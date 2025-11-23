@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee6549c72fe4271931326578e2379243",
-  "translation_date": "2025-09-18T09:49:21+00:00",
+  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
+  "translation_date": "2025-11-23T11:04:01+00:00",
   "source_file": "resources/study-guide.md",
   "language_code": "cs"
 }
 -->
-# Průvodce studiem - Komplexní vzdělávací cíle
+# Studijní příručka - Komplexní vzdělávací cíle
 
 **Navigace vzdělávací cestou**
 - **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../README.md)
@@ -16,25 +16,25 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tento komplexní průvodce studiem poskytuje strukturované vzdělávací cíle, klíčové koncepty, praktická cvičení a materiály pro hodnocení, které vám pomohou zvládnout Azure Developer CLI (azd). Použijte tento průvodce ke sledování svého pokroku a ujistěte se, že jste pokryli všechny zásadní témata.
+Tato komplexní studijní příručka poskytuje strukturované vzdělávací cíle, klíčové koncepty, praktická cvičení a hodnotící materiály, které vám pomohou zvládnout Azure Developer CLI (azd). Použijte tuto příručku ke sledování svého pokroku a ujistěte se, že jste pokryli všechna důležitá témata.
 
 ## Cíle vzdělávání
 
-Po dokončení tohoto průvodce budete:
-- Mít zvládnuté všechny základní i pokročilé koncepty Azure Developer CLI
+Po dokončení této studijní příručky budete:
+- Ovládat všechny základní i pokročilé koncepty Azure Developer CLI
 - Rozvíjet praktické dovednosti v nasazování a správě aplikací na Azure
 - Získat jistotu v řešení problémů a optimalizaci nasazení
-- Porozumět postupům pro nasazení připravené na produkci a bezpečnostním aspektům
+- Rozumět postupům pro nasazení připravené na produkci a bezpečnostním aspektům
 
 ## Výsledky vzdělávání
 
-Po dokončení všech sekcí tohoto průvodce budete schopni:
-- Navrhovat, nasazovat a spravovat kompletní architektury aplikací pomocí azd
+Po dokončení všech částí této studijní příručky budete schopni:
+- Navrhovat, nasazovat a spravovat kompletní aplikační architektury pomocí azd
 - Implementovat komplexní strategie monitorování, zabezpečení a optimalizace nákladů
 - Samostatně řešit složité problémy s nasazením
 - Vytvářet vlastní šablony a přispívat do komunity azd
 
-## Struktura učení v 8 kapitolách
+## Struktura vzdělávání v 8 kapitolách
 
 ### Kapitola 1: Základy a rychlý start (1. týden)
 **Doba trvání**: 30-45 minut | **Složitost**: ⭐
@@ -45,8 +45,8 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 - Nasadit svou první aplikaci pomocí existující šablony
 - Efektivně se orientovat v příkazovém rozhraní AZD
 
-#### Klíčové koncepty k zvládnutí
-- Struktura projektu AZD a jeho komponenty (azure.yaml, infra/, src/)
+#### Klíčové koncepty k osvojení
+- Struktura a komponenty projektu AZD (azure.yaml, infra/, src/)
 - Pracovní postupy nasazení založené na šablonách
 - Základy konfigurace prostředí
 - Správa skupin prostředků a předplatných
@@ -54,10 +54,10 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 #### Praktická cvičení
 1. **Ověření instalace**: Nainstalujte AZD a ověřte pomocí `azd version`
 2. **První nasazení**: Úspěšně nasadit šablonu todo-nodejs-mongo
-3. **Nastavení prostředí**: Nakonfigurovat první proměnné prostředí
-4. **Průzkum prostředků**: Procházet nasazené prostředky v Azure Portal
+3. **Nastavení prostředí**: Nakonfigurujte své první proměnné prostředí
+4. **Prozkoumání prostředků**: Projděte nasazené prostředky v Azure Portálu
 
-#### Otázky k hodnocení
+#### Hodnotící otázky
 - Jaké jsou hlavní komponenty projektu AZD?
 - Jak inicializujete nový projekt ze šablony?
 - Jaký je rozdíl mezi `azd up` a `azd deploy`?
@@ -69,28 +69,28 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 **Doba trvání**: 1-2 hodiny | **Složitost**: ⭐⭐
 
 #### Cíle vzdělávání
-- Integrovat služby Azure AI Foundry do pracovních postupů AZD
-- Nasadit a nakonfigurovat aplikace využívající AI
-- Porozumět implementačním vzorcům RAG (Retrieval-Augmented Generation)
-- Spravovat nasazení modelů AI a jejich škálování
+- Integrovat služby Microsoft Foundry do pracovních postupů AZD
+- Nasazovat a konfigurovat aplikace poháněné AI
+- Porozumět implementačním vzorům RAG (Retrieval-Augmented Generation)
+- Spravovat nasazení a škálování AI modelů
 
-#### Klíčové koncepty k zvládnutí
+#### Klíčové koncepty k osvojení
 - Integrace služby Azure OpenAI a správa API
-- Konfigurace AI Search a vektorové indexování
+- Konfigurace AI vyhledávání a vektorového indexování
 - Strategie nasazení modelů a plánování kapacity
-- Monitorování aplikací využívajících AI a optimalizace výkonu
+- Monitorování a optimalizace výkonu AI aplikací
 
 #### Praktická cvičení
 1. **Nasazení AI chatu**: Nasadit šablonu azure-search-openai-demo
-2. **Implementace RAG**: Nakonfigurovat indexování dokumentů a vyhledávání
-3. **Konfigurace modelů**: Nastavit více modelů AI s různými účely
-4. **Monitorování AI**: Implementovat Application Insights pro pracovní zátěže AI
+2. **Implementace RAG**: Nakonfigurovat indexování a vyhledávání dokumentů
+3. **Konfigurace modelu**: Nastavit více AI modelů s různými účely
+4. **Monitorování AI**: Implementovat Application Insights pro AI pracovní zátěže
 
-#### Otázky k hodnocení
+#### Hodnotící otázky
 - Jak nakonfigurujete služby Azure OpenAI v šabloně AZD?
 - Jaké jsou klíčové komponenty architektury RAG?
-- Jak spravujete kapacitu a škálování modelů AI?
-- Jaké metriky monitorování jsou důležité pro aplikace využívající AI?
+- Jak spravujete kapacitu a škálování AI modelů?
+- Jaké metriky monitorování jsou důležité pro AI aplikace?
 
 ---
 
@@ -98,27 +98,27 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 **Doba trvání**: 45-60 minut | **Složitost**: ⭐⭐
 
 #### Cíle vzdělávání
-- Zvládnout strategie konfigurace a správy prostředí
-- Implementovat bezpečné vzory autentizace a spravovanou identitu
-- Organizovat prostředky pomocí správných konvencí pojmenování
-- Nakonfigurovat nasazení pro více prostředí (dev, staging, prod)
+- Ovládnout strategie konfigurace a správy prostředí
+- Implementovat bezpečné autentizační vzory a spravovanou identitu
+- Organizovat prostředky pomocí správných pojmenovacích konvencí
+- Konfigurovat nasazení pro více prostředí (vývoj, testování, produkce)
 
-#### Klíčové koncepty k zvládnutí
+#### Klíčové koncepty k osvojení
 - Hierarchie prostředí a precedence konfigurace
-- Autentizace pomocí spravované identity a servisních principálů
-- Integrace Key Vault pro správu tajných údajů
+- Spravovaná identita a autentizace pomocí service principal
+- Integrace Key Vault pro správu tajných klíčů
 - Správa parametrů specifických pro prostředí
 
 #### Praktická cvičení
-1. **Nastavení více prostředí**: Nakonfigurovat prostředí dev, staging a prod
-2. **Konfigurace zabezpečení**: Implementovat autentizaci pomocí spravované identity
-3. **Správa tajných údajů**: Integrovat Azure Key Vault pro citlivá data
-4. **Správa parametrů**: Vytvořit konfigurace specifické pro prostředí
+1. **Nastavení více prostředí**: Nakonfigurujte vývojové, testovací a produkční prostředí
+2. **Bezpečnostní konfigurace**: Implementujte autentizaci pomocí spravované identity
+3. **Správa tajemství**: Integrujte Azure Key Vault pro citlivá data
+4. **Správa parametrů**: Vytvořte konfigurace specifické pro prostředí
 
-#### Otázky k hodnocení
+#### Hodnotící otázky
 - Jak nakonfigurujete různá prostředí pomocí AZD?
-- Jaké jsou výhody použití spravované identity oproti servisním principálům?
-- Jak bezpečně spravujete tajné údaje aplikace?
+- Jaké jsou výhody použití spravované identity oproti service principal?
+- Jak bezpečně spravujete tajemství aplikace?
 - Jaká je hierarchie konfigurace v AZD?
 
 ---
@@ -128,23 +128,27 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 
 #### Cíle vzdělávání
 - Vytvářet a přizpůsobovat šablony infrastruktury Bicep
-- Implementovat pokročilé vzory nasazení a pracovní postupy
+- Implementovat pokročilé vzory a pracovní postupy nasazení
 - Porozumět strategiím zajišťování prostředků
-- Navrhovat škálovatelné architektury pro více služeb
+- Navrhovat škálovatelné architektury s více službami
 
-#### Klíčové koncepty k zvládnutí
+- Nasazovat kontejnerizované aplikace pomocí Azure Container Apps a AZD
+
+#### Klíčové koncepty k osvojení
 - Struktura šablon Bicep a osvědčené postupy
 - Závislosti prostředků a pořadí nasazení
 - Parametrické soubory a modularita šablon
 - Vlastní hooky a automatizace nasazení
+- Vzory nasazení kontejnerových aplikací (rychlý start, produkce, mikroslužby)
 
 #### Praktická cvičení
-1. **Vytvoření vlastní šablony**: Vytvořit šablonu aplikace pro více služeb
-2. **Zvládnutí Bicep**: Vytvořit modulární, znovupoužitelné komponenty infrastruktury
-3. **Automatizace nasazení**: Implementovat hooky před/po nasazení
+1. **Vytvoření vlastní šablony**: Vytvořte šablonu aplikace s více službami
+2. **Ovládnutí Bicep**: Vytvořte modulární, znovupoužitelné komponenty infrastruktury
+3. **Automatizace nasazení**: Implementujte hooky před/po nasazení
 4. **Návrh architektury**: Nasadit komplexní architekturu mikroslužeb
+5. **Nasazení kontejnerové aplikace**: Nasadit příklady [Simple Flask API](../../../examples/container-app/simple-flask-api) a [Microservices Architecture](../../../examples/container-app/microservices) pomocí AZD
 
-#### Otázky k hodnocení
+#### Hodnotící otázky
 - Jak vytvoříte vlastní šablony Bicep pro AZD?
 - Jaké jsou osvědčené postupy pro organizaci kódu infrastruktury?
 - Jak řešíte závislosti prostředků v šablonách?
@@ -152,59 +156,62 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 
 ---
 
-### Kapitola 5: Řešení AI s více agenty (6.-7. týden)
+### Kapitola 5: Řešení s více AI agenty (6.-7. týden)
 **Doba trvání**: 2-3 hodiny | **Složitost**: ⭐⭐⭐⭐
 
 #### Cíle vzdělávání
-- Navrhovat a implementovat architektury AI s více agenty
-- Orchestraci koordinace a komunikace agentů
-- Nasazovat řešení AI připravená na produkci s monitorováním
-- Porozumět specializaci agentů a pracovním vzorcům
+- Navrhovat a implementovat architektury s více AI agenty
+- Koordinovat komunikaci a spolupráci agentů
+- Nasazovat produkčně připravená AI řešení s monitorováním
+- Porozumět specializaci agentů a vzorům pracovních postupů
+- Integrovat kontejnerizované mikroslužby jako součást řešení s více agenty
 
-#### Klíčové koncepty k zvládnutí
+#### Klíčové koncepty k osvojení
 - Vzory architektury s více agenty a principy návrhu
 - Protokoly komunikace agentů a tok dat
-- Strategie vyvažování zátěže a škálování pro agenty AI
-- Monitorování produkce pro systémy s více agenty
+- Strategie vyvažování zátěže a škálování pro AI agenty
+- Produkční monitorování systémů s více agenty
+- Komunikace mezi službami v kontejnerizovaných prostředích
 
 #### Praktická cvičení
-1. **Nasazení maloobchodního řešení**: Nasadit kompletní scénář maloobchodu s více agenty
-2. **Přizpůsobení agentů**: Upravit chování agentů zákazníků a inventáře
+1. **Nasazení maloobchodního řešení**: Nasadit kompletní scénář s více agenty pro maloobchod
+2. **Přizpůsobení agentů**: Upravit chování agentů pro zákazníky a inventář
 3. **Škálování architektury**: Implementovat vyvažování zátěže a automatické škálování
-4. **Monitorování produkce**: Nastavit komplexní monitorování a upozornění
+4. **Produkční monitorování**: Nastavit komplexní monitorování a upozornění
+5. **Integrace mikroslužeb**: Rozšířit příklad [Microservices Architecture](../../../examples/container-app/microservices) o pracovní postupy založené na agentech
 
-#### Otázky k hodnocení
+#### Hodnotící otázky
 - Jak navrhujete efektivní vzory komunikace mezi agenty?
-- Jaké jsou klíčové úvahy pro škálování pracovních zátěží agentů AI?
-- Jak monitorujete a ladíte systémy AI s více agenty?
-- Jaké produkční vzory zajišťují spolehlivost pro agenty AI?
+- Jaké jsou klíčové úvahy při škálování pracovních zátěží AI agentů?
+- Jak monitorujete a ladíte systémy s více AI agenty?
+- Jaké produkční vzory zajišťují spolehlivost pro AI agenty?
 
 ---
 
-### Kapitola 6: Validace před nasazením a plánování (8. týden)
+### Kapitola 6: Validace a plánování před nasazením (8. týden)
 **Doba trvání**: 1 hodina | **Složitost**: ⭐⭐
 
 #### Cíle vzdělávání
 - Provádět komplexní plánování kapacity a validaci prostředků
-- Vybrat optimální SKU Azure pro nákladovou efektivitu
-- Implementovat automatizované kontroly před nasazením a validaci
-- Plánovat nasazení s optimalizačními strategiemi nákladů
+- Vybrat optimální Azure SKU pro efektivitu nákladů
+- Implementovat automatizované kontroly a validace před nasazením
+- Plánovat nasazení s ohledem na optimalizaci nákladů
 
-#### Klíčové koncepty k zvládnutí
+#### Klíčové koncepty k osvojení
 - Kvóty prostředků Azure a omezení kapacity
 - Kritéria výběru SKU a optimalizace nákladů
 - Automatizované validační skripty a testování
 - Plánování nasazení a hodnocení rizik
 
 #### Praktická cvičení
-1. **Analýza kapacity**: Analyzovat požadavky na prostředky pro vaše aplikace
-2. **Optimalizace SKU**: Porovnat a vybrat nákladově efektivní úrovně služeb
-3. **Automatizace validace**: Implementovat skripty pro kontrolu před nasazením
-4. **Plánování nákladů**: Vytvořit odhady nákladů na nasazení a rozpočty
+1. **Analýza kapacity**: Analyzujte požadavky na prostředky pro vaše aplikace
+2. **Optimalizace SKU**: Porovnejte a vyberte nákladově efektivní úrovně služeb
+3. **Automatizace validace**: Implementujte skripty pro kontrolu před nasazením
+4. **Plánování nákladů**: Vytvořte odhady nákladů na nasazení a rozpočty
 
-#### Otázky k hodnocení
+#### Hodnotící otázky
 - Jak validujete kapacitu Azure před nasazením?
-- Jaké faktory ovlivňují rozhodnutí o výběru SKU?
+- Jaké faktory ovlivňují rozhodování o výběru SKU?
 - Jak automatizujete validaci před nasazením?
 - Jaké strategie pomáhají optimalizovat náklady na nasazení?
 
@@ -219,20 +226,20 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 - Ladit specifické problémy AI a problémy s výkonem
 - Implementovat monitorování a upozornění pro proaktivní detekci problémů
 
-#### Klíčové koncepty k zvládnutí
+#### Klíčové koncepty k osvojení
 - Diagnostické techniky a strategie logování
 - Běžné vzory selhání a jejich řešení
 - Monitorování výkonu a optimalizace
 - Postupy reakce na incidenty a obnovy
 
 #### Praktická cvičení
-1. **Diagnostické dovednosti**: Procvičit se na záměrně rozbitých nasazeních
-2. **Analýza logů**: Efektivně používat Azure Monitor a Application Insights
-3. **Ladění výkonu**: Optimalizovat aplikace s pomalým výkonem
-4. **Postupy obnovy**: Implementovat zálohování a obnovu po havárii
+1. **Diagnostické dovednosti**: Procvičte si práci s úmyslně rozbitými nasazeními
+2. **Analýza logů**: Efektivně používejte Azure Monitor a Application Insights
+3. **Ladění výkonu**: Optimalizujte pomalu fungující aplikace
+4. **Postupy obnovy**: Implementujte zálohování a obnovu po havárii
 
-#### Otázky k hodnocení
-- Jaké jsou nejčastější selhání nasazení AZD?
+#### Hodnotící otázky
+- Jaké jsou nejčastější chyby při nasazení AZD?
 - Jak ladíte problémy s autentizací a oprávněními?
 - Jaké strategie monitorování pomáhají předcházet problémům v produkci?
 - Jak optimalizujete výkon aplikací na Azure?
@@ -245,99 +252,229 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 #### Cíle vzdělávání
 - Implementovat strategie nasazení na podnikové úrovni
 - Navrhovat bezpečnostní vzory a rámce pro dodržování předpisů
-- Zřídit monitorování, správu a řízení nákladů
+- Zavést monitorování, správu a řízení nákladů
 - Vytvořit škálovatelné CI/CD pipeline s integrací AZD
+- Aplikovat osvědčené postupy pro produkční nasazení kontejnerových aplikací (zabezpečení, monitorování, náklady, CI/CD)
 
-#### Klíčové koncepty k zvládnutí
+#### Klíčové koncepty k osvojení
 - Požadavky na bezpečnost a dodržování předpisů na podnikové úrovni
 - Rámce řízení a implementace politik
 - Pokročilé monitorování a správa nákladů
 - Integrace CI/CD a automatizované pipeline nasazení
+- Strategie nasazení blue-green a canary pro kontejnerové pracovní zátěže
 
 #### Praktická cvičení
-1. **Podniková bezpečnost**: Implementovat komplexní bezpečnostní vzory
-2. **Rámec řízení**: Nastavit Azure Policy a správu prostředků
-3. **Pokročilé monitorování**: Vytvořit dashboardy a automatizované upozornění
-4. **Integrace CI/CD**: Vytvořit automatizované pipeline nasazení
+1. **Podniková bezpečnost**: Implementujte komplexní bezpečnostní vzory
+2. **Rámec řízení**: Nastavte Azure Policy a správu prostředků
+3. **Pokročilé monitorování**: Vytvořte dashboardy a automatizovaná upozornění
+4. **Integrace CI/CD**: Vytvořte automatizované pipeline nasazení
+5. **Produkční kontejnerové aplikace**: Aplikujte zabezpečení, monitorování a optimalizaci nákladů na příklad [Microservices Architecture](../../../examples/container-app/microservices)
 
-#### Otázky k hodnocení
-- Jak implementujete podnikovou bezpečnost v nasazeních AZD?
+#### Hodnotící otázky
+- Jak implementujete podnikové zabezpečení v nasazeních AZD?
 - Jaké vzory řízení zajišťují dodržování předpisů a kontrolu nákladů?
 - Jak navrhujete škálovatelné monitorování pro produkční systémy?
 - Jaké vzory CI/CD nejlépe fungují s pracovními postupy AZD?
-2. Jak ověřit dostupnost zdrojů Azure před nasazením?  
-3. Jaké jsou klíčové komponenty systému předběžné kontroly?  
-4. Jak odhadnout a kontrolovat náklady na nasazení?  
+
+#### Cíle vzdělávání
+- Porozumět základům a klíčovým konceptům Azure Developer CLI
+- Úspěšně nainstalovat a nakonfigurovat azd ve vašem vývojovém prostředí
+- Dokončit první nasazení pomocí existující šablony
+- Orientovat se ve struktuře projektu azd a pochopit klíčové komponenty
+
+#### Klíčové koncepty k osvojení
+- Šablony, prostředí a služby
+- Struktura konfigurace azure.yaml
+- Základní příkazy azd (init, up, down, deploy)
+- Principy infrastruktury jako kódu
+- Autentizace a autorizace Azure
+
+#### Praktická cvičení
+
+**Cvičení 1.1: Instalace a nastavení**
+```bash
+# Dokončete tyto úkoly:
+1. Install azd using your preferred method
+2. Install Azure CLI and authenticate
+3. Verify installation with: azd version
+4. Test connectivity with: azd auth login
+5. Explore available templates: azd template list
+```
+
+**Cvičení 1.2: První nasazení**
+```bash
+# Nasadit jednoduchou webovou aplikaci:
+1. Initialize project: azd init --template todo-nodejs-mongo
+2. Review project structure and configuration files
+3. Deploy to Azure: azd up
+4. Test the deployed application
+5. Clean up resources: azd down
+```
+
+**Cvičení 1.3: Analýza struktury projektu**
+```
+Analyze the following components:
+1. azure.yaml - service definitions and hooks
+2. infra/ directory - Bicep templates and modules
+3. src/ directory - application source code
+4. .azure/ directory - environment configurations
+```
+
+#### Hodnotící otázky
+1. Jaké jsou tři základní koncepty architektury azd?
+2. Jaký je účel souboru azure.yaml?
+3. Jak prostředí pomáhají spravovat různé cíle nasazení?
+4. Jaké metody autentizace lze použít s azd?
+5. Co se stane, když poprvé spustíte `azd up`?
+
+---
+
+## Sledování pokroku a hodnotící rámec
+```bash
+# Vytvořte a nakonfigurujte více prostředí:
+1. Create development environment: azd env new development
+2. Create staging environment: azd env new staging
+3. Create production environment: azd env new production
+4. Configure different settings for each environment
+5. Deploy the same application to different environments
+```
+
+**Cvičení 2.2: Pokročilá konfigurace**
+```yaml
+# Modify azure.yaml to include:
+1. Multiple services with different configurations
+2. Pre and post deployment hooks
+3. Environment-specific parameters
+4. Custom resource naming patterns
+```
+
+**Cvičení 2.3: Bez
+5. Jaké jsou úvahy při nasazení do více regionů?
+
+### Modul 4: Validace před nasazením (5. týden)
+
+#### Cíle učení
+- Provádět komplexní kontroly před nasazením
+- Ovládnout plánování kapacity a validaci zdrojů
+- Porozumět výběru SKU a optimalizaci nákladů
+- Vytvořit automatizované validační pipeline
+
+#### Klíčové koncepty k zvládnutí
+- Kvóty a limity zdrojů Azure
+- Kritéria výběru SKU a dopady na náklady
+- Automatizované validační skripty a nástroje
+- Metodiky plánování kapacity
+- Testování výkonu a optimalizace
+
+#### Praktická cvičení
+
+**Cvičení 4.1: Plánování kapacity**  
+```bash
+# Implementovat ověření kapacity:
+1. Create scripts to check Azure quotas
+2. Validate service availability in target regions
+3. Estimate resource costs for different SKUs
+4. Plan for scaling and growth requirements
+5. Document capacity requirements for each environment
+```
+  
+**Cvičení 4.2: Validace před nasazením**  
+```powershell
+# Vytvořte komplexní validační proces:
+1. Authentication and permissions validation
+2. Template syntax and parameter validation
+3. Resource naming and availability checks
+4. Network connectivity and security validation
+5. Cost estimation and budget verification
+```
+  
+**Cvičení 4.3: Optimalizace SKU**  
+```bash
+# Optimalizovat konfigurace služeb:
+1. Compare performance characteristics of different SKUs
+2. Implement cost-effective development configurations
+3. Design high-performance production configurations
+4. Create monitoring dashboards for resource utilization
+5. Set up auto-scaling policies
+```
+  
+
+#### Otázky pro sebehodnocení
+1. Jaké faktory by měly ovlivnit rozhodnutí o výběru SKU?
+2. Jak ověříte dostupnost zdrojů Azure před nasazením?
+3. Jaké jsou klíčové komponenty systému kontroly před nasazením?
+4. Jak odhadujete a kontrolujete náklady na nasazení?
 5. Jaké monitorování je nezbytné pro plánování kapacity?
 
 ### Modul 5: Řešení problémů a ladění (6. týden)
 
 #### Cíle učení
-- Osvojit si systematické metodiky řešení problémů  
-- Získat odborné znalosti v ladění složitých problémů při nasazení  
-- Implementovat komplexní monitorování a upozornění  
-- Vytvořit postupy pro reakci na incidenty a obnovu  
+- Ovládnout systematické metodiky řešení problémů
+- Získat odborné znalosti v ladění složitých problémů při nasazení
+- Implementovat komplexní monitorování a upozornění
+- Vytvořit postupy pro reakci na incidenty a obnovu
 
-#### Klíčové koncepty k osvojení
-- Běžné vzory selhání při nasazení  
-- Analýza logů a techniky korelace  
-- Monitorování výkonu a optimalizace  
-- Detekce bezpečnostních incidentů a reakce  
-- Obnova po havárii a kontinuita podnikání  
+#### Klíčové koncepty k zvládnutí
+- Běžné vzory selhání při nasazení
+- Analýza logů a techniky korelace
+- Monitorování výkonu a optimalizace
+- Detekce bezpečnostních incidentů a reakce na ně
+- Obnova po havárii a kontinuita podnikání
 
 #### Praktická cvičení
 
 **Cvičení 5.1: Scénáře řešení problémů**  
 ```bash
-# Practice resolving common issues:
+# Procvičte řešení běžných problémů:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
 4. Network connectivity problems
 5. Performance and scaling issues
-```  
-
+```
+  
 **Cvičení 5.2: Implementace monitorování**  
 ```bash
-# Set up comprehensive monitoring:
+# Nastavte komplexní monitorování:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
-```  
-
+```
+  
 **Cvičení 5.3: Reakce na incidenty**  
 ```bash
-# Build incident response procedures:
+# Vytvořte postupy pro reakci na incidenty:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
-```  
+```
+  
 
 #### Otázky pro sebehodnocení
-1. Jaký je systematický přístup k řešení problémů při nasazení azd?  
-2. Jak korelovat logy napříč více službami a zdroji?  
-3. Jaké monitorovací metriky jsou nejdůležitější pro včasnou detekci problémů?  
-4. Jak implementovat efektivní postupy obnovy po havárii?  
-5. Jaké jsou klíčové komponenty plánu reakce na incidenty?  
+1. Jaký je systematický přístup k řešení problémů při nasazeních azd?
+2. Jak korelujete logy napříč více službami a zdroji?
+3. Jaké metriky monitorování jsou nejdůležitější pro včasnou detekci problémů?
+4. Jak implementujete efektivní postupy obnovy po havárii?
+5. Jaké jsou klíčové komponenty plánu reakce na incidenty?
 
 ### Modul 6: Pokročilá témata a osvědčené postupy (7.–8. týden)
 
 #### Cíle učení
-- Implementovat vzory nasazení na úrovni podniků  
-- Osvojit si integraci a automatizaci CI/CD  
-- Vyvíjet vlastní šablony a přispívat do komunity  
-- Porozumět pokročilým požadavkům na bezpečnost a shodu  
+- Implementovat vzory nasazení na podnikové úrovni
+- Ovládnout integraci CI/CD a automatizaci
+- Vyvíjet vlastní šablony a přispívat do komunity
+- Porozumět pokročilým požadavkům na bezpečnost a shodu
 
-#### Klíčové koncepty k osvojení
-- Vzory integrace CI/CD pipeline  
-- Vývoj a distribuce vlastních šablon  
-- Podniková správa a shoda  
-- Pokročilé konfigurace sítí a bezpečnosti  
-- Optimalizace výkonu a řízení nákladů  
+#### Klíčové koncepty k zvládnutí
+- Vzory integrace CI/CD pipeline
+- Vývoj a distribuce vlastních šablon
+- Podniková správa a shoda
+- Pokročilé konfigurace sítí a bezpečnosti
+- Optimalizace výkonu a správa nákladů
 
 #### Praktická cvičení
 
@@ -349,90 +486,93 @@ Po dokončení všech sekcí tohoto průvodce budete schopni:
 3. Multi-stage deployment with approvals
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
-```  
-
+```
+  
 **Cvičení 6.2: Vývoj vlastních šablon**  
 ```bash
-# Create and publish custom templates:
+# Vytvořte a publikujte vlastní šablony:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
-```  
-
-**Cvičení 6.3: Implementace na úrovni podniků**  
+```
+  
+**Cvičení 6.3: Implementace na podnikové úrovni**  
 ```bash
-# Implement enterprise-grade features:
+# Implementujte funkce na úrovni podniku:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
-```  
+```
+  
 
 #### Otázky pro sebehodnocení
-1. Jak integrovat azd do existujících CI/CD workflow?  
-2. Jaké jsou klíčové aspekty vývoje vlastních šablon?  
-3. Jak implementovat správu a shodu v nasazeních azd?  
-4. Jaké jsou osvědčené postupy pro nasazení na úrovni podniků?  
-5. Jak efektivně přispívat do komunity azd?  
+1. Jak integrujete azd do existujících CI/CD workflow?
+2. Jaké jsou klíčové úvahy při vývoji vlastních šablon?
+3. Jak implementujete správu a shodu v nasazeních azd?
+4. Jaké jsou osvědčené postupy pro nasazení na podnikové úrovni?
+5. Jak efektivně přispíváte do komunity azd?
 
 ## Praktické projekty
 
-### Projekt 1: Osobní portfolio web  
+### Projekt 1: Osobní portfolio web
 **Složitost**: Začátečník  
-**Doba trvání**: 1–2 týdny  
+**Délka trvání**: 1–2 týdny  
 
-Vytvořte a nasaďte osobní portfolio web pomocí:  
-- Hostování statického webu na Azure Storage  
-- Konfigurace vlastního doménového jména  
-- Integrace CDN pro globální výkon  
-- Automatizované nasazení pipeline  
+Vytvořte a nasaďte osobní portfolio web pomocí:
+- Hostování statického webu na Azure Storage
+- Konfigurace vlastního doménového jména
+- Integrace CDN pro globální výkon
+- Automatizované pipeline pro nasazení
 
-**Výstupy**:  
-- Funkční web nasazený na Azure  
-- Vlastní šablona azd pro nasazení portfolia  
-- Dokumentace procesu nasazení  
-- Doporučení pro analýzu nákladů a optimalizaci  
+**Výstupy**:
+- Funkční web nasazený na Azure
+- Vlastní šablona azd pro nasazení portfolia
+- Dokumentace procesu nasazení
+- Doporučení pro analýzu nákladů a optimalizaci
 
-### Projekt 2: Aplikace pro správu úkolů  
+### Projekt 2: Aplikace pro správu úkolů
 **Složitost**: Středně pokročilý  
-**Doba trvání**: 2–3 týdny  
+**Délka trvání**: 2–3 týdny  
 
-Vytvořte full-stack aplikaci pro správu úkolů s:  
-- Frontendem React nasazeným na App Service  
-- Backendem Node.js API s autentizací  
-- Databází PostgreSQL s migracemi  
-- Monitorováním pomocí Application Insights  
+Vytvořte full-stack aplikaci pro správu úkolů s:
+- Frontendem React nasazeným na App Service
+- Backendem Node.js s autentizací
+- Databází PostgreSQL s migracemi
+- Monitorováním pomocí Application Insights
 
-**Výstupy**:  
-- Kompletní aplikace s autentizací uživatelů  
-- Schéma databáze a migrační skripty  
-- Monitorovací dashboardy a pravidla upozornění  
-- Konfigurace nasazení pro více prostředí  
+**Výstupy**:
+- Kompletní aplikace s autentizací uživatelů
+- Schéma databáze a migrační skripty
+- Dashboardy monitorování a pravidla upozornění
+- Konfigurace nasazení pro více prostředí
 
-### Projekt 3: E-commerce platforma založená na mikroservisách  
+### Projekt 3: E-commerce platforma založená na mikroservisech
 **Složitost**: Pokročilý  
-**Doba trvání**: 4–6 týdnů  
+**Délka trvání**: 4–6 týdnů  
 
-Navrhněte a implementujte e-commerce platformu založenou na mikroservisách:  
-- Více API služeb (katalog, objednávky, platby, uživatelé)  
-- Integrace fronty zpráv pomocí Service Bus  
-- Redis cache pro optimalizaci výkonu  
-- Komplexní logování a monitorování  
+Navrhněte a implementujte e-commerce platformu založenou na mikroservisech:
+- Více API služeb (katalog, objednávky, platby, uživatelé)
+- Integrace fronty zpráv pomocí Service Bus
+- Redis cache pro optimalizaci výkonu
+- Komplexní logování a monitorování
 
-**Výstupy**:  
-- Kompletní architektura mikroservis  
-- Vzory komunikace mezi službami  
-- Testování výkonu a optimalizace  
-- Implementace bezpečnosti připravené pro produkci  
+**Referenční příklad**: Viz [Microservices Architecture](../../../examples/container-app/microservices) pro šablonu připravenou k produkci a průvodce nasazením
+
+**Výstupy**:
+- Kompletní architektura mikroservisů
+- Vzory komunikace mezi službami
+- Testování výkonu a optimalizace
+- Implementace bezpečnosti připravené na produkci
 
 ## Hodnocení a certifikace
 
 ### Kontroly znalostí
 
-Dokončete tyto hodnocení po každém modulu:
+Dokončete tyto testy po každém modulu:
 
 **Hodnocení modulu 1**: Základní koncepty a instalace  
 - Otázky s výběrem odpovědí na základní koncepty  
@@ -457,43 +597,43 @@ Dokončete tyto hodnocení po každém modulu:
 **Hodnocení modulu 5**: Řešení problémů a ladění  
 - Cvičení diagnostiky problémů  
 - Úkoly implementace monitorování  
-- Simulace reakce na incidenty  
+- Simulace reakcí na incidenty  
 
 **Hodnocení modulu 6**: Pokročilá témata  
 - Návrh CI/CD pipeline  
 - Vývoj vlastních šablon  
-- Scénáře architektury na úrovni podniků  
+- Scénáře podnikové architektury  
 
 ### Závěrečný projekt
 
 Navrhněte a implementujte kompletní řešení, které demonstruje zvládnutí všech konceptů:
 
-**Požadavky**:  
+**Požadavky**:
 - Architektura aplikace s více vrstvami  
 - Více prostředí pro nasazení  
 - Komplexní monitorování a upozornění  
 - Implementace bezpečnosti a shody  
-- Optimalizace nákladů a výkonu  
-- Kompletní dokumentace a provozní příručky  
+- Optimalizace nákladů a ladění výkonu  
+- Kompletní dokumentace a provozní manuály  
 
-**Kritéria hodnocení**:  
+**Kritéria hodnocení**:
 - Kvalita technické implementace  
 - Úplnost dokumentace  
-- Dodržení bezpečnostních a osvědčených postupů  
+- Dodržování bezpečnostních zásad a osvědčených postupů  
 - Optimalizace výkonu a nákladů  
 - Účinnost řešení problémů a monitorování  
 
 ## Studijní zdroje a reference
 
 ### Oficiální dokumentace
-- [Azure Developer CLI Dokumentace](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Bicep Dokumentace](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+- [Dokumentace Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Dokumentace Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
 
-### Komunitní zdroje
+### Zdroje komunity
 - [AZD Template Gallery](https://azure.github.io/awesome-azd/)  
-- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)  
-- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)  
+- [GitHub organizace Azure-Samples](https://github.com/Azure-Samples)  
+- [GitHub repozitář Azure Developer CLI](https://github.com/Azure/azure-dev)  
 
 ### Praktická prostředí
 - [Azure Free Account](https://azure.microsoft.com/free/)  
@@ -505,15 +645,15 @@ Navrhněte a implementujte kompletní řešení, které demonstruje zvládnutí 
 - [Visual Studio Code](https://code.visualstudio.com/)  
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
 
-## Doporučení studijního plánu
+## Doporučení pro studijní plán
 
-### Plné studium (8 týdnů)
+### Studium na plný úvazek (8 týdnů)
 - **1.–2. týden**: Moduly 1–2 (Začínáme, Konfigurace)  
 - **3.–4. týden**: Moduly 3–4 (Nasazení, Validace před nasazením)  
 - **5.–6. týden**: Moduly 5–6 (Řešení problémů, Pokročilá témata)  
 - **7.–8. týden**: Praktické projekty a závěrečné hodnocení  
 
-### Částečné studium (16 týdnů)
+### Studium na částečný úvazek (16 týdnů)
 - **1.–4. týden**: Modul 1 (Začínáme)  
 - **5.–7. týden**: Modul 2 (Konfigurace a prostředí)  
 - **8.–10. týden**: Modul 3 (Nasazení a zajištění)  
@@ -529,117 +669,120 @@ Navrhněte a implementujte kompletní řešení, které demonstruje zvládnutí 
 
 Sledujte svůj pokrok v každé kapitole pomocí těchto měřitelných výsledků:
 
-#### 📚 Kapitola 1: Základy a rychlý start  
+#### 📚 Kapitola 1: Základy a rychlý start
 - [ ] **Dokončená instalace**: AZD nainstalováno a ověřeno na vaší platformě  
-- [ ] **První nasazení**: Úspěšně nasazená šablona todo-nodejs-mongo  
+- [ ] **První nasazení**: Úspěšně nasazena šablona todo-nodejs-mongo  
 - [ ] **Nastavení prostředí**: Konfigurovány první proměnné prostředí  
 - [ ] **Navigace zdrojů**: Prozkoumány nasazené zdroje v Azure Portal  
 - [ ] **Ovládání příkazů**: Zvládnutí základních příkazů AZD  
 
 #### 🤖 Kapitola 2: Vývoj zaměřený na AI  
-- [ ] **Nasazení AI šablony**: Úspěšně nasazená azure-search-openai-demo  
+- [ ] **Nasazení šablony AI**: Úspěšně nasazena azure-search-openai-demo  
 - [ ] **Implementace RAG**: Konfigurováno indexování a vyhledávání dokumentů  
-- [ ] **Konfigurace modelu**: Nastaveny různé AI modely pro různé účely  
-- [ ] **Monitorování AI**: Implementováno Application Insights pro AI pracovní zátěže  
+- [ ] **Konfigurace modelu**: Nastaveno více AI modelů s různými účely  
+- [ ] **Monitorování AI**: Implementovány Application Insights pro AI úlohy  
 - [ ] **Optimalizace výkonu**: Vyladěn výkon AI aplikace  
 
-#### ⚙️ Kapitola 3: Konfigurace a autentizace  
+#### ⚙️ Kapitola 3: Konfigurace a autentizace
 - [ ] **Nastavení více prostředí**: Konfigurována prostředí dev, staging a prod  
-- [ ] **Implementace bezpečnosti**: Nastavena autentizace pomocí spravované identity  
+- [ ] **Implementace bezpečnosti**: Nastavena autentizace spravované identity  
 - [ ] **Správa tajemství**: Integrovaný Azure Key Vault pro citlivá data  
 - [ ] **Správa parametrů**: Vytvořeny konfigurace specifické pro prostředí  
-- [ ] **Zvládnutí autentizace**: Implementovány bezpečné přístupové vzory  
+- [ ] **Ovládnutí autentizace**: Implementovány bezpečné přístupové vzory  
 
-#### 🏗️ Kapitola 4: Infrastruktura jako kód a nasazení  
+#### 🏗️ Kapitola 4: Infrastruktura jako kód a nasazení
 - [ ] **Vytvoření vlastní šablony**: Postavena šablona aplikace s více službami  
-- [ ] **Zvládnutí Bicep**: Vytvořeny modulární, znovupoužitelné komponenty infrastruktury  
-- [ ] **Automatizace nasazení**: Implementovány před/následné kroky nasazení  
-- [ ] **Návrh architektury**: Nasazena komplexní architektura mikroservis  
-- [ ] **Optimalizace šablony**: Optimalizovány šablony pro výkon a náklady  
+- [ ] **Ovládnutí Bicep**: Vytvořeny modulární, znovupoužitelné komponenty infrastruktury  
+- [ ] **Automatizace nasazení**: Implementovány pre/post nasazovací hooky  
+- [ ] **Návrh architektury**: Nasazena komplexní architektura mikroservisů  
+- [ ] **Optimalizace šablon**: Optimalizovány šablony pro výkon a náklady  
 
-#### 🎯 Kapitola 5: Řešení AI s více agenty  
-- [ ] **Nasazení maloobchodního řešení**: Nasazeno kompletní maloobchodní scénář s více agenty  
-- [ ] **Přizpůsobení agenta**: Upraveno chování agenta zákazníka a inventáře  
+#### 🎯 Kapitola 5: AI řešení s více agenty
+- [ ] **Nasazení maloobchodního řešení**: Nasazení kompletního maloobchodního scénáře s více agenty  
+- [ ] **Přizpůsobení agentů**: Upraveno chování agentů pro zákazníky a inventář  
 - [ ] **Škálování architektury**: Implementováno vyvažování zátěže a automatické škálování  
 - [ ] **Monitorování produkce**: Nastaveno komplexní monitorování a upozornění  
 - [ ] **Ladění výkonu**: Optimalizován výkon systému s více agenty  
 
-#### 🔍 Kapitola 6: Validace před nasazením a plánování  
+#### 🔍 Kapitola 6: Validace před nasazením a plánování
 - [ ] **Analýza kapacity**: Analyzovány požadavky na zdroje pro aplikace  
 - [ ] **Optimalizace SKU**: Vybrány nákladově efektivní úrovně služeb  
 - [ ] **Automatizace validace**: Implementovány skripty pro kontrolu před nasazením  
 - [ ] **Plánování nákladů**: Vytvořeny odhady nákladů na nasazení a rozpočty  
-- [ ] **Hodnocení rizik**: Identifikovány a zmírněny rizika nasazení  
+- [ ] **Hodnocení rizik**: Identifikována a zmírněna rizika nasazení  
 
-#### 🚨 Kapitola 7: Řešení problémů a ladění  
-- [ ] **Diagnostické dovednosti**: Úspěšně vyřešeny záměrně rozbité nasazení  
+#### 🚨 Kapitola 7: Řešení problémů a ladění
+- [ ] **Diagnostické dovednosti**: Úspěšně odladěna záměrně rozbitá nasazení  
 - [ ] **Analýza logů**: Efektivně použity Azure Monitor a Application Insights  
 - [ ] **Ladění výkonu**: Optimalizovány pomalu fungující aplikace  
 - [ ] **Postupy obnovy**: Implementovány zálohy a obnova po havárii  
 - [ ] **Nastavení monitorování**: Vytvořeno proaktivní monitorování a upozornění  
 
-#### 🏢 Kapitola 8: Produkční a podnikové vzory  
+#### 🏢 Kapitola 8: Produkční a podnikové vzory
 - [ ] **Podniková bezpečnost**: Implementovány komplexní bezpečnostní vzory  
 - [ ] **Rámec správy**: Nastaveny Azure Policy a správa zdrojů  
 - [ ] **Pokročilé monitorování**: Vytvořeny dashboardy a automatizované upozornění  
-- [ ] **Integrace CI/CD**: Postaveny automatizované pipeline nasazení  
+- [ ] **Integrace CI/CD**: Postaveny automatizované pipeline pro nasazení  
 - [ ] **Implementace shody**: Splněny požadavky na podnikovou shodu  
 
 ### Časová osa učení a milníky
 
-#### 1.–2. týden: Základy  
+#### 1.–2. týden: Základy
 - **Milník**: Nasazení první AI aplikace pomocí AZD  
 - **Validace**: Funkční aplikace dostupná přes veřejnou URL  
 - **Dovednosti**: Základní workflow AZD a integrace AI služeb  
 
-#### 3.–4. týden: Zvládnutí konfigurace  
+#### 3.–4. týden: Ovládnutí konfigurace
 - **Milník**: Nasazení do více prostředí s bezpečnou autentizací  
 - **Validace**: Stejná aplikace nasazena do dev/staging/prod  
 - **Dovednosti**: Správa prostředí a implementace bezpečnosti  
 
-#### 5.–6. týden: Odbornost v infrastruktuře  
+#### 5.–6. týden: Odbornost v infrastruktuře
 - **Milník**: Vlastní šablona pro komplexní aplikaci s více službami  
-- **Validace**: Znovupoužitelná šablona nasazena jiným členem týmu  
-- **Dovednosti**: Zvládnutí Bicep a automatizace infrastruktury  
+- **Validace**: Znovupoužitelná šablona nasazena jiným členem týmu
+5. **Přínos pro komunitu**: Sdílejte šablony nebo vylepšení
 
-#### 7.–8. týden: Pokročilá implementace AI  
-- **Milník**: Produkčně připravené řešení AI s více agenty  
-- **Validace**: Systém zvládající reálnou zátěž s monitorováním  
-- **Dovednosti**: Orchestrace více agentů a optimalizace výkonu  
+#### Výsledky profesního rozvoje
+- **Projekty do portfolia**: 8 nasazení připravených pro produkci
+- **Technické dovednosti**: Odborné znalosti nasazení AZD a AI na úrovni průmyslového standardu
+- **Schopnosti řešení problémů**: Samostatné odstraňování problémů a optimalizace
+- **Uznání v komunitě**: Aktivní účast v komunitě vývojářů Azure
+- **Kariérní růst**: Dovednosti přímo použitelné pro role v oblasti cloudu a AI
 
-#### 9.–10. týden: Produkční připravenost  
-- **Milník**: Nasazení na úrovni podniků s plnou shodou  
-- **Validace**: Splnění bezpečnostní kontroly a auditu optimalizace nákladů  
-- **Dovednosti**: Správa, monitorování a integrace CI/CD  
+#### Metriky úspěchu
+- **Úspěšnost nasazení**: >95 % úspěšných nasazení
+- **Čas na řešení problémů**: <30 minut pro běžné problémy
+- **Optimalizace výkonu**: Prokazatelné zlepšení nákladů a výkonu
+- **Soulad s bezpečností**: Všechna nasazení splňují podnikové bezpečnostní standardy
+- **Předávání znalostí**: Schopnost mentorovat ostatní vývojáře
 
-### Hodnocení a certifikace
+### Neustálé učení a zapojení do komunity
 
-#### Metody validace znalostí  
-1. **Praktická nasazení**: Funkční aplikace pro každou kapitolu  
-2. **Kontroly kódu**: Hodnocení kvality šablon a konfigurací  
-3. **Řešení problémů**: Scénáře řešení problémů a jejich řešení  
-4. **Výuka vrstevníkům**: Vysvětlení konceptů ostatním studentům  
-5. **Příspěvky komunitě**: Sdílení šablon
-- **Dokumentace**: Přispívejte do komunitní dokumentace a příkladů  
-- **Zpětná vazba**: Poskytujte zpětnou vazbu k obsahu kurzu a službám Azure  
+#### Udržujte si přehled
+- **Aktualizace Azure**: Sledujte poznámky k vydání Azure Developer CLI
+- **Komunitní akce**: Účastněte se akcí pro vývojáře Azure a AI
+- **Dokumentace**: Přispívejte do komunitní dokumentace a příkladů
+- **Zpětná vazba**: Poskytujte zpětnou vazbu k obsahu kurzu a službám Azure
 
-#### Kariérní rozvoj  
-- **Profesionální síť**: Spojte se s odborníky na Azure a AI  
-- **Příležitosti k vystupování**: Prezentujte své poznatky na konferencích nebo meetupech  
-- **Příspěvky do open source**: Přispívejte do šablon a nástrojů AZD  
-- **Mentorství**: Veďte ostatní vývojáře na jejich cestě za poznáním AZD  
-
----
-
-**Navigace kapitolami:**  
-- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../README.md)  
-- **📖 Začněte se učit**: [Kapitola 1: Základy a rychlý start](../README.md#-chapter-1-foundation--quick-start)  
-- **🎯 Sledování pokroku**: Sledujte svůj postup prostřednictvím komplexního systému učení o 8 kapitolách  
-- **🤝 Komunita**: [Azure Discord](https://discord.gg/microsoft-azure) pro podporu a diskuzi  
-
-**Sledování studijního pokroku**: Použijte tuto strukturovanou příručku k osvojení Azure Developer CLI prostřednictvím postupného, praktického učení s měřitelnými výsledky a přínosy pro profesní rozvoj.  
+#### Kariérní rozvoj
+- **Profesionální síť**: Spojte se s odborníky na Azure a AI
+- **Příležitosti k prezentaci**: Prezentujte své poznatky na konferencích nebo setkáních
+- **Příspěvky do open source**: Přispívejte do šablon a nástrojů AZD
+- **Mentorství**: Veďte ostatní vývojáře na jejich cestě k učení AZD
 
 ---
 
+**Navigace kapitolami:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../README.md)
+- **📖 Začněte se učit**: [Kapitola 1: Základy a rychlý start](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Sledování pokroku**: Sledujte svůj postup prostřednictvím komplexního osmikapitolového vzdělávacího systému
+- **🤝 Komunita**: [Azure Discord](https://discord.gg/microsoft-azure) pro podporu a diskusi
+
+**Sledování studijního pokroku**: Použijte tuto strukturovanou příručku k osvojení Azure Developer CLI prostřednictvím postupného, praktického učení s měřitelnými výsledky a přínosy pro profesní rozvoj.
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

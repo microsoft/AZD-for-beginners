@@ -1,38 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T10:00:23+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-23T11:49:30+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "sk"
 }
 -->
-# Najlepšie praktiky pre produkčné AI úlohy s AZD
+# Najlepšie postupy pre produkčné AI úlohy s AZD
 
 **Navigácia kapitol:**
-- **📚 Domov kurzu**: [AZD Pre Začiatočníkov](../../README.md)
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
 - **📖 Aktuálna kapitola**: Kapitola 8 - Produkčné a podnikové vzory
 - **⬅️ Predchádzajúca kapitola**: [Kapitola 7: Riešenie problémov](../troubleshooting/debugging.md)
 - **⬅️ Tiež súvisiace**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Kurz dokončený**: [AZD Pre Začiatočníkov](../../README.md)
+- **🎯 Kurz dokončený**: [AZD pre začiatočníkov](../../README.md)
 
 ## Prehľad
 
-Tento sprievodca poskytuje komplexné najlepšie praktiky pre nasadenie produkčne pripravených AI úloh pomocou Azure Developer CLI (AZD). Na základe spätnej väzby od komunity Azure AI Foundry Discord a reálnych zákazníckych nasadení tieto praktiky riešia najbežnejšie výzvy v produkčných AI systémoch.
+Táto príručka poskytuje komplexné najlepšie postupy pre nasadenie AI úloh pripravených na produkciu pomocou Azure Developer CLI (AZD). Na základe spätnej väzby od komunity Microsoft Foundry Discord a reálnych nasadení zákazníkov sa tieto postupy zameriavajú na najčastejšie výzvy v produkčných AI systémoch.
 
-## Kľúčové výzvy
+## Hlavné výzvy
 
 Na základe výsledkov ankety v našej komunite sú toto najväčšie výzvy, ktorým čelia vývojári:
 
-- **45%** má problémy s nasadením AI s viacerými službami
-- **38%** má problémy s riadením poverení a tajomstiev  
-- **35%** považuje produkčnú pripravenosť a škálovanie za náročné
-- **32%** potrebuje lepšie stratégie optimalizácie nákladov
-- **29%** vyžaduje zlepšené monitorovanie a riešenie problémov
+- **45 %** má problémy s nasadením AI s viacerými službami
+- **38 %** má problémy so správou poverení a tajomstiev  
+- **35 %** považuje pripravenosť na produkciu a škálovanie za náročné
+- **32 %** potrebuje lepšie stratégie optimalizácie nákladov
+- **29 %** vyžaduje zlepšené monitorovanie a riešenie problémov
 
 ## Architektonické vzory pre produkčné AI
 
-### Vzor 1: Architektúra mikroservisov pre AI
+### Vzor 1: Architektúra AI s mikroslužbami
 
 **Kedy použiť**: Komplexné AI aplikácie s viacerými schopnosťami
 
@@ -53,7 +53,7 @@ Na základe výsledkov ankety v našej komunite sú toto najväčšie výzvy, kt
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**Implementácia AZD**:
+**Implementácia s AZD**:
 
 ```yaml
 # azure.yaml
@@ -76,7 +76,7 @@ services:
     host: containerapp
 ```
 
-### Vzor 2: Spracovanie AI na základe udalostí
+### Vzor 2: Spracovanie AI riadené udalosťami
 
 **Kedy použiť**: Dávkové spracovanie, analýza dokumentov, asynchrónne pracovné postupy
 
@@ -125,15 +125,15 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Najlepšie praktiky bezpečnosti
+## Najlepšie postupy pre bezpečnosť
 
-### 1. Model bezpečnosti Zero-Trust
+### 1. Model Zero-Trust Security
 
 **Stratégia implementácie**:
 - Žiadna komunikácia medzi službami bez autentifikácie
 - Všetky API volania používajú spravované identity
-- Izolácia siete pomocou privátnych koncových bodov
-- Prístupové kontroly s minimálnymi oprávneniami
+- Sieťová izolácia s privátnymi koncovými bodmi
+- Prístupové práva s minimálnymi oprávneniami
 
 ```bicep
 // Managed Identity for each service
@@ -154,7 +154,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Bezpečné riadenie tajomstiev
+### 2. Bezpečná správa tajomstiev
 
 **Vzor integrácie Key Vault**:
 
@@ -327,7 +327,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Vyvažovanie záťaže a riadenie prevádzky
+### 3. Vyvažovanie záťaže a správa prevádzky
 
 **Application Gateway s WAF**:
 
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Konfigurácie špecifické pre prostredie**:
 
 ```bash
-# Development environment
+# Vývojové prostredie
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Produkčné prostredie
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -389,7 +389,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Monitorovanie nákladov a rozpočty
+### 2. Monitorovanie nákladov a rozpočtov
 
 ```bicep
 // Cost management and budgets
@@ -432,10 +432,10 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Optimalizácia používania tokenov
 
-**Riadenie nákladov OpenAI**:
+**Správa nákladov OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Optimalizácia tokenov na úrovni aplikácie
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Skrátiť kontext, nie vstup používateľa
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Hrubý odhad: 1 token ≈ 4 znaky
     return Math.ceil(text.length / 4);
   }
 }
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Obnova po havárii a vysoká dostupnosť
 
-### 1. Nasadenie do viacerých regiónov
+### 1. Nasadenie vo viacerých regiónoch
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -807,12 +807,12 @@ jobs:
 ### 2. Validácia infraštruktúry
 
 ```bash
-# scripts/validate_infrastructure.sh
+# skripty/validate_infrastructure.sh
 #!/bin/bash
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Skontrolujte, či všetky požadované služby bežia
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Overte nasadenie modelov OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,20 +830,20 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Otestujte konektivitu AI služby
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Kontrolný zoznam produkčnej pripravenosti
+## Kontrolný zoznam pripravenosti na produkciu
 
 ### Bezpečnosť ✅
 - [ ] Všetky služby používajú spravované identity
 - [ ] Tajomstvá uložené v Key Vault
 - [ ] Konfigurované privátne koncové body
-- [ ] Implementované bezpečnostné skupiny siete
+- [ ] Implementované sieťové bezpečnostné skupiny
 - [ ] RBAC s minimálnymi oprávneniami
 - [ ] WAF povolený na verejných koncových bodoch
 
@@ -864,46 +864,46 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Politiky uchovávania logov
 
 ### Spoľahlivosť ✅
-- [ ] Nasadenie do viacerých regiónov
+- [ ] Nasadenie vo viacerých regiónoch
 - [ ] Plán zálohovania a obnovy
-- [ ] Implementované obvody na prerušenie
+- [ ] Implementované obvodové ističe
 - [ ] Konfigurované politiky opakovania
-- [ ] Postupné zhoršovanie funkčnosti
+- [ ] Plynulá degradácia
 - [ ] Koncové body kontroly zdravia
 
-### Riadenie nákladov ✅
+### Správa nákladov ✅
 - [ ] Konfigurované upozornenia na rozpočet
 - [ ] Správne dimenzovanie zdrojov
-- [ ] Aplikované zľavy pre vývoj/testovanie
+- [ ] Uplatnené zľavy pre vývoj/testovanie
 - [ ] Zakúpené rezervované inštancie
-- [ ] Dashboard monitorovania nákladov
-- [ ] Pravidelné preskúmanie nákladov
+- [ ] Dashboard na monitorovanie nákladov
+- [ ] Pravidelné kontroly nákladov
 
 ### Súlad ✅
 - [ ] Splnené požiadavky na umiestnenie dát
 - [ ] Povolené auditné logovanie
-- [ ] Aplikované politiky súladu
-- [ ] Implementované bezpečnostné základné línie
+- [ ] Uplatnené politiky súladu
+- [ ] Implementované bezpečnostné základy
 - [ ] Pravidelné bezpečnostné hodnotenia
 - [ ] Plán reakcie na incidenty
 
-## Výkonnostné benchmarky
+## Výkonnostné ukazovatele
 
 ### Typické produkčné metriky
 
 | Metrika | Cieľ | Monitorovanie |
 |--------|--------|------------|
 | **Čas odozvy** | < 2 sekundy | Application Insights |
-| **Dostupnosť** | 99.9% | Monitorovanie dostupnosti |
-| **Chybovosť** | < 0.1% | Logy aplikácie |
-| **Používanie tokenov** | < $500/mesiac | Riadenie nákladov |
-| **Súčasní používatelia** | 1000+ | Testovanie záťaže |
+| **Dostupnosť** | 99,9 % | Monitorovanie dostupnosti |
+| **Chybovosť** | < 0,1 % | Logy aplikácie |
+| **Používanie tokenov** | < $500/mesiac | Správa nákladov |
+| **Súbežní používatelia** | 1000+ | Testovanie záťaže |
 | **Čas obnovy** | < 1 hodina | Testy obnovy po havárii |
 
 ### Testovanie záťaže
 
 ```bash
-# Load testing script for AI applications
+# Skript na záťažové testovanie aplikácií AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -911,16 +911,16 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Najlepšie praktiky komunity
+## 🤝 Najlepšie postupy komunity
 
-Na základe spätnej väzby komunity Azure AI Foundry Discord:
+Na základe spätnej väzby komunity Microsoft Foundry Discord:
 
 ### Najlepšie odporúčania od komunity:
 
 1. **Začnite v malom, škálujte postupne**: Začnite so základnými SKU a škálujte na základe skutočného používania
 2. **Monitorujte všetko**: Nastavte komplexné monitorovanie od prvého dňa
 3. **Automatizujte bezpečnosť**: Používajte infraštruktúru ako kód pre konzistentnú bezpečnosť
-4. **Testujte dôkladne**: Zahrňte testovanie špecifické pre AI do vášho pipeline
+4. **Dôkladne testujte**: Zahrňte testovanie špecifické pre AI do vášho pipeline
 5. **Plánujte náklady**: Monitorujte používanie tokenov a nastavte upozornenia na rozpočet včas
 
 ### Bežné chyby, ktorým sa treba vyhnúť:
@@ -934,22 +934,24 @@ Na základe spätnej väzby komunity Azure AI Foundry Discord:
 ## Ďalšie zdroje
 
 - **Azure Well-Architected Framework**: [Pokyny pre AI úlohy](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Dokumentácia Azure AI Foundry**: [Oficiálne dokumenty](https://learn.microsoft.com/azure/ai-studio/)
+- **Dokumentácia Microsoft Foundry**: [Oficiálne dokumenty](https://learn.microsoft.com/azure/ai-studio/)
 - **Šablóny komunity**: [Azure Samples](https://github.com/Azure-Samples)
 - **Komunita Discord**: [#Azure kanál](https://discord.gg/microsoft-azure)
 
 ---
 
 **Navigácia kapitol:**
-- **📚 Domov kurzu**: [AZD Pre Začiatočníkov](../../README.md)
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
 - **📖 Aktuálna kapitola**: Kapitola 8 - Produkčné a podnikové vzory
 - **⬅️ Predchádzajúca kapitola**: [Kapitola 7: Riešenie problémov](../troubleshooting/debugging.md)
 - **⬅️ Tiež súvisiace**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Kurz dokončený**: [AZD Pre Začiatočníkov](../../README.md)
+- **🎆 Kurz dokončený**: [AZD pre začiatočníkov](../../README.md)
 
-**Pamätajte**: Produkčné AI úlohy vyžadujú dôkladné plánovanie, monitorovanie a neustálu optimalizáciu. Začnite s týmito vzormi a prispôsobte ich vašim konkrétnym požiadavkám.
+**Pamätajte**: Produkčné AI úlohy vyžadujú dôkladné plánovanie, monitorovanie a neustálu optimalizáciu. Začnite s týmito vzormi a prispôsobte ich vašim špecifickým požiadavkám.
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

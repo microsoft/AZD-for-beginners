@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-18T09:40:46+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-23T11:22:41+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "cs"
 }
@@ -14,11 +14,11 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Aktuální kapitola**: Kapitola 1 - Základy & Rychlý start
 - **⬅️ Předchozí**: [Instalace & Nastavení](installation.md)
 - **➡️ Další**: [Konfigurace](configuration.md)
-- **🚀 Další kapitola**: [Kapitola 2: AI-First vývoj](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Další kapitola**: [Kapitola 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Úvod
 
-Vítejte u svého prvního projektu s Azure Developer CLI! Tento komplexní praktický tutoriál vás provede celým procesem vytvoření, nasazení a správy full-stack aplikace na Azure pomocí azd. Budete pracovat s reálnou aplikací pro správu úkolů, která zahrnuje React frontend, Node.js API backend a databázi MongoDB.
+Vítejte u svého prvního projektu s Azure Developer CLI! Tento komplexní praktický tutoriál vás provede procesem vytvoření, nasazení a správy full-stack aplikace na Azure pomocí azd. Budete pracovat s reálnou aplikací pro správu úkolů, která zahrnuje React frontend, Node.js API backend a databázi MongoDB.
 
 ## Cíle učení
 
@@ -26,9 +26,9 @@ Po dokončení tohoto tutoriálu budete:
 - Ovládat workflow inicializace projektu azd pomocí šablon
 - Rozumět struktuře projektu Azure Developer CLI a konfiguračním souborům
 - Provádět kompletní nasazení aplikace na Azure včetně zajištění infrastruktury
-- Implementovat strategie aktualizace aplikace a opětovného nasazení
+- Implementovat aktualizace aplikace a strategie pro opětovné nasazení
 - Spravovat více prostředí pro vývoj a testování
-- Aplikovat postupy pro čištění zdrojů a řízení nákladů
+- Aplikovat postupy pro čištění zdrojů a správu nákladů
 
 ## Výsledky učení
 
@@ -38,7 +38,7 @@ Po dokončení budete schopni:
 - Nasazovat full-stack aplikace na Azure pomocí jediného příkazu
 - Řešit běžné problémy s nasazením a autentizací
 - Spravovat více prostředí Azure pro různé fáze nasazení
-- Implementovat workflowy pro kontinuální nasazení aktualizací aplikace
+- Implementovat workflow pro kontinuální nasazení aktualizací aplikace
 
 ## Začínáme
 
@@ -51,7 +51,7 @@ Po dokončení budete schopni:
 
 ### Ověření nastavení
 ```bash
-# Check azd installation
+# Zkontrolujte instalaci azd
 azd version
 ```
 ### Ověření autentizace Azure
@@ -65,39 +65,39 @@ az account show
 node --version
 ```
 
-## Krok 1: Vyberte a inicializujte šablonu
+## Krok 1: Výběr a inicializace šablony
 
 Začněme populární šablonou aplikace pro správu úkolů, která zahrnuje React frontend a Node.js API backend.
 
 ```bash
-# Browse available templates
+# Procházet dostupné šablony
 azd template list
 
-# Initialize the todo app template
+# Inicializovat šablonu aplikace úkolů
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Follow the prompts:
-# - Enter an environment name: "dev"
-# - Choose a subscription (if you have multiple)
-# - Choose a region: "East US 2" (or your preferred region)
+# Postupujte podle pokynů:
+# - Zadejte název prostředí: "dev"
+# - Vyberte předplatné (pokud máte více)
+# - Vyberte region: "East US 2" (nebo váš preferovaný region)
 ```
 
 ### Co se právě stalo?
-- Šablona byla stažena do vašeho lokálního adresáře
-- Byl vytvořen soubor `azure.yaml` s definicemi služeb
-- Byly nastaveny infrastrukturní soubory v adresáři `infra/`
-- Byla vytvořena konfigurace prostředí
+- Stažený kód šablony do vašeho lokálního adresáře
+- Vytvořený soubor `azure.yaml` s definicemi služeb
+- Nastavený kód infrastruktury v adresáři `infra/`
+- Vytvořená konfigurace prostředí
 
-## Krok 2: Prozkoumejte strukturu projektu
+## Krok 2: Prozkoumání struktury projektu
 
-Podívejme se, co nám azd vytvořilo:
+Podívejme se, co nám azd vytvořil:
 
 ```bash
-# View the project structure
+# Zobrazit strukturu projektu
 tree /f   # Windows
-# or
+# nebo
 find . -type f | head -20   # macOS/Linux
 ```
 
@@ -132,54 +132,54 @@ my-first-azd-app/
 
 **azure.yaml** - Srdce vašeho projektu azd:
 ```bash
-# View the project configuration
+# Zobrazit konfiguraci projektu
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Definice infrastruktury:
 ```bash
-# View the infrastructure code
+# Zobrazit kód infrastruktury
 head -30 infra/main.bicep
 ```
 
-## Krok 3: Přizpůsobte svůj projekt (volitelné)
+## Krok 3: Přizpůsobení projektu (volitelné)
 
-Před nasazením můžete aplikaci upravit:
+Před nasazením můžete aplikaci přizpůsobit:
 
 ### Úprava frontendu
 ```bash
-# Open the React app component
+# Otevřete komponentu aplikace React
 code src/web/src/App.tsx
 ```
 
 Proveďte jednoduchou změnu:
 ```typescript
-// Find the title and change it
+// Najděte název a změňte ho
 <h1>My Awesome Todo App</h1>
 ```
 
 ### Konfigurace proměnných prostředí
 ```bash
-# Set custom environment variables
+# Nastavit vlastní proměnné prostředí
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# View all environment variables
+# Zobrazit všechny proměnné prostředí
 azd env get-values
 ```
 
 ## Krok 4: Nasazení na Azure
 
-Teď přichází vzrušující část - vše nasadíme na Azure!
+Teď přichází vzrušující část - nasazení všeho na Azure!
 
 ```bash
-# Deploy infrastructure and application
+# Nasadit infrastrukturu a aplikaci
 azd up
 
-# This command will:
-# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
-# 2. Build your application
-# 3. Deploy to the provisioned resources
-# 4. Display the application URL
+# Tento příkaz provede:
+# 1. Zajištění prostředků Azure (App Service, Cosmos DB, atd.)
+# 2. Sestavení vaší aplikace
+# 3. Nasazení na zajištěné prostředky
+# 4. Zobrazení URL aplikace
 ```
 
 ### Co se děje během nasazení?
@@ -202,15 +202,15 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Krok 5: Otestujte svou aplikaci
+## Krok 5: Testování aplikace
 
-### Přístup k aplikaci
+### Přístup k vaší aplikaci
 Klikněte na URL uvedenou ve výstupu nasazení nebo ji získejte kdykoli:
 ```bash
-# Get application endpoints
+# Získejte koncové body aplikace
 azd show
 
-# Open the application in your browser
+# Otevřete aplikaci ve svém prohlížeči
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
@@ -221,35 +221,35 @@ azd show --output json | jq -r '.services.web.endpoint'
 
 ### Monitorování aplikace
 ```bash
-# Open Azure portal for your resources
+# Otevřete Azure portál pro vaše zdroje
 azd monitor
 
-# View application logs
+# Zobrazit protokoly aplikace
 azd logs
 ```
 
-## Krok 6: Proveďte změny a znovu nasazujte
+## Krok 6: Provedení změn a opětovné nasazení
 
 Proveďme změnu a podívejme se, jak snadné je aktualizovat:
 
 ### Úprava API
 ```bash
-# Edit the API code
+# Upravit kód API
 code src/api/src/routes/lists.js
 ```
 
 Přidejte vlastní hlavičku odpovědi:
 ```javascript
-// Find a route handler and add:
+// Najděte obslužnou funkci trasy a přidejte:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Nasazení pouze změn kódu
+### Nasazení pouze změn v kódu
 ```bash
-# Deploy only the application code (skip infrastructure)
+# Nasadit pouze aplikační kód (přeskočit infrastrukturu)
 azd deploy
 
-# This is much faster than 'azd up' since infrastructure already exists
+# To je mnohem rychlejší než 'azd up', protože infrastruktura již existuje
 ```
 
 ## Krok 7: Správa více prostředí
@@ -257,42 +257,42 @@ azd deploy
 Vytvořte testovací prostředí pro ověření změn před produkcí:
 
 ```bash
-# Create a new staging environment
+# Vytvořte nové testovací prostředí
 azd env new staging
 
-# Deploy to staging
+# Nasadit do testovacího prostředí
 azd up
 
-# Switch back to dev environment
+# Přepnout zpět na vývojové prostředí
 azd env select dev
 
-# List all environments
+# Vypsat všechna prostředí
 azd env list
 ```
 
 ### Porovnání prostředí
 ```bash
-# View dev environment
+# Zobrazit vývojové prostředí
 azd env select dev
 azd show
 
-# View staging environment  
+# Zobrazit testovací prostředí
 azd env select staging
 azd show
 ```
 
 ## Krok 8: Vyčištění zdrojů
 
-Až skončíte s experimentováním, vyčistěte zdroje, abyste předešli dalším poplatkům:
+Až skončíte s experimentováním, vyčistěte zdroje, abyste se vyhnuli dalším poplatkům:
 
 ```bash
-# Delete all Azure resources for current environment
+# Smazat všechny prostředky Azure pro aktuální prostředí
 azd down
 
-# Force delete without confirmation and purge soft-deleted resources
+# Vynutit smazání bez potvrzení a vymazat měkce smazané prostředky
 azd down --force --purge
 
-# Delete specific environment
+# Smazat konkrétní prostředí
 azd env select staging
 azd down --force --purge
 ```
@@ -300,44 +300,152 @@ azd down --force --purge
 ## Co jste se naučili
 
 Gratulujeme! Úspěšně jste:
-- Inicializovali projekt azd ze šablony
-- Prozkoumali strukturu projektu a klíčové soubory
-- Nasadili full-stack aplikaci na Azure
-- Provedli změny kódu a znovu nasadili
-- Spravovali více prostředí
-- Vyčistili zdroje
+- ✅ Inicializovali projekt azd ze šablony
+- ✅ Prozkoumali strukturu projektu a klíčové soubory
+- ✅ Nasadili full-stack aplikaci na Azure
+- ✅ Provedli změny v kódu a opětovné nasazení
+- ✅ Spravovali více prostředí
+- ✅ Vyčistili zdroje
+
+## 🎯 Cvičení pro ověření dovedností
+
+### Cvičení 1: Nasazení jiné šablony (15 minut)
+**Cíl**: Prokázat zvládnutí workflow inicializace a nasazení azd
+
+```bash
+# Vyzkoušejte stack Python + MongoDB
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Ověřte nasazení
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Uklidit
+azd down --force --purge
+```
+
+**Kritéria úspěchu:**
+- [ ] Aplikace se nasadí bez chyb
+- [ ] Přístup k URL aplikace v prohlížeči
+- [ ] Aplikace funguje správně (přidání/odstranění úkolů)
+- [ ] Úspěšně vyčištěny všechny zdroje
+
+### Cvičení 2: Přizpůsobení konfigurace (20 minut)
+**Cíl**: Procvičit konfiguraci proměnných prostředí
+
+```bash
+cd my-first-azd-app
+
+# Vytvořte vlastní prostředí
+azd env new custom-config
+
+# Nastavte vlastní proměnné
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Ověřte proměnné
+azd env get-values | grep APP_TITLE
+
+# Nasazení s vlastní konfigurací
+azd up
+```
+
+**Kritéria úspěchu:**
+- [ ] Úspěšně vytvořeno vlastní prostředí
+- [ ] Nastavené a dostupné proměnné prostředí
+- [ ] Aplikace nasazena s vlastní konfigurací
+- [ ] Ověření vlastních nastavení v nasazené aplikaci
+
+### Cvičení 3: Workflow více prostředí (25 minut)
+**Cíl**: Zvládnout správu prostředí a strategie nasazení
+
+```bash
+# Vytvořte vývojové prostředí
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Poznamenejte si URL vývoje
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Vytvořte testovací prostředí
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Poznamenejte si URL testování
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Porovnejte prostředí
+azd env list
+
+# Otestujte obě prostředí
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Vyčistěte obě
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Kritéria úspěchu:**
+- [ ] Vytvořena dvě prostředí s různými konfiguracemi
+- [ ] Obě prostředí úspěšně nasazena
+- [ ] Možnost přepínání mezi prostředími pomocí `azd env select`
+- [ ] Proměnné prostředí se liší mezi prostředími
+- [ ] Úspěšně vyčištěna obě prostředí
+
+## 📊 Váš pokrok
+
+**Investovaný čas**: ~60-90 minut  
+**Získané dovednosti**:
+- ✅ Inicializace projektu na základě šablony
+- ✅ Zajištění zdrojů na Azure
+- ✅ Workflow nasazení aplikace
+- ✅ Správa prostředí
+- ✅ Správa konfigurace
+- ✅ Čištění zdrojů a správa nákladů
+
+**Další úroveň**: Jste připraveni na [Průvodce konfigurací](configuration.md), kde se naučíte pokročilé vzory konfigurace!
 
 ## Řešení běžných problémů
 
 ### Chyby autentizace
 ```bash
-# Re-authenticate with Azure
+# Znovu se ověřte pomocí Azure
 az login
 
-# Verify subscription access
+# Ověřte přístup k předplatnému
 az account show
 ```
 
 ### Selhání nasazení
 ```bash
-# Enable debug logging
+# Povolit ladicí protokolování
 export AZD_DEBUG=true
 azd up --debug
 
-# View detailed logs
+# Zobrazit podrobné protokoly
 azd logs --service api
 azd logs --service web
 ```
 
 ### Konflikty názvů zdrojů
 ```bash
-# Use a unique environment name
+# Použijte jedinečný název prostředí
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Problémy s porty/sítí
 ```bash
-# Check if ports are available
+# Zkontrolujte, zda jsou porty dostupné
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -347,7 +455,7 @@ netstat -an | grep :3100
 Nyní, když jste dokončili svůj první projekt, prozkoumejte tyto pokročilé témata:
 
 ### 1. Přizpůsobení infrastruktury
-- [Infrastruktura jako kód](../deployment/provisioning.md)
+- [Infrastructure as Code](../deployment/provisioning.md)
 - [Přidání databází, úložišť a dalších služeb](../deployment/provisioning.md#adding-services)
 
 ### 2. Nastavení CI/CD
@@ -355,18 +463,18 @@ Nyní, když jste dokončili svůj první projekt, prozkoumejte tyto pokročilé
 - [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
 
 ### 3. Nejlepší praktiky pro produkci
-- [Konfigurace zabezpečení](../deployment/best-practices.md#security)
+- [Bezpečnostní konfigurace](../deployment/best-practices.md#security)
 - [Optimalizace výkonu](../deployment/best-practices.md#performance)
 - [Monitorování a logování](../deployment/best-practices.md#monitoring)
 
-### 4. Prozkoumejte další šablony
+### 4. Prozkoumání dalších šablon
 ```bash
-# Browse templates by category
+# Procházet šablony podle kategorií
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Try different technology stacks
+# Vyzkoušet různé technologické stacky
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -386,7 +494,7 @@ azd init --template todo-java-mongo
 
 ### Šablony & Příklady
 - [Oficiální galerie šablon](https://azure.github.io/awesome-azd/)
-- [Šablony od komunity](https://github.com/Azure-Samples/azd-templates)
+- [Komunitní šablony](https://github.com/Azure-Samples/azd-templates)
 - [Podnikové vzory](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
@@ -400,10 +508,12 @@ azd init --template todo-java-mongo
 - **📖 Aktuální kapitola**: Kapitola 1 - Základy & Rychlý start
 - **⬅️ Předchozí**: [Instalace & Nastavení](installation.md)
 - **➡️ Další**: [Konfigurace](configuration.md)
-- **🚀 Další kapitola**: [Kapitola 2: AI-First vývoj](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Další kapitola**: [Kapitola 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Další lekce**: [Průvodce nasazením](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

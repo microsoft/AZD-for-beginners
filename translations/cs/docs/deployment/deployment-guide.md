@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-18T09:42:43+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-23T11:07:47+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "cs"
 }
@@ -13,38 +13,38 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 4 - Infrastruktura jako kód a nasazení
 - **⬅️ Předchozí kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
-- **➡️ Další**: [Zajištění prostředků](provisioning.md)
-- **🚀 Další kapitola**: [Kapitola 5: Řešení s více agenty AI](../../examples/retail-scenario.md)
+- **➡️ Další**: [Zajištění zdrojů](provisioning.md)
+- **🚀 Další kapitola**: [Kapitola 5: Víceagentní AI řešení](../../examples/retail-scenario.md)
 
 ## Úvod
 
-Tento komplexní průvodce pokrývá vše, co potřebujete vědět o nasazení aplikací pomocí Azure Developer CLI, od základních nasazení jedním příkazem až po pokročilé produkční scénáře s vlastními hooky, více prostředími a integrací CI/CD. Ovládněte celý životní cyklus nasazení pomocí praktických příkladů a osvědčených postupů.
+Tento komplexní průvodce pokrývá vše, co potřebujete vědět o nasazování aplikací pomocí Azure Developer CLI, od základních nasazení jedním příkazem až po pokročilé produkční scénáře s vlastními hooky, více prostředími a integrací CI/CD. Ovládněte celý životní cyklus nasazení s praktickými příklady a osvědčenými postupy.
 
 ## Cíle učení
 
-Po dokončení tohoto průvodce:
-- Ovládnete všechny příkazy a pracovní postupy nasazení pomocí Azure Developer CLI
-- Porozumíte celému životnímu cyklu nasazení od zajištění prostředků po monitorování
-- Implementujete vlastní hooky pro automatizaci před a po nasazení
-- Nakonfigurujete více prostředí s parametry specifickými pro prostředí
-- Nastavíte pokročilé strategie nasazení, včetně blue-green a kanárských nasazení
-- Integrujete nasazení pomocí azd do CI/CD pipeline a DevOps pracovních postupů
+Po dokončení tohoto průvodce budete:
+- Ovládat všechny příkazy a pracovní postupy nasazení Azure Developer CLI
+- Rozumět celému životnímu cyklu nasazení od zajištění zdrojů po monitorování
+- Implementovat vlastní hooky pro automatizaci před a po nasazení
+- Konfigurovat více prostředí s parametry specifickými pro prostředí
+- Nastavovat pokročilé strategie nasazení, včetně blue-green a kanárkových nasazení
+- Integrovat nasazení azd do CI/CD pipeline a DevOps pracovních postupů
 
-## Výsledky učení
+## Výstupy učení
 
 Po dokončení budete schopni:
-- Samostatně provádět a řešit problémy všech pracovních postupů nasazení pomocí azd
-- Navrhnout a implementovat vlastní automatizaci nasazení pomocí hooků
-- Nakonfigurovat produkční nasazení s odpovídající bezpečností a monitorováním
+- Samostatně provádět a řešit problémy všech pracovních postupů nasazení azd
+- Navrhovat a implementovat vlastní automatizaci nasazení pomocí hooků
+- Konfigurovat nasazení připravená pro produkci s odpovídajícím zabezpečením a monitorováním
 - Spravovat složité scénáře nasazení s více prostředími
-- Optimalizovat výkon nasazení a implementovat strategie pro návrat zpět
-- Integrovat nasazení pomocí azd do podnikových DevOps praktik
+- Optimalizovat výkon nasazení a implementovat strategie návratu zpět
+- Integrovat nasazení azd do podnikových DevOps praktik
 
 ## Přehled nasazení
 
 Azure Developer CLI poskytuje několik příkazů pro nasazení:
 - `azd up` - Kompletní pracovní postup (zajištění + nasazení)
-- `azd provision` - Pouze vytvoření/aktualizace prostředků Azure
+- `azd provision` - Pouze vytvoření/aktualizace Azure zdrojů
 - `azd deploy` - Pouze nasazení aplikačního kódu
 - `azd package` - Sestavení a balení aplikací
 
@@ -53,44 +53,78 @@ Azure Developer CLI poskytuje několik příkazů pro nasazení:
 ### Kompletní nasazení (azd up)
 Nejběžnější pracovní postup pro nové projekty:
 ```bash
-# Deploy everything from scratch
+# Nasadit vše od začátku
 azd up
 
-# Deploy with specific environment
+# Nasadit s konkrétním prostředím
 azd up --environment production
 
-# Deploy with custom parameters
+# Nasadit s vlastními parametry
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Pouze zajištění infrastruktury
-Když potřebujete aktualizovat pouze prostředky Azure:
+### Pouze nasazení infrastruktury
+Když potřebujete aktualizovat pouze Azure zdroje:
 ```bash
-# Provision/update infrastructure
+# Poskytnout/aktualizovat infrastrukturu
 azd provision
 
-# Provision with dry-run to preview changes
+# Poskytnout s dry-run pro náhled změn
 azd provision --preview
 
-# Provision specific services
+# Poskytnout konkrétní služby
 azd provision --service database
 ```
 
 ### Pouze nasazení kódu
 Pro rychlé aktualizace aplikací:
 ```bash
-# Deploy all services
+# Nasadit všechny služby
 azd deploy
 
-# Deploy specific service
+# Očekávaný výstup:
+# Nasazování služeb (azd deploy)
+# - web: Nasazování... Hotovo
+# - api: Nasazování... Hotovo
+# ÚSPĚCH: Vaše nasazení bylo dokončeno za 2 minuty 15 sekund
+
+# Nasadit konkrétní službu
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Nasadit s vlastními argumenty sestavení
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Ověřit nasazení
+azd show --output json | jq '.services'
 ```
 
-## 🏗️ Porozumění procesu nasazení
+### ✅ Ověření nasazení
+
+Po každém nasazení ověřte úspěšnost:
+
+```bash
+# Zkontrolujte, zda všechny služby běží
+azd show
+
+# Otestujte zdravotní koncové body
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Zkontrolujte protokoly na chyby
+azd logs --service api --since 5m | grep -i error
+```
+
+**Kritéria úspěchu:**
+- ✅ Všechny služby ukazují stav "Running"
+- ✅ Zdravotní endpointy vrací HTTP 200
+- ✅ Žádné chybové logy za posledních 5 minut
+- ✅ Aplikace reaguje na testovací požadavky
+
+## 🏗️ Pochopení procesu nasazení
 
 ### Fáze 1: Hooky před zajištěním
 ```yaml
@@ -108,8 +142,8 @@ hooks:
 
 ### Fáze 2: Zajištění infrastruktury
 - Čte šablony infrastruktury (Bicep/Terraform)
-- Vytváří nebo aktualizuje prostředky Azure
-- Konfiguruje síť a bezpečnost
+- Vytváří nebo aktualizuje Azure zdroje
+- Konfiguruje sítě a zabezpečení
 - Nastavuje monitorování a logování
 
 ### Fáze 3: Hooky po zajištění
@@ -128,7 +162,7 @@ hooks:
 ### Fáze 4: Balení aplikace
 - Sestavuje aplikační kód
 - Vytváří artefakty nasazení
-- Balí pro cílovou platformu (kontejnery, ZIP soubory, atd.)
+- Balí pro cílovou platformu (kontejnery, ZIP soubory atd.)
 
 ### Fáze 5: Hooky před nasazením
 ```yaml
@@ -144,7 +178,7 @@ hooks:
 ```
 
 ### Fáze 6: Nasazení aplikace
-- Nasazuje zabalené aplikace do služeb Azure
+- Nasazuje zabalené aplikace do Azure služeb
 - Aktualizuje konfigurační nastavení
 - Spouští/restartuje služby
 
@@ -163,7 +197,7 @@ hooks:
 
 ## 🎛️ Konfigurace nasazení
 
-### Nastavení specifická pro službu
+### Nastavení nasazení specifická pro službu
 ```yaml
 # azure.yaml
 services:
@@ -195,18 +229,18 @@ services:
 
 ### Konfigurace specifické pro prostředí
 ```bash
-# Development environment
+# Vývojové prostředí
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Testovací prostředí
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Produkční prostředí
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -253,22 +287,22 @@ services:
 
 ### Blue-Green nasazení
 ```bash
-# Create blue environment
+# Vytvořte modré prostředí
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# Otestujte modré prostředí
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Přepněte provoz na modré (ruční aktualizace DNS/load balanceru)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Vyčistěte zelené prostředí
 azd env select production-green
 azd down --force
 ```
 
-### Kanárská nasazení
+### Kanárková nasazení
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -282,10 +316,10 @@ services:
         percentage: 10
 ```
 
-### Fázová nasazení
+### Staged nasazení
 ```bash
 #!/bin/bash
-# deploy-staged.sh
+# nasazení-staged.sh
 
 echo "Deploying to development..."
 azd env select dev
@@ -339,7 +373,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimalizace Dockerfile s více fázemi
+### Optimalizace vícefázových Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -369,14 +403,14 @@ CMD ["npm", "start"]
 
 ### Paralelní nasazení
 ```bash
-# Configure parallel deployment
+# Nakonfigurujte paralelní nasazení
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Nasazujte služby paralelně
 azd deploy --parallel
 ```
 
-### Cache sestavení
+### Caching sestavení
 ```yaml
 # azure.yaml - Enable build caching
 services:
@@ -392,10 +426,10 @@ services:
 
 ### Inkrementální nasazení
 ```bash
-# Deploy only changed services
+# Nasadit pouze změněné služby
 azd deploy --incremental
 
-# Deploy with change detection
+# Nasadit s detekcí změn
 azd deploy --detect-changes
 ```
 
@@ -403,17 +437,17 @@ azd deploy --detect-changes
 
 ### Monitorování nasazení v reálném čase
 ```bash
-# Monitor deployment progress
+# Sledovat průběh nasazení
 azd deploy --follow
 
-# View deployment logs
+# Zobrazit logy nasazení
 azd logs --follow --service api
 
-# Check deployment status
+# Zkontrolovat stav nasazení
 azd show --service api
 ```
 
-### Kontroly stavu
+### Kontroly zdraví
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -430,11 +464,11 @@ services:
 ### Validace po nasazení
 ```bash
 #!/bin/bash
-# scripts/validate-deployment.sh
+# skripty/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# Check application health
+# Zkontrolujte stav aplikace
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -460,16 +494,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Bezpečnostní aspekty
+## 🔐 Zabezpečení
 
 ### Správa tajemství
 ```bash
-# Store secrets securely
+# Ukládejte tajemství bezpečně
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Odkazujte na tajemství v azure.yaml
 ```
 
 ```yaml
@@ -482,7 +516,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Bezpečnost sítě
+### Síťová bezpečnost
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -493,7 +527,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Správa identit a přístupu
+### Správa identity a přístupu
 ```yaml
 services:
   api:
@@ -512,29 +546,29 @@ services:
 
 ### Rychlý návrat zpět
 ```bash
-# Rollback to previous deployment
+# Vrátit se k předchozímu nasazení
 azd deploy --rollback
 
-# Rollback specific service
+# Vrátit konkrétní službu
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Vrátit se ke konkrétní verzi
 azd deploy --service api --version v1.2.3
 ```
 
-### Návrat zpět infrastruktury
+### Návrat infrastruktury zpět
 ```bash
-# Rollback infrastructure changes
+# Vrátit změny infrastruktury zpět
 azd provision --rollback
 
-# Preview rollback changes
+# Náhled změn vrácení zpět
 azd provision --rollback --preview
 ```
 
-### Návrat zpět migrace databáze
+### Návrat migrace databáze zpět
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# skripty/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -549,13 +583,13 @@ echo "Database rollback completed"
 
 ### Sledování výkonu nasazení
 ```bash
-# Enable deployment metrics
+# Povolit metriky nasazení
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# Zobrazit historii nasazení
 azd history
 
-# Get deployment statistics
+# Získat statistiky nasazení
 azd metrics --type deployment
 ```
 
@@ -580,22 +614,22 @@ hooks:
 
 ### 1. Konzistence prostředí
 ```bash
-# Use consistent naming
+# Používejte konzistentní pojmenování
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Udržujte paritu prostředí
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Validace infrastruktury
 ```bash
-# Validate before deployment
+# Ověřte před nasazením
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# Použijte lintování ARM/Bicep
 az bicep lint --file infra/main.bicep
 ```
 
@@ -630,7 +664,7 @@ hooks:
 
 ### 4. Dokumentace a logování
 ```bash
-# Document deployment procedures
+# Dokumentujte postupy nasazení
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -638,14 +672,267 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Další kroky
 
-- [Zajištění prostředků](provisioning.md) - Podrobný pohled na správu infrastruktury
-- [Plánování před nasazením](../pre-deployment/capacity-planning.md) - Naplánujte svou strategii nasazení
+- [Zajištění zdrojů](provisioning.md) - Podrobný pohled na správu infrastruktury
+- [Plánování před nasazením](../pre-deployment/capacity-planning.md) - Naplánujte si strategii nasazení
 - [Běžné problémy](../troubleshooting/common-issues.md) - Řešení problémů s nasazením
-- [Osvědčené postupy](../troubleshooting/debugging.md) - Strategie pro produkční nasazení
+- [Osvědčené postupy](../troubleshooting/debugging.md) - Strategie nasazení připravené pro produkci
+
+## 🎯 Praktická cvičení pro nasazení
+
+### Cvičení 1: Pracovní postup inkrementálního nasazení (20 minut)
+**Cíl**: Ovládnout rozdíl mezi plným a inkrementálním nasazením
+
+```bash
+# Počáteční nasazení
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Zaznamenat čas počátečního nasazení
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Proveďte změnu kódu
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Nasadit pouze kód (rychle)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Porovnat časy
+cat deployment-log.txt
+
+# Vyčistit
+azd down --force --purge
+```
+
+**Kritéria úspěchu:**
+- [ ] Plné nasazení trvá 5-15 minut
+- [ ] Pouze nasazení kódu trvá 2-5 minut
+- [ ] Změny kódu se projeví v nasazené aplikaci
+- [ ] Infrastruktura zůstane nezměněna po `azd deploy`
+
+**Výstup učení**: `azd deploy` je o 50-70 % rychlejší než `azd up` pro změny kódu
+
+### Cvičení 2: Vlastní hooky pro nasazení (30 minut)
+**Cíl**: Implementovat automatizaci před a po nasazení
+
+```bash
+# Vytvořte skript pro validaci před nasazením
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Zkontrolujte, zda testy procházejí
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Zkontrolujte neuložené změny
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Vytvořte test funkčnosti po nasazení
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Přidejte hooky do azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Otestujte nasazení s hooky
+azd deploy
+```
+
+**Kritéria úspěchu:**
+- [ ] Skript před nasazením se spustí před nasazením
+- [ ] Nasazení se přeruší, pokud testy selžou
+- [ ] Post-deploy smoke test ověří zdraví
+- [ ] Hooky se spustí ve správném pořadí
+
+### Cvičení 3: Strategie nasazení s více prostředími (45 minut)
+**Cíl**: Implementovat pracovní postup staged nasazení (dev → staging → produkce)
+
+```bash
+# Vytvořit skript nasazení
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Krok 1: Nasadit na vývoj
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Krok 2: Nasadit na testovací prostředí
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Krok 3: Ruční schválení pro produkci
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Vytvořit prostředí
+azd env new dev
+azd env new staging
+azd env new production
+
+# Spustit postupné nasazení
+./deploy-staged.sh
+```
+
+**Kritéria úspěchu:**
+- [ ] Prostředí dev se úspěšně nasadí
+- [ ] Prostředí staging se úspěšně nasadí
+- [ ] Pro produkci je vyžadováno manuální schválení
+- [ ] Všechna prostředí mají funkční kontroly zdraví
+- [ ] Možnost návratu zpět, pokud je potřeba
+
+### Cvičení 4: Strategie návratu zpět (25 minut)
+**Cíl**: Implementovat a otestovat návrat nasazení zpět
+
+```bash
+# Nasadit v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Uložit konfiguraci v1
+cp -r .azure/production .azure/production-v1-backup
+
+# Nasadit v2 s nekompatibilní změnou
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Zjistit selhání
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Vrátit kód zpět
+    git checkout src/api/src/server.js
+    
+    # Vrátit prostředí zpět
+    azd env set APP_VERSION "1.0.0"
+    
+    # Znovu nasadit v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Kritéria úspěchu:**
+- [ ] Možnost detekce selhání nasazení
+- [ ] Skript návratu zpět se spustí automaticky
+- [ ] Aplikace se vrátí do funkčního stavu
+- [ ] Kontroly zdraví projdou po návratu zpět
+
+## 📊 Sledování metrik nasazení
+
+### Sledujte výkon svého nasazení
+
+```bash
+# Vytvořte skript metrik nasazení
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Zaznamenávat do souboru
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Použijte to
+./track-deployment.sh
+```
+
+**Analyzujte své metriky:**
+```bash
+# Zobrazit historii nasazení
+cat deployment-metrics.csv
+
+# Vypočítat průměrný čas nasazení
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
 
 ## Další zdroje
 
-- [Referenční příručka nasazení pomocí Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referenční příručka nasazení Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Nasazení Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Nasazení Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Nasazení Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
@@ -654,9 +941,11 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 **Navigace**
 - **Předchozí lekce**: [Váš první projekt](../getting-started/first-project.md)
-- **Další lekce**: [Zajištění prostředků](provisioning.md)
+- **Další lekce**: [Zajištění zdrojů](provisioning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

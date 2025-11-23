@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-18T09:16:17+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-23T13:13:00+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
   "language_code": "hu"
 }
 -->
-# Azure AI Foundry integráció AZD-vel
+# Microsoft Foundry integráció AZD-vel
 
 **Fejezet navigáció:**
 - **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
@@ -18,11 +18,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Áttekintés
 
-Ez az útmutató bemutatja, hogyan integrálhatók az Azure AI Foundry szolgáltatások az Azure Developer CLI-vel (AZD), hogy egyszerűsítsük az AI alkalmazások telepítését. Az Azure AI Foundry átfogó platformot kínál AI alkalmazások építéséhez, telepítéséhez és kezeléséhez, míg az AZD leegyszerűsíti az infrastruktúra és telepítési folyamatokat.
+Ez az útmutató bemutatja, hogyan integrálhatók a Microsoft Foundry szolgáltatások az Azure Developer CLI-vel (AZD), hogy egyszerűsítsük az AI alkalmazások telepítését. A Microsoft Foundry átfogó platformot kínál AI alkalmazások építéséhez, telepítéséhez és kezeléséhez, míg az AZD leegyszerűsíti az infrastruktúra és telepítési folyamatokat.
 
-## Mi az Azure AI Foundry?
+## Mi az a Microsoft Foundry?
 
-Az Azure AI Foundry a Microsoft egységes platformja az AI fejlesztéshez, amely tartalmazza:
+A Microsoft Foundry a Microsoft egységes AI fejlesztési platformja, amely tartalmazza:
 
 - **Modellkatalógus**: Hozzáférés a legmodernebb AI modellekhez
 - **Prompt Flow**: Vizualizációs tervező AI munkafolyamatokhoz
@@ -30,11 +30,11 @@ Az Azure AI Foundry a Microsoft egységes platformja az AI fejlesztéshez, amely
 - **Telepítési lehetőségek**: Többféle hosztolási és skálázási opció
 - **Biztonság és védelem**: Beépített felelős AI funkciók
 
-## AZD + Azure AI Foundry: Együtt még jobb
+## AZD + Microsoft Foundry: Jobb együtt
 
-| Funkció | Azure AI Foundry | AZD integráció előnye |
+| Funkció | Microsoft Foundry | AZD integráció előnye |
 |---------|-----------------|------------------------|
-| **Modell telepítése** | Manuális portál telepítés | Automatizált, ismételhető telepítések |
+| **Modell telepítés** | Manuális portál telepítés | Automatizált, ismételhető telepítések |
 | **Infrastruktúra** | Kattintásos előkészítés | Infrastruktúra kódként (Bicep) |
 | **Környezetkezelés** | Egyetlen környezet fókusz | Több környezet (fejlesztés/staging/éles) |
 | **CI/CD integráció** | Korlátozott | Natív GitHub Actions támogatás |
@@ -45,7 +45,7 @@ Az Azure AI Foundry a Microsoft egységes platformja az AI fejlesztéshez, amely
 - Azure előfizetés megfelelő jogosultságokkal
 - Telepített Azure Developer CLI
 - Hozzáférés az Azure OpenAI szolgáltatásokhoz
-- Alapvető ismeretek az Azure AI Foundry-ról
+- Alapvető ismeretek a Microsoft Foundry-ról
 
 ## Alapvető integrációs minták
 
@@ -168,26 +168,26 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Éles konfiguráció:**
 ```bash
-# Core AI services
+# Alapvető AI szolgáltatások
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Model configurations
+# Modell konfigurációk
 azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
 
-# Performance settings
+# Teljesítmény beállítások
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Fejlesztési konfiguráció:**
 ```bash
-# Cost-optimized settings for development
+# Költségoptimalizált beállítások fejlesztéshez
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Ingyenes szint
 ```
 
 ### Biztonságos konfiguráció Key Vault-tal
@@ -227,27 +227,27 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ## Telepítési munkafolyamatok
 
-### Egyszerű parancs telepítés
+### Egyparancsos telepítés
 
 ```bash
-# Deploy everything with one command
+# Telepítsen mindent egy parancs segítségével
 azd up
 
-# Or deploy incrementally
-azd provision  # Infrastructure only
-azd deploy     # Application only
+# Vagy telepítsen fokozatosan
+azd provision  # Csak infrastruktúra
+azd deploy     # Csak alkalmazás
 ```
 
 ### Környezet-specifikus telepítések
 
 ```bash
-# Development environment
+# Fejlesztési környezet
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Production environment
+# Éles környezet
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -290,7 +290,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Költségfigyelés
+### Költségmonitorozás
 
 ```bicep
 // Budget alert for AI services
@@ -441,14 +441,14 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 **Megoldások:**
 ```bash
-# Check current quota usage
+# Ellenőrizze az aktuális kvóta használatát
 az cognitiveservices usage list --location eastus
 
-# Try different region
+# Próbáljon ki egy másik régiót
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacity temporarily
+# Csökkentse ideiglenesen a kapacitást
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -461,13 +461,13 @@ azd deploy
 
 **Megoldások:**
 ```bash
-# Verify role assignments
+# Ellenőrizze a szerepkör-hozzárendeléseket
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Check managed identity configuration
+# Ellenőrizze a kezelt identitás konfigurációját
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validate Key Vault access
+# Érvényesítse a Key Vault hozzáférést
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
@@ -479,11 +479,11 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Megoldások:**
 ```bash
-# List available models by region
+# Listázza a rendelkezésre álló modelleket régiónként
 az cognitiveservices model list --location eastus
 
-# Update model version in bicep template
-# Check model capacity requirements
+# Frissítse a modell verzióját a bicep sablonban
+# Ellenőrizze a modell kapacitás követelményeit
 ```
 
 ## Példa sablonok
@@ -500,7 +500,7 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Dokumentumfeldolgozó csővezeték
+### Dokumentumfeldolgozási csővezeték
 
 **Repository**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
 
@@ -526,17 +526,265 @@ azd up
 
 ## Következő lépések
 
-1. **Próbáld ki a példákat**: Kezdj egy előre elkészített sablonnal, amely megfelel az esetednek
+1. **Próbáld ki a példákat**: Kezdj egy előre elkészített sablonnal, amely megfelel az igényeidnek
 2. **Testreszabás**: Módosítsd az infrastruktúrát és az alkalmazáskódot
 3. **Monitorozás hozzáadása**: Valósíts meg átfogó megfigyelhetőséget
 4. **Költségoptimalizálás**: Finomhangold a konfigurációkat a költségvetésedhez
 5. **Biztonságos telepítés**: Valósíts meg vállalati biztonsági mintákat
 6. **Skálázás éles környezetre**: Adj hozzá több régiót és magas rendelkezésre állást
 
+## 🎯 Gyakorlati feladatok
+
+### Feladat 1: Azure OpenAI chat alkalmazás telepítése (30 perc)
+**Cél**: Telepíts és tesztelj egy élesre kész AI chat alkalmazást
+
+```bash
+# Sablon inicializálása
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Környezeti változók beállítása
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Telepítés
+azd up
+
+# Az alkalmazás tesztelése
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# AI műveletek figyelése
+azd monitor
+
+# Takarítás
+azd down --force --purge
+```
+
+**Siker kritériumok:**
+- [ ] A telepítés kvóta hibák nélkül befejeződik
+- [ ] A chat felület elérhető böngészőben
+- [ ] Kérdéseket lehet feltenni és AI-alapú válaszokat kapni
+- [ ] Application Insights mutatja a telemetriai adatokat
+- [ ] Az erőforrások sikeresen törölve lettek
+
+**Becsült költség**: $5-10 30 perc tesztelésre
+
+### Feladat 2: Több modell telepítésének konfigurálása (45 perc)
+**Cél**: Több AI modell telepítése különböző konfigurációkkal
+
+```bash
+# Hozzon létre egy egyedi Bicep konfigurációt
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Telepítse és ellenőrizze
+azd provision
+azd show
+```
+
+**Siker kritériumok:**
+- [ ] Több modell sikeresen telepítve
+- [ ] Különböző kapacitásbeállítások alkalmazva
+- [ ] Modellek elérhetők API-n keresztül
+- [ ] Mindkét modell hívható az alkalmazásból
+
+### Feladat 3: Költségmonitorozás megvalósítása (20 perc)
+**Cél**: Költségriasztások és költségkövetés beállítása
+
+```bash
+# Költségvetési figyelmeztetés hozzáadása Bicephez
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Költségvetési figyelmeztetés telepítése
+azd provision
+
+# Jelenlegi költségek ellenőrzése
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Siker kritériumok:**
+- [ ] Költségriasztás létrehozva az Azure-ban
+- [ ] E-mail értesítések beállítva
+- [ ] Költségadatok megtekinthetők az Azure Portálon
+- [ ] Költségkeret megfelelően beállítva
+
+## 💡 Gyakran ismételt kérdések
+
+<details>
+<summary><strong>Hogyan csökkenthetem az Azure OpenAI költségeit fejlesztés közben?</strong></summary>
+
+1. **Használj ingyenes szintet**: Az Azure OpenAI havi 50,000 token ingyenes
+2. **Csökkentsd a kapacitást**: Állítsd a kapacitást 10 TPM-re a 30+ helyett fejlesztéshez
+3. **Használj azd down-t**: Az erőforrások leállítása, ha nem aktívan fejlesztesz
+4. **Gyorsítótárazd a válaszokat**: Valósíts meg Redis gyorsítótárat ismételt lekérdezésekhez
+5. **Használj prompt engineering-et**: Csökkentsd a tokenhasználatot hatékony promptokkal
+
+```bash
+# Fejlesztési konfiguráció
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>Mi a különbség az Azure OpenAI és az OpenAI API között?</strong></summary>
+
+**Azure OpenAI**:
+- Vállalati biztonság és megfelelőség
+- Privát hálózati integráció
+- SLA garanciák
+- Kezelt identitás hitelesítés
+- Magasabb kvóták elérhetők
+
+**OpenAI API**:
+- Gyorsabb hozzáférés új modellekhez
+- Egyszerűbb beállítás
+- Alacsonyabb belépési küszöb
+- Csak nyilvános internet
+
+Éles alkalmazásokhoz **az Azure OpenAI ajánlott**.
+</details>
+
+<details>
+<summary><strong>Hogyan kezeljem az Azure OpenAI kvóta túllépési hibákat?</strong></summary>
+
+```bash
+# Ellenőrizze az aktuális kvótát
+az cognitiveservices usage list --location eastus2
+
+# Próbáljon ki egy másik régiót
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Csökkentse ideiglenesen a kapacitást
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Kérjen kvótanövelést
+# Lépjen az Azure Portál > Kvóták > Növelés kérése
+```
+</details>
+
+<details>
+<summary><strong>Használhatom saját adataimat az Azure OpenAI-val?</strong></summary>
+
+Igen! Használj **Azure AI Search**-t RAG-hoz (Retrieval Augmented Generation):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+Lásd az [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) sablont.
+</details>
+
+<details>
+<summary><strong>Hogyan biztosítsam az AI modell végpontokat?</strong></summary>
+
+**Legjobb gyakorlatok**:
+1. Használj kezelt identitást (API kulcsok nélkül)
+2. Engedélyezd a privát végpontokat
+3. Konfiguráld a hálózati biztonsági csoportokat
+4. Valósíts meg sebességkorlátozást
+5. Használj Azure Key Vault-ot titkokhoz
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
+
 ## Közösség és támogatás
 
-- **Azure AI Foundry Discord**: [#Azure csatorna](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Problémák és viták](https://github.com/Azure/azure-dev)
+- **Microsoft Foundry Discord**: [#Azure csatorna](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [Problémák és megbeszélések](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Hivatalos dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
 
 ---
@@ -548,9 +796,11 @@ azd up
 - **➡️ Következő**: [AI modell telepítése](ai-model-deployment.md)
 - **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../getting-started/configuration.md)
 
-**Segítségre van szükséged?** Csatlakozz a közösségi vitákhoz, vagy nyiss egy problémát a repository-ban. Az Azure AI + AZD közösség azért van, hogy segítsen neked sikeresnek lenni!
+**Segítségre van szükséged?** Csatlakozz a közösségi megbeszélésekhez, vagy nyiss egy problémát a repository-ban. Az Azure AI + AZD közösség azért van itt, hogy segítsen neked sikerrel járni!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

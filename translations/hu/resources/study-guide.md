@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ee6549c72fe4271931326578e2379243",
-  "translation_date": "2025-09-18T09:28:14+00:00",
+  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
+  "translation_date": "2025-11-23T10:24:27+00:00",
   "source_file": "resources/study-guide.md",
   "language_code": "hu"
 }
@@ -23,7 +23,7 @@ Ez az átfogó tanulási útmutató strukturált tanulási célokat, kulcsfogalm
 Az útmutató elvégzésével:
 - Elsajátítja az Azure Developer CLI alapvető és haladó fogalmait
 - Gyakorlati készségeket fejleszt az Azure alkalmazások telepítésében és kezelésében
-- Magabiztosságot szerez a hibakeresésben és a telepítések optimalizálásában
+- Magabiztosságot szerez a telepítési problémák elhárításában és optimalizálásában
 - Megérti a termelésre kész telepítési gyakorlatokat és biztonsági szempontokat
 
 ## Tanulási Eredmények
@@ -31,7 +31,7 @@ Az útmutató elvégzésével:
 Az útmutató összes szakaszának elvégzése után képes lesz:
 - Teljes alkalmazásarchitektúrákat tervezni, telepíteni és kezelni az azd segítségével
 - Átfogó monitorozási, biztonsági és költségoptimalizálási stratégiákat megvalósítani
-- Önállóan hibakeresni összetett telepítési problémákat
+- Önállóan elhárítani összetett telepítési problémákat
 - Egyedi sablonokat létrehozni és hozzájárulni az azd közösséghez
 
 ## 8 Fejezetes Tanulási Struktúra
@@ -40,10 +40,10 @@ Az útmutató összes szakaszának elvégzése után képes lesz:
 **Időtartam**: 30-45 perc | **Komplexitás**: ⭐
 
 #### Tanulási Célok
-- Az Azure Developer CLI alapfogalmainak és terminológiájának megértése
-- AZD sikeres telepítése és konfigurálása a fejlesztési platformján
-- Első alkalmazás telepítése meglévő sablon használatával
-- Az AZD parancssori felületének hatékony használata
+- Értsük meg az Azure Developer CLI alapfogalmait és terminológiáját
+- Sikeresen telepítsük és konfiguráljuk az AZD-t a fejlesztési platformon
+- Telepítsük az első alkalmazást egy meglévő sablon segítségével
+- Hatékonyan navigáljunk az AZD parancssori felületén
 
 #### Kulcsfogalmak, amelyeket el kell sajátítani
 - AZD projektstruktúra és komponensek (azure.yaml, infra/, src/)
@@ -52,14 +52,14 @@ Az útmutató összes szakaszának elvégzése után képes lesz:
 - Erőforráscsoport és előfizetés kezelése
 
 #### Gyakorlati Feladatok
-1. **Telepítés Ellenőrzése**: Telepítse az AZD-t, és ellenőrizze az `azd version` paranccsal
+1. **Telepítés Ellenőrzése**: Telepítse az AZD-t és ellenőrizze az `azd version` paranccsal
 2. **Első Telepítés**: Telepítse sikeresen a todo-nodejs-mongo sablont
-3. **Környezet Beállítása**: Konfigurálja az első környezeti változóit
-4. **Erőforrás Felfedezése**: Böngéssze a telepített erőforrásokat az Azure Portálon
+3. **Környezet Beállítása**: Konfigurálja az első környezeti változókat
+4. **Erőforrás Felfedezése**: Navigáljon a telepített erőforrások között az Azure Portálon
 
 #### Értékelési Kérdések
 - Mik az AZD projekt alapvető komponensei?
-- Hogyan inicializál egy új projektet sablonból?
+- Hogyan inicializál egy új projektet egy sablonból?
 - Mi a különbség az `azd up` és az `azd deploy` között?
 - Hogyan kezel több környezetet az AZD segítségével?
 
@@ -69,26 +69,26 @@ Az útmutató összes szakaszának elvégzése után képes lesz:
 **Időtartam**: 1-2 óra | **Komplexitás**: ⭐⭐
 
 #### Tanulási Célok
-- Az Azure AI Foundry szolgáltatások integrálása az AZD munkafolyamatokkal
-- AI-alapú alkalmazások telepítése és konfigurálása
-- RAG (Retrieval-Augmented Generation) implementációs minták megértése
-- AI modellek telepítésének és skálázásának kezelése
+- Integrálja a Microsoft Foundry szolgáltatásokat az AZD munkafolyamatokkal
+- Telepítse és konfigurálja AI-alapú alkalmazásokat
+- Értsük meg a RAG (Retrieval-Augmented Generation) megvalósítási mintákat
+- Kezelje az AI modellek telepítését és skálázását
 
 #### Kulcsfogalmak, amelyeket el kell sajátítani
 - Azure OpenAI szolgáltatás integrációja és API kezelése
-- AI keresés konfigurációja és vektorindexelés
-- Modelltelepítési stratégiák és kapacitástervezés
-- AI alkalmazások monitorozása és teljesítményoptimalizálása
+- AI keresési konfiguráció és vektorindexelés
+- Modell telepítési stratégiák és kapacitástervezés
+- AI alkalmazás monitorozása és teljesítményoptimalizálása
 
 #### Gyakorlati Feladatok
-1. **AI Chat Telepítése**: Telepítse az azure-search-openai-demo sablont
-2. **RAG Implementáció**: Dokumentumindexelés és visszakeresés konfigurálása
-3. **Modell Konfiguráció**: Több AI modell beállítása különböző célokra
-4. **AI Monitorozás**: Application Insights implementálása AI munkaterhelésekhez
+1. **AI Chat Telepítés**: Telepítse az azure-search-openai-demo sablont
+2. **RAG Megvalósítás**: Konfigurálja a dokumentum indexelést és visszakeresést
+3. **Modell Konfiguráció**: Állítson be több AI modellt különböző célokra
+4. **AI Monitorozás**: Valósítsa meg az Application Insights-t az AI munkaterhelésekhez
 
 #### Értékelési Kérdések
 - Hogyan konfigurálja az Azure OpenAI szolgáltatásokat egy AZD sablonban?
-- Mik az RAG architektúra kulcsfontosságú komponensei?
+- Mik az RAG architektúra kulcselemei?
 - Hogyan kezeli az AI modellek kapacitását és skálázását?
 - Milyen monitorozási metrikák fontosak az AI alkalmazásokhoz?
 
@@ -98,22 +98,22 @@ Az útmutató összes szakaszának elvégzése után képes lesz:
 **Időtartam**: 45-60 perc | **Komplexitás**: ⭐⭐
 
 #### Tanulási Célok
-- Környezetkonfigurációs és kezelési stratégiák elsajátítása
-- Biztonságos hitelesítési minták és kezelt identitás implementálása
-- Erőforrások szervezése megfelelő elnevezési konvenciókkal
-- Több környezet telepítésének konfigurálása (fejlesztés, tesztelés, éles)
+- Sajátítsa el a környezetkonfiguráció és kezelési stratégiákat
+- Valósítson meg biztonságos hitelesítési mintákat és kezelt identitást
+- Szervezze az erőforrásokat megfelelő elnevezési konvenciókkal
+- Konfigurálja a többkörnyezetes telepítéseket (fejlesztés, tesztelés, éles)
 
 #### Kulcsfogalmak, amelyeket el kell sajátítani
-- Környezet hierarchia és konfigurációs prioritások
+- Környezet hierarchia és konfigurációs prioritás
 - Kezelt identitás és szolgáltatásazonosító hitelesítés
 - Key Vault integráció titkok kezeléséhez
 - Környezet-specifikus paraméterek kezelése
 
 #### Gyakorlati Feladatok
-1. **Több Környezet Beállítása**: Fejlesztési, tesztelési és éles környezetek konfigurálása
-2. **Biztonsági Konfiguráció**: Kezelt identitás hitelesítés implementálása
-3. **Titkok Kezelése**: Azure Key Vault integrálása érzékeny adatokhoz
-4. **Paraméterek Kezelése**: Környezet-specifikus konfigurációk létrehozása
+1. **Többkörnyezetes Beállítás**: Konfigurálja a fejlesztési, tesztelési és éles környezeteket
+2. **Biztonsági Konfiguráció**: Valósítsa meg a kezelt identitás hitelesítést
+3. **Titkok Kezelése**: Integrálja az Azure Key Vault-ot érzékeny adatokhoz
+4. **Paraméterek Kezelése**: Hozzon létre környezet-specifikus konfigurációkat
 
 #### Értékelési Kérdések
 - Hogyan konfigurál különböző környezeteket az AZD-ben?
@@ -127,56 +127,63 @@ Az útmutató összes szakaszának elvégzése után képes lesz:
 **Időtartam**: 1-1,5 óra | **Komplexitás**: ⭐⭐⭐
 
 #### Tanulási Célok
-- Bicep infrastruktúra sablonok létrehozása és testreszabása
-- Haladó telepítési minták és munkafolyamatok implementálása
-- Erőforrások biztosítási stratégiáinak megértése
-- Skálázható több szolgáltatásból álló architektúrák tervezése
+- Hozzon létre és testreszabjon Bicep infrastruktúra sablonokat
+- Valósítson meg haladó telepítési mintákat és munkafolyamatokat
+- Értsük meg az erőforrások biztosítási stratégiáit
+- Tervezzen skálázható, több szolgáltatásból álló architektúrákat
+
+- Telepítsen konténeres alkalmazásokat az Azure Container Apps és AZD segítségével
 
 #### Kulcsfogalmak, amelyeket el kell sajátítani
 - Bicep sablon struktúra és legjobb gyakorlatok
-- Erőforrás-függőségek és telepítési sorrend
+- Erőforrás függőségek és telepítési sorrend
 - Paraméterfájlok és sablon modularitás
 - Egyedi horgok és telepítési automatizálás
+- Konténeres alkalmazás telepítési minták (gyors kezdés, éles, mikroszolgáltatások)
 
 #### Gyakorlati Feladatok
-1. **Egyedi Sablon Létrehozása**: Több szolgáltatásból álló alkalmazás sablon létrehozása
-2. **Bicep Elsajátítása**: Moduláris, újrahasználható infrastruktúra komponensek létrehozása
-3. **Telepítési Automatizálás**: Elő-/utótelepítési horgok implementálása
-4. **Architektúra Tervezés**: Összetett mikroszolgáltatások architektúrájának telepítése
+1. **Egyedi Sablon Létrehozása**: Építsen egy több szolgáltatásból álló alkalmazás sablont
+2. **Bicep Elsajátítása**: Hozzon létre moduláris, újrahasználható infrastruktúra komponenseket
+3. **Telepítési Automatizálás**: Valósítson meg elő-/utótelepítési horgokat
+4. **Architektúra Tervezés**: Telepítsen összetett mikroszolgáltatási architektúrát
+5. **Konténeres Alkalmazás Telepítése**: Telepítse a [Simple Flask API](../../../examples/container-app/simple-flask-api) és [Microservices Architecture](../../../examples/container-app/microservices) példákat az AZD segítségével
 
 #### Értékelési Kérdések
 - Hogyan hoz létre egyedi Bicep sablonokat az AZD-hez?
-- Mik a legjobb gyakorlatok az infrastruktúra kódjának szervezéséhez?
-- Hogyan kezeli az erőforrás-függőségeket a sablonokban?
-- Milyen telepítési minták támogatják a zéró leállási időt?
+- Mik a legjobb gyakorlatok az infrastruktúra kód szervezéséhez?
+- Hogyan kezeli az erőforrás függőségeket a sablonokban?
+- Milyen telepítési minták támogatják a zéró leállási frissítéseket?
 
 ---
 
-### 5. fejezet: Több Ügynökös AI Megoldások (6-7. hét)
+### 5. fejezet: Többügynökös AI Megoldások (6-7. hét)
 **Időtartam**: 2-3 óra | **Komplexitás**: ⭐⭐⭐⭐
 
 #### Tanulási Célok
-- Több ügynökös AI architektúrák tervezése és implementálása
-- Ügynökök koordinációjának és kommunikációjának irányítása
-- Termelésre kész AI megoldások telepítése monitorozással
-- Ügynökök specializációjának és munkafolyamat mintáinak megértése
+- Tervezzen és valósítson meg többügynökös AI architektúrákat
+- Orkestrálja az ügynökök koordinációját és kommunikációját
+- Telepítsen termelésre kész AI megoldásokat monitorozással
+- Értsük meg az ügynökök specializációját és munkafolyamat mintáit
+- Integrálja konténeres mikroszolgáltatásokat a többügynökös megoldások részeként
 
 #### Kulcsfogalmak, amelyeket el kell sajátítani
-- Több ügynökös architektúra minták és tervezési elvek
-- Ügynökök kommunikációs protokolljai és adatáramlás
+- Többügynökös architektúra minták és tervezési elvek
+- Ügynök kommunikációs protokollok és adatáramlás
 - Terheléselosztási és skálázási stratégiák AI ügynökökhöz
-- Termelési monitorozás több ügynökös rendszerekhez
+- Termelési monitorozás többügynökös rendszerekhez
+- Szolgáltatás-szolgáltatás kommunikáció konténeres környezetekben
 
 #### Gyakorlati Feladatok
-1. **Kiskereskedelmi Megoldás Telepítése**: Teljes több ügynökös kiskereskedelmi forgatókönyv telepítése
-2. **Ügynök Testreszabása**: Vásárlói és Készlet ügynökök viselkedésének módosítása
-3. **Architektúra Skálázása**: Terheléselosztás és automatikus skálázás implementálása
-4. **Termelési Monitorozás**: Átfogó monitorozás és riasztás beállítása
+1. **Kiskereskedelmi Megoldás Telepítése**: Telepítse a teljes többügynökös kiskereskedelmi forgatókönyvet
+2. **Ügynök Testreszabása**: Módosítsa az Ügyfél és Készlet ügynök viselkedését
+3. **Architektúra Skálázása**: Valósítson meg terheléselosztást és automatikus skálázást
+4. **Termelési Monitorozás**: Állítson be átfogó monitorozást és riasztásokat
+5. **Mikroszolgáltatások Integrációja**: Bővítse a [Microservices Architecture](../../../examples/container-app/microservices) példát, hogy támogassa az ügynök-alapú munkafolyamatokat
 
 #### Értékelési Kérdések
-- Hogyan tervez hatékony több ügynökös kommunikációs mintákat?
-- Melyek az AI ügynökök munkaterhelésének skálázására vonatkozó kulcsfontosságú szempontok?
-- Hogyan monitorozza és hibakeresi a több ügynökös AI rendszereket?
+- Hogyan tervez hatékony többügynökös kommunikációs mintákat?
+- Melyek a legfontosabb szempontok az AI ügynökök munkaterhelésének skálázásához?
+- Hogyan monitorozza és hibakeresi a többügynökös AI rendszereket?
 - Milyen termelési minták biztosítják az AI ügynökök megbízhatóságát?
 
 ---
@@ -185,105 +192,201 @@ Az útmutató összes szakaszának elvégzése után képes lesz:
 **Időtartam**: 1 óra | **Komplexitás**: ⭐⭐
 
 #### Tanulási Célok
-- Átfogó kapacitástervezés és erőforrás-érvényesítés végrehajtása
-- Optimális Azure SKU-k kiválasztása költséghatékonyság érdekében
-- Automatikus előzetes ellenőrzések és érvényesítés implementálása
-- Telepítések tervezése költségoptimalizálási stratégiákkal
+- Végezzen átfogó kapacitástervezést és erőforrás érvényesítést
+- Válassza ki az optimális Azure SKU-kat költséghatékonyság érdekében
+- Valósítson meg automatizált előzetes ellenőrzéseket és érvényesítést
+- Tervezze meg a telepítéseket költségoptimalizálási stratégiákkal
 
 #### Kulcsfogalmak, amelyeket el kell sajátítani
 - Azure erőforrás kvóták és kapacitáskorlátok
 - SKU kiválasztási kritériumok és költségoptimalizálás
-- Automatikus érvényesítési szkriptek és tesztelés
+- Automatizált érvényesítési szkriptek és tesztelés
 - Telepítési tervezés és kockázatértékelés
 
 #### Gyakorlati Feladatok
-1. **Kapacitáselemzés**: Elemezze az alkalmazásaihoz szükséges erőforrásokat
+1. **Kapacitás Elemzés**: Elemezze az alkalmazások erőforrásigényeit
 2. **SKU Optimalizálás**: Hasonlítsa össze és válassza ki a költséghatékony szolgáltatási szinteket
-3. **Érvényesítés Automatizálása**: Telepítés előtti ellenőrzési szkriptek implementálása
-4. **Költségtervezés**: Telepítési költségbecslések és költségvetések létrehozása
+3. **Érvényesítés Automatizálása**: Valósítson meg előtelepítési ellenőrző szkripteket
+4. **Költségtervezés**: Készítsen telepítési költségbecsléseket és költségvetéseket
 
 #### Értékelési Kérdések
 - Hogyan érvényesíti az Azure kapacitást telepítés előtt?
 - Milyen tényezők befolyásolják az SKU kiválasztási döntéseket?
-- Hogyan automatizálja a telepítés előtti érvényesítést?
+- Hogyan automatizálja az előtelepítési érvényesítést?
 - Milyen stratégiák segítenek optimalizálni a telepítési költségeket?
-2. Hogyan ellenőrizheted az Azure erőforrások elérhetőségét a telepítés előtt?  
-3. Melyek egy előzetes ellenőrzési rendszer kulcsfontosságú elemei?  
-4. Hogyan becsülheted meg és kontrollálhatod a telepítési költségeket?  
+
+---
+
+### 7. fejezet: Hibakeresés és Debugolás (9. hét)
+**Időtartam**: 1-1,5 óra | **Komplexitás**: ⭐⭐
+
+#### Tanulási Célok
+- Fejlesszen szisztematikus hibakeresési megközelítéseket az AZD telepítésekhez
+- Oldja meg a gyakori telepítési és konfigurációs problémákat
+- Debugolja az AI-specifikus problémákat és teljesítményproblémákat
+- Valósítson meg monitorozást és riasztásokat a proaktív problémaészleléshez
+
+#### Kulcsfogalmak, amelyeket el kell sajátítani
+- Diagnosztikai technikák és naplózási stratégiák
+- Gyakori hibaminták és megoldásaik
+- Teljesítmény monitorozás és optimalizálás
+- Incidens válasz és helyreállítási eljárások
+
+#### Gyakorlati Feladatok
+1. **Diagnosztikai Készségek**: Gyakoroljon szándékosan hibás telepítésekkel
+2. **Naplóelemzés**: Használja hatékonyan az Azure Monitor és Application Insights eszközöket
+3. **Teljesítmény Hangolás**: Optimalizálja a lassan működő alkalmazásokat
+4. **Helyreállítási Eljárások**: Valósítson meg biztonsági mentést és katasztrófa helyreállítást
+
+#### Értékelési Kérdések
+- Mik a leggyakoribb AZD telepítési hibák?
+- Hogyan debugolja a hitelesítési és engedélyezési problémákat?
+- Milyen monitorozási stratégiák segítenek megelőzni a termelési problémákat?
+- Hogyan optimalizálja az alkalmazás teljesítményét az Azure-ban?
+
+---
+
+### 8. fejezet: Termelési és Vállalati Minták (10-11. hét)
+**Időtartam**: 2-3 óra | **Komplexitás**: ⭐⭐⭐⭐
+
+#### Tanulási Célok
+- Valósítson meg vállalati szintű telepítési stratégiákat
+- Tervezzen biztonsági mintákat és megfelelőségi kereteket
+- Alakítson ki monitorozási, irányítási és költségkezelési rendszereket
+- Hozzon létre skálázható CI/CD csővezetékeket AZD integrációval
+- Alkalmazza a legjobb gyakorlatokat termelési konténeres alkalmazások telepítéséhez (biztonság, monitorozás, költség, CI/CD)
+
+#### Kulcsfogalmak, amelyeket el kell sajátítani
+- Vállalati biztonsági és megfelelőségi követelmények
+- Irányítási keretek és szabályzatok megval
+5. Milyen szempontokat kell figyelembe venni a több régióra kiterjedő telepítések esetén?
+
+### 4. modul: Telepítés előtti validáció (5. hét)
+
+#### Tanulási célok
+- Átfogó telepítés előtti ellenőrzések végrehajtása
+- Kapacitástervezés és erőforrás-validáció elsajátítása
+- SKU kiválasztás és költségoptimalizálás megértése
+- Automatizált validációs folyamatok létrehozása
+
+#### Kulcsfogalmak, amelyeket el kell sajátítani
+- Azure erőforrás kvóták és korlátok
+- SKU kiválasztási kritériumok és költségvonzatok
+- Automatizált validációs szkriptek és eszközök
+- Kapacitástervezési módszerek
+- Teljesítménytesztelés és optimalizálás
+
+#### Gyakorlati feladatok
+
+**4.1 gyakorlat: Kapacitástervezés**
+```bash
+# Kapacitás érvényesítésének megvalósítása:
+1. Create scripts to check Azure quotas
+2. Validate service availability in target regions
+3. Estimate resource costs for different SKUs
+4. Plan for scaling and growth requirements
+5. Document capacity requirements for each environment
+```
+
+**4.2 gyakorlat: Telepítés előtti validáció**
+```powershell
+# Építsen átfogó validációs folyamatot:
+1. Authentication and permissions validation
+2. Template syntax and parameter validation
+3. Resource naming and availability checks
+4. Network connectivity and security validation
+5. Cost estimation and budget verification
+```
+
+**4.3 gyakorlat: SKU optimalizálás**
+```bash
+# Optimalizálja a szolgáltatás konfigurációit:
+1. Compare performance characteristics of different SKUs
+2. Implement cost-effective development configurations
+3. Design high-performance production configurations
+4. Create monitoring dashboards for resource utilization
+5. Set up auto-scaling policies
+```
+
+#### Önértékelési kérdések
+1. Milyen tényezők befolyásolják a SKU kiválasztási döntéseket?
+2. Hogyan validálja az Azure erőforrások elérhetőségét telepítés előtt?
+3. Melyek a telepítés előtti ellenőrzési rendszer kulcselemei?
+4. Hogyan becsüli meg és kontrollálja a telepítési költségeket?
 5. Milyen monitorozás szükséges a kapacitástervezéshez?
 
 ### 5. modul: Hibakeresés és hibaelhárítás (6. hét)
 
-#### Tanulási célok  
-- Ismerd meg a szisztematikus hibaelhárítási módszereket  
-- Fejleszd a komplex telepítési problémák hibakeresési készségeit  
-- Valósíts meg átfogó monitorozási és riasztási rendszereket  
-- Építs incidenskezelési és helyreállítási eljárásokat  
+#### Tanulási célok
+- Szisztematikus hibakeresési módszerek elsajátítása
+- Összetett telepítési problémák hibakeresésében való jártasság fejlesztése
+- Átfogó monitorozás és riasztás megvalósítása
+- Incidenskezelési és helyreállítási eljárások kidolgozása
 
-#### Kulcsfogalmak, amelyeket el kell sajátítani  
-- Gyakori telepítési hibák mintázatai  
-- Naplóelemzési és korrelációs technikák  
-- Teljesítményfigyelés és optimalizálás  
-- Biztonsági incidensek észlelése és kezelése  
-- Katasztrófa utáni helyreállítás és üzletmenet-folytonosság  
+#### Kulcsfogalmak, amelyeket el kell sajátítani
+- Gyakori telepítési hibák mintázatai
+- Naplóelemzési és korrelációs technikák
+- Teljesítmény monitorozás és optimalizálás
+- Biztonsági incidensek észlelése és kezelése
+- Katasztrófa utáni helyreállítás és üzletmenet-folytonosság
 
-#### Gyakorlati feladatok  
+#### Gyakorlati feladatok
 
-**5.1 gyakorlat: Hibaelhárítási forgatókönyvek**  
+**5.1 gyakorlat: Hibakeresési forgatókönyvek**
 ```bash
-# Practice resolving common issues:
+# Gyakorold a gyakori problémák megoldását:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
 4. Network connectivity problems
 5. Performance and scaling issues
-```  
+```
 
-**5.2 gyakorlat: Monitorozás megvalósítása**  
+**5.2 gyakorlat: Monitorozás megvalósítása**
 ```bash
-# Set up comprehensive monitoring:
+# Állítsa be az átfogó monitorozást:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
-```  
+```
 
-**5.3 gyakorlat: Incidenskezelés**  
+**5.3 gyakorlat: Incidenskezelés**
 ```bash
-# Build incident response procedures:
+# Készítsen incidensreagálási eljárásokat:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
-```  
+```
 
-#### Önértékelési kérdések  
-1. Mi a szisztematikus megközelítés az azd telepítések hibaelhárításához?  
-2. Hogyan korrelálhatod a naplókat több szolgáltatás és erőforrás között?  
-3. Mely monitorozási metrikák a legkritikusabbak a korai problémák észleléséhez?  
-4. Hogyan valósíthatsz meg hatékony katasztrófa utáni helyreállítási eljárásokat?  
-5. Melyek egy incidenskezelési terv kulcsfontosságú elemei?  
+#### Önértékelési kérdések
+1. Mi a szisztematikus megközelítés az azd telepítések hibakereséséhez?
+2. Hogyan korrelálja a naplókat több szolgáltatás és erőforrás között?
+3. Mely monitorozási metrikák a legfontosabbak a korai problémaészleléshez?
+4. Hogyan valósítja meg a hatékony katasztrófa utáni helyreállítási eljárásokat?
+5. Melyek egy incidenskezelési terv kulcselemei?
 
 ### 6. modul: Haladó témák és legjobb gyakorlatok (7-8. hét)
 
-#### Tanulási célok  
-- Valósíts meg vállalati szintű telepítési mintákat  
-- Sajátítsd el a CI/CD integrációt és automatizálást  
-- Fejlessz egyedi sablonokat és járulj hozzá a közösséghez  
-- Értsd meg a haladó biztonsági és megfelelőségi követelményeket  
+#### Tanulási célok
+- Vállalati szintű telepítési minták megvalósítása
+- CI/CD integráció és automatizálás elsajátítása
+- Egyedi sablonok fejlesztése és közösségi hozzájárulás
+- Haladó biztonsági és megfelelőségi követelmények megértése
 
-#### Kulcsfogalmak, amelyeket el kell sajátítani  
-- CI/CD csővezeték integrációs minták  
-- Egyedi sablonok fejlesztése és terjesztése  
-- Vállalati irányítás és megfelelőség  
-- Haladó hálózati és biztonsági konfigurációk  
-- Teljesítményoptimalizálás és költségkezelés  
+#### Kulcsfogalmak, amelyeket el kell sajátítani
+- CI/CD folyamat integrációs minták
+- Egyedi sablonok fejlesztése és terjesztése
+- Vállalati irányítás és megfelelőség
+- Haladó hálózati és biztonsági konfigurációk
+- Teljesítményoptimalizálás és költségkezelés
 
-#### Gyakorlati feladatok  
+#### Gyakorlati feladatok
 
-**6.1 gyakorlat: CI/CD integráció**  
+**6.1 gyakorlat: CI/CD integráció**
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -291,261 +394,275 @@ Az útmutató összes szakaszának elvégzése után képes lesz:
 3. Multi-stage deployment with approvals
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
-```  
+```
 
-**6.2 gyakorlat: Egyedi sablon fejlesztése**  
+**6.2 gyakorlat: Egyedi sablon fejlesztése**
 ```bash
-# Create and publish custom templates:
+# Egyedi sablonok létrehozása és közzététele:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
-```  
+```
 
-**6.3 gyakorlat: Vállalati megvalósítás**  
+**6.3 gyakorlat: Vállalati megvalósítás**
 ```bash
-# Implement enterprise-grade features:
+# Vállalati szintű funkciók megvalósítása:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
-```  
+```
 
-#### Önértékelési kérdések  
-1. Hogyan integrálhatod az azd-t meglévő CI/CD munkafolyamatokba?  
-2. Melyek az egyedi sablonfejlesztés kulcsfontosságú szempontjai?  
-3. Hogyan valósíthatsz meg irányítást és megfelelőséget az azd telepítésekben?  
-4. Melyek a legjobb gyakorlatok vállalati szintű telepítésekhez?  
-5. Hogyan járulhatsz hozzá hatékonyan az azd közösséghez?  
+#### Önértékelési kérdések
+1. Hogyan integrálja az azd-t meglévő CI/CD munkafolyamatokba?
+2. Melyek az egyedi sablonok fejlesztésének kulcsfontosságú szempontjai?
+3. Hogyan valósítja meg az irányítást és megfelelőséget az azd telepítésekben?
+4. Melyek a legjobb gyakorlatok vállalati szintű telepítésekhez?
+5. Hogyan járul hozzá hatékonyan az azd közösséghez?
 
-## Gyakorlati projektek  
+## Gyakorlati projektek
 
-### 1. projekt: Személyes portfólió weboldal  
+### 1. projekt: Személyes portfólió weboldal
 **Komplexitás**: Kezdő  
-**Időtartam**: 1-2 hét  
+**Időtartam**: 1-2 hét
 
-Készíts és telepíts egy személyes portfólió weboldalt az alábbiak használatával:  
-- Statikus weboldal hosztolása Azure Storage-on  
-- Egyedi domain konfiguráció  
-- CDN integráció globális teljesítmény érdekében  
-- Automatizált telepítési csővezeték  
+Készítsen és telepítsen egy személyes portfólió weboldalt az alábbiak használatával:
+- Statikus weboldal hosztolása Azure Storage-on
+- Egyedi domain konfiguráció
+- CDN integráció globális teljesítmény érdekében
+- Automatizált telepítési folyamat
 
-**Leadandók**:  
-- Működő weboldal telepítve az Azure-ra  
-- Egyedi azd sablon portfólió telepítésekhez  
-- Telepítési folyamat dokumentációja  
-- Költségelemzés és optimalizálási ajánlások  
+**Leadandók**:
+- Működő weboldal telepítve az Azure-ra
+- Egyedi azd sablon portfólió telepítésekhez
+- Telepítési folyamat dokumentációja
+- Költségelemzés és optimalizálási ajánlások
 
-### 2. projekt: Feladatkezelő alkalmazás  
+### 2. projekt: Feladatkezelő alkalmazás
 **Komplexitás**: Középhaladó  
-**Időtartam**: 2-3 hét  
+**Időtartam**: 2-3 hét
 
-Hozz létre egy teljes stack feladatkezelő alkalmazást az alábbiakkal:  
-- React frontend App Service-re telepítve  
-- Node.js API backend hitelesítéssel  
-- PostgreSQL adatbázis migrációkkal  
-- Application Insights monitorozás  
+Hozzon létre egy teljes körű feladatkezelő alkalmazást az alábbiakkal:
+- React frontend telepítve az App Service-re
+- Node.js API backend hitelesítéssel
+- PostgreSQL adatbázis migrációkkal
+- Application Insights monitorozás
 
-**Leadandók**:  
-- Teljes alkalmazás felhasználói hitelesítéssel  
-- Adatbázis séma és migrációs szkriptek  
-- Monitorozási irányítópultok és riasztási szabályok  
-- Több környezetű telepítési konfiguráció  
+**Leadandók**:
+- Teljes alkalmazás felhasználói hitelesítéssel
+- Adatbázis séma és migrációs szkriptek
+- Monitorozási irányítópultok és riasztási szabályok
+- Több környezetű telepítési konfiguráció
 
-### 3. projekt: Mikroservices alapú e-kereskedelmi platform  
+### 3. projekt: Mikroservices alapú e-kereskedelmi platform
 **Komplexitás**: Haladó  
-**Időtartam**: 4-6 hét  
+**Időtartam**: 4-6 hét
 
-Tervezd meg és valósítsd meg egy mikroservices alapú e-kereskedelmi platformot:  
-- Több API szolgáltatás (katalógus, rendelések, fizetések, felhasználók)  
-- Üzenetsor integráció Service Bus-szal  
-- Redis cache teljesítményoptimalizáláshoz  
-- Átfogó naplózás és monitorozás  
+Tervezzen és valósítson meg egy mikroservices alapú e-kereskedelmi platformot:
+- Több API szolgáltatás (katalógus, rendelések, fizetések, felhasználók)
+- Üzenetküldési sor integráció Service Bus-szal
+- Redis cache teljesítményoptimalizálásra
+- Átfogó naplózás és monitorozás
 
-**Leadandók**:  
-- Teljes mikroservices architektúra  
-- Szolgáltatások közötti kommunikációs minták  
-- Teljesítménytesztelés és optimalizálás  
-- Produkcióra kész biztonsági megvalósítás  
+**Referenciapélda**: Lásd [Microservices Architecture](../../../examples/container-app/microservices) egy gyártásra kész sablonért és telepítési útmutatóért
 
-## Értékelés és tanúsítás  
+**Leadandók**:
+- Teljes mikroservices architektúra
+- Szolgáltatások közötti kommunikációs minták
+- Teljesítménytesztelés és optimalizálás
+- Gyártásra kész biztonsági megvalósítás
 
-### Tudásellenőrzések  
+## Értékelés és tanúsítás
 
-Végezd el ezeket az értékeléseket minden modul után:  
+### Tudásellenőrzések
 
-**1. modul értékelés**: Alapfogalmak és telepítés  
-- Feleletválasztós kérdések az alapfogalmakról  
-- Gyakorlati telepítési és konfigurációs feladatok  
-- Egyszerű telepítési gyakorlat  
+Töltse ki ezeket az értékeléseket minden modul után:
 
-**2. modul értékelés**: Konfiguráció és környezetek  
-- Környezetkezelési forgatókönyvek  
-- Konfigurációs hibaelhárítási gyakorlatok  
-- Biztonsági konfiguráció megvalósítása  
+**1. modul értékelés**: Alapfogalmak és telepítés
+- Feleletválasztós kérdések az alapfogalmakról
+- Gyakorlati telepítési és konfigurációs feladatok
+- Egyszerű telepítési gyakorlat
 
-**3. modul értékelés**: Telepítés és erőforrások létrehozása  
-- Infrastruktúra tervezési kihívások  
-- Több szolgáltatás telepítési forgatókönyvei  
-- Teljesítményoptimalizálási gyakorlatok  
+**2. modul értékelés**: Konfiguráció és környezetek
+- Környezetkezelési forgatókönyvek
+- Konfigurációs hibakeresési gyakorlatok
+- Biztonsági konfiguráció megvalósítása
 
-**4. modul értékelés**: Telepítés előtti validáció  
-- Kapacitástervezési esettanulmányok  
-- Költségoptimalizálási forgatókönyvek  
-- Validációs csővezeték megvalósítása  
+**3. modul értékelés**: Telepítés és erőforrások biztosítása
+- Infrastruktúra tervezési kihívások
+- Több szolgáltatás telepítési forgatókönyvei
+- Teljesítményoptimalizálási gyakorlatok
 
-**5. modul értékelés**: Hibakeresés és hibaelhárítás  
-- Problémadiagnosztikai gyakorlatok  
-- Monitorozási megvalósítási feladatok  
-- Incidenskezelési szimulációk  
+**4. modul értékelés**: Telepítés előtti validáció
+- Kapacitástervezési esettanulmányok
+- Költségoptimalizálási forgatókönyvek
+- Validációs folyamat megvalósítása
 
-**6. modul értékelés**: Haladó témák  
-- CI/CD csővezeték tervezés  
-- Egyedi sablon fejlesztés  
-- Vállalati architektúra forgatókönyvek  
+**5. modul értékelés**: Hibakeresés és hibaelhárítás
+- Problémadiagnosztikai gyakorlatok
+- Monitorozási megvalósítási feladatok
+- Incidenskezelési szimulációk
 
-### Záró projekt  
+**6. modul értékelés**: Haladó témák
+- CI/CD folyamat tervezés
+- Egyedi sablon fejlesztés
+- Vállalati architektúra forgatókönyvek
 
-Tervezd meg és valósítsd meg egy teljes megoldást, amely bemutatja az összes fogalom elsajátítását:  
+### Záró projekt
 
-**Követelmények**:  
-- Többrétegű alkalmazás architektúra  
-- Több telepítési környezet  
-- Átfogó monitorozás és riasztás  
-- Biztonsági és megfelelőségi megvalósítás  
-- Költségoptimalizálás és teljesítményhangolás  
-- Teljes dokumentáció és üzemeltetési kézikönyvek  
+Tervezzen és valósítson meg egy teljes megoldást, amely bemutatja az összes fogalom elsajátítását:
 
-**Értékelési kritériumok**:  
-- Technikai megvalósítás minősége  
-- Dokumentáció teljessége  
-- Biztonsági és legjobb gyakorlatok betartása  
-- Teljesítmény és költségoptimalizálás  
-- Hibakeresési és monitorozási hatékonyság  
+**Követelmények**:
+- Többrétegű alkalmazás architektúra
+- Több telepítési környezet
+- Átfogó monitorozás és riasztás
+- Biztonsági és megfelelőségi megvalósítás
+- Költségoptimalizálás és teljesítményhangolás
+- Teljes dokumentáció és üzemeltetési kézikönyvek
 
-## Tanulási források és hivatkozások  
+**Értékelési kritériumok**:
+- Technikai megvalósítás minősége
+- Dokumentáció teljessége
+- Biztonsági és legjobb gyakorlatok betartása
+- Teljesítmény és költségoptimalizálás
+- Hibakeresési és monitorozási hatékonyság
 
-### Hivatalos dokumentáció  
-- [Azure Developer CLI Dokumentáció](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Bicep Dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [Azure Architektúra Központ](https://learn.microsoft.com/en-us/azure/architecture/)  
+## Tanulási források és hivatkozások
 
-### Közösségi források  
-- [AZD Sablon Galéria](https://azure.github.io/awesome-azd/)  
-- [Azure-Samples GitHub Szervezet](https://github.com/Azure-Samples)  
-- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)  
+### Hivatalos dokumentáció
+- [Azure Developer CLI Dokumentáció](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Bicep Dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architektúra Központ](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Gyakorlati környezetek  
-- [Azure Ingyenes Fiók](https://azure.microsoft.com/free/)  
-- [Azure DevOps Ingyenes Szint](https://azure.microsoft.com/services/devops/)  
-- [GitHub Actions](https://github.com/features/actions)  
+### Közösségi források
+- [AZD Sablon Galéria](https://azure.github.io/awesome-azd/)
+- [Azure-Samples GitHub Szervezet](https://github.com/Azure-Samples)
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
-### További eszközök  
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
-- [Visual Studio Code](https://code.visualstudio.com/)  
-- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
+### Gyakorlati környezetek
+- [Azure Ingyenes Fiók](https://azure.microsoft.com/free/)
+- [Azure DevOps Ingyenes Szint](https://azure.microsoft.com/services/devops/)
+- [GitHub Actions](https://github.com/features/actions)
 
-## Tanulási ütemterv ajánlások  
+### További eszközök
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-### Teljes munkaidős tanulás (8 hét)  
-- **1-2. hét**: 1-2. modul (Kezdetek, Konfiguráció)  
-- **3-4. hét**: 3-4. modul (Telepítés, Telepítés előtti validáció)  
-- **5-6. hét**: 5-6. modul (Hibaelhárítás, Haladó témák)  
-- **7-8. hét**: Gyakorlati projektek és záró értékelés  
+## Tanulási ütemterv ajánlások
 
-### Részmunkaidős tanulás (16 hét)  
-- **1-4. hét**: 1. modul (Kezdetek)  
-- **5-7. hét**: 2. modul (Konfiguráció és környezetek)  
-- **8-10. hét**: 3. modul (Telepítés és erőforrások létrehozása)  
-- **11-12. hét**: 4. modul (Telepítés előtti validáció)  
-- **13-14. hét**: 5. modul (Hibaelhárítás és hibaelhárítás)  
-- **15-16. hét**: 6. modul (Haladó témák és értékelés)  
+### Teljes munkaidős tanulás (8 hét)
+- **1-2. hét**: 1-2. modul (Kezdetek, Konfiguráció)
+- **3-4. hét**: 3-4. modul (Telepítés, Telepítés előtti validáció)
+- **5-6. hét**: 5-6. modul (Hibakeresés, Haladó témák)
+- **7-8. hét**: Gyakorlati projektek és záró értékelés
+
+### Részmunkaidős tanulás (16 hét)
+- **1-4. hét**: 1. modul (Kezdetek)
+- **5-7. hét**: 2. modul (Konfiguráció és környezetek)
+- **8-10. hét**: 3. modul (Telepítés és erőforrások biztosítása)
+- **11-12. hét**: 4. modul (Telepítés előtti validáció)
+- **13-14. hét**: 5. modul (Hibakeresés és hibaelhárítás)
+- **15-16. hét**: 6. modul (Haladó témák és értékelés)
 
 ---
 
-## Haladáskövetés és értékelési keretrendszer  
+## Haladáskövetés és értékelési keretrendszer
 
-### Fejezetek teljesítési ellenőrzőlistája  
+### Fejezetek teljesítési ellenőrzőlistája
 
-Kövesd nyomon a haladásodat minden fejezetben az alábbi mérhető eredményekkel:  
+Kövesse nyomon haladását minden fejezetben az alábbi mérhető eredményekkel:
 
-#### 📚 1. fejezet: Alapok és gyors kezdés  
-- [ ] **Telepítés befejezve**: AZD telepítve és ellenőrizve a platformodon  
-- [ ] **Első telepítés**: Sikeresen telepítve a todo-nodejs-mongo sablon  
-- [ ] **Környezet beállítása**: Első környezeti változók konfigurálva  
-- [ ] **Erőforrás navigáció**: Telepített erőforrások felfedezése az Azure Portálon  
-- [ ] **Parancsok elsajátítása**: Magabiztosan használod az alapvető AZD parancsokat  
+#### 📚 1. fejezet: Alapok és gyors kezdés
+- [ ] **Telepítés befejezve**: AZD telepítve és ellenőrizve a platformján
+- [ ] **Első telepítés**: Sikeresen telepítve a todo-nodejs-mongo sablon
+- [ ] **Környezet beállítása**: Első környezeti változók konfigurálása
+- [ ] **Erőforrások navigálása**: Telepített erőforrások felfedezése az Azure Portálon
+- [ ] **Parancsok elsajátítása**: Magabiztosan használja az alapvető AZD parancsokat
 
 #### 🤖 2. fejezet: AI-első fejlesztés  
-- [ ] **AI sablon telepítése**: Sikeresen telepítve az azure-search-openai-demo  
-- [ ] **RAG megvalósítása**: Dokumentum indexelés és visszakeresés konfigurálva  
-- [ ] **Modell konfiguráció**: Több AI modell beállítva különböző célokra  
-- [ ] **AI monitorozás**: Application Insights megvalósítva AI munkaterhelésekhez  
-- [ ] **Teljesítményoptimalizálás**: AI alkalmazás teljesítményének hangolása  
+- [ ] **AI sablon telepítése**: Sikeresen telepítve az azure-search-openai-demo
+- [ ] **RAG megvalósítása**: Dokumentum indexelés és visszakeresés konfigurálása
+- [ ] **Modellek konfigurálása**: Több AI modell beállítása különböző célokra
+- [ ] **AI monitorozás**: Application Insights megvalósítása AI munkaterhelésekhez
+- [ ] **Teljesítményoptimalizálás**: AI alkalmazás teljesítményének hangolása
 
-#### ⚙️ 3. fejezet: Konfiguráció és hitelesítés  
-- [ ] **Több környezet beállítása**: Fejlesztési, tesztelési és éles környezetek konfigurálva  
-- [ ] **Biztonsági megvalósítás**: Kezelt identitás hitelesítés beállítva  
-- [ ] **Titkok kezelése**: Azure Key Vault integrálva érzékeny adatokhoz  
-- [ ] **Paraméterek kezelése**: Környezet-specifikus konfigurációk létrehozva  
-- [ ] **Hitelesítés elsajátítása**: Biztonságos hozzáférési minták megvalósítva  
+#### ⚙️ 3. fejezet: Konfiguráció és hitelesítés
+- [ ] **Több környezet beállítása**: Fejlesztési, tesztelési és éles környezetek konfigurálása
+- [ ] **Biztonsági megvalósítás**: Kezelt identitás hitelesítés beállítása
+- [ ] **Titkok kezelése**: Azure Key Vault integrálása érzékeny adatokhoz
+- [ ] **Paraméterek kezelése**: Környezet-specifikus konfigurációk létrehozása
+- [ ] **Hitelesítés elsajátítása**: Biztonságos hozzáférési minták megvalósítása
 
-#### 🏗️ 4. fejezet: Infrastruktúra kódként és telepítés  
-- [ ] **Egyedi sablon létrehozása**: Több szolgáltatásból álló alkalmazás sablonja elkészítve  
-- [ ] **Bicep elsajátítása**: Moduláris, újrahasználható infrastruktúra komponensek létrehozva  
-- [ ] **Telepítési automatizálás**: Telepítés előtti/utáni horgok megvalósítva  
-- [ ] **Architektúra tervezés**: Komplex mikroservices architektúra telepítve  
-- [ ] **Sablon optimalizálás**: Sablonok optimalizálva teljesítményre és költségre  
+#### 🏗️ 4. fejezet: Infrastruktúra kódként és telepítés
+- [ ] **Egyedi sablon létrehozása**: Több szolgáltatásból álló alkalmazás sablon készítése
+- [ ] **Bicep elsajátítása**: Moduláris, újrahasználható infrastruktúra komponensek létrehozása
+- [ ] **Telepítés automatizálása**: Telepítés előtti/utáni horgok megvalósítása
+- [ ] **Architektúra tervezés**: Összetett mikroservices architektúra telepítése
+- [ ] **Sablon optimalizálása**: Sablonok optimalizálása teljesítményre és költségre
 
-#### 🎯 5. fejezet: Többügynökös AI megoldások  
-- [ ] **Kiskereskedelmi megoldás telepítése**: Teljes többügynökös kiskereskedelmi forgatókönyv telepítve  
-- [ ] **Ügynök testreszabása**: Ügyfél és készlet ügynök viselkedésének módosítása  
-- [ ] **Architektúra skálázása**: Terheléselosztás és automatikus skálázás megvalósítva  
-- [ ] **Produkciós monitorozás**: Átfogó monitorozás és riasztás beállítva  
-- [ ] **Teljesítményhangolás**: Többügynökös rendszer teljesítményének optimalizálása  
+#### 🎯 5. fejezet: Többügynökös AI megoldások
+- [ ] **Kiskereskedelmi megoldás telepítése**: Teljes többügynökös kiskereskedelmi forgatókönyv telepítése
+- [ ] **Ügynök testreszabása**: Ügyfél és készlet ügynök viselkedésének módosítása
+- [ ] **Architektúra skálázása**: Terheléselosztás és automatikus skálázás megvalósítása
+- [ ] **Gyártási monitorozás**: Átfogó monitorozás és riasztás beállítása
+- [ ] **Teljesítményhangolás**: Többügynökös rendszer teljesítményének optimalizálása
 
-#### 🔍 6. fejezet: Telepítés előtti validáció és tervezés  
-- [ ] **Kapacitáselemzés**: Alkalmazások erőforrásigényeinek elemzése  
-- [ ] **SKU optimalizálás**: Költséghatékony szolgáltatási szintek kiválasztása  
-- [ ] **Validációs automatizálás**: Telepítés előtti ellenőrzési szkriptek megvalósítása  
-- [ ] **Költségtervezés**: Telepítési költségbecslések és költségvetések létrehozása  
-- [ ] **Kockázatelemzés**: Telepítési kockázatok azonosítása és csökkentése  
+#### 🔍 6. fejezet: Telepítés előtti validáció és tervezés
+- [ ] **Kapacitáselemzés**: Alkalmazások erőforrásigényeinek elemzése
+- [ ] **SKU optimalizálás**: Költséghatékony szolgáltatási szintek kiválasztása
+- [ ] **Validáció automatizálása**: Telepítés előtti ellenőrzési szkriptek megvalósítása
+- [ ] **Költségtervezés**: Telepítési költségbecslések és költségvetések készítése
+- [ ] **Kockázatelemzés**: Telepítési kockázatok azonosítása és csökkentése
 
-#### 🚨 7. fejezet: Hibakeresés és hibaelhárítás  
-- [ ] **Diagnosztikai készségek**: Sikeresen hibakeresett szándékosan hibás telepítések  
-- [ ] **Naplóelemzés**: Azure Monitor és Application Insights hatékony használata  
-- [ ] **Teljesítményhangolás**: Lassú alkalmazások optimalizálása  
-- [ ] **Helyreállítási eljárások**: Biztonsági mentés és katasztrófa utáni helyreállítás megvalósítása  
-- [ ] **Monitorozás beállítása**: Proaktív monitorozás és riasztás létrehozása  
+#### 🚨 7. fejezet: Hibakeresés és hibaelhárítás
+- [ ] **Diagnosztikai készségek**: Szándékosan hibás telepítések sikeres
+5. **Közösségi hozzájárulás**: Ossz meg sablonokat vagy fejlesztéseket
 
-#### 🏢 8. fejezet: Produkciós és vállalati minták  
-- [ ] **Vállalati biztonság**: Átfogó biztonsági minták megvalósítása  
-- [ ] **Irányítási keretrendszer**: Azure Policy és erőforráskezelés beállítása  
-- [ ] **Haladó monitorozás**: Irányítópultok és automatizált riasztás létrehozása  
-- [ ] **CI/CD integráció**: Automatizált telepítési csővezetékek létrehozása  
-- [ ] **Megfelelőség megvalósítása**: V
-- **Dokumentáció**: Közösségi dokumentációhoz és példákhoz való hozzájárulás
-- **Visszacsatolási kör**: Vélemény megosztása a tanfolyami tartalomról és az Azure szolgáltatásokról
+#### Szakmai fejlődési eredmények
+- **Portfólió projektek**: 8 éles bevetésre kész telepítés
+- **Technikai készségek**: Iparági szabvány AZD és AI telepítési szakértelem
+- **Problémamegoldó képességek**: Önálló hibakeresés és optimalizálás
+- **Közösségi elismerés**: Aktív részvétel az Azure fejlesztői közösségben
+- **Karrierfejlesztés**: Felhő- és AI-szerepkörökhöz közvetlenül alkalmazható készségek
+
+#### Sikerességi mutatók
+- **Telepítési sikerességi arány**: >95% sikeres telepítés
+- **Hibakeresési idő**: <30 perc a gyakori problémák esetén
+- **Teljesítményoptimalizálás**: Költség- és teljesítményjavulás bemutatása
+- **Biztonsági megfelelőség**: Minden telepítés megfelel a vállalati biztonsági szabványoknak
+- **Tudásátadás**: Képesség más fejlesztők mentorálására
+
+### Folyamatos tanulás és közösségi részvétel
+
+#### Maradj naprakész
+- **Azure frissítések**: Kövesd az Azure Developer CLI kiadási jegyzeteit
+- **Közösségi események**: Vegyél részt Azure és AI fejlesztői eseményeken
+- **Dokumentáció**: Járulj hozzá a közösségi dokumentációhoz és példákhoz
+- **Visszacsatolás**: Adj visszajelzést a tanfolyami tartalomról és az Azure szolgáltatásokról
 
 #### Karrierfejlesztés
-- **Szakmai hálózat**: Kapcsolatépítés Azure és AI szakértőkkel
-- **Előadási lehetőségek**: Tanulságok bemutatása konferenciákon vagy találkozókon
-- **Nyílt forráskódú hozzájárulás**: Közreműködés AZD sablonok és eszközök fejlesztésében
-- **Mentorálás**: Más fejlesztők segítése az AZD tanulási folyamatukban
+- **Szakmai hálózat**: Kapcsolódj Azure és AI szakértőkhöz
+- **Előadási lehetőségek**: Tarts előadásokat konferenciákon vagy találkozókon
+- **Nyílt forráskódú hozzájárulás**: Járulj hozzá AZD sablonokhoz és eszközökhöz
+- **Mentorálás**: Segíts más fejlesztőknek az AZD tanulási útjuk során
 
 ---
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlapja**: [AZD Kezdőknek](../README.md)
+- **📚 Tanfolyam kezdőlap**: [AZD Kezdőknek](../README.md)
 - **📖 Tanulás kezdése**: [1. fejezet: Alapok és gyors kezdés](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Haladás nyomon követése**: Kövesd előrehaladásodat a 8 fejezetből álló átfogó tanulási rendszerben
+- **🎯 Haladás nyomon követése**: Kövesd nyomon előrehaladásodat a 8 fejezetes tanulási rendszerben
 - **🤝 Közösség**: [Azure Discord](https://discord.gg/microsoft-azure) támogatásért és megbeszélésekhez
 
-**Tanulási haladás nyomon követése**: Használd ezt a strukturált útmutatót az Azure Developer CLI elsajátításához, fokozatos, gyakorlati tanulással, mérhető eredményekkel és szakmai fejlődési lehetőségekkel.
+**Tanulási haladás nyomon követése**: Használd ezt a strukturált útmutatót az Azure Developer CLI elsajátításához fokozatos, gyakorlati tanulással, mérhető eredményekkel és szakmai fejlődési előnyökkel.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T09:44:08+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-23T11:11:52+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "cs"
 }
 -->
-# Průvodce laděním pro nasazení AZD
+# Průvodce laděním nasazení AZD
 
 **Navigace kapitol:**
 - **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
 - **⬅️ Předchozí**: [Běžné problémy](common-issues.md)
 - **➡️ Další**: [Řešení problémů specifických pro AI](ai-troubleshooting.md)
-- **🚀 Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../ai-foundry/production-ai-practices.md)
+- **🚀 Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../microsoft-foundry/production-ai-practices.md)
 
 ## Úvod
 
-Tento komplexní průvodce poskytuje pokročilé strategie, nástroje a techniky pro diagnostiku a řešení složitých problémů s nasazením Azure Developer CLI. Naučte se systematické metodiky řešení problémů, techniky analýzy logů, profilování výkonu a pokročilé diagnostické nástroje pro efektivní řešení problémů při nasazení a běhu aplikací.
+Tento komplexní průvodce poskytuje pokročilé strategie ladění, nástroje a techniky pro diagnostiku a řešení složitých problémů s nasazením Azure Developer CLI. Naučte se systematické metodiky řešení problémů, techniky analýzy logů, profilování výkonu a pokročilé diagnostické nástroje pro efektivní řešení problémů při nasazení a běhu aplikací.
 
 ## Cíle učení
 
@@ -38,13 +38,13 @@ Po dokončení budete schopni:
 - Efektivně používat Azure Monitor, Application Insights a diagnostické nástroje
 - Samostatně ladit problémy s konektivitou sítě, autentizací a oprávněními
 - Implementovat strategie monitorování výkonu a optimalizace
-- Vytvářet vlastní ladicí skripty a automatizaci pro opakující se problémy
+- Vytvářet vlastní skripty pro ladění a automatizaci opakujících se problémů
 
 ## Metodika ladění
 
 ### Přístup TRIAGE
 - **T**ime: Kdy problém začal?
-- **R**eproduce: Lze jej konzistentně reprodukovat?
+- **R**eproduce: Lze problém konzistentně reprodukovat?
 - **I**solate: Která komponenta selhává?
 - **A**nalyze: Co nám říkají logy?
 - **G**ather: Shromážděte všechny relevantní informace
@@ -54,26 +54,26 @@ Po dokončení budete schopni:
 
 ### Proměnné prostředí
 ```bash
-# Enable comprehensive debugging
+# Povolit komplexní ladění
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Ladění Azure CLI
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Zakázat telemetrii pro čistší výstup
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Konfigurace ladění
 ```bash
-# Set debug configuration globally
+# Nastavit globální konfiguraci ladění
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Povolit sledování logování
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Strukturovaná analýza logů
 ```bash
-# Filter logs by level
+# Filtrovat logy podle úrovně
 azd logs --level error --since 1h
 
-# Filter by service
+# Filtrovat podle služby
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Exportovat logy pro analýzu
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Parsovat JSON logy pomocí jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Korelace logů
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Korelujte logy mezi službami
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,33 +118,33 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Hledat napříč všemi službami
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Hledat logy Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
 ## 🛠️ Pokročilé nástroje pro ladění
 
-### Dotazy Azure Resource Graph
+### Dotazy na Azure Resource Graph
 ```bash
-# Query resources by tags
+# Dotaz na zdroje podle štítků
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Najít neúspěšné nasazení
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Zkontrolovat stav zdrojů
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Ladění sítě
 ```bash
-# Test connectivity between services
+# Otestujte konektivitu mezi službami
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Použití
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Ladění kontejnerů
 ```bash
-# Debug container app issues
+# Ladění problémů s aplikací kontejneru
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Ladění připojení k databázi
 ```bash
-# Debug database connectivity
+# Ladění připojení k databázi
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### Monitorování výkonu aplikací
 ```bash
-# Enable Application Insights debugging
+# Povolit ladění Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Vlastní monitorování výkonu
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Analýza využití zdrojů
 ```bash
-# Monitor resource usage
+# Sledovat využití zdrojů
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Nastavit ladicí prostředí
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Získat koncové body služby
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Testovat koncové body zdraví
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Spustit testy
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Spustit vlastní integrační testy
 npm run test:integration
 ```
 
 ### Zátěžové testování pro ladění
 ```bash
-# Simple load test to identify performance bottlenecks
+# Jednoduchý zátěžový test k identifikaci výkonových úzkých míst
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Použití Apache Bench (instalace: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Extrahovat klíčové metriky
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Zkontrolovat chyby
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Ladění šablon Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# Ověřte šablony Bicep s podrobným výstupem
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Ověření syntaxe
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Ověření lintu
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Co-kdyby nasazení
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Ladění nasazení šablony
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Analýza stavu zdrojů
 ```bash
-# Analyze resource states for inconsistencies
+# Analyzujte stavy zdrojů na nesrovnalosti
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Seznamte všechny zdroje s jejich stavy
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Zkontrolujte neúspěšné zdroje
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -406,9 +406,9 @@ analyze_resources() {
 
 ## 🔒 Ladění zabezpečení
 
-### Ladění toku autentizace
+### Ladění autentizačních toků
 ```bash
-# Debug Azure authentication
+# Ladění ověřování Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Dekódovat JWT token (vyžaduje jq a base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Ladění přístupu k Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Ladění zabezpečení sítě
 ```bash
-# Debug network security groups
+# Ladit bezpečnostní skupiny sítě
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Zkontrolovat bezpečnostní pravidla
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Ladění aplikací Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Express ladicí middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Zaznamenat podrobnosti požadavku
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Přepsat res.json pro zaznamenání odpovědí
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Ladění dotazů na databázi
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Nástroje pro ladění databáze
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -524,7 +524,7 @@ module.exports = DebuggingPool;
 ### Reakce na problémy v produkci
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Nouzové ladění produkce
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Přepněte na správné prostředí
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Shromážděte kritické informace
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Postupy pro návrat zpět
 ```bash
-# Quick rollback script
+# Skript pro rychlé vrácení změn
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Přepnout prostředí
     azd env select "$environment"
     
-    # Rollback application
+    # Vrátit aplikaci zpět
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Ověřit vrácení změn
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Otestovat kritické koncové body
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -609,25 +609,25 @@ quick_rollback() {
 }
 ```
 
-## 📊 Ladicí dashboardy
+## 📊 Panely pro ladění
 
-### Vlastní monitorovací dashboard
+### Vlastní monitorovací panel
 ```bash
-# Create Application Insights queries for debugging
+# Vytvořte dotazy Application Insights pro ladění
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Dotaz na chyby
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Dotaz na problémy s výkonem
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Dotaz na selhání závislostí
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Agregace logů
 ```bash
-# Aggregate logs from multiple sources
+# Shromáždit logy z více zdrojů
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -658,7 +658,7 @@ aggregate_logs() {
 
 ## 🔗 Pokročilé zdroje
 
-### Vlastní ladicí skripty
+### Vlastní skripty pro ladění
 Vytvořte adresář `scripts/debug/` s:
 - `health-check.sh` - Komplexní kontrola zdraví
 - `performance-test.sh` - Automatizované testování výkonu
@@ -682,14 +682,14 @@ hooks:
       fi
 ```
 
-## Osvědčené postupy
+## Nejlepší postupy
 
 1. **Vždy aktivujte ladění logů** v neprodukčních prostředích
 2. **Vytvářejte reprodukovatelné testovací případy** pro problémy
 3. **Dokumentujte postupy ladění** pro váš tým
 4. **Automatizujte kontroly zdraví** a monitorování
-5. **Udržujte ladicí nástroje aktuální** s vašimi změnami aplikace
-6. **Procvičujte postupy ladění** během nekrizových období
+5. **Udržujte nástroje pro ladění aktuální** s vašimi změnami aplikace
+6. **Procvičujte postupy ladění** mimo dobu incidentů
 
 ## Další kroky
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T10:02:18+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-23T11:54:25+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "sk"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tento komplexný sprievodca pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy. Naučíte sa o hierarchii konfigurácie, správe prostredí, metódach autentifikácie a pokročilých vzoroch konfigurácie, ktoré umožňujú efektívne a bezpečné nasadenia v Azure.
+Tento komplexný sprievodca pokrýva všetky aspekty konfigurácie Azure Developer CLI pre optimálne vývojové a nasadzovacie pracovné postupy. Naučíte sa o hierarchii konfigurácie, správe prostredí, metódach autentifikácie a pokročilých konfiguračných vzoroch, ktoré umožňujú efektívne a bezpečné nasadenia v Azure.
 
 ## Ciele učenia
 
@@ -27,7 +27,7 @@ Na konci tejto lekcie budete:
 - Efektívne konfigurovať globálne a projektovo špecifické nastavenia
 - Spravovať viacero prostredí s rôznymi konfiguráciami
 - Implementovať bezpečné vzory autentifikácie a autorizácie
-- Rozumieť pokročilým vzorom konfigurácie pre komplexné scenáre
+- Rozumieť pokročilým konfiguračným vzorom pre komplexné scenáre
 
 ## Výsledky učenia
 
@@ -53,42 +53,42 @@ azd používa hierarchický systém konfigurácie:
 
 ### Nastavenie globálnych predvolieb
 ```bash
-# Set default subscription
+# Nastaviť predvolené predplatné
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Nastaviť predvolenú lokalitu
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Nastaviť predvolený názvový konvenciu skupiny zdrojov
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Zobraziť všetky globálne konfigurácie
 azd config list
 
-# Remove a configuration
+# Odstrániť konfiguráciu
 azd config unset defaults.location
 ```
 
 ### Bežné globálne nastavenia
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Preferencie vývoja
+azd config set alpha.enable true                    # Povoliť alfa funkcie
+azd config set telemetry.enabled false             # Zakázať telemetriu
+azd config set output.format json                  # Nastaviť formát výstupu
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Nastavenia zabezpečenia
+azd config set auth.useAzureCliCredential true     # Použiť Azure CLI na autentifikáciu
+azd config set tls.insecure false                  # Vynútiť overenie TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Optimalizácia výkonu
+azd config set provision.parallelism 5             # Paralelné vytváranie zdrojov
+azd config set deploy.timeout 30m                  # Časový limit nasadenia
 ```
 
 ## 🏗️ Projektová konfigurácia
 
 ### Štruktúra azure.yaml
-Súbor `azure.yaml` je srdcom vášho projektu azd:
+Súbor `azure.yaml` je srdcom vášho azd projektu:
 
 ```yaml
 # Minimum configuration
@@ -166,7 +166,7 @@ pipeline:
 
 ### Možnosti konfigurácie služieb
 
-#### Typy hostiteľov
+#### Typy hostingu
 ```yaml
 services:
   web-static:
@@ -213,13 +213,13 @@ services:
 
 ### Vytváranie prostredí
 ```bash
-# Create a new environment
+# Vytvorte nové prostredie
 azd env new development
 
-# Create with specific location
+# Vytvorte so špecifickou lokalitou
 azd env new staging --location "westus2"
 
-# Create from template
+# Vytvorte zo šablóny
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Každé prostredie má svoju vlastnú konfiguráciu v `.azure/<env-name>/config.
 
 ### Premenné prostredia
 ```bash
-# Set environment-specific variables
+# Nastaviť premenné špecifické pre prostredie
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Zobraziť premenné prostredia
 azd env get-values
 
-# Remove environment variable
+# Očakávaný výstup:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Odstrániť premennú prostredia
 azd env unset DEBUG
+
+# Overiť odstránenie
+azd env get-values | grep DEBUG
+# (nemalo by nič vrátiť)
 ```
 
 ### Šablóny prostredí
 Vytvorte `.azure/env.template` pre konzistentné nastavenie prostredí:
 ```bash
-# Required variables
+# Požadované premenné
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Nastavenia aplikácie
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Voliteľné nastavenia vývoja
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Integrácia Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Použiť predvolené poverenia Azure CLI
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Prihlásiť sa s konkrétnym nájomcom
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Nastaviť predvolené predplatné
 az account set --subscription <subscription-id>
 ```
 
 ### Autentifikácia pomocou Service Principal
 Pre CI/CD pipelines:
 ```bash
-# Set environment variables
+# Nastavte premenné prostredia
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Alebo nakonfigurujte priamo
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Spravovaná identita
 Pre prostredia hostované v Azure:
 ```bash
-# Enable managed identity authentication
+# Povoliť autentifikáciu spravovanej identity
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -391,7 +400,7 @@ Príklad `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/az
 
 ### Vlastné pomenovanie zdrojov
 ```bash
-# Set naming conventions
+# Nastavte konvencie pomenovania
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Vývojové prostredie
 ```bash
-# .azure/development/.env
+# .azure/vývoj/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -453,17 +462,17 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Validácia konfigurácie
 ```bash
-# Check configuration syntax
+# Skontrolujte syntax konfigurácie
 azd config validate
 
-# Test environment variables
+# Otestujte premenné prostredia
 azd env get-values
 
-# Validate infrastructure
+# Overte infraštruktúru
 azd provision --dry-run
 ```
 
-### Skripty konfigurácie
+### Konfiguračné skripty
 Vytvorte validačné skripty v `scripts/`:
 
 ```bash
@@ -472,13 +481,13 @@ Vytvorte validačné skripty v `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Skontrolujte požadované premenné prostredia
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Overte syntax azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,9 +528,9 @@ database:
 ### 3. Zohľadnite verzovanie
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Konfigurácie prostredia (obsahujú identifikátory zdrojov)
+.azure/*/.env               # Premenné prostredia (môžu obsahovať tajomstvá)
+.env                        # Súbor lokálneho prostredia
 ```
 
 ### 4. Dokumentácia konfigurácie
@@ -540,6 +549,68 @@ Dokumentujte svoju konfiguráciu v `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Praktické cvičenia
+
+### Cvičenie 1: Konfigurácia viacerých prostredí (15 minút)
+
+**Cieľ**: Vytvorte a nakonfigurujte tri prostredia s rôznymi nastaveniami
+
+```bash
+# Vytvorte vývojové prostredie
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Vytvorte testovacie prostredie
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Vytvorte produkčné prostredie
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Overte každé prostredie
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Kritériá úspechu:**
+- [ ] Tri prostredia úspešne vytvorené
+- [ ] Každé prostredie má unikátnu konfiguráciu
+- [ ] Možnosť prepínať medzi prostrediami bez chýb
+- [ ] `azd env list` zobrazuje všetky tri prostredia
+
+### Cvičenie 2: Správa tajomstiev (10 minút)
+
+**Cieľ**: Precvičte si bezpečnú konfiguráciu s citlivými údajmi
+
+```bash
+# Nastaviť tajomstvá (nezobrazujú sa vo výstupe)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Nastaviť nekonfigurované tajomstvá
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Zobraziť prostredie (tajomstvá by mali byť skryté)
+azd env get-values
+
+# Overiť, že tajomstvá sú uložené
+azd env get DB_PASSWORD  # Malo by ukázať skutočnú hodnotu
+```
+
+**Kritériá úspechu:**
+- [ ] Tajomstvá uložené bez zobrazenia v termináli
+- [ ] `azd env get-values` zobrazuje redigované tajomstvá
+- [ ] Individuálne `azd env get <SECRET_NAME>` získava skutočnú hodnotu
+
 ## Ďalšie kroky
 
 - [Váš prvý projekt](first-project.md) - Aplikujte konfiguráciu v praxi
@@ -548,7 +619,7 @@ Dokumentujte svoju konfiguráciu v `CONFIG.md`:
 
 ## Referencie
 
-- [Referenčná dokumentácia konfigurácie azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referenčná príručka konfigurácie azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schéma azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Premenné prostredia](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
@@ -563,5 +634,7 @@ Dokumentujte svoju konfiguráciu v `CONFIG.md`:
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

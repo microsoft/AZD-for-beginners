@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T09:41:44+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-23T11:19:29+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "cs"
 }
 -->
 # Průvodce konfigurací
 
-**Navigace kapitolou:**
+**Navigace kapitol:**
 - **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 3 - Konfigurace a autentizace
 - **⬅️ Předchozí**: [Váš první projekt](first-project.md)
@@ -18,12 +18,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Úvod
 
-Tento komplexní průvodce pokrývá všechny aspekty konfigurace Azure Developer CLI pro optimální vývojové a nasazovací pracovní postupy. Naučíte se o hierarchii konfigurace, správě prostředí, metodách autentizace a pokročilých vzorcích konfigurace, které umožňují efektivní a bezpečné nasazení v Azure.
+Tento komplexní průvodce pokrývá všechny aspekty konfigurace Azure Developer CLI pro optimální vývojové a nasazovací pracovní postupy. Naučíte se o hierarchii konfigurace, správě prostředí, metodách autentizace a pokročilých vzorcích konfigurace, které umožňují efektivní a bezpečné nasazení na Azure.
 
 ## Cíle učení
 
 Na konci této lekce budete:
-- Ovládat hierarchii konfigurace azd a rozumět tomu, jak jsou nastavení prioritizována
+- Mít přehled o hierarchii konfigurace azd a rozumět tomu, jak jsou nastavení prioritizována
 - Efektivně konfigurovat globální a projektově specifická nastavení
 - Spravovat více prostředí s různými konfiguracemi
 - Implementovat bezpečné vzorce autentizace a autorizace
@@ -32,9 +32,9 @@ Na konci této lekce budete:
 ## Výsledky učení
 
 Po dokončení této lekce budete schopni:
-- Konfigurovat azd pro optimální vývojové pracovní postupy
+- Konfigurovat azd pro optimální pracovní postupy vývoje
 - Nastavit a spravovat více prostředí pro nasazení
-- Implementovat bezpečné postupy správy konfigurace
+- Implementovat bezpečné praktiky správy konfigurace
 - Řešit problémy související s konfigurací
 - Přizpůsobit chování azd specifickým požadavkům organizace
 
@@ -45,7 +45,7 @@ Tento komplexní průvodce pokrývá všechny aspekty konfigurace Azure Develope
 azd používá hierarchický systém konfigurace:
 1. **Příznaky příkazového řádku** (nejvyšší priorita)
 2. **Proměnné prostředí**
-3. **Místní konfigurace projektu** (`.azd/config.json`)
+3. **Lokální konfigurace projektu** (`.azd/config.json`)
 4. **Globální uživatelská konfigurace** (`~/.azd/config.json`)
 5. **Výchozí hodnoty** (nejnižší priorita)
 
@@ -53,36 +53,36 @@ azd používá hierarchický systém konfigurace:
 
 ### Nastavení globálních výchozích hodnot
 ```bash
-# Set default subscription
+# Nastavit výchozí předplatné
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Nastavit výchozí umístění
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Nastavit výchozí konvenci pojmenování skupiny prostředků
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Zobrazit všechna globální nastavení
 azd config list
 
-# Remove a configuration
+# Odebrat konfiguraci
 azd config unset defaults.location
 ```
 
 ### Běžná globální nastavení
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Vývojové preference
+azd config set alpha.enable true                    # Povolit alfa funkce
+azd config set telemetry.enabled false             # Zakázat telemetrii
+azd config set output.format json                  # Nastavit formát výstupu
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Nastavení zabezpečení
+azd config set auth.useAzureCliCredential true     # Použít Azure CLI pro autentizaci
+azd config set tls.insecure false                  # Vynutit ověření TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Ladění výkonu
+azd config set provision.parallelism 5             # Paralelní vytváření zdrojů
+azd config set deploy.timeout 30m                  # Časový limit nasazení
 ```
 
 ## 🏗️ Konfigurace projektu
@@ -213,13 +213,13 @@ services:
 
 ### Vytváření prostředí
 ```bash
-# Create a new environment
+# Vytvořit nové prostředí
 azd env new development
 
-# Create with specific location
+# Vytvořit na konkrétním místě
 azd env new staging --location "westus2"
 
-# Create from template
+# Vytvořit ze šablony
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,66 +248,75 @@ Každé prostředí má svou vlastní konfiguraci v `.azure/<env-name>/config.js
 
 ### Proměnné prostředí
 ```bash
-# Set environment-specific variables
+# Nastavit proměnné specifické pro prostředí
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Zobrazit proměnné prostředí
 azd env get-values
 
-# Remove environment variable
+# Očekávaný výstup:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Odstranit proměnnou prostředí
 azd env unset DEBUG
+
+# Ověřit odstranění
+azd env get-values | grep DEBUG
+# (nemělo by nic vrátit)
 ```
 
 ### Šablony prostředí
 Vytvořte `.azure/env.template` pro konzistentní nastavení prostředí:
 ```bash
-# Required variables
+# Požadované proměnné
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Nastavení aplikace
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Volitelná nastavení vývoje
 DEBUG=false
 LOG_LEVEL=info
 ```
 
 ## 🔐 Konfigurace autentizace
 
-### Integrace s Azure CLI
+### Integrace Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Použijte přihlašovací údaje Azure CLI (výchozí)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Přihlaste se s konkrétním tenantem
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Nastavte výchozí předplatné
 az account set --subscription <subscription-id>
 ```
 
 ### Autentizace pomocí Service Principal
-Pro CI/CD pipeline:
+Pro CI/CD pipelines:
 ```bash
-# Set environment variables
+# Nastavte proměnné prostředí
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Nebo nakonfigurujte přímo
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Spravovaná identita
-Pro prostředí hostovaná v Azure:
+Pro prostředí hostovaná na Azure:
 ```bash
-# Enable managed identity authentication
+# Povolit ověřování spravované identity
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -391,7 +400,7 @@ Příklad `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/a
 
 ### Vlastní pojmenování zdrojů
 ```bash
-# Set naming conventions
+# Nastavte konvence pojmenování
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -431,7 +440,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging prostředí
+### Testovací prostředí
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -453,18 +462,18 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Validace konfigurace
 ```bash
-# Check configuration syntax
+# Zkontrolujte syntaxi konfigurace
 azd config validate
 
-# Test environment variables
+# Otestujte proměnné prostředí
 azd env get-values
 
-# Validate infrastructure
+# Ověřte infrastrukturu
 azd provision --dry-run
 ```
 
 ### Skripty konfigurace
-Vytvořte validační skripty ve složce `scripts/`:
+Vytvořte validační skripty v `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -472,13 +481,13 @@ Vytvořte validační skripty ve složce `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Zkontrolujte požadované proměnné prostředí
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Ověřte syntaxi azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -487,7 +496,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Osvědčené postupy
+## 🎓 Nejlepší praktiky
 
 ### 1. Používejte proměnné prostředí
 ```yaml
@@ -516,12 +525,12 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Zohledněte verzování
+### 3. Zvažte verzování
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Konfigurace prostředí (obsahují ID zdrojů)
+.azure/*/.env               # Proměnné prostředí (mohou obsahovat tajné informace)
+.env                        # Soubor místního prostředí
 ```
 
 ### 4. Dokumentace konfigurace
@@ -540,21 +549,83 @@ Dokumentujte svou konfiguraci v `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Praktická cvičení
+
+### Cvičení 1: Konfigurace více prostředí (15 minut)
+
+**Cíl**: Vytvořte a nakonfigurujte tři prostředí s různými nastaveními
+
+```bash
+# Vytvořte vývojové prostředí
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Vytvořte testovací prostředí
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Vytvořte produkční prostředí
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Ověřte každé prostředí
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Kritéria úspěchu:**
+- [ ] Tři prostředí úspěšně vytvořena
+- [ ] Každé prostředí má unikátní konfiguraci
+- [ ] Přepínání mezi prostředími bez chyb
+- [ ] `azd env list` zobrazuje všechna tři prostředí
+
+### Cvičení 2: Správa tajemství (10 minut)
+
+**Cíl**: Procvičte si bezpečnou konfiguraci s citlivými daty
+
+```bash
+# Nastavit tajemství (nezobrazují se ve výstupu)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Nastavit nekonfigurované tajemství
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Zobrazit prostředí (tajemství by měla být skryta)
+azd env get-values
+
+# Ověřit, že tajemství jsou uložena
+azd env get DB_PASSWORD  # Mělo by zobrazit skutečnou hodnotu
+```
+
+**Kritéria úspěchu:**
+- [ ] Tajemství uložena bez zobrazení v terminálu
+- [ ] `azd env get-values` zobrazuje redigovaná tajemství
+- [ ] Jednotlivé `azd env get <SECRET_NAME>` získává skutečnou hodnotu
+
 ## Další kroky
 
 - [Váš první projekt](first-project.md) - Aplikujte konfiguraci v praxi
 - [Průvodce nasazením](../deployment/deployment-guide.md) - Použijte konfiguraci pro nasazení
-- [Zajištění prostředků](../deployment/provisioning.md) - Konfigurace připravené pro produkci
+- [Zajištění zdrojů](../deployment/provisioning.md) - Konfigurace připravené pro produkci
 
 ## Odkazy
 
-- [Referenční příručka azd konfigurace](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referenční příručka konfigurace azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schéma azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Proměnné prostředí](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navigace kapitolou:**
+**Navigace kapitol:**
 - **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 3 - Konfigurace a autentizace
 - **⬅️ Předchozí**: [Váš první projekt](first-project.md)
@@ -563,5 +634,7 @@ Dokumentujte svou konfiguraci v `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,67 +1,67 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "aace36eff845763a5b041a4ed9a33e02",
-  "translation_date": "2025-09-25T00:48:48+00:00",
+  "original_hash": "2a0861541126250c3558d667e9b13c50",
+  "translation_date": "2025-11-23T10:14:19+00:00",
   "source_file": "course-outline.md",
   "language_code": "hu"
 }
 -->
-# AZD Kezdőknek: Kurzusvázlat és Tanulási Keretrendszer
+# AZD Kezdőknek: Tanfolyamvázlat és Tanulási Keretrendszer
 
-## Kurzus Áttekintés
+## Tanfolyam Áttekintés
 
-Tanuld meg az Azure Developer CLI (azd) használatát strukturált fejezeteken keresztül, amelyek fokozatos tanulást biztosítanak. **Különös hangsúly az AI alkalmazások telepítésén az Azure AI Foundry integrációval.**
+Sajátítsd el az Azure Developer CLI (azd) használatát strukturált fejezeteken keresztül, amelyek progresszív tanulást biztosítanak. **Különös hangsúly az AI alkalmazások telepítésén Microsoft Foundry integrációval.**
 
-### Miért elengedhetetlen ez a kurzus a modern fejlesztők számára?
+### Miért elengedhetetlen ez a tanfolyam a modern fejlesztők számára?
 
-Az Azure AI Foundry Discord közösség visszajelzései alapján **a fejlesztők 45%-a szeretné az AZD-t AI munkaterhelésekhez használni**, de nehézségekbe ütköznek az alábbiak miatt:
-- Összetett, több szolgáltatást igénylő AI architektúrák
-- AI alkalmazások telepítésének legjobb gyakorlatai
-- Azure AI szolgáltatások integrációja és konfigurációja
+A Microsoft Foundry Discord közösség visszajelzései alapján **a fejlesztők 45%-a szeretné használni az AZD-t AI munkaterhelésekhez**, de nehézségekbe ütköznek az alábbiakban:
+- Összetett, több szolgáltatást magában foglaló AI architektúrák
+- AI alkalmazások éles környezetbe történő telepítésének legjobb gyakorlatai  
+- Azure AI szolgáltatások integrációja és konfigurálása
 - AI munkaterhelések költségoptimalizálása
 - AI-specifikus telepítési problémák elhárítása
 
-### Fő Tanulási Célok
+### Fő tanulási célok
 
-A kurzus elvégzésével:
+A tanfolyam elvégzésével:
 - **Elsajátítod az AZD alapjait**: Alapfogalmak, telepítés és konfiguráció
-- **AI alkalmazásokat telepítesz**: AZD használata az Azure AI Foundry szolgáltatásokkal
-- **Infrastruktúra kódként**: Azure erőforrások kezelése Bicep sablonokkal
-- **Telepítési problémák megoldása**: Gyakori hibák elhárítása és hibakeresés
-- **Optimalizálás a termeléshez**: Biztonság, skálázás, monitorozás és költségkezelés
+- **AI alkalmazásokat telepítesz**: AZD használata Microsoft Foundry szolgáltatásokkal
+- **Infrastruktúra kódként történő megvalósítása**: Azure erőforrások kezelése Bicep sablonokkal
+- **Telepítési hibák elhárítása**: Gyakori problémák megoldása és hibakeresés
+- **Éles környezetre optimalizálás**: Biztonság, skálázás, monitorozás és költségkezelés
 - **Többügynökös megoldások építése**: Összetett AI architektúrák telepítése
 
 ## 🎓 Workshop Tanulási Élmény
 
 ### Rugalmas Tanulási Módszerek
-A kurzus úgy lett kialakítva, hogy támogassa mind az **egyéni, önálló tanulást**, mind a **vezetett workshopokat**, lehetőséget adva a résztvevőknek, hogy gyakorlati tapasztalatokat szerezzenek az AZD használatában interaktív gyakorlatokon keresztül.
+Ez a tanfolyam mind **önálló tanulásra**, mind **vezetett workshopokra** alkalmas, lehetővé téve a tanulók számára, hogy gyakorlati tapasztalatokat szerezzenek az AZD használatában interaktív gyakorlatokon keresztül.
 
 #### 🚀 Önálló Tanulási Mód
 **Tökéletes egyéni fejlesztők és folyamatos tanulás számára**
 
-**Funkciók:**
+**Jellemzők:**
 - **Böngésző-alapú felület**: MkDocs-alapú workshop, amely bármely böngészőből elérhető
 - **GitHub Codespaces integráció**: Egy kattintásos fejlesztési környezet előre konfigurált eszközökkel
 - **Interaktív DevContainer környezet**: Nincs szükség helyi beállításra - azonnal kezdhetsz kódolni
 - **Haladáskövetés**: Beépített ellenőrzőpontok és validációs gyakorlatok
-- **Közösségi támogatás**: Azure Discord csatornák kérdésekhez és együttműködéshez
+- **Közösségi támogatás**: Hozzáférés az Azure Discord csatornákhoz kérdések és együttműködés céljából
 
 **Tanulási Struktúra:**
 - **Rugalmas időbeosztás**: Fejezetek elvégzése saját tempóban, napok vagy hetek alatt
-- **Ellenőrzőpont rendszer**: Tanulás validálása, mielőtt összetettebb témákba lépnél
-- **Erőforrás könyvtár**: Átfogó dokumentáció, példák és hibaelhárítási útmutatók
-- **Portfólió fejlesztés**: Telepíthető projektek építése szakmai portfólióhoz
+- **Ellenőrzőpont rendszer**: A tanulás validálása, mielőtt bonyolultabb témákra térnél át
+- **Forráskönyvtár**: Átfogó dokumentáció, példák és hibakeresési útmutatók
+- **Portfóliófejlesztés**: Telepíthető projektek építése szakmai portfólióhoz
 
 **Kezdés (Önálló Tanulás):**
 ```bash
-# Option 1: GitHub Codespaces (Recommended)
-# Navigate to the repository and click "Code" → "Create codespace on main"
+# Opció 1: GitHub Codespaces (Ajánlott)
+# Navigáljon a tárolóhoz, és kattintson a "Code" → "Create codespace on main" gombra
 
-# Option 2: Local Development
+# Opció 2: Helyi fejlesztés
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Follow setup instructions in workshop/README.md
+# Kövesse a workshop/README.md fájlban található beállítási utasításokat
 ```
 
 #### 🏛️ Vezetett Workshopok
@@ -69,166 +69,166 @@ cd azd-for-beginners/workshop
 
 **Workshop Formátumok:**
 
-**📚 Akadémiai Kurzus Integráció (8-12 hét)**
-- **Egyetemi Programok**: Féléves kurzus heti 2 órás foglalkozásokkal
+**📚 Akadémiai Tanfolyam Integráció (8-12 hét)**
+- **Egyetemi Programok**: Féléves tanfolyam heti 2 órás foglalkozásokkal
 - **Bootcamp Formátum**: Intenzív 3-5 napos program napi 6-8 órás foglalkozásokkal
 - **Vállalati Képzés**: Havi csapatfoglalkozások gyakorlati projektmegvalósítással
 - **Értékelési Keretrendszer**: Osztályozott feladatok, társértékelések és záróprojektek
 
 **🚀 Intenzív Workshop (1-3 nap)**
-- **1. nap**: Alapok + AI fejlesztés (1-2. fejezet) - 6 óra
+- **1. nap**: Alapok + AI Fejlesztés (1-2. fejezet) - 6 óra
 - **2. nap**: Konfiguráció + Infrastruktúra (3-4. fejezet) - 6 óra  
-- **3. nap**: Haladó minták + Termelés (5-8. fejezet) - 8 óra
-- **Utókövetés**: Opcionális 2 hetes mentorálás a projekt befejezéséhez
+- **3. nap**: Haladó minták + Éles környezet (5-8. fejezet) - 8 óra
+- **Utánkövetés**: Opcionális 2 hetes mentorálás a projekt befejezéséhez
 
 **⚡ Vezetői Tájékoztató (4-6 óra)**
 - **Stratégiai Áttekintés**: AZD értékajánlat és üzleti hatás (1 óra)
 - **Gyakorlati Bemutató**: AI alkalmazás telepítése elejétől a végéig (2 óra)
-- **Architektúra Áttekintés**: Vállalati minták és irányítás (1 óra)
-- **Megvalósítási Tervezés**: Szervezeti bevezetési stratégia (1-2 óra)
+- **Architektúra Áttekintés**: Vállalati minták és irányelvek (1 óra)
+- **Megvalósítási Terv**: Szervezeti bevezetési stratégia (1-2 óra)
 
 #### 🛠️ Workshop Tanulási Módszertan
-**Felfedezés → Telepítés → Testreszabás megközelítés gyakorlati készségfejlesztéshez**
+**Felfedezés → Telepítés → Testreszabás megközelítés a gyakorlati készségfejlesztéshez**
 
 **1. Fázis: Felfedezés (45 perc)**
 - **Sablonok Felfedezése**: Azure AI Foundry sablonok és szolgáltatások értékelése
 - **Architektúra Elemzés**: Többügynökös minták és telepítési stratégiák megértése
-- **Igényfelmérés**: Szervezeti igények és korlátok azonosítása
+- **Követelmények Felmérése**: Szervezeti igények és korlátok azonosítása
 - **Környezet Beállítása**: Fejlesztési környezet és Azure erőforrások konfigurálása
 
 **2. Fázis: Telepítés (2 óra)**
 - **Irányított Megvalósítás**: AI alkalmazások lépésről lépésre történő telepítése AZD-vel
 - **Szolgáltatás Konfiguráció**: Azure AI szolgáltatások, végpontok és hitelesítés beállítása
 - **Biztonsági Megvalósítás**: Vállalati biztonsági minták és hozzáférés-vezérlés alkalmazása
-- **Validációs Tesztelés**: Telepítések ellenőrzése és gyakori hibák elhárítása
+- **Validációs Tesztelés**: Telepítések ellenőrzése és gyakori problémák elhárítása
 
 **3. Fázis: Testreszabás (45 perc)**
-- **Alkalmazás Módosítása**: Sablonok adaptálása specifikus esetekhez és igényekhez
-- **Termelési Optimalizálás**: Monitorozás, költségkezelés és skálázási stratégiák megvalósítása
+- **Alkalmazás Módosítása**: Sablonok adaptálása specifikus felhasználási esetekhez és igényekhez
+- **Éles Környezet Optimalizálása**: Monitorozás, költségkezelés és skálázási stratégiák megvalósítása
 - **Haladó Minták**: Többügynökös koordináció és összetett architektúrák felfedezése
-- **Következő Lépések Tervezése**: Tanulási útvonal meghatározása a folyamatos készségfejlesztéshez
+- **Következő Lépések Tervezése**: Tanulási útvonal meghatározása a további készségfejlesztéshez
 
 #### 🎯 Workshop Tanulási Eredmények
-**Mérhető készségek gyakorlati tapasztalatokon keresztül**
+**Mérhető készségek gyakorlati tapasztalatok révén**
 
 **Technikai Kompetenciák:**
-- **Termelési AI Alkalmazások Telepítése**: AI-alapú megoldások sikeres telepítése és konfigurálása
+- **Éles AI Alkalmazások Telepítése**: Sikeres AI-alapú megoldások telepítése és konfigurálása
 - **Infrastruktúra Kódként**: Egyedi Bicep sablonok létrehozása és kezelése
 - **Többügynökös Architektúra**: Koordinált AI ügynök megoldások megvalósítása
-- **Termelési Készenlét**: Biztonsági, monitorozási és irányítási minták alkalmazása
-- **Hibaelhárítási Szakértelem**: Telepítési és konfigurációs problémák önálló megoldása
+- **Éles Környezetre Való Felkészültség**: Biztonsági, monitorozási és irányítási minták alkalmazása
+- **Hibakeresési Szakértelem**: Telepítési és konfigurációs problémák önálló megoldása
 
 **Szakmai Készségek:**
 - **Projektvezetés**: Technikai csapatok vezetése felhőalapú telepítési kezdeményezésekben
 - **Architektúra Tervezés**: Skálázható, költséghatékony Azure megoldások tervezése
-- **Tudásmegosztás**: Kollégák képzése és mentorálása AZD legjobb gyakorlatokban
+- **Tudásmegosztás**: Kollégák képzése és mentorálása AZD legjobb gyakorlataiban
 - **Stratégiai Tervezés**: Szervezeti felhőbevezetési stratégiák befolyásolása
 
-#### 📋 Workshop Erőforrások és Anyagok
+#### 📋 Workshop Források és Anyagok
 **Átfogó eszköztár oktatók és tanulók számára**
 
 **Oktatóknak:**
 - **Oktatói Útmutató**: [Workshop Vezetési Útmutató](workshop/docs/instructor-guide.md) - Foglalkozások tervezése és lebonyolítása
 - **Prezentációs Anyagok**: Diák, architektúra diagramok és bemutató szkriptek
-- **Értékelési Eszközök**: Gyakorlati feladatok, tudásellenőrzések és értékelési rubrikák
-- **Technikai Beállítás**: Környezet konfiguráció, hibaelhárítási útmutatók és tartalék tervek
+- **Értékelési Eszközök**: Gyakorlati feladatok, tudásellenőrzések és értékelési szempontok
+- **Technikai Beállítás**: Környezet konfiguráció, hibakeresési útmutatók és tartalék tervek
 
 **Tanulóknak:**
 - **Interaktív Workshop Környezet**: [Workshop Anyagok](workshop/README.md) - Böngésző-alapú tanulási platform
-- **Lépésről Lépésre Útmutatók**: [Irányított Gyakorlatok](../../workshop/docs/instructions) - Részletes megvalósítási útmutatók  
-- **Referenciadokumentáció**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-központú mélyreható anyagok
-- **Közösségi Erőforrások**: Azure Discord csatornák, GitHub viták és szakértői támogatás
+- **Lépésről-Lépésre Útmutatók**: [Irányított Gyakorlatok](../../workshop/docs/instructions) - Részletes megvalósítási útmutatók  
+- **Referencia Dokumentáció**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-központú mélyreható anyagok
+- **Közösségi Források**: Azure Discord csatornák, GitHub viták és szakértői támogatás
 
 #### 🏢 Vállalati Workshop Megvalósítás
 **Szervezeti telepítési és képzési stratégiák**
 
 **Vállalati Képzési Programok:**
-- **Fejlesztői Bevezetés**: Új munkatársak orientációja AZD alapokkal (2-4 hét)
+- **Fejlesztői Bevezetés**: Új munkatársak betanítása AZD alapokkal (2-4 hét)
 - **Csapatfejlesztés**: Negyedéves workshopok meglévő fejlesztői csapatok számára (1-2 nap)
 - **Architektúra Áttekintés**: Havi foglalkozások vezető mérnökök és architekták számára (4 óra)
 - **Vezetői Tájékoztatók**: Vezetői workshopok technikai döntéshozók számára (fél nap)
 
 **Megvalósítási Támogatás:**
 - **Egyedi Workshop Tervezés**: Testreszabott tartalom specifikus szervezeti igényekhez
-- **Pilot Program Menedzsment**: Strukturált bevezetés sikerességi mutatókkal és visszacsatolási körökkel  
-- **Folyamatos Mentorálás**: Workshop utáni támogatás projektmegvalósításhoz
+- **Pilot Program Menedzsment**: Strukturált bevezetés sikerességi mutatókkal és visszacsatolási hurkokkal  
+- **Folyamatos Mentorálás**: Workshop utáni támogatás a projektek megvalósításához
 - **Közösségépítés**: Belső Azure AI fejlesztői közösségek és tudásmegosztás
 
 **Sikerességi Mutatók:**
-- **Készségfejlesztés**: Előtte/utána értékelések technikai kompetencia növekedésének mérésére
-- **Telepítési Siker**: Résztvevők százaléka, akik sikeresen telepítenek termelési alkalmazásokat
-- **Termelékenységhez szükséges idő**: Új Azure AI projektek bevezetési idejének csökkentése
-- **Tudásmegtartás**: Utólagos értékelések 3-6 hónappal a workshop után
+- **Készségfejlesztés**: Előtte/utána értékelések a technikai kompetenciák növekedésének mérésére
+- **Telepítési Siker**: Résztvevők százaléka, akik sikeresen telepítenek éles alkalmazásokat
+- **Termelékenységhez Szükséges Idő**: Csökkentett betanulási idő új Azure AI projektekhez
+- **Tudásmegtartás**: Utánkövetési értékelések 3-6 hónappal a workshop után
 
 ## 8 Fejezetes Tanulási Struktúra
 
 ### 1. Fejezet: Alapok és Gyors Kezdés (30-45 perc) 🌱
 **Előfeltételek**: Azure előfizetés, alapvető parancssori ismeretek  
-**Komplexitás**: ⭐
+**Bonyolultság**: ⭐
 
 #### Amit Megtanulsz
-- Az Azure Developer CLI alapjainak megértése
+- Azure Developer CLI alapjainak megértése
 - AZD telepítése a platformodra  
-- Az első sikeres telepítésed
+- Első sikeres telepítésed
 - Alapfogalmak és terminológia
 
-#### Tanulási Erőforrások
+#### Tanulási Források
 - [AZD Alapok](docs/getting-started/azd-basics.md) - Alapfogalmak
-- [Telepítés és Beállítás](docs/getting-started/installation.md) - Platform-specifikus útmutatók
-- [Az Első Projekted](docs/getting-started/first-project.md) - Gyakorlati útmutató
-- [Parancs Gyorslap](resources/cheat-sheet.md) - Gyors referencia
+- [Telepítés és Beállítás](docs/getting-started/installation.md) - Platformspecifikus útmutatók
+- [Első Projekted](docs/getting-started/first-project.md) - Gyakorlati útmutató
+- [Parancsok Segédlete](resources/cheat-sheet.md) - Gyors referencia
 
 #### Gyakorlati Eredmény
-Sikeresen telepítesz egy egyszerű webalkalmazást az Azure-ra AZD használatával
+Egy egyszerű webalkalmazás sikeres telepítése Azure-ra AZD használatával
 
 ---
 
-### 2. Fejezet: AI-első Fejlesztés (1-2 óra) 🤖
+### 2. Fejezet: AI-Orientált Fejlesztés (1-2 óra) 🤖
 **Előfeltételek**: 1. fejezet elvégzése  
-**Komplexitás**: ⭐⭐
+**Bonyolultság**: ⭐⭐
 
 #### Amit Megtanulsz
-- Azure AI Foundry integráció AZD-vel
+- Microsoft Foundry integráció AZD-vel
 - AI-alapú alkalmazások telepítése
 - AI szolgáltatások konfigurációjának megértése
 - RAG (Retrieval-Augmented Generation) minták
 
-#### Tanulási Erőforrások
-- [Azure AI Foundry Integráció](docs/ai-foundry/azure-ai-foundry-integration.md)
-- [AI Modell Telepítés](docs/ai-foundry/ai-model-deployment.md)
-- [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - **ÚJ**: Átfogó 2-3 órás gyakorlati lab
+#### Tanulási Források
+- [Microsoft Foundry Integráció](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI Modell Telepítés](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **ÚJ**: Átfogó 2-3 órás gyakorlati labor
 - [Interaktív Workshop Útmutató](workshop/README.md) - **ÚJ**: Böngésző-alapú workshop MkDocs előnézettel
-- [Azure AI Foundry Sablonok](README.md#featured-azure-ai-foundry-templates)
-- [Workshop Útmutatók](../../workshop/docs/instructions) - **ÚJ**: Lépésről lépésre irányított gyakorlatok
+- [Microsoft Foundry Sablonok](README.md#featured-microsoft-foundry-templates)
+- [Workshop Útmutatók](../../workshop/docs/instructions) - **ÚJ**: Lépésről-lépésre irányított gyakorlatok
 
 #### Gyakorlati Eredmény
-Telepítesz és konfigurálsz egy AI-alapú chat alkalmazást RAG képességekkel
+AI-alapú chatalkalmazás telepítése és konfigurálása RAG képességekkel
 
-#### Workshop Tanulási Útvonal (Opcionális Bővítés)
+#### Workshop Tanulási Útvonal (Opcionális Kiegészítés)
 **ÚJ Interaktív Élmény**: [Teljes Workshop Útmutató](workshop/README.md)
 1. **Felfedezés** (30 perc): Sablon kiválasztása és értékelése
-2. **Telepítés** (45 perc): AI sablon funkcionalitásának telepítése és validálása  
-3. **Szétszedés** (30 perc): Sablon architektúra és komponensek megértése
+2. **Telepítés** (45 perc): AI sablon funkcióinak telepítése és validálása  
+3. **Elemzés** (30 perc): Sablon architektúrájának és összetevőinek megértése
 4. **Konfiguráció** (30 perc): Beállítások és paraméterek testreszabása
 5. **Testreszabás** (45 perc): Módosítás és iteráció, hogy sajátoddá tedd
-6. **Tisztítás** (15 perc): Erőforrások eltávolítása és életciklus megértése
-7. **Zárás** (15 perc): Következő lépések és haladó tanulási útvonalak
+6. **Eltávolítás** (15 perc): Erőforrások törlése és életciklus megértése
+7. **Összegzés** (15 perc): Következő lépések és haladó tanulási utak
 
----
+--- 
 
 ### 3. Fejezet: Konfiguráció és Hitelesítés (45-60 perc) ⚙️
 **Előfeltételek**: 1. fejezet elvégzése  
-**Komplexitás**: ⭐⭐
+**Bonyolultság**: ⭐⭐
 
 #### Amit Megtanulsz
-- Környezet konfigurációja és kezelése
-- Hitelesítés és biztonsági legjobb gyakorlatok
+- Környezet konfiguráció és kezelés
+- Hitelesítési és biztonsági legjobb gyakorlatok
 - Erőforrások elnevezése és szervezése
 - Több környezet telepítése
 
-#### Tanulási Erőforrások
+#### Tanulási Források
 - [Konfigurációs Útmutató](docs/getting-started/configuration.md) - Környezet beállítása
-- Biztonsági minták és kezelt identitás
+- [Hitelesítési és Biztonsági Minták](docs/getting-started/authsecurity.md) - Kezelt identitás és Key Vault integráció
 - Több környezet példák
 
 #### Gyakorlati Eredmény
@@ -236,252 +236,261 @@ Több környezet kezelése megfelelő hitelesítéssel és biztonsággal
 
 ---
 
-### 4. Fejezet: Infrastruktúra Kódként és Telepítés (1-1.5 óra) 🏗️
+### 4. Fejezet: Infrastruktúra Kódként & Telepítés (1-1,5 óra) 🏗️
 **Előfeltételek**: 1-3. fejezet elvégzése  
-**Komplexitás**: ⭐⭐⭐
+**Bonyolultság**: ⭐⭐⭐
 
-#### Amit Megtanulsz
-- Haladó telepítési minták
-- Infrastruktúra kódként Bicep segítségével
-- Erőfor
-- [AI-Specifikus Hibakeresés](docs/troubleshooting/ai-troubleshooting.md) - AI szolgáltatási problémák
-
-#### Gyakorlati Eredmény
-Önállóan diagnosztizálni és megoldani a gyakori telepítési problémákat
+####
+Érvényesítse és optimalizálja a telepítéseket a végrehajtás előtt
 
 ---
 
-### 8. fejezet: Produkciós és Vállalati Minták (2-3 óra) 🏢
-**Előfeltételek**: 1-4. fejezetek elvégzése  
+### 7. fejezet: Hibakeresés és hibaelhárítás (1-1,5 óra) 🔧
+**Előfeltételek**: Bármely telepítési fejezet befejezése  
+**Komplexitás**: ⭐⭐
+
+#### Amit megtanul
+- Szisztematikus hibakeresési megközelítések
+- Gyakori problémák és megoldások
+- AI-specifikus hibaelhárítás
+- Teljesítményoptimalizálás
+
+#### Tanulási források
+- [Gyakori problémák](docs/troubleshooting/common-issues.md) - GYIK és megoldások
+- [Hibakeresési útmutató](docs/troubleshooting/debugging.md) - Lépésről lépésre stratégiák
+- [AI-specifikus hibaelhárítás](docs/troubleshooting/ai-troubleshooting.md) - AI szolgáltatások problémái
+
+#### Gyakorlati eredmény
+Önállóan diagnosztizálja és oldja meg a telepítési problémákat
+
+---
+
+### 8. fejezet: Produkciós és vállalati minták (2-3 óra) 🏢
+**Előfeltételek**: 1-4 fejezetek befejezése  
 **Komplexitás**: ⭐⭐⭐⭐
 
-#### Amit Megtanulsz
+#### Amit megtanul
 - Produkciós telepítési stratégiák
 - Vállalati biztonsági minták
-- Monitoring és költségoptimalizálás
+- Felügyelet és költségoptimalizálás
 - Skálázhatóság és irányítás
 
-#### Tanulási Források
-- [Produkciós AI Legjobb Gyakorlatok](docs/ai-foundry/production-ai-practices.md) - Vállalati minták
-- Mikroszolgáltatások és vállalati példák
-- Monitoring és irányítási keretrendszerek
+- Legjobb gyakorlatok produkciós konténeres alkalmazások telepítéséhez (biztonság, felügyelet, költség, CI/CD)
 
-#### Gyakorlati Eredmény
+#### Tanulási források
+- [Produkciós AI legjobb gyakorlatok](docs/microsoft-foundry/production-ai-practices.md) - Vállalati minták
+- Mikroszolgáltatások és vállalati példák
+- Felügyeleti és irányítási keretrendszerek
+- [Mikroszolgáltatások architektúra példa](../../examples/container-app/microservices) - Blue-green/canary telepítés, elosztott nyomkövetés és költségoptimalizálás
+
+#### Gyakorlati eredmény
 Vállalati szintű alkalmazások telepítése teljes produkciós képességekkel
 
 ---
 
-## Tanulási Haladás és Komplexitás
+## Tanulási haladás és komplexitás
 
-### Fokozatos Készségfejlesztés
+### Fokozatos készségfejlesztés
 
-- **🌱 Kezdők**: Kezdj az 1. fejezettel (Alapok) → 2. fejezet (AI Fejlesztés)
-- **🔧 Középhaladók**: 3-4. fejezetek (Konfiguráció és Infrastruktúra) → 6. fejezet (Érvényesítés)
-- **🚀 Haladók**: 5. fejezet (Többügynökös Megoldások) → 7. fejezet (Hibakeresés)
-- **🏢 Vállalati szint**: Az összes fejezet elvégzése, különös figyelemmel a 8. fejezetre (Produkciós Minták)
+- **🌱 Kezdők**: Kezdje az 1. fejezettel (Alapok) → 2. fejezet (AI fejlesztés)
+- **🔧 Középhaladó**: 3-4 fejezetek (Konfiguráció és infrastruktúra) → 6. fejezet (Érvényesítés)
+- **🚀 Haladó**: 5. fejezet (Többügynökös megoldások) → 7. fejezet (Hibaelhárítás)
+- **🏢 Vállalati szint**: Az összes fejezet befejezése, különös figyelemmel a 8. fejezetre (Produkciós minták)
 
-### Komplexitás Jelzők
+- **Konténeres alkalmazás útvonal**: 4. fejezet (Konténeres telepítés), 5. fejezet (Mikroszolgáltatások integrációja), 8. fejezet (Produkciós legjobb gyakorlatok)
 
-- **⭐ Alap**: Egyedi koncepciók, irányított oktatóanyagok, 30-60 perc
+### Komplexitás mutatók
+
+- **⭐ Alap**: Egyetlen koncepció, irányított oktatóanyagok, 30-60 perc
 - **⭐⭐ Középhaladó**: Több koncepció, gyakorlati feladatok, 1-2 óra  
 - **⭐⭐⭐ Haladó**: Összetett architektúrák, egyedi megoldások, 1-3 óra
 - **⭐⭐⭐⭐ Szakértő**: Produkciós rendszerek, vállalati minták, 2-4 óra
 
-### Rugalmas Tanulási Útvonalak
+### Rugalmas tanulási útvonalak
 
-#### 🎯 AI Fejlesztő Gyorsított Útvonal (4-6 óra)
-1. **1. fejezet**: Alapok és Gyors Kezdés (45 perc)
-2. **2. fejezet**: AI-első Fejlesztés (2 óra)  
-3. **5. fejezet**: Többügynökös AI Megoldások (3 óra)
-4. **8. fejezet**: Produkciós AI Legjobb Gyakorlatok (1 óra)
+#### 🎯 AI fejlesztő gyorsított pálya (4-6 óra)
+1. **1. fejezet**: Alapok és gyors kezdés (45 perc)
+2. **2. fejezet**: AI-első fejlesztés (2 óra)  
+3. **5. fejezet**: Többügynökös AI megoldások (3 óra)
+4. **8. fejezet**: Produkciós AI legjobb gyakorlatok (1 óra)
 
-#### 🛠️ Infrastruktúra Szakértő Útvonal (5-7 óra)
-1. **1. fejezet**: Alapok és Gyors Kezdés (45 perc)
-2. **3. fejezet**: Konfiguráció és Hitelesítés (1 óra)
-3. **4. fejezet**: Infrastruktúra mint Kód & Telepítés (1,5 óra)
-4. **6. fejezet**: Előtelepítési Érvényesítés és Tervezés (1 óra)
-5. **7. fejezet**: Hibakeresés és Hibajavítás (1,5 óra)
-6. **8. fejezet**: Produkciós és Vállalati Minták (2 óra)
+#### 🛠️ Infrastruktúra szakértői útvonal (5-7 óra)
+1. **1. fejezet**: Alapok és gyors kezdés (45 perc)
+2. **3. fejezet**: Konfiguráció és hitelesítés (1 óra)
+3. **4. fejezet**: Infrastruktúra kódként és telepítés (1,5 óra)
+4. **6. fejezet**: Telepítés előtti érvényesítés és tervezés (1 óra)
+5. **7. fejezet**: Hibakeresés és hibaelhárítás (1,5 óra)
+6. **8. fejezet**: Produkciós és vállalati minták (2 óra)
 
-#### 🎓 Teljes Tanulási Út (8-12 óra)
-Az összes 8 fejezet sorrendben történő elvégzése gyakorlati feladatokkal és érvényesítéssel
+#### 🎓 Teljes tanulási út (8-12 óra)
+Az összes 8 fejezet sorrendben történő befejezése gyakorlati feladatokkal és érvényesítéssel
 
-## Tanfolyam Teljesítési Keretrendszer
+## Tanfolyam befejezési keretrendszer
 
-### Tudás Érvényesítése
-- **Fejezet Ellenőrzőpontok**: Gyakorlati feladatok mérhető eredményekkel
-- **Gyakorlati Ellenőrzés**: Működő megoldások telepítése minden fejezethez
-- **Haladás Követése**: Vizualizált indikátorok és teljesítési jelvények
-- **Közösségi Érvényesítés**: Tapasztalatok megosztása az Azure Discord csatornákon
+### Tudás érvényesítése
+- **Fejezet ellenőrzőpontok**: Gyakorlati feladatok mérhető eredményekkel
+- **Gyakorlati ellenőrzés**: Működő megoldások telepítése minden fejezethez
+- **Haladás nyomon követése**: Vizualizált mutatók és befejezési jelvények
+- **Közösségi érvényesítés**: Tapasztalatok megosztása az Azure Discord csatornákon
 
-### Tanulási Eredmények Értékelése
+### Tanulási eredmények értékelése
 
-#### 1-2. fejezet Teljesítése (Alapok + AI)
-- ✅ Egyszerű webalkalmazás telepítése AZD segítségével
-- ✅ AI-alapú chat alkalmazás telepítése RAG használatával
+#### 1-2 fejezet befejezése (Alapok + AI)
+- ✅ Egyszerű webalkalmazás telepítése AZD használatával
+- ✅ AI-alapú chatalkalmazás telepítése RAG segítségével
 - ✅ AZD alapfogalmak és AI integráció megértése
 
-#### 3-4. fejezet Teljesítése (Konfiguráció + Infrastruktúra)  
+#### 3-4 fejezet befejezése (Konfiguráció + Infrastruktúra)  
 - ✅ Több környezet telepítésének kezelése
 - ✅ Egyedi Bicep infrastruktúra sablonok létrehozása
 - ✅ Biztonságos hitelesítési minták megvalósítása
 
-#### 5-6. fejezet Teljesítése (Többügynökös + Érvényesítés)
+#### 5-6 fejezet befejezése (Többügynökös + Érvényesítés)
 - ✅ Összetett többügynökös AI megoldás telepítése
 - ✅ Kapacitástervezés és költségoptimalizálás végrehajtása
-- ✅ Automatizált előtelepítési érvényesítés megvalósítása
+- ✅ Automatikus telepítés előtti érvényesítés megvalósítása
 
-#### 7-8. fejezet Teljesítése (Hibakeresés + Produkció)
-- ✅ Telepítési problémák önálló hibakeresése és megoldása  
-- ✅ Vállalati szintű monitoring és biztonság megvalósítása
+#### 7-8 fejezet befejezése (Hibaelhárítás + Produkció)
+- ✅ Telepítési problémák önálló hibaelhárítása  
+- ✅ Vállalati szintű felügyelet és biztonság megvalósítása
 - ✅ Produkciós kész alkalmazások telepítése irányítással
 
-### Tanúsítvány és Elismerés
-- **Tanfolyam Teljesítési Jelvény**: Az összes 8 fejezet gyakorlati érvényesítéssel történő elvégzése
-- **Közösségi Elismerés**: Aktív részvétel az Azure AI Foundry Discord közösségben
-- **Szakmai Fejlődés**: Iparágban releváns AZD és AI telepítési készségek
-- **Karrier Előrelépés**: Vállalati szintű felhőtelepítési képességek
+### Tanúsítvány és elismerés
+- **Tanfolyam befejezési jelvény**: Az összes 8 fejezet befejezése gyakorlati érvényesítéssel
+- **Közösségi elismerés**: Aktív részvétel a Microsoft Foundry Discordon
+- **Szakmai fejlődés**: Iparág-specifikus AZD és AI telepítési készségek
+- **Karrier előrelépés**: Vállalati szintű felhőtelepítési képességek
 
-## 🎓 Átfogó Tanulási Eredmények
+## 🎓 Átfogó tanulási eredmények
 
-### Alap Szint (1-2. fejezet)
-Az alap fejezetek elvégzése után a tanulók demonstrálják:
+### Alap szint (1-2 fejezet)
+Az alap fejezetek befejezése után a tanulók demonstrálják:
 
-**Technikai Képességek:**
+**Technikai képességek:**
 - Egyszerű webalkalmazások telepítése Azure-ra AZD parancsokkal
-- AI-alapú chat alkalmazások konfigurálása és telepítése RAG funkciókkal
-- AZD alapfogalmak megértése: sablonok, környezetek, provisioning munkafolyamatok
-- Azure AI Foundry szolgáltatások integrálása AZD telepítésekkel
+- AI-alapú chatalkalmazások telepítése RAG funkciókkal
+- AZD alapfogalmak megértése: sablonok, környezetek, előkészítési munkafolyamatok
+- Microsoft Foundry szolgáltatások integrálása AZD telepítésekkel
 - Azure AI szolgáltatások konfigurációinak és API végpontjainak navigálása
 
-**Szakmai Készségek:**
-- Strukturált telepítési munkafolyamatok követése a konzisztens eredmények érdekében
-- Alapvető telepítési problémák hibakeresése naplók és dokumentáció segítségével
+**Szakmai készségek:**
+- Strukturált telepítési munkafolyamatok követése a konzisztens eredményekért
+- Alapvető telepítési problémák hibaelhárítása naplók és dokumentáció segítségével
 - Hatékony kommunikáció a felhőtelepítési folyamatokról
-- Legjobb gyakorlatok alkalmazása biztonságos AI szolgáltatási integrációhoz
+- Legjobb gyakorlatok alkalmazása biztonságos AI szolgáltatások integrációjához
 
-**Tanulási Érvényesítés:**
+**Tanulási érvényesítés:**
 - ✅ Sikeres telepítés `todo-nodejs-mongo` sablonnal
 - ✅ `azure-search-openai-demo` telepítése és konfigurálása RAG funkcióval
-- ✅ Interaktív workshop gyakorlatok elvégzése (Felfedezési fázis)
-- ✅ Részvétel az Azure Discord közösségi beszélgetésekben
+- ✅ Interaktív workshop gyakorlatok befejezése (Felfedezési fázis)
+- ✅ Részvétel az Azure Discord közösségi beszélgetéseiben
 
-### Középhaladó Szint (3-4. fejezet)
-A középhaladó fejezetek elvégzése után a tanulók demonstrálják:
+### Középhaladó szint (3-4 fejezet)
+A középhaladó fejezetek befejezése után a tanulók demonstrálják:
 
-**Technikai Képességek:**
-- Több környezet telepítésének kezelése (fejlesztés, staging, produkció)
-- Egyedi Bicep sablonok létrehozása infrastruktúra mint kódhoz
+**Technikai képességek:**
+- Több környezet telepítésének kezelése (fejlesztés, tesztelés, produkció)
+- Egyedi Bicep sablonok létrehozása infrastruktúra kódként
 - Biztonságos hitelesítési minták megvalósítása kezelt identitással
 - Összetett több szolgáltatásból álló alkalmazások telepítése egyedi konfigurációkkal
-- Erőforrás provisioning stratégiák optimalizálása költség és teljesítmény szempontjából
+- Erőforrás-előkészítési stratégiák optimalizálása költség és teljesítmény szempontjából
 
-**Szakmai Készségek:**
+**Szakmai készségek:**
 - Skálázható infrastruktúra architektúrák tervezése
 - Biztonsági legjobb gyakorlatok megvalósítása felhőtelepítésekhez
 - Infrastruktúra minták dokumentálása csapat együttműködéshez
 - Megfelelő Azure szolgáltatások kiválasztása követelmények alapján
 
-**Tanulási Érvényesítés:**
+**Tanulási érvényesítés:**
 - ✅ Külön környezetek konfigurálása környezet-specifikus beállításokkal
 - ✅ Egyedi Bicep sablon létrehozása és telepítése több szolgáltatásból álló alkalmazáshoz
 - ✅ Kezelt identitás hitelesítés megvalósítása biztonságos hozzáféréshez
-- ✅ Konfigurációkezelési gyakorlatok elvégzése valós forgatókönyvekkel
+- ✅ Konfigurációkezelési gyakorlatok befejezése valós forgatókönyvekkel
 
-### Haladó Szint (5-6. fejezet)
-A haladó fejezetek elvégzése után a tanulók demonstrálják:
+### Haladó szint (5-6 fejezet)
+A haladó fejezetek befejezése után a tanulók demonstrálják:
 
-**Technikai Képességek:**
-- Többügynökös AI megoldások telepítése és koordinált munkafolyamatok irányítása
-- Ügyfél és Készlet ügynök architektúrák megvalósítása kiskereskedelmi forgatókönyvekhez
-- Átfogó kapacitástervezés és erőforrás érvényesítés végrehajtása
-- Automatizált előtelepítési érvényesítés és optimalizálás végrehajtása
+**Technikai képességek:**
+- Többügynökös AI megoldások telepítése és koordinált munkafolyamatokkal való vezérlése
+- Ügyfél- és készletügynök architektúrák megvalósítása kiskereskedelmi forgatókönyvekhez
+- Átfogó kapacitástervezés és erőforrás-érvényesítés végrehajtása
+- Automatikus telepítés előtti érvényesítés és optimalizálás végrehajtása
 - Költséghatékony SKU kiválasztások tervezése munkaterhelési követelmények alapján
 
-**Szakmai Készségek:**
-- Összetett AI megoldások architektúrájának tervezése produkciós környezetekhez
+**Szakmai készségek:**
+- Összetett AI megoldások architektúrája produkciós környezetekhez
 - Technikai megbeszélések vezetése AI telepítési stratégiákról
 - Junior fejlesztők mentorálása AZD és AI telepítési legjobb gyakorlatokban
 - AI architektúra minták értékelése és ajánlása üzleti követelményekhez
 
-**Tanulási Érvényesítés:**
+**Tanulási érvényesítés:**
 - ✅ Teljes kiskereskedelmi többügynökös megoldás telepítése ARM sablonokkal
-- ✅ Ügynök koordináció és munkafolyamat irányítás bemutatása
-- ✅ Kapacitástervezési gyakorlatok elvégzése valós erőforrás korlátokkal
-- ✅ Telepítési készenlét érvényesítése automatizált előellenőrzésekkel
+- ✅ Ügynök koordináció és munkafolyamat vezérlés bemutatása
+- ✅ Kapacitástervezési gyakorlatok befejezése valós erőforrás-korlátokkal
+- ✅ Telepítési készenlét érvényesítése automatikus előzetes ellenőrzésekkel
 
-### Szakértői Szint (7-8. fejezet)
-A szakértői fejezetek elvégzése után a tanulók demonstrálják:
+### Szakértői szint (7-8 fejezet)
+A szakértői fejezetek befejezése után a tanulók demonstrálják:
 
-**Technikai Képességek:**
-- Összetett telepítési problémák önálló diagnosztizálása és megoldása
+**Technikai képességek:**
+- Önállóan diagnosztizálja és oldja meg összetett telepítési problémákat
 - Vállalati szintű biztonsági minták és irányítási keretrendszerek megvalósítása
-- Átfogó monitoring és riasztási stratégiák tervezése
+- Átfogó felügyeleti és riasztási stratégiák tervezése
 - Produkciós telepítések optimalizálása skálázhatóság, költség és teljesítmény szempontjából
 - CI/CD csővezetékek létrehozása megfelelő teszteléssel és érvényesítéssel
 
-**Szakmai Készségek:**
+**Szakmai készségek:**
 - Vállalati felhő átalakítási kezdeményezések vezetése
 - Szervezeti telepítési szabványok tervezése és megvalósítása
 - Fejlesztői csapatok képzése haladó AZD gyakorlatokban
 - Technikai döntéshozatal befolyásolása vállalati AI telepítésekhez
 
-**Tanulási Érvényesítés:**
+**Tanulási érvényesítés:**
 - ✅ Összetett több szolgáltatásból álló telepítési hibák megoldása
 - ✅ Vállalati biztonsági minták megvalósítása megfelelőségi követelményekkel
-- ✅ Produkciós monitoring tervezése és telepítése Application Insights segítségével
+- ✅ Produkciós felügyelet tervezése és telepítése Application Insights segítségével
 - ✅ Vállalati irányítási keretrendszer megvalósítása
 
-## 🎯 Tanfolyam Teljesítési Tanúsítvány
+## 🎯 Tanfolyam befejezési tanúsítvány
 
-### Haladás Követési Keretrendszer
-Kövesd tanulási haladásodat strukturált ellenőrzőpontokon keresztül:
+### Haladás nyomon követési keretrendszer
+Kövesse tanulási haladását strukturált ellenőrzőpontokon keresztül:
 
-- [ ] **1. fejezet**: Alapok és Gyors Kezdés ✅
-- [ ] **2. fejezet**: AI-első Fejlesztés ✅  
-- [ ] **3. fejezet**: Konfiguráció és Hitelesítés ✅
-- [ ] **4. fejezet**: Infrastruktúra mint Kód & Telepítés ✅
-- [ ] **5. fejezet**: Többügynökös AI Megoldások ✅
-- [ ] **6. fejezet**: Előtelepítési Érvényesítés és Tervezés ✅
-- [ ] **7. fejezet**: Hibakeresés és Hibajavítás ✅
-- [ ] **8. fejezet**: Produkciós és Vállalati Minták ✅
+- [ ] **1. fejezet**: Alapok és gyors kezdés ✅
+- [ ] **2. fejezet**: AI-első fejlesztés ✅  
+- [ ] **3. fejezet**: Konfiguráció és hitelesítés ✅
+- [ ] **4. fejezet**: Infrastruktúra kódként és telepítés ✅
+- [ ] **5. fejezet**: Többügynökös AI megoldások ✅
+- [ ] **6. fejezet**: Telepítés előtti érvényesítés és tervezés ✅
+- [ ] **7. fejezet**: Hibakeresés és hibaelhárítás ✅
+- [ ] **8. fejezet**: Produkciós és vállalati minták ✅
 
-### Érvényesítési Folyamat
-Minden fejezet elvégzése után érvényesítsd tudásodat:
+### Érvényesítési folyamat
+Minden fejezet befejezése után ellenőrizze tudását:
 
-1. **Gyakorlati Feladatok Teljesítése**: Működő megoldások telepítése minden fejezethez
-2. **Tudás Értékelése**: GYIK szekciók áttekintése és önértékelések elvégzése
-3. **Közösségi Részvétel**: Tapasztalatok megosztása és visszajelzés kérése az Azure Discordon
-4. **Portfólió Fejlesztése**: Telepítések és tanulságok dokumentálása
-5. **Társak Általi Értékelés**: Más tanulókkal való együttműködés összetett forgatókönyvekben
+1. **Gyakorlati feladatok befejezése**: Működő megoldások telepítése minden fejezethez
+2. **Tudásértékelés**: GYIK szekciók áttekintése és önértékelések elvégzése
+3. **Közösségi részvétel**: Tapasztalatok megosztása és visszajelzés kérése az Azure Discordon
+4. **Portfólió fejlesztés**: Telepítések és tanulságok dokumentálása
+5. **Társak általi értékelés**: Együttműködés más tanulókkal összetett forgatókönyvekben
 
-### Tanfolyam Teljesítési Előnyök
-Az összes fejezet érvényesítésével történő elvégzése után a végzettek rendelkeznek:
+### Tanfolyam befejezési előnyök
+Az összes fejezet érvényesítésével történő befejezése után a végzettek rendelkeznek:
 
-**Technikai Szakértelem:**
-- **Produkciós Tapasztalat**: Valós AI alkalmazások telepítése Azure környezetekbe
-- **Szakmai Készségek**: Vállalati szintű telepítési és hibakeresési képességek  
-- **Architektúra Tudás**: Többügynökös AI megoldások és összetett infrastruktúra minták
-- **Hibakeresési Mesterség**: Telepítési és konfigurációs problémák önálló megoldása
+**Technikai szakértelem:**
+- **Produkciós tapasztalat**: Valós AI alkalmazások telepítése Azure környezetekbe
+- **Szakmai készségek**: Vállalati szintű telepítési és hibaelhárítási képességek  
+- **Architektúra ismeretek**: Többügynökös AI megoldások és összetett infrastruktúra minták
+- **Hibaelhárítási jártasság**: Telepítési és konfigurációs problémák önálló megoldása
 
-**Szakmai Fejlődés:**
-- **Iparági Elismerés**: Igazolható készségek a nagy keresletű AZD és AI telepítési területeken
-- **Karrier Előrelépés**: Képesítések felhőarchitekt és AI telepítési szakértői szerepekhez
-- **Közösségi Vezetés**: Aktív tagság az Azure fejlesztői és AI közösségekben
-- **Folyamatos Tanulás**: Alap a haladó Azure AI Foundry specializációhoz
-
-**Portfólió Eszközök:**
-- **Telepített Megoldások**: Működő példák AI alkalmazásokra és infrastruktúra mintákra
-- **Dokumentáció**: Átfogó telepítési útmutatók és hibakeresési eljárások  
-- **Közösségi Hozzájárulások**: Megosztott példák és fejlesztések az Azure közösséggel
-- **Szakmai Kapcsolatok**: Kapcsolatok Azure szakértőkkel és AI telepítési gyakorlókkal
-
-### Tanfolyam Utáni Tanulási Útvonal
-A végzettek felkészültek a haladó specializációra:
-- **Azure AI Foundry Szakértő**: Mély specializáció AI modell telepítésben és irányításban
-- **Felhőarchitektúra Vezetés**: Vállalati szintű telepítési tervezés és irányítás
-- **Fejlesztői Közösségi Vezetés**: Hozzájárulás Azure mintákhoz és közösségi forrásokhoz
-- **Vállalati Képzés**: AZD és AI tele
+**Szakmai fejlődés:**
+- **Iparági elismerés**: Igazolható készségek a nagy keresletű AZD és AI telepítési területeken
+- **Karrier előrelépés**: Képesítések felhőarchitekt és AI telepítési szakértői szerepekhez
+- **Közösségi vezetés**: Aktív tagság az
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Felelősség kizárása**:  
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
