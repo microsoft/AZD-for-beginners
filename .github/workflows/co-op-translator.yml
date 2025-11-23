@@ -65,8 +65,8 @@ jobs:
           # translate -l "el th sv da" -y 
           # translate -l "no fi nl he" -y
           # translate -l "vi id ms tl" -y
-          translate -l "sw hu cs sk" -y
-          # translate -l "ro bg sr hr" -y 
+          # translate -l "sw hu cs sk" -y
+          translate -l "ro bg sr hr" -y 
           # translate -l "sl uk my" -y
 
       - name: Authenticate GitHub App
@@ -100,6 +100,7 @@ jobs:
           add-paths: |
             translations/
             translated_images/
+
 
 
 
