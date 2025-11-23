@@ -1,46 +1,46 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T08:59:21+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-23T09:54:10+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "sw"
 }
 -->
-# Mwongozo wa Kutatua Hitilafu kwa AZD Deployments
+# Mwongozo wa Kudebug kwa AZD Deployments
 
-**Ukurasa wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
-- **📖 Sura ya Sasa**: Sura ya 7 - Kutatua Hitilafu & Uchanganuzi
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Anayeanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 7 - Utatuzi wa Shida & Kudebug
 - **⬅️ Iliyopita**: [Masuala ya Kawaida](common-issues.md)
-- **➡️ Inayofuata**: [Kutatua Hitilafu za AI](ai-troubleshooting.md)
-- **🚀 Sura Inayofuata**: [Sura ya 8: Mifumo ya Uzalishaji & Biashara](../ai-foundry/production-ai-practices.md)
+- **➡️ Inayofuata**: [Utatuzi wa Shida Maalum za AI](ai-troubleshooting.md)
+- **🚀 Sura Inayofuata**: [Sura ya 8: Mifumo ya Uzalishaji & Biashara](../microsoft-foundry/production-ai-practices.md)
 
 ## Utangulizi
 
-Mwongozo huu wa kina unatoa mbinu za hali ya juu za kutatua hitilafu, zana, na mbinu za kugundua na kutatua masuala magumu yanayohusiana na deployments za Azure Developer CLI. Jifunze mbinu za utatuzi wa matatizo kwa utaratibu, uchambuzi wa logi, uchanganuzi wa utendaji, na zana za hali ya juu za uchunguzi ili kutatua masuala ya deployment na runtime kwa ufanisi.
+Mwongozo huu wa kina unatoa mikakati ya hali ya juu ya kudebug, zana, na mbinu za kugundua na kutatua masuala magumu yanayohusiana na deployments za Azure Developer CLI. Jifunze mbinu za utatuzi wa shida kwa utaratibu, uchambuzi wa logi, ufuatiliaji wa utendaji, na zana za hali ya juu za uchunguzi ili kutatua masuala ya deployment na wakati wa utekelezaji kwa ufanisi.
 
 ## Malengo ya Kujifunza
 
 Kwa kukamilisha mwongozo huu, utaweza:
-- Kumiliki mbinu za utatuzi wa matatizo kwa utaratibu kwa masuala ya Azure Developer CLI
+- Kumudu mbinu za utatuzi wa shida kwa utaratibu kwa masuala ya Azure Developer CLI
 - Kuelewa usanidi wa hali ya juu wa logi na mbinu za uchambuzi wa logi
-- Kutekeleza mbinu za uchanganuzi wa utendaji na ufuatiliaji
+- Kutekeleza mikakati ya ufuatiliaji wa utendaji na uchambuzi
 - Kutumia zana na huduma za uchunguzi za Azure kwa utatuzi wa matatizo magumu
-- Kutumia mbinu za utatuzi wa matatizo ya mtandao na usalama
-- Kuseti ufuatiliaji wa kina na arifa kwa kugundua masuala mapema
+- Kutumia mbinu za kudebug mtandao na usalama
+- Kusimamia ufuatiliaji wa kina na tahadhari kwa kugundua masuala mapema
 
 ## Matokeo ya Kujifunza
 
 Baada ya kukamilisha, utaweza:
-- Kutumia mbinu ya TRIAGE kutatua masuala magumu ya deployment kwa utaratibu
-- Kuseti na kuchambua taarifa za logi na ufuatiliaji kwa kina
+- Kutumia mbinu ya TRIAGE kudebug masuala magumu ya deployment kwa utaratibu
+- Kusimamia na kuchambua taarifa za logi na ufuatiliaji kwa kina
 - Kutumia Azure Monitor, Application Insights, na zana za uchunguzi kwa ufanisi
-- Kutatua masuala ya mtandao, uthibitishaji, na ruhusa kwa kujitegemea
-- Kutekeleza mbinu za ufuatiliaji wa utendaji na uboreshaji
-- Kuunda script za kutatua hitilafu na otomatiki kwa masuala yanayojirudia
+- Kudebug masuala ya muunganisho wa mtandao, uthibitishaji, na ruhusa kwa uhuru
+- Kutekeleza mikakati ya ufuatiliaji wa utendaji na uboreshaji
+- Kuunda script za kudebug maalum na otomatiki kwa masuala yanayojirudia
 
-## Mbinu za Kutatua Hitilafu
+## Mbinu za Kudebug
 
 ### Mbinu ya TRIAGE
 - **T**ime: Lini tatizo lilianza?
@@ -48,32 +48,32 @@ Baada ya kukamilisha, utaweza:
 - **I**solate: Ni sehemu gani inashindwa?
 - **A**nalyze: Logi zinaonyesha nini?
 - **G**ather: Kusanya taarifa zote muhimu
-- **E**scalate: Wakati wa kutafuta msaada wa ziada
+- **E**scalate: Lini uombe msaada wa ziada
 
 ## Kuwasha Hali ya Debug
 
 ### Vigezo vya Mazingira
 ```bash
-# Enable comprehensive debugging
+# Washa ufuatiliaji wa kina
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Ufuatiliaji wa Azure CLI
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Zima telemetry kwa matokeo safi
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Usanidi wa Debug
 ```bash
-# Set debug configuration globally
+# Weka usanidi wa urekebishaji kimataifa
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Washa ufuatiliaji wa kumbukumbu
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -90,25 +90,25 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Uchambuzi wa Logi Iliyopangwa
+### Uchambuzi wa Logi Iliyopangiliwa
 ```bash
-# Filter logs by level
+# Chuja kumbukumbu kwa kiwango
 azd logs --level error --since 1h
 
-# Filter by service
+# Chuja kwa huduma
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Hamisha kumbukumbu kwa uchambuzi
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Changanua kumbukumbu za JSON kwa kutumia jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
-### Uhusiano wa Logi
+### Ulinganishaji wa Logi
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Linganisha kumbukumbu kati ya huduma
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,33 +118,33 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Tafuta katika huduma zote
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Tafuta kumbukumbu za Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Zana za Hali ya Juu za Kutatua Hitilafu
+## 🛠️ Zana za Kudebug za Hali ya Juu
 
 ### Maswali ya Azure Resource Graph
 ```bash
-# Query resources by tags
+# Tafuta rasilimali kwa kutumia lebo
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Tafuta usambazaji ulioshindwa
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Angalia afya ya rasilimali
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Utatuzi wa Mtandao
+### Kudebug Mtandao
 ```bash
-# Test connectivity between services
+# Jaribu muunganisho kati ya huduma
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Matumizi
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Utatuzi wa Kontena
+### Kudebug Kontena
 ```bash
-# Debug container app issues
+# Tatua masuala ya programu ya kontena
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -183,9 +183,9 @@ debug_container() {
 }
 ```
 
-### Utatuzi wa Muunganisho wa Database
+### Kudebug Muunganisho wa Hifadhidata
 ```bash
-# Debug database connectivity
+# Kagua muunganisho wa hifadhidata
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -202,11 +202,11 @@ debug_database() {
 }
 ```
 
-## 🔬 Utatuzi wa Utendaji
+## 🔬 Kudebug Utendaji
 
 ### Ufuatiliaji wa Utendaji wa Programu
 ```bash
-# Enable Application Insights debugging
+# Washa ufuatiliaji wa Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Ufuatiliaji wa utendaji maalum
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Uchambuzi wa Matumizi ya Rasilimali
 ```bash
-# Monitor resource usage
+# Fuatilia matumizi ya rasilimali
 monitor_resources() {
     local resource_group=$1
     
@@ -264,7 +264,7 @@ monitor_resources() {
 
 ## 🧪 Upimaji na Uthibitishaji
 
-### Utatuzi wa Upimaji wa Muunganisho
+### Kudebug Upimaji wa Muunganiko
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Weka mazingira ya urekebishaji
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Pata ncha za huduma
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Jaribu ncha za afya
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Endesha majaribio
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Endesha majaribio maalum ya muunganisho
 npm run test:integration
 ```
 
-### Upimaji wa Mzigo kwa Utatuzi
+### Upimaji wa Mzigo kwa Kudebug
 ```bash
-# Simple load test to identify performance bottlenecks
+# Jaribio rahisi la mzigo kutambua vikwazo vya utendaji
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,42 +323,42 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Kutumia Apache Bench (sakinisha: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Chukua vipimo muhimu
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Angalia kushindwa
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Utatuzi wa Miundombinu
+## 🔧 Kudebug Miundombinu
 
-### Utatuzi wa Bicep Template
+### Kudebug Templeti za Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# Thibitisha templeti za Bicep na matokeo ya kina
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Uthibitishaji wa sintaksia
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Uthibitishaji wa lint
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Nini-ikiwa kupelekwa
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Kagua kupelekwa kwa templeti
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Uchambuzi wa Hali ya Rasilimali
 ```bash
-# Analyze resource states for inconsistencies
+# Changanua hali za rasilimali kwa kutofautiana
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Orodhesha rasilimali zote na hali zao
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Angalia rasilimali zilizoshindwa
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -404,11 +404,11 @@ analyze_resources() {
 }
 ```
 
-## 🔒 Utatuzi wa Usalama
+## 🔒 Kudebug Usalama
 
-### Utatuzi wa Mtiririko wa Uthibitishaji
+### Kudebug Mtiririko wa Uthibitishaji
 ```bash
-# Debug Azure authentication
+# Sakinisha uthibitisho wa Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Fafanua tokeni ya JWT (inahitaji jq na base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Sakinisha ufikiaji wa Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,16 +440,16 @@ debug_keyvault() {
 }
 ```
 
-### Utatuzi wa Usalama wa Mtandao
+### Kudebug Usalama wa Mtandao
 ```bash
-# Debug network security groups
+# Kagua vikundi vya usalama wa mtandao
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Angalia sheria za usalama
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,17 +458,17 @@ debug_network_security() {
 }
 ```
 
-## 📱 Utatuzi wa Programu Maalum
+## 📱 Kudebug Maalum kwa Programu
 
-### Utatuzi wa Programu ya Node.js
+### Kudebug Programu za Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Kati ya Express ya urekebishaji
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Ingiza maelezo ya ombi
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Badilisha res.json ili kuingiza majibu
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -489,9 +489,9 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Utatuzi wa Maswali ya Database
+### Kudebug Maswali ya Hifadhidata
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Huduma za urekebishaji wa hifadhidata
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -519,12 +519,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Taratibu za Dharura za Kutatua Hitilafu
+## 🚨 Taratibu za Kudebug Dharura
 
-### Jibu la Masuala ya Uzalishaji
+### Majibu ya Masuala ya Uzalishaji
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Urekebishaji wa dharura wa uzalishaji
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Badilisha kwa mazingira sahihi
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Kusanya taarifa muhimu
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Taratibu za Kurudisha Nyuma
 ```bash
-# Quick rollback script
+# Skripti ya kurudisha haraka
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Badilisha mazingira
     azd env select "$environment"
     
-    # Rollback application
+    # Rudisha programu
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Thibitisha kurudisha
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Jaribu sehemu muhimu
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -609,34 +609,34 @@ quick_rollback() {
 }
 ```
 
-## 📊 Dashibodi za Kutatua Hitilafu
+## 📊 Dashibodi za Kudebug
 
 ### Dashibodi ya Ufuatiliaji Maalum
 ```bash
-# Create Application Insights queries for debugging
+# Unda maswali ya Application Insights kwa kusuluhisha hitilafu
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Uliza kuhusu makosa
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Uliza kuhusu masuala ya utendaji
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Uliza kuhusu kushindwa kwa utegemezi
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Muunganisho wa Logi
+### Ukusanyaji wa Logi
 ```bash
-# Aggregate logs from multiple sources
+# Kusanya kumbukumbu kutoka vyanzo mbalimbali
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -658,14 +658,14 @@ aggregate_logs() {
 
 ## 🔗 Rasilimali za Hali ya Juu
 
-### Script Maalum za Kutatua Hitilafu
+### Script za Kudebug Maalum
 Unda saraka `scripts/debug/` yenye:
 - `health-check.sh` - Ukaguzi wa afya wa kina
 - `performance-test.sh` - Upimaji wa utendaji otomatiki
-- `log-analyzer.py` - Uchambuzi wa logi wa hali ya juu
+- `log-analyzer.py` - Uchambuzi wa hali ya juu wa logi
 - `resource-validator.sh` - Uthibitishaji wa miundombinu
 
-### Muunganisho wa Ufuatiliaji
+### Ujumuishaji wa Ufuatiliaji
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
@@ -684,32 +684,34 @@ hooks:
 
 ## Mazoea Bora
 
-1. **Washa logi za debug** katika mazingira yasiyo ya uzalishaji
+1. **Washa logi za debug kila wakati** katika mazingira yasiyo ya uzalishaji
 2. **Unda kesi za majaribio zinazoweza kurudiwa** kwa masuala
-3. **Andika taratibu za kutatua hitilafu** kwa timu yako
+3. **Andika taratibu za kudebug** kwa timu yako
 4. **Otomatisha ukaguzi wa afya** na ufuatiliaji
 5. **Sasisha zana za debug** kulingana na mabadiliko ya programu yako
-6. **Fanya mazoezi ya taratibu za kutatua hitilafu** wakati wa nyakati zisizo za tukio
+6. **Fanya mazoezi ya taratibu za kudebug** wakati wa nyakati zisizo za tukio
 
-## Hatua Zingine
+## Hatua Zifuatazo
 
 - [Mipango ya Uwezo](../pre-deployment/capacity-planning.md) - Panga mahitaji ya rasilimali
 - [Uchaguzi wa SKU](../pre-deployment/sku-selection.md) - Chagua viwango vya huduma vinavyofaa
-- [Ukaguzi wa Awali](../pre-deployment/preflight-checks.md) - Uthibitishaji kabla ya deployment
-- [Karatasi ya Msaada](../../resources/cheat-sheet.md) - Amri za rejea ya haraka
+- [Ukaguzi wa Kabla ya Utekelezaji](../pre-deployment/preflight-checks.md) - Uthibitishaji wa kabla ya utekelezaji
+- [Karatasi ya Msaada](../../resources/cheat-sheet.md) - Amri za rejeleo la haraka
 
 ---
 
-**Kumbuka**: Kutatua hitilafu vizuri kunahusu kuwa na utaratibu, makini, na uvumilivu. Zana na mbinu hizi zitakusaidia kugundua masuala haraka na kwa ufanisi.
+**Kumbuka**: Kudebug vizuri ni kuhusu kuwa na utaratibu, makini, na uvumilivu. Zana na mbinu hizi zitakusaidia kugundua masuala kwa haraka na kwa ufanisi.
 
 ---
 
-**Ukurasa wa Sura**
+**Urambazaji**
 - **Somo Lililopita**: [Masuala ya Kawaida](common-issues.md)
 
 - **Somo Linalofuata**: [Mipango ya Uwezo](../pre-deployment/capacity-planning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asilia katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

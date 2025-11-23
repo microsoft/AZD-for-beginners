@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T09:16:48+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-23T10:36:16+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "hu"
 }
 -->
-# AI Munkaterhelések Legjobb Gyakorlatai AZD-vel
+# AI Munkaterhelés Legjobb Gyakorlatai AZD-vel
 
 **Fejezet Navigáció:**
 - **📚 Kurzus Kezdőlap**: [AZD Kezdőknek](../../README.md)
@@ -18,23 +18,23 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Áttekintés
 
-Ez az útmutató átfogó legjobb gyakorlatokat nyújt produkcióra kész AI munkaterhelések Azure Developer CLI (AZD) segítségével történő telepítéséhez. Az Azure AI Foundry Discord közösség visszajelzései és valós ügyféltelepítések alapján ezek a gyakorlatok a produkciós AI rendszerek leggyakoribb kihívásait célozzák meg.
+Ez az útmutató átfogó legjobb gyakorlatokat nyújt produkcióra kész AI munkaterhelések Azure Developer CLI (AZD) segítségével történő telepítéséhez. A Microsoft Foundry Discord közösség visszajelzései és valós ügyféltelepítések alapján ezek a gyakorlatok a produkciós AI rendszerek leggyakoribb kihívásait célozzák meg.
 
 ## Főbb Kihívások
 
 A közösségi szavazás eredményei alapján ezek a leggyakoribb problémák, amelyekkel a fejlesztők szembesülnek:
 
-- **45%** küzd több szolgáltatást érintő AI telepítésekkel
-- **38%** problémákat tapasztal hitelesítési adatok és titkok kezelésében  
-- **35%** nehézségei vannak a produkciós felkészültséggel és skálázással
+- **45%** küzd több szolgáltatásból álló AI telepítésekkel
+- **38%** problémákat tapasztal hitelesítési adatok és titkok kezelésével  
+- **35%** nehézségeket talál a produkciós készség és skálázás terén
 - **32%** jobb költségoptimalizálási stratégiákra van szüksége
-- **29%** fejlettebb monitorozási és hibakeresési megoldásokat igényel
+- **29%** fejlettebb monitorozásra és hibakeresésre van igénye
 
 ## Architektúra Minták Produkciós AI-hoz
 
-### Minta 1: Mikroszolgáltatás AI Architektúra
+### Minta 1: Mikroszolgáltatások AI Architektúra
 
-**Mikor használjuk**: Összetett AI alkalmazások több funkcióval
+**Mikor használjuk**: Összetett AI alkalmazások több képességgel
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -130,7 +130,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. Zero-Trust Biztonsági Modell
 
 **Megvalósítási Stratégia**:
-- Nincs szolgáltatásközi kommunikáció hitelesítés nélkül
+- Nincs szolgáltatás-szolgáltatás kommunikáció hitelesítés nélkül
 - Minden API hívás menedzselt identitásokat használ
 - Hálózati izoláció privát végpontokkal
 - Legkisebb jogosultság elve
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Környezet-specifikus Konfigurációk**:
 
 ```bash
-# Development environment
+# Fejlesztési környezet
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Éles környezet
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI Költségkezelés**:
 
 ```typescript
-// Application-level token optimization
+// Alkalmazásszintű token optimalizálás
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Kontextus csonkítása, nem a felhasználói bemenet
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Durva becslés: 1 token ≈ 4 karakter
     return Math.ceil(text.length / 4);
   }
 }
@@ -508,7 +508,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI-specifikus Monitorozás
 
-**Egyedi Metrikák Dashboardjai**:
+**Egyedi Metrikák AI Dashboardokhoz**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Egészségügyi Ellenőrzések és Üzemidő Monitorozás
+### 3. Egészségellenőrzések és Üzemidő Monitorozás
 
 ```bicep
 // Application Insights availability tests
@@ -606,7 +606,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Katasztrófaelhárítás és Magas Elérhetőség
+## Katasztrófa-helyreállítás és Magas Elérhetőség
 
 ### 1. Több Régiós Telepítés
 
@@ -804,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastruktúra Validáció
+### 2. Infrastruktúra Validálás
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Ellenőrizze, hogy minden szükséges szolgáltatás fut-e
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Érvényesítse az OpenAI modell telepítéseket
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,14 +830,14 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Tesztelje az AI szolgáltatás kapcsolatát
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Produkciós Felkészültségi Ellenőrzőlista
+## Produkciós Készség Ellenőrzőlista
 
 ### Biztonság ✅
 - [ ] Minden szolgáltatás menedzselt identitásokat használ
@@ -845,7 +845,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Privát végpontok konfigurálva
 - [ ] Hálózati biztonsági csoportok implementálva
 - [ ] RBAC legkisebb jogosultsággal
-- [ ] WAF engedélyezve nyilvános végpontokon
+- [ ] WAF engedélyezve a nyilvános végpontokon
 
 ### Teljesítmény ✅
 - [ ] Automatikus skálázás konfigurálva
@@ -860,16 +860,16 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Egyedi metrikák definiálva
 - [ ] Riasztási szabályok beállítva
 - [ ] Dashboard létrehozva
-- [ ] Egészségügyi ellenőrzések implementálva
+- [ ] Egészségellenőrzések implementálva
 - [ ] Naplómegőrzési szabályok
 
 ### Megbízhatóság ✅
 - [ ] Több régiós telepítés
 - [ ] Mentési és helyreállítási terv
-- [ ] Circuit breakers implementálva
+- [ ] Áramköri megszakítók implementálva
 - [ ] Újrapróbálkozási szabályok konfigurálva
-- [ ] Fokozatos degradáció
-- [ ] Egészségügyi ellenőrzési végpontok
+- [ ] Kegyes degradáció
+- [ ] Egészségellenőrzési végpontok
 
 ### Költségkezelés ✅
 - [ ] Költségvetési riasztások konfigurálva
@@ -880,14 +880,14 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Rendszeres költségfelülvizsgálatok
 
 ### Megfelelőség ✅
-- [ ] Adatrezidencia követelmények teljesítve
+- [ ] Adattárolási követelmények teljesítve
 - [ ] Audit naplózás engedélyezve
-- [ ] Megfelelőségi szabályzatok alkalmazva
+- [ ] Megfelelőségi szabályok alkalmazva
 - [ ] Biztonsági alapvonalak implementálva
 - [ ] Rendszeres biztonsági értékelések
 - [ ] Incidens választerv
 
-## Teljesítmény Benchmarkok
+## Teljesítmény Mutatók
 
 ### Tipikus Produkciós Metrikák
 
@@ -898,12 +898,12 @@ echo "Infrastructure validation completed successfully!"
 | **Hibaarány** | < 0.1% | Alkalmazás naplók |
 | **Tokenhasználat** | < $500/hónap | Költségkezelés |
 | **Egyidejű Felhasználók** | 1000+ | Terhelés tesztelés |
-| **Helyreállítási Idő** | < 1 óra | Katasztrófaelhárítási tesztek |
+| **Helyreállítási Idő** | < 1 óra | Katasztrófa-helyreállítási tesztek |
 
 ### Terhelés Tesztelés
 
 ```bash
-# Load testing script for AI applications
+# Terhelési teszt script AI alkalmazásokhoz
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,28 +913,28 @@ python scripts/load_test.py \
 
 ## 🤝 Közösségi Legjobb Gyakorlatok
 
-Az Azure AI Foundry Discord közösség visszajelzései alapján:
+A Microsoft Foundry Discord közösség visszajelzései alapján:
 
-### Közösség Legjobb Ajánlásai:
+### Közösség Ajánlásai:
 
 1. **Kezdj Kicsiben, Skálázz Fokozatosan**: Indíts alapvető SKU-kkal, és skálázz a tényleges használat alapján
-2. **Monitorozz Mindent**: Átfogó monitorozás beállítása az első naptól kezdve
-3. **Automatizáld a Biztonságot**: Használj infrastruktúrát kódként a konzisztens biztonság érdekében
-4. **Tesztelj Alaposan**: AI-specifikus tesztelést is vegyél bele a folyamatba
-5. **Tervezd a Költségeket**: Figyeld a tokenhasználatot, és állíts be költségvetési riasztásokat korán
+2. **Monitorozz Mindent**: Állíts be átfogó monitorozást már az első naptól
+3. **Automatizáld a Biztonságot**: Használj infrastruktúrát kódként a következetes biztonság érdekében
+4. **Tesztelj Alaposan**: Vegyél fel AI-specifikus tesztelést a pipeline-ba
+5. **Tervezd a Költségeket**: Figyeld a tokenhasználatot és állíts be költségvetési riasztásokat korán
 
 ### Gyakori Hibák, Amiket Kerülni Kell:
 
-- ❌ API kulcsok kódba ágyazása
+- ❌ API kulcsok kódba való beágyazása
 - ❌ Megfelelő monitorozás hiánya
 - ❌ Költségoptimalizálás figyelmen kívül hagyása
 - ❌ Hibahelyzetek tesztelésének elhanyagolása
-- ❌ Egészségügyi ellenőrzések nélküli telepítés
+- ❌ Egészségellenőrzések nélküli telepítés
 
 ## További Források
 
-- **Azure Jól Megtervezett Keretrendszer**: [AI munkaterhelés útmutató](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Dokumentáció**: [Hivatalos dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
+- **Azure Jól-Architektált Keretrendszer**: [AI munkaterhelés útmutató](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Dokumentáció**: [Hivatalos dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
 - **Közösségi Sablonok**: [Azure Minták](https://github.com/Azure-Samples)
 - **Discord Közösség**: [#Azure csatorna](https://discord.gg/microsoft-azure)
 
@@ -947,9 +947,11 @@ Az Azure AI Foundry Discord közösség visszajelzései alapján:
 - **⬅️ Kapcsolódó Téma**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎆 Kurzus Befejezve**: [AZD Kezdőknek](../../README.md)
 
-**Ne feledd**: Produkciós AI munkaterhelések gondos tervezést, monitorozást és folyamatos optimalizálást igényelnek. Kezdd ezekkel a mintákkal, és igazítsd őket az egyedi igényeidhez.
+**Ne feledd**: A produkciós AI munkaterhelések gondos tervezést, monitorozást és folyamatos optimalizálást igényelnek. Kezdd ezekkel a mintákkal, és igazítsd őket az egyedi igényeidhez.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

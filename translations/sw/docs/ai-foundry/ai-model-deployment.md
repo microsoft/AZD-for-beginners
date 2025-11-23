@@ -1,37 +1,37 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T08:55:52+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-23T09:59:47+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sw"
 }
 -->
-# Utekelezaji wa Modeli za AI kwa Azure Developer CLI
+# Utekelezaji wa Mfano wa AI na Azure Developer CLI
 
 **Urambazaji wa Sura:**
 - **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
 - **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza
-- **⬅️ Iliyopita**: [Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Iliyopita**: [Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Inayofuata**: [Maabara ya Warsha ya AI](ai-workshop-lab.md)
 - **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
 
-Mwongozo huu unatoa maelekezo ya kina kuhusu jinsi ya kupeleka modeli za AI kwa kutumia templeti za AZD, kuanzia kuchagua modeli hadi mifumo ya utekelezaji wa uzalishaji.
+Mwongozo huu unatoa maelekezo ya kina ya kupeleka mifano ya AI kwa kutumia templeti za AZD, ukifunika kila kitu kutoka kwa uchaguzi wa mfano hadi mifumo ya utekelezaji wa uzalishaji.
 
-## Jedwali la Maudhui
+## Jedwali la Yaliyomo
 
-- [Mkakati wa Uchaguzi wa Modeli](../../../../docs/ai-foundry)
-- [Usanidi wa AZD kwa Modeli za AI](../../../../docs/ai-foundry)
+- [Mkakati wa Uchaguzi wa Mfano](../../../../docs/ai-foundry)
+- [Usanidi wa AZD kwa Mifano ya AI](../../../../docs/ai-foundry)
 - [Mifumo ya Utekelezaji](../../../../docs/ai-foundry)
-- [Usimamizi wa Modeli](../../../../docs/ai-foundry)
+- [Usimamizi wa Mfano](../../../../docs/ai-foundry)
 - [Masuala ya Uzalishaji](../../../../docs/ai-foundry)
 - [Ufuatiliaji na Uangalizi](../../../../docs/ai-foundry)
 
-## Mkakati wa Uchaguzi wa Modeli
+## Mkakati wa Uchaguzi wa Mfano
 
-### Modeli za Azure OpenAI
+### Mifano ya Azure OpenAI
 
-Chagua modeli sahihi kwa matumizi yako:
+Chagua mfano sahihi kwa matumizi yako:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -59,20 +59,20 @@ services:
         ]
 ```
 
-### Mipango ya Uwezo wa Modeli
+### Mipango ya Uwezo wa Mfano
 
-| Aina ya Modeli | Matumizi | Uwezo Unaopendekezwa | Masuala ya Gharama |
-|----------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Gumzo, Maswali na Majibu | 10-50 TPM | Gharama nafuu kwa kazi nyingi |
-| GPT-4 | Utoaji wa hoja ngumu | 20-100 TPM | Gharama ya juu, tumia kwa vipengele vya premium |
+| Aina ya Mfano | Matumizi | Uwezo Unaopendekezwa | Mazingatio ya Gharama |
+|---------------|----------|---------------------|-----------------------|
+| GPT-4o-mini | Mazungumzo, Maswali na Majibu | 10-50 TPM | Gharama nafuu kwa kazi nyingi |
+| GPT-4 | Ufikiri wa hali ngumu | 20-100 TPM | Gharama ya juu, tumia kwa vipengele vya premium |
 | Text-embedding-ada-002 | Utafutaji, RAG | 30-120 TPM | Muhimu kwa utafutaji wa semantiki |
 | Whisper | Hotuba hadi maandishi | 10-50 TPM | Kazi za usindikaji wa sauti |
 
-## Usanidi wa AZD kwa Modeli za AI
+## Usanidi wa AZD kwa Mifano ya AI
 
 ### Usanidi wa Templeti ya Bicep
 
-Unda utekelezaji wa modeli kupitia templeti za Bicep:
+Unda utekelezaji wa mifano kupitia templeti za Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Sanidi mazingira ya programu yako:
 
 ```bash
-# .env configuration
+# Usanidi wa .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -158,7 +158,7 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Inafaa kwa:
+Bora kwa:
 - Maendeleo na majaribio
 - Programu za soko moja
 - Uboreshaji wa gharama
@@ -176,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Inafaa kwa:
+Bora kwa:
 - Programu za kimataifa
 - Mahitaji ya upatikanaji wa juu
 - Usambazaji wa mzigo
@@ -212,11 +212,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Usimamizi wa Modeli
+## Usimamizi wa Mfano
 
 ### Udhibiti wa Toleo
 
-Fuatilia matoleo ya modeli katika usanidi wako wa AZD:
+Fuatilia matoleo ya mifano katika usanidi wako wa AZD:
 
 ```json
 {
@@ -234,13 +234,13 @@ Fuatilia matoleo ya modeli katika usanidi wako wa AZD:
 }
 ```
 
-### Sasisho za Modeli
+### Sasisho za Mfano
 
-Tumia AZD hooks kwa sasisho za modeli:
+Tumia ndoano za AZD kwa sasisho za mifano:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# ndoano/kabla ya kupeleka.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -251,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### Upimaji wa A/B
 
-Tekeleza matoleo mengi ya modeli:
+Tekeleza matoleo mengi ya mifano:
 
 ```bicep
 param enableABTesting bool = false
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Hesabu uwezo unaohitajika kulingana na mifumo ya matumizi:
 
 ```python
-# Capacity calculation example
+# Mfano wa hesabu ya uwezo
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Mfano wa matumizi
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Fuatilia vipimo maalum vya AI:
 
 ```python
-# Custom telemetry for AI models
+# Telemetry maalum kwa mifano ya AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Tekeleza ufuatiliaji wa afya ya huduma za AI:
 
 ```python
-# Health check endpoints
+# Sehemu za ukaguzi wa afya
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Jaribu muunganisho wa OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -480,30 +480,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Hatua Zingine
+## Hatua Zifuatazo
 
-1. **Pitia [Mwongozo wa Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md)** kwa mifumo ya muunganisho wa huduma
+1. **Pitia [Mwongozo wa Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)** kwa mifumo ya muunganisho wa huduma
 2. **Kamilisha [Maabara ya Warsha ya AI](ai-workshop-lab.md)** kwa uzoefu wa vitendo
-3. **Tekeleza [Mbinu za AI za Uzalishaji](production-ai-practices.md)** kwa utekelezaji wa biashara
+3. **Tekeleza [Mazoea ya AI ya Uzalishaji](production-ai-practices.md)** kwa utekelezaji wa biashara
 4. **Gundua [Mwongozo wa Utatuzi wa AI](../troubleshooting/ai-troubleshooting.md)** kwa masuala ya kawaida
 
 ## Rasilimali
 
-- [Upatikanaji wa Modeli za Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Upatikanaji wa Mfano wa Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Usanidi wa Kujiendesha kwa Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Uboreshaji wa Gharama za Modeli za AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Uboreshaji wa Gharama za Mfano wa AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Urambazaji wa Sura:**
 - **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
 - **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya AI Kwanza
-- **⬅️ Iliyopita**: [Muunganisho wa Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Iliyopita**: [Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Inayofuata**: [Maabara ya Warsha ya AI](ai-workshop-lab.md)
 - **🚀 Sura Inayofuata**: [Sura ya 3: Usanidi](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T09:39:58+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-23T11:14:43+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "cs"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Přehled
 
-Tento průvodce poskytuje komplexní nejlepší postupy pro nasazení produkčně připravených AI pracovních zátěží pomocí Azure Developer CLI (AZD). Na základě zpětné vazby od komunity Azure AI Foundry na Discordu a reálných zákaznických nasazení tyto postupy řeší nejčastější výzvy v produkčních AI systémech.
+Tento průvodce poskytuje komplexní nejlepší postupy pro nasazení produkčně připravených AI pracovních zátěží pomocí Azure Developer CLI (AZD). Na základě zpětné vazby od komunity Microsoft Foundry Discord a reálných zákaznických nasazení tyto postupy řeší nejčastější výzvy v produkčních AI systémech.
 
 ## Klíčové výzvy
 
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Konfigurace specifické pro prostředí**:
 
 ```bash
-# Development environment
+# Vývojové prostředí
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Produkční prostředí
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Správa nákladů OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Optimalizace tokenů na úrovni aplikace
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Zkrátit kontext, ne uživatelský vstup
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Hrubý odhad: 1 token ≈ 4 znaky
     return Math.ceil(text.length / 4);
   }
 }
@@ -807,12 +807,12 @@ jobs:
 ### 2. Validace infrastruktury
 
 ```bash
-# scripts/validate_infrastructure.sh
+# skripty/validate_infrastructure.sh
 #!/bin/bash
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Zkontrolujte, zda všechny požadované služby běží
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Ověřte nasazení modelů OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Otestujte konektivitu AI služby
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -868,7 +868,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Plán zálohování a obnovy
 - [ ] Implementovány obvody přerušení
 - [ ] Nakonfigurovány politiky opakování
-- [ ] Elegantní degradace
+- [ ] Postupné zhoršování
 - [ ] Koncové body kontrol stavu
 
 ### Správa nákladů ✅
@@ -876,7 +876,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Správné dimenzování zdrojů
 - [ ] Aplikovány slevy pro vývoj/testování
 - [ ] Zakoupeny rezervované instance
-- [ ] Dashboard monitorování nákladů
+- [ ] Dashboard pro monitorování nákladů
 - [ ] Pravidelné přezkumy nákladů
 
 ### Soulad ✅
@@ -892,7 +892,7 @@ echo "Infrastructure validation completed successfully!"
 ### Typické produkční metriky
 
 | Metrika | Cíl | Monitorování |
-|--------|--------|------------|
+|---------|-----|--------------|
 | **Doba odezvy** | < 2 sekundy | Application Insights |
 | **Dostupnost** | 99,9 % | Monitorování dostupnosti |
 | **Chybovost** | < 0,1 % | Logy aplikace |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Testování zátěže
 
 ```bash
-# Load testing script for AI applications
+# Skript pro zátěžové testování AI aplikací
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,15 +913,15 @@ python scripts/load_test.py \
 
 ## 🤝 Nejlepší postupy komunity
 
-Na základě zpětné vazby komunity Azure AI Foundry na Discordu:
+Na základě zpětné vazby komunity Microsoft Foundry Discord:
 
 ### Nejlepší doporučení od komunity:
 
-1. **Začněte v malém, škálujte postupně**: Začněte s základními SKU a škálujte podle skutečného využití
+1. **Začněte v malém, škálujte postupně**: Začněte s základními SKU a škálujte na základě skutečného využití
 2. **Monitorujte vše**: Nastavte komplexní monitorování od prvního dne
 3. **Automatizujte zabezpečení**: Používejte infrastrukturu jako kód pro konzistentní zabezpečení
 4. **Důkladně testujte**: Zahrňte testování specifické pro AI do svého pipeline
-5. **Plánujte náklady**: Sledujte využití tokenů a nastavte upozornění na rozpočet včas
+5. **Plánujte náklady**: Monitorujte využití tokenů a nastavte upozornění na rozpočet včas
 
 ### Běžné chyby, kterým se vyhnout:
 
@@ -934,9 +934,9 @@ Na základě zpětné vazby komunity Azure AI Foundry na Discordu:
 ## Další zdroje
 
 - **Azure Well-Architected Framework**: [Pokyny pro AI pracovní zátěže](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Dokumentace Azure AI Foundry**: [Oficiální dokumentace](https://learn.microsoft.com/azure/ai-studio/)
+- **Dokumentace Microsoft Foundry**: [Oficiální dokumentace](https://learn.microsoft.com/azure/ai-studio/)
 - **Šablony komunity**: [Azure Samples](https://github.com/Azure-Samples)
-- **Komunita na Discordu**: [#Azure kanál](https://discord.gg/microsoft-azure)
+- **Komunita Discord**: [#Azure kanál](https://discord.gg/microsoft-azure)
 
 ---
 
@@ -951,5 +951,7 @@ Na základě zpětné vazby komunity Azure AI Foundry na Discordu:
 
 ---
 
-**Upozornění**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o co největší přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení**:  
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

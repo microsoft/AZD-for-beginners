@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T09:40:27+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-23T11:16:24+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "cs"
 }
@@ -12,11 +12,11 @@ CO_OP_TRANSLATOR_METADATA:
 **Navigace kapitol:**
 - **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
-- **⬅️ Předchozí**: [Integrace Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Další**: [Laboratoř AI Workshop](ai-workshop-lab.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
-Tento průvodce poskytuje komplexní pokyny pro nasazení AI modelů pomocí šablon AZD, od výběru modelu až po vzory nasazení do produkce.
+Tento průvodce poskytuje komplexní pokyny pro nasazení AI modelů pomocí šablon AZD, od výběru modelu až po vzory nasazení do produkčního prostředí.
 
 ## Obsah
 
@@ -24,7 +24,7 @@ Tento průvodce poskytuje komplexní pokyny pro nasazení AI modelů pomocí ša
 - [Konfigurace AZD pro AI modely](../../../../docs/ai-foundry)
 - [Vzory nasazení](../../../../docs/ai-foundry)
 - [Správa modelů](../../../../docs/ai-foundry)
-- [Úvahy o produkci](../../../../docs/ai-foundry)
+- [Úvahy o produkčním prostředí](../../../../docs/ai-foundry)
 - [Monitoring a pozorovatelnost](../../../../docs/ai-foundry)
 
 ## Strategie výběru modelu
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Nakonfigurujte prostředí vaší aplikace:
 
 ```bash
-# .env configuration
+# Konfigurace .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -183,7 +183,7 @@ Vhodné pro:
 
 ### Vzor 3: Hybridní nasazení
 
-Kombinujte Azure OpenAI s dalšími AI službami:
+Kombinace Azure OpenAI s dalšími AI službami:
 
 ```bicep
 // Hybrid AI services
@@ -251,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### A/B testování
 
-Nasazujte více verzí modelů:
+Nasazení více verzí modelů:
 
 ```bicep
 param enableABTesting bool = false
@@ -273,14 +273,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Úvahy o produkci
+## Úvahy o produkčním prostředí
 
 ### Plánování kapacity
 
-Vypočítejte požadovanou kapacitu na základě vzorců využití:
+Vypočítejte požadovanou kapacitu na základě vzorců používání:
 
 ```python
-# Capacity calculation example
+# Příklad výpočtu kapacity
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Příklad použití
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -414,10 +414,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Vlastní metriky
 
-Sledujte metriky specifické pro AI:
+Sledujte specifické metriky pro AI:
 
 ```python
-# Custom telemetry for AI models
+# Vlastní telemetrie pro AI modely
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementujte monitoring stavu AI služeb:
 
 ```python
-# Health check endpoints
+# Koncové body kontroly zdraví
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Testovat připojení OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,16 +482,16 @@ async def check_ai_models():
 
 ## Další kroky
 
-1. **Projděte si [Průvodce integrací Azure AI Foundry](azure-ai-foundry-integration.md)** pro vzory integrace služeb
+1. **Projděte si [Průvodce integrací Microsoft Foundry](microsoft-foundry-integration.md)** pro vzory integrace služeb
 2. **Dokončete [Laboratoř AI Workshop](ai-workshop-lab.md)** pro praktické zkušenosti
-3. **Implementujte [Produkční AI praktiky](production-ai-practices.md)** pro podniková nasazení
+3. **Implementujte [Postupy pro produkční AI](production-ai-practices.md)** pro nasazení v podnikovém prostředí
 4. **Prozkoumejte [Průvodce řešením problémů s AI](../troubleshooting/ai-troubleshooting.md)** pro běžné problémy
 
 ## Zdroje
 
 - [Dostupnost modelů Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentace Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Škálování aplikací Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Škálování Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimalizace nákladů na AI modely](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Navigace kapitol:**
 - **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
-- **⬅️ Předchozí**: [Integrace Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Další**: [Laboratoř AI Workshop](ai-workshop-lab.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení**:  
-Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

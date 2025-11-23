@@ -1,27 +1,34 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:36:46+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-23T11:40:37+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "sk"
 }
 -->
-# Plánovanie kapacity: Pochopenie kvót a limitov Azure - Dostupnosť a limity zdrojov Azure
+# Plánovanie kapacity - Dostupnosť a limity zdrojov Azure
+
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 6 - Validácia a plánovanie pred nasadením
+- **⬅️ Predchádzajúca kapitola**: [Kapitola 5: Riešenia AI s viacerými agentmi](../../examples/retail-scenario.md)
+- **➡️ Ďalej**: [Výber SKU](sku-selection.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 7: Riešenie problémov](../troubleshooting/common-issues.md)
 
 ## Úvod
 
-Tento komplexný sprievodca vám pomôže naplánovať a overiť kapacitu zdrojov Azure pred nasadením pomocou Azure Developer CLI. Naučte sa hodnotiť kvóty, dostupnosť a regionálne obmedzenia, aby ste zabezpečili úspešné nasadenia pri optimalizácii nákladov a výkonu. Ovládnite techniky plánovania kapacity pre rôzne architektúry aplikácií a scenáre škálovania.
+Tento komplexný sprievodca vám pomôže naplánovať a overiť kapacitu zdrojov Azure pred nasadením pomocou Azure Developer CLI. Naučíte sa hodnotiť kvóty, dostupnosť a regionálne obmedzenia, aby ste zabezpečili úspešné nasadenia pri optimalizácii nákladov a výkonu. Ovládnite techniky plánovania kapacity pre rôzne architektúry aplikácií a scenáre škálovania.
 
 ## Ciele učenia
 
 Po dokončení tohto sprievodcu budete:
-- Rozumieť kvótam, limitom a regionálnym obmedzeniam Azure
+- Rozumieť kvótam Azure, limitom a regionálnym obmedzeniam dostupnosti
 - Ovládať techniky na kontrolu dostupnosti a kapacity zdrojov pred nasadením
-- Implementovať automatizované stratégie na overovanie kapacity a monitorovanie
+- Implementovať automatizované stratégie validácie a monitorovania kapacity
 - Navrhovať aplikácie s ohľadom na správne dimenzovanie zdrojov a škálovanie
 - Aplikovať stratégie optimalizácie nákladov prostredníctvom inteligentného plánovania kapacity
-- Konfigurovať upozornenia a monitorovanie využitia kvót a dostupnosti zdrojov
+- Konfigurovať upozornenia a monitorovanie využívania kvót a dostupnosti zdrojov
 
 ## Výsledky učenia
 
@@ -42,30 +49,30 @@ Pred nasadením aplikácií je potrebné zabezpečiť:
 - **Kapacitu siete** pre očakávanú prevádzku
 - **Optimalizáciu nákladov** prostredníctvom správneho dimenzovania
 
-## 📊 Pochopenie kvót a limitov Azure
+## 📊 Porozumenie kvótam a limitom Azure
 
 ### Typy limitov
-1. **Kvóty na úrovni predplatného** - Maximálny počet zdrojov na predplatné
-2. **Regionálne kvóty** - Maximálny počet zdrojov na región
+1. **Kvóty na úrovni predplatného** - Maximálne zdroje na predplatné
+2. **Regionálne kvóty** - Maximálne zdroje na región
 3. **Limity špecifické pre zdroje** - Limity pre jednotlivé typy zdrojov
 4. **Limity úrovne služieb** - Limity na základe vášho plánu služieb
 
 ### Bežné kvóty zdrojov
 ```bash
-# Check current quota usage
+# Skontrolujte aktuálne využitie kvót
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Skontrolujte konkrétne kvóty zdrojov
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
 ## Kontroly kapacity pred nasadením
 
-### Automatizovaný skript na overenie kapacity
+### Automatizovaný validačný skript kapacity
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Overiť kapacitu Azure pred nasadením
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Funkcia na kontrolu využitia kvót
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,10 +118,10 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Skontrolovať rôzne kvóty zdrojov
+check_quota "compute" 4      # Potrebné 4 vCPU
+check_quota "storage" 2      # Potrebné 2 úložné účty
+check_quota "network" 1      # Potrebná 1 virtuálna sieť
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
@@ -124,14 +131,14 @@ echo "✅ Capacity check completed successfully!"
 
 #### Kapacita služby App Service
 ```bash
-# Check App Service Plan availability
+# Skontrolujte dostupnosť plánu služby aplikácie
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Skontrolujte dostupné SKU v regióne
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Navrhnite alternatívne regióny
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Skontrolujte aktuálne využitie
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Využitie
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Kapacita databázy
 ```bash
-# Check PostgreSQL capacity
+# Skontrolujte kapacitu PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Skontrolujte, či je SKU dostupné
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Zobraziť dostupné SKU
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Skontrolujte kapacitu Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Skontrolujte dostupnosť regiónu
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Skontrolujte, či je podporovaný serverless (ak je to potrebné)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -211,15 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-#### Kapacita aplikácií v kontajneroch
+#### Kapacita aplikácií kontajnerov
 ```bash
-# Check Container Apps capacity
+# Skontrolujte kapacitu aplikácií kontajnera
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Skontrolujte, či sú aplikácie kontajnera dostupné v regióne
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Skontrolujte aktuálny počet prostredí
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Aplikácie kontajnera majú limit 15 prostredí na región
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Zobraziť dostupné regióny
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,11 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Overenie regionálnej dostupnosti
+## 📍 Validácia regionálnej dostupnosti
 
 ### Dostupnosť služieb podľa regiónu
 ```bash
-# Check service availability across regions
+# Skontrolujte dostupnosť služieb v rôznych regiónoch
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Skontrolujte všetky služby
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Odporúčania pre výber regiónu
 ```bash
-# Recommend optimal regions based on requirements
+# Odporučiť optimálne regióny na základe požiadaviek
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "nízke náklady" | "výkon" | "súlad"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Odhad nákladov na zdroje
 ```bash
-# Estimate deployment costs
+# Odhadnúť náklady na nasadenie
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Vytvoriť dočasnú skupinu zdrojov na odhad
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Nasadiť infraštruktúru v režime validácie
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Vyčistiť dočasnú skupinu zdrojov
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -354,12 +361,12 @@ estimate_costs() {
 }
 ```
 
-### Odporúčania na optimalizáciu SKU
+### Odporúčania pre optimalizáciu SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# Odporučiť optimálne SKU na základe požiadaviek
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dev" | "staging" | "production"
+    local workload_type=$2  # "dev" | "staging" | "produkcia"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -424,27 +431,27 @@ recommend_sku() {
 ### Komplexný skript pred nasadením
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Kompletná validácia pred nasadením
 
 set -e
 
-# Configuration
+# Konfigurácia
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Farby pre výstup
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Žiadna farba
 
-# Logging functions
+# Funkcie pre logovanie
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Načítanie konfigurácie
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Kontrola 1: Autentifikácia
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Kontrola 2: Regionálna dostupnosť
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Kontrola 3: Validácia kvót
 log_info "Checking quota availability..."
 
-# vCPU quota
+# Kvóta vCPU
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Kvóta úložného účtu
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Kontrola 4: Dostupnosť služby
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Kontrola 5: Kapacita siete
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Kontrola 6: Validácia názvov zdrojov
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Kontrola 7: Odhad nákladov
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Kontrola 8: Validácia šablóny
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Záverečné zhrnutie
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### Monitorovanie kapacity v reálnom čase
 ```bash
-# Monitor capacity during deployment
+# Monitorujte kapacitu počas nasadenia
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Skontrolujte stav nasadenia
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Skontrolujte aktuálne využitie zdrojov
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -711,22 +718,22 @@ hooks:
 
 ## Najlepšie postupy
 
-1. **Vždy vykonávajte kontroly kapacity** pred nasadením do nových regiónov
-2. **Pravidelne monitorujte využitie kvót**, aby ste sa vyhli prekvapeniam
+1. **Vždy vykonajte kontroly kapacity** pred nasadením do nových regiónov
+2. **Pravidelne monitorujte využívanie kvót**, aby ste sa vyhli prekvapeniam
 3. **Plánujte rast** kontrolou budúcich potrieb kapacity
-4. **Používajte nástroje na odhad nákladov**, aby ste sa vyhli nečakaným výdavkom
+4. **Používajte nástroje na odhad nákladov**, aby ste sa vyhli neočakávaným výdavkom
 5. **Dokumentujte požiadavky na kapacitu** pre váš tím
-6. **Automatizujte overovanie kapacity** v CI/CD pipeline
-7. **Zohľadnite požiadavky na kapacitu pre regionálny failover**
+6. **Automatizujte validáciu kapacity** v CI/CD pipeline
+7. **Zvážte požiadavky na kapacitu pre regionálny failover**
 
 ## Ďalšie kroky
 
-- [Sprievodca výberom SKU](sku-selection.md) - Vyberte optimálne úrovne služieb
+- [Sprievodca výberom SKU](sku-selection.md) - Výber optimálnych úrovní služieb
 - [Kontroly pred nasadením](preflight-checks.md) - Automatizované validačné skripty
-- [Pomôcka](../../resources/cheat-sheet.md) - Rýchle referenčné príkazy
-- [Slovník pojmov](../../resources/glossary.md) - Termíny a definície
+- [Cheat Sheet](../../resources/cheat-sheet.md) - Rýchle referenčné príkazy
+- [Slovník](../../resources/glossary.md) - Termíny a definície
 
-## Dodatočné zdroje
+## Ďalšie zdroje
 
 - [Limity predplatného Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Kalkulačka cien Azure](https://azure.microsoft.com/pricing/calculator/)
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

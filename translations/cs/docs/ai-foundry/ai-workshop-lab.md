@@ -1,36 +1,36 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "22e9deee2d82e70fc841c60f97627916",
-  "translation_date": "2025-09-23T14:40:33+00:00",
+  "original_hash": "8b26783231714a00efafee3aca8b233c",
+  "translation_date": "2025-11-23T11:15:08+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "cs"
 }
 -->
-# AI Workshop Lab: Jak vytvořit AI řešení připravené pro AZD nasazení
+# AI Workshop Lab: Jak udělat vaše AI řešení nasaditelná pomocí AZD
 
-**Navigace kapitol:**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 2 - AI-první vývoj
+**Navigace kapitolami:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
 - **⬅️ Předchozí**: [Nasazení AI modelu](ai-model-deployment.md)
-- **➡️ Další**: [Nejlepší praktiky pro produkční AI](production-ai-practices.md)
+- **➡️ Další**: [Nejlepší postupy pro produkční AI](production-ai-practices.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
 
 ## Přehled workshopu
 
-Tento praktický workshop provede vývojáře procesem převzetí existující šablony AI a jejího nasazení pomocí Azure Developer CLI (AZD). Naučíte se základní vzory pro produkční nasazení AI pomocí služeb Azure AI Foundry.
+Tento praktický workshop provede vývojáře procesem převzetí existující šablony AI a jejího nasazení pomocí Azure Developer CLI (AZD). Naučíte se základní vzory pro nasazení AI v produkčním prostředí s využitím služeb Microsoft Foundry.
 
-**Délka:** 2-3 hodiny  
-**Úroveň:** Středně pokročilý  
-**Předpoklady:** Základní znalosti Azure, povědomí o AI/ML konceptech
+**Doba trvání:** 2-3 hodiny  
+**Úroveň:** Středně pokročilí  
+**Předpoklady:** Základní znalosti Azure, povědomí o konceptech AI/ML
 
 ## 🎓 Cíle učení
 
 Na konci tohoto workshopu budete schopni:
-- ✅ Převést existující AI aplikaci na použití AZD šablon
-- ✅ Konfigurovat služby Azure AI Foundry pomocí AZD
-- ✅ Implementovat bezpečnou správu přihlašovacích údajů pro AI služby
-- ✅ Nasadit produkčně připravené AI aplikace s monitoringem
+- ✅ Převést existující AI aplikaci na šablony AZD
+- ✅ Konfigurovat služby Microsoft Foundry pomocí AZD
+- ✅ Implementovat bezpečné řízení přístupových údajů pro AI služby
+- ✅ Nasadit produkčně připravené AI aplikace s monitorováním
 - ✅ Řešit běžné problémy při nasazení AI
 
 ## Předpoklady
@@ -42,7 +42,7 @@ Na konci tohoto workshopu budete schopni:
 - Editor kódu (doporučeno VS Code)
 
 ### Azure zdroje
-- Azure předplatné s přístupem přispěvatele
+- Předplatné Azure s přístupem přispěvatele
 - Přístup ke službám Azure OpenAI (nebo možnost požádat o přístup)
 - Oprávnění k vytváření skupin zdrojů
 
@@ -57,13 +57,13 @@ Na konci tohoto workshopu budete schopni:
 
 1. **Ověřte instalaci nástrojů:**
 ```bash
-# Check AZD installation
+# Zkontrolujte instalaci AZD
 azd version
 
-# Check Azure CLI
+# Zkontrolujte Azure CLI
 az --version
 
-# Login to Azure
+# Přihlaste se do Azure
 az login
 azd auth login
 ```
@@ -76,9 +76,9 @@ cd azure-search-openai-demo
 
 ## Modul 1: Porozumění struktuře AZD pro AI aplikace
 
-### Anatomie AI šablony AZD
+### Anatomie šablony AZD připravené pro AI
 
-Prozkoumejte klíčové soubory v šabloně připravené pro AI:
+Prozkoumejte klíčové soubory v šabloně AZD připravené pro AI:
 
 ```
 azure-search-openai-demo/
@@ -107,7 +107,7 @@ cat azure.yaml
 - Mapování proměnných prostředí
 - Konfigurace hostitele
 
-2. **Projděte hlavní infrastrukturu v main.bicep:**
+2. **Projděte si hlavní infrastrukturu main.bicep:**
 ```bash
 cat infra/main.bicep
 ```
@@ -115,15 +115,15 @@ cat infra/main.bicep
 **Klíčové AI vzory k identifikaci:**
 - Zajištění služby Azure OpenAI
 - Integrace Cognitive Search
-- Bezpečná správa klíčů
+- Bezpečné řízení klíčů
 - Konfigurace síťové bezpečnosti
 
-### **Diskusní bod:** Proč na těchto vzorech záleží u AI
+### **Diskusní bod:** Proč na těchto vzorech záleží pro AI
 
-- **Závislosti služeb**: AI aplikace často vyžadují koordinaci více služeb
-- **Bezpečnost**: API klíče a koncové body potřebují bezpečnou správu
+- **Závislosti služeb**: AI aplikace často vyžadují více koordinovaných služeb
+- **Bezpečnost**: API klíče a koncové body potřebují bezpečné řízení
 - **Škálovatelnost**: AI pracovní zátěže mají specifické požadavky na škálování
-- **Správa nákladů**: AI služby mohou být drahé, pokud nejsou správně nakonfigurovány
+- **Řízení nákladů**: AI služby mohou být drahé, pokud nejsou správně nakonfigurovány
 
 ## Modul 2: Nasazení vaší první AI aplikace
 
@@ -136,10 +136,10 @@ azd env new myai-workshop
 
 2. **Nastavte požadované parametry:**
 ```bash
-# Set your preferred Azure region
+# Nastavte preferovaný region Azure
 azd env set AZURE_LOCATION eastus
 
-# Optional: Set specific OpenAI model
+# Volitelné: Nastavte konkrétní model OpenAI
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
@@ -155,10 +155,10 @@ azd up
 - ✅ Vytváří službu Cognitive Search
 - ✅ Nastavuje App Service pro webovou aplikaci
 - ✅ Konfiguruje síť a bezpečnost
-- ✅ Nasazuje aplikační kód
-- ✅ Nastavuje monitoring a logování
+- ✅ Nasazuje kód aplikace
+- ✅ Nastavuje monitorování a logování
 
-2. **Sledujte průběh nasazení** a zaznamenejte vytvářené zdroje.
+2. **Sledujte průběh nasazení** a zaznamenejte si vytvářené zdroje.
 
 ### Krok 2.3: Ověření nasazení
 
@@ -177,25 +177,25 @@ azd show --output json | grep "webAppUrl"
    - Vyzkoušejte ukázkové dotazy
    - Ověřte, že AI odpovědi fungují
 
-### **Cvičení 2.1: Praxe řešení problémů**
+### **Cvičení 2.1: Procvičování odstraňování problémů**
 
-**Scénář**: Vaše nasazení bylo úspěšné, ale AI nereaguje.
+**Scénář**: Vaše nasazení bylo úspěšné, ale AI neodpovídá.
 
 **Běžné problémy ke kontrole:**
-1. **API klíče OpenAI**: Ověřte, že jsou správně nastaveny
+1. **API klíče OpenAI**: Ověřte, zda jsou správně nastaveny
 2. **Dostupnost modelu**: Zkontrolujte, zda váš region podporuje model
 3. **Síťová konektivita**: Ujistěte se, že služby mohou komunikovat
 4. **Oprávnění RBAC**: Ověřte, že aplikace má přístup k OpenAI
 
 **Příkazy pro ladění:**
 ```bash
-# Check environment variables
+# Zkontrolujte proměnné prostředí
 azd env get-values
 
-# View deployment logs
+# Zobrazit protokoly nasazení
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Check OpenAI deployment status
+# Zkontrolujte stav nasazení OpenAI
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
@@ -205,10 +205,10 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 
 1. **Aktualizujte model OpenAI:**
 ```bash
-# Change to a different model (if available in your region)
+# Změňte na jiný model (pokud je dostupný ve vašem regionu)
 azd env set AZURE_OPENAI_MODEL gpt-4
 
-# Redeploy with the new configuration
+# Znovu nasadit s novou konfigurací
 azd deploy
 ```
 
@@ -233,7 +233,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Krok 3.2: Konfigurace specifické pro prostředí
 
-**Nejlepší praxe**: Různé konfigurace pro vývoj vs produkci.
+**Nejlepší praxe**: Různé konfigurace pro vývoj a produkci.
 
 1. **Vytvořte produkční prostředí:**
 ```bash
@@ -242,11 +242,11 @@ azd env new myai-production
 
 2. **Nastavte parametry specifické pro produkci:**
 ```bash
-# Production typically uses higher SKUs
+# Produkce obvykle používá vyšší SKU
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# Enable additional security features
+# Povolit další bezpečnostní funkce
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
@@ -255,32 +255,32 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Výzva**: Nakonfigurujte šablonu pro nákladově efektivní vývoj.
 
 **Úkoly:**
-1. Identifikujte, které SKU lze nastavit na bezplatné/základní úrovně
+1. Identifikujte, které SKUs lze nastavit na bezplatné/základní úrovně
 2. Nakonfigurujte proměnné prostředí pro minimální náklady
-3. Nasazení a porovnání nákladů s produkční konfigurací
+3. Nasazujte a porovnejte náklady s produkční konfigurací
 
-**Tipy na řešení:**
+**Nápověda k řešení:**
 - Použijte úroveň F0 (bezplatná) pro Cognitive Services, pokud je to možné
 - Použijte základní úroveň pro Search Service ve vývoji
 - Zvažte použití plánu Consumption pro Functions
 
-## Modul 4: Bezpečnost a nejlepší praktiky pro produkci
+## Modul 4: Bezpečnost a nejlepší praxe pro produkci
 
-### Krok 4.1: Bezpečná správa přihlašovacích údajů
+### Krok 4.1: Bezpečné řízení přístupových údajů
 
 **Současná výzva**: Mnoho AI aplikací tvrdě kóduje API klíče nebo používá nezabezpečené úložiště.
 
 **Řešení AZD**: Integrace Managed Identity + Key Vault.
 
-1. **Projděte bezpečnostní konfiguraci ve vaší šabloně:**
+1. **Projděte si bezpečnostní konfiguraci ve vaší šabloně:**
 ```bash
-# Look for Key Vault and Managed Identity configuration
+# Hledejte konfiguraci Key Vault a Managed Identity
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
 2. **Ověřte, že Managed Identity funguje:**
 ```bash
-# Check if the web app has the correct identity configuration
+# Zkontrolujte, zda má webová aplikace správnou konfiguraci identity
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
@@ -288,7 +288,7 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 1. **Povolte privátní koncové body** (pokud ještě nejsou nakonfigurovány):
 
-Přidejte do šablony bicep:
+Přidejte do vaší šablony bicep:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -311,16 +311,16 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Krok 4.3: Monitoring a pozorovatelnost
+### Krok 4.3: Monitorování a pozorovatelnost
 
-1. **Konfigurujte Application Insights:**
+1. **Nakonfigurujte Application Insights:**
 ```bash
-# Application Insights should be automatically configured
-# Check the configuration:
+# Aplikace Insights by měla být automaticky nakonfigurována
+# Zkontrolujte konfiguraci:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Nastavte monitoring specifický pro AI:**
+2. **Nastavte monitorování specifické pro AI:**
 
 Přidejte vlastní metriky pro AI operace:
 ```bicep
@@ -345,25 +345,25 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Cvičení 4.1: Bezpečnostní audit**
 
-**Úkol**: Projděte své nasazení z hlediska bezpečnostních nejlepších praktik.
+**Úkol**: Projděte si své nasazení z hlediska bezpečnostních nejlepších praktik.
 
 **Kontrolní seznam:**
-- [ ] Žádné tvrdě kódované tajné klíče v kódu nebo konfiguraci
+- [ ] Žádné tvrdě kódované tajné údaje v kódu nebo konfiguraci
 - [ ] Managed Identity použita pro autentizaci mezi službami
 - [ ] Key Vault ukládá citlivou konfiguraci
-- [ ] Síťový přístup je správně omezen
-- [ ] Monitoring a logování jsou povoleny
+- [ ] Přístup k síti je správně omezen
+- [ ] Monitorování a logování jsou povoleny
 
-## Modul 5: Převod vlastní AI aplikace
+## Modul 5: Převod vaší vlastní AI aplikace
 
-### Krok 5.1: Hodnotící pracovní list
+### Krok 5.1: Hodnotící dotazník
 
 **Před převodem vaší aplikace** odpovězte na tyto otázky:
 
 1. **Architektura aplikace:**
    - Jaké AI služby vaše aplikace používá?
    - Jaké výpočetní zdroje potřebuje?
-   - Vyžaduje databázi?
+   - Potřebuje databázi?
    - Jaké jsou závislosti mezi službami?
 
 2. **Požadavky na bezpečnost:**
@@ -372,11 +372,11 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Potřebujete privátní síť?
 
 3. **Požadavky na škálování:**
-   - Jaké je vaše očekávané zatížení?
+   - Jaké zatížení očekáváte?
    - Potřebujete automatické škálování?
    - Existují regionální požadavky?
 
-### Krok 5.2: Vytvořte svou AZD šablonu
+### Krok 5.2: Vytvořte svou šablonu AZD
 
 **Postupujte podle tohoto vzoru pro převod vaší aplikace:**
 
@@ -385,7 +385,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Initialize AZD template
+# Inicializovat šablonu AZD
 azd init --template minimal
 ```
 
@@ -412,7 +412,7 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Vytvořte infrastrukturu šablon:**
+3. **Vytvořte šablony infrastruktury:**
 
 **infra/main.bicep** - Hlavní šablona:
 ```bicep
@@ -458,12 +458,12 @@ output name string = openAIAccount.name
 
 ### **Cvičení 5.1: Výzva k vytvoření šablony**
 
-**Výzva**: Vytvořte AZD šablonu pro AI aplikaci na zpracování dokumentů.
+**Výzva**: Vytvořte šablonu AZD pro AI aplikaci na zpracování dokumentů.
 
 **Požadavky:**
 - Azure OpenAI pro analýzu obsahu
 - Document Intelligence pro OCR
-- Úložiště pro nahrávání dokumentů
+- Účet úložiště pro nahrávání dokumentů
 - Function App pro zpracování logiky
 - Webová aplikace pro uživatelské rozhraní
 
@@ -480,10 +480,10 @@ output name string = openAIAccount.name
 **Příznaky:** Nasazení selže s chybou kvóty
 **Řešení:**
 ```bash
-# Check current quotas
+# Zkontrolujte aktuální kvóty
 az cognitiveservices usage list --location eastus
 
-# Request quota increase or try different region
+# Požádejte o zvýšení kvóty nebo zkuste jiný region
 azd env set AZURE_LOCATION westus2
 azd up
 ```
@@ -492,22 +492,22 @@ azd up
 **Příznaky:** AI odpovědi selhávají nebo chyby při nasazení modelu
 **Řešení:**
 ```bash
-# Check model availability by region
+# Zkontrolujte dostupnost modelu podle regionu
 az cognitiveservices model list --location eastus
 
-# Update to available model
+# Aktualizujte na dostupný model
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
-#### Problém 3: Problémy s oprávněním
+#### Problém 3: Problémy s oprávněními
 **Příznaky:** Chyby 403 Forbidden při volání AI služeb
 **Řešení:**
 ```bash
-# Check role assignments
+# Zkontrolujte přiřazení rolí
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Add missing roles
+# Přidejte chybějící role
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -519,44 +519,44 @@ az role assignment create \
 #### Problém 4: Pomalé AI odpovědi
 **Kroky vyšetřování:**
 1. Zkontrolujte metriky výkonu v Application Insights
-2. Projděte metriky služby OpenAI v Azure portálu
+2. Projděte si metriky služby OpenAI v Azure portálu
 3. Ověřte síťovou konektivitu a latenci
 
 **Řešení:**
 - Implementujte cache pro běžné dotazy
 - Použijte vhodný model OpenAI pro váš případ použití
-- Zvažte čtecí repliky pro scénáře s vysokým zatížením
+- Zvažte čtecí repliky pro scénáře s vysokou zátěží
 
 ### **Cvičení 6.1: Výzva k ladění**
 
 **Scénář**: Vaše nasazení bylo úspěšné, ale aplikace vrací chyby 500.
 
-**Úkoly ladění:**
+**Úkoly pro ladění:**
 1. Zkontrolujte logy aplikace
 2. Ověřte konektivitu služeb
 3. Otestujte autentizaci
-4. Projděte konfiguraci
+4. Projděte si konfiguraci
 
 **Nástroje k použití:**
 - `azd show` pro přehled nasazení
 - Azure portál pro podrobné logy služeb
 - Application Insights pro telemetrii aplikace
 
-## Modul 7: Monitoring a optimalizace
+## Modul 7: Monitorování a optimalizace
 
-### Krok 7.1: Nastavení komplexního monitoringu
+### Krok 7.1: Nastavení komplexního monitorování
 
 1. **Vytvořte vlastní panely:**
 
 Přejděte do Azure portálu a vytvořte panel s:
-- Počtem požadavků OpenAI a latencí
-- Mírou chyb aplikace
+- Počtem požadavků a latencí OpenAI
+- Chybovostí aplikace
 - Využitím zdrojů
 - Sledováním nákladů
 
 2. **Nastavte upozornění:**
 ```bash
-# Alert for high error rate
+# Upozornění na vysokou míru chyb
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -569,7 +569,7 @@ az monitor metrics alert create \
 
 1. **Analyzujte aktuální náklady:**
 ```bash
-# Use Azure CLI to get cost data
+# Použijte Azure CLI k získání údajů o nákladech
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
@@ -584,14 +584,14 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 **Úkol**: Optimalizujte svou AI aplikaci z hlediska výkonu i nákladů.
 
 **Metriky ke zlepšení:**
-- Snížit průměrnou dobu odezvy o 20 %
+- Snížit průměrnou dobu odpovědi o 20 %
 - Snížit měsíční náklady o 15 %
 - Udržet dostupnost 99,9 %
 
 **Strategie k vyzkoušení:**
 - Implementujte cache odpovědí
 - Optimalizujte prompty pro efektivitu tokenů
-- Použijte vhodné SKU pro výpočetní zdroje
+- Použijte vhodné SKUs pro výpočetní zdroje
 - Nastavte správné automatické škálování
 
 ## Závěrečná výzva: Implementace od začátku do konce
@@ -603,23 +603,23 @@ Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznick�
 **Funkční požadavky:**
 - Webové rozhraní pro interakce se zákazníky
 - Integrace s Azure OpenAI pro odpovědi
-- Možnost vyhledávání dokumentů pomocí Cognitive Search
-- Integrace s existující databází zákazníků
+- Možnost vyhledávání v dokumentech pomocí Cognitive Search
+- Integrace s existující zákaznickou databází
 - Podpora více jazyků
 
 **Nefunkční požadavky:**
 - Zvládnout 1000 současných uživatelů
 - SLA dostupnosti 99,9 %
 - Shoda se SOC 2
-- Náklady pod $500/měsíc
-- Nasazení do více prostředí (vývoj, staging, produkce)
+- Náklady pod 500 USD/měsíc
+- Nasazení do více prostředí (vývoj, testování, produkce)
 
 ### Kroky implementace
 
 1. **Navrhněte architekturu**
-2. **Vytvořte AZD šablonu**
+2. **Vytvořte šablonu AZD**
 3. **Implementujte bezpečnostní opatření**
-4. **Nastavte monitoring a upozornění**
+4. **Nastavte monitorování a upozornění**
 5. **Vytvořte nasazovací pipeline**
 6. **Zdokumentujte řešení**
 
@@ -635,8 +635,8 @@ Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznick�
 
 ### Dokumentace Microsoftu
 - [Dokumentace Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Dokumentace služby Azure OpenAI](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Dokumentace Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/)
+- [Dokumentace Azure OpenAI Service](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Dokumentace Microsoft Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Ukázkové šablony
 - [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
@@ -644,14 +644,11 @@ Vaším úkolem je vytvořit produkčně připravený AI chatbot pro zákaznick�
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Komunitní zdroje
-- [Discord Azure AI Foundry](https://discord.gg/microsoft-azure)
-- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
+- [Azure Developer CLI GitHub](https://
+Gratulujeme! Dokončili jste AI Workshop Lab. Nyní byste měli být schopni:
 
-## 🎓 Certifikát dokončení
-Gratulujeme! Dokončili jste workshop AI Lab. Nyní byste měli být schopni:
-
-- ✅ Převést existující AI aplikace na šablony AZD
+- ✅ Převést existující AI aplikace na AZD šablony
 - ✅ Nasadit AI aplikace připravené pro produkční prostředí
 - ✅ Implementovat nejlepší bezpečnostní postupy pro AI pracovní zátěže
 - ✅ Monitorovat a optimalizovat výkon AI aplikací
@@ -659,19 +656,19 @@ Gratulujeme! Dokončili jste workshop AI Lab. Nyní byste měli být schopni:
 
 ### Další kroky
 1. Použijte tyto vzory ve svých vlastních AI projektech
-2. Přispějte šablonami zpět do komunity
-3. Připojte se na Discord Azure AI Foundry pro průběžnou podporu
+2. Přispějte šablonami zpět komunitě
+3. Připojte se k Microsoft Foundry Discord pro průběžnou podporu
 4. Prozkoumejte pokročilá témata, jako jsou nasazení ve více regionech
 
 ---
 
-**Zpětná vazba k workshopu**: Pomozte nám zlepšit tento workshop sdílením svých zkušeností na [Azure AI Foundry Discord #Azure kanálu](https://discord.gg/microsoft-azure).
+**Zpětná vazba k workshopu**: Pomozte nám zlepšit tento workshop sdílením svých zkušeností na [Microsoft Foundry Discord #Azure kanálu](https://discord.gg/microsoft-azure).
 
 ---
 
-**Navigace kapitol:**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+**Navigace kapitolami:**
+- **📚 Domov kurzu**: [AZD Pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - AI-First Development
 - **⬅️ Předchozí**: [Nasazení AI modelu](ai-model-deployment.md)
 - **➡️ Další**: [Nejlepší postupy pro produkční AI](production-ai-practices.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../getting-started/configuration.md)
@@ -680,3 +677,7 @@ Gratulujeme! Dokončili jste workshop AI Lab. Nyní byste měli být schopni:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení**:  
+Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

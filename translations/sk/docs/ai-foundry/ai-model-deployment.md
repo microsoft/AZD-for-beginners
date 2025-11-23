@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T10:00:57+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-23T11:51:14+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sk"
 }
@@ -10,9 +10,9 @@ CO_OP_TRANSLATOR_METADATA:
 # Nasadenie AI modelov s Azure Developer CLI
 
 **Navigácia kapitol:**
-- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
-- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj zameraný na AI
-- **⬅️ Predchádzajúca**: [Integrácia Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj orientovaný na AI
+- **⬅️ Predchádzajúca**: [Integrácia Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Ďalšia**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../getting-started/configuration.md)
 
@@ -133,10 +133,10 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Premenné prostredia
 
-Konfigurujte prostredie vašej aplikácie:
+Nakonfigurujte prostredie vašej aplikácie:
 
 ```bash
-# .env configuration
+# Konfigurácia .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -216,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kontrola verzií
 
-Sledujte verzie modelov vo vašej konfigurácii AZD:
+Sledujte verzie modelov vo vašej AZD konfigurácii:
 
 ```json
 {
@@ -240,7 +240,7 @@ Použite AZD hooks na aktualizácie modelov:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# háky/predeploy.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -277,10 +277,10 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Plánovanie kapacity
 
-Vypočítajte požadovanú kapacitu na základe vzorcov používania:
+Vypočítajte potrebnú kapacitu na základe vzorcov používania:
 
 ```python
-# Capacity calculation example
+# Príklad výpočtu kapacity
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Príklad použitia
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -304,7 +304,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Konfigurácia automatického škálovania
 
-Konfigurujte automatické škálovanie pre Container Apps:
+Nakonfigurujte automatické škálovanie pre Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -376,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integrácia Application Insights
 
-Konfigurujte monitorovanie pre AI pracovné záťaže:
+Nakonfigurujte monitorovanie pre AI pracovné záťaže:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Sledujte metriky špecifické pre AI:
 
 ```python
-# Custom telemetry for AI models
+# Vlastná telemetria pre AI modely
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementujte monitorovanie zdravia AI služieb:
 
 ```python
-# Health check endpoints
+# Koncové body kontroly zdravia
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Testovať pripojenie OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,9 +482,9 @@ async def check_ai_models():
 
 ## Ďalšie kroky
 
-1. **Preštudujte si [Príručku integrácie Azure AI Foundry](azure-ai-foundry-integration.md)** pre vzory integrácie služieb
+1. **Preštudujte si [Príručku integrácie Microsoft Foundry](microsoft-foundry-integration.md)** pre vzory integrácie služieb
 2. **Dokončite [AI Workshop Lab](ai-workshop-lab.md)** pre praktické skúsenosti
-3. **Implementujte [Produkčné AI postupy](production-ai-practices.md)** pre podnikové nasadenia
+3. **Implementujte [Produkčné AI praktiky](production-ai-practices.md)** pre podnikové nasadenia
 4. **Preskúmajte [Príručku riešenia problémov s AI](../troubleshooting/ai-troubleshooting.md)** pre bežné problémy
 
 ## Zdroje
@@ -497,13 +497,15 @@ async def check_ai_models():
 ---
 
 **Navigácia kapitol:**
-- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
-- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj zameraný na AI
-- **⬅️ Predchádzajúca**: [Integrácia Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj orientovaný na AI
+- **⬅️ Predchádzajúca**: [Integrácia Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Ďalšia**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../getting-started/configuration.md)
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

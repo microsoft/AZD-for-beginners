@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T09:21:30+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-23T10:33:00+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "hu"
 }
@@ -10,30 +10,30 @@ CO_OP_TRANSLATOR_METADATA:
 # Hibakeresési útmutató AZD telepítésekhez
 
 **Fejezet navigáció:**
-- **📚 Kurzus kezdőlapja**: [AZD kezdőknek](../../README.md)
+- **📚 Tanfolyam kezdőlap**: [AZD Kezdőknek](../../README.md)
 - **📖 Aktuális fejezet**: 7. fejezet - Hibakeresés és hibaelhárítás
 - **⬅️ Előző**: [Gyakori problémák](common-issues.md)
 - **➡️ Következő**: [AI-specifikus hibakeresés](ai-troubleshooting.md)
-- **🚀 Következő fejezet**: [8. fejezet: Produkciós és vállalati minták](../ai-foundry/production-ai-practices.md)
+- **🚀 Következő fejezet**: [8. fejezet: Gyártási és vállalati minták](../microsoft-foundry/production-ai-practices.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató fejlett hibakeresési stratégiákat, eszközöket és technikákat mutat be az Azure Developer CLI telepítések összetett problémáinak diagnosztizálásához és megoldásához. Ismerje meg a rendszerezett hibakeresési módszereket, naplóelemzési technikákat, teljesítményprofilozást és fejlett diagnosztikai eszközöket, hogy hatékonyan kezelje a telepítési és futási problémákat.
+Ez az átfogó útmutató fejlett hibakeresési stratégiákat, eszközöket és technikákat mutat be az Azure Developer CLI telepítésekkel kapcsolatos összetett problémák diagnosztizálására és megoldására. Ismerje meg a szisztematikus hibakeresési módszertanokat, a naplóelemzési technikákat, a teljesítményprofilozást és a fejlett diagnosztikai eszközöket, hogy hatékonyan oldhassa meg a telepítési és futásidejű problémákat.
 
 ## Tanulási célok
 
-Az útmutató elvégzésével:
-- Elsajátítja az Azure Developer CLI problémák rendszerezett hibakeresési módszereit
-- Megérti a fejlett naplózási konfigurációt és naplóelemzési technikákat
-- Teljesítményprofilozási és monitorozási stratégiákat valósít meg
-- Használja az Azure diagnosztikai eszközeit és szolgáltatásait összetett problémák megoldására
-- Alkalmaz hálózati hibakeresési és biztonsági hibaelhárítási technikákat
-- Konfigurálja az átfogó monitorozást és riasztásokat a proaktív problémadetektálás érdekében
+Az útmutató elvégzése után képes lesz:
+- Mesteri szinten alkalmazni a szisztematikus hibakeresési módszertanokat az Azure Developer CLI problémák megoldására
+- Megérteni a fejlett naplózási konfigurációkat és naplóelemzési technikákat
+- Teljesítményprofilozási és monitorozási stratégiákat alkalmazni
+- Az Azure diagnosztikai eszközeit és szolgáltatásait használni az összetett problémák megoldására
+- Hálózati hibakeresési és biztonsági hibaelhárítási technikákat alkalmazni
+- Átfogó monitorozást és riasztásokat konfigurálni a proaktív problémák észlelésére
 
 ## Tanulási eredmények
 
 Az útmutató elvégzése után képes lesz:
-- Alkalmazni a TRIAGE módszertant az összetett telepítési problémák rendszerezett hibakereséséhez
+- Alkalmazni a TRIAGE módszertant az összetett telepítési problémák szisztematikus hibakeresésére
 - Konfigurálni és elemezni az átfogó naplózási és nyomkövetési információkat
 - Hatékonyan használni az Azure Monitor, Application Insights és diagnosztikai eszközöket
 - Önállóan hibakeresni hálózati kapcsolódási, hitelesítési és jogosultsági problémákat
@@ -44,36 +44,36 @@ Az útmutató elvégzése után képes lesz:
 
 ### A TRIAGE megközelítés
 - **T**ime: Mikor kezdődött a probléma?
-- **R**eproduce: Meg tudja-e következetesen ismételni?
+- **R**eproduce: Meg lehet-e következetesen ismételni?
 - **I**solate: Melyik komponens hibás?
 - **A**nalyze: Mit mondanak a naplók?
-- **G**ather: Gyűjtsön össze minden releváns információt
+- **G**ather: Gyűjts össze minden releváns információt
 - **E**scalate: Mikor kell további segítséget kérni?
 
 ## Hibakeresési mód engedélyezése
 
 ### Környezeti változók
 ```bash
-# Enable comprehensive debugging
+# Engedélyezze az átfogó hibakeresést
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLI hibakeresés
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Tiltsa le a telemetriát a tisztább kimenet érdekében
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Hibakeresési konfiguráció
 ```bash
-# Set debug configuration globally
+# Állítsa be a hibakeresési konfigurációt globálisan
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Engedélyezze a nyomkövetési naplózást
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Strukturált naplóelemzés
 ```bash
-# Filter logs by level
+# Szűrje a naplókat szint szerint
 azd logs --level error --since 1h
 
-# Filter by service
+# Szűrés szolgáltatás szerint
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Naplók exportálása elemzéshez
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# JSON naplók elemzése jq-val
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Naplókorreláció
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Naplófájlok korrelálása szolgáltatások között
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Keresés az összes szolgáltatásban
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Keresés Azure naplókban
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph lekérdezések
 ```bash
-# Query resources by tags
+# Erőforrások lekérdezése címkék alapján
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Sikertelen telepítések keresése
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Az erőforrások állapotának ellenőrzése
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Hálózati hibakeresés
 ```bash
-# Test connectivity between services
+# Tesztelje a szolgáltatások közötti kapcsolatot
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Használat
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Konténer hibakeresés
 ```bash
-# Debug container app issues
+# Hibakeresés a konténer alkalmazás problémáival kapcsolatban
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Adatbázis-kapcsolat hibakeresés
 ```bash
-# Debug database connectivity
+# Hibakeresés az adatbázis-kapcsolatban
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### Alkalmazás teljesítményfigyelés
 ```bash
-# Enable Application Insights debugging
+# Engedélyezze az Application Insights hibakeresést
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Egyedi teljesítményfigyelés
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Erőforrás-használat elemzése
 ```bash
-# Monitor resource usage
+# Figyelje az erőforrás-használatot
 monitor_resources() {
     local resource_group=$1
     
@@ -262,7 +262,7 @@ monitor_resources() {
 }
 ```
 
-## 🧪 Tesztelés és validálás
+## 🧪 Tesztelés és validáció
 
 ### Integrációs teszt hibakeresés
 ```bash
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Állítsa be a hibakeresési környezetet
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Szerezze meg a szolgáltatás végpontjait
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Tesztelje az egészségügyi végpontokat
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Futtassa a teszteket
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Futtassa az egyedi integrációs teszteket
 npm run test:integration
 ```
 
-### Terheléses tesztelés hibakereséshez
+### Terhelési tesztelés hibakereséshez
 ```bash
-# Simple load test to identify performance bottlenecks
+# Egyszerű terhelési teszt a teljesítmény szűk keresztmetszeteinek azonosítására
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Apache Bench használata (telepítés: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Kulcsfontosságú metrikák kinyerése
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Hibák ellenőrzése
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Bicep sablon hibakeresés
 ```bash
-# Validate Bicep templates with detailed output
+# Érvényesítse a Bicep sablonokat részletes kimenettel
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Szintaxis érvényesítés
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Lint érvényesítés
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Mi lenne, ha telepítés
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Hibakeresési sablon telepítés
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Erőforrás állapotának elemzése
 ```bash
-# Analyze resource states for inconsistencies
+# Elemezze az erőforrások állapotát az inkonzisztenciák miatt
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Sorolja fel az összes erőforrást az állapotukkal együtt
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Ellenőrizze a sikertelen erőforrásokat
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### Hitelesítési folyamat hibakeresés
 ```bash
-# Debug Azure authentication
+# Hibakeresés Azure hitelesítéshez
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # JWT token dekódolása (jq és base64 szükséges)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Hibakeresés Key Vault hozzáféréshez
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,16 +440,16 @@ debug_keyvault() {
 }
 ```
 
-### Hálózati biztonság hibakeresés
+### Hálózati biztonsági hibakeresés
 ```bash
-# Debug network security groups
+# Hibakeresés hálózati biztonsági csoportoknál
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Ellenőrizze a biztonsági szabályokat
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Node.js alkalmazás hibakeresés
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Express hibakeresési köztes szoftver
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Naplózza a kérés részleteit
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Felülírja a res.json-t a válaszok naplózásához
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Adatbázis-lekérdezés hibakeresés
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Adatbázis hibakeresési segédprogramok
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -521,10 +521,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 Vészhelyzeti hibakeresési eljárások
 
-### Produkciós probléma kezelése
+### Gyártási probléma kezelése
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Vészhelyzeti produkciós hibakeresés
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Váltás a megfelelő környezetre
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Kritikus információk gyűjtése
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Visszaállítási eljárások
 ```bash
-# Quick rollback script
+# Gyors visszaállítási szkript
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Környezet váltása
     azd env select "$environment"
     
-    # Rollback application
+    # Alkalmazás visszaállítása
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Visszaállítás ellenőrzése
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Kritikus végpontok tesztelése
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,30 +613,30 @@ quick_rollback() {
 
 ### Egyedi monitorozási irányítópult
 ```bash
-# Create Application Insights queries for debugging
+# Hozzon létre Application Insights lekérdezéseket hibakereséshez
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Lekérdezés hibákra
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Lekérdezés teljesítményproblémákra
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Lekérdezés függőségi hibákra
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Naplóaggregáció
+### Naplóösszesítés
 ```bash
-# Aggregate logs from multiple sources
+# Naplófájlok összesítése több forrásból
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -663,7 +663,7 @@ Hozzon létre egy `scripts/debug/` könyvtárat az alábbiakkal:
 - `health-check.sh` - Átfogó állapotellenőrzés
 - `performance-test.sh` - Automatizált teljesítménytesztelés
 - `log-analyzer.py` - Fejlett naplóelemzés
-- `resource-validator.sh` - Infrastruktúra validálás
+- `resource-validator.sh` - Infrastruktúra validáció
 
 ### Monitorozási integráció
 ```yaml
@@ -684,23 +684,23 @@ hooks:
 
 ## Legjobb gyakorlatok
 
-1. **Mindig engedélyezze a hibakeresési naplózást** nem produkciós környezetekben
+1. **Mindig engedélyezze a hibakeresési naplózást** nem éles környezetekben
 2. **Hozzon létre reprodukálható teszteseteket** a problémákhoz
 3. **Dokumentálja a hibakeresési eljárásokat** a csapat számára
 4. **Automatizálja az állapotellenőrzéseket** és a monitorozást
 5. **Tartsa naprakészen a hibakeresési eszközöket** az alkalmazás változásaival
-6. **Gyakorolja a hibakeresési eljárásokat** nem incidens időszakokban
+6. **Gyakorolja a hibakeresési eljárásokat** nem vészhelyzeti időszakokban
 
 ## Következő lépések
 
-- [Kapacitástervezés](../pre-deployment/capacity-planning.md) - Erőforrásigények megtervezése
+- [Kapacitástervezés](../pre-deployment/capacity-planning.md) - Erőforrásigények tervezése
 - [SKU kiválasztása](../pre-deployment/sku-selection.md) - Megfelelő szolgáltatási szintek kiválasztása
-- [Előzetes ellenőrzések](../pre-deployment/preflight-checks.md) - Telepítés előtti validálás
-- [Gyorsreferencia](../../resources/cheat-sheet.md) - Gyors parancsok áttekintése
+- [Előzetes ellenőrzések](../pre-deployment/preflight-checks.md) - Telepítés előtti validáció
+- [Gyorsreferencia](../../resources/cheat-sheet.md) - Gyors parancsreferencia
 
 ---
 
-**Ne feledje**: A jó hibakeresés rendszerezett, alapos és türelmes megközelítést igényel. Ezek az eszközök és technikák segítenek gyorsabban és hatékonyabban diagnosztizálni a problémákat.
+**Ne feledje**: A jó hibakeresés a szisztematikus, alapos és türelmes munkáról szól. Ezek az eszközök és technikák segítenek gyorsabban és hatékonyabban diagnosztizálni a problémákat.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
-**Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Felelősségi nyilatkozat**:  
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

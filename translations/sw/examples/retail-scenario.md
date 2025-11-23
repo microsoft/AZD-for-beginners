@@ -1,33 +1,145 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "616504abc1770bcde7a50c7f4ba008ac",
-  "translation_date": "2025-09-18T10:13:39+00:00",
+  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
+  "translation_date": "2025-11-23T09:37:30+00:00",
   "source_file": "examples/retail-scenario.md",
   "language_code": "sw"
 }
 -->
 # Suluhisho la Usaidizi wa Wateja wa Wakala Wengi - Hali ya Muuzaji
 
-**Sura ya 5: Suluhisho za AI za Wakala Wengi**  
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Kompyuta](../README.md)  
-- **📖 Sura ya Sasa**: [Sura ya 5: Suluhisho za AI za Wakala Wengi](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
-- **⬅️ Mahitaji ya Awali**: [Sura ya 2: Maendeleo ya AI-Kwanza](../docs/ai-foundry/azure-ai-foundry-integration.md)  
-- **➡️ Sura Inayofuata**: [Sura ya 6: Uthibitishaji Kabla ya Utekelezaji](../docs/pre-deployment/capacity-planning.md)  
-- **🚀 Violezo vya ARM**: [Kifurushi cha Utekelezaji](retail-multiagent-arm-template/README.md)  
+**Sura ya 5: Suluhisho za AI za Wakala Wengi**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Anayeanza](../README.md)
+- **📖 Sura ya Sasa**: [Sura ya 5: Suluhisho za AI za Wakala Wengi](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Mahitaji ya Awali**: [Sura ya 2: Maendeleo ya AI-Kwanza](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Sura Inayofuata**: [Sura ya 6: Uthibitishaji Kabla ya Utekelezaji](../docs/pre-deployment/capacity-planning.md)
+- **🚀 Violezo vya ARM**: [Pakiti ya Utekelezaji](retail-multiagent-arm-template/README.md)
+
+> **⚠️ MWONGOZO WA MUUNDO - SI UTEKELEZAJI UNAOFANYA KAZI**  
+> Hati hii inatoa **muundo wa kina wa usanifu** wa kujenga mfumo wa wakala wengi.  
+> **Kilichopo:** Kiolezo cha ARM kwa utekelezaji wa miundombinu (Azure OpenAI, AI Search, Container Apps, nk.)  
+> **Unachopaswa kujenga:** Msimbo wa wakala, mantiki ya usambazaji, UI ya mbele, mifumo ya data (inakadiriwa masaa 80-120)  
+>  
+> **Tumia hii kama:**
+> - ✅ Rejeleo la usanifu kwa mradi wako wa wakala wengi
+> - ✅ Mwongozo wa kujifunza mifumo ya muundo wa wakala wengi
+> - ✅ Kiolezo cha miundombinu ya kupeleka rasilimali za Azure
+> - ❌ SI programu inayoweza kuendeshwa moja kwa moja (inahitaji juhudi kubwa ya maendeleo)
 
 ## Muhtasari
 
-Hali hii inaelezea jinsi ya kujenga chatbot ya usaidizi wa wateja inayoweza kutumika katika uzalishaji kwa muuzaji anayehitaji uwezo wa AI wa hali ya juu ikiwa ni pamoja na usimamizi wa hesabu, usindikaji wa nyaraka, na mwingiliano wa akili na wateja.
+**Lengo la Kujifunza:** Kuelewa usanifu, maamuzi ya muundo, na mbinu ya utekelezaji ya kujenga chatbot ya usaidizi wa wateja inayotumia AI kwa muuzaji, ikiwa na uwezo wa hali ya juu wa AI ikiwa ni pamoja na usimamizi wa hesabu, usindikaji wa nyaraka, na mwingiliano wa akili na wateja.
+
+**Muda wa Kukamilisha:** Kusoma + Kuelewa (masaa 2-3) | Kujenga Utekelezaji Kamili (masaa 80-120)
+
+**Unachojifunza:**
+- Mifumo ya usanifu wa wakala wengi na kanuni za muundo
+- Mikakati ya utekelezaji wa Azure OpenAI katika maeneo mengi
+- Ujumuishaji wa AI Search na RAG (Retrieval-Augmented Generation)
+- Mfumo wa tathmini ya wakala na majaribio ya usalama
+- Masuala ya utekelezaji wa uzalishaji na uboreshaji wa gharama
 
 ## Malengo ya Usanifu
 
-Suluhisho la usaidizi wa wateja linahitaji:  
-- **Wakala maalum wengi** kwa mahitaji tofauti ya wateja  
-- **Utekelezaji wa mifano mingi** na upangaji sahihi wa uwezo  
-- **Ujumuishaji wa data wa nguvu** na AI Search na upakiaji wa faili  
-- **Ufuatiliaji wa kina** na uwezo wa tathmini  
-- **Usalama wa kiwango cha uzalishaji** na uthibitishaji wa timu nyekundu  
+**Mwelekeo wa Elimu:** Usanifu huu unaonyesha mifumo ya biashara kwa mifumo ya wakala wengi.
+
+### Mahitaji ya Mfumo (Kwa Utekelezaji Wako)
+
+Suluhisho la usaidizi wa wateja wa uzalishaji linahitaji:
+- **Wakala wengi maalum** kwa mahitaji tofauti ya wateja (Huduma kwa Wateja + Usimamizi wa Hesabu)
+- **Utekelezaji wa modeli nyingi** na mipango sahihi ya uwezo (GPT-4o, GPT-4o-mini, embeddings katika maeneo mbalimbali)
+- **Ujumuishaji wa data wa nguvu** na AI Search na upakiaji wa faili (tafutaji wa vector + usindikaji wa nyaraka)
+- **Ufuatiliaji wa kina** na uwezo wa tathmini (Application Insights + vipimo maalum)
+- **Usalama wa kiwango cha uzalishaji** na uthibitishaji wa timu nyekundu (uchunguzi wa udhaifu + tathmini ya wakala)
+
+### Kile Mwongozo Huu Unatoa
+
+✅ **Mifumo ya Usanifu** - Muundo uliothibitishwa kwa mifumo ya wakala wengi inayoweza kupanuka  
+✅ **Violezo vya Miundombinu** - Violezo vya ARM vinavyoweka huduma zote za Azure  
+✅ **Mifano ya Msimbo** - Utekelezaji wa rejeleo kwa vipengele muhimu  
+✅ **Mwongozo wa Usanidi** - Maelekezo ya hatua kwa hatua ya usanidi  
+✅ **Mbinu Bora** - Mikakati ya usalama, ufuatiliaji, uboreshaji wa gharama  
+
+❌ **Haijajumuishwa** - Programu kamili inayofanya kazi (inahitaji juhudi ya maendeleo)
+
+## 🗺️ Ramani ya Utekelezaji
+
+### Awamu ya 1: Soma Usanifu (masaa 2-3) - ANZA HAPA
+
+**Lengo:** Kuelewa muundo wa mfumo na mwingiliano wa vipengele
+
+- [ ] Soma hati hii yote
+- [ ] Pitia mchoro wa usanifu na uhusiano wa vipengele
+- [ ] Elewa mifumo ya wakala wengi na maamuzi ya muundo
+- [ ] Soma mifano ya msimbo kwa zana za wakala na usambazaji
+- [ ] Pitia makadirio ya gharama na mwongozo wa mipango ya uwezo
+
+**Matokeo:** Uelewa wazi wa unachohitaji kujenga
+
+### Awamu ya 2: Weka Miundombinu (dakika 30-45)
+
+**Lengo:** Kutoa rasilimali za Azure kwa kutumia kiolezo cha ARM
+
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup -m standard
+```
+
+**Kinachowekwa:**
+- ✅ Azure OpenAI (maeneo 3: GPT-4o, GPT-4o-mini, embeddings)
+- ✅ Huduma ya AI Search (tupu, inahitaji usanidi wa index)
+- ✅ Mazingira ya Container Apps (picha za placeholder)
+- ✅ Akaunti za uhifadhi, Cosmos DB, Key Vault
+- ✅ Ufuatiliaji wa Application Insights
+
+**Kinachokosekana:**
+- ❌ Msimbo wa utekelezaji wa wakala
+- ❌ Mantiki ya usambazaji
+- ❌ UI ya mbele
+- ❌ Schema ya index ya utafutaji
+- ❌ Mifumo ya data
+
+### Awamu ya 3: Jenga Programu (masaa 80-120)
+
+**Lengo:** Tekeleza mfumo wa wakala wengi kulingana na usanifu huu
+
+1. **Utekelezaji wa Wakala** (masaa 30-40)
+   - Darasa la msingi la wakala na interface
+   - Wakala wa huduma kwa wateja na GPT-4o
+   - Wakala wa hesabu na GPT-4o-mini
+   - Ujumuishaji wa zana (AI Search, Bing, usindikaji wa faili)
+
+2. **Huduma ya Usambazaji** (masaa 12-16)
+   - Mantiki ya uainishaji wa maombi
+   - Uchaguzi wa wakala na uratibu
+   - Backend ya FastAPI/Express
+
+3. **Maendeleo ya Mbele** (masaa 20-30)
+   - UI ya interface ya mazungumzo
+   - Utendaji wa upakiaji wa faili
+   - Utoaji wa majibu
+
+4. **Mfumo wa Data** (masaa 8-12)
+   - Uundaji wa index ya AI Search
+   - Usindikaji wa nyaraka na Document Intelligence
+   - Uzalishaji wa embeddings na uorodheshaji
+
+5. **Ufuatiliaji na Tathmini** (masaa 10-15)
+   - Utekelezaji wa telemetry maalum
+   - Mfumo wa tathmini ya wakala
+   - Scanner ya usalama ya timu nyekundu
+
+### Awamu ya 4: Weka na Jaribu (masaa 8-12)
+
+- Jenga picha za Docker kwa huduma zote
+- Push kwa Azure Container Registry
+- Sasisha Container Apps na picha halisi
+- Sanidi vigezo vya mazingira na siri
+- Endesha suite ya majaribio ya tathmini
+- Fanya uchunguzi wa usalama
+
+**Jumla ya Juhudi Zinazokadiriwa:** Masaa 80-120 kwa watengenezaji wenye uzoefu
 
 ## Usanifu wa Suluhisho
 
@@ -35,40 +147,40 @@ Suluhisho la usaidizi wa wateja linahitaji:
 
 ```mermaid
 graph TB
-    User[👤 Customer] --> LB[Azure Front Door]
-    LB --> WebApp[Web Frontend<br/>Container App]
+    User[👤 Mteja] --> LB[Azure Front Door]
+    LB --> WebApp[Sehemu ya Mbele ya Wavuti<br/>Programu ya Kontena]
     
-    WebApp --> Router[Agent Router<br/>Container App]
-    Router --> CustomerAgent[Customer Agent<br/>Customer Service]
-    Router --> InvAgent[Inventory Agent<br/>Stock Management]
+    WebApp --> Router[Kielekezi cha Wakala<br/>Programu ya Kontena]
+    Router --> CustomerAgent[Wakala wa Mteja<br/>Huduma kwa Wateja]
+    Router --> InvAgent[Wakala wa Hifadhi<br/>Usimamizi wa Hisa]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Mashariki Marekani 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Magharibi Marekani 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>Product Catalog]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Real-time Info]
+    CustomerAgent --> AISearch[Azure AI Search<br/>Katalogi ya Bidhaa]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Taarifa za Wakati Halisi]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>Documents & Files]
-    Storage --> DocIntel[Document Intelligence<br/>Content Processing]
+    AISearch --> Storage[Azure Storage<br/>Nyaraka & Faili]
+    Storage --> DocIntel[Ujasusi wa Nyaraka<br/>Usindikaji wa Maudhui]
     
-    OpenAI1 --> Embeddings[Text Embeddings<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[Embeddings za Maandishi<br/>ada-002<br/>Kati ya Ufaransa]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Monitoring]
+    Router --> AppInsights[Uchambuzi wa Programu<br/>Ufuatiliaji]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grader<br/>Switzerland North] --> Evaluation[Evaluation Framework]
-    RedTeam[Red Team Scanner] --> SecurityReports[Security Reports]
+    GraderModel[GPT-4o Mhakiki<br/>Kaskazini Uswisi] --> Evaluation[Mfumo wa Tathmini]
+    RedTeam[Kikosi Nyekundu cha Skana] --> SecurityReports[Taarifa za Usalama]
     
-    subgraph "Data Layer"
+    subgraph "Tabaka la Data"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Chat History]
+        CosmosDB[Cosmos DB<br/>Historia ya Gumzo]
     end
     
-    subgraph "AI Services"
+    subgraph "Huduma za AI"
         OpenAI1
         OpenAI2
         Embeddings
@@ -77,10 +189,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Monitoring & Security"
+    subgraph "Ufuatiliaji & Usalama"
         AppInsights
-        LogAnalytics[Log Analytics Workspace]
-        KeyVault[Azure Key Vault<br/>Secrets & Config]
+        LogAnalytics[Workspace ya Uchambuzi wa Magogo]
+        KeyVault[Azure Key Vault<br/>Siri & Usanidi]
         RedTeam
         Evaluation
     end
@@ -94,113 +206,117 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-
 ### Muhtasari wa Vipengele
 
-| Kipengele | Kusudi | Teknolojia | Eneo |  
-|-----------|---------|------------|---------|  
-| **Mbele ya Wavuti** | Kiolesura cha mtumiaji kwa mwingiliano wa wateja | Container Apps | Eneo Kuu |  
-| **Router ya Wakala** | Inapanga maombi kwa wakala sahihi | Container Apps | Eneo Kuu |  
-| **Wakala wa Wateja** | Hushughulikia maswali ya huduma kwa wateja | Container Apps + GPT-4o | Eneo Kuu |  
-| **Wakala wa Hesabu** | Husimamia hisa na utimilifu | Container Apps + GPT-4o-mini | Eneo Kuu |  
-| **Azure OpenAI** | Utoaji wa LLM kwa wakala | Huduma za Kognitibu | Eneo Mingi |  
-| **AI Search** | Utafutaji wa vector na RAG | Huduma ya AI Search | Eneo Kuu |  
-| **Akaunti ya Hifadhi** | Upakiaji wa faili na nyaraka | Blob Storage | Eneo Kuu |  
-| **Application Insights** | Ufuatiliaji na telemetry | Monitor | Eneo Kuu |  
-| **Modeli ya Grader** | Mfumo wa tathmini ya wakala | Azure OpenAI | Eneo la Pili |  
+| Kipengele | Kusudi | Teknolojia | Eneo |
+|-----------|---------|------------|---------|
+| **Mbele ya Wavuti** | Interface ya mtumiaji kwa mwingiliano wa wateja | Container Apps | Eneo la Kwanza |
+| **Router ya Wakala** | Usambazaji wa maombi kwa wakala sahihi | Container Apps | Eneo la Kwanza |
+| **Wakala wa Wateja** | Kushughulikia maswali ya huduma kwa wateja | Container Apps + GPT-4o | Eneo la Kwanza |
+| **Wakala wa Hesabu** | Kusimamia hisa na utimilifu | Container Apps + GPT-4o-mini | Eneo la Kwanza |
+| **Azure OpenAI** | Utoaji wa LLM kwa wakala | Huduma za Kognitiki | Maeneo Mengi |
+| **AI Search** | Tafutaji wa vector na RAG | Huduma ya AI Search | Eneo la Kwanza |
+| **Akaunti ya Uhifadhi** | Upakiaji wa faili na nyaraka | Blob Storage | Eneo la Kwanza |
+| **Application Insights** | Ufuatiliaji na telemetry | Monitor | Eneo la Kwanza |
+| **Modeli ya Grader** | Mfumo wa tathmini ya wakala | Azure OpenAI | Eneo la Pili |
 
 ## 📁 Muundo wa Mradi
 
+> **📍 Hadhi ya Hali:**  
+> ✅ = Ipo kwenye hifadhi  
+> 📝 = Utekelezaji wa rejeleo (mfano wa msimbo katika hati hii)  
+> 🔨 = Unahitaji kuunda hii
+
 ```
-retail-multiagent-solution/
-├── .azure/                              # Azure environment configs
-│   ├── config.json                      # Global config
+retail-multiagent-solution/              🔨 Your project directory
+├── .azure/                              🔨 Azure environment configs
+│   ├── config.json                      🔨 Global config
 │   └── env/
-│       ├── .env.development             # Dev environment
-│       ├── .env.staging                 # Staging environment
-│       └── .env.production              # Production environment
+│       ├── .env.development             🔨 Dev environment
+│       ├── .env.staging                 🔨 Staging environment
+│       └── .env.production              🔨 Production environment
 │
-├── azure.yaml                          # AZD main configuration
-├── azure.parameters.json               # Deployment parameters
-├── README.md                           # Solution documentation
+├── azure.yaml                          🔨 AZD main configuration
+├── azure.parameters.json               🔨 Deployment parameters
+├── README.md                           🔨 Solution documentation
 │
-├── infra/                              # Infrastructure as Code
-│   ├── main.bicep                      # Main Bicep template
-│   ├── main.parameters.json            # Parameters file
-│   ├── modules/                        # Bicep modules
-│   │   ├── ai-services.bicep           # Azure OpenAI deployments
-│   │   ├── search.bicep                # AI Search configuration
-│   │   ├── storage.bicep               # Storage accounts
-│   │   ├── container-apps.bicep        # Container Apps environment
-│   │   ├── monitoring.bicep            # Application Insights
-│   │   ├── security.bicep              # Key Vault and RBAC
-│   │   └── networking.bicep            # Virtual networks and DNS
-│   ├── arm-template/                   # ARM template version
-│   │   ├── azuredeploy.json            # ARM main template
-│   │   └── azuredeploy.parameters.json # ARM parameters
-│   └── scripts/                        # Deployment scripts
-│       ├── deploy.sh                   # Main deployment script
-│       ├── setup-data.sh               # Data setup script
-│       └── configure-rbac.sh           # RBAC configuration
+├── infra/                              🔨 Infrastructure as Code (you create)
+│   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
+│   ├── main.parameters.json            🔨 Parameters file
+│   ├── modules/                        📝 Bicep modules (reference examples below)
+│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── search.bicep                📝 AI Search configuration
+│   │   ├── storage.bicep               📝 Storage accounts
+│   │   ├── container-apps.bicep        📝 Container Apps environment
+│   │   ├── monitoring.bicep            📝 Application Insights
+│   │   ├── security.bicep              📝 Key Vault and RBAC
+│   │   └── networking.bicep            📝 Virtual networks and DNS
+│   ├── arm-template/                   ✅ ARM template version (EXISTS)
+│   │   ├── azuredeploy.json            ✅ ARM main template (retail-multiagent-arm-template/)
+│   │   └── azuredeploy.parameters.json ✅ ARM parameters
+│   └── scripts/                        ✅/🔨 Deployment scripts
+│       ├── deploy.sh                   ✅ Main deployment script (EXISTS)
+│       ├── setup-data.sh               🔨 Data setup script (you create)
+│       └── configure-rbac.sh           🔨 RBAC configuration (you create)
 │
-├── src/                                # Application source code
-│   ├── agents/                         # Agent implementations
-│   │   ├── base/                       # Base agent classes
-│   │   │   ├── agent.py                # Abstract agent class
-│   │   │   └── tools.py                # Tool interfaces
-│   │   ├── customer/                   # Customer service agent
-│   │   │   ├── agent.py                # Customer agent implementation
-│   │   │   ├── prompts.py              # System prompts
-│   │   │   └── tools/                  # Agent-specific tools
-│   │   │       ├── search_tool.py      # AI Search integration
-│   │   │       ├── bing_tool.py        # Bing Search integration
-│   │   │       └── file_tool.py        # File processing tool
-│   │   └── inventory/                  # Inventory management agent
-│   │       ├── agent.py                # Inventory agent implementation
-│   │       ├── prompts.py              # System prompts
-│   │       └── tools/                  # Agent-specific tools
-│   │           ├── inventory_search.py # Inventory search tool
-│   │           └── database_tool.py    # Database query tool
+├── src/                                🔨 Application source code (YOU BUILD THIS)
+│   ├── agents/                         📝 Agent implementations (examples below)
+│   │   ├── base/                       🔨 Base agent classes
+│   │   │   ├── agent.py                🔨 Abstract agent class
+│   │   │   └── tools.py                🔨 Tool interfaces
+│   │   ├── customer/                   🔨 Customer service agent
+│   │   │   ├── agent.py                📝 Customer agent implementation (see below)
+│   │   │   ├── prompts.py              🔨 System prompts
+│   │   │   └── tools/                  🔨 Agent-specific tools
+│   │   │       ├── search_tool.py      📝 AI Search integration (example below)
+│   │   │       ├── bing_tool.py        📝 Bing Search integration (example below)
+│   │   │       └── file_tool.py        🔨 File processing tool
+│   │   └── inventory/                  🔨 Inventory management agent
+│   │       ├── agent.py                🔨 Inventory agent implementation
+│   │       ├── prompts.py              🔨 System prompts
+│   │       └── tools/                  🔨 Agent-specific tools
+│   │           ├── inventory_search.py 🔨 Inventory search tool
+│   │           └── database_tool.py    🔨 Database query tool
 │   │
-│   ├── router/                         # Agent routing service
-│   │   ├── main.py                     # FastAPI router application
-│   │   ├── routing_logic.py            # Request routing logic
-│   │   └── middleware.py               # Authentication & logging
+│   ├── router/                         🔨 Agent routing service (you build)
+│   │   ├── main.py                     🔨 FastAPI router application
+│   │   ├── routing_logic.py            🔨 Request routing logic
+│   │   └── middleware.py               🔨 Authentication & logging
 │   │
-│   ├── frontend/                       # Web user interface
-│   │   ├── Dockerfile                  # Container configuration
-│   │   ├── package.json                # Node.js dependencies
-│   │   ├── src/                        # React/Vue source code
-│   │   │   ├── components/             # UI components
-│   │   │   ├── pages/                  # Application pages
-│   │   │   ├── services/               # API services
-│   │   │   └── styles/                 # CSS and themes
-│   │   └── public/                     # Static assets
+│   ├── frontend/                       🔨 Web user interface (you build)
+│   │   ├── Dockerfile                  🔨 Container configuration
+│   │   ├── package.json                🔨 Node.js dependencies
+│   │   ├── src/                        🔨 React/Vue source code
+│   │   │   ├── components/             🔨 UI components
+│   │   │   ├── pages/                  🔨 Application pages
+│   │   │   ├── services/               🔨 API services
+│   │   │   └── styles/                 🔨 CSS and themes
+│   │   └── public/                     🔨 Static assets
 │   │
-│   ├── shared/                         # Shared utilities
-│   │   ├── config.py                   # Configuration management
-│   │   ├── telemetry.py                # Telemetry utilities
-│   │   ├── security.py                 # Security utilities
-│   │   └── models.py                   # Data models
+│   ├── shared/                         🔨 Shared utilities (you build)
+│   │   ├── config.py                   🔨 Configuration management
+│   │   ├── telemetry.py                📝 Telemetry utilities (example below)
+│   │   ├── security.py                 🔨 Security utilities
+│   │   └── models.py                   🔨 Data models
 │   │
-│   └── evaluation/                     # Evaluation and testing
-│       ├── evaluator.py                # Agent evaluator
-│       ├── red_team_scanner.py         # Security scanner
-│       ├── test_cases.json             # Evaluation test cases
-│       └── reports/                    # Generated reports
+│   └── evaluation/                     🔨 Evaluation and testing (you build)
+│       ├── evaluator.py                📝 Agent evaluator (example below)
+│       ├── red_team_scanner.py         📝 Security scanner (example below)
+│       ├── test_cases.json             📝 Evaluation test cases (example below)
+│       └── reports/                    🔨 Generated reports
 │
-├── data/                               # Data and configuration
-│   ├── search-schema.json              # AI Search index schema
-│   ├── initial-docs/                   # Initial document corpus
-│   │   ├── product-manuals/            # Product documentation
-│   │   ├── policies/                   # Company policies
-│   │   └── faqs/                       # Frequently asked questions
-│   ├── fine-tuning/                    # Fine-tuning datasets
-│   │   ├── training.jsonl              # Training data
-│   │   └── validation.jsonl            # Validation data
-│   └── evaluation/                     # Evaluation datasets
-│       ├── test-conversations.json     # Test conversation data
-│       └── ground-truth.json           # Expected responses
+├── data/                               🔨 Data and configuration (you create)
+│   ├── search-schema.json              📝 AI Search index schema (example below)
+│   ├── initial-docs/                   🔨 Initial document corpus
+│   │   ├── product-manuals/            🔨 Product documentation (your data)
+│   │   ├── policies/                   🔨 Company policies (your data)
+│   │   └── faqs/                       🔨 Frequently asked questions (your data)
+│   ├── fine-tuning/                    🔨 Fine-tuning datasets (optional)
+│   │   ├── training.jsonl              🔨 Training data
+│   │   └── validation.jsonl            🔨 Validation data
+│   └── evaluation/                     🔨 Evaluation datasets
+│       ├── test-conversations.json     📝 Test conversation data (example below)
+│       └── ground-truth.json           🔨 Expected responses
 │
 ├── scripts/                            # Utility scripts
 │   ├── setup/                          # Setup scripts
@@ -256,11 +372,77 @@ retail-multiagent-solution/
 
 ---
 
-## Mahitaji ya Awali ya Usanidi
+## 🚀 Mwanzo wa Haraka: Unachoweza Kufanya Sasa
 
-### 1. Wakala Wengi na Usanidi
+### Chaguo 1: Weka Miundombinu Pekee (dakika 30)
 
-**Lengo**: Tekeleza wakala 2 maalum - "Wakala wa Wateja" (huduma kwa wateja) na "Hesabu" (usimamizi wa hisa)
+**Unachopata:** Huduma zote za Azure zimewekwa na ziko tayari kwa maendeleo
+
+```bash
+# Nakili hifadhi
+git clone https://github.com/microsoft/AZD-for-beginners.git
+cd AZD-for-beginners/examples/retail-multiagent-arm-template
+
+# Weka miundombinu
+./deploy.sh -g myResourceGroup -m standard
+
+# Thibitisha uwekaji
+az resource list --resource-group myResourceGroup --output table
+```
+
+**Matokeo yanayotarajiwa:**
+- ✅ Huduma za Azure OpenAI zimewekwa (maeneo 3)
+- ✅ Huduma ya AI Search imeundwa (tupu)
+- ✅ Mazingira ya Container Apps yako tayari
+- ✅ Uhifadhi, Cosmos DB, Key Vault vimesanidiwa
+- ❌ Hakuna wakala wanaofanya kazi bado (miundombinu pekee)
+
+### Chaguo 2: Soma Usanifu (masaa 2-3)
+
+**Unachopata:** Uelewa wa kina wa mifumo ya wakala wengi
+
+1. Soma hati hii yote
+2. Pitia mifano ya msimbo kwa kila kipengele
+3. Elewa maamuzi ya muundo na faida zake
+4. Soma mikakati ya uboreshaji wa gharama
+5. Panga mbinu yako ya utekelezaji
+
+**Matokeo yanayotarajiwa:**
+- ✅ Mfano wa akili wazi wa usanifu wa mfumo
+- ✅ Uelewa wa vipengele vinavyohitajika
+- ✅ Makadirio ya juhudi za kweli
+- ✅ Mpango wa utekelezaji
+
+### Chaguo 3: Jenga Mfumo Kamili (masaa 80-120)
+
+**Unachopata:** Suluhisho la wakala wengi linalofaa kwa uzalishaji
+
+1. **Awamu ya 1:** Weka miundombinu (imekamilika hapo juu)
+2. **Awamu ya 2:** Tekeleza wakala kwa kutumia mifano ya msimbo hapa chini (masaa 30-40)
+3. **Awamu ya 3:** Jenga huduma ya usambazaji (masaa 12-16)
+4. **Awamu ya 4:** Unda UI ya mbele (masaa 20-30)
+5. **Awamu ya 5:** Sanidi mifumo ya data (masaa 8-12)
+6. **Awamu ya 6:** Ongeza ufuatiliaji na tathmini (masaa 10-15)
+
+**Matokeo yanayotarajiwa:**
+- ✅ Mfumo wa wakala wengi unaofanya kazi kikamilifu
+- ✅ Ufuatiliaji wa kiwango cha uzalishaji
+- ✅ Uthibitishaji wa usalama
+- ✅ Utekelezaji ulioboreshwa kwa gharama
+
+---
+
+## 📚 Rejeleo la Usanifu & Mwongozo wa Utekelezaji
+
+Sehemu zifuatazo zinatoa mifumo ya kina ya usanifu, mifano ya usanidi, na msimbo wa rejeleo ili kuongoza utekelezaji wako.
+
+## Mahitaji ya Usanidi wa Awali
+
+### 1. Wakala Wengi & Usanidi
+
+**Lengo**: Weka wakala 2 maalum - "Wakala wa Wateja" (huduma kwa wateja) na "Hesabu" (usimamizi wa hisa)
+
+> **📝 Kumbuka:** Faili za azure.yaml na usanidi wa Bicep zifuatazo ni **mifano ya rejeleo** inayoonyesha jinsi ya kuunda utekelezaji wa wakala wengi. Utahitaji kuunda faili hizi na utekelezaji wa wakala unaolingana.
 
 #### Hatua za Usanidi:
 
@@ -334,11 +516,11 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Mifano Mingi na Upangaji wa Uwezo
+### 2. Modeli Nyingi na Mipango ya Uwezo
 
-**Lengo**: Tekeleza mfano wa mazungumzo (Wateja), mfano wa embeddings (tafuta), na mfano wa mantiki (grader) na usimamizi sahihi wa quota
+**Lengo**: Weka modeli ya mazungumzo (Wateja), modeli ya embeddings (tafutaji), na modeli ya mantiki (grader) na usimamizi sahihi wa quota
 
-#### Mkakati wa Eneo Mingi:
+#### Mkakati wa Maeneo Mengi:
 
 ```bicep
 // infra/models.bicep
@@ -391,9 +573,9 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search na Usanidi wa Kielezo cha Data
+### 3. AI Search na Usanidi wa Index ya Data
 
-**Lengo**: Sanidi AI Search kwa masasisho ya data na kielezo cha kiotomatiki
+**Lengo**: Sanidi AI Search kwa masasisho ya data na uorodheshaji wa kiotomatiki
 
 #### Hook ya Kabla ya Utekelezaji:
 
@@ -403,7 +585,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Create search service with specific SKU
+# Unda huduma ya utafutaji na SKU maalum
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -420,23 +602,23 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Get search service key
+# Pata ufunguo wa huduma ya utafutaji
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Create index schema
+# Unda mpangilio wa faharasa
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Upload initial documents
+# Pakia nyaraka za awali
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
 
-#### Mpangilio wa Kielezo cha Utafutaji:
+#### Schema ya Index ya Tafutaji:
 
 ```json
 {
@@ -461,14 +643,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Usanidi wa Zana ya Wakala kwa AI Search
+### 4. Usanidi wa Zana za Wakala kwa AI Search
 
 **Lengo**: Sanidi wakala kutumia AI Search kama zana ya msingi
 
-#### Utekelezaji wa Zana ya Utafutaji wa Wakala:
+#### Utekelezaji wa Zana ya Tafutaji ya Wakala:
 
 ```python
-# src/agents/tools/search_tool.py
+# src/mawakala/vifaa/chombo_cha_utafutaji.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -522,13 +704,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # First, search for relevant context
+        # Kwanza, tafuta muktadha unaofaa
         search_results = await self.search_tool.search_products(user_query)
         
-        # Prepare context for the LLM
+        # Andaa muktadha kwa LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generate response with grounding
+        # Tengeneza jibu kwa msingi
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -540,11 +722,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Ujumuishaji wa Hifadhi ya Upakiaji wa Faili
+### 5. Ujumuishaji wa Uhifadhi wa Upakiaji wa Faili
 
-**Lengo**: Ruhusu wakala kushughulikia faili zilizopakiwa (miongozo, nyaraka) kwa muktadha wa RAG
+**Lengo**: Ruhusu wakala kusindika faili zilizopakiwa (miongozo, nyaraka) kwa muktadha wa RAG
 
-#### Usanidi wa Hifadhi:
+#### Usanidi wa Uhifadhi:
 
 ```bicep
 // infra/storage.bicep
@@ -583,7 +765,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Njia ya Usindikaji wa Nyaraka:
+#### Mfumo wa Usindikaji wa Nyaraka:
 
 ```python
 # src/document_processor.py
@@ -603,13 +785,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Download file from blob storage
+        # Pakua faili kutoka kwa hifadhi ya blob
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Extract text using Document Intelligence
+        # Toa maandishi kwa kutumia Akili ya Nyaraka
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -617,19 +799,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # Extract text content
+        # Toa maudhui ya maandishi
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Generate embeddings
+        # Tengeneza embeddings
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Index in AI Search
+        # Faharisi katika Utafutaji wa AI
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -641,9 +823,9 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Ujumuishaji wa Utafutaji wa Bing
+### 6. Ujumuishaji wa Tafutaji wa Bing
 
-**Lengo**: Ongeza uwezo wa Utafutaji wa Bing kwa taarifa za wakati halisi
+**Lengo**: Ongeza uwezo wa Tafutaji wa Bing kwa taarifa za wakati halisi
 
 #### Ongezo la Rasilimali ya Bicep:
 
@@ -663,10 +845,10 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Zana ya Utafutaji wa Bing:
+#### Zana ya Tafutaji ya Bing:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# src/mawakala/vifaa/zana_ya_utafutaji_bing.py
 import aiohttp
 import asyncio
 
@@ -780,7 +962,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Configure logging
+        # Sanidi kumbukumbu
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -811,7 +993,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Truncate for privacy
+            'query': query[:100],  # Punguza kwa faragha
             'results_found': str(results_count > 0)
         }
         
@@ -874,12 +1056,12 @@ class AgentTelemetry:
 
 ### 8. Uthibitishaji wa Usalama wa Timu Nyekundu
 
-**Lengo**: Upimaji wa usalama wa kiotomatiki kwa wakala na mifano
+**Lengo**: Majaribio ya usalama ya kiotomatiki kwa wakala na modeli
 
 #### Usanidi wa Timu Nyekundu:
 
 ```python
-# src/security/red_team_scanner.py
+# src/usalama/kichunguzi_timu_nyekundu.py
 import asyncio
 from typing import List, Dict
 import json
@@ -924,7 +1106,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Calculate overall security score
+        # Hesabu alama ya jumla ya usalama
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -992,8 +1174,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementation would send HTTP request to agent endpoint
-        # For demo purposes, returning placeholder
+        # Utekelezaji ungetuma ombi la HTTP kwa sehemu ya mwisho ya wakala
+        # Kwa madhumuni ya maonyesho, kurudisha kionyeshi
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1015,7 +1197,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Simplified vulnerability detection
+        # Kugundua udhaifu kwa njia rahisi
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1050,14 +1232,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Basic scoring: 100 - (vulnerabilities / total * 100)
+        # Alama ya msingi: 100 - (udhaifu / jumla * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Reduce score based on severity
+        # Punguza alama kulingana na ukali
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1067,7 +1249,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Njia ya Usalama ya Kiotomatiki:
+#### Mfumo wa Usalama wa Kiotomatiki:
 
 ```bash
 #!/bin/bash
@@ -1075,13 +1257,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Get agent endpoint from deployment
+# Pata mwisho wa wakala kutoka kwa upelekaji
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Run security scan
+# Endesha uchunguzi wa usalama
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1093,7 +1275,7 @@ echo "Security scan completed. Check security_reports/ for results."
 
 ### 9. Tathmini ya Wakala na Modeli ya Grader
 
-**Lengo**: Tekeleza mfumo wa tathmini na modeli ya grader maalum
+**Lengo**: Weka mfumo wa tathmini na modeli ya grader maalum
 
 #### Usanidi wa Modeli ya Grader:
 
@@ -1168,7 +1350,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Calculate summary metrics
+        # Hesabu vipimo vya muhtasari
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1178,10 +1360,10 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # Get agent response
+        # Pata jibu la wakala
         agent_response = await self._get_agent_response(user_query)
         
-        # Grade the response
+        # Pima jibu
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1252,7 +1434,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Parse JSON response
+            # Changanua jibu la JSON
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1298,7 +1480,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Performance rating
+        # Kiwango cha utendaji
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1314,7 +1496,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Usanidi wa Kesi za Mtihani:
+#### Usanidi wa Majaribio:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1355,11 +1537,11 @@ class AgentEvaluator:
 
 ## Ubinafsishaji na Sasisho
 
-### 10. Ubinafsishaji wa Programu ya Kontena
+### 10. Ubinafsishaji wa Container App
 
-**Lengo**: Sasisha usanidi wa programu ya kontena na ubadilishe na UI maalum
+**Lengo**: Sasisha usanidi wa Container App na ubadilishe na UI maalum
 
-#### Usanidi wa Nguvu:
+#### Usanidi wa Dynamic:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1402,7 +1584,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Script ya Kujenga na Kutekeleza:
+#### Script ya Kujenga na Kuweka:
 
 ```bash
 #!/bin/bash
@@ -1410,7 +1592,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Build custom image with environment variables
+# Jenga picha maalum na vigezo vya mazingira
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1418,13 +1600,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Push to Azure Container Registry
+# Sukuma kwenye Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Update container app
+# Sasisha programu ya kontena
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1435,23 +1617,23 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Mwongozo wa Utatuzi wa Matatizo
+## 🔧 Mwongozo wa Kutatua Tatizo
 
 ### Masuala ya Kawaida na Suluhisho
 
-#### 1. Vikomo vya Quota ya Programu za Kontena
+#### 1. Vikomo vya Quota ya Container Apps
 
 **Tatizo**: Utekelezaji unashindwa kutokana na vikomo vya quota vya eneo
 
-**Suluhisho**:  
+**Suluhisho**:
 ```bash
-# Check current quota usage
+# Angalia matumizi ya sasa ya mgao
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Request quota increase
+# Omba ongezeko la mgao
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1466,7 +1648,7 @@ az support tickets create \
 
 **Tatizo**: Utekelezaji wa modeli unashindwa kutokana na toleo la API lililoisha muda wake
 
-**Suluhisho**:  
+**Suluhisho**:
 ```python
 # scripts/update_model_versions.py
 import requests
@@ -1474,7 +1656,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # This would call Azure OpenAI API to get current versions
+    # Hii ingeitisha Azure OpenAI API kupata matoleo ya sasa
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1491,12 +1673,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Read and update template
+    # Soma na sasisha kiolezo
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Update version in template
+        # Sasisha toleo katika kiolezo
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1513,11 +1695,11 @@ if __name__ == "__main__":
 
 #### 3. Ujumuishaji wa Fine-tuning
 
-**Tatizo**: Jinsi ya kujumuisha modeli zilizofanyiwa fine-tuning katika utekelezaji wa AZD
+**Tatizo**: Jinsi ya kuunganisha modeli zilizofanyiwa fine-tuning kwenye utekelezaji wa AZD
 
-**Suluhisho**:  
+**Suluhisho**:
 ```python
-# scripts/fine_tuning_pipeline.py
+# maandiko/fine_tuning_pipeline.py
 import asyncio
 from openai import AsyncOpenAI
 
@@ -1553,8 +1735,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Update deployment to use fine-tuned model
-            # This would call Azure CLI to update the deployment
+            # Sasisha upelekaji kutumia mfano ulioboreshwa
+            # Hii itaita Azure CLI kusasisha upelekaji
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1567,9 +1749,9 @@ class FineTuningPipeline:
 
 ### Maswali Yanayoulizwa Mara kwa Mara
 
-#### Swali: Je, kuna njia rahisi ya kutekeleza wakala wengi (muundo wa usanifu)?
+#### Swali: Je, kuna njia rahisi ya kuweka wakala wengi (mfumo wa muundo)?
 
-**Jibu: Ndiyo! Tumia Muundo wa Wakala Wengi:**  
+**Jibu: Ndiyo! Tumia Mfumo wa Wakala Wengi:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1586,211 +1768,72 @@ services:
         }
 ```
 
-#### Swali: Je, ninaweza kutekeleza "router ya modeli" kama modeli (athari za gharama)?
+#### Swali: Je, ninaweza kuweka "router ya modeli" kama
+## ✅ Kiolezo cha ARM Tayari kwa Utekelezaji
 
-**Jibu: Ndiyo, kwa kuzingatia kwa makini:**  
+> **✨ HIKI KINAEXIST NA KINAFANYA KAZI!**  
+> Tofauti na mifano ya msimbo wa dhana hapo juu, kiolezo cha ARM ni **miundombinu halisi inayofanya kazi** iliyojumuishwa katika hifadhi hii.
 
-```python
-# Model Router Implementation
-class ModelRouter:
-    def __init__(self):
-        self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
-            "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
-        }
-    
-    async def route_request(self, query: str, context: dict):
-        """Route request to most cost-effective model"""
-        complexity_score = self._analyze_complexity(query)
-        
-        if complexity_score < 0.3:
-            return self.routing_rules["simple_queries"]
-        else:
-            return self.routing_rules["complex_reasoning"]
-    
-    def estimate_cost_savings(self, usage_patterns: dict):
-        """Estimate cost savings from intelligent routing"""
-        # Implementation would calculate potential savings
-        pass
-```
+### Kile Kiolezo Hiki Kinachofanya
 
-**Athari za Gharama:**  
-- **Akiba**: Punguzo la gharama la 60-80% kwa maswali rahisi  
-- **Mabadilishano**: Kuongezeka kidogo kwa muda wa kusubiri kwa mantiki ya kupanga  
-- **Ufuatiliaji**: Fuatilia usahihi dhidi ya vipimo vya gharama  
+Kiolezo cha ARM kilichopo [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) kinatoa **miundombinu yote ya Azure** inayohitajika kwa mfumo wa mawakala wengi. Hiki ndicho **kipengele pekee kilicho tayari kutekelezwa** - kila kitu kingine kinahitaji maendeleo.
 
-#### Swali: Je, ninaweza kuanzisha kazi ya fine-tuning kutoka kwa kiolezo cha azd?
-
-**Jibu: Ndiyo, kwa kutumia hook za baada ya utekelezaji:**  
-
-```bash
-#!/bin/bash
-# hooks/postprovision.sh - Fine-tuning Integration
-
-echo "Starting fine-tuning pipeline..."
-
-# Upload training data
-TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
-  --data-path "./data/fine_tuning/training.jsonl" \
-  --openai-key "$AZURE_OPENAI_API_KEY")
-
-# Start fine-tuning job
-FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
-  --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
-
-# Store job ID for monitoring
-echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
-
-echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
-echo "Monitor progress with: azd hooks run monitor-fine-tuning"
-```
-
-### Hali za Juu
-
-#### Mkakati wa Utekelezaji wa Eneo Mingi
-
-```bicep
-// infra/multi-region.bicep
-param regions array = ['eastus2', 'westeurope', 'australiaeast']
-
-resource primaryRegionGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
-  name: '${resourceGroupName}-primary'
-  location: regions[0]
-}
-
-resource secondaryRegionGroups 'Microsoft.Resources/resourceGroups@2023-07-01' = [for i in range(1, length(regions) - 1): {
-  name: '${resourceGroupName}-${regions[i]}'
-  location: regions[i]
-}]
-
-// Traffic Manager for global load balancing
-resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = {
-  name: '${projectName}-tm'
-  location: 'global'
-  properties: {
-    profileStatus: 'Enabled'
-    trafficRoutingMethod: 'Performance'
-    dnsConfig: {
-      relativeName: '${projectName}-global'
-      ttl: 30
-    }
-    monitorConfig: {
-      protocol: 'HTTPS'
-      port: 443
-      path: '/health'
-    }
-  }
-}
-```
-
-#### Mfumo wa Uboreshaji wa Gharama
-
-```python
-# src/optimization/cost_optimizer.py
-class CostOptimizer:
-    def __init__(self, usage_analytics):
-        self.analytics = usage_analytics
-    
-    def analyze_usage_patterns(self):
-        """Analyze usage to recommend optimizations"""
-        recommendations = []
-        
-        # Model usage analysis
-        model_usage = self.analytics.get_model_usage()
-        for model, usage in model_usage.items():
-            if usage['utilization'] < 0.3:
-                recommendations.append({
-                    'type': 'capacity_reduction',
-                    'resource': model,
-                    'current_capacity': usage['capacity'],
-                    'recommended_capacity': usage['capacity'] * 0.7,
-                    'estimated_savings': usage['monthly_cost'] * 0.3
-                })
-        
-        # Peak time analysis
-        peak_patterns = self.analytics.get_peak_patterns()
-        if peak_patterns['variance'] > 0.6:
-            recommendations.append({
-                'type': 'auto_scaling',
-                'description': 'High variance detected, enable auto-scaling',
-                'estimated_savings': peak_patterns['potential_savings']
-            })
-        
-        return recommendations
-    
-    def implement_recommendations(self, recommendations):
-        """Automatically implement cost optimizations"""
-        for rec in recommendations:
-            if rec['type'] == 'capacity_reduction':
-                self._update_model_capacity(rec)
-            elif rec['type'] == 'auto_scaling':
-                self._enable_auto_scaling(rec)
-```
-
----
-
-## Kiolezo cha ARM Tayari Kutekelezwa
-
-Kwa utekelezaji wa haraka wa suluhisho kamili la wakala wengi wa rejareja, tumetoa kiolezo cha ARM kinachojumuisha rasilimali zote za Azure zinazohitajika kwa amri moja.
-
-### Kilichojumuishwa katika Kiolezo cha ARM
+### Kile Kilichojumuishwa Katika Kiolezo cha ARM
 
 Kiolezo cha ARM kilichopo [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) kinajumuisha:
 
-#### **Miundombinu Kamili**  
-- ✅ **Utekelezaji wa Azure OpenAI wa eneo nyingi** (GPT-4o, GPT-4o-mini, embeddings, grader)  
-- ✅ **Azure AI Search** na uwezo wa utafutaji wa vector  
-- ✅ **Azure Storage** na kontena za nyaraka na upakiaji  
-- ✅ **Mazingira ya Programu za Kontena** na upanuzi wa kiotomatiki  
-- ✅ **Router ya Wakala na Mbele** programu za kontena  
-- ✅ **Cosmos DB** kwa uhifadhi wa historia ya mazungumzo  
-- ✅ **Application Insights** kwa ufuatiliaji wa kina  
-- ✅ **Key Vault** kwa usimamizi salama wa siri  
-- ✅ **Intelligence ya Nyaraka** kwa usindikaji wa faili  
-- ✅ **API ya Utafutaji wa Bing** kwa taarifa za wakati halisi  
+#### **Miundombinu Kamili**
+- ✅ **Utekelezaji wa Azure OpenAI wa maeneo mengi** (GPT-4o, GPT-4o-mini, embeddings, grader)
+- ✅ **Azure AI Search** yenye uwezo wa utafutaji wa vector
+- ✅ **Azure Storage** na kontena za nyaraka na upakiaji
+- ✅ **Mazingira ya Programu za Kontena** yenye uwezo wa kuongeza kiotomatiki
+- ✅ **Programu za Kontena za Router ya Mawakala na Mbele**
+- ✅ **Cosmos DB** kwa kuhifadhi historia ya mazungumzo
+- ✅ **Application Insights** kwa ufuatiliaji wa kina
+- ✅ **Key Vault** kwa usimamizi salama wa siri
+- ✅ **Document Intelligence** kwa usindikaji wa faili
+- ✅ **Bing Search API** kwa taarifa za wakati halisi
 
-#### **Njia za Utekelezaji**  
-| Njia | Matumizi | Rasilimali | Gharama Inayokadiriwa/Mwezi |  
-|------|----------|-----------|---------------------|  
-| **Minimal** | Maendeleo, Upimaji | SKUs za msingi, Eneo moja | $100-370 |  
-| **Standard** | Uzalishaji, Kiwango cha wastani | SKUs za kawaida, Eneo nyingi | $420-1,450 |  
-| **Premium** | Biashara, Kiwango cha juu | SKUs za premium, usanidi wa HA | $1,150-3,500 |  
+#### **Njia za Utekelezaji**
+| Njia | Matumizi | Rasilimali | Gharama Inayokadiriwa/Mwezi |
+|------|----------|-----------|---------------------|
+| **Minimal** | Maendeleo, Kupima | SKUs za msingi, Eneo moja | $100-370 |
+| **Standard** | Uzalishaji, Kiwango cha wastani | SKUs za kawaida, Maeneo mengi | $420-1,450 |
+| **Premium** | Biashara, Kiwango cha juu | SKUs za premium, Mpangilio wa HA | $1,150-3,500 |
 
 ### 🎯 Chaguo za Utekelezaji wa Haraka
 
 #### Chaguo 1: Utekelezaji wa Azure kwa Kubofya Moja
 
-[![Tekeleza kwa Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 #### Chaguo 2: Utekelezaji wa Azure CLI
 
 ```bash
-# Clone the repository
+# Nakili hazina
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Make deployment script executable
+# Fanya hati ya usanidi iweze kutekelezwa
 chmod +x deploy.sh
 
-# Deploy with default settings (Standard mode)
+# Sanidua kwa mipangilio ya kawaida (Hali ya Kawaida)
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# Sanidua kwa uzalishaji na vipengele vya malipo
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Deploy minimal version for development
+# Sanidua toleo la chini kwa maendeleo
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Chaguo 3: Utekelezaji wa Kiolezo cha ARM Moja kwa Moja
+#### Chaguo 3: Utekelezaji wa Moja kwa Moja wa Kiolezo cha ARM
 
 ```bash
-# Create resource group
+# Unda kikundi cha rasilimali
 az group create --name myResourceGroup --location eastus2
 
-# Deploy template directly
+# Peleka kiolezo moja kwa moja
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1800,7 +1843,7 @@ az deployment group create \
 
 ### Matokeo ya Kiolezo
 
-Baada ya utekelezaji wa mafanikio, utapokea:
+Baada ya utekelezaji kufanikiwa, utapokea:
 
 ```json
 {
@@ -1816,29 +1859,29 @@ Baada ya utekelezaji wa mafanikio, utapokea:
 
 ### 🔧 Usanidi Baada ya Utekelezaji
 
-Kiolezo cha ARM kinashughulikia utoaji wa miundombinu. Baada ya utekelezaji:
+Kiolezo cha ARM hushughulikia utoaji wa miundombinu. Baada ya utekelezaji:
 
-1. **Sanidi Kielezo cha Utafutaji**:  
+1. **Sanidi Kielezo cha Utafutaji**:
    ```bash
-   # Use the provided search schema
+   # Tumia mpangilio wa utafutaji uliotolewa
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **Pakia Nyaraka za Awali**:  
+2. **Pakia Nyaraka za Awali**:
    ```bash
-   # Upload product manuals and knowledge base
+   # Pakia miongozo ya bidhaa na msingi wa maarifa
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Tekeleza Msimbo wa Wakala**:  
+3. **Tekeleza Msimbo wa Mawakala**:
    ```bash
-   # Build and deploy actual agent applications
+   # Jenga na peleka programu halisi za mawakala
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -1846,7 +1889,7 @@ Kiolezo cha ARM kinashughulikia utoaji wa miundombinu. Baada ya utekelezaji:
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ Chaguo za Ubinafsishaji
+### 🎛️ Chaguo za Kubinafsisha
 
 Hariri `azuredeploy.parameters.json` kubinafsisha utekelezaji wako:
 
@@ -1864,43 +1907,145 @@ Hariri `azuredeploy.parameters.json` kubinafsisha utekelezaji wako:
 
 ### 📊 Vipengele vya Utekelezaji
 
-- ✅ **Uthibitishaji wa Mahitaji ya Awali** (Azure CLI, quota, ruhusa)  
-- ✅ **Upatikanaji wa hali ya juu wa eneo nyingi** na urejeshaji wa kiotomatiki  
-- ✅ **Ufuatiliaji wa kina** na Application Insights na Log Analytics  
-- ✅ **Mazoea bora ya usalama** na Key Vault na RBAC  
-- ✅ **Uboreshaji wa gharama** na njia za utekelezaji zinazoweza kusanidiwa  
-- ✅ **Upanuzi wa kiotomatiki** kulingana na mifumo ya mahitaji  
-- ✅ **Sasisho bila muda wa kupumzika** na marekebisho ya Programu za Kontena  
+- ✅ **Uthibitishaji wa Mahitaji ya Awali** (Azure CLI, viwango, ruhusa)
+- ✅ **Upatikanaji wa hali ya juu wa maeneo mengi** na urekebishaji wa kiotomatiki
+- ✅ **Ufuatiliaji wa kina** na Application Insights na Log Analytics
+- ✅ **Mbinu bora za usalama** na Key Vault na RBAC
+- ✅ **Uboreshaji wa gharama** na njia za utekelezaji zinazoweza kusanidiwa
+- ✅ **Kuongeza kiotomatiki** kulingana na mifumo ya mahitaji
+- ✅ **Sasisho zisizo na wakati wa kupumzika** na marekebisho ya Programu za Kontena
 
 ### 🔍 Ufuatiliaji na Usimamizi
 
 Baada ya kutekelezwa, fuatilia suluhisho lako kupitia:
 
-- **Application Insights**: Vipimo vya utendaji, ufuatiliaji wa utegemezi, na telemetry maalum  
-- **Log Analytics**: Magogo ya kati kutoka kwa vipengele vyote  
-- **Azure Monitor**: Ufuatiliaji wa afya ya rasilimali na upatikanaji  
-- **Usimamizi wa Gharama**: Ufuatiliaji wa gharama za wakati halisi na arifa za bajeti  
+- **Application Insights**: Vipimo vya utendaji, ufuatiliaji wa utegemezi, na telemetry maalum
+- **Log Analytics**: Kumbukumbu zilizojumuishwa kutoka kwa vipengele vyote
+- **Azure Monitor**: Ufuatiliaji wa afya ya rasilimali na upatikanaji
+- **Usimamizi wa Gharama**: Ufuatiliaji wa gharama za wakati halisi na arifa za bajeti
 
 ---
 
 ## 📚 Mwongozo Kamili wa Utekelezaji
 
-Hati hii ya hali pamoja na kiolezo cha ARM inatoa kila kitu kinachohitajika kutekeleza suluhisho la usaidizi wa wateja wa wakala wengi linaloweza kutumika katika uzalishaji. Utekelezaji unashughulikia:
+Hati hii ya hali halisi pamoja na kiolezo cha ARM inatoa kila kitu kinachohitajika kupeleka suluhisho la msaada wa wateja wa mawakala wengi tayari kwa uzalishaji. Utekelezaji unajumuisha:
 
-✅ **Usanifu wa Mfumo** - Usanifu wa mfumo wa kina na uhusiano wa vipengele  
+✅ **Ubunifu wa Miundombinu** - Ubunifu wa mfumo wa kina na uhusiano wa vipengele  
 ✅ **Utoaji wa Miundombinu** - Kiolezo kamili cha ARM kwa utekelezaji wa kubofya moja  
-✅ **Usanidi wa Wakala** - Usanidi wa kina kwa wakala wa Wateja na Hesabu  
-✅ **Utekelezaji wa Mifano Mingi** - Uwekaji wa kimkakati wa modeli katika maeneo  
-✅ **Ujumuishaji wa Utafutaji** - AI Search na uwezo wa vector na kielezo cha data  
-✅ **Utekelezaji wa Usalama** - Timu nyekundu, skanning ya udhaifu, na mazoea salama  
-✅ **Ufuatiliaji na Tathmini** - Telemetry ya kina na mfumo wa tathmini ya wakala  
-✅ **Utekelezaji wa Uzalishaji** - Utekelezaji wa kiwango cha biashara na HA na urejeshaji wa maafa  
-✅ **Uboreshaji wa Gharama** - Upangaji wa akili na upanuzi kulingana na matumizi  
-✅ **Mwongozo wa Utatuzi wa Matatizo** - Masuala ya kawaida na mikakati ya suluhisho  
-
-Hali hii ya kina inashughulikia mahitaji yote ya suluhisho la wakala wengi wa rejareja, ikitoa mwongozo wa utekelezaji wa vitendo, msaada wa utatuzi wa matatizo, na mada za uchunguzi wa hali ya juu kwa kujenga programu za AI zinazoweza kutumika katika uzalishaji na AZD.
+✅ **Usanidi wa Mawakala** - Usanidi wa kina kwa Mawakala wa Wateja na Hifadhi  
+✅ **Utekelezaji wa Miundo Mingi** - Uwekaji wa kimkakati wa miundo katika maeneo  
+✅ **Ujumuishaji wa Utafutaji** - AI Search yenye uwezo wa vector na kuorodhesha data  
+✅ **Utekelezaji wa Usalama** - Timu nyekundu, uchunguzi wa udhaifu, na mbinu salama  
+✅ **Ufuatiliaji na Tathmini** - Telemetry ya kina na mfumo wa tathmini ya mawakala  
+✅ **Uzalishaji Tayari** - Utekelezaji wa kiwango cha biashara na HA na urejeshaji wa maafa  
+✅ **Uboreshaji wa Gharama** - Njia za usafirishaji wa akili na kuongeza kulingana na matumizi  
+✅ **Mwongozo wa Utatuzi wa Shida** - Masuala ya kawaida na mikakati ya utatuzi
 
 ---
 
+## 📊 Muhtasari: Ulichojifunza
+
+### Mifumo ya Miundombinu Iliyoshughulikiwa
+
+✅ **Ubunifu wa Mfumo wa Mawakala Wengi** - Mawakala maalum (Wateja + Hifadhi) na miundo maalum  
+✅ **Utekelezaji wa Maeneo Mengi** - Uwekaji wa kimkakati wa miundo kwa uboreshaji wa gharama na uaminifu  
+✅ **Muundo wa RAG** - Ujumuishaji wa AI Search na embeddings za vector kwa majibu yenye msingi  
+✅ **Tathmini ya Mawakala** - Muundo wa grader maalum kwa tathmini ya ubora  
+✅ **Mfumo wa Usalama** - Timu nyekundu na mifumo ya uchunguzi wa udhaifu  
+✅ **Uboreshaji wa Gharama** - Njia za usafirishaji wa miundo na mipango ya uwezo  
+✅ **Ufuatiliaji wa Uzalishaji** - Application Insights na telemetry maalum  
+
+### Kile Hati Hii Inatoa
+
+| Kipengele | Hali | Mahali pa Kupata |
+|-----------|--------|------------------|
+| **Kiolezo cha Miundombinu** | ✅ Tayari kwa Utekelezaji | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Mchoro wa Miundombinu** | ✅ Kamili | Mchoro wa Mermaid hapo juu |
+| **Mifano ya Msimbo** | ✅ Marejeleo ya Utekelezaji | Katika hati hii |
+| **Mifumo ya Usanidi** | ✅ Mwongozo wa Kina | Sehemu 1-10 hapo juu |
+| **Utekelezaji wa Mawakala** | 🔨 Unajenga Hii | ~Saa 40 za maendeleo |
+| **UI ya Mbele** | 🔨 Unajenga Hii | ~Saa 25 za maendeleo |
+| **Mifumo ya Data** | 🔨 Unajenga Hii | ~Saa 10 za maendeleo |
+
+### Uhalisia: Kile Kilicho Hapo Sasa
+
+**Katika Hifadhi (Tayari Sasa):**
+- ✅ Kiolezo cha ARM kinachopeleka huduma 15+ za Azure (azuredeploy.json)
+- ✅ Msimbo wa utekelezaji na uthibitishaji (deploy.sh)
+- ✅ Usanidi wa vigezo (azuredeploy.parameters.json)
+
+**Kilichotajwa Katika Hati (Unaunda):**
+- 🔨 Msimbo wa utekelezaji wa mawakala (~Saa 30-40)
+- 🔨 Huduma ya usafirishaji (~Saa 12-16)
+- 🔨 Programu ya mbele (~Saa 20-30)
+- 🔨 Msimbo wa usanidi wa data (~Saa 8-12)
+- 🔨 Mfumo wa ufuatiliaji (~Saa 10-15)
+
+### Hatua Zako Zifuatazo
+
+#### Ikiwa Unataka Kutoa Miundombinu (Dakika 30)
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup
+```
+
+#### Ikiwa Unataka Kujenga Mfumo Kamili (Saa 80-120)
+1. ✅ Soma na elewa hati hii ya miundombinu (Saa 2-3)
+2. ✅ Tekeleza miundombinu kwa kutumia kiolezo cha ARM (Dakika 30)
+3. 🔨 Tekeleza mawakala kwa kutumia mifano ya msimbo (~Saa 40)
+4. 🔨 Jenga huduma ya usafirishaji kwa FastAPI/Express (~Saa 15)
+5. 🔨 Unda UI ya mbele kwa React/Vue (~Saa 25)
+6. 🔨 Sanidi mfumo wa data na kielezo cha utafutaji (~Saa 10)
+7. 🔨 Ongeza ufuatiliaji na tathmini (~Saa 15)
+8. ✅ Jaribu, salama, na boresha (~Saa 10)
+
+#### Ikiwa Unataka Kujifunza Mifumo ya Mawakala Wengi (Jifunze)
+- 📖 Pitia mchoro wa miundombinu na uhusiano wa vipengele
+- 📖 Soma mifano ya msimbo kwa SearchTool, BingTool, AgentEvaluator
+- 📖 Elewa mkakati wa utekelezaji wa maeneo mengi
+- 📖 Jifunze mifumo ya tathmini na usalama
+- 📖 Tumia mifumo kwenye miradi yako mwenyewe
+
+### Mambo Muhimu ya Kumbuka
+
+1. **Miundombinu dhidi ya Programu** - Kiolezo cha ARM kinatoa miundombinu; mawakala wanahitaji maendeleo
+2. **Mkakati wa Maeneo Mengi** - Uwekaji wa kimkakati wa miundo hupunguza gharama na kuboresha uaminifu
+3. **Mfumo wa Tathmini** - Muundo wa grader maalum huwezesha tathmini ya ubora inayoendelea
+4. **Usalama Kwanza** - Timu nyekundu na uchunguzi wa udhaifu ni muhimu kwa uzalishaji
+5. **Uboreshaji wa Gharama** - Usafirishaji wa akili kati ya GPT-4o na GPT-4o-mini huokoa 60-80%
+
+### Gharama Zinazokadiriwa
+
+| Njia ya Utekelezaji | Miundombinu/Mwezi | Maendeleo (Mara Moja) | Jumla ya Mwezi wa Kwanza |
+|---------------------|-------------------|------------------------|--------------------------|
+| **Minimal** | $100-370 | $15K-25K (Saa 80-120) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (jitihada sawa) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (jitihada sawa) | $16.2K-28.5K |
+
+**Kumbuka:** Miundombinu ni <5% ya gharama ya jumla kwa utekelezaji mpya. Jitihada za maendeleo ndizo uwekezaji mkubwa.
+
+### Rasilimali Zinazohusiana
+
+- 📚 [Mwongozo wa Utekelezaji wa Kiolezo cha ARM](retail-multiagent-arm-template/README.md) - Usanidi wa miundombinu
+- 📚 [Mbinu Bora za Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - Utekelezaji wa miundo
+- 📚 [Nyaraka za AI Search](https://learn.microsoft.com/azure/search/) - Usanidi wa utafutaji wa vector
+- 📚 [Mifumo ya Programu za Kontena](https://learn.microsoft.com/azure/container-apps/) - Utekelezaji wa huduma ndogo
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Usanidi wa ufuatiliaji
+
+### Maswali au Masuala?
+
+- 🐛 [Ripoti Masuala](https://github.com/microsoft/AZD-for-beginners/issues) - Hitilafu za kiolezo au makosa ya nyaraka
+- 💬 [Majadiliano ya GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Maswali ya miundombinu
+- 📖 [Maswali Yanayoulizwa Mara kwa Mara](../../resources/faq.md) - Maswali ya kawaida yamejibiwa
+- 🔧 [Mwongozo wa Utatuzi wa Shida](../../docs/troubleshooting/common-issues.md) - Masuala ya utekelezaji
+
+---
+
+**Hali hii ya kina inatoa mpango wa miundombinu ya kiwango cha biashara kwa mifumo ya AI ya mawakala wengi, ikiwa na violezo vya miundombinu, mwongozo wa utekelezaji, na mbinu bora za uzalishaji kwa kujenga suluhisho za msaada wa wateja wa hali ya juu kwa Azure Developer CLI.**
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
