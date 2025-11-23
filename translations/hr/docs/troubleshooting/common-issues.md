@@ -1,317 +1,317 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-18T12:03:02+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-23T18:57:26+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "hr"
 }
 -->
-# Uobičajeni Problemi i Rješenja
+# Uobičajeni problemi i rješenja
 
-**Navigacija Poglavljem:**
-- **📚 Početna Stranica Tečaja**: [AZD za Početnike](../../README.md)
-- **📖 Trenutno Poglavlje**: Poglavlje 7 - Rješavanje Problema i Otklanjanje Pogrešaka
-- **⬅️ Prethodno Poglavlje**: [Poglavlje 6: Provjere Prije Implementacije](../pre-deployment/preflight-checks.md)
-- **➡️ Sljedeće**: [Vodič za Otklanjanje Pogrešaka](debugging.md)
-- **🚀 Sljedeće Poglavlje**: [Poglavlje 8: Obrasci za Produkciju i Poduzeća](../ai-foundry/production-ai-practices.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 7 - Rješavanje problema i otklanjanje pogrešaka
+- **⬅️ Prethodno poglavlje**: [Poglavlje 6: Provjere prije implementacije](../pre-deployment/preflight-checks.md)
+- **➡️ Sljedeće**: [Vodič za otklanjanje pogrešaka](debugging.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 8: Proizvodni i poslovni obrasci](../microsoft-foundry/production-ai-practices.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič za rješavanje problema pokriva najčešće poteškoće s kojima se možete susresti prilikom korištenja Azure Developer CLI-a. Naučite kako dijagnosticirati, rješavati i otklanjati uobičajene probleme vezane uz autentifikaciju, implementaciju, postavljanje infrastrukture i konfiguraciju aplikacija. Svaki problem uključuje detaljne simptome, uzroke i korake za rješavanje.
+Ovaj sveobuhvatni vodič za rješavanje problema pokriva najčešće probleme s kojima se možete susresti pri korištenju Azure Developer CLI-a. Naučite kako dijagnosticirati, riješiti i otkloniti uobičajene probleme s autentifikacijom, implementacijom, postavljanjem infrastrukture i konfiguracijom aplikacija. Svaki problem uključuje detaljne simptome, uzroke i korake za rješavanje.
 
-## Ciljevi Učenja
+## Ciljevi učenja
 
 Završetkom ovog vodiča, naučit ćete:
-- Ovladati tehnikama dijagnostike problema s Azure Developer CLI-jem
+- Ovladati tehnikama dijagnostike za probleme s Azure Developer CLI-jem
 - Razumjeti uobičajene probleme s autentifikacijom i dozvolama te njihova rješenja
-- Rješavati probleme s implementacijom, pogreške u postavljanju infrastrukture i konfiguracijske poteškoće
-- Provoditi proaktivno praćenje i strategije otklanjanja pogrešaka
-- Primijeniti sustavne metodologije za rješavanje složenih problema
-- Postaviti pravilno bilježenje i praćenje kako biste spriječili buduće probleme
+- Riješiti neuspjele implementacije, pogreške u postavljanju infrastrukture i probleme s konfiguracijom
+- Primijeniti proaktivne strategije praćenja i otklanjanja pogrešaka
+- Koristiti sustavne metode rješavanja složenih problema
+- Postaviti odgovarajuće zapisivanje i praćenje kako biste spriječili buduće probleme
 
-## Ishodi Učenja
+## Ishodi učenja
 
 Po završetku, moći ćete:
 - Dijagnosticirati probleme s Azure Developer CLI-jem koristeći ugrađene alate za dijagnostiku
-- Samostalno rješavati probleme vezane uz autentifikaciju, pretplate i dozvole
-- Učinkovito otklanjati pogreške u implementaciji i postavljanju infrastrukture
-- Rješavati probleme s konfiguracijom aplikacija i specifične probleme vezane uz okruženje
-- Provoditi praćenje i postavljanje upozorenja za proaktivno prepoznavanje potencijalnih problema
-- Primijeniti najbolje prakse za bilježenje, otklanjanje pogrešaka i tijekove rješavanja problema
+- Samostalno riješiti probleme s autentifikacijom, pretplatama i dozvolama
+- Učinkovito otkloniti neuspjele implementacije i pogreške u postavljanju infrastrukture
+- Otkloniti probleme s konfiguracijom aplikacija i specifične probleme okruženja
+- Implementirati praćenje i upozorenja za proaktivno prepoznavanje potencijalnih problema
+- Primijeniti najbolje prakse za zapisivanje, otklanjanje pogrešaka i tijekove rješavanja problema
 
-## Brza Dijagnostika
+## Brza dijagnostika
 
-Prije nego što se upustite u specifične probleme, pokrenite ove naredbe kako biste prikupili dijagnostičke informacije:
+Prije nego što se upustite u specifične probleme, pokrenite ove naredbe za prikupljanje dijagnostičkih informacija:
 
 ```bash
-# Check azd version and health
+# Provjeri azd verziju i stanje
 azd version
 azd config list
 
-# Verify Azure authentication
+# Provjeri Azure autentifikaciju
 az account show
 az account list
 
-# Check current environment
+# Provjeri trenutno okruženje
 azd env show
 azd env get-values
 
-# Enable debug logging
+# Omogući zapisivanje za debugiranje
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
-## Problemi s Autentifikacijom
+## Problemi s autentifikacijom
 
-### Problem: "Nije moguće dobiti pristupni token"
+### Problem: "Nije uspjelo dobivanje pristupnog tokena"
 **Simptomi:**
-- `azd up` ne uspijeva s greškama autentifikacije
+- `azd up` ne uspijeva s pogreškama autentifikacije
 - Naredbe vraćaju "neautorizirano" ili "pristup odbijen"
 
 **Rješenja:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Ponovno se autentificirajte pomoću Azure CLI
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. Očistite predmemorirane vjerodajnice
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. Koristite tok koda uređaja (za sustave bez glave)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. Postavite eksplicitnu pretplatu
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
 ### Problem: "Nedovoljne privilegije" tijekom implementacije
 **Simptomi:**
-- Implementacija ne uspijeva zbog grešaka s dozvolama
-- Nije moguće stvoriti određene Azure resurse
+- Implementacija ne uspijeva s pogreškama dozvola
+- Nemogućnost stvaranja određenih Azure resursa
 
 **Rješenja:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. Provjerite svoje Azure dodjele uloga
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. Osigurajte da imate potrebne uloge
+# - Suradnik (za stvaranje resursa)
+# - Administrator korisničkog pristupa (za dodjelu uloga)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. Kontaktirajte svog Azure administratora za odgovarajuće dozvole
 ```
 
-### Problem: Problemi s autentifikacijom u više najmoprimaca
+### Problem: Problemi s autentifikacijom u više tenanata
 **Rješenja:**
 ```bash
-# 1. Login with specific tenant
+# 1. Prijavite se s određenim zakupcem
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. Postavite zakupca u konfiguraciji
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. Očistite predmemoriju zakupca ako mijenjate zakupce
 az account clear
 ```
 
-## 🏗️ Pogreške u Postavljanju Infrastrukture
+## 🏗️ Pogreške u postavljanju infrastrukture
 
 ### Problem: Sukobi u nazivima resursa
 **Simptomi:**
-- Greške "Naziv resursa već postoji"
+- Pogreške "Naziv resursa već postoji"
 - Implementacija ne uspijeva tijekom stvaranja resursa
 
 **Rješenja:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# 1. Koristite jedinstvena imena resursa s tokenima
+# U vašem Bicep predlošku:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# 2. Promijenite naziv okruženja
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# 3. Očistite postojeće resurse
 azd down --force --purge
 ```
 
-### Problem: Lokacija/Regija nije dostupna
+### Problem: Lokacija/regija nije dostupna
 **Simptomi:**
 - "Lokacija 'xyz' nije dostupna za vrstu resursa"
 - Određeni SKU-ovi nisu dostupni u odabranoj regiji
 
 **Rješenja:**
 ```bash
-# 1. Check available locations for resource types
+# 1. Provjerite dostupne lokacije za vrste resursa
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. Koristite uobičajeno dostupne regije
 azd config set defaults.location eastus2
-# or
+# ili
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Provjerite dostupnost usluge po regijama
+# Posjetite: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problem: Prekoračenje kvote
+### Problem: Pogreške prekoračenja kvote
 **Simptomi:**
 - "Prekoračena kvota za vrstu resursa"
 - "Dosegnut maksimalan broj resursa"
 
 **Rješenja:**
 ```bash
-# 1. Check current quota usage
+# 1. Provjerite trenutnu upotrebu kvote
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. Zatražite povećanje kvote putem Azure portala
+# Idite na: Pretplate > Upotreba + kvote
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. Koristite manje SKU-ove za razvoj
+# U main.parameters.json:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. Očistite neiskorištene resurse
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### Problem: Pogreške u Bicep predlošcima
 **Simptomi:**
 - Neuspjeh validacije predloška
-- Sintaktičke greške u Bicep datotekama
+- Sintaktičke pogreške u Bicep datotekama
 
 **Rješenja:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. Provjerite sintaksu Bicep-a
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. Koristite Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. Provjerite sintaksu datoteke parametara
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. Pregledajte promjene implementacije
 azd provision --preview
 ```
 
-## 🚀 Neuspjesi Implementacije
+## 🚀 Neuspjele implementacije
 
-### Problem: Neuspjesi u izgradnji
+### Problem: Pogreške u izgradnji
 **Simptomi:**
-- Aplikacija se ne uspijeva izgraditi tijekom implementacije
-- Greške pri instalaciji paketa
+- Aplikacija ne uspijeva izgraditi tijekom implementacije
+- Pogreške pri instalaciji paketa
 
 **Rješenja:**
 ```bash
-# 1. Check build logs
+# 1. Provjerite zapisnike izgradnje
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. Testirajte izgradnju lokalno
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. Provjerite kompatibilnost verzije Node.js/Python
+node --version  # Treba odgovarati postavkama u azure.yaml
 python --version
 
-# 4. Clear build cache
+# 4. Očistite predmemoriju izgradnje
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. Provjerite Dockerfile ako koristite kontejnere
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problem: Neuspjesi u implementaciji kontejnera
+### Problem: Neuspjele implementacije kontejnera
 **Simptomi:**
-- Kontejnerske aplikacije se ne pokreću
-- Greške pri povlačenju slike
+- Kontejnerske aplikacije ne uspijevaju pokrenuti
+- Pogreške pri povlačenju slike
 
 **Rješenja:**
 ```bash
-# 1. Test Docker build locally
+# 1. Testiraj lokalnu izgradnju Dockera
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. Provjeri logove kontejnera
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. Provjeri pristup registru kontejnera
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. Provjeri konfiguraciju aplikacije kontejnera
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problem: Problemi s povezivanjem na bazu podataka
+### Problem: Pogreške u povezivanju s bazom podataka
 **Simptomi:**
-- Aplikacija se ne može povezati na bazu podataka
-- Greške vremenskog isteka veze
+- Aplikacija se ne može povezati s bazom podataka
+- Pogreške vremenskog isteka veze
 
 **Rješenja:**
 ```bash
-# 1. Check database firewall rules
+# 1. Provjerite pravila vatrozida baze podataka
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. Testirajte povezivost iz aplikacije
+# Privremeno dodajte u svoju aplikaciju:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. Provjerite format niza za povezivanje
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. Provjerite status poslužitelja baze podataka
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 Problemi s Konfiguracijom
+## 🔧 Problemi s konfiguracijom
 
-### Problem: Okolišne varijable ne rade
+### Problem: Varijable okruženja ne rade
 **Simptomi:**
-- Aplikacija ne može pročitati konfiguracijske vrijednosti
-- Okolišne varijable se prikazuju kao prazne
+- Aplikacija ne može pročitati vrijednosti konfiguracije
+- Varijable okruženja se čine praznima
 
 **Rješenja:**
 ```bash
-# 1. Verify environment variables are set
+# 1. Provjerite jesu li postavljene varijable okruženja
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. Provjerite nazive varijabli u azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. Ponovno pokrenite aplikaciju
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. Provjerite konfiguraciju usluge aplikacije
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
 ### Problem: Problemi s SSL/TLS certifikatima
 **Simptomi:**
 - HTTPS ne radi
-- Greške validacije certifikata
+- Pogreške validacije certifikata
 
 **Rješenja:**
 ```bash
-# 1. Check SSL certificate status
+# 1. Provjerite status SSL certifikata
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. Omogućite samo HTTPS
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. Dodajte prilagođenu domenu (ako je potrebno)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
@@ -322,21 +322,21 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 **Rješenja:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. Konfigurirajte CORS za App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. Ažurirajte API za rukovanje CORS-om
+# U Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. Provjerite radi li na ispravnim URL-ovima
 azd show
 ```
 
-## 🌍 Problemi s Upravljanjem Okruženjem
+## 🌍 Problemi s upravljanjem okruženjem
 
 ### Problem: Problemi s prebacivanjem okruženja
 **Simptomi:**
@@ -345,40 +345,40 @@ azd show
 
 **Rješenja:**
 ```bash
-# 1. List all environments
+# 1. Popis svih okruženja
 azd env list
 
-# 2. Explicitly select environment
+# 2. Izričito odabrati okruženje
 azd env select production
 
-# 3. Verify current environment
+# 3. Provjeriti trenutno okruženje
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. Stvoriti novo okruženje ako je oštećeno
 azd env new production-new
 azd env select production-new
 ```
 
-### Problem: Oštećenje okruženja
+### Problem: Korupcija okruženja
 **Simptomi:**
-- Okruženje prikazuje nevažeće stanje
+- Okruženje pokazuje nevažeće stanje
 - Resursi ne odgovaraju konfiguraciji
 
 **Rješenja:**
 ```bash
-# 1. Refresh environment state
+# 1. Osvježi stanje okruženja
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. Resetiraj konfiguraciju okruženja
 azd env new production-reset
-# Copy over required environment variables
+# Kopiraj potrebne varijable okruženja
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. Uvezi postojeće resurse (ako je moguće)
+# Ručno ažuriraj .azure/production/config.json s ID-ovima resursa
 ```
 
-## 🔍 Problemi s Performansama
+## 🔍 Problemi s performansama
 
 ### Problem: Sporo vrijeme implementacije
 **Simptomi:**
@@ -387,19 +387,19 @@ azd env set DATABASE_URL "your-value"
 
 **Rješenja:**
 ```bash
-# 1. Enable parallel deployment
+# 1. Omogući paralelno postavljanje
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. Koristi inkrementalna postavljanja
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. Optimiziraj proces izgradnje
+# U package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. Provjeri lokacije resursa (koristi istu regiju)
 azd config set defaults.location eastus2
 ```
 
@@ -410,100 +410,100 @@ azd config set defaults.location eastus2
 
 **Rješenja:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# 1. Povećajte resurse
+# Ažurirajte SKU u main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# 2. Omogućite praćenje Application Insights
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# 3. Provjerite zapisnike aplikacije za uska grla
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# 4. Implementirajte predmemoriranje
+# Dodajte Redis predmemoriju u svoju infrastrukturu
 ```
 
-## 🛠️ Alati i Naredbe za Otklanjanje Pogrešaka
+## 🛠️ Alati i naredbe za otklanjanje pogrešaka
 
-### Naredbe za Otklanjanje Pogrešaka
+### Naredbe za otklanjanje pogrešaka
 ```bash
-# Comprehensive debugging
+# Sveobuhvatno ispravljanje pogrešaka
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# Provjeri informacije o sustavu
 azd info
 
-# Validate configuration
+# Potvrdi konfiguraciju
 azd config validate
 
-# Test connectivity
+# Testiraj povezivost
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Analiza Logova
+### Analiza logova
 ```bash
-# Application logs
+# Dnevnici aplikacije
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# Dnevnici resursa Azure
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# Dnevnici kontejnera (za aplikacije u kontejnerima)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Istraživanje Resursa
+### Istraživanje resursa
 ```bash
-# List all resources
+# Popis svih resursa
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# Provjeri status resursa
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# Dijagnostika mreže
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Dodatna Pomoć
+## 🆘 Dodatna pomoć
 
-### Kada Eskalirati
-- Problemi s autentifikacijom traju i nakon pokušaja svih rješenja
-- Problemi s infrastrukturom vezani uz Azure usluge
-- Problemi s naplatom ili pretplatama
+### Kada eskalirati
+- Problemi s autentifikacijom traju nakon svih pokušaja rješavanja
+- Problemi s infrastrukturom Azure usluga
+- Problemi vezani uz naplatu ili pretplatu
 - Sigurnosni problemi ili incidenti
 
-### Kanali Podrške
+### Kanali podrške
 ```bash
-# 1. Check Azure Service Health
+# 1. Provjerite Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# 2. Kreirajte Azure podršku tiket
+# Idite na: https://portal.azure.com -> Pomoć + podrška
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
+# 3. Resursi zajednice
+# - Stack Overflow: oznaka azure-developer-cli
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Informacije za Prikupljanje
+### Informacije koje treba prikupiti
 Prije kontaktiranja podrške, prikupite:
 - Izlaz `azd version`
 - Izlaz `azd info`
-- Poruke o greškama (cijeli tekst)
+- Poruke o pogreškama (cijeli tekst)
 - Korake za reprodukciju problema
 - Detalje o okruženju (`azd env show`)
 - Vremenski okvir kada je problem započeo
 
-### Skripta za Prikupljanje Logova
+### Skripta za prikupljanje logova
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# prikupi-debug-info.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -524,36 +524,36 @@ azd logs --since 1h >> debug-logs/recent-logs.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 Prevencija Problema
+## 📊 Prevencija problema
 
-### Popis za Provjeru Prije Implementacije
+### Popis za provjeru prije implementacije
 ```bash
-# 1. Validate authentication
+# 1. Provjerite autentifikaciju
 az account show
 
-# 2. Check quotas and limits
+# 2. Provjerite kvote i ograničenja
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. Provjerite predloške
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. Prvo testirajte lokalno
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. Koristite implementacije probnog pokretanja
 azd provision --preview
 ```
 
-### Postavljanje Praćenja
+### Postavljanje praćenja
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# Omogući Application Insights
+# Dodaj u main.bicep:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# Postavi upozorenja
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -561,36 +561,38 @@ az monitor metrics alert create \
   --condition "avg Percentage CPU > 80"
 ```
 
-### Redovito Održavanje
+### Redovito održavanje
 ```bash
-# Weekly health checks
+# Tjedni zdravstveni pregledi
 ./scripts/health-check.sh
 
-# Monthly cost review
+# Mjesečni pregled troškova
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# Tromjesečni pregled sigurnosti
 az security assessment list --resource-group myrg
 ```
 
-## Povezani Resursi
+## Povezani resursi
 
-- [Vodič za Otklanjanje Pogrešaka](debugging.md) - Napredne tehnike otklanjanja pogrešaka
-- [Postavljanje Resursa](../deployment/provisioning.md) - Rješavanje problema s infrastrukturom
-- [Planiranje Kapaciteta](../pre-deployment/capacity-planning.md) - Smjernice za planiranje resursa
-- [Odabir SKU-a](../pre-deployment/sku-selection.md) - Preporuke za odabir razine usluge
+- [Vodič za otklanjanje pogrešaka](debugging.md) - Napredne tehnike otklanjanja pogrešaka
+- [Postavljanje resursa](../deployment/provisioning.md) - Rješavanje problema s infrastrukturom
+- [Planiranje kapaciteta](../pre-deployment/capacity-planning.md) - Smjernice za planiranje resursa
+- [Odabir SKU-a](../pre-deployment/sku-selection.md) - Preporuke za razine usluga
 
 ---
 
-**Savjet**: Označite ovaj vodič i koristite ga svaki put kada naiđete na probleme. Većina problema već je viđena i ima utvrđena rješenja!
+**Savjet**: Ovaj vodič držite označenim i koristite ga kad god naiđete na probleme. Većina problema već je viđena i ima utvrđena rješenja!
 
 ---
 
 **Navigacija**
-- **Prethodna Lekcija**: [Postavljanje Resursa](../deployment/provisioning.md)
-- **Sljedeća Lekcija**: [Vodič za Otklanjanje Pogrešaka](debugging.md)
+- **Prethodna lekcija**: [Postavljanje resursa](../deployment/provisioning.md)
+- **Sljedeća lekcija**: [Vodič za otklanjanje pogrešaka](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne odgovaramo za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

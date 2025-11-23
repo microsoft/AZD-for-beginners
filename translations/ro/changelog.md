@@ -1,360 +1,580 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "ae2cfa632f02df516d4e7cdddbb4a8b5",
-  "translation_date": "2025-10-24T18:01:38+00:00",
+  "original_hash": "1bc63a39d4cf8fc5cb5c7040344be859",
+  "translation_date": "2025-11-23T16:38:49+00:00",
   "source_file": "changelog.md",
   "language_code": "ro"
 }
 -->
-# Jurnal de modificări - AZD pentru Începători
+# Jurnal de Schimbări - AZD pentru Începători
 
 ## Introducere
 
-Acest jurnal de modificări documentează toate schimbările notabile, actualizările și îmbunătățirile aduse în depozitul AZD pentru Începători. Urmăm principiile versiunii semantice și menținem acest jurnal pentru a ajuta utilizatorii să înțeleagă ce s-a schimbat între versiuni.
+Acest jurnal de schimbări documentează toate modificările, actualizările și îmbunătățirile notabile aduse în depozitul AZD pentru Începători. Urmăm principiile versiunii semantice și menținem acest jurnal pentru a ajuta utilizatorii să înțeleagă ce s-a schimbat între versiuni.
 
-## Obiective de învățare
+## Obiective de Învățare
 
-Revizuind acest jurnal de modificări, veți:
-- Rămâneți informați despre funcționalitățile noi și adăugirile de conținut
-- Înțelegeți îmbunătățirile aduse documentației existente
-- Urmăriți corecturile și rezolvările de erori pentru a asigura acuratețea
-- Observați evoluția materialelor de învățare de-a lungul timpului
+Revizuind acest jurnal de schimbări, veți:
+- Rămâne informat despre funcționalitățile noi și adăugările de conținut
+- Înțelege îmbunătățirile aduse documentației existente
+- Urmări corecturile și remediile pentru a asigura acuratețea
+- Urmări evoluția materialelor de învățare în timp
 
-## Rezultate ale învățării
+## Rezultate ale Învățării
 
-După ce ați analizat înregistrările din jurnalul de modificări, veți putea:
-- Identifica conținutul nou și resursele disponibile pentru învățare
+După revizuirea înregistrărilor din jurnalul de schimbări, veți putea:
+- Identifica conținutul și resursele noi disponibile pentru învățare
 - Înțelege ce secțiuni au fost actualizate sau îmbunătățite
-- Planificați traseul de învățare bazat pe cele mai recente materiale
-- Contribuiți cu feedback și sugestii pentru îmbunătățiri viitoare
+- Planifica parcursul de învățare pe baza celor mai recente materiale
+- Contribui cu feedback și sugestii pentru îmbunătățiri viitoare
 
-## Istoricul versiunilor
+## Istoricul Versiunilor
 
-### [v3.4.0] - 24.10.2025
+### [v3.8.0] - 2025-11-19
 
-#### Îmbunătățiri pentru previzualizarea și validarea infrastructurii
-**Această versiune introduce suport cuprinzător pentru noua funcționalitate de previzualizare a CLI-ului Azure Developer și îmbunătățește experiența utilizatorilor în cadrul atelierului.**
+#### Documentație Avansată: Monitorizare, Securitate și Modele Multi-Agent
+**Această versiune adaugă lecții de nivel avansat despre integrarea Application Insights, modele de autentificare și coordonare multi-agent pentru implementări în producție.**
 
-#### Adăugiri
-- **🧪 Documentație pentru funcționalitatea azd provision --preview**: Acoperire completă a noii capacități de previzualizare a infrastructurii
-  - Referințe pentru comenzi și exemple de utilizare în fișa de ajutor
+#### Adăugat
+- **📊 Lecție despre Integrarea Application Insights**: în `docs/pre-deployment/application-insights.md`:
+  - Implementare AZD cu aprovizionare automată
+  - Șabloane complete Bicep pentru Application Insights + Log Analytics
+  - Aplicații Python funcționale cu telemetrie personalizată (peste 1.200 de linii)
+  - Modele de monitorizare AI/LLM (urmărirea token-urilor/costurilor Azure OpenAI)
+  - 6 diagrame Mermaid (arhitectură, trasare distribuită, flux de telemetrie)
+  - 3 exerciții practice (alerte, tablouri de bord, monitorizare AI)
+  - Exemple de interogări Kusto și strategii de optimizare a costurilor
+  - Streaming de metrici live și depanare în timp real
+  - Timp de învățare de 40-50 minute cu modele pregătite pentru producție
+
+- **🔐 Lecție despre Modele de Autentificare și Securitate**: în `docs/getting-started/authsecurity.md`:
+  - 3 modele de autentificare (șiruri de conexiune, Key Vault, identitate gestionată)
+  - Șabloane complete de infrastructură Bicep pentru implementări sigure
+  - Cod de aplicație Node.js cu integrare Azure SDK
+  - 3 exerciții complete (activare identitate gestionată, identitate atribuită utilizatorului, rotație Key Vault)
+  - Cele mai bune practici de securitate și configurații RBAC
+  - Ghid de depanare și analiză a costurilor
+  - Modele de autentificare fără parolă pregătite pentru producție
+
+- **🤖 Lecție despre Modele de Coordonare Multi-Agent**: în `docs/pre-deployment/coordination-patterns.md`:
+  - 5 modele de coordonare (secvențial, paralel, ierarhic, bazat pe evenimente, consens)
+  - Implementare completă a unui serviciu de orchestrare (Python/Flask, peste 1.500 de linii)
+  - 3 implementări specializate de agenți (Cercetare, Redactor, Editor)
+  - Integrare Service Bus pentru cozi de mesaje
+  - Gestionarea stării în Cosmos DB pentru sisteme distribuite
+  - 6 diagrame Mermaid care arată interacțiunile agenților
+  - 3 exerciții avansate (gestionarea timeout-urilor, logica de retry, circuit breaker)
+  - Defalcare a costurilor (240-565 USD/lună) cu strategii de optimizare
+  - Integrare Application Insights pentru monitorizare
+
+#### Îmbunătățit
+- **Capitolul Pre-implementare**: Include acum modele complete de monitorizare și coordonare
+- **Capitolul Introducere**: Îmbunătățit cu modele profesionale de autentificare
+- **Pregătire pentru Producție**: Acoperire completă de la securitate la observabilitate
+- **Structura Cursului**: Actualizată pentru a face referire la noile lecții din Capitolele 3 și 6
+
+#### Modificat
+- **Progresia Învățării**: Integrare mai bună a securității și monitorizării pe parcursul cursului
+- **Calitatea Documentației**: Standard consistent de calitate A (95-97%) în noile lecții
+- **Modele de Producție**: Acoperire completă de la început până la sfârșit pentru implementări la nivel de întreprindere
+
+#### Îmbunătățit
+- **Experiența Dezvoltatorului**: Cale clară de la dezvoltare la monitorizarea în producție
+- **Standarde de Securitate**: Modele profesionale pentru autentificare și gestionarea secretelor
+- **Observabilitate**: Integrare completă Application Insights cu AZD
+- **Sarcini AI**: Monitorizare specializată pentru Azure OpenAI și sisteme multi-agent
+
+#### Validat
+- ✅ Toate lecțiile includ cod complet funcțional (nu doar fragmente)
+- ✅ Diagrame Mermaid pentru învățare vizuală (19 în total în cele 3 lecții)
+- ✅ Exerciții practice cu pași de verificare (9 în total)
+- ✅ Șabloane Bicep pregătite pentru producție, implementabile prin `azd up`
+- ✅ Analiză a costurilor și strategii de optimizare
+- ✅ Ghiduri de depanare și cele mai bune practici
+- ✅ Puncte de verificare a cunoștințelor cu comenzi de verificare
+
+#### Rezultatele Evaluării Documentației
+- **docs/pre-deployment/application-insights.md**: - Ghid complet de monitorizare
+- **docs/getting-started/authsecurity.md**: - Modele profesionale de securitate
+- **docs/pre-deployment/coordination-patterns.md**: - Arhitecturi avansate multi-agent
+- **Conținut Nou General**: - Standard de calitate consistent ridicat
+
+#### Implementare Tehnică
+- **Application Insights**: Log Analytics + telemetrie personalizată + trasare distribuită
+- **Autentificare**: Identitate Gestionată + Key Vault + modele RBAC
+- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orchestrare
+- **Monitorizare**: Metrici live + interogări Kusto + alerte + tablouri de bord
+- **Gestionarea Costurilor**: Strategii de eșantionare, politici de retenție, controale bugetare
+
+### [v3.7.0] - 2025-11-19
+
+#### Îmbunătățiri ale Calității Documentației și Exemplu Nou Azure OpenAI
+**Această versiune îmbunătățește calitatea documentației în întregul depozit și adaugă un exemplu complet de implementare Azure OpenAI cu interfață de chat GPT-4.**
+
+#### Adăugat
+- **🤖 Exemplu de Chat Azure OpenAI**: Implementare completă GPT-4 în `examples/azure-openai-chat/`:
+  - Infrastructură completă Azure OpenAI (implementare model GPT-4)
+  - Interfață de chat Python în linie de comandă cu istoric conversațional
+  - Integrare Key Vault pentru stocarea sigură a cheilor API
+  - Urmărirea utilizării token-urilor și estimarea costurilor
+  - Limitarea ratei și gestionarea erorilor
+  - README cu ghid de implementare de 35-45 minute
+  - 11 fișiere pregătite pentru producție (șabloane Bicep, aplicație Python, configurație)
+- **📚 Exerciții de Documentație**: Adăugate exerciții practice în ghidul de configurare:
+  - Exercițiul 1: Configurare multi-mediu (15 minute)
+  - Exercițiul 2: Practică de gestionare a secretelor (10 minute)
+  - Criterii clare de succes și pași de verificare
+- **✅ Verificare Implementare**: Secțiune de verificare adăugată în ghidul de implementare:
+  - Proceduri de verificare a sănătății
+  - Listă de verificare a criteriilor de succes
+  - Rezultate așteptate pentru toate comenzile de implementare
+  - Referință rapidă pentru depanare
+
+#### Îmbunătățit
+- **examples/README.md**: Actualizat la calitate A (93%):
+  - Adăugat azure-openai-chat în toate secțiunile relevante
+  - Actualizat numărul de exemple locale de la 3 la 4
+  - Adăugat în tabelul Exemple de Aplicații AI
+  - Integrat în Ghidul Rapid pentru Utilizatori Intermediari
+  - Adăugat în secțiunea Șabloane Microsoft Foundry pentru AI
+  - Actualizat Matricea de Comparație și secțiunile de identificare a tehnologiilor
+- **Calitatea Documentației**: Îmbunătățită de la B+ (87%) → A- (92%) în folderul docs:
+  - Adăugate rezultate așteptate pentru exemplele critice de comenzi
+  - Incluse pași de verificare pentru modificările de configurare
+  - Îmbunătățită învățarea practică cu exerciții aplicate
+
+#### Modificat
+- **Progresia Învățării**: Integrare mai bună a exemplelor AI pentru utilizatorii intermediari
+- **Structura Documentației**: Exerciții mai aplicabile cu rezultate clare
+- **Procesul de Verificare**: Criterii explicite de succes adăugate în fluxurile cheie
+
+#### Îmbunătățit
+- **Experiența Dezvoltatorului**: Implementarea Azure OpenAI durează acum 35-45 minute (față de 60-90 pentru alternative complexe)
+- **Transparența Costurilor**: Estimări clare ale costurilor (50-200 USD/lună) pentru exemplul Azure OpenAI
+- **Parcursul de Învățare**: Dezvoltatorii AI au un punct de intrare clar cu azure-openai-chat
+- **Standardele Documentației**: Rezultate așteptate și pași de verificare consistenți
+
+#### Validat
+- ✅ Exemplul Azure OpenAI complet funcțional cu `azd up`
+- ✅ Toate cele 11 fișiere de implementare corecte sintactic
+- ✅ Instrucțiunile README corespund experienței reale de implementare
+- ✅ Linkurile documentației actualizate în peste 8 locații
+- ✅ Indexul exemplelor reflectă corect cele 4 exemple locale
+- ✅ Fără linkuri externe duplicate în tabele
+- ✅ Toate referințele de navigare corecte
+
+#### Implementare Tehnică
+- **Arhitectura Azure OpenAI**: GPT-4 + Key Vault + model Container Apps
+- **Securitate**: Pregătit pentru Identitate Gestionată, secrete în Key Vault
+- **Monitorizare**: Integrare Application Insights
+- **Gestionarea Costurilor**: Urmărirea token-urilor și optimizarea utilizării
+- **Implementare**: O singură comandă `azd up` pentru configurare completă
+
+### [v3.6.0] - 2025-11-19
+
+#### Actualizare Majoră: Exemple de Implementare a Aplicațiilor Containerizate
+**Această versiune introduce exemple complete, pregătite pentru producție, de implementare a aplicațiilor containerizate folosind Azure Developer CLI (AZD), cu documentație completă și integrare în parcursul de învățare.**
+
+#### Adăugat
+- **🚀 Exemple de Aplicații Containerizate**: Noi exemple locale în `examples/container-app/`:
+  - [Ghid Principal](examples/container-app/README.md): Prezentare completă a implementărilor containerizate, ghid rapid, producție și modele avansate
+  - [API Flask Simplu](../../examples/container-app/simple-flask-api): API REST prietenos pentru începători cu scale-to-zero, probe de sănătate, monitorizare și depanare
+  - [Arhitectură Microservicii](../../examples/container-app/microservices): Implementare multi-serviciu pregătită pentru producție (API Gateway, Product, Order, User, Notification), mesagerie asincronă, Service Bus, Cosmos DB, Azure SQL, trasare distribuită, implementare blue-green/canary
+- **Cele Mai Bune Practici**: Securitate, monitorizare, optimizare a costurilor și ghidare CI/CD pentru sarcini containerizate
+- **Exemple de Cod**: `azure.yaml` complet, șabloane Bicep și implementări de servicii multi-limbaj (Python, Node.js, C#, Go)
+- **Testare și Depanare**: Scenarii de testare end-to-end, comenzi de monitorizare, ghiduri de depanare
+
+#### Modificat
+- **README.md**: Actualizat pentru a evidenția și lega noile exemple de aplicații containerizate sub "Exemple Locale - Aplicații Containerizate"
+- **examples/README.md**: Actualizat pentru a evidenția exemplele de aplicații containerizate, a adăuga intrări în matricea de comparație și a actualiza referințele tehnologice/arhitecturale
+- **Structura Cursului și Ghidul de Studiu**: Actualizate pentru a face referire la noile exemple de aplicații containerizate și modele de implementare în capitolele relevante
+
+#### Validat
+- ✅ Toate noile exemple implementabile cu `azd up` și urmează cele mai bune practici
+- ✅ Linkurile și navigarea documentației actualizate
+- ✅ Exemplele acoperă scenarii de la începători la avansați, inclusiv microservicii de producție
+
+#### Note
+- **Domeniu**: Documentație și exemple doar în limba engleză
+- **Pași Următori**: Extindere cu modele avansate suplimentare pentru containere și automatizare CI/CD în versiunile viitoare
+
+### [v3.5.0] - 2025-11-19
+
+#### Rebranding al Produsului: Microsoft Foundry
+**Această versiune implementează o schimbare completă a denumirii produsului din "Azure AI Foundry" în "Microsoft Foundry" în toată documentația în limba engleză, reflectând rebranding-ul oficial al Microsoft.**
+
+#### Modificat
+- **🔄 Actualizare Denumire Produs**: Rebranding complet din "Azure AI Foundry" în "Microsoft Foundry"
+  - Actualizate toate referințele din documentația în limba engleză din folderul `docs/`
+  - Folder redenumit: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Fișier redenumit: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Total: 23 referințe de conținut actualizate în 7 fișiere de documentație
+
+- **📁 Schimbări în Structura Folderelor**:
+  - `docs/ai-foundry/` redenumit în `docs/microsoft-foundry/`
+  - Toate referințele încrucișate actualizate pentru a reflecta noua structură a folderelor
+  - Linkurile de navigare validate în toată documentația
+
+- **📄 Redenumiri de Fișiere**:
+  - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Toate linkurile interne actualizate pentru a face referire la noul nume de fișier
+
+#### Fișiere Actualizate
+- **Documentația Capitolului** (7 fișiere):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 actualizări de linkuri de navigare
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 referințe la denumirea produsului actualizate
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Deja folosește Microsoft Foundry (din actualizările anterioare)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 referințe actualizate (prezentare generală, feedback comunitar, documentație)
+  - `docs/getting-started/azd-basics.md` - 4 linkuri de referință încrucișată actualizate
+  - `docs/getting-started/first-project.md` - 2 linkuri de navigare a capitolului actualizate
+  - `docs/getting-started/installation.md` - 2 linkuri către capitolul următor actualizate
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 referințe actualizate (navigare, comunitatea Discord)
+  - `docs/troubleshooting/common-issues.md` - 1 link de navigare actualizat
+  - `docs/troubleshooting/debugging.md` - 1 link de navigare actualizat
+
+- **Fișierele Structurii Cursului** (2 fișiere):
+
+- **Atelier**: Materialele atelierului (`workshop/`) nu au fost actualizate în această versiune
+- **Exemple**: Fișierele de exemple pot face încă referire la denumiri vechi (se va rezolva într-o actualizare viitoare)
+- **Linkuri externe**: URL-urile externe și referințele la repository-ul GitHub rămân neschimbate
+
+#### Ghid de migrare pentru contribuitori
+Dacă aveți ramuri locale sau documentație care face referire la structura veche:
+1. Actualizați referințele la foldere: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. Actualizați referințele la fișiere: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. Înlocuiți denumirea produsului: "Azure AI Foundry" → "Microsoft Foundry"
+4. Verificați că toate linkurile interne din documentație funcționează în continuare
+
+---
+
+### [v3.4.0] - 2025-10-24
+
+#### Previzualizare infrastructură și îmbunătățiri de validare
+**Această versiune introduce suport complet pentru noua funcționalitate de previzualizare Azure Developer CLI și îmbunătățește experiența utilizatorilor atelierului.**
+
+#### Adăugat
+- **🧪 Documentație pentru funcția `azd provision --preview`**: Acoperire completă a noii capabilități de previzualizare a infrastructurii
+  - Referințe la comenzi și exemple de utilizare în fișa de lucru
   - Integrare detaliată în ghidul de provizionare cu studii de caz și beneficii
-  - Integrare verificare preliminară pentru validarea mai sigură a implementării
+  - Integrare de verificare preliminară pentru validarea mai sigură a implementărilor
   - Actualizări ale ghidului de început cu practici de implementare sigure
 - **🚧 Banner de stare pentru atelier**: Banner HTML profesional care indică starea de dezvoltare a atelierului
-  - Design gradient cu indicatori de construcție pentru comunicare clară cu utilizatorii
+  - Design cu gradient și indicatori de construcție pentru o comunicare clară cu utilizatorii
   - Timpul ultimei actualizări pentru transparență
-  - Design adaptabil pentru toate tipurile de dispozitive
+  - Design responsiv pentru dispozitive mobile
 
-#### Îmbunătățiri
-- **Siguranța infrastructurii**: Funcționalitatea de previzualizare integrată în documentația de implementare
+#### Îmbunătățit
+- **Siguranța infrastructurii**: Funcționalitatea de previzualizare integrată în toată documentația de implementare
 - **Validare înainte de implementare**: Scripturile automate includ acum testarea previzualizării infrastructurii
-- **Fluxul de lucru al dezvoltatorului**: Secvențele de comenzi actualizate pentru a include previzualizarea ca practică recomandată
-- **Experiența atelierului**: Stabilirea clară a așteptărilor utilizatorilor cu privire la starea de dezvoltare a conținutului
+- **Fluxul de lucru al dezvoltatorilor**: Secvențele de comenzi actualizate pentru a include previzualizarea ca practică recomandată
+- **Experiența atelierului**: Așteptări clare stabilite pentru utilizatori cu privire la starea de dezvoltare a conținutului
 
-#### Modificări
-- **Practici de implementare recomandate**: Fluxul de lucru bazat pe previzualizare este acum abordarea recomandată
+#### Modificat
+- **Cele mai bune practici de implementare**: Fluxul de lucru bazat pe previzualizare este acum abordarea recomandată
 - **Fluxul documentației**: Validarea infrastructurii mutată mai devreme în procesul de învățare
 - **Prezentarea atelierului**: Comunicare profesională a stării cu un calendar clar de dezvoltare
 
-#### Îmbunătățiri
-- **Abordare bazată pe siguranță**: Modificările infrastructurii pot fi acum validate înainte de implementare
+#### Îmbunătățit
+- **Abordare axată pe siguranță**: Modificările infrastructurii pot fi acum validate înainte de implementare
 - **Colaborare în echipă**: Rezultatele previzualizării pot fi partajate pentru revizuire și aprobare
-- **Conștientizarea costurilor**: Înțelegerea mai bună a costurilor resurselor înainte de provizionare
+- **Conștientizare a costurilor**: Înțelegere mai bună a costurilor resurselor înainte de provizionare
 - **Reducerea riscurilor**: Reducerea eșecurilor de implementare prin validare avansată
 
 #### Implementare tehnică
-- **Integrare multi-document**: Funcționalitatea de previzualizare documentată în 4 fișiere cheie
-- **Modele de comandă**: Sintaxă și exemple consistente în întreaga documentație
-- **Integrarea practicilor recomandate**: Previzualizarea inclusă în fluxurile de validare și scripturi
-- **Indicatori vizuali**: Marcaje clare pentru funcționalități NOI pentru o descoperire ușoară
+- **Integrare multi-document**: Funcția de previzualizare documentată în 4 fișiere cheie
+- **Modele de comandă**: Sintaxă și exemple consistente în toată documentația
+- **Integrarea celor mai bune practici**: Previzualizarea inclusă în fluxurile de lucru și scripturile de validare
+- **Indicatori vizuali**: Marcaje clare pentru funcții NOI pentru descoperire ușoară
 
 #### Infrastructura atelierului
 - **Comunicarea stării**: Banner HTML profesional cu stilizare gradient
-- **Experiența utilizatorului**: Starea clară a dezvoltării previne confuzia
-- **Prezentare profesională**: Menține credibilitatea depozitului în timp ce setează așteptările
+- **Experiența utilizatorului**: Stare clară a dezvoltării pentru a evita confuziile
+- **Prezentare profesională**: Menține credibilitatea repository-ului în timp ce setează așteptări
 - **Transparența calendarului**: Timpul ultimei actualizări din octombrie 2025 pentru responsabilitate
 
-### [v3.3.0] - 24.09.2025
+### [v3.3.0] - 2025-09-24
 
 #### Materiale de atelier îmbunătățite și experiență interactivă de învățare
-**Această versiune introduce materiale de atelier cuprinzătoare, ghiduri interactive bazate pe browser și trasee de învățare structurate.**
+**Această versiune introduce materiale complete pentru atelier cu ghiduri interactive bazate pe browser și trasee de învățare structurate.**
 
-#### Adăugiri
-- **🎥 Ghid interactiv pentru atelier**: Experiență de atelier bazată pe browser cu capacitate de previzualizare MkDocs
+#### Adăugat
+- **🎥 Ghid interactiv pentru atelier**: Experiență de atelier bazată pe browser cu capabilități de previzualizare MkDocs
 - **📝 Instrucțiuni structurate pentru atelier**: Traseu de învățare ghidat în 7 pași, de la descoperire la personalizare
-  - 0-Introducere: Prezentarea și configurarea atelierului
-  - 1-Selectare-Șablon-AI: Procesul de descoperire și selectare a șablonului
+  - 0-Introducere: Prezentare generală a atelierului și configurare
+  - 1-Selectare-Șablon-AI: Procesul de descoperire și selecție a șablonului
   - 2-Validare-Șablon-AI: Proceduri de implementare și validare
   - 3-Deconstrucție-Șablon-AI: Înțelegerea arhitecturii șablonului
   - 4-Configurare-Șablon-AI: Configurare și personalizare
   - 5-Personalizare-Șablon-AI: Modificări avansate și iterații
   - 6-Demontare-Infrastructură: Curățare și gestionarea resurselor
-  - 7-Concluzii: Rezumat și pași următori
+  - 7-Concluzie: Rezumat și pași următori
 - **🛠️ Instrumente pentru atelier**: Configurare MkDocs cu tema Material pentru o experiență de învățare îmbunătățită
 - **🎯 Traseu de învățare practic**: Metodologie în 3 pași (Descoperire → Implementare → Personalizare)
 - **📱 Integrare GitHub Codespaces**: Configurare fără probleme a mediului de dezvoltare
 
-#### Îmbunătățiri
-- **Laborator de atelier AI**: Extins cu o experiență de învățare structurată de 2-3 ore
+#### Îmbunătățit
+- **Laborator AI pentru atelier**: Extins cu o experiență de învățare structurată de 2-3 ore
 - **Documentația atelierului**: Prezentare profesională cu navigare și elemente vizuale
-- **Progresia învățării**: Ghid clar pas cu pas de la selectarea șablonului la implementarea în producție
-- **Experiența dezvoltatorului**: Instrumente integrate pentru fluxuri de lucru de dezvoltare simplificate
+- **Progresia învățării**: Ghidare clară pas cu pas de la selecția șablonului la implementarea în producție
+- **Experiența dezvoltatorului**: Instrumente integrate pentru fluxuri de lucru simplificate
 
-#### Îmbunătățiri
-- **Accesibilitate**: Interfață bazată pe browser cu funcționalități de căutare, copiere și comutare tematică
-- **Învățare în ritm propriu**: Structură flexibilă a atelierului care se adaptează diferitelor ritmuri de învățare
-- **Aplicare practică**: Scenarii reale de implementare a șabloanelor AI
+#### Îmbunătățit
+- **Accesibilitate**: Interfață bazată pe browser cu funcționalități de căutare, copiere și comutare temă
+- **Învățare în ritm propriu**: Structură flexibilă a atelierului care se adaptează diferitelor viteze de învățare
+- **Aplicație practică**: Scenarii reale de implementare a șabloanelor AI
 - **Integrare comunitară**: Integrare Discord pentru suport și colaborare în cadrul atelierului
 
-#### Funcționalități ale atelierului
+#### Caracteristici ale atelierului
 - **Căutare integrată**: Descoperire rapidă a cuvintelor cheie și lecțiilor
-- **Blocuri de cod copiate**: Funcționalitate de copiere prin hover pentru toate exemplele de cod
-- **Comutare tematică**: Suport pentru modurile întunecat/luminos pentru preferințe diferite
-- **Resurse vizuale**: Capturi de ecran și diagrame pentru o înțelegere îmbunătățită
-- **Integrare ajutor**: Acces direct la Discord pentru suport comunitar
+- **Blocuri de cod copiable**: Funcționalitate de copiere prin hover pentru toate exemplele de cod
+- **Comutare temă**: Suport pentru mod întunecat/luminos pentru preferințe diferite
+- **Resurse vizuale**: Capturi de ecran și diagrame pentru o mai bună înțelegere
+- **Integrare de ajutor**: Acces direct la Discord pentru suport comunitar
 
-### [v3.2.0] - 17.09.2025
+### [v3.2.0] - 2025-09-17
 
-#### Restructurare majoră a navigării și sistem de învățare bazat pe capitole
-**Această versiune introduce o structură de învățare bazată pe capitole cu navigare îmbunătățită în întregul depozit.**
+#### Restructurare majoră a navigației și sistem de învățare bazat pe capitole
+**Această versiune introduce o structură de învățare bazată pe capitole cu navigare îmbunătățită în întregul repository.**
 
-#### Adăugiri
+#### Adăugat
 - **📚 Sistem de învățare bazat pe capitole**: Restructurarea întregului curs în 8 capitole progresive de învățare
-  - Capitolul 1: Fundamente și Start Rapid (⭐ - 30-45 min)
-  - Capitolul 2: Dezvoltare AI (⭐⭐ - 1-2 ore)
-  - Capitolul 3: Configurare și Autentificare (⭐⭐ - 45-60 min)
-  - Capitolul 4: Infrastructură ca Cod și Implementare (⭐⭐⭐ - 1-1.5 ore)
-  - Capitolul 5: Soluții AI Multi-Agent (⭐⭐⭐⭐ - 2-3 ore)
-  - Capitolul 6: Validare și Planificare înainte de Implementare (⭐⭐ - 1 oră)
-  - Capitolul 7: Depanare și Debugging (⭐⭐ - 1-1.5 ore)
-  - Capitolul 8: Modele de Producție și Enterprise (⭐⭐⭐⭐ - 2-3 ore)
-- **📚 Sistem de navigare cuprinzător**: Antete și subsoluri de navigare consistente în întreaga documentație
+  - Capitolul 1: Fundamente și început rapid (⭐ - 30-45 min)
+  - Capitolul 2: Dezvoltare AI-First (⭐⭐ - 1-2 ore)
+  - Capitolul 3: Configurare și autentificare (⭐⭐ - 45-60 min)
+  - Capitolul 4: Infrastructură ca cod și implementare (⭐⭐⭐ - 1-1,5 ore)
+  - Capitolul 5: Soluții AI multi-agent (⭐⭐⭐⭐ - 2-3 ore)
+  - Capitolul 6: Validare și planificare înainte de implementare (⭐⭐ - 1 oră)
+  - Capitolul 7: Depanare și rezolvare de probleme (⭐⭐ - 1-1,5 ore)
+  - Capitolul 8: Modele de producție și pentru întreprinderi (⭐⭐⭐⭐ - 2-3 ore)
+- **📚 Sistem de navigare cuprinzător**: Anteturi și subsoluri de navigare consistente în toată documentația
 - **🎯 Urmărirea progresului**: Listă de verificare pentru finalizarea cursului și sistem de verificare a învățării
-- **🗺️ Ghid pentru traseul de învățare**: Puncte de intrare clare pentru niveluri de experiență și obiective diferite
-- **🔗 Navigare inter-relaționată**: Capitole și cerințe prealabile clar legate
+- **🗺️ Ghid pentru traseul de învățare**: Puncte de intrare clare pentru diferite niveluri de experiență și obiective
+- **🔗 Navigare cu referințe încrucișate**: Capitolele și cerințele prealabile clar legate
 
-#### Îmbunătățiri
+#### Îmbunătățit
 - **Structura README**: Transformată într-o platformă de învățare structurată cu organizare bazată pe capitole
 - **Navigarea documentației**: Fiecare pagină include acum contextul capitolului și ghidare pentru progresie
-- **Organizarea șabloanelor**: Exemplele și șabloanele sunt mapate la capitolele de învățare corespunzătoare
-- **Integrarea resurselor**: Fișe de ajutor, întrebări frecvente și ghiduri de studiu conectate la capitole relevante
+- **Organizarea șabloanelor**: Exemplele și șabloanele mapate la capitolele de învățare corespunzătoare
+- **Integrarea resurselor**: Fișe de lucru, întrebări frecvente și ghiduri de studiu conectate la capitole relevante
 - **Integrarea atelierului**: Laboratoare practice mapate la obiectivele de învățare ale mai multor capitole
 
-#### Modificări
-- **Progresia învățării**: Trecerea de la documentația liniară la învățarea flexibilă bazată pe capitole
-- **Plasarea configurării**: Ghidul de configurare repoziționat ca Capitolul 3 pentru un flux de învățare mai bun
+#### Modificat
+- **Progresia învățării**: Mutată de la documentație liniară la învățare flexibilă bazată pe capitole
+- **Poziționarea configurării**: Ghidul de configurare repoziționat ca Capitolul 3 pentru un flux de învățare mai bun
 - **Integrarea conținutului AI**: Integrare mai bună a conținutului specific AI pe parcursul traseului de învățare
-- **Conținut de producție**: Modele avansate consolidate în Capitolul 8 pentru cursanții din mediul enterprise
+- **Conținut pentru producție**: Modelele avansate consolidate în Capitolul 8 pentru cursanții din întreprinderi
 
-#### Îmbunătățiri
-- **Experiența utilizatorului**: Indicatori de progresie și navigare clare
+#### Îmbunătățit
+- **Experiența utilizatorului**: Navigare clară cu breadcrumbs și indicatori de progresie a capitolelor
 - **Accesibilitate**: Modele de navigare consistente pentru o traversare mai ușoară a cursului
-- **Prezentare profesională**: Structură de curs în stil universitar potrivită pentru formare academică și corporativă
-- **Eficiența învățării**: Reducerea timpului necesar pentru a găsi conținut relevant prin organizare îmbunătățită
+- **Prezentare profesională**: Structură de curs în stil universitar, potrivită pentru formare academică și corporativă
+- **Eficiența învățării**: Timp redus pentru găsirea conținutului relevant prin organizare îmbunătățită
 
 #### Implementare tehnică
-- **Antete de navigare**: Navigare standardizată pe capitole în peste 40 de fișiere de documentație
-- **Navigare în subsol**: Ghidare consistentă pentru progresie și indicatori de finalizare a capitolului
-- **Legături inter-relaționate**: Sistem cuprinzător de legături interne care conectează concepte relevante
-- **Mapare capitole**: Șabloane și exemple clar asociate cu obiectivele de învățare
+- **Anteturi de navigare**: Navigare standardizată pe capitole în peste 40 de fișiere de documentație
+- **Navigare în subsol**: Ghidare consistentă pentru progresie și indicatori de finalizare a capitolelor
+- **Legături încrucișate**: Sistem cuprinzător de legături interne care conectează concepte relevante
+- **Maparea capitolelor**: Șabloane și exemple clar asociate cu obiectivele de învățare
 
 #### Îmbunătățirea ghidului de studiu
 - **📚 Obiective de învățare cuprinzătoare**: Ghidul de studiu restructurat pentru a se alinia cu sistemul de 8 capitole
-- **🎯 Evaluare bazată pe capitole**: Fiecare capitol include obiective de învățare specifice și exerciții practice
+- **🎯 Evaluare bazată pe capitole**: Fiecare capitol include obiective specifice de învățare și exerciții practice
 - **📋 Urmărirea progresului**: Program săptămânal de învățare cu rezultate măsurabile și liste de verificare pentru finalizare
 - **❓ Întrebări de evaluare**: Întrebări de validare a cunoștințelor pentru fiecare capitol cu rezultate profesionale
 - **🛠️ Exerciții practice**: Activități practice cu scenarii reale de implementare și depanare
-- **📊 Progresia abilităților**: Avansare clară de la concepte de bază la modele enterprise cu focus pe dezvoltarea carierei
-- **🎓 Cadru de certificare**: Rezultate de dezvoltare profesională și sistem de recunoaștere comunitară
-- **⏱️ Managementul timpului**: Plan de învățare structurat pe 10 săptămâni cu validarea etapelor
+- **📊 Progresia abilităților**: Avansare clară de la concepte de bază la modele pentru întreprinderi, cu accent pe dezvoltarea carierei
+- **🎓 Cadru de certificare**: Rezultate pentru dezvoltare profesională și sistem de recunoaștere comunitară
+- **⏱️ Gestionarea timpului**: Plan de învățare structurat pe 10 săptămâni cu validarea etapelor
 
-### [v3.1.0] - 17.09.2025
+### [v3.1.0] - 2025-09-17
 
-#### Îmbunătățiri ale soluțiilor AI Multi-Agent
+#### Soluții AI multi-agent îmbunătățite
 **Această versiune îmbunătățește soluția multi-agent pentru retail cu denumiri mai clare ale agenților și documentație îmbunătățită.**
 
-#### Modificări
-- **Terminologia Multi-Agent**: Înlocuirea termenului "agent Cora" cu "agent Client" în întreaga soluție multi-agent pentru retail pentru o înțelegere mai clară
-- **Arhitectura agenților**: Actualizarea tuturor documentațiilor, șabloanelor ARM și exemplelor de cod pentru utilizarea consistentă a denumirii "agent Client"
-- **Exemple de configurare**: Modernizarea modelelor de configurare a agenților cu convenții de denumire actualizate
-- **Consistența documentației**: Asigurarea utilizării denumirilor profesionale și descriptive ale agenților în toate referințele
+#### Modificat
+- **Terminologia multi-agent**: Înlocuit "agent Cora" cu "agent Client" în întreaga soluție multi-agent pentru retail pentru o înțelegere mai clară
+- **Arhitectura agenților**: Actualizate toate documentațiile, șabloanele ARM și exemplele de cod pentru a utiliza denumirea consistentă "agent Client"
+- **Exemple de configurare**: Modele de configurare a agenților modernizate cu denumiri actualizate
+- **Consistența documentației**: Asigurată utilizarea unor denumiri profesionale și descriptive pentru agenți în toate referințele
 
-#### Îmbunătățiri
-- **Pachet șablon ARM**: Actualizarea șablonului retail-multiagent-arm-template cu referințe la agentul Client
-- **Diagrame de arhitectură**: Reîmprospătarea diagramelor Mermaid cu denumiri actualizate ale agenților
-- **Exemple de cod**: Clase Python și exemple de implementare care utilizează acum denumirea CustomerAgent
-- **Variabile de mediu**: Actualizarea tuturor scripturilor de implementare pentru utilizarea convențiilor CUSTOMER_AGENT_NAME
+#### Îmbunătățit
+- **Pachet șablon ARM**: Actualizat șablonul retail-multiagent-arm-template cu referințe la agentul Client
+- **Diagrame arhitecturale**: Diagrame Mermaid reîmprospătate cu denumiri actualizate ale agenților
+- **Exemple de cod**: Clasele Python și exemplele de implementare utilizează acum denumirea CustomerAgent
+- **Variabile de mediu**: Actualizate toate scripturile de implementare pentru a utiliza convențiile CUSTOMER_AGENT_NAME
 
-#### Îmbunătățiri
+#### Îmbunătățit
 - **Experiența dezvoltatorului**: Roluri și responsabilități mai clare ale agenților în documentație
-- **Pregătirea pentru producție**: Aliniere mai bună cu convențiile de denumire enterprise
+- **Pregătirea pentru producție**: Aliniere mai bună cu convențiile de denumire pentru întreprinderi
 - **Materiale de învățare**: Denumiri mai intuitive ale agenților pentru scopuri educaționale
-- **Utilitatea șabloanelor**: Înțelegere simplificată a funcțiilor agenților și modelelor de implementare
+- **Utilitatea șabloanelor**: Înțelegere simplificată a funcțiilor agenților și a modelelor de implementare
 
 #### Detalii tehnice
-- Actualizarea diagramelor de arhitectură Mermaid cu referințe la CustomerAgent
-- Înlocuirea denumirilor claselor CoraAgent cu CustomerAgent în exemplele Python
-- Modificarea configurațiilor JSON ale șabloanelor ARM pentru utilizarea tipului de agent "customer"
-- Actualizarea variabilelor de mediu de la CORA_AGENT_* la CUSTOMER_AGENT_*
-- Reîmprospătarea tuturor comenzilor de implementare și configurațiilor containerelor
+- Diagrame arhitecturale Mermaid actualizate cu referințe la CustomerAgent
+- Înlocuit numele claselor CoraAgent cu CustomerAgent în exemplele Python
+- Configurații JSON ale șabloanelor ARM modificate pentru a utiliza tipul de agent "customer"
+- Actualizate variabilele de mediu de la CORA_AGENT_* la CUSTOMER_AGENT_*
+- Reîmprospătate toate comenzile de implementare și configurațiile containerelor
 
-### [v3.0.0] - 12.09.2025
+### [v3.0.0] - 2025-09-12
 
-#### Schimbări majore - Focus pe dezvoltarea AI și integrarea Azure AI Foundry
-**Această versiune transformă depozitul într-o resursă cuprinzătoare de învățare axată pe AI, cu integrarea serviciilor Azure AI Foundry.**
+#### Schimbări majore - Focus pe dezvoltatori AI și integrarea Azure AI Foundry
+**Această versiune transformă repository-ul într-o resursă completă de învățare axată pe AI, cu integrarea Azure AI Foundry.**
 
-#### Adăugiri
-- **🤖 Traseu de învățare axat pe AI**: Restructurare completă cu prioritate pentru dezvoltatorii și inginerii AI
+#### Adăugat
+- **🤖 Traseu de învățare AI-First**: Restructurare completă care prioritizează dezvoltatorii și inginerii AI
 - **Ghid de integrare Azure AI Foundry**: Documentație cuprinzătoare pentru conectarea AZD cu serviciile Azure AI Foundry
-- **Modele de implementare AI**: Ghid detaliat care acoperă selecția, configurarea și strategiile de implementare în producție ale modelelor
-- **Laborator de atelier AI**: Atelier practic de 2-3 ore pentru conversia aplicațiilor AI în soluții implementabile AZD
-- **Practici de producție AI**: Modele pregătite pentru enterprise pentru scalare, monitorizare și securizarea sarcinilor de lucru AI
--
-- **Formatul Documentației**: Standardizarea tuturor documentațiilor cu o structură consistentă, axată pe învățare
-- **Fluxul de Navigare**: Implementarea unei progresii logice prin toate materialele de învățare
-- **Prezentarea Conținutului**: Eliminarea elementelor decorative în favoarea unui format clar și profesional
-- **Structura Linkurilor**: Actualizarea tuturor linkurilor interne pentru a susține noul sistem de navigare
+- **Modele de implementare AI**: Ghid detaliat care acoperă selecția, configurarea și strategiile de implementare în producție
+- **Laborator AI pentru atelier**: Atelier practic de 2-3 ore pentru conversia aplicațiilor AI în soluții implementabile AZD
+- **Cele mai bune practici AI pentru producție**: Modele pregătite pentru întreprinderi pentru scalare, monitorizare și securizarea sarcinilor AI
+- **Ghid de depanare specific AI**: Depanare cuprinzătoare pentru Azure OpenAI, Cognitive Services și probleme de implementare AI
+- **Galerie de șabloane AI**: Colecție de șabloane Azure AI Foundry cu evaluări de complexitate
+- **Materiale pentru atelier**: Structură completă a atelierului cu laboratoare practice și materiale de referință
+
+#### Îmbunătățit
+- **Structura README**
+- **Prezentarea conținutului**: Elemente decorative eliminate în favoarea unui format clar și profesional
+- **Structura linkurilor**: Toate linkurile interne actualizate pentru a susține noul sistem de navigare
 
 #### Îmbunătățiri
 - **Accesibilitate**: Eliminarea dependenței de emoji pentru o compatibilitate mai bună cu cititoarele de ecran
-- **Aspect Profesional**: Prezentare curată, de tip academic, potrivită pentru învățarea în mediul corporativ
-- **Experiența de Învățare**: Abordare structurată cu obiective și rezultate clare pentru fiecare lecție
-- **Organizarea Conținutului**: Flux logic mai bun și conexiuni între subiectele înrudite
+- **Aspect profesional**: Prezentare curată, stil academic, potrivită pentru învățarea în mediul enterprise
+- **Experiența de învățare**: Abordare structurată cu obiective și rezultate clare pentru fiecare lecție
+- **Organizarea conținutului**: Flux logic mai bun și conexiuni între subiecte înrudite
 
 ### [v1.0.0] - 2025-09-09
 
-#### Lansare Inițială - Repozitoriu Complet de Învățare AZD
+#### Lansare inițială - Repozitoriu complet de învățare AZD
 
 #### Adăugiri
-- **Structura de Bază a Documentației**
+- **Structura principală a documentației**
   - Seria completă de ghiduri introductive
-  - Documentație cuprinzătoare pentru implementare și aprovizionare
+  - Documentație detaliată pentru implementare și provizionare
   - Resurse detaliate pentru depanare și ghiduri de diagnosticare
   - Instrumente și proceduri de validare înainte de implementare
 
-- **Modulul de Introducere**
+- **Modulul introductiv**
   - Bazele AZD: Concepte de bază și terminologie
-  - Ghid de Instalare: Instrucțiuni de configurare specifice platformei
-  - Ghid de Configurare: Configurarea mediului și autentificarea
-  - Tutorial pentru Primul Proiect: Învățare practică pas cu pas
+  - Ghid de instalare: Instrucțiuni de configurare specifice platformei
+  - Ghid de configurare: Setarea mediului și autentificarea
+  - Tutorial pentru primul proiect: Învățare practică pas cu pas
 
-- **Modulul de Implementare și Aprovizionare**
-  - Ghid de Implementare: Documentație completă a fluxului de lucru
-  - Ghid de Aprovizionare: Infrastructură ca Cod cu Bicep
+- **Modulul de implementare și provizionare**
+  - Ghid de implementare: Documentație completă a fluxului de lucru
+  - Ghid de provizionare: Infrastructură ca cod cu Bicep
   - Cele mai bune practici pentru implementări în producție
   - Modele de arhitectură multi-servicii
 
-- **Modulul de Validare Pre-Implementare**
-  - Planificarea Capacității: Validarea disponibilității resurselor Azure
-  - Selectarea SKU: Ghid cuprinzător pentru nivelurile de servicii
-  - Verificări Pre-Implementare: Scripturi automate de validare (PowerShell și Bash)
+- **Modulul de validare înainte de implementare**
+  - Planificarea capacității: Validarea disponibilității resurselor Azure
+  - Selectarea SKU: Ghid complet pentru nivelurile de servicii
+  - Verificări preliminare: Scripturi automate de validare (PowerShell și Bash)
   - Instrumente de estimare a costurilor și planificare bugetară
 
-- **Modulul de Depanare**
-  - Probleme Comune: Probleme frecvent întâlnite și soluții
-  - Ghid de Diagnosticare: Metodologii sistematice de depanare
+- **Modulul de depanare**
+  - Probleme comune: Probleme frecvent întâlnite și soluții
+  - Ghid de diagnosticare: Metodologii sistematice de depanare
   - Tehnici și instrumente avansate de diagnosticare
   - Monitorizarea performanței și optimizare
 
-- **Resurse și Referințe**
-  - Foaie de Comenzi: Referință rapidă pentru comenzi esențiale
-  - Glosar: Definiții cuprinzătoare ale terminologiei și acronimelor
-  - Întrebări Frecvente: Răspunsuri detaliate la întrebări comune
+- **Resurse și referințe**
+  - Foaie de referință pentru comenzi: Referință rapidă pentru comenzi esențiale
+  - Glosar: Definiții complete ale terminologiei și acronimelor
+  - Întrebări frecvente: Răspunsuri detaliate la întrebări comune
   - Linkuri către resurse externe și conexiuni comunitare
 
-- **Exemple și Șabloane**
+- **Exemple și șabloane**
   - Exemplu de aplicație web simplă
   - Șablon de implementare pentru site-uri statice
-  - Configurare aplicație container
+  - Configurare pentru aplicații containerizate
   - Modele de integrare a bazelor de date
   - Exemple de arhitectură microservicii
   - Implementări de funcții serverless
 
 #### Funcționalități
-- **Suport Multi-Platformă**: Ghiduri de instalare și configurare pentru Windows, macOS și Linux
-- **Niveluri Multiple de Competență**: Conținut conceput pentru studenți și dezvoltatori profesioniști
-- **Focus Practic**: Exemple practice și scenarii din lumea reală
-- **Acoperire Cuprinzătoare**: De la concepte de bază la modele avansate pentru mediul corporativ
-- **Abordare Centrată pe Securitate**: Cele mai bune practici de securitate integrate
-- **Optimizare a Costurilor**: Ghiduri pentru implementări eficiente din punct de vedere al costurilor și gestionarea resurselor
+- **Suport multi-platformă**: Ghiduri de instalare și configurare pentru Windows, macOS și Linux
+- **Niveluri multiple de competență**: Conținut destinat studenților și dezvoltatorilor profesioniști
+- **Focus practic**: Exemple practice și scenarii din lumea reală
+- **Acoperire cuprinzătoare**: De la concepte de bază la modele avansate pentru enterprise
+- **Abordare orientată spre securitate**: Cele mai bune practici de securitate integrate
+- **Optimizare a costurilor**: Ghiduri pentru implementări eficiente din punct de vedere al costurilor și gestionarea resurselor
 
-#### Calitatea Documentației
-- **Exemple Detaliate de Cod**: Exemple practice și testate de cod
-- **Instrucțiuni Pas cu Pas**: Ghiduri clare și acționabile
-- **Gestionarea Erorilor**: Depanare pentru probleme comune
-- **Integrarea celor mai Bune Practici**: Standardele și recomandările industriei
-- **Compatibilitate Versiuni**: Actualizat cu cele mai recente servicii Azure și funcționalități azd
+#### Calitatea documentației
+- **Exemple de cod detaliate**: Exemple practice, testate
+- **Instrucțiuni pas cu pas**: Ghiduri clare și acționabile
+- **Gestionarea erorilor**: Depanare pentru probleme comune
+- **Integrarea celor mai bune practici**: Standardele și recomandările industriei
+- **Compatibilitate cu versiunile**: Actualizat cu cele mai recente servicii Azure și funcționalități azd
 
-## Îmbunătățiri Planificate pentru Viitor
+## Îmbunătățiri planificate pentru viitor
 
 ### Versiunea 3.1.0 (Planificată)
-#### Extinderea Platformei AI
-- **Suport Multi-Model**: Modele de integrare pentru Hugging Face, Azure Machine Learning și modele personalizate
-- **Framework-uri pentru Agenți AI**: Șabloane pentru implementări LangChain, Semantic Kernel și AutoGen
-- **Modele Avansate RAG**: Opțiuni pentru baze de date vectoriale dincolo de Azure AI Search (Pinecone, Weaviate etc.)
+#### Extinderea platformei AI
+- **Suport multi-model**: Modele de integrare pentru Hugging Face, Azure Machine Learning și modele personalizate
+- **Framework-uri pentru agenți AI**: Șabloane pentru implementări LangChain, Semantic Kernel și AutoGen
+- **Modele avansate RAG**: Opțiuni pentru baze de date vectoriale dincolo de Azure AI Search (Pinecone, Weaviate etc.)
 - **Observabilitate AI**: Monitorizare îmbunătățită pentru performanța modelelor, utilizarea token-urilor și calitatea răspunsurilor
 
-#### Experiența Dezvoltatorului
+#### Experiența dezvoltatorului
 - **Extensie VS Code**: Experiență integrată de dezvoltare AZD + AI Foundry
 - **Integrare GitHub Copilot**: Generare asistată de AI pentru șabloane AZD
-- **Tutoriale Interactive**: Exerciții practice de codare cu validare automată pentru scenarii AI
-- **Conținut Video**: Tutoriale video suplimentare pentru învățare vizuală, axate pe implementările AI
+- **Tutoriale interactive**: Exerciții practice de codare cu validare automată pentru scenarii AI
+- **Conținut video**: Tutoriale video suplimentare pentru învățare vizuală, axate pe implementările AI
 
 ### Versiunea 4.0.0 (Planificată)
-#### Modele AI pentru Mediul Corporativ
-- **Cadru de Guvernanță**: Guvernanța modelelor AI, conformitate și trasee de audit
-- **AI Multi-Tenant**: Modele pentru deservirea mai multor clienți cu servicii AI izolate
-- **Implementare AI la Margine**: Integrare cu Azure IoT Edge și instanțe de container
-- **AI în Cloud Hibrid**: Modele de implementare multi-cloud și hibrid pentru sarcini AI
+#### Modele AI pentru enterprise
+- **Framework de guvernanță**: Guvernanță, conformitate și trasee de audit pentru modele AI
+- **AI multi-chiriaș**: Modele pentru servirea mai multor clienți cu servicii AI izolate
+- **Implementare AI la margine**: Integrare cu Azure IoT Edge și instanțe containerizate
+- **AI în cloud hibrid**: Modele de implementare multi-cloud și hibrid pentru sarcini AI
 
-#### Funcționalități Avansate
-- **Automatizarea Fluxurilor AI**: Integrare MLOps cu fluxuri Azure Machine Learning
-- **Securitate Avansată**: Modele de încredere zero, puncte finale private și protecție avansată împotriva amenințărilor
-- **Optimizarea Performanței**: Strategii avansate de ajustare și scalare pentru aplicații AI cu debit ridicat
-- **Distribuție Globală**: Modele de livrare a conținutului și caching la margine pentru aplicații AI
+#### Funcționalități avansate
+- **Automatizarea pipeline-urilor AI**: Integrare MLOps cu pipeline-uri Azure Machine Learning
+- **Securitate avansată**: Modele zero-trust, puncte finale private și protecție avansată împotriva amenințărilor
+- **Optimizarea performanței**: Strategii avansate de ajustare și scalare pentru aplicații AI cu debit mare
+- **Distribuție globală**: Modele de livrare a conținutului și caching la margine pentru aplicații AI
 
-### Versiunea 3.0.0 (Planificată) - Înlocuită de Versiunea Curentă
-#### Adăugiri Propuse - Implementate în v3.0.0
-- ✅ **Conținut Centrat pe AI**: Integrare cuprinzătoare Azure AI Foundry (Finalizat)
-- ✅ **Tutoriale Interactive**: Laborator de workshop practic pentru AI (Finalizat)
-- ✅ **Modul de Securitate Avansată**: Modele de securitate specifice AI (Finalizat)
-- ✅ **Optimizarea Performanței**: Strategii de ajustare a sarcinilor AI (Finalizat)
+### Versiunea 3.0.0 (Planificată) - Înlocuită de lansarea actuală
+#### Adăugiri propuse - Acum implementate în v3.0.0
+- ✅ **Conținut axat pe AI**: Integrare completă Azure AI Foundry (Finalizat)
+- ✅ **Tutoriale interactive**: Laborator de workshop AI practic (Finalizat)
+- ✅ **Modul de securitate avansată**: Modele de securitate specifice AI (Finalizat)
+- ✅ **Optimizarea performanței**: Strategii de ajustare pentru sarcini AI (Finalizat)
 
-### Versiunea 2.1.0 (Planificată) - Parțial Implementată în v3.0.0
-#### Îmbunătățiri Minore - Unele Finalizate în Versiunea Curentă
-- ✅ **Exemple Suplimentare**: Scenarii de implementare centrate pe AI (Finalizat)
-- ✅ **FAQ Extins**: Întrebări și soluții specifice AI (Finalizat)
-- **Integrarea Instrumentelor**: Ghiduri îmbunătățite pentru integrarea IDE și editorului
-- ✅ **Extinderea Monitorizării**: Modele de monitorizare și alerte specifice AI (Finalizat)
+### Versiunea 2.1.0 (Planificată) - Parțial implementată în v3.0.0
+#### Îmbunătățiri minore - Unele finalizate în lansarea actuală
+- ✅ **Exemple suplimentare**: Scenarii de implementare axate pe AI (Finalizat)
+- ✅ **FAQ extins**: Întrebări și soluții specifice AI (Finalizat)
+- **Integrarea instrumentelor**: Ghiduri îmbunătățite pentru integrarea IDE și editorului
+- ✅ **Extinderea monitorizării**: Modele de monitorizare și alertare specifice AI (Finalizat)
 
-#### Încă Planificate pentru Versiuni Viitoare
-- **Documentație Compatibilă cu Dispozitive Mobile**: Design responsiv pentru învățarea pe mobil
-- **Acces Offline**: Pachete de documentație descărcabile
-- **Integrare IDE Îmbunătățită**: Extensie VS Code pentru fluxuri de lucru AZD + AI
-- **Tablou de Bord Comunitar**: Metrici comunitare în timp real și urmărirea contribuțiilor
+#### Încă planificate pentru lansări viitoare
+- **Documentație prietenoasă pentru mobil**: Design responsiv pentru învățarea pe mobil
+- **Acces offline**: Pachete de documentație descărcabile
+- **Integrare IDE îmbunătățită**: Extensie VS Code pentru fluxuri de lucru AZD + AI
+- **Tablou de bord comunitar**: Metrici comunitare în timp real și urmărirea contribuțiilor
 
-## Contribuirea la Jurnalul de Modificări
+## Contribuirea la jurnalul de modificări
 
-### Raportarea Modificărilor
-Când contribuiți la acest repo, asigurați-vă că înregistrările din jurnalul de modificări includ:
+### Raportarea modificărilor
+Când contribuiți la acest repo, asigurați-vă că intrările din jurnalul de modificări includ:
 
-1. **Numărul Versiunii**: Conform versiunii semantice (major.minor.patch)
+1. **Numărul versiunii**: Conform versiunii semantice (major.minor.patch)
 2. **Data**: Data lansării sau actualizării în format YYYY-MM-DD
 3. **Categorie**: Adăugat, Modificat, Depreciat, Eliminat, Reparat, Securitate
-4. **Descriere Clară**: Descriere concisă a modificării
-5. **Evaluarea Impactului**: Cum afectează modificările utilizatorii existenți
+4. **Descriere clară**: Descriere concisă a modificării
+5. **Evaluarea impactului**: Cum afectează modificările utilizatorii existenți
 
-### Categorii de Modificări
+### Categorii de modificări
 
 #### Adăugat
 - Funcționalități noi, secțiuni de documentație sau capabilități
 - Exemple noi, șabloane sau resurse de învățare
-- Instrumente, scripturi sau utilități suplimentare
+- Instrumente, scripturi sau utilitare suplimentare
 
 #### Modificat
-- Modificări ale funcționalităților sau documentației existente
+- Modificări ale funcționalității sau documentației existente
 - Actualizări pentru îmbunătățirea clarității sau acurateței
 - Restructurarea conținutului sau organizării
 
@@ -370,7 +590,7 @@ Când contribuiți la acest repo, asigurați-vă că înregistrările din jurnal
 
 #### Reparat
 - Corectarea erorilor din documentație sau cod
-- Rezolvarea problemelor sau erorilor raportate
+- Rezolvarea problemelor sau defecțiunilor raportate
 - Îmbunătățirea acurateței sau funcționalității
 
 #### Securitate
@@ -378,85 +598,87 @@ Când contribuiți la acest repo, asigurați-vă că înregistrările din jurnal
 - Actualizări ale celor mai bune practici de securitate
 - Rezolvarea vulnerabilităților de securitate
 
-### Ghiduri pentru Versiuni Semantice
+### Ghiduri pentru versiunea semantică
 
-#### Versiune Majoră (X.0.0)
-- Modificări majore care necesită acțiuni din partea utilizatorilor
+#### Versiune majoră (X.0.0)
+- Modificări majore care necesită acțiuni din partea utilizatorului
 - Restructurări semnificative ale conținutului sau organizării
 - Modificări care alterează abordarea sau metodologia fundamentală
 
-#### Versiune Minoră (X.Y.0)
+#### Versiune minoră (X.Y.0)
 - Funcționalități sau adăugiri noi de conținut
 - Îmbunătățiri care mențin compatibilitatea retroactivă
 - Exemple, instrumente sau resurse suplimentare
 
-#### Versiune Patch (X.Y.Z)
-- Corectarea erorilor și ajustări minore
+#### Versiune patch (X.Y.Z)
+- Corecturi de erori și ajustări
 - Îmbunătățiri minore ale conținutului existent
-- Clarificări și îmbunătățiri mici
+- Clarificări și mici îmbunătățiri
 
-## Feedback și Sugestii din Comunitate
+## Feedback și sugestii din comunitate
 
-Încurajăm activ feedback-ul comunității pentru a îmbunătăți acest material de învățare:
+Încurajăm activ feedback-ul comunității pentru a îmbunătăți această resursă de învățare:
 
-### Cum să Oferiți Feedback
-- **Probleme pe GitHub**: Raportați probleme sau sugerați îmbunătățiri (sunt binevenite problemele specifice AI)
+### Cum să oferi feedback
+- **Probleme pe GitHub**: Raportați probleme sau sugerați îmbunătățiri (probleme specifice AI sunt binevenite)
 - **Discuții pe Discord**: Împărtășiți idei și interacționați cu comunitatea Azure AI Foundry
 - **Pull Requests**: Contribuiți direct la îmbunătățirea conținutului, în special șabloane și ghiduri AI
 - **Discord Azure AI Foundry**: Participați în canalul #Azure pentru discuții AZD + AI
-- **Forumuri Comunitare**: Participați la discuții mai ample ale dezvoltatorilor Azure
+- **Forumuri comunitare**: Participați la discuții mai ample ale dezvoltatorilor Azure
 
-### Categorii de Feedback
-- **Acuratețea Conținutului AI**: Corecturi pentru informațiile despre integrarea și implementarea serviciilor AI
-- **Experiența de Învățare**: Sugestii pentru îmbunătățirea fluxului de învățare pentru dezvoltatori AI
-- **Conținut AI Lipsă**: Cereri pentru șabloane, modele sau exemple AI suplimentare
+### Categorii de feedback
+- **Acuratețea conținutului AI**: Corecții pentru informațiile despre integrarea și implementarea serviciilor AI
+- **Experiența de învățare**: Sugestii pentru un flux de învățare AI mai bun
+- **Conținut AI lipsă**: Cereri pentru șabloane, modele sau exemple AI suplimentare
 - **Accesibilitate**: Îmbunătățiri pentru nevoile diverse de învățare
-- **Integrarea Instrumentelor AI**: Sugestii pentru o mai bună integrare a fluxului de lucru în dezvoltarea AI
-- **Modele AI pentru Producție**: Cereri pentru modele de implementare AI în mediul corporativ
+- **Integrarea instrumentelor AI**: Sugestii pentru o mai bună integrare a fluxului de lucru AI
+- **Modele AI pentru producție**: Cereri pentru modele de implementare AI pentru enterprise
 
-### Angajamentul de Răspuns
-- **Răspuns la Probleme**: În termen de 48 de ore pentru problemele raportate
-- **Cereri de Funcționalități**: Evaluare în termen de o săptămână
-- **Contribuții Comunitare**: Revizuire în termen de o săptămână
-- **Probleme de Securitate**: Prioritate imediată cu răspuns accelerat
+### Angajamentul de răspuns
+- **Răspuns la probleme**: În termen de 48 de ore pentru problemele raportate
+- **Cereri de funcționalități**: Evaluare în termen de o săptămână
+- **Contribuții comunitare**: Revizuire în termen de o săptămână
+- **Probleme de securitate**: Prioritate imediată cu răspuns accelerat
 
-## Program de Întreținere
+## Program de întreținere
 
-### Actualizări Regulate
-- **Revizuiri Lunare**: Acuratețea conținutului și validarea linkurilor
-- **Actualizări Trimestriale**: Adăugiri și îmbunătățiri majore ale conținutului
-- **Revizuiri Semestriale**: Restructurare și îmbunătățire cuprinzătoare
-- **Lansări Anuale**: Actualizări majore de versiune cu îmbunătățiri semnificative
+### Actualizări regulate
+- **Revizuiri lunare**: Acuratețea conținutului și validarea linkurilor
+- **Actualizări trimestriale**: Adăugiri și îmbunătățiri majore ale conținutului
+- **Revizuiri semestriale**: Restructurări și îmbunătățiri cuprinzătoare
+- **Lansări anuale**: Actualizări majore ale versiunii cu îmbunătățiri semnificative
 
-### Monitorizare și Asigurarea Calității
-- **Testare Automată**: Validarea regulată a exemplelor de cod și linkurilor
-- **Integrarea Feedback-ului Comunității**: Incorporarea regulată a sugestiilor utilizatorilor
-- **Actualizări Tehnologice**: Alinierea la cele mai recente servicii Azure și funcționalități azd
-- **Audituri de Accesibilitate**: Revizuiri regulate pentru respectarea principiilor de design incluziv
+### Monitorizare și asigurarea calității
+- **Testare automată**: Validarea regulată a exemplelor de cod și linkurilor
+- **Integrarea feedback-ului comunitar**: Incorporarea regulată a sugestiilor utilizatorilor
+- **Actualizări tehnologice**: Alinierea cu cele mai recente servicii Azure și lansări azd
+- **Audituri de accesibilitate**: Revizuiri regulate pentru principiile de design incluziv
 
-## Politica de Suport pentru Versiuni
+## Politica de suport pentru versiuni
 
-### Suport pentru Versiunea Curentă
-- **Ultima Versiune Majoră**: Suport complet cu actualizări regulate
-- **Versiunea Majoră Anterioară**: Actualizări de securitate și corecții critice timp de 12 luni
-- **Versiuni Legacy**: Suport comunitar doar, fără actualizări oficiale
+### Suport pentru versiunea curentă
+- **Ultima versiune majoră**: Suport complet cu actualizări regulate
+- **Versiunea majoră anterioară**: Actualizări de securitate și corecții critice timp de 12 luni
+- **Versiuni vechi**: Suport comunitar doar, fără actualizări oficiale
 
-### Ghiduri de Migrare
+### Ghiduri de migrare
 Când sunt lansate versiuni majore, oferim:
-- **Ghiduri de Migrare**: Instrucțiuni pas cu pas pentru tranziție
-- **Note de Compatibilitate**: Detalii despre modificările majore
-- **Suport pentru Instrumente**: Scripturi sau utilități pentru a ajuta la migrare
-- **Suport Comunitar**: Forumuri dedicate pentru întrebări legate de migrare
+- **Ghiduri de migrare**: Instrucțiuni pas cu pas pentru tranziție
+- **Note de compatibilitate**: Detalii despre modificările majore
+- **Suport pentru instrumente**: Scripturi sau utilitare pentru a ajuta la migrare
+- **Suport comunitar**: Forumuri dedicate pentru întrebări legate de migrare
 
 ---
 
 **Navigare**
-- **Lecția Anterioară**: [Ghid de Studiu](resources/study-guide.md)
-- **Lecția Următoare**: Revenire la [README Principal](README.md)
+- **Lecția anterioară**: [Ghid de studiu](resources/study-guide.md)
+- **Lecția următoare**: Revenire la [README principal](README.md)
 
-**Rămâneți la Curent**: Urmăriți acest repo pentru notificări despre noi lansări și actualizări importante ale materialelor de învățare.
+**Rămâi la curent**: Urmărește acest repo pentru notificări despre noi lansări și actualizări importante ale materialelor de învățare.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru neînțelegerile sau interpretările greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

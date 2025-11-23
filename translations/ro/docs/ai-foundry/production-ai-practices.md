@@ -1,38 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T10:59:29+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-23T16:58:34+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "ro"
 }
 -->
-# Cele Mai Bune Practici pentru Workload-uri AI în Producție cu AZD
+# Cele mai bune practici pentru sarcini AI în producție cu AZD
 
-**Navigare Capitol:**
+**Navigare capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol Curent**: Capitolul 8 - Modele pentru Producție și Enterprise
-- **⬅️ Capitol Anterior**: [Capitolul 7: Depanare](../troubleshooting/debugging.md)
+- **📖 Capitol Curent**: Capitolul 8 - Modele de Producție și Enterprise
+- **⬅️ Capitolul Precedent**: [Capitolul 7: Depanare](../troubleshooting/debugging.md)
 - **⬅️ De asemenea, legat**: [Laborator Workshop AI](ai-workshop-lab.md)
 - **🎯 Curs Finalizat**: [AZD Pentru Începători](../../README.md)
 
-## Prezentare Generală
+## Prezentare generală
 
-Acest ghid oferă cele mai bune practici pentru implementarea workload-urilor AI pregătite pentru producție folosind Azure Developer CLI (AZD). Bazat pe feedback-ul comunității Discord Azure AI Foundry și pe implementări reale la clienți, aceste practici abordează cele mai comune provocări ale sistemelor AI în producție.
+Acest ghid oferă cele mai bune practici pentru implementarea sarcinilor AI pregătite pentru producție utilizând Azure Developer CLI (AZD). Bazat pe feedback-ul comunității Microsoft Foundry Discord și pe implementări reale ale clienților, aceste practici abordează cele mai comune provocări în sistemele AI de producție.
 
-## Provocări Cheie Abordate
+## Provocări cheie abordate
 
 Conform rezultatelor sondajului comunității, acestea sunt principalele provocări cu care se confruntă dezvoltatorii:
 
-- **45%** întâmpină dificultăți în implementarea AI cu mai multe servicii
+- **45%** întâmpină dificultăți în implementările AI multi-servicii
 - **38%** au probleme cu gestionarea acreditărilor și secretelor  
 - **35%** consideră dificilă pregătirea pentru producție și scalarea
 - **32%** au nevoie de strategii mai bune de optimizare a costurilor
 - **29%** necesită îmbunătățiri în monitorizare și depanare
 
-## Modele Arhitecturale pentru AI în Producție
+## Modele de arhitectură pentru AI în producție
 
-### Model 1: Arhitectura AI Microservicii
+### Modelul 1: Arhitectura AI Microservicii
 
 **Când să folosești**: Aplicații AI complexe cu multiple capabilități
 
@@ -76,7 +76,7 @@ services:
     host: containerapp
 ```
 
-### Model 2: Procesare AI Bazată pe Evenimente
+### Modelul 2: Procesare AI bazată pe evenimente
 
 **Când să folosești**: Procesare batch, analiză de documente, fluxuri de lucru asincrone
 
@@ -125,14 +125,14 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Cele Mai Bune Practici de Securitate
+## Cele mai bune practici de securitate
 
-### 1. Model de Securitate Zero-Trust
+### 1. Model de securitate Zero-Trust
 
-**Strategie de Implementare**:
+**Strategie de implementare**:
 - Nicio comunicare între servicii fără autentificare
-- Toate apelurile API folosesc identități gestionate
-- Izolare rețea cu endpoint-uri private
+- Toate apelurile API utilizează identități gestionate
+- Izolare rețea cu puncte finale private
 - Controale de acces cu privilegii minime
 
 ```bicep
@@ -154,9 +154,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Gestionarea Securizată a Secretelor
+### 2. Gestionarea sigură a secretelor
 
-**Model de Integrare Key Vault**:
+**Model de integrare Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -189,9 +189,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Securitatea Rețelei
+### 3. Securitatea rețelei
 
-**Configurarea Endpoint-urilor Private**:
+**Configurarea punctelor finale private**:
 
 ```bicep
 // Virtual Network for AI services
@@ -249,11 +249,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Performanță și Scalare
+## Performanță și scalare
 
-### 1. Strategii de Auto-Scalare
+### 1. Strategii de auto-scalare
 
-**Auto-scalare pentru Container Apps**:
+**Auto-scalare pentru aplicații containerizate**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -297,9 +297,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Strategii de Caching
+### 2. Strategii de caching
 
-**Redis Cache pentru Răspunsuri AI**:
+**Redis Cache pentru răspunsuri AI**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -327,9 +327,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Balansare de Sarcină și Managementul Traficului
+### 3. Echilibrarea încărcării și gestionarea traficului
 
-**Application Gateway cu WAF**:
+**Gateway de aplicații cu WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -365,14 +365,14 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Optimizarea Costurilor
+## 💰 Optimizarea costurilor
 
-### 1. Dimensionarea Corectă a Resurselor
+### 1. Dimensionarea corectă a resurselor
 
-**Configurații Specifice Mediului**:
+**Configurații specifice mediului**:
 
 ```bash
-# Development environment
+# Mediu de dezvoltare
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Mediu de producție
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -389,7 +389,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Monitorizarea Costurilor și Bugete
+### 2. Monitorizarea costurilor și bugete
 
 ```bicep
 // Cost management and budgets
@@ -430,12 +430,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Optimizarea Utilizării Token-urilor
+### 3. Optimizarea utilizării token-urilor
 
-**Managementul Costurilor OpenAI**:
+**Gestionarea costurilor OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Optimizarea tokenului la nivel de aplicație
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Trunchiați contextul, nu intrarea utilizatorului
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,15 +453,15 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Estimare aproximativă: 1 token ≈ 4 caractere
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Monitorizare și Observabilitate
+## Monitorizare și observabilitate
 
-### 1. Insights Complete pentru Aplicații
+### 1. Insights complete pentru aplicații
 
 ```bicep
 // Application Insights with advanced features
@@ -506,9 +506,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitorizare Specifică AI
+### 2. Monitorizare specifică AI
 
-**Dashboard-uri Personalizate pentru Metrici AI**:
+**Dashboard-uri personalizate pentru metrici AI**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Verificări de Sănătate și Monitorizare Uptime
+### 3. Verificări de sănătate și monitorizare a disponibilității
 
 ```bicep
 // Application Insights availability tests
@@ -606,9 +606,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Recuperare în Caz de Dezastru și Disponibilitate Ridicată
+## Recuperare în caz de dezastru și disponibilitate ridicată
 
-### 1. Implementare Multi-Regiune
+### 1. Implementare multi-regiune
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Backup și Recuperare Date
+### 2. Backup și recuperare de date
 
 ```bicep
 // Backup configuration for critical data
@@ -721,7 +721,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps și Integrare CI/CD
+## Integrare DevOps și CI/CD
 
 ### 1. Workflow GitHub Actions
 
@@ -804,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Validarea Infrastructurii
+### 2. Validarea infrastructurii
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Verificați dacă toate serviciile necesare sunt în funcțiune
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Validați implementările modelelor OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,27 +830,27 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Testați conectivitatea serviciului AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Lista de Verificare pentru Pregătirea Producției
+## Lista de verificare pentru pregătirea producției
 
 ### Securitate ✅
-- [ ] Toate serviciile folosesc identități gestionate
-- [ ] Secretele sunt stocate în Key Vault
-- [ ] Endpoint-uri private configurate
+- [ ] Toate serviciile utilizează identități gestionate
+- [ ] Secretele stocate în Key Vault
+- [ ] Puncte finale private configurate
 - [ ] Grupuri de securitate rețea implementate
 - [ ] RBAC cu privilegii minime
-- [ ] WAF activat pe endpoint-uri publice
+- [ ] WAF activat pe punctele finale publice
 
 ### Performanță ✅
 - [ ] Auto-scalare configurată
 - [ ] Caching implementat
-- [ ] Balansare de sarcină configurată
+- [ ] Echilibrarea încărcării configurată
 - [ ] CDN pentru conținut static
 - [ ] Pooling conexiuni baze de date
 - [ ] Optimizarea utilizării token-urilor
@@ -869,9 +869,9 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Circuit breakers implementate
 - [ ] Politici de retry configurate
 - [ ] Degradare grațioasă
-- [ ] Endpoint-uri de verificare sănătate
+- [ ] Puncte finale pentru verificări de sănătate
 
-### Managementul Costurilor ✅
+### Gestionarea costurilor ✅
 - [ ] Alarme buget configurate
 - [ ] Dimensionarea corectă a resurselor
 - [ ] Reduceri dev/test aplicate
@@ -880,30 +880,30 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Revizuiri regulate ale costurilor
 
 ### Conformitate ✅
-- [ ] Cerințele de rezidență date respectate
+- [ ] Cerințele de rezidență a datelor respectate
 - [ ] Logare audit activată
 - [ ] Politici de conformitate aplicate
-- [ ] Bazele de securitate implementate
+- [ ] Baze de securitate implementate
 - [ ] Evaluări regulate de securitate
 - [ ] Plan de răspuns la incidente
 
-## Benchmarks de Performanță
+## Repere de performanță
 
-### Metrici Tipice pentru Producție
+### Metrici tipice pentru producție
 
 | Metrică | Țintă | Monitorizare |
 |--------|--------|------------|
-| **Timp de Răspuns** | < 2 secunde | Application Insights |
-| **Disponibilitate** | 99.9% | Monitorizare uptime |
-| **Rată de Eroare** | < 0.1% | Loguri aplicație |
-| **Utilizare Token-uri** | < $500/lună | Management costuri |
-| **Utilizatori Concurenți** | 1000+ | Testare sarcină |
-| **Timp de Recuperare** | < 1 oră | Teste de recuperare în caz de dezastru |
+| **Timp de răspuns** | < 2 secunde | Application Insights |
+| **Disponibilitate** | 99.9% | Monitorizare disponibilitate |
+| **Rată de eroare** | < 0.1% | Loguri aplicație |
+| **Utilizare token-uri** | < $500/lună | Gestionarea costurilor |
+| **Utilizatori simultani** | 1000+ | Testare încărcare |
+| **Timp de recuperare** | < 1 oră | Teste de recuperare în caz de dezastru |
 
-### Testare Sarcină
+### Testare încărcare
 
 ```bash
-# Load testing script for AI applications
+# Script de testare a încărcării pentru aplicații AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -911,45 +911,47 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Cele Mai Bune Practici ale Comunității
+## 🤝 Cele mai bune practici ale comunității
 
-Bazat pe feedback-ul comunității Discord Azure AI Foundry:
+Bazat pe feedback-ul comunității Microsoft Foundry Discord:
 
-### Recomandări de Top din Comunitate:
+### Recomandări principale din partea comunității:
 
-1. **Începe Mic, Scalează Treptat**: Începe cu SKU-uri de bază și scalează în funcție de utilizarea reală
-2. **Monitorizează Totul**: Configurează monitorizare completă de la început
-3. **Automatizează Securitatea**: Folosește infrastructura ca cod pentru securitate consistentă
-4. **Testează Temeinic**: Include testare specifică AI în pipeline-ul tău
-5. **Planifică Costurile**: Monitorizează utilizarea token-urilor și configurează alarme buget devreme
+1. **Începeți mic, scalați treptat**: Începeți cu SKU-uri de bază și scalați în funcție de utilizarea reală
+2. **Monitorizați totul**: Configurați monitorizarea completă de la început
+3. **Automatizați securitatea**: Utilizați infrastructura ca cod pentru o securitate consistentă
+4. **Testați temeinic**: Includeți testarea specifică AI în pipeline-ul vostru
+5. **Planificați costurile**: Monitorizați utilizarea token-urilor și setați alarme de buget devreme
 
-### Greșeli Comune de Evitat:
+### Greșeli comune de evitat:
 
-- ❌ Hardcoding API keys în cod
-- ❌ Lipsa configurării monitorizării adecvate
+- ❌ Hardcodarea cheilor API în cod
+- ❌ Nefolosirea unei monitorizări adecvate
 - ❌ Ignorarea optimizării costurilor
-- ❌ Lipsa testării scenariilor de eșec
-- ❌ Implementare fără verificări de sănătate
+- ❌ Netestarea scenariilor de eșec
+- ❌ Implementarea fără verificări de sănătate
 
-## Resurse Suplimentare
+## Resurse suplimentare
 
-- **Framework-ul Azure Well-Architected**: [Ghid pentru workload-uri AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Documentația Azure AI Foundry**: [Documentație oficială](https://learn.microsoft.com/azure/ai-studio/)
-- **Template-uri Comunitare**: [Exemple Azure](https://github.com/Azure-Samples)
-- **Comunitatea Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Framework-ul Azure Well-Architected**: [Ghid pentru sarcini AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Documentația Microsoft Foundry**: [Documentație oficială](https://learn.microsoft.com/azure/ai-studio/)
+- **Șabloane comunitare**: [Exemple Azure](https://github.com/Azure-Samples)
+- **Comunitatea Discord**: [Canalul #Azure](https://discord.gg/microsoft-azure)
 
 ---
 
-**Navigare Capitol:**
+**Navigare capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol Curent**: Capitolul 8 - Modele pentru Producție și Enterprise
-- **⬅️ Capitol Anterior**: [Capitolul 7: Depanare](../troubleshooting/debugging.md)
+- **📖 Capitol Curent**: Capitolul 8 - Modele de Producție și Enterprise
+- **⬅️ Capitolul Precedent**: [Capitolul 7: Depanare](../troubleshooting/debugging.md)
 - **⬅️ De asemenea, legat**: [Laborator Workshop AI](ai-workshop-lab.md)
 - **🎆 Curs Finalizat**: [AZD Pentru Începători](../../README.md)
 
-**Reține**: Workload-urile AI în producție necesită planificare atentă, monitorizare și optimizare continuă. Începe cu aceste modele și adaptează-le la cerințele tale specifice.
+**Amintiți-vă**: Sarcinile AI în producție necesită planificare atentă, monitorizare și optimizare continuă. Începeți cu aceste modele și adaptați-le la cerințele voastre specifice.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

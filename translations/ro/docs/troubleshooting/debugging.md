@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T11:02:58+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-23T16:55:39+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "ro"
 }
 -->
 # Ghid de depanare pentru implementările AZD
 
-**Navigare capitole:**
+**Navigare capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol Curent**: Capitolul 7 - Depanare și Debugging
+- **📖 Capitol curent**: Capitolul 7 - Depanare și Debugging
 - **⬅️ Precedent**: [Probleme Comune](common-issues.md)
 - **➡️ Următor**: [Depanare Specifică AI](ai-troubleshooting.md)
-- **🚀 Capitol Următor**: [Capitolul 8: Practici de Producție și Enterprise](../ai-foundry/production-ai-practices.md)
+- **🚀 Capitol Următor**: [Capitolul 8: Modele de Producție și Enterprise](../microsoft-foundry/production-ai-practices.md)
 
 ## Introducere
 
-Acest ghid cuprinzător oferă strategii avansate de depanare, instrumente și tehnici pentru diagnosticarea și rezolvarea problemelor complexe legate de implementările Azure Developer CLI. Învață metodologii sistematice de depanare, tehnici de analiză a jurnalelor, profilarea performanței și utilizarea instrumentelor avansate de diagnostic pentru a rezolva eficient problemele de implementare și runtime.
+Acest ghid cuprinzător oferă strategii avansate de depanare, instrumente și tehnici pentru diagnosticarea și rezolvarea problemelor complexe legate de implementările Azure Developer CLI. Învață metodologii sistematice de depanare, tehnici de analiză a jurnalelor, profilarea performanței și instrumente avansate de diagnostic pentru a rezolva eficient problemele de implementare și runtime.
 
 ## Obiective de învățare
 
@@ -35,8 +35,8 @@ După parcurgerea acestui ghid, vei:
 După finalizare, vei putea:
 - Aplica metodologia TRIAGE pentru a depana sistematic probleme complexe de implementare
 - Configura și analiza informații detaliate de jurnalizare și trasare
-- Utiliza Azure Monitor, Application Insights și instrumente de diagnostic în mod eficient
-- Depana probleme de conectivitate, autentificare și permisiuni în mod independent
+- Utiliza Azure Monitor, Application Insights și instrumentele de diagnostic în mod eficient
+- Depana probleme de conectivitate rețea, autentificare și permisiuni în mod independent
 - Implementa strategii de monitorizare și optimizare a performanței
 - Crea scripturi personalizate de depanare și automatizare pentru probleme recurente
 
@@ -47,33 +47,33 @@ După finalizare, vei putea:
 - **R**eproducere: Poți reproduce problema în mod constant?
 - **I**zolare: Ce componentă eșuează?
 - **A**naliză: Ce ne spun jurnalele?
-- **C**olectare: Adună toate informațiile relevante
-- **E**scaladare: Când să ceri ajutor suplimentar
+- **C**olecție: Adună toate informațiile relevante
+- **E**scalare: Când să ceri ajutor suplimentar
 
 ## Activarea modului de depanare
 
 ### Variabile de mediu
 ```bash
-# Enable comprehensive debugging
+# Activați depanarea cuprinzătoare
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Depanare CLI Azure
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Dezactivați telemetria pentru un output mai curat
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Configurare de depanare
+### Configurare Debug
 ```bash
-# Set debug configuration globally
+# Setează configurația de depanare global
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Activează jurnalizarea de urmărire
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Analiza structurată a jurnalelor
 ```bash
-# Filter logs by level
+# Filtrează jurnalele după nivel
 azd logs --level error --since 1h
 
-# Filter by service
+# Filtrează după serviciu
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Exportă jurnalele pentru analiză
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Analizează jurnalele JSON cu jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Corelarea jurnalelor
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Corelează jurnalele între servicii
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Caută în toate serviciile
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Caută jurnalele Azure
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Interogări Azure Resource Graph
 ```bash
-# Query resources by tags
+# Interoghează resursele după etichete
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Găsește implementările eșuate
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Verifică sănătatea resurselor
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Depanare rețea
 ```bash
-# Test connectivity between services
+# Testați conectivitatea între servicii
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Utilizare
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Depanare containere
 ```bash
-# Debug container app issues
+# Depanare probleme aplicație container
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Depanare conexiuni baze de date
 ```bash
-# Debug database connectivity
+# Depanare conectivitatea bazei de date
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### Monitorizarea performanței aplicațiilor
 ```bash
-# Enable Application Insights debugging
+# Activați depanarea Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Monitorizare personalizată a performanței
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Analiza utilizării resurselor
 ```bash
-# Monitor resource usage
+# Monitorizați utilizarea resurselor
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Setează mediul de depanare
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Obține punctele de acces ale serviciului
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Testează punctele de acces pentru sănătate
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Rulează testele
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Rulează teste de integrare personalizate
 npm run test:integration
 ```
 
 ### Testare de încărcare pentru depanare
 ```bash
-# Simple load test to identify performance bottlenecks
+# Test de încărcare simplu pentru identificarea blocajelor de performanță
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Utilizarea Apache Bench (instalare: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Extrageți metricile cheie
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Verificați erorile
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Depanare șabloane Bicep
 ```bash
-# Validate Bicep templates with detailed output
+# Validați șabloanele Bicep cu ieșire detaliată
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Validarea sintaxei
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Validarea lint
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Ce-ar fi dacă implementarea
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Depanarea implementării șablonului
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Analiza stării resurselor
 ```bash
-# Analyze resource states for inconsistencies
+# Analizați stările resurselor pentru inconsecvențe
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Listați toate resursele cu stările lor
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Verificați resursele eșuate
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### Depanare fluxuri de autentificare
 ```bash
-# Debug Azure authentication
+# Depanare autentificare Azure
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Decodificare token JWT (necesită jq și base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Depanare acces Key Vault
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Depanare securitate rețea
 ```bash
-# Debug network security groups
+# Depanați grupurile de securitate ale rețelei
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Verificați regulile de securitate
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Depanare aplicații Node.js
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Middleware de depanare Express
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Înregistrează detaliile cererii
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Suprascrie res.json pentru a înregistra răspunsurile
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Depanare interogări baze de date
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Utilitare de depanare a bazei de date
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -524,7 +524,7 @@ module.exports = DebuggingPool;
 ### Răspuns la probleme în producție
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Debugging de urgență în producție
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Comută la mediul corect
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Colectează informații critice
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Proceduri de rollback
 ```bash
-# Quick rollback script
+# Script de revenire rapidă
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Schimbă mediul
     azd env select "$environment"
     
-    # Rollback application
+    # Revino la aplicație
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Verifică revenirea
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Testează punctele critice
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### Dashboard personalizat de monitorizare
 ```bash
-# Create Application Insights queries for debugging
+# Creați interogări Application Insights pentru depanare
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Interogare pentru erori
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Interogare pentru probleme de performanță
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Interogare pentru eșecuri de dependență
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Agregarea jurnalelor
 ```bash
-# Aggregate logs from multiple sources
+# Agregarea jurnalelor din surse multiple
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -696,11 +696,11 @@ hooks:
 - [Planificarea Capacității](../pre-deployment/capacity-planning.md) - Planifică cerințele de resurse
 - [Selecția SKU](../pre-deployment/sku-selection.md) - Alege nivelurile de servicii potrivite
 - [Verificări Preflight](../pre-deployment/preflight-checks.md) - Validare înainte de implementare
-- [Fișă de Cheat](../../resources/cheat-sheet.md) - Comenzi de referință rapidă
+- [Fișă de Referință](../../resources/cheat-sheet.md) - Comenzi de referință rapidă
 
 ---
 
-**Reține**: O depanare eficientă presupune să fii sistematic, atent și răbdător. Aceste instrumente și tehnici te vor ajuta să diagnostichezi problemele mai rapid și mai eficient.
+**Reține**: O depanare bună înseamnă să fii sistematic, meticulos și răbdător. Aceste instrumente și tehnici te vor ajuta să diagnostichezi problemele mai rapid și mai eficient.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

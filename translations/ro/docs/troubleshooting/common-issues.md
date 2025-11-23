@@ -1,204 +1,204 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-18T11:02:33+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-23T16:53:43+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "ro"
 }
 -->
 # Probleme Comune și Soluții
 
-**Navigare Capitole:**
+**Navigare Capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
 - **📖 Capitol Curent**: Capitolul 7 - Depanare și Debugging
 - **⬅️ Capitol Anterior**: [Capitolul 6: Verificări Preliminare](../pre-deployment/preflight-checks.md)
 - **➡️ Următor**: [Ghid de Debugging](debugging.md)
-- **🚀 Capitol Următor**: [Capitolul 8: Modele de Producție și Enterprise](../ai-foundry/production-ai-practices.md)
+- **🚀 Capitol Următor**: [Capitolul 8: Modele de Producție și Enterprise](../microsoft-foundry/production-ai-practices.md)
 
 ## Introducere
 
-Acest ghid cuprinzător de depanare acoperă cele mai frecvente probleme întâlnite în utilizarea Azure Developer CLI. Învață să diagnostichezi, să depanezi și să rezolvi probleme comune legate de autentificare, implementare, provizionarea infrastructurii și configurarea aplicațiilor. Fiecare problemă include simptome detaliate, cauze principale și proceduri pas cu pas pentru rezolvare.
+Acest ghid cuprinzător de depanare acoperă cele mai frecvente probleme întâlnite în utilizarea Azure Developer CLI. Învață să diagnostichezi, să depanezi și să rezolvi probleme comune legate de autentificare, implementare, furnizarea infrastructurii și configurarea aplicațiilor. Fiecare problemă include simptome detaliate, cauze principale și proceduri pas cu pas pentru rezolvare.
 
 ## Obiective de Învățare
 
-Parcurgând acest ghid, vei:
+După parcurgerea acestui ghid, vei:
 - Stăpâni tehnici de diagnosticare pentru problemele Azure Developer CLI
 - Înțelege problemele comune de autentificare și permisiuni și soluțiile acestora
-- Rezolva erori de implementare, probleme de provizionare a infrastructurii și probleme de configurare
+- Rezolva eșecurile de implementare, erorile de furnizare a infrastructurii și problemele de configurare
 - Implementa strategii proactive de monitorizare și debugging
 - Aplica metodologii sistematice de depanare pentru probleme complexe
 - Configura logare și monitorizare adecvate pentru a preveni problemele viitoare
 
 ## Rezultate de Învățare
 
-După finalizare, vei putea:
-- Diagnostica problemele Azure Developer CLI folosind instrumentele de diagnosticare încorporate
-- Rezolva independent problemele legate de autentificare, abonamente și permisiuni
-- Depana eficient erorile de implementare și problemele de provizionare a infrastructurii
-- Debugga problemele de configurare ale aplicațiilor și problemele specifice mediului
+La final, vei putea:
+- Diagnostica problemele Azure Developer CLI folosind instrumentele de diagnosticare integrate
+- Rezolva independent problemele de autentificare, abonament și permisiuni
+- Depana eficient eșecurile de implementare și erorile de furnizare a infrastructurii
+- Debugga problemele de configurare a aplicațiilor și problemele specifice mediului
 - Implementa monitorizare și alerte pentru a identifica proactiv problemele potențiale
 - Aplica cele mai bune practici pentru logare, debugging și fluxuri de rezolvare a problemelor
 
 ## Diagnosticare Rapidă
 
-Înainte de a intra în detalii despre probleme specifice, rulează aceste comenzi pentru a colecta informații de diagnosticare:
+Înainte de a intra în probleme specifice, rulează aceste comenzi pentru a colecta informații de diagnosticare:
 
 ```bash
-# Check azd version and health
+# Verifica versiunea azd și sănătatea
 azd version
 azd config list
 
-# Verify Azure authentication
+# Verifica autentificarea Azure
 az account show
 az account list
 
-# Check current environment
+# Verifica mediul curent
 azd env show
 azd env get-values
 
-# Enable debug logging
+# Activează jurnalizarea de depanare
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
 ## Probleme de Autentificare
 
-### Problemă: "Nu s-a putut obține token-ul de acces"
+### Problemă: "Failed to get access token"
 **Simptome:**
 - `azd up` eșuează cu erori de autentificare
 - Comenzile returnează "neautorizat" sau "acces refuzat"
 
 **Soluții:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Re-autentificați cu Azure CLI
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. Ștergeți acreditările memorate în cache
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. Utilizați fluxul de cod al dispozitivului (pentru sisteme fără interfață grafică)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. Setați abonamentul explicit
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problemă: "Privilegii insuficiente" în timpul implementării
+### Problemă: "Insufficient privileges" în timpul implementării
 **Simptome:**
 - Implementarea eșuează cu erori de permisiuni
 - Nu se pot crea anumite resurse Azure
 
 **Soluții:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. Verificați atribuțiile de rol Azure
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. Asigurați-vă că aveți rolurile necesare
+# - Contributor (pentru crearea resurselor)
+# - Administrator Acces Utilizator (pentru atribuțiile de rol)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. Contactați administratorul Azure pentru permisiunile corespunzătoare
 ```
 
 ### Problemă: Probleme de autentificare multi-tenant
 **Soluții:**
 ```bash
-# 1. Login with specific tenant
+# 1. Autentificare cu un chiriaș specific
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. Setează chiriașul în configurație
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. Șterge memoria cache a chiriașului dacă se schimbă chiriașii
 az account clear
 ```
 
-## 🏗️ Erori de Provizionare a Infrastructurii
+## 🏗️ Erori de Furnizare a Infrastructurii
 
 ### Problemă: Conflicte de nume ale resurselor
 **Simptome:**
-- Erori "Numele resursei există deja"
+- Erori "The resource name already exists"
 - Implementarea eșuează în timpul creării resurselor
 
 **Soluții:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# 1. Utilizați nume de resurse unice cu token-uri
+# În șablonul dvs. Bicep:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# 2. Schimbați numele mediului
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# 3. Curățați resursele existente
 azd down --force --purge
 ```
 
 ### Problemă: Locația/Regiunea nu este disponibilă
 **Simptome:**
-- "Locația 'xyz' nu este disponibilă pentru tipul de resursă"
-- Anumite SKUs nu sunt disponibile în regiunea selectată
+- "The location 'xyz' is not available for resource type"
+- Anumite SKU-uri nu sunt disponibile în regiunea selectată
 
 **Soluții:**
 ```bash
-# 1. Check available locations for resource types
+# 1. Verificați locațiile disponibile pentru tipurile de resurse
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. Utilizați regiunile disponibile în mod obișnuit
 azd config set defaults.location eastus2
-# or
+# sau
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Verificați disponibilitatea serviciului pe regiune
+# Vizitați: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### Problemă: Erori de depășire a cotei
 **Simptome:**
-- "Cota depășită pentru tipul de resursă"
-- "Numărul maxim de resurse atins"
+- "Quota exceeded for resource type"
+- "Maximum number of resources reached"
 
 **Soluții:**
 ```bash
-# 1. Check current quota usage
+# 1. Verificați utilizarea actuală a cotei
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. Solicitați creșterea cotei prin portalul Azure
+# Accesați: Abonamente > Utilizare + cote
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. Utilizați SKUs mai mici pentru dezvoltare
+# În main.parameters.json:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. Curățați resursele neutilizate
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problemă: Erori în template-urile Bicep
+### Problemă: Erori în template-ul Bicep
 **Simptome:**
-- Eșecuri de validare a template-urilor
+- Eșecuri de validare a template-ului
 - Erori de sintaxă în fișierele Bicep
 
 **Soluții:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. Validați sintaxa Bicep
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. Utilizați linter-ul Bicep
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. Verificați sintaxa fișierului de parametri
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. Previzualizați modificările de implementare
 azd provision --preview
 ```
 
@@ -207,71 +207,71 @@ azd provision --preview
 ### Problemă: Eșecuri de build
 **Simptome:**
 - Aplicația eșuează la build în timpul implementării
-- Erori la instalarea pachetelor
+- Erori de instalare a pachetelor
 
 **Soluții:**
 ```bash
-# 1. Check build logs
+# 1. Verificați jurnalele de compilare
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. Testați compilarea local
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. Verificați compatibilitatea versiunilor Node.js/Python
+node --version  # Ar trebui să se potrivească cu setările din azure.yaml
 python --version
 
-# 4. Clear build cache
+# 4. Goliți memoria cache de compilare
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. Verificați Dockerfile dacă utilizați containere
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problemă: Eșecuri la implementarea containerelor
+### Problemă: Eșecuri de implementare a containerelor
 **Simptome:**
-- Aplicațiile container nu pornesc
-- Erori la extragerea imaginilor
+- Aplicațiile container eșuează la pornire
+- Erori de pull pentru imagini
 
 **Soluții:**
 ```bash
-# 1. Test Docker build locally
+# 1. Testați compilarea Docker local
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. Verificați jurnalele containerului
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. Verificați accesul la registrul containerului
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. Verificați configurația aplicației containerului
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problemă: Probleme de conectare la baza de date
+### Problemă: Eșecuri de conectare la baza de date
 **Simptome:**
 - Aplicația nu se poate conecta la baza de date
 - Erori de timeout la conectare
 
 **Soluții:**
 ```bash
-# 1. Check database firewall rules
+# 1. Verificați regulile firewall-ului bazei de date
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. Testați conectivitatea din aplicație
+# Adăugați temporar în aplicația dvs.:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. Verificați formatul șirului de conexiune
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. Verificați statusul serverului bazei de date
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -284,17 +284,17 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 **Soluții:**
 ```bash
-# 1. Verify environment variables are set
+# 1. Verificați dacă variabilele de mediu sunt setate
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. Verificați numele variabilelor în azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. Reporniți aplicația
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. Verificați configurația serviciului aplicației
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -305,38 +305,38 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 **Soluții:**
 ```bash
-# 1. Check SSL certificate status
+# 1. Verificați starea certificatului SSL
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. Activați doar HTTPS
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. Adăugați un domeniu personalizat (dacă este necesar)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### Problemă: Probleme de configurare CORS
 **Simptome:**
 - Frontend-ul nu poate apela API-ul
-- Cerere cross-origin blocată
+- Cererea cross-origin este blocată
 
 **Soluții:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. Configurați CORS pentru App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. Actualizați API-ul pentru a gestiona CORS
+# În Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. Verificați dacă rulează pe URL-urile corecte
 azd show
 ```
 
-## 🌍 Probleme de Management al Mediului
+## 🌍 Probleme de Gestionare a Mediului
 
 ### Problemă: Probleme la schimbarea mediului
 **Simptome:**
@@ -345,61 +345,61 @@ azd show
 
 **Soluții:**
 ```bash
-# 1. List all environments
+# 1. Listează toate mediile
 azd env list
 
-# 2. Explicitly select environment
+# 2. Selectează explicit mediul
 azd env select production
 
-# 3. Verify current environment
+# 3. Verifică mediul curent
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. Creează un mediu nou dacă este corupt
 azd env new production-new
 azd env select production-new
 ```
 
 ### Problemă: Coruperea mediului
 **Simptome:**
-- Mediul afișează o stare invalidă
-- Resursele nu se potrivesc cu configurația
+- Mediul apare într-o stare invalidă
+- Resursele nu corespund configurației
 
 **Soluții:**
 ```bash
-# 1. Refresh environment state
+# 1. Reîmprospătează starea mediului
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. Resetează configurația mediului
 azd env new production-reset
-# Copy over required environment variables
+# Copiază variabilele de mediu necesare
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. Importă resursele existente (dacă este posibil)
+# Actualizează manual .azure/production/config.json cu ID-urile resurselor
 ```
 
 ## 🔍 Probleme de Performanță
 
-### Problemă: Timpuri de implementare lente
+### Problemă: Timpuri lungi de implementare
 **Simptome:**
 - Implementările durează prea mult
 - Timeout-uri în timpul implementării
 
 **Soluții:**
 ```bash
-# 1. Enable parallel deployment
+# 1. Activează implementarea paralelă
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. Utilizează implementări incrementale
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. Optimizează procesul de construire
+# În package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. Verifică locațiile resurselor (folosește aceeași regiune)
 azd config set defaults.location eastus2
 ```
 
@@ -410,84 +410,84 @@ azd config set defaults.location eastus2
 
 **Soluții:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# 1. Măriți resursele
+# Actualizați SKU în main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# 2. Activați monitorizarea Application Insights
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# 3. Verificați jurnalele aplicației pentru blocaje
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# 4. Implementați caching
+# Adăugați cache Redis la infrastructura dvs.
 ```
 
 ## 🛠️ Instrumente și Comenzi de Depanare
 
 ### Comenzi de Debugging
 ```bash
-# Comprehensive debugging
+# Depanare cuprinzătoare
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# Verifică informațiile sistemului
 azd info
 
-# Validate configuration
+# Validează configurația
 azd config validate
 
-# Test connectivity
+# Testează conectivitatea
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Analiza Logurilor
 ```bash
-# Application logs
+# Jurnale de aplicație
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# Jurnale de resurse Azure
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# Jurnale de containere (pentru Aplicații Container)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Investigarea Resurselor
+### Investigația Resurselor
 ```bash
-# List all resources
+# Listează toate resursele
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# Verifică starea resursei
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# Diagnosticare rețea
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Obținerea Ajutorului Suplimentar
 
 ### Când să Escalezi
-- Problemele de autentificare persistă după încercarea tuturor soluțiilor
+- Problemele de autentificare persistă după ce ai încercat toate soluțiile
 - Probleme de infrastructură cu serviciile Azure
-- Probleme legate de facturare sau abonamente
+- Probleme legate de facturare sau abonament
 - Probleme de securitate sau incidente
 
 ### Canale de Suport
 ```bash
-# 1. Check Azure Service Health
+# 1. Verificați sănătatea serviciului Azure
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# 2. Creați un tichet de suport Azure
+# Accesați: https://portal.azure.com -> Ajutor + suport
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
-# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# 3. Resurse comunitare
+# - Stack Overflow: eticheta azure-developer-cli
+# - Probleme GitHub: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
@@ -503,7 +503,7 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ### Script de Colectare a Logurilor
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# colectează-info-debug.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -528,32 +528,32 @@ echo "Debug information collected in debug-logs/"
 
 ### Lista de Verificare Pre-implementare
 ```bash
-# 1. Validate authentication
+# 1. Validați autentificarea
 az account show
 
-# 2. Check quotas and limits
+# 2. Verificați cotele și limitele
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. Validați șabloanele
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. Testați mai întâi local
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. Utilizați implementările de tip dry-run
 azd provision --preview
 ```
 
 ### Configurarea Monitorizării
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# Activează Application Insights
+# Adaugă în main.bicep:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# Configurează alertele
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,34 +563,36 @@ az monitor metrics alert create \
 
 ### Mentenanță Regulată
 ```bash
-# Weekly health checks
+# Verificări săptămânale de sănătate
 ./scripts/health-check.sh
 
-# Monthly cost review
+# Revizuire lunară a costurilor
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# Revizuire trimestrială a securității
 az security assessment list --resource-group myrg
 ```
 
-## Resurse Conexe
+## Resurse Asociate
 
 - [Ghid de Debugging](debugging.md) - Tehnici avansate de debugging
-- [Provizionarea Resurselor](../deployment/provisioning.md) - Depanarea infrastructurii
+- [Furnizarea Resurselor](../deployment/provisioning.md) - Depanarea infrastructurii
 - [Planificarea Capacității](../pre-deployment/capacity-planning.md) - Ghid pentru planificarea resurselor
 - [Selecția SKU](../pre-deployment/sku-selection.md) - Recomandări pentru nivelurile de servicii
 
 ---
 
-**Sfat**: Păstrează acest ghid la îndemână și consultă-l ori de câte ori întâmpini probleme. Majoritatea problemelor au fost întâlnite anterior și au soluții stabilite!
+**Sfat**: Păstrează acest ghid la îndemână și consultă-l ori de câte ori întâmpini probleme. Cele mai multe probleme au fost întâlnite anterior și au soluții stabilite!
 
 ---
 
 **Navigare**
-- **Lecția Anterioară**: [Provizionarea Resurselor](../deployment/provisioning.md)
+- **Lecția Anterioară**: [Furnizarea Resurselor](../deployment/provisioning.md)
 - **Lecția Următoare**: [Ghid de Debugging](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
