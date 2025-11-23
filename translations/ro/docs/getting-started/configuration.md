@@ -1,20 +1,20 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T11:01:03+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-23T17:03:22+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "ro"
 }
 -->
 # Ghid de Configurare
 
-**Navigare în capitol:**
+**Navigare Capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul Curent**: Capitolul 3 - Configurare & Autentificare
+- **📖 Capitol Curent**: Capitolul 3 - Configurare & Autentificare
 - **⬅️ Precedent**: [Primul Tău Proiect](first-project.md)
 - **➡️ Următor**: [Ghid de Implementare](../deployment/deployment-guide.md)
-- **🚀 Capitolul Următor**: [Capitolul 4: Infrastructură ca Cod](../deployment/deployment-guide.md)
+- **🚀 Capitol Următor**: [Capitolul 4: Infrastructură ca Cod](../deployment/deployment-guide.md)
 
 ## Introducere
 
@@ -24,7 +24,7 @@ Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer C
 
 Până la sfârșitul acestei lecții, vei:
 - Stăpâni ierarhia de configurare azd și vei înțelege cum sunt prioritizate setările
-- Configura setări globale și specifice proiectului în mod eficient
+- Configura setările globale și specifice proiectului în mod eficient
 - Gestiona mai multe medii cu configurații diferite
 - Implementa modele sigure de autentificare și autorizare
 - Înțelege modele avansate de configurare pentru scenarii complexe
@@ -36,11 +36,11 @@ După finalizarea acestei lecții, vei fi capabil să:
 - Configurezi și gestionezi mai multe medii de implementare
 - Implementa practici sigure de gestionare a configurației
 - Depanezi probleme legate de configurare
-- Personalizezi comportamentul azd pentru cerințe specifice organizației
+- Personalizezi comportamentul azd pentru cerințe specifice organizaționale
 
 Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de lucru optime de dezvoltare și implementare.
 
-## Ierarhia de Configurare
+## Ierarhia Configurării
 
 azd folosește un sistem ierarhic de configurare:
 1. **Flag-uri din linia de comandă** (prioritate cea mai mare)
@@ -53,36 +53,36 @@ azd folosește un sistem ierarhic de configurare:
 
 ### Setarea Valorilor Implicite Globale
 ```bash
-# Set default subscription
+# Setează abonamentul implicit
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Setează locația implicită
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Setează convenția de denumire a grupului de resurse implicit
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Vizualizează toate configurațiile globale
 azd config list
 
-# Remove a configuration
+# Elimină o configurație
 azd config unset defaults.location
 ```
 
 ### Setări Globale Comune
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Preferințe de dezvoltare
+azd config set alpha.enable true                    # Activare funcții alpha
+azd config set telemetry.enabled false             # Dezactivare telemetrie
+azd config set output.format json                  # Setare format de ieșire
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Setări de securitate
+azd config set auth.useAzureCliCredential true     # Utilizați Azure CLI pentru autentificare
+azd config set tls.insecure false                  # Impune verificarea TLS
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Optimizare performanță
+azd config set provision.parallelism 5             # Creare paralelă de resurse
+azd config set deploy.timeout 30m                  # Timeout de implementare
 ```
 
 ## 🏗️ Configurarea Proiectului
@@ -213,13 +213,13 @@ services:
 
 ### Crearea Mediilor
 ```bash
-# Create a new environment
+# Creează un mediu nou
 azd env new development
 
-# Create with specific location
+# Creează cu locație specifică
 azd env new staging --location "westus2"
 
-# Create from template
+# Creează din șablon
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Fiecare mediu are propria configurație în `.azure/<env-name>/config.json`:
 
 ### Variabile de Mediu
 ```bash
-# Set environment-specific variables
+# Setează variabile specifice mediului
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Vizualizează variabilele de mediu
 azd env get-values
 
-# Remove environment variable
+# Rezultatul așteptat:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Elimină variabila de mediu
 azd env unset DEBUG
+
+# Verifică eliminarea
+azd env get-values | grep DEBUG
+# (ar trebui să nu returneze nimic)
 ```
 
 ### Șabloane de Mediu
-Creează `.azure/env.template` pentru configurarea consistentă a mediilor:
+Creează `.azure/env.template` pentru configurarea consistentă a mediului:
 ```bash
-# Required variables
+# Variabile necesare
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Setări aplicație
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Setări opționale de dezvoltare
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Integrarea Azure CLI
 ```bash
-# Use Azure CLI credentials (default)
+# Utilizați acreditivele Azure CLI (implicit)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Autentificați-vă cu un tenant specific
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Setați abonamentul implicit
 az account set --subscription <subscription-id>
 ```
 
 ### Autentificare cu Service Principal
 Pentru pipeline-uri CI/CD:
 ```bash
-# Set environment variables
+# Setează variabilele de mediu
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Sau configurează direct
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Identitate Gestionată
 Pentru medii găzduite în Azure:
 ```bash
-# Enable managed identity authentication
+# Activați autentificarea identității gestionate
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -391,7 +400,7 @@ Exemplu `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azu
 
 ### Denumirea Resurselor Personalizate
 ```bash
-# Set naming conventions
+# Setează convențiile de denumire
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Mediu de Dezvoltare
 ```bash
-# .azure/development/.env
+# .azure/dezvoltare/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Validarea Configurării
 ```bash
-# Check configuration syntax
+# Verificați sintaxa configurației
 azd config validate
 
-# Test environment variables
+# Testați variabilele de mediu
 azd env get-values
 
-# Validate infrastructure
+# Validați infrastructura
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ Creează scripturi de validare în `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Verificați variabilele de mediu necesare
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Validați sintaxa azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,9 +528,9 @@ database:
 ### 3. Considerații pentru Controlul Versiunilor
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Configurații de mediu (conțin ID-uri de resurse)
+.azure/*/.env               # Variabile de mediu (pot conține secrete)
+.env                        # Fișier de mediu local
 ```
 
 ### 4. Documentarea Configurării
@@ -540,10 +549,72 @@ Documentează configurația în `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Exerciții Practice
+
+### Exercițiul 1: Configurare Multi-Mediu (15 minute)
+
+**Obiectiv**: Creează și configurează trei medii cu setări diferite
+
+```bash
+# Creează mediu de dezvoltare
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Creează mediu de testare
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Creează mediu de producție
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Verifică fiecare mediu
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Criterii de Succes:**
+- [ ] Trei medii create cu succes
+- [ ] Fiecare mediu are configurație unică
+- [ ] Se poate comuta între medii fără erori
+- [ ] `azd env list` afișează toate cele trei medii
+
+### Exercițiul 2: Gestionarea Secretelor (10 minute)
+
+**Obiectiv**: Exersează configurarea sigură cu date sensibile
+
+```bash
+# Setează secretele (nu sunt afișate în output)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Setează configurația non-secretă
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Vizualizează mediul (secretele ar trebui să fie redactate)
+azd env get-values
+
+# Verifică dacă secretele sunt stocate
+azd env get DB_PASSWORD  # Ar trebui să afișeze valoarea reală
+```
+
+**Criterii de Succes:**
+- [ ] Secretele stocate fără a fi afișate în terminal
+- [ ] `azd env get-values` afișează secretele redactate
+- [ ] Comanda individuală `azd env get <SECRET_NAME>` recuperează valoarea reală
+
 ## Pași Următori
 
-- [Primul Tău Proiect](first-project.md) - Aplică configurația în practică
-- [Ghid de Implementare](../deployment/deployment-guide.md) - Folosește configurația pentru implementare
+- [Primul Tău Proiect](first-project.md) - Aplică configurarea în practică
+- [Ghid de Implementare](../deployment/deployment-guide.md) - Folosește configurarea pentru implementare
 - [Provisionarea Resurselor](../deployment/provisioning.md) - Configurări pregătite pentru producție
 
 ## Referințe
@@ -554,14 +625,16 @@ Documentează configurația în `CONFIG.md`:
 
 ---
 
-**Navigare în capitol:**
+**Navigare Capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul Curent**: Capitolul 3 - Configurare & Autentificare
+- **📖 Capitol Curent**: Capitolul 3 - Configurare & Autentificare
 - **⬅️ Precedent**: [Primul Tău Proiect](first-project.md)
-- **➡️ Capitolul Următor**: [Capitolul 4: Infrastructură ca Cod](../deployment/deployment-guide.md)
-- **Lecția Următoare**: [Primul Tău Proiect](first-project.md)
+- **➡️ Capitol Următor**: [Capitolul 4: Infrastructură ca Cod](../deployment/deployment-guide.md)
+- **Lecție Următoare**: [Primul Tău Proiect](first-project.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

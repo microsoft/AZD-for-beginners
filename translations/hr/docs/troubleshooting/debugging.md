@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T12:03:29+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-23T18:59:32+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "hr"
 }
@@ -11,33 +11,33 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Navigacija poglavljem:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 7 - Otklanjanje pogrešaka i dijagnostika
+- **📖 Trenutno poglavlje**: Poglavlje 7 - Rješavanje problema i otklanjanje pogrešaka
 - **⬅️ Prethodno**: [Uobičajeni problemi](common-issues.md)
 - **➡️ Sljedeće**: [Otklanjanje pogrešaka specifičnih za AI](ai-troubleshooting.md)
-- **🚀 Sljedeće poglavlje**: [Poglavlje 8: Obrasci za produkciju i poduzeća](../ai-foundry/production-ai-practices.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 8: Obrasci za produkciju i poduzeća](../microsoft-foundry/production-ai-practices.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pruža napredne strategije, alate i tehnike za dijagnosticiranje i rješavanje složenih problema s implementacijama Azure Developer CLI-a. Naučite sustavne metodologije otklanjanja pogrešaka, tehnike analize logova, profiliranje performansi i napredne dijagnostičke alate za učinkovito rješavanje problema implementacije i izvođenja.
+Ovaj sveobuhvatni vodič pruža napredne strategije, alate i tehnike za dijagnosticiranje i rješavanje složenih problema s implementacijama Azure Developer CLI-a. Naučite sustavne metodologije za otklanjanje pogrešaka, tehnike analize logova, profiliranje performansi i napredne dijagnostičke alate za učinkovito rješavanje problema s implementacijom i izvođenjem.
 
 ## Ciljevi učenja
 
 Nakon završetka ovog vodiča, naučit ćete:
-- Ovladati sustavnim metodologijama otklanjanja pogrešaka za probleme s Azure Developer CLI-jem
+- Ovladati sustavnim metodologijama za otklanjanje pogrešaka u Azure Developer CLI-u
 - Razumjeti naprednu konfiguraciju logiranja i tehnike analize logova
-- Implementirati strategije profiliranja performansi i praćenja
+- Provoditi strategije profiliranja performansi i praćenja
 - Koristiti Azure dijagnostičke alate i usluge za rješavanje složenih problema
-- Primijeniti tehnike otklanjanja pogrešaka u mreži i sigurnosne dijagnostike
+- Primijeniti tehnike otklanjanja pogrešaka u mreži i sigurnosne provjere
 - Konfigurirati sveobuhvatno praćenje i upozorenja za proaktivno otkrivanje problema
 
 ## Ishodi učenja
 
 Po završetku, moći ćete:
-- Primijeniti metodologiju TRIAGE za sustavno otklanjanje složenih problema implementacije
+- Primijeniti metodologiju TRIAGE za sustavno otklanjanje složenih problema s implementacijom
 - Konfigurirati i analizirati sveobuhvatne informacije o logiranju i praćenju
 - Učinkovito koristiti Azure Monitor, Application Insights i dijagnostičke alate
-- Samostalno otklanjati probleme povezane s mrežnom povezivošću, autentifikacijom i dozvolama
-- Implementirati strategije praćenja performansi i optimizacije
+- Samostalno otklanjati probleme s mrežnom povezivošću, autentifikacijom i dozvolama
+- Provoditi strategije praćenja performansi i optimizacije
 - Kreirati prilagođene skripte za otklanjanje pogrešaka i automatizaciju za ponavljajuće probleme
 
 ## Metodologija otklanjanja pogrešaka
@@ -54,26 +54,26 @@ Po završetku, moći ćete:
 
 ### Varijable okruženja
 ```bash
-# Enable comprehensive debugging
+# Omogući sveobuhvatno ispravljanje pogrešaka
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Ispravljanje pogrešaka Azure CLI-a
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Onemogući telemetriju za čišći izlaz
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Konfiguracija otklanjanja pogrešaka
+### Konfiguracija za otklanjanje pogrešaka
 ```bash
-# Set debug configuration globally
+# Postavite konfiguraciju za ispravljanje pogrešaka globalno
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Omogućite praćenje zapisivanja
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Strukturalna analiza logova
 ```bash
-# Filter logs by level
+# Filtriraj zapise po razini
 azd logs --level error --since 1h
 
-# Filter by service
+# Filtriraj po usluzi
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Izvezi zapise za analizu
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Parsiraj JSON zapise s jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Korelacija logova
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Korelacija logova između usluga
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Pretraži sve usluge
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Pretraži Azure logove
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Upiti Azure Resource Graph-a
 ```bash
-# Query resources by tags
+# Pretraži resurse prema oznakama
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Pronađi neuspjele implementacije
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Provjeri stanje resursa
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Otklanjanje pogrešaka u mreži
 ```bash
-# Test connectivity between services
+# Testiraj povezanost između usluga
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Upotreba
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Otklanjanje pogrešaka u kontejnerima
 ```bash
-# Debug container app issues
+# Otklanjanje problema s aplikacijom spremnika
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Otklanjanje pogrešaka u povezivanju s bazom podataka
 ```bash
-# Debug database connectivity
+# Otklanjanje pogrešaka povezivanja s bazom podataka
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### Praćenje performansi aplikacije
 ```bash
-# Enable Application Insights debugging
+# Omogući debugiranje Application Insights
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Prilagođeno praćenje performansi
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Analiza iskorištenosti resursa
 ```bash
-# Monitor resource usage
+# Pratite korištenje resursa
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Postavite okruženje za ispravljanje pogrešaka
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Dohvati krajnje točke usluge
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Testiraj krajnje točke zdravlja
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Pokreni testove
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Pokreni prilagođene integracijske testove
 npm run test:integration
 ```
 
 ### Testiranje opterećenja za otklanjanje pogrešaka
 ```bash
-# Simple load test to identify performance bottlenecks
+# Jednostavno opterećenje za identificiranje uskih grla u performansama
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Koristeći Apache Bench (instalacija: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Izvuci ključne metrike
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Provjeri neuspjehe
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Otklanjanje pogrešaka u Bicep predlošcima
 ```bash
-# Validate Bicep templates with detailed output
+# Provjerite Bicep predloške s detaljnim izlazom
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Provjera sintakse
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Provjera lint-a
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Što-ako implementacija
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Otklanjanje pogrešaka implementacije predloška
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Analiza stanja resursa
 ```bash
-# Analyze resource states for inconsistencies
+# Analiziraj stanja resursa za nedosljednosti
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Popiši sve resurse s njihovim stanjima
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Provjeri neuspjele resurse
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### Otklanjanje pogrešaka u autentifikacijskom toku
 ```bash
-# Debug Azure authentication
+# Otklanjanje pogrešaka u Azure autentifikaciji
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Dekodiraj JWT token (zahtijeva jq i base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Otklanjanje pogrešaka u pristupu Key Vaultu
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Otklanjanje pogrešaka u mrežnoj sigurnosti
 ```bash
-# Debug network security groups
+# Otklonite poteškoće s mrežnim sigurnosnim grupama
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Provjerite sigurnosna pravila
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Otklanjanje pogrešaka u Node.js aplikacijama
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Express sredstvo za ispravljanje pogrešaka
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Zabilježi detalje zahtjeva
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Prepiši res.json za bilježenje odgovora
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Otklanjanje pogrešaka u upitima baze podataka
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Alati za ispravljanje pogrešaka baze podataka
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -519,12 +519,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Postupci hitnog otklanjanja pogrešaka
+## 🚨 Postupci za hitno otklanjanje pogrešaka
 
 ### Odgovor na probleme u produkciji
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Hitno otklanjanje pogrešaka u produkciji
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Prebacite se na ispravno okruženje
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Prikupite ključne informacije
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Postupci vraćanja na prethodno stanje
 ```bash
-# Quick rollback script
+# Brzi skript za povratak
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Promjena okruženja
     azd env select "$environment"
     
-    # Rollback application
+    # Povratak aplikacije
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Provjera povratka
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Testiranje kritičnih krajnjih točaka
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### Prilagođena nadzorna ploča za praćenje
 ```bash
-# Create Application Insights queries for debugging
+# Kreirajte upite za Application Insights za ispravljanje pogrešaka
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Upit za pogreške
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Upit za probleme s performansama
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Upit za neuspjehe ovisnosti
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Agregacija logova
 ```bash
-# Aggregate logs from multiple sources
+# Prikupi zapisnike iz više izvora
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -684,11 +684,11 @@ hooks:
 
 ## Najbolje prakse
 
-1. **Uvijek omogućite logiranje otklanjanja pogrešaka** u neprodukcijskim okruženjima
+1. **Uvijek omogućite logiranje za otklanjanje pogrešaka** u neprodukcijskim okruženjima
 2. **Kreirajte reproducibilne testne slučajeve** za probleme
 3. **Dokumentirajte postupke otklanjanja pogrešaka** za svoj tim
 4. **Automatizirajte provjere zdravlja** i praćenje
-5. **Ažurirajte alate za otklanjanje pogrešaka** u skladu s promjenama aplikacije
+5. **Ažurirajte alate za otklanjanje pogrešaka** s promjenama u aplikaciji
 6. **Vježbajte postupke otklanjanja pogrešaka** tijekom vremena bez incidenata
 
 ## Sljedeći koraci
@@ -700,7 +700,7 @@ hooks:
 
 ---
 
-**Zapamtite**: Dobro otklanjanje pogrešaka temelji se na sustavnom, temeljitom i strpljivom pristupu. Ovi alati i tehnike pomoći će vam da brže i učinkovitije dijagnosticirate probleme.
+**Zapamtite**: Dobro otklanjanje pogrešaka zahtijeva sustavnost, temeljitost i strpljenje. Ovi alati i tehnike pomoći će vam da brže i učinkovitije dijagnosticirate probleme.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden koristeći AI uslugu za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane stručnjaka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

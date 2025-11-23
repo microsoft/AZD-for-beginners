@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-18T11:59:26+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-23T20:27:05+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
   "language_code": "hr"
 }
 -->
-# Integracija Azure AI Foundry s AZD-om
+# Integracija Microsoft Foundry s AZD-om
 
 **Navigacija poglavljem:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
@@ -18,26 +18,26 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pregled
 
-Ovaj vodič pokazuje kako integrirati usluge Azure AI Foundry s Azure Developer CLI (AZD) za pojednostavljene implementacije AI aplikacija. Azure AI Foundry pruža sveobuhvatnu platformu za izgradnju, implementaciju i upravljanje AI aplikacijama, dok AZD pojednostavljuje proces infrastrukture i implementacije.
+Ovaj vodič pokazuje kako integrirati Microsoft Foundry usluge s Azure Developer CLI (AZD) za pojednostavljene implementacije AI aplikacija. Microsoft Foundry pruža sveobuhvatnu platformu za izgradnju, implementaciju i upravljanje AI aplikacijama, dok AZD pojednostavljuje proces infrastrukture i implementacije.
 
-## Što je Azure AI Foundry?
+## Što je Microsoft Foundry?
 
-Azure AI Foundry je Microsoftova objedinjena platforma za razvoj AI-a koja uključuje:
+Microsoft Foundry je objedinjena platforma za AI razvoj koja uključuje:
 
 - **Katalog modela**: Pristup najnaprednijim AI modelima
 - **Prompt Flow**: Vizualni dizajner za AI tijekove rada
-- **Portal AI Foundry**: Integrirano razvojno okruženje za AI aplikacije
+- **AI Foundry Portal**: Integrirano razvojno okruženje za AI aplikacije
 - **Opcije implementacije**: Višestruke opcije hostinga i skaliranja
 - **Sigurnost i zaštita**: Ugrađene značajke odgovornog AI-a
 
-## AZD + Azure AI Foundry: Bolje zajedno
+## AZD + Microsoft Foundry: Bolje zajedno
 
-| Značajka | Azure AI Foundry | Prednosti integracije s AZD-om |
-|----------|------------------|-------------------------------|
+| Značajka | Microsoft Foundry | Prednost integracije s AZD-om |
+|----------|-------------------|------------------------------|
 | **Implementacija modela** | Ručna implementacija putem portala | Automatizirane, ponovljive implementacije |
-| **Infrastruktura** | Klikom kroz proces postavljanja | Infrastruktura kao kod (Bicep) |
+| **Infrastruktura** | Klikom kroz proces | Infrastruktura kao kod (Bicep) |
 | **Upravljanje okruženjem** | Fokus na jednom okruženju | Više okruženja (razvoj/testiranje/produkcija) |
-| **Integracija CI/CD-a** | Ograničena | Izvorna podrška za GitHub Actions |
+| **CI/CD integracija** | Ograničeno | Izvorna podrška za GitHub Actions |
 | **Upravljanje troškovima** | Osnovno praćenje | Optimizacija troškova specifična za okruženje |
 
 ## Preduvjeti
@@ -45,13 +45,13 @@ Azure AI Foundry je Microsoftova objedinjena platforma za razvoj AI-a koja uklju
 - Azure pretplata s odgovarajućim dozvolama
 - Instaliran Azure Developer CLI
 - Pristup Azure OpenAI uslugama
-- Osnovno poznavanje Azure AI Foundry
+- Osnovno poznavanje Microsoft Foundry-a
 
 ## Osnovni obrasci integracije
 
-### Obrazac 1: Integracija Azure OpenAI-a
+### Obrazac 1: Integracija s Azure OpenAI
 
-**Primjena**: Implementacija aplikacija za chat s modelima Azure OpenAI
+**Primjena**: Implementacija aplikacija za chat s Azure OpenAI modelima
 
 ```yaml
 # azure.yaml
@@ -101,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Obrazac 2: AI pretraživanje + RAG integracija
 
-**Primjena**: Implementacija aplikacija za generaciju uz podršku pretraživanja (RAG)
+**Primjena**: Implementacija aplikacija za generaciju uz pomoć pretraživanja (RAG)
 
 ```bicep
 // Azure AI Search
@@ -168,29 +168,29 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Konfiguracija za produkciju:**
 ```bash
-# Core AI services
+# Osnovne AI usluge
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Model configurations
+# Konfiguracije modela
 azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
 
-# Performance settings
+# Postavke performansi
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Konfiguracija za razvoj:**
 ```bash
-# Cost-optimized settings for development
+# Troškovno optimizirane postavke za razvoj
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Besplatni nivo
 ```
 
-### Sigurna konfiguracija s Key Vaultom
+### Sigurna konfiguracija s Key Vault-om
 
 ```bicep
 // Key Vault for secrets
@@ -230,24 +230,24 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 ### Implementacija jednim naredbom
 
 ```bash
-# Deploy everything with one command
+# Implementiraj sve s jednom naredbom
 azd up
 
-# Or deploy incrementally
-azd provision  # Infrastructure only
-azd deploy     # Application only
+# Ili implementiraj postupno
+azd provision  # Samo infrastruktura
+azd deploy     # Samo aplikacija
 ```
 
 ### Implementacije specifične za okruženje
 
 ```bash
-# Development environment
+# Razvojno okruženje
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Production environment
+# Produkcijsko okruženje
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -441,14 +441,14 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 **Rješenja:**
 ```bash
-# Check current quota usage
+# Provjerite trenutnu upotrebu kvote
 az cognitiveservices usage list --location eastus
 
-# Try different region
+# Pokušajte s drugom regijom
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacity temporarily
+# Privremeno smanjite kapacitet
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -461,13 +461,13 @@ azd deploy
 
 **Rješenja:**
 ```bash
-# Verify role assignments
+# Provjerite dodjele uloga
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Check managed identity configuration
+# Provjerite konfiguraciju upravljanog identiteta
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validate Key Vault access
+# Potvrdite pristup Key Vaultu
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
@@ -475,15 +475,15 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Simptomi:**
 - Modeli nisu dostupni u implementaciji
-- Neuspjesi specifičnih verzija modela
+- Specifične verzije modela ne uspijevaju
 
 **Rješenja:**
 ```bash
-# List available models by region
+# Popis dostupnih modela po regiji
 az cognitiveservices model list --location eastus
 
-# Update model version in bicep template
-# Check model capacity requirements
+# Ažuriraj verziju modela u bicep predlošku
+# Provjeri zahtjeve kapaciteta modela
 ```
 
 ## Primjeri predložaka
@@ -527,15 +527,263 @@ azd up
 ## Sljedeći koraci
 
 1. **Isprobajte primjere**: Započnite s unaprijed izgrađenim predloškom koji odgovara vašem slučaju
-2. **Prilagodite svojim potrebama**: Modificirajte infrastrukturu i kod aplikacije
+2. **Prilagodite za svoje potrebe**: Modificirajte infrastrukturu i kod aplikacije
 3. **Dodajte praćenje**: Implementirajte sveobuhvatnu preglednost
 4. **Optimizirajte troškove**: Fino podesite konfiguracije prema svom budžetu
 5. **Osigurajte implementaciju**: Primijenite sigurnosne obrasce za poduzeća
-6. **Skalirajte na produkciju**: Dodajte značajke za više regija i visoku dostupnost
+6. **Skalirajte za produkciju**: Dodajte značajke za više regija i visoku dostupnost
+
+## 🎯 Praktične vježbe
+
+### Vježba 1: Implementacija Azure OpenAI aplikacije za chat (30 minuta)
+**Cilj**: Implementirati i testirati produkcijski spremnu AI aplikaciju za chat
+
+```bash
+# Inicijaliziraj predložak
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Postavi varijable okruženja
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Implementiraj
+azd up
+
+# Testiraj aplikaciju
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Prati AI operacije
+azd monitor
+
+# Očisti
+azd down --force --purge
+```
+
+**Kriteriji uspjeha:**
+- [ ] Implementacija završava bez grešaka kvote
+- [ ] Može se pristupiti sučelju za chat u pregledniku
+- [ ] Može se postavljati pitanja i dobiti odgovore uz AI podršku
+- [ ] Application Insights prikazuje podatke o telemetriji
+- [ ] Uspješno očišćeni resursi
+
+**Procijenjeni trošak**: $5-10 za 30 minuta testiranja
+
+### Vježba 2: Konfiguracija implementacije više modela (45 minuta)
+**Cilj**: Implementirati više AI modela s različitim konfiguracijama
+
+```bash
+# Kreirajte prilagođenu Bicep konfiguraciju
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Implementirajte i provjerite
+azd provision
+azd show
+```
+
+**Kriteriji uspjeha:**
+- [ ] Više modela uspješno implementirano
+- [ ] Primijenjene različite postavke kapaciteta
+- [ ] Modeli dostupni putem API-ja
+- [ ] Može se pozvati oba modela iz aplikacije
+
+### Vježba 3: Implementacija praćenja troškova (20 minuta)
+**Cilj**: Postaviti upozorenja o budžetu i praćenje troškova
+
+```bash
+# Dodajte upozorenje o proračunu u Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Implementirajte upozorenje o proračunu
+azd provision
+
+# Provjerite trenutne troškove
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Kriteriji uspjeha:**
+- [ ] Kreirano upozorenje o budžetu u Azure-u
+- [ ] Konfigurirane obavijesti putem e-pošte
+- [ ] Moguće pregledati podatke o troškovima u Azure Portalu
+- [ ] Pravilno postavljeni pragovi budžeta
+
+## 💡 Često postavljana pitanja
+
+<details>
+<summary><strong>Kako smanjiti troškove Azure OpenAI tijekom razvoja?</strong></summary>
+
+1. **Koristite besplatni sloj**: Azure OpenAI nudi 50,000 tokena/mjesečno besplatno
+2. **Smanjite kapacitet**: Postavite kapacitet na 10 TPM umjesto 30+ za razvoj
+3. **Koristite azd down**: Deaktivirajte resurse kada ne razvijate aktivno
+4. **Predmemorirajte odgovore**: Implementirajte Redis predmemoriju za ponovljene upite
+5. **Koristite Prompt Engineering**: Smanjite korištenje tokena s učinkovitim upitima
+
+```bash
+# Konfiguracija razvoja
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>Koja je razlika između Azure OpenAI i OpenAI API-ja?</strong></summary>
+
+**Azure OpenAI**:
+- Sigurnost i usklađenost za poduzeća
+- Integracija privatne mreže
+- SLA jamstva
+- Autentifikacija upravljanim identitetom
+- Dostupne veće kvote
+
+**OpenAI API**:
+- Brži pristup novim modelima
+- Jednostavnija postavka
+- Niža ulazna barijera
+- Samo javni internet
+
+Za produkcijske aplikacije, **preporučuje se Azure OpenAI**.
+</details>
+
+<details>
+<summary><strong>Kako riješiti greške prekoračenja kvote Azure OpenAI?</strong></summary>
+
+```bash
+# Provjerite trenutnu kvotu
+az cognitiveservices usage list --location eastus2
+
+# Pokušajte s drugom regijom
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Privremeno smanjite kapacitet
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Zatražite povećanje kvote
+# Idite na Azure Portal > Kvote > Zatražite povećanje
+```
+</details>
+
+<details>
+<summary><strong>Mogu li koristiti vlastite podatke s Azure OpenAI?</strong></summary>
+
+Da! Koristite **Azure AI Search** za RAG (Retrieval Augmented Generation):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+Pogledajte predložak [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
+</details>
+
+<details>
+<summary><strong>Kako osigurati AI model endpointove?</strong></summary>
+
+**Najbolje prakse**:
+1. Koristite upravljani identitet (bez API ključeva)
+2. Omogućite privatne endpointove
+3. Konfigurirajte grupe sigurnosti mreže
+4. Implementirajte ograničenje brzine
+5. Koristite Azure Key Vault za tajne
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
 
 ## Zajednica i podrška
 
-- **Azure AI Foundry Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Problemi i rasprave](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Službena dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
 
@@ -548,9 +796,11 @@ azd up
 - **➡️ Sljedeće**: [Implementacija AI modela](ai-model-deployment.md)
 - **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
 
-**Treba vam pomoć?** Pridružite se raspravama zajednice ili otvorite problem u repozitoriju. Zajednica Azure AI + AZD tu je da vam pomogne uspjeti!
+**Trebate pomoć?** Pridružite se raspravama u zajednici ili otvorite problem u repozitoriju. Zajednica Azure AI + AZD tu je da vam pomogne uspjeti!
 
 ---
 
-**Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Izjava o odricanju odgovornosti**:  
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

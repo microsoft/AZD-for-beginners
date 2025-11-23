@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T10:59:57+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-23T17:00:18+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "ro"
 }
@@ -12,22 +12,22 @@ CO_OP_TRANSLATOR_METADATA:
 **Navigare capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
 - **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Precedent**: [Integrarea Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Precedent**: [Integrarea Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Următor**: [Laborator Workshop AI](ai-workshop-lab.md)
 - **🚀 Capitol Următor**: [Capitolul 3: Configurare](../getting-started/configuration.md)
 
-Acest ghid oferă instrucțiuni detaliate pentru implementarea modelelor AI utilizând șabloane AZD, acoperind totul de la selecția modelelor până la tiparele de implementare în producție.
+Acest ghid oferă instrucțiuni detaliate pentru implementarea modelelor AI utilizând șabloane AZD, acoperind totul de la selecția modelului până la tiparele de implementare în producție.
 
 ## Cuprins
 
-- [Strategia de selecție a modelelor](../../../../docs/ai-foundry)
+- [Strategia de selecție a modelului](../../../../docs/ai-foundry)
 - [Configurarea AZD pentru modele AI](../../../../docs/ai-foundry)
 - [Tipare de implementare](../../../../docs/ai-foundry)
 - [Managementul modelelor](../../../../docs/ai-foundry)
 - [Considerații pentru producție](../../../../docs/ai-foundry)
 - [Monitorizare și observabilitate](../../../../docs/ai-foundry)
 
-## Strategia de selecție a modelelor
+## Strategia de selecție a modelului
 
 ### Modele Azure OpenAI
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Configurează mediul aplicației tale:
 
 ```bash
-# .env configuration
+# Configurarea .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -161,9 +161,9 @@ services:
 Ideal pentru:
 - Dezvoltare și testare
 - Aplicații pentru o singură piață
-- Optimizarea costurilor
+- Optimizare costuri
 
-### Tipar 2: Implementare multi-regională
+### Tipar 2: Implementare multi-regiune
 
 ```bicep
 // Multi-region deployment
@@ -179,7 +179,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 Ideal pentru:
 - Aplicații globale
 - Cerințe de disponibilitate ridicată
-- Distribuția sarcinilor
+- Distribuție a sarcinii
 
 ### Tipar 3: Implementare hibridă
 
@@ -234,9 +234,9 @@ Urmărește versiunile modelelor în configurația AZD:
 }
 ```
 
-### Actualizări ale modelelor
+### Actualizări ale modelului
 
-Utilizează hook-uri AZD pentru actualizări ale modelelor:
+Utilizează hook-uri AZD pentru actualizări ale modelului:
 
 ```bash
 #!/bin/bash
@@ -251,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### Testare A/B
 
-Implementarea mai multor versiuni de modele:
+Implementează mai multe versiuni ale modelului:
 
 ```bicep
 param enableABTesting bool = false
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Calculează capacitatea necesară pe baza tiparelor de utilizare:
 
 ```python
-# Capacity calculation example
+# Exemplu de calcul al capacității
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Exemplu de utilizare
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Urmărește metrici specifice AI:
 
 ```python
-# Custom telemetry for AI models
+# Telemetrie personalizată pentru modele AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementează monitorizarea sănătății serviciilor AI:
 
 ```python
-# Health check endpoints
+# Puncte de verificare a stării de sănătate
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Testează conexiunea OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,7 +482,7 @@ async def check_ai_models():
 
 ## Pași următori
 
-1. **Revizuiește [Ghidul de Integrare Azure AI Foundry](azure-ai-foundry-integration.md)** pentru tipare de integrare a serviciilor
+1. **Revizuiește [Ghidul de Integrare Microsoft Foundry](microsoft-foundry-integration.md)** pentru tipare de integrare a serviciilor
 2. **Completează [Laboratorul Workshop AI](ai-workshop-lab.md)** pentru experiență practică
 3. **Implementează [Practici AI pentru Producție](production-ai-practices.md)** pentru implementări la nivel de întreprindere
 4. **Explorează [Ghidul de Depanare AI](../troubleshooting/ai-troubleshooting.md)** pentru probleme comune
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Navigare capitol:**
 - **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
 - **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Precedent**: [Integrarea Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Precedent**: [Integrarea Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Următor**: [Laborator Workshop AI](ai-workshop-lab.md)
 - **🚀 Capitol Următor**: [Capitolul 3: Configurare](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

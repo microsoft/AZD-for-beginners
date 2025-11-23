@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T12:00:16+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-23T19:04:35+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "hr"
 }
@@ -12,7 +12,7 @@ CO_OP_TRANSLATOR_METADATA:
 **Navigacija kroz poglavlja:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
 - **📖 Trenutno poglavlje**: Poglavlje 2 - Razvoj s fokusom na AI
-- **⬅️ Prethodno**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Prethodno**: [Integracija Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Sljedeće**: [AI radionica](ai-workshop-lab.md)
 - **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
 
@@ -31,7 +31,7 @@ Ovaj vodič pruža detaljne upute za implementaciju AI modela koristeći AZD pre
 
 ### Azure OpenAI modeli
 
-Odaberite odgovarajući model za svoju primjenu:
+Odaberite pravi model za svoju primjenu:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -64,7 +64,7 @@ services:
 | Tip modela | Primjena | Preporučeni kapacitet | Troškovni aspekti |
 |------------|----------|-----------------------|-------------------|
 | GPT-4o-mini | Chat, Q&A | 10-50 TPM | Isplativo za većinu radnih opterećenja |
-| GPT-4 | Kompleksno zaključivanje | 20-100 TPM | Veći trošak, koristiti za premium značajke |
+| GPT-4 | Složeno zaključivanje | 20-100 TPM | Veći trošak, koristiti za premium značajke |
 | Text-embedding-ada-002 | Pretraživanje, RAG | 30-120 TPM | Ključno za semantičko pretraživanje |
 | Whisper | Govor u tekst | 10-50 TPM | Obrada audio sadržaja |
 
@@ -72,7 +72,7 @@ services:
 
 ### Konfiguracija Bicep predloška
 
-Kreirajte implementacije modela koristeći Bicep predloške:
+Kreirajte implementacije modela pomoću Bicep predložaka:
 
 ```bicep
 // infra/main.bicep
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurirajte okruženje svoje aplikacije:
 
 ```bash
-# .env configuration
+# .env konfiguracija
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -178,7 +178,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Najbolje za:
 - Globalne aplikacije
-- Zahtjevi za visoku dostupnost
+- Zahtjeve za visokom dostupnošću
 - Distribuciju opterećenja
 
 ### Obrazac 3: Hibridna implementacija
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Izračunajte potrebni kapacitet na temelju obrazaca korištenja:
 
 ```python
-# Capacity calculation example
+# Primjer izračuna kapaciteta
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Primjer upotrebe
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -374,7 +374,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Praćenje i preglednost
 
-### Integracija s Application Insights
+### Integracija Application Insights
 
 Postavite praćenje za AI radna opterećenja:
 
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Pratite metrike specifične za AI:
 
 ```python
-# Custom telemetry for AI models
+# Prilagođena telemetrija za AI modele
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Implementirajte praćenje zdravlja AI usluga:
 
 ```python
-# Health check endpoints
+# Krajnje točke provjere zdravlja
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Testiraj OpenAI vezu
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,7 +482,7 @@ async def check_ai_models():
 
 ## Sljedeći koraci
 
-1. **Pregledajte [Vodič za integraciju Azure AI Foundry](azure-ai-foundry-integration.md)** za obrasce integracije usluga
+1. **Pregledajte [Vodič za integraciju Microsoft Foundry](microsoft-foundry-integration.md)** za obrasce integracije usluga
 2. **Dovršite [AI radionicu](ai-workshop-lab.md)** za praktično iskustvo
 3. **Implementirajte [Prakse za produkcijski AI](production-ai-practices.md)** za implementacije na razini poduzeća
 4. **Istražite [Vodič za rješavanje problema s AI](../troubleshooting/ai-troubleshooting.md)** za uobičajene probleme
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Navigacija kroz poglavlja:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
 - **📖 Trenutno poglavlje**: Poglavlje 2 - Razvoj s fokusom na AI
-- **⬅️ Prethodno**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Prethodno**: [Integracija Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Sljedeće**: [AI radionica](ai-workshop-lab.md)
 - **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja mogu proizaći iz korištenja ovog prijevoda.
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne preuzimamo odgovornost za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
