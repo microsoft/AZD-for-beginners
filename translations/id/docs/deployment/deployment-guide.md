@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-18T07:58:15+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-22T09:02:22+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "id"
 }
@@ -18,13 +18,13 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Pendahuluan
 
-Panduan komprehensif ini mencakup semua yang perlu Anda ketahui tentang deployment aplikasi menggunakan Azure Developer CLI, mulai dari deployment sederhana dengan satu perintah hingga skenario produksi tingkat lanjut dengan custom hooks, beberapa lingkungan, dan integrasi CI/CD. Kuasai seluruh siklus hidup deployment dengan contoh praktis dan praktik terbaik.
+Panduan komprehensif ini mencakup semua yang perlu Anda ketahui tentang deployment aplikasi menggunakan Azure Developer CLI, mulai dari deployment dengan satu perintah hingga skenario produksi tingkat lanjut dengan custom hooks, beberapa lingkungan, dan integrasi CI/CD. Kuasai seluruh siklus hidup deployment dengan contoh praktis dan praktik terbaik.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
 - Menguasai semua perintah dan alur kerja deployment Azure Developer CLI
-- Memahami siklus hidup deployment lengkap dari penyediaan hingga pemantauan
+- Memahami seluruh siklus hidup deployment dari penyediaan hingga pemantauan
 - Menerapkan custom hooks untuk otomatisasi sebelum dan sesudah deployment
 - Mengonfigurasi beberapa lingkungan dengan parameter spesifik lingkungan
 - Menyiapkan strategi deployment tingkat lanjut termasuk blue-green dan canary deployments
@@ -51,44 +51,78 @@ Azure Developer CLI menyediakan beberapa perintah deployment:
 ## Alur Kerja Deployment Dasar
 
 ### Deployment Lengkap (azd up)
-Alur kerja paling umum untuk proyek baru:
+Alur kerja yang paling umum untuk proyek baru:
 ```bash
-# Deploy everything from scratch
+# Terapkan semuanya dari awal
 azd up
 
-# Deploy with specific environment
+# Terapkan dengan lingkungan tertentu
 azd up --environment production
 
-# Deploy with custom parameters
+# Terapkan dengan parameter khusus
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Deployment Infrastruktur Saja
 Ketika Anda hanya perlu memperbarui sumber daya Azure:
 ```bash
-# Provision/update infrastructure
+# Penyediaan/pembaruan infrastruktur
 azd provision
 
-# Provision with dry-run to preview changes
+# Penyediaan dengan dry-run untuk melihat pratinjau perubahan
 azd provision --preview
 
-# Provision specific services
+# Penyediaan layanan tertentu
 azd provision --service database
 ```
 
 ### Deployment Kode Saja
 Untuk pembaruan aplikasi yang cepat:
 ```bash
-# Deploy all services
+# Sebarkan semua layanan
 azd deploy
 
-# Deploy specific service
+# Output yang diharapkan:
+# Menyebarkan layanan (azd deploy)
+# - web: Menyebarkan... Selesai
+# - api: Menyebarkan... Selesai
+# BERHASIL: Penyebaran Anda selesai dalam 2 menit 15 detik
+
+# Sebarkan layanan tertentu
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Sebarkan dengan argumen build khusus
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Verifikasi penyebaran
+azd show --output json | jq '.services'
 ```
+
+### ✅ Verifikasi Deployment
+
+Setelah setiap deployment, verifikasi keberhasilan:
+
+```bash
+# Periksa semua layanan berjalan
+azd show
+
+# Uji endpoint kesehatan
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Periksa log untuk kesalahan
+azd logs --service api --since 5m | grep -i error
+```
+
+**Kriteria Keberhasilan:**
+- ✅ Semua layanan menunjukkan status "Running"
+- ✅ Endpoint kesehatan mengembalikan HTTP 200
+- ✅ Tidak ada log error dalam 5 menit terakhir
+- ✅ Aplikasi merespons permintaan uji
 
 ## 🏗️ Memahami Proses Deployment
 
@@ -195,18 +229,18 @@ services:
 
 ### Konfigurasi Spesifik Lingkungan
 ```bash
-# Development environment
+# Lingkungan pengembangan
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Lingkungan staging
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Lingkungan produksi
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -253,17 +287,17 @@ services:
 
 ### Blue-Green Deployments
 ```bash
-# Create blue environment
+# Buat lingkungan biru
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blue environment
+# Uji lingkungan biru
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Alihkan lalu lintas ke biru (pembaruan DNS/load balancer manual)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Bersihkan lingkungan hijau
 azd env select production-green
 azd down --force
 ```
@@ -339,7 +373,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimasi Dockerfile Multi-Tahap
+### Optimasi Multi-Stage Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -369,10 +403,10 @@ CMD ["npm", "start"]
 
 ### Deployment Paralel
 ```bash
-# Configure parallel deployment
+# Konfigurasikan penyebaran paralel
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Sebarkan layanan secara paralel
 azd deploy --parallel
 ```
 
@@ -392,10 +426,10 @@ services:
 
 ### Deployment Inkremental
 ```bash
-# Deploy only changed services
+# Hanya terapkan layanan yang berubah
 azd deploy --incremental
 
-# Deploy with change detection
+# Terapkan dengan deteksi perubahan
 azd deploy --detect-changes
 ```
 
@@ -403,13 +437,13 @@ azd deploy --detect-changes
 
 ### Pemantauan Deployment Real-Time
 ```bash
-# Monitor deployment progress
+# Pantau kemajuan penerapan
 azd deploy --follow
 
-# View deployment logs
+# Lihat log penerapan
 azd logs --follow --service api
 
-# Check deployment status
+# Periksa status penerapan
 azd show --service api
 ```
 
@@ -430,11 +464,11 @@ services:
 ### Validasi Pasca-Deployment
 ```bash
 #!/bin/bash
-# scripts/validate-deployment.sh
+# skrip/validasi-deployment.sh
 
 echo "Validating deployment..."
 
-# Check application health
+# Periksa kesehatan aplikasi
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -464,12 +498,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### Manajemen Rahasia
 ```bash
-# Store secrets securely
+# Simpan rahasia dengan aman
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Referensi rahasia di azure.yaml
 ```
 
 ```yaml
@@ -512,29 +546,29 @@ services:
 
 ### Rollback Cepat
 ```bash
-# Rollback to previous deployment
+# Kembali ke penerapan sebelumnya
 azd deploy --rollback
 
-# Rollback specific service
+# Kembali ke layanan tertentu
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Kembali ke versi tertentu
 azd deploy --service api --version v1.2.3
 ```
 
 ### Rollback Infrastruktur
 ```bash
-# Rollback infrastructure changes
+# Kembalikan perubahan infrastruktur
 azd provision --rollback
 
-# Preview rollback changes
+# Pratinjau perubahan pengembalian
 azd provision --rollback --preview
 ```
 
 ### Rollback Migrasi Database
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# skrip/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -549,13 +583,13 @@ echo "Database rollback completed"
 
 ### Melacak Kinerja Deployment
 ```bash
-# Enable deployment metrics
+# Aktifkan metrik penyebaran
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# Lihat riwayat penyebaran
 azd history
 
-# Get deployment statistics
+# Dapatkan statistik penyebaran
 azd metrics --type deployment
 ```
 
@@ -580,26 +614,26 @@ hooks:
 
 ### 1. Konsistensi Lingkungan
 ```bash
-# Use consistent naming
+# Gunakan penamaan yang konsisten
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Pertahankan kesetaraan lingkungan
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Validasi Infrastruktur
 ```bash
-# Validate before deployment
+# Validasi sebelum penerapan
 azd provision --preview
 azd provision --what-if
 
-# Use ARM/Bicep linting
+# Gunakan linting ARM/Bicep
 az bicep lint --file infra/main.bicep
 ```
 
-### 3. Pengujian Integrasi
+### 3. Integrasi Pengujian
 ```yaml
 hooks:
   predeploy:
@@ -630,7 +664,7 @@ hooks:
 
 ### 4. Dokumentasi dan Logging
 ```bash
-# Document deployment procedures
+# Dokumentasikan prosedur penerapan
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -640,8 +674,261 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 - [Penyediaan Sumber Daya](provisioning.md) - Penjelasan mendalam tentang manajemen infrastruktur
 - [Perencanaan Pra-Deployment](../pre-deployment/capacity-planning.md) - Rencanakan strategi deployment Anda
-- [Masalah Umum](../troubleshooting/common-issues.md) - Memecahkan masalah deployment
+- [Masalah Umum](../troubleshooting/common-issues.md) - Selesaikan masalah deployment
 - [Praktik Terbaik](../troubleshooting/debugging.md) - Strategi deployment siap produksi
+
+## 🎯 Latihan Deployment Praktis
+
+### Latihan 1: Alur Kerja Deployment Inkremental (20 menit)
+**Tujuan**: Kuasai perbedaan antara deployment penuh dan inkremental
+
+```bash
+# Penempatan awal
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Catat waktu penempatan awal
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Lakukan perubahan kode
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Terapkan hanya kode (cepat)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Bandingkan waktu
+cat deployment-log.txt
+
+# Bersihkan
+azd down --force --purge
+```
+
+**Kriteria Keberhasilan:**
+- [ ] Deployment penuh memakan waktu 5-15 menit
+- [ ] Deployment kode saja memakan waktu 2-5 menit
+- [ ] Perubahan kode tercermin dalam aplikasi yang dideploy
+- [ ] Infrastruktur tidak berubah setelah `azd deploy`
+
+**Hasil Pembelajaran**: `azd deploy` 50-70% lebih cepat daripada `azd up` untuk perubahan kode
+
+### Latihan 2: Custom Deployment Hooks (30 menit)
+**Tujuan**: Menerapkan otomatisasi sebelum dan sesudah deployment
+
+```bash
+# Buat skrip validasi pra-deploy
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Periksa apakah tes lulus
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Periksa perubahan yang belum dikomit
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Buat tes smoke pasca-deploy
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Tambahkan hooks ke azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Uji deployment dengan hooks
+azd deploy
+```
+
+**Kriteria Keberhasilan:**
+- [ ] Skrip pre-deploy berjalan sebelum deployment
+- [ ] Deployment dibatalkan jika pengujian gagal
+- [ ] Pengujian smoke post-deploy memvalidasi kesehatan
+- [ ] Hooks berjalan dalam urutan yang benar
+
+### Latihan 3: Strategi Deployment Multi-Lingkungan (45 menit)
+**Tujuan**: Menerapkan alur kerja deployment bertahap (dev → staging → produksi)
+
+```bash
+# Buat skrip penyebaran
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Langkah 1: Sebarkan ke dev
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Langkah 2: Sebarkan ke staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Langkah 3: Persetujuan manual untuk produksi
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Buat lingkungan
+azd env new dev
+azd env new staging
+azd env new production
+
+# Jalankan penyebaran bertahap
+./deploy-staged.sh
+```
+
+**Kriteria Keberhasilan:**
+- [ ] Lingkungan dev berhasil dideploy
+- [ ] Lingkungan staging berhasil dideploy
+- [ ] Persetujuan manual diperlukan untuk produksi
+- [ ] Semua lingkungan memiliki pemeriksaan kesehatan yang berfungsi
+- [ ] Dapat melakukan rollback jika diperlukan
+
+### Latihan 4: Strategi Rollback (25 menit)
+**Tujuan**: Menerapkan dan menguji rollback deployment
+
+```bash
+# Terapkan v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Simpan konfigurasi v1
+cp -r .azure/production .azure/production-v1-backup
+
+# Terapkan v2 dengan perubahan yang merusak
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Deteksi kegagalan
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Kembalikan kode
+    git checkout src/api/src/server.js
+    
+    # Kembalikan lingkungan
+    azd env set APP_VERSION "1.0.0"
+    
+    # Terapkan ulang v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Kriteria Keberhasilan:**
+- [ ] Dapat mendeteksi kegagalan deployment
+- [ ] Skrip rollback berjalan secara otomatis
+- [ ] Aplikasi kembali ke keadaan yang berfungsi
+- [ ] Pemeriksaan kesehatan berhasil setelah rollback
+
+## 📊 Pelacakan Metrik Deployment
+
+### Lacak Kinerja Deployment Anda
+
+```bash
+# Buat skrip metrik penyebaran
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Catat ke file
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Gunakan ini
+./track-deployment.sh
+```
+
+**Analisis metrik Anda:**
+```bash
+# Lihat riwayat penerapan
+cat deployment-metrics.csv
+
+# Hitung rata-rata waktu penerapan
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
 
 ## Sumber Daya Tambahan
 
@@ -658,5 +945,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang keliru yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

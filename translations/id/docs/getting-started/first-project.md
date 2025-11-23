@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-18T07:56:42+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-22T09:17:50+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "id"
 }
@@ -10,11 +10,11 @@ CO_OP_TRANSLATOR_METADATA:
 # Proyek Pertama Anda - Tutorial Praktis
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📚 Halaman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
 - **⬅️ Sebelumnya**: [Instalasi & Pengaturan](installation.md)
 - **➡️ Selanjutnya**: [Konfigurasi](configuration.md)
-- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Pendahuluan
 
@@ -28,15 +28,15 @@ Dengan menyelesaikan tutorial ini, Anda akan:
 - Melakukan penerapan aplikasi lengkap ke Azure dengan penyediaan infrastruktur
 - Menerapkan pembaruan aplikasi dan strategi penerapan ulang
 - Mengelola beberapa lingkungan untuk pengembangan dan staging
-- Menerapkan praktik pembersihan sumber daya dan pengelolaan biaya
+- Menerapkan praktik pembersihan sumber daya dan manajemen biaya
 
 ## Hasil Pembelajaran
 
 Setelah selesai, Anda akan dapat:
 - Menginisialisasi dan mengonfigurasi proyek azd dari template secara mandiri
-- Menavigasi dan memodifikasi struktur proyek azd secara efektif
-- Menerapkan aplikasi full-stack ke Azure menggunakan perintah tunggal
-- Memecahkan masalah umum penerapan dan masalah autentikasi
+- Menavigasi dan memodifikasi struktur proyek azd dengan efektif
+- Menerapkan aplikasi full-stack ke Azure dengan perintah tunggal
+- Memecahkan masalah umum penerapan dan autentikasi
 - Mengelola beberapa lingkungan Azure untuk berbagai tahap penerapan
 - Menerapkan alur kerja penerapan berkelanjutan untuk pembaruan aplikasi
 
@@ -44,14 +44,14 @@ Setelah selesai, Anda akan dapat:
 
 ### Daftar Prasyarat
 - ✅ Azure Developer CLI terinstal ([Panduan Instalasi](installation.md))
-- ✅ Azure CLI terinstal dan diautentikasi
+- ✅ Azure CLI terinstal dan terautentikasi
 - ✅ Git terinstal di sistem Anda
 - ✅ Node.js 16+ (untuk tutorial ini)
 - ✅ Visual Studio Code (disarankan)
 
 ### Verifikasi Pengaturan Anda
 ```bash
-# Check azd installation
+# Periksa instalasi azd
 azd version
 ```
 ### Verifikasi autentikasi Azure
@@ -70,18 +70,18 @@ node --version
 Mari mulai dengan template aplikasi todo populer yang mencakup frontend React dan backend API Node.js.
 
 ```bash
-# Browse available templates
+# Jelajahi template yang tersedia
 azd template list
 
-# Initialize the todo app template
+# Inisialisasi template aplikasi todo
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Follow the prompts:
-# - Enter an environment name: "dev"
-# - Choose a subscription (if you have multiple)
-# - Choose a region: "East US 2" (or your preferred region)
+# Ikuti petunjuk:
+# - Masukkan nama lingkungan: "dev"
+# - Pilih langganan (jika Anda memiliki beberapa)
+# - Pilih wilayah: "East US 2" (atau wilayah pilihan Anda)
 ```
 
 ### Apa yang Baru Saja Terjadi?
@@ -95,9 +95,9 @@ azd init --template todo-nodejs-mongo
 Mari kita periksa apa yang telah dibuat oleh azd untuk kita:
 
 ```bash
-# View the project structure
+# Lihat struktur proyek
 tree /f   # Windows
-# or
+# atau
 find . -type f | head -20   # macOS/Linux
 ```
 
@@ -132,13 +132,13 @@ my-first-azd-app/
 
 **azure.yaml** - Inti dari proyek azd Anda:
 ```bash
-# View the project configuration
+# Lihat konfigurasi proyek
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Definisi infrastruktur:
 ```bash
-# View the infrastructure code
+# Lihat kode infrastruktur
 head -30 infra/main.bicep
 ```
 
@@ -148,22 +148,22 @@ Sebelum menerapkan, Anda dapat menyesuaikan aplikasi:
 
 ### Modifikasi Frontend
 ```bash
-# Open the React app component
+# Buka komponen aplikasi React
 code src/web/src/App.tsx
 ```
 
 Lakukan perubahan sederhana:
 ```typescript
-// Find the title and change it
+// Temukan judul dan ubah itu
 <h1>My Awesome Todo App</h1>
 ```
 
 ### Konfigurasi Variabel Lingkungan
 ```bash
-# Set custom environment variables
+# Atur variabel lingkungan khusus
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# View all environment variables
+# Lihat semua variabel lingkungan
 azd env get-values
 ```
 
@@ -172,14 +172,14 @@ azd env get-values
 Sekarang bagian yang menarik - terapkan semuanya ke Azure!
 
 ```bash
-# Deploy infrastructure and application
+# Menerapkan infrastruktur dan aplikasi
 azd up
 
-# This command will:
-# 1. Provision Azure resources (App Service, Cosmos DB, etc.)
-# 2. Build your application
-# 3. Deploy to the provisioned resources
-# 4. Display the application URL
+# Perintah ini akan:
+# 1. Menyediakan sumber daya Azure (App Service, Cosmos DB, dll.)
+# 2. Membangun aplikasi Anda
+# 3. Menerapkan ke sumber daya yang telah disediakan
+# 4. Menampilkan URL aplikasi
 ```
 
 ### Apa yang Terjadi Selama Penerapan?
@@ -207,10 +207,10 @@ https://app-web-abc123def.azurewebsites.net
 ### Akses Aplikasi Anda
 Klik URL yang disediakan dalam output penerapan, atau dapatkan kapan saja:
 ```bash
-# Get application endpoints
+# Dapatkan endpoint aplikasi
 azd show
 
-# Open the application in your browser
+# Buka aplikasi di browser Anda
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
@@ -221,35 +221,35 @@ azd show --output json | jq -r '.services.web.endpoint'
 
 ### Pantau Aplikasi Anda
 ```bash
-# Open Azure portal for your resources
+# Buka portal Azure untuk sumber daya Anda
 azd monitor
 
-# View application logs
+# Lihat log aplikasi
 azd logs
 ```
 
 ## Langkah 6: Lakukan Perubahan dan Terapkan Ulang
 
-Mari kita lakukan perubahan dan lihat betapa mudahnya memperbarui:
+Mari lakukan perubahan dan lihat betapa mudahnya memperbarui:
 
 ### Modifikasi API
 ```bash
-# Edit the API code
+# Edit kode API
 code src/api/src/routes/lists.js
 ```
 
 Tambahkan header respons khusus:
 ```javascript
-// Find a route handler and add:
+// Temukan pengelola rute dan tambahkan:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### Terapkan Hanya Perubahan Kode
 ```bash
-# Deploy only the application code (skip infrastructure)
+# Hanya terapkan kode aplikasi (lewati infrastruktur)
 azd deploy
 
-# This is much faster than 'azd up' since infrastructure already exists
+# Ini jauh lebih cepat daripada 'azd up' karena infrastruktur sudah ada
 ```
 
 ## Langkah 7: Kelola Beberapa Lingkungan
@@ -257,42 +257,42 @@ azd deploy
 Buat lingkungan staging untuk menguji perubahan sebelum produksi:
 
 ```bash
-# Create a new staging environment
+# Buat lingkungan staging baru
 azd env new staging
 
-# Deploy to staging
+# Deploy ke staging
 azd up
 
-# Switch back to dev environment
+# Beralih kembali ke lingkungan dev
 azd env select dev
 
-# List all environments
+# Daftar semua lingkungan
 azd env list
 ```
 
 ### Perbandingan Lingkungan
 ```bash
-# View dev environment
+# Lihat lingkungan pengembangan
 azd env select dev
 azd show
 
-# View staging environment  
+# Lihat lingkungan staging
 azd env select staging
 azd show
 ```
 
 ## Langkah 8: Bersihkan Sumber Daya
 
-Saat Anda selesai bereksperimen, bersihkan untuk menghindari biaya yang terus berjalan:
+Ketika Anda selesai bereksperimen, bersihkan untuk menghindari biaya yang terus berjalan:
 
 ```bash
-# Delete all Azure resources for current environment
+# Hapus semua sumber daya Azure untuk lingkungan saat ini
 azd down
 
-# Force delete without confirmation and purge soft-deleted resources
+# Hapus paksa tanpa konfirmasi dan bersihkan sumber daya yang dihapus sementara
 azd down --force --purge
 
-# Delete specific environment
+# Hapus lingkungan tertentu
 azd env select staging
 azd down --force --purge
 ```
@@ -300,44 +300,152 @@ azd down --force --purge
 ## Apa yang Telah Anda Pelajari
 
 Selamat! Anda telah berhasil:
-- Menginisialisasi proyek azd dari template
-- Menjelajahi struktur proyek dan file utama
-- Menerapkan aplikasi full-stack ke Azure
-- Melakukan perubahan kode dan menerapkan ulang
-- Mengelola beberapa lingkungan
-- Membersihkan sumber daya
+- ✅ Menginisialisasi proyek azd dari template
+- ✅ Menjelajahi struktur proyek dan file utama
+- ✅ Menerapkan aplikasi full-stack ke Azure
+- ✅ Melakukan perubahan kode dan menerapkan ulang
+- ✅ Mengelola beberapa lingkungan
+- ✅ Membersihkan sumber daya
 
-## Pemecahan Masalah Umum
+## 🎯 Latihan Validasi Keterampilan
+
+### Latihan 1: Terapkan Template Berbeda (15 menit)
+**Tujuan**: Menunjukkan penguasaan alur kerja inisialisasi dan penerapan azd
+
+```bash
+# Coba tumpukan Python + MongoDB
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Verifikasi penyebaran
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Bersihkan
+azd down --force --purge
+```
+
+**Kriteria Keberhasilan:**
+- [ ] Aplikasi diterapkan tanpa kesalahan
+- [ ] Dapat mengakses URL aplikasi di browser
+- [ ] Aplikasi berfungsi dengan benar (tambah/hapus todo)
+- [ ] Berhasil membersihkan semua sumber daya
+
+### Latihan 2: Sesuaikan Konfigurasi (20 menit)
+**Tujuan**: Berlatih konfigurasi variabel lingkungan
+
+```bash
+cd my-first-azd-app
+
+# Buat lingkungan khusus
+azd env new custom-config
+
+# Atur variabel khusus
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Verifikasi variabel
+azd env get-values | grep APP_TITLE
+
+# Terapkan dengan konfigurasi khusus
+azd up
+```
+
+**Kriteria Keberhasilan:**
+- [ ] Lingkungan khusus berhasil dibuat
+- [ ] Variabel lingkungan diatur dan dapat diambil
+- [ ] Aplikasi diterapkan dengan konfigurasi khusus
+- [ ] Dapat memverifikasi pengaturan khusus di aplikasi yang diterapkan
+
+### Latihan 3: Alur Kerja Multi-Lingkungan (25 menit)
+**Tujuan**: Menguasai manajemen lingkungan dan strategi penerapan
+
+```bash
+# Buat lingkungan pengembangan
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Catat URL pengembangan
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Buat lingkungan staging
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Catat URL staging
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Bandingkan lingkungan
+azd env list
+
+# Uji kedua lingkungan
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Bersihkan keduanya
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Kriteria Keberhasilan:**
+- [ ] Dua lingkungan dibuat dengan konfigurasi berbeda
+- [ ] Kedua lingkungan berhasil diterapkan
+- [ ] Dapat beralih antara lingkungan menggunakan `azd env select`
+- [ ] Variabel lingkungan berbeda antara lingkungan
+- [ ] Berhasil membersihkan kedua lingkungan
+
+## 📊 Kemajuan Anda
+
+**Waktu yang Diinvestasikan**: ~60-90 menit  
+**Keterampilan yang Diperoleh**:
+- ✅ Inisialisasi proyek berbasis template
+- ✅ Penyediaan sumber daya Azure
+- ✅ Alur kerja penerapan aplikasi
+- ✅ Manajemen lingkungan
+- ✅ Manajemen konfigurasi
+- ✅ Pembersihan sumber daya dan manajemen biaya
+
+**Tingkat Selanjutnya**: Anda siap untuk [Panduan Konfigurasi](configuration.md) untuk mempelajari pola konfigurasi lanjutan!
+
+## Memecahkan Masalah Umum
 
 ### Kesalahan Autentikasi
 ```bash
-# Re-authenticate with Azure
+# Autentikasi ulang dengan Azure
 az login
 
-# Verify subscription access
+# Verifikasi akses langganan
 az account show
 ```
 
 ### Kegagalan Penerapan
 ```bash
-# Enable debug logging
+# Aktifkan pencatatan debug
 export AZD_DEBUG=true
 azd up --debug
 
-# View detailed logs
+# Lihat log terperinci
 azd logs --service api
 azd logs --service web
 ```
 
 ### Konflik Nama Sumber Daya
 ```bash
-# Use a unique environment name
+# Gunakan nama lingkungan yang unik
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Masalah Port/Jaringan
 ```bash
-# Check if ports are available
+# Periksa apakah port tersedia
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -347,7 +455,7 @@ netstat -an | grep :3100
 Sekarang setelah Anda menyelesaikan proyek pertama Anda, jelajahi topik lanjutan berikut:
 
 ### 1. Sesuaikan Infrastruktur
-- [Infrastructure as Code](../deployment/provisioning.md)
+- [Infrastruktur sebagai Kode](../deployment/provisioning.md)
 - [Tambahkan database, penyimpanan, dan layanan lainnya](../deployment/provisioning.md#adding-services)
 
 ### 2. Siapkan CI/CD
@@ -361,12 +469,12 @@ Sekarang setelah Anda menyelesaikan proyek pertama Anda, jelajahi topik lanjutan
 
 ### 4. Jelajahi Lebih Banyak Template
 ```bash
-# Browse templates by category
+# Jelajahi template berdasarkan kategori
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Try different technology stacks
+# Coba berbagai tumpukan teknologi
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -396,14 +504,16 @@ azd init --template todo-java-mongo
 ---
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📚 Halaman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
 - **⬅️ Sebelumnya**: [Instalasi & Pengaturan](installation.md)
 - **➡️ Selanjutnya**: [Konfigurasi](configuration.md)
-- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan Berbasis AI](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Pelajaran Selanjutnya**: [Panduan Penerapan](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk memberikan hasil yang akurat, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang keliru yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

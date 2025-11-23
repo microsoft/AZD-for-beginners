@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T07:37:09+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-22T08:37:47+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "vi"
 }
@@ -12,11 +12,11 @@ CO_OP_TRANSLATOR_METADATA:
 **Điều hướng chương:**
 - **📚 Trang chủ khóa học**: [AZD For Beginners](../../README.md)
 - **📖 Chương hiện tại**: Chương 2 - Phát triển AI-First
-- **⬅️ Trước đó**: [Tích hợp Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Trước đó**: [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Tiếp theo**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
 - **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
 
-Hướng dẫn này cung cấp các chỉ dẫn chi tiết để triển khai mô hình AI bằng các mẫu AZD, bao gồm từ việc chọn mô hình đến các mẫu triển khai trong môi trường sản xuất.
+Hướng dẫn này cung cấp các chỉ dẫn chi tiết để triển khai mô hình AI bằng các mẫu AZD, bao gồm từ việc chọn mô hình đến các mẫu triển khai sản xuất.
 
 ## Mục lục
 
@@ -24,7 +24,7 @@ Hướng dẫn này cung cấp các chỉ dẫn chi tiết để triển khai m�
 - [Cấu hình AZD cho mô hình AI](../../../../docs/ai-foundry)
 - [Mẫu triển khai](../../../../docs/ai-foundry)
 - [Quản lý mô hình](../../../../docs/ai-foundry)
-- [Cân nhắc trong sản xuất](../../../../docs/ai-foundry)
+- [Các yếu tố sản xuất](../../../../docs/ai-foundry)
 - [Giám sát và quan sát](../../../../docs/ai-foundry)
 
 ## Chiến lược chọn mô hình
@@ -61,8 +61,8 @@ services:
 
 ### Lập kế hoạch dung lượng mô hình
 
-| Loại mô hình | Trường hợp sử dụng | Dung lượng khuyến nghị | Cân nhắc về chi phí |
-|--------------|--------------------|------------------------|---------------------|
+| Loại mô hình | Trường hợp sử dụng | Dung lượng khuyến nghị | Cân nhắc chi phí |
+|--------------|--------------------|------------------------|------------------|
 | GPT-4o-mini | Chat, Hỏi & Đáp | 10-50 TPM | Hiệu quả chi phí cho hầu hết các khối lượng công việc |
 | GPT-4 | Lý luận phức tạp | 20-100 TPM | Chi phí cao hơn, sử dụng cho các tính năng cao cấp |
 | Text-embedding-ada-002 | Tìm kiếm, RAG | 30-120 TPM | Cần thiết cho tìm kiếm ngữ nghĩa |
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Cấu hình môi trường ứng dụng của bạn:
 
 ```bash
-# .env configuration
+# Cấu hình .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -216,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kiểm soát phiên bản
 
-Theo dõi phiên bản mô hình trong cấu hình AZD của bạn:
+Theo dõi các phiên bản mô hình trong cấu hình AZD của bạn:
 
 ```json
 {
@@ -236,7 +236,7 @@ Theo dõi phiên bản mô hình trong cấu hình AZD của bạn:
 
 ### Cập nhật mô hình
 
-Sử dụng các hooks của AZD để cập nhật mô hình:
+Sử dụng các hook AZD để cập nhật mô hình:
 
 ```bash
 #!/bin/bash
@@ -273,14 +273,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Cân nhắc trong sản xuất
+## Các yếu tố sản xuất
 
 ### Lập kế hoạch dung lượng
 
 Tính toán dung lượng cần thiết dựa trên các mẫu sử dụng:
 
 ```python
-# Capacity calculation example
+# Ví dụ tính toán dung lượng
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Ví dụ sử dụng
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Theo dõi các chỉ số cụ thể cho AI:
 
 ```python
-# Custom telemetry for AI models
+# Thống kê tùy chỉnh cho các mô hình AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Thực hiện giám sát sức khỏe dịch vụ AI:
 
 ```python
-# Health check endpoints
+# Điểm kiểm tra sức khỏe
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Kiểm tra kết nối OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,16 +482,16 @@ async def check_ai_models():
 
 ## Bước tiếp theo
 
-1. **Xem lại [Hướng dẫn tích hợp Azure AI Foundry](azure-ai-foundry-integration.md)** để biết các mẫu tích hợp dịch vụ
+1. **Xem lại [Hướng dẫn tích hợp Microsoft Foundry](microsoft-foundry-integration.md)** để biết các mẫu tích hợp dịch vụ
 2. **Hoàn thành [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)** để có trải nghiệm thực hành
-3. **Thực hiện [Thực hành AI trong sản xuất](production-ai-practices.md)** cho các triển khai doanh nghiệp
-4. **Khám phá [Hướng dẫn khắc phục sự cố AI](../troubleshooting/ai-troubleshooting.md)** để giải quyết các vấn đề thường gặp
+3. **Thực hiện [Thực hành AI sản xuất](production-ai-practices.md)** cho các triển khai doanh nghiệp
+4. **Khám phá [Hướng dẫn khắc phục sự cố AI](../troubleshooting/ai-troubleshooting.md)** cho các vấn đề thường gặp
 
 ## Tài nguyên
 
 - [Khả dụng của mô hình Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Tài liệu Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Mở rộng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Tự động mở rộng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Tối ưu hóa chi phí mô hình AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
@@ -499,11 +499,13 @@ async def check_ai_models():
 **Điều hướng chương:**
 - **📚 Trang chủ khóa học**: [AZD For Beginners](../../README.md)
 - **📖 Chương hiện tại**: Chương 2 - Phát triển AI-First
-- **⬅️ Trước đó**: [Tích hợp Azure AI Foundry](azure-ai-foundry-integration.md)
+- **⬅️ Trước đó**: [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Tiếp theo**: [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md)
 - **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

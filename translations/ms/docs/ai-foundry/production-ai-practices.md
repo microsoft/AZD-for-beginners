@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T08:11:41+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-22T09:45:22+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "ms"
 }
@@ -14,17 +14,17 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Bab Semasa**: Bab 8 - Corak Pengeluaran & Perusahaan
 - **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../troubleshooting/debugging.md)
 - **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](ai-workshop-lab.md)
-- **🎯 Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
+- **🎯 Kursus Selesai**: [AZD Untuk Pemula](../../README.md)
 
 ## Gambaran Keseluruhan
 
-Panduan ini menyediakan amalan terbaik yang komprehensif untuk melaksanakan beban kerja AI yang sedia untuk pengeluaran menggunakan Azure Developer CLI (AZD). Berdasarkan maklum balas daripada komuniti Discord Azure AI Foundry dan pelaksanaan pelanggan dunia sebenar, amalan ini menangani cabaran paling biasa dalam sistem AI pengeluaran.
+Panduan ini menyediakan amalan terbaik yang komprehensif untuk melaksanakan beban kerja AI yang sedia untuk pengeluaran menggunakan Azure Developer CLI (AZD). Berdasarkan maklum balas daripada komuniti Microsoft Foundry Discord dan pelaksanaan pelanggan dunia sebenar, amalan ini menangani cabaran paling biasa dalam sistem AI pengeluaran.
 
 ## Cabaran Utama yang Ditangani
 
 Berdasarkan hasil tinjauan komuniti kami, berikut adalah cabaran utama yang dihadapi oleh pembangun:
 
-- **45%** menghadapi kesukaran dengan pelaksanaan AI pelbagai perkhidmatan
+- **45%** menghadapi kesukaran dengan pelaksanaan AI berbilang perkhidmatan
 - **38%** mempunyai masalah dengan pengurusan kelayakan dan rahsia  
 - **35%** mendapati kesediaan pengeluaran dan penskalaan sukar
 - **32%** memerlukan strategi pengoptimuman kos yang lebih baik
@@ -76,7 +76,7 @@ services:
     host: containerapp
 ```
 
-### Corak 2: Pemprosesan AI Berasaskan Peristiwa
+### Corak 2: Pemprosesan AI Berasaskan Acara
 
 **Bila untuk digunakan**: Pemprosesan kelompok, analisis dokumen, aliran kerja asinkron
 
@@ -251,9 +251,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Prestasi dan Penskalaan
 
-### 1. Strategi Penskalaan Automatik
+### 1. Strategi Auto-Skala
 
-**Penskalaan Automatik Aplikasi Kontena**:
+**Auto-scaling Aplikasi Kontena**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -329,7 +329,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Pengimbangan Beban dan Pengurusan Trafik
 
-**Gerbang Aplikasi dengan WAF**:
+**Application Gateway dengan WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Konfigurasi Khusus Persekitaran**:
 
 ```bash
-# Development environment
+# Persekitaran pembangunan
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Persekitaran pengeluaran
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Pengurusan Kos OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Pengoptimuman token peringkat aplikasi
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Potong konteks, bukan input pengguna
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Anggaran kasar: 1 token ≈ 4 aksara
     return Math.ceil(text.length / 4);
   }
 }
@@ -461,7 +461,7 @@ class TokenOptimizer {
 
 ## Pemantauan dan Pemerhatian
 
-### 1. Wawasan Aplikasi yang Komprehensif
+### 1. Wawasan Aplikasi Komprehensif
 
 ```bicep
 // Application Insights with advanced features
@@ -537,7 +537,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Pemeriksaan Kesihatan dan Pemantauan Waktu Operasi
+### 3. Pemeriksaan Kesihatan dan Pemantauan Masa Operasi
 
 ```bicep
 // Application Insights availability tests
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Pemulihan Bencana dan Ketersediaan Tinggi
 
-### 1. Pelaksanaan Pelbagai Wilayah
+### 1. Pelaksanaan Berbilang Wilayah
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -721,7 +721,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## Integrasi DevOps dan CI/CD
+## DevOps dan Integrasi CI/CD
 
 ### 1. Aliran Kerja GitHub Actions
 
@@ -807,12 +807,12 @@ jobs:
 ### 2. Pengesahan Infrastruktur
 
 ```bash
-# scripts/validate_infrastructure.sh
+# skrip/validate_infrastructure.sh
 #!/bin/bash
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Periksa jika semua perkhidmatan yang diperlukan sedang berjalan
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Sahkan penyebaran model OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Uji kesambungan perkhidmatan AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -848,11 +848,11 @@ echo "Infrastructure validation completed successfully!"
 - [ ] WAF diaktifkan pada titik akhir awam
 
 ### Prestasi ✅
-- [ ] Penskalaan automatik dikonfigurasi
+- [ ] Auto-scaling dikonfigurasi
 - [ ] Caching dilaksanakan
 - [ ] Pengimbangan beban disediakan
 - [ ] CDN untuk kandungan statik
-- [ ] Pengumpulan sambungan pangkalan data
+- [ ] Pooling sambungan pangkalan data
 - [ ] Pengoptimuman penggunaan token
 
 ### Pemantauan ✅
@@ -864,18 +864,18 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Polisi pengekalan log
 
 ### Kebolehpercayaan ✅
-- [ ] Pelaksanaan pelbagai wilayah
+- [ ] Pelaksanaan berbilang wilayah
 - [ ] Pelan sandaran dan pemulihan
-- [ ] Pemutus litar dilaksanakan
-- [ ] Polisi percubaan dikonfigurasi
-- [ ] Kemerosotan yang beransur-ansur
+- [ ] Circuit breakers dilaksanakan
+- [ ] Polisi percubaan semula dikonfigurasi
+- [ ] Degradasi yang teratur
 - [ ] Titik akhir pemeriksaan kesihatan
 
 ### Pengurusan Kos ✅
 - [ ] Amaran belanjawan dikonfigurasi
 - [ ] Saiz sumber yang tepat
 - [ ] Diskaun dev/test digunakan
-- [ ] Insiden terpelihara dibeli
+- [ ] Instans terpelihara dibeli
 - [ ] Papan pemantauan kos
 - [ ] Kajian kos berkala
 
@@ -894,7 +894,7 @@ echo "Infrastructure validation completed successfully!"
 | Metrik | Sasaran | Pemantauan |
 |--------|--------|------------|
 | **Masa Respons** | < 2 saat | Wawasan Aplikasi |
-| **Ketersediaan** | 99.9% | Pemantauan waktu operasi |
+| **Ketersediaan** | 99.9% | Pemantauan masa operasi |
 | **Kadar Ralat** | < 0.1% | Log aplikasi |
 | **Penggunaan Token** | < $500/bulan | Pengurusan kos |
 | **Pengguna Serentak** | 1000+ | Ujian beban |
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Ujian Beban
 
 ```bash
-# Load testing script for AI applications
+# Skrip ujian beban untuk aplikasi AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,19 +913,19 @@ python scripts/load_test.py \
 
 ## 🤝 Amalan Terbaik Komuniti
 
-Berdasarkan maklum balas komuniti Discord Azure AI Foundry:
+Berdasarkan maklum balas komuniti Microsoft Foundry Discord:
 
 ### Cadangan Terbaik daripada Komuniti:
 
 1. **Mulakan Kecil, Skala Secara Beransur-ansur**: Mulakan dengan SKU asas dan skala berdasarkan penggunaan sebenar
-2. **Pantau Segalanya**: Sediakan pemantauan yang komprehensif dari hari pertama
+2. **Pantau Segalanya**: Sediakan pemantauan komprehensif dari hari pertama
 3. **Automasi Keselamatan**: Gunakan infrastruktur sebagai kod untuk keselamatan yang konsisten
 4. **Uji Secara Menyeluruh**: Sertakan ujian khusus AI dalam saluran anda
-5. **Rancang Kos**: Pantau penggunaan token dan tetapkan amaran belanjawan lebih awal
+5. **Rancang Kos**: Pantau penggunaan token dan tetapkan amaran belanjawan awal
 
 ### Kesilapan Biasa untuk Dielakkan:
 
-- ❌ Menyimpan kunci API secara keras dalam kod
+- ❌ Menyimpan kunci API secara hardcoding dalam kod
 - ❌ Tidak menyediakan pemantauan yang betul
 - ❌ Mengabaikan pengoptimuman kos
 - ❌ Tidak menguji senario kegagalan
@@ -934,9 +934,9 @@ Berdasarkan maklum balas komuniti Discord Azure AI Foundry:
 ## Sumber Tambahan
 
 - **Kerangka Seni Bina Azure yang Baik**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Dokumentasi Azure AI Foundry**: [Dok rasmi](https://learn.microsoft.com/azure/ai-studio/)
+- **Dokumentasi Microsoft Foundry**: [Dok rasmi](https://learn.microsoft.com/azure/ai-studio/)
 - **Templat Komuniti**: [Contoh Azure](https://github.com/Azure-Samples)
-- **Komuniti Discord**: [#Saluran Azure](https://discord.gg/microsoft-azure)
+- **Komuniti Discord**: [Saluran #Azure](https://discord.gg/microsoft-azure)
 
 ---
 
@@ -945,11 +945,13 @@ Berdasarkan maklum balas komuniti Discord Azure AI Foundry:
 - **📖 Bab Semasa**: Bab 8 - Corak Pengeluaran & Perusahaan
 - **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../troubleshooting/debugging.md)
 - **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](ai-workshop-lab.md)
-- **🎆 Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
+- **🎆 Kursus Selesai**: [AZD Untuk Pemula](../../README.md)
 
 **Ingat**: Beban kerja AI pengeluaran memerlukan perancangan yang teliti, pemantauan, dan pengoptimuman berterusan. Mulakan dengan corak ini dan sesuaikan mengikut keperluan khusus anda.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat yang kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
