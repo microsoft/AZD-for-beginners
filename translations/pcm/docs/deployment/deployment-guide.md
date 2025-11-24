@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-11-18T19:17:41+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-24T13:38:19+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "pcm"
 }
@@ -18,24 +18,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-Dis guide go teach you everytin wey you need sabi about how to deploy apps wit Azure Developer CLI, from simple one-command deployment to advanced production setups wey get custom hooks, multiple environments, and CI/CD integration. You go sabi di full deployment process wit practical examples and best practices.
+Dis guide go show you everytin wey you need sabi about how to deploy apps wit Azure Developer CLI, from simple one-command deployment to advanced production setups wey get custom hooks, multiple environments, and CI/CD integration. You go sabi di full deployment process wit practical examples and best practices.
 
 ## Learning Goals
 
-If you finish dis guide, you go:
+If you finish dis guide, you go fit:
 - Sabi all di Azure Developer CLI deployment commands and workflows
 - Understand di full deployment process from provisioning to monitoring
-- Fit use custom deployment hooks for pre and post-deployment automation
-- Configure multiple environments wit environment-specific parameters
-- Set up advanced deployment strategies like blue-green and canary deployments
-- Integrate azd deployments wit CI/CD pipelines and DevOps workflows
+- Use custom deployment hooks for pre and post-deployment automation
+- Set up multiple environments wit environment-specific parameters
+- Do advanced deployment strategies like blue-green and canary deployments
+- Connect azd deployments wit CI/CD pipelines and DevOps workflows
 
 ## Learning Outcomes
 
 When you don complete dis guide, you go fit:
 - Run and troubleshoot all azd deployment workflows by yourself
 - Design and use custom deployment automation wit hooks
-- Configure production-ready deployments wit correct security and monitoring
+- Set up production-ready deployments wit correct security and monitoring
 - Manage complex multi-environment deployment setups
 - Make deployment faster and use rollback strategies
 - Add azd deployments into enterprise DevOps practices
@@ -56,39 +56,73 @@ Dis na di most common workflow for new projects:
 # Deploy everything from scratch
 azd up
 
-# Deploy with specific environment
+# Deploy wit specific environment
 azd up --environment production
 
-# Deploy with custom parameters
+# Deploy wit custom parameters
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Infrastructure-Only Deployment
 If na only Azure resources you wan update:
 ```bash
-# Provision/update infrastructure
+# Set up/update infrastructure
 azd provision
 
-# Provision with dry-run to preview changes
+# Set up wit dry-run to see wetin go change
 azd provision --preview
 
-# Provision specific services
+# Set up specific services
 azd provision --service database
 ```
 
 ### Code-Only Deployment
 For quick application updates:
 ```bash
-# Deploy all services
+# Deploy all di services
 azd deploy
 
-# Deploy specific service
+# Wetin we dey expect:
+# Dey deploy services (azd deploy)
+# - web: Dey deploy... E don finish
+# - api: Dey deploy... E don finish
+# SUCCESS: Your deployment don complete for 2 minutes 15 seconds
+
+# Deploy one service
 azd deploy --service web
 azd deploy --service api
 
-# Deploy with custom build arguments
+# Deploy wit custom build arguments
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Check di deployment
+azd show --output json | jq '.services'
 ```
+
+### ✅ Deployment Verification
+
+After you deploy, make sure say e work:
+
+```bash
+# Make sure say all di services dey run
+azd show
+
+# Test di health endpoints
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Check di logs for any error
+azd logs --service api --since 5m | grep -i error
+```
+
+**Success Criteria:**
+- ✅ All services dey show "Running" status
+- ✅ Health endpoints dey return HTTP 200
+- ✅ No error logs for di last 5 minutes
+- ✅ Application dey respond to test requests
 
 ## 🏗️ Understanding the Deployment Process
 
@@ -126,7 +160,7 @@ hooks:
 ```
 
 ### Phase 4: Application Packaging
-- E go build application code
+- E go build di application code
 - E go create deployment artifacts
 - E go package am for di target platform (containers, ZIP files, etc.)
 
@@ -195,18 +229,18 @@ services:
 
 ### Environment-Specific Configurations
 ```bash
-# Development environment
+# Place wey dem dey build di software
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging environment
+# Place wey dem dey test di software
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Production environment
+# Place wey di software dey work for real
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -253,17 +287,17 @@ services:
 
 ### Blue-Green Deployments
 ```bash
-# Create blue environment
+# Make blue environment
 azd env new production-blue
 azd up --environment production-blue
 
 # Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# Switch traffic to blue (manual DNS/load balancer update)
+# Move traffic go blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# Clean up green environment
+# Clear green environment
 azd env select production-green
 azd down --force
 ```
@@ -369,10 +403,10 @@ CMD ["npm", "start"]
 
 ### Parallel Deployments
 ```bash
-# Configure parallel deployment
+# Set parallel deployment
 azd config set deploy.parallelism 5
 
-# Deploy services in parallel
+# Deploy services together
 azd deploy --parallel
 ```
 
@@ -392,10 +426,10 @@ services:
 
 ### Incremental Deployments
 ```bash
-# Deploy only changed services
+# Deploy only di services wey change
 azd deploy --incremental
 
-# Deploy with change detection
+# Deploy wit change detection
 azd deploy --detect-changes
 ```
 
@@ -403,13 +437,13 @@ azd deploy --detect-changes
 
 ### Real-Time Deployment Monitoring
 ```bash
-# Monitor deployment progress
+# Dey check how deployment dey go
 azd deploy --follow
 
-# View deployment logs
+# See deployment logs
 azd logs --follow --service api
 
-# Check deployment status
+# Confirm deployment status
 azd show --service api
 ```
 
@@ -434,7 +468,7 @@ services:
 
 echo "Validating deployment..."
 
-# Check application health
+# Check say di application dey okay
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -464,12 +498,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### Secrets Management
 ```bash
-# Store secrets securely
+# Keep secret dem well well
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Reference secrets in azure.yaml
+# Use secret dem for azure.yaml
 ```
 
 ```yaml
@@ -512,22 +546,22 @@ services:
 
 ### Quick Rollback
 ```bash
-# Rollback to previous deployment
+# Go back to di deployment wey dey before
 azd deploy --rollback
 
-# Rollback specific service
+# Go back to one service wey you choose
 azd deploy --service api --rollback
 
-# Rollback to specific version
+# Go back to one version wey you choose
 azd deploy --service api --version v1.2.3
 ```
 
 ### Infrastructure Rollback
 ```bash
-# Rollback infrastructure changes
+# Reverse infrastructure wey dem change
 azd provision --rollback
 
-# Preview rollback changes
+# Show wetin dem go reverse for the change
 azd provision --rollback --preview
 ```
 
@@ -552,7 +586,7 @@ echo "Database rollback completed"
 # Enable deployment metrics
 azd config set telemetry.deployment.enabled true
 
-# View deployment history
+# See deployment history
 azd history
 
 # Get deployment statistics
@@ -580,18 +614,18 @@ hooks:
 
 ### 1. Environment Consistency
 ```bash
-# Use consistent naming
+# Dey use same name style
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Maintain environment parity
+# Make sure say environment dey same
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Infrastructure Validation
 ```bash
-# Validate before deployment
+# Check am well before you deploy
 azd provision --preview
 azd provision --what-if
 
@@ -630,7 +664,7 @@ hooks:
 
 ### 4. Documentation and Logging
 ```bash
-# Document deployment procedures
+# Write how dem dey do deployment
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -641,7 +675,260 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 - [Provisioning Resources](provisioning.md) - Learn more about infrastructure management
 - [Pre-Deployment Planning](../pre-deployment/capacity-planning.md) - Plan your deployment strategy
 - [Common Issues](../troubleshooting/common-issues.md) - Solve deployment problems
-- [Best Practices](../troubleshooting/debugging.md) - Strategies for production-ready deployment
+- [Best Practices](../troubleshooting/debugging.md) - Strategies for production-ready deployments
+
+## 🎯 Hands-On Deployment Exercises
+
+### Exercise 1: Incremental Deployment Workflow (20 minutes)
+**Goal**: Sabi di difference between full and incremental deployments
+
+```bash
+# First deployment
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Write down di first deployment time
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Change di code small
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Deploy only di code (quick quick)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Check di time difference
+cat deployment-log.txt
+
+# Arrange tins well
+azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Full deployment dey take 5-15 minutes
+- [ ] Code-only deployment dey take 2-5 minutes
+- [ ] Code changes dey show for di deployed app
+- [ ] Infrastructure no change after `azd deploy`
+
+**Learning Outcome**: `azd deploy` dey 50-70% faster than `azd up` for code changes
+
+### Exercise 2: Custom Deployment Hooks (30 minutes)
+**Goal**: Add pre and post-deployment automation
+
+```bash
+# Make script wey go check before deploy
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Check if test dem pass
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Check for change wey never commit
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Make test wey go check after deploy
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Add hook for azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Test deploy with hook
+azd deploy
+```
+
+**Success Criteria:**
+- [ ] Pre-deploy script go run before deployment
+- [ ] Deployment go stop if tests fail
+- [ ] Post-deploy smoke test go check health
+- [ ] Hooks go run for correct order
+
+### Exercise 3: Multi-Environment Deployment Strategy (45 minutes)
+**Goal**: Do staged deployment workflow (dev → staging → production)
+
+```bash
+# Create deployment script
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Step 1: Deploy go dev
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Step 2: Deploy go staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Step 3: Manual approval for production
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Create environments
+azd env new dev
+azd env new staging
+azd env new production
+
+# Run staged deployment
+./deploy-staged.sh
+```
+
+**Success Criteria:**
+- [ ] Dev environment go deploy successfully
+- [ ] Staging environment go deploy successfully
+- [ ] Manual approval go dey for production
+- [ ] All environments go get working health checks
+- [ ] You fit roll back if e necessary
+
+### Exercise 4: Rollback Strategy (25 minutes)
+**Goal**: Test deployment rollback
+
+```bash
+# Deploy v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Save v1 configuration
+cp -r .azure/production .azure/production-v1-backup
+
+# Deploy v2 wit breaking change
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Detect failure
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Rollback code
+    git checkout src/api/src/server.js
+    
+    # Rollback environment
+    azd env set APP_VERSION "1.0.0"
+    
+    # Redeploy v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Success Criteria:**
+- [ ] You fit detect deployment failures
+- [ ] Rollback script go run automatically
+- [ ] Application go return to working state
+- [ ] Health checks go pass after rollback
+
+## 📊 Deployment Metrics Tracking
+
+### Track Your Deployment Performance
+
+```bash
+# Make deployment metrics script
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Log am for file
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Use am
+./track-deployment.sh
+```
+
+**Analyze your metrics:**
+```bash
+# See deployment history
+cat deployment-metrics.csv
+
+# Calculate average deployment time
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
 
 ## Additional Resources
 
@@ -660,5 +947,5 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don use AI transle-shon service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transle-shon. Even as we dey try make am accurate, abeg make you sabi say transle-shon wey machine do fit get mistake or no dey correct well. Di original dokyument for im native language na di one wey you go take as di correct source. For important mata, e good make professional human transle-shon dey do am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis transle-shon.
+Dis dokyument don use AI transle-shun service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transle-shun. Even as we dey try make am correct, abeg sabi say transle-shun wey machine do fit get mistake or no dey accurate well. Di original dokyument for im native language na di one wey you go take as di correct source. For important mata, e good make professional human transle-shun dey use. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis transle-shun.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

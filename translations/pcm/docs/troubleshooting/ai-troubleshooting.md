@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-11-18T19:20:09+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-24T13:45:03+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "pcm"
 }
@@ -13,27 +13,27 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
-- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**Previous:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
+**Previous:** [Production AI Practices](../microsoft-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
 
-Dis guide dey cover common wahala wey fit happen wen you dey deploy AI solutions wit AZD, and e dey provide solutions plus debugging techniques wey dey specific to Azure AI services.
+Dis guide go help you solve common wahala wey fit happen when you dey deploy AI solutions with AZD, and e go show you how to debug Azure AI services.
 
 ## Table of Contents
 
-- [Azure OpenAI Service Wahala](../../../../docs/troubleshooting)
+- [Azure OpenAI Service Issues](../../../../docs/troubleshooting)
 - [Azure AI Search Problems](../../../../docs/troubleshooting)
-- [Container Apps Deployment Wahala](../../../../docs/troubleshooting)
+- [Container Apps Deployment Issues](../../../../docs/troubleshooting)
 - [Authentication and Permission Errors](../../../../docs/troubleshooting)
 - [Model Deployment Failures](../../../../docs/troubleshooting)
-- [Performance and Scaling Wahala](../../../../docs/troubleshooting)
+- [Performance and Scaling Issues](../../../../docs/troubleshooting)
 - [Cost and Quota Management](../../../../docs/troubleshooting)
 - [Debugging Tools and Techniques](../../../../docs/troubleshooting)
 
-## Azure OpenAI Service Wahala
+## Azure OpenAI Service Issues
 
-### Wahala: OpenAI Service No Dey Available for Region
+### Issue: OpenAI Service No Dey Work for Region
 
 **Symptoms:**
 ```
@@ -43,13 +43,13 @@ Error: The requested resource type is not available in the location 'westus'
 **Causes:**
 - Azure OpenAI no dey for di region wey you select
 - Quota don finish for di region wey you prefer
-- Regional capacity dey tight
+- Capacity for di region no reach
 
 **Solutions:**
 
 1. **Check Region Availability:**
 ```bash
-# List available regions for OpenAI
+# Show di regions wey OpenAI dey available
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -79,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Wahala: Model Deployment Quota Don Finish
+### Issue: Model Deployment Quota Don Finish
 
 **Symptoms:**
 ```
@@ -90,7 +90,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **Check Current Quota:**
 ```bash
-# Check quota usage
+# Check how much quota you don use
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -98,7 +98,7 @@ az cognitiveservices usage list \
 
 2. **Request Quota Increase:**
 ```bash
-# Submit quota increase request
+# Send request make dem increase quota
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -124,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Wahala: Invalid API Version
+### Issue: Invalid API Version
 
 **Symptoms:**
 ```
@@ -135,13 +135,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Use Supported API Version:**
 ```python
-# Use latest supported version
+# Use di latest version wey dem support
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **Check API Version Compatibility:**
 ```bash
-# List supported API versions
+# List di API versions wey e support
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -149,7 +149,7 @@ az rest --method get \
 
 ## Azure AI Search Problems
 
-### Wahala: Search Service Pricing Tier No Reach
+### Issue: Search Service Pricing Tier No Reach
 
 **Symptoms:**
 ```
@@ -190,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Wahala: Index Creation No Work
+### Issue: Index Creation No Work
 
 **Symptoms:**
 ```
@@ -201,7 +201,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **Verify Search Service Keys:**
 ```bash
-# Get search service admin key
+# Collect search service admin key
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **Check Index Schema:**
 ```python
-# Validate index schema
+# Check say index schema correct
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -237,9 +237,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps Deployment Wahala
+## Container Apps Deployment Issues
 
-### Wahala: Container Build No Work
+### Issue: Container Build No Work
 
 **Symptoms:**
 ```
@@ -294,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Wahala: Container App No Start
+### Issue: Container App No Start
 
 **Symptoms:**
 ```
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimize Model Loading:**
 ```python
-# Lazy load models to reduce startup time
+# Load models small small to make startup time short
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # Start AI client for here
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Start work
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # Close work
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -368,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Authentication and Permission Errors
 
-### Wahala: Managed Identity Permission Denied
+### Issue: Managed Identity No Get Permission
 
 **Symptoms:**
 ```
@@ -379,7 +379,7 @@ Error: Authentication failed for Azure OpenAI Service
 
 1. **Verify Role Assignments:**
 ```bash
-# Check current role assignments
+# Check wetin dem don assign for role
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Test Authentication:**
 ```python
-# Test managed identity authentication
+# Test di managed identity authentication
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -417,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Wahala: Key Vault Access Denied
+### Issue: Key Vault Access Denied
 
 **Symptoms:**
 ```
@@ -460,7 +460,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ## Model Deployment Failures
 
-### Wahala: Model Version No Dey Available
+### Issue: Model Version No Dey Available
 
 **Symptoms:**
 ```
@@ -471,7 +471,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Check Available Models:**
 ```bash
-# List available models
+# List di models wey dey available
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -510,7 +510,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **Validate Model Before Deployment:**
 ```python
-# Pre-deployment model validation
+# Before dem deploy di model, dem go check am well
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -530,20 +530,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Performance and Scaling Wahala
+## Performance and Scaling Issues
 
-### Wahala: High Latency Responses
+### Issue: Response Dey Take Time
 
 **Symptoms:**
 - Response time pass 30 seconds
 - Timeout errors
-- Bad user experience
+- User experience no good
 
 **Solutions:**
 
 1. **Implement Request Timeouts:**
 ```python
-# Configure proper timeouts
+# Set correct timeouts
 import httpx
 
 client = httpx.AsyncClient(
@@ -558,7 +558,7 @@ client = httpx.AsyncClient(
 
 2. **Add Response Caching:**
 ```python
-# Redis cache for responses
+# Redis cache for ansas
 import redis.asyncio as redis
 import json
 
@@ -610,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Wahala: Memory Don Finish
+### Issue: Memory Don Finish
 
 **Symptoms:**
 ```
@@ -640,7 +640,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimize Memory Usage:**
 ```python
-# Memory-efficient model handling
+# Model wey no go use plenty memory
 import gc
 import psutil
 
@@ -650,24 +650,24 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # Check how memory dey before you process
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # Make sure say garbage collection happen
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # Arrange everything well after you process
         gc.collect()
         return result
 ```
 
 ## Cost and Quota Management
 
-### Wahala: Unexpected High Costs
+### Issue: Cost Don High Pass Wetin You Expect
 
 **Symptoms:**
-- Azure bill high pass wetin you expect
+- Azure bill high pass wetin you plan
 - Token usage don pass wetin you estimate
 - Budget alerts dey trigger
 
@@ -675,7 +675,7 @@ class MemoryOptimizedAI:
 
 1. **Implement Cost Controls:**
 ```python
-# Token usage tracking
+# Tracking how many token dem dey use
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -719,11 +719,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Optimize Model Selection:**
 ```python
-# Cost-aware model selection
+# Model wey sabi cost well
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # for every 1K tokens
+    'gpt-4': 0.03,          # for every 1K tokens
+    'gpt-35-turbo': 0.0015  # for every 1K tokens
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -741,13 +741,13 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### AZD Debugging Commands
 
 ```bash
-# Enable verbose logging
+# Make logging dey show plenty tori
 azd up --debug
 
-# Check deployment status
+# Check how deployment dey go
 azd show
 
-# View deployment logs
+# Look deployment logs
 azd logs --follow
 
 # Check environment variables
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# Set up structured logging for AI apps
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -787,7 +787,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # Check OpenAI connection
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -854,7 +854,7 @@ def monitor_performance(func):
 
 1. **Review [AI Model Deployment Guide](ai-model-deployment.md)** for deployment best practices
 2. **Complete [Production AI Practices](production-ai-practices.md)** for enterprise-ready solutions
-3. **Join the [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** for community support
+3. **Join the [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** for community support
 4. **Submit issues** to the [AZD GitHub repository](https://github.com/Azure/azure-dev) for AZD-specific problems
 
 ## Resources
@@ -869,13 +869,13 @@ def monitor_performance(func):
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
-- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don use AI transleto service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am correct, abeg sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument wey dey for im native language na di main source wey you go fit trust. For important information, e better make professional human transleto check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Dis dokyument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg sabi say machine translation fit get mistake or no dey correct well. Di original dokyument for im native language na di main correct source. For important information, e good make una use professional human translation. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

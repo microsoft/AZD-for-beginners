@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "22e9deee2d82e70fc841c60f97627916",
-  "translation_date": "2025-10-11T16:05:32+00:00",
+  "original_hash": "8b26783231714a00efafee3aca8b233c",
+  "translation_date": "2025-11-24T13:07:04+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "et"
 }
@@ -11,14 +11,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 2 - AI-esmane arendus
+- **📖 Praegune peatükk**: Peatükk 2 - AI-põhine arendus
 - **⬅️ Eelmine**: [AI mudeli juurutamine](ai-model-deployment.md)
 - **➡️ Järgmine**: [Tootmise AI parimad tavad](production-ai-practices.md)
 - **🚀 Järgmine peatükk**: [Peatükk 3: Konfiguratsioon](../getting-started/configuration.md)
 
 ## Töötoa ülevaade
 
-See praktiline labor juhendab arendajaid olemasoleva AI-malli võtmise ja selle Azure Developer CLI (AZD) abil juurutamise protsessis. Õpite olulisi mustreid tootmise AI juurutamiseks, kasutades Azure AI Foundry teenuseid.
+See praktiline labor juhendab arendajaid olemasoleva AI-malli võtmise ja selle Azure Developer CLI (AZD) abil juurutamise protsessis. Õpite olulisi mustreid tootmise AI juurutamiseks, kasutades Microsoft Foundry teenuseid.
 
 **Kestus:** 2-3 tundi  
 **Tase:** Keskmine  
@@ -28,7 +28,7 @@ See praktiline labor juhendab arendajaid olemasoleva AI-malli võtmise ja selle 
 
 Töötoa lõpuks suudate:
 - ✅ Muuta olemasoleva AI-rakenduse AZD mallide kasutamiseks
-- ✅ Konfigureerida Azure AI Foundry teenuseid AZD-ga
+- ✅ Konfigureerida Microsoft Foundry teenuseid AZD-ga
 - ✅ Rakendada turvalist mandaadihaldust AI-teenuste jaoks
 - ✅ Juurutada tootmisvalmis AI-rakendusi koos jälgimisega
 - ✅ Lahendada levinud AI juurutamise probleeme
@@ -39,7 +39,7 @@ Töötoa lõpuks suudate:
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) paigaldatud
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) paigaldatud
 - [Git](https://git-scm.com/) paigaldatud
-- Koodiredaktor (soovitatav VS Code)
+- Koodiredaktor (soovitatavalt VS Code)
 
 ### Azure'i ressursid
 - Azure'i tellimus koos kaastöötaja juurdepääsuga
@@ -49,21 +49,21 @@ Töötoa lõpuks suudate:
 ### Teadmiste eeltingimused
 - Põhiteadmised Azure'i teenustest
 - Käsurealiideste tundmine
-- Põhilised AI/ML kontseptsioonid (API-d, mudelid, päringud)
+- Põhilised AI/ML kontseptsioonid (API-d, mudelid, küsimused)
 
 ## Labori seadistamine
 
 ### Samm 1: Keskkonna ettevalmistamine
 
-1. **Kontrollige tööriistade paigaldamist:**
+1. **Kontrollige tööriistade paigaldust:**
 ```bash
-# Check AZD installation
+# Kontrolli AZD paigaldust
 azd version
 
-# Check Azure CLI
+# Kontrolli Azure CLI-d
 az --version
 
-# Login to Azure
+# Logi sisse Azure'i
 az login
 azd auth login
 ```
@@ -78,7 +78,7 @@ cd azure-search-openai-demo
 
 ### AI-valmis AZD malli anatoomia
 
-Uurige AI-valmis AZD malli põhifailide struktuuri:
+Tutvuge AI-valmis AZD malli põhifailidega:
 
 ```
 azure-search-openai-demo/
@@ -115,10 +115,10 @@ cat infra/main.bicep
 **Peamised AI mustrid, mida tuvastada:**
 - Azure OpenAI teenuse ettevalmistamine
 - Cognitive Search integratsioon
-- Turvalise võtmehalduse rakendamine
+- Turvaline võtmehaldus
 - Võrguturbe konfiguratsioonid
 
-### **Arutelu punkt:** Miks need mustrid on AI jaoks olulised
+### **Arutelu punkt:** Miks need mustrid AI jaoks olulised on
 
 - **Teenuste sõltuvused**: AI rakendused vajavad sageli mitme teenuse koordineerimist
 - **Turvalisus**: API võtmed ja lõpp-punktid vajavad turvalist haldust
@@ -136,14 +136,14 @@ azd env new myai-workshop
 
 2. **Määrake vajalikud parameetrid:**
 ```bash
-# Set your preferred Azure region
+# Määrake oma eelistatud Azure'i piirkond
 azd env set AZURE_LOCATION eastus
 
-# Optional: Set specific OpenAI model
+# Valikuline: Määrake konkreetne OpenAI mudel
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### Samm 2.2: Infrastruktuuri ja rakenduse juurutamine
+### Samm 2.2: Juurutage infrastruktuur ja rakendus
 
 1. **Juurutage AZD-ga:**
 ```bash
@@ -154,7 +154,7 @@ azd up
 - ✅ Azure OpenAI teenuse ettevalmistamine
 - ✅ Cognitive Search teenuse loomine
 - ✅ Veebirakenduse jaoks App Service seadistamine
-- ✅ Võrgu ja turvalisuse konfigureerimine
+- ✅ Võrgu ja turvalisuse konfiguratsioon
 - ✅ Rakenduse koodi juurutamine
 - ✅ Jälgimise ja logimise seadistamine
 
@@ -174,28 +174,28 @@ azd show --output json | grep "webAppUrl"
 
 3. **Testige AI funktsionaalsust:**
    - Navigeerige veebirakendusse
-   - Proovige näidispäringuid
+   - Proovige näidisküsimusi
    - Kontrollige, kas AI vastused töötavad
 
 ### **Laboriharjutus 2.1: Tõrkeotsingu praktika**
 
-**Stsenaarium**: Teie juurutamine õnnestus, kuid AI ei vasta.
+**Stsenaarium**: Teie juurutus õnnestus, kuid AI ei vasta.
 
 **Levinud probleemid, mida kontrollida:**
 1. **OpenAI API võtmed**: Kontrollige, kas need on õigesti seadistatud
 2. **Mudelite saadavus**: Kontrollige, kas teie piirkond toetab mudelit
 3. **Võrguühendus**: Veenduge, et teenused saavad suhelda
-4. **RBAC õigused**: Kontrollige, kas rakendus pääseb OpenAI-le juurde
+4. **RBAC õigused**: Kontrollige, kas rakendus pääseb OpenAI-le ligi
 
 **Tõrkeotsingu käsud:**
 ```bash
-# Check environment variables
+# Kontrolli keskkonnamuutujaid
 azd env get-values
 
-# View deployment logs
+# Vaata juurutamise logisid
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Check OpenAI deployment status
+# Kontrolli OpenAI juurutamise olekut
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
@@ -205,10 +205,10 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 
 1. **Uuendage OpenAI mudelit:**
 ```bash
-# Change to a different model (if available in your region)
+# Vaheta teise mudeli vastu (kui see on sinu piirkonnas saadaval)
 azd env set AZURE_OPENAI_MODEL gpt-4
 
-# Redeploy with the new configuration
+# Paigalda uuesti uue konfiguratsiooniga
 azd deploy
 ```
 
@@ -242,11 +242,11 @@ azd env new myai-production
 
 2. **Määrake tootmispõhised parameetrid:**
 ```bash
-# Production typically uses higher SKUs
+# Tootmine kasutab tavaliselt kõrgemaid SKU-sid
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# Enable additional security features
+# Luba täiendavad turvafunktsioonid
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
@@ -256,13 +256,13 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 **Ülesanded:**
 1. Tuvastage, millised SKU-d saab seadistada tasuta/põhitasemele
-2. Konfigureerige keskkonnamuutujad minimaalse kulu jaoks
+2. Konfigureerige keskkonnamuutujad minimaalsete kulude jaoks
 3. Juurutage ja võrrelge kulusid tootmiskonfiguratsiooniga
 
 **Lahenduse vihjed:**
-- Kasutage F0 (tasuta) taset Cognitive Services jaoks, kui võimalik
+- Kasutage Cognitive Services jaoks võimalusel F0 (tasuta) taset
 - Kasutage arenduses Search Service jaoks Basic taset
-- Kaaluge Functions jaoks tarbimisplaani kasutamist
+- Kaaluge Functions jaoks Consumption plaani kasutamist
 
 ## Moodul 4: Turvalisus ja tootmise parimad tavad
 
@@ -274,19 +274,19 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 1. **Vaadake üle turvakonfiguratsioon oma mallis:**
 ```bash
-# Look for Key Vault and Managed Identity configuration
+# Otsi Key Vaulti ja Hallatud Identiteedi konfiguratsiooni
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
 2. **Kontrollige, kas hallatud identiteet töötab:**
 ```bash
-# Check if the web app has the correct identity configuration
+# Kontrollige, kas veebirakendusel on õige identiteedi konfiguratsioon
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
 ### Samm 4.2: Võrguturvalisus
 
-1. **Lubage privaatlõpp-punktid** (kui pole juba konfigureeritud):
+1. **Lubage privaatsed lõpp-punktid** (kui pole juba konfigureeritud):
 
 Lisage oma bicep mallile:
 ```bicep
@@ -315,8 +315,8 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 1. **Konfigureerige Application Insights:**
 ```bash
-# Application Insights should be automatically configured
-# Check the configuration:
+# Rakenduse ülevaated peaksid olema automaatselt konfigureeritud
+# Kontrolli konfiguratsiooni:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
@@ -348,7 +348,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 **Ülesanne**: Vaadake oma juurutus üle turvalisuse parimate tavade osas.
 
 **Kontrollnimekiri:**
-- [ ] Koodis või konfiguratsioonis pole kõvakodeeritud saladusi
+- [ ] Koodis või konfiguratsioonis pole kõvakodeeritud võtmeid
 - [ ] Hallatud identiteeti kasutatakse teenustevaheliseks autentimiseks
 - [ ] Key Vault salvestab tundlikku konfiguratsiooni
 - [ ] Võrguühendus on korralikult piiratud
@@ -369,7 +369,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 2. **Turvanõuded:**
    - Millist tundlikku teavet teie rakendus käsitleb?
    - Millised vastavusnõuded teil on?
-   - Kas vajate privaatvõrku?
+   - Kas vajate privaatset võrku?
 
 3. **Mastaapsusnõuded:**
    - Milline on teie eeldatav koormus?
@@ -385,7 +385,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Initialize AZD template
+# Initsialiseeri AZD mall
 azd init --template minimal
 ```
 
@@ -461,29 +461,29 @@ output name string = openAIAccount.name
 **Väljakutse**: Looge AZD mall dokumenditöötluse AI rakenduse jaoks.
 
 **Nõuded:**
-- Azure OpenAI sisuanalüüsiks
+- Azure OpenAI sisu analüüsiks
 - Document Intelligence OCR-i jaoks
-- Dokumentide üleslaadimiseks Storage Account
-- Funktsioonirakendus töötlemisloogika jaoks
+- Storage Account dokumentide üleslaadimiseks
+- Function App töötlemisloogika jaoks
 - Veebirakendus kasutajaliidese jaoks
 
-**Lisapunktid:**
+**Boonuspunktid:**
 - Lisage korralik veakäsitlus
 - Kaasake kulude hinnang
 - Seadistage jälgimisdashboarid
 
 ## Moodul 6: Levinud probleemide tõrkeotsing
 
-### Levinud juurutamise probleemid
+### Levinud juurutusprobleemid
 
 #### Probleem 1: OpenAI teenuse kvoot ületatud
-**Sümptomid:** Juurutamine ebaõnnestub kvoodi veaga
+**Sümptomid:** Juurutus ebaõnnestub kvoodi veaga
 **Lahendused:**
 ```bash
-# Check current quotas
+# Kontrolli praeguseid kvoote
 az cognitiveservices usage list --location eastus
 
-# Request quota increase or try different region
+# Taotle kvoodi suurendamist või proovi teist piirkonda
 azd env set AZURE_LOCATION westus2
 azd up
 ```
@@ -492,10 +492,10 @@ azd up
 **Sümptomid:** AI vastused ebaõnnestuvad või mudeli juurutamise vead
 **Lahendused:**
 ```bash
-# Check model availability by region
+# Kontrolli mudeli saadavust piirkonna järgi
 az cognitiveservices model list --location eastus
 
-# Update to available model
+# Uuenda saadaval olevaks mudeliks
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
@@ -504,10 +504,10 @@ azd deploy
 **Sümptomid:** 403 Keelatud vead AI teenuste kutsumisel
 **Lahendused:**
 ```bash
-# Check role assignments
+# Kontrolli rollide määramisi
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Add missing roles
+# Lisa puuduvad rollid
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -523,19 +523,19 @@ az role assignment create \
 3. Kontrollige võrguühendust ja latentsust
 
 **Lahendused:**
-- Rakendage vahemällu salvestamine tavaliste päringute jaoks
+- Rakendage vahemälu korduvate küsimuste jaoks
 - Kasutage oma kasutusjuhtumi jaoks sobivat OpenAI mudelit
 - Kaaluge lugemisreplikaid suure koormuse korral
 
 ### **Laboriharjutus 6.1: Tõrkeotsingu väljakutse**
 
-**Stsenaarium**: Teie juurutamine õnnestus, kuid rakendus tagastab 500 vead.
+**Stsenaarium**: Teie juurutus õnnestus, kuid rakendus tagastab 500 vead.
 
 **Tõrkeotsingu ülesanded:**
 1. Kontrollige rakenduse logisid
 2. Kontrollige teenuste ühenduvust
 3. Testige autentimist
-4. Vaadake konfiguratsioon üle
+4. Vaadake üle konfiguratsioon
 
 **Tööriistad, mida kasutada:**
 - `azd show` juurutuse ülevaate jaoks
@@ -544,7 +544,7 @@ az role assignment create \
 
 ## Moodul 7: Jälgimine ja optimeerimine
 
-### Samm 7.1: Põhjaliku jälgimise seadistamine
+### Samm 7.1: Seadistage põhjalik jälgimine
 
 1. **Looge kohandatud dashboarid:**
 
@@ -556,7 +556,7 @@ Navigeerige Azure'i portaali ja looge dashboard koos:
 
 2. **Seadistage hoiatused:**
 ```bash
-# Alert for high error rate
+# Teade kõrge veamäära kohta
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -569,14 +569,14 @@ az monitor metrics alert create \
 
 1. **Analüüsige praeguseid kulusid:**
 ```bash
-# Use Azure CLI to get cost data
+# Kasuta Azure CLI-d, et saada kulude andmeid
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Rakendage kulude kontrolli:**
 - Seadistage eelarvehoiatused
 - Kasutage automaatse mastaapsuse poliitikaid
-- Rakendage päringute vahemällu salvestamist
+- Rakendage päringute vahemälu
 - Jälgige OpenAI tokenite kasutust
 
 ### **Laboriharjutus 7.1: Jõudluse optimeerimine**
@@ -586,30 +586,30 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 **Mõõdikud, mida parandada:**
 - Vähendage keskmist vastuseaega 20%
 - Vähendage igakuiseid kulusid 15%
-- Säilitage 99,9% tööaeg
+- Säilitage 99.9% tööaeg
 
 **Strateegiad, mida proovida:**
-- Rakendage vastuste vahemällu salvestamist
-- Optimeerige päringuid tokenite tõhususe jaoks
-- Kasutage sobivaid arvutusressursse
+- Rakendage vastuste vahemälu
+- Optimeerige küsimusi tokenite tõhususe jaoks
+- Kasutage sobivaid arvutus-SKU-sid
 - Seadistage korralik automaatne mastaapsus
 
 ## Lõplik väljakutse: Lõpuni viidud rakendamine
 
 ### Väljakutse stsenaarium
 
-Teie ülesanne on luua tootmisvalmis AI-toega klienditeeninduse vestlusrobot järgmiste nõuetega:
+Teie ülesandeks on luua tootmisvalmis AI-toega klienditeeninduse chatbot järgmiste nõuetega:
 
 **Funktsionaalsed nõuded:**
 - Veebiliides kliendisuhtluseks
 - Integratsioon Azure OpenAI-ga vastuste jaoks
-- Dokumentide otsinguvõime Cognitive Searchi abil
+- Dokumendiotsingu võimekus Cognitive Search abil
 - Integratsioon olemasoleva kliendibaasiga
 - Mitmekeelne tugi
 
 **Mittefunktsionaalsed nõuded:**
 - Toetab 1000 samaaegset kasutajat
-- 99,9% tööaja SLA
+- 99.9% tööaja SLA
 - SOC 2 vastavus
 - Kulu alla $500/kuus
 - Juurutamine mitmesse keskkonda (arendus, testimine, tootmine)
@@ -636,7 +636,7 @@ Teie ülesanne on luua tootmisvalmis AI-toega klienditeeninduse vestlusrobot jä
 ### Microsofti dokumentatsioon
 - [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Azure OpenAI teenuse dokumentatsioon](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Azure AI Foundry dokumentatsioon](https://learn.microsoft.com/azure/ai-studio/)
+- [Microsoft Foundry dokumentatsioon](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Näidismallid
 - [Azure OpenAI vestlusrakendus](https://github.com/Azure-Samples/azure-search-openai-demo)
@@ -644,25 +644,26 @@ Teie ülesanne on luua tootmisvalmis AI-toega klienditeeninduse vestlusrobot jä
 - [Contoso vestlus](https://github.com/Azure-Samples/contoso-chat)
 
 ### Kogukonna ressursid
-- [Azure AI Foundry Discord](https://discord.gg/microsoft-azure)
-- [Azure Developer
+- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Awesome AZD Templates](https://azure.github.io/awesome-azd
 Palju õnne! Olete lõpetanud AI Workshopi labori. Nüüd peaksite olema võimeline:
 
 - ✅ Muutma olemasolevaid AI rakendusi AZD mallideks
 - ✅ Juurutama tootmisvalmis AI rakendusi
 - ✅ Rakendama turvalisuse parimaid tavasid AI töökoormuste jaoks
 - ✅ Jälgima ja optimeerima AI rakenduste jõudlust
-- ✅ Lahendama levinud juurutamise probleeme
+- ✅ Lahendama levinud juurutusprobleeme
 
 ### Järgmised sammud
 1. Rakendage neid mustreid oma AI projektides
 2. Panustage mallidega tagasi kogukonda
-3. Liituge Azure AI Foundry Discordiga, et saada pidevat tuge
+3. Liituge Microsoft Foundry Discordiga, et saada pidevat tuge
 4. Uurige edasijõudnud teemasid, nagu mitme piirkonna juurutused
 
 ---
 
-**Töötoa tagasiside**: Aidake meil seda töötuba paremaks muuta, jagades oma kogemusi [Azure AI Foundry Discordi #Azure kanalil](https://discord.gg/microsoft-azure).
+**Töötoa tagasiside**: Aidake meil seda töötuba paremaks muuta, jagades oma kogemusi [Microsoft Foundry Discordi #Azure kanalil](https://discord.gg/microsoft-azure).
 
 ---
 
@@ -677,5 +678,7 @@ Palju õnne! Olete lõpetanud AI Workshopi labori. Nüüd peaksite olema võimel
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Lahtiütlus**:  
 See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

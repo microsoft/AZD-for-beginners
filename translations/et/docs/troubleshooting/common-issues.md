@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-10-11T16:00:45+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-24T12:59:19+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "et"
 }
@@ -12,193 +12,193 @@ CO_OP_TRANSLATOR_METADATA:
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
 - **📖 Praegune peatükk**: Peatükk 7 - Tõrkeotsing ja silumine
-- **⬅️ Eelmine peatükk**: [Peatükk 6: Kontroll enne juurutamist](../pre-deployment/preflight-checks.md)
-- **➡️ Järgmine**: [Silumise juhend](debugging.md)
-- **🚀 Järgmine peatükk**: [Peatükk 8: Tootmise ja ettevõtte mustrid](../ai-foundry/production-ai-practices.md)
+- **⬅️ Eelmine peatükk**: [Peatükk 6: Eelkontrollid](../pre-deployment/preflight-checks.md)
+- **➡️ Järgmine**: [Silumisjuhend](debugging.md)
+- **🚀 Järgmine peatükk**: [Peatükk 8: Tootmine ja ettevõtte mustrid](../microsoft-foundry/production-ai-practices.md)
 
 ## Sissejuhatus
 
-See põhjalik tõrkeotsingu juhend käsitleb kõige sagedamini esinevaid probleeme Azure Developer CLI kasutamisel. Õpi tuvastama, lahendama ja parandama levinud probleeme, mis on seotud autentimise, juurutamise, infrastruktuuri loomise ja rakenduse konfiguratsiooniga. Iga probleem sisaldab üksikasjalikke sümptomeid, põhjuseid ja samm-sammult lahendusi.
+See põhjalik tõrkeotsingu juhend käsitleb kõige sagedamini esinevaid probleeme Azure Developer CLI kasutamisel. Õpi tuvastama, lahendama ja ennetama probleeme, mis on seotud autentimise, juurutamise, infrastruktuuri loomise ja rakenduse seadistamisega. Iga probleemi juures on toodud sümptomid, põhjused ja samm-sammuline lahendus.
 
-## Õpieesmärgid
+## Õppimise eesmärgid
 
-Selle juhendi läbimisega:
-- Omandad diagnostikatehnikad Azure Developer CLI probleemide lahendamiseks
-- Mõistad levinud autentimise ja õiguste probleeme ning nende lahendusi
-- Lahendad juurutamise tõrkeid, infrastruktuuri loomise vigu ja konfiguratsiooniprobleeme
-- Rakendad ennetavat jälgimist ja silumistehnikaid
+Selle juhendi läbimise järel:
+- Oskad kasutada diagnostikatehnikaid Azure Developer CLI probleemide lahendamiseks
+- Mõistad autentimise ja õigustega seotud probleemide põhjuseid ja lahendusi
+- Lahendad juurutamise tõrkeid, infrastruktuuri loomise vigu ja seadistamisprobleeme
+- Rakendad ennetavat monitooringut ja silumisstrateegiaid
 - Kasutad süsteemset tõrkeotsingu metoodikat keeruliste probleemide lahendamiseks
-- Konfigureerid korrektse logimise ja jälgimise, et vältida tulevasi probleeme
+- Seadistad korrektse logimise ja monitooringu, et vältida tulevasi probleeme
 
 ## Õpitulemused
 
 Pärast juhendi läbimist suudad:
 - Tuvastada Azure Developer CLI probleeme sisseehitatud diagnostikavahendite abil
-- Lahendada iseseisvalt autentimise, tellimuse ja õigustega seotud probleeme
-- Tõrkeotsingut teha juurutamise ja infrastruktuuri loomise vigade korral
-- Siluda rakenduse konfiguratsiooniprobleeme ja keskkonnaspetsiifilisi vigu
-- Rakendada jälgimist ja hoiatusi, et ennetavalt tuvastada võimalikke probleeme
-- Kasutada parimaid praktikaid logimise, silumise ja probleemide lahendamise töövoogude jaoks
+- Lahendada autentimise, tellimuste ja õigustega seotud probleeme iseseisvalt
+- Tõhusalt tõrkeotsingut teha juurutamise ja infrastruktuuri loomise vigade korral
+- Siluda rakenduse seadistamise ja keskkonnaspetsiifilisi probleeme
+- Rakendada monitooringut ja häireid, et ennetada võimalikke probleeme
+- Kasutada parimaid tavasid logimise, silumise ja probleemide lahendamise töövoogude jaoks
 
 ## Kiirdiagnostika
 
-Enne konkreetsete probleemide lahendamist käivita need käsud diagnostilise teabe kogumiseks:
+Enne konkreetsete probleemide juurde asumist käivita need käsud, et koguda diagnostilist teavet:
 
 ```bash
-# Check azd version and health
+# Kontrolli azd versiooni ja tervist
 azd version
 azd config list
 
-# Verify Azure authentication
+# Kinnita Azure autentimine
 az account show
 az account list
 
-# Check current environment
+# Kontrolli praegust keskkonda
 azd env show
 azd env get-values
 
-# Enable debug logging
+# Luba silumise logimine
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
 ## Autentimise probleemid
 
-### Probleem: "Ei õnnestunud hankida juurdepääsuluba"
+### Probleem: "Ei õnnestunud saada juurdepääsuluba"
 **Sümptomid:**
 - `azd up` ebaõnnestub autentimisvigadega
-- Käskude tulemuseks on "volitamata" või "juurdepääs keelatud"
+- Käsud tagastavad "volitamata" või "juurdepääs keelatud"
 
 **Lahendused:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Autendi uuesti Azure CLI-ga
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. Tühjenda vahemällu salvestatud mandaadid
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. Kasuta seadme koodi voogu (peata süsteemide jaoks)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. Määra konkreetne tellimus
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
 ### Probleem: "Ebapiisavad õigused" juurutamise ajal
 **Sümptomid:**
-- Juurutamine ebaõnnestub õiguste vigadega
+- Juurutamine ebaõnnestub õiguste vigade tõttu
 - Ei saa luua teatud Azure'i ressursse
 
 **Lahendused:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. Kontrollige oma Azure'i rollide määramisi
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. Veenduge, et teil on vajalikud rollid
+# - Kaastööline (ressursside loomiseks)
+# - Kasutaja juurdepääsu administraator (rollide määramiseks)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. Võtke ühendust oma Azure'i administraatoriga, et saada sobivad õigused
 ```
 
 ### Probleem: Multi-tenant autentimise probleemid
 **Lahendused:**
 ```bash
-# 1. Login with specific tenant
+# 1. Logi sisse konkreetse rentnikuga
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. Määra rentnik konfiguratsioonis
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. Tühjenda rentniku vahemälu, kui rentnikke vahetatakse
 az account clear
 ```
 
 ## 🏗️ Infrastruktuuri loomise vead
 
-### Probleem: Ressursi nime konfliktid
+### Probleem: Ressursi nimede konfliktid
 **Sümptomid:**
-- "Ressursi nimi juba eksisteerib" vead
+- "Ressursi nimi on juba olemas" vead
 - Juurutamine ebaõnnestub ressursside loomise ajal
 
 **Lahendused:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# 1. Kasuta unikaalseid ressursinimesid koos tokenitega
+# Oma Bicep mallis:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# 2. Muuda keskkonna nime
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# 3. Puhasta olemasolevad ressursid
 azd down --force --purge
 ```
 
 ### Probleem: Asukoht/piirkond pole saadaval
 **Sümptomid:**
-- "Asukoht 'xyz' pole ressursitüübi jaoks saadaval"
+- "Asukoht 'xyz' pole saadaval ressursitüübi jaoks"
 - Teatud SKU-d pole valitud piirkonnas saadaval
 
 **Lahendused:**
 ```bash
-# 1. Check available locations for resource types
+# 1. Kontrolli ressurssitüüpide jaoks saadaolevaid asukohti
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. Kasuta tavaliselt saadaolevaid piirkondi
 azd config set defaults.location eastus2
-# or
+# või
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Kontrolli teenuse saadavust piirkonna järgi
+# Külastage: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Probleem: Kvoot ületatud
+### Probleem: Kvoodi ületamise vead
 **Sümptomid:**
-- "Ressursitüübi kvoot ületatud"
+- "Kvoot ületatud ressursitüübi jaoks"
 - "Ressursside maksimaalne arv saavutatud"
 
 **Lahendused:**
 ```bash
-# 1. Check current quota usage
+# 1. Kontrolli praegust kvoodi kasutust
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. Taotle kvoodi suurendamist Azure portaalis
+# Mine: Tellimused > Kasutus + kvoodid
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. Kasuta arenduseks väiksemaid SKU-sid
+# Failis main.parameters.json:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. Puhasta kasutamata ressursid
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Probleem: Bicep mallide vead
+### Probleem: Bicep-mallide vead
 **Sümptomid:**
-- Malli valideerimise ebaõnnestumised
-- Süntaksivead Bicep failides
+- Malli valideerimise vead
+- Sünaksivead Bicep-failides
 
 **Lahendused:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. Kontrolli Bicep süntaksit
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. Kasuta Bicep linterit
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. Kontrolli parameetrifaili süntaksit
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. Vaata üle juurutamise muudatused
 azd provision --preview
 ```
 
@@ -211,24 +211,24 @@ azd provision --preview
 
 **Lahendused:**
 ```bash
-# 1. Check build logs
+# 1. Kontrolli ehituse logisid
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. Testi ehitust lokaalselt
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# 3. Kontrolli Node.js/Pythoni versiooni ühilduvust
+node --version  # Peaks vastama azure.yaml seadetele
 python --version
 
-# 4. Clear build cache
+# 4. Tühjenda ehituse vahemälu
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# 5. Kontrolli Dockerfile'i, kui kasutad konteinereid
 docker build -t test-image .
 docker run --rm test-image
 ```
@@ -240,17 +240,17 @@ docker run --rm test-image
 
 **Lahendused:**
 ```bash
-# 1. Test Docker build locally
+# 1. Testi Dockeri ehitust kohapeal
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. Kontrolli konteineri logisid
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. Kinnita konteineri registri juurdepääs
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. Kontrolli konteineri rakenduse konfiguratsiooni
 az containerapp show --name my-app --resource-group my-rg
 ```
 
@@ -261,40 +261,40 @@ az containerapp show --name my-app --resource-group my-rg
 
 **Lahendused:**
 ```bash
-# 1. Check database firewall rules
+# 1. Kontrolli andmebaasi tulemüüri reegleid
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. Testi ühenduvust rakendusest
+# Lisa oma rakendusse ajutiselt:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. Kinnita ühenduse stringi formaat
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. Kontrolli andmebaasi serveri olekut
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 Konfiguratsiooniprobleemid
+## 🔧 Seadistamise probleemid
 
 ### Probleem: Keskkonnamuutujad ei tööta
 **Sümptomid:**
-- Rakendus ei saa konfiguratsiooniväärtusi lugeda
+- Rakendus ei loe konfiguratsiooniväärtusi
 - Keskkonnamuutujad tunduvad tühjad
 
 **Lahendused:**
 ```bash
-# 1. Verify environment variables are set
+# 1. Kontrolli, et keskkonnamuutujad on seadistatud
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. Kontrolli muutuja nimesid failis azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. Taaskäivita rakendus
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. Kontrolli rakenduse teenuse konfiguratsiooni
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -305,34 +305,34 @@ az webapp config appsettings list --name myapp --resource-group myrg
 
 **Lahendused:**
 ```bash
-# 1. Check SSL certificate status
+# 1. Kontrolli SSL-sertifikaadi olekut
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. Luba ainult HTTPS
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. Lisa kohandatud domeen (kui vaja)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Probleem: CORS konfiguratsiooni probleemid
+### Probleem: CORS-i konfiguratsiooni probleemid
 **Sümptomid:**
 - Frontend ei saa API-d kutsuda
-- Ristpäringu taotlus blokeeritud
+- Ristpäritolu päring blokeeritud
 
 **Lahendused:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. Konfigureeri CORS App Service jaoks
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. Uuenda API, et käsitleda CORS-i
+# Express.js-is:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. Kontrolli, kas töötab õigete URL-ide peal
 azd show
 ```
 
@@ -341,20 +341,20 @@ azd show
 ### Probleem: Keskkonna vahetamise probleemid
 **Sümptomid:**
 - Kasutatakse valet keskkonda
-- Konfiguratsioon ei vahetu korralikult
+- Konfiguratsioon ei vahetu õigesti
 
 **Lahendused:**
 ```bash
-# 1. List all environments
+# 1. Loetle kõik keskkonnad
 azd env list
 
-# 2. Explicitly select environment
+# 2. Vali keskkond selgesõnaliselt
 azd env select production
 
-# 3. Verify current environment
+# 3. Kontrolli praegust keskkonda
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. Loo uus keskkond, kui see on rikutud
 azd env new production-new
 azd env select production-new
 ```
@@ -366,128 +366,128 @@ azd env select production-new
 
 **Lahendused:**
 ```bash
-# 1. Refresh environment state
+# 1. Värskenda keskkonna olekut
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. Lähtesta keskkonna konfiguratsioon
 azd env new production-reset
-# Copy over required environment variables
+# Kopeeri vajalikud keskkonnamuutujad
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. Impordi olemasolevad ressursid (kui võimalik)
+# Uuenda käsitsi .azure/production/config.json ressursi ID-dega
 ```
 
 ## 🔍 Jõudlusprobleemid
 
-### Probleem: Aeglased juurutamisajad
+### Probleem: Aeglased juurutusajad
 **Sümptomid:**
-- Juurutamine võtab liiga kaua aega
+- Juurutused võtavad liiga kaua aega
 - Ajalõpud juurutamise ajal
 
 **Lahendused:**
 ```bash
-# 1. Enable parallel deployment
+# 1. Luba paralleelne juurutamine
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. Kasuta järk-järgulist juurutamist
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. Optimeeri ehitusprotsessi
+# Failis package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. Kontrolli ressursside asukohti (kasuta sama piirkonda)
 azd config set defaults.location eastus2
 ```
 
 ### Probleem: Rakenduse jõudlusprobleemid
 **Sümptomid:**
-- Aeglased vastuseajad
+- Aeglased vastusajad
 - Kõrge ressursikasutus
 
 **Lahendused:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# 1. Suurenda ressursside mahtu
+# Uuenda SKU failis main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# 2. Luba Application Insights monitooring
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# 3. Kontrolli rakenduse logisid kitsaskohtade leidmiseks
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# 4. Rakenda vahemälu
+# Lisa Redis vahemälu oma infrastruktuuri
 ```
 
 ## 🛠️ Tõrkeotsingu tööriistad ja käsud
 
-### Silumise käsud
+### Silumiskäsud
 ```bash
-# Comprehensive debugging
+# Põhjalik silumine
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# Kontrolli süsteemi infot
 azd info
 
-# Validate configuration
+# Kinnita konfiguratsioon
 azd config validate
 
-# Test connectivity
+# Testi ühenduvust
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Logide analüüs
 ```bash
-# Application logs
+# Rakenduse logid
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# Azure'i ressursi logid
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# Konteineri logid (konteinerrakenduste jaoks)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### Ressursside uurimine
 ```bash
-# List all resources
+# Loetle kõik ressursid
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# Kontrolli ressursi olekut
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# Võrgu diagnostika
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Täiendava abi saamine
+## 🆘 Lisainfo saamine
 
 ### Millal eskaleerida
-- Autentimise probleemid püsivad pärast kõigi lahenduste proovimist
-- Infrastruktuuri probleemid Azure'i teenustega
+- Autentimisprobleemid püsivad pärast kõigi lahenduste proovimist
+- Infrastruktuuriprobleemid Azure'i teenustega
 - Arveldus- või tellimusega seotud probleemid
 - Turvalisuse probleemid või intsidendid
 
 ### Tugikanalid
 ```bash
-# 1. Check Azure Service Health
+# 1. Kontrolli Azure'i teenuse tervist
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# 2. Loo Azure'i tugipilet
+# Mine: https://portal.azure.com -> Abi + tugi
 
-# 3. Community resources
-# - Stack Overflow: azure-developer-cli tag
-# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# 3. Kogukonna ressursid
+# - Stack Overflow: azure-developer-cli silt
+# - GitHubi probleemid: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
@@ -496,14 +496,14 @@ Enne toe poole pöördumist kogu:
 - `azd version` väljund
 - `azd info` väljund
 - Veateated (täistekst)
-- Sammud probleemi taastamiseks
+- Sammud probleemi taastootmiseks
 - Keskkonna üksikasjad (`azd env show`)
-- Ajajoon, millal probleem algas
+- Ajakava, millal probleem algas
 
 ### Logide kogumise skript
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# kogu-veaotsingu-info.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -526,34 +526,34 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Probleemide ennetamine
 
-### Kontrollnimekiri enne juurutamist
+### Eeljuurutamise kontrollnimekiri
 ```bash
-# 1. Validate authentication
+# 1. Kinnita autentimine
 az account show
 
-# 2. Check quotas and limits
+# 2. Kontrolli kvoote ja piiranguid
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# 3. Kinnita mallid
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# 4. Testi esmalt kohapeal
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# 5. Kasuta kuivkäivituse juurutusi
 azd provision --preview
 ```
 
-### Jälgimise seadistamine
+### Monitooringu seadistamine
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# Luba Application Insights
+# Lisa main.bicep faili:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# Seadista teavitused
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -563,34 +563,36 @@ az monitor metrics alert create \
 
 ### Regulaarne hooldus
 ```bash
-# Weekly health checks
+# Iganädalased tervisekontrollid
 ./scripts/health-check.sh
 
-# Monthly cost review
+# Igakuine kulude ülevaade
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# Kvartaalne turvalisuse ülevaade
 az security assessment list --resource-group myrg
 ```
 
 ## Seotud ressursid
 
-- [Silumise juhend](debugging.md) - Täiustatud silumistehnikad
+- [Silumisjuhend](debugging.md) - Täiustatud silumistehnikad
 - [Ressursside loomine](../deployment/provisioning.md) - Infrastruktuuri tõrkeotsing
 - [Mahutavuse planeerimine](../pre-deployment/capacity-planning.md) - Ressursside planeerimise juhend
-- [SKU valik](../pre-deployment/sku-selection.md) - Teenuse taseme soovitused
+- [SKU valik](../pre-deployment/sku-selection.md) - Teenuse tasemete soovitused
 
 ---
 
-**Nõuanne**: Hoia see juhend järjehoidjates ja kasuta seda alati, kui probleemid tekivad. Enamik probleeme on varem esinenud ja neil on olemas lahendused!
+**Nõuanne**: Hoia see juhend järjehoidjates ja kasuta seda alati, kui tekib probleeme. Enamik probleeme on varem esinenud ja neil on olemas lahendused!
 
 ---
 
 **Navigeerimine**
 - **Eelmine õppetund**: [Ressursside loomine](../deployment/provisioning.md)
-- **Järgmine õppetund**: [Silumise juhend](debugging.md)
+- **Järgmine õppetund**: [Silumisjuhend](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Lahtiütlus**:  
-See dokument on tõlgitud, kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algkeeles tuleks lugeda autoriteetseks allikaks. Olulise teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algkeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

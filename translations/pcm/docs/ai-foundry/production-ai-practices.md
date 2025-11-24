@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-11-18T19:21:35+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-24T13:46:34+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "pcm"
 }
@@ -18,23 +18,23 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Overview
 
-Dis guide go show beta ways wey you fit take deploy AI workloads wey ready for production wit Azure Developer CLI (AZD). E base on wetin we learn from Azure AI Foundry Discord community and wetin customers don use for real life. E go help solve di common wahala wey dey happen for production AI systems.
+Dis guide go show beta ways wey you fit take deploy AI workloads wey ready for production wit Azure Developer CLI (AZD). E base on wetin Microsoft Foundry Discord community talk and wetin we don see for real-life customer deployments. Dis practices go help solve di common wahala wey dey happen for production AI systems.
 
-## Key Challenges Wey Dem Solve
+## Key Challenges Wey Dem Address
 
-Based on di poll wey we do for di community, na dis challenges developers dey face pass:
+Based on di poll wey we do for our community, na dis challenges developers dey face pass:
 
 - **45%** dey struggle wit multi-service AI deployments
 - **38%** dey get wahala wit credential and secret management  
 - **35%** dey find am hard to make production ready and scale
-- **32%** dey need beta way to manage cost
+- **32%** dey need beta cost optimization strategies
 - **29%** dey need beta monitoring and troubleshooting
 
 ## Architecture Patterns for Production AI
 
 ### Pattern 1: Microservices AI Architecture
 
-**When to use am**: When you dey build complex AI apps wey get plenty features
+**When to use am**: When you dey build complex AI apps wey get plenty capabilities
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -78,7 +78,7 @@ services:
 
 ### Pattern 2: Event-Driven AI Processing
 
-**When to use am**: For batch processing, document analysis, and async workflows
+**When to use am**: For batch processing, document analysis, async workflows
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -130,10 +130,10 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. Zero-Trust Security Model
 
 **How to implement am**:
-- No service go dey talk to another one without authentication
+- No service go dey talk to another service without authentication
 - All API calls go use managed identities
 - Network go dey isolated wit private endpoints
-- Access go dey limited to only wetin person need
+- Least privilege access controls go dey
 
 ```bicep
 // Managed Identity for each service
@@ -329,7 +329,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Load Balancing and Traffic Management
 
-**Application Gateway with WAF**:
+**Application Gateway wit WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Environment-Specific Configurations**:
 
 ```bash
-# Development environment
+# Place wey dem dey build di software
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Place wey di software go dey work for real
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI Cost Management**:
 
 ```typescript
-// Application-level token optimization
+// Token optimization for app level
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Cut context, no be user input
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Rough guess: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
   }
 }
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Check say all di service wey we need dey run
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Make sure say OpenAI model deployment dey correct
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Test AI service connection
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -841,49 +841,49 @@ echo "Infrastructure validation completed successfully!"
 
 ### Security ✅
 - [ ] All services dey use managed identities
-- [ ] Secrets dey inside Key Vault
-- [ ] Private endpoints don dey configured
-- [ ] Network security groups don dey
-- [ ] RBAC dey set to least privilege
-- [ ] WAF dey enabled for public endpoints
+- [ ] Secrets dey store for Key Vault
+- [ ] Private endpoints don configure
+- [ ] Network security groups don implement
+- [ ] RBAC dey use least privilege
+- [ ] WAF don enable for public endpoints
 
 ### Performance ✅
-- [ ] Auto-scaling don dey configured
-- [ ] Caching don dey implemented
-- [ ] Load balancing don dey setup
+- [ ] Auto-scaling don configure
+- [ ] Caching don implement
+- [ ] Load balancing don setup
 - [ ] CDN dey for static content
 - [ ] Database connection pooling dey
-- [ ] Token usage don dey optimized
+- [ ] Token usage don optimize
 
 ### Monitoring ✅
-- [ ] Application Insights don dey configured
-- [ ] Custom metrics don dey defined
-- [ ] Alerting rules don dey setup
-- [ ] Dashboard don dey created
-- [ ] Health checks don dey implemented
+- [ ] Application Insights don configure
+- [ ] Custom metrics don define
+- [ ] Alerting rules don setup
+- [ ] Dashboard don create
+- [ ] Health checks don implement
 - [ ] Log retention policies dey
 
 ### Reliability ✅
 - [ ] Multi-region deployment don dey
 - [ ] Backup and recovery plan dey
-- [ ] Circuit breakers don dey implemented
-- [ ] Retry policies don dey configured
+- [ ] Circuit breakers don implement
+- [ ] Retry policies don configure
 - [ ] Graceful degradation dey
 - [ ] Health check endpoints dey
 
 ### Cost Management ✅
-- [ ] Budget alerts don dey configured
-- [ ] Resource don dey right-sized
-- [ ] Dev/test discounts don dey applied
-- [ ] Reserved instances don dey purchased
+- [ ] Budget alerts don configure
+- [ ] Resource right-sizing dey
+- [ ] Dev/test discounts don apply
+- [ ] Reserved instances don purchase
 - [ ] Cost monitoring dashboard dey
-- [ ] Regular cost reviews dey happen
+- [ ] Regular cost reviews dey
 
 ### Compliance ✅
-- [ ] Data residency requirements don dey met
-- [ ] Audit logging don dey enabled
-- [ ] Compliance policies don dey applied
-- [ ] Security baselines don dey implemented
+- [ ] Data residency requirements don meet
+- [ ] Audit logging don enable
+- [ ] Compliance policies don apply
+- [ ] Security baselines don implement
 - [ ] Regular security assessments dey
 - [ ] Incident response plan dey
 
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Load Testing
 
 ```bash
-# Load testing script for AI applications
+# Script wey go test how AI application go work when load dey
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,19 +913,19 @@ python scripts/load_test.py \
 
 ## 🤝 Community Best Practices
 
-Based on wetin Azure AI Foundry Discord community talk:
+Based on wetin Microsoft Foundry Discord community talk:
 
 ### Top Recommendations from di Community:
 
 1. **Start Small, Scale Gradually**: Start wit small SKUs and scale up as you dey use am
-2. **Monitor Everything**: Make sure say you set monitoring from day one
+2. **Monitor Everything**: Make sure say you set up monitoring from day one
 3. **Automate Security**: Use infrastructure as code to make security dey consistent
 4. **Test Thoroughly**: Add AI-specific testing for your pipeline
 5. **Plan for Costs**: Monitor token usage and set budget alerts early
 
 ### Common Pitfalls to Avoid:
 
-- ❌ To put API keys for code
+- ❌ Hardcoding API keys for code
 - ❌ No setup proper monitoring
 - ❌ Forget cost optimization
 - ❌ No test failure scenarios
@@ -934,7 +934,7 @@ Based on wetin Azure AI Foundry Discord community talk:
 ## Additional Resources
 
 - **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
 
@@ -947,11 +947,11 @@ Based on wetin Azure AI Foundry Discord community talk:
 - **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎆 Course Complete**: [AZD For Beginners](../../README.md)
 
-**Remember**: To run AI workloads for production, you need to plan well, monitor well, and dey optimize steady. Start wit dis patterns and adjust am to fit your own needs.
+**Remember**: To run AI workloads for production, you need to plan well, monitor well, and dey optimize steady. Start wit dis patterns and adjust dem to fit your own needs.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don use AI transleto service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am accurate, abeg sabi say machine translation fit get mistake or no dey correct well. Di original dokyument wey dey for im native language na di main source wey you go fit trust. For important information, e better make professional human translator check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Dis dokyument don use AI transleshion service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transleshion. Even as we dey try make am accurate, abeg make you sabi say transleshion wey machine do fit get mistake or no correct well. Di original dokyument for im native language na di main source wey you go fit trust. For important informashon, e good make you use professional human transleshion. We no go fit take blame for any misunderstanding or wrong meaning wey fit happen because you use dis transleshion.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

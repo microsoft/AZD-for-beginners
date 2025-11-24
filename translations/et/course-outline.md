@@ -1,340 +1,353 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "aace36eff845763a5b041a4ed9a33e02",
-  "translation_date": "2025-10-11T15:36:36+00:00",
+  "original_hash": "2a0861541126250c3558d667e9b13c50",
+  "translation_date": "2025-11-24T12:39:19+00:00",
   "source_file": "course-outline.md",
   "language_code": "et"
 }
 -->
-# AZD algajatele: kursuse ülevaade ja õppe raamistik
+# AZD Algajatele: Kursuse Ülevaade ja Õppimisraamistik
 
-## Kursuse ülevaade
+## Kursuse Ülevaade
 
-Õpi tundma Azure Developer CLI-d (azd) läbi struktureeritud peatükkide, mis on loodud järkjärguliseks õppimiseks. **Eriline rõhk AI rakenduste juurutamisel koos Azure AI Foundry integreerimisega.**
+Õpi Azure Developer CLI (azd) kasutamist läbi struktureeritud peatükkide, mis on loodud järkjärguliseks õppimiseks. **Eriline rõhk on AI-rakenduste juurutamisel koos Microsoft Foundry integratsiooniga.**
 
 ### Miks see kursus on kaasaegsetele arendajatele oluline
 
-Azure AI Foundry Discordi kogukonna ülevaadete põhjal **45% arendajatest soovib kasutada AZD-d AI töökoormuste jaoks**, kuid nad seisavad silmitsi väljakutsetega, nagu:
-- Keerukad mitme teenusega AI arhitektuurid
+Microsoft Foundry Discordi kogukonna andmetel soovib **45% arendajatest kasutada AZD-d AI töökoormuste jaoks**, kuid nad seisavad silmitsi järgmiste väljakutsetega:
+- Keerulised mitme teenusega AI arhitektuurid
 - Parimad tavad AI juurutamiseks tootmises
-- Azure AI teenuste integreerimine ja konfigureerimine
+- Azure AI teenuste integreerimine ja seadistamine
 - AI töökoormuste kulude optimeerimine
-- AI-spetsiifiliste juurutusprobleemide lahendamine
+- AI-spetsiifiliste juurutusprobleemide tõrkeotsing
 
-### Põhilised õpieesmärgid
+### Põhilised Õpieesmärgid
 
 Selle struktureeritud kursuse läbimisega:
-- **Õpid AZD põhialuseid**: Põhikontseptsioonid, paigaldamine ja konfigureerimine
-- **Juurutad AI rakendusi**: Kasuta AZD-d koos Azure AI Foundry teenustega
-- **Rakenda infrastruktuuri kui koodi**: Halda Azure'i ressursse Bicep mallidega
-- **Lahenda juurutusprobleeme**: Lahenda levinud probleeme ja veaotsingut
-- **Optimeeri tootmiseks**: Turvalisus, skaleerimine, jälgimine ja kulude haldamine
-- **Loo mitme agendiga lahendusi**: Juuruta keerukaid AI arhitektuure
+- **Õpid AZD põhialuseid**: Põhimõisted, paigaldamine ja seadistamine
+- **Juurutad AI rakendusi**: Kasuta AZD-d koos Microsoft Foundry teenustega
+- **Rakendad infrastruktuuri koodina**: Halda Azure'i ressursse Bicep mallidega
+- **Lahendad juurutusprobleeme**: Tuvasta ja paranda levinud vigu
+- **Optimeerid tootmiseks**: Turvalisus, skaleerimine, monitooring ja kulude haldamine
+- **Ehita mitmeagendilisi lahendusi**: Juuruta keerulisi AI arhitektuure
 
-## 🎓 Töötuba ja õpikogemus
+## 🎓 Töötuba ja Õppimiskogemus
 
-### Paindlikud õppevormid
-Kursus on loodud toetama nii **iseseisvat õppimist** kui ka **juhendatud töötubasid**, võimaldades õppijatel saada praktilisi kogemusi AZD-ga ja arendada oskusi interaktiivsete harjutuste kaudu.
+### Paindlikud Õppimisvõimalused
+See kursus on loodud toetama nii **iseseisvat õppimist** kui ka **juhendatud töötubasid**, võimaldades õppijatel omandada praktilisi oskusi AZD kasutamisel interaktiivsete harjutuste kaudu.
 
-#### 🚀 Iseseisev õppevorm
-**Ideaalne individuaalsetele arendajatele ja pidevaks õppimiseks**
+#### 🚀 Iseseisev Õppimisrežiim
+**Ideaalne üksikarendajatele ja pidevaks õppimiseks**
 
 **Omadused:**
-- **Brauseripõhine liides**: MkDocs-põhine töötuba, mis on kättesaadav igas veebibrauseris
+- **Brauseripõhine liides**: MkDocs-põhine töötuba, mis on ligipääsetav igast veebibrauserist
 - **GitHub Codespaces integratsioon**: Ühe klõpsuga arenduskeskkond eelkonfigureeritud tööriistadega
-- **Interaktiivne DevContainer keskkond**: Kohalikku seadistust pole vaja - alusta kohe kodeerimist
+- **Interaktiivne DevContainer keskkond**: Kohalikku seadistust pole vaja - alusta kohe koodikirjutamist
 - **Edenemise jälgimine**: Sisseehitatud kontrollpunktid ja valideerimisharjutused
 - **Kogukonna tugi**: Juurdepääs Azure'i Discordi kanalitele küsimuste ja koostöö jaoks
 
-**Õppestruktuur:**
+**Õppimise Struktuur:**
 - **Paindlik ajakava**: Lõpeta peatükid omas tempos päevade või nädalate jooksul
-- **Kontrollpunktide süsteem**: Valideeri õpitut enne keerukamate teemade juurde liikumist
-- **Ressursikogu**: Põhjalik dokumentatsioon, näited ja veaotsingu juhendid
-- **Portfoolio arendamine**: Loo juurutatavaid projekte professionaalseks portfoolioks
+- **Kontrollpunktide süsteem**: Kinnita õpitut enne keerukamate teemade juurde liikumist
+- **Ressursikogu**: Põhjalik dokumentatsioon, näited ja tõrkeotsingu juhendid
+- **Portfoolio arendamine**: Loo juurutatavaid projekte oma professionaalse portfoolio jaoks
 
 **Alustamine (iseseisev):**
 ```bash
-# Option 1: GitHub Codespaces (Recommended)
-# Navigate to the repository and click "Code" → "Create codespace on main"
+# Valik 1: GitHub Codespaces (soovitatav)
+# Liigu repositooriumisse ja klõpsa "Code" → "Create codespace on main"
 
-# Option 2: Local Development
+# Valik 2: Kohalik arendus
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Follow setup instructions in workshop/README.md
+# Järgi seadistusjuhiseid workshop/README.md failis
 ```
 
-#### 🏛️ Juhendatud töötuba
+#### 🏛️ Juhendatud Töötuba
 **Ideaalne ettevõtete koolitusteks, kiirkursusteks ja haridusasutustele**
 
-**Töötoa formaadi valikud:**
+**Töötoa Formaadid:**
 
-**📚 Akadeemiline kursus (8-12 nädalat)**
+**📚 Akadeemiline Kursus (8-12 nädalat)**
 - **Ülikooliprogrammid**: Semestripikkune kursus iganädalaste 2-tunniste sessioonidega
-- **Kiirkursuse formaat**: Intensiivne 3-5 päevane programm igapäevaste 6-8 tunniste sessioonidega
-- **Ettevõtete koolitus**: Igakuine meeskonna sessioon praktilise projekti rakendamisega
+- **Kiirkursuse Formaat**: Intensiivne 3-5-päevane programm igapäevaste 6-8-tunniste sessioonidega
+- **Ettevõtete Koolitus**: Igakuised meeskonnasessioonid praktiliste projektide elluviimiseks
 - **Hindamisraamistik**: Hinnatud ülesanded, kaaslaste ülevaated ja lõppprojektid
 
-**🚀 Intensiivne töötuba (1-3 päeva)**
-- **1. päev**: Põhitõed + AI arendus (peatükid 1-2) - 6 tundi
-- **2. päev**: Konfiguratsioon + infrastruktuur (peatükid 3-4) - 6 tundi  
-- **3. päev**: Täiustatud mustrid + tootmine (peatükid 5-8) - 8 tundi
+**🚀 Intensiivne Töötuba (1-3 päeva)**
+- **1. päev**: Alused + AI arendus (peatükid 1-2) - 6 tundi
+- **2. päev**: Seadistamine + Infrastruktuur (peatükid 3-4) - 6 tundi  
+- **3. päev**: Täiustatud mustrid + Tootmine (peatükid 5-8) - 8 tundi
 - **Järeltegevus**: Valikuline 2-nädalane mentorlus projekti lõpetamiseks
 
-**⚡ Juhtkonna briifing (4-6 tundi)**
-- **Strateegiline ülevaade**: AZD väärtuspakkumine ja äriline mõju (1 tund)
-- **Praktiline demo**: AI rakenduse juurutamine algusest lõpuni (2 tundi)
-- **Arhitektuuri ülevaade**: Ettevõtte mustrid ja juhtimine (1 tund)
-- **Rakendamise plaanimine**: Organisatsiooni kasutuselevõtu strateegia (1-2 tundi)
+**⚡ Juhtide Lühikursus (4-6 tundi)**
+- **Strateegiline Ülevaade**: AZD väärtuspakkumine ja äriline mõju (1 tund)
+- **Praktiline Demo**: AI rakenduse juurutamine algusest lõpuni (2 tundi)
+- **Arhitektuuri Ülevaade**: Ettevõtte mustrid ja haldus (1 tund)
+- **Rakendamise Plaan**: Organisatsiooni kasutuselevõtu strateegia (1-2 tundi)
 
-#### 🛠️ Töötoa õpimeetodid
-**Avastamine → Juurutamine → Kohandamine oskuste praktiliseks arendamiseks**
+#### 🛠️ Töötoa Õppemetoodika
+**Avastamine → Juurutamine → Kohandamine lähenemine praktiliste oskuste arendamiseks**
 
-**1. faas: Avastamine (45 minutit)**
-- **Mallide uurimine**: Hindamine Azure AI Foundry mallide ja teenuste osas
-- **Arhitektuuri analüüs**: Mitme agendi mustrite ja juurutusstrateegiate mõistmine
-- **Nõuete hindamine**: Organisatsiooniliste vajaduste ja piirangute tuvastamine
-- **Keskkonna seadistamine**: Arenduskeskkonna ja Azure'i ressursside konfigureerimine
+**1. Faas: Avastamine (45 minutit)**
+- **Mallide Uurimine**: Hinda Azure AI Foundry malle ja teenuseid
+- **Arhitektuuri Analüüs**: Mõista mitmeagendilisi mustreid ja juurutusstrateegiaid
+- **Nõuete Hindamine**: Tuvasta organisatsiooni vajadused ja piirangud
+- **Keskkonna Seadistamine**: Konfigureeri arenduskeskkond ja Azure'i ressursid
 
-**2. faas: Juurutamine (2 tundi)**
-- **Juhendatud rakendamine**: Samm-sammuline AI rakenduste juurutamine AZD-ga
-- **Teenuste konfigureerimine**: Azure AI teenuste, lõpp-punktide ja autentimise seadistamine
-- **Turvalisuse rakendamine**: Ettevõtte turvalisuse mustrite ja juurdepääsukontrollide rakendamine
-- **Valideerimise testimine**: Juurutuste kontrollimine ja levinud probleemide lahendamine
+**2. Faas: Juurutamine (2 tundi)**
+- **Juhendatud Rakendamine**: Samm-sammuline AI rakenduste juurutamine AZD-ga
+- **Teenuste Seadistamine**: Konfigureeri Azure AI teenused, lõpp-punktid ja autentimine
+- **Turvalisuse Rakendamine**: Kasuta ettevõtte turvamustreid ja juurdepääsukontrolle
+- **Valideerimise Testimine**: Kinnita juurutused ja lahenda levinud probleemid
 
-**3. faas: Kohandamine (45 minutit)**
-- **Rakenduse muutmine**: Mallide kohandamine konkreetsete kasutusjuhtude ja nõuete jaoks
-- **Tootmise optimeerimine**: Jälgimise, kulude haldamise ja skaleerimise strateegiate rakendamine
-- **Täiustatud mustrid**: Mitme agendi koordineerimise ja keerukate arhitektuuride uurimine
-- **Järgmiste sammude planeerimine**: Õppimistee määratlemine oskuste arendamiseks
+**3. Faas: Kohandamine (45 minutit)**
+- **Rakenduse Kohandamine**: Kohanda malle konkreetsete kasutusjuhtude ja nõuete jaoks
+- **Tootmise Optimeerimine**: Rakenda monitooringu, kulude haldamise ja skaleerimise strateegiaid
+- **Täiustatud Mustrid**: Uuri mitmeagendilist koordineerimist ja keerulisi arhitektuure
+- **Järgmiste Sammude Plaan**: Määra õpitee edasiste oskuste arendamiseks
 
-#### 🎯 Töötoa õpitulemused
-**Käed-külge praktika kaudu arendatud mõõdetavad oskused**
+#### 🎯 Töötoa Õpitulemused
+**Mõõdetavad oskused, mis arendatakse praktilise harjutamise kaudu**
 
-**Tehnilised kompetentsid:**
-- **Juuruta AI rakendusi tootmises**: Juuruta ja konfigureeri edukalt AI-lahendusi
-- **Infrastruktuuri kui koodi valdamine**: Loo ja halda kohandatud Bicep malle
-- **Mitme agendi arhitektuur**: Rakenda koordineeritud AI agentide lahendusi
-- **Tootmisvalmidus**: Rakenda turvalisuse, jälgimise ja juhtimise mustreid
-- **Veaotsingu oskused**: Lahenda iseseisvalt juurutus- ja konfiguratsiooniprobleeme
+**Tehnilised Kompetentsid:**
+- **Tootmiskõlblike AI Rakenduste Juurutamine**: Edukas AI-lahenduste juurutamine ja seadistamine
+- **Infrastruktuuri Koodina Valdamine**: Kohandatud Bicep mallide loomine ja haldamine
+- **Mitmeagendiline Arhitektuur**: Koordineeritud AI agentide lahenduste rakendamine
+- **Tootmisvalmidus**: Turvalisuse, monitooringu ja haldusmustrite rakendamine
+- **Tõrkeotsingu Oskused**: Juurutamis- ja seadistusprobleemide iseseisev lahendamine
 
-**Professionaalsed oskused:**
-- **Projekti juhtimine**: Juhi tehnilisi meeskondi pilve juurutamise algatustes
-- **Arhitektuuri disain**: Kujunda skaleeritavaid ja kulutõhusaid Azure'i lahendusi
-- **Teadmiste edastamine**: Koolita ja juhenda kolleege AZD parimate tavade osas
-- **Strateegiline planeerimine**: Mõjuta organisatsiooni pilve kasutuselevõtu strateegiaid
+**Professionaalsed Oskused:**
+- **Projekti Juhtimine**: Juhi tehnilisi meeskondi pilve juurutamise algatustes
+- **Arhitektuuri Kujundamine**: Kujunda skaleeritavaid ja kulutõhusaid Azure'i lahendusi
+- **Teadmiste Edastamine**: Koolita ja juhenda kolleege AZD parimates tavades
+- **Strateegiline Planeerimine**: Mõjuta organisatsiooni pilve kasutuselevõtu strateegiaid
 
-#### 📋 Töötoa ressursid ja materjalid
+#### 📋 Töötoa Ressursid ja Materjalid
 **Põhjalik tööriistakomplekt juhendajatele ja õppijatele**
 
 **Juhendajatele:**
-- **Juhendaja juhend**: [Töötoa juhend](workshop/docs/instructor-guide.md) - Sessiooni planeerimise ja läbiviimise näpunäited
-- **Esitlusmaterjalid**: Slideshow'd, arhitektuuri diagrammid ja demo skriptid
-- **Hindamisvahendid**: Praktilised harjutused, teadmiste kontrollid ja hindamisjuhendid
-- **Tehniline seadistus**: Keskkonna konfigureerimine, veaotsingu juhendid ja varuplaanid
+- **Juhendaja Juhend**: [Töötoa Juhend](workshop/docs/instructor-guide.md) - Sessioonide planeerimise ja läbiviimise näpunäited
+- **Esitlusmaterjalid**: Slaidid, arhitektuuridiagrammid ja demo skriptid
+- **Hindamisvahendid**: Praktilised harjutused, teadmiste kontrollid ja hindamisrubriigid
+- **Tehniline Seadistus**: Keskkonna seadistamine, tõrkeotsingu juhendid ja varuplaanid
 
 **Õppijatele:**
-- **Interaktiivne töötoa keskkond**: [Töötoa materjalid](workshop/README.md) - Brauseripõhine õppeplatvorm
-- **Samm-sammult juhised**: [Juhendatud harjutused](../../workshop/docs/instructions) - Üksikasjalikud rakendamise juhendid  
-- **Viitedokumentatsioon**: [AI töötuba](docs/ai-foundry/ai-workshop-lab.md) - AI-le keskenduvad süvitsi minevad materjalid
-- **Kogukonna ressursid**: Azure Discordi kanalid, GitHubi arutelud ja ekspertide tugi
+- **Interaktiivne Töötoa Keskkond**: [Töötoa Materjalid](workshop/README.md) - Brauseripõhine õppeplatvorm
+- **Samm-sammult Juhised**: [Juhendatud Harjutused](../../workshop/docs/instructions) - Üksikasjalikud rakendamise juhendid  
+- **Viitedokumentatsioon**: [AI Töötoa Labor](docs/ai-foundry/ai-workshop-lab.md) - AI-keskne süvitsi minek
+- **Kogukonna Ressursid**: Azure'i Discordi kanalid, GitHubi arutelud ja ekspertide tugi
 
-#### 🏢 Ettevõtte töötoa rakendamine
+#### 🏢 Ettevõtte Töötoa Rakendamine
 **Organisatsiooni juurutamise ja koolituse strateegiad**
 
-**Ettevõtete koolitusprogrammid:**
-- **Arendajate sisseelamine**: Uute töötajate orientatsioon AZD põhialustega (2-4 nädalat)
-- **Meeskonna oskuste arendamine**: Kvartali töötubade korraldamine olemasolevatele arendajatele (1-2 päeva)
-- **Arhitektuuri ülevaade**: Igakuised sessioonid vaneminseneridele ja arhitektidele (4 tundi)
-- **Juhtkonna briifingud**: Tehniliste otsustajate töötoad (pool päeva)
+**Ettevõtete Koolitusprogrammid:**
+- **Arendajate Sisseelamine**: Uute töötajate orienteerumine AZD põhialustega (2-4 nädalat)
+- **Meeskonna Oskuste Tõstmine**: Kvartalipõhised töötoad olemasolevatele arendajatele (1-2 päeva)
+- **Arhitektuuri Ülevaade**: Igakuised sessioonid vaneminseneridele ja arhitektidele (4 tundi)
+- **Juhtide Koolitused**: Tehniliste otsustajate töötoad (pool päeva)
 
-**Rakendamise tugi:**
-- **Kohandatud töötoa disain**: Kohandatud sisu konkreetsete organisatsiooniliste vajaduste jaoks
-- **Pilootprogrammi haldamine**: Struktureeritud juurutus koos edumõõdikute ja tagasiside tsüklitega  
-- **Jätkuv mentorlus**: Töötoa järgne tugi projekti rakendamiseks
-- **Kogukonna loomine**: Sisemised Azure AI arendajate kogukonnad ja teadmiste jagamine
+**Rakendamise Tugi:**
+- **Kohandatud Töötoa Kujundus**: Kohandatud sisu konkreetsete organisatsiooniliste vajaduste jaoks
+- **Pilootprogrammi Juhtimine**: Struktureeritud juurutus koos edumõõdikute ja tagasiside tsüklitega  
+- **Jätkuv Mentorlus**: Töötoa järgnev tugi projektide elluviimiseks
+- **Kogukonna Loomine**: Sisemised Azure AI arendajate kogukonnad ja teadmiste jagamine
 
-**Edu mõõdikud:**
-- **Oskuste omandamine**: Eel/järgne hindamine tehnilise kompetentsi kasvu mõõtmiseks
-- **Juurutuse edu**: Osalejate protsent, kes edukalt juurutavad tootmisrakendusi
-- **Tootlikkuse aeg**: Vähendatud sisseelamisaeg uute Azure AI projektide jaoks
-- **Teadmiste säilitamine**: Järelhindamised 3-6 kuud pärast töötuba
+**Edu Mõõdikud:**
+- **Oskuste Omandamine**: Eel- ja järelhindamised tehnilise pädevuse kasvu mõõtmiseks
+- **Juurutamise Edu**: Osalejate protsent, kes edukalt juurutavad tootmislahendusi
+- **Tootlikkuse Aeg**: Vähenenud sisseelamisaeg uute Azure AI projektide jaoks
+- **Teadmiste Säilitamine**: Järelhindamised 3-6 kuud pärast töötuba
 
-## 8 peatüki õpistruktuur
+## 8-Peatükiline Õppimisstruktuur
 
-### Peatükk 1: Põhitõed ja kiire alustamine (30-45 minutit) 🌱
-**Eeltingimused**: Azure'i tellimus, põhilised käsurea teadmised  
+### Peatükk 1: Alused ja Kiirstart (30-45 minutit) 🌱
+**Eeltingimused**: Azure'i tellimus, põhiteadmised käsureast  
 **Keerukus**: ⭐
 
-#### Mida õpid
+#### Mida Õpid
 - Azure Developer CLI põhialuste mõistmine
 - AZD paigaldamine oma platvormile  
-- Esimene edukas juurutus
-- Põhikontseptsioonid ja terminoloogia
+- Esimese eduka juurutuse tegemine
+- Põhimõisted ja terminoloogia
 
 #### Õppematerjalid
-- [AZD põhialused](docs/getting-started/azd-basics.md) - Põhikontseptsioonid
-- [Paigaldamine ja seadistamine](docs/getting-started/installation.md) - Platvormipõhised juhendid
-- [Sinu esimene projekt](docs/getting-started/first-project.md) - Praktiline juhend
-- [Käskude spikker](resources/cheat-sheet.md) - Kiirviide
+- [AZD Alused](docs/getting-started/azd-basics.md) - Põhimõisted
+- [Paigaldus ja Seadistamine](docs/getting-started/installation.md) - Platvormispetsiifilised juhendid
+- [Sinu Esimene Projekt](docs/getting-started/first-project.md) - Praktiline juhend
+- [Käskude Spikker](resources/cheat-sheet.md) - Kiirviide
 
-#### Praktiline tulemus
-Edukas lihtsa veebirakenduse juurutamine Azure'i kasutades AZD-d
+#### Praktiline Tulemus
+Lihtsa veebirakenduse edukas juurutamine Azure'i kasutades AZD-d
 
 ---
 
-### Peatükk 2: AI-põhine arendus (1-2 tundi) 🤖
-**Eeltingimused**: Peatükk 1 läbitud  
+### Peatükk 2: AI-Keskne Arendus (1-2 tundi) 🤖
+**Eeltingimused**: Peatükk 1 lõpetatud  
 **Keerukus**: ⭐⭐
 
-#### Mida õpid
-- Azure AI Foundry integreerimine AZD-ga
-- AI-põhiste rakenduste juurutamine
-- AI teenuste konfiguratsioonide mõistmine
+#### Mida Õpid
+- Microsoft Foundry integratsioon AZD-ga
+- AI-toega rakenduste juurutamine
+- AI-teenuste seadistuste mõistmine
 - RAG (Retrieval-Augmented Generation) mustrid
 
 #### Õppematerjalid
-- [Azure AI Foundry integreerimine](docs/ai-foundry/azure-ai-foundry-integration.md)
-- [AI mudeli juurutamine](docs/ai-foundry/ai-model-deployment.md)
-- [AI töötuba](docs/ai-foundry/ai-workshop-lab.md) - **UUS**: Põhjalik 2-3 tunnine praktiline töötuba
-- [Interaktiivne töötoa juhend](workshop/README.md) - **UUS**: Brauseripõhine töötuba MkDocs eelvaatega
-- [Azure AI Foundry mallid](README.md#featured-azure-ai-foundry-templates)
-- [Töötoa juhised](../../workshop/docs/instructions) - **UUS**: Samm-sammult juhendatud harjutused
+- [Microsoft Foundry Integratsioon](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI Mudeli Juurutamine](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Töötoa Labor](docs/microsoft-foundry/ai-workshop-lab.md) - **UUS**: Põhjalik 2-3-tunnine praktiline labor
+- [Interaktiivne Töötoa Juhend](workshop/README.md) - **UUS**: Brauseripõhine töötuba MkDocs eelvaatega
+- [Microsoft Foundry Mallid](README.md#featured-microsoft-foundry-templates)
+- [Töötoa Juhised](../../workshop/docs/instructions) - **UUS**: Samm-sammult juhendatud harjutused
 
-#### Praktiline tulemus
-Juuruta ja konfigureeri AI-põhine vestlusrakendus RAG funktsionaalsusega
+#### Praktiline Tulemus
+AI-toega vestlusrakenduse juurutamine ja seadistamine RAG võimekusega
 
-#### Töötoa õpitee (valikuline täiendus)
-**UUS interaktiivne kogemus**: [Täielik töötoa juhend](workshop/README.md)
+#### Töötoa Õppimistee (Valikuline Täiendus)
+**UUS Interaktiivne Kogemus**: [Täielik Töötoa Juhend](workshop/README.md)
 1. **Avastamine** (30 min): Malli valik ja hindamine
-2. **Juurutamine** (45 min): Juuruta ja valideeri AI malli funktsionaalsus  
-3. **Lahkamine** (30 min): Mõista malli arhitektuuri ja komponente
-4. **Konfiguratsioon** (30 min): Kohanda seadeid ja parameetreid
-5. **Kohandamine** (45 min): Muuda ja iteratsiooni, et teha see enda omaks
-6. **Lõpetamine** (15 min): Ressursside puhastamine ja elutsükli mõistmine
-7. **Kokkuvõte** (15 min): Järgmised sammud ja täiustatud õpiteed
+2. **Juurutamine** (45 min): AI malli funktsionaalsuse juurutamine ja valideerimine  
+3. **Lammutamine** (30 min): Malli arhitektuuri ja komponentide mõistmine
+4. **Seadistamine** (30 min): Seadete ja parameetrite kohandamine
+5. **Kohandamine** (45 min): Muuda ja täiusta, et see vastaks sinu vajadustele
+6. **Eemaldamine** (15 min): Ressursside puhastamine ja elutsükli mõistmine
+7. **Kokkuvõte** (15 min): Järgmised sammud ja täiustatud õppimisteed
 
 ---
 
-### Peatükk 3: Konfiguratsioon ja autentimine (45-60 minutit) ⚙️
-**Eeltingimused**: Peatükk 1 läbitud  
+### Peatükk 3: Seadistamine ja Autentimine (45-60 minutit) ⚙️
+**Eeltingimused**: Peatükk 1 lõpetatud  
 **Keerukus**: ⭐⭐
 
-#### Mida õpid
-- Keskkonna konfiguratsioon ja haldamine
+#### Mida Õpid
+- Keskkonna seadistamine ja haldamine
 - Autentimise ja turvalisuse parimad tavad
 - Ressursside nimetamine ja organiseerimine
 - Mitme keskkonna juurutused
 
 #### Õppematerjalid
-- [Konfiguratsiooni juhend](docs/getting-started/configuration.md) - Keskkonna seadistamine
-- Turvalisuse mustrid ja hallatud identiteet
+- [Seadistamise Juhend](docs/getting-started/configuration.md) - Keskkonna seadistamine
+- [Autentimise ja Turvalisuse Mustrid](docs/getting-started/authsecurity.md) - Hallatud identiteet ja Key Vault integratsioon
 - Mitme keskkonna näited
 
-#### Praktiline tulemus
-Halda mitut keskkonda õige autentimise ja turvalisusega
+#### Praktiline Tulemus
+Mitme keskkonna haldamine koos korrektse autentimise ja turvalisusega
 
 ---
 
-### Peatükk 4: Infrastruktuur kui kood ja juurutamine (1-1.5 tundi) 🏗️
-**Eeltingimused**: Peatükid 1-3 läbitud  
+### Peatükk 4: Infrastruktuur Koodina ja Juurutamine (1-1.5 tundi) 🏗️
+**Eeltingimused**: Peatükid 1-3 lõpetatud  
 **Keerukus**: ⭐⭐⭐
 
-#### Mida õpid
+#### Mida Õpid
 - Täiustatud juurutusmustrid
-- Infrastruktuur kui kood Bicepiga
-- Ressursside hankimise strateegiad
+- Infrastruktuur koodina Bicepiga
+- Ressursside varustamise strateegiad
 - Kohandatud mallide loomine
 
-#### Õppematerjalid
-- [Juurutuse juhend](docs/deployment/deployment-guide.md) - Täielikud töövood
-- [Ressursside hankimine](docs/deployment/provisioning.md) - Ressursside haldamine
-- Konteinerite ja mikroteenuste näited
+- Konteineriseeritud rakenduste juurutamine Azure Container Apps ja AZD abil
 
-#### Praktiline tulemus
-Juuruta keerukaid mitme teenusega rakendusi, kasutades kohandatud infrastruktuuri malle
+#### Õppematerjalid
+- [Juurutamise Juhend](docs/deployment/deployment-guide.md) - Täielikud töövood
+- [Ressursside Varustamine](docs/deployment/provisioning.md) - Ressursside haldamine
+- Konteinerite ja mikroteenuste näited
+- [Konteinerirakenduste Näited](examples/container-app/README.md) - Kiirstart, tootmine ja täiustatud juurutusmustrid
+
+#### Praktiline Tulemus
+Keeruliste mitme teenusega rakenduste juurutamine kohandatud infrastruktuurimallide abil
 
 ---
 
-### Peatükk 5: Mitme agendiga AI lahendused (2-3 tundi) 🤖🤖
-**Eeltingimused**: Peatükid 1-2 läbitud  
+### Peatükk 5: Mitmeagendilised AI Lahendused (2-3 tundi) 🤖🤖
+**Eeltingimused**: Peatükid 1-2 lõpetatud  
 **Keerukus**: ⭐⭐⭐⭐
 
-#### Mida õpid
-- Mitme agendi arhitektuuri mustrid
+#### Mida Õpid
+- Mitmeagendilised arhitektuurimustrid
 - Agentide orkestreerimine ja koordineerimine
-- Tootmisvalmis AI juurutused
-- Kliendi ja inventari agentide rakendused
-
-#### Õppematerjalid
-- [Jaemüügi mitme agendi lahendus](examples/retail-scenario.md) - Täielik rakendus
-- [ARM malli pakett](../../examples/retail-multiagent-arm-template) - Ühe klõpsuga juurutus
-- Mitme agendi koordineerimise mustrid
-
-#### Praktiline tulemus
-Juuruta ja halda tootmisvalmis mitme agendi AI lahendust
+- Tootmiskõlblikud AI juurutused
+- Kliendi
+Valideeri ja optimeeri juurutused enne täideviimist
 
 ---
 
-### Peatükk 6
-- [AI-spetsiifiline tõrkeotsing](docs/troubleshooting/ai-troubleshooting.md) - AI-teenuse probleemid
+### 7. peatükk: Tõrkeotsing ja silumine (1-1,5 tundi) 🔧
+**Eeltingimused**: Mis tahes juurutuspeatükk lõpetatud  
+**Keerukus**: ⭐⭐
+
+#### Mida õpid
+- Süsteemsed silumismeetodid
+- Levinumad probleemid ja lahendused
+- AI-spetsiifiline tõrkeotsing
+- Jõudluse optimeerimine
+
+#### Õppematerjalid
+- [Levinumad probleemid](docs/troubleshooting/common-issues.md) - KKK ja lahendused
+- [Silumisjuhend](docs/troubleshooting/debugging.md) - Samm-sammuline juhend
+- [AI-spetsiifiline tõrkeotsing](docs/troubleshooting/ai-troubleshooting.md) - AI-teenuste probleemid
 
 #### Praktiline tulemus
-Iseseisev oskus diagnoosida ja lahendada levinud juurutusprobleeme
+Iseseisev võime diagnoosida ja lahendada levinud juurutusprobleeme
 
 ---
 
 ### 8. peatükk: Tootmine ja ettevõtte mustrid (2-3 tundi) 🏢
-**Eeltingimused**: Peatükid 1-4 läbitud  
+**Eeltingimused**: Peatükid 1-4 lõpetatud  
 **Keerukus**: ⭐⭐⭐⭐
 
 #### Mida õpid
-- Tootmise juurutamise strateegiad
+- Tootmisesse juurutamise strateegiad
 - Ettevõtte turvalisuse mustrid
 - Jälgimine ja kulude optimeerimine
-- Skaalautuvus ja juhtimine
+- Laiendatavus ja haldus
+
+- Parimad tavad tootmiskonteinerite rakenduste juurutamiseks (turvalisus, jälgimine, kulud, CI/CD)
 
 #### Õppematerjalid
-- [Tootmise AI parimad praktikad](docs/ai-foundry/production-ai-practices.md) - Ettevõtte mustrid
-- Mikroteenused ja ettevõtte näited
-- Jälgimise ja juhtimise raamistikud
+- [Tootmise AI parimad tavad](docs/microsoft-foundry/production-ai-practices.md) - Ettevõtte mustrid
+- Mikroteenuste ja ettevõtte näited
+- Jälgimise ja halduse raamistikud
+- [Mikroteenuste arhitektuuri näide](../../examples/container-app/microservices) - Blue-green/kanarijuurutus, hajutatud jälgimine ja kulude optimeerimine
 
 #### Praktiline tulemus
-Juurutada ettevõttevalmis rakendusi täis tootmisvõimekusega
+Juurutada ettevõttevalmis rakendusi täielike tootmisvõimalustega
 
 ---
 
-## Õppimise progressioon ja keerukus
+## Õppimise edenemine ja keerukus
 
-### Järkjärguline oskuste arendamine
+### Oskuste järkjärguline arendamine
 
 - **🌱 Algajad**: Alusta 1. peatükist (Alused) → 2. peatükk (AI arendus)
 - **🔧 Kesktase**: Peatükid 3-4 (Konfiguratsioon ja infrastruktuur) → 6. peatükk (Valideerimine)
 - **🚀 Edasijõudnud**: 5. peatükk (Multi-agent lahendused) → 7. peatükk (Tõrkeotsing)
-- **🏢 Ettevõtte tasand**: Läbi kõik peatükid, keskendu 8. peatükile (Tootmise mustrid)
+- **🏢 Ettevõtte tase**: Lõpeta kõik peatükid, keskendu 8. peatükile (Tootmise mustrid)
+
+- **Konteinerirakenduste tee**: Peatükid 4 (Konteineriseeritud juurutus), 5 (Mikroteenuste integreerimine), 8 (Tootmise parimad tavad)
 
 ### Keerukuse näitajad
 
-- **⭐ Põhiline**: Üksikud kontseptsioonid, juhendatud õpetused, 30-60 minutit
-- **⭐⭐ Kesktase**: Mitu kontseptsiooni, praktiline harjutamine, 1-2 tundi  
+- **⭐ Põhitase**: Üksikud kontseptsioonid, juhendatud õpetused, 30-60 minutit
+- **⭐⭐ Kesktase**: Mitu kontseptsiooni, praktiline harjutus, 1-2 tundi  
 - **⭐⭐⭐ Edasijõudnud**: Keerukad arhitektuurid, kohandatud lahendused, 1-3 tundi
 - **⭐⭐⭐⭐ Ekspert**: Tootmissüsteemid, ettevõtte mustrid, 2-4 tundi
 
 ### Paindlikud õpiteed
 
-#### 🎯 Kiirtee AI arendajatele (4-6 tundi)
+#### 🎯 AI arendaja kiirtee (4-6 tundi)
 1. **1. peatükk**: Alused ja kiire algus (45 minutit)
 2. **2. peatükk**: AI-põhine arendus (2 tundi)  
 3. **5. peatükk**: Multi-agent AI lahendused (3 tundi)
-4. **8. peatükk**: Tootmise AI parimad praktikad (1 tund)
+4. **8. peatükk**: Tootmise AI parimad tavad (1 tund)
 
 #### 🛠️ Infrastruktuuri spetsialisti tee (5-7 tundi)
 1. **1. peatükk**: Alused ja kiire algus (45 minutit)
 2. **3. peatükk**: Konfiguratsioon ja autentimine (1 tund)
-3. **4. peatükk**: Infrastruktuur kui kood ja juurutamine (1,5 tundi)
+3. **4. peatükk**: Infrastruktuur koodina ja juurutus (1,5 tundi)
 4. **6. peatükk**: Eeljuurutuse valideerimine ja planeerimine (1 tund)
 5. **7. peatükk**: Tõrkeotsing ja silumine (1,5 tundi)
-6. **8. peatükk**: Tootmise ja ettevõtte mustrid (2 tundi)
+6. **8. peatükk**: Tootmine ja ettevõtte mustrid (2 tundi)
 
 #### 🎓 Täielik õpiteekond (8-12 tundi)
 Kõigi 8 peatüki järjestikune läbimine koos praktilise harjutamise ja valideerimisega
@@ -343,180 +356,182 @@ Kõigi 8 peatüki järjestikune läbimine koos praktilise harjutamise ja validee
 
 ### Teadmiste valideerimine
 - **Peatüki kontrollpunktid**: Praktilised harjutused mõõdetavate tulemustega
-- **Praktiline kontroll**: Töötavate lahenduste juurutamine iga peatüki jaoks
-- **Progressi jälgimine**: Visuaalsed indikaatorid ja lõpetamise märgid
-- **Kogukonna valideerimine**: Kogemuste jagamine Azure Discord kanalites
+- **Käed-külge kinnitamine**: Töötavate lahenduste juurutamine iga peatüki jaoks
+- **Edenemise jälgimine**: Visuaalsed näitajad ja lõpetamise märgid
+- **Kogukonna valideerimine**: Kogemuste jagamine Azure Discordi kanalites
 
 ### Õpitulemuste hindamine
 
 #### Peatükkide 1-2 lõpetamine (Alused + AI)
-- ✅ Juurutada lihtne veebirakendus AZD abil
-- ✅ Juurutada AI-põhine vestlusrakendus RAG-ga
-- ✅ Mõista AZD põhikontseptsioone ja AI integratsiooni
+- ✅ Lihtsa veebirakenduse juurutamine AZD abil
+- ✅ AI-toega vestlusrakenduse juurutamine RAG-iga
+- ✅ AZD põhikontseptsioonide ja AI integratsiooni mõistmine
 
 #### Peatükkide 3-4 lõpetamine (Konfiguratsioon + infrastruktuur)  
-- ✅ Hallata mitme keskkonna juurutusi
-- ✅ Luua kohandatud Bicep infrastruktuuri mallid
-- ✅ Rakendada turvalisi autentimismustreid
+- ✅ Mitme keskkonna juurutuste haldamine
+- ✅ Kohandatud Bicep infrastruktuuri mallide loomine
+- ✅ Turvaliste autentimismustrite rakendamine
 
 #### Peatükkide 5-6 lõpetamine (Multi-agent + valideerimine)
-- ✅ Juurutada keerukas multi-agent AI lahendus
-- ✅ Teostada mahutavuse planeerimist ja kulude optimeerimist
-- ✅ Rakendada automatiseeritud eeljuurutuse valideerimist
+- ✅ Keeruka multi-agent AI lahenduse juurutamine
+- ✅ Mahu planeerimine ja kulude optimeerimine
+- ✅ Automatiseeritud eeljuurutuse valideerimise rakendamine
 
 #### Peatükkide 7-8 lõpetamine (Tõrkeotsing + tootmine)
-- ✅ Siluda ja lahendada juurutusprobleeme iseseisvalt  
-- ✅ Rakendada ettevõtte tasemel jälgimist ja turvalisust
-- ✅ Juurutada tootmisvalmis rakendusi koos juhtimisega
+- ✅ Tõrkeotsing ja juurutusprobleemide iseseisev lahendamine  
+- ✅ Ettevõtte tasemel jälgimise ja turvalisuse rakendamine
+- ✅ Tootmisvalmis rakenduste juurutamine koos haldusega
 
 ### Sertifitseerimine ja tunnustus
 - **Kursuse lõpetamise märk**: Kõigi 8 peatüki praktilise valideerimisega lõpetamine
-- **Kogukonna tunnustus**: Aktiivne osalemine Azure AI Foundry Discordis
-- **Professionaalne areng**: Tööstusele vastavad AZD ja AI juurutamise oskused
-- **Karjäärivõimalused**: Ettevõtte tasemel pilvejuurutuse oskused
+- **Kogukonna tunnustus**: Aktiivne osalemine Microsoft Foundry Discordis
+- **Professionaalne areng**: Tööstusele vastavad AZD ja AI juurutusoskused
+- **Karjääri edendamine**: Ettevõttevalmis pilvejuurutusvõimalused
 
 ## 🎓 Põhjalikud õpitulemused
 
 ### Algtase (Peatükid 1-2)
-Pärast algtaseme peatükkide läbimist oskavad õppijad:
+Pärast algtaseme peatükkide läbimist näitavad õppijad:
 
 **Tehnilised oskused:**
-- Juurutada lihtsaid veebirakendusi Azure'i AZD käskude abil
-- Konfigureerida ja juurutada AI-põhiseid vestlusrakendusi RAG funktsioonidega
-- Mõista AZD põhikontseptsioone: mallid, keskkonnad, ettevalmistusprotsessid
-- Integreerida Azure AI Foundry teenuseid AZD juurutustega
-- Navigeerida Azure AI teenuste konfiguratsioonides ja API lõpp-punktides
+- Lihtsate veebirakenduste juurutamine Azure'i AZD käskude abil
+- AI-toega vestlusrakenduste konfigureerimine ja juurutamine RAG-iga
+- AZD põhikontseptsioonide mõistmine: mallid, keskkonnad, ettevalmistusvood
+- Microsoft Foundry teenuste integreerimine AZD juurutustega
+- Azure AI teenuste konfiguratsioonide ja API lõpp-punktide navigeerimine
 
 **Professionaalsed oskused:**
-- Järgida struktureeritud juurutusprotsesse järjepidevate tulemuste saavutamiseks
-- Lahendada põhilisi juurutusprobleeme logide ja dokumentatsiooni abil
-- Suhelda tõhusalt pilvejuurutuse protsesside teemal
-- Rakendada parimaid praktikaid turvalise AI-teenuse integreerimiseks
+- Struktureeritud juurutusvoogude järgimine järjepidevate tulemuste saavutamiseks
+- Põhiliste juurutusprobleemide tõrkeotsing logide ja dokumentatsiooni abil
+- Pilvejuurutusprotsesside tõhus selgitamine
+- Parimate tavade rakendamine turvaliseks AI-teenuste integreerimiseks
 
 **Õppimise valideerimine:**
-- ✅ Edukalt juurutada `todo-nodejs-mongo` mall
-- ✅ Juurutada ja konfigureerida `azure-search-openai-demo` RAG-ga
-- ✅ Lõpetada interaktiivsed töötoa harjutused (Avastamise faas)
-- ✅ Osaleda Azure Discord kogukonna aruteludes
+- ✅ Edukas `todo-nodejs-mongo` malli juurutamine
+- ✅ `azure-search-openai-demo` juurutamine ja konfigureerimine RAG-iga
+- ✅ Interaktiivsete töötubade harjutuste lõpetamine (Avastusfaas)
+- ✅ Osalemine Azure Discordi kogukonna aruteludes
 
 ### Kesktase (Peatükid 3-4)
-Pärast kesktaseme peatükkide läbimist oskavad õppijad:
+Pärast kesktaseme peatükkide läbimist näitavad õppijad:
 
 **Tehnilised oskused:**
-- Hallata mitme keskkonna juurutusi (arendus, testimine, tootmine)
-- Luua kohandatud Bicep malle infrastruktuuri kui koodi jaoks
-- Rakendada turvalisi autentimismustreid hallatud identiteediga
-- Juurutada keerukaid mitme teenuse rakendusi kohandatud konfiguratsioonidega
-- Optimeerida ressursside ettevalmistamise strateegiaid kulude ja jõudluse jaoks
+- Mitme keskkonna juurutuste haldamine (arendus, testimine, tootmine)
+- Kohandatud Bicep mallide loomine infrastruktuuri koodina
+- Turvaliste autentimismustrite rakendamine hallatud identiteediga
+- Keerukate mitme teenuse rakenduste juurutamine kohandatud konfiguratsioonidega
+- Ressursside ettevalmistusstrateegiate optimeerimine kulude ja jõudluse jaoks
 
 **Professionaalsed oskused:**
-- Kavandada skaleeritavaid infrastruktuuri arhitektuure
-- Rakendada turvalisuse parimaid praktikaid pilvejuurutustes
-- Dokumenteerida infrastruktuuri mustreid meeskonnatööks
-- Hinnata ja valida sobivaid Azure'i teenuseid vastavalt nõuetele
+- Laiendatavate infrastruktuuriarhitektuuride kujundamine
+- Pilvejuurutuste turvalisuse parimate tavade rakendamine
+- Infrastruktuurimustrite dokumenteerimine meeskonnatööks
+- Sobivate Azure'i teenuste hindamine ja valimine nõuete alusel
 
 **Õppimise valideerimine:**
-- ✅ Konfigureerida eraldi keskkonnad keskkonnaspetsiifiliste seadistustega
-- ✅ Luua ja juurutada kohandatud Bicep mall mitme teenuse rakenduse jaoks
-- ✅ Rakendada hallatud identiteedi autentimist turvaliseks juurdepääsuks
-- ✅ Lõpetada konfiguratsioonihalduse harjutused reaalses olukorras
+- ✅ Eraldi keskkondade konfigureerimine keskkonnaspetsiifiliste seadistustega
+- ✅ Kohandatud Bicep malli loomine ja juurutamine mitme teenuse rakenduse jaoks
+- ✅ Hallatud identiteedi autentimise rakendamine turvaliseks juurdepääsuks
+- ✅ Konfiguratsioonihalduse harjutuste lõpetamine reaalsete stsenaariumidega
 
 ### Edasijõudnud tase (Peatükid 5-6)
-Pärast edasijõudnud peatükkide läbimist oskavad õppijad:
+Pärast edasijõudnud peatükkide läbimist näitavad õppijad:
 
 **Tehnilised oskused:**
-- Juurutada ja orkestreerida multi-agent AI lahendusi koordineeritud töövoogudega
-- Rakendada kliendi ja inventari agentide arhitektuure jaemüügi stsenaariumide jaoks
-- Teostada põhjalikku mahutavuse planeerimist ja ressursside valideerimist
-- Teostada automatiseeritud eeljuurutuse valideerimist ja optimeerimist
-- Kavandada kulutõhusaid SKU valikuid töökoormuse nõuete alusel
+- Multi-agent AI lahenduste juurutamine ja orkestreerimine koordineeritud töövoogudega
+- Kliendi- ja inventuuragentide arhitektuuride rakendamine jaekaubanduse stsenaariumide jaoks
+- Põhjalik mahu planeerimine ja ressursside valideerimine
+- Automatiseeritud eeljuurutuse valideerimise ja optimeerimise täideviimine
+- Kulutõhusate SKU valikute kujundamine töökoormuse nõuete alusel
 
 **Professionaalsed oskused:**
-- Arhitektuuri keerukate AI lahenduste jaoks tootmiskeskkonnas
-- Juhtida tehnilisi arutelusid AI juurutusstrateegiate üle
-- Juhendada nooremaid arendajaid AZD ja AI juurutamise parimates praktikates
-- Hinnata ja soovitada AI arhitektuurimustreid ärivajaduste jaoks
+- Keerukate AI lahenduste arhitektuur tootmiskeskkondade jaoks
+- Tehniliste arutelude juhtimine AI juurutusstrateegiate üle
+- Nooremate arendajate juhendamine AZD ja AI juurutuse parimates tavades
+- AI arhitektuurimustrite hindamine ja soovitamine ärinõuete jaoks
 
 **Õppimise valideerimine:**
-- ✅ Juurutada täielik jaemüügi multi-agent lahendus ARM mallidega
-- ✅ Näidata agentide koordineerimist ja töövoogude orkestreerimist
-- ✅ Lõpetada mahutavuse planeerimise harjutused reaalse ressursside piirangutega
-- ✅ Valideerida juurutuse valmisolekut automatiseeritud kontrollide kaudu
+- ✅ Täieliku jaekaubanduse multi-agent lahenduse juurutamine ARM mallidega
+- ✅ Agentide koordineerimise ja töövoogude orkestreerimise demonstreerimine
+- ✅ Mahu planeerimise harjutuste lõpetamine reaalsete ressursipiirangutega
+- ✅ Juurutuse valmisoleku valideerimine automatiseeritud eelkontrollide kaudu
 
-### Ekspert tase (Peatükid 7-8)
-Pärast eksperttaseme peatükkide läbimist oskavad õppijad:
+### Ekspertide tase (Peatükid 7-8)
+Pärast ekspertide peatükkide läbimist näitavad õppijad:
 
 **Tehnilised oskused:**
-- Diagnoosida ja lahendada keerukaid juurutusprobleeme iseseisvalt
-- Rakendada ettevõtte tasemel turvalisuse mustreid ja juhtimisraamistikke
-- Kavandada põhjalikke jälgimis- ja hoiatustrateegiaid
-- Optimeerida tootmise juurutusi skaleeritavuse, kulude ja jõudluse jaoks
-- Luua CI/CD torustikke koos korrektse testimise ja valideerimisega
+- Keerukate juurutusprobleemide iseseisev diagnoosimine ja lahendamine
+- Ettevõtte tasemel turvalisuse mustrite ja haldusraamistike rakendamine
+- Põhjalike jälgimis- ja häirestrateegiate kujundamine
+- Tootmisjuurutuste optimeerimine ulatuse, kulude ja jõudluse jaoks
+- CI/CD torujuhtmete loomine koos testimise ja valideerimisega
 
 **Professionaalsed oskused:**
-- Juhtida ettevõtte pilve transformatsiooni algatusi
-- Kavandada ja rakendada organisatsioonilisi juurutusstandardeid
-- Koolitada ja juhendada arendustiime edasijõudnud AZD praktikates
-- Mõjutada tehnilisi otsuseid ettevõtte AI juurutuste jaoks
+- Ettevõtte pilvetransformatsiooni algatuste juhtimine
+- Organisatsiooniliste juurutusstandardite kujundamine ja rakendamine
+- Arendustiimide koolitamine edasijõudnud AZD praktikates
+- Tehniliste otsuste mõjutamine ettevõtte AI juurutuste jaoks
 
 **Õppimise valideerimine:**
-- ✅ Lahendada keerukaid mitme teenuse juurutuse tõrkeid
-- ✅ Rakendada ettevõtte turvalisuse mustreid vastavusnõuetega
-- ✅ Kavandada ja juurutada tootmise jälgimist Application Insights abil
-- ✅ Lõpetada ettevõtte juhtimisraamistiku rakendamine
+- ✅ Keerukate mitme teenuse juurutusvigade lahendamine
+- ✅ Ettevõtte turvalisuse mustrite rakendamine vastavusnõuetega
+- ✅ Tootmise jälgimise kujundamine ja juurutamine Application Insightsiga
+- ✅ Ettevõtte haldusraamistiku rakendamise lõpetamine
 
 ## 🎯 Kursuse lõpetamise sertifikaat
 
-### Progressi jälgimise raamistik
-Jälgi oma õppeprogressi struktureeritud kontrollpunktide kaudu:
+### Edenemise jälgimise raamistik
+Jälgi oma õppeprotsessi struktureeritud kontrollpunktide kaudu:
 
 - [ ] **1. peatükk**: Alused ja kiire algus ✅
 - [ ] **2. peatükk**: AI-põhine arendus ✅  
 - [ ] **3. peatükk**: Konfiguratsioon ja autentimine ✅
-- [ ] **4. peatükk**: Infrastruktuur kui kood ja juurutamine ✅
+- [ ] **4. peatükk**: Infrastruktuur koodina ja juurutus ✅
 - [ ] **5. peatükk**: Multi-agent AI lahendused ✅
 - [ ] **6. peatükk**: Eeljuurutuse valideerimine ja planeerimine ✅
 - [ ] **7. peatükk**: Tõrkeotsing ja silumine ✅
-- [ ] **8. peatükk**: Tootmise ja ettevõtte mustrid ✅
+- [ ] **8. peatükk**: Tootmine ja ettevõtte mustrid ✅
 
-### Verifitseerimise protsess
-Pärast iga peatüki lõpetamist kinnita oma teadmised läbi:
+### Verifitseerimisprotsess
+Pärast iga peatüki lõpetamist kinnita oma teadmised järgmiselt:
 
-1. **Praktiliste harjutuste lõpetamine**: Juuruta töötavad lahendused iga peatüki jaoks
-2. **Teadmiste hindamine**: Vaata KKK sektsioone ja täida enesehindamised
-3. **Kogukonna kaasamine**: Jaga kogemusi ja saa tagasisidet Azure Discordis
-4. **Portfoolio arendamine**: Dokumenteeri oma juurutused ja õppetunnid
-5. **Kaaskolleegide ülevaade**: Tee koostööd teiste õppijatega keerukates stsenaariumides
+1. **Praktiliste harjutuste lõpetamine**: Töötavate lahenduste juurutamine iga peatüki jaoks
+2. **Teadmiste hindamine**: KKK ja enesehindamiste läbivaatamine
+3. **Kogukonna kaasamine**: Kogemuste jagamine ja tagasiside saamine Azure Discordis
+4. **Portfoolio arendamine**: Oma juurutuste ja õppetundide dokumenteerimine
+5. **Kaastöötajate ülevaade**: Koostöö teiste õppijatega keerukate stsenaariumide lahendamisel
 
 ### Kursuse lõpetamise eelised
-Pärast kõigi peatükkide lõpetamist ja valideerimist saavad lõpetajad:
+Kõigi peatükkide valideerimisega lõpetajad omandavad:
 
 **Tehniline ekspertiis:**
-- **Tootmise kogemus**: Juurutatud reaalsed AI rakendused Azure'i keskkondades
-- **Professionaalsed oskused**: Ettevõttevalmis juurutamise ja tõrkeotsingu oskused  
-- **Arhitektuuri teadmised**: Multi-agent AI lahendused ja keerukad infrastruktuuri mustrid
-- **Tõrkeotsingu meisterlikkus**: Iseseisev juurutuse ja konfiguratsiooni probleemide lahendamine
+- **Tootmiskogemus**: Reaalsete AI rakenduste juurutamine Azure'i keskkondadesse
+- **Professionaalsed oskused**: Ettevõttevalmis juurutus- ja tõrkeotsinguvõimalused  
+- **Arhitektuuri teadmised**: Multi-agent AI lahendused ja keerukad infrastruktuurimustrid
+- **Tõrkeotsingu meisterlikkus**: Juurutuse ja konfiguratsiooniprobleemide iseseisev lahendamine
 
 **Professionaalne areng:**
-- **Tööstuse tunnustus**: Kontrollitavad oskused kõrge nõudlusega AZD ja AI juurutamise valdkondades
-- **Karjäärivõimalused**: Kvalifikatsioonid pilvearhitekti ja AI juurutamise spetsialisti rollide jaoks
+- **Tööstuse tunnustus**: Tõendatavad oskused kõrge nõudlusega AZD ja AI juurutusvaldkondades
+- **Karjääri edendamine**: Kvalifikatsioonid pilvearhitekti ja AI juurutusspetsialisti rollide jaoks
 - **Kogukonna juhtimine**: Aktiivne liikmelisus Azure'i arendajate ja AI kogukondades
-- **Pidev õppimine**: Alus edasijõudnud Azure AI Foundry spetsialiseerumiseks
+- **Pidev õppimine**: Alus edasijõudnud Microsoft Foundry spetsialiseerumiseks
 
 **Portfoolio varad:**
-- **Juurutatud lahendused**: Töötavad näited AI rakendustest ja infrastruktuuri mustritest
+- **Juurutatud lahendused**: Töötavad näited AI rakendustest ja infrastruktuurimustritest
 - **Dokumentatsioon**: Põhjalikud juurutusjuhendid ja tõrkeotsingu protseduurid  
 - **Kogukonna panused**: Arutelud, näited ja täiustused jagatud Azure'i kogukonnaga
-- **Professionaalne võrgustik**: Kontaktid Azure'i ekspertide ja AI juurutamise praktikutega
+- **Professionaalne võrgustik**: Kontaktid Azure'i ekspertide ja AI juurutuspraktikutega
 
 ### Kursusejärgne õpitee
 Lõpetajad on valmis edasijõudnud spetsialiseerumiseks:
-- **Azure AI Foundry ekspert**: Sügav spetsialiseerumine AI mudelite juurutamisele ja orkestreerimisele
-- **Pilvearhitektuuri juhtimine**: Ettevõtte tasemel juurutuse disain ja juhtimine
-- **Arendajate kogukonna juhtimine**: Panustamine Azure'i näidiste ja kogukonna ressurssidesse
-- **Ettevõtte koolitus**: AZD ja AI juurutamise oskuste õpetamine organisatsioonides
+- **Microsoft Foundry ekspert**: Sügav spetsialiseerumine AI mudelite juurutamisele ja orkestreerimisele
+- **Pilvearhitektuuri juhtimine**: Ettevõtte ulatusega juurutuskujundus ja haldus
+- **Arendajate kogukonna juhtimine**: Azure'i näidete ja kogukonna ressursside panustamine
+- **Ettevõttesisene koolitus**: AZD ja AI juurutusoskuste õpetamine organisatsioonides
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

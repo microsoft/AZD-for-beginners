@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "616504abc1770bcde7a50c7f4ba008ac",
-  "translation_date": "2025-11-18T18:59:25+00:00",
+  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
+  "translation_date": "2025-11-24T13:28:02+00:00",
   "source_file": "examples/retail-scenario.md",
   "language_code": "pcm"
 }
@@ -16,18 +16,130 @@ CO_OP_TRANSLATOR_METADATA:
 - **➡️ Next Chapter**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM Templates**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
+> **⚠️ ARCHITECTURE GUIDE - NOT WORKING IMPLEMENTATION**  
+> Dis document na **complete architecture blueprint** wey go help you build multi-agent system.  
+> **Wetin dey available:** ARM template to deploy infrastructure (Azure OpenAI, AI Search, Container Apps, etc.)  
+> **Wetin you go build:** Agent code, routing logic, frontend UI, data pipelines (e go take like 80-120 hours)  
+>  
+> **How you fit use am:**
+> - ✅ Architecture reference for your own multi-agent project
+> - ✅ Learning guide for multi-agent design patterns
+> - ✅ Infrastructure template to deploy Azure resources
+> - ❌ E no be ready-to-run application (e need plenty development)
+
 ## Overview
 
-Dis kain scenario go show how you fit build multi-agent customer support chatbot wey dey ready for production for retailer wey need beta AI features like inventory management, document processing, and smart customer interaction.
+**Learning Objective:** Make you sabi di architecture, design decisions, and how to implement multi-agent customer support chatbot for retailer wey get advanced AI features like inventory management, document processing, and smart customer interactions.
+
+**Time to Complete:** Reading + Understanding (2-3 hours) | Building Complete Implementation (80-120 hours)
+
+**Wetin You Go Learn:**
+- Multi-agent architecture patterns and design principles
+- Multi-region Azure OpenAI deployment strategies
+- AI Search integration with RAG (Retrieval-Augmented Generation)
+- Agent evaluation and security testing frameworks
+- Production deployment considerations and cost optimization
 
 ## Architecture Goals
 
-Customer support solution go need:
-- **Plenty agents wey sabi different tins** for customer needs
-- **Multi-model deployment** wey get beta capacity planning
-- **Dynamic data integration** wey dey use AI Search and file uploads
-- **Beta monitoring** and evaluation setup
-- **Strong security** wey dey use red teaming validation
+**Educational Focus:** Dis architecture dey show enterprise patterns for multi-agent systems.
+
+### System Requirements (For Your Implementation)
+
+To build production customer support solution, you go need:
+- **Plenty specialized agents** wey go handle different customer needs (Customer Service + Inventory Management)
+- **Multi-model deployment** wey get proper capacity planning (GPT-4o, GPT-4o-mini, embeddings across regions)
+- **Dynamic data integration** wey go use AI Search and file uploads (vector search + document processing)
+- **Comprehensive monitoring** and evaluation tools (Application Insights + custom metrics)
+- **Production-grade security** wey go include red teaming validation (vulnerability scanning + agent evaluation)
+
+### Wetin Dis Guide Go Provide
+
+✅ **Architecture Patterns** - Proven design for scalable multi-agent systems  
+✅ **Infrastructure Templates** - ARM templates wey go deploy all Azure services  
+✅ **Code Examples** - Reference implementations for key components  
+✅ **Configuration Guidance** - Step-by-step setup instructions  
+✅ **Best Practices** - Security, monitoring, cost optimization strategies  
+
+❌ **No Include** - Complete working application (e need development effort)
+
+## 🗺️ Implementation Roadmap
+
+### Phase 1: Study Architecture (2-3 hours) - START HERE
+
+**Goal:** Make you sabi di system design and how di components dey interact
+
+- [ ] Read dis document finish
+- [ ] Check di architecture diagram and how di components relate
+- [ ] Understand multi-agent patterns and di design decisions
+- [ ] Study code examples for agent tools and routing
+- [ ] Check cost estimates and capacity planning guidance
+
+**Outcome:** You go sabi wetin you need to build
+
+### Phase 2: Deploy Infrastructure (30-45 minutes)
+
+**Goal:** Use ARM template to provision Azure resources
+
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup -m standard
+```
+
+**Wetin Go Deploy:**
+- ✅ Azure OpenAI (3 regions: GPT-4o, GPT-4o-mini, embeddings)
+- ✅ AI Search service (empty, e need index configuration)
+- ✅ Container Apps environment (placeholder images)
+- ✅ Storage accounts, Cosmos DB, Key Vault
+- ✅ Application Insights monitoring
+
+**Wetin Dey Miss:**
+- ❌ Agent implementation code
+- ❌ Routing logic
+- ❌ Frontend UI
+- ❌ Search index schema
+- ❌ Data pipelines
+
+### Phase 3: Build Application (80-120 hours)
+
+**Goal:** Build di multi-agent system based on dis architecture
+
+1. **Agent Implementation** (30-40 hours)
+   - Base agent class and interfaces
+   - Customer service agent wey go use GPT-4o
+   - Inventory agent wey go use GPT-4o-mini
+   - Tool integrations (AI Search, Bing, file processing)
+
+2. **Routing Service** (12-16 hours)
+   - Request classification logic
+   - Agent selection and orchestration
+   - FastAPI/Express backend
+
+3. **Frontend Development** (20-30 hours)
+   - Chat interface UI
+   - File upload functionality
+   - Response rendering
+
+4. **Data Pipeline** (8-12 hours)
+   - AI Search index creation
+   - Document processing with Document Intelligence
+   - Embedding generation and indexing
+
+5. **Monitoring & Evaluation** (10-15 hours)
+   - Custom telemetry implementation
+   - Agent evaluation framework
+   - Red team security scanner
+
+### Phase 4: Deploy & Test (8-12 hours)
+
+- Build Docker images for all services
+- Push am go Azure Container Registry
+- Update Container Apps with real images
+- Configure environment variables and secrets
+- Run evaluation test suite
+- Perform security scanning
+
+**Total Estimated Effort:** 80-120 hours for experienced developers
 
 ## Solution Architecture
 
@@ -94,7 +206,6 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-
 ### Component Overview
 
 | Component | Purpose | Technology | Region |
@@ -111,96 +222,101 @@ graph TB
 
 ## 📁 Project Structure
 
+> **📍 Status Legend:**  
+> ✅ = Dey for repository  
+> 📝 = Reference implementation (code example dey dis document)  
+> 🔨 = You go need create am
+
 ```
-retail-multiagent-solution/
-├── .azure/                              # Azure environment configs
-│   ├── config.json                      # Global config
+retail-multiagent-solution/              🔨 Your project directory
+├── .azure/                              🔨 Azure environment configs
+│   ├── config.json                      🔨 Global config
 │   └── env/
-│       ├── .env.development             # Dev environment
-│       ├── .env.staging                 # Staging environment
-│       └── .env.production              # Production environment
+│       ├── .env.development             🔨 Dev environment
+│       ├── .env.staging                 🔨 Staging environment
+│       └── .env.production              🔨 Production environment
 │
-├── azure.yaml                          # AZD main configuration
-├── azure.parameters.json               # Deployment parameters
-├── README.md                           # Solution documentation
+├── azure.yaml                          🔨 AZD main configuration
+├── azure.parameters.json               🔨 Deployment parameters
+├── README.md                           🔨 Solution documentation
 │
-├── infra/                              # Infrastructure as Code
-│   ├── main.bicep                      # Main Bicep template
-│   ├── main.parameters.json            # Parameters file
-│   ├── modules/                        # Bicep modules
-│   │   ├── ai-services.bicep           # Azure OpenAI deployments
-│   │   ├── search.bicep                # AI Search configuration
-│   │   ├── storage.bicep               # Storage accounts
-│   │   ├── container-apps.bicep        # Container Apps environment
-│   │   ├── monitoring.bicep            # Application Insights
-│   │   ├── security.bicep              # Key Vault and RBAC
-│   │   └── networking.bicep            # Virtual networks and DNS
-│   ├── arm-template/                   # ARM template version
-│   │   ├── azuredeploy.json            # ARM main template
-│   │   └── azuredeploy.parameters.json # ARM parameters
-│   └── scripts/                        # Deployment scripts
-│       ├── deploy.sh                   # Main deployment script
-│       ├── setup-data.sh               # Data setup script
-│       └── configure-rbac.sh           # RBAC configuration
+├── infra/                              🔨 Infrastructure as Code (you create)
+│   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
+│   ├── main.parameters.json            🔨 Parameters file
+│   ├── modules/                        📝 Bicep modules (reference examples below)
+│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── search.bicep                📝 AI Search configuration
+│   │   ├── storage.bicep               📝 Storage accounts
+│   │   ├── container-apps.bicep        📝 Container Apps environment
+│   │   ├── monitoring.bicep            📝 Application Insights
+│   │   ├── security.bicep              📝 Key Vault and RBAC
+│   │   └── networking.bicep            📝 Virtual networks and DNS
+│   ├── arm-template/                   ✅ ARM template version (EXISTS)
+│   │   ├── azuredeploy.json            ✅ ARM main template (retail-multiagent-arm-template/)
+│   │   └── azuredeploy.parameters.json ✅ ARM parameters
+│   └── scripts/                        ✅/🔨 Deployment scripts
+│       ├── deploy.sh                   ✅ Main deployment script (EXISTS)
+│       ├── setup-data.sh               🔨 Data setup script (you create)
+│       └── configure-rbac.sh           🔨 RBAC configuration (you create)
 │
-├── src/                                # Application source code
-│   ├── agents/                         # Agent implementations
-│   │   ├── base/                       # Base agent classes
-│   │   │   ├── agent.py                # Abstract agent class
-│   │   │   └── tools.py                # Tool interfaces
-│   │   ├── customer/                   # Customer service agent
-│   │   │   ├── agent.py                # Customer agent implementation
-│   │   │   ├── prompts.py              # System prompts
-│   │   │   └── tools/                  # Agent-specific tools
-│   │   │       ├── search_tool.py      # AI Search integration
-│   │   │       ├── bing_tool.py        # Bing Search integration
-│   │   │       └── file_tool.py        # File processing tool
-│   │   └── inventory/                  # Inventory management agent
-│   │       ├── agent.py                # Inventory agent implementation
-│   │       ├── prompts.py              # System prompts
-│   │       └── tools/                  # Agent-specific tools
-│   │           ├── inventory_search.py # Inventory search tool
-│   │           └── database_tool.py    # Database query tool
+├── src/                                🔨 Application source code (YOU BUILD THIS)
+│   ├── agents/                         📝 Agent implementations (examples below)
+│   │   ├── base/                       🔨 Base agent classes
+│   │   │   ├── agent.py                🔨 Abstract agent class
+│   │   │   └── tools.py                🔨 Tool interfaces
+│   │   ├── customer/                   🔨 Customer service agent
+│   │   │   ├── agent.py                📝 Customer agent implementation (see below)
+│   │   │   ├── prompts.py              🔨 System prompts
+│   │   │   └── tools/                  🔨 Agent-specific tools
+│   │   │       ├── search_tool.py      📝 AI Search integration (example below)
+│   │   │       ├── bing_tool.py        📝 Bing Search integration (example below)
+│   │   │       └── file_tool.py        🔨 File processing tool
+│   │   └── inventory/                  🔨 Inventory management agent
+│   │       ├── agent.py                🔨 Inventory agent implementation
+│   │       ├── prompts.py              🔨 System prompts
+│   │       └── tools/                  🔨 Agent-specific tools
+│   │           ├── inventory_search.py 🔨 Inventory search tool
+│   │           └── database_tool.py    🔨 Database query tool
 │   │
-│   ├── router/                         # Agent routing service
-│   │   ├── main.py                     # FastAPI router application
-│   │   ├── routing_logic.py            # Request routing logic
-│   │   └── middleware.py               # Authentication & logging
+│   ├── router/                         🔨 Agent routing service (you build)
+│   │   ├── main.py                     🔨 FastAPI router application
+│   │   ├── routing_logic.py            🔨 Request routing logic
+│   │   └── middleware.py               🔨 Authentication & logging
 │   │
-│   ├── frontend/                       # Web user interface
-│   │   ├── Dockerfile                  # Container configuration
-│   │   ├── package.json                # Node.js dependencies
-│   │   ├── src/                        # React/Vue source code
-│   │   │   ├── components/             # UI components
-│   │   │   ├── pages/                  # Application pages
-│   │   │   ├── services/               # API services
-│   │   │   └── styles/                 # CSS and themes
-│   │   └── public/                     # Static assets
+│   ├── frontend/                       🔨 Web user interface (you build)
+│   │   ├── Dockerfile                  🔨 Container configuration
+│   │   ├── package.json                🔨 Node.js dependencies
+│   │   ├── src/                        🔨 React/Vue source code
+│   │   │   ├── components/             🔨 UI components
+│   │   │   ├── pages/                  🔨 Application pages
+│   │   │   ├── services/               🔨 API services
+│   │   │   └── styles/                 🔨 CSS and themes
+│   │   └── public/                     🔨 Static assets
 │   │
-│   ├── shared/                         # Shared utilities
-│   │   ├── config.py                   # Configuration management
-│   │   ├── telemetry.py                # Telemetry utilities
-│   │   ├── security.py                 # Security utilities
-│   │   └── models.py                   # Data models
+│   ├── shared/                         🔨 Shared utilities (you build)
+│   │   ├── config.py                   🔨 Configuration management
+│   │   ├── telemetry.py                📝 Telemetry utilities (example below)
+│   │   ├── security.py                 🔨 Security utilities
+│   │   └── models.py                   🔨 Data models
 │   │
-│   └── evaluation/                     # Evaluation and testing
-│       ├── evaluator.py                # Agent evaluator
-│       ├── red_team_scanner.py         # Security scanner
-│       ├── test_cases.json             # Evaluation test cases
-│       └── reports/                    # Generated reports
+│   └── evaluation/                     🔨 Evaluation and testing (you build)
+│       ├── evaluator.py                📝 Agent evaluator (example below)
+│       ├── red_team_scanner.py         📝 Security scanner (example below)
+│       ├── test_cases.json             📝 Evaluation test cases (example below)
+│       └── reports/                    🔨 Generated reports
 │
-├── data/                               # Data and configuration
-│   ├── search-schema.json              # AI Search index schema
-│   ├── initial-docs/                   # Initial document corpus
-│   │   ├── product-manuals/            # Product documentation
-│   │   ├── policies/                   # Company policies
-│   │   └── faqs/                       # Frequently asked questions
-│   ├── fine-tuning/                    # Fine-tuning datasets
-│   │   ├── training.jsonl              # Training data
-│   │   └── validation.jsonl            # Validation data
-│   └── evaluation/                     # Evaluation datasets
-│       ├── test-conversations.json     # Test conversation data
-│       └── ground-truth.json           # Expected responses
+├── data/                               🔨 Data and configuration (you create)
+│   ├── search-schema.json              📝 AI Search index schema (example below)
+│   ├── initial-docs/                   🔨 Initial document corpus
+│   │   ├── product-manuals/            🔨 Product documentation (your data)
+│   │   ├── policies/                   🔨 Company policies (your data)
+│   │   └── faqs/                       🔨 Frequently asked questions (your data)
+│   ├── fine-tuning/                    🔨 Fine-tuning datasets (optional)
+│   │   ├── training.jsonl              🔨 Training data
+│   │   └── validation.jsonl            🔨 Validation data
+│   └── evaluation/                     🔨 Evaluation datasets
+│       ├── test-conversations.json     📝 Test conversation data (example below)
+│       └── ground-truth.json           🔨 Expected responses
 │
 ├── scripts/                            # Utility scripts
 │   ├── setup/                          # Setup scripts
@@ -256,11 +372,77 @@ retail-multiagent-solution/
 
 ---
 
+## 🚀 Quick Start: Wetin You Fit Do Now-Now
+
+### Option 1: Deploy Infrastructure Only (30 minutes)
+
+**Wetin you go get:** All Azure services go dey ready for development
+
+```bash
+# Clone di repository
+git clone https://github.com/microsoft/AZD-for-beginners.git
+cd AZD-for-beginners/examples/retail-multiagent-arm-template
+
+# Set up di infrastructure
+./deploy.sh -g myResourceGroup -m standard
+
+# Check say di deployment work
+az resource list --resource-group myResourceGroup --output table
+```
+
+**Expected outcome:**
+- ✅ Azure OpenAI services deployed (3 regions)
+- ✅ AI Search service created (empty)
+- ✅ Container Apps environment ready
+- ✅ Storage, Cosmos DB, Key Vault configured
+- ❌ No working agents yet (infrastructure only)
+
+### Option 2: Study Architecture (2-3 hours)
+
+**Wetin you go get:** Better understanding of multi-agent patterns
+
+1. Read dis document finish
+2. Check code examples for each component
+3. Understand design decisions and trade-offs
+4. Study cost optimization strategies
+5. Plan how you go implement am
+
+**Expected outcome:**
+- ✅ Clear mental model of system architecture
+- ✅ Understanding of required components
+- ✅ Realistic effort estimates
+- ✅ Implementation plan
+
+### Option 3: Build Complete System (80-120 hours)
+
+**Wetin you go get:** Production-ready multi-agent solution
+
+1. **Phase 1:** Deploy infrastructure (done above)
+2. **Phase 2:** Implement agents using code examples below (30-40 hours)
+3. **Phase 3:** Build routing service (12-16 hours)
+4. **Phase 4:** Create frontend UI (20-30 hours)
+5. **Phase 5:** Configure data pipelines (8-12 hours)
+6. **Phase 6:** Add monitoring & evaluation (10-15 hours)
+
+**Expected outcome:**
+- ✅ Fully functional multi-agent system
+- ✅ Production-grade monitoring
+- ✅ Security validation
+- ✅ Cost-optimized deployment
+
+---
+
+## 📚 Architecture Reference & Implementation Guide
+
+Di next sections go show detailed architecture patterns, configuration examples, and reference code wey go guide you for implementation.
+
 ## Initial Configuration Requirements
 
 ### 1. Multiple Agents & Configuration
 
 **Goal**: Deploy 2 specialized agents - "Customer Agent" (customer service) and "Inventory" (stock management)
+
+> **📝 Note:** Di azure.yaml and Bicep configurations wey dey here na **reference examples** to show how you fit structure multi-agent deployments. You go need create dis files and di agent implementations.
 
 #### Configuration Steps:
 
@@ -403,7 +585,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Create search service with specific SKU
+# Create search service wit specific SKU
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -420,16 +602,16 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Get search service key
+# Collect search service key
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Create index schema
+# Make index schema
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Upload initial documents
+# Upload first documents
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
@@ -522,13 +704,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # First, search for relevant context
+        # First, find context wey fit the matter
         search_results = await self.search_tool.search_products(user_query)
         
-        # Prepare context for the LLM
+        # Arrange context for the LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generate response with grounding
+        # Make response wey get correct grounding
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -609,7 +791,7 @@ class DocumentProcessor:
             blob=blob_name
         )
         
-        # Extract text using Document Intelligence
+        # Comot text wit Document Intelligence
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -617,7 +799,7 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # Extract text content
+        # Comot text content
         text_content = ""
         for page in result.pages:
             for line in page.lines:
@@ -629,7 +811,7 @@ class DocumentProcessor:
             input=text_content
         )
         
-        # Index in AI Search
+        # Index for AI Search
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -780,7 +962,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Configure logging
+        # Set up logging
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -811,7 +993,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Truncate for privacy
+            'query': query[:100],  # Cut am short for privacy
             'results_found': str(results_count > 0)
         }
         
@@ -992,8 +1174,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementation would send HTTP request to agent endpoint
-        # For demo purposes, returning placeholder
+        # Implementation go send HTTP request go agent endpoint
+        # For demo, we go return placeholder
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1075,7 +1257,7 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Get agent endpoint from deployment
+# Collect agent endpoint from deployment
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1181,7 +1363,7 @@ class AgentEvaluator:
         # Get agent response
         agent_response = await self._get_agent_response(user_query)
         
-        # Grade the response
+        # Grade di response
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1410,7 +1592,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Build custom image with environment variables
+# Build custom image wit environment variables
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1418,7 +1600,7 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Push to Azure Container Registry
+# Push am go Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
@@ -1445,13 +1627,13 @@ echo "Frontend deployed successfully!"
 
 **Solution**:
 ```bash
-# Check current quota usage
+# Check how much quota we dey use now
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Request quota increase
+# Ask make dem increase quota
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1474,7 +1656,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # This would call Azure OpenAI API to get current versions
+    # Dis one go call Azure OpenAI API to get di current versions
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1491,12 +1673,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Read and update template
+    # Read and update di template
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Update version in template
+        # Update di version for template
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1553,8 +1735,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Update deployment to use fine-tuned model
-            # This would call Azure CLI to update the deployment
+            # Update deployment make e use fine-tuned model
+            # Dis one go call Azure CLI to update di deployment
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1611,7 +1793,7 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Implementation would calculate potential savings
+        # Implementation go calculate potential savings
         pass
 ```
 
@@ -1626,7 +1808,7 @@ class ModelRouter:
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Fine-tuning Integration
+# hooks/postprovision.sh - Adjust Integration
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1635,12 +1817,12 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Start fine-tuning job
+# Start fine-tuning work
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4o-mini")
 
-# Store job ID for monitoring
+# Keep job ID for monitoring
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
@@ -1730,30 +1912,34 @@ class CostOptimizer:
 ```
 
 ---
+## ✅ Ready-to-Deploy ARM Template
 
-## Ready-to-Deploy ARM Template
+> **✨ DIS ONE DEY REAL AND E DEY WORK!**  
+> No be like di example code wey we talk before, dis ARM template na **real, working infrastructure deployment** wey dey inside dis repository.
 
-For immediate deployment of the complete retail multi-agent solution, we've provided a comprehensive ARM template that provisions all required Azure resources with a single command.
+### Wetin Dis Template Dey Do
 
-### What's Included in the ARM Template
+Di ARM template wey dey [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) go setup **all di Azure infrastructure** wey you need for di multi-agent system. Na dis one be di **only ready-to-run component** - di rest go need make you develop dem.
 
-The ARM template located in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) includes:
+### Wetin Dey Inside di ARM Template
+
+Di ARM template wey dey [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) get:
 
 #### **Complete Infrastructure**
 - ✅ **Multi-region Azure OpenAI** deployments (GPT-4o, GPT-4o-mini, embeddings, grader)
-- ✅ **Azure AI Search** with vector search capabilities
-- ✅ **Azure Storage** with document and upload containers
-- ✅ **Container Apps Environment** with auto-scaling
+- ✅ **Azure AI Search** wey get vector search capabilities
+- ✅ **Azure Storage** wey get document and upload containers
+- ✅ **Container Apps Environment** wey fit auto-scale
 - ✅ **Agent Router & Frontend** container apps
-- ✅ **Cosmos DB** for chat history persistence
-- ✅ **Application Insights** for comprehensive monitoring
+- ✅ **Cosmos DB** for chat history storage
+- ✅ **Application Insights** for better monitoring
 - ✅ **Key Vault** for secure secret management
 - ✅ **Document Intelligence** for file processing
 - ✅ **Bing Search API** for real-time information
 
 #### **Deployment Modes**
-| Mode | Use Case | Resources | Estimated Cost/Month |
-|------|----------|-----------|---------------------|
+| Mode | Wetin E Fit Do | Resources | Estimated Cost/Month |
+|------|----------------|-----------|---------------------|
 | **Minimal** | Development, Testing | Basic SKUs, Single region | $100-370 |
 | **Standard** | Production, Moderate scale | Standard SKUs, Multi-region | $420-1,450 |
 | **Premium** | Enterprise, High scale | Premium SKUs, HA setup | $1,150-3,500 |
@@ -1767,20 +1953,20 @@ The ARM template located in [`retail-multiagent-arm-template/`](../../../example
 #### Option 2: Azure CLI Deployment
 
 ```bash
-# Clone the repository
+# Clone di repository
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Make deployment script executable
+# Make deployment script fit to run
 chmod +x deploy.sh
 
-# Deploy with default settings (Standard mode)
+# Deploy wit default settings (Standard mode)
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# Deploy for production wit premium features
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Deploy minimal version for development
+# Deploy small version for development
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
@@ -1800,7 +1986,7 @@ az deployment group create \
 
 ### Template Outputs
 
-After successful deployment, you'll receive:
+When deployment don complete, you go get:
 
 ```json
 {
@@ -1816,11 +2002,11 @@ After successful deployment, you'll receive:
 
 ### 🔧 Post-Deployment Configuration
 
-The ARM template handles infrastructure provisioning. After deployment:
+Di ARM template go handle di infrastructure setup. After deployment:
 
-1. **Configure Search Index**:
+1. **Set Search Index**:
    ```bash
-   # Use the provided search schema
+   # Use di search schema wey dem provide
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
@@ -1829,7 +2015,7 @@ The ARM template handles infrastructure provisioning. After deployment:
 
 2. **Upload Initial Documents**:
    ```bash
-   # Upload product manuals and knowledge base
+   # Upload product manual dem and knowledge base
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
@@ -1838,7 +2024,7 @@ The ARM template handles infrastructure provisioning. After deployment:
 
 3. **Deploy Agent Code**:
    ```bash
-   # Build and deploy actual agent applications
+   # Build and deploy real agent apps
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -1848,7 +2034,7 @@ The ARM template handles infrastructure provisioning. After deployment:
 
 ### 🎛️ Customization Options
 
-Edit `azuredeploy.parameters.json` to customize your deployment:
+Edit `azuredeploy.parameters.json` if you wan customize your deployment:
 
 ```json
 {
@@ -1865,16 +2051,16 @@ Edit `azuredeploy.parameters.json` to customize your deployment:
 ### 📊 Deployment Features
 
 - ✅ **Prerequisites validation** (Azure CLI, quotas, permissions)
-- ✅ **Multi-region high availability** with automatic failover
-- ✅ **Comprehensive monitoring** with Application Insights and Log Analytics
+- ✅ **Multi-region high availability** wey get automatic failover
+- ✅ **Better monitoring** with Application Insights and Log Analytics
 - ✅ **Security best practices** with Key Vault and RBAC
 - ✅ **Cost optimization** with configurable deployment modes
-- ✅ **Automated scaling** based on demand patterns
+- ✅ **Automated scaling** wey follow demand patterns
 - ✅ **Zero-downtime updates** with Container Apps revisions
 
 ### 🔍 Monitoring and Management
 
-Once deployed, monitor your solution through:
+After deployment, you fit monitor your solution through:
 
 - **Application Insights**: Performance metrics, dependency tracking, and custom telemetry
 - **Log Analytics**: Centralized logging from all components
@@ -1885,24 +2071,124 @@ Once deployed, monitor your solution through:
 
 ## 📚 Complete Implementation Guide
 
-Dis scenario document plus di ARM template go give you everything wey you need to deploy multi-agent customer support solution wey dey ready for production. Di implementation cover:
+Dis document plus di ARM template go give you everything wey you need to deploy production-ready multi-agent customer support solution. Di implementation cover:
 
-✅ **Architecture Design** - Beta system design wey show how components dey relate  
+✅ **Architecture Design** - Full system design with component relationships  
 ✅ **Infrastructure Provisioning** - Complete ARM template for one-click deployment  
 ✅ **Agent Configuration** - Detailed setup for Customer and Inventory agents  
 ✅ **Multi-Model Deployment** - Strategic model placement across regions  
-✅ **Search Integration** - AI Search wey get vector capabilities and data indexing  
+✅ **Search Integration** - AI Search with vector capabilities and data indexing  
 ✅ **Security Implementation** - Red teaming, vulnerability scanning, and secure practices  
-✅ **Monitoring & Evaluation** - Beta telemetry and agent evaluation framework  
-✅ **Production Readiness** - Enterprise-grade deployment wey get HA and disaster recovery  
+✅ **Monitoring & Evaluation** - Full telemetry and agent evaluation framework  
+✅ **Production Readiness** - Enterprise-grade deployment with HA and disaster recovery  
 ✅ **Cost Optimization** - Smart routing and usage-based scaling  
 ✅ **Troubleshooting Guide** - Common issues and how to solve dem
 
-Dis full scenario cover all di tins wey you need for di retailer multi-agent solution, e dey give practical implementation guide, troubleshooting support, and advanced exploration topics for how to build production-ready AI applications with AZD.
+---
+
+## 📊 Summary: Wetin You Don Learn
+
+### Architecture Patterns Wey We Cover
+
+✅ **Multi-Agent System Design** - Specialized agents (Customer + Inventory) with dedicated models  
+✅ **Multi-Region Deployment** - Strategic model placement for cost optimization and redundancy  
+✅ **RAG Architecture** - AI Search integration with vector embeddings for grounded responses  
+✅ **Agent Evaluation** - Dedicated grader model for quality assessment  
+✅ **Security Framework** - Red teaming and vulnerability scanning patterns  
+✅ **Cost Optimization** - Model routing and capacity planning strategies  
+✅ **Production Monitoring** - Application Insights with custom telemetry  
+
+### Wetin Dis Document Provide
+
+| Component | Status | Where to Find It |
+|-----------|--------|------------------|
+| **Infrastructure Template** | ✅ Ready to Deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Complete | Mermaid diagram above |
+| **Code Examples** | ✅ Reference Implementations | Throughout this document |
+| **Configuration Patterns** | ✅ Detailed Guidance | Sections 1-10 above |
+| **Agent Implementations** | 🔨 You Build This | ~40 hours development |
+| **Frontend UI** | 🔨 You Build This | ~25 hours development |
+| **Data Pipelines** | 🔨 You Build This | ~10 hours development |
+
+### Reality Check: Wetin Dey Real
+
+**Inside Repository (Ready Now):**
+- ✅ ARM template wey deploy 15+ Azure services (azuredeploy.json)
+- ✅ Deployment script wey dey validate (deploy.sh)
+- ✅ Parameters configuration (azuredeploy.parameters.json)
+
+**Wetin Document Mention (You Go Create):**
+- 🔨 Agent implementation code (~30-40 hours)
+- 🔨 Routing service (~12-16 hours)
+- 🔨 Frontend application (~20-30 hours)
+- 🔨 Data setup scripts (~8-12 hours)
+- 🔨 Monitoring framework (~10-15 hours)
+
+### Your Next Steps
+
+#### If You Wan Deploy Infrastructure (30 minutes)
+```bash
+cd retail-multiagent-arm-template
+./deploy.sh -g myResourceGroup
+```
+
+#### If You Wan Build di Complete System (80-120 hours)
+1. ✅ Read and understand dis architecture document (2-3 hours)
+2. ✅ Deploy infrastructure using ARM template (30 minutes)
+3. 🔨 Implement agents using reference code patterns (~40 hours)
+4. 🔨 Build routing service with FastAPI/Express (~15 hours)
+5. 🔨 Create frontend UI with React/Vue (~25 hours)
+6. 🔨 Configure data pipeline and search index (~10 hours)
+7. 🔨 Add monitoring and evaluation (~15 hours)
+8. ✅ Test, secure, and optimize (~10 hours)
+
+#### If You Wan Learn Multi-Agent Patterns (Study)
+- 📖 Check architecture diagram and component relationships
+- 📖 Study code examples for SearchTool, BingTool, AgentEvaluator
+- 📖 Understand multi-region deployment strategy
+- 📖 Learn evaluation and security frameworks
+- 📖 Apply patterns to your own projects
+
+### Key Takeaways
+
+1. **Infrastructure vs. Application** - ARM template dey provide infrastructure; agents go need development
+2. **Multi-Region Strategy** - Strategic model placement dey reduce costs and improve reliability
+3. **Evaluation Framework** - Dedicated grader model dey enable continuous quality assessment
+4. **Security First** - Red teaming and vulnerability scanning dey important for production
+5. **Cost Optimization** - Smart routing between GPT-4o and GPT-4o-mini fit save 60-80%
+
+### Estimated Costs
+
+| Deployment Mode | Infrastructure/Month | Development (One-Time) | Total First Month |
+|-----------------|---------------------|------------------------|-------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
+
+**Note:** Infrastructure na less than 5% of di total cost for new implementations. Development effort na di main investment.
+
+### Related Resources
+
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Infrastructure setup
+- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Model deployment
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Vector search configuration
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Microservices deployment
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Monitoring setup
+
+### Questions or Issues?
+
+- 🐛 [Report Issues](https://github.com/microsoft/AZD-for-beginners/issues) - Template bugs or documentation errors
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Architecture questions
+- 📖 [FAQ](../../resources/faq.md) - Common questions answered
+- 🔧 [Troubleshooting Guide](../../docs/troubleshooting/common-issues.md) - Deployment issues
+
+---
+
+**Dis full scenario dey give enterprise-grade architecture blueprint for multi-agent AI systems, complete with infrastructure templates, implementation guidance, and production best practices to build better customer support solutions with Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even as we dey try make am accurate, abeg make you sabi say machine translation fit get mistake or no dey correct well. Di original dokyument for im native language na di main source wey you go trust. For important mata, na beta make you use professional human translation. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Dis dokyument don use AI transleshion service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transleshion. Even as we dey try make am accurate, abeg make you sabi say automatik transleshion fit get mistake or no dey correct well. Di original dokyument wey dey for im native language na di one wey you go take as di correct source. For important mata, e good make you use professional human transleshion. We no go fit take blame for any misunderstanding or wrong interpretation wey go happen because you use dis transleshion.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

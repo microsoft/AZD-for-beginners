@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-10-11T16:01:33+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-24T13:02:14+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "et"
 }
@@ -13,67 +13,67 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
 - **📖 Praegune peatükk**: Peatükk 7 - Tõrkeotsing ja silumine
 - **⬅️ Eelmine**: [Levinud probleemid](common-issues.md)
-- **➡️ Järgmine**: [Tehisintellekti-spetsiifiline tõrkeotsing](ai-troubleshooting.md)
-- **🚀 Järgmine peatükk**: [Peatükk 8: Tootmine ja ettevõtte mustrid](../ai-foundry/production-ai-practices.md)
+- **➡️ Järgmine**: [AI-spetsiifiline tõrkeotsing](ai-troubleshooting.md)
+- **🚀 Järgmine peatükk**: [Peatükk 8: Tootmise ja ettevõtte mustrid](../microsoft-foundry/production-ai-practices.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend pakub edasijõudnud silumisstrateegiaid, tööriistu ja tehnikaid keerukate probleemide diagnoosimiseks ja lahendamiseks Azure Developer CLI juurutuste puhul. Õppige süsteemseid tõrkeotsingu meetodeid, logianalüüsi tehnikaid, jõudluse profileerimist ja edasijõudnud diagnostikavahendeid, et tõhusalt lahendada juurutus- ja käitusprobleeme.
+See põhjalik juhend pakub edasijõudnud silumisstrateegiaid, tööriistu ja tehnikaid keeruliste probleemide diagnoosimiseks ja lahendamiseks Azure Developer CLI juurutustes. Õppige süsteemseid tõrkeotsingu meetodeid, logianalüüsi tehnikaid, jõudluse profiilimist ja täiustatud diagnostikavahendeid, et tõhusalt lahendada juurutamise ja käitamise probleeme.
 
-## Õppimise eesmärgid
+## Õpieesmärgid
 
-Selle juhendi läbimise järel:
-- Omandate süsteemsed silumismeetodid Azure Developer CLI probleemide lahendamiseks
-- Mõistate edasijõudnud logide konfigureerimise ja analüüsi tehnikaid
-- Rakendate jõudluse profileerimise ja jälgimise strateegiaid
-- Kasutate Azure'i diagnostikavahendeid ja teenuseid keeruliste probleemide lahendamiseks
-- Rakendate võrgu silumist ja turvalisuse tõrkeotsingu tehnikaid
-- Konfigureerite põhjaliku jälgimise ja hoiatuste süsteemi probleemide ennetavaks avastamiseks
+Selle juhendi läbimisega õpite:
+- Valdama süsteemseid silumismeetodeid Azure Developer CLI probleemide lahendamiseks
+- Mõistma täiustatud logide konfigureerimist ja logianalüüsi tehnikaid
+- Rakendama jõudluse profiilimist ja jälgimisstrateegiaid
+- Kasutama Azure diagnostikavahendeid ja teenuseid keeruliste probleemide lahendamiseks
+- Rakendama võrgu silumist ja turvalisuse tõrkeotsingu tehnikaid
+- Konfigureerima terviklikku jälgimist ja hoiatusi probleemide ennetavaks tuvastamiseks
 
 ## Õpitulemused
 
 Pärast juhendi läbimist suudate:
-- Rakendada TRIAGE meetodit keerukate juurutusprobleemide süsteemseks silumiseks
-- Konfigureerida ja analüüsida põhjalikku logimist ja jälgimist
+- Rakendada TRIAGE metoodikat keeruliste juurutusprobleemide süsteemseks silumiseks
+- Konfigureerida ja analüüsida põhjalikku logimist ja jälgimisteavet
 - Kasutada tõhusalt Azure Monitori, Application Insightsi ja diagnostikavahendeid
-- Iseseisvalt siluda võrguühenduvuse, autentimise ja õiguste probleeme
+- Iseseisvalt siluda võrguühenduse, autentimise ja õiguste probleeme
 - Rakendada jõudluse jälgimise ja optimeerimise strateegiaid
-- Luua kohandatud silumisskripte ja automatiseerida korduvate probleemide lahendamist
+- Luua kohandatud silumisskripte ja automatiseerimist korduvate probleemide lahendamiseks
 
 ## Silumismetoodika
 
 ### TRIAGE lähenemine
 - **T**ime: Millal probleem algas?
-- **R**eproduce: Kas seda saab järjepidevalt taasesitada?
-- **I**solate: Milline komponent ebaõnnestub?
+- **R**eproduce: Kas saate seda järjepidevalt taastada?
+- **I**solate: Milline komponent ei tööta?
 - **A**nalyze: Mida logid meile räägivad?
-- **G**ather: Kogu kokku kõik asjakohane teave
+- **G**ather: Koguge kõik asjakohased andmed
 - **E**scalate: Millal otsida täiendavat abi
 
 ## Silumisrežiimi lubamine
 
 ### Keskkonnamuutujad
 ```bash
-# Enable comprehensive debugging
+# Luba põhjalik silumine
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLI silumine
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Keela telemeetria puhtama väljundi jaoks
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Silumise konfiguratsioon
+### Silumiskonfiguratsioon
 ```bash
-# Set debug configuration globally
+# Määra silumise konfiguratsioon globaalselt
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Luba jälituse logimine
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Struktureeritud logianalüüs
 ```bash
-# Filter logs by level
+# Filtreeri logisid taseme järgi
 azd logs --level error --since 1h
 
-# Filter by service
+# Filtreeri teenuse järgi
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Ekspordi logid analüüsimiseks
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Parsige JSON logisid jq-ga
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Logide korrelatsioon
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Korrelatsiooni logid teenuste vahel
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,33 +118,33 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Otsi kõigi teenuste vahel
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Otsi Azure'i logisid
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
-## 🛠️ Edasijõudnud silumisvahendid
+## 🛠️ Täiustatud silumisvahendid
 
 ### Azure Resource Graph päringud
 ```bash
-# Query resources by tags
+# Päring ressurside kohta siltide järgi
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Leia ebaõnnestunud juurutused
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Kontrolli ressursside tervist
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Võrgu silumine
 ```bash
-# Test connectivity between services
+# Testi ühenduvust teenuste vahel
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Kasutamine
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
-### Konteinerite silumine
+### Konteineri silumine
 ```bash
-# Debug container app issues
+# Siluge konteinerirakenduse probleeme
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Andmebaasiühenduse silumine
 ```bash
-# Debug database connectivity
+# Silu andmebaasi ühenduvust
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### Rakenduse jõudluse jälgimine
 ```bash
-# Enable Application Insights debugging
+# Luba rakenduse Insights silumine
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Kohandatud jõudluse jälgimine
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -238,9 +238,9 @@ monitor_performance() {
 }
 ```
 
-### Ressursside kasutuse analüüs
+### Ressursikasutuse analüüs
 ```bash
-# Monitor resource usage
+# Jälgi ressursikasutust
 monitor_resources() {
     local resource_group=$1
     
@@ -264,21 +264,21 @@ monitor_resources() {
 
 ## 🧪 Testimine ja valideerimine
 
-### Integreerimistestide silumine
+### Integratsioonitestide silumine
 ```bash
 #!/bin/bash
-# debug-integration-tests.sh
+# debug-integratsiooni-testid.sh
 
 set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Määra silumise keskkond
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Hangi teenuse lõpp-punktid
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Testi tervise lõpp-punkte
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Käivita testid
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Käivita kohandatud integratsiooni testid
 npm run test:integration
 ```
 
 ### Koormustestimine silumiseks
 ```bash
-# Simple load test to identify performance bottlenecks
+# Lihtne koormustest jõudlusprobleemide tuvastamiseks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,42 +323,42 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Kasutades Apache Bench'i (installimine: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Ekstrakti võtmemõõdikud
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Kontrolli vigade esinemist
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
 ## 🔧 Infrastruktuuri silumine
 
-### Bicep-mallide silumine
+### Bicep mallide silumine
 ```bash
-# Validate Bicep templates with detailed output
+# Kontrolli Bicep mallide kehtivust üksikasjaliku väljundiga
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Süntaksi kontroll
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Lindi kontroll
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Mis-juhtub-kui juurutamine
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Silu malli juurutamist
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,20 +377,20 @@ debug_deployment() {
 }
 ```
 
-### Ressursside oleku analüüs
+### Ressursi oleku analüüs
 ```bash
-# Analyze resource states for inconsistencies
+# Analüüsige ressursside olekuid ebakõlade suhtes
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Loetlege kõik ressursid koos nende olekutega
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Kontrollige ebaõnnestunud ressursse
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -408,7 +408,7 @@ analyze_resources() {
 
 ### Autentimisvoo silumine
 ```bash
-# Debug Azure authentication
+# Silu Azure autentimist
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Dekodeeri JWT token (vajab jq ja base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Silu Key Vaulti ligipääsu
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Võrgu turvalisuse silumine
 ```bash
-# Debug network security groups
+# Silu võrgu turberühmi
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Kontrolli turvareegleid
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,17 +458,17 @@ debug_network_security() {
 }
 ```
 
-## 📱 Rakendusepõhine silumine
+## 📱 Rakenduse-spetsiifiline silumine
 
 ### Node.js rakenduse silumine
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - Expressi silumisvahend
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Logi päringu üksikasjad
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Kirjuta üle res.json, et logida vastuseid
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Andmebaasi päringute silumine
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Andmebaasi silumise tööriistad
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -521,10 +521,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 Hädaolukorra silumisprotseduurid
 
-### Tootmisprobleemidele reageerimine
+### Tootmisprobleemide lahendamine
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Hädaolukorra tootmise silumine
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Lülitu õigesse keskkonda
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Kogu kriitiline teave
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Tagasipööramise protseduurid
 ```bash
-# Quick rollback script
+# Kiire tagasipööramise skript
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Keskkonna vahetamine
     azd env select "$environment"
     
-    # Rollback application
+    # Rakenduse tagasipööramine
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Tagasipööramise kontrollimine
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Kriitiliste lõpp-punktide testimine
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -609,25 +609,25 @@ quick_rollback() {
 }
 ```
 
-## 📊 Silumisdashboadid
+## 📊 Silumise juhtpaneelid
 
-### Kohandatud jälgimisdashboard
+### Kohandatud jälgimisjuhtpaneel
 ```bash
-# Create Application Insights queries for debugging
+# Loo Application Insights päringud silumiseks
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Päring vigade jaoks
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Päring jõudlusprobleemide jaoks
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Päring sõltuvuste tõrgete jaoks
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Logide koondamine
 ```bash
-# Aggregate logs from multiple sources
+# Koguge logisid mitmest allikast
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -656,13 +656,13 @@ aggregate_logs() {
 }
 ```
 
-## 🔗 Edasijõudnud ressursid
+## 🔗 Täiustatud ressursid
 
 ### Kohandatud silumisskriptid
-Looge kataloog `scripts/debug/` järgmiste failidega:
+Looge kataloog `scripts/debug/` koos:
 - `health-check.sh` - Põhjalik tervisekontroll
-- `performance-test.sh` - Automaatne jõudluse testimine
-- `log-analyzer.py` - Täiustatud logide analüüs
+- `performance-test.sh` - Automatiseeritud jõudluse testimine
+- `log-analyzer.py` - Täiustatud logide parsimine ja analüüs
 - `resource-validator.sh` - Infrastruktuuri valideerimine
 
 ### Jälgimise integreerimine
@@ -682,25 +682,25 @@ hooks:
       fi
 ```
 
-## Parimad praktikad
+## Parimad tavad
 
-1. **Luba alati silumislogimine** mitte-tootmiskeskkondades
-2. **Loo taasesitatavad testjuhtumid** probleemide jaoks
-3. **Dokumenteeri silumisprotseduurid** oma meeskonnale
-4. **Automatiseeri tervisekontrollid** ja jälgimine
-5. **Hoia silumisvahendid ajakohasena** vastavalt rakenduse muudatustele
-6. **Harjuta silumisprotseduure** mitte-kriitilistel aegadel
+1. **Lubage alati silumislogimine** mitte-tootmiskeskkondades
+2. **Looge korduvtestitavad juhtumid** probleemide jaoks
+3. **Dokumenteerige silumisprotseduurid** oma meeskonnale
+4. **Automatiseerige tervisekontrollid** ja jälgimine
+5. **Hoidke silumisvahendid ajakohased** vastavalt rakenduse muudatustele
+6. **Harjutage silumisprotseduure** mitte-intsidentide ajal
 
 ## Järgmised sammud
 
-- [Mahutavuse planeerimine](../pre-deployment/capacity-planning.md) - Ressursinõuete planeerimine
-- [SKU valik](../pre-deployment/sku-selection.md) - Sobivate teenustasemete valimine
+- [Mahutavuse planeerimine](../pre-deployment/capacity-planning.md) - Planeerige ressursinõuded
+- [SKU valik](../pre-deployment/sku-selection.md) - Valige sobivad teenusetasemed
 - [Eelkontrollid](../pre-deployment/preflight-checks.md) - Eeljuurutuse valideerimine
-- [Spikri leht](../../resources/cheat-sheet.md) - Kiire viite käsud
+- [Spikri leht](../../resources/cheat-sheet.md) - Kiirviited käskudele
 
 ---
 
-**Pea meeles**: Hea silumine tähendab süsteemset, põhjalikku ja kannatlikku lähenemist. Need tööriistad ja tehnikad aitavad sul probleeme kiiremini ja tõhusamalt diagnoosida.
+**Pidage meeles**: Hea silumine seisneb süsteemsuses, põhjalikkuses ja kannatlikkuses. Need tööriistad ja tehnikad aitavad teil probleeme kiiremini ja tõhusamalt diagnoosida.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Lahtiütlus**:  
 See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
