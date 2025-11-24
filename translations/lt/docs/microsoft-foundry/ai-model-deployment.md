@@ -2,8 +2,8 @@
 CO_OP_TRANSLATOR_METADATA:
 {
   "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-24T09:38:32+00:00",
-  "source_file": "docs/ai-foundry/ai-model-deployment.md",
+  "translation_date": "2025-11-24T10:38:31+00:00",
+  "source_file": "docs/microsoft-foundry/ai-model-deployment.md",
   "language_code": "lt"
 }
 -->
@@ -20,12 +20,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Turinys
 
-- [Modelio pasirinkimo strategija](../../../../docs/ai-foundry)
-- [AZD konfigūracija AI modeliams](../../../../docs/ai-foundry)
-- [Diegimo modeliai](../../../../docs/ai-foundry)
-- [Modelių valdymas](../../../../docs/ai-foundry)
-- [Gamybiniai aspektai](../../../../docs/ai-foundry)
-- [Stebėjimas ir stebimumas](../../../../docs/ai-foundry)
+- [Modelio pasirinkimo strategija](../../../../docs/microsoft-foundry)
+- [AZD konfigūracija AI modeliams](../../../../docs/microsoft-foundry)
+- [Diegimo modeliai](../../../../docs/microsoft-foundry)
+- [Modelių valdymas](../../../../docs/microsoft-foundry)
+- [Gamybiniai aspektai](../../../../docs/microsoft-foundry)
+- [Stebėjimas ir stebimumas](../../../../docs/microsoft-foundry)
 
 ## Modelio pasirinkimo strategija
 
@@ -66,7 +66,7 @@ services:
 | GPT-4o-mini | Pokalbiai, Q&A | 10-50 TPM | Ekonomiškas daugumai užduočių |
 | GPT-4 | Sudėtingas mąstymas | 20-100 TPM | Didesnė kaina, naudoti premium funkcijoms |
 | Text-embedding-ada-002 | Paieška, RAG | 30-120 TPM | Esminis semantinei paieškai |
-| Whisper | Kalbos į tekstą | 10-50 TPM | Garso apdorojimo užduotys |
+| Whisper | Kalbos į tekstą | 10-50 TPM | Garso apdorojimo užduotims |
 
 ## AZD konfigūracija AI modeliams
 
@@ -214,7 +214,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## Modelių valdymas
 
-### Versijų kontrolė
+### Versijų valdymas
 
 Sekite modelių versijas savo AZD konfigūracijoje:
 
@@ -251,7 +251,7 @@ az cognitiveservices account list-models \
 
 ### A/B testavimas
 
-Diegkite kelias modelių versijas:
+Diegti kelias modelių versijas:
 
 ```bicep
 param enableABTesting bool = false
@@ -277,7 +277,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Pajėgumų planavimas
 
-Apskaičiuokite reikalingą pajėgumą pagal naudojimo modelius:
+Apskaičiuokite reikiamą talpą pagal naudojimo modelius:
 
 ```python
 # Talpos skaičiavimo pavyzdys
@@ -376,7 +376,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights integracija
 
-Konfigūruokite AI darbo krūvių stebėjimą:
+Konfigūruokite stebėjimą AI darbo krūviams:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -417,7 +417,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Sekite AI specifinius metrikus:
 
 ```python
-# Pasirinktinis telemetrija AI modeliams
+# Pasirinktinis telemetrijos stebėjimas AI modeliams
 import logging
 from applicationinsights import TelemetryClient
 

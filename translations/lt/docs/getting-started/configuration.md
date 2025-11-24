@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T14:06:52+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-24T09:47:07+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "lt"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Įvadas
 
-Šis išsamus vadovas apima visus Azure Developer CLI konfigūracijos aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikacijos metodus ir pažangius konfigūracijos modelius, kurie leidžia efektyviai ir saugiai diegti Azure.
+Šis išsamus vadovas apima visus Azure Developer CLI konfigūravimo aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas. Sužinosite apie konfigūracijos hierarchiją, aplinkos valdymą, autentifikacijos metodus ir pažangius konfigūracijos modelius, kurie leidžia efektyviai ir saugiai diegti Azure.
 
 ## Mokymosi tikslai
 
@@ -38,7 +38,7 @@ Baigę šią pamoką, galėsite:
 - Spręsti su konfigūracija susijusias problemas
 - Pritaikyti azd elgseną specifiniams organizacijos poreikiams
 
-Šis išsamus vadovas apima visus Azure Developer CLI konfigūracijos aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas.
+Šis išsamus vadovas apima visus Azure Developer CLI konfigūravimo aspektus, siekiant optimizuoti kūrimo ir diegimo darbo eigas.
 
 ## Konfigūracijos hierarchija
 
@@ -51,44 +51,44 @@ azd naudoja hierarchinę konfigūracijos sistemą:
 
 ## Globali konfigūracija
 
-### Globalių numatytųjų reikšmių nustatymas
+### Numatytųjų globalių nustatymų nustatymas
 ```bash
-# Set default subscription
+# Nustatyti numatytąjį prenumeratą
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Set default location
+# Nustatyti numatytąją vietą
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
+# Nustatyti numatytąją išteklių grupės pavadinimo konvenciją
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# View all global configuration
+# Peržiūrėti visą globalią konfigūraciją
 azd config list
 
-# Remove a configuration
+# Pašalinti konfigūraciją
 azd config unset defaults.location
 ```
 
 ### Dažni globalūs nustatymai
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Plėtros nuostatos
+azd config set alpha.enable true                    # Įjungti alfa funkcijas
+azd config set telemetry.enabled false             # Išjungti telemetriją
+azd config set output.format json                  # Nustatyti išvesties formatą
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Saugumo nustatymai
+azd config set auth.useAzureCliCredential true     # Naudoti Azure CLI autentifikacijai
+azd config set tls.insecure false                  # Priversti TLS patikrinimą
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Našumo optimizavimas
+azd config set provision.parallelism 5             # Lygiagretus išteklių kūrimas
+azd config set deploy.timeout 30m                  # Diegimo laiko limitas
 ```
 
 ## 🏗️ Projekto konfigūracija
 
 ### azure.yaml struktūra
-Failas `azure.yaml` yra jūsų azd projekto pagrindas:
+`azure.yaml` failas yra jūsų azd projekto pagrindas:
 
 ```yaml
 # Minimum configuration
@@ -213,13 +213,13 @@ services:
 
 ### Aplinkų kūrimas
 ```bash
-# Create a new environment
+# Sukurti naują aplinką
 azd env new development
 
-# Create with specific location
+# Sukurti su konkrečia vieta
 azd env new staging --location "westus2"
 
-# Create from template
+# Sukurti iš šablono
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Kiekviena aplinka turi savo konfigūraciją `.azure/<env-name>/config.json`:
 
 ### Aplinkos kintamieji
 ```bash
-# Set environment-specific variables
+# Nustatyti aplinkai specifinius kintamuosius
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# Peržiūrėti aplinkos kintamuosius
 azd env get-values
 
-# Remove environment variable
+# Tikėtinas rezultatas:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=slaptas-api-raktas
+# DEBUG=true
+
+# Pašalinti aplinkos kintamąjį
 azd env unset DEBUG
+
+# Patikrinti pašalinimą
+azd env get-values | grep DEBUG
+# (turėtų nieko nerodyti)
 ```
 
 ### Aplinkos šablonai
 Sukurkite `.azure/env.template`, kad užtikrintumėte nuoseklų aplinkos nustatymą:
 ```bash
-# Required variables
+# Reikalingi kintamieji
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Programos nustatymai
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Pasirenkami kūrimo nustatymai
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -281,25 +290,25 @@ LOG_LEVEL=info
 
 ### Azure CLI integracija
 ```bash
-# Use Azure CLI credentials (default)
+# Naudokite Azure CLI kredencialus (numatytasis)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Prisijunkite su konkrečiu nuomininku
 az login --tenant <tenant-id>
 
-# Set default subscription
+# Nustatykite numatytąją prenumeratą
 az account set --subscription <subscription-id>
 ```
 
 ### Paslaugų principo autentifikacija
 CI/CD procesams:
 ```bash
-# Set environment variables
+# Nustatyti aplinkos kintamuosius
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
+# Arba konfigūruoti tiesiogiai
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -307,7 +316,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Valdoma tapatybė
 Azure talpinamoms aplinkoms:
 ```bash
-# Enable managed identity authentication
+# Įgalinti valdomos tapatybės autentifikavimą
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -348,7 +357,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Diegimo konfigūracija
 
-### Build konfigūracija
+### Kūrimo konfigūracija
 ```yaml
 # In azure.yaml
 services:
@@ -389,9 +398,9 @@ Pavyzdinis `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/
 
 ## 🔧 Pažangi konfigūracija
 
-### Tinkintas resursų pavadinimas
+### Tinkintų resursų pavadinimų nustatymas
 ```bash
-# Set naming conventions
+# Nustatyti pavadinimų konvencijas
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -424,7 +433,7 @@ monitoring:
 
 ### Kūrimo aplinka
 ```bash
-# .azure/development/.env
+# .azure/vystymas/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -442,7 +451,7 @@ USE_PRODUCTION_APIS=true
 
 ### Produkcijos aplinka
 ```bash
-# .azure/production/.env
+# .azure/produkcija/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Konfigūracijos validavimas
 ```bash
-# Check configuration syntax
+# Patikrinkite konfigūracijos sintaksę
 azd config validate
 
-# Test environment variables
+# Išbandykite aplinkos kintamuosius
 azd env get-values
 
-# Validate infrastructure
+# Patvirtinkite infrastruktūrą
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ Sukurkite validavimo skriptus `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Patikrinkite reikalingus aplinkos kintamuosius
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Patikrinkite azure.yaml sintaksę
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -516,12 +525,12 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versijų kontrolės aspektai
+### 3. Versijų kontrolės svarstymai
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
-.env                        # Local environment file
+.azure/*/config.json         # Aplinkos konfigūracijos (turi išteklių ID)
+.azure/*/.env               # Aplinkos kintamieji (gali turėti slaptažodžių)
+.env                        # Vietinis aplinkos failas
 ```
 
 ### 4. Konfigūracijos dokumentacija
@@ -540,10 +549,72 @@ Dokumentuokite savo konfigūraciją `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Praktiniai pratimai
+
+### Pratimas 1: Daugiaaplinkos konfigūracija (15 minučių)
+
+**Tikslas**: Sukurti ir konfigūruoti tris aplinkas su skirtingais nustatymais
+
+```bash
+# Sukurti vystymo aplinką
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Sukurti testavimo aplinką
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Sukurti gamybos aplinką
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Patikrinti kiekvieną aplinką
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Sėkmės kriterijai:**
+- [ ] Trys aplinkos sėkmingai sukurtos
+- [ ] Kiekviena aplinka turi unikalią konfigūraciją
+- [ ] Galima perjungti aplinkas be klaidų
+- [ ] `azd env list` rodo visas tris aplinkas
+
+### Pratimas 2: Slaptų duomenų valdymas (10 minučių)
+
+**Tikslas**: Praktikuoti saugią konfigūraciją su jautriais duomenimis
+
+```bash
+# Nustatyti paslaptis (nerodoma išvestyje)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Nustatyti nekonfidencialią konfigūraciją
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Peržiūrėti aplinką (paslaptys turėtų būti paslėptos)
+azd env get-values
+
+# Patikrinti, ar paslaptys yra saugomos
+azd env get DB_PASSWORD  # Turėtų rodyti tikrąją vertę
+```
+
+**Sėkmės kriterijai:**
+- [ ] Slaptos informacijos saugojimas be rodymo terminale
+- [ ] `azd env get-values` rodo užmaskuotus slaptus duomenis
+- [ ] Individualus `azd env get <SECRET_NAME>` grąžina tikrąją reikšmę
+
 ## Kiti žingsniai
 
-- [Jūsų pirmasis projektas](first-project.md) - Praktiškai pritaikykite konfigūraciją
-- [Diegimo vadovas](../deployment/deployment-guide.md) - Naudokite konfigūraciją diegimui
+- [Jūsų pirmasis projektas](first-project.md) - Konfigūracijos taikymas praktikoje
+- [Diegimo vadovas](../deployment/deployment-guide.md) - Konfigūracijos naudojimas diegimui
 - [Resursų paruošimas](../deployment/provisioning.md) - Produkcijai paruoštos konfigūracijos
 
 ## Nuorodos
@@ -563,5 +634,7 @@ Dokumentuokite savo konfigūraciją `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingą interpretaciją, atsiradusią naudojant šį vertimą.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

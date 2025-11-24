@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
-  "translation_date": "2025-09-18T14:06:27+00:00",
+  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
+  "translation_date": "2025-11-24T09:49:33+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "lt"
 }
@@ -14,51 +14,51 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas
 - **⬅️ Ankstesnis**: [AZD pagrindai](azd-basics.md)
 - **➡️ Kitas**: [Jūsų pirmasis projektas](first-project.md)
-- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Įvadas
 
-Šis išsamus vadovas padės jums įdiegti ir sukonfigūruoti „Azure Developer CLI“ (azd) jūsų sistemoje. Sužinosite apie įvairius diegimo metodus skirtingoms operacinėms sistemoms, autentifikacijos nustatymą ir pradinę konfigūraciją, kad paruoštumėte savo vystymo aplinką „Azure“ diegimams.
+Šis išsamus vadovas padės jums įdiegti ir sukonfigūruoti Azure Developer CLI (azd) jūsų sistemoje. Sužinosite apie įvairius diegimo būdus skirtingoms operacinėms sistemoms, autentifikacijos nustatymą ir pradinę konfigūraciją, kad paruoštumėte savo vystymo aplinką Azure diegimams.
 
 ## Mokymosi tikslai
 
 Šios pamokos pabaigoje jūs:
-- Sėkmingai įdiegsite „Azure Developer CLI“ savo operacinėje sistemoje
-- Suaktyvinsite autentifikaciją su „Azure“ naudodami kelis metodus
-- Nustatysite savo vystymo aplinką su būtinais reikalavimais
+- Sėkmingai įdiegsite Azure Developer CLI savo operacinėje sistemoje
+- Su Azure sukonfigūruosite autentifikaciją naudodami kelis metodus
+- Paruošite savo vystymo aplinką su būtinais reikalavimais
 - Suprasite skirtingas diegimo galimybes ir kada jas naudoti
 - Išspręsite dažniausiai pasitaikančias diegimo ir nustatymo problemas
 
 ## Mokymosi rezultatai
 
-Baigę šią pamoką, galėsite:
+Baigę šią pamoką, jūs galėsite:
 - Įdiegti azd naudodami tinkamą metodą savo platformai
-- Autentifikuotis su „Azure“ naudodami azd auth login
+- Autentifikuotis su Azure naudodami azd auth login
 - Patikrinti savo diegimą ir išbandyti pagrindines azd komandas
-- Suaktyvinti savo vystymo aplinką optimaliai azd naudojimui
+- Suprasti, kaip optimizuoti savo vystymo aplinką azd naudojimui
 - Savarankiškai išspręsti dažniausiai pasitaikančias diegimo problemas
 
-Šis vadovas padės jums įdiegti ir sukonfigūruoti „Azure Developer CLI“ jūsų sistemoje, nepriklausomai nuo operacinės sistemos ar vystymo aplinkos.
+Šis vadovas padės jums įdiegti ir sukonfigūruoti Azure Developer CLI jūsų sistemoje, nepriklausomai nuo jūsų operacinės sistemos ar vystymo aplinkos.
 
 ## Reikalavimai
 
 Prieš diegdami azd, įsitikinkite, kad turite:
-- **„Azure“ prenumeratą** - [Sukurkite nemokamą paskyrą](https://azure.microsoft.com/free/)
-- **„Azure CLI“** - Autentifikacijai ir resursų valdymui
+- **Azure prenumeratą** - [Sukurkite nemokamą paskyrą](https://azure.microsoft.com/free/)
+- **Azure CLI** - Autentifikacijai ir resursų valdymui
 - **Git** - Šablonų klonavimui ir versijų valdymui
-- **Docker** (neprivaloma) - Konteinerizuotoms aplikacijoms
+- **Docker** (neprivaloma) - Konteinerizuotoms programoms
 
-## Diegimo metodai
+## Diegimo būdai
 
 ### Windows
 
 #### 1 variantas: PowerShell (rekomenduojama)
 ```powershell
-# Run as Administrator or with elevated privileges
+# Vykdykite kaip administratorius arba su padidintomis privilegijomis
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### 2 variantas: „Windows Package Manager“ (winget)
+#### 2 variantas: Windows Package Manager (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
@@ -88,7 +88,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 #### 3 variantas: Rankinis diegimas
 ```bash
-# Download and install
+# Atsisiųsti ir įdiegti
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
@@ -99,21 +99,21 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### 2 variantas: Paketų valdytojai
+#### 2 variantas: Paketų valdymo sistemos
 
 **Ubuntu/Debian:**
 ```bash
-# Add Microsoft package repository
+# Pridėti Microsoft paketų saugyklą
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Install azd
+# Įdiegti azd
 sudo apt-get update
 sudo apt-get install azd
 ```
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Add Microsoft package repository
+# Pridėti Microsoft paketų saugyklą
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -121,15 +121,15 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd jau yra įdiegtas „GitHub Codespaces“. Tiesiog sukurkite „codespace“ ir pradėkite naudoti azd iš karto.
+azd jau yra iš anksto įdiegtas GitHub Codespaces. Tiesiog sukurkite kodų erdvę ir pradėkite naudoti azd iš karto.
 
 ### Docker
 
 ```bash
-# Run azd in a container
+# Paleiskite azd konteineryje
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Create an alias for easier use
+# Sukurkite alias patogesniam naudojimui
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
@@ -138,13 +138,13 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 Po diegimo patikrinkite, ar azd veikia tinkamai:
 
 ```bash
-# Check version
+# Patikrinti versiją
 azd version
 
-# View help
+# Peržiūrėti pagalbą
 azd --help
 
-# List available templates
+# Peržiūrėti galimus šablonus
 azd template list
 ```
 
@@ -153,24 +153,33 @@ Tikėtinas rezultatas:
 azd version 1.5.0 (commit abc123)
 ```
 
+**✅ Diegimo sėkmės kontrolinis sąrašas:**
+- [ ] `azd version` rodo versijos numerį be klaidų
+- [ ] `azd --help` rodo komandų dokumentaciją
+- [ ] `azd template list` rodo galimus šablonus
+- [ ] `az account show` rodo jūsų Azure prenumeratą
+- [ ] Galite sukurti testinį katalogą ir sėkmingai paleisti `azd init`
+
+**Jei visi punktai pažymėti, galite tęsti prie [Jūsų pirmasis projektas](first-project.md)!**
+
 ## Autentifikacijos nustatymas
 
-### „Azure CLI“ autentifikacija (rekomenduojama)
+### Azure CLI autentifikacija (rekomenduojama)
 ```bash
-# Install Azure CLI if not already installed
+# Įdiekite Azure CLI, jei dar neįdiegta
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
 # Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Login to Azure
+# Prisijunkite prie Azure
 az login
 
-# Verify authentication
+# Patikrinkite autentifikaciją
 az account show
 ```
 
 ### Įrenginio kodo autentifikacija
-Jei naudojate sistemą be grafinės sąsajos arba turite naršyklės problemų:
+Jei naudojate sistemą be grafinės sąsajos arba turite problemų su naršykle:
 ```bash
 az login --use-device-code
 ```
@@ -188,35 +197,35 @@ az login --service-principal \
 
 ### Globali konfigūracija
 ```bash
-# Set default subscription
+# Nustatyti numatytąjį prenumeratą
 azd config set defaults.subscription <subscription-id>
 
-# Set default location
+# Nustatyti numatytąją vietą
 azd config set defaults.location eastus2
 
-# View all configuration
+# Peržiūrėti visą konfigūraciją
 azd config list
 ```
 
 ### Aplinkos kintamieji
 Pridėkite prie savo shell profilio (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Azure configuration
+# Azure konfigūracija
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd configuration
+# azd konfigūracija
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Enable debug logging
+export AZD_DEBUG=true  # Įjungti derinimo žurnalavimą
 ```
 
 ## IDE integracija
 
 ### Visual Studio Code
-Įdiekite „Azure Developer CLI“ plėtinį:
+Įdiekite Azure Developer CLI plėtinį:
 1. Atidarykite VS Code
-2. Eikite į plėtinius (Ctrl+Shift+X)
-3. Ieškokite „Azure Developer CLI“
+2. Eikite į Plėtinius (Ctrl+Shift+X)
+3. Ieškokite "Azure Developer CLI"
 4. Įdiekite plėtinį
 
 Funkcijos:
@@ -239,17 +248,17 @@ Sukurkite `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Įdiekite „Azure“ plėtinį
-2. Suaktyvinkite „Azure“ kredencialus
+1. Įdiekite Azure plėtinį
+2. Suveskite Azure kredencialus
 3. Naudokite integruotą terminalą azd komandoms
 
-## 🐛 Diegimo problemų sprendimas
+## 🐛 Diegimo trikčių šalinimas
 
 ### Dažniausios problemos
 
 #### Leidimų trūkumas (Windows)
 ```powershell
-# Run PowerShell as Administrator
+# Paleiskite PowerShell kaip administratorius
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -269,35 +278,35 @@ source ~/.bashrc
 
 #### Tinklo/proxy problemos
 ```bash
-# Configure proxy
+# Konfigūruoti tarpinį serverį
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Skip SSL verification (not recommended for production)
+# Praleisti SSL patikrinimą (nerekomenduojama gamybai)
 azd config set http.insecure true
 ```
 
 #### Versijų konfliktai
 ```bash
-# Remove old installations
-# Windows: winget uninstall Microsoft.Azd
-# macOS: brew uninstall azd
-# Linux: sudo apt remove azd
+# Pašalinti senas diegimo versijas
+# Windows: winget pašalinti Microsoft.Azd
+# macOS: brew pašalinti azd
+# Linux: sudo apt pašalinti azd
 
-# Clean configuration
+# Išvalyti konfigūraciją
 rm -rf ~/.azd
 ```
 
 ### Papildoma pagalba
 ```bash
-# Enable debug logging
+# Įjungti derinimo žurnalavimą
 export AZD_DEBUG=true
 azd <command> --debug
 
-# View detailed logs
+# Peržiūrėti detalius žurnalus
 azd logs
 
-# Check system info
+# Patikrinti sistemos informaciją
 azd info
 ```
 
@@ -326,12 +335,78 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## Tolimesni žingsniai
+## 💡 Dažniausiai užduodami klausimai
 
-1. **Užbaikite autentifikaciją**: Įsitikinkite, kad galite pasiekti savo „Azure“ prenumeratą
+<details>
+<summary><strong>Kuo skiriasi azd ir az CLI?</strong></summary>
+
+**Azure CLI (az)**: Žemo lygio įrankis atskirų Azure resursų valdymui
+- `az webapp create`, `az storage account create`
+- Vienas resursas vienu metu
+- Dėmesys infrastruktūros valdymui
+
+**Azure Developer CLI (azd)**: Aukšto lygio įrankis visos programos diegimui
+- `azd up` diegia visą programą su visais resursais
+- Šablonais pagrįsti darbo srautai
+- Dėmesys kūrėjų produktyvumui
+
+**Jums reikia abiejų**: azd naudoja az CLI autentifikacijai
+</details>
+
+<details>
+<summary><strong>Ar galiu naudoti azd su esamais Azure resursais?</strong></summary>
+
+Taip! Galite:
+1. Importuoti esamus resursus į azd aplinkas
+2. Nurodyti esamus resursus savo Bicep šablonuose
+3. Naudoti azd naujiems diegimams kartu su esama infrastruktūra
+
+Žr. [Konfigūracijos vadovą](configuration.md) dėl detalių.
+</details>
+
+<details>
+<summary><strong>Ar azd veikia su Azure Government ar Azure China?</strong></summary>
+
+Taip, sukonfigūruokite debesį:
+```bash
+# Azure Vyriausybė
+az cloud set --name AzureUSGovernment
+az login
+
+# Azure Kinija
+az cloud set --name AzureChinaCloud
+az login
+```
+</details>
+
+<details>
+<summary><strong>Ar galiu naudoti azd CI/CD vamzdynuose?</strong></summary>
+
+Žinoma! azd sukurtas automatizavimui:
+- GitHub Actions integracija
+- Azure DevOps palaikymas
+- Paslaugos pagrindinio autentifikacija
+- Neinteraktyvus režimas
+
+Žr. [Diegimo vadovą](../deployment/deployment-guide.md) dėl CI/CD modelių.
+</details>
+
+<details>
+<summary><strong>Kiek kainuoja azd naudojimas?</strong></summary>
+
+Pats azd yra **visiškai nemokamas** ir atvirojo kodo. Mokate tik už:
+- Azure resursus, kuriuos diegiate
+- Azure naudojimo išlaidas (skaičiavimai, saugykla ir kt.)
+
+Naudokite `azd provision --preview`, kad įvertintumėte išlaidas prieš diegimą.
+</details>
+
+## Kiti žingsniai
+
+1. **Užbaikite autentifikaciją**: Įsitikinkite, kad galite pasiekti savo Azure prenumeratą
 2. **Išbandykite pirmąjį diegimą**: Sekite [Pirmojo projekto vadovą](first-project.md)
-3. **Naršykite šablonus**: Naršykite pasiekiamus šablonus su `azd template list`
-4. **Konfigūruokite savo IDE**: Nustatykite savo vystymo aplinką
+3. **Naršykite šablonus**: Peržiūrėkite galimus šablonus su `azd template list`
+4. **Sukonfigūruokite savo IDE**: Paruoškite savo vystymo aplinką
 
 ## Pagalba
 
@@ -339,7 +414,7 @@ Jei susiduriate su problemomis:
 - [Oficiali dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Pranešti apie problemas](https://github.com/Azure/azure-dev/issues)
 - [Bendruomenės diskusijos](https://github.com/Azure/azure-dev/discussions)
-- [„Azure“ pagalba](https://azure.microsoft.com/support/)
+- [Azure pagalba](https://azure.microsoft.com/support/)
 
 ---
 
@@ -348,11 +423,13 @@ Jei susiduriate su problemomis:
 - **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas startas
 - **⬅️ Ankstesnis**: [AZD pagrindai](azd-basics.md) 
 - **➡️ Kitas**: [Jūsų pirmasis projektas](first-project.md)
-- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmasis vystymas](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**✅ Diegimas baigtas!** Tęskite [Jūsų pirmasis projektas](first-project.md), kad pradėtumėte kurti su azd.
+**✅ Diegimas baigtas!** Tęskite prie [Jūsų pirmasis projektas](first-project.md), kad pradėtumėte dirbti su azd.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus interpretavimus, atsiradusius naudojant šį vertimą.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

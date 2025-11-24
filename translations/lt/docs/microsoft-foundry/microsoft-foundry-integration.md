@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-18T14:04:33+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-24T10:36:38+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
   "language_code": "lt"
 }
 -->
-# Azure AI Foundry integracija su AZD
+# Microsoft Foundry integracija su AZD
 
 **Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
@@ -18,11 +18,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Apžvalga
 
-Šiame vadove parodoma, kaip integruoti Azure AI Foundry paslaugas su Azure Developer CLI (AZD), siekiant supaprastinti AI programų diegimą. Azure AI Foundry siūlo išsamų platformos sprendimą AI programų kūrimui, diegimui ir valdymui, o AZD palengvina infrastruktūros ir diegimo procesą.
+Šiame vadove parodoma, kaip integruoti Microsoft Foundry paslaugas su Azure Developer CLI (AZD), siekiant supaprastinti AI programų diegimą. Microsoft Foundry siūlo išsamų platformą AI programų kūrimui, diegimui ir valdymui, o AZD palengvina infrastruktūros ir diegimo procesą.
 
-## Kas yra Azure AI Foundry?
+## Kas yra Microsoft Foundry?
 
-Azure AI Foundry yra Microsoft sukurta vieninga platforma AI vystymui, kuri apima:
+Microsoft Foundry yra vieninga Microsoft platforma AI vystymui, kuri apima:
 
 - **Modelių katalogą**: Prieiga prie pažangiausių AI modelių
 - **Prompt Flow**: Vizualinis AI darbo eigų dizaineris
@@ -30,14 +30,14 @@ Azure AI Foundry yra Microsoft sukurta vieninga platforma AI vystymui, kuri apim
 - **Diegimo galimybes**: Įvairūs talpinimo ir mastelio keitimo variantai
 - **Saugumą ir patikimumą**: Integruotos atsakingo AI funkcijos
 
-## AZD + Azure AI Foundry: geriau kartu
+## AZD + Microsoft Foundry: geriau kartu
 
-| Funkcija | Azure AI Foundry | AZD integracijos privalumas |
-|----------|------------------|----------------------------|
+| Funkcija | Microsoft Foundry | AZD integracijos privalumas |
+|----------|-------------------|----------------------------|
 | **Modelio diegimas** | Rankinis portalo diegimas | Automatizuoti, pakartojami diegimai |
 | **Infrastruktūra** | Pasirinkimų peržiūra | Infrastruktūra kaip kodas (Bicep) |
 | **Aplinkos valdymas** | Vienos aplinkos dėmesys | Daugiaaplinkos (dev/staging/prod) |
-| **CI/CD integracija** | Ribota | Integruota GitHub Actions palaikymas |
+| **CI/CD integracija** | Ribota | Natūrali GitHub Actions palaikymas |
 | **Kaštų valdymas** | Pagrindinis stebėjimas | Aplinkai specifinis kaštų optimizavimas |
 
 ## Būtinos sąlygos
@@ -45,13 +45,13 @@ Azure AI Foundry yra Microsoft sukurta vieninga platforma AI vystymui, kuri apim
 - Azure prenumerata su tinkamais leidimais
 - Įdiegtas Azure Developer CLI
 - Prieiga prie Azure OpenAI paslaugų
-- Pagrindinės žinios apie Azure AI Foundry
+- Pagrindinės žinios apie Microsoft Foundry
 
 ## Pagrindiniai integracijos modeliai
 
 ### Modelis 1: Azure OpenAI integracija
 
-**Naudojimo atvejis**: Pokalbių programų diegimas su Azure OpenAI modeliais
+**Naudojimo atvejis**: Diegti pokalbių programas su Azure OpenAI modeliais
 
 ```yaml
 # azure.yaml
@@ -101,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Modelis 2: AI paieška + RAG integracija
 
-**Naudojimo atvejis**: Diegti paieškos ir generavimo (RAG) programas
+**Naudojimo atvejis**: Diegti paieškos papildytos generacijos (RAG) programas
 
 ```bicep
 // Azure AI Search
@@ -168,29 +168,29 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Produkcijos konfigūracija:**
 ```bash
-# Core AI services
+# Pagrindinės AI paslaugos
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Model configurations
+# Modelio konfigūracijos
 azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
 
-# Performance settings
+# Našumo nustatymai
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Vystymo konfigūracija:**
 ```bash
-# Cost-optimized settings for development
+# Optimizuotos išlaidos kūrimui
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Nemokamas lygis
 ```
 
-### Saugus konfigūravimas naudojant Key Vault
+### Saugus konfigūravimas su Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -230,24 +230,24 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 ### Vieno komandos diegimas
 
 ```bash
-# Deploy everything with one command
+# Viską įdiegti vienu komandu
 azd up
 
-# Or deploy incrementally
-azd provision  # Infrastructure only
-azd deploy     # Application only
+# Arba diegti palaipsniui
+azd provision  # Tik infrastruktūra
+azd deploy     # Tik aplikacija
 ```
 
 ### Aplinkai specifiniai diegimai
 
 ```bash
-# Development environment
+# Kūrimo aplinka
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Production environment
+# Gamybos aplinka
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -397,7 +397,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Automatinio mastelio konfigūracija
+### Automatinio mastelio keitimo konfigūracija
 
 ```bicep
 // Container App with auto-scaling
@@ -441,14 +441,14 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 **Sprendimai:**
 ```bash
-# Check current quota usage
+# Patikrinkite dabartinį kvotos naudojimą
 az cognitiveservices usage list --location eastus
 
-# Try different region
+# Pabandykite kitą regioną
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacity temporarily
+# Laikinai sumažinkite pajėgumą
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -456,18 +456,18 @@ azd deploy
 ### Problema 2: Autentifikacijos klaidos
 
 **Simptomai:**
-- 401/403 klaidos, kai kreipiamasi į AI paslaugas
+- 401/403 klaidos, kai kviečiamos AI paslaugos
 - „Prieiga uždrausta“ pranešimai
 
 **Sprendimai:**
 ```bash
-# Verify role assignments
+# Patikrinkite vaidmenų priskyrimus
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Check managed identity configuration
+# Patikrinkite valdomos tapatybės konfigūraciją
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validate Key Vault access
+# Patvirtinkite prieigą prie Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
@@ -475,15 +475,15 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Simptomai:**
 - Modeliai nėra prieinami diegime
-- Konkretūs modelio versijų gedimai
+- Konkretūs modelio versijos nepavyksta
 
 **Sprendimai:**
 ```bash
-# List available models by region
+# Išvardykite galimus modelius pagal regioną
 az cognitiveservices model list --location eastus
 
-# Update model version in bicep template
-# Check model capacity requirements
+# Atnaujinkite modelio versiją bicep šablone
+# Patikrinkite modelio pajėgumo reikalavimus
 ```
 
 ## Pavyzdiniai šablonai
@@ -512,7 +512,7 @@ azd init --template ai-document-processing
 azd up
 ```
 
-### Įmonės pokalbiai su RAG
+### Įmonės pokalbis su RAG
 
 **Saugykla**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
@@ -529,13 +529,261 @@ azd up
 1. **Išbandykite pavyzdžius**: Pradėkite nuo iš anksto paruošto šablono, kuris atitinka jūsų naudojimo atvejį
 2. **Pritaikykite savo poreikiams**: Modifikuokite infrastruktūrą ir programos kodą
 3. **Pridėkite stebėjimą**: Įgyvendinkite išsamų stebimumą
-4. **Optimizuokite kaštus**: Koreguokite konfigūraciją pagal savo biudžetą
+4. **Optimizuokite kaštus**: Koreguokite konfigūracijas pagal savo biudžetą
 5. **Užtikrinkite diegimo saugumą**: Įgyvendinkite įmonės saugumo modelius
-6. **Mastelis iki produkcijos**: Pridėkite daugiaregionines ir aukšto prieinamumo funkcijas
+6. **Mastelio keitimas iki produkcijos**: Pridėkite daugiaregionines ir aukšto prieinamumo funkcijas
+
+## 🎯 Praktinės užduotys
+
+### Užduotis 1: Diegti Azure OpenAI pokalbių programą (30 minučių)
+**Tikslas**: Diegti ir išbandyti produkcijai paruoštą AI pokalbių programą
+
+```bash
+# Inicializuoti šabloną
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Nustatyti aplinkos kintamuosius
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Diegti
+azd up
+
+# Testuoti programą
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Stebėti AI operacijas
+azd monitor
+
+# Išvalyti
+azd down --force --purge
+```
+
+**Sėkmės kriterijai:**
+- [ ] Diegimas baigtas be kvotos klaidų
+- [ ] Galima pasiekti pokalbių sąsają naršyklėje
+- [ ] Galima užduoti klausimus ir gauti AI atsakymus
+- [ ] Application Insights rodo telemetrijos duomenis
+- [ ] Sėkmingai išvalyti resursai
+
+**Numatoma kaina**: $5-10 už 30 minučių testavimo
+
+### Užduotis 2: Konfigūruoti daugelio modelių diegimą (45 minutės)
+**Tikslas**: Diegti kelis AI modelius su skirtingomis konfigūracijomis
+
+```bash
+# Sukurkite pasirinktinius Bicep konfigūraciją
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Įdiegti ir patikrinti
+azd provision
+azd show
+```
+
+**Sėkmės kriterijai:**
+- [ ] Keli modeliai sėkmingai įdiegti
+- [ ] Taikytos skirtingos pajėgumo nustatymo konfigūracijos
+- [ ] Modeliai pasiekiami per API
+- [ ] Galima kviesti abu modelius iš programos
+
+### Užduotis 3: Įgyvendinti kaštų stebėjimą (20 minučių)
+**Tikslas**: Nustatyti biudžeto įspėjimus ir kaštų stebėjimą
+
+```bash
+# Pridėti biudžeto įspėjimą į Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Įdiegti biudžeto įspėjimą
+azd provision
+
+# Patikrinti dabartines išlaidas
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Sėkmės kriterijai:**
+- [ ] Sukurtas biudžeto įspėjimas Azure
+- [ ] Suaktyvinti el. pašto pranešimai
+- [ ] Galima peržiūrėti kaštų duomenis Azure portale
+- [ ] Tinkamai nustatyti biudžeto slenksčiai
+
+## 💡 Dažniausiai užduodami klausimai
+
+<details>
+<summary><strong>Kaip sumažinti Azure OpenAI kaštus vystymo metu?</strong></summary>
+
+1. **Naudokite nemokamą planą**: Azure OpenAI siūlo 50,000 žetonų/mėn nemokamai
+2. **Sumažinkite pajėgumą**: Nustatykite pajėgumą iki 10 TPM vietoj 30+ vystymui
+3. **Naudokite azd down**: Išjunkite resursus, kai aktyviai nevystote
+4. **Talpyklos atsakymai**: Įgyvendinkite Redis talpyklą pasikartojantiems užklausoms
+5. **Prompt Engineering**: Sumažinkite žetonų naudojimą efektyviais užklausų tekstais
+
+```bash
+# Kūrimo konfigūracija
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>Kuo skiriasi Azure OpenAI ir OpenAI API?</strong></summary>
+
+**Azure OpenAI**:
+- Įmonės saugumas ir atitiktis
+- Privataus tinklo integracija
+- SLA garantijos
+- Valdomos tapatybės autentifikacija
+- Galimos didesnės kvotos
+
+**OpenAI API**:
+- Greitesnė prieiga prie naujų modelių
+- Paprastesnis nustatymas
+- Mažesnė įėjimo barjera
+- Tik viešasis internetas
+
+Produkcijos programoms **rekomenduojama Azure OpenAI**.
+</details>
+
+<details>
+<summary><strong>Kaip spręsti Azure OpenAI kvotos viršijimo klaidas?</strong></summary>
+
+```bash
+# Patikrinkite dabartinę kvotą
+az cognitiveservices usage list --location eastus2
+
+# Pabandykite kitą regioną
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Laikinai sumažinkite pajėgumą
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Pateikite prašymą padidinti kvotą
+# Eikite į Azure Portal > Kvotos > Prašyti padidinimo
+```
+</details>
+
+<details>
+<summary><strong>Ar galiu naudoti savo duomenis su Azure OpenAI?</strong></summary>
+
+Taip! Naudokite **Azure AI Search** RAG (Retrieval Augmented Generation):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+Žiūrėkite [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) šabloną.
+</details>
+
+<details>
+<summary><strong>Kaip užtikrinti AI modelių galinių taškų saugumą?</strong></summary>
+
+**Geriausios praktikos**:
+1. Naudokite valdomą tapatybę (be API raktų)
+2. Įgalinkite privačius galinius taškus
+3. Konfigūruokite tinklo saugumo grupes
+4. Įgyvendinkite užklausų ribojimą
+5. Naudokite Azure Key Vault slaptažodžiams
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
 
 ## Bendruomenė ir palaikymas
 
-- **Azure AI Foundry Discord**: [#Azure kanalas](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure kanalas](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Problemos ir diskusijos](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Oficiali dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
 
@@ -552,5 +800,7 @@ azd up
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus interpretavimus, atsiradusius naudojant šį vertimą.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
