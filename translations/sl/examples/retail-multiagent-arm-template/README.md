@@ -1,107 +1,363 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "eb84941706983946ae03bfa0433c0bb6",
-  "translation_date": "2025-09-18T14:22:49+00:00",
+  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
+  "translation_date": "2025-11-23T21:17:53+00:00",
   "source_file": "examples/retail-multiagent-arm-template/README.md",
   "language_code": "sl"
 }
 -->
-# Rešitev za maloprodajo z več agenti - Namestitev ARM predloge
+# Rešitev za več agentov v maloprodaji - Predloga infrastrukture
 
-**Poglavje 5: Paket za produkcijsko namestitev**
+**Poglavje 5: Paket za produkcijsko uvedbo**
 - **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
 - **📖 Povezano poglavje**: [Poglavje 5: Rešitve z več agenti AI](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Vodnik scenarija**: [Popolna implementacija](../retail-scenario.md)
-- **🎯 Hitro nameščanje**: [Namestitev z enim klikom](../../../../examples/retail-multiagent-arm-template)
+- **📝 Vodnik scenarija**: [Celotna arhitektura](../retail-scenario.md)
+- **🎯 Hitro uvajanje**: [Uvajanje z enim klikom](../../../../examples/retail-multiagent-arm-template)
 
-Ta mapa vsebuje popolno predlogo Azure Resource Manager (ARM) za namestitev rešitve za podporo strankam z več agenti v maloprodaji, ki zagotavlja infrastrukturo kot kodo za celotno arhitekturo.
+> **⚠️ SAMO PREDLOGA INFRASTRUKTURE**  
+> Ta ARM predloga uvaja **Azure vire** za sistem z več agenti.  
+>  
+> **Kaj se uvede (15-25 minut):**
+> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, vektorske predstavitve v treh regijah)
+> - ✅ Storitev AI Search (prazna, pripravljena za ustvarjanje indeksov)
+> - ✅ Container Apps (slike z rezerviranimi mesti, pripravljene za vašo kodo)
+> - ✅ Storage, Cosmos DB, Key Vault, Application Insights
+>  
+> **Kaj NI vključeno (zahteva razvoj):**
+> - ❌ Koda za implementacijo agentov (Agent za stranke, Agent za zaloge)
+> - ❌ Logika usmerjanja in API končne točke
+> - ❌ Uporabniški vmesnik za klepet na sprednji strani
+> - ❌ Sheme iskalnih indeksov in podatkovni tokovi
+> - ❌ **Ocenjeni razvojni napor: 80-120 ur**
+>  
+> **Uporabite to predlogo, če:**
+> - ✅ Želite pripraviti Azure infrastrukturo za projekt z več agenti
+> - ✅ Načrtujete ločen razvoj implementacije agentov
+> - ✅ Potrebujete osnovo za infrastrukturo, pripravljeno za produkcijo
+>  
+> **Ne uporabljajte, če:**
+> - ❌ Pričakujete takojšen delujoč demo z več agenti
+> - ❌ Iščete popolne primere aplikacijske kode
 
-## 🎯 Kaj se namesti
+## Pregled
 
-### Osnovna infrastruktura
-- **Azure OpenAI storitve** (več regij za visoko razpoložljivost)
-  - Primarna regija: GPT-4o za agenta za stranke
-  - Sekundarna regija: GPT-4o-mini za agenta za zaloge  
-  - Tretja regija: Model za besedilne vektorske predstavitve
-  - Regija za ocenjevanje: GPT-4o ocenjevalni model
-- **Azure AI Search** z zmogljivostmi iskanja po vektorjih
-- **Azure Storage Account** z vsebniki za dokumente in nalaganja
-- **Azure Container Apps Environment** z avtomatskim skaliranjem
-- **Container Apps** za usmerjevalnik agentov in uporabniški vmesnik
-- **Azure Cosmos DB** za shranjevanje zgodovine klepeta
-- **Azure Key Vault** za upravljanje skrivnosti (neobvezno)
-- **Application Insights** in Log Analytics za spremljanje (neobvezno)
-- **Document Intelligence** za obdelavo dokumentov
-- **Bing Search API** za informacije v realnem času
+Ta mapa vsebuje celovito predlogo Azure Resource Manager (ARM) za uvajanje **osnovne infrastrukture** sistema za podporo strankam z več agenti. Predloga pripravi vse potrebne Azure storitve, pravilno konfigurirane in medsebojno povezane, pripravljene za vaš razvoj aplikacij.
 
-### Načini namestitve
+**Po uvedbi boste imeli:** Infrastrukturo Azure, pripravljeno za produkcijo  
+**Za dokončanje sistema potrebujete:** Kodo agentov, uporabniški vmesnik in konfiguracijo podatkov (glejte [Vodnik arhitekture](../retail-scenario.md))
 
-| Način | Opis | Uporaba | Viri |
-|-------|------|---------|------|
-| **Minimalno** | Stroškovno optimizirana osnovna namestitev | Razvoj, testiranje | Osnovni SKUs, ena regija, zmanjšana zmogljivost |
-| **Standardno** | Uravnotežena namestitev za produkcijsko uporabo | Produkcija, zmerna obremenitev | Standardni SKUs, več regij, standardna zmogljivost |
-| **Premium** | Visoko zmogljiva, podjetniška namestitev | Podjetje, velika obremenitev | Premium SKUs, več regij, visoka zmogljivost |
+## 🎯 Kaj se uvede
+
+### Osnovna infrastruktura (status po uvedbi)
+
+✅ **Azure OpenAI storitve** (Pripravljene za API klice)
+  - Primarna regija: GPT-4o uvedba (zmogljivost 20K TPM)
+  - Sekundarna regija: GPT-4o-mini uvedba (zmogljivost 10K TPM)
+  - Tretja regija: Model za vektorske predstavitve (zmogljivost 30K TPM)
+  - Evalvacija regije: GPT-4o model za ocenjevanje (zmogljivost 15K TPM)
+  - **Status:** Popolnoma funkcionalno - takoj pripravljeno za API klice
+
+✅ **Azure AI Search** (Prazno - pripravljeno za konfiguracijo)
+  - Omogočene zmogljivosti vektorskega iskanja
+  - Standardna stopnja z 1 particijo, 1 repliko
+  - **Status:** Storitev deluje, vendar zahteva ustvarjanje indeksov
+  - **Potrebno ukrepanje:** Ustvarite iskalni indeks z vašo shemo
+
+✅ **Azure Storage Account** (Prazno - pripravljeno za nalaganje)
+  - Posode za blob: `documents`, `uploads`
+  - Varna konfiguracija (samo HTTPS, brez javnega dostopa)
+  - **Status:** Pripravljeno za sprejemanje datotek
+  - **Potrebno ukrepanje:** Naložite podatke o izdelkih in dokumente
+
+⚠️ **Container Apps Environment** (Uvedene slike z rezerviranimi mesti)
+  - Aplikacija za usmerjanje agentov (privzeta slika nginx)
+  - Aplikacija na sprednji strani (privzeta slika nginx)
+  - Samodejno skaliranje konfigurirano (0-10 primerkov)
+  - **Status:** Delujoče posode z rezerviranimi mesti
+  - **Potrebno ukrepanje:** Zgradite in uvedite aplikacije za agente
+
+✅ **Azure Cosmos DB** (Prazno - pripravljeno za podatke)
+  - Predkonfigurirana baza podatkov in posoda
+  - Optimizirano za operacije z nizko zakasnitvijo
+  - TTL omogočen za samodejno čiščenje
+  - **Status:** Pripravljeno za shranjevanje zgodovine klepeta
+
+✅ **Azure Key Vault** (Neobvezno - pripravljeno za shranjevanje skrivnosti)
+  - Omogočeno mehko brisanje
+  - RBAC konfiguriran za upravljane identitete
+  - **Status:** Pripravljeno za shranjevanje API ključev in povezovalnih nizov
+
+✅ **Application Insights** (Neobvezno - aktivno spremljanje)
+  - Povezano z delovnim prostorom Log Analytics
+  - Konfigurirane prilagojene metrike in opozorila
+  - **Status:** Pripravljeno za sprejemanje telemetrije iz vaših aplikacij
+
+✅ **Document Intelligence** (Pripravljeno za API klice)
+  - S0 stopnja za produkcijske obremenitve
+  - **Status:** Pripravljeno za obdelavo naloženih dokumentov
+
+✅ **Bing Search API** (Pripravljeno za API klice)
+  - S1 stopnja za iskanje v realnem času
+  - **Status:** Pripravljeno za spletne iskalne poizvedbe
+
+### Načini uvajanja
+
+| Način | Zmogljivost OpenAI | Primerki posod | Stopnja iskanja | Redundanca shranjevanja | Najbolj primerno za |
+|-------|--------------------|----------------|------------------|-------------------------|---------------------|
+| **Minimalno** | 10K-20K TPM | 0-2 replike | Osnovno | LRS (Lokalno) | Razvoj/testiranje, učenje, dokaz koncepta |
+| **Standardno** | 30K-60K TPM | 2-5 replike | Standardno | ZRS (Cona) | Produkcija, zmerni promet (<10K uporabnikov) |
+| **Premium** | 80K-150K TPM | 5-10 replike, redundanca po conah | Premium | GRS (Geo) | Podjetje, visok promet (>10K uporabnikov), 99,99% SLA |
+
+**Vpliv na stroške:**
+- **Minimalno → Standardno:** ~4x povečanje stroškov ($100-370/mesec → $420-1,450/mesec)
+- **Standardno → Premium:** ~3x povečanje stroškov ($420-1,450/mesec → $1,150-3,500/mesec)
+- **Izberite glede na:** Pričakovano obremenitev, zahteve SLA, proračunske omejitve
+
+**Načrtovanje zmogljivosti:**
+- **TPM (žetoni na minuto):** Skupno število vseh uvedb modelov
+- **Primerki posod:** Obseg samodejnega skaliranja (min-max replike)
+- **Stopnja iskanja:** Vpliva na zmogljivost poizvedb in omejitve velikosti indeksov
 
 ## 📋 Predpogoji
 
-1. **Azure CLI** nameščen in konfiguriran
-2. **Aktivna naročnina Azure** z zadostnimi kvotami
-3. **Ustrezna dovoljenja** za ustvarjanje virov v ciljni naročnini
-4. **Kvote virov** za:
-   - Azure OpenAI (preverite razpoložljivost po regijah)
-   - Container Apps (razlikuje se glede na regijo)
-   - AI Search (priporočena standardna stopnja ali višja)
+### Zahtevana orodja
+1. **Azure CLI** (različica 2.50.0 ali novejša)
+   ```bash
+   az --version  # Preveri različico
+   az login      # Avtenticiraj
+   ```
 
-## 🚀 Hitro nameščanje
+2. **Aktivna naročnina Azure** z dostopom lastnika ali sodelavca
+   ```bash
+   az account show  # Preveri naročnino
+   ```
+
+### Zahtevane kvote Azure
+
+Pred uvedbo preverite zadostne kvote v ciljnih regijah:
+
+```bash
+# Preverite razpoložljivost Azure OpenAI v vaši regiji
+az cognitiveservices account list-skus \
+  --kind OpenAI \
+  --location eastus2
+
+# Preverite kvoto OpenAI (primer za gpt-4o)
+az cognitiveservices usage list \
+  --location eastus2 \
+  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+
+# Preverite kvoto za Container Apps
+az provider show \
+  --namespace Microsoft.App \
+  --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
+```
+
+**Minimalne zahtevane kvote:**
+- **Azure OpenAI:** 3-4 uvedbe modelov v regijah
+  - GPT-4o: 20K TPM (žetoni na minuto)
+  - GPT-4o-mini: 10K TPM
+  - text-embedding-ada-002: 30K TPM
+  - **Opomba:** GPT-4o je lahko na čakalni listi v nekaterih regijah - preverite [razpoložljivost modelov](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps:** Upravljano okolje + 2-10 primerkov posod
+- **AI Search:** Standardna stopnja (osnovna ni primerna za vektorsko iskanje)
+- **Cosmos DB:** Standardna zagotovljena prepustnost
+
+**Če kvote niso zadostne:**
+1. Pojdite na Azure Portal → Kvote → Zahtevajte povečanje
+2. Ali uporabite Azure CLI:
+   ```bash
+   az support tickets create \
+     --ticket-name "OpenAI-Quota-Increase" \
+     --severity "minimal" \
+     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+   ```
+3. Razmislite o alternativnih regijah z razpoložljivostjo
+
+## 🚀 Hitro uvajanje
 
 ### Možnost 1: Uporaba Azure CLI
 
 ```bash
-# Clone or download the template files
+# Klonirajte ali prenesite predložne datoteke
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# Make the deployment script executable
+# Naredite skripto za uvajanje izvedljivo
 chmod +x deploy.sh
 
-# Deploy with default settings
+# Uvedite z privzetimi nastavitvami
 ./deploy.sh -g myResourceGroup
 
-# Deploy for production with premium features
+# Uvedite za produkcijo s premium funkcijami
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Možnost 2: Uporaba Azure Portala
+### Možnost 2: Uporaba Azure Portal
 
-[![Namesti v Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Uvedi v Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Možnost 3: Neposredna uporaba Azure CLI
+### Možnost 3: Neposredno z uporabo Azure CLI
 
 ```bash
-# Create resource group
+# Ustvari skupino virov
 az group create --name myResourceGroup --location eastus2
 
-# Deploy template
+# Namesti predlogo
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json
 ```
 
+## ⏱️ Časovni okvir uvajanja
+
+### Kaj pričakovati
+
+| Faza | Trajanje | Kaj se zgodi |
+|------|----------|--------------||
+| **Validacija predloge** | 30-60 sekund | Azure preveri sintakso ARM predloge in parametre |
+| **Nastavitev skupine virov** | 10-20 sekund | Ustvari skupino virov (če je potrebno) |
+| **Uvajanje OpenAI** | 5-8 minut | Ustvari 3-4 OpenAI račune in uvede modele |
+| **Container Apps** | 3-5 minut | Ustvari okolje in uvede posode z rezerviranimi mesti |
+| **Iskanje in shranjevanje** | 2-4 minute | Pripravi storitev AI Search in račune za shranjevanje |
+| **Cosmos DB** | 2-3 minute | Ustvari bazo podatkov in konfigurira posode |
+| **Nastavitev spremljanja** | 2-3 minute | Nastavi Application Insights in Log Analytics |
+| **Konfiguracija RBAC** | 1-2 minuti | Konfigurira upravljane identitete in dovoljenja |
+| **Skupno uvajanje** | **15-25 minut** | Popolna infrastruktura pripravljena |
+
+**Po uvedbi:**
+- ✅ **Infrastruktura pripravljena:** Vsi Azure viri so uvedeni in delujejo
+- ⏱️ **Razvoj aplikacij:** 80-120 ur (vaša odgovornost)
+- ⏱️ **Konfiguracija indeksov:** 15-30 minut (zahteva vašo shemo)
+- ⏱️ **Nalaganje podatkov:** Odvisno od velikosti nabora podatkov
+- ⏱️ **Testiranje in validacija:** 2-4 ure
+
+---
+
+## ✅ Preverite uspešnost uvajanja
+
+### Korak 1: Preverite uvedbo virov (2 minuti)
+
+```bash
+# Preverite, ali so vsi viri uspešno uvedeni
+az resource list \
+  --resource-group myResourceGroup \
+  --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
+  --output table
+```
+
+**Pričakovano:** Prazna tabela (vsi viri prikazujejo status "Uspešno")
+
+### Korak 2: Preverite uvedbe Azure OpenAI (3 minute)
+
+```bash
+# Naštej vse OpenAI račune
+az cognitiveservices account list \
+  --resource-group myResourceGroup \
+  --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
+  --output table
+
+# Preveri namestitve modelov za primarno regijo
+OPENAI_NAME=$(az cognitiveservices account list \
+  --resource-group myResourceGroup \
+  --query "[?kind=='OpenAI'] | [0].name" -o tsv)
+
+az cognitiveservices account deployment list \
+  --name $OPENAI_NAME \
+  --resource-group myResourceGroup \
+  --output table
+```
+
+**Pričakovano:** 
+- 3-4 OpenAI računi (primarna, sekundarna, tretja, evalvacija regije)
+- 1-2 uvedbe modelov na račun (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+
+### Korak 3: Testirajte končne točke infrastrukture (5 minut)
+
+```bash
+# Pridobi URL-je aplikacije Container
+az containerapp list \
+  --resource-group myResourceGroup \
+  --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
+  --output table
+
+# Preizkusi končno točko usmerjevalnika (odzvala se bo nadomestna slika)
+ROUTER_URL=$(az containerapp show \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --query "properties.configuration.ingress.fqdn" -o tsv)
+
+echo "Testing: https://$ROUTER_URL"
+curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
+```
+
+**Pričakovano:** 
+- Container Apps prikazujejo status "Deluje"
+- Rezervirani nginx odgovarja s HTTP 200 ali 404 (še ni aplikacijske kode)
+
+### Korak 4: Preverite dostop do Azure OpenAI API (3 minute)
+
+```bash
+# Pridobi OpenAI končno točko in ključ
+OPENAI_ENDPOINT=$(az cognitiveservices account show \
+  --name $OPENAI_NAME \
+  --resource-group myResourceGroup \
+  --query "properties.endpoint" -o tsv)
+
+OPENAI_KEY=$(az cognitiveservices account keys list \
+  --name $OPENAI_NAME \
+  --resource-group myResourceGroup \
+  --query "key1" -o tsv)
+
+# Preizkusi GPT-4o uvajanje
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+  -H "Content-Type: application/json" \
+  -H "api-key: $OPENAI_KEY" \
+  -d '{
+    "messages": [{"role": "user", "content": "Say hello"}],
+    "max_tokens": 10
+  }'
+```
+
+**Pričakovano:** JSON odgovor z dokončanjem klepeta (potrjuje funkcionalnost OpenAI)
+
+### Kaj deluje in kaj ne
+
+**✅ Deluje po uvedbi:**
+- Azure OpenAI modeli uvedeni in sprejemajo API klice
+- Storitev AI Search deluje (prazna, brez indeksov)
+- Container Apps delujejo (rezervirane slike nginx)
+- Računi za shranjevanje dostopni in pripravljeni za nalaganje
+- Cosmos DB pripravljen za podatkovne operacije
+- Application Insights zbira telemetrijo infrastrukture
+- Key Vault pripravljen za shranjevanje skrivnosti
+
+**❌ Še ne deluje (zahteva razvoj):**
+- Končne točke agentov (ni uvedene aplikacijske kode)
+- Funkcionalnost klepeta (zahteva sprednji + zadnji del implementacije)
+- Iskalne poizvedbe (ni ustvarjenega iskalnega indeksa)
+- Tok obdelave dokumentov (ni naloženih podatkov)
+- Prilagojena telemetrija (zahteva instrumentacijo aplikacije)
+
+**Naslednji koraki:** Glejte [Konfiguracija po uvedbi](../../../../examples/retail-multiagent-arm-template) za razvoj in uvedbo vaše aplikacije
+
+---
+
 ## ⚙️ Možnosti konfiguracije
 
 ### Parametri predloge
 
 | Parameter | Tip | Privzeto | Opis |
-|-----------|-----|----------|------|
-| `projectName` | string | "retail" | Predpona za imena vseh virov |
-| `location` | string | Lokacija skupine virov | Primarna regija namestitve |
-| `secondaryLocation` | string | "westus2" | Sekundarna regija za namestitev v več regijah |
+|-----------|------|---------|------|
+| `projectName` | string | "retail" | Predpona za vsa imena virov |
+| `location` | string | Lokacija skupine virov | Primarna regija uvajanja |
+| `secondaryLocation` | string | "westus2" | Sekundarna regija za uvajanje v več regijah |
 | `tertiaryLocation` | string | "francecentral" | Regija za model vektorskih predstavitev |
-| `environmentName` | string | "dev" | Oznaka okolja (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | Konfiguracija namestitve (minimalno/standardno/premium) |
-| `enableMultiRegion` | bool | true | Omogoči namestitev v več regijah |
+| `environmentName` | string | "dev" | Oznaka okolja (razvoj/testiranje/produkcija) |
+| `deploymentMode` | string | "standard" | Konfiguracija uvajanja (minimalno/standardno/premium) |
+| `enableMultiRegion` | bool | true | Omogoči uvajanje v več regijah |
 | `enableMonitoring` | bool | true | Omogoči Application Insights in beleženje |
 | `enableSecurity` | bool | true | Omogoči Key Vault in izboljšano varnost |
 
@@ -151,18 +407,18 @@ Uredite `azuredeploy.parameters.json`:
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 📖 Uporaba skripta za namestitev
+## 📖 Uporaba skripta za uvajanje
 
-Skript `deploy.sh` omogoča interaktivno izkušnjo namestitve:
+Skript `deploy.sh` omogoča interaktivno izkušnjo uvajanja:
 
 ```bash
-# Show help
+# Prikaži pomoč
 ./deploy.sh --help
 
-# Basic deployment
+# Osnovna namestitev
 ./deploy.sh -g myResourceGroup
 
-# Advanced deployment with custom settings
+# Napredna namestitev s prilagojenimi nastavitvami
 ./deploy.sh \
   -g myProductionRG \
   -p companyname \
@@ -170,7 +426,7 @@ Skript `deploy.sh` omogoča interaktivno izkušnjo namestitve:
   -m premium \
   -l eastus2
 
-# Development deployment without multi-region
+# Razvojna namestitev brez več regij
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -179,29 +435,29 @@ Skript `deploy.sh` omogoča interaktivno izkušnjo namestitve:
   --no-security
 ```
 
-### Značilnosti skripta
+### Funkcije skripta
 
-- ✅ **Preverjanje predpogojev** (Azure CLI, status prijave, datoteke predloge)
+- ✅ **Validacija predpogojev** (Azure CLI, status prijave, datoteke predloge)
 - ✅ **Upravljanje skupine virov** (ustvari, če ne obstaja)
-- ✅ **Preverjanje predloge** pred namestitvijo
+- ✅ **Validacija predloge** pred uvajanjem
 - ✅ **Spremljanje napredka** z barvnim izpisom
-- ✅ **Prikaz rezultatov namestitve**
-- ✅ **Navodila po namestitvi**
+- ✅ **Prikaz rezultatov uvajanja**
+- ✅ **Vodnik po uvedbi**
 
-## 📊 Spremljanje namestitve
+## 📊 Spremljanje uvajanja
 
-### Preverjanje statusa namestitve
+### Preverite status uvajanja
 
 ```bash
-# List deployments
+# Seznam namestitev
 az deployment group list --resource-group myResourceGroup --output table
 
-# Get deployment details
+# Pridobite podrobnosti o namestitvi
 az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Watch deployment progress
+# Spremljajte napredek namestitve
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -209,126 +465,251 @@ az deployment group create \
   --verbose
 ```
 
-### Rezultati namestitve
+### Rezultati uvajanja
 
-Po uspešni namestitvi so na voljo naslednji rezultati:
+Po uspešni uvedbi so na voljo naslednji rezultati:
 
-- **URL uporabniškega vmesnika**: Javni dostop do spletnega vmesnika
-- **URL usmerjevalnika**: API dostop do usmerjevalnika agentov
-- **OpenAI končne točke**: Primarne in sekundarne končne točke storitve OpenAI
-- **Storitev iskanja**: Končna točka storitve Azure AI Search
-- **Račun za shranjevanje**: Ime računa za shranjevanje dokumentov
-- **Key Vault**: Ime Key Vault (če je omogočeno)
-- **Application Insights**: Ime storitve za spremljanje (če je omogočeno)
+- **URL sprednjega dela:** Javni naslov za spletni vmesnik
+- **URL usmerjevalnika:** API naslov za usmerjevalnik agentov
+- **OpenAI končne točke:** Primarne in sekundarne končne točke storitve OpenAI
+- **Storitev iskanja:** Naslov storitve Azure AI Search
+- **Račun za shranjevanje:** Ime računa za shranjevanje dokumentov
+- **Key Vault:** Ime Key Vault (če je omogočeno)
+- **Application Insights:** Ime storitve za spremljanje (če je omogočeno)
 
-## 🔧 Konfiguracija po namestitvi
+## 🔧 Po uvedbi: Naslednji koraki
+> **📝 Pomembno:** Infrastruktura je nameščena, vendar morate razviti in namestiti aplikacijsko kodo.
 
-### 1. Konfigurirajte indeks iskanja
+### Faza 1: Razvoj aplikacij agentov (Vaša odgovornost)
+
+ARM predloga ustvari **prazne aplikacije Container Apps** s predhodno nameščenimi slikami nginx. Vaša naloga je:
+
+**Potrebni razvojni koraki:**
+1. **Implementacija agentov** (30-40 ur)
+   - Agent za podporo strankam z integracijo GPT-4o
+   - Agent za inventar z integracijo GPT-4o-mini
+   - Logika usmerjanja agentov
+
+2. **Razvoj uporabniškega vmesnika** (20-30 ur)
+   - UI za klepet (React/Vue/Angular)
+   - Funkcionalnost za nalaganje datotek
+   - Prikaz in formatiranje odgovorov
+
+3. **Zaledne storitve** (12-16 ur)
+   - FastAPI ali Express router
+   - Middleware za avtentikacijo
+   - Integracija telemetrije
+
+**Glej:** [Vodnik za arhitekturo](../retail-scenario.md) za podrobne vzorce implementacije in primere kode
+
+### Faza 2: Konfiguracija AI iskalnega indeksa (15-30 minut)
+
+Ustvarite iskalni indeks, ki ustreza vašemu podatkovnemu modelu:
 
 ```bash
-# Set environment variables from deployment outputs
-export SEARCH_SERVICE_NAME="<search-service-name>"
-export SEARCH_ADMIN_KEY="<search-admin-key>"
+# Pridobite podrobnosti storitve iskanja
+SEARCH_NAME=$(az search service list \
+  --resource-group myResourceGroup \
+  --query "[0].name" -o tsv)
 
-# Create search index (customize schema as needed)
-curl -X POST "https://${SEARCH_SERVICE_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
+SEARCH_KEY=$(az search admin-key show \
+  --service-name $SEARCH_NAME \
+  --resource-group myResourceGroup \
+  --query "primaryKey" -o tsv)
+
+# Ustvarite indeks s svojo shemo (primer)
+curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
-  -H "api-key: ${SEARCH_ADMIN_KEY}" \
-  -d @../data/search-schema.json
+  -H "api-key: ${SEARCH_KEY}" \
+  -d '{
+    "name": "products",
+    "fields": [
+      {"name": "id", "type": "Edm.String", "key": true},
+      {"name": "title", "type": "Edm.String", "searchable": true},
+      {"name": "content", "type": "Edm.String", "searchable": true},
+      {"name": "category", "type": "Edm.String", "filterable": true},
+      {"name": "content_vector", "type": "Collection(Edm.Single)", 
+       "searchable": true, "dimensions": 1536, "vectorSearchProfile": "default"}
+    ],
+    "vectorSearch": {
+      "algorithms": [{"name": "default", "kind": "hnsw"}],
+      "profiles": [{"name": "default", "algorithm": "default"}]
+    }
+  }'
 ```
 
-### 2. Naložite začetne podatke
+**Viri:**
+- [Oblikovanje sheme AI iskalnega indeksa](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Konfiguracija iskanja z vektorji](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+
+### Faza 3: Nalaganje vaših podatkov (čas se razlikuje)
+
+Ko imate podatke o izdelkih in dokumente:
 
 ```bash
-# Upload documents to storage
+# Pridobite podrobnosti o računu za shranjevanje
+STORAGE_NAME=$(az storage account list \
+  --resource-group myResourceGroup \
+  --query "[0].name" -o tsv)
+
+STORAGE_KEY=$(az storage account keys list \
+  --account-name $STORAGE_NAME \
+  --resource-group myResourceGroup \
+  --query "[0].value" -o tsv)
+
+# Naložite svoje dokumente
 az storage blob upload-batch \
   --destination documents \
-  --source ../data/initial-docs \
-  --account-name <storage-account-name>
+  --source /path/to/your/product/docs \
+  --account-name $STORAGE_NAME \
+  --account-key $STORAGE_KEY
+
+# Primer: Naložite eno datoteko
+az storage blob upload \
+  --container-name documents \
+  --name "product-manual.pdf" \
+  --file /path/to/product-manual.pdf \
+  --account-name $STORAGE_NAME \
+  --account-key $STORAGE_KEY
 ```
 
-### 3. Preizkusite končne točke agentov
+### Faza 4: Razvoj in namestitev vaših aplikacij (8-12 ur)
+
+Ko ste razvili kodo za agente:
 
 ```bash
-# Test router endpoint
-curl -X POST "<router-url>/chat" \
+# 1. Ustvari Azure Container Registry (če je potrebno)
+az acr create \
+  --name myregistry \
+  --resource-group myResourceGroup \
+  --sku Basic
+
+# 2. Zgradi in potisni sliko agent routerja
+docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
+az acr login --name myregistry
+docker push myregistry.azurecr.io/agent-router:v1
+
+# 3. Zgradi in potisni sliko frontend-a
+docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
+docker push myregistry.azurecr.io/frontend:v1
+
+# 4. Posodobi Container Apps s svojimi slikami
+az containerapp update \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --image myregistry.azurecr.io/agent-router:v1
+
+az containerapp update \
+  --name retail-frontend \
+  --resource-group myResourceGroup \
+  --image myregistry.azurecr.io/frontend:v1
+
+# 5. Konfiguriraj okoljske spremenljivke
+az containerapp update \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --set-env-vars \
+    OPENAI_ENDPOINT=secretref:openai-endpoint \
+    OPENAI_KEY=secretref:openai-key \
+    SEARCH_ENDPOINT=secretref:search-endpoint \
+    SEARCH_KEY=secretref:search-key
+```
+
+### Faza 5: Testiranje vaše aplikacije (2-4 ure)
+
+```bash
+# Pridobite URL vaše aplikacije
+ROUTER_URL=$(az containerapp show \
+  --name retail-router \
+  --resource-group myResourceGroup \
+  --query "properties.configuration.ingress.fqdn" -o tsv)
+
+# Preizkusite končno točko agenta (ko je vaša koda nameščena)
+curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
     "message": "Hello, I need help with my order",
     "agent": "customer"
   }'
-```
 
-### 4. Konfigurirajte Container Apps
-
-ARM predloga namesti začasne slike kontejnerjev. Za namestitev dejanske kode agentov:
-
-```bash
-# Build and push agent images
-docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
-docker build -t myregistry.azurecr.io/frontend:latest ./src/frontend
-
-# Update container apps
-az containerapp update \
+# Preverite dnevniške zapise aplikacije
+az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
-  --image myregistry.azurecr.io/agent-router:latest
+  --follow
 ```
+
+### Viri za implementacijo
+
+**Arhitektura in dizajn:**
+- 📖 [Celoten vodnik za arhitekturo](../retail-scenario.md) - Podrobni vzorci implementacije
+- 📖 [Vzorci dizajna za več agentov](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+
+**Primeri kode:**
+- 🔗 [Primer klepeta Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo) - Vzorec RAG
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Okvir za agente (C#)
+- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Orkestracija agentov (Python)
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Pogovori med več agenti
+
+**Ocenjeni skupni čas:**
+- Namestitev infrastrukture: 15-25 minut (✅ Končano)
+- Razvoj aplikacij: 80-120 ur (🔨 Vaše delo)
+- Testiranje in optimizacija: 15-25 ur (🔨 Vaše delo)
 
 ## 🛠️ Odpravljanje težav
 
 ### Pogoste težave
 
-#### 1. Presežena kvota Azure OpenAI
+#### 1. Prekoračena kvota Azure OpenAI
 
 ```bash
-# Check current quota usage
+# Preveri trenutno uporabo kvote
 az cognitiveservices usage list --location eastus2
 
-# Request quota increase
+# Zahtevaj povečanje kvote
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
   --description "Request quota increase for Azure OpenAI in region X"
 ```
 
-#### 2. Napaka pri namestitvi Container Apps
+#### 2. Napaka pri namestitvi aplikacij Container Apps
 
 ```bash
-# Check container app logs
+# Preveri dnevnike aplikacije vsebnika
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# Restart container app
+# Znova zaženi aplikacijo vsebnika
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### 3. Inicializacija storitve iskanja
+#### 3. Inicializacija iskalne storitve
 
 ```bash
-# Verify search service status
+# Preverite stanje storitve iskanja
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# Test search service connectivity
+# Preizkusite povezljivost storitve iskanja
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
 
-### Preverjanje namestitve
+### Validacija namestitve
 
 ```bash
-# Validate all resources are created
+# Preverite, ali so vsi viri ustvarjeni
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Check resource health
+# Preverite stanje virov
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -338,18 +719,18 @@ az resource list \
 ## 🔐 Varnostni vidiki
 
 ### Upravljanje ključev
-- Vse skrivnosti so shranjene v Azure Key Vault (če je omogočeno)
-- Container Apps uporabljajo upravljano identiteto za avtentikacijo
+- Vsi skrivni podatki so shranjeni v Azure Key Vault (če je omogočeno)
+- Aplikacije Container Apps uporabljajo upravljano identiteto za avtentikacijo
 - Računi za shranjevanje imajo varne privzete nastavitve (samo HTTPS, brez javnega dostopa do blobov)
 
 ### Omrežna varnost
-- Container Apps uporabljajo interno omrežje, kjer je to mogoče
-- Storitev iskanja je konfigurirana z možnostjo zasebnih končnih točk
-- Cosmos DB je konfiguriran z minimalnimi potrebnimi dovoljenji
+- Aplikacije Container Apps uporabljajo interno omrežje, kjer je to mogoče
+- Iskalna storitev je konfigurirana z možnostjo zasebnih končnih točk
+- Cosmos DB je konfiguriran z minimalno potrebnimi dovoljenji
 
 ### Konfiguracija RBAC
 ```bash
-# Assign necessary roles for managed identity
+# Dodelite potrebne vloge za upravljano identiteto
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
@@ -360,8 +741,8 @@ az role assignment create \
 
 ### Ocenjeni stroški (mesečno, USD)
 
-| Način | OpenAI | Container Apps | Iskanje | Shranjevanje | Skupaj |
-|-------|--------|----------------|---------|-------------|--------|
+| Način | OpenAI | Container Apps | Search | Storage | Skupaj ocena |
+|-------|--------|----------------|--------|---------|--------------|
 | Minimalno | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standardno | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
@@ -369,7 +750,7 @@ az role assignment create \
 ### Spremljanje stroškov
 
 ```bash
-# Set up budget alerts
+# Nastavite opozorila o proračunu
 az consumption budget create \
   --account-name <subscription-id> \
   --budget-name "retail-budget" \
@@ -382,13 +763,13 @@ az consumption budget create \
 ## 🔄 Posodobitve in vzdrževanje
 
 ### Posodobitve predloge
-- Predloge ARM datotek naj bodo pod nadzorom različic
-- Spremembe najprej preizkusite v razvojnem okolju
+- Upravljajte različice datotek ARM predloge
+- Najprej preizkusite spremembe v razvojnem okolju
 - Za posodobitve uporabite način inkrementalne namestitve
 
 ### Posodobitve virov
 ```bash
-# Update with new parameters
+# Posodobi z novimi parametri
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -398,8 +779,8 @@ az deployment group create \
 
 ### Varnostno kopiranje in obnovitev
 - Samodejno varnostno kopiranje Cosmos DB omogočeno
-- Mehka izbris Key Vault omogočen
-- Revizije aplikacij v kontejnerjih ohranjene za povrnitev
+- Mehka izbris Key Vault omogočena
+- Revizije aplikacij Container Apps so ohranjene za povrnitev
 
 ## 📞 Podpora
 
@@ -415,5 +796,7 @@ Začnite z: `./deploy.sh -g myResourceGroup`
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni prevod s strani človeka. Ne prevzemamo odgovornosti za morebitna napačna razumevanja ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje AI [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,71 +1,78 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:38:53+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-23T22:39:21+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "my"
 }
 -->
-# Capacity Planning: Azure Quotas နှင့် ကန့်သတ်ချက်များကို နားလည်ခြင်း - Azure ရင်းမြစ်ရရှိနိုင်မှုနှင့် ကန့်သတ်ချက်များ
+# Azure အရင်းအမြစ်ရရှိနိုင်မှုနှင့် အကန့်အသတ်များ - စွမ်းရည်စီမံကိန်း
 
-## နိဒါန်း
+**အခန်းအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံများ](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၆ - Deployment မတိုင်မီ အတည်ပြုခြင်းနှင့် စီမံကိန်းရေးဆွဲခြင်း
+- **⬅️ ယခင်အခန်း**: [အခန်း ၅: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **➡️ နောက်တစ်ခု**: [SKU ရွေးချယ်ခြင်း](sku-selection.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၇: ပြဿနာရှာဖွေခြင်း](../troubleshooting/common-issues.md)
 
-ဒီလမ်းညွှန်ချက်က Azure Developer CLI ကို အသုံးပြုပြီး deployment မလုပ်မီ Azure ရင်းမြစ်စွမ်းရည်ကို စီစဉ်ပြီး အတည်ပြုဖို့ ကူညီပေးမှာဖြစ်ပါတယ်။ Quotas, ရရှိနိုင်မှုနှင့် ဒေသဆိုင်ရာ ကန့်သတ်ချက်များကို သုံးသပ်ပြီး deployment အောင်မြင်မှုရရှိစေဖို့၊ ကုန်ကျစရိတ်နှင့် စွမ်းဆောင်ရည်ကို အကောင်းဆုံးဖြစ်အောင်လုပ်ဆောင်ပါ။ အမျိုးမျိုးသော application architecture များနှင့် အရွယ်အစားချဲ့ထွင်မှုအခြေအနေများအတွက် စွမ်းရည်စီမံခန့်ခွဲမှုနည်းလမ်းများကို ကျွမ်းကျင်ပါ။
+## မိတ်ဆက်
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
+ဒီလမ်းညွှန်စာအုပ်က Azure Developer CLI ဖြင့် deployment မလုပ်မီ Azure အရင်းအမြစ်စွမ်းရည်ကို စီမံကိန်းရေးဆွဲပြီး အတည်ပြုနိုင်ရန် ကူညီပေးပါမည်။ Quotas, ရရှိနိုင်မှုနှင့် ဒေသဆိုင်ရာ အကန့်အသတ်များကို သုံးသပ်ခြင်းဖြင့် အောင်မြင်သော deployment များကို အာမခံပြီး ကုန်ကျစရိတ်နှင့် စွမ်းဆောင်ရည်ကို အကောင်းဆုံးဖြစ်အောင်လုပ်နိုင်ပါမည်။ အမျိုးမျိုးသော application architecture များနှင့် အရွယ်အစားချဲ့ထွင်မှုအခြေအနေများအတွက် စွမ်းရည်စီမံကိန်းနည်းလမ်းများကို ကျွမ်းကျင်စွာ လေ့လာပါ။
 
-ဒီလမ်းညွှန်ချက်ကို ပြီးမြောက်စွာ လေ့လာပြီးနောက်၊ သင်သည်:
-- Azure quotas, ကန့်သတ်ချက်များနှင့် ဒေသဆိုင်ရာ ရရှိနိုင်မှု ကန့်သတ်ချက်များကို နားလည်ပါမည်
-- Deployment မလုပ်မီ ရင်းမြစ်ရရှိနိုင်မှုနှင့် စွမ်းရည်ကို စစ်ဆေးနည်းများကို ကျွမ်းကျင်ပါမည်
-- စွမ်းရည်အတည်ပြုခြင်းနှင့် စောင့်ကြည့်မှု မျှတစွာလုပ်ဆောင်နိုင်သော နည်းလမ်းများကို အကောင်အထည်ဖော်ပါမည်
-- ရင်းမြစ်အရွယ်အစားနှင့် အရွယ်အစားချဲ့ထွင်မှုကို သင့်တော်စွာ စီမံခန့်ခွဲနိုင်သော application များကို ဒီဇိုင်းဆွဲပါမည်
-- စွမ်းရည်စီမံခန့်ခွဲမှုမှတဆင့် ကုန်ကျစရိတ်ကို အကောင်းဆုံးဖြစ်အောင်လုပ်ဆောင်ပါမည်
-- Quota အသုံးပြုမှုနှင့် ရင်းမြစ်ရရှိနိုင်မှုအတွက် အချက်ပေးနှင့် စောင့်ကြည့်မှုကို ပြင်ဆင်ပါမည်
+## သင်ယူရမည့်ရည်ရွယ်ချက်များ
 
-## သင်ယူမှုရလဒ်များ
+ဒီလမ်းညွှန်စာအုပ်ကို ပြီးမြောက်ပါက၊ သင်သည်:
+- Azure quotas, အကန့်အသတ်များနှင့် ဒေသဆိုင်ရာရရှိနိုင်မှု အကန့်အသတ်များကို နားလည်ခြင်း
+- Deployment မလုပ်မီ အရင်းအမြစ်ရရှိနိုင်မှုနှင့် စွမ်းရည်ကို စစ်ဆေးခြင်းနည်းလမ်းများကို ကျွမ်းကျင်စွာ လေ့လာခြင်း
+- စွမ်းရည်အတည်ပြုခြင်းနှင့် စောင့်ကြည့်မှုအတွက် အလိုအလျောက်စနစ်များကို အကောင်အထည်ဖော်ခြင်း
+- အရင်းအမြစ်အရွယ်အစားနှင့် အရွယ်အစားချဲ့ထွင်မှုအတွက် သင့်တော်သော application များကို ဒီဇိုင်းဆွဲခြင်း
+- စွမ်းရည်စီမံကိန်းရေးဆွဲခြင်းမှတဆင့် ကုန်ကျစရိတ်ကို အကောင်းဆုံးဖြစ်အောင်လုပ်ခြင်း
+- Quota အသုံးပြုမှုနှင့် အရင်းအမြစ်ရရှိနိုင်မှုအတွက် အချက်ပေးနှင့် စောင့်ကြည့်မှုကို ဖွဲ့စည်းခြင်း
 
-ဒီလမ်းညွှန်ချက်ကို ပြီးမြောက်ပြီးနောက်၊ သင်သည်:
-- Deployment မလုပ်မီ Azure ရင်းမြစ်စွမ်းရည်လိုအပ်ချက်များကို သုံးသပ်ပြီး အတည်ပြုနိုင်ပါမည်
-- စွမ်းရည်စစ်ဆေးမှုနှင့် quota စောင့်ကြည့်မှုအတွက် အလိုအလျောက် script များကို ဖန်တီးနိုင်ပါမည်
-- ဒေသဆိုင်ရာနှင့် subscription ကန့်သတ်ချက်များကို ထည့်သွင်းစဉ်းစားထားသော အရွယ်အစားချဲ့ထွင်နိုင်သော architecture များကို ဒီဇိုင်းဆွဲနိုင်ပါမည်
-- အမျိုးမျိုးသော workload အမျိုးအစားများအတွက် ကုန်ကျစရိတ်သက်သာစေသော ရင်းမြစ်အရွယ်အစားစီမံခန့်ခွဲမှုနည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်ပါမည်
-- စွမ်းရည်နှင့်ပတ်သက်သော ပြဿနာများအတွက် အချက်ပေးမှုနှင့် စောင့်ကြည့်မှုကို ကြိုတင်ပြင်ဆင်နိုင်ပါမည်
-- စွမ်းရည်ဖြန့်ဝေမှုကို သင့်တော်စွာ စီမံထားသော multi-region deployment များကို စီစဉ်နိုင်ပါမည်
+## သင်ယူပြီးရရှိမည့်ရလဒ်များ
 
-## စွမ်းရည်စီမံခန့်ခွဲမှု အရေးကြီးမှု
+သင်သည်:
+- Deployment မလုပ်မီ Azure အရင်းအမြစ်စွမ်းရည်လိုအပ်ချက်များကို သုံးသပ်ပြီး အတည်ပြုနိုင်ခြင်း
+- စွမ်းရည်စစ်ဆေးခြင်းနှင့် quota စောင့်ကြည့်မှုအတွက် အလိုအလျောက် script များကို ဖန်တီးနိုင်ခြင်း
+- ဒေသနှင့် subscription အကန့်အသတ်များကို ထည့်သွင်းထားသော scalable architecture များကို ဒီဇိုင်းဆွဲနိုင်ခြင်း
+- အမျိုးမျိုးသော workload အမျိုးအစားများအတွက် ကုန်ကျစရိတ်သက်သာသော အရင်းအမြစ်အရွယ်အစားနည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်ခြင်း
+- စွမ်းရည်နှင့်ပတ်သက်သော ပြဿနာများအတွက် proactive စောင့်ကြည့်မှုနှင့် အချက်ပေးမှုကို ဖွဲ့စည်းနိုင်ခြင်း
+- စွမ်းရည်ဖြန့်ဝေမှုမှန်ကန်သော multi-region deployment များကို စီမံကိန်းရေးဆွဲနိုင်ခြင်း
 
-Application များကို deploy လုပ်မီ၊ သင်သည် အောက်ပါအချက်များကို သေချာစွာ စစ်ဆေးရမည်:
-- လိုအပ်သော ရင်းမြစ်များအတွက် **လုံလောက်သော quotas**
-- သင့်ရည်မှန်းထားသော ဒေသတွင် **ရင်းမြစ်ရရှိနိုင်မှု**
-- သင့် subscription အမျိုးအစားအတွက် **ဝန်ဆောင်မှုအဆင့်ရရှိနိုင်မှု**
-- မျှော်မှန်းထားသော traffic အတွက် **ကွန်ရက်စွမ်းရည်**
-- **အရွယ်အစားချိန်ညှိမှုမှတဆင့် ကုန်ကျစရိတ်သက်သာမှု**
+## စွမ်းရည်စီမံကိန်းရေးဆွဲခြင်းအရေးကြီးမှု
 
-## 📊 Azure Quotas နှင့် ကန့်သတ်ချက်များကို နားလည်ခြင်း
+Application များကို deployment မလုပ်မီ သင်သည် အောက်ပါအချက်များကို သေချာစစ်ဆေးရမည်:
+- လိုအပ်သောအရင်းအမြစ်များအတွက် **Quotas လုံလောက်မှု**
+- သင့်ရည်ရွယ်ထားသောဒေသတွင် **အရင်းအမြစ်ရရှိနိုင်မှု**
+- သင့် subscription အမျိုးအစားအတွက် **Service tier ရရှိနိုင်မှု**
+- မျှော်မှန်းထားသော traffic အတွက် **Network စွမ်းရည်**
+- **အရွယ်အစားချဲ့ထွင်မှုမှန်ကန်မှု**မှတဆင့် ကုန်ကျစရိတ်သက်သာမှု
 
-### ကန့်သတ်ချက်အမျိုးအစားများ
-1. **Subscription-level quotas** - Subscription တစ်ခုစီအတွက် အများဆုံးရင်းမြစ်များ
-2. **Regional quotas** - ဒေသတစ်ခုစီအတွက် အများဆုံးရင်းမြစ်များ
-3. **Resource-specific limits** - ရင်းမြစ်အမျိုးအစားတစ်ခုစီအတွက် ကန့်သတ်ချက်များ
-4. **Service tier limits** - သင့်ဝန်ဆောင်မှုအစီအစဉ်အပေါ်မူတည်သော ကန့်သတ်ချက်များ
+## 📊 Azure Quotas နှင့် အကန့်အသတ်များကို နားလည်ခြင်း
 
-### ရင်းမြစ် Quotas အများဆုံးတွေ့ရသောအမျိုးအစားများ
+### အကန့်အသတ်အမျိုးအစားများ
+1. **Subscription-level quotas** - Subscription တစ်ခုလျှင် အရင်းအမြစ်အများဆုံး
+2. **Regional quotas** - ဒေသတစ်ခုလျှင် အရင်းအမြစ်အများဆုံး
+3. **Resource-specific limits** - အရင်းအမြစ်အမျိုးအစားတစ်ခုစီအတွက် အကန့်အသတ်များ
+4. **Service tier limits** - သင့် service plan အပေါ်မူတည်သော အကန့်အသတ်များ
+
+### အများဆုံးတွေ့ရသော Resource Quotas
 ```bash
-# Check current quota usage
+# လက်ရှိကိုတာအသုံးပြုမှုကိုစစ်ဆေးပါ
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# သတ်မှတ်ထားသောရင်းမြစ်ကိုတာများကိုစစ်ဆေးပါ
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Deployment မလုပ်မီ စွမ်းရည်စစ်ဆေးမှုများ
+## Deployment မလုပ်မီ စွမ်းရည်စစ်ဆေးခြင်း
 
 ### အလိုအလျောက် စွမ်းရည်အတည်ပြု Script
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Azure စွမ်းရည်ကို တင်သွင်းမှုမတိုင်မီ အတည်ပြုပါ
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# quota အသုံးပြုမှုကို စစ်ဆေးရန် function
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,27 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# အမျိုးမျိုးသော resource quota များကို စစ်ဆေးပါ
+check_quota "compute" 4      # 4 vCPUs လိုအပ်သည်
+check_quota "storage" 2      # 2 storage accounts လိုအပ်သည်
+check_quota "network" 1      # 1 virtual network လိုအပ်သည်
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-### ဝန်ဆောင်မှုအထူးစွမ်းရည်စစ်ဆေးမှုများ
+### Service-specific စွမ်းရည်စစ်ဆေးခြင်း
 
 #### App Service စွမ်းရည်
 ```bash
-# Check App Service Plan availability
+# App Service Plan ရရှိနိုင်မှုကို စစ်ဆေးပါ
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # ဒေသတွင် ရရှိနိုင်သော SKU များကို စစ်ဆေးပါ
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # အခြားဒေသများကို အကြံပြုပါ
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # လက်ရှိအသုံးပြုမှုကို စစ်ဆေးပါ
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# အသုံးပြုမှု
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Database စွမ်းရည်
 ```bash
-# Check PostgreSQL capacity
+# PostgreSQL စွမ်းရည်ကို စစ်ဆေးပါ
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # SKU ရရှိနိုင်မှုကို စစ်ဆေးပါ
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # ရရှိနိုင်သော SKU များကို ပြပါ
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Cosmos DB စွမ်းရည်ကို စစ်ဆေးပါ
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # ဒေသရရှိနိုင်မှုကို စစ်ဆေးပါ
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # serverless ကို ပံ့ပိုးနိုင်မရှိ စစ်ဆေးပါ (လိုအပ်ပါက)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Container Apps စွမ်းရည်
 ```bash
-# Check Container Apps capacity
+# Container Apps အမြှုပ်အားစစ်ဆေးပါ
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Container Apps ကိုဒေသတွင်ရရှိနိုင်မရှိစစ်ဆေးပါ
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # လက်ရှိပတ်ဝန်းကျင်အရေအတွက်ကိုစစ်ဆေးပါ
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Apps သည်ဒေသတစ်ခုလျှင်ပတ်ဝန်းကျင် 15 ခုအထိကန့်သတ်ထားသည်
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # ရရှိနိုင်သောဒေသများကိုပြပါ
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,11 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 ဒေသဆိုင်ရာ ရရှိနိုင်မှုအတည်ပြုခြင်း
+## 📍 ဒေသဆိုင်ရာရရှိနိုင်မှုအတည်ပြုခြင်း
 
-### ဒေသအလိုက် ဝန်ဆောင်မှုရရှိနိုင်မှု
+### Service ရရှိနိုင်မှု (Region အလိုက်)
 ```bash
-# Check service availability across regions
+# တိုင်းဒေသကြီးများအနှံ့ ဝန်ဆောင်မှုရရှိနိုင်မှုကို စစ်ဆေးပါ
 check_service_availability() {
     local service=$1
     
@@ -281,16 +288,16 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# ဝန်ဆောင်မှုအားလုံးကို စစ်ဆေးပါ
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### ဒေသရွေးချယ်မှု အကြံပြုချက်များ
+### Region ရွေးချယ်မှုအကြံပြုချက်များ
 ```bash
-# Recommend optimal regions based on requirements
+# လိုအပ်ချက်များအပေါ်အခြေခံပြီး အကောင်းဆုံးဒေသများကို အကြံပြုပါ
 recommend_region() {
     local requirements=$1  # "lowcost" | "performance" | "compliance"
     
@@ -319,22 +326,22 @@ recommend_region() {
 }
 ```
 
-## 💰 ကုန်ကျစရိတ် စီမံခြင်းနှင့် ခန့်မှန်းခြင်း
+## 💰 ကုန်ကျစရိတ်စီမံကိန်းနှင့် ခန့်မှန်းခြင်း
 
-### ရင်းမြစ်ကုန်ကျစရိတ် ခန့်မှန်းခြင်း
+### Resource ကုန်ကျစရိတ်ခန့်မှန်းခြင်း
 ```bash
-# Estimate deployment costs
+# တင်သွင်းမှုကုန်ကျစရိတ်များကို ခန့်မှန်းပါ
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # ခန့်မှန်းရန်အတွက် ယာယီအရင်းအမြစ်အုပ်စုတစ်ခုကို ဖန်တီးပါ
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # အတည်ပြုမှုအနေအထားတွင် အခြေခံအဆောက်အအုံကို တင်သွင်းပါ
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # ယာယီအရင်းအမြစ်အုပ်စုကို ရှင်းလင်းပါ
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -354,9 +361,9 @@ estimate_costs() {
 }
 ```
 
-### SKU ချိန်ညှိမှု အကြံပြုချက်များ
+### SKU Optimization အကြံပြုချက်များ
 ```bash
-# Recommend optimal SKUs based on requirements
+# လိုအပ်ချက်များအပေါ်အခြေခံပြီး အကောင်းဆုံး SKUs များကို အကြံပြုပါ
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -419,32 +426,32 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Deployment မလုပ်မီ အလိုအလျောက် စစ်ဆေးမှုများ
+## 🚀 Deployment မလုပ်မီ အလိုအလျောက်စစ်ဆေးမှုများ
 
-### အပြည့်အစုံ စစ်ဆေးမှု Script
+### Comprehensive Pre-Flight Script
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - မတိုင်မီအတည်ပြုမှုကို ပြီးစီးပါ
 
 set -e
 
-# Configuration
+# ဖွဲ့စည်းမှု
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# အထွက်အတွက် အရောင်များ
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # အရောင်မရှိ
 
-# Logging functions
+# မှတ်တမ်း functions
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# ဖွဲ့စည်းမှုကို တင်ပါ
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# စစ်ဆေးမှု ၁: အတည်ပြုမှု
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# စစ်ဆေးမှု ၂: ဒေသဆိုင်ရာရရှိနိုင်မှု
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,7 +490,7 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# စစ်ဆေးမှု ၃: Quota အတည်ပြုမှု
 log_info "Checking quota availability..."
 
 # vCPU quota
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# သိုလှောင်မှုအကောင့် quota
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# စစ်ဆေးမှု ၄: ဝန်ဆောင်မှုရရှိနိုင်မှု
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# စစ်ဆေးမှု ၅: ကွန်ယက်စွမ်းရည်
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# စစ်ဆေးမှု ၆: အရင်းအမြစ်အမည်အတည်ပြုမှု
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# စစ်ဆေးမှု ၇: ကုန်ကျစရိတ်ခန့်မှန်းခြေ
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# စစ်ဆေးမှု ၈: Template အတည်ပြုမှု
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# နောက်ဆုံးအကျဉ်းချုပ်
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -656,16 +663,16 @@ echo "  3. Verify application health post-deployment"
 
 ## 📈 Deployment အတွင်း စွမ်းရည်စောင့်ကြည့်ခြင်း
 
-### အချိန်နှင့်တပြေးညီ စွမ်းရည်စောင့်ကြည့်ခြင်း
+### Real-Time စွမ်းရည်စောင့်ကြည့်ခြင်း
 ```bash
-# Monitor capacity during deployment
+# တပ်ဆင်မှုအတွင်း စွမ်းဆောင်ရည်ကိုကြည့်ရှုပါ
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # တပ်ဆင်မှုအခြေအနေကိုစစ်ဆေးပါ
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # လက်ရှိအရင်းအမြစ်အသုံးပြုမှုကိုစစ်ဆေးပါ
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -709,24 +716,24 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## အကောင်းဆုံး လုပ်ဆောင်မှုများ
+## အကောင်းဆုံးအလေ့အကျင့်များ
 
-1. **ဒေသအသစ်များတွင် deploy လုပ်မီ စွမ်းရည်စစ်ဆေးမှုများကို အမြဲပြုလုပ်ပါ**
-2. **Quota အသုံးပြုမှုကို ပုံမှန်စောင့်ကြည့်ပါ** ပြဿနာများမဖြစ်စေရန်
-3. **အနာဂတ်အတွက် စွမ်းရည်လိုအပ်ချက်များကို စီစဉ်ပါ**
-4. **ကုန်ကျစရိတ်ခန့်မှန်းမှုကိရိယာများကို အသုံးပြုပါ** ကုန်ကျစရိတ်များကို ထိန်းချုပ်ရန်
-5. **သင့်အဖွဲ့အတွက် စွမ်းရည်လိုအပ်ချက်များကို မှတ်တမ်းတင်ထားပါ**
-6. **CI/CD pipelines တွင် စွမ်းရည်အတည်ပြုမှုကို အလိုအလျောက်လုပ်ဆောင်ပါ**
-7. **ဒေသဆိုင်ရာ failover စွမ်းရည်လိုအပ်ချက်များကို ထည့်သွင်းစဉ်းစားပါ**
+1. **Always run capacity checks** - Region အသစ်များတွင် deployment မလုပ်မီ စစ်ဆေးပါ
+2. **Monitor quota usage regularly** - မျှော်လင့်မထားသော ပြဿနာများကို ရှောင်ရှားပါ
+3. **Plan for growth** - အနာဂတ်စွမ်းရည်လိုအပ်ချက်များကို စစ်ဆေးပါ
+4. **Use cost estimation tools** - ကုန်ကျစရိတ်အလွန်အကျွံကို ရှောင်ရှားပါ
+5. **Document capacity requirements** - သင့်အဖွဲ့အတွက် စွမ်းရည်လိုအပ်ချက်များကို မှတ်တမ်းတင်ပါ
+6. **Automate capacity validation** - CI/CD pipelines တွင် စွမ်းရည်အတည်ပြုမှုကို အလိုအလျောက်လုပ်ပါ
+7. **Consider regional failover** - ဒေသဆိုင်ရာ failover စွမ်းရည်လိုအပ်ချက်များကို စီမံကိန်းရေးဆွဲပါ
 
 ## နောက်တစ်ဆင့်များ
 
-- [SKU Selection Guide](sku-selection.md) - ဝန်ဆောင်မှုအဆင့်များကို အကောင်းဆုံးရွေးချယ်ခြင်း
-- [Pre-flight Checks](preflight-checks.md) - အလိုအလျောက်အတည်ပြုမှု script များ
-- [Cheat Sheet](../../resources/cheat-sheet.md) - အမြန်ကိုးကားရန် command များ
-- [Glossary](../../resources/glossary.md) - အဓိပ္ပါယ်နှင့် အဓိပ္ပါယ်ဖွင့်ဆိုချက်များ
+- [SKU Selection Guide](sku-selection.md) - Service tiers အကောင်းဆုံးရွေးချယ်ပါ
+- [Pre-flight Checks](preflight-checks.md) - အလိုအလျောက်စစ်ဆေးမှု script များ
+- [Cheat Sheet](../../resources/cheat-sheet.md) - အမြန် reference command များ
+- [Glossary](../../resources/glossary.md) - အဓိပ္ပါယ်နှင့် အကြောင်းအရာများ
 
-## ထပ်မံသော အရင်းအမြစ်များ
+## အပိုဆောင်းအရင်းအမြစ်များ
 
 - [Azure Subscription Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
@@ -735,12 +742,14 @@ hooks:
 
 ---
 
-**Navigation**
+**အကြောင်းအရာ**
 - **ယခင်သင်ခန်းစာ**: [Debugging Guide](../troubleshooting/debugging.md)
 
-- **နောက်ထပ်သင်ခန်းစာ**: [SKU Selection](sku-selection.md)
+- **နောက်သင်ခန်းစာ**: [SKU Selection](sku-selection.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,32 +1,39 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:38:35+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-23T21:22:56+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "sl"
 }
 -->
-# Načrtovanje zmogljivosti: Razumevanje kvot in omejitev Azure - Razpoložljivost virov in omejitve Azure
+# Načrtovanje zmogljivosti - Razpoložljivost in omejitve virov Azure
+
+**Navigacija po poglavjih:**
+- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 6 - Validacija in načrtovanje pred uvedbo
+- **⬅️ Prejšnje poglavje**: [Poglavje 5: Rešitve z več agenti AI](../../examples/retail-scenario.md)
+- **➡️ Naslednje**: [Izbira SKU](sku-selection.md)
+- **🚀 Naslednje poglavje**: [Poglavje 7: Odpravljanje težav](../troubleshooting/common-issues.md)
 
 ## Uvod
 
-Ta obsežen vodič vam pomaga načrtovati in preveriti zmogljivost virov Azure pred uvajanjem z Azure Developer CLI. Naučite se oceniti kvote, razpoložljivost in regionalne omejitve, da zagotovite uspešne uvedbe ter optimizirate stroške in zmogljivost. Obvladujte tehnike načrtovanja zmogljivosti za različne arhitekture aplikacij in scenarije skaliranja.
+Ta obsežen vodič vam pomaga načrtovati in preveriti zmogljivost virov Azure pred uvedbo z Azure Developer CLI. Naučite se oceniti kvote, razpoložljivost in regionalne omejitve, da zagotovite uspešne uvedbe ter optimizirate stroške in zmogljivost. Obvladujte tehnike načrtovanja zmogljivosti za različne arhitekture aplikacij in scenarije skaliranja.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodiča boste:
-- Razumeli kvote, omejitve in regionalne omejitve razpoložljivosti Azure
+- Razumeli kvote, omejitve in regionalne omejitve Azure
 - Obvladali tehnike preverjanja razpoložljivosti virov in zmogljivosti pred uvedbo
-- Uvedli avtomatizirane strategije za preverjanje zmogljivosti in spremljanje
-- Načrtovali aplikacije z ustrezno velikostjo virov in upoštevanjem skaliranja
+- Uvedli strategije za avtomatizirano validacijo zmogljivosti in spremljanje
+- Načrtovali aplikacije z ustrezno velikostjo virov in skalirnimi premisleki
 - Uporabili strategije optimizacije stroškov z inteligentnim načrtovanjem zmogljivosti
-- Konfigurirali opozorila in spremljanje uporabe kvot ter razpoložljivosti virov
+- Konfigurirali opozorila in spremljanje za uporabo kvot in razpoložljivost virov
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Oceniti in preveriti zahteve za zmogljivost virov Azure pred uvedbo
+- Oceniti in validirati zahteve za zmogljivost virov Azure pred uvedbo
 - Ustvariti avtomatizirane skripte za preverjanje zmogljivosti in spremljanje kvot
 - Načrtovati skalabilne arhitekture, ki upoštevajo regionalne in naročniške omejitve
 - Uvesti stroškovno učinkovite strategije velikosti virov za različne vrste delovnih obremenitev
@@ -36,36 +43,36 @@ Po zaključku boste sposobni:
 ## Zakaj je načrtovanje zmogljivosti pomembno
 
 Pred uvedbo aplikacij morate zagotoviti:
-- **Dovolj kvot** za zahtevane vire
+- **Dovolj kvot** za potrebne vire
 - **Razpoložljivost virov** v ciljni regiji
-- **Razpoložljivost nivoja storitev** za vaš tip naročnine
+- **Razpoložljivost nivoja storitev** za vaš naročniški tip
 - **Omrežno zmogljivost** za pričakovani promet
 - **Optimizacijo stroškov** z ustrezno velikostjo
 
 ## 📊 Razumevanje kvot in omejitev Azure
 
 ### Vrste omejitev
-1. **Kvote na ravni naročnine** - Največje število virov na naročnino
-2. **Regionalne kvote** - Največje število virov na regijo
+1. **Kvote na ravni naročnine** - Največ virov na naročnino
+2. **Regionalne kvote** - Največ virov na regijo
 3. **Omejitve specifične za vire** - Omejitve za posamezne vrste virov
 4. **Omejitve nivoja storitev** - Omejitve glede na vaš načrt storitev
 
 ### Pogoste kvote virov
 ```bash
-# Check current quota usage
+# Preveri trenutno uporabo kvote
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Preveri kvote za določene vire
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
 ## Preverjanje zmogljivosti pred uvedbo
 
-### Skripta za avtomatizirano preverjanje zmogljivosti
+### Skripta za avtomatizirano validacijo zmogljivosti
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Preveri zmogljivost Azure pred uvedbo
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Funkcija za preverjanje uporabe kvot
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,10 +118,10 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Preveri različne kvote virov
+check_quota "compute" 4      # Potrebujemo 4 vCPU-je
+check_quota "storage" 2      # Potrebujemo 2 računa za shranjevanje
+check_quota "network" 1      # Potrebujemo 1 virtualno omrežje
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
@@ -124,14 +131,14 @@ echo "✅ Capacity check completed successfully!"
 
 #### Zmogljivost storitve App Service
 ```bash
-# Check App Service Plan availability
+# Preverite razpoložljivost načrta storitve aplikacije
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Preverite razpoložljive SKU-je v regiji
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Predlagajte alternativne regije
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Preverite trenutno uporabo
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Uporaba
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Zmogljivost baze podatkov
 ```bash
-# Check PostgreSQL capacity
+# Preveri zmogljivost PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Preveri, ali je SKU na voljo
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Prikaži razpoložljive SKU-je
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Preveri zmogljivost Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Preveri razpoložljivost regije
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Preveri, ali je podprta strežniška arhitektura (če je potrebno)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Zmogljivost aplikacij v kontejnerjih
 ```bash
-# Check Container Apps capacity
+# Preverite zmogljivost Container Apps
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Preverite, ali je Container Apps na voljo v regiji
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Preverite trenutno število okolij
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Apps ima omejitev 15 okolij na regijo
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Prikaži razpoložljive regije
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -252,11 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-## 📍 Preverjanje regionalne razpoložljivosti
+## 📍 Validacija regionalne razpoložljivosti
 
 ### Razpoložljivost storitev po regijah
 ```bash
-# Check service availability across regions
+# Preverite razpoložljivost storitev po regijah
 check_service_availability() {
     local service=$1
     
@@ -281,18 +288,18 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Preverite vse storitve
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-### Priporočila za izbiro regije
+### Priporočila za izbiro regij
 ```bash
-# Recommend optimal regions based on requirements
+# Priporoči optimalne regije glede na zahteve
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "nizkocenovno" | "zmogljivost" | "skladnost"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Ocena stroškov virov
 ```bash
-# Estimate deployment costs
+# Oceni stroške uvedbe
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Ustvari začasno skupino virov za oceno
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Uvedi infrastrukturo v načinu validacije
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Počisti začasno skupino virov
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,7 +363,7 @@ estimate_costs() {
 
 ### Priporočila za optimizacijo SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# Priporoči optimalne SKU-je glede na zahteve
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -419,32 +426,32 @@ recommend_sku() {
 }
 ```
 
-## 🚀 Avtomatizirani preverjalni postopki pred uvedbo
+## 🚀 Avtomatizirani preveritveni postopki
 
-### Celovita skripta za preverjanje pred uvedbo
+### Celovita preveritvena skripta
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Popolna validacija pred uvedbo
 
 set -e
 
-# Configuration
+# Konfiguracija
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Barve za izpis
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Brez barve
 
-# Logging functions
+# Funkcije za beleženje
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Naloži konfiguracijo
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Preverjanje 1: Avtentikacija
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Preverjanje 2: Regionalna razpoložljivost
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Preverjanje 3: Validacija kvot
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU kvota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Kvota za shranjevanje računov
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Preverjanje 4: Razpoložljivost storitev
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Preverjanje 5: Kapaciteta omrežja
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Preverjanje 6: Validacija poimenovanja virov
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -581,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Preverjanje 7: Ocena stroškov
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Preverjanje 8: Validacija predloge
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Končno povzetek
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### Spremljanje zmogljivosti v realnem času
 ```bash
-# Monitor capacity during deployment
+# Spremljajte zmogljivost med uvajanjem
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Preverite stanje uvajanja
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Preverite trenutno uporabo virov
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -691,7 +698,7 @@ monitor_deployment_capacity() {
 
 ## 🔗 Integracija z AZD
 
-### Dodajanje preverjalnih postopkov v azure.yaml
+### Dodajanje preveritvenih kljukic v azure.yaml
 ```yaml
 # azure.yaml
 hooks:
@@ -713,16 +720,16 @@ hooks:
 
 1. **Vedno izvedite preverjanje zmogljivosti** pred uvedbo v nove regije
 2. **Redno spremljajte uporabo kvot**, da se izognete presenečenjem
-3. **Načrtujte rast** z ocenjevanjem prihodnjih potreb po zmogljivosti
-4. **Uporabljajte orodja za oceno stroškov**, da se izognete nepričakovanim stroškom
+3. **Načrtujte rast** z oceno prihodnjih potreb po zmogljivosti
+4. **Uporabljajte orodja za oceno stroškov**, da se izognete nepričakovanim računom
 5. **Dokumentirajte zahteve za zmogljivost** za svojo ekipo
-6. **Avtomatizirajte preverjanje zmogljivosti** v CI/CD procesih
+6. **Avtomatizirajte validacijo zmogljivosti** v CI/CD procesih
 7. **Upoštevajte zahteve za zmogljivost pri regionalnem preklopu**
 
 ## Naslednji koraki
 
 - [Vodič za izbiro SKU](sku-selection.md) - Izberite optimalne nivoje storitev
-- [Preverjanje pred uvedbo](preflight-checks.md) - Skripte za avtomatizirano preverjanje
+- [Preveritveni postopki](preflight-checks.md) - Skripte za avtomatizirano validacijo
 - [Pomožni list](../../resources/cheat-sheet.md) - Hitri referenčni ukazi
 - [Slovar](../../resources/glossary.md) - Pojmi in definicije
 
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve AI za prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
