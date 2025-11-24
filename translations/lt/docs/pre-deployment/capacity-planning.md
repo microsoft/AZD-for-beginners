@@ -1,72 +1,78 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:40:11+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-24T09:22:28+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "lt"
 }
 -->
-# Talpos planavimas: Azure kvotų ir limitų supratimas
+# Talpos planavimas - „Azure“ išteklių prieinamumas ir limitai
+
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 6 skyrius - Prieš diegimą: patikrinimas ir planavimas
+- **⬅️ Ankstesnis skyrius**: [5 skyrius: Daugiaagentiniai AI sprendimai](../../examples/retail-scenario.md)
+- **➡️ Toliau**: [SKU pasirinkimas](sku-selection.md)
+- **🚀 Kitas skyrius**: [7 skyrius: Trikčių šalinimas](../troubleshooting/common-issues.md)
 
 ## Įvadas
 
-Šis išsamus vadovas padės jums planuoti ir patikrinti Azure resursų talpą prieš diegimą naudojant Azure Developer CLI. Sužinokite, kaip įvertinti kvotas, prieinamumą ir regioninius apribojimus, kad užtikrintumėte sėkmingą diegimą, optimizuotumėte išlaidas ir našumą. Įvaldykite talpos planavimo technikas skirtingoms programų architektūroms ir mastelio scenarijams.
+Šis išsamus vadovas padės jums suplanuoti ir patikrinti „Azure“ išteklių talpą prieš diegiant naudojant „Azure Developer CLI“. Sužinokite, kaip įvertinti kvotas, prieinamumą ir regioninius apribojimus, kad užtikrintumėte sėkmingą diegimą, optimizuotumėte išlaidas ir našumą. Įvaldykite talpos planavimo technikas skirtingoms programų architektūroms ir mastelio scenarijams.
 
 ## Mokymosi tikslai
 
 Baigę šį vadovą, jūs:
-- Suprasite Azure kvotas, limitus ir regioninius prieinamumo apribojimus
-- Įvaldysite resursų prieinamumo ir talpos patikrinimo technikas prieš diegimą
-- Įgyvendinsite automatizuotas talpos patikros ir stebėjimo strategijas
-- Projektuosite programas, atsižvelgdami į tinkamą resursų dydį ir mastelio galimybes
+- Suprasite „Azure“ kvotas, limitus ir regioninius prieinamumo apribojimus
+- Įvaldysite technikas, kaip patikrinti išteklių prieinamumą ir talpą prieš diegimą
+- Įgyvendinsite automatizuotas talpos patikrinimo ir stebėjimo strategijas
+- Projektuosite programas su tinkamu išteklių dydžiu ir mastelio apsvarstymais
 - Taikysite išlaidų optimizavimo strategijas per protingą talpos planavimą
-- Konfigūruosite įspėjimus ir stebėjimą kvotų naudojimui ir resursų prieinamumui
+- Konfigūruosite įspėjimus ir stebėjimą dėl kvotų naudojimo ir išteklių prieinamumo
 
 ## Mokymosi rezultatai
 
-Baigę, jūs galėsite:
-- Įvertinti ir patikrinti Azure resursų talpos reikalavimus prieš diegimą
-- Kurti automatizuotus scenarijus talpos patikrinimui ir kvotų stebėjimui
-- Projektuoti mastelio galimybes turinčias architektūras, atsižvelgiant į regioninius ir prenumeratos limitus
-- Įgyvendinti ekonomiškai efektyvias resursų dydžio strategijas skirtingiems darbo krūviams
+Baigę, galėsite:
+- Įvertinti ir patikrinti „Azure“ išteklių talpos reikalavimus prieš diegimą
+- Sukurti automatizuotus scenarijus talpos patikrinimui ir kvotų stebėjimui
+- Projektuoti mastelio architektūras, atsižvelgiant į regioninius ir prenumeratos limitus
+- Įgyvendinti ekonomiškai efektyvias išteklių dydžio strategijas skirtingiems darbo krūviams
 - Konfigūruoti proaktyvų stebėjimą ir įspėjimus dėl talpos susijusių problemų
-- Planuoti diegimus keliuose regionuose su tinkamu talpos paskirstymu
+- Planuoti daugiaregioninius diegimus su tinkamu talpos paskirstymu
 
 ## Kodėl talpos planavimas svarbus
 
-Prieš diegiant programas, būtina užtikrinti:
-- **Pakankamas kvotas** reikalingiems resursams
-- **Resursų prieinamumą** jūsų tiksliniame regione
+Prieš diegiant programas, turite užtikrinti:
+- **Pakankamas kvotas** reikalingiems ištekliams
+- **Išteklių prieinamumą** jūsų tiksliniame regione
 - **Paslaugų lygio prieinamumą** jūsų prenumeratos tipui
 - **Tinklo talpą** numatomam srautui
 - **Išlaidų optimizavimą** per tinkamą dydžio nustatymą
 
-## 📊 Azure kvotų ir limitų supratimas
+## 📊 „Azure“ kvotų ir limitų supratimas
 
 ### Limitų tipai
-1. **Prenumeratos lygio kvotos** – Maksimalūs resursai vienai prenumeratai
-2. **Regioninės kvotos** – Maksimalūs resursai viename regione
-3. **Resursų specifiniai limitai** – Limitai atskiriems resursų tipams
-4. **Paslaugų lygio limitai** – Limitai pagal jūsų paslaugų planą
+1. **Prenumeratos lygio kvotos** - Maksimalūs ištekliai vienai prenumeratai
+2. **Regioninės kvotos** - Maksimalūs ištekliai viename regione
+3. **Išteklių specifiniai limitai** - Limitai atskiriems išteklių tipams
+4. **Paslaugų lygio limitai** - Limitai pagal jūsų paslaugų planą
 
-### Dažniausios resursų kvotos
+### Dažniausios išteklių kvotos
 ```bash
-# Check current quota usage
+# Patikrinkite dabartinį kvotos naudojimą
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Patikrinkite konkrečias išteklių kvotas
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-
 ## Talpos patikrinimai prieš diegimą
 
-### Automatizuotas talpos patikros scenarijus
+### Automatizuotas talpos patikrinimo scenarijus
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Patikrinkite Azure pajėgumus prieš diegimą
 
 set -e
 
@@ -77,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Funkcija patikrinti kvotos naudojimą
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -112,28 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Patikrinkite įvairias išteklių kvotas
+check_quota "compute" 4      # Reikia 4 vCPU
+check_quota "storage" 2      # Reikia 2 saugojimo paskyrų
+check_quota "network" 1      # Reikia 1 virtualaus tinklo
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-
 ### Paslaugų specifiniai talpos patikrinimai
 
-#### App Service talpa
+#### Programų paslaugų talpa
 ```bash
-# Check App Service Plan availability
+# Patikrinkite programų paslaugų plano prieinamumą
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Patikrinkite galimus SKU regione
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -141,32 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Pasiūlykite alternatyvius regionus
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Patikrinkite dabartinį naudojimą
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Naudojimas
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-
 #### Duomenų bazės talpa
 ```bash
-# Check PostgreSQL capacity
+# Patikrinkite PostgreSQL talpą
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Patikrinkite, ar SKU yra prieinamas
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -175,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Rodyti prieinamus SKU
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -183,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Patikrinkite Cosmos DB talpą
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Patikrinkite regiono prieinamumą
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Patikrinkite, ar palaikomas serverless (jei reikia)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -214,16 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-
-#### Container Apps talpa
+#### Konteinerių programų talpa
 ```bash
-# Check Container Apps capacity
+# Patikrinkite „Container Apps“ pajėgumus
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Patikrinkite, ar „Container Apps“ yra prieinamas regione
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -231,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Patikrinkite dabartinį aplinkų skaičių
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # „Container Apps“ turi 15 aplinkų limitą vienam regionui
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -246,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Rodyti prieinamus regionus
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,12 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
-
 ## 📍 Regioninės prieinamumo patikros
 
 ### Paslaugų prieinamumas pagal regioną
 ```bash
-# Check service availability across regions
+# Patikrinkite paslaugų prieinamumą regionuose
 check_service_availability() {
     local service=$1
     
@@ -286,19 +288,18 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Patikrinkite visas paslaugas
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-
 ### Regiono pasirinkimo rekomendacijos
 ```bash
-# Recommend optimal regions based on requirements
+# Rekomenduokite optimalias sritis pagal reikalavimus
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "mažos sąnaudos" | "veikimas" | "atitiktis"
     
     echo "Region recommendations for: $requirements"
     
@@ -325,23 +326,22 @@ recommend_region() {
 }
 ```
 
-
 ## 💰 Išlaidų planavimas ir įvertinimas
 
-### Resursų išlaidų įvertinimas
+### Išteklių išlaidų įvertinimas
 ```bash
-# Estimate deployment costs
+# Įvertinti diegimo išlaidas
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Sukurti laikiną išteklių grupę vertinimui
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Diegti infrastruktūrą patvirtinimo režimu
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -349,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Išvalyti laikiną išteklių grupę
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -361,10 +361,9 @@ estimate_costs() {
 }
 ```
 
-
 ### SKU optimizavimo rekomendacijos
 ```bash
-# Recommend optimal SKUs based on requirements
+# Rekomenduoti optimalius SKU pagal reikalavimus
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -427,33 +426,32 @@ recommend_sku() {
 }
 ```
 
-
 ## 🚀 Automatizuoti patikrinimai prieš diegimą
 
 ### Išsamus patikrinimo scenarijus
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Baigti prieš diegimą patikrą
 
 set -e
 
-# Configuration
+# Konfigūracija
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Spalvos išvestims
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Be spalvų
 
-# Logging functions
+# Registravimo funkcijos
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Įkelti konfigūraciją
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -473,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Patikra 1: Autentifikacija
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -483,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Patikra 2: Regioninis prieinamumas
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -492,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Patikra 3: Kvotos patikrinimas
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU kvota
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -509,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Saugojimo paskyros kvota
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -522,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Patikra 4: Paslaugos prieinamumas
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -564,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Patikra 5: Tinklo pajėgumas
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -578,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Patikra 6: Išteklių pavadinimų patikrinimas
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -590,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Patikra 7: Kainos įvertinimas
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -605,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Patikra 8: Šablono patikrinimas
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -619,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Galutinė santrauka
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -628,7 +626,6 @@ echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
-
 
 ### Konfigūracijos failo šablonas
 ```json
@@ -664,19 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-
 ## 📈 Talpos stebėjimas diegimo metu
 
 ### Talpos stebėjimas realiu laiku
 ```bash
-# Monitor capacity during deployment
+# Stebėkite pajėgumus diegimo metu
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Patikrinkite diegimo būseną
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -689,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Patikrinkite dabartinį išteklių naudojimą
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -699,7 +695,6 @@ monitor_deployment_capacity() {
     done
 }
 ```
-
 
 ## 🔗 Integracija su AZD
 
@@ -721,39 +716,40 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-
 ## Geriausios praktikos
 
 1. **Visada atlikite talpos patikrinimus** prieš diegdami į naujus regionus
 2. **Reguliariai stebėkite kvotų naudojimą**, kad išvengtumėte netikėtumų
-3. **Planuokite augimą**, patikrindami būsimus talpos poreikius
-4. **Naudokite išlaidų įvertinimo įrankius**, kad išvengtumėte netikėtų sąskaitų
+3. **Planuokite augimą**, tikrindami būsimus talpos poreikius
+4. **Naudokite išlaidų įvertinimo įrankius**, kad išvengtumėte didelių sąskaitų
 5. **Dokumentuokite talpos reikalavimus** savo komandai
-6. **Automatizuokite talpos patikrinimus** CI/CD procesuose
-7. **Apsvarstykite regioninio failover talpos reikalavimus**
+6. **Automatizuokite talpos patikrinimą** CI/CD procesuose
+7. **Apsvarstykite regioninio atsarginio talpos poreikius**
 
 ## Kiti žingsniai
 
-- [SKU pasirinkimo vadovas](sku-selection.md) – Pasirinkite optimalų paslaugų lygį
-- [Patikrinimai prieš diegimą](preflight-checks.md) – Automatizuoti patikrinimo scenarijai
-- [Trumpas vadovas](../../resources/cheat-sheet.md) – Greitos nuorodos komandos
-- [Žodynas](../../resources/glossary.md) – Terminai ir apibrėžimai
+- [SKU pasirinkimo vadovas](sku-selection.md) - Pasirinkite optimalų paslaugų lygį
+- [Patikrinimai prieš diegimą](preflight-checks.md) - Automatizuoti patikrinimo scenarijai
+- [Trumpas vadovas](../../resources/cheat-sheet.md) - Greitos komandos
+- [Žodynas](../../resources/glossary.md) - Terminai ir apibrėžimai
 
 ## Papildomi ištekliai
 
-- [Azure prenumeratos limitai](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
-- [Azure kainų skaičiuoklė](https://azure.microsoft.com/pricing/calculator/)
-- [Azure išlaidų valdymas](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
-- [Azure regioninė prieinamumas](https://azure.microsoft.com/global-infrastructure/services/)
+- [„Azure“ prenumeratos limitai](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+- [„Azure“ kainų skaičiuoklė](https://azure.microsoft.com/pricing/calculator/)
+- [„Azure“ išlaidų valdymas](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
+- [„Azure“ regioninis prieinamumas](https://azure.microsoft.com/global-infrastructure/services/)
 
 ---
 
 **Navigacija**
-- **Ankstesnė pamoka**: [Derinimo vadovas](../troubleshooting/debugging.md)
+- **Ankstesnė pamoka**: [Trikčių šalinimo vadovas](../troubleshooting/debugging.md)
 
 - **Kita pamoka**: [SKU pasirinkimas](sku-selection.md)
 
 ---
 
-**Atsakomybės atsisakymas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Atsakomybės apribojimas**:  
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus aiškinimus, atsiradusius dėl šio vertimo naudojimo.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

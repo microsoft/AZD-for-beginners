@@ -2,8 +2,8 @@
 CO_OP_TRANSLATOR_METADATA:
 {
   "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-24T09:34:36+00:00",
-  "source_file": "docs/ai-foundry/production-ai-practices.md",
+  "translation_date": "2025-11-24T10:31:12+00:00",
+  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
   "language_code": "lt"
 }
 -->
@@ -18,14 +18,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Apžvalga
 
-Šiame vadove pateikiamos išsamios geriausios praktikos, kaip diegti gamybai paruoštus AI darbo krūvius naudojant Azure Developer CLI (AZD). Remiantis „Microsoft Foundry“ Discord bendruomenės atsiliepimais ir realių klientų diegimais, šios praktikos sprendžia dažniausiai pasitaikančius iššūkius gamybiniuose AI sistemose.
+Šis vadovas pateikia išsamias geriausias praktikas, kaip diegti gamybai paruoštus AI darbo krūvius naudojant Azure Developer CLI (AZD). Remiantis „Microsoft Foundry“ Discord bendruomenės atsiliepimais ir realių klientų diegimais, šios praktikos sprendžia dažniausiai pasitaikančius iššūkius gamybiniuose AI sistemose.
 
 ## Pagrindiniai sprendžiami iššūkiai
 
 Remiantis mūsų bendruomenės apklausos rezultatais, tai yra pagrindiniai iššūkiai, su kuriais susiduria kūrėjai:
 
 - **45%** susiduria su daugiapaslaugiais AI diegimais
-- **38%** kyla problemų su kredencialų ir slaptų duomenų valdymu  
+- **38%** turi problemų su kredencialų ir slaptų duomenų valdymu  
 - **35%** sunku užtikrinti gamybinį pasirengimą ir mastelį
 - **32%** reikia geresnių kaštų optimizavimo strategijų
 - **29%** reikia patobulinto stebėjimo ir trikčių šalinimo
@@ -76,7 +76,7 @@ services:
     host: containerapp
 ```
 
-### Modelis 2: Įvykių valdomas AI apdorojimas
+### Modelis 2: Įvykių pagrindu veikiantis AI apdorojimas
 
 **Kada naudoti**: Partijų apdorojimui, dokumentų analizei, asinchroniniams darbo srautams
 
@@ -367,7 +367,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Kaštų optimizavimas
 
-### 1. Išteklių tinkamas dydžio nustatymas
+### 1. Išteklių tinkamo dydžio nustatymas
 
 **Aplinkai pritaikytos konfigūracijos**:
 
@@ -804,7 +804,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastruktūros patikra
+### 2. Infrastruktūros patikrinimas
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -841,15 +841,15 @@ echo "Infrastructure validation completed successfully!"
 
 ### Saugumas ✅
 - [ ] Visos paslaugos naudoja valdomas tapatybes
-- [ ] Slaptos informacijos saugojimas Key Vault
-- [ ] Suprivačių galinių taškų konfigūracija
-- [ ] Tinklo saugumo grupės įgyvendintos
+- [ ] Slapti duomenys saugomi Key Vault
+- [ ] Suprivačiai galiniai taškai sukonfigūruoti
+- [ ] Įgyvendintos tinklo saugumo grupės
 - [ ] RBAC su minimaliomis privilegijomis
 - [ ] WAF įjungtas viešuose galiniuose taškuose
 
 ### Našumas ✅
-- [ ] Automatinis mastelio keitimas sukonfigūruotas
-- [ ] Kešavimas įgyvendintas
+- [ ] Suprivačiai automatinis mastelio keitimas
+- [ ] Įgyvendintas kešavimas
 - [ ] Apkrovos balansavimas nustatytas
 - [ ] CDN statiniam turiniui
 - [ ] Duomenų bazės ryšių telkimas
@@ -857,33 +857,33 @@ echo "Infrastructure validation completed successfully!"
 
 ### Stebėjimas ✅
 - [ ] Programos įžvalgos sukonfigūruotos
-- [ ] Individualios metrikos apibrėžtos
-- [ ] Įspėjimų taisyklės nustatytos
-- [ ] Prietaisų skydelis sukurtas
-- [ ] Sveikatos patikros įgyvendintos
+- [ ] Apibrėžtos individualios metrikos
+- [ ] Sukurtos įspėjimo taisyklės
+- [ ] Sukurtas prietaisų skydelis
+- [ ] Įgyvendintos sveikatos patikros
 - [ ] Žurnalų saugojimo politika
 
 ### Patikimumas ✅
 - [ ] Diegimas keliuose regionuose
 - [ ] Atsarginių kopijų ir atkūrimo planas
-- [ ] Apsaugos nuo gedimų mechanizmai
-- [ ] Pakartojimo politikos sukonfigūruotos
-- [ ] Sklandus degradavimas
+- [ ] Įgyvendinti grandinės pertraukikliai
+- [ ] Suprivačiai pakartojimo politikos
+- [ ] Malonus degradavimas
 - [ ] Sveikatos patikros galiniai taškai
 
 ### Kaštų valdymas ✅
-- [ ] Biudžeto įspėjimai sukonfigūruoti
-- [ ] Išteklių tinkamas dydžio nustatymas
-- [ ] Nuolaidos kūrimo/testavimo aplinkoms pritaikytos
-- [ ] Rezervuoti egzemplioriai įsigyti
+- [ ] Suprivačiai biudžeto įspėjimai
+- [ ] Išteklių tinkamo dydžio nustatymas
+- [ ] Taikomos nuolaidos kūrimui/testavimui
+- [ ] Įsigytos rezervuotos instancijos
 - [ ] Kaštų stebėjimo prietaisų skydelis
 - [ ] Reguliarūs kaštų peržiūros
 
 ### Atitiktis ✅
-- [ ] Duomenų rezidencijos reikalavimai įvykdyti
-- [ ] Audito žurnalai įjungti
-- [ ] Atitikties politikos pritaikytos
-- [ ] Saugumo pagrindai įgyvendinti
+- [ ] Atitinka duomenų rezidencijos reikalavimus
+- [ ] Įjungtas audito žurnalų vedimas
+- [ ] Taikomos atitikties politikos
+- [ ] Įgyvendinti saugumo pagrindai
 - [ ] Reguliarūs saugumo vertinimai
 - [ ] Incidentų reagavimo planas
 
@@ -895,7 +895,7 @@ echo "Infrastructure validation completed successfully!"
 |----------|---------|------------|
 | **Atsako laikas** | < 2 sekundės | Programos įžvalgos |
 | **Prieinamumas** | 99.9% | Veikimo stebėjimas |
-| **Klaidų dažnis** | < 0.1% | Programos žurnalai |
+| **Klaidos rodiklis** | < 0.1% | Programos žurnalai |
 | **Žetonų naudojimas** | < $500/mėn. | Kaštų valdymas |
 | **Vienu metu vartotojai** | 1000+ | Apkrovos testavimas |
 | **Atkūrimo laikas** | < 1 valanda | Atsigavimo po nelaimių testai |
@@ -923,7 +923,7 @@ Remiantis „Microsoft Foundry“ Discord bendruomenės atsiliepimais:
 4. **Kruopščiai testuokite**: Įtraukite AI specifinį testavimą į savo procesą
 5. **Planuokite kaštus**: Stebėkite žetonų naudojimą ir anksti nustatykite biudžeto įspėjimus
 
-### Dažniausios klaidos, kurių reikia vengti:
+### Dažniausiai pasitaikančios klaidos, kurių reikia vengti:
 
 - ❌ API raktų kietasis kodavimas kode
 - ❌ Tinkamo stebėjimo neįdiegimas
@@ -953,5 +953,5 @@ Remiantis „Microsoft Foundry“ Discord bendruomenės atsiliepimais:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus aiškinimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus interpretavimus, atsiradusius naudojant šį vertimą.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T14:09:12+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-24T09:30:40+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "lt"
 }
@@ -13,8 +13,8 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
 - **⬅️ Ankstesnis**: [Dažnos problemos](common-issues.md)
-- **➡️ Kitas**: [AI-specifinis trikčių šalinimas](ai-troubleshooting.md)
-- **🚀 Kitas skyrius**: [8 skyrius: Produkcija ir įmonių modeliai](../ai-foundry/production-ai-practices.md)
+- **➡️ Kitas**: [AI specifinis trikčių šalinimas](ai-troubleshooting.md)
+- **🚀 Kitas skyrius**: [8 skyrius: Produkcija ir įmonių modeliai](../microsoft-foundry/production-ai-practices.md)
 
 ## Įvadas
 
@@ -33,18 +33,18 @@ Baigę šį vadovą, jūs:
 ## Mokymosi rezultatai
 
 Baigę, galėsite:
-- Taikyti TRIAGE metodologiją sistemingai spręsti sudėtingas diegimo problemas
+- Taikyti TRIAGE metodiką sistemingai spręsti sudėtingas diegimo problemas
 - Konfigūruoti ir analizuoti išsamią žurnalų ir sekimo informaciją
 - Efektyviai naudoti Azure Monitor, Application Insights ir diagnostikos įrankius
-- Savarankiškai šalinti tinklo ryšio, autentifikacijos ir leidimų problemas
+- Savarankiškai šalinti tinklo ryšio, autentifikavimo ir leidimų problemas
 - Įgyvendinti našumo stebėjimo ir optimizavimo strategijas
 - Kurti pasirinktinius derinimo scenarijus ir automatizavimą pasikartojančioms problemoms
 
-## Derinimo metodologija
+## Derinimo metodika
 
 ### TRIAGE metodas
 - **T**ime: Kada problema prasidėjo?
-- **R**eproduce: Ar galite ją nuosekliai atkurti?
+- **R**eproduce: Ar galite ją nuolat atkurti?
 - **I**solate: Kuris komponentas neveikia?
 - **A**nalyze: Ką rodo žurnalai?
 - **G**ather: Surinkite visą svarbią informaciją
@@ -54,26 +54,26 @@ Baigę, galėsite:
 
 ### Aplinkos kintamieji
 ```bash
-# Enable comprehensive debugging
+# Įgalinti išsamų derinimą
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLI derinimas
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Išjungti telemetriją švaresniam rezultatui
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Derinimo konfigūracija
 ```bash
-# Set debug configuration globally
+# Nustatyti derinimo konfigūraciją globaliai
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Įjungti sekimo žurnalavimą
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -92,23 +92,23 @@ FATAL   - Critical errors that cause application termination
 
 ### Struktūrinė žurnalų analizė
 ```bash
-# Filter logs by level
+# Filtruoti žurnalus pagal lygį
 azd logs --level error --since 1h
 
-# Filter by service
+# Filtruoti pagal paslaugą
 azd logs --service api --level debug
 
-# Export logs for analysis
+# Eksportuoti žurnalus analizei
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Analizuoti JSON žurnalus su jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Žurnalų koreliacija
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Koreliuoti žurnalus tarp paslaugų
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Ieškoti visose paslaugose
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Ieškoti Azure žurnaluose
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph užklausos
 ```bash
-# Query resources by tags
+# Užklausa išteklių pagal žymes
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Rasti nepavykusius diegimus
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Patikrinti išteklių būklę
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Tinklo derinimas
 ```bash
-# Test connectivity between services
+# Patikrinti ryšį tarp paslaugų
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# Naudojimas
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Konteinerių derinimas
 ```bash
-# Debug container app issues
+# Derinti konteinerio programos problemas
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Duomenų bazės ryšio derinimas
 ```bash
-# Debug database connectivity
+# Derinti duomenų bazės ryšį
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -206,7 +206,7 @@ debug_database() {
 
 ### Programos našumo stebėjimas
 ```bash
-# Enable Application Insights debugging
+# Įjungti „Application Insights“ derinimą
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# Pasirinktinis našumo stebėjimas
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Išteklių naudojimo analizė
 ```bash
-# Monitor resource usage
+# Stebėkite išteklių naudojimą
 monitor_resources() {
     local resource_group=$1
     
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# Nustatyti derinimo aplinką
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Gauti paslaugų galinius taškus
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# Testuoti sveikatos galinius taškus
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# Paleisti testus
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# Paleisti pasirinktinius integracijos testus
 npm run test:integration
 ```
 
 ### Apkrovos testavimas derinimui
 ```bash
-# Simple load test to identify performance bottlenecks
+# Paprastas apkrovos testas našumo trūkumams nustatyti
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Naudojant Apache Bench (įdiegimas: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Išgauti pagrindinius rodiklius
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Patikrinti gedimus
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,26 +339,26 @@ load_test() {
 
 ### Bicep šablonų derinimas
 ```bash
-# Validate Bicep templates with detailed output
+# Patvirtinkite Bicep šablonus su detalia išvestimi
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Sintaksės patvirtinimas
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Lint patvirtinimas
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Kas-jei diegimas
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Derinkite šablono diegimą
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Išteklių būsenos analizė
 ```bash
-# Analyze resource states for inconsistencies
+# Analizuoti išteklių būsenas dėl neatitikimų
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Išvardyti visus išteklius su jų būsenomis
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Patikrinti nepavykusius išteklius
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -406,9 +406,9 @@ analyze_resources() {
 
 ## 🔒 Saugumo derinimas
 
-### Autentifikacijos srauto derinimas
+### Autentifikavimo srauto derinimas
 ```bash
-# Debug Azure authentication
+# Derinti Azure autentifikaciją
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Dekoduoti JWT žetoną (reikalingi jq ir base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Derinti Key Vault prieigą
 debug_keyvault() {
     local vault_name=$1
     
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Tinklo saugumo derinimas
 ```bash
-# Debug network security groups
+# Derinti tinklo saugos grupes
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Patikrinti saugos taisykles
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -462,13 +462,13 @@ debug_network_security() {
 
 ### Node.js programos derinimas
 ```javascript
-// debug-middleware.js - Express debugging middleware
+// debug-middleware.js - „Express“ derinimo tarpinė programinė įranga
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // Registruoti užklausos detales
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // Pakeisti res.json, kad būtų registruojami atsakymai
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Duomenų bazės užklausų derinimas
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Duomenų bazės derinimo įrankiai
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -519,12 +519,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Avarinės derinimo procedūros
+## 🚨 Skubios derinimo procedūros
 
-### Problemos produkcijoje sprendimas
+### Problemos gamyboje sprendimas
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - Skubus gamybos derinimas
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Perjungti į tinkamą aplinką
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Surinkti svarbią informaciją
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -582,26 +582,26 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Atsukimo procedūros
+### Atšaukimo procedūros
 ```bash
-# Quick rollback script
+# Greito atstatymo scenarijus
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Perjungti aplinką
     azd env select "$environment"
     
-    # Rollback application
+    # Atstatyti programą
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Patikrinti atstatymą
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Testuoti kritinius galinius taškus
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -613,21 +613,21 @@ quick_rollback() {
 
 ### Pasirinktinis stebėjimo skydelis
 ```bash
-# Create Application Insights queries for debugging
+# Sukurkite „Application Insights“ užklausas derinimui
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # Užklausa klaidoms
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Užklausa našumo problemoms
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # Užklausa priklausomybių gedimams
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Žurnalų agregavimas
 ```bash
-# Aggregate logs from multiple sources
+# Surinkti žurnalus iš kelių šaltinių
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -660,7 +660,7 @@ aggregate_logs() {
 
 ### Pasirinktiniai derinimo scenarijai
 Sukurkite `scripts/debug/` katalogą su:
-- `health-check.sh` - Išsamus sveikatos tikrinimas
+- `health-check.sh` - Išsamus sveikatos patikrinimas
 - `performance-test.sh` - Automatinis našumo testavimas
 - `log-analyzer.py` - Pažangi žurnalų analizė
 - `resource-validator.sh` - Infrastruktūros validacija
@@ -684,19 +684,19 @@ hooks:
 
 ## Geriausios praktikos
 
-1. **Visada įjunkite derinimo žurnalus** neprodukcinėje aplinkoje
-2. **Sukurkite atkuriamus testavimo scenarijus** problemoms
+1. **Visada įjunkite derinimo žurnalus** ne gamybos aplinkose
+2. **Sukurkite atkuriamus testavimo atvejus** problemoms
 3. **Dokumentuokite derinimo procedūras** savo komandai
-4. **Automatizuokite sveikatos tikrinimą** ir stebėjimą
-5. **Nuolat atnaujinkite derinimo įrankius** kartu su programos pakeitimais
+4. **Automatizuokite sveikatos patikrinimus** ir stebėjimą
+5. **Atnaujinkite derinimo įrankius** kartu su programos pakeitimais
 6. **Praktikuokite derinimo procedūras** ne incidentų metu
 
 ## Kiti žingsniai
 
-- [Talpos planavimas](../pre-deployment/capacity-planning.md) - Planuokite išteklių poreikius
-- [SKU pasirinkimas](../pre-deployment/sku-selection.md) - Pasirinkite tinkamus paslaugų lygius
-- [Priešskrydžio patikrinimai](../pre-deployment/preflight-checks.md) - Diegimo patvirtinimas
-- [Špargalkė](../../resources/cheat-sheet.md) - Greitos komandos nuorodos
+- [Talpos planavimas](../pre-deployment/capacity-planning.md) - Išteklių poreikių planavimas
+- [SKU pasirinkimas](../pre-deployment/sku-selection.md) - Tinkamų paslaugų lygių pasirinkimas
+- [Priešskrydžio patikrinimai](../pre-deployment/preflight-checks.md) - Prieš diegimą atliekama validacija
+- [Trumpa atmintinė](../../resources/cheat-sheet.md) - Greitos nuorodos komandos
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus aiškinimus, atsiradusius naudojant šį vertimą.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
