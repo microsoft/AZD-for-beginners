@@ -1,41 +1,48 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:41:11+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-24T12:53:34+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "et"
 }
 -->
-# Mahutavuse planeerimine: Azure'i kvootide ja piirangute mõistmine - Azure'i ressursside saadavus ja piirangud
+# Mahutavuse planeerimine - Azure'i ressursside saadavus ja piirangud
+
+**Peatüki navigeerimine:**
+- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
+- **📖 Praegune peatükk**: Peatükk 6 - Eelpaigaldamise valideerimine ja planeerimine
+- **⬅️ Eelmine peatükk**: [Peatükk 5: Mitmeagendilised AI lahendused](../../examples/retail-scenario.md)
+- **➡️ Järgmine**: [SKU valik](sku-selection.md)
+- **🚀 Järgmine peatükk**: [Peatükk 7: Tõrkeotsing](../troubleshooting/common-issues.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend aitab teil planeerida ja valideerida Azure'i ressursside mahutavust enne Azure Developer CLI-ga juurutamist. Õppige hindama kvoote, saadavust ja piirkondlikke piiranguid, et tagada edukad juurutused, optimeerides samal ajal kulusid ja jõudlust. Valdage mahutavuse planeerimise tehnikaid erinevate rakendusarhitektuuride ja skaleerimise stsenaariumide jaoks.
+See põhjalik juhend aitab teil planeerida ja valideerida Azure'i ressursside mahutavust enne Azure Developer CLI-ga paigaldamist. Õppige hindama kvoote, saadavust ja piirkondlikke piiranguid, et tagada edukad paigaldused, optimeerides samal ajal kulusid ja jõudlust. Omandage mahutavuse planeerimise tehnikad erinevate rakendusarhitektuuride ja skaleerimissituatsioonide jaoks.
 
-## Õpieesmärgid
+## Õppimise eesmärgid
 
 Selle juhendi läbimisega saate:
-- Mõista Azure'i kvoote, piiranguid ja piirkondlikke saadavuse piiranguid
-- Valdada tehnikaid ressursside saadavuse ja mahutavuse kontrollimiseks enne juurutamist
+- Mõista Azure'i kvoote, piiranguid ja piirkondlikke saadavuspiiranguid
+- Omandada tehnikad ressursside saadavuse ja mahutavuse kontrollimiseks enne paigaldamist
 - Rakendada automatiseeritud mahutavuse valideerimise ja jälgimise strateegiaid
-- Kavandada rakendusi, arvestades ressursside õiget suurustamist ja skaleerimist
+- Kujundada rakendusi, arvestades ressursside suuruse ja skaleerimise nõudeid
 - Rakendada kulude optimeerimise strateegiaid läbi nutika mahutavuse planeerimise
-- Konfigureerida teavitusi ja jälgimist kvootide kasutamise ja ressursside saadavuse jaoks
+- Konfigureerida hoiatusi ja jälgimist kvootide kasutuse ja ressursside saadavuse jaoks
 
 ## Õpitulemused
 
 Pärast juhendi läbimist suudate:
-- Hinnata ja valideerida Azure'i ressursside mahutavuse nõudeid enne juurutamist
+- Hinnata ja valideerida Azure'i ressursside mahutavuse nõudeid enne paigaldamist
 - Luua automatiseeritud skripte mahutavuse kontrollimiseks ja kvootide jälgimiseks
-- Kavandada skaleeritavaid arhitektuure, arvestades piirkondlikke ja tellimuse piiranguid
+- Kujundada skaleeritavaid arhitektuure, mis arvestavad piirkondlike ja tellimuse piirangutega
 - Rakendada kulutõhusaid ressursside suuruse määramise strateegiaid erinevate töökoormuste jaoks
-- Konfigureerida proaktiivset jälgimist ja teavitamist mahutavusega seotud probleemide jaoks
-- Planeerida mitme piirkonna juurutusi, arvestades õiget mahutavuse jaotust
+- Konfigureerida proaktiivset jälgimist ja hoiatusi mahutavusega seotud probleemide jaoks
+- Planeerida mitme piirkonna paigaldusi, arvestades õiget mahutavuse jaotust
 
 ## Miks mahutavuse planeerimine on oluline
 
-Enne rakenduste juurutamist peate tagama:
+Enne rakenduste paigaldamist peate tagama:
 - **Piisavad kvoodid** vajalike ressursside jaoks
 - **Ressursside saadavus** sihtpiirkonnas
 - **Teenuse taseme saadavus** teie tellimuse tüübi jaoks
@@ -47,25 +54,25 @@ Enne rakenduste juurutamist peate tagama:
 ### Piirangute tüübid
 1. **Tellimuse taseme kvoodid** - Maksimaalsed ressursid tellimuse kohta
 2. **Piirkondlikud kvoodid** - Maksimaalsed ressursid piirkonna kohta
-3. **Ressursispetsiifilised piirangud** - Piirangud individuaalsete ressursside tüüpide jaoks
-4. **Teenuse taseme piirangud** - Piirangud vastavalt teie teenuse plaanile
+3. **Ressursispetsiifilised piirangud** - Piirangud üksikute ressursside tüüpide jaoks
+4. **Teenuse taseme piirangud** - Piirangud vastavalt teie teenuseplaanile
 
-### Levinud ressursikvoodid
+### Levinumad ressursikvoodid
 ```bash
-# Check current quota usage
+# Kontrolli praegust kvoodi kasutust
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Kontrolli konkreetseid ressursikvoote
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
 
-## Enne juurutamist tehtavad mahutavuse kontrollid
+## Eelpaigaldamise mahutavuse kontrollid
 
 ### Automatiseeritud mahutavuse valideerimise skript
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Kontrolli Azure'i mahtu enne juurutamist
 
 set -e
 
@@ -76,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Funktsioon kvoodi kasutuse kontrollimiseks
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -111,10 +118,10 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Kontrolli erinevaid ressursikvoote
+check_quota "compute" 4      # Vajab 4 vCPU-d
+check_quota "storage" 2      # Vajab 2 salvestuskontot
+check_quota "network" 1      # Vajab 1 virtuaalvõrku
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
@@ -124,14 +131,14 @@ echo "✅ Capacity check completed successfully!"
 
 #### Rakendusteenuse mahutavus
 ```bash
-# Check App Service Plan availability
+# Kontrolli rakendusteenuse plaani saadavust
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Kontrolli saadaval olevaid SKU-sid piirkonnas
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,31 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Soovita alternatiivseid piirkondi
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Kontrolli praegust kasutust
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Kasutus
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
 #### Andmebaasi mahutavus
 ```bash
-# Check PostgreSQL capacity
+# Kontrolli PostgreSQL-i mahtu
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Kontrolli, kas SKU on saadaval
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Näita saadaval olevaid SKUsid
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -180,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Kontrolli Cosmos DB mahtu
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Kontrolli piirkonna saadavust
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Kontrolli, kas serverless on toetatud (vajadusel)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -213,13 +220,13 @@ check_cosmos_capacity() {
 
 #### Konteinerirakenduste mahutavus
 ```bash
-# Check Container Apps capacity
+# Kontrolli konteinerirakenduste mahtu
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Kontrolli, kas konteinerirakendused on piirkonnas saadaval
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Kontrolli praegust keskkondade arvu
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Konteinerirakendustel on piirang 15 keskkonda piirkonna kohta
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Näita saadavalolevaid piirkondi
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -254,9 +261,9 @@ check_container_apps_capacity() {
 
 ## 📍 Piirkondliku saadavuse valideerimine
 
-### Teenuse saadavus piirkonna järgi
+### Teenuse saadavus piirkonniti
 ```bash
-# Check service availability across regions
+# Kontrolli teenuse saadavust piirkondade lõikes
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Kontrolli kõiki teenuseid
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,9 +297,9 @@ done
 
 ### Piirkonna valiku soovitused
 ```bash
-# Recommend optimal regions based on requirements
+# Soovita optimaalseid piirkondi vastavalt nõuetele
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "madal hind" | "jõudlus" | "vastavus"
     
     echo "Region recommendations for: $requirements"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Ressursside kulude hindamine
 ```bash
-# Estimate deployment costs
+# Hinnake juurutuskulusid
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Looge ajutine ressursigrupp hindamiseks
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Juurutage infrastruktuur valideerimisrežiimis
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Kustutage ajutine ressursigrupp
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,10 +363,10 @@ estimate_costs() {
 
 ### SKU optimeerimise soovitused
 ```bash
-# Recommend optimal SKUs based on requirements
+# Soovita optimaalseid SKU-sid vastavalt nõuetele
 recommend_sku() {
     local service=$1
-    local workload_type=$2  # "dev" | "staging" | "production"
+    local workload_type=$2  # "arendus" | "testimine" | "tootmine"
     
     echo "SKU recommendations for $service ($workload_type workload):"
     
@@ -424,27 +431,27 @@ recommend_sku() {
 ### Põhjalik eelkontrolli skript
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Lõplik juurutuseelne valideerimine
 
 set -e
 
-# Configuration
+# Konfiguratsioon
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Väljundi värvid
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Ilma värvita
 
-# Logging functions
+# Logimisfunktsioonid
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Laadi konfiguratsioon
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -464,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Kontroll 1: Autentimine
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -474,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Kontroll 2: Piirkondlik saadavus
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -483,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Kontroll 3: Kvoodi valideerimine
 log_info "Checking quota availability..."
 
-# vCPU quota
+# vCPU kvoot
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -500,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Salvestuskonto kvoot
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -513,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Kontroll 4: Teenuse saadavus
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -555,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Kontroll 5: Võrgu maht
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -569,19 +576,19 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Kontroll 6: Ressursi nimetamise valideerimine
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
 
-if [ ${#STORAGE_NAME} -le 24 ] && [[ "$STORAGE_NAME" =~ ^[a-z0-9]+$ ]]; then
+if [ ${#STORAGE_NAME} -le 24 ] && [[ "$STORAGE_NAME" =~ ^[a-z0-9]+$ ]]; siis
     log_info "Storage account naming is valid: $STORAGE_NAME"
 else
     log_error "Storage account naming is invalid: $STORAGE_NAME"
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Kontroll 7: Kulude hindamine
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -596,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Kontroll 8: Malli valideerimine
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -610,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Lõplik kokkuvõte
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -654,18 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-## 📈 Mahutavuse jälgimine juurutamise ajal
+## 📈 Mahutavuse jälgimine paigaldamise ajal
 
 ### Reaalajas mahutavuse jälgimine
 ```bash
-# Monitor capacity during deployment
+# Jälgi läbilaskevõimet juurutamise ajal
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Kontrolli juurutamise olekut
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Kontrolli praegust ressursside kasutust
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -709,15 +716,15 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-## Parimad praktikad
+## Parimad tavad
 
-1. **Tehke alati mahutavuse kontrolle** enne uutesse piirkondadesse juurutamist
-2. **Jälgige regulaarselt kvootide kasutamist**, et vältida üllatusi
-3. **Planeerige kasvu**, kontrollides tulevasi mahutavuse vajadusi
+1. **Alati tehke mahutavuse kontrolle** enne uutesse piirkondadesse paigaldamist
+2. **Jälgige regulaarselt kvootide kasutust**, et vältida ootamatusi
+3. **Planeerige kasvu**, hinnates tulevasi mahutavuse vajadusi
 4. **Kasutage kulude hindamise tööriistu**, et vältida ootamatuid arveid
 5. **Dokumenteerige mahutavuse nõuded** oma meeskonna jaoks
 6. **Automatiseerige mahutavuse valideerimine** CI/CD torujuhtmetes
-7. **Arvestage piirkondliku varusüsteemi** mahutavuse nõuetega
+7. **Arvestage piirkondliku ülekatte** mahutavuse nõuetega
 
 ## Järgmised sammud
 
@@ -726,7 +733,7 @@ hooks:
 - [Spikri leht](../../resources/cheat-sheet.md) - Kiire viite käsud
 - [Sõnastik](../../resources/glossary.md) - Terminid ja definitsioonid
 
-## Täiendavad ressursid
+## Lisamaterjalid
 
 - [Azure'i tellimuse piirangud](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 - [Azure'i hinnakalkulaator](https://azure.microsoft.com/pricing/calculator/)
@@ -742,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Lahtiütlus**:  
 See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

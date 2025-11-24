@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-10-11T16:03:32+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-24T13:06:19+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "et"
 }
 -->
-# Tootmise AI töökoormuse parimad praktikad AZD-ga
+# Tootmise AI töökoormuse parimad tavad AZD-ga
 
 **Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
@@ -18,14 +18,14 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Ülevaade
 
-See juhend pakub põhjalikke parimaid praktikaid tootmisvalmis AI töökoormuste juurutamiseks, kasutades Azure Developer CLI-d (AZD). Tuginedes Azure AI Foundry Discordi kogukonna tagasisidele ja reaalse maailma klientide juurutustele, käsitletakse siin tootmise AI süsteemide kõige levinumaid väljakutseid.
+See juhend pakub põhjalikke parimaid tavasid tootmisvalmis AI töökoormuste juurutamiseks, kasutades Azure Developer CLI-d (AZD). Tuginedes Microsoft Foundry Discordi kogukonna tagasisidele ja reaalse maailma klientide juurutustele, käsitletakse siin tootmise AI süsteemide kõige levinumaid väljakutseid.
 
 ## Peamised käsitletavad väljakutsed
 
 Tuginedes meie kogukonna küsitluse tulemustele, on need arendajate peamised väljakutsed:
 
 - **45%** kogevad raskusi mitme teenusega AI juurutustes
-- **38%** seisavad silmitsi volituste ja salajaste võtmete haldamise probleemidega  
+- **38%** seisavad silmitsi volituste ja saladuste haldamise probleemidega  
 - **35%** leiavad tootmisvalmiduse ja skaleerimise keeruliseks
 - **32%** vajavad paremaid kulude optimeerimise strateegiaid
 - **29%** vajavad paremat jälgimist ja tõrkeotsingut
@@ -53,7 +53,7 @@ Tuginedes meie kogukonna küsitluse tulemustele, on need arendajate peamised vä
         └──────────────┘ └─────────────┘ └────────────┘
 ```
 
-**AZD rakendus**:
+**AZD rakendamine**:
 
 ```yaml
 # azure.yaml
@@ -125,14 +125,14 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Turvalisuse parimad praktikad
+## Turvalisuse parimad tavad
 
 ### 1. Nullusalduse turvamudel
 
 **Rakendamise strateegia**:
 - Teenustevaheline suhtlus ainult autentimisega
 - Kõik API-kõned kasutavad hallatud identiteete
-- Võrgueraldus privaatsete lõpp-punktidega
+- Võrguisolatsioon privaatsete lõpp-punktidega
 - Minimaalse privileegiga juurdepääsukontrollid
 
 ```bicep
@@ -154,7 +154,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Turvaline salajaste võtmete haldamine
+### 2. Turvaline saladuste haldamine
 
 **Key Vault integratsioonimuster**:
 
@@ -191,7 +191,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Võrgu turvalisus
 
-**Privaatsete lõpp-punktide konfiguratsioon**:
+**Privaatse lõpp-punkti konfiguratsioon**:
 
 ```bicep
 // Virtual Network for AI services
@@ -372,7 +372,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Keskkonnaspetsiifilised konfiguratsioonid**:
 
 ```bash
-# Development environment
+# Arenduskeskkond
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Tootmiskeskkond
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI kulude haldamine**:
 
 ```typescript
-// Application-level token optimization
+// Rakenduse taseme tokeni optimeerimine
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Kärbi konteksti, mitte kasutaja sisendit
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Ligikaudne hinnang: 1 token ≈ 4 tähemärki
     return Math.ceil(text.length / 4);
   }
 }
@@ -608,7 +608,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Katastroofide taastamine ja kõrge saadavus
 
-### 1. Mitme piirkonna juurutus
+### 1. Mitme piirkonna juurutamine
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Kontrolli, kas kõik vajalikud teenused töötavad
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Kinnita OpenAI mudelite juurutused
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,7 +830,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Testi AI teenuse ühenduvust
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -841,8 +841,8 @@ echo "Infrastructure validation completed successfully!"
 
 ### Turvalisus ✅
 - [ ] Kõik teenused kasutavad hallatud identiteete
-- [ ] Salajased võtmed salvestatud Key Vaultis
-- [ ] Privaatsete lõpp-punktide konfiguratsioon
+- [ ] Saladused salvestatud Key Vaultis
+- [ ] Privaatlõpp-punktid konfigureeritud
 - [ ] Võrgu turvalisuse grupid rakendatud
 - [ ] RBAC minimaalse privileegiga
 - [ ] WAF lubatud avalikel lõpp-punktidel
@@ -864,15 +864,15 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Logide säilitamise poliitikad
 
 ### Usaldusväärsus ✅
-- [ ] Mitme piirkonna juurutus
+- [ ] Mitme piirkonna juurutamine
 - [ ] Varundamise ja taastamise plaan
 - [ ] Circuit breakers rakendatud
 - [ ] Korduspoliitikad konfigureeritud
-- [ ] Graatsiline degradeerumine
+- [ ] Sujuv degradeerumine
 - [ ] Tervisekontrolli lõpp-punktid
 
 ### Kulude haldamine ✅
-- [ ] Eelarve hoiatused konfigureeritud
+- [ ] Eelarvehoiatused konfigureeritud
 - [ ] Ressursside õige suuruse määramine
 - [ ] Arendus/testimise soodustused rakendatud
 - [ ] Reserveeritud instantsid ostetud
@@ -881,7 +881,7 @@ echo "Infrastructure validation completed successfully!"
 
 ### Vastavus ✅
 - [ ] Andmete asukoha nõuded täidetud
-- [ ] Auditilogid lubatud
+- [ ] Auditilogimine lubatud
 - [ ] Vastavuspoliitikad rakendatud
 - [ ] Turvalisuse alused rakendatud
 - [ ] Regulaarne turvalisuse hindamine
@@ -889,7 +889,7 @@ echo "Infrastructure validation completed successfully!"
 
 ## Jõudluse võrdlusalused
 
-### Tüüpilised tootmise mõõdikud
+### Tüüpilised tootmismõõdikud
 
 | Mõõdik | Eesmärk | Jälgimine |
 |--------|--------|------------|
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Koormustestimine
 
 ```bash
-# Load testing script for AI applications
+# Koormustestimise skript tehisintellekti rakenduste jaoks
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -911,9 +911,9 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Kogukonna parimad praktikad
+## 🤝 Kogukonna parimad tavad
 
-Tuginedes Azure AI Foundry Discordi kogukonna tagasisidele:
+Tuginedes Microsoft Foundry Discordi kogukonna tagasisidele:
 
 ### Kogukonna peamised soovitused:
 
@@ -921,20 +921,20 @@ Tuginedes Azure AI Foundry Discordi kogukonna tagasisidele:
 2. **Jälgi kõike**: Seadista põhjalik jälgimine juba esimesest päevast
 3. **Automatiseeri turvalisus**: Kasuta infrastruktuuri koodi kujul järjepideva turvalisuse tagamiseks
 4. **Testi põhjalikult**: Kaasa AI-spetsiifiline testimine oma torustikku
-5. **Planeeri kulud**: Jälgi tokenite kasutamist ja seadista eelarve hoiatused varakult
+5. **Planeeri kulud**: Jälgi tokenite kasutamist ja seadista eelarvehoiatused varakult
 
 ### Levinud vead, mida vältida:
 
-- ❌ API võtmete kõvakodeerimine koodi
+- ❌ API võtmete kõvakodeerimine koodis
 - ❌ Jälgimise seadistamata jätmine
 - ❌ Kulude optimeerimise ignoreerimine
-- ❌ Tõrkeolukordade testimata jätmine
-- ❌ Juurutamine ilma tervisekontrollideta
+- ❌ Tõrkesituatsioonide testimata jätmine
+- ❌ Tervisekontrollideta juurutamine
 
-## Lisamaterjalid
+## Täiendavad ressursid
 
-- **Azure hästi arhitektuuriga raamistik**: [AI töökoormuse juhend](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry dokumentatsioon**: [Ametlikud dokumendid](https://learn.microsoft.com/azure/ai-studio/)
+- **Azure hästi arhitektuuri raamistik**: [AI töökoormuste juhend](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry dokumentatsioon**: [Ametlikud dokumendid](https://learn.microsoft.com/azure/ai-studio/)
 - **Kogukonna mallid**: [Azure näidised](https://github.com/Azure-Samples)
 - **Discordi kogukond**: [#Azure kanal](https://discord.gg/microsoft-azure)
 
@@ -951,5 +951,7 @@ Tuginedes Azure AI Foundry Discordi kogukonna tagasisidele:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-11-18T19:23:51+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-24T13:53:05+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "pcm"
 }
@@ -18,36 +18,36 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-Dis guide go show you every every wey you need sabi to configure Azure Developer CLI so you fit dey work well well for development and deployment. You go learn about di configuration hierarchy, how to manage environment, authentication methods, and advanced configuration patterns wey go make Azure deployment easy and secure.
+Dis guide go teach you how to configure Azure Developer CLI well for better development and deployment workflows. You go sabi di configuration hierarchy, how to manage environment, authentication methods, and advanced configuration patterns wey go make Azure deployment easy and secure.
 
 ## Learning Goals
 
-By di time you finish dis lesson, you go don:
-- Sabi di azd configuration hierarchy and how settings dey take priority
+By di end of dis lesson, you go:
+- Sabi di azd configuration hierarchy and how settings dey work
 - Configure global and project-specific settings well
-- Manage multiple environments wey get different configurations
+- Manage plenty environments wey get different configurations
 - Use secure authentication and authorization patterns
-- Understand advanced configuration patterns for complex scenarios
+- Understand advanced configuration patterns for complex setups
 
 ## Learning Outcomes
 
 After you finish dis lesson, you go fit:
-- Configure azd to make development workflows smooth
-- Set up and manage multiple deployment environments
+- Configure azd for better development workflows
+- Set up and manage plenty deployment environments
 - Use secure configuration management practices
-- Solve configuration-related wahala
-- Customize azd behavior to match wetin your organization need
+- Solve configuration wahala
+- Customize azd behavior for your organization needs
 
-Dis guide go show you everything wey you need to configure Azure Developer CLI for better development and deployment workflows.
+Dis guide go show you everything about configuring Azure Developer CLI for better development and deployment workflows.
 
 ## Configuration Hierarchy
 
-azd dey use one kind hierarchical configuration system:
-1. **Command-line flags** (na dem get highest priority)
+azd dey use one hierarchical configuration system:
+1. **Command-line flags** (na di highest priority)
 2. **Environment variables**
 3. **Local project configuration** (`.azd/config.json`)
 4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (na dem get lowest priority)
+5. **Default values** (na di lowest priority)
 
 ## Global Configuration
 
@@ -71,24 +71,24 @@ azd config unset defaults.location
 
 ### Common Global Settings
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Development choice dem
+azd config set alpha.enable true                    # Make alpha feature dem work
+azd config set telemetry.enabled false             # Turn off telemetry
+azd config set output.format json                  # Choose output format
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Security setting dem
+azd config set auth.useAzureCliCredential true     # Use Azure CLI for authentication
+azd config set tls.insecure false                  # Make sure TLS dey verify
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Performance adjustment
+azd config set provision.parallelism 5             # Create resource dem at once
+azd config set deploy.timeout 30m                  # Deployment time limit
 ```
 
 ## 🏗️ Project Configuration
 
 ### azure.yaml Structure
-Di `azure.yaml` file na di main thing for your azd project:
+Di `azure.yaml` file na di main file for your azd project:
 
 ```yaml
 # Minimum configuration
@@ -213,13 +213,13 @@ services:
 
 ### Creating Environments
 ```bash
-# Create a new environment
+# Make new environment
 azd env new development
 
-# Create with specific location
+# Make am for specific location
 azd env new staging --location "westus2"
 
-# Create from template
+# Make am from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -248,31 +248,40 @@ Each environment get im own configuration for `.azure/<env-name>/config.json`:
 
 ### Environment Variables
 ```bash
-# Set environment-specific variables
+# Set variables wey dey for environment
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# View environment variables
+# See variables wey dey for environment
 azd env get-values
 
-# Remove environment variable
+# Wetin we dey expect:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
+# Comot variable wey dey for environment
 azd env unset DEBUG
+
+# Check say e don comot
+azd env get-values | grep DEBUG
+# (e suppose no return anything)
 ```
 
 ### Environment Templates
-Create `.azure/env.template` to make sure environment setup dey consistent:
+Create `.azure/env.template` to make environment setup easy:
 ```bash
-# Required variables
+# Variables wey we need
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Application settings
+# Settings for di app
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Optional development settings
+# Settings wey no dey compulsory for development
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -284,7 +293,7 @@ LOG_LEVEL=info
 # Use Azure CLI credentials (default)
 azd config set auth.useAzureCliCredential true
 
-# Login with specific tenant
+# Login wit specific tenant
 az login --tenant <tenant-id>
 
 # Set default subscription
@@ -338,7 +347,7 @@ Set infrastructure parameters for `infra/main.parameters.json`:
 ```
 
 ### Terraform Configuration
-For Terraform projects, configure for `infra/terraform.tfvars`:
+For Terraform projects, set am for `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -391,7 +400,7 @@ Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azu
 
 ### Custom Resource Naming
 ```bash
-# Set naming conventions
+# Set name wey dem go dey use
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -453,13 +462,13 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Validate Configuration
 ```bash
-# Check configuration syntax
+# Check how config dey correct
 azd config validate
 
-# Test environment variables
+# Test environment variables dem
 azd env get-values
 
-# Validate infrastructure
+# Make sure infrastructure dey okay
 azd provision --dry-run
 ```
 
@@ -472,13 +481,13 @@ Create validation scripts for `scripts/`:
 
 echo "Validating configuration..."
 
-# Check required environment variables
+# Check di environment variables wey dem need
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Validate azure.yaml syntax
+# Make sure say azure.yaml syntax correct
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -519,8 +528,8 @@ database:
 ### 3. Version Control Considerations
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
-.azure/*/.env               # Environment variables (may contain secrets)
+.azure/*/config.json         # Environment configs (e get resource IDs)
+.azure/*/.env               # Environment variables (fit get secrets)
 .env                        # Local environment file
 ```
 
@@ -540,9 +549,71 @@ Document your configuration for `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Hands-On Practice Exercises
+
+### Exercise 1: Multi-Environment Configuration (15 minutes)
+
+**Goal**: Create and configure three environments wey get different settings
+
+```bash
+# Make development environment
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Make staging environment
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Make production environment
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Check each environment
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Success Criteria:**
+- [ ] Three environments dey created well
+- [ ] Each environment get im own configuration
+- [ ] You fit switch between environments without wahala
+- [ ] `azd env list` dey show all three environments
+
+### Exercise 2: Secret Management (10 minutes)
+
+**Goal**: Practice secure configuration with sensitive data
+
+```bash
+# Set secrets (e no go show for output)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Set config wey no be secret
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# Check environment (secrets suppose dey hide)
+azd env get-values
+
+# Make sure say secrets dey store
+azd env get DB_PASSWORD  # E suppose show real value
+```
+
+**Success Criteria:**
+- [ ] Secrets dey stored without showing for terminal
+- [ ] `azd env get-values` dey show redacted secrets
+- [ ] Individual `azd env get <SECRET_NAME>` dey retrieve di real value
+
 ## Next Steps
 
-- [Your First Project](first-project.md) - Use configuration for real-life example
+- [Your First Project](first-project.md) - Use configuration for practice
 - [Deployment Guide](../deployment/deployment-guide.md) - Use configuration for deployment
 - [Provisioning Resources](../deployment/provisioning.md) - Production-ready configurations
 
@@ -565,5 +636,5 @@ Document your configuration for `CONFIG.md`:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don use AI transleto service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am correct, abeg sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument for im native language na di main source wey you go trust. For important mata, e better make professional human transleto check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Dis dokyument don use AI transle-shun service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transle-shun. Even as we dey try make am correct, abeg make you sabi say machine transle-shun fit get mistake or no dey accurate well. Di original dokyument wey dey for im native language na di one wey you go take as di correct source. For important mata, e good make you use professional human transle-shun. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis transle-shun.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

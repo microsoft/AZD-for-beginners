@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-11-18T19:19:30+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-24T13:43:07+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "pcm"
 }
@@ -14,30 +14,30 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Common Issues](common-issues.md)
 - **➡️ Next**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
-- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduction
 
-Dis guide go show you advanced way to debug, tools, and techniques wey you fit use to find and solve wahala wey fit happen for Azure Developer CLI deployments. You go sabi how to troubleshoot step by step, check logs, do performance profiling, and use advanced diagnostic tools to fix deployment and runtime wahala quick quick.
+Dis guide go show you beta way to debug, tools, and techniques wey fit help you find and fix wahala wey dey happen for Azure Developer CLI deployments. You go learn how to troubleshoot step by step, check logs well, do performance profiling, and use advanced tools to solve deployment and runtime wahala.
 
 ## Learning Goals
 
-If you finish dis guide, you go fit:
-- Sabi how to debug Azure Developer CLI wahala step by step
-- Understand how to configure logs well and analyze dem
-- Fit do performance profiling and monitoring
-- Use Azure diagnostic tools and services to solve big problems
-- Debug network and security wahala
-- Set up monitoring and alerting to catch problems before dem happen
+If you finish dis guide, you go sabi:
+- How to debug Azure Developer CLI wahala step by step
+- How to set up advanced logging and check logs well
+- How to do performance profiling and monitoring
+- How to use Azure diagnostic tools and services to solve big wahala
+- How to debug network and security wahala
+- How to set up monitoring and alerting to catch wahala early
 
 ## Learning Outcomes
 
-When you don finish, you go sabi:
+When you don finish, you go fit:
 - Use TRIAGE method to debug deployment wahala step by step
-- Configure and analyze logs and tracing info well
-- Use Azure Monitor, Application Insights, and other diagnostic tools well
+- Set up and check logs and tracing info well
+- Use Azure Monitor, Application Insights, and other tools well
 - Debug network, authentication, and permission wahala by yourself
-- Do performance monitoring and optimization
+- Do performance monitoring and optimization well
 - Create custom debugging scripts and automation for wahala wey dey repeat
 
 ## Debugging Methodology
@@ -46,34 +46,34 @@ When you don finish, you go sabi:
 - **T**ime: When e start?
 - **R**eproduce: You fit make am happen again?
 - **I**solate: Which part dey fail?
-- **A**nalyze: Wetin the logs dey talk?
-- **G**ather: Collect all the info wey you need
-- **E**scalate: When you go need help from another person?
+- **A**nalyze: Wetin logs dey talk?
+- **G**ather: Collect all info wey dey important
+- **E**scalate: When you go need help?
 
 ## Enabling Debug Mode
 
 ### Environment Variables
 ```bash
-# Enable comprehensive debugging
+# Make debugging complete well well
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Debug Azure CLI
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# Turn off telemetry make output clean
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Debug Configuration
 ```bash
-# Set debug configuration globally
+# Set debug configuration for everywhere
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# Make trace logging dey work
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
@@ -101,14 +101,14 @@ azd logs --service api --level debug
 # Export logs for analysis
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# Parse JSON logs wit jq
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Log Correlation
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Join logs wey dey for different services
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# Find for all services
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Find Azure logs
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph Queries
 ```bash
-# Query resources by tags
+# Check resources wey get tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# Find deployments wey no work
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# Check how resource dey do
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Network Debugging
 ```bash
-# Test connectivity between services
+# Test if services dey connect well
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# How to use am
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Container Debugging
 ```bash
-# Debug container app issues
+# Check wetin dey cause wahala for container app
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -185,7 +185,7 @@ debug_container() {
 
 ### Database Connection Debugging
 ```bash
-# Debug database connectivity
+# Check how database dey connect
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -240,7 +240,7 @@ monitor_performance() {
 
 ### Resource Utilization Analysis
 ```bash
-# Monitor resource usage
+# Dey check how resource dey use
 monitor_resources() {
     local resource_group=$1
     
@@ -278,7 +278,7 @@ export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# Collect service endpoints
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -315,7 +315,7 @@ npm run test:integration
 
 ### Load Testing for Debugging
 ```bash
-# Simple load test to identify performance bottlenecks
+# Simple load test to sabi where performance dey get wahala
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,14 +323,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Use Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # Comot key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # Look for where e fail
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -339,19 +339,19 @@ load_test() {
 
 ### Bicep Template Debugging
 ```bash
-# Validate Bicep templates with detailed output
+# Check Bicep templates well well wit beta output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Check syntax
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Check lint
     az bicep lint --file "$template_file"
     
-    # What-if deployment
+    # Wetin go happen if dem deploy am
     az deployment group what-if \
         --resource-group "myapp-dev-rg" \
         --template-file "$template_file" \
@@ -379,18 +379,18 @@ debug_deployment() {
 
 ### Resource State Analysis
 ```bash
-# Analyze resource states for inconsistencies
+# Check how resource dem dey for any wahala
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # Show all resource dem with how dem dey
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # Look for resource wey no work well
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # Decode JWT token (e need jq and base64)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -442,14 +442,14 @@ debug_keyvault() {
 
 ### Network Security Debugging
 ```bash
-# Debug network security groups
+# Debug di network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # Check di security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Database Query Debugging
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - Tools wey go help debug database
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# Change to di correct environment
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# Gather important information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -584,24 +584,24 @@ echo "  - recent-deployments.json"
 
 ### Rollback Procedures
 ```bash
-# Quick rollback script
+# Quick script wey go do rollback
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # Change environment
     azd env select "$environment"
     
-    # Rollback application
+    # Do rollback for application
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # Check say rollback work well
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # Test di important endpoints
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -622,7 +622,7 @@ create_debug_queries() {
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # Query for performance wahala
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Log Aggregation
 ```bash
-# Aggregate logs from multiple sources
+# Gather logs from plenty sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -659,8 +659,8 @@ aggregate_logs() {
 ## 🔗 Advanced Resources
 
 ### Custom Debug Scripts
-Create one `scripts/debug/` folder wey get:
-- `health-check.sh` - Check health well well
+Create a `scripts/debug/` directory with:
+- `health-check.sh` - Comprehensive health checking
 - `performance-test.sh` - Automated performance testing
 - `log-analyzer.py` - Advanced log parsing and analysis
 - `resource-validator.sh` - Infrastructure validation
@@ -688,19 +688,19 @@ hooks:
 2. **Create reproducible test cases** for wahala
 3. **Document debugging procedures** for your team
 4. **Automate health checks** and monitoring
-5. **Keep debug tools updated** as your app dey change
-6. **Practice debugging procedures** when no be emergency time
+5. **Keep debug tools updated** with your app changes
+6. **Practice debugging procedures** when wahala no dey
 
 ## Next Steps
 
-- [Capacity Planning](../pre-deployment/capacity-planning.md) - Plan how much resources you go need
-- [SKU Selection](../pre-deployment/sku-selection.md) - Choose the correct service tiers
-- [Preflight Checks](../pre-deployment/preflight-checks.md) - Validate before deployment
+- [Capacity Planning](../pre-deployment/capacity-planning.md) - Plan resource requirements
+- [SKU Selection](../pre-deployment/sku-selection.md) - Choose correct service tiers
+- [Preflight Checks](../pre-deployment/preflight-checks.md) - Pre-deployment validation
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference commands
 
 ---
 
-**Remember**: Good debugging na to dey systematic, thorough, and patient. Dis tools and techniques go help you find and fix wahala fast fast.
+**Remember**: Good debugging na to dey systematic, thorough, and patient. Dis tools and techniques go help you find wahala fast and solve am well.
 
 ---
 
@@ -713,5 +713,5 @@ hooks:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don use AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am correct, abeg make you sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument wey dey for im native language na di main source wey you go fit trust. For important information, e better make professional human translator check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Dis dokyument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even as we dey try make am accurate, abeg sabi say machine translation fit get mistake or no dey correct well. Di original dokyument for im native language na di main correct source. For important mata, e good make una use professional human translation. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because una use dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

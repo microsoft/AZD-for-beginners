@@ -1,61 +1,68 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-11-18T19:14:56+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-24T13:36:24+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "pcm"
 }
 -->
-# Capacity Planning: Understanding Azure Quotas and Limitsnning - Azure Resource Availability and Limits
+# Capacity Planning - Azure Resource Availability and Limits
+
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
+- **⬅️ Previous Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **➡️ Next**: [SKU Selection](sku-selection.md)
+- **🚀 Next Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/common-issues.md)
 
 ## Introduction
 
-Dis guide go help you plan an check Azure resource capacity before you deploy wit Azure Developer CLI. You go sabi how to check quotas, availability, an regional limits so dat your deployment go work well, plus you go fit manage cost an performance better. You go learn capacity planning skills for different app designs an scaling situations.
+Dis guide go help you plan an check Azure resource capacity before you deploy wit Azure Developer CLI. You go sabi how to check quotas, availability, an regional limits so your deployment go work well, save money, an perform better. You go learn capacity planning for different app designs an scaling plans.
 
 ## Learning Goals
 
-Wetin you go sabi after you finish dis guide:
-- Understand Azure quotas, limits, an regional availability wahala
+When you finish dis guide, you go:
+- Sabi Azure quotas, limits, an regional availability wahala
 - Learn how to check resource availability an capacity before deployment
-- Use automated ways to validate an monitor capacity
+- Fit use automated capacity validation an monitoring plans
 - Design apps wey get correct resource size an scaling
-- Use smart capacity planning to save cost
+- Use cost optimization plans for better capacity planning
 - Set alerts an monitoring for quota usage an resource availability
 
 ## Learning Outcomes
 
-When you finish, you go fit:
-- Check an confirm Azure resource capacity needs before deployment
+When you don complete am, you go fit:
+- Check an confirm Azure resource capacity wey you need before deployment
 - Write automated scripts to check capacity an monitor quotas
-- Design scalable systems wey consider regional an subscription limits
-- Use cost-effective resource sizing for different workloads
-- Set up monitoring an alerts for capacity issues
-- Plan multi-region deployments wey balance capacity well
+- Design scalable app plans wey go fit regional an subscription limits
+- Use cost-effective resource sizing plans for different workloads
+- Set proactive monitoring an alerts for capacity wahala
+- Plan multi-region deployments wey get correct capacity distribution
 
 ## Why Capacity Planning Matters
 
-Before you deploy apps, you need to make sure say:
-- **Quotas dey enough** for the resources you need
+Before you deploy apps, you need make sure say:
+- **Enough quotas** dey for the resources wey you need
 - **Resources dey available** for your target region
 - **Service tier dey available** for your subscription type
-- **Network capacity** go fit handle the traffic wey you dey expect
-- **Cost dey optimized** by using correct sizing
+- **Network capacity** dey for the traffic wey you dey expect
+- **Cost optimization** dey through correct sizing
 
 ## 📊 Understanding Azure Quotas and Limits
 
 ### Types of Limits
-1. **Subscription-level quotas** - Maximum resources wey you fit get per subscription
-2. **Regional quotas** - Maximum resources wey you fit get per region
+1. **Subscription-level quotas** - Maximum resources wey subscription fit get
+2. **Regional quotas** - Maximum resources wey region fit get
 3. **Resource-specific limits** - Limits for each resource type
 4. **Service tier limits** - Limits based on your service plan
 
 ### Common Resource Quotas
 ```bash
-# Check current quota usage
+# Check how much quota you don use now
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Check quota for specific resource
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
@@ -65,7 +72,7 @@ az storage account show-usage --output table
 ### Automated Capacity Validation Script
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Check Azure capacity before deployment
 
 set -e
 
@@ -111,10 +118,10 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Check different resource quotas
+check_quota "compute" 4      # We need 4 vCPUs
+check_quota "storage" 2      # We need 2 storage accounts
+check_quota "network" 1      # We need 1 virtual network
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
@@ -124,14 +131,14 @@ echo "✅ Capacity check completed successfully!"
 
 #### App Service Capacity
 ```bash
-# Check App Service Plan availability
+# Check wetin dey for App Service Plan
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Check SKUs wey dey available for region
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -139,18 +146,18 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Suggest other regions wey fit work
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Check how dem dey use am now
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# How dem dey use am
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
@@ -163,7 +170,7 @@ check_postgres_capacity() {
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Check if SKU dey available
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -172,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Show SKUs wey dey available
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -187,13 +194,13 @@ check_cosmos_capacity() {
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Check if region dey available
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Check if serverless dey supported (if e need am)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -219,7 +226,7 @@ check_container_apps_capacity() {
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Check if Container Apps dey for region
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -227,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Check how many environment dey now
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Apps get limit of 15 environments per region
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -242,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Show regions wey dey available
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,7 +263,7 @@ check_container_apps_capacity() {
 
 ### Service Availability by Region
 ```bash
-# Check service availability across regions
+# Check if service dey available for all regions
 check_service_availability() {
     local service=$1
     
@@ -281,7 +288,7 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Check all di services
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
@@ -290,7 +297,7 @@ done
 
 ### Region Selection Recommendations
 ```bash
-# Recommend optimal regions based on requirements
+# Recommend beta regions wey go fit di requirements
 recommend_region() {
     local requirements=$1  # "lowcost" | "performance" | "compliance"
     
@@ -323,18 +330,18 @@ recommend_region() {
 
 ### Resource Cost Estimation
 ```bash
-# Estimate deployment costs
+# Calculate how much e go cost to deploy
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Make one temporary resource group for calculation
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Deploy di infrastructure for validation mode
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -342,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Remove di temporary resource group
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -356,7 +363,7 @@ estimate_costs() {
 
 ### SKU Optimization Recommendations
 ```bash
-# Recommend optimal SKUs based on requirements
+# Recommend beta SKUs wey go fit requirements
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -428,23 +435,23 @@ recommend_sku() {
 
 set -e
 
-# Configuration
+# Konfiguration
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Kolor dem for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # No Kolor
 
-# Logging functions
+# Logging function dem
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Load konfiguration
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -658,14 +665,14 @@ echo "  3. Verify application health post-deployment"
 
 ### Real-Time Capacity Monitoring
 ```bash
-# Monitor capacity during deployment
+# Dey check capacity wen you dey deploy
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Dey check how deployment dey go
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -678,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Dey check how resources dey use now
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -711,17 +718,17 @@ hooks:
 
 ## Best Practices
 
-1. **Always run capacity checks** before you deploy to new regions
+1. **Always run capacity checks** before you deploy for new regions
 2. **Monitor quota usage regularly** so you no go get surprise
 3. **Plan for growth** by checking future capacity needs
-4. **Use cost estimation tools** to avoid unexpected bills
+4. **Use cost estimation tools** so you no go get big bill
 5. **Document capacity requirements** for your team
 6. **Automate capacity validation** inside CI/CD pipelines
 7. **Consider regional failover** capacity needs
 
 ## Next Steps
 
-- [SKU Selection Guide](sku-selection.md) - Pick the best service tiers
+- [SKU Selection Guide](sku-selection.md) - Choose better service tiers
 - [Pre-flight Checks](preflight-checks.md) - Automated validation scripts
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference commands
 - [Glossary](../../resources/glossary.md) - Terms an definitions
@@ -744,5 +751,5 @@ hooks:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don use AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am correct, abeg sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument wey dey im native language na di main source wey you go trust. For important information, e better make professional human translator check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Dis dokyument don use AI transleshion service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transleshion. Even as we dey try make am accurate, abeg make you sabi say machine transleshion fit get mistake or no dey correct well. Di original dokyument wey dey for im native language na di main source wey you go fit trust. For important informashon, e good make you use professional human transleshion. We no go fit take blame for any misunderstanding or wrong meaning wey fit happen because you use dis transleshion.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

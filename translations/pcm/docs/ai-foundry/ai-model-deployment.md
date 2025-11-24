@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-11-18T19:22:50+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-24T13:48:52+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "pcm"
 }
@@ -12,7 +12,7 @@ CO_OP_TRANSLATOR_METADATA:
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Set up di environment for your application:
 
 ```bash
-# .env configuration
+# .env konfigureshun
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Calculate di capacity wey you need based on usage patterns:
 
 ```python
-# Capacity calculation example
+# Example for how to calculate capacity
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Example for how to use am
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -482,8 +482,8 @@ async def check_ai_models():
 
 ## Next Steps
 
-1. **Check di [Azure AI Foundry Integration Guide](azure-ai-foundry-integration.md)** for service integration patterns
-2. **Finish di [AI Workshop Lab](ai-workshop-lab.md)** for hands-on experience
+1. **Check di [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for service integration patterns
+2. **Finish di [AI Workshop Lab](ai-workshop-lab.md)** to get hands-on experience
 3. **Use [Production AI Practices](production-ai-practices.md)** for enterprise deployments
 4. **Look di [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** for common issues
 
@@ -499,7 +499,7 @@ async def check_ai_models():
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Azure AI Foundry Integration](azure-ai-foundry-integration.md)
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
@@ -507,5 +507,5 @@ async def check_ai_models():
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-Dis dokyument don use AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am accurate, abeg sabi say automated translations fit get mistake or no dey correct well. Di original dokyument for im native language na di main source wey you go fit trust. For important information, e good make professional human translation dey use. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Dis dokyument don use AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am accurate, abeg sabi say machine translation fit get mistake or no dey correct well. Di original dokyument wey dey for im native language na di main source wey you go trust. For important information, e better make professional human translator check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
