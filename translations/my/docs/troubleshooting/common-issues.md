@@ -1,508 +1,508 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-18T13:23:12+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-23T22:44:11+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "my"
 }
 -->
 # အများဆုံးတွေ့ရသောပြဿနာများနှင့် ဖြေရှင်းနည်းများ
 
-**အခန်းအကြောင်းအရာ:**
-- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
-- **📖 လက်ရှိအခန်း**: အခန်း ၇ - ပြဿနာရှာဖွေခြင်းနှင့် Debugging
-- **⬅️ ယခင်အခန်း**: [အခန်း ၆: Pre-flight Checks](../pre-deployment/preflight-checks.md)
+**အခန်းအကြောင်းအရာများ:**
+- **📚 သင်ခန်းစာမူလစာမျက်နှာ**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၇ - ပြဿနာရှာဖွေခြင်းနှင့် အမှားပြင်ခြင်း
+- **⬅️ ယခင်အခန်း**: [အခန်း ၆: စစ်ဆေးမှုများ](../pre-deployment/preflight-checks.md)
 - **➡️ နောက်တစ်ခု**: [Debugging Guide](debugging.md)
-- **🚀 နောက်အခန်း**: [အခန်း ၈: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၈: ထုတ်လုပ်မှုနှင့် စီးပွားရေးပုံစံများ](../microsoft-foundry/production-ai-practices.md)
 
-## အကျဉ်းချုပ်
+## နိဒါန်း
 
-ဒီပြဿနာရှာဖွေခြင်းလမ်းညွှန်မှာ Azure Developer CLI ကိုအသုံးပြုရာတွင် အများဆုံးတွေ့ရသောပြဿနာများကို ကူညီဖြေရှင်းပေးနိုင်ရန် ရည်ရွယ်ထားပါတယ်။ Authentication, Deployment, Infrastructure Provisioning, Application Configuration စတဲ့ပြဿနာများကို ရှာဖွေ၊ ဖြေရှင်းနည်းများကို လေ့လာနိုင်ပါမည်။ ပြဿနာတစ်ခုစီမှာ လက္ခဏာများ၊ အကြောင်းရင်းများနှင့် အဆင့်ဆင့်ဖြေရှင်းနည်းများ ပါဝင်ပါတယ်။
+ဒီပြဿနာရှာဖွေမှုလမ်းညွှန်သည် Azure Developer CLI ကိုအသုံးပြုရာတွင် အများဆုံးတွေ့ရသောပြဿနာများကို ကာဗာလုပ်ထားသည်။ အတည်ပြုခြင်း၊ တင်သွင်းခြင်း၊ အခြေခံအဆောက်အအုံများဖန်တီးခြင်းနှင့် အပလီကေးရှင်းဖွဲ့စည်းမှုဆိုင်ရာ ပြဿနာများကို ရှာဖွေ၊ ပြဿနာရှာဖွေ၊ ဖြေရှင်းနည်းများကို သင်ယူပါ။ ပြဿနာတစ်ခုစီတွင် အသေးစိတ်လက္ခဏာများ၊ အကြောင်းရင်းများနှင့် အဆင့်ဆင့်ဖြေရှင်းနည်းများပါဝင်သည်။
 
 ## သင်ယူရည်မှန်းချက်များ
 
-ဒီလမ်းညွှန်ကိုပြီးစီးပါက၊ သင်သည်:
-- Azure Developer CLI ပြဿနာများကို Diagnostic နည်းလမ်းများဖြင့် ကျွမ်းကျင်စွာရှာဖွေနိုင်မည်
-- Authentication နှင့် Permission ပြဿနာများကို နားလည်ပြီး ဖြေရှင်းနိုင်မည်
-- Deployment မအောင်မြင်မှုများ၊ Infrastructure Provisioning အမှားများနှင့် Configuration ပြဿနာများကို ဖြေရှင်းနိုင်မည်
-- Proactive Monitoring နှင့် Debugging Strategy များကို အကောင်အထည်ဖော်နိုင်မည်
-- ပြဿနာရှာဖွေခြင်းနည်းလမ်းများကို စနစ်တကျအသုံးပြုနိုင်မည်
-- Log နှင့် Monitoring ကိုမှန်ကန်စွာ Configure လုပ်ပြီး အနာဂတ်ပြဿနာများကို ကာကွယ်နိုင်မည်
+ဒီလမ်းညွှန်ကိုပြီးစီးခြင်းဖြင့် သင်သည်:
+- Azure Developer CLI ပြဿနာများအတွက် ရှာဖွေစစ်ဆေးနည်းများကို ကျွမ်းကျင်စွာအသုံးပြုနိုင်မည်
+- အတည်ပြုခြင်းနှင့် ခွင့်ပြုချက်ဆိုင်ရာ ပြဿနာများနှင့် ၎င်းတို့၏ ဖြေရှင်းနည်းများကို နားလည်မည်
+- တင်သွင်းမှုမအောင်မြင်မှုများ၊ အခြေခံအဆောက်အအုံဖန်တီးမှုအမှားများနှင့် ဖွဲ့စည်းမှုဆိုင်ရာ ပြဿနာများကို ဖြေရှင်းနိုင်မည်
+- ကြိုတင်စောင့်ကြည့်မှုနှင့် အမှားရှာဖွေမှုနည်းဗျူဟာများကို အကောင်အထည်ဖော်နိုင်မည်
+- ရှုပ်ထွေးသောပြဿနာများအတွက် စနစ်တကျ ပြဿနာရှာဖွေမှုနည်းလမ်းများကို အသုံးပြုနိုင်မည်
+- အနာဂတ်ပြဿနာများကို ကာကွယ်ရန် မှန်ကန်သော မှတ်တမ်းတင်ခြင်းနှင့် စောင့်ကြည့်မှုကို ဖွဲ့စည်းနိုင်မည်
 
 ## သင်ယူရလဒ်များ
 
-ဒီလမ်းညွှန်ကိုပြီးစီးပါက၊ သင်သည်:
-- Azure Developer CLI ပြဿနာများကို Built-in Diagnostic Tools အသုံးပြု၍ ရှာဖွေနိုင်မည်
-- Authentication, Subscription, Permission ပြဿနာများကို ကိုယ်တိုင်ဖြေရှင်းနိုင်မည်
-- Deployment မအောင်မြင်မှုများနှင့် Infrastructure Provisioning အမှားများကို ထိရောက်စွာ Troubleshoot လုပ်နိုင်မည်
-- Application Configuration ပြဿနာများနှင့် Environment-specific ပြဿနာများကို Debug လုပ်နိုင်မည်
-- Monitoring နှင့် Alerting ကို Proactively အသုံးပြု၍ ပြဿနာများကို ရှာဖွေနိုင်မည်
-- Logging, Debugging နှင့် Problem Resolution Workflow များအတွက် Best Practices များကို အသုံးပြုနိုင်မည်
+ပြီးစီးချိန်တွင် သင်သည်:
+- Azure Developer CLI ပြဿနာများကို တပ်ဆင်ထားသော ရှာဖွေစစ်ဆေးမှုကိရိယာများဖြင့် ရှာဖွေနိုင်မည်
+- အတည်ပြုခြင်း၊ subscription နှင့် ခွင့်ပြုချက်ဆိုင်ရာ ပြဿနာများကို ကိုယ်တိုင်ဖြေရှင်းနိုင်မည်
+- တင်သွင်းမှုမအောင်မြင်မှုများနှင့် အခြေခံအဆောက်အအုံဖန်တီးမှုအမှားများကို ထိရောက်စွာ ဖြေရှင်းနိုင်မည်
+- အပလီကေးရှင်းဖွဲ့စည်းမှုဆိုင်ရာ ပြဿနာများနှင့် ပတ်ဝန်းကျင်အထူးပြဿနာများကို အမှားရှာဖွေနိုင်မည်
+- ကြိုတင်စောင့်ကြည့်မှုနှင့် သတိပေးမှုများကို အကောင်အထည်ဖော်ပြီး ဖြစ်နိုင်သောပြဿနာများကို ရှာဖွေနိုင်မည်
+- မှတ်တမ်းတင်ခြင်း၊ အမှားရှာဖွေခြင်းနှင့် ပြဿနာဖြေရှင်းမှုလုပ်ငန်းစဉ်များအတွက် အကောင်းဆုံးအလေ့အထများကို အသုံးပြုနိုင်မည်
 
-## အမြန် Diagnostic
+## အမြန်ရှာဖွေစစ်ဆေးမှု
 
-အထူးပြဿနာများကို စတင်ရှာဖွေမည်မတိုင်မီ၊ ဒီ Commands များကို Run လုပ်ပြီး Diagnostic အချက်အလက်များကို စုဆောင်းပါ:
+အထူးပြဿနာများကို စတင်မရှာဖွေမီ၊ ဒီ command များကို အသုံးပြု၍ diagnostic အချက်အလက်များကို စုဆောင်းပါ:
 
 ```bash
-# Check azd version and health
+# azd ဗားရှင်းနှင့် ကျန်းမာရေးကို စစ်ဆေးပါ
 azd version
 azd config list
 
-# Verify Azure authentication
+# Azure အတည်ပြုခြင်းကို အတည်ပြုပါ
 az account show
 az account list
 
-# Check current environment
+# လက်ရှိပတ်ဝန်းကျင်ကို စစ်ဆေးပါ
 azd env show
 azd env get-values
 
-# Enable debug logging
+# debug logging ကို ဖွင့်ပါ
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
-## Authentication ပြဿနာများ
+## အတည်ပြုခြင်းဆိုင်ရာ ပြဿနာများ
 
 ### ပြဿနာ: "Failed to get access token"
 **လက္ခဏာများ:**
-- `azd up` Authentication အမှားများဖြင့် မအောင်မြင်
-- Commands "unauthorized" သို့မဟုတ် "access denied" ပြန်လာ
+- `azd up` သည် အတည်ပြုခြင်းအမှားများဖြင့် မအောင်မြင်
+- Command များသည် "unauthorized" သို့မဟုတ် "access denied" ပြန်လာသည်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Azure CLI ဖြင့် ပြန်လည်အတည်ပြုပါ
 az login
 az account show
 
-# 2. Clear cached credentials
+# 2. Cached လက်မှတ်များကို ရှင်းလင်းပါ
 az account clear
 az login
 
-# 3. Use device code flow (for headless systems)
+# 3. Device code flow ကို အသုံးပြုပါ (headless systems အတွက်)
 az login --use-device-code
 
-# 4. Set explicit subscription
+# 4. Explicit subscription ကို သတ်မှတ်ပါ
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### ပြဿနာ: Deployment အတွင်း "Insufficient privileges"
+### ပြဿနာ: တင်သွင်းမှုအတွင်း "Insufficient privileges"
 **လက္ခဏာများ:**
-- Deployment Permission အမှားများဖြင့် မအောင်မြင်
-- Azure Resources တချို့ကို Create လုပ်လို့မရ
+- တင်သွင်းမှုသည် ခွင့်ပြုချက်အမှားများဖြင့် မအောင်မြင်
+- Azure resource အချို့ကို ဖန်တီး၍မရ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Check your Azure role assignments
+# 1. သင်၏ Azure အခန်းကဏ္ဍ Assignments များကို စစ်ဆေးပါ
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ensure you have required roles
-# - Contributor (for resource creation)
-# - User Access Administrator (for role assignments)
+# 2. လိုအပ်သော အခန်းကဏ္ဍများ ရှိကြောင်း သေချာပါ
+# - Contributor (အရင်းအမြစ် ဖန်တီးခြင်းအတွက်)
+# - User Access Administrator (အခန်းကဏ္ဍ Assignments အတွက်)
 
-# 3. Contact your Azure administrator for proper permissions
+# 3. သင့် Azure အုပ်ချုပ်ရေးမှူးကို သင့်လျော်သော ခွင့်ပြုချက်များအတွက် ဆက်သွယ်ပါ
 ```
 
-### ပြဿနာ: Multi-tenant Authentication ပြဿနာများ
+### ပြဿနာ: Multi-tenant အတည်ပြုခြင်းပြဿနာများ
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Login with specific tenant
+# 1. အထူးသတ်မှတ်ထားသော tenant ဖြင့် Login လုပ်ပါ။
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. configuration တွင် tenant ကို သတ်မှတ်ပါ။
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. tenant ကို ပြောင်းလဲပါက tenant cache ကို ရှင်းလင်းပါ။
 az account clear
 ```
 
-## 🏗️ Infrastructure Provisioning အမှားများ
+## 🏗️ အခြေခံအဆောက်အအုံဖန်တီးမှုအမှားများ
 
-### ပြဿနာ: Resource Name Conflict
+### ပြဿနာ: Resource name conflicts
 **လက္ခဏာများ:**
 - "The resource name already exists" အမှားများ
-- Resource Creation အတွင်း Deployment မအောင်မြင်
+- Resource ဖန်တီးမှုအတွင်း တင်သွင်းမှုမအောင်မြင်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+# ၁။ တိုကင်များနှင့်ထူးခြားသောအရင်းအမြစ်အမည်များကိုအသုံးပြုပါ
+# သင့် Bicep template တွင်:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Change environment name
+# ၂။ ပတ်ဝန်းကျင်အမည်ကိုပြောင်းပါ
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
+# ၃။ ရှိပြီးသားအရင်းအမြစ်များကိုရှင်းလင်းပါ
 azd down --force --purge
 ```
 
-### ပြဿနာ: Location/Region မရရှိနိုင်
+### ပြဿနာ: Location/Region မရရှိနိုင်ခြင်း
 **လက္ခဏာများ:**
 - "The location 'xyz' is not available for resource type"
-- Region ရွေးချယ်မှုအတွင်း SKUs မရရှိနိုင်
+- ရွေးချယ်ထားသော region တွင် SKUs အချို့မရရှိနိုင်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Check available locations for resource types
+# 1. အရင်းအမြစ်အမျိုးအစားများအတွက် ရရှိနိုင်သော တည်နေရာများကို စစ်ဆေးပါ။
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
+# 2. အများအားဖြင့် ရရှိနိုင်သော ဒေသများကို အသုံးပြုပါ။
 azd config set defaults.location eastus2
-# or
+# သို့မဟုတ်
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check service availability by region
-# Visit: https://azure.microsoft.com/global-infrastructure/services/
+# 3. ဒေသအလိုက် ဝန်ဆောင်မှုရရှိနိုင်မှုကို စစ်ဆေးပါ။
+# သွားရောက်ကြည့်ရှုပါ: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### ပြဿနာ: Quota အလွန်ကျော်မှု
+### ပြဿနာ: Quota ကျော်လွန်မှုအမှားများ
 **လက္ခဏာများ:**
 - "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Check current quota usage
+# 1. လက်ရှိကိုတာအသုံးပြုမှုကို စစ်ဆေးပါ။
 az vm list-usage --location eastus2 -o table
 
-# 2. Request quota increase through Azure portal
-# Go to: Subscriptions > Usage + quotas
+# 2. Azure portal မှတဆင့် ကိုတာတိုးမြှင့်မှုကို တောင်းဆိုပါ။
+# သွားပါ: Subscriptions > Usage + quotas
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+# 3. ဖွံ့ဖြိုးတိုးတက်မှုအတွက် သေးငယ်သော SKUs ကို အသုံးပြုပါ။
+# main.parameters.json တွင်:
 {
   "appServiceSku": {
     "value": "B1"  // Instead of P1v3
   }
 }
 
-# 4. Clean up unused resources
+# 4. အသုံးမပြုသော အရင်းအမြစ်များကို ရှင်းလင်းပါ။
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### ပြဿနာ: Bicep Template အမှားများ
+### ပြဿနာ: Bicep template အမှားများ
 **လက္ခဏာများ:**
-- Template Validation မအောင်မြင်မှု
-- Bicep Files Syntax အမှားများ
+- Template အတည်ပြုမှုမအောင်မြင်မှုများ
+- Bicep ဖိုင်များတွင် စာလုံးပေါင်းအမှားများ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Validate Bicep syntax
+# 1. Bicep syntax ကိုအတည်ပြုပါ
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter
+# 2. Bicep linter ကိုအသုံးပြုပါ
 az bicep lint --file infra/main.bicep
 
-# 3. Check parameter file syntax
+# 3. parameter ဖိုင် syntax ကိုစစ်ဆေးပါ
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview deployment changes
+# 4. တပ်ဆင်မှုအပြောင်းအလဲများကိုကြိုတင်ကြည့်ရှုပါ
 azd provision --preview
 ```
 
-## 🚀 Deployment မအောင်မြင်မှုများ
+## 🚀 တင်သွင်းမှုမအောင်မြင်မှုများ
 
-### ပြဿနာ: Build မအောင်မြင်မှု
+### ပြဿနာ: Build မအောင်မြင်မှုများ
 **လက္ခဏာများ:**
-- Deployment အတွင်း Application Build မအောင်မြင်
-- Package Installation အမှားများ
+- တင်သွင်းမှုအတွင်း အပလီကေးရှင်း build မအောင်မြင်
+- Package တင်သွင်းမှုအမှားများ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Check build logs
+# ၁။ Build log များကို စစ်ဆေးပါ
 azd logs --service web
 azd deploy --service web --debug
 
-# 2. Test build locally
+# ၂။ Build ကို ဒေသတွင်းတွင် စမ်းသပ်ပါ
 cd src/web
 npm install
 npm run build
 
-# 3. Check Node.js/Python version compatibility
-node --version  # Should match azure.yaml settings
+# ၃။ Node.js/Python ဗားရှင်းလိုက်ဖက်မှုကို စစ်ဆေးပါ
+node --version  # azure.yaml အပြင်အဆင်များနှင့် ကိုက်ညီရမည်
 python --version
 
-# 4. Clear build cache
+# ၄။ Build cache ကို ရှင်းလင်းပါ
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Check Dockerfile if using containers
+# ၅။ Container များကို အသုံးပြုပါက Dockerfile ကို စစ်ဆေးပါ
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### ပြဿနာ: Container Deployment မအောင်မြင်မှု
+### ပြဿနာ: Container တင်သွင်းမှုမအောင်မြင်မှုများ
 **လက္ခဏာများ:**
-- Container Apps မစတင်နိုင်
-- Image Pull အမှားများ
+- Container apps မစတင်နိုင်
+- Image pull အမှားများ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Test Docker build locally
+# 1. Docker build ကို ဒေသတွင်းတွင် စမ်းသပ်ပါ
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
+# 2. Container logs ကို စစ်ဆေးပါ
 azd logs --service api --follow
 
-# 3. Verify container registry access
+# 3. Container registry access ကို အတည်ပြုပါ
 az acr login --name myregistry
 
-# 4. Check container app configuration
+# 4. Container app configuration ကို စစ်ဆေးပါ
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### ပြဿနာ: Database Connection မအောင်မြင်မှု
+### ပြဿနာ: Database ချိတ်ဆက်မှုမအောင်မြင်မှုများ
 **လက္ခဏာများ:**
-- Application Database ကို ချိတ်ဆက်လို့မရ
-- Connection Timeout အမှားများ
+- အပလီကေးရှင်းသည် database နှင့် ချိတ်ဆက်၍မရ
+- Connection timeout အမှားများ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Check database firewall rules
+# 1. ဒေတာဘေ့စ်ဖိုင်ဝေါလ်စည်းမျဉ်းများကိုစစ်ဆေးပါ။
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test connectivity from application
-# Add to your app temporarily:
+# 2. အက်ပလီကေးရှင်းမှချိတ်ဆက်မှုကိုစမ်းသပ်ပါ။
+# သင့်အက်ပလီကေးရှင်းတွင်ယာယီထည့်ပါ။
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Verify connection string format
+# 3. ချိတ်ဆက်မှု string ပုံစံကိုအတည်ပြုပါ။
 azd env get-values | grep DATABASE
 
-# 4. Check database server status
+# 4. ဒေတာဘေ့စ် server အခြေအနေကိုစစ်ဆေးပါ။
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 Configuration ပြဿနာများ
+## 🔧 ဖွဲ့စည်းမှုဆိုင်ရာ ပြဿနာများ
 
-### ပြဿနာ: Environment Variables မအလုပ်လုပ်
+### ပြဿနာ: Environment variables မအလုပ်လုပ်ခြင်း
 **လက္ခဏာများ:**
-- App Configuration Values မဖတ်နိုင်
-- Environment Variables အလွတ်ဖြစ်နေ
+- App သည် ဖွဲ့စည်းမှုတန်ဖိုးများကို မဖတ်နိုင်
+- Environment variables သည် အလွတ်ဖြစ်နေသည်
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Verify environment variables are set
+# 1. ပတ်ဝန်းကျင်အပြောင်းအလဲများကို သတ်မှတ်ထားသည်ကို အတည်ပြုပါ
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Check variable names in azure.yaml
+# 2. azure.yaml ထဲမှာ အပြောင်းအလဲအမည်များကို စစ်ဆေးပါ
 cat azure.yaml | grep -A 5 env:
 
-# 3. Restart the application
+# 3. အက်ပလီကေးရှင်းကို ပြန်လည်စတင်ပါ
 azd deploy --service web
 
-# 4. Check app service configuration
+# 4. အက်ပလီကေးရှင်းဝန်ဆောင်မှုဖွဲ့စည်းမှုကို စစ်ဆေးပါ
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### ပြဿနာ: SSL/TLS Certificate ပြဿနာများ
+### ပြဿနာ: SSL/TLS လက်မှတ်ပြဿနာများ
 **လက္ခဏာများ:**
 - HTTPS မအလုပ်လုပ်
-- Certificate Validation အမှားများ
+- လက်မှတ်အတည်ပြုမှုအမှားများ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Check SSL certificate status
+# 1. SSL လက်မှတ်အခြေအနေကို စစ်ဆေးပါ
 az webapp config ssl list --resource-group myrg
 
-# 2. Enable HTTPS only
+# 2. HTTPS သာလျှင် ဖွင့်ပါ
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain (if needed)
+# 3. လိုအပ်ပါက စိတ်ကြိုက် ဒိုမိန်း ထည့်ပါ
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### ပြဿနာ: CORS Configuration ပြဿနာများ
+### ပြဿနာ: CORS ဖွဲ့စည်းမှုပြဿနာများ
 **လက္ခဏာများ:**
-- Frontend API ကို ခေါ်လို့မရ
-- Cross-origin Request Block ဖြစ်နေ
+- Frontend သည် API ကို ခေါ်၍မရ
+- Cross-origin request ပိတ်ဆို့ခြင်း
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Configure CORS for App Service
+# 1. App Service အတွက် CORS ကို Configure လုပ်ပါ
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+# 2. CORS ကို ကိုင်တွယ်ရန် API ကို Update လုပ်ပါ
+# Express.js တွင်:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Check if running on correct URLs
+# 3. မှန်ကန်သော URL များပေါ်တွင် run နေသည်ကို စစ်ဆေးပါ
 azd show
 ```
 
-## 🌍 Environment Management ပြဿနာများ
+## 🌍 ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှုပြဿနာများ
 
-### ပြဿနာ: Environment Switching ပြဿနာများ
+### ပြဿနာ: ပတ်ဝန်းကျင်ပြောင်းလဲမှုပြဿနာများ
 **လက္ခဏာများ:**
-- မှားယွင်းသော Environment ကို အသုံးပြုနေ
-- Configuration မှန်ကန်စွာ Switch မဖြစ်
+- မှားသောပတ်ဝန်းကျင်ကို အသုံးပြုနေသည်
+- ဖွဲ့စည်းမှုမမှန်ကန်စွာပြောင်းလဲခြင်း
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. List all environments
+# 1. ပတ်ဝန်းကျင်အားလုံးကို စာရင်းပြုစုပါ။
 azd env list
 
-# 2. Explicitly select environment
+# 2. ပတ်ဝန်းကျင်ကို တိကျစွာ ရွေးချယ်ပါ။
 azd env select production
 
-# 3. Verify current environment
+# 3. လက်ရှိပတ်ဝန်းကျင်ကို အတည်ပြုပါ။
 azd env show
 
-# 4. Create new environment if corrupted
+# 4. ပတ်ဝန်းကျင်ပျက်စီးနေပါက အသစ်တစ်ခု ဖန်တီးပါ။
 azd env new production-new
 azd env select production-new
 ```
 
-### ပြဿနာ: Environment Corruption
+### ပြဿနာ: ပတ်ဝန်းကျင်ပျက်စီးမှု
 **လက္ခဏာများ:**
-- Environment Invalid State ပြ
-- Resources Configuration နှင့် မကိုက်ညီ
+- ပတ်ဝန်းကျင်သည် မမှန်ကန်သောအခြေအနေကို ပြသနေသည်
+- Resource များသည် ဖွဲ့စည်းမှုနှင့် မကိုက်ညီ
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Refresh environment state
+# 1. ပတ်ဝန်းကျင်အခြေအနေကို ပြန်လည်အသစ်လုပ်ပါ
 azd env refresh
 
-# 2. Reset environment configuration
+# 2. ပတ်ဝန်းကျင် configuration ကို ပြန်လည်ပြင်ဆင်ပါ
 azd env new production-reset
-# Copy over required environment variables
+# လိုအပ်သော ပတ်ဝန်းကျင် variables များကို ကူးယူပါ
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. ရှိပြီးသား resources များကို (ဖြစ်နိုင်လျှင်) တင်သွင်းပါ
+# .azure/production/config.json ကို resource IDs ဖြင့် လက်ဖြင့် ပြင်ဆင်ပါ
 ```
 
-## 🔍 Performance ပြဿနာများ
+## 🔍 စွမ်းဆောင်ရည်ပြဿနာများ
 
-### ပြဿနာ: Deployment အချိန်နှေးကွေး
+### ပြဿနာ: တင်သွင်းမှုအချိန်များနှေးကွေးခြင်း
 **လက္ခဏာများ:**
-- Deployment အချိန်များကြာ
-- Deployment အတွင်း Timeout ဖြစ်
+- တင်သွင်းမှုများ အချိန်ကြာနေသည်
+- တင်သွင်းမှုအတွင်း timeout ဖြစ်ခြင်း
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Enable parallel deployment
+# 1. အပြိုင်အဆိုင် deployment ကိုဖွင့်ပါ
 azd config set deploy.parallelism 5
 
-# 2. Use incremental deployments
+# 2. တိုးတက်မှု deployment များကိုအသုံးပြုပါ
 azd deploy --incremental
 
-# 3. Optimize build process
-# In package.json:
+# 3. Build လုပ်ငန်းစဉ်ကိုအကောင်းဆုံးဖြစ်အောင်လုပ်ပါ
+# package.json တွင်:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Check resource locations (use same region)
+# 4. အရင်းအမြစ်တည်နေရာများကိုစစ်ဆေးပါ (တည်နေရာတူညီသောကိုအသုံးပြုပါ)
 azd config set defaults.location eastus2
 ```
 
-### ပြဿနာ: Application Performance ပြဿနာများ
+### ပြဿနာ: အပလီကေးရှင်းစွမ်းဆောင်ရည်ပြဿနာများ
 **လက္ခဏာများ:**
-- Response Time နှေးကွေး
-- Resource Usage မြင့်မား
+- တုံ့ပြန်မှုအချိန်များနှေးကွေး
+- အရင်းအမြစ်အသုံးပြုမှုများမြင့်မား
 
 **ဖြေရှင်းနည်းများ:**
 ```bash
-# 1. Scale up resources
-# Update SKU in main.parameters.json:
+# 1. အရင်းအမြစ်များကို တိုးချဲ့ပါ
+# main.parameters.json တွင် SKU ကို အပ်ဒိတ်လုပ်ပါ
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Enable Application Insights monitoring
+# 2. Application Insights monitoring ကို ဖွင့်ပါ
 azd monitor
 
-# 3. Check application logs for bottlenecks
+# 3. bottlenecks များအတွက် application logs ကို စစ်ဆေးပါ
 azd logs --service api --follow
 
-# 4. Implement caching
-# Add Redis cache to your infrastructure
+# 4. caching ကို အကောင်အထည်ဖော်ပါ
+# သင့်အခြေခံအဆောက်အအုံတွင် Redis cache ကို ထည့်ပါ
 ```
 
-## 🛠️ Troubleshooting Tools နှင့် Commands
+## 🛠️ Troubleshooting Tools and Commands
 
 ### Debug Commands
 ```bash
-# Comprehensive debugging
+# အကျယ်အဝန်း အမှားရှာဖွေခြင်း
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
+# စနစ်အချက်အလက်ကို စစ်ဆေးပါ
 azd info
 
-# Validate configuration
+# ဖွဲ့စည်းမှုကို အတည်ပြုပါ
 azd config validate
 
-# Test connectivity
+# ချိတ်ဆက်မှုကို စမ်းသပ်ပါ
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Log Analysis
 ```bash
-# Application logs
+# အက်ပ်လီကေးရှင်း မှတ်တမ်းများ
 azd logs --service web --follow
 azd logs --service api --since 1h
 
-# Azure resource logs
+# Azure အရင်းအမြစ် မှတ်တမ်းများ
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Container logs (for Container Apps)
+# ကွန်တိန်နာ မှတ်တမ်းများ (Container Apps အတွက်)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### Resource Investigation
 ```bash
-# List all resources
+# အရင်းအမြစ်အားလုံးကို စာရင်းပြုစုပါ
 az resource list --resource-group myrg -o table
 
-# Check resource status
+# အရင်းအမြစ်အခြေအနေကို စစ်ဆေးပါ
 az webapp show --name myapp --resource-group myrg --query state
 
-# Network diagnostics
+# နက်ဝက်ကွန်ရက် ဒိုင်ယာဂနိုစစ်
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 အပိုဆောင်းအကူအညီရယူခြင်း
 
-### Escalate လုပ်ရန်အချိန်
-- Authentication ပြဿနာများကို အားလုံးစမ်းပြီးနောက်လည်း မဖြေရှင်းနိုင်
-- Azure Services နှင့်ဆိုင်သော Infrastructure ပြဿနာများ
-- Billing သို့မဟုတ် Subscription ပြဿနာများ
-- လုံခြုံရေးဆိုင်ရာ စိုးရိမ်မှုများ
+### ဘယ်အချိန်မှာ Escalate လုပ်မလဲ
+- အတည်ပြုခြင်းပြဿနာများကို ဖြေရှင်းနည်းအားလုံးကို စမ်းသပ်ပြီးနောက်လည်း ဆက်လက်ဖြစ်ပေါ်နေပါက
+- Azure ဝန်ဆောင်မှုများနှင့် ပတ်သက်သော အခြေခံအဆောက်အအုံပြဿနာများ
+- ငွေတောင်းခံမှု သို့မဟုတ် subscription ဆိုင်ရာ ပြဿနာများ
+- လုံခြုံရေးပတ်သက်သော စိုးရိမ်မှုများ သို့မဟုတ် ဖြစ်ရပ်များ
 
-### Support Channels
+### အကူအညီရယူရန် လမ်းကြောင်းများ
 ```bash
-# 1. Check Azure Service Health
+# ၁။ Azure Service Health ကိုစစ်ဆေးပါ
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Create Azure support ticket
-# Go to: https://portal.azure.com -> Help + support
+# ၂။ Azure အထောက်အပံ့လက်မှတ်တစ်ခုဖန်တီးပါ
+# https://portal.azure.com -> Help + support သို့သွားပါ
 
-# 3. Community resources
+# ၃။ အသိုင်းအဝိုင်းအရင်းအမြစ်များ
 # - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Support ကိုဆက်သွယ်မည်မတိုင်မီ စုဆောင်းရန်အချက်အလက်များ
-- `azd version` Output
-- `azd info` Output
-- Error Messages (အပြည့်အစုံ)
-- ပြဿနာကို ပြန်လုပ်နိုင်သောအဆင့်များ
-- Environment Details (`azd env show`)
-- ပြဿနာစတင်ချိန် Timeline
+### အကူအညီမတိုင်မီ စုဆောင်းရန်အချက်အလက်များ
+- `azd version` output
+- `azd info` output
+- အမှားစာသားများ (အပြည့်အစုံ)
+- ပြဿနာကို ထပ်မံဖြစ်ပေါ်စေသော အဆင့်များ
+- ပတ်ဝန်းကျင်အသေးစိတ် (`azd env show`)
+- ပြဿနာစတင်ဖြစ်ပေါ်ချိန်
 
 ### Log Collection Script
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# debug အချက်အလက်များစုဆောင်းရန် script။
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -527,32 +527,32 @@ echo "Debug information collected in debug-logs/"
 
 ### Pre-deployment Checklist
 ```bash
-# 1. Validate authentication
+# ၁။ အတည်ပြုခြင်းကို အတည်ပြုပါ။
 az account show
 
-# 2. Check quotas and limits
+# ၂။ အပိုင်းနှင့် အကန့်အသတ်များကို စစ်ဆေးပါ။
 az vm list-usage --location eastus2
 
-# 3. Validate templates
+# ၃။ အဆောင်အအုံများကို အတည်ပြုပါ။
 az bicep build --file infra/main.bicep
 
-# 4. Test locally first
+# ၄။ ဒေသတွင်းတွင် ပထမဦးဆုံး စမ်းသပ်ပါ။
 npm run build
 npm run test
 
-# 5. Use dry-run deployments
+# ၅။ အခြေခံစမ်းသပ်ဖြန့်ဝေမှုများကို အသုံးပြုပါ။
 azd provision --preview
 ```
 
 ### Monitoring Setup
 ```bash
-# Enable Application Insights
-# Add to main.bicep:
+# အက်ပလီကေးရှင်းအိုင်ဆိုက်များကိုဖွင့်ပါ
+# main.bicep တွင်ထည့်ပါ:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
 
-# Set up alerts
+# အချက်ပေးသတိပေးချက်များကိုစီစဉ်ပါ
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
@@ -562,34 +562,36 @@ az monitor metrics alert create \
 
 ### Regular Maintenance
 ```bash
-# Weekly health checks
+# အပတ်စဉ် ကျန်းမာရေး စစ်ဆေးမှုများ
 ./scripts/health-check.sh
 
-# Monthly cost review
+# လစဉ် ကုန်ကျစရိတ် ပြန်လည်သုံးသပ်မှု
 az consumption usage list --billing-period-name 202401
 
-# Quarterly security review
+# သုံးလတစ်ကြိမ် လုံခြုံရေး ပြန်လည်သုံးသပ်မှု
 az security assessment list --resource-group myrg
 ```
 
 ## ဆက်စပ်အရင်းအမြစ်များ
 
-- [Debugging Guide](debugging.md) - Debugging နည်းလမ်းများ
-- [Provisioning Resources](../deployment/provisioning.md) - Infrastructure Troubleshooting
-- [Capacity Planning](../pre-deployment/capacity-planning.md) - Resource Planning လမ်းညွှန်
-- [SKU Selection](../pre-deployment/sku-selection.md) - Service Tier အကြံပေးချက်များ
+- [Debugging Guide](debugging.md) - အဆင့်မြင့် debugging နည်းလမ်းများ
+- [Provisioning Resources](../deployment/provisioning.md) - အခြေခံအဆောက်အအုံပြဿနာရှာဖွေမှု
+- [Capacity Planning](../pre-deployment/capacity-planning.md) - အရင်းအမြစ်စီမံခန့်ခွဲမှုလမ်းညွှန်
+- [SKU Selection](../pre-deployment/sku-selection.md) - ဝန်ဆောင်မှုအဆင့်အတန်းအကြံပြုချက်များ
 
 ---
 
-**အကြံပြုချက်**: ဒီလမ်းညွှန်ကို Bookmark လုပ်ထားပြီး ပြဿနာများကို ရှာဖွေချိန်တိုင်း ပြန်လည်ကြည့်ရှုပါ။ အများဆုံးပြဿနာများမှာ ရှိပြီးသားဖြေရှင်းနည်းများပါဝင်ပါတယ်။
+**အကြံပြုချက်**: ဒီလမ်းညွှန်ကို Bookmark ထားပြီး ပြဿနာများကြုံတွေ့သောအခါ အမြဲပြန်လည်ကြည့်ရှုပါ။ အများစုသောပြဿနာများသည် ယခင်ကတွေ့ဖူးပြီးဖြေရှင်းနည်းများရှိပြီးသားဖြစ်သည်။
 
 ---
 
-**Navigation**
+**အခန်းအကြောင်းအရာများ**
 - **ယခင်သင်ခန်းစာ**: [Provisioning Resources](../deployment/provisioning.md)
 - **နောက်သင်ခန်းစာ**: [Debugging Guide](debugging.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှားမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

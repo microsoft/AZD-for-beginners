@@ -1,24 +1,24 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-18T13:24:19+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-23T22:48:50+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "my"
 }
 -->
-# AI-Specific Troubleshooting Guide
+# AI အထူး Troubleshooting လမ်းညွှန်
 
-**အခန်းများအကြောင်းအရာ:**
-- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
-- **📖 လက်ရှိအခန်း**: အခန်း 7 - အခက်အခဲရှင်းလင်းခြင်းနှင့် Debugging
-- **⬅️ အရင်အခန်း**: [Debugging Guide](debugging.md)
-- **➡️ နောက်အခန်း**: [အခန်း 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 ဆက်စပ်အခန်း**: [အခန်း 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+**အခန်းများ Navigation:**
+- **📚 သင်ခန်းစာ အိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၇ - Troubleshooting & Debugging
+- **⬅️ အရင်**: [Debugging Guide](debugging.md)
+- **➡️ နောက်အခန်း**: [အခန်း ၈: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 ဆက်စပ်**: [အခန်း ၂: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**အရင်အခန်း**: [Production AI Practices](../ai-foundry/production-ai-practices.md) | **နောက်အခန်း**: [Getting Started with AZD](../getting-started/README.md)
+**အရင်**: [Production AI Practices](../microsoft-foundry/production-ai-practices.md) | **နောက်**: [Getting Started with AZD](../getting-started/README.md)
 
-ဒီအခက်အခဲရှင်းလင်းလမ်းညွှန်သည် AZD ဖြင့် AI ဖြေရှင်းချက်များကို တင်သွင်းရာတွင် ကြုံတွေ့ရသော အခက်အခဲများကို ရှင်းလင်းပေးပြီး Azure AI ဝန်ဆောင်မှုများအတွက် အထူး Debugging နည်းလမ်းများကို ပေးထားသည်။
+ဒီအကျယ်အဝန်းရှိ troubleshooting လမ်းညွှန်မှာ AZD နဲ့ AI ဖြေရှင်းချက်တွေကို deploy လုပ်တဲ့အခါမှာ ကြုံရတဲ့ အခက်အခဲတွေကို ဖြေရှင်းနည်းတွေ၊ Azure AI services အတွက် debugging နည်းလမ်းတွေကို ဖော်ပြထားပါတယ်။
 
 ## အကြောင်းအရာများ
 
@@ -27,13 +27,13 @@ CO_OP_TRANSLATOR_METADATA:
 - [Container Apps Deployment အခက်အခဲများ](../../../../docs/troubleshooting)
 - [Authentication နှင့် Permission အမှားများ](../../../../docs/troubleshooting)
 - [Model Deployment မအောင်မြင်မှုများ](../../../../docs/troubleshooting)
-- [Performance နှင့် Scaling ပြဿနာများ](../../../../docs/troubleshooting)
+- [Performance နှင့် Scaling အခက်အခဲများ](../../../../docs/troubleshooting)
 - [ကုန်ကျစရိတ်နှင့် Quota စီမံခန့်ခွဲမှု](../../../../docs/troubleshooting)
 - [Debugging Tools နှင့် နည်းလမ်းများ](../../../../docs/troubleshooting)
 
 ## Azure OpenAI Service အခက်အခဲများ
 
-### ပြဿနာ: OpenAI Service ကို ရွေးချယ်ထားသော Region တွင် မရရှိနိုင်
+### ပြဿနာ: OpenAI Service ကို Region မှာ မရရှိနိုင်
 
 **လက္ခဏာများ:**
 ```
@@ -41,15 +41,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **အကြောင်းရင်းများ:**
-- Azure OpenAI ကို ရွေးချယ်ထားသော Region တွင် မရရှိနိုင်
-- ရွေးချယ်ထားသော Region များတွင် Quota ကုန်ဆုံးနေသည်
-- Region အတွင်း Capacity ကန့်သတ်ချက်များ
+- Azure OpenAI ကို ရွေးချယ်ထားတဲ့ region မှာ မရရှိနိုင်ခြင်း
+- ရွေးချယ်ထားတဲ့ region တွေမှာ quota ကုန်ဆုံးခြင်း
+- Regional capacity အကန့်အသတ်များ
 
 **ဖြေရှင်းနည်းများ:**
 
-1. **Region ရရှိနိုင်မှုကို စစ်ဆေးပါ:**
+1. **Region Availability ကို စစ်ဆေးပါ:**
 ```bash
-# List available regions for OpenAI
+# OpenAI အတွက် ရရှိနိုင်သော ဒေသများစာရင်း
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -67,7 +67,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **အခြား Region များကို အသုံးပြုပါ:**
+3. **Alternative Regions ကို အသုံးပြုပါ:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -79,7 +79,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### ပြဿနာ: Model Deployment Quota ကျော်လွန်မှု
+### ပြဿနာ: Model Deployment Quota ကုန်ဆုံး
 
 **လက္ခဏာများ:**
 ```
@@ -90,15 +90,15 @@ Error: Deployment failed due to insufficient quota
 
 1. **လက်ရှိ Quota ကို စစ်ဆေးပါ:**
 ```bash
-# Check quota usage
+# ကွိုတာအသုံးပြုမှုကိုစစ်ဆေးပါ
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
 ```
 
-2. **Quota တိုးမြှင့်မှုကို တောင်းဆိုပါ:**
+2. **Quota တိုးမြှင့်မှု တောင်းဆိုပါ:**
 ```bash
-# Submit quota increase request
+# ကိုတာတိုးမြှင့်ရန်တောင်းဆိုမှုတင်သွင်းပါ
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -106,7 +106,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **Model Capacity ကို Optimize လုပ်ပါ:**
+3. **Model Capacity ကို အကောင်းဆုံးဖြစ်အောင် ပြုလုပ်ပါ:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -124,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### ပြဿနာ: API Version မမှန်ကန်မှု
+### ပြဿနာ: API Version မမှန်
 
 **လက္ခဏာများ:**
 ```
@@ -133,15 +133,15 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **ဖြေရှင်းနည်းများ:**
 
-1. **ထောက်ခံထားသော API Version ကို အသုံးပြုပါ:**
+1. **ထောက်ခံထားတဲ့ API Version ကို အသုံးပြုပါ:**
 ```python
-# Use latest supported version
+# နောက်ဆုံးပံ့ပိုးထားသောဗားရှင်းကိုအသုံးပြုပါ
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **API Version Compatibility ကို စစ်ဆေးပါ:**
 ```bash
-# List supported API versions
+# ပံ့ပိုးထားသော API ဗားရှင်းများစာရင်း
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -149,7 +149,7 @@ az rest --method get \
 
 ## Azure AI Search ပြဿနာများ
 
-### ပြဿနာ: Search Service Pricing Tier မလုံလောက်မှု
+### ပြဿနာ: Search Service Pricing Tier မလုံလောက်
 
 **လက္ခဏာများ:**
 ```
@@ -176,7 +176,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Semantic Search ကို ပိတ်ထားပါ (Development အတွက်):**
+2. **Semantic Search ကို ပိတ်ထားပါ (Development):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -190,7 +190,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### ပြဿနာ: Index ဖန်တီးမှု မအောင်မြင်မှု
+### ပြဿနာ: Index ဖန်တီးမှု မအောင်မြင်
 
 **လက္ခဏာများ:**
 ```
@@ -201,7 +201,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **Search Service Keys ကို စစ်ဆေးပါ:**
 ```bash
-# Get search service admin key
+# ရှာဖွေမှုဝန်ဆောင်မှုအုပ်ချုပ်ရေးသော့ကိုရယူပါ
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -209,7 +209,7 @@ az search admin-key show \
 
 2. **Index Schema ကို စစ်ဆေးပါ:**
 ```python
-# Validate index schema
+# အညွှန်း schema ကိုအတည်ပြုပါ
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -239,7 +239,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Container Apps Deployment အခက်အခဲများ
 
-### ပြဿနာ: Container Build မအောင်မြင်မှု
+### ပြဿနာ: Container Build မအောင်မြင်
 
 **လက္ခဏာများ:**
 ```
@@ -270,7 +270,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Dependencies ကို Validate လုပ်ပါ:**
+2. **Dependencies ကို အတည်ပြုပါ:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -282,9 +282,9 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **Health Check ထည့်သွင်းပါ:**
+3. **Health Check ထည့်ပါ:**
 ```python
-# main.py - Add health check endpoint
+# main.py - ကျန်းမာရေးစစ်ဆေးမှု endpoint ထည့်ပါ
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -294,7 +294,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### ပြဿနာ: Container App Startup မအောင်မြင်မှု
+### ပြဿနာ: Container App Startup မအောင်မြင်
 
 **လက္ခဏာများ:**
 ```
@@ -336,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Model Loading ကို Optimize လုပ်ပါ:**
+2. **Model Loading ကို အကောင်းဆုံးဖြစ်အောင် ပြုလုပ်ပါ:**
 ```python
-# Lazy load models to reduce startup time
+# မော်ဒယ်များကို အစပျိုးချိန်ကို လျှော့ချရန် အလေးပိုးတင်ပါ
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -352,15 +352,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Initialize AI client here
+        # AI client ကို ဒီမှာ စတင်ပါ
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # စတင်ခြင်း
     app.state.model_manager = ModelManager()
     yield
-    # Shutdown
+    # ပိတ်ခြင်း
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -368,7 +368,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Authentication နှင့် Permission အမှားများ
 
-### ပြဿနာ: Managed Identity Permission ပိတ်ပင်ထားမှု
+### ပြဿနာ: Managed Identity Permission ပိတ်ပင်ထား
 
 **လက္ခဏာများ:**
 ```
@@ -379,13 +379,13 @@ Error: Authentication failed for Azure OpenAI Service
 
 1. **Role Assignments ကို စစ်ဆေးပါ:**
 ```bash
-# Check current role assignments
+# လက်ရှိအခန်းကဏ္ဍတာဝန်ပေးခြင်းများကို စစ်ဆေးပါ
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **လိုအပ်သော Roles ကို Assign လုပ်ပါ:**
+2. **လိုအပ်တဲ့ Roles တွေကို Assign လုပ်ပါ:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -404,7 +404,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Authentication ကို စမ်းသပ်ပါ:**
 ```python
-# Test managed identity authentication
+# စီမံခန့်ခွဲထားသော အတည်ပြုမှုကို စမ်းသပ်ပါ
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -417,7 +417,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### ပြဿနာ: Key Vault Access ပိတ်ပင်ထားမှု
+### ပြဿနာ: Key Vault Access ပိတ်ပင်ထား
 
 **လက္ခဏာများ:**
 ```
@@ -460,7 +460,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ## Model Deployment မအောင်မြင်မှုများ
 
-### ပြဿနာ: Model Version မရရှိနိုင်မှု
+### ပြဿနာ: Model Version မရရှိနိုင်
 
 **လက္ခဏာများ:**
 ```
@@ -469,9 +469,9 @@ Error: Model version 'gpt-4-32k' is not available
 
 **ဖြေရှင်းနည်းများ:**
 
-1. **ရရှိနိုင်သော Models ကို စစ်ဆေးပါ:**
+1. **ရရှိနိုင်တဲ့ Models ကို စစ်ဆေးပါ:**
 ```bash
-# List available models
+# ရရှိနိုင်သောမော်ဒယ်များစာရင်း
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -508,9 +508,9 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Deployment မပြုမီ Model ကို Validate လုပ်ပါ:**
+3. **Deploy မလုပ်ခင် Model ကို အတည်ပြုပါ:**
 ```python
-# Pre-deployment model validation
+# မော်ဒယ်ကို တင်သွင်းမည့်အခါ အတည်ပြုခြင်း
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -530,20 +530,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Performance နှင့် Scaling ပြဿနာများ
+## Performance နှင့် Scaling အခက်အခဲများ
 
-### ပြဿနာ: Latency မြင့်မားသော Response
+### ပြဿနာ: High Latency Responses
 
 **လက္ခဏာများ:**
-- Response အချိန် > 30 စက္ကန့်
-- Timeout အမှားများ
-- အသုံးပြုသူအတွေ့အကြုံ အနည်းငယ်
+- Response times > 30 seconds
+- Timeout errors
+- အသုံးပြုသူ အတွေ့အကြုံ မကောင်း
 
 **ဖြေရှင်းနည်းများ:**
 
-1. **Request Timeouts ကို အကောင်အထည်ဖော်ပါ:**
+1. **Request Timeouts ကို အသုံးပြုပါ:**
 ```python
-# Configure proper timeouts
+# သင့်လျော်သောအချိန်ကုန်ဆုံးမှုများကိုဖွင့်လှစ်ပါ
 import httpx
 
 client = httpx.AsyncClient(
@@ -556,9 +556,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Response Caching ကို ထည့်သွင်းပါ:**
+2. **Response Caching ကို ထည့်ပါ:**
 ```python
-# Redis cache for responses
+# တုံ့ပြန်မှုများအတွက် Redis cache
 import redis.asyncio as redis
 import json
 
@@ -610,7 +610,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ပြဿနာ: Memory ကုန်ဆုံးမှု
+### ပြဿနာ: Memory Out of Errors
 
 **လက္ခဏာများ:**
 ```
@@ -638,9 +638,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Memory Usage ကို Optimize လုပ်ပါ:**
+2. **Memory Usage ကို အကောင်းဆုံးဖြစ်အောင် ပြုလုပ်ပါ:**
 ```python
-# Memory-efficient model handling
+# မှတ်ဉာဏ်အသုံးပြုမှုကိုထိရောက်စွာကိုင်တွယ်ခြင်း
 import gc
 import psutil
 
@@ -650,32 +650,32 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check memory usage before processing
+        # အလုပ်လုပ်မီ မှတ်ဉာဏ်အသုံးပြုမှုကိုစစ်ဆေးပါ
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collection
+            gc.collect()  # အမှိုက်စုဆောင်းမှုကိုအတင်းအဓမ္မလုပ်ဆောင်ပါ
             
         result = await self._process_ai_request(request)
         
-        # Clean up after processing
+        # အလုပ်လုပ်ပြီးနောက် သန့်ရှင်းရေးလုပ်ဆောင်ပါ
         gc.collect()
         return result
 ```
 
 ## ကုန်ကျစရိတ်နှင့် Quota စီမံခန့်ခွဲမှု
 
-### ပြဿနာ: မမျှော်လင့်ထားသော ကုန်ကျစရိတ်မြင့်မားမှု
+### ပြဿနာ: မမျှော်လင့်ထားတဲ့ ကုန်ကျစရိတ်များ
 
 **လက္ခဏာများ:**
-- Azure ဘီလ် မျှော်လင့်ထားသည်ထက် မြင့်မားနေသည်
-- Token အသုံးပြုမှု ခန့်မှန်းချက်များ ကျော်လွန်နေသည်
-- Budget Alerts Trigger ဖြစ်နေသည်
+- Azure bill က မမျှော်လင့်ထားတဲ့ အမြင့်
+- Token usage က ခန့်မှန်းချက်ထက် ကျော်လွန်နေ
+- Budget alerts တွေ triggered ဖြစ်
 
 **ဖြေရှင်းနည်းများ:**
 
-1. **Cost Controls ကို အကောင်အထည်ဖော်ပါ:**
+1. **Cost Controls ကို အသုံးပြုပါ:**
 ```python
-# Token usage tracking
+# တိုကင်အသုံးပြုမှုကိုခြေရာခံခြင်း
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -717,13 +717,13 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **Model Selection ကို Optimize လုပ်ပါ:**
+3. **Model Selection ကို အကောင်းဆုံးဖြစ်အောင် ပြုလုပ်ပါ:**
 ```python
-# Cost-aware model selection
+# ကုန်ကျစရိတ်ကို သိရှိထားသော မော်ဒယ်ရွေးချယ်မှု
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+    'gpt-4o-mini': 0.00015,  # ၁၀၀၀ tokens အတွက်
+    'gpt-4': 0.03,          # ၁၀၀၀ tokens အတွက်
+    'gpt-35-turbo': 0.0015  # ၁၀၀၀ tokens အတွက်
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
@@ -741,16 +741,16 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### AZD Debugging Commands
 
 ```bash
-# Enable verbose logging
+# အသေးစိတ်မှတ်တမ်းများကိုဖွင့်ပါ
 azd up --debug
 
-# Check deployment status
+# တင်သွင်းမှုအခြေအနေကိုစစ်ဆေးပါ
 azd show
 
-# View deployment logs
+# တင်သွင်းမှတ်တမ်းများကိုကြည့်ပါ
 azd logs --follow
 
-# Check environment variables
+# ပတ်ဝန်းကျင်အပြောင်းအလဲများကိုစစ်ဆေးပါ
 azd env get-values
 ```
 
@@ -761,7 +761,7 @@ azd env get-values
 import logging
 import json
 
-# Configure structured logging for AI applications
+# AI အက်ပလီကေးရှင်းများအတွက် ဖွဲ့စည်းထားသော လော့ဂ်များကို ဖွင့်လှစ်ပါ
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -787,7 +787,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Check OpenAI connectivity
+    # OpenAI ချိတ်ဆက်မှုကို စစ်ဆေးပါ
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -795,7 +795,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Check Search service
+    # Search ဝန်ဆောင်မှုကို စစ်ဆေးပါ
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -840,22 +840,22 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Error Codes နှင့် ဖြေရှင်းနည်းများ
+## အများဆုံးတွေ့ရတဲ့ Error Codes နှင့် ဖြေရှင်းနည်းများ
 
 | Error Code | ဖော်ပြချက် | ဖြေရှင်းနည်း |
 |------------|-------------|----------|
 | 401 | Unauthorized | API keys နှင့် managed identity configuration ကို စစ်ဆေးပါ |
 | 403 | Forbidden | RBAC role assignments ကို စစ်ဆေးပါ |
-| 429 | Rate Limited | Exponential backoff ဖြင့် retry logic ကို အကောင်အထည်ဖော်ပါ |
+| 429 | Rate Limited | Exponential backoff နဲ့ retry logic ကို အသုံးပြုပါ |
 | 500 | Internal Server Error | Model deployment status နှင့် logs ကို စစ်ဆေးပါ |
 | 503 | Service Unavailable | Service health နှင့် regional availability ကို စစ်ဆေးပါ |
 
-## နောက်တစ်ဆင့်
+## နောက်ထပ်အဆင့်များ
 
-1. **[AI Model Deployment Guide](ai-model-deployment.md)** ကို Review လုပ်ပါ
-2. **[Production AI Practices](production-ai-practices.md)** ကို ပြီးမြောက်ပါ
-3. **[Azure AI Foundry Discord](https://aka.ms/foundry/discord)** ကို Join လုပ်ပြီး community support ရယူပါ
-4. **ပြဿနာများကို Submit လုပ်ပါ** [AZD GitHub repository](https://github.com/Azure/azure-dev) တွင် AZD-specific ပြဿနာများအတွက်
+1. **[AI Model Deployment Guide](ai-model-deployment.md)** ကို ပြန်လည်သုံးသပ်ပါ
+2. **[Production AI Practices](production-ai-practices.md)** ကို ပြီးမြောက်အောင် လုပ်ဆောင်ပါ
+3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord)** ကို ဝင်ရောက်ပြီး community support ရယူပါ
+4. **AZD GitHub repository** [AZD GitHub repository](https://github.com/Azure/azure-dev) မှာ AZD-specific ပြဿနာတွေကို တင်ပါ
 
 ## အရင်းအမြစ်များ
 
@@ -865,15 +865,17 @@ def monitor_performance(func):
 
 ---
 
-**အခန်းများအကြောင်းအရာ:**
-- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
-- **📖 လက်ရှိအခန်း**: အခန်း 7 - Troubleshooting & Debugging
-- **⬅️ အရင်အခန်း**: [Debugging Guide](debugging.md)
-- **➡️ နောက်အခန်း**: [အခန်း 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 ဆက်စပ်အခန်း**: [အခန်း 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+**အခန်းများ Navigation:**
+- **📚 သင်ခန်းစာ အိမ်**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၇ - Troubleshooting & Debugging
+- **⬅️ အရင်**: [Debugging Guide](debugging.md)
+- **➡️ နောက်အခန်း**: [အခန်း ၈: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 ဆက်စပ်**: [အခန်း ၂: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် ရှုလေ့လာသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

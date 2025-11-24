@@ -1,25 +1,32 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "5d681f3e20256d547ab3eebc052c1b6d",
-  "translation_date": "2025-10-13T15:39:33+00:00",
+  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
+  "translation_date": "2025-11-23T22:00:15+00:00",
   "source_file": "docs/pre-deployment/capacity-planning.md",
   "language_code": "uk"
 }
 -->
-# Планування потужностей: Розуміння квот і обмежень Azure
+# Планування потужностей - Доступність ресурсів Azure та обмеження
+
+**Навігація по розділу:**
+- **📚 Головна сторінка курсу**: [AZD для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 6 - Перевірка перед розгортанням та планування
+- **⬅️ Попередній розділ**: [Розділ 5: Багатоагентні AI-рішення](../../examples/retail-scenario.md)
+- **➡️ Далі**: [Вибір SKU](sku-selection.md)
+- **🚀 Наступний розділ**: [Розділ 7: Виправлення помилок](../troubleshooting/common-issues.md)
 
 ## Вступ
 
-Цей детальний посібник допоможе вам спланувати та перевірити потужності ресурсів Azure перед розгортанням за допомогою Azure Developer CLI. Дізнайтеся, як оцінювати квоти, доступність і регіональні обмеження, щоб забезпечити успішне розгортання, оптимізуючи витрати та продуктивність. Опануйте техніки планування потужностей для різних архітектур додатків і сценаріїв масштабування.
+Цей детальний посібник допоможе вам спланувати та перевірити потужності ресурсів Azure перед розгортанням за допомогою Azure Developer CLI. Дізнайтеся, як оцінювати квоти, доступність та регіональні обмеження, щоб забезпечити успішне розгортання, оптимізуючи витрати та продуктивність. Опануйте техніки планування потужностей для різних архітектур додатків та сценаріїв масштабування.
 
 ## Цілі навчання
 
 Після завершення цього посібника ви:
-- Зрозумієте квоти, обмеження та регіональні обмеження Azure
-- Опануєте техніки перевірки доступності ресурсів і потужностей перед розгортанням
-- Реалізуєте автоматизовані стратегії перевірки потужностей і моніторингу
-- Спроєктуєте додатки з правильним розміром ресурсів і врахуванням масштабування
+- Зрозумієте квоти Azure, обмеження та регіональні обмеження доступності
+- Опануєте техніки перевірки доступності ресурсів та потужностей перед розгортанням
+- Реалізуєте автоматизовані стратегії перевірки та моніторингу потужностей
+- Спроєктуєте додатки з правильним розміром ресурсів та врахуванням масштабування
 - Застосуєте стратегії оптимізації витрат через розумне планування потужностей
 - Налаштуєте сповіщення та моніторинг використання квот і доступності ресурсів
 
@@ -27,46 +34,45 @@ CO_OP_TRANSLATOR_METADATA:
 
 Після завершення ви зможете:
 - Оцінювати та перевіряти вимоги до потужностей ресурсів Azure перед розгортанням
-- Створювати автоматизовані скрипти для перевірки потужностей і моніторингу квот
-- Проєктувати масштабовані архітектури з урахуванням регіональних і підпискових обмежень
+- Створювати автоматизовані скрипти для перевірки потужностей та моніторингу квот
+- Проєктувати масштабовані архітектури з урахуванням регіональних та підпискових обмежень
 - Реалізовувати економічно ефективні стратегії розміру ресурсів для різних типів навантажень
-- Налаштовувати проактивний моніторинг і сповіщення для проблем, пов'язаних із потужностями
-- Планувати розгортання в кількох регіонах із правильним розподілом потужностей
+- Налаштовувати проактивний моніторинг та сповіщення для питань, пов'язаних із потужностями
+- Планувати розгортання в кількох регіонах з правильним розподілом потужностей
 
 ## Чому планування потужностей важливе
 
 Перед розгортанням додатків необхідно переконатися:
 - **Достатні квоти** для необхідних ресурсів
-- **Доступність ресурсів** у цільовому регіоні
+- **Доступність ресурсів** у вашому цільовому регіоні
 - **Доступність рівня послуг** для вашого типу підписки
 - **Мережеві потужності** для очікуваного трафіку
-- **Оптимізація витрат** через правильне визначення розміру
+- **Оптимізація витрат** через правильне розмірювання
 
-## 📊 Розуміння квот і обмежень Azure
+## 📊 Розуміння квот та обмежень Azure
 
 ### Типи обмежень
-1. **Квоти на рівні підписки** – Максимальна кількість ресурсів на підписку
-2. **Регіональні квоти** – Максимальна кількість ресурсів на регіон
-3. **Обмеження для конкретних ресурсів** – Ліміти для окремих типів ресурсів
-4. **Обмеження рівня послуг** – Ліміти залежно від вашого плану послуг
+1. **Квоти на рівні підписки** - Максимальна кількість ресурсів на підписку
+2. **Регіональні квоти** - Максимальна кількість ресурсів на регіон
+3. **Обмеження для конкретних ресурсів** - Ліміти для окремих типів ресурсів
+4. **Обмеження рівня послуг** - Ліміти залежно від вашого плану послуг
 
 ### Загальні квоти ресурсів
 ```bash
-# Check current quota usage
+# Перевірте поточне використання квоти
 az vm list-usage --location eastus2 --output table
 
-# Check specific resource quotas
+# Перевірте квоти на конкретні ресурси
 az network list-usages --location eastus2 --output table
 az storage account show-usage --output table
 ```
-
 
 ## Перевірки потужностей перед розгортанням
 
 ### Автоматизований скрипт перевірки потужностей
 ```bash
 #!/bin/bash
-# capacity-check.sh - Validate Azure capacity before deployment
+# capacity-check.sh - Перевірка доступності ресурсів Azure перед розгортанням
 
 set -e
 
@@ -77,7 +83,7 @@ echo "Checking Azure capacity for location: $LOCATION"
 echo "Subscription: $SUBSCRIPTION_ID"
 echo "======================================================"
 
-# Function to check quota usage
+# Функція для перевірки використання квот
 check_quota() {
     local resource_type=$1
     local required=$2
@@ -112,28 +118,27 @@ check_quota() {
     fi
 }
 
-# Check various resource quotas
-check_quota "compute" 4      # Need 4 vCPUs
-check_quota "storage" 2      # Need 2 storage accounts
-check_quota "network" 1      # Need 1 virtual network
+# Перевірка різних квот ресурсів
+check_quota "compute" 4      # Потрібно 4 vCPU
+check_quota "storage" 2      # Потрібно 2 облікові записи зберігання
+check_quota "network" 1      # Потрібна 1 віртуальна мережа
 
 echo "======================================================"
 echo "✅ Capacity check completed successfully!"
 ```
 
-
-### Перевірки потужностей для конкретних послуг
+### Перевірки потужностей для конкретних сервісів
 
 #### Потужності App Service
 ```bash
-# Check App Service Plan availability
+# Перевірте доступність плану служби додатків
 check_app_service_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking App Service Plan capacity for $sku in $location"
     
-    # Check available SKUs in region
+    # Перевірте доступні SKU в регіоні
     available_skus=$(az appservice list-locations --sku "$sku" --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_skus" ]; then
@@ -141,32 +146,31 @@ check_app_service_capacity() {
     else
         echo "❌ $sku is not available in $location"
         
-        # Suggest alternative regions
+        # Запропонуйте альтернативні регіони
         echo "Available regions for $sku:"
         az appservice list-locations --sku "$sku" --query "[].name" -o table
         return 1
     fi
     
-    # Check current usage
+    # Перевірте поточне використання
     current_plans=$(az appservice plan list --query "length([?location=='$location' && sku.name=='$sku'])")
     echo "Current $sku plans in $location: $current_plans"
 }
 
-# Usage
+# Використання
 check_app_service_capacity "eastus2" "P1v3"
 ```
 
-
 #### Потужності баз даних
 ```bash
-# Check PostgreSQL capacity
+# Перевірити ємність PostgreSQL
 check_postgres_capacity() {
     local location=$1
     local sku=$2
     
     echo "Checking PostgreSQL capacity for $sku in $location"
     
-    # Check if SKU is available
+    # Перевірити, чи доступний SKU
     available=$(az postgres flexible-server list-skus --location "$location" \
         --query "contains([].name, '$sku')" -o tsv)
     
@@ -175,7 +179,7 @@ check_postgres_capacity() {
     else
         echo "❌ PostgreSQL $sku is not available in $location"
         
-        # Show available SKUs
+        # Показати доступні SKU
         echo "Available PostgreSQL SKUs in $location:"
         az postgres flexible-server list-skus --location "$location" \
             --query "[].{name:name,tier:tier,vCores:vCores,memory:memorySizeInMb}" -o table
@@ -183,20 +187,20 @@ check_postgres_capacity() {
     fi
 }
 
-# Check Cosmos DB capacity
+# Перевірити ємність Cosmos DB
 check_cosmos_capacity() {
     local location=$1
     local tier=$2
     
     echo "Checking Cosmos DB capacity in $location"
     
-    # Check region availability
+    # Перевірити доступність регіону
     available_regions=$(az cosmosdb locations list --query "[?name=='$location']" -o tsv)
     
     if [ -n "$available_regions" ]; then
         echo "✅ Cosmos DB is available in $location"
         
-        # Check if serverless is supported (if needed)
+        # Перевірити, чи підтримується серверлес (за потреби)
         if [ "$tier" = "serverless" ]; then
             serverless_regions=$(az cosmosdb locations list \
                 --query "[?supportsAvailabilityZone==true && name=='$location']" -o tsv)
@@ -214,16 +218,15 @@ check_cosmos_capacity() {
 }
 ```
 
-
-#### Потужності Container Apps
+#### Потужності контейнерних додатків
 ```bash
-# Check Container Apps capacity
+# Перевірте ємність Container Apps
 check_container_apps_capacity() {
     local location=$1
     
     echo "Checking Container Apps capacity in $location"
     
-    # Check if Container Apps is available in region
+    # Перевірте, чи доступний Container Apps у регіоні
     az provider show --namespace Microsoft.App \
         --query "resourceTypes[?resourceType=='containerApps'].locations" \
         --output table | grep -q "$location"
@@ -231,13 +234,13 @@ check_container_apps_capacity() {
     if [ $? -eq 0 ]; then
         echo "✅ Container Apps is available in $location"
         
-        # Check current environment count
+        # Перевірте поточну кількість середовищ
         current_envs=$(az containerapp env list \
             --query "length([?location=='$location'])")
         
         echo "Current Container App environments in $location: $current_envs"
         
-        # Container Apps has a limit of 15 environments per region
+        # Container Apps має обмеження у 15 середовищ на регіон
         if [ "$current_envs" -lt 15 ]; then
             echo "✅ Can create more Container App environments"
         else
@@ -246,7 +249,7 @@ check_container_apps_capacity() {
     else
         echo "❌ Container Apps is not available in $location"
         
-        # Show available regions
+        # Показати доступні регіони
         echo "Available regions for Container Apps:"
         az provider show --namespace Microsoft.App \
             --query "resourceTypes[?resourceType=='containerApps'].locations[0:10]" \
@@ -256,12 +259,11 @@ check_container_apps_capacity() {
 }
 ```
 
+## 📍 Перевірка регіональної доступності
 
-## 📍 Перевірка доступності в регіонах
-
-### Доступність послуг за регіонами
+### Доступність сервісів за регіонами
 ```bash
-# Check service availability across regions
+# Перевірте доступність послуг у різних регіонах
 check_service_availability() {
     local service=$1
     
@@ -286,19 +288,18 @@ check_service_availability() {
     esac
 }
 
-# Check all services
+# Перевірте всі послуги
 for service in appservice containerapp postgres cosmosdb; do
     check_service_availability "$service"
     echo ""
 done
 ```
 
-
 ### Рекомендації щодо вибору регіону
 ```bash
-# Recommend optimal regions based on requirements
+# Рекомендувати оптимальні регіони на основі вимог
 recommend_region() {
-    local requirements=$1  # "lowcost" | "performance" | "compliance"
+    local requirements=$1  # "низька вартість" | "продуктивність" | "відповідність"
     
     echo "Region recommendations for: $requirements"
     
@@ -325,23 +326,22 @@ recommend_region() {
 }
 ```
 
-
-## 💰 Планування витрат і оцінка
+## 💰 Планування витрат та оцінка
 
 ### Оцінка вартості ресурсів
 ```bash
-# Estimate deployment costs
+# Оцініть витрати на розгортання
 estimate_costs() {
     local resource_group=$1
     local location=$2
     
     echo "Estimating costs for deployment in $location"
     
-    # Create a temporary resource group for estimation
+    # Створіть тимчасову групу ресурсів для оцінки
     temp_rg="temp-estimation-$(date +%s)"
     az group create --name "$temp_rg" --location "$location" >/dev/null
     
-    # Deploy infrastructure in validation mode
+    # Розгорніть інфраструктуру в режимі перевірки
     az deployment group validate \
         --resource-group "$temp_rg" \
         --template-file infra/main.bicep \
@@ -349,7 +349,7 @@ estimate_costs() {
         --parameters location="$location" \
         --query "properties.validatedResources[].{type:type,name:name}" -o table
     
-    # Clean up temporary resource group
+    # Очистіть тимчасову групу ресурсів
     az group delete --name "$temp_rg" --yes --no-wait
     
     echo ""
@@ -361,10 +361,9 @@ estimate_costs() {
 }
 ```
 
-
 ### Рекомендації щодо оптимізації SKU
 ```bash
-# Recommend optimal SKUs based on requirements
+# Рекомендувати оптимальні SKU на основі вимог
 recommend_sku() {
     local service=$1
     local workload_type=$2  # "dev" | "staging" | "production"
@@ -427,33 +426,32 @@ recommend_sku() {
 }
 ```
 
-
 ## 🚀 Автоматизовані перевірки перед розгортанням
 
 ### Комплексний скрипт перевірки перед розгортанням
 ```bash
 #!/bin/bash
-# preflight-check.sh - Complete pre-deployment validation
+# preflight-check.sh - Завершена перевірка перед розгортанням
 
 set -e
 
-# Configuration
+# Конфігурація
 LOCATION=${1:-eastus2}
 ENVIRONMENT=${2:-dev}
 CONFIG_FILE="preflight-config.json"
 
-# Colors for output
+# Кольори для виводу
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Без кольору
 
-# Logging functions
+# Функції логування
 log_info() { echo -e "${GREEN}ℹ️  $1${NC}"; }
 log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Load configuration
+# Завантаження конфігурації
 if [ -f "$CONFIG_FILE" ]; then
     REQUIRED_VCPUS=$(jq -r '.requirements.vcpus' "$CONFIG_FILE")
     REQUIRED_STORAGE=$(jq -r '.requirements.storage' "$CONFIG_FILE")
@@ -473,7 +471,7 @@ echo "Required Storage Accounts: $REQUIRED_STORAGE"
 echo "Required Services: ${REQUIRED_SERVICES[*]}"
 echo "=================================="
 
-# Check 1: Authentication
+# Перевірка 1: Аутентифікація
 log_info "Checking Azure authentication..."
 if az account show >/dev/null 2>&1; then
     SUBSCRIPTION_NAME=$(az account show --query name -o tsv)
@@ -483,7 +481,7 @@ else
     exit 1
 fi
 
-# Check 2: Regional availability
+# Перевірка 2: Регіональна доступність
 log_info "Checking regional availability..."
 if az account list-locations --query "[?name=='$LOCATION']" | grep -q "$LOCATION"; then
     log_info "Region $LOCATION is available"
@@ -492,10 +490,10 @@ else
     exit 1
 fi
 
-# Check 3: Quota validation
+# Перевірка 3: Перевірка квот
 log_info "Checking quota availability..."
 
-# vCPU quota
+# Квота vCPU
 vcpu_usage=$(az vm list-usage --location "$LOCATION" \
     --query "[?localName=='Total Regional vCPUs'].{current:currentValue,limit:limit}" -o json)
 vcpu_current=$(echo "$vcpu_usage" | jq -r '.[0].current')
@@ -509,7 +507,7 @@ else
     exit 1
 fi
 
-# Storage account quota
+# Квота облікового запису сховища
 storage_usage=$(az storage account show-usage --query "{current:value,limit:limit}" -o json)
 storage_current=$(echo "$storage_usage" | jq -r '.current')
 storage_limit=$(echo "$storage_usage" | jq -r '.limit')
@@ -522,7 +520,7 @@ else
     exit 1
 fi
 
-# Check 4: Service availability
+# Перевірка 4: Доступність сервісу
 log_info "Checking service availability..."
 
 for service in "${REQUIRED_SERVICES[@]}"; do
@@ -564,7 +562,7 @@ for service in "${REQUIRED_SERVICES[@]}"; do
     esac
 done
 
-# Check 5: Network capacity
+# Перевірка 5: Мережна пропускна здатність
 log_info "Checking network capacity..."
 vnet_usage=$(az network list-usages --location "$LOCATION" \
     --query "[?localName=='Virtual Networks'].{current:currentValue,limit:limit}" -o json)
@@ -578,7 +576,7 @@ else
     log_warn "Virtual Network quota: $vnet_available/$vnet_limit available (may need cleanup)"
 fi
 
-# Check 6: Resource naming validation
+# Перевірка 6: Перевірка іменування ресурсів
 log_info "Checking resource naming conventions..."
 RESOURCE_TOKEN=$(echo -n "${SUBSCRIPTION_ID}${ENVIRONMENT}${LOCATION}" | sha256sum | cut -c1-8)
 STORAGE_NAME="myapp${ENVIRONMENT}sa${RESOURCE_TOKEN}"
@@ -590,7 +588,7 @@ else
     exit 1
 fi
 
-# Check 7: Cost estimation
+# Перевірка 7: Оцінка вартості
 log_info "Performing cost estimation..."
 ESTIMATED_MONTHLY_COST=$(calculate_estimated_cost "$ENVIRONMENT" "$LOCATION")
 log_info "Estimated monthly cost: \$${ESTIMATED_MONTHLY_COST}"
@@ -605,7 +603,7 @@ if [ "$ENVIRONMENT" = "production" ] && [ "$ESTIMATED_MONTHLY_COST" -gt 1000 ]; 
     fi
 fi
 
-# Check 8: Template validation
+# Перевірка 8: Перевірка шаблону
 log_info "Validating Bicep templates..."
 if [ -f "infra/main.bicep" ]; then
     if az bicep build --file infra/main.bicep --stdout >/dev/null 2>&1; then
@@ -619,7 +617,7 @@ else
     log_warn "No Bicep template found at infra/main.bicep"
 fi
 
-# Final summary
+# Підсумковий звіт
 echo "=================================="
 log_info "✅ All pre-flight checks passed!"
 log_info "Ready for deployment to $LOCATION"
@@ -628,7 +626,6 @@ echo "  1. Run 'azd up' to deploy"
 echo "  2. Monitor deployment progress"
 echo "  3. Verify application health post-deployment"
 ```
-
 
 ### Шаблон конфігураційного файлу
 ```json
@@ -664,19 +661,18 @@ echo "  3. Verify application health post-deployment"
 }
 ```
 
-
 ## 📈 Моніторинг потужностей під час розгортання
 
 ### Моніторинг потужностей у реальному часі
 ```bash
-# Monitor capacity during deployment
+# Контролюйте ємність під час розгортання
 monitor_deployment_capacity() {
     local resource_group=$1
     
     echo "Monitoring capacity during deployment..."
     
     while true; do
-        # Check deployment status
+        # Перевірте статус розгортання
         deployment_status=$(az deployment group list \
             --resource-group "$resource_group" \
             --query "[0].properties.provisioningState" -o tsv)
@@ -689,7 +685,7 @@ monitor_deployment_capacity() {
             break
         fi
         
-        # Check current resource usage
+        # Перевірте поточне використання ресурсів
         current_resources=$(az resource list \
             --resource-group "$resource_group" \
             --query "length([])")
@@ -699,7 +695,6 @@ monitor_deployment_capacity() {
     done
 }
 ```
-
 
 ## 🔗 Інтеграція з AZD
 
@@ -721,7 +716,6 @@ hooks:
       echo "Pre-flight checks passed, proceeding with deployment"
 ```
 
-
 ## Найкращі практики
 
 1. **Завжди виконуйте перевірки потужностей** перед розгортанням у нових регіонах
@@ -734,10 +728,10 @@ hooks:
 
 ## Наступні кроки
 
-- [Посібник з вибору SKU](sku-selection.md) – Вибір оптимальних рівнів послуг
-- [Перевірки перед розгортанням](preflight-checks.md) – Автоматизовані скрипти перевірки
-- [Шпаргалка](../../resources/cheat-sheet.md) – Швидкі команди для довідки
-- [Глосарій](../../resources/glossary.md) – Терміни та визначення
+- [Посібник з вибору SKU](sku-selection.md) - Вибір оптимальних рівнів послуг
+- [Перевірки перед розгортанням](preflight-checks.md) - Автоматизовані скрипти перевірки
+- [Шпаргалка](../../resources/cheat-sheet.md) - Швидкі команди для довідки
+- [Глосарій](../../resources/glossary.md) - Терміни та визначення
 
 ## Додаткові ресурси
 
@@ -755,5 +749,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Відмова від відповідальності**:  
-Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, звертаємо вашу увагу, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ мовою оригіналу слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний переклад людиною. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+Цей документ був перекладений за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ на його рідній мові слід вважати авторитетним джерелом. Для критичної інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникають внаслідок використання цього перекладу.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,40 +1,40 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T13:19:25+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-23T22:50:17+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "my"
 }
 -->
-# AZD ဖြင့် AI Workload များကို ထုတ်လုပ်မှုအဆင့်သို့ ရောက်ရန်အကောင်းဆုံးနည်းလမ်းများ
+# AZD ဖြင့် ထုတ်လုပ်မှုအဆင့် AI Workload အကောင်းဆုံးအလေ့အကျင့်များ
 
-**အခန်းအကြောင်းအရာများ:**
+**အခန်းအညွှန်း:**
 - **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံများ](../../README.md)
-- **📖 လက်ရှိအခန်း**: အခန်း ၈ - ထုတ်လုပ်မှုနှင့် စီးပွားရေးပုံစံများ
-- **⬅️ ယခင်အခန်း**: [အခန်း ၇: ပြဿနာရှာဖွေခြင်း](../troubleshooting/debugging.md)
-- **⬅️ ဆက်စပ်အကြောင်းအရာ**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၈ - ထုတ်လုပ်မှုနှင့် စီးပွားရေးလုပ်ငန်းပုံစံများ
+- **⬅️ ယခင်အခန်း**: [အခန်း ၇: ပြဿနာများကို ဖြေရှင်းခြင်း](../troubleshooting/debugging.md)
+- **⬅️ ဆက်စပ်အခန်း**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎯 သင်ခန်းစာပြီးစီးမှု**: [AZD အခြေခံများ](../../README.md)
 
 ## အကျဉ်းချုပ်
 
-ဒီလမ်းညွှန်စာအုပ်မှာ Azure Developer CLI (AZD) ကို အသုံးပြုပြီး ထုတ်လုပ်မှုအဆင့် AI workload များကို deploy လုပ်ရန်အတွက် အကောင်းဆုံးနည်းလမ်းများကို ဖော်ပြထားပါတယ်။ Azure AI Foundry Discord အသိုင်းအဝိုင်းနှင့် အမှန်တကယ် customer deployment များမှ ရရှိသော အကြံပြုချက်များအပေါ် အခြေခံပြီး ထုတ်လုပ်မှု AI စနစ်များတွင် အများဆုံးကြုံတွေ့ရသော စိန်ခေါ်မှုများကို ဖြေရှင်းပေးထားပါတယ်။
+ဤလမ်းညွှန်သည် Azure Developer CLI (AZD) ကို အသုံးပြု၍ ထုတ်လုပ်မှုအဆင့် AI workload များကို တင်သွင်းရန်အတွက် အကောင်းဆုံးအလေ့အကျင့်များကို စုံလင်စွာ ဖော်ပြထားသည်။ Microsoft Foundry Discord အသိုင်းအဝိုင်းနှင့် အမှန်တကယ်သော ဖောက်သည်တင်သွင်းမှုများမှ အကြံပြုချက်များအပေါ် အခြေခံ၍ ထုတ်လုပ်မှု AI စနစ်များတွင် အများဆုံး ကြုံတွေ့ရသော စိန်ခေါ်မှုများကို ဖြေရှင်းပေးသည်။
 
-## ဖြေရှင်းထားသော အဓိကစိန်ခေါ်မှုများ
+## ဖြေရှင်းထားသော အဓိက စိန်ခေါ်မှုများ
 
-အသိုင်းအဝိုင်းမှ မဲပေးမှုရလဒ်များအပေါ် အခြေခံပြီး developer များကြုံတွေ့ရသော အဓိကစိန်ခေါ်မှုများမှာ:
+အသိုင်းအဝိုင်းဆွေးနွေးမှုရလဒ်များအပေါ် အခြေခံ၍ ဒီအခန်းမှာ ဖော်ပြထားတဲ့ အဓိက developer စိန်ခေါ်မှုတွေကတော့ -
 
-- **၄၅%** multi-service AI deployment များတွင် အခက်အခဲရှိသည်
-- **၃၈%** credential နှင့် secret စီမံခန့်ခွဲမှုတွင် ပြဿနာရှိသည်  
-- **၃၅%** ထုတ်လုပ်မှုအဆင့် readiness နှင့် scaling ကို ခက်ခဲစေသည်
-- **၃၂%** ကုန်ကျစရိတ်ကို ပိုမိုကောင်းမွန်စွာ optimize လုပ်ရန် လိုအပ်သည်
-- **၂၉%** monitoring နှင့် troubleshooting ကို တိုးတက်စေရန် လိုအပ်သည်
+- **၄၅%** Multi-service AI တင်သွင်းမှုတွင် အခက်အခဲရှိသည်
+- **၃၈%** အတည်ပြုချက်နှင့် လျှို့ဝှက်ချက် စီမံခန့်ခွဲမှုတွင် ပြဿနာရှိသည်  
+- **၃၅%** ထုတ်လုပ်မှုအဆင့်သင့်ဖြစ်မှုနှင့် အရွယ်အစားချဲ့ထွင်မှုကို ခက်ခဲစေသည်
+- **၃၂%** ကုန်ကျစရိတ် အကောင်းဆုံးဖြစ်စေရန် မူဝါဒများလိုအပ်သည်
+- **၂၉%** စောင့်ကြည့်မှုနှင့် ပြဿနာရှာဖွေမှုကို တိုးတက်စေရန် လိုအပ်သည်
 
 ## ထုတ်လုပ်မှု AI အတွက် Architecture ပုံစံများ
 
 ### ပုံစံ ၁: Microservices AI Architecture
 
-**အသုံးပြုရန်အချိန်**: အစွမ်းထက်သော AI application များတွင် အစွမ်းအလွန် functionalities များပါဝင်သောအခါ
+**အသုံးပြုရန်အချိန်**: အစွမ်းထက်သောစွမ်းရည်များစွာပါဝင်သော ရှုပ်ထွေးသော AI အက်ပလီကေးရှင်းများ
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -125,15 +125,15 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## လုံခြုံရေးအကောင်းဆုံးနည်းလမ်းများ
+## လုံခြုံရေးအကောင်းဆုံးအလေ့အကျင့်များ
 
 ### ၁. Zero-Trust Security Model
 
-**အကောင်အထည်ဖော်မှုနည်းလမ်း**:
+**အကောင်အထည်ဖော်မှု မူဝါဒ**:
 - Authentication မရှိဘဲ service-to-service ဆက်သွယ်မှုမရှိပါ
-- API call များအားလုံး managed identities ကို အသုံးပြုပါ
+- API ခေါ်ဆိုမှုအားလုံးသည် managed identities ကို အသုံးပြုသည်
 - Private endpoints ဖြင့် network isolation
-- Least privilege access controls
+- အနည်းဆုံး privilege access controls
 
 ```bicep
 // Managed Identity for each service
@@ -249,7 +249,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## စွမ်းဆောင်ရည်နှင့် Scaling
+## စွမ်းဆောင်ရည်နှင့် အရွယ်အစားချဲ့ထွင်မှု
 
 ### ၁. Auto-Scaling Strategies
 
@@ -365,14 +365,14 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 ကုန်ကျစရိတ် Optimize လုပ်ခြင်း
+## 💰 ကုန်ကျစရိတ် အကောင်းဆုံးဖြစ်စေရန်
 
 ### ၁. Resource Right-Sizing
 
 **Environment-Specific Configurations**:
 
 ```bash
-# Development environment
+# ဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# ထုတ်လုပ်မှုပတ်ဝန်းကျင်
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI Cost Management**:
 
 ```typescript
-// Application-level token optimization
+// အက်ပ်လီကေးရှင်းအဆင့်တွင် တိုကင်အာနိသင်ပြုလုပ်ခြင်း
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // အသုံးပြုသူရဲ့ input ကိုမဖြတ်ပစ်ဘဲ context ကိုဖြတ်ပစ်ပါ
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,13 +453,13 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // ခန့်မှန်းခြေ: 1 တိုကင် ≈ 4 အက္ခရာ
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Monitoring နှင့် Observability
+## စောင့်ကြည့်မှုနှင့် Observability
 
 ### ၁. Comprehensive Application Insights
 
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# လိုအပ်သောဝန်ဆောင်မှုများအားလုံးလည်ပတ်နေသည်ကိုစစ်ဆေးပါ
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# OpenAI မော်ဒယ်များ၏ဖြန့်ဝေမှုများကိုအတည်ပြုပါ
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,66 +830,66 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# AI ဝန်ဆောင်မှုချိတ်ဆက်မှုကိုစမ်းသပ်ပါ
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## ထုတ်လုပ်မှုအဆင့် Readiness Checklist
+## ထုတ်လုပ်မှုအဆင့်သင့်ဖြစ်မှု စစ်ဆေးစာရင်း
 
 ### လုံခြုံရေး ✅
-- [ ] Managed identities ဖြင့် service များအားလုံးကို အသုံးပြုထားသည်
-- [ ] Secrets များကို Key Vault တွင် သိမ်းဆည်းထားသည်
-- [ ] Private endpoints များကို configure လုပ်ထားသည်
-- [ ] Network security groups များကို အကောင်အထည်ဖော်ထားသည်
-- [ ] RBAC ကို least privilege ဖြင့် အသုံးပြုထားသည်
-- [ ] Public endpoints များတွင် WAF ကို enable လုပ်ထားသည်
+- [ ] Managed identities ဖြင့် service အားလုံးကို အသုံးပြုထားသည်
+- [ ] Secrets ကို Key Vault တွင် သိမ်းဆည်းထားသည်
+- [ ] Private endpoints ကို ဖော်ပြထားသည်
+- [ ] Network security groups ကို အကောင်အထည်ဖော်ထားသည်
+- [ ] RBAC ကို အနည်းဆုံး privilege ဖြင့် အသုံးပြုထားသည်
+- [ ] Public endpoints တွင် WAF ကို enabled လုပ်ထားသည်
 
 ### စွမ်းဆောင်ရည် ✅
-- [ ] Auto-scaling ကို configure လုပ်ထားသည်
-- [ ] Caching ကို implement လုပ်ထားသည်
-- [ ] Load balancing ကို setup လုပ်ထားသည်
-- [ ] Static content အတွက် CDN ကို အသုံးပြုထားသည်
-- [ ] Database connection pooling ကို configure လုပ်ထားသည်
-- [ ] Token usage optimization ကို ပြုလုပ်ထားသည်
+- [ ] Auto-scaling ကို ဖော်ပြထားသည်
+- [ ] Caching ကို အကောင်အထည်ဖော်ထားသည်
+- [ ] Load balancing ကို စီစဉ်ထားသည်
+- [ ] CDN ကို static content အတွက် အသုံးပြုထားသည်
+- [ ] Database connection pooling ကို ဖော်ပြထားသည်
+- [ ] Token usage optimization ကို စီစဉ်ထားသည်
 
-### Monitoring ✅
-- [ ] Application Insights ကို configure လုပ်ထားသည်
-- [ ] Custom metrics များကို သတ်မှတ်ထားသည်
-- [ ] Alerting rules များကို setup လုပ်ထားသည်
+### စောင့်ကြည့်မှု ✅
+- [ ] Application Insights ကို ဖော်ပြထားသည်
+- [ ] Custom metrics ကို သတ်မှတ်ထားသည်
+- [ ] Alerting rules ကို စီစဉ်ထားသည်
 - [ ] Dashboard ကို ဖန်တီးထားသည်
-- [ ] Health checks ကို implement လုပ်ထားသည်
-- [ ] Log retention policies များကို သတ်မှတ်ထားသည်
+- [ ] Health checks ကို ဖော်ပြထားသည်
+- [ ] Log retention policies ကို စီစဉ်ထားသည်
 
 ### ယုံကြည်စိတ်ချမှု ✅
-- [ ] Multi-region deployment ကို ပြုလုပ်ထားသည်
-- [ ] Backup နှင့် recovery အစီအစဉ်ကို ပြုလုပ်ထားသည်
-- [ ] Circuit breakers ကို implement လုပ်ထားသည်
-- [ ] Retry policies ကို configure လုပ်ထားသည်
-- [ ] Graceful degradation ကို ပြုလုပ်ထားသည်
-- [ ] Health check endpoints များကို implement လုပ်ထားသည်
+- [ ] Multi-region deployment ကို စီစဉ်ထားသည်
+- [ ] Backup နှင့် recovery plan ကို ဖော်ပြထားသည်
+- [ ] Circuit breakers ကို ဖော်ပြထားသည်
+- [ ] Retry policies ကို စီစဉ်ထားသည်
+- [ ] Graceful degradation ကို စီစဉ်ထားသည်
+- [ ] Health check endpoints ကို ဖော်ပြထားသည်
 
-### ကုန်ကျစရိတ်စီမံခန့်ခွဲမှု ✅
-- [ ] Budget alerts များကို configure လုပ်ထားသည်
-- [ ] Resource right-sizing ကို ပြုလုပ်ထားသည်
-- [ ] Dev/test discounts များကို အသုံးပြုထားသည်
-- [ ] Reserved instances များကို ဝယ်ယူထားသည်
+### ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု ✅
+- [ ] Budget alerts ကို စီစဉ်ထားသည်
+- [ ] Resource right-sizing ကို စီစဉ်ထားသည်
+- [ ] Dev/test discounts ကို အသုံးပြုထားသည်
+- [ ] Reserved instances ကို ဝယ်ယူထားသည်
 - [ ] Cost monitoring dashboard ကို ဖန်တီးထားသည်
-- [ ] Regular cost reviews များကို ပြုလုပ်ထားသည်
+- [ ] Regular cost reviews ကို စီစဉ်ထားသည်
 
 ### အညီအဖွဲ့ ✅
-- [ ] Data residency requirements များကို ဖြည့်ဆည်းထားသည်
-- [ ] Audit logging ကို enable လုပ်ထားသည်
-- [ ] Compliance policies များကို အသုံးပြုထားသည်
-- [ ] Security baselines များကို implement လုပ်ထားသည်
-- [ ] Regular security assessments များကို ပြုလုပ်ထားသည်
-- [ ] Incident response plan ကို ပြုလုပ်ထားသည်
+- [ ] Data residency requirements ကို ဖြည့်ဆည်းထားသည်
+- [ ] Audit logging ကို enabled လုပ်ထားသည်
+- [ ] Compliance policies ကို အသုံးပြုထားသည်
+- [ ] Security baselines ကို ဖော်ပြထားသည်
+- [ ] Regular security assessments ကို စီစဉ်ထားသည်
+- [ ] Incident response plan ကို စီစဉ်ထားသည်
 
-## စွမ်းဆောင်ရည် Benchmarks
+## စွမ်းဆောင်ရည် စံချိန်များ
 
-### ထုတ်လုပ်မှုအဆင့် Metrics များ
+### ထုတ်လုပ်မှုအဆင့် Metrics ပုံမှန်
 
 | Metric | Target | Monitoring |
 |--------|--------|------------|
@@ -903,7 +903,7 @@ echo "Infrastructure validation completed successfully!"
 ### Load Testing
 
 ```bash
-# Load testing script for AI applications
+# AI အက်ပလီကေးရှင်းများအတွက် Load testing စာရေးခြင်း script
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -911,45 +911,47 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 အသိုင်းအဝိုင်းအကောင်းဆုံးနည်းလမ်းများ
+## 🤝 အသိုင်းအဝိုင်းအကောင်းဆုံးအလေ့အကျင့်များ
 
-Azure AI Foundry Discord အသိုင်းအဝိုင်းမှ အကြံပြုချက်များအပေါ် အခြေခံပြီး:
+Microsoft Foundry Discord အသိုင်းအဝိုင်းမှ အကြံပြုချက်များအပေါ် အခြေခံ၍ -
 
 ### အသိုင်းအဝိုင်းမှ အကောင်းဆုံးအကြံပြုချက်များ:
 
-1. **အသေးစားစတင်ပြီး၊ တဖြည်းဖြည်း Scale လုပ်ပါ**: အခြေခံ SKUs များဖြင့် စတင်ပြီး အသုံးပြုမှုအပေါ် အခြေခံ၍ တိုးချဲ့ပါ
-2. **အရာအားလုံးကို Monitor လုပ်ပါ**: စတင်ချိန်မှစ၍ monitoring ကို ပြုလုပ်ပါ
-3. **လုံခြုံရေးကို အလိုအလျောက်လုပ်ဆောင်ပါ**: Infrastructure as code ကို အသုံးပြု၍ လုံခြုံရေးကို တိကျစွာ ပြုလုပ်ပါ
-4. **စမ်းသပ်မှုကို အပြည့်အဝလုပ်ပါ**: AI-specific testing ကို သင်၏ pipeline တွင် ထည့်သွင်းပါ
-5. **ကုန်ကျစရိတ်ကို စီမံပါ**: Token usage ကို monitor လုပ်ပြီး budget alerts များကို စောစောမှ သတ်မှတ်ပါ
+1. **Start Small, Scale Gradually**: အခြေခံ SKUs များဖြင့် စတင်ပြီး အမှန်တကယ်အသုံးပြုမှုအပေါ် အခြေခံ၍ အရွယ်အစားချဲ့ထွင်ပါ
+2. **Monitor Everything**: ပထမနေ့မှစ၍ စုံလင်သော စောင့်ကြည့်မှုကို စီစဉ်ပါ
+3. **Automate Security**: လုံခြုံရေးကို infrastructure as code ဖြင့် အဆင့်မြှင့်ပါ
+4. **Test Thoroughly**: AI-specific testing ကို သင့်ရဲ့ pipeline မှာ ထည့်သွင်းပါ
+5. **Plan for Costs**: Token usage ကို စောင့်ကြည့်ပြီး budget alerts ကို စောစီးစွာ စီစဉ်ပါ
 
 ### ရှောင်ရှားရန် အများဆုံး Pitfalls:
 
-- ❌ API keys များကို code တွင် hardcode လုပ်ခြင်း
-- ❌ Monitoring ကို မပြုလုပ်ခြင်း
-- ❌ Cost optimization ကို မလုပ်ဆောင်ခြင်း
+- ❌ API keys ကို code ထဲမှာ hardcoding လုပ်ခြင်း
+- ❌ စုံလင်သော စောင့်ကြည့်မှုကို မစီစဉ်ခြင်း
+- ❌ ကုန်ကျစရိတ် optimization ကို မလေ့လာခြင်း
 - ❌ Failure scenarios မစမ်းသပ်ခြင်း
-- ❌ Health checks မပါဘဲ deploy လုပ်ခြင်း
+- ❌ Health checks မပါဘဲ တင်သွင်းခြင်း
 
-## အပိုဆောင်းအရင်းအမြစ်များ
+## အပိုဆောင်း အရင်းအမြစ်များ
 
-- **Azure Well-Architected Framework**: [AI workload အတွက် လမ်းညွှန်ချက်](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Documentation**: [တရားဝင်စာရွက်စာတမ်းများ](https://learn.microsoft.com/azure/ai-studio/)
+- **Azure Well-Architected Framework**: [AI workload လမ်းညွှန်ချက်များ](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [တရားဝင်စာရွက်စာတမ်းများ](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
 
 ---
 
-**အခန်းအကြောင်းအရာများ:**
+**အခန်းအညွှန်း:**
 - **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံများ](../../README.md)
-- **📖 လက်ရှိအခန်း**: အခန်း ၈ - ထုတ်လုပ်မှုနှင့် စီးပွားရေးပုံစံများ
-- **⬅️ ယခင်အခန်း**: [အခန်း ၇: ပြဿနာရှာဖွေခြင်း](../troubleshooting/debugging.md)
-- **⬅️ ဆက်စပ်အကြောင်းအရာ**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၈ - ထုတ်လုပ်မှုနှင့် စီးပွားရေးလုပ်ငန်းပုံစံများ
+- **⬅️ ယခင်အခန်း**: [အခန်း ၇: ပြဿနာများကို ဖြေရှင်းခြင်း](../troubleshooting/debugging.md)
+- **⬅️ ဆက်စပ်အခန်း**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎆 သင်ခန်းစာပြီးစီးမှု**: [AZD အခြေခံများ](../../README.md)
 
-**သတိပြုရန်**: ထုတ်လုပ်မှု AI workload များအတွက် စီမံကိန်းချမှတ်ခြင်း၊ monitoring ပြုလုပ်ခြင်းနှင့် အဆက်မပြတ် optimize လုပ်ခြင်းတို့ကို ဂရုစိုက်ရန်လိုအပ်သည်။ ဒီပုံစံများကို စတင်အသုံးပြုပြီး သင့်လိုအပ်ချက်များအပေါ် အခြေခံ၍ ပြုပြင်ပြောင်းလဲပါ။
+**သတိပြုရန်**: ထုတ်လုပ်မှုအဆင့် AI workload များသည် စီစဉ်မှု, စောင့်ကြည့်မှုနှင့် ဆက်လက်တိုးတက်မှုများကို ဂရုစိုက်စွာ လိုအပ်သည်။ ဤပုံစံများဖြင့် စတင်ပြီး သင်၏ အထူးလိုအပ်ချက်များအတွက် အဆင့်မြှင့်ပါ။
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူလဘာသာစကားဖြင့် အာဏာတရားရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှုမှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

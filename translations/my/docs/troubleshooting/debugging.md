@@ -1,86 +1,86 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T13:23:44+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-23T22:46:47+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "my"
 }
 -->
 # AZD တင်သွင်းမှုများအတွက် Debugging လမ်းညွှန်
 
-**အခန်းအကြောင်းအရာများ:**
-- **📚 သင်ခန်းစာ မူလစာမျက်နှာ**: [AZD For Beginners](../../README.md)
+**အခန်းအကြောင်းအရာ:**
+- **📚 သင်ခန်းစာအိမ်**: [AZD အခြေခံများ](../../README.md)
 - **📖 လက်ရှိအခန်း**: အခန်း ၇ - ပြဿနာရှာဖွေခြင်းနှင့် Debugging
-- **⬅️ ယခင်အခန်း**: [Common Issues](common-issues.md)
-- **➡️ နောက်အခန်း**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
-- **🚀 နောက်အခန်း**: [အခန်း ၈: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **⬅️ အရင်**: [ပုံမှန်ပြဿနာများ](common-issues.md)
+- **➡️ နောက်တစ်ခု**: [AI အထူးပြဿနာရှာဖွေခြင်း](ai-troubleshooting.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၈: ထုတ်လုပ်မှုနှင့် စီးပွားရေးပုံစံများ](../microsoft-foundry/production-ai-practices.md)
 
-## နိဒါန်း
+## အကျဉ်းချုပ်
 
-ဒီလမ်းညွှန်မှာ Azure Developer CLI တင်သွင်းမှုများနှင့်ပတ်သက်သော ရှုပ်ထွေးသောပြဿနာများကို ရှာဖွေဖြေရှင်းရန် အဆင့်မြင့် Debugging များ၊ ကိရိယာများနှင့် နည်းလမ်းများကို ဖော်ပြထားပါတယ်။ ပြဿနာရှာဖွေမှုစနစ်များ၊ လော့ဖိုင်ခွဲခြမ်းစိတ်ဖြာမှုနည်းလမ်းများ၊ စွမ်းဆောင်ရည်ကို အကဲဖြတ်ခြင်းနည်းလမ်းများနှင့် အဆင့်မြင့် Diagnostic ကိရိယာများကို သင်ယူပြီး တင်သွင်းမှုနှင့် အလုပ်လည်ပတ်မှုဆိုင်ရာ ပြဿနာများကို ထိရောက်စွာ ဖြေရှင်းနိုင်ပါမည်။
+ဒီလမ်းညွှန်မှာ Azure Developer CLI တင်သွင်းမှုများနှင့်ပတ်သက်သော ရှုပ်ထွေးသောပြဿနာများကို ရှာဖွေဖြေရှင်းရန်အတွက် အဆင့်မြင့် Debugging နည်းလမ်းများ၊ ကိရိယာများနှင့်နည်းစနစ်များကို ဖော်ပြထားပါတယ်။ ပြဿနာရှာဖွေခြင်းနည်းလမ်းများ၊ လော့ဂ်ခွဲခြမ်းစိတ်ဖြာနည်းလမ်းများ၊ စွမ်းဆောင်ရည်ကို ပရိုဖိုင်းလုပ်ခြင်းနှင့် အဆင့်မြင့် Diagnostic ကိရိယာများကို သင်ယူပြီး တင်သွင်းမှုနှင့် လုပ်ဆောင်မှုဆိုင်ရာပြဿနာများကို ထိရောက်စွာဖြေရှင်းနိုင်ပါမည်။
 
 ## သင်ယူရမည့်ရည်မှန်းချက်များ
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်သင်ယူပြီးနောက်၊ သင်သည်:
-- Azure Developer CLI ပြဿနာများအတွက် စနစ်တကျ Debugging နည်းလမ်းများကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
-- အဆင့်မြင့် လော့ဖိုင်များကို ပြင်ဆင်ခြင်းနှင့် ခွဲခြမ်းစိတ်ဖြာခြင်းနည်းလမ်းများကို နားလည်မည်
-- စွမ်းဆောင်ရည်ကို အကဲဖြတ်ခြင်းနှင့် စောင့်ကြည့်မှုနည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်မည်
-- Azure Diagnostic ကိရိယာများနှင့် ဝန်ဆောင်မှုများကို အသုံးပြု၍ ရှုပ်ထွေးသော ပြဿနာများကို ဖြေရှင်းနိုင်မည်
-- ကွန်ယက် Debugging နှင့် လုံခြုံရေးပြဿနာရှာဖွေမှုနည်းလမ်းများကို အသုံးပြုနိုင်မည်
-- ပြဿနာရှာဖွေမှုနှင့် သတိပေးမှုများကို စနစ်တကျ ပြင်ဆင်နိုင်မည်
+ဒီလမ်းညွှန်ကိုပြီးမြောက်ပါက၊ သင်သည်:
+- Azure Developer CLI ပြဿနာများအတွက် စနစ်တကျ Debugging နည်းလမ်းများကို ကျွမ်းကျင်စွာအသုံးပြုနိုင်မည်
+- အဆင့်မြင့်လော့ဂ်ဖွဲ့စည်းမှုနှင့် လော့ဂ်ခွဲခြမ်းစိတ်ဖြာနည်းလမ်းများကို နားလည်မည်
+- စွမ်းဆောင်ရည်ကို ပရိုဖိုင်းလုပ်ခြင်းနှင့် မော်နီတာလုပ်ခြင်းနည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်မည်
+- Azure Diagnostic ကိရိယာများနှင့် ဝန်ဆောင်မှုများကို အသုံးပြု၍ ရှုပ်ထွေးသောပြဿနာများကို ဖြေရှင်းနိုင်မည်
+- Network Debugging နှင့် လုံခြုံရေးပြဿနာရှာဖွေခြင်းနည်းလမ်းများကို အသုံးပြုနိုင်မည်
+- ပြဿနာများကို ကြိုတင်ရှာဖွေဖော်ထုတ်ရန်အတွက် စုံလင်သော မော်နီတာလုပ်ခြင်းနှင့် အချက်ပေးခြင်းကို ဖွဲ့စည်းနိုင်မည်
 
-## သင်ယူပြီးနောက်ရလဒ်များ
+## သင်ယူပြီးရရှိမည့်ရလဒ်များ
 
-ဒီလမ်းညွှန်ကို ပြီးမြောက်သင်ယူပြီးနောက်၊ သင်သည်:
-- TRIAGE နည်းလမ်းကို အသုံးပြု၍ ရှုပ်ထွေးသော တင်သွင်းမှုပြဿနာများကို စနစ်တကျ Debugging ပြုလုပ်နိုင်မည်
-- လော့ဖိုင်များနှင့် ခြေရာခံမှုအချက်အလက်များကို ပြင်ဆင်ပြီး ခွဲခြမ်းစိတ်ဖြာနိုင်မည်
-- Azure Monitor, Application Insights နှင့် Diagnostic ကိရိယာများကို ထိရောက်စွာ အသုံးပြုနိုင်မည်
-- ကွန်ယက်ချိတ်ဆက်မှု၊ Authentication နှင့် ခွင့်ပြုချက်ပြဿနာများကို ကိုယ်တိုင် Debugging ပြုလုပ်နိုင်မည်
-- စွမ်းဆောင်ရည် စောင့်ကြည့်မှုနှင့် အကောင်းဆုံးအခြေအနေများကို အကောင်အထည်ဖော်နိုင်မည်
-- ထပ်တလဲလဲဖြစ်ပေါ်နေသော ပြဿနာများအတွက် စိတ်ကြိုက် Debugging စက်ရုပ်များနှင့် Automation များကို ဖန်တီးနိုင်မည်
+ပြီးမြောက်ပါက၊ သင်သည်:
+- TRIAGE နည်းလမ်းကို အသုံးပြု၍ ရှုပ်ထွေးသောတင်သွင်းမှုပြဿနာများကို စနစ်တကျ Debugging လုပ်နိုင်မည်
+- စုံလင်သော လော့ဂ်နှင့် Trace အချက်အလက်များကို ဖွဲ့စည်းပြီး ခွဲခြမ်းစိတ်ဖြာနိုင်မည်
+- Azure Monitor, Application Insights နှင့် Diagnostic ကိရိယာများကို ထိရောက်စွာအသုံးပြုနိုင်မည်
+- Network ချိတ်ဆက်မှု၊ Authentication နှင့် Permission ပြဿနာများကို ကိုယ်တိုင် Debugging လုပ်နိုင်မည်
+- စွမ်းဆောင်ရည်ကို မော်နီတာလုပ်ခြင်းနှင့် အဆင့်မြှင့်တင်ခြင်းနည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်မည်
+- ထပ်တလဲလဲဖြစ်သောပြဿနာများအတွက် စိတ်ကြိုက် Debugging Scripts နှင့် Automation ဖန်တီးနိုင်မည်
 
 ## Debugging နည်းလမ်း
 
 ### TRIAGE နည်းလမ်း
-- **T**ime: ပြဿနာစတင်ဖြစ်ပေါ်ချိန်က ဘယ်အချိန်လဲ?
-- **R**eproduce: ပြဿနာကို ထပ်မံဖြစ်ပေါ်အောင် ပြုလုပ်နိုင်ပါသလား?
-- **I**solate: ဘယ်ကွန်ပိုနင့်မှာ ပြဿနာရှိနေလဲ?
-- **A**nalyze: လော့ဖိုင်တွေက ဘာပြောပြနေသလဲ?
-- **G**ather: သက်ဆိုင်ရာ အချက်အလက်အားလုံးကို စုဆောင်းပါ
-- **E**scalate: အကူအညီတောင်းဖို့ လိုအပ်တဲ့အချိန်မှာ ဘယ်လိုလုပ်မလဲ?
+- **T**ime: ပြဿနာက ဘယ်အချိန်မှာ စတင်ဖြစ်လာတာလဲ?
+- **R**eproduce: ပြဿနာကို အမြဲတမ်း ပြန်လည်ဖြစ်ပေါ်စေနိုင်ပါသလား?
+- **I**solate: ဘယ်ကွန်ပိုနင့်က Fail ဖြစ်နေလဲ?
+- **A**nalyze: လော့ဂ်တွေက ဘာပြောနေလဲ?
+- **G**ather: သက်ဆိုင်တဲ့ အချက်အလက်အားလုံးကို စုဆောင်းပါ
+- **E**scalate: အကူအညီတောင်းဖို့ အချိန်ရောက်ပြီလား?
 
-## Debug Mode ဖွင့်ရန်
+## Debug Mode ဖွင့်ခြင်း
 
 ### Environment Variables
 ```bash
-# Enable comprehensive debugging
+# အကျွမ်းတဝင် အမှားရှာဖွေမှုကို ဖွင့်ပါ
 export AZD_DEBUG=true
 export AZD_LOG_LEVEL=debug
 export AZURE_CORE_DIAGNOSTICS_DEBUG=true
 
-# Azure CLI debugging
+# Azure CLI အမှားရှာဖွေမှု
 export AZURE_CLI_DIAGNOSTICS=true
 
-# Disable telemetry for cleaner output
+# သန့်ရှင်းသော output အတွက် telemetry ကို ပိတ်ပါ
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Debug Configuration
 ```bash
-# Set debug configuration globally
+# အပြည့်အဝ debug configuration ကို သတ်မှတ်ပါ။
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
 
-# Enable trace logging
+# trace logging ကို ဖွင့်ပါ။
 azd config set trace.enabled true
 azd config set trace.outputPath ./debug-traces
 ```
 
-## 📊 Log ခွဲခြမ်းစိတ်ဖြာမှုနည်းလမ်းများ
+## 📊 လော့ဂ်ခွဲခြမ်းစိတ်ဖြာနည်းလမ်းများ
 
-### Log Level များကို နားလည်ခြင်း
+### Log Levels နားလည်ခြင်း
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -90,25 +90,25 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Structured Log ခွဲခြမ်းစိတ်ဖြာမှု
+### Structured Log Analysis
 ```bash
-# Filter logs by level
+# အဆင့်အလိုက် မှတ်တမ်းများကို စစ်ထုတ်ပါ
 azd logs --level error --since 1h
 
-# Filter by service
+# ဝန်ဆောင်မှုအလိုက် စစ်ထုတ်ပါ
 azd logs --service api --level debug
 
-# Export logs for analysis
+# ခွဲခြမ်းစိတ်ဖြာရန် မှတ်တမ်းများကို တင်ပို့ပါ
 azd logs --output json > deployment-logs.json
 
-# Parse JSON logs with jq
+# jq ဖြင့် JSON မှတ်တမ်းများကို ဖော်ထုတ်ပါ
 cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
 ```
 
 ### Log Correlation
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - ဝန်ဆောင်မှုများအကြား log များကို ဆက်စပ်ပါ
 
 TRACE_ID=$1
 if [ -z "$TRACE_ID" ]; then
@@ -118,13 +118,13 @@ fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
+# ဝန်ဆောင်မှုအားလုံးအတွင်း ရှာဖွေပါ
 for service in web api worker; do
     echo "=== $service logs ==="
     azd logs --service $service | grep "$TRACE_ID"
 done
 
-# Search Azure logs
+# Azure log များကို ရှာဖွေပါ
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -132,19 +132,19 @@ az monitor activity-log list --correlation-id "$TRACE_ID"
 
 ### Azure Resource Graph Queries
 ```bash
-# Query resources by tags
+# တက်ဂ်များဖြင့်အရင်းအမြစ်များကိုရှာဖွေပါ
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find failed deployments
+# မအောင်မြင်သော deployment များကိုရှာပါ
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check resource health
+# အရင်းအမြစ်ကျန်းမာရေးကိုစစ်ဆေးပါ
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### ကွန်ယက် Debugging
+### Network Debugging
 ```bash
-# Test connectivity between services
+# ဝန်ဆောင်မှုများအကြား ချိတ်ဆက်မှုကို စမ်းသပ်ပါ
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -159,13 +159,13 @@ test_connectivity() {
         --output table
 }
 
-# Usage
+# အသုံးပြုမှု
 test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Container Debugging
 ```bash
-# Debug container app issues
+# ကွန်တိန်နာအက်ပ်ပြဿနာများကို Debug လုပ်ပါ
 debug_container() {
     local app_name=$1
     local resource_group=$2
@@ -183,9 +183,9 @@ debug_container() {
 }
 ```
 
-### Database ချိတ်ဆက်မှု Debugging
+### Database Connection Debugging
 ```bash
-# Debug database connectivity
+# ဒေတာဘေ့စ်ချိတ်ဆက်မှုကို Debug လုပ်ပါ
 debug_database() {
     local db_server=$1
     local db_name=$2
@@ -204,9 +204,9 @@ debug_database() {
 
 ## 🔬 စွမ်းဆောင်ရည် Debugging
 
-### Application စွမ်းဆောင်ရည် စောင့်ကြည့်မှု
+### Application Performance Monitoring
 ```bash
-# Enable Application Insights debugging
+# အက်ပလီကေးရှင်းအိုင်ဆိုက် Debugging ကိုဖွင့်ပါ
 export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   "role": {
     "name": "myapp-debug"
@@ -221,7 +221,7 @@ export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
   }
 }'
 
-# Custom performance monitoring
+# စိတ်ကြိုက်စွမ်းဆောင်ရည်ကြည့်ရှုခြင်း
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -238,9 +238,9 @@ monitor_performance() {
 }
 ```
 
-### အရင်းအမြစ်အသုံးပြုမှု ခွဲခြမ်းစိတ်ဖြာမှု
+### Resource Utilization Analysis
 ```bash
-# Monitor resource usage
+# အရင်းအမြစ်အသုံးပြုမှုကိုကြည့်ရှုပါ
 monitor_resources() {
     local resource_group=$1
     
@@ -262,7 +262,7 @@ monitor_resources() {
 }
 ```
 
-## 🧪 စမ်းသပ်မှုနှင့် အတည်ပြုမှု
+## 🧪 စမ်းသပ်ခြင်းနှင့် အတည်ပြုခြင်း
 
 ### Integration Test Debugging
 ```bash
@@ -273,12 +273,12 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Set debug environment
+# အပြစ်ရှာပတ်ဝန်းကျင်ကို သတ်မှတ်ပါ
 export NODE_ENV=test
 export DEBUG=*
 export LOG_LEVEL=debug
 
-# Get service endpoints
+# ဝန်ဆောင်မှုအဆုံးစွန်များကို ရယူပါ
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -286,7 +286,7 @@ echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test health endpoints
+# ကျန်းမာရေးအဆုံးစွန်များကို စမ်းသပ်ပါ
 test_health() {
     local service=$1
     local url=$2
@@ -305,17 +305,17 @@ test_health() {
     fi
 }
 
-# Run tests
+# စမ်းသပ်မှုများကို လုပ်ဆောင်ပါ
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run custom integration tests
+# စိတ်ကြိုက် ပေါင်းစည်းစမ်းသပ်မှုများကို လုပ်ဆောင်ပါ
 npm run test:integration
 ```
 
-### Debugging အတွက် Load Testing
+### Load Testing for Debugging
 ```bash
-# Simple load test to identify performance bottlenecks
+# စွမ်းဆောင်ရည်အခက်အခဲများကိုဖော်ထုတ်ရန်ရိုးရှင်းသော load စမ်းသပ်မှု
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -323,32 +323,32 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Using Apache Bench (install: apt-get install apache2-utils)
+    # Apache Bench ကိုအသုံးပြုခြင်း (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Extract key metrics
+    # အဓိက metrics များကိုထုတ်ယူပါ
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check for failures
+    # မအောင်မြင်မှုများကိုစစ်ဆေးပါ
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 အခြေခံဖွဲ့စည်းမှု Debugging
+## 🔧 အခြေခံအဆောက်အအုံ Debugging
 
 ### Bicep Template Debugging
 ```bash
-# Validate Bicep templates with detailed output
+# Bicep template များကို အသေးစိတ် output ဖြင့် အတည်ပြုပါ
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Syntax validation
+    # Syntax အတည်ပြုခြင်း
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Lint validation
+    # Lint အတည်ပြုခြင်း
     az bicep lint --file "$template_file"
     
     # What-if deployment
@@ -358,7 +358,7 @@ validate_bicep() {
         --parameters @main.parameters.json
 }
 
-# Debug template deployment
+# Template deployment ကို Debug လုပ်ပါ
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,20 +377,20 @@ debug_deployment() {
 }
 ```
 
-### အရင်းအမြစ်အခြေအနေ ခွဲခြမ်းစိတ်ဖြာမှု
+### Resource State Analysis
 ```bash
-# Analyze resource states for inconsistencies
+# အရင်းအမြစ်အခြေအနေများကို မတူညီမှုများအတွက် ချဉ်းကပ်ပါ။
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources with their states
+    # အရင်းအမြစ်အားလုံးကို ၎င်းတို့၏ အခြေအနေများနှင့်အတူ စာရင်းပြုပါ။
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for failed resources
+    # မအောင်မြင်သော အရင်းအမြစ်များကို စစ်ဆေးပါ။
     failed_resources=$(az resource list --resource-group "$resource_group" \
         --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
         --output tsv)
@@ -406,9 +406,9 @@ analyze_resources() {
 
 ## 🔒 လုံခြုံရေး Debugging
 
-### Authentication လမ်းကြောင်း Debugging
+### Authentication Flow Debugging
 ```bash
-# Debug Azure authentication
+# Azure အတည်ပြုမှုကို အမှားရှာပါ
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
@@ -416,7 +416,7 @@ debug_auth() {
     echo "=== Token Information ==="
     token=$(az account get-access-token --query accessToken -o tsv)
     
-    # Decode JWT token (requires jq and base64)
+    # JWT token ကို ဖော်ထုတ်ပါ (jq နှင့် base64 လိုအပ်သည်)
     echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
     
     echo "=== Role Assignments ==="
@@ -424,7 +424,7 @@ debug_auth() {
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Debug Key Vault access
+# Key Vault ဝင်ရောက်မှုကို အမှားရှာပါ
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,16 +440,16 @@ debug_keyvault() {
 }
 ```
 
-### ကွန်ယက်လုံခြုံရေး Debugging
+### Network Security Debugging
 ```bash
-# Debug network security groups
+# နက်ဝက်ကာကွယ်ရေးအုပ်စုများကို အမှားရှာပါ
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check security rules
+    # လုံခြုံရေးစည်းမျဉ်းများကို စစ်ဆေးပါ
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -458,7 +458,7 @@ debug_network_security() {
 }
 ```
 
-## 📱 အထူးသတ်မှတ်ထားသော Debugging
+## 📱 အထူး Application Debugging
 
 ### Node.js Application Debugging
 ```javascript
@@ -468,7 +468,7 @@ const debug = require('debug')('app:debug');
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Log request details
+    // တောင်းဆိုမှုအသေးစိတ်များကို မှတ်တမ်းတင်ပါ
     debug(`${req.method} ${req.url}`, {
         headers: req.headers,
         query: req.query,
@@ -477,7 +477,7 @@ module.exports = (req, res, next) => {
         ip: req.ip
     });
     
-    // Override res.json to log responses
+    // တုံ့ပြန်မှုများကို မှတ်တမ်းတင်ရန် res.json ကို အစားထိုးပါ
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
@@ -491,7 +491,7 @@ module.exports = (req, res, next) => {
 
 ### Database Query Debugging
 ```javascript
-// database-debug.js - Database debugging utilities
+// database-debug.js - ဒေတာဘေ့စ် အမှားရှာဖွေမှု အသုံးအဆောင်များ
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
@@ -521,10 +521,10 @@ module.exports = DebuggingPool;
 
 ## 🚨 အရေးပေါ် Debugging လုပ်ငန်းစဉ်များ
 
-### Production ပြဿနာတုံ့ပြန်မှု
+### Production Issue Response
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Emergency production debugging
+# emergency-debug.sh - အရေးပေါ်ထုတ်လုပ်မှုအဆင်မပြေမှုရှာဖွေခြင်း
 
 set -e
 
@@ -540,10 +540,10 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to correct environment
+# မှန်ကန်သောပတ်ဝန်းကျင်သို့ပြောင်းပါ
 azd env select "$ENVIRONMENT"
 
-# Collect critical information
+# အရေးကြီးသောအချက်အလက်များစုဆောင်းပါ
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
 cat emergency-status.json | jq '.services[].endpoint'
@@ -582,26 +582,26 @@ echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Rollback လုပ်ငန်းစဉ်များ
+### Rollback Procedures
 ```bash
-# Quick rollback script
+# အမြန်ပြန်လည်ပြင်ဆင်ရေး script
 quick_rollback() {
     local environment=$1
     local backup_timestamp=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
     
-    # Switch environment
+    # ပတ်ဝန်းကျင်ကိုပြောင်းရန်
     azd env select "$environment"
     
-    # Rollback application
+    # အက်ပလီကေးရှင်းကိုပြန်လည်ပြင်ဆင်ရန်
     azd deploy --rollback --timestamp "$backup_timestamp"
     
-    # Verify rollback
+    # ပြန်လည်ပြင်ဆင်မှုကိုအတည်ပြုရန်
     echo "Verifying rollback..."
     azd show
     
-    # Test critical endpoints
+    # အရေးကြီးသော endpoint များကိုစမ်းသပ်ရန်
     WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
     curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
     
@@ -609,25 +609,25 @@ quick_rollback() {
 }
 ```
 
-## 📊 Debugging Dashboard များ
+## 📊 Debugging Dashboards
 
-### စိတ်ကြိုက် Monitoring Dashboard
+### Custom Monitoring Dashboard
 ```bash
-# Create Application Insights queries for debugging
+# အက်ဉ်းချုပ်များကို Debugging အတွက် Application Insights queries ဖန်တီးပါ
 create_debug_queries() {
     local app_insights_name=$1
     
-    # Query for errors
+    # အမှားများအတွက် Query
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query for performance issues
+    # စွမ်းဆောင်ရည်ပြဿနာများအတွက် Query
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query for dependency failures
+    # အချင်းချင်းမအောင်မြင်မှုများအတွက် Query
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,7 +636,7 @@ create_debug_queries() {
 
 ### Log Aggregation
 ```bash
-# Aggregate logs from multiple sources
+# အမျိုးမျိုးသောအရင်းအမြစ်များမှ မှတ်တမ်းများကိုစုစည်းပါ
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
     
@@ -656,14 +656,14 @@ aggregate_logs() {
 }
 ```
 
-## 🔗 အဆင့်မြင့် အရင်းအမြစ်များ
+## 🔗 အဆင့်မြင့်အရင်းအမြစ်များ
 
-### စိတ်ကြိုက် Debug Scripts
-`scripts/debug/` directory ထဲတွင် ဖန်တီးပါ:
-- `health-check.sh` - ကျန်းမာရေးစစ်ဆေးမှုအပြည့်အစုံ
-- `performance-test.sh` - စွမ်းဆောင်ရည်စမ်းသပ်မှု အလိုအလျောက်ပြုလုပ်ခြင်း
-- `log-analyzer.py` - အဆင့်မြင့် Log ခွဲခြမ်းစိတ်ဖြာမှု
-- `resource-validator.sh` - အခြေခံဖွဲ့စည်းမှု အတည်ပြုမှု
+### Custom Debug Scripts
+`scripts/debug/` directory ကို ဖန်တီးပြီး:
+- `health-check.sh` - Comprehensive health checking
+- `performance-test.sh` - Automated performance testing
+- `log-analyzer.py` - Advanced log parsing and analysis
+- `resource-validator.sh` - Infrastructure validation
 
 ### Monitoring Integration
 ```yaml
@@ -682,34 +682,36 @@ hooks:
       fi
 ```
 
-## အကောင်းဆုံးအလေ့အထများ
+## အကောင်းဆုံးအလေ့အကျင့်များ
 
-1. **Debug Logging ကို အမြဲဖွင့်ထားပါ** (Non-Production ပတ်ဝန်းကျင်များတွင်သာ)
-2. **ပြဿနာများအတွက် ပြန်လည်ဖြစ်ပေါ်စေသော စမ်းသပ်မှုများ ဖန်တီးပါ**
-3. **Debugging လုပ်ငန်းစဉ်များကို သင့်အဖွဲ့အတွက် မှတ်တမ်းတင်ထားပါ**
-4. **ကျန်းမာရေးစစ်ဆေးမှုများနှင့် စောင့်ကြည့်မှုများကို အလိုအလျောက်ပြုလုပ်ပါ**
-5. **Debug Tools များကို သင့်အက်ပ်နှင့်အတူ အမြဲအပ်ဒိတ်လုပ်ပါ**
+1. **Debug logging ကို အမြဲဖွင့်ထားပါ** production မဟုတ်သော ပတ်ဝန်းကျင်များတွင်
+2. **ပြဿနာများအတွက် ပြန်လည်စမ်းသပ်နိုင်သော Test Cases ဖန်တီးပါ**
+3. **Debugging လုပ်ငန်းစဉ်များကို သင့်အဖွဲ့အတွက် Documentation လုပ်ပါ**
+4. **Health Checks နှင့် Monitoring ကို အလိုအလျောက်လုပ်ဆောင်ပါ**
+5. **Debugging ကိရိယာများကို သင့် Application ပြောင်းလဲမှုများနှင့်အတူ Update လုပ်ပါ**
 6. **ပြဿနာမရှိသောအချိန်များတွင် Debugging လုပ်ငန်းစဉ်များကို လေ့ကျင့်ပါ**
 
-## နောက်တစ်ဆင့်
+## နောက်တစ်ဆင့်များ
 
-- [Capacity Planning](../pre-deployment/capacity-planning.md) - အရင်းအမြစ်လိုအပ်ချက်များကို စီစဉ်ပါ
-- [SKU Selection](../pre-deployment/sku-selection.md) - သင့်တော်သော ဝန်ဆောင်မှုအဆင့်များကို ရွေးချယ်ပါ
-- [Preflight Checks](../pre-deployment/preflight-checks.md) - တင်သွင်းမှုမတိုင်မီ အတည်ပြုမှု
-- [Cheat Sheet](../../resources/cheat-sheet.md) - အမြန်ရယူနိုင်သော အမိန့်များ
-
----
-
-**သတိရပါ**: Debugging က စနစ်တကျ၊ ပြည့်စုံမှုနှင့် သည်းခံမှုအပေါ် မူတည်ပါတယ်။ ဒီကိရိယာများနှင့် နည်းလမ်းများက သင့်ကို ပြဿနာများကို ပိုမိုမြန်ဆန်စွာနှင့် ထိရောက်စွာ ဖြေရှင်းနိုင်စေပါမည်။
+- [Capacity Planning](../pre-deployment/capacity-planning.md) - အရင်းအမြစ်လိုအပ်ချက်များကို စီမံပါ
+- [SKU Selection](../pre-deployment/sku-selection.md) - သင့်ဝန်ဆောင်မှုအဆင့်များကို ရွေးချယ်ပါ
+- [Preflight Checks](../pre-deployment/preflight-checks.md) - တင်သွင်းမှုမတိုင်မီ အတည်ပြုခြင်း
+- [Cheat Sheet](../../resources/cheat-sheet.md) - အမြန်အသုံးပြုနိုင်သော Commands
 
 ---
 
-**အခန်းအကြောင်းအရာများ**
-- **ယခင်သင်ခန်းစာ**: [Common Issues](common-issues.md)
+**သတိပြုပါ**: Debugging က စနစ်တကျ၊ အလေးအနက်ထားပြီး သည်းခံမှုရှိဖို့အရေးကြီးပါတယ်။ ဒီကိရိယာများနှင့်နည်းလမ်းများက သင့်ကို ပြဿနာများကို ပိုမိုမြန်ဆန်ပြီး ထိရောက်စွာ ရှာဖွေဖြေရှင်းနိုင်စေပါမည်။
+
+---
+
+**အခန်းအကြောင်းအရာ**
+- **အရင်သင်ခန်းစာ**: [ပုံမှန်ပြဿနာများ](common-issues.md)
 
 - **နောက်သင်ခန်းစာ**: [Capacity Planning](../pre-deployment/capacity-planning.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေပါသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

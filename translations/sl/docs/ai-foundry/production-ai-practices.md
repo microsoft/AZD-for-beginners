@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T13:00:07+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-23T21:32:04+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "sl"
 }
@@ -13,22 +13,22 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
 - **📖 Trenutno poglavje**: Poglavje 8 - Produkcijski in podjetniški vzorci
 - **⬅️ Prejšnje poglavje**: [Poglavje 7: Odpravljanje težav](../troubleshooting/debugging.md)
-- **⬅️ Prav tako povezano**: [Delavnica AI laboratorij](ai-workshop-lab.md)
-- **🎯 Tečaj zaključen**: [AZD za začetnike](../../README.md)
+- **⬅️ Prav tako povezano**: [AI delavnica](ai-workshop-lab.md)
+- **🎯 Zaključek tečaja**: [AZD za začetnike](../../README.md)
 
 ## Pregled
 
-Ta vodič ponuja celovite najboljše prakse za uvajanje produkcijsko pripravljenih AI delovnih obremenitev z uporabo Azure Developer CLI (AZD). Na podlagi povratnih informacij skupnosti Azure AI Foundry Discord in resničnih primerov strank te prakse obravnavajo najpogostejše izzive v produkcijskih AI sistemih.
+Ta vodič ponuja celovite najboljše prakse za uvajanje produkcijsko pripravljenih AI delovnih obremenitev z uporabo Azure Developer CLI (AZD). Na podlagi povratnih informacij skupnosti Microsoft Foundry Discord in resničnih implementacij pri strankah te prakse obravnavajo najpogostejše izzive v produkcijskih AI sistemih.
 
 ## Ključni izzivi
 
-Na podlagi rezultatov ankete v skupnosti so to najpogostejši izzivi, s katerimi se soočajo razvijalci:
+Na podlagi rezultatov ankete naše skupnosti so to glavni izzivi, s katerimi se soočajo razvijalci:
 
 - **45 %** se sooča s težavami pri uvajanju več storitev AI
 - **38 %** ima težave z upravljanjem poverilnic in skrivnosti  
-- **35 %** težko dosega produkcijsko pripravljenost in skaliranje
+- **35 %** težko dosega pripravljenost za produkcijo in skaliranje
 - **32 %** potrebuje boljše strategije za optimizacijo stroškov
-- **29 %** zahteva izboljšano spremljanje in odpravljanje težav
+- **29 %** potrebuje izboljšano spremljanje in odpravljanje težav
 
 ## Arhitekturni vzorci za produkcijski AI
 
@@ -76,9 +76,9 @@ services:
     host: containerapp
 ```
 
-### Vzorec 2: Procesiranje AI na podlagi dogodkov
+### Vzorec 2: Dogodkovno usmerjena AI obdelava
 
-**Kdaj uporabiti**: Procesiranje v serijah, analiza dokumentov, asinhroni delovni tokovi
+**Kdaj uporabiti**: Serijska obdelava, analiza dokumentov, asinhroni poteki dela
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -327,7 +327,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Uravnavanje obremenitve in upravljanje prometa
+### 3. Uravnoteženje obremenitve in upravljanje prometa
 
 **Prehod aplikacij z WAF**:
 
@@ -367,12 +367,12 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Optimizacija stroškov
 
-### 1. Pravilno dimenzioniranje virov
+### 1. Prilagajanje virov
 
 **Konfiguracije specifične za okolje**:
 
 ```bash
-# Development environment
+# Razvojno okolje
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Proizvodno okolje
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -435,7 +435,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **Upravljanje stroškov OpenAI**:
 
 ```typescript
-// Application-level token optimization
+// Optimizacija žetonov na ravni aplikacije
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -445,7 +445,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncate context, not user input
+      // Skrajšaj kontekst, ne uporabniškega vnosa
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -453,7 +453,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Rough estimation: 1 token ≈ 4 characters
+    // Groba ocena: 1 žeton ≈ 4 znaki
     return Math.ceil(text.length / 4);
   }
 }
@@ -461,7 +461,7 @@ class TokenOptimizer {
 
 ## Spremljanje in opazovanje
 
-### 1. Celoviti vpogledi v aplikacijo
+### 1. Celoviti vpogledi v aplikacije
 
 ```bicep
 // Application Insights with advanced features
@@ -606,7 +606,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Obnova po katastrofi in visoka razpoložljivost
+## Obnova po nesrečah in visoka razpoložljivost
 
 ### 1. Uvajanje v več regijah
 
@@ -670,7 +670,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Varnostno kopiranje podatkov in obnova
+### 2. Varnostno kopiranje in obnova podatkov
 
 ```bicep
 // Backup configuration for critical data
@@ -723,7 +723,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## DevOps in integracija CI/CD
 
-### 1. Delovni tok GitHub Actions
+### 1. Potek dela z GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -812,7 +812,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
+# Preveri, ali delujejo vse zahtevane storitve
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -822,7 +822,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validate OpenAI model deployments
+# Preveri namestitve modelov OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -830,50 +830,50 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test AI service connectivity
+# Preizkusi povezljivost AI storitve
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Kontrolni seznam za produkcijsko pripravljenost
+## Kontrolni seznam za pripravljenost na produkcijo
 
 ### Varnost ✅
 - [ ] Vse storitve uporabljajo upravljane identitete
-- [ ] Skrivnosti shranjene v Key Vault
-- [ ] Zasebne končne točke konfigurirane
-- [ ] Implementirane skupine za varnost omrežja
+- [ ] Skrivnosti so shranjene v Key Vault
+- [ ] Konfigurirane zasebne končne točke
+- [ ] Implementirane omrežne varnostne skupine
 - [ ] RBAC z najmanjšimi privilegiji
 - [ ] WAF omogočen na javnih končnih točkah
 
 ### Zmogljivost ✅
-- [ ] Samodejno skaliranje konfigurirano
-- [ ] Predpomnjenje implementirano
-- [ ] Uravnavanje obremenitve nastavljeno
+- [ ] Konfigurirano samodejno skaliranje
+- [ ] Implementirano predpomnjenje
+- [ ] Nastavljeno uravnoteženje obremenitve
 - [ ] CDN za statične vsebine
 - [ ] Združevanje povezav z bazo podatkov
 - [ ] Optimizacija uporabe žetonov
 
 ### Spremljanje ✅
-- [ ] Konfigurirani vpogledi v aplikacijo
+- [ ] Konfigurirani vpogledi v aplikacije
 - [ ] Določene prilagojene metrike
 - [ ] Nastavljena pravila za opozarjanje
 - [ ] Ustvarjena nadzorna plošča
-- [ ] Implementirani pregledi zdravja
-- [ ] Politike zadrževanja dnevnikov
+- [ ] Implementirano preverjanje zdravja
+- [ ] Politike hrambe dnevnikov
 
 ### Zanesljivost ✅
 - [ ] Uvajanje v več regijah
 - [ ] Načrt varnostnega kopiranja in obnove
 - [ ] Implementirani odklopniki
 - [ ] Konfigurirane politike ponovnih poskusov
-- [ ] Postopno poslabšanje
+- [ ] Postopno zmanjševanje funkcionalnosti
 - [ ] Končne točke za preverjanje zdravja
 
 ### Upravljanje stroškov ✅
 - [ ] Nastavljena opozorila o proračunu
-- [ ] Pravilno dimenzioniranje virov
+- [ ] Prilagajanje virov
 - [ ] Uporabljeni popusti za razvoj/testiranje
 - [ ] Kupljene rezervirane instance
 - [ ] Nadzorna plošča za spremljanje stroškov
@@ -883,9 +883,9 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Izpolnjene zahteve glede lokacije podatkov
 - [ ] Omogočeno beleženje revizij
 - [ ] Uporabljene politike skladnosti
-- [ ] Implementirani varnostni temelji
+- [ ] Implementirane varnostne osnove
 - [ ] Redne varnostne ocene
-- [ ] Načrt odziva na incidente
+- [ ] Načrt za odziv na incidente
 
 ## Merila zmogljivosti
 
@@ -893,17 +893,17 @@ echo "Infrastructure validation completed successfully!"
 
 | Metrika | Cilj | Spremljanje |
 |--------|--------|------------|
-| **Čas odziva** | < 2 sekundi | Vpogledi v aplikacijo |
+| **Odzivni čas** | < 2 sekundi | Vpogledi v aplikacije |
 | **Razpoložljivost** | 99,9 % | Spremljanje razpoložljivosti |
-| **Stopnja napak** | < 0,1 % | Dnevniki aplikacije |
+| **Stopnja napak** | < 0,1 % | Dnevniki aplikacij |
 | **Uporaba žetonov** | < $500/mesec | Upravljanje stroškov |
 | **Sočasni uporabniki** | 1000+ | Testiranje obremenitve |
-| **Čas obnove** | < 1 ura | Testi obnove po katastrofi |
+| **Čas obnove** | < 1 ura | Testi obnove po nesrečah |
 
 ### Testiranje obremenitve
 
 ```bash
-# Load testing script for AI applications
+# Skripta za obremenitveno testiranje aplikacij AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -913,28 +913,28 @@ python scripts/load_test.py \
 
 ## 🤝 Najboljše prakse skupnosti
 
-Na podlagi povratnih informacij skupnosti Azure AI Foundry Discord:
+Na podlagi povratnih informacij skupnosti Microsoft Foundry Discord:
 
 ### Najboljša priporočila skupnosti:
 
-1. **Začnite majhno, postopoma skalirajte**: Začnite z osnovnimi SKU-ji in skalirajte glede na dejansko uporabo
+1. **Začnite majhno, postopoma povečujte**: Začnite z osnovnimi SKU-ji in povečujte glede na dejansko uporabo
 2. **Spremljajte vse**: Nastavite celovito spremljanje že od prvega dne
 3. **Avtomatizirajte varnost**: Uporabite infrastrukturo kot kodo za dosledno varnost
-4. **Temeljito testirajte**: Vključite testiranje specifično za AI v svojo cevovod
+4. **Temeljito testirajte**: Vključite testiranje specifično za AI v svoj potek dela
 5. **Načrtujte stroške**: Spremljajte uporabo žetonov in zgodaj nastavite opozorila o proračunu
 
 ### Pogoste napake, ki se jim je treba izogniti:
 
-- ❌ Trdo kodiranje API ključev v kodi
+- ❌ Trdo kodiranje API ključev v kodo
 - ❌ Ne nastavitev ustreznega spremljanja
-- ❌ Ignoriranje optimizacije stroškov
+- ❌ Zanemarjanje optimizacije stroškov
 - ❌ Ne testiranje scenarijev napak
-- ❌ Uvajanje brez pregledov zdravja
+- ❌ Uvajanje brez preverjanja zdravja
 
 ## Dodatni viri
 
 - **Azure dobro zasnovan okvir**: [Vodič za AI delovne obremenitve](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Dokumentacija Azure AI Foundry**: [Uradna dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
+- **Dokumentacija Microsoft Foundry**: [Uradna dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
 - **Predloge skupnosti**: [Azure vzorci](https://github.com/Azure-Samples)
 - **Skupnost Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
 
@@ -944,12 +944,14 @@ Na podlagi povratnih informacij skupnosti Azure AI Foundry Discord:
 - **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
 - **📖 Trenutno poglavje**: Poglavje 8 - Produkcijski in podjetniški vzorci
 - **⬅️ Prejšnje poglavje**: [Poglavje 7: Odpravljanje težav](../troubleshooting/debugging.md)
-- **⬅️ Prav tako povezano**: [Delavnica AI laboratorij](ai-workshop-lab.md)
-- **🎆 Tečaj zaključen**: [AZD za začetnike](../../README.md)
+- **⬅️ Prav tako povezano**: [AI delavnica](ai-workshop-lab.md)
+- **🎆 Zaključek tečaja**: [AZD za začetnike](../../README.md)
 
 **Zapomnite si**: Produkcijske AI delovne obremenitve zahtevajo skrbno načrtovanje, spremljanje in stalno optimizacijo. Začnite s temi vzorci in jih prilagodite svojim specifičnim zahtevam.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Omejitev odgovornosti**:  
 Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

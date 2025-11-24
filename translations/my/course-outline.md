@@ -1,342 +1,318 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "aace36eff845763a5b041a4ed9a33e02",
-  "translation_date": "2025-09-25T01:38:43+00:00",
+  "original_hash": "2a0861541126250c3558d667e9b13c50",
+  "translation_date": "2025-11-23T22:29:17+00:00",
   "source_file": "course-outline.md",
   "language_code": "my"
 }
 -->
-# AZD သင်ခန်းစာများအတွက် အခြေခံ: သင်ခန်းစာအကြောင်းအရာနှင့် သင်ယူမှုစနစ်
+# AZD သင်ခန်းစာများအတွက် အခြေခံသင်တန်း: သင်ခန်းစာအကြောင်းအရာနှင့် သင်ယူမှုဖွံ့ဖြိုးရေး
 
-## သင်ခန်းစာအကြောင်းအရာ
+## သင်ခန်းစာအကျဉ်းချုပ်
 
-Azure Developer CLI (azd) ကို အဆင့်လိုက်သင်ယူမှုအတွက် စနစ်တကျစီစဉ်ထားသော အခန်းများမှတဆင့် ကျွမ်းကျင်ပါ။ **Azure AI Foundry ကို ပေါင်းစပ်ပြီး AI အက်ပလီကေးရှင်းများကို တင်သွင်းခြင်းအပေါ် အထူးအာရုံစိုက်ထားသည်။**
+Azure Developer CLI (azd) ကို အဆင့်လိုက်သင်ယူမှုအတွက် စီစဉ်ထားသော အခန်းများမှတဆင့် ကျွမ်းကျင်မှုရရှိပါမည်။ **Microsoft Foundry ပေါင်းစည်းမှုဖြင့် AI အက်ပလီကေးရှင်းများကို တင်သွင်းခြင်းအပေါ် အထူးအာရုံစိုက်ထားသည်။**
 
-### အခေတ်မီ Developer များအတွက် ဒီသင်ခန်းစာက အရေးကြီးတဲ့အကြောင်း
+### အခေတ်မီ Developer များအတွက် သင်ခန်းစာသည် အရေးကြီးသောအကြောင်းရင်း
 
-Azure AI Foundry Discord အသိုင်းအဝိုင်းမှ အချက်အလက်များအရ **Developer 45% က AZD ကို AI workload များအတွက် အသုံးပြုချင်**ပေမယ့် အောက်ပါအခက်အခဲများကြုံတွေ့ရသည်။
+Microsoft Foundry Discord အသိုင်းအဝိုင်းမှ အချက်အလက်များအပေါ် အခြေခံ၍ **Developer များ၏ ၄၅% သည် AZD ကို AI workload များအတွက် အသုံးပြုလိုကြသည်** သို့သော် အောက်ပါအခက်အခဲများကြုံတွေ့ရသည်။
 - AI ဝန်ဆောင်မှုများစွာပါဝင်သော architecture များ၏ ရှုပ်ထွေးမှု
 - Production AI တင်သွင်းမှုအတွက် အကောင်းဆုံးအလေ့အကျင့်များ  
-- Azure AI ဝန်ဆောင်မှုများကို ပေါင်းစပ်ခြင်းနှင့် ဖွဲ့စည်းခြင်း
-- AI workload များအတွက် ကုန်ကျစရိတ်ကို အကောင်းဆုံးဖြေရှင်းခြင်း
-- AI-specific တင်သွင်းမှုများ၏ အခက်အခဲများကို ဖြေရှင်းခြင်း
+- Azure AI ဝန်ဆောင်မှုများကို ပေါင်းစည်းခြင်းနှင့် ဖွဲ့စည်းခြင်း
+- AI workload များအတွက် ကုန်ကျစရိတ်ကို အကောင်းဆုံးဖြစ်စေရန်
+- AI-specific တင်သွင်းမှုအခက်အခဲများကို ဖြေရှင်းခြင်း
 
-### အဓိက သင်ယူရမည့် ရည်မှန်းချက်များ
+### အဓိက သင်ယူရမည့်ရည်ရွယ်ချက်များ
 
-ဒီသင်ခန်းစာကို ပြီးမြောက်စွာ လေ့လာပြီးပါက၊ သင်သည်:
-- **AZD အခြေခံများကို ကျွမ်းကျင်**: အဓိကအကြောင်းအရာများ၊ ထည့်သွင်းခြင်းနှင့် ဖွဲ့စည်းခြင်း
-- **AI အက်ပလီကေးရှင်းများကို တင်သွင်းခြင်း**: AZD ကို Azure AI Foundry ဝန်ဆောင်မှုများနှင့် အသုံးပြုခြင်း
-- **Infrastructure as Code ကို အကောင်အထည်ဖော်ခြင်း**: Azure ရင်းမြစ်များကို Bicep template များဖြင့် စီမံခန့်ခွဲခြင်း
-- **Deployments များကို Troubleshoot လုပ်ခြင်း**: ရှေ့ဆောင်ပြဿနာများကို ဖြေရှင်းခြင်းနှင့် Debug လုပ်ခြင်း
-- **Production အတွက် Optimize လုပ်ခြင်း**: လုံခြုံရေး၊ အတိုင်းအတာချဲ့ထွင်ခြင်း၊ စောင့်ကြည့်ခြင်းနှင့် ကုန်ကျစရိတ်စီမံခန့်ခွဲမှု
+ဒီစီစဉ်ထားသော သင်ခန်းစာကို ပြီးမြောက်ပါက၊ သင်သည်:
+- **AZD အခြေခံများကို ကျွမ်းကျင်မှုရရှိမည်**: အဓိကအကြောင်းအရာများ၊ ထည့်သွင်းခြင်းနှင့် ဖွဲ့စည်းခြင်း
+- **AI အက်ပလီကေးရှင်းများကို တင်သွင်းခြင်း**: AZD ကို Microsoft Foundry ဝန်ဆောင်မှုများနှင့် အသုံးပြုခြင်း
+- **Infrastructure as Code ကို အကောင်အထည်ဖော်ခြင်း**: Azure resources များကို Bicep templates ဖြင့် စီမံခန့်ခွဲခြင်း
+- **တင်သွင်းမှုများကို Troubleshoot လုပ်ခြင်း**: အခက်အခဲများကို ဖြေရှင်းခြင်းနှင့် ပြဿနာများကို Debug လုပ်ခြင်း
+- **Production အတွက် အကောင်းဆုံးဖြစ်စေရန်**: လုံခြုံရေး၊ အတိုင်းအတာချဲ့ထွင်ခြင်း၊ စောင့်ကြည့်ခြင်းနှင့် ကုန်ကျစရိတ်စီမံခန့်ခွဲမှု
 - **Multi-Agent Solutions တည်ဆောက်ခြင်း**: ရှုပ်ထွေးသော AI architecture များကို တင်သွင်းခြင်း
 
 ## 🎓 Workshop သင်ယူမှုအတွေ့အကြုံ
 
-### သင်ယူမှုပုံစံများ
-ဒီသင်ခန်းစာကို **ကိုယ်တိုင်အချိန်လိုက်သင်ယူမှု** နှင့် **Workshop session များ** နှစ်မျိုးစလုံးအတွက် ထောက်ပံ့ထားပြီး၊ AZD ကို လက်တွေ့ကျကျ အသုံးပြုရင်း ကျွမ်းကျင်မှုများကို interactive exercise များမှတဆင့် တိုးတက်စေသည်။
+### သင်ယူမှုပေးပို့မှုအတွက် အလွယ်တကူရွေးချယ်နိုင်သောရွေးချယ်မှုများ
+ဒီသင်ခန်းစာကို **ကိုယ်တိုင်အချိန်လိုက်သင်ယူမှု** နှင့် **Workshop session များ** နှစ်မျိုးစလုံးအတွက် ထောက်ပံ့ထားပြီး၊ AZD ကို လက်တွေ့ကျကျ အသုံးပြုရင်း ကျွမ်းကျင်မှုရရှိစေရန် interactive exercises များဖြင့် သင်ယူမှုကို ဖွံ့ဖြိုးစေသည်။
 
 #### 🚀 ကိုယ်တိုင်အချိန်လိုက်သင်ယူမှု
-**Individual Developer များနှင့် ဆက်လက်သင်ယူလိုသူများအတွက် အထူးသင့်လျော်သည်**
+**Individual Developer များနှင့် ဆက်လက်သင်ယူမှုအတွက် အကောင်းဆုံး**
 
-**Features:**
-- **Browser-Based Interface**: MkDocs-powered workshop ကို ဘရောက်ဇာမှတဆင့် အလွယ်တကူ အသုံးပြုနိုင်သည်
+**အင်္ဂါရပ်များ:**
+- **Browser-Based Interface**: MkDocs-powered workshop ကို ဘရောက်ဇာမည်သည့်အမျိုးအစားမှမဆို အသုံးပြုနိုင်သည်
 - **GitHub Codespaces Integration**: တစ်ချက်နှိပ်ရုံဖြင့် Development Environment ကို စတင်နိုင်သည်
-- **Interactive DevContainer Environment**: Local setup မလိုအပ်ဘဲ coding စတင်နိုင်သည်
-- **Progress Tracking**: Checkpoint များနှင့် validation exercise များပါဝင်သည်
+- **Interactive DevContainer Environment**: Local setup မလိုအပ်ဘဲ ချက်ချင်း Coding စတင်နိုင်သည်
+- **Progress Tracking**: Built-in checkpoints နှင့် validation exercises
 - **Community Support**: Azure Discord channel များမှ မေးခွန်းများနှင့် ပူးပေါင်းဆောင်ရွက်မှု
 
-**Learning Structure:**
+**သင်ယူမှုဖွဲ့စည်းမှု:**
 - **Flexible Timing**: အခန်းများကို ကိုယ်တိုင်အချိန်လိုက် သင်ယူနိုင်သည်
-- **Checkpoint System**: ရှုပ်ထွေးသောအကြောင်းအရာများကို သင်ယူမတိုင်မီ သင်ယူမှုကို အတည်ပြုနိုင်သည်
-- **Resource Library**: စုံလင်သော documentation, ဥပမာများနှင့် troubleshooting guide များ
+- **Checkpoint System**: ရှုပ်ထွေးသောအကြောင်းအရာများသို့ ရောက်ရှိမီ သင်ယူမှုကို အတည်ပြုခြင်း
+- **Resource Library**: အကျဉ်းချုပ် documentation, ဥပမာများနှင့် troubleshooting guide များ
 - **Portfolio Development**: Professional portfolio များအတွက် deploy လုပ်နိုင်သော project များတည်ဆောက်ခြင်း
 
-**Getting Started (Self-Paced):**
+**စတင်ခြင်း (ကိုယ်တိုင်အချိန်လိုက်):**
 ```bash
-# Option 1: GitHub Codespaces (Recommended)
-# Navigate to the repository and click "Code" → "Create codespace on main"
+# အရွေးချယ်မှု ၁: GitHub Codespaces (အကြံပြုထားသည်)
+# Repository သို့သွားပြီး "Code" → "Create codespace on main" ကိုနှိပ်ပါ
 
-# Option 2: Local Development
+# အရွေးချယ်မှု ၂: ဒေသတွင်းဖွံ့ဖြိုးမှု
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Follow setup instructions in workshop/README.md
+# workshop/README.md တွင်ရှိသော setup အညွှန်းများကိုလိုက်နာပါ
 ```
 
 #### 🏛️ Facilitated Workshop Sessions
-**Corporate Training, Bootcamp များနှင့် ပညာရေးအဖွဲ့အစည်းများအတွက် အထူးသင့်လျော်သည်**
+**Corporate Training, Bootcamp များနှင့် ပညာရေးအဖွဲ့အစည်းများအတွက် အကောင်းဆုံး**
 
-**Workshop Format Options:**
+**Workshop Format ရွေးချယ်မှုများ:**
 
 **📚 Academic Course Integration (8-12 weeks)**
-- **University Programs**: တစ်ဆယ်မီတာအတွင်း သင်ခန်းစာများ
-- **Bootcamp Format**: 3-5 ရက်အတွင်း အဆင့်မြင့်သင်ခန်းစာများ
-- **Corporate Training**: လစဉ်အဖွဲ့အစည်း session များ
-- **Assessment Framework**: Assignments, peer reviews, နှင့် project များ
+- **University Programs**: တစ်ဆယ်မာတာအတွင်း အပတ်စဉ် ၂ နာရီ session များ
+- **Bootcamp Format**: ၃-၅ ရက်အတွင်း တစ်နေ့ ၆-၈ နာရီ session များ
+- **Corporate Training**: လစဉ် Team session များနှင့် လက်တွေ့ project တည်ဆောက်ခြင်း
+- **Assessment Framework**: Graded assignments, peer reviews, နှင့် final projects
 
 **🚀 Intensive Workshop (1-3 days)**
 - **Day 1**: Foundation + AI Development (Chapters 1-2) - 6 နာရီ
 - **Day 2**: Configuration + Infrastructure (Chapters 3-4) - 6 နာရီ  
 - **Day 3**: Advanced Patterns + Production (Chapters 5-8) - 8 နာရီ
-- **Follow-up**: Optional 2-week mentorship
+- **Follow-up**: Optional 2-week mentorship for project completion
 
 **⚡ Executive Briefing (4-6 hours)**
-- **Strategic Overview**: AZD ရဲ့ အကျိုးကျေးဇူးနှင့် လုပ်ငန်းအပေါ် သက်ရောက်မှု (1 နာရီ)
-- **Hands-On Demo**: AI application တစ်ခုကို အဆုံးအထိ deploy လုပ်ခြင်း (2 နာရီ)
+- **Strategic Overview**: AZD value proposition နှင့် business impact (1 နာရီ)
+- **Hands-On Demo**: AI application ကို အဆုံးအထိ တင်သွင်းခြင်း (2 နာရီ)
 - **Architecture Review**: Enterprise patterns နှင့် governance (1 နာရီ)
 - **Implementation Planning**: အဖွဲ့အစည်းအတွင်း အသုံးပြုမှုစီမံချက် (1-2 နာရီ)
 
-#### 🛠️ Workshop Learning Methodology
-**Discovery → Deployment → Customization approach**
+#### 🛠️ Workshop သင်ယူမှုနည်းလမ်း
+**Discovery → Deployment → Customization နည်းလမ်းဖြင့် လက်တွေ့ကျကျ ကျွမ်းကျင်မှုရရှိစေရန်**
 
-**Phase 1: Discovery (45 minutes)**
-- **Template Exploration**: Azure AI Foundry template များကို လေ့လာခြင်း
+**Phase 1: Discovery (45 မိနစ်)**
+- **Template Exploration**: Azure AI Foundry template များနှင့် ဝန်ဆောင်မှုများကို စိစစ်ခြင်း
 - **Architecture Analysis**: Multi-agent patterns နှင့် deployment strategy များကို နားလည်ခြင်း
-- **Requirement Assessment**: အဖွဲ့အစည်းလိုအပ်ချက်များကို သတ်မှတ်ခြင်း
-- **Environment Setup**: Development environment နှင့် Azure resource များကို configure လုပ်ခြင်း
+- **Requirement Assessment**: အဖွဲ့အစည်းလိုအပ်ချက်များနှင့် အကန့်အသတ်များကို သတ်မှတ်ခြင်း
+- **Environment Setup**: Development environment နှင့် Azure resources များကို configure လုပ်ခြင်း
 
-**Phase 2: Deployment (2 hours)**
+**Phase 2: Deployment (2 နာရီ)**
 - **Guided Implementation**: AZD ဖြင့် AI application များကို တင်သွင်းခြင်း
-- **Service Configuration**: Azure AI service များကို configure လုပ်ခြင်း
-- **Security Implementation**: လုံခြုံရေး pattern များကို အသုံးပြုခြင်း
-- **Validation Testing**: Deployment များကို အတည်ပြုခြင်း
+- **Service Configuration**: Azure AI service များ၊ endpoint များနှင့် authentication ကို configure လုပ်ခြင်း
+- **Security Implementation**: Enterprise security patterns နှင့် access control များကို အသုံးပြုခြင်း
+- **Validation Testing**: တင်သွင်းမှုများကို အတည်ပြုခြင်းနှင့် အခက်အခဲများကို troubleshoot လုပ်ခြင်း
 
-**Phase 3: Customization (45 minutes)**
-- **Application Modification**: Template များကို လိုအပ်ချက်နှင့် ကိုက်ညီအောင် ပြင်ဆင်ခြင်း
+**Phase 3: Customization (45 မိနစ်)**
+- **Application Modification**: Template များကို သတ်မှတ်လိုအပ်ချက်များနှင့် ကိုက်ညီစေရန် ပြင်ဆင်ခြင်း
 - **Production Optimization**: Monitoring, cost management, နှင့် scaling strategy များကို အကောင်အထည်ဖော်ခြင်း
-- **Advanced Patterns**: Multi-agent coordination နှင့် ရှုပ်ထွေးသော architecture များကို လေ့လာခြင်း
-- **Next Steps Planning**: ဆက်လက်သင်ယူရန် လမ်းကြောင်းသတ်မှတ်ခြင်း
+- **Advanced Patterns**: Multi-agent coordination နှင့် ရှုပ်ထွေးသော architecture များကို စူးစမ်းခြင်း
+- **Next Steps Planning**: ဆက်လက်သင်ယူမှုအတွက် လမ်းကြောင်းသတ်မှတ်ခြင်း
 
-#### 🎯 Workshop Learning Outcomes
-**လက်တွေ့ကျကျ လေ့ကျင့်မှုမှတဆင့် တိုးတက်မှုများ**
+#### 🎯 Workshop သင်ယူမှုရလဒ်များ
+**လက်တွေ့ကျကျ လေ့ကျင့်မှုမှတဆင့် ဖွံ့ဖြိုးမှုရရှိသော ကျွမ်းကျင်မှုများ**
 
 **Technical Competencies:**
-- **Deploy Production AI Applications**: AI-powered solution များကို deploy လုပ်ခြင်း
-- **Infrastructure as Code Mastery**: Bicep template များကို တည်ဆောက်ခြင်း
-- **Multi-Agent Architecture**: AI agent solution များကို coordinate လုပ်ခြင်း
-- **Production Readiness**: လုံခြုံရေး၊ စောင့်ကြည့်မှုနှင့် governance pattern များကို အသုံးပြုခြင်း
-- **Troubleshooting Expertise**: Deployment နှင့် configuration ပြဿနာများကို ကိုယ်တိုင်ဖြေရှင်းခြင်း
+- **Deploy Production AI Applications**: AI-powered solution များကို အောင်မြင်စွာ တင်သွင်းခြင်းနှင့် configure လုပ်ခြင်း
+- **Infrastructure as Code Mastery**: Bicep template များကို တည်ဆောက်ခြင်းနှင့် စီမံခန့်ခွဲခြင်း
+- **Multi-Agent Architecture**: AI agent များကို ပေါင်းစည်းထားသော solution များကို တည်ဆောက်ခြင်း
+- **Production Readiness**: Security, monitoring, နှင့် governance patterns များကို အသုံးပြုခြင်း
+- **Troubleshooting Expertise**: တင်သွင်းမှုနှင့် configuration ပြဿနာများကို ကိုယ်တိုင်ဖြေရှင်းခြင်း
 
 **Professional Skills:**
-- **Project Leadership**: Cloud deployment initiative များတွင် technical team များကို ဦးဆောင်ခြင်း
-- **Architecture Design**: Azure solution များကို စီမံခန့်ခွဲခြင်း
-- **Knowledge Transfer**: AZD အကောင်းဆုံးအလေ့အကျင့်များကို သင်ကြားခြင်း
-- **Strategic Planning**: Cloud adoption strategy များကို အဖွဲ့အစည်းအတွင်း သက်ရောက်မှုရှိအောင်လုပ်ခြင်း
+- **Project Leadership**: Cloud deployment စီမံချက်များတွင် Technical Team များကို ဦးဆောင်ခြင်း
+- **Architecture Design**: Scalable, cost-effective Azure solution များကို ဒီဇိုင်းဆွဲခြင်း
+- **Knowledge Transfer**: AZD အကောင်းဆုံးအလေ့အကျင့်များကို အလုပ်ဖော်များကို သင်ကြားခြင်း
+- **Strategic Planning**: Cloud adoption strategy များကို အဖွဲ့အစည်းအတွင်း သက်ရောက်မှုရှိစေရန်
 
-#### 📋 Workshop Resources and Materials
-**Facilitator နှင့် Learner များအတွက် အပြည့်အစုံ toolkit**
+#### 📋 Workshop Resources နှင့် Materials
+**Facilitator များနှင့် သင်ယူသူများအတွက် အပြည့်အစုံ toolkit**
 
-**For Facilitators:**
+**Facilitator များအတွက်:**
 - **Instructor Guide**: [Workshop Facilitation Guide](workshop/docs/instructor-guide.md) - Session planning နှင့် delivery tips
-- **Presentation Materials**: Slide deck, architecture diagram, နှင့် demo script များ
-- **Assessment Tools**: Practical exercise, knowledge check, နှင့် evaluation rubric များ
-- **Technical Setup**: Environment configuration, troubleshooting guide, နှင့် backup plan များ
+- **Presentation Materials**: Slide deck များ၊ architecture diagram များနှင့် demo script များ
+- **Assessment Tools**: လက်တွေ့ကျကျ exercises, knowledge check များနှင့် အကဲဖြတ်မှု rubrics
+- **Technical Setup**: Environment configuration, troubleshooting guide များနှင့် backup plan များ
 
-**For Learners:**
+**သင်ယူသူများအတွက်:**
 - **Interactive Workshop Environment**: [Workshop Materials](workshop/README.md) - Browser-based learning platform
-- **Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - လမ်းညွှန်ချက်များ
-- **Reference Documentation**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-focused deep dive
-- **Community Resources**: Azure Discord channel, GitHub discussion, နှင့် expert support
+- **Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Implementation walkthrough များ
+- **Reference Documentation**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-focused deep dive များ
+- **Community Resources**: Azure Discord channel များ၊ GitHub discussion များနှင့် အထောက်အပံ့
 
 #### 🏢 Enterprise Workshop Implementation
-**အဖွဲ့အစည်းအတွင်း deployment နှင့် training strategy များ**
+**အဖွဲ့အစည်းအတွင်း တင်သွင်းမှုနှင့် သင်တန်းပေးမှု strategy များ**
 
 **Corporate Training Programs:**
-- **Developer Onboarding**: AZD အခြေခံများနှင့် orientation (2-4 weeks)
-- **Team Upskilling**: Developer အဖွဲ့များအတွက် လစဉ် workshop (1-2 days)
-- **Architecture Review**: Senior engineer နှင့် architect များအတွက် monthly session (4 hours)
-- **Leadership Briefings**: Executive workshop (half-day)
+- **Developer Onboarding**: AZD အခြေခံများနှင့် New hire orientation (2-4 weeks)
+- **Team Upskilling**: လစဉ် workshop များ (1-2 days)
+- **Architecture Review**: Senior engineers နှင့် architects များအတွက် လစဉ် session များ (4 hours)
+- **Leadership Briefings**: Technical decision maker များအတွက် Executive workshop များ (half-day)
 
 **Implementation Support:**
-- **Custom Workshop Design**: အဖွဲ့အစည်းလိုအပ်ချက်များအတွက် content များကို customize လုပ်ခြင်း
-- **Pilot Program Management**: Success metrics နှင့် feedback loop များပါဝင်သော structured rollout
-- **Ongoing Mentorship**: Project implementation အတွက် workshop ပြီးနောက် support
-- **Community Building**: Azure AI developer community များနှင့် knowledge sharing
+- **Custom Workshop Design**: အဖွဲ့အစည်းလိုအပ်ချက်များအတွက် အထူး content
+- **Pilot Program Management**: Structured rollout နှင့် success metrics
+- **Ongoing Mentorship**: Project implementation အတွက် workshop အပြီး support
+- **Community Building**: Internal Azure AI developer community များနှင့် knowledge sharing
 
 **Success Metrics:**
-- **Skill Acquisition**: Pre/post assessment များမှ technical competency တိုးတက်မှု
-- **Deployment Success**: Production application များကို deploy လုပ်နိုင်မှု
-- **Time to Productivity**: Azure AI project များအတွက် onboarding အချိန်လျှော့ချမှု
-- **Knowledge Retention**: Workshop ပြီးနောက် 3-6 လအတွင်း follow-up assessment
+- **Skill Acquisition**: Pre/post assessment များမှ Technical competency ဖွံ့ဖြိုးမှု
+- **Deployment Success**: Production application များကို အောင်မြင်စွာ deploy လုပ်ခြင်း
+- **Time to Productivity**: Azure AI project များအတွက် onboarding အချိန်လျှော့ချခြင်း
+- **Knowledge Retention**: Workshop အပြီး 3-6 လအတွင်း Follow-up assessment
 
 ## 8-Chapter Learning Structure
 
-### Chapter 1: Foundation & Quick Start (30-45 minutes) 🌱
-**Prerequisites**: Azure subscription, basic command line knowledge  
-**Complexity**: ⭐
+### Chapter 1: Foundation & Quick Start (30-45 မိနစ်) 🌱
+**လိုအပ်ချက်များ**: Azure subscription, basic command line knowledge  
+**ရှုပ်ထွေးမှုအဆင့်**: ⭐
 
-#### What You'll Learn
+#### သင်ယူရမည့်အရာများ
 - Azure Developer CLI အခြေခံများကို နားလည်ခြင်း
 - AZD ကို သင့် platform တွင် ထည့်သွင်းခြင်း  
-- သင့်ရဲ့ ပထမဆုံး deployment ကို အောင်မြင်စွာ ပြုလုပ်ခြင်း
+- သင့်ရဲ့ ပထမဆုံးအောင်မြင်သော deployment
 - အဓိကအကြောင်းအရာများနှင့် အဘိဓာန်
 
-#### Learning Resources
+#### သင်ယူမှုအရင်းအမြစ်များ
 - [AZD Basics](docs/getting-started/azd-basics.md) - အဓိကအကြောင်းအရာများ
-- [Installation & Setup](docs/getting-started/installation.md) - Platform-specific လမ်းညွှန်ချက်များ
-- [Your First Project](docs/getting-started/first-project.md) - လက်တွေ့ကျကျ လမ်းညွှန်ချက်
-- [Command Cheat Sheet](resources/cheat-sheet.md) - အမြန်ရယူနိုင်သော reference
+- [Installation & Setup](docs/getting-started/installation.md) - Platform-specific guide များ
+- [Your First Project](docs/getting-started/first-project.md) - လက်တွေ့ကျကျ tutorial
+- [Command Cheat Sheet](resources/cheat-sheet.md) - Quick reference
 
-#### Practical Outcome
-AZD ကို အသုံးပြု၍ Azure တွင် ရိုးရှင်းသော web application တစ်ခုကို deploy လုပ်ခြင်း
+#### လက်တွေ့ရလဒ်
+AZD ကို အသုံးပြု၍ Azure တွင် ရိုးရှင်းသော web application တစ်ခုကို အောင်မြင်စွာ deploy လုပ်ပါ
 
 ---
 
-### Chapter 2: AI-First Development (1-2 hours) 🤖
-**Prerequisites**: Chapter 1 ပြီးမြောက်ထားရမည်  
-**Complexity**: ⭐⭐
+### Chapter 2: AI-First Development (1-2 နာရီ) 🤖
+**လိုအပ်ချက်များ**: Chapter 1 ပြီးမြောက်ထားရမည်  
+**ရှုပ်ထွေးမှုအဆင့်**: ⭐⭐
 
-#### What You'll Learn
-- AZD နှင့် Azure AI Foundry ကို ပေါင်းစပ်ခြင်း
+#### သင်ယူရမည့်အရာများ
+- Microsoft Foundry ကို AZD နှင့် ပေါင်းစည်းခြင်း
 - AI-powered application များကို deploy လုပ်ခြင်း
 - AI service configuration များကို နားလည်ခြင်း
-- RAG (Retrieval-Augmented Generation) pattern များ
+- RAG (Retrieval-Augmented Generation) patterns
 
-#### Learning Resources
-- [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
-- [AI Model Deployment](docs/ai-foundry/ai-model-deployment.md)
-- [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - **NEW**: 2-3 နာရီကြာ လက်တွေ့ကျကျ လေ့ကျင့်မှု
-- [Interactive Workshop Guide](workshop/README.md) - **NEW**: Browser-based workshop
-- [Azure AI Foundry Templates](README.md#featured-azure-ai-foundry-templates)
+#### သင်ယူမှုအရင်းအမြစ်များ
+- [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **NEW**: 2-3 နာရီ လက်တွေ့ကျကျ lab
+- [Interactive Workshop Guide](workshop/README.md) - **NEW**: Browser-based workshop MkDocs preview
+- [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
 - [Workshop Instructions](../../workshop/docs/instructions) - **NEW**: လမ်းညွှန်ချက်များ
 
-#### Practical Outcome
-RAG စွမ်းရည်များပါဝင်သော AI-powered chat application တစ်ခုကို deploy လုပ်ခြင်း
+#### လက်တွေ့ရလဒ်
+RAG စွမ်းရည်များပါဝင်သော AI-powered chat application ကို deploy လုပ်ပြီး configure လုပ်ပါ
 
 #### Workshop Learning Path (Optional Enhancement)
 **NEW Interactive Experience**: [Complete Workshop Guide](workshop/README.md)
-1. **Discovery** (30 mins): Template ရွေးချယ်ခြင်းနှင့် အကဲဖြတ်ခြင်း
-2. **Deployment** (45 mins): AI template functionality ကို deploy နှင့် validate လုပ်ခြင်း  
-3. **Deconstruction** (30 mins): Template architecture နှင့် component များကို နားလည်ခြင်း
-4. **Configuration** (30 mins): Setting နှင့် parameter များကို customize လုပ်ခြင်း
-5. **Customization** (45 mins): Template ကို ပြင်ဆင်ခြင်း
-6. **Teardown** (15 mins): Resource များကို clean up လုပ်ခြင်း
-7. **Wrap-up** (15 mins): ဆက်လက်သင်ယူရန် လမ်းကြောင်းများ
+1. **Discovery** (30 မိနစ်): Template ရွေးချယ်ခြင်းနှင့် စိစစ်ခြင်း
+2. **Deployment** (45 မိနစ်): AI template functionality ကို deploy လုပ်ပြီး validate လုပ်ပါ  
+3. **Deconstruction** (30 မိနစ်): Template architecture နှင့် components ကို နားလည်ပါ
+4. **Configuration** (30 မိနစ်): Setting နှင့် parameters များကို customize လုပ်ပါ
+5. **Customization** (45 မိနစ်): ပြင်ဆင်ပြီး ကိုယ်ပိုင်အဖြစ်ပြောင်းပါ
+6. **Teardown** (15 မိနစ်): Resource များကို clean up လုပ်ပြီး lifecycle ကို နားလည်ပါ
+7. **Wrap-up** (15 မိနစ်): နောက်တစ်ဆင့်များနှင့် အဆင့်မြှင့်သင်ယူမှုလမ်းကြောင်း
 
 ---
 
-### Chapter 3: Configuration & Authentication (45-60 minutes) ⚙️
-**Prerequisites**: Chapter 1 ပြီးမြောက်ထားရမည်  
-**Complexity**: ⭐⭐
+### Chapter 3: Configuration & Authentication (45-60 မိနစ်) ⚙️
+**လိုအပ်ချက်များ**: Chapter 1 ပြီးမြောက်ထားရမည်  
+**ရှုပ်ထွေးမှုအဆင့်**: ⭐⭐
 
-#### What You'll Learn
+#### သင်ယူရမည့်အရာများ
 - Environment configuration နှင့် စီမံခန့်ခွဲမှု
-- Authentication နှင့် လုံခြုံရေးအကောင်းဆုံးအလေ့အကျင့်များ
+- Authentication နှင့် security အကောင်းဆုံးအလေ့အကျင့်များ
 - Resource naming နှင့် organization
 - Multi-environment deployment များ
 
-#### Learning Resources
+#### သင်ယူမှုအရင်းအမြစ်များ
 - [Configuration Guide](docs/getting-started/configuration.md) - Environment setup
-- Security pattern များနှင့် managed identity
+- [Authentication & Security Patterns](docs/getting-started/authsecurity.md) - Managed identity နှင့် Key Vault integration
 - Multi-environment ဥပမာများ
 
-#### Practical Outcome
-Authentication နှင့် လုံခြုံရေးကို သင့်တော်စွာ အသုံးပြု၍ environment များစီမံခန့်ခွဲခြင်း
+#### လက်တွေ့ရလဒ်
+Authentication နှင့် security ကို သင့်တော်စွာ အသုံးပြု၍ environment များစီမံခန့်ခွဲပါ
 
 ---
 
-### Chapter 4: Infrastructure as Code & Deployment (1-1.5 hours) 🏗️
-**Prerequisites**: Chapters 1-3 ပြီးမြောက်ထားရမည်  
-**Complexity**: ⭐⭐⭐
-
-#### What You'll Learn
-- Deployment pattern များ
-- Infrastructure as Code ကို Bicep ဖြင့် အသုံးပြုခြင်း
-- Resource provisioning strategy များ
-- Custom template တည်ဆောက်ခြင်း
-
-#### Learning Resources
-- [Deployment Guide](docs/deployment/deployment-guide.md) - Workflow အပြည့်အစုံ
-- [Provisioning Resources](docs/deployment/provisioning.md) - Resource စီမံခန့်ခွဲမှု
-- Container နှင့် microservices ဥပမာများ
-
-#### Practical Outcome
-Custom infrastructure template များကို အသုံးပြု၍ multi-service application များကို deploy လုပ်ခြင်း
+### Chapter 4: Infrastructure as Code & Deployment (1-1.5 နာရီ) 🏗️
+**လိုအပ်ချက်များ**: Chapter 1-3
+အကောင့်များနှင့် အကောင်းဆုံးဖြေရှင်းနည်းများကို အကောင့်များနှင့် အကောင်းဆုံးဖြေရှင်းနည်းများကို အကောင့်များနှင့် အကောင်းဆုံးဖြေရှင်းနည်းများကို အကောင့်များနှင့် အကောင်းဆုံးဖြေရှင်းနည်းများကို အကောင့်များနှင့် အကောင်းဆုံးဖြေရှင်းနည်းများကို
 
 ---
 
-### Chapter 5: Multi-Agent AI Solutions (2-3 hours) 🤖🤖
-**Prerequisites**: Chapters 1-2 ပြီးမြောက်ထားရမည်  
-**Complexity**: ⭐⭐⭐⭐
+### အခန်း ၇: ပြဿနာရှာဖွေခြင်းနှင့် Debugging (၁-၁.၅ နာရီ) 🔧
+**လိုအပ်ချက်များ**: Deployment အခန်းတစ်ခုခုပြီးစီးထားရမည်  
+**အဆင့်အတန်း**: ⭐⭐
 
-#### What You'll Learn
-- Multi-agent architecture pattern များ
-- Agent orchestration နှင့် coordination
-- Production-ready AI deployment များ
-- Customer နှင့် Inventory agent implementation များ
+#### သင်လေ့လာနိုင်မည့်အရာများ
+- စနစ်တကျ Debugging လုပ်နည်းများ
+- အများဆုံးဖြစ်တတ်သောပြဿနာများနှင့် ဖြေရှင်းနည်းများ
+- AI အထူးပြဿနာရှာဖွေခြင်း
+- စွမ်းဆောင်ရည်တိုးတက်အောင်လုပ်ခြင်း
 
-#### Learning Resources
-- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Implementation အပြည့်အစုံ
-- [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
-- Multi-agent coordination pattern များ
-
-#### Practical Outcome
-Production-ready multi-agent AI solution တစ်ခုကို deploy နှင့် စီမံခန့်ခွဲခြင်း
-
----
-
-### Chapter 6: Pre-Deployment Validation & Planning (1 hour) 🔍
-**Prerequisites**: Chapter 4 ပြီးမြောက်ထားရမည်  
-**Complexity**: ⭐⭐
-
-#### What You'll Learn
-- Capacity planning နှင့် resource validation
-- SKU ရွေးချယ်မှု strategy များ
--
-- [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI ဝန်ဆောင်မှုဆိုင်ရာ ပြဿနာများ
+#### သင်ယူရန်အရင်းအမြစ်များ
+- [Common Issues](docs/troubleshooting/common-issues.md) - FAQ နှင့် ဖြေရှင်းနည်းများ
+- [Debugging Guide](docs/troubleshooting/debugging.md) - အဆင့်ဆင့်နည်းလမ်းများ
+- [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI ဝန်ဆောင်မှုဆိုင်ရာပြဿနာများ
 
 #### လက်တွေ့ရလဒ်
-တစ်ကိုယ်တည်းဖြေရှင်းနိုင်သော deployment ပြဿနာများကို သုံးသပ်ပြီး ဖြေရှင်းရန်
+Deployment ပြဿနာများကို ကိုယ်တိုင်ရှာဖွေပြီး ဖြေရှင်းနိုင်ခြင်း
 
 ---
 
-### အခန်း ၈: ထုတ်လုပ်မှုနှင့် အဖွဲ့အစည်းပုံစံများ (၂-၃ နာရီ) 🏢
+### အခန်း ၈: Production နှင့် Enterprise Patterns (၂-၃ နာရီ) 🏢
 **လိုအပ်ချက်များ**: အခန်း ၁-၄ ပြီးစီးထားရမည်  
-**အခက်အခဲအဆင့်**: ⭐⭐⭐⭐
+**အဆင့်အတန်း**: ⭐⭐⭐⭐
 
-#### သင်ယူမည့်အရာများ
-- ထုတ်လုပ်မှု deployment များအတွက် မူဝါဒများ
-- အဖွဲ့အစည်းအဆင့် လုံခြုံရေးပုံစံများ
-- စောင့်ကြည့်မှုနှင့် ကုန်ကျစရိတ် အားသာမှု
-- အတိုင်းအတာချဲ့ထွင်မှုနှင့် အုပ်ချုပ်မှု
+#### သင်လေ့လာနိုင်မည့်အရာများ
+- Production deployment နည်းလမ်းများ
+- Enterprise security patterns
+- Monitoring နှင့် ကုန်ကျစရိတ်အဆင့်မြှင့်ခြင်း
+- Scalability နှင့် governance
 
-#### သင်ယူရန် အရင်းအမြစ်များ
-- [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) - အဖွဲ့အစည်းပုံစံများ
-- Microservices နှင့် အဖွဲ့အစည်း ဥပမာများ
-- စောင့်ကြည့်မှုနှင့် အုပ်ချုပ်မှု framework များ
+- Production container app deployment အတွက် အကောင်းဆုံးနည်းလမ်းများ (လုံခြုံရေး၊ monitoring၊ ကုန်ကျစရိတ်၊ CI/CD)
+
+#### သင်ယူရန်အရင်းအမြစ်များ
+- [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
+- Microservices နှင့် enterprise ဥပမာများ
+- Monitoring နှင့် governance frameworks
+- [Microservices Architecture Example](../../examples/container-app/microservices) - Blue-green/canary deployment, distributed tracing, နှင့် ကုန်ကျစရိတ်အဆင့်မြှင့်ခြင်း
 
 #### လက်တွေ့ရလဒ်
-ထုတ်လုပ်မှုအဆင့် အပြည့်အဝရရှိသော အဖွဲ့အစည်းအဆင့် application များကို deploy လုပ်ရန်
+Enterprise-ready application များကို production အဆင့်တွင် deploy လုပ်နိုင်ခြင်း
 
 ---
 
-## သင်ယူမှုတိုးတက်မှုနှင့် အခက်အခဲအဆင့်
+## သင်ယူမှုတိုးတက်မှုနှင့် အဆင့်အတန်း
 
-### တိုးတက်မှုအဆင့်လိုက် ကျွမ်းကျင်မှုတည်ဆောက်ခြင်း
+### တိုးတက်မှုအဆင့်လိုက် ကျွမ်းကျင်မှုတိုးတက်ခြင်း
 
-- **🌱 အခြေခံ**: အခန်း ၁ (အခြေခံ) → အခန်း ၂ (AI ဖွံ့ဖြိုးမှု)
-- **🔧 အလယ်အလတ်**: အခန်း ၃-၄ (Configuration & Infrastructure) → အခန်း ၆ (Validation)
-- **🚀 အဆင့်မြင့်**: အခန်း ၅ (Multi-Agent Solutions) → အခန်း ၇ (Troubleshooting)
-- **🏢 အဖွဲ့အစည်း**: အခန်းအားလုံးကို ပြီးစီးပြီး အခန်း ၈ (Production Patterns) ကို အဓိကထားပါ
+- **🌱 Beginner**: အခန်း ၁ (Foundation) → အခန်း ၂ (AI Development)
+- **🔧 Intermediate**: အခန်း ၃-၄ (Configuration & Infrastructure) → အခန်း ၆ (Validation)
+- **🚀 Advanced**: အခန်း ၅ (Multi-Agent Solutions) → အခန်း ၇ (Troubleshooting)
+- **🏢 Enterprise**: အခန်းအားလုံးပြီးစီးပြီး အခန်း ၈ (Production Patterns) အာရုံစိုက်ပါ
 
-### အခက်အခဲအညွှန်းများ
+- **Container App Path**: အခန်း ၄ (Containerized deployment), ၅ (Microservices integration), ၈ (Production best practices)
 
-- **⭐ အခြေခံ**: အကြောင်းအရာတစ်ခုတည်း၊ လမ်းညွှန်သင်ခန်းစာများ၊ ၃၀-၆၀ မိနစ်
-- **⭐⭐ အလယ်အလတ်**: အကြောင်းအရာများစွာ၊ လက်တွေ့ကျင့်သုံးမှု၊ ၁-၂ နာရီ  
-- **⭐⭐⭐ အဆင့်မြင့်**: architecture အဆင့်မြင့်များ၊ custom ဖြေရှင်းချက်များ၊ ၁-၃ နာရီ
-- **⭐⭐⭐⭐ ကျွမ်းကျင်**: ထုတ်လုပ်မှုစနစ်များ၊ အဖွဲ့အစည်းပုံစံများ၊ ၂-၄ နာရီ
+### အဆင့်အတန်းပြသမှု
 
-### သင်ယူမှုလမ်းကြောင်းများ
+- **⭐ Basic**: အကြောင်းအရာတစ်ခုတည်း၊ လမ်းညွှန်သင်ခန်းစာများ၊ ၃၀-၆၀ မိနစ်
+- **⭐⭐ Intermediate**: အကြောင်းအရာများစွာ၊ လက်တွေ့ကျကျ လေ့ကျင့်မှု၊ ၁-၂ နာရီ  
+- **⭐⭐⭐ Advanced**: Architecture အဆင့်မြင့်၊ အထူးပြုဖြေရှင်းနည်းများ၊ ၁-၃ နာရီ
+- **⭐⭐⭐⭐ Expert**: Production စနစ်များ၊ Enterprise patterns၊ ၂-၄ နာရီ
+
+### Flexible Learning Paths
 
 #### 🎯 AI Developer Fast Track (၄-၆ နာရီ)
-1. **အခန်း ၁**: အခြေခံနှင့် အမြန်စတင်ခြင်း (၄၅ မိနစ်)
+1. **အခန်း ၁**: Foundation & Quick Start (၄၅ မိနစ်)
 2. **အခန်း ၂**: AI-First Development (၂ နာရီ)  
 3. **အခန်း ၅**: Multi-Agent AI Solutions (၃ နာရီ)
 4. **အခန်း ၈**: Production AI Best Practices (၁ နာရီ)
 
 #### 🛠️ Infrastructure Specialist Path (၅-၇ နာရီ)
-1. **အခန်း ၁**: အခြေခံနှင့် အမြန်စတင်ခြင်း (၄၅ မိနစ်)
+1. **အခန်း ၁**: Foundation & Quick Start (၄၅ မိနစ်)
 2. **အခန်း ၃**: Configuration & Authentication (၁ နာရီ)
 3. **အခန်း ၄**: Infrastructure as Code & Deployment (၁.၅ နာရီ)
 4. **အခန်း ၆**: Pre-Deployment Validation & Planning (၁ နာရီ)
@@ -344,138 +320,138 @@ Production-ready multi-agent AI solution တစ်ခုကို deploy နှ�
 6. **အခန်း ၈**: Production & Enterprise Patterns (၂ နာရီ)
 
 #### 🎓 Complete Learning Journey (၈-၁၂ နာရီ)
-အခန်း ၈ ခုအားလုံးကို လက်တွေ့ကျင့်သုံးမှုနှင့် validation ဖြင့် အဆင့်လိုက်ပြီးစီးခြင်း
+အခန်း ၈ ခုအားလုံးကို လက်တွေ့ကျကျ လေ့ကျင့်မှုနှင့် validation ဖြင့် အဆင့်လိုက်ပြီးစီးခြင်း
 
-## သင်ခန်းစာပြီးစီးမှု framework
+## သင်ခန်းစာပြီးစီးမှု Framework
 
-### အသိပညာအတည်ပြုခြင်း
-- **အခန်း Checkpoints**: လက်တွေ့ကျင့်သုံးမှုများနှင့် measurable ရလဒ်များ
-- **လက်တွေ့ Verification**: အခန်းတိုင်းအတွက် အလုပ်လုပ်သော ဖြေရှင်းချက်များကို deploy လုပ်ပါ
-- **တိုးတက်မှု Tracking**: အမြင်အာရုံအညွှန်းများနှင့် ပြီးစီးမှု badges
+### Knowledge Validation
+- **အခန်း Checkpoints**: လက်တွေ့ကျကျ လေ့ကျင့်မှုများနှင့် measurable ရလဒ်များ
+- **Hands-On Verification**: အခန်းတစ်ခုစီအတွက် အလုပ်လုပ်သော ဖြေရှင်းနည်းများကို deploy လုပ်ပါ
+- **Progress Tracking**: Visual indicators နှင့် completion badges
 - **Community Validation**: Azure Discord channel များတွင် အတွေ့အကြုံများကို မျှဝေပါ
 
-### သင်ယူမှုရလဒ်များအကဲဖြတ်ခြင်း
+### Learning Outcomes Assessment
 
 #### အခန်း ၁-၂ ပြီးစီးမှု (Foundation + AI)
-- ✅ AZD အသုံးပြု၍ အခြေခံ web application တစ်ခုကို deploy လုပ်ပါ
+- ✅ AZD ကို အသုံးပြု၍ အခြေခံ web application တစ်ခုကို deploy လုပ်ပါ
 - ✅ RAG ဖြင့် AI-powered chat application တစ်ခုကို deploy လုပ်ပါ
-- ✅ AZD core concept များနှင့် AI integration ကို နားလည်ပါ
+- ✅ AZD core concepts နှင့် AI integration ကို နားလည်ပါ
 
 #### အခန်း ၃-၄ ပြီးစီးမှု (Configuration + Infrastructure)  
-- ✅ multi-environment deployment များကို စီမံပါ
-- ✅ custom Bicep infrastructure template များကို ဖန်တီးပါ
-- ✅ secure authentication pattern များကို အကောင်အထည်ဖော်ပါ
+- ✅ Multi-environment deployments ကို စီမံပါ
+- ✅ Custom Bicep infrastructure templates ကို ဖန်တီးပါ
+- ✅ Secure authentication patterns ကို အကောင်အထည်ဖော်ပါ
 
 #### အခန်း ၅-၆ ပြီးစီးမှု (Multi-Agent + Validation)
-- ✅ complex multi-agent AI solution တစ်ခုကို deploy လုပ်ပါ
-- ✅ capacity planning နှင့် cost optimization ကို ဆောင်ရွက်ပါ
-- ✅ automated pre-deployment validation ကို အကောင်အထည်ဖော်ပါ
+- ✅ Complex multi-agent AI solution ကို deploy လုပ်ပါ
+- ✅ Capacity planning နှင့် cost optimization ကို လုပ်ဆောင်ပါ
+- ✅ Automated pre-deployment validation ကို အကောင်အထည်ဖော်ပါ
 
 #### အခန်း ၇-၈ ပြီးစီးမှု (Troubleshooting + Production)
-- ✅ deployment ပြဿနာများကို တစ်ကိုယ်တည်းဖြေရှင်းပါ  
-- ✅ enterprise-grade monitoring နှင့် security ကို အကောင်အထည်ဖော်ပါ
-- ✅ governance ဖြင့် production-ready application များကို deploy လုပ်ပါ
+- ✅ Deployment ပြဿနာများကို ကိုယ်တိုင် debug လုပ်ပြီး ဖြေရှင်းပါ  
+- ✅ Enterprise-grade monitoring နှင့် security ကို အကောင်အထည်ဖော်ပါ
+- ✅ Governance ဖြင့် production-ready applications ကို deploy လုပ်ပါ
 
-### လက်မှတ်နှင့် အသိအမှတ်ပြုခြင်း
-- **Course Completion Badge**: အခန်း ၈ ခုအားလုံးကို လက်တွေ့ validation ဖြင့် ပြီးစီးပါ
-- **Community Recognition**: Azure AI Foundry Discord တွင် တက်ကြွစွာ ပါဝင်ပါ
+### Certification and Recognition
+- **Course Completion Badge**: အခန်း ၈ ခုအားလုံးကို လက်တွေ့ကျကျ validation ဖြင့် ပြီးစီးပါ
+- **Community Recognition**: Microsoft Foundry Discord တွင် တက်ကြွစွာ ပါဝင်ပါ
 - **Professional Development**: AZD နှင့် AI deployment ကျွမ်းကျင်မှုများ
-- **Career Advancement**: အဖွဲ့အစည်းအဆင့် cloud deployment ကျွမ်းကျင်မှု
+- **Career Advancement**: Enterprise-ready cloud deployment ကျွမ်းကျင်မှုများ
 
 ## 🎓 Comprehensive Learning Outcomes
 
 ### Foundation Level (အခန်း ၁-၂)
-အခြေခံအခန်းများကို ပြီးစီးပြီးနောက် သင်ယူသူများသည် အောက်ပါအရာများကို ပြသနိုင်မည်ဖြစ်သည်။
+Foundation အခန်းများကို ပြီးစီးပြီးနောက်၊ သင်တန်းသားများသည် အောက်ပါအရာများကို ပြသနိုင်ပါမည်-
 
-**နည်းပညာဆိုင်ရာ ကျွမ်းကျင်မှုများ:**
-- AZD command များကို အသုံးပြု၍ Azure တွင် ရိုးရှင်းသော web application များကို deploy လုပ်ပါ
-- RAG အင်္ဂါရပ်များပါဝင်သော AI-powered chat application များကို configure နှင့် deploy လုပ်ပါ
-- AZD core concept များကို နားလည်ပါ: template များ၊ environment များ၊ provisioning workflow များ
-- AZD deployment များနှင့် Azure AI Foundry ဝန်ဆောင်မှုများကို ပေါင်းစပ်ပါ
-- Azure AI service configuration များနှင့် API endpoint များကို navigation လုပ်ပါ
+**Technical Capabilities:**
+- AZD commands ကို အသုံးပြု၍ အခြေခံ web applications ကို Azure တွင် deploy လုပ်ပါ
+- RAG capabilities ဖြင့် AI-powered chat applications ကို configure နှင့် deploy လုပ်ပါ
+- AZD core concepts ကို နားလည်ပါ- templates, environments, provisioning workflows
+- Microsoft Foundry services ကို AZD deployments နှင့် ပေါင်းစပ်ပါ
+- Azure AI service configurations နှင့် API endpoints ကို navigate လုပ်ပါ
 
-**ပရော်ဖက်ရှင်နယ် ကျွမ်းကျင်မှုများ:**
-- structured deployment workflow များကို လိုက်နာ၍ အမြဲတမ်းရလဒ်များရရှိပါ
-- log များနှင့် documentation ကို အသုံးပြု၍ အခြေခံ deployment ပြဿနာများကို troubleshoot လုပ်ပါ
-- cloud deployment လုပ်ငန်းစဉ်များအကြောင်းကို ထိရောက်စွာ ဆက်သွယ်ပါ
-- AI service integration အတွက် လုံခြုံရေးအကောင်းဆုံးအလေ့အကျင့်များကို အသုံးပြုပါ
+**Professional Skills:**
+- Structured deployment workflows ကို လိုက်နာပြီး အောင်မြင်သောရလဒ်များရရှိပါ
+- Logs နှင့် documentation ကို အသုံးပြု၍ အခြေခံ deployment ပြဿနာများကို troubleshoot လုပ်ပါ
+- Cloud deployment processes အကြောင်းကို ထိရောက်စွာ ဆက်သွယ်ပါ
+- Secure AI service integration အတွက် အကောင်းဆုံးနည်းလမ်းများကို အသုံးပြုပါ
 
-**သင်ယူမှုအတည်ပြုခြင်း:**
+**Learning Verification:**
 - ✅ `todo-nodejs-mongo` template ကို အောင်မြင်စွာ deploy လုပ်ပါ
 - ✅ `azure-search-openai-demo` ကို RAG ဖြင့် deploy နှင့် configure လုပ်ပါ
-- ✅ interactive workshop exercise များ (Discovery phase) ကို ပြီးစီးပါ
-- ✅ Azure Discord community discussion များတွင် ပါဝင်ပါ
+- ✅ Discovery phase workshop exercises ကို ပြီးစီးပါ
+- ✅ Azure Discord community discussions တွင် ပါဝင်ဆွေးနွေးပါ
 
 ### Intermediate Level (အခန်း ၃-၄)
-အလယ်အလတ်အခန်းများကို ပြီးစီးပြီးနောက် သင်ယူသူများသည် အောက်ပါအရာများကို ပြသနိုင်မည်ဖြစ်သည်။
+Intermediate အခန်းများကို ပြီးစီးပြီးနောက်၊ သင်တန်းသားများသည် အောက်ပါအရာများကို ပြသနိုင်ပါမည်-
 
-**နည်းပညာဆိုင်ရာ ကျွမ်းကျင်မှုများ:**
-- multi-environment deployment များကို စီမံပါ (dev, staging, production)
-- infrastructure as code အတွက် custom Bicep template များကို ဖန်တီးပါ
-- managed identity ဖြင့် secure authentication pattern များကို အကောင်အထည်ဖော်ပါ
-- custom configuration များပါဝင်သော multi-service application များကို deploy လုပ်ပါ
-- cost နှင့် performance အတွက် resource provisioning strategy များကို optimize လုပ်ပါ
+**Technical Capabilities:**
+- Multi-environment deployments (dev, staging, production) ကို စီမံပါ
+- Infrastructure as code အတွက် custom Bicep templates ကို ဖန်တီးပါ
+- Managed identity ဖြင့် secure authentication patterns ကို အကောင်အထည်ဖော်ပါ
+- Custom configurations ဖြင့် complex multi-service applications ကို deploy လုပ်ပါ
+- Cost နှင့် performance အတွက် resource provisioning strategies ကို optimize လုပ်ပါ
 
-**ပရော်ဖက်ရှင်နယ် ကျွမ်းကျင်မှုများ:**
-- scalable infrastructure architecture များကို design လုပ်ပါ
-- cloud deployment များအတွက် လုံခြုံရေးအကောင်းဆုံးအလေ့အကျင့်များကို အကောင်အထည်ဖော်ပါ
-- အဖွဲ့အစည်းအတွင်း အတူတူလုပ်ဆောင်ရန်အတွက် infrastructure pattern များကို documentation လုပ်ပါ
-- လိုအပ်ချက်များအတွက် သင့်လျော်သော Azure service များကို အကဲဖြတ်ပြီး ရွေးချယ်ပါ
+**Professional Skills:**
+- Scalable infrastructure architectures ကို ဒီဇိုင်းဆွဲပါ
+- Cloud deployments အတွက် security အကောင်းဆုံးနည်းလမ်းများကို အကောင်အထည်ဖော်ပါ
+- Infrastructure patterns ကို documentation လုပ်ပြီး အဖွဲ့နှင့် ပေါင်းစပ်ပါ
+- Requirements အတွက် သင့်လျော်သော Azure services ကို အကဲဖြတ်ပြီး ရွေးချယ်ပါ
 
-**သင်ယူမှုအတည်ပြုခြင်း:**
-- ✅ environment-specific setting များပါဝင်သော environment များကို configure လုပ်ပါ
-- ✅ multi-service application အတွက် custom Bicep template ကို ဖန်တီးပြီး deploy လုပ်ပါ
-- ✅ managed identity authentication ကို အကောင်အထည်ဖော်ပါ
-- ✅ configuration management exercise များကို အမှန်တကယ် scenario များဖြင့် ပြီးစီးပါ
+**Learning Verification:**
+- ✅ Environment-specific settings ဖြင့် separate environments ကို configure လုပ်ပါ
+- ✅ Multi-service application အတွက် custom Bicep template ကို ဖန်တီးပြီး deploy လုပ်ပါ
+- ✅ Managed identity authentication ကို secure access အတွက် အကောင်အထည်ဖော်ပါ
+- ✅ Configuration management exercises ကို လက်တွေ့ကျကျ scenario များဖြင့် ပြီးစီးပါ
 
 ### Advanced Level (အခန်း ၅-၆)
-အဆင့်မြင့်အခန်းများကို ပြီးစီးပြီးနောက် သင်ယူသူများသည် အောက်ပါအရာများကို ပြသနိုင်မည်ဖြစ်သည်။
+Advanced အခန်းများကို ပြီးစီးပြီးနောက်၊ သင်တန်းသားများသည် အောက်ပါအရာများကို ပြသနိုင်ပါမည်-
 
-**နည်းပညာဆိုင်ရာ ကျွမ်းကျင်မှုများ:**
-- coordinated workflow များဖြင့် multi-agent AI solution များကို deploy နှင့် orchestrate လုပ်ပါ
-- retail scenario များအတွက် Customer နှင့် Inventory agent architecture များကို အကောင်အထည်ဖော်ပါ
-- capacity planning နှင့် resource validation ကို ပြည့်စုံစွာ ဆောင်ရွက်ပါ
-- automated pre-deployment validation နှင့် optimization ကို အကောင်အထည်ဖော်ပါ
-- workload requirement များအပေါ်အခြေခံ၍ cost-effective SKU selection များကို design လုပ်ပါ
+**Technical Capabilities:**
+- Coordinated workflows ဖြင့် multi-agent AI solutions ကို deploy နှင့် orchestrate လုပ်ပါ
+- Retail scenarios အတွက် Customer နှင့် Inventory agent architectures ကို အကောင်အထည်ဖော်ပါ
+- Comprehensive capacity planning နှင့် resource validation ကို လုပ်ဆောင်ပါ
+- Automated pre-deployment validation နှင့် optimization ကို အကောင်အထည်ဖော်ပါ
+- Workload requirements အပေါ်မူတည်၍ cost-effective SKU selections ကို ဒီဇိုင်းဆွဲပါ
 
-**ပရော်ဖက်ရှင်နယ် ကျွမ်းကျင်မှုများ:**
-- production environment များအတွက် AI solution အဆင့်မြင့်များကို architect လုပ်ပါ
-- AI deployment strategy များအကြောင်း technical discussion များကို ဦးဆောင်ပါ
-- AZD နှင့် AI deployment အကောင်းဆုံးအလေ့အကျင့်များကို junior developer များကို သင်ကြားပါ
-- လုပ်ငန်းလိုအပ်ချက်များအတွက် AI architecture pattern များကို အကဲဖြတ်ပြီး အကြံပေးပါ
+**Professional Skills:**
+- Production environments အတွက် complex AI solutions ကို architect လုပ်ပါ
+- AI deployment strategies အကြောင်း technical discussions ကို ဦးဆောင်ပါ
+- AZD နှင့် AI deployment အကောင်းဆုံးနည်းလမ်းများကို junior developers များကို သင်ကြားပါ
+- Business requirements အတွက် AI architecture patterns ကို အကဲဖြတ်ပြီး အကြံပေးပါ
 
-**သင်ယူမှုအတည်ပြုခြင်း:**
-- ✅ ARM template များဖြင့် retail multi-agent solution တစ်ခုကို deploy လုပ်ပါ
-- ✅ agent coordination နှင့် workflow orchestration ကို ပြသပါ
-- ✅ resource constraint အမှန်တကယ် scenario များဖြင့် capacity planning exercise များကို ပြီးစီးပါ
-- ✅ automated pre-flight check များဖြင့် deployment readiness ကို validate လုပ်ပါ
+**Learning Verification:**
+- ✅ ARM templates ဖြင့် retail multi-agent solution အပြည့်အစုံကို deploy လုပ်ပါ
+- ✅ Agent coordination နှင့် workflow orchestration ကို ပြသပါ
+- ✅ Resource constraints အပြည့်အစုံဖြင့် capacity planning exercises ကို ပြီးစီးပါ
+- ✅ Automated pre-flight checks ဖြင့် deployment readiness ကို validate လုပ်ပါ
 
 ### Expert Level (အခန်း ၇-၈)
-ကျွမ်းကျင်အခန်းများကို ပြီးစီးပြီးနောက် သင်ယူသူများသည် အောက်ပါအရာများကို ပြသနိုင်မည်ဖြစ်သည်။
+Expert အခန်းများကို ပြီးစီးပြီးနောက်၊ သင်တန်းသားများသည် အောက်ပါအရာများကို ပြသနိုင်ပါမည်-
 
-**နည်းပညာဆိုင်ရာ ကျွမ်းကျင်မှုများ:**
-- deployment ပြဿနာများကို တစ်ကိုယ်တည်း သုံးသပ်ပြီး ဖြေရှင်းပါ
-- enterprise-grade security pattern များနှင့် governance framework များကို အကောင်အထည်ဖော်ပါ
-- monitoring နှင့် alerting strategy များကို ပြည့်စုံစွာ design လုပ်ပါ
-- scale, cost, နှင့် performance အတွက် production deployment များကို optimize လုပ်ပါ
-- CI/CD pipeline များကို သင့်တော်သော testing နှင့် validation ဖြင့် တည်ဆောက်ပါ
+**Technical Capabilities:**
+- Deployment ပြဿနာများကို ကိုယ်တိုင်ရှာဖွေပြီး ဖြေရှင်းပါ
+- Enterprise-grade security patterns နှင့် governance frameworks ကို အကောင်အထည်ဖော်ပါ
+- Monitoring နှင့် alerting strategies ကို comprehensive ဒီဇိုင်းဆွဲပါ
+- Scale, cost, နှင့် performance အတွက် production deployments ကို optimize လုပ်ပါ
+- Testing နှင့် validation အတွက် CI/CD pipelines ကို အကောင်အထည်ဖော်ပါ
 
-**ပရော်ဖက်ရှင်နယ် ကျွမ်းကျင်မှုများ:**
-- အဖွဲ့အစည်း cloud transformation လှုပ်ရှားမှုများကို ဦးဆောင်ပါ
-- အဖွဲ့အစည်း deployment စံသတ်မှတ်ချက်များကို design နှင့် implement လုပ်ပါ
-- AZD အလေ့အကျင့်များကို development အဖွဲ့များကို သင်ကြားပါ
-- အဖွဲ့အစည်း AI deployment များအတွက် technical ဆုံးဖြတ်ချက်များကို သက်ရောက်မှုရှိစွာ လုပ်ဆောင်ပါ
+**Professional Skills:**
+- Enterprise cloud transformation အစီအစဉ်များကို ဦးဆောင်ပါ
+- Organizational deployment standards ကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်ပါ
+- Development teams များကို AZD အဆင့်မြင့်နည်းလမ်းများတွင် သင်ကြားပါ
+- Enterprise AI deployments အတွက် technical decision-making ကို အကျိုးသက်သာစွာ လုပ်ဆောင်ပါ
 
-**သင်ယူမှုအတည်ပြုခြင်း:**
-- ✅ multi-service deployment failure များကို ဖြေရှင်းပါ
-- ✅ compliance requirement များပါဝင်သော enterprise security pattern များကို အကောင်အထည်ဖော်ပါ
-- ✅ Application Insights ဖြင့် production monitoring ကို design နှင့် deploy လုပ်ပါ
-- ✅ enterprise governance framework implementation ကို ပြီးစီးပါ
+**Learning Verification:**
+- ✅ Multi-service deployment failures အဆင့်မြင့်ကို ဖြေရှင်းပါ
+- ✅ Compliance requirements ဖြင့် enterprise security patterns ကို အကောင်အထည်ဖော်ပါ
+- ✅ Application Insights ဖြင့် production monitoring ကို ဒီဇိုင်းဆွဲပြီး deploy လုပ်ပါ
+- ✅ Enterprise governance framework implementation ကို ပြီးစီးပါ
 
-## 🎯 သင်ခန်းစာပြီးစီးမှု လက်မှတ်
+## 🎯 သင်ခန်းစာပြီးစီးမှုအထောက်အထား
 
-### တိုးတက်မှု Tracking Framework
-သင်၏သင်ယူမှုတိုးတက်မှုကို structured checkpoint များဖြင့် tracking လုပ်ပါ:
+### Progress Tracking Framework
+သင်၏သင်ယူမှုတိုးတက်မှုကို structured checkpoints များဖြင့် စစ်ဆေးပါ:
 
 - [ ] **အခန်း ၁**: Foundation & Quick Start ✅
 - [ ] **အခန်း ၂**: AI-First Development ✅  
@@ -486,29 +462,46 @@ Production-ready multi-agent AI solution တစ်ခုကို deploy နှ�
 - [ ] **အခန်း ၇**: Troubleshooting & Debugging ✅
 - [ ] **အခန်း ၈**: Production & Enterprise Patterns ✅
 
-### အတည်ပြုမှုလုပ်ငန်းစဉ်
-အခန်းတိုင်းကို ပြီးစီးပြီးနောက် သင်၏အသိပညာကို အတည်ပြုပါ:
+### Verification Process
+အခန်းတစ်ခုစီကို ပြီးစီးပြီးနောက်၊ သင်၏ကျွမ်းကျင်မှုကို အောက်ပါနည်းလမ်းများဖြင့် စစ်ဆေးပါ:
 
-1. **လက်တွေ့ကျင့်သုံးမှု ပြီးစီးမှု**: အခန်းတိုင်းအတွက် အလုပ်လုပ်သော ဖြေရှင်းချက်များကို deploy လုပ်ပါ
-2. **အသိပညာအကဲဖြတ်မှု**: FAQ အပိုင်းများကို ပြန်လည်သုံးသပ်ပြီး self-assessment များကို ပြီးစီးပါ
-3. **Community Engagement**: အတွေ့အကြုံများကို မျှဝေပြီး Azure Discord မှာ feedback ရယူပါ
-4. **Portfolio Development**: သင်၏ deployment များနှင့် သင်ခန်းစာများကို documentation လုပ်ပါ
-5. **Peer Review**: အခက်အခဲ scenario များတွင် အခြားသင်ယူသူများနှင့် ပူးပေါင်းပါ
+1. **Practical Exercise Completion**: အခန်းတစ်ခုစီအတွက် အလုပ်လုပ်သော ဖြေရှင်းနည်းများကို deploy လုပ်ပါ
+2. **Knowledge Assessment**: FAQ အပိုင်းများကို ပြန်လည်သုံးသပ်ပြီး Self-assessments ကို ပြီးစီးပါ
+3. **Community Engagement**: အတွေ့အကြုံများကို မျှဝေပြီး Azure Discord တွင် feedback ရယူပါ
+4. **Portfolio Development**: သင်၏ deployments နှင့် သင်ခန်းစာများကို documentation လုပ်ပါ
+5. **Peer Review**: အခြေခံ scenario များတွင် အခြားသင်တန်းသားများနှင့် ပေါင်းစပ်ပါ
 
-### သင်ခန်းစာပြီးစီးမှု အကျိုးကျေးဇူးများ
-အခန်းအားလုံးကို verification ဖြင့် ပြီးစီးပြီးနောက် သင်တန်းသားများသည် အောက်ပါအရာများရရှိမည်ဖြစ်သည်။
+### သင်ခန်းစာပြီးစီးမှုအကျိုးကျေးဇူးများ
+အခန်းအားလုံးကို verification ဖြင့် ပြီးစီးပြီးနောက်၊ သင်တန်းသားများသည် အောက်ပါအကျိုးကျေးဇူးများရရှိပါမည်-
 
-**နည်းပညာကျွမ်းကျင်မှု:**
-- **ထုတ်လုပ်မှုအတွေ့အကြုံ**: အမှန်တကယ် AI application များကို Azure environment များတွင် deploy လုပ်ထားသည်
-- **ပရော်ဖက်ရှင်နယ် ကျွမ်းကျင်မှု**: အဖွဲ့အစည်းအဆင့် deployment နှင့် troubleshooting ကျွမ်းကျင်မှု  
-- **Architecture အသိပညာ**: Multi-agent AI solution များနှင့် complex infrastructure pattern များ
-- **Troubleshooting ကျွမ်းကျင်မှု**: deployment နှင့် configuration ပြဿနာများကို တစ်ကိုယ်တည်း ဖြေရှင်းနိုင်မှု
+**Technical Expertise:**
+- **Production Experience**: အမှန်တကယ် AI applications များကို Azure environments တွင် deploy လုပ်ထားခြင်း
+- **Professional Skills**: Enterprise-ready deployment နှင့် troubleshooting ကျွမ်းကျင်မှုများ  
+- **Architecture Knowledge**: Multi-agent AI solutions နှင့် complex infrastructure patterns
+- **Troubleshooting Mastery**: Deployment နှင့် configuration ပြဿနာများကို ကိုယ်တိုင်ဖြေရှင်းနိုင်ခြင်း
 
-**ပရော်ဖက်ရှင်နယ် ဖွံ့ဖြိုးမှု:**
-- **စက်မှု Recognition**: AZD နှင့် AI deployment အပိုင်းများတွင် အတည်ပြုနိုင်သော ကျွမ်းကျင်မှု
-- **အလုပ်အကိုင်တိုးတက်မှု**: cloud architect နှင့် AI deployment specialist အခန်းကဏ္ဍများအတွက် အရည်အချင်း
+**Professional Development:**
+- **Industry Recognition**: AZD နှင့် AI deployment အထူးပြုကျွမ်းကျင်မှုများ
+- **Career Advancement**: Cloud architect နှင့် AI deployment specialist အခန်းကဏ္ဍများအတွက် အရည်အချင်း
 - **Community Leadership**: Azure developer နှင့် AI community များတွင် တက်ကြွစွာ ပါဝင်မှု
-- **ဆက်လက်သင်ယူမှု**: Azure AI Foundry အထူးကျွမ်း
+- **Continuous Learning**: Microsoft Foundry အထူးပြုသင်တန်းများအတွက် အခြေခံ
+
+**Portfolio Assets:**
+- **Deployed Solutions**: AI applications နှင့် infrastructure patterns များ၏ အလုပ်လုပ်သော ဥပမာများ
+- **Documentation**: Deployment guides နှင့် troubleshooting လုပ်နည်းများ  
+- **Community Contributions**: Azure community နှင့် မျှဝေထားသော ဆွေးနွေးချက်များ၊ ဥပမာများ၊ နှင့် တိုးတက်မှုများ
+- **Professional Network**: Azure ကျွမ်းကျင်သူများနှင့် AI deployment လုပ်ငန်းရှင်များနှင့် ဆက်သွယ်မှု
+
+### Post-Course Learning Path
+သင်တန်းပြီးစီးသူများသည် အောက်ပါအထူးပြုသင်တန်းများအတွက် ပြင်ဆင်ထားပါသည်-
+- **Microsoft Foundry Expert**: AI model deployment နှင့် orchestration အထူးပြု
+- **Cloud Architecture Leadership**: Enterprise-scale deployment design နှင့် governance
+- **Developer Community Leadership**: Azure samples နှင့် community resources များတွင် ပါဝင်မှု
+- **Corporate Training**: AZD နှင့် AI deployment ကျွမ်းကျင်မှုများကို အဖွဲ့အစည်းများတွင် သင်ကြားခြင်း
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**အကြောင်းကြားချက်**:  
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6af361e2339c27aa56a9196e11b32cb7",
-  "translation_date": "2025-09-18T13:00:36+00:00",
+  "original_hash": "2432e08775264e481d86a2e0e512a347",
+  "translation_date": "2025-11-23T21:33:55+00:00",
   "source_file": "docs/ai-foundry/ai-model-deployment.md",
   "language_code": "sl"
 }
@@ -10,13 +10,13 @@ CO_OP_TRANSLATOR_METADATA:
 # Uvajanje AI modelov z Azure Developer CLI
 
 **Navigacija po poglavjih:**
-- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI na prvem mestu
-- **⬅️ Prejšnje**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📚 Domača stran tečaja**: [AZD Za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI v ospredju
+- **⬅️ Prejšnje**: [Integracija Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Naslednje**: [Delavnica AI](ai-workshop-lab.md)
 - **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../getting-started/configuration.md)
 
-Ta vodič ponuja celovita navodila za uvajanje AI modelov z uporabo predlog AZD, od izbire modela do vzorcev uvajanja v produkcijo.
+Ta vodič ponuja podrobna navodila za uvajanje AI modelov z uporabo predlog AZD, od izbire modela do vzorcev uvajanja v produkcijo.
 
 ## Kazalo vsebine
 
@@ -61,8 +61,8 @@ services:
 
 ### Načrtovanje zmogljivosti modela
 
-| Vrsta modela | Primer uporabe | Priporočena zmogljivost | Stroškovni premisleki |
-|--------------|----------------|-------------------------|-----------------------|
+| Tip modela | Primer uporabe | Priporočena zmogljivost | Stroškovni vidiki |
+|------------|----------------|-------------------------|-------------------|
 | GPT-4o-mini | Klepet, Q&A | 10-50 TPM | Stroškovno učinkovit za večino delovnih obremenitev |
 | GPT-4 | Kompleksno razmišljanje | 20-100 TPM | Višji stroški, uporabite za premium funkcije |
 | Text-embedding-ada-002 | Iskanje, RAG | 30-120 TPM | Ključno za semantično iskanje |
@@ -72,7 +72,7 @@ services:
 
 ### Konfiguracija predloge Bicep
 
-Ustvarite uvajanja modelov s predlogami Bicep:
+Ustvarite uvajanja modelov z uporabo predlog Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -136,7 +136,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurirajte okolje vaše aplikacije:
 
 ```bash
-# .env configuration
+# .env konfiguracija
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
@@ -158,10 +158,10 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
 ```
 
-Najboljše za:
+Najbolj primerno za:
 - Razvoj in testiranje
 - Aplikacije za en trg
-- Optimizacija stroškov
+- Optimizacijo stroškov
 
 ### Vzorec 2: Uvajanje v več regijah
 
@@ -176,7 +176,7 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Najboljše za:
+Najbolj primerno za:
 - Globalne aplikacije
 - Zahteve po visoki razpoložljivosti
 - Porazdelitev obremenitve
@@ -216,7 +216,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Nadzor različic
 
-Spremljajte različice modelov v vaši konfiguraciji AZD:
+Sledite različicam modelov v vaši konfiguraciji AZD:
 
 ```json
 {
@@ -236,11 +236,11 @@ Spremljajte različice modelov v vaši konfiguraciji AZD:
 
 ### Posodobitve modelov
 
-Uporabite kljuke AZD za posodobitve modelov:
+Uporabite AZD kljuke za posodobitve modelov:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# kljuke/prednamestitev.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
@@ -280,7 +280,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Izračunajte potrebno zmogljivost glede na vzorce uporabe:
 
 ```python
-# Capacity calculation example
+# Primer izračuna zmogljivosti
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -292,7 +292,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example usage
+# Primer uporabe
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -412,12 +412,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Prilagojene meritve
+### Prilagojene metrike
 
-Spremljajte meritve, specifične za AI:
+Sledite metrikam, specifičnim za AI:
 
 ```python
-# Custom telemetry for AI models
+# Prilagojena telemetrija za modele AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -454,7 +454,7 @@ class AITelemetry:
 Uvedite spremljanje zdravja AI storitev:
 
 ```python
-# Health check endpoints
+# Končne točke preverjanja zdravja
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -464,7 +464,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI connection
+        # Preizkus povezave OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -482,28 +482,30 @@ async def check_ai_models():
 
 ## Naslednji koraki
 
-1. **Preglejte [vodnik za integracijo Azure AI Foundry](azure-ai-foundry-integration.md)** za vzorce integracije storitev
-2. **Dokončajte [delavnico AI](ai-workshop-lab.md)** za praktične izkušnje
-3. **Uvedite [prakse za produkcijo AI](production-ai-practices.md)** za podjetniške uvedbe
-4. **Raziščite [vodnik za odpravljanje težav z AI](../troubleshooting/ai-troubleshooting.md)** za pogoste težave
+1. **Preglejte [Vodič za integracijo Microsoft Foundry](microsoft-foundry-integration.md)** za vzorce integracije storitev
+2. **Zaključite [Delavnico AI](ai-workshop-lab.md)** za praktične izkušnje
+3. **Uvedite [Prakse za produkcijo AI](production-ai-practices.md)** za uvajanje v podjetjih
+4. **Raziščite [Vodič za odpravljanje težav z AI](../troubleshooting/ai-troubleshooting.md)** za pogoste težave
 
 ## Viri
 
 - [Razpoložljivost modelov Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Spreminjanje velikosti aplikacij Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Skaliranje Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimizacija stroškov AI modelov](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Navigacija po poglavjih:**
-- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI na prvem mestu
-- **⬅️ Prejšnje**: [Integracija Azure AI Foundry](azure-ai-foundry-integration.md)
+- **📚 Domača stran tečaja**: [AZD Za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj z AI v ospredju
+- **⬅️ Prejšnje**: [Integracija Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Naslednje**: [Delavnica AI](ai-workshop-lab.md)
 - **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../getting-started/configuration.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
