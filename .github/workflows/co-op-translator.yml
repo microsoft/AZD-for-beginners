@@ -68,8 +68,8 @@ jobs:
           # translate -l "sw hu cs sk" -y
           # translate -l "ro bg sr hr" -y 
           # translate -l "sl uk my" -y
-          translate -l "de ru ar fa" -y
-          # translate -l "ur mo hi bn" -y
+          # translate -l "de ru ar fa" -y
+          translate -l "ur mo hi bn" -y
           # translate -l "mr ne lt pl -y
           # translate -l "ta et pcm" -y
 
@@ -104,6 +104,7 @@ jobs:
           add-paths: |
             translations/
             translated_images/
+
 
 
 
