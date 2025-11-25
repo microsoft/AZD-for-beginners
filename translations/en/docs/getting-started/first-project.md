@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "67ffbcceec008228c4d22c1b3585844c",
-  "translation_date": "2025-09-18T12:45:15+00:00",
+  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
+  "translation_date": "2025-11-25T09:55:19+00:00",
   "source_file": "docs/getting-started/first-project.md",
   "language_code": "en"
 }
@@ -14,31 +14,31 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [Installation & Setup](installation.md)
 - **➡️ Next**: [Configuration](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 
-Welcome to your first Azure Developer CLI project! This hands-on tutorial will guide you step-by-step through creating, deploying, and managing a full-stack application on Azure using azd. You'll work on a real-world todo application featuring a React frontend, Node.js API backend, and MongoDB database.
+Welcome to your first Azure Developer CLI project! This hands-on tutorial will guide you step-by-step through creating, deploying, and managing a full-stack application on Azure using azd. You'll work with a real todo application that includes a React frontend, a Node.js API backend, and a MongoDB database.
 
 ## Learning Goals
 
 By completing this tutorial, you will:
-- Learn how to initialize azd projects using templates
+- Learn how to initialize an azd project using templates
 - Understand the structure and configuration files of an Azure Developer CLI project
 - Deploy a complete application to Azure, including infrastructure provisioning
 - Make updates to the application and redeploy it
 - Manage multiple environments for development and staging
-- Practice resource cleanup and cost management
+- Apply best practices for resource cleanup and cost management
 
 ## Learning Outcomes
 
 By the end of this tutorial, you will be able to:
-- Independently initialize and configure azd projects using templates
-- Navigate and modify the structure of azd projects
-- Deploy full-stack applications to Azure with a single command
+- Independently initialize and configure azd projects from templates
+- Navigate and modify azd project structures
+- Deploy full-stack applications to Azure with simple commands
 - Troubleshoot common deployment and authentication issues
-- Manage multiple Azure environments for different stages of deployment
-- Set up continuous deployment workflows for application updates
+- Manage multiple Azure environments for different deployment stages
+- Implement continuous deployment workflows for application updates
 
 ## Getting Started
 
@@ -67,7 +67,7 @@ node --version
 
 ## Step 1: Choose and Initialize a Template
 
-Start by selecting a popular todo application template that includes a React frontend and Node.js API backend.
+We'll start with a popular todo application template that includes a React frontend and a Node.js API backend.
 
 ```bash
 # Browse available templates
@@ -92,7 +92,7 @@ azd init --template todo-nodejs-mongo
 
 ## Step 2: Explore the Project Structure
 
-Take a closer look at what azd has created for you:
+Let’s take a look at what azd has created for us:
 
 ```bash
 # View the project structure
@@ -144,7 +144,7 @@ head -30 infra/main.bicep
 
 ## Step 3: Customize Your Project (Optional)
 
-Before deploying, you can personalize the application:
+Before deploying, you can make some customizations to the application:
 
 ### Modify the Frontend
 ```bash
@@ -169,7 +169,7 @@ azd env get-values
 
 ## Step 4: Deploy to Azure
 
-Now comes the exciting part—deploying everything to Azure!
+Now for the exciting part—deploy everything to Azure!
 
 ```bash
 # Deploy infrastructure and application
@@ -217,7 +217,7 @@ azd show --output json | jq -r '.services.web.endpoint'
 ### Test the Todo App
 1. **Add a todo item** - Click "Add Todo" and enter a task
 2. **Mark as complete** - Check off completed items
-3. **Delete items** - Remove tasks you no longer need
+3. **Delete items** - Remove todos you no longer need
 
 ### Monitor Your Application
 ```bash
@@ -230,7 +230,7 @@ azd logs
 
 ## Step 6: Make Changes and Redeploy
 
-Make a change and see how easy it is to update your application:
+Let’s make a change and see how easy it is to update:
 
 ### Modify the API
 ```bash
@@ -272,11 +272,11 @@ azd env list
 
 ### Environment Comparison
 ```bash
-# View dev environment
+# View development environment
 azd env select dev
 azd show
 
-# View staging environment  
+# View staging environment
 azd env select staging
 azd show
 ```
@@ -299,13 +299,121 @@ azd down --force --purge
 
 ## What You've Learned
 
-Congratulations! You've successfully:
-- Initialized an azd project using a template
-- Explored the project structure and key files
-- Deployed a full-stack application to Azure
-- Made code changes and redeployed
-- Managed multiple environments
-- Cleaned up resources
+Congratulations! You’ve successfully:
+- ✅ Initialized an azd project from a template
+- ✅ Explored the project structure and key files
+- ✅ Deployed a full-stack application to Azure
+- ✅ Made code changes and redeployed
+- ✅ Managed multiple environments
+- ✅ Cleaned up resources
+
+## 🎯 Skill Validation Exercises
+
+### Exercise 1: Deploy a Different Template (15 minutes)
+**Goal**: Demonstrate mastery of the azd initialization and deployment workflow
+
+```bash
+# Try Python + MongoDB stack
+mkdir todo-python && cd todo-python
+azd init --template todo-python-mongo
+azd up
+
+# Verify deployment
+azd show
+curl $(azd show --output json | jq -r '.services.web.endpoint')
+
+# Clean up
+azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Application deploys without errors
+- [ ] Application URL is accessible in a browser
+- [ ] Application functions correctly (add/remove todos)
+- [ ] All resources are successfully cleaned up
+
+### Exercise 2: Customize Configuration (20 minutes)
+**Goal**: Practice configuring environment variables
+
+```bash
+cd my-first-azd-app
+
+# Create custom environment
+azd env new custom-config
+
+# Set custom variables
+azd env set APP_TITLE "My Custom Todo App"
+azd env set API_VERSION "2.0.0"
+azd env set ENABLE_DEBUG "true"
+
+# Verify variables
+azd env get-values | grep APP_TITLE
+
+# Deploy with custom config
+azd up
+```
+
+**Success Criteria:**
+- [ ] Custom environment created successfully
+- [ ] Environment variables set and retrievable
+- [ ] Application deploys with custom configuration
+- [ ] Custom settings are visible in the deployed app
+
+### Exercise 3: Multi-Environment Workflow (25 minutes)
+**Goal**: Master environment management and deployment strategies
+
+```bash
+# Create development environment
+azd env new dev-$(whoami)
+azd env set ENVIRONMENT_TYPE dev
+azd env set LOG_LEVEL debug
+azd up
+
+# Note development URL
+DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Dev: $DEV_URL"
+
+# Create staging environment
+azd env new staging-$(whoami)
+azd env set ENVIRONMENT_TYPE staging
+azd env set LOG_LEVEL info
+azd up
+
+# Note staging URL
+STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Staging: $STAGING_URL"
+
+# Compare environments
+azd env list
+
+# Test both environments
+curl "$DEV_URL/health"
+curl "$STAGING_URL/health"
+
+# Clean up both
+azd env select dev-$(whoami) && azd down --force --purge
+azd env select staging-$(whoami) && azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Two environments created with different configurations
+- [ ] Both environments deployed successfully
+- [ ] Can switch between environments using `azd env select`
+- [ ] Environment variables differ between environments
+- [ ] Both environments are successfully cleaned up
+
+## 📊 Your Progress
+
+**Time Invested**: ~60-90 minutes  
+**Skills Acquired**:
+- ✅ Template-based project initialization
+- ✅ Azure resource provisioning
+- ✅ Application deployment workflows
+- ✅ Environment management
+- ✅ Configuration management
+- ✅ Resource cleanup and cost management
+
+**Next Level**: You’re ready for the [Configuration Guide](configuration.md) to learn advanced configuration patterns!
 
 ## Troubleshooting Common Issues
 
@@ -344,7 +452,7 @@ netstat -an | grep :3100
 
 ## Next Steps
 
-Now that you've completed your first project, dive into these advanced topics:
+Now that you’ve completed your first project, explore these advanced topics:
 
 ### 1. Customize Infrastructure
 - [Infrastructure as Code](../deployment/provisioning.md)
@@ -391,7 +499,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Congratulations on completing your first azd project!** You're now equipped to confidently build and deploy amazing applications on Azure.
+**Congratulations on completing your first azd project!** You’re now ready to build and deploy amazing applications on Azure with confidence.
 
 ---
 
@@ -400,10 +508,12 @@ azd init --template todo-java-mongo
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [Installation & Setup](installation.md)
 - **➡️ Next**: [Configuration](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 - **Next Lesson**: [Deployment Guide](../deployment/deployment-guide.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

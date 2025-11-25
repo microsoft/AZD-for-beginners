@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c8ab8fd8ed338b3ec17484b453dcda68",
-  "translation_date": "2025-09-18T12:47:51+00:00",
+  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
+  "translation_date": "2025-11-25T09:45:46+00:00",
   "source_file": "docs/troubleshooting/ai-troubleshooting.md",
   "language_code": "en"
 }
@@ -13,12 +13,12 @@ CO_OP_TRANSLATOR_METADATA:
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
-- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**Previous:** [Production AI Practices](../ai-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
+**Previous:** [Production AI Practices](../microsoft-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
 
-This detailed troubleshooting guide covers common challenges encountered when deploying AI solutions with AZD, offering solutions and debugging strategies tailored to Azure AI services.
+This comprehensive troubleshooting guide addresses common issues when deploying AI solutions with AZD, providing solutions and debugging techniques specific to Azure AI services.
 
 ## Table of Contents
 
@@ -41,9 +41,9 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Causes:**
-- Azure OpenAI is not supported in the selected region
-- Quota has been exhausted in preferred regions
-- Regional capacity limitations
+- Azure OpenAI not available in selected region
+- Quota exhausted in preferred regions
+- Regional capacity constraints
 
 **Solutions:**
 
@@ -535,7 +535,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 ### Issue: High Latency Responses
 
 **Symptoms:**
-- Response times exceed 30 seconds
+- Response times > 30 seconds
 - Timeout errors
 - Poor user experience
 
@@ -667,9 +667,9 @@ class MemoryOptimizedAI:
 ### Issue: Unexpected High Costs
 
 **Symptoms:**
-- Azure bill is higher than expected
-- Token usage exceeds estimates
-- Budget alerts are triggered
+- Azure bill higher than expected
+- Token usage exceeding estimates
+- Budget alerts triggered
 
 **Solutions:**
 
@@ -854,7 +854,7 @@ def monitor_performance(func):
 
 1. **Review [AI Model Deployment Guide](ai-model-deployment.md)** for deployment best practices
 2. **Complete [Production AI Practices](production-ai-practices.md)** for enterprise-ready solutions
-3. **Join the [Azure AI Foundry Discord](https://aka.ms/foundry/discord)** for community support
+3. **Join the [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** for community support
 4. **Submit issues** to the [AZD GitHub repository](https://github.com/Azure/azure-dev) for AZD-specific problems
 
 ## Resources
@@ -869,11 +869,13 @@ def monitor_performance(func):
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
-- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
-- **🤖 Related**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
+- **🤖 Related**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 - [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

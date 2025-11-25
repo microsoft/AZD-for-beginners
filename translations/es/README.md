@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "b2e94dc30cab0675918a6ad34863b05d",
-  "translation_date": "2025-11-19T20:09:06+00:00",
+  "original_hash": "6a804be263d09a0fd6f36d6ab251707a",
+  "translation_date": "2025-11-25T10:01:51+00:00",
   "source_file": "README.md",
   "language_code": "es"
 }
@@ -32,7 +32,7 @@ Sigue estos pasos para iniciar tu viaje de aprendizaje con AZD:
 #### Traducciones Automáticas (Siempre Actualizadas)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Árabe](../ar/README.md) | [Bengalí](../bn/README.md) | [Búlgaro](../bg/README.md) | [Birmano (Myanmar)](../my/README.md) | [Chino (Simplificado)](../zh/README.md) | [Chino (Tradicional, Hong Kong)](../hk/README.md) | [Chino (Tradicional, Macao)](../mo/README.md) | [Chino (Tradicional, Taiwán)](../tw/README.md) | [Croata](../hr/README.md) | [Checo](../cs/README.md) | [Danés](../da/README.md) | [Holandés](../nl/README.md) | [Estonio](../et/README.md) | [Finlandés](../fi/README.md) | [Francés](../fr/README.md) | [Alemán](../de/README.md) | [Griego](../el/README.md) | [Hebreo](../he/README.md) | [Hindi](../hi/README.md) | [Húngaro](../hu/README.md) | [Indonesio](../id/README.md) | [Italiano](../it/README.md) | [Japonés](../ja/README.md) | [Coreano](../ko/README.md) | [Lituano](../lt/README.md) | [Malayo](../ms/README.md) | [Maratí](../mr/README.md) | [Nepalí](../ne/README.md) | [Noruego](../no/README.md) | [Persa (Farsi)](../fa/README.md) | [Polaco](../pl/README.md) | [Portugués (Brasil)](../br/README.md) | [Portugués (Portugal)](../pt/README.md) | [Panyabí (Gurmukhi)](../pa/README.md) | [Rumano](../ro/README.md) | [Ruso](../ru/README.md) | [Serbio (Cirílico)](../sr/README.md) | [Eslovaco](../sk/README.md) | [Esloveno](../sl/README.md) | [Español](./README.md) | [Suajili](../sw/README.md) | [Sueco](../sv/README.md) | [Tagalo (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Tailandés](../th/README.md) | [Turco](../tr/README.md) | [Ucraniano](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamita](../vi/README.md)
+[Árabe](../ar/README.md) | [Bengalí](../bn/README.md) | [Búlgaro](../bg/README.md) | [Birmano (Myanmar)](../my/README.md) | [Chino (Simplificado)](../zh/README.md) | [Chino (Tradicional, Hong Kong)](../hk/README.md) | [Chino (Tradicional, Macao)](../mo/README.md) | [Chino (Tradicional, Taiwán)](../tw/README.md) | [Croata](../hr/README.md) | [Checo](../cs/README.md) | [Danés](../da/README.md) | [Holandés](../nl/README.md) | [Estonio](../et/README.md) | [Finlandés](../fi/README.md) | [Francés](../fr/README.md) | [Alemán](../de/README.md) | [Griego](../el/README.md) | [Hebreo](../he/README.md) | [Hindi](../hi/README.md) | [Húngaro](../hu/README.md) | [Indonesio](../id/README.md) | [Italiano](../it/README.md) | [Japonés](../ja/README.md) | [Canarés](../kn/README.md) | [Coreano](../ko/README.md) | [Lituano](../lt/README.md) | [Malayo](../ms/README.md) | [Malayalam](../ml/README.md) | [Maratí](../mr/README.md) | [Nepalí](../ne/README.md) | [Pidgin Nigeriano](../pcm/README.md) | [Noruego](../no/README.md) | [Persa (Farsi)](../fa/README.md) | [Polaco](../pl/README.md) | [Portugués (Brasil)](../br/README.md) | [Portugués (Portugal)](../pt/README.md) | [Panyabí (Gurmukhi)](../pa/README.md) | [Rumano](../ro/README.md) | [Ruso](../ru/README.md) | [Serbio (Cirílico)](../sr/README.md) | [Eslovaco](../sk/README.md) | [Esloveno](../sl/README.md) | [Español](./README.md) | [Swahili](../sw/README.md) | [Sueco](../sv/README.md) | [Tagalo (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Tailandés](../th/README.md) | [Turco](../tr/README.md) | [Ucraniano](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamita](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## Resumen del Curso
@@ -84,7 +84,7 @@ Al completar este curso estructurado, podrás:
 # Verificación rápida de instalación
 azd version
 
-# Despliega tu primera aplicación
+# Implementa tu primera aplicación
 azd init --template todo-nodejs-mongo
 azd up
 ```
@@ -102,7 +102,7 @@ azd show                # Muestra la URL de la aplicación en ejecución
 azd down --force --purge  # Limpia los recursos
 ```
 
-**📊 Inversión de Tiempo:** 30-45 minutos  
+**📊 Tiempo Invertido:** 30-45 minutos  
 **📈 Nivel de Habilidad Después:** Capaz de desplegar aplicaciones básicas de forma independiente
 
 **✅ Validación del Éxito:**
@@ -116,7 +116,7 @@ azd show                # Muestra la URL de la aplicación en ejecución
 azd down --force --purge  # Limpia los recursos
 ```
 
-**📊 Inversión de Tiempo:** 30-45 minutos  
+**📊 Tiempo Invertido:** 30-45 minutos  
 **📈 Nivel de Habilidad Después:** Capaz de desplegar aplicaciones básicas de forma independiente
 
 ---
@@ -128,7 +128,7 @@ azd down --force --purge  # Limpia los recursos
 
 #### Lo Que Aprenderás
 - Integración de Microsoft Foundry con AZD
-- Desplegar aplicaciones impulsadas por IA
+- Despliegue de aplicaciones impulsadas por IA
 - Comprender configuraciones de servicios de IA
 
 #### Recursos de Aprendizaje
@@ -159,12 +159,12 @@ azd init --template azure-search-openai-demo
 azd up
 # Probar la interfaz de chat de IA
 # Hacer preguntas y obtener respuestas impulsadas por IA con fuentes
-# Verificar que la integración de búsqueda funcione
+# Verificar que la integración de búsqueda funciona
 azd monitor  # Comprobar que Application Insights muestra telemetría
 azd down --force --purge
 ```
 
-**📊 Inversión de Tiempo:** 1-2 horas  
+**📊 Tiempo Invertido:** 1-2 horas  
 **📈 Nivel de Habilidad Después:** Capaz de desplegar y configurar aplicaciones de IA listas para producción  
 **💰 Conciencia de Costos:** Comprender costos de $80-150/mes en desarrollo, $300-3500/mes en producción
 
@@ -262,7 +262,7 @@ az consumption budget list --resource-group <your-rg>
 #### Recursos de Aprendizaje
 - **🤖 Proyecto Destacado**: [Solución Multi-Agente para Retail](examples/retail-scenario.md) - Implementación completa
 - **🛠️ Plantillas ARM**: [Paquete de Plantillas ARM](../../examples/retail-multiagent-arm-template) - Despliegue con un clic
-- **📖 Arquitectura**: [Patrones de coordinación multi-agente](/docs/pre-deployment/coordination-patterns.md) - Patrones
+- **📖 Arquitectura**: [Patrones de coordinación multiagente](/docs/pre-deployment/coordination-patterns.md) - Patrones
 
 #### Ejercicios Prácticos
 ```bash
@@ -274,7 +274,7 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Resultado del Capítulo**: Implementar y gestionar una solución de IA multiagente lista para producción con agentes de Cliente e Inventario
+**💡 Resultado del Capítulo**: Desplegar y gestionar una solución de IA multiagente lista para producción con agentes de Cliente e Inventario
 
 ---
 
@@ -283,46 +283,46 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Duración**: 1 hora  
 **Complejidad**: ⭐⭐
 
-#### Lo que aprenderás
+#### Lo que Aprenderás
 - Planificación de capacidad y validación de recursos
 - Estrategias de selección de SKU
 - Verificaciones previas y automatización
 
-#### Recursos de aprendizaje
+#### Recursos de Aprendizaje
 - **📊 Planificación**: [Planificación de Capacidad](docs/pre-deployment/capacity-planning.md) - Validación de recursos
 - **💰 Selección**: [Selección de SKU](docs/pre-deployment/sku-selection.md) - Opciones rentables
 - **✅ Validación**: [Verificaciones Previas](docs/pre-deployment/preflight-checks.md) - Scripts automatizados
 
-#### Ejercicios prácticos
+#### Ejercicios Prácticos
 - Ejecutar scripts de validación de capacidad
 - Optimizar selecciones de SKU para reducir costos
-- Implementar verificaciones automatizadas previas al despliegue
+- Implementar verificaciones previas al despliegue automatizadas
 
 **💡 Resultado del Capítulo**: Validar y optimizar despliegues antes de la ejecución
 
 ---
 
-### 🚨 Capítulo 7: Resolución de Problemas y Depuración
+### 🚨 Capítulo 7: Solución de Problemas y Depuración
 **Requisitos previos**: Cualquier capítulo de despliegue completado  
 **Duración**: 1-1.5 horas  
 **Complejidad**: ⭐⭐
 
-#### Lo que aprenderás
+#### Lo que Aprenderás
 - Enfoques sistemáticos de depuración
 - Problemas comunes y soluciones
-- Resolución de problemas específicos de IA
+- Solución de problemas específicos de IA
 
-#### Recursos de aprendizaje
-- **🔧 Problemas Comunes**: [Problemas Comunes](docs/troubleshooting/common-issues.md) - Preguntas frecuentes y soluciones
+#### Recursos de Aprendizaje
+- **🔧 Problemas Comunes**: [Problemas Comunes](docs/troubleshooting/common-issues.md) - FAQ y soluciones
 - **🕵️ Depuración**: [Guía de Depuración](docs/troubleshooting/debugging.md) - Estrategias paso a paso
-- **🤖 Problemas de IA**: [Resolución de Problemas Específicos de IA](docs/troubleshooting/ai-troubleshooting.md) - Problemas con servicios de IA
+- **🤖 Problemas de IA**: [Solución de Problemas de IA](docs/troubleshooting/ai-troubleshooting.md) - Problemas con servicios de IA
 
-#### Ejercicios prácticos
-- Diagnosticar fallos en despliegues
+#### Ejercicios Prácticos
+- Diagnosticar fallos en el despliegue
 - Resolver problemas de autenticación
-- Depurar la conectividad de servicios de IA
+- Depurar conectividad de servicios de IA
 
-**💡 Resultado del Capítulo**: Diagnosticar y resolver problemas comunes de despliegue de manera independiente
+**💡 Resultado del Capítulo**: Diagnosticar y resolver de forma independiente problemas comunes de despliegue
 
 ---
 
@@ -331,20 +331,20 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Duración**: 2-3 horas  
 **Complejidad**: ⭐⭐⭐⭐
 
-#### Lo que aprenderás
+#### Lo que Aprenderás
 - Estrategias de despliegue en producción
 - Patrones de seguridad empresarial
 - Monitoreo y optimización de costos
 
-#### Recursos de aprendizaje
-- **🏭 Producción**: [Prácticas de IA en Producción](docs/microsoft-foundry/production-ai-practices.md) - Patrones empresariales
+#### Recursos de Aprendizaje
+- **🏭 Producción**: [Mejores Prácticas de IA en Producción](docs/microsoft-foundry/production-ai-practices.md) - Patrones empresariales
 - **📝 Ejemplos**: [Ejemplo de Microservicios](../../examples/microservices) - Arquitecturas complejas
 - **📊 Monitoreo**: [Integración con Application Insights](docs/pre-deployment/application-insights.md) - Monitoreo
 
-#### Ejercicios prácticos
+#### Ejercicios Prácticos
 - Implementar patrones de seguridad empresarial
 - Configurar monitoreo integral
-- Desplegar en producción con gobernanza adecuada
+- Desplegar en producción con la gobernanza adecuada
 
 **💡 Resultado del Capítulo**: Desplegar aplicaciones listas para empresa con capacidades completas de producción
 
@@ -353,16 +353,16 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ## 🎓 Resumen del Taller: Experiencia de Aprendizaje Práctico
 
 > **⚠️ ESTADO DEL TALLER: En Desarrollo Activo**  
-> Los materiales del taller están siendo desarrollados y refinados. Los módulos principales están funcionales, pero algunas secciones avanzadas están incompletas. Estamos trabajando activamente para completar todo el contenido. [Seguimiento del progreso →](workshop/README.md)
+> Los materiales del taller están siendo desarrollados y refinados. Los módulos principales son funcionales, pero algunas secciones avanzadas están incompletas. Estamos trabajando activamente para completar todo el contenido. [Seguimiento del progreso →](workshop/README.md)
 
 ### Materiales Interactivos del Taller
 **Aprendizaje práctico integral con herramientas basadas en navegador y ejercicios guiados**
 
-Nuestros materiales del taller ofrecen una experiencia de aprendizaje estructurada e interactiva que complementa el currículo basado en capítulos mencionado anteriormente. El taller está diseñado tanto para aprendizaje autodirigido como para sesiones dirigidas por instructores.
+Nuestros materiales del taller ofrecen una experiencia de aprendizaje estructurada e interactiva que complementa el plan de estudios basado en capítulos mencionado anteriormente. El taller está diseñado tanto para aprendizaje autodirigido como para sesiones dirigidas por instructores.
 
 #### 🛠️ Características del Taller
-- **Interfaz Basada en Navegador**: Taller completo impulsado por MkDocs con búsqueda, copia y funciones de tema
-- **Integración con GitHub Codespaces**: Configuración de entorno de desarrollo con un solo clic
+- **Interfaz Basada en Navegador**: Taller impulsado por MkDocs con búsqueda, copia y funciones de tema
+- **Integración con GitHub Codespaces**: Configuración del entorno de desarrollo con un clic
 - **Ruta de Aprendizaje Estructurada**: Ejercicios guiados en 7 pasos (3.5 horas en total)
 - **Descubrimiento → Despliegue → Personalización**: Metodología progresiva
 - **Entorno Interactivo DevContainer**: Herramientas y dependencias preconfiguradas
@@ -370,7 +370,7 @@ Nuestros materiales del taller ofrecen una experiencia de aprendizaje estructura
 #### 📚 Estructura del Taller
 El taller sigue una metodología de **Descubrimiento → Despliegue → Personalización**:
 
-1. **Fase de Descubrimiento** (45 minutos)
+1. **Fase de Descubrimiento** (45 mins)
    - Explorar plantillas y servicios de Microsoft Foundry
    - Comprender patrones de arquitectura multiagente
    - Revisar requisitos y prerrequisitos de despliegue
@@ -380,7 +380,7 @@ El taller sigue una metodología de **Descubrimiento → Despliegue → Personal
    - Configurar servicios de Azure AI y puntos de conexión
    - Implementar patrones de seguridad y autenticación
 
-3. **Fase de Personalización** (45 minutos)
+3. **Fase de Personalización** (45 mins)
    - Modificar aplicaciones para casos de uso específicos
    - Optimizar para despliegue en producción
    - Implementar monitoreo y gestión de costos
@@ -402,7 +402,7 @@ Al completar el taller, los participantes podrán:
 - **Dominar Arquitecturas Multiagente**: Implementar soluciones coordinadas de agentes de IA
 - **Implementar Mejores Prácticas de Seguridad**: Configurar autenticación y control de acceso
 - **Optimizar para Escalabilidad**: Diseñar despliegues rentables y de alto rendimiento
-- **Resolver Problemas de Despliegue**: Solucionar problemas comunes de manera independiente
+- **Solucionar Problemas de Despliegue**: Resolver problemas comunes de forma independiente
 
 #### 📖 Recursos del Taller
 - **🎥 Guía Interactiva**: [Materiales del Taller](workshop/README.md) - Entorno de aprendizaje basado en navegador
@@ -416,22 +416,22 @@ Al completar el taller, los participantes podrán:
 
 ## 📖 ¿Qué es Azure Developer CLI?
 
-Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desarrolladores que acelera el proceso de creación y despliegue de aplicaciones en Azure. Proporciona:
+Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desarrolladores que acelera el proceso de construcción y despliegue de aplicaciones en Azure. Proporciona:
 
-- **Despliegues basados en plantillas** - Usa plantillas preconstruidas para patrones comunes de aplicaciones
+- **Despliegues basados en plantillas** - Usa plantillas preconstruidas para patrones de aplicaciones comunes
 - **Infraestructura como Código** - Gestiona recursos de Azure usando Bicep o Terraform  
 - **Flujos de trabajo integrados** - Provisión, despliegue y monitoreo de aplicaciones sin problemas
 - **Amigable para desarrolladores** - Optimizado para la productividad y experiencia del desarrollador
 
 ### **AZD + Microsoft Foundry: Perfecto para Despliegues de IA**
 
-**¿Por qué AZD para soluciones de IA?** AZD aborda los principales desafíos que enfrentan los desarrolladores de IA:
+**¿Por qué usar AZD para Soluciones de IA?** AZD aborda los principales desafíos que enfrentan los desarrolladores de IA:
 
 - **Plantillas listas para IA** - Plantillas preconfiguradas para Azure OpenAI, Cognitive Services y cargas de trabajo de ML
-- **Despliegues de IA seguros** - Patrones de seguridad integrados para servicios de IA, claves API y puntos de conexión de modelos  
+- **Despliegues de IA Seguros** - Patrones de seguridad integrados para servicios de IA, claves API y puntos de conexión de modelos  
 - **Patrones de IA en Producción** - Mejores prácticas para despliegues de aplicaciones de IA escalables y rentables
-- **Flujos de trabajo de IA de extremo a extremo** - Desde el desarrollo de modelos hasta el despliegue en producción con monitoreo adecuado
-- **Optimización de costos** - Estrategias inteligentes de asignación de recursos y escalabilidad para cargas de trabajo de IA
+- **Flujos de Trabajo de IA de Extremo a Extremo** - Desde el desarrollo del modelo hasta el despliegue en producción con monitoreo adecuado
+- **Optimización de Costos** - Estrategias inteligentes de asignación de recursos y escalado para cargas de trabajo de IA
 - **Integración con Microsoft Foundry** - Conexión fluida al catálogo de modelos y puntos de conexión de Microsoft Foundry
 
 ---
@@ -441,19 +441,19 @@ Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desa
 ### Destacado: Plantillas de Microsoft Foundry
 **¡Comienza aquí si estás desplegando aplicaciones de IA!**
 
-> **Nota:** Estas plantillas demuestran varios patrones de IA. Algunas son ejemplos externos de Azure Samples, otras son implementaciones locales.
+> **Nota:** Estas plantillas demuestran varios patrones de IA. Algunas son muestras externas de Azure, otras son implementaciones locales.
 
 | Plantilla | Capítulo | Complejidad | Servicios | Tipo |
 |----------|---------|------------|----------|------|
-| [**Comienza con chat de IA**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capítulo 2 | ⭐⭐ | AzureOpenAI + API de Inferencia de Modelos de Azure AI + Azure AI Search + Azure Container Apps + Application Insights | Externo |
-| [**Comienza con agentes de IA**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Capítulo 2 | ⭐⭐ | Servicio de Agentes de Azure AI + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Externo |
-| [**Demo de Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | Capítulo 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Externo |
-| [**Inicio rápido de aplicación de chat OpenAI**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Capítulo 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Externo |
-| [**Agente OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Externo |
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Capítulo 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Externo |
+| [**Comienza con el chat de IA**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Capítulo 2 | ⭐⭐ | AzureOpenAI + API de Inferencia de Modelos de Azure AI + Azure AI Search + Azure Container Apps + Application Insights | Externa |
+| [**Comienza con agentes de IA**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Capítulo 2 | ⭐⭐ | Servicio de Agentes de Azure AI + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Externa |
+| [**Demo de Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | Capítulo 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Externa |
+| [**Inicio rápido de la aplicación de chat OpenAI**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Capítulo 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Externa |
+| [**Agente OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Externa |
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Capítulo 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Externa |
 | [**Solución Multiagente para Retail**](examples/retail-scenario.md) | Capítulo 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Local** |
 
-### Destacado: Escenarios de Aprendizaje Completo
+### Destacado: Escenarios Completos de Aprendizaje
 **Plantillas de aplicaciones listas para producción mapeadas a capítulos de aprendizaje**
 
 | Plantilla | Capítulo de Aprendizaje | Complejidad | Aprendizaje Clave |
@@ -465,11 +465,11 @@ Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desa
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Capítulo 8 | ⭐⭐⭐ | Orquestación de IA empresarial |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Capítulo 5 | ⭐⭐⭐⭐ | Arquitectura multiagente con agentes de Cliente e Inventario |
 
-### Aprender por Tipo de Ejemplo
+### Aprendizaje por Tipo de Ejemplo
 
 > **📌 Ejemplos Locales vs. Externos:**  
 > **Ejemplos Locales** (en este repositorio) = Listos para usar inmediatamente  
-> **Ejemplos Externos** (Azure Samples) = Clonar desde repositorios vinculados
+> **Ejemplos Externos** (Muestras de Azure) = Clonar desde los repositorios enlazados
 
 #### Ejemplos Locales (Listos para Usar)
 - [**Solución Multiagente para Retail**](examples/retail-scenario.md) - Implementación completa lista para producción con plantillas ARM
@@ -481,22 +481,22 @@ Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desa
 **Ejemplos completos de despliegue en contenedores en este repositorio:**
 - [**Ejemplos de Aplicaciones en Contenedores**](examples/container-app/README.md) - Guía completa para despliegues en contenedores
   - [API Simple Flask](../../examples/container-app/simple-flask-api) - API REST básica con escala a cero
-  - [Arquitectura de Microservicios](../../examples/container-app/microservices) - Despliegue multi-servicio listo para producción
-  - Patrones de despliegue rápido, producción y avanzado
+  - [Arquitectura de Microservicios](../../examples/container-app/microservices) - Despliegue listo para producción de múltiples servicios
+  - Patrones de despliegue Rápido, Producción y Avanzado
   - Guía de monitoreo, seguridad y optimización de costos
 
 #### Ejemplos Externos - Aplicaciones Simples (Capítulos 1-2)
-**Clona estos repositorios de Azure Samples para comenzar:**
+**Clona estos repositorios de Muestras de Azure para comenzar:**
 - [Aplicación Web Simple - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Patrones básicos de despliegue
 - [Sitio Web Estático - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Despliegue de contenido estático
 - [Aplicación en Contenedor - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Despliegue de API REST
 
-#### Ejemplos Externos - Integración de Bases de Datos (Capítulos 3-4)  
-- [Aplicación de Base de Datos - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Patrones de conectividad de bases de datos
+#### Ejemplos Externos - Integración con Bases de Datos (Capítulos 3-4)  
+- [Aplicación con Base de Datos - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Patrones de conectividad con bases de datos
 - [Funciones + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Flujo de datos sin servidor
 
 #### Ejemplos Externos - Patrones Avanzados (Capítulos 4-8)
-- [Microservicios en Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - Arquitecturas multi-servicio
+- [Microservicios en Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - Arquitecturas de múltiples servicios
 - [Trabajos en Aplicaciones en Contenedores](https://github.com/Azure-Samples/container-apps-jobs) - Procesamiento en segundo plano  
 - [Pipeline Empresarial de ML](https://github.com/Azure-Samples/mlops-v2) - Patrones de ML listos para producción
 
@@ -510,25 +510,26 @@ Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desa
 ## 📚 Recursos de Aprendizaje y Referencias
 
 ### Referencias Rápidas
-- [**Hoja de Trucos de Comandos**](resources/cheat-sheet.md) - Comandos esenciales de azd organizados por capítulo
+- [**Hoja de referencia de comandos**](resources/cheat-sheet.md) - Comandos esenciales de azd organizados por capítulo
 - [**Glosario**](resources/glossary.md) - Terminología de Azure y azd  
-- [**Preguntas Frecuentes**](resources/faq.md) - Preguntas comunes organizadas por capítulo de aprendizaje
-- [**Guía de Estudio**](resources/study-guide.md) - Ejercicios prácticos completos
-### Talleres Prácticos
-- [**Laboratorio de Taller de IA**](docs/microsoft-foundry/ai-workshop-lab.md) - Haz que tus soluciones de IA sean desplegables con AZD (2-3 horas)
-- [**Guía Interactiva del Taller**](workshop/README.md) - Taller basado en navegador con MkDocs y entorno DevContainer
-- [**Ruta de Aprendizaje Estructurada**](../../workshop/docs/instructions) - Ejercicios guiados en 7 pasos (Descubrimiento → Despliegue → Personalización)
-- [**Taller AZD para Principiantes**](workshop/README.md) - Materiales completos de taller práctico con integración de GitHub Codespaces
+- [**Preguntas frecuentes**](resources/faq.md) - Preguntas comunes organizadas por capítulo de aprendizaje
+- [**Guía de estudio**](resources/study-guide.md) - Ejercicios prácticos completos
 
-### Recursos de Aprendizaje Externos
+### Talleres prácticos
+- [**Laboratorio de taller de IA**](docs/microsoft-foundry/ai-workshop-lab.md) - Haz que tus soluciones de IA sean implementables con AZD (2-3 horas)
+- [**Guía interactiva del taller**](workshop/README.md) - Taller basado en navegador con MkDocs y entorno DevContainer
+- [**Ruta de aprendizaje estructurada**](../../workshop/docs/instructions) - Ejercicios guiados en 7 pasos (Descubrimiento → Implementación → Personalización)
+- [**Taller AZD para principiantes**](workshop/README.md) - Materiales completos de taller práctico con integración de GitHub Codespaces
+
+### Recursos externos de aprendizaje
 - [Documentación de Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Centro de Arquitectura de Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Calculadora de Precios de Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Centro de arquitectura de Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Calculadora de precios de Azure](https://azure.microsoft.com/pricing/calculator/)
 - [Estado de Azure](https://status.azure.com/)
 
 ---
 
-## 🔧 Guía Rápida de Solución de Problemas
+## 🔧 Guía rápida de solución de problemas
 
 **Problemas comunes que enfrentan los principiantes y soluciones inmediatas:**
 
@@ -545,7 +546,7 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Verificar la instalación
+# Verificar instalación
 azd version
 ```
 
@@ -627,12 +628,12 @@ azd up
 - Aplicaciones de IA: 15-25 minutos (la provisión de OpenAI es lenta)
 
 ```bash
-# Verificar el progreso
+# Verificar progreso
 azd show
 
-# Si está atascado >30 minutos, revise el Portal de Azure:
+# Si está atascado >30 minutos, verifique el Portal de Azure:
 azd monitor
-# Buscar implementaciones fallidas
+# Busque implementaciones fallidas
 ```
 
 ### ❌ "Permiso denegado" o "Prohibido"
@@ -647,10 +648,10 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Administrador de acceso de usuario (para asignaciones de roles)
 ```
 
-### ❌ No se puede encontrar la URL de la aplicación desplegada
+### ❌ No se puede encontrar la URL de la aplicación implementada
 
 ```bash
-# Mostrar todos los puntos finales del servicio
+# Mostrar todos los puntos de servicio
 azd show
 
 # O abrir el Portal de Azure
@@ -663,14 +664,14 @@ azd env get-values
 
 ### 📚 Recursos completos de solución de problemas
 
-- **Guía de Problemas Comunes:** [Soluciones Detalladas](docs/troubleshooting/common-issues.md)
-- **Problemas Específicos de IA:** [Solución de Problemas de IA](docs/troubleshooting/ai-troubleshooting.md)
-- **Guía de Depuración:** [Depuración Paso a Paso](docs/troubleshooting/debugging.md)
-- **Obtener Ayuda:** [Discord de Azure](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Guía de problemas comunes:** [Soluciones detalladas](docs/troubleshooting/common-issues.md)
+- **Problemas específicos de IA:** [Solución de problemas de IA](docs/troubleshooting/ai-troubleshooting.md)
+- **Guía de depuración:** [Depuración paso a paso](docs/troubleshooting/debugging.md)
+- **Obtén ayuda:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🔧 Guía Rápida de Solución de Problemas
+## 🔧 Guía rápida de solución de problemas
 
 **Problemas comunes que enfrentan los principiantes y soluciones inmediatas:**
 
@@ -715,7 +716,7 @@ az account show
 <summary><strong>❌ "InsufficientQuota" o "Cuota excedida"</strong></summary>
 
 ```bash
-# Prueba con una región de Azure diferente
+# Prueba con una región diferente de Azure
 azd env set AZURE_LOCATION "westus2"
 azd up
 
@@ -782,12 +783,12 @@ azd up
 - Aplicaciones de IA: 15-25 minutos (la provisión de OpenAI es lenta)
 
 ```bash
-# Verificar el progreso
+# Verificar progreso
 azd show
 
-# Si está atascado >30 minutos, revise el Portal de Azure:
+# Si está atascado >30 minutos, verificar Azure Portal:
 azd monitor
-# Busque implementaciones fallidas
+# Buscar implementaciones fallidas
 ```
 </details>
 
@@ -795,7 +796,7 @@ azd monitor
 <summary><strong>❌ "Permiso denegado" o "Prohibido"</strong></summary>
 
 ```bash
-# Verifica tu rol en Azure
+# Verifica tu rol de Azure
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # Necesitas al menos el rol de "Colaborador"
@@ -806,7 +807,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 </details>
 
 <details>
-<summary><strong>❌ No se puede encontrar la URL de la aplicación desplegada</strong></summary>
+<summary><strong>❌ No se puede encontrar la URL de la aplicación implementada</strong></summary>
 
 ```bash
 # Mostrar todos los puntos de servicio
@@ -823,131 +824,132 @@ azd env get-values
 
 ### 📚 Recursos completos de solución de problemas
 
-- **Guía de Problemas Comunes:** [Soluciones Detalladas](docs/troubleshooting/common-issues.md)
-- **Problemas Específicos de IA:** [Solución de Problemas de IA](docs/troubleshooting/ai-troubleshooting.md)
-- **Guía de Depuración:** [Depuración Paso a Paso](docs/troubleshooting/debugging.md)
-- **Obtener Ayuda:** [Discord de Azure](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Guía de problemas comunes:** [Soluciones detalladas](docs/troubleshooting/common-issues.md)
+- **Problemas específicos de IA:** [Solución de problemas de IA](docs/troubleshooting/ai-troubleshooting.md)
+- **Guía de depuración:** [Depuración paso a paso](docs/troubleshooting/debugging.md)
+- **Obtén ayuda:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🎓 Finalización del Curso y Certificación
+## 🎓 Finalización del curso y certificación
 
-### Seguimiento del Progreso
+### Seguimiento del progreso
 Sigue tu progreso de aprendizaje a través de cada capítulo:
 
-- [ ] **Capítulo 1**: Fundamentos y Inicio Rápido ✅
-- [ ] **Capítulo 2**: Desarrollo con IA como prioridad ✅  
-- [ ] **Capítulo 3**: Configuración y Autenticación ✅
-- [ ] **Capítulo 4**: Infraestructura como Código y Despliegue ✅
-- [ ] **Capítulo 5**: Soluciones de IA Multi-Agente ✅
-- [ ] **Capítulo 6**: Validación y Planificación Pre-Despliegue ✅
-- [ ] **Capítulo 7**: Solución de Problemas y Depuración ✅
-- [ ] **Capítulo 8**: Patrones de Producción y Empresa ✅
+- [ ] **Capítulo 1**: Fundamentos y inicio rápido ✅
+- [ ] **Capítulo 2**: Desarrollo centrado en IA ✅  
+- [ ] **Capítulo 3**: Configuración y autenticación ✅
+- [ ] **Capítulo 4**: Infraestructura como código e implementación ✅
+- [ ] **Capítulo 5**: Soluciones de IA multiagente ✅
+- [ ] **Capítulo 6**: Validación previa a la implementación y planificación ✅
+- [ ] **Capítulo 7**: Solución de problemas y depuración ✅
+- [ ] **Capítulo 8**: Patrones de producción y empresariales ✅
 
-### Verificación del Aprendizaje
+### Verificación del aprendizaje
 Después de completar cada capítulo, verifica tu conocimiento mediante:
-1. **Ejercicio Práctico**: Completa el despliegue práctico del capítulo
-2. **Revisión de Conocimientos**: Consulta la sección de preguntas frecuentes del capítulo
-3. **Discusión Comunitaria**: Comparte tu experiencia en Discord de Azure
-4. **Siguiente Capítulo**: Avanza al siguiente nivel de complejidad
+1. **Ejercicio práctico**: Completa la implementación práctica del capítulo
+2. **Revisión de conocimientos**: Consulta la sección de preguntas frecuentes de tu capítulo
+3. **Discusión comunitaria**: Comparte tu experiencia en Azure Discord
+4. **Siguiente capítulo**: Avanza al siguiente nivel de complejidad
 
-### Beneficios de Completar el Curso
+### Beneficios de completar el curso
 Al completar todos los capítulos, obtendrás:
-- **Experiencia en Producción**: Aplicaciones de IA reales desplegadas en Azure
-- **Habilidades Profesionales**: Capacidades de despliegue listas para empresas  
-- **Reconocimiento Comunitario**: Miembro activo de la comunidad de desarrolladores de Azure
-- **Avance Profesional**: Experiencia en AZD y despliegue de IA en demanda
+- **Experiencia en producción**: Implementación de aplicaciones reales de IA en Azure
+- **Habilidades profesionales**: Capacidades de implementación listas para empresas  
+- **Reconocimiento comunitario**: Miembro activo de la comunidad de desarrolladores de Azure
+- **Avance profesional**: Experiencia en AZD y despliegue de IA en alta demanda
 
 ---
 
-## 🤝 Comunidad y Soporte
+## 🤝 Comunidad y soporte
 
-### Obtener Ayuda y Soporte
-- **Problemas Técnicos**: [Reporta errores y solicita funciones](https://github.com/microsoft/azd-for-beginners/issues)
-- **Preguntas de Aprendizaje**: [Comunidad de Discord de Microsoft Azure](https://discord.gg/microsoft-azure) y [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **Ayuda Específica de IA**: Únete al [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+### Obtén ayuda y soporte
+- **Problemas técnicos**: [Reporta errores y solicita funciones](https://github.com/microsoft/azd-for-beginners/issues)
+- **Preguntas de aprendizaje**: [Comunidad de Microsoft Azure en Discord](https://discord.gg/microsoft-azure) y [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Ayuda específica de IA**: Únete a [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Documentación**: [Documentación oficial de Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Perspectivas de la Comunidad en Discord de Microsoft Foundry
+### Perspectivas de la comunidad desde Microsoft Foundry Discord
 
 **Resultados recientes de encuestas en el canal #Azure:**
 - **45%** de los desarrolladores quieren usar AZD para cargas de trabajo de IA
-- **Principales desafíos**: Despliegues multi-servicio, gestión de credenciales, preparación para producción  
+- **Principales desafíos**: Implementaciones de múltiples servicios, gestión de credenciales, preparación para producción  
 - **Más solicitado**: Plantillas específicas de IA, guías de solución de problemas, mejores prácticas
 
 **Únete a nuestra comunidad para:**
 - Compartir tus experiencias con AZD + IA y obtener ayuda
-- Acceder a vistas previas tempranas de nuevas plantillas de IA
-- Contribuir a las mejores prácticas de despliegue de IA
+- Acceder a vistas previas de nuevas plantillas de IA
+- Contribuir a las mejores prácticas de implementación de IA
 - Influir en el desarrollo futuro de características de IA + AZD
 
-### Contribuir al Curso
-¡Aceptamos contribuciones! Por favor, lee nuestra [Guía de Contribución](CONTRIBUTING.md) para detalles sobre:
-- **Mejoras de Contenido**: Mejorar capítulos y ejemplos existentes
-- **Nuevos Ejemplos**: Agregar escenarios y plantillas del mundo real  
-- **Traducción**: Ayudar a mantener soporte multilingüe
-- **Reportes de Errores**: Mejorar precisión y claridad
-- **Estándares Comunitarios**: Seguir nuestras pautas inclusivas de comunidad
+### Contribuir al curso
+¡Damos la bienvenida a las contribuciones! Por favor, lee nuestra [Guía de contribución](CONTRIBUTING.md) para detalles sobre:
+- **Mejoras de contenido**: Mejora capítulos y ejemplos existentes
+- **Nuevos ejemplos**: Agrega escenarios y plantillas del mundo real  
+- **Traducción**: Ayuda a mantener el soporte multilingüe
+- **Reportes de errores**: Mejora la precisión y claridad
+- **Estándares comunitarios**: Sigue nuestras directrices inclusivas de la comunidad
 
 ---
 
-## 📄 Información del Curso
+## 📄 Información del curso
 
 ### Licencia
 Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](../../LICENSE) para más detalles.
 
-### Recursos de Aprendizaje Relacionados de Microsoft
+### Recursos relacionados de aprendizaje de Microsoft
 
 Nuestro equipo produce otros cursos de aprendizaje completos:
 
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### Azure / Edge / MCP / Agentes
-[![AZD para Principiantes](https://img.shields.io/badge/AZD%20para%20Principiantes-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Edge IA para Principiantes](https://img.shields.io/badge/Edge%20IA%20para%20Principiantes-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![MCP para Principiantes](https://img.shields.io/badge/MCP%20para%20Principiantes-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Agentes de IA para Principiantes](https://img.shields.io/badge/Agentes%20de%20IA%20para%20Principiantes-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AZD para principiantes](https://img.shields.io/badge/AZD%20para%20principiantes-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI para principiantes](https://img.shields.io/badge/Edge%20AI%20para%20principiantes-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP para principiantes](https://img.shields.io/badge/MCP%20para%20principiantes-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Agentes de IA para principiantes](https://img.shields.io/badge/Agentes%20de%20IA%20para%20principiantes-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
-
-### Serie de IA Generativa
-[![IA Generativa para Principiantes](https://img.shields.io/badge/IA%20Generativa%20para%20Principiantes-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![IA Generativa (.NET)](https://img.shields.io/badge/IA%20Generativa%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![IA Generativa (Java)](https://img.shields.io/badge/IA%20Generativa%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![IA Generativa (JavaScript)](https://img.shields.io/badge/IA%20Generativa%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+ 
+### Serie de IA generativa
+[![IA generativa para principiantes](https://img.shields.io/badge/IA%20generativa%20para%20principiantes-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![IA generativa (.NET)](https://img.shields.io/badge/IA%20generativa%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![IA generativa (Java)](https://img.shields.io/badge/IA%20generativa%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![IA generativa (JavaScript)](https://img.shields.io/badge/IA%20generativa%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
-
-### Aprendizaje Básico
-[![ML para Principiantes](https://img.shields.io/badge/ML%20para%20Principiantes-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Ciencia de Datos para Principiantes](https://img.shields.io/badge/Ciencia%20de%20Datos%20para%20Principiantes-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![IA para Principiantes](https://img.shields.io/badge/IA%20para%20Principiantes-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![Ciberseguridad para Principiantes](https://img.shields.io/badge/Ciberseguridad%20para%20Principiantes-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Desarrollo Web para Principiantes](https://img.shields.io/badge/Desarrollo%20Web%20para%20Principiantes-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT para Principiantes](https://img.shields.io/badge/IoT%20para%20Principiantes-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Desarrollo XR para Principiantes](https://img.shields.io/badge/Desarrollo%20XR%20para%20Principiantes-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+ 
+### Aprendizaje básico
+[![ML para principiantes](https://img.shields.io/badge/ML%20para%20principiantes-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Ciencia de datos para principiantes](https://img.shields.io/badge/Ciencia%20de%20datos%20para%20principiantes-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![IA para principiantes](https://img.shields.io/badge/IA%20para%20principiantes-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Ciberseguridad para principiantes](https://img.shields.io/badge/Ciberseguridad%20para%20principiantes-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Desarrollo Web para Principiantes](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
+[![IoT para Principiantes](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+[![Desarrollo XR para Principiantes](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
 
 ### Serie Copilot  
-[![Copilot para Programación en Pareja con IA](https://img.shields.io/badge/Copilot%20para%20Programación%20en%20Pareja%20con%20IA-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-[![Copilot para C#/.NET](https://img.shields.io/badge/Copilot%20para%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-[![Aventura Copilot](https://img.shields.io/badge/Aventura%20Copilot-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+[![Copilot para Programación en Pareja con IA](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
+[![Copilot para C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
+[![Aventura Copilot](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
-## 🗺️ Navegación del Curso  
+## 🗺️ Navegación del Curso
 
 **🚀 ¿Listo para empezar a aprender?**
 
-**Principiantes**: Comienza con [Capítulo 1: Fundamentos y Inicio Rápido](../..)  
-**Desarrolladores de IA**: Salta al [Capítulo 2: Desarrollo con IA como prioridad](../..)  
-**Desarrolladores experimentados**: Empieza con [Capítulo 3: Configuración y Autenticación](../..)
+**Principiantes**: Comienza con [Capítulo 1: Fundamentos y Comienzo Rápido](../..)  
+**Desarrolladores de IA**: Salta a [Capítulo 2: Desarrollo con Enfoque en IA](../..)  
+**Desarrolladores con Experiencia**: Empieza con [Capítulo 3: Configuración y Autenticación](../..)
 
-**Próximos pasos**: [Comienza el Capítulo 1 - Fundamentos de AZD](docs/getting-started/azd-basics.md) →
+**Próximos Pasos**: [Comienza el Capítulo 1 - Fundamentos de AZD](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

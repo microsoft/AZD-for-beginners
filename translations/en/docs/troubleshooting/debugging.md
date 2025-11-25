@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6d02a4ed24d16a82e651a7d3e8c618e8",
-  "translation_date": "2025-09-18T12:47:35+00:00",
+  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
+  "translation_date": "2025-11-25T09:44:02+00:00",
   "source_file": "docs/troubleshooting/debugging.md",
   "language_code": "en"
 }
@@ -14,20 +14,20 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Common Issues](common-issues.md)
 - **➡️ Next**: [AI-Specific Troubleshooting](ai-troubleshooting.md)
-- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduction
 
-This guide offers advanced strategies, tools, and techniques for debugging and resolving complex issues in Azure Developer CLI deployments. You'll learn systematic troubleshooting methods, log analysis, performance profiling, and how to use advanced diagnostic tools to address deployment and runtime challenges effectively.
+This guide offers advanced strategies, tools, and techniques for debugging and resolving complex issues with Azure Developer CLI deployments. You'll learn systematic troubleshooting methods, log analysis, performance profiling, and how to use advanced diagnostic tools to address deployment and runtime challenges effectively.
 
 ## Learning Goals
 
-By the end of this guide, you will:
-- Gain expertise in systematic debugging methods for Azure Developer CLI issues
+By completing this guide, you will:
+- Master systematic debugging methods for Azure Developer CLI issues
 - Learn advanced logging configurations and log analysis techniques
-- Implement strategies for performance profiling and monitoring
-- Utilize Azure diagnostic tools and services to solve complex problems
-- Apply network debugging and security troubleshooting methods
+- Implement performance profiling and monitoring strategies
+- Use Azure diagnostic tools and services to solve complex problems
+- Apply network debugging and security troubleshooting techniques
 - Set up comprehensive monitoring and alerting for proactive issue detection
 
 ## Learning Outcomes
@@ -68,7 +68,7 @@ export AZD_DISABLE_TELEMETRY=true
 
 ### Debug Configuration
 ```bash
-# Set debug configuration globally
+# Set global debug configuration
 azd config set debug.enabled true
 azd config set debug.logLevel debug
 azd config set debug.verboseOutput true
@@ -688,8 +688,8 @@ hooks:
 2. **Create reproducible test cases** for issues
 3. **Document debugging procedures** for your team
 4. **Automate health checks** and monitoring
-5. **Keep debug tools updated** alongside application changes
-6. **Practice debugging procedures** during non-critical times
+5. **Keep debug tools updated** with application changes
+6. **Practice debugging procedures** during non-incident times
 
 ## Next Steps
 
@@ -700,7 +700,7 @@ hooks:
 
 ---
 
-**Remember**: Effective debugging requires a systematic, thorough, and patient approach. These tools and techniques will help you diagnose issues more quickly and efficiently.
+**Remember**: Effective debugging requires being systematic, thorough, and patient. These tools and techniques will help you diagnose and resolve issues more efficiently.
 
 ---
 
@@ -711,5 +711,7 @@ hooks:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

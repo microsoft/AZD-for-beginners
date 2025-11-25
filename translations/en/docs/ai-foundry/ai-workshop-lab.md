@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "22e9deee2d82e70fc841c60f97627916",
-  "translation_date": "2025-09-23T13:53:55+00:00",
+  "original_hash": "8b26783231714a00efafee3aca8b233c",
+  "translation_date": "2025-11-25T09:47:28+00:00",
   "source_file": "docs/ai-foundry/ai-workshop-lab.md",
   "language_code": "en"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Workshop Overview
 
-This hands-on lab walks developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn key patterns for deploying AI solutions in production using Azure AI Foundry services.
+This hands-on lab walks developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn key patterns for deploying AI solutions in production using Microsoft Foundry services.
 
 **Duration:** 2-3 hours  
 **Level:** Intermediate  
@@ -28,7 +28,7 @@ This hands-on lab walks developers through the process of taking an existing AI 
 
 By the end of this workshop, you will be able to:
 - ✅ Adapt an existing AI application to use AZD templates
-- ✅ Configure Azure AI Foundry services with AZD
+- ✅ Configure Microsoft Foundry services with AZD
 - ✅ Implement secure credential management for AI services
 - ✅ Deploy production-ready AI applications with monitoring
 - ✅ Troubleshoot common AI deployment issues
@@ -44,7 +44,7 @@ By the end of this workshop, you will be able to:
 ### Azure Resources
 - Azure subscription with contributor access
 - Access to Azure OpenAI services (or ability to request access)
-- Resource group creation permissions
+- Permissions to create resource groups
 
 ### Knowledge Prerequisites
 - Basic understanding of Azure services
@@ -74,7 +74,6 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-
 ## Module 1: Understanding AZD Structure for AI Applications
 
 ### Anatomy of an AI AZD Template
@@ -95,7 +94,6 @@ azure-search-openai-demo/
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
-
 
 ### **Lab Exercise 1.1: Explore the Configuration**
 
@@ -122,10 +120,10 @@ cat infra/main.bicep
 
 ### **Discussion Point:** Why These Patterns Matter for AI
 
-- **Service Dependencies**: AI applications often require multiple coordinated services
+- **Service Dependencies**: AI apps often require multiple coordinated services
 - **Security**: API keys and endpoints need secure management
 - **Scalability**: AI workloads have unique scaling requirements
-- **Cost Management**: AI services can become expensive if not properly configured
+- **Cost Management**: AI services can be expensive if not properly configured
 
 ## Module 2: Deploy Your First AI Application
 
@@ -144,7 +142,6 @@ azd env set AZURE_LOCATION eastus
 # Optional: Set specific OpenAI model
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
-
 
 ### Step 2.2: Deploy the Infrastructure and Application
 
@@ -202,14 +199,13 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-
 ## Module 3: Customizing AI Applications for Your Needs
 
 ### Step 3.1: Modify the AI Configuration
 
 1. **Update the OpenAI model:**
 ```bash
-# Change to a different model (if available in your region)
+# Switch to a different model (if available in your region)
 azd env set AZURE_OPENAI_MODEL gpt-4
 
 # Redeploy with the new configuration
@@ -235,7 +231,6 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-
 ### Step 3.2: Environment-Specific Configurations
 
 **Best Practice**: Different configurations for development vs production.
@@ -254,7 +249,6 @@ azd env set AZURE_SEARCH_SKU standard
 # Enable additional security features
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
-
 
 ### **Lab Exercise 3.1: Cost Optimization**
 
@@ -290,7 +284,6 @@ grep -r "keyVault\|managedIdentity" infra/
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-
 ### Step 4.2: Network Security
 
 1. **Enable private endpoints** (if not already configured):
@@ -317,7 +310,6 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
   }
 }
 ```
-
 
 ### Step 4.3: Monitoring and Observability
 
@@ -350,7 +342,6 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
   }
 }
 ```
-
 
 ### **Lab Exercise 4.1: Security Audit**
 
@@ -465,7 +456,6 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-
 ### **Lab Exercise 5.1: Template Creation Challenge**
 
 **Challenge**: Create an AZD template for a document processing AI app.
@@ -488,7 +478,7 @@ output name string = openAIAccount.name
 
 #### Issue 1: OpenAI Service Quota Exceeded
 **Symptoms:** Deployment fails with quota error  
-**Solutions:**  
+**Solutions:**
 ```bash
 # Check current quotas
 az cognitiveservices usage list --location eastus
@@ -498,10 +488,9 @@ azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-
 #### Issue 2: Model Not Available in Region
 **Symptoms:** AI responses fail or model deployment errors  
-**Solutions:**  
+**Solutions:**
 ```bash
 # Check model availability by region
 az cognitiveservices model list --location eastus
@@ -511,10 +500,9 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
-
 #### Issue 3: Permission Issues
 **Symptoms:** 403 Forbidden errors when calling AI services  
-**Solutions:**  
+**Solutions:**
 ```bash
 # Check role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
@@ -525,7 +513,6 @@ az role assignment create \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
-
 
 ### Performance Issues
 
@@ -577,7 +564,6 @@ az monitor metrics alert create \
   --condition "avg Http5xx greater than 10" \
   --description "Alert when error rate is high"
 ```
-
 
 ### Step 7.2: Cost Optimization
 
@@ -650,7 +636,7 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 ### Microsoft Documentation
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Sample Templates
 - [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
@@ -658,28 +644,28 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Community Resources
-- [Azure AI Foundry Discord](https://discord.gg/microsoft-azure)
+- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Completion Certificate
 Congratulations! You've completed the AI Workshop Lab. You should now be able to:
 
-- ✅ Convert existing AI applications into AZD templates
-- ✅ Deploy AI applications ready for production
-- ✅ Apply security best practices to AI workloads
-- ✅ Monitor and enhance the performance of AI applications
-- ✅ Resolve common deployment issues
+- ✅ Convert existing AI applications to AZD templates
+- ✅ Deploy production-ready AI applications
+- ✅ Implement security best practices for AI workloads
+- ✅ Monitor and optimize AI application performance
+- ✅ Troubleshoot common deployment issues
 
 ### Next Steps
-1. Use these patterns in your own AI projects
-2. Share templates with the community
-3. Join the Azure AI Foundry Discord for ongoing support
-4. Dive into advanced topics like multi-region deployments
+1. Apply these patterns to your own AI projects
+2. Contribute templates back to the community
+3. Join the Microsoft Foundry Discord for ongoing support
+4. Explore advanced topics like multi-region deployments
 
 ---
 
-**Workshop Feedback**: Help us improve this workshop by sharing your thoughts in the [Azure AI Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
+**Workshop Feedback**: Help us improve this workshop by sharing your experience in the [Microsoft Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
 
 ---
 
@@ -694,3 +680,7 @@ Congratulations! You've completed the AI Workshop Lab. You should now be able to
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:  
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

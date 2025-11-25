@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "aace36eff845763a5b041a4ed9a33e02",
-  "translation_date": "2025-09-25T00:35:38+00:00",
+  "original_hash": "2a0861541126250c3558d667e9b13c50",
+  "translation_date": "2025-11-25T09:30:47+00:00",
   "source_file": "course-outline.md",
   "language_code": "en"
 }
@@ -11,11 +11,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Course Overview
 
-Learn Azure Developer CLI (azd) through structured chapters designed for step-by-step progress. **Special emphasis on deploying AI applications with Azure AI Foundry integration.**
+Learn Azure Developer CLI (azd) step-by-step through structured chapters designed for gradual learning. **Special emphasis on deploying AI applications with Microsoft Foundry integration.**
 
-### Why This Course is Important for Modern Developers
+### Why This Course is Essential for Modern Developers
 
-Based on insights from the Azure AI Foundry Discord community, **45% of developers aim to use AZD for AI workloads** but face challenges such as:
+Based on insights from the Microsoft Foundry Discord community, **45% of developers aim to use AZD for AI workloads** but face challenges such as:
 - Complex multi-service AI architectures
 - Best practices for deploying AI in production  
 - Integration and configuration of Azure AI services
@@ -25,8 +25,8 @@ Based on insights from the Azure AI Foundry Discord community, **45% of develope
 ### Core Learning Objectives
 
 By completing this course, you will:
-- **Master AZD Basics**: Learn core concepts, installation, and configuration
-- **Deploy AI Applications**: Utilize AZD with Azure AI Foundry services
+- **Master AZD Fundamentals**: Learn core concepts, installation, and configuration
+- **Deploy AI Applications**: Utilize AZD with Microsoft Foundry services
 - **Implement Infrastructure as Code**: Manage Azure resources using Bicep templates
 - **Troubleshoot Deployments**: Solve common issues and debug problems
 - **Optimize for Production**: Focus on security, scaling, monitoring, and cost management
@@ -35,23 +35,23 @@ By completing this course, you will:
 ## 🎓 Workshop Learning Experience
 
 ### Flexible Learning Delivery Options
-This course supports both **self-paced individual learning** and **facilitated workshop sessions**, providing hands-on experience with AZD while developing practical skills through interactive exercises.
+This course supports both **self-paced individual learning** and **facilitated workshop sessions**, allowing learners to gain hands-on experience with AZD while developing practical skills through interactive exercises.
 
 #### 🚀 Self-Paced Learning Mode
 **Ideal for individual developers and continuous learning**
 
 **Features:**
-- **Browser-Based Interface**: Access the MkDocs-powered workshop via any web browser
+- **Browser-Based Interface**: Access MkDocs-powered workshop via any web browser
 - **GitHub Codespaces Integration**: One-click development environment with pre-configured tools
-- **Interactive DevContainer Environment**: No local setup needed—start coding immediately
+- **Interactive DevContainer Environment**: No local setup needed - start coding immediately
 - **Progress Tracking**: Built-in checkpoints and validation exercises
-- **Community Support**: Engage with Azure Discord channels for collaboration and questions
+- **Community Support**: Engage with Azure Discord channels for questions and collaboration
 
 **Learning Structure:**
 - **Flexible Timing**: Complete chapters at your own pace over days or weeks
-- **Checkpoint System**: Validate your learning before moving to advanced topics
+- **Checkpoint System**: Validate learning before moving to advanced topics
 - **Resource Library**: Access comprehensive documentation, examples, and troubleshooting guides
-- **Portfolio Development**: Build deployable projects to showcase in your professional portfolio
+- **Portfolio Development**: Build deployable projects for your professional portfolio
 
 **Getting Started (Self-Paced):**
 ```bash
@@ -82,7 +82,7 @@ cd azd-for-beginners/workshop
 - **Follow-up**: Optional 2-week mentorship for project completion
 
 **⚡ Executive Briefing (4-6 hours)**
-- **Strategic Overview**: AZD's value and business impact (1 hour)
+- **Strategic Overview**: AZD value proposition and business impact (1 hour)
 - **Hands-On Demo**: Deploy an AI application end-to-end (2 hours)
 - **Architecture Review**: Enterprise patterns and governance (1 hour)
 - **Implementation Planning**: Organizational adoption strategy (1-2 hours)
@@ -97,19 +97,19 @@ cd azd-for-beginners/workshop
 - **Environment Setup**: Configure development environment and Azure resources
 
 **Phase 2: Deployment (2 hours)**
-- **Guided Implementation**: Step-by-step deployment of AI applications using AZD
+- **Guided Implementation**: Step-by-step deployment of AI applications with AZD
 - **Service Configuration**: Set up Azure AI services, endpoints, and authentication
 - **Security Implementation**: Apply enterprise security patterns and access controls
 - **Validation Testing**: Verify deployments and troubleshoot common issues
 
 **Phase 3: Customization (45 minutes)**
-- **Application Modification**: Tailor templates to specific use cases and requirements
+- **Application Modification**: Tailor templates for specific use cases and requirements
 - **Production Optimization**: Implement monitoring, cost management, and scaling strategies
 - **Advanced Patterns**: Explore multi-agent coordination and complex architectures
 - **Next Steps Planning**: Define a learning path for continued skill development
 
 #### 🎯 Workshop Learning Outcomes
-**Skills you will gain through hands-on practice**
+**Measurable skills developed through hands-on practice**
 
 **Technical Competencies:**
 - **Deploy Production AI Applications**: Successfully deploy and configure AI-powered solutions
@@ -125,10 +125,10 @@ cd azd-for-beginners/workshop
 - **Strategic Planning**: Influence organizational cloud adoption strategies
 
 #### 📋 Workshop Resources and Materials
-**A complete toolkit for facilitators and learners**
+**Comprehensive toolkit for facilitators and learners**
 
 **For Facilitators:**
-- **Instructor Guide**: [Workshop Facilitation Guide](workshop/docs/instructor-guide.md) - Tips for planning and delivering sessions
+- **Instructor Guide**: [Workshop Facilitation Guide](workshop/docs/instructor-guide.md) - Tips for session planning and delivery
 - **Presentation Materials**: Slide decks, architecture diagrams, and demo scripts
 - **Assessment Tools**: Practical exercises, knowledge checks, and evaluation rubrics
 - **Technical Setup**: Environment configuration, troubleshooting guides, and backup plans
@@ -140,22 +140,22 @@ cd azd-for-beginners/workshop
 - **Community Resources**: Azure Discord channels, GitHub discussions, and expert support
 
 #### 🏢 Enterprise Workshop Implementation
-**Strategies for organizational deployment and training**
+**Organizational deployment and training strategies**
 
 **Corporate Training Programs:**
-- **Developer Onboarding**: Introduce new hires to AZD fundamentals (2-4 weeks)
+- **Developer Onboarding**: New hire orientation with AZD fundamentals (2-4 weeks)
 - **Team Upskilling**: Quarterly workshops for existing development teams (1-2 days)
 - **Architecture Review**: Monthly sessions for senior engineers and architects (4 hours)
-- **Leadership Briefings**: Executive workshops for technical decision-makers (half-day)
+- **Leadership Briefings**: Executive workshops for technical decision makers (half-day)
 
 **Implementation Support:**
 - **Custom Workshop Design**: Tailored content for specific organizational needs
 - **Pilot Program Management**: Structured rollout with success metrics and feedback loops  
 - **Ongoing Mentorship**: Post-workshop support for project implementation
-- **Community Building**: Foster internal Azure AI developer communities and knowledge sharing
+- **Community Building**: Internal Azure AI developer communities and knowledge sharing
 
 **Success Metrics:**
-- **Skill Acquisition**: Pre/post assessments to measure technical competency growth
+- **Skill Acquisition**: Pre/post assessments measuring technical competency growth
 - **Deployment Success**: Percentage of participants successfully deploying production applications
 - **Time to Productivity**: Reduced onboarding time for new Azure AI projects
 - **Knowledge Retention**: Follow-up assessments 3-6 months post-workshop
@@ -167,7 +167,7 @@ cd azd-for-beginners/workshop
 **Complexity**: ⭐
 
 #### What You'll Learn
-- Introduction to Azure Developer CLI fundamentals
+- Understanding Azure Developer CLI fundamentals
 - Installing AZD on your platform  
 - Your first successful deployment
 - Core concepts and terminology
@@ -188,17 +188,17 @@ Successfully deploy a simple web application to Azure using AZD
 **Complexity**: ⭐⭐
 
 #### What You'll Learn
-- Azure AI Foundry integration with AZD
+- Microsoft Foundry integration with AZD
 - Deploying AI-powered applications
 - Understanding AI service configurations
 - RAG (Retrieval-Augmented Generation) patterns
 
 #### Learning Resources
-- [Azure AI Foundry Integration](docs/ai-foundry/azure-ai-foundry-integration.md)
-- [AI Model Deployment](docs/ai-foundry/ai-model-deployment.md)
-- [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
+- [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **NEW**: Comprehensive 2-3 hour hands-on lab
 - [Interactive Workshop Guide](workshop/README.md) - **NEW**: Browser-based workshop with MkDocs preview
-- [Azure AI Foundry Templates](README.md#featured-azure-ai-foundry-templates)
+- [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
 - [Workshop Instructions](../../workshop/docs/instructions) - **NEW**: Step-by-step guided exercises
 
 #### Practical Outcome
@@ -228,7 +228,7 @@ Deploy and configure an AI-powered chat application with RAG capabilities
 
 #### Learning Resources
 - [Configuration Guide](docs/getting-started/configuration.md) - Environment setup
-- Security patterns and managed identity
+- [Authentication & Security Patterns](docs/getting-started/authsecurity.md) - Managed identity and Key Vault integration
 - Multi-environment examples
 
 #### Practical Outcome
@@ -246,10 +246,13 @@ Manage multiple environments with proper authentication and security
 - Resource provisioning strategies
 - Custom template creation
 
+- Containerized application deployment with Azure Container Apps and AZD
+
 #### Learning Resources
 - [Deployment Guide](docs/deployment/deployment-guide.md) - Complete workflows
 - [Provisioning Resources](docs/deployment/provisioning.md) - Resource management
 - Container and microservices examples
+- [Container App Examples](examples/container-app/README.md) - Quick start, production, and advanced deployment patterns
 
 #### Practical Outcome
 Deploy complex multi-service applications using custom infrastructure templates
@@ -266,10 +269,13 @@ Deploy complex multi-service applications using custom infrastructure templates
 - Production-ready AI deployments
 - Customer and Inventory agent implementations
 
+- Integrating containerized microservices as part of agent-based solutions
+
 #### Learning Resources
 - [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
 - [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
 - Multi-agent coordination patterns
+- [Microservices Architecture Example](../../examples/container-app/microservices) - Service-to-service communication, async messaging, and production deployment
 
 #### Practical Outcome
 Deploy and manage a production-ready multi-agent AI solution
@@ -290,6 +296,8 @@ Deploy and manage a production-ready multi-agent AI solution
 - [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Resource validation
 - [SKU Selection](docs/pre-deployment/sku-selection.md) - Cost-effective choices
 - [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automated scripts
+- [Application Insights Integration](docs/pre-deployment/application-insights.md) - Monitoring and observability
+- [Multi-Agent Coordination Patterns](docs/pre-deployment/coordination-patterns.md) - Agent orchestration strategies
 
 #### Practical Outcome
 Validate and optimize deployments before execution
@@ -297,39 +305,42 @@ Validate and optimize deployments before execution
 ---
 
 ### Chapter 7: Troubleshooting & Debugging (1-1.5 hours) 🔧
-**Prerequisites**: Any deployment chapter completed  
+**Prerequisites**: Completion of any deployment chapter  
 **Complexity**: ⭐⭐
 
 #### What You'll Learn
-- Systematic debugging approaches
-- Common issues and solutions
-- AI-specific troubleshooting
-- Performance optimization
+- Systematic approaches to debugging
+- Common problems and their solutions
+- Troubleshooting specific to AI
+- Performance optimization techniques
 
 #### Learning Resources
-- [Common Issues](docs/troubleshooting/common-issues.md) - FAQ and solutions
+- [Common Issues](docs/troubleshooting/common-issues.md) - FAQs and solutions
 - [Debugging Guide](docs/troubleshooting/debugging.md) - Step-by-step strategies
-- [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI service problems
+- [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - Addressing AI service issues
 
 #### Practical Outcome
-Independently diagnose and resolve common deployment issues
+Gain the ability to independently diagnose and resolve common deployment problems
 
 ---
 
 ### Chapter 8: Production & Enterprise Patterns (2-3 hours) 🏢
-**Prerequisites**: Chapters 1-4 completed  
+**Prerequisites**: Completion of Chapters 1-4  
 **Complexity**: ⭐⭐⭐⭐
 
 #### What You'll Learn
-- Strategies for production deployment
-- Enterprise security patterns
+- Strategies for production deployments
+- Enterprise-level security patterns
 - Monitoring and cost optimization
-- Scalability and governance
+- Scalability and governance practices
+
+- Best practices for deploying containerized applications in production (security, monitoring, cost, CI/CD)
 
 #### Learning Resources
-- [Production AI Best Practices](docs/ai-foundry/production-ai-practices.md) - Enterprise patterns
+- [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise-level patterns
 - Microservices and enterprise examples
 - Monitoring and governance frameworks
+- [Microservices Architecture Example](../../examples/container-app/microservices) - Blue-green/canary deployment, distributed tracing, and cost optimization
 
 #### Practical Outcome
 Deploy enterprise-ready applications with full production capabilities
@@ -343,7 +354,9 @@ Deploy enterprise-ready applications with full production capabilities
 - **🌱 Beginners**: Start with Chapter 1 (Foundation) → Chapter 2 (AI Development)
 - **🔧 Intermediate**: Chapters 3-4 (Configuration & Infrastructure) → Chapter 6 (Validation)
 - **🚀 Advanced**: Chapter 5 (Multi-Agent Solutions) → Chapter 7 (Troubleshooting)
-- **🏢 Enterprise**: Complete all chapters, focus on Chapter 8 (Production Patterns)
+- **🏢 Enterprise**: Complete all chapters, focusing on Chapter 8 (Production Patterns)
+
+- **Container App Path**: Chapters 4 (Containerized deployment), 5 (Microservices integration), 8 (Production best practices)
 
 ### Complexity Indicators
 
@@ -382,8 +395,8 @@ Sequential completion of all 8 chapters with hands-on practice and validation
 ### Learning Outcomes Assessment
 
 #### Chapter 1-2 Completion (Foundation + AI)
-- ✅ Deploy basic web application using AZD
-- ✅ Deploy AI-powered chat application with RAG
+- ✅ Deploy a basic web application using AZD
+- ✅ Deploy an AI-powered chat application with RAG
 - ✅ Understand AZD core concepts and AI integration
 
 #### Chapter 3-4 Completion (Configuration + Infrastructure)  
@@ -392,7 +405,7 @@ Sequential completion of all 8 chapters with hands-on practice and validation
 - ✅ Implement secure authentication patterns
 
 #### Chapter 5-6 Completion (Multi-Agent + Validation)
-- ✅ Deploy complex multi-agent AI solution
+- ✅ Deploy a complex multi-agent AI solution
 - ✅ Perform capacity planning and cost optimization
 - ✅ Implement automated pre-deployment validation
 
@@ -403,20 +416,20 @@ Sequential completion of all 8 chapters with hands-on practice and validation
 
 ### Certification and Recognition
 - **Course Completion Badge**: Complete all 8 chapters with practical validation
-- **Community Recognition**: Active participation in Azure AI Foundry Discord
+- **Community Recognition**: Active participation in Microsoft Foundry Discord
 - **Professional Development**: Industry-relevant AZD and AI deployment skills
 - **Career Advancement**: Enterprise-ready cloud deployment capabilities
 
 ## 🎓 Comprehensive Learning Outcomes
 
 ### Foundation Level (Chapters 1-2)
-Upon completion of foundation chapters, learners will demonstrate:
+Upon completing the foundation chapters, learners will demonstrate:
 
 **Technical Capabilities:**
 - Deploy simple web applications to Azure using AZD commands
 - Configure and deploy AI-powered chat applications with RAG capabilities
 - Understand core AZD concepts: templates, environments, provisioning workflows
-- Integrate Azure AI Foundry services with AZD deployments
+- Integrate Microsoft Foundry services with AZD deployments
 - Navigate Azure AI service configurations and API endpoints
 
 **Professional Skills:**
@@ -432,7 +445,7 @@ Upon completion of foundation chapters, learners will demonstrate:
 - ✅ Participate in Azure Discord community discussions
 
 ### Intermediate Level (Chapters 3-4)
-Upon completion of intermediate chapters, learners will demonstrate:
+Upon completing the intermediate chapters, learners will demonstrate:
 
 **Technical Capabilities:**
 - Manage multi-environment deployments (dev, staging, production)
@@ -454,7 +467,7 @@ Upon completion of intermediate chapters, learners will demonstrate:
 - ✅ Complete configuration management exercises with real scenarios
 
 ### Advanced Level (Chapters 5-6)
-Upon completion of advanced chapters, learners will demonstrate:
+Upon completing the advanced chapters, learners will demonstrate:
 
 **Technical Capabilities:**
 - Deploy and orchestrate multi-agent AI solutions with coordinated workflows
@@ -476,7 +489,7 @@ Upon completion of advanced chapters, learners will demonstrate:
 - ✅ Validate deployment readiness through automated pre-flight checks
 
 ### Expert Level (Chapters 7-8)
-Upon completion of expert chapters, learners will demonstrate:
+Upon completing the expert chapters, learners will demonstrate:
 
 **Technical Capabilities:**
 - Diagnose and resolve complex deployment issues independently
@@ -533,7 +546,7 @@ Upon completing all chapters with verification, graduates will have:
 - **Industry Recognition**: Verifiable skills in high-demand AZD and AI deployment areas
 - **Career Advancement**: Qualifications for cloud architect and AI deployment specialist roles
 - **Community Leadership**: Active membership in Azure developer and AI communities
-- **Continuous Learning**: Foundation for advanced Azure AI Foundry specialization
+- **Continuous Learning**: Foundation for advanced Microsoft Foundry specialization
 
 **Portfolio Assets:**
 - **Deployed Solutions**: Working examples of AI applications and infrastructure patterns
@@ -543,10 +556,14 @@ Upon completing all chapters with verification, graduates will have:
 
 ### Post-Course Learning Path
 Graduates are prepared for advanced specialization in:
-- **Azure AI Foundry Expert**: Deep specialization in AI model deployment and orchestration
+- **Microsoft Foundry Expert**: Deep specialization in AI model deployment and orchestration
 - **Cloud Architecture Leadership**: Enterprise-scale deployment design and governance
 - **Developer Community Leadership**: Contributing to Azure samples and community resources
 - **Corporate Training**: Teaching AZD and AI deployment skills within organizations
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:  
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
