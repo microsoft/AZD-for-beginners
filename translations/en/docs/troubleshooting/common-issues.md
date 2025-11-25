@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e3b1c94a2da4a497e880ebe7b89c2bb1",
-  "translation_date": "2025-09-18T12:47:17+00:00",
+  "original_hash": "94de06ce1e81ee964b067f118211612f",
+  "translation_date": "2025-11-25T09:41:50+00:00",
   "source_file": "docs/troubleshooting/common-issues.md",
   "language_code": "en"
 }
@@ -14,35 +14,35 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous Chapter**: [Chapter 6: Pre-flight Checks](../pre-deployment/preflight-checks.md)
 - **➡️ Next**: [Debugging Guide](debugging.md)
-- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../ai-foundry/production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
 
 ## Introduction
 
-This guide provides a detailed overview of common issues encountered when using Azure Developer CLI. It includes instructions on diagnosing, troubleshooting, and resolving problems related to authentication, deployment, infrastructure provisioning, and application configuration. Each issue is accompanied by symptoms, root causes, and step-by-step solutions.
+This detailed troubleshooting guide addresses the most common issues encountered when using Azure Developer CLI. It provides insights into diagnosing, troubleshooting, and resolving problems related to authentication, deployment, infrastructure provisioning, and application configuration. Each issue includes clear symptoms, root causes, and step-by-step solutions.
 
 ## Learning Goals
 
-By working through this guide, you will:
-- Learn diagnostic techniques for Azure Developer CLI issues
+By completing this guide, you will:
+- Gain expertise in diagnosing Azure Developer CLI issues
 - Understand and resolve common authentication and permission problems
-- Address deployment failures, infrastructure provisioning errors, and configuration issues
-- Implement proactive monitoring and debugging strategies
+- Fix deployment failures, infrastructure provisioning errors, and configuration issues
+- Learn proactive monitoring and debugging strategies
 - Apply systematic troubleshooting methods for complex problems
 - Set up proper logging and monitoring to prevent future issues
 
 ## Learning Outcomes
 
-By the end of this guide, you will be able to:
-- Diagnose Azure Developer CLI issues using built-in tools
+After completing this guide, you will be able to:
+- Use built-in diagnostic tools to identify Azure Developer CLI issues
 - Independently resolve authentication, subscription, and permission-related problems
 - Effectively troubleshoot deployment failures and infrastructure provisioning errors
 - Debug application configuration and environment-specific issues
-- Implement monitoring and alerting to identify potential problems early
-- Use best practices for logging, debugging, and resolving issues
+- Implement monitoring and alerting to detect potential problems early
+- Follow best practices for logging, debugging, and resolving issues
 
 ## Quick Diagnostics
 
-Before addressing specific issues, use these commands to collect diagnostic information:
+Before addressing specific issues, run these commands to collect diagnostic information:
 
 ```bash
 # Check azd version and health
@@ -107,13 +107,13 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 ### Issue: Multi-tenant authentication problems
 **Solutions:**
 ```bash
-# 1. Login with specific tenant
+# 1. Log in with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
+# 2. Configure tenant settings
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Clear tenant cache if switching tenants
+# 3. Clear tenant cache when switching tenants
 az account clear
 ```
 
@@ -121,7 +121,7 @@ az account clear
 
 ### Issue: Resource name conflicts
 **Symptoms:**
-- Errors indicating "The resource name already exists"
+- Errors like "The resource name already exists"
 - Deployment fails during resource creation
 
 **Solutions:**
@@ -159,7 +159,7 @@ azd env set AZURE_LOCATION eastus2
 
 ### Issue: Quota exceeded errors
 **Symptoms:**
-- Errors such as "Quota exceeded for resource type"
+- Errors like "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
 **Solutions:**
@@ -236,7 +236,7 @@ docker run --rm test-image
 ### Issue: Container deployment failures
 **Symptoms:**
 - Container apps fail to start
-- Errors pulling container images
+- Image pull errors
 
 **Solutions:**
 ```bash
@@ -256,7 +256,7 @@ az containerapp show --name my-app --resource-group my-rg
 
 ### Issue: Database connection failures
 **Symptoms:**
-- Application unable to connect to the database
+- Application cannot connect to the database
 - Connection timeout errors
 
 **Solutions:**
@@ -279,7 +279,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ### Issue: Environment variables not working
 **Symptoms:**
-- Application unable to read configuration values
+- Application cannot read configuration values
 - Environment variables appear empty
 
 **Solutions:**
@@ -317,8 +317,8 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 ### Issue: CORS configuration problems
 **Symptoms:**
-- Frontend unable to call API
-- Cross-origin requests blocked
+- Frontend cannot call API
+- Cross-origin request blocked
 
 **Solutions:**
 ```bash
@@ -341,7 +341,7 @@ azd show
 ### Issue: Environment switching problems
 **Symptoms:**
 - Incorrect environment being used
-- Configuration not switching as expected
+- Configuration not switching properly
 
 **Solutions:**
 ```bash
@@ -362,7 +362,7 @@ azd env select production-new
 ### Issue: Environment corruption
 **Symptoms:**
 - Environment shows an invalid state
-- Resources do not match the configuration
+- Resources do not match configuration
 
 **Solutions:**
 ```bash
@@ -472,7 +472,7 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 Getting Additional Help
 
 ### When to Escalate
-- Persistent authentication issues after trying all solutions
+- Authentication issues persist despite trying all solutions
 - Infrastructure problems with Azure services
 - Billing or subscription-related issues
 - Security concerns or incidents
@@ -582,7 +582,7 @@ az security assessment list --resource-group myrg
 
 ---
 
-**Tip**: Bookmark this guide and refer to it whenever you encounter issues. Most problems have established solutions!
+**Tip**: Bookmark this guide and refer to it whenever you face issues. Most problems have been encountered before and have well-documented solutions!
 
 ---
 
@@ -592,5 +592,7 @@ az security assessment list --resource-group myrg
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

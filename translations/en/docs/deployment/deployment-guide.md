@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6832562a3a3c5cfa9d8b172025ae2fa4",
-  "translation_date": "2025-09-18T12:46:43+00:00",
+  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
+  "translation_date": "2025-11-25T09:39:46+00:00",
   "source_file": "docs/deployment/deployment-guide.md",
   "language_code": "en"
 }
@@ -25,7 +25,7 @@ This comprehensive guide covers everything you need to know about deploying appl
 By completing this guide, you will:
 - Master all Azure Developer CLI deployment commands and workflows
 - Understand the complete deployment lifecycle from provisioning to monitoring
-- Implement custom deployment hooks for pre- and post-deployment automation
+- Implement custom deployment hooks for pre and post-deployment automation
 - Configure multiple environments with environment-specific parameters
 - Set up advanced deployment strategies including blue-green and canary deployments
 - Integrate azd deployments with CI/CD pipelines and DevOps workflows
@@ -66,13 +66,13 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ### Infrastructure-Only Deployment
 When you only need to update Azure resources:
 ```bash
-# Provision/update infrastructure
+# Provide/update infrastructure
 azd provision
 
-# Provision with dry-run to preview changes
+# Provide with dry-run to preview changes
 azd provision --preview
 
-# Provision specific services
+# Provide specific services
 azd provision --service database
 ```
 
@@ -82,13 +82,47 @@ For quick application updates:
 # Deploy all services
 azd deploy
 
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
+
 # Deploy specific service
 azd deploy --service web
 azd deploy --service api
 
 # Deploy with custom build arguments
 azd deploy --service api --build-arg NODE_ENV=production
+
+# Verify deployment
+azd show --output json | jq '.services'
 ```
+
+### ✅ Deployment Verification
+
+After any deployment, verify success:
+
+```bash
+# Verify that all services are operational
+azd show
+
+# Test the health check endpoints
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+
+curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
+curl -f "$API_URL/health" || echo "❌ API health check failed"
+
+# Inspect logs for any errors
+azd logs --service api --since 5m | grep -i error
+```
+
+**Success Criteria:**
+- ✅ All services show "Running" status
+- ✅ Health endpoints return HTTP 200
+- ✅ No error logs in the last 5 minutes
+- ✅ Application responds to test requests
 
 ## 🏗️ Understanding the Deployment Process
 
@@ -643,6 +677,259 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 - [Common Issues](../troubleshooting/common-issues.md) - Resolve deployment issues
 - [Best Practices](../troubleshooting/debugging.md) - Production-ready deployment strategies
 
+## 🎯 Hands-On Deployment Exercises
+
+### Exercise 1: Incremental Deployment Workflow (20 minutes)
+**Goal**: Master the difference between full and incremental deployments
+
+```bash
+# Initial deployment
+mkdir deployment-practice && cd deployment-practice
+azd init --template todo-nodejs-mongo
+azd up
+
+# Record initial deployment time
+echo "Full deployment: $(date)" > deployment-log.txt
+
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/server.js
+
+# Deploy only code (fast)
+time azd deploy
+echo "Code-only deployment: $(date)" >> deployment-log.txt
+
+# Compare times
+cat deployment-log.txt
+
+# Clean up
+azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Full deployment takes 5-15 minutes
+- [ ] Code-only deployment takes 2-5 minutes
+- [ ] Code changes reflected in deployed app
+- [ ] Infrastructure unchanged after `azd deploy`
+
+**Learning Outcome**: `azd deploy` is 50-70% faster than `azd up` for code changes
+
+### Exercise 2: Custom Deployment Hooks (30 minutes)
+**Goal**: Implement pre and post-deployment automation
+
+```bash
+# Create pre-deploy validation script
+mkdir -p scripts
+cat > scripts/pre-deploy-check.sh << 'EOF'
+#!/bin/bash
+echo "⚠️ Running pre-deployment checks..."
+
+# Check if tests pass
+if ! npm run test:unit; then
+    echo "❌ Tests failed! Aborting deployment."
+    exit 1
+fi
+
+# Check for uncommitted changes
+if [[ -n $(git status -s) ]]; then
+    echo "⚠️ Warning: Uncommitted changes detected"
+fi
+
+echo "✅ Pre-deployment checks passed!"
+EOF
+
+chmod +x scripts/pre-deploy-check.sh
+
+# Create post-deploy smoke test
+cat > scripts/post-deploy-test.sh << 'EOF'
+#!/bin/bash
+echo "💨 Running smoke tests..."
+
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+
+if curl -f "$WEB_URL/health"; then
+    echo "✅ Health check passed!"
+else
+    echo "❌ Health check failed!"
+    exit 1
+fi
+
+echo "✅ Smoke tests completed!"
+EOF
+
+chmod +x scripts/post-deploy-test.sh
+
+# Add hooks to azure.yaml
+cat >> azure.yaml << 'EOF'
+
+hooks:
+  predeploy:
+    shell: sh
+    run: ./scripts/pre-deploy-check.sh
+    
+  postdeploy:
+    shell: sh
+    run: ./scripts/post-deploy-test.sh
+EOF
+
+# Test deployment with hooks
+azd deploy
+```
+
+**Success Criteria:**
+- [ ] Pre-deploy script runs before deployment
+- [ ] Deployment aborts if tests fail
+- [ ] Post-deploy smoke test validates health
+- [ ] Hooks execute in correct order
+
+### Exercise 3: Multi-Environment Deployment Strategy (45 minutes)
+**Goal**: Implement staged deployment workflow (dev → staging → production)
+
+```bash
+# Create deployment script
+cat > deploy-staged.sh << 'EOF'
+#!/bin/bash
+set -e
+
+echo "🚀 Staged Deployment Workflow"
+echo "=============================="
+
+# Step 1: Deploy to dev
+echo "
+🛠️ Step 1: Deploying to development..."
+azd env select dev
+azd up --no-prompt
+
+echo "Running dev tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Step 2: Deploy to staging
+echo "
+🔍 Step 2: Deploying to staging..."
+azd env select staging
+azd up --no-prompt
+
+echo "Running staging tests..."
+curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+
+# Step 3: Manual approval for production
+echo "
+✅ Dev and staging deployments successful!"
+read -p "Deploy to production? (yes/no): " confirm
+
+if [[ $confirm == "yes" ]]; then
+    echo "
+🎉 Step 3: Deploying to production..."
+    azd env select production
+    azd up --no-prompt
+    
+    echo "Running production smoke tests..."
+    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    
+    echo "
+✅ Production deployment completed!"
+else
+    echo "❌ Production deployment cancelled"
+fi
+EOF
+
+chmod +x deploy-staged.sh
+
+# Create environments
+azd env new dev
+azd env new staging
+azd env new production
+
+# Run staged deployment
+./deploy-staged.sh
+```
+
+**Success Criteria:**
+- [ ] Dev environment deploys successfully
+- [ ] Staging environment deploys successfully
+- [ ] Manual approval required for production
+- [ ] All environments have working health checks
+- [ ] Can roll back if needed
+
+### Exercise 4: Rollback Strategy (25 minutes)
+**Goal**: Implement and test deployment rollback
+
+```bash
+# Deploy v1
+azd env set APP_VERSION "1.0.0"
+azd up
+
+# Save v1 configuration
+cp -r .azure/production .azure/production-v1-backup
+
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break')" >> src/api/src/server.js
+azd env set APP_VERSION "2.0.0"
+azd deploy
+
+# Detect failure
+if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+    echo "❌ v2 deployment failed! Rolling back..."
+    
+    # Rollback code
+    git checkout src/api/src/server.js
+    
+    # Rollback environment
+    azd env set APP_VERSION "1.0.0"
+    
+    # Redeploy v1
+    azd deploy
+    
+    echo "✅ Rolled back to v1.0.0"
+fi
+```
+
+**Success Criteria:**
+- [ ] Can detect deployment failures
+- [ ] Rollback script executes automatically
+- [ ] Application returns to working state
+- [ ] Health checks pass after rollback
+
+## 📊 Deployment Metrics Tracking
+
+### Track Your Deployment Performance
+
+```bash
+# Create deployment metrics script
+cat > track-deployment.sh << 'EOF'
+#!/bin/bash
+START_TIME=$(date +%s)
+
+azd deploy "$@"
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo "
+📊 Deployment Metrics:"
+echo "Duration: ${DURATION}s"
+echo "Timestamp: $(date)"
+echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
+
+# Log to file
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+EOF
+
+chmod +x track-deployment.sh
+
+# Use it
+./track-deployment.sh
+```
+
+**Analyze your metrics:**
+```bash
+# View deployment history
+cat deployment-metrics.csv
+
+# Calculate average deployment time
+awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
+```
+
 ## Additional Resources
 
 - [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
@@ -658,5 +945,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

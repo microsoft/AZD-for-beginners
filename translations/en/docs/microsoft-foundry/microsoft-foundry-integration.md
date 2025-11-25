@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "894be87a84e7f669a164d4f67545c8ac",
-  "translation_date": "2025-09-18T12:44:22+00:00",
-  "source_file": "docs/ai-foundry/azure-ai-foundry-integration.md",
+  "original_hash": "2e61bc7db9c28647211ab64e03045882",
+  "translation_date": "2025-11-25T13:59:00+00:00",
+  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
   "language_code": "en"
 }
 -->
-# Azure AI Foundry Integration with AZD
+# Microsoft Foundry Integration with AZD
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -18,40 +18,40 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Overview
 
-This guide explains how to connect Azure AI Foundry services with Azure Developer CLI (AZD) to simplify the deployment of AI applications. Azure AI Foundry offers a robust platform for creating, deploying, and managing AI solutions, while AZD streamlines infrastructure and deployment tasks.
+This guide explains how to integrate Microsoft Foundry services with Azure Developer CLI (AZD) to simplify AI application deployments. Microsoft Foundry offers a robust platform for creating, deploying, and managing AI applications, while AZD streamlines infrastructure and deployment processes.
 
-## What is Azure AI Foundry?
+## What is Microsoft Foundry?
 
-Azure AI Foundry is Microsoft's all-in-one platform for AI development, featuring:
+Microsoft Foundry is Microsoft's unified platform for AI development, featuring:
 
-- **Model Catalog**: Access cutting-edge AI models
-- **Prompt Flow**: A visual tool for designing AI workflows
-- **AI Foundry Portal**: A unified development environment for AI applications
-- **Deployment Options**: Flexible hosting and scaling choices
-- **Safety and Security**: Built-in tools for responsible AI practices
+- **Model Catalog**: Access to cutting-edge AI models
+- **Prompt Flow**: Visual designer for AI workflows
+- **AI Foundry Portal**: Integrated development environment for AI applications
+- **Deployment Options**: Various hosting and scaling options
+- **Safety and Security**: Built-in responsible AI features
 
-## AZD + Azure AI Foundry: Better Together
+## AZD + Microsoft Foundry: Better Together
 
-| Feature | Azure AI Foundry | AZD Integration Benefit |
+| Feature | Microsoft Foundry | AZD Integration Benefit |
 |---------|-----------------|------------------------|
-| **Model Deployment** | Manual deployment via portal | Automated, repeatable deployments |
-| **Infrastructure** | Provisioning through UI | Infrastructure as Code (Bicep) |
-| **Environment Management** | Focus on a single environment | Support for multiple environments (dev/staging/prod) |
-| **CI/CD Integration** | Limited capabilities | Built-in GitHub Actions support |
-| **Cost Management** | Basic monitoring tools | Optimized costs for specific environments |
+| **Model Deployment** | Manual portal deployment | Automated, repeatable deployments |
+| **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
+| **Environment Management** | Single environment focus | Multi-environment (dev/staging/prod) |
+| **CI/CD Integration** | Limited | Native GitHub Actions support |
+| **Cost Management** | Basic monitoring | Environment-specific cost optimization |
 
 ## Prerequisites
 
-- An Azure subscription with the necessary permissions
+- Azure subscription with appropriate permissions
 - Azure Developer CLI installed
 - Access to Azure OpenAI services
-- Basic knowledge of Azure AI Foundry
+- Basic familiarity with Microsoft Foundry
 
 ## Core Integration Patterns
 
 ### Pattern 1: Azure OpenAI Integration
 
-**Use Case**: Deploy chat applications using Azure OpenAI models
+**Use Case**: Deploy chat applications with Azure OpenAI models
 
 ```yaml
 # azure.yaml
@@ -101,7 +101,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Pattern 2: AI Search + RAG Integration
 
-**Use Case**: Deploy applications using retrieval-augmented generation (RAG)
+**Use Case**: Deploy retrieval-augmented generation (RAG) applications
 
 ```bicep
 // Azure AI Search
@@ -131,7 +131,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### Pattern 3: Document Intelligence Integration
 
-**Use Case**: Automate document processing and analysis workflows
+**Use Case**: Document processing and analysis workflows
 
 ```bicep
 // Document Intelligence service
@@ -436,8 +436,8 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 ### Issue 1: OpenAI Quota Exceeded
 
 **Symptoms:**
-- Deployment fails due to quota errors
-- 429 errors appear in application logs
+- Deployment fails with quota errors
+- 429 errors in application logs
 
 **Solutions:**
 ```bash
@@ -456,8 +456,8 @@ azd deploy
 ### Issue 2: Authentication Failures
 
 **Symptoms:**
-- 401/403 errors when accessing AI services
-- "Access denied" error messages
+- 401/403 errors when calling AI services
+- "Access denied" messages
 
 **Solutions:**
 ```bash
@@ -474,8 +474,8 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ### Issue 3: Model Deployment Issues
 
 **Symptoms:**
-- Models are unavailable during deployment
-- Specific model versions fail to deploy
+- Models not available in deployment
+- Specific model versions failing
 
 **Solutions:**
 ```bash
@@ -526,16 +526,264 @@ azd up
 
 ## Next Steps
 
-1. **Try the Examples**: Start with a pre-built template that fits your needs
-2. **Customize for Your Needs**: Adjust the infrastructure and application code
-3. **Add Monitoring**: Set up detailed observability
-4. **Optimize Costs**: Configure settings to match your budget
-5. **Secure Your Deployment**: Apply enterprise-grade security measures
-6. **Scale to Production**: Implement multi-region and high-availability features
+1. **Try the Examples**: Start with a pre-built template that matches your use case
+2. **Customize for Your Needs**: Modify the infrastructure and application code
+3. **Add Monitoring**: Implement comprehensive observability
+4. **Optimize Costs**: Fine-tune configurations for your budget
+5. **Secure Your Deployment**: Implement enterprise security patterns
+6. **Scale to Production**: Add multi-region and high-availability features
+
+## 🎯 Hands-On Exercises
+
+### Exercise 1: Deploy Azure OpenAI Chat App (30 minutes)
+**Goal**: Deploy and test a production-ready AI chat application
+
+```bash
+# Initialize template
+mkdir ai-chat-demo && cd ai-chat-demo
+azd init --template azure-search-openai-demo
+
+# Set environment variables
+azd env set AZURE_LOCATION eastus2
+azd env set AZURE_OPENAI_CAPACITY 30
+
+# Deploy
+azd up
+
+# Test the application
+WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+echo "Chat app: $WEB_URL"
+
+# Monitor AI operations
+azd monitor
+
+# Clean up
+azd down --force --purge
+```
+
+**Success Criteria:**
+- [ ] Deployment completes without quota errors
+- [ ] Can access chat interface in browser
+- [ ] Can ask questions and get AI-powered responses
+- [ ] Application Insights shows telemetry data
+- [ ] Successfully cleaned up resources
+
+**Estimated Cost**: $5-10 for 30 minutes of testing
+
+### Exercise 2: Configure Multi-Model Deployment (45 minutes)
+**Goal**: Deploy multiple AI models with different configurations
+
+```bash
+# Create custom Bicep configuration
+cat > infra/ai-models.bicep << 'EOF'
+param openAiAccountName string
+param location string
+
+resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAiAccountName
+}
+
+// GPT-4o-mini for general chat
+resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'gpt-4o-mini'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'gpt-4o-mini'
+      version: '2024-07-18'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 30
+    }
+  }
+}
+
+// Text embedding for search
+resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi
+  name: 'text-embedding-ada-002'
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: 'text-embedding-ada-002'
+      version: '2'
+    }
+    scaleSettings: {
+      scaleType: 'Standard'
+      capacity: 50
+    }
+  }
+  dependsOn: [gpt4omini]
+}
+EOF
+
+# Deploy and verify
+azd provision
+azd show
+```
+
+**Success Criteria:**
+- [ ] Multiple models deployed successfully
+- [ ] Different capacity settings applied
+- [ ] Models accessible via API
+- [ ] Can call both models from application
+
+### Exercise 3: Implement Cost Monitoring (20 minutes)
+**Goal**: Set up budget alerts and cost tracking
+
+```bash
+# Add budget alert to Bicep
+cat >> infra/main.bicep << 'EOF'
+
+resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+  name: 'ai-monthly-budget'
+  properties: {
+    timePeriod: {
+      startDate: '2024-01-01'
+      endDate: '2025-12-31'
+    }
+    timeGrain: 'Monthly'
+    amount: 200
+    category: 'Cost'
+    notifications: {
+      notification1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: ['your-email@example.com']
+      }
+      notification2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: ['your-email@example.com']
+      }
+    }
+  }
+}
+EOF
+
+# Deploy budget alert
+azd provision
+
+# Check current costs
+az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+```
+
+**Success Criteria:**
+- [ ] Budget alert created in Azure
+- [ ] Email notifications configured
+- [ ] Can view cost data in Azure Portal
+- [ ] Budget thresholds set appropriately
+
+## 💡 Frequently Asked Questions
+
+<details>
+<summary><strong>How do I reduce Azure OpenAI costs during development?</strong></summary>
+
+1. **Use Free Tier**: Azure OpenAI offers 50,000 tokens/month free
+2. **Reduce Capacity**: Set capacity to 10 TPM instead of 30+ for dev
+3. **Use azd down**: Deallocate resources when not actively developing
+4. **Cache Responses**: Implement Redis cache for repeated queries
+5. **Use Prompt Engineering**: Reduce token usage with efficient prompts
+
+```bash
+# Development configuration
+azd env set AZURE_OPENAI_CAPACITY 10
+azd env set ENABLE_RESPONSE_CACHE true
+```
+</details>
+
+<details>
+<summary><strong>What's the difference between Azure OpenAI and OpenAI API?</strong></summary>
+
+**Azure OpenAI**:
+- Enterprise security and compliance
+- Private network integration
+- SLA guarantees
+- Managed identity authentication
+- Higher quotas available
+
+**OpenAI API**:
+- Faster access to new models
+- Simpler setup
+- Lower barrier to entry
+- Public internet only
+
+For production apps, **Azure OpenAI is recommended**.
+</details>
+
+<details>
+<summary><strong>How do I handle Azure OpenAI quota exceeded errors?</strong></summary>
+
+```bash
+# Check current quota
+az cognitiveservices usage list --location eastus2
+
+# Try different region
+azd env set AZURE_LOCATION westus2
+azd up
+
+# Reduce capacity temporarily
+azd env set AZURE_OPENAI_CAPACITY 10
+azd provision
+
+# Request quota increase
+# Go to Azure Portal > Quotas > Request increase
+```
+</details>
+
+<details>
+<summary><strong>Can I use my own data with Azure OpenAI?</strong></summary>
+
+Yes! Use **Azure AI Search** for RAG (Retrieval Augmented Generation):
+
+```yaml
+# azure.yaml
+services:
+  ai:
+    env:
+      - AZURE_SEARCH_ENDPOINT
+      - AZURE_SEARCH_INDEX
+      - AZURE_OPENAI_ENDPOINT
+```
+
+See the [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template.
+</details>
+
+<details>
+<summary><strong>How do I secure AI model endpoints?</strong></summary>
+
+**Best Practices**:
+1. Use Managed Identity (no API keys)
+2. Enable Private Endpoints
+3. Configure network security groups
+4. Implement rate limiting
+5. Use Azure Key Vault for secrets
+
+```bicep
+// Managed Identity authentication
+resource webAppIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'web-identity'
+  location: location
+}
+
+resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: openAIAccount
+  name: guid(openAIAccount.id, webAppIdentity.id)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+    principalId: webAppIdentity.properties.principalId
+  }
+}
+```
+</details>
 
 ## Community and Support
 
-- **Azure AI Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Official documentation](https://learn.microsoft.com/azure/ai-studio/)
 
@@ -548,9 +796,11 @@ azd up
 - **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
 
-**Need Help?** Join our community discussions or open an issue in the repository. The Azure AI + AZD community is here to support you!
+**Need Help?** Join our community discussions or open an issue in the repository. The Azure AI + AZD community is here to help you succeed!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

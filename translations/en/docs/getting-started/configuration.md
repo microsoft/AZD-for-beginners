@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "2268ee429553504f96f4571074bcbf84",
-  "translation_date": "2025-09-18T12:46:07+00:00",
+  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
+  "translation_date": "2025-11-25T09:51:45+00:00",
   "source_file": "docs/getting-started/configuration.md",
   "language_code": "en"
 }
@@ -18,31 +18,31 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Introduction
 
-This guide provides a detailed overview of how to configure Azure Developer CLI for streamlined development and deployment workflows. You'll explore the configuration hierarchy, environment management, authentication methods, and advanced configuration techniques to ensure efficient and secure Azure deployments.
+This guide provides a detailed overview of configuring the Azure Developer CLI to streamline your development and deployment workflows. You'll explore the configuration hierarchy, environment management, authentication methods, and advanced configuration techniques to ensure efficient and secure Azure deployments.
 
 ## Learning Goals
 
 By the end of this lesson, you will:
 - Understand the azd configuration hierarchy and how settings are prioritized
-- Learn to configure global and project-specific settings effectively
+- Effectively configure global and project-specific settings
 - Manage multiple environments with unique configurations
-- Implement secure authentication and authorization methods
-- Explore advanced configuration techniques for complex scenarios
+- Implement secure authentication and authorization practices
+- Learn advanced configuration techniques for complex scenarios
 
 ## Learning Outcomes
 
 After completing this lesson, you will be able to:
-- Set up azd for efficient development workflows
-- Manage multiple deployment environments
+- Configure azd for efficient development workflows
+- Set up and manage multiple deployment environments
 - Apply secure configuration management practices
-- Resolve configuration-related issues
-- Tailor azd behavior to meet organizational needs
+- Troubleshoot configuration-related issues
+- Customize azd behavior to meet organizational needs
 
-This guide provides a detailed overview of how to configure Azure Developer CLI for streamlined development and deployment workflows.
+This guide covers all aspects of configuring the Azure Developer CLI for optimal development and deployment workflows.
 
 ## Configuration Hierarchy
 
-azd follows a hierarchical configuration system:
+azd uses a hierarchical configuration system:
 1. **Command-line flags** (highest priority)
 2. **Environment variables**
 3. **Local project configuration** (`.azd/config.json`)
@@ -256,12 +256,21 @@ azd env set DEBUG "true"
 # View environment variables
 azd env get-values
 
+# Expected output:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
+# API_KEY=secret-api-key
+# DEBUG=true
+
 # Remove environment variable
 azd env unset DEBUG
+
+# Verify removal
+azd env get-values | grep DEBUG
+# (should return nothing)
 ```
 
 ### Environment Templates
-Use `.azure/env.template` to ensure consistent environment setup:
+Create `.azure/env.template` for consistent environment setup:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -315,7 +324,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Infrastructure Configuration
 
 ### Bicep Parameters
-Define infrastructure parameters in `infra/main.parameters.json`:
+Configure infrastructure parameters in `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -338,7 +347,7 @@ Define infrastructure parameters in `infra/main.parameters.json`:
 ```
 
 ### Terraform Configuration
-For Terraform projects, use `infra/terraform.tfvars`:
+For Terraform projects, configure in `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -464,7 +473,7 @@ azd provision --dry-run
 ```
 
 ### Configuration Scripts
-Place validation scripts in `scripts/`:
+Create validation scripts in `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -540,6 +549,68 @@ Document your configuration in `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
+## 🎯 Hands-On Practice Exercises
+
+### Exercise 1: Multi-Environment Configuration (15 minutes)
+
+**Goal**: Create and configure three environments with different settings
+
+```bash
+# Create development environment
+azd env new dev
+azd env set LOG_LEVEL debug
+azd env set ENABLE_TELEMETRY false
+azd env set APP_INSIGHTS_SAMPLING 100
+
+# Create staging environment
+azd env new staging
+azd env set LOG_LEVEL info
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 50
+
+# Create production environment
+azd env new production
+azd env set LOG_LEVEL error
+azd env set ENABLE_TELEMETRY true
+azd env set APP_INSIGHTS_SAMPLING 10
+
+# Verify each environment
+azd env select dev && azd env get-values
+azd env select staging && azd env get-values
+azd env select production && azd env get-values
+```
+
+**Success Criteria:**
+- [ ] Three environments created successfully
+- [ ] Each environment has unique configuration
+- [ ] Can switch between environments without errors
+- [ ] `azd env list` shows all three environments
+
+### Exercise 2: Secret Management (10 minutes)
+
+**Goal**: Practice secure configuration with sensitive data
+
+```bash
+# Set secrets (not displayed in output)
+azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
+azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+
+# Set non-secret config
+azd env set DB_HOST "mydb.postgres.database.azure.com"
+azd env set DB_NAME "production_db"
+
+# View environment (secrets should be redacted)
+azd env get-values
+
+# Verify secrets are stored
+azd env get DB_PASSWORD  # Should show actual value
+```
+
+**Success Criteria:**
+- [ ] Secrets stored without displaying in terminal
+- [ ] `azd env get-values` shows redacted secrets
+- [ ] Individual `azd env get <SECRET_NAME>` retrieves actual value
+
 ## Next Steps
 
 - [Your First Project](first-project.md) - Apply configuration in practice
@@ -563,5 +634,7 @@ Document your configuration in `CONFIG.md`:
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

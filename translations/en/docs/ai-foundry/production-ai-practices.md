@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "e2706bfe15e4801ded418f5c1de39212",
-  "translation_date": "2025-09-18T12:44:37+00:00",
+  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
+  "translation_date": "2025-11-25T09:47:03+00:00",
   "source_file": "docs/ai-foundry/production-ai-practices.md",
   "language_code": "en"
 }
@@ -18,17 +18,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Overview
 
-This guide outlines best practices for deploying AI workloads in production using Azure Developer CLI (AZD). These recommendations are based on insights from the Azure AI Foundry Discord community and real-world customer implementations, addressing common challenges in production AI systems.
+This guide offers detailed best practices for deploying AI workloads that are ready for production using Azure Developer CLI (AZD). These practices are based on feedback from the Microsoft Foundry Discord community and real-world customer implementations, addressing the most common challenges in production AI systems.
 
 ## Key Challenges Addressed
 
-According to our community poll, developers face the following challenges:
+According to our community poll results, these are the main challenges developers encounter:
 
-- **45%** struggle with deploying AI workloads across multiple services
-- **38%** encounter issues with managing credentials and secrets  
-- **35%** find it difficult to ensure production readiness and scalability
+- **45%** face difficulties with multi-service AI deployments
+- **38%** struggle with credential and secret management  
+- **35%** find production readiness and scaling challenging
 - **32%** need better strategies for cost optimization
-- **29%** require improved monitoring and troubleshooting capabilities
+- **29%** require enhanced monitoring and troubleshooting
 
 ## Architecture Patterns for Production AI
 
@@ -78,7 +78,7 @@ services:
 
 ### Pattern 2: Event-Driven AI Processing
 
-**When to use**: For batch processing, document analysis, or asynchronous workflows
+**When to use**: For batch processing, document analysis, and asynchronous workflows
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -130,10 +130,10 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 ### 1. Zero-Trust Security Model
 
 **Implementation Strategy**:
-- Require authentication for all service-to-service communication
-- Use managed identities for API calls
-- Isolate networks with private endpoints
-- Apply least privilege access controls
+- No service-to-service communication without authentication
+- All API calls utilize managed identities
+- Network isolation through private endpoints
+- Least privilege access controls
 
 ```bicep
 // Managed Identity for each service
@@ -380,7 +380,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Production environment  
+# Production environment
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -840,17 +840,17 @@ echo "Infrastructure validation completed successfully!"
 ## Production Readiness Checklist
 
 ### Security ✅
-- [ ] Managed identities for all services
+- [ ] All services use managed identities
 - [ ] Secrets stored in Key Vault
 - [ ] Private endpoints configured
-- [ ] Network security groups applied
-- [ ] RBAC with least privilege access
-- [ ] WAF enabled for public endpoints
+- [ ] Network security groups implemented
+- [ ] RBAC with least privilege
+- [ ] WAF enabled on public endpoints
 
 ### Performance ✅
 - [ ] Auto-scaling configured
 - [ ] Caching implemented
-- [ ] Load balancing set up
+- [ ] Load balancing setup
 - [ ] CDN for static content
 - [ ] Database connection pooling
 - [ ] Token usage optimization
@@ -858,34 +858,34 @@ echo "Infrastructure validation completed successfully!"
 ### Monitoring ✅
 - [ ] Application Insights configured
 - [ ] Custom metrics defined
-- [ ] Alerting rules set up
+- [ ] Alerting rules setup
 - [ ] Dashboard created
 - [ ] Health checks implemented
-- [ ] Log retention policies applied
+- [ ] Log retention policies
 
 ### Reliability ✅
 - [ ] Multi-region deployment
 - [ ] Backup and recovery plan
 - [ ] Circuit breakers implemented
 - [ ] Retry policies configured
-- [ ] Graceful degradation strategies
+- [ ] Graceful degradation
 - [ ] Health check endpoints
 
 ### Cost Management ✅
 - [ ] Budget alerts configured
-- [ ] Resource right-sizing applied
-- [ ] Dev/test discounts utilized
+- [ ] Resource right-sizing
+- [ ] Dev/test discounts applied
 - [ ] Reserved instances purchased
-- [ ] Cost monitoring dashboard created
-- [ ] Regular cost reviews conducted
+- [ ] Cost monitoring dashboard
+- [ ] Regular cost reviews
 
 ### Compliance ✅
 - [ ] Data residency requirements met
 - [ ] Audit logging enabled
 - [ ] Compliance policies applied
 - [ ] Security baselines implemented
-- [ ] Regular security assessments conducted
-- [ ] Incident response plan in place
+- [ ] Regular security assessments
+- [ ] Incident response plan
 
 ## Performance Benchmarks
 
@@ -913,28 +913,28 @@ python scripts/load_test.py \
 
 ## 🤝 Community Best Practices
 
-Based on feedback from the Azure AI Foundry Discord community:
+Based on Microsoft Foundry Discord community feedback:
 
 ### Top Recommendations from the Community:
 
-1. **Start Small, Scale Gradually**: Begin with basic configurations and scale based on actual usage
-2. **Monitor Everything**: Set up comprehensive monitoring from the start
-3. **Automate Security**: Use infrastructure as code to ensure consistent security
-4. **Test Thoroughly**: Include AI-specific tests in your pipeline
+1. **Start Small, Scale Gradually**: Begin with basic SKUs and scale up based on actual usage
+2. **Monitor Everything**: Set up comprehensive monitoring from day one
+3. **Automate Security**: Use infrastructure as code for consistent security
+4. **Test Thoroughly**: Include AI-specific testing in your pipeline
 5. **Plan for Costs**: Monitor token usage and set budget alerts early
 
 ### Common Pitfalls to Avoid:
 
-- ❌ Hardcoding API keys in your code
-- ❌ Neglecting proper monitoring
-- ❌ Overlooking cost optimization
-- ❌ Skipping failure scenario testing
+- ❌ Hardcoding API keys in code
+- ❌ Not setting up proper monitoring
+- ❌ Ignoring cost optimization
+- ❌ Not testing failure scenarios
 - ❌ Deploying without health checks
 
 ## Additional Resources
 
 - **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Azure AI Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
 
@@ -947,9 +947,11 @@ Based on feedback from the Azure AI Foundry Discord community:
 - **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎆 Course Complete**: [AZD For Beginners](../../README.md)
 
-**Remember**: Deploying AI workloads in production requires careful planning, monitoring, and ongoing optimization. Use these patterns as a starting point and adapt them to your specific needs.
+**Remember**: Production AI workloads require careful planning, monitoring, and continuous optimization. Start with these patterns and adapt them to your specific requirements.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

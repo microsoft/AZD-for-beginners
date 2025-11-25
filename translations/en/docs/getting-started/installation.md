@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "c58e92a5b56ad73610b95518b0eea386",
-  "translation_date": "2025-09-18T12:45:49+00:00",
+  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
+  "translation_date": "2025-11-25T09:53:13+00:00",
   "source_file": "docs/getting-started/installation.md",
   "language_code": "en"
 }
@@ -14,38 +14,38 @@ CO_OP_TRANSLATOR_METADATA:
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [AZD Basics](azd-basics.md)
 - **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 
-This guide provides step-by-step instructions for installing and setting up Azure Developer CLI (azd) on your system. It covers various installation methods for different operating systems, authentication setup, and initial configuration to prepare your development environment for Azure deployments.
+This guide provides step-by-step instructions for installing and configuring the Azure Developer CLI (azd) on your system. It covers various installation methods for different operating systems, authentication setup, and initial configuration to prepare your development environment for Azure deployments.
 
 ## Learning Goals
 
 By the end of this lesson, you will:
 - Successfully install Azure Developer CLI on your operating system
-- Set up authentication with Azure using different methods
-- Prepare your development environment with the required tools
-- Understand the available installation options and when to use them
+- Configure authentication with Azure using multiple methods
+- Set up your development environment with necessary prerequisites
+- Understand different installation options and when to use each
 - Troubleshoot common installation and setup issues
 
 ## Learning Outcomes
 
 After completing this lesson, you will be able to:
 - Install azd using the appropriate method for your platform
-- Authenticate with Azure using `azd auth login`
+- Authenticate with Azure using azd auth login
 - Verify your installation and test basic azd commands
-- Configure your development environment for optimal use of azd
-- Solve common installation problems on your own
+- Configure your development environment for optimal azd usage
+- Resolve common installation problems independently
 
-This guide ensures you can install and configure Azure Developer CLI on your system, regardless of your operating system or development environment.
+This guide will help you install and configure Azure Developer CLI on your system, regardless of your operating system or development environment.
 
 ## Prerequisites
 
-Before installing azd, make sure you have:
+Before installing azd, ensure you have:
 - **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
-- **Azure CLI** - Required for authentication and resource management
-- **Git** - Used for cloning templates and version control
+- **Azure CLI** - For authentication and resource management
+- **Git** - For cloning templates and version control
 - **Docker** (optional) - For containerized applications
 
 ## Installation Methods
@@ -71,7 +71,7 @@ choco install azd
 #### Option 4: Manual Installation
 1. Download the latest release from [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Extract to `C:\Program Files\azd\`
-3. Add it to the PATH environment variable
+3. Add to PATH environment variable
 
 ### macOS
 
@@ -121,7 +121,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd is pre-installed in GitHub Codespaces. Simply create a codespace and start using azd right away.
+azd comes pre-installed in GitHub Codespaces. Simply create a codespace and start using azd immediately.
 
 ### Docker
 
@@ -135,7 +135,7 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 
 ## ✅ Verify Installation
 
-After installation, confirm that azd is working correctly:
+After installation, verify azd is working correctly:
 
 ```bash
 # Check version
@@ -152,6 +152,15 @@ Expected output:
 ```
 azd version 1.5.0 (commit abc123)
 ```
+
+**✅ Installation Success Checklist:**
+- [ ] `azd version` shows version number without errors
+- [ ] `azd --help` displays command documentation
+- [ ] `azd template list` shows available templates
+- [ ] `az account show` displays your Azure subscription
+- [ ] You can create a test directory and run `azd init` successfully
+
+**If all checks pass, you're ready to proceed to [Your First Project](first-project.md)!**
 
 ## Authentication Setup
 
@@ -170,7 +179,7 @@ az account show
 ```
 
 ### Device Code Authentication
-Use this method if you're on a headless system or experiencing browser issues:
+If you're on a headless system or having browser issues:
 ```bash
 az login --use-device-code
 ```
@@ -199,7 +208,7 @@ azd config list
 ```
 
 ### Environment Variables
-Add these to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
+Add to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -241,7 +250,7 @@ Create a `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Install the Azure plugin
 2. Configure Azure credentials
-3. Use the integrated terminal for azd commands
+3. Use integrated terminal for azd commands
 
 ## 🐛 Troubleshooting Installation
 
@@ -326,6 +335,72 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
+## 💡 Frequently Asked Questions
+
+<details>
+<summary><strong>What's the difference between azd and az CLI?</strong></summary>
+
+**Azure CLI (az)**: Low-level tool for managing individual Azure resources
+- `az webapp create`, `az storage account create`
+- One resource at a time
+- Infrastructure management focus
+
+**Azure Developer CLI (azd)**: High-level tool for complete application deployments
+- `azd up` deploys entire app with all resources
+- Template-based workflows
+- Developer productivity focus
+
+**You need both**: azd uses az CLI for authentication
+</details>
+
+<details>
+<summary><strong>Can I use azd with existing Azure resources?</strong></summary>
+
+Yes! You can:
+1. Import existing resources into azd environments
+2. Reference existing resources in your Bicep templates
+3. Use azd for new deployments alongside existing infrastructure
+
+See [Configuration Guide](configuration.md) for details.
+</details>
+
+<details>
+<summary><strong>Does azd work with Azure Government or Azure China?</strong></summary>
+
+Yes, configure the cloud:
+```bash
+# Azure Government
+az cloud set --name AzureUSGovernment
+az login
+
+# Azure China
+az cloud set --name AzureChinaCloud
+az login
+```
+</details>
+
+<details>
+<summary><strong>Can I use azd in CI/CD pipelines?</strong></summary>
+
+Absolutely! azd is designed for automation:
+- GitHub Actions integration
+- Azure DevOps support
+- Service principal authentication
+- Non-interactive mode
+
+See [Deployment Guide](../deployment/deployment-guide.md) for CI/CD patterns.
+</details>
+
+<details>
+<summary><strong>What's the cost of using azd?</strong></summary>
+
+azd itself is **completely free** and open-source. You only pay for:
+- Azure resources you deploy
+- Azure consumption costs (compute, storage, etc.)
+
+Use `azd provision --preview` to estimate costs before deployment.
+</details>
+
 ## Next Steps
 
 1. **Complete authentication**: Ensure you can access your Azure subscription
@@ -348,11 +423,13 @@ If you encounter issues:
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [AZD Basics](azd-basics.md) 
 - **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../ai-foundry/azure-ai-foundry-integration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
 **✅ Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:  
 This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
