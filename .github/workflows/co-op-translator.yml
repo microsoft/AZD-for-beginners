@@ -54,7 +54,7 @@ jobs:
           # IMPORTANT: Set your target languages here (REQUIRED CONFIGURATION)
           # =====================================================================
           # Example: Translate to Spanish, French, German. Add -y to auto-confirm.
-          # translate -l "all" -y  # <--- MODIFY THIS LINE with your desired languages
+          translate -l "all" -y  # <--- MODIFY THIS LINE with your desired languages
           # Recommendation for large batches over 29 files run them in batches maximum github runner time is 6 hours
           # translate -l "en fr es de" -y
           # translate -l "ru ar fa ur" -y
@@ -68,7 +68,7 @@ jobs:
           # translate -l "tl sw hu cs" -y
           # translate -l "sk ro bg sr" -y
           # translate -l "hr sl uk my" -y
-          translate -l "ta et pcm te" -y
+          # translate -l "ta et pcm te" -y
           # translate -l "ml kn" -y
 
       - name: Authenticate GitHub App
@@ -102,6 +102,7 @@ jobs:
           add-paths: |
             translations/
             translated_images/
+
 
 
 
