@@ -68,8 +68,8 @@ jobs:
           # translate -l "tl sw hu cs" -y
           # translate -l "sk ro bg sr" -y
           # translate -l "hr sl uk my" -y
-          # translate -l "ta et pcm te" -y
-          translate -l "ml kn" -y
+          translate -l "ta et pcm te" -y
+          # translate -l "ml kn" -y
 
       - name: Authenticate GitHub App
         id: generate_token
@@ -102,6 +102,7 @@ jobs:
           add-paths: |
             translations/
             translated_images/
+
 
 
 
