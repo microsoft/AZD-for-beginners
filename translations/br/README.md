@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-15T22:38:05+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T13:30:49+00:00",
   "source_file": "README.md",
   "language_code": "br"
 }
@@ -20,7 +20,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Começando com Este Curso
 
-Siga estes passos para iniciar sua jornada de aprendizado com AZD:
+Siga estes passos para iniciar sua jornada de aprendizado AZD:
 
 1. **Faça um Fork do Repositório**: Clique [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clone o Repositório**: `git clone https://github.com/microsoft/azd-for-beginners.git`
@@ -77,7 +77,7 @@ Ao concluir este curso estruturado, você irá:
 - **📖 Teoria**: [Noções Básicas do AZD](docs/getting-started/azd-basics.md) - Conceitos e terminologia principais
 - **⚙️ Configuração**: [Instalação & Configuração](docs/getting-started/installation.md) - Guias específicos para plataforma
 - **🛠️ Prática**: [Seu Primeiro Projeto](docs/getting-started/first-project.md) - Tutorial passo a passo
-- **📋 Referência Rápida**: [Folha de Comandos](resources/cheat-sheet.md)
+- **📋 Referência Rápida**: [Resumo de Comandos](resources/cheat-sheet.md)
 
 #### Exercícios Práticos
 ```bash
@@ -98,7 +98,7 @@ azd version              # Mostra a versão instalada
 azd init --template todo-nodejs-mongo  # Inicializa o projeto
 azd up                  # Faz o deploy para o Azure
 azd show                # Exibe a URL do aplicativo em execução
-# Aplicação abre no navegador e funciona
+# Aplicativo abre no navegador e funciona
 azd down --force --purge  # Limpa os recursos
 ```
 
@@ -112,7 +112,7 @@ azd version              # Mostra a versão instalada
 azd init --template todo-nodejs-mongo  # Inicializa o projeto
 azd up                  # Faz o deploy para o Azure
 azd show                # Exibe a URL do aplicativo em execução
-# Aplicativo abre no navegador e funciona
+# Aplicação abre no navegador e funciona
 azd down --force --purge  # Limpa os recursos
 ```
 
@@ -428,7 +428,7 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 **Por que AZD para Soluções de IA?** AZD resolve os principais desafios enfrentados por desenvolvedores de IA:
 
 - **Templates Prontos para IA** - Templates pré-configurados para Azure OpenAI, Serviços Cognitivos e cargas de trabalho ML
-- **Implantações Seguras de IA** - Padrões de segurança embutidos para serviços de IA, chaves de API e endpoints de modelo  
+- **Implantações Seguras de IA** - Padrões de segurança embutidos para serviços de IA, chaves de API e endpoints de modelos  
 - **Padrões de IA para Produção** - Melhores práticas para implantações escaláveis e econômicas de aplicações de IA
 - **Fluxos de Trabalho de IA de Ponta a Ponta** - Do desenvolvimento do modelo à implantação em produção com monitoramento adequado
 - **Otimização de Custos** - Alocação inteligente de recursos e estratégias de escalonamento para cargas de trabalho de IA
@@ -461,7 +461,7 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Capítulo 2 | ⭐ | Padrões básicos de implantação de IA |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Capítulo 2 | ⭐⭐ | Implementação RAG com Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Capítulo 4 | ⭐⭐ | Integração de Inteligência de Documentos |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | Framework de agente e chamadas de função |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | Framework de agentes e chamadas de função |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Capítulo 8 | ⭐⭐⭐ | Orquestração empresarial de IA |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Capítulo 5 | ⭐⭐⭐⭐ | Arquitetura multiagente com agentes de Cliente e Inventário |
 
@@ -493,7 +493,7 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 
 #### Exemplos Externos - Integração com Banco de Dados (Capítulos 3-4)  
 - [Aplicação com Banco de Dados - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Padrões de conectividade com banco de dados
-- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Fluxo de trabalho serverless de dados
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Fluxo de trabalho de dados serverless
 
 #### Exemplos Externos - Padrões Avançados (Capítulos 4-8)
 - [Microsserviços Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - Arquiteturas multi-serviço
@@ -507,10 +507,10 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 
 ---
 
-## 📚 Recursos de Aprendizagem e Referências
+## 📚 Recursos e Referências de Aprendizagem
 
 ### Referências Rápidas
-- [**Folha de Comandos**](resources/cheat-sheet.md) - Comandos essenciais do azd organizados por capítulo
+- [**Resumo de Comandos**](resources/cheat-sheet.md) - Comandos essenciais do azd organizados por capítulo
 - [**Glossário**](resources/glossary.md) - Terminologia do Azure e azd  
 - [**FAQ**](resources/faq.md) - Perguntas comuns organizadas por capítulo de aprendizado
 - [**Guia de Estudo**](resources/study-guide.md) - Exercícios práticos abrangentes
@@ -625,7 +625,7 @@ azd up
 **Tempos normais de espera:**
 - Aplicativo web simples: 5-10 minutos
 - Aplicativo com banco de dados: 10-15 minutos
-- Aplicações de IA: 15-25 minutos (provisionamento do OpenAI é lento)
+- Aplicações de IA: 15-25 minutos (Provisionamento do OpenAI é lento)
 
 ```bash
 # Verificar progresso
@@ -780,7 +780,7 @@ azd up
 **Tempos normais de espera:**
 - Aplicativo web simples: 5-10 minutos
 - Aplicativo com banco de dados: 10-15 minutos
-- Aplicações de IA: 15-25 minutos (provisionamento do OpenAI é lento)
+- Aplicações de IA: 15-25 minutos (Provisionamento do OpenAI é lento)
 
 ```bash
 # Verificar progresso
@@ -869,7 +869,7 @@ Ao concluir todos os capítulos, você terá:
 - **Ajuda Específica de IA**: Participe do [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Documentação**: [Documentação oficial do Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Insights da Comunidade no Microsoft Foundry Discord
+### Insights da Comunidade no Discord Microsoft Foundry
 
 **Resultados recentes da enquete no canal #Azure:**
 - **45%** dos desenvolvedores querem usar AZD para cargas de trabalho de IA
@@ -879,7 +879,7 @@ Ao concluir todos os capítulos, você terá:
 **Junte-se à nossa comunidade para:**
 - Compartilhar suas experiências com AZD + IA e obter ajuda
 - Acessar prévias antecipadas de novos templates de IA
-- Contribuir para as melhores práticas de implantação de IA
+- Contribuir para melhores práticas de implantação de IA
 - Influenciar o desenvolvimento futuro de recursos IA + AZD
 
 ### Contribuindo para o Curso
@@ -902,6 +902,12 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](../.
 Nossa equipe produz outros cursos abrangentes de aprendizado:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j para Iniciantes](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js para Iniciantes](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
 ### Azure / Edge / MCP / Agentes
 [![AZD para Iniciantes](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI para Iniciantes](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -923,16 +929,16 @@ Nossa equipe produz outros cursos abrangentes de aprendizado:
 [![Ciência de Dados para Iniciantes](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![IA para Iniciantes](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Cibersegurança para Iniciantes](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Desenvolvimento Web para Iniciantes](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT para Iniciantes](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![Desenvolvimento XR para Iniciantes](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Série Copilot
-[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Copilot para Programação Emparelhada com IA](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot para C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Aventura Copilot](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
@@ -951,5 +957,5 @@ Nossa equipe produz outros cursos abrangentes de aprendizado:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-15T23:17:53+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T14:16:30+00:00",
   "source_file": "README.md",
   "language_code": "da"
 }
 -->
-# AZD For Begyndere: En Struktureret Læringsrejse
+# AZD For Beginners: En Struktureret Læringsrejse
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.da.png) 
 
@@ -75,7 +75,7 @@ Ved at gennemføre dette strukturerede kursus vil du:
 #### Læringsressourcer
 - **🎯 Start Her**: [Hvad er Azure Developer CLI?](../..)
 - **📖 Teori**: [AZD Basics](docs/getting-started/azd-basics.md) - Kernebegreber og terminologi
-- **⚙️ Opsætning**: [Installation & Opsætning](docs/getting-started/installation.md) - Platformsspecifikke vejledninger
+- **⚙️ Opsætning**: [Installation & Opsætning](docs/getting-started/installation.md) - Platformsspecifikke guider
 - **🛠️ Praktisk**: [Dit Første Projekt](docs/getting-started/first-project.md) - Trin-for-trin vejledning
 - **📋 Hurtig Reference**: [Kommandooversigt](resources/cheat-sheet.md)
 
@@ -89,7 +89,7 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Kapitelresultat**: Udrul en simpel webapplikation til Azure ved hjælp af AZD
+**💡 Kapitelresultat**: Udrul en simpel webapplikation til Azure med AZD
 
 **✅ Succesvalidering:**
 ```bash
@@ -98,7 +98,7 @@ azd version              # Viser installeret version
 azd init --template todo-nodejs-mongo  # Initialiserer projekt
 azd up                  # Udruller til Azure
 azd show                # Viser kørende app URL
-# Applikationen åbnes i browseren og fungerer
+# Applikationen åbner i browseren og fungerer
 azd down --force --purge  # Rydder op i ressourcer
 ```
 
@@ -121,7 +121,7 @@ azd down --force --purge  # Rydder op i ressourcer
 
 ---
 
-### 🤖 Kapitel 2: AI-Først Udvikling (Anbefalet for AI-udviklere)
+### 🤖 Kapitel 2: AI-Først Udvikling (Anbefalet til AI-udviklere)
 **Forudsætninger**: Kapitel 1 gennemført  
 **Varighed**: 1-2 timer  
 **Kompleksitet**: ⭐⭐
@@ -214,7 +214,7 @@ az consumption budget list --resource-group <your-rg>
 #### Læringsressourcer
 - **📖 Konfiguration**: [Konfigurationsguide](docs/getting-started/configuration.md) - Miljøopsætning
 - **🔐 Sikkerhed**: [Autentifikationsmønstre og managed identity](docs/getting-started/authsecurity.md) - Autentifikationsmønstre
-- **📝 Eksempler**: [Database App Eksempel](examples/database-app/README.md) - AZD Databaseeksempler
+- **📝 Eksempler**: [Database App Eksempel](examples/database-app/README.md) - AZD Database Eksempler
 
 #### Praktiske Øvelser
 - Konfigurer flere miljøer (dev, staging, prod)
@@ -290,12 +290,12 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Læringsressourcer  
 - **📊 Planlægning**: [Kapacitetsplanlægning](docs/pre-deployment/capacity-planning.md) - Ressourcevalidering  
-- **💰 Valg**: [SKU Valg](docs/pre-deployment/sku-selection.md) - Omkostningseffektive valg  
+- **💰 Udvælgelse**: [SKU Udvælgelse](docs/pre-deployment/sku-selection.md) - Omkostningseffektive valg  
 - **✅ Validering**: [Forudgående Tjek](docs/pre-deployment/preflight-checks.md) - Automatiserede scripts
 
 #### Praktiske Øvelser  
 - Kør kapacitetsvalideringsscripts  
-- Optimer SKU-valg for omkostninger  
+- Optimer SKU-udvælgelse for omkostninger  
 - Implementer automatiserede forudgående tjek
 
 **💡 Kapitel Resultat**: Valider og optimer implementeringer før udførelse
@@ -322,7 +322,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Løs autentificeringsproblemer  
 - Debug AI serviceforbindelser
 
-**💡 Kapitel Resultat**: Selvstændigt diagnosticer og løs almindelige implementeringsproblemer
+**💡 Kapitel Resultat**: Selvstændigt diagnosticere og løse almindelige implementeringsproblemer
 
 ---
 
@@ -346,7 +346,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Opsæt omfattende overvågning  
 - Implementer til produktion med korrekt styring
 
-**💡 Kapitel Resultat**: Implementer enterprise-klare applikationer med fuld produktionskapacitet
+**💡 Kapitel Resultat**: Implementer enterprise-klar applikationer med fuld produktionskapacitet
 
 ---
 
@@ -385,7 +385,7 @@ Workshoppen følger en **Discovery → Deployment → Customization** metode:
    - Optimer til produktionsimplementering  
    - Implementer overvågning og omkostningsstyring
 
-#### 🚀 Kom Godt I Gang Med Workshoppen  
+#### 🚀 Kom Godt I Gang med Workshoppen  
 ```bash
 # Mulighed 1: GitHub Codespaces (Anbefalet)
 # Klik på "Code" → "Create codespace on main" i repositoryet
@@ -425,7 +425,7 @@ Azure Developer CLI (azd) er en udviklercentreret kommandolinjegrænseflade, der
 
 ### **AZD + Microsoft Foundry: Perfekt til AI-Implementeringer**
 
-**Hvorfor AZD til AI-løsninger?** AZD adresserer de største udfordringer, AI-udviklere møder:
+**Hvorfor AZD til AI-løsninger?** AZD adresserer de største udfordringer AI-udviklere møder:
 
 - **AI-Klare Skabeloner** - Forudkonfigurerede skabeloner til Azure OpenAI, Cognitive Services og ML workloads  
 - **Sikre AI-Implementeringer** - Indbyggede sikkerhedsmønstre til AI-services, API-nøgler og modelendpoints  
@@ -436,33 +436,33 @@ Azure Developer CLI (azd) er en udviklercentreret kommandolinjegrænseflade, der
 
 ---
 
-## 🎯 Skabeloner & Eksempelsamling
+## 🎯 Skabelon- & Eksempelsamling
 
 ### Fremhævet: Microsoft Foundry Skabeloner  
 **Start her, hvis du implementerer AI-applikationer!**
 
 > **Bemærk:** Disse skabeloner demonstrerer forskellige AI-mønstre. Nogle er eksterne Azure Samples, andre er lokale implementeringer.
 
-| Skabelon | Kapitel | Kompleksitet | Services | Type |  
-|----------|---------|--------------|----------|------|  
-| [**Kom i gang med AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Ekstern |  
-| [**Kom i gang med AI agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Kapitel 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Ekstern |  
-| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Ekstern |  
-| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Ekstern |  
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Ekstern |  
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Ekstern |  
+| Skabelon | Kapitel | Kompleksitet | Services | Type |
+|----------|---------|--------------|----------|------|
+| [**Kom i gang med AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Ekstern |
+| [**Kom i gang med AI agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Kapitel 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights | Ekstern |
+| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Ekstern |
+| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Ekstern |
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Ekstern |
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Ekstern |
 | [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Kapitel 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Lokal** |
 
 ### Fremhævet: Færdige Læringsscenarier  
 **Produktionsklare applikationsskabeloner knyttet til læringskapitler**
 
-| Skabelon | Læringskapitel | Kompleksitet | Nøglelæring |  
-|----------|----------------|--------------|-------------|  
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | Grundlæggende AI implementeringsmønstre |  
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | RAG-implementering med Azure AI Search |  
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Kapitel 4 | ⭐⭐ | Dokumentintelligens integration |  
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | Agent framework og funktionskald |  
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐ | Enterprise AI orkestrering |  
+| Skabelon | Læringskapitel | Kompleksitet | Nøglelæring |
+|----------|----------------|--------------|-------------|
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | Grundlæggende AI implementeringsmønstre |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | RAG-implementering med Azure AI Search |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Kapitel 4 | ⭐⭐ | Dokumentintelligens integration |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | Agent framework og funktionskald |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐ | Enterprise AI orkestrering |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kapitel 5 | ⭐⭐⭐⭐ | Multi-agent arkitektur med Kunde- og Lageragenter |
 
 ### Læring efter Eksempeltype
@@ -566,7 +566,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 
-### ❌ "Utilstrækkelig kvote" eller "Kvote overskredet"
+### ❌ "InsufficientQuota" eller "Kvota overskredet"
 
 ```bash
 # Prøv en anden Azure-region
@@ -580,7 +580,7 @@ azd up
 }
 ```
 
-### ❌ "azd up" fejler halvvejs
+### ❌ "azd up" fejler halvvejs igennem
 
 ```bash
 # Mulighed 1: Rens og prøv igen
@@ -713,7 +713,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Utilstrækkelig kvote" eller "Kvote overskredet"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" eller "Kvota overskredet"</strong></summary>
 
 ```bash
 # Prøv en anden Azure-region
@@ -729,7 +729,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" fejler halvvejs</strong></summary>
+<summary><strong>❌ "azd up" fejler halvvejs igennem</strong></summary>
 
 ```bash
 # Mulighed 1: Rens og prøv igen
@@ -833,7 +833,7 @@ azd env get-values
 
 ## 🎓 Kursusafslutning & Certificering
 
-### Fremskridtssporing
+### Fremskridtsovervågning
 Følg din læringsfremskridt gennem hvert kapitel:
 
 - [ ] **Kapitel 1**: Grundlag & Hurtig Start ✅
@@ -846,7 +846,7 @@ Følg din læringsfremskridt gennem hvert kapitel:
 - [ ] **Kapitel 8**: Produktion & Enterprise-mønstre ✅
 
 ### Læringsverifikation
-Efter hvert kapitel, bekræft din viden ved at:
+Efter at have gennemført hvert kapitel, bekræft din viden ved at:
 1. **Praktisk Øvelse**: Fuldfør kapitlets praktiske udrulning
 2. **Videnscheck**: Gennemgå FAQ-sektionen for dit kapitel
 3. **Fællesskabsdiskussion**: Del din erfaring i Azure Discord
@@ -856,8 +856,8 @@ Efter hvert kapitel, bekræft din viden ved at:
 Når alle kapitler er gennemført, vil du have:
 - **Produktionserfaring**: Udrullet rigtige AI-applikationer til Azure
 - **Professionelle Kompetencer**: Enterprise-klar udrulningskapacitet  
-- **Fællesskabsanerkendelse**: Aktiv medlem af Azure-udviklerfællesskabet
-- **Karrierefremme**: Eftertragtet AZD- og AI-udrulningsekspertise
+- **Fællesskabsanerkendelse**: Aktivt medlem af Azure-udviklerfællesskabet
+- **Karrierefremgang**: Eftertragtet AZD- og AI-udrulningsekspertise
 
 ---
 
@@ -874,7 +874,7 @@ Når alle kapitler er gennemført, vil du have:
 **Seneste afstemningsresultater fra #Azure-kanalen:**
 - **45%** af udviklere ønsker at bruge AZD til AI-arbejdsbelastninger
 - **Topudfordringer**: Multi-service udrulninger, legitimationsstyring, produktionsparathed  
-- **Mest efterspurgt**: AI-specifikke skabeloner, fejlfinding, bedste praksis
+- **Mest efterspurgt**: AI-specifikke skabeloner, fejlfinding guider, bedste praksis
 
 **Deltag i vores fællesskab for at:**
 - Dele dine AZD + AI erfaringer og få hjælp
@@ -883,7 +883,7 @@ Når alle kapitler er gennemført, vil du have:
 - Påvirke fremtidig AI + AZD funktionsudvikling
 
 ### Bidrag til Kurset
-Vi byder bidrag velkommen! Læs venligst vores [Bidragsvejledning](CONTRIBUTING.md) for detaljer om:
+Vi byder bidrag velkommen! Læs venligst vores [Bidragsguide](CONTRIBUTING.md) for detaljer om:
 - **Indholdsforbedringer**: Forbedr eksisterende kapitler og eksempler
 - **Nye Eksempler**: Tilføj virkelighedsnære scenarier og skabeloner  
 - **Oversættelse**: Hjælp med at vedligeholde flersproget support
@@ -902,6 +902,12 @@ Dette projekt er licenseret under MIT-licensen - se [LICENSE](../../LICENSE) fil
 Vores team producerer andre omfattende læringskurser:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
 ### Azure / Edge / MCP / Agenter
 [![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-15T23:41:03+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T14:41:40+00:00",
   "source_file": "README.md",
   "language_code": "he"
 }
@@ -22,17 +22,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 עקבו אחר השלבים הבאים כדי להתחיל את מסע הלמידה שלכם ב-AZD:
 
-1. **צור Fork למאגר**: לחץ על [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **שכפל את המאגר**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **הצטרף לקהילה**: [קהילות Azure Discord](https://discord.com/invite/ByRwuEEgH4) לתמיכה מקצועית
-4. **בחר את מסלול הלמידה שלך**: בחר פרק למטה שמתאים לרמת הניסיון שלך
+1. **פיצול המאגר**: לחצו [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **שכפול המאגר**: `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. **הצטרפות לקהילה**: [קהילות Azure Discord](https://discord.com/invite/ByRwuEEgH4) לתמיכה מקצועית
+4. **בחרו את מסלול הלמידה שלכם**: בחרו פרק למטה שמתאים לרמת הניסיון שלכם
 
 ### תמיכה בריבוי שפות
 
 #### תרגומים אוטומטיים (תמיד מעודכנים)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](./README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[ערבית](../ar/README.md) | [בנגלית](../bn/README.md) | [בולגרית](../bg/README.md) | [בורמזית (מיאנמר)](../my/README.md) | [סינית (מפושטת)](../zh/README.md) | [סינית (מסורתית, הונג קונג)](../hk/README.md) | [סינית (מסורתית, מקאו)](../mo/README.md) | [סינית (מסורתית, טייוואן)](../tw/README.md) | [קרואטית](../hr/README.md) | [צ'כית](../cs/README.md) | [דנית](../da/README.md) | [הולנדית](../nl/README.md) | [אסטונית](../et/README.md) | [פינית](../fi/README.md) | [צרפתית](../fr/README.md) | [גרמנית](../de/README.md) | [יוונית](../el/README.md) | [עברית](./README.md) | [הינדי](../hi/README.md) | [הונגרית](../hu/README.md) | [אינדונזית](../id/README.md) | [איטלקית](../it/README.md) | [יפנית](../ja/README.md) | [קנדה](../kn/README.md) | [קוריאנית](../ko/README.md) | [ליטאית](../lt/README.md) | [מלאית](../ms/README.md) | [מלאיאלאם](../ml/README.md) | [מרטהי](../mr/README.md) | [נפאלית](../ne/README.md) | [פידג'ין ניגרי](../pcm/README.md) | [נורווגית](../no/README.md) | [פרסית (פרסי)](../fa/README.md) | [פולנית](../pl/README.md) | [פורטוגזית (ברזיל)](../br/README.md) | [פורטוגזית (פורטוגל)](../pt/README.md) | [פונג'אבי (גורמוכי)](../pa/README.md) | [רומנית](../ro/README.md) | [רוסית](../ru/README.md) | [סרבית (קירילית)](../sr/README.md) | [סלובקית](../sk/README.md) | [סלובנית](../sl/README.md) | [ספרדית](../es/README.md) | [סווהילית](../sw/README.md) | [שוודית](../sv/README.md) | [טגלוג (פיליפינית)](../tl/README.md) | [טמילית](../ta/README.md) | [טלוגו](../te/README.md) | [תאית](../th/README.md) | [טורקית](../tr/README.md) | [אוקראינית](../uk/README.md) | [אורדו](../ur/README.md) | [וייטנאמית](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## סקירת הקורס
@@ -50,30 +50,30 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### מטרות הלמידה
 
-בסיום הקורס המובנה הזה, תלמדו:
-- **שליטה ביסודות AZD**: מושגים מרכזיים, התקנה והגדרה
-- **פריסת יישומי AI**: שימוש ב-AZD עם שירותי Microsoft Foundry
-- **יישום תשתית כקוד**: ניהול משאבי Azure עם תבניות Bicep
-- **פתרון תקלות בפריסות**: זיהוי ופתרון בעיות נפוצות
-- **אופטימיזציה לסביבת ייצור**: אבטחה, סקיילינג, ניטור וניהול עלויות
-- **בניית פתרונות מרובי סוכנים**: פריסת ארכיטקטורות AI מורכבות
+בסיום הקורס המובנה הזה, תוכלו:
+- **לשלוט ביסודות AZD**: מושגים מרכזיים, התקנה והגדרה
+- **לפרוס יישומי AI**: שימוש ב-AZD עם שירותי Microsoft Foundry
+- **ליישם תשתית כקוד**: ניהול משאבי Azure עם תבניות Bicep
+- **לטפל בבעיות פריסה**: פתרון תקלות ו-debugging
+- **לאופטם לייצור**: אבטחה, סקיילינג, ניטור וניהול עלויות
+- **לבנות פתרונות מרובי סוכנים**: פריסת ארכיטקטורות AI מורכבות
 
 ## 📚 פרקי למידה
 
-*בחר את מסלול הלמידה שלך בהתאם לרמת הניסיון והמטרות*
+*בחרו את מסלול הלמידה שלכם בהתאם לרמת הניסיון והמטרות*
 
 ### 🚀 פרק 1: יסודות והתחלה מהירה
 **דרישות מוקדמות**: מנוי Azure, ידע בסיסי בשורת הפקודה  
 **משך זמן**: 30-45 דקות  
 **מורכבות**: ⭐
 
-#### מה תלמד
+#### מה תלמדו
 - הבנת יסודות Azure Developer CLI
-- התקנת AZD בפלטפורמה שלך
-- הפריסה המוצלחת הראשונה שלך
+- התקנת AZD על הפלטפורמה שלכם
+- הפריסה הראשונה המוצלחת שלכם
 
 #### משאבי למידה
-- **🎯 התחלה כאן**: [מה זה Azure Developer CLI?](../..)
+- **🎯 התחילו כאן**: [מהו Azure Developer CLI?](../..)
 - **📖 תיאוריה**: [יסודות AZD](docs/getting-started/azd-basics.md) - מושגים מרכזיים וטרמינולוגיה
 - **⚙️ התקנה**: [התקנה והגדרה](docs/getting-started/installation.md) - מדריכים לפי פלטפורמה
 - **🛠️ תרגול מעשי**: [הפרויקט הראשון שלך](docs/getting-started/first-project.md) - מדריך שלב-אחר-שלב
@@ -89,7 +89,7 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 תוצאה בפרק**: פריסה מוצלחת של יישום ווב פשוט ל-Azure באמצעות AZD
+**💡 תוצאת הפרק**: פריסת יישום ווב פשוט ל-Azure באמצעות AZD בהצלחה
 
 **✅ אימות הצלחה:**
 ```bash
@@ -126,16 +126,16 @@ azd down --force --purge  # מנקה משאבים
 **משך זמן**: 1-2 שעות  
 **מורכבות**: ⭐⭐
 
-#### מה תלמד
+#### מה תלמדו
 - אינטגרציה של Microsoft Foundry עם AZD
-- פריסת יישומים מונחי AI
+- פריסת יישומים מונעי AI
 - הבנת הגדרות שירותי AI
 
 #### משאבי למידה
-- **🎯 התחלה כאן**: [אינטגרציה עם Microsoft Foundry](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🎯 התחילו כאן**: [אינטגרציה עם Microsoft Foundry](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 דפוסים**: [פריסת מודל AI](docs/microsoft-foundry/ai-model-deployment.md) - פריסה וניהול מודלים של AI
-- **🛠️ סדנה**: [מעבדת סדנת AI](docs/microsoft-foundry/ai-workshop-lab.md) - הפוך את פתרונות ה-AI שלך למוכנים ל-AZD
-- **🎥 מדריך אינטראקטיבי**: [חומרי סדנה](workshop/README.md) - למידה בדפדפן עם MkDocs * סביבה DevContainer
+- **🛠️ סדנה**: [מעבדת סדנת AI](docs/microsoft-foundry/ai-workshop-lab.md) - הפכו את פתרונות ה-AI שלכם למוכנים ל-AZD
+- **🎥 מדריך אינטראקטיבי**: [חומרי הסדנה](workshop/README.md) - למידה בדפדפן עם MkDocs * סביבה DevContainer
 - **📋 תבניות**: [תבניות Microsoft Foundry](../..)
 - **📝 דוגמאות**: [דוגמאות לפריסת AZD](examples/README.md)
 
@@ -150,7 +150,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 תוצאה בפרק**: פריסה והגדרה של יישום צ'אט מונחה AI עם יכולות RAG
+**💡 תוצאת הפרק**: פריסה והגדרה של יישום צ'אט מונע AI עם יכולות RAG
 
 **✅ אימות הצלחה:**
 ```bash
@@ -166,7 +166,7 @@ azd down --force --purge
 
 **📊 זמן השקעה:** 1-2 שעות  
 **📈 רמת מיומנות לאחר:** יכול לפרוס ולהגדיר יישומי AI מוכנים לייצור  
-**💰 מודעות לעלויות:** הבנת עלויות פיתוח של $80-150 לחודש, ועלויות ייצור של $300-3500 לחודש
+**💰 מודעות לעלות:** הבנת עלויות פיתוח של $80-150 לחודש, ועלויות ייצור של $300-3500 לחודש
 
 #### 💰 שיקולי עלות לפריסות AI
 
@@ -184,18 +184,18 @@ azd down --force --purge
 - אחסון (פרימיום): $10-50 לחודש
 
 **💡 טיפים לאופטימיזציה של עלויות:**
-- השתמש ב-**רמת חינם** של Azure OpenAI ללמידה (כולל 50,000 טוקנים לחודש)
-- הרץ `azd down` לשחרור משאבים כשאינך מפתח פעיל
-- התחל בחיוב מבוסס צריכה, שדרג ל-PTU רק לייצור
-- השתמש ב-`azd provision --preview` להערכת עלויות לפני פריסה
-- אפשר סקיילינג אוטומטי: שלם רק על השימוש בפועל
+- השתמשו ב-**רמת חינם** של Azure OpenAI ללמידה (כולל 50,000 טוקנים לחודש)
+- הריצו `azd down` כדי לשחרר משאבים כשאינכם מפתחים פעיל
+- התחילו בחיוב מבוסס צריכה, שדרגו ל-PTU רק לייצור
+- השתמשו ב-`azd provision --preview` להערכת עלויות לפני פריסה
+- אפשרו סקיילינג אוטומטי: שלמו רק על השימוש בפועל
 
 **ניטור עלויות:**
 ```bash
 # בדוק עלויות חודשיות מוערכות
 azd provision --preview
 
-# נטר עלויות בפועל בפורטל Azure
+# עקוב אחר עלויות בפועל בפורטל Azure
 az consumption budget list --resource-group <your-rg>
 ```
 
@@ -206,7 +206,7 @@ az consumption budget list --resource-group <your-rg>
 **משך זמן**: 45-60 דקות  
 **מורכבות**: ⭐⭐
 
-#### מה תלמד
+#### מה תלמדו
 - הגדרה וניהול סביבות
 - אימות זהות ושיטות אבטחה מומלצות
 - שמות וארגון משאבים
@@ -221,7 +221,7 @@ az consumption budget list --resource-group <your-rg>
 - הקמת אימות זהות מנוהלת
 - יישום הגדרות ייחודיות לסביבה
 
-**💡 תוצאה בפרק**: ניהול סביבות מרובות עם אימות ואבטחה נכונים
+**💡 תוצאת הפרק**: ניהול סביבות מרובות עם אימות ואבטחה נכונים
 
 ---
 
@@ -230,14 +230,14 @@ az consumption budget list --resource-group <your-rg>
 **משך זמן**: 1-1.5 שעות  
 **מורכבות**: ⭐⭐⭐
 
-#### מה תלמד
+#### מה תלמדו
 - דפוסי פריסה מתקדמים
 - תשתית כקוד עם Bicep
 - אסטרטגיות פריסת משאבים
 
 #### משאבי למידה
-- **📖 פריסה**: [מדריך פריסה](docs/deployment/deployment-guide.md) - תהליכים מלאים
-- **🏗️ פרוביז'ן**: [ניהול משאבים](docs/deployment/provisioning.md) - ניהול משאבי Azure
+- **📖 פריסה**: [מדריך פריסה](docs/deployment/deployment-guide.md) - זרימות עבודה מלאות
+- **🏗️ פרוביז'ן**: [ניהול משאבי Azure](docs/deployment/provisioning.md) - ניהול משאבים
 - **📝 דוגמאות**: [דוגמת Container App](../../examples/container-app) - פריסות מכולות
 
 #### תרגילים מעשיים
@@ -245,7 +245,7 @@ az consumption budget list --resource-group <your-rg>
 - פריסת יישומים עם שירותים מרובים
 - יישום אסטרטגיות פריסה כחולה-ירוקה
 
-**💡 תוצאה בפרק**: פריסת יישומים מורכבים עם שירותים מרובים באמצעות תבניות תשתית מותאמות
+**💡 תוצאת הפרק**: פריסת יישומים מורכבים עם שירותים מרובים באמצעות תבניות תשתית מותאמות
 
 ---
 
@@ -254,7 +254,7 @@ az consumption budget list --resource-group <your-rg>
 **משך זמן**: 2-3 שעות  
 **מורכבות**: ⭐⭐⭐⭐
 
-#### מה תלמד
+#### מה תלמדו
 - דפוסי ארכיטקטורת מרובי סוכנים
 - תיאום ואורקסטרציה של סוכנים
 - פריסות AI מוכנות לייצור
@@ -266,7 +266,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### תרגילים מעשיים  
 ```bash
-# פרוס את הפתרון המלא למספר סוכנים בקמעונאות
+# פרוס את הפתרון המלא של סוכני קמעונאות מרובים
 cd examples/retail-multiagent-arm-template
 ./deploy.sh
 
@@ -274,16 +274,16 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
   
-**💡 תוצאת הפרק**: פרוס ונהל פתרון AI רב-סוכנים מוכן לייצור עם סוכני לקוחות ומלאי
+**💡 תוצאת הפרק**: פריסה וניהול של פתרון AI רב-סוכנים מוכן לייצור עם סוכני לקוחות ומלאי
 
 ---
 
 ### 🔍 פרק 6: אימות ותכנון לפני פריסה  
 **דרישות מוקדמות**: פרק 4 הושלם  
-**משך זמן**: שעה  
+**משך**: שעה  
 **מורכבות**: ⭐⭐
 
-#### מה תלמד  
+#### מה תלמדו  
 - תכנון קיבולת ואימות משאבים  
 - אסטרטגיות בחירת SKU  
 - בדיקות טרום-טיסה ואוטומציה
@@ -294,20 +294,20 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - **✅ אימות**: [בדיקות טרום-טיסה](docs/pre-deployment/preflight-checks.md) - סקריפטים אוטומטיים
 
 #### תרגילים מעשיים  
-- הרץ סקריפטים לאימות קיבולת  
+- הרצת סקריפטים לאימות קיבולת  
 - אופטימיזציה של בחירות SKU לחיסכון בעלויות  
 - יישום בדיקות טרום-פריסה אוטומטיות
 
-**💡 תוצאת הפרק**: אמת ואופטם פריסות לפני ביצוע
+**💡 תוצאת הפרק**: לאמת ולאופטם פריסות לפני ביצוע
 
 ---
 
 ### 🚨 פרק 7: פתרון תקלות ודיבוג  
-**דרישות מוקדמות**: כל פרק פריסה הושלם  
-**משך זמן**: 1-1.5 שעות  
+**דרישות מוקדמות**: כל פרק פריסה שהושלם  
+**משך**: 1-1.5 שעות  
 **מורכבות**: ⭐⭐
 
-#### מה תלמד  
+#### מה תלמדו  
 - גישות שיטתיות לדיבוג  
 - בעיות נפוצות ופתרונות  
 - פתרון תקלות ספציפי ל-AI
@@ -318,20 +318,20 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - **🤖 בעיות AI**: [פתרון תקלות AI](docs/troubleshooting/ai-troubleshooting.md) - בעיות שירותי AI
 
 #### תרגילים מעשיים  
-- אבחן כשלונות פריסה  
-- פתר בעיות אימות  
-- דיבג חיבור לשירותי AI
+- אבחון כשלי פריסה  
+- פתרון בעיות אימות  
+- דיבוג חיבור לשירותי AI
 
-**💡 תוצאת הפרק**: אבחן ופתור בעיות פריסה נפוצות באופן עצמאי
+**💡 תוצאת הפרק**: לאבחן ולפתור באופן עצמאי בעיות פריסה נפוצות
 
 ---
 
 ### 🏢 פרק 8: תבניות ייצור וארגוניות  
 **דרישות מוקדמות**: פרקים 1-4 הושלמו  
-**משך זמן**: 2-3 שעות  
+**משך**: 2-3 שעות  
 **מורכבות**: ⭐⭐⭐⭐
 
-#### מה תלמד  
+#### מה תלמדו  
 - אסטרטגיות פריסת ייצור  
 - תבניות אבטחה ארגוניות  
 - ניטור ואופטימיזציה של עלויות
@@ -346,14 +346,14 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - הקמת ניטור מקיף  
 - פריסה לייצור עם ממשל תקין
 
-**💡 תוצאת הפרק**: פרוס יישומים מוכנים לארגון עם יכולות ייצור מלאות
+**💡 תוצאת הפרק**: לפרוס יישומים מוכנים לארגון עם יכולות ייצור מלאות
 
 ---
 
 ## 🎓 סקירת סדנה: חווית למידה מעשית
 
 > **⚠️ מצב הסדנה: בפיתוח פעיל**  
-> חומרי הסדנה נמצאים בפיתוח ושיפור מתמיד. מודולים מרכזיים פעילים, אך חלק מהחלקים המתקדמים אינם שלמים. אנו עובדים במרץ להשלים את כל התוכן. [עקוב אחרי ההתקדמות →](workshop/README.md)
+> חומרי הסדנה נמצאים בפיתוח ושיפור מתמיד. מודולים מרכזיים פעילים, אך חלק מהחלקים המתקדמים אינם שלמים. אנו עובדים במרץ להשלים את כל התוכן. [עקבו אחרי ההתקדמות →](workshop/README.md)
 
 ### חומרי סדנה אינטראקטיביים  
 **למידה מעשית מקיפה עם כלים בדפדפן ותרגילים מודרכים**
@@ -361,7 +361,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 חומרי הסדנה שלנו מספקים חווית למידה אינטראקטיבית ומובנית המשלים את תוכנית הלימודים מבוססת הפרקים לעיל. הסדנה מיועדת ללמידה בקצב עצמי ולמפגשים בהנחיית מדריך.
 
 #### 🛠️ תכונות הסדנה  
-- **ממשק מבוסס דפדפן**: סדנה מלאה עם MkDocs הכוללת חיפוש, העתקה ותכונות נושא  
+- **ממשק מבוסס דפדפן**: סדנת MkDocs מלאה עם חיפוש, העתקה ותכונות נושא  
 - **אינטגרציית GitHub Codespaces**: הקמת סביבת פיתוח בלחיצה אחת  
 - **מסלול למידה מובנה**: 7 תרגילים מודרכים (סה"כ 3.5 שעות)  
 - **גילוי → פריסה → התאמה אישית**: מתודולוגיה מתקדמת  
@@ -370,17 +370,17 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 📚 מבנה הסדנה  
 הסדנה פועלת לפי מתודולוגיית **גילוי → פריסה → התאמה אישית**:
 
-1. **שלב גילוי** (45 דקות)  
-   - חקור תבניות ושירותי Microsoft Foundry  
-   - הבן תבניות ארכיטקטורה רב-סוכנית  
-   - סקור דרישות ודרישות מוקדמות לפריסה
+1. **שלב הגילוי** (45 דקות)  
+   - חקר תבניות ושירותי Microsoft Foundry  
+   - הבנת תבניות ארכיטקטורה רב-סוכנית  
+   - סקירת דרישות ודרישות מוקדמות לפריסה
 
-2. **שלב פריסה** (שעתיים)  
+2. **שלב הפריסה** (שעתיים)  
    - פריסה מעשית של יישומי AI עם AZD  
    - קונפיגורציית שירותי Azure AI ונקודות קצה  
    - יישום תבניות אבטחה ואימות
 
-3. **שלב התאמה אישית** (45 דקות)  
+3. **שלב ההתאמה האישית** (45 דקות)  
    - שינוי יישומים למקרי שימוש ספציפיים  
    - אופטימיזציה לפריסת ייצור  
    - יישום ניטור וניהול עלויות
@@ -397,31 +397,31 @@ cd azd-for-beginners/workshop
 ```
   
 #### 🎯 תוצאות למידה בסדנה  
-בסיום הסדנה, המשתתפים יוכלו:  
+עם השלמת הסדנה, המשתתפים יוכלו:  
 - **לפרוס יישומי AI לייצור**: שימוש ב-AZD עם שירותי Microsoft Foundry  
 - **להתמחות בארכיטקטורות רב-סוכנים**: יישום פתרונות סוכני AI מתואמים  
 - **ליישם שיטות אבטחה מיטביות**: קונפיגורציית אימות ושליטה בגישה  
-- **לאופטם לפריסה בקנה מידה**: תכנון פריסות חסכוניות וביצועיות  
+- **לאופטם להיקף**: תכנון פריסות חסכוניות וביצועיות  
 - **לפתור תקלות בפריסות**: פתרון בעיות נפוצות באופן עצמאי
 
 #### 📖 משאבי הסדנה  
 - **🎥 מדריך אינטראקטיבי**: [חומרי הסדנה](workshop/README.md) - סביבת למידה בדפדפן  
 - **📋 הוראות שלב-אחר-שלב**: [תרגילים מודרכים](../../workshop/docs/instructions) - הסברים מפורטים  
-- **🛠️ מעבדת AI בסדנה**: [מעבדת AI](docs/microsoft-foundry/ai-workshop-lab.md) - תרגילים ממוקדי AI  
+- **🛠️ מעבדת סדנת AI**: [מעבדת סדנת AI](docs/microsoft-foundry/ai-workshop-lab.md) - תרגילים ממוקדי AI  
 - **💡 התחלה מהירה**: [מדריך הגדרת סדנה](workshop/README.md#quick-start) - קונפיגורציית סביבה
 
-**מתאים ל**: הכשרות ארגוניות, קורסים אקדמיים, למידה עצמאית ומחנות אימונים למפתחים.
+**מתאים ל**: הכשרות ארגוניות, קורסים אקדמיים, למידה עצמאית ובוטקאמפים למפתחים.
 
 ---
 
 ## 📖 מהו Azure Developer CLI?
 
-Azure Developer CLI (azd) הוא ממשק שורת פקודה למפתחים שמאיץ את תהליך בניית ופריסת יישומים ל-Azure. הוא מספק:
+Azure Developer CLI (azd) הוא ממשק שורת פקודה ממוקד מפתח שמאיץ את תהליך בניית ופריסת יישומים ל-Azure. הוא מספק:
 
-- **פריסות מבוססות תבניות** - שימוש בתבניות מוכנות לדפוסי יישומים נפוצים  
+- **פריסות מבוססות תבניות** - שימוש בתבניות מוכנות לתבניות יישום נפוצות  
 - **תשתית כקוד** - ניהול משאבי Azure באמצעות Bicep או Terraform  
-- **זרימות עבודה משולבות** - פריסה, ניהול וניטור חלקים של היישום  
-- **ידידותי למפתחים** - מותאם לפרודוקטיביות וחוויית מפתח
+- **זרימות עבודה משולבות** - פריסה, ניהול וניטור חלקים של יישומים  
+- **ידידותי למפתח** - מותאם לפרודוקטיביות וחוויית מפתח
 
 ### **AZD + Microsoft Foundry: מושלם לפריסות AI**
 
@@ -429,7 +429,7 @@ Azure Developer CLI (azd) הוא ממשק שורת פקודה למפתחים ש�
 
 - **תבניות מוכנות ל-AI** - תבניות מוגדרות מראש ל-Azure OpenAI, Cognitive Services ועומסי עבודה של ML  
 - **פריסות AI מאובטחות** - תבניות אבטחה מובנות לשירותי AI, מפתחות API ונקודות קצה של מודלים  
-- **תבניות AI לייצור** - שיטות עבודה מומלצות לפריסות AI בקנה מידה חסכוני  
+- **תבניות AI לייצור** - שיטות עבודה מומלצות לפריסות AI חסכוניות וסקלאביליות  
 - **זרימות עבודה מקצה לקצה ל-AI** - מפיתוח מודל ועד פריסה עם ניטור תקין  
 - **אופטימיזציה של עלויות** - הקצאת משאבים חכמה ואסטרטגיות סקיילינג לעומסי AI  
 - **אינטגרציה עם Microsoft Foundry** - חיבור חלק לקטלוג מודלים ונקודות קצה של Microsoft Foundry
@@ -439,26 +439,26 @@ Azure Developer CLI (azd) הוא ממשק שורת פקודה למפתחים ש�
 ## 🎯 ספריית תבניות ודוגמאות
 
 ### מובלט: תבניות Microsoft Foundry  
-**התחל כאן אם אתה מפרוס יישומי AI!**
+**התחילו כאן אם אתם מפרסים יישומי AI!**
 
-> **הערה:** תבניות אלו מדגימות דפוסי AI שונים. חלקן דוגמאות חיצוניות של Azure, אחרות יישומים מקומיים.
+> **הערה:** תבניות אלו מדגימות תבניות AI שונות. חלקן דוגמאות חיצוניות של Azure, אחרות יישומים מקומיים.
 
 | תבנית | פרק | מורכבות | שירותים | סוג |
 |----------|---------|------------|----------|------|
-| [**התחל עם צ'אט AI**](https://github.com/Azure-Samples/get-started-with-ai-chat) | פרק 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | חיצוני |
-| [**התחל עם סוכני AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | פרק 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| חיצוני |
-| [**הדגמת Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | פרק 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | חיצוני |
+| [**התחילו עם צ'אט AI**](https://github.com/Azure-Samples/get-started-with-ai-chat) | פרק 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | חיצוני |
+| [**התחילו עם סוכני AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | פרק 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| חיצוני |
+| [**דמו Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | פרק 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | חיצוני |
 | [**התחלת מהירה לאפליקציית צ'אט OpenAI**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | פרק 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | חיצוני |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | פרק 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | חיצוני |
 | [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | פרק 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | חיצוני |
 | [**פתרון רב-סוכנים קמעונאי**](examples/retail-scenario.md) | פרק 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **מקומי** |
 
 ### מובלט: תרחישי למידה שלמים  
-**תבניות יישומים מוכנות לייצור הממופות לפרקי למידה**
+**תבניות יישום מוכנות לייצור הממופות לפרקי למידה**
 
 | תבנית | פרק למידה | מורכבות | מפתח למידה |
 |----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | פרק 2 | ⭐ | דפוסי פריסת AI בסיסיים |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | פרק 2 | ⭐ | תבניות פריסת AI בסיסיות |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | פרק 2 | ⭐⭐ | יישום RAG עם Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | פרק 4 | ⭐⭐ | אינטגרציית בינה תיעודית |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | פרק 5 | ⭐⭐⭐ | מסגרת סוכנים וקריאות פונקציות |
@@ -469,7 +469,7 @@ Azure Developer CLI (azd) הוא ממשק שורת פקודה למפתחים ש�
 
 > **📌 דוגמאות מקומיות לעומת חיצוניות:**  
 > **דוגמאות מקומיות** (בריפו זה) = מוכנות לשימוש מיידי  
-> **דוגמאות חיצוניות** (Azure Samples) = שיבוט מהריפוזיטוריות המקושרות
+> **דוגמאות חיצוניות** (דוגמאות Azure) = לשכפל מהריפוזיטוריות המקושרות
 
 #### דוגמאות מקומיות (מוכנות לשימוש)  
 - [**פתרון רב-סוכנים קמעונאי**](examples/retail-scenario.md) - יישום מלא מוכן לייצור עם תבניות ARM  
@@ -477,26 +477,26 @@ Azure Developer CLI (azd) הוא ממשק שורת פקודה למפתחים ש�
   - ניטור והערכה מקיפים  
   - פריסה בלחיצה אחת דרך תבנית ARM
 
-#### דוגמאות מקומיות - אפליקציות מכולה (פרקים 2-5)  
+#### דוגמאות מקומיות - אפליקציות מכולות (פרקים 2-5)  
 **דוגמאות פריסה מקיפות של מכולות בריפו זה:**  
-- [**דוגמאות אפליקציות מכולה**](examples/container-app/README.md) - מדריך מלא לפריסות מכולות  
-  - [API Flask פשוט](../../examples/container-app/simple-flask-api) - REST API בסיסי עם סקייל-טו-זירו  
+- [**דוגמאות אפליקציות מכולות**](examples/container-app/README.md) - מדריך מלא לפריסות מכולות  
+  - [API Flask פשוט](../../examples/container-app/simple-flask-api) - REST API בסיסי עם סקייל לאפס  
   - [ארכיטקטורת מיקרו-שירותים](../../examples/container-app/microservices) - פריסת רב-שירותים מוכנה לייצור  
-  - דפוסי פריסה התחלה מהירה, ייצור ומתקדמים  
+  - תבניות התחלה מהירה, ייצור ומתקדמות  
   - הנחיות לניטור, אבטחה ואופטימיזציה של עלויות
 
 #### דוגמאות חיצוניות - אפליקציות פשוטות (פרקים 1-2)  
-**שיבוט ריפוזיטוריות Azure Samples אלו להתחלה:**  
-- [אפליקציית ווב פשוטה - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - דפוסי פריסה בסיסיים  
+**שכפלו את ריפוזיטוריות דוגמאות Azure הבאות כדי להתחיל:**  
+- [אפליקציית ווב פשוטה - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - תבניות פריסה בסיסיות  
 - [אתר סטטי - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - פריסת תוכן סטטי  
-- [אפליקציית מכולה - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - פריסת REST API
+- [אפליקציית מכולות - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - פריסת REST API
 
 #### דוגמאות חיצוניות - אינטגרציית מסד נתונים (פרקים 3-4)  
-- [אפליקציית מסד נתונים - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - דפוסי חיבור למסד נתונים  
+- [אפליקציית מסד נתונים - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - תבניות חיבור למסד נתונים  
 - [פונקציות + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - זרימת עבודה ללא שרת
 
 #### דוגמאות חיצוניות - תבניות מתקדמות (פרקים 4-8)  
-- [מיקרו-שירותים ב-Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - ארכיטקטורות רב-שירותים  
+- [מיקרו-שירותים ב-Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - ארכיטקטורות רב-שירותיות  
 - [עבודות Container Apps](https://github.com/Azure-Samples/container-apps-jobs) - עיבוד ברקע  
 - [צינור ML ארגוני](https://github.com/Azure-Samples/mlops-v2) - תבניות ML מוכנות לייצור
 
@@ -513,17 +513,17 @@ Azure Developer CLI (azd) הוא ממשק שורת פקודה למפתחים ש�
 - [**גליון פקודות**](resources/cheat-sheet.md) - פקודות azd חיוניות מאורגנות לפי פרק  
 - [**מילון מונחים**](resources/glossary.md) - מונחים של Azure ו-azd  
 - [**שאלות נפוצות**](resources/faq.md) - שאלות נפוצות מאורגנות לפי פרק לימוד  
-- [**מדריך לימוד**](resources/study-guide.md) - תרגולים מקיפים  
+- [**מדריך לימוד**](resources/study-guide.md) - תרגולים מעשיים מקיפים  
 
 ### סדנאות מעשיות  
 - [**מעבדת סדנת AI**](docs/microsoft-foundry/ai-workshop-lab.md) - הפוך את פתרונות ה-AI שלך לניתנים לפריסה עם AZD (שעתיים-שלוש)  
 - [**מדריך סדנה אינטראקטיבי**](workshop/README.md) - סדנה מבוססת דפדפן עם MkDocs וסביבת DevContainer  
-- [**מסלול למידה מובנה**](../../workshop/docs/instructions) - תרגולים מודרכים ב-7 שלבים (גילוי → פריסה → התאמה אישית)  
+- [**מסלול לימוד מובנה**](../../workshop/docs/instructions) - תרגולים מודרכים ב-7 שלבים (גילוי → פריסה → התאמה אישית)  
 - [**סדנת AZD למתחילים**](workshop/README.md) - חומרי סדנה מעשית מלאים עם אינטגרציה ל-GitHub Codespaces  
 
-### משאבי למידה חיצוניים  
+### משאבי לימוד חיצוניים  
 - [תיעוד Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [מרכז ארכיטקטורת Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [מרכז הארכיטקטורה של Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [מחשבון תמחור Azure](https://azure.microsoft.com/pricing/calculator/)  
 - [סטטוס Azure](https://status.azure.com/)  
 
@@ -531,7 +531,7 @@ Azure Developer CLI (azd) הוא ממשק שורת פקודה למפתחים ש�
 
 ## 🔧 מדריך פתרון בעיות מהיר
 
-**בעיות נפוצות שמתחילים נתקלים בהן ופתרונות מיידיים:**
+**בעיות נפוצות שמתחילים נתקלים בהן ופתרונות מיידיים:**  
 
 ### ❌ "azd: פקודה לא נמצאה"
 
@@ -662,7 +662,7 @@ azd env get-values
 # חפש משתני *_URL
 ```
   
-### 📚 משאבים מלאים לפתרון בעיות
+### 📚 משאבים מלאים לפתרון בעיות  
 
 - **מדריך בעיות נפוצות:** [פתרונות מפורטים](docs/troubleshooting/common-issues.md)  
 - **בעיות ספציפיות ל-AI:** [פתרון בעיות AI](docs/troubleshooting/ai-troubleshooting.md)  
@@ -673,10 +673,10 @@ azd env get-values
 
 ## 🔧 מדריך פתרון בעיות מהיר
 
-**בעיות נפוצות שמתחילים נתקלים בהן ופתרונות מיידיים:**
+**בעיות נפוצות שמתחילים נתקלים בהן ופתרונות מיידיים:**  
 
-<details>
-<summary><strong>❌ "azd: פקודה לא נמצאה"</strong></summary>
+<details>  
+<summary><strong>❌ "azd: פקודה לא נמצאה"</strong></summary>  
 
 ```bash
 # התקן את AZD תחילה
@@ -692,10 +692,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 # אמת את ההתקנה
 azd version
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ "לא נמצאה מנוי" או "המנוי לא הוגדר"</strong></summary>
+<details>  
+<summary><strong>❌ "לא נמצאה מנוי" או "המנוי לא הוגדר"</strong></summary>  
 
 ```bash
 # רשום מנויים זמינים
@@ -710,10 +710,10 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # אמת
 az account show
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ "InsufficientQuota" או "חריגה מהמכסה"</strong></summary>
+<details>  
+<summary><strong>❌ "InsufficientQuota" או "חריגה מהמכסה"</strong></summary>  
 
 ```bash
 # נסה אזור Azure שונה
@@ -726,10 +726,10 @@ azd up
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ "azd up" נכשל באמצע התהליך</strong></summary>
+<details>  
+<summary><strong>❌ "azd up" נכשל באמצע התהליך</strong></summary>  
 
 ```bash
 # אפשרות 1: לנקות ולנסות שוב
@@ -743,10 +743,10 @@ azd provision
 azd show
 azd logs
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ "אימות נכשל" או "הטוקן פג תוקף"</strong></summary>
+<details>  
+<summary><strong>❌ "אימות נכשל" או "הטוקן פג תוקף"</strong></summary>  
 
 ```bash
 # לאמת מחדש
@@ -759,10 +759,10 @@ azd auth login
 # לאמת את האימות
 az account show
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ "המשאב כבר קיים" או קונפליקטים בשמות</strong></summary>
+<details>  
+<summary><strong>❌ "המשאב כבר קיים" או קונפליקטים בשמות</strong></summary>  
 
 ```bash
 # AZD מייצר שמות ייחודיים, אבל אם יש התנגשות:
@@ -772,10 +772,10 @@ azd down --force --purge
 azd env new dev-v2
 azd up
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ פריסת תבנית לוקחת יותר מדי זמן</strong></summary>
+<details>  
+<summary><strong>❌ פריסת תבנית לוקחת יותר מדי זמן</strong></summary>  
 
 **זמני המתנה רגילים:**  
 - אפליקציית ווב פשוטה: 5-10 דקות  
@@ -790,10 +790,10 @@ azd show
 azd monitor
 # חפש פריסות שנכשלו
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ "הרשאה נדחתה" או "אסור"</strong></summary>
+<details>  
+<summary><strong>❌ "הרשאה נדחתה" או "אסור"</strong></summary>  
 
 ```bash
 # בדוק את התפקיד שלך ב-Azure
@@ -804,10 +804,10 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - תורם (למשאבים)
 # - מנהל גישת משתמשים (להקצאות תפקידים)
 ```
-</details>
+</details>  
 
-<details>
-<summary><strong>❌ לא מצליחים למצוא את כתובת ה-URL של האפליקציה שפורסה</strong></summary>
+<details>  
+<summary><strong>❌ לא מצליחים למצוא את כתובת ה-URL של האפליקציה שפורסה</strong></summary>  
 
 ```bash
 # הצג את כל נקודות הקצה של השירות
@@ -820,9 +820,9 @@ azd monitor
 azd env get-values
 # חפש משתני *_URL
 ```
-</details>
+</details>  
 
-### 📚 משאבים מלאים לפתרון בעיות
+### 📚 משאבים מלאים לפתרון בעיות  
 
 - **מדריך בעיות נפוצות:** [פתרונות מפורטים](docs/troubleshooting/common-issues.md)  
 - **בעיות ספציפיות ל-AI:** [פתרון בעיות AI](docs/troubleshooting/ai-troubleshooting.md)  
@@ -834,10 +834,10 @@ azd env get-values
 ## 🎓 סיום קורס והסמכה
 
 ### מעקב התקדמות  
-עקוב אחרי התקדמות הלמידה שלך בכל פרק:
+עקוב אחרי התקדמות הלמידה שלך בכל פרק:  
 
 - [ ] **פרק 1**: יסודות והתחלה מהירה ✅  
-- [ ] **פרק 2**: פיתוח מונחה AI ✅  
+- [ ] **פרק 2**: פיתוח AI-ראשון ✅  
 - [ ] **פרק 3**: קונפיגורציה ואימות ✅  
 - [ ] **פרק 4**: תשתית כקוד ופריסה ✅  
 - [ ] **פרק 5**: פתרונות AI מרובי סוכנים ✅  
@@ -865,16 +865,16 @@ azd env get-values
 
 ### קבל עזרה ותמיכה  
 - **בעיות טכניות**: [דווח על באגים ובקש תכונות](https://github.com/microsoft/azd-for-beginners/issues)  
-- **שאלות למידה**: [קהילת Microsoft Azure Discord](https://discord.gg/microsoft-azure) ו-[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
+- **שאלות לימוד**: [קהילת Microsoft Azure Discord](https://discord.gg/microsoft-azure) ו-[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
 - **עזרה ספציפית ל-AI**: הצטרף ל-[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
 - **תיעוד**: [תיעוד רשמי של Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
-### תובנות קהילתיות מ-Microsoft Foundry Discord
+### תובנות קהילתיות מ-Microsoft Foundry Discord  
 
-**תוצאות סקר אחרונות מערוץ #Azure:**  
+**תוצאות סקר אחרון בערוץ #Azure:**  
 - **45%** מהמפתחים רוצים להשתמש ב-AZD לעומסי עבודה של AI  
-- **אתגרים מובילים**: פריסות מרובות שירותים, ניהול אישורים, מוכנות לייצור  
-- **הכי מבוקש**: תבניות ספציפיות ל-AI, מדריכי פתרון בעיות, שיטות עבודה מומלצות  
+- **האתגרים המובילים**: פריסות מרובות שירותים, ניהול אישורים, מוכנות לייצור  
+- **הבקשות הנפוצות ביותר**: תבניות ספציפיות ל-AI, מדריכי פתרון בעיות, שיטות עבודה מומלצות  
 
 **הצטרף לקהילה שלנו כדי:**  
 - לשתף את חוויות ה-AZD + AI שלך ולקבל עזרה  
@@ -897,11 +897,17 @@ azd env get-values
 ### רישיון  
 פרויקט זה מורשה תחת רישיון MIT - ראה את קובץ [LICENSE](../../LICENSE) לפרטים.  
 
-### משאבי למידה קשורים של Microsoft
+### משאבי לימוד קשורים של Microsoft  
 
-הצוות שלנו מייצר קורסי למידה מקיפים נוספים:
+הצוות שלנו מייצר קורסי לימוד מקיפים נוספים:  
 
-<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->  
+### LangChain  
+[![LangChain4j למתחילים](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)  
+[![LangChain.js למתחילים](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)  
+
+---  
+
 ### Azure / Edge / MCP / סוכנים  
 [![AZD למתחילים](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)  
 [![Edge AI למתחילים](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)  
@@ -918,21 +924,21 @@ azd env get-values
 
 ---  
  
-### למידה בסיסית  
+### לימוד בסיסי  
 [![ML למתחילים](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-[![מדעי הנתונים למתחילים](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI למתחילים](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-[![סייברסקיוריטי למתחילים](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![פיתוח ווב למתחילים](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT למתחילים](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![פיתוח XR למתחילים](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![מדעי הנתונים למתחילים](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### סדרת קופיילוט
-[![קופיילוט לתכנות משותף עם AI](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![קופיילוט ל-C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![הרפתקת קופיילוט](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
@@ -942,14 +948,14 @@ azd env get-values
 **🚀 מוכנים להתחיל ללמוד?**
 
 **מתחילים**: התחילו עם [פרק 1: יסודות והתחלה מהירה](../..)  
-**מפתחי AI**: קפצו ל-[פרק 2: פיתוח מונחה AI](../..)  
+**מפתחים בינה מלאכותית**: קפצו ל-[פרק 2: פיתוח מונחה בינה מלאכותית](../..)  
 **מפתחים מנוסים**: התחילו עם [פרק 3: תצורה ואימות](../..)
 
-**שלבים הבאים**: [התחילו בפרק 1 - יסודות AZD](docs/getting-started/azd-basics.md) →
+**השלבים הבאים**: [התחילו בפרק 1 - יסודות AZD](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור שלו נחשב למקור הסמכותי. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי אדם. אנו לא נושאים באחריות לכל אי-הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור שלו הוא המקור הסמכותי. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי אדם. אנו לא נושאים באחריות לכל אי-הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-16T01:09:09+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T16:13:49+00:00",
   "source_file": "README.md",
   "language_code": "my"
 }
 -->
-# AZD အတွက် စတင်သင်ယူသူများအတွက်: တိကျစွာ ဖွဲ့စည်းထားသော သင်ယူမှု ခရီးစဉ်
+# AZD အတွက် စတင်လေ့လာသူများ: တိကျစွာ ဖွဲ့စည်းထားသော သင်ယူမှု ခရီးစဉ်
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.my.png) 
 
@@ -25,7 +25,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. **Repository ကို Fork လုပ်ပါ**: Click [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Repository ကို Clone လုပ်ပါ**: `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. **အသိုင်းအဝိုင်းတွင် ပါဝင်ပါ**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) မှ ကျွမ်းကျင်သူများထံ အထောက်အပံ့ရယူရန်
-4. **သင်ယူမှု လမ်းကြောင်းကို ရွေးချယ်ပါ**: သင့်အတွေ့အကြုံအဆင့်နှင့် ကိုက်ညီသော အခန်းကို အောက်တွင် ရွေးချယ်ပါ
+4. **သင်ယူမည့် လမ်းကြောင်းကို ရွေးချယ်ပါ**: အောက်ပါ အခန်းများထဲမှ သင့်အတွေ့အကြုံနှင့် ကိုက်ညီသည့် အခန်းကို ရွေးချယ်ပါ
 
 ### ဘာသာစကား မျိုးစုံ ထောက်ပံ့မှု
 
@@ -60,7 +60,7 @@ Microsoft Foundry Discord အသိုင်းအဝိုင်းမှ အ�
 
 ## 📚 သင်ယူမှု အခန်းများ
 
-*သင့်အတွေ့အကြုံနှင့် ရည်မှန်းချက်အရ သင်ယူမှု လမ်းကြောင်းကို ရွေးချယ်ပါ*
+*သင့်အတွေ့အကြုံနှင့် ရည်မှန်းချက်အရ သင်ယူမည့် လမ်းကြောင်းကို ရွေးချယ်ပါ*
 
 ### 🚀 အခန်း ၁: အခြေခံနှင့် အမြန်စတင်ခြင်း
 **လိုအပ်ချက်များ**: Azure subscription, အခြေခံ command line အသိပညာ  
@@ -69,8 +69,8 @@ Microsoft Foundry Discord အသိုင်းအဝိုင်းမှ အ�
 
 #### သင်ယူမည့်အရာများ
 - Azure Developer CLI အခြေခံများ နားလည်ခြင်း
-- သင့်ပလက်ဖောင်းတွင် AZD တပ်ဆင်ခြင်း
-- သင့်ပထမဆုံး အောင်မြင်သော deployment
+- သင့်ပလက်ဖောင်းပေါ်တွင် AZD တပ်ဆင်ခြင်း
+- ပထမဆုံး အောင်မြင်သော deployment
 
 #### သင်ယူမှု အရင်းအမြစ်များ
 - **🎯 ဒီနေရာက စတင်ပါ**: [What is Azure Developer CLI?](../..)
@@ -93,22 +93,8 @@ azd up
 
 **✅ အောင်မြင်မှု အတည်ပြုချက်:**
 ```bash
-# အခန်း ၁ ကိုပြီးမြောက်ပြီးနောက်၊ သင်သည် အောက်ပါအရာများကို ပြုလုပ်နိုင်ရမည်။
-azd version              # တပ်ဆင်ထားသော ဗားရှင်းကို ပြသည်
-azd init --template todo-nodejs-mongo  # ပရောဂျက်ကို စတင်တည်ဆောက်သည်
-azd up                  # Azure သို့ တင်ပို့သည်
-azd show                # လည်ပတ်နေသော အက်ပ် URL ကို ပြသည်
-# အက်ပ်သည် ဘရောက်ဇာတွင် ဖွင့်ပြီး အလုပ်လုပ်သည်
-azd down --force --purge  # အရင်းအမြစ်များကို သန့်ရှင်းသည်
-```
-
-**📊 ကြာချိန်**: ၃၀-၄၅ မိနစ်  
-**📈 သင်ယူမှုအဆင့်**: အခြေခံ application များကို ကိုယ်တိုင် တပ်ဆင်နိုင်ခြင်း
-
-**✅ အောင်မြင်မှု အတည်ပြုချက်:**
-```bash
-# အခန်း ၁ ကိုပြီးမြောက်ပြီးနောက်၊ သင်သည် အောက်ပါအရာများကို ပြုလုပ်နိုင်ရမည်။
-azd version              # တပ်ဆင်ထားသော ဗားရှင်းကို ပြသသည်
+# အခန်း ၁ ကိုပြီးမြောက်ပြီးနောက် သင်သည် အောက်ပါအရာများကို ပြုလုပ်နိုင်ရမည်။
+azd version              # ထည့်သွင်းထားသော ဗားရှင်းကို ပြသသည်
 azd init --template todo-nodejs-mongo  # ပရောဂျက်ကို စတင်တည်ဆောက်သည်
 azd up                  # Azure သို့ တင်ပို့သည်
 azd show                # လည်ပတ်နေသော အက်ပ် URL ကို ပြသသည်
@@ -117,7 +103,21 @@ azd down --force --purge  # အရင်းအမြစ်များကို 
 ```
 
 **📊 ကြာချိန်**: ၃၀-၄၅ မိနစ်  
-**📈 သင်ယူမှုအဆင့်**: အခြေခံ application များကို ကိုယ်တိုင် တပ်ဆင်နိုင်ခြင်း
+**📈 လေ့ကျင့်ပြီးနောက် ကျွမ်းကျင်မှု**: ရိုးရှင်းသော အပလီကေးရှင်းများကို ကိုယ်တိုင် တပ်ဆင်နိုင်ခြင်း
+
+**✅ အောင်မြင်မှု အတည်ပြုချက်:**
+```bash
+# အခန်း ၁ ကိုပြီးမြောက်ပြီးနောက် သင်သည် အောက်ပါအရာများကို ပြုလုပ်နိုင်ရမည်။
+azd version              # ထည့်သွင်းထားသော ဗားရှင်းကို ပြသသည်
+azd init --template todo-nodejs-mongo  # ပရောဂျက်ကို စတင်တည်ဆောက်သည်
+azd up                  # Azure သို့ တင်ပို့သည်
+azd show                # လည်ပတ်နေသော အက်ပ် URL ကို ပြသသည်
+# အက်ပ်သည် ဘရောက်ဇာတွင် ဖွင့်ပြီး လုပ်ဆောင်သည်
+azd down --force --purge  # အရင်းအမြစ်များကို သန့်ရှင်းသည်
+```
+
+**📊 ကြာချိန်**: ၃၀-၄၅ မိနစ်  
+**📈 လေ့ကျင့်ပြီးနောက် ကျွမ်းကျင်မှု**: ရိုးရှင်းသော အပလီကေးရှင်းများကို ကိုယ်တိုင် တပ်ဆင်နိုင်ခြင်း
 
 ---
 
@@ -134,7 +134,7 @@ azd down --force --purge  # အရင်းအမြစ်များကို 
 #### သင်ယူမှု အရင်းအမြစ်များ
 - **🎯 ဒီနေရာက စတင်ပါ**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 ပုံစံများ**: [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md) - AI မော်ဒယ်များ တပ်ဆင်ခြင်းနှင့် စီမံခန့်ခွဲခြင်း
-- **🛠️ လက်တွေ့ အလုပ်ရုံ**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - သင့် AI ဖြေရှင်းချက်များကို AZD အတွက် အသင့်ပြုလုပ်ခြင်း
+- **🛠️ အလုပ်ရုံ**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - သင့် AI ဖြေရှင်းချက်များကို AZD အတွက် အသင့်ပြင်ဆင်ခြင်း
 - **🎥 အပြန်အလှန် လမ်းညွှန်ချက်**: [Workshop Materials](workshop/README.md) - MkDocs * DevContainer ပတ်ဝန်းကျင်ဖြင့် Browser-based သင်ယူမှု
 - **📋 Template များ**: [Microsoft Foundry Templates](../..)
 - **📝 ဥပမာများ**: [AZD Deployment Examples](examples/README.md)
@@ -145,12 +145,12 @@ azd down --force --purge  # အရင်းအမြစ်များကို 
 azd init --template azure-search-openai-demo
 azd up
 
-# ထပ်မံ AI ပုံစံများကို စမ်းသပ်ပါ
+# အပို AI ပုံစံများကို စမ်းသပ်ပါ
 azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 အခန်းရလဒ်**: RAG စွမ်းရည်ပါရှိသော AI အင်အားပြည့် chat application တစ်ခုကို တပ်ဆင်ပြီး ဖွဲ့စည်းနိုင်ခြင်း
+**💡 အခန်းရလဒ်**: RAG စွမ်းရည်ပါရှိသော AI အင်အားပြည့် chat application တစ်ခု တပ်ဆင်ပြီး ဖွဲ့စည်းနိုင်ခြင်း
 
 **✅ အောင်မြင်မှု အတည်ပြုချက်:**
 ```bash
@@ -165,27 +165,27 @@ azd down --force --purge
 ```
 
 **📊 ကြာချိန်**: ၁-၂ နာရီ  
-**📈 သင်ယူမှုအဆင့်**: ထုတ်လုပ်မှုအဆင့် AI application များကို တပ်ဆင်ပြီး ဖွဲ့စည်းနိုင်ခြင်း  
-**💰 ကုန်ကျစရိတ် အသိပညာ**: တိုးတက်မှုအတွက် $80-150/လ၊ ထုတ်လုပ်မှုအတွက် $300-3500/လ ကုန်ကျစရိတ်ကို နားလည်ခြင်း
+**📈 လေ့ကျင့်ပြီးနောက် ကျွမ်းကျင်မှု**: ထုတ်လုပ်မှုအဆင့် AI အပလီကေးရှင်းများ တပ်ဆင်ပြီး ဖွဲ့စည်းနိုင်ခြင်း  
+**💰 ကုန်ကျစရိတ် အသိပညာ**: တိုးတက်ရေးအတွက် $80-150/လ၊ ထုတ်လုပ်မှုအတွက် $300-3500/လ ကုန်ကျစရိတ်ကို နားလည်ခြင်း
 
 #### 💰 AI Deployment များအတွက် ကုန်ကျစရိတ် စဉ်းစားချက်များ
 
-**ဖွံ့ဖြိုးတိုးတက်မှု ပတ်ဝန်းကျင် (ခန့်မှန်း $80-150/လ):**
-- Azure OpenAI (Pay-as-you-go): $0-50/လ (token အသုံးအပေါ် မူတည်၍)
+**ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင် (ခန့်မှန်း $80-150/လ):**
+- Azure OpenAI (Pay-as-you-go): $0-50/လ (token အသုံးပြုမှုအပေါ် မူတည်၍)
 - AI Search (Basic tier): $75/လ
 - Container Apps (Consumption): $0-20/လ
 - Storage (Standard): $1-5/လ
 
 **ထုတ်လုပ်မှု ပတ်ဝန်းကျင် (ခန့်မှန်း $300-3,500+/လ):**
-- Azure OpenAI (PTU အတွက် တည်ငြိမ်သော စွမ်းဆောင်ရည်): $3,000+/လ သို့မဟုတ် Pay-as-go အမြင့်အသုံးပြုမှုဖြင့်
+- Azure OpenAI (PTU ဖြင့် တည်ငြိမ်သော စွမ်းဆောင်ရည်): $3,000+/လ သို့မဟုတ် Pay-as-go အမြင့်အသုံးပြုမှု
 - AI Search (Standard tier): $250/လ
 - Container Apps (Dedicated): $50-100/လ
 - Application Insights: $5-50/လ
 - Storage (Premium): $10-50/လ
 
 **💡 ကုန်ကျစရိတ် ထိရောက်စွာ စီမံခန့်ခွဲရန် အကြံပြုချက်များ:**
-- သင်ယူမှုအတွက် **Free Tier** Azure OpenAI ကို အသုံးပြုပါ (50,000 tokens/လ ပါဝင်သည်)
-- ဖွံ့ဖြိုးတိုးတက်မှု မလုပ်သည့်အချိန်တွင် `azd down` ဖြင့် အရင်းအမြစ်များကို ပိတ်ထားပါ
+- သင်ယူရန်အတွက် **Free Tier** Azure OpenAI ကို အသုံးပြုပါ (လစဉ် 50,000 tokens ပါဝင်သည်)
+- ဖွံ့ဖြိုးမှုမလုပ်သည့်အချိန်တွင် `azd down` ဖြင့် အရင်းအမြစ်များကို ပိတ်ထားပါ
 - စားသုံးမှုအခြေပြု ဘီလ်လ်ကို စတင်အသုံးပြု၍ ထုတ်လုပ်မှုအတွက်သာ PTU သို့ မြှင့်တင်ပါ
 - တပ်ဆင်မှုမပြုမီ `azd provision --preview` ဖြင့် ကုန်ကျစရိတ် ခန့်မှန်းပါ
 - auto-scaling ကို ဖွင့်ထား၍ အသုံးပြုမှုအတိုင်းသာ ငွေပေးချေပါ
@@ -213,15 +213,15 @@ az consumption budget list --resource-group <your-rg>
 
 #### သင်ယူမှု အရင်းအမြစ်များ
 - **📖 ဖွဲ့စည်းမှု**: [Configuration Guide](docs/getting-started/configuration.md) - ပတ်ဝန်းကျင် တပ်ဆင်ခြင်း
-- **🔐 လုံခြုံရေး**: [Authentication patterns and managed identity](docs/getting-started/authsecurity.md) - အတည်ပြုခြင်း ပုံစံများ
+- **🔐 လုံခြုံရေး**: [Authentication patterns and managed identity](docs/getting-started/authsecurity.md) - အတည်ပြုမှု ပုံစံများ
 - **📝 ဥပမာများ**: [Database App Example](examples/database-app/README.md) - AZD Database ဥပမာများ
 
 #### လက်တွေ့ လေ့ကျင့်ခန်းများ
 - ပတ်ဝန်းကျင် များစွာ (dev, staging, prod) ကို ဖွဲ့စည်းပါ
-- managed identity အတည်ပြုခြင်း တပ်ဆင်ပါ
+- managed identity အတည်ပြုမှု တပ်ဆင်ပါ
 - ပတ်ဝန်းကျင်အလိုက် ဖွဲ့စည်းမှုများကို အကောင်အထည်ဖော်ပါ
 
-**💡 အခန်းရလဒ်**: လုံခြုံရေးနှင့် အတည်ပြုခြင်းမှန်ကန်စွာဖြင့် ပတ်ဝန်းကျင် များစွာကို စီမံခန့်ခွဲနိုင်ခြင်း
+**💡 အခန်းရလဒ်**: လုံခြုံမှုနှင့် အတည်ပြုမှုမှန်ကန်စွာဖြင့် ပတ်ဝန်းကျင် များစွာကို စီမံခန့်ခွဲနိုင်ခြင်း
 
 ---
 
@@ -233,7 +233,7 @@ az consumption budget list --resource-group <your-rg>
 #### သင်ယူမည့်အရာများ
 - တိုးတက်သော deployment ပုံစံများ
 - Bicep ဖြင့် Infrastructure as Code
-- အရင်းအမြစ် ပေးအပ်မှု မဟာဗျူဟာများ
+- အရင်းအမြစ် provisioning များ စီမံခန့်ခွဲမှု
 
 #### သင်ယူမှု အရင်းအမြစ်များ
 - **📖 Deployment**: [Deployment Guide](docs/deployment/deployment-guide.md) - ပြည့်စုံသော workflow များ
@@ -241,11 +241,11 @@ az consumption budget list --resource-group <your-rg>
 - **📝 ဥပမာများ**: [Container App Example](../../examples/container-app) - Containerized deployment များ
 
 #### လက်တွေ့ လေ့ကျင့်ခန်းများ
-- ကိုယ်ပိုင် Bicep template များ ဖန်တီးပါ
-- multi-service application များ တပ်ဆင်ပါ
-- blue-green deployment မဟာဗျူဟာများ အကောင်အထည်ဖော်ပါ
+- ကိုယ်ပိုင် Bicep templates ဖန်တီးပါ
+- multi-service အပလီကေးရှင်းများ တပ်ဆင်ပါ
+- blue-green deployment များ အကောင်အထည်ဖော်ပါ
 
-**💡 အခန်းရလဒ်**: ကိုယ်ပိုင် infrastructure template များ အသုံးပြု၍ ရှုပ်ထွေးသော multi-service application များ တပ်ဆင်နိုင်ခြင်း
+**💡 အခန်းရလဒ်**: ကိုယ်ပိုင် infrastructure templates အသုံးပြု၍ ရှုပ်ထွေးသော multi-service အပလီကေးရှင်းများ တပ်ဆင်နိုင်ခြင်း
 
 ---
 
@@ -262,9 +262,9 @@ az consumption budget list --resource-group <your-rg>
 #### သင်ယူမှု အရင်းအမြစ်များ
 - **🤖 အထူးပြု စီမံကိန်း**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - ပြည့်စုံသော အကောင်အထည်ဖော်မှု
 - **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - တစ်ချက်နှိပ်ပြီး တပ်ဆင်ခြင်း  
-- **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - ပုံစံများ  
+- **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - ပုံစံများ
 
-#### လက်တွေ့လေ့ကျင့်ခန်းများ  
+#### Practical Exercises  
 ```bash
 # အပြည့်အစုံ လက်လီစျေးကွက် မျိုးစုံအေးဂျင့် ဖြေရှင်းချက်ကို တပ်ဆင်ပါ
 cd examples/retail-multiagent-arm-template
@@ -274,118 +274,118 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
   
-**💡 အခန်းရလဒ်**: Customer နှင့် Inventory အေးဂျင့်များပါသော ထုတ်လုပ်မှုအဆင်သင့် multi-agent AI ဖြေရှင်းချက် တပ်ဆင်ပြီး စီမံခန့်ခွဲခြင်း  
+**💡 Chapter Outcome**: Customer နှင့် Inventory အေးဂျင့်များပါဝင်သည့် ထုတ်လုပ်မှုအဆင်သင့် multi-agent AI ဖြေရှင်းချက် တပ်ဆင်ပြီး စီမံခန့်ခွဲခြင်း
 
 ---
 
-### 🔍 အခန်း ၆: တပ်ဆင်မှုမတိုင်မီ စစ်ဆေးခြင်းနှင့် စီမံကိန်းရေးဆွဲခြင်း  
-**လိုအပ်ချက်များ**: အခန်း ၄ ပြီးစီးထားခြင်း  
-**ကြာချိန်**: ၁ နာရီ  
-**ရှုပ်ထွေးမှု**: ⭐⭐  
+### 🔍 Chapter 6: Pre-Deployment Validation & Planning  
+**Prerequisites**: Chapter 4 ပြီးစီးထားရန်  
+**Duration**: 1 နာရီ  
+**Complexity**: ⭐⭐
 
-#### သင်ယူမည့်အရာများ  
-- စွမ်းဆောင်ရည်စီမံကိန်းရေးဆွဲခြင်းနှင့် အရင်းအမြစ်စစ်ဆေးခြင်း  
+#### What You'll Learn  
+- စွမ်းဆောင်ရည်စီမံခန့်ခွဲမှုနှင့် အရင်းအမြစ်အတည်ပြုခြင်း  
 - SKU ရွေးချယ်မှု မဟာဗျူဟာများ  
-- တပ်ဆင်မှုမတိုင်မီ စစ်ဆေးမှုများနှင့် အလိုအလျောက်လုပ်ဆောင်မှုများ  
+- Pre-flight စစ်ဆေးမှုများနှင့် အလိုအလျောက်လုပ်ဆောင်မှုများ
 
-#### သင်ယူရန် အရင်းအမြစ်များ  
-- **📊 စီမံကိန်းရေးဆွဲခြင်း**: [Capacity Planning](docs/pre-deployment/capacity-planning.md) - အရင်းအမြစ်စစ်ဆေးခြင်း  
-- **💰 ရွေးချယ်မှု**: [SKU Selection](docs/pre-deployment/sku-selection.md) - ကုန်ကျစရိတ်သက်သာစေရေးရွေးချယ်မှုများ  
-- **✅ စစ်ဆေးခြင်း**: [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - အလိုအလျောက် စာရင်းများ  
+#### Learning Resources  
+- **📊 Planning**: [Capacity Planning](docs/pre-deployment/capacity-planning.md) - အရင်းအမြစ်အတည်ပြုခြင်း  
+- **💰 Selection**: [SKU Selection](docs/pre-deployment/sku-selection.md) - ကုန်ကျစရိတ်ထိရောက်စွာ ရွေးချယ်ခြင်း  
+- **✅ Validation**: [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - အလိုအလျောက် စာရင်းများ
 
-#### လက်တွေ့လေ့ကျင့်ခန်းများ  
-- စွမ်းဆောင်ရည်စစ်ဆေးမှု စာရင်းများကို လည်ပတ်ပါ  
-- ကုန်ကျစရိတ်သက်သာစေရန် SKU ရွေးချယ်မှုများကို အကောင်းဆုံးပြုလုပ်ပါ  
-- တပ်ဆင်မှုမတိုင်မီ စစ်ဆေးမှုများကို အလိုအလျောက် အကောင်အထည်ဖော်ပါ  
+#### Practical Exercises  
+- စွမ်းဆောင်ရည်အတည်ပြု စာရင်းများကို လည်ပတ်ပါ  
+- ကုန်ကျစရိတ်အတွက် SKU ရွေးချယ်မှုများကို အကောင်းဆုံးပြုလုပ်ပါ  
+- အလိုအလျောက် Pre-deployment စစ်ဆေးမှုများကို အကောင်အထည်ဖော်ပါ
 
-**💡 အခန်းရလဒ်**: တပ်ဆင်မှုမတိုင်မီ စစ်ဆေးပြီး အကောင်းဆုံးပြင်ဆင်ထားခြင်း  
+**💡 Chapter Outcome**: တပ်ဆင်မှုများကို အကောင်အထည်ဖော်မတိုင်မီ အတည်ပြု၍ အကောင်းဆုံးပြုလုပ်နိုင်ခြင်း
 
 ---
 
-### 🚨 အခန်း ၇: ပြဿနာဖြေရှင်းခြင်းနှင့် အမှားရှာဖွေခြင်း  
-**လိုအပ်ချက်များ**: တပ်ဆင်မှုအခန်း မည်သည့်အခန်းမဆို ပြီးစီးထားခြင်း  
-**ကြာချိန်**: ၁-၁.၅ နာရီ  
-**ရှုပ်ထွေးမှု**: ⭐⭐  
+### 🚨 Chapter 7: Troubleshooting & Debugging  
+**Prerequisites**: မည်သည့် တပ်ဆင်မှုအခန်းကဏ္ဍမဆို ပြီးစီးထားရန်  
+**Duration**: 1-1.5 နာရီ  
+**Complexity**: ⭐⭐
 
-#### သင်ယူမည့်အရာများ  
-- စနစ်တကျ အမှားရှာဖွေခြင်းနည်းလမ်းများ  
+#### What You'll Learn  
+- စနစ်တကျ ပြဿနာရှာဖွေခြင်းနည်းလမ်းများ  
 - ပုံမှန်ပြဿနာများနှင့် ဖြေရှင်းနည်းများ  
-- AI အထူးပြဿနာများ ဖြေရှင်းနည်းများ  
+- AI အထူးပြဿနာရှာဖွေခြင်း
 
-#### သင်ယူရန် အရင်းအမြစ်များ  
-- **🔧 ပုံမှန်ပြဿနာများ**: [Common Issues](docs/troubleshooting/common-issues.md) - မေးခွန်းများနှင့် ဖြေရှင်းနည်းများ  
-- **🕵️ အမှားရှာဖွေခြင်း**: [Debugging Guide](docs/troubleshooting/debugging.md) - အဆင့်ဆင့်နည်းလမ်းများ  
-- **🤖 AI ပြဿနာများ**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI ဝန်ဆောင်မှု ပြဿနာများ  
+#### Learning Resources  
+- **🔧 Common Issues**: [Common Issues](docs/troubleshooting/common-issues.md) - မေးခွန်းများနှင့် ဖြေရှင်းနည်းများ  
+- **🕵️ Debugging**: [Debugging Guide](docs/troubleshooting/debugging.md) - အဆင့်ဆင့်နည်းလမ်းများ  
+- **🤖 AI Issues**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI ဝန်ဆောင်မှု ပြဿနာများ
 
-#### လက်တွေ့လေ့ကျင့်ခန်းများ  
+#### Practical Exercises  
 - တပ်ဆင်မှု မအောင်မြင်မှုများကို ရှာဖွေပါ  
 - အတည်ပြုခြင်း ပြဿနာများကို ဖြေရှင်းပါ  
-- AI ဝန်ဆောင်မှု ချိတ်ဆက်မှု အမှားများကို အမှားရှာဖွေပါ  
+- AI ဝန်ဆောင်မှု ချိတ်ဆက်မှုကို ပြန်လည်စစ်ဆေးပါ
 
-**💡 အခန်းရလဒ်**: ပုံမှန်တပ်ဆင်မှု ပြဿနာများကို ကိုယ်တိုင် ရှာဖွေ ဖြေရှင်းနိုင်ခြင်း  
+**💡 Chapter Outcome**: ပုံမှန်တပ်ဆင်မှု ပြဿနာများကို ကိုယ်တိုင် ရှာဖွေ ဖြေရှင်းနိုင်ခြင်း
 
 ---
 
-### 🏢 အခန်း ၈: ထုတ်လုပ်မှုနှင့် စီးပွားရေး ပုံစံများ  
-**လိုအပ်ချက်များ**: အခန်း ၁-၄ ပြီးစီးထားခြင်း  
-**ကြာချိန်**: ၂-၃ နာရီ  
-**ရှုပ်ထွေးမှု**: ⭐⭐⭐⭐  
+### 🏢 Chapter 8: Production & Enterprise Patterns  
+**Prerequisites**: Chapters 1-4 ပြီးစီးထားရန်  
+**Duration**: 2-3 နာရီ  
+**Complexity**: ⭐⭐⭐⭐
 
-#### သင်ယူမည့်အရာများ  
+#### What You'll Learn  
 - ထုတ်လုပ်မှု တပ်ဆင်မှု မဟာဗျူဟာများ  
 - စီးပွားရေး လုံခြုံရေး ပုံစံများ  
-- စောင့်ကြည့်ခြင်းနှင့် ကုန်ကျစရိတ် ထိရောက်စွာ စီမံခန့်ခွဲခြင်း  
+- စောင့်ကြည့်မှုနှင့် ကုန်ကျစရိတ် ထိရောက်စွာ စီမံခန့်ခွဲခြင်း
 
-#### သင်ယူရန် အရင်းအမြစ်များ  
-- **🏭 ထုတ်လုပ်မှု**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - စီးပွားရေး ပုံစံများ  
-- **📝 ဥပမာများ**: [Microservices Example](../../examples/microservices) - ရှုပ်ထွေးသော အင်ဂျင်နီယာပုံစံများ  
-- **📊 စောင့်ကြည့်ခြင်း**: [Application Insights integration](docs/pre-deployment/application-insights.md) - စောင့်ကြည့်ခြင်း  
+#### Learning Resources  
+- **🏭 Production**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - စီးပွားရေး ပုံစံများ  
+- **📝 Examples**: [Microservices Example](../../examples/microservices) - ရှုပ်ထွေးသော အင်ဂျင်နီယာပုံစံများ  
+- **📊 Monitoring**: [Application Insights integration](docs/pre-deployment/application-insights.md) - စောင့်ကြည့်မှု
 
-#### လက်တွေ့လေ့ကျင့်ခန်းများ  
+#### Practical Exercises  
 - စီးပွားရေး လုံခြုံရေး ပုံစံများကို အကောင်အထည်ဖော်ပါ  
 - စုံလင်သော စောင့်ကြည့်မှု စနစ်တစ်ခု တည်ဆောက်ပါ  
-- သင့်တော်သော အုပ်ချုပ်မှုဖြင့် ထုတ်လုပ်မှုသို့ တပ်ဆင်ပါ  
+- ထုတ်လုပ်မှုအဆင့်သို့ တပ်ဆင်ပြီး အုပ်ချုပ်မှုမှန်ကန်စွာ ပြုလုပ်ပါ
 
-**💡 အခန်းရလဒ်**: ထုတ်လုပ်မှုအဆင်သင့် စီးပွားရေးအက်ပလီကေးရှင်းများ တပ်ဆင်နိုင်ခြင်း  
+**💡 Chapter Outcome**: ထုတ်လုပ်မှုအဆင့် အပြည့်အဝ အသုံးပြုနိုင်သော စီးပွားရေးအဆင့် အက်ပလီကေးရှင်းများ တပ်ဆင်နိုင်ခြင်း
 
 ---
 
-## 🎓 အလုပ်ရုံဆွေးနွေးပွဲ အကျဉ်းချုပ်: လက်တွေ့သင်ယူမှု အတွေ့အကြုံ  
+## 🎓 Workshop Overview: Hands-On Learning Experience
 
-> **⚠️ အလုပ်ရုံဆွေးနွေးပွဲ အခြေအနေ: ဖွံ့ဖြိုးတိုးတက်နေဆဲ**  
-> အလုပ်ရုံဆွေးနွေးပွဲ ပစ္စည်းများကို လက်ရှိ ဖွံ့ဖြိုးတိုးတက်စေနေပြီး ပြုပြင်မွမ်းမံနေပါသည်။ အခြေခံ မော်ဂျူးများ လုပ်ဆောင်နိုင်သော်လည်း အဆင့်မြင့် အပိုင်းများ အချို့ မပြီးစီးသေးပါ။ ကျွန်ုပ်တို့သည် အကြောင်းအရာအားလုံး ပြီးစီးအောင် ဆက်လက်လုပ်ဆောင်နေပါသည်။ [တိုးတက်မှုကို လိုက်နာရန် →](workshop/README.md)  
+> **⚠️ WORKSHOP STATUS: Active Development**  
+> Workshop ပစ္စည်းများကို လက်ရှိ ဖန်တီးနေဆဲဖြစ်ပြီး တိုးတက်မှုများ ပြုလုပ်နေပါသည်။ အခြေခံ module များ လုပ်ဆောင်နိုင်ပြီး၊ အဆင့်မြင့် အပိုင်းများ အချို့ မပြီးစီးသေးပါ။ အကြောင်းအရာအားလုံး ပြီးစီးအောင် ကြိုးစားနေပါသည်။ [Track progress →](workshop/README.md)
 
-### အပြန်အလှန် အလုပ်ရုံဆွေးနွေးပွဲ ပစ္စည်းများ  
-**ဘရောက်ဇာအခြေပြု ကိရိယာများနှင့် လမ်းညွှန် လေ့ကျင့်ခန်းများဖြင့် စုံလင်သော လက်တွေ့သင်ယူမှု**  
+### Interactive Workshop Materials  
+**Browser-based tools နှင့် လမ်းညွှန် လေ့ကျင့်ခန်းများဖြင့် လက်တွေ့ လေ့လာမှု**
 
-ကျွန်ုပ်တို့၏ အလုပ်ရုံဆွေးနွေးပွဲ ပစ္စည်းများသည် အထက်ပါ အခန်းအခြေခံ သင်ခန်းစာများနှင့် တွဲဖက်၍ ဖွဲ့စည်းထားသော လက်တွေ့သင်ယူမှု အတွေ့အကြုံကို ပေးစွမ်းပါသည်။ အလုပ်ရုံဆွေးနွေးပွဲကို ကိုယ်တိုင် လေ့လာသင်ယူခြင်းနှင့် ဆရာ/ဆရာမ ဦးဆောင်သင်ကြားမှု နှစ်မျိုးစလုံးအတွက် ဒီဇိုင်းရေးဆွဲထားပါသည်။  
+Workshop ပစ္စည်းများသည် အထက်ပါ အခန်းများအခြေခံ သင်ခန်းစာများနှင့် တွဲဖက်၍ ဖွဲ့စည်းထားသော လက်တွေ့ လေ့လာမှု အတွေ့အကြုံကို ပေးစွမ်းပါသည်။ Workshop သည် ကိုယ်တိုင် လေ့လာသူများနှင့် သင်ကြားသူများအတွက် တို့အတွက် ရည်ရွယ်ထားပါသည်။
 
-#### 🛠️ အလုပ်ရုံဆွေးနွေးပွဲ အင်္ဂါရပ်များ  
-- **ဘရောက်ဇာအခြေပြု မျက်နှာပြင်**: MkDocs ဖြင့် အပြည့်အစုံ ပြုလုပ်ထားပြီး ရှာဖွေရေး၊ ကူးယူခြင်းနှင့် အပြင်အဆင်များ ပါဝင်သည်  
-- **GitHub Codespaces ပေါင်းစည်းမှု**: တစ်ချက်နှိပ်ပြီး ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင် တပ်ဆင်ခြင်း  
-- **ဖွဲ့စည်းထားသော သင်ယူမှု လမ်းကြောင်း**: ၇ အဆင့် လမ်းညွှန် လေ့ကျင့်ခန်းများ (စုစုပေါင်း ၃.၅ နာရီ)  
-- **ရှာဖွေခြင်း → တပ်ဆင်ခြင်း → ကိုယ်ပိုင်ပြင်ဆင်ခြင်း**: တိုးတက်မှုဆက်လက်ဖြစ်စဉ်  
-- **အပြန်အလှန် DevContainer ပတ်ဝန်းကျင်**: ကြိုတင်ပြင်ဆင်ထားသော ကိရိယာများနှင့် အခြေခံပစ္စည်းများ  
+#### 🛠️ Workshop Features  
+- **Browser-Based Interface**: MkDocs ဖြင့် ပြုလုပ်ထားသော workshop၊ ရှာဖွေရေး၊ ကူးယူခြင်းနှင့် theme များပါဝင်သည်  
+- **GitHub Codespaces Integration**: တစ်ချက်နှိပ်ပြီး ဖွင့်လှစ်နိုင်သော ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်  
+- **Structured Learning Path**: ၇ အဆင့် လမ်းညွှန် လေ့ကျင့်ခန်းများ (စုစုပေါင်း ၃.၅ နာရီ)  
+- **Discovery → Deployment → Customization**: တိုးတက်မှုဆက်လက်ဖြစ်စဉ်  
+- **Interactive DevContainer Environment**: ကြိုတင်ပြင်ဆင်ထားသော ကိရိယာများနှင့် အခြေခံပစ္စည်းများ
 
-#### 📚 အလုပ်ရုံဆွေးနွေးပွဲ ဖွဲ့စည်းမှု  
-အလုပ်ရုံဆွေးနွေးပွဲသည် **ရှာဖွေခြင်း → တပ်ဆင်ခြင်း → ကိုယ်ပိုင်ပြင်ဆင်ခြင်း** နည်းလမ်းဖြင့် လိုက်နာသည်။  
+#### 📚 Workshop Structure  
+Workshop သည် **Discovery → Deployment → Customization** နည်းလမ်းဖြင့် ဆောင်ရွက်သည်။
 
-1. **ရှာဖွေခြင်း အဆင့်** (၄၅ မိနစ်)  
-   - Microsoft Foundry မော်ဒယ်များနှင့် ဝန်ဆောင်မှုများကို ရှာဖွေပါ  
-   - multi-agent အင်ဂျင်နီယာ ပုံစံများကို နားလည်ပါ  
-   - တပ်ဆင်မှု လိုအပ်ချက်များနှင့် လိုအပ်ချက်များကို ပြန်လည်သုံးသပ်ပါ  
+1. **Discovery Phase** (၄၅ မိနစ်)  
+   - Microsoft Foundry templates နှင့် ဝန်ဆောင်မှုများကို ရှာဖွေပါ  
+   - Multi-agent architecture ပုံစံများကို နားလည်ပါ  
+   - တပ်ဆင်မှု လိုအပ်ချက်များနှင့် အခြေခံအချက်များကို ပြန်လည်သုံးသပ်ပါ
 
-2. **တပ်ဆင်ခြင်း အဆင့်** (၂ နာရီ)  
+2. **Deployment Phase** (၂ နာရီ)  
    - AZD ဖြင့် AI အက်ပလီကေးရှင်းများ လက်တွေ့ တပ်ဆင်ပါ  
-   - Azure AI ဝန်ဆောင်မှုများနှင့် အဆုံးအဖြတ်များကို ဖွဲ့စည်းပါ  
-   - လုံခြုံရေးနှင့် အတည်ပြုမှု ပုံစံများကို အကောင်အထည်ဖော်ပါ  
+   - Azure AI ဝန်ဆောင်မှုများနှင့် endpoint များကို ပြင်ဆင်ပါ  
+   - လုံခြုံရေးနှင့် အတည်ပြုမှု ပုံစံများကို အကောင်အထည်ဖော်ပါ
 
-3. **ကိုယ်ပိုင်ပြင်ဆင်ခြင်း အဆင့်** (၄၅ မိနစ်)  
-   - အထူးသုံးစွဲမှုများအတွက် အက်ပလီကေးရှင်းများ ပြင်ဆင်ပါ  
-   - ထုတ်လုပ်မှု တပ်ဆင်မှုအတွက် အကောင်းဆုံးပြင်ဆင်ပါ  
-   - စောင့်ကြည့်ခြင်းနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှုများကို အကောင်အထည်ဖော်ပါ  
+3. **Customization Phase** (၄၅ မိနစ်)  
+   - အထူးသီးသန့် အသုံးပြုမှုများအတွက် အက်ပလီကေးရှင်းများ ပြင်ဆင်ပါ  
+   - ထုတ်လုပ်မှု တပ်ဆင်မှုအတွက် အကောင်းဆုံး ပြုလုပ်ပါ  
+   - စောင့်ကြည့်မှုနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှုများကို အကောင်အထည်ဖော်ပါ
 
-#### 🚀 အလုပ်ရုံဆွေးနွေးပွဲ စတင်ရန်  
+#### 🚀 Getting Started with the Workshop  
 ```bash
 # ရွေးချယ်မှု ၁: GitHub Codespaces (အကြံပြုသည်)
 # "Code" → "Create codespace on main" ကို repository တွင် နှိပ်ပါ
@@ -396,147 +396,147 @@ cd azd-for-beginners/workshop
 # workshop/README.md တွင် setup လမ်းညွှန်ချက်များကို လိုက်နာပါ
 ```
   
-#### 🎯 အလုပ်ရုံဆွေးနွေးပွဲ သင်ယူမှု ရလဒ်များ  
-အလုပ်ရုံဆွေးနွေးပွဲ ပြီးစီးပါက ပါဝင်သူများသည်-  
-- **ထုတ်လုပ်မှု AI အက်ပလီကေးရှင်းများ တပ်ဆင်နိုင်ခြင်း**: Microsoft Foundry ဝန်ဆောင်မှုများနှင့် AZD ကို အသုံးပြုခြင်း  
-- **multi-agent အင်ဂျင်နီယာများ ကျွမ်းကျင်ခြင်း**: ညှိနှိုင်းထားသော AI အေးဂျင့် ဖြေရှင်းချက်များ အကောင်အထည်ဖော်ခြင်း  
-- **လုံခြုံရေး အကောင်းဆုံးလေ့လာမှုများ အကောင်အထည်ဖော်ခြင်း**: အတည်ပြုခြင်းနှင့် ဝင်ရောက်ခွင့် ထိန်းချုပ်မှု ဖွဲ့စည်းခြင်း  
-- **အရွယ်အစားအတွက် ထိရောက်စွာ ပြင်ဆင်ခြင်း**: ကုန်ကျစရိတ်သက်သာပြီး စွမ်းဆောင်ရည်မြင့် တပ်ဆင်မှုများ ဒီဇိုင်းရေးဆွဲခြင်း  
-- **တပ်ဆင်မှု ပြဿနာများ ဖြေရှင်းနိုင်ခြင်း**: ပုံမှန်ပြဿနာများကို ကိုယ်တိုင် ဖြေရှင်းနိုင်ခြင်း  
+#### 🎯 Workshop Learning Outcomes  
+Workshop ပြီးစီးပြီးနောက် ပါဝင်သူများသည် -  
+- **ထုတ်လုပ်မှု AI အက်ပလီကေးရှင်းများ တပ်ဆင်နိုင်ခြင်း**: Microsoft Foundry ဝန်ဆောင်မှုများနှင့် AZD အသုံးပြုခြင်း  
+- **Multi-Agent Architecture များ ကျွမ်းကျင်စွာ အသုံးပြုနိုင်ခြင်း**: AI အေးဂျင့်များ ပူးပေါင်းဆောင်ရွက်မှု  
+- **လုံခြုံရေး အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ အကောင်အထည်ဖော်နိုင်ခြင်း**: အတည်ပြုခြင်းနှင့် ဝင်ရောက်ခွင့် ထိန်းချုပ်မှု  
+- **အရွယ်အစားအတွက် အကောင်းဆုံး ပြုလုပ်နိုင်ခြင်း**: ကုန်ကျစရိတ်ထိရောက်ပြီး စွမ်းဆောင်ရည်မြင့် တပ်ဆင်မှုများ  
+- **တပ်ဆင်မှု ပြဿနာများကို ကိုယ်တိုင် ဖြေရှင်းနိုင်ခြင်း**
 
-#### 📖 အလုပ်ရုံဆွေးနွေးပွဲ အရင်းအမြစ်များ  
-- **🎥 အပြန်အလှန် လမ်းညွှန်**: [Workshop Materials](workshop/README.md) - ဘရောက်ဇာအခြေပြု သင်ယူမှု ပတ်ဝန်းကျင်  
-- **📋 အဆင့်ဆင့် လမ်းညွှန်ချက်များ**: [Guided Exercises](../../workshop/docs/instructions) - အသေးစိတ် လမ်းညွှန်ချက်များ  
-- **🛠️ AI အလုပ်ရုံဆွေးနွေးပွဲ ဓာတ်ခွဲခန်း**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI အထူးလေ့ကျင့်ခန်းများ  
-- **💡 အလျင်အမြန် စတင်ခြင်း**: [Workshop Setup Guide](workshop/README.md#quick-start) - ပတ်ဝန်းကျင် ဖွဲ့စည်းခြင်း  
+#### 📖 Workshop Resources  
+- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based လေ့လာမှု ပတ်ဝန်းကျင်  
+- **📋 Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - အသေးစိတ် လမ်းညွှန်ချက်များ  
+- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI အထူး လေ့ကျင့်ခန်းများ  
+- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - ပတ်ဝန်းကျင် ပြင်ဆင်ခြင်း
 
-**သင့်တော်သည်**: ကော်ပိုရေးရှင်း လေ့ကျင့်ရေး၊ တက္ကသိုလ် သင်တန်းများ၊ ကိုယ်တိုင် လေ့လာသင်ယူမှုနှင့် ဖွံ့ဖြိုးရေးသူ bootcamp များအတွက်။  
+**သင့်တော်သည်**: ကော်ပိုရေးရှင်း သင်တန်းများ၊ တက္ကသိုလ် သင်တန်းများ၊ ကိုယ်တိုင် လေ့လာသူများနှင့် developer bootcamp များအတွက်။
 
 ---
 
-## 📖 Azure Developer CLI ဆိုတာဘာလဲ?  
+## 📖 What is Azure Developer CLI?
 
-Azure Developer CLI (azd) သည် Azure သို့ အက်ပလီကေးရှင်းများ တည်ဆောက်ခြင်းနှင့် တပ်ဆင်ခြင်း လုပ်ငန်းစဉ်ကို မြန်ဆန်စေသော developer အလယ်အလတ် command-line interface ဖြစ်သည်။ ၎င်းသည်-  
+Azure Developer CLI (azd) သည် Azure သို့ အက်ပလီကေးရှင်းများ တည်ဆောက်ခြင်းနှင့် တပ်ဆင်ခြင်း လုပ်ငန်းစဉ်ကို မြန်ဆန်စေသော developer အလယ်အလတ် command-line interface ဖြစ်သည်။ ၎င်းသည် -
 
-- **ပုံစံအခြေပြု တပ်ဆင်မှုများ** - ပုံမှန် အက်ပလီကေးရှင်း ပုံစံများအတွက် ကြိုတင်ပြင်ဆင်ထားသော ပုံစံများ အသုံးပြုခြင်း  
+- **Template-based deployments** - ပုံမှန် အက်ပလီကေးရှင်း ပုံစံများအတွက် ကြိုတင်ပြင်ဆင်ထားသော template များ အသုံးပြုခြင်း  
 - **Infrastructure as Code** - Bicep သို့မဟုတ် Terraform အသုံးပြု၍ Azure အရင်းအမြစ်များ စီမံခန့်ခွဲခြင်း  
-- **ပေါင်းစည်းထားသော လုပ်ငန်းစဉ်များ** - အက်ပလီကေးရှင်းများကို အဆက်မပြတ် provision, deploy နှင့် စောင့်ကြည့်ခြင်း  
-- **Developer များအတွက် သင့်တော်မှု** - developer ထုတ်လုပ်မှုနှင့် အတွေ့အကြုံအတွက် အကောင်းဆုံး ပြင်ဆင်ထားခြင်း  
+- **Integrated workflows** - အက်ပလီကေးရှင်းများကို တပ်ဆင်ခြင်း၊ စောင့်ကြည့်ခြင်းတို့ကို ချိတ်ဆက်စွာ ဆောင်ရွက်ခြင်း  
+- **Developer-friendly** - developer ထုတ်လုပ်မှုနှင့် အတွေ့အကြုံအတွက် အထူးပြုလုပ်ထားခြင်း
 
-### **AZD + Microsoft Foundry: AI တပ်ဆင်မှုများအတွက် အကောင်းဆုံး**  
+### **AZD + Microsoft Foundry: AI တပ်ဆင်မှုများအတွက် အကောင်းဆုံး**
 
-**AI ဖြေရှင်းချက်များအတွက် AZD ရွေးချယ်ရခြင်း အကြောင်း** AZD သည် AI developer များ ကြုံတွေ့ရသော အဓိက စိန်ခေါ်မှုများကို ဖြေရှင်းပေးသည်-  
+**AI ဖြေရှင်းချက်များအတွက် AZD ရွေးချယ်ရခြင်း အကြောင်း** AZD သည် AI developer များ ကြုံတွေ့ရသော အဓိက စိန်ခေါ်မှုများကို ဖြေရှင်းပေးသည် -
 
-- **AI-အဆင်သင့် ပုံစံများ** - Azure OpenAI, Cognitive Services နှင့် ML အလုပ်များအတွက် ကြိုတင်ပြင်ဆင်ထားသော ပုံစံများ  
-- **လုံခြုံသော AI တပ်ဆင်မှုများ** - AI ဝန်ဆောင်မှုများ၊ API key များနှင့် မော်ဒယ် အဆုံးအဖြတ်များအတွက် လုံခြုံရေး ပုံစံများ ပါဝင်သည်  
-- **ထုတ်လုပ်မှု AI ပုံစံများ** - တိုးချဲ့နိုင်ပြီး ကုန်ကျစရိတ်သက်သာသော AI အက်ပလီကေးရှင်း တပ်ဆင်မှုအတွက် အကောင်းဆုံးလေ့လာမှုများ  
-- **အဆုံးမှ အဆုံး AI လုပ်ငန်းစဉ်များ** - မော်ဒယ် ဖွံ့ဖြိုးမှုမှ ထုတ်လုပ်မှု တပ်ဆင်မှုအထိ စောင့်ကြည့်မှုနှင့်အတူ  
-- **ကုန်ကျစရိတ် ထိရောက်စွာ စီမံခန့်ခွဲခြင်း** - AI အလုပ်များအတွက် အရင်းအမြစ် ချမှတ်ခြင်းနှင့် တိုးချဲ့မှု မဟာဗျူဟာများ  
-- **Microsoft Foundry ပေါင်းစည်းမှု** - Microsoft Foundry မော်ဒယ် ကတ်တလော့နှင့် အဆုံးအဖြတ်များကို အဆက်မပြတ် ချိတ်ဆက်ခြင်း  
+- **AI-Ready Templates** - Azure OpenAI, Cognitive Services နှင့် ML အလုပ်များအတွက် ကြိုတင်ပြင်ဆင်ထားသော template များ  
+- **Secure AI Deployments** - AI ဝန်ဆောင်မှုများ၊ API key များနှင့် မော်ဒယ် endpoint များအတွက် လုံခြုံရေး ပုံစံများ ပါဝင်သည်  
+- **Production AI Patterns** - တိုးချဲ့နိုင်ပြီး ကုန်ကျစရိတ်ထိရောက်သော AI အက်ပလီကေးရှင်း တပ်ဆင်မှု အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ  
+- **End-to-End AI Workflows** - မော်ဒယ် ဖွံ့ဖြိုးမှုမှ ထုတ်လုပ်မှု တပ်ဆင်မှုအထိ စောင့်ကြည့်မှုနှင့်အတူ  
+- **Cost Optimization** - AI အလုပ်များအတွက် အရင်းအမြစ် ချမှတ်ခြင်းနှင့် တိုးချဲ့မှု မဟာဗျူဟာများ  
+- **Microsoft Foundry Integration** - Microsoft Foundry မော်ဒယ် ကတ်တလော့နှင့် endpoint များနှင့် ချိတ်ဆက်မှု
 
 ---
 
-## 🎯 ပုံစံများနှင့် ဥပမာစာကြည့်တိုက်  
+## 🎯 Templates & Examples Library
 
-### ထူးခြားချက်: Microsoft Foundry ပုံစံများ  
-**AI အက်ပလီကေးရှင်းများ တပ်ဆင်မည့်သူများအတွက် ဒီနေရာမှ စတင်ပါ!**  
+### Featured: Microsoft Foundry Templates  
+**AI အက်ပလီကေးရှင်းများ တပ်ဆင်မည့်သူများအတွက် စတင်ရန်**
 
-> **မှတ်ချက်:** ဤပုံစံများသည် AI ပုံစံအမျိုးမျိုးကို ပြသသည်။ အချို့သည် အပြင် Azure Samples ဖြစ်ပြီး အချို့ကို ဒေသခံ အကောင်အထည်ဖော်မှုများ ဖြစ်သည်။  
+> **မှတ်ချက်:** ဤ template များသည် AI ပုံစံအမျိုးမျိုးကို ပြသသည်။ အချို့သည် Azure Samples အပြင်၊ အချို့ကို ဒေသခံ အကောင်အထည်ဖော်မှုများဖြစ်သည်။
 
-| ပုံစံ | အခန်း | ရှုပ်ထွေးမှု | ဝန်ဆောင်မှုများ | အမျိုးအစား |  
+| Template | Chapter | Complexity | Services | Type |  
 |----------|---------|------------|----------|------|  
-| [**AI စကားပြော စတင်ခြင်း**](https://github.com/Azure-Samples/get-started-with-ai-chat) | အခန်း ၂ | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | အပြင် |  
-| [**AI အေးဂျင့်များ စတင်ခြင်း**](https://github.com/Azure-Samples/get-started-with-ai-agents) | အခန်း ၂ | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| အပြင် |  
-| [**Azure Search + OpenAI ပြသမှု**](https://github.com/Azure-Samples/azure-search-openai-demo) | အခန်း ၂ | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | အပြင် |  
-| [**OpenAI စကားပြော အက်ပလီကေးရှင်း အလျင်အမြန်စတင်ခြင်း**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | အခန်း ၂ | ⭐ | AzureOpenAI + Container Apps + Application Insights | အပြင် |  
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | အခန်း ၅ | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | အပြင် |  
-| [**Contoso စကားပြော RAG**](https://github.com/Azure-Samples/contoso-chat) | အခန်း ၈ | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | အပြင် |  
-| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | အခန်း ၅ | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **ဒေသခံ** |  
+| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | External |  
+| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Chapter 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| External |  
+| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | External |  
+| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | External |  
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | External |  
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | External |  
+| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Local** |
 
-### ထူးခြားချက်: ပြည့်စုံသော သင်ယူမှု အခြေအနေများ  
-**ထုတ်လုပ်မှုအဆင်သင့် အက်ပလီကေးရှင်း ပုံစံများကို သင်ခန်းစာများနှင့် တွဲဖက်ထားသည်**  
+### Featured: Complete Learning Scenarios  
+**ထုတ်လုပ်မှုအဆင့် အက်ပလီကေးရှင်း template များကို သင်ခန်းစာအခန်းများနှင့် တွဲဖက်ထားသည်**
 
-| ပုံစံ | သင်ယူမှု အခန်း | ရှုပ်ထွေးမှု | အဓိက သင်ယူမှု |  
+| Template | Learning Chapter | Complexity | Key Learning |  
 |----------|------------------|------------|--------------|  
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | အခန်း ၂ | ⭐ | အခြေခံ AI တပ်ဆင်မှု ပုံစံများ |  
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | အခန်း ၂ | ⭐⭐ | Azure AI Search ဖြင့် RAG အကောင်အထည်ဖော်ခြင်း |  
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | အခန်း ၄ | ⭐⭐ | စာရွက်စာတမ်း ဉာဏ်ရည် ပေါင်းစပ်ခြင်း |  
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | အခန်း ၅ | ⭐⭐⭐ | အေးဂျင့် ဖရိမ်ဝတ်နှင့် function ခေါ်ဆိုခြင်း |  
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | အခန်း ၈ | ⭐⭐⭐ | စီးပွားရေး AI စီမံခန့်ခွဲမှု |  
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | အခန်း ၅ | ⭐⭐⭐⭐ | Customer နှင့် Inventory အေးဂျင့်များပါသော multi-agent အင်ဂျင်နီယာ |  
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | အခြေခံ AI တပ်ဆင်မှု ပုံစံများ |  
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | Azure AI Search ဖြင့် RAG အကောင်အထည်ဖော်ခြင်း |  
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Chapter 4 | ⭐⭐ | စာရွက်စာတမ်း အချက်အလက် ထည့်သွင်းခြင်း |  
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | အေးဂျင့် ဖရိမ်ဝတ်နှင့် function ခေါ်ဆိုခြင်း |  
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐ | စီးပွားရေး AI စီမံခန့်ခွဲမှု |  
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | Customer နှင့် Inventory အေးဂျင့်များပါဝင်သည့် multi-agent architecture |
 
-### ဥပမာအမျိုးအစားအလိုက် သင်ယူခြင်း  
+### Learning by Example Type
 
-> **📌 ဒေသခံ နှင့် အပြင် ဥပမာများ**:  
-> **ဒေသခံ ဥပမာများ** (ဤ repository တွင်) = ချက်ချင်း အသုံးပြုနိုင်သည်  
-> **အပြင် ဥပမာများ** (Azure Samples) = ချိတ်ဆက်ထားသော repository များမှ clone ရယူရန်  
+> **📌 ဒေသခံ နှင့် ပြင်ပ ဥပမာများ**  
+> **ဒေသခံ ဥပမာများ** (ဤ repo တွင်) = ချက်ချင်း အသုံးပြုနိုင်သည်  
+> **ပြင်ပ ဥပမာများ** (Azure Samples) = ချိတ်ဆက်ထားသော repository များမှ clone ရယူရန်
 
-#### ဒေသခံ ဥပမာများ (ချက်ချင်း အသုံးပြုနိုင်)  
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - ARM template များဖြင့် ပြည့်စုံသော ထုတ်လုပ်မှုအဆင်သင့် အကောင်အထည်ဖော်မှု  
-  - multi-agent အင်ဂျင်နီယာ (Customer + Inventory အေးဂျင့်များ)  
+#### Local Examples (Ready to Use)  
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - ARM template များဖြင့် ပြည့်စုံသော ထုတ်လုပ်မှုအဆင့် အကောင်အထည်ဖော်မှု  
+  - Multi-agent architecture (Customer + Inventory အေးဂျင့်များ)  
   - စုံလင်သော စောင့်ကြည့်မှုနှင့် အကဲဖြတ်မှု  
-  - ARM template ဖြင့် တစ်ချက်နှိပ်ပြီး တပ်ဆင်ခြင်း  
+  - ARM template ဖြင့် တစ်ချက်နှိပ်ပြီး တပ်ဆင်နိုင်ခြင်း
 
-#### ဒေသခံ ဥပမာများ - ကွန်တိန်နာ အက်ပလီကေးရှင်းများ (အခန်း ၂-၅)  
-**ဤ repository တွင် ပြည့်စုံသော ကွန်တိန်နာ တပ်ဆင်မှု ဥပမာများ**  
-- [**Container App Examples**](examples/container-app/README.md) - ကွန်တိန်နာ အခြေပြု တပ်ဆင်မှု လမ်းညွှန်ပြချက်  
-  - [ရိုးရှင်းသော Flask API](../../examples/container-app/simple-flask-api) - scale-to-zero ပါသော အခြေခံ REST API  
-  - [Microservices Architecture](../../examples/container-app/microservices) - ထုတ်လုပ်မှုအဆင်သင့် multi-service တပ်ဆင်မှု  
-  - အလျင်အမြန် စတင်ခြင်း၊ ထုတ်လုပ်မှုနှင့် အဆင့်မြင့် တပ်ဆင်မှု ပုံစံများ  
-  - စောင့်ကြည့်ခြင်း၊ လုံခြုံရေးနှင့် ကုန်ကျစရိတ် ထိရောက်စွာ စီမံခန့်ခွဲခြင်း လမ်းညွှန်ချက်များ  
+#### Local Examples - Container Applications (Chapters 2-5)  
+**ဤ repository တွင် ပြည့်စုံသော container တပ်ဆင်မှု ဥပမာများ**  
+- [**Container App Examples**](examples/container-app/README.md) - containerized deployment များအတွက် လမ်းညွှန်ချက်  
+  - [Simple Flask API](../../examples/container-app/simple-flask-api) - scale-to-zero ပါသော အခြေခံ REST API  
+  - [Microservices Architecture](../../examples/container-app/microservices) - ထုတ်လုပ်မှုအဆင့် multi-service တပ်ဆင်မှု  
+  - Quick Start, Production, နှင့် Advanced deployment ပုံစံများ  
+  - စောင့်ကြည့်မှု၊ လုံခြုံရေးနှင့် ကုန်ကျစရိတ် ထိရောက်စွာ စီမံခန့်ခွဲခြင်း လမ်းညွှန်ချက်များ
 
-#### အပြင် ဥပမာများ - ရိုးရှင်းသော အက်ပလီကေးရှင်းများ (အခန်း ၁-၂)  
-**ဤ Azure Samples repository များကို clone ရယူ၍ စတင်ပါ**  
-- [ရိုးရှင်းသော ဝက်ဘ်အက်ပလီကေးရှင်း - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - အခြေခံ တပ်ဆင်မှု ပုံစံများ  
-- [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Static အကြောင်းအရာ တပ်ဆင်မှု  
-- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API တပ်ဆင်မှု  
+#### External Examples - Simple Applications (Chapters 1-2)  
+**ဤ Azure Samples repository များကို clone ပြုလုပ်၍ စတင်ပါ**  
+- [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - အခြေခံ တပ်ဆင်မှု ပုံစံများ  
+- [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Static content တပ်ဆင်မှု  
+- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API တပ်ဆင်မှု
 
-#### အပြင် ဥပမာများ - ဒေတာဘေ့စ် ပေါင်းစပ်မှု (အခန်း ၃-၄)  
-- [ဒေတာဘေ့စ် အက်ပလီကေးရှင်း - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - ဒေတာဘေ့စ် ချိတ်ဆက်မှု ပုံစံများ  
-- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless ဒေတာ လုပ်ငန်းစဉ်  
+#### External Examples - Database Integration (Chapter 3-4)  
+- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - ဒေတာဘေ့စ် ချိတ်ဆက်မှု ပုံစံများ  
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless ဒေတာ လုပ်ငန်းစဉ်များ
 
-#### အပြင် ဥပမာများ - အဆင့်မြင့် ပုံစံများ (အခန်း ၄-၈)  
-- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - multi-service အင်ဂျင်နီယာများ  
+#### External Examples - Advanced Patterns (Chapters 4-8)  
+- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service architecture များ  
 - [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - နောက်ခံ လုပ်ငန်းစဉ်များ  
-- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - ထုတ်လုပ်မှုအဆင်သင့် ML ပုံစံများ  
+- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - ထုတ်လုပ်မှုအဆင့် ML ပုံစံများ
 
-### အပြင် ပုံစံ စုစည်းမှုများ  
-- [**တရားဝင် AZD ပုံစံ ပြခန်း**](https://azure.github.io/awesome-azd/) - တရားဝင်နှင့် အသိုင်းအဝိုင်း ပုံစံများ စုစည်းထားသော စာမျက်နှာ  
-- [**Azure Developer CLI ပုံစံများ**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn ပုံစံ စာတမ်းများ  
-- [**ဥပမာ ဖိုင်များ**](examples/README.md) - ဒေသခံ သင်ယူမှု ဥပမာများနှင့် အသေးစိတ် ရှင်းလင်းချက်များ  
+### External Template Collections  
+- [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - တရားဝင်နှင့် အသိုင်းအဝိုင်း template များ စုစည်းထားသော စာကြည့်တိုက်  
+- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn template စာတမ်းများ  
+- [**Examples Directory**](examples/README.md) - ဒေသခံ သင်ယူမှု ဥပမာများနှင့် အသေးစိတ် ရှင်းလင်းချက်များ
 
 ---
 
-## 📚 သင်ယူရန် အရင်းအမြစ်များနှင့် ကိုးကားချက်များ  
+## 📚 Learning Resources & References
 
-### အလျင်အမြန် ကိုးကားချက်များ
-- [**Command Cheat Sheet**](resources/cheat-sheet.md) - အရေးကြီးသော azd command များကို အခန်းအလိုက် စီစဉ်ထားသည်
+### Quick References
+- [**Command Cheat Sheet**](resources/cheat-sheet.md) - အခန်းလိုက် စီစဉ်ထားသော အရေးကြီး azd command များ  
 - [**Glossary**](resources/glossary.md) - Azure နှင့် azd အသုံးအနှုန်းများ  
-- [**FAQ**](resources/faq.md) - သင်ယူမှုအခန်းအလိုက် စုစည်းထားသော မေးခွန်းများ
-- [**Study Guide**](resources/study-guide.md) - ကျယ်ပြန့်သော လေ့ကျင့်မှု လေ့လာမှုများ
+- [**FAQ**](resources/faq.md) - သင်ယူမှုအခန်းအလိုက် စီစဉ်ထားသော မေးခွန်းများ  
+- [**Study Guide**](resources/study-guide.md) - ကျယ်ပြန့်သော လေ့ကျင့်ခန်းများ  
 
-### လက်တွေ့ အလုပ်ရုံဆွေးနွေးပွဲများ
-- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - သင့် AI ဖြေရှင်းချက်များကို AZD ဖြင့် တပ်ဆင်နိုင်အောင် ပြုလုပ်ခြင်း (၂-၃ နာရီ)
-- [**Interactive Workshop Guide**](workshop/README.md) - MkDocs နှင့် DevContainer ပတ်ဝန်းကျင်ဖြင့် Browser အခြေပြု အလုပ်ရုံဆွေးနွေးပွဲ
-- [**Structured Learning Path**](../../workshop/docs/instructions) - ၇ အဆင့် လမ်းညွှန် လေ့ကျင့်မှုများ (ရှာဖွေခြင်း → တပ်ဆင်ခြင်း → ကိုယ်ပိုင်ပြင်ဆင်ခြင်း)
-- [**AZD For Beginners Workshop**](workshop/README.md) - GitHub Codespaces ပေါင်းစပ်ထားသော လက်တွေ့ အလုပ်ရုံဆွေးနွေးပွဲ ပစ္စည်းများ အပြည့်အစုံ
+### လက်တွေ့ အလုပ်ရုံဆွေးနွေးပွဲများ  
+- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - သင့် AI ဖြေရှင်းချက်များကို AZD ဖြင့် deploy လုပ်နိုင်ရန် (၂-၃ နာရီ)  
+- [**Interactive Workshop Guide**](workshop/README.md) - MkDocs နှင့် DevContainer ပတ်ဝန်းကျင်ဖြင့် Browser အခြေပြု အလုပ်ရုံဆွေးနွေးပွဲ  
+- [**Structured Learning Path**](../../workshop/docs/instructions) - ၇ အဆင့် လမ်းညွှန် လေ့ကျင့်ခန်းများ (ရှာဖွေခြင်း → တပ်ဆင်ခြင်း → ကိုယ်ပိုင်ပြင်ဆင်ခြင်း)  
+- [**AZD For Beginners Workshop**](workshop/README.md) - GitHub Codespaces ပေါင်းစပ်ထားသော လက်တွေ့ အလုပ်ရုံဆွေးနွေးပွဲ ပစ္စည်းများ  
 
-### ပြင်ပ သင်ယူမှု အရင်းအမြစ်များ
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Status](https://status.azure.com/)
+### ပြင်ပ သင်ယူမှု အရင်းအမြစ်များ  
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)  
+- [Azure Status](https://status.azure.com/)  
 
 ---
 
-## 🔧 အမြန် ပြဿနာဖြေရှင်း လမ်းညွှန်
+## 🔧 အမြန် ပြဿနာဖြေရှင်းလမ်းညွှန်
 
-**အစပြုသူများ ကြုံတွေ့ရသော ပုံမှန်ပြဿနာများနှင့် ချက်ချင်း ဖြေရှင်းနည်းများ:**
+**အစပြုသူများ ကြုံတွေ့ရသော ပုံမှန်ပြဿနာများနှင့် ချက်ချင်း ဖြေရှင်းနည်းများ။**
 
 ### ❌ "azd: command not found"
 
 ```bash
-# ပထမဦးစွာ AZD ကို 설치 လုပ်ပါ
+# AZD ကို ပထမဦးစွာ ထည့်သွင်းပါ
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -546,10 +546,10 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# 설치 확인ပါ
+# ထည့်သွင်းမှုကို စစ်ဆေးပါ
 azd version
 ```
-
+  
 ### ❌ "No subscription found" or "Subscription not set"
 
 ```bash
@@ -565,7 +565,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # အတည်ပြုပါ
 az account show
 ```
-
+  
 ### ❌ "InsufficientQuota" or "Quota exceeded"
 
 ```bash
@@ -579,7 +579,7 @@ azd up
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
-
+  
 ### ❌ "azd up" fails halfway through
 
 ```bash
@@ -594,7 +594,7 @@ azd provision
 azd show
 azd logs
 ```
-
+  
 ### ❌ "Authentication failed" or "Token expired"
 
 ```bash
@@ -605,10 +605,10 @@ az login
 azd auth logout
 azd auth login
 
-# အတည်ပြုမှုကိုစစ်ဆေးပါ
+# အတည်ပြုမှုကို စစ်ဆေးပါ
 az account show
 ```
-
+  
 ### ❌ "Resource already exists" or naming conflicts
 
 ```bash
@@ -619,13 +619,13 @@ azd down --force --purge
 azd env new dev-v2
 azd up
 ```
-
+  
 ### ❌ Template deployment taking too long
 
-**ပုံမှန် စောင့်ဆိုင်းချိန်များ:**
-- ရိုးရှင်းသော ဝက်ဘ်အက်ပ်: ၅-၁၀ မိနစ်
-- ဒေတာဘေ့စ်ပါသော အက်ပ်: ၁၀-၁၅ မိနစ်
-- AI အက်ပ်များ: ၁၅-၂၅ မိနစ် (OpenAI provisioning သည် နှေးကွေးသည်)
+**ပုံမှန် စောင့်ဆိုင်းချိန်များ**  
+- ရိုးရှင်းသော web app: ၅-၁၀ မိနစ်  
+- ဒေတာဘေ့စ်ပါသော app: ၁၀-၁၅ မိနစ်  
+- AI application များ: ၁၅-၂၅ မိနစ် (OpenAI provisioning နှေးကွေးသည်)  
 
 ```bash
 # တိုးတက်မှုကို စစ်ဆေးပါ
@@ -635,7 +635,7 @@ azd show
 azd monitor
 # မအောင်မြင်သော တပ်ဆင်မှုများကို ရှာဖွေပါ
 ```
-
+  
 ### ❌ "Permission denied" or "Forbidden"
 
 ```bash
@@ -647,7 +647,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Contributor (အရင်းအမြစ်များအတွက်)
 # - User Access Administrator (အခန်းကဏ္ဍ ခန့်အပ်မှုများအတွက်)
 ```
-
+  
 ### ❌ Can't find deployed application URL
 
 ```bash
@@ -661,19 +661,19 @@ azd monitor
 azd env get-values
 # *_URL အမျိုးအစား များကို ရှာဖွေပါ
 ```
-
+  
 ### 📚 ပြည့်စုံသော ပြဿနာဖြေရှင်း အရင်းအမြစ်များ
 
-- **ပုံမှန်ပြဿနာလမ်းညွှန်:** [အသေးစိတ် ဖြေရှင်းချက်များ](docs/troubleshooting/common-issues.md)
-- **AI သက်ဆိုင်ရာ ပြဿနာများ:** [AI ပြဿနာဖြေရှင်း](docs/troubleshooting/ai-troubleshooting.md)
-- **ဒစ်ဘတ်ဂ် လမ်းညွှန်:** [အဆင့်ဆင့် ဒစ်ဘတ်ဂ်](docs/troubleshooting/debugging.md)
-- **အကူအညီရယူရန်:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **ပုံမှန်ပြဿနာလမ်းညွှန်:** [အသေးစိတ် ဖြေရှင်းချက်များ](docs/troubleshooting/common-issues.md)  
+- **AI သက်ဆိုင်ရာ ပြဿနာများ:** [AI ပြဿနာဖြေရှင်း](docs/troubleshooting/ai-troubleshooting.md)  
+- **Debugging လမ်းညွှန်:** [အဆင့်ဆင့် Debugging](docs/troubleshooting/debugging.md)  
+- **အကူအညီရယူရန်:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
 
 ---
 
-## 🔧 အမြန် ပြဿနာဖြေရှင်း လမ်းညွှန်
+## 🔧 အမြန် ပြဿနာဖြေရှင်းလမ်းညွှန်
 
-**အစပြုသူများ ကြုံတွေ့ရသော ပုံမှန်ပြဿနာများနှင့် ချက်ချင်း ဖြေရှင်းနည်းများ:**
+**အစပြုသူများ ကြုံတွေ့ရသော ပုံမှန်ပြဿနာများနှင့် ချက်ချင်း ဖြေရှင်းနည်းများ။**
 
 <details>
 <summary><strong>❌ "azd: command not found"</strong></summary>
@@ -777,16 +777,16 @@ azd up
 <details>
 <summary><strong>❌ Template deployment taking too long</strong></summary>
 
-**ပုံမှန် စောင့်ဆိုင်းချိန်များ:**
-- ရိုးရှင်းသော ဝက်ဘ်အက်ပ်: ၅-၁၀ မိနစ်
-- ဒေတာဘေ့စ်ပါသော အက်ပ်: ၁၀-၁၅ မိနစ်
-- AI အက်ပ်များ: ၁၅-၂၅ မိနစ် (OpenAI provisioning သည် နှေးကွေးသည်)
+**ပုံမှန် စောင့်ဆိုင်းချိန်များ**  
+- ရိုးရှင်းသော web app: ၅-၁၀ မိနစ်  
+- ဒေတာဘေ့စ်ပါသော app: ၁၀-၁၅ မိနစ်  
+- AI application များ: ၁၅-၂၅ မိနစ် (OpenAI provisioning နှေးကွေးသည်)  
 
 ```bash
 # တိုးတက်မှုကို စစ်ဆေးပါ
 azd show
 
-# ၃၀ မိနစ်ထက်ပိုကြာပြီး အတားအဆီးရှိပါက Azure Portal ကို စစ်ဆေးပါ
+# ၃၀ မိနစ်ထက်ပိုကြာပြီး ရပ်တန့်နေပါက Azure Portal ကို စစ်ဆေးပါ
 azd monitor
 # မအောင်မြင်သော တပ်ဆင်မှုများကို ရှာဖွေပါ
 ```
@@ -824,102 +824,108 @@ azd env get-values
 
 ### 📚 ပြည့်စုံသော ပြဿနာဖြေရှင်း အရင်းအမြစ်များ
 
-- **ပုံမှန်ပြဿနာလမ်းညွှန်:** [အသေးစိတ် ဖြေရှင်းချက်များ](docs/troubleshooting/common-issues.md)
-- **AI သက်ဆိုင်ရာ ပြဿနာများ:** [AI ပြဿနာဖြေရှင်း](docs/troubleshooting/ai-troubleshooting.md)
-- **ဒစ်ဘတ်ဂ် လမ်းညွှန်:** [အဆင့်ဆင့် ဒစ်ဘတ်ဂ်](docs/troubleshooting/debugging.md)
-- **အကူအညီရယူရန်:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **ပုံမှန်ပြဿနာလမ်းညွှန်:** [အသေးစိတ် ဖြေရှင်းချက်များ](docs/troubleshooting/common-issues.md)  
+- **AI သက်ဆိုင်ရာ ပြဿနာများ:** [AI ပြဿနာဖြေရှင်း](docs/troubleshooting/ai-troubleshooting.md)  
+- **Debugging လမ်းညွှန်:** [အဆင့်ဆင့် Debugging](docs/troubleshooting/debugging.md)  
+- **အကူအညီရယူရန်:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
 
 ---
 
-## 🎓 သင်တန်းပြီးမြောက်ခြင်းနှင့် အသိအမှတ်ပြုလက်မှတ်
+## 🎓 သင်တန်းပြီးမြောက်ခြင်းနှင့် လက်မှတ်ရရှိခြင်း
 
-### တိုးတက်မှု ခြေရာခံခြင်း
-သင်ယူမှု တစ်ခုချင်းစီကို အခန်းအလိုက် ခြေရာခံပါ:
+### တိုးတက်မှု ခြေရာခံခြင်း  
+သင်ယူမှု အခန်းတိုင်းအလိုက် တိုးတက်မှုကို ခြေရာခံပါ -  
 
-- [ ] **အခန်း ၁**: အခြေခံနှင့် အမြန်စတင်ခြင်း ✅
+- [ ] **အခန်း ၁**: အခြေခံနှင့် အမြန်စတင်ခြင်း ✅  
 - [ ] **အခန်း ၂**: AI-ပထမ ဦးဆုံး ဖွံ့ဖြိုးတိုးတက်မှု ✅  
-- [ ] **အခန်း ၃**: ဖွဲ့စည်းမှုနှင့် အတည်ပြုခြင်း ✅
-- [ ] **အခန်း ၄**: Infrastructure as Code နှင့် တပ်ဆင်ခြင်း ✅
-- [ ] **အခန်း ၅**: Multi-Agent AI ဖြေရှင်းချက်များ ✅
-- [ ] **အခန်း ၆**: တပ်ဆင်မှုမတိုင်မီ စစ်ဆေးခြင်းနှင့် စီမံကိန်း ✅
-- [ ] **အခန်း ၇**: ပြဿနာဖြေရှင်းခြင်းနှင့် ဒစ်ဘတ်ဂ် ✅
-- [ ] **အခန်း ၈**: ထုတ်လုပ်မှုနှင့် စီးပွားရေး ပုံစံများ ✅
+- [ ] **အခန်း ၃**: ဖွဲ့စည်းမှုနှင့် အတည်ပြုခြင်း ✅  
+- [ ] **အခန်း ၄**: Infrastructure as Code နှင့် တပ်ဆင်ခြင်း ✅  
+- [ ] **အခန်း ၅**: Multi-Agent AI ဖြေရှင်းချက်များ ✅  
+- [ ] **အခန်း ၆**: တပ်ဆင်မှုမတိုင်မီ စစ်ဆေးခြင်းနှင့် စီမံကိန်းရေးဆွဲခြင်း ✅  
+- [ ] **အခန်း ၇**: ပြဿနာဖြေရှင်းခြင်းနှင့် Debugging ✅  
+- [ ] **အခန်း ၈**: ထုတ်လုပ်မှုနှင့် စီးပွားရေးပုံစံများ ✅  
 
-### သင်ယူမှု အတည်ပြုခြင်း
-အခန်းတစ်ခုချင်းပြီးဆုံးပြီးနောက် သင်၏ အသိပညာကို အတည်ပြုပါ:
-1. **လက်တွေ့ လေ့ကျင့်မှု**: အခန်း၏ လက်တွေ့ တပ်ဆင်မှု ပြီးမြောက်ပါ
-2. **အသိစစ်ဆေးမှု**: အခန်း၏ FAQ အပိုင်းကို ပြန်လည်သုံးသပ်ပါ
-3. **အသိုင်းအဝိုင်း ဆွေးနွေးမှု**: Azure Discord တွင် သင်၏ အတွေ့အကြုံ မျှဝေပါ
-4. **နောက်တစ်ခန်း**: နောက်တစ်ဆင့် အဆင့်မြှင့်သို့ ရွှေ့ပါ
+### သင်ယူမှု အတည်ပြုခြင်း  
+အခန်းတိုင်းပြီးဆုံးပြီးနောက် သင်၏ အသိပညာကို အတည်ပြုပါ -  
+1. **လက်တွေ့ လေ့ကျင့်ခန်း**: အခန်း၏ လက်တွေ့ တပ်ဆင်မှု ပြီးမြောက်စေပါ  
+2. **အသိစစ်ဆေးမှု**: အခန်း၏ FAQ အပိုင်းကို ပြန်လည်သုံးသပ်ပါ  
+3. **အသိုင်းအဝိုင်း ဆွေးနွေးမှု**: Azure Discord တွင် သင်၏ အတွေ့အကြုံ မျှဝေပါ  
+4. **နောက်တစ်ခန်း**: နောက်တစ်ဆင့် အဆင့်မြှင့်သို့ ရွှေ့ပါ  
 
-### သင်တန်းပြီးမြောက်ခြင်း အကျိုးကျေးဇူးများ
-အခန်းအားလုံး ပြီးမြောက်ပါက သင်မှာ:
-- **ထုတ်လုပ်မှု အတွေ့အကြုံ**: Azure တွင် အမှန်တကယ် AI အက်ပ်များ တပ်ဆင်ပြီး
+### သင်တန်းပြီးမြောက်ခြင်း အကျိုးကျေးဇူးများ  
+အခန်းအားလုံးပြီးမြောက်ပါက -  
+- **ထုတ်လုပ်မှု အတွေ့အကြုံ**: Azure တွင် အမှန်တကယ် AI application များ တပ်ဆင်ထားခြင်း  
 - **ပရော်ဖက်ရှင်နယ် ကျွမ်းကျင်မှုများ**: စီးပွားရေးအဆင့် တပ်ဆင်မှု စွမ်းရည်များ  
-- **အသိုင်းအဝိုင်း အသိအမှတ်ပြုခြင်း**: Azure developer အသိုင်းအဝိုင်း၏ တက်ကြွသော အဖွဲ့ဝင်
-- **အလုပ်အကိုင် တိုးတက်မှု**: လိုအပ်သော AZD နှင့် AI တပ်ဆင်မှု ကျွမ်းကျင်မှုများ
+- **အသိုင်းအဝိုင်း အသိအမှတ်ပြုခြင်း**: Azure developer အသိုင်းအဝိုင်း၏ တက်ကြွသော အဖွဲ့ဝင်  
+- **အလုပ်အကိုင် တိုးတက်မှု**: လိုအပ်သော AZD နှင့် AI တပ်ဆင်မှု ကျွမ်းကျင်မှုများ  
 
 ---
 
 ## 🤝 အသိုင်းအဝိုင်းနှင့် အထောက်အပံ့
 
-### အကူအညီနှင့် ထောက်ခံမှု ရယူရန်
-- **နည်းပညာဆိုင်ရာ ပြဿနာများ**: [အမှားများ တင်ပြခြင်းနှင့် လိုအပ်ချက်များ တောင်းဆိုခြင်း](https://github.com/microsoft/azd-for-beginners/issues)
-- **သင်ယူမှု မေးခွန်းများ**: [Microsoft Azure Discord အသိုင်းအဝိုင်း](https://discord.gg/microsoft-azure) နှင့် [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **AI သက်ဆိုင်ရာ အကူအညီ**: [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG) တွင် ပါဝင်ဆွေးနွေးပါ
-- **စာတမ်းများ**: [တရားဝင် Azure Developer CLI စာတမ်းများ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### အကူအညီနှင့် ထောက်ခံမှု ရယူရန်  
+- **နည်းပညာဆိုင်ရာ ပြဿနာများ**: [အမှားများ တင်ပြခြင်းနှင့် လိုအပ်ချက်များ တောင်းဆိုခြင်း](https://github.com/microsoft/azd-for-beginners/issues)  
+- **သင်ယူမှု မေးခွန်းများ**: [Microsoft Azure Discord အသိုင်းအဝိုင်း](https://discord.gg/microsoft-azure) နှင့် [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
+- **AI သက်ဆိုင်ရာ အကူအညီ**: [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG) တွင် ပါဝင်ဆွေးနွေးပါ  
+- **စာတမ်းများ**: [တရားဝင် Azure Developer CLI စာတမ်းများ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
 ### Microsoft Foundry Discord မှ အသိုင်းအဝိုင်း အမြင်များ
 
-**#Azure ချန်နယ်မှ မကြာသေးမီ စစ်တမ်းရလဒ်များ:**
-- **၄၅%** အထိ ဖွံ့ဖြိုးသူများသည် AI အလုပ်များအတွက် AZD ကို အသုံးပြုလိုကြသည်
-- **အကြီးဆုံး စိန်ခေါ်မှုများ**: Multi-service တပ်ဆင်မှုများ၊ လက်မှတ်စီမံခန့်ခွဲမှု၊ ထုတ်လုပ်မှုအဆင့် ပြင်ဆင်မှု  
-- **အများဆုံး တောင်းဆိုသောအရာများ**: AI သက်ဆိုင်ရာ template များ၊ ပြဿနာဖြေရှင်း လမ်းညွှန်များ၊ အကောင်းဆုံး လေ့လာမှုများ
+**#Azure ချန်နယ်မှ မကြာသေးမီ စစ်တမ်းရလဒ်များ**  
+- **၄၅%** အထက်ရှိသော developer များသည် AI အလုပ်များအတွက် AZD ကို အသုံးပြုလိုကြသည်  
+- **အကြီးဆုံး စိန်ခေါ်မှုများ**: Multi-service တပ်ဆင်မှုများ၊ အတည်ပြုချက် စီမံခန့်ခွဲမှု၊ ထုတ်လုပ်မှုအဆင့် ပြင်ဆင်မှု  
+- **အများဆုံး တောင်းဆိုထားသောအရာများ**: AI သက်ဆိုင်ရာ template များ၊ ပြဿနာဖြေရှင်း လမ်းညွှန်များ၊ အကောင်းဆုံး လေ့လာမှုနည်းလမ်းများ  
 
-**ကျွန်ုပ်တို့၏ အသိုင်းအဝိုင်းတွင် ပါဝင်ရန်:**
-- သင့် AZD + AI အတွေ့အကြုံများ မျှဝေပြီး အကူအညီ ရယူပါ
-- AI template အသစ်များ၏ မျှော်မှန်းချက်များကို ကြိုတင် ဝင်ရောက်ကြည့်ရှုပါ
-- AI တပ်ဆင်မှု အကောင်းဆုံး လေ့လာမှုများတွင် ပါဝင်ဆောင်ရွက်ပါ
-- အနာဂတ် AI + AZD လုပ်ဆောင်ချက် ဖွံ့ဖြိုးတိုးတက်မှုကို သက်ရောက်မှု ရှိစေပါ
+**ကျွန်ုပ်တို့၏ အသိုင်းအဝိုင်းတွင် ပါဝင်ရန် -**  
+- သင့် AZD + AI အတွေ့အကြုံများ မျှဝေပြီး အကူအညီ ရယူပါ  
+- AI template အသစ်များ၏ မျှော်မှန်းချက်များကို ကြိုတင်ကြည့်ရှုပါ  
+- AI တပ်ဆင်မှု အကောင်းဆုံး လေ့လာမှုနည်းလမ်းများတွင် ပါဝင်ဆောင်ရွက်ပါ  
+- အနာဂတ် AI + AZD လုပ်ဆောင်ချက် ဖွံ့ဖြိုးတိုးတက်မှုကို သက်ရောက်မှု ရှိစေပါ  
 
-### သင်တန်းတွင် ပါဝင်ဆောင်ရွက်ခြင်း
-ကျွန်ုပ်တို့သည် ပါဝင်ဆောင်ရွက်မှုများကို ကြိုဆိုပါသည်! အသေးစိတ်အတွက် ကျေးဇူးပြု၍ [Contributing Guide](CONTRIBUTING.md) ကို ဖတ်ပါ:
-- **အကြောင်းအရာ တိုးတက်မှုများ**: ရှိပြီးသား အခန်းများနှင့် ဥပမာများ တိုးတက်အောင် ပြုလုပ်ခြင်း
+### သင်တန်းတွင် ပါဝင်ဆောင်ရွက်ခြင်း  
+ကျွန်ုပ်တို့သည် ပါဝင်ဆောင်ရွက်မှုများကို ကြိုဆိုပါသည်! အသေးစိတ်အတွက် ကျေးဇူးပြု၍ [Contributing Guide](CONTRIBUTING.md) ကို ဖတ်ပါ -  
+- **အကြောင်းအရာ တိုးတက်မှုများ**: ရှိပြီးသား အခန်းများနှင့် ဥပမာများ တိုးတက်အောင် ပြုလုပ်ခြင်း  
 - **ဥပမာအသစ်များ**: အမှန်တကယ် ဖြစ်ပေါ်နေသော အခြေအနေများနှင့် template များ ထည့်သွင်းခြင်း  
-- **ဘာသာပြန်ခြင်း**: ဘာသာစကားစုံ ထောက်ပံ့မှု ထိန်းသိမ်းရန် အကူအညီပေးခြင်း
-- **အမှားအစီရင်ခံခြင်း**: တိကျမှုနှင့် ရှင်းလင်းမှု တိုးတက်အောင် ပြုလုပ်ခြင်း
-- **အသိုင်းအဝိုင်း စံနှုန်းများ**: ကျွန်ုပ်တို့၏ ပေါင်းသင်းဆက်ဆံမှု စည်းကမ်းများကို လိုက်နာခြင်း
+- **ဘာသာပြန်ခြင်း**: ဘာသာစကားစုံ ထောက်ပံ့မှု ထိန်းသိမ်းရန် အကူအညီပေးခြင်း  
+- **အမှားအစီရင်ခံခြင်း**: တိကျမှုနှင့် ရှင်းလင်းမှု တိုးတက်အောင် ပြုလုပ်ခြင်း  
+- **အသိုင်းအဝိုင်း စံနှုန်းများ**: ကျွန်ုပ်တို့၏ ပေါင်းစည်းမှုရှိသော အသိုင်းအဝိုင်း လမ်းညွှန်ချက်များကို လိုက်နာခြင်း  
 
 ---
 
 ## 📄 သင်တန်း အချက်အလက်
 
-### လိုင်စင်
-ဤပရောဂျက်သည် MIT License အောက်တွင် လိုင်စင်ပြုထားသည် - အသေးစိတ်အတွက် [LICENSE](../../LICENSE) ဖိုင်ကို ကြည့်ပါ။
+### လိုင်စင်  
+ဤပရောဂျက်သည် MIT License အောက်တွင် လိုင်စင်ပြုထားသည် - အသေးစိတ်အတွက် [LICENSE](../../LICENSE) ဖိုင်ကို ကြည့်ပါ။  
 
 ### Microsoft သင်ယူမှု အရင်းအမြစ်များနှင့် ဆက်စပ်မှု
 
-ကျွန်ုပ်တို့၏ အဖွဲ့သည် အခြား ကျယ်ပြန့်သော သင်ယူမှု သင်တန်းများကို ထုတ်လုပ်သည်။
+ကျွန်ုပ်တို့၏ အဖွဲ့သည် အခြား ကျယ်ပြန့်သော သင်ယူမှု သင်တန်းများကို ထုတ်လုပ်သည် -  
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
-### Azure / Edge / MCP / Agents
-[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+### LangChain  
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)  
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)  
+
+---
+
+### Azure / Edge / MCP / Agents  
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)  
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
 
 ---
  
-### Generative AI Series
-[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+### Generative AI Series  
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)  
 
 ---
  
-### Core Learning
-[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+### Core Learning  
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
 [![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
@@ -939,11 +945,11 @@ azd env get-values
 
 ## 🗺️ သင်တန်းလမ်းညွှန်
 
-**🚀 သင်ယူရန် အသင့်ဖြစ်ပြီလား?**
+**🚀 သင်ယူရန် ပြင်ဆင်ပြီးပြီလား?**
 
 **စတင်သူများ**: [အခန်း ၁: အခြေခံနှင့် အမြန်စတင်ခြင်း](../..) မှ စတင်ပါ  
 **AI ဖန်တီးသူများ**: [အခန်း ၂: AI-ပထမဆုံး ဖန်တီးမှု](../..) သို့ ခုန်ပါ  
-**အတွေ့အကြုံရှိသူများ**: [အခန်း ၃: ဖွဲ့စည်းမှုနှင့် အတည်ပြုခြင်း](../..) မှ စတင်ပါ
+**အတွေ့အကြုံရှိ ဖန်တီးသူများ**: [အခန်း ၃: ဖွဲ့စည်းမှုနှင့် အတည်ပြုခြင်း](../..) မှ စတင်ပါ
 
 **နောက်တစ်ဆင့်များ**: [အခန်း ၁ - AZD အခြေခံများ စတင်ပါ](docs/getting-started/azd-basics.md) →
 
@@ -951,5 +957,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **အကြောင်းကြားချက်**  
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် မေတ္တာရပ်ခံအပ်ပါသည်။ မူရင်းစာတမ်းကို မိမိဘာသာစကားဖြင့်သာ တရားဝင်အချက်အလက်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်မှ ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုရာမှ ဖြစ်ပေါ်လာနိုင်သည့် နားလည်မှုမှားယွင်းမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားသော်လည်း အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် မေတ္တာရပ်ခံအပ်ပါသည်။ မူရင်းစာတမ်းကို မိမိဘာသာစကားဖြင့်သာ တရားဝင်အရင်းအမြစ်အဖြစ် ယူဆသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ပညာရှင်များ၏ ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာနိုင်သည့် နားလည်မှုမှားယွင်းမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
