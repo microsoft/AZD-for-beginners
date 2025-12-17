@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "6a804be263d09a0fd6f36d6ab251707a",
-  "translation_date": "2025-11-25T09:25:01+00:00",
+  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
+  "translation_date": "2025-12-15T20:41:50+00:00",
   "source_file": "README.md",
   "language_code": "en"
 }
@@ -261,6 +261,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### Learning Resources
 - **🤖 Featured Project**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
+
 - **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
 - **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - Patterns
 
@@ -510,30 +511,30 @@ Azure Developer CLI (azd) is a developer-centric command-line interface that acc
 ## 📚 Learning Resources & References
 
 ### Quick References
-- [**Command Cheat Sheet**](resources/cheat-sheet.md) - Key azd commands organized by chapter  
+- [**Command Cheat Sheet**](resources/cheat-sheet.md) - Essential azd commands organized by chapter
 - [**Glossary**](resources/glossary.md) - Azure and azd terminology  
-- [**FAQ**](resources/faq.md) - Frequently asked questions organized by learning chapter  
-- [**Study Guide**](resources/study-guide.md) - Comprehensive practice exercises  
+- [**FAQ**](resources/faq.md) - Common questions organized by learning chapter
+- [**Study Guide**](resources/study-guide.md) - Comprehensive practice exercises
 
-### Hands-On Workshops  
-- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-deployable (2-3 hours)  
-- [**Interactive Workshop Guide**](workshop/README.md) - Browser-based workshop with MkDocs and DevContainer Environment  
-- [**Structured Learning Path**](../../workshop/docs/instructions) - 7-step guided exercises (Discovery → Deployment → Customization)  
-- [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials with GitHub Codespaces integration  
+### Hands-On Workshops
+- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-deployable (2-3 hours)
+- [**Interactive Workshop Guide**](workshop/README.md) - Browser-based workshop with MkDocs and DevContainer Environment
+- [**Structured Learning Path**](../../workshop/docs/instructions) -7-step guided exercises (Discovery → Deployment → Customization)
+- [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials with GitHub Codespaces integration
 
-### External Learning Resources  
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)  
-- [Azure Status](https://status.azure.com/)  
+### External Learning Resources
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
+- [Azure Status](https://status.azure.com/)
 
 ---
 
-## 🔧 Quick Troubleshooting Guide  
+## 🔧 Quick Troubleshooting Guide
 
-**Common issues beginners face and immediate solutions:**  
+**Common issues beginners face and immediate solutions:**
 
-### ❌ "azd: command not found"  
+### ❌ "azd: command not found"
 
 ```bash
 # Install AZD first
@@ -549,8 +550,8 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 # Verify installation
 azd version
 ```
-  
-### ❌ "No subscription found" or "Subscription not set"  
+
+### ❌ "No subscription found" or "Subscription not set"
 
 ```bash
 # List available subscriptions
@@ -565,8 +566,8 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # Verify
 az account show
 ```
-  
-### ❌ "InsufficientQuota" or "Quota exceeded"  
+
+### ❌ "InsufficientQuota" or "Quota exceeded"
 
 ```bash
 # Try different Azure region
@@ -579,8 +580,8 @@ azd up
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
-  
-### ❌ "azd up" fails halfway through  
+
+### ❌ "azd up" fails halfway through
 
 ```bash
 # Option 1: Clean and retry
@@ -594,8 +595,8 @@ azd provision
 azd show
 azd logs
 ```
-  
-### ❌ "Authentication failed" or "Token expired"  
+
+### ❌ "Authentication failed" or "Token expired"
 
 ```bash
 # Re-authenticate
@@ -608,8 +609,8 @@ azd auth login
 # Verify authentication
 az account show
 ```
-  
-### ❌ "Resource already exists" or naming conflicts  
+
+### ❌ "Resource already exists" or naming conflicts
 
 ```bash
 # AZD generates unique names, but if conflict:
@@ -619,13 +620,13 @@ azd down --force --purge
 azd env new dev-v2
 azd up
 ```
-  
-### ❌ Template deployment taking too long  
 
-**Expected wait times:**  
-- Simple web app: 5-10 minutes  
-- App with database: 10-15 minutes  
-- AI applications: 15-25 minutes (OpenAI provisioning is slow)  
+### ❌ Template deployment taking too long
+
+**Normal wait times:**
+- Simple web app: 5-10 minutes
+- App with database: 10-15 minutes
+- AI applications: 15-25 minutes (OpenAI provisioning is slow)
 
 ```bash
 # Check progress
@@ -635,8 +636,8 @@ azd show
 azd monitor
 # Look for failed deployments
 ```
-  
-### ❌ "Permission denied" or "Forbidden"  
+
+### ❌ "Permission denied" or "Forbidden"
 
 ```bash
 # Check your Azure role
@@ -647,8 +648,8 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Contributor (for resources)
 # - User Access Administrator (for role assignments)
 ```
-  
-### ❌ Can't find deployed application URL  
+
+### ❌ Can't find deployed application URL
 
 ```bash
 # Show all service endpoints
@@ -661,22 +662,22 @@ azd monitor
 azd env get-values
 # Look for *_URL variables
 ```
-  
-### 📚 Full Troubleshooting Resources  
 
-- **Common Issues Guide:** [Detailed Solutions](docs/troubleshooting/common-issues.md)  
-- **AI-Specific Issues:** [AI Troubleshooting](docs/troubleshooting/ai-troubleshooting.md)  
-- **Debugging Guide:** [Step-by-step Debugging](docs/troubleshooting/debugging.md)  
-- **Get Help:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+### 📚 Full Troubleshooting Resources
+
+- **Common Issues Guide:** [Detailed Solutions](docs/troubleshooting/common-issues.md)
+- **AI-Specific Issues:** [AI Troubleshooting](docs/troubleshooting/ai-troubleshooting.md)
+- **Debugging Guide:** [Step-by-step Debugging](docs/troubleshooting/debugging.md)
+- **Get Help:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🔧 Quick Troubleshooting Guide  
+## 🔧 Quick Troubleshooting Guide
 
-**Common issues beginners face and immediate solutions:**  
+**Common issues beginners face and immediate solutions:**
 
-<details>  
-<summary><strong>❌ "azd: command not found"</strong></summary>  
+<details>
+<summary><strong>❌ "azd: command not found"</strong></summary>
 
 ```bash
 # Install AZD first
@@ -692,11 +693,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 # Verify installation
 azd version
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>  
+<details>
+<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
 
 ```bash
 # List available subscriptions
@@ -711,11 +711,10 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # Verify
 az account show
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>  
+<details>
+<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
 ```bash
 # Try different Azure region
@@ -728,11 +727,10 @@ azd up
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ "azd up" fails halfway through"</strong></summary>  
+<details>
+<summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
 # Option 1: Clean and retry
@@ -746,11 +744,10 @@ azd provision
 azd show
 azd logs
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>  
+<details>
+<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
 
 ```bash
 # Re-authenticate
@@ -763,11 +760,10 @@ azd auth login
 # Verify authentication
 az account show
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ "Resource already exists" or naming conflicts"</strong></summary>  
+<details>
+<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
 # AZD generates unique names, but if conflict:
@@ -777,16 +773,15 @@ azd down --force --purge
 azd env new dev-v2
 azd up
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ Template deployment taking too long"</strong></summary>  
+<details>
+<summary><strong>❌ Template deployment taking too long</strong></summary>
 
-**Expected wait times:**  
-- Simple web app: 5-10 minutes  
-- App with database: 10-15 minutes  
-- AI applications: 15-25 minutes (OpenAI provisioning is slow)  
+**Normal wait times:**
+- Simple web app: 5-10 minutes
+- App with database: 10-15 minutes
+- AI applications: 15-25 minutes (OpenAI provisioning is slow)
 
 ```bash
 # Check progress
@@ -796,11 +791,10 @@ azd show
 azd monitor
 # Look for failed deployments
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>  
+<details>
+<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
 
 ```bash
 # Check your Azure role
@@ -811,11 +805,10 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Contributor (for resources)
 # - User Access Administrator (for role assignments)
 ```
-  
-</details>  
+</details>
 
-<details>  
-<summary><strong>❌ Can't find deployed application URL"</strong></summary>  
+<details>
+<summary><strong>❌ Can't find deployed application URL</strong></summary>
 
 ```bash
 # Show all service endpoints
@@ -828,125 +821,124 @@ azd monitor
 azd env get-values
 # Look for *_URL variables
 ```
-  
-</details>  
+</details>
 
-### 📚 Full Troubleshooting Resources  
+### 📚 Full Troubleshooting Resources
 
-- **Common Issues Guide:** [Detailed Solutions](docs/troubleshooting/common-issues.md)  
-- **AI-Specific Issues:** [AI Troubleshooting](docs/troubleshooting/ai-troubleshooting.md)  
-- **Debugging Guide:** [Step-by-step Debugging](docs/troubleshooting/debugging.md)  
-- **Get Help:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+- **Common Issues Guide:** [Detailed Solutions](docs/troubleshooting/common-issues.md)
+- **AI-Specific Issues:** [AI Troubleshooting](docs/troubleshooting/ai-troubleshooting.md)
+- **Debugging Guide:** [Step-by-step Debugging](docs/troubleshooting/debugging.md)
+- **Get Help:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🎓 Course Completion & Certification  
+## 🎓 Course Completion & Certification
 
-### Progress Tracking  
-Track your learning progress through each chapter:  
+### Progress Tracking
+Track your learning progress through each chapter:
 
-- [ ] **Chapter 1**: Foundation & Quick Start ✅  
+- [ ] **Chapter 1**: Foundation & Quick Start ✅
 - [ ] **Chapter 2**: AI-First Development ✅  
-- [ ] **Chapter 3**: Configuration & Authentication ✅  
-- [ ] **Chapter 4**: Infrastructure as Code & Deployment ✅  
-- [ ] **Chapter 5**: Multi-Agent AI Solutions ✅  
-- [ ] **Chapter 6**: Pre-Deployment Validation & Planning ✅  
-- [ ] **Chapter 7**: Troubleshooting & Debugging ✅  
-- [ ] **Chapter 8**: Production & Enterprise Patterns ✅  
+- [ ] **Chapter 3**: Configuration & Authentication ✅
+- [ ] **Chapter 4**: Infrastructure as Code & Deployment ✅
+- [ ] **Chapter 5**: Multi-Agent AI Solutions ✅
+- [ ] **Chapter 6**: Pre-Deployment Validation & Planning ✅
+- [ ] **Chapter 7**: Troubleshooting & Debugging ✅
+- [ ] **Chapter 8**: Production & Enterprise Patterns ✅
 
-### Learning Verification  
-After completing each chapter, verify your knowledge by:  
-1. **Practical Exercise**: Complete the chapter's hands-on deployment  
-2. **Knowledge Check**: Review the FAQ section for your chapter  
-3. **Community Discussion**: Share your experience in Azure Discord  
-4. **Next Chapter**: Move to the next complexity level  
+### Learning Verification
+After completing each chapter, verify your knowledge by:
+1. **Practical Exercise**: Complete the chapter's hands-on deployment
+2. **Knowledge Check**: Review the FAQ section for your chapter
+3. **Community Discussion**: Share your experience in Azure Discord
+4. **Next Chapter**: Move to the next complexity level
 
-### Course Completion Benefits  
-Upon completing all chapters, you will have:  
-- **Production Experience**: Deployed real AI applications to Azure  
+### Course Completion Benefits
+Upon completing all chapters, you will have:
+- **Production Experience**: Deployed real AI applications to Azure
 - **Professional Skills**: Enterprise-ready deployment capabilities  
-- **Community Recognition**: Active member of Azure developer community  
-- **Career Advancement**: In-demand AZD and AI deployment expertise  
+- **Community Recognition**: Active member of Azure developer community
+- **Career Advancement**: In-demand AZD and AI deployment expertise
 
 ---
 
-## 🤝 Community & Support  
+## 🤝 Community & Support
 
-### Get Help & Support  
-- **Technical Issues**: [Report bugs and request features](https://github.com/microsoft/azd-for-beginners/issues)  
-- **Learning Questions**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure) and [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **AI-Specific Help**: Join the [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **Documentation**: [Official Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+### Get Help & Support
+- **Technical Issues**: [Report bugs and request features](https://github.com/microsoft/azd-for-beginners/issues)
+- **Learning Questions**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure) and [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI-Specific Help**: Join the [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Documentation**: [Official Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Community Insights from Microsoft Foundry Discord  
+### Community Insights from Microsoft Foundry Discord
 
-**Recent Poll Results from #Azure Channel:**  
-- **45%** of developers want to use AZD for AI workloads  
+**Recent Poll Results from #Azure Channel:**
+- **45%** of developers want to use AZD for AI workloads
 - **Top challenges**: Multi-service deployments, credential management, production readiness  
-- **Most requested**: AI-specific templates, troubleshooting guides, best practices  
+- **Most requested**: AI-specific templates, troubleshooting guides, best practices
 
-**Join our community to:**  
-- Share your AZD + AI experiences and get help  
-- Access early previews of new AI templates  
-- Contribute to AI deployment best practices  
-- Influence future AI + AZD feature development  
+**Join our community to:**
+- Share your AZD + AI experiences and get help
+- Access early previews of new AI templates
+- Contribute to AI deployment best practices
+- Influence future AI + AZD feature development
 
-### Contributing to the Course  
-We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on:  
-- **Content Improvements**: Enhance existing chapters and examples  
+### Contributing to the Course
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on:
+- **Content Improvements**: Enhance existing chapters and examples
 - **New Examples**: Add real-world scenarios and templates  
-- **Translation**: Help maintain multi-language support  
-- **Bug Reports**: Improve accuracy and clarity  
-- **Community Standards**: Follow our inclusive community guidelines  
+- **Translation**: Help maintain multi-language support
+- **Bug Reports**: Improve accuracy and clarity
+- **Community Standards**: Follow our inclusive community guidelines
 
 ---
 
-## 📄 Course Information  
+## 📄 Course Information
 
-### License  
-This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details.  
+### License
+This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details.
 
-### Related Microsoft Learning Resources  
+### Related Microsoft Learning Resources
 
-Our team produces other comprehensive learning courses:  
+Our team produces other comprehensive learning courses:
 
-<!-- CO-OP TRANSLATOR OTHER COURSES START -->  
-### Azure / Edge / MCP / Agents  
-[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### Azure / Edge / MCP / Agents
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
----  
+---
+ 
+### Generative AI Series
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
-### Generative AI Series  
-[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)  
-
----  
-
-### Core Learning  
-[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)  
-[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)  
-[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)  
+---
+ 
+### Core Learning
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 [![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
-
-### Copilot Series  
-[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)  
-[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)  
-[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)  
+ 
+### Copilot Series
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
-## 🗺️ Course Navigation  
+## 🗺️ Course Navigation
 
 **🚀 Ready to Start Learning?**
 
@@ -954,11 +946,11 @@ Our team produces other comprehensive learning courses:
 **AI Developers**: Jump to [Chapter 2: AI-First Development](../..)  
 **Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](../..)
 
-**Next Steps**: [Begin Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →  
+**Next Steps**: [Begin Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
