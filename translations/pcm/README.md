@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-16T01:38:53+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T16:48:22+00:00",
   "source_file": "README.md",
   "language_code": "pcm"
 }
@@ -84,7 +84,7 @@ By completing this structured course, you will:
 # Quick installation check
 azd version
 
-# Make you deploy your first application
+# Make you deploy your first app
 azd init --template todo-nodejs-mongo
 azd up
 ```
@@ -93,13 +93,13 @@ azd up
 
 **✅ Success Validation:**
 ```bash
-# After you don finish Chapter 1, you go fit:
+# After you don finish Chapter 1, you go fit do:
 azd version              # Show di version wey dem don install
-azd init --template todo-nodejs-mongo  # Start di project
-azd up                  # Put am for Azure
-azd show                # Show di URL wey di app dey run
+azd init --template todo-nodejs-mongo  # E dey start di project
+azd up                  # E dey deploy go Azure
+azd show                # E dey show di URL wey di app dey run for
 # Di app go open for browser and e go work
-azd down --force --purge  # Clear all di resources dem
+azd down --force --purge  # E dey clean up resources
 ```
 
 **📊 Time Investment:** 30-45 minutes  
@@ -107,13 +107,13 @@ azd down --force --purge  # Clear all di resources dem
 
 **✅ Success Validation:**
 ```bash
-# After you don finish Chapter 1, you go fit:
+# After you don finish Chapter 1, you go fit do:
 azd version              # Show di version wey dem don install
-azd init --template todo-nodejs-mongo  # Start di project
-azd up                  # Put am for Azure
-azd show                # Show di URL wey di app dey run
+azd init --template todo-nodejs-mongo  # E dey start di project
+azd up                  # E dey deploy go Azure
+azd show                # E dey show di URL wey di app dey run
 # Di app go open for browser and e go work
-azd down --force --purge  # Clear all di resources
+azd down --force --purge  # E dey clean up resources
 ```
 
 **📊 Time Investment:** 30-45 minutes  
@@ -154,12 +154,12 @@ azd init --template agent-openai-python-prompty
 
 **✅ Success Validation:**
 ```bash
-# After Chapter 2, you for fit:
+# After Chapter 2, you go fit do:
 azd init --template azure-search-openai-demo
 azd up
 # Test di AI chat interface
 # Ask questions and get AI-powered responses wit sources
-# Verify say search integration dey work
+# Make sure say search integration dey work
 azd monitor  # Check say Application Insights dey show telemetry
 azd down --force --purge
 ```
@@ -192,7 +192,7 @@ azd down --force --purge
 
 **Cost Monitoring:**
 ```bash
-# Check how much e go cost for each month
+# Check how much e go cost every month
 azd provision --preview
 
 # Watch how much e really cost for Azure Portal
@@ -388,7 +388,7 @@ The workshop dey follow **Discovery → Deployment → Customization** methodolo
 #### 🚀 Getting Started with the Workshop
 ```bash
 # Option 1: GitHub Codespaces (Wetin dem recommend)
-# Click "Code" → "Create codespace on main" for di repository
+# Click "Code" → "Create codespace on main" for inside the repository
 
 # Option 2: Local Development
 git clone https://github.com/microsoft/azd-for-beginners.git
@@ -536,7 +536,7 @@ Azure Developer CLI (azd) na developer-centric command-line interface wey dey ac
 ### ❌ "azd: command not found"
 
 ```bash
-# Make you install AZD first
+# Install AZD first
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -546,7 +546,7 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Check say installation don correct
+# Make sure say e install well
 azd version
 ```
 
@@ -622,7 +622,7 @@ azd up
 
 ### ❌ Template deployment dey take too long
 
-**Normal wait time be like:**
+**Normal wait time dem be:**
 - Simple web app: 5-10 minutes
 - App wey get database: 10-15 minutes
 - AI applications: 15-25 minutes (OpenAI provisioning slow)
@@ -679,7 +679,7 @@ azd env get-values
 <summary><strong>❌ "azd: command not found"</strong></summary>
 
 ```bash
-# Make you install AZD first
+# Install AZD first
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -689,7 +689,7 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Check say installation don correct
+# Make sure say e install well
 azd version
 ```
 </details>
@@ -732,7 +732,7 @@ azd up
 <summary><strong>❌ "azd up" fail for middle</strong></summary>
 
 ```bash
-# Option 1: Comot di dirt den try again
+# Option 1: Clean am and try again
 azd down --force --purge
 azd up
 
@@ -777,7 +777,7 @@ azd up
 <details>
 <summary><strong>❌ Template deployment dey take too long</strong></summary>
 
-**Normal wait time be like:**
+**Normal wait time dem be:**
 - Simple web app: 5-10 minutes
 - App wey get database: 10-15 minutes
 - AI applications: 15-25 minutes (OpenAI provisioning slow)
@@ -810,7 +810,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 <summary><strong>❌ No fit find deployed application URL</strong></summary>
 
 ```bash
-# Show all service endpoints
+# Show all di service endpoints
 azd show
 
 # Or open Azure Portal
@@ -834,7 +834,7 @@ azd env get-values
 ## 🎓 Course Completion & Certification
 
 ### Progress Tracking
-Track your learning progress through each chapter:
+Track how your learning dey go for each chapter:
 
 - [ ] **Chapter 1**: Foundation & Quick Start ✅
 - [ ] **Chapter 2**: AI-First Development ✅  
@@ -847,7 +847,7 @@ Track your learning progress through each chapter:
 
 ### Learning Verification
 After you finish each chapter, check your knowledge by:
-1. **Practical Exercise**: Complete the chapter's hands-on deployment
+1. **Practical Exercise**: Complete the chapter hands-on deployment
 2. **Knowledge Check**: Review the FAQ section for your chapter
 3. **Community Discussion**: Share your experience for Azure Discord
 4. **Next Chapter**: Move go the next level of difficulty
@@ -888,7 +888,7 @@ We dey welcome contributions! Abeg read our [Contributing Guide](CONTRIBUTING.md
 - **New Examples**: Add real-world scenarios and templates  
 - **Translation**: Help maintain multi-language support
 - **Bug Reports**: Make am more correct and clear
-- **Community Standards**: Follow our inclusive community guidelines
+- **Community Standards**: Follow our inclusive community rules
 
 ---
 
@@ -902,6 +902,12 @@ This project get MIT License - see the [LICENSE](../../LICENSE) file for details
 Our team dey produce other complete learning courses:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
 ### Azure / Edge / MCP / Agents
 [![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -951,5 +957,5 @@ Our team dey produce other complete learning courses:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document na AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator) wey translate am. Even though we dey try make am correct, abeg sabi say automated translation fit get some mistakes or no too correct. The original document wey dem write for im own language na the correct one. If na serious matter, e better make person wey sabi do professional human translation do am. We no go responsible for any misunderstanding or wrong meaning wey fit come from this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translation fit get some mistakes or no too correct. Di original document wey e dey for im own language na di correct one. If na serious matter, e better make human professional translate am. We no go responsible for any misunderstanding or wrong meaning wey fit come from dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

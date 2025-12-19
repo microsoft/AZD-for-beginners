@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-15T21:43:01+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T12:34:08+00:00",
   "source_file": "README.md",
   "language_code": "tw"
 }
@@ -37,15 +37,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 課程概覽
 
-透過結構化章節掌握 Azure Developer CLI (azd)，設計為循序漸進學習。**特別聚焦於結合 Microsoft Foundry 的 AI 應用部署。**
+透過結構化章節掌握 Azure Developer CLI (azd)，設計為循序漸進的學習。**特別聚焦於結合 Microsoft Foundry 的 AI 應用部署。**
 
-### 為何本課程對現代開發者至關重要
+### 為什麼本課程對現代開發者至關重要
 
-根據 Microsoft Foundry Discord 社群洞察，**45% 的開發者希望使用 AZD 進行 AI 工作負載**，但面臨以下挑戰：
+根據 Microsoft Foundry Discord 社群的見解，**45% 的開發者希望使用 AZD 來處理 AI 工作負載**，但面臨以下挑戰：
 - 複雜的多服務 AI 架構
 - 生產環境 AI 部署最佳實踐  
 - Azure AI 服務整合與配置
-- AI 工作負載成本優化
+- AI 工作負載的成本優化
 - AI 特定部署問題的故障排除
 
 ### 學習目標
@@ -89,7 +89,7 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 章節成果**：成功使用 AZD 部署簡單的 Web 應用程式到 Azure
+**💡 章節成果**：成功使用 AZD 部署簡單的 Web 應用至 Azure
 
 **✅ 成功驗證：**
 ```bash
@@ -98,12 +98,12 @@ azd version              # 顯示已安裝的版本
 azd init --template todo-nodejs-mongo  # 初始化專案
 azd up                  # 部署到 Azure
 azd show                # 顯示正在運行的應用程式 URL
-# 應用程式在瀏覽器中開啟並正常運作
+# 應用程式在瀏覽器中開啟並運作
 azd down --force --purge  # 清理資源
 ```
 
 **📊 時間投入：** 30-45 分鐘  
-**📈 完成後技能：** 能獨立部署基本應用程式
+**📈 完成後技能：** 能獨立部署基本應用
 
 **✅ 成功驗證：**
 ```bash
@@ -111,13 +111,13 @@ azd down --force --purge  # 清理資源
 azd version              # 顯示已安裝的版本
 azd init --template todo-nodejs-mongo  # 初始化專案
 azd up                  # 部署到 Azure
-azd show                # 顯示正在執行的應用程式 URL
+azd show                # 顯示正在運行的應用程式 URL
 # 應用程式在瀏覽器中開啟並運作
 azd down --force --purge  # 清理資源
 ```
 
 **📊 時間投入：** 30-45 分鐘  
-**📈 完成後技能：** 能獨立部署基本應用程式
+**📈 完成後技能：** 能獨立部署基本應用
 
 ---
 
@@ -128,7 +128,7 @@ azd down --force --purge  # 清理資源
 
 #### 您將學到
 - Microsoft Foundry 與 AZD 整合
-- 部署 AI 驅動的應用程式
+- 部署 AI 驅動的應用
 - 了解 AI 服務配置
 
 #### 學習資源
@@ -150,7 +150,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 章節成果**：部署並配置具備 RAG 功能的 AI 聊天應用程式
+**💡 章節成果**：部署並配置具備 RAG 功能的 AI 聊天應用
 
 **✅ 成功驗證：**
 ```bash
@@ -160,12 +160,12 @@ azd up
 # 測試 AI 聊天介面
 # 提問並獲得帶有來源的 AI 回應
 # 驗證搜尋整合是否正常運作
-azd monitor  # 檢查 Application Insights 是否顯示遙測資料
+azd monitor  # 檢查 Application Insights 是否顯示遙測數據
 azd down --force --purge
 ```
 
 **📊 時間投入：** 1-2 小時  
-**📈 完成後技能：** 能部署並配置生產級 AI 應用程式  
+**📈 完成後技能：** 能部署並配置生產級 AI 應用  
 **💰 成本認知：** 了解開發成本約 $80-150/月，生產成本約 $300-3500/月
 
 #### 💰 AI 部署成本考量
@@ -242,10 +242,10 @@ az consumption budget list --resource-group <your-rg>
 
 #### 實作練習
 - 建立自訂 Bicep 模板
-- 部署多服務應用程式
+- 部署多服務應用
 - 實作藍綠部署策略
 
-**💡 章節成果**：使用自訂基礎設施模板部署複雜多服務應用程式
+**💡 章節成果**：使用自訂基礎設施模板部署複雜多服務應用
 
 ---
 
@@ -279,10 +279,10 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ---
 
-### 🔍 第6章：部署前驗證與規劃
-**先決條件**：完成第4章  
-**時長**：1 小時  
-**難度**：⭐⭐
+### 🔍 第 6 章：部署前驗證與規劃
+**先決條件**: 完成第 4 章  
+**時長**: 1 小時  
+**難度**: ⭐⭐
 
 #### 你將學到
 - 容量規劃與資源驗證
@@ -303,10 +303,10 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ---
 
-### 🚨 第7章：故障排除與除錯
-**先決條件**：完成任一部署章節  
-**時長**：1-1.5 小時  
-**難度**：⭐⭐
+### 🚨 第 7 章：故障排除與除錯
+**先決條件**: 完成任一部署章節  
+**時長**: 1-1.5 小時  
+**難度**: ⭐⭐
 
 #### 你將學到
 - 系統化除錯方法
@@ -320,17 +320,17 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### 實作練習
 - 診斷部署失敗
-- 解決身份驗證問題
+- 解決認證問題
 - 除錯 AI 服務連線
 
 **💡 章節成果**: 獨立診斷並解決常見部署問題
 
 ---
 
-### 🏢 第8章：生產與企業模式
-**先決條件**：完成第1-4章  
-**時長**：2-3 小時  
-**難度**：⭐⭐⭐⭐
+### 🏢 第 8 章：生產與企業模式
+**先決條件**: 完成第 1-4 章  
+**時長**: 2-3 小時  
+**難度**: ⭐⭐⭐⭐
 
 #### 你將學到
 - 生產部署策略
@@ -362,26 +362,26 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 我們的工作坊教材提供結構化且互動的學習體驗，與上述章節課程相輔相成。工作坊設計適合自學與講師帶領課程。
 
 #### 🛠️ 工作坊特色
-- **瀏覽器介面**：完整 MkDocs 支援，具搜尋、複製與主題功能
-- **GitHub Codespaces 整合**：一鍵開發環境設定
-- **結構化學習路徑**：7 步驟引導練習（共3.5小時）
-- **探索 → 部署 → 客製化**：漸進式方法論
-- **互動式 DevContainer 環境**：預先配置工具與相依性
+- **瀏覽器介面**: 完整 MkDocs 支援的工作坊，具備搜尋、複製與主題功能
+- **GitHub Codespaces 整合**: 一鍵開發環境設定
+- **結構化學習路徑**: 7 步驟引導練習（共 3.5 小時）
+- **探索 → 部署 → 客製化**: 漸進式方法論
+- **互動式 DevContainer 環境**: 預先配置工具與相依性
 
 #### 📚 工作坊結構
 工作坊遵循 **探索 → 部署 → 客製化** 方法：
 
-1. **探索階段**（45 分鐘）
+1. **探索階段** (45 分鐘)
    - 探索 Microsoft Foundry 範本與服務
    - 理解多代理架構模式
    - 檢視部署需求與先決條件
 
-2. **部署階段**（2 小時）
+2. **部署階段** (2 小時)
    - 實作使用 AZD 部署 AI 應用
    - 配置 Azure AI 服務與端點
-   - 實作安全與身份驗證模式
+   - 實作安全與認證模式
 
-3. **客製化階段**（45 分鐘）
+3. **客製化階段** (45 分鐘)
    - 修改應用以符合特定使用案例
    - 優化生產部署
    - 實作監控與成本管理
@@ -389,7 +389,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 🚀 開始使用工作坊
 ```bash
 # 選項 1：GitHub Codespaces（推薦）
-# 在儲存庫中點擊「Code」→「Create codespace on main」
+# 在儲存庫中點擊「Code」→「在 main 上建立 codespace」
 
 # 選項 2：本地開發
 git clone https://github.com/microsoft/azd-for-beginners.git
@@ -400,16 +400,16 @@ cd azd-for-beginners/workshop
 #### 🎯 工作坊學習成果
 完成工作坊後，參與者將能：
 - **部署生產 AI 應用**：使用 AZD 與 Microsoft Foundry 服務
-- **掌握多代理架構**：實作協調 AI 代理解決方案
-- **實作安全最佳實踐**：配置身份驗證與存取控制
+- **掌握多代理架構**：實作協調式 AI 代理解決方案
+- **實作安全最佳實踐**：配置認證與存取控制
 - **優化擴展性**：設計具成本效益與高效能的部署
 - **故障排除部署問題**：獨立解決常見問題
 
 #### 📖 工作坊資源
-- **🎥 互動指南**：[工作坊教材](workshop/README.md) - 瀏覽器學習環境
-- **📋 逐步指引**：[引導練習](../../workshop/docs/instructions) - 詳細操作說明
-- **🛠️ AI 工作坊實驗室**：[AI 工作坊實驗室](docs/microsoft-foundry/ai-workshop-lab.md) - AI 專注練習
-- **💡 快速入門**：[工作坊設定指南](workshop/README.md#quick-start) - 環境配置
+- **🎥 互動指南**: [工作坊教材](workshop/README.md) - 瀏覽器學習環境
+- **📋 逐步指引**: [引導練習](../../workshop/docs/instructions) - 詳細操作說明
+- **🛠️ AI 工作坊實驗室**: [AI 工作坊實驗室](docs/microsoft-foundry/ai-workshop-lab.md) - AI 專注練習
+- **💡 快速入門**: [工作坊設定指南](workshop/README.md#quick-start) - 環境配置
 
 **適合對象**：企業培訓、大學課程、自學與開發者訓練營。
 
@@ -419,9 +419,9 @@ cd azd-for-beginners/workshop
 
 Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加速應用程式在 Azure 上的建置與部署流程。它提供：
 
-- **範本式部署** - 使用預建範本快速建立常見應用模式
+- **範本化部署** - 使用預建範本快速建立常見應用模式
 - **基礎架構即程式碼** - 使用 Bicep 或 Terraform 管理 Azure 資源  
-- **整合工作流程** - 無縫配置、部署與監控應用
+- **整合工作流程** - 無縫佈署、監控與管理應用
 - **開發者友善** - 優化開發者生產力與體驗
 
 ### **AZD + Microsoft Foundry：AI 部署的完美組合**
@@ -430,8 +430,8 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 
 - **AI 就緒範本** - 預配置 Azure OpenAI、認知服務與機器學習工作負載範本
 - **安全 AI 部署** - 內建 AI 服務、API 金鑰與模型端點的安全模式  
-- **生產 AI 模式** - 可擴展且具成本效益的 AI 應用部署最佳實踐
-- **端到端 AI 工作流程** - 從模型開發到生產部署並搭配適當監控
+- **生產 AI 模式** - 可擴展且成本效益高的 AI 應用最佳實踐
+- **端到端 AI 工作流程** - 從模型開發到生產部署並具備監控
 - **成本優化** - 智慧資源分配與擴展策略
 - **Microsoft Foundry 整合** - 無縫連接 Microsoft Foundry 模型目錄與端點
 
@@ -446,25 +446,25 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 
 | 範本 | 章節 | 難度 | 服務 | 類型 |
 |----------|---------|------------|----------|------|
-| [**開始使用 AI 聊天**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 第2章 | ⭐⭐ | AzureOpenAI + Azure AI 模型推論 API + Azure AI 搜尋 + Azure Container Apps + Application Insights | 外部 |
-| [**開始使用 AI 代理**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 第2章 | ⭐⭐ | Azure AI 代理服務 + AzureOpenAI + Azure AI 搜尋 + Azure Container Apps + Application Insights| 外部 |
-| [**Azure 搜尋 + OpenAI 示範**](https://github.com/Azure-Samples/azure-search-openai-demo) | 第2章 | ⭐⭐ | AzureOpenAI + Azure AI 搜尋 + App Service + 儲存體 | 外部 |
-| [**OpenAI 聊天應用快速入門**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第2章 | ⭐ | AzureOpenAI + Container Apps + Application Insights | 外部 |
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第5章 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | 外部 |
-| [**Contoso 聊天 RAG**](https://github.com/Azure-Samples/contoso-chat) | 第8章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜尋 + Cosmos DB + Container Apps | 外部 |
-| [**零售多代理解決方案**](examples/retail-scenario.md) | 第5章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜尋 + 儲存體 + Container Apps + Cosmos DB | **本地** |
+| [**開始使用 AI 聊天**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 第 2 章 | ⭐⭐ | AzureOpenAI + Azure AI 模型推論 API + Azure AI 搜尋 + Azure Container Apps + Application Insights | 外部 |
+| [**開始使用 AI 代理**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 第 2 章 | ⭐⭐ | Azure AI 代理服務 + AzureOpenAI + Azure AI 搜尋 + Azure Container Apps + Application Insights| 外部 |
+| [**Azure 搜尋 + OpenAI 示範**](https://github.com/Azure-Samples/azure-search-openai-demo) | 第 2 章 | ⭐⭐ | AzureOpenAI + Azure AI 搜尋 + App Service + 儲存體 | 外部 |
+| [**OpenAI 聊天應用快速入門**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第 2 章 | ⭐ | AzureOpenAI + Container Apps + Application Insights | 外部 |
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第 5 章 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | 外部 |
+| [**Contoso 聊天 RAG**](https://github.com/Azure-Samples/contoso-chat) | 第 8 章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜尋 + Cosmos DB + Container Apps | 外部 |
+| [**零售多代理解決方案**](examples/retail-scenario.md) | 第 5 章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜尋 + 儲存體 + Container Apps + Cosmos DB | **本地** |
 
 ### 精選：完整學習場景
-**生產就緒應用範本，對應學習章節**
+**生產就緒應用範本對應學習章節**
 
 | 範本 | 學習章節 | 難度 | 主要學習內容 |
 |----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第2章 | ⭐ | 基本 AI 部署模式 |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | 第2章 | ⭐⭐ | 使用 Azure AI 搜尋的 RAG 實作 |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | 第4章 | ⭐⭐ | 文件智能整合 |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第5章 | ⭐⭐⭐ | 代理框架與函式呼叫 |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | 第8章 | ⭐⭐⭐ | 企業 AI 編排 |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | 第5章 | ⭐⭐⭐⭐ | 多代理架構，含客戶與庫存代理 |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第 2 章 | ⭐ | 基本 AI 部署模式 |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | 第 2 章 | ⭐⭐ | 使用 Azure AI 搜尋的 RAG 實作 |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | 第 4 章 | ⭐⭐ | 文件智能整合 |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第 5 章 | ⭐⭐⭐ | 代理框架與函式呼叫 |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | 第 8 章 | ⭐⭐⭐ | 企業 AI 編排 |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | 第 5 章 | ⭐⭐⭐⭐ | 多代理架構，含客戶與庫存代理 |
 
 ### 依範例類型學習
 
@@ -478,25 +478,25 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
   - 全面監控與評估
   - 透過 ARM 範本一鍵部署
 
-#### 本地範例 - 容器應用（第2-5章）
-**本倉庫中完整容器部署範例：**
+#### 本地範例 - 容器應用（第 2-5 章）
+**本倉庫中完整的容器部署範例：**
 - [**容器應用範例**](examples/container-app/README.md) - 容器化部署完整指南
   - [簡易 Flask API](../../examples/container-app/simple-flask-api) - 基本 REST API，支援 scale-to-zero
   - [微服務架構](../../examples/container-app/microservices) - 生產就緒多服務部署
   - 快速入門、生產與進階部署模式
   - 監控、安全與成本優化指引
 
-#### 外部範例 - 簡易應用（第1-2章）
+#### 外部範例 - 簡易應用（第 1-2 章）
 **克隆這些 Azure Samples 倉庫開始：**
 - [簡易 Web 應用 - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - 基本部署模式
 - [靜態網站 - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - 靜態內容部署
 - [容器應用 - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API 部署
 
-#### 外部範例 - 資料庫整合（第3-4章）  
+#### 外部範例 - 資料庫整合（第 3-4 章）  
 - [資料庫應用 - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - 資料庫連接模式
 - [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - 無伺服器資料工作流程
 
-#### 外部範例 - 進階模式（第4-8章）
+#### 外部範例 - 進階模式（第 4-8 章）
 - [Java 微服務](https://github.com/Azure-Samples/java-microservices-aca-lab) - 多服務架構
 - [容器應用工作任務](https://github.com/Azure-Samples/container-apps-jobs) - 背景處理  
 - [企業機器學習管線](https://github.com/Azure-Samples/mlops-v2) - 生產就緒 ML 模式
@@ -518,9 +518,9 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 
 ### 實作工作坊
 - [**AI 工作坊實驗室**](docs/microsoft-foundry/ai-workshop-lab.md) - 讓您的 AI 解決方案可用 AZD 部署（2-3 小時）
-- [**互動式工作坊指南**](workshop/README.md) - 使用 MkDocs 與 DevContainer 環境的瀏覽器工作坊
+- [**互動式工作坊指南**](workshop/README.md) - 使用 MkDocs 和 DevContainer 環境的瀏覽器工作坊
 - [**結構化學習路徑**](../../workshop/docs/instructions) - 7 步驟引導練習（探索 → 部署 → 自訂）
-- [**AZD 初學者工作坊**](workshop/README.md) - 完整實作工作坊教材，整合 GitHub Codespaces
+- [**AZD 初學者工作坊**](workshop/README.md) - 完整的實作工作坊教材，整合 GitHub Codespaces
 
 ### 外部學習資源
 - [Azure Developer CLI 文件](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -534,7 +534,7 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 
 **初學者常見問題與即時解決方案：**
 
-### ❌ 「azd: 找不到指令」
+### ❌ "azd: 找不到指令"
 
 ```bash
 # 先安裝 AZD
@@ -551,7 +551,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 azd version
 ```
 
-### ❌ 「找不到訂閱」或「未設定訂閱」
+### ❌ "找不到訂閱" 或 "未設定訂閱"
 
 ```bash
 # 列出可用的訂閱
@@ -567,7 +567,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 
-### ❌ 「配額不足」或「配額超過」
+### ❌ "配額不足" 或 "配額超過"
 
 ```bash
 # 嘗試不同的 Azure 區域
@@ -575,13 +575,13 @@ azd env set AZURE_LOCATION "westus2"
 azd up
 
 # 或在開發中使用較小的 SKU
-# 編輯 infra/main.parameters.json:
+# 編輯 infra/main.parameters.json：
 {
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
 
-### ❌ 「azd up」執行到一半失敗
+### ❌ "azd up" 中途失敗
 
 ```bash
 # 選項 1：清理並重試
@@ -596,7 +596,7 @@ azd show
 azd logs
 ```
 
-### ❌ 「驗證失敗」或「權杖過期」
+### ❌ "驗證失敗" 或 "權杖過期"
 
 ```bash
 # 重新驗證
@@ -610,7 +610,7 @@ azd auth login
 az account show
 ```
 
-### ❌ 「資源已存在」或命名衝突
+### ❌ "資源已存在" 或 命名衝突
 
 ```bash
 # AZD 會產生唯一名稱，但如果發生衝突：
@@ -637,7 +637,7 @@ azd monitor
 # 尋找失敗的部署
 ```
 
-### ❌ 「權限被拒絕」或「禁止存取」
+### ❌ "權限被拒絕" 或 "禁止存取"
 
 ```bash
 # 檢查您的 Azure 角色
@@ -677,7 +677,7 @@ azd env get-values
 **初學者常見問題與即時解決方案：**
 
 <details>
-<summary><strong>❌ 「azd: 找不到指令」</strong></summary>
+<summary><strong>❌ "azd: 找不到指令"</strong></summary>
 
 ```bash
 # 先安裝 AZD
@@ -696,7 +696,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ 「找不到訂閱」或「未設定訂閱」</strong></summary>
+<summary><strong>❌ "找不到訂閱" 或 "未設定訂閱"</strong></summary>
 
 ```bash
 # 列出可用的訂閱
@@ -714,7 +714,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ 「配額不足」或「配額超過」</strong></summary>
+<summary><strong>❌ "配額不足" 或 "配額超過"</strong></summary>
 
 ```bash
 # 嘗試不同的 Azure 區域
@@ -722,7 +722,7 @@ azd env set AZURE_LOCATION "westus2"
 azd up
 
 # 或在開發中使用較小的 SKU
-# 編輯 infra/main.parameters.json：
+# 編輯 infra/main.parameters.json:
 {
   "sku": "B1"  // Instead of "P1V2"
 }
@@ -730,7 +730,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ 「azd up」執行到一半失敗</strong></summary>
+<summary><strong>❌ "azd up" 中途失敗</strong></summary>
 
 ```bash
 # 選項 1：清理並重試
@@ -747,7 +747,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ 「驗證失敗」或「權杖過期」</strong></summary>
+<summary><strong>❌ "驗證失敗" 或 "權杖過期"</strong></summary>
 
 ```bash
 # 重新驗證
@@ -763,7 +763,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ 「資源已存在」或命名衝突</strong></summary>
+<summary><strong>❌ "資源已存在" 或 命名衝突</strong></summary>
 
 ```bash
 # AZD 會產生唯一名稱，但如果發生衝突：
@@ -794,7 +794,7 @@ azd monitor
 </details>
 
 <details>
-<summary><strong>❌ 「權限被拒絕」或「禁止存取」</strong></summary>
+<summary><strong>❌ "權限被拒絕" 或 "禁止存取"</strong></summary>
 
 ```bash
 # 檢查您的 Azure 角色
@@ -853,7 +853,7 @@ azd env get-values
 3. **社群討論**：在 Azure Discord 分享您的經驗
 4. **下一章節**：進入下一個難度層級
 
-### 課程完成效益
+### 課程完成好處
 完成所有章節後，您將擁有：
 - **生產經驗**：成功部署真實 AI 應用至 Azure
 - **專業技能**：具備企業級部署能力  
@@ -865,7 +865,7 @@ azd env get-values
 ## 🤝 社群與支援
 
 ### 尋求協助與支援
-- **技術問題**： [回報錯誤與功能請求](https://github.com/microsoft/azd-for-beginners/issues)
+- **技術問題**： [回報錯誤與功能需求](https://github.com/microsoft/azd-for-beginners/issues)
 - **學習問題**： [Microsoft Azure Discord 社群](https://discord.gg/microsoft-azure) 與 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **AI 專屬協助**：加入 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **文件資源**： [官方 Azure Developer CLI 文件](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -874,7 +874,7 @@ azd env get-values
 
 **#Azure 頻道近期投票結果：**
 - **45%** 的開發者想用 AZD 來處理 AI 工作負載
-- **主要挑戰**：多服務部署、憑證管理、生產準備  
+- **主要挑戰**：多服務部署、憑證管理、生產準備度  
 - **最受歡迎需求**：AI 專屬範本、故障排除指南、最佳實踐
 
 **加入我們的社群，您可以：**
@@ -903,25 +903,31 @@ azd env get-values
 我們團隊製作其他全面的學習課程：
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
-### Azure / Edge / MCP / 代理人
-[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+### LangChain
+[![LangChain4j 初學者](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js 初學者](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
+### Azure / Edge / MCP / Agents
+[![AZD 初學者](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI 初學者](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP 初學者](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents 初學者](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### 生成式 AI 系列
-[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+[![生成式 AI 初學者](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![生成式 AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![生成式 AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![生成式 AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### 核心學習
-[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![機器學習初學者](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![資料科學初學者](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
@@ -952,5 +958,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責聲明**：  
-本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤譯負責。
+本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於確保翻譯的準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

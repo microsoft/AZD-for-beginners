@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-15T21:49:23+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T12:39:41+00:00",
   "source_file": "README.md",
   "language_code": "ja"
 }
 -->
-# 初心者のためのAZD：体系的な学習の旅
+# AZD 初心者向け：体系的な学習の旅
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.ja.png) 
 
@@ -24,7 +24,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. **リポジトリをフォークする**: クリック [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **リポジトリをクローンする**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **コミュニティに参加する**: 専門家サポートのための [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4)
+3. **コミュニティに参加する**: 専門家サポートのために [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4)
 4. **学習パスを選ぶ**: 自分の経験レベルに合った章を以下から選択
 
 ### 多言語サポート
@@ -37,7 +37,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## コース概要
 
-段階的な学習のために設計された体系的な章を通じて、Azure Developer CLI（azd）をマスターしましょう。**Microsoft Foundryとの統合によるAIアプリケーションの展開に特に注力しています。**
+段階的な学習のために設計された体系的な章を通じて、Azure Developer CLI (azd) をマスターしましょう。**Microsoft Foundryとの統合によるAIアプリケーションの展開に特に注力しています。**
 
 ### なぜこのコースが現代の開発者に必須なのか
 
@@ -52,11 +52,11 @@ Microsoft Foundry Discordコミュニティの洞察に基づくと、**45%の�
 
 この体系的なコースを修了することで、以下を習得できます：
 - **AZDの基本をマスター**：コアコンセプト、インストール、設定
-- **AIアプリケーションの展開**：Microsoft FoundryサービスとAZDの活用
-- **Infrastructure as Codeの実装**：BicepテンプレートでAzureリソースを管理
+- **AIアプリケーションを展開**：Microsoft FoundryサービスとAZDの活用
+- **Infrastructure as Codeを実装**：BicepテンプレートでAzureリソースを管理
 - **展開のトラブルシューティング**：一般的な問題の解決とデバッグ
 - **本番環境向け最適化**：セキュリティ、スケーリング、監視、コスト管理
-- **マルチエージェントソリューションの構築**：複雑なAIアーキテクチャの展開
+- **マルチエージェントソリューションを構築**：複雑なAIアーキテクチャの展開
 
 ## 📚 学習章
 
@@ -73,7 +73,7 @@ Microsoft Foundry Discordコミュニティの洞察に基づくと、**45%の�
 - 最初の成功した展開
 
 #### 学習リソース
-- **🎯 ここから開始**: [Azure Developer CLIとは？](../..)
+- **🎯 ここから始める**: [Azure Developer CLIとは？](../..)
 - **📖 理論**: [AZDの基本](docs/getting-started/azd-basics.md) - コアコンセプトと用語
 - **⚙️ セットアップ**: [インストールとセットアップ](docs/getting-started/installation.md) - プラットフォーム別ガイド
 - **🛠️ ハンズオン**: [最初のプロジェクト](docs/getting-started/first-project.md) - ステップバイステップチュートリアル
@@ -89,7 +89,7 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 章の成果**：AZDを使ってシンプルなWebアプリケーションをAzureに展開成功
+**💡 章の成果**：AZDを使ってシンプルなWebアプリケーションをAzureに展開することに成功
 
 **✅ 成功の検証：**
 ```bash
@@ -127,12 +127,12 @@ azd down --force --purge  # リソースをクリーンアップします
 **難易度**：⭐⭐
 
 #### 学習内容
-- Microsoft FoundryとのAZD統合
+- Microsoft Foundryとの統合
 - AI搭載アプリケーションの展開
-- AIサービス設定の理解
+- AIサービスの設定理解
 
 #### 学習リソース
-- **🎯 ここから開始**: [Microsoft Foundry統合](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🎯 ここから始める**: [Microsoft Foundry統合](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 パターン**: [AIモデル展開](docs/microsoft-foundry/ai-model-deployment.md) - AIモデルの展開と管理
 - **🛠️ ワークショップ**: [AIワークショップラボ](docs/microsoft-foundry/ai-workshop-lab.md) - AIソリューションをAZD対応に
 - **🎥 インタラクティブガイド**: [ワークショップ資料](workshop/README.md) - MkDocs * DevContainer環境によるブラウザ学習
@@ -141,7 +141,7 @@ azd down --force --purge  # リソースをクリーンアップします
 
 #### 実践演習
 ```bash
-# 最初のAIアプリケーションを展開する
+# 最初のAIアプリケーションをデプロイする
 azd init --template azure-search-openai-demo
 azd up
 
@@ -150,7 +150,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 章の成果**：RAG機能を備えたAIチャットアプリケーションを展開・設定
+**💡 章の成果**：RAG機能を備えたAIチャットアプリケーションを展開・設定する
 
 **✅ 成功の検証：**
 ```bash
@@ -166,29 +166,29 @@ azd down --force --purge
 
 **📊 所要時間:** 1-2時間  
 **📈 習得レベル:** 本番対応のAIアプリケーションを展開・設定可能  
-**💰 コスト認識:** 開発環境で月80-150ドル、本番環境で月300-3500ドルのコスト理解
+**💰 コスト認識:** 開発環境で月80-150ドル、本番環境で月300-3500ドルのコストを理解
 
 #### 💰 AI展開のコスト考慮
 
 **開発環境（推定月80-150ドル）：**
 - Azure OpenAI（従量課金）：トークン使用量に応じて0-50ドル/月
 - AI Search（Basic層）：75ドル/月
-- Container Apps（消費ベース）：0-20ドル/月
+- Container Apps（消費プラン）：0-20ドル/月
 - ストレージ（標準）：1-5ドル/月
 
 **本番環境（推定月300-3,500ドル以上）：**
 - Azure OpenAI（PTUで安定性能）：3,000ドル以上/月 または 高ボリュームの従量課金
 - AI Search（Standard層）：250ドル/月
-- Container Apps（専用）：50-100ドル/月
+- Container Apps（専用プラン）：50-100ドル/月
 - Application Insights：5-50ドル/月
 - ストレージ（プレミアム）：10-50ドル/月
 
 **💡 コスト最適化のヒント：**
-- 学習には**無料層**のAzure OpenAI（50,000トークン/月含む）を利用
+- 学習には**無料枠**のAzure OpenAI（50,000トークン/月含む）を利用
 - 開発していない時は `azd down` でリソースを解放
 - 従量課金から始め、本番のみPTUにアップグレード
 - 展開前に `azd provision --preview` でコスト見積もり
-- オートスケールを有効にし、実際の使用量に応じて支払い
+- オートスケールを有効にし、実際の使用分のみ支払う
 
 **コスト監視：**
 ```bash
@@ -217,15 +217,15 @@ az consumption budget list --resource-group <your-rg>
 - **📝 例**: [データベースアプリ例](examples/database-app/README.md) - AZDデータベース例
 
 #### 実践演習
-- 複数環境（開発、ステージング、本番）の設定
-- マネージドID認証のセットアップ
-- 環境固有の設定の実装
+- 複数環境（開発、ステージング、本番）を設定
+- マネージドID認証をセットアップ
+- 環境ごとの設定を実装
 
 **💡 章の成果**：適切な認証とセキュリティで複数環境を管理
 
 ---
 
-### 🏗️ 第4章：Infrastructure as Codeと展開
+### 🏗️ 第4章：Infrastructure as Code と展開
 **前提条件**：第1～3章修了  
 **所要時間**：1-1.5時間  
 **難易度**：⭐⭐⭐
@@ -237,13 +237,13 @@ az consumption budget list --resource-group <your-rg>
 
 #### 学習リソース
 - **📖 展開**: [展開ガイド](docs/deployment/deployment-guide.md) - 完全なワークフロー
-- **🏗️ プロビジョニング**: [リソースプロビジョニング](docs/deployment/provisioning.md) - Azureリソース管理
-- **📝 例**: [コンテナアプリ例](../../examples/container-app) - コンテナ化展開
+- **🏗️ プロビジョニング**: [リソースのプロビジョニング](docs/deployment/provisioning.md) - Azureリソース管理
+- **📝 例**: [Container App例](../../examples/container-app) - コンテナ化展開
 
 #### 実践演習
-- カスタムBicepテンプレートの作成
-- マルチサービスアプリケーションの展開
-- ブルーグリーン展開戦略の実装
+- カスタムBicepテンプレートを作成
+- マルチサービスアプリケーションを展開
+- ブルーグリーン展開戦略を実装
 
 **💡 章の成果**：カスタムインフラテンプレートを使い複雑なマルチサービスアプリを展開
 
@@ -260,7 +260,7 @@ az consumption budget list --resource-group <your-rg>
 - 本番対応のAI展開
 
 #### 学習リソース
-- **🤖 注目プロジェクト**: [小売業向けマルチエージェントソリューション](examples/retail-scenario.md) - 完全実装
+- **🤖 注目プロジェクト**: [小売マルチエージェントソリューション](examples/retail-scenario.md) - 完全実装
 
 - **🛠️ ARM テンプレート**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - ワンクリックデプロイ
 - **📖 アーキテクチャ**: [マルチエージェント調整パターン](/docs/pre-deployment/coordination-patterns.md) - パターン
@@ -275,7 +275,7 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 チャプターの成果**: Customer と Inventory エージェントを用いた本番対応のマルチエージェント AI ソリューションのデプロイと管理
+**💡 チャプターの成果**: Customer と Inventory エージェントを備えた本番対応のマルチエージェント AI ソリューションをデプロイおよび管理する
 
 ---
 
@@ -299,7 +299,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - コスト最適化のための SKU 選択
 - 自動化されたデプロイ前チェックの実装
 
-**💡 チャプターの成果**: デプロイ実行前の検証と最適化
+**💡 チャプターの成果**: 実行前にデプロイを検証し最適化する
 
 ---
 
@@ -309,7 +309,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **難易度**: ⭐⭐
 
 #### 学習内容
-- 系統的なデバッグ手法
+- 体系的なデバッグ手法
 - よくある問題と解決策
 - AI 特有のトラブルシューティング
 
@@ -323,7 +323,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - 認証問題の解決
 - AI サービス接続のデバッグ
 
-**💡 チャプターの成果**: 一般的なデプロイ問題を自力で診断・解決
+**💡 チャプターの成果**: 一般的なデプロイ問題を自力で診断し解決する
 
 ---
 
@@ -345,16 +345,16 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 実践演習
 - エンタープライズセキュリティパターンの実装
 - 包括的な監視のセットアップ
-- 適切なガバナンスによる本番環境へのデプロイ
+- 適切なガバナンスで本番環境にデプロイ
 
-**💡 チャプターの成果**: 本番対応のエンタープライズアプリケーションを完全な機能でデプロイ
+**💡 チャプターの成果**: 本番対応のエンタープライズアプリケーションをデプロイする
 
 ---
 
 ## 🎓 ワークショップ概要: ハンズオン学習体験
 
 > **⚠️ ワークショップ状況: 開発中**  
-> ワークショップ資料は現在開発・改良中です。コアモジュールは機能していますが、一部の高度なセクションは未完成です。全コンテンツの完成に向けて積極的に作業しています。[進捗を確認 →](workshop/README.md)
+> ワークショップ資料は現在開発および改良中です。コアモジュールは機能していますが、一部の高度なセクションは未完成です。全コンテンツの完成に向けて積極的に作業しています。[進捗を追跡 →](workshop/README.md)
 
 ### インタラクティブなワークショップ資料
 **ブラウザベースのツールとガイド付き演習による包括的なハンズオン学習**
@@ -362,23 +362,23 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 本ワークショップ資料は、上記のチャプター別カリキュラムを補完する構造化されたインタラクティブな学習体験を提供します。自己学習とインストラクター主導の両方に対応しています。
 
 #### 🛠️ ワークショップの特徴
-- **ブラウザベースのインターフェース**: 検索、コピー、テーマ機能を備えた MkDocs ベースのワークショップ
+- **ブラウザベースのインターフェース**: MkDocs で構築されたワークショップ、検索、コピー、テーマ機能付き
 - **GitHub Codespaces 統合**: ワンクリックで開発環境をセットアップ
 - **構造化された学習パス**: 7 ステップのガイド付き演習（合計 3.5 時間）
-- **発見 → デプロイ → カスタマイズ**: 段階的なメソッド
+- **探索 → デプロイ → カスタマイズ**: 段階的なメソッド
 - **インタラクティブな DevContainer 環境**: 事前構成済みのツールと依存関係
 
 #### 📚 ワークショップ構成
-ワークショップは **発見 → デプロイ → カスタマイズ** のメソッドに従います：
+ワークショップは **探索 → デプロイ → カスタマイズ** のメソッドに従います：
 
-1. **発見フェーズ**（45 分）
-   - Microsoft Foundry テンプレートとサービスの探索
+1. **探索フェーズ**（45 分）
+   - Microsoft Foundry テンプレートとサービスの調査
    - マルチエージェントアーキテクチャパターンの理解
    - デプロイ要件と前提条件の確認
 
 2. **デプロイフェーズ**（2 時間）
    - AZD を使った AI アプリケーションのハンズオンデプロイ
-   - Azure AI サービスとエンドポイントの設定
+   - Azure AI サービスとエンドポイントの構成
    - セキュリティと認証パターンの実装
 
 3. **カスタマイズフェーズ**（45 分）
@@ -400,8 +400,8 @@ cd azd-for-beginners/workshop
 #### 🎯 ワークショップの学習成果
 ワークショップを完了すると、参加者は以下を習得します：
 - **本番対応の AI アプリケーションをデプロイ**: Microsoft Foundry サービスと AZD を使用
-- **マルチエージェントアーキテクチャをマスター**: 協調型 AI エージェントソリューションの実装
-- **セキュリティベストプラクティスを実装**: 認証とアクセス制御の設定
+- **マルチエージェントアーキテクチャを習得**: 調整された AI エージェントソリューションの実装
+- **セキュリティベストプラクティスを実装**: 認証とアクセス制御の構成
 - **スケールに最適化**: コスト効率とパフォーマンスを考慮した設計
 - **デプロイのトラブルシューティング**: 一般的な問題を自力で解決
 
@@ -409,7 +409,7 @@ cd azd-for-beginners/workshop
 - **🎥 インタラクティブガイド**: [ワークショップ資料](workshop/README.md) - ブラウザベースの学習環境
 - **📋 ステップバイステップ手順**: [ガイド付き演習](../../workshop/docs/instructions) - 詳細なウォークスルー
 - **🛠️ AI ワークショップラボ**: [AI ワークショップラボ](docs/microsoft-foundry/ai-workshop-lab.md) - AI に特化した演習
-- **💡 クイックスタート**: [ワークショップセットアップガイド](workshop/README.md#quick-start) - 環境構築
+- **💡 クイックスタート**: [ワークショップセットアップガイド](workshop/README.md#quick-start) - 環境構成
 
 **対象**: 企業研修、大学講座、自己学習、開発者ブートキャンプに最適。
 
@@ -420,18 +420,18 @@ cd azd-for-beginners/workshop
 Azure Developer CLI (azd) は、Azure へのアプリケーション構築とデプロイを加速する開発者向けコマンドラインインターフェースです。以下を提供します：
 
 - **テンプレートベースのデプロイ** - 一般的なアプリケーションパターンの事前構築済みテンプレートを使用
-- **Infrastructure as Code** - Bicep や Terraform を使った Azure リソース管理  
+- **Infrastructure as Code** - Bicep または Terraform を使った Azure リソース管理  
 - **統合ワークフロー** - アプリケーションのプロビジョニング、デプロイ、監視をシームレスに実行
 - **開発者フレンドリー** - 開発者の生産性と体験に最適化
 
 ### **AZD + Microsoft Foundry: AI デプロイに最適**
 
-**なぜ AI ソリューションに AZD なのか？** AZD は AI 開発者が直面する主要課題に対応しています：
+**なぜ AI ソリューションに AZD なのか？** AZD は AI 開発者が直面する主要課題に対応します：
 
-- **AI 対応テンプレート** - Azure OpenAI、Cognitive Services、ML ワークロード向けの事前設定済みテンプレート
+- **AI 対応テンプレート** - Azure OpenAI、Cognitive Services、ML ワークロード向けの事前構成テンプレート
 - **安全な AI デプロイ** - AI サービス、API キー、モデルエンドポイントの組み込みセキュリティパターン  
 - **本番 AI パターン** - スケーラブルでコスト効率の良い AI アプリケーションデプロイのベストプラクティス
-- **エンドツーエンド AI ワークフロー** - モデル開発から本番デプロイまで適切な監視付きで実現
+- **エンドツーエンド AI ワークフロー** - モデル開発から本番デプロイまで適切な監視付きで対応
 - **コスト最適化** - AI ワークロード向けのスマートなリソース割り当てとスケーリング戦略
 - **Microsoft Foundry 連携** - Microsoft Foundry のモデルカタログとエンドポイントへのシームレスな接続
 
@@ -440,7 +440,7 @@ Azure Developer CLI (azd) は、Azure へのアプリケーション構築とデ
 ## 🎯 テンプレート＆サンプルライブラリ
 
 ### 注目: Microsoft Foundry テンプレート
-**AI アプリケーションをデプロイするならここから！**
+**AI アプリケーションをデプロイするならここから始めよう！**
 
 > **注意:** これらのテンプレートは様々な AI パターンを示しています。一部は外部の Azure Samples、他はローカル実装です。
 
@@ -460,7 +460,7 @@ Azure Developer CLI (azd) は、Azure へのアプリケーション構築とデ
 | テンプレート | 学習チャプター | 難易度 | 主要学習内容 |
 |--------------|----------------|--------|--------------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | チャプター 2 | ⭐ | 基本的な AI デプロイパターン |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | チャプター 2 | ⭐⭐ | Azure AI Search を用いた RAG 実装 |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | チャプター 2 | ⭐⭐ | Azure AI Search を使った RAG 実装 |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | チャプター 4 | ⭐⭐ | ドキュメントインテリジェンス統合 |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | チャプター 5 | ⭐⭐⭐ | エージェントフレームワークと関数呼び出し |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | チャプター 8 | ⭐⭐⭐ | エンタープライズ AI オーケストレーション |
@@ -473,7 +473,7 @@ Azure Developer CLI (azd) は、Azure へのアプリケーション構築とデ
 > **外部サンプル**（Azure Samples）= リンク先リポジトリからクローン
 
 #### ローカルサンプル（すぐに使用可能）
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - ARM テンプレートを用いた本番対応の完全実装
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - ARM テンプレートを使った本番対応の完全実装
   - マルチエージェントアーキテクチャ（Customer + Inventory エージェント）
   - 包括的な監視と評価
   - ARM テンプレートによるワンクリックデプロイ
@@ -504,7 +504,7 @@ Azure Developer CLI (azd) は、Azure へのアプリケーション構築とデ
 ### 外部テンプレートコレクション
 - [**公式 AZD テンプレートギャラリー**](https://azure.github.io/awesome-azd/) - 公式およびコミュニティテンプレートの厳選コレクション
 - [**Azure Developer CLI テンプレート**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn のテンプレートドキュメント
-- [**Examples ディレクトリ**](examples/README.md) - ローカル学習用サンプルと詳細解説
+- [**Examples ディレクトリ**](examples/README.md) - ローカル学習用例と詳細説明
 
 ---
 
@@ -626,13 +626,13 @@ azd up
 **通常の待ち時間：**
 - シンプルなウェブアプリ：5～10分
 - データベース付きアプリ：10～15分
-- AIアプリケーション：15～25分（OpenAIのプロビジョニングは遅い）
+- AIアプリケーション：15～25分（OpenAIのプロビジョニングが遅い）
 
 ```bash
 # 進行状況を確認する
 azd show
 
-# 30分以上進まない場合は、Azureポータルを確認してください:
+# 30分以上進まない場合は、Azureポータルを確認してください：
 azd monitor
 # 失敗したデプロイメントを探す
 ```
@@ -665,10 +665,10 @@ azd env get-values
 
 ### 📚 詳細なトラブルシューティングリソース
 
-- **よくある問題ガイド：** [詳細な解決策](docs/troubleshooting/common-issues.md)
-- **AI特有の問題：** [AIトラブルシューティング](docs/troubleshooting/ai-troubleshooting.md)
-- **デバッグガイド：** [ステップバイステップデバッグ](docs/troubleshooting/debugging.md)
-- **サポートを受ける：** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **よくある問題ガイド:** [詳細な解決策](docs/troubleshooting/common-issues.md)
+- **AI特有の問題:** [AIトラブルシューティング](docs/troubleshooting/ai-troubleshooting.md)
+- **デバッグガイド:** [ステップバイステップデバッグ](docs/troubleshooting/debugging.md)
+- **ヘルプを得る:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -699,13 +699,13 @@ azd version
 <summary><strong>❌ "No subscription found" または "Subscription not set"</strong></summary>
 
 ```bash
-# 利用可能なサブスクリプションを一覧表示
+# 利用可能なサブスクリプションを一覧表示する
 az account list --output table
 
-# デフォルトのサブスクリプションを設定
+# デフォルトのサブスクリプションを設定する
 az account set --subscription "<subscription-id-or-name>"
 
-# AZD環境用に設定
+# AZD環境用に設定する
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
 # 検証する
@@ -781,7 +781,7 @@ azd up
 **通常の待ち時間：**
 - シンプルなウェブアプリ：5～10分
 - データベース付きアプリ：10～15分
-- AIアプリケーション：15～25分（OpenAIのプロビジョニングは遅い）
+- AIアプリケーション：15～25分（OpenAIのプロビジョニングが遅い）
 
 ```bash
 # 進行状況を確認する
@@ -801,7 +801,7 @@ azd monitor
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # 少なくとも「Contributor」ロールが必要です
-# Azure管理者に以下の付与を依頼してください:
+# Azure管理者に付与を依頼してください:
 # - Contributor（リソース用）
 # - User Access Administrator（ロール割り当て用）
 ```
@@ -825,10 +825,10 @@ azd env get-values
 
 ### 📚 詳細なトラブルシューティングリソース
 
-- **よくある問題ガイド：** [詳細な解決策](docs/troubleshooting/common-issues.md)
-- **AI特有の問題：** [AIトラブルシューティング](docs/troubleshooting/ai-troubleshooting.md)
-- **デバッグガイド：** [ステップバイステップデバッグ](docs/troubleshooting/debugging.md)
-- **サポートを受ける：** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **よくある問題ガイド:** [詳細な解決策](docs/troubleshooting/common-issues.md)
+- **AI特有の問題:** [AIトラブルシューティング](docs/troubleshooting/ai-troubleshooting.md)
+- **デバッグガイド:** [ステップバイステップデバッグ](docs/troubleshooting/debugging.md)
+- **ヘルプを得る:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -865,10 +865,10 @@ azd env get-values
 ## 🤝 コミュニティとサポート
 
 ### ヘルプとサポートを得る
-- **技術的な問題**： [バグ報告と機能要望](https://github.com/microsoft/azd-for-beginners/issues)
-- **学習に関する質問**： [Microsoft Azure Discordコミュニティ](https://discord.gg/microsoft-azure) および [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **AI特有のサポート**： [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG) に参加
-- **ドキュメント**： [公式Azure Developer CLIドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- **技術的な問題**：[バグ報告と機能要望](https://github.com/microsoft/azd-for-beginners/issues)
+- **学習に関する質問**：[Microsoft Azure Discordコミュニティ](https://discord.gg/microsoft-azure) および [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI特有のサポート**：[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG) に参加
+- **ドキュメント**：[公式Azure Developer CLIドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Microsoft Foundry Discordからのコミュニティインサイト
 
@@ -884,7 +884,7 @@ azd env get-values
 - 将来のAI + AZD機能開発に影響を与える
 
 ### コースへの貢献
-貢献を歓迎します！詳細は[Contributing Guide](CONTRIBUTING.md)をご覧ください：
+貢献を歓迎します！詳細は[貢献ガイド](CONTRIBUTING.md)をご覧ください：
 - **コンテンツ改善**：既存の章や例を強化
 - **新しい例**：実世界のシナリオやテンプレートを追加  
 - **翻訳**：多言語サポートの維持に協力
@@ -903,7 +903,13 @@ azd env get-values
 当チームは他にも包括的な学習コースを提供しています：
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
-### Azure / Edge / MCP / エージェント
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
+### Azure / Edge / MCP / Agents
 [![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -922,18 +928,18 @@ azd env get-values
 ### コアラーニング
 [![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 [![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![初心者向けAI](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![初心者向けサイバーセキュリティ](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![初心者向けWeb開発](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![初心者向けIoT](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![初心者向けXR開発](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Copilot シリーズ
-[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![AIペアプログラミング向けCopilot](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![C#/.NET向けCopilot](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilotアドベンチャー](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
@@ -946,11 +952,11 @@ azd env get-values
 **AI開発者**: [第2章: AIファースト開発](../..) に進みましょう  
 **経験豊富な開発者**: [第3章: 設定と認証](../..) から始めましょう
 
-**次のステップ**: [第1章 - AZDの基本を始める](docs/getting-started/azd-basics.md) →
+**次のステップ**: [第1章 - AZDの基本](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**：  
-本書類はAI翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性を期しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文の言語による文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じた誤解や誤訳について、当方は一切の責任を負いかねます。
+本書類はAI翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性の向上に努めておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文の言語による文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じた誤解や誤訳について、当方は一切の責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

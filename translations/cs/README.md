@@ -1,38 +1,38 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-16T00:23:20+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T15:25:38+00:00",
   "source_file": "README.md",
   "language_code": "cs"
 }
 -->
-# AZD pro začátečníky: Strukturovaná učební cesta
+# AZD pro začátečníky: Strukturovaná cesta k učení
 
 ![AZD-pro-zacatecniky](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.cs.png) 
 
-[![GitHub sledující](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![GitHub forky](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub hvězdy](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ## Začínáme s tímto kurzem
 
-Postupujte podle těchto kroků, abyste zahájili svou učební cestu s AZD:
+Postupujte podle těchto kroků, abyste zahájili svou cestu učení AZD:
 
-1. **Vytvořte fork repozitáře**: Klikněte na [![GitHub forky](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+1. **Vytvořte fork repozitáře**: Klikněte na [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Naklonujte repozitář**: `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. **Připojte se ke komunitě**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) pro odbornou podporu
-4. **Vyberte si svou učební cestu**: Vyberte kapitolu níže, která odpovídá vaší úrovni zkušeností
+4. **Vyberte si svou cestu učení**: Vyberte kapitolu níže, která odpovídá vaší úrovni zkušeností
 
 ### Podpora více jazyků
 
 #### Automatizované překlady (vždy aktuální)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabština](../ar/README.md) | [Bengálština](../bn/README.md) | [Bulharština](../bg/README.md) | [Barmština (Myanmar)](../my/README.md) | [Čínština (zjednodušená)](../zh/README.md) | [Čínština (tradiční, Hong Kong)](../hk/README.md) | [Čínština (tradiční, Macau)](../mo/README.md) | [Čínština (tradiční, Taiwan)](../tw/README.md) | [Chorvatština](../hr/README.md) | [Čeština](./README.md) | [Dánština](../da/README.md) | [Nizozemština](../nl/README.md) | [Estonština](../et/README.md) | [Finština](../fi/README.md) | [Francouzština](../fr/README.md) | [Němčina](../de/README.md) | [Řečtina](../el/README.md) | [Hebrejština](../he/README.md) | [Hindština](../hi/README.md) | [Maďarština](../hu/README.md) | [Indonéština](../id/README.md) | [Italština](../it/README.md) | [Japonština](../ja/README.md) | [Kannadština](../kn/README.md) | [Korejština](../ko/README.md) | [Litevština](../lt/README.md) | [Malajština](../ms/README.md) | [Malajalámština](../ml/README.md) | [Maráthština](../mr/README.md) | [Nepálština](../ne/README.md) | [Nigerijský pidžin](../pcm/README.md) | [Norština](../no/README.md) | [Perština (Farsi)](../fa/README.md) | [Polština](../pl/README.md) | [Portugalština (Brazílie)](../br/README.md) | [Portugalština (Portugalsko)](../pt/README.md) | [Paňdžábština (Gurmukhi)](../pa/README.md) | [Rumunština](../ro/README.md) | [Ruština](../ru/README.md) | [Srbština (cyrilice)](../sr/README.md) | [Slovenština](../sk/README.md) | [Slovinština](../sl/README.md) | [Španělština](../es/README.md) | [Svahilština](../sw/README.md) | [Švédština](../sv/README.md) | [Tagalog (Filipínština)](../tl/README.md) | [Tamilština](../ta/README.md) | [Telugština](../te/README.md) | [Thajština](../th/README.md) | [Turečtina](../tr/README.md) | [Ukrajinština](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamština](../vi/README.md)
+[Arabština](../ar/README.md) | [Bengálština](../bn/README.md) | [Bulharština](../bg/README.md) | [Barmština (Myanmar)](../my/README.md) | [Čínština (zjednodušená)](../zh/README.md) | [Čínština (tradiční, Hongkong)](../hk/README.md) | [Čínština (tradiční, Macao)](../mo/README.md) | [Čínština (tradiční, Tchaj-wan)](../tw/README.md) | [Chorvatština](../hr/README.md) | [Čeština](./README.md) | [Dánština](../da/README.md) | [Nizozemština](../nl/README.md) | [Estonština](../et/README.md) | [Finština](../fi/README.md) | [Francouzština](../fr/README.md) | [Němčina](../de/README.md) | [Řečtina](../el/README.md) | [Hebrejština](../he/README.md) | [Hindština](../hi/README.md) | [Maďarština](../hu/README.md) | [Indonéština](../id/README.md) | [Italština](../it/README.md) | [Japonština](../ja/README.md) | [Kannadština](../kn/README.md) | [Korejština](../ko/README.md) | [Litevština](../lt/README.md) | [Malajština](../ms/README.md) | [Malajalámština](../ml/README.md) | [Maráthština](../mr/README.md) | [Nepálština](../ne/README.md) | [Nigerijský pidžin](../pcm/README.md) | [Norština](../no/README.md) | [Perština (Farsi)](../fa/README.md) | [Polština](../pl/README.md) | [Portugalština (Brazílie)](../br/README.md) | [Portugalština (Portugalsko)](../pt/README.md) | [Paňdžábština (Gurmukhi)](../pa/README.md) | [Rumunština](../ro/README.md) | [Ruština](../ru/README.md) | [Srbština (cyrilice)](../sr/README.md) | [Slovenština](../sk/README.md) | [Slovinština](../sl/README.md) | [Španělština](../es/README.md) | [Svahilština](../sw/README.md) | [Švédština](../sv/README.md) | [Tagalog (Filipínština)](../tl/README.md) | [Tamilština](../ta/README.md) | [Telugština](../te/README.md) | [Thajština](../th/README.md) | [Turečtina](../tr/README.md) | [Ukrajinština](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamština](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## Přehled kurzu
@@ -50,7 +50,7 @@ Na základě poznatků z komunity Microsoft Foundry Discord, **45 % vývojářů
 
 ### Cíle učení
 
-Po dokončení tohoto strukturovaného kurzu budete:
+Dokončením tohoto strukturovaného kurzu budete:
 - **Ovládat základy AZD**: Základní koncepty, instalace a konfigurace
 - **Nasazovat AI aplikace**: Používat AZD s Microsoft Foundry službami
 - **Implementovat infrastrukturu jako kód**: Spravovat Azure zdroje pomocí Bicep šablon
@@ -58,9 +58,9 @@ Po dokončení tohoto strukturovaného kurzu budete:
 - **Optimalizovat pro produkci**: Bezpečnost, škálování, monitorování a správa nákladů
 - **Vytvářet multi-agentní řešení**: Nasazovat složité AI architektury
 
-## 📚 Učební kapitoly
+## 📚 Výukové kapitoly
 
-*Vyberte si svou učební cestu podle úrovně zkušeností a cílů*
+*Vyberte si cestu učení podle úrovně zkušeností a cílů*
 
 ### 🚀 Kapitola 1: Základy a rychlý start
 **Předpoklady**: Azure předplatné, základní znalost příkazové řádky  
@@ -74,10 +74,10 @@ Po dokončení tohoto strukturovaného kurzu budete:
 
 #### Výukové zdroje
 - **🎯 Začněte zde**: [Co je Azure Developer CLI?](../..)
-- **📖 Teorie**: [Základy AZD](docs/getting-started/azd-basics.md) - Základní koncepty a terminologie
+- **📖 Teorie**: [Základy AZD](docs/getting-started/azd-basics.md) - Klíčové koncepty a terminologie
 - **⚙️ Nastavení**: [Instalace a nastavení](docs/getting-started/installation.md) - Průvodce pro konkrétní platformy
 - **🛠️ Prakticky**: [Váš první projekt](docs/getting-started/first-project.md) - Krok za krokem
-- **📋 Rychlá reference**: [Přehled příkazů](resources/cheat-sheet.md)
+- **📋 Rychlý přehled**: [Přehled příkazů](resources/cheat-sheet.md)
 
 #### Praktická cvičení
 ```bash
@@ -103,7 +103,7 @@ azd down --force --purge  # Čistí zdroje
 ```
 
 **📊 Časová investice:** 30-45 minut  
-**📈 Úroveň dovedností po dokončení:** Dokáže samostatně nasadit základní aplikace
+**📈 Úroveň dovedností po dokončení:** Schopnost samostatně nasadit základní aplikace
 
 **✅ Ověření úspěchu:**
 ```bash
@@ -117,7 +117,7 @@ azd down --force --purge  # Čistí zdroje
 ```
 
 **📊 Časová investice:** 30-45 minut  
-**📈 Úroveň dovedností po dokončení:** Dokáže samostatně nasadit základní aplikace
+**📈 Úroveň dovedností po dokončení:** Schopnost samostatně nasadit základní aplikace
 
 ---
 
@@ -165,8 +165,8 @@ azd down --force --purge
 ```
 
 **📊 Časová investice:** 1-2 hodiny  
-**📈 Úroveň dovedností po dokončení:** Dokáže nasadit a nakonfigurovat produkčně připravené AI aplikace  
-**💰 Povědomí o nákladech:** Chápe náklady na vývoj $80-150/měsíc, produkční náklady $300-3500/měsíc
+**📈 Úroveň dovedností po dokončení:** Schopnost nasadit a konfigurovat produkčně připravené AI aplikace  
+**💰 Povědomí o nákladech:** Pochopení nákladů na vývoj $80-150/měsíc, produkce $300-3500/měsíc
 
 #### 💰 Úvahy o nákladech pro AI nasazení
 
@@ -176,8 +176,8 @@ azd down --force --purge
 - Container Apps (spotřeba): $0-20/měsíc
 - Úložiště (standardní): $1-5/měsíc
 
-**Produkční prostředí (odhad $300-3,500+/měsíc):**
-- Azure OpenAI (PTU pro konzistentní výkon): $3,000+/měsíc NEBO platba podle využití při vysokém objemu
+**Produkční prostředí (odhad $300-3 500+/měsíc):**
+- Azure OpenAI (PTU pro konzistentní výkon): $3 000+/měsíc NEBO platba podle využití s vysokým objemem
 - AI Search (standardní úroveň): $250/měsíc
 - Container Apps (dedikované): $50-100/měsíc
 - Application Insights: $5-50/měsíc
@@ -186,7 +186,7 @@ azd down --force --purge
 **💡 Tipy pro optimalizaci nákladů:**
 - Používejte **Free Tier** Azure OpenAI pro učení (včetně 50 000 tokenů/měsíc)
 - Spouštějte `azd down` pro uvolnění zdrojů, když nevyvíjíte aktivně
-- Začněte s účtováním podle spotřeby, PTU upgradujte jen pro produkci
+- Začněte s účtováním podle spotřeby, PTU používejte jen pro produkci
 - Použijte `azd provision --preview` pro odhad nákladů před nasazením
 - Zapněte automatické škálování: plaťte jen za skutečné využití
 
@@ -241,9 +241,9 @@ az consumption budget list --resource-group <your-rg>
 - **📝 Příklady**: [Příklad Container App](../../examples/container-app) - Nasazení kontejnerizovaných aplikací
 
 #### Praktická cvičení
-- Vytvořit vlastní Bicep šablony
-- Nasadit více-službové aplikace
-- Implementovat strategie blue-green nasazení
+- Vytvoření vlastních Bicep šablon
+- Nasazení více-službových aplikací
+- Implementace blue-green deployment strategií
 
 **💡 Výsledek kapitoly**: Nasadit složité více-službové aplikace pomocí vlastních infrastrukturních šablon
 
@@ -298,7 +298,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Optimalizovat výběr SKU z hlediska nákladů
 - Implementovat automatizované kontroly před nasazením
 
-**💡 Výsledek kapitoly**: Validovat a optimalizovat nasazení před spuštěním
+**💡 Výsledek kapitoly**: Validovat a optimalizovat nasazení před jejich provedením
 
 ---
 
@@ -318,7 +318,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - **🤖 AI problémy**: [Řešení problémů AI](docs/troubleshooting/ai-troubleshooting.md) - Problémy AI služeb
 
 #### Praktická cvičení
-- Diagnostikovat chyby nasazení
+- Diagnostikovat selhání nasazení
 - Vyřešit problémy s autentizací
 - Ladit konektivitu AI služeb
 
@@ -346,14 +346,14 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Nastavit komplexní monitorování
 - Nasadit do produkce s odpovídajícím řízením
 
-**💡 Výsledek kapitoly**: Nasadit podnikové aplikace připravené na produkci s plnou funkcionalitou
+**💡 Výsledek kapitoly**: Nasadit podnikové aplikace s plnou produkční funkcionalitou
 
 ---
 
 ## 🎓 Přehled workshopu: Praktická výuka
 
 > **⚠️ STAV WORKSHOPU: Aktivní vývoj**  
-> Materiály workshopu jsou aktuálně vyvíjeny a zdokonalovány. Základní moduly fungují, ale některé pokročilé části nejsou dokončeny. Aktivně pracujeme na dokončení veškerého obsahu. [Sledujte pokrok →](workshop/README.md)
+> Materiály workshopu jsou aktuálně vyvíjeny a zdokonalovány. Základní moduly jsou funkční, ale některé pokročilé části nejsou dokončeny. Aktivně pracujeme na dokončení veškerého obsahu. [Sledujte pokrok →](workshop/README.md)
 
 ### Interaktivní materiály workshopu
 **Komplexní praktické učení s nástroji v prohlížeči a řízenými cvičeními**
@@ -387,7 +387,7 @@ Workshop následuje metodologii **Objevování → Nasazení → Přizpůsobení
 
 #### 🚀 Začínáme s workshopem
 ```bash
-# Možnost 1: GitHub Codespaces (doporučeno)
+# Možnost 1: GitHub Codespaces (Doporučeno)
 # Klikněte na "Code" → "Create codespace on main" v repozitáři
 
 # Možnost 2: Lokální vývoj
@@ -418,10 +418,10 @@ Po dokončení workshopu účastníci:
 
 Azure Developer CLI (azd) je příkazový řádek zaměřený na vývojáře, který urychluje proces vytváření a nasazení aplikací do Azure. Poskytuje:
 
-- **Nasazení založené na šablonách** - Použití předpřipravených šablon pro běžné vzory aplikací
-- **Infrastruktura jako kód** - Správa Azure zdrojů pomocí Bicep nebo Terraform  
+- **Nasazení založené na šablonách** - Použijte předpřipravené šablony pro běžné vzory aplikací
+- **Infrastruktura jako kód** - Spravujte Azure zdroje pomocí Bicep nebo Terraformu  
 - **Integrované pracovní postupy** - Bezproblémové zajištění, nasazení a monitorování aplikací
-- **Přátelské k vývojářům** - Optimalizováno pro produktivitu a uživatelský zážitek vývojáře
+- **Přátelské pro vývojáře** - Optimalizováno pro produktivitu a uživatelský zážitek vývojáře
 
 ### **AZD + Microsoft Foundry: Ideální pro AI nasazení**
 
@@ -462,14 +462,14 @@ Azure Developer CLI (azd) je příkazový řádek zaměřený na vývojáře, kt
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitola 2 | ⭐⭐ | Implementace RAG s Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Kapitola 4 | ⭐⭐ | Integrace Document Intelligence |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitola 5 | ⭐⭐⭐ | Agent framework a volání funkcí |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kapitola 8 | ⭐⭐⭐ | Podniková AI orchestraci |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kapitola 8 | ⭐⭐⭐ | Orchestrace podnikové AI |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kapitola 5 | ⭐⭐⭐⭐ | Architektura více agentů se zákaznickými a inventárními agenty |
 
 ### Učení podle typu příkladu
 
 > **📌 Lokální vs. externí příklady:**  
 > **Lokální příklady** (v tomto repozitáři) = Ihned připravené k použití  
-> **Externí příklady** (Azure Samples) = Klonovat z propojených repozitářů
+> **Externí příklady** (Azure Samples) = Klonovat z odkazovaných repozitářů
 
 #### Lokální příklady (připravené k použití)
 - [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Kompletní produkční implementace s ARM šablonami
@@ -479,9 +479,9 @@ Azure Developer CLI (azd) je příkazový řádek zaměřený na vývojáře, kt
 
 #### Lokální příklady - kontejnerové aplikace (kapitoly 2-5)
 **Komplexní příklady nasazení kontejnerů v tomto repozitáři:**
-- [**Příklady kontejnerových aplikací**](examples/container-app/README.md) - Kompletní průvodce kontejnerizovaným nasazením
+- [**Příklady kontejnerových aplikací**](examples/container-app/README.md) - Kompletní průvodce nasazením kontejnerů
   - [Jednoduché Flask API](../../examples/container-app/simple-flask-api) - Základní REST API s automatickým škálováním na nulu
-  - [Mikroservisní architektura](../../examples/container-app/microservices) - Produkční nasazení více služeb
+  - [Architektura mikroservis](../../examples/container-app/microservices) - Produkční nasazení více služeb
   - Rychlý start, produkční a pokročilé vzory nasazení
   - Pokyny k monitorování, bezpečnosti a optimalizaci nákladů
 
@@ -491,7 +491,7 @@ Azure Developer CLI (azd) je příkazový řádek zaměřený na vývojáře, kt
 - [Statická webová stránka - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Nasazení statického obsahu
 - [Kontejnerová aplikace - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Nasazení REST API
 
-#### Externí příklady - integrace databáze (kapitoly 3-4)  
+#### Externí příklady - integrace databází (kapitoly 3-4)  
 - [Databázová aplikace - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Vzory připojení k databázi
 - [Funkce + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless datové workflow
 
@@ -510,22 +510,22 @@ Azure Developer CLI (azd) je příkazový řádek zaměřený na vývojáře, kt
 ## 📚 Výukové zdroje a reference
 
 ### Rychlé odkazy
-- [**Přehled příkazů**](resources/cheat-sheet.md) - Základní příkazy azd uspořádané podle kapitol  
+- [**Přehled příkazů**](resources/cheat-sheet.md) - Základní příkazy azd uspořádané podle kapitol
 - [**Glosář**](resources/glossary.md) - Terminologie Azure a azd  
-- [**Často kladené otázky (FAQ)**](resources/faq.md) - Běžné otázky uspořádané podle učebních kapitol  
-- [**Studijní průvodce**](resources/study-guide.md) - Komplexní cvičení na procvičování  
+- [**Často kladené otázky (FAQ)**](resources/faq.md) - Běžné otázky uspořádané podle učebních kapitol
+- [**Studijní průvodce**](resources/study-guide.md) - Komplexní cvičení
 
-### Praktické workshopy  
-- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Umožněte nasazení vašich AI řešení pomocí AZD (2-3 hodiny)  
-- [**Interaktivní průvodce workshopem**](workshop/README.md) - Workshop v prohlížeči s MkDocs a prostředím DevContainer  
-- [**Strukturovaná učební cesta**](../../workshop/docs/instructions) - 7 kroků s řízenými cvičeními (Objevování → Nasazení → Přizpůsobení)  
-- [**AZD pro začátečníky Workshop**](workshop/README.md) - Kompletní materiály pro praktický workshop s integrací GitHub Codespaces  
+### Praktické workshopy
+- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Umožněte nasazení vašich AI řešení pomocí AZD (2-3 hodiny)
+- [**Interaktivní průvodce workshopem**](workshop/README.md) - Workshop v prohlížeči s MkDocs a DevContainer prostředím
+- [**Strukturovaná učební cesta**](../../workshop/docs/instructions) - 7 kroků řízených cvičení (Objevování → Nasazení → Přizpůsobení)
+- [**AZD pro začátečníky Workshop**](workshop/README.md) - Kompletní materiály pro praktický workshop s integrací GitHub Codespaces
 
-### Externí zdroje pro učení  
-- Dokumentace Azure Developer CLI: https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/  
-- Azure Architecture Center: https://learn.microsoft.com/en-us/azure/architecture/  
-- Kalkulačka cen Azure: https://azure.microsoft.com/pricing/calculator/  
-- Stav Azure: https://status.azure.com/  
+### Externí zdroje pro učení
+- Dokumentace Azure Developer CLI: [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Azure Architecture Center: [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- Kalkulačka cen Azure: [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
+- Stav Azure: [Azure Status](https://status.azure.com/)
 
 ---
 
@@ -549,7 +549,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 # Ověřte instalaci
 azd version
 ```
-  
+
 ### ❌ "Nebylo nalezeno žádné předplatné" nebo "Předplatné není nastaveno"
 
 ```bash
@@ -565,7 +565,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # Ověřit
 az account show
 ```
-  
+
 ### ❌ "Nedostatečná kvóta" nebo "Kvóta překročena"
 
 ```bash
@@ -579,7 +579,7 @@ azd up
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
-  
+
 ### ❌ "azd up" selže v polovině procesu
 
 ```bash
@@ -587,15 +587,15 @@ azd up
 azd down --force --purge
 azd up
 
-# Možnost 2: Opravit pouze infrastrukturu
+# Možnost 2: Pouze opravit infrastrukturu
 azd provision
 
 # Možnost 3: Zkontrolovat podrobné záznamy
 azd show
 azd logs
 ```
-  
-### ❌ "Autentizace selhala" nebo "Platnost tokenu vypršela"
+
+### ❌ "Autentizace selhala" nebo "Token vypršel"
 
 ```bash
 # Znovu ověřit
@@ -608,7 +608,7 @@ azd auth login
 # Ověřit autentizaci
 az account show
 ```
-  
+
 ### ❌ "Zdroj již existuje" nebo konflikty v názvech
 
 ```bash
@@ -619,13 +619,13 @@ azd down --force --purge
 azd env new dev-v2
 azd up
 ```
-  
+
 ### ❌ Nasazení šablony trvá příliš dlouho
 
-**Běžné čekací doby:**  
-- Jednoduchá webová aplikace: 5-10 minut  
-- Aplikace s databází: 10-15 minut  
-- AI aplikace: 15-25 minut (provisioning OpenAI je pomalý)  
+**Normální doby čekání:**
+- Jednoduchá webová aplikace: 5-10 minut
+- Aplikace s databází: 10-15 minut
+- AI aplikace: 15-25 minut (provisioning OpenAI je pomalý)
 
 ```bash
 # Zkontrolujte průběh
@@ -635,7 +635,7 @@ azd show
 azd monitor
 # Hledejte neúspěšné nasazení
 ```
-  
+
 ### ❌ "Přístup odepřen" nebo "Zakázáno"
 
 ```bash
@@ -647,7 +647,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Přispěvatel (pro zdroje)
 # - Správce přístupu uživatelů (pro přiřazení rolí)
 ```
-  
+
 ### ❌ Nelze najít URL nasazené aplikace
 
 ```bash
@@ -661,13 +661,13 @@ azd monitor
 azd env get-values
 # Hledat proměnné *_URL
 ```
-  
+
 ### 📚 Kompletní zdroje pro řešení problémů
 
-- **Průvodce běžnými problémy:** [Podrobné řešení](docs/troubleshooting/common-issues.md)  
-- **Problémy specifické pro AI:** [Řešení problémů AI](docs/troubleshooting/ai-troubleshooting.md)  
-- **Průvodce laděním:** [Krok za krokem ladění](docs/troubleshooting/debugging.md)  
-- **Získejte pomoc:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+- **Průvodce běžnými problémy:** [Podrobné řešení](docs/troubleshooting/common-issues.md)
+- **Problémy specifické pro AI:** [Řešení problémů AI](docs/troubleshooting/ai-troubleshooting.md)
+- **Průvodce laděním:** [Krok za krokem ladění](docs/troubleshooting/debugging.md)
+- **Získejte pomoc:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -746,7 +746,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ "Autentizace selhala" nebo "Platnost tokenu vypršela"</strong></summary>
+<summary><strong>❌ "Autentizace selhala" nebo "Token vypršel"</strong></summary>
 
 ```bash
 # Znovu ověřit
@@ -777,10 +777,10 @@ azd up
 <details>
 <summary><strong>❌ Nasazení šablony trvá příliš dlouho</strong></summary>
 
-**Běžné čekací doby:**  
-- Jednoduchá webová aplikace: 5-10 minut  
-- Aplikace s databází: 10-15 minut  
-- AI aplikace: 15-25 minut (provisioning OpenAI je pomalý)  
+**Normální doby čekání:**
+- Jednoduchá webová aplikace: 5-10 minut
+- Aplikace s databází: 10-15 minut
+- AI aplikace: 15-25 minut (provisioning OpenAI je pomalý)
 
 ```bash
 # Zkontrolujte průběh
@@ -824,105 +824,111 @@ azd env get-values
 
 ### 📚 Kompletní zdroje pro řešení problémů
 
-- **Průvodce běžnými problémy:** [Podrobné řešení](docs/troubleshooting/common-issues.md)  
-- **Problémy specifické pro AI:** [Řešení problémů AI](docs/troubleshooting/ai-troubleshooting.md)  
-- **Průvodce laděním:** [Krok za krokem ladění](docs/troubleshooting/debugging.md)  
-- **Získejte pomoc:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+- **Průvodce běžnými problémy:** [Podrobné řešení](docs/troubleshooting/common-issues.md)
+- **Problémy specifické pro AI:** [Řešení problémů AI](docs/troubleshooting/ai-troubleshooting.md)
+- **Průvodce laděním:** [Krok za krokem ladění](docs/troubleshooting/debugging.md)
+- **Získejte pomoc:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🎓 Dokončení kurzu a certifikace
 
-### Sledování pokroku  
+### Sledování pokroku
 Sledujte svůj pokrok v učení v jednotlivých kapitolách:
 
-- [ ] **Kapitola 1**: Základy a rychlý start ✅  
+- [ ] **Kapitola 1**: Základy a rychlý start ✅
 - [ ] **Kapitola 2**: Vývoj zaměřený na AI ✅  
-- [ ] **Kapitola 3**: Konfigurace a autentizace ✅  
-- [ ] **Kapitola 4**: Infrastruktura jako kód a nasazení ✅  
-- [ ] **Kapitola 5**: AI řešení s více agenty ✅  
-- [ ] **Kapitola 6**: Validace a plánování před nasazením ✅  
-- [ ] **Kapitola 7**: Řešení problémů a ladění ✅  
-- [ ] **Kapitola 8**: Produkční a podnikové vzory ✅  
+- [ ] **Kapitola 3**: Konfigurace a autentizace ✅
+- [ ] **Kapitola 4**: Infrastruktura jako kód a nasazení ✅
+- [ ] **Kapitola 5**: Víceagentní AI řešení ✅
+- [ ] **Kapitola 6**: Validace a plánování před nasazením ✅
+- [ ] **Kapitola 7**: Řešení problémů a ladění ✅
+- [ ] **Kapitola 8**: Produkční a podnikové vzory ✅
 
-### Ověření znalostí  
-Po dokončení každé kapitoly ověřte své znalosti:  
-1. **Praktické cvičení**: Dokončete praktické nasazení kapitoly  
-2. **Kontrola znalostí**: Projděte sekci FAQ pro danou kapitolu  
-3. **Diskuse v komunitě**: Sdílejte své zkušenosti na Azure Discord  
-4. **Další kapitola**: Pokračujte na další úroveň složitosti  
+### Ověření znalostí
+Po dokončení každé kapitoly ověřte své znalosti:
+1. **Praktické cvičení**: Dokončete praktické nasazení kapitoly
+2. **Kontrola znalostí**: Projděte sekci FAQ pro danou kapitolu
+3. **Diskuse v komunitě**: Sdílejte své zkušenosti na Azure Discord
+4. **Další kapitola**: Pokračujte na další úroveň složitosti
 
-### Výhody dokončení kurzu  
-Po dokončení všech kapitol získáte:  
-- **Produkční zkušenosti**: Nasadili jste skutečné AI aplikace do Azure  
+### Výhody dokončení kurzu
+Po dokončení všech kapitol získáte:
+- **Produkční zkušenosti**: Nasadili jste skutečné AI aplikace do Azure
 - **Profesionální dovednosti**: Schopnost nasazení připraveného pro podnikové prostředí  
-- **Uznání v komunitě**: Aktivní člen Azure vývojářské komunity  
-- **Kariérní růst**: Žádané znalosti AZD a AI nasazení  
+- **Uznání v komunitě**: Aktivní člen Azure vývojářské komunity
+- **Kariérní růst**: Žádané znalosti AZD a AI nasazení
 
 ---
 
 ## 🤝 Komunita a podpora
 
-### Získejte pomoc a podporu  
-- **Technické problémy**: [Nahlásit chyby a požádat o funkce](https://github.com/microsoft/azd-for-beginners/issues)  
-- **Otázky k učení**: [Microsoft Azure Discord komunita](https://discord.gg/microsoft-azure) a [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **Pomoc specifická pro AI**: Připojte se k [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **Dokumentace**: [Oficiální dokumentace Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+### Získejte pomoc a podporu
+- **Technické problémy**: [Nahlásit chyby a požádat o funkce](https://github.com/microsoft/azd-for-beginners/issues)
+- **Otázky k učení**: [Microsoft Azure Discord komunita](https://discord.gg/microsoft-azure) a [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Pomoc specifická pro AI**: Připojte se k [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Dokumentace**: [Oficiální dokumentace Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Přehled komunity z Microsoft Foundry Discord
+### Postřehy komunity z Microsoft Foundry Discord
 
-**Nedávné výsledky ankety z kanálu #Azure:**  
-- **45 %** vývojářů chce používat AZD pro AI pracovní zátěže  
-- **Hlavní výzvy:** Nasazení více služeb, správa přihlašovacích údajů, připravenost na produkci  
-- **Nejčastější požadavky:** Šablony specifické pro AI, průvodce řešením problémů, osvědčené postupy  
+**Nedávné výsledky ankety z kanálu #Azure:**
+- **45 %** vývojářů chce používat AZD pro AI pracovní zátěže
+- **Hlavní výzvy**: Nasazení více služeb, správa přihlašovacích údajů, připravenost na produkci  
+- **Nejčastější požadavky**: AI-specifické šablony, průvodce řešením problémů, osvědčené postupy
 
-**Připojte se k naší komunitě a:**  
-- Sdílejte své zkušenosti s AZD + AI a získejte pomoc  
-- Získejte přístup k předběžným verzím nových AI šablon  
-- Přispívejte k osvědčeným postupům nasazení AI  
-- Ovlivňujte budoucí vývoj funkcí AI + AZD  
+**Připojte se k naší komunitě, abyste:**
+- Sdíleli své zkušenosti s AZD + AI a získali pomoc
+- Měli přístup k předběžným verzím nových AI šablon
+- Přispívali k osvědčeným postupům nasazení AI
+- Ovlivňovali budoucí vývoj funkcí AI + AZD
 
-### Přispívání do kurzu  
-Vítáme příspěvky! Přečtěte si náš [Průvodce přispíváním](CONTRIBUTING.md) pro podrobnosti o:  
-- **Vylepšení obsahu:** Zlepšování existujících kapitol a příkladů  
-- **Nové příklady:** Přidání reálných scénářů a šablon  
-- **Překlady:** Pomoc s udržováním vícejazyčné podpory  
-- **Nahlášení chyb:** Zlepšení přesnosti a srozumitelnosti  
-- **Standardy komunity:** Dodržování našich inkluzivních pravidel komunity  
+### Přispívání do kurzu
+Vítáme příspěvky! Přečtěte si náš [Průvodce přispíváním](CONTRIBUTING.md) pro podrobnosti o:
+- **Vylepšení obsahu**: Zlepšení stávajících kapitol a příkladů
+- **Nové příklady**: Přidání reálných scénářů a šablon  
+- **Překlady**: Pomoc s udržováním vícejazyčné podpory
+- **Nahlášení chyb**: Zlepšení přesnosti a srozumitelnosti
+- **Standardy komunity**: Dodržování našich inkluzivních pravidel komunity
 
 ---
 
 ## 📄 Informace o kurzu
 
-### Licence  
-Tento projekt je licencován pod licencí MIT - podrobnosti naleznete v souboru [LICENSE](../../LICENSE).  
+### Licence
+Tento projekt je licencován pod licencí MIT - podrobnosti naleznete v souboru [LICENSE](../../LICENSE).
 
 ### Související vzdělávací zdroje Microsoftu
 
 Náš tým vytváří další komplexní vzdělávací kurzy:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
-### Azure / Edge / MCP / Agenti  
-[![AZD pro začátečníky](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Edge AI pro začátečníky](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![MCP pro začátečníky](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI Agents pro začátečníky](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+### LangChain
+[![LangChain4j pro začátečníky](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js pro začátečníky](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
 
----  
+---
 
-### Série Generativní AI  
-[![Generativní AI pro začátečníky](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Generativní AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-[![Generativní AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-[![Generativní AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)  
+### Azure / Edge / MCP / Agenti
+[![AZD pro začátečníky](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI pro začátečníky](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP pro začátečníky](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents pro začátečníky](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
----  
+---
+ 
+### Série Generativní AI
+[![Generativní AI pro začátečníky](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generativní AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generativní AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generativní AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
-### Základní učení  
-[![ML pro začátečníky](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Data Science pro začátečníky](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI pro začátečníky](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Kybernetická bezpečnost pro začátečníky](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+---
+ 
+### Základní učení
+[![ML pro začátečníky](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science pro začátečníky](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 [![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -945,11 +951,11 @@ Náš tým vytváří další komplexní vzdělávací kurzy:
 **Vývojáři AI**: Přejděte na [Kapitola 2: Vývoj zaměřený na AI](../..)  
 **Zkušení vývojáři**: Začněte s [Kapitola 3: Konfigurace a autentizace](../..)
 
-**Další kroky**: [Začít Kapitolu 1 - Základy AZD](docs/getting-started/azd-basics.md) →
+**Další kroky**: [Začněte Kapitolu 1 - Základy AZD](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Prohlášení o vyloučení odpovědnosti**:  
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoliv nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoliv nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

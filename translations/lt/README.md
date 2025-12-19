@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-16T01:21:08+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T16:28:17+00:00",
   "source_file": "README.md",
   "language_code": "lt"
 }
@@ -29,7 +29,7 @@ Sekite šiuos žingsnius, kad pradėtumėte savo AZD mokymosi kelionę:
 
 ### Daugiakalbė parama
 
-#### Automatiniai vertimai (visada atnaujinami)
+#### Automatizuoti vertimai (Visada atnaujinti)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
 [Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](./README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
@@ -121,7 +121,7 @@ azd down --force --purge  # Išvalo resursus
 
 ---
 
-### 🤖 2 skyrius: AI-pirmas vystymas (rekomenduojama AI kūrėjams)
+### 🤖 2 skyrius: AI-pirmas vystymas (Rekomenduojama AI kūrėjams)
 **Reikalavimai**: Baigtas 1 skyrius  
 **Trukmė**: 1-2 valandos  
 **Sudėtingumas**: ⭐⭐
@@ -170,16 +170,16 @@ azd down --force --purge
 
 #### 💰 AI diegimo kaštų svarstymai
 
-**Kūrimo aplinka (apytiksliai $80-150/mėn):**
+**Kūrimo aplinka (Apskaičiuota $80-150/mėn):**
 - Azure OpenAI (mokėjimas už naudojimą): $0-50/mėn (pagal tokenų naudojimą)
 - AI paieška (pagrindinis lygis): $75/mėn
 - Container Apps (vartojimo modelis): $0-20/mėn
 - Saugykla (standartinė): $1-5/mėn
 
-**Gamybos aplinka (apytiksliai $300-3,500+/mėn):**
-- Azure OpenAI (PTU dėl nuoseklaus našumo): $3,000+/mėn ARBA mokėjimas už naudojimą su dideliu kiekiu
+**Gamybos aplinka (Apskaičiuota $300-3,500+/mėn):**
+- Azure OpenAI (PTU dėl nuoseklaus veikimo): $3,000+/mėn ARBA mokėjimas už naudojimą su dideliu kiekiu
 - AI paieška (standartinis lygis): $250/mėn
-- Container Apps (dedikuotas): $50-100/mėn
+- Container Apps (dedikuota): $50-100/mėn
 - Application Insights: $5-50/mėn
 - Saugykla (premium): $10-50/mėn
 
@@ -249,7 +249,7 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### 🎯 5 skyrius: Daugiaagentiniai AI sprendimai (pažengusiems)
+### 🎯 5 skyrius: Daugiaagentiniai AI sprendimai (Pažengusiems)
 **Reikalavimai**: Baigti 1-2 skyrius  
 **Trukmė**: 2-3 valandos  
 **Sudėtingumas**: ⭐⭐⭐⭐
@@ -266,7 +266,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### Praktinės užduotys
 ```bash
-# Diegti pilną mažmeninės prekybos daugiaprogramių agentų sprendimą
+# Diegti pilną mažmeninės prekybos daugiaagentinį sprendimą
 cd examples/retail-multiagent-arm-template
 ./deploy.sh
 
@@ -343,7 +343,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Praktinės užduotys
 - Įgyvendinti įmonių saugumo modelius
-- Nustatyti išsamų stebėjimą
+- Sukurti išsamų stebėjimą
 - Diegti gamyboje su tinkama valdymo sistema
 
 **💡 Skyriaus rezultatas**: Diegti įmonėms paruoštas programas su pilnu gamybiniu funkcionalumu
@@ -361,7 +361,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 Mūsų dirbtuvių medžiaga suteikia struktūruotą, interaktyvų mokymosi patyrimą, papildantį aukščiau pateiktą skyrių programą. Dirbtuvės skirtos tiek savarankiškam mokymuisi, tiek instruktoriaus vedamoms sesijoms.
 
 #### 🛠️ Dirbtuvių ypatybės
-- **Naršyklės sąsaja**: Pilnai veikianti MkDocs pagrindu su paieška, kopijavimo ir temos funkcijomis
+- **Naršyklės sąsaja**: Pilnas MkDocs pagrindu veikiantis dirbtuvių rinkinys su paieška, kopijavimo ir temos funkcijomis
 - **GitHub Codespaces integracija**: Vieno paspaudimo kūrimo aplinkos nustatymas
 - **Struktūruotas mokymosi kelias**: 7 žingsnių vedamos užduotys (iš viso 3,5 val.)
 - **Atranka → Diegimas → Pritaikymas**: Progresyvi metodika
@@ -387,10 +387,10 @@ Dirbtuvės vyksta pagal **Atrankos → Diegimo → Pritaikymo** metodiką:
 
 #### 🚀 Pradžia su dirbtuvėmis
 ```bash
-# Parinktis 1: GitHub Codespaces (Rekomenduojama)
-# Spustelėkite "Code" → "Create codespace on main" saugykloje
+# 1 variantas: GitHub Codespaces (rekomenduojama)
+# Spustelėkite „Code“ → „Create codespace on main“ saugykloje
 
-# Parinktis 2: Vietinis vystymas
+# 2 variantas: Vietinis vystymas
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
 # Vadovaukitės nustatymo instrukcijomis faile workshop/README.md
@@ -405,7 +405,7 @@ Baigę dirbtuves dalyviai:
 - **Spręs diegimo problemas**: Savarankiškai šalins dažnas problemas
 
 #### 📖 Dirbtuvių ištekliai
-- **🎥 Interaktyvus vadovas**: [Dirbtuvių medžiaga](workshop/README.md) - Naršyklės pagrindu mokymosi aplinka
+- **🎥 Interaktyvus vadovas**: [Dirbtuvių medžiaga](workshop/README.md) - Naršyklėje veikianti mokymosi aplinka
 - **📋 Žingsnis po žingsnio instrukcijos**: [Vedamos užduotys](../../workshop/docs/instructions) - Išsamūs žingsniai
 - **🛠️ DI dirbtuvių laboratorija**: [DI dirbtuvių laboratorija](docs/microsoft-foundry/ai-workshop-lab.md) - DI orientuotos užduotys
 - **💡 Greitas pradėjimas**: [Dirbtuvių nustatymo vadovas](workshop/README.md#quick-start) - Aplinkos konfigūracija
@@ -423,7 +423,7 @@ Azure Developer CLI (azd) yra programuotojui skirtas komandų eilutės įrankis,
 - **Integruoti darbo srautai** – Sklandžiai teikite, diekite ir stebėkite programas
 - **Draugiškas programuotojui** – Optimizuotas produktyvumui ir patirčiai
 
-### **AZD + Microsoft Foundry: Tobula DI diegimams**
+### **AZD + Microsoft Foundry: Idealu DI diegimams**
 
 **Kodėl AZD DI sprendimams?** AZD sprendžia pagrindines DI kūrėjų problemas:
 
@@ -445,8 +445,8 @@ Azure Developer CLI (azd) yra programuotojui skirtas komandų eilutės įrankis,
 
 | Šablonas | Skyrius | Sudėtingumas | Paslaugos | Tipas |
 |----------|---------|--------------|-----------|-------|
-| [**Pradžia su DI pokalbiu**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 2 skyrius | ⭐⭐ | AzureOpenAI + Azure DI modelio inferencijos API + Azure DI paieška + Azure konteinerių programos + Application Insights | Išorinis |
-| [**Pradžia su DI agentais**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 2 skyrius | ⭐⭐ | Azure DI agentų paslauga + AzureOpenAI + Azure DI paieška + Azure konteinerių programos + Application Insights | Išorinis |
+| [**Pradėkite su DI pokalbiu**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 2 skyrius | ⭐⭐ | AzureOpenAI + Azure DI modelio inferencijos API + Azure DI paieška + Azure konteinerių programos + Application Insights | Išorinis |
+| [**Pradėkite su DI agentais**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 2 skyrius | ⭐⭐ | Azure DI agentų paslauga + AzureOpenAI + Azure DI paieška + Azure konteinerių programos + Application Insights | Išorinis |
 | [**Azure paieška + OpenAI demonstracija**](https://github.com/Azure-Samples/azure-search-openai-demo) | 2 skyrius | ⭐⭐ | AzureOpenAI + Azure DI paieška + App Service + Saugykla | Išorinis |
 | [**OpenAI pokalbių programos greitas startas**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 2 skyrius | ⭐ | AzureOpenAI + Konteinerių programos + Application Insights | Išorinis |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 5 skyrius | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Išorinis |
@@ -480,7 +480,7 @@ Azure Developer CLI (azd) yra programuotojui skirtas komandų eilutės įrankis,
 #### Vietiniai pavyzdžiai – konteinerių programos (2-5 skyriai)
 **Išsamūs konteinerių diegimo pavyzdžiai šiame saugykloje:**
 - [**Konteinerių programų pavyzdžiai**](examples/container-app/README.md) - Pilnas konteinerizuotų diegimų vadovas
-  - [Paprastas Flask API](../../examples/container-app/simple-flask-api) - Pagrindinis REST API su mastelio mažinimu iki nulio
+  - [Paprasta Flask API](../../examples/container-app/simple-flask-api) - Pagrindinė REST API su mastelio iki nulio palaikymu
   - [Mikropaslaugų architektūra](../../examples/container-app/microservices) - Gamybai paruoštas daugiapaslaugis diegimas
   - Greitas startas, gamybiniai ir pažangūs diegimo modeliai
   - Stebėjimo, saugumo ir kaštų optimizavimo gairės
@@ -510,22 +510,22 @@ Azure Developer CLI (azd) yra programuotojui skirtas komandų eilutės įrankis,
 ## 📚 Mokymosi ištekliai ir nuorodos
 
 ### Greitos nuorodos
-- [**Komandų Santrauka**](resources/cheat-sheet.md) - Pagrindinės azd komandos, suskirstytos pagal skyrius  
-- [**Žodynas**](resources/glossary.md) - Azure ir azd terminai  
-- [**DUK**](resources/faq.md) - Dažniausiai užduodami klausimai, suskirstyti pagal mokymosi skyrių  
-- [**Mokymosi Vadovas**](resources/study-guide.md) - Išsamios praktinės užduotys  
+- [**Komandų Santrauka**](resources/cheat-sheet.md) - Esminės azd komandos suskirstytos pagal skyrius
+- [**Žodynas**](resources/glossary.md) - Azure ir azd terminologija  
+- [**DUK**](resources/faq.md) - Dažniausiai užduodami klausimai suskirstyti pagal mokymosi skyrių
+- [**Mokymosi Vadovas**](resources/study-guide.md) - Išsamios praktinės užduotys
 
-### Praktiniai Seminarai  
-- [**DI Seminaro Laboratorija**](docs/microsoft-foundry/ai-workshop-lab.md) - Padarykite savo DI sprendimus diegiamus su AZD (2-3 valandos)  
-- [**Interaktyvus Seminaro Vadovas**](workshop/README.md) - Naršyklėje veikiantis seminaras su MkDocs ir DevContainer aplinka  
-- [**Struktūruotas Mokymosi Kelias**](../../workshop/docs/instructions) - 7 žingsnių vedamos užduotys (Atranka → Diegimas → Pritaikymas)  
-- [**AZD Pradedantiesiems Seminaras**](workshop/README.md) - Pilnos praktinės seminaro medžiagos su GitHub Codespaces integracija  
+### Praktiniai Seminarai
+- [**DI Seminaro Laboratorija**](docs/microsoft-foundry/ai-workshop-lab.md) - Padarykite savo DI sprendimus diegiamus su AZD (2-3 valandos)
+- [**Interaktyvus Seminaro Vadovas**](workshop/README.md) - Naršyklėje vykdomas seminaras su MkDocs ir DevContainer aplinka
+- [**Struktūruotas Mokymosi Kelias**](../../workshop/docs/instructions) - 7 žingsnių vedamos užduotys (Atranka → Diegimas → Pritaikymas)
+- [**AZD Pradedantiesiems Seminaras**](workshop/README.md) - Pilnos praktinės seminaro medžiagos su GitHub Codespaces integracija
 
-### Išoriniai Mokymosi Šaltiniai  
-- [Azure Developer CLI Dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architektūros Centras](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Kainų Skaičiuoklė](https://azure.microsoft.com/pricing/calculator/)  
-- [Azure Būsena](https://status.azure.com/)  
+### Išoriniai Mokymosi Šaltiniai
+- [Azure Developer CLI Dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architektūros Centras](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Kainų Skaičiuoklė](https://azure.microsoft.com/pricing/calculator/)
+- [Azure Būsena](https://status.azure.com/)
 
 ---
 
@@ -533,7 +533,7 @@ Azure Developer CLI (azd) yra programuotojui skirtas komandų eilutės įrankis,
 
 **Dažniausios pradedančiųjų problemos ir greiti sprendimai:**
 
-### ❌ „azd: komanda nerasta“
+### ❌ "azd: komanda nerasta"
 
 ```bash
 # Pirmiausia įdiekite AZD
@@ -549,8 +549,8 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 # Patikrinkite diegimą
 azd version
 ```
-  
-### ❌ „Prenumerata nerasta“ arba „Prenumerata nenustatyta“
+
+### ❌ "Prenumerata nerasta" arba "Prenumerata nenustatyta"
 
 ```bash
 # Išvardinti galimus prenumeratas
@@ -565,8 +565,8 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # Patikrinti
 az account show
 ```
-  
-### ❌ „InsufficientQuota“ arba „Kvota viršyta“
+
+### ❌ "Nepakankamas Kvota" arba "Kvota viršyta"
 
 ```bash
 # Išbandykite kitą Azure regioną
@@ -579,8 +579,8 @@ azd up
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
-  
-### ❌ „azd up“ nepavyksta viduryje
+
+### ❌ "azd up" nepavyksta viduryje
 
 ```bash
 # Parinktis 1: Išvalyti ir bandyti dar kartą
@@ -594,8 +594,8 @@ azd provision
 azd show
 azd logs
 ```
-  
-### ❌ „Autentifikacija nepavyko“ arba „Žetonas pasibaigęs“
+
+### ❌ "Autentifikacija nepavyko" arba "Tokenas pasibaigė"
 
 ```bash
 # Pakartotinai autentifikuoti
@@ -605,11 +605,11 @@ az login
 azd auth logout
 azd auth login
 
-# Patvirtinti autentifikaciją
+# Patvirtinti autentifikavimą
 az account show
 ```
-  
-### ❌ „Išteklius jau egzistuoja“ arba pavadinimų konfliktai
+
+### ❌ "Išteklius jau egzistuoja" arba pavadinimų konfliktai
 
 ```bash
 # AZD generuoja unikalius pavadinimus, bet jei kyla konfliktas:
@@ -619,13 +619,13 @@ azd down --force --purge
 azd env new dev-v2
 azd up
 ```
-  
+
 ### ❌ Šablono diegimas užtrunka per ilgai
 
-**Įprasti laukimo laikai:**  
-- Paprasta internetinė programa: 5-10 minučių  
-- Programa su duomenų baze: 10-15 minučių  
-- DI programos: 15-25 minutės (OpenAI teikimas vyksta lėtai)  
+**Įprasti laukimo laikai:**
+- Paprasta interneto programa: 5-10 minučių
+- Programa su duomenų baze: 10-15 minučių
+- DI programos: 15-25 minutės (OpenAI teikimas vyksta lėtai)
 
 ```bash
 # Patikrinkite pažangą
@@ -635,8 +635,8 @@ azd show
 azd monitor
 # Ieškokite nepavykusių diegimų
 ```
-  
-### ❌ „Leidimas atmestas“ arba „Draudžiama“
+
+### ❌ "Leidimas atmestas" arba "Draudžiama"
 
 ```bash
 # Patikrinkite savo Azure vaidmenį
@@ -647,8 +647,8 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Contributor (ištekliams)
 # - User Access Administrator (vaidmenų priskyrimams)
 ```
-  
-### ❌ Nepavyksta rasti diegto programos URL
+
+### ❌ Negalima rasti diegto programos URL
 
 ```bash
 # Rodyti visus paslaugų galinius taškus
@@ -661,13 +661,13 @@ azd monitor
 azd env get-values
 # Ieškoti *_URL kintamųjų
 ```
-  
+
 ### 📚 Pilni Gedimų Šalinimo Šaltiniai
 
-- **Dažniausių problemų vadovas:** [Išsamūs sprendimai](docs/troubleshooting/common-issues.md)  
-- **DI specifinės problemos:** [DI gedimų šalinimas](docs/troubleshooting/ai-troubleshooting.md)  
-- **Derinimo vadovas:** [Žingsnis po žingsnio derinimas](docs/troubleshooting/debugging.md)  
-- **Pagalba:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+- **Dažniausių problemų vadovas:** [Išsamūs sprendimai](docs/troubleshooting/common-issues.md)
+- **DI specifinės problemos:** [DI gedimų šalinimas](docs/troubleshooting/ai-troubleshooting.md)
+- **Derinimo vadovas:** [Žingsnis po žingsnio derinimas](docs/troubleshooting/debugging.md)
+- **Gaukite pagalbą:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -676,7 +676,7 @@ azd env get-values
 **Dažniausios pradedančiųjų problemos ir greiti sprendimai:**
 
 <details>
-<summary><strong>❌ „azd: komanda nerasta“</strong></summary>
+<summary><strong>❌ "azd: komanda nerasta"</strong></summary>
 
 ```bash
 # Pirmiausia įdiekite AZD
@@ -695,7 +695,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ „Prenumerata nerasta“ arba „Prenumerata nenustatyta“</strong></summary>
+<summary><strong>❌ "Prenumerata nerasta" arba "Prenumerata nenustatyta"</strong></summary>
 
 ```bash
 # Išvardinti galimus prenumeratas
@@ -713,7 +713,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ „InsufficientQuota“ arba „Kvota viršyta“</strong></summary>
+<summary><strong>❌ "Nepakankamas Kvota" arba "Kvota viršyta"</strong></summary>
 
 ```bash
 # Išbandykite kitą Azure regioną
@@ -729,7 +729,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ „azd up“ nepavyksta viduryje</strong></summary>
+<summary><strong>❌ "azd up" nepavyksta viduryje</strong></summary>
 
 ```bash
 # Parinktis 1: Išvalyti ir bandyti dar kartą
@@ -746,7 +746,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ „Autentifikacija nepavyko“ arba „Žetonas pasibaigęs“</strong></summary>
+<summary><strong>❌ "Autentifikacija nepavyko" arba "Tokenas pasibaigė"</strong></summary>
 
 ```bash
 # Pakartotinai autentifikuoti
@@ -762,7 +762,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ „Išteklius jau egzistuoja“ arba pavadinimų konfliktai</strong></summary>
+<summary><strong>❌ "Išteklius jau egzistuoja" arba pavadinimų konfliktai</strong></summary>
 
 ```bash
 # AZD generuoja unikalius pavadinimus, bet jei kyla konfliktas:
@@ -777,10 +777,10 @@ azd up
 <details>
 <summary><strong>❌ Šablono diegimas užtrunka per ilgai</strong></summary>
 
-**Įprasti laukimo laikai:**  
-- Paprasta internetinė programa: 5-10 minučių  
-- Programa su duomenų baze: 10-15 minučių  
-- DI programos: 15-25 minutės (OpenAI teikimas vyksta lėtai)  
+**Įprasti laukimo laikai:**
+- Paprasta interneto programa: 5-10 minučių
+- Programa su duomenų baze: 10-15 minučių
+- DI programos: 15-25 minutės (OpenAI teikimas vyksta lėtai)
 
 ```bash
 # Patikrinkite pažangą
@@ -793,7 +793,7 @@ azd monitor
 </details>
 
 <details>
-<summary><strong>❌ „Leidimas atmestas“ arba „Draudžiama“</strong></summary>
+<summary><strong>❌ "Leidimas atmestas" arba "Draudžiama"</strong></summary>
 
 ```bash
 # Patikrinkite savo Azure vaidmenį
@@ -807,7 +807,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 </details>
 
 <details>
-<summary><strong>❌ Nepavyksta rasti diegto programos URL</strong></summary>
+<summary><strong>❌ Negalima rasti diegto programos URL</strong></summary>
 
 ```bash
 # Rodyti visus paslaugų galinius taškus
@@ -824,115 +824,121 @@ azd env get-values
 
 ### 📚 Pilni Gedimų Šalinimo Šaltiniai
 
-- **Dažniausių problemų vadovas:** [Išsamūs sprendimai](docs/troubleshooting/common-issues.md)  
-- **DI specifinės problemos:** [DI gedimų šalinimas](docs/troubleshooting/ai-troubleshooting.md)  
-- **Derinimo vadovas:** [Žingsnis po žingsnio derinimas](docs/troubleshooting/debugging.md)  
-- **Pagalba:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+- **Dažniausių problemų vadovas:** [Išsamūs sprendimai](docs/troubleshooting/common-issues.md)
+- **DI specifinės problemos:** [DI gedimų šalinimas](docs/troubleshooting/ai-troubleshooting.md)
+- **Derinimo vadovas:** [Žingsnis po žingsnio derinimas](docs/troubleshooting/debugging.md)
+- **Gaukite pagalbą:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🎓 Kurso Baigimas ir Sertifikavimas
 
-### Progreso Sekimas  
+### Progreso Sekimas
 Sekite savo mokymosi pažangą kiekviename skyriuje:
 
-- [ ] **1 skyrius**: Pagrindai ir Greitas Startas ✅  
-- [ ] **2 skyrius**: DI Pirmoji Plėtra ✅  
-- [ ] **3 skyrius**: Konfigūracija ir Autentifikacija ✅  
-- [ ] **4 skyrius**: Infrastruktūra kaip Kodas ir Diegimas ✅  
-- [ ] **5 skyrius**: Daugiaprogramių DI Sprendimai ✅  
-- [ ] **6 skyrius**: Išankstinė Diegimo Patikra ir Planavimas ✅  
-- [ ] **7 skyrius**: Gedimų Šalinimas ir Derinimas ✅  
-- [ ] **8 skyrius**: Gamybiniai ir Įmonių Modeliai ✅  
+- [ ] **1 skyrius**: Pagrindai ir Greitas Startas ✅
+- [ ] **2 skyrius**: DI-Pirmoji Plėtra ✅  
+- [ ] **3 skyrius**: Konfigūracija ir Autentifikacija ✅
+- [ ] **4 skyrius**: Infrastruktūra kaip Kodas ir Diegimas ✅
+- [ ] **5 skyrius**: Daugiaprogramių DI Sprendimai ✅
+- [ ] **6 skyrius**: Išankstinė Diegimo Patikra ir Planavimas ✅
+- [ ] **7 skyrius**: Gedimų Šalinimas ir Derinimas ✅
+- [ ] **8 skyrius**: Gamybiniai ir Įmonių Modeliai ✅
 
-### Mokymosi Patvirtinimas  
-Baigę kiekvieną skyrių, patikrinkite savo žinias:  
-1. **Praktinė užduotis**: Atlikite skyriaus praktinį diegimą  
-2. **Žinių patikra**: Peržiūrėkite DUK skyriaus dalį  
-3. **Bendruomenės diskusija**: Pasidalinkite patirtimi Azure Discord  
-4. **Kitas skyrius**: Pereikite prie kito sudėtingumo lygio  
+### Mokymosi Patvirtinimas
+Baigę kiekvieną skyrių, patikrinkite savo žinias:
+1. **Praktinė Užduotis**: Atlikite skyriaus praktinį diegimą
+2. **Žinių Patikra**: Peržiūrėkite DUK skyriaus dalį
+3. **Bendruomenės Diskusija**: Pasidalinkite patirtimi Azure Discord
+4. **Kitas Skyrius**: Pereikite prie kito sudėtingumo lygio
 
-### Kurso Baigimo Privalumai  
-Baigę visus skyrius, turėsite:  
-- **Gamybinę patirtį**: Įdiegėte tikras DI programas Azure aplinkoje  
-- **Profesinius įgūdžius**: Įmonėms paruoštas diegimo gebėjimas  
-- **Bendruomenės pripažinimą**: Aktyvus Azure kūrėjų bendruomenės narys  
-- **Karjeros galimybes**: Paklausa AZD ir DI diegimo ekspertizėje  
+### Kurso Baigimo Privalumai
+Baigę visus skyrius, turėsite:
+- **Gamybinę Patirtį**: Įdiegėte tikras DI programas Azure aplinkoje
+- **Profesinius Įgūdžius**: Įmonėms paruoštas diegimo gebėjimas  
+- **Bendruomenės Pripažinimą**: Aktyvus Azure kūrėjų bendruomenės narys
+- **Karjeros Pažangą**: Paklausa turint AZD ir DI diegimo ekspertizę
 
 ---
 
 ## 🤝 Bendruomenė ir Pagalba
 
-### Gaukite Pagalbą ir Palaikymą  
-- **Techninės problemos**: [Praneškite apie klaidas ir prašykite funkcijų](https://github.com/microsoft/azd-for-beginners/issues)  
-- **Mokymosi klausimai**: [Microsoft Azure Discord bendruomenė](https://discord.gg/microsoft-azure) ir [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **DI specifinė pagalba**: Prisijunkite prie [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **Dokumentacija**: [Oficiali Azure Developer CLI dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+### Gaukite Pagalbą ir Palaikymą
+- **Techninės Problemų Ataskaitos:** [Praneškite apie klaidas ir prašykite funkcijų](https://github.com/microsoft/azd-for-beginners/issues)
+- **Mokymosi Klausimai:** [Microsoft Azure Discord Bendruomenė](https://discord.gg/microsoft-azure) ir [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **DI Specifinė Pagalba:** Prisijunkite prie [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Dokumentacija:** [Oficiali Azure Developer CLI dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Bendruomenės Įžvalgos iš Microsoft Foundry Discord
 
-**Naujausi apklausos rezultatai #Azure kanale:**  
-- **45%** kūrėjų nori naudoti AZD DI darbo krūviams  
-- **Pagrindinės problemos**: Daugiaprotė diegimas, kredencialų valdymas, gamybinis pasirengimas  
-- **Dažniausiai prašoma**: DI specifiniai šablonai, gedimų šalinimo vadovai, geriausios praktikos  
+**Naujausi #Azure Kanalo Apklausos Rezultatai:**
+- **45%** kūrėjų nori naudoti AZD DI darbo krūviams
+- **Pagrindinės problemos**: Daugiaprotė diegimai, kredencialų valdymas, gamybinis pasirengimas  
+- **Dažniausiai prašoma:** DI specifiniai šablonai, gedimų šalinimo vadovai, geriausios praktikos
 
-**Prisijunkite prie mūsų bendruomenės, kad:**  
-- Pasidalintumėte savo AZD + DI patirtimi ir gautumėte pagalbą  
-- Gautumėte ankstyvas naujų DI šablonų peržiūras  
-- Prisidėtumėte prie DI diegimo geriausių praktikų  
-- Įtakotumėte būsimą DI + AZD funkcijų vystymą  
+**Prisijunkite prie mūsų bendruomenės, kad:**
+- Pasidalintumėte savo AZD + DI patirtimi ir gautumėte pagalbą
+- Gautumėte ankstyvas naujų DI šablonų peržiūras
+- Prisidėtumėte prie DI diegimo geriausių praktikų
+- Įtakotumėte būsimą DI + AZD funkcijų vystymą
 
-### Prisidėjimas prie Kurso  
-Laukiame jūsų indėlio! Prašome perskaityti mūsų [Prisidėjimo Vadovą](CONTRIBUTING.md) dėl detalių apie:  
-- **Turinio tobulinimą**: Tobulinkite esamus skyrius ir pavyzdžius  
-- **Naujus pavyzdžius**: Pridėkite realaus pasaulio scenarijus ir šablonus  
-- **Vertimą**: Padėkite palaikyti daugiakalbę paramą  
-- **Klaidų pranešimus**: Pagerinkite tikslumą ir aiškumą  
-- **Bendruomenės standartus**: Laikykitės mūsų įtraukių bendruomenės taisyklių  
+### Prisidėjimas prie Kurso
+Laukiame jūsų indėlio! Prašome perskaityti mūsų [Prisidėjimo Vadovą](CONTRIBUTING.md) dėl detalių apie:
+- **Turinio Tobulinimą**: Tobulinkite esamus skyrius ir pavyzdžius
+- **Nauji Pavyzdžiai**: Pridėkite realaus pasaulio scenarijus ir šablonus  
+- **Vertimas**: Padėkite palaikyti daugiakalbę paramą
+- **Klaidų Ataskaitos**: Pagerinkite tikslumą ir aiškumą
+- **Bendruomenės Standartai**: Laikykitės mūsų įtraukių bendruomenės taisyklių
 
 ---
 
 ## 📄 Kurso Informacija
 
-### Licencija  
-Šis projektas licencijuotas pagal MIT licenciją – žr. [LICENSE](../../LICENSE) failą dėl detalių.  
+### Licencija
+Šis projektas licencijuotas pagal MIT licenciją - žr. [LICENSE](../../LICENSE) failą dėl detalių.
 
 ### Susiję Microsoft Mokymosi Šaltiniai
 
 Mūsų komanda kuria ir kitus išsamius mokymosi kursus:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
-### Azure / Edge / MCP / Agentai  
-[![AZD pradedantiesiems](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Edge DI pradedantiesiems](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![MCP pradedantiesiems](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![DI Agentai pradedantiesiems](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+### LangChain
+[![LangChain4j pradedantiesiems](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js pradedantiesiems](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
 
----  
- 
-### Generatyvinis DI Serija  
-[![Generatyvinis DI pradedantiesiems](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Generatyvinis DI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-[![Generatyvinis DI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-[![Generatyvinis DI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)  
+---
 
----  
+### Azure / Edge / MCP / Agentai
+[![AZD pradedantiesiems](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge DI pradedantiesiems](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP pradedantiesiems](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![DI Agentai pradedantiesiems](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
  
-### Pagrindinis Mokymasis  
-[![ML pradedantiesiems](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Duomenų Mokslas pradedantiesiems](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-[![DI pradedantiesiems](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Kibernetinis Saugumas pradedantiesiems](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+### Generatyvinis DI Serija
+[![Generatyvinis DI pradedantiesiems](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generatyvinis DI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generatyvinis DI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generatyvinis DI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Pagrindinis Mokymasis
+[![ML pradedantiesiems](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Duomenų Mokslas pradedantiesiems](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![Dirbtinis intelektas pradedantiesiems](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Kibernetinis saugumas pradedantiesiems](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Tinklalapių kūrimas pradedantiesiems](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![Daiktų internetas pradedantiesiems](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR kūrimas pradedantiesiems](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Copilot serija
-[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Copilot dirbtinio intelekto poriniam programavimui](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot nuotykiai](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
@@ -942,7 +948,7 @@ Mūsų komanda kuria ir kitus išsamius mokymosi kursus:
 **🚀 Pasiruošę pradėti mokytis?**
 
 **Pradedantieji**: Pradėkite nuo [1 skyrius: Pagrindai ir greitas startas](../..)  
-**AI kūrėjai**: Pereikite prie [2 skyrius: AI-pirmas vystymas](../..)  
+**Dirbtinio intelekto kūrėjai**: Pereikite prie [2 skyrius: Dirbtinio intelekto pirmumo kūrimas](../..)  
 **Patyrę kūrėjai**: Pradėkite nuo [3 skyrius: Konfigūracija ir autentifikacija](../..)
 
 **Kiti žingsniai**: [Pradėti 1 skyrių - AZD pagrindai](docs/getting-started/azd-basics.md) →
@@ -950,6 +956,6 @@ Mūsų komanda kuria ir kitus išsamius mokymosi kursus:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,19 +1,19 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-16T01:02:21+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T16:05:37+00:00",
   "source_file": "README.md",
   "language_code": "sl"
 }
 -->
 # AZD za začetnike: Strukturirana učna pot
 
-![AZD-za-začetnike](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.sl.png) 
+![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.sl.png) 
 
-[![GitHub opazovalci](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![GitHub forki](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub zvezdice](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
@@ -22,22 +22,22 @@ CO_OP_TRANSLATOR_METADATA:
 
 Sledite tem korakom, da začnete svojo učno pot z AZD:
 
-1. **Razvezi repozitorij**: Kliknite [![GitHub forki](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+1. **Razvezi repozitorij**: Kliknite [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Kloniraj repozitorij**: `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. **Pridruži se skupnosti**: [Azure Discord skupnosti](https://discord.com/invite/ByRwuEEgH4) za strokovno podporo
-4. **Izberi svojo učno pot**: Izberi poglavje spodaj, ki ustreza tvoji ravni izkušenj
+4. **Izberi svojo učno pot**: Izberi spodnje poglavje, ki ustreza tvoji ravni izkušenj
 
 ### Podpora za več jezikov
 
 #### Avtomatizirani prevodi (vedno posodobljeni)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabščina](../ar/README.md) | [Bengalščina](../bn/README.md) | [Bolgarščina](../bg/README.md) | [Burmanščina (Mjanmar)](../my/README.md) | [Kitajščina (poenostavljena)](../zh/README.md) | [Kitajščina (tradicionalna, Hong Kong)](../hk/README.md) | [Kitajščina (tradicionalna, Macau)](../mo/README.md) | [Kitajščina (tradicionalna, Tajvan)](../tw/README.md) | [Hrvaščina](../hr/README.md) | [Češčina](../cs/README.md) | [Danščina](../da/README.md) | [Nizozemščina](../nl/README.md) | [Estonščina](../et/README.md) | [Finščina](../fi/README.md) | [Francoščina](../fr/README.md) | [Nemščina](../de/README.md) | [Grščina](../el/README.md) | [Hebrejščina](../he/README.md) | [Hindijščina](../hi/README.md) | [Madžarščina](../hu/README.md) | [Indonezijščina](../id/README.md) | [Italijanščina](../it/README.md) | [Japonščina](../ja/README.md) | [Kannada](../kn/README.md) | [Korejščina](../ko/README.md) | [Litovščina](../lt/README.md) | [Malajščina](../ms/README.md) | [Malajalščina](../ml/README.md) | [Maratščina](../mr/README.md) | [Nepalščina](../ne/README.md) | [Nigerijski pidžin](../pcm/README.md) | [Norveščina](../no/README.md) | [Perzijščina (Farsi)](../fa/README.md) | [Poljščina](../pl/README.md) | [Portugalščina (Brazilija)](../br/README.md) | [Portugalščina (Portugalska)](../pt/README.md) | [Pandžabščina (Gurmukhi)](../pa/README.md) | [Romunščina](../ro/README.md) | [Ruščina](../ru/README.md) | [Srbščina (cirilica)](../sr/README.md) | [Slovaščina](../sk/README.md) | [Slovenščina](./README.md) | [Španščina](../es/README.md) | [Svahili](../sw/README.md) | [Švedščina](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamilščina](../ta/README.md) | [Telugu](../te/README.md) | [Tajščina](../th/README.md) | [Turščina](../tr/README.md) | [Ukrajinščina](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamščina](../vi/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](./README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## Pregled tečaja
 
-Obvladaj Azure Developer CLI (azd) skozi strukturirana poglavja, zasnovana za postopno učenje. **Poseben poudarek na uvajanju AI aplikacij z integracijo Microsoft Foundry.**
+Obvladajte Azure Developer CLI (azd) skozi strukturirana poglavja, zasnovana za postopno učenje. **Poseben poudarek na uvajanju AI aplikacij z integracijo Microsoft Foundry.**
 
 ### Zakaj je ta tečaj ključnega pomena za sodobne razvijalce
 
@@ -67,16 +67,16 @@ Z dokončanjem tega strukturiranega tečaja boste:
 **Trajanje**: 30-45 minut  
 **Zahtevnost**: ⭐
 
-#### Kaj se boš naučil
+#### Kaj se boste naučili
 - Razumevanje osnov Azure Developer CLI
-- Namestitev AZD na tvojo platformo
-- Tvoj prvi uspešen deployment
+- Namestitev AZD na vašo platformo
+- Vaša prva uspešna namestitev
 
 #### Učni viri
 - **🎯 Začni tukaj**: [Kaj je Azure Developer CLI?](../..)
 - **📖 Teorija**: [AZD osnove](docs/getting-started/azd-basics.md) - Temeljni koncepti in terminologija
 - **⚙️ Namestitev**: [Namestitev in nastavitev](docs/getting-started/installation.md) - Vodniki za posamezne platforme
-- **🛠️ Praktično**: [Tvoj prvi projekt](docs/getting-started/first-project.md) - Korak za korakom vodič
+- **🛠️ Praktično**: [Vaš prvi projekt](docs/getting-started/first-project.md) - Korak za korakom vodič
 - **📋 Hiter pregled**: [Ukazni prevarant](resources/cheat-sheet.md)
 
 #### Praktične vaje
@@ -89,52 +89,52 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Rezultat poglavja**: Uspešno uvajanje preproste spletne aplikacije v Azure z uporabo AZD
+**💡 Rezultat poglavja**: Uspešno namestite preprosto spletno aplikacijo v Azure z uporabo AZD
 
 **✅ Potrditev uspeha:**
 ```bash
 # Po zaključku 1. poglavja bi morali biti sposobni:
 azd version              # Prikaže nameščeno različico
 azd init --template todo-nodejs-mongo  # Inicializira projekt
-azd up                  # Namesti v Azure
+azd up                  # Izvede namestitev v Azure
 azd show                # Prikaže URL delujoče aplikacije
 # Aplikacija se odpre v brskalniku in deluje
 azd down --force --purge  # Počisti vire
 ```
 
 **📊 Časovna investicija:** 30-45 minut  
-**📈 Raven znanja po:** Samostojno uvajanje osnovnih aplikacij
+**📈 Raven znanja po:** Samostojno lahko nameščate osnovne aplikacije
 
 **✅ Potrditev uspeha:**
 ```bash
 # Po zaključku 1. poglavja bi morali biti sposobni:
 azd version              # Prikaže nameščeno različico
 azd init --template todo-nodejs-mongo  # Inicializira projekt
-azd up                  # Namesti v Azure
+azd up                  # Izvede namestitev v Azure
 azd show                # Prikaže URL delujoče aplikacije
 # Aplikacija se odpre v brskalniku in deluje
 azd down --force --purge  # Počisti vire
 ```
 
 **📊 Časovna investicija:** 30-45 minut  
-**📈 Raven znanja po:** Samostojno uvajanje osnovnih aplikacij
+**📈 Raven znanja po:** Samostojno lahko nameščate osnovne aplikacije
 
 ---
 
-### 🤖 Poglavje 2: AI-prvi razvoj (Priporočeno za AI razvijalce)
+### 🤖 Poglavje 2: AI-prvi razvoj (priporočeno za AI razvijalce)
 **Predpogoji**: Poglavje 1 zaključeno  
 **Trajanje**: 1-2 uri  
 **Zahtevnost**: ⭐⭐
 
-#### Kaj se boš naučil
+#### Kaj se boste naučili
 - Integracija Microsoft Foundry z AZD
-- Uvajanje AI-poganjanih aplikacij
+- Uvajanje AI-podprtih aplikacij
 - Razumevanje konfiguracij AI storitev
 
 #### Učni viri
 - **🎯 Začni tukaj**: [Integracija Microsoft Foundry](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 Vzorce**: [Uvajanje AI modelov](docs/microsoft-foundry/ai-model-deployment.md) - Uvajanje in upravljanje AI modelov
-- **🛠️ Delavnica**: [AI delavnica](docs/microsoft-foundry/ai-workshop-lab.md) - Pripravi svoje AI rešitve za AZD
+- **🛠️ Delavnica**: [AI delavnica](docs/microsoft-foundry/ai-workshop-lab.md) - Priprava AI rešitev za AZD
 - **🎥 Interaktivni vodič**: [Materiali delavnice](workshop/README.md) - Učenje v brskalniku z MkDocs * DevContainer okolje
 - **📋 Predloge**: [Microsoft Foundry predloge](../..)
 - **📝 Primeri**: [Primeri uvajanja z AZD](examples/README.md)
@@ -150,7 +150,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Rezultat poglavja**: Uvajanje in konfiguracija AI-poganjanega klepetalnega programa z RAG zmogljivostmi
+**💡 Rezultat poglavja**: Uvedite in konfigurirajte AI-podprto klepetalno aplikacijo z RAG zmogljivostmi
 
 **✅ Potrditev uspeha:**
 ```bash
@@ -165,10 +165,10 @@ azd down --force --purge
 ```
 
 **📊 Časovna investicija:** 1-2 uri  
-**📈 Raven znanja po:** Samostojno uvajanje in konfiguracija produkcijsko pripravljenih AI aplikacij  
+**📈 Raven znanja po:** Lahko uvajate in konfigurirate produkcijsko pripravljene AI aplikacije  
 **💰 Zavedanje stroškov:** Razumevanje stroškov razvoja $80-150/mesec, produkcijskih stroškov $300-3500/mesec
 
-#### 💰 Stroški uvajanja AI aplikacij
+#### 💰 Stroški uvajanja AI
 
 **Razvojno okolje (ocenjeno $80-150/mesec):**
 - Azure OpenAI (plačilo po porabi): $0-50/mesec (glede na uporabo tokenov)
@@ -177,18 +177,18 @@ azd down --force --purge
 - Shranjevanje (standardno): $1-5/mesec
 
 **Produkcijsko okolje (ocenjeno $300-3,500+/mesec):**
-- Azure OpenAI (PTU za konsistentno zmogljivost): $3,000+/mesec ALI plačilo po porabi z velikim obsegom
+- Azure OpenAI (PTU za dosledno zmogljivost): $3,000+/mesec ALI plačilo po porabi z velikim obsegom
 - AI Search (standardni nivo): $250/mesec
-- Container Apps (namensko): $50-100/mesec
+- Container Apps (namenski): $50-100/mesec
 - Application Insights: $5-50/mesec
 - Shranjevanje (premium): $10-50/mesec
 
 **💡 Nasveti za optimizacijo stroškov:**
-- Uporabljaj **brezplačni nivo** Azure OpenAI za učenje (vključeno 50.000 tokenov/mesec)
-- Začasno sprosti vire z `azd down`, ko ne razvijaš aktivno
-- Začni z obračunom po porabi, PTU nadgradi le za produkcijo
-- Uporabi `azd provision --preview` za oceno stroškov pred uvajanjem
-- Omogoči samodejno skaliranje: plačuj le za dejansko uporabo
+- Uporabljajte **brezplačni nivo** Azure OpenAI za učenje (vključeno 50.000 tokenov/mesec)
+- Začasno sprostite vire z ukazom `azd down`, ko ne razvijate aktivno
+- Začnite z obračunom po porabi, PTU nadgradite le za produkcijo
+- Uporabite `azd provision --preview` za oceno stroškov pred uvajanjem
+- Omogočite samodejno skaliranje: plačajte le za dejansko uporabo
 
 **Nadzor stroškov:**
 ```bash
@@ -206,22 +206,22 @@ az consumption budget list --resource-group <your-rg>
 **Trajanje**: 45-60 minut  
 **Zahtevnost**: ⭐⭐
 
-#### Kaj se boš naučil
+#### Kaj se boste naučili
 - Konfiguracija in upravljanje okolij
-- Najboljše prakse avtentikacije in varnosti
+- Avtentikacija in najboljše varnostne prakse
 - Poimenovanje in organizacija virov
 
 #### Učni viri
 - **📖 Konfiguracija**: [Vodnik za konfiguracijo](docs/getting-started/configuration.md) - Nastavitev okolja
 - **🔐 Varnost**: [Vzorce avtentikacije in upravljane identitete](docs/getting-started/authsecurity.md) - Vzorce avtentikacije
-- **📝 Primeri**: [Primer aplikacije z bazo](examples/database-app/README.md) - AZD primeri z bazami
+- **📝 Primeri**: [Primer aplikacije z bazo](examples/database-app/README.md) - AZD primeri za baze podatkov
 
 #### Praktične vaje
-- Konfiguriraj več okolij (dev, staging, prod)
-- Nastavi avtentikacijo z upravljano identiteto
-- Izvedi konfiguracije specifične za okolje
+- Konfigurirajte več okolij (dev, staging, prod)
+- Nastavite avtentikacijo z upravljano identiteto
+- Implementirajte konfiguracije specifične za okolje
 
-**💡 Rezultat poglavja**: Upravljanje več okolij z ustrezno avtentikacijo in varnostjo
+**💡 Rezultat poglavja**: Upravljajte več okolij z ustrezno avtentikacijo in varnostjo
 
 ---
 
@@ -230,7 +230,7 @@ az consumption budget list --resource-group <your-rg>
 **Trajanje**: 1-1,5 ure  
 **Zahtevnost**: ⭐⭐⭐
 
-#### Kaj se boš naučil
+#### Kaj se boste naučili
 - Napredni vzorci uvajanja
 - Infrastruktura kot koda z Bicep
 - Strategije zagotavljanja virov
@@ -241,20 +241,20 @@ az consumption budget list --resource-group <your-rg>
 - **📝 Primeri**: [Primer Container App](../../examples/container-app) - Uvajanja v vsebnikih
 
 #### Praktične vaje
-- Ustvari lastne Bicep predloge
-- Uvajaj večstoritevne aplikacije
-- Izvedi strategije modro-zelene uvajanja
+- Ustvarite lastne Bicep predloge
+- Uvajajte večstoritevne aplikacije
+- Implementirajte strategije modro-zelene namestitve
 
-**💡 Rezultat poglavja**: Uvajanje kompleksnih večstoritevnih aplikacij z uporabo lastnih infrastrukturnih predlog
+**💡 Rezultat poglavja**: Uvajajte kompleksne večstoritevne aplikacije z uporabo lastnih infrastrukturnih predlog
 
 ---
 
 ### 🎯 Poglavje 5: Večagentne AI rešitve (napredno)
-**Predpogoji**: Poglavji 1-2 zaključeni  
+**Predpogoji**: Poglavji 1-2 zaključena  
 **Trajanje**: 2-3 ure  
 **Zahtevnost**: ⭐⭐⭐⭐
 
-#### Kaj se boš naučil
+#### Kaj se boste naučili
 - Vzorce večagentne arhitekture
 - Orkestracijo in koordinacijo agentov
 - Produkcijsko pripravljene AI uvajanja
@@ -262,7 +262,7 @@ az consumption budget list --resource-group <your-rg>
 #### Učni viri
 - **🤖 Izpostavljen projekt**: [Večagentna rešitev za maloprodajo](examples/retail-scenario.md) - Celovita implementacija
 - **🛠️ ARM predloge**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Namestitev z enim klikom
-- **📖 Arhitektura**: [Vzorce koordinacije več agentov](/docs/pre-deployment/coordination-patterns.md) - Vzorci
+- **📖 Arhitektura**: [Vzorce koordinacije več agentov](/docs/pre-deployment/coordination-patterns.md) - Vzorce
 
 #### Praktične vaje
 ```bash
@@ -274,36 +274,36 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Cilj poglavja**: Namestiti in upravljati večagentno AI rešitev, pripravljeno za produkcijo, z agenti za stranke in zaloge
+**💡 Cilj poglavja**: Namestiti in upravljati produkcijsko pripravljen večagentni AI sistem s strankinimi in zalogovnimi agenti
 
 ---
 
-### 🔍 Poglavje 6: Preverjanje in načrtovanje pred namestitvijo
-**Pogoji**: Poglavje 4 zaključeno  
+### 🔍 Poglavje 6: Validacija in načrtovanje pred namestitvijo
+**Predpogoji**: Dokončano poglavje 4  
 **Trajanje**: 1 ura  
 **Zahtevnost**: ⭐⭐
 
 #### Kaj se boste naučili
-- Načrtovanje zmogljivosti in preverjanje virov
+- Načrtovanje zmogljivosti in validacija virov
 - Strategije izbire SKU
 - Preverjanja pred zagonom in avtomatizacija
 
 #### Viri za učenje
-- **📊 Načrtovanje**: [Načrtovanje zmogljivosti](docs/pre-deployment/capacity-planning.md) - Preverjanje virov
+- **📊 Načrtovanje**: [Načrtovanje zmogljivosti](docs/pre-deployment/capacity-planning.md) - Validacija virov
 - **💰 Izbira**: [Izbira SKU](docs/pre-deployment/sku-selection.md) - Stroškovno učinkovite izbire
-- **✅ Preverjanje**: [Preverjanja pred zagonom](docs/pre-deployment/preflight-checks.md) - Avtomatizirani skripti
+- **✅ Validacija**: [Preverjanja pred zagonom](docs/pre-deployment/preflight-checks.md) - Avtomatizirani skripti
 
 #### Praktične vaje
-- Zaženite skripte za preverjanje zmogljivosti
-- Optimizirajte izbiro SKU za stroške
+- Zaženite skripte za validacijo zmogljivosti
+- Optimizirajte izbire SKU glede na stroške
 - Izvedite avtomatizirana preverjanja pred namestitvijo
 
-**💡 Cilj poglavja**: Preveriti in optimizirati namestitve pred izvedbo
+**💡 Cilj poglavja**: Validirati in optimizirati namestitve pred izvedbo
 
 ---
 
 ### 🚨 Poglavje 7: Odpravljanje težav in razhroščevanje
-**Pogoji**: Katero koli poglavje o namestitvi zaključeno  
+**Predpogoji**: Dokončano katerokoli poglavje o namestitvi  
 **Trajanje**: 1-1,5 ure  
 **Zahtevnost**: ⭐⭐
 
@@ -315,19 +315,19 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### Viri za učenje
 - **🔧 Pogoste težave**: [Pogoste težave](docs/troubleshooting/common-issues.md) - Pogosta vprašanja in rešitve
 - **🕵️ Razhroščevanje**: [Vodnik za razhroščevanje](docs/troubleshooting/debugging.md) - Strategije korak za korakom
-- **🤖 AI težave**: [Odpravljanje težav AI](docs/troubleshooting/ai-troubleshooting.md) - Težave AI storitev
+- **🤖 AI težave**: [Odpravljanje težav za AI](docs/troubleshooting/ai-troubleshooting.md) - Težave s storitvami AI
 
 #### Praktične vaje
 - Diagnosticirajte neuspehe namestitve
 - Odpravite težave z avtentikacijo
-- Razhroščujte povezljivost AI storitev
+- Razhroščite povezljivost AI storitev
 
 **💡 Cilj poglavja**: Samostojno diagnosticirati in odpraviti pogoste težave pri namestitvah
 
 ---
 
 ### 🏢 Poglavje 8: Produkcijski in podjetniški vzorci
-**Pogoji**: Poglavja 1-4 zaključena  
+**Predpogoji**: Dokončana poglavja 1-4  
 **Trajanje**: 2-3 ure  
 **Zahtevnost**: ⭐⭐⭐⭐
 
@@ -337,12 +337,12 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Nadzor in optimizacija stroškov
 
 #### Viri za učenje
-- **🏭 Produkcija**: [Najboljše prakse AI za produkcijo](docs/microsoft-foundry/production-ai-practices.md) - Podjetniški vzorci
+- **🏭 Produkcija**: [Najboljše prakse za AI v produkciji](docs/microsoft-foundry/production-ai-practices.md) - Podjetniški vzorci
 - **📝 Primeri**: [Primer mikrostoritev](../../examples/microservices) - Kompleksne arhitekture
 - **📊 Nadzor**: [Integracija Application Insights](docs/pre-deployment/application-insights.md) - Nadzor
 
 #### Praktične vaje
-- Uvedite varnostne vzorce za podjetja
+- Implementirajte varnostne vzorce za podjetja
 - Nastavite celovit nadzor
 - Namestite v produkcijo z ustreznim upravljanjem
 
@@ -358,14 +358,14 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### Interaktivni materiali delavnice
 **Celovito praktično učenje z orodji v brskalniku in vodenimi vajami**
 
-Naši materiali delavnice nudijo strukturirano, interaktivno učno izkušnjo, ki dopolnjuje zgornji učni načrt po poglavjih. Delavnica je zasnovana za samostojno učenje in vodenje s strani inštruktorjev.
+Naši materiali delavnice nudijo strukturirano, interaktivno učno izkušnjo, ki dopolnjuje zgornji učni načrt po poglavjih. Delavnica je zasnovana tako za samostojno učenje kot za vodenje s strani inštruktorja.
 
 #### 🛠️ Značilnosti delavnice
 - **Vmesnik v brskalniku**: Popolna delavnica na platformi MkDocs z iskanjem, kopiranjem in temami
 - **Integracija GitHub Codespaces**: Namestitev razvojnega okolja z enim klikom
-- **Strukturirana učna pot**: 7 korakov vodenih vaj (skupaj 3,5 ure)
+- **Strukturirana učna pot**: 7-stopenjske vodene vaje (skupaj 3,5 ure)
 - **Odkritje → Namestitev → Prilagoditev**: Postopna metodologija
-- **Interaktivno okolje DevContainer**: Vnaprej konfigurirana orodja in odvisnosti
+- **Interaktivno razvojno okolje DevContainer**: Vnaprej konfigurirana orodja in odvisnosti
 
 #### 📚 Struktura delavnice
 Delavnica sledi metodologiji **Odkritje → Namestitev → Prilagoditev**:
@@ -373,17 +373,17 @@ Delavnica sledi metodologiji **Odkritje → Namestitev → Prilagoditev**:
 1. **Faza odkritja** (45 min)
    - Raziščite Microsoft Foundry predloge in storitve
    - Razumite vzorce arhitekture več agentov
-   - Preglejte zahteve in pogoje za namestitev
+   - Preglejte zahteve in predpogoje za namestitev
 
 2. **Faza namestitve** (2 uri)
    - Praktična namestitev AI aplikacij z AZD
    - Konfiguracija Azure AI storitev in končnih točk
-   - Uvedba varnostnih in avtentikacijskih vzorcev
+   - Implementacija varnostnih in avtentikacijskih vzorcev
 
 3. **Faza prilagoditve** (45 min)
    - Prilagodite aplikacije za specifične primere uporabe
    - Optimizirajte za produkcijsko namestitev
-   - Uvedite nadzor in upravljanje stroškov
+   - Implementirajte nadzor in upravljanje stroškov
 
 #### 🚀 Začetek z delavnico
 ```bash
@@ -397,20 +397,20 @@ cd azd-for-beginners/workshop
 ```
 
 #### 🎯 Cilji učenja delavnice
-Z zaključkom delavnice bodo udeleženci:
+Z dokončanjem delavnice bodo udeleženci:
 - **Namestili produkcijske AI aplikacije**: Uporaba AZD z Microsoft Foundry storitvami
-- **Obvladali arhitekture več agentov**: Uvedba koordiniranih AI agent rešitev
-- **Uvedli najboljše varnostne prakse**: Konfiguracija avtentikacije in nadzora dostopa
+- **Obvladali arhitekture več agentov**: Implementacija koordiniranih AI agent rešitev
+- **Uporabljali najboljše varnostne prakse**: Konfiguracija avtentikacije in nadzora dostopa
 - **Optimizirali za obseg**: Oblikovanje stroškovno učinkovitih in zmogljivih namestitev
 - **Odpravljali težave pri namestitvah**: Samostojno reševanje pogostih težav
 
 #### 📖 Viri delavnice
 - **🎥 Interaktivni vodič**: [Materiali delavnice](workshop/README.md) - Učno okolje v brskalniku
-- **📋 Navodila korak za korakom**: [Vodenje vaj](../../workshop/docs/instructions) - Podrobna navodila
+- **📋 Navodila korak za korakom**: [Vodene vaje](../../workshop/docs/instructions) - Podrobna navodila
 - **🛠️ AI delavnica laboratorij**: [AI delavnica laboratorij](docs/microsoft-foundry/ai-workshop-lab.md) - AI osredotočene vaje
 - **💡 Hitri začetek**: [Vodnik za nastavitev delavnice](workshop/README.md#quick-start) - Konfiguracija okolja
 
-**Popolno za**: Podjetna usposabljanja, univerzitetne tečaje, samostojno učenje in razvojne bootcampe.
+**Popolno za**: Podjetna usposabljanja, univerzitetne tečaje, samostojno učenje in bootcampe za razvijalce.
 
 ---
 
@@ -427,7 +427,7 @@ Azure Developer CLI (azd) je ukazna vrstica, osredotočena na razvijalce, ki pos
 
 **Zakaj AZD za AI rešitve?** AZD rešuje glavne izzive, s katerimi se srečujejo AI razvijalci:
 
-- **Predloge pripravljene za AI** - Vnaprej konfigurirane predloge za Azure OpenAI, kognitivne storitve in ML delovne obremenitve
+- **Predloge pripravljene za AI** - Vnaprej konfigurirane predloge za Azure OpenAI, Kognitivne storitve in ML delovne obremenitve
 - **Varnostne AI namestitve** - Vgrajeni varnostni vzorci za AI storitve, API ključe in končne točke modelov  
 - **Produkcijski AI vzorci** - Najboljše prakse za skalabilne, stroškovno učinkovite AI aplikacije
 - **Celoviti AI delovni tokovi** - Od razvoja modela do produkcijske namestitve z ustreznim nadzorom
@@ -458,12 +458,12 @@ Azure Developer CLI (azd) je ukazna vrstica, osredotočena na razvijalce, ki pos
 
 | Predloga | Učno poglavje | Zahtevnost | Ključna vsebina |
 |----------|---------------|------------|-----------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Poglavje 2 | ⭐ | Osnovni vzorci AI namestitev |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Poglavje 2 | ⭐ | Osnovni AI vzorci namestitve |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Poglavje 2 | ⭐⭐ | Implementacija RAG z Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Poglavje 4 | ⭐⭐ | Integracija inteligence dokumentov |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Poglavje 5 | ⭐⭐⭐ | Okvir agentov in klic funkcij |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Poglavje 8 | ⭐⭐⭐ | Podjetniška AI orkestracija |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Poglavje 5 | ⭐⭐⭐⭐ | Arhitektura več agentov s strankami in agenti za zaloge |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Poglavje 5 | ⭐⭐⭐⭐ | Arhitektura več agentov s strankinimi in zalogovnimi agenti |
 
 ### Učenje po tipu primerov
 
@@ -472,54 +472,54 @@ Azure Developer CLI (azd) je ukazna vrstica, osredotočena na razvijalce, ki pos
 > **Zunanji primeri** (Azure vzorci) = Klonirajte iz povezanih repozitorijev
 
 #### Lokalni primeri (takoj pripravljeni za uporabo)
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Celovita implementacija, pripravljena za produkcijo, z ARM predlogami
-  - Arhitektura več agentov (stranke + agenti za zaloge)
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Popolna produkcijsko pripravljena implementacija z ARM predlogami
+  - Arhitektura več agentov (stranka + zaloga)
   - Celovit nadzor in ocenjevanje
   - Namestitev z enim klikom preko ARM predloge
 
 #### Lokalni primeri - aplikacije v vsebnikih (poglavja 2-5)
-**Celoviti primeri namestitev vsebnikov v tem repozitoriju:**
+**Celoviti primeri namestitve vsebnikov v tem repozitoriju:**
 - [**Primeri Container App**](examples/container-app/README.md) - Popoln vodič za namestitve v vsebnikih
-  - [Preprost Flask API](../../examples/container-app/simple-flask-api) - Osnovni REST API s skaliranjem na nič
-  - [Arhitektura mikrostoritev](../../examples/container-app/microservices) - Produkcijska večstoritevna namestitev
-  - Hitri začetek, produkcija in napredni vzorci namestitev
-  - Navodila za nadzor, varnost in optimizacijo stroškov
+  - [Preprost Flask API](../../examples/container-app/simple-flask-api) - Osnovni REST API s skaliranjem na ničlo
+  - [Arhitektura mikrostoritev](../../examples/container-app/microservices) - Produkcijsko pripravljena večstoritevna namestitev
+  - Hitri začetek, produkcija in napredni vzorci namestitve
+  - Nadzor, varnost in smernice za optimizacijo stroškov
 
 #### Zunanji primeri - preproste aplikacije (poglavja 1-2)
 **Klonirajte te Azure vzorčne repozitorije za začetek:**
-- [Preprosta spletna aplikacija - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Osnovni vzorci namestitev
+- [Preprosta spletna aplikacija - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Osnovni vzorci namestitve
 - [Statična spletna stran - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Namestitev statične vsebine
 - [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Namestitev REST API
 
 #### Zunanji primeri - integracija podatkovnih baz (poglavja 3-4)  
-- [Aplikacija z bazo - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Vzorci povezljivosti baz podatkov
+- [Aplikacija z bazo - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Vzorci povezljivosti z bazo
 - [Funkcije + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Brezstrežni podatkovni delovni tok
 
 #### Zunanji primeri - napredni vzorci (poglavja 4-8)
-- [Java mikrostoritev](https://github.com/Azure-Samples/java-microservices-aca-lab) - Arhitekture več storitev
+- [Java mikrostoritev](https://github.com/Azure-Samples/java-microservices-aca-lab) - Večstoritevne arhitekture
 - [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Ozadinsko procesiranje  
-- [Podjetniški ML potek](https://github.com/Azure-Samples/mlops-v2) - Produkcijski ML vzorci
+- [Podjetniški ML pipeline](https://github.com/Azure-Samples/mlops-v2) - Produkcijsko pripravljeni ML vzorci
 
 ### Zbirke zunanjih predlog
-- [**Uradna galerija AZD predlog**](https://azure.github.io/awesome-azd/) - Izbrana zbirka uradnih in skupnostnih predlog
+- [**Uradna galerija AZD predlog**](https://azure.github.io/awesome-azd/) - Kurirana zbirka uradnih in skupnostnih predlog
 - [**Azure Developer CLI predloge**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Dokumentacija Microsoft Learn predlog
-- [**Mapa primerov**](examples/README.md) - Lokalni učni primeri s podrobnimi razlagami
+- [**Mapa primerov**](examples/README.md) - Lokalni učni primeri z podrobnimi razlagami
 
 ---
 
 ## 📚 Viri za učenje in reference
 
 ### Hitre reference
-- [**Ukazni priročnik**](resources/cheat-sheet.md) - Osnovni ukazi azd organizirani po poglavjih  
-- [**Slovar izrazov**](resources/glossary.md) - Terminologija Azure in azd  
+- [**Ukazni prevarantski list**](resources/cheat-sheet.md) - Osnovni ukazi azd organizirani po poglavjih  
+- [**Slovar**](resources/glossary.md) - Terminologija Azure in azd  
 - [**Pogosta vprašanja**](resources/faq.md) - Pogosta vprašanja organizirana po učnih poglavjih  
-- [**Učni vodič**](resources/study-guide.md) - Celovite praktične vaje  
+- [**Študijski vodič**](resources/study-guide.md) - Celovite praktične vaje  
 
 ### Delavnice z vajo
 - [**Delavnica AI laboratorij**](docs/microsoft-foundry/ai-workshop-lab.md) - Naredite svoje AI rešitve pripravljene za AZD-implementacijo (2-3 ure)  
 - [**Interaktivni vodič delavnice**](workshop/README.md) - Delavnica v brskalniku z MkDocs in DevContainer okoljem  
 - [**Strukturirana učna pot**](../../workshop/docs/instructions) - 7-stopenjske vodene vaje (Odkritje → Implementacija → Prilagoditev)  
-- [**Delavnica AZD za začetnike**](workshop/README.md) - Celoten material delavnice z integracijo GitHub Codespaces  
+- [**AZD za začetnike delavnica**](workshop/README.md) - Celoten material za delavnico z integracijo GitHub Codespaces  
 
 ### Zunanji učni viri
 - [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
@@ -531,7 +531,7 @@ Azure Developer CLI (azd) je ukazna vrstica, osredotočena na razvijalce, ki pos
 
 ## 🔧 Hiter vodič za odpravljanje težav
 
-**Pogoste težave, s katerimi se srečujejo začetniki, in takojšnje rešitve:**
+**Pogoste težave, s katerimi se začetniki srečujejo, in takojšnje rešitve:**
 
 ### ❌ "azd: ukaz ni najden"
 
@@ -550,10 +550,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 azd version
 ```
   
-### ❌ "Nobenega naročnika ni najdenega" ali "Naročnina ni nastavljena"
+### ❌ "Nobenega naročniškega paketa ni najdenega" ali "Naročniški paket ni nastavljen"
 
 ```bash
-# Prikaži razpoložljive naročnine
+# Naštej razpoložljive naročnine
 az account list --output table
 
 # Nastavi privzeto naročnino
@@ -625,7 +625,7 @@ azd up
 **Običajni časi čakanja:**  
 - Preprosta spletna aplikacija: 5-10 minut  
 - Aplikacija z bazo podatkov: 10-15 minut  
-- AI aplikacije: 15-25 minut (OpenAI priprava je počasna)  
+- AI aplikacije: 15-25 minut (OpenAI zagotavljanje je počasno)  
 
 ```bash
 # Preveri napredek
@@ -639,7 +639,7 @@ azd monitor
 ### ❌ "Dostop zavrnjen" ali "Prepovedano"
 
 ```bash
-# Preverite svojo vlogo v Azure
+# Preverite svojo Azure vlogo
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # Potrebujete vsaj vlogo "Contributor"
@@ -664,16 +664,16 @@ azd env get-values
   
 ### 📚 Celotni viri za odpravljanje težav
 
-- **Vodnik za pogoste težave:** [Podrobne rešitve](docs/troubleshooting/common-issues.md)  
+- **Vodič za pogoste težave:** [Podrobne rešitve](docs/troubleshooting/common-issues.md)  
 - **Težave specifične za AI:** [Odpravljanje težav AI](docs/troubleshooting/ai-troubleshooting.md)  
-- **Vodnik za odpravljanje napak:** [Korak za korakom odpravljanje](docs/troubleshooting/debugging.md)  
+- **Vodič za odpravljanje napak:** [Korak za korakom odpravljanje napak](docs/troubleshooting/debugging.md)  
 - **Poišči pomoč:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
 
 ---
 
 ## 🔧 Hiter vodič za odpravljanje težav
 
-**Pogoste težave, s katerimi se srečujejo začetniki, in takojšnje rešitve:**
+**Pogoste težave, s katerimi se začetniki srečujejo, in takojšnje rešitve:**
 
 <details>
 <summary><strong>❌ "azd: ukaz ni najden"</strong></summary>
@@ -695,10 +695,10 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "Nobenega naročnika ni najdenega" ali "Naročnina ni nastavljena"</strong></summary>
+<summary><strong>❌ "Nobenega naročniškega paketa ni najdenega" ali "Naročniški paket ni nastavljen"</strong></summary>
 
 ```bash
-# Naštej razpoložljive naročnine
+# Prikaži razpoložljive naročnine
 az account list --output table
 
 # Nastavi privzeto naročnino
@@ -780,7 +780,7 @@ azd up
 **Običajni časi čakanja:**  
 - Preprosta spletna aplikacija: 5-10 minut  
 - Aplikacija z bazo podatkov: 10-15 minut  
-- AI aplikacije: 15-25 minut (OpenAI priprava je počasna)  
+- AI aplikacije: 15-25 minut (OpenAI zagotavljanje je počasno)  
 
 ```bash
 # Preveri napredek
@@ -824,9 +824,9 @@ azd env get-values
 
 ### 📚 Celotni viri za odpravljanje težav
 
-- **Vodnik za pogoste težave:** [Podrobne rešitve](docs/troubleshooting/common-issues.md)  
+- **Vodič za pogoste težave:** [Podrobne rešitve](docs/troubleshooting/common-issues.md)  
 - **Težave specifične za AI:** [Odpravljanje težav AI](docs/troubleshooting/ai-troubleshooting.md)  
-- **Vodnik za odpravljanje napak:** [Korak za korakom odpravljanje](docs/troubleshooting/debugging.md)  
+- **Vodič za odpravljanje napak:** [Korak za korakom odpravljanje napak](docs/troubleshooting/debugging.md)  
 - **Poišči pomoč:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
 
 ---
@@ -850,14 +850,14 @@ Po zaključku vsakega poglavja preverite svoje znanje z:
 1. **Praktična vaja**: Zaključite praktično implementacijo poglavja  
 2. **Preverjanje znanja**: Preglejte razdelek FAQ za vaše poglavje  
 3. **Skupnostna razprava**: Delite svoje izkušnje v Azure Discord  
-4. **Naslednje poglavje**: Nadaljujte na naslednjo stopnjo zahtevnosti  
+4. **Naslednje poglavje**: Premaknite se na naslednjo stopnjo zahtevnosti  
 
 ### Prednosti zaključka tečaja  
 Po zaključku vseh poglavij boste imeli:  
 - **Izkušnje iz produkcije**: Implementirane resnične AI aplikacije v Azure  
-- **Poklicne veščine**: Zmožnost implementacije za podjetja  
+- **Poklicne veščine**: Sposobnosti implementacije za podjetja  
 - **Priznanje v skupnosti**: Aktivni član Azure razvijalske skupnosti  
-- **Napredovanje v karieri**: Iskana strokovnost za AZD in AI implementacije  
+- **Napredovanje v karieri**: Iskana strokovnost za AZD in AI implementacijo  
 
 ---
 
@@ -871,24 +871,24 @@ Po zaključku vseh poglavij boste imeli:
 
 ### Vpogledi skupnosti iz Microsoft Foundry Discord
 
-**Nedavni rezultati ankete na kanalu #Azure:**  
+**Nedavni rezultati ankete iz kanala #Azure:**  
 - **45 %** razvijalcev želi uporabljati AZD za AI delovne obremenitve  
-- **Glavne težave:** Večstoritevne implementacije, upravljanje poverilnic, pripravljenost za produkcijo  
-- **Najbolj zahtevano:** AI-specifične predloge, vodiči za odpravljanje težav, najboljše prakse  
+- **Glavni izzivi**: Večstoritevne implementacije, upravljanje poverilnic, pripravljenost za produkcijo  
+- **Najbolj zahtevano**: AI-specifične predloge, vodiči za odpravljanje težav, najboljše prakse  
 
 **Pridružite se naši skupnosti, da:**  
 - Delite svoje izkušnje z AZD + AI in poiščete pomoč  
 - Dostopate do zgodnjih predogledov novih AI predlog  
-- Prispevate k najboljšim praksam AI implementacije  
+- Prispevate k najboljšim praksam za AI implementacijo  
 - Vplivate na prihodnji razvoj funkcij AI + AZD  
 
 ### Prispevanje k tečaju  
-Prispevke toplo pozdravljamo! Prosimo, preberite naš [Vodič za prispevke](CONTRIBUTING.md) za podrobnosti o:  
-- **Izboljšavah vsebine:** Izboljšajte obstoječa poglavja in primere  
-- **Novi primeri:** Dodajte resnične scenarije in predloge  
-- **Prevajanju:** Pomagajte vzdrževati podporo za več jezikov  
-- **Poročilih o napakah:** Izboljšajte natančnost in jasnost  
-- **Standardih skupnosti:** Sledite našim vključujočim smernicam skupnosti  
+Prispevke sprejemamo! Prosimo, preberite naš [Vodič za prispevke](CONTRIBUTING.md) za podrobnosti o:  
+- **Izboljšave vsebine**: Izboljšajte obstoječa poglavja in primere  
+- **Novi primeri**: Dodajte resnične scenarije in predloge  
+- **Prevajanje**: Pomagajte vzdrževati podporo za več jezikov  
+- **Poročila o napakah**: Izboljšajte natančnost in jasnost  
+- **Standardi skupnosti**: Sledite našim vključujočim smernicam skupnosti  
 
 ---
 
@@ -902,26 +902,32 @@ Ta projekt je licenciran pod licenco MIT - podrobnosti so v datoteki [LICENSE](.
 Naša ekipa ustvarja tudi druge celovite učne tečaje:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain  
+[![LangChain4j za začetnike](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)  
+[![LangChain.js za začetnike](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)  
+
+---
+
 ### Azure / Edge / MCP / Agent  
 [![AZD za začetnike](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)  
 [![Edge AI za začetnike](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)  
 [![MCP za začetnike](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
 [![AI agenti za začetnike](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
 
----  
- 
+---
+
 ### Serija Generativni AI  
 [![Generativni AI za začetnike](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
 [![Generativni AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
 [![Generativni AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
 [![Generativni AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)  
 
----  
- 
+---
+
 ### Osnovno učenje  
 [![ML za začetnike](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Podatkovna znanost za začetnike](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI za začetnike](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+[![Podatkovna znanost za začetnike](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI za začetnike](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Kibernetska varnost za začetnike](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Spletni razvoj za začetnike](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT za začetnike](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
@@ -941,15 +947,15 @@ Naša ekipa ustvarja tudi druge celovite učne tečaje:
 
 **🚀 Pripravljeni za začetek učenja?**
 
-**Začetniki**: Začnite s [Poglavje 1: Osnove in hiter začetek](../..)  
-**AI razvijalci**: Preskočite na [Poglavje 2: AI-prvi razvoj](../..)  
-**Izkušeni razvijalci**: Začnite s [Poglavje 3: Konfiguracija in avtentikacija](../..)
+**Začetniki**: Začnite s [1. poglavjem: Osnove in hiter začetek](../..)  
+**AI razvijalci**: Preskočite na [2. poglavje: AI-prvi razvoj](../..)  
+**Izkušeni razvijalci**: Začnite s [3. poglavjem: Konfiguracija in avtentikacija](../..)
 
-**Naslednji koraki**: [Začni Poglavje 1 - Osnove AZD](docs/getting-started/azd-basics.md) →
+**Naslednji koraki**: [Začni 1. poglavje - Osnove AZD](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Omejitev odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas opozarjamo, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Za morebitne nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda, ne odgovarjamo.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas opozarjamo, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda, ne odgovarjamo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

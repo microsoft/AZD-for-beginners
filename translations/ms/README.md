@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-16T00:00:23+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T15:00:04+00:00",
   "source_file": "README.md",
   "language_code": "ms"
 }
@@ -221,7 +221,7 @@ az consumption budget list --resource-group <your-rg>
 - Sediakan pengesahan identiti terurus
 - Laksanakan konfigurasi khusus persekitaran
 
-**💡 Hasil Bab**: Urus pelbagai persekitaran dengan pengesahan dan keselamatan yang betul
+**💡 Hasil Bab**: Mengurus pelbagai persekitaran dengan pengesahan dan keselamatan yang betul
 
 ---
 
@@ -261,8 +261,8 @@ az consumption budget list --resource-group <your-rg>
 
 #### Sumber Pembelajaran
 - **🤖 Projek Pilihan**: [Penyelesaian Multi-Ejen Runcit](examples/retail-scenario.md) - Pelaksanaan lengkap
-- **🛠️ ARM Templates**: [Pakej Templat ARM](../../examples/retail-multiagent-arm-template) - Penghantaran satu klik
-- **📖 Seni Bina**: [Corak penyelarasan ejen pelbagai](/docs/pre-deployment/coordination-patterns.md) - Corak
+- **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Penghantaran satu klik
+- **📖 Architecture**: [Corak penyelarasan ejen pelbagai](/docs/pre-deployment/coordination-patterns.md) - Corak
 
 #### Latihan Praktikal
 ```bash
@@ -361,7 +361,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 Bahan bengkel kami menyediakan pengalaman pembelajaran berstruktur dan interaktif yang melengkapkan kurikulum berasaskan bab di atas. Bengkel direka untuk pembelajaran kendiri dan sesi dipimpin pengajar.
 
 #### 🛠️ Ciri-ciri Bengkel
-- **Antara Muka Berasaskan Pelayar**: Bengkel lengkap berkuasa MkDocs dengan ciri carian, salin, dan tema
+- **Antara Muka Berasaskan Pelayar**: Bengkel lengkap dikuasakan MkDocs dengan ciri carian, salin, dan tema
 - **Integrasi GitHub Codespaces**: Persediaan persekitaran pembangunan satu klik
 - **Jalur Pembelajaran Berstruktur**: 7 langkah latihan berpandu (3.5 jam keseluruhan)
 - **Penemuan → Penghantaran → Penyesuaian**: Metodologi progresif
@@ -397,7 +397,7 @@ cd azd-for-beginners/workshop
 ```
 
 #### 🎯 Hasil Pembelajaran Bengkel
-Dengan menyelesaikan bengkel, peserta akan:
+Dengan menamatkan bengkel, peserta akan:
 - **Menghantar Aplikasi AI Pengeluaran**: Gunakan AZD dengan perkhidmatan Microsoft Foundry
 - **Menguasai Seni Bina Ejen Pelbagai**: Laksanakan penyelesaian ejen AI berkoordinasi
 - **Melaksanakan Amalan Keselamatan Terbaik**: Konfigurasi pengesahan dan kawalan akses
@@ -430,7 +430,7 @@ Azure Developer CLI (azd) ialah antara muka baris perintah berfokuskan pembangun
 - **Templat Sedia AI** - Templat pra-konfigurasi untuk Azure OpenAI, Perkhidmatan Kognitif, dan beban kerja ML
 - **Penghantaran AI Selamat** - Corak keselamatan terbina dalam untuk perkhidmatan AI, kunci API, dan titik akhir model  
 - **Corak AI Pengeluaran** - Amalan terbaik untuk penghantaran aplikasi AI yang boleh diskala dan kos efektif
-- **Aliran Kerja AI Sepanjang** - Dari pembangunan model ke penghantaran pengeluaran dengan pemantauan yang betul
+- **Aliran Kerja AI Sepanjang Rantaian** - Dari pembangunan model ke penghantaran pengeluaran dengan pemantauan betul
 - **Pengoptimuman Kos** - Strategi peruntukan sumber dan penskalaan pintar untuk beban kerja AI
 - **Integrasi Microsoft Foundry** - Sambungan lancar ke katalog model dan titik akhir Microsoft Foundry
 
@@ -473,7 +473,7 @@ Azure Developer CLI (azd) ialah antara muka baris perintah berfokuskan pembangun
 
 #### Contoh Tempatan (Sedia Digunakan)
 - [**Penyelesaian Multi-Ejen Runcit**](examples/retail-scenario.md) - Pelaksanaan lengkap sedia pengeluaran dengan templat ARM
-  - Seni bina ejen pelbagai (Pelanggan + Ejen Inventori)
+  - Seni bina ejen pelbagai (Ejen Pelanggan + Inventori)
   - Pemantauan dan penilaian menyeluruh
   - Penghantaran satu klik melalui templat ARM
 
@@ -497,7 +497,7 @@ Azure Developer CLI (azd) ialah antara muka baris perintah berfokuskan pembangun
 
 #### Contoh Luaran - Corak Lanjutan (Bab 4-8)
 - [Mikroservis Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - Seni bina multi-perkhidmatan
-- [Tugas Aplikasi Kontena](https://github.com/Azure-Samples/container-apps-jobs) - Pemprosesan latar belakang  
+- [Pekerjaan Aplikasi Kontena](https://github.com/Azure-Samples/container-apps-jobs) - Pemprosesan latar belakang  
 - [Saluran ML Perusahaan](https://github.com/Azure-Samples/mlops-v2) - Corak ML sedia pengeluaran
 
 ### Koleksi Templat Luaran
@@ -510,22 +510,22 @@ Azure Developer CLI (azd) ialah antara muka baris perintah berfokuskan pembangun
 ## 📚 Sumber Pembelajaran & Rujukan
 
 ### Rujukan Pantas
-- [**Lembaran Cheat Perintah**](resources/cheat-sheet.md) - Perintah azd penting yang disusun mengikut bab  
+- [**Lembaran Cheat Perintah**](resources/cheat-sheet.md) - Perintah azd penting yang disusun mengikut bab
 - [**Glosari**](resources/glossary.md) - Terminologi Azure dan azd  
-- [**Soalan Lazim**](resources/faq.md) - Soalan biasa yang disusun mengikut bab pembelajaran  
-- [**Panduan Belajar**](resources/study-guide.md) - Latihan praktikal yang komprehensif  
+- [**Soalan Lazim**](resources/faq.md) - Soalan biasa yang disusun mengikut bab pembelajaran
+- [**Panduan Belajar**](resources/study-guide.md) - Latihan praktikal yang menyeluruh
 
-### Bengkel Praktikal  
-- [**Makmal Bengkel AI**](docs/microsoft-foundry/ai-workshop-lab.md) - Jadikan penyelesaian AI anda boleh dideploy dengan AZD (2-3 jam)  
-- [**Panduan Bengkel Interaktif**](workshop/README.md) - Bengkel berasaskan pelayar dengan MkDocs dan Persekitaran DevContainer  
-- [**Laluan Pembelajaran Berstruktur**](../../workshop/docs/instructions) - Latihan berpandu 7 langkah (Penemuan → Penyebaran → Penyesuaian)  
-- [**Bengkel AZD Untuk Pemula**](workshop/README.md) - Bahan bengkel praktikal lengkap dengan integrasi GitHub Codespaces  
+### Bengkel Praktikal
+- [**Makmal Bengkel AI**](docs/microsoft-foundry/ai-workshop-lab.md) - Jadikan penyelesaian AI anda boleh dideploy dengan AZD (2-3 jam)
+- [**Panduan Bengkel Interaktif**](workshop/README.md) - Bengkel berasaskan pelayar dengan MkDocs dan Persekitaran DevContainer
+- [**Jalur Pembelajaran Berstruktur**](../../workshop/docs/instructions) - Latihan berpandu 7 langkah (Penemuan → Penyebaran → Penyesuaian)
+- [**Bengkel AZD Untuk Pemula**](workshop/README.md) - Bahan bengkel praktikal lengkap dengan integrasi GitHub Codespaces
 
-### Sumber Pembelajaran Luaran  
-- [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Kalkulator Harga Azure](https://azure.microsoft.com/pricing/calculator/)  
-- [Status Azure](https://status.azure.com/)  
+### Sumber Pembelajaran Luaran
+- [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Kalkulator Harga Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Status Azure](https://status.azure.com/)
 
 ---
 
@@ -549,8 +549,8 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 # Sahkan pemasangan
 azd version
 ```
-  
-### ❌ "No subscription found" atau "Subscription not set"
+
+### ❌ "No subscription found" or "Subscription not set"
 
 ```bash
 # Senaraikan langganan yang tersedia
@@ -565,8 +565,8 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # Sahkan
 az account show
 ```
-  
-### ❌ "InsufficientQuota" atau "Quota exceeded"
+
+### ❌ "InsufficientQuota" or "Quota exceeded"
 
 ```bash
 # Cuba rantau Azure yang berbeza
@@ -579,8 +579,8 @@ azd up
   "sku": "B1"  // Instead of "P1V2"
 }
 ```
-  
-### ❌ "azd up" gagal di tengah jalan
+
+### ❌ "azd up" fails halfway through
 
 ```bash
 # Pilihan 1: Bersihkan dan cuba semula
@@ -594,8 +594,8 @@ azd provision
 azd show
 azd logs
 ```
-  
-### ❌ "Authentication failed" atau "Token expired"
+
+### ❌ "Authentication failed" or "Token expired"
 
 ```bash
 # Sahkan semula
@@ -608,8 +608,8 @@ azd auth login
 # Sahkan pengesahan
 az account show
 ```
-  
-### ❌ "Resource already exists" atau konflik penamaan
+
+### ❌ "Resource already exists" or naming conflicts
 
 ```bash
 # AZD menjana nama unik, tetapi jika berlaku konflik:
@@ -619,13 +619,13 @@ azd down --force --purge
 azd env new dev-v2
 azd up
 ```
-  
-### ❌ Penyebaran templat mengambil masa terlalu lama
 
-**Masa menunggu biasa:**  
-- Aplikasi web mudah: 5-10 minit  
-- Aplikasi dengan pangkalan data: 10-15 minit  
-- Aplikasi AI: 15-25 minit (penyediaan OpenAI lambat)  
+### ❌ Template deployment taking too long
+
+**Masa menunggu biasa:**
+- Aplikasi web mudah: 5-10 minit
+- Aplikasi dengan pangkalan data: 10-15 minit
+- Aplikasi AI: 15-25 minit (penyediaan OpenAI lambat)
 
 ```bash
 # Semak kemajuan
@@ -635,8 +635,8 @@ azd show
 azd monitor
 # Cari penyebaran yang gagal
 ```
-  
-### ❌ "Permission denied" atau "Forbidden"
+
+### ❌ "Permission denied" or "Forbidden"
 
 ```bash
 # Semak peranan Azure anda
@@ -645,13 +645,13 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # Anda memerlukan sekurang-kurangnya peranan "Contributor"
 # Minta pentadbir Azure anda untuk memberikan:
 # - Contributor (untuk sumber)
-# - Pentadbir Akses Pengguna (untuk penugasan peranan)
+# - User Access Administrator (untuk penugasan peranan)
 ```
-  
-### ❌ Tidak dapat mencari URL aplikasi yang telah dideploy
+
+### ❌ Can't find deployed application URL
 
 ```bash
-# Papar semua titik akhir perkhidmatan
+# Paparkan semua titik akhir perkhidmatan
 azd show
 
 # Atau buka Portal Azure
@@ -661,13 +661,13 @@ azd monitor
 azd env get-values
 # Cari pembolehubah *_URL
 ```
-  
+
 ### 📚 Sumber Penyelesaian Masalah Lengkap
 
-- **Panduan Isu Biasa:** [Penyelesaian Terperinci](docs/troubleshooting/common-issues.md)  
-- **Isu Khusus AI:** [Penyelesaian Masalah AI](docs/troubleshooting/ai-troubleshooting.md)  
-- **Panduan Debugging:** [Debugging Langkah demi Langkah](docs/troubleshooting/debugging.md)  
-- **Dapatkan Bantuan:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+- **Panduan Isu Biasa:** [Penyelesaian Terperinci](docs/troubleshooting/common-issues.md)
+- **Isu Khusus AI:** [Penyelesaian Masalah AI](docs/troubleshooting/ai-troubleshooting.md)
+- **Panduan Debugging:** [Debugging Langkah demi Langkah](docs/troubleshooting/debugging.md)
+- **Dapatkan Bantuan:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -695,7 +695,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "No subscription found" atau "Subscription not set"</strong></summary>
+<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
 
 ```bash
 # Senaraikan langganan yang tersedia
@@ -713,7 +713,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "InsufficientQuota" atau "Quota exceeded"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
 ```bash
 # Cuba rantau Azure yang berbeza
@@ -729,7 +729,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" gagal di tengah jalan</strong></summary>
+<summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
 # Pilihan 1: Bersihkan dan cuba semula
@@ -746,7 +746,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ "Authentication failed" atau "Token expired"</strong></summary>
+<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
 
 ```bash
 # Sahkan semula
@@ -762,7 +762,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" atau konflik penamaan</strong></summary>
+<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
 # AZD menjana nama unik, tetapi jika berlaku konflik:
@@ -775,12 +775,12 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ Penyebaran templat mengambil masa terlalu lama</strong></summary>
+<summary><strong>❌ Template deployment taking too long</strong></summary>
 
-**Masa menunggu biasa:**  
-- Aplikasi web mudah: 5-10 minit  
-- Aplikasi dengan pangkalan data: 10-15 minit  
-- Aplikasi AI: 15-25 minit (penyediaan OpenAI lambat)  
+**Masa menunggu biasa:**
+- Aplikasi web mudah: 5-10 minit
+- Aplikasi dengan pangkalan data: 10-15 minit
+- Aplikasi AI: 15-25 minit (penyediaan OpenAI lambat)
 
 ```bash
 # Semak kemajuan
@@ -793,7 +793,7 @@ azd monitor
 </details>
 
 <details>
-<summary><strong>❌ "Permission denied" atau "Forbidden"</strong></summary>
+<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
 
 ```bash
 # Semak peranan Azure anda
@@ -807,10 +807,10 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 </details>
 
 <details>
-<summary><strong>❌ Tidak dapat mencari URL aplikasi yang telah dideploy</strong></summary>
+<summary><strong>❌ Can't find deployed application URL</strong></summary>
 
 ```bash
-# Paparkan semua titik akhir perkhidmatan
+# Papar semua titik akhir perkhidmatan
 azd show
 
 # Atau buka Portal Azure
@@ -824,104 +824,110 @@ azd env get-values
 
 ### 📚 Sumber Penyelesaian Masalah Lengkap
 
-- **Panduan Isu Biasa:** [Penyelesaian Terperinci](docs/troubleshooting/common-issues.md)  
-- **Isu Khusus AI:** [Penyelesaian Masalah AI](docs/troubleshooting/ai-troubleshooting.md)  
-- **Panduan Debugging:** [Debugging Langkah demi Langkah](docs/troubleshooting/debugging.md)  
-- **Dapatkan Bantuan:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli  
+- **Panduan Isu Biasa:** [Penyelesaian Terperinci](docs/troubleshooting/common-issues.md)
+- **Isu Khusus AI:** [Penyelesaian Masalah AI](docs/troubleshooting/ai-troubleshooting.md)
+- **Panduan Debugging:** [Debugging Langkah demi Langkah](docs/troubleshooting/debugging.md)
+- **Dapatkan Bantuan:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🎓 Penyelesaian Kursus & Pensijilan
 
-### Penjejakan Kemajuan  
+### Penjejakan Kemajuan
 Jejaki kemajuan pembelajaran anda melalui setiap bab:
 
-- [ ] **Bab 1**: Asas & Permulaan Pantas ✅  
+- [ ] **Bab 1**: Asas & Mula Pantas ✅
 - [ ] **Bab 2**: Pembangunan AI-Pertama ✅  
-- [ ] **Bab 3**: Konfigurasi & Pengesahan ✅  
-- [ ] **Bab 4**: Infrastruktur sebagai Kod & Penyebaran ✅  
-- [ ] **Bab 5**: Penyelesaian AI Multi-Ejen ✅  
-- [ ] **Bab 6**: Pengesahan & Perancangan Pra-Penyebaran ✅  
-- [ ] **Bab 7**: Penyelesaian Masalah & Debugging ✅  
-- [ ] **Bab 8**: Corak Pengeluaran & Perusahaan ✅  
+- [ ] **Bab 3**: Konfigurasi & Pengesahan ✅
+- [ ] **Bab 4**: Infrastruktur sebagai Kod & Penyebaran ✅
+- [ ] **Bab 5**: Penyelesaian AI Multi-Ejen ✅
+- [ ] **Bab 6**: Pengesahan & Perancangan Pra-Penyebaran ✅
+- [ ] **Bab 7**: Penyelesaian Masalah & Debugging ✅
+- [ ] **Bab 8**: Corak Pengeluaran & Perusahaan ✅
 
-### Pengesahan Pembelajaran  
-Selepas menamatkan setiap bab, sahkan pengetahuan anda dengan:  
-1. **Latihan Praktikal**: Lengkapkan penyebaran praktikal bab tersebut  
-2. **Semakan Pengetahuan**: Semak bahagian FAQ untuk bab anda  
-3. **Perbincangan Komuniti**: Kongsi pengalaman anda di Azure Discord  
-4. **Bab Seterusnya**: Teruskan ke tahap kerumitan seterusnya  
+### Pengesahan Pembelajaran
+Selepas menyelesaikan setiap bab, sahkan pengetahuan anda dengan:
+1. **Latihan Praktikal**: Lengkapkan penyebaran praktikal bab tersebut
+2. **Semakan Pengetahuan**: Semak bahagian FAQ untuk bab anda
+3. **Perbincangan Komuniti**: Kongsi pengalaman anda di Azure Discord
+4. **Bab Seterusnya**: Beralih ke tahap kerumitan seterusnya
 
-### Manfaat Penyelesaian Kursus  
-Setelah menamatkan semua bab, anda akan mempunyai:  
-- **Pengalaman Pengeluaran**: Telah menyebarkan aplikasi AI sebenar ke Azure  
-- **Kemahiran Profesional**: Kebolehan penyebaran bersedia perusahaan  
-- **Pengiktirafan Komuniti**: Ahli aktif komuniti pembangun Azure  
-- **Kemajuan Kerjaya**: Kepakaran AZD dan penyebaran AI yang tinggi permintaan  
+### Manfaat Penyelesaian Kursus
+Setelah menamatkan semua bab, anda akan mempunyai:
+- **Pengalaman Pengeluaran**: Menyebarkan aplikasi AI sebenar ke Azure
+- **Kemahiran Profesional**: Keupayaan penyebaran bersedia perusahaan  
+- **Pengiktirafan Komuniti**: Ahli aktif komuniti pembangun Azure
+- **Kemajuan Kerjaya**: Kepakaran AZD dan penyebaran AI yang tinggi permintaan
 
 ---
 
 ## 🤝 Komuniti & Sokongan
 
-### Dapatkan Bantuan & Sokongan  
-- **Isu Teknikal**: [Laporkan pepijat dan minta ciri](https://github.com/microsoft/azd-for-beginners/issues)  
-- **Soalan Pembelajaran**: [Komuniti Microsoft Azure Discord](https://discord.gg/microsoft-azure) dan [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **Bantuan Khusus AI**: Sertai [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **Dokumentasi**: [Dokumentasi rasmi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+### Dapatkan Bantuan & Sokongan
+- **Isu Teknikal**: [Laporkan pepijat dan minta ciri](https://github.com/microsoft/azd-for-beginners/issues)
+- **Soalan Pembelajaran**: [Komuniti Microsoft Azure Discord](https://discord.gg/microsoft-azure) dan [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Bantuan Khusus AI**: Sertai [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Dokumentasi**: [Dokumentasi rasmi Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Pandangan Komuniti dari Microsoft Foundry Discord
 
-**Keputusan Tinjauan Terkini dari Saluran #Azure:**  
-- **45%** pembangun mahu menggunakan AZD untuk beban kerja AI  
+**Keputusan Tinjauan Terkini dari Saluran #Azure:**
+- **45%** pembangun mahu menggunakan AZD untuk beban kerja AI
 - **Cabaran utama**: Penyebaran multi-perkhidmatan, pengurusan kelayakan, kesediaan pengeluaran  
-- **Permintaan tertinggi**: Templat khusus AI, panduan penyelesaian masalah, amalan terbaik  
+- **Permintaan tertinggi**: Templat khusus AI, panduan penyelesaian masalah, amalan terbaik
 
-**Sertai komuniti kami untuk:**  
-- Berkongsi pengalaman AZD + AI dan dapatkan bantuan  
-- Akses pratonton awal templat AI baru  
-- Menyumbang kepada amalan terbaik penyebaran AI  
-- Mempengaruhi pembangunan ciri AI + AZD masa depan  
+**Sertai komuniti kami untuk:**
+- Berkongsi pengalaman AZD + AI dan dapatkan bantuan
+- Akses pratonton awal templat AI baru
+- Menyumbang kepada amalan terbaik penyebaran AI
+- Mempengaruhi pembangunan ciri AI + AZD masa depan
 
-### Menyumbang kepada Kursus  
-Kami mengalu-alukan sumbangan! Sila baca [Panduan Menyumbang](CONTRIBUTING.md) untuk maklumat tentang:  
-- **Penambahbaikan Kandungan**: Memperbaiki bab dan contoh sedia ada  
-- **Contoh Baru**: Menambah senario dan templat dunia sebenar  
-- **Terjemahan**: Membantu mengekalkan sokongan pelbagai bahasa  
-- **Laporan Pepijat**: Meningkatkan ketepatan dan kejelasan  
-- **Standard Komuniti**: Mengikuti garis panduan komuniti inklusif kami  
+### Menyumbang kepada Kursus
+Kami mengalu-alukan sumbangan! Sila baca [Panduan Menyumbang](CONTRIBUTING.md) untuk maklumat tentang:
+- **Penambahbaikan Kandungan**: Memperbaiki bab dan contoh sedia ada
+- **Contoh Baru**: Tambah senario dan templat dunia sebenar  
+- **Terjemahan**: Bantu mengekalkan sokongan pelbagai bahasa
+- **Laporan Pepijat**: Tingkatkan ketepatan dan kejelasan
+- **Standard Komuniti**: Ikuti garis panduan komuniti inklusif kami
 
 ---
 
 ## 📄 Maklumat Kursus
 
-### Lesen  
-Projek ini dilesenkan di bawah Lesen MIT - lihat fail [LICENSE](../../LICENSE) untuk maklumat lanjut.  
+### Lesen
+Projek ini dilesenkan di bawah Lesen MIT - lihat fail [LICENSE](../../LICENSE) untuk butiran.
 
 ### Sumber Pembelajaran Berkaitan Microsoft
 
-Pasukan kami menghasilkan kursus pembelajaran komprehensif lain:
+Pasukan kami menghasilkan kursus pembelajaran menyeluruh lain:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
-### Azure / Edge / MCP / Ejen  
-[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)  
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
 
----  
- 
-### Siri AI Generatif  
-[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)  
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)  
-[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)  
+---
 
----  
+### Azure / Edge / MCP / Ejen
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
  
-### Pembelajaran Teras  
-[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)  
-[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)  
-[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)  
+### Siri AI Generatif
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Pembelajaran Teras
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-15T21:21:05+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T12:09:58+00:00",
   "source_file": "README.md",
   "language_code": "ur"
 }
@@ -20,7 +20,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## اس کورس کے ساتھ آغاز کریں
 
-اپنے AZD تعلیمی سفر کو شروع کرنے کے لیے یہ اقدامات کریں:
+اپنی AZD سیکھنے کے سفر کا آغاز کرنے کے لیے یہ اقدامات کریں:
 
 1. **ریپوزیٹری کو فورک کریں**: کلک کریں [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **ریپوزیٹری کو کلون کریں**: `git clone https://github.com/microsoft/azd-for-beginners.git`
@@ -37,7 +37,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## کورس کا جائزہ
 
-Azure Developer CLI (azd) کو منظم ابواب کے ذریعے ماسٹر کریں جو تدریجی سیکھنے کے لیے ڈیزائن کیے گئے ہیں۔ **خصوصی توجہ Microsoft Foundry انضمام کے ساتھ AI ایپلیکیشن کی تعیناتی پر۔**
+Azure Developer CLI (azd) میں مہارت حاصل کریں منظم ابواب کے ذریعے جو تدریجی سیکھنے کے لیے ڈیزائن کیے گئے ہیں۔ **خصوصی توجہ Microsoft Foundry انضمام کے ساتھ AI ایپلیکیشن کی تعیناتی پر۔**
 
 ### یہ کورس جدید ڈویلپرز کے لیے کیوں ضروری ہے
 
@@ -74,7 +74,7 @@ Microsoft Foundry Discord کمیونٹی کی بصیرت کی بنیاد پر، 
 
 #### تعلیمی وسائل
 - **🎯 یہاں سے شروع کریں**: [Azure Developer CLI کیا ہے؟](../..)
-- **📖 نظریہ**: [AZD بنیادی باتیں](docs/getting-started/azd-basics.md) - بنیادی تصورات اور اصطلاحات
+- **📖 نظریہ**: [AZD بنیادیات](docs/getting-started/azd-basics.md) - بنیادی تصورات اور اصطلاحات
 - **⚙️ سیٹ اپ**: [تنصیب اور سیٹ اپ](docs/getting-started/installation.md) - پلیٹ فارم مخصوص رہنما
 - **🛠️ عملی کام**: [آپ کا پہلا پروجیکٹ](docs/getting-started/first-project.md) - مرحلہ وار ٹیوٹوریل
 - **📋 فوری حوالہ**: [کمانڈ چیٹ شیٹ](resources/cheat-sheet.md)
@@ -111,7 +111,7 @@ azd down --force --purge  # وسائل کو صاف کرتا ہے
 azd version              # نصب شدہ ورژن دکھاتا ہے
 azd init --template todo-nodejs-mongo  # پروجیکٹ کو شروع کرتا ہے
 azd up                  # Azure پر تعینات کرتا ہے
-azd show                # چل رہی ایپ کا URL دکھاتا ہے
+azd show                # چلنے والی ایپ کا URL دکھاتا ہے
 # ایپلیکیشن براؤزر میں کھلتی ہے اور کام کرتی ہے
 azd down --force --purge  # وسائل کو صاف کرتا ہے
 ```
@@ -133,8 +133,8 @@ azd down --force --purge  # وسائل کو صاف کرتا ہے
 
 #### تعلیمی وسائل
 - **🎯 یہاں سے شروع کریں**: [Microsoft Foundry انضمام](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **📖 پیٹرنز**: [AI ماڈل کی تعیناتی](docs/microsoft-foundry/ai-model-deployment.md) - AI ماڈلز کی تعیناتی اور انتظام
-- **🛠️ ورکشاپ**: [AI ورکشاپ لیب](docs/microsoft-foundry/ai-workshop-lab.md) - اپنے AI حل AZD کے لیے تیار کریں
+- **📖 پیٹرنز**: [AI ماڈل کی تعیناتی](docs/microsoft-foundry/ai-model-deployment.md) - AI ماڈلز کو تعینات اور منظم کریں
+- **🛠️ ورکشاپ**: [AI ورکشاپ لیب](docs/microsoft-foundry/ai-workshop-lab.md) - اپنی AI حل کو AZD کے لیے تیار کریں
 - **🎥 انٹرایکٹو گائیڈ**: [ورکشاپ مواد](workshop/README.md) - MkDocs * DevContainer ماحول کے ساتھ براؤزر پر مبنی سیکھنا
 - **📋 ٹیمپلیٹس**: [Microsoft Foundry ٹیمپلیٹس](../..)
 - **📝 مثالیں**: [AZD تعیناتی کی مثالیں](examples/README.md)
@@ -154,13 +154,13 @@ azd init --template agent-openai-python-prompty
 
 **✅ کامیابی کی تصدیق:**
 ```bash
-# باب 2 کے بعد، آپ کو قابل ہونا چاہیے:
+# باب 2 کے بعد، آپ کو قابل ہونا چاہیے کہ:
 azd init --template azure-search-openai-demo
 azd up
 # AI چیٹ انٹرفیس کا ٹیسٹ کریں
 # سوالات پوچھیں اور ماخذات کے ساتھ AI سے چلنے والے جوابات حاصل کریں
 # تصدیق کریں کہ سرچ انٹیگریشن کام کر رہا ہے
-azd monitor  # چیک کریں کہ ایپلیکیشن انسائٹس ٹیلی میٹری دکھاتا ہے
+azd monitor  # چیک کریں کہ ایپلیکیشن انسائٹس ٹیلی میٹری دکھا رہا ہے
 azd down --force --purge
 ```
 
@@ -177,7 +177,7 @@ azd down --force --purge
 - اسٹوریج (معیاری): $1-5/ماہ
 
 **پروڈکشن ماحول (تخمینی $300-3,500+/ماہ):**
-- Azure OpenAI (PTU برائے مستقل کارکردگی): $3,000+/ماہ یا Pay-as-go زیادہ حجم کے ساتھ
+- Azure OpenAI (PTU برائے مستقل کارکردگی): $3,000+/ماہ یا زیادہ OR Pay-as-go زیادہ حجم کے ساتھ
 - AI سرچ (معیاری سطح): $250/ماہ
 - کنٹینر ایپس (مختص): $50-100/ماہ
 - ایپلیکیشن انسائٹس: $5-50/ماہ
@@ -285,7 +285,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### آپ کیا سیکھیں گے  
 - صلاحیت کی منصوبہ بندی اور وسائل کی تصدیق  
-- SKU انتخاب کی حکمت عملیاں  
+- SKU انتخاب کی حکمت عملی  
 - پری فلائٹ چیکس اور خودکار عمل
 
 #### تعلیمی وسائل  
@@ -314,7 +314,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### تعلیمی وسائل  
 - **🔧 عام مسائل**: [عام مسائل](docs/troubleshooting/common-issues.md) - اکثر پوچھے جانے والے سوالات اور حل  
-- **🕵️ ڈیبگنگ**: [ڈیبگنگ گائیڈ](docs/troubleshooting/debugging.md) - مرحلہ وار حکمت عملیاں  
+- **🕵️ ڈیبگنگ**: [ڈیبگنگ گائیڈ](docs/troubleshooting/debugging.md) - مرحلہ وار حکمت عملی  
 - **🤖 AI مسائل**: [AI مخصوص مسئلہ حل کرنا](docs/troubleshooting/ai-troubleshooting.md) - AI سروس کے مسائل
 
 #### عملی مشقیں  
@@ -332,7 +332,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **پیچیدگی**: ⭐⭐⭐⭐
 
 #### آپ کیا سیکھیں گے  
-- پروڈکشن تعیناتی کی حکمت عملیاں  
+- پروڈکشن تعیناتی کی حکمت عملی  
 - انٹرپرائز سیکیورٹی کے نمونے  
 - مانیٹرنگ اور لاگت کی بہتری
 
@@ -356,7 +356,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 > ورکشاپ کے مواد کو فی الحال تیار اور بہتر بنایا جا رہا ہے۔ بنیادی ماڈیولز فعال ہیں، لیکن کچھ اعلیٰ حصے مکمل نہیں ہیں۔ ہم تمام مواد مکمل کرنے پر سرگرم ہیں۔ [پیش رفت دیکھیں →](workshop/README.md)
 
 ### انٹرایکٹو ورکشاپ مواد  
-**براؤزر پر مبنی ٹولز اور رہنمائی کے ساتھ مکمل عملی سیکھنے کا تجربہ**
+**براؤزر پر مبنی ٹولز اور رہنمائی شدہ مشقوں کے ساتھ مکمل عملی سیکھنے کا تجربہ**
 
 ہمارے ورکشاپ کے مواد ایک منظم، انٹرایکٹو سیکھنے کا تجربہ فراہم کرتے ہیں جو اوپر دیے گئے بابوں کے نصاب کی تکمیل کرتے ہیں۔ ورکشاپ خود رفتار سیکھنے اور انسٹرکٹر کی رہنمائی دونوں کے لیے ڈیزائن کی گئی ہے۔
 
@@ -364,7 +364,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - **براؤزر پر مبنی انٹرفیس**: مکمل MkDocs سے چلنے والی ورکشاپ جس میں تلاش، کاپی، اور تھیم کی خصوصیات  
 - **GitHub Codespaces انٹیگریشن**: ایک کلک میں ترقیاتی ماحول کی ترتیب  
 - **منظم سیکھنے کا راستہ**: 7 مرحلوں پر مشتمل رہنمائی شدہ مشقیں (کل 3.5 گھنٹے)  
-- **دریافت → تعیناتی → تخصیص**: ترقیاتی طریقہ کار  
+- **دریافت → تعیناتی → تخصیص**: ترقی پسند طریقہ کار  
 - **انٹرایکٹو DevContainer ماحول**: پہلے سے ترتیب شدہ ٹولز اور انحصار
 
 #### 📚 ورکشاپ کا ڈھانچہ  
@@ -381,7 +381,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
    - سیکیورٹی اور توثیق کے نمونے نافذ کرنا
 
 3. **تخصیص کا مرحلہ** (45 منٹ)  
-   - مخصوص استعمال کے کیسز کے لیے ایپلیکیشنز میں ترمیم  
+   - مخصوص استعمال کے لیے ایپلیکیشنز میں ترمیم  
    - پروڈکشن تعیناتی کے لیے بہتر بنانا  
    - مانیٹرنگ اور لاگت کے انتظام کا نفاذ
 
@@ -401,7 +401,7 @@ cd azd-for-beginners/workshop
 - **پروڈکشن AI ایپلیکیشنز تعینات کریں**: Microsoft Foundry سروسز کے ساتھ AZD استعمال کریں  
 - **کثیر ایجنٹ فن تعمیر میں مہارت حاصل کریں**: مربوط AI ایجنٹ حل نافذ کریں  
 - **سیکیورٹی کے بہترین طریقے نافذ کریں**: توثیق اور رسائی کنٹرول ترتیب دیں  
-- **اسکیل کے لیے بہتر بنائیں**: لاگت مؤثر اور کارکردگی والے تعینات ڈیزائن کریں  
+- **اسکیل کے لیے بہتر بنائیں**: لاگت مؤثر اور کارکردگی والی تعیناتیاں ڈیزائن کریں  
 - **تعیناتی کے مسائل حل کریں**: عام مسائل خود مختار طریقے سے حل کریں
 
 #### 📖 ورکشاپ کے وسائل  
@@ -431,7 +431,7 @@ Azure Developer CLI (azd) ایک ڈویلپر مرکوز کمانڈ لائن ا�
 - **محفوظ AI تعیناتیاں** - AI سروسز، API کیز، اور ماڈل اینڈ پوائنٹس کے لیے بلٹ ان سیکیورٹی نمونے  
 - **پروڈکشن AI نمونے** - اسکیل ایبل، لاگت مؤثر AI ایپلیکیشن تعیناتی کے بہترین طریقے  
 - **اینڈ ٹو اینڈ AI ورک فلو** - ماڈل کی ترقی سے لے کر پروڈکشن تعیناتی تک مناسب مانیٹرنگ کے ساتھ  
-- **لاگت کی بہتری** - AI ورک لوڈز کے لیے ذہین وسائل کی تقسیم اور اسکیلنگ حکمت عملیاں  
+- **لاگت کی بہتری** - AI ورک لوڈز کے لیے ذہین وسائل کی تقسیم اور اسکیلنگ حکمت عملی  
 - **Microsoft Foundry انٹیگریشن** - Microsoft Foundry ماڈل کیٹلاگ اور اینڈ پوائنٹس سے مربوط
 
 ---
@@ -445,21 +445,21 @@ Azure Developer CLI (azd) ایک ڈویلپر مرکوز کمانڈ لائن ا�
 
 | ٹیمپلیٹ | باب | پیچیدگی | سروسز | قسم |
 |----------|---------|------------|----------|------|
-| [**AI چیٹ کے ساتھ شروع کریں**](https://github.com/Azure-Samples/get-started-with-ai-chat) | باب 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | بیرونی |
-| [**AI ایجنٹس کے ساتھ شروع کریں**](https://github.com/Azure-Samples/get-started-with-ai-agents) | باب 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| بیرونی |
-| [**Azure Search + OpenAI ڈیمو**](https://github.com/Azure-Samples/azure-search-openai-demo) | باب 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | بیرونی |
-| [**OpenAI چیٹ ایپ کوئیک اسٹارٹ**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | باب 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | بیرونی |
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | باب 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | بیرونی |
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | باب 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | بیرونی |
-| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | باب 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **مقامی** |
+| [**AI چیٹ کے ساتھ شروع کریں**](https://github.com/Azure-Samples/get-started-with-ai-chat) | باب 2 | ⭐⭐ | AzureOpenAI + Azure AI ماڈل انفیرنس API + Azure AI سرچ + Azure کنٹینر ایپس + ایپلیکیشن انسائٹس | بیرونی |
+| [**AI ایجنٹس کے ساتھ شروع کریں**](https://github.com/Azure-Samples/get-started-with-ai-agents) | باب 2 | ⭐⭐ | Azure AI ایجنٹ سروس + AzureOpenAI + Azure AI سرچ + Azure کنٹینر ایپس + ایپلیکیشن انسائٹس | بیرونی |
+| [**Azure سرچ + OpenAI ڈیمو**](https://github.com/Azure-Samples/azure-search-openai-demo) | باب 2 | ⭐⭐ | AzureOpenAI + Azure AI سرچ + ایپ سروس + اسٹوریج | بیرونی |
+| [**OpenAI چیٹ ایپ کوئیک اسٹارٹ**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | باب 2 | ⭐ | AzureOpenAI + کنٹینر ایپس + ایپلیکیشن انسائٹس | بیرونی |
+| [**ایجنٹ OpenAI پائتھن پرومپٹی**](https://github.com/Azure-Samples/agent-openai-python-prompty) | باب 5 | ⭐⭐⭐ | AzureOpenAI + Azure فنکشنز + پرومپٹی | بیرونی |
+| [**کانٹوسو چیٹ RAG**](https://github.com/Azure-Samples/contoso-chat) | باب 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI سرچ + Cosmos DB + کنٹینر ایپس | بیرونی |
+| [**ریٹیل کثیر ایجنٹ حل**](examples/retail-scenario.md) | باب 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI سرچ + اسٹوریج + کنٹینر ایپس + Cosmos DB | **مقامی** |
 
-### نمایاں: مکمل سیکھنے کے منظرنامے  
+### نمایاں: مکمل سیکھنے کے مناظر  
 **پروڈکشن کے لیے تیار ایپلیکیشن ٹیمپلیٹس جو سیکھنے کے ابواب سے منسلک ہیں**
 
 | ٹیمپلیٹ | سیکھنے کا باب | پیچیدگی | کلیدی سیکھنا |
 |----------|------------------|------------|--------------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | باب 2 | ⭐ | بنیادی AI تعیناتی کے نمونے |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | باب 2 | ⭐⭐ | Azure AI Search کے ساتھ RAG نفاذ |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | باب 2 | ⭐⭐ | Azure AI سرچ کے ساتھ RAG نفاذ |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | باب 4 | ⭐⭐ | دستاویز انٹیلی جنس انٹیگریشن |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | باب 5 | ⭐⭐⭐ | ایجنٹ فریم ورک اور فنکشن کالنگ |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | باب 8 | ⭐⭐⭐ | انٹرپرائز AI آرکیسٹریشن |
@@ -468,25 +468,25 @@ Azure Developer CLI (azd) ایک ڈویلپر مرکوز کمانڈ لائن ا�
 ### مثال کی قسم کے لحاظ سے سیکھنا
 
 > **📌 مقامی بمقابلہ بیرونی مثالیں:**  
-> **مقامی مثالیں** (اس ریپوزیٹری میں) = فوری استعمال کے لیے تیار  
-> **بیرونی مثالیں** (Azure Samples) = لنک شدہ ریپوزیٹریز سے کلون کریں
+> **مقامی مثالیں** (اس ریپو میں) = فوری استعمال کے لیے تیار  
+> **بیرونی مثالیں** (Azure Samples) = لنک شدہ ریپوز سے کلون کریں
 
 #### مقامی مثالیں (فوری استعمال کے لیے تیار)  
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - ARM ٹیمپلیٹس کے ساتھ مکمل پروڈکشن تیار نفاذ  
+- [**ریٹیل کثیر ایجنٹ حل**](examples/retail-scenario.md) - ARM ٹیمپلیٹس کے ساتھ مکمل پروڈکشن تیار نفاذ  
   - کثیر ایجنٹ فن تعمیر (کسٹمر + انوینٹری ایجنٹس)  
   - جامع مانیٹرنگ اور جائزہ  
-  - ARM ٹیمپلیٹ کے ذریعے ایک کلک میں تعیناتی
+  - ARM ٹیمپلیٹ کے ذریعے ایک کلک تعیناتی
 
 #### مقامی مثالیں - کنٹینر ایپلیکیشنز (ابواب 2-5)  
-**اس ریپوزیٹری میں مکمل کنٹینر تعیناتی کی مثالیں:**  
+**اس ریپوز میں مکمل کنٹینر تعیناتی کی مثالیں:**  
 - [**کنٹینر ایپ مثالیں**](examples/container-app/README.md) - کنٹینرائزڈ تعیناتی کے لیے مکمل رہنمائی  
-  - [سادہ Flask API](../../examples/container-app/simple-flask-api) - اسکیل ٹو زیرو کے ساتھ بنیادی REST API  
+  - [سادہ Flask API](../../examples/container-app/simple-flask-api) - سکیل ٹو زیرو کے ساتھ بنیادی REST API  
   - [مائیکرو سروسز فن تعمیر](../../examples/container-app/microservices) - پروڈکشن تیار کثیر سروس تعیناتی  
-  - کوئیک اسٹارٹ، پروڈکشن، اور اعلیٰ تعیناتی کے نمونے  
+  - کوئیک اسٹارٹ، پروڈکشن، اور ایڈوانسڈ تعیناتی کے نمونے  
   - مانیٹرنگ، سیکیورٹی، اور لاگت کی بہتری کی رہنمائی
 
 #### بیرونی مثالیں - سادہ ایپلیکیشنز (ابواب 1-2)  
-**شروع کرنے کے لیے ان Azure Samples ریپوزیٹریز کو کلون کریں:**  
+**شروع کرنے کے لیے یہ Azure Samples ریپوز کلون کریں:**  
 - [سادہ ویب ایپ - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - بنیادی تعیناتی کے نمونے  
 - [اسٹیٹک ویب سائٹ - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - اسٹیٹک مواد کی تعیناتی  
 - [کنٹینر ایپ - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API تعیناتی
@@ -495,7 +495,7 @@ Azure Developer CLI (azd) ایک ڈویلپر مرکوز کمانڈ لائن ا�
 - [ڈیٹا بیس ایپ - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - ڈیٹا بیس کنیکٹیویٹی کے نمونے  
 - [فنکشنز + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - سرور لیس ڈیٹا ورک فلو
 
-#### بیرونی مثالیں - اعلیٰ نمونے (ابواب 4-8)  
+#### بیرونی مثالیں - ایڈوانسڈ نمونے (ابواب 4-8)  
 - [جاوا مائیکرو سروسز](https://github.com/Azure-Samples/java-microservices-aca-lab) - کثیر سروس فن تعمیر  
 - [کنٹینر ایپس جابز](https://github.com/Azure-Samples/container-apps-jobs) - پس منظر کی پروسیسنگ  
 - [انٹرپرائز ML پائپ لائن](https://github.com/Azure-Samples/mlops-v2) - پروڈکشن تیار ML نمونے
@@ -512,14 +512,14 @@ Azure Developer CLI (azd) ایک ڈویلپر مرکوز کمانڈ لائن ا�
 ### فوری حوالہ جات
 - [**کمانڈ چیٹ شیٹ**](resources/cheat-sheet.md) - لازمی azd کمانڈز باب وار ترتیب دی گئی
 - [**اصطلاحات**](resources/glossary.md) - Azure اور azd کی اصطلاحات  
-- [**عمومی سوالات**](resources/faq.md) - عام سوالات سیکھنے کے باب کے مطابق ترتیب دیے گئے
+- [**عمومی سوالات**](resources/faq.md) - عام سوالات سیکھنے کے باب وار ترتیب دیے گئے
 - [**مطالعہ گائیڈ**](resources/study-guide.md) - جامع عملی مشقیں
 
 ### عملی ورکشاپس
 - [**AI ورکشاپ لیب**](docs/microsoft-foundry/ai-workshop-lab.md) - اپنے AI حلوں کو AZD-ڈپلائے کے قابل بنائیں (2-3 گھنٹے)
 - [**انٹرایکٹو ورکشاپ گائیڈ**](workshop/README.md) - MkDocs اور DevContainer ماحول کے ساتھ براؤزر پر مبنی ورکشاپ
 - [**منظم سیکھنے کا راستہ**](../../workshop/docs/instructions) - 7 مرحلوں پر مشتمل رہنمائی شدہ مشقیں (دریافت → تعیناتی → تخصیص)
-- [**AZD برائے ابتدائی ورکشاپ**](workshop/README.md) - مکمل عملی ورکشاپ مواد GitHub Codespaces انضمام کے ساتھ
+- [**AZD برائے مبتدی ورکشاپ**](workshop/README.md) - مکمل عملی ورکشاپ مواد GitHub Codespaces انضمام کے ساتھ
 
 ### بیرونی سیکھنے کے وسائل
 - [Azure Developer CLI دستاویزات](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -531,7 +531,7 @@ Azure Developer CLI (azd) ایک ڈویلپر مرکوز کمانڈ لائن ا�
 
 ## 🔧 فوری مسئلہ حل کرنے کی گائیڈ
 
-**ابتدائی افراد کو درپیش عام مسائل اور فوری حل:**
+**مبتدیوں کو درپیش عام مسائل اور فوری حل:**
 
 ### ❌ "azd: کمانڈ نہیں ملا"
 
@@ -609,7 +609,7 @@ azd auth login
 az account show
 ```
 
-### ❌ "وسائل پہلے سے موجود ہیں" یا نام کے تصادم
+### ❌ "وسائل پہلے سے موجود ہیں" یا ناموں کا تصادم
 
 ```bash
 # AZD منفرد نام بناتا ہے، لیکن اگر تصادم ہو:
@@ -636,7 +636,7 @@ azd monitor
 # ناکام تعیناتیوں کو دیکھیں
 ```
 
-### ❌ "اجازت نہیں ہے" یا "ممنوع"
+### ❌ "اجازت نہیں" یا "ممنوع"
 
 ```bash
 # اپنا Azure کردار چیک کریں
@@ -645,7 +645,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # آپ کو کم از کم "Contributor" کردار کی ضرورت ہے
 # اپنے Azure ایڈمن سے درخواست کریں کہ اجازت دے:
 # - Contributor (وسائل کے لیے)
-# - User Access Administrator (کردار کی تفویضات کے لیے)
+# - User Access Administrator (کردار کی تفویض کے لیے)
 ```
 
 ### ❌ تعینات شدہ ایپلیکیشن کا URL نہیں مل رہا
@@ -665,7 +665,7 @@ azd env get-values
 ### 📚 مکمل مسئلہ حل کرنے کے وسائل
 
 - **عام مسائل کی گائیڈ:** [تفصیلی حل](docs/troubleshooting/common-issues.md)
-- **AI مخصوص مسائل:** [AI مسئلہ حل](docs/troubleshooting/ai-troubleshooting.md)
+- **AI مخصوص مسائل:** [AI مسئلہ حل کرنا](docs/troubleshooting/ai-troubleshooting.md)
 - **ڈی بگنگ گائیڈ:** [مرحلہ وار ڈی بگنگ](docs/troubleshooting/debugging.md)
 - **مدد حاصل کریں:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
@@ -673,7 +673,7 @@ azd env get-values
 
 ## 🔧 فوری مسئلہ حل کرنے کی گائیڈ
 
-**ابتدائی افراد کو درپیش عام مسائل اور فوری حل:**
+**مبتدیوں کو درپیش عام مسائل اور فوری حل:**
 
 <details>
 <summary><strong>❌ "azd: کمانڈ نہیں ملا"</strong></summary>
@@ -762,7 +762,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "وسائل پہلے سے موجود ہیں" یا نام کے تصادم</strong></summary>
+<summary><strong>❌ "وسائل پہلے سے موجود ہیں" یا ناموں کا تصادم</strong></summary>
 
 ```bash
 # AZD منفرد نام بناتا ہے، لیکن اگر تصادم ہو:
@@ -786,21 +786,21 @@ azd up
 # پیش رفت چیک کریں
 azd show
 
-# اگر 30 منٹ سے زیادہ پھنس گئے ہیں، تو Azure پورٹل چیک کریں:
+# اگر 30 منٹ سے زیادہ پھنس جائیں، Azure پورٹل چیک کریں:
 azd monitor
 # ناکام تعیناتیوں کو دیکھیں
 ```
 </details>
 
 <details>
-<summary><strong>❌ "اجازت نہیں ہے" یا "ممنوع"</strong></summary>
+<summary><strong>❌ "اجازت نہیں" یا "ممنوع"</strong></summary>
 
 ```bash
 # اپنا Azure کردار چیک کریں
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # آپ کو کم از کم "Contributor" کردار کی ضرورت ہے
-# اپنے Azure ایڈمن سے درخواست کریں کہ اجازت دے:
+# اپنے Azure ایڈمن سے درخواست کریں کہ اجازت دیں:
 # - Contributor (وسائل کے لیے)
 # - User Access Administrator (کردار کی تفویضات کے لیے)
 ```
@@ -825,7 +825,7 @@ azd env get-values
 ### 📚 مکمل مسئلہ حل کرنے کے وسائل
 
 - **عام مسائل کی گائیڈ:** [تفصیلی حل](docs/troubleshooting/common-issues.md)
-- **AI مخصوص مسائل:** [AI مسئلہ حل](docs/troubleshooting/ai-troubleshooting.md)
+- **AI مخصوص مسائل:** [AI مسئلہ حل کرنا](docs/troubleshooting/ai-troubleshooting.md)
 - **ڈی بگنگ گائیڈ:** [مرحلہ وار ڈی بگنگ](docs/troubleshooting/debugging.md)
 - **مدد حاصل کریں:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
@@ -838,7 +838,7 @@ azd env get-values
 
 - [ ] **باب 1**: بنیاد اور فوری آغاز ✅
 - [ ] **باب 2**: AI-فرسٹ ڈیولپمنٹ ✅  
-- [ ] **باب 3**: کنفیگریشن اور تصدیق ✅
+- [ ] **باب 3**: ترتیب اور تصدیق ✅
 - [ ] **باب 4**: انفراسٹرکچر ایز کوڈ اور تعیناتی ✅
 - [ ] **باب 5**: ملٹی ایجنٹ AI حل ✅
 - [ ] **باب 6**: پری-ڈپلائمنٹ ویلیڈیشن اور منصوبہ بندی ✅
@@ -849,7 +849,7 @@ azd env get-values
 ہر باب مکمل کرنے کے بعد اپنی معلومات کی تصدیق کریں:
 1. **عملی مشق**: باب کی عملی تعیناتی مکمل کریں
 2. **علمی جانچ**: اپنے باب کے FAQ سیکشن کا جائزہ لیں
-3. **کمیونٹی مباحثہ**: Azure Discord میں اپنا تجربہ شیئر کریں
+3. **کمیونٹی بحث**: Azure Discord میں اپنا تجربہ شیئر کریں
 4. **اگلا باب**: اگلے پیچیدگی کے درجے پر جائیں
 
 ### کورس مکمل کرنے کے فوائد
@@ -902,27 +902,33 @@ azd env get-values
 ہماری ٹیم دیگر جامع سیکھنے کے کورسز تیار کرتی ہے:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
-### Azure / Edge / MCP / ایجنٹس
-[![AZD برائے ابتدائی](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Edge AI برائے ابتدائی](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![MCP برائے ابتدائی](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI ایجنٹس برائے ابتدائی](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+### LangChain
+[![LangChain4j برائے مبتدی](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js برائے مبتدی](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
+### Azure / Edge / MCP / Agents
+[![AZD برائے مبتدی](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI برائے مبتدی](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP برائے مبتدی](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents برائے مبتدی](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### جنریٹو AI سیریز
-[![جنریٹو AI برائے ابتدائی](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![جنریٹو AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![جنریٹو AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![جنریٹو AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+### Generative AI سیریز
+[![Generative AI برائے مبتدی](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### بنیادی سیکھنا
-[![ML برائے ابتدائی](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![ڈیٹا سائنس برائے ابتدائی](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI برائے ابتدائی](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![سائبرسیکیورٹی برائے ابتدائی](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+### بنیادی تعلیم
+[![ML برائے مبتدی](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science برائے مبتدی](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![ابتدائیوں کے لیے AI](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![ابتدائیوں کے لیے سائبرسیکیورٹی](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![ابتدائیوں کے لیے ویب ڈویلپمنٹ](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![ابتدائیوں کے لیے IoT](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
 [![ابتدائیوں کے لیے XR ڈیولپمنٹ](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -950,6 +956,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**دستخطی نوٹ**:  
+**دستخطی دستبرداری**:  
 یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا عدم درستیاں ہو سکتی ہیں۔ اصل دستاویز اپنی مادری زبان میں ہی معتبر ماخذ سمجھی جانی چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم پر عائد نہیں ہوتی۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

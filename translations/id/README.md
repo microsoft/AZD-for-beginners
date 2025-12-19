@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "62affa32f7697d88ec2a2d5745364db1",
-  "translation_date": "2025-12-15T23:55:03+00:00",
+  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
+  "translation_date": "2025-12-17T14:54:09+00:00",
   "source_file": "README.md",
   "language_code": "id"
 }
@@ -18,13 +18,13 @@ CO_OP_TRANSLATOR_METADATA:
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-## Memulai dengan Kursus Ini
+## Memulai Dengan Kursus Ini
 
 Ikuti langkah-langkah ini untuk memulai perjalanan pembelajaran AZD Anda:
 
 1. **Fork Repository**: Klik [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clone Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **Bergabung dengan Komunitas**: [Komunitas Discord Azure](https://discord.com/invite/ByRwuEEgH4) untuk dukungan ahli
+3. **Bergabung dengan Komunitas**: [Komunitas Azure Discord](https://discord.com/invite/ByRwuEEgH4) untuk dukungan ahli
 4. **Pilih Jalur Pembelajaran Anda**: Pilih bab di bawah yang sesuai dengan tingkat pengalaman Anda
 
 ### Dukungan Multi-Bahasa
@@ -186,7 +186,7 @@ azd down --force --purge
 **💡 Tips Optimasi Biaya:**
 - Gunakan **Tingkat Gratis** Azure OpenAI untuk belajar (termasuk 50.000 token/bulan)
 - Jalankan `azd down` untuk menghapus alokasi sumber daya saat tidak aktif mengembangkan
-- Mulai dengan penagihan berbasis konsumsi, naikkan ke PTU hanya untuk produksi
+- Mulai dengan penagihan berbasis konsumsi, upgrade ke PTU hanya untuk produksi
 - Gunakan `azd provision --preview` untuk memperkirakan biaya sebelum penerapan
 - Aktifkan auto-scaling: bayar hanya untuk penggunaan aktual
 
@@ -218,7 +218,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### Latihan Praktis
 - Konfigurasikan beberapa lingkungan (dev, staging, prod)
-- Siapkan otentikasi managed identity
+- Atur otentikasi managed identity
 - Terapkan konfigurasi spesifik lingkungan
 
 **💡 Hasil Bab**: Kelola beberapa lingkungan dengan otentikasi dan keamanan yang tepat
@@ -310,7 +310,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Apa yang Akan Anda Pelajari
 - Pendekatan debugging sistematis
-- Masalah umum dan solusinya
+- Masalah umum dan solusi
 - Pemecahan masalah khusus AI
 
 #### Sumber Belajar
@@ -335,16 +335,16 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### Apa yang Akan Anda Pelajari
 - Strategi deployment produksi
 - Pola keamanan enterprise
-- Monitoring dan optimasi biaya
+- Pemantauan dan optimasi biaya
 
 #### Sumber Belajar
 - **🏭 Produksi**: [Praktik Terbaik AI Produksi](docs/microsoft-foundry/production-ai-practices.md) - Pola enterprise
 - **📝 Contoh**: [Contoh Microservices](../../examples/microservices) - Arsitektur kompleks
-- **📊 Monitoring**: [Integrasi Application Insights](docs/pre-deployment/application-insights.md) - Monitoring
+- **📊 Pemantauan**: [Integrasi Application Insights](docs/pre-deployment/application-insights.md) - Pemantauan
 
 #### Latihan Praktis
 - Terapkan pola keamanan enterprise
-- Siapkan monitoring komprehensif
+- Siapkan pemantauan komprehensif
 - Deploy ke produksi dengan tata kelola yang tepat
 
 **💡 Hasil Bab**: Deploy aplikasi siap enterprise dengan kemampuan produksi penuh
@@ -354,7 +354,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ## 🎓 Ikhtisar Workshop: Pengalaman Belajar Praktis
 
 > **⚠️ STATUS WORKSHOP: Pengembangan Aktif**  
-> Materi workshop saat ini sedang dikembangkan dan disempurnakan. Modul inti berfungsi, tetapi beberapa bagian lanjutan belum lengkap. Kami aktif bekerja untuk menyelesaikan semua konten. [Lacak kemajuan →](workshop/README.md)
+> Materi workshop saat ini sedang dikembangkan dan disempurnakan. Modul inti berfungsi, tetapi beberapa bagian lanjutan belum lengkap. Kami aktif bekerja menyelesaikan semua konten. [Lacak kemajuan →](workshop/README.md)
 
 ### Materi Workshop Interaktif
 **Pembelajaran praktis komprehensif dengan alat berbasis browser dan latihan terpandu**
@@ -384,7 +384,7 @@ Workshop mengikuti metodologi **Discovery → Deployment → Customization**:
 3. **Fase Customization** (45 menit)
    - Modifikasi aplikasi untuk kasus penggunaan spesifik
    - Optimalkan untuk deployment produksi
-   - Terapkan monitoring dan manajemen biaya
+   - Terapkan pemantauan dan manajemen biaya
 
 #### 🚀 Memulai Workshop
 ```bash
@@ -402,7 +402,7 @@ Dengan menyelesaikan workshop, peserta akan:
 - **Deploy Aplikasi AI Produksi**: Gunakan AZD dengan layanan Microsoft Foundry
 - **Kuasi Arsitektur Multi-Agen**: Terapkan solusi agen AI terkoordinasi
 - **Terapkan Praktik Keamanan Terbaik**: Konfigurasi autentikasi dan kontrol akses
-- **Optimalkan untuk Skala**: Rancang deployment hemat biaya dan berkinerja
+- **Optimalkan untuk Skala**: Rancang deployment hemat biaya dan berkinerja tinggi
 - **Pemecahan Masalah Deployment**: Selesaikan masalah umum secara mandiri
 
 #### 📖 Sumber Workshop
@@ -421,7 +421,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 
 - **Deployment berbasis template** - Gunakan template siap pakai untuk pola aplikasi umum
 - **Infrastruktur sebagai Kode** - Kelola sumber daya Azure menggunakan Bicep atau Terraform  
-- **Alur kerja terintegrasi** - Provisi, deploy, dan monitor aplikasi secara mulus
+- **Alur kerja terintegrasi** - Provisi, deploy, dan pantau aplikasi secara mulus
 - **Ramah pengembang** - Dioptimalkan untuk produktivitas dan pengalaman pengembang
 
 ### **AZD + Microsoft Foundry: Sempurna untuk Deployment AI**
@@ -431,7 +431,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 - **Template Siap AI** - Template yang sudah dikonfigurasi untuk Azure OpenAI, Cognitive Services, dan beban kerja ML
 - **Deployment AI Aman** - Pola keamanan bawaan untuk layanan AI, kunci API, dan endpoint model  
 - **Pola AI Produksi** - Praktik terbaik untuk deployment aplikasi AI yang skalabel dan hemat biaya
-- **Alur Kerja AI End-to-End** - Dari pengembangan model hingga deployment produksi dengan monitoring yang tepat
+- **Alur Kerja AI End-to-End** - Dari pengembangan model hingga deployment produksi dengan pemantauan yang tepat
 - **Optimasi Biaya** - Alokasi sumber daya dan strategi penskalaan cerdas untuk beban kerja AI
 - **Integrasi Microsoft Foundry** - Koneksi mulus ke katalog model dan endpoint Microsoft Foundry
 
@@ -466,7 +466,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Bab 8 | ⭐⭐⭐ | Orkestrasi AI enterprise |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Bab 5 | ⭐⭐⭐⭐ | Arsitektur multi-agen dengan agen Pelanggan dan Inventaris |
 
-### Pembelajaran Berdasarkan Jenis Contoh
+### Belajar Berdasarkan Jenis Contoh
 
 > **📌 Contoh Lokal vs. Eksternal:**  
 > **Contoh Lokal** (di repo ini) = Siap digunakan segera  
@@ -475,7 +475,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 #### Contoh Lokal (Siap Pakai)
 - [**Solusi Multi-Agen Retail**](examples/retail-scenario.md) - Implementasi lengkap siap produksi dengan template ARM
   - Arsitektur multi-agen (agen Pelanggan + Inventaris)
-  - Monitoring dan evaluasi komprehensif
+  - Pemantauan dan evaluasi komprehensif
   - Deploy satu klik via template ARM
 
 #### Contoh Lokal - Aplikasi Container (Bab 2-5)
@@ -484,7 +484,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
   - [API Flask Sederhana](../../examples/container-app/simple-flask-api) - REST API dasar dengan scale-to-zero
   - [Arsitektur Microservices](../../examples/container-app/microservices) - Deployment multi-layanan siap produksi
   - Pola Quick Start, Produksi, dan Lanjutan
-  - Panduan monitoring, keamanan, dan optimasi biaya
+  - Panduan pemantauan, keamanan, dan optimasi biaya
 
 #### Contoh Eksternal - Aplikasi Sederhana (Bab 1-2)
 **Clone repositori Azure Samples ini untuk memulai:**
@@ -591,7 +591,7 @@ azd up
 # Opsi 2: Hanya perbaiki infrastruktur
 azd provision
 
-# Opsi 3: Periksa log rinci
+# Opsi 3: Periksa log detail
 azd show
 azd logs
 ```
@@ -649,7 +649,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Administrator Akses Pengguna (untuk penugasan peran)
 ```
 
-### ❌ Can't find deployed application URL
+### ❌ Tidak dapat menemukan URL aplikasi yang dideploy
 
 ```bash
 # Tampilkan semua titik akhir layanan
@@ -740,7 +740,7 @@ azd up
 # Opsi 2: Hanya perbaiki infrastruktur
 azd provision
 
-# Opsi 3: Periksa log detail
+# Opsi 3: Periksa log rinci
 azd show
 azd logs
 ```
@@ -787,7 +787,7 @@ azd up
 # Periksa kemajuan
 azd show
 
-# Jika terhenti >30 menit, periksa Portal Azure:
+# Jika terhenti >30 menit, periksa Azure Portal:
 azd monitor
 # Cari penyebaran yang gagal
 ```
@@ -808,7 +808,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 </details>
 
 <details>
-<summary><strong>❌ Can't find deployed application URL</strong></summary>
+<summary><strong>❌ Tidak dapat menemukan URL aplikasi yang dideploy</strong></summary>
 
 ```bash
 # Tampilkan semua titik akhir layanan
@@ -903,6 +903,12 @@ Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](../../LICENS
 Tim kami memproduksi kursus pembelajaran komprehensif lainnya:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
 ### Azure / Edge / MCP / Agents
 [![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
@@ -924,16 +930,16 @@ Tim kami memproduksi kursus pembelajaran komprehensif lainnya:
 [![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Web Dev untuk Pemula](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT untuk Pemula](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![Pengembangan XR untuk Pemula](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Seri Copilot
-[![Copilot untuk Pemrograman Berpasangan AI](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![Copilot untuk C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Petualangan Copilot](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
@@ -943,7 +949,7 @@ Tim kami memproduksi kursus pembelajaran komprehensif lainnya:
 **🚀 Siap Memulai Belajar?**
 
 **Pemula**: Mulai dengan [Bab 1: Dasar & Mulai Cepat](../..)  
-**Pengembang AI**: Langsung ke [Bab 2: Pengembangan AI-Pertama](../..)  
+**Pengembang AI**: Lompat ke [Bab 2: Pengembangan AI-Pertama](../..)  
 **Pengembang Berpengalaman**: Mulai dengan [Bab 3: Konfigurasi & Otentikasi](../..)
 
 **Langkah Selanjutnya**: [Mulai Bab 1 - Dasar AZD](docs/getting-started/azd-basics.md) →
@@ -952,5 +958,5 @@ Tim kami memproduksi kursus pembelajaran komprehensif lainnya:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk akurasi, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sahih. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sahih. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
