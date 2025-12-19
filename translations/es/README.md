@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T11:40:56+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T09:57:18+00:00",
   "source_file": "README.md",
   "language_code": "es"
 }
@@ -68,7 +68,7 @@ Al completar este curso estructurado, podrás:
 **Complejidad**: ⭐
 
 #### Qué Aprenderás
-- Entender los fundamentos de Azure Developer CLI
+- Comprender los fundamentos de Azure Developer CLI
 - Instalar AZD en tu plataforma
 - Tu primer despliegue exitoso
 
@@ -121,7 +121,7 @@ azd down --force --purge  # Limpia los recursos
 
 ---
 
-### 🤖 Capítulo 2: Desarrollo con Enfoque en IA (Recomendado para Desarrolladores de IA)
+### 🤖 Capítulo 2: Desarrollo con IA como Prioridad (Recomendado para Desarrolladores de IA)
 **Requisitos previos**: Capítulo 1 completado  
 **Duración**: 1-2 horas  
 **Complejidad**: ⭐⭐
@@ -183,7 +183,7 @@ azd down --force --purge
 - Application Insights: $5-50/mes
 - Almacenamiento (Premium): $10-50/mes
 
-**💡 Consejos para Optimización de Costos:**
+**💡 Consejos para Optimizar Costos:**
 - Usa **Nivel Gratuito** de Azure OpenAI para aprendizaje (50,000 tokens/mes incluidos)
 - Ejecuta `azd down` para desalocar recursos cuando no estés desarrollando activamente
 - Comienza con facturación por consumo, actualiza a PTU solo para producción
@@ -283,12 +283,12 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Duración**: 1 hora  
 **Complejidad**: ⭐⭐
 
-#### Lo que aprenderás
+#### Lo que Aprenderás
 - Planificación de capacidad y validación de recursos
 - Estrategias de selección de SKU
 - Comprobaciones previas y automatización
 
-#### Recursos de aprendizaje
+#### Recursos de Aprendizaje
 - **📊 Planificación**: [Planificación de Capacidad](docs/pre-deployment/capacity-planning.md) - Validación de recursos
 - **💰 Selección**: [Selección de SKU](docs/pre-deployment/sku-selection.md) - Opciones rentables
 - **✅ Validación**: [Comprobaciones Previas](docs/pre-deployment/preflight-checks.md) - Scripts automatizados
@@ -307,15 +307,15 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Duración**: 1-1.5 horas  
 **Complejidad**: ⭐⭐
 
-#### Lo que aprenderás
+#### Lo que Aprenderás
 - Enfoques sistemáticos de depuración
 - Problemas comunes y soluciones
 - Solución de problemas específica para IA
 
-#### Recursos de aprendizaje
+#### Recursos de Aprendizaje
 - **🔧 Problemas Comunes**: [Problemas Comunes](docs/troubleshooting/common-issues.md) - Preguntas frecuentes y soluciones
 - **🕵️ Depuración**: [Guía de Depuración](docs/troubleshooting/debugging.md) - Estrategias paso a paso
-- **🤖 Problemas de IA**: [Solución de Problemas de IA](docs/troubleshooting/ai-troubleshooting.md) - Problemas de servicios de IA
+- **🤖 Problemas de IA**: [Solución de Problemas Específica de IA](docs/troubleshooting/ai-troubleshooting.md) - Problemas de servicios de IA
 
 #### Ejercicios Prácticos
 - Diagnosticar fallos en despliegues
@@ -331,19 +331,19 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Duración**: 2-3 horas  
 **Complejidad**: ⭐⭐⭐⭐
 
-#### Lo que aprenderás
+#### Lo que Aprenderás
 - Estrategias de despliegue en producción
 - Patrones de seguridad empresarial
 - Monitorización y optimización de costos
 
-#### Recursos de aprendizaje
+#### Recursos de Aprendizaje
 - **🏭 Producción**: [Buenas Prácticas de IA en Producción](docs/microsoft-foundry/production-ai-practices.md) - Patrones empresariales
 - **📝 Ejemplos**: [Ejemplo de Microservicios](../../examples/microservices) - Arquitecturas complejas
 - **📊 Monitorización**: [Integración con Application Insights](docs/pre-deployment/application-insights.md) - Monitorización
 
 #### Ejercicios Prácticos
 - Implementar patrones de seguridad empresarial
-- Configurar monitorización completa
+- Configurar monitorización integral
 - Desplegar en producción con gobernanza adecuada
 
 **💡 Resultado del Capítulo**: Desplegar aplicaciones listas para empresa con capacidades completas de producción
@@ -358,7 +358,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### Materiales Interactivos del Taller
 **Aprendizaje práctico integral con herramientas basadas en navegador y ejercicios guiados**
 
-Nuestros materiales del taller ofrecen una experiencia de aprendizaje estructurada e interactiva que complementa el currículo basado en capítulos arriba. El taller está diseñado tanto para aprendizaje autodidacta como para sesiones dirigidas por instructor.
+Nuestros materiales del taller ofrecen una experiencia de aprendizaje estructurada e interactiva que complementa el currículo basado en capítulos arriba. El taller está diseñado tanto para aprendizaje autodidacta como para sesiones dirigidas por instructores.
 
 #### 🛠️ Características del Taller
 - **Interfaz basada en navegador**: Taller completo con MkDocs, búsqueda, copia y temas
@@ -370,7 +370,7 @@ Nuestros materiales del taller ofrecen una experiencia de aprendizaje estructura
 #### 📚 Estructura del Taller
 El taller sigue una metodología de **Descubrimiento → Despliegue → Personalización**:
 
-1. **Fase de Descubrimiento** (45 min)
+1. **Fase de Descubrimiento** (45 minutos)
    - Explorar plantillas y servicios de Microsoft Foundry
    - Entender patrones de arquitectura multiagente
    - Revisar requisitos y prerrequisitos de despliegue
@@ -380,7 +380,7 @@ El taller sigue una metodología de **Descubrimiento → Despliegue → Personal
    - Configurar servicios y endpoints de Azure AI
    - Implementar patrones de seguridad y autenticación
 
-3. **Fase de Personalización** (45 min)
+3. **Fase de Personalización** (45 minutos)
    - Modificar aplicaciones para casos de uso específicos
    - Optimizar para despliegue en producción
    - Implementar monitorización y gestión de costos
@@ -390,7 +390,7 @@ El taller sigue una metodología de **Descubrimiento → Despliegue → Personal
 # Opción 1: GitHub Codespaces (Recomendado)
 # Haz clic en "Code" → "Create codespace on main" en el repositorio
 
-# Opción 2: Desarrollo Local
+# Opción 2: Desarrollo local
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
 # Sigue las instrucciones de configuración en workshop/README.md
@@ -429,7 +429,7 @@ Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desa
 
 - **Plantillas listas para IA** - Plantillas preconfiguradas para Azure OpenAI, Servicios Cognitivos y cargas de trabajo ML
 - **Despliegues seguros de IA** - Patrones de seguridad integrados para servicios de IA, claves API y endpoints de modelos  
-- **Patrones de IA en producción** - Mejores prácticas para despliegues escalables y rentables de aplicaciones de IA
+- **Patrones de IA para producción** - Mejores prácticas para despliegues escalables y rentables de aplicaciones de IA
 - **Flujos de trabajo de IA de extremo a extremo** - Desde desarrollo de modelos hasta despliegue en producción con monitorización adecuada
 - **Optimización de costos** - Estrategias inteligentes de asignación y escalado de recursos para cargas de trabajo de IA
 - **Integración con Microsoft Foundry** - Conexión fluida con catálogo y endpoints de modelos de Microsoft Foundry
@@ -478,7 +478,7 @@ Azure Developer CLI (azd) es una interfaz de línea de comandos centrada en desa
   - Despliegue con un clic vía plantilla ARM
 
 #### Ejemplos Locales - Aplicaciones en Contenedores (Capítulos 2-5)
-**Ejemplos completos de despliegue en contenedores en este repositorio:**
+**Ejemplos completos de despliegue de contenedores en este repositorio:**
 - [**Ejemplos de Aplicaciones en Contenedores**](examples/container-app/README.md) - Guía completa para despliegues en contenedores
   - [API Flask Simple](../../examples/container-app/simple-flask-api) - API REST básica con escalado a cero
   - [Arquitectura de Microservicios](../../examples/container-app/microservices) - Despliegue multi-servicio listo para producción
@@ -667,7 +667,7 @@ azd env get-values
 - **Guía de Problemas Comunes:** [Soluciones Detalladas](docs/troubleshooting/common-issues.md)
 - **Problemas Específicos de IA:** [Solución de Problemas de IA](docs/troubleshooting/ai-troubleshooting.md)
 - **Guía de Depuración:** [Depuración paso a paso](docs/troubleshooting/debugging.md)
-- **Obtener Ayuda:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Obtén Ayuda:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -783,7 +783,7 @@ azd up
 - Aplicaciones de IA: 15-25 minutos (la provisión de OpenAI es lenta)
 
 ```bash
-# Comprobar progreso
+# Verificar progreso
 azd show
 
 # Si está atascado >30 minutos, revise el Portal de Azure:
@@ -827,7 +827,7 @@ azd env get-values
 - **Guía de Problemas Comunes:** [Soluciones Detalladas](docs/troubleshooting/common-issues.md)
 - **Problemas Específicos de IA:** [Solución de Problemas de IA](docs/troubleshooting/ai-troubleshooting.md)
 - **Guía de Depuración:** [Depuración paso a paso](docs/troubleshooting/debugging.md)
-- **Obtener Ayuda:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Obtén Ayuda:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -837,7 +837,7 @@ azd env get-values
 Realiza un seguimiento de tu progreso de aprendizaje en cada capítulo:
 
 - [ ] **Capítulo 1**: Fundamentos y Inicio Rápido ✅
-- [ ] **Capítulo 2**: Desarrollo con IA como Prioridad ✅  
+- [ ] **Capítulo 2**: Desarrollo con enfoque en IA ✅  
 - [ ] **Capítulo 3**: Configuración y Autenticación ✅
 - [ ] **Capítulo 4**: Infraestructura como Código y Despliegue ✅
 - [ ] **Capítulo 5**: Soluciones de IA Multi-Agente ✅
@@ -853,8 +853,8 @@ Después de completar cada capítulo, verifica tus conocimientos mediante:
 4. **Siguiente Capítulo**: Avanza al siguiente nivel de complejidad
 
 ### Beneficios al Completar el Curso
-Al completar todos los capítulos, habrás obtenido:
-- **Experiencia en Producción**: Despliegue real de aplicaciones de IA en Azure
+Al completar todos los capítulos, habrás logrado:
+- **Experiencia en Producción**: Desplegado aplicaciones reales de IA en Azure
 - **Habilidades Profesionales**: Capacidades de despliegue listas para empresas  
 - **Reconocimiento Comunitario**: Miembro activo de la comunidad de desarrolladores de Azure
 - **Avance Profesional**: Experiencia demandada en AZD y despliegue de IA
@@ -869,7 +869,7 @@ Al completar todos los capítulos, habrás obtenido:
 - **Ayuda Específica de IA**: Únete a [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Documentación**: [Documentación oficial de Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Perspectivas Comunitarias desde Microsoft Foundry Discord
+### Perspectivas de la Comunidad desde Microsoft Foundry Discord
 
 **Resultados recientes de la encuesta en el canal #Azure:**
 - **45%** de los desarrolladores quieren usar AZD para cargas de trabajo de IA
@@ -945,7 +945,7 @@ Nuestro equipo produce otros cursos completos de aprendizaje:
 
 ## 🗺️ Navegación del Curso
 
-**🚀 ¿Listo para Comenzar a Aprender?**
+**🚀 ¿Listo para comenzar a aprender?**
 
 **Principiantes**: Comienza con [Capítulo 1: Fundamentos y Inicio Rápido](../..)  
 **Desarrolladores de IA**: Salta a [Capítulo 2: Desarrollo con IA como Prioridad](../..)  
@@ -956,6 +956,6 @@ Nuestro equipo produce otros cursos completos de aprendizaje:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:  
+**Aviso legal**:
 Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas derivadas del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

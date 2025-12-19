@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T13:25:14+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T11:39:31+00:00",
   "source_file": "README.md",
   "language_code": "pt"
 }
@@ -32,7 +32,7 @@ Siga estes passos para iniciar a sua jornada de aprendizagem AZD:
 #### Traduções Automáticas (Sempre Atualizadas)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](./README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[Árabe](../ar/README.md) | [Bengali](../bn/README.md) | [Búlgaro](../bg/README.md) | [Birmanês (Myanmar)](../my/README.md) | [Chinês (Simplificado)](../zh/README.md) | [Chinês (Tradicional, Hong Kong)](../hk/README.md) | [Chinês (Tradicional, Macau)](../mo/README.md) | [Chinês (Tradicional, Taiwan)](../tw/README.md) | [Croata](../hr/README.md) | [Checo](../cs/README.md) | [Dinamarquês](../da/README.md) | [Holandês](../nl/README.md) | [Estónio](../et/README.md) | [Finlandês](../fi/README.md) | [Francês](../fr/README.md) | [Alemão](../de/README.md) | [Grego](../el/README.md) | [Hebraico](../he/README.md) | [Hindi](../hi/README.md) | [Húngaro](../hu/README.md) | [Indonésio](../id/README.md) | [Italiano](../it/README.md) | [Japonês](../ja/README.md) | [Kannada](../kn/README.md) | [Coreano](../ko/README.md) | [Lituano](../lt/README.md) | [Malaio](../ms/README.md) | [Malaiala](../ml/README.md) | [Marata](../mr/README.md) | [Nepali](../ne/README.md) | [Pidgin Nigeriano](../pcm/README.md) | [Norueguês](../no/README.md) | [Persa (Farsi)](../fa/README.md) | [Polaco](../pl/README.md) | [Português (Brasil)](../br/README.md) | [Português (Portugal)](./README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romeno](../ro/README.md) | [Russo](../ru/README.md) | [Sérvio (Cirílico)](../sr/README.md) | [Eslovaco](../sk/README.md) | [Esloveno](../sl/README.md) | [Espanhol](../es/README.md) | [Suaíli](../sw/README.md) | [Sueco](../sv/README.md) | [Tagalo (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Tailandês](../th/README.md) | [Turco](../tr/README.md) | [Ucraniano](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamita](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## Visão Geral do Curso
@@ -172,13 +172,13 @@ azd down --force --purge
 
 **Ambiente de Desenvolvimento (Estimado $80-150/mês):**
 - Azure OpenAI (Pagamento conforme uso): $0-50/mês (baseado no uso de tokens)
-- AI Search (nível básico): $75/mês
+- AI Search (nível Básico): $75/mês
 - Container Apps (Consumo): $0-20/mês
 - Armazenamento (Standard): $1-5/mês
 
 **Ambiente de Produção (Estimado $300-3,500+/mês):**
 - Azure OpenAI (PTU para desempenho consistente): $3,000+/mês OU Pagamento conforme uso com alto volume
-- AI Search (nível standard): $250/mês
+- AI Search (nível Standard): $250/mês
 - Container Apps (Dedicado): $50-100/mês
 - Application Insights: $5-50/mês
 - Armazenamento (Premium): $10-50/mês
@@ -322,7 +322,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Resolver problemas de autenticação
 - Depurar conectividade de serviços de IA
 
-**💡 Resultado do Capítulo**: Diagnosticar e resolver independentemente problemas comuns de implementação
+**💡 Resultado do Capítulo**: Diagnosticar e resolver problemas comuns de implementação de forma independente
 
 ---
 
@@ -346,7 +346,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Configurar monitorização abrangente
 - Implementar em produção com governança adequada
 
-**💡 Resultado do Capítulo**: Implementar aplicações prontas para produção empresarial com capacidades completas
+**💡 Resultado do Capítulo**: Implementar aplicações prontas para produção empresarial com todas as capacidades
 
 ---
 
@@ -370,7 +370,7 @@ Os materiais do workshop fornecem uma experiência de aprendizagem estruturada e
 #### 📚 Estrutura do Workshop
 O workshop segue a metodologia **Descoberta → Implementação → Personalização**:
 
-1. **Fase de Descoberta** (45 minutos)
+1. **Fase de Descoberta** (45 mins)
    - Explorar templates e serviços Microsoft Foundry
    - Compreender padrões de arquitetura multi-agente
    - Rever requisitos e pré-requisitos de implementação
@@ -380,7 +380,7 @@ O workshop segue a metodologia **Descoberta → Implementação → Personaliza�
    - Configurar serviços e endpoints Azure AI
    - Implementar padrões de segurança e autenticação
 
-3. **Fase de Personalização** (45 minutos)
+3. **Fase de Personalização** (45 mins)
    - Modificar aplicações para casos de uso específicos
    - Otimizar para implementação em produção
    - Implementar monitorização e gestão de custos
@@ -397,7 +397,7 @@ cd azd-for-beginners/workshop
 ```
 
 #### 🎯 Resultados de Aprendizagem do Workshop
-Ao completar o workshop, os participantes irão:
+Ao concluir o workshop, os participantes irão:
 - **Implementar Aplicações de IA em Produção**: Usar AZD com serviços Microsoft Foundry
 - **Dominar Arquiteturas Multi-Agente**: Implementar soluções coordenadas de agentes de IA
 - **Implementar Melhores Práticas de Segurança**: Configurar autenticação e controlo de acesso
@@ -461,7 +461,7 @@ Azure Developer CLI (azd) é uma interface de linha de comandos centrada no prog
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Capítulo 2 | ⭐ | Padrões básicos de implementação de IA |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Capítulo 2 | ⭐⭐ | Implementação RAG com Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Capítulo 4 | ⭐⭐ | Integração de Inteligência de Documentos |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | Framework de agentes e chamadas de funções |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | Framework de agentes e chamadas de função |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Capítulo 8 | ⭐⭐⭐ | Orquestração empresarial de IA |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Capítulo 5 | ⭐⭐⭐⭐ | Arquitetura multi-agente com agentes Cliente e Inventário |
 
@@ -477,12 +477,12 @@ Azure Developer CLI (azd) é uma interface de linha de comandos centrada no prog
   - Monitorização e avaliação abrangentes
   - Implementação com um clique via template ARM
 
-#### Exemplos Locais - Aplicações em Contêineres (Capítulos 2-5)
+#### Exemplos Locais - Aplicações em Contêiner (Capítulos 2-5)
 **Exemplos completos de implementação de contêineres neste repositório:**
 - [**Exemplos de Container App**](examples/container-app/README.md) - Guia completo para implementações conteinerizadas
   - [API Flask Simples](../../examples/container-app/simple-flask-api) - API REST básica com escala para zero
   - [Arquitetura de Microserviços](../../examples/container-app/microservices) - Implementação multi-serviço pronta para produção
-  - Padrões de implementação Quick Start, Produção e Avançados
+  - Padrões de início rápido, produção e avançados
   - Orientação para monitorização, segurança e otimização de custos
 
 #### Exemplos Externos - Aplicações Simples (Capítulos 1-2)
@@ -569,7 +569,7 @@ az account show
 ### ❌ "Quota insuficiente" ou "Quota excedida"
 
 ```bash
-# Experimente uma região diferente da Azure
+# Experimente diferentes regiões do Azure
 azd env set AZURE_LOCATION "westus2"
 azd up
 
@@ -620,18 +620,18 @@ azd env new dev-v2
 azd up
 ```
 
-### ❌ Implantação do template demora demasiado
+### ❌ Implantação do template a demorar demasiado
 
 **Tempos normais de espera:**
 - Aplicação web simples: 5-10 minutos
 - Aplicação com base de dados: 10-15 minutos
-- Aplicações de IA: 15-25 minutos (provisionamento OpenAI é lento)
+- Aplicações de IA: 15-25 minutos (o provisionamento do OpenAI é lento)
 
 ```bash
 # Verificar progresso
 azd show
 
-# Se estiver parado >30 minutos, verifique o Portal Azure:
+# Se estiver bloqueado >30 minutos, verifique o Portal Azure:
 azd monitor
 # Procure implantações falhadas
 ```
@@ -775,18 +775,18 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ Implantação do template demora demasiado</strong></summary>
+<summary><strong>❌ Implantação do template a demorar demasiado</strong></summary>
 
 **Tempos normais de espera:**
 - Aplicação web simples: 5-10 minutos
 - Aplicação com base de dados: 10-15 minutos
-- Aplicações de IA: 15-25 minutos (provisionamento OpenAI é lento)
+- Aplicações de IA: 15-25 minutos (o provisionamento do OpenAI é lento)
 
 ```bash
 # Verificar progresso
 azd show
 
-# Se estiver parado >30 minutos, verifique o Portal Azure:
+# Se estiver bloqueado >30 minutos, verifique o Portal Azure:
 azd monitor
 # Procure implantações falhadas
 ```
@@ -800,7 +800,7 @@ azd monitor
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # Precisa de pelo menos o papel de "Colaborador"
-# Peça ao seu administrador Azure para conceder:
+# Peça ao seu administrador do Azure para conceder:
 # - Colaborador (para recursos)
 # - Administrador de Acesso de Utilizadores (para atribuições de papéis)
 ```
@@ -854,7 +854,7 @@ Após completar cada capítulo, verifique o seu conhecimento através de:
 
 ### Benefícios da Conclusão do Curso
 Ao completar todos os capítulos, terá:
-- **Experiência em Produção**: Aplicações reais de IA implantadas no Azure
+- **Experiência em Produção**: Implantado aplicações reais de IA no Azure
 - **Competências Profissionais**: Capacidades de implantação prontas para empresas  
 - **Reconhecimento Comunitário**: Membro ativo da comunidade de desenvolvedores Azure
 - **Avanço na Carreira**: Especialização procurada em AZD e implantação de IA
@@ -873,8 +873,8 @@ Ao completar todos os capítulos, terá:
 
 **Resultados recentes da sondagem no canal #Azure:**
 - **45%** dos desenvolvedores querem usar AZD para cargas de trabalho de IA
-- **Principais desafios**: Implantações multi-serviço, gestão de credenciais, prontidão para produção  
-- **Mais pedidos**: Templates específicos de IA, guias de resolução de problemas, melhores práticas
+- **Principais desafios**: Implantação multi-serviço, gestão de credenciais, prontidão para produção  
+- **Mais pedidos**: Templates específicos para IA, guias de resolução de problemas, melhores práticas
 
 **Junte-se à nossa comunidade para:**
 - Partilhar as suas experiências com AZD + IA e obter ajuda
@@ -895,7 +895,7 @@ Aceitamos contribuições! Por favor leia o nosso [Guia de Contribuição](CONTR
 ## 📄 Informações do Curso
 
 ### Licença
-Este projeto está licenciado sob a Licença MIT - consulte o ficheiro [LICENSE](../../LICENSE) para detalhes.
+Este projeto está licenciado sob a Licença MIT - veja o ficheiro [LICENSE](../../LICENSE) para detalhes.
 
 ### Recursos de Aprendizagem Relacionados da Microsoft
 

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T14:48:01+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T12:57:26+00:00",
   "source_file": "README.md",
   "language_code": "vi"
 }
@@ -25,7 +25,7 @@ Thực hiện các bước sau để bắt đầu hành trình học AZD của b
 1. **Fork Kho Lưu Trữ**: Nhấn [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clone Kho Lưu Trữ**: `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. **Tham Gia Cộng Đồng**: [Cộng đồng Azure Discord](https://discord.com/invite/ByRwuEEgH4) để được hỗ trợ chuyên gia
-4. **Chọn Lộ Trình Học**: Chọn một chương bên dưới phù hợp với trình độ của bạn
+4. **Chọn Lộ Trình Học Tập**: Chọn một chương bên dưới phù hợp với trình độ của bạn
 
 ### Hỗ Trợ Đa Ngôn Ngữ
 
@@ -37,7 +37,7 @@ Thực hiện các bước sau để bắt đầu hành trình học AZD của b
 
 ## Tổng Quan Khóa Học
 
-Làm chủ Azure Developer CLI (azd) qua các chương có cấu trúc được thiết kế cho việc học tiến bộ. **Tập trung đặc biệt vào triển khai ứng dụng AI với tích hợp Microsoft Foundry.**
+Làm chủ Azure Developer CLI (azd) qua các chương học có cấu trúc được thiết kế để học tập tiến bộ. **Tập trung đặc biệt vào triển khai ứng dụng AI với tích hợp Microsoft Foundry.**
 
 ### Tại Sao Khóa Học Này Quan Trọng Với Nhà Phát Triển Hiện Đại
 
@@ -50,10 +50,10 @@ Dựa trên những hiểu biết từ cộng đồng Microsoft Foundry Discord,
 
 ### Mục Tiêu Học Tập
 
-Khi hoàn thành khóa học có cấu trúc này, bạn sẽ:
+Hoàn thành khóa học có cấu trúc này, bạn sẽ:
 - **Làm chủ các kiến thức cơ bản về AZD**: Khái niệm cốt lõi, cài đặt và cấu hình
-- **Triển khai ứng dụng AI**: Sử dụng AZD với các dịch vụ Microsoft Foundry
-- **Thực hiện Hạ tầng dưới dạng Mã**: Quản lý tài nguyên Azure với các mẫu Bicep
+- **Triển khai ứng dụng AI**: Sử dụng AZD với dịch vụ Microsoft Foundry
+- **Thực hiện Hạ tầng dưới dạng Mã**: Quản lý tài nguyên Azure với mẫu Bicep
 - **Khắc phục sự cố triển khai**: Giải quyết các vấn đề phổ biến và gỡ lỗi
 - **Tối ưu cho môi trường sản xuất**: Bảo mật, mở rộng, giám sát và quản lý chi phí
 - **Xây dựng giải pháp đa tác nhân**: Triển khai kiến trúc AI phức tạp
@@ -128,7 +128,7 @@ azd down --force --purge  # Dọn dẹp tài nguyên
 
 #### Bạn Sẽ Học Gì
 - Tích hợp Microsoft Foundry với AZD
-- Triển khai các ứng dụng AI
+- Triển khai ứng dụng AI
 - Hiểu cấu hình dịch vụ AI
 
 #### Tài Nguyên Học Tập
@@ -160,7 +160,7 @@ azd up
 # Kiểm tra giao diện trò chuyện AI
 # Đặt câu hỏi và nhận phản hồi được hỗ trợ bởi AI kèm nguồn
 # Xác minh tích hợp tìm kiếm hoạt động
-azd monitor  # Kiểm tra Application Insights hiển thị dữ liệu giám sát
+azd monitor  # Kiểm tra Application Insights hiển thị dữ liệu đo lường
 azd down --force --purge
 ```
 
@@ -171,7 +171,7 @@ azd down --force --purge
 #### 💰 Cân Nhắc Chi Phí Cho Triển Khai AI
 
 **Môi Trường Phát Triển (Ước tính $80-150/tháng):**
-- Azure OpenAI (Trả theo mức sử dụng): $0-50/tháng (dựa trên lượng token)
+- Azure OpenAI (Trả theo mức sử dụng): $0-50/tháng (dựa trên token sử dụng)
 - AI Search (Cấp độ cơ bản): $75/tháng
 - Container Apps (Tiêu thụ): $0-20/tháng
 - Lưu trữ (Chuẩn): $1-5/tháng
@@ -213,12 +213,12 @@ az consumption budget list --resource-group <your-rg>
 
 #### Tài Nguyên Học Tập
 - **📖 Cấu Hình**: [Hướng Dẫn Cấu Hình](docs/getting-started/configuration.md) - Thiết lập môi trường
-- **🔐 Bảo Mật**: [Mẫu xác thực và managed identity](docs/getting-started/authsecurity.md) - Mẫu xác thực
-- **📝 Ví Dụ**: [Ví dụ Ứng Dụng Cơ Sở Dữ Liệu](examples/database-app/README.md) - Ví dụ AZD Database
+- **🔐 Bảo Mật**: [Mẫu xác thực và Managed Identity](docs/getting-started/authsecurity.md) - Mẫu xác thực
+- **📝 Ví Dụ**: [Ví Dụ Ứng Dụng Cơ Sở Dữ Liệu](examples/database-app/README.md) - Ví dụ AZD Database
 
 #### Bài Tập Thực Hành
 - Cấu hình nhiều môi trường (dev, staging, prod)
-- Thiết lập xác thực managed identity
+- Thiết lập xác thực Managed Identity
 - Thực hiện cấu hình riêng cho từng môi trường
 
 **💡 Kết Quả Chương**: Quản lý nhiều môi trường với xác thực và bảo mật đúng cách
@@ -238,14 +238,14 @@ az consumption budget list --resource-group <your-rg>
 #### Tài Nguyên Học Tập
 - **📖 Triển Khai**: [Hướng Dẫn Triển Khai](docs/deployment/deployment-guide.md) - Quy trình hoàn chỉnh
 - **🏗️ Cung Cấp**: [Cung Cấp Tài Nguyên](docs/deployment/provisioning.md) - Quản lý tài nguyên Azure
-- **📝 Ví Dụ**: [Ví Dụ Container App](../../examples/container-app) - Triển khai container
+- **📝 Ví Dụ**: [Ví Dụ Container App](../../examples/container-app) - Triển khai container hóa
 
 #### Bài Tập Thực Hành
 - Tạo mẫu Bicep tùy chỉnh
 - Triển khai ứng dụng đa dịch vụ
 - Thực hiện chiến lược triển khai blue-green
 
-**💡 Kết Quả Chương**: Triển khai ứng dụng đa dịch vụ phức tạp bằng mẫu hạ tầng tùy chỉnh
+**💡 Kết Quả Chương**: Triển khai ứng dụng đa dịch vụ phức tạp sử dụng mẫu hạ tầng tùy chỉnh
 
 ---
 
@@ -298,7 +298,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Tối ưu lựa chọn SKU để tiết kiệm chi phí
 - Triển khai kiểm tra tự động trước khi triển khai
 
-**💡 Kết quả chương học**: Xác thực và tối ưu hóa triển khai trước khi thực thi
+**💡 Kết quả chương học**: Xác thực và tối ưu hóa triển khai trước khi thực hiện
 
 ---
 
@@ -355,16 +355,16 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 > **⚠️ TRẠNG THÁI WORKSHOP: Đang phát triển**  
 > Tài liệu workshop hiện đang được phát triển và hoàn thiện. Các mô-đun cốt lõi đã hoạt động, nhưng một số phần nâng cao chưa hoàn chỉnh. Chúng tôi đang tích cực hoàn thiện toàn bộ nội dung. [Theo dõi tiến độ →](workshop/README.md)
 
-### Tài liệu Workshop tương tác
+### Tài liệu Workshop Tương tác
 **Học tập thực hành toàn diện với công cụ trên trình duyệt và bài tập hướng dẫn**
 
-Tài liệu workshop cung cấp trải nghiệm học tập có cấu trúc, tương tác, bổ sung cho chương trình học theo chương ở trên. Workshop được thiết kế cho cả học tự học và các buổi học có giảng viên hướng dẫn.
+Tài liệu workshop cung cấp trải nghiệm học tập có cấu trúc, tương tác bổ sung cho chương trình học theo chương ở trên. Workshop được thiết kế cho cả học tự học và các buổi học có giảng viên hướng dẫn.
 
 #### 🛠️ Tính năng Workshop
 - **Giao diện trên trình duyệt**: Workshop hoàn chỉnh chạy trên MkDocs với tính năng tìm kiếm, sao chép và chủ đề
-- **Tích hợp GitHub Codespaces**: Thiết lập môi trường phát triển chỉ với một cú nhấp
+- **Tích hợp GitHub Codespaces**: Thiết lập môi trường phát triển chỉ với một cú nhấp chuột
 - **Lộ trình học có cấu trúc**: 7 bước bài tập hướng dẫn (tổng 3.5 giờ)
-- **Khám phá → Triển khai → Tùy chỉnh**: Phương pháp học tiến bộ
+- **Khám phá → Triển khai → Tùy chỉnh**: Phương pháp tiến triển
 - **Môi trường DevContainer tương tác**: Công cụ và phụ thuộc được cấu hình sẵn
 
 #### 📚 Cấu trúc Workshop
@@ -373,7 +373,7 @@ Workshop theo phương pháp **Khám phá → Triển khai → Tùy chỉnh**:
 1. **Giai đoạn Khám phá** (45 phút)
    - Khám phá mẫu và dịch vụ Microsoft Foundry
    - Hiểu các mẫu kiến trúc đa tác nhân
-   - Xem xét yêu cầu và điều kiện trước khi triển khai
+   - Xem xét yêu cầu và điều kiện trước triển khai
 
 2. **Giai đoạn Triển khai** (2 giờ)
    - Thực hành triển khai ứng dụng AI với AZD
@@ -387,7 +387,7 @@ Workshop theo phương pháp **Khám phá → Triển khai → Tùy chỉnh**:
 
 #### 🚀 Bắt đầu với Workshop
 ```bash
-# Lựa chọn 1: GitHub Codespaces (Được khuyến nghị)
+# Lựa chọn 1: GitHub Codespaces (Khuyến nghị)
 # Nhấp "Code" → "Create codespace on main" trong kho lưu trữ
 
 # Lựa chọn 2: Phát triển cục bộ
@@ -399,13 +399,13 @@ cd azd-for-beginners/workshop
 #### 🎯 Kết quả học tập Workshop
 Sau khi hoàn thành workshop, người tham gia sẽ:
 - **Triển khai ứng dụng AI sản xuất**: Sử dụng AZD với dịch vụ Microsoft Foundry
-- **Thành thạo kiến trúc đa tác nhân**: Triển khai giải pháp AI đa tác nhân phối hợp
+- **Thành thạo kiến trúc đa tác nhân**: Triển khai giải pháp tác nhân AI phối hợp
 - **Áp dụng thực hành bảo mật tốt nhất**: Cấu hình xác thực và kiểm soát truy cập
-- **Tối ưu hóa quy mô**: Thiết kế triển khai tiết kiệm chi phí và hiệu năng cao
+- **Tối ưu cho quy mô**: Thiết kế triển khai tiết kiệm chi phí và hiệu năng
 - **Khắc phục sự cố triển khai**: Giải quyết các vấn đề phổ biến một cách độc lập
 
 #### 📖 Tài nguyên Workshop
-- **🎥 Hướng dẫn tương tác**: [Tài liệu Workshop](workshop/README.md) - Môi trường học trên trình duyệt
+- **🎥 Hướng dẫn tương tác**: [Tài liệu Workshop](workshop/README.md) - Môi trường học tập trên trình duyệt
 - **📋 Hướng dẫn từng bước**: [Bài tập hướng dẫn](../../workshop/docs/instructions) - Hướng dẫn chi tiết
 - **🛠️ Phòng thí nghiệm AI Workshop**: [Phòng thí nghiệm AI Workshop](docs/microsoft-foundry/ai-workshop-lab.md) - Bài tập tập trung AI
 - **💡 Bắt đầu nhanh**: [Hướng dẫn thiết lập Workshop](workshop/README.md#quick-start) - Cấu hình môi trường
@@ -419,7 +419,7 @@ Sau khi hoàn thành workshop, người tham gia sẽ:
 Azure Developer CLI (azd) là giao diện dòng lệnh tập trung vào nhà phát triển giúp tăng tốc quá trình xây dựng và triển khai ứng dụng lên Azure. Nó cung cấp:
 
 - **Triển khai dựa trên mẫu** - Sử dụng các mẫu dựng sẵn cho các mẫu ứng dụng phổ biến
-- **Hạ tầng như mã** - Quản lý tài nguyên Azure bằng Bicep hoặc Terraform  
+- **Hạ tầng dưới dạng mã** - Quản lý tài nguyên Azure bằng Bicep hoặc Terraform  
 - **Quy trình tích hợp** - Cung cấp, triển khai và giám sát ứng dụng liền mạch
 - **Thân thiện với nhà phát triển** - Tối ưu năng suất và trải nghiệm nhà phát triển
 
@@ -456,7 +456,7 @@ Azure Developer CLI (azd) là giao diện dòng lệnh tập trung vào nhà ph�
 ### Nổi bật: Kịch bản học tập hoàn chỉnh
 **Mẫu ứng dụng sẵn sàng sản xuất được liên kết với các chương học**
 
-| Mẫu | Chương học | Độ phức tạp | Học chính |
+| Mẫu | Chương học | Độ phức tạp | Nội dung học chính |
 |----------|------------------|------------|--------------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chương 2 | ⭐ | Mẫu triển khai AI cơ bản |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chương 2 | ⭐⭐ | Triển khai RAG với Azure AI Search |
@@ -475,24 +475,24 @@ Azure Developer CLI (azd) là giao diện dòng lệnh tập trung vào nhà ph�
 - [**Giải pháp đa tác nhân bán lẻ**](examples/retail-scenario.md) - Triển khai hoàn chỉnh sẵn sàng sản xuất với mẫu ARM
   - Kiến trúc đa tác nhân (Khách hàng + Kho hàng)
   - Giám sát và đánh giá toàn diện
-  - Triển khai một cú nhấp qua mẫu ARM
+  - Triển khai một cú nhấp chuột qua mẫu ARM
 
 #### Ví dụ nội bộ - Ứng dụng Container (Chương 2-5)
 **Ví dụ triển khai container toàn diện trong kho này:**
 - [**Ví dụ Container App**](examples/container-app/README.md) - Hướng dẫn đầy đủ triển khai container
-  - [API Flask đơn giản](../../examples/container-app/simple-flask-api) - API REST cơ bản với scale-to-zero
+  - [API Flask đơn giản](../../examples/container-app/simple-flask-api) - REST API cơ bản với scale-to-zero
   - [Kiến trúc Microservices](../../examples/container-app/microservices) - Triển khai đa dịch vụ sẵn sàng sản xuất
   - Mẫu Khởi động nhanh, Sản xuất và Nâng cao
   - Hướng dẫn giám sát, bảo mật và tối ưu chi phí
 
 #### Ví dụ bên ngoài - Ứng dụng đơn giản (Chương 1-2)
 **Clone các kho Azure Samples này để bắt đầu:**
-- [Ứng dụng Web đơn giản - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Mẫu triển khai cơ bản
+- [Ứng dụng web đơn giản - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Mẫu triển khai cơ bản
 - [Website tĩnh - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Triển khai nội dung tĩnh
-- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Triển khai API REST
+- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Triển khai REST API
 
 #### Ví dụ bên ngoài - Tích hợp cơ sở dữ liệu (Chương 3-4)  
-- [Ứng dụng Cơ sở dữ liệu - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Mẫu kết nối cơ sở dữ liệu
+- [Ứng dụng cơ sở dữ liệu - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Mẫu kết nối cơ sở dữ liệu
 - [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Quy trình dữ liệu serverless
 
 #### Ví dụ bên ngoài - Mẫu nâng cao (Chương 4-8)
@@ -573,7 +573,7 @@ az account show
 azd env set AZURE_LOCATION "westus2"
 azd up
 
-# Hoặc sử dụng các SKU nhỏ hơn trong phát triển
+# Hoặc sử dụng SKU nhỏ hơn trong phát triển
 # Chỉnh sửa infra/main.parameters.json:
 {
   "sku": "B1"  // Instead of "P1V2"
@@ -636,7 +636,7 @@ azd monitor
 # Tìm các triển khai thất bại
 ```
 
-### ❌ "Không có quyền" hoặc "Bị cấm"
+### ❌ "Từ chối quyền" hoặc "Bị cấm"
 
 ```bash
 # Kiểm tra vai trò Azure của bạn
@@ -644,8 +644,8 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # Bạn cần ít nhất vai trò "Người đóng góp"
 # Yêu cầu quản trị viên Azure của bạn cấp:
-# - Người đóng góp (cho tài nguyên)
-# - Quản trị viên truy cập người dùng (cho việc gán vai trò)
+# - Người đóng góp (cho các tài nguyên)
+# - Quản trị viên truy cập người dùng (cho các phân công vai trò)
 ```
 
 ### ❌ Không tìm thấy URL ứng dụng đã triển khai
@@ -654,7 +654,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # Hiển thị tất cả các điểm cuối dịch vụ
 azd show
 
-# Hoặc mở Cổng thông tin Azure
+# Hoặc mở Cổng Azure
 azd monitor
 
 # Kiểm tra dịch vụ cụ thể
@@ -720,7 +720,7 @@ az account show
 azd env set AZURE_LOCATION "westus2"
 azd up
 
-# Hoặc sử dụng SKU nhỏ hơn trong phát triển
+# Hoặc sử dụng các SKU nhỏ hơn trong phát triển
 # Chỉnh sửa infra/main.parameters.json:
 {
   "sku": "B1"  // Instead of "P1V2"
@@ -793,7 +793,7 @@ azd monitor
 </details>
 
 <details>
-<summary><strong>❌ "Không có quyền" hoặc "Bị cấm"</strong></summary>
+<summary><strong>❌ "Từ chối quyền" hoặc "Bị cấm"</strong></summary>
 
 ```bash
 # Kiểm tra vai trò Azure của bạn
@@ -945,10 +945,10 @@ Nhóm của chúng tôi sản xuất các khóa học học tập toàn diện k
 
 ## 🗺️ Điều hướng Khóa học
 
-**🚀 Sẵn sàng Bắt đầu Học?**
+**🚀 Sẵn sàng bắt đầu học?**
 
-**Người mới bắt đầu**: Bắt đầu với [Chương 1: Nền tảng & Khởi đầu Nhanh](../..)  
-**Nhà phát triển AI**: Nhảy đến [Chương 2: Phát triển AI-Đầu tiên](../..)  
+**Người mới bắt đầu**: Bắt đầu với [Chương 1: Nền tảng & Khởi đầu nhanh](../..)  
+**Nhà phát triển AI**: Nhảy đến [Chương 2: Phát triển AI-First](../..)  
 **Nhà phát triển có kinh nghiệm**: Bắt đầu với [Chương 3: Cấu hình & Xác thực](../..)
 
 **Bước tiếp theo**: [Bắt đầu Chương 1 - AZD Cơ bản](docs/getting-started/azd-basics.md) →

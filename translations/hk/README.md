@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T12:28:02+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T10:44:11+00:00",
   "source_file": "README.md",
   "language_code": "hk"
 }
 -->
-# AZD 初學者指南：有結構的學習旅程
+# AZD 初學者指南：結構化學習之旅
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.hk.png) 
 
@@ -20,7 +20,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 開始本課程
 
-請按照以下步驟開始您的 AZD 學習旅程：
+請依照以下步驟開始您的 AZD 學習之旅：
 
 1. **Fork 倉庫**：點擊 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clone 倉庫**：`git clone https://github.com/microsoft/azd-for-beginners.git`
@@ -37,11 +37,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 課程概覽
 
-透過有結構的章節掌握 Azure Developer CLI (azd)，設計為循序漸進學習。**特別聚焦於結合 Microsoft Foundry 的 AI 應用部署。**
+透過結構化章節掌握 Azure Developer CLI (azd)，設計為循序漸進學習。**特別聚焦於結合 Microsoft Foundry 的 AI 應用部署。**
 
 ### 為何本課程對現代開發者至關重要
 
-根據 Microsoft Foundry Discord 社群的見解，**45% 的開發者希望使用 AZD 來處理 AI 工作負載**，但面臨以下挑戰：
+根據 Microsoft Foundry Discord 社群洞察，**45% 的開發者希望使用 AZD 進行 AI 工作負載**，但面臨以下挑戰：
 - 複雜的多服務 AI 架構
 - 生產環境 AI 部署最佳實踐  
 - Azure AI 服務整合與配置
@@ -50,7 +50,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 學習目標
 
-完成本有結構課程後，您將能：
+完成本結構化課程後，您將能：
 - **掌握 AZD 基礎**：核心概念、安裝與配置
 - **部署 AI 應用**：結合 Microsoft Foundry 服務使用 AZD
 - **實作基礎設施即代碼**：使用 Bicep 模板管理 Azure 資源
@@ -75,9 +75,9 @@ CO_OP_TRANSLATOR_METADATA:
 #### 學習資源
 - **🎯 從這裡開始**：[什麼是 Azure Developer CLI？](../..)
 - **📖 理論**：[AZD 基礎](docs/getting-started/azd-basics.md) - 核心概念與術語
-- **⚙️ 設置**：[安裝與設置](docs/getting-started/installation.md) - 平台專屬指南
+- **⚙️ 設置**：[安裝與設定](docs/getting-started/installation.md) - 平台專屬指南
 - **🛠️ 實作**：[您的第一個專案](docs/getting-started/first-project.md) - 逐步教學
-- **📋 快速參考**：[命令速查表](resources/cheat-sheet.md)
+- **📋 快速參考**：[指令速查表](resources/cheat-sheet.md)
 
 #### 實作練習
 ```bash
@@ -127,7 +127,7 @@ azd down --force --purge  # 清理資源
 **難度**：⭐⭐
 
 #### 您將學到
-- Microsoft Foundry 與 AZD 的整合
+- Microsoft Foundry 與 AZD 整合
 - 部署 AI 驅動的應用
 - 了解 AI 服務配置
 
@@ -135,7 +135,7 @@ azd down --force --purge  # 清理資源
 - **🎯 從這裡開始**：[Microsoft Foundry 整合](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 模式**：[AI 模型部署](docs/microsoft-foundry/ai-model-deployment.md) - 部署與管理 AI 模型
 - **🛠️ 工作坊**：[AI 工作坊實驗室](docs/microsoft-foundry/ai-workshop-lab.md) - 讓您的 AI 解決方案適用於 AZD
-- **🎥 互動指南**：[工作坊教材](workshop/README.md) - 使用 MkDocs 的瀏覽器學習 * DevContainer 環境
+- **🎥 互動指南**：[工作坊教材](workshop/README.md) - 使用 MkDocs * DevContainer 瀏覽器學習環境
 - **📋 範本**：[Microsoft Foundry 範本](../..)
 - **📝 範例**：[AZD 部署範例](examples/README.md)
 
@@ -166,7 +166,7 @@ azd down --force --purge
 
 **📊 時間投入：** 1-2 小時  
 **📈 完成後技能水平：** 能部署並配置生產級 AI 應用  
-**💰 成本意識：** 了解開發成本約 $80-150/月，生產成本約 $300-3500/月
+**💰 成本認知：** 了解開發成本約 $80-150/月，生產成本約 $300-3500/月
 
 #### 💰 AI 部署成本考量
 
@@ -186,9 +186,9 @@ azd down --force --purge
 **💡 成本優化建議：**
 - 使用 **免費層** Azure OpenAI 學習（含 50,000 令牌/月）
 - 不開發時執行 `azd down` 釋放資源
-- 先使用消耗計費，生產環境才升級 PTU
+- 先使用消耗計費，生產環境再升級 PTU
 - 使用 `azd provision --preview` 預估部署成本
-- 啟用自動擴展：只付實際使用費用
+- 啟用自動擴展：只為實際使用付費
 
 **成本監控：**
 ```bash
@@ -201,27 +201,27 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### ⚙️ 第 3 章：配置與認證
+### ⚙️ 第 3 章：配置與身份驗證
 **先決條件**：完成第 1 章  
 **時長**：45-60 分鐘  
 **難度**：⭐⭐
 
 #### 您將學到
 - 環境配置與管理
-- 認證與安全最佳實踐
+- 身份驗證與安全最佳實踐
 - 資源命名與組織
 
 #### 學習資源
-- **📖 配置**：[配置指南](docs/getting-started/configuration.md) - 環境設置
-- **🔐 安全**：[認證模式與管理身分](docs/getting-started/authsecurity.md) - 認證模式
+- **📖 配置**：[配置指南](docs/getting-started/configuration.md) - 環境設定
+- **🔐 安全**：[身份驗證模式與管理身份](docs/getting-started/authsecurity.md) - 身份驗證模式
 - **📝 範例**：[資料庫應用範例](examples/database-app/README.md) - AZD 資料庫範例
 
 #### 實作練習
 - 配置多個環境（開發、測試、生產）
-- 設置管理身分認證
-- 實作環境特定配置
+- 設置管理身份驗證
+- 實作環境專屬配置
 
-**💡 章節成果**：管理多環境並具備適當認證與安全性
+**💡 章節成果**：管理多環境並確保適當身份驗證與安全性
 
 ---
 
@@ -232,7 +232,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### 您將學到
 - 進階部署模式
-- 使用 Bicep 的基礎設施即代碼
+- 使用 Bicep 實作基礎設施即代碼
 - 資源佈建策略
 
 #### 學習資源
@@ -354,10 +354,10 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ## 🎓 工作坊概覽：實作學習體驗
 
 > **⚠️ 工作坊狀態：積極開發中**  
-> 工作坊教材目前正在開發與完善中。核心模組已可使用，但部分進階章節尚未完成。我們正積極努力完成所有內容。 [追蹤進度 →](workshop/README.md)
+> 工作坊教材目前正在開發與完善中。核心模組已可使用，但部分進階章節尚未完成。我們正積極努力完成所有內容。[追蹤進度 →](workshop/README.md)
 
 ### 互動式工作坊教材
-**結合瀏覽器工具與引導練習的完整實作學習體驗**
+**結合瀏覽器工具與引導練習的完整實作學習**
 
 我們的工作坊教材提供結構化且互動的學習體驗，與上述章節課程相輔相成。工作坊設計適合自學與講師帶領課程。
 
@@ -371,17 +371,17 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 📚 工作坊結構
 工作坊遵循 **探索 → 部署 → 客製化** 方法：
 
-1. **探索階段**（45 分鐘）
+1. **探索階段** (45 分鐘)
    - 探索 Microsoft Foundry 範本與服務
    - 理解多代理架構模式
    - 檢視部署需求與先決條件
 
-2. **部署階段**（2 小時）
+2. **部署階段** (2 小時)
    - 實作使用 AZD 部署 AI 應用
    - 配置 Azure AI 服務與端點
    - 實作安全與身份驗證模式
 
-3. **客製化階段**（45 分鐘）
+3. **客製化階段** (45 分鐘)
    - 修改應用以符合特定使用案例
    - 優化生產部署
    - 實作監控與成本管理
@@ -402,7 +402,7 @@ cd azd-for-beginners/workshop
 - **部署生產 AI 應用**：使用 AZD 與 Microsoft Foundry 服務
 - **掌握多代理架構**：實作協調式 AI 代理解決方案
 - **實作安全最佳實踐**：配置身份驗證與存取控制
-- **優化擴展性**：設計具成本效益與高效能的部署
+- **優化擴展性**：設計具成本效益且高效能的部署
 - **故障排除部署問題**：獨立解決常見問題
 
 #### 📖 工作坊資源
@@ -462,7 +462,7 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第 2 章 | ⭐ | 基本 AI 部署模式 |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | 第 2 章 | ⭐⭐ | 使用 Azure AI 搜尋的 RAG 實作 |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | 第 4 章 | ⭐⭐ | 文件智能整合 |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第 5 章 | ⭐⭐⭐ | 代理框架與函數呼叫 |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第 5 章 | ⭐⭐⭐ | 代理框架與函式呼叫 |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | 第 8 章 | ⭐⭐⭐ | 企業 AI 編排 |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | 第 5 章 | ⭐⭐⭐⭐ | 多代理架構，含客戶與庫存代理 |
 
@@ -473,7 +473,7 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 > **外部範例**（Azure Samples）= 從連結倉庫克隆
 
 #### 本地範例（可立即使用）
-- [**零售多代理解決方案**](examples/retail-scenario.md) - 完整生產就緒實作，含 ARM 範本
+- [**零售多代理解決方案**](examples/retail-scenario.md) - 完整生產就緒實作含 ARM 範本
   - 多代理架構（客戶 + 庫存代理）
   - 全面監控與評估
   - 透過 ARM 範本一鍵部署
@@ -499,7 +499,7 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 #### 外部範例 - 進階模式（第 4-8 章）
 - [Java 微服務](https://github.com/Azure-Samples/java-microservices-aca-lab) - 多服務架構
 - [容器應用工作任務](https://github.com/Azure-Samples/container-apps-jobs) - 背景處理  
-- [企業 ML 管線](https://github.com/Azure-Samples/mlops-v2) - 生產就緒 ML 模式
+- [企業機器學習管線](https://github.com/Azure-Samples/mlops-v2) - 生產就緒 ML 模式
 
 ### 外部範本集合
 - [**官方 AZD 範本庫**](https://azure.github.io/awesome-azd/) - 精選官方與社群範本
@@ -534,7 +534,7 @@ Azure Developer CLI (azd) 是一款以開發者為中心的命令列介面，加
 
 **初學者常見問題及即時解決方案：**
 
-### ❌ 「azd: 找不到指令」
+### ❌ 「azd: command not found」
 
 ```bash
 # 首先安裝 AZD
@@ -596,7 +596,7 @@ azd show
 azd logs
 ```
 
-### ❌ 「驗證失敗」或「令牌過期」
+### ❌ 「認證失敗」或「令牌過期」
 
 ```bash
 # 重新驗證
@@ -621,7 +621,7 @@ azd env new dev-v2
 azd up
 ```
 
-### ❌ 範本部署花費太久
+### ❌ 模板部署時間過長
 
 **正常等待時間：**
 - 簡單網頁應用：5-10 分鐘
@@ -677,7 +677,7 @@ azd env get-values
 **初學者常見問題及即時解決方案：**
 
 <details>
-<summary><strong>❌ 「azd: 找不到指令」</strong></summary>
+<summary><strong>❌ 「azd: command not found」</strong></summary>
 
 ```bash
 # 首先安裝 AZD
@@ -747,7 +747,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ 「驗證失敗」或「令牌過期」</strong></summary>
+<summary><strong>❌ 「認證失敗」或「令牌過期」</strong></summary>
 
 ```bash
 # 重新驗證
@@ -776,7 +776,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ 範本部署花費太久</strong></summary>
+<summary><strong>❌ 模板部署時間過長</strong></summary>
 
 **正常等待時間：**
 - 簡單網頁應用：5-10 分鐘
@@ -839,7 +839,7 @@ azd env get-values
 
 - [ ] **第 1 章**：基礎與快速入門 ✅
 - [ ] **第 2 章**：AI 優先開發 ✅  
-- [ ] **第 3 章**：設定與驗證 ✅
+- [ ] **第 3 章**：設定與認證 ✅
 - [ ] **第 4 章**：基礎架構即程式碼與部署 ✅
 - [ ] **第 5 章**：多代理 AI 解決方案 ✅
 - [ ] **第 6 章**：部署前驗證與規劃 ✅
@@ -853,12 +853,12 @@ azd env get-values
 3. **社群討論**：在 Azure Discord 分享你的經驗
 4. **下一章節**：進入下一個難度層級
 
-### 課程完成好處
+### 課程完成收益
 完成所有章節後，你將擁有：
 - **生產經驗**：成功部署真實 AI 應用至 Azure
 - **專業技能**：具備企業級部署能力  
 - **社群認可**：成為活躍的 Azure 開發者社群成員
-- **職涯提升**：掌握熱門的 AZD 與 AI 部署專業知識
+- **職涯提升**：掌握熱門 AZD 與 AI 部署專業知識
 
 ---
 
@@ -875,18 +875,18 @@ azd env get-values
 **#Azure 頻道近期投票結果：**
 - **45%** 的開發者想用 AZD 來處理 AI 工作負載
 - **主要挑戰**：多服務部署、憑證管理、生產準備  
-- **最受歡迎需求**：AI 專屬範本、故障排除指南、最佳實踐
+- **最受歡迎需求**：AI 專屬模板、故障排除指南、最佳實踐
 
 **加入我們的社群，享有：**
 - 分享你的 AZD + AI 經驗並獲得協助
-- 取得 AI 範本的早期預覽
+- 取得 AI 模板的早期預覽
 - 參與 AI 部署最佳實踐的貢獻
 - 影響未來 AI + AZD 功能開發
 
 ### 課程貢獻
 歡迎貢獻！請閱讀我們的 [貢獻指南](CONTRIBUTING.md) 了解詳情：
 - **內容改進**：強化現有章節與範例
-- **新增範例**：加入真實場景與範本  
+- **新增範例**：加入真實場景與模板  
 - **翻譯**：協助維護多語言支援
 - **錯誤回報**：提升準確性與清晰度
 - **社群標準**：遵守我們包容的社群規範
@@ -949,7 +949,7 @@ azd env get-values
 **🚀 準備好開始學習了嗎？**
 
 **初學者**：從 [第 1 章：基礎與快速入門](../..) 開始  
-**AI 開發者**：直接跳到 [第 2 章：AI 優先開發](../..)  
+**AI 開發者**：跳至 [第 2 章：AI 優先開發](../..)  
 **有經驗的開發者**：從 [第 3 章：配置與身份驗證](../..) 開始
 
 **下一步**：[開始第 1 章 - AZD 基礎](docs/getting-started/azd-basics.md) →
