@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T12:15:41+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T10:33:25+00:00",
   "source_file": "README.md",
   "language_code": "zh"
 }
@@ -25,14 +25,14 @@ CO_OP_TRANSLATOR_METADATA:
 1. **Fork 仓库**：点击 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **克隆仓库**：`git clone https://github.com/microsoft/azd-for-beginners.git`
 3. **加入社区**：[Azure Discord 社区](https://discord.com/invite/ByRwuEEgH4) 获取专家支持
-4. **选择学习路径**：从下面章节中选择适合您经验水平的内容
+4. **选择学习路径**：从下面选择适合您经验水平的章节
 
 ### 多语言支持
 
 #### 自动翻译（始终保持最新）
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[阿拉伯语](../ar/README.md) | [孟加拉语](../bn/README.md) | [保加利亚语](../bg/README.md) | [缅甸语 (Myanmar)](../my/README.md) | [中文 (简体)](./README.md) | [中文 (繁体，香港)](../hk/README.md) | [中文 (繁体，澳门)](../mo/README.md) | [中文 (繁体，台湾)](../tw/README.md) | [克罗地亚语](../hr/README.md) | [捷克语](../cs/README.md) | [丹麦语](../da/README.md) | [荷兰语](../nl/README.md) | [爱沙尼亚语](../et/README.md) | [芬兰语](../fi/README.md) | [法语](../fr/README.md) | [德语](../de/README.md) | [希腊语](../el/README.md) | [希伯来语](../he/README.md) | [印地语](../hi/README.md) | [匈牙利语](../hu/README.md) | [印度尼西亚语](../id/README.md) | [意大利语](../it/README.md) | [日语](../ja/README.md) | [卡纳达语](../kn/README.md) | [韩语](../ko/README.md) | [立陶宛语](../lt/README.md) | [马来语](../ms/README.md) | [马拉雅拉姆语](../ml/README.md) | [马拉地语](../mr/README.md) | [尼泊尔语](../ne/README.md) | [尼日利亚皮钦语](../pcm/README.md) | [挪威语](../no/README.md) | [波斯语 (法尔西语)](../fa/README.md) | [波兰语](../pl/README.md) | [葡萄牙语 (巴西)](../br/README.md) | [葡萄牙语 (葡萄牙)](../pt/README.md) | [旁遮普语 (古鲁穆奇)](../pa/README.md) | [罗马尼亚语](../ro/README.md) | [俄语](../ru/README.md) | [塞尔维亚语 (西里尔字母)](../sr/README.md) | [斯洛伐克语](../sk/README.md) | [斯洛文尼亚语](../sl/README.md) | [西班牙语](../es/README.md) | [斯瓦希里语](../sw/README.md) | [瑞典语](../sv/README.md) | [他加禄语 (菲律宾语)](../tl/README.md) | [泰米尔语](../ta/README.md) | [泰卢固语](../te/README.md) | [泰语](../th/README.md) | [土耳其语](../tr/README.md) | [乌克兰语](../uk/README.md) | [乌尔都语](../ur/README.md) | [越南语](../vi/README.md)
+[阿拉伯语](../ar/README.md) | [孟加拉语](../bn/README.md) | [保加利亚语](../bg/README.md) | [缅甸语](../my/README.md) | [中文（简体）](./README.md) | [中文（繁体，香港）](../hk/README.md) | [中文（繁体，澳门）](../mo/README.md) | [中文（繁体，台湾）](../tw/README.md) | [克罗地亚语](../hr/README.md) | [捷克语](../cs/README.md) | [丹麦语](../da/README.md) | [荷兰语](../nl/README.md) | [爱沙尼亚语](../et/README.md) | [芬兰语](../fi/README.md) | [法语](../fr/README.md) | [德语](../de/README.md) | [希腊语](../el/README.md) | [希伯来语](../he/README.md) | [印地语](../hi/README.md) | [匈牙利语](../hu/README.md) | [印度尼西亚语](../id/README.md) | [意大利语](../it/README.md) | [日语](../ja/README.md) | [卡纳达语](../kn/README.md) | [韩语](../ko/README.md) | [立陶宛语](../lt/README.md) | [马来语](../ms/README.md) | [马拉雅拉姆语](../ml/README.md) | [马拉地语](../mr/README.md) | [尼泊尔语](../ne/README.md) | [尼日利亚皮钦语](../pcm/README.md) | [挪威语](../no/README.md) | [波斯语（法尔西语）](../fa/README.md) | [波兰语](../pl/README.md) | [葡萄牙语（巴西）](../br/README.md) | [葡萄牙语（葡萄牙）](../pt/README.md) | [旁遮普语（古鲁穆奇文）](../pa/README.md) | [罗马尼亚语](../ro/README.md) | [俄语](../ru/README.md) | [塞尔维亚语（西里尔文）](../sr/README.md) | [斯洛伐克语](../sk/README.md) | [斯洛文尼亚语](../sl/README.md) | [西班牙语](../es/README.md) | [斯瓦希里语](../sw/README.md) | [瑞典语](../sv/README.md) | [他加禄语（菲律宾语）](../tl/README.md) | [泰米尔语](../ta/README.md) | [泰卢固语](../te/README.md) | [泰语](../th/README.md) | [土耳其语](../tr/README.md) | [乌克兰语](../uk/README.md) | [乌尔都语](../ur/README.md) | [越南语](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## 课程概览
@@ -55,7 +55,7 @@ CO_OP_TRANSLATOR_METADATA:
 - **部署 AI 应用**：结合 Microsoft Foundry 服务使用 AZD
 - **实现基础设施即代码**：使用 Bicep 模板管理 Azure 资源
 - **排查部署问题**：解决常见问题并调试
-- **优化生产环境**：安全、扩展、监控与成本管理
+- **优化生产环境**：安全、扩展、监控及成本管理
 - **构建多代理解决方案**：部署复杂 AI 架构
 
 ## 📚 学习章节
@@ -165,7 +165,7 @@ azd down --force --purge
 ```
 
 **📊 时间投入：** 1-2 小时  
-**📈 完成后技能水平：** 能部署和配置生产级 AI 应用  
+**📈 完成后技能水平：** 能部署并配置生产级 AI 应用  
 **💰 成本意识：** 了解开发环境月成本约 $80-150，生产环境月成本约 $300-3500
 
 #### 💰 AI 部署成本考虑
@@ -188,7 +188,7 @@ azd down --force --purge
 - 不开发时运行 `azd down` 释放资源
 - 初期使用消费计费，生产环境再升级 PTU
 - 使用 `azd provision --preview` 预估部署成本
-- 启用自动扩展：只为实际使用付费
+- 启用自动扩缩容：只为实际使用付费
 
 **成本监控：**
 ```bash
@@ -279,7 +279,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ---
 
-### 🔍 第6章：预部署验证与规划
+### 🔍 第6章：部署前验证与规划
 **先决条件**: 完成第4章  
 **时长**: 1小时  
 **复杂度**: ⭐⭐
@@ -297,7 +297,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 实践练习
 - 运行容量验证脚本
 - 优化 SKU 选择以降低成本
-- 实施自动化预部署检查
+- 实施自动化部署前检查
 
 **💡 章节成果**: 在执行前验证并优化部署
 
@@ -340,7 +340,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 学习资源
 - **🏭 生产**: [生产 AI 最佳实践](docs/microsoft-foundry/production-ai-practices.md) - 企业模式
 - **📝 示例**: [微服务示例](../../examples/microservices) - 复杂架构
-- **📊 监控**: [应用洞察集成](docs/pre-deployment/application-insights.md) - 监控
+- **📊 监控**: [Application Insights 集成](docs/pre-deployment/application-insights.md) - 监控
 
 #### 实践练习
 - 实施企业安全模式
@@ -362,11 +362,11 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 我们的研讨会材料提供结构化、互动式的学习体验，补充上述章节课程。研讨会适合自学和讲师指导。
 
 #### 🛠️ 研讨会特色
-- **基于浏览器的界面**：完整的 MkDocs 支持，具备搜索、复制和主题功能
-- **GitHub Codespaces 集成**：一键设置开发环境
-- **结构化学习路径**：7步引导练习（共3.5小时）
-- **发现 → 部署 → 定制**：渐进式方法论
-- **交互式 DevContainer 环境**：预配置工具和依赖
+- **基于浏览器的界面**: 完整的 MkDocs 支持，具备搜索、复制和主题功能
+- **GitHub Codespaces 集成**: 一键设置开发环境
+- **结构化学习路径**: 7步引导练习（共3.5小时）
+- **发现 → 部署 → 定制**: 渐进式方法论
+- **交互式 DevContainer 环境**: 预配置工具和依赖
 
 #### 📚 研讨会结构
 研讨会遵循 **发现 → 部署 → 定制** 方法：
@@ -377,7 +377,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
    - 审查部署需求和先决条件
 
 2. **部署阶段**（2小时）
-   - 使用 AZD 动手部署 AI 应用
+   - 使用 AZD 实践部署 AI 应用
    - 配置 Azure AI 服务和端点
    - 实施安全和身份验证模式
 
@@ -389,7 +389,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### 🚀 研讨会入门
 ```bash
 # 选项1：GitHub Codespaces（推荐）
-# 在仓库中点击“代码” → “在 main 上创建代码空间”
+# 在仓库中点击“代码” → “在 main 上创建 codespace”
 
 # 选项2：本地开发
 git clone https://github.com/microsoft/azd-for-beginners.git
@@ -409,7 +409,7 @@ cd azd-for-beginners/workshop
 - **🎥 互动指南**: [研讨会材料](workshop/README.md) - 基于浏览器的学习环境
 - **📋 逐步指导**: [引导练习](../../workshop/docs/instructions) - 详细操作流程
 - **🛠️ AI 研讨会实验室**: [AI 研讨会实验室](docs/microsoft-foundry/ai-workshop-lab.md) - AI 相关练习
-- **💡 快速开始**: [研讨会设置指南](workshop/README.md#quick-start) - 环境配置
+- **💡 快速入门**: [研讨会设置指南](workshop/README.md#quick-start) - 环境配置
 
 **适合对象**：企业培训、大学课程、自学和开发者训练营。
 
@@ -417,7 +417,7 @@ cd azd-for-beginners/workshop
 
 ## 📖 什么是 Azure Developer CLI？
 
-Azure Developer CLI (azd) 是面向开发者的命令行工具，加速构建和部署 Azure 应用的流程。它提供：
+Azure Developer CLI (azd) 是面向开发者的命令行界面，加速构建和部署 Azure 应用的流程。它提供：
 
 - **基于模板的部署** - 使用预构建模板实现常见应用模式
 - **基础设施即代码** - 使用 Bicep 或 Terraform 管理 Azure 资源  
@@ -446,10 +446,10 @@ Azure Developer CLI (azd) 是面向开发者的命令行工具，加速构建和
 
 | 模板 | 章节 | 复杂度 | 服务 | 类型 |
 |----------|---------|------------|----------|------|
-| [**AI 聊天入门**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 第2章 | ⭐⭐ | AzureOpenAI + Azure AI 模型推理 API + Azure AI 搜索 + Azure 容器应用 + 应用洞察 | 外部 |
-| [**AI 代理入门**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 第2章 | ⭐⭐ | Azure AI 代理服务 + AzureOpenAI + Azure AI 搜索 + Azure 容器应用 + 应用洞察 | 外部 |
+| [**AI 聊天入门**](https://github.com/Azure-Samples/get-started-with-ai-chat) | 第2章 | ⭐⭐ | AzureOpenAI + Azure AI 模型推理 API + Azure AI 搜索 + Azure 容器应用 + Application Insights | 外部 |
+| [**AI 代理入门**](https://github.com/Azure-Samples/get-started-with-ai-agents) | 第2章 | ⭐⭐ | Azure AI 代理服务 + AzureOpenAI + Azure AI 搜索 + Azure 容器应用 + Application Insights | 外部 |
 | [**Azure 搜索 + OpenAI 演示**](https://github.com/Azure-Samples/azure-search-openai-demo) | 第2章 | ⭐⭐ | AzureOpenAI + Azure AI 搜索 + 应用服务 + 存储 | 外部 |
-| [**OpenAI 聊天应用快速开始**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第2章 | ⭐ | AzureOpenAI + 容器应用 + 应用洞察 | 外部 |
+| [**OpenAI 聊天应用快速入门**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 第2章 | ⭐ | AzureOpenAI + 容器应用 + Application Insights | 外部 |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | 第5章 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | 外部 |
 | [**Contoso 聊天 RAG**](https://github.com/Azure-Samples/contoso-chat) | 第8章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜索 + Cosmos DB + 容器应用 | 外部 |
 | [**零售多代理解决方案**](examples/retail-scenario.md) | 第5章 | ⭐⭐⭐⭐ | AzureOpenAI + AI 搜索 + 存储 + 容器应用 + Cosmos DB | **本地** |
@@ -468,7 +468,7 @@ Azure Developer CLI (azd) 是面向开发者的命令行工具，加速构建和
 
 ### 按示例类型学习
 
-> **📌 本地与外部示例：**  
+> **📌 本地示例 vs. 外部示例：**  
 > **本地示例**（本仓库）= 可立即使用  
 > **外部示例**（Azure 示例）= 从链接仓库克隆
 
@@ -483,7 +483,7 @@ Azure Developer CLI (azd) 是面向开发者的命令行工具，加速构建和
 - [**容器应用示例**](examples/container-app/README.md) - 容器化部署完整指南
   - [简单 Flask API](../../examples/container-app/simple-flask-api) - 基础 REST API，支持零扩展
   - [微服务架构](../../examples/container-app/microservices) - 生产就绪多服务部署
-  - 快速开始、生产和高级部署模式
+  - 快速入门、生产和高级部署模式
   - 监控、安全和成本优化指导
 
 #### 外部示例 - 简单应用（第1-2章）
@@ -502,7 +502,7 @@ Azure Developer CLI (azd) 是面向开发者的命令行工具，加速构建和
 - [企业 ML 流水线](https://github.com/Azure-Samples/mlops-v2) - 生产就绪 ML 模式
 
 ### 外部模板集合
-- [**官方 AZD 模板库**](https://azure.github.io/awesome-azd/) - 官方及社区模板精选
+- [**官方 AZD 模板库**](https://azure.github.io/awesome-azd/) - 官方和社区模板精选
 - [**Azure Developer CLI 模板**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn 模板文档
 - [**示例目录**](examples/README.md) - 本地学习示例及详细说明
 
@@ -567,7 +567,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 
-### ❌ “配额不足”或“配额超限”
+### ❌ “配额不足”或“配额超出”
 
 ```bash
 # 尝试不同的 Azure 区域
@@ -584,14 +584,14 @@ azd up
 ### ❌ “azd up” 中途失败
 
 ```bash
-# 选项1：清理并重试
+# 选项 1：清理并重试
 azd down --force --purge
 azd up
 
-# 选项2：仅修复基础设施
+# 选项 2：仅修复基础设施
 azd provision
 
-# 选项3：检查详细日志
+# 选项 3：检查详细日志
 azd show
 azd logs
 ```
@@ -613,7 +613,7 @@ az account show
 ### ❌ “资源已存在”或命名冲突
 
 ```bash
-# AZD 生成唯一名称，但如果冲突：
+# AZD 会生成唯一名称，但如果发生冲突：
 azd down --force --purge
 
 # 则使用新的环境重试
@@ -621,10 +621,10 @@ azd env new dev-v2
 azd up
 ```
 
-### ❌ 模板部署耗时过长
+### ❌ 模板部署时间过长
 
 **正常等待时间：**
-- 简单的 Web 应用：5-10 分钟
+- 简单 Web 应用：5-10 分钟
 - 带数据库的应用：10-15 分钟
 - AI 应用：15-25 分钟（OpenAI 资源配置较慢）
 
@@ -680,7 +680,7 @@ azd env get-values
 <summary><strong>❌ “azd: command not found”</strong></summary>
 
 ```bash
-# 先安装 AZD
+# 首先安装 AZD
 # Windows（PowerShell）：
 winget install microsoft.azd
 
@@ -714,7 +714,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ “配额不足”或“配额超限”</strong></summary>
+<summary><strong>❌ “配额不足”或“配额超出”</strong></summary>
 
 ```bash
 # 尝试不同的 Azure 区域
@@ -733,14 +733,14 @@ azd up
 <summary><strong>❌ “azd up” 中途失败</strong></summary>
 
 ```bash
-# 选项 1：清理并重试
+# 选项1：清理并重试
 azd down --force --purge
 azd up
 
-# 选项 2：仅修复基础设施
+# 选项2：仅修复基础设施
 azd provision
 
-# 选项 3：检查详细日志
+# 选项3：检查详细日志
 azd show
 azd logs
 ```
@@ -776,10 +776,10 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ 模板部署耗时过长</strong></summary>
+<summary><strong>❌ 模板部署时间过长</strong></summary>
 
 **正常等待时间：**
-- 简单的 Web 应用：5-10 分钟
+- 简单 Web 应用：5-10 分钟
 - 带数据库的应用：10-15 分钟
 - AI 应用：15-25 分钟（OpenAI 资源配置较慢）
 
@@ -847,18 +847,18 @@ azd env get-values
 - [ ] **第 8 章**：生产与企业模式 ✅
 
 ### 学习验证
-完成每章后，验证您的知识：
-1. **实践练习**：完成本章的实操部署
-2. **知识检测**：查看本章的常见问题部分
+完成每章后，通过以下方式验证您的知识：
+1. **实践练习**：完成该章节的实操部署
+2. **知识检测**：查看该章节的常见问题部分
 3. **社区讨论**：在 Azure Discord 分享您的经验
 4. **下一章节**：进入下一个难度级别
 
 ### 课程完成收益
 完成所有章节后，您将获得：
-- **生产经验**：将真实 AI 应用部署到 Azure
+- **生产经验**：成功将真实 AI 应用部署到 Azure
 - **专业技能**：具备企业级部署能力  
 - **社区认可**：成为活跃的 Azure 开发者社区成员
-- **职业发展**：掌握热门的 AZD 和 AI 部署技能
+- **职业提升**：掌握热门的 AZD 和 AI 部署技能
 
 ---
 
@@ -870,9 +870,9 @@ azd env get-values
 - **AI 专用帮助**：加入 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **文档**：[官方 Azure Developer CLI 文档](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### 来自 Microsoft Foundry Discord 的社区洞察
+### 来自 Microsoft Foundry Discord 的社区见解
 
-**#Azure 频道的最新投票结果：**
+**#Azure 频道近期投票结果：**
 - **45%** 的开发者希望使用 AZD 进行 AI 工作负载
 - **主要挑战**：多服务部署、凭据管理、生产准备  
 - **最受欢迎需求**：AI 专用模板、故障排除指南、最佳实践
@@ -880,7 +880,7 @@ azd env get-values
 **加入我们的社区，您可以：**
 - 分享您的 AZD + AI 经验并获得帮助
 - 访问新 AI 模板的早期预览
-- 参与 AI 部署最佳实践的制定
+- 参与 AI 部署最佳实践的贡献
 - 影响未来 AI + AZD 功能开发
 
 ### 课程贡献
@@ -950,7 +950,7 @@ azd env get-values
 
 **初学者**：从[第1章：基础与快速入门](../..)开始  
 **AI开发者**：跳转到[第2章：AI优先开发](../..)  
-**有经验的开发者**：从[第3章：配置与身份验证](../..)开始
+**有经验的开发者**：从[第3章：配置与认证](../..)开始
 
 **下一步**：[开始第1章 - AZD基础](docs/getting-started/azd-basics.md) →
 
@@ -958,5 +958,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**：  
-本文件由人工智能翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译。虽然我们力求准确，但请注意自动翻译可能存在错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。因使用本翻译而产生的任何误解或误释，我们概不负责。
+本文件由人工智能翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译。虽然我们力求准确，但请注意自动翻译可能存在错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或误释承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

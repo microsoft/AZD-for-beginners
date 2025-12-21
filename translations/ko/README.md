@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T12:45:21+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T11:01:37+00:00",
   "source_file": "README.md",
   "language_code": "ko"
 }
@@ -53,7 +53,7 @@ Microsoft Foundry Discord 커뮤니티 인사이트에 따르면, **개발자의
 이 체계적인 과정을 완료하면 다음을 할 수 있습니다:
 - **AZD 기본기 마스터**: 핵심 개념, 설치 및 구성
 - **AI 애플리케이션 배포**: Microsoft Foundry 서비스와 함께 AZD 사용
-- **코드형 인프라 구현**: Bicep 템플릿으로 Azure 리소스 관리
+- **코드로서의 인프라 구현**: Bicep 템플릿으로 Azure 리소스 관리
 - **배포 문제 해결**: 일반 문제 해결 및 디버깅
 - **프로덕션 최적화**: 보안, 확장, 모니터링 및 비용 관리
 - **멀티 에이전트 솔루션 구축**: 복잡한 AI 아키텍처 배포
@@ -134,8 +134,8 @@ azd down --force --purge  # 리소스를 정리합니다
 #### 학습 자료
 - **🎯 시작하기**: [Microsoft Foundry 통합](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 패턴**: [AI 모델 배포](docs/microsoft-foundry/ai-model-deployment.md) - AI 모델 배포 및 관리
-- **🛠️ 워크숍**: [AI 워크숍 랩](docs/microsoft-foundry/ai-workshop-lab.md) - AI 솔루션을 AZD에 맞게 준비
-- **🎥 인터랙티브 가이드**: [워크숍 자료](workshop/README.md) - MkDocs * DevContainer 환경을 활용한 브라우저 기반 학습
+- **🛠️ 워크숍**: [AI 워크숍 실습](docs/microsoft-foundry/ai-workshop-lab.md) - AI 솔루션을 AZD에 맞게 준비
+- **🎥 인터랙티브 가이드**: [워크숍 자료](workshop/README.md) - MkDocs * DevContainer 환경에서 브라우저 기반 학습
 - **📋 템플릿**: [Microsoft Foundry 템플릿](../..)
 - **📝 예제**: [AZD 배포 예제](examples/README.md)
 
@@ -171,28 +171,28 @@ azd down --force --purge
 #### 💰 AI 배포 비용 고려사항
 
 **개발 환경 (예상 월 $80-150):**
-- Azure OpenAI (종량제): 토큰 사용량에 따라 $0-50/월
-- AI 검색 (기본 요금제): $75/월
-- 컨테이너 앱 (소비 기반): $0-20/월
-- 스토리지 (표준): $1-5/월
+- Azure OpenAI (종량제): 토큰 사용량에 따라 월 $0-50
+- AI 검색 (기본 요금제): 월 $75
+- 컨테이너 앱 (소비 기반): 월 $0-20
+- 스토리지 (표준): 월 $1-5
 
 **프로덕션 환경 (예상 월 $300-3,500+):**
-- Azure OpenAI (일관된 성능을 위한 PTU): $3,000+/월 또는 대량 사용 시 종량제
-- AI 검색 (표준 요금제): $250/월
-- 컨테이너 앱 (전용): $50-100/월
-- 애플리케이션 인사이트: $5-50/월
-- 스토리지 (프리미엄): $10-50/월
+- Azure OpenAI (일관된 성능을 위한 PTU): 월 $3,000+ 또는 대량 사용 시 종량제
+- AI 검색 (표준 요금제): 월 $250
+- 컨테이너 앱 (전용): 월 $50-100
+- 애플리케이션 인사이트: 월 $5-50
+- 스토리지 (프리미엄): 월 $10-50
 
 **💡 비용 최적화 팁:**
 - 학습용으로 **무료 등급** Azure OpenAI 사용 (월 50,000 토큰 포함)
 - 개발하지 않을 때는 `azd down` 명령어로 리소스 할당 해제
-- 처음에는 소비 기반 요금제로 시작, 프로덕션에만 PTU 업그레이드
+- 처음에는 소비 기반 청구 사용, 프로덕션에만 PTU 업그레이드
 - 배포 전에 `azd provision --preview`로 비용 예측
 - 자동 확장 활성화: 실제 사용량에 대해서만 비용 지불
 
 **비용 모니터링:**
 ```bash
-# 예상 월간 비용 확인
+# 예상 월별 비용 확인
 azd provision --preview
 
 # Azure 포털에서 실제 비용 모니터링
@@ -225,14 +225,14 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### 🏗️ 챕터 4: 코드형 인프라 및 배포
+### 🏗️ 챕터 4: 코드로서의 인프라 및 배포
 **전제 조건**: 챕터 1-3 완료  
 **소요 시간**: 1-1.5시간  
 **난이도**: ⭐⭐⭐
 
 #### 학습 내용
 - 고급 배포 패턴
-- Bicep을 이용한 코드형 인프라
+- Bicep을 이용한 코드로서의 인프라
 - 리소스 프로비저닝 전략
 
 #### 학습 자료
@@ -245,7 +245,7 @@ az consumption budget list --resource-group <your-rg>
 - 다중 서비스 애플리케이션 배포
 - 블루-그린 배포 전략 구현
 
-**💡 챕터 결과**: 맞춤형 인프라 템플릿으로 복잡한 다중 서비스 애플리케이션 배포
+**💡 챕터 결과**: 맞춤형 인프라 템플릿을 사용하여 복잡한 다중 서비스 애플리케이션 배포
 
 ---
 
@@ -260,7 +260,8 @@ az consumption budget list --resource-group <your-rg>
 - 프로덕션 준비 AI 배포
 
 #### 학습 자료
-- **🤖 추천 프로젝트**: [리테일 멀티 에이전트 솔루션](examples/retail-scenario.md) - 완전한 구현 사례
+- **🤖 주요 프로젝트**: [리테일 멀티 에이전트 솔루션](examples/retail-scenario.md) - 완전한 구현
+
 - **🛠️ ARM 템플릿**: [ARM 템플릿 패키지](../../examples/retail-multiagent-arm-template) - 원클릭 배포
 - **📖 아키텍처**: [멀티 에이전트 조정 패턴](/docs/pre-deployment/coordination-patterns.md) - 패턴
 
@@ -295,7 +296,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### 실습 연습
 - 용량 검증 스크립트 실행
-- 비용 최적화를 위한 SKU 선택
+- 비용 최적화를 위한 SKU 선택 최적화
 - 자동화된 사전 배포 점검 구현
 
 **💡 챕터 결과**: 실행 전에 배포를 검증하고 최적화
@@ -421,7 +422,7 @@ Azure Developer CLI(azd)는 개발자 중심 명령줄 인터페이스로, Azure
 - **템플릿 기반 배포** - 일반 애플리케이션 패턴에 대한 사전 구축된 템플릿 사용
 - **코드로서의 인프라** - Bicep 또는 Terraform을 사용한 Azure 리소스 관리  
 - **통합 워크플로우** - 애플리케이션 프로비저닝, 배포, 모니터링을 원활하게 수행
-- **개발자 친화적** - 개발자 생산성과 경험 최적화
+- **개발자 친화적** - 개발자 생산성과 경험에 최적화
 
 ### **AZD + Microsoft Foundry: AI 배포에 완벽한 조합**
 
@@ -430,7 +431,7 @@ Azure Developer CLI(azd)는 개발자 중심 명령줄 인터페이스로, Azure
 - **AI 준비 템플릿** - Azure OpenAI, Cognitive Services, ML 워크로드용 사전 구성 템플릿
 - **안전한 AI 배포** - AI 서비스, API 키, 모델 엔드포인트에 대한 내장 보안 패턴  
 - **프로덕션 AI 패턴** - 확장 가능하고 비용 효율적인 AI 애플리케이션 배포 모범 사례
-- **엔드투엔드 AI 워크플로우** - 모델 개발부터 프로덕션 배포 및 적절한 모니터링까지
+- **엔드 투 엔드 AI 워크플로우** - 모델 개발부터 프로덕션 배포 및 적절한 모니터링까지
 - **비용 최적화** - AI 워크로드를 위한 스마트 리소스 할당 및 확장 전략
 - **Microsoft Foundry 통합** - Microsoft Foundry 모델 카탈로그 및 엔드포인트와 원활한 연결
 
@@ -509,14 +510,14 @@ Azure Developer CLI(azd)는 개발자 중심 명령줄 인터페이스로, Azure
 
 ## 📚 학습 자료 및 참고 문헌
 
-### 빠른 참조
+### 빠른 참조 목록
 - [**명령어 치트 시트**](resources/cheat-sheet.md) - 챕터별로 정리된 필수 azd 명령어
 - [**용어집**](resources/glossary.md) - Azure 및 azd 용어  
 - [**자주 묻는 질문(FAQ)**](resources/faq.md) - 학습 챕터별로 정리된 일반 질문
 - [**학습 가이드**](resources/study-guide.md) - 종합 연습 문제
 
 ### 실습 워크숍
-- [**AI 워크숍 랩**](docs/microsoft-foundry/ai-workshop-lab.md) - AI 솔루션을 AZD 배포 가능하게 만들기 (2-3시간)
+- [**AI 워크숍 실습실**](docs/microsoft-foundry/ai-workshop-lab.md) - AI 솔루션을 AZD 배포 가능하게 만들기 (2-3시간)
 - [**인터랙티브 워크숍 가이드**](workshop/README.md) - MkDocs 및 DevContainer 환경을 이용한 브라우저 기반 워크숍
 - [**구조화된 학습 경로**](../../workshop/docs/instructions) - 7단계 가이드 연습 (발견 → 배포 → 맞춤화)
 - [**초보자를 위한 AZD 워크숍**](workshop/README.md) - GitHub Codespaces 통합 완전 실습 워크숍 자료
@@ -550,7 +551,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 azd version
 ```
 
-### ❌ "No subscription found" 또는 "Subscription not set"
+### ❌ "구독을 찾을 수 없음" 또는 "구독이 설정되지 않음"
 
 ```bash
 # 사용 가능한 구독 목록
@@ -566,7 +567,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 
-### ❌ "InsufficientQuota" 또는 "Quota exceeded"
+### ❌ "InsufficientQuota" 또는 "쿼터 초과"
 
 ```bash
 # 다른 Azure 지역을 시도하세요
@@ -580,7 +581,7 @@ azd up
 }
 ```
 
-### ❌ "azd up" 중간에 실패함
+### ❌ "azd up" 명령이 중간에 실패함
 
 ```bash
 # 옵션 1: 정리하고 다시 시도
@@ -595,7 +596,7 @@ azd show
 azd logs
 ```
 
-### ❌ "Authentication failed" 또는 "Token expired"
+### ❌ "인증 실패" 또는 "토큰 만료"
 
 ```bash
 # 다시 인증하기
@@ -609,7 +610,7 @@ azd auth login
 az account show
 ```
 
-### ❌ "Resource already exists" 또는 이름 충돌
+### ❌ "리소스가 이미 존재함" 또는 이름 충돌
 
 ```bash
 # AZD는 고유한 이름을 생성하지만, 충돌이 발생하면:
@@ -631,12 +632,12 @@ azd up
 # 진행 상황 확인
 azd show
 
-# 30분 이상 멈췄다면, Azure 포털을 확인하세요:
+# 30분 이상 멈춘 경우, Azure 포털을 확인하세요:
 azd monitor
 # 실패한 배포를 찾으세요
 ```
 
-### ❌ "Permission denied" 또는 "Forbidden"
+### ❌ "권한 거부" 또는 "금지됨"
 
 ```bash
 # Azure 역할을 확인하세요
@@ -664,7 +665,7 @@ azd env get-values
 
 ### 📚 전체 문제 해결 자료
 
-- **일반 문제 가이드:** [상세 해결책](docs/troubleshooting/common-issues.md)
+- **일반 문제 가이드:** [자세한 해결책](docs/troubleshooting/common-issues.md)
 - **AI 관련 문제:** [AI 문제 해결](docs/troubleshooting/ai-troubleshooting.md)
 - **디버깅 가이드:** [단계별 디버깅](docs/troubleshooting/debugging.md)
 - **도움 받기:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
@@ -695,7 +696,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "No subscription found" 또는 "Subscription not set"</strong></summary>
+<summary><strong>❌ "구독을 찾을 수 없음" 또는 "구독이 설정되지 않음"</strong></summary>
 
 ```bash
 # 사용 가능한 구독 목록
@@ -713,14 +714,14 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "InsufficientQuota" 또는 "Quota exceeded"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" 또는 "쿼터 초과"</strong></summary>
 
 ```bash
 # 다른 Azure 지역을 시도하세요
 azd env set AZURE_LOCATION "westus2"
 azd up
 
-# 또는 개발 환경에서는 더 작은 SKU를 사용하세요
+# 또는 개발 시 더 작은 SKU를 사용하세요
 # infra/main.parameters.json을 편집하세요:
 {
   "sku": "B1"  // Instead of "P1V2"
@@ -729,7 +730,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" 중간에 실패함</strong></summary>
+<summary><strong>❌ "azd up" 명령이 중간에 실패함</strong></summary>
 
 ```bash
 # 옵션 1: 정리하고 다시 시도
@@ -746,7 +747,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ "Authentication failed" 또는 "Token expired"</strong></summary>
+<summary><strong>❌ "인증 실패" 또는 "토큰 만료"</strong></summary>
 
 ```bash
 # 다시 인증하기
@@ -762,7 +763,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" 또는 이름 충돌</strong></summary>
+<summary><strong>❌ "리소스가 이미 존재함" 또는 이름 충돌</strong></summary>
 
 ```bash
 # AZD는 고유한 이름을 생성하지만, 충돌이 발생하면:
@@ -793,7 +794,7 @@ azd monitor
 </details>
 
 <details>
-<summary><strong>❌ "Permission denied" 또는 "Forbidden"</strong></summary>
+<summary><strong>❌ "권한 거부" 또는 "금지됨"</strong></summary>
 
 ```bash
 # Azure 역할을 확인하세요
@@ -824,7 +825,7 @@ azd env get-values
 
 ### 📚 전체 문제 해결 자료
 
-- **일반 문제 가이드:** [상세 해결책](docs/troubleshooting/common-issues.md)
+- **일반 문제 가이드:** [자세한 해결책](docs/troubleshooting/common-issues.md)
 - **AI 관련 문제:** [AI 문제 해결](docs/troubleshooting/ai-troubleshooting.md)
 - **디버깅 가이드:** [단계별 디버깅](docs/troubleshooting/debugging.md)
 - **도움 받기:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
@@ -846,7 +847,7 @@ azd env get-values
 - [ ] **8장**: 운영 및 엔터프라이즈 패턴 ✅
 
 ### 학습 검증
-각 챕터를 완료한 후 다음으로 지식을 검증하세요:
+각 챕터를 완료한 후 다음을 통해 지식을 확인하세요:
 1. **실습 과제**: 챕터별 실습 배포 완료
 2. **지식 점검**: 해당 챕터 FAQ 검토
 3. **커뮤니티 토론**: Azure Discord에서 경험 공유
@@ -857,7 +858,7 @@ azd env get-values
 - **운영 경험**: 실제 AI 애플리케이션을 Azure에 배포
 - **전문 기술**: 엔터프라이즈 준비된 배포 역량  
 - **커뮤니티 인정**: Azure 개발자 커뮤니티의 활발한 멤버
-- **경력 발전**: 수요가 높은 AZD 및 AI 배포 전문성
+- **경력 발전**: 수요 높은 AZD 및 AI 배포 전문성
 
 ---
 
@@ -882,13 +883,13 @@ azd env get-values
 - AI 배포 모범 사례 기여
 - 미래 AI + AZD 기능 개발에 영향력 행사
 
-### 과정 기여하기
-기여를 환영합니다! 자세한 내용은 [기여 가이드](CONTRIBUTING.md)를 읽어주세요:
+### 과정 기여 안내
+기여를 환영합니다! 자세한 내용은 [기여 가이드](CONTRIBUTING.md)를 참고하세요:
 - **콘텐츠 개선**: 기존 챕터 및 예제 향상
 - **새 예제 추가**: 실제 시나리오 및 템플릿 추가  
 - **번역 지원**: 다국어 지원 유지
 - **버그 신고**: 정확성 및 명확성 개선
-- **커뮤니티 기준**: 포용적인 커뮤니티 가이드라인 준수
+- **커뮤니티 기준**: 포용적 커뮤니티 가이드라인 준수
 
 ---
 
@@ -948,8 +949,8 @@ azd env get-values
 **🚀 학습을 시작할 준비가 되셨나요?**
 
 **초보자**: [1장: 기초 및 빠른 시작](../..)부터 시작하세요  
-**AI 개발자**: [2장: AI 우선 개발](../..)으로 바로 이동하세요  
-**경험 있는 개발자**: [3장: 구성 및 인증](../..)부터 시작하세요
+**AI 개발자**: [2장: AI 우선 개발](../..)으로 바로 이동  
+**경험 많은 개발자**: [3장: 구성 및 인증](../..)부터 시작하세요
 
 **다음 단계**: [1장 시작 - AZD 기본](docs/getting-started/azd-basics.md) →
 
@@ -957,5 +958,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원문 문서가 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우 전문적인 인간 번역을 권장합니다. 본 번역 사용으로 인한 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원문 문서가 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우 전문적인 인간 번역을 권장합니다. 본 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

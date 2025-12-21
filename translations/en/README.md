@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T11:28:20+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T09:45:48+00:00",
   "source_file": "README.md",
   "language_code": "en"
 }
@@ -177,7 +177,7 @@ azd down --force --purge
 - Storage (Standard): $1-5/month
 
 **Production Environment (Estimated $300-3,500+/month):**
-- Azure OpenAI (PTU for consistent performance): $3,000+/month OR Pay-as-go with high volume
+- Azure OpenAI (PTU for consistent performance): $3,000+/month OR Pay-as-you-go with high volume
 - AI Search (Standard tier): $250/month
 - Container Apps (Dedicated): $50-100/month
 - Application Insights: $5-50/month

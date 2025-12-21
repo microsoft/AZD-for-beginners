@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T11:46:17+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T10:02:59+00:00",
   "source_file": "README.md",
   "language_code": "de"
 }
@@ -25,7 +25,7 @@ Folgen Sie diesen Schritten, um Ihre AZD-Lernreise zu beginnen:
 1. **Forken Sie das Repository**: Klicken Sie auf [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Klonen Sie das Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
 3. **Treten Sie der Community bei**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) für Expertenunterstützung
-4. **Wählen Sie Ihren Lernpfad**: Wählen Sie unten ein Kapitel, das Ihrem Erfahrungsniveau entspricht
+4. **Wählen Sie Ihren Lernpfad**: Wählen Sie unten ein Kapitel, das Ihrem Erfahrungslevel entspricht
 
 ### Mehrsprachige Unterstützung
 
@@ -37,7 +37,7 @@ Folgen Sie diesen Schritten, um Ihre AZD-Lernreise zu beginnen:
 
 ## Kursübersicht
 
-Beherrschen Sie Azure Developer CLI (azd) durch strukturierte Kapitel, die für progressives Lernen konzipiert sind. **Besonderer Fokus auf die Bereitstellung von KI-Anwendungen mit Microsoft Foundry-Integration.**
+Meistern Sie die Azure Developer CLI (azd) durch strukturierte Kapitel, die für progressives Lernen konzipiert sind. **Besonderer Fokus auf die Bereitstellung von KI-Anwendungen mit Microsoft Foundry-Integration.**
 
 ### Warum dieser Kurs für moderne Entwickler unverzichtbar ist
 
@@ -51,7 +51,7 @@ Basierend auf Erkenntnissen der Microsoft Foundry Discord-Community möchten **4
 ### Lernziele
 
 Nach Abschluss dieses strukturierten Kurses werden Sie:
-- **AZD-Grundlagen meistern**: Kernkonzepte, Installation und Konfiguration
+- **AZD-Grundlagen beherrschen**: Kernkonzepte, Installation und Konfiguration
 - **KI-Anwendungen bereitstellen**: AZD mit Microsoft Foundry-Diensten nutzen
 - **Infrastructure as Code umsetzen**: Azure-Ressourcen mit Bicep-Vorlagen verwalten
 - **Bereitstellungen debuggen**: Häufige Probleme lösen und Fehler beheben
@@ -73,10 +73,10 @@ Nach Abschluss dieses strukturierten Kurses werden Sie:
 - Ihre erste erfolgreiche Bereitstellung
 
 #### Lernressourcen
-- **🎯 Starten Sie hier**: [Was ist Azure Developer CLI?](../..)
+- **🎯 Start hier**: [Was ist Azure Developer CLI?](../..)
 - **📖 Theorie**: [AZD Grundlagen](docs/getting-started/azd-basics.md) – Kernkonzepte und Terminologie
 - **⚙️ Einrichtung**: [Installation & Setup](docs/getting-started/installation.md) – Plattform-spezifische Anleitungen
-- **🛠️ Praxis**: [Ihr erstes Projekt](docs/getting-started/first-project.md) – Schritt-für-Schritt-Anleitung
+- **🛠️ Praxis**: [Ihr erstes Projekt](docs/getting-started/first-project.md) – Schritt-für-Schritt-Tutorial
 - **📋 Schnellreferenz**: [Befehlsübersicht](resources/cheat-sheet.md)
 
 #### Praktische Übungen
@@ -132,7 +132,7 @@ azd down --force --purge  # Bereinigt Ressourcen
 - Verständnis von KI-Dienstkonfigurationen
 
 #### Lernressourcen
-- **🎯 Starten Sie hier**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🎯 Start hier**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 Muster**: [KI-Modell-Bereitstellung](docs/microsoft-foundry/ai-model-deployment.md) – KI-Modelle bereitstellen und verwalten
 - **🛠️ Workshop**: [KI-Workshop-Labor](docs/microsoft-foundry/ai-workshop-lab.md) – Machen Sie Ihre KI-Lösungen AZD-bereit
 - **🎥 Interaktiver Leitfaden**: [Workshop-Materialien](workshop/README.md) – Browserbasiertes Lernen mit MkDocs * DevContainer-Umgebung
@@ -171,20 +171,20 @@ azd down --force --purge
 #### 💰 Kostenüberlegungen für KI-Bereitstellungen
 
 **Entwicklungsumgebung (geschätzt $80-150/Monat):**
-- Azure OpenAI (Pay-as-you-go): $0-50/Monat (abhängig von der Token-Nutzung)
-- KI-Suche (Basistarif): $75/Monat
+- Azure OpenAI (Pay-as-you-go): $0-50/Monat (abhängig von Token-Nutzung)
+- KI-Suche (Basisstufe): $75/Monat
 - Container Apps (Consumption): $0-20/Monat
 - Speicher (Standard): $1-5/Monat
 
 **Produktionsumgebung (geschätzt $300-3.500+/Monat):**
 - Azure OpenAI (PTU für konsistente Leistung): $3.000+/Monat ODER Pay-as-you-go mit hohem Volumen
-- KI-Suche (Standardtarif): $250/Monat
+- KI-Suche (Standardstufe): $250/Monat
 - Container Apps (Dediziert): $50-100/Monat
 - Application Insights: $5-50/Monat
 - Speicher (Premium): $10-50/Monat
 
 **💡 Tipps zur Kostenoptimierung:**
-- Nutzen Sie den **Free Tier** Azure OpenAI zum Lernen (50.000 Tokens/Monat inklusive)
+- Nutzen Sie die **kostenlose Stufe** von Azure OpenAI zum Lernen (50.000 Tokens/Monat inklusive)
 - Führen Sie `azd down` aus, um Ressourcen bei Nichtentwicklung freizugeben
 - Beginnen Sie mit verbrauchsabhängiger Abrechnung, PTU nur für Produktion upgraden
 - Verwenden Sie `azd provision --preview`, um Kosten vor der Bereitstellung zu schätzen
@@ -218,7 +218,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### Praktische Übungen
 - Konfigurieren mehrerer Umgebungen (dev, staging, prod)
-- Einrichten von Managed Identity Authentifizierung
+- Einrichten von Managed Identity-Authentifizierung
 - Implementieren umgebungsspezifischer Konfigurationen
 
 **💡 Kapitel-Ergebnis**: Verwaltung mehrerer Umgebungen mit korrekter Authentifizierung und Sicherheit
@@ -236,7 +236,7 @@ az consumption budget list --resource-group <your-rg>
 - Strategien zur Ressourcenbereitstellung
 
 #### Lernressourcen
-- **📖 Bereitstellung**: [Bereitstellungsanleitung](docs/deployment/deployment-guide.md) – Komplett-Workflows
+- **📖 Bereitstellung**: [Bereitstellungsanleitung](docs/deployment/deployment-guide.md) – Komplette Workflows
 - **🏗️ Provisionierung**: [Ressourcen bereitstellen](docs/deployment/provisioning.md) – Azure-Ressourcenverwaltung
 - **📝 Beispiele**: [Container-App-Beispiel](../../examples/container-app) – Containerisierte Bereitstellungen
 
@@ -245,7 +245,7 @@ az consumption budget list --resource-group <your-rg>
 - Multi-Service-Anwendungen bereitstellen
 - Blue-Green-Bereitstellungsstrategien implementieren
 
-**💡 Kapitel-Ergebnis**: Komplexe Multi-Service-Anwendungen mit eigenen Infrastrukturvorlagen bereitstellen
+**💡 Kapitel-Ergebnis**: Komplexe Multi-Service-Anwendungen mit benutzerdefinierten Infrastrukturvorlagen bereitstellen
 
 ---
 
@@ -322,7 +322,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Behebung von Authentifizierungsproblemen
 - Debugging der KI-Dienst-Konnektivität
 
-**💡 Kapitel-Ergebnis**: Eigenständige Diagnose und Lösung häufiger Bereitstellungsprobleme
+**💡 Kapitel-Ergebnis**: Diagnostizieren und beheben Sie häufige Bereitstellungsprobleme eigenständig
 
 ---
 
@@ -339,7 +339,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 #### Lernressourcen
 - **🏭 Produktion**: [Best Practices für Produktions-KI](docs/microsoft-foundry/production-ai-practices.md) - Unternehmensmuster
 - **📝 Beispiele**: [Microservices-Beispiel](../../examples/microservices) - Komplexe Architekturen
-- **📊 Überwachung**: [Application Insights-Integration](docs/pre-deployment/application-insights.md) - Überwachung
+- **📊 Überwachung**: [Application Insights Integration](docs/pre-deployment/application-insights.md) - Monitoring
 
 #### Praktische Übungen
 - Implementierung von Sicherheitsmustern für Unternehmen
@@ -358,11 +358,11 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### Interaktive Workshop-Materialien
 **Umfassendes praxisorientiertes Lernen mit browserbasierten Tools und geführten Übungen**
 
-Unsere Workshop-Materialien bieten ein strukturiertes, interaktives Lernerlebnis, das das obenstehende kapitelbasierte Curriculum ergänzt. Der Workshop ist sowohl für selbstgesteuertes Lernen als auch für geleitete Sitzungen konzipiert.
+Unsere Workshop-Materialien bieten ein strukturiertes, interaktives Lernerlebnis, das das obenstehende kapitelbasierte Curriculum ergänzt. Der Workshop ist sowohl für selbstgesteuertes Lernen als auch für von Lehrkräften geführte Sitzungen konzipiert.
 
 #### 🛠️ Workshop-Funktionen
 - **Browserbasierte Oberfläche**: Vollständiger MkDocs-basierter Workshop mit Suche, Kopier- und Designfunktionen
-- **GitHub Codespaces-Integration**: Ein-Klick-Setup der Entwicklungsumgebung
+- **GitHub Codespaces Integration**: Ein-Klick-Entwicklungsumgebung
 - **Strukturierter Lernpfad**: 7-stufige geführte Übungen (insgesamt 3,5 Stunden)
 - **Discovery → Deployment → Customization**: Fortschreitende Methodik
 - **Interaktive DevContainer-Umgebung**: Vorgefertigte Tools und Abhängigkeiten
@@ -393,13 +393,13 @@ Der Workshop folgt der Methodik **Discovery → Deployment → Customization**:
 # Option 2: Lokale Entwicklung
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Befolgen Sie die Einrichtungshinweise in workshop/README.md
+# Folgen Sie den Einrichtungshinweisen in workshop/README.md
 ```
 
 #### 🎯 Workshop-Lernergebnisse
 Nach Abschluss des Workshops werden die Teilnehmer:
 - **Produktionsreife KI-Anwendungen bereitstellen**: Nutzung von AZD mit Microsoft Foundry-Diensten
-- **Multi-Agenten-Architekturen meistern**: Implementierung koordinierter KI-Agentenlösungen
+- **Multi-Agenten-Architekturen beherrschen**: Implementierung koordinierter KI-Agentenlösungen
 - **Sicherheits-Best-Practices umsetzen**: Konfiguration von Authentifizierung und Zugriffskontrolle
 - **Für Skalierung optimieren**: Gestaltung kosteneffizienter, leistungsfähiger Bereitstellungen
 - **Bereitstellungen debuggen**: Eigenständige Lösung häufiger Probleme
@@ -410,7 +410,7 @@ Nach Abschluss des Workshops werden die Teilnehmer:
 - **🛠️ KI-Workshop-Labor**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - KI-fokussierte Übungen
 - **💡 Schnellstart**: [Workshop-Setup-Anleitung](workshop/README.md#quick-start) - Umgebungskonfiguration
 
-**Ideal für**: Firmenschulungen, Universitätskurse, selbstgesteuertes Lernen und Entwickler-Bootcamps.
+**Ideal für**: Unternehmensschulungen, Universitätskurse, selbstgesteuertes Lernen und Entwickler-Bootcamps.
 
 ---
 
@@ -429,10 +429,10 @@ Azure Developer CLI (azd) ist eine entwicklerzentrierte Befehlszeilenschnittstel
 
 - **KI-fertige Vorlagen** – Vorgefertigte Vorlagen für Azure OpenAI, Cognitive Services und ML-Workloads
 - **Sichere KI-Bereitstellungen** – Eingebaute Sicherheitsmuster für KI-Dienste, API-Schlüssel und Modellendpunkte  
-- **Produktionsreife KI-Muster** – Best Practices für skalierbare, kosteneffiziente KI-Anwendungsbereitstellungen
-- **End-to-End KI-Workflows** – Von der Modellentwicklung bis zur Produktionsbereitstellung mit ordnungsgemäßer Überwachung
+- **Produktions-KI-Muster** – Best Practices für skalierbare, kosteneffiziente KI-Anwendungsbereitstellungen
+- **End-to-End-KI-Workflows** – Vom Modellentwicklung bis zur Produktionsbereitstellung mit ordnungsgemäßem Monitoring
 - **Kostenoptimierung** – Intelligente Ressourcenallokation und Skalierungsstrategien für KI-Workloads
-- **Microsoft Foundry-Integration** – Nahtlose Verbindung zum Microsoft Foundry Modellkatalog und Endpunkten
+- **Microsoft Foundry Integration** – Nahtlose Verbindung zum Microsoft Foundry Modellkatalog und Endpunkten
 
 ---
 
@@ -474,8 +474,8 @@ Azure Developer CLI (azd) ist eine entwicklerzentrierte Befehlszeilenschnittstel
 #### Lokale Beispiele (Sofort einsatzbereit)
 - [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Vollständige produktionsreife Implementierung mit ARM-Vorlagen
   - Multi-Agenten-Architektur (Kunden- + Inventaragenten)
-  - Umfassende Überwachung und Auswertung
-  - Ein-Klick-Bereitstellung über ARM-Vorlage
+  - Umfassendes Monitoring und Auswertung
+  - Ein-Klick-Bereitstellung via ARM-Vorlage
 
 #### Lokale Beispiele - Container-Anwendungen (Kapitel 2-5)
 **Umfassende Container-Bereitstellungsbeispiele in diesem Repository:**
@@ -483,7 +483,7 @@ Azure Developer CLI (azd) ist eine entwicklerzentrierte Befehlszeilenschnittstel
   - [Einfache Flask-API](../../examples/container-app/simple-flask-api) - Basis-REST-API mit Scale-to-Zero
   - [Microservices-Architektur](../../examples/container-app/microservices) - Produktionsreife Multi-Service-Bereitstellung
   - Schnellstart-, Produktions- und erweiterte Bereitstellungsmuster
-  - Anleitung zu Überwachung, Sicherheit und Kostenoptimierung
+  - Anleitung zu Monitoring, Sicherheit und Kostenoptimierung
 
 #### Externe Beispiele - Einfache Anwendungen (Kapitel 1-2)
 **Klonen Sie diese Azure Samples Repositories, um zu starten:**
@@ -513,7 +513,7 @@ Azure Developer CLI (azd) ist eine entwicklerzentrierte Befehlszeilenschnittstel
 - [**Befehlsübersicht**](resources/cheat-sheet.md) - Wichtige azd-Befehle nach Kapiteln geordnet  
 - [**Glossar**](resources/glossary.md) - Azure- und azd-Terminologie  
 - [**FAQ**](resources/faq.md) - Häufige Fragen nach Lernkapiteln geordnet  
-- [**Studienleitfaden**](resources/study-guide.md) - Umfassende Übungsaufgaben  
+- [**Studienführer**](resources/study-guide.md) - Umfassende Übungsaufgaben  
 
 ### Praktische Workshops
 - [**KI-Workshop-Labor**](docs/microsoft-foundry/ai-workshop-lab.md) - Machen Sie Ihre KI-Lösungen AZD-bereit (2-3 Stunden)  
@@ -531,7 +531,7 @@ Azure Developer CLI (azd) ist eine entwicklerzentrierte Befehlszeilenschnittstel
 
 ## 🔧 Schnelle Fehlerbehebung
 
-**Häufige Probleme bei Anfängern und sofortige Lösungen:**  
+**Häufige Probleme bei Anfängern und sofortige Lösungen:**
 
 ### ❌ "azd: Befehl nicht gefunden"
 
@@ -648,7 +648,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # - Benutzerzugriffsadministrator (für Rollenzuweisungen)
 ```
   
-### ❌ Kann die URL der bereitgestellten Anwendung nicht finden
+### ❌ Bereitgestellte Anwendungs-URL nicht gefunden
 
 ```bash
 # Alle Service-Endpunkte anzeigen
@@ -673,7 +673,7 @@ azd env get-values
 
 ## 🔧 Schnelle Fehlerbehebung
 
-**Häufige Probleme bei Anfängern und sofortige Lösungen:**  
+**Häufige Probleme bei Anfängern und sofortige Lösungen:**
 
 <details>
 <summary><strong>❌ "azd: Befehl nicht gefunden"</strong></summary>
@@ -807,7 +807,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 </details>
 
 <details>
-<summary><strong>❌ Kann die URL der bereitgestellten Anwendung nicht finden</strong></summary>
+<summary><strong>❌ Bereitgestellte Anwendungs-URL nicht gefunden</strong></summary>
 
 ```bash
 # Alle Service-Endpunkte anzeigen
@@ -816,7 +816,7 @@ azd show
 # Oder Azure-Portal öffnen
 azd monitor
 
-# Spezifischen Service überprüfen
+# Spezifischen Dienst überprüfen
 azd env get-values
 # Nach *_URL-Variablen suchen
 ```
@@ -834,61 +834,61 @@ azd env get-values
 ## 🎓 Kursabschluss & Zertifizierung
 
 ### Fortschrittsverfolgung  
-Verfolgen Sie Ihren Lernfortschritt in jedem Kapitel:  
+Verfolgen Sie Ihren Lernfortschritt in jedem Kapitel:
 
 - [ ] **Kapitel 1**: Grundlagen & Schnellstart ✅  
 - [ ] **Kapitel 2**: KI-zentrierte Entwicklung ✅  
 - [ ] **Kapitel 3**: Konfiguration & Authentifizierung ✅  
 - [ ] **Kapitel 4**: Infrastruktur als Code & Bereitstellung ✅  
-- [ ] **Kapitel 5**: Multi-Agent KI-Lösungen ✅  
+- [ ] **Kapitel 5**: Multi-Agent-KI-Lösungen ✅  
 - [ ] **Kapitel 6**: Vorbereitende Validierung & Planung ✅  
 - [ ] **Kapitel 7**: Fehlerbehebung & Debugging ✅  
 - [ ] **Kapitel 8**: Produktion & Enterprise-Muster ✅  
 
 ### Lernüberprüfung  
 Nach Abschluss jedes Kapitels überprüfen Sie Ihr Wissen durch:  
-1. **Praktische Übung**: Schließen Sie die praktische Bereitstellung des Kapitels ab  
+1. **Praktische Übung**: Führen Sie die praktische Bereitstellung des Kapitels durch  
 2. **Wissenscheck**: Überprüfen Sie den FAQ-Bereich Ihres Kapitels  
 3. **Community-Diskussion**: Teilen Sie Ihre Erfahrungen im Azure Discord  
 4. **Nächstes Kapitel**: Wechseln Sie zum nächsten Komplexitätsgrad  
 
 ### Vorteile des Kursabschlusses  
 Nach Abschluss aller Kapitel haben Sie:  
-- **Produktionserfahrung**: Echt eingesetzte KI-Anwendungen in Azure  
-- **Professionelle Fähigkeiten**: Enterprise-bereite Bereitstellungsfähigkeiten  
+- **Produktionserfahrung**: Echte KI-Anwendungen in Azure bereitgestellt  
+- **Professionelle Fähigkeiten**: Enterprise-fähige Bereitstellungsfähigkeiten  
 - **Community-Anerkennung**: Aktives Mitglied der Azure-Entwickler-Community  
-- **Karriereförderung**: Gefragte AZD- und KI-Bereitstellungsexpertise  
+- **Karriereförderung**: Gefragte AZD- und KI-Bereitstellungskompetenz  
 
 ---
 
 ## 🤝 Community & Support
 
 ### Hilfe & Support erhalten  
-- **Technische Probleme**: [Fehler melden und Funktionen anfragen](https://github.com/microsoft/azd-for-beginners/issues)  
-- **Lernfragen**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure) und [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
-- **KI-spezifische Hilfe**: Treten Sie dem [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG) bei  
-- **Dokumentation**: [Offizielle Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- **Technische Probleme:** [Fehler melden und Funktionen anfragen](https://github.com/microsoft/azd-for-beginners/issues)  
+- **Lernfragen:** [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure) und [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)  
+- **KI-spezifische Hilfe:** Treten Sie dem [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG) bei  
+- **Dokumentation:** [Offizielle Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 
 ### Community-Einblicke vom Microsoft Foundry Discord
 
 **Aktuelle Umfrageergebnisse aus dem #Azure-Kanal:**  
 - **45 %** der Entwickler möchten AZD für KI-Workloads nutzen  
-- **Top-Herausforderungen**: Multi-Service-Bereitstellungen, Anmeldeinformationen-Verwaltung, Produktionsreife  
-- **Meistgewünscht**: KI-spezifische Vorlagen, Fehlerbehebungsleitfäden, Best Practices  
+- **Top-Herausforderungen:** Multi-Service-Bereitstellungen, Anmeldeinformationen-Verwaltung, Produktionsreife  
+- **Meistgewünscht:** KI-spezifische Vorlagen, Fehlerbehebungsleitfäden, Best Practices  
 
 **Treten Sie unserer Community bei, um:**  
 - Ihre AZD + KI-Erfahrungen zu teilen und Hilfe zu erhalten  
 - Frühe Vorschauen neuer KI-Vorlagen zu erhalten  
-- Zu Best Practices für KI-Bereitstellung beizutragen  
+- Zu Best Practices für KI-Bereitstellungen beizutragen  
 - Die zukünftige Entwicklung von KI + AZD-Funktionen zu beeinflussen  
 
 ### Beitrag zum Kurs  
 Beiträge sind willkommen! Bitte lesen Sie unseren [Beitragsleitfaden](CONTRIBUTING.md) für Details zu:  
-- **Inhaltsverbesserungen**: Bestehende Kapitel und Beispiele verbessern  
-- **Neue Beispiele**: Realistische Szenarien und Vorlagen hinzufügen  
-- **Übersetzung**: Unterstützung bei der Mehrsprachigkeit  
-- **Fehlerberichte**: Genauigkeit und Klarheit verbessern  
-- **Community-Standards**: Unsere inklusiven Community-Richtlinien befolgen  
+- **Inhaltsverbesserungen:** Bestehende Kapitel und Beispiele verbessern  
+- **Neue Beispiele:** Realistische Szenarien und Vorlagen hinzufügen  
+- **Übersetzung:** Unterstützung bei der Pflege der Mehrsprachigkeit  
+- **Fehlerberichte:** Genauigkeit und Klarheit verbessern  
+- **Community-Standards:** Unsere inklusiven Community-Richtlinien befolgen  
 
 ---
 
@@ -897,9 +897,9 @@ Beiträge sind willkommen! Bitte lesen Sie unseren [Beitragsleitfaden](CONTRIBUT
 ### Lizenz  
 Dieses Projekt ist unter der MIT-Lizenz lizenziert – siehe die [LICENSE](../../LICENSE)-Datei für Details.  
 
-### Verwandte Microsoft Lernressourcen
+### Verwandte Microsoft-Lernressourcen
 
-Unser Team erstellt weitere umfassende Lernkurse:  
+Unser Team erstellt weitere umfassende Lernkurse:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain  
@@ -957,5 +957,5 @@ Unser Team erstellt weitere umfassende Lernkurse:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

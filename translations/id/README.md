@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T14:54:09+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T13:03:35+00:00",
   "source_file": "README.md",
   "language_code": "id"
 }
@@ -18,7 +18,7 @@ CO_OP_TRANSLATOR_METADATA:
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-## Memulai Dengan Kursus Ini
+## Memulai dengan Kursus Ini
 
 Ikuti langkah-langkah ini untuk memulai perjalanan pembelajaran AZD Anda:
 
@@ -56,7 +56,7 @@ Dengan menyelesaikan kursus terstruktur ini, Anda akan:
 - **Mengimplementasikan Infrastruktur sebagai Kode**: Kelola sumber daya Azure dengan template Bicep
 - **Memecahkan Masalah Penerapan**: Selesaikan masalah umum dan debug
 - **Optimalkan untuk Produksi**: Keamanan, penskalaan, pemantauan, dan manajemen biaya
-- **Membangun Solusi Multi-Agen**: Terapkan arsitektur AI kompleks
+- **Membangun Solusi Multi-Agen**: Terapkan arsitektur AI yang kompleks
 
 ## 📚 Bab Pembelajaran
 
@@ -186,7 +186,7 @@ azd down --force --purge
 **💡 Tips Optimasi Biaya:**
 - Gunakan **Tingkat Gratis** Azure OpenAI untuk belajar (termasuk 50.000 token/bulan)
 - Jalankan `azd down` untuk menghapus alokasi sumber daya saat tidak aktif mengembangkan
-- Mulai dengan penagihan berbasis konsumsi, upgrade ke PTU hanya untuk produksi
+- Mulai dengan penagihan berbasis konsumsi, naikkan ke PTU hanya untuk produksi
 - Gunakan `azd provision --preview` untuk memperkirakan biaya sebelum penerapan
 - Aktifkan auto-scaling: bayar hanya untuk penggunaan aktual
 
@@ -218,7 +218,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### Latihan Praktis
 - Konfigurasikan beberapa lingkungan (dev, staging, prod)
-- Atur otentikasi managed identity
+- Siapkan otentikasi managed identity
 - Terapkan konfigurasi spesifik lingkungan
 
 **💡 Hasil Bab**: Kelola beberapa lingkungan dengan otentikasi dan keamanan yang tepat
@@ -354,7 +354,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ## 🎓 Ikhtisar Workshop: Pengalaman Belajar Praktis
 
 > **⚠️ STATUS WORKSHOP: Pengembangan Aktif**  
-> Materi workshop saat ini sedang dikembangkan dan disempurnakan. Modul inti berfungsi, tetapi beberapa bagian lanjutan belum lengkap. Kami aktif bekerja menyelesaikan semua konten. [Lacak kemajuan →](workshop/README.md)
+> Materi workshop saat ini sedang dikembangkan dan disempurnakan. Modul inti berfungsi, tetapi beberapa bagian lanjutan belum lengkap. Kami aktif bekerja untuk menyelesaikan semua konten. [Lacak kemajuan →](workshop/README.md)
 
 ### Materi Workshop Interaktif
 **Pembelajaran praktis komprehensif dengan alat berbasis browser dan latihan terpandu**
@@ -362,26 +362,26 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 Materi workshop kami menyediakan pengalaman belajar terstruktur dan interaktif yang melengkapi kurikulum berbasis bab di atas. Workshop dirancang untuk pembelajaran mandiri dan sesi yang dipandu instruktur.
 
 #### 🛠️ Fitur Workshop
-- **Antarmuka Berbasis Browser**: Workshop lengkap dengan MkDocs, fitur pencarian, salin, dan tema
+- **Antarmuka Berbasis Browser**: Workshop lengkap dengan MkDocs yang mendukung pencarian, salin, dan tema
 - **Integrasi GitHub Codespaces**: Setup lingkungan pengembangan dengan satu klik
 - **Jalur Pembelajaran Terstruktur**: 7 langkah latihan terpandu (total 3,5 jam)
-- **Discovery → Deployment → Customization**: Metodologi progresif
+- **Penemuan → Deployment → Kustomisasi**: Metodologi progresif
 - **Lingkungan DevContainer Interaktif**: Alat dan dependensi yang sudah dikonfigurasi
 
 #### 📚 Struktur Workshop
-Workshop mengikuti metodologi **Discovery → Deployment → Customization**:
+Workshop mengikuti metodologi **Penemuan → Deployment → Kustomisasi**:
 
-1. **Fase Discovery** (45 menit)
+1. **Fase Penemuan** (45 menit)
    - Jelajahi template dan layanan Microsoft Foundry
    - Pahami pola arsitektur multi-agen
    - Tinjau persyaratan dan prasyarat deployment
 
 2. **Fase Deployment** (2 jam)
-   - Praktik deployment aplikasi AI dengan AZD
+   - Deployment aplikasi AI secara langsung dengan AZD
    - Konfigurasi layanan dan endpoint Azure AI
    - Terapkan pola keamanan dan autentikasi
 
-3. **Fase Customization** (45 menit)
+3. **Fase Kustomisasi** (45 menit)
    - Modifikasi aplikasi untuk kasus penggunaan spesifik
    - Optimalkan untuk deployment produksi
    - Terapkan pemantauan dan manajemen biaya
@@ -400,7 +400,7 @@ cd azd-for-beginners/workshop
 #### 🎯 Hasil Pembelajaran Workshop
 Dengan menyelesaikan workshop, peserta akan:
 - **Deploy Aplikasi AI Produksi**: Gunakan AZD dengan layanan Microsoft Foundry
-- **Kuasi Arsitektur Multi-Agen**: Terapkan solusi agen AI terkoordinasi
+- **Menguasai Arsitektur Multi-Agen**: Terapkan solusi agen AI terkoordinasi
 - **Terapkan Praktik Keamanan Terbaik**: Konfigurasi autentikasi dan kontrol akses
 - **Optimalkan untuk Skala**: Rancang deployment hemat biaya dan berkinerja tinggi
 - **Pemecahan Masalah Deployment**: Selesaikan masalah umum secara mandiri
@@ -466,7 +466,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Bab 8 | ⭐⭐⭐ | Orkestrasi AI enterprise |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Bab 5 | ⭐⭐⭐⭐ | Arsitektur multi-agen dengan agen Pelanggan dan Inventaris |
 
-### Belajar Berdasarkan Jenis Contoh
+### Pembelajaran Berdasarkan Jenis Contoh
 
 > **📌 Contoh Lokal vs. Eksternal:**  
 > **Contoh Lokal** (di repo ini) = Siap digunakan segera  
@@ -480,7 +480,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 
 #### Contoh Lokal - Aplikasi Container (Bab 2-5)
 **Contoh deployment container lengkap di repositori ini:**
-- [**Contoh Aplikasi Container**](examples/container-app/README.md) - Panduan lengkap deployment containerized
+- [**Contoh Aplikasi Container**](examples/container-app/README.md) - Panduan lengkap deployment container
   - [API Flask Sederhana](../../examples/container-app/simple-flask-api) - REST API dasar dengan scale-to-zero
   - [Arsitektur Microservices](../../examples/container-app/microservices) - Deployment multi-layanan siap produksi
   - Pola Quick Start, Produksi, dan Lanjutan
@@ -537,7 +537,7 @@ Azure Developer CLI (azd) adalah antarmuka baris perintah yang berfokus pada pen
 ### ❌ "azd: command not found"
 
 ```bash
-# Pasang AZD terlebih dahulu
+# Instal AZD terlebih dahulu
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -547,11 +547,11 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Verifikasi pemasangan
+# Verifikasi instalasi
 azd version
 ```
 
-### ❌ "No subscription found" or "Subscription not set"
+### ❌ "No subscription found" atau "Subscription not set"
 
 ```bash
 # Daftar langganan yang tersedia
@@ -567,7 +567,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 
-### ❌ "InsufficientQuota" or "Quota exceeded"
+### ❌ "InsufficientQuota" atau "Quota exceeded"
 
 ```bash
 # Coba wilayah Azure yang berbeda
@@ -581,7 +581,7 @@ azd up
 }
 ```
 
-### ❌ "azd up" fails halfway through
+### ❌ "azd up" gagal di tengah jalan
 
 ```bash
 # Opsi 1: Bersihkan dan coba lagi
@@ -596,7 +596,7 @@ azd show
 azd logs
 ```
 
-### ❌ "Authentication failed" or "Token expired"
+### ❌ "Authentication failed" atau "Token expired"
 
 ```bash
 # Autentikasi ulang
@@ -610,7 +610,7 @@ azd auth login
 az account show
 ```
 
-### ❌ "Resource already exists" or naming conflicts
+### ❌ "Resource already exists" atau konflik penamaan
 
 ```bash
 # AZD menghasilkan nama unik, tetapi jika terjadi konflik:
@@ -621,7 +621,7 @@ azd env new dev-v2
 azd up
 ```
 
-### ❌ Template deployment taking too long
+### ❌ Deployment template memakan waktu terlalu lama
 
 **Waktu tunggu normal:**
 - Aplikasi web sederhana: 5-10 menit
@@ -637,7 +637,7 @@ azd monitor
 # Cari penyebaran yang gagal
 ```
 
-### ❌ "Permission denied" or "Forbidden"
+### ❌ "Permission denied" atau "Forbidden"
 
 ```bash
 # Periksa peran Azure Anda
@@ -696,7 +696,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
+<summary><strong>❌ "No subscription found" atau "Subscription not set"</strong></summary>
 
 ```bash
 # Daftar langganan yang tersedia
@@ -714,7 +714,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" atau "Quota exceeded"</strong></summary>
 
 ```bash
 # Coba wilayah Azure yang berbeda
@@ -730,7 +730,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" fails halfway through</strong></summary>
+<summary><strong>❌ "azd up" gagal di tengah jalan</strong></summary>
 
 ```bash
 # Opsi 1: Bersihkan dan coba lagi
@@ -747,7 +747,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
+<summary><strong>❌ "Authentication failed" atau "Token expired"</strong></summary>
 
 ```bash
 # Autentikasi ulang
@@ -763,7 +763,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
+<summary><strong>❌ "Resource already exists" atau konflik penamaan</strong></summary>
 
 ```bash
 # AZD menghasilkan nama unik, tetapi jika terjadi konflik:
@@ -776,7 +776,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ Template deployment taking too long</strong></summary>
+<summary><strong>❌ Deployment template memakan waktu terlalu lama</strong></summary>
 
 **Waktu tunggu normal:**
 - Aplikasi web sederhana: 5-10 menit
@@ -787,14 +787,14 @@ azd up
 # Periksa kemajuan
 azd show
 
-# Jika terhenti >30 menit, periksa Azure Portal:
+# Jika terhenti >30 menit, periksa Portal Azure:
 azd monitor
 # Cari penyebaran yang gagal
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
+<summary><strong>❌ "Permission denied" atau "Forbidden"</strong></summary>
 
 ```bash
 # Periksa peran Azure Anda
@@ -878,8 +878,8 @@ Setelah menyelesaikan semua bab, Anda akan memiliki:
 - **Permintaan terbanyak**: Template khusus AI, panduan pemecahan masalah, praktik terbaik
 
 **Bergabung dengan komunitas kami untuk:**
-- Berbagi pengalaman AZD + AI dan dapatkan bantuan
-- Akses pratinjau awal template AI baru
+- Berbagi pengalaman AZD + AI dan mendapatkan bantuan
+- Mengakses preview awal template AI baru
 - Berkontribusi pada praktik terbaik deployment AI
 - Mempengaruhi pengembangan fitur AI + AZD di masa depan
 
@@ -887,7 +887,7 @@ Setelah menyelesaikan semua bab, Anda akan memiliki:
 Kami menyambut kontribusi! Silakan baca [Panduan Kontribusi](CONTRIBUTING.md) untuk detail tentang:
 - **Peningkatan Konten**: Tingkatkan bab dan contoh yang ada
 - **Contoh Baru**: Tambahkan skenario dan template dunia nyata  
-- **Terjemahan**: Bantu mempertahankan dukungan multi-bahasa
+- **Terjemahan**: Bantu memelihara dukungan multi-bahasa
 - **Laporan Bug**: Tingkatkan akurasi dan kejelasan
 - **Standar Komunitas**: Ikuti pedoman komunitas inklusif kami
 
@@ -949,7 +949,7 @@ Tim kami memproduksi kursus pembelajaran komprehensif lainnya:
 **🚀 Siap Memulai Belajar?**
 
 **Pemula**: Mulai dengan [Bab 1: Dasar & Mulai Cepat](../..)  
-**Pengembang AI**: Lompat ke [Bab 2: Pengembangan AI-Pertama](../..)  
+**Pengembang AI**: Langsung ke [Bab 2: Pengembangan AI-Pertama](../..)  
 **Pengembang Berpengalaman**: Mulai dengan [Bab 3: Konfigurasi & Otentikasi](../..)
 
 **Langkah Selanjutnya**: [Mulai Bab 1 - Dasar AZD](docs/getting-started/azd-basics.md) →

@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T13:37:06+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T11:49:39+00:00",
   "source_file": "README.md",
   "language_code": "it"
 }
@@ -24,7 +24,7 @@ Segui questi passaggi per iniziare il tuo percorso di apprendimento AZD:
 
 1. **Forka il Repository**: Clicca [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Clona il Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **Unisciti alla Comunità**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) per supporto da esperti
+3. **Unisciti alla Comunità**: [Community Discord di Azure](https://discord.com/invite/ByRwuEEgH4) per supporto esperto
 4. **Scegli il Tuo Percorso di Apprendimento**: Seleziona un capitolo qui sotto che corrisponde al tuo livello di esperienza
 
 ### Supporto Multilingue
@@ -32,7 +32,7 @@ Segui questi passaggi per iniziare il tuo percorso di apprendimento AZD:
 #### Traduzioni Automatiche (Sempre Aggiornate)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](./README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[Arabo](../ar/README.md) | [Bengalese](../bn/README.md) | [Bulgaro](../bg/README.md) | [Birmano (Myanmar)](../my/README.md) | [Cinese (Semplificato)](../zh/README.md) | [Cinese (Tradizionale, Hong Kong)](../hk/README.md) | [Cinese (Tradizionale, Macao)](../mo/README.md) | [Cinese (Tradizionale, Taiwan)](../tw/README.md) | [Croato](../hr/README.md) | [Ceco](../cs/README.md) | [Danese](../da/README.md) | [Olandese](../nl/README.md) | [Estone](../et/README.md) | [Finlandese](../fi/README.md) | [Francese](../fr/README.md) | [Tedesco](../de/README.md) | [Greco](../el/README.md) | [Ebraico](../he/README.md) | [Hindi](../hi/README.md) | [Ungherese](../hu/README.md) | [Indonesiano](../id/README.md) | [Italiano](./README.md) | [Giapponese](../ja/README.md) | [Kannada](../kn/README.md) | [Coreano](../ko/README.md) | [Lituano](../lt/README.md) | [Malese](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepalese](../ne/README.md) | [Pidgin Nigeriano](../pcm/README.md) | [Norvegese](../no/README.md) | [Persiano (Farsi)](../fa/README.md) | [Polacco](../pl/README.md) | [Portoghese (Brasile)](../br/README.md) | [Portoghese (Portogallo)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Rumeno](../ro/README.md) | [Russo](../ru/README.md) | [Serbo (Cirillico)](../sr/README.md) | [Slovacco](../sk/README.md) | [Sloveno](../sl/README.md) | [Spagnolo](../es/README.md) | [Swahili](../sw/README.md) | [Svedese](../sv/README.md) | [Tagalog (Filippino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thailandese](../th/README.md) | [Turco](../tr/README.md) | [Ucraino](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamita](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## Panoramica del Corso
@@ -41,12 +41,12 @@ Padroneggia Azure Developer CLI (azd) attraverso capitoli strutturati progettati
 
 ### Perché Questo Corso è Essenziale per gli Sviluppatori Moderni
 
-Basato sulle intuizioni della community Microsoft Foundry Discord, **il 45% degli sviluppatori vuole usare AZD per carichi di lavoro AI** ma incontra sfide con:
+Basato sulle intuizioni della community Discord di Microsoft Foundry, **il 45% degli sviluppatori vuole usare AZD per carichi di lavoro AI** ma incontra sfide con:
 - Architetture AI multi-servizio complesse
 - Best practice per il deployment AI in produzione  
 - Integrazione e configurazione dei servizi Azure AI
 - Ottimizzazione dei costi per carichi di lavoro AI
-- Risoluzione di problemi specifici del deployment AI
+- Risoluzione di problemi specifici di deployment AI
 
 ### Obiettivi di Apprendimento
 
@@ -63,7 +63,7 @@ Completando questo corso strutturato, sarai in grado di:
 *Seleziona il tuo percorso di apprendimento in base al livello di esperienza e agli obiettivi*
 
 ### 🚀 Capitolo 1: Fondamenti & Avvio Rapido
-**Prerequisiti**: Abbonamento Azure, conoscenze base della linea di comando  
+**Prerequisiti**: Abbonamento Azure, conoscenze base della riga di comando  
 **Durata**: 30-45 minuti  
 **Complessità**: ⭐
 
@@ -74,7 +74,7 @@ Completando questo corso strutturato, sarai in grado di:
 
 #### Risorse di Apprendimento
 - **🎯 Inizia Qui**: [Cos'è Azure Developer CLI?](../..)
-- **📖 Teoria**: [Nozioni di Base AZD](docs/getting-started/azd-basics.md) - Concetti e terminologia fondamentali
+- **📖 Teoria**: [Basi di AZD](docs/getting-started/azd-basics.md) - Concetti e terminologia fondamentali
 - **⚙️ Setup**: [Installazione & Configurazione](docs/getting-started/installation.md) - Guide specifiche per piattaforma
 - **🛠️ Pratica**: [Il Tuo Primo Progetto](docs/getting-started/first-project.md) - Tutorial passo-passo
 - **📋 Riferimento Rapido**: [Cheat Sheet Comandi](resources/cheat-sheet.md)
@@ -102,7 +102,7 @@ azd show                # Visualizza l'URL dell'app in esecuzione
 azd down --force --purge  # Pulisce le risorse
 ```
 
-**📊 Tempo Investito:** 30-45 minuti  
+**📊 Tempo Stimato:** 30-45 minuti  
 **📈 Livello di Competenza Dopo:** Capacità di deployare applicazioni base in autonomia
 
 **✅ Validazione del Successo:**
@@ -116,7 +116,7 @@ azd show                # Visualizza l'URL dell'app in esecuzione
 azd down --force --purge  # Pulisce le risorse
 ```
 
-**📊 Tempo Investito:** 30-45 minuti  
+**📊 Tempo Stimato:** 30-45 minuti  
 **📈 Livello di Competenza Dopo:** Capacità di deployare applicazioni base in autonomia
 
 ---
@@ -150,7 +150,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Risultato del Capitolo**: Deploy e configurazione di un'applicazione chat AI-powered con capacità RAG
+**💡 Risultato del Capitolo**: Deployare e configurare un'applicazione chat AI-powered con capacità RAG
 
 **✅ Validazione del Successo:**
 ```bash
@@ -158,39 +158,39 @@ azd init --template agent-openai-python-prompty
 azd init --template azure-search-openai-demo
 azd up
 # Testare l'interfaccia di chat AI
-# Fare domande e ottenere risposte basate sull'AI con fonti
+# Fare domande e ottenere risposte AI con fonti
 # Verificare che l'integrazione della ricerca funzioni
 azd monitor  # Controllare che Application Insights mostri la telemetria
 azd down --force --purge
 ```
 
-**📊 Tempo Investito:** 1-2 ore  
+**📊 Tempo Stimato:** 1-2 ore  
 **📈 Livello di Competenza Dopo:** Capacità di deployare e configurare applicazioni AI pronte per la produzione  
 **💰 Consapevolezza dei Costi:** Comprendere costi di sviluppo $80-150/mese, costi produzione $300-3500/mese
 
 #### 💰 Considerazioni sui Costi per i Deployment AI
 
 **Ambiente di Sviluppo (Stimato $80-150/mese):**
-- Azure OpenAI (Pay-as-you-go): $0-50/mese (basato su uso token)
+- Azure OpenAI (Pay-as-you-go): $0-50/mese (basato su utilizzo token)
 - AI Search (livello base): $75/mese
 - Container Apps (Consumo): $0-20/mese
 - Storage (Standard): $1-5/mese
 
 **Ambiente di Produzione (Stimato $300-3,500+/mese):**
-- Azure OpenAI (PTU per performance costante): $3,000+/mese OPPURE Pay-as-you-go con alto volume
+- Azure OpenAI (PTU per prestazioni costanti): $3,000+/mese OPPURE Pay-as-you-go con alto volume
 - AI Search (livello standard): $250/mese
 - Container Apps (Dedicato): $50-100/mese
 - Application Insights: $5-50/mese
 - Storage (Premium): $10-50/mese
 
-**💡 Consigli per l'Ottimizzazione dei Costi:**
+**💡 Consigli per l’Ottimizzazione dei Costi:**
 - Usa **Tier Gratuito** Azure OpenAI per apprendimento (50.000 token/mese inclusi)
 - Esegui `azd down` per deallocare risorse quando non sviluppi attivamente
 - Inizia con fatturazione a consumo, passa a PTU solo in produzione
 - Usa `azd provision --preview` per stimare i costi prima del deployment
-- Abilita auto-scaling: paga solo per l'uso effettivo
+- Abilita auto-scaling: paga solo per l’uso effettivo
 
-**Monitoraggio dei Costi:**
+**Monitoraggio Costi:**
 ```bash
 # Controlla i costi mensili stimati
 azd provision --preview
@@ -295,7 +295,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Esercizi Pratici
 - Eseguire script di validazione della capacità
-- Ottimizzare la selezione SKU per i costi
+- Ottimizzare le selezioni SKU per il costo
 - Implementare controlli automatizzati pre-distribuzione
 
 **💡 Risultato del Capitolo**: Validare e ottimizzare le distribuzioni prima dell’esecuzione
@@ -421,7 +421,7 @@ Azure Developer CLI (azd) è un’interfaccia a riga di comando orientata agli s
 - **Distribuzioni basate su template** - Usa template predefiniti per modelli applicativi comuni
 - **Infrastructure as Code** - Gestisci risorse Azure con Bicep o Terraform  
 - **Flussi di lavoro integrati** - Provisioning, distribuzione e monitoraggio senza interruzioni
-- **Ottimizzato per sviluppatori** - Migliora produttività ed esperienza dello sviluppatore
+- **Ottimizzato per sviluppatori** - Progettato per produttività ed esperienza sviluppatore
 
 ### **AZD + Microsoft Foundry: Perfetto per le Distribuzioni AI**
 
@@ -430,8 +430,8 @@ Azure Developer CLI (azd) è un’interfaccia a riga di comando orientata agli s
 - **Template pronti per AI** - Template preconfigurati per Azure OpenAI, Cognitive Services e carichi ML
 - **Distribuzioni AI sicure** - Modelli di sicurezza integrati per servizi AI, chiavi API e endpoint modello  
 - **Modelli AI per produzione** - Best practice per distribuzioni AI scalabili ed economiche
-- **Flussi AI end-to-end** - Dallo sviluppo modello alla produzione con monitoraggio adeguato
-- **Ottimizzazione costi** - Allocazione intelligente e strategie di scaling per carichi AI
+- **Flussi di lavoro AI end-to-end** - Dallo sviluppo modello alla produzione con monitoraggio adeguato
+- **Ottimizzazione dei costi** - Allocazione intelligente delle risorse e strategie di scaling per AI
 - **Integrazione Microsoft Foundry** - Connessione fluida al catalogo modelli e endpoint Microsoft Foundry
 
 ---
@@ -518,14 +518,14 @@ Azure Developer CLI (azd) è un’interfaccia a riga di comando orientata agli s
 ### Workshop Pratici
 - [**Laboratorio Workshop AI**](docs/microsoft-foundry/ai-workshop-lab.md) - Rendi le tue soluzioni AI distribuibili con AZD (2-3 ore)
 - [**Guida Workshop Interattiva**](workshop/README.md) - Workshop basato su browser con MkDocs e ambiente DevContainer
-- [**Percorso di Apprendimento Strutturato**](../../workshop/docs/instructions) - Esercizi guidati in 7 passaggi (Scoperta → Distribuzione → Personalizzazione)
-- [**Workshop AZD per Principianti**](workshop/README.md) - Materiali completi per workshop pratici con integrazione GitHub Codespaces
+- [**Percorso di Apprendimento Strutturato**](../../workshop/docs/instructions) - Esercizi guidati in 7 fasi (Scoperta → Distribuzione → Personalizzazione)
+- [**Workshop AZD per Principianti**](workshop/README.md) - Materiali completi per workshop pratico con integrazione GitHub Codespaces
 
 ### Risorse Esterne di Apprendimento
-- [Documentazione Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Centro di Architettura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Calcolatore Prezzi Azure](https://azure.microsoft.com/pricing/calculator/)
-- [Stato Azure](https://status.azure.com/)
+- Documentazione Azure Developer CLI (https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Centro di Architettura Azure (https://learn.microsoft.com/en-us/azure/architecture/)
+- Calcolatore Prezzi Azure (https://azure.microsoft.com/pricing/calculator/)
+- Stato di Azure (https://status.azure.com/)
 
 ---
 
@@ -645,7 +645,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # Hai bisogno almeno del ruolo "Collaboratore"
 # Chiedi al tuo amministratore Azure di concedere:
 # - Collaboratore (per le risorse)
-# - Amministratore accesso utente (per le assegnazioni di ruolo)
+# - Amministratore Accesso Utente (per le assegnazioni di ruolo)
 ```
 
 ### ❌ Impossibile trovare l'URL dell'applicazione distribuita
@@ -856,7 +856,7 @@ Dopo aver completato ogni capitolo, verifica le tue conoscenze con:
 Al completamento di tutti i capitoli, avrai:
 - **Esperienza di Produzione**: Applicazioni AI reali distribuite su Azure
 - **Competenze Professionali**: Capacità di deployment pronte per l'impresa  
-- **Riconoscimento Comunitario**: Membro attivo della community di sviluppatori Azure
+- **Riconoscimento nella Comunità**: Membro attivo della community di sviluppatori Azure
 - **Avanzamento di Carriera**: Competenza richiesta in AZD e deployment AI
 
 ---
@@ -878,15 +878,15 @@ Al completamento di tutti i capitoli, avrai:
 
 **Unisciti alla nostra comunità per:**
 - Condividere le tue esperienze AZD + AI e ricevere aiuto
-- Accedere alle anteprime anticipate di nuovi template AI
+- Accedere alle anteprime di nuovi template AI
 - Contribuire alle best practice per il deployment AI
 - Influenzare lo sviluppo futuro di funzionalità AI + AZD
 
 ### Contribuire al Corso
-Accogliamo con piacere i contributi! Leggi la nostra [Guida ai Contributi](CONTRIBUTING.md) per dettagli su:
+Accogliamo contributi! Leggi la nostra [Guida ai Contributi](CONTRIBUTING.md) per dettagli su:
 - **Miglioramenti dei Contenuti**: Migliora capitoli ed esempi esistenti
 - **Nuovi Esempi**: Aggiungi scenari reali e template  
-- **Traduzione**: Aiuta a mantenere il supporto multilingue
+- **Traduzioni**: Aiuta a mantenere il supporto multilingue
 - **Segnalazioni di Bug**: Migliora accuratezza e chiarezza
 - **Standard Comunitari**: Segui le nostre linee guida inclusive
 
@@ -951,7 +951,7 @@ Il nostro team produce altri corsi di apprendimento completi:
 **Sviluppatori AI**: Passa a [Capitolo 2: Sviluppo AI-First](../..)  
 **Sviluppatori Esperti**: Inizia con [Capitolo 3: Configurazione e Autenticazione](../..)
 
-**Passi Successivi**: [Inizia Capitolo 1 - Nozioni di base AZD](docs/getting-started/azd-basics.md) →
+**Prossimi Passi**: [Inizia Capitolo 1 - Nozioni di base AZD](docs/getting-started/azd-basics.md) →
 
 ---
 

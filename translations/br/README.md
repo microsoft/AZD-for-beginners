@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T13:30:49+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T11:44:53+00:00",
   "source_file": "README.md",
   "language_code": "br"
 }
@@ -37,11 +37,11 @@ Siga estes passos para iniciar sua jornada de aprendizado AZD:
 
 ## Visão Geral do Curso
 
-Domine o Azure Developer CLI (azd) por meio de capítulos estruturados projetados para aprendizado progressivo. **Foco especial na implantação de aplicações de IA com integração Microsoft Foundry.**
+Domine o Azure Developer CLI (azd) através de capítulos estruturados projetados para aprendizado progressivo. **Foco especial na implantação de aplicações de IA com integração Microsoft Foundry.**
 
 ### Por Que Este Curso é Essencial para Desenvolvedores Modernos
 
-Com base em insights da comunidade Microsoft Foundry Discord, **45% dos desenvolvedores querem usar AZD para cargas de trabalho de IA** mas enfrentam desafios com:
+Baseado em insights da comunidade Microsoft Foundry Discord, **45% dos desenvolvedores querem usar AZD para cargas de trabalho de IA** mas enfrentam desafios com:
 - Arquiteturas complexas de IA multi-serviço
 - Melhores práticas para implantação de IA em produção  
 - Integração e configuração de serviços Azure AI
@@ -98,7 +98,7 @@ azd version              # Mostra a versão instalada
 azd init --template todo-nodejs-mongo  # Inicializa o projeto
 azd up                  # Faz o deploy para o Azure
 azd show                # Exibe a URL do aplicativo em execução
-# Aplicativo abre no navegador e funciona
+# Aplicação abre no navegador e funciona
 azd down --force --purge  # Limpa os recursos
 ```
 
@@ -112,7 +112,7 @@ azd version              # Mostra a versão instalada
 azd init --template todo-nodejs-mongo  # Inicializa o projeto
 azd up                  # Faz o deploy para o Azure
 azd show                # Exibe a URL do aplicativo em execução
-# Aplicação abre no navegador e funciona
+# Aplicativo abre no navegador e funciona
 azd down --force --purge  # Limpa os recursos
 ```
 
@@ -346,7 +346,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Configurar monitoramento abrangente
 - Implantar em produção com governança adequada
 
-**💡 Resultado do Capítulo**: Implantar aplicações prontas para o ambiente empresarial com capacidades completas de produção
+**💡 Resultado do Capítulo**: Implantar aplicações prontas para empresa com capacidades completas de produção
 
 ---
 
@@ -358,7 +358,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ### Materiais Interativos do Workshop
 **Aprendizagem prática abrangente com ferramentas baseadas em navegador e exercícios guiados**
 
-Nossos materiais do workshop oferecem uma experiência de aprendizagem estruturada e interativa que complementa o currículo baseado em capítulos acima. O workshop é projetado tanto para aprendizado autodirigido quanto para sessões conduzidas por instrutores.
+Nossos materiais do workshop fornecem uma experiência de aprendizagem estruturada e interativa que complementa o currículo baseado em capítulos acima. O workshop é projetado tanto para aprendizado autodirigido quanto para sessões conduzidas por instrutores.
 
 #### 🛠️ Recursos do Workshop
 - **Interface Baseada em Navegador**: Workshop completo com MkDocs, com busca, cópia e temas
@@ -428,7 +428,7 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 **Por que AZD para Soluções de IA?** AZD resolve os principais desafios enfrentados por desenvolvedores de IA:
 
 - **Templates Prontos para IA** - Templates pré-configurados para Azure OpenAI, Serviços Cognitivos e cargas de trabalho ML
-- **Implantações Seguras de IA** - Padrões de segurança embutidos para serviços de IA, chaves de API e endpoints de modelos  
+- **Implantações Seguras de IA** - Padrões de segurança embutidos para serviços de IA, chaves de API e endpoints de modelo  
 - **Padrões de IA para Produção** - Melhores práticas para implantações escaláveis e econômicas de aplicações de IA
 - **Fluxos de Trabalho de IA de Ponta a Ponta** - Do desenvolvimento do modelo à implantação em produção com monitoramento adequado
 - **Otimização de Custos** - Alocação inteligente de recursos e estratégias de escalonamento para cargas de trabalho de IA
@@ -461,7 +461,7 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Capítulo 2 | ⭐ | Padrões básicos de implantação de IA |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Capítulo 2 | ⭐⭐ | Implementação RAG com Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Capítulo 4 | ⭐⭐ | Integração de Inteligência de Documentos |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | Framework de agentes e chamadas de função |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Capítulo 5 | ⭐⭐⭐ | Framework de agente e chamadas de função |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Capítulo 8 | ⭐⭐⭐ | Orquestração empresarial de IA |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Capítulo 5 | ⭐⭐⭐⭐ | Arquitetura multiagente com agentes de Cliente e Inventário |
 
@@ -482,8 +482,8 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 - [**Exemplos de Aplicações em Contêiner**](examples/container-app/README.md) - Guia completo para implantações conteinerizadas
   - [API Flask Simples](../../examples/container-app/simple-flask-api) - API REST básica com escala para zero
   - [Arquitetura de Microsserviços](../../examples/container-app/microservices) - Implantação multi-serviço pronta para produção
-  - Padrões de implantação Rápida, Produção e Avançada
-  - Orientações para monitoramento, segurança e otimização de custos
+  - Padrões de implantação Rápido, Produção e Avançado
+  - Orientações de monitoramento, segurança e otimização de custos
 
 #### Exemplos Externos - Aplicações Simples (Capítulos 1-2)
 **Clone estes repositórios Azure Samples para começar:**
@@ -493,7 +493,7 @@ Azure Developer CLI (azd) é uma interface de linha de comando centrada no desen
 
 #### Exemplos Externos - Integração com Banco de Dados (Capítulos 3-4)  
 - [Aplicação com Banco de Dados - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Padrões de conectividade com banco de dados
-- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Fluxo de trabalho de dados serverless
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Fluxo de dados serverless
 
 #### Exemplos Externos - Padrões Avançados (Capítulos 4-8)
 - [Microsserviços Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - Arquiteturas multi-serviço
@@ -566,7 +566,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 
-### ❌ "Quota insuficiente" ou "Quota excedida"
+### ❌ "Quota insuficiente" ou "Cota excedida"
 
 ```bash
 # Tente uma região diferente do Azure
@@ -625,7 +625,7 @@ azd up
 **Tempos normais de espera:**
 - Aplicativo web simples: 5-10 minutos
 - Aplicativo com banco de dados: 10-15 minutos
-- Aplicações de IA: 15-25 minutos (Provisionamento do OpenAI é lento)
+- Aplicações de IA: 15-25 minutos (provisionamento do OpenAI é lento)
 
 ```bash
 # Verificar progresso
@@ -645,7 +645,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # Você precisa de pelo menos o papel de "Colaborador"
 # Peça ao seu administrador do Azure para conceder:
 # - Colaborador (para recursos)
-# - Administrador de Acesso do Usuário (para atribuições de função)
+# - Administrador de Acesso de Usuário (para atribuições de função)
 ```
 
 ### ❌ Não consegue encontrar a URL da aplicação implantada
@@ -713,7 +713,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Quota insuficiente" ou "Quota excedida"</strong></summary>
+<summary><strong>❌ "Quota insuficiente" ou "Cota excedida"</strong></summary>
 
 ```bash
 # Tente uma região diferente do Azure
@@ -780,13 +780,13 @@ azd up
 **Tempos normais de espera:**
 - Aplicativo web simples: 5-10 minutos
 - Aplicativo com banco de dados: 10-15 minutos
-- Aplicações de IA: 15-25 minutos (Provisionamento do OpenAI é lento)
+- Aplicações de IA: 15-25 minutos (provisionamento do OpenAI é lento)
 
 ```bash
 # Verificar progresso
 azd show
 
-# Se estiver travado por mais de 30 minutos, verifique o Portal do Azure:
+# Se travado por mais de 30 minutos, verifique o Portal do Azure:
 azd monitor
 # Procure por implantações com falha
 ```
@@ -869,7 +869,7 @@ Ao concluir todos os capítulos, você terá:
 - **Ajuda Específica de IA**: Participe do [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Documentação**: [Documentação oficial do Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Insights da Comunidade no Discord Microsoft Foundry
+### Insights da Comunidade no Microsoft Foundry Discord
 
 **Resultados recentes da enquete no canal #Azure:**
 - **45%** dos desenvolvedores querem usar AZD para cargas de trabalho de IA
@@ -957,5 +957,5 @@ Nossa equipe produz outros cursos abrangentes de aprendizado:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

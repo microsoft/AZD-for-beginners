@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T13:50:01+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T12:00:59+00:00",
   "source_file": "README.md",
   "language_code": "tr"
 }
@@ -53,10 +53,10 @@ Microsoft Foundry Discord topluluğu içgörülerine göre, **geliştiricilerin 
 Bu yapılandırılmış kursu tamamlayarak:
 - **AZD Temellerini Öğrenin**: Temel kavramlar, kurulum ve yapılandırma
 - **AI Uygulamaları Dağıtın**: AZD ile Microsoft Foundry servislerini kullanın
-- **Altyapıyı Kod Olarak Uygulayın**: Bicep şablonları ile Azure kaynaklarını yönetin
+- **Kod Olarak Altyapı Uygulayın**: Bicep şablonları ile Azure kaynaklarını yönetin
 - **Dağıtım Sorunlarını Giderin**: Yaygın sorunları çözün ve hata ayıklayın
 - **Üretim İçin Optimize Edin**: Güvenlik, ölçeklendirme, izleme ve maliyet yönetimi
-- **Çoklu Ajan Çözümleri Oluşturun**: Karmaşık AI mimarilerini dağıtın
+- **Çok Ajanlı Çözümler Oluşturun**: Karmaşık AI mimarilerini dağıtın
 
 ## 📚 Öğrenme Bölümleri
 
@@ -135,7 +135,7 @@ azd down --force --purge  # Kaynakları temizler
 - **🎯 Buradan Başlayın**: [Microsoft Foundry Entegrasyonu](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 Kalıplar**: [AI Model Dağıtımı](docs/microsoft-foundry/ai-model-deployment.md) - AI modellerini dağıtma ve yönetme
 - **🛠️ Atölye**: [AI Atölye Laboratuvarı](docs/microsoft-foundry/ai-workshop-lab.md) - AI çözümlerinizi AZD uyumlu hale getirin
-- **🎥 Etkileşimli Rehber**: [Atölye Materyalleri](workshop/README.md) - MkDocs * DevContainer ortamında tarayıcı tabanlı öğrenme
+- **🎥 Etkileşimli Rehber**: [Atölye Materyalleri](workshop/README.md) - MkDocs * DevContainer Ortamı ile tarayıcı tabanlı öğrenme
 - **📋 Şablonlar**: [Microsoft Foundry Şablonları](../..)
 - **📝 Örnekler**: [AZD Dağıtım Örnekleri](examples/README.md)
 
@@ -150,7 +150,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Bölüm Sonucu**: RAG özellikli AI destekli sohbet uygulaması dağıtımı ve yapılandırması
+**💡 Bölüm Sonucu**: RAG özellikli AI destekli bir sohbet uygulaması dağıtmak ve yapılandırmak
 
 **✅ Başarı Doğrulaması:**
 ```bash
@@ -184,9 +184,9 @@ azd down --force --purge
 - Depolama (Premium): 10-50$/ay
 
 **💡 Maliyet Optimizasyon İpuçları:**
-- Öğrenme için **Ücretsiz Katman** Azure OpenAI kullanın (aylık 50.000 token dahil)
+- Öğrenme için **Ücretsiz Katman** Azure OpenAI kullanın (ayda 50.000 token dahil)
 - Aktif geliştirme yoksa kaynakları boşaltmak için `azd down` komutunu çalıştırın
-- Önce tüketim bazlı faturalandırma ile başlayın, sadece üretim için PTU'ya geçin
+- Tüketim bazlı faturalama ile başlayın, sadece üretim için PTU'ya geçin
 - Dağıtımdan önce maliyet tahmini için `azd provision --preview` kullanın
 - Otomatik ölçeklendirmeyi etkinleştirin: sadece gerçek kullanım için ödeme yapın
 
@@ -225,14 +225,14 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### 🏗️ Bölüm 4: Altyapı Kod Olarak & Dağıtım
+### 🏗️ Bölüm 4: Kod Olarak Altyapı & Dağıtım
 **Önkoşullar**: Bölümler 1-3 tamamlandı  
 **Süre**: 1-1.5 saat  
 **Zorluk Seviyesi**: ⭐⭐⭐
 
 #### Öğrenecekleriniz
 - İleri dağıtım kalıpları
-- Bicep ile Altyapı Kod Olarak
+- Bicep ile Kod Olarak Altyapı
 - Kaynak sağlama stratejileri
 
 #### Öğrenme Kaynakları
@@ -249,18 +249,18 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### 🎯 Bölüm 5: Çoklu Ajan AI Çözümleri (İleri Seviye)
+### 🎯 Bölüm 5: Çok Ajanlı AI Çözümleri (İleri Seviye)
 **Önkoşullar**: Bölümler 1-2 tamamlandı  
 **Süre**: 2-3 saat  
 **Zorluk Seviyesi**: ⭐⭐⭐⭐
 
 #### Öğrenecekleriniz
-- Çoklu ajan mimari kalıpları
+- Çok ajanlı mimari kalıplar
 - Ajan orkestrasyonu ve koordinasyonu
 - Üretim hazır AI dağıtımları
 
 #### Öğrenme Kaynakları
-- **🤖 Öne Çıkan Proje**: [Perakende Çoklu Ajan Çözümü](examples/retail-scenario.md) - Tam uygulama
+- **🤖 Öne Çıkan Proje**: [Perakende Çok Ajanlı Çözüm](examples/retail-scenario.md) - Tam uygulama
 
 - **🛠️ ARM Şablonları**: [ARM Şablon Paketi](../../examples/retail-multiagent-arm-template) - Tek tıklamayla dağıtım
 - **📖 Mimari**: [Çoklu ajan koordinasyon desenleri](/docs/pre-deployment/coordination-patterns.md) - Desenler
@@ -354,7 +354,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 ## 🎓 Atölye Genel Bakış: Uygulamalı Öğrenme Deneyimi
 
 > **⚠️ ATÖLYE DURUMU: Aktif Geliştirme**  
-> Atölye materyalleri şu anda geliştiriliyor ve iyileştiriliyor. Temel modüller işlevsel, ancak bazı ileri bölümler tamamlanmamış durumda. Tüm içeriği tamamlamak için aktif olarak çalışıyoruz. [İlerlemenizi takip edin →](workshop/README.md)
+> Atölye materyalleri şu anda geliştiriliyor ve iyileştiriliyor. Temel modüller işlevsel, ancak bazı ileri bölümler tamamlanmamış durumda. Tüm içeriği tamamlamak için aktif olarak çalışıyoruz. [İlerlemeyi takip et →](workshop/README.md)
 
 ### Etkileşimli Atölye Materyalleri
 **Tarayıcı tabanlı araçlar ve rehberli egzersizlerle kapsamlı uygulamalı öğrenme**
@@ -403,7 +403,7 @@ Atölyeyi tamamlayan katılımcılar:
 - **Çoklu Ajan Mimarilerinde Uzmanlaşır**: Koordine AI ajan çözümleri uygular
 - **Güvenlik En İyi Uygulamalarını Uygular**: Kimlik doğrulama ve erişim kontrolü yapılandırır
 - **Ölçek için Optimize Eder**: Maliyet etkin, performanslı dağıtımlar tasarlar
-- **Dağıtımları Sorunsuz Giderir**: Yaygın sorunları bağımsız çözer
+- **Dağıtımları Sorunsuz Çözer**: Yaygın sorunları bağımsız olarak giderir
 
 #### 📖 Atölye Kaynakları
 - **🎥 Etkileşimli Rehber**: [Atölye Materyalleri](workshop/README.md) - Tarayıcı tabanlı öğrenme ortamı
@@ -449,7 +449,7 @@ Azure Developer CLI (azd), uygulamaların Azure'a hızlıca oluşturulması ve d
 | [**AI sohbet ile başlayın**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Bölüm 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Dış |
 | [**AI ajanları ile başlayın**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Bölüm 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Dış |
 | [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Bölüm 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Dış |
-| [**OpenAI Chat Uygulaması Hızlı Başlangıç**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Bölüm 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Dış |
+| [**OpenAI Sohbet Uygulaması Hızlı Başlangıç**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Bölüm 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Dış |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Bölüm 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Dış |
 | [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Bölüm 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Dış |
 | [**Perakende Çoklu Ajan Çözümü**](examples/retail-scenario.md) | Bölüm 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Yerel** |
@@ -481,7 +481,7 @@ Azure Developer CLI (azd), uygulamaların Azure'a hızlıca oluşturulması ve d
 #### Yerel Örnekler - Konteyner Uygulamaları (Bölümler 2-5)
 **Bu depoda kapsamlı konteyner dağıtım örnekleri:**
 - [**Konteyner Uygulama Örnekleri**](examples/container-app/README.md) - Konteynerleştirilmiş dağıtımlar için tam rehber
-  - [Basit Flask API](../../examples/container-app/simple-flask-api) - Ölçeklendirme ile temel REST API
+  - [Basit Flask API](../../examples/container-app/simple-flask-api) - Ölçeğe göre sıfıra inebilen temel REST API
   - [Mikroservis Mimarisi](../../examples/container-app/microservices) - Üretime hazır çoklu servis dağıtımı
   - Hızlı Başlangıç, Üretim ve İleri dağıtım desenleri
   - İzleme, güvenlik ve maliyet optimizasyonu rehberi
@@ -502,9 +502,9 @@ Azure Developer CLI (azd), uygulamaların Azure'a hızlıca oluşturulması ve d
 - [Kurumsal ML Boru Hattı](https://github.com/Azure-Samples/mlops-v2) - Üretime hazır ML desenleri
 
 ### Dış Şablon Koleksiyonları
-- [**Resmi AZD Şablon Galerisi**](https://azure.github.io/awesome-azd/) - Resmi ve topluluk şablonlarının seçkisi
+- [**Resmi AZD Şablon Galerisi**](https://azure.github.io/awesome-azd/) - Resmi ve topluluk şablonlarının küratörlüğü
 - [**Azure Developer CLI Şablonları**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn şablon dokümantasyonu
-- [**Örnekler Dizini**](examples/README.md) - Yerel öğrenme örnekleri ve detaylı açıklamalar
+- [**Örnekler Dizini**](examples/README.md) - Detaylı açıklamalarla yerel öğrenme örnekleri
 
 ---
 
@@ -517,7 +517,7 @@ Azure Developer CLI (azd), uygulamaların Azure'a hızlıca oluşturulması ve d
 - [**Çalışma Rehberi**](resources/study-guide.md) - Kapsamlı uygulama alıştırmaları
 
 ### Uygulamalı Atölyeler
-- [**AI Atölye Laboratuvarı**](docs/microsoft-foundry/ai-workshop-lab.md) - AI çözümlerinizi AZD ile dağıtılabilir hale getirin (2-3 saat)
+- [**AI Atölye Laboratuvarı**](docs/microsoft-foundry/ai-workshop-lab.md) - AI çözümlerinizi AZD dağıtılabilir hale getirin (2-3 saat)
 - [**Etkileşimli Atölye Rehberi**](workshop/README.md) - MkDocs ve DevContainer Ortamı ile tarayıcı tabanlı atölye
 - [**Yapılandırılmış Öğrenme Yolu**](../../workshop/docs/instructions) - 7 adımlı rehberli alıştırmalar (Keşif → Dağıtım → Özelleştirme)
 - [**Başlangıç için AZD Atölyesi**](workshop/README.md) - GitHub Codespaces entegrasyonlu tam uygulamalı atölye materyalleri
@@ -574,7 +574,7 @@ az account show
 azd env set AZURE_LOCATION "westus2"
 azd up
 
-# Veya geliştirmede daha küçük SKU'lar kullanın
+# Ya da geliştirmede daha küçük SKU'lar kullanın
 # infra/main.parameters.json dosyasını düzenleyin:
 {
   "sku": "B1"  // Instead of "P1V2"
@@ -606,7 +606,7 @@ az login
 azd auth logout
 azd auth login
 
-# Kimlik doğrulamayı doğrula
+# Kimlik doğrulamasını doğrula
 az account show
 ```
 
@@ -668,7 +668,7 @@ azd env get-values
 - **Yaygın Sorunlar Rehberi:** [Detaylı Çözümler](docs/troubleshooting/common-issues.md)
 - **AI’ye Özel Sorunlar:** [AI Sorun Giderme](docs/troubleshooting/ai-troubleshooting.md)
 - **Hata Ayıklama Rehberi:** [Adım Adım Hata Ayıklama](docs/troubleshooting/debugging.md)
-- **Yardım Alın:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Yardım Al:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
@@ -769,7 +769,7 @@ az account show
 # AZD benzersiz isimler oluşturur, ancak çakışma olursa:
 azd down --force --purge
 
-# Sonra yeni bir ortamla tekrar deneyin
+# O zaman yeni bir ortamla tekrar deneyin
 azd env new dev-v2
 azd up
 ```
@@ -828,21 +828,21 @@ azd env get-values
 - **Yaygın Sorunlar Rehberi:** [Detaylı Çözümler](docs/troubleshooting/common-issues.md)
 - **AI’ye Özel Sorunlar:** [AI Sorun Giderme](docs/troubleshooting/ai-troubleshooting.md)
 - **Hata Ayıklama Rehberi:** [Adım Adım Hata Ayıklama](docs/troubleshooting/debugging.md)
-- **Yardım Alın:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Yardım Al:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🎓 Kurs Tamamlama ve Sertifikasyon
 
 ### İlerleme Takibi
-Her bölümü tamamladıkça öğrenme ilerlemenizi takip edin:
+Her bölümü öğrenme ilerlemenizi takip edin:
 
 - [ ] **Bölüm 1**: Temel ve Hızlı Başlangıç ✅
 - [ ] **Bölüm 2**: AI-Öncelikli Geliştirme ✅  
 - [ ] **Bölüm 3**: Yapılandırma ve Kimlik Doğrulama ✅
 - [ ] **Bölüm 4**: Kod Olarak Altyapı ve Dağıtım ✅
 - [ ] **Bölüm 5**: Çoklu Ajan AI Çözümleri ✅
-- [ ] **Bölüm 6**: Dağıtım Öncesi Doğrulama ve Planlama ✅
+- [ ] **Bölüm 6**: Dağıtımdan Önce Doğrulama ve Planlama ✅
 - [ ] **Bölüm 7**: Sorun Giderme ve Hata Ayıklama ✅
 - [ ] **Bölüm 8**: Üretim ve Kurumsal Modeller ✅
 
@@ -851,7 +851,7 @@ Her bölümü tamamladıktan sonra bilginizi doğrulayın:
 1. **Pratik Alıştırma**: Bölümün uygulamalı dağıtımını tamamlayın
 2. **Bilgi Kontrolü**: Bölümünüzün SSS kısmını gözden geçirin
 3. **Topluluk Tartışması**: Deneyiminizi Azure Discord’da paylaşın
-4. **Sonraki Bölüm**: Bir sonraki zorluk seviyesine geçin
+4. **Sonraki Bölüm**: Bir sonraki karmaşıklık seviyesine geçin
 
 ### Kurs Tamamlama Avantajları
 Tüm bölümleri tamamladığınızda:
@@ -884,7 +884,7 @@ Tüm bölümleri tamamladığınızda:
 - Gelecekteki AI + AZD özellik geliştirmelerini etkileyebilirsiniz
 
 ### Kursa Katkıda Bulunma
-Katkılarınızı bekliyoruz! Ayrıntılar için lütfen [Katkıda Bulunma Rehberi](CONTRIBUTING.md)’ni okuyun:
+Katkılarınızı bekliyoruz! Ayrıntılar için lütfen [Katkı Rehberimizi](CONTRIBUTING.md) okuyun:
 - **İçerik İyileştirmeleri**: Mevcut bölümleri ve örnekleri geliştirin
 - **Yeni Örnekler**: Gerçek dünya senaryoları ve şablonlar ekleyin  
 - **Çeviri**: Çok dilli desteğin sürdürülmesine yardımcı olun

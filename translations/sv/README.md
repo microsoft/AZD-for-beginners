@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T14:10:32+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T12:19:54+00:00",
   "source_file": "README.md",
   "language_code": "sv"
 }
@@ -27,7 +27,7 @@ Följ dessa steg för att börja din AZD-läranderesa:
 3. **Gå med i Communityn**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) för expertstöd
 4. **Välj Din Lärandestig**: Välj ett kapitel nedan som matchar din erfarenhetsnivå
 
-### Flerspråkigt Stöd
+### Fler språkstöd
 
 #### Automatiska Översättningar (Alltid Uppdaterade)
 
@@ -41,7 +41,7 @@ Bemästra Azure Developer CLI (azd) genom strukturerade kapitel designade för p
 
 ### Varför Denna Kurs är Viktig för Moderna Utvecklare
 
-Baserat på insikter från Microsoft Foundry Discord-communityn vill **45 % av utvecklarna använda AZD för AI-arbetsbelastningar** men stöter på utmaningar med:
+Baserat på insikter från Microsoft Foundry Discord-communityn, **vill 45 % av utvecklarna använda AZD för AI-arbetsbelastningar** men stöter på utmaningar med:
 - Komplexa AI-arkitekturer med flera tjänster
 - Bästa praxis för AI-distribution i produktion  
 - Integration och konfiguration av Azure AI-tjänster
@@ -171,13 +171,13 @@ azd down --force --purge
 #### 💰 Kostnadsöverväganden för AI-Distributioner
 
 **Utvecklingsmiljö (Beräknat $80-150/månad):**
-- Azure OpenAI (Pay-as-you-go): $0-50/månad (baserat på tokenanvändning)
+- Azure OpenAI (Betala per användning): $0-50/månad (baserat på tokenanvändning)
 - AI Search (Basic-nivå): $75/månad
 - Container Apps (Consumption): $0-20/månad
 - Lagring (Standard): $1-5/månad
 
 **Produktionsmiljö (Beräknat $300-3,500+/månad):**
-- Azure OpenAI (PTU för konsekvent prestanda): $3,000+/månad ELLER Pay-as-you-go med hög volym
+- Azure OpenAI (PTU för konsekvent prestanda): $3,000+/månad ELLER Betala per användning med hög volym
 - AI Search (Standard-nivå): $250/månad
 - Container Apps (Dedikerad): $50-100/månad
 - Application Insights: $5-50/månad
@@ -218,7 +218,7 @@ az consumption budget list --resource-group <your-rg>
 
 #### Praktiska Övningar
 - Konfigurera flera miljöer (dev, staging, prod)
-- Ställ in autentisering med hanterad identitet
+- Sätt upp autentisering med hanterad identitet
 - Implementera miljöspecifika konfigurationer
 
 **💡 Kapitelresultat**: Hantera flera miljöer med korrekt autentisering och säkerhet
@@ -299,7 +299,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Optimera val av SKU för kostnad
 - Implementera automatiserade förkontroller
 
-**💡 Kapitelresultat**: Validera och optimera distributioner före genomförande
+**💡 Kapitelresultat**: Validera och optimera distributioner före utförande
 
 ---
 
@@ -315,7 +315,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 #### Lärresurser
 - **🔧 Vanliga problem**: [Vanliga problem](docs/troubleshooting/common-issues.md) - FAQ och lösningar
-- **🕵️ Debugging**: [Debuggingguide](docs/troubleshooting/debugging.md) - Steg-för-steg-strategier
+- **🕵️ Debugging**: [Debugging-guide](docs/troubleshooting/debugging.md) - Steg-för-steg-strategier
 - **🤖 AI-problem**: [AI-specifik felsökning](docs/troubleshooting/ai-troubleshooting.md) - Problem med AI-tjänster
 
 #### Praktiska övningar
@@ -338,8 +338,8 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Övervakning och kostnadsoptimering
 
 #### Lärresurser
-- **🏭 Produktion**: [Bästa praxis för AI i produktion](docs/microsoft-foundry/production-ai-practices.md) - Företagsmönster
-- **📝 Exempel**: [Exempel på mikrotjänster](../../examples/microservices) - Komplexa arkitekturer
+- **🏭 Produktion**: [Produktionspraxis för AI](docs/microsoft-foundry/production-ai-practices.md) - Företagsmönster
+- **📝 Exempel**: [Microservices-exempel](../../examples/microservices) - Komplexa arkitekturer
 - **📊 Övervakning**: [Integration med Application Insights](docs/pre-deployment/application-insights.md) - Övervakning
 
 #### Praktiska övningar
@@ -347,14 +347,14 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Sätt upp omfattande övervakning
 - Distribuera till produktion med korrekt styrning
 
-**💡 Kapitelresultat**: Distribuera företagsklara applikationer med fulla produktionsmöjligheter
+**💡 Kapitelresultat**: Distribuera företagsklara applikationer med full produktionskapacitet
 
 ---
 
 ## 🎓 Workshopöversikt: Praktisk inlärningsupplevelse
 
 > **⚠️ WORKSHOPSTATUS: Aktiv utveckling**  
-> Workshopmaterialet utvecklas och förfinas för närvarande. Kärnmoduler är funktionella, men vissa avancerade avsnitt är ofullständiga. Vi arbetar aktivt för att slutföra allt innehåll. [Följ framsteg →](workshop/README.md)
+> Workshopmaterialet utvecklas och förfinas för närvarande. Kärnmoduler är funktionella, men vissa avancerade avsnitt är ofullständiga. Vi arbetar aktivt för att slutföra allt innehåll. [Följ framstegen →](workshop/README.md)
 
 ### Interaktiva workshopmaterial
 **Omfattande praktisk inlärning med webbläsarbaserade verktyg och guidade övningar**
@@ -399,7 +399,7 @@ cd azd-for-beginners/workshop
 
 #### 🎯 Workshopens lärandemål
 Genom att slutföra workshopen kommer deltagarna att:
-- **Distribuera AI-applikationer i produktion**: Använd AZD med Microsoft Foundry-tjänster
+- **Distribuera produktionsklara AI-applikationer**: Använd AZD med Microsoft Foundry-tjänster
 - **Bemästra multi-agentarkitekturer**: Implementera koordinerade AI-agentlösningar
 - **Implementera säkerhetsbästa praxis**: Konfigurera autentisering och åtkomstkontroll
 - **Optimera för skalning**: Designa kostnadseffektiva och presterande distributioner
@@ -431,7 +431,7 @@ Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsgränssnitt som
 - **AI-redo mallar** - Förkonfigurerade mallar för Azure OpenAI, Cognitive Services och ML-arbetsbelastningar
 - **Säkra AI-distributioner** - Inbyggda säkerhetsmönster för AI-tjänster, API-nycklar och modellslutpunkter  
 - **Produktionsmönster för AI** - Bästa praxis för skalbara, kostnadseffektiva AI-applikationsdistributioner
-- **End-to-End AI-arbetsflöden** - Från modellutveckling till produktionsdistribution med korrekt övervakning
+- **End-to-end AI-arbetsflöden** - Från modellutveckling till produktionsdistribution med korrekt övervakning
 - **Kostnadsoptimering** - Smart resursallokering och skalningsstrategier för AI-arbetsbelastningar
 - **Microsoft Foundry-integration** - Sömlös koppling till Microsoft Foundry-modellkatalog och slutpunkter
 
@@ -446,7 +446,7 @@ Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsgränssnitt som
 
 | Mall | Kapitel | Komplexitet | Tjänster | Typ |
 |----------|---------|------------|----------|------|
-| [**Kom igång med AI-chatt**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Extern |
+| [**Kom igång med AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Extern |
 | [**Kom igång med AI-agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Kapitel 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Extern |
 | [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Extern |
 | [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Extern |
@@ -484,7 +484,7 @@ Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsgränssnitt som
   - [Enkel Flask-API](../../examples/container-app/simple-flask-api) - Grundläggande REST-API med scale-to-zero
   - [Mikrotjänstarkitektur](../../examples/container-app/microservices) - Produktionsklar multi-service-distribution
   - Snabbstart, produktion och avancerade distributionsmönster
-  - Riktlinjer för övervakning, säkerhet och kostnadsoptimering
+  - Övervakning, säkerhet och kostnadsoptimeringsvägledning
 
 #### Externa exempel - Enkla applikationer (Kapitel 1-2)
 **Klona dessa Azure Samples-repos för att komma igång:**
@@ -494,7 +494,7 @@ Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsgränssnitt som
 
 #### Externa exempel - Databasintegration (Kapitel 3-4)  
 - [Databasapp - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Mönster för databasanslutning
-- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless dataarbetsflöde
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverlösa dataarbetsflöden
 
 #### Externa exempel - Avancerade mönster (Kapitel 4-8)
 - [Java-mikrotjänster](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service-arkitekturer
@@ -511,18 +511,18 @@ Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsgränssnitt som
 ## 📚 Lärresurser & Referenser
 
 ### Snabbreferenser
-- [**Kommandocheatsheet**](resources/cheat-sheet.md) - Viktiga azd-kommandon organiserade efter kapitel
-- [**Ordlista**](resources/glossary.md) - Azure- och azd-terminologi  
-- [**FAQ**](resources/faq.md) - Vanliga frågor organiserade efter lärandekapitel
+- [**Kommandotabell**](resources/cheat-sheet.md) - Viktiga azd-kommandon organiserade efter kapitel
+- [**Ordlista**](resources/glossary.md) - Azure- och azd-termer  
+- [**Vanliga frågor**](resources/faq.md) - Vanliga frågor organiserade efter lärandekapitel
 - [**Studieguide**](resources/study-guide.md) - Omfattande övningar
 
 ### Praktiska Workshops
 - [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Gör dina AI-lösningar AZD-distribuerbara (2-3 timmar)
 - [**Interaktiv Workshopguide**](workshop/README.md) - Webbläsarbaserad workshop med MkDocs och DevContainer-miljö
-- [**Strukturerad Lärandebana**](../../workshop/docs/instructions) - 7-stegs guidade övningar (Upptäckt → Distribution → Anpassning)
-- [**AZD För Nybörjare Workshop**](workshop/README.md) - Kompletta praktiska workshopmaterial med GitHub Codespaces-integration
+- [**Strukturerad lärandebana**](../../workshop/docs/instructions) - 7-stegs guidade övningar (Upptäckt → Distribution → Anpassning)
+- [**AZD för nybörjare Workshop**](workshop/README.md) - Kompletta praktiska workshopmaterial med GitHub Codespaces-integration
 
-### Externa Lärresurser
+### Externa lärresurser
 - [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Prisräknare](https://azure.microsoft.com/pricing/calculator/)
@@ -530,11 +530,11 @@ Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsgränssnitt som
 
 ---
 
-## 🔧 Snabbguide för Felsökning
+## 🔧 Snabb felsökningsguide
 
 **Vanliga problem som nybörjare stöter på och omedelbara lösningar:**
 
-### ❌ "azd: command not found"
+### ❌ "azd: kommando hittades inte"
 
 ```bash
 # Installera AZD först
@@ -551,7 +551,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 azd version
 ```
 
-### ❌ "No subscription found" eller "Subscription not set"
+### ❌ "Ingen prenumeration hittades" eller "Prenumeration inte inställd"
 
 ```bash
 # Lista tillgängliga prenumerationer
@@ -567,7 +567,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 
-### ❌ "InsufficientQuota" eller "Quota exceeded"
+### ❌ "Otillräcklig kvot" eller "Kvot överskriden"
 
 ```bash
 # Prova en annan Azure-region
@@ -596,7 +596,7 @@ azd show
 azd logs
 ```
 
-### ❌ "Authentication failed" eller "Token expired"
+### ❌ "Autentisering misslyckades" eller "Token har gått ut"
 
 ```bash
 # Autentisera igen
@@ -610,7 +610,7 @@ azd auth login
 az account show
 ```
 
-### ❌ "Resource already exists" eller namnkrockar
+### ❌ "Resurs finns redan" eller namnkrockar
 
 ```bash
 # AZD genererar unika namn, men vid konflikt:
@@ -632,12 +632,12 @@ azd up
 # Kontrollera framsteg
 azd show
 
-# Om fast >30 minuter, kontrollera Azure-portalen:
+# Om fast i >30 minuter, kontrollera Azure-portalen:
 azd monitor
 # Leta efter misslyckade distributioner
 ```
 
-### ❌ "Permission denied" eller "Forbidden"
+### ❌ "Behörighet nekad" eller "Förbjudet"
 
 ```bash
 # Kontrollera din Azure-roll
@@ -672,12 +672,12 @@ azd env get-values
 
 ---
 
-## 🔧 Snabbguide för Felsökning
+## 🔧 Snabb felsökningsguide
 
 **Vanliga problem som nybörjare stöter på och omedelbara lösningar:**
 
 <details>
-<summary><strong>❌ "azd: command not found"</strong></summary>
+<summary><strong>❌ "azd: kommando hittades inte"</strong></summary>
 
 ```bash
 # Installera AZD först
@@ -696,7 +696,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "No subscription found" eller "Subscription not set"</strong></summary>
+<summary><strong>❌ "Ingen prenumeration hittades" eller "Prenumeration inte inställd"</strong></summary>
 
 ```bash
 # Lista tillgängliga prenumerationer
@@ -714,7 +714,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "InsufficientQuota" eller "Quota exceeded"</strong></summary>
+<summary><strong>❌ "Otillräcklig kvot" eller "Kvot överskriden"</strong></summary>
 
 ```bash
 # Prova en annan Azure-region
@@ -747,7 +747,7 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ "Authentication failed" eller "Token expired"</strong></summary>
+<summary><strong>❌ "Autentisering misslyckades" eller "Token har gått ut"</strong></summary>
 
 ```bash
 # Autentisera igen
@@ -763,7 +763,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" eller namnkrockar</strong></summary>
+<summary><strong>❌ "Resurs finns redan" eller namnkrockar</strong></summary>
 
 ```bash
 # AZD genererar unika namn, men vid konflikt:
@@ -787,14 +787,14 @@ azd up
 # Kontrollera framsteg
 azd show
 
-# Om fast >30 minuter, kontrollera Azure-portalen:
+# Om fast i >30 minuter, kontrollera Azure-portalen:
 azd monitor
 # Leta efter misslyckade distributioner
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Permission denied" eller "Forbidden"</strong></summary>
+<summary><strong>❌ "Behörighet nekad" eller "Förbjudet"</strong></summary>
 
 ```bash
 # Kontrollera din Azure-roll
@@ -838,11 +838,11 @@ azd env get-values
 Följ din lärandeprogress genom varje kapitel:
 
 - [ ] **Kapitel 1**: Grundläggande & Snabbstart ✅
-- [ ] **Kapitel 2**: AI-Först Utveckling ✅  
+- [ ] **Kapitel 2**: AI-först utveckling ✅  
 - [ ] **Kapitel 3**: Konfiguration & Autentisering ✅
-- [ ] **Kapitel 4**: Infrastruktur som Kod & Distribution ✅
-- [ ] **Kapitel 5**: Multi-Agent AI-lösningar ✅
-- [ ] **Kapitel 6**: Förvalidering & Planering inför distribution ✅
+- [ ] **Kapitel 4**: Infrastruktur som kod & Distribution ✅
+- [ ] **Kapitel 5**: Multi-agent AI-lösningar ✅
+- [ ] **Kapitel 6**: Förvalidering & Planering före distribution ✅
 - [ ] **Kapitel 7**: Felsökning & Debugging ✅
 - [ ] **Kapitel 8**: Produktion & Företagsmönster ✅
 
@@ -854,7 +854,7 @@ Efter att ha slutfört varje kapitel, verifiera dina kunskaper genom att:
 4. **Nästa kapitel**: Gå vidare till nästa komplexitetsnivå
 
 ### Fördelar med kursavslutning
-När du slutfört alla kapitel kommer du att ha:
+När du har slutfört alla kapitel kommer du att ha:
 - **Produktionserfarenhet**: Distribuerat riktiga AI-applikationer till Azure
 - **Professionella färdigheter**: Företagsredo distributionsförmåga  
 - **Communityerkännande**: Aktiv medlem i Azure-utvecklargemenskapen
@@ -874,7 +874,7 @@ När du slutfört alla kapitel kommer du att ha:
 
 **Senaste omröstningsresultat från #Azure-kanalen:**
 - **45%** av utvecklare vill använda AZD för AI-arbetsbelastningar
-- **Största utmaningar**: Multi-service-distributioner, hantering av autentiseringsuppgifter, produktionsberedskap  
+- **Största utmaningar**: Multi-service distributioner, hantering av autentiseringsuppgifter, produktionsberedskap  
 - **Mest efterfrågade**: AI-specifika mallar, felsökningsguider, bästa praxis
 
 **Gå med i vår community för att:**
@@ -896,7 +896,7 @@ Vi välkomnar bidrag! Läs vår [Bidragsguide](CONTRIBUTING.md) för detaljer om
 ## 📄 Kursinformation
 
 ### Licens
-Detta projekt är licensierat under MIT-licensen - se [LICENSE](../../LICENSE) för detaljer.
+Detta projekt är licensierat under MIT-licensen - se [LICENSE](../../LICENSE)-filen för detaljer.
 
 ### Relaterade Microsoft-lärresurser
 
@@ -958,5 +958,5 @@ Vårt team producerar andra omfattande lärandekurser:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

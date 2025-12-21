@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "7c5d2bb409800e22e74f34ee0ed12bed",
-  "translation_date": "2025-12-17T16:48:22+00:00",
+  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
+  "translation_date": "2025-12-19T14:59:16+00:00",
   "source_file": "README.md",
   "language_code": "pcm"
 }
@@ -95,7 +95,7 @@ azd up
 ```bash
 # After you don finish Chapter 1, you go fit do:
 azd version              # Show di version wey dem don install
-azd init --template todo-nodejs-mongo  # E dey start di project
+azd init --template todo-nodejs-mongo  # E dey start project
 azd up                  # E dey deploy go Azure
 azd show                # E dey show di URL wey di app dey run for
 # Di app go open for browser and e go work
@@ -109,9 +109,9 @@ azd down --force --purge  # E dey clean up resources
 ```bash
 # After you don finish Chapter 1, you go fit do:
 azd version              # Show di version wey dem don install
-azd init --template todo-nodejs-mongo  # E dey start di project
+azd init --template todo-nodejs-mongo  # E dey start project
 azd up                  # E dey deploy go Azure
-azd show                # E dey show di URL wey di app dey run
+azd show                # E dey show di URL wey di app dey run for
 # Di app go open for browser and e go work
 azd down --force --purge  # E dey clean up resources
 ```
@@ -154,12 +154,12 @@ azd init --template agent-openai-python-prompty
 
 **✅ Success Validation:**
 ```bash
-# After Chapter 2, you go fit do:
+# After Chapter 2, you for fit:
 azd init --template azure-search-openai-demo
 azd up
 # Test di AI chat interface
 # Ask questions and get AI-powered responses wit sources
-# Make sure say search integration dey work
+# Verify say search integration dey work
 azd monitor  # Check say Application Insights dey show telemetry
 azd down --force --purge
 ```
@@ -387,8 +387,8 @@ The workshop dey follow **Discovery → Deployment → Customization** methodolo
 
 #### 🚀 Getting Started with the Workshop
 ```bash
-# Option 1: GitHub Codespaces (Wetin dem recommend)
-# Click "Code" → "Create codespace on main" for inside the repository
+# Option 1: GitHub Codespaces (Na wetin we recommend)
+# Click "Code" → "Create codespace on main" for di repository
 
 # Option 2: Local Development
 git clone https://github.com/microsoft/azd-for-beginners.git
@@ -416,7 +416,7 @@ By completing the workshop, participants go:
 
 ## 📖 Wetin be Azure Developer CLI?
 
-Azure Developer CLI (azd) na developer-centric command-line interface wey dey accelerate di process of building and deploying applications to Azure. E dey provide:
+Azure Developer CLI (azd) na developer-centric command-line interface wey dey accelerate the process of building and deploying applications to Azure. E dey provide:
 
 - **Template-based deployments** - Use pre-built templates for common application patterns
 - **Infrastructure as Code** - Manage Azure resources using Bicep or Terraform  
@@ -425,7 +425,7 @@ Azure Developer CLI (azd) na developer-centric command-line interface wey dey ac
 
 ### **AZD + Microsoft Foundry: Perfect for AI Deployments**
 
-**Why AZD for AI Solutions?** AZD dey address di top challenges wey AI developers dey face:
+**Why AZD for AI Solutions?** AZD dey address the top challenges wey AI developers dey face:
 
 - **AI-Ready Templates** - Pre-configured templates for Azure OpenAI, Cognitive Services, and ML workloads
 - **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints  
@@ -546,7 +546,7 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Make sure say e install well
+# Check say installation don correct
 azd version
 ```
 
@@ -580,10 +580,10 @@ azd up
 }
 ```
 
-### ❌ "azd up" fail for middle
+### ❌ "azd up" fails halfway through
 
 ```bash
-# Option 1: Comot di dirt den try again
+# Option 1: Clean am and try again
 azd down --force --purge
 azd up
 
@@ -609,7 +609,7 @@ azd auth login
 az account show
 ```
 
-### ❌ "Resource already exists" or naming wahala
+### ❌ "Resource already exists" or naming conflicts
 
 ```bash
 # AZD dey generate unique names, but if e get wahala:
@@ -622,7 +622,7 @@ azd up
 
 ### ❌ Template deployment dey take too long
 
-**Normal wait time dem be:**
+**Normal wait times:**
 - Simple web app: 5-10 minutes
 - App wey get database: 10-15 minutes
 - AI applications: 15-25 minutes (OpenAI provisioning slow)
@@ -729,10 +729,10 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" fail for middle</strong></summary>
+<summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
-# Option 1: Clean am and try again
+# Option 1: Comot di dirt den try again
 azd down --force --purge
 azd up
 
@@ -762,7 +762,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" or naming wahala</strong></summary>
+<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
 # AZD dey generate unique names, but if e get wahala:
@@ -777,7 +777,7 @@ azd up
 <details>
 <summary><strong>❌ Template deployment dey take too long</strong></summary>
 
-**Normal wait time dem be:**
+**Normal wait times:**
 - Simple web app: 5-10 minutes
 - App wey get database: 10-15 minutes
 - AI applications: 15-25 minutes (OpenAI provisioning slow)
@@ -810,7 +810,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 <summary><strong>❌ No fit find deployed application URL</strong></summary>
 
 ```bash
-# Show all di service endpoints
+# Show all service endpoints
 azd show
 
 # Or open Azure Portal
@@ -834,7 +834,7 @@ azd env get-values
 ## 🎓 Course Completion & Certification
 
 ### Progress Tracking
-Track how your learning dey go for each chapter:
+Track your learning progress through each chapter:
 
 - [ ] **Chapter 1**: Foundation & Quick Start ✅
 - [ ] **Chapter 2**: AI-First Development ✅  
@@ -846,14 +846,14 @@ Track how your learning dey go for each chapter:
 - [ ] **Chapter 8**: Production & Enterprise Patterns ✅
 
 ### Learning Verification
-After you finish each chapter, check your knowledge by:
+After you don finish each chapter, check your knowledge by:
 1. **Practical Exercise**: Complete the chapter hands-on deployment
 2. **Knowledge Check**: Review the FAQ section for your chapter
 3. **Community Discussion**: Share your experience for Azure Discord
-4. **Next Chapter**: Move go the next level of difficulty
+4. **Next Chapter**: Move go the next level of complexity
 
 ### Course Completion Benefits
-When you finish all chapters, you go get:
+When you don finish all chapters, you go get:
 - **Production Experience**: Deployed real AI applications for Azure
 - **Professional Skills**: Enterprise-ready deployment skills  
 - **Community Recognition**: Active member for Azure developer community
@@ -888,7 +888,7 @@ We dey welcome contributions! Abeg read our [Contributing Guide](CONTRIBUTING.md
 - **New Examples**: Add real-world scenarios and templates  
 - **Translation**: Help maintain multi-language support
 - **Bug Reports**: Make am more correct and clear
-- **Community Standards**: Follow our inclusive community rules
+- **Community Standards**: Follow our inclusive community guidelines
 
 ---
 
@@ -957,5 +957,5 @@ Our team dey produce other complete learning courses:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translation fit get some mistakes or no too correct. Di original document wey e dey for im own language na di correct one. If na serious matter, e better make human professional translate am. We no go responsible for any misunderstanding or wrong meaning wey fit come from dis translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translation fit get some errors or wahala. Di original document wey dey im own language na di correct one. If na serious matter, e better make human professional translate am. We no go responsible for any misunderstanding or wrong meaning wey fit show because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
