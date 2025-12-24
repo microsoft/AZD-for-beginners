@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
-  "translation_date": "2025-12-19T09:45:48+00:00",
+  "original_hash": "1caf5e63f84a4cdffbeb8d0fe5fa3fa8",
+  "translation_date": "2025-12-21T10:13:37+00:00",
   "source_file": "README.md",
   "language_code": "en"
 }
@@ -177,7 +177,7 @@ azd down --force --purge
 - Storage (Standard): $1-5/month
 
 **Production Environment (Estimated $300-3,500+/month):**
-- Azure OpenAI (PTU for consistent performance): $3,000+/month OR Pay-as-you-go with high volume
+- Azure OpenAI (PTU for consistent performance): $3,000+/month OR Pay-as-go with high volume
 - AI Search (Standard tier): $250/month
 - Container Apps (Dedicated): $50-100/month
 - Application Insights: $5-50/month
@@ -261,7 +261,6 @@ az consumption budget list --resource-group <your-rg>
 
 #### Learning Resources
 - **🤖 Featured Project**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
-
 - **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
 - **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - Patterns
 
@@ -766,10 +765,10 @@ az account show
 <summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
-# AZD generates unique names, but if conflict:
+# AZD generates unique names, but if there is a conflict:
 azd down --force --purge
 
-# Then retry with fresh environment
+# Then retry with a fresh environment
 azd env new dev-v2
 azd up
 ```
@@ -957,6 +956,8 @@ Our team produces other comprehensive learning courses:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
+The text is already in English. Here it is:
+
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

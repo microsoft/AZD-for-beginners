@@ -1,85 +1,85 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "9d6a833ed38e4fb2c726d3955fc8a726",
-  "translation_date": "2025-12-19T12:26:09+00:00",
+  "original_hash": "1caf5e63f84a4cdffbeb8d0fe5fa3fa8",
+  "translation_date": "2025-12-21T16:44:30+00:00",
   "source_file": "README.md",
   "language_code": "da"
 }
 -->
-# AZD For Beginners: En Struktureret Læringsrejse
+# AZD For Beginners: A Structured Learning Journey
 
-![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.da.png) 
+![AZD-for-begyndere](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.da.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub-overvågere](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub-forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub-stjerner](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-## Kom Godt I Gang Med Dette Kursus
+## Kom godt i gang med dette kursus
 
-Følg disse trin for at begynde din AZD læringsrejse:
+Følg disse trin for at begynde din AZD-læringsrejse:
 
-1. **Fork Repositoryet**: Klik [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Klon Repositoryet**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **Deltag i Fællesskabet**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) for ekspertstøtte
-4. **Vælg Din Læringssti**: Vælg et kapitel nedenfor, der matcher dit erfaringsniveau
+1. **Fork repositoryet**: Klik [![GitHub-forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Klon repositoryet**: `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. **Deltag i fællesskabet**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) for ekspertstøtte
+4. **Vælg din læringsvej**: Vælg et kapitel nedenfor, der matcher dit erfaringsniveau
 
-### Multisprog Support
+### Flersproget support
 
-#### Automatiske Oversættelser (Altid Opdaterede)
+#### Automatiske oversættelser (altid opdaterede)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](./README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[Arabisk](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarisk](../bg/README.md) | [Burmesisk (Myanmar)](../my/README.md) | [Kinesisk (forenklet)](../zh/README.md) | [Kinesisk (traditionelt, Hong Kong)](../hk/README.md) | [Kinesisk (traditionelt, Macau)](../mo/README.md) | [Kinesisk (traditionelt, Taiwan)](../tw/README.md) | [Kroatisk](../hr/README.md) | [Tjekkisk](../cs/README.md) | [Dansk](./README.md) | [Hollandsk](../nl/README.md) | [Estisk](../et/README.md) | [Finsk](../fi/README.md) | [Fransk](../fr/README.md) | [Tysk](../de/README.md) | [Græsk](../el/README.md) | [Hebraisk](../he/README.md) | [Hindi](../hi/README.md) | [Ungarsk](../hu/README.md) | [Indonesisk](../id/README.md) | [Italiensk](../it/README.md) | [Japansk](../ja/README.md) | [Kannada](../kn/README.md) | [Koreansk](../ko/README.md) | [Litauisk](../lt/README.md) | [Malaysisk](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigeriansk Pidgin](../pcm/README.md) | [Norsk](../no/README.md) | [Persisk (Farsi)](../fa/README.md) | [Polsk](../pl/README.md) | [Portugisisk (Brasilien)](../br/README.md) | [Portugisisk (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Rumænsk](../ro/README.md) | [Russisk](../ru/README.md) | [Serbisk (kyrillisk)](../sr/README.md) | [Slovakisk](../sk/README.md) | [Slovensk](../sl/README.md) | [Spansk](../es/README.md) | [Swahili](../sw/README.md) | [Svensk](../sv/README.md) | [Tagalog (filippinsk)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Tyrkisk](../tr/README.md) | [Ukrainsk](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamesisk](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## Kursusoversigt
 
-Bliv mester i Azure Developer CLI (azd) gennem strukturerede kapitler designet til progressiv læring. **Særligt fokus på AI-applikationsudrulning med Microsoft Foundry-integration.**
+Bliv ekspert i Azure Developer CLI (azd) gennem strukturerede kapitler designet til progressiv læring. **Særligt fokus på udrulning af AI-applikationer med Microsoft Foundry-integration.**
 
-### Hvorfor Dette Kursus er Vigtigt for Moderne Udviklere
+### Hvorfor dette kursus er essentielt for moderne udviklere
 
-Baseret på Microsoft Foundry Discord-fællesskabets indsigt ønsker **45% af udviklerne at bruge AZD til AI-arbejdsbelastninger**, men støder på udfordringer med:
+Baseret på indsigter fra Microsoft Foundry Discord-fællesskabet ønsker **45% af udviklerne at bruge AZD til AI-workloads**, men møder udfordringer med:
 - Komplekse multi-service AI-arkitekturer
-- Bedste praksis for AI-udrulning i produktion  
-- Azure AI service integration og konfiguration
-- Omkostningsoptimering for AI-arbejdsbelastninger
+- Best practices for AI-udrulning i produktion  
+- Integration og konfiguration af Azure AI-tjenester
+- Omkostningsoptimering for AI-workloads
 - Fejlfinding af AI-specifikke udrulningsproblemer
 
 ### Læringsmål
 
 Ved at gennemføre dette strukturerede kursus vil du:
-- **Beherske AZD Grundlæggende**: Kernekoncepter, installation og konfiguration
+- **Mestre AZD-grundlæggende**: Kernekoncepter, installation og konfiguration
 - **Udrulle AI-applikationer**: Brug AZD med Microsoft Foundry-tjenester
 - **Implementere Infrastruktur som kode**: Administrer Azure-ressourcer med Bicep-skabeloner
-- **Fejlsøge Udrulninger**: Løs almindelige problemer og fejlfind
-- **Optimere til Produktion**: Sikkerhed, skalering, overvågning og omkostningsstyring
-- **Bygge Multi-Agent Løsninger**: Udrul komplekse AI-arkitekturer
+- **Fejlfinde udrulninger**: Løs almindelige problemer og debug fejl
+- **Optimere til produktion**: Sikkerhed, skalering, overvågning og omkostningsstyring
+- **Bygge multi-agent løsninger**: Udrul komplekse AI-arkitekturer
 
 ## 📚 Læringskapitler
 
-*Vælg din læringssti baseret på erfaringsniveau og mål*
+*Vælg din læringsvej baseret på erfaringsniveau og mål*
 
-### 🚀 Kapitel 1: Grundlag & Hurtig Start
-**Forudsætninger**: Azure-abonnement, grundlæggende kendskab til kommandolinje  
+### 🚀 Kapitel 1: Fundament & Hurtigstart
+**Forudsætninger**: Azure-abonnement, grundlæggende kendskab til kommandolinjen  
 **Varighed**: 30-45 minutter  
 **Kompleksitet**: ⭐
 
-#### Hvad Du Vil Lære
-- Forstå Azure Developer CLI grundlæggende
+#### Hvad du vil lære
+- Forstå Azure Developer CLI-grundlæggende
 - Installere AZD på din platform
 - Din første succesfulde udrulning
 
 #### Læringsressourcer
-- **🎯 Start Her**: [Hvad er Azure Developer CLI?](../..)
-- **📖 Teori**: [AZD Basics](docs/getting-started/azd-basics.md) - Kernekoncepter og terminologi
-- **⚙️ Opsætning**: [Installation & Opsætning](docs/getting-started/installation.md) - Platform-specifikke guider
-- **🛠️ Praktisk**: [Dit Første Projekt](docs/getting-started/first-project.md) - Trin-for-trin vejledning
-- **📋 Hurtig Reference**: [Kommando Oversigt](resources/cheat-sheet.md)
+- **🎯 Start her**: [Hvad er Azure Developer CLI?](../..)
+- **📖 Teori**: [AZD Grundlæggende](docs/getting-started/azd-basics.md) - Kernekoncepter og terminologi
+- **⚙️ Opsætning**: [Installation & Opsætning](docs/getting-started/installation.md) - Platform-specifikke vejledninger
+- **🛠️ Praktisk**: [Dit første projekt](docs/getting-started/first-project.md) - Trin-for-trin vejledning
+- **📋 Hurtig reference**: [Kommandooversigt](resources/cheat-sheet.md)
 
-#### Praktiske Øvelser
+#### Praktiske øvelser
 ```bash
 # Hurtig installationskontrol
 azd version
@@ -89,57 +89,57 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Kapitel Resultat**: Udrul en simpel webapplikation til Azure med AZD
+**💡 Kapitelresultat**: Udrul en simpel webapplikation til Azure ved hjælp af AZD
 
 **✅ Succesvalidering:**
 ```bash
-# Efter at have gennemført kapitel 1, bør du kunne:
+# Efter at have gennemført kapitel 1, bør du være i stand til:
+azd version              # Viser den installerede version
+azd init --template todo-nodejs-mongo  # Initialiserer projektet
+azd up                  # Udruller til Azure
+azd show                # Viser URL'en for den kørende app
+# Applikationen åbner i browseren og fungerer
+azd down --force --purge  # Rydder op i ressourcerne
+```
+
+**📊 Tidsforbrug:** 30-45 minutter  
+**📈 Færdighedsniveau efter:** Kan selvstændigt deployere grundlæggende applikationer
+
+**✅ Succesvalidering:**
+```bash
+# Efter at have gennemført kapitel 1 bør du kunne:
 azd version              # Viser installeret version
 azd init --template todo-nodejs-mongo  # Initialiserer projekt
 azd up                  # Udruller til Azure
-azd show                # Viser kørende app URL
+azd show                # Viser URL for den kørende app
 # Applikationen åbner i browseren og fungerer
 azd down --force --purge  # Rydder op i ressourcer
 ```
 
 **📊 Tidsforbrug:** 30-45 minutter  
-**📈 Færdighedsniveau Efter:** Kan udrulle grundlæggende applikationer selvstændigt
-
-**✅ Succesvalidering:**
-```bash
-# Efter at have gennemført kapitel 1, bør du kunne:
-azd version              # Viser installeret version
-azd init --template todo-nodejs-mongo  # Initialiserer projekt
-azd up                  # Udruller til Azure
-azd show                # Viser kørende app URL
-# Applikationen åbner i browseren og fungerer
-azd down --force --purge  # Rydder op i ressourcer
-```
-
-**📊 Tidsforbrug:** 30-45 minutter  
-**📈 Færdighedsniveau Efter:** Kan udrulle grundlæggende applikationer selvstændigt
+**📈 Færdighedsniveau efter:** Kan selvstændigt deployere grundlæggende applikationer
 
 ---
 
-### 🤖 Kapitel 2: AI-Første Udvikling (Anbefalet til AI-udviklere)
+### 🤖 Kapitel 2: AI-første udvikling (Anbefalet for AI-udviklere)
 **Forudsætninger**: Kapitel 1 gennemført  
 **Varighed**: 1-2 timer  
 **Kompleksitet**: ⭐⭐
 
-#### Hvad Du Vil Lære
-- Microsoft Foundry integration med AZD
+#### Hvad du vil lære
+- Microsoft Foundry-integration med AZD
 - Udrulning af AI-drevne applikationer
-- Forståelse af AI service konfigurationer
+- Forståelse af AI-tjenestekonfigurationer
 
 #### Læringsressourcer
-- **🎯 Start Her**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **📖 Mønstre**: [AI Model Udrulning](docs/microsoft-foundry/ai-model-deployment.md) - Udrul og administrer AI-modeller
-- **🛠️ Workshop**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - Gør dine AI-løsninger AZD-klar
-- **🎥 Interaktiv Guide**: [Workshop Materialer](workshop/README.md) - Browser-baseret læring med MkDocs * DevContainer Miljø
-- **📋 Skabeloner**: [Microsoft Foundry Skabeloner](../..)
-- **📝 Eksempler**: [AZD Udrulningseksempler](examples/README.md)
+- **🎯 Start her**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📖 Mønstre**: [AI-model-udrulning](docs/microsoft-foundry/ai-model-deployment.md) - Udrul og administrer AI-modeller
+- **🛠️ Workshop**: [AI Workshop-lab](docs/microsoft-foundry/ai-workshop-lab.md) - Gør dine AI-løsninger AZD-klar
+- **🎥 Interaktiv vejledning**: [Workshop Materials](workshop/README.md) - Browser-baseret læring med MkDocs * DevContainer Environment
+- **📋 Skabeloner**: [Microsoft Foundry-skabeloner](../..)
+- **📝 Eksempler**: [AZD Deployment Examples](examples/README.md)
 
-#### Praktiske Øvelser
+#### Praktiske øvelser
 ```bash
 # Udrul din første AI-applikation
 azd init --template azure-search-openai-demo
@@ -150,49 +150,49 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Kapitel Resultat**: Udrul og konfigurer en AI-drevet chatapplikation med RAG-funktioner
+**💡 Kapitelresultat**: Udrul og konfigurer en AI-drevet chatapplikation med RAG-funktioner
 
 **✅ Succesvalidering:**
 ```bash
-# Efter kapitel 2 bør du kunne:
+# Efter kapitel 2 bør du være i stand til at:
 azd init --template azure-search-openai-demo
 azd up
 # Teste AI-chatgrænsefladen
 # Stille spørgsmål og få AI-drevne svar med kilder
-# Bekræfte at søgeintegration fungerer
-azd monitor  # Kontrollere at Application Insights viser telemetri
+# Bekræfte, at søgeintegrationen fungerer
+azd monitor  # Kontrollere, at Application Insights viser telemetri
 azd down --force --purge
 ```
 
 **📊 Tidsforbrug:** 1-2 timer  
-**📈 Færdighedsniveau Efter:** Kan udrulle og konfigurere produktionsklare AI-applikationer  
-**💰 Omkostningsbevidsthed:** Forstå udviklingsomkostninger på $80-150/måned, produktionsomkostninger på $300-3500/måned
+**📈 Færdighedsniveau efter:** Kan udrulle og konfigurere produktionsklare AI-applikationer  
+**💰 Omkostningsbevidsthed:** Forstå $80-150/month udviklingsomkostninger, $300-3500/month produktionsomkostninger
 
-#### 💰 Omkostningshensyn for AI-Udrulninger
+#### 💰 Omkostningsovervejelser for AI-udrulninger
 
-**Udviklingsmiljø (Estimeret $80-150/måned):**
-- Azure OpenAI (Betal efter forbrug): $0-50/måned (baseret på tokenforbrug)
-- AI Search (Basisniveau): $75/måned
-- Container Apps (Forbrug): $0-20/måned
-- Storage (Standard): $1-5/måned
+**Udviklingsmiljø (anslået $80-150/pr. måned):**
+- Azure OpenAI (Pay-as-you-go): $0-50/pr. måned (baseret på tokenforbrug)
+- AI Search (Basic tier): $75/pr. måned
+- Container Apps (Consumption): $0-20/pr. måned
+- Storage (Standard): $1-5/pr. måned
 
-**Produktionsmiljø (Estimeret $300-3.500+/måned):**
-- Azure OpenAI (PTU for konsistent ydeevne): $3.000+/måned ELLER Betal efter forbrug med højt volumen
-- AI Search (Standardniveau): $250/måned
-- Container Apps (Dedikeret): $50-100/måned
-- Application Insights: $5-50/måned
-- Storage (Premium): $10-50/måned
+**Produktionsmiljø (anslået $300-3,500+/pr. måned):**
+- Azure OpenAI (PTU for konsistent ydeevne): $3,000+/pr. måned ELLER Pay-as-you-go ved stort forbrug
+- AI Search (Standard tier): $250/pr. måned
+- Container Apps (Dedicated): $50-100/pr. måned
+- Application Insights: $5-50/pr. måned
+- Storage (Premium): $10-50/pr. måned
 
-**💡 Omkostningsoptimeringstips:**
-- Brug **Gratis Niveau** Azure OpenAI til læring (50.000 tokens/måned inkluderet)
-- Kør `azd down` for at frigøre ressourcer, når du ikke aktivt udvikler
-- Start med forbrugsbaseret fakturering, opgrader til PTU kun til produktion
+**💡 Tips til omkostningsoptimering:**
+- Brug **Free Tier** Azure OpenAI til læring (50,000 tokens pr. måned inkluderet)
+- Kør `azd down` for at deallokere ressourcer, når du ikke aktivt udvikler
+- Start med forbrugbaseret fakturering, opgrader til PTU kun til produktion
 - Brug `azd provision --preview` for at estimere omkostninger før udrulning
-- Aktiver autoskalering: betal kun for faktisk brug
+- Aktivér autoskalering: betal kun for faktisk brug
 
 **Omkostningsovervågning:**
 ```bash
-# Tjek estimerede månedlige omkostninger
+# Tjek anslåede månedlige omkostninger
 azd provision --preview
 
 # Overvåg faktiske omkostninger i Azure-portalen
@@ -206,186 +206,186 @@ az consumption budget list --resource-group <your-rg>
 **Varighed**: 45-60 minutter  
 **Kompleksitet**: ⭐⭐
 
-#### Hvad Du Vil Lære
+#### Hvad du vil lære
 - Miljøkonfiguration og -styring
-- Autentificering og sikkerhedspraksis
-- Ressourcenavne og organisering
+- Autentificering og sikkerheds bedste praksis
+- Ressource-navngivning og organisering
 
 #### Læringsressourcer
-- **📖 Konfiguration**: [Konfigurationsguide](docs/getting-started/configuration.md) - Miljøopsætning
-- **🔐 Sikkerhed**: [Autentificeringsmønstre og managed identity](docs/getting-started/authsecurity.md) - Autentificeringsmønstre
-- **📝 Eksempler**: [Database App Eksempel](examples/database-app/README.md) - AZD Database Eksempler
+- **📖 Konfiguration**: [Configuration Guide](docs/getting-started/configuration.md) - Miljøopsætning
+- **🔐 Sikkerhed**: [Authentication patterns and managed identity](docs/getting-started/authsecurity.md) - Autentificeringsmønstre
+- **📝 Eksempler**: [Database App Example](examples/database-app/README.md) - AZD Database-eksempler
 
-#### Praktiske Øvelser
+#### Praktiske øvelser
 - Konfigurer flere miljøer (dev, staging, prod)
-- Opsæt managed identity autentificering
+- Opsæt managed identity-autentificering
 - Implementer miljøspecifikke konfigurationer
 
-**💡 Kapitel Resultat**: Administrer flere miljøer med korrekt autentificering og sikkerhed
+**💡 Kapitelresultat**: Administrer flere miljøer med korrekt autentificering og sikkerhed
 
 ---
 
 ### 🏗️ Kapitel 4: Infrastruktur som kode & Udrulning
 **Forudsætninger**: Kapitel 1-3 gennemført  
-**Varighed**: 1-1,5 timer  
+**Varighed**: 1-1.5 timer  
 **Kompleksitet**: ⭐⭐⭐
 
-#### Hvad Du Vil Lære
+#### Hvad du vil lære
 - Avancerede udrulningsmønstre
 - Infrastruktur som kode med Bicep
-- Ressourceprovisioneringsstrategier
+- Strategier for ressourceprovisionering
 
 #### Læringsressourcer
-- **📖 Udrulning**: [Udrulningsguide](docs/deployment/deployment-guide.md) - Komplette workflows
-- **🏗️ Provisionering**: [Provisionering af ressourcer](docs/deployment/provisioning.md) - Azure ressourcestyring
-- **📝 Eksempler**: [Container App Eksempel](../../examples/container-app) - Containeriserede udrulninger
+- **📖 Udrulning**: [Deployment Guide](docs/deployment/deployment-guide.md) - Fuldstændige workflows
+- **🏗️ Provisionering**: [Provisioning Resources](docs/deployment/provisioning.md) - Azure resource management
+- **📝 Eksempler**: [Container App Example](../../examples/container-app) - Containeriserede udrulninger
 
-#### Praktiske Øvelser
-- Opret brugerdefinerede Bicep-skabeloner
+#### Praktiske øvelser
+- Opret tilpassede Bicep-skabeloner
 - Udrul multi-service applikationer
 - Implementer blue-green udrulningsstrategier
 
-**💡 Kapitel Resultat**: Udrul komplekse multi-service applikationer ved hjælp af brugerdefinerede infrastrukturskabeloner
+**💡 Kapitelresultat**: Udrul komplekse multi-service applikationer ved hjælp af tilpassede infrastruktur-skabeloner
 
 ---
 
-### 🎯 Kapitel 5: Multi-Agent AI Løsninger (Avanceret)
+### 🎯 Kapitel 5: Multi-Agent AI-løsninger (Avanceret)
 **Forudsætninger**: Kapitel 1-2 gennemført  
 **Varighed**: 2-3 timer  
 **Kompleksitet**: ⭐⭐⭐⭐
 
-#### Hvad Du Vil Lære
-- Multi-agent arkitektur mønstre
-- Agent orkestrering og koordinering
+#### Hvad du vil lære
+- Multi-agent arkitekturmønstre
+- Agentorkestrering og koordinering
 - Produktionsklare AI-udrulninger
 
 #### Læringsressourcer
-- **🤖 Fremhævet Projekt**: [Retail Multi-Agent Løsning](examples/retail-scenario.md) - Fuld implementering
-- **🛠️ ARM Skabeloner**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Én-klik implementering  
-- **📖 Arkitektur**: [Multi-agent koordinationsmønstre](/docs/pre-deployment/coordination-patterns.md) - Mønstre
+- **🤖 Fremhævet projekt**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
+- **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Én-klik-udrulning
+- **📖 Arkitektur**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - Mønstre
 
-#### Praktiske Øvelser  
+#### Praktiske øvelser
 ```bash
-# Udrul den komplette detail multi-agent løsning
+# Udrul den komplette multi-agent-løsning til detailhandel
 cd examples/retail-multiagent-arm-template
 ./deploy.sh
 
 # Udforsk agentkonfigurationer
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
-  
-**💡 Kapitel Resultat**: Implementer og administrer en produktionsklar multi-agent AI-løsning med Kunde- og Lageragenter
+
+**💡 Kapitelresultat**: Udrul og administrer en produktionsklar multi-agent AI-løsning med Customer- og Inventory-agenter
 
 ---
 
-### 🔍 Kapitel 6: Forudgående Validering & Planlægning  
+### 🔍 Kapitel 6: Validering og planlægning før implementering
 **Forudsætninger**: Kapitel 4 gennemført  
 **Varighed**: 1 time  
 **Kompleksitet**: ⭐⭐
 
-#### Hvad Du Vil Lære  
-- Kapacitetsplanlægning og ressourcevalidering  
-- Strategier for valg af SKU  
+#### Hvad du vil lære
+- Kapacitetsplanlægning og ressourcevalidering
+- Strategier for valg af SKU'er
 - Forudgående tjek og automatisering
 
-#### Læringsressourcer  
-- **📊 Planlægning**: [Kapacitetsplanlægning](docs/pre-deployment/capacity-planning.md) - Ressourcevalidering  
-- **💰 Udvælgelse**: [SKU Udvælgelse](docs/pre-deployment/sku-selection.md) - Omkostningseffektive valg  
-- **✅ Validering**: [Forudgående Tjek](docs/pre-deployment/preflight-checks.md) - Automatiserede scripts
+#### Læringsressourcer
+- **📊 Planlægning**: [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Ressourcevalidering
+- **💰 Udvælgelse**: [SKU Selection](docs/pre-deployment/sku-selection.md) - Omkostningseffektive valg
+- **✅ Validering**: [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automatiserede scripts
 
-#### Praktiske Øvelser  
-- Kør kapacitetsvalideringsscripts  
-- Optimer SKU-udvælgelse for omkostninger  
-- Implementer automatiserede forudgående tjek
+#### Praktiske øvelser
+- Kør scripts til validering af kapacitet
+- Optimér SKU-valg med henblik på omkostninger
+- Implementér automatiserede forudgående tjek før implementering
 
-**💡 Kapitel Resultat**: Valider og optimer implementeringer før udførelse
+**💡 Kapitelresultat**: Valider og optimér udrulninger før eksekvering
 
 ---
 
-### 🚨 Kapitel 7: Fejlfinding & Debugging  
+### 🚨 Kapitel 7: Fejlfinding & fejlsøgning
 **Forudsætninger**: Ethvert implementeringskapitel gennemført  
-**Varighed**: 1-1,5 timer  
+**Varighed**: 1-1.5 timer  
 **Kompleksitet**: ⭐⭐
 
-#### Hvad Du Vil Lære  
-- Systematiske debugging-tilgange  
-- Almindelige problemer og løsninger  
+#### Hvad du vil lære
+- Systematiske fejlsøgningsmetoder
+- Almindelige problemer og løsninger
 - AI-specifik fejlfinding
 
-#### Læringsressourcer  
-- **🔧 Almindelige Problemer**: [Almindelige Problemer](docs/troubleshooting/common-issues.md) - FAQ og løsninger  
-- **🕵️ Debugging**: [Debugging Guide](docs/troubleshooting/debugging.md) - Trin-for-trin strategier  
-- **🤖 AI Problemer**: [AI-Specifik Fejlfinding](docs/troubleshooting/ai-troubleshooting.md) - AI serviceproblemer
+#### Læringsressourcer
+- **🔧 Almindelige problemer**: [Common Issues](docs/troubleshooting/common-issues.md) - FAQ og løsninger
+- **🕵️ Fejlsøgning**: [Debugging Guide](docs/troubleshooting/debugging.md) - Trin-for-trin strategier
+- **🤖 AI-problemer**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - Problemer med AI-tjenester
 
-#### Praktiske Øvelser  
-- Diagnosticer implementeringsfejl  
-- Løs autentificeringsproblemer  
-- Debug AI serviceforbindelser
+#### Praktiske øvelser
+- Diagnostiser udrulningsfejl
+- Løs autentificeringsproblemer
+- Fejlsøg forbindelsesproblemer til AI-tjenester
 
-**💡 Kapitel Resultat**: Selvstændigt diagnosticere og løse almindelige implementeringsproblemer
+**💡 Kapitelresultat**: Selvstændigt diagnosticere og løse almindelige implementeringsproblemer
 
 ---
 
-### 🏢 Kapitel 8: Produktions- & Enterprise Mønstre  
+### 🏢 Kapitel 8: Produktions- og virksomhedsmønstre
 **Forudsætninger**: Kapitel 1-4 gennemført  
 **Varighed**: 2-3 timer  
 **Kompleksitet**: ⭐⭐⭐⭐
 
-#### Hvad Du Vil Lære  
-- Produktionsimplementeringsstrategier  
-- Enterprise sikkerhedsmønstre  
+#### Hvad du vil lære
+- Strategier for produktionsudrulning
+- Virksomhedssikkerhedsmønstre
 - Overvågning og omkostningsoptimering
 
-#### Læringsressourcer  
-- **🏭 Produktion**: [Produktions AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise mønstre  
-- **📝 Eksempler**: [Microservices Eksempel](../../examples/microservices) - Komplekse arkitekturer  
+#### Læringsressourcer
+- **🏭 Produktion**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Virksomhedsmønstre
+- **📝 Eksempler**: [Microservices Example](../../examples/microservices) - Komplekse arkitekturer
 - **📊 Overvågning**: [Application Insights integration](docs/pre-deployment/application-insights.md) - Overvågning
 
-#### Praktiske Øvelser  
-- Implementer enterprise sikkerhedsmønstre  
-- Opsæt omfattende overvågning  
-- Implementer til produktion med korrekt styring
+#### Praktiske øvelser
+- Implementér virksomhedssikkerhedsmønstre
+- Opsæt omfattende overvågning
+- Udrul til produktion med korrekt styring
 
-**💡 Kapitel Resultat**: Implementer enterprise-klar applikationer med fuld produktionskapacitet
+**💡 Kapitelresultat**: Udrul virksomhedsklare applikationer med fuld produktionskapacitet
 
 ---
 
-## 🎓 Workshop Oversigt: Praktisk Læringsoplevelse
+## 🎓 Workshopoversigt: Praktisk læringsoplevelse
 
-> **⚠️ WORKSHOP STATUS: Aktiv Udvikling**  
-> Workshopmaterialerne er under udvikling og finpudsning. Kernemoduler fungerer, men nogle avancerede sektioner er ufuldstændige. Vi arbejder aktivt på at færdiggøre alt indhold. [Følg fremskridt →](workshop/README.md)
+> **⚠️ WORKSHOPSTATUS: Aktiv udvikling**  
+> Workshopmaterialerne er i øjeblikket under udvikling og forfining. Kernemodulerne er funktionelle, men nogle avancerede sektioner er ufuldstændige. Vi arbejder aktivt på at færdiggøre alt indhold. [Track progress →](workshop/README.md)
 
-### Interaktive Workshopmaterialer  
-**Omfattende praktisk læring med browserbaserede værktøjer og guidede øvelser**
+### Interaktive workshopmaterialer
+**Omfattende praktisk læring med browser-baserede værktøjer og guidede øvelser**
 
-Vores workshopmaterialer tilbyder en struktureret, interaktiv læringsoplevelse, der supplerer det kapitelbaserede pensum ovenfor. Workshoppen er designet til både selvstyret læring og instruktørledede sessioner.
+Vores workshopmaterialer giver en struktureret, interaktiv læringsoplevelse, der supplerer det kapitel-baserede pensum ovenfor. Workshoppen er designet til både selvstudium og underviser-ledede sessioner.
 
-#### 🛠️ Workshop Funktioner  
-- **Browserbaseret Interface**: Fuld MkDocs-drevet workshop med søgning, kopiering og tema-funktioner  
-- **GitHub Codespaces Integration**: Én-klik opsætning af udviklingsmiljø  
-- **Struktureret Læringssti**: 7-trins guidede øvelser (3,5 timer samlet)  
-- **Discovery → Deployment → Customization**: Progressiv metode  
-- **Interaktiv DevContainer Miljø**: Forudkonfigurerede værktøjer og afhængigheder
+#### 🛠️ Workshopfunktioner
+- **Browserbaseret grænseflade**: Fuldstændig MkDocs-drevet workshop med søgning, kopiering og tema-funktioner
+- **GitHub Codespaces-integration**: Ét-klik opsætning af udviklingsmiljø
+- **Struktureret læringssti**: 7-trins guidede øvelser (3,5 timer i alt)
+- **Opdagelse → Udrulning → Tilpasning**: Progressiv metodik
+- **Interaktivt DevContainer-miljø**: Forudkonfigurerede værktøjer og afhængigheder
 
-#### 📚 Workshop Struktur  
-Workshoppen følger en **Discovery → Deployment → Customization** metode:
+#### 📚 Workshopstruktur
+Workshoppen følger en **Opdagelse → Udrulning → Tilpasning** metodik:
 
-1. **Discovery Fase** (45 min)  
-   - Udforsk Microsoft Foundry skabeloner og services  
-   - Forstå multi-agent arkitektur mønstre  
-   - Gennemgå implementeringskrav og forudsætninger
+1. **Opdagelsesfase** (45 min)
+   - Undersøg Microsoft Foundry-skabeloner og -tjenester
+   - Forstå multi-agent arkitekturmønstre
+   - Gennemgå udrulningskrav og forudsætninger
 
-2. **Deployment Fase** (2 timer)  
-   - Praktisk implementering af AI-applikationer med AZD  
-   - Konfigurer Azure AI services og endpoints  
-   - Implementer sikkerheds- og autentificeringsmønstre
+2. **Udrulningsfase** (2 timer)
+   - Praktisk udrulning af AI-applikationer med AZD
+   - Konfigurer Azure AI-tjenester og endpoints
+   - Implementér sikkerheds- og autentificeringsmønstre
 
-3. **Customization Fase** (45 min)  
-   - Tilpas applikationer til specifikke brugsscenarier  
-   - Optimer til produktionsimplementering  
-   - Implementer overvågning og omkostningsstyring
+3. **Tilpasningsfase** (45 min)
+   - Tilpas applikationer til specifikke brugstilfælde
+   - Optimér til produktionsudrulning
+   - Implementér overvågning og omkostningsstyring
 
-#### 🚀 Kom Godt I Gang med Workshoppen  
+#### 🚀 Kom godt i gang med workshoppen
 ```bash
 # Mulighed 1: GitHub Codespaces (Anbefalet)
 # Klik på "Code" → "Create codespace on main" i repositoryet
@@ -395,145 +395,145 @@ git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
 # Følg opsætningsinstruktionerne i workshop/README.md
 ```
-  
-#### 🎯 Workshop Læringsresultater  
-Ved at gennemføre workshoppen vil deltagerne:  
-- **Implementere Produktionsklare AI Applikationer**: Brug AZD med Microsoft Foundry services  
-- **Beherske Multi-Agent Arkitekturer**: Implementer koordinerede AI agent løsninger  
-- **Implementere Sikkerhedsbest Practices**: Konfigurer autentificering og adgangskontrol  
-- **Optimere til Skala**: Design omkostningseffektive, højtydende implementeringer  
-- **Fejlfinding af Implementeringer**: Løs almindelige problemer selvstændigt
 
-#### 📖 Workshop Ressourcer  
-- **🎥 Interaktiv Guide**: [Workshop Materialer](workshop/README.md) - Browserbaseret læringsmiljø  
-- **📋 Trin-for-Trin Instruktioner**: [Guidede Øvelser](../../workshop/docs/instructions) - Detaljerede gennemgange  
-- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-fokuserede øvelser  
-- **💡 Hurtig Start**: [Workshop Opsætningsguide](workshop/README.md#quick-start) - Miljøkonfiguration
+#### 🎯 Læringsmål for workshoppen
+Ved at gennemføre workshoppen vil deltagerne:
+- **Udrul AI-applikationer til produktion**: Brug AZD med Microsoft Foundry-tjenester
+- **Behersk multi-agent arkitekturer**: Implementér koordinerede AI-agentløsninger
+- **Implementér bedste sikkerhedspraksis**: Konfigurer autentificering og adgangskontrol
+- **Optimér til skala**: Design omkostningseffektive, performant-venlige udrulninger
+- **Fejlfinding af udrulninger**: Løs almindelige problemer selvstændigt
 
-**Perfekt til**: Virksomhedstræning, universitetskurser, selvstyret læring og udvikler bootcamps.
+#### 📖 Workshopressourcer
+- **🎥 Interaktiv guide**: [Workshop Materials](workshop/README.md) - Browser-baseret læringsmiljø
+- **📋 Trin-for-trin instruktioner**: [Guided Exercises](../../workshop/docs/instructions) - Detaljerede gennemgange
+- **🛠️ AI Workshop-lab**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-fokuserede øvelser
+- **💡 Hurtigstart**: [Workshop Setup Guide](workshop/README.md#quick-start) - Miljøkonfiguration
+
+**Perfekt til**: Virksomhedstræning, universitetskurser, selvstyret læring og udvikler-bootcamps.
 
 ---
 
 ## 📖 Hvad er Azure Developer CLI?
 
-Azure Developer CLI (azd) er en udviklercentreret kommandolinjegrænseflade, der accelererer processen med at bygge og implementere applikationer til Azure. Den tilbyder:
+Azure Developer CLI (azd) er en udviklercentreret kommandolinjegrænseflade, der accelererer processen med at bygge og udrulle applikationer til Azure. Den tilbyder:
 
-- **Skabelonbaserede implementeringer** - Brug forudbyggede skabeloner til almindelige applikationsmønstre  
-- **Infrastructure as Code** - Administrer Azure-ressourcer med Bicep eller Terraform  
-- **Integrerede workflows** - Problemfri provisionering, implementering og overvågning af applikationer  
-- **Udviklervenlig** - Optimeret til udviklerproduktivitet og oplevelse
+- **Skabelonbaserede udrulninger** - Brug forudbyggede skabeloner til almindelige applikationsmønstre
+- **Infrastruktur som kode** - Administrer Azure-ressourcer ved hjælp af Bicep eller Terraform  
+- **Integrerede arbejdsgange** - Provisionér, udrul og overvåg applikationer sømløst
+- **Udviklervenlig** - Optimeret til udviklerens produktivitet og oplevelse
 
-### **AZD + Microsoft Foundry: Perfekt til AI-Implementeringer**
+### **AZD + Microsoft Foundry: Perfekt til AI-udrulninger**
 
-**Hvorfor AZD til AI-løsninger?** AZD adresserer de største udfordringer AI-udviklere møder:
+**Hvorfor AZD til AI-løsninger?** AZD adresserer de største udfordringer, AI-udviklere står overfor:
 
-- **AI-Klare Skabeloner** - Forudkonfigurerede skabeloner til Azure OpenAI, Cognitive Services og ML workloads  
-- **Sikre AI-Implementeringer** - Indbyggede sikkerhedsmønstre til AI-services, API-nøgler og modelendpoints  
-- **Produktions AI Mønstre** - Best practices for skalerbare, omkostningseffektive AI-applikationsimplementeringer  
-- **End-to-End AI Workflows** - Fra modeludvikling til produktionsimplementering med korrekt overvågning  
-- **Omkostningsoptimering** - Smarte ressourceallokerings- og skaleringsstrategier til AI workloads  
-- **Microsoft Foundry Integration** - Problemfri forbindelse til Microsoft Foundry modelkatalog og endpoints
+- **AI-klare skabeloner** - Forudkonfigurerede skabeloner til Azure OpenAI, Cognitive Services og ML-workloads
+- **Sikre AI-udrulninger** - Indbyggede sikkerhedsmønstre for AI-tjenester, API-nøgler og modelendepunkter  
+- **Produktions-AI-mønstre** - Bedste praksis for skalerbare og omkostningseffektive AI-udrulninger
+- **End-to-end AI-arbejdsgange** - Fra modeludvikling til produktionsudrulning med korrekt overvågning
+- **Omkostningsoptimering** - Smart ressourceallokering og skaleringsstrategier for AI-workloads
+- **Microsoft Foundry-integration** - Sømløs forbindelse til Microsoft Foundry-modelkataloget og endepunkter
 
 ---
 
-## 🎯 Skabeloner & Eksempelsamling
+## 🎯 Skabeloner & eksempelsamling
 
-### Fremhævet: Microsoft Foundry Skabeloner  
-**Start her, hvis du implementerer AI-applikationer!**
+### Fremhævet: Microsoft Foundry-skabeloner
+**Start her, hvis du udruller AI-applikationer!**
 
 > **Bemærk:** Disse skabeloner demonstrerer forskellige AI-mønstre. Nogle er eksterne Azure Samples, andre er lokale implementeringer.
 
-| Skabelon | Kapitel | Kompleksitet | Services | Type |  
-|----------|---------|--------------|----------|------|  
-| [**Kom godt i gang med AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Ekstern |  
-| [**Kom godt i gang med AI agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Kapitel 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Ekstern |  
-| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Ekstern |  
-| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Ekstern |  
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Ekstern |  
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Ekstern |  
+| Skabelon | Kapitel | Kompleksitet | Tjenester | Type |
+|----------|---------|--------------|----------|------|
+| [**Kom godt i gang med AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Ekstern |
+| [**Kom godt i gang med AI-agenter**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Kapitel 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Ekstern |
+| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Ekstern |
+| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Ekstern |
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Ekstern |
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Ekstern |
 | [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Kapitel 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Lokal** |
 
-### Fremhævet: Færdige Læringsscenarier  
-**Produktionsklare applikationsskabeloner knyttet til læringskapitler**
+### Fremhævet: Komplette læringsscenarier
+**Produktionsklare applikationsskabeloner kortlagt til læringskapitler**
 
-| Skabelon | Læringskapitel | Kompleksitet | Nøglelæring |  
-|----------|----------------|--------------|-------------|  
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | Grundlæggende AI implementeringsmønstre |  
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | RAG-implementering med Azure AI Search |  
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Kapitel 4 | ⭐⭐ | Dokumentintelligens integration |  
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | Agent framework og funktionskald |  
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐ | Enterprise AI orkestrering |  
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kapitel 5 | ⭐⭐⭐⭐ | Multi-agent arkitektur med Kunde- og Lageragenter |
+| Skabelon | Læringskapitel | Kompleksitet | Nøglelæring |
+|----------|----------------|--------------|--------------|
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Kapitel 2 | ⭐ | Grundlæggende AI-udrulningsmønstre |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Kapitel 2 | ⭐⭐ | RAG-implementering med Azure AI Search |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Kapitel 4 | ⭐⭐ | Integration af Document Intelligence |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Kapitel 5 | ⭐⭐⭐ | Agent-rammeværk og function calling |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Kapitel 8 | ⭐⭐⭐ | Enterprise AI-orchestrering |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Kapitel 5 | ⭐⭐⭐⭐ | Multi-agent arkitektur med Customer- og Inventory-agenter |
 
-### Læring efter Eksempeltype
+### Læring efter eksempeltype
 
-> **📌 Lokale vs. Eksterne Eksempler:**  
-> **Lokale Eksempler** (i dette repo) = Klar til brug med det samme  
-> **Eksterne Eksempler** (Azure Samples) = Klon fra linkede repositories
+> **📌 Lokale vs. eksterne eksempler:**  
+> **Lokale eksempler** (i dette repo) = Klar til brug med det samme  
+> **Eksterne eksempler** (Azure Samples) = Klon fra de linkede repositories
 
-#### Lokale Eksempler (Klar til Brug)  
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Fuldstændig produktionsklar implementering med ARM skabeloner  
-  - Multi-agent arkitektur (Kunde + Lageragenter)  
-  - Omfattende overvågning og evaluering  
-  - Én-klik implementering via ARM skabelon
+#### Lokale eksempler (Klar til brug)
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Fuld produktionsklar implementering med ARM-skabeloner
+  - Multi-agent arkitektur (Customer + Inventory-agenter)
+  - Omfattende overvågning og evaluering
+  - Én-klik-udrulning via ARM-skabelon
 
-#### Lokale Eksempler - Container Applikationer (Kapitel 2-5)  
-**Omfattende containerimplementeringseksempler i dette repository:**  
-- [**Container App Eksempler**](examples/container-app/README.md) - Fuld guide til containeriserede implementeringer  
-  - [Simple Flask API](../../examples/container-app/simple-flask-api) - Grundlæggende REST API med scale-to-zero  
-  - [Microservices Arkitektur](../../examples/container-app/microservices) - Produktionsklar multi-service implementering  
-  - Hurtig start, produktion og avancerede implementeringsmønstre  
-  - Overvågning, sikkerhed og omkostningsoptimeringsvejledning
+#### Lokale eksempler - Containerapplikationer (Kapitler 2-5)
+**Omfattende container-udrulningseksempler i dette repository:**
+- [**Container App Examples**](examples/container-app/README.md) - Komplet guide til containeriserede udrulninger
+  - [Simple Flask API](../../examples/container-app/simple-flask-api) - Simpel REST API med skaler-til-nul
+  - [Microservices Architecture](../../examples/container-app/microservices) - Produktionsklar multi-service udrulning
+  - Hurtigstart-, produktions- og avancerede udrulningsmønstre
+  - Vejledning i overvågning, sikkerhed og omkostningsoptimering
 
-#### Eksterne Eksempler - Simple Applikationer (Kapitel 1-2)  
-**Klon disse Azure Samples repositories for at komme i gang:**  
-- [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Grundlæggende implementeringsmønstre  
-- [Statisk Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Statisk indholdsimplementering  
-- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API implementering
+#### Eksterne eksempler - Simple applikationer (Kapitler 1-2)
+**Klon disse Azure Samples-repositorier for at komme i gang:**
+- [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Grundlæggende udrulningsmønstre
+- [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Udrulning af statisk indhold
+- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API-udrulning
 
-#### Eksterne Eksempler - Database Integration (Kapitel 3-4)  
-- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Databaseforbindelsesmønstre  
-- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless data workflow
+#### Eksterne eksempler - Databaseintegration (Kapitel 3-4)  
+- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Databaseforbindelsesmønstre
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless data-workflow
 
-#### Eksterne Eksempler - Avancerede Mønstre (Kapitel 4-8)  
-- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service arkitekturer  
+#### Eksterne eksempler - Avancerede mønstre (Kapitler 4-8)
+- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service arkitekturer
 - [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Baggrundsbehandling  
-- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Produktionsklare ML mønstre
+- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Produktionsklare ML-mønstre
 
-### Eksterne Skabelonsamlinger  
-- [**Officiel AZD Skabelongalleri**](https://azure.github.io/awesome-azd/) - Kurateret samling af officielle og community skabeloner  
-- [**Azure Developer CLI Skabeloner**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn skabelondokumentation  
-- [**Eksempelkatalog**](examples/README.md) - Lokale læringseksempler med detaljerede forklaringer
+### Eksterne skabelonsamlinger
+- [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Kurateret samling af officielle og community-skabeloner
+- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn skabelondokumentation
+- [**Examples Directory**](examples/README.md) - Lokale læringseksempler med detaljerede forklaringer
 
 ---
 
 ## 📚 Læringsressourcer & Referencer
 
-### Hurtige Referencer
+### Hurtige reference
 - [**Kommandooversigt**](resources/cheat-sheet.md) - Væsentlige azd-kommandoer organiseret efter kapitel
-- [**Ordliste**](resources/glossary.md) - Azure- og azd-terminologi  
+- [**Ordliste**](resources/glossary.md) - Azure og azd-terminologi  
 - [**FAQ**](resources/faq.md) - Almindelige spørgsmål organiseret efter læringskapitel
 - [**Studieguide**](resources/study-guide.md) - Omfattende øvelser
 
 ### Praktiske Workshops
-- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Gør dine AI-løsninger AZD-udrulningsklare (2-3 timer)
-- [**Interaktiv Workshop Guide**](workshop/README.md) - Browserbaseret workshop med MkDocs og DevContainer-miljø
-- [**Struktureret Læringssti**](../../workshop/docs/instructions) - 7-trins guidede øvelser (Opdagelse → Udrulning → Tilpasning)
-- [**AZD For Begyndere Workshop**](workshop/README.md) - Fuldstændige praktiske workshopmaterialer med GitHub Codespaces-integration
+- [**AI Workshop-lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Gør dine AI-løsninger klar til udrulning med AZD (2-3 timer)
+- [**Interaktiv Workshop Guide**](workshop/README.md) - Browser-baseret workshop med MkDocs og DevContainer-miljø
+- [**Structured Learning Path**](../../workshop/docs/instructions) -7-trins guidede øvelser (Opdagelse → Udrulning → Tilpasning)
+- [**AZD for begyndere-workshop**](workshop/README.md) - Komplette praktiske workshopmaterialer med GitHub Codespaces-integration
 
-### Eksterne Læringsressourcer
-- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### Eksterne læringsressourcer
+- [Azure Developer CLI-dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Arkitekturcenter](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Prisberegner](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Status](https://status.azure.com/)
+- [Azure-prisberegner](https://azure.microsoft.com/pricing/calculator/)
+- [Azure-status](https://status.azure.com/)
 
 ---
 
-## 🔧 Hurtig Fejlfinding Guide
+## 🔧 Hurtig fejlsøgningsguide
 
-**Almindelige problemer begyndere møder og øjeblikkelige løsninger:**
+**Almindelige problemer, som begyndere møder, og hurtige løsninger:**
 
-### ❌ "azd: kommando ikke fundet"
+### ❌ "azd: command not found"
 
 ```bash
 # Installer AZD først
@@ -546,27 +546,27 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Bekræft installation
+# Bekræft installationen
 azd version
 ```
 
-### ❌ "Ingen abonnement fundet" eller "Abonnement ikke sat"
+### ❌ "No subscription found" or "Subscription not set"
 
 ```bash
-# Liste over tilgængelige abonnementer
+# Vis tilgængelige abonnementer
 az account list --output table
 
 # Indstil standardabonnement
 az account set --subscription "<subscription-id-or-name>"
 
-# Indstil for AZD-miljø
+# Indstil til AZD-miljø
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
 # Bekræft
 az account show
 ```
 
-### ❌ "Utilstrækkelig kvote" eller "Kvote overskredet"
+### ❌ "InsufficientQuota" or "Quota exceeded"
 
 ```bash
 # Prøv en anden Azure-region
@@ -580,10 +580,10 @@ azd up
 }
 ```
 
-### ❌ "azd up" fejler halvvejs
+### ❌ "azd up" fails halfway through
 
 ```bash
-# Mulighed 1: Rens og prøv igen
+# Mulighed 1: Ryd op og prøv igen
 azd down --force --purge
 azd up
 
@@ -595,10 +595,10 @@ azd show
 azd logs
 ```
 
-### ❌ "Godkendelse mislykkedes" eller "Token udløbet"
+### ❌ "Authentication failed" or "Token expired"
 
 ```bash
-# Genautentificer
+# Autentificer igen
 az logout
 az login
 
@@ -609,7 +609,7 @@ azd auth login
 az account show
 ```
 
-### ❌ "Ressource findes allerede" eller navnekonflikter
+### ❌ "Resource already exists" or naming conflicts
 
 ```bash
 # AZD genererer unikke navne, men hvis der opstår konflikt:
@@ -620,63 +620,63 @@ azd env new dev-v2
 azd up
 ```
 
-### ❌ Skabelonudrulning tager for lang tid
+### ❌ Template deployment taking too long
 
 **Normale ventetider:**
-- Simpel webapp: 5-10 minutter
+- Enkel webapp: 5-10 minutter
 - App med database: 10-15 minutter
 - AI-applikationer: 15-25 minutter (OpenAI-provisionering er langsom)
 
 ```bash
-# Tjek fremskridt
+# Tjek fremdrift
 azd show
 
-# Hvis fastlåst >30 minutter, tjek Azure Portal:
+# Hvis det sidder fast i mere end 30 minutter, tjek Azure-portalen:
 azd monitor
-# Se efter mislykkede implementeringer
+# Se efter mislykkede udrulninger
 ```
 
-### ❌ "Adgang nægtet" eller "Forbudt"
+### ❌ "Permission denied" or "Forbidden"
 
 ```bash
-# Tjek din Azure-rolle
+# Kontroller din Azure-rolle
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# Du skal have mindst rollen "Bidragyder"
+# Du skal som minimum have rollen "Contributor"
 # Bed din Azure-administrator om at give:
-# - Bidragyder (for ressourcer)
-# - Brugeradgangsadministrator (for rollefordelinger)
+# - Contributor (til ressourcer)
+# - User Access Administrator (til tildeling af roller)
 ```
 
-### ❌ Kan ikke finde URL til udrullet applikation
+### ❌ Can't find deployed application URL
 
 ```bash
 # Vis alle serviceendepunkter
 azd show
 
-# Eller åbn Azure Portal
+# Eller åbn Azure-portalen
 azd monitor
 
-# Tjek specifik service
+# Kontroller en specifik tjeneste
 azd env get-values
-# Kig efter *_URL variabler
+# Søg efter *_URL-variabler
 ```
 
-### 📚 Fuld Fejlfinding Ressourcer
+### 📚 Fuldstændige fejlsøgningsressourcer
 
-- **Guide til Almindelige Problemer:** [Detaljerede Løsninger](docs/troubleshooting/common-issues.md)
-- **AI-specifikke Problemer:** [AI Fejlfinding](docs/troubleshooting/ai-troubleshooting.md)
-- **Debugging Guide:** [Trin-for-trin Debugging](docs/troubleshooting/debugging.md)
-- **Få Hjælp:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Vejledning om almindelige problemer:** [Detaljerede løsninger](docs/troubleshooting/common-issues.md)
+- **AI-specifikke problemer:** [AI-fejlsøgning](docs/troubleshooting/ai-troubleshooting.md)
+- **Fejlfindingsvejledning:** [Trin-for-trin fejlfinding](docs/troubleshooting/debugging.md)
+- **Få hjælp:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🔧 Hurtig Fejlfinding Guide
+## 🔧 Hurtig fejlsøgningsguide
 
-**Almindelige problemer begyndere møder og øjeblikkelige løsninger:**
+**Almindelige problemer, som begyndere møder, og hurtige løsninger:**
 
 <details>
-<summary><strong>❌ "azd: kommando ikke fundet"</strong></summary>
+<summary><strong>❌ "azd: command not found"</strong></summary>
 
 ```bash
 # Installer AZD først
@@ -689,16 +689,16 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Bekræft installation
+# Bekræft installationen
 azd version
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Ingen abonnement fundet" eller "Abonnement ikke sat"</strong></summary>
+<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
 
 ```bash
-# Liste over tilgængelige abonnementer
+# Vis tilgængelige abonnementer
 az account list --output table
 
 # Indstil standardabonnement
@@ -713,7 +713,7 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Utilstrækkelig kvote" eller "Kvote overskredet"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
 ```bash
 # Prøv en anden Azure-region
@@ -729,10 +729,10 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" fejler halvvejs</strong></summary>
+<summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
-# Mulighed 1: Rens og prøv igen
+# Mulighed 1: Ryd op og prøv igen
 azd down --force --purge
 azd up
 
@@ -746,10 +746,10 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ "Godkendelse mislykkedes" eller "Token udløbet"</strong></summary>
+<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
 
 ```bash
-# Genautentificer
+# Autentificér igen
 az logout
 az login
 
@@ -762,142 +762,142 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Ressource findes allerede" eller navnekonflikter</strong></summary>
+<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
-# AZD genererer unikke navne, men hvis der opstår konflikt:
+# AZD genererer unikke navne, men hvis der opstår en konflikt:
 azd down --force --purge
 
-# Så prøv igen med et nyt miljø
+# Prøv derefter igen med et nyt miljø
 azd env new dev-v2
 azd up
 ```
 </details>
 
 <details>
-<summary><strong>❌ Skabelonudrulning tager for lang tid</strong></summary>
+<summary><strong>❌ Template deployment taking too long</strong></summary>
 
 **Normale ventetider:**
-- Simpel webapp: 5-10 minutter
+- Enkel webapp: 5-10 minutter
 - App med database: 10-15 minutter
 - AI-applikationer: 15-25 minutter (OpenAI-provisionering er langsom)
 
 ```bash
-# Tjek fremskridt
+# Kontroller fremdrift
 azd show
 
-# Hvis fastlåst >30 minutter, tjek Azure Portal:
+# Hvis du sidder fast i over 30 minutter, tjek Azure-portalen:
 azd monitor
 # Se efter mislykkede implementeringer
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Adgang nægtet" eller "Forbudt"</strong></summary>
+<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
 
 ```bash
-# Tjek din Azure-rolle
+# Kontroller din Azure-rolle
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# Du skal have mindst rollen "Bidragyder"
-# Bed din Azure-administrator om at give:
-# - Bidragyder (for ressourcer)
-# - Brugeradgangsadministrator (for rollefordelinger)
+# Du skal mindst have rollen "Contributor"
+# Bed din Azure-administrator om at tildele:
+# - Contributor (til ressourcer)
+# - User Access Administrator (til tildeling af roller)
 ```
 </details>
 
 <details>
-<summary><strong>❌ Kan ikke finde URL til udrullet applikation</strong></summary>
+<summary><strong>❌ Can't find deployed application URL</strong></summary>
 
 ```bash
 # Vis alle serviceendepunkter
 azd show
 
-# Eller åbn Azure Portal
+# Eller åbn Azure-portalen
 azd monitor
 
-# Tjek specifik service
+# Kontroller en specifik tjeneste
 azd env get-values
-# Kig efter *_URL variabler
+# Søg efter *_URL-variabler
 ```
 </details>
 
-### 📚 Fuld Fejlfinding Ressourcer
+### 📚 Fuldstændige fejlsøgningsressourcer
 
-- **Guide til Almindelige Problemer:** [Detaljerede Løsninger](docs/troubleshooting/common-issues.md)
-- **AI-specifikke Problemer:** [AI Fejlfinding](docs/troubleshooting/ai-troubleshooting.md)
-- **Debugging Guide:** [Trin-for-trin Debugging](docs/troubleshooting/debugging.md)
-- **Få Hjælp:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Vejledning om almindelige problemer:** [Detaljerede løsninger](docs/troubleshooting/common-issues.md)
+- **AI-specifikke problemer:** [AI-fejlsøgning](docs/troubleshooting/ai-troubleshooting.md)
+- **Fejlfindingsvejledning:** [Trin-for-trin fejlfinding](docs/troubleshooting/debugging.md)
+- **Få hjælp:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🎓 Kursusafslutning & Certificering
 
-### Fremskridtssporing
-Følg din læringsfremskridt gennem hvert kapitel:
+### Fremdriftssporing
+Spor din læring gennem hvert kapitel:
 
-- [ ] **Kapitel 1**: Grundlag & Hurtig Start ✅
-- [ ] **Kapitel 2**: AI-Første Udvikling ✅  
+- [ ] **Kapitel 1**: Grundlæggende & Hurtigstart ✅
+- [ ] **Kapitel 2**: AI-først udvikling ✅  
 - [ ] **Kapitel 3**: Konfiguration & Godkendelse ✅
 - [ ] **Kapitel 4**: Infrastruktur som kode & Udrulning ✅
-- [ ] **Kapitel 5**: Multi-Agent AI-løsninger ✅
-- [ ] **Kapitel 6**: Forudgående validering & planlægning ✅
-- [ ] **Kapitel 7**: Fejlfinding & Debugging ✅
+- [ ] **Kapitel 5**: Multi-agent AI-løsninger ✅
+- [ ] **Kapitel 6**: Validering før udrulning & Planlægning ✅
+- [ ] **Kapitel 7**: Fejlsøgning & Fejlfinding ✅
 - [ ] **Kapitel 8**: Produktion & Enterprise-mønstre ✅
 
-### Læringsverifikation
-Efter at have gennemført hvert kapitel, bekræft din viden ved at:
-1. **Praktisk Øvelse**: Fuldfør kapitlets praktiske udrulning
+### Verificering af læring
+Efter du har afsluttet hvert kapitel, verificer din viden ved at:
+1. **Praktisk øvelse**: Fuldfør kapitlets praktiske udrulning
 2. **Videnstest**: Gennemgå FAQ-sektionen for dit kapitel
-3. **Fællesskabsdiskussion**: Del din erfaring i Azure Discord
-4. **Næste Kapitel**: Gå videre til næste kompleksitetsniveau
+3. **Fællesskabsdiskussion**: Del din oplevelse i Azure Discord
+4. **Næste kapitel**: Gå videre til næste kompleksitetsniveau
 
-### Fordele ved Kursusafslutning
-Når alle kapitler er gennemført, vil du have:
-- **Produktionserfaring**: Udrullet rigtige AI-applikationer til Azure
-- **Professionelle Kompetencer**: Enterprise-klar udrulningskapacitet  
+### Fordele ved at gennemføre kurset
+Når du har gennemført alle kapitler, vil du have:
+- **Produktionserfaring**: Udrullet rigtige AI-applikationer i Azure
+- **Professionelle færdigheder**: Udrulningskapaciteter klar til virksomhedsmiljø  
 - **Fællesskabsanerkendelse**: Aktivt medlem af Azure-udviklerfællesskabet
-- **Karrierefremgang**: Eftertragtet AZD- og AI-udrulningsekspertise
+- **Karrierefremmelse**: Efterspurgt AZD- og AI-udrulningsekspertise
 
 ---
 
 ## 🤝 Fællesskab & Support
 
-### Få Hjælp & Support
-- **Tekniske Problemer**: [Rapporter fejl og foreslå funktioner](https://github.com/microsoft/azd-for-beginners/issues)
-- **Læringsspørgsmål**: [Microsoft Azure Discord Fællesskab](https://discord.gg/microsoft-azure) og [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **AI-specifik Hjælp**: Deltag i [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **Dokumentation**: [Officiel Azure Developer CLI dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### Få hjælp & support
+- **Tekniske problemer**: [Rapporter fejl og anmod om funktioner](https://github.com/microsoft/azd-for-beginners/issues)
+- **Spørgsmål om læring**: [Microsoft Azure Discord-fællesskab](https://discord.gg/microsoft-azure) og [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI-specifik hjælp**: Deltag i [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Dokumentation**: [Officiel Azure Developer CLI-dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Fællesskabsindsigter fra Microsoft Foundry Discord
 
 **Seneste afstemningsresultater fra #Azure-kanalen:**
-- **45%** af udviklere ønsker at bruge AZD til AI-arbejdsbelastninger
-- **Topudfordringer**: Multi-service udrulninger, legitimationsstyring, produktionsparathed  
-- **Mest efterspurgt**: AI-specifikke skabeloner, fejlfinding, bedste praksis
+- **45%** af udviklere vil bruge AZD til AI-workloads
+- **Topudfordringer**: Multi-service-udrulninger, håndtering af legitimationsoplysninger, produktionsparathed  
+- **Mest efterspurgt**: AI-specifikke skabeloner, fejlsøgningsvejledninger, bedste praksis
 
 **Deltag i vores fællesskab for at:**
-- Dele dine AZD + AI erfaringer og få hjælp
+- Del dine AZD + AI-oplevelser og få hjælp
 - Få adgang til tidlige forhåndsvisninger af nye AI-skabeloner
-- Bidrage til bedste praksis for AI-udrulning
-- Påvirke fremtidig AI + AZD funktionsudvikling
+- Bidrag til bedste praksis for AI-udrulning
+- Påvirk fremtidig udvikling af AI + AZD-funktioner
 
-### Bidrag til Kurset
-Vi byder bidrag velkommen! Læs venligst vores [Bidragsvejledning](CONTRIBUTING.md) for detaljer om:
+### Bidrag til kurset
+Vi byder bidrag velkommen! Læs venligst vores [bidragsvejledning](CONTRIBUTING.md) for detaljer om:
 - **Indholdsforbedringer**: Forbedr eksisterende kapitler og eksempler
-- **Nye Eksempler**: Tilføj virkelighedsnære scenarier og skabeloner  
+- **Nye eksempler**: Tilføj virkelige scenarier og skabeloner  
 - **Oversættelse**: Hjælp med at vedligeholde flersproget support
 - **Fejlrapporter**: Forbedr nøjagtighed og klarhed
 - **Fællesskabsstandarder**: Følg vores inkluderende fællesskabsretningslinjer
 
 ---
 
-## 📄 Kursusinformation
+## 📄 Kursusoplysninger
 
 ### Licens
-Dette projekt er licenseret under MIT-licensen - se [LICENSE](../../LICENSE)-filen for detaljer.
+Dette projekt er licenseret under MIT-licensen - se filen [LICENSE](../../LICENSE) for detaljer.
 
-### Relaterede Microsoft Læringsressourcer
+### Relaterede Microsoft-læringsressourcer
 
 Vores team producerer andre omfattende læringskurser:
 
@@ -916,7 +916,7 @@ Vores team producerer andre omfattende læringskurser:
 
 ---
  
-### Generativ AI Serie
+### Generative AI Series
 [![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
 [![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
@@ -924,7 +924,7 @@ Vores team producerer andre omfattende læringskurser:
 
 ---
  
-### Kerne Læring
+### Kerne-læring
 [![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 [![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
@@ -935,7 +935,7 @@ Vores team producerer andre omfattende læringskurser:
 
 ---
  
-### Copilot-serie
+### Copilot-serien
 [![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 [![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 [![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
@@ -945,17 +945,17 @@ Vores team producerer andre omfattende læringskurser:
 
 ## 🗺️ Kursusnavigation
 
-**🚀 Klar til at begynde at lære?**
+**🚀 Klar til at komme i gang?**
 
 **Begyndere**: Start med [Kapitel 1: Grundlag & Hurtig start](../..)  
-**AI-udviklere**: Spring til [Kapitel 2: AI-først udvikling](../..)  
-**Erfarne udviklere**: Begynd med [Kapitel 3: Konfiguration & godkendelse](../..)
+**AI-udviklere**: Gå til [Kapitel 2: AI-First Development](../..)  
+**Erfarne udviklere**: Begynd med [Kapitel 3: Konfiguration & Autentificering](../..)
 
-**Næste skridt**: [Begynd Kapitel 1 - AZD Basics](docs/getting-started/azd-basics.md) →
+**Næste skridt**: [Start Kapitel 1 - AZD Basics](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets modersmål bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Ansvarsfraskrivelse:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten Co-op Translator (https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i dets originalsprog bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel, menneskelig oversættelse. Vi påtager os intet ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
