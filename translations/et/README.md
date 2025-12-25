@@ -1,13 +1,13 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "1caf5e63f84a4cdffbeb8d0fe5fa3fa8",
-  "translation_date": "2025-12-21T21:45:43+00:00",
+  "original_hash": "05c30c9e5ed7951c72855108c6788034",
+  "translation_date": "2025-12-25T09:55:23+00:00",
   "source_file": "README.md",
   "language_code": "et"
 }
 -->
-# AZD algajatele: Struktureeritud õpiteekond
+# AZD algajatele: struktureeritud õpitee
 
 ![AZD-algajatele](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.et.png) 
 
@@ -15,523 +15,523 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub forkid](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
 [![GitHub tähed](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-[![Azure'i Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
-[![Microsoft Foundry'i Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-## Kuidas selle kursusega alustada
+## Selle kursuse alustamine
 
 Järgige neid samme, et alustada oma AZD õpiteekonda:
 
-1. **Forki hoidla**: Click [![GitHub forkid](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+1. **Forki hoidla**: Klõpsa [![GitHub forkid](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Klooni hoidla**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **Liitu kogukonnaga**: [Azure Discordi kogukonnad](https://discord.com/invite/ByRwuEEgH4) for expert support
-4. **Valige oma õpitee**: Select a chapter below that matches your experience level
+3. **Liitu kogukonnaga**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) eksperttoetuseks
+4. **Vali õpitee**: Vali allolevast peatükist, mis vastab sinu kogemustasemele
 
 ### Mitmekeelne tugi
 
 #### Automaatne tõlge (alati ajakohane)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Araabia](../ar/README.md) | [Bengaali](../bn/README.md) | [Bulgaaria](../bg/README.md) | [Birma (Myanmar)](../my/README.md) | [Hiina (lihtsustatud)](../zh/README.md) | [Hiina (traditsiooniline, Hongkong)](../hk/README.md) | [Hiina (traditsiooniline, Macau)](../mo/README.md) | [Hiina (traditsiooniline, Taiwan)](../tw/README.md) | [Horvaadi](../hr/README.md) | [Tšehhi](../cs/README.md) | [Taani](../da/README.md) | [Hollandi](../nl/README.md) | [Eesti](./README.md) | [Soome](../fi/README.md) | [Prantsuse](../fr/README.md) | [Saksa](../de/README.md) | [Kreeka](../el/README.md) | [Heebrea](../he/README.md) | [Hindi](../hi/README.md) | [Ungari](../hu/README.md) | [Indoneesia](../id/README.md) | [Itaalia](../it/README.md) | [Jaapani](../ja/README.md) | [Kannada](../kn/README.md) | [Korea](../ko/README.md) | [Leedu](../lt/README.md) | [Malai](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigeeria pidžin](../pcm/README.md) | [Norra](../no/README.md) | [Pärsia (Farsi)](../fa/README.md) | [Poola](../pl/README.md) | [Portugali (Brasiilia)](../br/README.md) | [Portugali (Portugal)](../pt/README.md) | [Pandžabi (Gurmukhi)](../pa/README.md) | [Rumeenia](../ro/README.md) | [Vene](../ru/README.md) | [Serbia (kirillitsa)](../sr/README.md) | [Slovaki](../sk/README.md) | [Sloveeni](../sl/README.md) | [Hispaania](../es/README.md) | [Suahiili](../sw/README.md) | [Rootsi](../sv/README.md) | [Tagalogu (Filipino)](../tl/README.md) | [Tamili](../ta/README.md) | [Telugu](../te/README.md) | [Tai](../th/README.md) | [Türgi](../tr/README.md) | [Ukraina](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnami](../vi/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](./README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## Kursuse ülevaade
 
-Valdge Azure Developer CLI (azd) läbi struktureeritud peatükkide, mis on mõeldud samm-sammult õppimiseks. **Eritähtsus AI-rakenduste juurutamisele Microsoft Foundry integreerimisega.**
+Valda Azure Developer CLI (azd) läbi struktureeritud peatükkide, mis on mõeldud järkjärguliseks õppimiseks. **Eriti keskendutakse tehisintellekti (AI) rakenduste juurutamisele Microsoft Foundry integratsiooniga.**
 
-### Miks see kursus on tänapäeva arendajatele oluline
+### Miks see kursus on tänapäevastele arendajatele oluline
 
-Põhinedes Microsoft Foundry Discordi kogukonna teadmistele, **45% arendajatest soovivad kasutada AZD-d AI töökoormuste jaoks**, kuid seisavad silmitsi järgmiste väljakutsetega:
-- Kompleksne mitme teenusega AI-arhitektuur
-- Tootmises AI juurutamise parimad praktikad  
-- Azure AI teenuste integreerimine ja seadistamine
-- AI töökoormuste kulude optimeerimine
+Põhinedes Microsoft Foundry Discord kogukonna sisendil, **45% arendajatest soovib kasutada AZD-d tehisintellekti töökoormuste jaoks**, kuid nad puutuvad kokku järgmiste väljakutsetega:
+- Kompleksne mitme teenusega AI arhitektuur
+- Tootmisse juurutamise parimad praktikad AI jaoks  
+- Azure AI teenuste integreerimine ja konfiguratsioon
+- Kulu optimeerimine AI töökoormuste jaoks
 - AI-spetsiifiliste juurutusprobleemide tõrkeotsing
 
 ### Õpieesmärgid
 
-Selle struktureeritud kursuse läbimisel:
-- **Valdake AZD põhitõdesid**: Põhikontseptsioonid, installatsioon ja seadistamine
-- **Juurutage AI-rakendusi**: Kasutage AZD-d koos Microsoft Foundry teenustega
-- **Rakendage infrastruktuur koodina**: Halda Azure ressursse Bicep mallidega
-- **Lahendage juurutusi**: Parandage levinud vigu ja siluge probleeme
-- **Optimeerige tootmiseks**: Turvalisus, skaleerimine, jälgimine ja kulujuhtimine
-- **Ehitage mitmeagendilisi lahendusi**: Juurutage keerukaid AI-arhitektuure
+Selle struktureeritud kursuse lõpetamisel saad:
+- **Valda AZD aluseid**: Põhimõtted, paigaldus ja konfiguratsioon
+- **Juuruta AI rakendusi**: Kasuta AZD-d koos Microsoft Foundry teenustega
+- **Rakenda infrastruktuuri koodina**: Halda Azure ressursse Bicep mallidega
+- **Tõrkeotsing juurutuste puhul**: Lahenda levinud probleeme ja silu vigasid
+- **Optimeeri tootmiseks**: Turvalisus, skaala, jälgimine ja kulude juhtimine
+- **Loo mitmeagendilisi lahendusi**: Juuruta keerukaid AI arhitektuure
 
-## 📚 Õppepeatükid
+## 📚 Õppimispeatükid
 
-*Valige oma õpitee vastavalt kogemustele ja eesmärkidele*
+*Vali oma õpitee vastavalt kogemustasemele ja eesmärkidele*
 
-### 🚀 1. peatükk: Alused ja kiire alustamine
-**Eeltingimused**: Azure'i tellimus, põhiteadmised käsureast  
-**Kestus**: 30–45 minutit  
+### 🚀 Peatükk 1: Alused & kiire alustamine
+**Eeltingimused**: Azure'i tellimus, põhilised käsuridade teadmised  
+**Kestus**: 30-45 minutit  
 **Kompleksus**: ⭐
 
-#### Mida õpite
-- Azure Developer CLI põhimõistete mõistmine
-- AZD installimine teie platvormile
-- Teie esimene edukas juurutus
+#### Mida sa õpid
+- Azure Developer CLI alustalad
+- AZD paigaldamine su platvormile
+- Sinu esimene edukas juurutus
 
 #### Õppematerjalid
-- **🎯 Alustage siit**: [Mis on Azure Developer CLI?](../..)
-- **📖 Teooria**: [AZD põhitõed](docs/getting-started/azd-basics.md) - Põhikonseptsioonid ja terminoloogia
-- **⚙️ Seadistus**: [Installimine ja seadistamine](docs/getting-started/installation.md) - Platvormispetsiifilised juhised
-- **🛠️ Praktiline**: [Teie esimene projekt](docs/getting-started/first-project.md) - Samm-sammult juhend
-- **📋 Kiirviide**: [Käskude spikker](resources/cheat-sheet.md)
+- **🎯 Alusta siit**: [Mis on Azure Developer CLI?](../..)
+- **📖 Teooria**: [AZD põhitõed](docs/getting-started/azd-basics.md) - Põhikontseptsioonid ja terminoloogia
+- **⚙️ Seadistamine**: [Installatsioon & seadistamine](docs/getting-started/installation.md) - Platvormispetsiifilised juhendid
+- **🛠️ Praktiline**: [Sinu esimene projekt](docs/getting-started/first-project.md) - Samm-sammuline juhend
+- **📋 Kiirviide**: [Käskude kiirjuhend](resources/cheat-sheet.md)
 
 #### Praktilised harjutused
 ```bash
-# Kiire paigaldamise kontroll
+# Kiire installatsiooni kontroll
 azd version
 
-# Paigalda oma esimene rakendus
+# Juuruta oma esimene rakendus
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Peatüki tulemus**: Juurutage edukalt lihtne veebirakendus Azure'i, kasutades AZD-d
+**💡 Peatüki tulemus**: Juurutada edukalt lihtsat veebirakendust Azure'i kasutades AZD-d
 
-**✅ Edukuse valideerimine:**
+**✅ Edu kinnitus:**
 ```bash
 # Pärast 1. peatüki lõpetamist peaksite suutma:
 azd version              # Kuvab installitud versiooni
 azd init --template todo-nodejs-mongo  # Initsialiseerib projekti
-azd up                  # Juurutab Azure'i
-azd show                # Kuvab jooksva rakenduse URL-i
+azd up                  # Paigaldab Azuresse
+azd show                # Kuvab töötava rakenduse URL-i
 # Rakendus avaneb brauseris ja töötab
-azd down --force --purge  # Puhastab ressursid
+azd down --force --purge  # Puhastab ressursse
 ```
 
-**📊 Aja kulu:** 30–45 minutit  
-**📈 Oskuste tase pärast:** Suudab iseseisvalt juurutada põhirakendusi
+**📊 Ajakulu:** 30-45 minutit  
+**📈 Oskuste tase peale:** Suudad iseseisvalt juurutada põhirakendusi
 
-**✅ Edukuse valideerimine:**
+**✅ Edu kinnitus:**
 ```bash
-# Pärast 1. peatüki lõpetamist peaksid sa suutma:
-azd version              # Kuvab installitud versiooni
+# Pärast 1. peatüki lõpetamist peaksite olema võimeline:
+azd version              # Näitab installitud versiooni
 azd init --template todo-nodejs-mongo  # Initsialiseerib projekti
-azd up                  # Rakendab Azure'i
+azd up                  # Juurutab Azure'i
 azd show                # Kuvab töötava rakenduse URL-i
 # Rakendus avaneb brauseris ja töötab
 azd down --force --purge  # Puhastab ressursid
 ```
 
-**📊 Aja kulu:** 30–45 minutit  
-**📈 Oskuste tase pärast:** Suudab iseseisvalt juurutada põhirakendusi
+**📊 Ajakulu:** 30-45 minutit  
+**📈 Oskuste tase peale:** Suudad iseseisvalt juurutada põhirakendusi
 
 ---
 
-### 🤖 2. peatükk: AI-esmane arendus (soovitatav AI arendajatele)
-**Eeltingimused**: 1. peatükk lõpetatud  
-**Kestus**: 1–2 tundi  
+### 🤖 Peatükk 2: AI-esmane arendus (Soovitatav AI-arendajatele)
+**Eeltingimused**: Peatükk 1 lõpetatud  
+**Kestus**: 1-2 tundi  
 **Kompleksus**: ⭐⭐
 
-#### Mida õpite
+#### Mida sa õpid
 - Microsoft Foundry integreerimine AZD-ga
-- AI-toega rakenduste juurutamine
-- AI-teenuste konfigureerimise mõistmine
+- Tehisintellektiga tugevdatud rakenduste juurutamine
+- AI teenuste konfiguratsioonide mõistmine
 
 #### Õppematerjalid
-- **🎯 Alustage siit**: [Microsoft Foundry integreerimine](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **📖 Mustrid**: [AI mudelite juurutamine](docs/microsoft-foundry/ai-model-deployment.md) - AI mudelite juurutamine ja haldamine
-- **🛠️ Töötuba**: [AI töötoa labor](docs/microsoft-foundry/ai-workshop-lab.md) - Tehke oma AI lahendused AZD-valmis
-- **🎥 Interaktiivne juhend**: [Töötubade materjalid](workshop/README.md) - Sirvupõhine õpe MkDocsiga * DevContainer Environment
-- **📋 Mallid**: [Microsoft Foundry mallid](../..)
-- **📝 Näited**: [AZD juurutuse näited](examples/README.md)
+- **🎯 Alusta siit**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📖 Mustrid**: [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md) - AI mudelite juurutamine ja haldus
+- **🛠️ Töötoa labor**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - Tee oma AI lahendid AZD-valmis
+- **🎥 Interaktiivne juhend**: [Workshop Materials](workshop/README.md) - Sirvijapõhine õppimine MkDocs * DevContainer Environment
+- **📋 Mallid**: [Microsoft Foundry Templates](../..)
+- **📝 Näited**: [AZD Deployment Examples](examples/README.md)
 
 #### Praktilised harjutused
 ```bash
-# Käivitage oma esimene tehisintellekti rakendus
+# Paigalda oma esimene tehisintellekti rakendus
 azd init --template azure-search-openai-demo
 azd up
 
-# Proovige täiendavaid tehisintellekti malle
+# Proovi täiendavaid tehisintellekti malle
 azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Peatüki tulemus**: Juurutage ja konfigureerige AI-toega vestlusrakendus RAG-võimekusega
+**💡 Peatüki tulemus**: Juurutada ja konfigureerida AI-vestlusrakendus RAG-võimekusega
 
-**✅ Edukuse valideerimine:**
+**✅ Edu kinnitus:**
 ```bash
 # Pärast 2. peatükki peaksite suutma:
 azd init --template azure-search-openai-demo
 azd up
 # Testida tehisintellekti vestlusliidest
-# Esitada küsimusi ja saada tehisintellekti vastuseid koos allikatega
-# Veenduda, et otsingu integratsioon töötab
+# Esitada küsimusi ja saada tehisintellekti abil genereeritud vastuseid koos allikatega
+# Veenduda, et otsinguintegratsioon töötab
 azd monitor  # Kontrollida, et Application Insights kuvab telemeetriaandmeid
 azd down --force --purge
 ```
 
-**📊 Aja kulu:** 1–2 tundi  
-**📈 Oskuste tase pärast:** Suudab juurutada ja konfigureerida tootmiskõlblikke AI-rakendusi  
-**💰 Kuluteadlikkus:** Mõista arendus- ja tootmiskulusid ligikaudu $80–150/kuu arenduseks, $300–3500/kuu tootmiseks
+**📊 Ajakulu:** 1-2 tundi  
+**📈 Oskuste tase peale:** Suudad juurutada ja konfigureerida tootmiskõlbulikke AI rakendusi  
+**💰 Kuluteadlikkus:** Mõista $80-150/kuus arenduse kulusid, $300-3500/kuus tootmiskulusid
 
-#### 💰 Kuluteemad AI juurutuste puhul
+#### 💰 Kulukaalutlused AI juurutuste jaoks
 
-**Arenduskeskkond (hinnanguliselt $80–150/kuu):**
-- Azure OpenAI (tasuline kasutuse järgi): $0–50/kuu (sõltuvalt tokenite kasutamisest)
-- AI Search (Basic-tase): $75/kuu
-- Container Apps (tarbimine): $0–20/kuu
-- Salvestus (Standard): $1–5/kuu
+**Arenduskeskkond (ligikaudne $80-150/kuus):**
+- Azure OpenAI (Pay-as-you-go): $0-50/kuus (sõltuvalt tokenite kasutusest)
+- AI Search (Basic tier): $75/kuus
+- Container Apps (Consumption): $0-20/kuus
+- Salvestus (Standard): $1-5/kuus
 
-**Tootmiskeskkond (hinnanguliselt $300–3,500+/kuu):**
-- Azure OpenAI (PTU ühtlase jõudluse jaoks): $3,000+/kuu VÕI tasuline kasutus suurma mahuga
-- AI Search (Standard-tase): $250/kuu
-- Container Apps (pühendatud): $50–100/kuu
-- Application Insights: $5–50/kuu
-- Salvestus (Premium): $10–50/kuu
+**Tootmiskeskkond (ligikaudne $300-3,500+/kuus):**
+- Azure OpenAI (PTU järjepideva jõudluse jaoks): $3,000+/kuus VÕI Pay-as-you-go suure mahuga
+- AI Search (Standard tier): $250/kuus
+- Container Apps (Dedicated): $50-100/kuus
+- Application Insights: $5-50/kuus
+- Salvestus (Premium): $10-50/kuus
 
 **💡 Kuluoptimeerimise näpunäited:**
-- Kasutage õppimiseks **tasuta taset** Azure OpenAI-s (kuni 50 000 tokenit/kuus kaasas)
-- Käivitage `azd down`, et ressursid vabastada, kui aktiivselt ei arendata
-- Alustage tarbimispõhisest arveldamisest, minge PTU-le ainult tootmises
-- Kasutage `azd provision --preview`, et enne juurutamist kulusid hinnata
-- Lülitage sisse automaatne skaleerimine: makske ainult reaalse kasutuse eest
+- Kasuta **Free Tier** Azure OpenAI õppimiseks (50,000 tokenit/kuus kaasatud)
+- Käivita `azd down`, et vabastada ressursse, kui sa aktiivselt ei arenda
+- Alusta tarbimispõhisest arvestusest, uuenda PTU-le vaid tootmises
+- Kasuta `azd provision --preview`, et hinnata kulusid enne juurutust
+- Lülita sisse automaatne skaala: maksa ainult tegeliku kasutuse eest
 
-**Kulude jälgimine:**
+**Kulu jälgimine:**
 ```bash
-# Kontrolli hinnangulisi igakuiseid kulusid
+# Kontrollige hinnangulisi igakuiseid kulusid
 azd provision --preview
 
-# Jälgi tegelikke kulusid Azure'i portaalis
+# Jälgige tegelikke kulusid Azure'i portaalis
 az consumption budget list --resource-group <your-rg>
 ```
 
 ---
 
-### ⚙️ 3. peatükk: Konfigureerimine ja autentimine
-**Eeltingimused**: 1. peatükk lõpetatud  
-**Kestus**: 45–60 minutit  
+### ⚙️ Peatükk 3: Konfiguratsioon & autentimine
+**Eeltingimused**: Peatükk 1 lõpetatud  
+**Kestus**: 45-60 minutit  
 **Kompleksus**: ⭐⭐
 
-#### Mida õpite
-- Keskkonna konfigureerimine ja haldamine
-- Autentimise ja turvalisuse parimad praktikad
-- Ressursside nimetamine ja organiseerimine
+#### Mida sa õpid
+- Keskkonna konfiguratsioon ja haldus
+- Autentimine ja turvalisuse parimad praktikad
+- Resursside nimetamine ja organiseerimine
 
 #### Õppematerjalid
-- **📖 Konfiguratsioon**: [Konfiguratsiooni juhend](docs/getting-started/configuration.md) - Keskkonna seadistamine
-- **🔐 Turvalisus**: [Autentimismustrid ja hallatav identiteet](docs/getting-started/authsecurity.md) - Autentimismustrid
-- **📝 Näited**: [Andmebaasi rakenduse näide](examples/database-app/README.md) - AZD andmebaasi näited
+- **📖 Konfiguratsioon**: [Configuration Guide](docs/getting-started/configuration.md) - Keskkonna seadistamine
+- **🔐 Turvalisus**: [Authentication patterns and managed identity](docs/getting-started/authsecurity.md) - Autentimismustrid
+- **📝 Näited**: [Database App Example](examples/database-app/README.md) - AZD andmebaasi näited
 
 #### Praktilised harjutused
-- Konfigureeri mitmeid keskkondi (dev, staging, prod)
-- Sea üles hallatav identiteedi autentimine
-- Rakenda keskkonnaspetsiifilisi konfiguratsioone
+- Konfigureeri mitu keskkonda (dev, staging, prod)
+- Sea sisse hallatava identiteedi autentimine
+- Rakenda keskkonnapõhised konfiguratsioonid
 
-**💡 Peatüki tulemus**: Halda mitut keskkonda õige autentimise ja turvalisusega
+**💡 Peatüki tulemus**: Halda mitut keskkonda nõuetekohase autentimise ja turvalisusega
 
 ---
 
-### 🏗️ 4. peatükk: Infrastruktuur koodina ja juurutamine
-**Eeltingimused**: 1.–3. peatükk lõpetatud  
-**Kestus**: 1–1,5 tundi  
+### 🏗️ Peatükk 4: Infrastruktuur koodina & juurutamine
+**Eeltingimused**: Peatükid 1-3 lõpetatud  
+**Kestus**: 1-1.5 tundi  
 **Kompleksus**: ⭐⭐⭐
 
-#### Mida õpite
-- Täiustatud juurutusmustrid
+#### Mida sa õpid
+- Täpsemad juurutamismustrid
 - Infrastruktuur koodina Bicepiga
-- Ressursside provisioneerimise strateegiad
+- Resursside provisjonimise strateegiad
 
 #### Õppematerjalid
-- **📖 Juurutamine**: [Juurutuse juhend](docs/deployment/deployment-guide.md) - Täielikud töövood
-- **🏗️ Provisioneerimine**: [Ressursside provisioneerimine](docs/deployment/provisioning.md) - Azure ressursihaldus
-- **📝 Näited**: [Container App näide](../../examples/container-app) - Konteineripõhised juurutused
+- **📖 Juurutamine**: [Deployment Guide](docs/deployment/deployment-guide.md) - Täielikud töövood
+- **🏗️ Provisjonimine**: [Provisioning Resources](docs/deployment/provisioning.md) - Azure ressursside haldus
+- **📝 Näited**: [Container App Example](../../examples/container-app) - Konteineripõhised juurutused
 
 #### Praktilised harjutused
 - Loo kohandatud Bicep mallid
 - Juuruta mitme teenusega rakendusi
-- Rakenda blue-green juurutusstrateegiaid
+- Rakenda sinine-roheline (blue-green) juurutusstrateegiaid
 
-**💡 Peatüki tulemus**: Juurutage keerukaid mitme teenuse rakendusi, kasutades kohandatud infrastruktuuri malle
+**💡 Peatüki tulemus**: Juurutada keerukaid mitme teenusega rakendusi, kasutades kohandatud infrastruktuuri malle
 
 ---
 
-### 🎯 5. peatükk: Mitmeagendilised AI lahendused (edasijõudnutele)
-**Eeltingimused**: 1.–2. peatükk lõpetatud  
-**Kestus**: 2–3 tundi  
+### 🎯 Peatükk 5: Mitmeagendilised AI-lahendused (edasijõudnutele)
+**Eeltingimused**: Peatükid 1-2 lõpetatud  
+**Kestus**: 2-3 tundi  
 **Kompleksus**: ⭐⭐⭐⭐
 
-#### Mida õpite
-- Mitmeagendiliste arhitektuurimustrid
+#### Mida sa õpid
+- Mitmeagendi arhitektuurimustrid
 - Agentide orkestreerimine ja koordineerimine
-- Tootmiskõlblikud AI-juurutused
+- Tootmiskõlblikud AI juurutused
 
 #### Õppematerjalid
-- **🤖 Esiletõstetud projekt**: [Jaemüügi mitmeagentne lahendus](examples/retail-scenario.md) - Täielik rakendus
+- **🤖 Esiletõstetud projekt**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Täielik teostus
 - **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Ühe klõpsuga juurutus
-- **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - Muster
+- **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - Mustrid
 
 #### Practical Exercises
 ```bash
-# Juuruta täielik mitmeagendiline jaemüügilahendus
+# Juurutage täielik jaemüügi mitmeagentne lahendus
 cd examples/retail-multiagent-arm-template
 ./deploy.sh
 
-# Uuri agentide konfiguratsioone
+# Uurige agentide konfiguratsioone
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Chapter Outcome**: Deploy and manage a production-ready multi-agent AI solution with Customer and Inventory agents
+**💡 Chapter Outcome**: Juuruta ja halda tootmiskõlblikku mitmeagendilist tehisintellekti lahendust koos Customer ja Inventory agentidega
 
 ---
 
-### 🔍 Chapter 6: Pre-Deployment Validation & Planning
-**Prerequisites**: Chapter 4 completed  
-**Duration**: 1 hour  
-**Complexity**: ⭐⭐
+### 🔍 Peatükk 6: Eel-juurutuse valideerimine ja planeerimine
+**Eeltingimused**: Peatükk 4 lõpetatud  
+**Kestus**: 1 tund  
+**Kompleksus**: ⭐⭐
 
-#### What You'll Learn
-- Capacity planning and resource validation
-- SKU selection strategies
-- Pre-flight checks and automation
+#### Mida õpid
+- Mahutavuse planeerimine ja ressursside valideerimine
+- SKU valiku strateegiad
+- Eel-juurutuse kontrollid ja automatiseerimine
 
-#### Learning Resources
-- **📊 Planning**: [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Resource validation
-- **💰 Selection**: [SKU Selection](docs/pre-deployment/sku-selection.md) - Cost-effective choices
-- **✅ Validation**: [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automated scripts
+#### Õppematerjalid
+- **📊 Planeerimine**: [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Ressursside valideerimine
+- **💰 Valik**: [SKU Selection](docs/pre-deployment/sku-selection.md) - Kuluefektiivsed valikud
+- **✅ Valideerimine**: [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automatiseeritud skriptid
 
-#### Practical Exercises
-- Run capacity validation scripts
-- Optimize SKU selections for cost
-- Implement automated pre-deployment checks
+#### Praktilised harjutused
+- Käivita mahutavuse valideerimise skripte
+- Optimeeri SKU valikuid kulude vähendamiseks
+- Rakenda automatiseeritud eeljärgimise kontrolle
 
-**💡 Chapter Outcome**: Validate and optimize deployments before execution
-
----
-
-### 🚨 Chapter 7: Troubleshooting & Debugging
-**Prerequisites**: Any deployment chapter completed  
-**Duration**: 1-1.5 hours  
-**Complexity**: ⭐⭐
-
-#### What You'll Learn
-- Systematic debugging approaches
-- Common issues and solutions
-- AI-specific troubleshooting
-
-#### Learning Resources
-- **🔧 Common Issues**: [Common Issues](docs/troubleshooting/common-issues.md) - FAQ and solutions
-- **🕵️ Debugging**: [Debugging Guide](docs/troubleshooting/debugging.md) - Step-by-step strategies
-- **🤖 AI Issues**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI service problems
-
-#### Practical Exercises
-- Diagnose deployment failures
-- Resolve authentication issues
-- Debug AI service connectivity
-
-**💡 Chapter Outcome**: Independently diagnose and resolve common deployment issues
+**💡 Peatüki eesmärk**: Valideerida ja optimeerida juurutusi enne nende läbiviimist
 
 ---
 
-### 🏢 Chapter 8: Production & Enterprise Patterns
-**Prerequisites**: Chapters 1-4 completed  
-**Duration**: 2-3 hours  
-**Complexity**: ⭐⭐⭐⭐
+### 🚨 Peatükk 7: Tõrkeotsing ja silumine
+**Eeltingimused**: Mis tahes juurutuspeatükk lõpetatud  
+**Kestus**: 1–1,5 tundi  
+**Kompleksus**: ⭐⭐
 
-#### What You'll Learn
-- Production deployment strategies
-- Enterprise security patterns
-- Monitoring and cost optimization
+#### Mida õpid
+- Süstemaatilised silumisvõtted
+- Levinud probleemid ja lahendused
+- AI-spetsiifiline tõrkeotsing
 
-#### Learning Resources
-- **🏭 Production**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
-- **📝 Examples**: [Microservices Example](../../examples/microservices) - Complex architectures
-- **📊 Monitoring**: [Application Insights integration](docs/pre-deployment/application-insights.md) - Monitoring
+#### Õppematerjalid
+- **🔧 Levinud probleemid**: [Common Issues](docs/troubleshooting/common-issues.md) - KKK ja lahendused
+- **🕵️ Silumine**: [Debugging Guide](docs/troubleshooting/debugging.md) - Samm-sammult strateegiad
+- **🤖 AI probleemid**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI-teenuste probleemid
 
-#### Practical Exercises
-- Implement enterprise security patterns
-- Set up comprehensive monitoring
-- Deploy to production with proper governance
+#### Praktilised harjutused
+- Diagnoosi juurutuse rikkeid
+- Lahenda autentimisprobleeme
+- Silu AI-teenuse ühenduvust
 
-**💡 Chapter Outcome**: Deploy enterprise-ready applications with full production capabilities
+**💡 Peatüki eesmärk**: Iseseisvalt diagnoosida ja lahendada levinud juurutusprobleeme
 
 ---
 
-## 🎓 Workshop Overview: Hands-On Learning Experience
+### 🏢 Peatükk 8: Tootmise ja ettevõtte mustrid
+**Eeltingimused**: Peatükid 1–4 lõpetatud  
+**Kestus**: 2–3 tundi  
+**Kompleksus**: ⭐⭐⭐⭐
 
-> **⚠️ WORKSHOP STATUS: Active Development**  
-> The workshop materials are currently being developed and refined. Core modules are functional, but some advanced sections are incomplete. We're actively working to complete all content. [Track progress →](workshop/README.md)
+#### Mida õpid
+- Tootmisse juurutamise strateegiad
+- Ettevõtte turvamustrid
+- Järelevalve ja kulude optimeerimine
 
-### Interactive Workshop Materials
-**Comprehensive hands-on learning with browser-based tools and guided exercises**
+#### Õppematerjalid
+- **🏭 Tootmine**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Ettevõtte mustrid
+- **📝 Näited**: [Microservices Example](../../examples/microservices) - Komplekssed arhitektuurid
+- **📊 Järelevalve**: [Application Insights integration](docs/pre-deployment/application-insights.md) - Järelevalve
 
-Our workshop materials provide a structured, interactive learning experience that complements the chapter-based curriculum above. The workshop is designed for both self-paced learning and instructor-led sessions.
+#### Praktilised harjutused
+- Rakenda ettevõtte turvamustreid
+- Sea üles laiapõhjaline järelevalve
+- Juuruta tootmiskeskkonda asjakohase haldusega
 
-#### 🛠️ Workshop Features
-- **Browser-Based Interface**: Complete MkDocs-powered workshop with search, copy, and theme features
-- **GitHub Codespaces Integration**: One-click development environment setup
-- **Structured Learning Path**: 7-step guided exercises (3.5 hours total)
-- **Discovery → Deployment → Customization**: Progressive methodology
-- **Interactive DevContainer Environment**: Pre-configured tools and dependencies
+**💡 Peatüki eesmärk**: Juurutada ettevõttetasemel rakendusi täieliku tootmistoega
 
-#### 📚 Workshop Structure
-The workshop follows a **Discovery → Deployment → Customization** methodology:
+---
 
-1. **Discovery Phase** (45 mins)
-   - Explore Microsoft Foundry templates and services
-   - Understand multi-agent architecture patterns
-   - Review deployment requirements and prerequisites
+## 🎓 Töötoa ülevaade: praktiline õpikogemus
 
-2. **Deployment Phase** (2 hours)
-   - Hands-on deployment of AI applications with AZD
-   - Configure Azure AI services and endpoints
-   - Implement security and authentication patterns
+> **⚠️ TÖÖTOA STAATUS: Arendamisel**  
+> Töötoa materjalid on praegu arendamisel ja täiendamisel. Põhimoodulid töötavad, kuid mõned arenenud osad on veel lõpetamisel. Töötame aktiivselt kõigi materjalide valmimise nimel. [Jälgi edenemist →](workshop/README.md)
 
-3. **Customization Phase** (45 mins)
-   - Modify applications for specific use cases
-   - Optimize for production deployment
-   - Implement monitoring and cost management
+### Interaktiivsed töötoa materjalid
+**Põhjalik praktiline õpe brauseripõhiste tööriistade ja juhendatud harjutustega**
 
-#### 🚀 Getting Started with the Workshop
+Meie töötoa materjalid pakuvad struktureeritud, interaktiivset õpikogemust, mis täiendavad ülaltoodud peatükkide õppekava. Töötoa on mõeldud nii iseseisvaks õppeks kui ka juhendatud sessioonideks.
+
+#### 🛠️ Töötoa funktsioonid
+- **Brauseripõhine liides**: Täielik MkDocs-i abil loodud töötoa liides otsingu, kopeerimise ja teemade valikutega
+- **GitHub Codespaces integratsioon**: Ühe klõpsuga arenduskeskkonna seadistamine
+- **Struktureeritud õppejooks**: 7-astmeline juhendatud harjutuste jada (kokku 3,5 tundi)
+- **Avastamine → Juurutamine → Kohandamine**: Progressiivne metoodika
+- **Interaktiivne DevContainer-keskkond**: Eeltuvastatud tööriistad ja sõltuvused
+
+#### 📚 Töötoa ülesehitus
+Töötoa ülesehitus järgib metoodikat: Avastamine → Juurutamine → Kohandamine:
+
+1. Avastamisfaas (45 min)
+   - Uuri Microsoft Foundry malle ja teenuseid
+   - Mõista mitmeagendilise arhitektuuri mustreid
+   - Vaata üle juurutuse nõuded ja eeltingimused
+
+2. Juurutusfaas (2 tundi)
+   - Praktiline AI-rakenduste juurutamine AZD-ga
+   - Seadista Azure AI teenused ja lõpp-punktid
+   - Rakenda turbe- ja autentimismustreid
+
+3. Kohandamisfaas (45 min)
+   - Muuda rakendusi konkreetsete kasutusjuhtude jaoks
+   - Optimeeri tootmisse juurutamiseks
+   - Rakenda järelevalvet ja kulude haldamist
+
+#### 🚀 Töötuba: alustamine
 ```bash
 # Valik 1: GitHub Codespaces (Soovitatav)
-# Klõpsake hoidlas "Code" → "Create codespace on main"
+# Hoidlas klõpsake "Code" → "Create codespace on main"
 
 # Valik 2: Kohalik arendus
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Järgige seadistusjuhiseid failis workshop/README.md
+# Järgige workshop/README.md failis olevaid seadistusjuhiseid
 ```
 
-#### 🎯 Workshop Learning Outcomes
-By completing the workshop, participants will:
-- **Deploy Production AI Applications**: Use AZD with Microsoft Foundry services
-- **Master Multi-Agent Architectures**: Implement coordinated AI agent solutions
-- **Implement Security Best Practices**: Configure authentication and access control
-- **Optimize for Scale**: Design cost-effective, performant deployments
-- **Troubleshoot Deployments**: Resolve common issues independently
+#### 🎯 Töötoa õpitulemused
+Töötuba lõpetades osalejad:
+- **Juurutavad tootmis-AI rakendusi**: Kasutavad AZD-d koos Microsoft Foundry teenustega
+- **Valdavad mitmeagendilisi arhitektuure**: Rakendavad koordineeritud AI-agentide lahendusi
+- **Rakendavad turbeparimaid tavasid**: Seadistavad autentimise ja juurdepääsukontrolli
+- **Optimeerivad skaleerimiseks**: Kujundavad kulutõhusaid ja jõudlusele optimeeritud juurutusi
+- **Tõrkeotsing juurutustel**: Lahendavad levinud probleeme iseseisvalt
 
-#### 📖 Workshop Resources
-- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning environment
-- **📋 Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Detailed walkthroughs
-- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-focused exercises
-- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration
+#### 📖 Töötoa ressursid
+- **🎥 Interaktiivne juhend**: [Workshop Materials](workshop/README.md) - Brauseripõhine õpikeskkond
+- **📋 Samm-sammult juhised**: [Guided Exercises](../../workshop/docs/instructions) - Üksikasjalikud läbikäigud
+- **🛠️ AI töötoa labor**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-keskse harjutuslabori materjalid
+- **💡 Kiire algus**: [Workshop Setup Guide](workshop/README.md#quick-start) - Keskkonna seadistus
 
-**Perfect for**: Corporate training, university courses, self-paced learning, and developer bootcamps.
-
----
-
-## 📖 What is Azure Developer CLI?
-
-Azure Developer CLI (azd) is a developer-centric command-line interface that accelerates the process of building and deploying applications to Azure. It provides:
-
-- **Template-based deployments** - Use pre-built templates for common application patterns
-- **Infrastructure as Code** - Manage Azure resources using Bicep or Terraform  
-- **Integrated workflows** - Seamlessly provision, deploy, and monitor applications
-- **Developer-friendly** - Optimized for developer productivity and experience
-
-### **AZD + Microsoft Foundry: Perfect for AI Deployments**
-
-**Why AZD for AI Solutions?** AZD addresses the top challenges AI developers face:
-
-- **AI-Ready Templates** - Pre-configured templates for Azure OpenAI, Cognitive Services, and ML workloads
-- **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints  
-- **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
-- **End-to-End AI Workflows** - From model development to production deployment with proper monitoring
-- **Cost Optimization** - Smart resource allocation and scaling strategies for AI workloads
-- **Microsoft Foundry Integration** - Seamless connection to Microsoft Foundry model catalog and endpoints
+**Sobib ideaalselt**: Korporatiivõpetuseks, ülikoolikursusteks, iseseisvaks õppeks ja arendajate bootcampideks.
 
 ---
 
-## 🎯 Templates & Examples Library
+## 📖 Mis on Azure Developer CLI?
 
-### Featured: Microsoft Foundry Templates
-**Start here if you're deploying AI applications!**
+Azure Developer CLI (azd) on arendajakeskne käsurealiides, mis kiirendab rakenduste loomise ja Azure'i juurutamise protsessi. See pakub:
 
-> **Note:** These templates demonstrate various AI patterns. Some are external Azure Samples, others are local implementations.
+- **Malli-põhised juurutused** - Kasuta eelnevalt loodud malle tavaliste rakenduse mustrite jaoks
+- **Infrastruktuur kui kood** - Halda Azure ressursse Bicep või Terraformi abil  
+- **Integreeritud töövood** - Provisioni, juuruta ja jälgi rakendusi sujuvalt
+- **Arendajasõbralik** - Optimeeritud arendaja tootlikkuse ja kogemuse jaoks
 
-| Template | Chapter | Complexity | Services | Type |
+### **AZD + Microsoft Foundry: ideaalne AI-juurutusteks**
+
+**Miks AZD AI-lahenduste jaoks?** AZD lahendab peamised väljakutsed, millega AI-arendajad kokku puutuvad:
+
+- **AI-valmis mallid** - Eeltuvastatud mallid Azure OpenAI, Cognitive Services ja ML töökoormuste jaoks
+- **Turvalised AI-juurutused** - Sisseehitatud turbemustrid AI-teenustele, API-võtmetele ja mudeli lõpp-punktidele  
+- **Tootmise AI-mustrid** - Parimad tavad skaleeritavate, kuluefektiivsete AI-rakenduste juurutamiseks
+- **Lõpp-punktini AI töövood** - Mudeli arendamisest kuni tootmise juurutamiseni koos asjakohase järelevalvega
+- **Kulude optimeerimine** - Nutikad ressursijaotuse ja skaleerimise strateegiad AI töökoormustele
+- **Microsoft Foundry integratsioon** - Sujuv ühendus Microsoft Foundry mudeli kataloogi ja lõpp-punktidega
+
+---
+
+## 🎯 Mallide ja näidete teek
+
+### Esiletõstetud: Microsoft Foundry mallid
+**Alusta siit, kui juurutad AI-rakendusi!**
+
+> **Märkus:** Need mallid demonstreerivad erinevaid AI-mustreid. Mõned on Azure Samples välised näited, teised on kohalikud teostused.
+
+| Mall | Peatükk | Kompleksus | Teenused | Tüüp |
 |----------|---------|------------|----------|------|
-| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | External |
-| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Chapter 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| External |
-| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | External |
-| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | External |
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | External |
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | External |
-| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Kohalik** |
+| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Peatükk 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Väline |
+| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Peatükk 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Väline |
+| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Peatükk 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Väline |
+| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Peatükk 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Väline |
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Peatükk 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Väline |
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Peatükk 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Väline |
+| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Peatükk 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Kohalik** |
 
-### Featured: Complete Learning Scenarios
-**Production-ready application templates mapped to learning chapters**
+### Esiletõstetud: Täielikud õpistsenaariumid
+**Tootmisvalmis rakenduse mallid, mis on seotud õppepeatükkidega**
 
-| Template | Learning Chapter | Complexity | Key Learning |
+| Mall | Õppepeatükk | Kompleksus | Põhiline õppetulemus |
 |----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | Basic AI deployment patterns |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | RAG implementation with Azure AI Search |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Chapter 4 | ⭐⭐ | Document Intelligence integration |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | Agent framework and function calling |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐ | Enterprise AI orchestration |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | Multi-agent architecture with Customer and Inventory agents |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Peatükk 2 | ⭐ | Põhilised AI juurutuse mustrid |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Peatükk 2 | ⭐⭐ | RAG rakendamine Azure AI Searchiga |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Peatükk 4 | ⭐⭐ | Document Intelligence integreerimine |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Peatükk 5 | ⭐⭐⭐ | Agendi raamistik ja funktsioonikõned |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Peatükk 8 | ⭐⭐⭐ | Ettevõtte AI orkestreerimine |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Peatükk 5 | ⭐⭐⭐⭐ | Mitmeagendiline arhitektuur koos Customer ja Inventory agentidega |
 
-### Learning by Example Type
+### Õppimine näidete kaudu
 
-> **📌 Local vs. External Examples:**  
-> **Local Examples** (in this repo) = Ready to use immediately  
-> **External Examples** (Azure Samples) = Clone from linked repositories
+> **📌 Kohalik vs. väline näide:**  
+> **Kohalikud näited** (selles repoes) = Valmis kohe kasutamiseks  
+> **Välised näited** (Azure Samples) = Kloneeri lingitud reposid
 
-#### Local Examples (Ready to Use)
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Complete production-ready implementation with ARM templates
-  - Multi-agent architecture (Customer + Inventory agents)
-  - Comprehensive monitoring and evaluation
-  - One-click deployment via ARM template
+#### Kohalikud näited (valmis kasutamiseks)
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Täielik tootmiskõlblik teostus ARM-mallidega
+  - Mitmeagendiline arhitektuur (Customer + Inventory agent)
+  - Põhjalik järelevalve ja hindamine
+  - Ühe klõpsuga juurutus ARM-malli kaudu
 
-#### Local Examples - Container Applications (Chapters 2-5)
-**Comprehensive container deployment examples in this repository:**
-- [**Container App Examples**](examples/container-app/README.md) - Complete guide to containerized deployments
-  - [Simple Flask API](../../examples/container-app/simple-flask-api) - Basic REST API with scale-to-zero
-  - [Microservices Architecture](../../examples/container-app/microservices) - Production-ready multi-service deployment
-  - Quick Start, Production, and Advanced deployment patterns
-  - Monitoring, security, and cost optimization guidance
+#### Kohalikud näited - konteinerirakendused (peatükid 2–5)
+**Selles repositooriumis põhjalikud konteineripõhised juurutusnäited:**
+- [**Container App Examples**](examples/container-app/README.md) - Põhjalik juhend konteineripõhiste juurutuste kohta
+  - [Simple Flask API](../../examples/container-app/simple-flask-api) - Lihtne REST-API koos scale-to-zero funktsiooniga
+  - [Microservices Architecture](../../examples/container-app/microservices) - Tootmisvalmis mitme-teenuse juurutus
+  - Kiire algus, tootmine ja arenenud juurutusmustrid
+  - Järelevalve, turvalisus ja kulude optimeerimise juhised
 
-#### External Examples - Simple Applications (Chapters 1-2)
-**Clone these Azure Samples repositories to get started:**
-- [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Basic deployment patterns
-- [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Static content deployment
-- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API deployment
+#### Välised näited - lihtsad rakendused (peatükid 1–2)
+**Klooni need Azure Samples reposid, et alustada:**
+- [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Põhilised juurutuse mustrid
+- [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Staatilise sisu juurutus
+- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST-API juurutus
 
-#### External Examples - Database Integration (Chapter 3-4)  
-- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Database connectivity patterns
-- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless data workflow
+#### Välised näited - andmebaasi integreerimine (peatükid 3–4)  
+- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Andmebaasi ühenduvuse mustrid
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless andmetöövoog
 
-#### External Examples - Advanced Patterns (Chapters 4-8)
-- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service architectures
-- [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Background processing  
-- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Production-ready ML patterns
+#### Välised näited - arenenud mustrid (peatükid 4–8)
+- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Mitme-teenuse arhitektuurid
+- [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Taustatöötlus  
+- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Tootmisvalmis ML-mustrid
 
-### External Template Collections
-- [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Curated collection of official and community templates
-- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn template documentation
-- [**Examples Directory**](examples/README.md) - Local learning examples with detailed explanations
+### Välised malli kogumikud
+- [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Kuraatoritud kogu ametlikest ja kogukonna mallidest
+- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn malli dokumentatsioon
+- [**Examples Directory**](examples/README.md) - Kohalikud õpinäited üksikasjalike selgitustega
 
 ---
 
-## 📚 Learning Resources & References
+## 📚 Õppematerjalid ja viited
 
-### Quick References
-- [**Käskude kiirjuhend**](resources/cheat-sheet.md) - Olulised azd käsud jaotatuna peatükkide järgi
-- [**Terminite sõnastik**](resources/glossary.md) - Azure'i ja azd terminoloogia  
-- [**KKK**](resources/faq.md) - Levinumad küsimused, jaotatuna õppepeatükkide kaupa
-- [**Õppejuhend**](resources/study-guide.md) - Põhjalikud praktilised harjutused
+### Kiirviited
+- [**Käskude kiirjuhend**](resources/cheat-sheet.md) - Olulised azd-käsud peatükkide kaupa
+- [**Glosaar**](resources/glossary.md) - Azure'i ja azd terminoloogia  
+- [**KKK**](resources/faq.md) - Sageli esinevad küsimused peatükkide kaupa
+- [**Õppimisjuhend**](resources/study-guide.md) - Üksikasjalikud praktilised ülesanded
 
-### Praktilised töötoad
-- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Tehke oma AI-lahendused AZD-ga juurutatavaks (2-3 tundi)
-- [**Interaktiivne töötoa juhend**](workshop/README.md) - Brauseripõhine töötoa juhend MkDocs'i ja DevContaineri keskkonnaga
-- [**Struktureeritud õpiteekond**](../../workshop/docs/instructions) - 7-sammulised juhendatud harjutused (Discovery → Deployment → Customization)
-- [**AZD algajatele töötuba**](workshop/README.md) - Täielikud praktilised töötoa materjalid GitHub Codespacesi integratsiooniga
+### Käed-küljes töötoad
+- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Tee oma AI-lahendused AZD-juurutatavaks (2-3 hours)
+- [**Interaktiivne töötoa juhend**](workshop/README.md) - Brauseripõhine töötuba MkDocsiga ja DevContaineri keskkonnaga
+- [**Struktureeritud õpitee**](../../workshop/docs/instructions) -7-sammulised juhendatud harjutused (Discovery → Deployment → Customization)
+- [**AZD For Beginners Workshop**](workshop/README.md) - Täielikud praktilised töötoa materjalid GitHub Codespacesi integratsiooniga
 
-### Välised õppematerjalid
-- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure arhitektuuri keskus](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure hinnakalkulaator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure olek](https://status.azure.com/)
+### Välised õpperessursid
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
+- [Azure Status](https://status.azure.com/)
 
 ---
 
 ## 🔧 Kiire tõrkeotsingu juhend
 
-**Levinumad probleemid, millega algajad kokku puutuvad, ja kiire lahendus:**
+**Algajate sagedased probleemid ja kiiremad lahendused:**
 
 ### ❌ "azd: command not found"
 
@@ -550,23 +550,23 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 azd version
 ```
 
-### ❌ "No subscription found" or "Subscription not set"
+### ❌ "Ühtegi tellimust ei leitud" või "Tellimus pole määratud"
 
 ```bash
-# Loetle saadaval olevad tellimused
+# Loetle saadaolevad tellimused
 az account list --output table
 
-# Sea vaikimisi tellimus
+# Määra vaikimisi tellimus
 az account set --subscription "<subscription-id-or-name>"
 
-# Sea AZD keskkonna jaoks
+# Määra AZD keskkonna jaoks
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
 # Kontrolli
 az account show
 ```
 
-### ❌ "InsufficientQuota" or "Quota exceeded"
+### ❌ "InsufficientQuota" või "Quota exceeded"
 
 ```bash
 # Proovi mõnda teist Azure'i regiooni
@@ -580,14 +580,14 @@ azd up
 }
 ```
 
-### ❌ "azd up" fails halfway through
+### ❌ "azd up" ebaõnnestub poole peal
 
 ```bash
 # Valik 1: Puhasta ja proovi uuesti
 azd down --force --purge
 azd up
 
-# Valik 2: Paranda lihtsalt infrastruktuuri
+# Valik 2: Lihtsalt paranda infrastruktuuri
 azd provision
 
 # Valik 3: Kontrolli üksikasjalikke logisid
@@ -595,10 +595,10 @@ azd show
 azd logs
 ```
 
-### ❌ "Authentication failed" or "Token expired"
+### ❌ "Autentimine ebaõnnestus" või "Token aegunud"
 
 ```bash
-# Autenteeri uuesti
+# Logi uuesti sisse
 az logout
 az login
 
@@ -609,46 +609,46 @@ azd auth login
 az account show
 ```
 
-### ❌ "Resource already exists" or naming conflicts
+### ❌ "Resurss on juba olemas" või nimekonfliktid
 
 ```bash
 # AZD genereerib unikaalseid nimesid, kuid kui tekib konflikt:
 azd down --force --purge
 
-# Seejärel proovi uuesti puhta keskkonnaga
+# Siis proovi uuesti uue keskkonnaga
 azd env new dev-v2
 azd up
 ```
 
-### ❌ "Template deployment taking too long"
+### ❌ Malli juurutamine võtab liiga kaua aega
 
 **Tavalised ooteajad:**
-- Lihtne veebirakendus: 5-10 minutit
-- Rakendus andmebaasiga: 10-15 minutit
-- AI rakendused: 15-25 minutit (OpenAI juurutamine on aeglane)
+- Lihtne veebirakendus: 5–10 minutit
+- Rakendus andmebaasiga: 10–15 minutit
+- AI rakendused: 15–25 minutit (OpenAI provisioneerimine on aeglane)
 
 ```bash
-# Kontrolli edenemist
+# Kontrollige edenemist
 azd show
 
-# Kui kinni üle 30 minuti, kontrolli Azure'i portaali:
+# Kui kinni >30 minutit, kontrollige Azure'i portaali:
 azd monitor
-# Otsi ebaõnnestunud juurutusi
+# Otsige ebaõnnestunud juurutusi
 ```
 
-### ❌ "Permission denied" or "Forbidden"
+### ❌ "Luba keeldus" või "Keelatud"
 
 ```bash
-# Kontrollige oma Azure'i rolli
+# Kontrolli oma Azure'i rolli
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# Teil peab olema vähemalt "Contributor" roll
+# Sul on vaja vähemalt "Contributor" rolli
 # Paluge oma Azure'i administraatoril anda:
 # - Contributor (ressursside jaoks)
 # - User Access Administrator (rolli määramiseks)
 ```
 
-### ❌ Can't find deployed application URL
+### ❌ Ei leia juurutatud rakenduse URL-i
 
 ```bash
 # Kuva kõik teenuse lõpp-punktid
@@ -664,19 +664,19 @@ azd env get-values
 
 ### 📚 Täielikud tõrkeotsingu ressursid
 
-- **Tüüpiliste probleemide juhend:** [Üksikasjalikud lahendused](docs/troubleshooting/common-issues.md)
+- **Levinud probleemide juhend:** [Põhjalikud lahendused](docs/troubleshooting/common-issues.md)
 - **AI-spetsiifilised probleemid:** [AI tõrkeotsing](docs/troubleshooting/ai-troubleshooting.md)
-- **Tõrkeotsingu juhend:** [Samm-sammuline tõrkeotsing](docs/troubleshooting/debugging.md)
+- **Silumise juhend:** [Silumine samm-sammult](docs/troubleshooting/debugging.md)
 - **Abi saamine:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🔧 Kiire tõrkeotsingu juhend
 
-**Levinumad probleemid, millega algajad kokku puutuvad, ja kiire lahendus:**
+**Algajate sagedased probleemid ja kiiremad lahendused:**
 
 <details>
-<summary><strong>❌ "azd: command not found"</strong></summary>
+<summary><strong>❌ "azd: käsku ei leitud"</strong></summary>
 
 ```bash
 # Paigalda esmalt AZD
@@ -695,7 +695,7 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
+<summary><strong>❌ "Ühtegi tellimust ei leitud" või "Tellimus pole määratud"</strong></summary>
 
 ```bash
 # Loetle saadaolevad tellimused
@@ -716,7 +716,7 @@ az account show
 <summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
 ```bash
-# Proovi teist Azure'i piirkonda
+# Proovi teist Azure'i regiooni
 azd env set AZURE_LOCATION "westus2"
 azd up
 
@@ -729,7 +729,7 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" fails halfway through</strong></summary>
+<summary><strong>❌ "azd up" ebaõnnestub poole peal</strong></summary>
 
 ```bash
 # Valik 1: Puhasta ja proovi uuesti
@@ -746,10 +746,10 @@ azd logs
 </details>
 
 <details>
-<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
+<summary><strong>❌ "Autentimine ebaõnnestus" või "Token aegunud"</strong></summary>
 
 ```bash
-# Autenteeri uuesti
+# Logi uuesti sisse
 az logout
 az login
 
@@ -762,52 +762,52 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
+<summary><strong>❌ "Resurss on juba olemas" või nimekonfliktid</strong></summary>
 
 ```bash
 # AZD genereerib unikaalseid nimesid, kuid kui tekib konflikt:
 azd down --force --purge
 
-# Siis proovi uuesti puhta keskkonnaga
+# Seejärel proovi uuesti uue keskkonnaga
 azd env new dev-v2
 azd up
 ```
 </details>
 
 <details>
-<summary><strong>❌ Mallide juurutamine võtab liiga kaua aega</strong></summary>
+<summary><strong>❌ Malli juurutamine võtab liiga kaua aega</strong></summary>
 
 **Tavalised ooteajad:**
-- Lihtne veebirakendus: 5-10 minutit
-- Rakendus andmebaasiga: 10-15 minutit
-- AI rakendused: 15-25 minutit (OpenAI juurutamine on aeglane)
+- Lihtne veebirakendus: 5–10 minutit
+- Rakendus andmebaasiga: 10–15 minutit
+- AI rakendused: 15–25 minutit (OpenAI provisioneerimine on aeglane)
 
 ```bash
 # Kontrolli edenemist
 azd show
 
-# Kui kinni >30 minutit, kontrolli Azure'i portaali:
+# Kui takerdunud üle 30 minuti, kontrolli Azure'i portaali:
 azd monitor
-# Otsi nurjunud juurutusi
+# Otsi ebaõnnestunud juurutusi
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
+<summary><strong>❌ "Luba keeldus" või "Keelatud"</strong></summary>
 
 ```bash
 # Kontrollige oma Azure'i rolli
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# Teil peab olema vähemalt "Contributor" roll
+# Teil on vaja vähemalt "Contributor" rolli
 # Paluge oma Azure'i administraatoril anda:
 # - Contributor (ressursside jaoks)
-# - User Access Administrator (rollide määramiseks)
+# - User Access Administrator (rolli määramiseks)
 ```
 </details>
 
 <details>
-<summary><strong>❌ Can't find deployed application URL</strong></summary>
+<summary><strong>❌ Ei leia juurutatud rakenduse URL-i</strong></summary>
 
 ```bash
 # Kuva kõik teenuse lõpp-punktid
@@ -824,119 +824,119 @@ azd env get-values
 
 ### 📚 Täielikud tõrkeotsingu ressursid
 
-- **Tüüpiliste probleemide juhend:** [Üksikasjalikud lahendused](docs/troubleshooting/common-issues.md)
+- **Levinud probleemide juhend:** [Põhjalikud lahendused](docs/troubleshooting/common-issues.md)
 - **AI-spetsiifilised probleemid:** [AI tõrkeotsing](docs/troubleshooting/ai-troubleshooting.md)
-- **Tõrkeotsingu juhend:** [Samm-sammuline tõrkeotsing](docs/troubleshooting/debugging.md)
+- **Silumise juhend:** [Silumine samm-sammult](docs/troubleshooting/debugging.md)
 - **Abi saamine:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
 ## 🎓 Kursuse lõpetamine ja sertifitseerimine
 
-### Edenemise jälgimine
+### Edusammude jälgimine
 Jälgi oma õppe edenemist iga peatüki lõikes:
 
-- [ ] **Peatükk 1**: Alused ja kiire algus ✅
-- [ ] **Peatükk 2**: AI-keskne arendus ✅  
+- [ ] **Peatükk 1**: Põhitõed ja kiire algus ✅
+- [ ] **Peatükk 2**: AI-esmane arendus ✅  
 - [ ] **Peatükk 3**: Konfiguratsioon ja autentimine ✅
-- [ ] **Peatükk 4**: Infrastruktuur koodina (IaC) ja juurutamine ✅
+- [ ] **Peatükk 4**: Infrastruktuur kui kood ja juurutamine ✅
 - [ ] **Peatükk 5**: Mitmeagendilised AI-lahendused ✅
-- [ ] **Peatükk 6**: Enne juurutamist valideerimine ja planeerimine ✅
+- [ ] **Peatükk 6**: Eeljuurutuse valideerimine ja planeerimine ✅
 - [ ] **Peatükk 7**: Tõrkeotsing ja silumine ✅
-- [ ] **Peatükk 8**: Tootmis- ja ettevõtte mustrid ✅
+- [ ] **Peatükk 8**: Tootmiskeskkond ja ettevõtte mustrid ✅
 
-### Õppe kinnitamine
-Pärast iga peatüki lõpetamist kontrolli oma teadmisi järgmiselt:
-1. **Praktiline harjutus**: Lõpeta peatüki praktiline juurutamine
-2. **Teadmiste kontroll**: Vaata peatüki KKK jaotist
-3. **Kogukonna arutelu**: Jaga oma kogemust Azure Discordis
-4. **Järgmine peatükk**: Liigu järgmise keerukuse tasemeni
+### Õppimise kinnitamine
+Pärast iga peatüki lõpetamist kinnita oma teadmised järgmiselt:
+1. **Praktiline ülesanne**: Sooritage peatüki praktiline juurutus
+2. **Teadmiste kontroll**: Vaadake oma peatüki KKK jaotis läbi
+3. **Kogukonna arutelu**: Jagage oma kogemust Azure Discordis
+4. **Järgmine peatükk**: Liikuge järgmisele keerukuse tasemele
 
 ### Kursuse lõpetamise eelised
-Pärast kõigi peatükkide lõpetamist omandad:
-- **Töökogemus**: Reaalsete AI-rakenduste juurutamine Azure'i
-- **Professionaalsed oskused**: Ettevõttevalmiduse juurutamisvõimekus  
+Pärast kõigi peatükkide läbimist omandate:
+- **Tootmiskogemus**: Olete juurutanud päris AI-rakendusi Azure'i
+- **Professionaalsed oskused**: Ettevõtte-tasemel juurutusvõimekus  
 - **Kogukonna tunnustus**: Aktiivne Azure arendajate kogukonna liige
-- **Karjääri areng**: Nõutud AZD ja AI juurutamise oskused
+- **Karjääriedendamine**: Nõutud AZD ja AI juurutamise pädevus
 
 ---
 
 ## 🤝 Kogukond ja tugi
 
 ### Abi ja tugi
-- **Tehnilised probleemid**: [Teata vigadest ja taotle uusi funktsioone](https://github.com/microsoft/azd-for-beginners/issues)
-- **Õppeküsimused**: [Microsoft Azure Discordi kogukond](https://discord.gg/microsoft-azure) ja [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **AI-spetsiifiline abi**: Liitu [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Tehnilised probleemid**: [Teatage vigadest ja taotlege funktsioone](https://github.com/microsoft/azd-for-beginners/issues)
+- **Õppimise küsimused**: [Microsoft Azure Discordi kogukond](https://discord.gg/microsoft-azure) ja [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI-spetsiifiline abi**: Liituge [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Dokumentatsioon**: [Ametlik Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Kogukonna ülevaated Microsoft Foundry Discordist
+### Kogukonna teadmised Microsoft Foundry Discordist
 
-**Hiljutiste küsitluste tulemused #Azure kanalist:**
-- **45%** arendajatest soovib kasutada AZD-d AI töökoormuste jaoks
-- **Peamised väljakutsed**: Mitmete teenuste juurutamine, volituste haldamine, tootmiskõlblikkus  
-- **Kõige enam nõutud**: AI-spetsiifilised mallid, tõrkeotsingu juhendid, parimad tavad
+**Hiljutised küsitluse tulemused #Azure kanalist:**
+- **45%** arendajatest soovivad kasutada AZD-d AI töökoormuste jaoks
+- **Peamised väljakutsed**: Mitme-teenuse juurutused, volituste haldamine, tootmisvalmidus  
+- **Kõige enam soovitud**: AI-spetsiifilised mallid, tõrkeotsingu juhendid, head tavad
 
 **Liitu meie kogukonnaga, et:**
-- Jaga oma AZD + AI kogemusi ja saa abi
-- Saada varajast ligipääsu uutele AI mallidele
-- Panusta AI juurutamise parimatesse tavadesse
-- Mõjuta tulevaste AI + AZD funktsioonide arengut
+- Jagada oma AZD + AI kogemusi ja saada abi
+- Saada varajast juurdepääsu uutele AI-mallidele
+- Panustada AI-juurutuse heade tavade koostamisse
+- Mõjutada tulevasi AI + AZD funktsioonide arendusi
 
 ### Kursusele panustamine
-Ootame panuseid! Palun loe üksikasjade saamiseks meie [Panustamise juhendit](CONTRIBUTING.md):
-- **Sisu täiustused**: Täienda olemasolevaid peatükke ja näiteid
-- **Uued näited**: Lisa reaalse maailma stsenaariumid ja mallid  
-- **Tõlkimine**: Aita hoida mitmekeelset tuge
-- **Veaaruanded**: Paranda täpsust ja selgust
-- **Kogukonna standardid**: Järgi meie kaasavaid kogukonna juhiseid
+Tervitame panuseid! Palun lugege üksikasjade saamiseks meie [Panustamisjuhendit](CONTRIBUTING.md) for details on:
+- **Sisu parendamine**: Täiustage olemasolevaid peatükke ja näiteid
+- **Uued näited**: Lisage reaalseid stsenaariume ja malle  
+- **Tõlkimine**: Aidake säilitada mitmekeelset tuge
+- **Vigade raporteerimine**: Parandage täpsust ja selgust
+- **Kogukonna standardid**: Järgige meie kaasavaid kogukonna juhiseid
 
 ---
 
-## 📄 Kursuse teave
+## 📄 Kursuse info
 
 ### Litsents
-See projekt on litsentseeritud MIT-litsentsi alusel - üksikasjadeks vaata faili [LICENSE](../../LICENSE).
+See projekt on litsentseeritud MIT-litsentsi alusel - vaadake täpsemate üksikasjade jaoks faili [LICENSE](../../LICENSE).
 
-### Seotud Microsofti õppematerjalid
+### Seotud Microsofti õpperessursid
 
-Meie meeskond valmistab veel teisi põhjalikke õppekursusi:
+Meie meeskond toodab ka teisi põhjalikke õppekursusi:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
-[![LangChain4j algajatele](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
-[![LangChain.js algajatele](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
 
 ---
 
 ### Azure / Edge / MCP / Agendid
-[![AZD algajatele](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Edge AI algajatele](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![MCP algajatele](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI agentide algajatele](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Generatiivse AI sari
-[![Generatiivne AI algajatele](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Generatiivne AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Generatiivne AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![Generatiivne AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Põhiõpe
-[![Masinõpe algajatele](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Andmeteadus algajatele](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![Tehisintellekt algajatele](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![Küberturvalisus algajatele](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI algajatele](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Küberjulgeolek algajatele](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
 [![Veebiarendus algajatele](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
 [![IoT algajatele](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![XR-arendus algajatele](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR arendus algajatele](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Copiloti sari
-[![Copilot AI-paarprogrammeerimiseks](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot AI paarisprogrammeerimiseks](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 [![Copilot C#/.NET jaoks](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 [![Copiloti seiklus](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
@@ -947,15 +947,16 @@ Meie meeskond valmistab veel teisi põhjalikke õppekursusi:
 
 **🚀 Valmis õppima?**
 
-**Algajad**: Alusta [Peatükk 1: Põhitõed ja kiire alustamine](../..)  
-**AI arendajad**: Minge [Peatükk 2: AI-esimene arendamine](../..)  
-**Kogenud arendajad**: Alustage [Peatükk 3: Konfiguratsioon ja autentimine](../..)
+**Algajatele**: Start with [Peatükk 1: Alused ja kiire alustamine](../..)  
+**AI arendajatele**: Jump to [Peatükk 2: AI-keskne arendus](../..)  
+**Kogenud arendajad**: Begin with [Peatükk 3: Konfiguratsioon ja autentimine](../..)
 
-**Järgmised sammud**: [Alusta peatükki 1 - AZD põhitõed](docs/getting-started/azd-basics.md) →
+**Järgmised sammud**: [Alusta peatükki 1 - AZD alused](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Vastutusest loobumine:
-See dokument on tõlgitud tehisintellekti tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, tuleb arvestada, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle algkeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega valede tõlgenduste eest.
+
+Seda dokumenti on tõlgitud tehisintellektil põhineva tõlke-teenuse Co-op Translator (https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, palun pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokumenti selle algkeeles tuleks pidada autoriteetseks allikaks. Kriitilise tähtsusega teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega valesti tõlgendamise eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
