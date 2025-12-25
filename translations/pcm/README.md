@@ -1,35 +1,35 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "1caf5e63f84a4cdffbeb8d0fe5fa3fa8",
-  "translation_date": "2025-12-21T21:59:04+00:00",
+  "original_hash": "05c30c9e5ed7951c72855108c6788034",
+  "translation_date": "2025-12-25T10:10:52+00:00",
   "source_file": "README.md",
   "language_code": "pcm"
 }
 -->
-# AZD For Beginners: Na Structured Learning Journey
+# AZD For Beginners: Wan Structured Learning Journey
 
 ![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.pcm.png) 
 
-[![GitHub watcher dem](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![GitHub fork dem](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub star dem](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub people wey dey watch](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ## How to Start Dis Course
 
-Follow these steps make you fit start your AZD learning journey:
+Follow dis steps make you fit start your AZD learning journey:
 
-1. **Fork di Repository**: Click [![GitHub fork dem](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Clone di Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **Join di Community**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) for expert support
-4. **Choose Your Learning Path**: Choose chapter wey dey below wey match your experience level
+1. **Fork the Repository**: Click [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Clone the Repository**: `git clone https://github.com/microsoft/azd-for-beginners.git`
+3. **Join the Community**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) for expert support
+4. **Choose Your Learning Path**: Select one chapter wey match your experience level
 
 ### Multi-Language Support
 
-#### Automated Translations (Always Dey Up-to-Date)
+#### Automated Translations (Dem dey Always Up-to-Date)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
 [Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](./README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
@@ -37,30 +37,30 @@ Follow these steps make you fit start your AZD learning journey:
 
 ## Course Overview
 
-Become master for Azure Developer CLI (azd) wit chapters wey dem arrange step-by-step. **We go specially focus on how to deploy AI applications wit Microsoft Foundry integration.**
+Learn how to use Azure Developer CLI (azd) through arranged chapters wey dem design make you learn step-by-step. **We put special focus for AI application deployment with Microsoft Foundry integration.**
 
-### Why Dis Course Dey Important for Modern Developers
+### Why Dis Course Important for Modern Developers
 
-Based on wetin Microsoft Foundry Discord community talk, **45% of developers wan use AZD for AI workloads** but dem dey face wahala with:
-- Complex multi-service AI architectures
-- How to deploy AI for production correct  
+Based on Microsoft Foundry Discord community insight, **45% of developers wan use AZD for AI workloads** but dem dey face wahala like:
+- Complex AI architectures wey get plenty services
+- Best practices for deploying AI for production  
 - How to integrate and configure Azure AI services
-- How to optimize cost for AI workloads
-- Troubleshooting AI-specific deployment issues
+- How to optimise cost for AI workloads
+- Troubleshooting deployment issues wey relate to AI
 
 ### Learning Objectives
 
-When you finish dis structured course, you go:
-- **Master AZD Fundamentals**: Understand core concepts, how to install, and how to configure
-- **Deploy AI Applications**: Use AZD wit Microsoft Foundry services
-- **Implement Infrastructure as Code**: Manage Azure resources wit Bicep templates
-- **Troubleshoot Deployments**: Solve common issues and debug problems
+By finishing dis structured course, you go:
+- **Master AZD Fundamentals**: Core concepts, how to install, and how to configure
+- **Deploy AI Applications**: Use AZD with Microsoft Foundry services
+- **Implement Infrastructure as Code**: Manage Azure resources with Bicep templates
+- **Troubleshoot Deployments**: Fix common issues and debug problems
 - **Optimize for Production**: Security, scaling, monitoring, and cost management
 - **Build Multi-Agent Solutions**: Deploy complex AI architectures
 
 ## 📚 Learning Chapters
 
-*Choose your learning path based on experience level and goals*
+*Choose di learning path wey match your experience level and goals*
 
 ### 🚀 Chapter 1: Foundation & Quick Start
 **Prerequisites**: Azure subscription, basic command line knowledge  
@@ -68,37 +68,37 @@ When you finish dis structured course, you go:
 **Complexity**: ⭐
 
 #### Wetin You Go Learn
-- Understand Azure Developer CLI basics
-- How to install AZD on your platform
-- How to do your first successful deployment
+- Understanding Azure Developer CLI fundamentals
+- Installing AZD on your platform
+- Your first successful deployment
 
 #### Learning Resources
-- **🎯 Start Here**: [Wet na Azure Developer CLI?](../..)
-- **📖 Theory**: [AZD Basics](docs/getting-started/azd-basics.md) - Main concepts and terms
-- **⚙️ Setup**: [Installation & Setup](docs/getting-started/installation.md) - Guides for each platform
-- **🛠️ Hands-On**: [Your First Project](docs/getting-started/first-project.md) - Step-by-step guide
+- **🎯 Start Here**: [What is Azure Developer CLI?](../..)
+- **📖 Theory**: [AZD Basics](docs/getting-started/azd-basics.md) - Core concepts and terminology
+- **⚙️ Setup**: [Installation & Setup](docs/getting-started/installation.md) - Platform-specific guides
+- **🛠️ Hands-On**: [Your First Project](docs/getting-started/first-project.md) - Step-by-step tutorial
 - **📋 Quick Reference**: [Command Cheat Sheet](resources/cheat-sheet.md)
 
 #### Practical Exercises
 ```bash
-# Quick check make sure installation don work
+# Small check make sure installation don work
 azd version
 
-# Carry your first app go live
+# Make you deploy your first app
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Chapter Outcome**: You go successfully deploy one simple web application to Azure using AZD
+**💡 Chapter Outcome**: Make you fit successfully deploy one simple web application to Azure using AZD
 
 **✅ Success Validation:**
 ```bash
-# After you don finish Chapter 1, you go fit:
-azd version              # Dey show di installed version
-azd init --template todo-nodejs-mongo  # Dey set up di project
-azd up                  # Dey deploy am to Azure
-azd show                # Dey show di URL wey di app dey run for
-# App go open for browser an e go work
+# Wen you don finish Chapter 1, you go fit:
+azd version              # Show di version wey don install
+azd init --template todo-nodejs-mongo  # Dey initialize di project
+azd up                  # Dey deploy am go Azure
+azd show                # Show di URL wey di app dey run for
+# Di app go open for browser an e go dey work
 azd down --force --purge  # Dey clean up di resources
 ```
 
@@ -108,12 +108,12 @@ azd down --force --purge  # Dey clean up di resources
 **✅ Success Validation:**
 ```bash
 # After you don finish Chapter 1, you go fit:
-azd version              # Dey show version wey don install
-azd init --template todo-nodejs-mongo  # Dey set up di project
+azd version              # Show di version wey don install
+azd init --template todo-nodejs-mongo  # Dey initialize di project
 azd up                  # Dey deploy go Azure
-azd show                # Dey show di URL wey di app dey run for
-# App go open for browser and e go work
-azd down --force --purge  # Dey clean up di resources
+azd show                # Show di URL wey di app dey run for
+# Di application go open for browser and e go dey work
+azd down --force --purge  # Clean up di resources
 ```
 
 **📊 Time Investment:** 30-45 minutes  
@@ -122,30 +122,30 @@ azd down --force --purge  # Dey clean up di resources
 ---
 
 ### 🤖 Chapter 2: AI-First Development (Recommended for AI Developers)
-**Prerequisites**: Chapter 1 don finish  
+**Prerequisites**: Chapter 1 completed  
 **Duration**: 1-2 hours  
 **Complexity**: ⭐⭐
 
 #### Wetin You Go Learn
-- How to integrate Microsoft Foundry wit AZD
-- How to deploy AI-powered applications
-- Understand AI service configurations
+- Microsoft Foundry integration with AZD
+- Deploying AI-powered applications
+- Understanding AI service configurations
 
 #### Learning Resources
 - **🎯 Start Here**: [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **📖 Patterns**: [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md) - Deploy and manage AI models
 - **🛠️ Workshop**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions AZD-ready
-- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning wit MkDocs * DevContainer Environment
+- **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning with MkDocs * DevContainer Environment
 - **📋 Templates**: [Microsoft Foundry Templates](../..)
 - **📝 Examples**: [AZD Deployment Examples](examples/README.md)
 
 #### Practical Exercises
 ```bash
-# Put your first AI app for production
+# Deploy di first AI application wey you get
 azd init --template azure-search-openai-demo
 azd up
 
-# Try more AI template dem
+# Try more AI templates dem
 azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
@@ -154,19 +154,19 @@ azd init --template agent-openai-python-prompty
 
 **✅ Success Validation:**
 ```bash
-# After Chapter 2, you go fit do:
+# After Chapter 2, you go fit:
 azd init --template azure-search-openai-demo
 azd up
 # Test di AI chat interface
-# Ask question dem and get answers wey AI give with source dem
-# Confirm say search integration dey work
-azd monitor  # Check Application Insights dey show telemetry
+# Ask question dem an get AI-powered answers wey get sources
+# Make sure say search integration dey work
+azd monitor  # Check say Application Insights dey show telemetry
 azd down --force --purge
 ```
 
 **📊 Time Investment:** 1-2 hours  
 **📈 Skill Level After:** Fit deploy and configure production-ready AI applications  
-**💰 Cost Awareness:** Understand $80-150/month for dev costs, $300-3500/month for production costs
+**💰 Cost Awareness:** Know say dev costs fit be $80-150/month, production costs fit be $300-3500/month
 
 #### 💰 Cost Considerations for AI Deployments
 
@@ -192,17 +192,17 @@ azd down --force --purge
 
 **Cost Monitoring:**
 ```bash
-# Check di estimated monthly costs
+# Check di monthly cost wey dem estimate
 azd provision --preview
 
-# Dey monitor di real costs for Azure Portal
+# Monitor di real cost dem for Azure Portal
 az consumption budget list --resource-group <your-rg>
 ```
 
 ---
 
 ### ⚙️ Chapter 3: Configuration & Authentication
-**Prerequisites**: Chapter 1 don finish  
+**Prerequisites**: Chapter 1 completed  
 **Duration**: 45-60 minutes  
 **Complexity**: ⭐⭐
 
@@ -221,18 +221,18 @@ az consumption budget list --resource-group <your-rg>
 - Set up managed identity authentication
 - Implement environment-specific configurations
 
-**💡 Chapter Outcome**: Manage multiple environments wit proper authentication and security
+**💡 Chapter Outcome**: Manage multiple environments well with correct authentication and security
 
 ---
 
 ### 🏗️ Chapter 4: Infrastructure as Code & Deployment
-**Prerequisites**: Chapters 1-3 don finish  
+**Prerequisites**: Chapters 1-3 completed  
 **Duration**: 1-1.5 hours  
 **Complexity**: ⭐⭐⭐
 
 #### Wetin You Go Learn
 - Advanced deployment patterns
-- Infrastructure as Code wit Bicep
+- Infrastructure as Code with Bicep
 - Resource provisioning strategies
 
 #### Learning Resources
@@ -250,7 +250,7 @@ az consumption budget list --resource-group <your-rg>
 ---
 
 ### 🎯 Chapter 5: Multi-Agent AI Solutions (Advanced)
-**Prerequisites**: Chapters 1-2 don finish  
+**Prerequisites**: Chapters 1-2 completed  
 **Duration**: 2-3 hours  
 **Complexity**: ⭐⭐⭐⭐
 
@@ -264,9 +264,9 @@ az consumption budget list --resource-group <your-rg>
 - **🛠️ ARM Templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Deploy wit one click
 - **📖 Architecture**: [Multi-agent coordination patterns](/docs/pre-deployment/coordination-patterns.md) - Patterns
 
-#### Praktikal Ejasaiz
+#### Practical Exercises
 ```bash
-# Deploy di complete retail solution wey get many agents
+# Deploy di complete retail multi-agent solution
 cd examples/retail-multiagent-arm-template
 ./deploy.sh
 
@@ -274,158 +274,158 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Chapter Outcome**: Make you fit deploy an manage one production-ready multi-agent AI solution wey get Customer and Inventory agents
+**💡 Chapter Outcome**: Make you fit deploy and manage production-ready multi-agent AI solution wey get Customer and Inventory agents
 
 ---
 
 ### 🔍 Chapter 6: Pre-Deployment Validation & Planning
-**Prerequisites**: Chapter 4 don finish  
+**Prerequisites**: Make you don finish Chapter 4  
 **Duration**: 1 hour  
 **Complexity**: ⭐⭐
 
-#### Wetin You Go Learn
-- How to plan capacity and check resource dem
-- How to choose SKU dem
+#### What You'll Learn
+- Capacity planning and resource validation
+- SKU selection strategies
 - Pre-flight checks and automation
 
 #### Learning Resources
-- **📊 Planning**: [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Check resources
-- **💰 Selection**: [SKU Selection](docs/pre-deployment/sku-selection.md) - Choices wey go save cost
-- **✅ Validation**: [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Scripts wey dey run automatically
+- **📊 Planning**: [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Resource validation
+- **💰 Selection**: [SKU Selection](docs/pre-deployment/sku-selection.md) - Cost-effective choices
+- **✅ Validation**: [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automated scripts
 
-#### Praktikal Ejasaiz
-- Run scripts wey go check capacity
-- Make SKU choice dem better to save cost
-- Set up automated checks wey go run before deployment
+#### Practical Exercises
+- Run capacity validation scripts
+- Optimize SKU selections for cost
+- Implement automated pre-deployment checks
 
-**💡 Chapter Outcome**: Make you fit validate an optimize deployments before you run am
+**💡 Chapter Outcome**: Validate and optimize deployments before execution
 
 ---
 
 ### 🚨 Chapter 7: Troubleshooting & Debugging
-**Prerequisites**: Any deployment chapter wey you don finish  
+**Prerequisites**: Any deployment chapter don finish  
 **Duration**: 1-1.5 hours  
 **Complexity**: ⭐⭐
 
-#### Wetin You Go Learn
-- Step-by-step ways to debug
-- Common problems and how to solve dem
-- Troubleshooting wey specific to AI
+#### What You'll Learn
+- Systematic debugging approaches
+- Common issues and solutions
+- AI-specific troubleshooting
 
 #### Learning Resources
 - **🔧 Common Issues**: [Common Issues](docs/troubleshooting/common-issues.md) - FAQ and solutions
 - **🕵️ Debugging**: [Debugging Guide](docs/troubleshooting/debugging.md) - Step-by-step strategies
-- **🤖 AI Issues**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - Problems wey dey AI service
+- **🤖 AI Issues**: [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - AI service problems
 
-#### Praktikal Ejasaiz
-- Diagnose why deployment fail
-- Fix authentication wahala
-- Debug connection to AI service
+#### Practical Exercises
+- Diagnose deployment failures
+- Resolve authentication issues
+- Debug AI service connectivity
 
-**💡 Chapter Outcome**: Make you fit diagnose an fix common deployment issues by yourself
+**💡 Chapter Outcome**: Fit diagnose and resolve common deployment wahala by yourself
 
 ---
 
 ### 🏢 Chapter 8: Production & Enterprise Patterns
-**Prerequisites**: Chapters 1-4 don finish  
+**Prerequisites**: Make you don finish Chapters 1-4  
 **Duration**: 2-3 hours  
 **Complexity**: ⭐⭐⭐⭐
 
-#### Wetin You Go Learn
-- Strategies for production deployment
-- Security patterns for enterprise
-- How to monitor an save cost
+#### What You'll Learn
+- Production deployment strategies
+- Enterprise security patterns
+- Monitoring and cost optimization
 
 #### Learning Resources
-- **🏭 Production**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Patterns wey enterprise dey use
+- **🏭 Production**: [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Enterprise patterns
 - **📝 Examples**: [Microservices Example](../../examples/microservices) - Complex architectures
 - **📊 Monitoring**: [Application Insights integration](docs/pre-deployment/application-insights.md) - Monitoring
 
-#### Praktikal Ejasaiz
-- Put enterprise security patterns for place
-- Set up full monitoring
+#### Practical Exercises
+- Implement enterprise security patterns
+- Set up comprehensive monitoring
 - Deploy to production with proper governance
 
-**💡 Chapter Outcome**: Make you fit deploy enterprise-ready applications wit full production capabilities
+**💡 Chapter Outcome**: Deploy enterprise-ready applications wey get full production capabilities
 
 ---
 
 ## 🎓 Workshop Overview: Hands-On Learning Experience
 
-> **⚠️ WORKSHOP STATUS: Dey Under Development**  
-> Di workshop materials still dey under development an dem dey refine am. Core modules dey functional, but some advanced sections never complete. We dey actively work to finish all the content. [Track progress →](workshop/README.md)
+> **⚠️ WORKSHOP STATUS: Active Development**  
+> The workshop materials dey under development and we dey refine dem. Core modules dey work, but some advanced sections never complete. We dey actively work to finish all content. [Track progress →](workshop/README.md)
 
 ### Interactive Workshop Materials
-**Complete hands-on learning wit browser-based tools and guided exercises**
+**Comprehensive hands-on learning with browser-based tools and guided exercises**
 
-Our workshop materials dey give structured, interactive learning experience wey dey complement di chapter-based curriculum wey dey above. Di workshop dey designed for both self-paced learning and instructor-led sessions.
+Our workshop materials dey give structured, interactive learning wey go complement the chapter-based curriculum wey dey above. The workshop dey built for self-paced learning and instructor-led sessions.
 
 #### 🛠️ Workshop Features
-- **Browser-Based Interface**: Complete MkDocs-powered workshop wey get search, copy, and theme features
-- **GitHub Codespaces Integration**: One-click setup for development environment
+- **Browser-Based Interface**: Complete MkDocs-powered workshop with search, copy, and theme features
+- **GitHub Codespaces Integration**: One-click development environment setup
 - **Structured Learning Path**: 7-step guided exercises (3.5 hours total)
 - **Discovery → Deployment → Customization**: Progressive methodology
 - **Interactive DevContainer Environment**: Pre-configured tools and dependencies
 
 #### 📚 Workshop Structure
-Di workshop follow **Discovery → Deployment → Customization** methodology:
+The workshop follow **Discovery → Deployment → Customization** methodology:
 
 1. **Discovery Phase** (45 mins)
-   - Check Microsoft Foundry templates and services
-   - Understand how multi-agent architecture dem dey
-   - Review deployment requirements and wetin you need
+   - Explore Microsoft Foundry templates and services
+   - Understand multi-agent architecture patterns
+   - Review deployment requirements and prerequisites
 
 2. **Deployment Phase** (2 hours)
-   - Do hands-on deployment of AI applications with AZD
+   - Hands-on deployment of AI applications with AZD
    - Configure Azure AI services and endpoints
-   - Put security and authentication patterns for place
+   - Implement security and authentication patterns
 
 3. **Customization Phase** (45 mins)
    - Modify applications for specific use cases
-   - Make apps ready an optimized for production deployment
-   - Put monitoring and cost management
+   - Optimize for production deployment
+   - Implement monitoring and cost management
 
 #### 🚀 Getting Started with the Workshop
 ```bash
-# Option 1: GitHub Codespaces (na wetin dem recommend)
-# Click "Code" → "Create codespace on main" for inside di repository
+# Option 1: GitHub Codespaces (Na di one we recommend)
+# Make you click "Code" → "Create codespace on main" for the repo
 
-# Option 2: Work for your computer
+# Option 2: Local development for your own machine
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
 # Follow di setup instructions wey dey for workshop/README.md
 ```
 
 #### 🎯 Workshop Learning Outcomes
-If person complete di workshop, dem go:
+By completing the workshop, participants go:
 - **Deploy Production AI Applications**: Use AZD with Microsoft Foundry services
 - **Master Multi-Agent Architectures**: Implement coordinated AI agent solutions
 - **Implement Security Best Practices**: Configure authentication and access control
 - **Optimize for Scale**: Design cost-effective, performant deployments
-- **Troubleshoot Deployments**: Resolve common issues independently
+- **Troubleshoot Deployments**: Resolve common issues on your own
 
 #### 📖 Workshop Resources
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning environment
 - **📋 Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Detailed walkthroughs
-- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - Exercises focused on AI
-- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - How to configure the environment
+- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-focused exercises
+- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration
 
-**E perfect for**: Corporate training, university courses, self-paced learning, and developer bootcamps.
+**Perfect for**: Corporate training, university courses, self-paced learning, and developer bootcamps.
 
 ---
 
-## 📖 Wetin be Azure Developer CLI?
+## 📖 What is Azure Developer CLI?
 
-Azure Developer CLI (azd) na developer-centric command-line interface wey dey speed up di process of building and deploying applications to Azure. E dey provide:
+Azure Developer CLI (azd) na command-line tool wey dey focused on developers wey dey speed up how dem build and deploy applications to Azure. E dey provide:
 
 - **Template-based deployments** - Use pre-built templates for common application patterns
 - **Infrastructure as Code** - Manage Azure resources using Bicep or Terraform  
-- **Integrated workflows** - Provision, deploy, and monitor applications without wahala
-- **Developer-friendly** - Make developers work faster and better
+- **Integrated workflows** - Seamlessly provision, deploy, and monitor applications
+- **Developer-friendly** - Optimized for developer productivity and experience
 
 ### **AZD + Microsoft Foundry: Perfect for AI Deployments**
 
-**Why AZD for AI Solutions?** AZD dey tackle di main challenges wey AI developers dey face:
+**Why AZD for AI Solutions?** AZD dey solve top wahala wey AI developers dey face:
 
 - **AI-Ready Templates** - Pre-configured templates for Azure OpenAI, Cognitive Services, and ML workloads
 - **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints  
@@ -441,7 +441,7 @@ Azure Developer CLI (azd) na developer-centric command-line interface wey dey sp
 ### Featured: Microsoft Foundry Templates
 **Start here if you dey deploy AI applications!**
 
-> **Note:** These templates show different AI patterns. Some dey external Azure Samples, others na local implementations.
+> **Note:** These templates dey show different AI patterns. Some na external Azure Samples, others na local implementations.
 
 | Template | Chapter | Complexity | Services | Type |
 |----------|---------|------------|----------|------|
@@ -468,17 +468,17 @@ Azure Developer CLI (azd) na developer-centric command-line interface wey dey sp
 ### Learning by Example Type
 
 > **📌 Local vs. External Examples:**  
-> **Local Examples** (in this repo) = Ready to use immediately  
-> **External Examples** (Azure Samples) = Clone from linked repositories
+> **Local Examples** (for this repo) = Ready to use immediately  
+> **External Examples** (Azure Samples) = Clone dem from the linked repositories
 
 #### Local Examples (Ready to Use)
 - [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Complete production-ready implementation with ARM templates
   - Multi-agent architecture (Customer + Inventory agents)
   - Comprehensive monitoring and evaluation
-  - Deploy wit one click via ARM template
+  - One-click deployment via ARM template
 
 #### Local Examples - Container Applications (Chapters 2-5)
-**Comprehensive container deployment examples in this repository:**
+**Comprehensive container deployment examples wey dey this repository:**
 - [**Container App Examples**](examples/container-app/README.md) - Complete guide to containerized deployments
   - [Simple Flask API](../../examples/container-app/simple-flask-api) - Basic REST API with scale-to-zero
   - [Microservices Architecture](../../examples/container-app/microservices) - Production-ready multi-service deployment
@@ -486,7 +486,7 @@ Azure Developer CLI (azd) na developer-centric command-line interface wey dey sp
   - Monitoring, security, and cost optimization guidance
 
 #### External Examples - Simple Applications (Chapters 1-2)
-**Clone these Azure Samples repositories to get started:**
+**Clone these Azure Samples repositories to start:**
 - [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Basic deployment patterns
 - [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Static content deployment
 - [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API deployment
@@ -510,16 +510,16 @@ Azure Developer CLI (azd) na developer-centric command-line interface wey dey sp
 ## 📚 Learning Resources & References
 
 ### Quick References
-- [**Cheat Sheet wey get azd commands**](resources/cheat-sheet.md) - Important azd commands wey dem arrange by chapter
-- [**Glossary**](resources/glossary.md) - Terms wey concern Azure and azd  
-- [**FAQ**](resources/faq.md) - Common questions dem arrange by learning chapter
+- [**Cheat Sheet for Commands**](resources/cheat-sheet.md) - Important azd commands wey dem arrange by chapter
+- [**Glossary**](resources/glossary.md) - Terms dem for Azure and azd  
+- [**FAQ**](resources/faq.md) - Common questions wey dem arrange by learning chapter
 - [**Study Guide**](resources/study-guide.md) - Plenty practice exercises wey cover everything
 
-### Workshops wey you go do for hand
-- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions fit deploy wit AZD (2-3 hours)
-- [**Interactive Workshop Guide**](workshop/README.md) - Browser-based workshop wey dey use MkDocs and DevContainer Environment
-- [**Structured Learning Path**](../../workshop/docs/instructions) - 7-step exercises wey dem guide you (Discovery → Deployment → Customization)
-- [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials wit GitHub Codespaces integration
+### Practical Workshops
+- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Make your AI solutions fit deploy for AZD (2-3 hours)
+- [**Interactive Workshop Guide**](workshop/README.md) - Browser-based workshop with MkDocs and DevContainer Environment
+- [**Structured Learning Path**](../../workshop/docs/instructions) -7-step guided exercises (Discovery → Deployment → Customization)
+- [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials wey get GitHub Codespaces integration
 
 ### External Learning Resources
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
@@ -531,12 +531,12 @@ Azure Developer CLI (azd) na developer-centric command-line interface wey dey sp
 
 ## 🔧 Quick Troubleshooting Guide
 
-**Problems wey beginners dey face and quick solutions:**
+**Common wahala wey beginners dey face and quick solutions:**
 
 ### ❌ "azd: command not found"
 
 ```bash
-# Make sure say you install AZD first
+# Make you install AZD first
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -546,17 +546,17 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Make sure say e don install
+# Confirm say installation don finish
 azd version
 ```
 
 ### ❌ "No subscription found" or "Subscription not set"
 
 ```bash
-# List all subscriptions wey dey
+# Show di subscriptions wey dey available
 az account list --output table
 
-# Set subscription wey go be default
+# Set di default subscription
 az account set --subscription "<subscription-id-or-name>"
 
 # Set am for AZD environment
@@ -574,7 +574,7 @@ azd env set AZURE_LOCATION "westus2"
 azd up
 
 # Or use smaller SKUs when you dey do development
-# Edit infra/main.parameters.json:
+# Edit di infra/main.parameters.json:
 {
   "sku": "B1"  // Instead of "P1V2"
 }
@@ -590,7 +590,7 @@ azd up
 # Option 2: Just fix di infrastructure
 azd provision
 
-# Option 3: Check di logs well-well
+# Option 3: Check di detailed logs
 azd show
 azd logs
 ```
@@ -598,14 +598,14 @@ azd logs
 ### ❌ "Authentication failed" or "Token expired"
 
 ```bash
-# Confirm say na you again
+# Make dem log in again
 az logout
 az login
 
 azd auth logout
 azd auth login
 
-# Make sure say authentication dey correct
+# Check say dem don log in
 az account show
 ```
 
@@ -623,7 +623,7 @@ azd up
 ### ❌ Template deployment taking too long
 
 **Normal wait times:**
-- Simple web app: 5-10 minutes
+- Small web app: 5-10 minutes
 - App with database: 10-15 minutes
 - AI applications: 15-25 minutes (OpenAI provisioning dey slow)
 
@@ -631,21 +631,21 @@ azd up
 # Check di progress
 azd show
 
-# If e dey stuck pass 30 minutes, check Azure Portal:
+# If e jam for pass 30 minutes, check Azure Portal:
 azd monitor
-# Look for di deployments wey fail
+# Look for deployments wey don fail
 ```
 
 ### ❌ "Permission denied" or "Forbidden"
 
 ```bash
-# Make sure say you check your Azure role
+# Make you check your Azure role
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # You suppose get at least "Contributor" role
-# Ask your Azure admin make em give you:
-# - Contributor (for resources dem)
-# - User Access Administrator (to assign role dem)
+# Ask your Azure admin make e give:
+# - Contributor (to manage resources)
+# - User Access Administrator (to assign roles)
 ```
 
 ### ❌ Can't find deployed application URL
@@ -673,13 +673,13 @@ azd env get-values
 
 ## 🔧 Quick Troubleshooting Guide
 
-**Problems wey beginners dey face and quick solutions:**
+**Common wahala wey beginners dey face and quick solutions:**
 
 <details>
-<summary><strong>❌ "azd: command not found"</strong></summary>
+<summary><strong>❌ "azd: command no dey"</strong></summary>
 
 ```bash
-# First make you install AZD
+# Make sure say you don install AZD first
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -689,7 +689,7 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Make sure say e don install
+# Check say e don install well
 azd version
 ```
 </details>
@@ -698,16 +698,16 @@ azd version
 <summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
 
 ```bash
-# Show all subscriptions wey dey available
+# List di subscriptions wey dey available
 az account list --output table
 
-# Set subscription wey go be default
+# Set di default subscription
 az account set --subscription "<subscription-id-or-name>"
 
-# Make am ready for AZD environment
+# Set for di AZD environment
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
-# Make sure say e correct
+# Confirm am
 az account show
 ```
 </details>
@@ -716,11 +716,11 @@ az account show
 <summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
 ```bash
-# Try use anoda Azure region
+# Try anoda Azure region
 azd env set AZURE_LOCATION "westus2"
 azd up
 
-# Or use smaller SKUs when you dey develop
+# Or use smaller SKUs when you dey do development
 # Edit infra/main.parameters.json:
 {
   "sku": "B1"  // Instead of "P1V2"
@@ -749,14 +749,14 @@ azd logs
 <summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
 
 ```bash
-# Make dem confirm say na you be that again
+# Confirm say na you again
 az logout
 az login
 
 azd auth logout
 azd auth login
 
-# Make sure say authentication correct
+# Make sure say authentication dey valid
 az account show
 ```
 </details>
@@ -778,7 +778,7 @@ azd up
 <summary><strong>❌ Template deployment taking too long</strong></summary>
 
 **Normal wait times:**
-- Simple web app: 5-10 minutes
+- Small web app: 5-10 minutes
 - App with database: 10-15 minutes
 - AI applications: 15-25 minutes (OpenAI provisioning dey slow)
 
@@ -786,9 +786,9 @@ azd up
 # Check how e dey go
 azd show
 
-# If e jam you pass 30 minutes, check Azure Portal:
+# If e jam pass 30 minutes, check Azure Portal:
 azd monitor
-# Find deployment dem wey fail
+# Find any deployment wey fail
 ```
 </details>
 
@@ -796,13 +796,13 @@ azd monitor
 <summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
 
 ```bash
-# Make you check your Azure role
+# Check di Azure role wey you get
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# You suppose get at least "Contributor" role
-# Ask your Azure admin make dem grant:
-# - Contributor (for resources dem)
-# - User Access Administrator (for role assignments dem)
+# You gats get at least "Contributor" role
+# Ask your Azure admin make e give:
+# - Contributor (for di resources)
+# - User Access Administrator (for di role assignments)
 ```
 </details>
 
@@ -833,8 +833,8 @@ azd env get-values
 
 ## 🎓 Course Completion & Certification
 
-### Progress Tracking
-Keep track of how your learning dey go for each chapter:
+### How to Track Progress
+Track how far you don go for each chapter:
 
 - [ ] **Chapter 1**: Foundation & Quick Start ✅
 - [ ] **Chapter 2**: AI-First Development ✅  
@@ -845,25 +845,25 @@ Keep track of how your learning dey go for each chapter:
 - [ ] **Chapter 7**: Troubleshooting & Debugging ✅
 - [ ] **Chapter 8**: Production & Enterprise Patterns ✅
 
-### Learning Verification
-After you finish each chapter, check say you sabi by:
+### How to Verify You Don Learn
+After you finish each chapter, make sure say you sabi the things by:
 1. **Practical Exercise**: Do the chapter hands-on deployment
-2. **Knowledge Check**: Go through the FAQ section for the chapter
-3. **Community Discussion**: Share your experience for Azure Discord
-4. **Next Chapter**: Move to the next level of difficulty
+2. **Knowledge Check**: Read the FAQ section for the chapter
+3. **Community Discussion**: Share wetin you learn for Azure Discord
+4. **Next Chapter**: Move go the next level wey get more complexity
 
-### Course Completion Benefits
-When you don finish all chapters, you go get:
-- **Production Experience**: You go don deploy real AI applications to Azure
-- **Professional Skills**: Skills wey fit deploy for enterprise  
-- **Community Recognition**: You go be active member for Azure developer community
-- **Career Advancement**: Better AZD and AI deployment skills wey employers dey find
+### Benefits When You Finish Course
+When you finish all chapters, you go get:
+- **Production Experience**: You don deploy real AI applications to Azure
+- **Professional Skills**: Skills to deploy for enterprise level  
+- **Community Recognition**: You go dey active for Azure developer community
+- **Career Advancement**: Skills for AZD and AI deployment wey employers dey find
 
 ---
 
 ## 🤝 Community & Support
 
-### How to Get Help & Support
+### Get Help & Support
 - **Technical Issues**: [Report bugs and request features](https://github.com/microsoft/azd-for-beginners/issues)
 - **Learning Questions**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure) and [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **AI-Specific Help**: Join the [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
@@ -873,29 +873,29 @@ When you don finish all chapters, you go get:
 
 **Recent Poll Results from #Azure Channel:**
 - **45%** of developers wan use AZD for AI workloads
-- **Top challenges**: Multi-service deployments, credential management, production readiness  
+- **Top challenges**: Deploying many services, credential management, making dat one production-ready  
 - **Most requested**: AI-specific templates, troubleshooting guides, best practices
 
 **Join our community to:**
 - Share your AZD + AI experience and get help
-- Get early previews of new AI templates
+- Access early previews of new AI templates
 - Contribute to AI deployment best practices
-- Help shape future AI + AZD feature development
+- Influence wetin dem go build for future AI + AZD features
 
 ### Contributing to the Course
 We dey welcome contributions! Abeg read our [Contributing Guide](CONTRIBUTING.md) for details on:
-- **Content Improvements**: Improve existing chapters and examples
+- **Content Improvements**: Make the chapters and examples better
 - **New Examples**: Add real-world scenarios and templates  
-- **Translation**: Help maintain multi-language support
-- **Bug Reports**: Improve accuracy and clarity
-- **Community Standards**: Follow our inclusive community guidelines
+- **Translation**: Help keep multi-language support updated
+- **Bug Reports**: Help make am more correct and clear
+- **Community Standards**: Follow our inclusive community rules
 
 ---
 
 ## 📄 Course Information
 
 ### License
-This project dey licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details.
+This project dey under MIT License - see the [LICENSE](../../LICENSE) file for details.
 
 ### Related Microsoft Learning Resources
 
@@ -927,35 +927,35 @@ Our team dey produce other complete learning courses:
 ### Core Learning
 [![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 [![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for People Wey Dey Start](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for People Wey Dey Start](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for People Wey Dey Start](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for People Wey Dey Start](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for People Wey Dey Start](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Copilot Series
-[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot wey dey help for AI Pair Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 [![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
 [![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
-## 🗺️ Course Navigation
+## 🗺️ How to waka di course
 
-**🚀 Ready to Start Learning?**
+**🚀 You ready to start learn?**
 
-**Beginners**: Start with [Chapter 1: Foundation & Quick Start](../..)  
-**AI Developers**: Jump to [Chapter 2: AI-First Development](../..)  
-**Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](../..)
+**People Wey Dey Start**: Start wit [Chapter 1: Foundation & Quick Start](../..)  
+**People Wey Dey Build AI**: Go straight to [Chapter 2: AI-First Development](../..)  
+**Developers Wey Get Experience**: Start for [Chapter 3: Configuration & Authentication](../..)
 
-**Next Steps**: [Begin Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →
+**Wetin Next**: [Start Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Disclaimer:
-Dis document don translate wit AI translation service [Co-op Translator] (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get errors or mistakes. Di original document for e own language na di authoritative source. For important information, e better make professional human translation handle am. We no dey liable for any misunderstanding or misinterpretation wey fit come from using this translation.
+Dis document don translate using AI translation service [Co-op Translator] (https://github.com/Azure/co-op-translator). Though we dey try make am correct, abeg note say automatic translations fit get mistakes or inaccuracies. Di original document for im own language na di authoritative source wey you suppose follow. If na critical information, make you use professional human translation. We no dey liable for any misunderstanding or misinterpretation wey fit come from using this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -943,19 +943,3 @@ Our team produces other comprehensive learning courses:
 **Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](#️-chapter-3-configuration--authentication)
 
 **Next Steps**: [Begin Chapter 1 - AZD Basics](docs/getting-started/azd-basics.md) →
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

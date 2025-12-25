@@ -1,8 +1,8 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "1caf5e63f84a4cdffbeb8d0fe5fa3fa8",
-  "translation_date": "2025-12-21T10:13:37+00:00",
+  "original_hash": "05c30c9e5ed7951c72855108c6788034",
+  "translation_date": "2025-12-24T22:33:43+00:00",
   "source_file": "README.md",
   "language_code": "en"
 }
@@ -765,10 +765,10 @@ az account show
 <summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
-# AZD generates unique names, but if there is a conflict:
+# AZD generates unique names, but if conflict:
 azd down --force --purge
 
-# Then retry with a fresh environment
+# Then retry with fresh environment
 azd env new dev-v2
 azd up
 ```
@@ -956,8 +956,6 @@ Our team produces other comprehensive learning courses:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-The text is already in English. Here it is:
-
-**Disclaimer**:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+Disclaimer:
+This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
