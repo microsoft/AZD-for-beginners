@@ -47,10 +47,10 @@ Avant de démanteler le projet, prenez quelques minutes pour explorer librement.
 
       Voici les déploiements de modèles **avant** :
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.fr.png)
+      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.fr.png)
 
       Et voici **après** :
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.fr.png)
+      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.fr.png)
 
 ---
 

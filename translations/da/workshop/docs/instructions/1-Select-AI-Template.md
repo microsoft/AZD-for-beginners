@@ -51,7 +51,7 @@ Med `azd` kan din implementeringsrejse være så enkel som:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.da.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.da.png)
 
 ---
 
@@ -71,7 +71,7 @@ Når du opretter eller genbruger en AZD-skabelon til _din_ situation, bør du ov
 **🎯 | ØVELSE**: <br/> 
 Besøg [Awesome AZD](https://azure.github.io/awesome-azd/) galleriet og brug filtrene til at udforske de 250+ skabeloner, der i øjeblikket er tilgængelige. Se, om du kan finde en, der passer til _dine_ scenariekrav.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.da.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.da.png)
 
 ---
 

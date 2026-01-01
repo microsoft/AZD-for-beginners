@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.fa.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.fa.png)
 
 ---
 
@@ -72,7 +72,7 @@ azd help
 **🎯 | تمرین**: <br/> 
 به گالری [Awesome AZD](https://azure.github.io/awesome-azd/) مراجعه کنید و از فیلترها برای بررسی بیش از 250 قالب موجود استفاده کنید. ببینید آیا می‌توانید قالبی پیدا کنید که با نیازهای سناریوی _شما_ مطابقت داشته باشد.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.fa.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.fa.png)
 
 ---
 

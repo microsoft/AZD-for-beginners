@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. בקרו ב-[https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. התחברו לפורטל Azure AI Foundry כאשר תתבקשו - אתם תראו משהו כזה.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.he.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.he.png)
 
 אפשרויות ה-**Basic** הן תבניות ההתחלה שלכם:
 
@@ -60,7 +60,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 בקרו בקישור השני בלשונית דפדפן חדשה (או לחצו על `Open in GitHub` עבור הכרטיס הקשור). אתם אמורים לראות את המאגר עבור תבנית AZD זו. קחו דקה לחקור את ה-README. ארכיטקטורת האפליקציה נראית כך:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.he.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.he.png)
 
 ---
 
@@ -92,7 +92,7 @@ CO_OP_TRANSLATOR_METADATA:
       ```
 1. פורטל Azure שלכם יכלול עכשיו קבוצת משאבים פרוסה עם שם הסביבה הזה:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.he.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.he.png)
 
 1. **עכשיו אתם מוכנים לאמת את התשתית והאפליקציה שפורסו**.
 
@@ -108,7 +108,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. אתם אמורים לראות ממשק משתמש של אפליקציה מתארחת כמו זה:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.he.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.he.png)
 
 1. נסו לשאול כמה [שאלות לדוגמה](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. אתם אמורים לקבל תשובות דומות למה שמוצג למטה. _אבל איך זה עובד?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.he.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.he.png)
 
 ---
 
@@ -130,25 +130,25 @@ CO_OP_TRANSLATOR_METADATA:
 1. לחצו על משאב `Azure AI Foundry` ברשימה הזו
 
 1. אתם אמורים לראות את זה. לחצו על כפתור `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.he.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.he.png)
 
 1. אתם אמורים לראות את דף הפרויקט של Foundry עבור אפליקציית ה-AI שלכם
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.he.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.he.png)
 
 1. לחצו על `Agents` - אתם רואים את הסוכן המוגדר כברירת מחדל שפורס בפרויקט שלכם
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.he.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.he.png)
 
 1. בחרו אותו - ואתם רואים את פרטי הסוכן. שימו לב לדברים הבאים:
 
       - הסוכן משתמש ב-File Search כברירת מחדל (תמיד)
       - הידע של הסוכן מציין שיש לו 32 קבצים שהועלו (לצורך חיפוש קבצים)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.he.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.he.png)
 
 1. חפשו את האפשרות `Data+indexes` בתפריט השמאלי ולחצו לפרטים. 
 
       - אתם אמורים לראות את 32 קבצי הנתונים שהועלו עבור הידע.
       - אלה יתאימו ל-12 קבצי לקוחות ו-20 קבצי מוצרים תחת `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.he.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.he.png)
 
 **אימתתם את פעולת הסוכן!** 
 
@@ -158,7 +158,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 חזרו ללשונית הדפדפן עם נקודת הקצה של אפליקציית Container ושאלו: `What products does Amanda Perez own?`. אתם אמורים לראות משהו כזה:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.he.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.he.png)
 
 ---
 
@@ -170,7 +170,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. לחצו על האפשרות `Try in Playground` - אתם אמורים לקבל ממשק מגרש משחקים כמו זה
 1. שאלו את אותה שאלה: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.he.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.he.png)
 
 אתם מקבלים את אותה תשובה (או דומה) - אבל אתם גם מקבלים מידע נוסף שתוכלו להשתמש בו כדי להבין את האיכות, העלות והביצועים של אפליקציית הסוכן שלכם. לדוגמה:
 
@@ -182,7 +182,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. רחפו מעל כל מדד - לדוגמה, Safety. אתם רואים משהו כזה
 1. האם הדירוג שנבדק תואם את האינטואיציה שלכם לגבי רמת הבטיחות של התשובה?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.he.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.he.png)
 
 ---
 
@@ -196,15 +196,15 @@ CO_OP_TRANSLATOR_METADATA:
    - הבינו את סך כל ספירת הטוקנים (לעומת שימוש בטוקנים בתשובה) עבור התשובה
    - הבינו את זמן ההשהיה ואיפה הזמן מושקע בביצוע
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.he.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.he.png)
 
 1. לחצו על לשונית `Metadata` כדי לראות תכונות נוספות עבור הריצה, שעשויות לספק הקשר שימושי לניטור בעיות מאוחר יותר.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.he.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.he.png)
 
 1. לחצו על לשונית `Evaluations` כדי לראות הערכות אוטומטיות שנעשו על תשובת הסוכן. אלה כוללות הערכות בטיחות (לדוגמה, Self-harm) והערכות ספציפיות לסוכן (לדוגמה, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.he.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.he.png)
 
 1. ולבסוף, לחצו על לשונית `Monitoring` בתפריט הצדדי.
 
@@ -212,7 +212,7 @@ CO_OP_TRANSLATOR_METADATA:
       - עקבו אחר השימוש באפליקציה במונחים של עלויות (טוקנים) ועומס (בקשות).
       - עקבו אחר זמן ההשהיה של האפליקציה עד הבייט הראשון (עיבוד קלט) ועד הבייט האחרון (פלט).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.he.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.he.png)
 
 ---
 

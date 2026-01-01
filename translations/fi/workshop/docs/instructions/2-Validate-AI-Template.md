@@ -51,7 +51,7 @@ Azure AI Foundry -alusta sisältää [joukon suositeltuja AZD-malleja](https://l
 1. Siirry osoitteeseen [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Kirjaudu Azure AI Foundry -portaaliin, kun sinua pyydetään - näet jotain tällaista.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.fi.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.fi.png)
 
 **Perusvaihtoehdot** ovat aloitusmallejasi:
 
@@ -60,7 +60,7 @@ Azure AI Foundry -alusta sisältää [joukon suositeltuja AZD-malleja](https://l
 
 Avaa toinen linkki uudessa selaimen välilehdessä (tai napsauta `Open in GitHub` liittyvää korttia varten). Näet tämän AZD-mallin arkiston. Tutustu README-tiedostoon minuutin ajan. Sovelluksen arkkitehtuuri näyttää tältä:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.fi.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.fi.png)
 
 ---
 
@@ -92,7 +92,7 @@ Nyt odotat, että käyttöönotto valmistuu. **Tämä kestää 10-15 minuuttia**
       ```
 1. Azure-portaalissasi on nyt provisionoitu resurssiryhmä kyseisellä ympäristön nimellä:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.fi.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.fi.png)
 
 1. **Olet nyt valmis validoimaan käyttöön otetun infrastruktuurin ja sovelluksen**.
 
@@ -108,7 +108,7 @@ Nyt odotat, että käyttöönotto valmistuu. **Tämä kestää 10-15 minuuttia**
 
 1. Näet isännöidyn sovelluksen käyttöliittymän, kuten tämä:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.fi.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.fi.png)
 
 1. Kokeile kysyä muutama [esimerkkikysymys](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Nyt odotat, että käyttöönotto valmistuu. **Tämä kestää 10-15 minuuttia**
 
 1. Saat vastauksia, jotka ovat samanlaisia kuin alla. _Mutta miten tämä toimii?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.fi.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.fi.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App ottaa käyttöön päätepisteen, joka yhdistyy tekoälyagen
 1. Napsauta `Azure AI Foundry` -resurssia luettelossa
 
 1. Näet tämän. Napsauta `Go to Azure AI Foundry Portal` -painiketta. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.fi.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.fi.png)
 
 1. Näet Foundry-projektisivun tekoälysovelluksellesi
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.fi.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.fi.png)
 
 1. Napsauta `Agents` - näet projektisi oletusagentin
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.fi.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.fi.png)
 
 1. Valitse se - ja näet agentin tiedot. Huomaa seuraavat asiat:
 
       - Agentti käyttää oletuksena File Search -toimintoa (aina)
       - Agentin `Knowledge` osoittaa, että sillä on 32 tiedostoa ladattuna (tiedostohakuun)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.fi.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.fi.png)
 
 1. Etsi vasemman valikon `Data+indexes`-vaihtoehto ja napsauta saadaksesi lisätietoja. 
 
       - Näet 32 tietotiedostoa ladattuna tiedoksi.
       - Nämä vastaavat 12 asiakastiedostoa ja 20 tuotetiedostoa `src/files`-kansiossa 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.fi.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.fi.png)
 
 **Olet validoinut agentin toiminnan!** 
 
@@ -158,7 +158,7 @@ Azure Container App ottaa käyttöön päätepisteen, joka yhdistyy tekoälyagen
 
 Palaa selaimen välilehteen, jossa on Container App -päätepiste, ja kysy: `What products does Amanda Perez own?`. Näet jotain tällaista:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.fi.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.fi.png)
 
 ---
 
@@ -170,7 +170,7 @@ Rakennetaan hieman enemmän intuitiota Azure AI Foundryn ominaisuuksista ottamal
 1. Napsauta `Try in Playground` -vaihtoehtoa - saat Playground-käyttöliittymän, kuten tämä
 1. Kysy sama kysymys: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.fi.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.fi.png)
 
 Saat saman (tai samanlaisen) vastauksen - mutta saat myös lisätietoja, joita voit käyttää sovelluksesi laadun, kustannusten ja suorituskyvyn ymmärtämiseen. Esimerkiksi:
 
@@ -182,7 +182,7 @@ Näet myös _tilastot_-rivillä vastauksen alla.
 1. Vie hiiri minkä tahansa mittarin päälle - esim. Safety. Näet jotain tällaista.
 1. Vastaako arvioitu luokitus intuitiotasi vastauksen turvallisuustasosta?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.fi.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.fi.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Havainnointi tarkoittaa sovelluksen instrumentointia tuottamaan dataa, jota void
    - Ymmärrä kokonais Token-määrä (vs. ulostulotokenien käyttö) vastauksessa
    - Ymmärrä viive ja missä aikaa kuluu suorituksessa
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.fi.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.fi.png)
 
 1. Napsauta `Metadata`-välilehteä nähdäksesi lisäominaisuuksia suoritukselle, jotka voivat tarjota hyödyllistä kontekstia virheiden korjaamiseen myöhemmin.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.fi.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.fi.png)
 
 1. Napsauta `Evaluations`-välilehteä nähdäksesi automaattiset arviot agentin vastauksesta. Näihin kuuluvat turvallisuusarviot (esim. Itsevahingoittaminen) ja agenttikohtaiset arviot (esim. Tarkoituksen ratkaisu, Tehtävän noudattaminen).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.fi.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.fi.png)
 
 1. Viimeisenä mutta ei vähäisimpänä, napsauta `Monitoring`-välilehteä sivuvalikossa.
 
@@ -212,7 +212,7 @@ Havainnointi tarkoittaa sovelluksen instrumentointia tuottamaan dataa, jota void
       - Seuraa sovelluksen käyttöä kustannusten (tokenit) ja kuormituksen (pyynnöt) osalta.
       - Seuraa sovelluksen viivettä ensimmäiseen tavuun (syötteen käsittely) ja viimeiseen tavuun (ulostulo).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.fi.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.fi.png)
 
 ---
 

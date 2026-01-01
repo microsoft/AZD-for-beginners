@@ -40,7 +40,7 @@ Throughout this workshop, you will also be introduced to essential developer too
 
 The workshop lessons are written in Markdown. You can access them directly on GitHub or launch a browser-based preview as shown in the screenshot below.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.en.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.en.png)
 
 To use this option, fork the repository to your profile and launch GitHub Codespaces. Once the VS Code terminal is active, type this command:
 

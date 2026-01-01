@@ -40,7 +40,7 @@ A lo largo de este taller, también se te presentarán herramientas y flujos de 
 
 Las lecciones del taller están en formato Markdown. Puedes navegar directamente en GitHub o lanzar una vista previa en el navegador como se muestra en la captura de pantalla a continuación.
 
-![Taller](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.es.png)
+![Taller](../../../translated_images/workshop.75906f133e6f8ba0.es.png)
 
 Para usar esta opción, haz un fork del repositorio en tu perfil y lanza GitHub Codespaces. Una vez que el terminal de VS Code esté activo, escribe este comando:
 
