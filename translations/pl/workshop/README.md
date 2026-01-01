@@ -40,7 +40,7 @@ Podczas warsztatu poznasz również podstawowe narzędzia i przepływy pracy dew
 
 Lekcje warsztatowe są zapisane w formacie Markdown. Możesz je przeglądać bezpośrednio na GitHubie lub uruchomić podgląd w przeglądarce, jak pokazano na poniższym zrzucie ekranu.
 
-![Warsztat](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.pl.png)
+![Warsztat](../../../translated_images/workshop.75906f133e6f8ba0.pl.png)
 
 Aby skorzystać z tej opcji - zrób fork repozytorium na swoim profilu i uruchom GitHub Codespaces. Gdy terminal VS Code będzie aktywny, wpisz następujące polecenie:
 

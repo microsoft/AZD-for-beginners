@@ -51,7 +51,7 @@ Ang Azure AI Foundry platform ay may [set ng mga inirerekomendang AZD templates]
 1. Bisitahin ang [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Mag-log in sa Azure AI Foundry portal kapag na-prompt - makikita mo ang ganito.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.tl.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.tl.png)
 
 Ang mga **Basic** na opsyon ay ang iyong mga starter templates:
 
@@ -60,7 +60,7 @@ Ang mga **Basic** na opsyon ay ang iyong mga starter templates:
 
 Bisitahin ang pangalawang link sa isang bagong tab ng browser (o i-click ang `Open in GitHub` para sa kaugnay na card). Makikita mo ang repository para sa AZD Template na ito. Maglaan ng isang minuto upang suriin ang README. Ang arkitektura ng application ay ganito:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.tl.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.tl.png)
 
 ---
 
@@ -92,7 +92,7 @@ Ngayon, hintayin ang pag-provision na makumpleto. **Ito ay tumatagal ng 10-15 mi
       ```
 1. Ang iyong Azure Portal ay magkakaroon na ng provisioned resource group na may pangalan ng environment:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.tl.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.tl.png)
 
 1. **Handa ka na ngayong i-validate ang na-deploy na infrastructure at application**.
 
@@ -108,7 +108,7 @@ Ngayon, hintayin ang pag-provision na makumpleto. **Ito ay tumatagal ng 10-15 mi
 
 1. Makikita mo ang isang hosted application front-end UI na ganito:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.tl.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.tl.png)
 
 1. Subukan ang ilang [sample na tanong](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Ngayon, hintayin ang pag-provision na makumpleto. **Ito ay tumatagal ng 10-15 mi
 
 1. Makakakuha ka ng mga sagot na katulad ng ipinapakita sa ibaba. _Pero paano ito gumagana?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.tl.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.tl.png)
 
 ---
 
@@ -130,25 +130,25 @@ Ang Azure Container App ay nagde-deploy ng isang endpoint na kumokonekta sa AI A
 1. I-click ang `Azure AI Foundry` resource sa listahan
 
 1. Makikita mo ito. I-click ang `Go to Azure AI Foundry Portal` button. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.tl.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.tl.png)
 
 1. Makikita mo ang Foundry Project page para sa iyong AI application
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.tl.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.tl.png)
 
 1. I-click ang `Agents` - makikita mo ang default na Agent na na-provision sa iyong project
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.tl.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.tl.png)
 
 1. Piliin ito - at makikita mo ang mga detalye ng Agent. Tandaan ang sumusunod:
 
       - Ang agent ay gumagamit ng File Search bilang default (palagi)
       - Ang `Knowledge` ng agent ay nagpapahiwatig na mayroon itong 32 files na na-upload (para sa file search)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.tl.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.tl.png)
 
 1. Hanapin ang opsyon na `Data+indexes` sa kaliwang menu at i-click para sa mga detalye. 
 
       - Makikita mo ang 32 data files na na-upload para sa knowledge.
       - Ang mga ito ay tumutugma sa 12 customer files at 20 product files sa ilalim ng `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.tl.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.tl.png)
 
 **Na-validate mo ang operasyon ng Agent!** 
 
@@ -158,7 +158,7 @@ Ang Azure Container App ay nagde-deploy ng isang endpoint na kumokonekta sa AI A
 
 Balikan ang tab ng browser na may Container App endpoint at magtanong: `Anong mga produkto ang pag-aari ni Amanda Perez?`. Makikita mo ang ganito:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.tl.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.tl.png)
 
 ---
 
@@ -170,7 +170,7 @@ Subukan nating palawakin ang ating kaalaman sa mga kakayahan ng Azure AI Foundry
 1. I-click ang opsyon na `Try in Playground` - makakakuha ka ng Playground UI na ganito
 1. Magtanong ng parehong tanong: `Anong mga produkto ang pag-aari ni Amanda Perez?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.tl.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.tl.png)
 
 Makakakuha ka ng parehong (o katulad) na sagot - ngunit makakakuha ka rin ng karagdagang impormasyon na magagamit mo upang maunawaan ang kalidad, gastos, at performance ng iyong agentic app. Halimbawa:
 
@@ -182,7 +182,7 @@ Makikita mo rin ang isang _stats_ row sa ibaba ng sagot.
 1. I-hover ang anumang metric - halimbawa, Safety. Makikita mo ang ganito
 1. Tumutugma ba ang na-assess na rating sa iyong intuition para sa safety level ng sagot?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.tl.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.tl.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Ang Observability ay tungkol sa pag-iinstrument ng iyong application upang makab
    - Unawain ang kabuuang Token count (vs. paggamit ng output tokens) para sa sagot
    - Unawain ang latency at kung saan ginugugol ang oras sa execution
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.tl.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.tl.png)
 
 1. I-click ang `Metadata` tab upang makita ang karagdagang attributes para sa run, na maaaring magbigay ng kapaki-pakinabang na konteksto para sa pag-debug ng mga isyu sa hinaharap.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.tl.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.tl.png)
 
 1. I-click ang `Evaluations` tab upang makita ang mga auto-assessments na ginawa sa sagot ng agent. Kasama dito ang mga safety evaluations (hal., Self-harm) at mga agent-specific evaluations (hal., Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.tl.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.tl.png)
 
 1. Panghuli, i-click ang `Monitoring` tab sa sidebar menu.
 
@@ -212,7 +212,7 @@ Ang Observability ay tungkol sa pag-iinstrument ng iyong application upang makab
       - Subaybayan ang paggamit ng application sa mga tuntunin ng gastos (tokens) at load (requests).
       - Subaybayan ang latency ng application mula sa unang byte (input processing) hanggang sa huling byte (output).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.tl.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.tl.png)
 
 ---
 

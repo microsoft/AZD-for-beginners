@@ -40,7 +40,7 @@ Atölye boyunca, uçtan uca geliştirme sürecinizi kolaylaştırmanıza yardım
 
 Atölye dersleri Markdown formatındadır. GitHub'da doğrudan gezinebilir veya aşağıdaki ekran görüntüsünde gösterildiği gibi tarayıcı tabanlı bir önizleme başlatabilirsiniz.
 
-![Atölye](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.tr.png)
+![Atölye](../../../translated_images/workshop.75906f133e6f8ba0.tr.png)
 
 Bu seçeneği kullanmak için - depoyu profilinize çatallayın ve GitHub Codespaces'i başlatın. VS Code terminali aktif olduğunda şu komutu yazın:
 

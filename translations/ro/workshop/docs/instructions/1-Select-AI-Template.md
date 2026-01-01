@@ -51,7 +51,7 @@ Cu `azd`, călătoria ta de implementare poate fi la fel de simplă ca:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.ro.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.ro.png)
 
 ---
 
@@ -72,7 +72,7 @@ Când creezi sau reutilizezi un șablon AZD pentru scenariul _tău_, ia în cons
 **🎯 | EXERCIȚIU**: <br/> 
 Vizitează galeria [Awesome AZD](https://azure.github.io/awesome-azd/) și folosește filtrele pentru a explora cele peste 250 de șabloane disponibile în prezent. Vezi dacă poți găsi unul care se aliniază cerințelor scenariului _tău_.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.ro.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.ro.png)
 
 ---
 

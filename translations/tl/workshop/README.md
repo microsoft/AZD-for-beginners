@@ -40,7 +40,7 @@ Sa kabuuan ng workshop na ito, ipakikilala rin sa iyo ang mga pangunahing tools 
 
 Ang mga aralin sa workshop ay nasa Markdown. Maaari mo itong i-navigate nang direkta sa GitHub - o mag-launch ng browser-based preview tulad ng ipinapakita sa screenshot sa ibaba.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.tl.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.tl.png)
 
 Upang magamit ang opsyon na ito - i-fork ang repository sa iyong profile, at i-launch ang GitHub Codespaces. Kapag aktibo na ang VS Code terminal, i-type ang command na ito:
 

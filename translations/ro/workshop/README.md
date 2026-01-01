@@ -40,7 +40,7 @@ Pe parcursul acestui atelier, vei fi introdus și în instrumente și fluxuri de
 
 Lecțiile atelierului sunt în Markdown. Le poți naviga direct pe GitHub - sau poți lansa o previzualizare bazată pe browser, așa cum este ilustrat în captura de ecran de mai jos.
 
-![Atelier](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.ro.png)
+![Atelier](../../../translated_images/workshop.75906f133e6f8ba0.ro.png)
 
 Pentru a utiliza această opțiune - clonează repository-ul în profilul tău și lansează GitHub Codespaces. Odată ce terminalul VS Code este activ, tastează această comandă:
 

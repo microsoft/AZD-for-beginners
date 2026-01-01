@@ -51,7 +51,7 @@ Platforma Azure AI Foundry vine cu un [set de șabloane AZD recomandate](https:/
 1. Vizitează [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Autentifică-te în portalul Azure AI Foundry când ți se solicită - vei vedea ceva de genul acesta.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.ro.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.ro.png)
 
 Opțiunile **Basic** sunt șabloanele de început:
 
@@ -60,7 +60,7 @@ Opțiunile **Basic** sunt șabloanele de început:
 
 Vizitează al doilea link într-o filă nouă de browser (sau fă clic pe `Open in GitHub` pentru cardul aferent). Ar trebui să vezi depozitul pentru acest șablon AZD. Ia un minut pentru a explora README-ul. Arhitectura aplicației arată astfel:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.ro.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.ro.png)
 
 ---
 
@@ -92,7 +92,7 @@ Acum, așteaptă ca provizionarea să se finalizeze. **Aceasta durează 10-15 mi
       ```
 1. Portalul Azure va avea acum un grup de resurse provizionat cu numele mediului:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.ro.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.ro.png)
 
 1. **Acum ești pregătit să validezi infrastructura și aplicația implementată**.
 
@@ -108,7 +108,7 @@ Acum, așteaptă ca provizionarea să se finalizeze. **Aceasta durează 10-15 mi
 
 1. Ar trebui să vezi o interfață UI de aplicație găzduită, cum ar fi aceasta:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.ro.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.ro.png)
 
 1. Încearcă să pui câteva [întrebări exemplu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Acum, așteaptă ca provizionarea să se finalizeze. **Aceasta durează 10-15 mi
 
 1. Ar trebui să primești răspunsuri similare cu cele prezentate mai jos. _Dar cum funcționează acest lucru?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.ro.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.ro.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App implementează un endpoint care se conectează la Agentul AI
 1. Fă clic pe resursa `Azure AI Foundry` din listă
 
 1. Ar trebui să vezi aceasta. Fă clic pe butonul `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.ro.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.ro.png)
 
 1. Ar trebui să vezi pagina Proiectului Foundry pentru aplicația ta AI
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.ro.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.ro.png)
 
 1. Fă clic pe `Agents` - vei vedea Agentul implicit provizionat în proiectul tău
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.ro.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.ro.png)
 
 1. Selectează-l - și vei vedea detaliile Agentului. Observă următoarele:
 
       - Agentul folosește File Search implicit (mereu)
       - `Knowledge` al agentului indică faptul că are 32 de fișiere încărcate (pentru File Search)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.ro.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.ro.png)
 
 1. Caută opțiunea `Data+indexes` în meniul din stânga și fă clic pentru detalii. 
 
       - Ar trebui să vezi cele 32 de fișiere de date încărcate pentru cunoștințe.
       - Acestea vor corespunde celor 12 fișiere de clienți și 20 de fișiere de produse din `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.ro.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.ro.png)
 
 **Ai validat funcționarea Agentului!** 
 
@@ -158,7 +158,7 @@ Azure Container App implementează un endpoint care se conectează la Agentul AI
 
 Revino la fila browserului cu endpoint-ul Container App și întreabă: `Ce produse deține Amanda Perez?`. Ar trebui să vezi ceva de genul acesta:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.ro.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.ro.png)
 
 ---
 
@@ -170,7 +170,7 @@ Să construim puțin mai multă intuiție pentru capacitățile Azure AI Foundry
 1. Fă clic pe opțiunea `Try in Playground` - ar trebui să obții o interfață UI de Loc de Joacă, cum ar fi aceasta
 1. Pune aceeași întrebare: `Ce produse deține Amanda Perez?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.ro.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.ro.png)
 
 Primești același (sau similar) răspuns - dar primești și informații suplimentare pe care le poți folosi pentru a înțelege calitatea, costul și performanța aplicației tale agentice. De exemplu:
 
@@ -182,7 +182,7 @@ De asemenea, vezi un rând de _statistici_ sub răspuns.
 1. Plasează cursorul peste orice metrică - de exemplu, Siguranță. Vezi ceva de genul acesta
 1. Evaluarea corespunde intuiției tale pentru nivelul de siguranță al răspunsului?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.ro.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.ro.png)
 
 ---x
 
@@ -196,16 +196,16 @@ Observabilitatea se referă la instrumentarea aplicației tale pentru a genera d
    - Înțelege numărul total de Token-uri (vs. utilizarea token-urilor de ieșire) pentru răspuns
    - Înțelege latența și unde se consumă timpul în execuție
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.ro.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.ro.png)
 
 1. Fă clic pe fila `Metadata` pentru a vedea atribute suplimentare ale rulării, care pot oferi context util pentru depanarea problemelor mai târziu.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.ro.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.ro.png)
 
 
 1. Fă clic pe fila `Evaluations` pentru a vedea evaluările automate făcute asupra răspunsului agentului. Acestea includ evaluări de siguranță (de exemplu, Auto-vătămare) și evaluări specifice agentului (de exemplu, Rezoluția intenției, Respectarea sarcinii).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.ro.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.ro.png)
 
 1. În cele din urmă, fă clic pe fila `Monitoring` din meniul lateral.
 
@@ -213,7 +213,7 @@ Observabilitatea se referă la instrumentarea aplicației tale pentru a genera d
       - Urmărește utilizarea aplicației în termeni de costuri (token-uri) și încărcare (cereri).
       - Urmărește latența aplicației până la primul byte (procesarea intrării) și ultimul byte (ieșirea).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.ro.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.ro.png)
 
 ---
 

@@ -51,7 +51,7 @@ With `azd`, your deployment journey fit be as simple as:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.pcm.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.pcm.png)
 
 ---
 
@@ -72,7 +72,7 @@ When you dey create or dey use AZD template for _your_ case, think about these q
 **🎯 | EXERCISE**: <br/> 
 Go the [Awesome AZD](https://azure.github.io/awesome-azd/) gallery and use the filters to check the 250+ templates wey dey available. See if you fit find one wey match _your_ case needs.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.pcm.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.pcm.png)
 
 ---
 

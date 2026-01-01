@@ -51,7 +51,7 @@ Platforma Azure AI Foundry vključuje [nabor priporočenih AZD predlog](https://
 1. Obiščite [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Prijavite se v portal Azure AI Foundry, ko boste pozvani – videti bo nekaj takega.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.sl.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.sl.png)
 
 **Osnovne** možnosti so vaše začetne predloge:
 
@@ -60,7 +60,7 @@ Platforma Azure AI Foundry vključuje [nabor priporočenih AZD predlog](https://
 
 Obiščite drugo povezavo v novem zavihku brskalnika (ali kliknite `Open in GitHub` za ustrezno kartico). Videti bi morali repozitorij za to AZD predlogo. Vzemite si minuto za raziskovanje README datoteke. Arhitektura aplikacije je videti takole:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.sl.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.sl.png)
 
 ---
 
@@ -92,7 +92,7 @@ Zdaj počakajte, da se namestitev dokonča. **To traja 10–15 minut**
       ```
 1. Vaš Azure Portal bo zdaj imel nameščeno skupino virov z imenom okolja:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.sl.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.sl.png)
 
 1. **Zdaj ste pripravljeni preveriti nameščeno infrastrukturo in aplikacijo**.
 
@@ -108,7 +108,7 @@ Zdaj počakajte, da se namestitev dokonča. **To traja 10–15 minut**
 
 1. Videti bi morali gostujoči uporabniški vmesnik aplikacije, kot je ta:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.sl.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.sl.png)
 
 1. Poskusite zastaviti nekaj [vzorčnih vprašanj](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Zdaj počakajte, da se namestitev dokonča. **To traja 10–15 minut**
 
 1. Videti bi morali odgovore, podobne prikazanim spodaj. _Ampak kako to deluje?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.sl.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.sl.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App namesti končno točko, ki se poveže z AI agentom, namešč
 1. Kliknite na vir `Azure AI Foundry` na seznamu
 
 1. Videti bi morali to. Kliknite gumb `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.sl.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.sl.png)
 
 1. Videti bi morali stran projekta Foundry za vašo AI aplikacijo
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.sl.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.sl.png)
 
 1. Kliknite na `Agents` – videli boste privzetega agenta, nameščenega v vašem projektu
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.sl.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.sl.png)
 
 1. Izberite ga – in videli boste podrobnosti agenta. Opazite naslednje:
 
       - Agent privzeto uporablja File Search (vedno)
       - Znanost agenta kaže, da ima naloženih 32 datotek (za iskanje datotek)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.sl.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.sl.png)
 
 1. Poiščite možnost `Data+indexes` v levem meniju in kliknite za podrobnosti. 
 
       - Videti bi morali 32 podatkovnih datotek, naloženih za znanje.
       - Te ustrezajo 12 datotekam strank in 20 datotekam izdelkov v `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.sl.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.sl.png)
 
 **Preverili ste delovanje agenta!** 
 
@@ -158,7 +158,7 @@ Azure Container App namesti končno točko, ki se poveže z AI agentom, namešč
 
 Vrnite se na zavihek brskalnika s končno točko Container App in vprašajte: `What products does Amanda Perez own?`. Videti bi morali nekaj takega:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.sl.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.sl.png)
 
 ---
 
@@ -170,7 +170,7 @@ Razvijmo malo več intuicije za zmogljivosti Azure AI Foundry, tako da agenta pr
 1. Kliknite možnost `Try in Playground` – dobili boste uporabniški vmesnik igralnice, kot je ta
 1. Zastavite isto vprašanje: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.sl.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.sl.png)
 
 Dobite enak (ali podoben) odgovor – vendar dobite tudi dodatne informacije, ki jih lahko uporabite za razumevanje kakovosti, stroškov in zmogljivosti vaše aplikacije z agenti. Na primer:
 
@@ -182,7 +182,7 @@ Vidite tudi vrstico _statistika_ pod odgovorom.
 1. Premaknite miško nad katero koli metriko – npr. Varnost. Videli boste nekaj takega
 1. Ali ocenjena ocena ustreza vaši intuiciji glede ravni varnosti odgovora?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.sl.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.sl.png)
 
 ---x
 
@@ -196,16 +196,16 @@ Opazljivost pomeni opremljanje vaše aplikacije z orodji za generiranje podatkov
    - Razumite skupno število žetonov (v primerjavi z uporabo izhodnih žetonov) za odgovor
    - Razumite zakasnitev in kje se porabi čas pri izvajanju
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.sl.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.sl.png)
 
 1. Kliknite zavihek `Metadata`, da vidite dodatne atribute za izvajanje, ki lahko zagotovijo koristen kontekst za odpravljanje težav pozneje.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.sl.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.sl.png)
 
 
 1. Kliknite zavihek `Evaluations`, da vidite samodejne ocene, narejene na podlagi odgovora agenta. Te vključujejo ocene varnosti (npr. Samopoškodovanje) in ocene, specifične za agenta (npr. Razrešitev namena, Upoštevanje naloge).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.sl.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.sl.png)
 
 1. Nazadnje kliknite zavihek `Monitoring` v stranskem meniju.
 
@@ -213,7 +213,7 @@ Opazljivost pomeni opremljanje vaše aplikacije z orodji za generiranje podatkov
       - Spremljajte uporabo aplikacije glede na stroške (žetone) in obremenitev (zahteve).
       - Spremljajte zakasnitev aplikacije do prvega bajta (obdelava vhodnih podatkov) in zadnjega bajta (izhod).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.sl.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.sl.png)
 
 ---
 

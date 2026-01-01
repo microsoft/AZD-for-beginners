@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Лекције радионице су у Markdown формату. Можете их директно прегледати на GitHub-у - или покренути преглед у претраживачу као што је приказано на снимку екрана испод.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.sr.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.sr.png)
 
 Да бисте користили ову опцију - форкујте репозиторијум на свој профил и покрените GitHub Codespaces. Када се VS Code терминал активира, укуцајте ову команду:
 

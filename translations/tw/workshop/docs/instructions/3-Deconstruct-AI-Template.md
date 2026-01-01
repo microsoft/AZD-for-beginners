@@ -112,7 +112,7 @@ CO_OP_TRANSLATOR_METADATA:
       
       Azure Storage 提供應用數據和文件上傳的 Blob 存儲，而 Managed Identity 確保 Azure 資源之間的安全訪問，無需存儲憑據。整個解決方案旨在實現可擴展性和可維護性，容器化應用根據需求自動擴展，同時通過 Azure 的托管服務生態系統提供內置的安全性、監控和 CI/CD 功能。
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.tw.png)
+![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.tw.png)
 
 ---
 
