@@ -51,7 +51,7 @@ Platform Azure AI Foundry dilengkapi dengan [set template AZD yang disyorkan](ht
 1. Lawati [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log masuk ke portal Azure AI Foundry apabila diminta - anda akan melihat sesuatu seperti ini.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.ms.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.ms.png)
 
 Pilihan **Basic** adalah template permulaan anda:
 
@@ -60,7 +60,7 @@ Pilihan **Basic** adalah template permulaan anda:
 
 Lawati pautan kedua dalam tab penyemak imbas baru (atau klik `Open in GitHub` untuk kad berkaitan). Anda sepatutnya melihat repositori untuk Template AZD ini. Luangkan masa untuk meneroka README. Seni bina aplikasi kelihatan seperti ini:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.ms.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.ms.png)
 
 ---
 
@@ -93,7 +93,7 @@ Sekarang, tunggu penyediaan selesai. **Ini mengambil masa 10-15 minit**
 
 1. Portal Azure anda kini akan mempunyai kumpulan sumber yang disediakan dengan nama persekitaran itu:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.ms.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.ms.png)
 
 1. **Anda kini bersedia untuk mengesahkan infrastruktur dan aplikasi yang diterapkan**.
 
@@ -109,7 +109,7 @@ Sekarang, tunggu penyediaan selesai. **Ini mengambil masa 10-15 minit**
 
 1. Anda sepatutnya melihat UI aplikasi yang dihoskan seperti ini:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.ms.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.ms.png)
 
 1. Cuba tanya beberapa [soalan contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -118,7 +118,7 @@ Sekarang, tunggu penyediaan selesai. **Ini mengambil masa 10-15 minit**
 
 1. Anda sepatutnya mendapat jawapan yang serupa dengan apa yang ditunjukkan di bawah. _Tetapi bagaimana ini berfungsi?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.ms.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.ms.png)
 
 ---
 
@@ -131,25 +131,25 @@ Azure Container App menerapkan titik akhir yang menghubungkan ke AI Agent yang d
 1. Klik pada sumber `Azure AI Foundry` dalam senarai itu
 
 1. Anda sepatutnya melihat ini. Klik butang `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.ms.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.ms.png)
 
 1. Anda sepatutnya melihat halaman Projek Foundry untuk aplikasi AI anda
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.ms.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.ms.png)
 
 1. Klik pada `Agents` - anda akan melihat Agen lalai yang disediakan dalam projek anda
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.ms.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.ms.png)
 
 1. Pilihnya - dan anda akan melihat butiran Agen. Perhatikan perkara berikut:
 
       - Agen menggunakan File Search secara lalai (sentiasa)
       - `Knowledge` agen menunjukkan ia mempunyai 32 fail yang dimuat naik (untuk carian fail)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.ms.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.ms.png)
 
 1. Cari pilihan `Data+indexes` dalam menu kiri dan klik untuk butiran. 
 
       - Anda sepatutnya melihat 32 fail data yang dimuat naik untuk pengetahuan.
       - Ini akan sepadan dengan 12 fail pelanggan dan 20 fail produk di bawah `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.ms.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.ms.png)
 
 **Anda telah mengesahkan operasi Agen!** 
 
@@ -159,7 +159,7 @@ Azure Container App menerapkan titik akhir yang menghubungkan ke AI Agent yang d
 
 Kembali ke tab penyemak imbas dengan titik akhir Container App dan tanya: `What products does Amanda Perez own?`. Anda sepatutnya melihat sesuatu seperti ini:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.ms.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.ms.png)
 
 ---
 
@@ -171,7 +171,7 @@ Mari bina sedikit intuisi tentang keupayaan Azure AI Foundry, dengan mencuba Age
 1. Klik pilihan `Try in Playground` - anda sepatutnya mendapat UI Playground seperti ini
 1. Tanya soalan yang sama: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.ms.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.ms.png)
 
 Anda mendapat respons yang sama (atau serupa) - tetapi anda juga mendapat maklumat tambahan yang boleh digunakan untuk memahami kualiti, kos, dan prestasi aplikasi agen anda. Contohnya:
 
@@ -183,7 +183,7 @@ Anda juga melihat baris _stats_ di bawah respons.
 1. Arahkan tetikus ke mana-mana metrik - contohnya, Safety. Anda melihat sesuatu seperti ini
 1. Adakah penilaian yang dinilai sepadan dengan intuisi anda untuk tahap keselamatan respons?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.ms.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.ms.png)
 
 ---x
 
@@ -197,15 +197,15 @@ Pemerhatian adalah tentang menginstrumentasikan aplikasi anda untuk menghasilkan
    - Fahami jumlah Token yang digunakan (berbanding penggunaan token output) untuk respons
    - Fahami latensi dan di mana masa dihabiskan dalam pelaksanaan
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.ms.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.ms.png)
 
 1. Klik tab `Metadata` untuk melihat atribut tambahan untuk larian, yang mungkin memberikan konteks berguna untuk menyahpepijat isu kemudian.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.ms.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.ms.png)
 
 1. Klik tab `Evaluations` untuk melihat penilaian automatik yang dibuat pada respons agen. Ini termasuk penilaian keselamatan (contohnya, Self-harm) dan penilaian khusus agen (contohnya, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.ms.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.ms.png)
 
 1. Akhir sekali, klik tab `Monitoring` dalam menu bar sisi.
 
@@ -213,7 +213,7 @@ Pemerhatian adalah tentang menginstrumentasikan aplikasi anda untuk menghasilkan
       - Jejak penggunaan aplikasi dari segi kos (token) dan beban (permintaan).
       - Jejak latensi aplikasi hingga byte pertama (pemprosesan input) dan byte terakhir (output).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.ms.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.ms.png)
 
 ---
 

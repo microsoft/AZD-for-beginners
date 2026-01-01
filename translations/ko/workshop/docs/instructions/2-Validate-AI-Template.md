@@ -51,7 +51,7 @@ Azure AI Foundry 플랫폼은 _멀티 에이전트 워크플로 자동화_ 및 _
 1. [https://ai.azure.com/templates](https://ai.azure.com/templates)를 방문하세요.
 1. Azure AI Foundry 포털에 로그인하라는 메시지가 표시되면 로그인하세요. 다음과 같은 화면이 나타납니다.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.ko.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.ko.png)
 
 **기본** 옵션은 스타터 템플릿입니다:
 
@@ -60,7 +60,7 @@ Azure AI Foundry 플랫폼은 _멀티 에이전트 워크플로 자동화_ 및 _
 
 두 번째 링크를 새 브라우저 탭에서 열거나 관련 카드의 `GitHub에서 열기`를 클릭하세요. AZD 템플릿의 저장소를 확인할 수 있습니다. README를 잠시 살펴보세요. 애플리케이션 아키텍처는 다음과 같습니다:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.ko.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.ko.png)
 
 ---
 
@@ -92,7 +92,7 @@ Azure AI Foundry 플랫폼은 _멀티 에이전트 워크플로 자동화_ 및 _
       ```
 1. Azure 포털에 환경 이름으로 프로비저닝된 리소스 그룹이 생성됩니다:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.ko.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.ko.png)
 
 1. **이제 배포된 인프라와 애플리케이션을 검증할 준비가 되었습니다**.
 
@@ -108,7 +108,7 @@ Azure AI Foundry 플랫폼은 _멀티 에이전트 워크플로 자동화_ 및 _
 
 1. 다음과 같은 호스팅된 애플리케이션 프론트엔드 UI를 확인할 수 있습니다:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.ko.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.ko.png)
 
 1. 몇 가지 [샘플 질문](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)을 시도해 보세요.
 
@@ -117,7 +117,7 @@ Azure AI Foundry 플랫폼은 _멀티 에이전트 워크플로 자동화_ 및 _
 
 1. 아래와 유사한 답변을 받을 수 있습니다. _그런데 이게 어떻게 작동할까요?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.ko.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.ko.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App은 이 템플릿에 대해 Azure AI Foundry 프로젝트에�
 1. 목록에서 `Azure AI Foundry` 리소스를 클릭하세요.
 
 1. 다음 화면이 나타납니다. `Azure AI Foundry 포털로 이동` 버튼을 클릭하세요. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.ko.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.ko.png)
 
 1. AI 애플리케이션에 대한 Foundry 프로젝트 페이지를 확인할 수 있습니다.
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.ko.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.ko.png)
 
 1. `에이전트`를 클릭하세요 - 프로젝트에 프로비저닝된 기본 에이전트를 확인할 수 있습니다.
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.ko.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.ko.png)
 
 1. 선택하면 에이전트 세부 정보를 확인할 수 있습니다. 다음을 주목하세요:
 
       - 에이전트는 기본적으로 파일 검색을 사용합니다(항상).
       - 에이전트 `Knowledge`는 32개의 파일이 업로드되었음을 나타냅니다(파일 검색용).
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.ko.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.ko.png)
 
 1. 왼쪽 메뉴에서 `Data+indexes` 옵션을 찾아 클릭하여 세부 정보를 확인하세요.
 
       - 업로드된 32개의 데이터 파일을 확인할 수 있습니다.
       - 이는 `src/files` 아래의 12개의 고객 파일과 20개의 제품 파일에 해당합니다.
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.ko.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.ko.png)
 
 **에이전트 작동을 검증했습니다!**
 
@@ -158,7 +158,7 @@ Azure Container App은 이 템플릿에 대해 Azure AI Foundry 프로젝트에�
 
 Container App 엔드포인트가 있는 브라우저 탭으로 돌아가서 다음을 질문하세요: `Amanda Perez가 소유한 제품은 무엇인가요?`. 다음과 같은 결과를 확인할 수 있습니다:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.ko.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.ko.png)
 
 ---
 
@@ -170,7 +170,7 @@ Azure AI Foundry의 기능에 대한 직관을 더 키우기 위해 에이전트
 1. `플레이그라운드에서 시도하기` 옵션을 클릭하세요 - 다음과 같은 플레이그라운드 UI를 확인할 수 있습니다.
 1. 동일한 질문을 해보세요: `Amanda Perez가 소유한 제품은 무엇인가요?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.ko.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.ko.png)
 
 동일하거나 유사한 응답을 받을 수 있습니다 - 하지만 응답의 품질, 비용, 성능을 이해하는 데 사용할 수 있는 추가 정보를 확인할 수 있습니다. 예를 들어:
 
@@ -182,7 +182,7 @@ Azure AI Foundry의 기능에 대한 직관을 더 키우기 위해 에이전트
 1. 특정 메트릭 위에 마우스를 올려보세요 - 예: 안전성. 다음과 같은 화면을 확인할 수 있습니다.
 1. 평가된 등급이 응답의 안전성 수준에 대한 직관과 일치하나요?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.ko.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.ko.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Azure AI Foundry의 기능에 대한 직관을 더 키우기 위해 에이전트
    - 응답에 사용된 총 토큰 수(출력 토큰 사용량 대비)를 이해하세요.
    - 실행 중 소요된 시간과 지연 시간을 이해하세요.
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.ko.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.ko.png)
 
 1. `메타데이터` 탭을 클릭하여 실행에 대한 추가 속성을 확인하세요. 이는 나중에 문제를 디버깅하는 데 유용한 컨텍스트를 제공할 수 있습니다.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.ko.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.ko.png)
 
 1. `평가` 탭을 클릭하여 에이전트 응답에 대한 자동 평가를 확인하세요. 여기에는 안전성 평가(예: 자해) 및 에이전트별 평가(예: 의도 해결, 작업 준수)가 포함됩니다.
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.ko.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.ko.png)
 
 1. 마지막으로, 사이드바 메뉴에서 `모니터링` 탭을 클릭하세요.
 
@@ -212,7 +212,7 @@ Azure AI Foundry의 기능에 대한 직관을 더 키우기 위해 에이전트
       - 비용(토큰) 및 부하(요청) 측면에서 애플리케이션 사용량을 추적하세요.
       - 첫 번째 바이트(입력 처리)와 마지막 바이트(출력)까지의 애플리케이션 지연 시간을 추적하세요.
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.ko.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.ko.png)
 
 ---
 

@@ -51,7 +51,7 @@ Het Azure AI Foundry-platform wordt geleverd met een [set aanbevolen AZD-templat
 1. Bezoek [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log in op de Azure AI Foundry-portal wanneer daarom wordt gevraagd - je ziet iets zoals dit.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.nl.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.nl.png)
 
 De **Basic**-opties zijn je startertemplates:
 
@@ -60,7 +60,7 @@ De **Basic**-opties zijn je startertemplates:
 
 Bezoek de tweede link in een nieuw browsertabblad (of klik op `Open in GitHub` voor de bijbehorende kaart). Je zou de repository voor deze AZD-template moeten zien. Neem een minuut om de README te verkennen. De applicatiearchitectuur ziet er zo uit:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.nl.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.nl.png)
 
 ---
 
@@ -92,7 +92,7 @@ Nu wacht je tot de inrichting is voltooid. **Dit duurt 10-15 minuten**
       ```
 1. Je Azure Portal heeft nu een ingerichte resourcegroep met die omgevingsnaam:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.nl.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.nl.png)
 
 1. **Je bent nu klaar om de ingerichte infrastructuur en applicatie te valideren**.
 
@@ -108,7 +108,7 @@ Nu wacht je tot de inrichting is voltooid. **Dit duurt 10-15 minuten**
 
 1. Je zou een gehoste applicatie-frontend UI moeten zien zoals dit:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.nl.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.nl.png)
 
 1. Probeer een paar [voorbeeldvragen](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) te stellen
 
@@ -117,7 +117,7 @@ Nu wacht je tot de inrichting is voltooid. **Dit duurt 10-15 minuten**
 
 1. Je zou antwoorden moeten krijgen die vergelijkbaar zijn met wat hieronder wordt weergegeven. _Maar hoe werkt dit?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.nl.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.nl.png)
 
 ---
 
@@ -130,25 +130,25 @@ De Azure Container App implementeert een endpoint dat verbinding maakt met de AI
 1. Klik op de `Azure AI Foundry`-resource in die lijst
 
 1. Je zou dit moeten zien. Klik op de knop `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.nl.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.nl.png)
 
 1. Je zou de Foundry Project-pagina voor je AI-applicatie moeten zien
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.nl.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.nl.png)
 
 1. Klik op `Agents` - je ziet de standaardagent die is ingericht in je project
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.nl.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.nl.png)
 
 1. Selecteer deze - en je ziet de agentdetails. Let op het volgende:
 
       - De agent gebruikt standaard File Search (altijd)
       - De agent `Knowledge` geeft aan dat er 32 bestanden zijn geüpload (voor file search)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.nl.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.nl.png)
 
 1. Zoek naar de optie `Data+indexes` in het linkermenu en klik voor details. 
 
       - Je zou de 32 databestanden moeten zien die zijn geüpload voor kennis.
       - Deze komen overeen met de 12 klantbestanden en 20 productbestanden onder `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.nl.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.nl.png)
 
 **Je hebt de werking van de agent gevalideerd!** 
 
@@ -158,7 +158,7 @@ De Azure Container App implementeert een endpoint dat verbinding maakt met de AI
 
 Ga terug naar het browsertabblad met het Container App-endpoint en vraag: `Welke producten bezit Amanda Perez?`. Je zou iets moeten zien zoals dit:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.nl.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.nl.png)
 
 ---
 
@@ -170,7 +170,7 @@ Laten we wat meer inzicht krijgen in de mogelijkheden van Azure AI Foundry door 
 1. Klik op de optie `Try in Playground` - je zou een Playground UI moeten zien zoals deze
 1. Stel dezelfde vraag: `Welke producten bezit Amanda Perez?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.nl.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.nl.png)
 
 Je krijgt hetzelfde (of een vergelijkbaar) antwoord - maar je krijgt ook aanvullende informatie die je kunt gebruiken om de kwaliteit, kosten en prestaties van je agent-gebaseerde app te begrijpen. Bijvoorbeeld:
 
@@ -182,7 +182,7 @@ Je ziet ook een _stats_-rij onder het antwoord.
 1. Beweeg je cursor over een metric - bijvoorbeeld Veiligheid. Je ziet iets zoals dit
 1. Komt de beoordeelde score overeen met je intuïtie over het veiligheidsniveau van het antwoord?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.nl.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.nl.png)
 
 ---x
 
@@ -196,16 +196,16 @@ Observability gaat over het instrumenteren van je applicatie om data te generere
    - Begrijp het totale aantal tokens (vs. gebruik van outputtokens) voor het antwoord
    - Begrijp de latentie en waar tijd wordt besteed aan de uitvoering
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.nl.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.nl.png)
 
 1. Klik op het tabblad `Metadata` om aanvullende attributen voor de uitvoering te zien, die nuttige context kunnen bieden voor het debuggen van problemen later.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.nl.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.nl.png)
 
 
 1. Klik op het tabblad `Evaluations` om automatische beoordelingen te zien van het agentantwoord. Deze omvatten veiligheidsbeoordelingen (bijv. Zelfbeschadiging) en agent-specifieke beoordelingen (bijv. Intentieresolutie, Taaknaleving).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.nl.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.nl.png)
 
 1. Klik tot slot op het tabblad `Monitoring` in het zijmenu.
 
@@ -213,7 +213,7 @@ Observability gaat over het instrumenteren van je applicatie om data te generere
       - Volg het gebruik van de applicatie in termen van kosten (tokens) en belasting (verzoeken).
       - Volg de latentie van de applicatie tot de eerste byte (inputverwerking) en de laatste byte (output).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.nl.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.nl.png)
 
 ---
 

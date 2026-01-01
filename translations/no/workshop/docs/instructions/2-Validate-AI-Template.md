@@ -51,7 +51,7 @@ Azure AI Foundry-plattformen kommer med et [sett anbefalte AZD-maler](https://le
 1. Besøk [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Logg inn på Azure AI Foundry-portalen når du blir bedt om det - du vil se noe som dette.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.no.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.no.png)
 
 **Basic**-alternativene er dine startmaler:
 
@@ -60,7 +60,7 @@ Azure AI Foundry-plattformen kommer med et [sett anbefalte AZD-maler](https://le
 
 Besøk den andre lenken i en ny nettleserfane (eller klikk `Open in GitHub` for det relaterte kortet). Du bør se repositoriet for denne AZD-malen. Ta et minutt til å utforske README. Applikasjonsarkitekturen ser slik ut:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.no.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.no.png)
 
 ---
 
@@ -92,7 +92,7 @@ Nå venter du på at klargjøringen skal fullføres. **Dette tar 10-15 minutter*
       ```
 1. Din Azure Portal vil nå ha en klargjort ressursgruppe med det miljønavnet:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.no.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.no.png)
 
 1. **Du er nå klar til å validere den deployerte infrastrukturen og applikasjonen**.
 
@@ -108,7 +108,7 @@ Nå venter du på at klargjøringen skal fullføres. **Dette tar 10-15 minutter*
 
 1. Du bør se en hostet applikasjons front-end UI som dette:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.no.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.no.png)
 
 1. Prøv å stille et par [eksempelspørsmål](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Nå venter du på at klargjøringen skal fullføres. **Dette tar 10-15 minutter*
 
 1. Du bør få svar som ligner på det som vises nedenfor. _Men hvordan fungerer dette?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.no.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.no.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App deployerer en endepunkt som kobler til AI-agenten klargjort 
 1. Klikk på `Azure AI Foundry`-ressursen i listen
 
 1. Du bør se dette. Klikk på `Go to Azure AI Foundry Portal`-knappen. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.no.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.no.png)
 
 1. Du bør se Foundry-prosjektsiden for AI-applikasjonen din
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.no.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.no.png)
 
 1. Klikk på `Agents` - du ser standardagenten klargjort i prosjektet ditt
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.no.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.no.png)
 
 1. Velg den - og du ser agentdetaljene. Merk følgende:
 
       - Agenten bruker File Search som standard (alltid)
       - Agentens `Knowledge` indikerer at den har 32 filer lastet opp (for filsøking)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.no.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.no.png)
 
 1. Se etter `Data+indexes`-alternativet i venstre meny og klikk for detaljer. 
 
       - Du bør se de 32 datafilene lastet opp for kunnskap.
       - Disse vil tilsvare de 12 kundefilene og 20 produktfilene under `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.no.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.no.png)
 
 **Du har validert agentens operasjon!** 
 
@@ -158,7 +158,7 @@ Azure Container App deployerer en endepunkt som kobler til AI-agenten klargjort 
 
 Gå tilbake til nettleserfanen med Container App-endepunktet og spør: `Hvilke produkter eier Amanda Perez?`. Du bør se noe som dette:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.no.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.no.png)
 
 ---
 
@@ -170,7 +170,7 @@ La oss bygge litt mer intuisjon for kapasitetene til Azure AI Foundry, ved å te
 1. Klikk på `Try in Playground`-alternativet - du bør få en Playground UI som dette
 1. Still det samme spørsmålet: `Hvilke produkter eier Amanda Perez?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.no.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.no.png)
 
 Du får det samme (eller lignende) svar - men du får også tilleggsinformasjon som du kan bruke til å forstå kvaliteten, kostnaden og ytelsen til din agentbaserte app. For eksempel:
 
@@ -182,7 +182,7 @@ Du ser også en _stats_-rad under svaret.
 1. Hold musepekeren over en hvilken som helst metrikk - f.eks. Safety. Du ser noe som dette
 1. Samsvarer den vurderte rangeringen med din intuisjon for sikkerhetsnivået til svaret?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.no.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.no.png)
 
 ---
 
@@ -196,15 +196,15 @@ Observabilitet handler om å instrumentere applikasjonen din for å generere dat
    - Forstå totalt antall tokens (vs. bruk av output tokens) for svaret
    - Forstå latensen og hvor tiden brukes i utførelsen
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.no.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.no.png)
 
 1. Klikk på `Metadata`-fanen for å se ytterligere attributter for kjøringen, som kan gi nyttig kontekst for feilsøking senere.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.no.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.no.png)
 
 1. Klikk på `Evaluations`-fanen for å se automatiske vurderinger gjort på agentens svar. Disse inkluderer sikkerhetsvurderinger (f.eks. Selvskading) og agentspesifikke vurderinger (f.eks. Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.no.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.no.png)
 
 1. Sist men ikke minst, klikk på `Monitoring`-fanen i sidebarmenyen.
 
@@ -212,7 +212,7 @@ Observabilitet handler om å instrumentere applikasjonen din for å generere dat
       - Spor applikasjonsbruk i form av kostnader (tokens) og belastning (forespørsler).
       - Spor applikasjonslatens til første byte (inputbehandling) og siste byte (output).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.no.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.no.png)
 
 ---
 

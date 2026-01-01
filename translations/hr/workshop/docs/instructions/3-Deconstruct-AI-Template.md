@@ -112,7 +112,7 @@ U `Ask` modu, ovo će pružiti kod koji možete kopirati i isprobati. U `Agent` 
       
       Azure Storage pruža blob storage za podatke aplikacije i prijenos datoteka, dok Managed Identity osigurava siguran pristup između Azure resursa bez pohranjivanja vjerodajnica. Cijelo rješenje je dizajnirano za skalabilnost i održivost, s aplikacijom u containeru koja se automatski skalira prema potražnji dok pruža ugrađenu sigurnost, praćenje i CI/CD mogućnosti kroz Azureov ekosustav upravljanih usluga.
 
-![Arhitektura](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.hr.png)
+![Arhitektura](../../../../../translated_images/architecture.48d94861e6e6cdc0.hr.png)
 
 ---
 

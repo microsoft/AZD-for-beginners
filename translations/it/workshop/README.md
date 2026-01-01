@@ -40,7 +40,7 @@ Durante il workshop, ti verranno introdotti anche strumenti e flussi di lavoro e
 
 Le lezioni del workshop sono in Markdown. Puoi navigarle direttamente su GitHub - oppure avviare un'anteprima basata su browser come mostrato nello screenshot qui sotto.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.it.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.it.png)
 
 Per utilizzare questa opzione - fai un fork del repository nel tuo profilo e avvia GitHub Codespaces. Una volta attivo il terminale di VS Code, digita questo comando:
 

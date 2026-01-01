@@ -47,10 +47,10 @@ Før vi avvikler prosjektet, ta noen minutter til å utforske fritt.
 
       Her er modell-distribusjonene **før**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.no.png)
+      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.no.png)
 
       Og her er de **etter**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.no.png)
+      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.no.png)
 
 ---
 
