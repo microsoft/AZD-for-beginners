@@ -51,7 +51,7 @@ Nền tảng Azure AI Foundry đi kèm với [bộ mẫu AZD được khuyến n
 1. Truy cập [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Đăng nhập vào cổng thông tin Azure AI Foundry khi được yêu cầu - bạn sẽ thấy giao diện như thế này.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.vi.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.vi.png)
 
 Các tùy chọn **Cơ bản** là các mẫu khởi đầu của bạn:
 
@@ -60,7 +60,7 @@ Các tùy chọn **Cơ bản** là các mẫu khởi đầu của bạn:
 
 Truy cập liên kết thứ hai trong một tab trình duyệt mới (hoặc nhấp vào `Open in GitHub` trên thẻ liên quan). Bạn sẽ thấy kho lưu trữ cho mẫu AZD này. Dành một phút để khám phá README. Kiến trúc ứng dụng trông như thế này:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.vi.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.vi.png)
 
 ---
 
@@ -92,7 +92,7 @@ Bây giờ, bạn chờ quá trình cung cấp hoàn tất. **Điều này mất
       ```
 1. Cổng thông tin Azure của bạn bây giờ sẽ có một nhóm tài nguyên được cung cấp với tên môi trường đó:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.vi.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.vi.png)
 
 1. **Bây giờ bạn đã sẵn sàng xác thực hạ tầng và ứng dụng đã triển khai**.
 
@@ -108,7 +108,7 @@ Bây giờ, bạn chờ quá trình cung cấp hoàn tất. **Điều này mất
 
 1. Bạn sẽ thấy giao diện người dùng front-end của ứng dụng được lưu trữ như thế này:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.vi.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.vi.png)
 
 1. Thử hỏi một vài [câu hỏi mẫu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Bây giờ, bạn chờ quá trình cung cấp hoàn tất. **Điều này mất
 
 1. Bạn sẽ nhận được câu trả lời tương tự như hình dưới đây. _Nhưng điều này hoạt động như thế nào?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.vi.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.vi.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App triển khai một endpoint kết nối với AI Agent đư�
 1. Nhấp vào tài nguyên `Azure AI Foundry` trong danh sách đó
 
 1. Bạn sẽ thấy giao diện này. Nhấp vào nút `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.vi.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.vi.png)
 
 1. Bạn sẽ thấy trang Dự án Foundry cho ứng dụng AI của bạn
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.vi.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.vi.png)
 
 1. Nhấp vào `Agents` - bạn sẽ thấy tác nhân mặc định được cung cấp trong dự án của bạn
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.vi.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.vi.png)
 
 1. Chọn nó - và bạn sẽ thấy chi tiết về tác nhân. Lưu ý các điểm sau:
 
       - Tác nhân sử dụng File Search theo mặc định (luôn luôn)
       - `Knowledge` của tác nhân cho thấy nó có 32 tệp đã tải lên (cho tìm kiếm tệp)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.vi.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.vi.png)
 
 1. Tìm tùy chọn `Data+indexes` trong menu bên trái và nhấp để xem chi tiết. 
 
       - Bạn sẽ thấy 32 tệp dữ liệu đã tải lên cho kiến thức.
       - Những tệp này sẽ tương ứng với 12 tệp khách hàng và 20 tệp sản phẩm trong `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.vi.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.vi.png)
 
 **Bạn đã xác thực hoạt động của Tác nhân!** 
 
@@ -158,7 +158,7 @@ Azure Container App triển khai một endpoint kết nối với AI Agent đư�
 
 Quay lại tab trình duyệt với endpoint của Container App và hỏi: `Amanda Perez sở hữu những sản phẩm nào?`. Bạn sẽ thấy kết quả như thế này:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.vi.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.vi.png)
 
 ---
 
@@ -170,7 +170,7 @@ Hãy xây dựng thêm trực giác về khả năng của Azure AI Foundry, b�
 1. Nhấp vào tùy chọn `Try in Playground` - bạn sẽ nhận được giao diện Sân chơi như thế này
 1. Hỏi cùng câu hỏi: `Amanda Perez sở hữu những sản phẩm nào?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.vi.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.vi.png)
 
 Bạn nhận được câu trả lời tương tự (hoặc gần giống) - nhưng bạn cũng nhận được thông tin bổ sung mà bạn có thể sử dụng để hiểu chất lượng, chi phí, và hiệu suất của ứng dụng AI tác nhân của mình. Ví dụ:
 
@@ -182,7 +182,7 @@ Bạn cũng thấy một hàng _stats_ bên dưới câu trả lời.
 1. Di chuột qua bất kỳ chỉ số nào - ví dụ, Safety. Bạn sẽ thấy điều gì đó như thế này
 1. Đánh giá được đưa ra có khớp với trực giác của bạn về mức độ an toàn của câu trả lời không?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.vi.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.vi.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Khả năng quan sát là việc trang bị cho ứng dụng của bạn để t
    - Hiểu tổng số Token (so với số token đầu ra được sử dụng) cho câu trả lời
    - Hiểu độ trễ và thời gian được sử dụng trong quá trình thực thi
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.vi.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.vi.png)
 
 1. Nhấp vào tab `Metadata` để xem các thuộc tính bổ sung cho lần chạy, có thể cung cấp ngữ cảnh hữu ích để gỡ lỗi các vấn đề sau này.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.vi.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.vi.png)
 
 1. Nhấp vào tab `Evaluations` để xem các đánh giá tự động được thực hiện trên câu trả lời của tác nhân. Các đánh giá này bao gồm đánh giá an toàn (ví dụ, Self-harm) và đánh giá cụ thể của tác nhân (ví dụ, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.vi.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.vi.png)
 
 1. Cuối cùng nhưng không kém phần quan trọng, nhấp vào tab `Monitoring` trong menu bên.
 
@@ -212,7 +212,7 @@ Khả năng quan sát là việc trang bị cho ứng dụng của bạn để t
       - Theo dõi việc sử dụng ứng dụng về chi phí (token) và tải (yêu cầu).
       - Theo dõi độ trễ của ứng dụng từ byte đầu tiên (xử lý đầu vào) đến byte cuối cùng (đầu ra).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.vi.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.vi.png)
 
 ---
 

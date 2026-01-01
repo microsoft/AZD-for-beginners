@@ -112,7 +112,7 @@ Trong chế độ `Ask`, điều này sẽ cung cấp mã mà bạn có thể sa
       
       Azure Storage cung cấp lưu trữ blob cho dữ liệu ứng dụng và tệp tải lên, trong khi Managed Identity đảm bảo truy cập an toàn giữa các tài nguyên Azure mà không cần lưu trữ thông tin đăng nhập. Toàn bộ giải pháp được thiết kế để mở rộng và duy trì, với ứng dụng container tự động mở rộng dựa trên nhu cầu đồng thời cung cấp bảo mật, giám sát và khả năng CI/CD tích hợp thông qua hệ sinh thái dịch vụ được quản lý của Azure.
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.vi.png)
+![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.vi.png)
 
 ---
 
