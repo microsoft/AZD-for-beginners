@@ -51,7 +51,7 @@ Dengan `azd`, perjalanan pelaksanaan anda boleh menjadi semudah:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.ms.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.ms.png)
 
 ---
 
@@ -72,7 +72,7 @@ Apabila mencipta atau menggunakan templat AZD untuk senario _anda_, pertimbangka
 **🎯 | LATIHAN**: <br/> 
 Lawati galeri [Awesome AZD](https://azure.github.io/awesome-azd/) dan gunakan penapis untuk meneroka lebih daripada 250 templat yang tersedia. Lihat jika anda boleh menemui satu yang selaras dengan keperluan senario _anda_.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.ms.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.ms.png)
 
 ---
 

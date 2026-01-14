@@ -40,7 +40,7 @@ For dis workshop, you go also learn about di main developer tools and workflows 
 
 Di workshop lessons dey for Markdown. You fit check dem directly for GitHub - or you fit open browser-based preview like di screenshot below.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.pcm.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.pcm.png)
 
 To use dis option - fork di repository go your profile, then open GitHub Codespaces. Once di VS Code terminal don active, type dis command:
 

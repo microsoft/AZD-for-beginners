@@ -51,7 +51,7 @@ Azure AI Foundry ਪਲੇਟਫਾਰਮ ਨਾਲ [ਸੁਝਾਏ ਗਏ AZD 
 1. [https://ai.azure.com/templates](https://ai.azure.com/templates) 'ਤੇ ਜਾਓ
 1. ਜਦੋਂ ਪੁੱਛਿਆ ਜਾਵੇ ਤਾਂ Azure AI Foundry ਪੋਰਟਲ ਵਿੱਚ ਲੌਗਇਨ ਕਰੋ - ਤੁਹਾਨੂੰ ਕੁਝ ਇਸ ਤਰ੍ਹਾਂ ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ।
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.pa.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.pa.png)
 
 **ਬੇਸਿਕ** ਵਿਕਲਪ ਤੁਹਾਡੇ ਸਟਾਰਟਰ ਟੈਂਪਲੇਟ ਹਨ:
 
@@ -60,7 +60,7 @@ Azure AI Foundry ਪਲੇਟਫਾਰਮ ਨਾਲ [ਸੁਝਾਏ ਗਏ AZD 
 
 ਦੂਜੇ ਲਿੰਕ ਨੂੰ ਇੱਕ ਨਵੇਂ ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ ਵਿੱਚ ਖੋਲ੍ਹੋ (ਜਾਂ ਸੰਬੰਧਿਤ ਕਾਰਡ ਲਈ `Open in GitHub` 'ਤੇ ਕਲਿਕ ਕਰੋ)। ਤੁਹਾਨੂੰ ਇਸ AZD ਟੈਂਪਲੇਟ ਲਈ ਰਿਪੋਜ਼ਿਟਰੀ ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ। README ਦੀ ਪੜਚੋਲ ਕਰਨ ਲਈ ਇੱਕ ਮਿੰਟ ਲਓ। ਐਪਲੀਕੇਸ਼ਨ ਆਰਕੀਟੈਕਚਰ ਕੁਝ ਇਸ ਤਰ੍ਹਾਂ ਦੇਖਦੀ ਹੈ:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.pa.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.pa.png)
 
 ---
 
@@ -92,7 +92,7 @@ Azure AI Foundry ਪਲੇਟਫਾਰਮ ਨਾਲ [ਸੁਝਾਏ ਗਏ AZD 
       ```
 1. ਤੁਹਾਡਾ Azure ਪੋਰਟਲ ਹੁਣ ਉਸ env ਨਾਮ ਨਾਲ ਇੱਕ ਪ੍ਰੋਵਿਜ਼ਨ ਕੀਤਾ ਰਿਸੋਰਸ ਗਰੁੱਪ ਰੱਖੇਗਾ:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.pa.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.pa.png)
 
 1. **ਤੁਸੀਂ ਹੁਣ ਡਿਪਲੌਇ ਕੀਤੇ ਇੰਫਰਾਸਟਰਕਚਰ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ।**
 
@@ -108,7 +108,7 @@ Azure AI Foundry ਪਲੇਟਫਾਰਮ ਨਾਲ [ਸੁਝਾਏ ਗਏ AZD 
 
 1. ਤੁਹਾਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਇੱਕ ਹੋਸਟ ਕੀਤੀ ਐਪਲੀਕੇਸ਼ਨ ਫਰੰਟ-ਐਂਡ UI ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.pa.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.pa.png)
 
 1. ਕੁਝ [ਨਮੂਨਾ ਪ੍ਰਸ਼ਨ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) ਪੁੱਛਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ
 
@@ -117,7 +117,7 @@ Azure AI Foundry ਪਲੇਟਫਾਰਮ ਨਾਲ [ਸੁਝਾਏ ਗਏ AZD 
 
 1. ਤੁਹਾਨੂੰ ਹੇਠਾਂ ਦਿੱਤੇ ਜਿਵੇਂ ਜਵਾਬ ਮਿਲਣੇ ਚਾਹੀਦੇ ਹਨ। _ਪਰ ਇਹ ਕੰਮ ਕਿਵੇਂ ਕਰਦਾ ਹੈ?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.pa.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.pa.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App ਇੱਕ ਐਂਡਪੌਇੰਟ ਡਿਪਲੌਇ ਕਰ
 1. ਉਸ ਸੂਚੀ ਵਿੱਚ `Azure AI Foundry` ਰਿਸੋਰਸ 'ਤੇ ਕਲਿਕ ਕਰੋ
 
 1. ਤੁਹਾਨੂੰ ਇਹ ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ। `Go to Azure AI Foundry Portal` ਬਟਨ 'ਤੇ ਕਲਿਕ ਕਰੋ।  
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.pa.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.pa.png)
 
 1. ਤੁਹਾਨੂੰ ਆਪਣੇ AI ਐਪਲੀਕੇਸ਼ਨ ਲਈ Foundry Project ਪੇਜ ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ  
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.pa.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.pa.png)
 
 1. `Agents` 'ਤੇ ਕਲਿਕ ਕਰੋ - ਤੁਸੀਂ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਪ੍ਰੋਵਿਜ਼ਨ ਕੀਤਾ ਡਿਫਾਲਟ Agent ਦੇਖਦੇ ਹੋ  
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.pa.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.pa.png)
 
 1. ਇਸਨੂੰ ਚੁਣੋ - ਅਤੇ ਤੁਸੀਂ Agent ਵੇਰਵੇ ਦੇਖਦੇ ਹੋ। ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਚੀਜ਼ਾਂ 'ਤੇ ਧਿਆਨ ਦਿਓ:
 
       - Agent ਡਿਫਾਲਟ ਰੂਪ ਵਿੱਚ File Search ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ (ਹਮੇਸ਼ਾ)
       - Agent `Knowledge` ਦਰਸਾਉਂਦਾ ਹੈ ਕਿ ਇਸ ਵਿੱਚ 32 ਫਾਈਲਾਂ ਅੱਪਲੋਡ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ (ਫਾਈਲ ਖੋਜ ਲਈ)  
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.pa.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.pa.png)
 
 1. ਖੋਜ ਲਈ `Data+indexes` ਵਿਕਲਪ ਨੂੰ ਖੋਜੋ ਅਤੇ ਵੇਰਵੇ ਲਈ ਕਲਿਕ ਕਰੋ। 
 
       - ਤੁਹਾਨੂੰ 32 ਡਾਟਾ ਫਾਈਲਾਂ ਅੱਪਲੋਡ ਕੀਤੀਆਂ ਦੇਖਣ ਨੂੰ ਮਿਲਣਗੀਆਂ।
       - ਇਹ `src/files` ਦੇ ਹੇਠਾਂ 12 ਗਾਹਕ ਫਾਈਲਾਂ ਅਤੇ 20 ਉਤਪਾਦ ਫਾਈਲਾਂ ਨਾਲ ਸਬੰਧਿਤ ਹੋਣਗੀਆਂ  
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.pa.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.pa.png)
 
 **ਤੁਸੀਂ Agent ਦੇ ਕੰਮ ਦੀ ਪੁਸ਼ਟੀ ਕੀਤੀ!** 
 
@@ -158,7 +158,7 @@ Azure Container App ਇੱਕ ਐਂਡਪੌਇੰਟ ਡਿਪਲੌਇ ਕਰ
 
 Container App ਐਂਡਪੌਇੰਟ ਵਾਲੇ ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ 'ਤੇ ਵਾਪਸ ਜਾਓ ਅਤੇ ਪੁੱਛੋ: `What products does Amanda Perez own?`। ਤੁਹਾਨੂੰ ਕੁਝ ਇਸ ਤਰ੍ਹਾਂ ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.pa.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.pa.png)
 
 ---
 
@@ -170,7 +170,7 @@ Container App ਐਂਡਪੌਇੰਟ ਵਾਲੇ ਬ੍ਰਾਊਜ਼ਰ ਟ
 1. `Try in Playground` ਵਿਕਲਪ 'ਤੇ ਕਲਿਕ ਕਰੋ - ਤੁਹਾਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਇੱਕ Playground UI ਮਿਲੇਗਾ
 1. ਉਹੀ ਪ੍ਰਸ਼ਨ ਪੁੱਛੋ: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.pa.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.pa.png)
 
 ਤੁਹਾਨੂੰ ਉਹੀ (ਜਾਂ ਸਮਾਨ) ਜਵਾਬ ਮਿਲਦਾ ਹੈ - ਪਰ ਤੁਹਾਨੂੰ ਵਾਧੂ ਜਾਣਕਾਰੀ ਵੀ ਮਿਲਦੀ ਹੈ ਜੋ ਤੁਹਾਡੇ Agentic ਐਪ ਦੀ ਗੁਣਵੱਤਾ, ਲਾਗਤ, ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ਨੂੰ ਸਮਝਣ ਲਈ ਵਰਤੀ ਜਾ ਸਕਦੀ ਹੈ। ਉਦਾਹਰਨ ਲਈ:
 
@@ -182,7 +182,7 @@ Container App ਐਂਡਪੌਇੰਟ ਵਾਲੇ ਬ੍ਰਾਊਜ਼ਰ ਟ
 1. ਕਿਸੇ ਵੀ ਮੈਟ੍ਰਿਕ 'ਤੇ ਹਵਰ ਕਰੋ - ਉਦਾਹਰਨ ਲਈ, Safety। ਤੁਹਾਨੂੰ ਕੁਝ ਇਸ ਤਰ੍ਹਾਂ ਦੇਖਣ ਨੂੰ ਮਿਲੇਗਾ
 1. ਕੀ ਅੰਕਿਤ ਰੇਟਿੰਗ ਤੁਹਾਡੇ ਜਵਾਬ ਦੀ ਸੁਰੱਖਿਆ ਪੱਧਰ ਲਈ ਤੁਹਾਡੇ ਅਨੁਭਵ ਨਾਲ ਮੇਲ ਖਾਂਦੀ ਹੈ?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.pa.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.pa.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Observability ਤੁਹਾਡੀ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਸਾਜ
    - ਜਵਾਬ ਲਈ ਕੁੱਲ Token ਗਿਣਤੀ (ਵਰਤੋਂ Token ਦੀ ਵਰਤੋਂ ਦੇ ਵਿਰੁੱਧ) ਨੂੰ ਸਮਝੋ
    - ਲੈਟੈਂਸੀ ਨੂੰ ਸਮਝੋ ਅਤੇ ਕਾਰਜਨਵਾਈ ਵਿੱਚ ਸਮਾਂ ਕਿੱਥੇ ਲਗ ਰਿਹਾ ਹੈ
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.pa.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.pa.png)
 
 1. `Metadata` ਟੈਬ 'ਤੇ ਕਲਿਕ ਕਰੋ ਤਾਂ ਜੋ ਰਨ ਲਈ ਵਾਧੂ ਗੁਣਾਂ ਦੇਖੇ ਜਾ ਸਕਣ, ਜੋ ਬਾਅਦ ਵਿੱਚ ਸਮੱਸਿਆਵਾਂ ਨੂੰ ਡਿਬੱਗ ਕਰਨ ਲਈ ਉਪਯੋਗ ਸੰਦਰਭ ਪ੍ਰਦਾਨ ਕਰ ਸਕਦੇ ਹਨ।   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.pa.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.pa.png)
 
 1. `Evaluations` ਟੈਬ 'ਤੇ ਕਲਿਕ ਕਰੋ ਤਾਂ ਜੋ Agent ਜਵਾਬ 'ਤੇ ਕੀਤੇ ਆਟੋ-ਅਸੈਸਮੈਂਟਸ ਦੇਖੇ ਜਾ ਸਕਣ। ਇਹਨਾਂ ਵਿੱਚ ਸੁਰੱਖਿਆ ਮੁਲਾਂਕਣ (ਉਦਾਹਰਨ ਲਈ, Self-harm) ਅਤੇ Agent-ਵਿਸ਼ੇਸ਼ ਮੁਲਾਂਕਣ (ਉਦਾਹਰਨ ਲਈ, Intent resolution, Task adherence) ਸ਼ਾਮਲ ਹਨ।
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.pa.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.pa.png)
 
 1. ਆਖਰੀ ਪਰ ਘੱਟ ਨਹੀਂ, ਸਾਈਡਬਾਰ ਮੈਨੂ ਵਿੱਚ `Monitoring` ਟੈਬ 'ਤੇ ਕਲਿਕ ਕਰੋ।
 

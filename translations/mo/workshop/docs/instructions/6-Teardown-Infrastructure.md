@@ -48,10 +48,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       以下是模型部署的 **之前** 狀態：
 
-      ![初始](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.mo.png)
+      ![初始](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.mo.png)
 
       以下是 **之後** 的狀態：
-      ![新部署](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.mo.png)
+      ![新部署](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.mo.png)
 
 ---
 

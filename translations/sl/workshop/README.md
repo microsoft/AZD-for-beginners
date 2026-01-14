@@ -40,7 +40,7 @@ Med delavnico boste spoznali tudi osnovna orodja za razvijalce in delovne proces
 
 Lekcije delavnice so v Markdownu. Lahko jih pregledujete neposredno na GitHubu - ali pa zaženete predogled v brskalniku, kot je prikazano na spodnjem posnetku zaslona.
 
-![Delavnica](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.sl.png)
+![Delavnica](../../../translated_images/workshop.75906f133e6f8ba0.sl.png)
 
 Za uporabo te možnosti - razvejite repozitorij v svoj profil in zaženite GitHub Codespaces. Ko je terminal VS Code aktiven, vnesite naslednji ukaz:
 

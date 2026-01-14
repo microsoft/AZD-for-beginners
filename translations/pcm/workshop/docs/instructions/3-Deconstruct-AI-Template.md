@@ -113,7 +113,7 @@ For `Ask` mode, e go provide code wey you fit copy-paste and try. For `Agent` mo
       
       Azure Storage dey provide blob storage for application data and file uploads, while Managed Identity dey ensure secure access between Azure resources without storing credentials. The whole solution dey designed for scalability and maintainability, with the containerized application dey automatically scale based on demand while e dey provide built-in security, monitoring, and CI/CD capabilities through Azure's managed services ecosystem.
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.pcm.png)
+![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.pcm.png)
 
 ---
 

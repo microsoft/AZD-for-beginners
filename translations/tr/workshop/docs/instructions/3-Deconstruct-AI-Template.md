@@ -112,7 +112,7 @@ Ya da bir görevi tamamlamak için kod parçacıkları isteyebilirsiniz. Şu kom
       
       Azure Storage, uygulama verileri ve dosya yüklemeleri için blob depolama sağlar, Managed Identity ise kimlik bilgilerini saklamadan Azure kaynakları arasında güvenli erişim sağlar. Tüm çözüm, talebe göre otomatik olarak ölçeklenen ve Azure'un yönetilen hizmetler ekosistemi aracılığıyla yerleşik güvenlik, izleme ve CI/CD yetenekleri sağlayan konteynerleştirilmiş uygulama ile ölçeklenebilirlik ve sürdürülebilirlik için tasarlanmıştır.
 
-![Mimari](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.tr.png)
+![Mimari](../../../../../translated_images/architecture.48d94861e6e6cdc0.tr.png)
 
 ---
 

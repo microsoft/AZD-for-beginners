@@ -40,7 +40,7 @@ Töötoa käigus tutvustatakse ka peamisi arendustööriistu ja töövooge, mis 
 
 Töötoa materjalid on Markdown formaadis. Saate neid otse GitHubis sirvida või avada brauseripõhise eelvaate, nagu alloleval ekraanipildil näidatud.
 
-![Töötuba](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.et.png)
+![Töötuba](../../../translated_images/workshop.75906f133e6f8ba0.et.png)
 
 Selle valiku kasutamiseks - tehke repositooriumist oma profiilile fork ja avage GitHub Codespaces. Kui VS Code terminal on aktiivne, sisestage järgmine käsk:
 

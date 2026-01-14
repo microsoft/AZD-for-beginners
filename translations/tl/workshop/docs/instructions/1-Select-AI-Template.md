@@ -51,7 +51,7 @@ Sa `azd`, ang iyong deployment journey ay maaaring maging kasing simple ng:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.tl.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.tl.png)
 
 ---
 
@@ -71,7 +71,7 @@ Kapag gumagawa o gumagamit ng AZD template para sa _iyong_ sitwasyon, isaalang-a
 **🎯 | EHERSISYO**: <br/> 
 Bisitahin ang [Awesome AZD](https://azure.github.io/awesome-azd/) gallery at gamitin ang mga filter upang tuklasin ang mahigit 250+ templates na kasalukuyang available. Tingnan kung makakahanap ka ng template na akma sa _iyong_ mga pangangailangan.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.tl.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.tl.png)
 
 ---
 

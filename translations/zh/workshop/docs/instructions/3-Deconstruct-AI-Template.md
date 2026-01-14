@@ -112,7 +112,7 @@ CO_OP_TRANSLATOR_METADATA:
       
       Azure Storage 提供了应用数据和文件上传的 Blob 存储，而托管身份确保 Azure 资源之间的安全访问，无需存储凭据。整个解决方案设计为可扩展和可维护，容器化应用根据需求自动扩展，同时通过 Azure 的托管服务生态系统提供内置的安全性、监控和 CI/CD 功能。
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.zh.png)
+![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.zh.png)
 
 ---
 

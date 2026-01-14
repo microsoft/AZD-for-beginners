@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Уроки майстер-класу представлені у форматі Markdown. Ви можете переглядати їх безпосередньо на GitHub або запустити попередній перегляд у браузері, як показано на скріншоті нижче.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.uk.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.uk.png)
 
 Щоб скористатися цією опцією, створіть форк репозиторію у своєму профілі та запустіть GitHub Codespaces. Коли термінал VS Code стане активним, введіть цю команду:
 

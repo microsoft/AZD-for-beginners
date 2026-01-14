@@ -51,7 +51,7 @@ S `azd`, vaš put implementacije može biti jednostavan kao:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.hr.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.hr.png)
 
 ---
 
@@ -72,7 +72,7 @@ Kada kreirate ili ponovno koristite AZD predložak za _vaš_ scenarij, razmotrit
 **🎯 | VJEŽBA**: <br/> 
 Posjetite galeriju [Awesome AZD](https://azure.github.io/awesome-azd/) i koristite filtre za istraživanje više od 250 predložaka koji su trenutno dostupni. Pogledajte možete li pronaći onaj koji odgovara _vašim_ zahtjevima scenarija.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.hr.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.hr.png)
 
 ---
 

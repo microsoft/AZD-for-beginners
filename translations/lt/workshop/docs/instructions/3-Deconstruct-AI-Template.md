@@ -112,7 +112,7 @@ Režime `Ask` tai pateiks kodą, kurį galite nukopijuoti ir išbandyti. Režime
 
       Azure Storage teikia blob saugyklą programos duomenims ir failų įkėlimams, o Managed Identity užtikrina saugų prieigą tarp Azure išteklių be kredencialų saugojimo. Visa sprendimas yra sukurtas skalavimui ir palaikomumui, su konteinerizuota programa, automatiškai skalavimui pagal poreikį, tuo pačiu užtikrinant įmontuotą saugumą, stebėjimą ir CI/CD galimybes per Azure valdomų paslaugų ekosistemą.
 
-![Architektūra](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.lt.png)
+![Architektūra](../../../../../translated_images/architecture.48d94861e6e6cdc0.lt.png)
 
 ---
 

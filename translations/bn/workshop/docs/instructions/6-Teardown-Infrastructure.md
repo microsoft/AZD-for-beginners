@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       এখানে মডেল ডিপ্লয়মেন্ট **আগে**:
 
-      ![প্রাথমিক](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.bn.png)
+      ![প্রাথমিক](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.bn.png)
 
       এবং এটি **পরে**:
-      ![নতুন](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.bn.png)
+      ![নতুন](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.bn.png)
 
 ---
 

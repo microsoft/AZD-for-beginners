@@ -51,7 +51,7 @@ Azure AI Foundry platforma siūlo [rekomenduojamų AZD šablonų rinkinį](https
 1. Apsilankykite [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Prisijunkite prie Azure AI Foundry portalo, kai būsite paraginti – pamatysite kažką panašaus.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.lt.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.lt.png)
 
 **Pagrindinės** parinktys yra jūsų pradiniai šablonai:
 
@@ -60,7 +60,7 @@ Azure AI Foundry platforma siūlo [rekomenduojamų AZD šablonų rinkinį](https
 
 Apsilankykite antrame nuorodoje naujame naršyklės skirtuke (arba spustelėkite `Open in GitHub` susijusioje kortelėje). Turėtumėte pamatyti šio AZD šablono saugyklą. Skirkite minutę apžvelgti README. Programos architektūra atrodo taip:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.lt.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.lt.png)
 
 ---
 
@@ -92,7 +92,7 @@ Dabar laukite, kol paruošimas bus baigtas. **Tai užtrunka 10–15 minučių**
       ```
 1. Jūsų Azure portale dabar bus paruošta išteklių grupė su tuo aplinkos pavadinimu:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.lt.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.lt.png)
 
 1. **Dabar esate pasiruošę patvirtinti įdiegtą infrastruktūrą ir programą**.
 
@@ -108,7 +108,7 @@ Dabar laukite, kol paruošimas bus baigtas. **Tai užtrunka 10–15 minučių**
 
 1. Turėtumėte pamatyti talpinamos programos priekinio sąsajos UI, panašų į šį:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.lt.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.lt.png)
 
 1. Pabandykite užduoti kelis [pavyzdinius klausimus](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Dabar laukite, kol paruošimas bus baigtas. **Tai užtrunka 10–15 minučių**
 
 1. Turėtumėte gauti atsakymus, panašius į tai, kas parodyta žemiau. _Bet kaip tai veikia?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.lt.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.lt.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App diegia galinį tašką, kuris jungiasi su AI agentu, paruoš
 1. Spustelėkite `Azure AI Foundry` išteklių sąraše
 
 1. Turėtumėte pamatyti tai. Spustelėkite `Go to Azure AI Foundry Portal` mygtuką. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.lt.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.lt.png)
 
 1. Turėtumėte pamatyti Foundry projekto puslapį savo AI programai
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.lt.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.lt.png)
 
 1. Spustelėkite `Agents` – pamatysite numatytąjį agentą, paruoštą jūsų projekte
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.lt.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.lt.png)
 
 1. Pasirinkite jį – ir pamatysite agento detales. Atkreipkite dėmesį į šiuos dalykus:
 
       - Agentas pagal numatytuosius nustatymus naudoja File Search (visada)
       - Agentas `Knowledge` rodo, kad įkelta 32 failai (paieškai pagal failus)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.lt.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.lt.png)
 
 1. Ieškokite `Data+indexes` parinkties kairiajame meniu ir spustelėkite, kad pamatytumėte detales. 
 
       - Turėtumėte pamatyti 32 duomenų failus, įkeltus žinioms.
       - Jie atitiks 12 klientų failų ir 20 produktų failų, esančių `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.lt.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.lt.png)
 
 **Jūs patvirtinote agento veikimą!** 
 
@@ -158,7 +158,7 @@ Azure Container App diegia galinį tašką, kuris jungiasi su AI agentu, paruoš
 
 Grįžkite į naršyklės skirtuką su Container App galiniu tašku ir klauskite: `What products does Amanda Perez own?`. Turėtumėte pamatyti kažką panašaus:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.lt.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.lt.png)
 
 ---
 
@@ -170,7 +170,7 @@ Pažvelkime giliau į Azure AI Foundry galimybes, išbandydami agentą žaidimų
 1. Spustelėkite `Try in Playground` parinktį – turėtumėte gauti žaidimų aikštelės UI, panašų į šį
 1. Klauskite to paties klausimo: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.lt.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.lt.png)
 
 Jūs gaunate tą patį (arba panašų) atsakymą – bet taip pat gaunate papildomą informaciją, kurią galite naudoti norėdami suprasti atsakymo kokybę, kainą ir našumą. Pavyzdžiui:
 
@@ -182,7 +182,7 @@ Taip pat matote _statistikos_ eilutę po atsakymu.
 1. Užveskite pelės žymeklį ant bet kurio metrikos – pvz., Saugumas. Pamatysite kažką panašaus
 1. Ar vertinimas atitinka jūsų intuiciją dėl atsakymo saugumo lygio?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.lt.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.lt.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Stebėjimas reiškia jūsų programos instrumentavimą, kad būtų generuojami d
    - Supraskite bendrą žetonų skaičių (vs. išvesties žetonų naudojimą) atsakymui
    - Supraskite vėlavimą ir kur vykdymo metu praleidžiamas laikas
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.lt.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.lt.png)
 
 1. Spustelėkite `Metadata` skirtuką, kad pamatytumėte papildomus atributus, susijusius su veikimu, kurie gali būti naudingi derinant problemas vėliau.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.lt.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.lt.png)
 
 1. Spustelėkite `Evaluations` skirtuką, kad pamatytumėte automatinį agento atsakymo vertinimą. Tai apima saugumo vertinimus (pvz., Savęs žalojimas) ir agento specifinius vertinimus (pvz., Ketinimų sprendimas, Užduočių laikymasis).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.lt.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.lt.png)
 
 1. Galiausiai spustelėkite `Monitoring` skirtuką šoniniame meniu.
 
@@ -212,7 +212,7 @@ Stebėjimas reiškia jūsų programos instrumentavimą, kad būtų generuojami d
       - Stebėkite programos naudojimą pagal išlaidas (žetonus) ir apkrovą (užklausas).
       - Stebėkite programos vėlavimą nuo pirmo baito (įvesties apdorojimas) iki paskutinio baito (išvestis).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.lt.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.lt.png)
 
 ---
 

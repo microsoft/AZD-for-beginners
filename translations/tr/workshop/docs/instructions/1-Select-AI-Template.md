@@ -51,7 +51,7 @@ Bu araçlarla artık doğru şablonu _keşfedebilir_, çalıştığını doğrul
 azd help
 ```
 
-![Akış](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.tr.png)
+![Akış](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.tr.png)
 
 ---
 
@@ -72,7 +72,7 @@ _Kendi_ senaryonuz için bir AZD şablonu oluştururken veya yeniden kullanırke
 **🎯 | EGZERSİZ**: <br/> 
 [Awesome AZD](https://azure.github.io/awesome-azd/) galerisini ziyaret edin ve mevcut 250+ şablonu keşfetmek için filtreleri kullanın. _Kendi_ senaryo gereksinimlerinize uygun bir şablon bulup bulamayacağınıza bakın.
 
-![Kod](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.tr.png)
+![Kod](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.tr.png)
 
 ---
 

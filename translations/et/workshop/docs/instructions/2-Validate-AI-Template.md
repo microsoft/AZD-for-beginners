@@ -51,7 +51,7 @@ Azure AI Foundry platvormil on [soovitatud AZD mallide komplekt](https://learn.m
 1. Külastage [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Logige sisse Azure AI Foundry portaali, kui seda küsitakse - näete midagi sellist.
 
-![Vali](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.et.png)
+![Vali](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.et.png)
 
 **Basic** valikud on teie algusmallid:
 
@@ -60,7 +60,7 @@ Azure AI Foundry platvormil on [soovitatud AZD mallide komplekt](https://learn.m
 
 Avage teine link uues brauseri vahekaardis (või klõpsake `Open in GitHub` seotud kaardil). Peaksite nägema selle AZD malli repositooriumi. Võtke minut, et uurida README-d. Rakenduse arhitektuur näeb välja selline:
 
-![Arhitektuur](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.et.png)
+![Arhitektuur](../../../../../translated_images/architecture.8cec470ec15c65c7.et.png)
 
 ---
 
@@ -92,7 +92,7 @@ Nüüd oodake, kuni ettevalmistamine on lõpule viidud. **See võtab 10-15 minut
       ```
 1. Teie Azure'i portaalis on nüüd ettevalmistatud ressursigrupp selle keskkonna nimega:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.et.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.et.png)
 
 1. **Olete nüüd valmis valideerima juurutatud infrastruktuuri ja rakendust**.
 
@@ -108,7 +108,7 @@ Nüüd oodake, kuni ettevalmistamine on lõpule viidud. **See võtab 10-15 minut
 
 1. Peaksite nägema hostitud rakenduse esikülje kasutajaliidest, mis näeb välja selline:
 
-   ![Rakendus](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.et.png)
+   ![Rakendus](../../../../../translated_images/03-test-application.471910da12c3038e.et.png)
 
 1. Proovige küsida paar [näidisküsimust](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Nüüd oodake, kuni ettevalmistamine on lõpule viidud. **See võtab 10-15 minut
 
 1. Peaksite saama vastuseid, mis on sarnased allpool näidatule. _Aga kuidas see töötab?_ 
 
-      ![Rakendus](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.et.png)
+      ![Rakendus](../../../../../translated_images/03-test-question.521c1e863cbaddb6.et.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App juurutab lõpp-punkti, mis ühendub AI agendiga, mis on ette
 1. Klõpsake loendis `Azure AI Foundry` ressursil
 
 1. Peaksite nägema seda. Klõpsake `Go to Azure AI Foundry Portal` nuppu. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.et.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.et.png)
 
 1. Peaksite nägema Foundry projekti lehte oma AI rakenduse jaoks
-   ![Projekt](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.et.png)
+   ![Projekt](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.et.png)
 
 1. Klõpsake `Agents` - näete vaikimisi agenti, mis on teie projektis ettevalmistatud
-   ![Agendid](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.et.png)
+   ![Agendid](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.et.png)
 
 1. Valige see - ja näete agendi üksikasju. Pange tähele järgmist:
 
       - Agent kasutab vaikimisi failide otsingut (alati)
       - Agendi `Knowledge` näitab, et üles laaditud on 32 faili (failide otsinguks)
-      ![Agendid](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.et.png)
+      ![Agendid](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.et.png)
 
 1. Otsige vasakpoolsest menüüst `Data+indexes` valikut ja klõpsake, et näha üksikasju. 
 
       - Peaksite nägema 32 andmefaili, mis on üles laaditud teadmiste jaoks.
       - Need vastavad 12 kliendifailile ja 20 toote failile kaustas `src/files` 
-      ![Andmed](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.et.png)
+      ![Andmed](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.et.png)
 
 **Olete valideerinud agendi toimimise!** 
 
@@ -158,7 +158,7 @@ Azure Container App juurutab lõpp-punkti, mis ühendub AI agendiga, mis on ette
 
 Naaske brauseri vahekaardile, kus on Container App lõpp-punkt, ja küsige: `Milliseid tooteid Amanda Perez omab?`. Peaksite nägema midagi sellist:
 
-![Andmed](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.et.png)
+![Andmed](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.et.png)
 
 ---
 
@@ -170,7 +170,7 @@ Tutvume Azure AI Foundry võimalustega, proovides agenti mänguväljakul.
 1. Klõpsake `Try in Playground` valikut - peaksite saama mänguväljaku kasutajaliidese, mis näeb välja selline
 1. Küsige sama küsimust: `Milliseid tooteid Amanda Perez omab?`
 
-    ![Andmed](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.et.png)
+    ![Andmed](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.et.png)
 
 Saate sama (või sarnase) vastuse - kuid näete ka täiendavat teavet, mida saate kasutada oma agentliku rakenduse kvaliteedi, kulude ja jõudluse mõistmiseks. Näiteks:
 
@@ -182,7 +182,7 @@ Näete ka _statistika_ rida vastuse all.
 1. Hõljutage kursorit mõne mõõdiku kohal - näiteks Safety. Näete midagi sellist
 1. Kas hinnang vastab teie intuitsioonile vastuse ohutuse taseme kohta?
 
-      ![Andmed](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.et.png)
+      ![Andmed](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.et.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Jälgitavus tähendab rakenduse instrumenteerimist, et genereerida andmeid, mida
    - Mõistke vastuse jaoks kasutatud kogutokenite arvu (vs. väljundtokenite kasutus)
    - Mõistke latentsust ja kus kulub aega täitmise ajal
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.et.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.et.png)
 
 1. Klõpsake `Metadata` vahekaarti, et näha täiendavaid atribuute käivitamise kohta, mis võivad pakkuda kasulikku konteksti hilisemate probleemide silumiseks.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.et.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.et.png)
 
 1. Klõpsake `Evaluations` vahekaarti, et näha automaatseid hinnanguid agendi vastuse kohta. Need hõlmavad ohutuse hinnanguid (nt enesevigastus) ja agendispetsiifilisi hinnanguid (nt kavatsuse lahendamine, ülesande järgimine).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.et.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.et.png)
 
 1. Viimaks, klõpsake külgriba menüüs `Monitoring` vahekaarti.
 
@@ -212,7 +212,7 @@ Jälgitavus tähendab rakenduse instrumenteerimist, et genereerida andmeid, mida
       - Jälgige rakenduse kasutust kulude (tokenid) ja koormuse (päringud) osas.
       - Jälgige rakenduse latentsust esimese baidini (sisendi töötlemine) ja viimase baidini (väljund).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.et.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.et.png)
 
 ---
 

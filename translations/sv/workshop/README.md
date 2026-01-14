@@ -40,7 +40,7 @@ Under denna workshop kommer du också att introduceras till viktiga utvecklarver
 
 Workshopens lektioner är skrivna i Markdown. Du kan navigera dem direkt på GitHub - eller starta en webbläsarbaserad förhandsvisning som visas i skärmdumpen nedan.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.sv.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.sv.png)
 
 För att använda detta alternativ - gör en fork av repot till din profil och starta GitHub Codespaces. När VS Code-terminalen är aktiv, skriv detta kommando:
 

@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa661db02745e9bba115874d18ce52480f2854ae6e2011d4b526.my.png)
+![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.my.png)
 
 ---
 
@@ -72,7 +72,7 @@ _Infrastructure-as-Code_ (IaC) နည်းလမ်းကို အသုံး
 **🎯 | လေ့ကျင့်မှု**: <br/> 
 [Awesome AZD](https://azure.github.io/awesome-azd/) gallery ကို သွားရောက်ပြီး၊ လက်ရှိရှိသော template 250+ ကို filters အသုံးပြု၍ ရှာဖွေပါ။ သင့် scenario လိုအပ်ချက်များနှင့် ကိုက်ညီသော template တစ်ခုကို ရှာဖွေနိုင်မလား ကြည့်ပါ။
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da091317081968b6cad59c951339fea82ebe0b5ec646a3362d.my.png)
+![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.my.png)
 
 ---
 

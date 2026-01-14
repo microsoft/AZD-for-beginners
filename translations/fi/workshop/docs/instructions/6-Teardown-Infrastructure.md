@@ -47,10 +47,10 @@ Ennen kuin puramme projektin, käytä muutama minuutti avoimeen tutkimiseen.
 
       Tässä ovat mallin käyttöönotot **ennen**:
 
-      ![Alkuperäinen](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.fi.png)
+      ![Alkuperäinen](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.fi.png)
 
       Ja tässä ne ovat **jälkeen**:
-      ![Uusi](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.fi.png)
+      ![Uusi](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.fi.png)
 
 ---
 

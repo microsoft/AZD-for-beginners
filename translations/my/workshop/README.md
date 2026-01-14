@@ -40,7 +40,7 @@ Azure Developer CLI (AZD) ကို အသုံးပြု၍ AI application �
 
 Workshop သင်ခန်းစာများကို Markdown ဖြင့် ရေးသားထားပါသည်။ GitHub တွင် တိုက်ရိုက် navigation လုပ်နိုင်သလို - အောက်ပါ screenshot တွင် ပြထားသည့်အတိုင်း browser-based preview ကိုလည်း ဖွင့်နိုင်ပါသည်။
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba07ab0302ce17f67ff90f357513f3d4c4bbafa5978b10f058b.my.png)
+![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.my.png)
 
 ဒီ option ကို အသုံးပြုရန် - repository ကို သင့် profile သို့ fork လုပ်ပြီး GitHub Codespaces ကို ဖွင့်ပါ။ VS Code terminal အလုပ်လုပ်နေသောအခါ အောက်ပါ command ကို ရိုက်ထည့်ပါ-
 

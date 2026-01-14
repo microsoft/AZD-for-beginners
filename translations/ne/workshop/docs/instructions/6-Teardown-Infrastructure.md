@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       यहाँ मोडेल तैनातीहरू **पहिले**:
 
-      ![प्रारम्भिक](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.ne.png)
+      ![प्रारम्भिक](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.ne.png)
 
       र यहाँ यो **पछि**:
-      ![नयाँ](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.ne.png)
+      ![नयाँ](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.ne.png)
 
 ---
 

@@ -1,15 +1,15 @@
 <!--
 CO_OP_TRANSLATOR_METADATA:
 {
-  "original_hash": "05c30c9e5ed7951c72855108c6788034",
-  "translation_date": "2025-12-24T22:33:43+00:00",
+  "original_hash": "068c87cc2641a81ca353ad7064ff326a",
+  "translation_date": "2026-01-01T09:46:04+00:00",
   "source_file": "README.md",
   "language_code": "en"
 }
 -->
 # AZD For Beginners: A Structured Learning Journey
 
-![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f7406899cccfc907016b09f9370137543280d95f62ebf23637a2ee.en.png) 
+![AZD-for-beginners](../../translated_images/azdbeginners.5527441dd9f74068.en.png) 
 
 [![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
@@ -612,10 +612,10 @@ az account show
 ### ❌ "Resource already exists" or naming conflicts
 
 ```bash
-# AZD generates unique names, but if conflict:
+# AZD generates unique names, but if there's a conflict:
 azd down --force --purge
 
-# Then retry with fresh environment
+# Then retry with a fresh environment.
 azd env new dev-v2
 azd up
 ```
@@ -786,7 +786,7 @@ azd up
 # Check progress
 azd show
 
-# If stuck >30 minutes, check Azure Portal:
+# If stuck for more than 30 minutes, check the Azure Portal:
 azd monitor
 # Look for failed deployments
 ```

@@ -48,10 +48,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       Ево како изгледају постављени модели **пре**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.sr.png)
+      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.sr.png)
 
       А овако изгледају **после**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.sr.png)
+      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.sr.png)
 
 ---
 

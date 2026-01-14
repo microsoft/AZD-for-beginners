@@ -51,7 +51,7 @@ A plataforma Azure AI Foundry vem com um [conjunto de templates AZD recomendados
 1. Visite [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Faça login no portal Azure AI Foundry quando solicitado - verá algo como isto.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.pt.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.pt.png)
 
 As opções **Básicas** são os seus templates iniciais:
 
@@ -60,7 +60,7 @@ As opções **Básicas** são os seus templates iniciais:
 
 Visite o segundo link numa nova aba do navegador (ou clique em `Open in GitHub` no cartão relacionado). Deve ver o repositório para este template AZD. Reserve um minuto para explorar o README. A arquitetura da aplicação é assim:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.pt.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.pt.png)
 
 ---
 
@@ -92,7 +92,7 @@ Agora, aguarde até que a provisão seja concluída. **Isto leva de 10 a 15 minu
       ```
 1. O seu Portal Azure agora terá um grupo de recursos provisionado com o nome do ambiente:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.pt.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.pt.png)
 
 1. **Agora está pronto para validar a infraestrutura e aplicação implementadas**.
 
@@ -108,7 +108,7 @@ Agora, aguarde até que a provisão seja concluída. **Isto leva de 10 a 15 minu
 
 1. Deve ver uma interface de utilizador da aplicação hospedada como esta:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.pt.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.pt.png)
 
 1. Experimente fazer algumas [perguntas de exemplo](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Agora, aguarde até que a provisão seja concluída. **Isto leva de 10 a 15 minu
 
 1. Deve obter respostas semelhantes às mostradas abaixo. _Mas como isto funciona?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.pt.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.pt.png)
 
 ---
 
@@ -130,25 +130,25 @@ O Azure Container App implementa um endpoint que se conecta ao Agente de IA prov
 1. Clique no recurso `Azure AI Foundry` na lista
 
 1. Deve ver isto. Clique no botão `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.pt.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.pt.png)
 
 1. Deve ver a página do Projeto Foundry para a sua aplicação de IA
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.pt.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.pt.png)
 
 1. Clique em `Agents` - verá o Agente padrão provisionado no seu projeto
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.pt.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.pt.png)
 
 1. Selecione-o - e verá os detalhes do Agente. Note o seguinte:
 
       - O agente usa File Search por padrão (sempre)
       - O `Knowledge` do agente indica que tem 32 ficheiros carregados (para pesquisa de ficheiros)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.pt.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.pt.png)
 
 1. Procure a opção `Data+indexes` no menu à esquerda e clique para ver os detalhes. 
 
       - Deve ver os 32 ficheiros de dados carregados para conhecimento.
       - Estes correspondem aos 12 ficheiros de clientes e 20 ficheiros de produtos em `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.pt.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.pt.png)
 
 **Validou a operação do Agente!** 
 
@@ -158,7 +158,7 @@ O Azure Container App implementa um endpoint que se conecta ao Agente de IA prov
 
 Volte para a aba do navegador com o endpoint do Container App e pergunte: `Quais produtos Amanda Perez possui?`. Deve ver algo como isto:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.pt.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.pt.png)
 
 ---
 
@@ -170,7 +170,7 @@ Vamos explorar um pouco mais as capacidades do Azure AI Foundry, experimentando 
 1. Clique na opção `Try in Playground` - deve obter uma interface de Playground como esta
 1. Pergunte a mesma questão: `Quais produtos Amanda Perez possui?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.pt.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.pt.png)
 
 Obtém a mesma (ou semelhante) resposta - mas também recebe informações adicionais que pode usar para entender a qualidade, custo e desempenho da sua aplicação baseada em agentes. Por exemplo:
 
@@ -182,7 +182,7 @@ Também verá uma linha de _estatísticas_ abaixo da resposta.
 1. Passe o cursor sobre qualquer métrica - por exemplo, Segurança. Verá algo como isto
 1. A classificação avaliada corresponde à sua intuição sobre o nível de segurança da resposta?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.pt.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.pt.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Observabilidade trata de instrumentar a sua aplicação para gerar dados que pod
    - Compreenda o total de Tokens usados (vs. uso de tokens de saída) para a resposta
    - Compreenda a latência e onde o tempo está sendo gasto na execução
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.pt.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.pt.png)
 
 1. Clique na aba `Metadata` para ver atributos adicionais da execução, que podem fornecer contexto útil para depurar problemas mais tarde.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.pt.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.pt.png)
 
 1. Clique na aba `Evaluations` para ver autoavaliações feitas na resposta do agente. Estas incluem avaliações de segurança (por exemplo, Auto-mutilação) e avaliações específicas do agente (por exemplo, Resolução de intenção, Adesão à tarefa).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.pt.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.pt.png)
 
 1. Por último, mas não menos importante, clique na aba `Monitoring` no menu lateral.
 
@@ -212,7 +212,7 @@ Observabilidade trata de instrumentar a sua aplicação para gerar dados que pod
       - Acompanhe o uso da aplicação em termos de custos (tokens) e carga (pedidos).
       - Acompanhe a latência da aplicação desde o primeiro byte (processamento de entrada) até o último byte (saída).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.pt.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.pt.png)
 
 ---
 

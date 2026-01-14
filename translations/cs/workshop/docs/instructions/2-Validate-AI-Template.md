@@ -51,7 +51,7 @@ Platforma Azure AI Foundry obsahuje [sadu doporučených AZD šablon](https://le
 1. Navštivte [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Přihlaste se do portálu Azure AI Foundry, když budete vyzváni - uvidíte něco takového.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.cs.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.cs.png)
 
 **Základní** možnosti jsou vaše startovací šablony:
 
@@ -60,7 +60,7 @@ Platforma Azure AI Foundry obsahuje [sadu doporučených AZD šablon](https://le
 
 Navštivte druhý odkaz v novém okně prohlížeče (nebo klikněte na `Open in GitHub` na příslušné kartě). Měli byste vidět repozitář pro tuto AZD šablonu. Věnujte chvíli prozkoumání README. Architektura aplikace vypadá takto:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.cs.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.cs.png)
 
 ---
 
@@ -92,7 +92,7 @@ Nyní počkejte, až se dokončí zprovoznění. **To trvá 10-15 minut**
       ```
 1. Váš Azure Portal nyní bude mít zprovozněnou skupinu prostředků s tímto názvem prostředí:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.cs.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.cs.png)
 
 1. **Nyní jste připraveni ověřit nasazenou infrastrukturu a aplikaci**.
 
@@ -108,7 +108,7 @@ Nyní počkejte, až se dokončí zprovoznění. **To trvá 10-15 minut**
 
 1. Měli byste vidět hostované UI aplikace, jako je toto:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.cs.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.cs.png)
 
 1. Zkuste položit několik [ukázkových otázek](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Nyní počkejte, až se dokončí zprovoznění. **To trvá 10-15 minut**
 
 1. Měli byste dostat odpovědi podobné těm, které jsou uvedeny níže. _Ale jak to funguje?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.cs.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.cs.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App nasazuje endpoint, který se připojuje k AI Agentovi zprovo
 1. Klikněte na prostředek `Azure AI Foundry` v tomto seznamu
 
 1. Měli byste vidět toto. Klikněte na tlačítko `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.cs.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.cs.png)
 
 1. Měli byste vidět stránku projektu Foundry pro vaši AI aplikaci
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.cs.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.cs.png)
 
 1. Klikněte na `Agents` - uvidíte výchozího Agenta zprovozněného ve vašem projektu
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.cs.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.cs.png)
 
 1. Vyberte ho - a uvidíte podrobnosti o Agentovi. Všimněte si následujícího:
 
       - Agent používá File Search jako výchozí (vždy)
       - `Knowledge` agenta ukazuje, že má nahráno 32 souborů (pro File Search)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.cs.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.cs.png)
 
 1. Vyhledejte možnost `Data+indexes` v levém menu a klikněte pro podrobnosti. 
 
       - Měli byste vidět 32 datových souborů nahraných pro znalosti.
       - Ty odpovídají 12 zákaznickým souborům a 20 produktovým souborům pod `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.cs.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.cs.png)
 
 **Ověřili jste operaci agenta!** 
 
@@ -158,7 +158,7 @@ Azure Container App nasazuje endpoint, který se připojuje k AI Agentovi zprovo
 
 Vraťte se na záložku prohlížeče s endpointem Container App a zeptejte se: `Jaké produkty vlastní Amanda Perez?`. Měli byste vidět něco takového:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.cs.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.cs.png)
 
 ---
 
@@ -170,7 +170,7 @@ Pojďme si vytvořit trochu více intuice pro schopnosti Azure AI Foundry tím, 
 1. Klikněte na možnost `Try in Playground` - měli byste dostat UI Hřiště jako toto
 1. Zeptejte se na stejnou otázku: `Jaké produkty vlastní Amanda Perez?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.cs.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.cs.png)
 
 Dostanete stejnou (nebo podobnou) odpověď - ale také získáte další informace, které můžete použít k pochopení kvality, nákladů a výkonu vaší agentické aplikace. Například:
 
@@ -182,7 +182,7 @@ Také vidíte _řádek statistik_ pod odpovědí.
 1. Přejeďte myší nad jakoukoli metrikou - např. Bezpečnost. Vidíte něco takového
 1. Odpovídá hodnocení vašemu intuitivnímu vnímání úrovně bezpečnosti odpovědi?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.cs.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.cs.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Pozorovatelnost znamená instrumentaci vaší aplikace tak, aby generovala data,
    - Porozumějte celkovému počtu tokenů (vs. použití výstupních tokenů) pro odpověď
    - Porozumějte latenci a tomu, kde se tráví čas při provádění
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.cs.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.cs.png)
 
 1. Klikněte na záložku `Metadata`, abyste viděli další atributy běhu, které mohou poskytnout užitečný kontext pro ladění problémů později.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.cs.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.cs.png)
 
 1. Klikněte na záložku `Evaluations`, abyste viděli automatická hodnocení provedená na odpovědi agenta. Tato hodnocení zahrnují bezpečnostní hodnocení (např. Sebepoškozování) a specifická hodnocení agenta (např. Řešení záměru, Dodržení úkolu).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.cs.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.cs.png)
 
 1. Nakonec klikněte na záložku `Monitoring` v postranním menu.
 
@@ -212,7 +212,7 @@ Pozorovatelnost znamená instrumentaci vaší aplikace tak, aby generovala data,
       - Sledujte využití aplikace z hlediska nákladů (tokeny) a zátěže (požadavky).
       - Sledujte latenci aplikace od prvního bajtu (zpracování vstupu) po poslední bajt (výstup).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.cs.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.cs.png)
 
 ---
 

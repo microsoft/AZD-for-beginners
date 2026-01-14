@@ -51,7 +51,7 @@ Azure AI Foundry-plattformen kommer med ett [set av rekommenderade AZD-mallar](h
 1. Besök [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Logga in på Azure AI Foundry-portalen när du blir ombedd - du kommer att se något som detta.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374d04f05f556f505a3800b2b5fb08e03153b1b878939b49da6.sv.png)
+![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.sv.png)
 
 **Basic**-alternativen är dina startmallar:
 
@@ -60,7 +60,7 @@ Azure AI Foundry-plattformen kommer med ett [set av rekommenderade AZD-mallar](h
 
 Besök den andra länken i en ny webbläsarflik (eller klicka på `Open in GitHub` för det relaterade kortet). Du bör se arkivet för denna AZD-mall. Ta en minut att utforska README. Applikationsarkitekturen ser ut så här:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c743dcc1aa383d2500be4d6a9270693b8bfeb3d8deca4a22e1.sv.png)
+![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.sv.png)
 
 ---
 
@@ -93,7 +93,7 @@ Nu väntar du på att tillhandahållandet ska slutföras. **Detta tar 10-15 minu
 
 1. Din Azure Portal kommer nu att ha en tillhandahållen resursgrupp med det miljönamnet:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf36cb90ba441d16690ce10a00d42990bb9441126ceff08990.sv.png)
+      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.sv.png)
 
 1. **Du är nu redo att validera den distribuerade infrastrukturen och applikationen**.
 
@@ -109,7 +109,7 @@ Nu väntar du på att tillhandahållandet ska slutföras. **Detta tar 10-15 minu
 
 1. Du bör se en värdad applikationsfrontend som ser ut så här:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e4a3c20e98ebf080abb227e122699ef7b7a262b87af6f98c3.sv.png)
+   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.sv.png)
 
 1. Försök ställa några [exempelfrågor](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -118,7 +118,7 @@ Nu väntar du på att tillhandahållandet ska slutföras. **Detta tar 10-15 minu
 
 1. Du bör få svar som liknar det som visas nedan. _Men hur fungerar detta?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb604172e95d704407b4b6304c0e04d9130e51b7994f951b026.sv.png)
+      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.sv.png)
 
 ---
 
@@ -131,25 +131,25 @@ Azure Container App distribuerar en slutpunkt som ansluter till AI-agenten som t
 1. Klicka på resursen `Azure AI Foundry` i listan
 
 1. Du bör se detta. Klicka på knappen `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3a7baa67099e11360380dc7f17bfb0583689cf34419b80498.sv.png)
+   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.sv.png)
 
 1. Du bör se Foundry-projektsidan för din AI-applikation
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e96324cebee01acfa6c339706b2d5e50ede4682beb5d431d9.sv.png)
+   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.sv.png)
 
 1. Klicka på `Agents` - du ser den förvalda agenten som tillhandahålls i ditt projekt
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a0917878ae22b420c3b0df0ade50c0df8e20e6e45d49a220514.sv.png)
+   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.sv.png)
 
 1. Välj den - och du ser agentens detaljer. Notera följande:
 
       - Agenten använder File Search som standard (alltid)
       - Agentens `Knowledge` indikerar att den har 32 uppladdade filer (för filsökning)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae6292faf47da2651994dab9ac9cf06c20e7c996c54dbca02245.sv.png)
+      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.sv.png)
 
 1. Leta efter alternativet `Data+indexes` i vänstermenyn och klicka för detaljer. 
 
       - Du bör se de 32 datafilerna som laddats upp för kunskap.
       - Dessa kommer att motsvara de 12 kundfilerna och 20 produktfilerna under `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a49625f0d4956f3b22681ae275a62c35516dabf1eb9d49a89.sv.png)
+      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.sv.png)
 
 **Du har validerat agentens funktion!** 
 
@@ -159,7 +159,7 @@ Azure Container App distribuerar en slutpunkt som ansluter till AI-agenten som t
 
 Gå tillbaka till webbläsarfliken med Container App-slutpunkten och fråga: `Vilka produkter äger Amanda Perez?`. Du bör se något som detta:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5617af2a71501c3b7607d198df9e598f84abacc32423c17b9.sv.png)
+![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.sv.png)
 
 ---
 
@@ -171,7 +171,7 @@ Låt oss bygga lite mer intuition för kapaciteterna hos Azure AI Foundry genom 
 1. Klicka på alternativet `Try in Playground` - du bör få en Playground-UI som ser ut så här
 1. Ställ samma fråga: `Vilka produkter äger Amanda Perez?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676c13e7b81dd60bc8589c742cf1069dc4589acf36ac050298d.sv.png)
+    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.sv.png)
 
 Du får samma (eller liknande) svar - men du får också ytterligare information som du kan använda för att förstå kvaliteten, kostnaden och prestandan för din agentbaserade applikation. Till exempel:
 
@@ -183,7 +183,7 @@ Du ser också en _stats_-rad under svaret.
 1. Håll muspekaren över någon metrisk - t.ex. Safety. Du ser något som detta
 1. Matchar den bedömda betygsnivån din intuition för svarets säkerhetsnivå?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531fced8249c58037ab5fb939478145db95b840a6aab8b21d85e.sv.png)
+      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.sv.png)
 
 ---
 
@@ -197,15 +197,15 @@ Observability handlar om att instrumentera din applikation för att generera dat
    - Förstå det totala antalet tokens (jämfört med användningen av utgångstokens) för svaret
    - Förstå latensen och var tiden spenderas under exekveringen
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc01382282300bc7d4afe4aa289de08bc97d1e097d7dc4b77d.sv.png)
+      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.sv.png)
 
 1. Klicka på fliken `Metadata` för att se ytterligare attribut för körningen, som kan ge användbar kontext för att felsöka problem senare.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2dfef2df06e56db549f922c09658b51496fac040106de75e2b9.sv.png)
+      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.sv.png)
 
 1. Klicka på fliken `Evaluations` för att se automatiska bedömningar av agentens svar. Dessa inkluderar säkerhetsbedömningar (t.ex. Självskada) och agent-specifika bedömningar (t.ex. Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb777dfadf51fed1694661fa370dd5a4e5fea4aec8de234568.sv.png)
+      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.sv.png)
 
 1. Sist men inte minst, klicka på fliken `Monitoring` i sidomenyn.
 
@@ -213,7 +213,7 @@ Observability handlar om att instrumentera din applikation för att generera dat
       - Spåra applikationsanvändning i termer av kostnader (tokens) och belastning (förfrågningar).
       - Spåra applikationens latens till första byte (inmatningsbearbetning) och sista byte (utmatning).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f774aaa6a45b7156969ce1b1861d1c34d191c98b61d6d8b84.sv.png)
+      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.sv.png)
 
 ---
 

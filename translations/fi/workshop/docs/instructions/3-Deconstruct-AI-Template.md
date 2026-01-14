@@ -112,7 +112,7 @@ Tai voit pyytää koodiesimerkkejä tehtävän suorittamiseen. Kokeile tätä ke
       
       Azure Storage tarjoaa blob-tallennustilan sovellustiedoille ja tiedostojen latauksille, kun taas Managed Identity varmistaa turvallisen pääsyn Azure-resurssien välillä ilman tunnistetietojen tallentamista. Koko ratkaisu on suunniteltu skaalautuvaksi ja ylläpidettäväksi, ja konttisoitu sovellus skaalautuu automaattisesti kysynnän mukaan tarjoten samalla sisäänrakennettua turvallisuutta, seurantaa ja CI/CD-ominaisuuksia Azuren hallittujen palveluiden ekosysteemin kautta.
 
-![Arkkitehtuuri](../../../../../translated_images/architecture.48d94861e6e6cdc000edd4d7e2a5020cf2e97a97dbe353789ae9da48c946ccd0.fi.png)
+![Arkkitehtuuri](../../../../../translated_images/architecture.48d94861e6e6cdc0.fi.png)
 
 ---
 

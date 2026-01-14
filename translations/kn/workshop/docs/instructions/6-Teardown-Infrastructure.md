@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       ಇಲ್ಲಿದೆ ಮಾದರಿ ನಿಯೋಜನೆಗಳು **ಮೊದಲು**:
 
-      ![ಪ್ರಾರಂಭಿಕ](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc86efd11a0dd0b6ee6bec92ae4425860272179121951bd917.kn.png)
+      ![ಪ್ರಾರಂಭಿಕ](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.kn.png)
 
       ಮತ್ತು ಇದು **ನಂತರ**:
-      ![ಹೊಸದು](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299572bca5941cfeec14090237cd3d20310e347f27564089379.kn.png)
+      ![ಹೊಸದು](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.kn.png)
 
 ---
 
