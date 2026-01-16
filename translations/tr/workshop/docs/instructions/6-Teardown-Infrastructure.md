@@ -47,10 +47,10 @@ Projeyi kaldırmadan önce, birkaç dakika ayırarak açık uçlu bir keşif yap
 
       İşte model dağıtımları **öncesi**:
 
-      ![Başlangıç](../../../../../translated_images/tr/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Başlangıç](../../../../../translated_images/tr/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Ve işte **sonrası**:
-      ![Yeni](../../../../../translated_images/tr/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Yeni](../../../../../translated_images/tr/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

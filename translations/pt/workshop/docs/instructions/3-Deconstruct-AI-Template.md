@@ -112,7 +112,7 @@ No modo `Ask`, isto fornecerá código que pode copiar e testar. No modo `Agent`
       
       O Azure Storage fornece armazenamento de blobs para dados da aplicação e carregamento de ficheiros, enquanto a Identidade Gerida garante acesso seguro entre recursos do Azure sem armazenar credenciais. Toda a solução é projetada para escalabilidade e manutenção, com a aplicação conteinerizada a escalar automaticamente com base na procura, enquanto fornece segurança, monitorização e capacidades de CI/CD integradas através do ecossistema de serviços geridos do Azure.
 
-![Architecture](../../../../../translated_images/pt/architecture.48d94861e6e6cdc0.png)
+![Architecture](../../../../../translated_images/pt/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

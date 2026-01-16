@@ -51,7 +51,7 @@ Azure AI Foundry platforma siūlo [rekomenduojamų AZD šablonų rinkinį](https
 1. Apsilankykite [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Prisijunkite prie Azure AI Foundry portalo, kai būsite paraginti – pamatysite kažką panašaus.
 
-![Pick](../../../../../translated_images/lt/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/lt/01-pick-template.60d2d5fff5ebc374.webp)
 
 **Pagrindinės** parinktys yra jūsų pradiniai šablonai:
 
@@ -60,7 +60,7 @@ Azure AI Foundry platforma siūlo [rekomenduojamų AZD šablonų rinkinį](https
 
 Apsilankykite antrame nuorodoje naujame naršyklės skirtuke (arba spustelėkite `Open in GitHub` susijusioje kortelėje). Turėtumėte pamatyti šio AZD šablono saugyklą. Skirkite minutę apžvelgti README. Programos architektūra atrodo taip:
 
-![Arch](../../../../../translated_images/lt/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/lt/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Dabar laukite, kol paruošimas bus baigtas. **Tai užtrunka 10–15 minučių**
       ```
 1. Jūsų Azure portale dabar bus paruošta išteklių grupė su tuo aplinkos pavadinimu:
 
-      ![Infra](../../../../../translated_images/lt/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/lt/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Dabar esate pasiruošę patvirtinti įdiegtą infrastruktūrą ir programą**.
 
@@ -108,7 +108,7 @@ Dabar laukite, kol paruošimas bus baigtas. **Tai užtrunka 10–15 minučių**
 
 1. Turėtumėte pamatyti talpinamos programos priekinio sąsajos UI, panašų į šį:
 
-   ![App](../../../../../translated_images/lt/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/lt/03-test-application.471910da12c3038e.webp)
 
 1. Pabandykite užduoti kelis [pavyzdinius klausimus](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Dabar laukite, kol paruošimas bus baigtas. **Tai užtrunka 10–15 minučių**
 
 1. Turėtumėte gauti atsakymus, panašius į tai, kas parodyta žemiau. _Bet kaip tai veikia?_ 
 
-      ![App](../../../../../translated_images/lt/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/lt/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App diegia galinį tašką, kuris jungiasi su AI agentu, paruoš
 1. Spustelėkite `Azure AI Foundry` išteklių sąraše
 
 1. Turėtumėte pamatyti tai. Spustelėkite `Go to Azure AI Foundry Portal` mygtuką. 
-   ![Foundry](../../../../../translated_images/lt/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/lt/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Turėtumėte pamatyti Foundry projekto puslapį savo AI programai
-   ![Project](../../../../../translated_images/lt/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/lt/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Spustelėkite `Agents` – pamatysite numatytąjį agentą, paruoštą jūsų projekte
-   ![Agents](../../../../../translated_images/lt/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/lt/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Pasirinkite jį – ir pamatysite agento detales. Atkreipkite dėmesį į šiuos dalykus:
 
       - Agentas pagal numatytuosius nustatymus naudoja File Search (visada)
       - Agentas `Knowledge` rodo, kad įkelta 32 failai (paieškai pagal failus)
-      ![Agents](../../../../../translated_images/lt/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/lt/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Ieškokite `Data+indexes` parinkties kairiajame meniu ir spustelėkite, kad pamatytumėte detales. 
 
       - Turėtumėte pamatyti 32 duomenų failus, įkeltus žinioms.
       - Jie atitiks 12 klientų failų ir 20 produktų failų, esančių `src/files` 
-      ![Data](../../../../../translated_images/lt/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/lt/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Jūs patvirtinote agento veikimą!** 
 
@@ -158,7 +158,7 @@ Azure Container App diegia galinį tašką, kuris jungiasi su AI agentu, paruoš
 
 Grįžkite į naršyklės skirtuką su Container App galiniu tašku ir klauskite: `What products does Amanda Perez own?`. Turėtumėte pamatyti kažką panašaus:
 
-![Data](../../../../../translated_images/lt/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/lt/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Pažvelkime giliau į Azure AI Foundry galimybes, išbandydami agentą žaidimų
 1. Spustelėkite `Try in Playground` parinktį – turėtumėte gauti žaidimų aikštelės UI, panašų į šį
 1. Klauskite to paties klausimo: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/lt/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/lt/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Jūs gaunate tą patį (arba panašų) atsakymą – bet taip pat gaunate papildomą informaciją, kurią galite naudoti norėdami suprasti atsakymo kokybę, kainą ir našumą. Pavyzdžiui:
 
@@ -182,7 +182,7 @@ Taip pat matote _statistikos_ eilutę po atsakymu.
 1. Užveskite pelės žymeklį ant bet kurio metrikos – pvz., Saugumas. Pamatysite kažką panašaus
 1. Ar vertinimas atitinka jūsų intuiciją dėl atsakymo saugumo lygio?
 
-      ![Data](../../../../../translated_images/lt/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/lt/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -196,15 +196,15 @@ Stebėjimas reiškia jūsų programos instrumentavimą, kad būtų generuojami d
    - Supraskite bendrą žetonų skaičių (vs. išvesties žetonų naudojimą) atsakymui
    - Supraskite vėlavimą ir kur vykdymo metu praleidžiamas laikas
 
-      ![Agent](../../../../../translated_images/lt/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/lt/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Spustelėkite `Metadata` skirtuką, kad pamatytumėte papildomus atributus, susijusius su veikimu, kurie gali būti naudingi derinant problemas vėliau.   
 
-      ![Agent](../../../../../translated_images/lt/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/lt/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Spustelėkite `Evaluations` skirtuką, kad pamatytumėte automatinį agento atsakymo vertinimą. Tai apima saugumo vertinimus (pvz., Savęs žalojimas) ir agento specifinius vertinimus (pvz., Ketinimų sprendimas, Užduočių laikymasis).
 
-      ![Agent](../../../../../translated_images/lt/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/lt/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Galiausiai spustelėkite `Monitoring` skirtuką šoniniame meniu.
 
@@ -212,7 +212,7 @@ Stebėjimas reiškia jūsų programos instrumentavimą, kad būtų generuojami d
       - Stebėkite programos naudojimą pagal išlaidas (žetonus) ir apkrovą (užklausas).
       - Stebėkite programos vėlavimą nuo pirmo baito (įvesties apdorojimas) iki paskutinio baito (išvestis).
 
-      ![Agent](../../../../../translated_images/lt/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/lt/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

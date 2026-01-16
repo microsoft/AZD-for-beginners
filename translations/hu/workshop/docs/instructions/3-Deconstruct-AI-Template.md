@@ -112,7 +112,7 @@ Kérhetsz kódrészleteket is egy feladat elvégzéséhez. Próbáld ki ezt a pr
 
       Az Azure Storage blob tárolást biztosít az alkalmazás adataihoz és fájlfeltöltésekhez, míg a Managed Identity biztonságos hozzáférést biztosít az Azure erőforrások között hitelesítő adatok tárolása nélkül. Az egész megoldás skálázhatóságra és fenntarthatóságra van tervezve, a konténeres alkalmazás automatikusan skálázódik a kereslet alapján, miközben beépített biztonságot, monitorozást és CI/CD képességeket nyújt az Azure kezelt szolgáltatási ökoszisztémáján keresztül.
 
-![Architektúra](../../../../../translated_images/hu/architecture.48d94861e6e6cdc0.png)
+![Architektúra](../../../../../translated_images/hu/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

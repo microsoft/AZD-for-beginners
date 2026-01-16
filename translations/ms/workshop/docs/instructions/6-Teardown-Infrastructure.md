@@ -47,10 +47,10 @@ Sebelum kita menutup projek, luangkan beberapa minit untuk melakukan penerokaan 
 
       Berikut adalah pengedaran model **sebelum**:
 
-      ![Awal](../../../../../translated_images/ms/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Awal](../../../../../translated_images/ms/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Dan ini adalah **selepas**:
-      ![Baru](../../../../../translated_images/ms/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Baru](../../../../../translated_images/ms/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

@@ -112,7 +112,7 @@ Dalam mod `Ask`, ini akan memberikan kod yang boleh anda salin dan cuba. Dalam m
       
       Azure Storage menyediakan storan blob untuk data aplikasi dan muat naik fail, manakala Managed Identity memastikan akses selamat antara sumber Azure tanpa menyimpan kelayakan. Keseluruhan penyelesaian direka untuk skalabiliti dan penyelenggaraan, dengan aplikasi yang dikontena secara automatik berskala berdasarkan permintaan sambil menyediakan keselamatan, pemantauan, dan keupayaan CI/CD terbina melalui ekosistem perkhidmatan terurus Azure.
 
-![Architecture](../../../../../translated_images/ms/architecture.48d94861e6e6cdc0.png)
+![Architecture](../../../../../translated_images/ms/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

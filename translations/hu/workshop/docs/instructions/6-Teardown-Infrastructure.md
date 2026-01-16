@@ -47,10 +47,10 @@ Mielőtt lebontanánk a projektet, szánj néhány percet nyitott végű felfede
 
       Íme a modell telepítések **előtte**:
 
-      ![Kezdeti](../../../../../translated_images/hu/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Kezdeti](../../../../../translated_images/hu/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       És íme **utána**:
-      ![Új](../../../../../translated_images/hu/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Új](../../../../../translated_images/hu/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

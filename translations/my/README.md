@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD အတွက် စတင်သူများ: တစိုက်တယောက် သင်ယူရေး ခရီး
 
-![AZD အတွက် စတင်သူများ](../../translated_images/my/azdbeginners.5527441dd9f74068.png) 
+![AZD အတွက် စတင်သူများ](../../translated_images/my/azdbeginners.5527441dd9f74068.webp) 
 
 [![GitHub ကြည့်သူများ](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub ဖော့ခ်များ](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

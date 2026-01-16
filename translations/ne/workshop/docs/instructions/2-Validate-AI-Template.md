@@ -51,7 +51,7 @@ Azure AI Foundry प्लेटफर्मले [सिफारिस गर
 1. [https://ai.azure.com/templates](https://ai.azure.com/templates) मा जानुहोस्
 1. Azure AI Foundry पोर्टलमा लगइन गर्नुहोस् जब सोधिन्छ - तपाईंले यस्तो देख्नुहुनेछ।
 
-![Pick](../../../../../translated_images/ne/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/ne/01-pick-template.60d2d5fff5ebc374.webp)
 
 **बेसिक** विकल्पहरू तपाईंका स्टार्टर टेम्प्लेटहरू हुन्:
 
@@ -60,7 +60,7 @@ Azure AI Foundry प्लेटफर्मले [सिफारिस गर
 
 दोस्रो लिंकलाई नयाँ ब्राउजर ट्याबमा खोल्नुहोस् (वा सम्बन्धित कार्डको लागि `Open in GitHub` क्लिक गर्नुहोस्)। तपाईंले यस AZD टेम्प्लेटको लागि रिपोजिटरी देख्नुहुनेछ। README अन्वेषण गर्न एक मिनेट लिनुहोस्। एप्लिकेसन आर्किटेक्चर यस्तो देखिन्छ:
 
-![Arch](../../../../../translated_images/ne/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/ne/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Azure AI Foundry प्लेटफर्मले [सिफारिस गर
       ```
 1. तपाईंको Azure पोर्टलमा अब उक्त वातावरण नामको साथ प्रोभिजन गरिएको रिसोर्स समूह हुनेछ:
 
-      ![Infra](../../../../../translated_images/ne/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/ne/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **अब तपाईं डिप्लोय गरिएको इन्फ्रास्ट्रक्चर र एप्लिकेसन प्रमाणित गर्न तयार हुनुहुन्छ।**
 
@@ -108,7 +108,7 @@ Azure AI Foundry प्लेटफर्मले [सिफारिस गर
 
 1. तपाईंले यस्तो होस्ट गरिएको एप्लिकेसन फ्रन्ट-एन्ड UI देख्नुहुनेछ:
 
-   ![App](../../../../../translated_images/ne/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/ne/03-test-application.471910da12c3038e.webp)
 
 1. केही [नमूना प्रश्नहरू](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) सोध्ने प्रयास गर्नुहोस्
 
@@ -117,7 +117,7 @@ Azure AI Foundry प्लेटफर्मले [सिफारिस गर
 
 1. तपाईंले तल देखाइएको जस्तै उत्तरहरू प्राप्त गर्नुहुनेछ। _तर यो कसरी काम गर्छ?_ 
 
-      ![App](../../../../../translated_images/ne/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/ne/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App ले एक एन्डप्वइन्ट डिप्
 1. उक्त सूचीमा `Azure AI Foundry` रिसोर्समा क्लिक गर्नुहोस्
 
 1. तपाईंले यस्तो देख्नुहुनेछ। `Go to Azure AI Foundry Portal` बटनमा क्लिक गर्नुहोस्। 
-   ![Foundry](../../../../../translated_images/ne/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/ne/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. तपाईंले आफ्नो एआई एप्लिकेसनको लागि Foundry प्रोजेक्ट पृष्ठ देख्नुहुनेछ
-   ![Project](../../../../../translated_images/ne/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/ne/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. `Agents` मा क्लिक गर्नुहोस् - तपाईंले आफ्नो प्रोजेक्टमा प्रोभिजन गरिएको डिफल्ट एजेन्ट देख्नुहुनेछ
-   ![Agents](../../../../../translated_images/ne/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/ne/06-visit-agents.bccb263f77b00a09.webp)
 
 1. यसलाई चयन गर्नुहोस् - र तपाईंले एजेन्ट विवरण देख्नुहुनेछ। निम्न कुराहरू नोट गर्नुहोस्:
 
       - एजेन्टले डिफल्ट रूपमा फाइल खोज प्रयोग गर्दछ (सधैं)
       - एजेन्टको `Knowledge` ले देखाउँछ कि यसमा ३२ फाइलहरू अपलोड गरिएको छ (फाइल खोजको लागि)
-      ![Agents](../../../../../translated_images/ne/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/ne/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. बायाँ मेनुमा `Data+indexes` विकल्प खोज्नुहोस् र विवरणको लागि क्लिक गर्नुहोस्। 
 
       - तपाईंले ज्ञानको लागि अपलोड गरिएका ३२ डेटा फाइलहरू देख्नुहुनेछ।
       - यी `src/files` अन्तर्गत १२ ग्राहक फाइलहरू र २० उत्पादन फाइलहरूसँग मेल खानेछन्। 
-      ![Data](../../../../../translated_images/ne/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/ne/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **तपाईंले एजेन्टको सञ्चालन प्रमाणित गर्नुभयो!** 
 
@@ -158,7 +158,7 @@ Azure Container App ले एक एन्डप्वइन्ट डिप्
 
 Container App एन्डप्वइन्ट भएको ब्राउजर ट्याबमा फर्कनुहोस् र सोध्नुहोस्: `What products does Amanda Perez own?`. तपाईंले यस्तो देख्नुहुनेछ:
 
-![Data](../../../../../translated_images/ne/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/ne/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Azure AI Foundry को क्षमताहरूको लागि थोर
 1. `Try in Playground` विकल्पमा क्लिक गर्नुहोस् - तपाईंले यस्तो प्लेग्राउन्ड UI प्राप्त गर्नुहुनेछ
 1. उही प्रश्न सोध्नुहोस्: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/ne/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/ne/09-ask-in-playground.a1b93794f78fa676.webp)
 
 तपाईंले उस्तै (वा समान) उत्तर प्राप्त गर्नुहुनेछ - तर तपाईंले थप जानकारी पनि प्राप्त गर्नुहुनेछ जसले तपाईंलाई तपाईंको एजेन्टिक एप्लिकेसनको गुणस्तर, लागत, र प्रदर्शन बुझ्न मद्दत गर्दछ। उदाहरणका लागि:
 
@@ -182,7 +182,7 @@ Azure AI Foundry को क्षमताहरूको लागि थोर
 1. कुनै मेट्रिकमा होभर गर्नुहोस् - जस्तै, Safety। तपाईंले यस्तो देख्नुहुनेछ
 1. के मूल्याङ्कन गरिएको रेटिङ तपाईंको उत्तरको सुरक्षा स्तरको लागि अन्तर्ज्ञानसँग मेल खान्छ?
 
-      ![Data](../../../../../translated_images/ne/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/ne/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -196,15 +196,15 @@ Azure AI Foundry को क्षमताहरूको लागि थोर
    - उत्तरको लागि कुल टोकन गणना (vs. आउटपुट टोकन प्रयोग) बुझ्नुहोस्
    - विलम्बता बुझ्नुहोस् र कार्यान्वयनमा समय कहाँ खर्च भइरहेको छ
 
-      ![Agent](../../../../../translated_images/ne/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/ne/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. `Metadata` ट्याबमा क्लिक गर्नुहोस् रनको लागि थप विशेषताहरू हेर्न, जसले पछि समस्या डिबग गर्न उपयोगी सन्दर्भ प्रदान गर्न सक्छ।   
 
-      ![Agent](../../../../../translated_images/ne/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/ne/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. `Evaluations` ट्याबमा क्लिक गर्नुहोस् एजेन्ट उत्तरमा गरिएको स्व-मूल्याङ्कनहरू हेर्न। यीमा सुरक्षा मूल्याङ्कनहरू (जस्तै, Self-harm) र एजेन्ट-विशिष्ट मूल्याङ्कनहरू (जस्तै, Intent resolution, Task adherence) समावेश छन्।
 
-      ![Agent](../../../../../translated_images/ne/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/ne/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. अन्तमा, साइडबार मेनुमा `Monitoring` ट्याबमा क्लिक गर्नुहोस्।
 
@@ -212,7 +212,7 @@ Azure AI Foundry को क्षमताहरूको लागि थोर
       - लागत (टोकन) र लोड (अनुरोधहरू) को सन्दर्भमा एप्लिकेसन प्रयोग ट्र्याक गर्नुहोस्।
       - पहिलो बाइट (इनपुट प्रशोधन) र अन्तिम बाइट (आउटपुट) को विलम्बता ट्र्याक गर्नुहोस्।
 
-      ![Agent](../../../../../translated_images/ne/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/ne/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

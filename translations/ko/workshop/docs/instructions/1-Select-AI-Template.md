@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/ko/azd-flow.19ea67c2f81eaa66.png)
+![Flow](../../../../../translated_images/ko/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ _자신의_ 시나리오에 맞는 AZD 템플릿을 생성하거나 재사용할
 **🎯 | 실습**: <br/> 
 [Awesome AZD](https://azure.github.io/awesome-azd/) 갤러리를 방문하여 현재 제공되는 250개 이상의 템플릿을 필터링하며 탐색해보세요. _자신의_ 시나리오 요구사항에 맞는 템플릿을 찾아보세요.
 
-![Code](../../../../../translated_images/ko/azd-code-to-cloud.2d9503d69d3400da.png)
+![Code](../../../../../translated_images/ko/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

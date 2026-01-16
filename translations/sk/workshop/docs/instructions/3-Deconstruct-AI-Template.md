@@ -112,7 +112,7 @@ V režime `Ask` vám poskytne kód, ktorý môžete skopírovať a vyskúšať. 
       
       Azure Storage poskytuje blob storage pre aplikačné dáta a nahrané súbory, zatiaľ čo Managed Identity zabezpečuje bezpečný prístup medzi Azure zdrojmi bez ukladania poverení. Celé riešenie je navrhnuté pre škálovateľnosť a udržateľnosť, pričom kontajnerizovaná aplikácia sa automaticky škáluje na základe dopytu a poskytuje zabudovanú bezpečnosť, monitorovanie a CI/CD schopnosti prostredníctvom ekosystému spravovaných služieb Azure.
 
-![Architektúra](../../../../../translated_images/sk/architecture.48d94861e6e6cdc0.png)
+![Architektúra](../../../../../translated_images/sk/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

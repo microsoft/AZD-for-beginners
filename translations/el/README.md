@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD Για Αρχάριους: Ένα Δομημένο Μαθησιακό Ταξίδι
 
-![AZD-για-αρχάριους](../../translated_images/el/azdbeginners.5527441dd9f74068.png) 
+![AZD-για-αρχάριους](../../translated_images/el/azdbeginners.5527441dd9f74068.webp) 
 
 [![Παρακολουθητές GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![Forks στο GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

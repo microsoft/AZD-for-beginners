@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD algajatele: Struktureeritud õppimisretk
 
-![AZD algajatele](../../translated_images/et/azdbeginners.5527441dd9f74068.png) 
+![AZD algajatele](../../translated_images/et/azdbeginners.5527441dd9f74068.webp) 
 
 [![GitHub jälgijad](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub forkid](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

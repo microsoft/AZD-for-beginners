@@ -47,10 +47,10 @@ Kabla ya kuvunja mradi, tumia dakika chache kufanya uchunguzi wa wazi.
 
       Hapa kuna utoaji wa modeli **kabla**:
 
-      ![Awali](../../../../../translated_images/sw/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Awali](../../../../../translated_images/sw/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Na hapa iko **baada**:
-      ![Mpya](../../../../../translated_images/sw/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Mpya](../../../../../translated_images/sw/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

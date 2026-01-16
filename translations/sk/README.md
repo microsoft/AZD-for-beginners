@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD pre začiatočníkov: Štruktúrovaná učebná cesta
 
-![AZD pre začiatočníkov](../../translated_images/sk/azdbeginners.5527441dd9f74068.png) 
+![AZD pre začiatočníkov](../../translated_images/sk/azdbeginners.5527441dd9f74068.webp) 
 
 [![Sledujúci na GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![Forky na GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

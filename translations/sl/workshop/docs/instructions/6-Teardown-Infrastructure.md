@@ -47,10 +47,10 @@ Preden razgradimo projekt, si vzemite nekaj minut za odprto raziskovanje.
 
       Tukaj so namestitve modela **pred**:
 
-      ![Začetno](../../../../../translated_images/sl/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Začetno](../../../../../translated_images/sl/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       In tukaj so **po**:
-      ![Novo](../../../../../translated_images/sl/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Novo](../../../../../translated_images/sl/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD नयाँ सिक्नेहरूका लागि: एक संरचित सिकाइ यात्रा
 
-![AZD-नयाँ-सिक्नेहरूका लागि](../../translated_images/ne/azdbeginners.5527441dd9f74068.png) 
+![AZD-नयाँ-सिक्नेहरूका लागि](../../translated_images/ne/azdbeginners.5527441dd9f74068.webp) 
 
 [![GitHub अनुगामीहरू](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub फोर्कहरू](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

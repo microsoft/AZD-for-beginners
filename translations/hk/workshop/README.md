@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 工作坊課程以 Markdown 編寫。您可以直接在 GitHub 中瀏覽，或者如以下截圖所示啟動瀏覽器預覽。
 
-![Workshop](../../../translated_images/hk/workshop.75906f133e6f8ba0.png)
+![Workshop](../../../translated_images/hk/workshop.75906f133e6f8ba0.webp)
 
 使用此選項 - 將此存儲庫 fork 到您的個人檔案，並啟動 GitHub Codespaces。當 VS Code 終端啟動後，輸入以下指令：
 

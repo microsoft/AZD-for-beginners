@@ -47,10 +47,10 @@ Prieš išardant projektą, skirkite kelias minutes laisvai tyrinėjimui.
 
       Štai modelio diegimai **prieš**:
 
-      ![Pradinis](../../../../../translated_images/lt/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Pradinis](../../../../../translated_images/lt/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Ir štai jie **po**:
-      ![Naujas](../../../../../translated_images/lt/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Naujas](../../../../../translated_images/lt/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

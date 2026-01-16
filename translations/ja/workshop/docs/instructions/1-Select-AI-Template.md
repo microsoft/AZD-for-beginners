@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/ja/azd-flow.19ea67c2f81eaa66.png)
+![Flow](../../../../../translated_images/ja/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ _インフラストラクチャコード_（IaC）アプローチを使用する
 **🎯 | 演習**: <br/> 
 [Awesome AZD](https://azure.github.io/awesome-azd/)ギャラリーを訪問し、フィルターを使って現在利用可能な250以上のテンプレートを探索してください。自分のシナリオ要件に合うものを見つけられるか試してみましょう。
 
-![Code](../../../../../translated_images/ja/azd-code-to-cloud.2d9503d69d3400da.png)
+![Code](../../../../../translated_images/ja/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

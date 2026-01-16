@@ -47,10 +47,10 @@ Bago natin alisin ang proyekto, maglaan ng ilang minuto para sa malayang paggalu
 
       Narito ang mga deployment ng model **bago**:
 
-      ![Initial](../../../../../translated_images/tl/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Initial](../../../../../translated_images/tl/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       At narito ito **pagkatapos**:
-      ![New](../../../../../translated_images/tl/14-deploy-new.f7f3c355a3cf7299.png)
+      ![New](../../../../../translated_images/tl/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

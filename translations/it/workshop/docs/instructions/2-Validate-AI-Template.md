@@ -51,7 +51,7 @@ La piattaforma Azure AI Foundry offre un [set di template AZD consigliati](https
 1. Visita [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Accedi al portale Azure AI Foundry quando richiesto - vedrai qualcosa di simile.
 
-![Pick](../../../../../translated_images/it/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/it/01-pick-template.60d2d5fff5ebc374.webp)
 
 Le opzioni **Basic** sono i tuoi template iniziali:
 
@@ -60,7 +60,7 @@ Le opzioni **Basic** sono i tuoi template iniziali:
 
 Visita il secondo link in una nuova scheda del browser (o clicca su `Open in GitHub` per la scheda correlata). Dovresti vedere il repository per questo template AZD. Prenditi un minuto per esplorare il README. L'architettura dell'applicazione appare così:
 
-![Arch](../../../../../translated_images/it/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/it/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Ora, attendi il completamento del provisioning. **Questo richiede 10-15 minuti**
       ```
 1. Il tuo portale Azure avrà ora un gruppo di risorse provisionato con il nome dell'ambiente:
 
-      ![Infra](../../../../../translated_images/it/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/it/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Ora sei pronto per validare l'infrastruttura e l'applicazione distribuite**.
 
@@ -108,7 +108,7 @@ Ora, attendi il completamento del provisioning. **Questo richiede 10-15 minuti**
 
 1. Dovresti vedere un'interfaccia utente front-end dell'applicazione ospitata simile a questa:
 
-   ![App](../../../../../translated_images/it/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/it/03-test-application.471910da12c3038e.webp)
 
 1. Prova a fare alcune [domande di esempio](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Ora, attendi il completamento del provisioning. **Questo richiede 10-15 minuti**
 
 1. Dovresti ottenere risposte simili a quelle mostrate di seguito. _Ma come funziona tutto questo?_ 
 
-      ![App](../../../../../translated_images/it/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/it/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ L'app Azure Container distribuisce un endpoint che si connette all'agente AI pro
 1. Clicca sulla risorsa `Azure AI Foundry` in quell'elenco
 
 1. Dovresti vedere questo. Clicca sul pulsante `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/it/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/it/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Dovresti vedere la pagina del progetto Foundry per la tua applicazione AI
-   ![Project](../../../../../translated_images/it/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/it/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Clicca su `Agents` - vedrai l'agente predefinito provisionato nel tuo progetto
-   ![Agents](../../../../../translated_images/it/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/it/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Selezionalo - e vedrai i dettagli dell'agente. Nota quanto segue:
 
       - L'agente utilizza File Search per impostazione predefinita (sempre)
       - La `Knowledge` dell'agente indica che sono stati caricati 32 file (per la ricerca nei file)
-      ![Agents](../../../../../translated_images/it/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/it/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Cerca l'opzione `Data+indexes` nel menu a sinistra e clicca per i dettagli. 
 
       - Dovresti vedere i 32 file di dati caricati per la conoscenza.
       - Questi corrisponderanno ai 12 file cliente e ai 20 file prodotto sotto `src/files` 
-      ![Data](../../../../../translated_images/it/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/it/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Hai validato il funzionamento dell'agente!** 
 
@@ -158,7 +158,7 @@ L'app Azure Container distribuisce un endpoint che si connette all'agente AI pro
 
 Ritorna alla scheda del browser con l'endpoint dell'app Container e chiedi: `Quali prodotti possiede Amanda Perez?`. Dovresti vedere qualcosa di simile:
 
-![Data](../../../../../translated_images/it/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/it/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Costruiamo un po' di intuizione sulle capacità di Azure AI Foundry, facendo un 
 1. Clicca sull'opzione `Try in Playground` - dovresti ottenere un'interfaccia Playground simile
 1. Fai la stessa domanda: `Quali prodotti possiede Amanda Perez?`
 
-    ![Data](../../../../../translated_images/it/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/it/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Ottieni la stessa (o simile) risposta - ma ottieni anche informazioni aggiuntive che puoi utilizzare per comprendere la qualità, il costo e le prestazioni della tua app agentica. Ad esempio:
 
@@ -182,7 +182,7 @@ Vedi anche una riga di _statistiche_ sotto la risposta.
 1. Passa il mouse su una qualsiasi metrica - ad esempio, Sicurezza. Vedi qualcosa di simile
 1. La valutazione assegnata corrisponde alla tua intuizione sul livello di sicurezza della risposta?
 
-      ![Data](../../../../../translated_images/it/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/it/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
@@ -196,15 +196,15 @@ L'osservabilità riguarda l'instrumentazione della tua applicazione per generare
    - Comprendi il conteggio totale dei token (rispetto all'uso dei token di output) per la risposta
    - Comprendi la latenza e dove viene speso il tempo nell'esecuzione
 
-      ![Agent](../../../../../translated_images/it/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/it/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Clicca sulla scheda `Metadata` per vedere attributi aggiuntivi per l'esecuzione, che potrebbero fornire un contesto utile per il debug di problemi in seguito.   
 
-      ![Agent](../../../../../translated_images/it/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/it/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Clicca sulla scheda `Evaluations` per vedere le valutazioni automatiche effettuate sulla risposta dell'agente. Queste includono valutazioni di sicurezza (ad esempio, Autolesionismo) e valutazioni specifiche dell'agente (ad esempio, Risoluzione dell'intento, Adesione al compito).
 
-      ![Agent](../../../../../translated_images/it/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/it/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Infine, clicca sulla scheda `Monitoring` nel menu laterale.
 
@@ -212,7 +212,7 @@ L'osservabilità riguarda l'instrumentazione della tua applicazione per generare
       - Monitora l'utilizzo dell'applicazione in termini di costi (token) e carico (richieste).
       - Monitora la latenza dell'applicazione al primo byte (elaborazione input) e all'ultimo byte (output).
 
-      ![Agent](../../../../../translated_images/it/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/it/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

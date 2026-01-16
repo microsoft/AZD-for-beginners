@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       Εδώ είναι οι αναπτύξεις του μοντέλου **πριν**:
 
-      ![Αρχικό](../../../../../translated_images/el/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Αρχικό](../../../../../translated_images/el/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Και εδώ είναι **μετά**:
-      ![Νέο](../../../../../translated_images/el/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Νέο](../../../../../translated_images/el/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

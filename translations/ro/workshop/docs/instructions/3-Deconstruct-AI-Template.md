@@ -112,7 +112,7 @@ Sau poți solicita fragmente de cod pentru a finaliza o sarcină. Încearcă ace
       
       Azure Storage oferă stocare blob pentru datele aplicației și fișierele încărcate, în timp ce Managed Identity asigură accesul securizat între resursele Azure fără a stoca acreditive. Întreaga soluție este proiectată pentru scalabilitate și mentenabilitate, cu aplicația containerizată scalând automat în funcție de cerere, oferind în același timp securitate, monitorizare și capabilități CI/CD integrate prin ecosistemul de servicii gestionate Azure.
 
-![Architecture](../../../../../translated_images/ro/architecture.48d94861e6e6cdc0.png)
+![Architecture](../../../../../translated_images/ro/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

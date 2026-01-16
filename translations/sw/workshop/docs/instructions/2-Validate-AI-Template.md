@@ -51,7 +51,7 @@ Jukwaa la Azure AI Foundry linakuja na [seti ya violezo vya AZD vilivyopendekezw
 1. Tembelea [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Ingia kwenye portal ya Azure AI Foundry unapoulizwa - utaona kitu kama hiki.
 
-![Pick](../../../../../translated_images/sw/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/sw/01-pick-template.60d2d5fff5ebc374.webp)
 
 Chaguo za **Msingi** ni violezo vyako vya kuanzia:
 
@@ -60,7 +60,7 @@ Chaguo za **Msingi** ni violezo vyako vya kuanzia:
 
 Tembelea kiungo cha pili kwenye tabo mpya ya kivinjari (au bonyeza `Open in GitHub` kwa kadi inayohusiana). Unapaswa kuona hifadhi ya kiolezo hiki cha AZD. Chukua dakika kuchunguza README. Muundo wa programu unaonekana kama huu:
 
-![Arch](../../../../../translated_images/sw/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/sw/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -93,7 +93,7 @@ Sasa, subiri mchakato wa kuweka miundombinu ukamilike. **Hii inachukua dakika 10
 
 1. Portal yako ya Azure sasa itakuwa na kikundi cha rasilimali kilichowekwa na jina la mazingira hayo:
 
-      ![Infra](../../../../../translated_images/sw/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/sw/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Sasa uko tayari kuthibitisha miundombinu na programu iliyowekwa.**
 
@@ -109,7 +109,7 @@ Sasa, subiri mchakato wa kuweka miundombinu ukamilike. **Hii inachukua dakika 10
 
 1. Unapaswa kuona UI ya mbele ya programu iliyohifadhiwa kama hii:
 
-   ![App](../../../../../translated_images/sw/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/sw/03-test-application.471910da12c3038e.webp)
 
 1. Jaribu kuuliza maswali kadhaa ya [mfano](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -118,7 +118,7 @@ Sasa, subiri mchakato wa kuweka miundombinu ukamilike. **Hii inachukua dakika 10
 
 1. Unapaswa kupata majibu yanayofanana na yale yaliyoonyeshwa hapa chini. _Lakini hii inafanyaje kazi?_ 
 
-      ![App](../../../../../translated_images/sw/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/sw/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -131,25 +131,25 @@ Azure Container App huweka endpoint inayounganisha na AI Agent iliyowekwa katika
 1. Bonyeza rasilimali ya `Azure AI Foundry` katika orodha hiyo
 
 1. Unapaswa kuona hii. Bonyeza kitufe cha `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/sw/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/sw/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Unapaswa kuona ukurasa wa Mradi wa Foundry kwa programu yako ya AI
-   ![Project](../../../../../translated_images/sw/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/sw/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Bonyeza `Agents` - utaona Mawakala wa chaguo-msingi waliowekwa katika mradi wako
-   ![Agents](../../../../../translated_images/sw/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/sw/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Chagua - na utaona maelezo ya Mawakala. Kumbuka yafuatayo:
 
       - Mawakala hutumia File Search kwa chaguo-msingi (daima)
       - `Knowledge` ya Mawakala inaonyesha ina faili 32 zilizopakiwa (kwa utafutaji wa faili)
-      ![Agents](../../../../../translated_images/sw/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/sw/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Tafuta chaguo la `Data+indexes` katika menyu ya kushoto na bonyeza kwa maelezo.
 
       - Unapaswa kuona faili 32 za data zilizopakiwa kwa maarifa.
       - Hizi zitahusiana na faili 12 za wateja na faili 20 za bidhaa chini ya `src/files` 
-      ![Data](../../../../../translated_images/sw/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/sw/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Umehakiki operesheni ya Mawakala!** 
 
@@ -159,7 +159,7 @@ Azure Container App huweka endpoint inayounganisha na AI Agent iliyowekwa katika
 
 Rudi kwenye tabo ya kivinjari yenye endpoint ya Container App na uliza: `What products does Amanda Perez own?`. Unapaswa kuona kitu kama hiki:
 
-![Data](../../../../../translated_images/sw/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/sw/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -171,7 +171,7 @@ Hebu tujenge uelewa zaidi wa uwezo wa Azure AI Foundry, kwa kujaribu Mawakala ka
 1. Bonyeza chaguo la `Try in Playground` - unapaswa kupata UI ya Uwanja kama huu
 1. Uliza swali lile lile: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/sw/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/sw/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Unapata jibu lile lile (au linalofanana) - lakini pia unapata maelezo ya ziada unayoweza kutumia kuelewa ubora, gharama, na utendaji wa programu yako ya mawakala. Kwa mfano:
 
@@ -183,7 +183,7 @@ Pia unaona safu ya _stats_ chini ya jibu.
 1. Peleka mshale juu ya kipimo chochote - kwa mfano, Usalama. Unaona kitu kama hiki
 1. Je, tathmini inayotolewa inalingana na uelewa wako wa kiwango cha usalama wa jibu?
 
-      ![Data](../../../../../translated_images/sw/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/sw/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -197,15 +197,15 @@ Ufuatiliaji ni kuhusu kuweka vifaa vya programu yako ili kuzalisha data inayowez
    - Elewa jumla ya idadi ya Tokeni (vs. matumizi ya tokeni za matokeo) kwa jibu
    - Elewa ucheleweshaji na mahali muda unatumika katika utekelezaji
 
-      ![Agent](../../../../../translated_images/sw/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/sw/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Bonyeza tabo ya `Metadata` ili kuona sifa za ziada za kukimbia, ambazo zinaweza kutoa muktadha muhimu kwa kutatua matatizo baadaye.   
 
-      ![Agent](../../../../../translated_images/sw/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/sw/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Bonyeza tabo ya `Evaluations` ili kuona tathmini za kiotomatiki zilizofanywa kwenye jibu la wakala. Hizi zinajumuisha tathmini za usalama (mfano, Kujidhuru) na tathmini maalum za wakala (mfano, Utatuzi wa nia, Ufuatiliaji wa kazi).
 
-      ![Agent](../../../../../translated_images/sw/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/sw/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Mwisho lakini si kwa uchache, bonyeza tabo ya `Monitoring` katika menyu ya upande.
 
@@ -213,7 +213,7 @@ Ufuatiliaji ni kuhusu kuweka vifaa vya programu yako ili kuzalisha data inayowez
       - Fuatilia matumizi ya programu kwa gharama (tokeni) na mzigo (maombi).
       - Fuatilia ucheleweshaji wa programu hadi byte ya kwanza (usindikaji wa pembejeo) na byte ya mwisho (matokeo).
 
-      ![Agent](../../../../../translated_images/sw/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/sw/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

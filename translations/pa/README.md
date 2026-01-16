@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD ਬੈਗਿਨਰਜ਼ ਲਈ: ਇੱਕ ਸੰਰਚਿਤ ਸਿੱਖਣ ਯਾਤਰਾ
 
-![AZD-ਬੈਗਿਨਰਜ਼](../../translated_images/pa/azdbeginners.5527441dd9f74068.png) 
+![AZD-ਬੈਗਿਨਰਜ਼](../../translated_images/pa/azdbeginners.5527441dd9f74068.webp) 
 
 [![GitHub ਵੇਖਣ ਵਾਲੇ](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub ਫੋਰਕ](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

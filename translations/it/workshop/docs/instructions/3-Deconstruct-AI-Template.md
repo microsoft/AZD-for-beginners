@@ -112,7 +112,7 @@ In modalità `Ask`, questo fornirà codice che puoi copiare e incollare per prov
       
       Azure Storage fornisce archiviazione blob per i dati dell'applicazione e i file caricati, mentre Managed Identity garantisce un accesso sicuro tra le risorse Azure senza memorizzare credenziali. L'intera soluzione è progettata per scalabilità e manutenibilità, con l'applicazione containerizzata che si scala automaticamente in base alla domanda, fornendo al contempo sicurezza, monitoraggio e capacità CI/CD integrate tramite l'ecosistema di servizi gestiti di Azure.
 
-![Architecture](../../../../../translated_images/it/architecture.48d94861e6e6cdc0.png)
+![Architecture](../../../../../translated_images/it/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

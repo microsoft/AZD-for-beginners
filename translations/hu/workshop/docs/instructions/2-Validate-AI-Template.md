@@ -51,7 +51,7 @@ Az Azure AI Foundry platform [ajánlott AZD sablonok](https://learn.microsoft.co
 1. Látogasson el ide: [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Jelentkezzen be az Azure AI Foundry portálra, amikor erre felszólítják - valami ilyesmit fog látni.
 
-![Pick](../../../../../translated_images/hu/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/hu/01-pick-template.60d2d5fff5ebc374.webp)
 
 A **Basic** opciók az Ön kezdő sablonjai:
 
@@ -60,7 +60,7 @@ A **Basic** opciók az Ön kezdő sablonjai:
 
 Nyissa meg a második linket egy új böngészőfülön (vagy kattintson az `Open in GitHub` gombra a kapcsolódó kártyán). Látni fogja az AZD sablon adattárát. Szánjon egy percet a README felfedezésére. Az alkalmazás architektúrája így néz ki:
 
-![Arch](../../../../../translated_images/hu/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/hu/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Most várja meg, amíg a létrehozás befejeződik. **Ez 10-15 percet vesz igén
       ```
 1. Az Azure Portálon most egy létrehozott erőforráscsoportot fog látni az adott környezetnévvel:
 
-      ![Infra](../../../../../translated_images/hu/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/hu/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Most készen áll az infrastruktúra és az alkalmazás érvényesítésére**.
 
@@ -108,7 +108,7 @@ Most várja meg, amíg a létrehozás befejeződik. **Ez 10-15 percet vesz igén
 
 1. Egy hosztolt alkalmazás front-end UI-t kell látnia, például ezt:
 
-   ![App](../../../../../translated_images/hu/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/hu/03-test-application.471910da12c3038e.webp)
 
 1. Próbáljon ki néhány [minta kérdést](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Most várja meg, amíg a létrehozás befejeződik. **Ez 10-15 percet vesz igén
 
 1. Olyan válaszokat kell kapnia, mint az alábbiak. _De hogyan működik ez?_ 
 
-      ![App](../../../../../translated_images/hu/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/hu/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Az Azure Container App egy végpontot telepít, amely csatlakozik az Azure AI Fo
 1. Kattintson az `Azure AI Foundry` erőforrásra a listában
 
 1. Ezt kell látnia. Kattintson a `Go to Azure AI Foundry Portal` gombra. 
-   ![Foundry](../../../../../translated_images/hu/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/hu/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Látni fogja az AI alkalmazás Foundry Projekt oldalát
-   ![Project](../../../../../translated_images/hu/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/hu/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Kattintson az `Agents` opcióra - látni fogja az alapértelmezett ügynököt a projektben
-   ![Agents](../../../../../translated_images/hu/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/hu/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Válassza ki - és látni fogja az ügynök részleteit. Vegye figyelembe a következőket:
 
       - Az ügynök alapértelmezés szerint File Search-t használ (mindig)
       - Az ügynök `Knowledge` azt jelzi, hogy 32 fájl van feltöltve (fájlkereséshez)
-      ![Agents](../../../../../translated_images/hu/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/hu/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Keresse meg a bal oldali menüben a `Data+indexes` opciót, és kattintson a részletekért. 
 
       - Látni fogja a 32 adatfájlt, amelyek feltöltve vannak a tudás számára.
       - Ezek megfelelnek a `src/files` alatt található 12 ügyfélfájlnak és 20 termékfájlnak 
-      ![Data](../../../../../translated_images/hu/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/hu/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Érvényesítette az ügynök működését!** 
 
@@ -158,7 +158,7 @@ Az Azure Container App egy végpontot telepít, amely csatlakozik az Azure AI Fo
 
 Térjen vissza a böngészőfülre a Container App végponttal, és kérdezze: `Milyen termékekkel rendelkezik Amanda Perez?`. Valami ilyesmit kell látnia:
 
-![Data](../../../../../translated_images/hu/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/hu/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Nézzük meg közelebbről az Azure AI Foundry képességeit, és próbáljuk ki
 1. Kattintson a `Try in Playground` opcióra - egy Játszótér UI-t kell látnia, például ezt
 1. Tegye fel ugyanazt a kérdést: `Milyen termékekkel rendelkezik Amanda Perez?`
 
-    ![Data](../../../../../translated_images/hu/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/hu/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Ugyanazt (vagy hasonló) választ kapja - de további információkat is kap, amelyek segítenek megérteni az ügynöki alkalmazás minőségét, költségeit és teljesítményét. Például:
 
@@ -182,7 +182,7 @@ Egy _statisztika_ sor is látható a válasz alatt.
 1. Vigye az egérmutatót bármelyik metrika fölé - például Biztonság. Valami ilyesmit fog látni
 1. Megfelel-e az értékelt besorolás az Ön intuíciójának a válasz biztonsági szintjéről?
 
-      ![Data](../../../../../translated_images/hu/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/hu/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -196,15 +196,15 @@ A megfigyelhetőség az alkalmazás instrumentálásáról szól, hogy olyan ada
    - Értsük meg a teljes Token számot (szemben a kimeneti tokenek használatával) a válaszhoz
    - Értsük meg a késleltetést és azt, hogy hol tölt időt a végrehajtás során
 
-      ![Agent](../../../../../translated_images/hu/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/hu/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Kattintson a `Metadata` fülre, hogy további attribútumokat láthasson a futtatásról, amelyek hasznos kontextust nyújthatnak a későbbi hibakereséshez.   
 
-      ![Agent](../../../../../translated_images/hu/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/hu/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Kattintson az `Evaluations` fülre, hogy lássa az ügynök válaszára vonatkozó automatikus értékeléseket. Ezek tartalmazzák a biztonsági értékeléseket (például Önkárosítás) és az ügynök-specifikus értékeléseket (például Szándék feloldása, Feladat betartása).
 
-      ![Agent](../../../../../translated_images/hu/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/hu/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Végül kattintson a `Monitoring` fülre az oldalsó menüben.
 
@@ -212,7 +212,7 @@ A megfigyelhetőség az alkalmazás instrumentálásáról szól, hogy olyan ada
       - Kövesse nyomon az alkalmazás használatát költségek (tokenek) és terhelés (kérések) szempontjából.
       - Kövesse nyomon az alkalmazás késleltetését az első byte (bemenet feldolgozása) és az utolsó byte (kimenet) között.
 
-      ![Agent](../../../../../translated_images/hu/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/hu/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

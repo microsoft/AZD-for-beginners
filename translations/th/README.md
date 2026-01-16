@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD สำหรับผู้เริ่มต้น: เส้นทางการเรียนรู้ที่เป็นระบบ
 
-![AZD สำหรับผู้เริ่มต้น](../../translated_images/th/azdbeginners.5527441dd9f74068.png) 
+![AZD สำหรับผู้เริ่มต้น](../../translated_images/th/azdbeginners.5527441dd9f74068.webp) 
 
 [![ผู้ติดตาม GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![Forks บน GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 שיעורי הסדנה כתובים ב-Markdown. ניתן לנווט בהם ישירות ב-GitHub - או להפעיל תצוגה מקדימה מבוססת דפדפן כפי שמוצג בתמונה למטה.
 
-![סדנה](../../../translated_images/he/workshop.75906f133e6f8ba0.png)
+![סדנה](../../../translated_images/he/workshop.75906f133e6f8ba0.webp)
 
 כדי להשתמש באפשרות זו - בצעו Fork למאגר לפרופיל שלכם, והפעילו את GitHub Codespaces. לאחר שהטרמינל של VS Code פעיל, הקלידו את הפקודה הזו:
 

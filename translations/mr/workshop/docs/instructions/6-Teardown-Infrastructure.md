@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       मॉडेल तैनाती **पूर्वी** अशी होती:
 
-      ![Initial](../../../../../translated_images/mr/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Initial](../../../../../translated_images/mr/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       आणि ती **नंतर** अशी आहे:
-      ![New](../../../../../translated_images/mr/14-deploy-new.f7f3c355a3cf7299.png)
+      ![New](../../../../../translated_images/mr/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

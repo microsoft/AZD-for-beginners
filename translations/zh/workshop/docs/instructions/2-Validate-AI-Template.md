@@ -51,7 +51,7 @@ Azure AI Foundry 平台提供了一组[推荐的 AZD 模板](https://learn.micro
 1. 访问 [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. 登录 Azure AI Foundry 门户后，您会看到类似这样的页面。
 
-![Pick](../../../../../translated_images/zh/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/zh/01-pick-template.60d2d5fff5ebc374.webp)
 
 **基础选项** 是您的入门模板：
 
@@ -60,7 +60,7 @@ Azure AI Foundry 平台提供了一组[推荐的 AZD 模板](https://learn.micro
 
 在新浏览器标签中访问第二个链接（或点击相关卡片上的 `Open in GitHub`）。您应该会看到此 AZD 模板的代码库。花一分钟时间浏览 README。应用程序架构如下所示：
 
-![Arch](../../../../../translated_images/zh/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/zh/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -93,7 +93,7 @@ Azure AI Foundry 平台提供了一组[推荐的 AZD 模板](https://learn.micro
 
 1. 您的 Azure Portal 现在会有一个以环境名称命名的资源组：
 
-      ![Infra](../../../../../translated_images/zh/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/zh/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **现在您可以验证已部署的基础设施和应用程序了**。
 
@@ -109,7 +109,7 @@ Azure AI Foundry 平台提供了一组[推荐的 AZD 模板](https://learn.micro
 
 1. 您应该会看到一个托管的应用程序前端 UI，如下所示：
 
-   ![App](../../../../../translated_images/zh/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/zh/03-test-application.471910da12c3038e.webp)
 
 1. 尝试问几个[示例问题](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -118,7 +118,7 @@ Azure AI Foundry 平台提供了一组[推荐的 AZD 模板](https://learn.micro
 
 1. 您应该会得到类似如下的答案。_但它是如何工作的呢？_
 
-      ![App](../../../../../translated_images/zh/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/zh/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -131,25 +131,25 @@ Azure Container App 部署了一个端点，该端点连接到为此模板在 Az
 1. 点击列表中的 `Azure AI Foundry` 资源
 
 1. 您应该会看到如下页面。点击 `Go to Azure AI Foundry Portal` 按钮。
-   ![Foundry](../../../../../translated_images/zh/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/zh/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. 您应该会看到您的 AI 应用程序的 Foundry 项目页面
-   ![Project](../../../../../translated_images/zh/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/zh/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. 点击 `Agents` - 您会看到项目中配置的默认代理
-   ![Agents](../../../../../translated_images/zh/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/zh/06-visit-agents.bccb263f77b00a09.webp)
 
 1. 选择它 - 您会看到代理的详细信息。注意以下内容：
 
       - 代理默认使用文件搜索（始终）
       - 代理的 `Knowledge` 表明它上传了 32 个文件（用于文件搜索）
-      ![Agents](../../../../../translated_images/zh/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/zh/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. 在左侧菜单中找到 `Data+indexes` 选项并点击查看详细信息。
 
       - 您应该会看到上传的 32 个数据文件。
       - 这些文件对应于 `src/files` 文件夹中的 12 个客户文件和 20 个产品文件
-      ![Data](../../../../../translated_images/zh/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/zh/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **您已验证代理操作！**
 
@@ -159,7 +159,7 @@ Azure Container App 部署了一个端点，该端点连接到为此模板在 Az
 
 返回浏览器标签中的 Container App 端点并询问：`Amanda Perez 拥有哪些产品？`。您应该会看到类似如下的内容：
 
-![Data](../../../../../translated_images/zh/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/zh/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -171,7 +171,7 @@ Azure Container App 部署了一个端点，该端点连接到为此模板在 Az
 1. 点击 `Try in Playground` 选项 - 您应该会看到如下的游乐场 UI
 1. 问同样的问题：`Amanda Perez 拥有哪些产品？`
 
-    ![Data](../../../../../translated_images/zh/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/zh/09-ask-in-playground.a1b93794f78fa676.webp)
 
 您会得到相同（或类似）的响应 - 但您还会获得额外的信息，用于了解您的代理应用程序的质量、成本和性能。例如：
 
@@ -183,7 +183,7 @@ Azure Container App 部署了一个端点，该端点连接到为此模板在 Az
 1. 将鼠标悬停在任何指标上 - 例如，安全性。您会看到类似如下的内容
 1. 评估的评分是否与您对响应安全级别的直觉相符？
 
-      ![Data](../../../../../translated_images/zh/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/zh/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
@@ -197,15 +197,15 @@ Azure Container App 部署了一个端点，该端点连接到为此模板在 Az
    - 理解响应的总 Token 数量（与输出 Token 使用量的对比）
    - 理解延迟以及执行过程中时间的分布
 
-      ![Agent](../../../../../translated_images/zh/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/zh/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. 点击 `Metadata` 标签以查看运行的其他属性，这些属性可能为后续调试问题提供有用的上下文。
 
-      ![Agent](../../../../../translated_images/zh/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/zh/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. 点击 `Evaluations` 标签以查看对代理响应的自动评估。这些评估包括安全性评估（例如，自我伤害）和代理特定评估（例如，意图解析、任务遵守）。
 
-      ![Agent](../../../../../translated_images/zh/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/zh/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. 最后但同样重要的是，点击侧边栏菜单中的 `Monitoring` 标签。
 
@@ -213,7 +213,7 @@ Azure Container App 部署了一个端点，该端点连接到为此模板在 Az
       - 跟踪应用程序使用情况，包括成本（Token）和负载（请求）。
       - 跟踪应用程序的延迟，从第一个字节（输入处理）到最后一个字节（输出）。
 
-      ![Agent](../../../../../translated_images/zh/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/zh/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

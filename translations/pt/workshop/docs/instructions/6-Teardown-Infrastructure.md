@@ -47,10 +47,10 @@ Antes de desmontar o projeto, reserve alguns minutos para fazer uma exploração
 
       Aqui estão as implementações do modelo **antes**:
 
-      ![Inicial](../../../../../translated_images/pt/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Inicial](../../../../../translated_images/pt/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       E aqui estão **depois**:
-      ![Novo](../../../../../translated_images/pt/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Novo](../../../../../translated_images/pt/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

@@ -40,7 +40,7 @@ Dirbtuvių metu taip pat susipažinsite su pagrindiniais kūrėjų įrankiais ir
 
 Dirbtuvių pamokos pateiktos Markdown formatu. Jas galite naršyti tiesiogiai GitHub arba paleisti naršyklės pagrindu sukurtą peržiūrą, kaip parodyta žemiau esančiame ekrano vaizde.
 
-![Dirbtuvės](../../../translated_images/lt/workshop.75906f133e6f8ba0.png)
+![Dirbtuvės](../../../translated_images/lt/workshop.75906f133e6f8ba0.webp)
 
 Norėdami naudotis šia galimybe - nukopijuokite sau šį saugyklą ir paleiskite GitHub Codespaces. Kai VS Code terminalas bus aktyvus, įveskite šią komandą:
 

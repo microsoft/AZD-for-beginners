@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD 초보자용: 구조화된 학습 여정
 
-![AZD-초보자용](../../translated_images/ko/azdbeginners.5527441dd9f74068.png) 
+![AZD-초보자용](../../translated_images/ko/azdbeginners.5527441dd9f74068.webp) 
 
 [![GitHub 감시자](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub 포크](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

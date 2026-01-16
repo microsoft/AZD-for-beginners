@@ -112,7 +112,7 @@ Katika hali ya `Ask`, hii itatoa msimbo ambao unaweza kunakili na kujaribu. Kati
       
       Azure Storage inatoa hifadhi ya blob kwa data ya programu na nyaraka zilizopakiwa, wakati Managed Identity inahakikisha ufikiaji salama kati ya rasilimali za Azure bila kuhifadhi hati za siri. Suluhisho zima limeundwa kwa ajili ya kupanuka na kudumishwa, na programu iliyowekwa kwenye kontena ikipanuka kiotomatiki kulingana na mahitaji huku ikitoa usalama wa ndani, ufuatiliaji, na uwezo wa CI/CD kupitia mfumo wa huduma za Azure.
 
-![Architecture](../../../../../translated_images/sw/architecture.48d94861e6e6cdc0.png)
+![Architecture](../../../../../translated_images/sw/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

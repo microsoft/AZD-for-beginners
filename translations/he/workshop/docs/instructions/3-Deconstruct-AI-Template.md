@@ -112,7 +112,7 @@ CO_OP_TRANSLATOR_METADATA:
       
       Azure Storage מספק אחסון Blob לנתוני יישום והעלאות קבצים, בעוד Managed Identity מבטיח גישה מאובטחת בין משאבי Azure ללא צורך באחסון אישורים. הפתרון כולו מעוצב לסקלביליות ותחזוקה, עם יישום מבוסס קונטיינרים שמתרחב אוטומטית בהתאם לדרישה תוך מתן אבטחה מובנית, ניטור ויכולות CI/CD דרך מערכת השירותים המנוהלים של Azure.
 
-![Architecture](../../../../../translated_images/he/architecture.48d94861e6e6cdc0.png)
+![Architecture](../../../../../translated_images/he/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

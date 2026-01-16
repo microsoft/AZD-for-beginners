@@ -112,7 +112,7 @@ AZD टेम्प्लेटहरू र Azure Developer CLI (`azd`) को 
       
       Azure Storage ले अनुप्रयोग डेटा र फाइल अपलोडहरूको लागि ब्लब स्टोरेज प्रदान गर्दछ, जबकि Managed Identity ले क्रेडेन्सियलहरू भण्डारण नगरी Azure स्रोतहरू बीच सुरक्षित पहुँच सुनिश्चित गर्दछ। सम्पूर्ण समाधान मागको आधारमा स्वचालित रूपमा स्केल गर्न डिजाइन गरिएको छ, जबकि Azure को प्रबन्धित सेवाहरूको इकोसिस्टम मार्फत निर्मित सुरक्षा, निगरानी, र CI/CD क्षमताहरू प्रदान गर्दछ।
 
-![Architecture](../../../../../translated_images/ne/architecture.48d94861e6e6cdc0.png)
+![Architecture](../../../../../translated_images/ne/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

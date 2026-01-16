@@ -47,10 +47,10 @@ Prima di smantellare il progetto, prenditi qualche minuto per fare un'esplorazio
 
       Ecco le distribuzioni del modello **prima**:
 
-      ![Iniziale](../../../../../translated_images/it/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Iniziale](../../../../../translated_images/it/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Ed ecco **dopo**:
-      ![Nuovo](../../../../../translated_images/it/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Nuovo](../../../../../translated_images/it/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

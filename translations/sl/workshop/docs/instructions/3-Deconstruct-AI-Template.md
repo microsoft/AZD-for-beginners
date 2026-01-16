@@ -112,7 +112,7 @@ V načinu `Ask` bo to zagotovilo kodo, ki jo lahko kopirate in preizkusite. V na
       
       Azure Storage zagotavlja blob shranjevanje za podatke aplikacije in nalaganje datotek, medtem ko Managed Identity zagotavlja varni dostop med Azure viri brez shranjevanja poverilnic. Celotna rešitev je zasnovana za skalabilnost in vzdržljivost, pri čemer aplikacija v vsebniku samodejno skalira glede na povpraševanje, hkrati pa zagotavlja vgrajeno varnost, spremljanje in CI/CD zmogljivosti prek ekosistema upravljanih storitev Azure.
 
-![Arhitektura](../../../../../translated_images/sl/architecture.48d94861e6e6cdc0.png)
+![Arhitektura](../../../../../translated_images/sl/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

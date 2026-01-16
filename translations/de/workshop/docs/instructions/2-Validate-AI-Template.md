@@ -51,7 +51,7 @@ Die Azure AI Foundry-Plattform bietet eine [Reihe empfohlener AZD-Vorlagen](http
 1. Besuchen Sie [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Melden Sie sich im Azure AI Foundry-Portal an, wenn Sie dazu aufgefordert werden – Sie sehen etwas Ähnliches.
 
-![Pick](../../../../../translated_images/de/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/de/01-pick-template.60d2d5fff5ebc374.webp)
 
 Die **Basic**-Optionen sind Ihre Startervorlagen:
 
@@ -60,7 +60,7 @@ Die **Basic**-Optionen sind Ihre Startervorlagen:
 
 Besuchen Sie den zweiten Link in einem neuen Browser-Tab (oder klicken Sie auf `Open in GitHub` für die zugehörige Karte). Sie sollten das Repository für diese AZD-Vorlage sehen. Nehmen Sie sich eine Minute Zeit, um die README-Datei zu erkunden. Die Anwendungsarchitektur sieht so aus:
 
-![Arch](../../../../../translated_images/de/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/de/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Nun warten Sie, bis die Bereitstellung abgeschlossen ist. **Dies dauert 10-15 Mi
       ```
 1. Ihr Azure-Portal enthält jetzt eine bereitgestellte Ressourcengruppe mit diesem Umgebungsnamen:
 
-      ![Infra](../../../../../translated_images/de/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/de/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Sie sind jetzt bereit, die bereitgestellte Infrastruktur und Anwendung zu validieren**.
 
@@ -108,7 +108,7 @@ Nun warten Sie, bis die Bereitstellung abgeschlossen ist. **Dies dauert 10-15 Mi
 
 1. Sie sollten eine gehostete Anwendungs-Frontend-UI wie diese sehen:
 
-   ![App](../../../../../translated_images/de/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/de/03-test-application.471910da12c3038e.webp)
 
 1. Versuchen Sie, ein paar [Beispielfragen](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) zu stellen:
 
@@ -117,7 +117,7 @@ Nun warten Sie, bis die Bereitstellung abgeschlossen ist. **Dies dauert 10-15 Mi
 
 1. Sie sollten Antworten erhalten, die ähnlich wie unten gezeigt sind. _Aber wie funktioniert das?_ 
 
-      ![App](../../../../../translated_images/de/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/de/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Die Azure Container App stellt einen Endpunkt bereit, der mit dem KI-Agenten ver
 1. Klicken Sie auf die Ressource `Azure AI Foundry` in dieser Liste
 
 1. Sie sollten dies sehen. Klicken Sie auf die Schaltfläche `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/de/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/de/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Sie sollten die Foundry-Projektseite für Ihre KI-Anwendung sehen
-   ![Project](../../../../../translated_images/de/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/de/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Klicken Sie auf `Agents` – Sie sehen den Standard-Agenten, der in Ihrem Projekt bereitgestellt wurde
-   ![Agents](../../../../../translated_images/de/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/de/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Wählen Sie ihn aus – und Sie sehen die Details des Agenten. Beachten Sie Folgendes:
 
       - Der Agent verwendet standardmäßig File Search (immer)
       - Die `Knowledge` des Agenten zeigt an, dass 32 Dateien hochgeladen wurden (für die Dateisuche)
-      ![Agents](../../../../../translated_images/de/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/de/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Suchen Sie nach der Option `Data+indexes` im linken Menü und klicken Sie für Details. 
 
       - Sie sollten die 32 hochgeladenen Datenfiles für das Wissen sehen.
       - Diese entsprechen den 12 Kundenfiles und 20 Produktfiles unter `src/files` 
-      ![Data](../../../../../translated_images/de/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/de/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Sie haben die Funktion des Agenten validiert!** 
 
@@ -158,7 +158,7 @@ Die Azure Container App stellt einen Endpunkt bereit, der mit dem KI-Agenten ver
 
 Öffnen Sie den Browser-Tab mit dem Container-App-Endpunkt erneut und fragen Sie: `What products does Amanda Perez own?`. Sie sollten etwas Ähnliches sehen:
 
-![Data](../../../../../translated_images/de/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/de/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Lassen Sie uns ein besseres Verständnis für die Fähigkeiten von Azure AI Foun
 1. Klicken Sie auf die Option `Try in Playground` – Sie sollten eine Spielplatz-UI wie diese erhalten
 1. Stellen Sie dieselbe Frage: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/de/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/de/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Sie erhalten dieselbe (oder ähnliche) Antwort – aber Sie erhalten auch zusätzliche Informationen, die Ihnen helfen können, die Qualität, Kosten und Leistung Ihrer agentenbasierten Anwendung zu verstehen. Zum Beispiel:
 
@@ -182,7 +182,7 @@ Sie sehen auch eine _Statistik_-Zeile unter der Antwort.
 1. Fahren Sie mit der Maus über eine Metrik – z. B. Sicherheit. Sie sehen etwas wie dies
 1. Entspricht die bewertete Einstufung Ihrer Intuition für das Sicherheitsniveau der Antwort?
 
-      ![Data](../../../../../translated_images/de/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/de/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -196,15 +196,15 @@ Beobachtbarkeit bedeutet, Ihre Anwendung so zu instrumentieren, dass Daten gener
    - Verstehen Sie die Gesamtanzahl der Tokens (vs. der verwendeten Output-Tokens) für die Antwort
    - Verstehen Sie die Latenz und wo Zeit bei der Ausführung verbracht wird
 
-      ![Agent](../../../../../translated_images/de/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/de/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Klicken Sie auf die Registerkarte `Metadata`, um zusätzliche Attribute für die Ausführung zu sehen, die nützliche Kontextinformationen für die spätere Fehlerbehebung liefern können.   
 
-      ![Agent](../../../../../translated_images/de/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/de/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Klicken Sie auf die Registerkarte `Evaluations`, um automatische Bewertungen der Agentenantwort zu sehen. Dazu gehören Sicherheitsbewertungen (z. B. Selbstverletzung) und agentenspezifische Bewertungen (z. B. Intent-Auflösung, Aufgabenbefolgung).
 
-      ![Agent](../../../../../translated_images/de/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/de/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Zuletzt klicken Sie auf die Registerkarte `Monitoring` im Seitenmenü.
 
@@ -212,7 +212,7 @@ Beobachtbarkeit bedeutet, Ihre Anwendung so zu instrumentieren, dass Daten gener
       - Verfolgen Sie die Nutzung der Anwendung in Bezug auf Kosten (Tokens) und Last (Anfragen).
       - Verfolgen Sie die Latenz der Anwendung bis zum ersten Byte (Eingabeverarbeitung) und bis zum letzten Byte (Ausgabe).
 
-      ![Agent](../../../../../translated_images/de/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/de/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/he/azd-flow.19ea67c2f81eaa66.png)
+![Flow](../../../../../translated_images/he/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ azd help
 **🎯 | תרגיל**: <br/> 
 בקר בגלריית [Awesome AZD](https://azure.github.io/awesome-azd/) והשתמש במסננים כדי לחקור את 250+ התבניות הזמינות כרגע. ראה אם תוכל למצוא אחת שמתאימה לדרישות התרחיש שלך.
 
-![Code](../../../../../translated_images/he/azd-code-to-cloud.2d9503d69d3400da.png)
+![Code](../../../../../translated_images/he/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

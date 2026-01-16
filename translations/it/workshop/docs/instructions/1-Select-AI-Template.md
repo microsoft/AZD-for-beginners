@@ -51,7 +51,7 @@ Con `azd`, il tuo percorso di distribuzione può essere semplice come:
 azd help
 ```
 
-![Flow](../../../../../translated_images/it/azd-flow.19ea67c2f81eaa66.png)
+![Flow](../../../../../translated_images/it/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ Quando crei o riutilizzi un template AZD per il _tuo_ scenario, considera queste
 **🎯 | ESERCIZIO**: <br/> 
 Visita la galleria [Awesome AZD](https://azure.github.io/awesome-azd/) e usa i filtri per esplorare i 250+ template attualmente disponibili. Vedi se riesci a trovarne uno che si allinea ai requisiti del _tuo_ scenario.
 
-![Code](../../../../../translated_images/it/azd-code-to-cloud.2d9503d69d3400da.png)
+![Code](../../../../../translated_images/it/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

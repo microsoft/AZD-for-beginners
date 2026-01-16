@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       यहां मॉडल तैनाती **पहले** की स्थिति में है:
 
-      ![प्रारंभिक](../../../../../translated_images/hi/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![प्रारंभिक](../../../../../translated_images/hi/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       और यह **बाद में** की स्थिति में है:
-      ![नया](../../../../../translated_images/hi/14-deploy-new.f7f3c355a3cf7299.png)
+      ![नया](../../../../../translated_images/hi/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

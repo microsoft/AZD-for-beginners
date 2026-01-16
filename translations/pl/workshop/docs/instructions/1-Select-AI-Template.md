@@ -51,7 +51,7 @@ Dzięki `azd` proces wdrażania może być tak prosty, jak:
 azd help
 ```
 
-![Flow](../../../../../translated_images/pl/azd-flow.19ea67c2f81eaa66.png)
+![Flow](../../../../../translated_images/pl/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -71,7 +71,7 @@ Podczas tworzenia lub ponownego używania szablonu AZD dla _Twojego_ scenariusza
 **🎯 | ĆWICZENIE**: <br/> 
 Odwiedź galerię [Awesome AZD](https://azure.github.io/awesome-azd/) i użyj filtrów, aby przeszukać ponad 250 dostępnych szablonów. Sprawdź, czy znajdziesz taki, który odpowiada wymaganiom Twojego scenariusza.
 
-![Code](../../../../../translated_images/pl/azd-code-to-cloud.2d9503d69d3400da.png)
+![Code](../../../../../translated_images/pl/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

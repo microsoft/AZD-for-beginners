@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. Перейдите на [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Войдите в портал Azure AI Foundry, когда будет предложено — вы увидите что-то подобное.
 
-![Pick](../../../../../translated_images/ru/01-pick-template.60d2d5fff5ebc374.png)
+![Pick](../../../../../translated_images/ru/01-pick-template.60d2d5fff5ebc374.webp)
 
 **Базовые** варианты — это ваши стартовые шаблоны:
 
@@ -60,7 +60,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Откройте вторую ссылку в новой вкладке браузера (или нажмите `Open in GitHub` на соответствующей карточке). Вы должны увидеть репозиторий для этого шаблона AZD. Потратьте минуту, чтобы изучить README. Архитектура приложения выглядит следующим образом:
 
-![Arch](../../../../../translated_images/ru/architecture.8cec470ec15c65c7.png)
+![Arch](../../../../../translated_images/ru/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ CO_OP_TRANSLATOR_METADATA:
       ```
 1. В вашем портале Azure теперь будет создана группа ресурсов с именем вашей среды:
 
-      ![Infra](../../../../../translated_images/ru/02-provisioned-infra.46c706b14f56e0bf.png)
+      ![Infra](../../../../../translated_images/ru/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Теперь вы готовы проверить развернутую инфраструктуру и приложение**.
 
@@ -108,7 +108,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. Вы должны увидеть хостинг пользовательского интерфейса приложения, как показано ниже:
 
-   ![App](../../../../../translated_images/ru/03-test-application.471910da12c3038e.png)
+   ![App](../../../../../translated_images/ru/03-test-application.471910da12c3038e.webp)
 
 1. Попробуйте задать несколько [примеров вопросов](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. Вы должны получить ответы, похожие на показанные ниже. _Но как это работает?_ 
 
-      ![App](../../../../../translated_images/ru/03-test-question.521c1e863cbaddb6.png)
+      ![App](../../../../../translated_images/ru/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App развертывает конечную точку, кот
 1. Нажмите на ресурс `Azure AI Foundry` в списке
 
 1. Вы увидите следующее. Нажмите кнопку `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/ru/04-view-foundry-project.fb94ca41803f28f3.png)
+   ![Foundry](../../../../../translated_images/ru/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Вы увидите страницу проекта Foundry для вашего AI-приложения
-   ![Project](../../../../../translated_images/ru/05-visit-foundry-portal.d734e98135892d7e.png)
+   ![Project](../../../../../translated_images/ru/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Нажмите на `Agents` — вы увидите стандартного агента, подготовленного в вашем проекте
-   ![Agents](../../../../../translated_images/ru/06-visit-agents.bccb263f77b00a09.png)
+   ![Agents](../../../../../translated_images/ru/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Выберите его — и вы увидите детали агента. Обратите внимание на следующее:
 
       - Агент по умолчанию использует File Search (всегда)
       - В разделе `Knowledge` указано, что загружено 32 файла (для поиска по файлам)
-      ![Agents](../../../../../translated_images/ru/07-view-agent-details.0e049f37f61eae62.png)
+      ![Agents](../../../../../translated_images/ru/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Найдите опцию `Data+indexes` в левом меню и нажмите для получения деталей. 
 
       - Вы увидите 32 загруженных файла данных для знаний.
       - Они будут соответствовать 12 клиентским файлам и 20 продуктовым файлам в папке `src/files` 
-      ![Data](../../../../../translated_images/ru/08-visit-data-indexes.5a4cc1686fa0d19a.png)
+      ![Data](../../../../../translated_images/ru/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Вы проверили работу агента!** 
 
@@ -158,7 +158,7 @@ Azure Container App развертывает конечную точку, кот
 
 Вернитесь на вкладку браузера с конечной точкой Container App и спросите: `What products does Amanda Perez own?`. Вы должны увидеть что-то подобное:
 
-![Data](../../../../../translated_images/ru/09-ask-in-aca.4102297fc465a4d5.png)
+![Data](../../../../../translated_images/ru/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Azure Container App развертывает конечную точку, кот
 1. Нажмите опцию `Try in Playground` — вы увидите интерфейс Playground, как показано ниже
 1. Задайте тот же вопрос: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/ru/09-ask-in-playground.a1b93794f78fa676.png)
+    ![Data](../../../../../translated_images/ru/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Вы получите тот же (или похожий) ответ — но также получите дополнительную информацию, которую можно использовать для оценки качества, стоимости и производительности вашего агентного приложения. Например:
 
@@ -182,7 +182,7 @@ Azure Container App развертывает конечную точку, кот
 1. Наведите курсор на любой показатель — например, Safety. Вы увидите что-то подобное
 1. Соответствует ли оценка вашей интуиции относительно уровня безопасности ответа?
 
-      ![Data](../../../../../translated_images/ru/10-view-run-info-meter.6cdb89a0eea5531f.png)
+      ![Data](../../../../../translated_images/ru/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
@@ -196,15 +196,15 @@ Azure Container App развертывает конечную точку, кот
    - Поймите общее количество токенов (по сравнению с использованием токенов для вывода) для ответа
    - Поймите задержку и где тратится время на выполнение
 
-      ![Agent](../../../../../translated_images/ru/10-view-run-info.b20ebd75fef6a1cc.png)
+      ![Agent](../../../../../translated_images/ru/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Нажмите вкладку `Metadata`, чтобы увидеть дополнительные атрибуты выполнения, которые могут быть полезны для отладки проблем в будущем.   
 
-      ![Agent](../../../../../translated_images/ru/11-view-run-info-metadata.7966986122c7c2df.png)
+      ![Agent](../../../../../translated_images/ru/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Нажмите вкладку `Evaluations`, чтобы увидеть автоматические оценки, сделанные для ответа агента. Они включают оценки безопасности (например, Self-harm) и специфические для агента оценки (например, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/ru/12-view-run-info-evaluations.ef25e4577d70efeb.png)
+      ![Agent](../../../../../translated_images/ru/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. И наконец, нажмите вкладку `Monitoring` в боковом меню.
 
@@ -212,7 +212,7 @@ Azure Container App развертывает конечную точку, кот
       - Отслеживайте использование приложения с точки зрения затрат (токены) и нагрузки (запросы).
       - Отслеживайте задержку приложения до первого байта (обработка ввода) и последнего байта (вывод).
 
-      ![Agent](../../../../../translated_images/ru/13-monitoring-resources.5148015f7311807f.png)
+      ![Agent](../../../../../translated_images/ru/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

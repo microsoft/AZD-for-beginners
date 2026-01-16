@@ -47,10 +47,10 @@ Prije nego što raspremimo projekt, odvojite nekoliko minuta za otvoreno istraž
 
       Evo implementacija modela **prije**:
 
-      ![Početno](../../../../../translated_images/hr/14-deploy-initial.30e4cf1c29b587bc.png)
+      ![Početno](../../../../../translated_images/hr/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       A evo ih **poslije**:
-      ![Novo](../../../../../translated_images/hr/14-deploy-new.f7f3c355a3cf7299.png)
+      ![Novo](../../../../../translated_images/hr/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
