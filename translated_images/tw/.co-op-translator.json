@@ -1,0 +1,152 @@
+{
+  "azdbeginners.5527441dd9f74068.webp": {
+    "original_hash": "ada36e188b9cc2ea2652348cea70606b",
+    "translation_date": "2026-01-16T09:17:30+00:00",
+    "source_file": "images/azdbeginners.png",
+    "language_code": "tw"
+  },
+  "workshop.75906f133e6f8ba0.webp": {
+    "original_hash": "376d417dff86b55ddd7d4fc62a339fb6",
+    "translation_date": "2026-01-16T09:17:53+00:00",
+    "source_file": "workshop/docs/assets/workshop.png",
+    "language_code": "tw"
+  },
+  "architecture.48d94861e6e6cdc0.webp": {
+    "original_hash": "fdf944befc531733fa2782fcc8c0ed7e",
+    "translation_date": "2026-01-16T09:18:03+00:00",
+    "source_file": "workshop/docs/assets/architecture.png",
+    "language_code": "tw"
+  },
+  "logo.2b7b1b37bf4a09af.webp": {
+    "original_hash": "7815046193786b53e85cf916ceba7779",
+    "translation_date": "2026-01-16T09:18:06+00:00",
+    "source_file": "workshop/docs/assets/logo.png",
+    "language_code": "tw"
+  },
+  "10-view-run-info-meter.6cdb89a0eea5531f.webp": {
+    "original_hash": "7c164f1496706256079adf2947325a37",
+    "translation_date": "2026-01-16T09:18:12+00:00",
+    "source_file": "workshop/docs/instructions/assets/10-view-run-info-meter.png",
+    "language_code": "tw"
+  },
+  "03-test-application.471910da12c3038e.webp": {
+    "original_hash": "29c420033698eb4e93a38ee84cc1f656",
+    "translation_date": "2026-01-16T09:18:18+00:00",
+    "source_file": "workshop/docs/instructions/assets/03-test-application.png",
+    "language_code": "tw"
+  },
+  "azd-flow.19ea67c2f81eaa66.webp": {
+    "original_hash": "41fc7dcc81164e332655a4da60b606f8",
+    "translation_date": "2026-01-16T09:18:23+00:00",
+    "source_file": "workshop/docs/instructions/assets/azd-flow.png",
+    "language_code": "tw"
+  },
+  "08-visit-data-indexes.5a4cc1686fa0d19a.webp": {
+    "original_hash": "34a17908597ca2d19cb8446d74fd97fc",
+    "translation_date": "2026-01-16T09:18:57+00:00",
+    "source_file": "workshop/docs/instructions/assets/08-visit-data-indexes.png",
+    "language_code": "tw"
+  },
+  "14-deploy-initial.30e4cf1c29b587bc.webp": {
+    "original_hash": "dc4279362af80a3f43b17e8cdce9e5e9",
+    "translation_date": "2026-01-16T09:19:16+00:00",
+    "source_file": "workshop/docs/instructions/assets/14-deploy-initial.png",
+    "language_code": "tw"
+  },
+  "12-view-run-info-evaluations.ef25e4577d70efeb.webp": {
+    "original_hash": "ee4ea00b127fd95b57a2fe3dda731122",
+    "translation_date": "2026-01-16T09:19:43+00:00",
+    "source_file": "workshop/docs/instructions/assets/12-view-run-info-evaluations.png",
+    "language_code": "tw"
+  },
+  "09-ask-in-playground.a1b93794f78fa676.webp": {
+    "original_hash": "5b608c5c7849331a21508c80563bc8d7",
+    "translation_date": "2026-01-16T09:20:19+00:00",
+    "source_file": "workshop/docs/instructions/assets/09-ask-in-playground.png",
+    "language_code": "tw"
+  },
+  "azd-code-to-cloud.2d9503d69d3400da.webp": {
+    "original_hash": "15ec1b9b56fee654e8d19329fc9bcef7",
+    "translation_date": "2026-01-16T09:20:42+00:00",
+    "source_file": "workshop/docs/instructions/assets/azd-code-to-cloud.png",
+    "language_code": "tw"
+  },
+  "14-deploy-new.f7f3c355a3cf7299.webp": {
+    "original_hash": "d4fa67c97f62f9ab423488c716653437",
+    "translation_date": "2026-01-16T09:21:03+00:00",
+    "source_file": "workshop/docs/instructions/assets/14-deploy-new.png",
+    "language_code": "tw"
+  },
+  "02-provisioned-infra.46c706b14f56e0bf.webp": {
+    "original_hash": "ee6bbd68cc8d193952dbad793bac3fe9",
+    "translation_date": "2026-01-16T09:21:30+00:00",
+    "source_file": "workshop/docs/instructions/assets/02-provisioned-infra.png",
+    "language_code": "tw"
+  },
+  "01-pick-template.60d2d5fff5ebc374.webp": {
+    "original_hash": "2517ada8ee02e296cd7158f4a87abed0",
+    "translation_date": "2026-01-16T09:22:06+00:00",
+    "source_file": "workshop/docs/instructions/assets/01-pick-template.png",
+    "language_code": "tw"
+  },
+  "architecture.8cec470ec15c65c7.webp": {
+    "original_hash": "fdf944befc531733fa2782fcc8c0ed7e",
+    "translation_date": "2026-01-16T09:22:16+00:00",
+    "source_file": "workshop/docs/instructions/assets/architecture.png",
+    "language_code": "tw"
+  },
+  "04-view-foundry-project.fb94ca41803f28f3.webp": {
+    "original_hash": "9bc9a6d841d1b77c02800b5f14a33a81",
+    "translation_date": "2026-01-16T09:22:28+00:00",
+    "source_file": "workshop/docs/instructions/assets/04-view-foundry-project.png",
+    "language_code": "tw"
+  },
+  "09-ask-in-aca.4102297fc465a4d5.webp": {
+    "original_hash": "26bfb4f4cf502869145fcd693e208624",
+    "translation_date": "2026-01-16T09:22:45+00:00",
+    "source_file": "workshop/docs/instructions/assets/09-ask-in-aca.png",
+    "language_code": "tw"
+  },
+  "03-test-question.521c1e863cbaddb6.webp": {
+    "original_hash": "59e56717f3d511286f858931d33769c0",
+    "translation_date": "2026-01-16T09:23:05+00:00",
+    "source_file": "workshop/docs/instructions/assets/03-test-question.png",
+    "language_code": "tw"
+  },
+  "11-view-run-info-metadata.7966986122c7c2df.webp": {
+    "original_hash": "a01756619b726598582ba03e9435238c",
+    "translation_date": "2026-01-16T09:23:27+00:00",
+    "source_file": "workshop/docs/instructions/assets/11-view-run-info-metadata.png",
+    "language_code": "tw"
+  },
+  "10-view-run-info.b20ebd75fef6a1cc.webp": {
+    "original_hash": "80052d44487ceefcd3b783fc2dea6127",
+    "translation_date": "2026-01-16T09:23:50+00:00",
+    "source_file": "workshop/docs/instructions/assets/10-view-run-info.png",
+    "language_code": "tw"
+  },
+  "05-visit-foundry-portal.d734e98135892d7e.webp": {
+    "original_hash": "c94c5a71dedd317d42556568d060212f",
+    "translation_date": "2026-01-16T09:24:12+00:00",
+    "source_file": "workshop/docs/instructions/assets/05-visit-foundry-portal.png",
+    "language_code": "tw"
+  },
+  "07-view-agent-details.0e049f37f61eae62.webp": {
+    "original_hash": "6097d47a2547f3a33a634d731e86cf47",
+    "translation_date": "2026-01-16T09:24:28+00:00",
+    "source_file": "workshop/docs/instructions/assets/07-view-agent-details.png",
+    "language_code": "tw"
+  },
+  "06-visit-agents.bccb263f77b00a09.webp": {
+    "original_hash": "f42a22ca9cdb20b3523018e461bc4146",
+    "translation_date": "2026-01-16T09:24:41+00:00",
+    "source_file": "workshop/docs/instructions/assets/06-visit-agents.png",
+    "language_code": "tw"
+  },
+  "13-monitoring-resources.5148015f7311807f.webp": {
+    "original_hash": "5aadbb4b82b9b865c2173369accb7ad1",
+    "translation_date": "2026-01-16T09:25:19+00:00",
+    "source_file": "workshop/docs/instructions/assets/13-monitoring-resources.png",
+    "language_code": "tw"
+  }
+}
