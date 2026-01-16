@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 บทเรียนในเวิร์กช็อปนี้อยู่ในรูปแบบ Markdown คุณสามารถเข้าถึงได้โดยตรงใน GitHub หรือเปิดดูตัวอย่างบนเบราว์เซอร์ตามภาพด้านล่าง
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.th.png)
+![Workshop](../../../translated_images/th/workshop.75906f133e6f8ba0.png)
 
 หากต้องการใช้ตัวเลือกนี้ ให้ fork repository ไปยังโปรไฟล์ของคุณ และเปิด GitHub Codespaces เมื่อเทอร์มินัล VS Code พร้อมใช้งาน ให้พิมพ์คำสั่งนี้:
 

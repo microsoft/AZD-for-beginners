@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. قم بزيارة [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. قم بتسجيل الدخول إلى بوابة Azure AI Foundry عندما يُطلب منك ذلك - سترى شيئًا مثل هذا.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.ar.png)
+![Pick](../../../../../translated_images/ar/01-pick-template.60d2d5fff5ebc374.png)
 
 **الخيارات الأساسية** هي قوالب البداية الخاصة بك:
 
@@ -60,7 +60,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 قم بزيارة الرابط الثاني في علامة تبويب جديدة في المتصفح (أو انقر على `Open in GitHub` للبطاقة ذات الصلة). يجب أن ترى المستودع الخاص بهذا القالب AZD. خذ دقيقة لاستكشاف ملف README. تبدو بنية التطبيق كما يلي:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.ar.png)
+![Arch](../../../../../translated_images/ar/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -92,7 +92,7 @@ CO_OP_TRANSLATOR_METADATA:
       ```
 1. سيكون لديك الآن مجموعة موارد مخصصة في بوابة Azure باسم البيئة:
 
-![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.ar.png)
+![Infra](../../../../../translated_images/ar/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **أنت الآن جاهز للتحقق من صحة البنية التحتية والتطبيق المنشور**.
 
@@ -108,7 +108,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. يجب أن ترى واجهة مستخدم أمامية للتطبيق المستضاف مثل هذا:
 
-![App](../../../../../translated_images/03-test-application.471910da12c3038e.ar.png)
+![App](../../../../../translated_images/ar/03-test-application.471910da12c3038e.png)
 
 1. حاول طرح بعض [الأسئلة التجريبية](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. يجب أن تحصل على إجابات مشابهة لما هو موضح أدناه. _لكن كيف يعمل هذا؟_
 
-![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.ar.png)
+![App](../../../../../translated_images/ar/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -130,25 +130,25 @@ CO_OP_TRANSLATOR_METADATA:
 1. انقر على مورد `Azure AI Foundry` في تلك القائمة
 
 1. يجب أن ترى هذا. انقر على زر `Go to Azure AI Foundry Portal`. 
-![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.ar.png)
+![Foundry](../../../../../translated_images/ar/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. يجب أن ترى صفحة مشروع Foundry لتطبيق الذكاء الاصطناعي الخاص بك
-![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.ar.png)
+![Project](../../../../../translated_images/ar/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. انقر على `Agents` - سترى الوكيل الافتراضي الذي تم توفيره في مشروعك
-![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.ar.png)
+![Agents](../../../../../translated_images/ar/06-visit-agents.bccb263f77b00a09.png)
 
 1. اختره - وسترى تفاصيل الوكيل. لاحظ ما يلي:
 
 - يستخدم الوكيل البحث في الملفات بشكل افتراضي (دائمًا)
 - يشير `Knowledge` الخاص بالوكيل إلى أنه تم تحميل 32 ملفًا (للبحث في الملفات)
-![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.ar.png)
+![Agents](../../../../../translated_images/ar/07-view-agent-details.0e049f37f61eae62.png)
 
 1. ابحث عن خيار `Data+indexes` في القائمة اليسرى وانقر للحصول على التفاصيل.
 
 - يجب أن ترى 32 ملف بيانات تم تحميلها للمعرفة.
 - ستتوافق هذه مع 12 ملفًا للعميل و20 ملفًا للمنتجات تحت `src/files` 
-![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.ar.png)
+![Data](../../../../../translated_images/ar/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **لقد تحققت من صحة تشغيل الوكيل!**
 
@@ -158,7 +158,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 عد إلى علامة التبويب في المتصفح مع نقطة نهاية تطبيق Container واسأل: `ما هي المنتجات التي تمتلكها Amanda Perez؟`. يجب أن ترى شيئًا مثل هذا:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.ar.png)
+![Data](../../../../../translated_images/ar/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -170,7 +170,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. انقر على خيار `Try in Playground` - يجب أن تحصل على واجهة ملعب مثل هذه
 1. اسأل نفس السؤال: `ما هي المنتجات التي تمتلكها Amanda Perez؟`
 
-![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.ar.png)
+![Data](../../../../../translated_images/ar/09-ask-in-playground.a1b93794f78fa676.png)
 
 تحصل على نفس الاستجابة (أو مشابهة) - ولكنك تحصل أيضًا على معلومات إضافية يمكنك استخدامها لفهم جودة، تكلفة، وأداء تطبيقك الوكلي. على سبيل المثال:
 
@@ -182,7 +182,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. مرر فوق أي مقياس - على سبيل المثال، الأمان. سترى شيئًا مثل هذا
 1. هل تتطابق التقييمات المقدرة مع حدسك لمستوى أمان الاستجابة؟
 
-![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.ar.png)
+![Data](../../../../../translated_images/ar/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---
 
@@ -196,15 +196,15 @@ CO_OP_TRANSLATOR_METADATA:
 - فهم إجمالي عدد الرموز (مقابل استخدام رموز الإخراج) للاستجابة
 - فهم التأخير وأين يتم إنفاق الوقت في التنفيذ
 
-![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.ar.png)
+![Agent](../../../../../translated_images/ar/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. انقر على علامة التبويب `Metadata` لرؤية سمات إضافية للتشغيل، التي قد توفر سياقًا مفيدًا لتصحيح المشكلات لاحقًا.
 
-![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.ar.png)
+![Agent](../../../../../translated_images/ar/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. انقر على علامة التبويب `Evaluations` لرؤية التقييمات التلقائية التي تم إجراؤها على استجابة الوكيل. تتضمن هذه التقييمات تقييمات الأمان (مثل، إيذاء النفس) وتقييمات خاصة بالوكيل (مثل، حل النية، الالتزام بالمهمة).
 
-![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.ar.png)
+![Agent](../../../../../translated_images/ar/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. أخيرًا وليس آخرًا، انقر على علامة التبويب `Monitoring` في القائمة الجانبية.
 
@@ -212,7 +212,7 @@ CO_OP_TRANSLATOR_METADATA:
 - تتبع استخدام التطبيق من حيث التكاليف (الرموز) والتحميل (الطلبات).
 - تتبع تأخير التطبيق إلى أول بايت (معالجة الإدخال) وآخر بايت (الإخراج).
 
-![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.ar.png)
+![Agent](../../../../../translated_images/ar/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

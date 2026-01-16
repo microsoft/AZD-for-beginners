@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       ఇక్కడ **ముందు** మోడల్ డిప్లాయ్‌మెంట్లు ఉన్నాయి:
 
-      ![ప్రారంభం](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.te.png)
+      ![ప్రారంభం](../../../../../translated_images/te/14-deploy-initial.30e4cf1c29b587bc.png)
 
       మరియు ఇది **తర్వాత** ఇలా ఉంది:
-      ![కొత్తది](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.te.png)
+      ![కొత్తది](../../../../../translated_images/te/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

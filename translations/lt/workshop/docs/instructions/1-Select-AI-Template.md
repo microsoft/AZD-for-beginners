@@ -51,7 +51,7 @@ Naudojant `azd`, jūsų diegimo procesas gali būti toks paprastas:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.lt.png)
+![Flow](../../../../../translated_images/lt/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -71,7 +71,7 @@ Kuriant arba naudojant AZD šabloną _savo_ scenarijui, apsvarstykite šiuos kla
 **🎯 | PRATIMAS**: <br/> 
 Apsilankykite [Awesome AZD](https://azure.github.io/awesome-azd/) galerijoje ir naudokite filtrus, kad peržiūrėtumėte daugiau nei 250 šiuo metu prieinamų šablonų. Pažiūrėkite, ar galite rasti tokį, kuris atitinka _jūsų_ scenarijaus reikalavimus.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.lt.png)
+![Code](../../../../../translated_images/lt/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

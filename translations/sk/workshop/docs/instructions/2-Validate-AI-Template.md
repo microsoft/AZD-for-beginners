@@ -51,7 +51,7 @@ Platforma Azure AI Foundry obsahuje [sadu odporúčaných AZD šablón](https://
 1. Navštívte [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Prihláste sa do portálu Azure AI Foundry, keď budete vyzvaní - uvidíte niečo takéto.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.sk.png)
+![Pick](../../../../../translated_images/sk/01-pick-template.60d2d5fff5ebc374.png)
 
 **Základné** možnosti sú vaše štartovacie šablóny:
 
@@ -60,7 +60,7 @@ Platforma Azure AI Foundry obsahuje [sadu odporúčaných AZD šablón](https://
 
 Navštívte druhý odkaz v novom okne prehliadača (alebo kliknite na `Open in GitHub` pre súvisiacu kartu). Mali by ste vidieť repozitár pre túto AZD šablónu. Venujte chvíľu preskúmaniu README. Architektúra aplikácie vyzerá takto:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.sk.png)
+![Arch](../../../../../translated_images/sk/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -92,7 +92,7 @@ Teraz počkajte, kým sa zriadenie dokončí. **Toto trvá 10-15 minút**
       ```
 1. Váš Azure Portal bude teraz obsahovať zriadenú skupinu zdrojov s týmto názvom prostredia:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.sk.png)
+      ![Infra](../../../../../translated_images/sk/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **Teraz ste pripravení overiť nasadenú infraštruktúru a aplikáciu**.
 
@@ -108,7 +108,7 @@ Teraz počkajte, kým sa zriadenie dokončí. **Toto trvá 10-15 minút**
 
 1. Mali by ste vidieť hostované aplikačné rozhranie ako toto:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.sk.png)
+   ![App](../../../../../translated_images/sk/03-test-application.471910da12c3038e.png)
 
 1. Skúste položiť niekoľko [ukážkových otázok](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Teraz počkajte, kým sa zriadenie dokončí. **Toto trvá 10-15 minút**
 
 1. Mali by ste dostať odpovede podobné tým, ktoré sú uvedené nižšie. _Ale ako to funguje?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.sk.png)
+      ![App](../../../../../translated_images/sk/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App nasadzuje endpoint, ktorý sa pripája k AI agentovi zriaden
 1. Kliknite na zdroj `Azure AI Foundry` v zozname
 
 1. Mali by ste vidieť toto. Kliknite na tlačidlo `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.sk.png)
+   ![Foundry](../../../../../translated_images/sk/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. Mali by ste vidieť stránku projektu Foundry pre vašu AI aplikáciu
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.sk.png)
+   ![Project](../../../../../translated_images/sk/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. Kliknite na `Agents` - uvidíte predvoleného agenta zriadeného vo vašom projekte
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.sk.png)
+   ![Agents](../../../../../translated_images/sk/06-visit-agents.bccb263f77b00a09.png)
 
 1. Vyberte ho - a uvidíte podrobnosti o agentovi. Všimnite si nasledujúce:
 
       - Agent používa File Search predvolene (vždy)
       - `Knowledge` agenta naznačuje, že má nahraných 32 súborov (pre File Search)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.sk.png)
+      ![Agents](../../../../../translated_images/sk/07-view-agent-details.0e049f37f61eae62.png)
 
 1. Vyhľadajte možnosť `Data+indexes` v ľavom menu a kliknite na podrobnosti. 
 
       - Mali by ste vidieť 32 dátových súborov nahraných pre znalosti.
       - Tieto budú zodpovedať 12 zákazníckym súborom a 20 produktovým súborom v `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.sk.png)
+      ![Data](../../../../../translated_images/sk/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **Overili ste operáciu agenta!** 
 
@@ -158,7 +158,7 @@ Azure Container App nasadzuje endpoint, ktorý sa pripája k AI agentovi zriaden
 
 Vráťte sa na kartu prehliadača s endpointom Container App a spýtajte sa: `What products does Amanda Perez own?`. Mali by ste vidieť niečo takéto:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.sk.png)
+![Data](../../../../../translated_images/sk/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -170,7 +170,7 @@ Poďme si vybudovať trochu viac intuície pre schopnosti Azure AI Foundry tým,
 1. Kliknite na možnosť `Try in Playground` - mali by ste dostať rozhranie Playground ako toto
 1. Spýtajte sa tú istú otázku: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.sk.png)
+    ![Data](../../../../../translated_images/sk/09-ask-in-playground.a1b93794f78fa676.png)
 
 Dostanete tú istú (alebo podobnú) odpoveď - ale tiež dostanete ďalšie informácie, ktoré môžete použiť na pochopenie kvality, nákladov a výkonu vašej agentickej aplikácie. Napríklad:
 
@@ -182,7 +182,7 @@ Tiež vidíte _stats_ riadok pod odpoveďou.
 1. Prejdite myšou nad ktoroukoľvek metrikou - napr. Safety. Vidíte niečo takéto
 1. Zodpovedá hodnotenie vašej intuícii pre úroveň bezpečnosti odpovede?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.sk.png)
+      ![Data](../../../../../translated_images/sk/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Pozorovateľnosť znamená inštrumentáciu vašej aplikácie na generovanie dá
    - Pochopte celkový počet tokenov (vs. použitie výstupných tokenov) pre odpoveď
    - Pochopte latenciu a kde sa trávi čas pri vykonávaní
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.sk.png)
+      ![Agent](../../../../../translated_images/sk/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. Kliknite na kartu `Metadata`, aby ste videli ďalšie atribúty behu, ktoré môžu poskytnúť užitočný kontext pre ladenie problémov neskôr.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.sk.png)
+      ![Agent](../../../../../translated_images/sk/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. Kliknite na kartu `Evaluations`, aby ste videli automatické hodnotenia vykonané na odpovedi agenta. Tieto zahŕňajú hodnotenia bezpečnosti (napr. Sebapoškodenie) a špecifické hodnotenia agenta (napr. Rozlíšenie zámeru, Dodržiavanie úlohy).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.sk.png)
+      ![Agent](../../../../../translated_images/sk/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. Nakoniec kliknite na kartu `Monitoring` v bočnom menu.
 
@@ -212,7 +212,7 @@ Pozorovateľnosť znamená inštrumentáciu vašej aplikácie na generovanie dá
       - Sledujte používanie aplikácie z hľadiska nákladov (tokeny) a záťaže (požiadavky).
       - Sledujte latenciu aplikácie od prvého bajtu (spracovanie vstupu) po posledný bajt (výstup).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.sk.png)
+      ![Agent](../../../../../translated_images/sk/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

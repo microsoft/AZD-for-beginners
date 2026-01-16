@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.ru.png)
+![Flow](../../../../../translated_images/ru/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -71,7 +71,7 @@ azd help
 **🎯 | УПРАЖНЕНИЕ**: <br/> 
 Посетите галерею [Awesome AZD](https://azure.github.io/awesome-azd/) и используйте фильтры, чтобы изучить более 250 доступных шаблонов. Попробуйте найти тот, который соответствует _вашим_ требованиям.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.ru.png)
+![Code](../../../../../translated_images/ru/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

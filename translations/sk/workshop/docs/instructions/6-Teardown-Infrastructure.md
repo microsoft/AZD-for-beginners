@@ -47,10 +47,10 @@ Predtým, než projekt zrušíme, venujte pár minút voľnému skúmaniu.
 
       Tu sú nasadenia modelu **predtým**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.sk.png)
+      ![Initial](../../../../../translated_images/sk/14-deploy-initial.30e4cf1c29b587bc.png)
 
       A tu sú **potom**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.sk.png)
+      ![New](../../../../../translated_images/sk/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

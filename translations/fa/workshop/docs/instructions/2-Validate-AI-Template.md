@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. به [https://ai.azure.com/templates](https://ai.azure.com/templates) مراجعه کنید
 1. هنگام درخواست وارد پورتال Azure AI Foundry شوید - چیزی شبیه به این خواهید دید.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.fa.png)
+![Pick](../../../../../translated_images/fa/01-pick-template.60d2d5fff5ebc374.png)
 
 گزینه‌های **Basic** قالب‌های شروع‌کننده شما هستند:
 
@@ -60,7 +60,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 لینک دوم را در یک تب مرورگر جدید باز کنید (یا برای کارت مرتبط روی `Open in GitHub` کلیک کنید). باید مخزن این قالب AZD را ببینید. یک دقیقه وقت بگذارید و README را بررسی کنید. معماری برنامه به این شکل است:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.fa.png)
+![Arch](../../../../../translated_images/fa/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -92,7 +92,7 @@ CO_OP_TRANSLATOR_METADATA:
       ```
 1. پورتال Azure شما اکنون یک گروه منابع فراهم‌شده با نام محیط خواهد داشت:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.fa.png)
+      ![Infra](../../../../../translated_images/fa/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **اکنون آماده اعتبارسنجی زیرساخت و برنامه مستقر شده هستید**.
 
@@ -108,7 +108,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. باید یک رابط کاربری جلویی برنامه میزبانی‌شده مانند این را ببینید:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.fa.png)
+   ![App](../../../../../translated_images/fa/03-test-application.471910da12c3038e.png)
 
 1. چند [سوال نمونه](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) را امتحان کنید
 
@@ -117,7 +117,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. باید پاسخ‌هایی مشابه آنچه در زیر نشان داده شده است دریافت کنید. _اما این چگونه کار می‌کند؟_
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.fa.png)
+      ![App](../../../../../translated_images/fa/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -130,25 +130,25 @@ CO_OP_TRANSLATOR_METADATA:
 1. روی منبع `Azure AI Foundry` در آن لیست کلیک کنید
 
 1. باید این را ببینید. روی دکمه `Go to Azure AI Foundry Portal` کلیک کنید. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.fa.png)
+   ![Foundry](../../../../../translated_images/fa/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. باید صفحه پروژه Foundry برای برنامه هوش مصنوعی خود را ببینید
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.fa.png)
+   ![Project](../../../../../translated_images/fa/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. روی `Agents` کلیک کنید - عامل پیش‌فرض فراهم‌شده در پروژه خود را مشاهده خواهید کرد
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.fa.png)
+   ![Agents](../../../../../translated_images/fa/06-visit-agents.bccb263f77b00a09.png)
 
 1. آن را انتخاب کنید - و جزئیات عامل را مشاهده خواهید کرد. به موارد زیر توجه کنید:
 
       - عامل به طور پیش‌فرض از File Search استفاده می‌کند (همیشه)
       - `Knowledge` عامل نشان می‌دهد که 32 فایل آپلود شده است (برای جستجوی فایل)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.fa.png)
+      ![Agents](../../../../../translated_images/fa/07-view-agent-details.0e049f37f61eae62.png)
 
 1. گزینه `Data+indexes` را در منوی سمت چپ پیدا کنید و برای جزئیات کلیک کنید. 
 
       - باید 32 فایل داده آپلود شده برای دانش را ببینید.
       - این‌ها با 12 فایل مشتری و 20 فایل محصول در زیر `src/files` مطابقت خواهند داشت 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.fa.png)
+      ![Data](../../../../../translated_images/fa/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **عملکرد عامل را اعتبارسنجی کردید!**
 
@@ -158,7 +158,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 به تب مرورگر با نقطه پایانی برنامه Container App بازگردید و بپرسید: `Amanda Perez چه محصولاتی دارد؟`. باید چیزی شبیه به این ببینید:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.fa.png)
+![Data](../../../../../translated_images/fa/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -170,7 +170,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. گزینه `Try in Playground` را کلیک کنید - باید یک رابط کاربری زمین بازی مانند این دریافت کنید
 1. همان سوال را بپرسید: `Amanda Perez چه محصولاتی دارد؟`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.fa.png)
+    ![Data](../../../../../translated_images/fa/09-ask-in-playground.a1b93794f78fa676.png)
 
 پاسخ مشابه (یا مشابهی) دریافت می‌کنید - اما همچنین اطلاعات اضافی دریافت می‌کنید که می‌توانید برای درک کیفیت، هزینه، و عملکرد برنامه عامل خود استفاده کنید. برای مثال:
 
@@ -182,7 +182,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. روی هر متریک حرکت کنید - به عنوان مثال، Safety. چیزی شبیه به این می‌بینید
 1. آیا رتبه‌بندی ارزیابی‌شده با شهود شما برای سطح ایمنی پاسخ مطابقت دارد؟
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.fa.png)
+      ![Data](../../../../../translated_images/fa/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---x
 
@@ -196,15 +196,15 @@ CO_OP_TRANSLATOR_METADATA:
    - تعداد کل Token‌ها (در مقابل استفاده از Token‌های خروجی) برای پاسخ را درک کنید
    - تأخیر و جایی که زمان در اجرا صرف می‌شود را درک کنید
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.fa.png)
+      ![Agent](../../../../../translated_images/fa/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. روی تب `Metadata` کلیک کنید تا ویژگی‌های اضافی برای اجرا را ببینید که ممکن است برای اشکال‌زدایی مشکلات بعدی مفید باشند.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.fa.png)
+      ![Agent](../../../../../translated_images/fa/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. روی تب `Evaluations` کلیک کنید تا ارزیابی‌های خودکار انجام‌شده بر روی پاسخ عامل را ببینید. این شامل ارزیابی‌های ایمنی (مانند Self-harm) و ارزیابی‌های خاص عامل (مانند Intent resolution، Task adherence) می‌شود.
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.fa.png)
+      ![Agent](../../../../../translated_images/fa/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. در نهایت، روی تب `Monitoring` در منوی کناری کلیک کنید.
 
@@ -212,7 +212,7 @@ CO_OP_TRANSLATOR_METADATA:
       - استفاده از برنامه را از نظر هزینه‌ها (Token‌ها) و بار (درخواست‌ها) پیگیری کنید.
       - تأخیر برنامه را تا اولین بایت (پردازش ورودی) و آخرین بایت (خروجی) پیگیری کنید.
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.fa.png)
+      ![Agent](../../../../../translated_images/fa/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

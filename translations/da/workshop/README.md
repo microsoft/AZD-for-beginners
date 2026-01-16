@@ -40,7 +40,7 @@ I løbet af workshoppen vil du også blive introduceret til kerneværktøjer og 
 
 Workshop-lektionerne er i Markdown. Du kan navigere direkte i GitHub - eller starte en browser-baseret forhåndsvisning som vist på skærmbilledet nedenfor.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.da.png)
+![Workshop](../../../translated_images/da/workshop.75906f133e6f8ba0.png)
 
 For at bruge denne mulighed - fork repository til din profil, og start GitHub Codespaces. Når VS Code-terminalen er aktiv, skal du skrive denne kommando:
 

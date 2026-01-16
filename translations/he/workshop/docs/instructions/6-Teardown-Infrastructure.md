@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       הנה פריסות המודל **לפני**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.he.png)
+      ![Initial](../../../../../translated_images/he/14-deploy-initial.30e4cf1c29b587bc.png)
 
       והנה הן **אחרי**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.he.png)
+      ![New](../../../../../translated_images/he/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

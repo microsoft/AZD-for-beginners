@@ -47,10 +47,10 @@ Sebelum kita membongkar proyek, luangkan beberapa menit untuk melakukan eksplora
 
       Berikut adalah deployment model **sebelum**:
 
-      ![Awal](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.id.png)
+      ![Awal](../../../../../translated_images/id/14-deploy-initial.30e4cf1c29b587bc.png)
 
       Dan berikut adalah **setelah**:
-      ![Baru](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.id.png)
+      ![Baru](../../../../../translated_images/id/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

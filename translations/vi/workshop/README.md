@@ -40,7 +40,7 @@ Trong suốt hội thảo này, bạn cũng sẽ được giới thiệu các c�
 
 Các bài học trong hội thảo được viết bằng Markdown. Bạn có thể truy cập trực tiếp trên GitHub - hoặc mở bản xem trước trên trình duyệt như hình dưới đây.
 
-![Hội thảo](../../../translated_images/workshop.75906f133e6f8ba0.vi.png)
+![Hội thảo](../../../translated_images/vi/workshop.75906f133e6f8ba0.png)
 
 Để sử dụng tùy chọn này - hãy fork kho lưu trữ vào hồ sơ của bạn và mở GitHub Codespaces. Khi terminal của VS Code hoạt động, hãy nhập lệnh này:
 

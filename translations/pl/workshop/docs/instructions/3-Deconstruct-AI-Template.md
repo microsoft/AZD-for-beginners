@@ -112,7 +112,7 @@ W trybie `Ask` otrzymasz kod, który możesz skopiować i wypróbować. W trybie
       
       Azure Storage zapewnia przechowywanie blobów dla danych aplikacji i przesłanych plików, podczas gdy Managed Identity zapewnia bezpieczny dostęp między zasobami Azure bez przechowywania poświadczeń. Całe rozwiązanie zostało zaprojektowane z myślą o skalowalności i łatwości utrzymania, z konteneryzowaną aplikacją automatycznie skalującą się w zależności od zapotrzebowania, zapewniając jednocześnie wbudowane funkcje bezpieczeństwa, monitorowania i CI/CD dzięki ekosystemowi zarządzanych usług Azure.
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.pl.png)
+![Architecture](../../../../../translated_images/pl/architecture.48d94861e6e6cdc0.png)
 
 ---
 

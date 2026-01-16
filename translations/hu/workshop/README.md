@@ -40,7 +40,7 @@ A workshop során megismerkedsz alapvető fejlesztői eszközökkel és munkafol
 
 A workshop leckéi Markdown formátumban érhetők el. Közvetlenül a GitHub-on böngészheted őket – vagy elindíthatsz egy böngésző-alapú előnézetet, ahogy az alábbi képernyőképen látható.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.hu.png)
+![Workshop](../../../translated_images/hu/workshop.75906f133e6f8ba0.png)
 
 Ehhez az opcióhoz forkolnod kell a repót a profilodra, majd elindítanod a GitHub Codespaces-t. Miután a VS Code terminál aktív, írd be ezt a parancsot:
 

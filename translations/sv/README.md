@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD för nybörjare: En strukturerad läranderesa
 
-![AZD-för-nybörjare](../../translated_images/azdbeginners.5527441dd9f74068.sv.png) 
+![AZD-för-nybörjare](../../translated_images/sv/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub-övervakare](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub-forkar](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

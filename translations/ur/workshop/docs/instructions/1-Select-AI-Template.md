@@ -52,7 +52,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.ur.png)
+![Flow](../../../../../translated_images/ur/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -73,7 +73,7 @@ _Infrastructure-as-Code_ (IaC) کے طریقہ کار کو استعمال کرت
 **🎯 | مشق**: <br/> 
 [Awesome AZD](https://azure.github.io/awesome-azd/) گیلری پر جائیں اور فلٹرز کا استعمال کرتے ہوئے 250+ ٹیمپلیٹس کو دریافت کریں جو فی الحال دستیاب ہیں۔ دیکھیں کہ آیا آپ کو کوئی ایسا ٹیمپلیٹ ملتا ہے جو _آپ_ کے منظرنامے کی ضروریات کے مطابق ہو۔
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.ur.png)
+![Code](../../../../../translated_images/ur/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

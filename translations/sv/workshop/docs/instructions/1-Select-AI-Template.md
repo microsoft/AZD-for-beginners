@@ -51,7 +51,7 @@ Med `azd` kan din implementeringsresa vara så enkel som:
 azd help
 ```
 
-![Flöde](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.sv.png)
+![Flöde](../../../../../translated_images/sv/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -72,7 +72,7 @@ När du skapar eller återanvänder en AZD-mall för _ditt_ scenario, överväg 
 **🎯 | ÖVNING**: <br/> 
 Besök [Awesome AZD](https://azure.github.io/awesome-azd/) galleriet och använd filtren för att utforska de 250+ mallar som för närvarande finns tillgängliga. Se om du kan hitta en som passar _dina_ scenariokrav.
 
-![Kod](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.sv.png)
+![Kod](../../../../../translated_images/sv/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

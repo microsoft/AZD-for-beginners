@@ -47,10 +47,10 @@ Trước khi gỡ bỏ dự án, hãy dành vài phút để khám phá thêm m�
 
       Đây là các triển khai mô hình **trước**:
 
-      ![Ban đầu](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.vi.png)
+      ![Ban đầu](../../../../../translated_images/vi/14-deploy-initial.30e4cf1c29b587bc.png)
 
       Và đây là **sau**:
-      ![Mới](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.vi.png)
+      ![Mới](../../../../../translated_images/vi/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

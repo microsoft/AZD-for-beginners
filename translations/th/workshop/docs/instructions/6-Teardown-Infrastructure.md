@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       นี่คือการปรับใช้โมเดล **ก่อน**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.th.png)
+      ![Initial](../../../../../translated_images/th/14-deploy-initial.30e4cf1c29b587bc.png)
 
       และนี่คือ **หลัง**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.th.png)
+      ![New](../../../../../translated_images/th/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

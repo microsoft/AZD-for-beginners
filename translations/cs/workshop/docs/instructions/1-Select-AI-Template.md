@@ -51,7 +51,7 @@ S `azd` může být vaše cesta nasazení tak jednoduchá jako:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.cs.png)
+![Flow](../../../../../translated_images/cs/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -72,7 +72,7 @@ Při vytváření nebo opětovném použití šablony AZD pro _váš_ scénář 
 **🎯 | CVIČENÍ**: <br/> 
 Navštivte galerii [Awesome AZD](https://azure.github.io/awesome-azd/) a použijte filtry k prozkoumání více než 250 dostupných šablon. Zkuste najít takovou, která odpovídá _vašim_ požadavkům na scénář.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.cs.png)
+![Code](../../../../../translated_images/cs/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

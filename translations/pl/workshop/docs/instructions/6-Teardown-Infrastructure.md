@@ -47,10 +47,10 @@ Zanim rozbierzemy projekt, poświęć kilka minut na otwartą eksplorację.
 
       Oto wdrożenia modelu **przed**:
 
-      ![Początkowe](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.pl.png)
+      ![Początkowe](../../../../../translated_images/pl/14-deploy-initial.30e4cf1c29b587bc.png)
 
       A oto **po**:
-      ![Nowe](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.pl.png)
+      ![Nowe](../../../../../translated_images/pl/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

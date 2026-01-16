@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD Kezdőknek: Egy Strukturált Tanulási Út
 
-![AZD-kezdőknek](../../translated_images/azdbeginners.5527441dd9f74068.hu.png) 
+![AZD-kezdőknek](../../translated_images/hu/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub megfigyelők](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub forkok](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

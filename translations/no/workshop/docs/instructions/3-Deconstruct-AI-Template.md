@@ -112,7 +112,7 @@ I `Ask`-modus vil dette gi kode som du kan kopiere og prøve ut. I `Agent`-modus
       
       Azure Storage gir blob-lagring for applikasjonsdata og filopplastinger, mens Managed Identity sikrer sikker tilgang mellom Azure-ressurser uten å lagre legitimasjon. Hele løsningen er designet for skalerbarhet og vedlikeholdbarhet, med den containeriserte applikasjonen som automatisk skalerer basert på etterspørsel, samtidig som den gir innebygd sikkerhet, overvåking og CI/CD-funksjoner gjennom Azures administrerte tjenesteøkosystem.
 
-![Arkitektur](../../../../../translated_images/architecture.48d94861e6e6cdc0.no.png)
+![Arkitektur](../../../../../translated_images/no/architecture.48d94861e6e6cdc0.png)
 
 ---
 

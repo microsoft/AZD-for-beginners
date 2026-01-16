@@ -51,7 +51,7 @@ Kwa kutumia `azd`, safari yako ya upelekaji inaweza kuwa rahisi kama:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.sw.png)
+![Flow](../../../../../translated_images/sw/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -72,7 +72,7 @@ Unapounda au kutumia kiolezo cha AZD kwa hali yako, zingatia maswali haya:
 **🎯 | ZOEZI**: <br/> 
 Tembelea [Awesome AZD](https://azure.github.io/awesome-azd/) gallery na tumia vichujio kuchunguza violezo 250+ vilivyopo. Angalia kama unaweza kupata kimoja kinacholingana na mahitaji ya hali yako.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.sw.png)
+![Code](../../../../../translated_images/sw/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

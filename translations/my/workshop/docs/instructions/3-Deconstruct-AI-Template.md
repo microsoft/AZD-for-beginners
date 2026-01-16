@@ -112,7 +112,7 @@ Azure documentation အကြောင်းကို မေးမြန်း�
 
       Azure Storage သည် application data နှင့် file uploads အတွက် blob storage ကို ပေးထားပြီး Managed Identity သည် credentials မသိမ်းဆည်းဘဲ Azure resources အကြား secure access ကို အာမခံသည်။ solution အားလုံးကို scalability နှင့် maintainability အတွက် design ပြုလုပ်ထားပြီး containerized application သည် demand အလိုက် auto-scaling ပြုလုပ်နိုင်ပြီး Azure managed services ecosystem မှ built-in security, monitoring, CI/CD capabilities များကို ပေးထားသည်။
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.my.png)
+![Architecture](../../../../../translated_images/my/architecture.48d94861e6e6cdc0.png)
 
 ---
 

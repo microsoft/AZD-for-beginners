@@ -51,7 +51,7 @@ Platforma Azure AI Foundry dolazi s [setom preporučenih AZD predložaka](https:
 1. Posjetite [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Prijavite se na portal Azure AI Foundry kada se to zatraži - vidjet ćete nešto poput ovoga.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.hr.png)
+![Pick](../../../../../translated_images/hr/01-pick-template.60d2d5fff5ebc374.png)
 
 **Osnovne** opcije su vaši početni predlošci:
 
@@ -60,7 +60,7 @@ Platforma Azure AI Foundry dolazi s [setom preporučenih AZD predložaka](https:
 
 Posjetite drugi link u novoj kartici preglednika (ili kliknite `Open in GitHub` za povezanu karticu). Trebali biste vidjeti repozitorij za ovaj AZD predložak. Odvojite minutu za istraživanje README datoteke. Arhitektura aplikacije izgleda ovako:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.hr.png)
+![Arch](../../../../../translated_images/hr/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -92,7 +92,7 @@ Sada čekate da se postavljanje dovrši. **Ovo traje 10-15 minuta**
       ```
 1. Vaš Azure Portal sada će imati grupu resursa s imenom vašeg okruženja:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.hr.png)
+      ![Infra](../../../../../translated_images/hr/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **Sada ste spremni validirati implementiranu infrastrukturu i aplikaciju**.
 
@@ -108,7 +108,7 @@ Sada čekate da se postavljanje dovrši. **Ovo traje 10-15 minuta**
 
 1. Trebali biste vidjeti hostirani UI aplikacije poput ovoga:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.hr.png)
+   ![App](../../../../../translated_images/hr/03-test-application.471910da12c3038e.png)
 
 1. Pokušajte postaviti nekoliko [uzoraka pitanja](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Sada čekate da se postavljanje dovrši. **Ovo traje 10-15 minuta**
 
 1. Trebali biste dobiti odgovore slične onima prikazanim dolje. _Ali kako ovo funkcionira?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.hr.png)
+      ![App](../../../../../translated_images/hr/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App implementira krajnju točku koja se povezuje s AI agentom po
 1. Kliknite na resurs `Azure AI Foundry` u tom popisu
 
 1. Trebali biste vidjeti ovo. Kliknite gumb `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.hr.png)
+   ![Foundry](../../../../../translated_images/hr/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. Trebali biste vidjeti stranicu projekta Foundry za vašu AI aplikaciju
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.hr.png)
+   ![Project](../../../../../translated_images/hr/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. Kliknite na `Agents` - vidjet ćete zadani agent postavljen u vašem projektu
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.hr.png)
+   ![Agents](../../../../../translated_images/hr/06-visit-agents.bccb263f77b00a09.png)
 
 1. Odaberite ga - i vidjet ćete detalje agenta. Obratite pažnju na sljedeće:
 
       - Agent koristi File Search prema zadanim postavkama (uvijek)
       - Znanje agenta pokazuje da ima 32 datoteke učitane (za File Search)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.hr.png)
+      ![Agents](../../../../../translated_images/hr/07-view-agent-details.0e049f37f61eae62.png)
 
 1. Potražite opciju `Data+indexes` u lijevom izborniku i kliknite za detalje. 
 
       - Trebali biste vidjeti 32 podatkovne datoteke učitane za znanje.
       - One će odgovarati 12 datoteka kupaca i 20 datoteka proizvoda pod `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.hr.png)
+      ![Data](../../../../../translated_images/hr/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **Validirali ste rad agenta!** 
 
@@ -158,7 +158,7 @@ Azure Container App implementira krajnju točku koja se povezuje s AI agentom po
 
 Vratite se na karticu preglednika s krajnjom točkom Container App-a i pitajte: `What products does Amanda Perez own?`. Trebali biste vidjeti nešto poput ovoga:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.hr.png)
+![Data](../../../../../translated_images/hr/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -170,7 +170,7 @@ Razvijmo malo intuicije o mogućnostima Azure AI Foundry, tako što ćemo isprob
 1. Kliknite opciju `Try in Playground` - trebali biste dobiti UI Igrališta poput ovoga
 1. Postavite isto pitanje: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.hr.png)
+    ![Data](../../../../../translated_images/hr/09-ask-in-playground.a1b93794f78fa676.png)
 
 Dobivate isti (ili sličan) odgovor - ali također dobivate dodatne informacije koje možete koristiti za razumijevanje kvalitete, troškova i performansi vaše aplikacije s agentima. Na primjer:
 
@@ -182,7 +182,7 @@ Također vidite _red statistike_ ispod odgovora.
 1. Zadržite pokazivač iznad bilo koje metrike - npr., Sigurnost. Vidjet ćete nešto poput ovoga
 1. Odgovara li procijenjena ocjena vašoj intuiciji o razini sigurnosti odgovora?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.hr.png)
+      ![Data](../../../../../translated_images/hr/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Promatranje se odnosi na instrumentiranje vaše aplikacije kako bi generirala po
    - Razumijte ukupni broj tokena (naspram korištenja izlaznih tokena) za odgovor
    - Razumijte kašnjenje i gdje se troši vrijeme u izvođenju
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.hr.png)
+      ![Agent](../../../../../translated_images/hr/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. Kliknite karticu `Metadata` za dodatne atribute izvođenja koji mogu pružiti korisni kontekst za otklanjanje problema kasnije.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.hr.png)
+      ![Agent](../../../../../translated_images/hr/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. Kliknite karticu `Evaluations` za automatske procjene odgovora agenta. To uključuje procjene sigurnosti (npr., Samoozljeđivanje) i specifične procjene agenta (npr., Razlučivanje namjere, Pridržavanje zadatka).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.hr.png)
+      ![Agent](../../../../../translated_images/hr/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. Na kraju, kliknite karticu `Monitoring` u izborniku sa strane.
 
@@ -212,7 +212,7 @@ Promatranje se odnosi na instrumentiranje vaše aplikacije kako bi generirala po
       - Pratite korištenje aplikacije u smislu troškova (tokeni) i opterećenja (zahtjevi).
       - Pratite kašnjenje aplikacije do prvog bajta (obrada ulaza) i zadnjeg bajta (izlaz).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.hr.png)
+      ![Agent](../../../../../translated_images/hr/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

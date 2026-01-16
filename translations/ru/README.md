@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD Для Начинающих: Структурированное Обучение
 
-![AZD для начинающих](../../translated_images/azdbeginners.5527441dd9f74068.ru.png) 
+![AZD для начинающих](../../translated_images/ru/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub наблюдатели](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub форки](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

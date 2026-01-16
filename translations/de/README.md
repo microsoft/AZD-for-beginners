@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD für Einsteiger: Eine strukturierte Lernreise
 
-![AZD-für-Einsteiger](../../translated_images/azdbeginners.5527441dd9f74068.de.png) 
+![AZD-für-Einsteiger](../../translated_images/de/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub-Beobachter](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub-Forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

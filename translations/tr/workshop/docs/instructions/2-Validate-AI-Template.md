@@ -51,7 +51,7 @@ Azure AI Foundry platformu, _çoklu ajan iş akışı otomasyonu_ ve _çok modlu
 1. [https://ai.azure.com/templates](https://ai.azure.com/templates) adresini ziyaret edin
 1. Azure AI Foundry portalına giriş yapın - şuna benzer bir şey göreceksiniz.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.tr.png)
+![Pick](../../../../../translated_images/tr/01-pick-template.60d2d5fff5ebc374.png)
 
 **Temel** seçenekler başlangıç şablonlarınızdır:
 
@@ -60,7 +60,7 @@ Azure AI Foundry platformu, _çoklu ajan iş akışı otomasyonu_ ve _çok modlu
 
 İkinci bağlantıyı yeni bir tarayıcı sekmesinde ziyaret edin (veya ilgili kart için `GitHub'da Aç` seçeneğine tıklayın). Bu AZD Şablonu için depoyu görmelisiniz. README dosyasını incelemek için bir dakikanızı ayırın. Uygulama mimarisi şu şekilde görünüyor:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.tr.png)
+![Arch](../../../../../translated_images/tr/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -92,7 +92,7 @@ Bu işlemle tetiklenen iş akışı adımlarını tamamlayın:
       ```
 1. Azure Portalınızda artık o ortam adıyla sağlanmış bir kaynak grubu olacak:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.tr.png)
+      ![Infra](../../../../../translated_images/tr/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **Artık dağıtılan altyapıyı ve uygulamayı doğrulamaya hazırsınız.**
 
@@ -108,7 +108,7 @@ Bu işlemle tetiklenen iş akışı adımlarını tamamlayın:
 
 1. Şuna benzer bir barındırılan uygulama ön yüzü UI'si görmelisiniz:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.tr.png)
+   ![App](../../../../../translated_images/tr/03-test-application.471910da12c3038e.png)
 
 1. Birkaç [örnek soru](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) sormayı deneyin
 
@@ -117,7 +117,7 @@ Bu işlemle tetiklenen iş akışı adımlarını tamamlayın:
 
 1. Aşağıda gösterilenlere benzer yanıtlar almalısınız. _Peki bu nasıl çalışıyor?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.tr.png)
+      ![App](../../../../../translated_images/tr/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App, bu şablon için Azure AI Foundry projesinde sağlanan AI A
 1. Listedeki `Azure AI Foundry` kaynağına tıklayın
 
 1. Şunu görmelisiniz. `Go to Azure AI Foundry Portal` düğmesine tıklayın. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.tr.png)
+   ![Foundry](../../../../../translated_images/tr/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. AI uygulamanız için Foundry Proje sayfasını görmelisiniz
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.tr.png)
+   ![Project](../../../../../translated_images/tr/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. `Agents` sekmesine tıklayın - projenizde sağlanan varsayılan Agent'ı göreceksiniz
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.tr.png)
+   ![Agents](../../../../../translated_images/tr/06-visit-agents.bccb263f77b00a09.png)
 
 1. Seçin - ve Agent ayrıntılarını göreceksiniz. Şunlara dikkat edin:
 
       - Agent varsayılan olarak Dosya Arama kullanır (her zaman)
       - Agent'ın `Knowledge` kısmı, dosya arama için 32 dosya yüklendiğini gösterir
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.tr.png)
+      ![Agents](../../../../../translated_images/tr/07-view-agent-details.0e049f37f61eae62.png)
 
 1. Sol menüdeki `Data+indexes` seçeneğini arayın ve ayrıntılar için tıklayın. 
 
       - Bilgi için yüklenen 32 veri dosyasını görmelisiniz.
       - Bunlar `src/files` altındaki 12 müşteri dosyası ve 20 ürün dosyasına karşılık gelir
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.tr.png)
+      ![Data](../../../../../translated_images/tr/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **Agent operasyonunu doğruladınız!** 
 
@@ -158,7 +158,7 @@ Azure Container App, bu şablon için Azure AI Foundry projesinde sağlanan AI A
 
 Container App uç noktasıyla tarayıcı sekmesine geri dönün ve şunu sorun: `Amanda Perez hangi ürünlere sahip?`. Şuna benzer bir şey görmelisiniz:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.tr.png)
+![Data](../../../../../translated_images/tr/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -170,7 +170,7 @@ Azure AI Foundry'nin yetenekleri hakkında biraz daha sezgi geliştirelim ve Age
 1. `Try in Playground` seçeneğine tıklayın - şu şekilde bir Playground UI'si almalısınız
 1. Aynı soruyu sorun: `Amanda Perez hangi ürünlere sahip?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.tr.png)
+    ![Data](../../../../../translated_images/tr/09-ask-in-playground.a1b93794f78fa676.png)
 
 Aynı (veya benzer) yanıtı alırsınız - ancak ayrıca ajan uygulamanızın kalitesini, maliyetini ve performansını anlamak için kullanabileceğiniz ek bilgiler de alırsınız. Örneğin:
 
@@ -182,7 +182,7 @@ Yanıtın altında bir _istatistik_ satırı da görürsünüz.
 1. Herhangi bir metriğin üzerine gelin - örneğin, Güvenlik. Şuna benzer bir şey görürsünüz
 1. Değerlendirilen derecelendirme, yanıtın güvenlik seviyesi için sezginizle eşleşiyor mu?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.tr.png)
+      ![Data](../../../../../translated_images/tr/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---x
 
@@ -196,15 +196,15 @@ Gözlemlenebilirlik, uygulamanızı çalışmasını anlamak, hata ayıklamak ve
    - Yanıt için toplam Token sayısını (vs. çıktı token kullanımı) anlayın
    - Gecikmeyi ve yürütmede zamanın nerede harcandığını anlayın
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.tr.png)
+      ![Agent](../../../../../translated_images/tr/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. `Metadata` sekmesine tıklayın ve daha sonra sorunları ayıklamak için yararlı bağlam sağlayabilecek çalıştırma için ek öznitelikleri görün.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.tr.png)
+      ![Agent](../../../../../translated_images/tr/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. `Evaluations` sekmesine tıklayın ve agent yanıtı üzerinde yapılan otomatik değerlendirmeleri görün. Bunlar güvenlik değerlendirmelerini (örneğin, Kendine zarar verme) ve agent'a özgü değerlendirmeleri (örneğin, Niyet çözümü, Görev uyumu) içerir.
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.tr.png)
+      ![Agent](../../../../../translated_images/tr/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. Son olarak, yan menüdeki `Monitoring` sekmesine tıklayın.
 
@@ -212,7 +212,7 @@ Gözlemlenebilirlik, uygulamanızı çalışmasını anlamak, hata ayıklamak ve
       - Uygulama kullanımını maliyetler (tokenlar) ve yük (istekler) açısından takip edin.
       - İlk bayta (girdi işleme) ve son bayta (çıktı) kadar uygulama gecikmesini takip edin.
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.tr.png)
+      ![Agent](../../../../../translated_images/tr/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

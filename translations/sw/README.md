@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD Kwa Waanza: Safari ya Kujifunza Iliyopangwa
 
-![AZD kwa Waanza](../../translated_images/azdbeginners.5527441dd9f74068.sw.png) 
+![AZD kwa Waanza](../../translated_images/sw/azdbeginners.5527441dd9f74068.png) 
 
 [![Watazamaji wa GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![Forks za GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

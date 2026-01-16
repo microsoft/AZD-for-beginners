@@ -40,7 +40,7 @@ Au cours de cet atelier, vous serez également introduit aux outils et workflows
 
 Les leçons de l'atelier sont en Markdown. Vous pouvez les consulter directement sur GitHub - ou lancer un aperçu dans le navigateur comme illustré dans la capture d'écran ci-dessous.
 
-![Atelier](../../../translated_images/workshop.75906f133e6f8ba0.fr.png)
+![Atelier](../../../translated_images/fr/workshop.75906f133e6f8ba0.webp)
 
 Pour utiliser cette option - créez un fork du dépôt sur votre profil, et lancez GitHub Codespaces. Une fois le terminal VS Code actif, tapez cette commande :
 

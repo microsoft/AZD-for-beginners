@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD नवशिक्यांसाठी: एक संरचित शिक्षण प्रवास
 
-![AZD - नवशिक्यांसाठी](../../translated_images/azdbeginners.5527441dd9f74068.mr.png) 
+![AZD - नवशिक्यांसाठी](../../translated_images/mr/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub पाहणारे](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub फोर्क्स](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

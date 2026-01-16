@@ -47,10 +47,10 @@ Voordat we het project afbreken, neem een paar minuten de tijd voor wat open ver
 
       Hier zijn de modelimplementaties **vooraf**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.nl.png)
+      ![Initial](../../../../../translated_images/nl/14-deploy-initial.30e4cf1c29b587bc.png)
 
       En hier zijn ze **achteraf**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.nl.png)
+      ![New](../../../../../translated_images/nl/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

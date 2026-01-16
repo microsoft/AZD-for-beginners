@@ -40,7 +40,7 @@ Katika kipindi cha warsha hii, utatambulishwa pia kwa zana kuu za waendelezaji n
 
 Masomo ya warsha yako katika Markdown. Unaweza kuyapitia moja kwa moja kwenye GitHub - au kuzindua mwonekano wa kivinjari kama inavyoonyeshwa kwenye picha hapa chini.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.sw.png)
+![Workshop](../../../translated_images/sw/workshop.75906f133e6f8ba0.png)
 
 Ili kutumia chaguo hili - fanya nakala ya hifadhi kwenye wasifu wako, na uzindue GitHub Codespaces. Mara terminal ya VS Code itakapokuwa hai, andika amri hii:
 

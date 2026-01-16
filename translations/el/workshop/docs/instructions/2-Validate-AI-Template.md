@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. Επισκεφθείτε [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Συνδεθείτε στην πύλη Azure AI Foundry όταν σας ζητηθεί - θα δείτε κάτι σαν αυτό.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.el.png)
+![Pick](../../../../../translated_images/el/01-pick-template.60d2d5fff5ebc374.png)
 
 Οι **Βασικές** επιλογές είναι τα πρότυπα εκκίνησής σας:
 
@@ -60,7 +60,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Επισκεφθείτε τον δεύτερο σύνδεσμο σε μια νέα καρτέλα του προγράμματος περιήγησης (ή κάντε κλικ στο `Open in GitHub` για την αντίστοιχη κάρτα). Θα πρέπει να δείτε το αποθετήριο για αυτό το πρότυπο AZD. Αφιερώστε ένα λεπτό για να εξερευνήσετε το README. Η αρχιτεκτονική της εφαρμογής μοιάζει με αυτήν:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.el.png)
+![Arch](../../../../../translated_images/el/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -92,7 +92,7 @@ CO_OP_TRANSLATOR_METADATA:
       ```
 1. Η πύλη Azure σας θα έχει πλέον μια παρεχόμενη ομάδα πόρων με αυτό το όνομα περιβάλλοντος:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.el.png)
+      ![Infra](../../../../../translated_images/el/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **Είστε πλέον έτοιμοι να επικυρώσετε την υποδομή και την εφαρμογή που αναπτύχθηκαν**.
 
@@ -108,7 +108,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. Θα πρέπει να δείτε ένα UI εφαρμογής που φιλοξενείται όπως αυτό:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.el.png)
+   ![App](../../../../../translated_images/el/03-test-application.471910da12c3038e.png)
 
 1. Δοκιμάστε να κάνετε μερικές [ερωτήσεις δείγματος](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 1. Θα πρέπει να λάβετε απαντήσεις παρόμοιες με αυτές που φαίνονται παρακάτω. _Αλλά πώς λειτουργεί αυτό;_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.el.png)
+      ![App](../../../../../translated_images/el/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -130,25 +130,25 @@ CO_OP_TRANSLATOR_METADATA:
 1. Κάντε κλικ στον πόρο `Azure AI Foundry` στη λίστα
 
 1. Θα πρέπει να δείτε αυτό. Κάντε κλικ στο κουμπί `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.el.png)
+   ![Foundry](../../../../../translated_images/el/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. Θα πρέπει να δείτε τη σελίδα Έργου Foundry για την εφαρμογή AI σας
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.el.png)
+   ![Project](../../../../../translated_images/el/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. Κάντε κλικ στο `Agents` - θα δείτε τον προεπιλεγμένο Πράκτορα που παρέχεται στο έργο σας
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.el.png)
+   ![Agents](../../../../../translated_images/el/06-visit-agents.bccb263f77b00a09.png)
 
 1. Επιλέξτε τον - και θα δείτε τις λεπτομέρειες του Πράκτορα. Σημειώστε τα εξής:
 
       - Ο πράκτορας χρησιμοποιεί File Search από προεπιλογή (πάντα)
       - Η `Knowledge` του πράκτορα υποδεικνύει ότι έχουν ανέβει 32 αρχεία (για αναζήτηση αρχείων)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.el.png)
+      ![Agents](../../../../../translated_images/el/07-view-agent-details.0e049f37f61eae62.png)
 
 1. Αναζητήστε την επιλογή `Data+indexes` στο αριστερό μενού και κάντε κλικ για λεπτομέρειες. 
 
       - Θα πρέπει να δείτε τα 32 αρχεία δεδομένων που έχουν ανέβει για γνώση.
       - Αυτά θα αντιστοιχούν στα 12 αρχεία πελατών και 20 αρχεία προϊόντων στον φάκελο `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.el.png)
+      ![Data](../../../../../translated_images/el/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **Επικυρώσατε τη λειτουργία του Πράκτορα!** 
 
@@ -158,7 +158,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 Επιστρέψτε στην καρτέλα του προγράμματος περιήγησης με το endpoint της εφαρμογής Container App και ρωτήστε: `Ποια προϊόντα κατέχει η Amanda Perez;`. Θα πρέπει να δείτε κάτι σαν αυτό:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.el.png)
+![Data](../../../../../translated_images/el/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -170,7 +170,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. Κάντε κλικ στην επιλογή `Try in Playground` - θα πρέπει να δείτε ένα UI Παιδικής Χαράς όπως αυτό
 1. Ρωτήστε την ίδια ερώτηση: `Ποια προϊόντα κατέχει η Amanda Perez;`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.el.png)
+    ![Data](../../../../../translated_images/el/09-ask-in-playground.a1b93794f78fa676.png)
 
 Λαμβάνετε την ίδια (ή παρόμοια) απάντηση - αλλά λαμβάνετε επίσης πρόσθετες πληροφορίες που μπορείτε να χρησιμοποιήσετε για να κατανοήσετε την ποιότητα, το κόστος και την απόδοση της εφαρμογής σας. Για παράδειγμα:
 
@@ -182,7 +182,7 @@ CO_OP_TRANSLATOR_METADATA:
 1. Περάστε το ποντίκι πάνω από οποιαδήποτε μέτρηση - π.χ., Safety. Βλέπετε κάτι σαν αυτό
 1. Ταιριάζει η αξιολόγηση με τη διαίσθησή σας για το επίπεδο ασφάλειας της απάντησης;
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.el.png)
+      ![Data](../../../../../translated_images/el/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---x
 
@@ -196,15 +196,15 @@ CO_OP_TRANSLATOR_METADATA:
    - Κατανοήστε τον συνολικό αριθμό Token (σε σχέση με τη χρήση Token εξόδου) για την απάντηση
    - Κατανοήστε την καθυστέρηση και πού δαπανάται χρόνος στην εκτέλεση
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.el.png)
+      ![Agent](../../../../../translated_images/el/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. Κάντε κλικ στην καρτέλα `Metadata` για να δείτε πρόσθετα χαρακτηριστικά για την εκτέλεση, που μπορεί να παρέχουν χρήσιμα συμφραζόμενα για την αποσφαλμάτωση προβλημάτων αργότερα.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.el.png)
+      ![Agent](../../../../../translated_images/el/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. Κάντε κλικ στην καρτέλα `Evaluations` για να δείτε αυτόματες αξιολογήσεις που έγιναν στην απάντηση του πράκτορα. Αυτές περιλαμβάνουν αξιολογήσεις ασφάλειας (π.χ., Self-harm) και αξιολογήσεις που αφορούν τον πράκτορα (π.χ., Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.el.png)
+      ![Agent](../../../../../translated_images/el/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. Τέλος, κάντε κλικ στην καρτέλα `Monitoring` στο μενού της πλαϊνής γραμμής.
 
@@ -212,7 +212,7 @@ CO_OP_TRANSLATOR_METADATA:
       - Παρακολουθήστε τη χρήση της εφαρμογής σε όρους κόστους (tokens) και φόρτου (requests).
       - Παρακολουθήστε την καθυστέρηση της εφαρμογής από το πρώτο byte (επεξεργασία εισόδου) έως το τελευταίο byte (έξοδος).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.el.png)
+      ![Agent](../../../../../translated_images/el/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

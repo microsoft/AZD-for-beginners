@@ -47,10 +47,10 @@ Enne projekti lammutamist võta paar minutit, et teha avatud uurimistööd.
 
       Siin on mudeli juurutused **enne**:
 
-      ![Algne](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.et.png)
+      ![Algne](../../../../../translated_images/et/14-deploy-initial.30e4cf1c29b587bc.png)
 
       Ja siin on see **pärast**:
-      ![Uus](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.et.png)
+      ![Uus](../../../../../translated_images/et/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

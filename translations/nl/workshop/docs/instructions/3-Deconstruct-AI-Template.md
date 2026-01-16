@@ -112,7 +112,7 @@ In `Ask` mode krijg je code die je kunt kopiëren en plakken om uit te proberen.
       
       Azure Storage biedt blobopslag voor applicatiegegevens en bestandsuploads, terwijl Managed Identity zorgt voor veilige toegang tussen Azure-resources zonder inloggegevens op te slaan. De hele oplossing is ontworpen voor schaalbaarheid en onderhoudbaarheid, waarbij de container-applicatie automatisch schaalt op basis van de vraag en ingebouwde beveiliging, monitoring en CI/CD-mogelijkheden biedt via het beheerde dienstenecosysteem van Azure.
 
-![Architectuur](../../../../../translated_images/architecture.48d94861e6e6cdc0.nl.png)
+![Architectuur](../../../../../translated_images/nl/architecture.48d94861e6e6cdc0.png)
 
 ---
 

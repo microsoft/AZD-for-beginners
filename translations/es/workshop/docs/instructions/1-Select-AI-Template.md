@@ -51,7 +51,7 @@ Con `azd`, tu proceso de despliegue puede ser tan simple como:
 azd help
 ```
 
-![Flujo](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.es.png)
+![Flujo](../../../../../translated_images/es/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ Al crear o reutilizar una plantilla de AZD para _tu_ escenario, considera estas 
 **🎯 | EJERCICIO**: <br/> 
 Visita la galería [Awesome AZD](https://azure.github.io/awesome-azd/) y usa los filtros para explorar las más de 250 plantillas disponibles actualmente. Ve si puedes encontrar una que se alinee con los requisitos de _tu_ escenario.
 
-![Código](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.es.png)
+![Código](../../../../../translated_images/es/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

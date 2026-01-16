@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD Pradedantiesiems: Struktūruota mokymosi kelionė
 
-![AZD pradedantiesiems](../../translated_images/azdbeginners.5527441dd9f74068.lt.png) 
+![AZD pradedantiesiems](../../translated_images/lt/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub stebėtojai](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub forkai](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

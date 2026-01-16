@@ -51,7 +51,7 @@ Met `azd` kan je implementatieproces zo eenvoudig zijn als:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.nl.png)
+![Flow](../../../../../translated_images/nl/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -71,7 +71,7 @@ Bij het maken of hergebruiken van een AZD-template voor _jouw_ scenario, overwee
 **🎯 | OEFENING**: <br/> 
 Bezoek de [Awesome AZD](https://azure.github.io/awesome-azd/) galerij en gebruik de filters om de 250+ templates te verkennen die momenteel beschikbaar zijn. Kijk of je er een kunt vinden die aansluit bij _jouw_ scenariovereisten.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.nl.png)
+![Code](../../../../../translated_images/nl/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

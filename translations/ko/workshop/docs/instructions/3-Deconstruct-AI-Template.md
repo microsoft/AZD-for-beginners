@@ -112,7 +112,7 @@ Azure 문서에 대한 질문을 하고 Microsoft Docs MCP 서버에 기반한 �
       
       Azure Storage는 애플리케이션 데이터와 파일 업로드를 위한 Blob 스토리지를 제공하며, Managed Identity는 자격 증명을 저장하지 않고 Azure 리소스 간의 안전한 액세스를 보장합니다. 전체 솔루션은 수요에 따라 자동으로 확장되는 컨테이너화된 애플리케이션과 Azure의 관리 서비스 생태계를 통해 내장된 보안, 모니터링 및 CI/CD 기능을 제공하도록 설계되었습니다.
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.ko.png)
+![Architecture](../../../../../translated_images/ko/architecture.48d94861e6e6cdc0.png)
 
 ---
 

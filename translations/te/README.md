@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD ప్రారంభికులకు: ఒక శ్రద్ధపూర్వక అధ్యయన ప్రయాణం
 
-![AZD ప్రారంభికులకు](../../translated_images/azdbeginners.5527441dd9f74068.te.png) 
+![AZD ప్రారంభికులకు](../../translated_images/te/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub వీక్షకులు](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub ఫోర్క్‌లు](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

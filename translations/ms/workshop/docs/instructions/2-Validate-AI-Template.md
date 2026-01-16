@@ -51,7 +51,7 @@ Platform Azure AI Foundry dilengkapi dengan [set template AZD yang disyorkan](ht
 1. Lawati [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log masuk ke portal Azure AI Foundry apabila diminta - anda akan melihat sesuatu seperti ini.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.ms.png)
+![Pick](../../../../../translated_images/ms/01-pick-template.60d2d5fff5ebc374.png)
 
 Pilihan **Basic** adalah template permulaan anda:
 
@@ -60,7 +60,7 @@ Pilihan **Basic** adalah template permulaan anda:
 
 Lawati pautan kedua dalam tab penyemak imbas baru (atau klik `Open in GitHub` untuk kad berkaitan). Anda sepatutnya melihat repositori untuk Template AZD ini. Luangkan masa untuk meneroka README. Seni bina aplikasi kelihatan seperti ini:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.ms.png)
+![Arch](../../../../../translated_images/ms/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -93,7 +93,7 @@ Sekarang, tunggu penyediaan selesai. **Ini mengambil masa 10-15 minit**
 
 1. Portal Azure anda kini akan mempunyai kumpulan sumber yang disediakan dengan nama persekitaran itu:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.ms.png)
+      ![Infra](../../../../../translated_images/ms/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **Anda kini bersedia untuk mengesahkan infrastruktur dan aplikasi yang diterapkan**.
 
@@ -109,7 +109,7 @@ Sekarang, tunggu penyediaan selesai. **Ini mengambil masa 10-15 minit**
 
 1. Anda sepatutnya melihat UI aplikasi yang dihoskan seperti ini:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.ms.png)
+   ![App](../../../../../translated_images/ms/03-test-application.471910da12c3038e.png)
 
 1. Cuba tanya beberapa [soalan contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -118,7 +118,7 @@ Sekarang, tunggu penyediaan selesai. **Ini mengambil masa 10-15 minit**
 
 1. Anda sepatutnya mendapat jawapan yang serupa dengan apa yang ditunjukkan di bawah. _Tetapi bagaimana ini berfungsi?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.ms.png)
+      ![App](../../../../../translated_images/ms/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -131,25 +131,25 @@ Azure Container App menerapkan titik akhir yang menghubungkan ke AI Agent yang d
 1. Klik pada sumber `Azure AI Foundry` dalam senarai itu
 
 1. Anda sepatutnya melihat ini. Klik butang `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.ms.png)
+   ![Foundry](../../../../../translated_images/ms/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. Anda sepatutnya melihat halaman Projek Foundry untuk aplikasi AI anda
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.ms.png)
+   ![Project](../../../../../translated_images/ms/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. Klik pada `Agents` - anda akan melihat Agen lalai yang disediakan dalam projek anda
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.ms.png)
+   ![Agents](../../../../../translated_images/ms/06-visit-agents.bccb263f77b00a09.png)
 
 1. Pilihnya - dan anda akan melihat butiran Agen. Perhatikan perkara berikut:
 
       - Agen menggunakan File Search secara lalai (sentiasa)
       - `Knowledge` agen menunjukkan ia mempunyai 32 fail yang dimuat naik (untuk carian fail)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.ms.png)
+      ![Agents](../../../../../translated_images/ms/07-view-agent-details.0e049f37f61eae62.png)
 
 1. Cari pilihan `Data+indexes` dalam menu kiri dan klik untuk butiran. 
 
       - Anda sepatutnya melihat 32 fail data yang dimuat naik untuk pengetahuan.
       - Ini akan sepadan dengan 12 fail pelanggan dan 20 fail produk di bawah `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.ms.png)
+      ![Data](../../../../../translated_images/ms/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **Anda telah mengesahkan operasi Agen!** 
 
@@ -159,7 +159,7 @@ Azure Container App menerapkan titik akhir yang menghubungkan ke AI Agent yang d
 
 Kembali ke tab penyemak imbas dengan titik akhir Container App dan tanya: `What products does Amanda Perez own?`. Anda sepatutnya melihat sesuatu seperti ini:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.ms.png)
+![Data](../../../../../translated_images/ms/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -171,7 +171,7 @@ Mari bina sedikit intuisi tentang keupayaan Azure AI Foundry, dengan mencuba Age
 1. Klik pilihan `Try in Playground` - anda sepatutnya mendapat UI Playground seperti ini
 1. Tanya soalan yang sama: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.ms.png)
+    ![Data](../../../../../translated_images/ms/09-ask-in-playground.a1b93794f78fa676.png)
 
 Anda mendapat respons yang sama (atau serupa) - tetapi anda juga mendapat maklumat tambahan yang boleh digunakan untuk memahami kualiti, kos, dan prestasi aplikasi agen anda. Contohnya:
 
@@ -183,7 +183,7 @@ Anda juga melihat baris _stats_ di bawah respons.
 1. Arahkan tetikus ke mana-mana metrik - contohnya, Safety. Anda melihat sesuatu seperti ini
 1. Adakah penilaian yang dinilai sepadan dengan intuisi anda untuk tahap keselamatan respons?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.ms.png)
+      ![Data](../../../../../translated_images/ms/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---x
 
@@ -197,15 +197,15 @@ Pemerhatian adalah tentang menginstrumentasikan aplikasi anda untuk menghasilkan
    - Fahami jumlah Token yang digunakan (berbanding penggunaan token output) untuk respons
    - Fahami latensi dan di mana masa dihabiskan dalam pelaksanaan
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.ms.png)
+      ![Agent](../../../../../translated_images/ms/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. Klik tab `Metadata` untuk melihat atribut tambahan untuk larian, yang mungkin memberikan konteks berguna untuk menyahpepijat isu kemudian.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.ms.png)
+      ![Agent](../../../../../translated_images/ms/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. Klik tab `Evaluations` untuk melihat penilaian automatik yang dibuat pada respons agen. Ini termasuk penilaian keselamatan (contohnya, Self-harm) dan penilaian khusus agen (contohnya, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.ms.png)
+      ![Agent](../../../../../translated_images/ms/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. Akhir sekali, klik tab `Monitoring` dalam menu bar sisi.
 
@@ -213,7 +213,7 @@ Pemerhatian adalah tentang menginstrumentasikan aplikasi anda untuk menghasilkan
       - Jejak penggunaan aplikasi dari segi kos (token) dan beban (permintaan).
       - Jejak latensi aplikasi hingga byte pertama (pemprosesan input) dan byte terakhir (output).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.ms.png)
+      ![Agent](../../../../../translated_images/ms/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

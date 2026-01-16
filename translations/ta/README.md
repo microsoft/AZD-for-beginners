@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD தொடக்கக்காரர்களுக்கு: கட்டமைக்கப்பட்ட கற்றல் பயணம்
 
-![AZD தொடக்கத்திற்கானவர்கள்](../../translated_images/azdbeginners.5527441dd9f74068.ta.png) 
+![AZD தொடக்கத்திற்கானவர்கள்](../../translated_images/ta/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub கண்காணிப்பவர்கள்](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub கிளோன்கள்](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

@@ -51,7 +51,7 @@ Com o `azd`, sua jornada de implantação pode ser tão simples quanto:
 azd help
 ```
 
-![Fluxo](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.br.png)
+![Fluxo](../../../../../translated_images/br/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -72,7 +72,7 @@ Ao criar ou reutilizar um template AZD para _seu_ cenário, considere estas perg
 **🎯 | EXERCÍCIO**: <br/> 
 Visite a galeria [Awesome AZD](https://azure.github.io/awesome-azd/) e use os filtros para explorar os mais de 250 templates disponíveis atualmente. Veja se consegue encontrar um que se alinhe aos requisitos do _seu_ cenário.
 
-![Código](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.br.png)
+![Código](../../../../../translated_images/br/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 

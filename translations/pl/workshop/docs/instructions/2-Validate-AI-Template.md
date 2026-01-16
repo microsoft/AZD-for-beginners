@@ -51,7 +51,7 @@ Platforma Azure AI Foundry oferuje [zestaw rekomendowanych szablonów AZD](https
 1. Odwiedź [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Zaloguj się do portalu Azure AI Foundry, gdy zostaniesz o to poproszony - zobaczysz coś takiego.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.pl.png)
+![Pick](../../../../../translated_images/pl/01-pick-template.60d2d5fff5ebc374.png)
 
 **Podstawowe** opcje to Twoje szablony startowe:
 
@@ -60,7 +60,7 @@ Platforma Azure AI Foundry oferuje [zestaw rekomendowanych szablonów AZD](https
 
 Otwórz drugi link w nowej karcie przeglądarki (lub kliknij `Open in GitHub` na powiązanej karcie). Powinieneś zobaczyć repozytorium dla tego szablonu AZD. Poświęć chwilę na zapoznanie się z plikiem README. Architektura aplikacji wygląda tak:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.pl.png)
+![Arch](../../../../../translated_images/pl/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -93,7 +93,7 @@ Teraz poczekaj na zakończenie udostępniania. **To zajmuje 10-15 minut**
 
 1. Twój portal Azure będzie teraz zawierał udostępnioną grupę zasobów z nazwą środowiska:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.pl.png)
+      ![Infra](../../../../../translated_images/pl/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **Teraz jesteś gotowy do walidacji wdrożonej infrastruktury i aplikacji**.
 
@@ -109,7 +109,7 @@ Teraz poczekaj na zakończenie udostępniania. **To zajmuje 10-15 minut**
 
 1. Powinieneś zobaczyć hostowany interfejs użytkownika aplikacji, taki jak ten:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.pl.png)
+   ![App](../../../../../translated_images/pl/03-test-application.471910da12c3038e.png)
 
 1. Spróbuj zadać kilka [przykładowych pytań](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -118,7 +118,7 @@ Teraz poczekaj na zakończenie udostępniania. **To zajmuje 10-15 minut**
 
 1. Powinieneś otrzymać odpowiedzi podobne do tych pokazanych poniżej. _Ale jak to działa?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.pl.png)
+      ![App](../../../../../translated_images/pl/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -131,25 +131,25 @@ Azure Container App wdraża punkt końcowy, który łączy się z agentem AI udo
 1. Kliknij na zasób `Azure AI Foundry` na tej liście
 
 1. Powinieneś zobaczyć to. Kliknij przycisk `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.pl.png)
+   ![Foundry](../../../../../translated_images/pl/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. Powinieneś zobaczyć stronę projektu Foundry dla swojej aplikacji AI
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.pl.png)
+   ![Project](../../../../../translated_images/pl/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. Kliknij na `Agents` - zobaczysz domyślnego agenta udostępnionego w Twoim projekcie
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.pl.png)
+   ![Agents](../../../../../translated_images/pl/06-visit-agents.bccb263f77b00a09.png)
 
 1. Wybierz go - i zobacz szczegóły agenta. Zwróć uwagę na następujące informacje:
 
       - Agent domyślnie używa File Search (zawsze)
       - `Knowledge` agenta wskazuje, że ma załadowane 32 pliki (do wyszukiwania plików)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.pl.png)
+      ![Agents](../../../../../translated_images/pl/07-view-agent-details.0e049f37f61eae62.png)
 
 1. Poszukaj opcji `Data+indexes` w lewym menu i kliknij, aby zobaczyć szczegóły. 
 
       - Powinieneś zobaczyć 32 załadowane pliki danych dla wiedzy.
       - Odpowiadają one 12 plikom klientów i 20 plikom produktów w folderze `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.pl.png)
+      ![Data](../../../../../translated_images/pl/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **Zweryfikowałeś działanie agenta!** 
 
@@ -159,7 +159,7 @@ Azure Container App wdraża punkt końcowy, który łączy się z agentem AI udo
 
 Wróć do karty przeglądarki z punktem końcowym aplikacji Container App i zapytaj: `What products does Amanda Perez own?`. Powinieneś zobaczyć coś takiego:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.pl.png)
+![Data](../../../../../translated_images/pl/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -171,7 +171,7 @@ Zbudujmy trochę intuicji dotyczącej możliwości Azure AI Foundry, testując a
 1. Kliknij opcję `Try in Playground` - powinieneś zobaczyć interfejs placu zabaw, taki jak ten
 1. Zadaj to samo pytanie: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.pl.png)
+    ![Data](../../../../../translated_images/pl/09-ask-in-playground.a1b93794f78fa676.png)
 
 Otrzymasz tę samą (lub podobną) odpowiedź - ale zobaczysz również dodatkowe informacje, które możesz wykorzystać do zrozumienia jakości, kosztów i wydajności swojej aplikacji opartej na agentach. Na przykład:
 
@@ -183,7 +183,7 @@ Zobaczysz również wiersz _statystyk_ poniżej odpowiedzi.
 1. Najedź kursorem na dowolną metrykę - np. Safety. Zobaczysz coś takiego
 1. Czy oceniony poziom bezpieczeństwa odpowiada Twojej intuicji dotyczącej poziomu bezpieczeństwa odpowiedzi?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.pl.png)
+      ![Data](../../../../../translated_images/pl/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---
 
@@ -197,15 +197,15 @@ Obserwowalność polega na instrumentacji aplikacji w celu generowania danych, k
    - Zrozum całkowitą liczbę tokenów (vs. użycie tokenów wyjściowych) dla odpowiedzi
    - Zrozum opóźnienie i gdzie czas jest spędzany podczas wykonania
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.pl.png)
+      ![Agent](../../../../../translated_images/pl/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. Kliknij kartę `Metadata`, aby zobaczyć dodatkowe atrybuty dla wykonania, które mogą dostarczyć przydatnego kontekstu do debugowania problemów później.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.pl.png)
+      ![Agent](../../../../../translated_images/pl/11-view-run-info-metadata.7966986122c7c2df.png)
 
 1. Kliknij kartę `Evaluations`, aby zobaczyć automatyczne oceny odpowiedzi agenta. Obejmują one oceny bezpieczeństwa (np. Samookaleczenie) i oceny specyficzne dla agenta (np. Rozwiązanie intencji, Zgodność z zadaniem).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.pl.png)
+      ![Agent](../../../../../translated_images/pl/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. Na koniec kliknij kartę `Monitoring` w menu bocznym.
 
@@ -213,7 +213,7 @@ Obserwowalność polega na instrumentacji aplikacji w celu generowania danych, k
       - Śledź użycie aplikacji pod względem kosztów (tokeny) i obciążenia (żądania).
       - Śledź opóźnienie aplikacji od pierwszego bajtu (przetwarzanie wejścia) do ostatniego bajtu (wyjście).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.pl.png)
+      ![Agent](../../../../../translated_images/pl/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

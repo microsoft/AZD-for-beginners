@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD dành cho Người Mới Bắt Đầu: Hành Trình Học Có Cấu Trúc
 
-![AZD cho Người Mới Bắt Đầu](../../translated_images/azdbeginners.5527441dd9f74068.vi.png) 
+![AZD cho Người Mới Bắt Đầu](../../translated_images/vi/azdbeginners.5527441dd9f74068.png) 
 
 [![Người theo dõi GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![Forks trên GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

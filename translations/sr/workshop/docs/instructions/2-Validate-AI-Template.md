@@ -51,7 +51,7 @@ Azure AI Foundry платформа долази са [сет препоруче
 1. Посетите [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Пријавите се на Azure AI Foundry портал када се то од вас затражи - видећете нешто овако.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.sr.png)
+![Pick](../../../../../translated_images/sr/01-pick-template.60d2d5fff5ebc374.png)
 
 **Основне** опције су ваши почетни шаблони:
 
@@ -60,7 +60,7 @@ Azure AI Foundry платформа долази са [сет препоруче
 
 Посетите други линк у новом прозору претраживача (или кликните `Open in GitHub` за повезану картицу). Требало би да видите репозиторијум за овај AZD шаблон. Одвојите минут да истражите README. Архитектура апликације изгледа овако:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.sr.png)
+![Arch](../../../../../translated_images/sr/architecture.8cec470ec15c65c7.png)
 
 ---
 
@@ -92,7 +92,7 @@ Azure AI Foundry платформа долази са [сет препоруче
       ```
 1. Ваш Azure портал ће сада имати провизионисану групу ресурса са тим именом окружења:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.sr.png)
+      ![Infra](../../../../../translated_images/sr/02-provisioned-infra.46c706b14f56e0bf.png)
 
 1. **Сада сте спремни да валидирате распоређену инфраструктуру и апликацију**.
 
@@ -108,7 +108,7 @@ Azure AI Foundry платформа долази са [сет препоруче
 
 1. Требало би да видите хостовани UI апликације као овај:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.sr.png)
+   ![App](../../../../../translated_images/sr/03-test-application.471910da12c3038e.png)
 
 1. Покушајте да поставите неколико [пример питања](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Azure AI Foundry платформа долази са [сет препоруче
 
 1. Требало би да добијете одговоре сличне ономе што је приказано испод. _Али како ово функционише?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.sr.png)
+      ![App](../../../../../translated_images/sr/03-test-question.521c1e863cbaddb6.png)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App распоређује крајњу тачку која се
 1. Кликните на ресурс `Azure AI Foundry` у том списку
 
 1. Требало би да видите ово. Кликните на дугме `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.sr.png)
+   ![Foundry](../../../../../translated_images/sr/04-view-foundry-project.fb94ca41803f28f3.png)
 
 1. Требало би да видите страницу Foundry пројекта за вашу AI апликацију
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.sr.png)
+   ![Project](../../../../../translated_images/sr/05-visit-foundry-portal.d734e98135892d7e.png)
 
 1. Кликните на `Agents` - видећете подразумеваног агента провизионисаног у вашем пројекту
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.sr.png)
+   ![Agents](../../../../../translated_images/sr/06-visit-agents.bccb263f77b00a09.png)
 
 1. Изаберите га - и видећете детаље агента. Обратите пажњу на следеће:
 
       - Агенат користи File Search по подразумеваној вредности (увек)
       - `Knowledge` агента указује да има 32 датотеке отпремљене (за претрагу датотека)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.sr.png)
+      ![Agents](../../../../../translated_images/sr/07-view-agent-details.0e049f37f61eae62.png)
 
 1. Потражите опцију `Data+indexes` у левом менију и кликните за детаље. 
 
       - Требало би да видите 32 датотеке података отпремљене за знање.
       - Оне ће одговарати 12 датотека купаца и 20 датотека производа у `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.sr.png)
+      ![Data](../../../../../translated_images/sr/08-visit-data-indexes.5a4cc1686fa0d19a.png)
 
 **Валидирали сте рад агента!** 
 
@@ -158,7 +158,7 @@ Azure Container App распоређује крајњу тачку која се
 
 Вратите се на прозор претраживача са крајњом тачком Container App-а и питајте: `What products does Amanda Perez own?`. Требало би да видите нешто овако:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.sr.png)
+![Data](../../../../../translated_images/sr/09-ask-in-aca.4102297fc465a4d5.png)
 
 ---
 
@@ -170,7 +170,7 @@ Azure Container App распоређује крајњу тачку која се
 1. Кликните на опцију `Try in Playground` - требало би да добијете UI Игралишта као овај
 1. Поставите исто питање: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.sr.png)
+    ![Data](../../../../../translated_images/sr/09-ask-in-playground.a1b93794f78fa676.png)
 
 Добијате исти (или сличан) одговор - али добијате и додатне информације које можете користити за разумевање квалитета, трошкова и перформанси ваше апликације са агентима. На пример:
 
@@ -182,7 +182,7 @@ Azure Container App распоређује крајњу тачку која се
 1. Пређите мишем преко било које метрике - нпр., Safety. Видите нешто овако
 1. Да ли процењена оцена одговара вашој интуицији за ниво безбедности одговора?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.sr.png)
+      ![Data](../../../../../translated_images/sr/10-view-run-info-meter.6cdb89a0eea5531f.png)
 
 ---x
 
@@ -196,16 +196,16 @@ Azure Container App распоређује крајњу тачку која се
    - Разумите укупни број токена (у односу на употребу токена за излаз) за одговор
    - Разумите кашњење и где се време троши у извршењу
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.sr.png)
+      ![Agent](../../../../../translated_images/sr/10-view-run-info.b20ebd75fef6a1cc.png)
 
 1. Кликните на картицу `Metadata` да видите додатне атрибуте за рад, који могу пружити корисни контекст за отклањање проблема касније.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.sr.png)
+      ![Agent](../../../../../translated_images/sr/11-view-run-info-metadata.7966986122c7c2df.png)
 
 
 1. Кликните на картицу `Evaluations` да видите аутоматске процене направљене на одговор агента. Оне укључују процене безбедности (нпр., Self-harm) и процене специфичне за агента (нпр., Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.sr.png)
+      ![Agent](../../../../../translated_images/sr/12-view-run-info-evaluations.ef25e4577d70efeb.png)
 
 1. На крају, кликните на картицу `Monitoring` у менију са стране.
 
@@ -213,7 +213,7 @@ Azure Container App распоређује крајњу тачку која се
       - Пратите употребу апликације у смислу трошкова (токени) и оптерећења (захтеви).
       - Пратите кашњење апликације до првог бајта (обрада улазних података) и последњег бајта (излаз).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.sr.png)
+      ![Agent](../../../../../translated_images/sr/13-monitoring-resources.5148015f7311807f.png)
 
 ---
 

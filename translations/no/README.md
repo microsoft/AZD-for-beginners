@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD for nybegynnere: En strukturert læringsreise
 
-![AZD-for-nybegynnere](../../translated_images/azdbeginners.5527441dd9f74068.no.png) 
+![AZD-for-nybegynnere](../../translated_images/no/azdbeginners.5527441dd9f74068.png) 
 
 [![GitHub-observatører](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub-forker](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

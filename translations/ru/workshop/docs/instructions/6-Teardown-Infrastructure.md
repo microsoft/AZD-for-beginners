@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       Вот как выглядели развертывания модели **до**:
 
-      ![Начальное](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.ru.png)
+      ![Начальное](../../../../../translated_images/ru/14-deploy-initial.30e4cf1c29b587bc.png)
 
       А вот как они выглядят **после**:
-      ![Новое](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.ru.png)
+      ![Новое](../../../../../translated_images/ru/14-deploy-new.f7f3c355a3cf7299.png)
 
 ---
 

@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD للمبتدئين: رحلة تعليمية منظمة
 
-![AZD للمبتدئين](../../translated_images/azdbeginners.5527441dd9f74068.ar.png) 
+![AZD للمبتدئين](../../translated_images/ar/azdbeginners.5527441dd9f74068.png) 
 
 [![مشاهدون GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![Forks على GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

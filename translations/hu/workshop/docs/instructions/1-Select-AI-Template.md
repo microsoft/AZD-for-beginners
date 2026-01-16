@@ -51,7 +51,7 @@ Az `azd` segítségével a telepítési folyamat egyszerű lehet:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.hu.png)
+![Flow](../../../../../translated_images/hu/azd-flow.19ea67c2f81eaa66.png)
 
 ---
 
@@ -71,7 +71,7 @@ Amikor AZD sablont hozol létre vagy használsz _saját_ esetedre, fontold meg e
 **🎯 | GYAKORLAT**: <br/> 
 Látogasd meg az [Awesome AZD](https://azure.github.io/awesome-azd/) galériát, és használd a szűrőket, hogy felfedezd a jelenleg elérhető több mint 250 sablont. Nézd meg, találsz-e olyat, amely megfelel _saját_ eseted követelményeinek.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.hu.png)
+![Code](../../../../../translated_images/hu/azd-code-to-cloud.2d9503d69d3400da.png)
 
 ---
 
