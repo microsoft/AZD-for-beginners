@@ -51,7 +51,7 @@ Azure AI Foundry platform get [recommended AZD templates](https://learn.microsof
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into Azure AI Foundry portal when dem ask - you go see something like this.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.pcm.png)
+![Pick](../../../../../translated_images/pcm/01-pick-template.60d2d5fff5ebc374.webp)
 
 The **Basic** options na your starter templates:
 
@@ -60,7 +60,7 @@ The **Basic** options na your starter templates:
 
 Visit the second link for new browser tab (or click `Open in GitHub` for the related card). You go see the repository for this AZD Template. Take one minute check the README. The app architecture go look like this:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.pcm.png)
+![Arch](../../../../../translated_images/pcm/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Now, wait make provisioning complete. **E go take 10-15 minutes**
       ```
 1. Your Azure Portal go get provisioned resource group with that env name:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.pcm.png)
+      ![Infra](../../../../../translated_images/pcm/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **You don ready to validate the deployed infrastructure and app**.
 
@@ -108,7 +108,7 @@ Now, wait make provisioning complete. **E go take 10-15 minutes**
 
 1. You go see hosted app front-end UI like this:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.pcm.png)
+   ![App](../../../../../translated_images/pcm/03-test-application.471910da12c3038e.webp)
 
 1. Try ask some [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Now, wait make provisioning complete. **E go take 10-15 minutes**
 
 1. You go get answers wey resemble wetin dey shown below. _But how e dey work?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.pcm.png)
+      ![App](../../../../../translated_images/pcm/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App dey deploy endpoint wey connect to AI Agent wey dem provisio
 1. Click `Azure AI Foundry` resource for that list
 
 1. You go see this. Click `Go to Azure AI Foundry Portal` button. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.pcm.png)
+   ![Foundry](../../../../../translated_images/pcm/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. You go see Foundry Project page for your AI app
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.pcm.png)
+   ![Project](../../../../../translated_images/pcm/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Click `Agents` - you go see default Agent wey dem provision for your project
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.pcm.png)
+   ![Agents](../../../../../translated_images/pcm/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Select am - and you go see Agent details. Note these:
 
       - The agent dey use File Search by default (always)
       - The agent `Knowledge` show say e get 32 files uploaded (for file search)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.pcm.png)
+      ![Agents](../../../../../translated_images/pcm/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Look for `Data+indexes` option for left menu and click for details. 
 
       - You go see the 32 data files wey dem upload for knowledge.
       - These go match the 12 customer files and 20 product files under `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.pcm.png)
+      ![Data](../../../../../translated_images/pcm/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **You don validate Agent operation!** 
 
@@ -158,7 +158,7 @@ Azure Container App dey deploy endpoint wey connect to AI Agent wey dem provisio
 
 Go back to browser tab with Container App endpoint and ask: `What products does Amanda Perez own?`. You go see something like this:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.pcm.png)
+![Data](../../../../../translated_images/pcm/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Make we try understand more about wetin Azure AI Foundry fit do, by testing the 
 1. Click `Try in Playground` option - you go get Playground UI like this
 1. Ask the same question: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.pcm.png)
+    ![Data](../../../../../translated_images/pcm/09-ask-in-playground.a1b93794f78fa676.webp)
 
 You go get the same (or similar) response - but you go also get extra info wey fit help you understand the quality, cost, and performance of your agentic app. For example:
 
@@ -182,7 +182,7 @@ You go also see _stats_ row under the response.
 1. Hover over any metric - e.g., Safety. You go see something like this
 1. E match your understanding of the response safety level?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.pcm.png)
+      ![Data](../../../../../translated_images/pcm/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -196,16 +196,16 @@ Observability na about how you go instrument your app to generate data wey fit h
    - Understand total Token count (vs. output tokens usage) for response
    - Understand latency and where time dey spent for execution
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.pcm.png)
+      ![Agent](../../../../../translated_images/pcm/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Click `Metadata` tab to see extra attributes for the run, wey fit help debug issues later.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.pcm.png)
+      ![Agent](../../../../../translated_images/pcm/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
 1. Click `Evaluations` tab to see auto-assessments wey dem make for agent response. These include safety evaluations (e.g., Self-harm) and agent-specific evaluations (e.g., Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.pcm.png)
+      ![Agent](../../../../../translated_images/pcm/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Last one, click `Monitoring` tab for sidebar menu.
 
@@ -213,7 +213,7 @@ Observability na about how you go instrument your app to generate data wey fit h
       - Track app usage in terms of costs (tokens) and load (requests).
       - Track app latency to first byte (input processing) and last byte (output).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.pcm.png)
+      ![Agent](../../../../../translated_images/pcm/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

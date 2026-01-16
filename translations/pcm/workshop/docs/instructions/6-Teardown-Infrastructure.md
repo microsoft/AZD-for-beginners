@@ -47,10 +47,10 @@ Before we go break down di project, take small time do some open-ended explorati
 
       Dis na di model deployments **before**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.pcm.png)
+      ![Initial](../../../../../translated_images/pcm/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       And dis na di one **after**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.pcm.png)
+      ![New](../../../../../translated_images/pcm/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
