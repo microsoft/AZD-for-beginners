@@ -3,7 +3,7 @@
 **Chapter 5: Multi-Agent AI Solutions**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Current Chapter**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Prerequisites**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ Prerequisites**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **➡️ Next Chapter**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM Templates**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
@@ -2172,8 +2172,8 @@ cd retail-multiagent-arm-template
 
 - 🐛 [Report Issues](https://github.com/microsoft/AZD-for-beginners/issues) - Template bugs or documentation errors
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Architecture questions
-- 📖 [FAQ](../../resources/faq.md) - Common questions answered
-- 🔧 [Troubleshooting Guide](../../docs/troubleshooting/common-issues.md) - Deployment issues
+- 📖 [FAQ](../resources/faq.md) - Common questions answered
+- 🔧 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - Deployment issues
 
 ---
 

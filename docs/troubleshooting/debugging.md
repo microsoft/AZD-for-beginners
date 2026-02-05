@@ -83,39 +83,46 @@ FATAL   - Critical errors that cause application termination
 
 ### Structured Log Analysis
 ```bash
-# Filter logs by level
-azd logs --level error --since 1h
+# View logs with Azure Monitor (via azd monitor)
+azd monitor --logs
 
-# Filter by service
-azd logs --service api --level debug
+# View application logs in real-time
+azd monitor --live
 
-# Export logs for analysis
-azd logs --output json > deployment-logs.json
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name <app-name> --resource-group <rg-name>
 
-# Parse JSON logs with jq
-cat deployment-logs.json | jq '.[] | select(.level == "ERROR")'
+# Container App logs
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Export Application Insights logs for analysis
+az monitor app-insights query \
+    --app <app-insights-name> \
+    --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### Log Correlation
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Correlate logs across services
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-if [ -z "$TRACE_ID" ]; then
-    echo "Usage: $0 <trace-id>"
+APP_INSIGHTS_NAME=$2
+
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
+    echo "Usage: $0 <trace-id> <app-insights-name>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Search across all services
-for service in web api worker; do
-    echo "=== $service logs ==="
-    azd logs --service $service | grep "$TRACE_ID"
-done
+# Search Application Insights for correlated logs
+az monitor app-insights query \
+    --app "$APP_INSIGHTS_NAME" \
+    --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Search Azure logs
+# Search Azure activity logs
 az monitor activity-log list --correlation-id "$TRACE_ID"
 ```
 
@@ -546,8 +553,9 @@ for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
 done
 
 echo "=== 3. Recent Errors ==="
-azd logs --level error --since 30m > emergency-errors.log
-echo "Error count: $(wc -l < emergency-errors.log)"
+# Use Azure Monitor for error logs
+azd monitor --logs
+echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
 az resource list --resource-group "$RESOURCE_GROUP" \
@@ -578,15 +586,16 @@ echo "  - recent-deployments.json"
 # Quick rollback script
 quick_rollback() {
     local environment=$1
-    local backup_timestamp=$2
+    local previous_commit=$2
     
-    echo "🔄 INITIATING ROLLBACK for $environment to $backup_timestamp"
+    echo "🔄 INITIATING ROLLBACK for $environment"
     
     # Switch environment
     azd env select "$environment"
     
-    # Rollback application
-    azd deploy --rollback --timestamp "$backup_timestamp"
+    # Rollback using Git (AZD doesn't have built-in rollback)
+    git checkout "$previous_commit"
+    azd deploy
     
     # Verify rollback
     echo "Verifying rollback..."
@@ -627,20 +636,24 @@ create_debug_queries() {
 
 ### Log Aggregation
 ```bash
-# Aggregate logs from multiple sources
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
+    local app_insights_name=$1
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azd", "logs": ['
-        azd logs --output json --since 1h | sed '$ ! s/$/,/'
-        echo ']}'
+        echo '{"source": "azure-activity", "logs": '
+        az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
+        echo '}'
         
-        echo ',{"source": "azure", "logs": ['
-        az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json | sed '$ ! s/$/,/'
-        echo ']}'
+        if [ -n "$app_insights_name" ]; then
+            echo ',{"source": "app-insights", "logs": '
+            az monitor app-insights query --app "$app_insights_name" \
+                --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
+            echo '}'
+        fi
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"

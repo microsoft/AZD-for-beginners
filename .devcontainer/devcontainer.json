@@ -1,43 +1,79 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "Python 3",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
+	"name": "AZD for Beginners",
+	// Python 3.12 with Debian Bookworm (latest stable)
+	"image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+	
+	// Dev container features - tools installed in the container
 	"features": {
-		"ghcr.io/devcontainers/features/azure-cli:latest": {},
-		"ghcr.io/devcontainers/features/node:1": {},
-        "ghcr.io/azure/azure-dev/azd:latest": {}
+		// Azure Developer CLI - the main tool for this course
+		"ghcr.io/azure/azure-dev/azd:latest": {},
+		// Azure CLI - used alongside AZD for resource management
+		"ghcr.io/devcontainers/features/azure-cli:1": {
+			"installBicep": true
+		},
+		// Node.js - required for many AZD templates
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "20"
+		},
+		// GitHub CLI - useful for template management
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		// Docker-in-Docker - for container app deployments
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	// Forward ports for local development
+	"forwardPorts": [
+		8000,  // MkDocs preview server
+		3000,  // Common web app port
+		5000,  // Python Flask default
+		8080   // Common API port
+	],
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	// Commands to run after container creation
+	"postCreateCommand": "pip3 install --user -r requirements-dev.txt && azd version && az --version",
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip3 install --user -r requirements-dev.txt",
-
-	// Configure tool-specific properties.
+	// VS Code specific customizations
 	"customizations": {
 		"vscode": {
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"editor.formatOnSave": true,
+				"files.trimTrailingWhitespace": true
+			},
 			"extensions": [
 				// Python development
-				"ms-python.python",                           // Python language support and debugging
+				"ms-python.python",
+				"ms-python.vscode-pylance",
 				
 				// Jupyter notebook support
-				"ms-toolsai.jupyter",                         // Core Jupyter notebook functionality
-				"ms-toolsai.vscode-jupyter-cell-tags",        // Add tags to Jupyter notebook cells
-				"ms-toolsai.vscode-jupyter-slideshow",        // Create slideshows from Jupyter notebooks
+				"ms-toolsai.jupyter",
+				"ms-toolsai.vscode-jupyter-cell-tags",
+				"ms-toolsai.vscode-jupyter-slideshow",
 				
 				// AI-powered coding assistance
-				"GitHub.copilot",                             // GitHub Copilot AI code suggestions
-				"GitHub.copilot-chat",                        // GitHub Copilot chat interface
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
 				
 				// Azure development tools
-				"ms-vscode.azure-repos",                      // Azure DevOps repository integration
-				"ms-azure-devtools.vscode-azurecli"           // Azure CLI commands and IntelliSense
+				"ms-azuretools.vscode-azurefunctions",
+				"ms-azuretools.vscode-docker",
+				"ms-azuretools.vscode-bicep",
+				"ms-vscode.azure-repos",
+				"ms-azure-devtools.azure-resource-groups",
+				
+				// Markdown and documentation
+				"yzhang.markdown-all-in-one",
+				"DavidAnson.vscode-markdownlint",
+				"bierner.markdown-mermaid",
+				
+				// YAML and JSON support (for azure.yaml, bicep params)
+				"redhat.vscode-yaml",
+				
+				// Git tools
+				"eamodio.gitlens",
+				"mhutchie.git-graph"
 			]
 		}
 	}

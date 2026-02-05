@@ -5,7 +5,7 @@
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
 - **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
 - **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ## Workshop Overview
 
@@ -666,6 +666,6 @@ Congratulations! You've completed the AI Workshop Lab. You should now be able to
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
 - **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
 - **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 **Need Help?** Join our community for support and discussions about AZD and AI deployments.

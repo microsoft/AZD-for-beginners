@@ -3,7 +3,7 @@
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
-- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/debugging.md)
+- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎯 Course Complete**: [AZD For Beginners](../../README.md)
 
@@ -934,7 +934,7 @@ Based on Microsoft Foundry Discord community feedback:
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
-- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../troubleshooting/debugging.md)
+- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎆 Course Complete**: [AZD For Beginners](../../README.md)
 

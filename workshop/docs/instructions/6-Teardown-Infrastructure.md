@@ -2,9 +2,10 @@
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Item
-    - [ ] Item
-    - [ ] Item
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted cognitive services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
@@ -12,7 +13,19 @@
 
 Before we tear down the project, take a few minutes to do some open-ended exploration.
 
-!!! danger "NITYA-TODO: Outline some prompts to try"
+!!! info "Try These Exploration Prompts"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the AI Foundry portal agent playground one more time
 
 ---
 

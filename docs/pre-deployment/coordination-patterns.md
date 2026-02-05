@@ -1392,7 +1392,8 @@ for i in {1..10}; do
 done
 
 # Check logs - should see circuit open after 5 failures
-azd logs orchestrator --tail 50
+# Use Azure CLI for Container App logs:
+az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ Success Criteria:**
@@ -1632,8 +1633,8 @@ az servicebus queue show \
   --name research-tasks \
   --query "countDetails"
 
-# Check agent health
-azd logs research-agent --tail 50
+# Check agent logs using Azure CLI
+az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Solutions:**
@@ -1676,9 +1677,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 1. **Implement timeout in aggregator (Exercise 1)**
 
-2. **Check for agent failures:**
+2. **Check for agent failures using Azure Monitor:**
    ```bash
-   azd logs --follow | grep "ERROR\|FAIL"
+   # View logs via azd monitor
+   azd monitor --logs
+   
+   # Or use Azure CLI to check specific container app logs
+   az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
 3. **Verify all agents are running:**

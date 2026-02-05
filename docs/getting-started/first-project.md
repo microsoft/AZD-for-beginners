@@ -216,7 +216,10 @@ azd show --output json | jq -r '.services.web.endpoint'
 azd monitor
 
 # View application logs
-azd logs
+azd monitor --logs
+
+# View live metrics
+azd monitor --live
 ```
 
 ## Step 6: Make Changes and Redeploy
@@ -423,9 +426,11 @@ az account show
 export AZD_DEBUG=true
 azd up --debug
 
-# View detailed logs
-azd logs --service api
-azd logs --service web
+# View application logs in Azure
+azd monitor --logs
+
+# For Container Apps, use Azure CLI:
+# az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
 ### Resource Name Conflicts
@@ -450,13 +455,11 @@ Now that you've completed your first project, explore these advanced topics:
 - [Add databases, storage, and other services](../deployment/provisioning.md#adding-services)
 
 ### 2. Set Up CI/CD
-- [GitHub Actions Integration](../deployment/cicd-integration.md)
-- [Azure DevOps Pipelines](../deployment/cicd-integration.md#azure-devops)
+- [Deployment Guide](../deployment/deployment-guide.md) - Complete CI/CD workflows
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipeline configuration
 
 ### 3. Production Best Practices
-- [Security configurations](../deployment/best-practices.md#security)
-- [Performance optimization](../deployment/best-practices.md#performance)
-- [Monitoring and logging](../deployment/best-practices.md#monitoring)
+- [Deployment Guide](../deployment/deployment-guide.md) - Security, performance, and monitoring
 
 ### 4. Explore More Templates
 ```bash

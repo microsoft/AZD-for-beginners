@@ -590,14 +590,15 @@ probes: [
 ### View Service Logs
 
 ```bash
+# View logs using azd monitor
+azd monitor --logs
+
+# Or use Azure CLI for specific Container Apps:
 # Stream logs from API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
 # View recent product service logs
-azd logs product-service --tail 100
-
-# View all logs from both services
-azd logs --follow
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Expected Output**:
@@ -837,8 +838,8 @@ az containerapp show \
 # Generate concurrent requests
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# Watch scaling happen
-azd logs product-service --follow
+# Watch scaling happen using Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
 # Look for: Container Apps scaling events
 ```
 
@@ -980,7 +981,7 @@ az containerapp update \
 5. View retry logs:
 
 ```bash
-azd logs api-gateway --tail 50
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
 # Look for: Retry attempt messages
 ```
 
@@ -1053,8 +1054,8 @@ Test your knowledge:
 # Generate load to test autoscaling
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Watch replicas increase
-azd logs api-gateway --follow
+# Watch replicas increase using Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 # ✅ Expected: See scaling events in logs
 ```
 
@@ -1144,8 +1145,8 @@ azd up
 
 **Diagnose**:
 ```bash
-# Check product service logs
-azd logs product-service --tail 50
+# Check product service logs using Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
 # Check product service health
 az containerapp show \
@@ -1172,8 +1173,8 @@ az containerapp revision list \
 # Generate load to test
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Watch scaling events
-azd logs api-gateway --follow | grep -i scale
+# Watch scaling events using Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
 **Common Causes**:
@@ -1218,7 +1219,7 @@ docker build -t test-product .
 2. Dockerfile syntax errors
 3. Network issues downloading dependencies
 
-**Still Stuck?** See [Common Issues Guide](../../docs/troubleshooting/common-issues.md) or [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+**Still Stuck?** See [Common Issues Guide](../../docs/chapter-07-troubleshooting/common-issues.md) or [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
@@ -1400,7 +1401,7 @@ A: Yes! You can connect to existing databases, storage accounts, Service Bus, et
 - ← Previous: [Simple Flask API](../container-app/simple-flask-api/)
 - → Next: [Database Integration Example](../../database-app/)
 - 🏠 [Course Home](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- 📖 [Container Apps Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 

@@ -1,2 +1,14 @@
-# ......... Documentation
-mkdocs-material
+# ========================================
+# AZD for Beginners - Development Dependencies
+# ========================================
+
+# Documentation (MkDocs Workshop)
+mkdocs-material>=9.5.0
+mkdocs-minify-plugin>=0.8.0
+
+# Code Quality
+pre-commit>=3.6.0
+
+# Azure SDK (for examples and testing)
+azure-identity>=1.15.0
+azure-mgmt-resource>=23.0.0

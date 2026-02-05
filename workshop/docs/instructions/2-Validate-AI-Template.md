@@ -38,10 +38,10 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 
 ## 2. Template Selection
 
-The Azure AI Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Azure AI Foundry portal.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Azure AI Foundry portal when prompted - you will see something like this.
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
 ![Pick](./assets/01-pick-template.png)
 
@@ -49,7 +49,7 @@ The Azure AI Foundry platform comes with a [set of recommended AZD templates](ht
 The **Basic** options are your starter templates:
 
 1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Azure AI Agent Service). Use this to get familiar with agentic AI solutions involving tools and models.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
 Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
 
@@ -116,13 +116,13 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ## 5.  Agent Validation
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Azure AI Foundry project for this template. Let's take a look at what that means.
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
 1. Return to the Azure Portal _Overview_ page for your resource group
 
-1. Click on the `Azure AI Foundry` resource in that list
+1. Click on the `Microsoft Foundry` resource in that list
 
-1. You should see this. Click the `Go to Azure AI Foundry Portal` button. 
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](./assets/04-view-foundry-project.png)
 
 1. You should see the Foundry Project page for your AI application
@@ -157,9 +157,9 @@ Revisit the browser tab with the Container App endpoint and ask: `What products 
 
 ## 6. Agent Playground
 
-Let's build a bit more intuition for the capabilities of Azure AI Foundry, by taking the Agent for a spin in the Agents Playground. 
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
-1. Return to the `Agents` page in Azure AI Foundry - select the default agent
+1. Return to the `Agents` page in Microsoft Foundry - select the default agent
 1. Click the `Try in Playground` option - you should get a Playground UI like this
 1. Ask the same question: `What products does Amanda Perez own?`
 

@@ -105,8 +105,8 @@ API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Check logs for errors
-azd logs --service api --since 5m | grep -i error
+# Monitor for errors (opens in browser by default)
+azd monitor --logs
 ```
 
 **Success Criteria:**
@@ -392,50 +392,48 @@ CMD ["npm", "start"]
 
 ## ⚡ Performance Optimization
 
-### Parallel Deployments
+### Service-Specific Deployments
 ```bash
-# Configure parallel deployment
-azd config set deploy.parallelism 5
+# Deploy a specific service for faster iteration
+azd deploy --service web
+azd deploy --service api
 
-# Deploy services in parallel
-azd deploy --parallel
+# Deploy all services
+azd deploy
 ```
 
 ### Build Caching
 ```yaml
-# azure.yaml - Enable build caching
+# azure.yaml - Configure build commands
 services:
   web:
     project: ./src/web
     buildCommand: npm run build
-    buildCache:
-      enabled: true
-      paths:
-        - node_modules
-        - .next/cache
+    outputPath: dist
 ```
 
-### Incremental Deployments
+### Efficient Code Deployments
 ```bash
-# Deploy only changed services
-azd deploy --incremental
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
+azd deploy
 
-# Deploy with change detection
-azd deploy --detect-changes
+# Deploy specific service for fastest iteration
+azd deploy --service api
 ```
 
 ## 🔍 Deployment Monitoring
 
 ### Real-Time Deployment Monitoring
 ```bash
-# Monitor deployment progress
-azd deploy --follow
+# Monitor application in real-time
+azd monitor --live
 
-# View deployment logs
-azd logs --follow --service api
+# View application logs
+azd monitor --logs
 
 # Check deployment status
-azd show --service api
+azd show
 ```
 
 ### Health Checks
@@ -537,23 +535,27 @@ services:
 
 ### Quick Rollback
 ```bash
-# Rollback to previous deployment
-azd deploy --rollback
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# Rollback specific service
-azd deploy --service api --rollback
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
+git push
+azd deploy
 
-# Rollback to specific version
-azd deploy --service api --version v1.2.3
+# Option 2: Redeploy specific commit
+git checkout <previous-commit-hash>
+azd deploy
+git checkout main
 ```
 
 ### Infrastructure Rollback
 ```bash
-# Rollback infrastructure changes
-azd provision --rollback
+# Preview infrastructure changes before applying
+azd provision --preview
 
-# Preview rollback changes
-azd provision --rollback --preview
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
 ### Database Migration Rollback
@@ -574,14 +576,14 @@ echo "Database rollback completed"
 
 ### Track Deployment Performance
 ```bash
-# Enable deployment metrics
-azd config set telemetry.deployment.enabled true
+# View current deployment status
+azd show
 
-# View deployment history
-azd history
+# Monitor application with Application Insights
+azd monitor --overview
 
-# Get deployment statistics
-azd metrics --type deployment
+# View live metrics
+azd monitor --live
 ```
 
 ### Custom Metrics Collection
@@ -616,12 +618,14 @@ azd env new production-v1
 
 ### 2. Infrastructure Validation
 ```bash
-# Validate before deployment
+# Preview infrastructure changes before deployment
 azd provision --preview
-azd provision --what-if
 
 # Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
+
+# Validate Bicep syntax
+az bicep build --file infra/main.bicep
 ```
 
 ### 3. Testing Integration
@@ -842,27 +846,29 @@ azd env new production
 - [ ] Can roll back if needed
 
 ### Exercise 4: Rollback Strategy (25 minutes)
-**Goal**: Implement and test deployment rollback
+**Goal**: Implement and test deployment rollback using Git
 
 ```bash
 # Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Save v1 configuration
-cp -r .azure/production .azure/production-v1-backup
+# Save v1 commit hash
+V1_COMMIT=$(git rev-parse HEAD)
+echo "v1 commit: $V1_COMMIT"
 
 # Deploy v2 with breaking change
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
+git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Detect failure
+# Detect failure and rollback
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Rollback code
-    git checkout src/api/src/server.js
+    # Rollback using git
+    git revert HEAD --no-edit
     
     # Rollback environment
     azd env set APP_VERSION "1.0.0"

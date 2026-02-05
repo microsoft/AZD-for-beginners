@@ -3,7 +3,7 @@
 **Reference for All Chapters**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Learn Basics**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
-- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 

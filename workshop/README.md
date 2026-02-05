@@ -1,15 +1,15 @@
 <div align="center">
-  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+  <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🚧 Workshop Under Construction 🚧
+      🎯 AZD for AI Developers Workshop
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>This workshop is currently in active development.</strong><br>
-      Content may be incomplete or subject to change. Check back soon for updates!
+      <strong>A hands-on workshop for building AI applications with Azure Developer CLI.</strong><br>
+      Complete 7 modules to master AZD templates and AI deployment workflows.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Last Updated: October 2025
+        📅 Last Updated: February 2026
       </span>
     </div>
   </div>
@@ -71,13 +71,13 @@ This is a hands-on workshop where you learn by doing. Once you have completed th
 
 ## What You'll Learn
 
-Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Azure AI Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
+Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
 
 | Concept  | Objective |
 |:---|:---|
 | **Azure Developer CLI** | Understand tool commands and workflows|
 | **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Azure AI Foundry project  |
+| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
 | **Azure AI Search**| Enable context engineering with agents |
 | **Observability**| Explore tracing, monitoring and evaluations |
 | **Red Teaming**| Explore adversarial testing and mitigations |
@@ -142,23 +142,23 @@ Want to challenge yourself to do more? Here are some project suggestions - or sh
 ## Have feedback?
 
 1. Post an issue on this repo - tag it `Workshop` for convenience.
-1. Join the Azure AI Foundry Discord - connect with your peers!
+1. Join the Microsoft Foundry Discord - connect with your peers!
 
 
 | | | 
 |:---|:---|
 | **📚 Course Home**| [AZD For Beginners](../README.md)|
 | **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Azure AI Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](#workshop-challenge) |
+| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 Next Steps** | [Begin Workshop](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**Previous:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Next:** Begin with [Lab 1: AZD Basics](./lab-1-azd-basics/)
+**Navigation:** [Main Course](../README.md) | [Introduction](docs/instructions/0-Introduction.md) | [Module 1: Select Template](docs/instructions/1-Select-AI-Template.md)
 
 **Ready to start building AI applications with AZD?**
 
-[Begin Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
+[Begin Workshop: Introduction →](docs/instructions/0-Introduction.md)

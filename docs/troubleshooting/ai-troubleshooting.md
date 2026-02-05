@@ -7,7 +7,7 @@
 - **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../microsoft-foundry/production-ai-practices.md)
 - **🤖 Related**: [Chapter 2: AI-First Development](../microsoft-foundry/microsoft-foundry-integration.md)
 
-**Previous:** [Production AI Practices](../microsoft-foundry/production-ai-practices.md) | **Next:** [Getting Started with AZD](../getting-started/README.md)
+**Previous:** [Production AI Practices](../microsoft-foundry/production-ai-practices.md) | **Next:** [AZD Basics](../getting-started/azd-basics.md)
 
 This comprehensive troubleshooting guide addresses common issues when deploying AI solutions with AZD, providing solutions and debugging techniques specific to Azure AI services.
 
@@ -738,8 +738,11 @@ azd up --debug
 # Check deployment status
 azd show
 
-# View deployment logs
-azd logs --follow
+# View application logs (opens monitoring dashboard)
+azd monitor --logs
+
+# View live metrics
+azd monitor --live
 
 # Check environment variables
 azd env get-values
@@ -843,8 +846,8 @@ def monitor_performance(func):
 
 ## Next Steps
 
-1. **Review [AI Model Deployment Guide](ai-model-deployment.md)** for deployment best practices
-2. **Complete [Production AI Practices](production-ai-practices.md)** for enterprise-ready solutions
+1. **Review [AI Model Deployment Guide](../microsoft-foundry/ai-model-deployment.md)** for deployment best practices
+2. **Complete [Production AI Practices](../microsoft-foundry/production-ai-practices.md)** for enterprise-ready solutions
 3. **Join the [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** for community support
 4. **Submit issues** to the [AZD GitHub repository](https://github.com/Azure/azure-dev) for AZD-specific problems
 

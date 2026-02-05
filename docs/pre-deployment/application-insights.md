@@ -1464,8 +1464,11 @@ az monitor app-insights component show \
 # Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Check application logs
-azd logs api --tail 50
+# Check application logs via Azure Monitor
+azd monitor --logs
+
+# Or use Azure CLI for Container Apps:
+az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Solution:**

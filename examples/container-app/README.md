@@ -100,8 +100,8 @@ azd env set COLLECTION_NAME todos
 # Deploy
 azd up
 
-# View logs
-azd logs api
+# View logs via Azure Monitor
+azd monitor --logs
 ```
 
 **Infrastructure Highlights:**
@@ -669,10 +669,12 @@ services:
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # View logs in real-time
-azd logs api --follow
+azd monitor --logs
+# Or use Azure CLI for Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Monitor metrics
-azd monitor --service api
+azd monitor --live
 
 # Create alerts
 az monitor metrics alert create \
@@ -753,8 +755,9 @@ azd provision
 # View deployed resources
 azd show
 
-# Stream logs
-azd logs <service-name> --follow
+# Stream logs using azd monitor or Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # Monitor application
 azd monitor --overview
@@ -768,8 +771,8 @@ azd down --force --purge
 ### Issue: Container fails to start
 
 ```bash
-# Check logs
-azd logs api --tail 100
+# Check logs using Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # View container events
 az containerapp revision show \

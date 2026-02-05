@@ -17,7 +17,7 @@ Over the course of this workshop, you will also be introduced to core developer 
 |:---|:---|
 | **📚 Course Home**| [AZD For Beginners](../README.md)|
 | **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Azure AI Foundry Templates](https://ai.azure.com/templates) |
+| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
 |**🚀 Next Steps** | [Take The Challenge](#workshop-challenge) |
 | | |
 
@@ -43,13 +43,13 @@ This is a hands-on workshop where you learn by doing. Once you have completed th
 
 ## What You'll Learn
 
-Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Azure AI Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
+Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
 
 | Concept  | Objective |
 |:---|:---|
 | **Azure Developer CLI** | Understand tool commands and workflows|
 | **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Azure AI Foundry project  |
+| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
 | **Azure AI Search**| Enable context engineering with agents |
 | **Observability**| Explore tracing, monitoring and evaluations |
 | **Red Teaming**| Explore adversarial testing and mitigations |

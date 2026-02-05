@@ -34,7 +34,10 @@ With regular reference to this cheat sheet, you will be able to:
 
 ### Authentication
 ```bash
-# Login to Azure (uses Azure CLI)
+# Login to Azure via AZD
+azd auth login
+
+# Login to Azure CLI (AZD uses this under the hood)
 az login
 
 # Check current account
@@ -43,6 +46,12 @@ az account show
 # Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# Logout from AZD
+azd auth logout
+
+# Logout from Azure CLI
+az logout
 ```
 
 ### Project Initialization
@@ -83,13 +92,10 @@ azd up --parameter location=westus2
 # Provision Azure resources
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 Preview infrastructure changes
 azd provision --preview
 # Shows a dry-run view of what resources would be created/modified/deleted
 # Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
 ```
 
 ### Application Only
@@ -181,34 +187,44 @@ azd show
 azd show --output json
 ```
 
-## 📊 Monitoring and Logs
+## 📊 Monitoring and Diagnostics
 
-### Application Logs
+### Monitoring Dashboard
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### Monitoring
-```bash
-# Open Azure portal for monitoring
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Open Application Insights live metrics
+azd monitor --live
+
+# Open Application Insights logs blade
+azd monitor --logs
+
+# Open Application Insights overview
+azd monitor --overview
+```
+
+### Viewing Container Logs
+```bash
+# View logs via Azure CLI (for Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Follow logs in real-time
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# View logs from Azure Portal
+azd monitor --logs
+```
+
+### Log Analytics Queries
+```bash
+# Access Log Analytics via Azure Portal
+azd monitor --logs
+
+# Query logs using Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ Maintenance Commands
@@ -231,13 +247,13 @@ azd down --force --purge
 ### Updates
 ```bash
 # Check for azd updates
-azd version --check-for-updates
+azd version
 
 # Get current version
 azd version
 
-# Show system information
-azd info
+# View current configuration
+azd config list
 ```
 
 ## 🔧 Advanced Commands
@@ -256,16 +272,10 @@ azd pipeline show
 
 ### Infrastructure Management
 ```bash
-# Import existing resources
-azd infra import
+# Generate infrastructure templates
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
 # Simulates infrastructure provisioning without deploying
 # Analyzes Bicep/Terraform templates and shows:
@@ -273,18 +283,21 @@ azd provision --preview
 # - Resources to be modified (yellow ~) 
 # - Resources to be deleted (red -)
 # Safe to run - no actual changes made to Azure environment
+
+# Synthesize infrastructure from azure.yaml
+azd infra synth
 ```
 
-### Service Management
+### Project Information
 ```bash
-# List all services
-azd service list
+# Show project status and endpoints
+azd show
 
-# Show service details
-azd service show --service web
+# Show detailed project info as JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Get service endpoints
+azd show --output json | jq '.services'
 ```
 
 ## 🎯 Quick Workflows
@@ -302,8 +315,8 @@ azd up
 # Make changes and redeploy
 azd deploy
 
-# View logs
-azd logs --follow
+# Open monitoring dashboard
+azd monitor --live
 ```
 
 ### Multi-Environment Workflow
@@ -331,14 +344,14 @@ azd up
 # Enable debug mode
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Check deployment status
+azd show
 
 # Validate configuration
-azd config validate
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Open monitoring dashboard for logs
+azd monitor --logs
 
 # Check resource status
 azd show --output json
@@ -355,8 +368,8 @@ azd <command> --debug
 # Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Check current configuration
+azd config list
 
 # Check authentication status
 az account show
@@ -407,7 +420,9 @@ azd env get-values --output json | jq -r '.DATABASE_URL'
 ```bash
 # Format as table
 azd env list --output table
-azd service list --output table
+
+# View deployed services
+azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 Common Command Combinations
@@ -418,15 +433,15 @@ azd service list --output table
 # Quick health check
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
 ### Deployment Validation
 ```bash
 #!/bin/bash
 # Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+azd show
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
@@ -480,24 +495,26 @@ az account clear
 az login
 
 # Force refresh environment
-azd env refresh --force
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# Redeploy all services
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Check deployment status
+azd show --output json
 ```
 
 ### Recovery Commands
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Recover from failed deployment - clean and redeploy
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Reprovision infrastructure only
+azd provision
+
+# Redeploy application only
+azd deploy
 ```
 
 ## 💡 Pro Tips
@@ -505,8 +522,8 @@ azd up --confirm-with-no-prompt
 ### Aliases for Faster Workflow
 ```bash
 # Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
@@ -518,14 +535,15 @@ azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
 # Environment status
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }

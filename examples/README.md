@@ -242,7 +242,7 @@ Azure Samples AZD Templates (linked externally):
    **You'll Learn:** Spring Boot deployment, service mesh, load balancing  
    **Expected Outcome:** Multi-service Java system with service discovery and routing
 
-### Azure AI Foundry Templates
+### Microsoft Foundry Templates
 
 1. **[Azure OpenAI Chat App - Local Example](azure-openai-chat/)** ⭐⭐  
    Complete GPT-4 deployment with chat interface  
@@ -291,7 +291,7 @@ A comprehensive, production-ready multi-agent customer support solution that dem
 
 Before running any example:
 - ✅ Azure subscription with Owner or Contributor access
-- ✅ Azure Developer CLI installed ([Installation Guide](../docs/getting-started/installation.md))
+- ✅ Azure Developer CLI installed ([Installation Guide](../docs/chapter-01-foundation/installation.md))
 - ✅ Docker Desktop running (for container examples)
 - ✅ Appropriate Azure quotas (check example-specific requirements)
 
@@ -342,7 +342,7 @@ Before running any example:
    - ✅ Azure Portal shows "Running" status
    - ✅ Application Insights receiving telemetry
 
-> **⚠️ Issues?** See [Common Issues](../docs/troubleshooting/common-issues.md) for deployment troubleshooting
+> **⚠️ Issues?** See [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) for deployment troubleshooting
 
 ### Adapting Examples
 
@@ -414,7 +414,7 @@ Each example includes:
 **Complexity**: Intermediate  
 **Concepts**: Microservices communication, distributed systems, enterprise patterns
 
-### Azure AI Foundry Examples
+### Microsoft Foundry Examples
 
 #### Azure OpenAI Chat App
 **Technologies**: Azure OpenAI, Cognitive Search, App Service  
@@ -566,13 +566,13 @@ The `configurations/` directory contains reusable components:
 
 ### Documentation Links
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Community Examples
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 - [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
@@ -634,7 +634,7 @@ example-name/
 ### Need Help?
 
 - 📖 [FAQ](../resources/faq.md) - Common questions answered
-- 🐛 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - Fix deployment issues
+- 🐛 [Troubleshooting Guide](../docs/chapter-07-troubleshooting/common-issues.md) - Fix deployment issues
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Ask the community
 - 📚 [Study Guide](../resources/study-guide.md) - Reinforce your learning
 
@@ -643,7 +643,7 @@ example-name/
 **Navigation**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Study Materials**: [Study Guide](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)
-- **🔧 Resources**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/troubleshooting/common-issues.md)
+- **🔧 Resources**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 

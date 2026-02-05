@@ -5,7 +5,7 @@
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
 - **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 This guide provides comprehensive instructions for deploying AI models using AZD templates, covering everything from model selection to production deployment patterns.
 
@@ -476,7 +476,7 @@ async def check_ai_models():
 1. **Review the [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for service integration patterns
 2. **Complete the [AI Workshop Lab](ai-workshop-lab.md)** for hands-on experience
 3. **Implement [Production AI Practices](production-ai-practices.md)** for enterprise deployments
-4. **Explore the [AI Troubleshooting Guide](../troubleshooting/ai-troubleshooting.md)** for common issues
+4. **Explore the [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** for common issues
 
 ## Resources
 
@@ -492,4 +492,4 @@ async def check_ai_models():
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
 - **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../getting-started/configuration.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)

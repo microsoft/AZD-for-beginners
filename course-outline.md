@@ -82,7 +82,7 @@ cd azd-for-beginners/workshop
 **Discovery → Deployment → Customization approach for hands-on skill development**
 
 **Phase 1: Discovery (45 minutes)**
-- **Template Exploration**: Evaluate Azure AI Foundry templates and services
+- **Template Exploration**: Evaluate Microsoft Foundry templates and services
 - **Architecture Analysis**: Understand multi-agent patterns and deployment strategies
 - **Requirement Assessment**: Identify organizational needs and constraints
 - **Environment Setup**: Configure development environment and Azure resources
@@ -119,7 +119,7 @@ cd azd-for-beginners/workshop
 **Comprehensive toolkit for facilitators and learners**
 
 **For Facilitators:**
-- **Instructor Guide**: [Workshop Facilitation Guide](workshop/docs/instructor-guide.md) - Session planning and delivery tips
+- **Instructor Guide**: [Workshop Overview](workshop/README.md) - Session planning and delivery guidance
 - **Presentation Materials**: Slide decks, architecture diagrams, and demo scripts
 - **Assessment Tools**: Practical exercises, knowledge checks, and evaluation rubrics
 - **Technical Setup**: Environment configuration, troubleshooting guides, and backup plans
@@ -127,7 +127,7 @@ cd azd-for-beginners/workshop
 **For Learners:**
 - **Interactive Workshop Environment**: [Workshop Materials](workshop/README.md) - Browser-based learning platform
 - **Step-by-Step Instructions**: [Guided Exercises](workshop/docs/instructions/) - Detailed implementation walkthroughs  
-- **Reference Documentation**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-focused deep dives
+- **Reference Documentation**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-focused deep dives
 - **Community Resources**: Azure Discord channels, GitHub discussions, and expert support
 
 #### 🏢 Enterprise Workshop Implementation

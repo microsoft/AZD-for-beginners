@@ -822,11 +822,12 @@ The following resources will be destroyed:
 # Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Apply changes incrementally after preview
+# Apply changes after preview confirmation
 azd provision --confirm-with-no-prompt
 
-# Rollback if needed
-azd provision --rollback
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
 ### Database Migrations

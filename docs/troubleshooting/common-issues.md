@@ -202,11 +202,13 @@ azd provision --preview
 
 **Solutions:**
 ```bash
-# 1. Check build logs
-azd logs --service web
+# 1. Check build output with debug flag
 azd deploy --service web --debug
 
-# 2. Test build locally
+# 2. View deployed service status
+azd show
+
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
@@ -235,8 +237,11 @@ docker run --rm test-image
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Check container logs
-azd logs --service api --follow
+# 2. Check container logs using Azure CLI
+az containerapp logs show --name my-app --resource-group my-rg --follow
+
+# 3. Monitor application through azd
+azd monitor --logs
 
 # 3. Verify container registry access
 az acr login --name myregistry
@@ -378,11 +383,12 @@ azd env set DATABASE_URL "your-value"
 
 **Solutions:**
 ```bash
-# 1. Enable parallel deployment
-azd config set deploy.parallelism 5
+# 1. Deploy specific services for faster iteration
+azd deploy --service web
+azd deploy --service api
 
-# 2. Use incremental deployments
-azd deploy --incremental
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
 # 3. Optimize build process
 # In package.json:
@@ -408,10 +414,12 @@ azd config set defaults.location eastus2
 }
 
 # 2. Enable Application Insights monitoring
-azd monitor
+azd monitor --overview
 
-# 3. Check application logs for bottlenecks
-azd logs --service api --follow
+# 3. Check application logs in Azure
+az webapp log tail --name myapp --resource-group myrg
+# or for Container Apps:
+az containerapp logs show --name myapp --resource-group myrg --follow
 
 # 4. Implement caching
 # Add Redis cache to your infrastructure
@@ -425,11 +433,11 @@ azd logs --service api --follow
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
-# Check system info
-azd info
+# Check azd version
+azd version
 
-# Validate configuration
-azd config validate
+# View current configuration
+azd config list
 
 # Test connectivity
 curl -v https://myapp.azurewebsites.net/health
@@ -437,9 +445,12 @@ curl -v https://myapp.azurewebsites.net/health
 
 ### Log Analysis
 ```bash
-# Application logs
-azd logs --service web --follow
-azd logs --service api --since 1h
+# Application logs via Azure CLI
+az webapp log tail --name myapp --resource-group myrg
+
+# Monitor application with azd
+azd monitor --logs
+azd monitor --live
 
 # Azure resource logs
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
@@ -485,7 +496,8 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ### Information to Gather
 Before contacting support, collect:
 - `azd version` output
-- `azd info` output
+- `azd config list` output
+- `azd show` output (current deployment status)
 - Error messages (full text)
 - Steps to reproduce the issue
 - Environment details (`azd env show`)
@@ -501,7 +513,6 @@ mkdir -p debug-logs
 
 echo "System Information:" > debug-logs/system-info.txt
 azd version >> debug-logs/system-info.txt
-azd info >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
@@ -509,8 +520,8 @@ azd config list >> debug-logs/config.txt
 azd env show >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
-echo "Recent logs:" > debug-logs/recent-logs.txt
-azd logs --since 1h >> debug-logs/recent-logs.txt
+echo "Current deployment status:" > debug-logs/status.txt
+azd show >> debug-logs/status.txt
 
 echo "Debug information collected in debug-logs/"
 ```

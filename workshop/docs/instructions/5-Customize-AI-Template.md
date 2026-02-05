@@ -42,7 +42,7 @@
 
 **OpenAI File Search (Default):**
 
-- Built-in to Azure AI Agent service
+- Built-in to Foundry Agents
 - Automatic document processing and indexing
 - No additional configuration required
 

@@ -499,14 +499,15 @@ probes: [
 ### View Service Logs
 
 ```bash
+# View logs using azd monitor
+azd monitor --logs
+
+# Or use Azure CLI for specific Container Apps:
 # Stream logs from API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
 # View recent product service logs
-azd logs product-service --tail 100
-
-# View all logs from both services
-azd logs --follow
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Expected Output**:
@@ -811,5 +812,5 @@ A: Use Azure free tier (first 30 days with new accounts) or deploy for short tes
 **📚 Course Navigation:**
 - ← Previous: [Simple Flask API](../simple-flask-api/)
 - → Next: [Database Integration Example](../../database-app/)
-- 🏠 [Course Home](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- 🏠 [Course Home](../../../README.md)
+- 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)

@@ -145,8 +145,11 @@ curl $API_URL/api/items
 ### Step 3: View Logs
 
 ```bash
-# Stream live logs
-azd logs api --follow
+# Stream live logs using azd monitor
+azd monitor --logs
+
+# Or use Azure CLI:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # You should see:
 # - Gunicorn startup messages
@@ -260,11 +263,14 @@ azd deploy api
 ### View Logs
 
 ```bash
-# Stream live logs
-azd logs api --follow
+# Stream live logs using azd monitor
+azd monitor --logs
+
+# Or use Azure CLI for Container Apps:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # View last 100 lines
-azd logs api --tail 100
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
 ### Monitor Metrics
@@ -332,8 +338,8 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutes
 ### Container Won't Start
 
 ```bash
-# Check container logs
-azd logs api --tail 100
+# Check container logs using Azure CLI
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
 # Verify Docker image builds locally
 docker build -t test ./src

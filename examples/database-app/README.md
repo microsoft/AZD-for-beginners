@@ -63,7 +63,7 @@ This is an **intermediate-level** example. You should be familiar with:
 - Fundamental cloud concepts (resources, resource groups)
 - Basic understanding of web applications and databases
 
-**New to AZD?** Start with the [Getting Started guide](../../docs/getting-started/azd-basics.md) first.
+**New to AZD?** Start with the [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) first.
 
 ## Architecture
 
@@ -647,7 +647,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 ```
 
 **Need More Help?**
-- [AZD Troubleshooting Guide](../../docs/troubleshooting/common-issues.md)
+- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
 - [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
 - [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
@@ -862,7 +862,7 @@ az group delete --name rg-<env-name> --yes
 ### Next Steps in This Course
 - **[Container Apps Example](../container-app/)**: Deploy microservices with Azure Container Apps
 - **[AI Integration Guide](../../docs/ai-foundry/)**: Add AI capabilities to your app
-- **[Deployment Best Practices](../../docs/deployment/deployment-guide.md)**: Production deployment patterns
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Production deployment patterns
 
 ### Advanced Topics
 - **Managed Identity**: Remove passwords and use Azure AD authentication

@@ -141,8 +141,10 @@ azd template list
 
 Expected output:
 ```
-azd version 1.5.0 (commit abc123)
+azd version 1.x.x (commit xxxxxx)
 ```
+
+**Note**: The actual version number will vary. Check [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) for the latest version.
 
 **✅ Installation Success Checklist:**
 - [ ] `azd version` shows version number without errors
@@ -294,11 +296,11 @@ rm -rf ~/.azd
 export AZD_DEBUG=true
 azd <command> --debug
 
-# View detailed logs
-azd logs
+# View current configuration
+azd config list
 
-# Check system info
-azd info
+# View current deployment status
+azd show
 ```
 
 ## Updating azd

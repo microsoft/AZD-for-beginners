@@ -752,9 +752,10 @@ azd config list             # Configuration settings
 
 ### Monitoring
 ```bash
-azd monitor                  # Open Azure portal
+azd monitor                  # Open Azure portal monitoring
+azd monitor --logs           # View application logs
+azd monitor --live           # View live metrics
 azd pipeline config          # Set up CI/CD
-azd logs                     # View application logs
 ```
 
 ## Best Practices
