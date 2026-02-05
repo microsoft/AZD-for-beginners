@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-20T10:34:48+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "ur"
-}
--->
 # ملٹی ایجنٹ کوآرڈینیشن پیٹرنز
 
 ⏱️ **متوقع وقت**: 60-75 منٹ | 💰 **متوقع لاگت**: ~$100-300/ماہ | ⭐ **پیچیدگی**: اعلیٰ

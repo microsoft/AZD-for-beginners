@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-19T23:53:07+00:00",
-  "source_file": "docs/ai-foundry/ai-model-deployment.md",
-  "language_code": "fa"
-}
--->
 # استقرار مدل‌های هوش مصنوعی با Azure Developer CLI
 
 **فهرست فصل‌ها:**

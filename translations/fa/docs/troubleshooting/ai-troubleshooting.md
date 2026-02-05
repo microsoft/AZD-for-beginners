@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
-  "translation_date": "2025-11-19T23:48:43+00:00",
-  "source_file": "docs/troubleshooting/ai-troubleshooting.md",
-  "language_code": "fa"
-}
--->
 # راهنمای عیب‌یابی مخصوص هوش مصنوعی
 
 **فهرست فصل‌ها:**

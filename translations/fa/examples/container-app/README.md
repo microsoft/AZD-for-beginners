@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T01:34:46+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "fa"
-}
--->
 # مثال‌های استقرار اپلیکیشن‌های کانتینری با AZD
 
 این پوشه شامل مثال‌های جامع برای استقرار اپلیکیشن‌های کانتینری شده در Azure Container Apps با استفاده از Azure Developer CLI (AZD) است. این مثال‌ها الگوهای واقعی، بهترین روش‌ها و تنظیمات آماده برای تولید را نشان می‌دهند.

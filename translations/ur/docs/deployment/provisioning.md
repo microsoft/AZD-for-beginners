@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
-  "translation_date": "2025-10-24T16:39:14+00:00",
-  "source_file": "docs/deployment/provisioning.md",
-  "language_code": "ur"
-}
--->
 # AZD کے ساتھ Azure وسائل کی فراہمی
 
 **باب کی نیویگیشن:**

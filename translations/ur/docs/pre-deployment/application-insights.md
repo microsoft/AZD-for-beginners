@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-20T10:42:58+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "ur"
-}
--->
 # ایپلیکیشن انسائٹس کا AZD کے ساتھ انضمام
 
 ⏱️ **تخمینی وقت**: 40-50 منٹ | 💰 **لاگت کا اثر**: ~$5-15/ماہ | ⭐ **پیچیدگی**: درمیانی

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-20T10:08:04+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "ur"
-}
--->
 # مائیکروسروسز آرکیٹیکچر - کنٹینر ایپ کی مثال
 
 ⏱️ **متوقع وقت**: 25-35 منٹ | 💰 **متوقع لاگت**: ~$50-100/ماہ | ⭐ **پیچیدگی**: اعلیٰ

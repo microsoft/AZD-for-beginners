@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-19T23:53:35+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "fa"
-}
--->
 # اصول اولیه AZD - آشنایی با Azure Developer CLI
 
 # اصول اولیه AZD - مفاهیم اصلی و مبانی

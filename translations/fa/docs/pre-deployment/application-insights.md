@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-20T02:36:33+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "fa"
-}
--->
 # یکپارچه‌سازی Application Insights با AZD
 
 ⏱️ **زمان تخمینی**: ۴۰-۵۰ دقیقه | 💰 **هزینه تقریبی**: ~۵-۱۵ دلار/ماه | ⭐ **پیچیدگی**: متوسط

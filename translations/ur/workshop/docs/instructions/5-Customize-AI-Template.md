@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T12:03:44+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "ur"
-}
--->
 # 5. ٹیمپلیٹ کو حسب ضرورت بنائیں
 
 !!! tip "اس ماڈیول کے اختتام تک آپ یہ کرنے کے قابل ہوں گے"

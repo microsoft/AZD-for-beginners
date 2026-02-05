@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-20T01:57:44+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "fa"
-}
--->
 # استقرار یک پایگاه داده Microsoft SQL و برنامه وب با AZD
 
 ⏱️ **زمان تخمینی**: ۲۰-۳۰ دقیقه | 💰 **هزینه تخمینی**: حدود ۱۵-۲۵ دلار در ماه | ⭐ **پیچیدگی**: متوسط

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "94de06ce1e81ee964b067f118211612f",
-  "translation_date": "2025-11-19T23:44:22+00:00",
-  "source_file": "docs/troubleshooting/common-issues.md",
-  "language_code": "fa"
-}
--->
 # مشکلات رایج و راه‌حل‌ها
 
 **ناوبری فصل:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-20T08:13:49+00:00",
-  "source_file": "docs/ai-foundry/ai-workshop-lab.md",
-  "language_code": "ur"
-}
--->
 # اے آئی ورکشاپ لیب: اپنی اے آئی حلوں کو AZD کے قابل بنانا
 
 **باب کی نیویگیشن:**

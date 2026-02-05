@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-20T02:07:27+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "fa"
-}
--->
 # معماری میکروسرویس‌ها - مثال برنامه کانتینر
 
 ⏱️ **زمان تخمینی**: ۲۵-۳۵ دقیقه | 💰 **هزینه تخمینی**: حدود $۵۰-۱۰۰ در ماه | ⭐ **پیچیدگی**: پیشرفته

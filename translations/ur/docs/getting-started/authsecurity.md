@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-20T11:14:20+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "ur"
-}
--->
 # تصدیق کے طریقے اور منیجڈ شناخت
 
 ⏱️ **تخمینی وقت**: 45-60 منٹ | 💰 **لاگت کا اثر**: مفت (کوئی اضافی چارجز نہیں) | ⭐ **پیچیدگی**: درمیانی

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
-  "translation_date": "2025-11-19T23:59:29+00:00",
-  "source_file": "docs/getting-started/first-project.md",
-  "language_code": "fa"
-}
--->
 # پروژه اول شما - آموزش عملی
 
 **فهرست فصل‌ها:**

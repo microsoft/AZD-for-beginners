@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T10:59:44+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "fa"
-}
--->
 # 2. اعتبارسنجی یک قالب
 
 !!! tip "در پایان این ماژول شما قادر خواهید بود"
