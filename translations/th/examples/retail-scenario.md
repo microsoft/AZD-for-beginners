@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-21T07:20:35+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "th"
-}
--->
 # โซลูชันสนับสนุนลูกค้าแบบหลายตัวแทน - สถานการณ์ผู้ค้าปลีก
 
 **บทที่ 5: โซลูชัน AI แบบหลายตัวแทน**

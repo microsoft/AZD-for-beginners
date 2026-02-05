@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T21:36:02+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "th"
-}
--->
 # 2. ตรวจสอบความถูกต้องของเทมเพลต
 
 !!! tip "เมื่อจบโมดูลนี้ คุณจะสามารถ"

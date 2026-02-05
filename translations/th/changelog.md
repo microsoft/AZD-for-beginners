@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1bc63a39d4cf8fc5cb5c7040344be859",
-  "translation_date": "2025-11-21T07:12:51+00:00",
-  "source_file": "changelog.md",
-  "language_code": "th"
-}
--->
 # บันทึกการเปลี่ยนแปลง - AZD สำหรับผู้เริ่มต้น
 
 ## บทนำ

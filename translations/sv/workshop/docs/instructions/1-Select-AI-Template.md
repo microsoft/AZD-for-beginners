@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T21:30:02+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "sv"
-}
--->
 # 1. Välj en Mall
 
 !!! tip "VID SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"

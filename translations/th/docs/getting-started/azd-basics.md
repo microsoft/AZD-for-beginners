@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-21T07:54:12+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "th"
-}
--->
 # AZD Basics - ทำความเข้าใจ Azure Developer CLI
 
 # AZD Basics - แนวคิดและพื้นฐานสำคัญ

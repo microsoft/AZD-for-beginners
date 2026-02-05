@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
-  "translation_date": "2025-11-21T06:45:18+00:00",
-  "source_file": "docs/troubleshooting/debugging.md",
-  "language_code": "el"
-}
--->
 # Οδηγός Εντοπισμού Σφαλμάτων για Αναπτύξεις AZD
 
 **Πλοήγηση Κεφαλαίου:**

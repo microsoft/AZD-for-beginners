@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-24T21:31:55+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "th"
-}
--->
 # 3. แยกโครงสร้างเทมเพลต
 
 !!! tip "เมื่อจบโมดูลนี้ คุณจะสามารถ"

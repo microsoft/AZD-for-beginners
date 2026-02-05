@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-21T08:17:01+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "sv"
-}
--->
 # Lösning för kundsupport med flera agenter - Återförsäljarscenario
 
 **Kapitel 5: AI-lösningar med flera agenter**

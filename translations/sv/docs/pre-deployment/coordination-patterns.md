@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-21T10:50:52+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "sv"
-}
--->
 # Mönster för samordning av flera agenter
 
 ⏱️ **Beräknad tid**: 60-75 minuter | 💰 **Beräknad kostnad**: ~$100-300/månad | ⭐ **Komplexitet**: Avancerad

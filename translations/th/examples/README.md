@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-21T07:24:27+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "th"
-}
--->
 # ตัวอย่าง - แม่แบบและการตั้งค่าของ AZD ที่ใช้งานได้จริง
 
 **เรียนรู้จากตัวอย่าง - จัดเรียงตามบทเรียน**

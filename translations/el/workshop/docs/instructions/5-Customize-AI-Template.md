@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T21:27:59+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "el"
-}
--->
 # 5. Προσαρμογή Προτύπου
 
 !!! tip "ΜΕΧΡΙ ΤΟ ΤΕΛΟΣ ΑΥΤΗΣ ΤΗΣ ΕΝΟΤΗΤΑΣ ΘΑ ΜΠΟΡΕΙΤΕ ΝΑ"

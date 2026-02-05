@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T09:37:52+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "th"
-}
--->
 # ตัวอย่างการปรับใช้แอป Container ด้วย AZD
 
 ไดเรกทอรีนี้มีตัวอย่างที่ครอบคลุมสำหรับการปรับใช้แอปพลิเคชันที่อยู่ในรูปแบบคอนเทนเนอร์ไปยัง Azure Container Apps โดยใช้ Azure Developer CLI (AZD) ตัวอย่างเหล่านี้แสดงรูปแบบการใช้งานจริง แนวทางปฏิบัติที่ดีที่สุด และการตั้งค่าที่พร้อมใช้งานในระดับการผลิต

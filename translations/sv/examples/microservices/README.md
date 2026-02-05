@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-21T10:23:57+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "sv"
-}
--->
 # Mikrotjänstarkitektur - Exempel på Container App
 
 ⏱️ **Beräknad tid**: 25-35 minuter | 💰 **Beräknad kostnad**: ~$50-100/månad | ⭐ **Komplexitet**: Avancerad

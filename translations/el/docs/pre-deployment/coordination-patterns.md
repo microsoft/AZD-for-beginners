@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-21T10:43:18+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "el"
-}
--->
 # Πρότυπα Συντονισμού Πολλαπλών Πρακτόρων
 
 ⏱️ **Εκτιμώμενος Χρόνος**: 60-75 λεπτά | 💰 **Εκτιμώμενο Κόστος**: ~$100-300/μήνα | ⭐ **Πολυπλοκότητα**: Προχωρημένο

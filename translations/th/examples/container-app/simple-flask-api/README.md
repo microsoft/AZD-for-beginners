@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-21T09:54:38+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "th"
-}
--->
 # ตัวอย่างแอปพลิเคชันคอนเทนเนอร์ - Simple Flask API
 
 **เส้นทางการเรียนรู้:** ผู้เริ่มต้น ⭐ | **เวลา:** 25-35 นาที | **ค่าใช้จ่าย:** $0-15/เดือน

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T09:35:59+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "el"
-}
--->
 # Παραδείγματα Ανάπτυξης Εφαρμογών Container με AZD
 
 Αυτός ο κατάλογος περιέχει ολοκληρωμένα παραδείγματα για την ανάπτυξη εφαρμογών container στο Azure Container Apps χρησιμοποιώντας το Azure Developer CLI (AZD). Τα παραδείγματα αυτά παρουσιάζουν πραγματικά μοτίβα, βέλτιστες πρακτικές και διαμορφώσεις έτοιμες για παραγωγή.
