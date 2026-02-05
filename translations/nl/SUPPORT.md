@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-09T21:07:34+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "nl"
-}
--->
 # TODO: De beheerder van deze repo heeft dit bestand nog niet bewerkt
 
 **REPO EIGENAAR**: Wil je ondersteuning van Customer Service & Support (CSS) voor dit product/project?

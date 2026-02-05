@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-21T19:04:12+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "nl"
-}
--->
 # Integratie van Application Insights met AZD
 
 ⏱️ **Geschatte tijd**: 40-50 minuten | 💰 **Kostenimpact**: ~$5-15/maand | ⭐ **Complexiteit**: Gemiddeld

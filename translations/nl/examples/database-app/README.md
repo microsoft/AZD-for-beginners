@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-21T18:15:29+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "nl"
-}
--->
 # Implementeren van een Microsoft SQL-database en webapp met AZD
 
 ⏱️ **Geschatte tijd**: 20-30 minuten | 💰 **Geschatte kosten**: ~€15-25/maand | ⭐ **Complexiteit**: Gemiddeld

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-22T10:41:52+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "vi"
-}
--->
 # API Flask Đơn Giản - Ví Dụ Ứng Dụng Container
 
 **Lộ trình học:** Người mới bắt đầu ⭐ | **Thời gian:** 25-35 phút | **Chi phí:** $0-15/tháng

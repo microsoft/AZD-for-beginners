@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-22T11:23:32+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "vi"
-}
--->
 # Tích hợp Application Insights với AZD
 
 ⏱️ **Thời gian ước tính**: 40-50 phút | 💰 **Chi phí dự kiến**: ~$5-15/tháng | ⭐ **Độ phức tạp**: Trung bình

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-21T17:15:16+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "he"
-}
--->
 # פתרון רב-סוכנים לקמעונאות - תבנית תשתית
 
 **פרק 5: חבילת פריסה לייצור**

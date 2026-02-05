@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
-  "translation_date": "2025-11-22T08:26:02+00:00",
-  "source_file": "docs/pre-deployment/capacity-planning.md",
-  "language_code": "vi"
-}
--->
 # Lập Kế Hoạch Năng Lực - Khả Dụng và Giới Hạn Tài Nguyên Azure
 
 **Điều Hướng Chương:**

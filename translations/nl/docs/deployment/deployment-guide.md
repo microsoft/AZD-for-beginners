@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-21T16:33:14+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "nl"
-}
--->
 # Handleiding voor implementatie - Meesterschap in AZD-implementaties
 
 **Hoofdstuknavigatie:**

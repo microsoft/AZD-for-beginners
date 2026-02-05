@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-22T11:42:36+00:00",
-  "source_file": "docs/microsoft-foundry/ai-model-deployment.md",
-  "language_code": "vi"
-}
--->
 # Triển khai Mô hình AI với Azure Developer CLI
 
 **Điều hướng chương:**

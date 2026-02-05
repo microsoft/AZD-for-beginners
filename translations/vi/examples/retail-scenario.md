@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-22T08:15:43+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "vi"
-}
--->
 # Giải pháp Hỗ trợ Khách hàng Đa Tác nhân - Kịch bản Nhà bán lẻ
 
 **Chương 5: Giải pháp AI Đa Tác nhân**

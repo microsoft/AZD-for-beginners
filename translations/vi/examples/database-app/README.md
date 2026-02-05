@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-22T10:49:29+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "vi"
-}
--->
 # Triển khai Cơ sở Dữ liệu Microsoft SQL và Ứng dụng Web với AZD
 
 ⏱️ **Thời gian ước tính**: 20-30 phút | 💰 **Chi phí ước tính**: ~15-25 USD/tháng | ⭐ **Độ phức tạp**: Trung cấp

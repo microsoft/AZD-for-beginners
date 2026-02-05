@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-22T08:19:02+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "vi"
-}
--->
 # Ví dụ - Mẫu và Cấu hình AZD Thực tiễn
 
 **Học qua ví dụ - Sắp xếp theo chương**

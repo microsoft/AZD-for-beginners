@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T22:45:15+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "he"
-}
--->
 # 1. בחירת תבנית
 
 !!! tip "בסיום המודול הזה תוכל"

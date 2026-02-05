@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-21T18:18:49+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "he"
-}
--->
 # פריסת מסד נתונים של Microsoft SQL ואפליקציית ווב עם AZD
 
 ⏱️ **זמן משוער**: 20-30 דקות | 💰 **עלות משוערת**: ~$15-25 לחודש | ⭐ **רמת קושי**: בינונית

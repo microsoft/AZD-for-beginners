@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-21T18:55:33+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "nl"
-}
--->
 # Multi-Agent Coördinatiepatronen
 
 ⏱️ **Geschatte Tijd**: 60-75 minuten | 💰 **Geschatte Kosten**: ~$100-300/maand | ⭐ **Complexiteit**: Geavanceerd

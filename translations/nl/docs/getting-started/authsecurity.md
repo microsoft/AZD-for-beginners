@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-21T19:33:43+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "nl"
-}
--->
 # Authenticatiepatronen en Managed Identity
 
 ⏱️ **Geschatte tijd**: 45-60 minuten | 💰 **Kostenimpact**: Gratis (geen extra kosten) | ⭐ **Complexiteit**: Gemiddeld

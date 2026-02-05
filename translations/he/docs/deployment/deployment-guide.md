@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-21T17:24:16+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "he"
-}
--->
 # מדריך פריסה - שליטה בפריסות AZD
 
 **ניווט פרקים:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T17:49:36+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "nl"
-}
--->
 # Voorbeelden van Container App Implementaties met AZD
 
 Deze map bevat uitgebreide voorbeelden voor het implementeren van container-applicaties naar Azure Container Apps met behulp van Azure Developer CLI (AZD). De voorbeelden tonen realistische patronen, best practices en configuraties die klaar zijn voor productie.

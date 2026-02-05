@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-21T17:57:43+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "he"
-}
--->
 # ארכיטקטורת מיקרו-שירותים - דוגמה לאפליקציות מכולות
 
 ⏱️ **זמן משוער**: 25-35 דקות | 💰 **עלות משוערת**: ~$50-100 לחודש | ⭐ **רמת קושי**: מתקדם

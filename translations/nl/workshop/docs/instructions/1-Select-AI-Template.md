@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T22:45:02+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "nl"
-}
--->
 # 1. Selecteer een Template
 
 !!! tip "AAN HET EINDE VAN DEZE MODULE KUN JE"

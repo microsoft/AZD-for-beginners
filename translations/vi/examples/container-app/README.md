@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-22T10:30:12+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "vi"
-}
--->
 # Ví dụ Triển khai Ứng dụng Container với AZD
 
 Thư mục này chứa các ví dụ toàn diện về cách triển khai ứng dụng container lên Azure Container Apps bằng Azure Developer CLI (AZD). Các ví dụ này minh họa các mô hình thực tế, các phương pháp tốt nhất và cấu hình sẵn sàng cho sản xuất.

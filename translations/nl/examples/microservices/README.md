@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-21T18:31:16+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "nl"
-}
--->
 # Microservices Architectuur - Container App Voorbeeld
 
 ⏱️ **Geschatte Tijd**: 25-35 minuten | 💰 **Geschatte Kosten**: ~$50-100/maand | ⭐ **Complexiteit**: Geavanceerd

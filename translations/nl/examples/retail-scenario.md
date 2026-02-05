@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-21T16:21:55+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "nl"
-}
--->
 # Multi-Agent Klantenondersteuningsoplossing - Scenario voor Retailers
 
 **Hoofdstuk 5: Multi-Agent AI Oplossingen**

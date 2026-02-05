@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-22T08:27:55+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "vi"
-}
--->
 # Hướng Dẫn Triển Khai - Làm Chủ Các Triển Khai AZD
 
 **Mục Lục Chương:**

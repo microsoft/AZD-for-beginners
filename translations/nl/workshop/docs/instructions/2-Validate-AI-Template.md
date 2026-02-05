@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T22:49:58+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "nl"
-}
--->
 # 2. Valideer een Template
 
 !!! tip "AAN HET EINDE VAN DEZE MODULE KUN JE"

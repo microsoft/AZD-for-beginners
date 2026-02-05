@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-24T23:37:09+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "vi"
-}
--->
 # AZD Dành Cho Nhà Phát Triển AI
 
 !!! info "ĐỐI TƯỢNG CỦA BUỔI WORKSHOP NÀY"

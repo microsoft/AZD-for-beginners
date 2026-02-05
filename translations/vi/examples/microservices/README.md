@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-22T10:58:27+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "vi"
-}
--->
 # Kiến trúc Microservices - Ví dụ về Ứng dụng Container
 
 ⏱️ **Thời gian ước tính**: 25-35 phút | 💰 **Chi phí ước tính**: ~$50-100/tháng | ⭐ **Độ phức tạp**: Nâng cao

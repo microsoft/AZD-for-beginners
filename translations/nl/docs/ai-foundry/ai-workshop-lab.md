@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-21T16:44:35+00:00",
-  "source_file": "docs/ai-foundry/ai-workshop-lab.md",
-  "language_code": "nl"
-}
--->
 # AI Workshop Lab: Je AI-oplossingen AZD-Deployable maken
 
 **Hoofdstuk Navigatie:**

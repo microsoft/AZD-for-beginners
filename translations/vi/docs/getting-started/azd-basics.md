@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-22T08:38:07+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "vi"
-}
--->
 # AZD Cơ Bản - Hiểu về Azure Developer CLI
 
 # AZD Cơ Bản - Các Khái Niệm và Nền Tảng Cốt Lõi

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-21T18:33:53+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "he"
-}
--->
 # ארכיטקטורת מיקרו-שירותים - דוגמת אפליקציית קונטיינר
 
 ⏱️ **זמן משוער**: 25-35 דקות | 💰 **עלות משוערת**: ~$50-100 לחודש | ⭐ **מורכבות**: מתקדם

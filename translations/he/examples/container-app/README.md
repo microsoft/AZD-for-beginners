@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T17:51:32+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "he"
-}
--->
 # דוגמאות לפריסת אפליקציות קונטיינר עם AZD
 
 תיקייה זו מכילה דוגמאות מקיפות לפריסת אפליקציות מבוססות קונטיינר ל-Azure Container Apps באמצעות Azure Developer CLI (AZD). הדוגמאות מציגות תבניות מעשיות, שיטות עבודה מומלצות וקונפיגורציות מוכנות לייצור.

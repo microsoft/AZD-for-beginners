@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T23:34:42+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "vi"
-}
--->
 # 6. Gỡ bỏ hạ tầng
 
 !!! tip "SAU KHI HOÀN THÀNH MODULE NÀY, BẠN SẼ CÓ THỂ"
