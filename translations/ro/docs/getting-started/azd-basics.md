@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-23T17:00:40+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "ro"
-}
--->
 # AZD Bazele - Înțelegerea Azure Developer CLI
 
 # AZD Bazele - Concepte de bază și fundamente

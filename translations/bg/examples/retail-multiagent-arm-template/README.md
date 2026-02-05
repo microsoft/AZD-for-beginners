@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-23T17:24:42+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "bg"
-}
--->
 # Решение за търговия на дребно с много агенти - Шаблон за инфраструктура
 
 **Глава 5: Пакет за внедряване в производство**

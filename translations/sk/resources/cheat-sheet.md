@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T17:59:35+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "sk"
-}
--->
 # Príručka príkazov - Základné príkazy AZD
 
 **Rýchly prehľad všetkých kapitol**

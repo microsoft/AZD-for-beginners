@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "94de06ce1e81ee964b067f118211612f",
-  "translation_date": "2025-11-23T16:53:43+00:00",
-  "source_file": "docs/troubleshooting/common-issues.md",
-  "language_code": "ro"
-}
--->
 # Probleme Comune și Soluții
 
 **Navigare Capitol:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T19:25:46+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ro"
-}
--->
 # Simplu API Flask - Exemplu de Aplicație Container
 
 **Cale de învățare:** Începător ⭐ | **Timp:** 25-35 minute | **Cost:** $0-15/lună

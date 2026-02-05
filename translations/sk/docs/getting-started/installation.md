@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
-  "translation_date": "2025-11-23T11:55:52+00:00",
-  "source_file": "docs/getting-started/installation.md",
-  "language_code": "sk"
-}
--->
 # Inštalačný a nastavovací sprievodca
 
 **Navigácia kapitolou:**

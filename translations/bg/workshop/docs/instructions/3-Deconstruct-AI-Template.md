@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-25T02:28:05+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "bg"
-}
--->
 # 3. Разглобяване на шаблон
 
 !!! tip "ДО КРАЯ НА ТОЗИ МОДУЛ ЩЕ МОЖЕТЕ ДА"

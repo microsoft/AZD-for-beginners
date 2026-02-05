@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-23T16:40:20+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "ro"
-}
--->
 # AZD pentru Începători: Structura Cursului & Cadru de Învățare
 
 ## Prezentare Generală a Cursului

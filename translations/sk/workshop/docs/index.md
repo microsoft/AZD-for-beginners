@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a87eaee8309cd74837981fdc6834dd9",
-  "translation_date": "2025-09-25T01:56:10+00:00",
-  "source_file": "workshop/docs/index.md",
-  "language_code": "sk"
-}
--->
 # AZD pre workshop AI vývojárov
 
 > [!IMPORTANT]  

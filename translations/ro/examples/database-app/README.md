@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-23T19:31:48+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "ro"
-}
--->
 # Implementarea unei baze de date Microsoft SQL și a unei aplicații web cu AZD
 
 ⏱️ **Timp estimat**: 20-30 minute | 💰 **Cost estimat**: ~15-25$/lună | ⭐ **Complexitate**: Intermediar

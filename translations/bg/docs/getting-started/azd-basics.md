@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-23T17:43:24+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "bg"
-}
--->
 # AZD Основи - Разбиране на Azure Developer CLI
 
 # AZD Основи - Основни концепции и принципи

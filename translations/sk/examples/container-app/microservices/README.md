@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-23T12:11:16+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "sk"
-}
--->
 # Architektúra Mikroservisov - Príklad s Kontajnerovými Aplikáciami
 
 ⏱️ **Odhadovaný čas**: 25-35 minút | 💰 **Odhadované náklady**: ~50-100 USD/mesiac | ⭐ **Zložitosť**: Pokročilá

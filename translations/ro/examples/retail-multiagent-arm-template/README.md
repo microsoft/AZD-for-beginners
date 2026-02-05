@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-23T16:45:24+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "ro"
-}
--->
 # Soluție Multi-Agent Retail - Șablon de Infrastructură
 
 **Capitolul 5: Pachet de Implementare în Producție**

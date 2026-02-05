@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T19:13:04+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ro"
-}
--->
 # Exemple de implementare a aplicațiilor containerizate cu AZD
 
 Acest director conține exemple detaliate pentru implementarea aplicațiilor containerizate în Azure Container Apps folosind Azure Developer CLI (AZD). Aceste exemple demonstrează modele reale, bune practici și configurații pregătite pentru producție.

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "94de06ce1e81ee964b067f118211612f",
-  "translation_date": "2025-11-23T11:44:28+00:00",
-  "source_file": "docs/troubleshooting/common-issues.md",
-  "language_code": "sk"
-}
--->
 # Bežné problémy a riešenia
 
 **Navigácia kapitol:**

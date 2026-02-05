@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-23T13:05:24+00:00",
-  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
-  "language_code": "sk"
-}
--->
 # Najlepšie postupy pre produkčné AI pracovné zaťaženie s AZD
 
 **Navigácia kapitol:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-23T19:49:49+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "ro"
-}
--->
 # Aplicație de Chat Azure OpenAI
 
 **Nivel de învățare:** Intermediar ⭐⭐ | **Timp:** 35-45 minute | **Cost:** $50-200/lună

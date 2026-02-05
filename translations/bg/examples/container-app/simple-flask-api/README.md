@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T19:27:30+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "bg"
-}
--->
 # Прост API с Flask - Пример за приложение в контейнер
 
 **Път на обучение:** Начинаещ ⭐ | **Време:** 25-35 минути | **Цена:** $0-15/месец

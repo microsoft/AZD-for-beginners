@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-23T13:24:28+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "sk"
-}
--->
 # Autentifikačné vzory a spravovaná identita
 
 ⏱️ **Odhadovaný čas**: 45-60 minút | 💰 **Vplyv na náklady**: Bezplatné (žiadne dodatočné poplatky) | ⭐ **Komplexnosť**: Stredná

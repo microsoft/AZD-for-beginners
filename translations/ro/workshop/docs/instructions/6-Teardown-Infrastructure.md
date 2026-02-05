@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-25T02:17:29+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "ro"
-}
--->
 # 6. Dezactivarea Infrastructurii
 
 !!! tip "PÂNĂ LA SFÂRȘITUL ACESTUI MODUL VEI FI CAPABIL SĂ"
