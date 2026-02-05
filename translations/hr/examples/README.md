@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-23T18:47:06+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "hr"
-}
--->
 # Primjeri - Praktični AZD predlošci i konfiguracije
 
 **Učenje kroz primjere - organizirano po poglavljima**

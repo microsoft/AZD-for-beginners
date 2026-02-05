@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-25T02:00:35+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "sl"
-}
--->
 # 1. Izberite predlogo
 
 !!! tip "DO KONCA TEGA MODULA BOSTE ZMOGLI"

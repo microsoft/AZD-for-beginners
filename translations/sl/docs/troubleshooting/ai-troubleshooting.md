@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
-  "translation_date": "2025-11-23T21:30:40+00:00",
-  "source_file": "docs/troubleshooting/ai-troubleshooting.md",
-  "language_code": "sl"
-}
--->
 # Vodnik za odpravljanje težav, specifičnih za umetno inteligenco
 
 **Navigacija po poglavjih:**

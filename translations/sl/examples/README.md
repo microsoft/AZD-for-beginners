@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-23T21:16:32+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "sl"
-}
--->
 # Primeri - Praktične AZD predloge in konfiguracije
 
 **Učenje na primerih - organizirano po poglavjih**

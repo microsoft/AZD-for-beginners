@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-23T19:23:51+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "hr"
-}
--->
 # Arhitektura mikroservisa - Primjer aplikacije u kontejnerima
 
 ⏱️ **Procijenjeno vrijeme**: 25-35 minuta | 💰 **Procijenjeni trošak**: ~$50-100/mjesečno | ⭐ **Složenost**: Napredno

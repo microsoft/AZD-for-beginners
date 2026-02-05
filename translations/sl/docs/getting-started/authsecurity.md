@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-24T00:14:23+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "sl"
-}
--->
 # Vzorci za preverjanje pristnosti in upravljana identiteta
 
 ⏱️ **Ocenjeni čas**: 45-60 minut | 💰 **Vpliv na stroške**: Brezplačno (brez dodatnih stroškov) | ⭐ **Kompleksnost**: Srednja

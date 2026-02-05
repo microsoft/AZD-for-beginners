@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-23T20:20:05+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "sr"
-}
--->
 # AI Workshop Lab: Прављење ваших AI решења спремним за AZD-деплојмент
 
 **Навигација кроз поглавља:**

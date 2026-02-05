@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T19:18:24+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "hr"
-}
--->
 # Primjeri implementacije aplikacija u kontejnerima s AZD-om
 
 Ovaj direktorij sadrži detaljne primjere za implementaciju aplikacija u kontejnerima na Azure Container Apps koristeći Azure Developer CLI (AZD). Ovi primjeri prikazuju stvarne obrasce, najbolje prakse i konfiguracije spremne za produkciju.

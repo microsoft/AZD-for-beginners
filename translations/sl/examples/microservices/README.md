@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-23T23:27:33+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "sl"
-}
--->
 # Arhitektura mikrostoritev - Primer aplikacije v kontejnerju
 
 ⏱️ **Ocenjeni čas**: 25-35 minut | 💰 **Ocenjeni strošek**: ~$50-100/mesec | ⭐ **Kompleksnost**: Napredno

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T19:16:27+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "sr"
-}
--->
 # Примери за Деплојмент Контејнерских Апликација са AZD
 
 Овај директоријум садржи свеобухватне примере за деплојмент контејнеризованих апликација на Azure Container Apps користећи Azure Developer CLI (AZD). Ови примери приказују реалне шаблоне, најбоље праксе и конфигурације спремне за продукцију.

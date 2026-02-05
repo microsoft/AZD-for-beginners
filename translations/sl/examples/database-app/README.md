@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-23T23:21:07+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "sl"
-}
--->
 # Uvajanje Microsoft SQL baze podatkov in spletne aplikacije z AZD
 
 ⏱️ **Ocenjeni čas**: 20-30 minut | 💰 **Ocenjeni stroški**: ~15-25 €/mesec | ⭐ **Kompleksnost**: Srednja

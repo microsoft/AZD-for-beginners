@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T23:15:08+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "sl"
-}
--->
 # Preprosta Flask API - Primer aplikacije v vsebniku
 
 **Učna pot:** Začetnik ⭐ | **Čas:** 25-35 minut | **Cena:** $0-15/mesec

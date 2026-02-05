@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-25T02:29:58+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "sl"
-}
--->
 # 3. Razčlenitev predloge
 
 !!! tip "DO KONCA TEGA MODULA BOSTE ZMOGLI"

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-23T20:06:24+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "hr"
-}
--->
 # Obrasci koordinacije više agenata
 
 ⏱️ **Procijenjeno vrijeme**: 60-75 minuta | 💰 **Procijenjeni trošak**: ~$100-300/mjesečno | ⭐ **Složenost**: Napredno

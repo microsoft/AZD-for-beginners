@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-23T20:35:54+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "hr"
-}
--->
 # Obrasci autentifikacije i upravljani identitet
 
 ⏱️ **Procijenjeno vrijeme**: 45-60 minuta | 💰 **Utjecaj na troškove**: Besplatno (nema dodatnih troškova) | ⭐ **Složenost**: Srednje

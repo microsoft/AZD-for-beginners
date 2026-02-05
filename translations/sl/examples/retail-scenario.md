@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-23T21:13:36+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "sl"
-}
--->
 # Rešitev za podporo strankam z več agenti - scenarij trgovca
 
 **Poglavje 5: Rešitve z več agenti AI**

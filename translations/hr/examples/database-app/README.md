@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-23T19:36:45+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "hr"
-}
--->
 # Implementacija Microsoft SQL baze podataka i web aplikacije s AZD-om
 
 ⏱️ **Procijenjeno vrijeme**: 20-30 minuta | 💰 **Procijenjeni trošak**: ~15-25 USD/mjesečno | ⭐ **Složenost**: Srednja

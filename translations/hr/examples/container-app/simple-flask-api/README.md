@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T19:30:59+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "hr"
-}
--->
 # Jednostavna Flask API - Primjer aplikacije u kontejneru
 
 **Put učenja:** Početnik ⭐ | **Vrijeme:** 25-35 minuta | **Trošak:** $0-15/mjesečno
