@@ -22,6 +22,16 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.17.0] - 2026-02-05
+
+#### Course Navigation Enhancement
+**This version improves README.md chapter navigation with an enhanced table format.**
+
+#### Changed
+- **Course Map Table**: Enhanced with direct lesson links, duration estimates, and complexity ratings
+- **Folder Cleanup**: Removed redundant old folders (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Link Validation**: All 21+ internal links in Course Map table verified
+
 ### [v3.16.0] - 2026-02-05
 
 #### Product Name Updates
