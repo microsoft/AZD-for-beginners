@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T21:30:55+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "da"
-}
--->
 # 6. Nedtagning af Infrastruktur
 
 !!! tip "VED SLUTNINGEN AF DETTE MODUL VIL DU KUNNE"

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-18T06:24:21+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "no"
-}
--->
 # Ofte stilte spørsmål (FAQ)
 
 **Få hjelp etter kapittel**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-21T18:09:06+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "no"
-}
--->
 # Distribuere en Microsoft SQL-database og webapp med AZD
 
 ⏱️ **Estimert tid**: 20-30 minutter | 💰 **Estimert kostnad**: ~15-25 kr/måned | ⭐ **Kompleksitet**: Middels

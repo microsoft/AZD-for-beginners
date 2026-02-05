@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T17:45:27+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "no"
-}
--->
 # Eksempler på Distribusjon av Container-apper med AZD
 
 Denne katalogen inneholder omfattende eksempler for å distribuere containeriserte applikasjoner til Azure Container Apps ved bruk av Azure Developer CLI (AZD). Disse eksemplene viser virkelige mønstre, beste praksis og produksjonsklare konfigurasjoner.

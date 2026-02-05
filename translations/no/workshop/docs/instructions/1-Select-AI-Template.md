@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T22:44:33+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "no"
-}
--->
 # 1. Velg en mal
 
 !!! tip "VED SLUTTEN AV DENNE MODULEN VIL DU KUNNE"

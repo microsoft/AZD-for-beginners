@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-21T17:52:27+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "no"
-}
--->
 # Mikrotjenestearkitektur - Eksempel på Container App
 
 ⏱️ **Estimert tid**: 25-35 minutter | 💰 **Estimert kostnad**: ~$50-100/måned | ⭐ **Kompleksitet**: Avansert

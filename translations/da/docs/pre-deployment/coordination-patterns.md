@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-21T10:53:13+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "da"
-}
--->
 # Multi-Agent Koordinationsmønstre
 
 ⏱️ **Estimeret tid**: 60-75 minutter | 💰 **Estimeret omkostning**: ~$100-300/måned | ⭐ **Kompleksitet**: Avanceret

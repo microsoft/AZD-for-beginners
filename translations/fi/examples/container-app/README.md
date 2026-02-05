@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T17:47:33+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "fi"
-}
--->
 # Esimerkkejä Container-sovellusten käyttöönotosta AZD:llä
 
 Tämä hakemisto sisältää kattavia esimerkkejä konttipohjaisten sovellusten käyttöönotosta Azure Container Apps -palveluun Azure Developer CLI:n (AZD) avulla. Esimerkit havainnollistavat todellisia käyttötapoja, parhaita käytäntöjä ja tuotantovalmiita konfiguraatioita.

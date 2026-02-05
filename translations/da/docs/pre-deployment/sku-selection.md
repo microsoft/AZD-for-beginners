@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-09-17T23:31:53+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "da"
-}
--->
 # Vejledning til SKU-valg - Sådan vælger du de rette Azure-serviceniveauer
 
 **Kapiteloversigt:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T09:41:37+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "da"
-}
--->
 # Eksempler på Container App-udrulning med AZD
 
 Denne mappe indeholder omfattende eksempler på udrulning af containeriserede applikationer til Azure Container Apps ved hjælp af Azure Developer CLI (AZD). Disse eksempler viser virkelige mønstre, bedste praksis og produktionsklare konfigurationer.

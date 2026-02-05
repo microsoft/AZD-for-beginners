@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-21T14:36:40+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "no"
-}
--->
 # Multi-Agent Kundestøtteløsning - Forhandler-scenario
 
 **Kapittel 5: Multi-Agent AI-løsninger**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T22:45:30+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "no"
-}
--->
 # 6. Avvikling av Infrastruktur
 
 !!! tip "VED SLUTTEN AV DENNE MODULEN VIL DU KUNNE"

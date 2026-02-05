@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-21T11:03:05+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "da"
-}
--->
 # Integration af Application Insights med AZD
 
 ⏱️ **Estimeret tid**: 40-50 minutter | 💰 **Omkostningspåvirkning**: ~$5-15/måned | ⭐ **Kompleksitet**: Mellem

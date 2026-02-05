@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-21T10:39:44+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "da"
-}
--->
 # Azure OpenAI Chat Applikation
 
 **Læringsniveau:** Mellem ⭐⭐ | **Tid:** 35-45 minutter | **Omkostninger:** $50-200/måned

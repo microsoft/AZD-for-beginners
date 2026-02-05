@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-21T10:11:19+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "da"
-}
--->
 # Udrulning af en Microsoft SQL Database og Web App med AZD
 
 ⏱️ **Estimeret tid**: 20-30 minutter | 💰 **Estimeret pris**: ~15-25 USD/måned | ⭐ **Kompleksitet**: Mellem

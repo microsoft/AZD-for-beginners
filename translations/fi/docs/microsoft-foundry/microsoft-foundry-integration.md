@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2e61bc7db9c28647211ab64e03045882",
-  "translation_date": "2025-11-21T19:20:52+00:00",
-  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
-  "language_code": "fi"
-}
--->
 # Microsoft Foundry - Integraatio AZD:n kanssa
 
 **Luvun navigointi:**

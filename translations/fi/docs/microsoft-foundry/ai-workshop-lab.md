@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-21T19:13:50+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "fi"
-}
--->
 # AI Workshop Lab: Tee AI-ratkaisusi AZD-yhteensopiviksi
 
 **Luvun navigointi:**

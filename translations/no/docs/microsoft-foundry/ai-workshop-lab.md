@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-21T19:12:41+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "no"
-}
--->
 # AI Workshop Lab: Gjør AI-løsningene dine AZD-klare
 
 **Kapittelnavigasjon:**

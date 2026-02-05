@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-21T18:53:02+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "fi"
-}
--->
 # Moniagenttien koordinointimallit
 
 ⏱️ **Arvioitu aika**: 60-75 minuuttia | 💰 **Arvioitu kustannus**: ~$100-300/kuukausi | ⭐ **Monimutkaisuus**: Edistynyt
