@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-20T15:44:40+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "mr"
-}
--->
 # AZD सह Application Insights एकत्रीकरण
 
 ⏱️ **अंदाजे वेळ**: 40-50 मिनिटे | 💰 **खर्चाचा परिणाम**: ~$5-15/महिना | ⭐ **जटिलता**: मध्यम

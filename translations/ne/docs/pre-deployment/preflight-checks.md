@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
-  "translation_date": "2025-10-24T17:03:25+00:00",
-  "source_file": "docs/pre-deployment/preflight-checks.md",
-  "language_code": "ne"
-}
--->
 # AZD डिप्लोयमेन्टको लागि प्रि-फ्लाइट जाँच
 
 **अध्याय नेभिगेसन:**

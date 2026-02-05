@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T13:49:48+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "bn"
-}
--->
 # 4. একটি টেমপ্লেট কনফিগার করুন
 
 !!! tip "এই মডিউল শেষে আপনি সক্ষম হবেন"

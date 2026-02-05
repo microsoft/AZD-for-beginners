@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
-  "translation_date": "2025-11-20T12:54:37+00:00",
-  "source_file": "resources/study-guide.md",
-  "language_code": "mr"
-}
--->
 # अभ्यास मार्गदर्शक - सर्वसमावेशक शिक्षण उद्दिष्टे
 
 **शिकण्याचा मार्गदर्शक नेव्हिगेशन**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-20T15:56:38+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "bn"
-}
--->
 # এআই ওয়ার্কশপ ল্যাব: আপনার এআই সমাধানগুলো AZD-তে ডিপ্লয়যোগ্য করা
 
 **অধ্যায় নেভিগেশন:**

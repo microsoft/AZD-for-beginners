@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-20T12:46:00+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "mr"
-}
--->
 # मल्टी-एजंट ग्राहक समर्थन समाधान - किरकोळ विक्रेता परिदृश्य
 
 **अध्याय ५: मल्टी-एजंट AI सोल्यूशन्स**

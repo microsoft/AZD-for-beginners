@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T13:42:28+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "mr"
-}
--->
 # 1. टेम्पलेट निवडा
 
 !!! tip "या मॉड्यूलच्या शेवटी तुम्ही हे करू शकाल"

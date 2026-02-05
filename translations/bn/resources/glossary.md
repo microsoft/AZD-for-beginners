@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-17T19:34:54+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "bn"
-}
--->
 # গ্লসারি - Azure এবং AZD পরিভাষা
 
 **সমস্ত অধ্যায়ের জন্য রেফারেন্স**

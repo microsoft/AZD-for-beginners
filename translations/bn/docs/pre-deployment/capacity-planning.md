@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
-  "translation_date": "2025-11-20T11:59:30+00:00",
-  "source_file": "docs/pre-deployment/capacity-planning.md",
-  "language_code": "bn"
-}
--->
 # সক্ষমতা পরিকল্পনা - Azure রিসোর্সের প্রাপ্যতা এবং সীমা
 
 **অধ্যায়ের নেভিগেশন:**

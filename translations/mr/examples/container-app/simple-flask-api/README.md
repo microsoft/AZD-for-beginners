@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-20T14:44:59+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "mr"
-}
--->
 # साधा Flask API - कंटेनर अॅप उदाहरण
 
 **शिकण्याचा मार्ग:** नवशिक्या ⭐ | **वेळ:** २५-३५ मिनिटे | **खर्च:** $०-१५/महिना

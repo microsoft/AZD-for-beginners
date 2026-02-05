@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-20T15:52:00+00:00",
-  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
-  "language_code": "mr"
-}
--->
 # उत्पादन AI वर्कलोडसाठी AZD सह सर्वोत्तम पद्धती
 
 **अध्याय नेव्हिगेशन:**

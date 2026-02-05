@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-20T13:00:24+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "mr"
-}
--->
 # डिप्लॉयमेंट मार्गदर्शक - AZD डिप्लॉयमेंट्समध्ये प्राविण्य मिळवा
 
 **अध्याय नेव्हिगेशन:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T13:50:16+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "mr"
-}
--->
 # 4. टेम्पलेट कॉन्फिगर करा
 
 !!! tip "या मॉड्यूलच्या शेवटी तुम्ही हे करू शकाल"

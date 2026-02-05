@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1bc63a39d4cf8fc5cb5c7040344be859",
-  "translation_date": "2025-11-20T11:32:41+00:00",
-  "source_file": "changelog.md",
-  "language_code": "bn"
-}
--->
 # পরিবর্তন লগ - AZD ফর বিগিনার্স
 
 ## পরিচিতি

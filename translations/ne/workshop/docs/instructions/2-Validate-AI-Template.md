@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T13:48:48+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "ne"
-}
--->
 # 2. टेम्प्लेट प्रमाणित गर्नुहोस्
 
 !!! tip "यस मोड्युलको अन्त्यमा तपाईं सक्षम हुनुहुनेछ"

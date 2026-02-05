@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-20T14:01:45+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "ne"
-}
--->
 # परिनियोजन मार्गदर्शन - AZD परिनियोजनमा महारत हासिल गर्नुहोस्
 
 **अध्याय नेभिगेसन:**

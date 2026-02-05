@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
-  "translation_date": "2025-10-24T16:56:46+00:00",
-  "source_file": "docs/pre-deployment/preflight-checks.md",
-  "language_code": "bn"
-}
--->
 # AZD ডিপ্লয়মেন্টের জন্য প্রি-ফ্লাইট চেক
 
 **অধ্যায়ের নেভিগেশন:**

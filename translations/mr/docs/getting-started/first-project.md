@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
-  "translation_date": "2025-11-20T13:28:52+00:00",
-  "source_file": "docs/getting-started/first-project.md",
-  "language_code": "mr"
-}
--->
 # तुमचा पहिला प्रकल्प - हाताळण्याचा ट्यूटोरियल
 
 **अध्याय नेव्हिगेशन:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-20T11:39:22+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "bn"
-}
--->
 # AZD শিক্ষার্থীদের জন্য: কোর্সের কাঠামো ও শেখার পদ্ধতি
 
 ## কোর্সের সংক্ষিপ্ত বিবরণ

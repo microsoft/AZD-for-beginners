@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
-  "translation_date": "2025-11-20T12:07:08+00:00",
-  "source_file": "docs/troubleshooting/debugging.md",
-  "language_code": "bn"
-}
--->
 # AZD ডিপ্লয়মেন্টের জন্য ডিবাগিং গাইড
 
 **অধ্যায় নেভিগেশন:**

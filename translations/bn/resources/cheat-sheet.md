@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T16:56:33+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "bn"
-}
--->
 # কমান্ড চিট শিট - গুরুত্বপূর্ণ AZD কমান্ডসমূহ
 
 **সব অধ্যায়ের দ্রুত রেফারেন্স**

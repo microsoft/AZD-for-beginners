@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-17T19:33:01+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "bn"
-}
--->
 # প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী (FAQ)
 
 **অধ্যায় অনুযায়ী সাহায্য পান**

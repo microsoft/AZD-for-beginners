@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-17T19:52:59+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "mr"
-}
--->
 # वारंवार विचारले जाणारे प्रश्न (FAQ)
 
 **प्रत्येक अध्यायासाठी मदत मिळवा**

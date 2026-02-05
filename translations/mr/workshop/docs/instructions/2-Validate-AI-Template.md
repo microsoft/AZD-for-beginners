@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T13:47:48+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "mr"
-}
--->
 # 2. टेम्पलेटची वैधता तपासा
 
 !!! tip "या मॉड्यूलच्या शेवटी तुम्ही सक्षम असाल"

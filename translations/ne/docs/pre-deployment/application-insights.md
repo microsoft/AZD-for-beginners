@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-20T15:47:03+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "ne"
-}
--->
 # AZD सँग Application Insights एकीकरण
 
 ⏱️ **अनुमानित समय**: ४०-५० मिनेट | 💰 **खर्च प्रभाव**: ~$५-१५/महिना | ⭐ **जटिलता**: मध्यम

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T14:28:19+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "bn"
-}
--->
 # AZD দিয়ে কন্টেইনার অ্যাপ ডিপ্লয়মেন্টের উদাহরণ
 
 এই ডিরেক্টরিতে Azure Developer CLI (AZD) ব্যবহার করে Azure Container Apps-এ কন্টেইনারাইজড অ্যাপ্লিকেশন ডিপ্লয় করার জন্য বিস্তারিত উদাহরণ রয়েছে। এই উদাহরণগুলো বাস্তব জীবনের প্যাটার্ন, সেরা অনুশীলন এবং প্রোডাকশন-রেডি কনফিগারেশন প্রদর্শন করে।

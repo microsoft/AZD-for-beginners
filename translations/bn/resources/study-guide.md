@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
-  "translation_date": "2025-11-20T11:56:27+00:00",
-  "source_file": "resources/study-guide.md",
-  "language_code": "bn"
-}
--->
 # স্টাডি গাইড - বিস্তৃত শেখার লক্ষ্যসমূহ
 
 **শেখার পথের নেভিগেশন**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T16:59:51+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "mr"
-}
--->
 # कमांड चीट शीट - आवश्यक AZD कमांड्स
 
 **सर्व अध्यायांसाठी जलद संदर्भ**

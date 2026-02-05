@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
-  "translation_date": "2025-10-24T17:03:45+00:00",
-  "source_file": "docs/deployment/provisioning.md",
-  "language_code": "ne"
-}
--->
 # AZD प्रयोग गरेर Azure स्रोतहरू तयार गर्ने
 
 **अध्याय नेभिगेसन:**

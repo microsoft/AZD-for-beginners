@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
-  "translation_date": "2025-11-20T12:08:13+00:00",
-  "source_file": "docs/troubleshooting/ai-troubleshooting.md",
-  "language_code": "bn"
-}
--->
 # এআই-নির্দিষ্ট সমস্যা সমাধানের গাইড
 
 **অধ্যায়ের নেভিগেশন:**

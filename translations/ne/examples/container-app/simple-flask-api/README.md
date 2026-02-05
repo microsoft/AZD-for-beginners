@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-20T14:47:21+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ne"
-}
--->
 # साधारण Flask API - कन्टेनर एप्लिकेसन उदाहरण
 
 **शिक्षण मार्ग:** प्रारम्भिक ⭐ | **समय:** २५-३५ मिनेट | **खर्च:** $०-१५/महिना

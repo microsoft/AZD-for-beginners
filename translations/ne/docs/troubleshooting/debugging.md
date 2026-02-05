@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
-  "translation_date": "2025-11-20T14:07:59+00:00",
-  "source_file": "docs/troubleshooting/debugging.md",
-  "language_code": "ne"
-}
--->
 # AZD डिप्लोयमेन्टहरूको लागि डिबगिङ गाइड
 
 **अध्याय नेभिगेसन:**
