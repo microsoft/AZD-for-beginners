@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-23T22:29:17+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "my"
-}
--->
 # AZD သင်ခန်းစာများအတွက် အခြေခံသင်တန်း: သင်ခန်းစာအကြောင်းအရာနှင့် သင်ယူမှုဖွံ့ဖြိုးရေး
 
 ## သင်ခန်းစာအကျဉ်းချုပ်

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
-  "translation_date": "2025-11-23T23:03:05+00:00",
-  "source_file": "docs/getting-started/first-project.md",
-  "language_code": "my"
-}
--->
 # သင်၏ ပထမဆုံး Project - လက်တွေ့လေ့ကျင့်ခန်း သင်ခန်းစာ
 
 **အခန်း လမ်းကြောင်း:**

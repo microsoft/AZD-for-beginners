@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-10T05:44:33+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "lt"
-}
--->
 # TODO: Šio saugyklos prižiūrėtojas dar neredagavo šio failo
 
 **SAUGYKLOS SAVININKAS**: Ar norite, kad šiam produktui/projektui būtų teikiama Klientų aptarnavimo ir palaikymo (CSS) paslauga?

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-23T22:32:18+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "my"
-}
--->
 # ဥပမာများ - AZD Template နှင့် Configuration များအတွက် လက်တွေ့အသုံးပြုနိုင်သော လမ်းညွှန်
 
 **ဥပမာများမှ သင်ယူခြင်း - အခန်းအလိုက် စီစဉ်ထားခြင်း**

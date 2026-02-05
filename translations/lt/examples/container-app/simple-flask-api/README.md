@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-24T10:02:00+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "lt"
-}
--->
 # Paprastas Flask API - Konteinerinės programos pavyzdys
 
 **Mokymosi lygis:** Pradedantysis ⭐ | **Laikas:** 25-35 minutės | **Kaina:** $0-15/mėn.

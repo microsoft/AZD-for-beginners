@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-23T23:57:46+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "my"
-}
--->
 # AZD နှင့် Application Insights ပေါင်းစည်းခြင်း
 
 ⏱️ **ခန့်မှန်းချိန်**: 40-50 မိနစ် | 💰 **ကုန်ကျစရိတ်**: ~$5-15/လ | ⭐ **အဆင့်**: အလယ်အလတ်

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-24T09:54:49+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "lt"
-}
--->
 # Konteinerinių programų diegimo pavyzdžiai su AZD
 
 Šiame kataloge pateikiami išsamūs pavyzdžiai, kaip diegti konteinerizuotas programas į Azure Container Apps naudojant Azure Developer CLI (AZD). Šie pavyzdžiai demonstruoja realaus pasaulio modelius, geriausias praktikas ir paruoštas gamybai konfigūracijas.

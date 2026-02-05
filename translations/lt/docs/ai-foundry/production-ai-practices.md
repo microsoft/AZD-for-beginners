@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-24T09:34:36+00:00",
-  "source_file": "docs/ai-foundry/production-ai-practices.md",
-  "language_code": "lt"
-}
--->
 # Geriausios praktikos dirbant su gamybiniais AI darbo krūviais naudojant AZD
 
 **Skyriaus navigacija:**

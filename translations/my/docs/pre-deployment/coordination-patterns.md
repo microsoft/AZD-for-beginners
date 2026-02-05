@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-23T23:53:06+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "my"
-}
--->
 # Multi-Agent Coordination Patterns
 
 ⏱️ **ခန့်မှန်းချိန်**: 60-75 မိနစ် | 💰 **ခန့်မှန်းကုန်ကျစရိတ်**: ~$100-300/လ | ⭐ **အဆင့်**: အဆင့်မြင့်

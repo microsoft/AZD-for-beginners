@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:06:15+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "my"
-}
--->
 # 4. Template ကို Configure လုပ်ခြင်း
 
 !!! tip "ဒီ module အဆုံးသတ်တဲ့အချိန်မှာ သင်တတ်မြောက်ထားမယ့်အရာများ"

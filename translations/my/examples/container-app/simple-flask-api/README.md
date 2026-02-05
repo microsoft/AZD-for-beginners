@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T23:18:49+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "my"
-}
--->
 # Simple Flask API - Container App အထိမ်းအမှတ်
 
 **သင်ကြားမှုလမ်းကြောင်း:** အခြေခံ ⭐ | **အချိန်:** ၂၅-၃၅ မိနစ် | **ကုန်ကျစရိတ်:** $0-15/လ

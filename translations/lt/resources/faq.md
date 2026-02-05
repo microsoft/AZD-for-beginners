@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-18T14:16:51+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "lt"
-}
--->
 # Dažniausiai užduodami klausimai (DUK)
 
 **Pagalba pagal skyrių**

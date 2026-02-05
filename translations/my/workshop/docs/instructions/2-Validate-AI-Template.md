@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-25T02:14:52+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "my"
-}
--->
 # 2. Template ကိုအတည်ပြုပါ
 
 !!! tip "ဒီ module အဆုံးသတ်မှာ သင်တတ်နိုင်မယ့်အရာတွေ"

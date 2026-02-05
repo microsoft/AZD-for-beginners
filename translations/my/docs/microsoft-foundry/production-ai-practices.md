@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-24T00:01:48+00:00",
-  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
-  "language_code": "my"
-}
--->
 # AZD ဖြင့် AI Workload များကို ထုတ်လုပ်မှုအဆင့်သို့ အကောင်းဆုံးလုပ်ဆောင်ရန် လမ်းညွှန်
 
 **အခန်းအကြောင်းအရာများ:**

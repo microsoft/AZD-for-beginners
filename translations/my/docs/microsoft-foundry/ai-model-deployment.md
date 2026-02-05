@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-24T00:13:56+00:00",
-  "source_file": "docs/microsoft-foundry/ai-model-deployment.md",
-  "language_code": "my"
-}
--->
 # Azure Developer CLI ဖြင့် AI မော်ဒယ်များကို တင်သွင်းခြင်း
 
 **အခန်းအကြောင်းအရာများ:**

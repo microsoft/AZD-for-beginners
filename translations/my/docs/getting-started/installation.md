@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
-  "translation_date": "2025-11-23T23:00:48+00:00",
-  "source_file": "docs/getting-started/installation.md",
-  "language_code": "my"
-}
--->
 # တပ်ဆင်ခြင်းနှင့် စတင်အသုံးပြုရန် လမ်းညွှန်
 
 **အခန်းအကြောင်းအရာများ:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-23T23:13:00+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "my"
-}
--->
 # Microservices Architecture - Container App Example
 
 ⏱️ **ခန့်မှန်းချိန်**: ၂၅-၃၅ မိနစ် | 💰 **ခန့်မှန်းကုန်ကျစရိတ်**: ~$50-100/လ | ⭐ **အဆင့်**: အဆင့်မြင့်

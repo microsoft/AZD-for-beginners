@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-24T00:04:25+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "uk"
-}
--->
 # Лабораторна робота AI Workshop: Як зробити ваші AI-рішення готовими до розгортання з AZD
 
 **Навігація по розділах:**

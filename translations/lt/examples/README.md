@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-24T09:10:40+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "lt"
-}
--->
 # Pavyzdžiai - Praktiniai AZD šablonai ir konfigūracijos
 
 **Mokymasis per pavyzdžius - suskirstyta pagal skyrius**

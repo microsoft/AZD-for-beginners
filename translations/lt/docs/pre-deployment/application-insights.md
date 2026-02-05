@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-24T10:27:23+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "lt"
-}
--->
 # Application Insights integracija su AZD
 
 ⏱️ **Numatomas laikas**: 40-50 minučių | 💰 **Kainos poveikis**: ~5-15 $/mėn. | ⭐ **Sudėtingumas**: Vidutinis

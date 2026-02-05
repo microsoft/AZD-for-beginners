@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T23:08:35+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "my"
-}
--->
 # AZD ဖြင့် Container App တင်သွင်းမှု ဥပမာများ
 
 ဤဖိုင်တွဲတွင် Azure Developer CLI (AZD) ကို အသုံးပြု၍ Azure Container Apps သို့ containerized application များကို တင်သွင်းရန်အတွက် အပြည့်အစုံသော ဥပမာများ ပါဝင်သည်။ ဤဥပမာများသည် အမှန်တကယ်အသုံးပြုနိုင်သော ပုံစံများ၊ အကောင်းဆုံးအလေ့အကျင့်များနှင့် ထုတ်လုပ်မှုအဆင့်တွင် အသင့်ဖြစ်သော configuration များကို ပြသထားသည်။

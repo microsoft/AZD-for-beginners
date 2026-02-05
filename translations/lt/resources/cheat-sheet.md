@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T18:22:59+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "lt"
-}
--->
 # Komandų atmintinė - Pagrindiniai AZD komandos
 
 **Greita nuoroda visiems skyriams**

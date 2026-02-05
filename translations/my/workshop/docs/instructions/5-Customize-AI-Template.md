@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-25T02:23:37+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "my"
-}
--->
 # 5. Template ကို Customize လုပ်ခြင်း
 
 !!! tip "ဒီ module အဆုံးသတ်မှာ သင်တတ်မြောက်မည်"

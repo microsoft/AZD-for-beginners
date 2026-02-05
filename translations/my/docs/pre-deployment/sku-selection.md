@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-09-18T13:25:46+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "my"
-}
--->
 # SKU ရွေးချယ်မှုလမ်းညွှန် - Azure Service Tiers ကိုမှန်ကန်စွာရွေးချယ်ခြင်း
 
 **အခန်းအကြောင်းအရာ:**

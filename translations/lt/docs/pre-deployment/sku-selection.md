@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-09-18T14:10:36+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "lt"
-}
--->
 # SKU pasirinkimo vadovas - tinkamų Azure paslaugų lygių pasirinkimas
 
 **Skyrių navigacija:**

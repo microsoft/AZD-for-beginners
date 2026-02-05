@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-23T23:44:48+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "my"
-}
--->
 # Azure OpenAI Chat Application
 
 **သင်ကြားမှုလမ်းကြောင်း:** အလယ်အလတ် ⭐⭐ | **အချိန်:** ၃၅-၄၅ မိနစ် | **ကုန်ကျစရိတ်:** $50-200/လ

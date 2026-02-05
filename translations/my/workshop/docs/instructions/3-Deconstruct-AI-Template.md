@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-25T02:30:37+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "my"
-}
--->
 # 3. Template ကိုခွဲခြမ်းစိတ်ဖြာခြင်း
 
 !!! tip "ဤ module အဆုံးသတ်သည့်အခါ သင်လုပ်နိုင်မည်"

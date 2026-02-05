@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-24T10:39:02+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "lt"
-}
--->
 # Autentifikacijos modeliai ir valdomoji tapatybė
 
 ⏱️ **Numatomas laikas**: 45-60 minučių | 💰 **Kainos poveikis**: Nemokamai (be papildomų mokesčių) | ⭐ **Sudėtingumas**: Vidutinis

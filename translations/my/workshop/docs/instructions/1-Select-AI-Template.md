@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-25T02:00:50+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "my"
-}
--->
 # 1. Template ရွေးချယ်ခြင်း
 
 !!! tip "ဒီ module အဆုံးသတ်မှာ သင်တတ်မြောက်မည့်အရာများ"

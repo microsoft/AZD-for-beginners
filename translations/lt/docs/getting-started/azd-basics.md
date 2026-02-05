@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-24T09:42:16+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "lt"
-}
--->
 # AZD Pagrindai - Azure Developer CLI supratimas
 
 # AZD Pagrindai - Pagrindinės sąvokos ir pagrindai

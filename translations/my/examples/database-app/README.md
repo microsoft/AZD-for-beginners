@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-23T23:26:13+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "my"
-}
--->
 # Microsoft SQL Database နှင့် Web App ကို AZD ဖြင့် Deploy လုပ်ခြင်း
 
 ⏱️ **ခန့်မှန်းချိန်**: 20-30 မိနစ် | 💰 **ခန့်မှန်းကုန်ကျစရိတ်**: ~$15-25/လ | ⭐ **အဆင့်အတန်း**: အလယ်အလတ်

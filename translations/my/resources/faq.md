@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-18T13:33:42+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "my"
-}
--->
 # မကြာခဏမေးလေ့ရှိသောမေးခွန်းများ (FAQ)
 
 **အခန်းအလိုက်အကူအညီရယူရန်**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-24T09:25:11+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "lt"
-}
--->
 # Diegimo vadovas - AZD diegimų įvaldymas
 
 **Skyriaus navigacija:**

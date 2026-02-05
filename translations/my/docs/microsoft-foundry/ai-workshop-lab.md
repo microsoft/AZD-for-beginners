@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-24T00:06:17+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "my"
-}
--->
 # AI Workshop Lab: သင့် AI ဖြေရှင်းနည်းများကို AZD-Deployable အဖြစ် ပြုလုပ်ခြင်း
 
 **အခန်းအကြောင်းအရာများ:**

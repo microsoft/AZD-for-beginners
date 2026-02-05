@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
-  "translation_date": "2025-11-23T22:46:47+00:00",
-  "source_file": "docs/troubleshooting/debugging.md",
-  "language_code": "my"
-}
--->
 # AZD တင်သွင်းမှုများအတွက် Debugging လမ်းညွှန်
 
 **အခန်းအကြောင်းအရာ:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-24T00:18:01+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "my"
-}
--->
 # Authentication Patterns နှင့် Managed Identity
 
 ⏱️ **ခန့်မှန်းချိန်**: ၄၅-၆၀ မိနစ် | 💰 **ကုန်ကျစရိတ်**: အခမဲ့ (အပိုကုန်ကျစရိတ်မရှိ) | ⭐ **အဆင့်**: အလယ်အလတ်

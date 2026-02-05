@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-25T02:01:28+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "lt"
-}
--->
 # 1. Pasirinkite šabloną
 
 !!! tipas "IKI ŠIO MODULIO PABAIGOS JŪS GALĖSITE"

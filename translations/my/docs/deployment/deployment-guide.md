@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-23T22:41:28+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "my"
-}
--->
 # တင်သွင်းလမ်းညွှန် - AZD တင်သွင်းမှုများကို ကျွမ်းကျင်စွာ လုပ်ဆောင်ခြင်း
 
 **အခန်းများအကြောင်းအရာ:**

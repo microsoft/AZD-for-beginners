@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-18T13:36:07+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "my"
-}
--->
 # အဘိဓာန် - Azure နှင့် AZD အကြောင်းအရာများ
 
 **အခန်းအားလုံးအတွက် ရည်ညွှန်းချက်**
