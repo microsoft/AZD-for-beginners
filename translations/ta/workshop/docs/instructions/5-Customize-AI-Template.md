@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-10-11T15:46:12+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "ta"
-}
--->
 # 5. ஒரு டெம்ப்ளேட்டை தனிப்பயனாக்கவும்
 
 !!! tip "இந்த மாட்யூலை முடிக்கும்போது நீங்கள் செய்ய முடியும்"

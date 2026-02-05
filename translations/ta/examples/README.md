@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-24T11:42:44+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "ta"
-}
--->
 # உதாரணங்கள் - நடைமுறை AZD டெம்ப்ளேட்கள் மற்றும் கட்டமைப்புகள்
 
 **உதாரணங்களின் மூலம் கற்றல் - அத்தியாயத்தின்படி ஒழுங்குபடுத்தப்பட்டது**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-24T13:59:38+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ta"
-}
--->
 # AZD மூலம் கன்டெய்னர் ஆப் டிப்ளாய்மென்ட் எடுத்துக்காட்டுகள்
 
 இந்த அடைவு, Azure Developer CLI (AZD) பயன்படுத்தி Azure Container Apps-க்கு கன்டெய்னர் செய்யப்பட்ட பயன்பாடுகளை டிப்ளாய் செய்ய விரிவான எடுத்துக்காட்டுகளை கொண்டுள்ளது. இவை நிஜ வாழ்க்கை முறைமைகள், சிறந்த நடைமுறைகள் மற்றும் தயாரிப்பு-தயார் உள்ளமைப்புகளை விளக்குகின்றன.

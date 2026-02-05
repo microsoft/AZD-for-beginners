@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-10-11T15:58:31+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "et"
-}
--->
 # SKU valikujuhend - Õige Azure'i teenuse taseme valimine
 
 **Peatüki navigeerimine:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-10-11T15:48:42+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "ta"
-}
--->
 # கிளாஸரி - Azure மற்றும் AZD சொற்களஞ்சியம்
 
 **அனைத்து அத்தியாயங்களுக்கான குறிப்புகள்**

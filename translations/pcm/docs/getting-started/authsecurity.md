@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-24T15:43:05+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "pcm"
-}
--->
 # Authentication Patterns and Managed Identity
 
 ⏱️ **Estimated Time**: 45-60 minutes | 💰 **Cost Impact**: Free (no additional charges) | ⭐ **Complexity**: Intermediate

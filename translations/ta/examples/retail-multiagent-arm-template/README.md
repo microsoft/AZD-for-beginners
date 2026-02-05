@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-24T11:47:05+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "ta"
-}
--->
 # ரீட்டெயில் மல்டி-ஏஜென்ட் தீர்வு - உள்கட்டமைப்பு டெம்ப்ளேட்
 
 **அத்தியாயம் 5: உற்பத்தி பிரயோக தொகுப்பு**

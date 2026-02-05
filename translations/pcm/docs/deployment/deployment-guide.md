@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-24T13:38:19+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "pcm"
-}
--->
 # Deployment Guide - How to Master AZD Deployments
 
 **Chapter Navigation:**

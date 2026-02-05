@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-24T14:18:50+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "et"
-}
--->
 # Lihtne Flask API - Konteinerirakenduse näide
 
 **Õppetasand:** Algaja ⭐ | **Aeg:** 25-35 minutit | **Maksumus:** $0-15/kuus

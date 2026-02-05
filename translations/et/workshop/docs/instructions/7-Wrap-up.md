@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ef7f514ede16a170411752b56bedaa5a",
-  "translation_date": "2025-10-11T15:44:12+00:00",
-  "source_file": "workshop/docs/instructions/7-Wrap-up.md",
-  "language_code": "et"
-}
--->
 # 8. Kokkuvõte
 
 !!! tip "PEAMISED JÄRELDUSED ON"

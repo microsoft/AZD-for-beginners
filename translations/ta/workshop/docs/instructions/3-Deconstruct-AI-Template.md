@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-10-11T15:46:56+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "ta"
-}
--->
 # 3. டெம்ப்ளேட்டை பிரித்தெடுக்கவும்
 
 !!! tip "இந்த மாட்யூலை முடிக்கும்போது நீங்கள் செய்ய முடியும்"

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-24T14:04:07+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "pcm"
-}
--->
 # Container App Deployment Examples wit AZD
 
 Dis folder get plenty examples wey show how to deploy container apps go Azure Container Apps wit Azure Developer CLI (AZD). Di examples dey show real-life patterns, best practices, and settings wey fit work for production.

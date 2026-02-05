@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-11-18T19:16:47+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "pcm"
-}
--->
 # SKU Selection Guide - How to Choose Di Correct Azure Service Tiers
 
 **Chapter Navigation:**

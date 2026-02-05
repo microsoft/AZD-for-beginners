@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-11-18T19:06:22+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "pcm"
-}
--->
 # 6. Teardown Infrastructure
 
 !!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-24T13:09:24+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "et"
-}
--->
 # AZD Alused - Azure Developer CLI mõistmine
 
 # AZD Alused - Põhimõisted ja põhialused

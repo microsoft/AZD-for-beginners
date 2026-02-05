@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-10-11T15:44:16+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "ta"
-}
--->
 # 2. ஒரு டெம்ப்ளேட்டை சரிபார்க்கவும்
 
 !!! tip "இந்த தொகுதியின் முடிவில் நீங்கள் செய்ய முடியும்"

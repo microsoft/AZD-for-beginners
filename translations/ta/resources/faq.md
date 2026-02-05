@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-10-11T15:54:38+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "ta"
-}
--->
 # அடிக்கடி கேட்கப்படும் கேள்விகள் (FAQ)
 
 **அத்தியாயத்தின்படி உதவி பெறுங்கள்**

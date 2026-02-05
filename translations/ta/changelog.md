@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1bc63a39d4cf8fc5cb5c7040344be859",
-  "translation_date": "2025-11-24T11:30:49+00:00",
-  "source_file": "changelog.md",
-  "language_code": "ta"
-}
--->
 # மாற்றங்கள் - AZD தொடக்கத்திற்கான வழிகாட்டி
 
 ## அறிமுகம்

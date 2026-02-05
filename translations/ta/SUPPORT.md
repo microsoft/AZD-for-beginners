@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-10-11T15:32:39+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "ta"
-}
--->
 # TODO: இந்த கோப்பை இந்த தொகுப்பின் பராமரிப்பாளர் இன்னும் திருத்தவில்லை
 
 **REPO OWNER**: இந்த தயாரிப்பு/திட்டத்திற்கான வாடிக்கையாளர் சேவை மற்றும் ஆதரவு (CSS) தேவைப்படுகிறதா?

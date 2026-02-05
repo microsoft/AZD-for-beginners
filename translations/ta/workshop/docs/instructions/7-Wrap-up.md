@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ef7f514ede16a170411752b56bedaa5a",
-  "translation_date": "2025-10-11T15:44:07+00:00",
-  "source_file": "workshop/docs/instructions/7-Wrap-up.md",
-  "language_code": "ta"
-}
--->
 # 8. முடிவு
 
 !!! tip "முக்கியமான takeaway செய்திகள்"

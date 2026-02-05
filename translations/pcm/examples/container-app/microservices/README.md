@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-24T14:13:35+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "pcm"
-}
--->
 # Microservices Architecture - Container App Example
 
 ⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced

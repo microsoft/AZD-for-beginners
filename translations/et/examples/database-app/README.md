@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-24T14:32:08+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "et"
-}
--->
 # Microsoft SQL andmebaasi ja veebirakenduse juurutamine AZD abil
 
 ⏱️ **Hinnanguline aeg**: 20-30 minutit | 💰 **Hinnanguline kulu**: ~15-25 $/kuus | ⭐ **Keerukus**: Keskmine

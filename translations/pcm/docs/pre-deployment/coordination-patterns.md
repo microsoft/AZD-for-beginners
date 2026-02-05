@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-24T15:12:41+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "pcm"
-}
--->
 # Multi-Agent Coordination Patterns
 
 ⏱️ **Estimated Time**: 60-75 minutes | 💰 **Estimated Cost**: ~$100-300/month | ⭐ **Complexity**: Advanced

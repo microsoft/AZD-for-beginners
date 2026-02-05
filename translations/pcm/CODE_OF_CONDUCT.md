@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "763a733399ea9f55f6418d1efe13c12b",
-  "translation_date": "2025-11-18T18:56:04+00:00",
-  "source_file": "CODE_OF_CONDUCT.md",
-  "language_code": "pcm"
-}
--->
 # Microsoft Open Source Code of Conduct
 
 Dis project don adopt di [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).

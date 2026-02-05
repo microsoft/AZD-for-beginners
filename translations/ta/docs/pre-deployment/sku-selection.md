@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-10-11T15:58:00+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "ta"
-}
--->
 # SKU தேர்வு வழிகாட்டி - சரியான Azure சேவை நிலைகளை தேர்வு செய்வது எப்படி
 
 **அத்தியாய வழிசெலுத்தல்:**

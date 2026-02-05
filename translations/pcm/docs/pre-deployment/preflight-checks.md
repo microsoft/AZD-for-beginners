@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
-  "translation_date": "2025-11-18T19:15:42+00:00",
-  "source_file": "docs/pre-deployment/preflight-checks.md",
-  "language_code": "pcm"
-}
--->
 # Pre-Flight Checks for AZD Deployments
 
 **Chapter Navigation:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-24T14:37:22+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "pcm"
-}
--->
 # How to Deploy Microsoft SQL Database and Web App wit AZD
 
 ⏱️ **Time wey e go take**: 20-30 minutes | 💰 **Cost wey e go cost**: ~$15-25/month | ⭐ **Level**: Intermediate

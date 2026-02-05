@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
-  "translation_date": "2025-11-24T11:54:30+00:00",
-  "source_file": "docs/pre-deployment/capacity-planning.md",
-  "language_code": "ta"
-}
--->
 # திறன் திட்டமிடல் - Azure வளங்களின் கிடைக்கும் நிலை மற்றும் வரம்புகள்
 
 **அத்தியாய வழிகாட்டி:**

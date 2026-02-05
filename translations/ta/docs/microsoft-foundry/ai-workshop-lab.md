@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-24T15:25:12+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "ta"
-}
--->
 # AI பணிக்காக்கூடிய பயிற்சி ஆய்வகம்: உங்கள் AI தீர்வுகளை AZD-Deployable ஆக்குதல்
 
 **அத்தியாய வழிகாட்டல்:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
-  "translation_date": "2025-11-24T12:53:34+00:00",
-  "source_file": "docs/pre-deployment/capacity-planning.md",
-  "language_code": "et"
-}
--->
 # Mahutavuse planeerimine - Azure'i ressursside saadavus ja piirangud
 
 **Peatüki navigeerimine:**

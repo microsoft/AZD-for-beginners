@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-24T13:07:04+00:00",
-  "source_file": "docs/ai-foundry/ai-workshop-lab.md",
-  "language_code": "et"
-}
--->
 # AI Workshop Lab: Teie AI-lahenduste AZD-le juurutatavaks muutmine
 
 **Peatüki navigeerimine:**

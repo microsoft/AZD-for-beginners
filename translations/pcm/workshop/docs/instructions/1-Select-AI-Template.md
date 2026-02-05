@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-11-18T19:04:06+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "pcm"
-}
--->
 # 1. Choose Template
 
 !!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"

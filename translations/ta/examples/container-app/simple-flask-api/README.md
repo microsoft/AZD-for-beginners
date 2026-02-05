@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-24T14:16:17+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ta"
-}
--->
 # சிம்பிள் பிளாஸ்க் API - கண்டெய்னர் ஆப் உதாரணம்
 
 **கற்றல் பாதை:** தொடக்க நிலை ⭐ | **நேரம்:** 25-35 நிமிடங்கள் | **செலவு:** $0-15/மாதம்

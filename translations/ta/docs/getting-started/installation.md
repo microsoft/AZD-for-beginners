@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
-  "translation_date": "2025-11-24T12:23:12+00:00",
-  "source_file": "docs/getting-started/installation.md",
-  "language_code": "ta"
-}
--->
 # நிறுவல் மற்றும் அமைப்பு வழிகாட்டி
 
 **அத்தியாய வழிசெலுத்தல்:**

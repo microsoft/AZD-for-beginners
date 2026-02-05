@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
-  "translation_date": "2025-11-24T12:05:52+00:00",
-  "source_file": "docs/troubleshooting/ai-troubleshooting.md",
-  "language_code": "ta"
-}
--->
 # AI-சிறப்பு பிரச்சனை தீர்க்கும் வழிகாட்டி
 
 **அத்தியாய வழிசெலுத்தல்:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
-  "translation_date": "2025-11-24T12:20:42+00:00",
-  "source_file": "docs/getting-started/configuration.md",
-  "language_code": "ta"
-}
--->
 # கட்டமைப்பு வழிகாட்டி
 
 **அத்தியாய வழிசெலுத்தல்:**

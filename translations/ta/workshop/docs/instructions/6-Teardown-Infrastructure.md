@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-10-11T15:45:38+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "ta"
-}
--->
 # 6. உள்கட்டமைப்பை அகற்றுதல்
 
 !!! tip "இந்த பகுதியின் முடிவில் நீங்கள் செய்யக்கூடியவை"

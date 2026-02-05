@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-11-18T19:08:39+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "pcm"
-}
--->
 # Command Cheat Sheet - Important AZD Commands
 
 **Quick Reference for All Chapters**

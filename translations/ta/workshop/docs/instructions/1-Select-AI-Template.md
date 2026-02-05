@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-10-11T15:42:46+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "ta"
-}
--->
 # 1. ஒரு டெம்ப்ளேட்டை தேர்ந்தெடுக்கவும்
 
 !!! tip "இந்த தொகுதியின் முடிவில் நீங்கள் செய்யக்கூடியவை"

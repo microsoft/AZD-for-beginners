@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-24T14:01:59+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "et"
-}
--->
 # Konteinerirakenduste juurutamise näited AZD-ga
 
 See kataloog sisaldab põhjalikke näiteid konteinerirakenduste juurutamiseks Azure Container Apps platvormile, kasutades Azure Developer CLI-d (AZD). Näited illustreerivad reaalseid mustreid, parimaid tavasid ja tootmiskõlblikke konfiguratsioone.

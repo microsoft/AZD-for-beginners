@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-24T15:17:00+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "et"
-}
--->
 # Rakenduse Insights integratsioon AZD-ga
 
 ⏱️ **Hinnanguline aeg**: 40-50 minutit | 💰 **Kulude mõju**: ~5-15 $/kuus | ⭐ **Keerukus**: Keskmine

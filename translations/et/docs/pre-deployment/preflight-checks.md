@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
-  "translation_date": "2025-10-24T18:30:04+00:00",
-  "source_file": "docs/pre-deployment/preflight-checks.md",
-  "language_code": "et"
-}
--->
 # AZD juurutuste eelkontrollid
 
 **Peatüki navigeerimine:**

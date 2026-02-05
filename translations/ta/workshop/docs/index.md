@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a87eaee8309cd74837981fdc6834dd9",
-  "translation_date": "2025-10-11T15:42:18+00:00",
-  "source_file": "workshop/docs/index.md",
-  "language_code": "ta"
-}
--->
 # AI டெவலப்பர்களுக்கான AZD பணிப்பயிற்சி
 
 > [!IMPORTANT]  

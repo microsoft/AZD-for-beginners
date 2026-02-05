@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-11-18T19:06:58+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "pcm"
-}
--->
 # 5. Customize Template
 
 !!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"

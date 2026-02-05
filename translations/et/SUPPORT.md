@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-10-11T15:32:46+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "et"
-}
--->
 # TODO: Selle repo haldaja pole seda faili veel redigeerinud
 
 **REPO OMANIK**: Kas soovite klienditeeninduse ja toe (CSS) abi selle toote/projekti jaoks?

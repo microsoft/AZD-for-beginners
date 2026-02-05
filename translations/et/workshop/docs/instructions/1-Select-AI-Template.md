@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-10-11T15:43:03+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "et"
-}
--->
 # 1. Valige mall
 
 !!! tip "PÄRAST SELLE MOODULI LÄBIMIST SAATE"

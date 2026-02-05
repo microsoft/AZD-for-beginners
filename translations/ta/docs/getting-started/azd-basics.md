@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-24T12:16:02+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "ta"
-}
--->
 # AZD அடிப்படைகள் - Azure Developer CLI-ஐப் புரிந்துகொள்வது
 
 # AZD அடிப்படைகள் - முக்கிய கருத்துக்கள் மற்றும் அடிப்படைகள்

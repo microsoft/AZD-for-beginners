@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
-  "translation_date": "2025-11-24T12:26:06+00:00",
-  "source_file": "docs/getting-started/first-project.md",
-  "language_code": "ta"
-}
--->
 # உங்கள் முதல் திட்டம் - செயல்முறை வழிகாட்டி
 
 **அத்தியாய வழிசெலுத்தல்:**

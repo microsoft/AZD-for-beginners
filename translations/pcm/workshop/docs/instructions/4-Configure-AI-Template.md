@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-11-18T19:04:54+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "pcm"
-}
--->
 # 4. Configure Template
 
 !!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"

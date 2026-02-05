@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
-  "translation_date": "2025-11-24T12:03:22+00:00",
-  "source_file": "docs/troubleshooting/debugging.md",
-  "language_code": "ta"
-}
--->
 # AZD இடுப்புகளுக்கான பிழைத்திருத்த வழிகாட்டி
 
 **அத்தியாய வழிசெலுத்தல்:**
