@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-22T09:31:58+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "ms"
-}
--->
 # Penyelesaian Multi-Ejen Runcit - Templat Infrastruktur
 
 **Bab 5: Pakej Pengeluaran**

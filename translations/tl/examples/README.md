@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-22T10:04:10+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "tl"
-}
--->
 # Mga Halimbawa - Praktikal na AZD Templates at Konfigurasyon
 
 **Pag-aaral sa Pamamagitan ng Halimbawa - Inayos ayon sa Kabanata**

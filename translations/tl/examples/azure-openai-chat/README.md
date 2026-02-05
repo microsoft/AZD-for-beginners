@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-22T11:15:11+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "tl"
-}
--->
 # Azure OpenAI Chat Application
 
 **Landas ng Pag-aaral:** Intermediate ⭐⭐ | **Oras:** 35-45 minuto | **Gastos:** $50-200/buwan

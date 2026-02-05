@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-22T11:27:29+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "tl"
-}
--->
 # Pagsasama ng Application Insights sa AZD
 
 ⏱️ **Tinatayang Oras**: 40-50 minuto | 💰 **Halaga**: ~$5-15/buwan | ⭐ **Kahirapan**: Katamtaman

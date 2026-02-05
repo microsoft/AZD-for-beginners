@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-22T09:37:23+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "ms"
-}
--->
 # Panduan Penggunaan - Menguasai Penerapan AZD
 
 **Navigasi Bab:**

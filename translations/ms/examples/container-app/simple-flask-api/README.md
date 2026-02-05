@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-22T10:45:21+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ms"
-}
--->
 # API Flask Mudah - Contoh Aplikasi Kontena
 
 **Laluan Pembelajaran:** Pemula ⭐ | **Masa:** 25-35 minit | **Kos:** $0-15/bulan

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-22T09:09:42+00:00",
-  "source_file": "docs/ai-foundry/production-ai-practices.md",
-  "language_code": "id"
-}
--->
 # Praktik Terbaik Beban Kerja AI Produksi dengan AZD
 
 **Navigasi Bab:**

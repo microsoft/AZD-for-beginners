@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T23:41:03+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "tl"
-}
--->
 # 4. I-configure ang Template
 
 !!! tip "SA DULO NG MODULONG ITO, MAGAGAWA MO NA ANG SUMUSUNOD"

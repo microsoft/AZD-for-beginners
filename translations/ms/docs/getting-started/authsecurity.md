@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-22T11:48:29+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "ms"
-}
--->
 # Corak Pengesahan dan Identiti Terurus
 
 ⏱️ **Anggaran Masa**: 45-60 minit | 💰 **Kos**: Percuma (tiada caj tambahan) | ⭐ **Tahap Kesukaran**: Pertengahan

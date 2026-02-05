@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-22T10:56:57+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "tl"
-}
--->
 # Pag-deploy ng Microsoft SQL Database at Web App gamit ang AZD
 
 ⏱️ **Tinatayang Oras**: 20-30 minuto | 💰 **Tinatayang Gastos**: ~$15-25/buwan | ⭐ **Kumplikado**: Intermediate

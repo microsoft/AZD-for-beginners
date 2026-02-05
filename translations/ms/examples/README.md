@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-22T09:30:45+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "ms"
-}
--->
 # Contoh - Templat dan Konfigurasi AZD Praktikal
 
 **Belajar Melalui Contoh - Disusun Mengikut Bab**

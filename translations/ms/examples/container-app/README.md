@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-22T10:33:33+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ms"
-}
--->
 # Contoh Penerapan Aplikasi Kontena dengan AZD
 
 Direktori ini mengandungi contoh lengkap untuk menerapkan aplikasi yang telah dikontena ke Azure Container Apps menggunakan Azure Developer CLI (AZD). Contoh-contoh ini menunjukkan corak dunia nyata, amalan terbaik, dan konfigurasi yang sedia untuk produksi.

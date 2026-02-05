@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-22T11:19:55+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "ms"
-}
--->
 # Corak Koordinasi Multi-Ejen
 
 ⏱️ **Anggaran Masa**: 60-75 minit | 💰 **Anggaran Kos**: ~$100-300/bulan | ⭐ **Kerumitan**: Lanjutan

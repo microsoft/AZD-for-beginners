@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
-  "translation_date": "2025-11-22T09:16:00+00:00",
-  "source_file": "docs/getting-started/installation.md",
-  "language_code": "id"
-}
--->
 # Panduan Instalasi & Pengaturan
 
 **Navigasi Bab:**

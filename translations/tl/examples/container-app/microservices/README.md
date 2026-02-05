@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-22T10:39:44+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "tl"
-}
--->
 # Arkitektura ng Microservices - Halimbawa ng Container App
 
 ⏱️ **Tinatayang Oras**: 25-35 minuto | 💰 **Tinatayang Gastos**: ~$50-100/buwan | ⭐ **Kahirapan**: Advanced

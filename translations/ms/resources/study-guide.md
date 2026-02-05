@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
-  "translation_date": "2025-11-22T09:33:23+00:00",
-  "source_file": "resources/study-guide.md",
-  "language_code": "ms"
-}
--->
 # Panduan Pembelajaran - Objektif Pembelajaran Komprehensif
 
 **Navigasi Laluan Pembelajaran**

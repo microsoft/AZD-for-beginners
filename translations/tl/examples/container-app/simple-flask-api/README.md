@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-22T10:47:12+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "tl"
-}
--->
 # Simple Flask API - Halimbawa ng Container App
 
 **Landas ng Pag-aaral:** Baguhan ⭐ | **Oras:** 25-35 minuto | **Gastos:** $0-15/buwan

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-22T08:52:58+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "id"
-}
--->
 # Solusi Dukungan Pelanggan Multi-Agent - Skenario Retailer
 
 **Bab 5: Solusi AI Multi-Agent**

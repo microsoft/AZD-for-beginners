@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-22T10:31:51+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "id"
-}
--->
 # Contoh Penerapan Aplikasi Container dengan AZD
 
 Direktori ini berisi contoh lengkap untuk menerapkan aplikasi yang dikontainerisasi ke Azure Container Apps menggunakan Azure Developer CLI (AZD). Contoh-contoh ini menunjukkan pola dunia nyata, praktik terbaik, dan konfigurasi siap produksi.

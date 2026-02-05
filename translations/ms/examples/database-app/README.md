@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-22T10:54:20+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "ms"
-}
--->
 # Melancarkan Pangkalan Data Microsoft SQL dan Aplikasi Web dengan AZD
 
 ⏱️ **Anggaran Masa**: 20-30 minit | 💰 **Anggaran Kos**: ~$15-25/bulan | ⭐ **Tahap Kesukaran**: Pertengahan

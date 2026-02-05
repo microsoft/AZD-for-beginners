@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-18T08:05:17+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "id"
-}
--->
 # Pertanyaan yang Sering Diajukan (FAQ)
 
 **Dapatkan Bantuan Berdasarkan Bab**

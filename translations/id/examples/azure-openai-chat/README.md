@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-22T11:11:34+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "id"
-}
--->
 # Aplikasi Chat Azure OpenAI
 
 **Tingkat Pembelajaran:** Menengah ⭐⭐ | **Waktu:** 35-45 menit | **Biaya:** $50-200/bulan

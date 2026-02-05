@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-22T11:31:12+00:00",
-  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
-  "language_code": "ms"
-}
--->
 # Amalan Terbaik Beban Kerja AI Pengeluaran dengan AZD
 
 **Navigasi Bab:**

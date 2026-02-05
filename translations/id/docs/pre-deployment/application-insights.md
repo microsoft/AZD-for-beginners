@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-22T11:24:53+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "id"
-}
--->
 # Integrasi Application Insights dengan AZD
 
 ⏱️ **Estimasi Waktu**: 40-50 menit | 💰 **Dampak Biaya**: ~$5-15/bulan | ⭐ **Kompleksitas**: Menengah

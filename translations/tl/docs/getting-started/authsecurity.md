@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-22T11:50:10+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "tl"
-}
--->
 # Mga Pattern ng Authentication at Managed Identity
 
 ⏱️ **Tinatayang Oras**: 45-60 minuto | 💰 **Epekto sa Gastos**: Libre (walang karagdagang bayarin) | ⭐ **Kumplikado**: Intermediate

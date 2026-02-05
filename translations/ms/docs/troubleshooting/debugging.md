@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
-  "translation_date": "2025-11-22T09:41:58+00:00",
-  "source_file": "docs/troubleshooting/debugging.md",
-  "language_code": "ms"
-}
--->
 # Panduan Debugging untuk Penerapan AZD
 
 **Navigasi Bab:**

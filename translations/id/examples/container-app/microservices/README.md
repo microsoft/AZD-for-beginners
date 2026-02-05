@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-22T10:37:22+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "id"
-}
--->
 # Arsitektur Microservices - Contoh Aplikasi Container
 
 ⏱️ **Estimasi Waktu**: 25-35 menit | 💰 **Estimasi Biaya**: ~$50-100/bulan | ⭐ **Kompleksitas**: Tingkat Lanjut

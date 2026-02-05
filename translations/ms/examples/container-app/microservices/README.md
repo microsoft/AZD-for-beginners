@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-22T10:38:32+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "ms"
-}
--->
 # Seni Bina Mikroservis - Contoh Aplikasi Kontena
 
 ⏱️ **Anggaran Masa**: 25-35 minit | 💰 **Anggaran Kos**: ~$50-100/bulan | ⭐ **Kerumitan**: Lanjutan
