@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T10:52:27+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "de"
-}
--->
 # 5. Anpassung einer Vorlage
 
 !!! tip "AM ENDE DIESES MODULS WERDEN SIE IN DER LAGE SEIN"

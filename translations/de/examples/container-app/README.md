@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T01:32:59+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "de"
-}
--->
 # Container-App-Bereitstellungsbeispiele mit AZD
 
 Dieses Verzeichnis enthält umfassende Beispiele für die Bereitstellung containerisierter Anwendungen in Azure Container Apps mithilfe der Azure Developer CLI (AZD). Die Beispiele zeigen praxisnahe Muster, bewährte Verfahren und produktionsreife Konfigurationen.

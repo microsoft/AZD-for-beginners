@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T09:17:28+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ru"
-}
--->
 # Примеры развертывания контейнерных приложений с AZD
 
 Этот каталог содержит подробные примеры развертывания контейнеризированных приложений в Azure Container Apps с использованием Azure Developer CLI (AZD). Примеры демонстрируют реальные сценарии, лучшие практики и готовые к производству конфигурации.

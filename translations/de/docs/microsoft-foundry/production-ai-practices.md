@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-20T02:41:42+00:00",
-  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
-  "language_code": "de"
-}
--->
 # Best Practices für produktive KI-Workloads mit AZD
 
 **Kapitelübersicht:**

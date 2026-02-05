@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "94de06ce1e81ee964b067f118211612f",
-  "translation_date": "2025-11-20T07:05:44+00:00",
-  "source_file": "docs/troubleshooting/common-issues.md",
-  "language_code": "ar"
-}
--->
 # المشكلات الشائعة والحلول
 
 **تنقل الفصول:**

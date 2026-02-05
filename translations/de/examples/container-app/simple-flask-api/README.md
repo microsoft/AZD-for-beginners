@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-20T01:47:16+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "de"
-}
--->
 # Einfache Flask-API - Beispiel für eine Container-App
 
 **Lernpfad:** Anfänger ⭐ | **Zeit:** 25-35 Minuten | **Kosten:** $0-15/Monat

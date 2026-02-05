@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T09:19:26+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ar"
-}
--->
 # أمثلة على نشر تطبيقات الحاويات باستخدام AZD
 
 يحتوي هذا الدليل على أمثلة شاملة لنشر التطبيقات المعبأة في حاويات إلى Azure Container Apps باستخدام Azure Developer CLI (AZD). تعرض هذه الأمثلة أنماطًا واقعية، وأفضل الممارسات، وتكوينات جاهزة للإنتاج.

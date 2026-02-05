@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2e61bc7db9c28647211ab64e03045882",
-  "translation_date": "2025-11-20T11:01:26+00:00",
-  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
-  "language_code": "ar"
-}
--->
 # تكامل Microsoft Foundry مع AZD
 
 **تنقل الفصول:**

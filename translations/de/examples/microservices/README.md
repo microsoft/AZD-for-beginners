@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-20T02:05:24+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "de"
-}
--->
 # Microservices-Architektur - Beispiel einer Container-App
 
 ⏱️ **Geschätzte Zeit**: 25-35 Minuten | 💰 **Geschätzte Kosten**: ~50-100 $/Monat | ⭐ **Schwierigkeitsgrad**: Fortgeschritten

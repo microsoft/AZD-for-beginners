@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-20T10:39:31+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "ru"
-}
--->
 # Интеграция Application Insights с AZD
 
 ⏱️ **Оценочное время**: 40-50 минут | 💰 **Стоимость**: ~$5-15/месяц | ⭐ **Сложность**: Средняя

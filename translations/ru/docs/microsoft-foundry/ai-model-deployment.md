@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-20T11:07:12+00:00",
-  "source_file": "docs/microsoft-foundry/ai-model-deployment.md",
-  "language_code": "ru"
-}
--->
 # Развертывание моделей ИИ с помощью Azure Developer CLI
 
 **Навигация по главе:**

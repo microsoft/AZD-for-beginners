@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5395583c1a88847b97d186dd5f5b1a69",
-  "translation_date": "2025-11-20T06:27:18+00:00",
-  "source_file": "docs/troubleshooting/debugging.md",
-  "language_code": "ru"
-}
--->
 # Руководство по отладке для развертываний AZD
 
 **Навигация по главам:**

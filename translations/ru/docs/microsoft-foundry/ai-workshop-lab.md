@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-20T10:53:29+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "ru"
-}
--->
 # Лаборатория AI Workshop: Подготовка AI-решений для развертывания с AZD
 
 **Навигация по главам:**

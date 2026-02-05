@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-20T02:27:17+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "de"
-}
--->
 # Koordinationsmuster für Multi-Agenten-Systeme
 
 ⏱️ **Geschätzte Zeit**: 60-75 Minuten | 💰 **Geschätzte Kosten**: ~100-300 $/Monat | ⭐ **Komplexität**: Fortgeschritten

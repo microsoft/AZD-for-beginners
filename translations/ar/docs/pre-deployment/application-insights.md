@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-20T10:41:06+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "ar"
-}
--->
 # دمج Application Insights مع AZD
 
 ⏱️ **الوقت المقدر**: 40-50 دقيقة | 💰 **تأثير التكلفة**: ~5-15 دولار/شهريًا | ⭐ **التعقيد**: متوسط

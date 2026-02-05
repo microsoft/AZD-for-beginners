@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-20T06:30:35+00:00",
-  "source_file": "docs/ai-foundry/production-ai-practices.md",
-  "language_code": "ru"
-}
--->
 # Лучшие практики для рабочих нагрузок ИИ в продакшене с AZD
 
 **Навигация по главе:**

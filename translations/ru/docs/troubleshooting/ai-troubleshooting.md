@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b5ae13b6a245ab3a2e6dae923aab65bd",
-  "translation_date": "2025-11-20T06:29:08+00:00",
-  "source_file": "docs/troubleshooting/ai-troubleshooting.md",
-  "language_code": "ru"
-}
--->
 # Руководство по устранению неполадок, связанных с ИИ
 
 **Навигация по главам:**

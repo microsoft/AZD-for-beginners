@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-20T01:55:03+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "de"
-}
--->
 # Bereitstellung einer Microsoft SQL-Datenbank und Web-App mit AZD
 
 ⏱️ **Geschätzte Zeit**: 20-30 Minuten | 💰 **Geschätzte Kosten**: ~15-25 €/Monat | ⭐ **Komplexität**: Mittel
