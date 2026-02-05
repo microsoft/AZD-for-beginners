@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-09-17T21:06:43+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "pa"
-}
--->
 # SKU ਚੋਣ ਗਾਈਡ - ਸਹੀ Azure ਸੇਵਾ ਟੀਅਰ ਚੁਣਨਾ
 
 **ਅਧਿਆਇ ਨੈਵੀਗੇਸ਼ਨ:**

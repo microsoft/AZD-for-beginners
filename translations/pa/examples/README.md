@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-20T20:26:04+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "pa"
-}
--->
 # ਉਦਾਹਰਨ - ਪ੍ਰੈਕਟਿਕਲ AZD ਟੈਂਪਲੇਟ ਅਤੇ ਕਨਫਿਗਰੇਸ਼ਨ
 
 **ਉਦਾਹਰਨਾਂ ਰਾਹੀਂ ਸਿੱਖਣਾ - ਅਧਿਆਇ ਅਨੁਸਾਰ ਵਿਵਸਥਿਤ**

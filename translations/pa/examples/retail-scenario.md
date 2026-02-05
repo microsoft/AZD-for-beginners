@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-20T20:20:47+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "pa"
-}
--->
 # ਮਲਟੀ-ਏਜੰਟ ਗਾਹਕ ਸਹਾਇਤਾ ਹੱਲ - ਰਿਟੇਲਰ ਸਨਰੀਓ
 
 **ਅਧਿਆਇ 5: ਮਲਟੀ-ਏਜੰਟ AI ਹੱਲ**

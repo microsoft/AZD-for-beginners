@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-20T23:53:20+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "pa"
-}
--->
 # Azure OpenAI ਚੈਟ ਐਪਲੀਕੇਸ਼ਨ
 
 **ਸਿਖਲਾਈ ਪਾਥ:** ਮੱਧਮ ⭐⭐ | **ਸਮਾਂ:** 35-45 ਮਿੰਟ | **ਖਰਚ:** $50-200/ਮਹੀਨਾ
