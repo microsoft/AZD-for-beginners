@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-19T18:31:30+00:00",
-  "source_file": "docs/ai-foundry/ai-model-deployment.md",
-  "language_code": "ja"
-}
--->
 # Azure Developer CLI を使用した AI モデルのデプロイ
 
 **章のナビゲーション:**

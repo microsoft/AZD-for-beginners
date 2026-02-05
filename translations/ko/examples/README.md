@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-19T18:55:37+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "ko"
-}
--->
 # 예제 - 실용적인 AZD 템플릿 및 구성
 
 **예제를 통해 배우기 - 챕터별로 정리됨**

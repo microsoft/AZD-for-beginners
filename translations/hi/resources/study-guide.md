@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
-  "translation_date": "2025-11-20T01:04:24+00:00",
-  "source_file": "resources/study-guide.md",
-  "language_code": "hi"
-}
--->
 # अध्ययन गाइड - व्यापक सीखने के उद्देश्य
 
 **लर्निंग पाथ नेविगेशन**

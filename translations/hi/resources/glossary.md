@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-17T17:10:02+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "hi"
-}
--->
 # शब्दावली - Azure और AZD शब्दावली
 
 **सभी अध्यायों के लिए संदर्भ**

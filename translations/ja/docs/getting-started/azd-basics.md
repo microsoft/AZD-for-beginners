@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-19T18:32:05+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "ja"
-}
--->
 # AZDの基本 - Azure Developer CLIの理解
 
 # AZDの基本 - 核心概念と基礎

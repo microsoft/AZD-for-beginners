@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-20T00:56:05+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "hi"
-}
--->
 # मल्टी-एजेंट कस्टमर सपोर्ट सॉल्यूशन - रिटेलर परिदृश्य
 
 **अध्याय 5: मल्टी-एजेंट एआई सॉल्यूशंस**

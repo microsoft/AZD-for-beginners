@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T10:05:14+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "ko"
-}
--->
 # 2. 템플릿 검증하기
 
 !!! tip "이 모듈을 완료하면 다음을 할 수 있습니다"

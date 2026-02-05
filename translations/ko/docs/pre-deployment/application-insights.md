@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-19T21:47:05+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "ko"
-}
--->
 # AZD와 Application Insights 통합
 
 ⏱️ **예상 소요 시간**: 40-50분 | 💰 **비용 영향**: 약 $5-15/월 | ⭐ **난이도**: 중급

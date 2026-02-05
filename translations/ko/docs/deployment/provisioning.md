@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
-  "translation_date": "2025-10-24T16:51:08+00:00",
-  "source_file": "docs/deployment/provisioning.md",
-  "language_code": "ko"
-}
--->
 # AZD를 사용한 Azure 리소스 프로비저닝
 
 **챕터 탐색:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-19T18:50:14+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "ko"
-}
--->
 # AZD 초보자를 위한: 강의 개요 및 학습 프레임워크
 
 ## 강의 개요

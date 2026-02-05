@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-20T00:51:59+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "hi"
-}
--->
 # AZD शुरुआती लोगों के लिए: कोर्स की रूपरेखा और सीखने का ढांचा
 
 ## कोर्स का अवलोकन

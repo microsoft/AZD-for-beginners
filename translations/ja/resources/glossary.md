@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-17T14:26:08+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "ja"
-}
--->
 # 用語集 - AzureとAZDの用語
 
 **全章の参考資料**

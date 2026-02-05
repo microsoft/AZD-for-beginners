@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T16:50:39+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "ko"
-}
--->
 # 명령어 치트 시트 - 필수 AZD 명령어
 
 **모든 챕터를 위한 빠른 참조**

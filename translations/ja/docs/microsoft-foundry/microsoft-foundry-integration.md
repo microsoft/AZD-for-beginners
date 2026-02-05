@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2e61bc7db9c28647211ab64e03045882",
-  "translation_date": "2025-11-19T22:00:49+00:00",
-  "source_file": "docs/microsoft-foundry/microsoft-foundry-integration.md",
-  "language_code": "ja"
-}
--->
 # Microsoft Foundry と AZD の統合
 
 **章のナビゲーション:**

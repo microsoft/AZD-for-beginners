@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-19T21:56:35+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "ko"
-}
--->
 # AI 워크숍 실습: AI 솔루션을 AZD로 배포 가능하게 만들기
 
 **챕터 탐색:**

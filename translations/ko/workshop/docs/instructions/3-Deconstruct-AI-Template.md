@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-24T10:01:37+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "ko"
-}
--->
 # 3. 템플릿 분해하기
 
 !!! tip "이 모듈을 완료하면 다음을 할 수 있습니다"

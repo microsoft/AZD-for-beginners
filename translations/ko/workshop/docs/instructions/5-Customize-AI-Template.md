@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T09:58:23+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "ko"
-}
--->
 # 5. 템플릿 맞춤화하기
 
 !!! tip "이 모듈을 완료하면 다음을 할 수 있습니다"

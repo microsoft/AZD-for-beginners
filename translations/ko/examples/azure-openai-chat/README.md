@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-19T21:30:51+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "ko"
-}
--->
 # Azure OpenAI 채팅 애플리케이션
 
 **학습 경로:** 중급 ⭐⭐ | **소요 시간:** 35-45분 | **비용:** 월 $50-200

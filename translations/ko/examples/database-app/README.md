@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-19T21:08:08+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "ko"
-}
--->
 # Microsoft SQL 데이터베이스와 웹 앱을 AZD로 배포하기
 
 ⏱️ **예상 소요 시간**: 20-30분 | 💰 **예상 비용**: 약 $15-25/월 | ⭐ **난이도**: 중급

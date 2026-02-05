@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-17T14:40:25+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "ko"
-}
--->
 # 자주 묻는 질문 (FAQ)
 
 **챕터별 도움말**

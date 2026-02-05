@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T09:59:44+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "ko"
-}
--->
 # 1. 템플릿 선택하기
 
 !!! tip "이 모듈을 완료하면 다음을 할 수 있습니다"

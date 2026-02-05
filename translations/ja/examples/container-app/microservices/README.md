@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-19T20:51:53+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "ja"
-}
--->
 # マイクロサービスアーキテクチャ - コンテナアプリの例
 
 ⏱️ **所要時間の目安**: 25-35分 | 💰 **推定コスト**: ~$50-100/月 | ⭐ **難易度**: 上級

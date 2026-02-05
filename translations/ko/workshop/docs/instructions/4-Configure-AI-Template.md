@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T10:07:50+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "ko"
-}
--->
 # 4. 템플릿 구성하기
 
 !!! tip "이 모듈을 완료하면 다음을 할 수 있습니다"

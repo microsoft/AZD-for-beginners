@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "94de06ce1e81ee964b067f118211612f",
-  "translation_date": "2025-11-20T01:11:10+00:00",
-  "source_file": "docs/troubleshooting/common-issues.md",
-  "language_code": "hi"
-}
--->
 # सामान्य समस्याएँ और समाधान
 
 **अध्याय नेविगेशन:**

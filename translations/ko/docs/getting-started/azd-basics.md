@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-19T19:16:27+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "ko"
-}
--->
 # AZD 기본 - Azure Developer CLI 이해하기
 
 # AZD 기본 - 핵심 개념과 기초

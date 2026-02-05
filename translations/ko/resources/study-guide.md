@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
-  "translation_date": "2025-11-19T18:58:42+00:00",
-  "source_file": "resources/study-guide.md",
-  "language_code": "ko"
-}
--->
 # 학습 가이드 - 종합 학습 목표
 
 **학습 경로 탐색**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-19T21:53:17+00:00",
-  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
-  "language_code": "ko"
-}
--->
 # AZD를 활용한 프로덕션 AI 워크로드 모범 사례
 
 **챕터 네비게이션:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e855e899d2705754fe85b04190edd0f0",
-  "translation_date": "2025-11-20T01:21:51+00:00",
-  "source_file": "docs/getting-started/azd-basics.md",
-  "language_code": "hi"
-}
--->
 # AZD बेसिक्स - Azure Developer CLI को समझना
 
 # AZD बेसिक्स - मुख्य अवधारणाएँ और मूल बातें

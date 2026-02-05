@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-19T21:27:34+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "ja"
-}
--->
 # Azure OpenAI チャットアプリケーション
 
 **学習レベル:** 中級 ⭐⭐ | **所要時間:** 35-45分 | **コスト:** 月額 $50-200

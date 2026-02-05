@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T10:00:37+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "ko"
-}
--->
 # 6. 인프라 해체
 
 !!! tip "이 모듈을 완료하면 다음을 할 수 있습니다"

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-19T20:58:21+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ja"
-}
--->
 # シンプルな Flask API - コンテナアプリの例
 
 **学習レベル:** 初心者 ⭐ | **所要時間:** 25-35分 | **コスト:** $0-15/月

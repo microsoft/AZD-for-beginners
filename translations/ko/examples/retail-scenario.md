@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-19T18:52:08+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "ko"
-}
--->
 # 다중 에이전트 고객 지원 솔루션 - 소매업체 시나리오
 
 **5장: 다중 에이전트 AI 솔루션**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-19T22:08:50+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "ja"
-}
--->
 # 認証パターンとマネージドID
 
 ⏱️ **所要時間の目安**: 45～60分 | 💰 **コスト影響**: 無料（追加料金なし） | ⭐ **複雑さ**: 中級

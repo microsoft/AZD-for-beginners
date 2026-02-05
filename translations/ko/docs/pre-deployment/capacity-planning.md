@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "133c6f0d02c698cbe1cdb5d405ad4994",
-  "translation_date": "2025-11-19T19:01:20+00:00",
-  "source_file": "docs/pre-deployment/capacity-planning.md",
-  "language_code": "ko"
-}
--->
 # 용량 계획 - Azure 리소스 가용성과 제한
 
 **챕터 네비게이션:**

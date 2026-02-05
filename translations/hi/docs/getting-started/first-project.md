@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
-  "translation_date": "2025-11-20T01:30:49+00:00",
-  "source_file": "docs/getting-started/first-project.md",
-  "language_code": "hi"
-}
--->
 # आपका पहला प्रोजेक्ट - हैंड्स-ऑन ट्यूटोरियल
 
 **अध्याय नेविगेशन:**

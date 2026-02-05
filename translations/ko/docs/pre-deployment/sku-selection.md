@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-09-17T14:36:32+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "ko"
-}
--->
 # SKU 선택 가이드 - 적합한 Azure 서비스 계층 선택하기
 
 **챕터 탐색:**

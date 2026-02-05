@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-19T21:00:24+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ko"
-}
--->
 # 간단한 Flask API - 컨테이너 앱 예제
 
 **학습 경로:** 초급 ⭐ | **소요 시간:** 25-35분 | **비용:** 월 $0-15

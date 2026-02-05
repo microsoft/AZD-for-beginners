@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-19T21:05:09+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "ja"
-}
--->
 # Microsoft SQLデータベースとWebアプリのAZDによるデプロイ
 
 ⏱️ **所要時間**: 20～30分 | 💰 **推定コスト**: 約15～25ドル/月 | ⭐ **難易度**: 中級

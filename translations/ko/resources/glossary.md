@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-17T14:41:55+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "ko"
-}
--->
 # 용어집 - Azure 및 AZD 용어
 
 **모든 챕터 참고**

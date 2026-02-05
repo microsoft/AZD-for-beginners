@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-19T21:55:28+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "ja"
-}
--->
 # AIワークショップラボ: AIソリューションをAZDでデプロイ可能にする
 
 **章ナビゲーション:**

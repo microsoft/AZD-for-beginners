@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-19T21:45:17+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "ja"
-}
--->
 # AZDとのApplication Insights統合
 
 ⏱️ **所要時間の目安**: 40～50分 | 💰 **コスト影響**: 約$5～15/月 | ⭐ **難易度**: 中級

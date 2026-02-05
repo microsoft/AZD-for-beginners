@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T10:55:14+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "hi"
-}
--->
 # 6. इंफ्रास्ट्रक्चर को समाप्त करना
 
 !!! tip "इस मॉड्यूल के अंत तक आप सक्षम होंगे"

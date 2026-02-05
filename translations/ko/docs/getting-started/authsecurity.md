@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-19T22:10:42+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "ko"
-}
--->
 # 인증 패턴과 관리 ID
 
 ⏱️ **예상 소요 시간**: 45-60분 | 💰 **비용 영향**: 무료 (추가 요금 없음) | ⭐ **난이도**: 중급

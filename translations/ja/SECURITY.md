@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7229f7490ea61a04330b79651ac4d37e",
-  "translation_date": "2025-09-09T16:39:47+00:00",
-  "source_file": "SECURITY.md",
-  "language_code": "ja"
-}
--->
 ## セキュリティ
 
 Microsoftは、GitHub組織内のすべてのソースコードリポジトリを含む、ソフトウェア製品およびサービスのセキュリティを真剣に考えています。

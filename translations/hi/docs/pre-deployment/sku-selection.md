@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-09-17T17:02:32+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "hi"
-}
--->
 # SKU चयन गाइड - सही Azure सेवा स्तर चुनना
 
 **अध्याय नेविगेशन:**

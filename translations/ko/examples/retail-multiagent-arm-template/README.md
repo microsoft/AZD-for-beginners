@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-19T18:57:16+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "ko"
-}
--->
 # 소매 멀티 에이전트 솔루션 - 인프라 템플릿
 
 **5장: 프로덕션 배포 패키지**

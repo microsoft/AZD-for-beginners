@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-19T20:45:34+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ja"
-}
--->
 # AZDを使ったコンテナアプリのデプロイ例
 
 このディレクトリには、Azure Developer CLI (AZD) を使用して Azure Container Apps にコンテナ化されたアプリケーションをデプロイするための包括的な例が含まれています。これらの例は、実際のパターン、ベストプラクティス、および本番環境向けの設定を示しています。

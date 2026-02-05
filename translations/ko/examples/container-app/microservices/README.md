@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-19T20:53:17+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "ko"
-}
--->
 # 마이크로서비스 아키텍처 - 컨테이너 앱 예제
 
 ⏱️ **예상 소요 시간**: 25-35분 | 💰 **예상 비용**: 약 $50-100/월 | ⭐ **난이도**: 고급

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ba67ea0b26574a03ffcade6c98a9af60",
-  "translation_date": "2025-11-19T19:24:50+00:00",
-  "source_file": "docs/getting-started/first-project.md",
-  "language_code": "ko"
-}
--->
 # 첫 번째 프로젝트 - 실습 튜토리얼
 
 **챕터 탐색:**
