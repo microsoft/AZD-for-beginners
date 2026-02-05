@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       മോഡൽ ഡിപ്ലോയ്‌മെന്റുകൾ **മുമ്പ്** ഇങ്ങനെയായിരുന്നു:
 
-      ![ആദ്യത്തെ](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.ml.png)
+      ![ആദ്യത്തെ](../../../../../translated_images/ml/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       **ശേഷം** ഇത് ഇങ്ങനെയായി:
-      ![പുതിയത്](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.ml.png)
+      ![പുതിയത്](../../../../../translated_images/ml/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

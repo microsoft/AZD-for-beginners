@@ -51,7 +51,7 @@ Azure AI Foundry platform မှာ [အကြံပြု AZD templates](https:
 1. [https://ai.azure.com/templates](https://ai.azure.com/templates) ကိုသွားပါ
 1. Azure AI Foundry portal မှာ log in လုပ်ပါ - ဒီလိုအရာတစ်ခုကိုတွေ့ရပါမယ်။
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.my.png)
+![Pick](../../../../../translated_images/my/01-pick-template.60d2d5fff5ebc374.webp)
 
 **Basic** options တွေဟာ starter templates တွေဖြစ်ပါတယ်:
 
@@ -60,7 +60,7 @@ Azure AI Foundry platform မှာ [အကြံပြု AZD templates](https:
 
 အပေါ်က link ကို browser tab အသစ်မှာဖွင့်ပါ (သို့မဟုတ် `Open in GitHub` ကိုနှိပ်ပါ။) AZD Template ရဲ့ repository ကိုတွေ့ရပါမယ်။ README ကိုကြည့်ဖို့အချိန်ယူပါ။ Application architecture ဟာဒီလိုပုံစံရှိပါတယ်:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.my.png)
+![Arch](../../../../../translated_images/my/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Provisioning ပြီးအောင်စောင့်ပါ။ **ဒီအ�
       ```
 1. Azure Portal မှာ environment name နဲ့ resource group တစ်ခုကို provision လုပ်ထားတာတွေ့ရပါမယ်:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.my.png)
+      ![Infra](../../../../../translated_images/my/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Deploy လုပ်ထားတဲ့ infrastructure နဲ့ application ကိုအတည်ပြုဖို့အဆင်သင့်ဖြစ်ပါပြီ**။
 
@@ -108,7 +108,7 @@ Provisioning ပြီးအောင်စောင့်ပါ။ **ဒီအ�
 
 1. Hosted application front-end UI ကိုဒီလိုပုံစံနဲ့တွေ့ရပါမယ်:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.my.png)
+   ![App](../../../../../translated_images/my/03-test-application.471910da12c3038e.webp)
 
 1. [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) တချို့ကိုစမ်းကြည့်ပါ
 
@@ -117,7 +117,7 @@ Provisioning ပြီးအောင်စောင့်ပါ။ **ဒီအ�
 
 1. အောက်မှာပြထားတဲ့အတိုင်းဖြေကြားချက်တွေကိုရပါမယ်။ _ဒါကဘယ်လိုအလုပ်လုပ်သလဲ?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.my.png)
+      ![App](../../../../../translated_images/my/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App ဟာ endpoint တစ်ခုကို deploy လုပ်
 1. List မှာ `Azure AI Foundry` resource ကိုနှိပ်ပါ
 
 1. ဒီလိုအရာတစ်ခုကိုတွေ့ရပါမယ်။ `Go to Azure AI Foundry Portal` button ကိုနှိပ်ပါ။ 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.my.png)
+   ![Foundry](../../../../../translated_images/my/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. သင့် AI application အတွက် Foundry Project page ကိုတွေ့ရပါမယ်
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.my.png)
+   ![Project](../../../../../translated_images/my/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. `Agents` ကိုနှိပ်ပါ - သင့် project မှာ provision လုပ်ထားတဲ့ default Agent ကိုတွေ့ရပါမယ်
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.my.png)
+   ![Agents](../../../../../translated_images/my/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Agent ကိုရွေးပါ - Agent details ကိုတွေ့ရပါမယ်။ အောက်ပါအချက်တွေကိုသတိပြုပါ:
 
       - Agent ဟာ File Search ကို default အနေနဲ့အသုံးပြုပါတယ် (အမြဲ)
       - Agent ရဲ့ `Knowledge` မှာ file search အတွက် 32 files upload လုပ်ထားတာတွေ့ရပါမယ်
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.my.png)
+      ![Agents](../../../../../translated_images/my/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. ဘယ် menu မှာ `Data+indexes` option ကိုရှာပြီး details ကိုကြည့်ပါ။ 
 
       - Knowledge အတွက် upload လုပ်ထားတဲ့ 32 data files တွေကိုတွေ့ရပါမယ်။
       - ဒီ files တွေဟာ `src/files` အောက်မှာရှိတဲ့ 12 customer files နဲ့ 20 product files တွေကိုကိုက်ညီပါမယ်။
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.my.png)
+      ![Data](../../../../../translated_images/my/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Agent operation ကိုအတည်ပြုပြီးပါပြီ!**
 
@@ -158,7 +158,7 @@ Azure Container App ဟာ endpoint တစ်ခုကို deploy လုပ်
 
 Container App endpoint ရဲ့ browser tab ကိုပြန်သွားပြီး `What products does Amanda Perez own?` လို့မေးပါ။ ဒီလိုအရာတစ်ခုကိုတွေ့ရပါမယ်:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.my.png)
+![Data](../../../../../translated_images/my/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Azure AI Foundry ရဲ့စွမ်းရည်တွေကိုနားလ
 1. `Try in Playground` option ကိုနှိပ်ပါ - Playground UI ကိုဒီလိုပုံစံနဲ့တွေ့ရပါမယ်
 1. အဲ့ဒီမေးခွန်းကိုပြန်မေးပါ: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.my.png)
+    ![Data](../../../../../translated_images/my/09-ask-in-playground.a1b93794f78fa676.webp)
 
 အဲ့ဒီ response ကိုပြန်ရပါမယ် (သို့မဟုတ်) response နဲ့ဆင်တူတဲ့အရာကိုရပါမယ် - ဒါပေမယ့် response ရဲ့ quality, cost, နဲ့ performance ကိုနားလည်ဖို့အသုံးပြုနိုင်တဲ့အချက်တွေကိုလည်းတွေ့ရပါမယ်။ ဥပမာ:
 
@@ -182,7 +182,7 @@ Response အောက်မှာ _stats_ row တစ်ခုကိုလည်�
 1. Metrics တစ်ခုခုကို hover လုပ်ပါ - ဥပမာ၊ Safety. ဒီလိုအရာတစ်ခုကိုတွေ့ရပါမယ်
 1. Response ရဲ့ safety level အတွက် rating ဟာ သင့်အတွေးအမြင်နဲ့ကိုက်ညီပါသလား?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.my.png)
+      ![Data](../../../../../translated_images/my/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
@@ -196,15 +196,15 @@ Observability ဟာ application ကို debug လုပ်ဖို့နဲ�
    - Response အတွက် total Token count (vs. output tokens usage) ကိုနားလည်ပါ
    - Latency နဲ့ execution မှာအချိန်ကုန်ကျမှုကိုနားလည်ပါ
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.my.png)
+      ![Agent](../../../../../translated_images/my/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. `Metadata` tab ကိုနှိပ်ပြီး run အတွက် debugging issues တွေကိုနောက်ပိုင်းမှာအသုံးပြုနိုင်တဲ့အချက်တွေကိုကြည့်ပါ။   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.my.png)
+      ![Agent](../../../../../translated_images/my/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. `Evaluations` tab ကိုနှိပ်ပြီး agent response အပေါ် auto-assessments တွေကိုကြည့်ပါ။ ဒီအထဲမှာ safety evaluations (ဥပမာ၊ Self-harm) နဲ့ agent-specific evaluations (ဥပမာ၊ Intent resolution, Task adherence) ပါဝင်ပါတယ်။
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.my.png)
+      ![Agent](../../../../../translated_images/my/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. နောက်ဆုံးအနေနဲ့ sidebar menu မှာ `Monitoring` tab ကိုနှိပ်ပါ။
 
@@ -212,7 +212,7 @@ Observability ဟာ application ကို debug လုပ်ဖို့နဲ�
       - Application usage ကို cost (tokens) နဲ့ load (requests) အနေနဲ့ track လုပ်ပါ။
       - Application latency ကို first byte (input processing) နဲ့ last byte (output) အနေနဲ့ track လုပ်ပါ။
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.my.png)
+      ![Agent](../../../../../translated_images/my/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

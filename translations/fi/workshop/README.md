@@ -40,7 +40,7 @@ Työpajan aikana tutustut myös keskeisiin kehittäjätyökaluihin ja -työnkulk
 
 Työpajan oppitunnit ovat Markdown-muodossa. Voit selata niitä suoraan GitHubissa tai avata selaimessa esikatselun, kuten alla olevassa kuvakaappauksessa.
 
-![Työpaja](../../../translated_images/workshop.75906f133e6f8ba0.fi.png)
+![Työpaja](../../../translated_images/fi/workshop.75906f133e6f8ba0.webp)
 
 Jos haluat käyttää tätä vaihtoehtoa, haaroita arkisto omaan profiiliisi ja käynnistä GitHub Codespaces. Kun VS Code -pääte on aktiivinen, kirjoita tämä komento:
 

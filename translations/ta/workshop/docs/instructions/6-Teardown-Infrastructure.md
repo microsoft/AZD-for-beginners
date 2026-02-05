@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       மாதிரி நிறுவல்கள் **முன்** இங்கே உள்ளன:
 
-      ![துவக்கம்](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.ta.png)
+      ![துவக்கம்](../../../../../translated_images/ta/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       இது **பிறகு** இங்கே உள்ளது:
-      ![புதியது](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.ta.png)
+      ![புதியது](../../../../../translated_images/ta/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

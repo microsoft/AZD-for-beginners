@@ -40,7 +40,7 @@ Selama workshop ini, Anda juga akan diperkenalkan dengan alat-alat pengembang in
 
 Materi workshop tersedia dalam format Markdown. Anda dapat langsung menavigasi di GitHub - atau membuka pratinjau berbasis browser seperti yang ditunjukkan pada tangkapan layar di bawah ini.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.id.png)
+![Workshop](../../../translated_images/id/workshop.75906f133e6f8ba0.webp)
 
 Untuk menggunakan opsi ini - fork repositori ke profil Anda, dan buka GitHub Codespaces. Setelah terminal VS Code aktif, ketik perintah ini:
 

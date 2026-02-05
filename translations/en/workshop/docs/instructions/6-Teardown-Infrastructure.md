@@ -47,10 +47,10 @@ Before dismantling the project, take a few minutes for some open-ended explorati
 
       Here are the model deployments **before**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.en.png)
+      ![Initial](../../../../../translated_images/en/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       And here they are **after**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.en.png)
+      ![New](../../../../../translated_images/en/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

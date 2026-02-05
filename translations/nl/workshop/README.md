@@ -40,7 +40,7 @@ Tijdens deze workshop maak je ook kennis met essentiële ontwikkeltools en workf
 
 De workshoplessen zijn in Markdown. Je kunt ze direct in GitHub bekijken - of een browser-gebaseerde preview starten zoals weergegeven in de onderstaande screenshot.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.nl.png)
+![Workshop](../../../translated_images/nl/workshop.75906f133e6f8ba0.webp)
 
 Om deze optie te gebruiken - fork de repository naar je profiel en start GitHub Codespaces. Zodra de VS Code-terminal actief is, typ je dit commando:
 

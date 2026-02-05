@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 درس‌های کارگاه به صورت Markdown هستند. می‌توانید مستقیماً در GitHub به آن‌ها دسترسی داشته باشید - یا پیش‌نمایش مبتنی بر مرورگر را همانطور که در تصویر زیر نشان داده شده است، راه‌اندازی کنید.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.fa.png)
+![Workshop](../../../translated_images/fa/workshop.75906f133e6f8ba0.webp)
 
 برای استفاده از این گزینه - مخزن را به پروفایل خود فورک کنید و GitHub Codespaces را راه‌اندازی کنید. هنگامی که ترمینال VS Code فعال شد، این دستور را تایپ کنید:
 

@@ -112,7 +112,7 @@ AZDテンプレートとAzure Developer CLI (`azd`)を使用すると、サン�
       
       Azure StorageはアプリケーションデータやファイルアップロードのためのBlobストレージを提供し、Managed Identityは資格情報を保存せずにAzureリソース間の安全なアクセスを保証します。このソリューション全体は、需要に応じて自動的にスケールし、Azureの管理サービスエコシステムを通じてセキュリティ、モニタリング、CI/CD機能を備えたスケーラブルで保守性の高い設計となっています。
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.ja.png)
+![Architecture](../../../../../translated_images/ja/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

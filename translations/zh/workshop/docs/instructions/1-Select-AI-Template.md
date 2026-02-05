@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![流程图](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.zh.png)
+![流程图](../../../../../translated_images/zh/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ AZD 模板是开源代码库，将示例代码与部署解决方案架构所需�
 **🎯 | 练习**：<br/> 
 访问 [Awesome AZD](https://azure.github.io/awesome-azd/) 画廊，使用筛选器探索当前可用的 250+ 模板。看看是否能找到一个符合 _你的_ 场景需求的模板。
 
-![代码](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.zh.png)
+![代码](../../../../../translated_images/zh/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

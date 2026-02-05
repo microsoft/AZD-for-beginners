@@ -112,7 +112,7 @@ AZD ٹیمپلیٹس اور Azure Developer CLI (`azd`) کے ذریعے ہم AI 
       
       Azure Storage ایپلیکیشن ڈیٹا اور فائل اپ لوڈز کے لیے blob اسٹوریج فراہم کرتا ہے، جبکہ Managed Identity Azure وسائل کے درمیان محفوظ رسائی کو یقینی بناتا ہے بغیر اسناد کو ذخیرہ کیے۔ پورا حل پیمائش اور دیکھ بھال کے لیے ڈیزائن کیا گیا ہے، کنٹینرائزڈ ایپلیکیشن خود بخود طلب کے مطابق پیمائش کرتی ہے جبکہ Azure کے منظم خدمات کے ماحولیاتی نظام کے ذریعے بلٹ ان سیکیورٹی، نگرانی، اور CI/CD صلاحیتیں فراہم کرتی ہے۔
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.ur.png)
+![Architecture](../../../../../translated_images/ur/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

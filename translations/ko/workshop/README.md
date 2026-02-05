@@ -40,7 +40,7 @@ Azure Developer CLI (AZD)를 활용한 AI 애플리케이션 배포를 배우는
 
 워크숍 레슨은 Markdown 형식으로 제공됩니다. GitHub에서 직접 탐색하거나 아래 스크린샷처럼 브라우저 기반 미리보기를 실행할 수 있습니다.
 
-![워크숍](../../../translated_images/workshop.75906f133e6f8ba0.ko.png)
+![워크숍](../../../translated_images/ko/workshop.75906f133e6f8ba0.webp)
 
 이 옵션을 사용하려면 저장소를 자신의 프로필로 포크한 후 GitHub Codespaces를 실행하세요. VS Code 터미널이 활성화되면 다음 명령어를 입력하세요:
 

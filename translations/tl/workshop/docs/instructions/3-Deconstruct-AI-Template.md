@@ -112,7 +112,7 @@ Sa `Ask` mode, magbibigay ito ng code na maaari mong kopyahin at subukan. Sa `Ag
       
       Ang Azure Storage ay nagbibigay ng blob storage para sa application data at file uploads, habang ang Managed Identity ay nagsisiguro ng secure na access sa pagitan ng mga Azure resources nang hindi nag-iimbak ng mga kredensyal. Ang buong solusyon ay idinisenyo para sa scalability at maintainability, na may containerized application na awtomatikong nag-scale base sa demand habang nagbibigay ng built-in na seguridad, monitoring, at CI/CD capabilities sa pamamagitan ng ecosystem ng Azure's managed services.
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.tl.png)
+![Architecture](../../../../../translated_images/tl/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

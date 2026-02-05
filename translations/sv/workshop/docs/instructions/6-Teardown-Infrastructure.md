@@ -47,10 +47,10 @@ Innan vi avvecklar projektet, ta några minuter för att utforska fritt.
 
       Här är modellens distributioner **före**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.sv.png)
+      ![Initial](../../../../../translated_images/sv/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Och här är den **efter**:
-      ![Ny](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.sv.png)
+      ![Ny](../../../../../translated_images/sv/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

@@ -51,7 +51,7 @@ Với `azd`, hành trình triển khai của bạn có thể đơn giản như:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.vi.png)
+![Flow](../../../../../translated_images/vi/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ Khi tạo hoặc tái sử dụng một mẫu AZD cho kịch bản của _bạn_
 **🎯 | BÀI TẬP**: <br/> 
 Truy cập [Awesome AZD](https://azure.github.io/awesome-azd/) và sử dụng bộ lọc để khám phá hơn 250+ mẫu hiện có. Xem liệu bạn có thể tìm thấy mẫu nào phù hợp với yêu cầu kịch bản của _bạn_.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.vi.png)
+![Code](../../../../../translated_images/vi/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

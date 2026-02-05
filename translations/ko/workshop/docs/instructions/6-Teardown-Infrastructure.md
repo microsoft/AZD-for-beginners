@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       아래는 **이전** 모델 배포 상태입니다:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.ko.png)
+      ![Initial](../../../../../translated_images/ko/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       그리고 이것은 **이후** 상태입니다:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.ko.png)
+      ![New](../../../../../translated_images/ko/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

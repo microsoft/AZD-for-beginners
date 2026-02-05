@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD പുതിയവർക്കുള്ള: ഒരു ഘടനാപരമായ പഠന യാത്ര
 
-![AZD പുതിയവർക്കുള്ള](../../translated_images/azdbeginners.5527441dd9f74068.ml.png) 
+![AZD പുതിയവർക്കുള്ള](../../translated_images/ml/azdbeginners.5527441dd9f74068.webp) 
 
 [![GitHub നിരീക്ഷകർ](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub ഫോർക്കുകൾ](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

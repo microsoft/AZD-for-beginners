@@ -112,7 +112,7 @@ CO_OP_TRANSLATOR_METADATA:
 
       يوفر Azure Storage تخزينًا للبيانات والملفات المرفوعة، بينما يضمن Managed Identity الوصول الآمن بين موارد Azure دون تخزين بيانات الاعتماد. تم تصميم الحل بالكامل ليكون قابلًا للتوسع والصيانة، مع تطبيق مخصص يتم توسيعه تلقائيًا بناءً على الطلب مع توفير الأمان المدمج، المراقبة، وقدرات CI/CD من خلال نظام خدمات Azure المُدارة.
 
-![Architecture](../../../../../translated_images/architecture.48d94861e6e6cdc0.ar.png)
+![Architecture](../../../../../translated_images/ar/architecture.48d94861e6e6cdc0.webp)
 
 ---
 

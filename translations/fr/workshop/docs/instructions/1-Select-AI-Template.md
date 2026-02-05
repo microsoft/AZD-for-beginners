@@ -51,7 +51,7 @@ Avec `azd`, votre parcours de déploiement peut être aussi simple que :
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.fr.png)
+![Flow](../../../../../translated_images/fr/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ Lorsque vous créez ou réutilisez un modèle AZD pour _votre_ scénario, posez-
 **🎯 | EXERCICE** : <br/> 
 Visitez la galerie [Awesome AZD](https://azure.github.io/awesome-azd/) et utilisez les filtres pour explorer les 250+ modèles actuellement disponibles. Voyez si vous pouvez en trouver un qui correspond à vos besoins spécifiques.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.fr.png)
+![Code](../../../../../translated_images/fr/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

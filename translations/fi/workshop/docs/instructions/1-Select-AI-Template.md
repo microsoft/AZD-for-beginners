@@ -51,7 +51,7 @@ Näiden työkalujen avulla voimme nyt _löytää_ oikean mallipohjan, _ottaa sen
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.fi.png)
+![Flow](../../../../../translated_images/fi/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ Kun luot tai käytät AZD-mallipohjaa _oma_ käyttötapaukseesi, harkitse näit�
 **🎯 | HARJOITUS**: <br/> 
 Vieraile [Awesome AZD](https://azure.github.io/awesome-azd/) -galleriassa ja käytä suodattimia tutkiaksesi yli 250 mallipohjaa, jotka ovat tällä hetkellä saatavilla. Katso, löydätkö mallipohjan, joka vastaa _sinun_ käyttötapauksesi vaatimuksia.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.fi.png)
+![Code](../../../../../translated_images/fi/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

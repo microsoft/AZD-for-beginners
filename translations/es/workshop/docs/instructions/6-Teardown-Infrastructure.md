@@ -47,10 +47,10 @@ Antes de desmontar el proyecto, toma unos minutos para realizar una exploración
 
       Aquí están los despliegues del modelo **antes**:
 
-      ![Inicial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.es.png)
+      ![Inicial](../../../../../translated_images/es/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Y aquí está **después**:
-      ![Nuevo](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.es.png)
+      ![Nuevo](../../../../../translated_images/es/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

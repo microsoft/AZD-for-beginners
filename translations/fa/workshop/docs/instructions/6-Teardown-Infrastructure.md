@@ -48,10 +48,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       اینجا استقرار مدل‌ها **قبل از تغییر**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.fa.png)
+      ![Initial](../../../../../translated_images/fa/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       و اینجا **بعد از تغییر**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.fa.png)
+      ![New](../../../../../translated_images/fa/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

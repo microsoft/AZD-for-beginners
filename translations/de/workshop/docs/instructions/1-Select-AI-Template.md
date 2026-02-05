@@ -51,7 +51,7 @@ Mit `azd` kann deine Bereitstellungsreise so einfach sein wie:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.de.png)
+![Flow](../../../../../translated_images/de/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -72,7 +72,7 @@ Wenn du eine AZD-Vorlage für _dein_ Szenario erstellst oder wiederverwendest, s
 **🎯 | ÜBUNG**: <br/> 
 Besuche die [Awesome AZD](https://azure.github.io/awesome-azd/) Galerie und nutze die Filter, um die über 250 verfügbaren Vorlagen zu erkunden. Sieh nach, ob du eine findest, die zu _deinen_ Szenarioanforderungen passt.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.de.png)
+![Code](../../../../../translated_images/de/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

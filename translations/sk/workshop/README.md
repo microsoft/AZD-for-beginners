@@ -40,7 +40,7 @@ Počas tohto workshopu budete tiež oboznámení so základnými nástrojmi a pr
 
 Lekcie workshopu sú v Markdown formáte. Môžete ich prehliadať priamo na GitHube - alebo spustiť náhľad v prehliadači, ako je znázornené na obrázku nižšie.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.sk.png)
+![Workshop](../../../translated_images/sk/workshop.75906f133e6f8ba0.webp)
 
 Ak chcete použiť túto možnosť - vytvorte si fork repozitára vo svojom profile a spustite GitHub Codespaces. Keď bude terminál VS Code aktívny, zadajte tento príkaz:
 

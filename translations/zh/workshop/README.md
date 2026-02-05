@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 工作坊课程以Markdown格式编写。您可以直接在GitHub中浏览，或者按照下图所示启动基于浏览器的预览。
 
-![工作坊](../../../translated_images/workshop.75906f133e6f8ba0.zh.png)
+![工作坊](../../../translated_images/zh/workshop.75906f133e6f8ba0.webp)
 
 使用此选项时，请将仓库分叉到您的个人资料中，并启动GitHub Codespaces。当VS Code终端激活后，输入以下命令：
 

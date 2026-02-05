@@ -40,7 +40,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 دروس الورشة مكتوبة بلغة Markdown. يمكنك التنقل فيها مباشرة عبر GitHub - أو تشغيل معاينة مستندة إلى المتصفح كما هو موضح في الصورة أدناه.
 
-![ورشة العمل](../../../translated_images/workshop.75906f133e6f8ba0.ar.png)
+![ورشة العمل](../../../translated_images/ar/workshop.75906f133e6f8ba0.webp)
 
 لاستخدام هذا الخيار - قم بعمل fork للمستودع إلى ملفك الشخصي، وقم بتشغيل GitHub Codespaces. بمجرد أن يصبح طرفية VS Code نشطة، اكتب هذا الأمر:
 

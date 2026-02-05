@@ -40,7 +40,7 @@ Im Laufe des Workshops werden Sie auch mit grundlegenden Entwickler-Tools und Wo
 
 Die Workshop-Lektionen sind in Markdown geschrieben. Sie können sie direkt auf GitHub durchsuchen oder eine browserbasierte Vorschau starten, wie im Screenshot unten gezeigt.
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.de.png)
+![Workshop](../../../translated_images/de/workshop.75906f133e6f8ba0.webp)
 
 Um diese Option zu nutzen, forken Sie das Repository in Ihr Profil und starten Sie GitHub Codespaces. Sobald das VS Code-Terminal aktiv ist, geben Sie diesen Befehl ein:
 

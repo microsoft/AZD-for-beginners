@@ -51,7 +51,7 @@ Azure AI Foundry -alusta sisältää [joukon suositeltuja AZD-malleja](https://l
 1. Siirry osoitteeseen [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Kirjaudu Azure AI Foundry -portaaliin, kun sinua pyydetään - näet jotain tällaista.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.fi.png)
+![Pick](../../../../../translated_images/fi/01-pick-template.60d2d5fff5ebc374.webp)
 
 **Perusvaihtoehdot** ovat aloitusmallejasi:
 
@@ -60,7 +60,7 @@ Azure AI Foundry -alusta sisältää [joukon suositeltuja AZD-malleja](https://l
 
 Avaa toinen linkki uudessa selaimen välilehdessä (tai napsauta `Open in GitHub` liittyvää korttia varten). Näet tämän AZD-mallin arkiston. Tutustu README-tiedostoon minuutin ajan. Sovelluksen arkkitehtuuri näyttää tältä:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.fi.png)
+![Arch](../../../../../translated_images/fi/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Nyt odotat, että käyttöönotto valmistuu. **Tämä kestää 10-15 minuuttia**
       ```
 1. Azure-portaalissasi on nyt provisionoitu resurssiryhmä kyseisellä ympäristön nimellä:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.fi.png)
+      ![Infra](../../../../../translated_images/fi/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Olet nyt valmis validoimaan käyttöön otetun infrastruktuurin ja sovelluksen**.
 
@@ -108,7 +108,7 @@ Nyt odotat, että käyttöönotto valmistuu. **Tämä kestää 10-15 minuuttia**
 
 1. Näet isännöidyn sovelluksen käyttöliittymän, kuten tämä:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.fi.png)
+   ![App](../../../../../translated_images/fi/03-test-application.471910da12c3038e.webp)
 
 1. Kokeile kysyä muutama [esimerkkikysymys](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Nyt odotat, että käyttöönotto valmistuu. **Tämä kestää 10-15 minuuttia**
 
 1. Saat vastauksia, jotka ovat samanlaisia kuin alla. _Mutta miten tämä toimii?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.fi.png)
+      ![App](../../../../../translated_images/fi/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App ottaa käyttöön päätepisteen, joka yhdistyy tekoälyagen
 1. Napsauta `Azure AI Foundry` -resurssia luettelossa
 
 1. Näet tämän. Napsauta `Go to Azure AI Foundry Portal` -painiketta. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.fi.png)
+   ![Foundry](../../../../../translated_images/fi/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Näet Foundry-projektisivun tekoälysovelluksellesi
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.fi.png)
+   ![Project](../../../../../translated_images/fi/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Napsauta `Agents` - näet projektisi oletusagentin
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.fi.png)
+   ![Agents](../../../../../translated_images/fi/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Valitse se - ja näet agentin tiedot. Huomaa seuraavat asiat:
 
       - Agentti käyttää oletuksena File Search -toimintoa (aina)
       - Agentin `Knowledge` osoittaa, että sillä on 32 tiedostoa ladattuna (tiedostohakuun)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.fi.png)
+      ![Agents](../../../../../translated_images/fi/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Etsi vasemman valikon `Data+indexes`-vaihtoehto ja napsauta saadaksesi lisätietoja. 
 
       - Näet 32 tietotiedostoa ladattuna tiedoksi.
       - Nämä vastaavat 12 asiakastiedostoa ja 20 tuotetiedostoa `src/files`-kansiossa 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.fi.png)
+      ![Data](../../../../../translated_images/fi/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Olet validoinut agentin toiminnan!** 
 
@@ -158,7 +158,7 @@ Azure Container App ottaa käyttöön päätepisteen, joka yhdistyy tekoälyagen
 
 Palaa selaimen välilehteen, jossa on Container App -päätepiste, ja kysy: `What products does Amanda Perez own?`. Näet jotain tällaista:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.fi.png)
+![Data](../../../../../translated_images/fi/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Rakennetaan hieman enemmän intuitiota Azure AI Foundryn ominaisuuksista ottamal
 1. Napsauta `Try in Playground` -vaihtoehtoa - saat Playground-käyttöliittymän, kuten tämä
 1. Kysy sama kysymys: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.fi.png)
+    ![Data](../../../../../translated_images/fi/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Saat saman (tai samanlaisen) vastauksen - mutta saat myös lisätietoja, joita voit käyttää sovelluksesi laadun, kustannusten ja suorituskyvyn ymmärtämiseen. Esimerkiksi:
 
@@ -182,7 +182,7 @@ Näet myös _tilastot_-rivillä vastauksen alla.
 1. Vie hiiri minkä tahansa mittarin päälle - esim. Safety. Näet jotain tällaista.
 1. Vastaako arvioitu luokitus intuitiotasi vastauksen turvallisuustasosta?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.fi.png)
+      ![Data](../../../../../translated_images/fi/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -196,15 +196,15 @@ Havainnointi tarkoittaa sovelluksen instrumentointia tuottamaan dataa, jota void
    - Ymmärrä kokonais Token-määrä (vs. ulostulotokenien käyttö) vastauksessa
    - Ymmärrä viive ja missä aikaa kuluu suorituksessa
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.fi.png)
+      ![Agent](../../../../../translated_images/fi/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Napsauta `Metadata`-välilehteä nähdäksesi lisäominaisuuksia suoritukselle, jotka voivat tarjota hyödyllistä kontekstia virheiden korjaamiseen myöhemmin.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.fi.png)
+      ![Agent](../../../../../translated_images/fi/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Napsauta `Evaluations`-välilehteä nähdäksesi automaattiset arviot agentin vastauksesta. Näihin kuuluvat turvallisuusarviot (esim. Itsevahingoittaminen) ja agenttikohtaiset arviot (esim. Tarkoituksen ratkaisu, Tehtävän noudattaminen).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.fi.png)
+      ![Agent](../../../../../translated_images/fi/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Viimeisenä mutta ei vähäisimpänä, napsauta `Monitoring`-välilehteä sivuvalikossa.
 
@@ -212,7 +212,7 @@ Havainnointi tarkoittaa sovelluksen instrumentointia tuottamaan dataa, jota void
       - Seuraa sovelluksen käyttöä kustannusten (tokenit) ja kuormituksen (pyynnöt) osalta.
       - Seuraa sovelluksen viivettä ensimmäiseen tavuun (syötteen käsittely) ja viimeiseen tavuun (ulostulo).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.fi.png)
+      ![Agent](../../../../../translated_images/fi/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

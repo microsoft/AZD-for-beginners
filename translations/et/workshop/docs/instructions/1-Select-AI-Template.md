@@ -51,7 +51,7 @@ Nende tööriistade abil saame nüüd _avastada_ õige malli, _juurutada_ selle,
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.et.png)
+![Flow](../../../../../translated_images/et/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -71,7 +71,7 @@ Kui loote või kasutate AZD malli _oma_ stsenaariumi jaoks, kaaluge järgmisi k�
 **🎯 | HARJUTUS**: <br/> 
 Külastage [Awesome AZD](https://azure.github.io/awesome-azd/) galeriid ja kasutage filtreid, et uurida praegu saadaval olevaid 250+ malle. Vaadake, kas leiate malli, mis vastab _teie_ stsenaariumi nõuetele.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.et.png)
+![Code](../../../../../translated_images/et/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

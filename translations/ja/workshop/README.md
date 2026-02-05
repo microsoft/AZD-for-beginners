@@ -40,7 +40,7 @@ Azure Developer CLI (AZD)を学び、AIアプリケーションのデプロイ�
 
 ワークショップのレッスンはMarkdown形式で記載されています。GitHubで直接ナビゲートするか、以下のスクリーンショットに示されているようにブラウザベースのプレビューを起動することができます。
 
-![Workshop](../../../translated_images/workshop.75906f133e6f8ba0.ja.png)
+![Workshop](../../../translated_images/ja/workshop.75906f133e6f8ba0.webp)
 
 このオプションを使用するには、リポジトリを自分のプロフィールにフォークし、GitHub Codespacesを起動します。VS Codeのターミナルがアクティブになったら、以下のコマンドを入力してください：
 

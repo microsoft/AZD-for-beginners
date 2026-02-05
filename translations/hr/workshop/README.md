@@ -40,7 +40,7 @@ Tijekom radionice također ćete se upoznati s osnovnim alatima za developere i 
 
 Lekcije radionice su u Markdown formatu. Možete ih pregledavati direktno na GitHubu - ili pokrenuti pregled u pregledniku, kao što je prikazano na slici ispod.
 
-![Radionica](../../../translated_images/workshop.75906f133e6f8ba0.hr.png)
+![Radionica](../../../translated_images/hr/workshop.75906f133e6f8ba0.webp)
 
 Za korištenje ove opcije - napravite fork repozitorija na svoj profil i pokrenite GitHub Codespaces. Kada terminal u VS Code-u postane aktivan, upišite ovu naredbu:
 

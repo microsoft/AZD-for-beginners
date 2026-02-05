@@ -51,7 +51,7 @@ CO_OP_TRANSLATOR_METADATA:
 azd help
 ```
 
-![Flow](../../../../../translated_images/azd-flow.19ea67c2f81eaa66.ar.png)
+![Flow](../../../../../translated_images/ar/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
@@ -73,7 +73,7 @@ azd help
 **🎯 | تمرين**: <br/> 
 قم بزيارة معرض [Awesome AZD](https://azure.github.io/awesome-azd/) واستخدم الفلاتر لاستكشاف أكثر من 250 قالبًا متاحًا حاليًا. حاول العثور على قالب يتماشى مع متطلبات سيناريو _خاص بك_.
 
-![Code](../../../../../translated_images/azd-code-to-cloud.2d9503d69d3400da.ar.png)
+![Code](../../../../../translated_images/ar/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 

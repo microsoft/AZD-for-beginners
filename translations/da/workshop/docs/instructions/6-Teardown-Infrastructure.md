@@ -47,10 +47,10 @@ Før vi nedtager projektet, brug et par minutter på at udforske frit og åbent.
 
       Her er modelimplementeringerne **før**:
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.da.png)
+      ![Initial](../../../../../translated_images/da/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Og her er de **efter**:
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.da.png)
+      ![New](../../../../../translated_images/da/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

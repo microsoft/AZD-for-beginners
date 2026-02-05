@@ -48,10 +48,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       以下はモデルのデプロイ状況の **前** の状態です：
 
-      ![Initial](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.ja.png)
+      ![Initial](../../../../../translated_images/ja/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       そして、これが **後** の状態です：
-      ![New](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.ja.png)
+      ![New](../../../../../translated_images/ja/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

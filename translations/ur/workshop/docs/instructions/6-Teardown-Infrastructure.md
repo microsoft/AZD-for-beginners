@@ -47,10 +47,10 @@ CO_OP_TRANSLATOR_METADATA:
 
       یہاں ماڈل کی تعیناتیاں **پہلے** ہیں:
 
-      ![ابتدائی](../../../../../translated_images/14-deploy-initial.30e4cf1c29b587bc.ur.png)
+      ![ابتدائی](../../../../../translated_images/ur/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       اور یہ **بعد میں** ہے:
-      ![نیا](../../../../../translated_images/14-deploy-new.f7f3c355a3cf7299.ur.png)
+      ![نیا](../../../../../translated_images/ur/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 

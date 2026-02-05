@@ -51,7 +51,7 @@ Platform Azure AI Foundry dilengkapi dengan [set template AZD yang direkomendasi
 1. Kunjungi [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Masuk ke portal Azure AI Foundry saat diminta - Anda akan melihat sesuatu seperti ini.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.id.png)
+![Pick](../../../../../translated_images/id/01-pick-template.60d2d5fff5ebc374.webp)
 
 Opsi **Basic** adalah template awal Anda:
 
@@ -60,7 +60,7 @@ Opsi **Basic** adalah template awal Anda:
 
 Kunjungi tautan kedua di tab browser baru (atau klik `Open in GitHub` untuk kartu terkait). Anda akan melihat repositori untuk Template AZD ini. Luangkan waktu untuk menjelajahi README. Arsitektur aplikasinya terlihat seperti ini:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.id.png)
+![Arch](../../../../../translated_images/id/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Sekarang, tunggu hingga penyediaan selesai. **Ini memakan waktu 10-15 menit**
       ```
 1. Portal Azure Anda sekarang akan memiliki grup sumber daya yang disediakan dengan nama lingkungan tersebut:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.id.png)
+      ![Infra](../../../../../translated_images/id/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Anda sekarang siap untuk memvalidasi infrastruktur dan aplikasi yang diterapkan**.
 
@@ -108,7 +108,7 @@ Sekarang, tunggu hingga penyediaan selesai. **Ini memakan waktu 10-15 menit**
 
 1. Anda akan melihat UI front-end aplikasi yang di-host seperti ini:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.id.png)
+   ![App](../../../../../translated_images/id/03-test-application.471910da12c3038e.webp)
 
 1. Cobalah mengajukan beberapa [pertanyaan contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Sekarang, tunggu hingga penyediaan selesai. **Ini memakan waktu 10-15 menit**
 
 1. Anda akan mendapatkan jawaban yang mirip dengan yang ditunjukkan di bawah ini. _Tapi bagaimana ini bekerja?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.id.png)
+      ![App](../../../../../translated_images/id/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App menerapkan endpoint yang terhubung ke AI Agent yang disediak
 1. Klik pada sumber daya `Azure AI Foundry` dalam daftar tersebut
 
 1. Anda akan melihat ini. Klik tombol `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.id.png)
+   ![Foundry](../../../../../translated_images/id/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Anda akan melihat halaman Proyek Foundry untuk aplikasi AI Anda
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.id.png)
+   ![Project](../../../../../translated_images/id/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Klik pada `Agents` - Anda akan melihat Agen default yang disediakan dalam proyek Anda
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.id.png)
+   ![Agents](../../../../../translated_images/id/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Pilih itu - dan Anda akan melihat detail Agen. Perhatikan hal berikut:
 
       - Agen menggunakan File Search secara default (selalu)
       - `Knowledge` agen menunjukkan bahwa ia memiliki 32 file yang diunggah (untuk pencarian file)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.id.png)
+      ![Agents](../../../../../translated_images/id/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Cari opsi `Data+indexes` di menu kiri dan klik untuk detailnya. 
 
       - Anda akan melihat 32 file data yang diunggah untuk pengetahuan.
       - Ini akan sesuai dengan 12 file pelanggan dan 20 file produk di bawah `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.id.png)
+      ![Data](../../../../../translated_images/id/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Anda telah memvalidasi operasi Agen!** 
 
@@ -158,7 +158,7 @@ Azure Container App menerapkan endpoint yang terhubung ke AI Agent yang disediak
 
 Kembali ke tab browser dengan endpoint Container App dan tanyakan: `Produk apa yang dimiliki Amanda Perez?`. Anda akan melihat sesuatu seperti ini:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.id.png)
+![Data](../../../../../translated_images/id/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Mari kita bangun sedikit intuisi tentang kemampuan Azure AI Foundry, dengan menc
 1. Klik opsi `Try in Playground` - Anda akan mendapatkan UI Playground seperti ini
 1. Ajukan pertanyaan yang sama: `Produk apa yang dimiliki Amanda Perez?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.id.png)
+    ![Data](../../../../../translated_images/id/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Anda mendapatkan respons yang sama (atau serupa) - tetapi Anda juga mendapatkan informasi tambahan yang dapat Anda gunakan untuk memahami kualitas, biaya, dan kinerja aplikasi berbasis agen Anda. Misalnya:
 
@@ -182,7 +182,7 @@ Anda juga melihat baris _stats_ di bawah respons.
 1. Arahkan kursor ke metrik apa pun - misalnya, Safety. Anda akan melihat sesuatu seperti ini
 1. Apakah penilaian yang diberikan sesuai dengan intuisi Anda tentang tingkat keamanan respons?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.id.png)
+      ![Data](../../../../../translated_images/id/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
@@ -196,15 +196,15 @@ Observabilitas adalah tentang menginstrumen aplikasi Anda untuk menghasilkan dat
    - Pahami total jumlah Token (vs. penggunaan token output) untuk respons
    - Pahami latensi dan di mana waktu dihabiskan dalam eksekusi
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.id.png)
+      ![Agent](../../../../../translated_images/id/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Klik tab `Metadata` untuk melihat atribut tambahan untuk run, yang dapat memberikan konteks berguna untuk memperbaiki masalah di kemudian hari.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.id.png)
+      ![Agent](../../../../../translated_images/id/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Klik tab `Evaluations` untuk melihat penilaian otomatis yang dibuat pada respons agen. Ini termasuk evaluasi keamanan (misalnya, Self-harm) dan evaluasi spesifik agen (misalnya, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.id.png)
+      ![Agent](../../../../../translated_images/id/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Terakhir, klik tab `Monitoring` di menu sidebar.
 
@@ -212,7 +212,7 @@ Observabilitas adalah tentang menginstrumen aplikasi Anda untuk menghasilkan dat
       - Lacak penggunaan aplikasi dalam hal biaya (token) dan beban (permintaan).
       - Lacak latensi aplikasi hingga byte pertama (pemrosesan input) dan byte terakhir (output).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.id.png)
+      ![Agent](../../../../../translated_images/id/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 

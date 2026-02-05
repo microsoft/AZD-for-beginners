@@ -40,7 +40,7 @@ Sepanjang bengkel ini, anda juga akan diperkenalkan kepada alat dan aliran kerja
 
 Pelajaran bengkel ini disediakan dalam format Markdown. Anda boleh menavigasi terus di GitHub - atau melancarkan pratonton berasaskan pelayar seperti yang ditunjukkan dalam tangkapan skrin di bawah.
 
-![Bengkel](../../../translated_images/workshop.75906f133e6f8ba0.ms.png)
+![Bengkel](../../../translated_images/ms/workshop.75906f133e6f8ba0.webp)
 
 Untuk menggunakan pilihan ini - fork repositori ke profil anda, dan lancarkan GitHub Codespaces. Setelah terminal VS Code aktif, taip arahan ini:
 

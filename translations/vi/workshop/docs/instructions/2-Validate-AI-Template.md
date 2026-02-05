@@ -51,7 +51,7 @@ Nền tảng Azure AI Foundry đi kèm với [bộ mẫu AZD được khuyến n
 1. Truy cập [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Đăng nhập vào cổng thông tin Azure AI Foundry khi được yêu cầu - bạn sẽ thấy giao diện như thế này.
 
-![Pick](../../../../../translated_images/01-pick-template.60d2d5fff5ebc374.vi.png)
+![Pick](../../../../../translated_images/vi/01-pick-template.60d2d5fff5ebc374.webp)
 
 Các tùy chọn **Cơ bản** là các mẫu khởi đầu của bạn:
 
@@ -60,7 +60,7 @@ Các tùy chọn **Cơ bản** là các mẫu khởi đầu của bạn:
 
 Truy cập liên kết thứ hai trong một tab trình duyệt mới (hoặc nhấp vào `Open in GitHub` trên thẻ liên quan). Bạn sẽ thấy kho lưu trữ cho mẫu AZD này. Dành một phút để khám phá README. Kiến trúc ứng dụng trông như thế này:
 
-![Arch](../../../../../translated_images/architecture.8cec470ec15c65c7.vi.png)
+![Arch](../../../../../translated_images/vi/architecture.8cec470ec15c65c7.webp)
 
 ---
 
@@ -92,7 +92,7 @@ Bây giờ, bạn chờ quá trình cung cấp hoàn tất. **Điều này mất
       ```
 1. Cổng thông tin Azure của bạn bây giờ sẽ có một nhóm tài nguyên được cung cấp với tên môi trường đó:
 
-      ![Infra](../../../../../translated_images/02-provisioned-infra.46c706b14f56e0bf.vi.png)
+      ![Infra](../../../../../translated_images/vi/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **Bây giờ bạn đã sẵn sàng xác thực hạ tầng và ứng dụng đã triển khai**.
 
@@ -108,7 +108,7 @@ Bây giờ, bạn chờ quá trình cung cấp hoàn tất. **Điều này mất
 
 1. Bạn sẽ thấy giao diện người dùng front-end của ứng dụng được lưu trữ như thế này:
 
-   ![App](../../../../../translated_images/03-test-application.471910da12c3038e.vi.png)
+   ![App](../../../../../translated_images/vi/03-test-application.471910da12c3038e.webp)
 
 1. Thử hỏi một vài [câu hỏi mẫu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
@@ -117,7 +117,7 @@ Bây giờ, bạn chờ quá trình cung cấp hoàn tất. **Điều này mất
 
 1. Bạn sẽ nhận được câu trả lời tương tự như hình dưới đây. _Nhưng điều này hoạt động như thế nào?_ 
 
-      ![App](../../../../../translated_images/03-test-question.521c1e863cbaddb6.vi.png)
+      ![App](../../../../../translated_images/vi/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
@@ -130,25 +130,25 @@ Azure Container App triển khai một endpoint kết nối với AI Agent đư�
 1. Nhấp vào tài nguyên `Azure AI Foundry` trong danh sách đó
 
 1. Bạn sẽ thấy giao diện này. Nhấp vào nút `Go to Azure AI Foundry Portal`. 
-   ![Foundry](../../../../../translated_images/04-view-foundry-project.fb94ca41803f28f3.vi.png)
+   ![Foundry](../../../../../translated_images/vi/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. Bạn sẽ thấy trang Dự án Foundry cho ứng dụng AI của bạn
-   ![Project](../../../../../translated_images/05-visit-foundry-portal.d734e98135892d7e.vi.png)
+   ![Project](../../../../../translated_images/vi/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Nhấp vào `Agents` - bạn sẽ thấy tác nhân mặc định được cung cấp trong dự án của bạn
-   ![Agents](../../../../../translated_images/06-visit-agents.bccb263f77b00a09.vi.png)
+   ![Agents](../../../../../translated_images/vi/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Chọn nó - và bạn sẽ thấy chi tiết về tác nhân. Lưu ý các điểm sau:
 
       - Tác nhân sử dụng File Search theo mặc định (luôn luôn)
       - `Knowledge` của tác nhân cho thấy nó có 32 tệp đã tải lên (cho tìm kiếm tệp)
-      ![Agents](../../../../../translated_images/07-view-agent-details.0e049f37f61eae62.vi.png)
+      ![Agents](../../../../../translated_images/vi/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Tìm tùy chọn `Data+indexes` trong menu bên trái và nhấp để xem chi tiết. 
 
       - Bạn sẽ thấy 32 tệp dữ liệu đã tải lên cho kiến thức.
       - Những tệp này sẽ tương ứng với 12 tệp khách hàng và 20 tệp sản phẩm trong `src/files` 
-      ![Data](../../../../../translated_images/08-visit-data-indexes.5a4cc1686fa0d19a.vi.png)
+      ![Data](../../../../../translated_images/vi/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Bạn đã xác thực hoạt động của Tác nhân!** 
 
@@ -158,7 +158,7 @@ Azure Container App triển khai một endpoint kết nối với AI Agent đư�
 
 Quay lại tab trình duyệt với endpoint của Container App và hỏi: `Amanda Perez sở hữu những sản phẩm nào?`. Bạn sẽ thấy kết quả như thế này:
 
-![Data](../../../../../translated_images/09-ask-in-aca.4102297fc465a4d5.vi.png)
+![Data](../../../../../translated_images/vi/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
@@ -170,7 +170,7 @@ Hãy xây dựng thêm trực giác về khả năng của Azure AI Foundry, b�
 1. Nhấp vào tùy chọn `Try in Playground` - bạn sẽ nhận được giao diện Sân chơi như thế này
 1. Hỏi cùng câu hỏi: `Amanda Perez sở hữu những sản phẩm nào?`
 
-    ![Data](../../../../../translated_images/09-ask-in-playground.a1b93794f78fa676.vi.png)
+    ![Data](../../../../../translated_images/vi/09-ask-in-playground.a1b93794f78fa676.webp)
 
 Bạn nhận được câu trả lời tương tự (hoặc gần giống) - nhưng bạn cũng nhận được thông tin bổ sung mà bạn có thể sử dụng để hiểu chất lượng, chi phí, và hiệu suất của ứng dụng AI tác nhân của mình. Ví dụ:
 
@@ -182,7 +182,7 @@ Bạn cũng thấy một hàng _stats_ bên dưới câu trả lời.
 1. Di chuột qua bất kỳ chỉ số nào - ví dụ, Safety. Bạn sẽ thấy điều gì đó như thế này
 1. Đánh giá được đưa ra có khớp với trực giác của bạn về mức độ an toàn của câu trả lời không?
 
-      ![Data](../../../../../translated_images/10-view-run-info-meter.6cdb89a0eea5531f.vi.png)
+      ![Data](../../../../../translated_images/vi/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---x
 
@@ -196,15 +196,15 @@ Khả năng quan sát là việc trang bị cho ứng dụng của bạn để t
    - Hiểu tổng số Token (so với số token đầu ra được sử dụng) cho câu trả lời
    - Hiểu độ trễ và thời gian được sử dụng trong quá trình thực thi
 
-      ![Agent](../../../../../translated_images/10-view-run-info.b20ebd75fef6a1cc.vi.png)
+      ![Agent](../../../../../translated_images/vi/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Nhấp vào tab `Metadata` để xem các thuộc tính bổ sung cho lần chạy, có thể cung cấp ngữ cảnh hữu ích để gỡ lỗi các vấn đề sau này.   
 
-      ![Agent](../../../../../translated_images/11-view-run-info-metadata.7966986122c7c2df.vi.png)
+      ![Agent](../../../../../translated_images/vi/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 1. Nhấp vào tab `Evaluations` để xem các đánh giá tự động được thực hiện trên câu trả lời của tác nhân. Các đánh giá này bao gồm đánh giá an toàn (ví dụ, Self-harm) và đánh giá cụ thể của tác nhân (ví dụ, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/12-view-run-info-evaluations.ef25e4577d70efeb.vi.png)
+      ![Agent](../../../../../translated_images/vi/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Cuối cùng nhưng không kém phần quan trọng, nhấp vào tab `Monitoring` trong menu bên.
 
@@ -212,7 +212,7 @@ Khả năng quan sát là việc trang bị cho ứng dụng của bạn để t
       - Theo dõi việc sử dụng ứng dụng về chi phí (token) và tải (yêu cầu).
       - Theo dõi độ trễ của ứng dụng từ byte đầu tiên (xử lý đầu vào) đến byte cuối cùng (đầu ra).
 
-      ![Agent](../../../../../translated_images/13-monitoring-resources.5148015f7311807f.vi.png)
+      ![Agent](../../../../../translated_images/vi/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
