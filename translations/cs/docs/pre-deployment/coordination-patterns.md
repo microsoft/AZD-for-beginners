@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-23T12:53:33+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "cs"
-}
--->
 # Vzory koordinace více agentů
 
 ⏱️ **Odhadovaný čas**: 60-75 minut | 💰 **Odhadované náklady**: ~$100-300/měsíc | ⭐ **Složitost**: Pokročilá

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T12:13:15+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "sw"
-}
--->
 # API Rahisi ya Flask - Mfano wa Programu ya Kontena
 
 **Njia ya Kujifunza:** Mwanzoni ⭐ | **Muda:** Dakika 25-35 | **Gharama:** $0-15/mwezi

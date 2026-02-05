@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-25T02:17:11+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "sw"
-}
--->
 # 6. Kuvunja Miundombinu
 
 !!! tip "MWISHO WA MODULI HII UTAWEZA"

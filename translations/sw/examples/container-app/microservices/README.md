@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-23T12:05:26+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "sw"
-}
--->
 # Usanifu wa Microservices - Mfano wa Programu ya Kontena
 
 ⏱️ **Muda Unaokadiriwa**: Dakika 25-35 | 💰 **Gharama Inayokadiriwa**: ~$50-100/mwezi | ⭐ **Ugumu**: Juu

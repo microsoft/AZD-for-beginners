@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-23T12:22:55+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "cs"
-}
--->
 # Nasazení Microsoft SQL databáze a webové aplikace pomocí AZD
 
 ⏱️ **Odhadovaný čas**: 20-30 minut | 💰 **Odhadované náklady**: ~15-25 USD/měsíc | ⭐ **Složitost**: Střední

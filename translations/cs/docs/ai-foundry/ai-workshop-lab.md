@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-23T11:15:08+00:00",
-  "source_file": "docs/ai-foundry/ai-workshop-lab.md",
-  "language_code": "cs"
-}
--->
 # AI Workshop Lab: Jak udělat vaše AI řešení nasaditelná pomocí AZD
 
 **Navigace kapitolami:**

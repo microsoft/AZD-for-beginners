@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-23T12:21:47+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "hu"
-}
--->
 # Microsoft SQL adatbázis és webalkalmazás telepítése AZD-vel
 
 ⏱️ **Becsült idő**: 20-30 perc | 💰 **Becsült költség**: ~15-25 USD/hó | ⭐ **Komplexitás**: Középhaladó

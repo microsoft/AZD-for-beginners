@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T12:15:04+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "hu"
-}
--->
 # Egyszerű Flask API - Konténeres alkalmazás példa
 
 **Tanulási útvonal:** Kezdő ⭐ | **Idő:** 25-35 perc | **Költség:** $0-15/hó

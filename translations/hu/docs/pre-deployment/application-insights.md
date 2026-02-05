@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-23T12:58:15+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "hu"
-}
--->
 # Alkalmazás Insights integráció az AZD-vel
 
 ⏱️ **Becsült idő**: 40-50 perc | 💰 **Költséghatás**: ~5-15 USD/hó | ⭐ **Komplexitás**: Középhaladó

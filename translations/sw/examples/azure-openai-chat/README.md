@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-23T12:40:33+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "sw"
-}
--->
 # Azure OpenAI Chat Application
 
 **Njia ya Kujifunza:** Kati ⭐⭐ | **Muda:** Dakika 35-45 | **Gharama:** $50-200/mwezi

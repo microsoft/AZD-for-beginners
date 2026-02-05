@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T11:59:37+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "sw"
-}
--->
 # Mifano ya Uwekaji wa Programu za Kontena na AZD
 
 Hii ni saraka yenye mifano kamili ya jinsi ya kuweka programu za kontena kwenye Azure Container Apps kwa kutumia Azure Developer CLI (AZD). Mifano hii inaonyesha mifumo ya hali halisi, mbinu bora, na usanidi wa kiwango cha uzalishaji.

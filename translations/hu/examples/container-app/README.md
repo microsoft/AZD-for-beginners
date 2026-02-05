@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T12:01:21+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "hu"
-}
--->
 # Konténeres alkalmazások telepítési példái AZD-vel
 
 Ez a könyvtár átfogó példákat tartalmaz konténeres alkalmazások Azure Container Apps-be történő telepítésére az Azure Developer CLI (AZD) használatával. A példák valós életből vett mintákat, legjobb gyakorlatokat és gyártásra kész konfigurációkat mutatnak be.

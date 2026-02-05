@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "763a733399ea9f55f6418d1efe13c12b",
-  "translation_date": "2025-09-10T05:55:41+00:00",
-  "source_file": "CODE_OF_CONDUCT.md",
-  "language_code": "cs"
-}
--->
 # Kodex chování pro otevřený zdroj Microsoftu
 
 Tento projekt přijal [Kodex chování pro otevřený zdroj Microsoftu](https://opensource.microsoft.com/codeofconduct/).

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8399160e4ce8c3eb6fd5d831f6602e18",
-  "translation_date": "2025-11-23T10:44:38+00:00",
-  "source_file": "docs/getting-started/configuration.md",
-  "language_code": "hu"
-}
--->
 # Konfigurációs Útmutató
 
 **Fejezet Navigáció:**

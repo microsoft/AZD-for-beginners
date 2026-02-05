@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-23T12:33:25+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "cs"
-}
--->
 # Architektura mikroslužeb - Příklad aplikace v kontejnerech
 
 ⏱️ **Odhadovaný čas**: 25-35 minut | 💰 **Odhadované náklady**: ~$50-100/měsíc | ⭐ **Složitost**: Pokročilá

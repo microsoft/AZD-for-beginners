@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-23T10:18:49+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "hu"
-}
--->
 # Példák - Gyakorlati AZD sablonok és konfigurációk
 
 **Tanulás példákon keresztül - Fejezetek szerint rendezve**

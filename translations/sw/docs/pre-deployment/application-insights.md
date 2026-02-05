@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-23T12:56:53+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "sw"
-}
--->
 # Ushirikiano wa Application Insights na AZD
 
 ⏱️ **Muda Unaokadiriwa**: Dakika 40-50 | 💰 **Athari ya Gharama**: ~$5-15/mwezi | ⭐ **Ugumu**: Kati

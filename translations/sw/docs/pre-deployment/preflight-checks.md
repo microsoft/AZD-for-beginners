@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "943c0b72e253ba63ff813a2a580ebf10",
-  "translation_date": "2025-10-24T17:50:24+00:00",
-  "source_file": "docs/pre-deployment/preflight-checks.md",
-  "language_code": "sw"
-}
--->
 # Ukaguzi Kabla ya Utekelezaji wa AZD
 
 **Urambazaji wa Sura:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-23T09:58:07+00:00",
-  "source_file": "docs/ai-foundry/ai-workshop-lab.md",
-  "language_code": "sw"
-}
--->
 # AI Workshop Lab: Kufanya Suluhisho Zako za AI Ziweze Kupelekwa na AZD
 
 **Ukurasa wa Sehemu:**

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-23T13:17:37+00:00",
-  "source_file": "docs/microsoft-foundry/ai-model-deployment.md",
-  "language_code": "hu"
-}
--->
 # AI modellek telepítése az Azure Developer CLI segítségével
 
 **Fejezet navigáció:**

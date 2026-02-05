@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-23T13:19:22+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "sw"
-}
--->
 # Mifumo ya Uthibitishaji na Utambulisho Ulioendeshwa
 
 ⏱️ **Muda Unaokadiriwa**: Dakika 45-60 | 💰 **Athari ya Gharama**: Bure (hakuna gharama za ziada) | ⭐ **Ugumu**: Kati

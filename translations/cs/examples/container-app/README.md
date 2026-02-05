@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T12:02:59+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "cs"
-}
--->
 # Příklady nasazení kontejnerových aplikací s AZD
 
 Tento adresář obsahuje komplexní příklady nasazení kontejnerových aplikací do Azure Container Apps pomocí Azure Developer CLI (AZD). Tyto příklady ukazují reálné vzory, osvědčené postupy a konfigurace připravené pro produkční prostředí.
