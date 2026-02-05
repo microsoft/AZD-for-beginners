@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-25T09:47:03+00:00",
-  "source_file": "docs/ai-foundry/production-ai-practices.md",
-  "language_code": "en"
-}
--->
 # Production AI Workload Best Practices with AZD
 
 **Chapter Navigation:**

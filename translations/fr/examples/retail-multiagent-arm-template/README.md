@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-19T14:25:04+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "fr"
-}
--->
 # Solution multi-agents pour le commerce de détail - Modèle d'infrastructure
 
 **Chapitre 5 : Package de déploiement en production**

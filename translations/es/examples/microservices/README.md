@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-19T21:23:28+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "es"
-}
--->
 # Arquitectura de Microservicios - Ejemplo de Aplicación en Contenedor
 
 ⏱️ **Tiempo Estimado**: 25-35 minutos | 💰 **Costo Estimado**: ~$50-100/mes | ⭐ **Complejidad**: Avanzada

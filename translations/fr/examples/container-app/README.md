@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-19T12:48:52+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "fr"
-}
--->
 # Exemples de Déploiement d'Applications Conteneurisées avec AZD
 
 Ce répertoire contient des exemples complets pour déployer des applications conteneurisées sur Azure Container Apps en utilisant Azure Developer CLI (AZD). Ces exemples illustrent des modèles réels, des meilleures pratiques et des configurations prêtes pour la production.

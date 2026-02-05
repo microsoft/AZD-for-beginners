@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-25T01:58:19+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "en"
-}
--->
 # 1. Select a Template
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"

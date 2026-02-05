@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
-  "translation_date": "2025-11-19T20:41:26+00:00",
-  "source_file": "docs/getting-started/installation.md",
-  "language_code": "es"
-}
--->
 # Guía de Instalación y Configuración
 
 **Navegación del Capítulo:**

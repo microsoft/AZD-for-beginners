@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-19T14:33:46+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "fr"
-}
--->
 # Guide de Déploiement - Maîtriser les Déploiements AZD
 
 **Navigation des Chapitres :**

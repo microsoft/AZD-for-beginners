@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-25T09:47:28+00:00",
-  "source_file": "docs/ai-foundry/ai-workshop-lab.md",
-  "language_code": "en"
-}
--->
 # AI Workshop Lab: Making Your AI Solutions AZD-Deployable
 
 **Chapter Navigation:**

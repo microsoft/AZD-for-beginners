@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d02f62a3017cc4c95dee2c496218ac8a",
-  "translation_date": "2025-10-24T16:24:24+00:00",
-  "source_file": "docs/deployment/provisioning.md",
-  "language_code": "en"
-}
--->
 # Provisioning Azure Resources with AZD
 
 **Chapter Navigation:**

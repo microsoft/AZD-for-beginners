@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6ae5503cd909d625f01efa4d9e99799e",
-  "translation_date": "2025-11-19T20:26:55+00:00",
-  "source_file": "docs/deployment/deployment-guide.md",
-  "language_code": "es"
-}
--->
 # Guía de Despliegue - Dominando los Despliegues con AZD
 
 **Navegación del Capítulo:**

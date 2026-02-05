@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # AZD Para Iniciantes: Uma Jornada de Aprendizagem Estruturada
 
-![AZD-for-beginners](../../../../translated_images/pt/azdbeginners.5527441dd9f74068.webp) 
+![AZD-for-beginners](../../../../translated_images/pt-PT/azdbeginners.5527441dd9f74068.webp) 
 
 [![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)

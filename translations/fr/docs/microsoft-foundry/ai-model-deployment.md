@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-19T11:31:32+00:00",
-  "source_file": "docs/microsoft-foundry/ai-model-deployment.md",
-  "language_code": "fr"
-}
--->
 # Déploiement de modèles d'IA avec Azure Developer CLI
 
 **Navigation du chapitre :**

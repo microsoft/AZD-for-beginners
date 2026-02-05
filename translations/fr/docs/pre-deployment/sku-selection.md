@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "952ed5af7f5db069c53a6840717e1801",
-  "translation_date": "2025-09-17T13:27:40+00:00",
-  "source_file": "docs/pre-deployment/sku-selection.md",
-  "language_code": "fr"
-}
--->
 # Guide de sélection des SKU - Choisir les bons niveaux de service Azure
 
 **Navigation du chapitre :**

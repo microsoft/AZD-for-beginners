@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-19T16:36:33+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "fr"
-}
--->
 # Modèles de coordination multi-agents
 
 ⏱️ **Temps estimé** : 60-75 minutes | 💰 **Coût estimé** : ~100-300 $/mois | ⭐ **Complexité** : Avancé

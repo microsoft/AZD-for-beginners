@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-19T16:26:41+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "fr"
-}
--->
 # Architecture des Microservices - Exemple d'Application Conteneurisée
 
 ⏱️ **Temps estimé** : 25-35 minutes | 💰 **Coût estimé** : ~50-100 $/mois | ⭐ **Complexité** : Avancée

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T09:10:36+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "fr"
-}
--->
 # 6. Démantèlement de l'infrastructure
 
 !!! tip "À LA FIN DE CE MODULE, VOUS SEREZ EN MESURE DE"

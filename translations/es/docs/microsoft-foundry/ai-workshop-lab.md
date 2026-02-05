@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-19T21:58:47+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "es"
-}
--->
 # Taller de Laboratorio de IA: Haciendo que tus Soluciones de IA sean Desplegables con AZD
 
 **Navegación del Capítulo:**

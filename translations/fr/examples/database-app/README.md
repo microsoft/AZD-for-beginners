@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-19T14:50:21+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "fr"
-}
--->
 # Déploiement d'une base de données Microsoft SQL et d'une application web avec AZD
 
 ⏱️ **Temps estimé** : 20-30 minutes | 💰 **Coût estimé** : ~15-25 €/mois | ⭐ **Complexité** : Intermédiaire
