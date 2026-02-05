@@ -2,10 +2,10 @@
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Understood the purpose of `azure.yaml`
-    - [ ] Understood the structure of `azure.yaml`
-    - [ ] Understood the value of azd lifecyle `hooks`
-    - [ ] **Lab 3:** 
+    - [ ] Understand the purpose of `azure.yaml`
+    - [ ] Understand the structure of `azure.yaml`
+    - [ ] Understand the value of azd lifecycle `hooks`
+    - [ ] **Lab 4:** Explore and modify environment variables
 
 ---
 
@@ -307,7 +307,7 @@ AZURE_RESOURCE_GROUP              # Resource group name
 AZURE_PRINCIPAL_ID                # User principal for RBAC
 
 # Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
+AZURE_AIHUB_NAME                  # Microsoft Foundry hub name
 AZURE_AIPROJECT_NAME              # AI project name
 AZURE_AISERVICES_NAME             # AI services account name
 AZURE_STORAGE_ACCOUNT_NAME        # Storage account name

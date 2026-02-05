@@ -25,7 +25,7 @@ Before we tear down the project, take a few minutes to do some open-ended explor
     
     1. Review Application Insights metrics for your deployment
     2. Check the cost analysis for resources provisioned
-    3. Explore the AI Foundry portal agent playground one more time
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 

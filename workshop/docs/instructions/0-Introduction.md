@@ -2,7 +2,7 @@
 
 !!! info "AUDIENCE FOR THIS WORKSHOP"
    
-    This workshop is for anyone looking to build AI Agentic applications on Microsoft Foundry by levreraging best-in-class tools and workflows. The workshop is suited to both beginners and experienced developers who have some familiarity with Azure, AI concepts and Python code. Please check the pre-requisites before you begin.
+    This workshop is for anyone looking to build AI Agentic applications on Microsoft Foundry by leveraging best-in-class tools and workflows. The workshop is suited to both beginners and experienced developers who have some familiarity with Azure, AI concepts and Python code. Please check the pre-requisites before you begin.
 
     **Duration:** 3-4 hours  
     **Level:** Beginner to Intermediate  

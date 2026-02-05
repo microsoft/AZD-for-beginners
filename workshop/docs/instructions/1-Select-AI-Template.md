@@ -69,3 +69,43 @@ Visit the [Awesome AZD](https://azure.github.io/awesome-azd/) gallery and use th
 ---
 
 ## 4. AI App Templates
+
+For AI-powered applications, Microsoft provides specialized templates featuring **Microsoft Foundry** and **Foundry Agents**. These templates accelerate your path to building intelligent, production-ready applications.
+
+### Microsoft Foundry & Foundry Agents Templates
+
+Select a template below to deploy. Each template is available on [Awesome AZD](https://azure.github.io/awesome-azd/) and can be initialized with a single command.
+
+| Template | Description | Deploy Command |
+|----------|-------------|----------------|
+| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Chat application with Retrieval Augmented Generation using Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Build AI agents with Foundry Agents for autonomous task execution | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Coordinate multiple Foundry Agents for complex workflows | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Extract and analyze documents with Microsoft Foundry models | `azd init -t azure-samples/ai-document-processing` |
+| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Build intelligent chatbots with Microsoft Foundry integration | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Generate images using DALL-E via Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
+| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | AI agents using Semantic Kernel with Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
+| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Multi-agent systems using AutoGen framework | `azd init -t azure-samples/autogen-multi-agent` |
+
+### Quick Start
+
+1. **Browse templates**: Visit [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) and filter by `AI`, `Agents`, or `Microsoft Foundry`
+2. **Select your template**: Choose one that matches your use case
+3. **Initialize**: Run the `azd init` command for your chosen template
+4. **Deploy**: Run `azd up` to provision and deploy
+
+**🎯 | EXERCISE**: <br/>
+Select one of the templates above based on your scenario:
+
+- **Building a chatbot?** → Start with **AI Chat with RAG** or **Conversational AI Bot**
+- **Need autonomous agents?** → Try **Foundry Agent Service Starter** or **Multi-Agent Orchestration**
+- **Processing documents?** → Use **AI Document Intelligence**
+- **Want AI coding assistance?** → Explore **Semantic Kernel Agent** or **AutoGen Multi-Agent**
+
+```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
+azd init -t azure-samples/azure-search-openai-demo
+azd up
+```
+
+!!! info "Explore More Templates"
+    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.

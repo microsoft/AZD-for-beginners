@@ -157,6 +157,7 @@ This course is designed for **progressive learning** - start where you're comfor
 | **Brand new to Azure** | [Chapter 1: Foundation](#-chapter-1-foundation--quick-start) |
 | **Know Azure, new to AZD** | [Chapter 1: Foundation](#-chapter-1-foundation--quick-start) |
 | **Want to deploy AI apps** | [Chapter 2: AI-First Development](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
+| **Want hands-on practice** | [🎓 Interactive Workshop](workshop/README.md) - 3-4 hour guided lab |
 | **Need production patterns** | [Chapter 8: Production & Enterprise](#-chapter-8-production--enterprise-patterns) |
 
 ### Quick Setup
@@ -213,6 +214,7 @@ Each chapter has a dedicated README with learning objectives, quick starts, and 
 | **[Ch 6: Pre-Deployment](docs/chapter-06-pre-deployment/README.md)** | Planning & Validation | [Preflight Checks](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [SKU Selection](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [App Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 hr | ⭐⭐ |
 | **[Ch 7: Troubleshooting](docs/chapter-07-troubleshooting/README.md)** | Debug & Fix | [Common Issues](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Debugging](docs/chapter-07-troubleshooting/debugging.md) &#124; [AI Issues](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 hrs | ⭐⭐ |
 | **[Ch 8: Production](docs/chapter-08-production/README.md)** | Enterprise Patterns | [Production Practices](docs/chapter-08-production/production-ai-practices.md) | 2-3 hrs | ⭐⭐⭐⭐ |
+| **[🎓 Workshop](workshop/README.md)** | Hands-On Lab | [Introduction](workshop/docs/instructions/0-Introduction.md) &#124; [Selection](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Validation](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Deconstruction](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Configuration](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Customization](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Teardown](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [Wrap-up](workshop/docs/instructions/7-Wrap-up.md) | 3-4 hrs | ⭐⭐ |
 
 **Total Course Duration:** ~10-14 hours | **Skill Progression:** Beginner → Production-Ready
 
@@ -524,27 +526,32 @@ Our workshop materials provide a structured, interactive learning experience tha
 #### 🛠️ Workshop Features
 - **Browser-Based Interface**: Complete MkDocs-powered workshop with search, copy, and theme features
 - **GitHub Codespaces Integration**: One-click development environment setup
-- **Structured Learning Path**: 7-step guided exercises (3.5 hours total)
-- **Discovery → Deployment → Customization**: Progressive methodology
+- **Structured Learning Path**: 8-module guided exercises (3-4 hours total)
+- **Progressive Methodology**: Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
 - **Interactive DevContainer Environment**: Pre-configured tools and dependencies
 
-#### 📚 Workshop Structure
-The workshop follows a **Discovery → Deployment → Customization** methodology:
+#### 📚 Workshop Module Structure
+The workshop follows an **8-module progressive methodology** that takes you from discovery to deployment mastery:
 
-1. **Discovery Phase** (45 mins)
-   - Explore Microsoft Foundry templates and services
-   - Understand multi-agent architecture patterns
-   - Review deployment requirements and prerequisites
+| Module | Topic | What You'll Do | Duration |
+|--------|-------|----------------|----------|
+| **0. Introduction** | Workshop Overview | Understand learning objectives, prerequisites, and workshop structure | 15 min |
+| **1. Selection** | Template Discovery | Explore AZD templates and select the right AI template for your scenario | 20 min |
+| **2. Validation** | Deploy & Verify | Deploy the template with `azd up` and validate infrastructure works | 30 min |
+| **3. Deconstruction** | Understand Structure | Use GitHub Copilot to explore template architecture, Bicep files, and code organization | 30 min |
+| **4. Configuration** | azure.yaml Deep Dive | Master `azure.yaml` configuration, lifecycle hooks, and environment variables | 30 min |
+| **5. Customization** | Make It Yours | Enable AI Search, tracing, evaluation, and customize for your scenario | 45 min |
+| **6. Teardown** | Clean Up | Safely deprovision resources with `azd down --purge` | 15 min |
+| **7. Wrap-up** | Next Steps | Review accomplishments, key concepts, and continue your learning journey | 15 min |
 
-2. **Deployment Phase** (2 hours)
-   - Hands-on deployment of AI applications with AZD
-   - Configure Azure AI services and endpoints
-   - Implement security and authentication patterns
-
-3. **Customization Phase** (45 mins)
-   - Modify applications for specific use cases
-   - Optimize for production deployment
-   - Implement monitoring and cost management
+**Workshop Flow:**
+```
+Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
+     ↓            ↓           ↓              ↓               ↓              ↓            ↓           ↓
+  Overview    Find the     Deploy &      Explore        Master         Customize     Clean up    Review &
+             right        verify        code &        azure.yaml      for your      resources   next steps
+             template                   structure                     scenario
+```
 
 #### 🚀 Getting Started with the Workshop
 ```bash
@@ -567,7 +574,15 @@ By completing the workshop, participants will:
 
 #### 📖 Workshop Resources
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning environment
-- **📋 Step-by-Step Instructions**: [Guided Exercises](workshop/docs/instructions/) - Detailed walkthroughs
+- **📋 Module-by-Module Instructions**:
+  - [0. Introduction](workshop/docs/instructions/0-Introduction.md) - Workshop overview and objectives
+  - [1. Selection](workshop/docs/instructions/1-Select-AI-Template.md) - Find and select AI templates
+  - [2. Validation](workshop/docs/instructions/2-Validate-AI-Template.md) - Deploy and verify templates
+  - [3. Deconstruction](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Explore template architecture
+  - [4. Configuration](workshop/docs/instructions/4-Configure-AI-Template.md) - Master azure.yaml
+  - [5. Customization](workshop/docs/instructions/5-Customize-AI-Template.md) - Customize for your scenario
+  - [6. Teardown](workshop/docs/instructions/6-Teardown-Infrastructure.md) - Clean up resources
+  - [7. Wrap-up](workshop/docs/instructions/7-Wrap-up.md) - Review and next steps
 - **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - AI-focused exercises
 - **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration
 
@@ -678,9 +693,8 @@ Beyond the basics, AZD provides powerful features for production deployments:
 
 ### Hands-On Workshops
 - [**AI Workshop Lab**](docs/chapter-02-ai-development/ai-workshop-lab.md) - Make your AI solutions AZD-deployable (2-3 hours)
-- [**Interactive Workshop Guide**](workshop/README.md) - Browser-based workshop with MkDocs and DevContainer Environment
-- [**Structured Learning Path**](workshop/docs/instructions/) -7-step guided exercises (Discovery → Deployment → Customization)
-- [**AZD For Beginners Workshop**](workshop/README.md) - Complete hands-on workshop materials with GitHub Codespaces integration
+- [**Interactive Workshop**](workshop/README.md) - 8-module guided exercises with MkDocs and GitHub Codespaces
+  - Follows: Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
 
 ### External Learning Resources
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
