@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-20T21:58:06+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "it"
-}
--->
 # AZD per Principianti: Struttura del Corso e Framework di Apprendimento
 
 ## Panoramica del Corso

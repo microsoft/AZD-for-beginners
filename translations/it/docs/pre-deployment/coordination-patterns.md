@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bcefbd5d0107691ef3e6e33ba694d6f4",
-  "translation_date": "2025-11-21T00:06:34+00:00",
-  "source_file": "docs/pre-deployment/coordination-patterns.md",
-  "language_code": "it"
-}
--->
 # Modelli di Coordinazione Multi-Agente
 
 ⏱️ **Tempo Stimato**: 60-75 minuti | 💰 **Costo Stimato**: ~$100-300/mese | ⭐ **Complessità**: Avanzata

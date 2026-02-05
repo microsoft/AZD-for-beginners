@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-20T23:26:20+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "it"
-}
--->
 # Semplice API Flask - Esempio di App Contenitore
 
 **Percorso di apprendimento:** Principiante ⭐ | **Tempo:** 25-35 minuti | **Costo:** $0-15/mese

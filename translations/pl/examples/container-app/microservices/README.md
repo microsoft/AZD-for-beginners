@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-20T01:43:32+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "pl"
-}
--->
 # Architektura Mikroserwisów - Przykład Aplikacji Kontenerowej
 
 ⏱️ **Szacowany czas**: 25-35 minut | 💰 **Szacowany koszt**: ~$50-100/miesiąc | ⭐ **Poziom trudności**: Zaawansowany

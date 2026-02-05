@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-20T01:59:09+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "pl"
-}
--->
 # Wdrażanie bazy danych Microsoft SQL i aplikacji webowej za pomocą AZD
 
 ⏱️ **Szacowany czas**: 20-30 minut | 💰 **Szacowany koszt**: ~15-25 USD/miesiąc | ⭐ **Poziom trudności**: Średniozaawansowany

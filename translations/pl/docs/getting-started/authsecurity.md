@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e13ff6e1197e0a7462ed0aede7df9f23",
-  "translation_date": "2025-11-20T03:03:05+00:00",
-  "source_file": "docs/getting-started/authsecurity.md",
-  "language_code": "pl"
-}
--->
 # Wzorce uwierzytelniania i Zarządzana Tożsamość
 
 ⏱️ **Szacowany czas**: 45-60 minut | 💰 **Koszt**: Bez dodatkowych opłat | ⭐ **Poziom trudności**: Średni

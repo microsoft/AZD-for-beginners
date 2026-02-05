@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-20T23:20:13+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "tr"
-}
--->
 # Mikroservis Mimarisi - Container App Örneği
 
 ⏱️ **Tahmini Süre**: 25-35 dakika | 💰 **Tahmini Maliyet**: ~50-100$/ay | ⭐ **Zorluk Seviyesi**: İleri

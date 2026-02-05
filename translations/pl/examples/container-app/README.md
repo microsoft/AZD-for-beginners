@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T01:36:36+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "pl"
-}
--->
 # Przykłady wdrażania aplikacji kontenerowych z AZD
 
 Ten katalog zawiera kompleksowe przykłady wdrażania aplikacji kontenerowych do Azure Container Apps za pomocą Azure Developer CLI (AZD). Przykłady te pokazują rzeczywiste wzorce, najlepsze praktyki i konfiguracje gotowe do produkcji.

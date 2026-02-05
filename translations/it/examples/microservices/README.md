@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-20T23:47:30+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "it"
-}
--->
 # Architettura Microservices - Esempio di App Container
 
 ⏱️ **Tempo Stimato**: 25-35 minuti | 💰 **Costo Stimato**: ~$50-100/mese | ⭐ **Complessità**: Avanzata

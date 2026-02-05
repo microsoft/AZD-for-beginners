@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-20T00:15:59+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "pl"
-}
--->
 # Rozwiązanie Retail Multi-Agent - Szablon Infrastruktury
 
 **Rozdział 5: Pakiet wdrożenia produkcyjnego**

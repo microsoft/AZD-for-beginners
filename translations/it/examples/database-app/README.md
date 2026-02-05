@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-20T23:35:49+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "it"
-}
--->
 # Distribuire un Database Microsoft SQL e un'App Web con AZD
 
 ⏱️ **Tempo Stimato**: 20-30 minuti | 💰 **Costo Stimato**: ~15-25€/mese | ⭐ **Complessità**: Intermedia

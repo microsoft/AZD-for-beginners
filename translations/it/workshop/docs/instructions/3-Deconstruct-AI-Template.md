@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-24T14:58:44+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "it"
-}
--->
 # 3. Decomporre un Template
 
 !!! tip "ALLA FINE DI QUESTO MODULO SARAI IN GRADO DI"

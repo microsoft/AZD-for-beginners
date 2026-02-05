@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T14:54:30+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "tr"
-}
--->
 # 5. Bir Şablonu Özelleştirin
 
 !!! tip "BU MODÜLÜ TAMAMLADIĞINIZDA ŞUNLARI YAPABİLECEKSİNİZ"

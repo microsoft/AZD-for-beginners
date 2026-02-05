@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T23:14:25+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "tr"
-}
--->
 # AZD ile Container Uygulama Dağıtım Örnekleri
 
 Bu dizin, Azure Developer CLI (AZD) kullanarak Azure Container Apps'e konteynerleştirilmiş uygulamaları dağıtmak için kapsamlı örnekler içerir. Bu örnekler, gerçek dünya senaryolarını, en iyi uygulamaları ve üretime hazır yapılandırmaları göstermektedir.

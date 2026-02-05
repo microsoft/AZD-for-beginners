@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "dbc3f2f6acbaa09093b21a220e1c2769",
-  "translation_date": "2025-11-20T23:04:55+00:00",
-  "source_file": "docs/getting-started/installation.md",
-  "language_code": "tr"
-}
--->
 # Kurulum ve Ayar Kılavuzu
 
 **Bölüm Navigasyonu:**

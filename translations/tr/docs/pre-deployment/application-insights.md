@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e5aa37cdb6378c09099500ac31600b8c",
-  "translation_date": "2025-11-21T00:16:36+00:00",
-  "source_file": "docs/pre-deployment/application-insights.md",
-  "language_code": "tr"
-}
--->
 # AZD ile Application Insights Entegrasyonu
 
 ⏱️ **Tahmini Süre**: 40-50 dakika | 💰 **Maliyet Etkisi**: ~5-15$/ay | ⭐ **Zorluk Seviyesi**: Orta

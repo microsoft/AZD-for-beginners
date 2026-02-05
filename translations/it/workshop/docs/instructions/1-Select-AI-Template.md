@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T14:55:34+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "it"
-}
--->
 # 1. Seleziona un Template
 
 !!! tip "ALLA FINE DI QUESTO MODULO SARAI IN GRADO DI"

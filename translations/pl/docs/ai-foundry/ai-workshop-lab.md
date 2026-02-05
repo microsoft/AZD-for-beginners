@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-20T00:32:04+00:00",
-  "source_file": "docs/ai-foundry/ai-workshop-lab.md",
-  "language_code": "pl"
-}
--->
 # Warsztaty AI: Tworzenie rozwiązań AI gotowych do wdrożenia z AZD
 
 **Nawigacja po rozdziałach:**

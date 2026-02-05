@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8b26783231714a00efafee3aca8b233c",
-  "translation_date": "2025-11-21T00:25:11+00:00",
-  "source_file": "docs/microsoft-foundry/ai-workshop-lab.md",
-  "language_code": "it"
-}
--->
 # Laboratorio AI Workshop: Rendere le tue soluzioni AI pronte per AZD
 
 **Navigazione Capitolo:**

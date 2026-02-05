@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2432e08775264e481d86a2e0e512a347",
-  "translation_date": "2025-11-21T00:35:11+00:00",
-  "source_file": "docs/microsoft-foundry/ai-model-deployment.md",
-  "language_code": "tr"
-}
--->
 # Azure Developer CLI ile AI Modeli Dağıtımı
 
 **Bölüm Navigasyonu:**

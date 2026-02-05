@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-20T23:38:31+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "tr"
-}
--->
 # Microsoft SQL Veritabanı ve Web Uygulamasını AZD ile Dağıtma
 
 ⏱️ **Tahmini Süre**: 20-30 dakika | 💰 **Tahmini Maliyet**: ~15-25$/ay | ⭐ **Zorluk Seviyesi**: Orta

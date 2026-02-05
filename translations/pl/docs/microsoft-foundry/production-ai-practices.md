@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a248f574dbb58c1f58a7bcc3f47e361",
-  "translation_date": "2025-11-20T02:43:40+00:00",
-  "source_file": "docs/microsoft-foundry/production-ai-practices.md",
-  "language_code": "pl"
-}
--->
 # Najlepsze praktyki dla produkcyjnych obciążeń AI z AZD
 
 **Nawigacja po rozdziałach:**
