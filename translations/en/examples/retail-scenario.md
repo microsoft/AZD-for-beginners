@@ -1,18 +1,9 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-25T09:31:41+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "en"
-}
--->
 # Multi-Agent Customer Support Solution - Retailer Scenario
 
 **Chapter 5: Multi-Agent AI Solutions**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Current Chapter**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Prerequisites**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **⬅️ Prerequisites**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **➡️ Next Chapter**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM Templates**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
@@ -2024,7 +2015,7 @@ The ARM template handles infrastructure provisioning. After deployment:
 
 3. **Deploy Agent Code**:
    ```bash
-   # Build and deploy real agent applications
+   # Build and deploy actual agent applications
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2179,8 +2170,8 @@ cd retail-multiagent-arm-template
 
 - 🐛 [Report Issues](https://github.com/microsoft/AZD-for-beginners/issues) - Template bugs or documentation errors
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Architecture questions
-- 📖 [FAQ](../../resources/faq.md) - Common questions answered
-- 🔧 [Troubleshooting Guide](../../docs/troubleshooting/common-issues.md) - Deployment issues
+- 📖 [FAQ](../resources/faq.md) - Common questions answered
+- 🔧 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - Deployment issues
 
 ---
 
@@ -2189,6 +2180,6 @@ cd retail-multiagent-arm-template
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+Disclaimer:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
