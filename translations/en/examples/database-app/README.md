@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-25T13:48:12+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "en"
-}
--->
 # Deploying a Microsoft SQL Database and Web App with AZD
 
 ⏱️ **Estimated Time**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Intermediate
@@ -72,7 +63,7 @@ This is an **intermediate-level** example. You should be familiar with:
 - Fundamental cloud concepts (resources, resource groups)
 - Basic understanding of web applications and databases
 
-**New to AZD?** Start with the [Getting Started guide](../../docs/getting-started/azd-basics.md) first.
+**New to AZD?** Start with the [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) first.
 
 ## Architecture
 
@@ -565,9 +556,9 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 ```
 
 **Solution**:
-- Verify that the SQL Server firewall allows Azure services (this is configured automatically)
-- Check that the SQL admin password was entered correctly during `azd provision`
-- Ensure the SQL Server is fully provisioned (this can take 2-3 minutes)
+- Verify SQL Server firewall allows Azure services (configured automatically)
+- Check the SQL admin password was entered correctly during `azd provision`
+- Ensure SQL Server is fully provisioned (can take 2-3 minutes)
 
 **Verify Connection**:
 ```sh
@@ -578,10 +569,10 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 #### 3. Web App Shows "Application Error"
 
 **Symptom**:
-The browser displays a generic error page.
+Browser shows generic error page.
 
 **Solution**:
-Check the application logs:
+Check application logs:
 ```sh
 # View recent logs
 az webapp log tail --name <app-name> --resource-group <rg-name>
@@ -600,9 +591,9 @@ Error: Failed to build project
 ```
 
 **Solution**:
-- Ensure there are no syntax errors in `requirements.txt`
+- Ensure `requirements.txt` has no syntax errors
 - Check that Python 3.11 is specified in `infra/resources/web-app.bicep`
-- Verify that the Dockerfile has the correct base image
+- Verify Dockerfile has correct base image
 
 **Debug locally**:
 ```sh
@@ -625,7 +616,7 @@ azd auth login
 az login
 ```
 
-Verify that you have the correct permissions (Contributor role) on the subscription.
+Verify you have the correct permissions (Contributor role) on the subscription.
 
 #### 6. High Database Costs
 
@@ -634,7 +625,7 @@ Unexpected Azure bill.
 
 **Solution**:
 - Check if you forgot to run `azd down` after testing
-- Verify that the SQL Database is using the Basic tier (not Premium)
+- Verify SQL Database is using Basic tier (not Premium)
 - Review costs in Azure Cost Management
 - Set up cost alerts
 
@@ -656,7 +647,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 ```
 
 **Need More Help?**
-- [AZD Troubleshooting Guide](../../docs/troubleshooting/common-issues.md)
+- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
 - [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
 - [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
@@ -664,7 +655,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 ### Exercise 1: Verify Your Deployment (Beginner)
 
-**Goal**: Confirm that all resources are deployed and the application is working.
+**Goal**: Confirm all resources are deployed and the application is working.
 
 **Steps**:
 1. List all resources in your resource group:
@@ -683,7 +674,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    **Expected**: All return valid JSON without errors
 
 3. Check Application Insights:
-   - Navigate to Application Insights in the Azure Portal
+   - Navigate to Application Insights in Azure Portal
    - Go to "Live Metrics"
    - Refresh your browser on the web app
    **Expected**: See requests appearing in real-time
@@ -744,7 +735,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```
    **Expected**: Returns products matching "laptop"
 
-**Success Criteria**: The new endpoint works, returns filtered results, and shows up in Application Insights logs.
+**Success Criteria**: New endpoint works, returns filtered results, shows up in Application Insights logs.
 
 ---
 
@@ -782,7 +773,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    - Azure Portal → Alerts → Alert Rules
    - Check your email (if configured)
 
-**Success Criteria**: The alert rule is created, triggers on errors, and notifications are received.
+**Success Criteria**: Alert rule is created, triggers on errors, notifications are received.
 
 ---
 
@@ -791,7 +782,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 **Goal**: Add a new table and modify the application to use it.
 
 **Steps**:
-1. Connect to the SQL Database via the Azure Portal Query Editor
+1. Connect to SQL Database via Azure Portal Query Editor
 
 2. Create a new `categories` table:
    ```sql
@@ -814,7 +805,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 4. Deploy and test
 
-**Success Criteria**: The new table exists, products show category information, and the application still works.
+**Success Criteria**: New table exists, products show category information, application still works.
 
 ---
 
@@ -828,7 +819,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 3. Measure performance improvement with Application Insights
 4. Compare response times before/after caching
 
-**Success Criteria**: Redis is deployed, caching works, and response times improve by >50%.
+**Success Criteria**: Redis is deployed, caching works, response times improve by >50%.
 
 **Hint**: Start with [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
@@ -850,7 +841,7 @@ azd down
 Type `y` to confirm.
 
 **✓ Success Check**: 
-- All resources are deleted from the Azure Portal
+- All resources are deleted from Azure Portal
 - No ongoing charges
 - Local `.azure/<env-name>` folder can be deleted
 
@@ -871,7 +862,7 @@ az group delete --name rg-<env-name> --yes
 ### Next Steps in This Course
 - **[Container Apps Example](../../../../examples/container-app)**: Deploy microservices with Azure Container Apps
 - **[AI Integration Guide](../../../../docs/ai-foundry)**: Add AI capabilities to your app
-- **[Deployment Best Practices](../../docs/deployment/deployment-guide.md)**: Production deployment patterns
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Production deployment patterns
 
 ### Advanced Topics
 - **Managed Identity**: Remove passwords and use Azure AD authentication
@@ -938,6 +929,6 @@ A: Yes, modify `infra/main.bicep` to reference an existing SQL Server and update
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+Disclaimer:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

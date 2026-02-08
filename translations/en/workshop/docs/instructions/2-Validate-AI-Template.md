@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-25T02:07:59+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "en"
-}
--->
 # 2. Validate a Template
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
@@ -18,23 +9,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
+
 ## 1. Introduction
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source command-line tool designed to simplify the developer workflow for building and deploying applications to Azure.
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure as code_ assets, and `azd` configuration files for a unified solution architecture. Provisioning infrastructure is as simple as running the `azd provision` command, while `azd up` allows you to provision infrastructure **and** deploy your application in one go!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
 
-This makes it easy to kickstart your application development process by finding an _AZD Starter template_ that closely matches your application and infrastructure needs, then customizing the repository to fit your specific requirements.
+As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
-Before we begin, let’s ensure you have the Azure Developer CLI installed.
+Before we begin, let's make sure you have the Azure Developer CLI installed.
 
-1. Open a VS Code terminal and type the following command:
+1. Open a VS Code terminal and type this command:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. You should see output similar to this:
+1. You should see something like this!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
@@ -46,19 +38,20 @@ Before we begin, let’s ensure you have the Azure Developer CLI installed.
 
 ## 2. Template Selection
 
-The Azure AI Foundry platform offers a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that address popular solution scenarios like _multi-agent workflow automation_ and _multi-modal content processing_. You can also explore these templates on the Azure AI Foundry portal.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Azure AI Foundry portal when prompted—you’ll see a page like this:
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
 ![Pick](../../../../../translated_images/en/01-pick-template.60d2d5fff5ebc374.webp)
 
+
 The **Basic** options are your starter templates:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat), which deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a simple AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents), which deploys a standard AI Agent (using the Azure AI Agent Service). Use this to familiarize yourself with agent-based AI solutions involving tools and models.
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
-Open the second link in a new browser tab (or click `Open in GitHub` on the corresponding card). You’ll see the repository for this AZD Template. Take a moment to review the README. The application architecture looks like this:
+Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
 
 ![Arch](../../../../../translated_images/en/architecture.8cec470ec15c65c7.webp)
 
@@ -66,96 +59,95 @@ Open the second link in a new browser tab (or click `Open in GitHub` on the corr
 
 ## 3. Template Activation
 
-Let’s deploy this template and ensure it works as expected. Follow the steps outlined in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm the default action to `Create codespace`.
-1. A new browser tab will open—wait for the GitHub Codespaces session to finish loading.
-1. Open the VS Code terminal in Codespaces and type the following command:
+1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
+1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
+1. Open the VS Code terminal in Codespaces - type the following command:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Complete the workflow steps triggered by this command:
+Complete the workflow steps that this will trigger:
 
-1. You’ll be prompted to log into Azure—follow the instructions to authenticate.
-1. Enter a unique environment name—for example, `nitya-mshack-azd`.
-1. This will create a `.azure/` folder, and you’ll see a subfolder with the environment name.
-1. You’ll be asked to select a subscription name—choose the default.
-1. You’ll be asked for a location—use `East US 2`.
+1. You will be prompted to log into Azure - follow instructions to authenticate
+1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
+1. This  will create a `.azure/` folder - you will see a subfolder with the env name
+1. You will be prompted to select a subscription name - select the default
+1. You will be prompted for a location - use `East US 2`
 
-Now, wait for the provisioning process to complete. **This takes 10-15 minutes.**
+Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
-1. Once finished, your console will display a SUCCESS message like this:
+1. When done, your console will show a SUCCESS message like this:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
+1. Your Azure Portal will now have a provisioned resource group with that env name:
 
-1. Your Azure Portal will now contain a provisioned resource group with the environment name:
+      ![Infra](../../../../../translated_images/en/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-   ![Infra](../../../../../translated_images/en/02-provisioned-infra.46c706b14f56e0bf.webp)
-
-1. **You are now ready to validate the deployed infrastructure and application.**
+1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
 ## 4. Template Validation
 
-1. Visit the Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page and log in if prompted.
-1. Click on the resource group for your environment name—you’ll see a page like the one above.
+1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Click on RG for your environment name - you see the page above
 
-   - Click on the Azure Container Apps resource.
-   - In the _Essentials_ section (top right), click on the Application URL.
+      - click on the Azure Container Apps resource
+      - click on the Application Url in the _Essentials_ section (top right)
 
 1. You should see a hosted application front-end UI like this:
 
    ![App](../../../../../translated_images/en/03-test-application.471910da12c3038e.webp)
 
-1. Try asking a few [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md):
+1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-   1. Ask: ```What is the capital of France?```
-   1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
+      1. Ask: ```What is the capital of France?``` 
+      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. You should receive answers similar to those shown below. _But how does this work?_
+1. You should get answers similar to what is shown below. _But how does this work?_ 
 
-   ![App](../../../../../translated_images/en/03-test-question.521c1e863cbaddb6.webp)
+      ![App](../../../../../translated_images/en/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5. Agent Validation
+## 5.  Agent Validation
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Azure AI Foundry project for this template. Let’s explore what this entails.
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
-1. Return to the Azure Portal _Overview_ page for your resource group.
+1. Return to the Azure Portal _Overview_ page for your resource group
 
-1. Click on the `Azure AI Foundry` resource in the list.
+1. Click on the `Microsoft Foundry` resource in that list
 
-1. You’ll see this. Click the `Go to Azure AI Foundry Portal` button.
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](../../../../../translated_images/en/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. You’ll land on the Foundry Project page for your AI application.
+1. You should see the Foundry Project page for your AI application
    ![Project](../../../../../translated_images/en/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Click on `Agents`—you’ll see the default Agent provisioned in your project.
+1. Click on `Agents` - you see the default Agent provisioned in your project
    ![Agents](../../../../../translated_images/en/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Select the agent to view its details. Note the following:
+1. Select it - and you see the Agent details. Note the following:
 
-   - The agent uses File Search by default (always).
-   - The agent’s `Knowledge` section indicates it has 32 files uploaded for file search.
-     ![Agents](../../../../../translated_images/en/07-view-agent-details.0e049f37f61eae62.webp)
+      - The agent uses File Search by default (always)
+      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
+      ![Agents](../../../../../translated_images/en/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details.
+1. Look for the `Data+indexes` option in the left menu and click for details. 
 
-   - You’ll see the 32 data files uploaded for knowledge.
-   - These correspond to the 12 customer files and 20 product files under `src/files`.
-     ![Data](../../../../../translated_images/en/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - You should see the 32 data files uploaded for knowledge.
+      - These will correspond to the 12 customer files and 20 product files under `src/files` 
+      ![Data](../../../../../translated_images/en/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You’ve validated the Agent’s operation!**
+**You validated Agent operation!** 
 
-1. The agent’s responses are grounded in the knowledge contained in these files.
-1. You can now ask questions related to this data and receive grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez."
+1. The agent responses are grounded in the knowledge in those files. 
+1. You can now ask questions related to that data, and get grounded responses.
+1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
 Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
@@ -165,77 +157,79 @@ Revisit the browser tab with the Container App endpoint and ask: `What products 
 
 ## 6. Agent Playground
 
-Let’s explore the capabilities of Azure AI Foundry further by testing the Agent in the Agents Playground.
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
-1. Return to the `Agents` page in Azure AI Foundry and select the default agent.
-1. Click the `Try in Playground` option—you’ll see a Playground UI like this.
+1. Return to the `Agents` page in Microsoft Foundry - select the default agent
+1. Click the `Try in Playground` option - you should get a Playground UI like this
 1. Ask the same question: `What products does Amanda Perez own?`
 
-   ![Data](../../../../../translated_images/en/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Data](../../../../../translated_images/en/09-ask-in-playground.a1b93794f78fa676.webp)
 
-You’ll receive the same (or similar) response, but you’ll also gain additional insights into the quality, cost, and performance of your agent-based application. For example:
+You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
 
-1. The response cites the data files used to "ground" the answer.
-1. Hover over any file label—does the data match your query and the displayed response?
+1. Note that the response cites data files used to "ground" the response
+1. Hover over any of these file labels - does the data match your query and displayed response?
 
-You’ll also see a _stats_ row below the response.
+You also see a _stats_ row below the response. 
 
-1. Hover over any metric—for example, Safety. You’ll see something like this.
-1. Does the assessed rating align with your intuition about the response’s safety level?
+1. Hover over any metric - e.g., Safety. You see something like this
+1. Does the assessed rating match your intuition for the response safety level?
 
-   ![Data](../../../../../translated_images/en/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Data](../../../../../translated_images/en/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
 ## 7. Built-in Observability
 
-Observability involves instrumenting your application to generate data that helps you understand, debug, and optimize its operations. Here’s how to explore this:
+Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
-1. Click the `View Run Info` button—you’ll see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also access this view by clicking Thread Logs in the top-level menu._
+1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - Review the run steps and tools engaged by the agent.
-   - Understand the total Token count (vs. output tokens used) for the response.
-   - Analyze latency and identify where time is spent during execution.
+   - Get a sense for the run steps and tools engaged by the agent
+   - Understand total Token count (vs. output tokens usage) for response
+   - Understand the latency and where time is being spent in execution
 
-     ![Agent](../../../../../translated_images/en/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![Agent](../../../../../translated_images/en/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metadata` tab to view additional attributes for the run, which may provide useful context for debugging issues later.
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
-     ![Agent](../../../../../translated_images/en/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![Agent](../../../../../translated_images/en/11-view-run-info-metadata.7966986122c7c2df.webp)
 
-1. Click the `Evaluations` tab to see auto-assessments of the agent’s response. These include safety evaluations (e.g., Self-harm) and agent-specific evaluations (e.g., Intent resolution, Task adherence).
 
-     ![Agent](../../../../../translated_images/en/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
-1. Finally, click the `Monitoring` tab in the sidebar menu.
+      ![Agent](../../../../../translated_images/en/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-   - Select the `Resource usage` tab on the displayed page to view metrics.
-   - Track application usage in terms of costs (tokens) and load (requests).
-   - Monitor application latency from input processing to output delivery.
+1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
-     ![Agent](../../../../../translated_images/en/13-monitoring-resources.5148015f7311807f.webp)
+      - Select `Resource usage` tab in the displayed page - and view the metrics.
+      - Track application usage in terms of costs (tokens) and load (requests).
+      - Track applicaton latency to first byte (input processing) and last byte (output).
+
+      ![Agent](../../../../../translated_images/en/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
 ## 8. Environment Variables
 
-So far, we’ve validated the deployment in the browser and confirmed that the infrastructure is provisioned and the application is operational. To work with the application _code-first_, we need to configure our local development environment with the relevant variables for these resources. `azd` simplifies this process.
+So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for application deployments.
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
 
-1. Environment variables are stored in `.azure/<env-name>/.env`, which scopes them to the `env-name` environment used during deployment. This helps isolate environments across different deployment targets within the same repository.
+1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
 
-1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., those set in the shell). Instead, use `azd set env` and `azd get env` to transfer information within scripts.
+1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
 
-Let’s try a few commands:
 
-1. Retrieve all environment variables set for `azd` in this environment:
+Let's try out a few commands:
+
+1. Get all the environment variables set for `azd` in this environment:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-   You’ll see output similar to this:
+      You see something like:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -245,19 +239,19 @@ Let’s try a few commands:
       ...
       ```
 
-1. Retrieve a specific value—for example, check if the `AZURE_AI_AGENT_MODEL_NAME` value is set:
+1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-   You’ll see output like this—it wasn’t set by default!
+      You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will immediately reflect in the `.azure/<env-name>/.env` file._
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -265,30 +259,35 @@ Let’s try a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-   Now, verify that the value is set:
+      Now, we should find the value is set:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Note that some resources are persistent (e.g., model deployments) and may require more than just an `azd up` to force redeployment. Let’s try tearing down the original deployment and redeploying with updated environment variables.
+1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **Refresh** If you previously deployed infrastructure using an azd template, you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      This is a powerful method to _synchronize_ environment variables across two or more local development environments (e.g., a team with multiple developers), enabling the deployed infrastructure to act as the single source of truth for the state of environment variables. Team members can simply _refresh_ the variables to stay in sync.
+      This is a powerful way to _sync_ environment variables across two or more local development environments (e.g., team with multiple developers) - allowing the deployed infrastructure to serve as the ground truth for env variable state. Team members simply _refresh_ variables to get back in sync.
 
 ---
 
 ## 9. Congratulations 🏆
 
-You’ve just completed an end-to-end workflow where you:
+You just completed an end-to-end workflow where you:
 
-- [X] Chose the AZD Template you wanted to use
-- [X] Launched the template using GitHub Codespaces
-- [X] Deployed the template and confirmed it works
+- [X] Selected the AZD Template You Want To Use
+- [X] Launched The Template With GitHub Codespaces 
+- [X] Deployed the Template and validated it works
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Disclaimer:
+This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, a professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

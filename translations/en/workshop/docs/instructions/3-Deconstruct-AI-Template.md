@@ -1,26 +1,18 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-25T02:24:39+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "en"
-}
--->
 # 3. Deconstruct a Template
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Item
-    - [ ] Item
-    - [ ] Item
-    - [ ] **Lab 3:** 
+    - [ ] Activate GitHub Copilot with MCP servers for Azure assistance
+    - [ ] Understand the AZD template folder structure and components
+    - [ ] Explore infrastructure-as-code (Bicep) organization patterns
+    - [ ] **Lab 3:** Use GitHub Copilot to explore and understand repository architecture 
 
 ---
 
-With AZD templates and the Azure Developer CLI (`azd`), we can quickly kickstart our AI development journey using standardized repositories that include sample code, infrastructure, and configuration files—all packaged as a ready-to-deploy _starter_ project.
 
-**But now, we need to understand the project structure and codebase—and learn how to customize the AZD template—even without prior experience or knowledge of AZD!**
+With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _starter_ project.
+
+**But now, we need to understand the project structure and codebase - and be able to customize the AZD template - without any prior experience or understanding of AZD!**
 
 ---
 
@@ -28,21 +20,21 @@ With AZD templates and the Azure Developer CLI (`azd`), we can quickly kickstart
 
 ### 1.1 Install GitHub Copilot Chat
 
-It's time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). This allows us to use natural language to describe tasks at a high level and receive assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup), which has a monthly limit for completions and chat interactions.
+It's time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
 
-The extension can be installed from the marketplace but should already be available in your Codespaces environment. _Click `Open Chat` from the Copilot icon drop-down and type a prompt like `What can you do?`_—you may be prompted to log in. **GitHub Copilot Chat is ready**.
+The extension can be installed from the marketplace, but should already be available in your Codespaces environment. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat is ready**.
 
-### 1.2 Install MCP Servers
+### 1.2. Install MCP Servers
 
-For Agent Mode to work effectively, it needs access to the right tools to retrieve knowledge or take actions. MCP servers are designed to help with this. We'll configure the following servers:
+For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
 
 To activate these:
 
-1. Create a file called `.vscode/mcp.json` if it does not exist.
-1. Copy the following into that file—and start the servers!
+1. Create a file called `.vscode/mcp.json` if it does not exist
+1. Copy the following into that file - and start the servers!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -65,7 +57,7 @@ To activate these:
 
 ??? warning "You may get an error that `npx` is not installed (click to expand for fix)"
 
-      To fix this, open the `.devcontainer/devcontainer.json` file and add this line to the features section. Then rebuild the container. You should now have `npx` installed.
+      To fix,this open the `.devcontainer/devcontainer.json` file and add this line to the features section. Then rebuild the container. You should now have `npx` installed.
 
       ```title="" linenums="0"
          "features": {
@@ -76,11 +68,11 @@ To activate these:
 
 ---
 
-### 1.3 Test GitHub Copilot Chat
+### 1.3. Test GitHub Copilot Chat
 
-**First, use `az login` to authenticate with Azure from the VS Code command line.**
+**First use `az login` to authenticate with Azure from VS Code command line.**
 
-You should now be able to query your Azure subscription status and ask questions about deployed resources or configurations. Try these prompts:
+You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
@@ -90,13 +82,13 @@ You can also ask questions about Azure documentation and get responses grounded 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Or you can request code snippets to complete a task. Try this prompt:
+Or you can ask for code snippets to complete a task. Try this prompt.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, it might go a step further and create the relevant resources for you—including setup scripts and documentation—to help you execute the task.
+In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
 
-**You are now equipped to start exploring the template repository.**
+**You are now equipped to start exploring the template repository**
 
 ---
 
@@ -106,7 +98,7 @@ In `Ask` mode, this will provide code that you can copy-paste and try out. In `A
 
       This application is an AI-powered chat application built on Azure that demonstrates a modern agent-based architecture. The solution centers around an Azure Container App that hosts the main application code, which processes user input and generates intelligent responses through an AI agent. 
       
-      The architecture leverages Azure AI Foundry Project as the foundation for AI capabilities, connecting to Azure AI Services that provide the underlying language models (such as GPT-4o-mini) and agent functionality. User interactions flow through a React-based frontend to a FastAPI backend that communicates with the AI agent service for generating contextual responses. 
+      The architecture leverages Microsoft Foundry Project as the foundation for AI capabilities, connecting to Azure AI Services that provide the underlying language models (such as GPT-4o-mini) and agent functionality. User interactions flow through a React-based frontend to a FastAPI backend that communicates with the AI agent service for generating contextual responses. 
       
       The system incorporates knowledge retrieval capabilities through either file search or Azure AI Search service, allowing the agent to access and cite information from uploaded documents. For operational excellence, the architecture includes comprehensive monitoring through Application Insights and Log Analytics Workspace for tracing, logging, and performance optimization. 
       
@@ -197,7 +189,7 @@ In `Ask` mode, this will provide code that you can copy-paste and try out. In `A
          └── next-steps.md                # Post-deployment guidance
       ```
 
-### 3.1 Core App Architecture
+### 3.1. Core App Architecture
 
 This template follows a **full-stack web application** pattern with:
 
@@ -222,7 +214,7 @@ The infrastructure layer uses **Azure Bicep** templates organized modularly:
 **Backend API (`src/api/`)**:
 
 - FastAPI-based REST API
-- Azure AI Agent service integration
+- Foundry Agents integration
 - Search index management for knowledge retrieval
 - File upload and processing capabilities
 
@@ -237,6 +229,7 @@ The infrastructure layer uses **Azure Bicep** templates organized modularly:
 - Sample customer and product data
 - Demonstrates file-based knowledge retrieval
 - JSON and Markdown format examples
+
 
 ### 3.4 DevOps & Automation
 
@@ -271,7 +264,7 @@ The infrastructure layer uses **Azure Bicep** templates organized modularly:
 
 ## 4. Congratulations 🏆
 
-You successfully used GitHub Copilot Chat with MCP servers to explore the repository.
+You successfully used GitHub Copilot Chat with MCP servers, to explore the repository.
 
 - [X] Activated GitHub Copilot for Azure
 - [X] Understood the Application Architecture
@@ -281,3 +274,7 @@ This gives you a sense of the _infrastructure as code_ assets for this template.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Disclaimer:
+This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

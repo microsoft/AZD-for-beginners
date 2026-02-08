@@ -1,162 +1,159 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T16:29:08+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "de"
-}
--->
-# Befehlsübersicht - Wesentliche AZD-Befehle
+# Befehls-Spickzettel - Wichtige AZD-Befehle
 
 **Schnellreferenz für alle Kapitel**
-- **📚 Kursübersicht**: [AZD für Anfänger](../README.md)
+- **📚 Kurs-Startseite**: [AZD für Einsteiger](../README.md)
 - **📖 Schnellstart**: [Kapitel 1: Grundlagen & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 KI-Befehle**: [Kapitel 2: KI-gestützte Entwicklung](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Fortgeschritten**: [Kapitel 4: Infrastruktur als Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 KI-Befehle**: [Kapitel 2: KI-zentrierte Entwicklung](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Erweitert**: [Kapitel 4: Infrastruktur als Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Einführung
 
-Dieses umfassende Cheat Sheet bietet eine schnelle Referenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, kategorisiert und mit praktischen Beispielen versehen. Perfekt für schnelle Nachschlagewerke während der Entwicklung, Fehlerbehebung und täglichen Arbeiten mit azd-Projekten.
+Dieser umfassende Spickzettel bietet eine Schnellreferenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, organisiert nach Kategorien und mit praktischen Beispielen. Perfekt für schnelle Nachschläge während der Entwicklung, Fehlerbehebung und dem täglichen Betrieb mit azd-Projekten.
 
 ## Lernziele
 
-Durch die Nutzung dieses Cheat Sheets werden Sie:
-- Sofortigen Zugriff auf wesentliche Azure Developer CLI-Befehle und deren Syntax haben
-- Die Organisation der Befehle nach funktionalen Kategorien und Anwendungsfällen verstehen
-- Praktische Beispiele für häufige Entwicklungs- und Bereitstellungsszenarien nachschlagen können
-- Fehlerbehebungsbefehle für eine schnelle Problemlösung finden
-- Erweiterte Konfigurations- und Anpassungsoptionen effizient auffinden
-- Befehle für die Verwaltung von Umgebungen und Workflows mit mehreren Umgebungen lokalisieren
+Durch die Verwendung dieses Spickzettels erhalten Sie:
+- Sofortigen Zugriff auf wichtige Azure Developer CLI-Befehle und deren Syntax
+- Verständnis der Organisation von Befehlen nach funktionalen Kategorien und Anwendungsfällen
+- Nachschlagbare praktische Beispiele für gängige Entwicklungs- und Deployment-Szenarien
+- Zugriff auf Fehlerbehebungsbefehle für schnelle Problemlösungen
+- Effizientes Auffinden erweiterter Konfigurations- und Anpassungsoptionen
+- Auffinden von Befehlen zur Umgebungverwaltung und Workflows für mehrere Umgebungen
 
 ## Lernergebnisse
 
-Mit regelmäßiger Nutzung dieses Cheat Sheets werden Sie in der Lage sein:
-- azd-Befehle sicher auszuführen, ohne die vollständige Dokumentation zu konsultieren
+Bei regelmäßiger Nutzung dieses Spickzettels werden Sie in der Lage sein:
+- azd-Befehle sicher auszuführen, ohne ständig die vollständige Dokumentation zu konsultieren
 - Häufige Probleme schnell mit geeigneten Diagnosebefehlen zu lösen
-- Mehrere Umgebungen und Bereitstellungsszenarien effizient zu verwalten
+- Mehrere Umgebungen und Deployment-Szenarien effizient zu verwalten
 - Erweiterte azd-Funktionen und Konfigurationsoptionen bei Bedarf anzuwenden
-- Bereitstellungsprobleme mit systematischen Befehlsfolgen zu beheben
-- Workflows durch effektive Nutzung von azd-Kurzbefehlen und Optionen zu optimieren
+- Bereitstellungsprobleme mithilfe systematischer Befehlsfolgen zu beheben
+- Workflows durch effektiven Einsatz von azd-Kurzbefehlen und Optionen zu optimieren
 
-## Erste Schritte mit Befehlen
+## Erste Schritte - Befehle
 
 ### Authentifizierung
 ```bash
-# Login to Azure (uses Azure CLI)
+# Bei Azure über AZD anmelden
+azd auth login
+
+# Bei der Azure CLI anmelden (AZD verwendet dies im Hintergrund)
 az login
 
-# Check current account
+# Aktuelles Konto prüfen
 az account show
 
-# Set default subscription
+# Standardabonnement festlegen
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# Von AZD abmelden
+azd auth logout
+
+# Von der Azure CLI abmelden
+az logout
 ```
 
 ### Projektinitialisierung
 ```bash
-# Browse available templates
+# Verfügbare Vorlagen durchsuchen
 azd template list
 
-# Initialize from template
+# Aus Vorlage initialisieren
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# Im aktuellen Verzeichnis initialisieren
 azd init .
 
-# Initialize with custom name
+# Mit benutzerdefiniertem Namen initialisieren
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Kernbefehle für die Bereitstellung
+## Kern-Bereitstellungsbefehle
 
-### Vollständiger Bereitstellungsworkflow
+### Vollständiger Bereitstellungs-Workflow
 ```bash
-# Deploy everything (provision + deploy)
+# Alles bereitstellen (Einrichten + Bereitstellung)
 azd up
 
-# Deploy with confirmation prompts disabled
+# Bereitstellen mit deaktivierten Bestätigungsabfragen
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# In eine bestimmte Umgebung bereitstellen
 azd up --environment production
 
-# Deploy with custom parameters
+# Bereitstellen mit benutzerdefinierten Parametern
 azd up --parameter location=westus2
 ```
 
 ### Nur Infrastruktur
 ```bash
-# Provision Azure resources
+# Azure-Ressourcen bereitstellen
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 Vorschau von Infrastrukturänderungen
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# Zeigt eine Trockenlaufansicht, welche Ressourcen erstellt, geändert oder gelöscht würden
+# Ähnlich wie 'terraform plan' oder 'bicep what-if' - sicher auszuführen, es werden keine Änderungen angewendet
 ```
 
 ### Nur Anwendung
 ```bash
-# Deploy application code
+# Anwendungscode bereitstellen
 azd deploy
 
-# Deploy specific service
+# Bestimmten Dienst bereitstellen
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# Alle Dienste bereitstellen
 azd deploy --all
 ```
 
-### Build und Paketierung
+### Erstellen und Paketieren
 ```bash
-# Build applications
+# Anwendungen erstellen
 azd package
 
-# Build specific service
+# Einen bestimmten Dienst erstellen
 azd package --service api
 ```
 
-## 🌍 Umweltmanagement
+## 🌍 Umgebungsverwaltung
 
-### Umweltoperationen
+### Umgebungsoperationen
 ```bash
-# List all environments
+# Alle Umgebungen auflisten
 azd env list
 
-# Create new environment
+# Neue Umgebung erstellen
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# Umgebung auswählen
 azd env select production
 
-# Show current environment
+# Aktuelle Umgebung anzeigen
 azd env show
 
-# Refresh environment state
+# Status der Umgebung aktualisieren
 azd env refresh
 ```
 
 ### Umgebungsvariablen
 ```bash
-# Set environment variable
+# Umgebungsvariable setzen
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# Umgebungsvariable abrufen
 azd env get API_KEY
 
-# List all environment variables
+# Alle Umgebungsvariablen auflisten
 azd env get-values
 
-# Remove environment variable
+# Umgebungsvariable entfernen
 azd env unset DEBUG
 ```
 
@@ -164,192 +161,199 @@ azd env unset DEBUG
 
 ### Globale Konfiguration
 ```bash
-# List all configuration
+# Alle Konfigurationen auflisten
 azd config list
 
-# Set global defaults
+# Globale Standardwerte setzen
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# Konfiguration entfernen
 azd config unset defaults.location
 
-# Reset all configuration
+# Alle Konfigurationen zurücksetzen
 azd config reset
 ```
 
 ### Projektkonfiguration
 ```bash
-# Validate azure.yaml
+# azure.yaml validieren
 azd config validate
 
-# Show project information
+# Projektinformationen anzeigen
 azd show
 
-# Get service endpoints
+# Service-Endpunkte abrufen
 azd show --output json
 ```
 
-## 📊 Überwachung und Protokolle
+## 📊 Überwachung und Diagnose
 
-### Anwendungsprotokolle
+### Überwachungs-Dashboard
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### Überwachung
-```bash
-# Open Azure portal for monitoring
+# Überwachungs-Dashboard im Azure-Portal öffnen
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Live-Metriken von Application Insights öffnen
+azd monitor --live
+
+# Blade für Application Insights-Logs öffnen
+azd monitor --logs
+
+# Application Insights-Übersicht öffnen
+azd monitor --overview
+```
+
+### Containerprotokolle anzeigen
+```bash
+# Protokolle mit der Azure CLI anzeigen (für Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Protokolle in Echtzeit verfolgen
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Protokolle im Azure-Portal anzeigen
+azd monitor --logs
+```
+
+### Log Analytics-Abfragen
+```bash
+# Zugriff auf Log Analytics über das Azure-Portal
+azd monitor --logs
+
+# Protokolle mit der Azure CLI abfragen
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ Wartungsbefehle
 
-### Bereinigung
+### Aufräumen
 ```bash
-# Remove all Azure resources
+# Alle Azure-Ressourcen entfernen
 azd down
 
-# Force delete without confirmation
+# Löschung erzwingen ohne Bestätigung
 azd down --force
 
-# Purge soft-deleted resources
+# Softgelöschte Ressourcen endgültig löschen
 azd down --purge
 
-# Complete cleanup
+# Vollständige Bereinigung
 azd down --force --purge
 ```
 
-### Updates
+### Aktualisierungen
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# Auf Updates für azd prüfen
 azd version
 
-# Show system information
-azd info
+# Aktuelle Version abrufen
+azd version
+
+# Aktuelle Konfiguration anzeigen
+azd config list
 ```
 
 ## 🔧 Erweiterte Befehle
 
-### Pipeline und CI/CD
+### Pipelines und CI/CD
 ```bash
-# Configure GitHub Actions
+# GitHub Actions konfigurieren
 azd pipeline config
 
-# Configure Azure DevOps
+# Azure DevOps konfigurieren
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# Pipeline-Konfiguration anzeigen
 azd pipeline show
 ```
 
-### Infrastrukturmanagement
+### Infrastrukturverwaltung
 ```bash
-# Import existing resources
-azd infra import
+# Infrastrukturvorlagen generieren
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Infrastrukturvorschau und Planung
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Simuliert die Bereitstellung der Infrastruktur, ohne sie tatsächlich bereitzustellen
+# Analysiert Bicep/Terraform-Vorlagen und zeigt:
+# - Ressourcen, die hinzugefügt werden (grün +)
+# - Ressourcen, die geändert werden (gelb ~)
+# - Ressourcen, die gelöscht werden (rot -)
+# Sicher auszuführen - es werden keine tatsächlichen Änderungen an der Azure-Umgebung vorgenommen
+
+# Infrastruktur aus azure.yaml erzeugen
+azd infra synth
 ```
 
-### Servicemanagement
+### Projektinformationen
 ```bash
-# List all services
-azd service list
+# Projektstatus und Endpunkte anzeigen
+azd show
 
-# Show service details
-azd service show --service web
+# Detaillierte Projektinformationen als JSON anzeigen
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Service-Endpunkte abrufen
+azd show --output json | jq '.services'
 ```
 
 ## 🎯 Schnelle Workflows
 
-### Entwicklungsworkflow
+### Entwicklungs-Workflow
 ```bash
-# Start new project
+# Neues Projekt starten
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# In die Entwicklungsumgebung bereitstellen
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# Änderungen vornehmen und erneut bereitstellen
 azd deploy
 
-# View logs
-azd logs --follow
+# Überwachungs-Dashboard öffnen
+azd monitor --live
 ```
 
-### Workflow mit mehreren Umgebungen
+### Workflow für mehrere Umgebungen
 ```bash
-# Set up environments
+# Umgebungen einrichten
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# In die Entwicklungsumgebung bereitstellen
 azd env select dev
 azd up
 
-# Test and promote to staging
+# Testen und in die Staging-Umgebung überführen
 azd env select staging
 azd up
 
-# Deploy to production
+# In die Produktionsumgebung bereitstellen
 azd env select production
 azd up
 ```
 
-### Fehlerbehebungsworkflow
+### Fehlerbehebungs-Workflow
 ```bash
-# Enable debug mode
+# Debug-Modus aktivieren
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Bereitstellungsstatus prüfen
+azd show
 
-# Validate configuration
-azd config validate
+# Konfiguration validieren
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Überwachungs-Dashboard für Protokolle öffnen
+azd monitor --logs
 
-# Check resource status
+# Ressourcenstatus prüfen
 azd show --output json
 ```
 
@@ -357,29 +361,29 @@ azd show --output json
 
 ### Debug-Informationen
 ```bash
-# Enable debug output
+# Debug-Ausgabe aktivieren
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# Telemetrie deaktivieren für sauberere Ausgabe
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Aktuelle Konfiguration prüfen
+azd config list
 
-# Check authentication status
+# Authentifizierungsstatus prüfen
 az account show
 ```
 
 ### Template-Debugging
 ```bash
-# List available templates with details
+# Verfügbare Vorlagen mit Details auflisten
 azd template list --output json
 
-# Show template information
+# Informationen zur Vorlage anzeigen
 azd template show <template-name>
 
-# Validate template before init
+# Vorlage vor der Initialisierung validieren
 azd template validate <template-name>
 ```
 
@@ -387,36 +391,38 @@ azd template validate <template-name>
 
 ### Projektstruktur
 ```bash
-# Show current directory structure
+# Aktuelle Verzeichnisstruktur anzeigen
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
+# Zum Stammverzeichnis des azd-Projekts navigieren
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# azd-Konfigurationsverzeichnis anzeigen
+echo $AZD_CONFIG_DIR  # Normalerweise ~/.azd
 ```
 
 ## 🎨 Ausgabeformatierung
 
 ### JSON-Ausgabe
 ```bash
-# Get JSON output for scripting
+# JSON-Ausgabe für Skripte
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# Mit jq parsen
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Tabellen-Ausgabe
 ```bash
-# Format as table
+# Als Tabelle formatieren
 azd env list --output table
-azd service list --output table
+
+# Bereitgestellte Dienste anzeigen
+azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 Häufige Befehlskombinationen
@@ -424,25 +430,25 @@ azd service list --output table
 ### Health-Check-Skript
 ```bash
 #!/bin/bash
-# Quick health check
+# Kurzer Gesundheitscheck
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
 ### Bereitstellungsvalidierung
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# Validierung vor der Bereitstellung
+azd show
+azd provision --preview  # Änderungen vor der Bereitstellung anzeigen
 az account show
 ```
 
-### Vergleich von Umgebungen
+### Umgebungsvergleich
 ```bash
 #!/bin/bash
-# Compare environments
+# Umgebungen vergleichen
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### Ressourcenbereinigungs-Skript
+### Skript zum Aufräumen von Ressourcen
 ```bash
 #!/bin/bash
-# Clean up old environments
+# Bereinige alte Umgebungen
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -465,76 +471,79 @@ done
 
 ### Häufige Umgebungsvariablen
 ```bash
-# Azure configuration
+# Azure-Konfiguration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# AZD-Konfiguration
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# Anwendungskonfiguration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
 ## 🚨 Notfallbefehle
 
-### Schnelllösungen
+### Schnelle Lösungen
 ```bash
-# Reset authentication
+# Authentifizierung zurücksetzen
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# Umgebung zwangsweise aktualisieren
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# Alle Dienste neu bereitstellen
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Bereitstellungsstatus prüfen
+azd show --output json
 ```
 
 ### Wiederherstellungsbefehle
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Von fehlgeschlagener Bereitstellung wiederherstellen - bereinigen und neu bereitstellen
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Nur Infrastruktur erneut bereitstellen
+azd provision
+
+# Nur Anwendung neu bereitstellen
+azd deploy
 ```
 
 ## 💡 Profi-Tipps
 
-### Aliase für schnellere Workflows
+### Aliasse für schnellere Workflows
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# Füge es deiner .bashrc- oder .zshrc-Datei hinzu.
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funktions-Kurzbefehle
+### Funktionskürzel
 ```bash
-# Quick environment switching
+# Schnelles Umschalten der Umgebung
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# Schnelle Bereitstellung mit Überwachung
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# Status der Umgebung
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -544,32 +553,32 @@ azd-status() {
 
 ### Hilfe erhalten
 ```bash
-# General help
+# Allgemeine Hilfe
 azd --help
 azd help
 
-# Command-specific help
+# Befehlsbezogene Hilfe
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# Version- und Build-Informationen anzeigen
 azd version
 azd version --output json
 ```
 
-### Dokumentationslinks
+### Links zur Dokumentation
 ```bash
-# Open documentation in browser
+# Dokumentation im Browser öffnen
 azd docs
 
-# Show template documentation
+# Dokumentation der Vorlage anzeigen
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tipp**: Lesezeichen für dieses Cheat Sheet setzen und `Strg+F` verwenden, um schnell die benötigten Befehle zu finden!
+**Tipp**: Setzen Sie ein Lesezeichen für diesen Spickzettel und verwenden Sie `Ctrl+F`, um schnell die benötigten Befehle zu finden!
 
 ---
 
@@ -579,5 +588,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Haftungsausschluss:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in der Ausgangssprache ist als maßgebliche Quelle zu betrachten. Bei wichtigen Informationen wird eine professionelle Übersetzung durch einen Menschen empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

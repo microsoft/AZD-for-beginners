@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-19T21:35:39+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "es"
-}
--->
 # Aplicación de Chat de Azure OpenAI
 
 **Ruta de Aprendizaje:** Intermedio ⭐⭐ | **Tiempo:** 35-45 minutos | **Costo:** $50-200/mes

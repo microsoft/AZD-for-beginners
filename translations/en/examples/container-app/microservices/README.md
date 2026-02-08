@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-25T13:44:23+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "en"
-}
--->
 # Microservices Architecture - Container App Example
 
 ⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
@@ -508,14 +499,15 @@ probes: [
 ### View Service Logs
 
 ```bash
+# View logs using azd monitor
+azd monitor --logs
+
+# Or use Azure CLI for specific Container Apps:
 # Stream logs from API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
 # View recent product service logs
-azd logs product-service --tail 100
-
-# View all logs from both services
-azd logs --follow
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Expected Output**:
@@ -633,14 +625,14 @@ az monitor app-insights component show \
 ### Free Tier Options
 For learning/testing, consider:
 - Use Azure free credits (first 30 days)
-- Keep the number of replicas to a minimum
-- Delete resources after testing (to avoid ongoing charges)
+- Keep to minimum replicas
+- Delete after testing (no ongoing charges)
 
 ---
 
 ## Cleanup
 
-To prevent ongoing charges, delete all resources:
+To avoid ongoing charges, delete all resources:
 
 ```bash
 azd down --force --purge
@@ -691,7 +683,7 @@ Once you've mastered this 2-service architecture, here's how to expand:
    }
    ```
 
-2. Update the product service to use Cosmos DB instead of in-memory data
+2. Update product service to use Cosmos DB instead of in-memory data
 
 3. Estimated additional cost: ~$25/month (serverless)
 
@@ -819,12 +811,12 @@ A: Use Azure free tier (first 30 days with new accounts) or deploy for short tes
 **📚 Course Navigation:**
 - ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
 - → Next: [Database Integration Example](../../../../../examples/database-app)
-- 🏠 [Course Home](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- 🏠 [Course Home](../../../README.md)
+- 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+Disclaimer:
+This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

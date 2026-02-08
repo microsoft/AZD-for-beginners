@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-20T06:15:47+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "ru"
-}
--->
 # Решение для розничной торговли с несколькими агентами - Шаблон инфраструктуры
 
 **Глава 5: Пакет для развертывания в производственной среде**

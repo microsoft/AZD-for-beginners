@@ -1,125 +1,122 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T16:35:38+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "fa"
-}
--->
 # برگه تقلب دستورات - دستورات ضروری AZD
 
 **مرجع سریع برای همه فصل‌ها**
-- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../README.md)
+- **📚 خانه دوره**: [AZD برای مبتدیان](../README.md)
 - **📖 شروع سریع**: [فصل 1: پایه و شروع سریع](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 دستورات هوش مصنوعی**: [فصل 2: توسعه مبتنی بر هوش مصنوعی](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 پیشرفته**: [فصل 4: زیرساخت به عنوان کد](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 دستورات هوش مصنوعی**: [فصل 2: توسعهٔ مبتنی بر هوش مصنوعی (توصیه‌شده برای توسعه‌دهندگان هوش مصنوعی)](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 پیشرفته**: [فصل 4: زیرساخت به‌عنوان کد](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## مقدمه
+## معرفی
 
-این برگه تقلب جامع، مرجع سریعی برای پرکاربردترین دستورات CLI توسعه‌دهنده Azure ارائه می‌دهد که بر اساس دسته‌بندی‌ها با مثال‌های عملی سازماندهی شده است. مناسب برای جستجوی سریع در طول توسعه، رفع اشکال و عملیات روزانه با پروژه‌های azd.
+این برگه تقلب جامع مرجع سریعی برای پراستفاده‌ترین دستورات Azure Developer CLI فراهم می‌کند، که بر اساس دسته‌بندی و با مثال‌های کاربردی سازمان‌دهی شده‌اند. برای جستجوی سریع در حین توسعه، عیب‌یابی و عملیات روزانه با پروژه‌های azd ایده‌آل است.
 
 ## اهداف یادگیری
 
 با استفاده از این برگه تقلب، شما:
-- به دستورات ضروری CLI توسعه‌دهنده Azure و نحو آن‌ها دسترسی فوری خواهید داشت
-- سازماندهی دستورات بر اساس دسته‌بندی‌های عملکردی و موارد استفاده را درک خواهید کرد
-- به مثال‌های عملی برای سناریوهای رایج توسعه و استقرار مراجعه خواهید کرد
-- دستورات رفع اشکال برای حل سریع مشکلات را پیدا خواهید کرد
-- گزینه‌های پیکربندی پیشرفته و سفارشی‌سازی را به‌طور مؤثر پیدا خواهید کرد
-- دستورات مدیریت محیط و جریان کاری چند محیطی را پیدا خواهید کرد
+- دسترسی فوری به دستورات و نحو ضروری Azure Developer CLI خواهید داشت
+- درک می‌کنید که دستورات چگونه بر اساس دسته‌های عملکردی و موارد استفاده سازمان‌دهی شده‌اند
+- به مثال‌های عملی برای سناریوهای رایج توسعه و استقرار دسترسی خواهید داشت
+- به دستورات عیب‌یابی برای حل سریع مشکلات دسترسی خواهید داشت
+- گزینه‌های پیکربندی و سفارشی‌سازی پیشرفته را به‌صورت کارآمد خواهید یافت
+- دستورات مدیریت محیط و جریان‌های کاری چندمحیطی را خواهید یافت
 
 ## نتایج یادگیری
 
-با مراجعه منظم به این برگه تقلب، شما قادر خواهید بود:
-- دستورات azd را با اطمینان اجرا کنید بدون نیاز به مراجعه به مستندات کامل
-- مشکلات رایج را به سرعت با استفاده از دستورات تشخیصی مناسب حل کنید
-- محیط‌های متعدد و سناریوهای استقرار را به‌طور مؤثر مدیریت کنید
-- ویژگی‌ها و گزینه‌های پیکربندی پیشرفته azd را در صورت نیاز اعمال کنید
-- مشکلات استقرار را با استفاده از توالی‌های دستوری سیستماتیک رفع کنید
-- جریان‌های کاری را از طریق استفاده مؤثر از میانبرها و گزینه‌های azd بهینه کنید
+با مراجعه منظم به این برگه تقلب، قادر خواهید بود:
+- دستورات azd را با اطمینان اجرا کنید بدون اینکه به مستندات کامل مراجعه کنید
+- مسائل رایج را سریعاً با استفاده از دستورات تشخیصی مناسب حل کنید
+- به‌طور مؤثر چندین محیط و سناریوهای استقرار را مدیریت کنید
+- از قابلیت‌ها و گزینه‌های پیکربندی پیشرفته azd هنگام نیاز استفاده کنید
+- مسائل استقرار را با توالی‌های دستوری سیستماتیک عیب‌یابی کنید
+- جریان‌های کاری را از طریق استفاده مؤثر از میان‌برها و گزینه‌های azd بهینه کنید
 
-## دستورات شروع کار
+## دستورات شروع به کار
 
 ### احراز هویت
 ```bash
-# Login to Azure (uses Azure CLI)
+# ورود به Azure از طریق AZD
+azd auth login
+
+# ورود به Azure CLI (AZD از این در پس‌زمینه استفاده می‌کند)
 az login
 
-# Check current account
+# بررسی حساب فعلی
 az account show
 
-# Set default subscription
+# تنظیم اشتراک پیش‌فرض
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# خروج از AZD
+azd auth logout
+
+# خروج از Azure CLI
+az logout
 ```
 
 ### راه‌اندازی پروژه
 ```bash
-# Browse available templates
+# قالب‌های موجود را مرور کنید
 azd template list
 
-# Initialize from template
+# از قالب مقداردهی اولیه کنید
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# در پوشهٔ فعلی مقداردهی اولیه کنید
 azd init .
 
-# Initialize with custom name
+# با نام دلخواه مقداردهی اولیه کنید
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
 ## دستورات اصلی استقرار
 
-### جریان کاری کامل استقرار
+### گردش کار کامل استقرار
 ```bash
-# Deploy everything (provision + deploy)
+# همه را مستقر کن (تأمین منابع + استقرار)
 azd up
 
-# Deploy with confirmation prompts disabled
+# استقرار با غیرفعال کردن درخواست‌های تأیید
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# استقرار در محیط مشخص
 azd up --environment production
 
-# Deploy with custom parameters
+# استقرار با پارامترهای سفارشی
 azd up --parameter location=westus2
 ```
 
 ### فقط زیرساخت
 ```bash
-# Provision Azure resources
+# تأمین منابع Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 پیش‌نمایش تغییرات زیرساخت
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# نمایشی از اجرای آزمایشی که نشان می‌دهد چه منابعی ایجاد/تغییر/حذف خواهند شد
+# مشابه 'terraform plan' یا 'bicep what-if' - اجرای آن ایمن است، هیچ تغییری اعمال نمی‌شود
 ```
 
 ### فقط برنامه
 ```bash
-# Deploy application code
+# استقرار کد برنامه
 azd deploy
 
-# Deploy specific service
+# استقرار سرویس مشخص
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# استقرار همه سرویس‌ها
 azd deploy --all
 ```
 
 ### ساخت و بسته‌بندی
 ```bash
-# Build applications
+# ساخت برنامه‌ها
 azd package
 
-# Build specific service
+# ساخت سرویس مشخص
 azd package --service api
 ```
 
@@ -127,229 +124,236 @@ azd package --service api
 
 ### عملیات محیط
 ```bash
-# List all environments
+# فهرست تمام محیط‌ها
 azd env list
 
-# Create new environment
+# ایجاد محیط جدید
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# انتخاب محیط
 azd env select production
 
-# Show current environment
+# نمایش محیط فعلی
 azd env show
 
-# Refresh environment state
+# به‌روزرسانی وضعیت محیط
 azd env refresh
 ```
 
-### متغیرهای محیط
+### متغیرهای محیطی
 ```bash
-# Set environment variable
+# تنظیم متغیر محیطی
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# دریافت متغیر محیطی
 azd env get API_KEY
 
-# List all environment variables
+# فهرست همهٔ متغیرهای محیطی
 azd env get-values
 
-# Remove environment variable
+# حذف متغیر محیطی
 azd env unset DEBUG
 ```
 
 ## ⚙️ دستورات پیکربندی
 
-### پیکربندی جهانی
+### پیکربندی سراسری
 ```bash
-# List all configuration
+# تمام پیکربندی‌ها را فهرست کن
 azd config list
 
-# Set global defaults
+# پیش‌فرض‌های سراسری را تنظیم کن
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# پیکربندی را حذف کن
 azd config unset defaults.location
 
-# Reset all configuration
+# تمام پیکربندی‌ها را بازنشانی کن
 azd config reset
 ```
 
 ### پیکربندی پروژه
 ```bash
-# Validate azure.yaml
+# اعتبارسنجی فایل azure.yaml
 azd config validate
 
-# Show project information
+# نمایش اطلاعات پروژه
 azd show
 
-# Get service endpoints
+# دریافت نقاط انتهایی سرویس
 azd show --output json
 ```
 
-## 📊 نظارت و گزارش‌ها
+## 📊 نظارت و عیب‌یابی
 
-### گزارش‌های برنامه
+### داشبورد نظارت
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### نظارت
-```bash
-# Open Azure portal for monitoring
+# داشبورد مانیتورینگ پرتال Azure را باز کنید
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# متریک‌های زنده Application Insights را باز کنید
+azd monitor --live
+
+# صفحه لاگ‌های Application Insights را باز کنید
+azd monitor --logs
+
+# نمای کلی Application Insights را باز کنید
+azd monitor --overview
+```
+
+### مشاهده لاگ‌های کانتینر
+```bash
+# مشاهده لاگ‌ها از طریق Azure CLI (برای Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# دنبال کردن لاگ‌ها به‌صورت زنده
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# مشاهده لاگ‌ها از طریق پورتال Azure
+azd monitor --logs
+```
+
+### کوئری‌های Log Analytics
+```bash
+# دسترسی به Log Analytics از طریق پورتال Azure
+azd monitor --logs
+
+# جستجوی لاگ‌ها با استفاده از Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ دستورات نگهداری
 
-### پاکسازی
+### پاک‌سازی
 ```bash
-# Remove all Azure resources
+# تمام منابع Azure را حذف کنید
 azd down
 
-# Force delete without confirmation
+# بدون تأیید، به‌صورت اجباری حذف کنید
 azd down --force
 
-# Purge soft-deleted resources
+# پاک‌سازی دائمی منابع حذف‌شده به‌صورت نرم
 azd down --purge
 
-# Complete cleanup
+# پاک‌سازی کامل
 azd down --force --purge
 ```
 
 ### به‌روزرسانی‌ها
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# بررسی به‌روزرسانی‌های azd
 azd version
 
-# Show system information
-azd info
+# دریافت نسخه فعلی
+azd version
+
+# مشاهده پیکربندی فعلی
+azd config list
 ```
 
 ## 🔧 دستورات پیشرفته
 
-### خط لوله و CI/CD
+### پایپلاین و CI/CD
 ```bash
-# Configure GitHub Actions
+# پیکربندی GitHub Actions
 azd pipeline config
 
-# Configure Azure DevOps
+# پیکربندی Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# نمایش پیکربندی خط لوله
 azd pipeline show
 ```
 
 ### مدیریت زیرساخت
 ```bash
-# Import existing resources
-azd infra import
+# تولید قالب‌های زیرساخت
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 پیش‌نمایش و برنامه‌ریزی زیرساخت
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# شبیه‌سازی تأمین زیرساخت بدون انجام استقرار
+# قالب‌های Bicep/Terraform را تحلیل کرده و نشان می‌دهد:
+# - منابعی که اضافه خواهند شد (سبز +)
+# - منابعی که تغییر خواهند کرد (زرد ~)
+# - منابعی که حذف خواهند شد (قرمز -)
+# اجرای ایمن - هیچ تغییر واقعی در محیط Azure اعمال نمی‌شود
+
+# تولید زیرساخت از فایل azure.yaml
+azd infra synth
 ```
 
-### مدیریت سرویس
+### اطلاعات پروژه
 ```bash
-# List all services
-azd service list
+# نمایش وضعیت پروژه و نقاط پایانی
+azd show
 
-# Show service details
-azd service show --service web
+# نمایش اطلاعات مفصل پروژه به‌صورت JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# دریافت نقاط پایانی سرویس
+azd show --output json | jq '.services'
 ```
 
-## 🎯 جریان‌های کاری سریع
+## 🎯 گردش‌های کاری سریع
 
-### جریان کاری توسعه
+### گردش کار توسعه
 ```bash
-# Start new project
+# شروع پروژه جدید
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# استقرار در محیط توسعه
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# تغییرات را اعمال کرده و مجدداً استقرار دهید
 azd deploy
 
-# View logs
-azd logs --follow
+# باز کردن داشبورد مانیتورینگ
+azd monitor --live
 ```
 
-### جریان کاری چند محیطی
+### گردش کار چندمحیطی
 ```bash
-# Set up environments
+# راه‌اندازی محیط‌ها
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# استقرار در محیط توسعه
 azd env select dev
 azd up
 
-# Test and promote to staging
+# تست و ارتقا به محیط پیش‌تولید
 azd env select staging
 azd up
 
-# Deploy to production
+# استقرار در محیط تولید
 azd env select production
 azd up
 ```
 
-### جریان کاری رفع اشکال
+### گردش کار عیب‌یابی
 ```bash
-# Enable debug mode
+# حالت اشکال‌زدایی را فعال کنید
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# وضعیت استقرار را بررسی کنید
+azd show
 
-# Validate configuration
-azd config validate
+# پیکربندی را اعتبارسنجی کنید
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# داشبورد مانیتورینگ را برای مشاهده لاگ‌ها باز کنید
+azd monitor --logs
 
-# Check resource status
+# وضعیت منابع را بررسی کنید
 azd show --output json
 ```
 
@@ -357,29 +361,29 @@ azd show --output json
 
 ### اطلاعات اشکال‌زدایی
 ```bash
-# Enable debug output
+# خروجی اشکال‌زدایی را فعال کنید
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# برای خروجی تمیزتر، تله‌متری را غیرفعال کنید
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# پیکربندی فعلی را بررسی کنید
+azd config list
 
-# Check authentication status
+# وضعیت احراز هویت را بررسی کنید
 az account show
 ```
 
 ### اشکال‌زدایی قالب
 ```bash
-# List available templates with details
+# فهرست قالب‌های موجود با جزئیات
 azd template list --output json
 
-# Show template information
+# نمایش اطلاعات قالب
 azd template show <template-name>
 
-# Validate template before init
+# اعتبارسنجی قالب قبل از مقداردهی اولیه
 azd template validate <template-name>
 ```
 
@@ -387,62 +391,64 @@ azd template validate <template-name>
 
 ### ساختار پروژه
 ```bash
-# Show current directory structure
-tree /f  # Windows
-find . -type f  # Linux/macOS
+# نمایش ساختار دایرکتوری جاری
+tree /f  # ویندوز
+find . -type f  # لینوکس/مک‌اواس
 
-# Navigate to azd project root
+# رفتن به ریشهٔ پروژهٔ azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# نمایش دایرکتوری پیکربندی azd
+echo $AZD_CONFIG_DIR  # معمولاً ~/.azd
 ```
 
 ## 🎨 قالب‌بندی خروجی
 
 ### خروجی JSON
 ```bash
-# Get JSON output for scripting
+# خروجی JSON برای اسکریپت‌نویسی
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# با jq تجزیه کنید
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### خروجی جدول
 ```bash
-# Format as table
+# قالب‌بندی به‌صورت جدول
 azd env list --output table
-azd service list --output table
+
+# مشاهده سرویس‌های مستقر شده
+azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 ترکیب‌های رایج دستورات
+## 🔧 ترکیب‌های متداول دستورات
 
 ### اسکریپت بررسی سلامت
 ```bash
 #!/bin/bash
-# Quick health check
+# بررسی سریع سلامت
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
 ### اعتبارسنجی استقرار
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# اعتبارسنجی قبل از استقرار
+azd show
+azd provision --preview  # پیش‌نمایش تغییرات قبل از استقرار
 az account show
 ```
 
-### مقایسه محیط
+### مقایسه محیط‌ها
 ```bash
 #!/bin/bash
-# Compare environments
+# مقایسهٔ محیط‌ها
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### اسکریپت پاکسازی منابع
+### اسکریپت پاک‌سازی منابع
 ```bash
 #!/bin/bash
-# Clean up old environments
+# پاک‌سازی محیط‌های قدیمی
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -461,21 +467,21 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 متغیرهای محیط
+## 📝 متغیرهای محیطی
 
-### متغیرهای محیط رایج
+### متغیرهای محیطی رایج
 ```bash
-# Azure configuration
+# پیکربندی آزور
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# پیکربندی AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# پیکربندی برنامه
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -484,57 +490,60 @@ export LOG_LEVEL="info"
 
 ### رفع سریع
 ```bash
-# Reset authentication
+# بازنشانی احراز هویت
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# اجبار به تازه‌سازی محیط
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# استقرار مجدد همه سرویس‌ها
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# بررسی وضعیت استقرار
+azd show --output json
 ```
 
 ### دستورات بازیابی
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# بازیابی از استقرار ناموفق - پاک‌سازی و استقرار مجدد
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# فقط فراهم‌سازی مجدد زیرساخت
+azd provision
+
+# فقط استقرار مجدد برنامه
+azd deploy
 ```
 
 ## 💡 نکات حرفه‌ای
 
-### نام مستعار برای جریان کاری سریع‌تر
+### نام‌های مستعار برای سرعت بخشیدن به جریان کاری
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# آن را به فایل .bashrc یا .zshrc خود اضافه کنید
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### میانبرهای عملکرد
+### میان‌برهای توابع
 ```bash
-# Quick environment switching
+# تغییر سریع بین محیط‌ها
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# استقرار سریع همراه با پایش
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# وضعیت محیط
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -544,40 +553,42 @@ azd-status() {
 
 ### دریافت کمک
 ```bash
-# General help
+# راهنمای عمومی
 azd --help
 azd help
 
-# Command-specific help
+# راهنمای مربوط به دستور
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# نمایش نسخه و اطلاعات ساخت
 azd version
 azd version --output json
 ```
 
-### لینک‌های مستندات
+### پیوندهای مستندات
 ```bash
-# Open documentation in browser
+# مستندات را در مرورگر باز کنید
 azd docs
 
-# Show template documentation
+# مستندات قالب را نمایش دهید
 azd template show <template-name> --docs
 ```
 
 ---
 
-**نکته**: این برگه تقلب را نشانه‌گذاری کنید و از `Ctrl+F` برای یافتن سریع دستورات مورد نیاز استفاده کنید!
+**نکته**: این برگه تقلب را نشانک‌گذاری کنید و از `Ctrl+F` برای پیدا کردن سریع دستورات مورد نیازتان استفاده کنید!
 
 ---
 
 **ناوبری**
-- **درس قبلی**: [بررسی‌های پیش از استقرار](../docs/pre-deployment/preflight-checks.md)
+- **درس قبلی**: [بررسی‌های پیش‌استقرار](../docs/pre-deployment/preflight-checks.md)
 - **درس بعدی**: [واژه‌نامه](glossary.md)
 
 ---
 
-**سلب مسئولیت**:  
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما تلاش می‌کنیم دقت را حفظ کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌ها باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما مسئولیتی در قبال سوء تفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+سلب مسئولیت:
+این سند با استفاده از سرویس ترجمهٔ مبتنی بر هوش مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. با اینکه ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مبدأ باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس یا حیاتی، استفاده از ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوء‌تفاهم یا برداشت نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

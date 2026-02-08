@@ -40,7 +40,7 @@ Ao longo deste workshop, você também será apresentado a ferramentas e fluxos 
 
 As lições do workshop estão em Markdown. Você pode navegá-las diretamente no GitHub - ou lançar uma pré-visualização no navegador, como mostrado na imagem abaixo.
 
-![Workshop](../../../translated_images/br/workshop.75906f133e6f8ba0.webp)
+![Workshop](../../../translated_images/pt-BR/workshop.75906f133e6f8ba0.webp)
 
 Para usar esta opção - faça um fork do repositório para o seu perfil e inicie o GitHub Codespaces. Assim que o terminal do VS Code estiver ativo, digite este comando:
 
