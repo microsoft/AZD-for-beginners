@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T11:02:08+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "de"
-}
--->
-# 4. Konfigurieren einer Vorlage
+# 4. Eine Vorlage konfigurieren
 
-!!! tip "AM ENDE DIESES MODULS WERDEN SIE IN DER LAGE SEIN"
+!!! tip "AM ENDE DIESES MODULS SIND SIE IN DER LAGE"
 
-    - [ ] Den Zweck von `azure.yaml` verstanden haben
-    - [ ] Die Struktur von `azure.yaml` verstanden haben
-    - [ ] Den Wert der azd-Lebenszyklus-`hooks` verstanden haben
-    - [ ] **Lab 3:** 
+    - [ ] Verstehen Sie den Zweck von `azure.yaml`
+    - [ ] Verstehen Sie die Struktur von `azure.yaml`
+    - [ ] Verstehen Sie den Wert der azd-Lebenszyklus-`hooks`
+    - [ ] **Lab 4:** Umgebungsvariablen erkunden und ändern
 
 ---
 
-!!! prompt "Was macht die Datei `azure.yaml`? Verwenden Sie einen Codeblock und erklären Sie sie Zeile für Zeile"
+!!! prompt "Was macht die `azure.yaml`-Datei? Verwenden Sie einen Codeblock und erklären Sie sie Zeile für Zeile"
 
-      Die Datei `azure.yaml` ist die **Konfigurationsdatei für Azure Developer CLI (azd)**. Sie definiert, wie Ihre Anwendung in Azure bereitgestellt werden soll, einschließlich Infrastruktur, Dienste, Bereitstellungshooks und Umgebungsvariablen.
+      Die `azure.yaml`-Datei ist die **Konfigurationsdatei für Azure Developer CLI (azd)**. Sie definiert, wie Ihre Anwendung in Azure bereitgestellt werden soll, einschließlich Infrastruktur, Dienste, Bereitstellungshooks und Umgebungsvariablen.
 
 ---
 
 ## 1. Zweck und Funktionalität
 
-Die Datei `azure.yaml` dient als **Bereitstellungsplan** für eine KI-Agenten-Anwendung, die:
+Diese `azure.yaml`-Datei dient als **Bereitstellungsplan** für eine KI-Agent-Anwendung, die:
 
-1. **Die Umgebung vor der Bereitstellung validiert**
-2. **Azure AI-Dienste bereitstellt** (AI Hub, AI Project, Search usw.)
-3. **Eine Python-Anwendung** in Azure Container Apps bereitstellt
-4. **KI-Modelle konfiguriert** für Chat- und Einbettungsfunktionen
-5. **Überwachung und Tracing** für die KI-Anwendung einrichtet
-6. **Sowohl neue als auch bestehende** Azure AI-Projekt-Szenarien unterstützt
+1. **Validiert die Umgebung** vor der Bereitstellung
+2. **Stellt Azure AI-Dienste bereit** (AI Hub, AI Project, Search, etc.)
+3. **Stellt eine Python-Anwendung bereit** in Azure Container Apps
+4. **Konfiguriert KI-Modelle** für Chat- und Embedding-Funktionalität
+5. **Richtet Überwachung und Tracing ein** für die KI-Anwendung
+6. **Unterstützt sowohl neue als auch bestehende** Azure AI-Projekt-Szenarien
 
-Die Datei ermöglicht eine **Bereitstellung mit einem einzigen Befehl** (`azd up`) einer vollständigen KI-Agenten-Lösung mit ordnungsgemäßer Validierung, Bereitstellung und Nachbereitstellungskonfiguration.
+Die Datei ermöglicht die **Bereitstellung mit einem einzigen Befehl** (`azd up`) einer vollständigen KI-Agent-Lösung mit entsprechender Validierung, Bereitstellung und Nachbereitungs-Konfiguration.
 
-??? info "Erweitern, um `azure.yaml` anzuzeigen"
+??? info "Zum Anzeigen erweitern: `azure.yaml`"
 
-      Die Datei `azure.yaml` definiert, wie Azure Developer CLI diese KI-Agenten-Anwendung in Azure bereitstellen und verwalten soll. Lassen Sie uns sie Zeile für Zeile durchgehen.
+      Die `azure.yaml`-Datei legt fest, wie die Azure Developer CLI diese KI-Agent-Anwendung in Azure bereitstellen und verwalten soll. Lassen Sie uns sie Zeile für Zeile aufschlüsseln.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: Brauchen wir Hooks? 
-      # TODO: Brauchen wir alle Variablen?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ Die Datei ermöglicht eine **Bereitstellung mit einem einzigen Befehl** (`azd up
 
 ---
 
-## 2. Datei analysieren
+## 2. Die Datei aufschlüsseln
 
-Lassen Sie uns die Datei Abschnitt für Abschnitt durchgehen, um zu verstehen, was sie tut - und warum.
+Gehen wir die Datei Abschnitt für Abschnitt durch, um zu verstehen, was sie tut und warum.
 
 ### 2.1 **Header und Schema (1-3)**
 
@@ -145,7 +136,7 @@ Lassen Sie uns die Datei Abschnitt für Abschnitt durchgehen, um zu verstehen, w
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Zeile 1**: Bietet Schema-Validierung für YAML-Sprachserver für IDE-Unterstützung und IntelliSense
+- **Zeile 1**: Bietet Schemavalidierung für den YAML Language Server zur IDE-Unterstützung und IntelliSense
 
 ### 2.2 Projekt-Metadaten (5-10)
 
@@ -157,7 +148,7 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Zeile 5**: Definiert den Projektnamen, der von Azure Developer CLI verwendet wird
+- **Zeile 5**: Definiert den Projektnamen, der von der Azure Developer CLI verwendet wird
 - **Zeilen 6-7**: Gibt an, dass dies auf einer Vorlage Version 1.0.2 basiert
 - **Zeilen 8-9**: Erfordert Azure Developer CLI Version 1.14.0 oder höher
 
@@ -178,10 +169,10 @@ hooks:
       continueOnError: false      
 ```
 
-- **Zeilen 11-20**: **Pre-Bereitstellungshook** - wird vor `azd up` ausgeführt
+- **Zeilen 11-20**: **Pre-Deployment-Hook** - wird vor `azd up` ausgeführt
 
-      - Auf Unix/Linux: Macht das Validierungsskript ausführbar und führt es aus
-      - Auf Windows: Führt das PowerShell-Validierungsskript aus
+      - Unter Unix/Linux: Macht das Validierungsskript ausführbar und führt es aus
+      - Unter Windows: Führt das PowerShell-Validierungsskript aus
       - Beide sind interaktiv und stoppen die Bereitstellung, wenn sie fehlschlagen
 
 ```yaml  title="" linenums="0"
@@ -197,7 +188,7 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Zeilen 21-30**: **Post-Provision-Hook** - wird nach der Erstellung von Azure-Ressourcen ausgeführt
+- **Zeilen 21-30**: **Post-Provision-Hook** - wird ausgeführt, nachdem Azure-Ressourcen erstellt wurden
 
   - Führt Skripte zum Schreiben von Umgebungsvariablen aus
   - Setzt die Bereitstellung fort, auch wenn diese Skripte fehlschlagen (`continueOnError: true`)
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Zeilen 31-40**: **Post-Bereitstellungshook** - wird nach der Bereitstellung der Anwendung ausgeführt
+- **Zeilen 31-40**: **Post-Deploy-Hook** - wird nach der Bereitstellung der Anwendung ausgeführt
 
-  - Führt abschließende Setup-Skripte aus
-  - Setzt die Bereitstellung fort, auch wenn Skripte fehlschlagen
+  - Führt abschließende Einrichtungs-Skripte aus
+  - Setzt fort, auch wenn Skripte fehlschlagen
 
 ### 2.4 Service-Konfiguration (41-48)
 
-Konfiguriert den Anwendungsdienst, den Sie bereitstellen.
+Dies konfiguriert den Anwendungsdienst, den Sie bereitstellen.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Zeile 42**: Definiert einen Dienst namens "api_and_frontend"
+- **Zeile 42**: Definiert einen Dienst mit dem Namen "api_and_frontend"
 - **Zeile 43**: Verweist auf das Verzeichnis `./src` für den Quellcode
 - **Zeile 44**: Gibt Python als Programmiersprache an
 - **Zeile 45**: Verwendet Azure Container Apps als Hosting-Plattform
 - **Zeilen 46-48**: Docker-Konfiguration
 
-      - Verwendet "api_and_frontend" als Bildnamen
-      - Erstellt das Docker-Bild remote in Azure (nicht lokal)
+      - Verwendet "api_and_frontend" als Image-Namen
+      - Baut das Docker-Image remote in Azure (nicht lokal)
 
 ### 2.5 Pipeline-Variablen (49-76)
 
-Dies sind Variablen, die Ihnen helfen, `azd` in CI/CD-Pipelines für die Automatisierung auszuführen.
+Dies sind Variablen, die Ihnen helfen, `azd` in CI/CD-Pipelines zur Automatisierung auszuführen
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,87 +278,87 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Dieser Abschnitt definiert Umgebungsvariablen, die **während der Bereitstellung** verwendet werden, organisiert nach Kategorien:
+Dieser Abschnitt definiert Umgebungsvariablen, die **während der Bereitstellung** verwendet werden, und ist nach Kategorien gegliedert:
 
 - **Azure-Ressourcennamen (Zeilen 51-60)**:
-      - Namen der Kern-Azure-Dienste, z. B. Resource Group, AI Hub, AI Project usw.- 
+      - Zentrale Azure-Dienstressourcennamen, z. B. Ressourcengruppe, AI Hub, AI Project usw.
 - **Feature-Flags (Zeilen 61-63)**:
       - Boolesche Variablen zum Aktivieren/Deaktivieren bestimmter Azure-Dienste
-- **KI-Agenten-Konfiguration (Zeilen 64-71)**:
-      - Konfiguration für den Haupt-KI-Agenten einschließlich Name, ID, Bereitstellungseinstellungen, Modelldetails- 
-- **Einbettungs-Konfiguration (Zeilen 72-79)**:
-      - Konfiguration für das Einbettungsmodell, das für die Vektorsuche verwendet wird
+- **KI-Agent-Konfiguration (Zeilen 64-71)**:
+      - Konfiguration für den Haupt-KI-Agenten, einschließlich Name, ID, Bereitstellungseinstellungen, Modelldetails
+- **KI-Embedding-Konfiguration (Zeilen 72-79)**:
+      - Konfiguration für das Embedding-Modell, das für die Vektorsuche verwendet wird
 - **Suche und Überwachung (Zeilen 80-84)**:
-      - Suchindexname, bestehende Ressourcen-IDs und Überwachungs-/Tracing-Einstellungen
+      - Name des Suchindex, vorhandene Ressourcen-IDs sowie Überwachungs-/Tracing-Einstellungen
 
 ---
 
 ## 3. Umgebungsvariablen kennen
-Die folgenden Umgebungsvariablen steuern die Konfiguration und das Verhalten Ihrer Bereitstellung, organisiert nach ihrem Hauptzweck. Die meisten Variablen haben sinnvolle Standardwerte, aber Sie können sie an Ihre spezifischen Anforderungen oder vorhandenen Azure-Ressourcen anpassen.
+Die folgenden Umgebungsvariablen steuern die Konfiguration und das Verhalten Ihrer Bereitstellung und sind nach ihrem Hauptzweck geordnet. Die meisten Variablen haben sinnvolle Standardwerte, Sie können sie jedoch an Ihre spezifischen Anforderungen oder vorhandene Azure-Ressourcen anpassen.
 
 ### 3.1 Erforderliche Variablen 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Kernkonfiguration für Azure
+AZURE_ENV_NAME                    # Umgebungsname (wird bei der Ressourcenbenennung verwendet)
+AZURE_LOCATION                    # Bereitstellungsregion
+AZURE_SUBSCRIPTION_ID             # Zielabonnement
+AZURE_RESOURCE_GROUP              # Name der Ressourcengruppe
+AZURE_PRINCIPAL_ID                # Benutzerprinzipal für RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Ressourcennamen (falls nicht angegeben automatisch generiert)
+AZURE_AIHUB_NAME                  # Name des Microsoft Foundry-Hubs
+AZURE_AIPROJECT_NAME              # Name des KI-Projekts
+AZURE_AISERVICES_NAME             # Name des Kontos für KI-Dienste
+AZURE_STORAGE_ACCOUNT_NAME        # Name des Speicherkontos
+AZURE_CONTAINER_REGISTRY_NAME     # Name der Container-Registry
+AZURE_KEYVAULT_NAME               # Name des Key Vaults (falls verwendet)
 ```
 
 ### 3.2 Modellkonfiguration 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Konfiguration des Chat-Modells
+AZURE_AI_AGENT_MODEL_NAME         # Standard: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Standard: OpenAI (oder Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Standard: neueste verfügbare
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Bereitstellungsname für das Chat-Modell
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Standard: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standard: 80 (Tausende TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Konfiguration des Embedding-Modells
+AZURE_AI_EMBED_MODEL_NAME         # Standard: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Standard: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Standard: neueste verfügbare
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Bereitstellungsname für Embeddings
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Standard: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Standard: 50 (Tausende TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Agentenkonfiguration
+AZURE_AI_AGENT_NAME               # Anzeigename des Agenten
+AZURE_EXISTING_AGENT_ID           # Vorhandenen Agenten verwenden (optional)
 ```
 
 ### 3.3 Feature-Toggle
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Optionale Dienste
+USE_APPLICATION_INSIGHTS         # Standard: true
+USE_AZURE_AI_SEARCH_SERVICE      # Standard: false
+USE_CONTAINER_REGISTRY           # Standard: true
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Überwachung und Tracing
+ENABLE_AZURE_MONITOR_TRACING     # Standard: false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standard: false
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Suchkonfiguration
+AZURE_AI_SEARCH_INDEX_NAME       # Name des Suchindex
+AZURE_SEARCH_SERVICE_NAME        # Name des Suchdienstes
 ```
 
-### 3.4 KI-Projekt-Konfiguration 
+### 3.4 KI-Projektkonfiguration 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Vorhandene Ressourcen verwenden
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Vollständige Ressourcen-ID des bestehenden KI-Projekts
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpunkt-URL des bestehenden Projekts
 ```
 
 ### 3.5 Überprüfen Sie Ihre Variablen
@@ -375,18 +366,22 @@ AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
 Verwenden Sie die Azure Developer CLI, um Ihre Umgebungsvariablen anzuzeigen und zu verwalten:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Alle Umgebungsvariablen der aktuellen Umgebung anzeigen
 azd env get-values
 
-# Get a specific environment variable
+# Eine bestimmte Umgebungsvariable abrufen
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Eine Umgebungsvariable festlegen
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Mehrere Variablen aus einer .env-Datei setzen
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Haftungsausschluss:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Originalsprache gilt als maßgebliche Quelle. Bei kritischen Informationen empfehlen wir eine professionelle menschliche Übersetzung. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
