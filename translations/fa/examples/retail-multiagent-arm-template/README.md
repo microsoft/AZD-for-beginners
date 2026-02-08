@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-19T23:30:33+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "fa"
-}
--->
 # راه‌حل چندعاملی خرده‌فروشی - قالب زیرساخت
 
 **فصل ۵: بسته استقرار تولید**
