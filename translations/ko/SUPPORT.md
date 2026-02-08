@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-09T16:31:06+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "ko"
-}
--->
 # TODO: 이 저장소의 관리자가 아직 이 파일을 편집하지 않았습니다
 
 **저장소 소유자**: 이 제품/프로젝트에 대해 고객 서비스 및 지원(CSS)을 원하시나요?

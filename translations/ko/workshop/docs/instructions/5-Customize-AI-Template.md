@@ -1,39 +1,30 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T09:58:23+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "ko"
-}
--->
-# 5. 템플릿 맞춤화하기
+# 5. 템플릿 사용자 지정
 
-!!! tip "이 모듈을 완료하면 다음을 할 수 있습니다"
+!!! tip "이 모듈이 끝날 때까지 할 수 있게 됩니다"
 
     - [ ] 기본 AI 에이전트 기능 탐색
-    - [ ] 자체 인덱스를 사용하여 AI 검색 추가
+    - [ ] 자신의 인덱스로 AI 검색 추가
     - [ ] 추적 메트릭 활성화 및 분석
     - [ ] 평가 실행 수행
     - [ ] 레드팀 스캔 실행
-    - [ ] **실습 5: 맞춤화 계획 수립**
+    - [ ] **랩 5: 사용자 지정 계획 수립**
 
 ---
 
 ## 5.1 AI 에이전트 기능
 
-!!! success "이 작업은 실습 01에서 완료했습니다"
+!!! success "랩 01에서 완료했습니다"
 
-- **파일 검색**: OpenAI의 내장 파일 검색을 통한 지식 검색
-- **출처 표시**: 응답에서 자동으로 출처를 명시
-- **맞춤형 지침**: 에이전트의 행동과 성격 수정 가능
-- **도구 통합**: 맞춤형 기능을 위한 확장 가능한 도구 시스템
+- **파일 검색**: 지식 검색을 위한 OpenAI 내장 파일 검색
+- **출처 인용**: 응답에 자동 출처 표시
+- **사용자 지정 가능한 지침**: 에이전트 동작 및 개성 수정
+- **도구 통합**: 맞춤 기능을 위한 확장 가능한 도구 시스템
 
 ---
 
 ## 5.2 지식 검색 옵션
 
-!!! task "이 작업을 완료하려면 변경 후 재배포가 필요합니다"    
+!!! task "완료하려면 변경하고 다시 배포해야 합니다"    
     
     ```bash title=""
     # 환경 변수 설정
@@ -44,28 +35,29 @@ CO_OP_TRANSLATOR_METADATA:
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
     # 데이터 업로드 및 인덱스 생성
+
     ```
 
 ---
 
 **OpenAI 파일 검색 (기본값):**
 
-- Azure AI 에이전트 서비스에 내장
+- Foundry 에이전트에 내장됨
 - 자동 문서 처리 및 인덱싱
-- 추가 설정 필요 없음
+- 추가 구성 불필요
 
 **Azure AI 검색 (선택 사항):**
 
-- 하이브리드 의미 및 벡터 검색
-- 맞춤형 인덱스 관리
+- 하이브리드 의미론 및 벡터 검색
+- 맞춤 인덱스 관리
 - 고급 검색 기능
-- `USE_AZURE_AI_SEARCH_SERVICE=true` 설정 필요
+- `USE_AZURE_AI_SEARCH_SERVICE=true` 필요
 
 ---
 
 ## 5.3 [추적 및 모니터링](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "이 작업을 완료하려면 변경 후 재배포가 필요합니다"    
+!!! task "완료하려면 변경하고 다시 배포해야 합니다"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -77,13 +69,13 @@ CO_OP_TRANSLATOR_METADATA:
 - OpenTelemetry 통합
 - 요청/응답 추적
 - 성능 메트릭
-- AI Foundry 포털에서 사용 가능
+- Microsoft Foundry 포털에서 사용 가능
 
-**로그:**
+**로깅:**
 
-- Container Apps에서 애플리케이션 로그 제공
-- 상관 ID를 포함한 구조화된 로그
-- 실시간 및 과거 로그 보기 가능
+- 컨테이너 앱의 애플리케이션 로그
+- 상관 ID가 포함된 구조화된 로깅
+- 실시간 및 과거 로그 보기
 
 ---
 
@@ -92,14 +84,14 @@ CO_OP_TRANSLATOR_METADATA:
 **로컬 평가:**
 
 - 품질 평가를 위한 내장 평가 도구
-- 맞춤형 평가 스크립트
+- 맞춤 평가 스크립트
 - 성능 벤치마킹
 
 **지속적 모니터링:**
 
-- 실시간 상호작용 자동 평가
+- 라이브 상호작용 자동 평가
 - 품질 메트릭 추적
-- 성능 회귀 감지
+- 성능 회귀 탐지
 
 **CI/CD 통합:**
 
@@ -114,28 +106,28 @@ CO_OP_TRANSLATOR_METADATA:
 **AI 레드팀:**
 
 - 자동화된 보안 스캔
-- AI 시스템에 대한 위험 평가
-- 여러 카테고리에서 안전성 평가
+- AI 시스템 위험 평가
+- 다중 카테고리 안전성 평가
 
 **인증:**
 
 - Azure 서비스용 관리 ID
 - 선택적 Azure App Service 인증
-- 개발용 기본 인증 대체 옵션
+- 개발용 기본 인증 대체
 
-!!! quote "이 실습을 완료하면 다음을 할 수 있습니다"
+!!! quote "이 랩이 끝날 때까지 갖추게 될 사항"
     - [ ] 시나리오 요구사항 정의
-    - [ ] 환경 변수 맞춤화 (설정)
-    - [ ] 에이전트 지침 맞춤화 (작업)
-    - [ ] 맞춤화된 템플릿 배포 (앱)
-    - [ ] 배포 후 작업 완료 (수동)
+    - [ ] 환경 변수(구성) 맞춤화
+    - [ ] 에이전트 지침(작업) 맞춤화
+    - [ ] 맞춤 템플릿 배포(앱)
+    - [ ] 배포 후 작업 완료(수동)
     - [ ] 테스트 평가 실행
 
-이 예시는 두 개의 전문화된 에이전트와 여러 모델 배포를 포함한 엔터프라이즈 소매 사례를 위한 템플릿 맞춤화를 보여줍니다.
+이 예제는 두 개의 전문화된 에이전트와 여러 모델 배포를 통해 엔터프라이즈 소매 사용 사례에 맞게 템플릿을 사용자 지정하는 방법을 보여줍니다.
 
 ---
 
-## 5.6 나만의 맞춤화하기!
+## 5.6 나만의 맞춤 설정!
 
 ### 5.6.1. 시나리오 요구사항
 
@@ -146,15 +138,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 #### **모델 배포:**
 
-   - `gpt-4.1`: 주요 채팅 모델
-   - `o3`: 복잡한 쿼리를 위한 추론 모델
+   - `gpt-4.1`: 기본 채팅 모델
+   - `o3`: 복잡한 질의를 위한 추론 모델
    - `gpt-4.1-nano`: 간단한 상호작용을 위한 경량 모델
-   - `text-embedding-3-large`: 검색을 위한 고품질 임베딩
+   - `text-embedding-3-large`: 검색용 고품질 임베딩
 
 #### **기능:**
 
    - 추적 및 모니터링 활성화
-   - 제품 카탈로그를 위한 AI 검색
+   - 제품 카탈로그용 AI 검색
    - 품질 보증을 위한 평가 프레임워크
    - 보안 검증을 위한 레드팀
 
@@ -162,39 +154,40 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 5.6.2 시나리오 구현
 
-#### 5.6.2.1. 배포 전 설정
 
-`setup-retail.sh` 설정 스크립트 생성
+#### 5.6.2.1. 사전 배포 구성
+
+설정 스크립트(`setup-retail.sh`) 생성
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# 환경 이름 설정
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# 지역 구성 (모델 가용성에 따라 선택)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# 모든 선택적 서비스 활성화
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# 기본 챗 모델 구성 (gpt-4.1에 가장 가까운 gpt-4o)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# 향상된 검색을 위한 임베딩 모델 구성
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# 에이전트 이름 설정 (첫 번째 에이전트 생성)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# 검색 인덱스 구성
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -263,7 +256,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# 사전 요구 사항 확인
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -275,12 +268,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# 환경 설정
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# 선택한 지역의 할당량 확인
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -296,29 +289,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# 인프라 및 애플리케이션 배포
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# 배포 결과 캡처
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# 웹 앱 URL 가져오기
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -326,7 +319,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: 배포 후 설정
+#### 5.6.2.4: 배포 후 구성
 
 `configure-retail-agents.sh` 생성:
 
@@ -335,19 +328,19 @@ echo "4. Test both agents with sample queries"
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# 배포 정보 가져오기
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# 수동 구성 지침
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -372,7 +365,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -392,11 +385,11 @@ echo "
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# 환경 변수들이 설정되어 있는지 확인
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# 웹 애플리케이션 가용성 테스트
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -410,7 +403,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# 구성된 경우 평가 실행
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -425,7 +418,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -434,38 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 기대 결과
+### 5.6.4 예상 결과
 
-이 구현 가이드를 따르면 다음을 얻을 수 있습니다:
+이 구현 가이드를 따르면 다음을 갖추게 됩니다:
 
 1. **배포된 인프라:**
 
-      - 모델 배포가 포함된 AI Foundry 프로젝트
-      - 웹 애플리케이션을 호스팅하는 Container Apps
-      - 제품 카탈로그를 위한 AI 검색 서비스
+      - 모델 배포가 포함된 Microsoft Foundry 프로젝트
+      - 웹 애플리케이션을 호스팅하는 컨테이너 앱
+      - 제품 카탈로그용 AI 검색 서비스
       - 모니터링을 위한 Application Insights
 
 2. **초기 에이전트:**
 
       - 기본 지침으로 구성된 쇼퍼 에이전트
       - 파일 검색 기능 활성화
-      - 추적 및 모니터링 설정 완료
+      - 추적 및 모니터링 구성
 
-3. **맞춤화 준비 완료:**
+3. **사용자 지정 준비 완료:**
 
       - 로열티 에이전트 추가를 위한 프레임워크
-      - 맞춤형 지침 템플릿
+      - 맞춤 지침 템플릿
       - 테스트 및 검증 스크립트
       - 모니터링 및 평가 설정
 
-4. **운영 준비 상태:**
+4. **운영 준비 완료:**
 
       - 레드팀을 통한 보안 스캔
       - 성능 모니터링
       - 품질 평가 프레임워크
       - 확장 가능한 아키텍처
 
-이 예시는 AZD 템플릿이 특정 엔터프라이즈 시나리오에 맞게 확장 및 맞춤화될 수 있는 방법을 보여주며, 보안, 모니터링 및 확장성을 위한 모범 사례를 유지합니다.
+이 예제는 AZD 템플릿이 보안, 모니터링 및 확장성의 모범 사례를 유지하면서 특정 엔터프라이즈 시나리오에 맞게 어떻게 확장 및 사용자 지정될 수 있는지 보여줍니다.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**면책 조항**:  
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나 자동 번역에는 오류나 부정확성이 포함될 수 있음을 양지해 주시기 바랍니다. 원문 문서가 권위 있는 출처로 간주되어야 합니다. 중요한 정보에 대해서는 전문 인력의 번역을 권장합니다. 본 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대하여 당사는 책임을 지지 않습니다.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
