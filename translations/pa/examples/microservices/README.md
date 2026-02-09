@@ -1,93 +1,84 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-20T23:42:38+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "pa"
-}
--->
-# ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ - ਕੰਟੇਨਰ ਐਪ ਉਦਾਹਰਨ
+# Microservices Architecture - Container App Example
 
-⏱️ **ਅਨੁਮਾਨਿਤ ਸਮਾਂ**: 25-35 ਮਿੰਟ | 💰 **ਅਨੁਮਾਨਿਤ ਖਰਚ**: ~$50-100/ਮਹੀਨਾ | ⭐ **ਜਟਿਲਤਾ**: ਉੱਚ ਪੱਧਰ
+⏱️ **ਅੰਦਾਜ਼ੀ ਸਮਾਂ**: 25-35 minutes | 💰 **ਅੰਦਾਜ਼ੀ ਲਾਗਤ**: ~$50-100/month | ⭐ **ਜਟਿਲਤਾ**: ਉੱਨਤ
 
-**📚 ਸਿੱਖਣ ਦਾ ਰਾਹ**:
-- ← ਪਿਛਲਾ: [ਸਧਾਰਨ Flask API](../../../../examples/container-app/simple-flask-api) - ਸਿੰਗਲ ਕੰਟੇਨਰ ਬੁਨਿਆਦ
-- 🎯 **ਤੁਸੀਂ ਇੱਥੇ ਹੋ**: ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ (2-ਸਰਵਿਸ ਬੁਨਿਆਦ)
-- → ਅਗਲਾ: [AI ਇੰਟੀਗ੍ਰੇਸ਼ਨ](../../../../docs/ai-foundry) - ਆਪਣੀਆਂ ਸਰਵਿਸਾਂ ਵਿੱਚ ਸਮਰੱਥਾ ਸ਼ਾਮਲ ਕਰੋ
-- 🏠 [ਕੋਰਸ ਹੋਮ](../../README.md)
+**📚 ਲਰਨਿੰਗ ਪਾਥ:**
+- ← ਪਿਛਲਾ: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - ਸਿੰਗਲ ਕਨਟੇਨਰ ਬੁਨਿਆਦੀ ਗੱਲਾਂ
+- 🎯 **ਤੁਸੀਂ ਇੱਥੇ ਹੋ**: ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ (2-ਸੇਵਾ ਬੇਸ)
+- → ਅਗਲਾ: [AI Integration](../../../../docs/ai-foundry) - ਆਪਣੀਆਂ ਸੇਵਾਵਾਂ ਵਿੱਚ ਬੁੱਧੀਮੱਤਾ ਸ਼ਾਮਲ ਕਰੋ
+- 🏠 [Course Home](../../README.md)
 
 ---
 
-ਇੱਕ **ਸਰਲ ਪਰ ਕਾਰਗਰ** ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਜੋ AZD CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ Azure Container Apps ਵਿੱਚ ਡਿਪਲੌਇ ਕੀਤੀ ਗਈ ਹੈ। ਇਹ ਉਦਾਹਰਨ ਸਰਵਿਸ-ਤੋਂ-ਸਰਵਿਸ ਸੰਚਾਰ, ਕੰਟੇਨਰ ਆਰਕੇਸਟ੍ਰੇਸ਼ਨ, ਅਤੇ ਮਾਨੀਟਰਿੰਗ ਨੂੰ ਇੱਕ ਪ੍ਰਯੋਗਤਮ 2-ਸਰਵਿਸ ਸੈਟਅਪ ਨਾਲ ਦਰਸਾਉਂਦੀ ਹੈ।
+A **ਸਰਲ ਪਰ ਕਾਰਗਰ** ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਜੋ AZD CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ Azure Container Apps 'ਤੇ ਡਿਪਲੋਏ ਕੀਤਾ ਗਿਆ ਹੈ। ਇਹ ਉਦਾਹਰਣ ਸੇਵਾ-ਤੋਂ-ਸੇਵਾ ਸੰਚਾਰ, ਕਨਟੇਨਰ ਓਰਕੇਸਟ੍ਰੇਸ਼ਨ, ਅਤੇ ਨਿਰੀਖਣ ਨੂੰ ਇੱਕ ਪ੍ਰਯੋਗਕ 2-ਸੇਵਾ ਸੈਟਅਪ ਨਾਲ ਦਰਸਾਉਂਦੀ ਹੈ।
 
-> **📚 ਸਿੱਖਣ ਦਾ ਢੰਗ**: ਇਹ ਉਦਾਹਰਨ ਇੱਕ ਘੱਟੋ-ਘੱਟ 2-ਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ (API Gateway + Backend Service) ਨਾਲ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ ਜਿਸਨੂੰ ਤੁਸੀਂ ਅਸਲ ਵਿੱਚ ਡਿਪਲੌਇ ਕਰ ਸਕਦੇ ਹੋ ਅਤੇ ਸਿੱਖ ਸਕਦੇ ਹੋ। ਇਸ ਬੁਨਿਆਦ ਨੂੰ ਮਾਸਟਰ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਅਸੀਂ ਪੂਰੇ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਸਿਸਟਮ ਵਿੱਚ ਵਧਾਉਣ ਲਈ ਮਾਰਗਦਰਸ਼ਨ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਾਂ।
+> **📚 ਲਰਨਿੰਗ ਅੰਦਾਜ਼ਾ**: ਇਹ ਉਦਾਹਰਣ ਇੱਕ ਘੱਟੋ ਘੱਟ 2-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰ (API Gateway + Backend Service) ਨਾਲ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ ਜਿਸਨੂੰ ਤੁਸੀਂ ਆਸਲ ਵਿੱਚ ਡਿਪਲੋਏ ਕਰ ਸਕਦੇ ਹੋ ਅਤੇ ਇਸ ਤੋਂ ਸਿੱਖ ਸਕਦੇ ਹੋ। ਇਸ ਬੁਨਿਆਦ ਨੂੰ ਮਾਹਿਰ ਬਣਾਉਣ ਤੋਂ ਬਾਅਦ, ਅਸੀਂ ਪੂਰੇ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਇਕੋਸਿਸਟਮ ਵੱਲ ਵਿਕਾਸ ਲਈ ਮਾਰਗਦਰਸ਼ਨ ਦਿੰਦੇ ਹਾਂ।
 
 ## ਤੁਸੀਂ ਕੀ ਸਿੱਖੋਗੇ
 
-ਇਸ ਉਦਾਹਰਨ ਨੂੰ ਪੂਰਾ ਕਰਕੇ, ਤੁਸੀਂ:
-- Azure Container Apps ਵਿੱਚ ਕਈ ਕੰਟੇਨਰ ਡਿਪਲੌਇ ਕਰਨਾ
-- ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ ਨਾਲ ਸਰਵਿਸ-ਤੋਂ-ਸਰਵਿਸ ਸੰਚਾਰ ਲਾਗੂ ਕਰਨਾ
-- ਵਾਤਾਵਰਣ-ਅਧਾਰਿਤ ਸਕੇਲਿੰਗ ਅਤੇ ਸਿਹਤ ਜਾਂਚਾਂ ਕਨਫਿਗਰ ਕਰਨਾ
-- Application Insights ਨਾਲ ਵੰਡੇ ਐਪਲੀਕੇਸ਼ਨ ਮਾਨੀਟਰ ਕਰਨਾ
-- ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਡਿਪਲੌਇਮੈਂਟ ਪੈਟਰਨ ਅਤੇ ਵਧੀਆ ਅਭਿਆਸ ਸਮਝਣਾ
-- ਸਧਾਰਨ ਤੋਂ ਜਟਿਲ ਆਰਕੀਟੈਕਚਰ ਵਿੱਚ ਤਰੱਕੀ ਕਰਨ ਦੀ ਸਿੱਖਣਾ
+ਇਸ ਉਦਾਹਰਣ ਨੂੰ ਪੂਰਾ ਕਰਕੇ, ਤੁਸੀਂ:
+- ਅਨੇਕ ਕਨਟੇਨਰ Azure Container Apps 'ਤੇ ਡਿਪਲੋਏ ਕਰਨਾ ਸਿੱਖੋਗੇ
+- ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ ਨਾਲ ਸੇਵਾ-ਤੋਂ-ਸੇਵਾ ਸੰਚਾਰ ਲਾਗੂ ਕਰਨਾ
+- ਵਾਤਾਵਰਣ ਆਧਾਰਤ ਸਕੇਲਿੰਗ ਅਤੇ ਹੈਲਥ ਚੈੱਕ ਕੰਫਿਗਰ ਕਰਨਾ
+- Application Insights ਨਾਲ ਵਿਤਰਿਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ ਨਿਗਰਾਨੀ ਕਰਨਾ
+- ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਡਿਪਲੋਏਮੈਂਟ ਪੈਟਰਨਾਂ ਅਤੇ بہترین ਅਭਿਆਸਾਂ ਨੂੰ ਸਮਝਣਾ
+- ਸਧਾਰਨ ਤੋਂ ਜਟਿਲ ਆਰਕੀਟੈਕਚਰ ਵੱਲ ਪ੍ਰਗਟ ਤੌਰ 'ਤੇ ਵਿਸ਼ਤਾਰ ਕਰਨਾ ਸਿੱਖਣਾ
 
 ## ਆਰਕੀਟੈਕਚਰ
 
-### ਫੇਜ਼ 1: ਜੋ ਅਸੀਂ ਬਣਾਉਣ ਜਾ ਰਹੇ ਹਾਂ (ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ ਸ਼ਾਮਲ)
+### ਦੌਰ 1: ਅਸੀਂ ਕੀ ਬਣਾ ਰਹੇ ਹਾਂ (ਇਸ ਉਦਾਹਰਣ ਵਿੱਚ ਸ਼ਾਮਲ)
 
 ```mermaid
 graph TB
-    Internet[ਇੰਟਰਨੈਟ/ਉਪਭੋਗਤਾ]
+    Internet[ਇੰਟਰਨੈੱਟ/ਉਪਭੋਗਤਾ]
     Gateway[API ਗੇਟਵੇ<br/>Node.js ਕੰਟੇਨਰ<br/>ਪੋਰਟ 8080]
     Product[ਪ੍ਰੋਡਕਟ ਸੇਵਾ<br/>Python ਕੰਟੇਨਰ<br/>ਪੋਰਟ 8000]
-    AppInsights[ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ<br/>ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਲੌਗ]
-
+    AppInsights[ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ<br/>ਨਿਗਰਾਨੀ ਅਤੇ ਲੌਗ]
+    
     Internet -->|HTTPS| Gateway
-    Gateway -->|HTTP ਅੰਦਰੂਨੀ| Product
-    Gateway -.->|ਟੈਲੀਮੇਟਰੀ| AppInsights
-    Product -.->|ਟੈਲੀਮੇਟਰੀ| AppInsights
+    Gateway -->|ਅੰਦਰੂਨੀ HTTP| Product
+    Gateway -.->|ਟੈਲੀਮੀਟਰੀ| AppInsights
+    Product -.->|ਟੈਲੀਮੀਟਰੀ| AppInsights
     
     style Gateway fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Product fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
     style Internet fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#fff
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:#fff
 ```
-**ਕੰਪੋਨੈਂਟ ਵੇਰਵਾ:**
+**Component Details:**
 
-| ਕੰਪੋਨੈਂਟ | ਉਦੇਸ਼ | ਪਹੁੰਚ | ਸਰੋਤ |
+| Component | Purpose | Access | Resources |
 |-----------|---------|--------|-----------|
-| **API Gateway** | ਬੈਕਐਂਡ ਸਰਵਿਸਾਂ ਨੂੰ ਬਾਹਰੀ ਬੇਨਤੀਆਂ ਰੂਟ ਕਰਦਾ ਹੈ | ਪਬਲਿਕ (HTTPS) | 1 vCPU, 2GB RAM, 2-20 ਰਿਪਲਿਕਾ |
-| **Product Service** | ਇਨ-ਮੇਮੋਰੀ ਡਾਟਾ ਨਾਲ ਪ੍ਰੋਡਕਟ ਕੈਟਾਲੌਗ ਦਾ ਪ੍ਰਬੰਧ ਕਰਦਾ ਹੈ | ਸਿਰਫ ਅੰਦਰੂਨੀ | 0.5 vCPU, 1GB RAM, 1-10 ਰਿਪਲਿਕਾ |
-| **Application Insights** | ਕੇਂਦਰੀ ਲਾਗਿੰਗ ਅਤੇ ਵੰਡੇ ਟ੍ਰੇਸਿੰਗ | Azure ਪੋਰਟਲ | 1-2 GB/ਮਹੀਨਾ ਡਾਟਾ ਇੰਜੈਕਸ਼ਨ |
+| **API Gateway** | ਬੈਕਐਂਡ ਸੇਵਾਵਾਂ ਵੱਲ ਬਾਹਰੀ ਬੇਨਤੀਆਂ ਰੂਟ ਕਰਦਾ ਹੈ | Public (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replicas |
+| **Product Service** | ਇਨ-ਮੇਮੋਰੀ ਡੇਟਾ ਨਾਲ ਉਤਪਾਦ ਕੈਟਾਲੌਗ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਦਾ ਹੈ | Internal only | 0.5 vCPU, 1GB RAM, 1-10 replicas |
+| **Application Insights** | ਕੇਂਦਰੀਕ੍ਰਿਤ ਲੌਗਿੰਗ ਅਤੇ ਵਿਤਰਿਤ ਟ੍ਰੇਸਿੰਗ | Azure Portal | 1-2 GB/month data ingestion |
 
-**ਸਧਾਰਨ ਤੋਂ ਸ਼ੁਰੂ ਕਿਉਂ?**
-- ✅ ਤੇਜ਼ੀ ਨਾਲ ਡਿਪਲੌਇ ਅਤੇ ਸਮਝੋ (25-35 ਮਿੰਟ)
-- ✅ ਜਟਿਲਤਾ ਤੋਂ ਬਿਨਾਂ ਮੁੱਖ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਪੈਟਰਨ ਸਿੱਖੋ
-- ✅ ਕੰਮ ਕਰਨ ਵਾਲਾ ਕੋਡ ਜਿਸਨੂੰ ਤੁਸੀਂ ਸੋਧ ਅਤੇ ਪ੍ਰਯੋਗ ਕਰ ਸਕਦੇ ਹੋ
-- ✅ ਸਿੱਖਣ ਲਈ ਘੱਟ ਖਰਚ (~$50-100/ਮਹੀਨਾ ਬਨਾਮ $300-1400/ਮਹੀਨਾ)
-- ✅ ਡਾਟਾਬੇਸ ਅਤੇ ਮੈਸੇਜ ਕਿਊਜ਼ ਸ਼ਾਮਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਭਰੋਸਾ ਬਣਾਓ
+**ਕਿਉਂ ਸਧਾਰਨ ਤੋਂ ਸ਼ੁਰੂ ਕਰੀਏ?**
+- ✅ ਤੇਜ਼ੀ ਨਾਲ ਡਿਪਲੋਏ ਅਤੇ ਸਮਝੋ (25-35 ਮਿੰਟ)
+- ✅ ਮੁੱਖ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਪੈਟਰਨ ਬਿਨਾਂ ਜਟਿਲਤਾ ਦੇ ਸਿੱਖੋ
+- ✅ ਕੰਮ ਕਰਨ ਵਾਲਾ ਕੋਡ ਜਿਸਨੂੰ ਤੁਸੀਂ ਸੋਧ ਸਕਦੇ ਹੋ ਅਤੇ ਪ੍ਰਯੋਗ ਕਰ ਸਕਦੇ ਹੋ
+- ✅ ਸਿੱਖਣ ਲਈ ਘੱਟ ਲਾਗਤ (~$50-100/month ਬਨਾਮ $300-1400/month)
+- ✅ ਡੇਟਾਬੇਸ ਅਤੇ ਮੈਸੇਜ ਕਿਊਜ਼ ਸ਼ਾਮਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਵਿਸ਼ਵਾਸ ਬਣਾਓ
 
-**ਉਦਾਹਰਣ**: ਇਸਨੂੰ ਡਰਾਈਵ ਕਰਨਾ ਸਿੱਖਣ ਵਾਂਗ ਸੋਚੋ। ਤੁਸੀਂ ਇੱਕ ਖਾਲੀ ਪਾਰਕਿੰਗ ਲਾਟ (2 ਸਰਵਿਸਾਂ) ਨਾਲ ਸ਼ੁਰੂ ਕਰਦੇ ਹੋ, ਮੁੱਢਲੇ ਸਿੱਧਾਂਤਾਂ ਨੂੰ ਮਾਸਟਰ ਕਰਦੇ ਹੋ, ਫਿਰ ਸ਼ਹਿਰੀ ਟ੍ਰੈਫਿਕ (5+ ਸਰਵਿਸਾਂ ਡਾਟਾਬੇਸਾਂ ਨਾਲ) ਵਿੱਚ ਤਰੱਕੀ ਕਰਦੇ ਹੋ।
+**ਉਪਮੈਾ**: ਇਸਨੂੰ ਗੱਡੀ ਚਲਾਉਣਾ ਸਿੱਖਣ ਵਰਗੋ ਸੋਚੋ। ਤੁਸੀਂ ਖਾਲੀ ਪਾਰਕਿੰਗ ਲੌਟ (2 ਸੇਵਾਵਾਂ) ਨਾਲ ਸ਼ੁਰੂ ਕਰਦੇ ਹੋ, ਬੁਨਿਆਦੀ ਗੱਲਾਂ ਮਾਸਟਰ ਕਰਦੇ ਹੋ, ਫਿਰ ਸ਼ਹਿਰੀ ਟ੍ਰੈਫਿਕ (5+ ਸੇਵਾਵਾਂ ਡੇਟਾਬੇਸਾਂ ਦੇ ਨਾਲ) ਵੱਲ ਵਧਦੇ ਹੋ।
 
-### ਫੇਜ਼ 2: ਭਵਿੱਖ ਵਿੱਚ ਵਧਾਉਣਾ (ਰੈਫਰੈਂਸ ਆਰਕੀਟੈਕਚਰ)
+### ਦੌਰ 2: ਭਵਿੱਖੀ ਵਿਸਥਾਰ (ਸੰਦਰਭ ਆਰਕੀਟੈਕਚਰ)
 
-ਜਦੋਂ ਤੁਸੀਂ 2-ਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਨੂੰ ਮਾਸਟਰ ਕਰ ਲੈਂਦੇ ਹੋ, ਤੁਸੀਂ ਇਸਨੂੰ ਵਧਾ ਸਕਦੇ ਹੋ:
+ਜਦੋਂ ਤੁਸੀਂ 2-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰ 'ਤੇ ਮਾਹਿਰ ਹੋ ਜਾਵੋਗੇ, ਤਾਂ ਤੁਸੀਂ ਇਹ ਵਿਸਥਾਰ ਕਰ ਸਕਦੇ ਹੋ:
 
 ```mermaid
 graph TB
     User[ਯੂਜ਼ਰ]
-    Gateway[API ਗੇਟਵੇ<br/>✅ ਸ਼ਾਮਲ ਹੈ]
-    Product[ਉਤਪਾਦ ਸੇਵਾ<br/>✅ ਸ਼ਾਮਲ ਹੈ]
-    Order[ਆਰਡਰ ਸੇਵਾ<br/>🔜 ਅਗਲੇ ਜੋੜੋ]
-    UserSvc[ਯੂਜ਼ਰ ਸੇਵਾ<br/>🔜 ਅਗਲੇ ਜੋੜੋ]
-    Notify[ਸੂਚਨਾ ਸੇਵਾ<br/>🔜 ਆਖਰੀ ਜੋੜੋ]
+    Gateway[API ਗੇਟਵੇ<br/>✅ ਸ਼ਾਮِل]
+    Product[ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ<br/>✅ ਸ਼ਾਮِل]
+    Order[ਆਰਡਰ ਸਰਵਿਸ<br/>🔜 ਅਗਲੇ ਵਿੱਚ ਸ਼ਾਮِل ਕਰੋ]
+    UserSvc[ਯੂਜ਼ਰ ਸਰਵਿਸ<br/>🔜 ਅਗਲੇ ਵਿੱਚ ਸ਼ਾਮِل ਕਰੋ]
+    Notify[ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਰਵਿਸ<br/>🔜 ਆਖ਼ਰੀ ਵਿੱਚ ਸ਼ਾਮِل ਕਰੋ]
     
-    CosmosDB[(ਕੋਸਮੋਸ ਡੀਬੀ<br/>🔜 ਉਤਪਾਦ ਡਾਟਾ)]
-    AzureSQL[(ਐਜ਼ਰ ਐਸਕਿਊਐਲ<br/>🔜 ਆਰਡਰ ਡਾਟਾ)]
-    ServiceBus[ਐਜ਼ਰ ਸੇਵਾ ਬੱਸ<br/>🔜 ਐਸਿੰਕ ਇਵੈਂਟਸ]
-    AppInsights[ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ<br/>✅ ਸ਼ਾਮਲ ਹੈ]
+    CosmosDB[(Cosmos DB<br/>🔜 ਉਤਪਾਦ ਡੇਟਾ)]
+    AzureSQL[(Azure SQL<br/>🔜 ਆਰਡਰ ਡੇਟਾ)]
+    ServiceBus[Azure Service Bus<br/>🔜 ਅਸਿੰਕ ਘਟਨਾਵਾਂ]
+    AppInsights[Application Insights<br/>✅ ਸ਼ਾਮِل]
     
     User --> Gateway
     Gateway --> Product
@@ -98,9 +89,9 @@ graph TB
     Order --> AzureSQL
     UserSvc --> AzureSQL
     
-    Product -.->|ਉਤਪਾਦ ਬਣਾਇਆ ਗਿਆ ਇਵੈਂਟ| ServiceBus
-    ServiceBus -.->|ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ| Notify
-    ServiceBus -.->|ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ| Order
+    Product -.->|ProductCreated ਘਟਨਾ| ServiceBus
+    ServiceBus -.->|ਸਬਸਕ੍ਰਾਈਬ| Notify
+    ServiceBus -.->|ਸਬਸਕ੍ਰਾਈਬ| Order
     
     Gateway -.-> AppInsights
     Product -.-> AppInsights
@@ -114,92 +105,92 @@ graph TB
     style UserSvc fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
     style Notify fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
 ```
-"ਵਧਾਉਣ ਦੀ ਗਾਈਡ" ਸੈਕਸ਼ਨ ਦੇ ਅੰਤ ਵਿੱਚ ਕਦਮ-ਦਰ-ਕਦਮ ਹਦਾਇਤਾਂ ਦੇਖੋ।
+ਐਖ਼ੀ ਕਦਮ-ਦਰ-ਕਦਮ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ਾਂ ਲਈ ਅਖੀਰ ਵਿੱਚ "Expansion Guide" ਸੈਕਸ਼ਨ ਵੇਖੋ।
 
 ## ਸ਼ਾਮਲ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ
 
-✅ **ਸਰਵਿਸ ਡਿਸਕਵਰੀ**: ਕੰਟੇਨਰਾਂ ਦੇ ਵਿਚਕਾਰ DNS-ਅਧਾਰਿਤ ਆਟੋਮੈਟਿਕ ਡਿਸਕਵਰੀ  
-✅ **ਲੋਡ ਬੈਲੈਂਸਿੰਗ**: ਰਿਪਲਿਕਾ ਵਿੱਚ ਬਣਾਇਆ ਗਿਆ ਲੋਡ ਬੈਲੈਂਸਿੰਗ  
-✅ **ਆਟੋ-ਸਕੇਲਿੰਗ**: HTTP ਬੇਨਤੀਆਂ ਦੇ ਅਧਾਰ 'ਤੇ ਹਰ ਸਰਵਿਸ ਲਈ ਸੁਤੰਤਰ ਸਕੇਲਿੰਗ  
-✅ **ਸਿਹਤ ਮਾਨੀਟਰਿੰਗ**: ਦੋਵਾਂ ਸਰਵਿਸਾਂ ਲਈ ਲਾਈਵਨੈਸ ਅਤੇ ਰੀਡੀਨੈਸ ਪ੍ਰੋਬ  
-✅ **ਵੰਡੇ ਲਾਗਿੰਗ**: Application Insights ਨਾਲ ਕੇਂਦਰੀ ਲਾਗਿੰਗ  
-✅ **ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ**: ਸੁਰੱਖਿਅਤ ਸਰਵਿਸ-ਤੋਂ-ਸਰਵਿਸ ਸੰਚਾਰ  
-✅ **ਕੰਟੇਨਰ ਆਰਕੇਸਟ੍ਰੇਸ਼ਨ**: ਆਟੋਮੈਟਿਕ ਡਿਪਲੌਇਮੈਂਟ ਅਤੇ ਸਕੇਲਿੰਗ  
-✅ **ਜ਼ੀਰੋ-ਡਾਊਨਟਾਈਮ ਅਪਡੇਟਸ**: ਰੋਲਿੰਗ ਅਪਡੇਟਸ ਰਿਵੀਜ਼ਨ ਪ੍ਰਬੰਧਨ ਨਾਲ  
+✅ **ਸੇਵਾ ਖੋਜ**: ਕੰਟੇਨਰਾਂ ਦਰਮਿਆਨ ਆਟੋਮੈਟਿਕ DNS-ਆਧਾਰਤ ਖੋਜ  
+✅ **ਲੋਡ ਬੈਲੈਂਸਿੰਗ**: ਰੀਪਲਿਕਾਸ ਦੇ ਆਰੰਭ ਵਿੱਚ ਨਿਰਮਿਤ ਲੋਡ ਬੈਲੈਂਸਿੰਗ  
+✅ **ਆਟੋ-ਸਕੇਲਿੰਗ**: HTTP ਬੇਨਤੀਆਂ ਅਧਾਰਤ ਪ੍ਰਤੀ ਸੇਵਾ ਸੁਤੰਤਰ ਸਕੇਲਿੰਗ  
+✅ **ਹੈਲਥ ਮਾਨੀਟਰਿੰਗ**: ਦੋਹਾਂ ਸੇਵਾਵਾਂ ਲਈ ਲਾਇਵੇਨੈੱਸ ਅਤੇ ਰੀਡਿਨੈੱਸ ਪ੍ਰੋਬਸ  
+✅ **ਵਿਤਰਿਤ ਲੌਗਿੰਗ**: Application Insights ਨਾਲ ਕੇਂਦਰੀ ਲੌਗਿੰਗ  
+✅ **ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ**: ਸੁਰੱਖਿਅਤ ਸੇਵਾ-ਤੋਂ-ਸੇਵਾ ਸੰਚਾਰ  
+✅ **ਕਨਟੇਨਰ ਓਰਕੇਸਟ੍ਰੇਸ਼ਨ**: ਆਟੋਮੈਟਿਕ ਡਿਪਲੋਇਮੈਂਟ ਅਤੇ ਸਕੇਲਿੰਗ  
+✅ **ਜ਼ੀਰੋ-ਡਾਊਨਟਾਈਮ ਅਪਡੇਟਸ**: ਰਿਵਿਜ਼ਨ ਪ੍ਰਬੰਧਨ ਨਾਲ ਰੋਲਿੰਗ ਅਪਡੇਟਸ  
 
-## ਪੂਰਵ ਸ਼ਰਤਾਂ
+## ਲੋੜੀਂਦੀਆਂ ਜ਼ਰੂਰਤਾਂ
 
 ### ਲੋੜੀਂਦੇ ਟੂਲ
 
-ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਇਹ ਟੂਲ ਇੰਸਟਾਲ ਹਨ:
+ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਇਹ ਟੂਲ ਇੰਸਟਾਲ ਹਨ:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (ਵਰਜਨ 1.0.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```bash
    azd version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azd ਵਰਜਨ 1.0.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
+   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁਟ: azd ਸੰਸਕਰਣ 1.0.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਤੇ
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (ਵਰਜਨ 2.50.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```bash
    az --version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azure-cli 2.50.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
+   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azure-cli 2.50.0 ਜਾਂ ਉੱਪਰ
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (ਸਥਾਨਕ ਵਿਕਾਸ/ਟੈਸਟਿੰਗ ਲਈ - ਵਿਕਲਪਿਕ)
+3. **[Docker](https://www.docker.com/get-started)** (ਲੋਕਲ ਡਿਵੈਲਪਮੈਂਟ/ਟੈਸਟਿੰਗ ਲਈ - ਵਿਕਲਪੀ)
    ```bash
    docker --version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: ਡਾਕਰ ਵਰਜਨ 20.10 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
+   # ਉਮੀਦ ਕੀਤਾ ਨਤੀਜਾ: Docker ਵਰਜ਼ਨ 20.10 ਜਾਂ ਵੱਧ
    ```
 
 ### ਆਪਣੀ ਸੈਟਅਪ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
 
-ਇਹ ਕਮਾਂਡ ਚਲਾਓ ਤਾਂ ਜੋ ਇਹ ਯਕੀਨੀ ਬਣੇ ਕਿ ਤੁਸੀਂ ਤਿਆਰ ਹੋ:
+ਇਨ੍ਹਾਂ ਕਮਾਂਡਾਂ ਨੂੰ ਚਲਾਕੇ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਸੀਂ ਤਿਆਰ ਹੋ:
 
 ```bash
-# ਐਜ਼ਰ ਡਿਵੈਲਪਰ CLI ਚੈੱਕ ਕਰੋ
+# Azure Developer CLI ਦੀ ਜਾਂਚ ਕਰੋ
 azd version
-# ✅ ਉਮੀਦ: azd ਵਰਜਨ 1.0.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
+# ✅ ਉਮੀਦ: azd ਵਰਜਨ 1.0.0 ਜਾਂ ਉਸ ਤੋਂ ਉੱਪਰ
 
-# ਐਜ਼ਰ CLI ਚੈੱਕ ਕਰੋ
+# Azure CLI ਦੀ ਜਾਂਚ ਕਰੋ
 az --version
-# ✅ ਉਮੀਦ: azure-cli 2.50.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
+# ✅ ਉਮੀਦ: azure-cli 2.50.0 ਜਾਂ ਉਸ ਤੋਂ ਉੱਪਰ
 
-# ਡਾਕਰ ਚੈੱਕ ਕਰੋ (ਵਿਕਲਪਿਕ)
+# Docker (ਵਿਕਲਪਿਕ) ਦੀ ਜਾਂਚ ਕਰੋ
 docker --version
-# ✅ ਉਮੀਦ: ਡਾਕਰ ਵਰਜਨ 20.10 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
+# ✅ ਉਮੀਦ: Docker ਵਰਜਨ 20.10 ਜਾਂ ਉਸ ਤੋਂ ਉੱਪਰ
 ```
 
-**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਸਾਰੀਆਂ ਕਮਾਂਡਾਂ ਵਰਜਨ ਨੰਬਰ ਵਾਪਸ ਕਰਦੀਆਂ ਹਨ ਜੋ ਘੱਟੋ-ਘੱਟ ਮਾਪਦੰਡਾਂ ਨਾਲ ਮੇਲ ਖਾਂਦੀਆਂ ਹਨ।
+**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਸਾਰੀਆਂ ਕਮਾਂਡਾਂ ਉਹਨਾਂ ਸੰਸਕਰਣ ਨੰਬਰਾਂ ਨੂੰ ਵਾਪਸ ਕਰਦੀਆਂ ਹੋਣ ਜੋ ਘੱਟੋ-ਘੱਟਆਂ ਨਾਲ ਮਿਲਦੀਆਂ ਜਾਂ ਵੱਧ ਹੁੰਦੀਆਂ ਹਨ।
 
 ### Azure ਦੀਆਂ ਲੋੜਾਂ
 
-- ਇੱਕ ਸਰਗਰਮ **Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ** ([ਮੁਫ਼ਤ ਖਾਤਾ ਬਣਾਓ](https://azure.microsoft.com/free/))
-- ਤੁਹਾਡੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਵਿੱਚ ਸਰੋਤ ਬਣਾਉਣ ਦੀਆਂ ਅਨੁਮਤੀਆਂ
-- ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਜਾਂ ਰਿਸੋਰਸ ਗਰੁੱਪ 'ਤੇ **Contributor** ਭੂਮਿਕਾ
+- ਇੱਕ ਸਰਗਰਮ **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- ਆਪਣੀ subscription ਵਿੱਚ ਸਰੋਤ ਬਣਾਉਣ ਦੀਆਂ ਅਨੁਮਤੀਆਂ
+- subscription ਜਾਂ resource group 'ਤੇ **Contributor** ਭੂਮਿਕਾ
 
-### ਗਿਆਨ ਪੂਰਵ ਸ਼ਰਤਾਂ
+### ਜਾਣਕਾਰੀਕ ਲੋੜੀਂਦੀਆਂ
 
-ਇਹ ਇੱਕ **ਉੱਚ ਪੱਧਰ** ਦੀ ਉਦਾਹਰਨ ਹੈ। ਤੁਹਾਨੂੰ:
-- [ਸਧਾਰਨ Flask API ਉਦਾਹਰਨ](../../../../examples/container-app/simple-flask-api) ਪੂਰਾ ਕੀਤਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ
-- ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਦੀ ਬੁਨਿਆਦ ਸਮਝ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ
-- REST APIs ਅਤੇ HTTP ਨਾਲ ਜਾਣੂ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ
-- ਕੰਟੇਨਰ ਸੰਕਲਪਾਂ ਦੀ ਸਮਝ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ
+ਇਹ ਇੱਕ **ਉੱਚ ਪੱਧਰੀ** ਉਦਾਹਰਣ ਹੈ। ਤੁਹਾਨੂੰ ਇਹ ਜਾਣਕਾਰੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ:
+- [Simple Flask API example](../../../../examples/container-app/simple-flask-api) ਮੁਕੰਮਲ ਕੀਤਾ ਹੋਇਆ ਹੋਏ
+- ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਦੀ ਬੁਨਿਆਦੀ ਸਮਝ
+- REST APIs ਅਤੇ HTTP ਨਾਲ ਜਾਣੂ
+- ਕਨਟੇਨਰ ਸੰਕਲਪਾਂ ਦੀ ਸਮਝ
 
-**ਕੰਟੇਨਰ ਐਪਸ ਵਿੱਚ ਨਵੇਂ ਹੋ?** ਪਹਿਲਾਂ [ਸਧਾਰਨ Flask API ਉਦਾਹਰਨ](../../../../examples/container-app/simple-flask-api) ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ ਤਾਂ ਜੋ ਬੁਨਿਆਦ ਸਿੱਖ ਸਕੋ।
+**Container Apps ਲਈ ਨਵੇਂ ਹੋ?** ਪਹਿਲਾਂ ਮੂਲ ਸਿੱਖਣ ਲਈ [Simple Flask API example](../../../../examples/container-app/simple-flask-api) ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ।
 
-## ਤੇਜ਼ ਸ਼ੁਰੂਆਤ (ਕਦਮ-ਦਰ-ਕਦਮ)
+## ਤੁਰੰਤ ਸ਼ੁਰੂਆਤ (ਕਦਮ-ਦਰ-ਕਦਮ)
 
-### ਕਦਮ 1: ਕਲੋਨ ਅਤੇ ਨੈਵੀਗੇਟ ਕਰੋ
+### ਕਦਮ 1: ਕਲੋਨ ਅਤੇ नौੈਵੀਗੇਟ
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/microservices
 ```
 
-**✓ ਸਫਲਤਾ ਦੀ ਜਾਂਚ**: ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਸੀਂ `azure.yaml` ਵੇਖਦੇ ਹੋ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਜਾਂਚੋ ਕਿ ਤੁਸੀਂ `azure.yaml` ਵੇਖ ਰਹੇ ਹੋ:
 ```bash
 ls
-# ਉਮੀਦ ਹੈ: README.md, azure.yaml, infra/, src/
+# ਉਮੀਦ: README.md, azure.yaml, infra/, src/
 ```
 
 ### ਕਦਮ 2: Azure ਨਾਲ ਪ੍ਰਮਾਣਿਕਤਾ
@@ -208,58 +199,58 @@ ls
 azd auth login
 ```
 
-ਇਹ ਤੁਹਾਡੇ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ Azure ਪ੍ਰਮਾਣਿਕਤਾ ਲਈ ਖੋਲ੍ਹਦਾ ਹੈ। ਆਪਣੇ Azure ਪ੍ਰਮਾਣਿਕਤਾ ਪੱਤਰਾਂ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ।
+ਇਹ ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ Azure ਪ੍ਰਮਾਣਿਕਤਾ ਲਈ ਖੋਲ੍ਹੇਗਾ। ਆਪਣੇ Azure ਪ੍ਰਮਾਣ ਪੱਤਰਾਂ ਨਾਲ ਸਾਈਨ-ਇਨ ਕਰੋ।
 
-**✓ ਸਫਲਤਾ ਦੀ ਜਾਂਚ**: ਤੁਹਾਨੂੰ ਇਹ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਸਮਝ ਆਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 Logged in to Azure.
 ```
 
-### ਕਦਮ 3: ਵਾਤਾਵਰਣ ਸ਼ੁਰੂ ਕਰੋ
+### ਕਦਮ 3: ਵਾਤਾਵਰਣ ਐਨੀਸ਼ੀਅਲਾਈਜ਼ ਕਰੋ
 
 ```bash
 azd init
 ```
 
-**ਤੁਹਾਨੂੰ ਜੋ ਪ੍ਰਸ਼ਨ ਦਿੱਤੇ ਜਾਣਗੇ**:
-- **ਵਾਤਾਵਰਣ ਦਾ ਨਾਮ**: ਇੱਕ ਛੋਟਾ ਨਾਮ ਦਾਖਲ ਕਰੋ (ਜਿਵੇਂ, `microservices-dev`)
-- **Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ**: ਆਪਣੀ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਚੁਣੋ
-- **Azure ਸਥਾਨ**: ਇੱਕ ਖੇਤਰ ਚੁਣੋ (ਜਿਵੇਂ, `eastus`, `westeurope`)
+**ਪ੍ਰਾਂਪਟਸ ਜੋ ਤੁਹਾਨੂੰ ਦਿਖਾਈ ਦੇਣਗੇ**:
+- **Environment name**: ਇੱਕ ਛੋਟਾ ਨਾਮ ਦਿਓ (ਉਦਾਹਰਣ ਲਈ, `microservices-dev`)
+- **Azure subscription**: ਆਪਣੀ subscription ਚੁਣੋ
+- **Azure location**: ਇੱਕ ਖੇਤਰ ਚੁਣੋ (ਉਦਾਹਰਣ ਲਈ, `eastus`, `westeurope`)
 
-**✓ ਸਫਲਤਾ ਦੀ ਜਾਂਚ**: ਤੁਹਾਨੂੰ ਇਹ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦਿਖਾਈ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 SUCCESS: New project initialized!
 ```
 
-### ਕਦਮ 4: ਢਾਂਚਾ ਅਤੇ ਸਰਵਿਸਾਂ ਡਿਪਲੌਇ ਕਰੋ
+### ਕਦਮ 4: ਇੰਫ਼ਾਸਟਰਕਚਰ ਅਤੇ ਸੇਵਾਵਾਂ ਡਿਪਲੋਏ ਕਰੋ
 
 ```bash
 azd up
 ```
 
-**ਕੀ ਹੁੰਦਾ ਹੈ** (8-12 ਮਿੰਟ ਲੱਗਦੇ ਹਨ):
+**ਕੀ ਹੁੰਦਾ ਹੈ** (ਲਗਭਗ 8-12 ਮਿੰਟ ਲੱਗਦੇ ਹਨ):
 
 ```mermaid
 graph LR
     A[azd ਅੱਪ] --> B[ਰਿਸੋਰਸ ਗਰੁੱਪ ਬਣਾਓ]
-    B --> C[ਕੰਟੇਨਰ ਰਜਿਸਟਰੀ ਡਿਪਲੌਇ ਕਰੋ]
-    C --> D[ਲੌਗ ਐਨਾਲਿਟਿਕਸ ਡਿਪਲੌਇ ਕਰੋ]
-    D --> E[ਐਪ ਇਨਸਾਈਟਸ ਡਿਪਲੌਇ ਕਰੋ]
+    B --> C[ਕੰਟੇਨਰ ਰਜਿਸਟਰੀ ਤੈਨਾਤ ਕਰੋ]
+    C --> D[ਲੌਗ ਐਨਾਲਿਟਿਕਸ ਤੈਨਾਤ ਕਰੋ]
+    D --> E[ਐਪ ਇਨਸਾਈਟਸ тੈਨਾਤ ਕਰੋ]
     E --> F[ਕੰਟੇਨਰ ਵਾਤਾਵਰਣ ਬਣਾਓ]
     F --> G[API ਗੇਟਵੇ ਇਮੇਜ ਬਣਾਓ]
-    F --> H[ਪ੍ਰੋਡਕਟ ਸੇਵਾ ਇਮੇਜ ਬਣਾਓ]
+    F --> H[ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਇਮੇਜ ਬਣਾਓ]
     G --> I[ਰਜਿਸਟਰੀ ਵਿੱਚ ਪੁਸ਼ ਕਰੋ]
     H --> I
-    I --> J[API ਗੇਟਵੇ ਡਿਪਲੌਇ ਕਰੋ]
-    I --> K[ਪ੍ਰੋਡਕਟ ਸੇਵਾ ਡਿਪਲੌਇ ਕਰੋ]
-    J --> L[ਇਨਗ੍ਰੈਸ ਅਤੇ ਹੈਲਥ ਚੈਕਸ ਸੰਰਚਨਾ ਕਰੋ]
+    I --> J[API ਗੇਟਵੇ ਤੈਨਾਤ ਕਰੋ]
+    I --> K[ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਤੈਨਾਤ ਕਰੋ]
+    J --> L[Ingress ਅਤੇ Health Checks ਕਨਫਿਗਰ ਕਰੋ]
     K --> L
-    L --> M[ਡਿਪਲੌਇਮੈਂਟ ਪੂਰਾ ✓]
+    L --> M[ਡਿਪਲੋਇਮੈਂਟ ਮੁਕੰਮਲ ✓]
     
     style A fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style M fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**✓ ਸਫਲਤਾ ਦੀ ਜਾਂਚ**: ਤੁਹਾਨੂੰ ਇਹ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦਿਖਾਈ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -267,17 +258,17 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ ਸਮਾਂ**: 8-12 ਮਿੰਟ
 
-### ਕਦਮ 5: ਡਿਪਲੌਇਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ
+### ਕਦਮ 5: ਡਿਪਲੋਇਮੈਂਟ ਦੀ ਜਾਂਚ
 
 ```bash
 # ਗੇਟਵੇ ਐਂਡਪੌਇੰਟ ਪ੍ਰਾਪਤ ਕਰੋ
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# API ਗੇਟਵੇ ਦੀ ਸਿਹਤ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਏਪੀਆਈ ਗੇਟਵੇ ਦੀ ਸਿਹਤ ਦੀ ਜਾਂਚ ਕਰੋ
 curl $GATEWAY_URL/health
 ```
 
-**✅ ਉਮੀਦਵਾਰ ਨਤੀਜਾ**:
+**✅ ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ:**
 ```json
 {
   "status": "healthy",
@@ -286,13 +277,13 @@ curl $GATEWAY_URL/health
 }
 ```
 
-**ਗੇਟਵੇ ਰਾਹੀਂ ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਦੀ ਜਾਂਚ ਕਰੋ**:
+**ਗੇਟਵੇ ਰਾਹੀਂ ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਦੀ ਜਾਂਚ**:
 ```bash
 # ਉਤਪਾਦਾਂ ਦੀ ਸੂਚੀ
 curl $GATEWAY_URL/api/products
 ```
 
-**✅ ਉਮੀਦਵਾਰ ਨਤੀਜਾ**:
+**✅ ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ:**
 ```json
 [
   {"id":1,"name":"Laptop","price":999.99,"stock":50},
@@ -301,15 +292,15 @@ curl $GATEWAY_URL/api/products
 ]
 ```
 
-**✓ ਸਫਲਤਾ ਦੀ ਜਾਂਚ**: ਦੋਵੇਂ ਐਂਡਪੌਇੰਟ JSON ਡਾਟਾ ਬਿਨਾਂ ਗਲਤੀਆਂ ਦੇ ਵਾਪਸ ਕਰਦੇ ਹਨ।
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਦੋਹਾਂ ਐਂਡਪੋਇੰਟ JSON ਡਾਟਾ ਬਿਨਾਂ ਤਰੁਟੀਆਂ ਦੇ ਵਾਪਸ ਕਰਨ।
 
 ---
 
-**🎉 ਵਧਾਈ ਹੋਵੇ!** ਤੁਸੀਂ Azure ਵਿੱਚ ਇੱਕ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਡਿਪਲੌਇ ਕਰ ਦਿੱਤਾ ਹੈ!
+**🎉 ਵਧਾਈਆਂ!** ਤੁਸੀਂ Azure 'ਤੇ ਇੱਕ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਡਿਪਲੋਏ ਕੀਤਾ ਹੈ!
 
-## ਪ੍ਰੋਜੈਕਟ ਸਟ੍ਰਕਚਰ
+## ਪ੍ਰੋਜੈਕਟ ਦਾ ਢਾਂਚਾ
 
-ਸਾਰੇ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਫਾਈਲਾਂ ਸ਼ਾਮਲ ਹਨ—ਇਹ ਇੱਕ ਪੂਰੀ, ਕੰਮ ਕਰਨ ਵਾਲੀ ਉਦਾਹਰਨ ਹੈ:
+ਸਾਰੀਆਂ ਕਰਮਾਂਕਾਰੀ ਫਾਈਲਾਂ ਸ਼ਾਮਲ ਹਨ—ਇਹ ਇਕ ਪੂਰਾ, ਕਾਰਜਕ ਅਦਾਹਰਣ ਹੈ:
 
 ```
 microservices/
@@ -339,43 +330,43 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**ਹਰ ਕੰਪੋਨੈਂਟ ਕੀ ਕਰਦਾ ਹੈ:**
+**ਹਰ ਘਟਕਾ ਕੀ ਕਰਦਾ ਹੈ:**
 
 **Infrastructure (infra/)**:
-- `main.bicep`: ਸਾਰੇ Azure ਸਰੋਤਾਂ ਅਤੇ ਉਨ੍ਹਾਂ ਦੀਆਂ ਲੋੜਾਂ ਨੂੰ ਆਰਕੇਸਟ੍ਰੇਟ ਕਰਦਾ ਹੈ
-- `core/container-apps-environment.bicep`: ਕੰਟੇਨਰ ਐਪਸ ਵਾਤਾਵਰਣ ਅਤੇ Azure Container Registry ਬਣਾਉਂਦਾ ਹੈ
-- `core/monitor.bicep`: ਵੰਡੇ ਲਾਗਿੰਗ ਲਈ Application Insights ਸੈਟਅਪ ਕਰਦਾ ਹੈ
-- `app/*.bicep`: ਸਕੇਲਿੰਗ ਅਤੇ ਸਿਹਤ ਜਾਂਚਾਂ ਨਾਲ ਵਿਅਕਤੀਗਤ ਕੰਟੇਨਰ ਐਪ ਪਰਿਭਾਸ਼ਾਵਾਂ
+- `main.bicep`: ਸਾਰੇ Azure ਸਰੋਤ ਅਤੇ ਉਨ੍ਹਾਂ ਦੀਆਂ ਨਿਰਭਰਤਾਵਾਂ ਦਾ ਓਰਕੇਸਟ੍ਰੇਸ਼ਨ
+- `core/container-apps-environment.bicep`: Container Apps ਵਾਤਾਵਰਣ ਅਤੇ Azure Container Registry ਬਣਾਉਂਦਾ ਹੈ
+- `core/monitor.bicep`: ਵਿਤਰਿਤ ਲੌਗਿੰਗ ਲਈ Application Insights ਸੈਟਅਪ ਕਰਦਾ ਹੈ
+- `app/*.bicep`: ਵਿਅਕਤੀਗਤ ਕੰਟੇਨਰ ਐਪ ਪਰਿਭਾਸ਼ਾਵਾਂ ਸਕੇਲਿੰਗ ਅਤੇ ਹੈਲਥ ਚੈੱਕਸ ਦੇ ਨਾਲ
 
 **API Gateway (src/api-gateway/)**:
-- ਬਾਹਰੀ ਬੇਨਤੀਆਂ ਨੂੰ ਬੈਕਐਂਡ ਸਰਵਿਸਾਂ ਵੱਲ ਰੂਟ ਕਰਨ ਵਾਲੀ ਸਰਵਿਸ
-- ਲਾਗਿੰਗ, ਗਲਤੀ ਸੰਭਾਲਣ, ਅਤੇ ਬੇਨਤੀ ਅੱਗੇ ਭੇਜਣ ਨੂੰ ਲਾਗੂ ਕਰਦਾ ਹੈ
-- ਸਰਵਿਸ-ਤੋਂ-ਸਰਵਿਸ HTTP ਸੰਚਾਰ ਦਾ ਪ੍ਰਦਰਸ਼ਨ ਕਰਦਾ ਹੈ
+- ਬਾਹਰੀ-ਮੁਖੀ ਸੇਵਾ ਜੋ ਬੈਕਐਂਡ ਸੇਵਾਵਾਂ ਵੱਲ ਰਿਕਵੈਸਟ ਰੂਟ ਕਰਦੀ ਹੈ
+- ਲੌਗਿੰਗ, ਐਰਰ ਹੈਂਡਲਿੰਗ, ਅਤੇ ਬੇਨਤੀ ਅੱਗੇ ਭੇਜਣ ਲਾਗੂ ਕਰਦੀ ਹੈ
+- ਸੇਵਾ-ਤੋਂ-ਸੇਵਾ HTTP ਸੰਚਾਰ ਨੂੰ ਦਰਸਾਉਂਦੀ ਹੈ
 
 **Product Service (src/product-service/)**:
-- ਪ੍ਰੋਡਕਟ ਕੈਟਾਲੌਗ ਨਾਲ ਅੰਦਰੂਨੀ ਸਰਵਿਸ (ਸਰਲਤਾ ਲਈ ਇਨ-ਮੇਮੋਰੀ)
-- REST API ਸਿਹਤ ਜਾਂਚਾਂ ਨਾਲ
-- ਬੈਕਐਂਡ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਪੈਟਰਨ ਦਾ ਉਦਾਹਰਨ
+- ਇਨ-ਮੇਮੋਰੀ ਲਈ ਉਤਪਾਦ ਕੈਟਾਲੌਗ ਵਾਲੀ ਅੰਦਰੂਨੀ ਸੇਵਾ
+- REST API ਲੈ ਕੇ ਹੈਲਥ ਚੈੱਕਸ
+- ਬੈਕਐਂਡ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਪੈਟਰਨ ਦੀ ਉਦਾਹਰਣ
 
-## ਸਰਵਿਸਾਂ ਦਾ ਝਲਕ
+## ਸੇਵਾਵਾਂ ਦਾ ਜਾਇਜ਼ਾ
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Access**: ਪਬਲਿਕ (ਬਾਹਰੀ ਇਨਗਰੈਸ)  
-**Purpose**: ਆਉਣ ਵਾਲੀਆਂ ਬੇਨਤੀਆਂ ਨੂੰ ਉਚਿਤ ਬੈਕਐਂਡ ਸਰਵਿਸਾਂ ਵੱਲ ਰੂਟ ਕਰਦਾ ਹੈ  
+**ਐਕਸੈੱਸ**: Public (external ingress)  
+**ਉਦੇਸ਼**: ਆਉਣ ਵਾਲੀਆਂ ਬੇਨਤੀਆਂ ਨੂੰ ਢੰਗ-ਮੁਤਾਬਕ ਬੈਕਐਂਡ ਸੇਵਾਵਾਂ ਵੱਲ ਰੂਟ ਕਰਨਾ  
 
-**Endpoints**:
-- `GET /` - ਸਰਵਿਸ ਜਾਣਕਾਰੀ
-- `GET /health` - ਸਿਹਤ ਜਾਂਚ ਐਂਡਪੌਇੰਟ
-- `GET /api/products` - ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਵੱਲ ਅੱਗੇ ਭੇਜੋ (ਸਾਰੇ ਦੀ ਸੂਚੀ)
-- `GET /api/products/:id` - ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਵੱਲ ਅੱਗੇ ਭੇਜੋ (ID ਦੁਆਰਾ ਪ੍ਰਾਪਤ ਕਰੋ)
+**ਐਂਡਪੋਇੰਟਸ**:
+- `GET /` - ਸੇਵਾ ਜਾਣਕਾਰੀ
+- `GET /health` - ਹੈਲਥ ਚੈੱਕ ਐਂਡਪੋਇੰਟ
+- `GET /api/products` - ਉਤਪਾਦ ਸੇਵਾ ਵੱਲ ਅੱਗੇ ਭੇਜੋ (ਸਭ ਦੀ ਸੂਚੀ)
+- `GET /api/products/:id` - ਉਤਪਾਦ ਸੇਵਾ ਵੱਲ ਅੱਗੇ ਭੇਜੋ (ID ਦੁਆਰਾ ਪ੍ਰਾਪਤ)
 
 **ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ**:
 - axios ਨਾਲ ਬੇਨਤੀ ਰੂਟਿੰਗ
-- ਕੇਂਦਰੀ ਲਾਗਿੰਗ
-- ਗਲਤੀ ਸੰਭਾਲਣ ਅਤੇ ਟਾਈਮਆਉਟ ਪ੍ਰਬੰਧਨ
-- ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲਾਂ ਰਾਹੀਂ ਸਰਵਿਸ ਡਿਸਕਵਰੀ
+- ਕੇਂਦਰੀ ਲੌਗਿੰਗ
+- ਐਰਰ ਹੈਂਡਲਿੰਗ ਅਤੇ ਟਾਈਮਆਊਟ ਮੈਨੇਜਮੈਂਟ
+- ਵਾਤਾਵਰਣ ਚਲਣਾਂ ਦੁਆਰਾ ਸੇਵਾ ਖੋਜ
 - Application Insights ਇੰਟੀਗ੍ਰੇਸ਼ਨ
 
 **ਕੋਡ ਹਾਈਲਾਈਟ** (`src/api-gateway/app.js`):
@@ -392,19 +383,20 @@ app.get('/api/products', async (req, res) => {
 ### Product Service (Python/Flask)
 
 **Port**: 8000  
-**Access**: ਸਿਰਫ ਅੰਦਰੂਨੀ (ਕੋਈ ਬਾਹਰੀ ਇਨਗਰੈਸ ਨਹੀਂ)  
-**Purpose**: ਇਨ-ਮੇਮੋਰੀ ਡਾਟਾ ਨਾਲ ਪ੍ਰੋਡਕਟ ਕੈਟਾਲੌਗ ਦਾ ਪ੍ਰਬੰਧ ਕਰਦਾ ਹੈ  
+**ਐਕਸੈੱਸ**: ਸਿਰਫ਼ ਅੰਦਰੂਨੀ (ਕੋਈ ਬਾਹਰੀ ਇੰਗ੍ਰੈੱਸ ਨਹੀਂ)  
+**ਉਦੇਸ਼**: ਇਨ-ਮੇਮੋਰੀ ਡਾਟਾ ਨਾਲ ਉਤਪਾਦ ਕੈਟਾਲੌਗ ਦਾ ਪ੍ਰਬੰਧਨ  
 
-**Endpoints**:
-- `GET /` - ਸਰਵਿਸ ਜਾਣਕਾਰੀ
-- `GET /health` - ਸਿਹਤ ਜਾਂਚ ਐਂਡਪੌਇੰਟ
-- `GET /products` - ਸਾਰੇ ਪ੍ਰੋਡਕਟ ਦੀ ਸੂਚੀ
-- `GET /products/<id>` - ID ਦੁਆਰਾ ਪ੍ਰੋਡਕਟ ਪ੍ਰਾਪਤ ਕਰੋ
+**ਐਂਡਪੋਇੰਟਸ**:
+- `GET /` - ਸੇਵਾ ਜਾਣਕਾਰੀ
+- `GET /health` - ਹੈਲਥ ਚੈੱਕ ਐਂਡਪੋਇੰਟ
+- `GET /products` - ਸਾਰੇ ਉਤਪਾਦ ਦੀ ਸੂਚੀ
+- `GET /products/<id>` - ID ਦੁਆਰਾ ਉਤਪਾਦ ਪ੍ਰਾਪਤ ਕਰੋ
 
 **ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ**:
 - Flask ਨਾਲ RESTful API
-- ਸਿਹਤ ਮਾਨੀਟਰਿੰਗ ਪ੍ਰੋਬ ਨਾਲ
-- ਸਟ੍ਰਕਚਰਡ ਲਾਗਿੰਗ
+- ਇਨ-ਮੇਮੋਰੀ ਉਤਪਾਦ ਸਟੋਰ (ਸਰਲ, ਕਿਸੇ ਡੇਟਾਬੇਸ ਦੀ ਲੋੜ ਨਹੀਂ)
+- ਪ੍ਰੋਬਸ ਨਾਲ ਹੈਲਥ ਮਾਨੀਟਰਿੰਗ
+- ਸੰਰਚਿਤ ਲੌਗਿੰਗ
 - Application Insights ਇੰਟੀਗ੍ਰੇਸ਼ਨ
 
 **ਡਾਟਾ ਮਾਡਲ**:
@@ -418,35 +410,35 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**ਸਿਰਫ ਅੰਦਰੂਨੀ ਕਿਉਂ?**
-ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਨੂੰ ਜਨਤਕ ਤੌਰ 'ਤੇ ਉਜਾਗਰ ਨਹੀਂ ਕੀਤਾ ਗਿਆ। ਸਾਰੀਆਂ ਬੇਨਤੀਆਂ API Gateway ਰਾਹੀਂ ਜਾਣੀਆਂ ਚਾਹੀਦੀਆਂ ਹਨ, ਜੋ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ:
-- ਸੁਰੱਖਿਆ: ਨਿਯੰਤਰਿਤ ਪਹੁੰਚ ਬਿੰਦੂ
-- ਲਚਕਤਾ: ਬੈਕਐਂਡ ਬਦਲ ਸਕਦੇ ਹੋ ਬਿਨਾਂ ਕਲਾਇੰਟਾਂ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕੀਤੇ
-- ਮਾਨੀਟਰਿੰਗ: ਕੇਂਦਰੀ ਬੇਨਤੀ ਲਾਗਿੰਗ
+**ਕਿਉਂ ਸਿਰਫ਼ ਅੰਦਰੂਨੀ?**
+Product Service ਨੂੰ ਜਨਤਕ ਤੌਰ 'ਤੇ ਪ੍ਰਦਰਸ਼ਿਤ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ। ਸਾਰੀਆਂ ਬੇਨਤੀਆਂ API Gateway ਰਾਹੀਂ ਜਾਣੀਆਂ ਚਾਹੀਦੀਆਂ ਹਨ, ਜੋ ਇਹ ਮੁਹੱਈਆ ਕਰਦਾ ਹੈ:
+- ਸੁਰੱਖਿਆ: ਨਿਯੰਤਰਿਤ ਐਕਸੈੱਸ ਪੁਆਇੰਟ
+- ਲਚਕੀਲਾਪਨ: ਬੈਕਏਂਡ ਬਦਲ ਸਕਦਾ ਹੈ ਬਿਨਾਂ ਕਲਾਇੰਟਾਂ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕੀਤੇ
+- ਨਿਗਰਾਨੀ: ਕੇਂਦਰੀ ਬੇਨਤੀ ਲੌਗਿੰਗ
 
-## ਸਰਵਿਸ ਸੰਚਾਰ ਨੂੰ ਸਮਝਣਾ
+## ਸੇਵਾ ਸੰਚਾਰ ਨੂੰ ਸਮਝਣਾ
 
-### ਸਰਵਿਸਾਂ ਇੱਕ-ਦੂਜੇ ਨਾਲ ਕਿਵੇਂ ਗੱਲ ਕਰਦੀਆਂ ਹਨ
+### ਸੇਵਾਵਾਂ ਇਕ ਦੂਜੇ ਨਾਲ ਕਿਵੇਂ ਗੱਲ ਕਰਦੀਆਂ ਹਨ
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Gateway as API ਗੇਟਵੇ<br/>(ਪੋਰਟ 8080)
-    participant Product as ਪ੍ਰੋਡਕਟ ਸੇਵਾ<br/>(ਪੋਰਟ 8000)
-    participant AI as ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ
+    participant Product as ਉਤਪਾਦ ਸੇਵਾ<br/>(ਪੋਰਟ 8000)
+    participant AI as ਅਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ
     
     User->>Gateway: GET /api/products
-    Gateway->>AI: ਬੇਨਤੀ ਲੌਗ ਕਰੋ
+    Gateway->>AI: ਰਿਕਵੇਸਟ ਲਾਗ ਕਰੋ
     Gateway->>Product: GET /products (ਅੰਦਰੂਨੀ HTTP)
-    Product->>AI: ਕਵੈਰੀ ਲੌਗ ਕਰੋ
-    Product-->>Gateway: JSON ਜਵਾਬ [5 ਪ੍ਰੋਡਕਟਸ]
-    Gateway->>AI: ਜਵਾਬ ਲੌਗ ਕਰੋ
-    Gateway-->>User: JSON ਜਵਾਬ [5 ਪ੍ਰੋਡਕਟਸ]
+    Product->>AI: ਕੁਏਰੀ ਲਾਗ ਕਰੋ
+    Product-->>Gateway: JSON ਜਵਾਬ [5 ਉਤਪਾਦ]
+    Gateway->>AI: ਜਵਾਬ ਲਾਗ ਕਰੋ
+    Gateway-->>User: JSON ਜਵਾਬ [5 ਉਤਪਾਦ]
     
     Note over Gateway,Product: ਅੰਦਰੂਨੀ DNS: http://product-service
-    Note over User,AI: ਸਾਰੀ ਸੰਚਾਰ ਲੌਗ ਅਤੇ ਟ੍ਰੇਸ ਕੀਤੀ ਗਈ
+    Note over User,AI: ਸਾਰਾ ਸੰਚਾਰ ਲਾਗ ਅਤੇ ਟਰੇਸ ਕੀਤਾ ਗਿਆ
 ```
-ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ, API Gateway **ਅੰਦਰੂਨੀ HTTP ਕਾਲਾਂ** ਦੀ ਵਰਤੋਂ ਕਰਕੇ Product Service ਨਾਲ ਗੱਲ ਕਰਦਾ ਹੈ:
+ਇਸ ਉਦਾਹਰਣ ਵਿੱਚ, API Gateway Product Service ਨਾਲ **ਅੰਦਰੂਨੀ HTTP ਕਾਲਾਂ** ਰਾਹੀਂ ਸੰਚਾਰ ਕਰਦੀ ਹੈ:
 
 ```javascript
 // API ਗੇਟਵੇ (src/api-gateway/app.js)
@@ -458,16 +450,283 @@ const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 
 **ਮੁੱਖ ਬਿੰਦੂ**:
 
-1. **DNS-ਅਧਾਰਿਤ ਡਿਸਕਵਰੀ**: ਕੰਟੇਨਰ ਐਪਸ ਅੰਦਰੂਨੀ ਸਰਵਿਸਾਂ ਲਈ DNS ਆਟੋਮੈਟਿਕ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ
-   - ਪ੍ਰੋਡਕਟ ਸਰ
-3. ਦੋਵੇਂ ਸੇਵਾਵਾਂ ਨੂੰ ਮੁੜ ਤੈਨਾਤ ਕਰੋ:
+1. **DNS-ਆਧਾਰਤ ਖੋਜ**: Container Apps ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਅੰਦਰੂਨੀ ਸੇਵਾਵਾਂ ਲਈ DNS ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ
+   - Product Service FQDN: product-service.internal.<environment>.azurecontainerapps.io
+   - ਸਧਾਰਨ ਕੀਤਾ ਗਿਆ: `http://product-service` (Container Apps ਇਹ ਸਾਲੱਬ ਕਰਦਾ ਹੈ)
+
+2. **ਕੋਈ ਜਨਤਕ ਪਰਦਰਸ਼ਨ ਨਹੀਂ**: Bicep ਵਿੱਚ Product Service ਲਈ `external: false` ਹੈ
+   - ਸਿਰਫ਼ Container Apps ਵਾਤਾਵਰਣ ਦੇ ਅੰਦਰ ਪਹੁੰਚਯੋਗ
+   - ਇੰਟਰਨੈੱਟ ਤੋਂ ਪਹੁੰਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ
+
+3. **ਵਾਤਾਵਰਣ ਵੇਰੀਏਬਲ**: ਸੇਵਾ URLs ਡਿਪਲੋਇਮੈਂਟ ਸਮੇਂ ਇੰਜੇਕਟ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ
+   - Bicep ਗੇਟਵੇ ਨੂੰ ਅੰਦਰੂਨੀ FQDN ਪਾਸ ਕਰਦਾ ਹੈ
+   - ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਵਿੱਚ ਕੋਈ ਹਾਰਡਕੋਡ ਕੀਤੇ URLs ਨਹੀਂ
+
+**ਉਪਮੈਾ**: ਇਸਨੂੰ ਦਫਤਰ ਦੇ ਕਮਰਿਆਂ ਵਾਂਗ ਸੋਚੋ। API Gateway ਰਿਸੈਪਸ਼ਨ ਡੈਸਕ (ਪਬਲਿਕ-ਮੁਖੀ) ਹੈ, ਅਤੇ Product Service ਇੱਕ ਦਫਤਰ ਕਮਰਾ (ਅੰਦਰੂਨੀ) ਹੈ। ਦੌਰੇ ਕਰਨ ਵਾਲੇ ਰਿਸੈਪਸ਼ਨ ਰਾਹੀਂ ਹੀ ਕਿਸੇ ਵੀ ਦਫਤਰ ਤੱਕ ਜਾ ਸਕਦੇ ਹਨ।
+
+## ਡਿਪਲੋਇਮੈਂਟ ਵਿਕਲਪ
+
+### ਪੂਰਾ ਡਿਪਲੋਇਮੈਂਟ (ਸਿਫ਼ਾਰਸ਼ੀ)
+
+```bash
+# ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਅਤੇ ਦੋਹਾਂ ਸੇਵਾਵਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
+azd up
+```
+
+ਇਹ ਡਿਪਲੋਇਮੈਂਟ ਕਰਦਾ ਹੈ:
+1. Container Apps ਵਾਤਾਵਰਣ
+2. Application Insights
+3. Container Registry
+4. API Gateway ਕੰਟੇਨਰ
+5. Product Service ਕੰਟੇਨਰ
+
+**ਸਮਾਂ**: 8-12 ਮਿੰਟ
+
+### ਵਿਅਕਤੀਗਤ ਸੇਵਾ ਡਿਪਲੋਏ ਕਰੋ
+
+```bash
+# ਕੇਵਲ ਇੱਕ ਸੇਵਾ ਡਿਪਲੋਇ ਕਰੋ (ਪ੍ਰਾਰੰਭਿਕ azd up ਤੋਂ ਬਾਅਦ)
+azd deploy api-gateway
+
+# ਜਾਂ ਉਤਪਾਦ ਸੇਵਾ ਡਿਪਲੋਇ ਕਰੋ
+azd deploy product-service
+```
+
+**ਉਪਯੋਗ ਮਾਮਲਾ**: ਜਦੋਂ ਤੁਸੀਂ ਇੱਕ ਸੇਵਾ ਵਿੱਚ ਕੋਡ ਅੱਪਡੇਟ ਕੀਤਾ ਹੈ ਅਤੇ ਸਿਰਫ਼ ਉਸ ਸੇਵਾ ਨੂੰ ਹੀ ਦੁਬਾਰਾ ਡਿਪਲੋਏ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।
+
+### ਸੰਰਚਨਾ ਅੱਪਡੇਟ ਕਰੋ
+
+```bash
+# ਸਕੇਲਿੰਗ ਪੈਰਾਮੀਟਰ ਬਦਲੋ
+azd env set GATEWAY_MAX_REPLICAS 30
+
+# ਨਵੀਂ ਸੰਰਚਨਾ ਨਾਲ ਮੁੜ ਤੈਨਾਤ ਕਰੋ
+azd up
+```
+
+## ਕੰਫਿਗਰੇਸ਼ਨ
+
+### ਸਕੇਲਿੰਗ ਸੰਰਚਨਾ
+
+ਦੋਹਾਂ ਸੇਵਾਵਾਂ ਨੂੰ ਉਨ੍ਹਾਂ ਦੀਆਂ Bicep ਫਾਈਲਾਂ ਵਿੱਚ HTTP-ਅਧਾਰਤ ਆਟੋ-ਸਕੇਲਿੰਗ ਨਾਲ ਕੰਫਿਗਰ ਕੀਤਾ ਗਿਆ ਹੈ:
+
+**API Gateway**:
+- ਨਿਥੈਨ ਰੀਪਲਿਕਾ(ਜ਼): 2 (ਉਪਲਬਧਤਾ ਲਈ ਹਮੇਸ਼ਾਂ ਘੱਟੋ-ਘੱਟ 2)
+- ਵੱਧੋ-ਤੱਕ ਰੀਪਲਿਕਾ(ਜ਼): 20
+- ਸਕੇਲ ਟ੍ਰਿਗਰ: ਪ੍ਰਤੀ ਰੀਪਲਿਕਾ 50 ਸਮਕਾਲੀ ਬੇਨਤੀਆਂ
+
+**Product Service**:
+- ਨਿਥੈਨ ਰੀਪਲਿਕਾ(ਜ਼): 1 (ਜ਼ਰੂਰਤ ਹੋਣ 'ਤੇ ਜ਼ੀਰੋ ਤੱਕ ਸਕੇਲ ਹੋ ਸਕਦਾ ਹੈ)
+- ਵੱਧੋ-ਤੱਕ ਰੀਪਲਿਕਾ(ਜ਼): 10
+- ਸਕੇਲ ਟ੍ਰਿਗਰ: ਪ੍ਰਤੀ ਰੀਪਲਿਕਾ 100 ਸਮਕਾਲੀ ਬੇਨਤੀਆਂ
+
+**ਸਕੇਲਿੰਗ ਕਸਟਮਾਈਜ਼ ਕਰੋ** (in `infra/app/*.bicep`):
+```bicep
+scale: {
+  minReplicas: 1
+  maxReplicas: 10
+  rules: [
+    {
+      name: 'http-scale-rule'
+      http: {
+        metadata: {
+          concurrentRequests: '100'  // Adjust this
+        }
+      }
+    }
+  ]
+}
+```
+
+### ਸਰੋਤ ਆਲੋਕੇਸ਼ਨ
+
+**API Gateway**:
+- CPU: 1.0 vCPU
+- ਮੈਮੋਰੀ: 2 GiB
+- ਕਾਰਨ: ਸਾਰੇ ਬਾਹਰੀ ਟ੍ਰੈਫਿਕ ਨੂੰ ਸਹਿਣਾ
+
+**Product Service**:
+- CPU: 0.5 vCPU
+- ਮੈਮੋਰੀ: 1 GiB
+- ਕਾਰਨ: ਹਲਕੇ-ਭਾਰੇ ਇਨ-ਮੇਮੋਰੀ ਆਪਰੇਸ਼ਨ
+
+### ਹੈਲਥ ਚੈੱਕਸ
+
+ਦੋਹਾਂ ਸੇਵਾਵਾਂ ਵਿੱਚ ਲਾਇਵੇਨੈੱਸ ਅਤੇ ਰੀਡਿਨੈੱਸ ਪ੍ਰੋਬਸ ਸ਼ਾਮਲ ਹਨ:
+
+```bicep
+probes: [
+  {
+    type: 'Liveness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+  }
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  }
+]
+```
+
+**ਇਸਦਾ ਕੀ ਮਤਲਬ ਹੈ**:
+- **ਲਾਇਵੇਨੈੱਸ**: ਜੇ ਹੈਲਥ ਚੈੱਕ ਫੇਲ ਹੁੰਦਾ ਹੈ, Container Apps ਕੰਟੇਨਰ ਨੂੰ ਰੀਸਟਾਰਟ ਕਰਦਾ ਹੈ
+- **ਰੀਡਿਨੈੱਸ**: ਜੇ ਤਿਆਰ ਨਹੀਂ, Container Apps ਉਸ ਰੀਪਲਿਕਾ ਨੂੰ ਟਰੇਫਿਕ ਰੂਟ ਕਰਨ ਤੋਂ ਰੋਕਦਾ ਹੈ
+
+## ਨਿਗਰਾਨੀ ਅਤੇ ਦ੍ਰਿਸ਼ਯਤਾ
+
+### ਸੇਵਾ ਲੌਗਸ ਵੇਖੋ
+
+```bash
+# azd monitor ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲੌਗ ਵੇਖੋ
+azd monitor --logs
+
+# ਜਾਂ ਕਿਸੇ ਖਾਸ Container Apps ਲਈ Azure CLI ਦੀ ਵਰਤੋਂ ਕਰੋ:
+# API Gateway ਤੋਂ ਲੌਗਾਂ ਨੂੰ ਸਟ੍ਰੀਮ ਕਰੋ
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+
+# ਹਾਲੀਆ ਉਤਪਾਦ ਸੇਵਾ ਦੇ ਲੌਗ ਵੇਖੋ
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+```
+
+**ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ**:
+```
+[api-gateway] API Gateway listening on port 8080
+[api-gateway] Product Service URL: http://product-service
+[api-gateway] GET /api/products 200 - 45ms
+[product-service] Retrieved 5 products
+```
+
+### Application Insights ਕੈਰੀਜ਼
+
+Azure Portal ਵਿਚ Application Insights 'ਤੇ ਜਾ ਕੇ, ਫਿਰ ਇਹਨਾਂ ਕਵੈਰੀਆਂ ਨੂੰ ਚਲਾਓ:
+
+**ਢੀਹੀ ਬੇਨਤੀਆਂ ਲੱਭੋ**:
+```kusto
+requests
+| where timestamp > ago(1h)
+| where duration > 1000  // Requests taking >1 second
+| summarize count() by name, cloud_RoleName
+| order by count_ desc
+```
+
+**ਸੇਵਾ-ਤੋਂ-ਸੇਵਾ ਕਾਲਾਂ ট্রੈਕ ਕਰੋ**:
+```kusto
+dependencies
+| where timestamp > ago(1h)
+| where type == "Http"
+| project timestamp, name, target, duration, success
+| order by timestamp desc
+```
+
+**ਸੇਵਾ ਅਨੁਸਾਰ ਤ੍ਰੁੱਟੀ ਦੀ ਦਰ**:
+```kusto
+exceptions
+| where timestamp > ago(24h)
+| summarize errorCount = count() by cloud_RoleName, type
+| order by errorCount desc
+```
+
+**ਸਮੇਂ ਦੇ ਨਾਲ ਬੇਨਤੀ ਦੀ ਮਾਤਰਾ**:
+```kusto
+requests
+| where timestamp > ago(1h)
+| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
+| render timechart
+```
+
+### ਨਿਗਰਾਨੀ ਡੈਸ਼ਬੋਰਡ ਤੱਕ ਪਹੁੰਚ
+
+```bash
+# Application Insights ਦੇ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
+azd env get-values | grep APPLICATIONINSIGHTS
+
+# Azure Portal ਦੀ ਨਿਗਰਾਨੀ ਖੋਲ੍ਹੋ
+az monitor app-insights component show \
+  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
+  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
+  --query "appId" -o tsv
+```
+
+### ਲਾਈਵ ਮੈਟਰਿਕਸ
+
+1. Application Insights ਵਿੱਚ Azure Portal 'ਤੇ ਜਾਓ
+2. "Live Metrics" 'ਤੇ ਕਲਿੱਕ ਕਰੋ
+3. ਰੀਅਲ-ਟਾਈਮ ਬੇਨਤੀਆਂ, ਫੇਲ੍ਹਰ, ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ਵੇਖੋ
+4. ਟੈਸਟ ਕਰਨ ਲਈ ਰਨ ਕਰੋ: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+
+## ਪ੍ਰਯੋਗਿਕ ਅਭਿਆਸ
+
+### ਅਭਿਆਸ 1: ਨਵਾਂ ਪ੍ਰੋਡਕਟ ਐਂਡਪੋਇੰਟ ਜੋੜੋ ⭐ (ਆਸਾਨ)
+
+**ਲਕਸ਼**: ਨਵੇਂ ਉਤਪਾਦ ਬਣਾਉਣ ਲਈ POST ਐਂਡਪੋਇੰਟ ਸ਼ਾਮਲ ਕਰੋ
+
+**ਸ਼ੁਰੂਆਤੀ ਬਿੰਦੂ**: `src/product-service/main.py`
+
+**ਕਦਮ**:
+
+1. `main.py` ਵਿੱਚ `get_product` ֆੰਕਸ਼ਨ ਤੋਂ ਬਾਅਦ ਇਹ ਐਂਡਪੋਇੰਟ ਜੋੜੋ:
+
+```python
+@app.route('/products', methods=['POST'])
+def create_product():
+    """Create a new product"""
+    data = request.get_json()
+    
+    # ਲਾਜ਼ਮੀ ਖੇਤਰਾਂ ਦੀ ਜਾਂਚ ਕਰੋ
+    if not data or 'name' not in data or 'price' not in data:
+        return jsonify({'error': 'Missing required fields: name, price'}), 400
+    
+    new_id = max(p['id'] for p in products) + 1
+    new_product = {
+        'id': new_id,
+        'name': data['name'],
+        'description': data.get('description', ''),
+        'price': float(data['price']),
+        'stock': int(data.get('stock', 0))
+    }
+    products.append(new_product)
+    logger.info(f"Created product {new_id}")
+    return jsonify(new_product), 201
+```
+
+2. API Gateway (`src/api-gateway/app.js`) ਵਿੱਚ POST ਰੂਟ ਸ਼ਾਮਲ ਕਰੋ:
+
+```javascript
+// ਇਸ ਨੂੰ GET /api/products ਰੂਟ ਦੇ ਬਾਅਦ ਜੋੜੋ
+app.post('/api/products', async (req, res) => {
+  try {
+    console.log(`Forwarding POST request to ${PRODUCT_SERVICE_URL}/products`);
+    const response = await axios.post(`${PRODUCT_SERVICE_URL}/products`, req.body, {
+      timeout: 5000
+    });
+    res.status(201).json(response.data);
+  } catch (error) {
+    console.error('Error calling product service:', error.message);
+    res.status(503).json({
+      error: 'Product service unavailable',
+      message: error.message
+    });
+  }
+});
+```
+
+3. ਦੋਹਾਂ ਸੇਵਾਵਾਂ ਨੂੰ ਮੁੜ ਤੈਨਾਤ ਕਰੋ:
 
 ```bash
 azd deploy product-service
 azd deploy api-gateway
 ```
 
-4. ਨਵੇਂ ਐਂਡਪੌਇੰਟ ਦੀ ਜਾਂਚ ਕਰੋ:
+4. ਨਵੇਂ ਐਂਡਪੋਇੰਟ ਦੀ ਜਾਂਚ ਕਰੋ:
 
 ```bash
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
@@ -483,33 +742,33 @@ curl -X POST $GATEWAY_URL/api/products \
 {"id":6,"name":"USB Cable","description":"","price":9.99,"stock":500}
 ```
 
-5. ਪੱਕਾ ਕਰੋ ਕਿ ਇਹ ਸੂਚੀ ਵਿੱਚ ਦਿਖਾਈ ਦੇ ਰਿਹਾ ਹੈ:
+5. ਜਾਂਚੋ ਕਿ ਇਹ ਸੂਚੀ ਵਿੱਚ ਦਿਸਦਾ ਹੈ:
 
 ```bash
 curl $GATEWAY_URL/api/products
-# ਹੁਣ 6 ਉਤਪਾਦ ਦਿਖਾਉਣੇ ਚਾਹੀਦੇ ਹਨ, ਜਿਸ ਵਿੱਚ ਨਵਾਂ USB ਕੇਬਲ ਸ਼ਾਮਲ ਹੈ।
+# ਹੁਣ ਨਵੇਂ USB ਕੇਬਲ ਸਮੇਤ 6 ਉਤਪਾਦ ਦਿਖਾਏ ਜਾਣੇ ਚਾਹੀਦੇ ਹਨ
 ```
 
 **ਸਫਲਤਾ ਮਾਪਦੰਡ**:
-- ✅ POST ਬੇਨਤੀ HTTP 201 ਵਾਪਸ ਕਰਦੀ ਹੈ
-- ✅ GET /api/products ਸੂਚੀ ਵਿੱਚ ਨਵਾਂ ਉਤਪਾਦ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ
-- ✅ ਉਤਪਾਦ ਵਿੱਚ ਆਟੋ-ਇੰਕਰੀਮੈਂਟ ਕੀਤਾ ID ਹੁੰਦਾ ਹੈ
+- ✅ POST request HTTP 201 ਵਾਪਸ ਕਰਦੀ ਹੈ
+- ✅ ਨਵਾਂ ਪ੍ਰੋਡਕਟ GET /api/products ਸੂਚੀ ਵਿੱਚ ਦਿਖਦਾ ਹੈ
+- ✅ ਪ੍ਰੋਡਕਟ ਦਾ ID ਆਟੋ-ਇੰਕਰੀਮੈਂਟ ਹੋਇਆ ਹੈ
 
 **ਸਮਾਂ**: 10-15 ਮਿੰਟ
 
 ---
 
-### ਅਭਿਆਸ 2: Autoscaling ਨਿਯਮਾਂ ਨੂੰ ਸੋਧੋ ⭐⭐ (ਦਰਮਿਆਨਾ)
+### ਅਭਿਆਸ 2: ਆਟੋਸਕੇਲਿੰਗ ਨਿਯਮ ਬਦਲੋ ⭐⭐ (ਦਰਮਿਆਨਾ)
 
-**ਲਕਸ਼**: Product Service ਨੂੰ ਜ਼ਿਆਦਾ ਤੇਜ਼ੀ ਨਾਲ ਸਕੇਲ ਕਰਨ ਲਈ ਬਦਲੋ
+**ਮਕਸਦ**: Product Service ਨੂੰ ਹੋਰ ਜ਼ਿਆਦਾ ਅਗਰੈਸੀਵ ਤਰੀਕੇ ਨਾਲ ਸਕੇਲ ਕਰਨ ਲਈ ਬਦਲੋ
 
-**ਸ਼ੁਰੂਆਤੀ ਬਿੰਦੂ**: `infra/app/product-service.bicep`
+**ਸ਼ੁਰੂਆਤੀ ਨੁਕਤਾ**: `infra/app/product-service.bicep`
 
 **ਕਦਮ**:
 
 1. `infra/app/product-service.bicep` ਖੋਲ੍ਹੋ ਅਤੇ `scale` ਬਲਾਕ ਲੱਭੋ (ਲਗਭਗ ਲਾਈਨ 95)
 
-2. ਇਸ ਨੂੰ ਬਦਲੋ:
+2. ਇਸ ਤੋਂ ਬਦਲੋ:
 ```bicep
 scale: {
   minReplicas: 1
@@ -527,7 +786,7 @@ scale: {
 }
 ```
 
-ਇਸ ਵਿੱਚ:
+ਇਸ ਨਾਲ:
 ```bicep
 scale: {
   minReplicas: 2  // Always have 2 running
@@ -545,13 +804,13 @@ scale: {
 }
 ```
 
-3. ਢਾਂਚੇ ਨੂੰ ਮੁੜ ਤੈਨਾਤ ਕਰੋ:
+3. ਇਨਫਰਾਸਟਰੱਕਚਰ ਨੂੰ ਮੁੜ ਤੈਨਾਤ ਕਰੋ:
 
 ```bash
 azd up
 ```
 
-4. ਨਵੇਂ ਸਕੇਲਿੰਗ ਸੰਰਚਨਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ:
+4. ਨਵੀਂ ਸਕੇਲਿੰਗ ਸੰਰਚਨਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ:
 
 ```bash
 az containerapp show \
@@ -569,40 +828,40 @@ az containerapp show \
 }
 ```
 
-5. ਲੋਡ ਨਾਲ autoscaling ਦੀ ਜਾਂਚ ਕਰੋ:
+5. ਲੋਡ ਨਾਲ ਆਟੋਸਕੇਲਿੰਗ ਦੀ ਪਰਖ ਕਰੋ:
 
 ```bash
 # ਸਮਕਾਲੀ ਬੇਨਤੀਆਂ ਬਣਾਓ
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# ਸਕੇਲਿੰਗ ਦੇ ਘਟਨਾ ਦੇਖੋ
-azd logs product-service --follow
-# ਲੱਭੋ: ਕੰਟੇਨਰ ਐਪਸ ਸਕੇਲਿੰਗ ਘਟਨਾਵਾਂ
+# Azure CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਸਕੇਲਿੰਗ ਹੋਣ ਵੇਖੋ
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
+# ਖੋਜੋ: Container Apps ਦੇ ਸਕੇਲਿੰਗ ਘਟਨਾਵਾਂ
 ```
 
 **ਸਫਲਤਾ ਮਾਪਦੰਡ**:
-- ✅ Product Service ਹਮੇਸ਼ਾ ਘੱਟੋ-ਘੱਟ 2 replicas ਚਲਾਉਂਦਾ ਹੈ
-- ✅ ਲੋਡ ਦੇ ਹੇਠਾਂ, 2 ਤੋਂ ਵੱਧ replicas ਤੱਕ ਸਕੇਲ ਕਰਦਾ ਹੈ
-- ✅ Azure Portal ਵਿੱਚ ਨਵੇਂ ਸਕੇਲਿੰਗ ਨਿਯਮ ਦਿਖਾਈ ਦਿੰਦੇ ਹਨ
+- ✅ Product Service ਹਮੇਸ਼ਾ ਘੱਟੋ-ਘੱਟ 2 ਰੇਪਲਿਕਾ 'ਤੇ ਚੱਲਦੀ ਹੈ
+- ✅ ਲੋਡ ਹੇਠਾਂ, 2 ਤੋਂ ਵੱਧ ਰੇਪਲਿਕਾ ਤੱਕ ਸਕੇਲ ਹੁੰਦਾ ਹੈ
+- ✅ Azure Portal ਨਵੇਂ ਸਕੇਲਿੰਗ ਨਿਯਮ ਦਿਖਾਉਂਦਾ ਹੈ
 
 **ਸਮਾਂ**: 15-20 ਮਿੰਟ
 
 ---
 
-### ਅਭਿਆਸ 3: Custom Monitoring Query ਸ਼ਾਮਲ ਕਰੋ ⭐⭐ (ਦਰਮਿਆਨਾ)
+### ਅਭਿਆਸ 3: ਕਸਟਮ ਮਾਨੀਟਰਨਿੰਗ ਕੁਐਰੀ ਸ਼ਾਮਲ ਕਰੋ ⭐⭐ (ਦਰਮਿਆਨਾ)
 
-**ਲਕਸ਼**: Product API ਦੇ ਪ੍ਰਦਰਸ਼ਨ ਨੂੰ ਟ੍ਰੈਕ ਕਰਨ ਲਈ ਇੱਕ custom Application Insights query ਬਣਾਓ
+**ਮਕਸਦ**: Product API ਦੇ ਪ੍ਰਦਰਸ਼ਨ ਨੂੰ ਟਰੈਕ ਕਰਨ ਲਈ ਇੱਕ ਕਸਟਮ Application Insights ਕੁਐਰੀ ਬਣਾਓ
 
 **ਕਦਮ**:
 
-1. Azure Portal ਵਿੱਚ Application Insights ਤੇ ਜਾਓ:
-   - Azure Portal ਤੇ ਜਾਓ
-   - ਆਪਣੀ resource group (rg-microservices-*) ਲੱਭੋ
+1. Azure Portal ਵਿੱਚ Application Insights 'ਤੇ ਜਾਓ:
+   - Azure Portal 'ਤੇ ਜਾਓ
+   - ਆਪਣਾ resource group ਲੱਭੋ (rg-microservices-*)
    - Application Insights resource 'ਤੇ ਕਲਿੱਕ ਕਰੋ
 
-2. ਖੱਬੇ ਮੀਨੂ ਵਿੱਚ "Logs" 'ਤੇ ਕਲਿੱਕ ਕਰੋ
+2. ਖੱਬੇ ਮੇਨੂ ਵਿੱਚ "Logs" 'ਤੇ ਕਲਿੱਕ ਕਰੋ
 
-3. ਇਹ query ਬਣਾਓ:
+3. ਇਹ ਕੁਐਰੀ ਬਣਾਓ:
 
 ```kusto
 requests
@@ -617,9 +876,9 @@ requests
 | render timechart
 ```
 
-4. Query ਨੂੰ ਚਲਾਉਣ ਲਈ "Run" 'ਤੇ ਕਲਿੱਕ ਕਰੋ
+4. ਕੁਐਰੀ ਚਲਾਉਣ ਲਈ "Run" 'ਤੇ ਕਲਿੱਕ ਕਰੋ
 
-5. Query ਨੂੰ ਸੇਵ ਕਰੋ:
+5. ਕੁਐਰੀ ਨੂੰ ਸੇਵ ਕਰੋ:
    - "Save" 'ਤੇ ਕਲਿੱਕ ਕਰੋ
    - ਨਾਮ: "Product API Performance"
    - ਸ਼੍ਰੇਣੀ: "Performance"
@@ -630,35 +889,35 @@ requests
 for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 ```
 
-7. ਡੇਟਾ ਦੇਖਣ ਲਈ query ਨੂੰ ਰਿਫ੍ਰੈਸ਼ ਕਰੋ
+7. ਡੇਟਾ ਵੇਖਣ ਲਈ ਕੁਐਰੀ ਨੂੰ ਰੀਫ੍ਰੈਸ਼ ਕਰੋ
 
 **✅ ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ:**
-- ਸਮੇਂ ਦੇ ਨਾਲ ਬੇਨਤੀ ਗਿਣਤੀ ਦਿਖਾਉਣ ਵਾਲਾ ਚਾਰਟ
-- ਔਸਤ ਅੰਤਰਾਲ < 500ms
+- ਇੱਕ ਚਾਰਟ ਜੋ ਸਮੇਂ ਦੇ ਨਾਲ ਰਿਕਵੇਸਟ ਗਿਣਤੀਆਂ ਦਿਖਾਉਂਦਾ ਹੈ
+- ਔਸਤ ਅਵਧੀ < 500ms
 - ਸਫਲਤਾ ਦਰ = 100%
-- 5 ਮਿੰਟ ਦੇ ਸਮੇਂ ਦੇ ਬਿਨ
+- 5 ਮਿੰਟ ਦੇ ਟਾਈਮ ਬਿਨ
 
 **ਸਫਲਤਾ ਮਾਪਦੰਡ**:
-- ✅ Query 100+ ਬੇਨਤੀਆਂ ਦਿਖਾਉਂਦੀ ਹੈ
+- ✅ ਕੁਐਰੀ 100+ ਰਿਕਵੇਸਟ ਦਿਖਾਉਂਦੀ ਹੈ
 - ✅ ਸਫਲਤਾ ਦਰ 100% ਹੈ
-- ✅ ਔਸਤ ਅੰਤਰਾਲ < 500ms
-- ✅ ਚਾਰਟ 5 ਮਿੰਟ ਦੇ ਸਮੇਂ ਦੇ ਬਿਨ ਦਿਖਾਉਂਦਾ ਹੈ
+- ✅ ਔਸਤ ਅਵਧੀ < 500ms
+- ✅ ਚਾਰਟ 5-ਮਿੰਟ ਵਾਲੇ ਟਾਈਮ ਬਿਨ ਦਿਖਾਉਂਦਾ ਹੈ
 
-**ਸਿੱਖਣ ਦਾ ਨਤੀਜਾ**: custom queries ਨਾਲ ਸੇਵਾ ਦੇ ਪ੍ਰਦਰਸ਼ਨ ਦੀ ਨਿਗਰਾਨੀ ਕਰਨ ਦੀ ਸਮਝ
+**ਸਿੱਖਣ ਦਾ ਨਤੀਜਾ**: ਸਮਝੋ ਕਿ ਕਸਟਮ ਕੁਐਰੀਜ਼ ਨਾਲ ਸੇਵਾ ਦੇ ਪ੍ਰਦਰਸ਼ਨ ਦੀ ਨਿਗਰਾਨੀ ਕਿਵੇਂ ਕੀਤੀ ਜਾਂਦੀ ਹੈ
 
 **ਸਮਾਂ**: 10-15 ਮਿੰਟ
 
 ---
 
-### ਅਭਿਆਸ 4: Retry Logic ਲਾਗੂ ਕਰੋ ⭐⭐⭐ (ਉੱਚ ਪੱਧਰ)
+### ਅਭਿਆਸ 4: ਰੀਟ੍ਰਾਈ ਲਾਜਿਕ ਲਾਗੂ ਕਰੋ ⭐⭐⭐ (ਉੱਚ-ਪੱਧਰੀ)
 
-**ਲਕਸ਼**: ਜਦੋਂ Product Service ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੁੰਦੀ, API Gateway ਵਿੱਚ retry logic ਸ਼ਾਮਲ ਕਰੋ
+**ਮਕਸਦ**: ਜਦੋਂ Product Service ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਾ ਹੋਵੇ ਤਾਂ API Gateway ਵਿੱਚ ਰੀਟ੍ਰਾਈ ਲਾਜਿਕ ਸ਼ਾਮਲ ਕਰੋ
 
-**ਸ਼ੁਰੂਆਤੀ ਬਿੰਦੂ**: `src/api-gateway/app.js`
+**ਸ਼ੁਰੂਆਤੀ ਨੁਕਤਾ**: `src/api-gateway/app.js`
 
 **ਕਦਮ**:
 
-1. Retry ਲਾਇਬ੍ਰੇਰੀ ਇੰਸਟਾਲ ਕਰੋ:
+1. ਰੀਟ੍ਰਾਈ ਲਾਇਬ੍ਰੇਰੀ ਇੰਸਟਾਲ ਕਰੋ:
 
 ```bash
 cd src/api-gateway
@@ -666,19 +925,19 @@ npm install axios-retry --save
 cd ../..
 ```
 
-2. `src/api-gateway/app.js` ਨੂੰ ਅਪਡੇਟ ਕਰੋ (axios import ਤੋਂ ਬਾਅਦ ਸ਼ਾਮਲ ਕਰੋ):
+2. `src/api-gateway/app.js` ਅਪਡੇਟ ਕਰੋ (axios ਇੰਪੋਰਟ ਦੇ ਬਾਅਦ ਜੋੜੋ):
 
 ```javascript
 const axiosRetry = require('axios-retry');
 
-// ਰੀਟ੍ਰਾਈ ਲਾਜਿਕ ਸੰਰਚਿਤ ਕਰੋ
+// ਰੀਟ੍ਰਾਈ ਲੋਜਿਕ ਨੂੰ ਸੰਰਚਿਤ ਕਰੋ
 axiosRetry(axios, {
   retries: 3,
   retryDelay: (retryCount) => {
-    return retryCount * 1000; // 1ਸ, 2ਸ, 3ਸ
+    return retryCount * 1000; // 1 ਸਕਿੰਟ, 2 ਸਕਿੰਟ, 3 ਸਕਿੰਟ
   },
   retryCondition: (error) => {
-    // ਨੈਟਵਰਕ ਗਲਤੀਆਂ ਜਾਂ 5xx ਜਵਾਬਾਂ 'ਤੇ ਰੀਟ੍ਰਾਈ ਕਰੋ
+    // ਨੈੱਟਵਰਕ ਦੀਆਂ ਗਲਤੀਆਂ ਜਾਂ 5xx ਰਿਸਪਾਂਸਾਂ ਤੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ
     return axiosRetry.isNetworkOrIdempotentRequestError(error) ||
            (error.response && error.response.status >= 500);
   }
@@ -693,21 +952,21 @@ console.log('Retry logic configured: 3 retries with exponential backoff');
 azd deploy api-gateway
 ```
 
-4. ਸੇਵਾ ਦੀ ਅਸਫਲਤਾ ਨੂੰ ਨਕਲ ਕਰਕੇ retry ਵਿਹਾਰ ਦੀ ਜਾਂਚ ਕਰੋ:
+4. ਸੇਵਾ ਦੀ ਨਾਕਾਮੀ ਦੀ ਨਕਲ ਕਰਕੇ ਰੀਟ੍ਰਾਈ ਵਿਹਾਰ ਦੀ ਜਾਂਚ ਕਰੋ:
 
 ```bash
-# ਪ੍ਰੋਡਕਟ ਸੇਵਾ ਨੂੰ 0 'ਤੇ ਸਕੇਲ ਕਰੋ (ਨਕਲ ਫੇਲ੍ਹ)
+# ਉਤਪਾਦ ਸੇਵਾ ਨੂੰ 0 'ਤੇ ਸਕੇਲ ਕਰੋ (ਫੇਲ੍ਹ ਦੀ ਨਕਲ ਕਰਨ ਲਈ)
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --min-replicas 0 \
   --max-replicas 0
 
-# ਪ੍ਰੋਡਕਟਸ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ (3 ਵਾਰ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ)
+# ਉਤਪਾਦਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ (3 ਵਾਰ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ ਜਾਵੇਗੀ)
 time curl -v $GATEWAY_URL/api/products
-# ਦੇਖੋ: ਜਵਾਬ ਲਗਭਗ 6 ਸਕਿੰਟ ਲੈਂਦਾ ਹੈ (1ਸ + 2ਸ + 3ਸ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼)
+# ਨੋਟ ਕਰੋ: ਜਵਾਬ ਲਗਭਗ 6 ਸੈਕਿੰਡ ਲੈਂਦਾ ਹੈ (1s + 2s + 3s ਦੀਆਂ ਮੁੜ ਕੋਸ਼ਿਸ਼ਾਂ)
 
-# ਪ੍ਰੋਡਕਟ ਸੇਵਾ ਨੂੰ ਮੁੜ ਸਥਾਪਿਤ ਕਰੋ
+# ਉਤਪਾਦ ਸੇਵਾ ਨੂੰ ਬਹਾਲ ਕਰੋ
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -715,124 +974,124 @@ az containerapp update \
   --max-replicas 10
 ```
 
-5. Retry logs ਦੇਖੋ:
+5. ਰੀਟ੍ਰਾਈ ਲੋਗ ਵੇਖੋ:
 
 ```bash
-azd logs api-gateway --tail 50
-# ਰੀਟ੍ਰਾਈ ਕੋਸ਼ਿਸ਼ ਸੁਨੇਹਿਆਂ ਦੀ ਭਾਲ ਕਰੋ
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
+# ਖੋਜੋ: ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਦੇ ਸੰਦੇਸ਼
 ```
 
 **✅ ਉਮੀਦ ਕੀਤੀ ਵਿਹਾਰ:**
-- ਬੇਨਤੀਆਂ 3 ਵਾਰ retry ਕਰਦੀਆਂ ਹਨ ਜਦੋਂ ਤੱਕ ਅਸਫਲ ਨਹੀਂ ਹੁੰਦੀਆਂ
-- ਹਰ retry ਵਧੇਰੇ ਸਮਾਂ ਲੈਂਦਾ ਹੈ (1s, 2s, 3s)
-- ਸੇਵਾ ਮੁੜ ਸ਼ੁਰੂ ਹੋਣ ਤੋਂ ਬਾਅਦ ਸਫਲ ਬੇਨਤੀਆਂ
-- Logs retry ਦੇ ਯਤਨ ਦਿਖਾਉਂਦੇ ਹਨ
+- ਨਾਕਾਮ ਹੋਣ ਤੋਂ ਪਹਿਲਾਂ ਰਿਕਵੇਸਟ 3 ਵਾਰੀ ਰੀਟ੍ਰਾਈ ਹੁੰਦੀ ਹੈ
+- ਹਰ ਰੀਟ੍ਰਾਈ ਲਈ ਇੰਤਜ਼ਾਰ ਲੰਮਾ ਹੁੰਦਾ ਹੈ (1s, 2s, 3s)
+- ਸੇਵਾ ਰੀਸਟਾਰਟ ਹੋਣ ਤੇ ਰਿਕਵੇਸਟ ਸਫਲ ਹੁੰਦੇ ਹਨ
+- ਲੋਗ ਰੀਟ੍ਰਾਈ ਕੋਸ਼ਿਸ਼ਾਂ ਦਿਖਾਉਂਦੇ ਹਨ
 
 **ਸਫਲਤਾ ਮਾਪਦੰਡ**:
-- ✅ ਬੇਨਤੀਆਂ 3 ਵਾਰ retry ਕਰਦੀਆਂ ਹਨ ਜਦੋਂ ਤੱਕ ਅਸਫਲ ਨਹੀਂ ਹੁੰਦੀਆਂ
-- ✅ ਹਰ retry ਵਧੇਰੇ ਸਮਾਂ ਲੈਂਦਾ ਹੈ (exponential backoff)
-- ✅ ਸੇਵਾ ਮੁੜ ਸ਼ੁਰੂ ਹੋਣ ਤੋਂ ਬਾਅਦ ਸਫਲ ਬੇਨਤੀਆਂ
-- ✅ Logs retry ਦੇ ਯਤਨ ਦਿਖਾਉਂਦੇ ਹਨ
+- ✅ ਨਾਕਾਮ ਹੋਣ ਤੋਂ ਪਹਿਲਾਂ ਰਿਕਵੇਸਟ 3 ਵਾਰੀ ਰੀਟ੍ਰਾਈ ਹੁੰਦੀ ਹੈ
+- ✅ ਹਰ ਰੀਟ੍ਰਾਈ ਲਈ ਇੰਤਜ਼ਾਰ ਲੰਮਾ ਹੁੰਦਾ ਹੈ (exponential backoff)
+- ✅ ਸੇਵਾ ਰੀਸਟਾਰਟ ਹੋਣ ਤੇ ਰਿਕਵੇਸਟ ਸਫਲ ਹੁੰਦੇ ਹਨ
+- ✅ ਲੋਗ ਰੀਟ੍ਰਾਈ ਕੋਸ਼ਿਸ਼ਾਂ ਦਿਖਾਉਂਦੇ ਹਨ
 
-**ਸਿੱਖਣ ਦਾ ਨਤੀਜਾ**: microservices ਵਿੱਚ resilience patterns ਦੀ ਸਮਝ (circuit breakers, retries, timeouts)
+**ਸਿੱਖਣ ਦਾ ਨਤੀਜਾ**: ਮਾਈਕ੍ਰੋਸਰਵਿਸਜ਼ ਵਿੱਚ ਰੇਜ਼ਿਲੀਅੰਸ ਪੈਟਰਨ (circuit breakers, retries, timeouts) ਨੂੰ ਸਮਝੋ
 
 **ਸਮਾਂ**: 20-25 ਮਿੰਟ
 
 ---
 
-## ਗਿਆਨ ਚੈੱਕਪੋਇੰਟ
+## ਗਿਆਨ ਚੈਕਪੋਇੰਟ
 
-ਇਹ ਉਦਾਹਰਨ ਪੂਰੀ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਆਪਣੀ ਸਮਝ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ:
+ਇਸ ਉਦਾਹਰਨ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਦ, ਆਪਣੀ ਸਮਝ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ:
 
 ### 1. ਸੇਵਾ ਸੰਚਾਰ ✓
 
 ਆਪਣੀ ਜਾਣਕਾਰੀ ਦੀ ਜਾਂਚ ਕਰੋ:
-- [ ] ਕੀ ਤੁਸੀਂ ਸਮਝਾ ਸਕਦੇ ਹੋ ਕਿ API Gateway Product Service ਨੂੰ ਕਿਵੇਂ ਲੱਭਦਾ ਹੈ? (DNS-ਅਧਾਰਿਤ ਸੇਵਾ ਖੋਜ)
-- [ ] ਜੇ Product Service ਡਾਊਨ ਹੋਵੇ ਤਾਂ ਕੀ ਹੁੰਦਾ ਹੈ? (Gateway 503 error ਵਾਪਸ ਕਰਦਾ ਹੈ)
-- [ ] ਤੁਸੀਂ ਤੀਜੀ ਸੇਵਾ ਕਿਵੇਂ ਸ਼ਾਮਲ ਕਰਦੇ ਹੋ? (ਨਵਾਂ Bicep ਫਾਈਲ ਬਣਾਓ, main.bicep ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ, src ਫੋਲਡਰ ਬਣਾਓ)
+- [ ] ਕੀ ਤੁਸੀਂ ਵਿਆਖਿਆ ਕਰ ਸਕਦੇ ਹੋ ਕਿ API Gateway Product Service ਨੂੰ ਕਿਵੇਂ ਖੋਜਦਾ ਹੈ? (DNS-based service discovery)
+- [ ] ਜੇ Product Service ਡਾਊਨ ਹੋਵੇ ਤਾਂ ਕੀ ਹੁੰਦਾ ਹੈ? (Gateway returns 503 error)
+- [ ] ਤੁਸੀਂ ਤੀਜੀ ਸੇਵਾ ਕਿਵੇਂ ਸ਼ਾਮਲ ਕਰੋਗੇ? (Create new Bicep file, add to main.bicep, create src folder)
 
-**ਹੈਂਡਸ-ਆਨ ਪੁਸ਼ਟੀਕਰਨ**:
+**ਹੈਂਡਸ-ਆਨ ਪੁਸ਼ਟੀ:**
 ```bash
-# ਸੇਵਾ ਦੀ ਨਾਕਾਮੀ ਦਾ ਨਕਲ ਕਰੋ
+# ਸੇਵਾ ਦੀ ਅਸਫਲਤਾ ਦਾ ਅਨੁਕਲਨ ਕਰੋ
 az containerapp update --name <product-service-name> --min-replicas 0 --max-replicas 0
 curl $GATEWAY_URL/api/products
 # ✅ ਉਮੀਦ: 503 ਸੇਵਾ ਉਪਲਬਧ ਨਹੀਂ
 
-# ਸੇਵਾ ਨੂੰ ਮੁੜ ਸਥਾਪਿਤ ਕਰੋ
+# ਸੇਵਾ ਬਹਾਲ ਕਰੋ
 az containerapp update --name <product-service-name> --min-replicas 1 --max-replicas 10
 ```
 
-### 2. ਨਿਗਰਾਨੀ ਅਤੇ ਦ੍ਰਿਸ਼ਟਤਾ ✓
+### 2. ਮਾਨੀਟਰਨਿੰਗ ਅਤੇ ਨਿਰੀਖਣਯੋਗਤਾ ✓
 
 ਆਪਣੀ ਜਾਣਕਾਰੀ ਦੀ ਜਾਂਚ ਕਰੋ:
-- [ ] ਤੁਸੀਂ ਵਿਤਰਿਤ logs ਕਿੱਥੇ ਦੇਖਦੇ ਹੋ? (Azure Portal ਵਿੱਚ Application Insights)
-- [ ] ਤੁਸੀਂ ਹੌਲੀ ਬੇਨਤੀਆਂ ਨੂੰ ਕਿਵੇਂ ਟ੍ਰੈਕ ਕਰਦੇ ਹੋ? (Kusto query: `requests | where duration > 1000`)
-- [ ] ਤੁਸੀਂ ਪਛਾਣ ਸਕਦੇ ਹੋ ਕਿ ਕਿਹੜੀ ਸੇਵਾ ਨੇ ਗਲਤੀ ਕੀਤੀ? (logs ਵਿੱਚ `cloud_RoleName` field ਚੈੱਕ ਕਰੋ)
+- [ ] ਤੁਸੀਂ ਵੰਡੇ ਹੋਏ ਲੋਗ ਕਿੱਥੇ ਵੇਖਦੇ ਹੋ? (Application Insights in Azure Portal)
+- [ ] ਤੁਸੀਂ ਸਲੋ ਰਿਕਵੇਸਟਾਂ ਨੂੰ ਕਿਵੇਂ ਟਰੈਕ ਕਰਦੇ ਹੋ? (Kusto query: `requests | where duration > 1000`)
+- [ ] ਕੀ ਤੁਸੀਂ ਪਛਾਣ ਸਕਦੇ ਹੋ ਕਿ ਕਿਹੜੀ ਸੇਵਾ ਨੇ ਤਰੁਟੀ ਪੈਦਾ ਕੀਤੀ? (ਲੋਗ ਵਿੱਚ `cloud_RoleName` ਫੀਲਡ ਚੈੱਕ ਕਰੋ)
 
-**ਹੈਂਡਸ-ਆਨ ਪੁਸ਼ਟੀਕਰਨ**:
+**ਹੈਂਡਸ-ਆਨ ਪੁਸ਼ਟੀ:**
 ```bash
-# ਹੌਲੀ ਬੇਨਤੀ ਸਿਮੂਲੇਸ਼ਨ ਬਣਾਓ
+# ਇੱਕ ਢਿੱਲੀ ਬੇਨਤੀ ਦੀ ਨਕਲ ਤਿਆਰ ਕਰੋ
 curl "$GATEWAY_URL/api/products?delay=2000"
 
-# ਹੌਲੀ ਬੇਨਤੀਆਂ ਲਈ ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਦੀ ਪੁੱਛਗਿੱਛ ਕਰੋ
-# ਐਜ਼ਰ ਪੋਰਟਲ → ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ → ਲੌਗਸ 'ਤੇ ਜਾਓ
+# ਢਿੱਲੀਆਂ ਬੇਨਤੀਆਂ ਲਈ Application Insights ਵਿੱਚ ਪੁੱਛਗਿੱਛ ਕਰੋ
+# Azure Portal → Application Insights → Logs ਤੇ ਜਾਓ
 # ਚਲਾਓ: requests | where duration > 1000 | project timestamp, name, duration, cloud_RoleName
 ```
 
 ### 3. ਸਕੇਲਿੰਗ ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ✓
 
 ਆਪਣੀ ਜਾਣਕਾਰੀ ਦੀ ਜਾਂਚ ਕਰੋ:
-- [ ] Autoscaling ਨੂੰ ਕਿਹੜਾ trigger ਕਰਦਾ ਹੈ? (HTTP concurrent request rules: gateway ਲਈ 50, product ਲਈ 100)
-- [ ] ਹੁਣ ਕਿੰਨੇ replicas ਚਲ ਰਹੇ ਹਨ? (`az containerapp revision list` ਨਾਲ ਚੈੱਕ ਕਰੋ)
-- [ ] ਤੁਸੀਂ Product Service ਨੂੰ 5 replicas ਤੱਕ ਕਿਵੇਂ ਸਕੇਲ ਕਰਦੇ ਹੋ? (Bicep ਵਿੱਚ minReplicas ਅਪਡੇਟ ਕਰੋ)
+- [ ] ਆਟੋਸਕੇਲਿੰਗ ਨੂੰ ਕੀ ਟ੍ਰਿਗਰ ਕਰਦਾ ਹੈ? (HTTP concurrent request rules: 50 for gateway, 100 for product)
+- [ ] ਹੁਣ ਕਿੰਨੇ ਰੇਪਲਿਕਾ ਚੱਲ ਰਹੇ ਹਨ? (Check with `az containerapp revision list`)
+- [ ] ਤੁਸੀਂ Product Service ਨੂੰ 5 ਰੇਪਲਿਕਾ ਤੱਕ ਕਿਵੇਂ ਸਕੇਲ ਕਰੋਗੇ? (Update minReplicas in Bicep)
 
-**ਹੈਂਡਸ-ਆਨ ਪੁਸ਼ਟੀਕਰਨ**:
+**ਹੈਂਡਸ-ਆਨ ਪੁਸ਼ਟੀ:**
 ```bash
 # ਆਟੋਸਕੇਲਿੰਗ ਦੀ ਜਾਂਚ ਲਈ ਲੋਡ ਬਣਾਓ
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# ਰਿਪਲਿਕਾ ਵਧਦੇ ਦੇਖੋ
-azd logs api-gateway --follow
-# ✅ ਉਮੀਦ: ਲਾਗਜ਼ ਵਿੱਚ ਸਕੇਲਿੰਗ ਇਵੈਂਟਸ ਦੇਖੋ
+# Azure CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰਿਪਲਿਕਿਆਂ ਦੇ ਵਧਣ ਨੂੰ ਦੇਖੋ
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+# ✅ ਉਮੀਦ: ਲੌਗਾਂ ਵਿੱਚ ਸਕੇਲਿੰਗ ਘਟਨਾਵਾਂ ਦਿਖਾਈ ਦੇਣ
 ```
 
-**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਤੁਸੀਂ ਸਾਰੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦੇ ਸਕਦੇ ਹੋ ਅਤੇ hands-on commands ਨਾਲ ਪੁਸ਼ਟੀ ਕਰ ਸਕਦੇ ਹੋ।
+**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਤੁਸੀਂ ਸਾਰੇ ਸਵਾਲ ਦਾ ਜਵਾਬ ਦੇ ਸਕਦੇ ਹੋ ਅਤੇ ਹੈਂਡਸ-ਆਨ ਕਮਾਂਡ ਨਾਲ ਪੁਸ਼ਟੀ ਕਰ ਸਕਦੇ ਹੋ।
 
 ---
 
 ## ਲਾਗਤ ਵਿਸ਼ਲੇਸ਼ਣ
 
-### ਅਨੁਮਾਨਿਤ ਮਾਸਿਕ ਲਾਗਤ (ਇਸ 2-ਸੇਵਾ ਉਦਾਹਰਨ ਲਈ)
+### ਅੰਦਾਜ਼ਿਤ ਮਹੀਨਾਵਾਰ ਲਾਗਤ (ਇਸ 2-ਸੇਵਾ ਉਦਾਹਰਨ ਲਈ)
 
-| Resource | Configuration | Estimated Cost |
+| ਸਰੋਤ | ਕਨਫਿਗਰੇਸ਼ਨ | ਅੰਦਾਜ਼ਿਤ ਲਾਗਤ |
 |----------|--------------|----------------|
-| API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Basic tier | $5 |
-| Application Insights | 1-2 GB/month | $5-10 |
-| Log Analytics | 1 GB/month | $3 |
-| **Total** | | **$58-243/month** |
+| API Gateway | 2-20 ਰੇਪਲਿਕਾ, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 ਰੇਪਲਿਕਾ, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | ਬੇਸਿਕ ਟੀਅਰ | $5 |
+| Application Insights | 1-2 GB/ਮਹੀਨਾ | $5-10 |
+| Log Analytics | 1 GB/ਮਹੀਨਾ | $3 |
+| **ਕੁੱਲ** | | **$58-243/month** |
 
-### ਵਰਤੋਂ ਦੁਆਰਾ ਲਾਗਤ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ
+### ਉਪਯੋਗ ਅਨੁਸਾਰ ਲਗਤ ਵਿਭਾਜਨ
 
-**ਹਲਕਾ ਟ੍ਰੈਫਿਕ** (ਟੈਸਟਿੰਗ/ਸਿੱਖਣ): ~$60/month
-- API Gateway: 2 replicas × 24/7 = $30
-- Product Service: 1 replica × 24/7 = $15
-- Monitoring + Registry = $13
+**ਛੋਟੀ ਟ੍ਰੈਫਿਕ** (ਟੈਸਟਿੰਗ/ਸਿੱਖਣ): ~$60/ਮਹੀਨਾ
+- API Gateway: 2 ਰੇਪਲਿਕਾ × 24/7 = $30
+- Product Service: 1 ਰੇਪਲਿਕਾ × 24/7 = $15
+- ਮਾਨੀਟਰਨਿੰਗ + ਰਜਿਸਟਰੀ = $13
 
-**ਦਰਮਿਆਨਾ ਟ੍ਰੈਫਿਕ** (ਛੋਟਾ production): ~$120/month
-- API Gateway: 5 avg replicas = $75
-- Product Service: 3 avg replicas = $45
-- Monitoring + Registry = $13
+**ਮੋਡਰੇਟ ਟ੍ਰੈਫਿਕ** (ਛੋਟੀ ਪ੍ਰੋਡਕਸ਼ਨ): ~$120/ਮਹੀਨਾ
+- API Gateway: 5 ਔਸਤ ਰੇਪਲਿਕਾ = $75
+- Product Service: 3 ਔਸਤ ਰੇਪਲਿਕਾ = $45
+- ਮਾਨੀਟਰਨਿੰਗ + ਰਜਿਸਟਰੀ = $13
 
-**ਉੱਚ ਟ੍ਰੈਫਿਕ** (ਵਿਆਸਤ ਸਮੇਂ): ~$240/month
-- API Gateway: 15 avg replicas = $225
-- Product Service: 8 avg replicas = $120
-- Monitoring + Registry = $13
+**ਵੱਧੇ ਟ੍ਰੈਫਿਕ** (ਵਿਆਸਤ ਸਮੇ): ~$240/ਮਹੀਨਾ
+- API Gateway: 15 ਔਸਤ ਰੇਪਲਿਕਾ = $225
+- Product Service: 8 ਔਸਤ ਰੇਪਲਿਕਾ = $120
+- ਮਾਨੀਟਰਨਿੰਗ + ਰਜਿਸਟਰੀ = $13
 
-### ਲਾਗਤ ਨੂੰ ਘਟਾਉਣ ਦੇ ਸੁਝਾਅ
+### ਲਾਗਤ ਘਟਾਉਣ ਦੇ ਸੁਝਾਅ
 
-1. **Development ਲਈ Scale to Zero**:
+1. **ਡਿਵੈਲਪਮੈਂਟ ਲਈ ਜ਼ੀਰੋ ਤੱਕ ਸਕੇਲ ਕਰੋ**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -840,39 +1099,39 @@ azd logs api-gateway --follow
    }
    ```
 
-2. **Cosmos DB ਲਈ Consumption Plan ਵਰਤੋ** (ਜਦੋਂ ਤੁਸੀਂ ਇਸਨੂੰ ਸ਼ਾਮਲ ਕਰਦੇ ਹੋ):
-   - ਸਿਰਫ਼ ਜੋ ਤੁਸੀਂ ਵਰਤਦੇ ਹੋ ਉਸ ਲਈ ਭੁਗਤਾਨ ਕਰੋ
+2. **Cosmos DB ਲਈ Consumption Plan ਵਰਤੋ** (ਜਦੋਂ ਤੁਸੀਂ ਇਸਨੂੰ ਸ਼ਾਮਲ ਕਰੋ):
+   - ਸਿਰਫ਼ ਉਸਦੀ ਭੁਗਤਾਨ ਕਰੋ ਜੋ ਤੁਸੀਂ ਵਰਤਦੇ ਹੋ
    - ਕੋਈ ਘੱਟੋ-ਘੱਟ ਚਾਰਜ ਨਹੀਂ
 
 3. **Application Insights Sampling ਸੈਟ ਕਰੋ**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // 50% ਬੇਨਤੀਆਂ ਦਾ ਨਮੂਨਾ
+   appInsights.defaultClient.config.samplingPercentage = 50; // ਬੇਨਤੀਆਂ ਦਾ 50% ਨਮੂਨਾ ਲਓ
    ```
 
-4. **ਜਦੋਂ ਲੋੜ ਨਹੀਂ ਹੁੰਦੀ ਤਾਂ ਸਾਫ਼ ਕਰੋ**:
+4. **ਜਦੋਂ ਜ਼ਰੂਰਤ ਨਾ ਹੋਵੇ ਤਾਂ ਸਾਫ਼ ਕਰੋ**:
    ```bash
    azd down --force --purge
    ```
 
 ### ਮੁਫ਼ਤ ਟੀਅਰ ਵਿਕਲਪ
 
-ਸਿੱਖਣ/ਟੈਸਟਿੰਗ ਲਈ, ਵਿਚਾਰ ਕਰੋ:
-- ✅ Azure ਮੁਫ਼ਤ credits ($200 ਪਹਿਲੇ 30 ਦਿਨਾਂ ਲਈ ਨਵੇਂ ਖਾਤਿਆਂ ਨਾਲ)
-- ✅ ਘੱਟੋ-ਘੱਟ replicas ਰੱਖੋ (ਲਗਭਗ 50% ਲਾਗਤ ਬਚਾਉਂਦਾ ਹੈ)
-- ✅ ਟੈਸਟਿੰਗ ਤੋਂ ਬਾਅਦ ਮਿਟਾਓ (ਕੋਈ ongoing charges ਨਹੀਂ)
-- ✅ ਸਿੱਖਣ ਸੈਸ਼ਨ ਦੇ ਵਿਚਕਾਰ scale to zero ਕਰੋ
+ਸਿੱਖਣ/ਪਰੀਖਣ ਲਈ, ਵਿਚਾਰ ਕਰੋ:
+- ✅ Azure ਮੁਫ਼ਤ ਕਰੈਡਿਟ ਵਰਤੋ ($200 ਪਹਿਲੇ 30 ਦਿਨਾਂ ਲਈ ਨਵੇਂ ਖਾਤਿਆਂ ਲਈ)
+- ✅ ਘੱਟੋ ਘੱਟ ਰੇਪਲਿਕਾ ਰੱਖੋ (ਲਗਭਗ 50% ਲਾਗਤ ਬਚਾਓ)
+- ✅ ਟੈਸਟਿੰਗ ਤੋਂ ਬਾਅਦ ਮਿਟਾਓ (ਕੋਈ ਲਗਾਤਾਰ ਚਾਰਜ ਨਹੀਂ)
+- ✅ ਸਿੱਖਣ ਵਾਲੀਆਂ ਸੈਸ਼ਨਾਂ ਦੇ ਵਿਚਕਾਰ ਜ਼ੀਰੋ ਤਕ ਸਕੇਲ ਕਰੋ
 
-**ਉਦਾਹਰਨ**: ਇਸ ਉਦਾਹਰਨ ਨੂੰ 2 ਘੰਟੇ/ਦਿਨ × 30 ਦਿਨਾਂ ਲਈ ਚਲਾਉਣਾ = ~$5/month ਬਜਾਏ $60/month
+**ਉਦਾਹਰਨ**: ਇਸ ਉਦਾਹਰਨ ਨੂੰ 2 ਘੰਟੇ/ਰੋਜ਼ × 30 ਦਿਨ ਚਲਾਉਣ ਨਾਲ = ~$5/ਮਹੀਨਾ ਬਜਾਏ $60/ਮਹੀਨਾ
 
 ---
 
-## Troubleshooting Quick Reference
+## ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ ਤੁਰੰਤ ਸੰਦਰਭ
 
-### ਸਮੱਸਿਆ: `azd up` "Subscription not found" ਨਾਲ ਅਸਫਲ ਹੁੰਦਾ ਹੈ
+### ਸਮੱਸਿਆ: `azd up` "Subscription not found" ਨਾਲ ਫੇਲ ਹੁੰਦਾ ਹੈ
 
-**Solution**:
+**ਉਪਾਇ**:
 ```bash
-# ਸਪਸ਼ਟ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਾਲ ਮੁੜ ਲੌਗਇਨ ਕਰੋ
+# ਫਿਰ ਤੋਂ ਸਪਸ਼ਟ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਾਲ ਲੌਗਿਨ ਕਰੋ
 az account set --subscription <your-subscription-id>
 azd env set AZURE_SUBSCRIPTION_ID <your-subscription-id>
 azd up
@@ -880,12 +1139,12 @@ azd up
 
 ### ਸਮੱਸਿਆ: API Gateway 503 "Product service unavailable" ਵਾਪਸ ਕਰਦਾ ਹੈ
 
-**Diagnose**:
+**ਡਾਇਗਨੋਜ਼**:
 ```bash
-# ਉਤਪਾਦ ਸੇਵਾ ਲੌਗਸ ਦੀ ਜਾਂਚ ਕਰੋ
-azd logs product-service --tail 50
+# Azure CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਉਤਪਾਦ ਸੇਵਾ ਦੇ ਲੌਗ ਚੈੱਕ ਕਰੋ
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
-# ਉਤਪਾਦ ਸੇਵਾ ਦੀ ਸਿਹਤ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਉਤਪਾਦ ਸੇਵਾ ਦੀ ਸਿਹਤ ਜਾਂਚੋ
 az containerapp show \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -893,40 +1152,40 @@ az containerapp show \
 ```
 
 **ਆਮ ਕਾਰਨ**:
-1. Product service ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਈ (Python errors ਲਈ logs ਚੈੱਕ ਕਰੋ)
-2. Health check ਅਸਫਲ ਹੋ ਰਿਹਾ ਹੈ (`/health` endpoint ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ)
-3. Container image build ਅਸਫਲ ਹੋਈ (image ਲਈ registry ਚੈੱਕ ਕਰੋ)
+1. Product service ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਈ (Python errors ਲਈ ਲੋਗ ਚੈੱਕ ਕਰੋ)
+2. Health check ਫੇਲ ਹੋ ਰਿਹਾ ਹੈ (verify `/health` endpoint works)
+3. Container image build failed (check registry for image)
 
-### ਸਮੱਸਿਆ: Autoscaling ਕੰਮ ਨਹੀਂ ਕਰ ਰਿਹਾ
+### ਸਮੱਸਿਆ: ਆਟੋਸਕੇਲਿੰਗ ਕੰਮ ਨਹੀਂ ਕਰ ਰਹੀ
 
-**Diagnose**:
+**ਡਾਇਗਨੋਜ਼**:
 ```bash
-# ਮੌਜੂਦਾ ਰਿਪਲਿਕਾ ਗਿਣਤੀ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਮੌਜੂਦਾ ਰੇਪਲੀਕਾ ਗਿਣਤੀ ਜਾਂਚੋ
 az containerapp revision list \
   --name $(azd env get-values | grep API_GATEWAY | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "[].properties.replicas"
 
-# ਟੈਸਟ ਕਰਨ ਲਈ ਲੋਡ ਤਿਆਰ ਕਰੋ
+# ਟੈਸਟ ਕਰਨ ਲਈ ਲੋਡ ਬਣਾਓ
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# ਸਕੇਲਿੰਗ ਘਟਨਾਵਾਂ ਨੂੰ ਦੇਖੋ
-azd logs api-gateway --follow | grep -i scale
+# Azure CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਸਕੇਲਿੰਗ ਘਟਨਾਵਾਂ ਵੇਖੋ
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
 **ਆਮ ਕਾਰਨ**:
-1. ਲੋਡ autoscaling rule ਨੂੰ trigger ਕਰਨ ਲਈ ਕਾਫ਼ੀ ਨਹੀਂ ਹੈ (50 concurrent requests ਤੋਂ ਵੱਧ ਦੀ ਲੋੜ ਹੈ)
-2. Max replicas ਪਹਿਲਾਂ ਹੀ ਪਹੁੰਚ ਗਏ ਹਨ (Bicep configuration ਚੈੱਕ ਕਰੋ)
-3. Scale rule Bicep ਵਿੱਚ ਗਲਤ ਕਨਫਿਗਰ ਕੀਤਾ ਗਿਆ ਹੈ (concurrentRequests value ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ)
+1. ਲੋਡ ਸਕੇਲ ਨਿਯਮ ਨੂੰ ਟ੍ਰਿਗਰ ਕਰਨ ਲਈ ਕਾਫ਼ੀ ਉੱਚਾ ਨਹੀਂ (50+ concurrent requests ਦੀ ਲੋੜ ਹੈ)
+2. Max replicas ਪਹਿਲਾਂ ਹੀ ਪਹੁੰਚ ਗਈ (Bicep configuration ਚੈੱਕ ਕਰੋ)
+3. Scale rule Bicep ਵਿੱਚ ਗਲਤ ਕਨਫਿਗਰ ਹੈ (concurrentRequests value ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ)
 
-### ਸਮੱਸਿਆ: Application Insights logs ਨਹੀਂ ਦਿਖਾ ਰਿਹਾ
+### ਸਮੱਸਿਆ: Application Insights ਲੋਗ ਨਹੀਂ ਦਿਖਾ ਰਿਹਾ
 
-**Diagnose**:
+**ਡਾਇਗਨੋਜ਼**:
 ```bash
-# ਕਨੈਕਸ਼ਨ ਸਟ੍ਰਿੰਗ ਸੈਟ ਹੋਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
+# ਪੁਸ਼ਟੀ ਕਰੋ ਕਿ ਕਨੈਕਸ਼ਨ ਸਟਰਿੰਗ ਸੈੱਟ ਹੈ
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# ਜਾਂਚੋ ਕਿ ਸੇਵਾਵਾਂ ਟੈਲੀਮੈਟਰੀ ਭੇਜ ਰਹੀਆਂ ਹਨ
+# ਜਾਂਚ ਕਰੋ ਕਿ ਸੇਵਾਵਾਂ ਟੈਲੀਮੀਟਰੀ ਭੇਜ ਰਹੀਆਂ ਹਨ
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -934,73 +1193,73 @@ az monitor app-insights component show \
 ```
 
 **ਆਮ ਕਾਰਨ**:
-1. Connection string container ਨੂੰ ਨਹੀਂ ਦਿੱਤੀ ਗਈ (environment variables ਚੈੱਕ ਕਰੋ)
-2. Application Insights SDK ਕਨਫਿਗਰ ਨਹੀਂ ਕੀਤਾ ਗਿਆ (code ਵਿੱਚ imports ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ)
-3. Firewall telemetry ਨੂੰ ਰੋਕ ਰਿਹਾ ਹੈ (ਕਦਾਚਿਤ, network rules ਚੈੱਕ ਕਰੋ)
+1. Connection string ਕੰਟੇਨਰ ਨੂੰ ਨਹੀਂ ਪਾਸ ਕੀਤੀ ਗਈ (environment variables ਚੈੱਕ ਕਰੋ)
+2. Application Insights SDK ਕਨਫਿਗਰ ਨਹੀਂ (verify imports in code)
+3. ਫਾਇਰਵਾਲ ਟੈਲੇਮੈਟਰੀ ਰੋਕ ਰਿਹਾ ਹੈ (ਘਟਨਾ ਵਿਰਲੇ, network rules ਚੈੱਕ ਕਰੋ)
 
-### ਸਮੱਸਿਆ: Docker build ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਅਸਫਲ ਹੁੰਦਾ ਹੈ
+### ਸਮੱਸਿਆ: Docker ਬਿਲਡ ਲੋਕਲ ਤੌਰ ਤੇ ਫੇਲ ਹੁੰਦਾ ਹੈ
 
-**Diagnose**:
+**ਡਾਇਗਨੋਜ਼**:
 ```bash
-# API ਗੇਟਵੇ ਬਣਾਉਣ ਦੀ ਜਾਂਚ ਕਰੋ
+# API ਗੇਟਵੇ ਬਿਲਡ ਦੀ ਜਾਂਚ
 cd src/api-gateway
 docker build -t test-gateway .
 
-# ਪ੍ਰੋਡਕਟ ਸੇਵਾ ਬਣਾਉਣ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਉਤਪਾਦ ਸੇਵਾ ਬਿਲਡ ਦੀ ਜਾਂਚ
 cd ../product-service
 docker build -t test-product .
 ```
 
 **ਆਮ ਕਾਰਨ**:
-1. package.json/requirements.txt ਵਿੱਚ dependencies ਦੀ ਘਾਟ
-2. Dockerfile syntax errors
-3. Dependencies ਡਾਊਨਲੋਡ ਕਰਨ ਵਿੱਚ network issues
+1. package.json/requirements.txt ਵਿੱਚ ਡਿਪੈਂਡੈਂਸੀ ਦੀ ਘਾਟ
+2. Dockerfile ਸਿੰਟੈਕਸ ਗਲਤੀਆਂ
+3. ਡਿਪੈਂਡੈਂਸੀ ਡਾਊਨਲੋਡ ਕਰਨ ਵਿੱਚ ਨੈੱਟਵਰਕ ਸਮੱਸਿਆਵਾਂ
 
-**ਹਾਲੇ ਵੀ ਫਸੇ ਹੋ?** [Common Issues Guide](../../docs/troubleshooting/common-issues.md) ਜਾਂ [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting) ਵੇਖੋ
+**ਅਜੇ ਵੀ ਫਸੇ ਹੋ?** ਵੇਖੋ [Common Issues Guide](../../docs/chapter-07-troubleshooting/common-issues.md) ਜਾਂ [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
-## Cleanup
+## ਕਲੀਨਅੱਪ
 
-ਚਾਰਜਾਂ ਤੋਂ ਬਚਣ ਲਈ, ਸਾਰੇ resources ਮਿਟਾਓ:
+ਚੱਲ ਰਹੇ ਚਾਰਜਾਂ ਤੋਂ ਬਚਣ ਲਈ, ਸਾਰੇ ਰਿਸੋਰਸ ਮਿਟਾਓ:
 
 ```bash
 azd down --force --purge
 ```
 
-**Confirmation Prompt**:
+**ਪੁਸ਼ਟੀ ਪ੍ਰਾਂਪਟ**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-`y` ਟਾਈਪ ਕਰੋ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ।
+ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ `y` ਟਾਈਪ ਕਰੋ।
 
-**ਕੀ ਮਿਟਾਇਆ ਜਾਵੇਗਾ**:
+**ਕੀ ਮਿਟਾਇਆ ਜਾਂਦਾ ਹੈ**:
 - Container Apps Environment
-- ਦੋ Container Apps (gateway & product service)
+- ਦੋਹਾਂ Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Cleanup ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ**:
+**✓ ਕਲੀਨਅੱਪ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-ਖਾਲੀ ਵਾਪਸ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ।
+ਖਾਲੀ ਵਾਪਸ ਆਣਾ ਚਾਹੀਦਾ ਹੈ।
 
 ---
 
-## ਵਿਸਤਾਰ ਗਾਈਡ: 2 ਤੋਂ 5+ ਸੇਵਾਵਾਂ
+## ਵਿਸਥਾਰ ਗਾਈਡ: 2 ਤੋਂ 5+ ਸੇਵਾਵਾਂ ਵੱਲ
 
-ਜਦੋਂ ਤੁਸੀਂ ਇਸ 2-service architecture ਨੂੰ ਮਾਸਟਰ ਕਰ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਇਸਨੂੰ ਵਧਾਉਣ ਦਾ ਤਰੀਕਾ:
+ਜਦੋਂ ਤੁਸੀਂ ਇਸ 2-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰ 'ਤੇ ਪ੍ਰਾਵੀਨ ਹੋ ਜਾਵੋਗੇ, ਇੱਥੇ ਇਹਨਾਂ ਨੂੰ ਵਧਾਉਣ ਦਾ ਤਰੀਕਾ ਹੈ:
 
-### ਚਰਨ 1: ਡਾਟਾਬੇਸ Persistence ਸ਼ਾਮਲ ਕਰੋ (ਅਗਲਾ ਕਦਮ)
+### ਫੇਜ਼ 1: ਡੇਟਾਬੇਸ ਪ੍ਰਸਿਸਟੈਂਸ ਸ਼ਾਮਲ ਕਰੋ (ਅਗਲਾ ਕਦਮ)
 
 **Product Service ਲਈ Cosmos DB ਸ਼ਾਮਲ ਕਰੋ**:
 
-1. `infra/core/cosmos.bicep` ਬਣਾਓ:
+1. ਬਣਾਓ `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -1014,132 +1273,139 @@ az group list --query "[?starts_with(name,'rg-microservices')]" --output table
    }
    ```
 
-2. Product Service ਨੂੰ in-memory data ਦੀ ਬਜਾਏ Azure Cosmos DB Python SDK ਵਰਤਣ ਲਈ ਅਪਡੇਟ ਕਰੋ
+2. product service ਨੂੰ ਅਪਡੇਟ ਕਰੋ ਤਾਂ ਜੋ in-memory ਡਾਟਾ ਦੀ ਥਾਂ Azure Cosmos DB Python SDK ਵਰਤੇ
 
-3. ਅਨੁਮਾਨਿਤ ਵਾਧੂ ਲਾਗਤ: ~$25/month (serverless)
+3. ਅੰਦਾਜ਼ਿਤ ਵਾਧੂ ਲਾਗਤ: ~$25/month (serverless)
 
-### ਚਰਨ 2: ਤੀਜੀ ਸੇਵਾ ਸ਼ਾਮਲ ਕਰੋ (Order Management)
+### ਫੇਜ਼ 2: ਤੀਜੀ ਸੇਵਾ ਜੋੜੋ (Order Management)
 
 **Order Service ਬਣਾਓ**:
 
 1. ਨਵਾਂ ਫੋਲਡਰ: `src/order-service/` (Python/Node.js/C#)
 2. ਨਵਾਂ Bicep: `infra/app/order-service.bicep`
 3. API Gateway ਨੂੰ `/api/orders` ਰੂਟ ਕਰਨ ਲਈ ਅਪਡੇਟ ਕਰੋ
-4. Order persistence ਲਈ Azure SQL Database ਸ਼ਾਮਲ ਕਰੋ
+4. Order persistence ਲਈ Azure SQL Database ਜੋੜੋ
 
-**Architecture ਬਣ ਜਾਂਦਾ ਹੈ**:
+**ਆਰਕੀਟੈਕਚਰ ਬਣ ਜਾਂਦੀ ਹੈ**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### ਚਰਨ 3: Async Communication ਸ਼ਾਮਲ ਕਰੋ (Service Bus)
+### ਫੇਜ਼ 3: ਐਸਿੰਕ ਸਾਂਝ (Service Bus)
 
-**Event-Driven Architecture ਲਾਗੂ ਕਰੋ**:
+**ਈਵੈਂਟ-ਡ੍ਰਿਵਨ ਆਰਕੀਟੈਕਚਰ ਲਾਗੂ ਕਰੋ**:
 
-1. Azure Service Bus ਸ਼ਾਮਲ ਕਰੋ: `infra/core/servicebus.bicep`
-2. Product Service "ProductCreated" events ਪਬਲਿਸ਼ ਕਰਦਾ ਹੈ
-3. Order Service product events ਨੂੰ subscribe ਕਰਦਾ ਹੈ
-4. Notification Service events ਨੂੰ process ਕਰਨ ਲਈ ਸ਼ਾਮਲ ਕਰੋ
+1. Azure Service Bus ਜੋੜੋ: `infra/core/servicebus.bicep`
+2. Product Service "ProductCreated" ਇਵੈਂਟ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਦਾ ਹੈ
+3. Order Service product ਇਵੈਂਟਸ ਨੂੰ subscribe ਕਰਦਾ ਹੈ
+4. ਇਵੈਂਟਸ ਨੂੰ ਪ੍ਰਕਿਰਿਆ ਕਰਨ ਲਈ Notification Service ਜੋੜੋ
 
-**Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
+**ਪੈਟਰਨ**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
-### ਚਰਨ 4: User Authentication ਸ਼ਾਮਲ ਕਰੋ
+### ਫੇਜ਼ 4: ਯੂਜ਼ਰ ਆਥੇਂਟੀਕੇਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ
 
 **User Service ਲਾਗੂ ਕਰੋ**:
 
-1. `src/user-service/` ਬਣਾਓ (Go/Node.js)
-2. Azure AD B2C ਜਾਂ custom JWT authentication ਸ਼ਾਮਲ ਕਰੋ
-3. API Gateway tokens ਨੂੰ validate ਕਰਦਾ ਹੈ ਰੂਟ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ
-4. ਸੇਵਾਵਾਂ user permissions ਨੂੰ ਚੈੱਕ ਕਰਦੀਆਂ ਹਨ
+1. ਬਣਾਓ `src/user-service/` (Go/Node.js)
+2. Azure AD B2C ਜਾਂ custom JWT authentication ਜੋੜੋ
+3. API Gateway ਰੂਟ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਟੋਕਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰਦਾ ਹੈ
+4. ਸੇਵਾਵਾਂ ਯੂਜ਼ਰ ਪਰਮਿਸ਼ਨ ਚੈੱਕ ਕਰਦੀਆਂ ਹਨ
 
-### ਚਰਨ 5: Production Readiness
+### ਫੇਜ਼ 5: ਪ੍ਰੋਡਕਸ਼ਨ ਤਿਆਰੀ
 
-**ਇਹ Components ਸ਼ਾਮਲ ਕਰੋ**:
-- ✅ Azure Front Door (global load balancing)
-- ✅ Azure Key Vault (secret management)
-- ✅ Azure Monitor Workbooks (custom dashboards)
+**ਇਹ ਕੰਪੋਨੈਂਟ ਜੋੜੋ**:
+- ✅ Azure Front Door (ਗਲੋਬਲ ਲੋਡ ਬੈਲੈਂਸਿੰਗ)
+- ✅ Azure Key Vault (ਸਿਕ੍ਰੇਟ ਪ੍ਰਬੰਧਨ)
+- ✅ Azure Monitor Workbooks (ਕਸਟਮ ਡੈਸ਼ਬੋਰਡ)
 - ✅ CI/CD Pipeline (GitHub Actions)
 - ✅ Blue-Green Deployments
-- ✅ Managed Identity for all services
+- ✅ ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ ਲਈ Managed Identity
 
-**Full Production Architecture Cost**: ~$300-1,400/month
+**ਪੂਰਾ ਪ੍ਰੋਡਕਸ਼ਨ ਆਰਕੀਟੈਕਚਰ ਲਾਗਤ**: ~$300-1,400/month
 
 ---
 
-## ਹੋਰ ਸਿੱਖੋ
+## ਹੋਰ ਜਾਣੋ
 
-### ਸੰਬੰਧਿਤ ਦਸਤਾਵੇਜ਼
+### ਸਬੰਧਤ ਡਾਕਯੂਮੈਂਟੇਸ਼ਨ
 - [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
 - [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
 - [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### ਇਸ ਕੋਰਸ ਵਿੱਚ ਅਗਲੇ ਕਦਮ
-- ← ਪਿਛਲਾ: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - ਸ਼ੁਰੂਆਤੀ single-container ਉਦਾਹਰਨ
-- → ਅਗਲਾ: [AI Integration Guide](../../../../docs/ai-foundry) - AI ਸਮਰੱਥਾ ਸ਼ਾਮਲ ਕਰੋ
+### ਇਸ ਕੋਰਸ ਦੇ ਅਗਲੇ ਕਦਮ
+- ← ਪਿਛਲਾ: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - ਸ਼ੁਰੂਆਤੀ ਇੱਕ-ਕੰਟੇਨਰ ਉਦਾਹਰਨ
+- → ਅਗਲਾ: [AI Integration Guide](../../../../docs/ai-foundry) - AI ਸਮਰੱਥਾਵਾਂ ਜੋੜੋ
 - 🏠 [Course Home](../../README.md)
 
-### ਤੁਲਨਾ: ਕਦੋਂ ਕੀ ਵਰਤਣਾ ਹੈ
+### ਤੁਲਨਾ: ਕਦੋਂ ਕਿਹੜਾ ਵਰਤਣਾ
 
-| Feature | Single Container | Microservices (
-| **ਸਰਬੋਤਮ ਲਈ** | MVPs, ਪ੍ਰੋਟੋਟਾਈਪ | ਪ੍ਰੋਡਕਸ਼ਨ ਐਪਸ | ਮਲਟੀ-ਕਲਾਉਡ, ਅਡਵਾਂਸਡ ਨੈਟਵਰਕਿੰਗ |
+| ਫੀਚਰ | ਸਿੰਗਲ ਕਨਟੇਨਰ | ਮਾਈਕ੍ਰੋਸਰਵਿਸ (ਇਹ) | Kubernetes (AKS) |
+|---------|-----------------|---------------------|------------------|
+| **ਵਰਤੋਂ ਮਾਮਲਾ** | ਸਧਾਰਨ ਐਪ | ਜਟਿਲ ਐਪ | ਐਂਟਰਪ੍ਰਾਈਜ਼ ਐਪ |
+| **ਸਕੇਲਬਿਲਟੀ** | ਇਕ ਸੇਵਾ | ਪ੍ਰਤੀ-ਸੇਵਾ ਸਕੇਲਿੰਗ | ਅਧਿਕਤਮ ਲਚਕੀਲਾਪਣ |
+| **ਜਟਿਲਤਾ** | ਘੱਟ | ਦਰਮਿਆਨਾ | ਉੱਚ |
+| **ਟੀਮ ਸਾਈਜ਼** | 1-3 ਡਿਵੈਲਪਰ | 3-10 ਡਿਵੈਲਪਰ | 10+ ਡਿਵੈਲਪਰ |
+| **ਲਾਗਤ** | ~$15-50/month | ~$60-250/month | ~$150-500/month |
+| **ਡਿਪਲੋਯਮੈਂਟ ਸਮਾਂ** | 5-10 minutes | 8-12 minutes | 15-30 minutes |
+| **ਲਈ ਸਭ ਤੋਂ ਵਧੀਆ** | MVPs, ਪ੍ਰੋਟੋਟਾਈਪ | ਉਤਪਾਦਨ ਐਪਸ | ਮਲਟੀ-ਕਲਾਉਡ, ਉੱਨਤ ਨੈਟਵਰਕਿੰਗ |
 
-**ਸਿਫਾਰਸ਼**: ਕੰਟੇਨਰ ਐਪਸ (ਇਸ ਉਦਾਹਰਨ) ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ, AKS 'ਤੇ ਸਿਰਫ਼ ਤਦ ਹੀ ਜਾਓ ਜਦੋਂ ਤੁਹਾਨੂੰ Kubernetes-ਵਿਸ਼ੇਸ਼ ਫੀਚਰਾਂ ਦੀ ਲੋੜ ਹੋਵੇ।
+**ਸਿਫ਼ਾਰਿਸ਼**: Container Apps (ਇਹ ਉਦਾਹਰਨ) ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ, AKS ਵੱਲ ਤਦ ਹੀ ਜਾਓ ਜਦੋਂ ਤੁਹਾਨੂੰ Kubernetes-ਖਾਸ ਫੀਚਰਾਂ ਦੀ ਲੋੜ ਹੋਵੇ।
 
 ---
 
-## ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ
+## ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸਵਾਲ
 
-**ਸਵਾਲ: ਸਿਰਫ਼ 2 ਸੇਵਾਵਾਂ 5+ ਦੀ ਬਜਾਏ ਕਿਉਂ?**  
-ਜਵਾਬ: ਸਿੱਖਣ ਦੀ ਤਰੱਕੀ। ਪੇਚੀਦਗੀ ਵਧਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਇੱਕ ਸਧਾਰਨ ਉਦਾਹਰਨ ਨਾਲ ਮੁੱਢਲੇ ਗੁਣਾਂ (ਸੇਵਾ ਸੰਚਾਰ, ਮਾਨੀਟਰਿੰਗ, ਸਕੇਲਿੰਗ) ਨੂੰ ਸਮਝੋ। ਇੱਥੇ ਸਿੱਖੇ ਪੈਟਰਨ 100-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰਾਂ 'ਤੇ ਲਾਗੂ ਹੁੰਦੇ ਹਨ।
+**Q: 5+ ਦੀ ਥਾਂ ਕੇਵਲ 2 ਸੇਵਾਵਾਂ ਕਿਉਂ?**  
+A: ਸਿੱਖਣਕ੍ਰਮਕ ਤਰੱਕੀ। ਬੁਨਿਆਦੀ ਗੱਲਾਂ ਨੂੰ (service communication, monitoring, scaling) ਇੱਕ ਸਧਾਰਣ ਉਦਾਹਰਨ ਨਾਲ ਮਾਹਿਰ ਹੋਵੋ ਪਹਿਲਾਂ ਜਦੋਂ ਕਿ ਜਟਿਲਤਾ ਜੋੜੋ। ਇੱਥੇ ਜੋ ਪੈਟਰਨ ਤੁਸੀਂ ਸਿੱਖਦੇ ਹੋ ਉਹ 100-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰਾਂ 'ਤੇ ਲਾਗੂ ਹੁੰਦੇ ਹਨ।
 
-**ਸਵਾਲ: ਕੀ ਮੈਂ ਹੋਰ ਸੇਵਾਵਾਂ ਖੁਦ ਸ਼ਾਮਲ ਕਰ ਸਕਦਾ ਹਾਂ?**  
-ਜਵਾਬ: ਬਿਲਕੁਲ! ਉਪਰ ਦਿੱਤੇ ਵਿਸਥਾਰ ਗਾਈਡ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਹਰ ਨਵੀਂ ਸੇਵਾ ਇੱਕੋ ਪੈਟਰਨ ਦੀ ਪਾਲਣਾ ਕਰਦੀ ਹੈ: src ਫੋਲਡਰ ਬਣਾਓ, Bicep ਫਾਈਲ ਬਣਾਓ, azure.yaml ਅਪਡੇਟ ਕਰੋ, ਡਿਪਲੌਇ ਕਰੋ।
+**Q: ਕੀ ਮੈੰ ਹੋਰ ਸੇਵਾਵਾਂ ਆਪਣੇ ਆਪ ਜੋੜ ਸਕਦਾ ਹਾਂ?**  
+A: ਬਿਲਕੁਲ! ਉੱਪਰ ਦਿੱਤੇ ਵਾਧਾ ਮਾਰਗਦਰਸ਼ਨ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਹਰ ਨਵੀਂ ਸੇਵਾ ਇਕੋ ਜਿਹਾ ਪੈਟਰਨ ਫਾਲੋ ਕਰਦੀ ਹੈ: src ਫੋਲਡਰ ਬਣਾਓ, Bicep ਫਾਇਲ ਬਣਾਓ, azure.yaml ਅੱਪਡੇਟ ਕਰੋ, ਅਤੇ ਤੈਨਾਤ ਕਰੋ।
 
-**ਸਵਾਲ: ਕੀ ਇਹ ਪ੍ਰੋਡਕਸ਼ਨ-ਤਿਆਰ ਹੈ?**  
-ਜਵਾਬ: ਇਹ ਇੱਕ ਮਜ਼ਬੂਤ ਨੀਂਹ ਹੈ। ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ ਸ਼ਾਮਲ ਕਰੋ: ਮੈਨੇਜਡ ਆਈਡੈਂਟਿਟੀ, Key Vault, ਪERSISTENT ਡੇਟਾਬੇਸ, CI/CD ਪਾਈਪਲਾਈਨ, ਮਾਨੀਟਰਿੰਗ ਅਲਰਟਸ, ਅਤੇ ਬੈਕਅਪ ਸਟ੍ਰੈਟਜੀ।
+**Q: ਕੀ ਇਹ ਉਤਪਾਦਨ-ਤਿਆਰ ਹੈ?**  
+A: ਇਹ ਇੱਕ ਮਜ਼ਬੂਤ ਬੁਨਿਆਦ ਹੈ। ਉਤਪਾਦਨ ਲਈ, ਇਹ ਸ਼ਾਮਲ ਕਰੋ: managed identity, Key Vault, ਸਥਾਈ ਡੇਟਾਬੇਸ, CI/CD ਪਾਈਪਲਾਈਨ, ਮਾਨੀਟਰਿੰਗ ਅਲਰਟ ਅਤੇ ਬੈਕਅਪ ਰਣਨੀਤੀ।
 
-**ਸਵਾਲ: Dapr ਜਾਂ ਹੋਰ ਸੇਵਾ ਮੈਸ਼ ਕਿਉਂ ਨਹੀਂ ਵਰਤਦੇ?**  
-ਜਵਾਬ: ਸਿੱਖਣ ਲਈ ਸਧਾਰਨ ਰੱਖੋ। ਜਦੋਂ ਤੁਸੀਂ ਮੂਲ ਕੰਟੇਨਰ ਐਪਸ ਨੈਟਵਰਕਿੰਗ ਨੂੰ ਸਮਝ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਅਡਵਾਂਸਡ ਸਨਰੀਓਜ਼ (ਸਟੇਟ ਮੈਨੇਜਮੈਂਟ, pub/sub, ਬਾਈਂਡਿੰਗ) ਲਈ Dapr ਨੂੰ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ।
+**Q: Dapr ਜਾਂ ਹੋਰ service mesh ਕਿਉਂ ਨਹੀਂ ਵਰਤਦੇ?**  
+A: ਸਿੱਖਣ ਲਈ ਇਸਨੂੰ ਸਧਾਰਨ ਰੱਖੋ। ਜਦੋਂ ਤੁਸੀਂ ਨੈਟਿਵ Container Apps ਨੈਟਵਰਕਿੰਗ ਨੂੰ ਸਮਝ ਲੈ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਉन्नਤ ਸਿਨਾਰਿਓਜ਼ ਲਈ Dapr ਲੇਅਰ ਕਰ ਸਕਦੇ ਹੋ (ਅਵਸਥਾ ਪ੍ਰਬੰਧਨ, pub/sub, bindings)।
 
-**ਸਵਾਲ: ਮੈਂ ਲੋਕਲ ਡੀਬੱਗ ਕਿਵੇਂ ਕਰ ਸਕਦਾ ਹਾਂ?**  
-ਜਵਾਬ: Docker ਨਾਲ ਸੇਵਾਵਾਂ ਨੂੰ ਲੋਕਲ ਚਲਾਓ:  
+**Q: ਮੈਂ ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਕਿਵੇਂ ਡੀਬੱਗ ਕਰਾਂ?**  
+A: Docker ਨਾਲ ਸੇਵਾਵਾਂ ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਚਲਾਓ:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
-  
-**ਸਵਾਲ: ਕੀ ਮੈਂ ਵੱਖ-ਵੱਖ ਪ੍ਰੋਗਰਾਮਿੰਗ ਭਾਸ਼ਾਵਾਂ ਵਰਤ ਸਕਦਾ ਹਾਂ?**  
-ਜਵਾਬ: ਹਾਂ! ਇਹ ਉਦਾਹਰਨ Node.js (gateway) + Python (product service) ਦਿਖਾਉਂਦੀ ਹੈ। ਤੁਸੀਂ ਕੋਈ ਵੀ ਭਾਸ਼ਾਵਾਂ ਮਿਲਾ ਸਕਦੇ ਹੋ ਜੋ ਕੰਟੇਨਰਾਂ ਵਿੱਚ ਚੱਲਦੀਆਂ ਹਨ: C#, Go, Java, Ruby, PHP, ਆਦਿ।
 
-**ਸਵਾਲ: ਜੇ ਮੇਰੇ ਕੋਲ Azure credits ਨਹੀਂ ਹਨ ਤਾਂ ਕੀ ਕਰਨਾ?**  
-ਜਵਾਬ: Azure ਫ੍ਰੀ ਟੀਅਰ ਵਰਤੋ (ਨਵੇਂ ਖਾਤਿਆਂ ਲਈ ਪਹਿਲੇ 30 ਦਿਨਾਂ ਵਿੱਚ $200 ਕ੍ਰੈਡਿਟ ਮਿਲਦੇ ਹਨ) ਜਾਂ ਛੋਟੇ ਟੈਸਟਿੰਗ ਪੀਰੀਅਡ ਲਈ ਡਿਪਲੌਇ ਕਰੋ ਅਤੇ ਤੁਰੰਤ ਮਿਟਾਓ। ਇਹ ਉਦਾਹਰਨ ~$2/ਦਿਨ ਦੀ ਲਾਗਤ ਕਰਦੀ ਹੈ।
+**Q: ਕੀ ਮੈਂ ਵੱਖ-ਵੱਖ ਪ੍ਰੋਗ੍ਰਾਮਿੰਗ ਭਾਸ਼ਾਵਾਂ ਵਰਤ ਸਕਦਾ ਹਾਂ?**  
+A: ਹਾਂ! ਇਹ ਉਦਾਹਰਨ Node.js (gateway) + Python (product service) ਦਿਖਾਉਂਦੀ ਹੈ। ਤੁਸੀਂ ਉਹਨਾਂ ਕਿਸੇ ਵੀ ਭਾਸ਼ਾ ਨੂੰ ਮਿਲਾ ਸਕਦੇ ਹੋ ਜੋ ਕੰਟੇਨਰਾਂ ਵਿੱਚ ਚਲਦੀ ਹੈ: C#, Go, Java, Ruby, PHP, ਆਦਿ।
 
-**ਸਵਾਲ: ਇਹ Azure Kubernetes Service (AKS) ਤੋਂ ਕਿਵੇਂ ਵੱਖ ਹੈ?**  
-ਜਵਾਬ: ਕੰਟੇਨਰ ਐਪਸ ਸਧਾਰਨ ਹੈ (Kubernetes ਦੀ ਜਾਣਕਾਰੀ ਦੀ ਲੋੜ ਨਹੀਂ) ਪਰ ਘੱਟ ਲਚੀਲਾ। AKS ਤੁਹਾਨੂੰ ਪੂਰੀ Kubernetes ਕੰਟਰੋਲ ਦਿੰਦਾ ਹੈ ਪਰ ਵਧੇਰੇ ਮਾਹਰਤਾ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। ਕੰਟੇਨਰ ਐਪਸ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ, ਜਰੂਰਤ ਪੈਣ 'ਤੇ AKS 'ਤੇ ਜਾਓ।
+**Q: ਜੇ ਮੇਰੇ ਕੋਲ Azure credits ਨਾ ਹੋਣ ਤਾਂ ਕੀ?**  
+A: Azure ਫ੍ਰੀ ਟੀਅਰ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਨਵੇਂ ਖਾਤਿਆਂ ਲਈ ਪਹਿਲੇ 30 ਦਿਨਾਂ ਵਿੱਚ $200 credits ਮਿਲਦੇ ਹਨ) ਜਾਂ ਛੋਟੇ ਟੈਸਟਿੰਗ ਅਵਧੀ ਲਈ ਤੈਨਾਤ ਕਰੋ ਅਤੇ ਤੁਰੰਤ ਮਿਟਾ ਦਿਓ। ਇਸ ਉਦਾਹਰਨ ਦੀ ਲਾਗਤ ~\$2/ਦਿਨ ਹੈ।
 
-**ਸਵਾਲ: ਕੀ ਮੈਂ ਇਸਨੂੰ ਮੌਜੂਦਾ Azure ਸੇਵਾਵਾਂ ਨਾਲ ਵਰਤ ਸਕਦਾ ਹਾਂ?**  
-ਜਵਾਬ: ਹਾਂ! ਤੁਸੀਂ ਮੌਜੂਦਾ ਡੇਟਾਬੇਸ, ਸਟੋਰੇਜ ਅਕਾਊਂਟਸ, Service Bus ਆਦਿ ਨਾਲ ਕਨੈਕਟ ਕਰ ਸਕਦੇ ਹੋ। Bicep ਫਾਈਲਾਂ ਨੂੰ ਅਪਡੇਟ ਕਰੋ ਤਾਂ ਜੋ ਨਵੀਆਂ ਰਿਸੋਰਸਾਂ ਬਣਾਉਣ ਦੀ ਬਜਾਏ ਮੌਜੂਦਾ ਰਿਸੋਰਸਾਂ ਨੂੰ ਰਿਫਰ ਕਰ ਸਕੋ।
+**Q: ਇਹ Azure Kubernetes Service (AKS) ਨਾਲ ਕਿਵੇਂ ਵੱਖਰਾ ਹੈ?**  
+A: Container Apps ਸਧਾਰਣ ਹੈ (Kubernetes ਗਿਆਨ ਦੀ ਲੋੜ ਨਹੀਂ) ਪਰ ਘੱਟ ਲਚਕੀਲਾ ਹੈ। AKS ਤੁਹਾਨੂੰ ਪੂਰਾ Kubernetes ਕੰਟਰੋਲ ਦਿੰਦਾ ਹੈ ਪਰ ਇਸ ਲਈ ਵੱਧ ਮਾਹਿਰਤਾ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। Container Apps ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ, ਜੇ ਲੋੜ ਹੋਵੇ ਤਦ AKS ਵੱਲ ਅੱਗੇ ਵਧੋ।
 
----
-
-> **🎓 ਸਿੱਖਣ ਪਾਥ ਸੰਖੇਪ**: ਤੁਸੀਂ ਸਵੈ-ਚਲਿਤ ਸਕੇਲਿੰਗ, ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ, ਕੇਂਦਰੀ ਮਾਨੀਟਰਿੰਗ, ਅਤੇ ਪ੍ਰੋਡਕਸ਼ਨ-ਤਿਆਰ ਪੈਟਰਨਾਂ ਨਾਲ ਇੱਕ ਮਲਟੀ-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰ ਨੂੰ ਡਿਪਲੌਇ ਕਰਨਾ ਸਿੱਖਿਆ ਹੈ। ਇਹ ਨੀਂਹ ਤੁਹਾਨੂੰ ਪੇਚੀਦਾ ਵੰਡੇ ਸਿਸਟਮਾਂ ਅਤੇ ਐਨਟਰਪ੍ਰਾਈਜ਼ ਮਾਈਕ੍ਰੋਸੇਵਾ ਆਰਕੀਟੈਕਚਰਾਂ ਲਈ ਤਿਆਰ ਕਰਦੀ ਹੈ।
-
-**📚 ਕੋਰਸ ਨੈਵੀਗੇਸ਼ਨ:**  
-- ← ਪਿਛਲਾ: [ਸਧਾਰਨ Flask API](../../../../examples/container-app/simple-flask-api)  
-- → ਅਗਲਾ: [ਡੇਟਾਬੇਸ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਉਦਾਹਰਨ](../../../../database-app)  
-- 🏠 [ਕੋਰਸ ਹੋਮ](../../README.md)  
-- 📖 [ਕੰਟੇਨਰ ਐਪਸ ਸਰਬੋਤਮ ਅਭਿਆਸ](../../docs/deployment/deployment-guide.md)  
+**Q: ਕੀ ਮੈਂ ਇਸ ਨੂੰ ਮੌਜੂਦਾ Azure ਸੇਵਾਵਾਂ ਨਾਲ ਵਰਤ ਸਕਦਾ ਹਾਂ?**  
+A: ਹਾਂ! ਤੁਸੀਂ ਮੌਜੂਦਾ ਡੇਟਾਬੇਸ, ਸਟੋਰੇਜ ਅਕਾਊਂਟ, Service Bus ਆਦਿ ਨਾਲ ਕਨੈਕਟ ਕਰ ਸਕਦੇ ਹੋ। ਨਵੀਆਂ ਸਰੋਤਾਂ ਬਣਾਉਣ ਦੀ ਥਾਂ Bicep ਫਾਇਲਾਂ ਨੂੰ ਮੌਜੂਦਾ ਸਰੋਤਾਂ ਦੀ ਸੰਦਰਭ ਲਈ ਅੱਪਡੇਟ ਕਰੋ।
 
 ---
 
-**✨ ਵਧਾਈ ਹੋਵੇ!** ਤੁਸੀਂ ਮਾਈਕ੍ਰੋਸੇਵਾ ਉਦਾਹਰਨ ਪੂਰਾ ਕਰ ਲਿਆ ਹੈ। ਹੁਣ ਤੁਸੀਂ Azure Container Apps 'ਤੇ ਵੰਡੇ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ, ਡਿਪਲੌਇ ਕਰਨ, ਅਤੇ ਮਾਨੀਟਰ ਕਰਨ ਦਾ ਤਰੀਕਾ ਸਮਝਦੇ ਹੋ। AI ਸਮਰਥਨ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ? [AI ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਗਾਈਡ](../../../../docs/ai-foundry) ਵੇਖੋ!
+> **🎓 ਲਰਨਿੰਗ ਪਾਥ ਸੰਖੇਪ**: ਤੁਸੀਂ ਆਟੋਮੈਟਿਕ ਸਕੇਲਿੰਗ, ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ, ਕੇਂਦਰੀ ਮਾਨੀਟਰਿੰਗ, ਅਤੇ ਪ੍ਰੋਡਕਸ਼ਨ-ਤਿਆਰ ਪੈਟਰਨਾਂ ਨਾਲ ਇੱਕ ਮਲਟੀ-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰ ਤੈਨਾਤ ਕਰਨਾ ਸਿੱਖ ਲਿਆ ਹੈ। ਇਹ ਬੁਨਿਆਦ ਤੁਹਾਨੂੰ ਜਟਿਲ ਵਿਤਰਿਤ ਸਿਸਟਮਾਂ ਅਤੇ ਐਂਟਰਪ੍ਰਾਈਜ਼ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰਾਂ ਲਈ ਤਿਆਰ ਕਰਦੀ ਹੈ।
+
+**📚 ਕੋਰਸ ਨੈਵੀਗੇਸ਼ਨ:**
+- ← ਪਿਛਲਾ: [ਸਧਾਰਨ Flask API](../../../../examples/container-app/simple-flask-api)
+- → ਅਗਲਾ: [ਡੇਟਾਬੇਸ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਉਦਾਹਰਨ](../../../../database-app)
+- 🏠 [ਕੋਰਸ ਹੋਮ](../../README.md)
+- 📖 [Container Apps ਲਈ ਸ਼੍ਰੇਸ਼ਠ ਅਭਿਆਸ](../../docs/chapter-04-infrastructure/deployment-guide.md)
+
+---
+
+**✨ ਵਧਾਈਆਂ!** ਤੁਸੀਂ ਮਾਇਕ੍ਰੋਸਰਵਿਸਾਂ ਦੀ ਉਦਾਹਰਨ ਪੂਰੀ ਕਰ ਲਈ ਹੈ। ਹੁਣ ਤੁਸੀਂ ਸਮਝਦੇ ਹੋ ਕਿ Azure Container Apps 'ਤੇ ਵੰਡੇ ਹੋਏ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਕਿਵੇਂ ਬਣਾਇਆ, ਤੈਨਾਤ ਅਤੇ ਮਾਨੀਟਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਕੀ ਤੁਸੀਂ AI ਸਮਰੱਥਤਾਵਾਂ ਜੋੜਨ ਲਈ ਤਿਆਰ ਹੋ? ਵੇਖੋ [AI ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਗਾਈਡ](../../../../docs/ai-foundry)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਰਤਾ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚਤਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+ਜਵਾਬਦਾਰੀ ਤੋਂ ਇਨਕਾਰ:
+ਇਹ ਦਸਤਾਵੇਜ਼ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ Co-op Translator (https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਤ੍ਰੁਟੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਉਤਪੰਨ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

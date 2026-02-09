@@ -1,47 +1,38 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T23:09:17+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "pa"
-}
--->
-# AZD ਨਾਲ ਕੰਟੇਨਰ ਐਪ ਡਿਪਲੌਇਮੈਂਟ ਦੇ ਉਦਾਹਰਨ
+# AZD ਨਾਲ Container App ਡਿਪਲੋਇਮੈਂਟ ਉਦਾਹਰਨਾਂ
 
-ਇਹ ਡਾਇਰੈਕਟਰੀ AZD (Azure Developer CLI) ਦੀ ਵਰਤੋਂ ਕਰਕੇ Azure Container Apps 'ਤੇ ਕੰਟੇਨਰਾਈਜ਼ਡ ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੌਇ ਕਰਨ ਲਈ ਵਿਸਥਾਰਪੂਰਵਕ ਉਦਾਹਰਨਾਂ ਸ਼ਾਮਲ ਕਰਦੀ ਹੈ। ਇਹ ਉਦਾਹਰਨਾਂ ਅਸਲ ਦੁਨੀਆ ਦੇ ਪੈਟਰਨ, ਵਧੀਆ ਪ੍ਰੈਕਟਿਸਾਂ ਅਤੇ ਪ੍ਰੋਡਕਸ਼ਨ-ਤਿਆਰ ਕਾਨਫਿਗਰੇਸ਼ਨ ਦਿਖਾਉਂਦੀਆਂ ਹਨ।
+ਇਹ ਡਾਇਰੈਕਟਰੀ Azure Developer CLI (AZD) ਦੀ ਵਰਤੋਂ ਕਰਕੇ Azure Container Apps ਤੇ ਕੰਟਰੈਨਰਾਈਜ਼ਡ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇਮੈਂਟ ਕਰਨ ਲਈ ਵਿਆਪਕ ਉਦਾਹਰਨਾਂ ਰੱਖਦੀ ਹੈ। ਇਹ ਉਦਾਹਰਨਾਂ ਅਸਲ-ਜਿਹੇ ਪੈਟਰਨ, ਸਰਵੋਤਮ ਅਭਿਆਸ ਅਤੇ ਪ੍ਰੋਡਕਸ਼ਨ-ਤਿਆਰ ਕਾਨਫਿਗਰੇਸ਼ਨਾਂ ਨੂੰ ਦਰਸਾਉਂਦੀਆਂ ਹਨ।
 
-## 📚 ਸਮੱਗਰੀ ਦੀ ਸੂਚੀ
+## 📚 ਸੂਚੀ
 
-- [ਜਾਇਜ਼ਾ](../../../../examples/container-app)
-- [ਪੂਰਵ ਸ਼ਰਤਾਂ](../../../../examples/container-app)
-- [ਤੁਰੰਤ ਸ਼ੁਰੂਆਤ ਦੇ ਉਦਾਹਰਨ](../../../../examples/container-app)
-- [ਪ੍ਰੋਡਕਸ਼ਨ ਦੇ ਉਦਾਹਰਨ](../../../../examples/container-app)
-- [ਤਕਨੀਕੀ ਪੈਟਰਨ](../../../../examples/container-app)
-- [ਵਧੀਆ ਪ੍ਰੈਕਟਿਸਾਂ](../../../../examples/container-app)
+- [ਸਾਰ](../../../../examples/container-app)
+- [ਪਹਿਲਾਂ ਦੀਆਂ ਲੋੜਾਂ](../../../../examples/container-app)
+- [ਤੁਰੰਤ ਸ਼ੁਰੂ ਕਰਨ ਦੀਆਂ ਉਦਾਹਰਨਾਂ](../../../../examples/container-app)
+- [ਉਤਪਾਦਨ ਉਦਾਹਰਨਾਂ](../../../../examples/container-app)
+- [ਉੱਨਤ ਪੈਟਰਨ](../../../../examples/container-app)
+- [ਸਰਵੋਤਮ ਅਭਿਆਸ](../../../../examples/container-app)
 
-## ਜਾਇਜ਼ਾ
+## ਸਾਰ
 
-Azure Container Apps ਇੱਕ ਪੂਰੀ ਤਰ੍ਹਾਂ ਪ੍ਰਬੰਧਤ ਸਰਵਰਲੈੱਸ ਕੰਟੇਨਰ ਪਲੇਟਫਾਰਮ ਹੈ ਜੋ ਤੁਹਾਨੂੰ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਅਤੇ ਕੰਟੇਨਰਾਈਜ਼ਡ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਦੀ ਆਗਿਆ ਦਿੰਦਾ ਹੈ ਬਿਨਾਂ ਇੰਫਰਾਸਟਰਕਚਰ ਨੂੰ ਪ੍ਰਬੰਧਿਤ ਕੀਤੇ। AZD ਨਾਲ ਮਿਲ ਕੇ, ਤੁਹਾਨੂੰ ਮਿਲਦਾ ਹੈ:
+Azure Container Apps ਇੱਕ ਪੂਰੀ ਤਰ੍ਹਾਂ ਪ੍ਰਬੰਧਿਤ ਸਰਵਰਲੈੱਸ ਕੰਟਰੈਨਰ ਪਲੇਟਫਾਰਮ ਹੈ ਜੋ ਤੁਹਾਨੂੰ ਬਿਨਾਂ ਇੰਫਰਾਸਟਰਕਚਰ ਪ੍ਰਬੰਧਨ ਦੇ ਮਾਈਕ੍ਰੋਸਰਵਿਸਜ਼ ਅਤੇ ਕੰਟਰੈਨਰਾਈਜ਼ਡ ਐਪਲੀਕੇਸ਼ਨਾਂ ਚਲਾਉਣ ਯੋਗ ਬਣਾਉਂਦਾ ਹੈ। AZD ਨਾਲ ਮਿਲਾ ਕੇ, ਤੁਹਾਨੂੰ ਮਿਲਦਾ ਹੈ:
 
-- **ਸਰਲ ਡਿਪਲੌਇਮੈਂਟ**: ਇੱਕ ਕਮਾਂਡ ਨਾਲ ਕੰਟੇਨਰ ਅਤੇ ਇੰਫਰਾਸਟਰਕਚਰ ਡਿਪਲੌਇ ਕਰੋ
-- **ਆਟੋਮੈਟਿਕ ਸਕੇਲਿੰਗ**: HTTP ਟ੍ਰੈਫਿਕ ਜਾਂ ਇਵੈਂਟਸ ਦੇ ਆਧਾਰ 'ਤੇ ਸਕੇਲਿੰਗ
-- **ਇੰਟੀਗ੍ਰੇਟਡ ਨੈਟਵਰਕਿੰਗ**: ਬਿਲਟ-ਇਨ ਸਰਵਿਸ ਡਿਸਕਵਰੀ ਅਤੇ ਟ੍ਰੈਫਿਕ ਸਪਲਿਟਿੰਗ
+- **ਸਰਲ ਡਿਪਲੋਇਮੈਂਟ**: ਇੱਕ ਹੀ ਕਮਾਂਡ ਨਾਲ ਕੰਟਰੈਨਰਾਂ ਅਤੇ ਇੰਫਰਾਸਟਰਕਚਰ ਨੂੰ ਡਿਪਲੋਇਮੈਂਟ ਕਰੋ
+- **ਆਟੋਮੈਟਿਕ ਸਕੇਲਿੰਗ**: HTTP ਟ੍ਰੈਫਿਕ ਜਾਂ ਇਵੈਂਟਾਂ ਦੇ ਅਧਾਰ 'ਤੇ ਜ਼ੀਰੋ ਤੱਕ ਸਕੇਲ ਅਤੇ ਵੱਧ ਸਕਦਾ ਹੈ
+- **ਇੰਟੀਗਰੇਟਡ ਨੈਟਵਰਕਿੰਗ**: ਬਿਲਟ-ਇਨ ਸਰਵਿਸ ਡਿਸਕਵਰੀ ਅਤੇ ਟ੍ਰੈਫਿਕ ਵੰਡ
 - **ਮੈਨੇਜਡ ਆਈਡੈਂਟਿਟੀ**: Azure ਸਰੋਤਾਂ ਲਈ ਸੁਰੱਖਿਅਤ ਪ੍ਰਮਾਣਿਕਤਾ
-- **ਲਾਗਤ ਦੀ ਬਚਤ**: ਸਿਰਫ ਉਹਨਾਂ ਸਰੋਤਾਂ ਲਈ ਭੁਗਤਾਨ ਕਰੋ ਜੋ ਤੁਸੀਂ ਵਰਤਦੇ ਹੋ
+- **ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ**: ਸਿਰਫ਼ ਉਹਨਾਂ ਸਰੋਤਾਂ ਲਈ ਭੁਗਤਾਨ ਕਰੋ ਜੋ ਤੁਸੀਂ ਵਰਤਦੇ ਹੋ
 
-## ਪੂਰਵ ਸ਼ਰਤਾਂ
+## ਪਹਿਲਾਂ ਦੀਆਂ ਲੋੜਾਂ
 
 ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ:
 
 ```bash
-# AZD ਇੰਸਟਾਲੇਸ਼ਨ ਚੈੱਕ ਕਰੋ
+# AZD ਦੀ ਸਥਾਪਨਾ ਦੀ ਜਾਂਚ ਕਰੋ
 azd version
 
-# Azure CLI ਚੈੱਕ ਕਰੋ
+# Azure CLI ਦੀ ਜਾਂਚ ਕਰੋ
 az version
 
-# Docker ਚੈੱਕ ਕਰੋ (ਕਸਟਮ ਇਮੇਜ ਬਣਾਉਣ ਲਈ)
+# Docker ਦੀ ਜਾਂਚ ਕਰੋ (ਕਸਟਮ ਇਮੇਜ ਬਣਾਉਣ ਲਈ)
 docker --version
 
 # Azure ਵਿੱਚ ਲੌਗਇਨ ਕਰੋ
@@ -49,16 +40,16 @@ azd auth login
 az login
 ```
 
-**ਲੋੜੀਂਦੇ Azure ਸਰੋਤ:**
-- ਐਕਟਿਵ Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ
-- ਰਿਸੋਰਸ ਗਰੁੱਪ ਬਣਾਉਣ ਦੀ ਇਜਾਜ਼ਤ
-- Container Apps ਵਾਤਾਵਰਣ ਤੱਕ ਪਹੁੰਚ
+**ਜ਼ਰੂਰੀ Azure ਸਰੋਤ:**
+- ਸක්੍ਰਿਆ Azure subscription
+- Resource group ਬਣਾਉਣ ਦੀਆਂ ਅਨੁਮਤੀਆਂ
+- Container Apps environment ਦੀ ਪਹੁੰਚ
 
-## ਤੁਰੰਤ ਸ਼ੁਰੂਆਤ ਦੇ ਉਦਾਹਰਨ
+## ਤੁਰੰਤ ਸ਼ੁਰੂ ਕਰਨ ਦੀਆਂ ਉਦਾਹਰਨਾਂ
 
-### 1. ਸਧਾਰਨ ਵੈੱਬ API (Python Flask)
+### 1. ਸਧਾਰਣ ਵੈੱਬ API (Python Flask)
 
-Azure Container Apps ਨਾਲ ਇੱਕ ਬੇਸਿਕ REST API ਡਿਪਲੌਇ ਕਰੋ।
+Azure Container Apps ਨਾਲ ਇੱਕ ਬੁਨਿਆਦੀ REST API ਡਿਪਲੋਇਮੈਂਟ ਕਰੋ।
 
 **ਉਦਾਹਰਨ: Python Flask API**
 
@@ -74,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**ਡਿਪਲੌਇਮੈਂਟ ਦੇ ਕਦਮ:**
+**ਡਿਪਲੋਇਮੈਂਟ ਕਦਮ:**
 
 ```bash
-# ਟੈਂਪਲੇਟ ਤੋਂ ਸ਼ੁਰੂ ਕਰੋ
+# ਟੈਮਪਲੇਟ ਤੋਂ ਸ਼ੁਰੂ ਕਰੋ
 azd init --template todo-python-mongo
 
-# ਢਾਂਚਾ ਪ੍ਰਦਾਨ ਕਰੋ ਅਤੇ ਤੈਨਾਤ ਕਰੋ
+# ਸਰੰਚਨਾ ਤਿਆਰ ਕਰੋ ਅਤੇ ਤੈਨਾਤ ਕਰੋ
 azd up
 
 # ਤੈਨਾਤ ਦੀ ਜਾਂਚ ਕਰੋ
@@ -88,32 +79,32 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ:**
-- 0 ਤੋਂ 10 ਰਿਪਲਿਕਾ ਤੱਕ ਆਟੋਮੈਟਿਕ ਸਕੇਲਿੰਗ
+**ਮੁੱਖ ਫੀਚਰ:**
+- 0 ਤੋਂ 10 ਰੈਪਲਿਕਿਆਂ ਤੱਕ ਆਟੋ-ਸਕੇਲਿੰਗ
 - ਹੈਲਥ ਪ੍ਰੋਬਸ ਅਤੇ ਲਾਈਵਨੈੱਸ ਚੈੱਕ
-- ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ ਇੰਜੈਕਸ਼ਨ
-- ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਇੰਟੀਗ੍ਰੇਸ਼ਨ
+- ਇਨਵਾਇਰਨਮੈਂਟ ਵੈਰੀਏਬਲ ਇੰਜੈਕਸ਼ਨ
+- Application Insights ਇੰਟੀਗਰੇਸ਼ਨ
 
 ### 2. Node.js Express API
 
-MongoDB ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਨਾਲ ਇੱਕ Node.js ਬੈਕਐਂਡ ਡਿਪਲੌਇ ਕਰੋ।
+MongoDB ਇੰਟੀਗਰੇਸ਼ਨ ਨਾਲ Node.js ਬੈਕਇੰਡ ਡਿਪਲੋਇਮੈਂਟ ਕਰੋ।
 
 ```bash
-# ਨੋਡ.ਜੇਐਸ ਏਪੀਆਈ ਟੈਂਪਲੇਟ ਸ਼ੁਰੂ ਕਰੋ
+# Node.js API ਟੈਮਪਲੇਟ ਨੂੰ ਸ਼ੁਰੂ ਕਰੋ
 azd init --template todo-nodejs-mongo
 
-# ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲਾਂ ਕਨਫਿਗਰ ਕਰੋ
+# ਮਾਹੌਲ ਦੇ ਵੈਰੀਏਬਲਾਂ ਦੀ ਸੰਰਚਨਾ ਕਰੋ
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# ਡਿਪਲੌਇ ਕਰੋ
+# ਤੈਨਾਤ ਕਰੋ
 azd up
 
-# ਲੌਗਸ ਦੇਖੋ
-azd logs api
+# Azure Monitor ਰਾਹੀਂ ਲਾਗਾਂ ਵੇਖੋ
+azd monitor --logs
 ```
 
-**ਇੰਫਰਾਸਟਰਕਚਰ ਦੀਆਂ ਹਾਈਲਾਈਟਸ:**
+**ਇੰਫਰਾਸਟਰਕਚਰ ਮੁੱਖ ਬਿੰਦੂ:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -156,31 +147,31 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. ਸਟੈਟਿਕ ਫਰੰਟਐਂਡ + API ਬੈਕਐਂਡ
+### 3. ਸਟੈਟਿਕ ਫਰੰਟਏਂਡ + API ਬੈਕਇੰਡ
 
-React ਫਰੰਟਐਂਡ ਅਤੇ API ਬੈਕਐਂਡ ਨਾਲ ਇੱਕ ਫੁੱਲ-ਸਟੈਕ ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੌਇ ਕਰੋ।
+React ਫਰੰਟਏਂਡ ਅਤੇ API ਬੈਕਇੰਡ ਨਾਲ ਇੱਕ ਫੁੱਲ-ਸਟੈਕ ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੋਇਮੈਂਟ ਕਰੋ।
 
 ```bash
-# ਪੂਰਾ-ਸਟੈਕ ਟੈਂਪਲੇਟ ਸ਼ੁਰੂ ਕਰੋ
+# ਫੁੱਲ-ਸਟੈਕ ਟੈਮਪਲੇਟ ਸ਼ੁਰੂ ਕਰੋ
 azd init --template todo-csharp-sql-swa-func
 
-# ਕਨਫਿਗਰੇਸ਼ਨ ਦੀ ਸਮੀਖਿਆ ਕਰੋ
+# ਵਿਨਿਆਸ ਦੀ ਸਮੀਖਿਆ ਕਰੋ
 cat azure.yaml
 
-# ਦੋਵੇਂ ਸੇਵਾਵਾਂ ਤੈਨਾਤ ਕਰੋ
+# ਦੋਨੋ ਸੇਵਾਵਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
 azd up
 
 # ਐਪਲੀਕੇਸ਼ਨ ਖੋਲ੍ਹੋ
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## ਪ੍ਰੋਡਕਸ਼ਨ ਦੇ ਉਦਾਹਰਨ
+## ਉਤਪਾਦਨ ਉਦਾਹਰਨਾਂ
 
-### ਉਦਾਹਰਨ 1: ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ
+### ਉਦਾਹਰਨ 1: ਮਾਇਕ੍ਰੋਸਰਵਿਸਜ਼ ਆਰਕੀਟੈਕਚਰ
 
-**ਸਥਿਤੀ**: ਕਈ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਵਾਲੀ ਈ-ਕਾਮਰਸ ਐਪਲੀਕੇਸ਼ਨ
+**ਸਥਿਤੀ**: ਕਈ ਮਾਇਕ੍ਰੋਸਰਵਿਸਜ਼ ਵਾਲੀ ਈ-ਕਾਮਰਸ ਐਪਲੀਕੇਸ਼ਨ
 
-**ਡਾਇਰੈਕਟਰੀ ਸਟ੍ਰਕਚਰ:**
+**ਡਾਇਰੈਕਟਰੀ ਢਾਂਚਾ:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -220,7 +211,7 @@ services:
     host: containerapp
 ```
 
-**ਡਿਪਲੌਇਮੈਂਟ:**
+**ਡਿਪਲੋਇਮੈਂਟ:**
 ```bash
 # ਪ੍ਰੋਜੈਕਟ ਸ਼ੁਰੂ ਕਰੋ
 azd init
@@ -228,7 +219,7 @@ azd init
 # ਉਤਪਾਦਨ ਵਾਤਾਵਰਣ ਸੈਟ ਕਰੋ
 azd env new production
 
-# ਉਤਪਾਦਨ ਸੈਟਿੰਗਾਂ ਕਨਫਿਗਰ ਕਰੋ
+# ਉਤਪਾਦਨ ਸੈਟਿੰਗਾਂ ਸੰਰਚਿਤ ਕਰੋ
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -240,11 +231,11 @@ azd up
 azd monitor --overview
 ```
 
-### ਉਦਾਹਰਨ 2: AI-ਚਲਿਤ ਕੰਟੇਨਰ ਐਪ
+### ਉਦਾਹਰਨ 2: AI-ਸਮਰੱਥ Container App
 
-**ਸਥਿਤੀ**: Azure OpenAI ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਨਾਲ AI ਚੈਟ ਐਪਲੀਕੇਸ਼ਨ
+**ਸਥਿਤੀ**: Azure OpenAI ਇੰਟੀਗਰੇਸ਼ਨ ਨਾਲ AI ਚੈਟ ਐਪਲੀਕੇਸ਼ਨ
 
-**ਫਾਈਲ: src/ai-chat/app.py**
+**ਫਾਇਲ: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# ਸੁਰੱਖਿਅਤ ਪਹੁੰਚ ਲਈ ਪ੍ਰਬੰਧਿਤ ਪਛਾਣ ਦੀ ਵਰਤੋਂ ਕਰੋ
+# ਸੁਰੱਖਿਅਤ ਪਹੁੰਚ ਲਈ Managed Identity ਦੀ ਵਰਤੋਂ ਕਰੋ
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -262,7 +253,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # ਕੀ ਵਾਲਟ ਤੋਂ OpenAI ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰੋ
+    # Key Vault ਤੋਂ OpenAI ਕੀ ਪ੍ਰਾਪਤ ਕਰੋ
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -277,7 +268,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**ਫਾਈਲ: azure.yaml**
+**ਫਾਇਲ: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -287,7 +278,7 @@ services:
     host: containerapp
 ```
 
-**ਫਾਈਲ: infra/main.bicep**
+**ਫਾਇਲ: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -329,13 +320,13 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**ਡਿਪਲੌਇਮੈਂਟ ਕਮਾਂਡਸ:**
+**ਡਿਪਲੋਇਮੈਂਟ ਕਮਾਂਡਾਂ:**
 ```bash
-# ਵਾਤਾਵਰਣ ਸੈਟ ਕਰੋ
+# ਮਾਹੌਲ ਸੈੱਟ ਕਰੋ
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAI ਸੰਰਚਿਤ ਕਰੋ
+# OpenAI ਨੂੰ ਸੰਰਚਿਤ ਕਰੋ
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
@@ -348,11 +339,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### ਉਦਾਹਰਨ 3: ਬੈਕਗ੍ਰਾਊਂਡ ਵਰਕਰ ਨਾਲ ਕਿਊ ਪ੍ਰੋਸੈਸਿੰਗ
+### ਉਦਾਹਰਨ 3: ਕਤਾਰ ਪ੍ਰੋਸੈਸਿੰਗ ਨਾਲ ਬੈਕਗ੍ਰਾਊਂਡ ਵਰਕਰ
 
-**ਸਥਿਤੀ**: ਮੈਸੇਜ ਕਿਊ ਨਾਲ ਆਰਡਰ ਪ੍ਰੋਸੈਸਿੰਗ ਸਿਸਟਮ
+**ਸਥਿਤੀ**: ਮੇਸੇਜ ਕਤਾਰ ਵਾਲਾ ਆਰਡਰ ਪ੍ਰੋਸੈਸਿੰਗ ਸਿਸਟਮ
 
-**ਡਾਇਰੈਕਟਰੀ ਸਟ੍ਰਕਚਰ:**
+**ਡਾਇਰੈਕਟਰੀ ਢਾਂਚਾ:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -369,7 +360,7 @@ queue-worker/
     └── worker/
 ```
 
-**ਫਾਈਲ: src/worker/processor.py**
+**ਫਾਇਲ: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -387,17 +378,17 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # ਆਰਡਰ ਪ੍ਰਕਿਰਿਆ
+            # ਆਰਡਰ ਨੂੰ ਪ੍ਰਕਿਰਿਆ ਕਰੋ
             print(f"Processing order: {message.content}")
             
-            # ਸੰਦੇਸ਼ ਪੂਰਾ
+            # ਸੰਦੇਸ਼ ਪੂਰਾ ਕਰੋ
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
     process_orders()
 ```
 
-**ਫਾਈਲ: azure.yaml**
+**ਫਾਇਲ: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -412,15 +403,15 @@ services:
     host: containerapp
 ```
 
-**ਡਿਪਲੌਇਮੈਂਟ:**
+**ਡਿਪਲੋਇਮੈਂਟ:**
 ```bash
-# ਸ਼ੁਰੂ ਕਰੋ
+# ਆਰੰਭ ਕਰੋ
 azd init
 
-# ਕਤਾਰ ਸੰਰਚਨਾ ਨਾਲ ਤੈਨਾਤ ਕਰੋ
+# ਕਤਾਰ ਸੰਰਚਨਾ ਨਾਲ ਤਾਇਨਾਤ ਕਰੋ
 azd up
 
-# ਕਤਾਰ ਦੀ ਲੰਬਾਈ ਦੇ ਅਧਾਰ 'ਤੇ ਵਰਕਰ ਨੂੰ ਸਕੇਲ ਕਰੋ
+# ਕਤਾਰ ਦੀ ਲੰਬਾਈ ਦੇ ਆਧਾਰ ਤੇ ਵਰਕਰ ਦੀ ਸੰਖਿਆ ਵਧਾਓ ਜਾਂ ਘਟਾਓ
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -429,15 +420,15 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## ਤਕਨੀਕੀ ਪੈਟਰਨ
+## ਉੱਨਤ ਪੈਟਰਨ
 
-### ਪੈਟਰਨ 1: ਬਲੂ-ਗ੍ਰੀਨ ਡਿਪਲੌਇਮੈਂਟ
+### ਪੈਟਰਨ 1: ਬਲੂ-ਗ੍ਰੀਨ ਡਿਪਲੋਇਮੈਂਟ
 
 ```bash
-# ਨਵੀਂ ਰੀਵਿਜ਼ਨ ਬਿਨਾਂ ਟ੍ਰੈਫਿਕ ਦੇ ਬਣਾਓ
+# ਟ੍ਰੈਫਿਕ ਦੇ ਬਿਨਾਂ ਨਵੀਂ ਰਿਵੀਜ਼ਨ ਬਣਾਓ
 azd deploy api --revision-suffix blue --no-traffic
 
-# ਨਵੀਂ ਰੀਵਿਜ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਨਵੀਂ ਰਿਵੀਜ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
 # ਟ੍ਰੈਫਿਕ ਵੰਡੋ (20% ਨੀਲੇ ਨੂੰ, 80% ਮੌਜੂਦਾ ਨੂੰ)
@@ -446,16 +437,16 @@ az containerapp ingress traffic set \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# ਪੂਰੀ ਤਰ੍ਹਾਂ ਨੀਲੇ ਵਿੱਚ ਬਦਲੋ
+# ਪੂਰੀ ਤਰ੍ਹਾਂ ਨੀਲੇ ਵੱਲ ਕਟਓਵਰ
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### ਪੈਟਰਨ 2: AZD ਨਾਲ ਕੈਨੇਰੀ ਡਿਪਲੌਇਮੈਂਟ
+### ਪੈਟਰਨ 2: AZD ਨਾਲ ਕੈਨੇਰੀ ਡਿਪਲੋਇਮੈਂਟ
 
-**ਫਾਈਲ: .azure/dev/config.json**
+**ਫਾਇਲ: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -467,18 +458,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**ਡਿਪਲੌਇਮੈਂਟ ਸਕ੍ਰਿਪਟ:**
+**ਡਿਪਲੋਇਮੈਂਟ ਸਕ੍ਰਿਪਟ:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# ਨਵੀਂ ਰੀਵਿਜ਼ਨ ਨੂੰ 10% ਟ੍ਰੈਫਿਕ ਨਾਲ ਡਿਪਲੌਇ ਕਰੋ
+# ਨਵੀਂ ਰਿਵੀਜ਼ਨ 10% ਟਰੈਫਿਕ ਨਾਲ ਡਿਪਲੋਇ ਕਰੋ
 azd deploy api --revision-mode multiple
 
-# ਮੈਟ੍ਰਿਕਸ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ
+# ਮੀਟ੍ਰਿਕਸ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ
 azd monitor --service api --duration 5m
 
-# ਟ੍ਰੈਫਿਕ ਨੂੰ ਹੌਲੀ-ਹੌਲੀ ਵਧਾਓ
+# ਟ੍ਰੈਫਿਕ ਨੂੰ ਧੀਰੇ-ਧੀਰੇ ਵਧਾਓ
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -486,13 +477,13 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # 5 ਮਿੰਟ ਉਡੀਕ ਕਰੋ
+  sleep 300  # 5 ਮਿੰਟ ਲਈ ਉਡੀਕ ਕਰੋ
 done
 ```
 
-### ਪੈਟਰਨ 3: ਮਲਟੀ-ਰੀਜਨ ਡਿਪਲੌਇਮੈਂਟ
+### ਪੈਟਰਨ 3: ਬਹੁ-ਰਾਜ ਡਿਪਲੋਇਮੈਂਟ
 
-**ਫਾਈਲ: azure.yaml**
+**ਫਾਇਲ: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -506,7 +497,7 @@ services:
       - southeastasia
 ```
 
-**ਫਾਈਲ: infra/multi-region.bicep**
+**ਫਾਇਲ: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -536,7 +527,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**ਡਿਪਲੌਇਮੈਂਟ:**
+**ਡਿਪਲੋਇਮੈਂਟ:**
 ```bash
 # ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਤੈਨਾਤ ਕਰੋ
 azd up
@@ -545,9 +536,9 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### ਪੈਟਰਨ 4: Dapr ਇੰਟੀਗ੍ਰੇਸ਼ਨ
+### ਪੈਟਰਨ 4: Dapr ਇੰਟੀਗਰੇਸ਼ਨ
 
-**ਫਾਈਲ: infra/app/dapr-enabled.bicep**
+**ਫਾਇਲ: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -582,14 +573,14 @@ app = Flask(__name__)
 @app.route('/orders', methods=['POST'])
 def create_order():
     with DaprClient() as client:
-        # ਸਟੇਟ ਸੇਵ ਕਰੋ
+        # ਸਥਿਤੀ ਸੰਭਾਲੋ
         client.save_state(
             store_name='statestore',
             key='order-123',
             value={'status': 'pending'}
         )
         
-        # ਇਵੈਂਟ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ
+        # ਘਟਨਾ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -599,20 +590,20 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## ਵਧੀਆ ਪ੍ਰੈਕਟਿਸਾਂ
+## ਸਰਵੋਤਮ ਅਭਿਆਸ
 
-### 1. ਸਰੋਤਾਂ ਦੀ ਸੰਗਠਨਾ
+### 1. ਸਰੋਤਾਂ ਦੀ ਵਿਵਸਥਾ
 
 ```bash
-# ਸਥਿਰ ਨਾਮਕਰਨ ਰੀਤੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰੋ
+# ਇਕਸਾਰ ਨਾਮਕਰਨ ਨਿਯਮ ਵਰਤੋ
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# ਖਰਚਾ ਟ੍ਰੈਕਿੰਗ ਲਈ ਸਰੋਤਾਂ ਨੂੰ ਟੈਗ ਕਰੋ
+# ਲਾਗਤ ਦੀ ਨਿਗਰਾਨੀ ਲਈ ਸਰੋਤਾਂ ਨੂੰ ਟੈਗ ਕਰੋ
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. ਸੁਰੱਖਿਆ ਲਈ ਵਧੀਆ ਪ੍ਰੈਕਟਿਸਾਂ
+### 2. ਸੁਰੱਖਿਆ ਵਧੀਆ ਅਭਿਆਸ
 
 ```bicep
 // Always use managed identity
@@ -651,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. ਪ੍ਰਦਰਸ਼ਨ ਦਾ ਅਧਿਕਤਮ ਬਣਾਉਣਾ
+### 3. ਪ੍ਰਦਰਸ਼ਨ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ
 
 ```yaml
 # azure.yaml with performance settings
@@ -671,19 +662,21 @@ services:
             concurrent: 100
 ```
 
-### 4. ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਦ੍ਰਿਸ਼ਟਤਾ
+### 4. ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਨਿਰੀਖਣਯੋਗਤਾ
 
 ```bash
-# ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ ਨੂੰ ਸਚਾਲਿਤ ਕਰੋ
+# Application Insights ਨੂੰ ਚਾਲੂ ਕਰੋ
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# ਲਾਗਜ਼ ਨੂੰ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਵੇਖੋ
-azd logs api --follow
+# ਅਸਲ ਸਮੇਂ ਵਿੱਚ ਲੌਗ ਵੇਖੋ
+azd monitor --logs
+# ਜਾਂ Container Apps ਲਈ Azure CLI ਦੀ ਵਰਤੋਂ ਕਰੋ:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# ਮੈਟ੍ਰਿਕਸ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ
-azd monitor --service api
+# ਮੀਟ੍ਰਿਕਸ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ
+azd monitor --live
 
-# ਚੇਤਾਵਨੀਆਂ ਬਣਾਓ
+# ਅਲਰਟ ਬਣਾਓ
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -692,19 +685,19 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. ਲਾਗਤ ਦੀ ਬਚਤ
+### 5. ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ
 
 ```bash
-# ਵਰਤੋਂ ਵਿੱਚ ਨਾ ਹੋਣ 'ਤੇ ਜ਼ੀਰੋ 'ਤੇ ਸਕੇਲ ਕਰੋ
+# ਜਦੋਂ ਵਰਤੋਂ ਵਿੱਚ ਨਾ ਹੋਵੇ ਤਾਂ ਸਕੇਲ ਨੂੰ ਜੀਰੋ ਤੇ ਲਿਆਓ
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# ਡਿਵ ਐਨਵਾਇਰਨਮੈਂਟ ਲਈ ਸਪਾਟ ਇੰਸਟੈਂਸ ਵਰਤੋ
+# ਡੈਵਲਪਮੈਂਟ ਵਾਤਾਵਰਣਾਂ ਲਈ ਸਪੌਟ ਇੰਸਟੈਂਸ ਵਰਤੋ
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# ਬਜਟ ਅਲਰਟ ਸੈਟ ਕਰੋ
+# ਬਜਟ ਚੇਤਾਵਨੀਆਂ ਸੈਟ ਕਰੋ
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -712,9 +705,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD ਇੰਟੀਗ੍ਰੇਸ਼ਨ
+### 6. CI/CD ਇੰਟੀਗਰੇਸ਼ਨ
 
-**GitHub Actions ਦਾ ਉਦਾਹਰਨ:**
+**GitHub Actions ਉਦਾਹਰਨ:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -744,26 +737,27 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## ਆਮ ਕਮਾਂਡਸ ਰਿਫਰੈਂਸ
+## ਆਮ ਕਮਾਂਡ ਰੈਫਰੈਂਸ
 
 ```bash
-# ਨਵਾਂ ਕੰਟੇਨਰ ਐਪ ਪ੍ਰੋਜੈਕਟ ਸ਼ੁਰੂ ਕਰੋ
+# ਨਵਾਂ ਕੰਟੇਨਰ ਐਪ ਪਰੋਜੈਕਟ ਸ਼ੁਰੂ ਕਰੋ
 azd init --template <template-name>
 
-# ਢਾਂਚਾ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਤੈਨਾਤ ਕਰੋ
+# ਬੁਨਿਆਦੀ ਢਾਂਚਾ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਤੈਨਾਤ ਕਰੋ
 azd up
 
-# ਸਿਰਫ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਤੈਨਾਤ ਕਰੋ (ਢਾਂਚਾ ਛੱਡੋ)
+# ਸਿਰਫ਼ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਤੈਨਾਤ ਕਰੋ (ਇਨਫਰਾਸਟਰੱਕਚਰ ਨੂੰ ਛੱਡੋ)
 azd deploy
 
-# ਸਿਰਫ ਢਾਂਚਾ ਪ੍ਰਦਾਨ ਕਰੋ
+# ਸਿਰਫ਼ ਇਨਫਰਾਸਟਰੱਕਚਰ ਤਿਆਰ ਕਰੋ
 azd provision
 
-# ਤੈਨਾਤ ਕੀਤੇ ਸਰੋਤਾਂ ਨੂੰ ਵੇਖੋ
+# ਤੈਨਾਤ ਕੀਤੇ ਸਰੋਤ ਵੇਖੋ
 azd show
 
-# ਲਾਗਸ ਸਟ੍ਰੀਮ ਕਰੋ
-azd logs <service-name> --follow
+# azd monitor ਜਾਂ Azure CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲੌਗ ਸਟਰੀਮ ਕਰੋ
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # ਐਪਲੀਕੇਸ਼ਨ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ
 azd monitor --overview
@@ -772,50 +766,50 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## ਸਮੱਸਿਆ ਹੱਲ
+## ਸਮੱਸਿਆ ਨਿਵਾਰਣ
 
-### ਸਮੱਸਿਆ: ਕੰਟੇਨਰ ਸ਼ੁਰੂ ਨਹੀਂ ਹੁੰਦਾ
+### ਸਮੱਸਿਆ: ਕੰਟੇਨਰ ਸ਼ੁਰੂ ਹੋਣ ਵਿੱਚ ਨਾਕਾਮ
 
 ```bash
-# ਲਾਗਜ਼ ਚੈੱਕ ਕਰੋ
-azd logs api --tail 100
+# Azure CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲੌਗ ਚੈੱਕ ਕਰੋ
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# ਕੰਟੇਨਰ ਇਵੈਂਟਸ ਵੇਖੋ
+# ਕੰਟੇਨਰ ਘਟਨਾਵਾਂ ਵੇਖੋ
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਟੈਸਟ ਕਰੋ
+# ਸਥਾਨਕ ਤੌਰ ਤੇ ਟੈਸਟ ਕਰੋ
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### ਸਮੱਸਿਆ: ਕੰਟੇਨਰ ਐਪ ਐਂਡਪੌਇੰਟ ਤੱਕ ਪਹੁੰਚ ਨਹੀਂ
+### ਸਮੱਸਿਆ: ਕੰਟੇਨਰ ਐਪ ਐਂਡਪੁਆਇੰਟ ਤੱਕ ਪਹੁੰਚ ਨਹੀਂ ਹੋ ਰਹੀ
 
 ```bash
-# ਇਨਗ੍ਰੈਸ ਕਨਫਿਗਰੇਸ਼ਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
+# ਇਨਗ੍ਰੈੱਸ ਸੰਰਚਨਾ ਦੀ ਜਾਂਚ ਕਰੋ
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# ਜਾਂਚੋ ਕਿ ਅੰਦਰੂਨੀ ਇਨਗ੍ਰੈਸ ਚਾਲੂ ਹੈ
+# ਜਾਂਚੋ ਕਿ ਅੰਦਰੂਨੀ ਇਨਗ੍ਰੈੱਸ ਚਾਲੂ ਹੈ ਕਿ ਨਹੀਂ
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### ਸਮੱਸਿਆ: ਪ੍ਰਦਰਸ਼ਨ ਦੀ ਸਮੱਸਿਆ
+### ਸਮੱਸਿਆ: ਪ੍ਰਦਰਸ਼ਨ ਸਮੱਸਿਆਵਾਂ
 
 ```bash
-# ਸਰੋਤਾਂ ਦੀ ਵਰਤੋਂ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਸੰਸਾਧਨਾਂ ਦੀ ਉਪਯੋਗਤਾ ਜਾਂਚੋ
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# ਸਰੋਤਾਂ ਨੂੰ ਵਧਾਓ
+# ਸੰਸਾਧਨਾਂ ਨੂੰ ਵਧਾਓ
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -824,30 +818,30 @@ az containerapp update \
 ```
 
 ## ਵਾਧੂ ਸਰੋਤ ਅਤੇ ਉਦਾਹਰਨਾਂ
-- [ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਉਦਾਹਰਨ](./microservices/README.md)
-- [ਸਧਾਰਨ Flash API ਉਦਾਹਰਨ](./simple-flask-api/README.md)
-- [Azure Container Apps ਦਸਤਾਵੇਜ਼](https://learn.microsoft.com/azure/container-apps/)
-- [AZD ਟੈਂਪਲੇਟ ਗੈਲਰੀ](https://azure.github.io/awesome-azd/)
-- [Container Apps ਦੇ ਨਮੂਨੇ](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep ਟੈਂਪਲੇਟ](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [ਮਾਇਕ੍ਰੋਸਰਵਿਸਜ਼ ਉਦਾਹਰਨ](./microservices/README.md)
+- [ਸਧਾਰਣ Flask API ਉਦਾਹਰਨ](./simple-flask-api/README.md)
+- [Azure Container Apps ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ](https://learn.microsoft.com/azure/container-apps/)
+- [AZD ਟੈਮਪਲੇਟ ਗੈਲਰੀ](https://azure.github.io/awesome-azd/)
+- [Container Apps ਨਮੂਨੇ](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep ਟੈਮਪਲੇਟਸ](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## ਯੋਗਦਾਨ
 
-ਨਵੇਂ ਕੰਟੇਨਰ ਐਪ ਦੇ ਉਦਾਹਰਨ ਜੋੜਨ ਲਈ:
+ਨਵੇਂ container app ਉਦਾਹਰਨਾਂ ਵਿੱਚ ਯੋਗਦਾਨ ਦੇਣ ਲਈ:
 
-1. ਆਪਣੇ ਉਦਾਹਰਨ ਨਾਲ ਇੱਕ ਨਵੀਂ ਸਬਡਾਇਰੈਕਟਰੀ ਬਣਾਓ
-2. ਪੂਰੇ `azure.yaml`, `infra/`, ਅਤੇ `src/` ਫਾਈਲਾਂ ਸ਼ਾਮਲ ਕਰੋ
-3. ਡਿਪਲੌਇਮੈਂਟ ਨਿਰਦੇਸ਼ਾਂ ਨਾਲ ਵਿਸਥਾਰਪੂਰਵਕ README ਸ਼ਾਮਲ ਕਰੋ
-4. `azd up` ਨਾਲ ਡਿਪਲੌਇਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ
-5. ਇੱਕ ਪੁਲ ਰਿਕਵੈਸਟ ਜਮ੍ਹਾਂ ਕਰੋ
+1. ਆਪਣੇ ਉਦਾਹਰਨ ਨਾਲ ਇੱਕ ਨਵਾਂ ਸਬਡਾਇਰੈਕਟਰੀ ਬਣਾਓ
+2. ਪੂਰੇ `azure.yaml`, `infra/`, ਅਤੇ `src/` ਫਾਇਲਾਂ ਸ਼ਾਮਲ ਕਰੋ
+3. ਡਿਪਲੋਇਮੈਂਟ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ਾਂ ਸਮੇਤ ਵਿਆਪਕ README ਜੋੜੋ
+4. ਡਿਪਲੋਇਮੈਂਟ ਨੂੰ `azd up` ਨਾਲ ਟੈਸਟ ਕਰੋ
+5. ਇੱਕ ਪੁਲ ਰਿਕਵੇਸਟ ਜਮ੍ਹਾਂ ਕਰੋ
 
 ---
 
-**ਮਦਦ ਦੀ ਲੋੜ ਹੈ?** ਸਹਾਇਤਾ ਅਤੇ ਸਵਾਲਾਂ ਲਈ [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) ਕਮਿਊਨਿਟੀ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ।
+**ਸਹਾਇਤਾ ਚਾਹੀਦੀ ਹੈ?** ਸਹਾਇਤਾ ਅਤੇ ਪ੍ਰਸ਼ਨਾਂ ਲਈ [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) ਕਮਿਊਨਿਟੀ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਰਤਾ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਣੀਕਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+ਅਸਵੀਕਰਨ:
+ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਪਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਇਹ ਜਾਣਣਾ ਜ਼ਰੂਰੀ ਹੈ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣਸ਼ੁੱਧਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਨਾਜ਼ੁਕ ਜਾਂ ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਨਾਲ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਵਿਆਖਿਆਈਆਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
