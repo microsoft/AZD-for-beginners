@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-20T14:39:20+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "ne"
-}
--->
-# माइक्रोसर्भिस आर्किटेक्चर - कन्टेनर एप्स उदाहरण
+# Microservices Architecture - Container App Example
 
-⏱️ **अनुमानित समय**: २५-३५ मिनेट | 💰 **अनुमानित लागत**: ~$५०-१००/महिना | ⭐ **जटिलता**: उन्नत
+⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
 
-एक **सरल तर कार्यात्मक** माइक्रोसर्भिस आर्किटेक्चर, AZD CLI प्रयोग गरेर Azure Container Apps मा तैनात गरिएको। यो उदाहरणले सेवा-देखि-सेवा संचार, कन्टेनर व्यवस्थापन, र निगरानीलाई व्यावहारिक दुई-सेवा सेटअपको साथ प्रदर्शन गर्दछ।
+A **simplified but functional** microservices architecture deployed to Azure Container Apps using AZD CLI. This example demonstrates service-to-service communication, container orchestration, and monitoring with a practical 2-service setup.
 
-> **📚 सिक्ने दृष्टिकोण**: यो उदाहरणले न्यूनतम दुई-सेवा आर्किटेक्चर (API Gateway + Backend Service) बाट सुरु गर्दछ जुन तपाईं वास्तवमै तैनात गर्न र सिक्न सक्नुहुन्छ। यो आधारलाई मास्टर गरेपछि, हामी पूर्ण माइक्रोसर्भिस इकोसिस्टममा विस्तारको लागि मार्गदर्शन प्रदान गर्दछौं।
+> **📚 Learning Approach**: This example starts with a minimal 2-service architecture (API Gateway + Backend Service) that you can actually deploy and learn from. After mastering this foundation, we provide guidance for expanding to a full microservices ecosystem.
 
-## तपाईंले के सिक्नुहुनेछ
+## What You'll Learn
 
-यो उदाहरण पूरा गरेर, तपाईं:
-- Azure Container Apps मा धेरै कन्टेनर तैनात गर्नुहोस्
-- आन्तरिक नेटवर्किङको साथ सेवा-देखि-सेवा संचार कार्यान्वयन गर्नुहोस्
-- वातावरण-आधारित स्केलिङ र स्वास्थ्य जाँचहरू कन्फिगर गर्नुहोस्
-- Application Insights को साथ वितरित एप्लिकेसनहरू निगरानी गर्नुहोस्
-- माइक्रोसर्भिस तैनाती ढाँचाहरू र उत्कृष्ट अभ्यासहरू बुझ्नुहोस्
-- सरलदेखि जटिल आर्किटेक्चरमा प्रगतिशील विस्तार सिक्नुहोस्
+By completing this example, you will:
+- Deploy multiple containers to Azure Container Apps
+- Implement service-to-service communication with internal networking
+- Configure environment-based scaling and health checks
+- Monitor distributed applications with Application Insights
+- Understand microservices deployment patterns and best practices
+- Learn progressive expansion from simple to complex architectures
 
-## आर्किटेक्चर
+## Architecture
 
-### चरण १: हामी के निर्माण गर्दैछौं (यो उदाहरणमा समावेश)
+### Phase 1: What We're Building (Included in This Example)
 
 ```
                     ┌─────────────────────────────┐
@@ -60,18 +51,18 @@ CO_OP_TRANSLATOR_METADATA:
                     └─────────────────────────────┘
 ```
 
-**किन सरलबाट सुरु गर्ने?**
-- ✅ छिटो तैनात र बुझ्न सकिने (२५-३५ मिनेट)
-- ✅ जटिलता बिना कोर माइक्रोसर्भिस ढाँचाहरू सिक्नुहोस्
-- ✅ कार्यरत कोड जुन तपाईं परिमार्जन र प्रयोग गर्न सक्नुहुन्छ
-- ✅ सिक्नको लागि कम लागत (~$५०-१००/महिना बनाम $३००-१४००/महिना)
-- ✅ डेटाबेस र सन्देश पङ्क्तिहरू थप्नुअघि आत्मविश्वास निर्माण गर्नुहोस्
+**Why Start Simple?**
+- ✅ Deploy and understand quickly (25-35 minutes)
+- ✅ Learn core microservices patterns without complexity
+- ✅ Working code you can modify and experiment with
+- ✅ Lower cost for learning (~$50-100/month vs $300-1400/month)
+- ✅ Build confidence before adding databases and message queues
 
-**उदाहरण**: यसलाई ड्राइभ गर्न सिक्ने जस्तै सोच्नुहोस्। तपाईं खाली पार्किङ स्थलबाट सुरु गर्नुहुन्छ (२ सेवाहरू), आधारभूत कुराहरू मास्टर गर्नुहोस्, त्यसपछि सहरको ट्राफिकमा प्रगति गर्नुहोस् (५+ सेवाहरू डेटाबेसको साथ)।
+**Analogy**: Think of this like learning to drive. You start with an empty parking lot (2 services), master the basics, then progress to city traffic (5+ services with databases).
 
-### चरण २: भविष्य विस्तार (सन्दर्भ आर्किटेक्चर)
+### Phase 2: Future Expansion (Reference Architecture)
 
-जब तपाईं दुई-सेवा आर्किटेक्चर मास्टर गर्नुहुन्छ, तपाईं विस्तार गर्न सक्नुहुन्छ:
+Once you master the 2-service architecture, you can expand to:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -86,161 +77,161 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-"Expansion Guide" खण्डमा चरण-दर-चरण निर्देशनहरू हेर्नुहोस्।
+See "Expansion Guide" section at the end for step-by-step instructions.
 
-## समावेश सुविधाहरू
+## Features Included
 
-✅ **सेवा पत्ता लगाउने**: कन्टेनरहरू बीच स्वचालित DNS-आधारित पत्ता लगाउने  
-✅ **लोड ब्यालेन्सिङ**: प्रतिकृतिहरूमा निर्मित लोड ब्यालेन्सिङ  
-✅ **स्वचालित स्केलिङ**: HTTP अनुरोधहरूमा आधारित प्रत्येक सेवाको स्वतन्त्र स्केलिङ  
-✅ **स्वास्थ्य निगरानी**: दुवै सेवाहरूको लागि लिभनेस र रेडिनेस प्रब्स  
-✅ **वितरित लगिङ**: Application Insights को साथ केन्द्रीयकृत लगिङ  
-✅ **आन्तरिक नेटवर्किङ**: सुरक्षित सेवा-देखि-सेवा संचार  
-✅ **कन्टेनर व्यवस्थापन**: स्वचालित तैनाती र स्केलिङ  
-✅ **शून्य-डाउनटाइम अपडेटहरू**: रिभिजन व्यवस्थापनको साथ रोलिङ अपडेटहरू  
+✅ **Service Discovery**: Automatic DNS-based discovery between containers  
+✅ **Load Balancing**: Built-in load balancing across replicas  
+✅ **Auto-scaling**: Independent scaling per service based on HTTP requests  
+✅ **Health Monitoring**: Liveness and readiness probes for both services  
+✅ **Distributed Logging**: Centralized logging with Application Insights  
+✅ **Internal Networking**: Secure service-to-service communication  
+✅ **Container Orchestration**: Automatic deployment and scaling  
+✅ **Zero-Downtime Updates**: Rolling updates with revision management  
 
-## पूर्वापेक्षाहरू
+## Prerequisites
 
-### आवश्यक उपकरणहरू
+### Required Tools
 
-सुरु गर्नु अघि, यी उपकरणहरू स्थापना भएको सुनिश्चित गर्नुहोस्:
+Before starting, verify you have these tools installed:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (संस्करण १.०.० वा उच्च)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```bash
    azd version
-   # अपेक्षित आउटपुट: azd संस्करण 1.0.0 वा उच्च
+   # अपेक्षित आउटपुट: azd संस्करण 1.0.0 वा सोभन्दा उच्च
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (संस्करण २.५०.० वा उच्च)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```bash
    az --version
-   # अपेक्षित आउटपुट: azure-cli 2.50.0 वा उच्च
+   # अपेक्षित आउटपुट: azure-cli 2.50.0 वा सो भन्दा माथि
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (स्थानीय विकास/परीक्षणको लागि - वैकल्पिक)
+3. **[Docker](https://www.docker.com/get-started)** (for local development/testing - optional)
    ```bash
    docker --version
-   # अपेक्षित आउटपुट: Docker संस्करण 20.10 वा उच्च
+   # अपेक्षित आउटपुट: Docker संस्करण 20.10 वा त्यसभन्दा नयाँ
    ```
 
-### Azure आवश्यकताहरू
+### Azure Requirements
 
-- सक्रिय **Azure सदस्यता** ([निःशुल्क खाता सिर्जना गर्नुहोस्](https://azure.microsoft.com/free/))
-- तपाईंको सदस्यता मा स्रोतहरू सिर्जना गर्न अनुमति
-- सदस्यता वा स्रोत समूहमा **Contributor** भूमिका
+- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- Permissions to create resources in your subscription
+- **Contributor** role on the subscription or resource group
 
-### ज्ञान आवश्यकताहरू
+### Knowledge Prerequisites
 
-यो एक **उन्नत-स्तर** उदाहरण हो। तपाईंले:
-- [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) पूरा गर्नुभएको छ
-- माइक्रोसर्भिस आर्किटेक्चरको आधारभूत बुझाइ
-- REST API र HTTP को परिचितता
-- कन्टेनर अवधारणाहरूको बुझाइ
+This is an **advanced-level** example. You should have:
+- Completed the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Basic understanding of microservices architecture
+- Familiarity with REST APIs and HTTP
+- Understanding of container concepts
 
-**कन्टेनर एप्समा नयाँ?** आधारभूत सिक्नको लागि पहिले [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) बाट सुरु गर्नुहोस्।
+**New to Container Apps?** Start with the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) first to learn the basics.
 
-## छिटो सुरु (चरण-दर-चरण)
+## Quick Start (Step-by-Step)
 
-### चरण १: क्लोन गर्नुहोस् र नेभिगेट गर्नुहोस्
+### Step 1: Clone and Navigate
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ सफलताको जाँच**: `azure.yaml` देख्न सक्नुहुन्छ:
+**✓ Success Check**: Verify you see `azure.yaml`:
 ```bash
 ls
 # अपेक्षित: README.md, azure.yaml, infra/, src/
 ```
 
-### चरण २: Azure सँग प्रमाणित गर्नुहोस्
+### Step 2: Authenticate with Azure
 
 ```bash
 azd auth login
 ```
 
-यो Azure प्रमाणिकरणको लागि तपाईंको ब्राउजर खोल्छ। तपाईंको Azure प्रमाणहरू प्रयोग गरेर साइन इन गर्नुहोस्।
+This opens your browser for Azure authentication. Sign in with your Azure credentials.
 
-**✓ सफलताको जाँच**: तपाईंले देख्नुहुनेछ:
+**✓ Success Check**: You should see:
 ```
 Logged in to Azure.
 ```
 
-### चरण ३: वातावरण आरम्भ गर्नुहोस्
+### Step 3: Initialize the Environment
 
 ```bash
 azd init
 ```
 
-**तपाईंले देख्नुहुने संकेतहरू**:
-- **Environment name**: छोटो नाम प्रविष्ट गर्नुहोस् (जस्तै, `microservices-dev`)
-- **Azure subscription**: तपाईंको सदस्यता चयन गर्नुहोस्
-- **Azure location**: क्षेत्र चयन गर्नुहोस् (जस्तै, `eastus`, `westeurope`)
+**Prompts you'll see**:
+- **Environment name**: Enter a short name (e.g., `microservices-dev`)
+- **Azure subscription**: Select your subscription
+- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
 
-**✓ सफलताको जाँच**: तपाईंले देख्नुहुनेछ:
+**✓ Success Check**: You should see:
 ```
 SUCCESS: New project initialized!
 ```
 
-### चरण ४: पूर्वाधार र सेवाहरू तैनात गर्नुहोस्
+### Step 4: Deploy Infrastructure and Services
 
 ```bash
 azd up
 ```
 
-**के हुन्छ** (८-१२ मिनेट लाग्छ):
-1. कन्टेनर एप्स वातावरण सिर्जना गर्दछ
-2. निगरानीको लागि Application Insights सिर्जना गर्दछ
-3. API Gateway कन्टेनर निर्माण गर्दछ (Node.js)
-4. Product Service कन्टेनर निर्माण गर्दछ (Python)
-5. दुवै कन्टेनरहरू Azure मा तैनात गर्दछ
-6. नेटवर्किङ र स्वास्थ्य जाँचहरू कन्फिगर गर्दछ
-7. निगरानी र लगिङ सेटअप गर्दछ
+**What happens** (takes 8-12 minutes):
+1. Creates Container Apps environment
+2. Creates Application Insights for monitoring
+3. Builds API Gateway container (Node.js)
+4. Builds Product Service container (Python)
+5. Deploys both containers to Azure
+6. Configures networking and health checks
+7. Sets up monitoring and logging
 
-**✓ सफलताको जाँच**: तपाईंले देख्नुहुनेछ:
+**✓ Success Check**: You should see:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ समय**: ८-१२ मिनेट
+**⏱️ Time**: 8-12 minutes
 
-### चरण ५: तैनाती परीक्षण गर्नुहोस्
+### Step 5: Test the Deployment
 
 ```bash
-# गेटवे अन्त बिन्दु प्राप्त गर्नुहोस्
+# गेटवे अन्तबिन्दु प्राप्त गर्नुहोस्
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# API गेटवे स्वास्थ्य परीक्षण गर्नुहोस्
+# API गेटवेको स्वास्थ्य परीक्षण गर्नुहोस्
 curl $GATEWAY_URL/health
 
 # अपेक्षित आउटपुट:
-# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
+# {"status":"स्वस्थ","service":"एपीआई-गेटवे","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**गेटवे मार्फत उत्पादन सेवा परीक्षण गर्नुहोस्**:
+**Test product service through gateway**:
 ```bash
-# उत्पादनहरूको सूची
+# उत्पादनहरू सूचीबद्ध गर्नुहोस्
 curl $GATEWAY_URL/api/products
 
 # अपेक्षित आउटपुट:
 # [
-#   {"id":1,"name":"ल्यापटप","price":999.99,"stock":50},
-#   {"id":2,"name":"माउस","price":29.99,"stock":200},
-#   {"id":3,"name":"किबोर्ड","price":79.99,"stock":150}
+#   {"id":1,"name":"Laptop","price":999.99,"stock":50},
+#   {"id":2,"name":"Mouse","price":29.99,"stock":200},
+#   {"id":3,"name":"Keyboard","price":79.99,"stock":150}
 # ]
 ```
 
-**✓ सफलताको जाँच**: दुवै अन्त बिन्दुहरूले त्रुटि बिना JSON डेटा फर्काउँछन्।
+**✓ Success Check**: Both endpoints return JSON data without errors.
 
 ---
 
-**🎉 बधाई छ!** तपाईंले Azure मा माइक्रोसर्भिस आर्किटेक्चर तैनात गर्नुभएको छ!
+**🎉 Congratulations!** You've deployed a microservices architecture to Azure!
 
-## परियोजना संरचना
+## Project Structure
 
-सबै कार्यान्वयन फाइलहरू समावेश छन्—यो एक पूर्ण, कार्यरत उदाहरण हो:
+All implementation files are included—this is a complete, working example:
 
 ```
 microservices/
@@ -270,46 +261,46 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**प्रत्येक घटकले के गर्छ:**
+**What Each Component Does:**
 
-**पूर्वाधार (infra/)**:
-- `main.bicep`: सबै Azure स्रोतहरू र तिनीहरूको निर्भरता व्यवस्थापन गर्दछ
-- `core/container-apps-environment.bicep`: कन्टेनर एप्स वातावरण र Azure Container Registry सिर्जना गर्दछ
-- `core/monitor.bicep`: वितरित लगिङको लागि Application Insights सेटअप गर्दछ
-- `app/*.bicep`: स्केलिङ र स्वास्थ्य जाँचको साथ व्यक्तिगत कन्टेनर एप्स परिभाषा
+**Infrastructure (infra/)**:
+- `main.bicep`: Orchestrates all Azure resources and their dependencies
+- `core/container-apps-environment.bicep`: Creates the Container Apps environment and Azure Container Registry
+- `core/monitor.bicep`: Sets up Application Insights for distributed logging
+- `app/*.bicep`: Individual container app definitions with scaling and health checks
 
 **API Gateway (src/api-gateway/)**:
-- सार्वजनिक-सामना गर्ने सेवा जसले अनुरोधहरू ब्याकएन्ड सेवाहरूमा रुट गर्दछ
-- लगिङ, त्रुटि ह्यान्डलिङ, र अनुरोध अग्रेषण कार्यान्वयन गर्दछ
-- सेवा-देखि-सेवा HTTP संचार प्रदर्शन गर्दछ
+- Public-facing service that routes requests to backend services
+- Implements logging, error handling, and request forwarding
+- Demonstrates service-to-service HTTP communication
 
 **Product Service (src/product-service/)**:
-- उत्पादन क्याटलगको साथ आन्तरिक सेवा (सरलताको लागि इन-मेमोरी)
-- स्वास्थ्य जाँचको साथ REST API
-- ब्याकएन्ड माइक्रोसर्भिस ढाँचाको उदाहरण
+- Internal service with product catalog (in-memory for simplicity)
+- REST API with health checks
+- Example of backend microservice pattern
 
-## सेवाहरूको अवलोकन
+## Services Overview
 
 ### API Gateway (Node.js/Express)
 
-**पोर्ट**: ८०८०  
-**पहुँच**: सार्वजनिक (बाह्य इनग्रेस)  
-**उद्देश्य**: आउने अनुरोधहरूलाई उपयुक्त ब्याकएन्ड सेवाहरूमा रुट गर्दछ  
+**Port**: 8080  
+**Access**: Public (external ingress)  
+**Purpose**: Routes incoming requests to appropriate backend services  
 
-**अन्त बिन्दुहरू**:
-- `GET /` - सेवा जानकारी
-- `GET /health` - स्वास्थ्य जाँच अन्त बिन्दु
-- `GET /api/products` - उत्पादन सेवा (सबै सूची) मा अग्रेषण
-- `GET /api/products/:id` - उत्पादन सेवा (ID द्वारा प्राप्त) मा अग्रेषण
+**Endpoints**:
+- `GET /` - Service information
+- `GET /health` - Health check endpoint
+- `GET /api/products` - Forward to product service (list all)
+- `GET /api/products/:id` - Forward to product service (get by ID)
 
-**मुख्य सुविधाहरू**:
-- axios को साथ अनुरोध रुटिङ
-- केन्द्रीयकृत लगिङ
-- त्रुटि ह्यान्डलिङ र टाइमआउट व्यवस्थापन
-- वातावरण चरहरू मार्फत सेवा पत्ता लगाउने
-- Application Insights एकीकरण
+**Key Features**:
+- Request routing with axios
+- Centralized logging
+- Error handling and timeout management
+- Service discovery via environment variables
+- Application Insights integration
 
-**कोड हाइलाइट** (`src/api-gateway/app.js`):
+**Code Highlight** (`src/api-gateway/app.js`):
 ```javascript
 // आन्तरिक सेवा सञ्चार
 app.get('/api/products', async (req, res) => {
@@ -320,24 +311,24 @@ app.get('/api/products', async (req, res) => {
 
 ### Product Service (Python/Flask)
 
-**पोर्ट**: ८०००  
-**पहुँच**: केवल आन्तरिक (बाह्य इनग्रेस छैन)  
-**उद्देश्य**: इन-मेमोरी डेटा संग उत्पादन क्याटलग व्यवस्थापन गर्दछ  
+**Port**: 8000  
+**Access**: Internal only (no external ingress)  
+**Purpose**: Manages product catalog with in-memory data  
 
-**अन्त बिन्दुहरू**:
-- `GET /` - सेवा जानकारी
-- `GET /health` - स्वास्थ्य जाँच अन्त बिन्दु
-- `GET /products` - सबै उत्पादनहरू सूचीबद्ध गर्नुहोस्
-- `GET /products/<id>` - ID द्वारा उत्पादन प्राप्त गर्नुहोस्
+**Endpoints**:
+- `GET /` - Service information
+- `GET /health` - Health check endpoint
+- `GET /products` - List all products
+- `GET /products/<id>` - Get product by ID
 
-**मुख्य सुविधाहरू**:
-- Flask को साथ RESTful API
-- इन-मेमोरी उत्पादन स्टोर (सरल, कुनै डेटाबेस आवश्यक छैन)
-- प्रब्सको साथ स्वास्थ्य निगरानी
-- संरचित लगिङ
-- Application Insights एकीकरण
+**Key Features**:
+- RESTful API with Flask
+- In-memory product store (simple, no database needed)
+- Health monitoring with probes
+- Structured logging
+- Application Insights integration
 
-**डेटा मोडेल**:
+**Data Model**:
 ```python
 {
   "id": 1,
@@ -348,17 +339,17 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**किन केवल आन्तरिक?**
-उत्पादन सेवा सार्वजनिक रूपमा उजागर गरिएको छैन। सबै अनुरोधहरू API Gateway मार्फत जानुपर्छ, जसले प्रदान गर्दछ:
-- सुरक्षा: नियन्त्रण गरिएको पहुँच बिन्दु
-- लचिलोपन: क्लाइन्टहरूलाई असर नगरी ब्याकएन्ड परिवर्तन गर्न सकिन्छ
-- निगरानी: केन्द्रीयकृत अनुरोध लगिङ
+**Why Internal Only?**
+The product service is not exposed publicly. All requests must go through the API Gateway, which provides:
+- Security: Controlled access point
+- Flexibility: Can change backend without affecting clients
+- Monitoring: Centralized request logging
 
-## सेवा संचार बुझ्दै
+## Understanding Service Communication
 
-### सेवाहरू एक-अर्कासँग कसरी कुरा गर्छन्
+### How Services Talk to Each Other
 
-यस उदाहरणमा, API Gateway ले **आन्तरिक HTTP कलहरू** प्रयोग गरेर Product Service सँग संचार गर्दछ:
+In this example, the API Gateway communicates with the Product Service using **internal HTTP calls**:
 
 ```javascript
 // एपीआई गेटवे (src/api-gateway/app.js)
@@ -368,79 +359,79 @@ const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**मुख्य बिन्दुहरू**:
+**Key Points**:
 
-1. **DNS-आधारित पत्ता लगाउने**: कन्टेनर एप्सले आन्तरिक सेवाहरूको लागि स्वचालित रूपमा DNS प्रदान गर्दछ
+1. **DNS-Based Discovery**: Container Apps automatically provides DNS for internal services
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - सरल रूपमा: `http://product-service` (कन्टेनर एप्सले यसलाई समाधान गर्दछ)
+   - Simplified as: `http://product-service` (Container Apps resolves it)
 
-2. **कुनै सार्वजनिक एक्सपोजर छैन**: Product Service मा `external: false` छ Bicep मा
-   - केवल कन्टेनर एप्स वातावरण भित्र पहुँचयोग्य
-   - इन्टरनेटबाट पहुँच गर्न सकिँदैन
+2. **No Public Exposure**: Product Service has `external: false` in Bicep
+   - Only accessible within the Container Apps environment
+   - Cannot be reached from the internet
 
-3. **Environment Variables**: सेवा URL हरू तैनाती समयमा इंजेक्ट गरिन्छ
-   - Bicep ले गेटवेमा आन्तरिक FQDN पास गर्दछ
-   - एप्लिकेसन कोडमा कुनै हार्डकोडेड URL छैन
+3. **Environment Variables**: Service URLs are injected at deployment time
+   - Bicep passes the internal FQDN to the gateway
+   - No hardcoded URLs in application code
 
-**उदाहरण**: यसलाई कार्यालय कोठाहरू जस्तै सोच्नुहोस्। API Gateway रिसेप्शन डेस्क हो (सार्वजनिक-सामना गर्ने), र Product Service कार्यालय कोठा हो (केवल आन्तरिक)। आगन्तुकहरूले रिसेप्शन मार्फत कुनै पनि कार्यालयमा पुग्नुपर्छ।
+**Analogy**: Think of this like office rooms. The API Gateway is the reception desk (public-facing), and the Product Service is an office room (internal only). Visitors must go through reception to reach any office.
 
-## तैनाती विकल्पहरू
+## Deployment Options
 
-### पूर्ण तैनाती (सिफारिस गरिएको)
+### Full Deployment (Recommended)
 
 ```bash
-# पूर्वाधार र दुबै सेवाहरू तैनाथ गर्नुहोस्
+# पूर्वाधार र दुवै सेवाहरू तैनाथ गर्नुहोस्
 azd up
 ```
 
-यो तैनात गर्दछ:
-1. कन्टेनर एप्स वातावरण
+This deploys:
+1. Container Apps environment
 2. Application Insights
-3. कन्टेनर रजिस्ट्री
-4. API Gateway कन्टेनर
-5. Product Service कन्टेनर
+3. Container Registry
+4. API Gateway container
+5. Product Service container
 
-**समय**: ८-१२ मिनेट
+**Time**: 8-12 minutes
 
-### व्यक्तिगत सेवा तैनात गर्नुहोस्
+### Deploy Individual Service
 
 ```bash
-# केवल एक सेवा तैनात गर्नुहोस् (प्रारम्भिक azd up पछि)
+# केवल एउटा सेवा तैनात गर्नुहोस् (प्रारम्भिक azd up पछि)
 azd deploy api-gateway
 
-# वा उत्पादन सेवा तैनात गर्नुहोस्
+# वा प्रोडक्ट सेवा तैनात गर्नुहोस्
 azd deploy product-service
 ```
 
-**प्रयोग केस**: जब तपाईंले एक सेवामा कोड अपडेट गर्नुभएको छ र केवल त्यो सेवा पुनः तैनात गर्न चाहनुहुन्छ।
+**Use Case**: When you've updated code in one service and want to redeploy only that service.
 
-### कन्फिगरेसन अपडेट गर्नुहोस्
+### Update Configuration
 
 ```bash
 # स्केलिङ प्यारामिटरहरू परिवर्तन गर्नुहोस्
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# नयाँ कन्फिगरेसनसँग पुनः तैनाथ गर्नुहोस्
+# नयाँ कन्फिगरेसनसहित पुनः तैनाथ गर्नुहोस्
 azd up
 ```
 
-## कन्फिगरेसन
+## Configuration
 
-### स्केलिङ कन्फिगरेसन
+### Scaling Configuration
 
-दुवै सेवाहरू Bicep फाइलहरूमा HTTP-आधारित स्वचालित स्केलिङको साथ कन्फिगर गरिएको छ:
+Both services are configured with HTTP-based autoscaling in their Bicep files:
 
 **API Gateway**:
-- न्यूनतम प्रतिकृतिहरू: २ (सधैं कम्तिमा २ उपलब्धताका लागि)
-- अधिकतम प्रतिकृतिहरू: २०
-- स्केल ट्रिगर: प्रति प्रतिकृति ५० समवर्ती अनुरोधहरू
+- Min replicas: 2 (always at least 2 for availability)
+- Max replicas: 20
+- Scale trigger: 50 concurrent requests per replica
 
 **Product Service**:
-- न्यूनतम प्रतिकृतिहरू: १ (आवश्यक भएमा शून्यमा स्केल गर्न सकिन्छ)
-- अधिकतम प्रतिकृतिहरू: १०
-- स्केल ट्रिगर: प्रति प्रतिकृति १०० समवर्ती अनुरोधहरू
+- Min replicas: 1 (can scale to zero if needed)
+- Max replicas: 10
+- Scale trigger: 100 concurrent requests per replica
 
-**स्केलिङ अनुकूलन गर्नुहोस्** (`infra/app/*.bicep` मा):
+**Customize Scaling** (in `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -458,21 +449,21 @@ scale: {
 }
 ```
 
-### स्रोत आवंटन
+### Resource Allocation
 
 **API Gateway**:
-- CPU: १.० vCPU
-- मेमोरी: २ GiB
-- कारण: सबै बाह्य ट्राफिक ह्यान्डल गर्दछ
+- CPU: 1.0 vCPU
+- Memory: 2 GiB
+- Reason: Handles all external traffic
 
 **Product Service**:
-- CPU: ०.५ vCPU
-- मेमोरी: १ GiB
-- कारण: हल्का इन-मेमोरी अपरेसनहरू
+- CPU: 0.5 vCPU
+- Memory: 1 GiB
+- Reason: Lightweight in-memory operations
 
-### स्वास्थ्य जाँचहरू
+### Health Checks
 
-दुवै सेवाहरूमा लिभनेस र रेडिनेस प्रब्स समावेश छन्:
+Both services include liveness and readiness probes:
 
 ```bicep
 probes: [
@@ -497,28 +488,29 @@ probes: [
 ]
 ```
 
-**यसको अर्थ के हो**:
-- **लिभनेस**: यदि स्वास्थ्य जाँच असफल भयो भने, कन्टेनर एप्सले कन्टेनर पुनः सुरु गर्दछ
-- **रेडिनेस**: यदि तयार छैन भने, कन्टेनर एप्सले उक्त प्रतिकृतिमा ट्राफिक रुट गर्न रोक्छ
+**What This Means**:
+- **Liveness**: If health check fails, Container Apps restarts the container
+- **Readiness**: If not ready, Container Apps stops routing traffic to that replica
 
 
 
-## निगरानी र अवलोकन
+## Monitoring & Observability
 
-### सेवा लगहरू हेर्नुहोस्
+### View Service Logs
 
 ```bash
-# API गेटवेबाट लगहरू स्ट्रिम गर्नुहोस्
-azd logs api-gateway --follow
+# azd monitor प्रयोग गरी लगहरू हेर्नुहोस्
+azd monitor --logs
 
-# हालसालैको उत्पादन सेवा लगहरू हेर्नुहोस्
-azd logs product-service --tail 100
+# वा विशिष्ट Container Apps का लागि Azure CLI प्रयोग गर्नुहोस्:
+# API Gateway बाट लगहरू स्ट्रीम गर्नुहोस्
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# दुबै सेवाहरूबाट सबै लगहरू हेर्नुहोस्
-azd logs --follow
+# हालैका उत्पादन सेवा लगहरू हेर्नुहोस्
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**अपेक्षित आउटपुट**:
+**Expected Output**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -526,11 +518,11 @@ azd logs --follow
 [product-service] Retrieved 5 products
 ```
 
-### Application Insights क्वेरीहरू
+### Application Insights Queries
 
-Azure Portal मा Application Insights पहुँच गर्नुहोस्, त्यसपछि यी क्वेरीहरू चलाउनुहोस्:
+Access Application Insights in Azure Portal, then run these queries:
 
-**ढिलो अनुरोधहरू फेला पार्नुहोस्**:
+**Find Slow Requests**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -539,7 +531,7 @@ requests
 | order by count_ desc
 ```
 
-**सेवा-देखि-सेवा कलहरू ट्र्याक गर्नुहोस्**:
+**Track Service-to-Service Calls**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -548,7 +540,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**सेवाले त्रुटि दर**:
+**Error Rate by Service**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -556,7 +548,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**समयको साथ अनुरोध मात्रा**:
+**Request Volume Over Time**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -564,51 +556,51 @@ requests
 | render timechart
 ```
 
-### निगरानी ड्यासबोर्ड पहुँच गर्नुहोस्
+### Access Monitoring Dashboard
 
 ```bash
-# एप्लिकेशन इनसाइट्स विवरण प्राप्त गर्नुहोस्
+# Application Insights को विवरण प्राप्त गर्नुहोस्
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# एजर पोर्टल अनुगमन खोल्नुहोस्
+# Azure Portal मा निगरानी खोल्नुहोस्
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### लाइभ मेट्रिक्स
+### Live Metrics
 
-1. Azure Portal मा Application Insights नेभिगेट गर्नुहोस्
-2. "Live Metrics" मा क्लिक गर्नुहोस्
-3. वास्तविक-समय अनुरोधहरू, असफलताहरू, र प्रदर्शन हेर्नुहोस्
-4. परीक्षण गर्नुहोस्: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+1. Navigate to Application Insights in Azure Portal
+2. Click "Live Metrics"
+3. See real-time requests, failures, and performance
+4. Test by running: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## व्यावहारिक अभ्यासहरू
+## Practical Exercises
 
-[नोट: "Practical Exercises" खण्डमा माथि विस्तृत चरण-दर-चरण अभ्यासहरू हेर्नुहोस् जसमा तैनाती प्रमाणीकरण, डेटा परिमार्जन, स्वचालित स्केलिङ परीक्षणहरू, त्रुटि ह्यान्डलिङ, र तेस्रो सेवा थप्ने समावेश छ।]
+[Note: See full exercises above in the "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding a third service.]
 
-## लागत विश्लेषण
+## Cost Analysis
 
-### अनुमानित मासिक लागतहरू (यो दुई-सेवा उदाहरणको लागि)
+### Estimated Monthly Costs (For This 2-Service Example)
 
-| स्रोत | कन्फिगरेसन | अनुमानित लागत |
+| Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
-| API Gateway | २-२० प्रतिकृतिहरू, १ vCPU, २GB RAM | $३०-१५० |
-| Product Service | १-१० प्रतिकृतिहरू, ०.५ vCPU, १GB RAM | $१५-७५ |
-| Container Registry | आधारभूत स्तर | $५ |
-| Application Insights | १-२ GB/महिना | $५-१० |
-| Log Analytics | १ GB/महिना | $३ |
-| **कुल** | | **$५८-२४३/महिना** |
+| API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Basic tier | $5 |
+| Application Insights | 1-2 GB/month | $5-10 |
+| Log Analytics | 1 GB/month | $3 |
+| **Total** | | **$58-243/month** |
 
-**प्रयोग अनुसार लागत ब्रेकडाउन**:
-- **हल्का ट्राफिक** (परीक्षण/सिकाइ): ~$६०/महिना
-- **मध्यम ट्राफिक** (सानो उत्पादन): ~$१२०/महिना
-- **उच्च ट्राफिक** (व्यस्त अवधि): ~$२४०/महिना
+**Cost Breakdown by Usage**:
+- **Light traffic** (testing/learning): ~$60/month
+- **Moderate traffic** (small production): ~$120/month
+- **High traffic** (busy periods): ~$240/month
 
-### लागत अनुकूलन सुझावहरू
+### Cost Optimization Tips
 
-1. **विकासको लागि शून्यमा स्केल गर्नुहोस्**:
+1. **Scale to Zero for Development**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -616,64 +608,69 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Cosmos DB को लागि उपभोग योजना प्रयोग गर्नुहोस्** (जब तपाईं यसलाई थप्नुहुन्छ):
-   - तपाईंले प्रयोग गरेको मात्र तिर्नुहोस्
-   - कुनै न्यूनतम शुल्क छैन
+2. **Use Consumption Plan for Cosmos DB** (when you add it):
+   - Pay only for what you use
+   - No minimum charge
 
-3. **Application Insights स्याम्पलिङ सेट गर्नुहोस्**:
+3. **Set Application Insights Sampling**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // अनुरोधहरूको ५०% नमूना
+   appInsights.defaultClient.config.samplingPercentage = 50; // अनुरोधहरूको 50% नमुना गर्नुहोस्
    ```
 
-4. **आवश्यक नभएको बेला सफा
-शिक्षा/परीक्षणका लागि विचार गर्नुहोस्:
-- Azure निःशुल्क क्रेडिट प्रयोग गर्नुहोस् (पहिलो ३० दिन)
-- न्यूनतम प्रतिकृतिहरूमा सीमित रहनुहोस्
-- परीक्षणपछि मेटाउनुहोस् (लगातार शुल्क नहोस्)
+4. **Clean Up When Not Needed**:
+   ```bash
+   azd down
+   ```
+
+### Free Tier Options
+For learning/testing, consider:
+- Azure निःशुल्क क्रेडिटहरू प्रयोग गर्नुहोस् (पहिला 30 दिन)
+- रिप्लिकाहरू न्यूनतममा राख्नुहोस्
+- परीक्षण पछि मेटाउनुहोस् (निरन्तर शुल्क नलागोस्)
 
 ---
 
-## सफाइ
+## Cleanup
 
-लगातार शुल्कबाट बच्न, सबै स्रोतहरू मेटाउनुहोस्:
+To avoid ongoing charges, delete all resources:
 
 ```bash
 azd down --force --purge
 ```
 
-**पुष्टिकरण प्रॉम्प्ट**:
+**पुष्टिकरण संकेत**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-पुष्टि गर्न `y` टाइप गर्नुहोस्।
+पुष्टिकरण गर्न `y` टाइप गर्नुहोस्।
 
-**के मेटिन्छ**:
-- कन्टेनर एप्स वातावरण
-- दुवै कन्टेनर एप्स (गेटवे र प्रोडक्ट सेवा)
-- कन्टेनर रजिस्ट्री
-- एप्लिकेसन इन्साइट्स
-- लग एनालिटिक्स कार्यक्षेत्र
-- स्रोत समूह
+**के मेटिनेछ**:
+- Container Apps Environment
+- Both Container Apps (gateway & product service)
+- Container Registry
+- Application Insights
+- Log Analytics Workspace
+- Resource Group
 
-**✓ सफाइ पुष्टि गर्नुहोस्**:
+**✓ सफाइ प्रमाणित गर्नुहोस्**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-खाली फर्किनुपर्छ।
+खाली हुनुपर्छ।
 
 ---
 
-## विस्तार मार्गदर्शिका: २ बाट ५+ सेवाहरूमा
+## विस्तार मार्गदर्शिका: 2 बाट 5+ सेवाहरू
 
-जब तपाईंले यो २-सेवा आर्किटेक्चरमा महारत हासिल गर्नुहुन्छ, यहाँ विस्तार गर्ने तरिका छ:
+एक पटक तपाईंले यो 2-सर्भिस आर्किटेक्चरमा निपुण भएपछि, यसरी विस्तार गर्न सकिन्छ:
 
-### चरण १: डाटाबेस स्थायित्व थप्नुहोस् (अर्को कदम)
+### चरण 1: डेटाबेस स्थायित्व थप्नुहोस् (अर्को चरण)
 
-**प्रोडक्ट सेवाका लागि Cosmos DB थप्नुहोस्**:
+**Product Service का लागि Cosmos DB थप्नुहोस्**:
 
-1. `infra/core/cosmos.bicep` सिर्जना गर्नुहोस्:
+1. सिर्जना गर्नुहोस् `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -686,18 +683,18 @@ az group list --query "[?starts_with(name,'rg-microservices')]" --output table
    }
    ```
 
-2. प्रोडक्ट सेवालाई इन-मेमोरी डाटाको सट्टा Cosmos DB प्रयोग गर्न अद्यावधिक गर्नुहोस्
+2. Product service लाई in-memory डेटाको सट्टा Cosmos DB प्रयोग गर्ने गरी अपडेट गर्नुहोस्
 
-3. अनुमानित थप लागत: ~$25/महिना (सर्भरलेस)
+3. अनुमानित अतिरिक्त लागत: ~$25/महिना (serverless)
 
-### चरण २: तेस्रो सेवा थप्नुहोस् (अर्डर व्यवस्थापन)
+### चरण 2: तेस्रो सेवा थप्नुहोस् (Order Management)
 
-**अर्डर सेवा सिर्जना गर्नुहोस्**:
+**Order Service सिर्जना गर्नुहोस्**:
 
 1. नयाँ फोल्डर: `src/order-service/` (Python/Node.js/C#)
 2. नयाँ Bicep: `infra/app/order-service.bicep`
-3. API गेटवेलाई `/api/orders` मार्गमा अद्यावधिक गर्नुहोस्
-4. अर्डर स्थायित्वका लागि Azure SQL डाटाबेस थप्नुहोस्
+3. API Gateway लाई `/api/orders` रुट गर्न अपडेट गर्नुहोस्
+4. अर्डर स्थायित्वका लागि Azure SQL Database थप्नुहोस्
 
 **आर्किटेक्चर यसरी हुन्छ**:
 ```
@@ -705,35 +702,35 @@ API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### चरण ३: असिन्क्रोनस सञ्चार थप्नुहोस् (सर्भिस बस)
+### चरण 3: असिन्क्रोन सञ्चार थप्नुहोस् (Service Bus)
 
-**इभेन्ट-ड्रिभन आर्किटेक्चर कार्यान्वयन गर्नुहोस्**:
+**इभेन्ट-ड्राइभन आर्किटेक्चर लागू गर्नुहोस्**:
 
 1. Azure Service Bus थप्नुहोस्: `infra/core/servicebus.bicep`
-2. प्रोडक्ट सेवाले "ProductCreated" इभेन्टहरू प्रकाशित गर्छ
-3. अर्डर सेवाले प्रोडक्ट इभेन्टहरू सब्स्क्राइब गर्छ
-4. इभेन्टहरू प्रशोधन गर्न Notification सेवा थप्नुहोस्
+2. Product Service ले "ProductCreated" इभेन्टहरू प्रकाशित गर्छ
+3. Order Service ले product इभेन्टहरूमा सदस्यता लिन्छ
+4. इभेन्टहरू प्रक्रिया गर्न Notification Service थप्नुहोस्
 
-**ढाँचा**: अनुरोध/प्रतिक्रिया (HTTP) + इभेन्ट-ड्रिभन (सर्भिस बस)
+**ढाँचा**: अनुरोध/प्रतिक्रिया (HTTP) + इभेन्ट-ड्राइभन (Service Bus)
 
-### चरण ४: प्रयोगकर्ता प्रमाणीकरण थप्नुहोस्
+### चरण 4: प्रयोगकर्ता प्रमाणीकरण थप्नुहोस्
 
-**प्रयोगकर्ता सेवा कार्यान्वयन गर्नुहोस्**:
+**प्रयोगकर्ता सेवा लागू गर्नुहोस्**:
 
-1. `src/user-service/` सिर्जना गर्नुहोस् (Go/Node.js)
-2. Azure AD B2C वा कस्टम JWT प्रमाणीकरण थप्नुहोस्
-3. API गेटवेले टोकनहरू प्रमाणित गर्छ
-4. सेवाहरूले प्रयोगकर्ता अनुमतिहरू जाँच गर्छन्
+1. सिर्जना गर्नुहोस् `src/user-service/` (Go/Node.js)
+2. Azure AD B2C वा custom JWT प्रमाणीकरण थप्नुहोस्
+3. API Gateway ले टोकनहरू मान्य गर्छ
+4. सेवाहरूले प्रयोगकर्ताको अनुमति जाँच गर्छन्
 
-### चरण ५: उत्पादन तयारी
+### चरण 5: उत्पादन तयारी
 
 **यी कम्पोनेन्टहरू थप्नुहोस्**:
-- Azure Front Door (ग्लोबल लोड ब्यालेन्सिङ)
-- Azure Key Vault (गोप्य व्यवस्थापन)
+- Azure Front Door (ग्लोबल लोड बेलान्सिङ)
+- Azure Key Vault (सिक्रेट व्यवस्थापन)
 - Azure Monitor Workbooks (कस्टम ड्यासबोर्डहरू)
 - CI/CD पाइपलाइन (GitHub Actions)
-- ब्लू-ग्रीन डिप्लोयमेन्टहरू
-- सबै सेवाहरूका लागि प्रबन्धित पहिचान
+- Blue-Green Deployments
+- सबै सेवाहरूका लागि Managed Identity
 
 **पूर्ण उत्पादन आर्किटेक्चर लागत**: ~$300-1,400/महिना
 
@@ -741,60 +738,60 @@ API Gateway → Product Service (Cosmos DB)
 
 ## थप जान्नुहोस्
 
-### सम्बन्धित दस्तावेज
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+### सम्बन्धित दस्तावेजहरू
+- [Azure Container Apps दस्तावेजीकरण](https://learn.microsoft.com/azure/container-apps/)
+- [माइक्रोसर्भिस आर्किटेक्चर गाइड](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [वितरित ट्रेसिङका लागि Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI दस्तावेजीकरण](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### यस पाठ्यक्रममा अर्को कदम
-- ← अघिल्लो: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - सुरुको एकल-कन्टेनर उदाहरण
-- → अर्को: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI क्षमता थप्नुहोस्
-- 🏠 [पाठ्यक्रम गृह](../../README.md)
+### यो कोर्सको अर्को चरणहरू
+- ← अघिल्लो: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - शुरुआतकर्ता एकल-कन्टेनर उदाहरण
+- → अर्को: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI क्षमताहरू थप्नुहोस्
+- 🏠 [Course Home](../../README.md)
 
 ### तुलना: कहिले के प्रयोग गर्ने
 
-**एकल कन्टेनर एप** (Simple Flask API उदाहरण):
+**सिङ्गल कन्टेनर एप** (Simple Flask API उदाहरण):
 - ✅ सरल अनुप्रयोगहरू
-- ✅ मोनोलिथिक आर्किटेक्चर
-- ✅ छिटो तैनाथ गर्न
+- ✅ मोनोलीथिक आर्किटेक्चर
+- ✅ छिटो डिप्लोय गर्न मिल्ने
 - ❌ सीमित स्केलेबिलिटी
 - **लागत**: ~$15-50/महिना
 
 **माइक्रोसर्भिसहरू** (यो उदाहरण):
 - ✅ जटिल अनुप्रयोगहरू
-- ✅ प्रत्येक सेवाको स्वतन्त्र स्केलिङ
-- ✅ टोली स्वायत्तता (विभिन्न सेवाहरू, विभिन्न टोलीहरू)
-- ❌ व्यवस्थापन गर्न थप जटिल
+- ✅ प्रत्येक सेवाको लागि स्वतन्त्र स्केलिङ
+- ✅ टिम स्वतन्त्रता (विभिन्न सेवाहरू, विभिन्न टिमहरू)
+- ❌ व्यवस्थापनमा अधिक जटिल
 - **लागत**: ~$60-250/महिना
 
-**कुबेरनेट्स (AKS)**:
+**Kubernetes (AKS)**:
 - ✅ अधिकतम नियन्त्रण र लचिलोपन
-- ✅ मल्टि-क्लाउड पोर्टेबिलिटी
+- ✅ बहु-क्लाउड पोर्टेबिलिटी
 - ✅ उन्नत नेटवर्किङ
-- ❌ कुबेरनेट्स विशेषज्ञता आवश्यक
+- ❌ Kubernetes विशेषज्ञता आवश्यक
 - **लागत**: ~$150-500/महिना न्यूनतम
 
-**सिफारिस**: कन्टेनर एप्सबाट सुरु गर्नुहोस् (यो उदाहरण), कुबेरनेट्स-विशिष्ट सुविधाहरू आवश्यक परे मात्र AKS मा जानुहोस्।
+**सिफारिस**: Container Apps (यो उदाहरण) बाट सुरु गर्नुहोस्, AKS त केवल तब मात्र सर्नुहोस् जब तपाईंलाई Kubernetes-विशिष्ट सुविधाहरू आवश्यक परो।
 
 ---
 
 ## बारम्बार सोधिने प्रश्नहरू
 
-**प्रश्न: किन २ सेवाहरू मात्र, ५+ होइन?**  
-उत्तर: शैक्षिक प्रगति। सरल उदाहरणसँग आधारभूत कुराहरू (सेवा सञ्चार, अनुगमन, स्केलिङ) सिक्नुहोस्, त्यसपछि जटिलता थप्नुहोस्। यहाँ सिकेका ढाँचाहरू १००-सेवा आर्किटेक्चरहरूमा पनि लागू हुन्छन्।
+**प्रश्न: किन 5+ को सट्टा मात्र 2 सेवा?**  
+उत्तर: शैक्षिक प्रगति। जटिलता थप्नु अघि आधारभूत कुरा (सेवा संचार, मोनिटरिङ, स्केलिङ) एउटा सरल उदाहरणबाट सिक्नुहोस्। यहाँ सिकेका ढाँचाहरू 100-सेवा आर्किटेक्चरमा पनि लागू हुन्छन्।
 
-**प्रश्न: के म आफैं थप सेवाहरू थप्न सक्छु?**  
-उत्तर: पक्कै! माथिको विस्तार मार्गदर्शिका अनुसरण गर्नुहोस्। प्रत्येक नयाँ सेवाले उही ढाँचा अनुसरण गर्छ: src फोल्डर सिर्जना गर्नुहोस्, Bicep फाइल सिर्जना गर्नुहोस्, azure.yaml अद्यावधिक गर्नुहोस्, तैनाथ गर्नुहोस्।
+**प्रश्न: के म आफैँ थप सेवाहरू थप्न सक्छु?**  
+उत्तर: अवश्य! माथिको विस्तार मार्गदर्शिका पालन गर्नुहोस्। प्रत्येक नयाँ सेवा एउटै ढाँचालाई अनुसरण गर्छ: src फोल्डर सिर्जना गर्नुहोस्, Bicep फाइल बनाउनुहोस्, azure.yaml अपडेट गर्नुहोस्, तैनाथ गर्नुहोस्।
 
-**प्रश्न: के यो उत्पादनको लागि तयार छ?**  
-उत्तर: यो एक बलियो आधार हो। उत्पादनका लागि थप्नुहोस्: प्रबन्धित पहिचान, Key Vault, स्थायी डाटाबेसहरू, CI/CD पाइपलाइन, अनुगमन अलर्टहरू, र ब्याकअप रणनीति।
+**प्रश्न: के यो उत्पादन-तयार छ?**  
+उत्तर: यो बलियो आधार हो। उत्पादनका लागि थप्नुहोस्: Managed Identity, Key Vault, स्थायी डेटाबेसहरू, CI/CD पाइपलाइन, मोनिटरिङ अलर्टहरू, र ब्याकअप रणनीति।
 
-**प्रश्न: किन Dapr वा अन्य सेवा मेष प्रयोग नगर्ने?**  
-उत्तर: सिक्नको लागि सरल राख्नुहोस्। एकपटक तपाईंले मूल कन्टेनर एप्स नेटवर्किङ बुझ्नुभयो भने, उन्नत परिदृश्यहरूको लागि Dapr थप्न सक्नुहुन्छ।
+**प्रश्न: किन Dapr वा अन्य सेवा मेश प्रयोग नगर्ने?**  
+उत्तर: सिकाइका लागि सरल राख्नुहोस्। जब तपाईंले Container Apps को नेटिव नेटवर्किङ बुझ्नुभयो भने, उन्नत परिदृश्यहरूको लागि Dapr थप गर्न सक्नुहुन्छ।
 
-**प्रश्न: म स्थानीय रूपमा कसरी डिबग गर्न सक्छु?**  
-उत्तर: Docker सँग सेवाहरू स्थानीय रूपमा चलाउनुहोस्:
+**प्रश्न: म स्थानीय रूपमा कसरी डिबग गर्छु?**  
+उत्तर: सेवाहरूलाई स्थानीय रूपमा Docker सँग चलाउनुहोस्:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
@@ -802,24 +799,24 @@ docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gatew
 ```
 
 **प्रश्न: के म विभिन्न प्रोग्रामिङ भाषाहरू प्रयोग गर्न सक्छु?**  
-उत्तर: हो! यो उदाहरणले Node.js (गेटवे) + Python (प्रोडक्ट सेवा) देखाउँछ। तपाईं कुनै पनि भाषाहरू मिसाउन सक्नुहुन्छ जुन कन्टेनरहरूमा चल्छ।
+उत्तर: हो! यो उदाहरण Node.js (gateway) + Python (product service) देखाउँछ। तपाईं कन्टेनरमा चल्ने कुनै पनि भाषाहरू मिश्रण गर्न सक्नुहुन्छ।
 
-**प्रश्न: यदि मसँग Azure क्रेडिट छैन भने के गर्ने?**  
-उत्तर: Azure निःशुल्क स्तर प्रयोग गर्नुहोस् (नयाँ खाताहरूका लागि पहिलो ३० दिन) वा छोटो परीक्षण अवधिका लागि तैनाथ गर्नुहोस् र तुरुन्त मेटाउनुहोस्।
+**प्रश्न: के मेरो सँग Azure क्रेडिटहरू छैनन् भने?**  
+उत्तर: नयाँ खाताहरूका लागि Azure निःशुल्क टियर (पहिला 30 दिन) प्रयोग गर्नुहोस् वा छोटो परीक्षण अवधि मात्र तैनाथ गरेर तुरुन्त मेटाउनुहोस्।
 
 ---
 
-> **🎓 सिकाइ मार्ग सारांश**: तपाईंले स्वचालित स्केलिङ, आन्तरिक नेटवर्किङ, केन्द्रीकृत अनुगमन, र उत्पादन-तयारी ढाँचाहरूको साथ बहु-सेवा आर्किटेक्चर तैनाथ गर्न सिक्नुभयो। यो आधारले तपाईंलाई जटिल वितरित प्रणालीहरू र उद्यम माइक्रोसर्भिस आर्किटेक्चरहरूको लागि तयार गर्दछ।
+> **🎓 सिकाइ मार्ग सारांश**: तपाईंले स्वत: स्केलिङ, आन्तरिक नेटवर्किङ, केन्द्रित मोनिटरिङ, र उत्पादन-तयार ढाँचाहरूसँग बहु-सेवा आर्किटेक्चर तैनाथ गर्न सिक्नुभयो। यो आधारले तपाईंलाई जटिल वितरित प्रणालीहरू र एन्त्रप्राइज माइक्रोसर्भिस आर्किटेक्चरहरूका लागि तयार बनाउँछ।
 
-**📚 पाठ्यक्रम नेभिगेसन:**
+**📚 कोर्स नेभिगेसन:**
 - ← अघिल्लो: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
 - → अर्को: [Database Integration Example](../../../../../examples/database-app)
-- 🏠 [पाठ्यक्रम गृह](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- 🏠 [Course Home](../../../README.md)
+- 📖 [Container Apps सर्वश्रेष्ठ अभ्यासहरू](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:  
-यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको छ। हामी शुद्धताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छ। यसको मूल भाषामा रहेको दस्तावेज़लाई आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीको लागि, व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलतफहमी वा गलत व्याख्याको लागि हामी जिम्मेवार हुनेछैनौं।
+अस्वीकरण:
+यो कागजात AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुन सक्छ। मूल भाषामा रहेको मौलिक दस्तावेजलाई अधिकृत स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि पेशेवर मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलत बुझाइ वा व्याख्याको लागि हामी उत्तरदायी छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,82 +1,118 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-24T13:42:50+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "ne"
-}
--->
-# 1. टेम्प्लेट चयन गर्नुहोस्
+# 1. Select a Template
 
-!!! tip "यस मोड्युलको अन्त्यसम्ममा तपाईं सक्षम हुनुहुनेछ"
+!!! tip "यस मोड्युलको अन्त्यसम्म तपाईं निम्न कार्यहरू गर्न सक्षम हुनुहुनेछ"
 
-    - [ ] AZD टेम्प्लेट के हो भनेर वर्णन गर्नुहोस्
-    - [ ] AI को लागि AZD टेम्प्लेट पत्ता लगाउनुहोस् र प्रयोग गर्नुहोस्
-    - [ ] AI एजेन्ट्स टेम्प्लेटबाट सुरु गर्नुहोस्
-    - [ ] **प्रयोगशाला १:** GitHub Codespaces सँग AZD क्विकस्टार्ट
+    - [ ] AZD टेम्पलेटहरू के हुन् वर्णन गर्नुहोस्
+    - [ ] AI का लागि AZD टेम्पलेटहरू पत्ता लगाउनुहोस् र प्रयोग गर्नुहोस्
+    - [ ] AI Agents टेम्पलेटबाट सुरु गर्नुहोस्
+    - [ ] **Lab 1:** GitHub Codespacesसहित AZD क्विकस्टार्ट
 
 ---
 
-## 1. निर्माणकर्ताको उपमा
+## 1. A Builder Analogy
 
-आधुनिक उद्यम-तयार AI एप्लिकेसन _शून्यबाट_ निर्माण गर्नु चुनौतीपूर्ण हुन सक्छ। यो आफ्नै घर ईंटा-ईंटा बनाएर निर्माण गर्ने जस्तै हो। हो, यो सम्भव छ! तर यो चाहिएको परिणाम प्राप्त गर्न सबैभन्दा प्रभावकारी तरिका होइन!
+Building a modern enterprise-ready AI application _शुरुबाटै_ can be daunting. It's a little bit like building your new home on your own, brick by brick. Yes, it can be done! But it is not the most effective way to get the desired end result! 
 
-यसको सट्टा, हामी प्रायः पहिले नै रहेको _डिजाइन ब्लूप्रिन्ट_ बाट सुरु गर्छौं, र यसलाई हाम्रो व्यक्तिगत आवश्यकताहरूमा अनुकूलन गर्न आर्किटेक्टसँग काम गर्छौं। र यही दृष्टिकोण हो जब बौद्धिक एप्लिकेसनहरू निर्माण गरिन्छ। पहिले, तपाईंको समस्या क्षेत्रसँग मेल खाने राम्रो डिजाइन आर्किटेक्चर खोज्नुहोस्। त्यसपछि समाधान आर्किटेक्टसँग काम गरेर तपाईंको विशेष परिदृश्यको लागि समाधान अनुकूलन र विकास गर्नुहोस्।
+Instead, we often start with an existing _डिजाइन ब्लूप्रिन्ट_, and work with an architect to customize it to our personal requirements. And that's exactly the approach to take when building intelligent applications. First, find a good design architecture that fits your problem space. Then work with a solution architect to customize and develop the solution for your specific scenario.
 
-तर यी डिजाइन ब्लूप्रिन्टहरू कहाँ पाउन सकिन्छ? र कसरी हामी यस्तो आर्किटेक्ट पाउन सक्छौं जो हामीलाई यी ब्लूप्रिन्टहरू अनुकूलन र तैनात गर्न सिकाउन इच्छुक छ? यस कार्यशालामा, हामी तीन प्रविधिहरूको परिचय दिएर ती प्रश्नहरूको उत्तर दिन्छौं:
+But where can we find these design blueprints? And how do we find an architect that is willing to teach us how to customize and deploy these blueprints on our own? In this workshop, we answer those questions by introducing you to three technologies:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - एक ओपन-सोर्स उपकरण जसले स्थानीय विकास (निर्माण) देखि क्लाउड तैनाती (शिप) सम्मको विकासकर्ता मार्गलाई तीव्र बनाउँछ।
-1. [Azure AI Foundry Templates](https://ai.azure.com/templates) - AI समाधान आर्किटेक्चर तैनात गर्न नमूना कोड, पूर्वाधार र कन्फिगरेसन फाइलहरू समावेश गर्ने मानकीकृत ओपन-सोर्स रिपोजिटरीहरू।
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - Azure ज्ञानमा आधारित कोडिङ एजेन्ट, जसले कोडबेस नेभिगेट गर्न र परिवर्तन गर्न प्राकृतिक भाषाको प्रयोग गरेर मार्गदर्शन गर्न सक्छ।
+1. [Azure Developer CLI](https://aka.ms/azd) - एक खुला स्रोत उपकरण जसले स्थानीय विकास (build) बाट क्लाउड डिप्लोयमेन्ट (ship) सम्मको विकासकर्ताको मार्गलाई तीव्र बनाउँछ।
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - नमूना कोड, पूर्वाधार र कन्फिगरेसन फाइलहरू समावेश गर्ने मानकीकृत खुला स्रोत रिपोजिटरीहरू जसले AI समाधान आर्किटेक्चर डिप्लोय गर्न मद्दत गर्छ।
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - Azure ज्ञानले आधारित एक कोडिङ् एजेन्ट, जसले प्राकृतिक भाषाको प्रयोग गरेर हामीलाई कोडबेस नेभिगेट गर्न र परिवर्तनहरू गर्न मार्गनिर्देशन गर्न सक्छ।
 
-यी उपकरणहरू हातमा लिएर, हामी अब _सही टेम्प्लेट पत्ता लगाउन_, _तैनात गर्न_ यसको काम सुनिश्चित गर्न, र _अनुकूलन गर्न_ हाम्रो विशेष परिदृश्यहरूमा प्रयोग गर्न सक्छौं। अब हामी यसबारे सिक्न सुरु गरौं।
+With these tools in hand, we can now _discover_ the right template, _deploy_ it to validate it works, and _customize_ it to suit our specific scenarios. Let's dive in and learn how these work.
+
 
 ---
 
 ## 2. Azure Developer CLI
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (वा `azd`) एक ओपन-सोर्स कमाण्डलाइन उपकरण हो जसले विकासकर्ता-अनुकूल आदेशहरूको सेटको साथ तपाईंको कोड-देखि-क्लाउड यात्रा तीव्र बनाउन सक्छ, जुन तपाईंको IDE (विकास) र CI/CD (डेभअप्स) वातावरणहरूमा निरन्तर काम गर्दछ।
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) is an open-source commandline tool that can speed up your code-to-cloud journey with a set of developer-friendly commands that work consistently across your IDE (development) and CI/CD (devops) environments.
 
-`azd` प्रयोग गरेर, तपाईंको तैनाती यात्रा निम्नानुसार सरल हुन सक्छ:
+With `azd`, your deployment journey can be as simple as:
 
-- `azd init` - एउटा विद्यमान AZD टेम्प्लेटबाट नयाँ AI परियोजना आरम्भ गर्नुहोस्।
-- `azd up` - पूर्वाधार तयार गर्नुहोस् र एक चरणमा तपाईंको एप्लिकेसन तैनात गर्नुहोस्।
-- `azd monitor` - तैनात गरिएको एप्लिकेसनको लागि वास्तविक-समय निगरानी र डायग्नोस्टिक्स प्राप्त गर्नुहोस्।
-- `azd pipeline config` - Azure मा तैनाती स्वचालित गर्न CI/CD पाइपलाइन सेटअप गर्नुहोस्।
+- `azd init` - कुनै पनि विद्यमान AZD टेम्पलेटबाट नयाँ AI परियोजना सुरु गर्छ।
+- `azd up` - पूर्वाधार प्राविजन गर्छ र एकै चरणमा तपाईंको आवेदन डिप्लोय गर्छ।
+- `azd monitor` - तपाईंले डिप्लोय गरेको अनुप्रयोगको लागि रियल-टाइम मोनिटरिङ र डायग्नोस्टिक्स प्राप्त गर्नुहोस्।
+- `azd pipeline config` - Azure मा डिप्लोयमेन्टलाई स्वचालित बनाउन CI/CD पाइपलाइनहरू सेटअप गर्नुहोस्।
 
-**🎯 | अभ्यास**: <br/> GitHub Codespaces वातावरणमा `azd` कमाण्डलाइन उपकरण अन्वेषण गर्नुहोस्। यो उपकरणले के गर्न सक्छ भनेर हेर्नको लागि यो आदेश टाइप गरेर सुरु गर्नुहोस्:
+**🎯 | अभ्यास**: <br/> Explore the `azd` commandline tool in your GitHub Codespaces environment now. Start by typing this command to see what the tool can do:
 
 ```bash title="" linenums="0"
 azd help
 ```
 
-![Flow](../../../../../translated_images/ne/azd-flow.19ea67c2f81eaa66.webp)
+![प्रवाह](../../../../../translated_images/ne/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
-## 3. AZD टेम्प्लेट
+## 3. The AZD Template
 
-`azd` ले यो हासिल गर्नको लागि, यसलाई पूर्वाधार तयार गर्न, कन्फिगरेसन सेटिङहरू लागू गर्न, र एप्लिकेसन तैनात गर्न थाहा हुनुपर्छ। यहीँ [AZD टेम्प्लेटहरू](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) काममा आउँछन्।
+For `azd` to achieve this, it needs to know the infrastructure to provision, the configuration settings to enforce, and the application to deploy. This is where [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) come in. 
 
-AZD टेम्प्लेटहरू ओपन-सोर्स रिपोजिटरीहरू हुन् जसले समाधान आर्किटेक्चर तैनात गर्न आवश्यक नमूना कोड, पूर्वाधार र कन्फिगरेसन फाइलहरू संयोजन गर्छन्। 
-_Infrastructure-as-Code_ (IaC) दृष्टिकोण प्रयोग गरेर, तिनीहरूले टेम्प्लेट स्रोत परिभाषा र कन्फिगरेसन सेटिङहरू संस्करण-नियन्त्रित गर्न अनुमति दिन्छन् (ठीक एप स्रोत कोड जस्तै) - परियोजनाको प्रयोगकर्ताहरू बीच पुन: प्रयोगयोग्य र निरन्तर वर्कफ्लोहरू सिर्जना गर्दै।
+AZD templates are open-source repositories that combine sample code with infrastructure and configuraton files required for deploying the solution architecture.
+By using an _Infrastructure-as-Code_ (IaC) approach, they allow template resource definitions and configuration settings to be version-controller (just like the app source code) - creating reusable and consistent workflows across users of that project.
 
-तपाईंको परिदृश्यको लागि AZD टेम्प्लेट सिर्जना वा पुन: प्रयोग गर्दा यी प्रश्नहरू विचार गर्नुहोस्:
+When creating or reusing an AZD template for _your_ scenario, consider these questions:
 
-1. तपाईं के निर्माण गर्दै हुनुहुन्छ? → के त्यहाँ उक्त परिदृश्यको लागि स्टार्टर कोड भएको टेम्प्लेट छ?
-1. तपाईंको समाधान कसरी आर्किटेक्ट गरिएको छ? → के त्यहाँ आवश्यक स्रोतहरू भएको टेम्प्लेट छ?
-1. तपाईंको समाधान कसरी तैनात गरिएको छ? → `azd deploy` सोच्नुहोस्, पूर्व/पश्च-प्रोसेसिङ हुकहरू सहित!
-1. तपाईं यसलाई कसरी अझ अनुकूलित गर्न सक्नुहुन्छ? → निर्मित निगरानी र स्वचालन पाइपलाइनहरू सोच्नुहोस्!
+1. What are you building? → के त्यो परिदृश्यका लागि स्टार्टर कोड भएको कुनै टेम्पलेट छ?
+1. How is your solution architected? → के आवश्यक स्रोतहरू भएको कुनै टेम्पलेट छ?
+1. How is your solution deployed? → `azd deploy` सँग प्रि/पोस्ट-प्रोसेसिङ हुकहरू कस्तो हुन्छन् भनी विचार गर्नुहोस्!
+1. How can you optimize it further? → इन-बिल्ट मोनिटरिङ र स्वचालन पाइपलाइन्सबारे सोच्नुहोस्!
 
 **🎯 | अभ्यास**: <br/> 
-[Awesome AZD](https://azure.github.io/awesome-azd/) ग्यालरी भ्रमण गर्नुहोस् र हाल उपलब्ध २५०+ टेम्प्लेटहरू अन्वेषण गर्न फिल्टरहरू प्रयोग गर्नुहोस्। तपाईंको परिदृश्य आवश्यकताहरूमा मेल खाने टेम्प्लेट पाउन सक्नुहुन्छ कि हेर्नुहोस्।
+Visit the [Awesome AZD](https://azure.github.io/awesome-azd/) gallery and use the filters to explore the 250+ templates currently available. See if you can find one that aligns to _your_ scenario requirements.
 
-![Code](../../../../../translated_images/ne/azd-code-to-cloud.2d9503d69d3400da.webp)
-
----
-
-## 4. AI एप टेम्प्लेट
+![कोड](../../../../../translated_images/ne/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
+## 4. AI App Templates
+
+For AI-powered applications, Microsoft provides specialized templates featuring **Microsoft Foundry** and **Foundry Agents**. These templates accelerate your path to building intelligent, production-ready applications.
+
+### Microsoft Foundry & Foundry Agents Templates
+
+Select a template below to deploy. Each template is available on [Awesome AZD](https://azure.github.io/awesome-azd/) and can be initialized with a single command.
+
+| टेम्पलेट | विवरण | डिप्लोय आदेश |
+|----------|-------------|----------------|
+| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Microsoft Foundry प्रयोग गरेर Retrieval Augmented Generation सहितको च्याट एप्लिकेसन | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Foundry Agents प्रयोग गरी автономस कार्य सम्पन्नका लागि AI एजेन्टहरू बनाउनुहोस् | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | जटिल वर्कफ्लोहरूका लागि बहु Foundry Agents समन्वय गर्नुहोस् | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Microsoft Foundry मोडेलहरू प्रयोग गरी कागजातहरू निकाल्नुहोस् र विश्लेषण गर्नुहोस् | `azd init -t azure-samples/ai-document-processing` |
+| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Microsoft Foundry एकीकरणसहित बुद्धिमान च्याटबटहरू बनाउनुहोस् | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Microsoft Foundry मार्फत DALL-E प्रयोग गरी तस्बिरहरू उत्पन्न गर्नुहोस् | `azd init -t azure-samples/ai-image-generation` |
+| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Foundry Agents सहित Semantic Kernel प्रयोग गर्ने AI एजेन्टहरू | `azd init -t azure-samples/semantic-kernel-agent` |
+| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | AutoGen फ्रेमवर्क प्रयोग गर्ने बहु-एजेन्ट सिस्टमहरू | `azd init -t azure-samples/autogen-multi-agent` |
+
+### द्रुत सुरुवात
+
+1. **टेम्पलेट ब्राउज गर्नुहोस्**: Visit [https://azure.github.io/awesome-azd/] र फिल्टरहरू प्रयोग गरेर `AI`, `Agents`, वा `Microsoft Foundry` अनुसार सिम्ट्र गर्नुहोस्
+2. **आफ्नो टेम्पलेट चयन गर्नुहोस्**: आफ्नो उपयोग केससँग मेल खाने एउटा छान्नुहोस्
+3. **इनिसियलाइज गर्नुहोस्**: छनोट गरेको टेम्पलेटका लागि `azd init` कमाण्ड चलाउनुहोस्
+4. **डिप्लोय गर्नुहोस्**: प्राविजन र डिप्लोय गर्न `azd up` चलाउनुहोस्
+
+**🎯 | अभ्यास**: <br/>
+Select one of the templates above based on your scenario:
+
+- **Building a chatbot?** → Start with **AI Chat with RAG** or **Conversational AI Bot**
+- **Need autonomous agents?** → Try **Foundry Agent Service Starter** or **Multi-Agent Orchestration**
+- **Processing documents?** → Use **AI Document Intelligence**
+- **Want AI coding assistance?** → Explore **Semantic Kernel Agent** or **AutoGen Multi-Agent**
+
+```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
+azd init -t azure-samples/azure-search-openai-demo
+azd up
+```
+
+!!! info "थप टेम्पलेटहरू अन्वेषण गर्नुहोस्"
+    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+अस्वीकरण:
+यस दस्तावेजलाई AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयत्नशील भए पनि, कृपया जानकारि राख्नुहोस् कि स्वचालित अनुवादहरूमा त्रुटि वा अशुद्धि हुनसक्छ। मूल दस्तावेजलाई त्यसको मूल भाषामा नै अधिकारिक स्रोत मानिनु पर्छ। महत्वपूर्ण जानकारीको लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याहरूका लागि हामी जिम्मेवार छैनौँ।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

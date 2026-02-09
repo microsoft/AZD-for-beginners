@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-20T15:19:50+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "mr"
-}
--->
 # Azure OpenAI चॅट अॅप्लिकेशन
 
 **शिकण्याचा मार्ग:** मध्यम ⭐⭐ | **वेळ:** 35-45 मिनिटे | **खर्च:** $50-200/महिना

@@ -1,240 +1,235 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T13:46:52+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "bn"
-}
--->
 # 2. একটি টেমপ্লেট যাচাই করুন
 
-!!! tip "এই মডিউল শেষে আপনি সক্ষম হবেন"
+!!! tip "এই মডিউলের শেষ নাগাদ আপনি সক্ষম হবেন"
 
-    - [ ] AI সলিউশন আর্কিটেকচার বিশ্লেষণ করুন
+    - [ ] AI সমাধান আর্কিটেকচার বিশ্লেষণ করুন
     - [ ] AZD ডিপ্লয়মেন্ট ওয়ার্কফ্লো বুঝুন
-    - [ ] AZD ব্যবহারে সাহায্য পেতে GitHub Copilot ব্যবহার করুন
-    - [ ] **ল্যাব ২:** AI এজেন্টস টেমপ্লেট ডিপ্লয় এবং যাচাই করুন
+    - [ ] AZD ব্যবহারে সাহায্যের জন্য GitHub Copilot ব্যবহার করুন
+    - [ ] **Lab 2:** AI Agents টেমপ্লেট ডিপ্লয় ও যাচাই করুন
 
 ---
 
-## ১. ভূমিকা
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) বা `azd` একটি ওপেন-সোর্স কমান্ডলাইন টুল যা Azure-এ অ্যাপ্লিকেশন তৈরি এবং ডিপ্লয় করার সময় ডেভেলপার ওয়ার্কফ্লোকে সহজ করে তোলে।
+## 1. ভূমিকা
 
-[AZD টেমপ্লেট](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) হলো স্ট্যান্ডার্ডাইজড রিপোজিটরি যা নমুনা অ্যাপ্লিকেশন কোড, _ইনফ্রাস্ট্রাকচার অ্যাজ কোড_ সম্পদ এবং `azd` কনফিগারেশন ফাইল অন্তর্ভুক্ত করে একটি সমন্বিত সলিউশন আর্কিটেকচার তৈরি করে। `azd provision` কমান্ড ব্যবহার করে ইনফ্রাস্ট্রাকচার প্রভিশনিং সহজ হয়ে যায় - এবং `azd up` ব্যবহার করলে ইনফ্রাস্ট্রাকচার **এবং** অ্যাপ্লিকেশন একসাথে ডিপ্লয় করা যায়!
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` হল একটি ওপেন-সোর্স কমান্ডলাইন টুল যা Azure-এ অ্যাপ্লিকেশন তৈরি এবং ডিপ্লয় করার সময় ডেভেলপারদের ওয়ার্কফ্লোকে সরল করে। 
 
-ফলস্বরূপ, আপনার অ্যাপ্লিকেশন ডেভেলপমেন্ট প্রক্রিয়া শুরু করা সহজ হয়ে যায় যদি আপনি এমন একটি _AZD স্টার্টার টেমপ্লেট_ খুঁজে পান যা আপনার অ্যাপ্লিকেশন এবং ইনফ্রাস্ট্রাকচার প্রয়োজনের সাথে সবচেয়ে কাছাকাছি। এরপর রিপোজিটরিটি আপনার নির্দিষ্ট প্রয়োজন অনুযায়ী কাস্টমাইজ করুন।
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) হল স্ট্যান্ডার্ডাইজড রিপোজিটরিগুলি যেগুলো নমুনা অ্যাপ্লিকেশন কোড, _infrastructure-as-code_ অ্যাসেটস, এবং `azd` কনফিগারেশন ফাইলগুলো একটি সমন্বিত সলিউশন আর্কিটেকচারের জন্য অন্তর্ভুক্ত করে। ইনফ্রাস্ট্রাকচার provisioning করা হয়ে যায় একটি `azd provision` কমান্ডের মতোই সহজ - আর `azd up` ব্যবহার করলে আপনি এক্কেবারে একবারে ইনফ্রাস্ট্রাকচার provisioning **এবং** আপনার অ্যাপ্লিকেশন ডিপ্লয় করতে পারবেন!
 
-শুরু করার আগে, নিশ্চিত করুন যে আপনার Azure Developer CLI ইনস্টল করা আছে।
+ফলশ্বরূপ, আপনার অ্যাপ্লিকেশন ডেভেলপমেন্ট প্রক্রিয়া শুরু করা হতে পারে সহজভাবে সঠিক _AZD Starter template_ খুঁজে নিয়ে যা আপনার অ্যাপ্লিকেশন ও ইনফ্রাস্ট্রাকচার প্রয়োজনের সন্নিকট - তারপর সেই রিপোজিটরিটি আপনার সিচুয়েশনের প্রয়োজন অনুযায়ী কাস্টোমাইজ করুন।
 
-1. VS Code টার্মিনাল খুলুন এবং এই কমান্ডটি টাইপ করুন:
+শুরু করার আগে, চলুন নিশ্চিত করি আপনার কাছে Azure Developer CLI ইনস্টল করা আছে।
+
+1. Open a VS Code terminal and type this command:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. আপনি এরকম কিছু দেখতে পাবেন!
+1. আপনি এ রকম কিছু দেখতে পাবেন!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**আপনি এখন azd দিয়ে একটি টেমপ্লেট নির্বাচন এবং ডিপ্লয় করতে প্রস্তুত**
+**আপনি এখন azd ব্যবহার করে একটি টেমপ্লেট নির্বাচন ও ডিপ্লয় করার জন্য প্রস্তুত**
 
 ---
 
-## ২. টেমপ্লেট নির্বাচন
+## 2. টেমপ্লেট নির্বাচন
 
-Azure AI Foundry প্ল্যাটফর্মে [প্রস্তাবিত AZD টেমপ্লেটের একটি সেট](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) রয়েছে যা জনপ্রিয় সলিউশন দৃশ্যপট যেমন _মাল্টি-এজেন্ট ওয়ার্কফ্লো অটোমেশন_ এবং _মাল্টি-মোডাল কন্টেন্ট প্রসেসিং_ কভার করে। আপনি Azure AI Foundry পোর্টাল পরিদর্শন করেও এই টেমপ্লেটগুলি আবিষ্কার করতে পারেন।
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) যা জনপ্রিয় সলিউশন পরিস্থিতি যেমন _multi-agent workflow atomation_ এবং _multi-modal content processing_ কভার করে। আপনি Microsoft Foundry পোর্টাল ভিজিট করেও এই টেমপ্লেটগুলো আবিষ্কার করতে পারেন।
 
-1. [https://ai.azure.com/templates](https://ai.azure.com/templates) পরিদর্শন করুন
-1. Azure AI Foundry পোর্টালে লগইন করুন যখন প্রম্পট করা হবে - আপনি এরকম কিছু দেখতে পাবেন।
+1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Pick](../../../../../translated_images/bn/01-pick-template.60d2d5fff5ebc374.webp)
+![নির্বাচন](../../../../../translated_images/bn/01-pick-template.60d2d5fff5ebc374.webp)
 
-**বেসিক** অপশনগুলো আপনার স্টার্টার টেমপ্লেট:
 
-1. [ ] [AI চ্যাট দিয়ে শুরু করুন](https://github.com/Azure-Samples/get-started-with-ai-chat) যা একটি বেসিক চ্যাট অ্যাপ্লিকেশন _আপনার ডেটা সহ_ Azure Container Apps-এ ডিপ্লয় করে। এটি ব্যবহার করে একটি বেসিক AI চ্যাটবট দৃশ্যপট অন্বেষণ করুন।
-1. [X] [AI এজেন্টস দিয়ে শুরু করুন](https://github.com/Azure-Samples/get-started-with-ai-agents) যা একটি স্ট্যান্ডার্ড AI এজেন্ট (Azure AI Agent Service সহ) ডিপ্লয় করে। এটি ব্যবহার করে টুল এবং মডেল অন্তর্ভুক্ত এজেন্টিক AI সলিউশনগুলির সাথে পরিচিত হন।
+The **Basic** options are your starter templates:
 
-দ্বিতীয় লিঙ্কটি একটি নতুন ব্রাউজার ট্যাবে পরিদর্শন করুন (অথবা সংশ্লিষ্ট কার্ডের জন্য `Open in GitHub` ক্লিক করুন)। আপনি এই AZD টেমপ্লেটের জন্য রিপোজিটরি দেখতে পাবেন। README অন্বেষণ করতে এক মিনিট সময় নিন। অ্যাপ্লিকেশন আর্কিটেকচার এরকম দেখায়:
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) যা একটি বেসিক চ্যাট অ্যাপ্লিকেশন _আপনার ডেটা সহ_ Azure Container Apps-এ ডিপ্লয় করে। এটি একটি বেসিক AI চ্যাটবট সিচুয়েশন অন্বেষণের জন্য ব্যবহার করুন।
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) যা একটি স্ট্যান্ডার্ড AI Agent (Foundry Agents সহ) ও ডিপ্লয় করে। টুল এবং মডেল জড়িত agentic AI সলিউশনগুলোর সাথে পরিচিত হতে এটি ব্যবহার করুন।
 
-![Arch](../../../../../translated_images/bn/architecture.8cec470ec15c65c7.webp)
+Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+
+![আর্কিটেকচার](../../../../../translated_images/bn/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## ৩. টেমপ্লেট অ্যাক্টিভেশন
+## 3. টেমপ্লেট সক্রিয়করণ
 
-এই টেমপ্লেটটি ডিপ্লয় করার চেষ্টা করুন এবং নিশ্চিত করুন এটি বৈধ। আমরা [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) সেকশনের নির্দেশিকা অনুসরণ করব।
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. [এই লিঙ্কটি](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) ক্লিক করুন - ডিফল্ট অ্যাকশন `Create codespace` নিশ্চিত করুন
-1. এটি একটি নতুন ব্রাউজার ট্যাব খুলবে - GitHub Codespaces সেশন সম্পূর্ণ লোড হওয়ার জন্য অপেক্ষা করুন
-1. Codespaces-এ VS Code টার্মিনাল খুলুন - এই কমান্ডটি টাইপ করুন:
+1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
+1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
+1. Open the VS Code terminal in Codespaces - type the following command:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-এই ওয়ার্কফ্লো ধাপগুলি সম্পূর্ণ করুন যা এটি ট্রিগার করবে:
+Complete the workflow steps that this will trigger:
 
-1. আপনাকে Azure-এ লগইন করতে বলা হবে - প্রমাণীকরণের জন্য নির্দেশনা অনুসরণ করুন
-1. আপনার জন্য একটি ইউনিক পরিবেশ নাম লিখুন - উদাহরণস্বরূপ, আমি `nitya-mshack-azd` ব্যবহার করেছি
-1. এটি একটি `.azure/` ফোল্ডার তৈরি করবে - আপনি একটি সাবফোল্ডার দেখতে পাবেন পরিবেশ নাম সহ
-1. আপনাকে একটি সাবস্ক্রিপশন নাম নির্বাচন করতে বলা হবে - ডিফল্টটি নির্বাচন করুন
-1. আপনাকে একটি অবস্থান নির্বাচন করতে বলা হবে - `East US 2` ব্যবহার করুন
+1. You will be prompted to log into Azure - follow instructions to authenticate
+1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
+1. This  will create a `.azure/` folder - you will see a subfolder with the env name
+1. You will be prompted to select a subscription name - select the default
+1. You will be prompted for a location - use `East US 2`
 
-এখন, প্রভিশনিং সম্পূর্ণ হওয়ার জন্য অপেক্ষা করুন। **এটি ১০-১৫ মিনিট সময় নেয়**
+Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
-1. সম্পন্ন হলে, আপনার কনসোলে একটি SUCCESS বার্তা এরকম দেখাবে:
+1. When done, your console will show a SUCCESS message like this:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. আপনার Azure পোর্টালে এখন সেই পরিবেশ নাম সহ একটি প্রভিশন করা রিসোর্স গ্রুপ থাকবে:
+1. আপনার Azure পোর্টালে এখন ঐ env নামসহ একটি provision করা resource group থাকবে:
 
-      ![Infra](../../../../../translated_images/bn/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![ইনফ্রা](../../../../../translated_images/bn/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **আপনি এখন ডিপ্লয় করা ইনফ্রাস্ট্রাকচার এবং অ্যাপ্লিকেশন যাচাই করতে প্রস্তুত।**
-
----
-
-## ৪. টেমপ্লেট যাচাই
-
-1. Azure পোর্টালের [Resource Groups](https://portal.azure.com/#browse/resourcegroups) পৃষ্ঠায় যান - লগইন করুন যখন প্রম্পট করা হবে
-1. আপনার পরিবেশ নামের RG-তে ক্লিক করুন - আপনি উপরের পৃষ্ঠাটি দেখতে পাবেন
-
-      - Azure Container Apps রিসোর্সে ক্লিক করুন
-      - _Essentials_ সেকশনে (উপরে ডানদিকে) Application Url-এ ক্লিক করুন
-
-1. আপনি একটি হোস্ট করা অ্যাপ্লিকেশন ফ্রন্ট-এন্ড UI এরকম দেখতে পাবেন:
-
-   ![App](../../../../../translated_images/bn/03-test-application.471910da12c3038e.webp)
-
-1. কয়েকটি [নমুনা প্রশ্ন](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) জিজ্ঞাসা করার চেষ্টা করুন
-
-      1. জিজ্ঞাসা করুন: ```ফ্রান্সের রাজধানী কী?``` 
-      1. জিজ্ঞাসা করুন: ```দুইজনের জন্য $২০০ এর নিচে সেরা তাঁবু কী, এবং এতে কী বৈশিষ্ট্য রয়েছে?```
-
-1. আপনি এরকম উত্তর পাবেন যা নিচে দেখানো হয়েছে। _কিন্তু এটি কীভাবে কাজ করে?_ 
-
-      ![App](../../../../../translated_images/bn/03-test-question.521c1e863cbaddb6.webp)
+1. **আপনি এখন ডিপ্লয় করা ইনফ্রাস্ট্রাকচার এবং অ্যাপ্লিকেশন যাচাই করার জন্য প্রস্তুত**।
 
 ---
 
-## ৫. এজেন্ট যাচাই
+## 4. টেমপ্লেট যাচাই
 
-Azure Container App একটি এন্ডপয়েন্ট ডিপ্লয় করে যা এই টেমপ্লেটের জন্য Azure AI Foundry প্রকল্পে প্রভিশন করা AI এজেন্টের সাথে সংযুক্ত হয়। আসুন দেখি এর অর্থ কী।
+1. Azure পোর্টালে [রিসোর্স গ্রুপসমূহ](https://portal.azure.com/#browse/resourcegroups) পেজে যান - প্রম্পট হলে লগ ইন করুন
+1. Click on RG for your environment name - you see the page above
 
-1. আপনার রিসোর্স গ্রুপের জন্য Azure পোর্টালের _Overview_ পৃষ্ঠায় ফিরে যান
+      - ক্লিক করুন Azure Container Apps রিসোর্সে
+      - ক্লিক করুন Application Url-এ _Essentials_ সেকশনে (উপরে ডানদিকে)
 
-1. তালিকায় `Azure AI Foundry` রিসোর্সে ক্লিক করুন
+1. আপনি এ রকম একটি হোস্ট করা অ্যাপ্লিকেশন ফ্রন্ট-এন্ড UI দেখতে পাবেন:
 
-1. আপনি এটি দেখতে পাবেন। `Go to Azure AI Foundry Portal` বোতামে ক্লিক করুন। 
-   ![Foundry](../../../../../translated_images/bn/04-view-foundry-project.fb94ca41803f28f3.webp)
+   ![অ্যাপ্লিকেশন](../../../../../translated_images/bn/03-test-application.471910da12c3038e.webp)
 
-1. আপনি আপনার AI অ্যাপ্লিকেশনের জন্য Foundry Project পৃষ্ঠাটি দেখতে পাবেন
-   ![Project](../../../../../translated_images/bn/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. কয়েকটি [নমুনা প্রশ্নসমূহ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) জিজ্ঞাসা করে দেখুন
 
-1. `Agents`-এ ক্লিক করুন - আপনি আপনার প্রকল্পে প্রভিশন করা ডিফল্ট এজেন্টটি দেখতে পাবেন
-   ![Agents](../../../../../translated_images/bn/06-visit-agents.bccb263f77b00a09.webp)
+      1. জিজ্ঞাসা করুন: ```ফ্রান্সের রাজধানী কোনটি?``` 
+      1. জিজ্ঞাসা করুন: ```দুজনের জন্য $200-এর নিচে কোন তাঁবিলটি সেরা, এবং এতে কোন বৈশিষ্ট্যগুলো আছে?```
 
-1. এটি নির্বাচন করুন - এবং আপনি এজেন্টের বিস্তারিত দেখতে পাবেন। নিম্নলিখিতগুলি লক্ষ্য করুন:
+1. আপনি নিচে দেখানোর মতো সমান ধরনের উত্তর পাবেন। _কিন্তু এটি কীভাবে কাজ করে?_
 
-      - এজেন্ট ডিফল্টভাবে ফাইল সার্চ ব্যবহার করে (সবসময়)
-      - এজেন্টের `Knowledge` নির্দেশ করে যে এতে ৩২টি ফাইল আপলোড করা হয়েছে (ফাইল সার্চের জন্য)
-      ![Agents](../../../../../translated_images/bn/07-view-agent-details.0e049f37f61eae62.webp)
+      ![অ্যাপ্লিকেশন](../../../../../translated_images/bn/03-test-question.521c1e863cbaddb6.webp)
 
-1. বাম মেনুতে `Data+indexes` অপশনটি খুঁজুন এবং বিস্তারিত দেখতে ক্লিক করুন। 
+---
 
-      - আপনি ৩২টি ডেটা ফাইল আপলোড করা দেখতে পাবেন জ্ঞানের জন্য।
-      - এগুলি `src/files` এর অধীনে ১২টি কাস্টমার ফাইল এবং ২০টি প্রোডাক্ট ফাইলের সাথে মিলে যাবে।
-      ![Data](../../../../../translated_images/bn/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+## 5.  এজেন্ট যাচাই
+
+Azure Container App একটি এন্ডপয়েন্ট ডিপ্লয় করে যা এই টেমপ্লেটের জন্য Microsoft Foundry প্রজেক্টে provisioning করা AI Agent-এ সংযুক্ত হয়। চলুন দেখি এর মানে কী।
+
+1. আপনার রিসোর্স গ্রুপের Azure Portal _Overview_ পেজে ফিরে যান
+
+1. তালিকার মধ্যে `Microsoft Foundry` রিসোর্সে ক্লিক করুন
+
+1. আপনি এটি দেখতে পাবেন। `Go to Microsoft Foundry Portal` বোতামে ক্লিক করুন। 
+   ![ফাউন্ড্রি](../../../../../translated_images/bn/04-view-foundry-project.fb94ca41803f28f3.webp)
+
+1. আপনি আপনার AI অ্যাপ্লিকেশনের Foundry Project পেজ দেখতে পাবেন
+   ![প্রকল্প](../../../../../translated_images/bn/05-visit-foundry-portal.d734e98135892d7e.webp)
+
+1. `Agents` এ ক্লিক করুন - আপনি আপনার প্রজেক্টে ডিফল্টভাবে provisioning হওয়া এজেন্টটি দেখতে পাবেন
+   ![এজেন্টসমূহ](../../../../../translated_images/bn/06-visit-agents.bccb263f77b00a09.webp)
+
+1. এটি সিলেক্ট করুন - এবং আপনি এজেন্টের বিস্তারিত দেখতে পাবেন। নিম্নলিখিত বিষয়গুলো লক্ষ্য করুন:
+
+      - এজেন্টটি ডিফল্টভাবে File Search ব্যবহার করে (সবসময়)
+      - এজেন্টের `Knowledge` দেখায় যে এতে ৩২টি ফাইল আপলোড করা আছে (ফাইল সার্চের জন্য)
+      ![এজেন্টসমূহ](../../../../../translated_images/bn/07-view-agent-details.0e049f37f61eae62.webp)
+
+1. বাম মেনুতে `Data+indexes` অপশনটি খুঁজে ক্লিক করে বিস্তারিত দেখুন। 
+
+      - আপনি জ্ঞানের জন্য আপলোড করা ৩২টি ডেটা ফাইল দেখতে পাবেন।
+      - এগুলো `src/files`-এর অধীনে থাকা ১২টি customer ফাইল এবং ২০টি product ফাইলের সাথে মিল থাকবে
+      ![ডেটা](../../../../../translated_images/bn/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **আপনি এজেন্ট অপারেশন যাচাই করেছেন!**
 
-1. এজেন্টের উত্তরগুলি সেই ফাইলগুলির জ্ঞানের উপর ভিত্তি করে।
-1. আপনি এখন সেই ডেটা সম্পর্কিত প্রশ্ন জিজ্ঞাসা করতে পারেন এবং ভিত্তিক উত্তর পেতে পারেন।
-1. উদাহরণ: `customer_info_10.json` "Amanda Perez" এর ৩টি কেনাকাটার বর্ণনা দেয়।
+1. এজেন্টের উত্তরগুলো ঐ ফাইলগুলোর জ্ঞানের ওপর ভিত্তি করে গ্রাউন্ড করা হয়। 
+1. আপনি এখন ঐ ডেটা সম্পর্কিত প্রশ্ন করতে পারবেন এবং গ্রাউন্ডেড উত্তর পেতে পারবেন।
+1. উদাহরণ: `customer_info_10.json` বর্ণনা করে "Amanda Perez" দ্বারা করা ৩টি ক্রয়
 
-Container App এন্ডপয়েন্ট সহ ব্রাউজার ট্যাবে ফিরে যান এবং জিজ্ঞাসা করুন: `Amanda Perez কোন পণ্যগুলি মালিকানাধীন?`। আপনি এরকম কিছু দেখতে পাবেন:
+Browser ট্যাবে থাকা Container App এন্ডপয়েন্টটি পুনরায় দেখুন এবং জিজ্ঞাসা করুন: `What products does Amanda Perez own?`. আপনি এ রকম কিছু দেখতে পাবেন:
 
-![Data](../../../../../translated_images/bn/09-ask-in-aca.4102297fc465a4d5.webp)
-
----
-
-## ৬. এজেন্ট প্লেগ্রাউন্ড
-
-Azure AI Foundry-এর ক্ষমতাগুলি সম্পর্কে আরও ধারণা তৈরি করতে, এজেন্টকে এজেন্ট প্লেগ্রাউন্ডে নিয়ে যান।
-
-1. Azure AI Foundry-এ `Agents` পৃষ্ঠায় ফিরে যান - ডিফল্ট এজেন্টটি নির্বাচন করুন
-1. `Try in Playground` অপশনটি ক্লিক করুন - আপনি এরকম একটি প্লেগ্রাউন্ড UI পাবেন
-1. একই প্রশ্ন জিজ্ঞাসা করুন: `Amanda Perez কোন পণ্যগুলি মালিকানাধীন?`
-
-    ![Data](../../../../../translated_images/bn/09-ask-in-playground.a1b93794f78fa676.webp)
-
-আপনি একই (বা অনুরূপ) উত্তর পাবেন - তবে আপনি অতিরিক্ত তথ্যও পাবেন যা আপনার এজেন্টিক অ্যাপের গুণমান, খরচ এবং কার্যকারিতা বুঝতে সাহায্য করতে পারে। উদাহরণস্বরূপ:
-
-1. লক্ষ্য করুন যে উত্তরটি "গ্রাউন্ড" করার জন্য ব্যবহৃত ডেটা ফাইলগুলি উল্লেখ করে।
-1. যেকোনো ফাইল লেবেলের উপর হোভার করুন - আপনার প্রশ্ন এবং প্রদর্শিত উত্তরটির সাথে ডেটা মিলে যায় কি না?
-
-আপনি একটি _স্ট্যাটস_ সারি দেখতে পাবেন উত্তরটির নিচে।
-
-1. যেকোনো মেট্রিকের উপর হোভার করুন - যেমন, Safety। আপনি এরকম কিছু দেখতে পাবেন।
-1. উত্তরটির নিরাপত্তা স্তরের জন্য মূল্যায়িত রেটিংটি আপনার ধারণার সাথে মিলে যায় কি না?
-
-      ![Data](../../../../../translated_images/bn/10-view-run-info-meter.6cdb89a0eea5531f.webp)
-
----x
-
-## ৭. বিল্ট-ইন অবজারভেবিলিটি
-
-অবজারভেবিলিটি হলো আপনার অ্যাপ্লিকেশনকে এমনভাবে ইনস্ট্রুমেন্ট করা যাতে এটি ডেটা তৈরি করে যা তার অপারেশন বুঝতে, ডিবাগ করতে এবং অপ্টিমাইজ করতে ব্যবহার করা যায়। এর জন্য একটি ধারণা পেতে:
-
-1. `View Run Info` বোতামে ক্লিক করুন - আপনি এই ভিউটি দেখতে পাবেন। এটি [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) এর একটি উদাহরণ। _আপনি এই ভিউটি Thread Logs-এ ক্লিক করেও পেতে পারেন।_
-
-   - এজেন্ট দ্বারা সম্পন্ন রান ধাপ এবং টুলগুলি সম্পর্কে ধারণা পান।
-   - উত্তরটির জন্য মোট টোকেন সংখ্যা (বনাম আউটপুট টোকেন ব্যবহার) বুঝুন।
-   - লেটেন্সি এবং এক্সিকিউশনে সময় কোথায় ব্যয় হচ্ছে তা বুঝুন।
-
-      ![Agent](../../../../../translated_images/bn/10-view-run-info.b20ebd75fef6a1cc.webp)
-
-1. `Metadata` ট্যাবে ক্লিক করুন রানটির জন্য অতিরিক্ত অ্যাট্রিবিউট দেখতে, যা পরে সমস্যা ডিবাগ করার জন্য দরকারী প্রসঙ্গ প্রদান করতে পারে।   
-
-      ![Agent](../../../../../translated_images/bn/11-view-run-info-metadata.7966986122c7c2df.webp)
-
-1. `Evaluations` ট্যাবে ক্লিক করুন এজেন্টের উত্তরটির উপর করা স্বয়ংক্রিয় মূল্যায়ন দেখতে। এর মধ্যে নিরাপত্তা মূল্যায়ন (যেমন, Self-harm) এবং এজেন্ট-নির্দিষ্ট মূল্যায়ন (যেমন, Intent resolution, Task adherence) অন্তর্ভুক্ত।
-
-      ![Agent](../../../../../translated_images/bn/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
-
-1. সর্বশেষে, সাইডবার মেনুতে `Monitoring` ট্যাবে ক্লিক করুন।
-
-      - প্রদর্শিত পৃষ্ঠায় `Resource usage` ট্যাব নির্বাচন করুন - এবং মেট্রিকগুলি দেখুন।
-      - খরচ (টোকেন) এবং লোড (রিকোয়েস্ট) এর ক্ষেত্রে অ্যাপ্লিকেশন ব্যবহার ট্র্যাক করুন।
-      - প্রথম বাইট (ইনপুট প্রসেসিং) এবং শেষ বাইট (আউটপুট) পর্যন্ত অ্যাপ্লিকেশন লেটেন্সি ট্র্যাক করুন।
-
-      ![Agent](../../../../../translated_images/bn/13-monitoring-resources.5148015f7311807f.webp)
+![ডেটা](../../../../../translated_images/bn/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## ৮. পরিবেশ ভেরিয়েবল
+## 6. এজেন্ট প্লেগ্রাউন্ড
 
-এখন পর্যন্ত, আমরা ব্রাউজারে ডিপ্লয়মেন্টের মাধ্যমে হাঁটলাম - এবং যাচাই করলাম যে আমাদের ইনফ্রাস্ট্রাকচার প্রভিশন করা হয়েছে এবং অ্যাপ্লিকেশন কার্যকর। কিন্তু অ্যাপ্লিকেশনটি _কোড-ফার্স্ট_ দিয়ে কাজ করতে, আমাদের স্থানীয় ডেভেলপমেন্ট পরিবেশ কনফিগার করতে হবে প্রাসঙ্গিক ভেরিয়েবলগুলির সাথে যা এই রিসোর্সগুলির সাথে কাজ করার জন্য প্রয়োজন। `azd` ব্যবহার করে এটি সহজ হয়ে যায়।
+Microsoft Foundry-এর ক্ষমতা সম্পর্কে আরও কিছু অন্তর্যাম গড়ে তুলতে, এজেন্টটিকে Agents Playground-এ চালিয়ে দেখা যাক। 
 
-1. Azure Developer CLI [পরিবেশ ভেরিয়েবল ব্যবহার করে](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) অ্যাপ্লিকেশন ডিপ্লয়মেন্টের জন্য কনফিগারেশন সেটিংস সংরক্ষণ এবং পরিচালনা করতে।
+1. Microsoft Foundry-এ `Agents` পেজে ফিরে যান - ডিফল্ট এজেন্টটি সিলেক্ট করুন
+1. `Try in Playground` অপশনটি ক্লিক করুন - আপনি একটি Playground UI পাবেন যা এর মতো হবে
+1. একই প্রশ্ন জিজ্ঞাসা করুন: `What products does Amanda Perez own?`
 
-1. পরিবেশ ভেরিয়েবল `.azure/<env-name>/.env`-এ সংরক্ষণ করা হয় - এটি ডিপ্লয়মেন্টের সময় ব্যবহৃত `env-name` পরিবেশে স্কোপ করে এবং একই রিপোজিটরিতে বিভিন্ন ডিপ্লয়মেন্ট টার্গেটের মধ্যে পরিবেশ আলাদা করতে সাহায্য করে।
+    ![ডেটা](../../../../../translated_images/bn/09-ask-in-playground.a1b93794f78fa676.webp)
 
-1. পরিবেশ ভেরিয়েবলগুলি `azd` কমান্ড দ্বারা স্বয়ংক্রিয়ভাবে লোড করা হয় যখন এটি একটি নির্দিষ্ট কমান্ড কার্যকর করে (যেমন, `azd up`)। লক্ষ্য করুন যে `azd` _OS-স্তরের_ পরিবেশ ভেরিয়েবল (যেমন, শেলে সেট করা) স্বয়ংক্রিয়ভাবে পড়ে না - পরিবর্তে স্ক্রিপ্টের মধ্যে তথ্য স্থানান্তর করতে `azd set env` এবং `azd get env` ব্যবহার করুন।
+আপনি একই (বা অনুরূপ) উত্তর পাবেন - কিন্তু আপনি আরও অতিরিক্ত তথ্যও পাবেন যা ব্যবহার করে আপনার এজেন্টিক অ্যাপের গুণমান, খরচ, এবং পারফরম্যান্স বুঝতে পারবেন। উদাহরণস্বরূপ:
 
-কিছু কমান্ড চেষ্টা করুন:
+1. লক্ষ্য করুন যে উত্তরটি যে ডেটা ফাইলগুলো ব্যবহার করে "ground" করা হয়েছে সেগুলো উদ্ধৃত করেছে
+1. যে কোন ফাইল লেবেলের উপর হোভার করুন - কি ডেটা আপনার প্রশ্ন ও প্রদর্শিত উত্তরের সাথে মেলে?
 
-1. এই পরিবেশে `azd` এর জন্য সেট করা সমস্ত পরিবেশ ভেরিয়েবল পান:
+আপনি উত্তরটির নিচে একটি _stats_ সারি দেখতে পাবেন। 
+
+1. যে কোন মেট্রিকের উপর হোভার করুন - উদাহরণস্বরূপ, Safety। আপনি এ রকম কিছু দেখতে পাবেন
+1. মূল্যায়িত রেটিংটি কি আপনার উত্তর নিরাপত্তা স্তরের জন্য আপনার অনুভূতির সাথে মেলে?
+
+      ![এজেন্ট](../../../../../translated_images/bn/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+
+---
+
+## 7. অন্তর্নির্মিত পর্যবেক্ষণযোগ্যতা
+
+Observability হলো আপনার অ্যাপ্লিকেশনকে এমনভাবে ইন্সট্রুমেন্ট করা যাতে এটি ডাটা জেনারেট করে যা ব্যবহৃত হতে পারে অপারেশনগুলো বুঝতে, ডিবাগ করতে, এবং অপ্টিমাইজ করতে। এর একটি অনুভূতি পেতে:
+
+1. `View Run Info` বোতামে ক্লিক করুন - আপনি এই ভিউটি দেখতে পাবেন। এটি [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) এর একটি উদাহরণ। _আপনি এই ভিউটি Thread Logs-এ ক্লিক করেও পেতে পারেন_।
+
+   - এজেন্টের চালানো ধাপগুলো এবং যে টুলগুলো কাজে লিপ্ত হয়েছে সেগুলো সম্পর্কে ধারণা নিন
+   - উত্তরটির জন্য মোট Token count বোঝার চেষ্টা করুন (আর আউটপুট টোকেন্স ব্যবহার বনাম)
+   - লেটেন্সি এবং এক্সিকিউশনে সময় কোথায় কাটছে তা বুঝুন
+
+      ![এজেন্ট](../../../../../translated_images/bn/10-view-run-info.b20ebd75fef6a1cc.webp)
+
+1. `Metadata` ট্যাবে ক্লিক করে রানটির জন্য অতিরিক্ত অ্যাট্রিবিউটগুলো দেখুন, যা পরে সমস্যাগুলি ডিবাগ করার জন্য দরকারী কন্টেক্সট দিতে পারে।   
+
+      ![এজেন্ট](../../../../../translated_images/bn/11-view-run-info-metadata.7966986122c7c2df.webp)
+
+
+1. `Evaluations` ট্যাবে ক্লিক করে এজেন্টের উত্তরের উপর করা অটো-অ্যাসেসমেন্টগুলো দেখুন। এগুলোর মধ্যে রয়েছে নিরাপত্তা মূল্যায়ন (যেমন, Self-harm) এবং এজেন্ট-নির্দিষ্ট মূল্যায়ন (যেমন, Intent resolution, Task adherence)।
+
+      ![এজেন্ট](../../../../../translated_images/bn/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+
+1. শেষ কিন্তু গুরুত্বপূর্ণ, সাইডবার মেনুতে থাকা `Monitoring` ট্যাবে ক্লিক করুন।
+
+      - প্রদর্শিত পেজে `Resource usage` ট্যাব সিলেক্ট করুন - এবং মেট্রিকগুলো দেখুন।
+      - খরচের (টোকেন) এবং লোড (রিকোয়েস্ট) দিক থেকে অ্যাপ্লিকেশন ব্যবহার ট্র্যাক করুন।
+      - ইনপুট প্রসেসিং (প্রথম বাইট) এবং আউটপুট (শেষ বাইট) পর্যন্ত অ্যাপ্লিকেশন লেটেন্সি ট্র্যাক করুন।
+
+      ![এজেন্ট](../../../../../translated_images/bn/13-monitoring-resources.5148015f7311807f.webp)
+
+---
+
+## 8. পরিবেশ ভেরিয়েবল
+
+এ পর্যন্ত, আমরা ব্রাউজারে ডিপ্লয়মেন্টটি পার করেছি - এবং যাচাই করেছি যে আমাদের ইনফ্রাস্ট্রাকচার provision হয়েছে এবং অ্যাপ্লিকেশন অপারেশনাল। কিন্তু অ্যাপ্লিকেশনের কোড-ফার্স্টভাবে কাজ করতে হলে আমাদের লোকাল ডেভেলপমেন্ট পরিবেশ কনফিগার করতে হবে ঐ রিসোর্সগুলোর সাথে কাজ করার জন্য প্রয়োজনীয় ভেরিয়েবলগুলো। `azd` ব্যবহার করলে এটি সহজ হয়।
+
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) কনফিগারেশন সেটিংগুলো অ্যাপ্লিকেশন ডিপ্লয়মেন্টের জন্য সংরক্ষণ ও ম্যানেজ করতে।
+
+1. Environment variables গুলো `.azure/<env-name>/.env` এ স্টোর করা হয় - এটি এগুলোকে `env-name` পরিবেশের মধ্যে সীমাবদ্ধ করে যা ডিপ্লয়মেন্টের সময় ব্যবহৃত হয় এবং একই রিপোতে বিভিন্ন ডেপ্লয়মেন্ট টার্গেটের মধ্যে পরিবেশগুলো আলাদা রাখতে সাহায্য করে।
+
+1. Environment variablesগুলো স্বয়ংক্রিয়ভাবে লোড হয় `azd` কমান্ড দ্বারা যখন এটি কোন নির্দিষ্ট কমান্ড কার্যকর করে (যেমন, `azd up`). লক্ষ্য করুন যে `azd` স্বয়ংক্রিয়ভাবে _OS-level_ environment variables (যেমন, shell-এ সেট করা) পড়ে না - পরিবর্তে স্ক্রিপ্টগুলোর মধ্যে তথ্য ট্রান্সফার করার জন্য `azd set env` এবং `azd get env` ব্যবহার করুন।
+
+
+চলুন কয়েকটি কমান্ড চেষ্টা করে দেখি:
+
+1. Get all the environment variables set for `azd` in this environment:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      আপনি এরকম কিছু দেখতে পাবেন:
+      আপনি এ রকম কিছু দেখতে পাবেন:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -244,19 +239,19 @@ Azure AI Foundry-এর ক্ষমতাগুলি সম্পর্কে 
       ...
       ```
 
-1. একটি নির্দিষ্ট মান পান - উদাহরণস্বরূপ, আমি জানতে চাই যে আমরা `AZURE_AI_AGENT_MODEL_NAME` মানটি সেট করেছি কি না।
+1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      আপনি এরকম কিছু দেখতে পাবেন - এটি ডিফল্টভাবে সেট করা হয়নি!
+      আপনি এ রকম কিছু দেখতে পাবেন - এটি ডিফল্টভাবে সেট ছিল না!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. `azd` এর জন্য একটি নতুন পরিবেশ ভেরিয়েবল সেট করুন। এখানে, আমরা এজেন্ট মডেল নাম আপডেট করি। _নোট: করা যেকোনো পরিবর্তন `.azure/<env-name>/.env` ফাইলে সাথে সাথে প্রতিফলিত হবে।
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,30 +259,35 @@ Azure AI Foundry-এর ক্ষমতাগুলি সম্পর্কে 
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      এখন, আমরা দেখতে পাব মানটি সেট করা হয়েছে:
+      এখন, আমরা দেখতে পাব যে মানটি সেট করা আছে:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. লক্ষ্য করুন যে কিছু রিসোর্স স্থায়ী (যেমন, মডেল ডিপ্লয়মেন্ট) এবং শুধুমাত্র একটি `azd up` দিয়ে পুনরায় ডিপ্লয়মেন্ট বাধ্য করতে আরও কিছু প্রয়োজন হবে। আসুন মূল ডিপ্লয়মেন্টটি টিয়ার ডাউন করি এবং পরিবর্তিত পরিবেশ ভেরিয়েবল সহ পুনরায় ডিপ্লয় করি।
+1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **রিফ্রেশ** যদি আপনি পূর্বে একটি azd টেমপ্লেট ব্যবহার করে ইনফ্রাস্ট্রাকচার ডিপ্লয় করে থাকেন - আপনি এই কমান্ডটি ব্যবহার করে আপনার Azure ডিপ্লয়মেন্টের বর্তমান অবস্থার উপর ভিত্তি করে আপনার স্থানীয় পরিবেশ ভেরিয়েবলগুলির অবস্থা _রিফ্রেশ_ করতে পারেন:
+1. **রিফ্রেশ** যদি আপনি পূর্বে azd টেমপ্লেট ব্যবহার করে ইনফ্রাস্ট্রাকচার ডিপ্লয় করে থাকেন - আপনি আপনার লোকাল environment variables-এর স্টেটকে আপনার Azure ডিপ্লয়মেন্টের বর্তমান স্টেটের উপর ভিত্তি করে _refresh_ করতে পারবেন এই কমান্ড ব্যবহার করে:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      এটি একটি শক্তিশালী উপায় যা পরিবেশ ভেরিয়েবলগুলোকে একাধিক স্থানীয় ডেভেলপমেন্ট পরিবেশের মধ্যে (_sync_) করতে সাহায্য করে (যেমন, একাধিক ডেভেলপারদের সমন্বয়ে গঠিত দল) - যেখানে ডিপ্লয় করা অবকাঠামো পরিবেশ ভেরিয়েবলের অবস্থার জন্য মূল সত্য হিসেবে কাজ করে। দলের সদস্যরা সহজেই ভেরিয়েবলগুলো _refresh_ করে আবার সিঙ্কে ফিরে আসতে পারেন।
+      এটি স্থানীয় দুটি বা ততোধিক ডেভেলপমেন্ট পরিবেশে পরিবেশ ভেরিয়েবলগুলি _সমন্বয়_ করার একটি শক্তিশালী উপায় (উদাহরণস্বরূপ, একাধিক ডেভেলপারসহ একটি টিম) - প্রয়োগ করা অবকাঠামোকে পরিবেশ ভেরিয়েবলের অবস্থার সত্য ভিত্তি হিসেবে কাজ করতে দেয়। টিমের সদস্যরা কেবল ভেরিয়েবলগুলো _রিফ্রেশ_ করে আবার সমন্বয়ে আসে।
 
 ---
 
 ## 9. অভিনন্দন 🏆
 
-আপনি একটি সম্পূর্ণ প্রক্রিয়া সম্পন্ন করেছেন যেখানে আপনি:
+আপনি মাত্রই একটি শুরু-থেকে-শেষ পর্যন্ত কর্মপ্রবাহ সম্পন্ন করেছেন যেখানে আপনি:
 
-- [X] AZD টেমপ্লেট নির্বাচন করেছেন যা আপনি ব্যবহার করতে চান
-- [X] GitHub Codespaces দিয়ে টেমপ্লেট চালু করেছেন
-- [X] টেমপ্লেট ডিপ্লয় করেছেন এবং নিশ্চিত করেছেন যে এটি কাজ করছে
+- [X] আপনি ব্যবহার করতে চান এমন AZD টেমপ্লেটটি নির্বাচন করেছেন
+- [X] GitHub Codespaces দিয়ে টেমপ্লেটটি চালু করেছেন 
+- [X] টেমপ্লেটটি ডিপ্লয় করেছেন এবং এটি কাজ করছে তা যাচাই করেছেন
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+দায়-অস্বীকৃতি:
+এই দলিলটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। যদিও আমরা যথাসম্ভব সঠিকতা নিশ্চিত করার চেষ্টা করি, অনুগ্রহ করে জানুন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা ভুল থাকতে পারে। মূল ভাষায় থাকা আসল দলিলটিকেই কর্তৃপক্ষ হিসেবে বিবেচনা করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ করার পরামর্শ দেওয়া হয়। এই অনুবাদ ব্যবহারের ফলে সৃষ্ট কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়বদ্ধ নই।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
