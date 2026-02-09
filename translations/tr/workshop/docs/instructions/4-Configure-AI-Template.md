@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T15:06:00+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "tr"
-}
--->
-# 4. Bir Şablon Yapılandırın
+# 4. Bir Şablon Yapılandırma
 
 !!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLECEKSİNİZ"
 
     - [ ] `azure.yaml` dosyasının amacını anlayın
     - [ ] `azure.yaml` dosyasının yapısını anlayın
-    - [ ] azd yaşam döngüsü `hooks` değerini anlayın
-    - [ ] **Lab 3:** 
+    - [ ] azd yaşam döngüsü `hooks` değerinin faydasını anlayın
+    - [ ] **Lab 4:** Ortam değişkenlerini keşfedin ve değiştirin
 
 ---
 
 !!! prompt "`azure.yaml` dosyası ne işe yarar? Bir kod bloğu kullanarak satır satır açıklayın"
 
-      `azure.yaml` dosyası, **Azure Developer CLI (azd)** için bir yapılandırma dosyasıdır. Uygulamanızın Azure'a nasıl dağıtılacağını tanımlar; altyapı, hizmetler, dağıtım kancaları ve ortam değişkenlerini içerir.
+      `azure.yaml` dosyası, **Azure Developer CLI (azd) için yapılandırma dosyasıdır**. Uygulamanızın Azure'a nasıl dağıtılacağını, altyapı, servisler, dağıtım kancaları (hooks) ve ortam değişkenleri dahil olmak üzere tanımlar.
 
 ---
 
 ## 1. Amaç ve İşlevsellik
 
-Bu `azure.yaml` dosyası, bir AI ajan uygulaması için bir **dağıtım planı** olarak hizmet eder:
+Bu `azure.yaml` dosyası, bir AI ajan uygulaması için **dağıtım planı** olarak hizmet eder; aşağıdakileri yapar:
 
-1. Dağıtımdan önce **ortamı doğrular**
-2. **Azure AI hizmetlerini sağlar** (AI Hub, AI Projesi, Arama vb.)
-3. **Bir Python uygulamasını** Azure Container Apps'e dağıtır
-4. **AI modellerini yapılandırır** (hem sohbet hem de gömme işlevselliği için)
-5. **AI uygulaması için izleme ve takip** ayarlarını yapar
-6. **Yeni ve mevcut** Azure AI proje senaryolarını yönetir
+1. Dağıtımdan önce ortamı **doğrular**
+2. Azure AI servislerini **sağlar** (AI Hub, AI Proje, Search vb.)
+3. Bir Python uygulamasını **Azure Container Apps**'e dağıtır
+4. Hem sohbet hem de embedding işlevselliği için **AI modellerini yapılandırır**
+5. AI uygulaması için **izleme ve izleme (tracing)** ayarlarını oluşturur
+6. Hem yeni hem de mevcut Azure AI proje senaryolarını **ele alır**
 
-Bu dosya, doğru doğrulama, sağlama ve dağıtım sonrası yapılandırma ile **tek komutla dağıtım** (`azd up`) sağlar.
+Bu dosya, uygun doğrulama, sağlama ve dağıtımdan sonra yapılandırma ile eksiksiz bir AI ajan çözümünün tek komutla (`azd up`) dağıtılmasını sağlar.
 
-??? info "Genişletmek için tıklayın: `azure.yaml`"
+??? info "Görüntülemek İçin Genişlet: `azure.yaml`"
 
-      `azure.yaml` dosyası, Azure Developer CLI'nin bu AI Ajan uygulamasını Azure'da nasıl dağıtacağını ve yöneteceğini tanımlar. Şimdi bunu satır satır inceleyelim.
+      `azure.yaml` dosyası, Azure Developer CLI'nin bu AI Ajan uygulamasını Azure'da nasıl dağıtıp yöneteceğini tanımlar. Hadi bunu satır satır inceleyelim.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: Kancalara ihtiyacımız var mı? 
-      # TODO: Tüm değişkenlere ihtiyacımız var mı?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ Bu dosya, doğru doğrulama, sağlama ve dağıtım sonrası yapılandırma ile 
 
 ---
 
-## 2. Dosyayı Parçalarına Ayırma
+## 2. Dosyayı Parçalara Ayırma
 
-Dosyayı bölüm bölüm inceleyelim, ne yaptığını ve neden yaptığını anlayalım.
+Dosyanın ne yaptığını ve nedenini anlamak için bölümler halinde inceleyelim.
 
 ### 2.1 **Başlık ve Şema (1-3)**
 
@@ -158,8 +149,8 @@ requiredVersions:
 ```
 
 - **Satır 5**: Azure Developer CLI tarafından kullanılan proje adını tanımlar
-- **Satır 6-7**: Bu projenin 1.0.2 sürümünde bir şablona dayandığını belirtir
-- **Satır 8-9**: Azure Developer CLI'nin 1.14.0 veya daha yüksek bir sürümünü gerektirir
+- **Satırlar 6-7**: Bunun bir şablon sürümü 1.0.2'ye dayandığını belirtir
+- **Satırlar 8-9**: Azure Developer CLI sürümünün 1.14.0 veya daha yüksek olmasını gerektirir
 
 ### 2.3 Dağıtım Kancaları (11-40)
 
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Satır 11-20**: **Dağıtım öncesi kanca** - `azd up` çalıştırılmadan önce çalışır
+- **Satırlar 11-20**: **Ön dağıtım kancası (pre-deployment hook)** - `azd up` çalıştırılmadan önce çalışır
 
-      - Unix/Linux'ta: Doğrulama betiğini çalıştırılabilir hale getirir ve çalıştırır
-      - Windows'ta: PowerShell doğrulama betiğini çalıştırır
-      - Her iki durumda da etkileşimlidir ve başarısız olursa dağıtımı durdurur
+      - Unix/Linux üzerinde: doğrulama betiğini çalıştırılabilir hale getirir ve çalıştırır
+      - Windows üzerinde: PowerShell doğrulama betiğini çalıştırır
+      - Her ikisi de etkileşimlidir ve başarısız olurlarsa dağıtımı durduracaktır
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Satır 21-30**: **Sağlama sonrası kanca** - Azure kaynakları oluşturulduktan sonra çalışır
+- **Satırlar 21-30**: **Sağlamadan sonra çalışan kanca (post-provision hook)** - Azure kaynakları oluşturulduktan sonra çalışır
 
-  - Ortam değişkenlerini yazan betikleri çalıştırır
-  - Bu betikler başarısız olsa bile dağıtıma devam eder (`continueOnError: true`)
+  - Ortam değişkenlerini yazma betiklerini çalıştırır
+  - Bu betikler başarısız olsa bile dağıtımın devam etmesini sağlar (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Satır 31-40**: **Dağıtım sonrası kanca** - Uygulama dağıtıldıktan sonra çalışır
+- **Satırlar 31-40**: **Dağıtımdan sonra çalışan kanca (post-deploy hook)** - uygulama dağıtımından sonra çalışır
 
-  - Son yapılandırma betiklerini çalıştırır
+  - Son kurulum betiklerini çalıştırır
   - Betikler başarısız olsa bile devam eder
 
-### 2.4 Hizmet Yapılandırması (41-48)
+### 2.4 Servis Yapılandırması (41-48)
 
-Bu bölüm, dağıttığınız uygulama hizmetini yapılandırır.
+Bu, dağıttığınız uygulama servisini yapılandırır.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Satır 42**: "api_and_frontend" adında bir hizmet tanımlar
-- **Satır 43**: Kaynak kodu için `./src` dizinini işaret eder
+- **Satır 42**: "api_and_frontend" adlı bir hizmet tanımlar
+- **Satır 43**: Kaynak kod için `./src` dizinine işaret eder
 - **Satır 44**: Programlama dili olarak Python'u belirtir
-- **Satır 45**: Barındırma platformu olarak Azure Container Apps'i kullanır
-- **Satır 46-48**: Docker yapılandırması
+- **Satır 45**: Barındırma platformu olarak Azure Container Apps kullanır
+- **Satırlar 46-48**: Docker yapılandırması
 
-      - "api_and_frontend" adını görüntü olarak kullanır
-      - Docker görüntüsünü yerel olarak değil, Azure'da uzaktan oluşturur
+      - "api_and_frontend" adını görüntü adı olarak kullanır
+      - Docker görüntüsünü yerel değil, Azure'da uzaktan oluşturur
 
 ### 2.5 Pipeline Değişkenleri (49-76)
 
-Bunlar, CI/CD boru hatlarında `azd` çalıştırmanıza yardımcı olan değişkenlerdir.
+Bunlar, otomasyon için CI/CD boru hattında `azd` çalıştırmanıza yardımcı olacak değişkenlerdir
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Bu bölüm, **dağıtım sırasında** kullanılan ortam değişkenlerini tanımlar ve kategorilere ayırır:
+Bu bölüm, dağıtım sırasında kullanılan ortam değişkenlerini kategori halinde tanımlar:
 
-- **Azure Kaynak Adları (Satır 51-60)**:
-      - Temel Azure hizmet kaynak adları, ör. Resource Group, AI Hub, AI Project vb.
-- **Özellik Bayrakları (Satır 61-63)**:
-      - Belirli Azure hizmetlerini etkinleştirmek/devre dışı bırakmak için kullanılan boolean değişkenler
-- **AI Ajan Yapılandırması (Satır 64-71)**:
-      - Ana AI ajanı için ad, kimlik, dağıtım ayarları ve model ayrıntıları gibi yapılandırmalar
-- **AI Gömme Yapılandırması (Satır 72-79)**:
-      - Vektör araması için kullanılan gömme modeli yapılandırması
-- **Arama ve İzleme (Satır 80-84)**:
-      - Arama dizini adı, mevcut kaynak kimlikleri ve izleme/izleme ayarları
+- **Azure Kaynak İsimleri (Satırlar 51-60)**:
+      - Kaynak Grubu, AI Hub, AI Proje vb. gibi temel Azure servis kaynak adları
+- **Özellik Bayrakları (Satırlar 61-63)**:
+      - Belirli Azure servislerini etkinleştirmek/devre dışı bırakmak için boolean değişkenler
+- **AI Ajan Yapılandırması (Satırlar 64-71)**:
+      - Ana AI ajan için ad, ID, dağıtım ayarları, model detayları gibi yapılandırma
+- **AI Embedding Yapılandırması (Satırlar 72-79)**:
+      - Vektör arama için kullanılan embedding modeli yapılandırması
+- **Arama ve İzleme (Satırlar 80-84)**:
+      - Arama dizini adı, mevcut kaynak ID'leri ve izleme/tracing ayarları
 
 ---
 
 ## 3. Ortam Değişkenlerini Bilin
-Aşağıdaki ortam değişkenleri, dağıtımınızın yapılandırmasını ve davranışını kontrol eder. Çoğu değişkenin mantıklı varsayılan değerleri vardır, ancak bunları özel gereksinimlerinize veya mevcut Azure kaynaklarınıza uyacak şekilde özelleştirebilirsiniz.
+Aşağıdaki ortam değişkenleri, dağıtımınızın yapılandırmasını ve davranışını kontrol eder; birincil amaçlarına göre düzenlenmiştir. Çoğu değişken mantıklı varsayılanlara sahiptir, ancak bunları özel gereksinimlerinize veya mevcut Azure kaynaklarınıza uyacak şekilde özelleştirebilirsiniz.
 
-### 3.1 Gerekli Değişkenler 
+### 3.1 Gereken Değişkenler 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Temel Azure Yapılandırması
+AZURE_ENV_NAME                    # Ortam adı (kaynak adlandırmasında kullanılır)
+AZURE_LOCATION                    # Dağıtım bölgesi
+AZURE_SUBSCRIPTION_ID             # Hedef abonelik
+AZURE_RESOURCE_GROUP              # Kaynak grubu adı
+AZURE_PRINCIPAL_ID                # RBAC için kullanıcı principali
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Kaynak adları (belirtilmezse otomatik oluşturulur)
+AZURE_AIHUB_NAME                  # Microsoft Foundry hub adı
+AZURE_AIPROJECT_NAME              # Yapay zeka proje adı
+AZURE_AISERVICES_NAME             # Yapay zeka hizmetleri hesap adı
+AZURE_STORAGE_ACCOUNT_NAME        # Depolama hesabı adı
+AZURE_CONTAINER_REGISTRY_NAME     # Konteyner kayıt defteri adı
+AZURE_KEYVAULT_NAME               # Key Vault adı (kullanılıyorsa)
 ```
 
 ### 3.2 Model Yapılandırması 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Sohbet Modeli Yapılandırması
+AZURE_AI_AGENT_MODEL_NAME         # Varsayılan: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Varsayılan: OpenAI (veya Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Varsayılan: mevcut en son
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Sohbet modeli için dağıtım adı
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Varsayılan: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Varsayılan: 80 (binlerce TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Gömme Modeli Yapılandırması
+AZURE_AI_EMBED_MODEL_NAME         # Varsayılan: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Varsayılan: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Varsayılan: mevcut en son
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Gömme modeli için dağıtım adı
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Varsayılan: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Varsayılan: 50 (binlerce TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Ajan Yapılandırması
+AZURE_AI_AGENT_NAME               # Ajan görüntülenen adı
+AZURE_EXISTING_AGENT_ID           # Mevcut ajanı kullan (isteğe bağlı)
 ```
 
-### 3.3 Özellik Geçişi
+### 3.3 Özellik Anahtarı (Feature Toggle)
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# İsteğe Bağlı Hizmetler
+USE_APPLICATION_INSIGHTS         # Varsayılan: doğru
+USE_AZURE_AI_SEARCH_SERVICE      # Varsayılan: yanlış
+USE_CONTAINER_REGISTRY           # Varsayılan: doğru
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# İzleme ve İz Sürme
+ENABLE_AZURE_MONITOR_TRACING     # Varsayılan: yanlış
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Varsayılan: yanlış
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Arama Yapılandırması
+AZURE_AI_SEARCH_INDEX_NAME       # Arama indeks adı
+AZURE_SEARCH_SERVICE_NAME        # Arama hizmeti adı
 ```
 
 ### 3.4 AI Proje Yapılandırması 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Mevcut Kaynakları Kullan
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Mevcut yapay zeka projesinin tam kaynak kimliği
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # Mevcut projenin uç nokta URL'si
 ```
 
 ### 3.5 Değişkenlerinizi Kontrol Edin
 
-Azure Developer CLI'yi kullanarak ortam değişkenlerinizi görüntüleyin ve yönetin:
+Ortam değişkenlerinizi görüntülemek ve yönetmek için Azure Developer CLI'yi kullanın:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Geçerli ortam için tüm ortam değişkenlerini görüntüle
 azd env get-values
 
-# Get a specific environment variable
+# Belirli bir ortam değişkenini al
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Bir ortam değişkeni ayarla
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Bir .env dosyasından birden çok değişken ayarla
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Sorumluluk Reddi**:
+Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğa özen göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

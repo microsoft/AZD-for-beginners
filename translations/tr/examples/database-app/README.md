@@ -1,44 +1,35 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-20T23:38:31+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "tr"
-}
--->
-# Microsoft SQL Veritabanı ve Web Uygulamasını AZD ile Dağıtma
+# AZD ile Microsoft SQL Veritabanı ve Web Uygulaması Dağıtımı
 
-⏱️ **Tahmini Süre**: 20-30 dakika | 💰 **Tahmini Maliyet**: ~15-25$/ay | ⭐ **Zorluk Seviyesi**: Orta
+⏱️ **Tahmini Süre**: 20-30 dakika | 💰 **Tahmini Maliyet**: ~$15-25/ay | ⭐ **Zorluk**: Orta
 
-Bu **tam, çalışan örnek**, [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) kullanarak bir Python Flask web uygulamasını ve Microsoft SQL Veritabanını Azure'a nasıl dağıtacağınızı gösterir. Tüm kodlar dahil edilmiştir ve test edilmiştir—harici bağımlılık gerekmez.
+Bu **tam, çalışan örnek**, bir Python Flask web uygulamasını Microsoft SQL Veritabanı ile birlikte Azure'a dağıtmak için [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) kullanımını gösterir. Tüm kod dahildir ve test edilmiştir—harici bağımlılığa gerek yoktur.
 
 ## Öğrenecekleriniz
 
 Bu örneği tamamlayarak:
-- Kod olarak altyapı kullanarak çok katmanlı bir uygulama (web uygulaması + veritabanı) dağıtmayı öğreneceksiniz.
-- Şifreleri kodda sabitlemeden güvenli veritabanı bağlantılarını yapılandırmayı öğreneceksiniz.
-- Application Insights ile uygulama sağlığını izlemeyi öğreneceksiniz.
-- AZD CLI ile Azure kaynaklarını verimli bir şekilde yönetmeyi öğreneceksiniz.
-- Güvenlik, maliyet optimizasyonu ve gözlemlenebilirlik için Azure en iyi uygulamalarını takip edeceksiniz.
+- Altyapıyı kod olarak (infrastructure-as-code) kullanarak çok katmanlı bir uygulama (web uygulaması + veritabanı) dağıtacaksınız
+- Gizli bilgileri sabit kodlamadan güvenli şekilde yapılandıracaksınız
+- Uygulama sağlığını Application Insights ile izleyeceksiniz
+- AZD CLI ile Azure kaynaklarını verimli yöneteceksiniz
+- Güvenlik, maliyet optimizasyonu ve gözlemlenebilirlik için Azure en iyi uygulamalarını takip edeceksiniz
 
-## Senaryo Özeti
+## Senaryo Genel Bakış
 - **Web Uygulaması**: Veritabanı bağlantılı Python Flask REST API
-- **Veritabanı**: Örnek veri içeren Azure SQL Veritabanı
-- **Altyapı**: Bicep kullanılarak sağlanır (modüler, yeniden kullanılabilir şablonlar)
+- **Veritabanı**: Örnek verilerle Azure SQL Database
+- **Altyapı**: Bicep kullanılarak temin edilir (modüler, yeniden kullanılabilir şablonlar)
 - **Dağıtım**: `azd` komutları ile tamamen otomatik
-- **İzleme**: Günlükler ve telemetri için Application Insights
+- **İzleme**: Loglar ve telemetri için Application Insights
 
-## Ön Koşullar
+## Önkoşullar
 
 ### Gerekli Araçlar
 
-Başlamadan önce aşağıdaki araçların yüklü olduğundan emin olun:
+Başlamadan önce bu araçların yüklü olduğundan emin olun:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (sürüm 2.50.0 veya üzeri)
    ```sh
    az --version
-   # Beklenen çıktı: azure-cli 2.50.0 veya daha yüksek
+   # Beklenen çıktı: azure-cli 2.50.0 veya daha yeni
    ```
 
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (sürüm 1.0.0 veya üzeri)
@@ -53,7 +44,7 @@ Başlamadan önce aşağıdaki araçların yüklü olduğundan emin olun:
    # Beklenen çıktı: Python 3.8 veya daha yüksek
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (isteğe bağlı, yerel konteyner geliştirme için)
+4. **[Docker](https://www.docker.com/get-started)** (isteğe bağlı, yerel konteynerli geliştirme için)
    ```sh
    docker --version
    # Beklenen çıktı: Docker sürümü 20.10 veya daha yüksek
@@ -61,22 +52,22 @@ Başlamadan önce aşağıdaki araçların yüklü olduğundan emin olun:
 
 ### Azure Gereksinimleri
 
-- Aktif bir **Azure aboneliği** ([ücretsiz hesap oluşturun](https://azure.microsoft.com/free/))
+- Etkin bir **Azure aboneliği** ([ücretsiz hesap oluştur](https://azure.microsoft.com/free/))
 - Aboneliğinizde kaynak oluşturma izinleri
-- Abonelik veya kaynak grubunda **Sahip** veya **Katkıda Bulunan** rolü
+- Abonelikte veya kaynak grubunda **Owner** veya **Contributor** rolü
 
-### Bilgi Ön Koşulları
+### Bilgi Önkoşulları
 
-Bu **orta seviye** bir örnektir. Aşina olmanız gerekenler:
+Bu bir **orta düzey** örnektir. Aşağıları bilmeniz beklenir:
 - Temel komut satırı işlemleri
-- Temel bulut kavramları (kaynaklar, kaynak grupları)
-- Web uygulamaları ve veritabanları hakkında temel bilgi
+- Bulut temel kavramları (kaynaklar, kaynak grupları)
+- Web uygulamaları ve veritabanları hakkında temel anlayış
 
-**AZD'ye yeni mi?** Önce [Başlangıç Kılavuzu](../../docs/getting-started/azd-basics.md) ile başlayın.
+**AZD’ye yeni misiniz?** Önce [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) ile başlayın.
 
 ## Mimari
 
-Bu örnek, bir web uygulaması ve SQL veritabanı içeren iki katmanlı bir mimariyi dağıtır:
+Bu örnek bir web uygulaması ve SQL veritabanından oluşan iki katmanlı bir mimari dağıtır:
 
 ```
 ┌─────────────────┐        ┌──────────────────────┐
@@ -97,19 +88,19 @@ Bu örnek, bir web uygulaması ve SQL veritabanı içeren iki katmanlı bir mima
 ```
 
 **Kaynak Dağıtımı:**
-- **Kaynak Grubu**: Tüm kaynaklar için konteyner
-- **App Service Planı**: Linux tabanlı barındırma (B1 maliyet verimliliği için)
-- **Web Uygulaması**: Flask uygulamalı Python 3.11 çalışma zamanı
-- **SQL Sunucusu**: TLS 1.2 minimum ile yönetilen veritabanı sunucusu
-- **SQL Veritabanı**: Temel seviye (2GB, geliştirme/test için uygun)
-- **Application Insights**: İzleme ve günlükleme
-- **Log Analytics Workspace**: Merkezi günlük depolama
+- **Resource Group**: Tüm kaynakların konteyneri
+- **App Service Plan**: Linux tabanlı barındırma (maliyet verimliliği için B1 katmanı)
+- **Web App**: Flask uygulaması ile Python 3.11 çalışma zamanı
+- **SQL Server**: TLS 1.2 minimum ile yönetilen veritabanı sunucusu
+- **SQL Database**: Basic katman (2GB, geliştirme/test için uygun)
+- **Application Insights**: İzleme ve loglama
+- **Log Analytics Workspace**: Merkezi log depolama
 
-**Benzetme**: Bunu bir restoran (web uygulaması) ve bir soğuk hava deposu (veritabanı) gibi düşünün. Müşteriler menüden sipariş verir (API uç noktaları) ve mutfak (Flask uygulaması) malzemeleri (veriler) soğuk hava deposundan alır. Restoran yöneticisi (Application Insights) olan biteni takip eder.
+**Benzetme**: Bunu, bir restoran (web uygulaması) ve bir walk-in dondurucu (veritabanı) olarak düşünebilirsiniz. Müşteriler menüden sipariş verir (API uç noktaları) ve mutfak (Flask uygulaması) malzemeleri (veri) dondurucudan alır. Restoran yöneticisi (Application Insights) olan biteni takip eder.
 
 ## Klasör Yapısı
 
-Tüm dosyalar bu örnekte dahil edilmiştir—harici bağımlılık gerekmez:
+Tüm dosyalar bu örnekte dahil—harici bağımlılık gerekmiyor:
 
 ```
 examples/database-app/
@@ -136,24 +127,24 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**Her Dosyanın İşlevi:**
-- **azure.yaml**: AZD'ye neyin nerede dağıtılacağını söyler
-- **infra/main.bicep**: Tüm Azure kaynaklarını düzenler
-- **infra/resources/*.bicep**: Bireysel kaynak tanımları (yeniden kullanılabilir modüler)
+**Her Dosyanın Ne Yaptığı:**
+- **azure.yaml**: AZD’ye neyi, nereye dağıtacağını söyler
+- **infra/main.bicep**: Tüm Azure kaynaklarını orkestre eder
+- **infra/resources/*.bicep**: Bireysel kaynak tanımları (yeniden kullanım için modüler)
 - **src/web/app.py**: Veritabanı mantığı içeren Flask uygulaması
 - **requirements.txt**: Python paket bağımlılıkları
 - **Dockerfile**: Dağıtım için konteynerleştirme talimatları
 
 ## Hızlı Başlangıç (Adım Adım)
 
-### Adım 1: Klonlayın ve Gezin
+### Adım 1: Klonla ve Gezin
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Başarı Kontrolü**: `azure.yaml` ve `infra/` klasörünü gördüğünüzden emin olun:
+**✓ Başarı Kontrolü**: `azure.yaml` ve `infra/` klasörlerini gördüğünüzü doğrulayın:
 ```sh
 ls
 # Beklenen: README.md, azure.yaml, infra/, src/
@@ -172,7 +163,7 @@ Bu, Azure kimlik doğrulaması için tarayıcınızı açar. Azure kimlik bilgil
 Logged in to Azure.
 ```
 
-### Adım 3: Ortamı Başlatın
+### Adım 3: Ortamı Başlatma
 
 ```sh
 azd init
@@ -180,33 +171,33 @@ azd init
 
 **Ne olur**: AZD, dağıtımınız için yerel bir yapılandırma oluşturur.
 
-**Göreceğiniz İstemler**:
-- **Ortam adı**: Kısa bir ad girin (ör. `dev`, `myapp`)
-- **Azure aboneliği**: Listeden aboneliğinizi seçin
-- **Azure konumu**: Bir bölge seçin (ör. `eastus`, `westeurope`)
+**Görüntüleyeceğiniz istemler**:
+- **Environment name**: Kısa bir ad girin (ör. `dev`, `myapp`)
+- **Azure subscription**: Listeden aboneliğinizi seçin
+- **Azure location**: Bir bölge seçin (ör. `eastus`, `westeurope`)
 
 **✓ Başarı Kontrolü**: Şunu görmelisiniz:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Adım 4: Azure Kaynaklarını Sağlayın
+### Adım 4: Azure Kaynaklarını Sağlama
 
 ```sh
 azd provision
 ```
 
 **Ne olur**: AZD tüm altyapıyı dağıtır (5-8 dakika sürer):
-1. Kaynak grubu oluşturur
-2. SQL Sunucusu ve Veritabanı oluşturur
-3. App Service Planı oluşturur
-4. Web Uygulaması oluşturur
+1. Resource group oluşturur
+2. SQL Server ve Database oluşturur
+3. App Service Plan oluşturur
+4. Web App oluşturur
 5. Application Insights oluşturur
-6. Ağ ve güvenliği yapılandırır
+6. Ağ ve güvenlik yapılandırmasını yapar
 
-**İstenecek Bilgiler**:
-- **SQL yönetici kullanıcı adı**: Bir kullanıcı adı girin (ör. `sqladmin`)
-- **SQL yönetici şifresi**: Güçlü bir şifre girin (bunu kaydedin!)
+**Size sorulacaklar**:
+- **SQL admin username**: Bir kullanıcı adı girin (ör. `sqladmin`)
+- **SQL admin password**: Güçlü bir parola girin (bunu kaydedin!)
 
 **✓ Başarı Kontrolü**: Şunu görmelisiniz:
 ```
@@ -217,17 +208,17 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Süre**: 5-8 dakika
 
-### Adım 5: Uygulamayı Dağıtın
+### Adım 5: Uygulamayı Dağıtma
 
 ```sh
 azd deploy
 ```
 
-**Ne olur**: AZD Flask uygulamanızı oluşturur ve dağıtır:
+**Ne olur**: AZD Flask uygulamanızı derler ve dağıtır:
 1. Python uygulamasını paketler
 2. Docker konteynerini oluşturur
-3. Azure Web Uygulamasına gönderir
-4. Örnek veri ile veritabanını başlatır
+3. Azure Web App’e iter
+4. Veritabanını örnek verilerle başlatır
 5. Uygulamayı başlatır
 
 **✓ Başarı Kontrolü**: Şunu görmelisiniz:
@@ -239,15 +230,15 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Süre**: 3-5 dakika
 
-### Adım 6: Uygulamayı Tarayıcıda Açın
+### Adım 6: Uygulamayı Tarayıcıda Açma
 
 ```sh
 azd browse
 ```
 
-Bu, tarayıcıda `https://app-<benzersiz-id>.azurewebsites.net` adresinde dağıtılmış web uygulamanızı açar.
+Bu, dağıtılmış web uygulamanızı tarayıcıda `https://app-<unique-id>.azurewebsites.net` adresinde açar.
 
-**✓ Başarı Kontrolü**: JSON çıktısını görmelisiniz:
+**✓ Başarı Kontrolü**: JSON çıktısı görmelisiniz:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -260,7 +251,7 @@ Bu, tarayıcıda `https://app-<benzersiz-id>.azurewebsites.net` adresinde dağı
 }
 ```
 
-### Adım 7: API Uç Noktalarını Test Edin
+### Adım 7: API Uç Noktalarını Test Etme
 
 **Sağlık Kontrolü** (veritabanı bağlantısını doğrulayın):
 ```sh
@@ -275,7 +266,7 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**Ürünleri Listele** (örnek veri):
+**Ürünleri Listele** (örnek veriler):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
@@ -294,37 +285,37 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**Tek Bir Ürünü Al**:
+**Tek Ürün Getir**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Başarı Kontrolü**: Tüm uç noktalar hatasız JSON verisi döndürür.
+**✓ Başarı Kontrolü**: Tüm uç noktalar JSON veri döndürmeli ve hata vermemelidir.
 
 ---
 
-**🎉 Tebrikler!** AZD kullanarak bir veritabanı ile web uygulamasını Azure'a başarıyla dağıttınız.
+**🎉 Tebrikler!** AZD kullanarak bir veritabanıyla birlikte web uygulamasını başarıyla Azure'a dağıttınız.
 
-## Yapılandırma Derinlemesine
+## Yapılandırma Derinlemesine İnceleme
 
 ### Ortam Değişkenleri
 
-Gizli bilgiler, Azure App Service yapılandırması aracılığıyla güvenli bir şekilde yönetilir—**asla kaynak kodda sabitlenmez**.
+Gizli bilgiler Azure App Service yapılandırması aracılığıyla güvenli şekilde yönetilir—**kaynak kodda asla sabit kodlanmaz**.
 
-**AZD Tarafından Otomatik Olarak Yapılandırılır**:
-- `SQL_CONNECTION_STRING`: Şifrelenmiş kimlik bilgileri ile veritabanı bağlantısı
+**AZD TARAFINDAN OTOMATİK OLARAK YAPILANDIRILIR**:
+- `SQL_CONNECTION_STRING`: Şifrelenmiş kimlik bilgileriyle veritabanı bağlantısı
 - `APPLICATIONINSIGHTS_CONNECTION_STRING`: İzleme telemetri uç noktası
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Otomatik bağımlılık yüklemeyi etkinleştirir
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Otomatik bağımlılık kurulumunu etkinleştirir
 
-**Gizli Bilgilerin Saklandığı Yer**:
-1. `azd provision` sırasında SQL kimlik bilgilerini güvenli istemler aracılığıyla sağlarsınız.
-2. AZD bunları yerel `.azure/<env-name>/.env` dosyanıza kaydeder (git tarafından yok sayılır).
-3. AZD bunları Azure App Service yapılandırmasına enjekte eder (dinlenme sırasında şifrelenir).
-4. Uygulama bunları çalışma zamanında `os.getenv()` ile okur.
+**Gizli Bilgiler Nerede Saklanır**:
+1. `azd provision` sırasında SQL kimlik bilgilerini güvenli istemlerle sağlarsınız
+2. AZD bunları yerel `.azure/<env-name>/.env` dosyanıza kaydeder (git-ignored)
+3. AZD bunları Azure App Service yapılandırmasına enjekte eder (dinlenmede şifrelenmiş)
+4. Uygulama runtime sırasında bunları `os.getenv()` ile okur
 
 ### Yerel Geliştirme
 
-Yerel test için, örnekten bir `.env` dosyası oluşturun:
+Yerel test için örnekten bir `.env` dosyası oluşturun:
 
 ```sh
 cp .env.sample .env
@@ -344,23 +335,23 @@ export SQL_CONNECTION_STRING="your-local-connection-string"
 python app.py
 ```
 
-**Yerel Test**:
+**Yerelde test et**:
 ```sh
 curl http://localhost:8000/health
-# Beklenen: {"durum": "sağlıklı", "veritabanı": "bağlı"}
+# Beklenen: {"status": "healthy", "database": "connected"}
 ```
 
 ### Kod Olarak Altyapı
 
 Tüm Azure kaynakları **Bicep şablonlarında** tanımlanmıştır (`infra/` klasörü):
 
-- **Modüler Tasarım**: Her kaynak türü yeniden kullanılabilirlik için kendi dosyasına sahiptir.
-- **Parametreli**: SKU'lar, bölgeler, adlandırma kuralları özelleştirilebilir.
-- **En İyi Uygulamalar**: Azure adlandırma standartlarını ve güvenlik varsayılanlarını takip eder.
-- **Sürüm Kontrolü**: Altyapı değişiklikleri Git'te izlenir.
+- **Modüler Tasarım**: Her kaynak türü yeniden kullanılabilirlik için kendi dosyasına sahiptir
+- **Parametrelendirilebilir**: SKU'ları, bölgeleri, adlandırma kurallarını özelleştirin
+- **En İyi Uygulamalar**: Azure adlandırma standartları ve güvenlik varsayılanlarını takip eder
+- **Sürüm Kontrolü**: Altyapı değişiklikleri Git’te izlenir
 
 **Özelleştirme Örneği**:
-Veritabanı seviyesini değiştirmek için `infra/resources/sql-database.bicep` dosyasını düzenleyin:
+Veritabanı katmanını değiştirmek için `infra/resources/sql-database.bicep` dosyasını düzenleyin:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -371,67 +362,67 @@ sku: {
 
 ## Güvenlik En İyi Uygulamaları
 
-Bu örnek, Azure güvenlik en iyi uygulamalarını takip eder:
+Bu örnek Azure güvenlik en iyi uygulamalarını takip eder:
 
-### 1. **Kaynak Kodda Gizli Bilgi Yok**
+### 1. **Kaynak Kodunda Gizli Bilgi Yok**
 - ✅ Kimlik bilgileri Azure App Service yapılandırmasında saklanır (şifrelenmiş)
-- ✅ `.env` dosyaları `.gitignore` ile Git'ten hariç tutulur
-- ✅ Gizli bilgiler sağlama sırasında güvenli parametreler aracılığıyla iletilir
+- ✅ `.env` dosyaları `.gitignore` ile Git dışı bırakılır
+- ✅ Gizli bilgiler provisioning sırasında güvenli parametrelerle geçirilebilir
 
 ### 2. **Şifrelenmiş Bağlantılar**
-- ✅ SQL Sunucusu için minimum TLS 1.2
-- ✅ Web Uygulaması için yalnızca HTTPS zorunlu
+- ✅ SQL Server için en az TLS 1.2
+- ✅ Web App için sadece HTTPS zorlanır
 - ✅ Veritabanı bağlantıları şifreli kanallar kullanır
 
 ### 3. **Ağ Güvenliği**
-- ✅ SQL Sunucusu güvenlik duvarı yalnızca Azure hizmetlerine izin verir
-- ✅ Genel ağ erişimi kısıtlanmıştır (Özel Uç Noktalar ile daha fazla kilitlenebilir)
-- ✅ Web Uygulamasında FTPS devre dışı
+- ✅ SQL Server güvenlik duvarı yalnızca Azure hizmetlerine izin verecek şekilde yapılandırılmıştır
+- ✅ Genel ağ erişimi kısıtlanmıştır (Private Endpoints ile daha da sınırlandırılabilir)
+- ✅ Web App üzerinde FTPS devre dışı bırakılmıştır
 
 ### 4. **Kimlik Doğrulama ve Yetkilendirme**
-- ⚠️ **Mevcut**: SQL kimlik doğrulama (kullanıcı adı/şifre)
-- ✅ **Üretim Önerisi**: Şifresiz kimlik doğrulama için Azure Yönetilen Kimlik kullanın
+- ⚠️ **Mevcut**: SQL kimlik doğrulaması (kullanıcı adı/parola)
+- ✅ **Üretim Önerisi**: Parolasız kimlik doğrulaması için Azure Managed Identity kullanın
 
-**Yönetilen Kimliğe Yükseltme** (üretim için):
-1. Web Uygulamasında yönetilen kimliği etkinleştirin.
-2. Kimliğe SQL izinleri verin.
-3. Bağlantı dizesini yönetilen kimlik kullanacak şekilde güncelleyin.
-4. Şifre tabanlı kimlik doğrulamayı kaldırın.
+**Yönetilen Kimliğe Geçiş için** (üretim için):
+1. Web App üzerinde managed identity’yi etkinleştirin
+2. Kimliğe SQL izinleri verin
+3. Bağlantı dizesini managed identity kullanacak şekilde güncelleyin
+4. Parola tabanlı kimlik doğrulamayı kaldırın
 
-### 5. **Denetim ve Uyumluluk**
-- ✅ Application Insights tüm istekleri ve hataları kaydeder.
-- ✅ SQL Veritabanı denetimi etkinleştirilmiştir (uyumluluk için yapılandırılabilir).
-- ✅ Tüm kaynaklar yönetişim için etiketlenmiştir.
+### 5. **Denetim & Uyum**
+- ✅ Application Insights tüm istekleri ve hataları loglar
+- ✅ SQL Database denetimi etkin (uyumluluk için yapılandırılabilir)
+- ✅ Tüm kaynaklar yönetişim için etiketlenir
 
 **Üretim Öncesi Güvenlik Kontrol Listesi**:
-- [ ] Azure Defender for SQL'i etkinleştirin.
-- [ ] SQL Veritabanı için Özel Uç Noktalar yapılandırın.
-- [ ] Web Uygulama Güvenlik Duvarı (WAF) etkinleştirin.
-- [ ] Gizli bilgi döndürme için Azure Key Vault'u uygulayın.
-- [ ] Azure AD kimlik doğrulamasını yapılandırın.
-- [ ] Tüm kaynaklar için tanılama günlüklerini etkinleştirin.
+- [ ] Azure Defender for SQL etkinleştirin
+- [ ] SQL Database için Private Endpoints yapılandırın
+- [ ] Web Application Firewall (WAF) etkinleştirin
+- [ ] Gizli bilgilerin döngüsel yönetimi için Azure Key Vault uygulayın
+- [ ] Azure AD kimlik doğrulamayı yapılandırın
+- [ ] Tüm kaynaklar için tanısal loglamayı etkinleştirin
 
 ## Maliyet Optimizasyonu
 
 **Tahmini Aylık Maliyetler** (Kasım 2025 itibarıyla):
 
-| Kaynak | SKU/Seviye | Tahmini Maliyet |
-|--------|------------|-----------------|
-| App Service Planı | B1 (Temel) | ~13$/ay |
-| SQL Veritabanı | Temel (2GB) | ~5$/ay |
-| Application Insights | Kullanıma göre ödeme | ~2$/ay (düşük trafik) |
-| **Toplam** | | **~20$/ay** |
+| Resource | SKU/Tier | Tahmini Maliyet |
+|----------|----------|----------------|
+| App Service Plan | B1 (Basic) | ~$13/ay |
+| SQL Database | Basic (2GB) | ~$5/ay |
+| Application Insights | Pay-as-you-go | ~$2/ay (düşük trafik) |
+| **Total** | | **~$20/ay** |
 
-**💡 Maliyet Tasarruf İpuçları**:
+**💡 Maliyet Tasarrufu İpuçları**:
 
-1. **Öğrenme için Ücretsiz Seviye Kullanın**:
-   - App Service: F1 seviyesi (ücretsiz, sınırlı saatler)
-   - SQL Veritabanı: Azure SQL Veritabanı sunucusuz kullanın
-   - Application Insights: 5GB/ay ücretsiz veri alımı
+1. **Öğrenme İçin Ücretsiz Katmanı Kullanın**:
+   - App Service: F1 tier (ücretsiz, sınırlı saat)
+   - SQL Database: Azure SQL Database serverless kullanın
+   - Application Insights: Aylık 5GB ücretsiz ingestion
 
-2. **Kaynakları Kullanılmadığında Durdurun**:
+2. **Kullanılmadığında Kaynakları Durdurun**:
    ```sh
-   # Web uygulamasını durdur (veritabanı hala ücret alıyor)
+   # Web uygulamasını durdur (veritabanı yine de ücretlendirilmeye devam eder)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
    # Gerektiğinde yeniden başlat
@@ -442,46 +433,46 @@ Bu örnek, Azure güvenlik en iyi uygulamalarını takip eder:
    ```sh
    azd down
    ```
-   Bu, TÜM kaynakları kaldırır ve ücretleri durdurur.
+   Bu, TÜM kaynakları kaldırır ve ücretlendirmeyi durdurur.
 
-4. **Geliştirme ve Üretim SKU'ları**:
-   - **Geliştirme**: Temel seviye (bu örnekte kullanılmıştır)
-   - **Üretim**: Yedeklilik ile Standart/Premium seviye
+4. **Geliştirme ve Üretim SKU’ları Arasındaki Fark**:
+   - **Geliştirme**: Bu örnekte kullanılan Basic katman
+   - **Üretim**: Redundancy ile Standard/Premium katmanlar
 
 **Maliyet İzleme**:
-- Maliyetleri [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement) üzerinden görüntüleyin.
-- Sürprizlerden kaçınmak için maliyet uyarıları ayarlayın.
-- Tüm kaynakları `azd-env-name` etiketi ile takip edin.
+- [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement) üzerinden maliyetleri görüntüleyin
+- Sürprizleri önlemek için maliyet uyarıları kurun
+- İzleme için tüm kaynakları `azd-env-name` ile etiketleyin
 
-**Ücretsiz Seviye Alternatifi**:
-Öğrenme amaçlı olarak `infra/resources/app-service-plan.bicep` dosyasını değiştirebilirsiniz:
+**Ücretsiz Katman Alternatifi**:
+Öğrenme amaçlı `infra/resources/app-service-plan.bicep` dosyasını değiştirebilirsiniz:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Not**: Ücretsiz seviye sınırlamalara sahiptir (günde 60 dakika CPU, her zaman açık değil).
+**Not**: Ücretsiz katmanın sınırlamaları vardır (günlük 60 dk CPU, sürekli açık değil).
 
-## İzleme ve Gözlemlenebilirlik
+## İzleme & Gözlemlenebilirlik
 
 ### Application Insights Entegrasyonu
 
-Bu örnek, kapsamlı izleme için **Application Insights** içerir:
+Bu örnek kapsamlı izleme için **Application Insights** içerir:
 
-**İzlenenler**:
+**Neler İzlenir**:
 - ✅ HTTP istekleri (gecikme, durum kodları, uç noktalar)
 - ✅ Uygulama hataları ve istisnalar
-- ✅ Flask uygulamasından özel günlükleme
+- ✅ Flask uygulamasından özel loglama
 - ✅ Veritabanı bağlantı sağlığı
 - ✅ Performans metrikleri (CPU, bellek)
 
-**Application Insights'a Erişim**:
-1. [Azure Portal](https://portal.azure.com) açın.
-2. Kaynak grubunuza gidin (`rg-<env-name>`).
-3. Application Insights kaynağına tıklayın (`appi-<benzersiz-id>`).
+**Application Insights’e Erişim**:
+1. [Azure Portal](https://portal.azure.com) açın
+2. Resource group'unuza gidin (`rg-<env-name>`)
+3. Application Insights kaynağına tıklayın (`appi-<unique-id>`)
 
-**Faydalı Sorgular** (Application Insights → Günlükler):
+**Yararlı Sorgular** (Application Insights → Logs):
 
 **Tüm İstekleri Görüntüle**:
 ```kusto
@@ -508,25 +499,25 @@ requests
 
 ### SQL Veritabanı Denetimi
 
-**SQL Veritabanı denetimi etkinleştirilmiştir** ve şunları izler:
+**SQL Database denetimi etkin** olup şunları izler:
 - Veritabanı erişim desenleri
-- Başarısız oturum açma girişimleri
+- Başarısız giriş denemeleri
 - Şema değişiklikleri
 - Veri erişimi (uyumluluk için)
 
-**Denetim Günlüklerine Erişim**:
-1. Azure Portal → SQL Veritabanı → Denetim
-2. Günlükleri Log Analytics çalışma alanında görüntüleyin.
+**Denetim Loglarına Erişim**:
+1. Azure Portal → SQL Database → Auditing
+2. Log Analytics workspace’te logları görüntüleyin
 
 ### Gerçek Zamanlı İzleme
 
 **Canlı Metrikleri Görüntüle**:
-1. Application Insights → Canlı Metrikler
-2. İstekleri, hataları ve performansı gerçek zamanlı olarak görün.
+1. Application Insights → Live Metrics
+2. Gerçek zamanlı istekleri, hataları ve performansı görün
 
-**Uyarılar Ayarlayın**:
+**Uyarılar Kurun**:
 Kritik olaylar için uyarılar oluşturun:
-- 5 dakika içinde >5 HTTP 500 hatası
+- 5 dakika içinde HTTP 500 hataları > 5
 - Veritabanı bağlantı hataları
 - Yüksek yanıt süreleri (>2 saniye)
 
@@ -544,7 +535,7 @@ az monitor metrics alert create \
 
 ### Yaygın Sorunlar ve Çözümleri
 
-#### 1. `azd provision` "Konum mevcut değil" hatasıyla başarısız oluyor
+#### 1. `azd provision` "Location not available" hatasıyla başarısız olur
 
 **Belirti**:
 ```
@@ -557,7 +548,7 @@ Farklı bir Azure bölgesi seçin veya kaynak sağlayıcısını kaydedin:
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. Dağıtım sırasında SQL bağlantısı başarısız oluyor
+#### 2. Dağıtım Sırasında SQL Bağlantısı Başarısız Oluyor
 
 **Belirti**:
 ```
@@ -565,34 +556,34 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 ```
 
 **Çözüm**:
-- SQL Server güvenlik duvarının Azure hizmetlerine izin verdiğinden emin olun (otomatik olarak yapılandırılır)
-- `azd provision` sırasında SQL yönetici şifresinin doğru girildiğini kontrol edin
+- SQL Server güvenlik duvarının Azure hizmetlerine izin verdiğini doğrulayın (otomatik olarak yapılandırılır)
+- SQL yönetici parolasının `azd provision` sırasında doğru girildiğini kontrol edin
 - SQL Server'ın tamamen sağlandığından emin olun (2-3 dakika sürebilir)
 
-**Bağlantıyı Doğrula**:
+**Bağlantıyı Doğrulayın**:
 ```sh
-# Azure Portal'dan SQL Veritabanı → Sorgu düzenleyicisine gidin
-# Kimlik bilgilerinizi kullanarak bağlanmayı deneyin
+# Azure Portal'dan SQL Database → Sorgu düzenleyicisine gidin
+# Kimlik bilgilerinizle bağlanmayı deneyin
 ```
 
-#### 3. Web Uygulaması "Uygulama Hatası" Gösteriyor
+#### 3. Web Uygulaması "Application Error" Gösteriyor
 
 **Belirti**:
-Tarayıcı genel bir hata sayfası gösteriyor.
+Tarayıcı genel bir hata sayfası gösterir.
 
 **Çözüm**:
 Uygulama günlüklerini kontrol edin:
 ```sh
-# Son günlükleri görüntüle
+# Son kayıtları görüntüle
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
 **Yaygın nedenler**:
-- Eksik ortam değişkenleri (App Service → Yapılandırma bölümünü kontrol edin)
-- Python paket yüklemesi başarısız oldu (dağıtım günlüklerini kontrol edin)
+- Eksik ortam değişkenleri (App Service → Configuration bölümünü kontrol edin)
+- Python paket kurulumu başarısız oldu (dağıtım günlüklerini kontrol edin)
 - Veritabanı başlatma hatası (SQL bağlantısını kontrol edin)
 
-#### 4. `azd deploy` "Derleme Hatası" ile başarısız oluyor
+#### 4. `azd deploy` "Build Error" ile Başarısız Oluyor
 
 **Belirti**:
 ```
@@ -601,17 +592,17 @@ Error: Failed to build project
 
 **Çözüm**:
 - `requirements.txt` dosyasında sözdizimi hatası olmadığından emin olun
-- `infra/resources/web-app.bicep` dosyasında Python 3.11'in belirtildiğini kontrol edin
+- Python 3.11'in `infra/resources/web-app.bicep` içinde belirtildiğini kontrol edin
 - Dockerfile'ın doğru temel imajı içerdiğini doğrulayın
 
-**Yerel olarak hata ayıkla**:
+**Yerelde Hata Ayıklama**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. AZD Komutlarını Çalıştırırken "Yetkisiz" Hatası
+#### 5. AZD Komutları Çalıştırılırken "Unauthorized" Hatası
 
 **Belirti**:
 ```
@@ -619,24 +610,24 @@ ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have auth
 ```
 
 **Çözüm**:
-Azure ile yeniden kimlik doğrulaması yapın:
+Azure ile tekrar kimlik doğrulaması yapın:
 ```sh
 azd auth login
 az login
 ```
 
-Abonelikte doğru izinlere (Katkıda Bulunan rolü) sahip olduğunuzu doğrulayın.
+Abonelikte doğru izinlere sahip olduğunuzu doğrulayın (Contributor rolü).
 
 #### 6. Yüksek Veritabanı Maliyetleri
 
 **Belirti**:
-Beklenmedik Azure faturası.
+Beklenmeyen Azure faturası.
 
 **Çözüm**:
 - Testten sonra `azd down` komutunu çalıştırmayı unuttuğunuzu kontrol edin
-- SQL Veritabanının Temel katman (Premium değil) kullandığını doğrulayın
-- Azure Maliyet Yönetimi'nde maliyetleri gözden geçirin
-- Maliyet uyarıları ayarlayın
+- SQL Database'in Basic katmanı kullandığını doğrulayın (Premium değil)
+- Azure Cost Management'ta maliyetleri gözden geçirin
+- Maliyet uyarıları kurun
 
 ### Yardım Alma
 
@@ -650,13 +641,13 @@ azd env get-values
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Uygulama Günlüklerine Erişin**:
+**Uygulama Günlüklerine Erişim**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**Daha Fazla Yardım mı Gerekli?**
-- [AZD Sorun Giderme Kılavuzu](../../docs/troubleshooting/common-issues.md)
+**Daha Fazla Yardıma mı ihtiyacınız var?**
+- [AZD Sorun Giderme Rehberi](../../docs/chapter-07-troubleshooting/common-issues.md)
 - [Azure App Service Sorun Giderme](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
 - [Azure SQL Sorun Giderme](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
@@ -671,7 +662,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Beklenen**: 6-7 kaynak (Web Uygulaması, SQL Server, SQL Veritabanı, App Service Planı, Application Insights, Log Analytics)
+   **Beklenen**: 6-7 kaynak (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
 2. Tüm API uç noktalarını test edin:
    ```sh
@@ -684,17 +675,17 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 3. Application Insights'ı kontrol edin:
    - Azure Portal'da Application Insights'a gidin
-   - "Canlı Metrikler"e gidin
+   - "Live Metrics" bölümüne gidin
    - Web uygulamasında tarayıcınızı yenileyin
-   **Beklenen**: Gerçek zamanlı olarak isteklerin göründüğünü görün
+   **Beklenen**: İsteklerin gerçek zamanlı olarak göründüğünü görün
 
-**Başarı Kriterleri**: Tüm 6-7 kaynak mevcut, tüm uç noktalar veri döndürüyor, Canlı Metrikler etkinlik gösteriyor.
+**Başarı Kriterleri**: Tüm 6-7 kaynak mevcut, tüm uç noktalar veri döndürüyor, Live Metrics etkinlik gösteriyor.
 
 ---
 
-### Alıştırma 2: Yeni Bir API Uç Noktası Ekleyin (Orta Seviye)
+### Alıştırma 2: Yeni Bir API Uç Noktası Ekle (Orta Seviye)
 
-**Hedef**: Flask uygulamasına yeni bir uç nokta ekleyin.
+**Hedef**: Flask uygulamasını yeni bir uç noktayla genişletin.
 
 **Başlangıç Kodu**: `src/web/app.py` içindeki mevcut uç noktalar
 
@@ -744,18 +735,18 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```
    **Beklenen**: "laptop" ile eşleşen ürünleri döndürür
 
-**Başarı Kriterleri**: Yeni uç nokta çalışıyor, filtrelenmiş sonuçlar döndürüyor, Application Insights günlüklerinde görünüyor.
+**Başarı Kriterleri**: Yeni uç nokta çalışıyor, filtrelenmiş sonuçlar döndürüyor, Application Insights günlüklerinde görünür.
 
 ---
 
-### Alıştırma 3: İzleme ve Uyarılar Ekleyin (İleri Seviye)
+### Alıştırma 3: İzleme ve Uyarılar Ekle (İleri Seviye)
 
-**Hedef**: Uyarılarla proaktif izleme ayarlayın.
+**Hedef**: Uyarılarla proaktif izleme kurun.
 
 **Adımlar**:
 1. HTTP 500 hataları için bir uyarı oluşturun:
    ```sh
-   # Uygulama İçgörüleri kaynak kimliğini alın
+   # Application Insights kaynak kimliğini al
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
@@ -774,24 +765,24 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 2. Hatalar oluşturarak uyarıyı tetikleyin:
    ```sh
-   # Mevcut olmayan bir ürün isteyin
+   # Mevcut olmayan bir ürünü talep et
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
 3. Uyarının tetiklenip tetiklenmediğini kontrol edin:
-   - Azure Portal → Uyarılar → Uyarı Kuralları
+   - Azure Portal → Alerts → Alert Kuralları
    - E-postanızı kontrol edin (eğer yapılandırıldıysa)
 
 **Başarı Kriterleri**: Uyarı kuralı oluşturuldu, hatalarda tetikleniyor, bildirimler alınıyor.
 
 ---
 
-### Alıştırma 4: Veritabanı Şeması Değişiklikleri (İleri Seviye)
+### Alıştırma 4: Veritabanı Şema Değişiklikleri (İleri Seviye)
 
-**Hedef**: Yeni bir tablo ekleyin ve uygulamayı bunu kullanacak şekilde değiştirin.
+**Hedef**: Yeni bir tablo ekleyin ve uygulamayı kullanacak şekilde değiştirin.
 
 **Adımlar**:
-1. Azure Portal Sorgu Editörü aracılığıyla SQL Veritabanına bağlanın
+1. Azure Portal Query Editor üzerinden SQL Veritabanına bağlanın
 
 2. Yeni bir `categories` tablosu oluşturun:
    ```sql
@@ -810,11 +801,11 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. `src/web/app.py` dosyasını güncelleyerek yanıtların kategori bilgisini içermesini sağlayın
+3. Yanıtlara kategori bilgisi eklemek için `src/web/app.py`'yi güncelleyin
 
 4. Dağıtın ve test edin
 
-**Başarı Kriterleri**: Yeni tablo mevcut, ürünler kategori bilgisi gösteriyor, uygulama hala çalışıyor.
+**Başarı Kriterleri**: Yeni tablo mevcut, ürünler kategori bilgisi gösteriyor, uygulama hâlâ çalışıyor.
 
 ---
 
@@ -824,19 +815,19 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Adımlar**:
 1. `infra/main.bicep` dosyasına Redis Cache ekleyin
-2. `src/web/app.py` dosyasını ürün sorgularını önbelleğe alacak şekilde güncelleyin
-3. Application Insights ile performans iyileştirmesini ölçün
+2. Ürün sorgularını önbelleğe almak için `src/web/app.py`'yi güncelleyin
+3. Application Insights ile performans iyileşmesini ölçün
 4. Önbellekleme öncesi/sonrası yanıt sürelerini karşılaştırın
 
 **Başarı Kriterleri**: Redis dağıtıldı, önbellekleme çalışıyor, yanıt süreleri %50'den fazla iyileşti.
 
-**İpucu**: [Azure Cache for Redis belgeleri](https://learn.microsoft.com/azure/azure-cache-for-redis/) ile başlayın.
+**İpucu**: [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/) ile başlayın.
 
 ---
 
 ## Temizlik
 
-Devam eden ücretlerden kaçınmak için işiniz bittiğinde tüm kaynakları silin:
+Süregelen ücretlerden kaçınmak için işiniz bittiğinde tüm kaynakları silin:
 
 ```sh
 azd down
@@ -847,73 +838,73 @@ azd down
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
 
-`y` yazın ve onaylayın.
+Onaylamak için `y` tuşunu girin.
 
 **✓ Başarı Kontrolü**: 
 - Tüm kaynaklar Azure Portal'dan silindi
-- Devam eden ücret yok
+- Süregelen ücret yok
 - Yerel `.azure/<env-name>` klasörü silinebilir
 
-**Alternatif** (altyapıyı koruyun, verileri silin):
+**Alternatif** (altyapıyı koru, verileri sil):
 ```sh
-# Yalnızca kaynak grubunu sil (AZD yapılandırmasını koru)
+# Sadece kaynak grubunu sil (AZD yapılandırmasını koru)
 az group delete --name rg-<env-name> --yes
 ```
-## Daha Fazla Bilgi Edinin
+## Daha Fazla Bilgi
 
-### İlgili Belgeler
-- [Azure Developer CLI Belgeleri](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Veritabanı Belgeleri](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service Belgeleri](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Belgeleri](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+### İlgili Dokümantasyon
+- [Azure Developer CLI Dokümantasyonu](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure SQL Database Dokümantasyonu](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Azure App Service Dokümantasyonu](https://learn.microsoft.com/azure/app-service/)
+- [Application Insights Dokümantasyonu](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Bicep Dil Referansı](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ### Bu Kursta Sonraki Adımlar
-- **[Container Apps Örneği](../../../../examples/container-app)**: Azure Container Apps ile mikro hizmetler dağıtın
-- **[AI Entegrasyon Kılavuzu](../../../../docs/ai-foundry)**: Uygulamanıza yapay zeka yetenekleri ekleyin
-- **[Dağıtım En İyi Uygulamaları](../../docs/deployment/deployment-guide.md)**: Üretim dağıtım desenleri
+- **[Container Apps Örneği](../../../../examples/container-app)**: Azure Container Apps ile mikroservisleri dağıtın
+- **[AI Entegrasyon Rehberi](../../../../docs/ai-foundry)**: Uygulamanıza yapay zeka yetenekleri ekleyin
+- **[Dağıtım En İyi Uygulamaları](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Üretim dağıtımı kalıpları
 
 ### İleri Konular
-- **Yönetilen Kimlik**: Şifreleri kaldırın ve Azure AD kimlik doğrulamasını kullanın
-- **Özel Uç Noktalar**: Sanal ağ içinde güvenli veritabanı bağlantıları
-- **CI/CD Entegrasyonu**: GitHub Actions veya Azure DevOps ile dağıtımları otomatikleştirin
-- **Çoklu Ortam**: Geliştirme, test ve üretim ortamlarını ayarlayın
-- **Veritabanı Geçişleri**: Şema sürümlendirme için Alembic veya Entity Framework kullanın
+- **Managed Identity**: Parolaları kaldırın ve Azure AD kimlik doğrulaması kullanın
+- **Private Endpoints**: Veritabanı bağlantılarını sanal ağ içinde güvence altına alın
+- **CI/CD Entegrasyonu**: Dağıtımları GitHub Actions veya Azure DevOps ile otomatikleştirin
+- **Çoklu Ortam**: geliştirme, hazırlık ve üretim ortamlarını kurun
+- **Veritabanı Göçleri**: Şema versiyonlaması için Alembic veya Entity Framework kullanın
 
 ### Diğer Yaklaşımlarla Karşılaştırma
 
 **AZD vs. ARM Şablonları**:
 - ✅ AZD: Daha yüksek seviyeli soyutlama, daha basit komutlar
-- ⚠️ ARM: Daha ayrıntılı, daha ince kontrol
+- ⚠️ ARM: Daha ayrıntılıdır, daha ince kontrol sağlar
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure'a özgü, Azure hizmetleriyle entegre
+- ✅ AZD: Azure'e özgü, Azure hizmetleriyle entegre
 - ⚠️ Terraform: Çoklu bulut desteği, daha geniş ekosistem
 
 **AZD vs. Azure Portal**:
 - ✅ AZD: Tekrarlanabilir, sürüm kontrollü, otomatikleştirilebilir
-- ⚠️ Portal: Manuel tıklamalar, yeniden üretmek zor
+- ⚠️ Portal: Manuel tıklamalar, yeniden üretmesi zor
 
-**AZD'yi şu şekilde düşünün**: Azure için Docker Compose—karmaşık dağıtımlar için basitleştirilmiş yapılandırma.
+**AZD'yi şunun gibi düşünün**: Azure için Docker Compose — karmaşık dağıtımlar için basitleştirilmiş yapılandırma.
 
 ---
 
 ## Sıkça Sorulan Sorular
 
-**S: Farklı bir programlama dili kullanabilir miyim?**  
-C: Evet! `src/web/` dizinini Node.js, C#, Go veya herhangi bir dille değiştirin. `azure.yaml` ve Bicep dosyalarını buna göre güncelleyin.
+**Q: Farklı bir programlama dili kullanabilir miyim?**  
+A: Evet! `src/web/`'i Node.js, C#, Go veya herhangi bir dille değiştirin. `azure.yaml` ve Bicep'i buna göre güncelleyin.
 
-**S: Daha fazla veritabanı nasıl eklerim?**  
-C: `infra/main.bicep` dosyasına başka bir SQL Veritabanı modülü ekleyin veya Azure Veritabanı hizmetlerinden PostgreSQL/MySQL kullanın.
+**Q: Nasıl daha fazla veritabanı ekleyebilirim?**  
+A: `infra/main.bicep`'e başka bir SQL Database modülü ekleyin veya Azure Database hizmetlerinden PostgreSQL/MySQL kullanın.
 
-**S: Bunu üretimde kullanabilir miyim?**  
-C: Bu bir başlangıç noktasıdır. Üretim için: yönetilen kimlik, özel uç noktalar, yedeklilik, yedekleme stratejisi, WAF ve gelişmiş izleme ekleyin.
+**Q: Bunu üretim için kullanabilir miyim?**  
+A: Bu bir başlangıç noktasıdır. Üretim için: managed identity, private endpoints, yedeklilik, yedekleme stratejisi, WAF ve gelişmiş izleme ekleyin.
 
-**S: Kod dağıtımı yerine konteyner kullanmak istersem ne yapmalıyım?**  
-C: [Container Apps Örneği](../../../../examples/container-app) bölümüne göz atın; baştan sona Docker konteynerleri kullanır.
+**Q: Kod dağıtımı yerine konteyner kullanmak istersem ne olur?**  
+A: Docker konteynerlerini kullanan [Container Apps Örneği](../../../../examples/container-app)'a göz atın.
 
-**S: Veritabanına yerel makinemden nasıl bağlanırım?**  
-C: IP adresinizi SQL Server güvenlik duvarına ekleyin:
+**Q: Yerel makinemden veritabanına nasıl bağlanırım?**  
+A: IP'nizi SQL Server güvenlik duvarına ekleyin:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -923,21 +914,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**S: Yeni bir veritabanı oluşturmak yerine mevcut bir veritabanını kullanabilir miyim?**  
-C: Evet, `infra/main.bicep` dosyasını mevcut bir SQL Server'ı referans alacak şekilde değiştirin ve bağlantı dizesi parametrelerini güncelleyin.
+**Q: Yeni bir tane oluşturmak yerine mevcut bir veritabanı kullanabilir miyim?**  
+A: Evet, mevcut bir SQL Server'ı referans almak için `infra/main.bicep`'i değiştirin ve bağlantı dizesi parametrelerini güncelleyin.
 
 ---
 
-> **Not:** Bu örnek, bir veritabanı ile bir web uygulaması dağıtımı için en iyi uygulamaları göstermektedir. Çalışan kod, kapsamlı belgeler ve öğrenmeyi pekiştirmek için pratik alıştırmalar içerir. Üretim dağıtımları için, kuruluşunuza özgü güvenlik, ölçeklendirme, uyumluluk ve maliyet gereksinimlerini gözden geçirin.
+> **Not:** Bu örnek, AZD kullanarak veritabanlı bir web uygulamasını dağıtmak için en iyi uygulamaları gösterir. Çalışır kod, kapsamlı dokümantasyon ve öğrenmeyi pekiştiren pratik alıştırmalar içerir. Üretim dağıtımları için, kuruluşunuza özgü güvenlik, ölçeklendirme, uyumluluk ve maliyet gereksinimlerini gözden geçirin.
 
-**📚 Kurs Navigasyonu:**
+**📚 Kurs Gezinme:**
 - ← Önceki: [Container Apps Örneği](../../../../examples/container-app)
-- → Sonraki: [AI Entegrasyon Kılavuzu](../../../../docs/ai-foundry)
-- 🏠 [Kurs Ana Sayfası](../../README.md)
+- → Sonraki: [AI Entegrasyon Rehberi](../../../../docs/ai-foundry)
+- 🏠 [Kurs Anasayfa](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Feragatname:
+Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba gösterilse de otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu tutulamayız.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

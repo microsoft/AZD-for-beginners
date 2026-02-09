@@ -1,38 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T10:55:09+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "pl"
-}
--->
-# 6. Rozbiórka infrastruktury
+# 6. Usuwanie infrastruktury
 
-!!! tip "PO ZAKOŃCZENIU TEGO MODUŁU BĘDZIESZ W STANIE"
+!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ MÓGŁ"
 
-    - [ ] Element
-    - [ ] Element
-    - [ ] Element
+    - [ ] Zrozumieć znaczenie czyszczenia zasobów i zarządzania kosztami
+    - [ ] Użyć `azd down` do bezpiecznego usunięcia infrastruktury
+    - [ ] Odzyskać miękko usunięte usługi kognitywne w razie potrzeby
+    - [ ] **Laboratorium 6:** Posprzątać zasoby Azure i zweryfikować ich usunięcie
 
 ---
 
-## Dodatkowe ćwiczenia
+## Ćwiczenia bonusowe
 
-Zanim rozbierzemy projekt, poświęć kilka minut na otwartą eksplorację.
+Zanim usuniemy projekt, poświęć kilka minut na swobodne eksperymentowanie.
 
-!!! danger "NITYA-TODO: Zarysuj kilka sugestii do wypróbowania"
+!!! info "Wypróbuj te pytania eksploracyjne"
+
+    **Eksperymentuj z GitHub Copilot:**
+    
+    1. Zapytaj: `Jakie inne szablony AZD mógłbym wypróbować dla scenariuszy wieloagentowych?`
+    2. Zapytaj: `Jak mogę dostosować instrukcje dla agenta w zastosowaniu medycznym?`
+    3. Zapytaj: `Jakie zmienne środowiskowe kontrolują optymalizację kosztów?`
+    
+    **Zwiedź portal Azure:**
+    
+    1. Przejrzyj metryki Application Insights dla swojego wdrożenia
+    2. Sprawdź analizę kosztów zasobów, które zostały udostępnione
+    3. Jeszcze raz zbadaj portal Microsoft Foundry agent playground
 
 ---
 
 ## Usuwanie infrastruktury
 
-1. Rozbiórka infrastruktury jest tak prosta jak:
+1. Usunięcie infrastruktury jest tak proste jak:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. Flaga `--purge` zapewnia, że usuwane są również zasoby Cognitive Service, które zostały miękko usunięte, zwalniając tym samym limit przypisany do tych zasobów. Po zakończeniu zobaczysz coś takiego:
+1. Flaga `--purge` zapewnia także usunięcie miękko usuniętych zasobów Cognitive Service, zwalniając tym samym przydział zasobów zajmowany przez te zasoby. Po zakończeniu zobaczysz coś takiego:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -43,14 +47,18 @@ Zanim rozbierzemy projekt, poświęć kilka minut na otwartą eksplorację.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Opcjonalnie) Jeśli teraz uruchomisz ponownie `azd up`, zauważysz, że model gpt-4.1 zostanie wdrożony, ponieważ zmieniono (i zapisano) zmienną środowiskową w lokalnym folderze `.azure`.
+1. (Opcjonalnie) Jeśli teraz ponownie uruchomisz `azd up`, zauważysz, że model gpt-4.1 zostanie wdrożony, ponieważ zmienna środowiskowa została zmieniona (i zapisana) w lokalnym folderze `.azure`.
 
       Oto wdrożenia modelu **przed**:
 
-      ![Początkowe](../../../../../translated_images/pl/14-deploy-initial.30e4cf1c29b587bc.webp)
+      ![Początkowy](../../../../../translated_images/pl/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       A oto **po**:
-      ![Nowe](../../../../../translated_images/pl/14-deploy-new.f7f3c355a3cf7299.webp)
+      ![Nowy](../../../../../translated_images/pl/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zastrzeżenie**:  
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do jak największej dokładności, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uważany za źródło autorytatywne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

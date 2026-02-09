@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T15:05:27+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "it"
-}
--->
-# 4. Configurare un Template
+# 4. Configurare un modello
 
-!!! tip "ALLA FINE DI QUESTO MODULO SARAI IN GRADO DI"
+!!! tip "AL TERMINE DI QUESTO MODULO SARAI IN GRADO DI"
 
     - [ ] Comprendere lo scopo di `azure.yaml`
     - [ ] Comprendere la struttura di `azure.yaml`
-    - [ ] Comprendere il valore dei `hooks` nel ciclo di vita di azd
-    - [ ] **Lab 3:** 
+    - [ ] Comprendere il valore dei `hooks` del ciclo di vita di azd
+    - [ ] **Lab 4:** Esplorare e modificare le variabili d'ambiente
 
 ---
 
-!!! prompt "A cosa serve il file `azure.yaml`? Usa un blocco di codice e spiegalo riga per riga"
+!!! prompt "Cosa fa il file `azure.yaml`? Usa un blocco di codice e spiegalo riga per riga"
 
-      Il file `azure.yaml` è il **file di configurazione per Azure Developer CLI (azd)**. Definisce come la tua applicazione deve essere distribuita su Azure, inclusa l'infrastruttura, i servizi, gli hooks di distribuzione e le variabili di ambiente.
+      Il file `azure.yaml` è il **file di configurazione per Azure Developer CLI (azd)**. Definisce come la tua applicazione deve essere distribuita in Azure, inclusa l'infrastruttura, i servizi, i hook di deployment e le variabili d'ambiente.
 
 ---
 
-## 1. Scopo e Funzionalità
+## 1. Scopo e funzionalità
 
-Questo file `azure.yaml` funge da **progetto di distribuzione** per un'applicazione di agente AI che:
+Questo file `azure.yaml` funge da **schema di distribuzione** per un'applicazione agente AI che:
 
 1. **Valida l'ambiente** prima della distribuzione
-2. **Provisiona i servizi Azure AI** (AI Hub, AI Project, Search, ecc.)
+2. **Esegue il provisioning dei servizi Azure AI** (AI Hub, AI Project, Search, ecc.)
 3. **Distribuisce un'applicazione Python** su Azure Container Apps
-4. **Configura i modelli AI** per funzionalità di chat e embedding
-5. **Imposta il monitoraggio e il tracciamento** per l'applicazione AI
-6. **Gestisce sia scenari nuovi che esistenti** per progetti Azure AI
+4. **Configura i modelli AI** sia per la chat che per le funzionalità di embedding
+5. **Configura monitoraggio e tracing** per l'applicazione AI
+6. **Gestisce sia scenari con progetti Azure AI nuovi che esistenti**
 
-Il file consente una **distribuzione con un solo comando** (`azd up`) di una soluzione completa di agente AI con validazione, provisioning e configurazione post-distribuzione adeguati.
+Il file consente una **distribuzione con un solo comando** (`azd up`) di una soluzione completa per agenti AI con opportuna validazione, provisioning e configurazione post-distribuzione.
 
 ??? info "Espandi per visualizzare: `azure.yaml`"
 
-      Il file `azure.yaml` definisce come Azure Developer CLI dovrebbe distribuire e gestire questa applicazione di agente AI su Azure. Analizziamolo riga per riga.
+      Il file `azure.yaml` definisce come Azure Developer CLI dovrebbe distribuire e gestire questa applicazione agente AI in Azure. Esaminiamolo riga per riga.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: abbiamo bisogno degli hooks? 
-      # TODO: abbiamo bisogno di tutte le variabili?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,19 +126,19 @@ Il file consente una **distribuzione con un solo comando** (`azd up`) di una sol
 
 ---
 
-## 2. Analisi del File
+## 2. Analisi del file
 
-Esaminiamo il file sezione per sezione, per capire cosa fa e perché.
+Passiamo attraverso il file sezione per sezione, per capire cosa fa - e perché.
 
-### 2.1 **Header e Schema (1-3)**
+### 2.1 **Intestazione e schema (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Linea 1**: Fornisce la validazione dello schema del server YAML per il supporto IDE e IntelliSense
+- **Riga 1**: Fornisce la convalida dello schema del language server YAML per il supporto IDE e IntelliSense
 
-### 2.2 Metadati del Progetto (5-10)
+### 2.2 Metadati del progetto (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Linea 5**: Definisce il nome del progetto utilizzato da Azure Developer CLI
-- **Linee 6-7**: Specifica che si basa su una versione del template 1.0.2
-- **Linee 8-9**: Richiede la versione 1.14.0 o superiore di Azure Developer CLI
+- **Riga 5**: Definisce il nome del progetto usato da Azure Developer CLI
+- **Righe 6-7**: Specifica che si basa su un template versione 1.0.2
+- **Righe 8-9**: Richiede Azure Developer CLI versione 1.14.0 o superiore
 
-### 2.3 Hooks di Distribuzione (11-40)
+### 2.3 Hook di distribuzione (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Linee 11-20**: **Hook pre-distribuzione** - eseguito prima di `azd up`
+- **Righe 11-20**: **Hook pre-distribuzione** - esegue prima di `azd up`
 
-      - Su Unix/Linux: Rende eseguibile lo script di validazione e lo esegue
-      - Su Windows: Esegue lo script di validazione PowerShell
-      - Entrambi sono interattivi e interrompono la distribuzione se falliscono
+      - Su Unix/Linux: rende eseguibile lo script di convalida e lo esegue
+      - Su Windows: esegue lo script di convalida PowerShell
+      - Entrambi sono interattivi e interromperanno la distribuzione se falliscono
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,9 +188,9 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linee 21-30**: **Hook post-provisioning** - eseguito dopo la creazione delle risorse Azure
+- **Righe 21-30**: **Hook post-provision** - eseguito dopo che le risorse Azure sono state create
 
-  - Esegue script per scrivere variabili di ambiente
+  - Esegue script che scrivono le variabili d'ambiente
   - Continua la distribuzione anche se questi script falliscono (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linee 31-40**: **Hook post-distribuzione** - eseguito dopo la distribuzione dell'applicazione
+- **Righe 31-40**: **Hook post-deploy** - esegue dopo la distribuzione dell'applicazione
 
-  - Esegue script di configurazione finale
-  - Continua anche se gli script falliscono
+  - Esegue gli script di configurazione finale
+  - Prosegue anche se gli script falliscono
 
-### 2.4 Configurazione del Servizio (41-48)
+### 2.4 Configurazione del servizio (41-48)
 
-Questa sezione configura il servizio applicativo che stai distribuendo.
+Questo configura il servizio applicativo che stai distribuendo.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Linea 42**: Definisce un servizio chiamato "api_and_frontend"
-- **Linea 43**: Punta alla directory `./src` per il codice sorgente
-- **Linea 44**: Specifica Python come linguaggio di programmazione
-- **Linea 45**: Utilizza Azure Container Apps come piattaforma di hosting
-- **Linee 46-48**: Configurazione Docker
+- **Riga 42**: Definisce un servizio denominato "api_and_frontend"
+- **Riga 43**: Indica la directory `./src` per il codice sorgente
+- **Riga 44**: Specifica Python come linguaggio di programmazione
+- **Riga 45**: Usa Azure Container Apps come piattaforma di hosting
+- **Righe 46-48**: Configurazione Docker
 
-      - Utilizza "api_and_frontend" come nome dell'immagine
+      - Usa "api_and_frontend" come nome dell'immagine
       - Costruisce l'immagine Docker in remoto su Azure (non localmente)
 
-### 2.5 Variabili della Pipeline (49-76)
+### 2.5 Variabili di pipeline (49-76)
 
-Queste sono variabili per eseguire `azd` in pipeline CI/CD per l'automazione
+Queste sono variabili per aiutarti a eseguire `azd` nelle pipeline CI/CD per l'automazione
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Questa sezione definisce variabili di ambiente utilizzate **durante la distribuzione**, organizzate per categoria:
+Questa sezione definisce le variabili d'ambiente utilizzate **durante la distribuzione**, organizzate per categoria:
 
-- **Nomi delle Risorse Azure (Linee 51-60)**:
-      - Nomi delle risorse principali di Azure, ad esempio Resource Group, AI Hub, AI Project, ecc.
-- **Flag delle Funzionalità (Linee 61-63)**:
+- **Nomi delle risorse Azure (Righe 51-60)**:
+      - Nomi delle risorse core dei servizi Azure, ad es., Resource Group, AI Hub, AI Project, ecc.- 
+- **Flag delle funzionalità (Righe 61-63)**:
       - Variabili booleane per abilitare/disabilitare specifici servizi Azure
-- **Configurazione dell'Agente AI (Linee 64-71)**:
-      - Configurazione per l'agente AI principale, inclusi nome, ID, impostazioni di distribuzione, dettagli del modello
-- **Configurazione dell'Embedding AI (Linee 72-79)**:
+- **Configurazione dell'agente AI (Righe 64-71)**:
+      - Configurazione per l'agente AI principale inclusi nome, ID, impostazioni di deployment, dettagli del modello- 
+- **Configurazione degli embedding AI (Righe 72-79)**:
       - Configurazione per il modello di embedding utilizzato per la ricerca vettoriale
-- **Ricerca e Monitoraggio (Linee 80-84)**:
-      - Nome dell'indice di ricerca, ID delle risorse esistenti e impostazioni di monitoraggio/tracciamento
+- **Ricerca e monitoraggio (Righe 80-84)**:
+      - Nome dell'indice di ricerca, ID delle risorse esistenti e impostazioni di monitoraggio/tracing
 
 ---
 
-## 3. Conoscere le Variabili di Ambiente
-Le seguenti variabili di ambiente controllano la configurazione e il comportamento della tua distribuzione, organizzate in base al loro scopo principale. La maggior parte delle variabili ha valori predefiniti sensati, ma puoi personalizzarle per adattarle ai tuoi requisiti specifici o alle risorse Azure esistenti.
+## 3. Conoscere le variabili d'ambiente
+Le seguenti variabili d'ambiente controllano la configurazione e il comportamento della tua distribuzione, organizzate per scopo principale. La maggior parte delle variabili ha valori predefiniti sensati, ma puoi personalizzarle per adattarle ai tuoi requisiti specifici o a risorse Azure esistenti.
 
-### 3.1 Variabili Necessarie 
+### 3.1 Variabili richieste 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Configurazione principale di Azure
+AZURE_ENV_NAME                    # Nome dell'ambiente (usato nella denominazione delle risorse)
+AZURE_LOCATION                    # Regione di distribuzione
+AZURE_SUBSCRIPTION_ID             # Sottoscrizione di destinazione
+AZURE_RESOURCE_GROUP              # Nome del gruppo di risorse
+AZURE_PRINCIPAL_ID                # Principal utente per RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Nomi delle risorse (generati automaticamente se non specificati)
+AZURE_AIHUB_NAME                  # Nome dell'hub Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Nome del progetto IA
+AZURE_AISERVICES_NAME             # Nome dell'account dei servizi IA
+AZURE_STORAGE_ACCOUNT_NAME        # Nome dell'account di archiviazione
+AZURE_CONTAINER_REGISTRY_NAME     # Nome del registro dei container
+AZURE_KEYVAULT_NAME               # Nome del Key Vault (se utilizzato)
 ```
 
-### 3.2 Configurazione del Modello 
+### 3.2 Configurazione del modello 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Configurazione del modello di chat
+AZURE_AI_AGENT_MODEL_NAME         # Predefinito: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Predefinito: OpenAI (o Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Predefinito: l'ultima disponibile
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Nome del deployment per il modello di chat
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Predefinito: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Predefinito: 80 (migliaia di TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Configurazione del modello di embedding
+AZURE_AI_EMBED_MODEL_NAME         # Predefinito: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Predefinito: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Predefinito: l'ultima disponibile
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Nome del deployment per gli embedding
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Predefinito: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Predefinito: 50 (migliaia di TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Configurazione dell'agente
+AZURE_AI_AGENT_NAME               # Nome visualizzato dell'agente
+AZURE_EXISTING_AGENT_ID           # Usa agente esistente (opzionale)
 ```
 
-### 3.3 Attivazione delle Funzionalità
+### 3.3 Attivazione delle funzionalità
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Servizi opzionali
+USE_APPLICATION_INSIGHTS         # Predefinito: true
+USE_AZURE_AI_SEARCH_SERVICE      # Predefinito: false
+USE_CONTAINER_REGISTRY           # Predefinito: true
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Monitoraggio e tracciamento
+ENABLE_AZURE_MONITOR_TRACING     # Predefinito: false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Predefinito: false
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Configurazione di ricerca
+AZURE_AI_SEARCH_INDEX_NAME       # Nome dell'indice di ricerca
+AZURE_SEARCH_SERVICE_NAME        # Nome del servizio di ricerca
 ```
 
-### 3.4 Configurazione del Progetto AI 
+### 3.4 Configurazione del progetto AI 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Usa risorse esistenti
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ID completo della risorsa del progetto di IA esistente
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL dell'endpoint del progetto esistente
 ```
 
-### 3.5 Controlla le Tue Variabili
+### 3.5 Controlla le tue variabili
 
-Usa Azure Developer CLI per visualizzare e gestire le tue variabili di ambiente:
+Usa Azure Developer CLI per visualizzare e gestire le tue variabili d'ambiente:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Visualizza tutte le variabili d'ambiente per l'ambiente corrente
 azd env get-values
 
-# Get a specific environment variable
+# Ottieni una variabile d'ambiente specifica
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Imposta una variabile d'ambiente
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Imposta più variabili da un file .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Dichiarazione di non responsabilità**:
+Questo documento è stato tradotto mediante il servizio di traduzione automatica basato su IA [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per garantire l'accuratezza, si tenga presente che le traduzioni automatiche possono contenere errori o inesattezze. La versione originale del documento nella sua lingua nativa deve essere considerata la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

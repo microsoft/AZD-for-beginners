@@ -1,64 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-24T15:00:23+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "it"
-}
--->
-# AZD Per Sviluppatori AI
+# AZD per sviluppatori AI
 
-!!! info "PUBBLICO DI QUESTO WORKSHOP"
+!!! info "DESTINATARI DI QUESTO WORKSHOP"
    
-    Questo workshop è rivolto a chiunque desideri creare applicazioni AI Agentic su Azure AI Foundry sfruttando strumenti e flussi di lavoro all'avanguardia. Il workshop è adatto sia ai principianti che agli sviluppatori esperti con una certa familiarità con Azure, concetti di AI e codice Python. Controlla i prerequisiti prima di iniziare.
+    Questo workshop è pensato per chiunque voglia creare applicazioni agentiche AI su Microsoft Foundry sfruttando strumenti e workflow all'avanguardia. Il workshop è adatto sia ai principianti sia agli sviluppatori esperti che hanno una certa familiarità con Azure, i concetti di AI e il codice Python. Si prega di verificare i prerequisiti prima di iniziare.
 
-    **Durata:** 3-4 ore  
-    **Livello:** Principiante a Intermedio  
-
----
-
-## Prerequisiti
-
-- Un account personale GitHub → [Creane uno gratuitamente](https://github.com/signup)
-- Un account Azure attivo → [Creane uno gratuitamente](https://aka.ms/free)
-- Familiarità con concetti di AI, sviluppo in Python, strumenti da riga di comando
-- Esperienza con VS Code e strumenti e flussi di lavoro di GitHub.
+    **Duration:** 3-4 ore  
+    **Level:** Principiante to Intermedio  
 
 ---
 
-## Obiettivi di Apprendimento
 
-Alla fine di questo workshop, saprai come:
+## Pre-Requisites
 
-- [X] **Utilizzare Azure Developer CLI** → per fornire, distribuire e gestire le tue risorse Azure.
-- [X] **Usare i Template per App AI** → per avviare rapidamente progetti AI Agent su Azure AI Foundry.
-- [X] **Configurare i Template** → per funzionalità come Red Teaming, Valutazioni, Tracciamento e Monitoraggio.
-- [X] **Analizzare ed Esplorare** → i template e i flussi di lavoro AZD utilizzando GitHub Copilot.
-- [X] **Personalizzare e Ridistribuire** → il template iniziale per AI Agent, con i tuoi requisiti personalizzati.
+- Un account GitHub personale → [Create one for free](https://github.com/signup)
+- Un account Azure attivo → [Create one for free](https://aka.ms/free)
+- Familiarità con i concetti di AI, lo sviluppo in Python, gli strumenti da riga di comando
+- Esperienza con VS Code e gli strumenti e i flussi di lavoro di GitHub.
 
 ---
 
-## Struttura del Workshop
+## Learning Objectives
 
-Il workshop è organizzato in moduli, ciascuno accompagnato da un esercizio pratico:
+Al termine di questo workshop, saprai come:
 
-1. **Introduzione** - Comprendi cosa sono i template AZD e come funzionano.
-1. **Selezione** - Scopri il "template iniziale" giusto per il tuo prossimo progetto AI.
-1. **Validazione** - Distribuisci ed esplora il template per verificarne il funzionamento.
-1. **Analisi** - Smonta il template per comprenderne i componenti e la configurazione.
-1. **Configurazione** - Impara ad attivare e utilizzare le diverse funzionalità di Azure AI Foundry.
-1. **Personalizzazione** - Ricostruisci l'applicazione tenendo conto dei tuoi dati e requisiti.
-1. **Smantellamento** - Impara a deprovisionare l'infrastruttura e recuperare risorse eliminate in modo soft.
+- [X] **Work with Azure Developer CLI** → to provision, deploy, and manage, your Azure resources.
+- [X] **Use AI App Templates** →  to jumpstart AI Agent projects on Microsoft Foundry.
+- [X] **Configure Templates** →  for features like Red Teaming, Evaluations, Tracing & Monitoring
+- [X] **Deconstruct and Explore** →  AZD templates and workflows using GitHub Copilot
+- [X] **Customize and Redeploy** →  the AI Agent starter template, with your custom requirements
 
 ---
 
-## Feedback e Problemi
+## Workshop Outline
 
-Aggiorniamo attivamente i contenuti per garantire la migliore esperienza di apprendimento per i principianti. Il tuo feedback è apprezzato.
+The workshop is structured as modules, each anchored by a hands-on lab exercise:
 
-1. Pubblica un problema su questo repository - taggalo `Workshop` per comodità.
-1. Unisciti al Discord di Azure AI Foundry - connettiti con altri studenti!
+1. **Introduction** - Comprendere cosa sono i template AZD e come funzionano
+1. **Selection** - Scoprire il giusto "starter" template per il tuo prossimo progetto AI
+1. **Validation** - Distribuire ed esplorare il template per verificare che funzioni come pubblicizzato
+1. **Deconstruction** - Smontare il template per comprenderne i componenti & la configurazione
+1. **Configuration** - Imparare ad attivare e utilizzare diverse funzionalità di Microsoft Foundry
+1. **Customization** - Ricostruire l'applicazione tenendo in considerazione i tuoi dati e requisiti
+1. **Teardown** - Imparare a deprovisionare l'infrastruttura e recuperare le risorse eliminate in soft-delete
 
 ---
 
+## Feedback & Issues
+
+Aggiorniamo attivamente i curricula per assicurarci che offrano la migliore esperienza di apprendimento per i principianti. Apprezziamo il tuo feedback.
+
+1. Apri un issue su questo repo - etichettalo con `Workshop` per comodità.
+1. Unisciti al Discord di Microsoft Foundry - connettiti con altri partecipanti!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Dichiarazione di non responsabilità:
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica basato su intelligenza artificiale [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale eseguita da un traduttore umano. Non ci assumiamo alcuna responsabilità per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
