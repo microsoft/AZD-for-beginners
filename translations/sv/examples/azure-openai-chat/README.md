@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-21T10:36:56+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "sv"
-}
--->
 # Azure OpenAI Chat-applikation
 
 **Lärandebana:** Medel ⭐⭐ | **Tid:** 35-45 minuter | **Kostnad:** $50-200/månad

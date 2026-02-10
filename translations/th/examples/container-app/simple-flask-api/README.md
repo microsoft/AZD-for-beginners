@@ -1,34 +1,25 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-21T09:54:38+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "th"
-}
--->
-# ตัวอย่างแอปพลิเคชันคอนเทนเนอร์ - Simple Flask API
+# ตัวอย่างแอป Container API Flask ง่าย ๆ
 
-**เส้นทางการเรียนรู้:** ผู้เริ่มต้น ⭐ | **เวลา:** 25-35 นาที | **ค่าใช้จ่าย:** $0-15/เดือน
+**เส้นทางการเรียนรู้:** ผู้เริ่มต้น ⭐ | **เวลา:** 25-35 นาที | **ค่าใช้จ่าย:** 0-15 ดอลลาร์/เดือน
 
-ตัวอย่าง Python Flask REST API ที่สมบูรณ์และพร้อมใช้งาน ซึ่งถูกปรับใช้ใน Azure Container Apps โดยใช้ Azure Developer CLI (azd) ตัวอย่างนี้แสดงการปรับใช้คอนเทนเนอร์ การปรับขนาดอัตโนมัติ และพื้นฐานการตรวจสอบระบบ
+API REST Python Flask ที่ทำงานครบถ้วนและพร้อมใช้งานและถูกดีพลอยไปที่ Azure Container Apps โดยใช้ Azure Developer CLI (azd) ตัวอย่างนี้แสดงถึงการดีพลอย container, การปรับขนาดอัตโนมัติ และพื้นฐานการมอนิเตอร์
 
 ## 🎯 สิ่งที่คุณจะได้เรียนรู้
 
-- ปรับใช้แอปพลิเคชัน Python ที่อยู่ในคอนเทนเนอร์ไปยัง Azure
-- ตั้งค่าการปรับขนาดอัตโนมัติด้วยการปรับขนาดเป็นศูนย์
-- ใช้ health probes และ readiness checks
-- ตรวจสอบบันทึกและเมตริกของแอปพลิเคชัน
-- ใช้ Azure Developer CLI เพื่อการปรับใช้อย่างรวดเร็ว
+- ดีพลอยแอปพลิเคชัน Python ที่ถูกใส่ไว้ใน container ไปยัง Azure  
+- กำหนดการปรับขนาดอัตโนมัติให้สเกลเป็นศูนย์  
+- ใช้ health probes และ readiness checks  
+- มอนิเตอร์ logs และ metrics ของแอป  
+- ใช้ Azure Developer CLI สำหรับการดีพลอยอย่างรวดเร็ว  
 
-## 📦 สิ่งที่รวมอยู่ในโปรเจกต์
+## 📦 สิ่งที่รวมอยู่ในนี้
 
-✅ **แอปพลิเคชัน Flask** - REST API ที่สมบูรณ์พร้อมการทำงาน CRUD (`src/app.py`)  
-✅ **Dockerfile** - การตั้งค่าคอนเทนเนอร์ที่พร้อมใช้งานในโปรดักชัน  
-✅ **Bicep Infrastructure** - สภาพแวดล้อม Container Apps และการปรับใช้ API  
-✅ **การตั้งค่า AZD** - การปรับใช้ด้วยคำสั่งเดียว  
-✅ **Health Probes** - การตั้งค่า liveness และ readiness checks  
-✅ **การปรับขนาดอัตโนมัติ** - 0-10 replicas ตามโหลด HTTP  
+✅ **แอป Flask** - REST API ครบถ้วนพร้อมการดำเนินงาน CRUD (`src/app.py`)  
+✅ **Dockerfile** - การตั้งค่า container พร้อมใช้งานใน production  
+✅ **โครงสร้าง Bicep** - สภาพแวดล้อม Container Apps และการดีพลอย API  
+✅ **การตั้งค่า AZD** - การตั้งค่าการดีพลอยด้วยคำสั่งเดียว  
+✅ **Health Probes** - การตรวจสอบ liveness และ readiness ถูกตั้งค่าแล้ว  
+✅ **การปรับขนาดอัตโนมัติ** - 0-10 สำเนาตามโหลด HTTP  
 
 ## สถาปัตยกรรม
 
@@ -49,9 +40,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## ข้อกำหนดเบื้องต้น
 
-### สิ่งที่จำเป็น
+### สิ่งที่ต้องมี
 - **Azure Developer CLI (azd)** - [คู่มือการติดตั้ง](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **การสมัครสมาชิก Azure** - [บัญชีฟรี](https://azure.microsoft.com/free/)
+- **บัญชี Azure** - [บัญชีฟรี](https://azure.microsoft.com/free/)
 - **Docker Desktop** - [ติดตั้ง Docker](https://www.docker.com/products/docker-desktop/) (สำหรับการทดสอบในเครื่อง)
 
 ### ตรวจสอบข้อกำหนดเบื้องต้น
@@ -63,37 +54,37 @@ azd version
 # ตรวจสอบการเข้าสู่ระบบ Azure
 azd auth login
 
-# ตรวจสอบ Docker (ไม่บังคับ สำหรับการทดสอบในเครื่อง)
+# ตรวจสอบ Docker (ทางเลือก สำหรับการทดสอบในเครื่อง)
 docker --version
 ```
 
-## ⏱️ ไทม์ไลน์การปรับใช้
+## ⏱️ ระยะเวลาดีพลอย
 
 | ขั้นตอน | ระยะเวลา | สิ่งที่เกิดขึ้น |
-|---------|----------|-----------------||
-| การตั้งค่าสภาพแวดล้อม | 30 วินาที | สร้างสภาพแวดล้อม azd |
-| สร้างคอนเทนเนอร์ | 2-3 นาที | Docker สร้างแอป Flask |
-| จัดเตรียมโครงสร้างพื้นฐาน | 3-5 นาที | สร้าง Container Apps, registry, monitoring |
-| ปรับใช้แอปพลิเคชัน | 2-3 นาที | Push image และปรับใช้ไปยัง Container Apps |
-| **รวมทั้งหมด** | **8-12 นาที** | การปรับใช้เสร็จสมบูรณ์พร้อมใช้งาน |
+|-------|----------|--------------||
+| ตั้งค่าสภาพแวดล้อม | 30 วินาที | สร้างสภาพแวดล้อม azd |
+| สร้าง container | 2-3 นาที | สร้างแอป Flask ด้วย Docker |
+| เตรียมโครงสร้างพื้นฐาน | 3-5 นาที | สร้าง Container Apps, registry, มอนิเตอร์ |
+| ดีพลอยแอปพลิเคชัน | 2-3 นาที | ส่ง image และดีพลอยไป Container Apps |
+| **รวมทั้งหมด** | **8-12 นาที** | การดีพลอยเสร็จสมบูรณ์พร้อมใช้งาน |
 
 ## เริ่มต้นอย่างรวดเร็ว
 
 ```bash
-# ไปที่ตัวอย่าง
+# นำทางไปยังตัวอย่าง
 cd examples/container-app/simple-flask-api
 
 # เริ่มต้นสภาพแวดล้อม (เลือกชื่อที่ไม่ซ้ำ)
 azd env new myflaskapi
 
-# ปรับใช้ทุกอย่าง (โครงสร้างพื้นฐาน + แอปพลิเคชัน)
+# ติดตั้งทุกอย่าง (โครงสร้างพื้นฐาน + แอปพลิเคชัน)
 azd up
-# คุณจะได้รับการแจ้งให้ทำ:
-# 1. เลือกการสมัครสมาชิก Azure
+# คุณจะถูกถามให้:
+# 1. เลือกการสมัครใช้งาน Azure
 # 2. เลือกตำแหน่งที่ตั้ง (เช่น eastus2)
-# 3. รอ 8-12 นาทีสำหรับการปรับใช้
+# 3. รอ 8-12 นาทีสำหรับการติดตั้ง
 
-# รับจุดเชื่อมต่อ API ของคุณ
+# รับจุดสิ้นสุด API ของคุณ
 azd env get-values
 
 # ทดสอบ API
@@ -110,12 +101,12 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ ตรวจสอบการปรับใช้
+## ✅ ตรวจสอบการดีพลอย
 
-### ขั้นตอนที่ 1: ตรวจสอบสถานะการปรับใช้
+### ขั้นตอนที่ 1: ตรวจสอบสถานะการดีพลอย
 
 ```bash
-# ดูบริการที่ปรับใช้
+# ดูบริการที่ปรับใช้งานแล้ว
 azd show
 
 # ผลลัพธ์ที่คาดหวังแสดง:
@@ -124,16 +115,16 @@ azd show
 # - สถานะ: กำลังทำงาน
 ```
 
-### ขั้นตอนที่ 2: ทดสอบ API Endpoints
+### ขั้นตอนที่ 2: ทดสอบ Endpoint API
 
 ```bash
-# รับจุดเชื่อมต่อ API
+# รับ API endpoint
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# ทดสอบสุขภาพ
+# ทดสอบสถานะสุขภาพ
 curl $API_URL/health
 
-# ทดสอบจุดเชื่อมต่อราก
+# ทดสอบ root endpoint
 curl $API_URL/
 
 # สร้างรายการ
@@ -146,19 +137,22 @@ curl $API_URL/api/items
 ```
 
 **เกณฑ์ความสำเร็จ:**
-- ✅ Health endpoint ส่งคืน HTTP 200
-- ✅ Root endpoint แสดงข้อมูล API
-- ✅ POST สร้างรายการและส่งคืน HTTP 201
-- ✅ GET ส่งคืนรายการที่สร้างขึ้น
+- ✅ endpoint สุขภาพตอบ HTTP 200  
+- ✅ endpoint รากแสดงข้อมูล API  
+- ✅ POST สร้างรายการและส่ง HTTP 201  
+- ✅ GET ส่งคืนรายการที่ถูกสร้าง
 
-### ขั้นตอนที่ 3: ดูบันทึก
+### ขั้นตอนที่ 3: ดูบันทึก (Logs)
 
 ```bash
-# สตรีมบันทึกสด
-azd logs api --follow
+# สตรีมบันทึกสดโดยใช้ azd monitor
+azd monitor --logs
 
-# คุณควรเห็น:
-# - ข้อความเริ่มต้นของ Gunicorn
+# หรือใช้ Azure CLI:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
+
+# คุณควรจะเห็น:
+# - ข้อความเริ่มต้น Gunicorn
 # - บันทึกคำขอ HTTP
 # - บันทึกข้อมูลแอปพลิเคชัน
 ```
@@ -180,14 +174,14 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## API Endpoints
+## Endpoint API
 
-| Endpoint | Method | คำอธิบาย |
-|----------|--------|----------|
-| `/health` | GET | ตรวจสอบสถานะ |
+| Endpoint | วิธีการ | คำอธิบาย |
+|----------|--------|-------------|
+| `/health` | GET | เช็คสุขภาพแอป |
 | `/api/items` | GET | แสดงรายการทั้งหมด |
 | `/api/items` | POST | สร้างรายการใหม่ |
-| `/api/items/{id}` | GET | รับรายการเฉพาะ |
+| `/api/items/{id}` | GET | รับข้อมูลรายการ |
 | `/api/items/{id}` | PUT | อัปเดตรายการ |
 | `/api/items/{id}` | DELETE | ลบรายการ |
 
@@ -196,7 +190,7 @@ simple-flask-api/
 ### ตัวแปรสภาพแวดล้อม
 
 ```bash
-# ตั้งค่าการกำหนดเอง
+# ตั้งค่าการกำหนดค่าที่กำหนดเอง
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
@@ -204,17 +198,17 @@ azd env set MAX_REPLICAS 20
 
 ### การตั้งค่าการปรับขนาด
 
-API จะปรับขนาดอัตโนมัติตามการจราจร HTTP:
-- **จำนวน Replicas ขั้นต่ำ**: 0 (ปรับขนาดเป็นศูนย์เมื่อไม่มีการใช้งาน)
-- **จำนวน Replicas สูงสุด**: 10
-- **คำขอพร้อมกันต่อ Replica**: 50
+API จะปรับขนาดโดยอัตโนมัติตามปริมาณการร้องขอ HTTP:
+- **จำนวนสำเนาขั้นต่ำ**: 0 (สเกลเป็นศูนย์เมื่อไม่มีการใช้งาน)  
+- **จำนวนสำเนาสูงสุด**: 10  
+- **จำนวนคำขอพร้อมกันต่อสำเนา**: 50  
 
 ## การพัฒนา
 
 ### รันในเครื่อง
 
 ```bash
-# ติดตั้งการพึ่งพา
+# ติดตั้ง dependencies
 cd src
 pip install -r requirements.txt
 
@@ -225,10 +219,10 @@ python app.py
 curl http://localhost:8000/health
 ```
 
-### สร้างและทดสอบคอนเทนเนอร์
+### สร้างและทดสอบ container
 
 ```bash
-# สร้างภาพ Docker
+# สร้าง Docker image
 docker build -t flask-api:local ./src
 
 # รันคอนเทนเนอร์ในเครื่อง
@@ -238,51 +232,54 @@ docker run -p 8000:8000 flask-api:local
 curl http://localhost:8000/health
 ```
 
-## การปรับใช้
+## การดีพลอย
 
-### การปรับใช้เต็มรูปแบบ
+### ดีพลอยแบบเต็มรูปแบบ
 
 ```bash
 # ปรับใช้โครงสร้างพื้นฐานและแอปพลิเคชัน
 azd up
 ```
 
-### การปรับใช้เฉพาะโค้ด
+### ดีพลอยเฉพาะโค้ด
 
 ```bash
-# ปรับใช้เฉพาะโค้ดแอปพลิเคชัน (โครงสร้างพื้นฐานไม่เปลี่ยนแปลง)
+# เผยแพร่เฉพาะโค้ดแอปพลิเคชัน (โครงสร้างพื้นฐานไม่เปลี่ยนแปลง)
 azd deploy api
 ```
 
 ### อัปเดตการตั้งค่า
 
 ```bash
-# อัปเดตตัวแปรสภาพแวดล้อม
+# อัปเดตตัวแปรสิ่งแวดล้อม
 azd env set API_KEY "new-api-key"
 
-# ปรับใช้ใหม่ด้วยการกำหนดค่าที่อัปเดต
+# นำส่งใหม่ด้วยการกำหนดค่าที่อัปเดตแล้ว
 azd deploy api
 ```
 
-## การตรวจสอบ
+## การมอนิเตอร์
 
-### ดูบันทึก
+### ดูบันทึก (Logs)
 
 ```bash
-# สตรีมบันทึกสด
-azd logs api --follow
+# สตรีมบันทึกสดโดยใช้ azd monitor
+azd monitor --logs
+
+# หรือใช้ Azure CLI สำหรับ Container Apps:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # ดู 100 บรรทัดล่าสุด
-azd logs api --tail 100
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### ตรวจสอบเมตริก
+### มอนิเตอร์ Metrics
 
 ```bash
 # เปิดแดชบอร์ด Azure Monitor
 azd monitor --overview
 
-# ดูเมตริกเฉพาะ
+# ดูเมตริกเฉพาะเจาะจง
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
@@ -290,7 +287,7 @@ az monitor metrics list \
 
 ## การทดสอบ
 
-### การตรวจสอบสถานะ
+### เช็คสุขภาพ
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
@@ -318,45 +315,45 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 ```
 
-## การเพิ่มประสิทธิภาพค่าใช้จ่าย
+## การประหยัดค่าใช้จ่าย
 
-การปรับใช้นี้ใช้การปรับขนาดเป็นศูนย์ ดังนั้นคุณจะจ่ายเฉพาะเมื่อ API กำลังประมวลผลคำขอ:
+การดีพลอยนี้ใช้การสเกลเป็นศูนย์ ดังนั้นคุณจะจ่ายเฉพาะเมื่อ API กำลังประมวลผลคำร้องขอเท่านั้น:
 
-- **ค่าใช้จ่ายเมื่อไม่มีการใช้งาน**: ~$0/เดือน (ปรับขนาดเป็นศูนย์)
-- **ค่าใช้จ่ายเมื่อใช้งาน**: ~$0.000024/วินาทีต่อ Replica
-- **ค่าใช้จ่ายรายเดือนที่คาดหวัง** (การใช้งานเบา): $5-15
+- **ค่าใช้จ่ายเมื่อไม่มีการใช้งาน**: ~0 ดอลลาร์/เดือน (สเกลเป็นศูนย์)  
+- **ค่าใช้จ่ายเมื่อใช้งาน**: ~0.000024 ดอลลาร์/วินาทีต่อสำเนา  
+- **ค่าใช้จ่ายรายเดือนโดยประมาณ** (ใช้งานเบา): 5-15 ดอลลาร์  
 
 ### ลดค่าใช้จ่ายเพิ่มเติม
 
 ```bash
-# ลดจำนวนสำเนาสูงสุดสำหรับการพัฒนา
+# ลดจำนวนรีพลิคาสูงสุดสำหรับการพัฒนา
 azd env set MAX_REPLICAS 3
 
-# ใช้เวลาหยุดพักที่สั้นลง
+# ใช้ระยะเวลาหยุดทำงานที่สั้นลง
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 นาที
 ```
 
 ## การแก้ไขปัญหา
 
-### คอนเทนเนอร์ไม่เริ่มทำงาน
+### Container ไม่เริ่มทำงาน
 
 ```bash
-# ตรวจสอบบันทึกของคอนเทนเนอร์
-azd logs api --tail 100
+# ตรวจสอบบันทึกคอนเทนเนอร์โดยใช้ Azure CLI
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
 # ตรวจสอบการสร้างภาพ Docker ในเครื่อง
 docker build -t test ./src
 ```
 
-### API ไม่สามารถเข้าถึงได้
+### ไม่สามารถเข้าถึง API
 
 ```bash
-# ตรวจสอบว่า ingress เป็นภายนอก
+# ตรวจสอบว่า ingress เป็นภายนอกหรือไม่
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### เวลาตอบสนองสูง
+### เวลาตอบสนองช้า
 
 ```bash
 # ตรวจสอบการใช้งาน CPU/หน่วยความจำ
@@ -364,12 +361,12 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# เพิ่มทรัพยากรหากจำเป็น
+# ขยายทรัพยากรหากจำเป็น
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## การล้างข้อมูล
+## ทำความสะอาด
 
 ```bash
 # ลบทรัพยากรทั้งหมด
@@ -380,26 +377,26 @@ azd down --force --purge
 
 ### ขยายตัวอย่างนี้
 
-1. **เพิ่มฐานข้อมูล** - รวม Azure Cosmos DB หรือ SQL Database
+1. **เพิ่มฐานข้อมูล** - รวม Azure Cosmos DB หรือ SQL Database  
    ```bash
    # เพิ่มโมดูล Cosmos DB ไปยัง infra/main.bicep
-   # อัปเดต app.py ด้วยการเชื่อมต่อฐานข้อมูล
+   # อัปเดต app.py พร้อมการเชื่อมต่อฐานข้อมูล
    ```
 
-2. **เพิ่มการยืนยันตัวตน** - ใช้ Azure AD หรือ API keys
+2. **เพิ่มการยืนยันตัวตน** - ใช้ Azure AD หรือ API keys  
    ```python
    # เพิ่ม middleware การตรวจสอบสิทธิ์ใน app.py
    from functools import wraps
    ```
 
-3. **ตั้งค่า CI/CD** - Workflow ของ GitHub Actions
+3. **ตั้งค่า CI/CD** - Workflow ของ GitHub Actions  
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **เพิ่ม Managed Identity** - เข้าถึงบริการ Azure อย่างปลอดภัย
+4. **เพิ่ม Managed Identity** - ปลอดภัยสำหรับการเข้าใช้บริการ Azure  
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -407,41 +404,41 @@ azd down --force --purge
 
 ### ตัวอย่างที่เกี่ยวข้อง
 
-- **[Database App](../../../../../examples/database-app)** - ตัวอย่างที่สมบูรณ์พร้อม SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - สถาปัตยกรรมหลายบริการ
-- **[Container Apps Master Guide](../README.md)** - รูปแบบคอนเทนเนอร์ทั้งหมด
+- **[Database App](../../../../../examples/database-app)** - ตัวอย่างครบถ้วนกับ SQL Database  
+- **[Microservices](../../../../../examples/container-app/microservices)** - สถาปัตยกรรมหลายบริการ  
+- **[Container Apps Master Guide](../README.md)** - รูปแบบ container ทั้งหมด  
 
-### แหล่งเรียนรู้
+### แหล่งการเรียนรู้
 
-- 📚 [AZD For Beginners Course](../../../README.md) - คอร์สหลัก
-- 📚 [Container Apps Patterns](../README.md) - รูปแบบการปรับใช้เพิ่มเติม
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - เทมเพลตจากชุมชน
+- 📚 [คอร์ส AZD สำหรับผู้เริ่มต้น](../../../README.md) - หน้าโฮมหลักของคอร์ส  
+- 📚 [รูปแบบ Container Apps](../README.md) - รูปแบบการดีพลอยเพิ่มเติม  
+- 📚 [แกลเลอรีเทมเพลต AZD](https://azure.github.io/awesome-azd/) - เทมเพลตจากชุมชน  
 
 ## แหล่งข้อมูลเพิ่มเติม
 
 ### เอกสาร
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - คู่มือเฟรมเวิร์ก Flask
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - เอกสาร Azure อย่างเป็นทางการ
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - คำสั่ง azd อ้างอิง
+- **[เอกสาร Flask](https://flask.palletsprojects.com/)** - คู่มือเฟรมเวิร์ค Flask  
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - เอกสาร Azure อย่างเป็นทางการ  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - อ้างอิงคำสั่ง azd  
 
 ### บทเรียน
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - ปรับใช้แอปแรกของคุณ
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - คู่มือการพัฒนา Python
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - โค้ดโครงสร้างพื้นฐาน
+- **[เริ่มต้น Container Apps อย่างรวดเร็ว](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - ดีพลอยแอปแรกของคุณ  
+- **[Python บน Azure](https://learn.microsoft.com/azure/developer/python/)** - คู่มือพัฒนา Python  
+- **[ภาษา Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - โครงสร้างพื้นฐานเป็นโค้ด  
 
 ### เครื่องมือ
-- **[Azure Portal](https://portal.azure.com)** - จัดการทรัพยากรด้วยภาพ
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - การรวม IDE
+- **[Azure Portal](https://portal.azure.com)** - จัดการทรัพยากรด้วยภาพ  
+- **[ส่วนขยาย VS Code Azure](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - การรวม IDE  
 
 ---
 
-**🎉 ยินดีด้วย!** คุณได้ปรับใช้ Flask API ที่พร้อมใช้งานในโปรดักชันไปยัง Azure Container Apps พร้อมการปรับขนาดอัตโนมัติและการตรวจสอบระบบ
+**🎉 ยินดีด้วย!** คุณได้ดีพลอย Flask API สำหรับ production บน Azure Container Apps พร้อมการปรับขนาดอัตโนมัติและการมอนิเตอร์เรียบร้อยแล้ว
 
-**มีคำถาม?** [เปิดปัญหา](https://github.com/microsoft/AZD-for-beginners/issues) หรือดู [FAQ](../../../resources/faq.md)
+**มีคำถาม?** [เปิดข้อเสนอแนะ](https://github.com/microsoft/AZD-for-beginners/issues) หรือดูที่ [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้การแปลมีความถูกต้อง แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาดั้งเดิมควรถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ ขอแนะนำให้ใช้บริการแปลภาษามืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดที่เกิดจากการใช้การแปลนี้
+**ประกาศแจ้งเตือน**:  
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษาด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เรามุ่งมั่นที่จะให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อนได้ เอกสารต้นฉบับในภาษาต้นทางถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลสำคัญ ขอแนะนำให้ใช้บริการแปลโดยนักแปลมืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดที่เกิดจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

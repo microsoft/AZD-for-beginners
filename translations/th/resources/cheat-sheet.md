@@ -1,422 +1,428 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T17:25:22+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "th"
-}
--->
-# แผ่นโกงคำสั่ง - คำสั่ง AZD ที่จำเป็น
+# Command Cheat Sheet - คำสั่ง AZD ที่จำเป็น
 
-**อ้างอิงด่วนสำหรับทุกบท**
+**คู่มือด่วนสำหรับทุกบท**
 - **📚 หน้าแรกของคอร์ส**: [AZD สำหรับผู้เริ่มต้น](../README.md)
-- **📖 เริ่มต้นอย่างรวดเร็ว**: [บทที่ 1: พื้นฐานและเริ่มต้นอย่างรวดเร็ว](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 คำสั่ง AI**: [บทที่ 2: การพัฒนาแบบ AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📖 เริ่มต้นอย่างรวดเร็ว**: [บทที่ 1: พื้นฐาน & เริ่มต้นอย่างรวดเร็ว](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 คำสั่ง AI**: [บทที่ 2: การพัฒนา AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 ขั้นสูง**: [บทที่ 4: โครงสร้างพื้นฐานเป็นโค้ด](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## บทนำ
 
-แผ่นโกงนี้รวบรวมคำสั่ง Azure Developer CLI ที่ใช้บ่อยที่สุด โดยจัดหมวดหมู่พร้อมตัวอย่างการใช้งาน เหมาะสำหรับการค้นหาอย่างรวดเร็วระหว่างการพัฒนา การแก้ไขปัญหา และการดำเนินงานประจำวันกับโปรเจกต์ azd
+ชีทช่วยจำนี้ครอบคลุมและให้การอ้างอิงอย่างรวดเร็วสำหรับคำสั่ง Azure Developer CLI ที่ใช้บ่อยที่สุด โดยจัดหมวดหมู่และตัวอย่างใช้งานจริง เหมาะสำหรับดูเร็วระหว่างการพัฒนา การแก้ปัญหา และการปฏิบัติงานประจำวันกับโปรเจค azd
 
 ## เป้าหมายการเรียนรู้
 
-เมื่อใช้แผ่นโกงนี้ คุณจะ:
+โดยใช้ชีทช่วยจำนี้ คุณจะได้:
 - เข้าถึงคำสั่งและไวยากรณ์ Azure Developer CLI ที่จำเป็นได้ทันที
-- เข้าใจการจัดหมวดหมู่คำสั่งตามฟังก์ชันและกรณีการใช้งาน
-- อ้างอิงตัวอย่างการใช้งานจริงสำหรับสถานการณ์การพัฒนาและการปรับใช้ทั่วไป
-- เข้าถึงคำสั่งแก้ไขปัญหาเพื่อแก้ไขปัญหาได้อย่างรวดเร็ว
-- ค้นหาตัวเลือกการตั้งค่าขั้นสูงและการปรับแต่งได้อย่างมีประสิทธิภาพ
-- ใช้คำสั่งจัดการสภาพแวดล้อมและการทำงานหลายสภาพแวดล้อม
+- เข้าใจการจัดคำสั่งตามหมวดหมู่ฟังก์ชันและกรณีการใช้งาน
+- อ้างอิงตัวอย่างใช้งานจริงสำหรับสถานการณ์พัฒนาและดีพลอยทั่วไป
+- เข้าถึงคำสั่งแก้ไขปัญหาเพื่อแก้ไขปัญหาได้เร็วขึ้น
+- ค้นหาตัวเลือกการตั้งค่าและปรับแต่งขั้นสูงได้อย่างมีประสิทธิภาพ
+- หาและบริหารจัดการสภาพแวดล้อมและคำสั่ง workflow หลายสภาพแวดล้อม
 
 ## ผลลัพธ์การเรียนรู้
 
-เมื่ออ้างอิงแผ่นโกงนี้เป็นประจำ คุณจะสามารถ:
-- ใช้คำสั่ง azd ได้อย่างมั่นใจโดยไม่ต้องอ้างอิงเอกสารเต็มรูปแบบ
-- แก้ไขปัญหาทั่วไปได้อย่างรวดเร็วด้วยคำสั่งวินิจฉัยที่เหมาะสม
-- จัดการหลายสภาพแวดล้อมและสถานการณ์การปรับใช้อย่างมีประสิทธิภาพ
-- ใช้ฟีเจอร์ขั้นสูงและตัวเลือกการตั้งค่า azd ตามความจำเป็น
-- แก้ไขปัญหาการปรับใช้ด้วยลำดับคำสั่งที่เป็นระบบ
-- ปรับปรุงการทำงานผ่านการใช้ทางลัดและตัวเลือก azd อย่างมีประสิทธิภาพ
+เมื่อใช้อ้างอิงชีทช่วยจำนี้อย่างสม่ำเสมอ คุณจะสามารถ:
+- รันคำสั่ง azd ได้อย่างมั่นใจโดยไม่ต้องค้นหาเอกสารเต็มรูปแบบ
+- แก้ไขปัญหาทั่วไปได้เร็วด้วยคำสั่งวินิจฉัยที่เหมาะสม
+- บริหารจัดการหลายสภาพแวดล้อมและกรณีดีพลอยได้อย่างมีประสิทธิภาพ
+- ใช้คุณสมบัติและตัวเลือกการตั้งค่าขั้นสูงของ azd ตามต้องการ
+- แก้ไขปัญหาการดีพลอยด้วยชุดคำสั่งอย่างเป็นระบบ
+- ปรับปรุง workflow ผ่านการใช้ทางลัดและตัวเลือก azd อย่างมีประสิทธิภาพ
 
-## คำสั่งเริ่มต้นใช้งาน
+## คำสั่งเริ่มต้น
 
-### การตรวจสอบสิทธิ์
+### การยืนยันตัวตน
 ```bash
-# Login to Azure (uses Azure CLI)
+# เข้าสู่ระบบ Azure ผ่าน AZD
+azd auth login
+
+# เข้าสู่ระบบ Azure CLI (AZD ใช้สิ่งนี้ภายใต้ระบบ)
 az login
 
-# Check current account
+# ตรวจสอบบัญชีปัจจุบัน
 az account show
 
-# Set default subscription
+# ตั้งค่าสมัครสมาชิกเริ่มต้น
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# ออกจากระบบจาก AZD
+azd auth logout
+
+# ออกจากระบบจาก Azure CLI
+az logout
 ```
 
-### การเริ่มต้นโปรเจกต์
+### การเริ่มโปรเจค
 ```bash
-# Browse available templates
+# เรียกดูแม่แบบที่มีอยู่
 azd template list
 
-# Initialize from template
+# เริ่มต้นจากแม่แบบ
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# เริ่มต้นในไดเรกทอรีปัจจุบัน
 azd init .
 
-# Initialize with custom name
+# เริ่มต้นด้วยชื่อตามต้องการ
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## คำสั่งการปรับใช้หลัก
+## คำสั่งดีพลอยหลัก
 
-### ขั้นตอนการปรับใช้อย่างสมบูรณ์
+### กระบวนการดีพลอยครบวงจร
 ```bash
-# Deploy everything (provision + deploy)
+# ติดตั้งทุกอย่าง (เตรียมพร้อม + ติดตั้ง)
 azd up
 
-# Deploy with confirmation prompts disabled
+# ติดตั้งโดยปิดใช้งานการยืนยัน
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# ติดตั้งไปยังสภาพแวดล้อมที่เฉพาะเจาะจง
 azd up --environment production
 
-# Deploy with custom parameters
+# ติดตั้งด้วยพารามิเตอร์ที่กำหนดเอง
 azd up --parameter location=westus2
 ```
 
 ### เฉพาะโครงสร้างพื้นฐาน
 ```bash
-# Provision Azure resources
+# จัดหาแหล่งข้อมูล Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 แสดงตัวอย่างการเปลี่ยนแปลงโครงสร้างพื้นฐาน
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# แสดงมุมมองการจำลองการทำงานว่าทรัพยากรใดจะถูกสร้าง/แก้ไข/ลบ
+# คล้ายกับ 'terraform plan' หรือ 'bicep what-if' - ปลอดภัยที่จะรัน ไม่ได้เปลี่ยนแปลงใดๆ
 ```
 
 ### เฉพาะแอปพลิเคชัน
 ```bash
-# Deploy application code
+# นำโค้ดแอปพลิเคชันไปใช้งาน
 azd deploy
 
-# Deploy specific service
+# นำบริการเฉพาะไปใช้งาน
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# นำบริการทั้งหมดไปใช้งาน
 azd deploy --all
 ```
 
-### การสร้างและการแพ็กเกจ
+### สร้างและแพ็กเกจ
 ```bash
-# Build applications
+# สร้างแอปพลิเคชัน
 azd package
 
-# Build specific service
+# สร้างบริการเฉพาะทาง
 azd package --service api
 ```
 
 ## 🌍 การจัดการสภาพแวดล้อม
 
-### การดำเนินการเกี่ยวกับสภาพแวดล้อม
+### การดำเนินการกับสภาพแวดล้อม
 ```bash
-# List all environments
+# แสดงรายการสภาพแวดล้อมทั้งหมด
 azd env list
 
-# Create new environment
+# สร้างสภาพแวดล้อมใหม่
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# เลือกสภาพแวดล้อม
 azd env select production
 
-# Show current environment
+# แสดงสภาพแวดล้อมปัจจุบัน
 azd env show
 
-# Refresh environment state
+# รีเฟรชสถานะสภาพแวดล้อม
 azd env refresh
 ```
 
 ### ตัวแปรสภาพแวดล้อม
 ```bash
-# Set environment variable
+# ตั้งค่าตัวแปรสิ่งแวดล้อม
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# รับค่าตัวแปรสิ่งแวดล้อม
 azd env get API_KEY
 
-# List all environment variables
+# แสดงรายการตัวแปรสิ่งแวดล้อมทั้งหมด
 azd env get-values
 
-# Remove environment variable
+# ลบตัวแปรสิ่งแวดล้อม
 azd env unset DEBUG
 ```
 
-## ⚙️ คำสั่งการตั้งค่า
+## ⚙️ คำสั่งตั้งค่า
 
-### การตั้งค่าทั่วไป
+### การตั้งค่าระดับโลก
 ```bash
-# List all configuration
+# แสดงรายการการตั้งค่าทั้งหมด
 azd config list
 
-# Set global defaults
+# ตั้งค่าค่าพื้นฐานทั่วโลก
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# ลบการตั้งค่า
 azd config unset defaults.location
 
-# Reset all configuration
+# รีเซ็ตการตั้งค่าทั้งหมด
 azd config reset
 ```
 
-### การตั้งค่าโปรเจกต์
+### การตั้งค่าโปรเจค
 ```bash
-# Validate azure.yaml
+# ตรวจสอบความถูกต้องของ azure.yaml
 azd config validate
 
-# Show project information
+# แสดงข้อมูลโครงการ
 azd show
 
-# Get service endpoints
+# ดึงข้อมูลจุดเชื่อมต่อบริการ
 azd show --output json
 ```
 
-## 📊 การตรวจสอบและบันทึก
+## 📊 การตรวจสอบและวินิจฉัย
 
-### บันทึกแอปพลิเคชัน
+### แดชบอร์ดการตรวจสอบ
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### การตรวจสอบ
-```bash
-# Open Azure portal for monitoring
+# เปิดแดชบอร์ดการตรวจสอบบนพอร์ทัล Azure
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# เปิดเมทริกซ์แบบสดของ Application Insights
+azd monitor --live
+
+# เปิดหน้าบันทึกของ Application Insights
+azd monitor --logs
+
+# เปิดภาพรวมของ Application Insights
+azd monitor --overview
 ```
 
-## 🛠️ คำสั่งการบำรุงรักษา
-
-### การล้างข้อมูล
+### การดูบันทึกคอนเทนเนอร์
 ```bash
-# Remove all Azure resources
+# ดูบันทึกผ่าน Azure CLI (สำหรับ Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# ติดตามบันทึกแบบเรียลไทม์
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# ดูบันทึกจาก Azure Portal
+azd monitor --logs
+```
+
+### คำสั่งค้นหาบันทึก Log Analytics
+```bash
+# เข้าถึงการวิเคราะห์ล็อกผ่าน Azure Portal
+azd monitor --logs
+
+# สืบค้นล็อกโดยใช้ Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
+```
+
+## 🛠️ คำสั่งดูแลรักษา
+
+### ทำความสะอาด
+```bash
+# ลบทรัพยากร Azure ทั้งหมด
 azd down
 
-# Force delete without confirmation
+# ลบโดยไม่ต้องยืนยัน
 azd down --force
 
-# Purge soft-deleted resources
+# ลบทรัพยากรที่ลบแบบอ่อนออกอย่างถาวร
 azd down --purge
 
-# Complete cleanup
+# ทำความสะอาดให้สมบูรณ์
 azd down --force --purge
 ```
 
 ### การอัปเดต
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# ตรวจสอบการอัปเดต azd
 azd version
 
-# Show system information
-azd info
+# รับเวอร์ชันปัจจุบัน
+azd version
+
+# ดูการกำหนดค่าปัจจุบัน
+azd config list
 ```
 
 ## 🔧 คำสั่งขั้นสูง
 
-### การตั้งค่าท่อและ CI/CD
+### Pipeline และ CI/CD
 ```bash
-# Configure GitHub Actions
+# กำหนดค่า GitHub Actions
 azd pipeline config
 
-# Configure Azure DevOps
+# กำหนดค่า Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# แสดงการกำหนดค่า pipeline
 azd pipeline show
 ```
 
 ### การจัดการโครงสร้างพื้นฐาน
 ```bash
-# Import existing resources
-azd infra import
+# สร้างเทมเพลตโครงสร้างพื้นฐาน
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 การดูตัวอย่างและวางแผนโครงสร้างพื้นฐาน
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# จำลองการจัดเตรียมโครงสร้างพื้นฐานโดยไม่ต้องปรับใช้จริง
+# วิเคราะห์เทมเพลต Bicep/Terraform และแสดง:
+# - ทรัพยากรที่จะเพิ่ม (สีเขียว +)
+# - ทรัพยากรที่จะปรับเปลี่ยน (สีเหลือง ~)
+# - ทรัพยากรที่จะลบ (สีแดง -)
+# ปลอดภัยในการรัน - ไม่มีการเปลี่ยนแปลงจริงใดๆ กับสภาพแวดล้อม Azure
+
+# สังเคราะห์โครงสร้างพื้นฐานจากไฟล์ azure.yaml
+azd infra synth
 ```
 
-### การจัดการบริการ
+### ข้อมูลโปรเจค
 ```bash
-# List all services
-azd service list
+# แสดงสถานะโครงการและจุดเชื่อมต่อ
+azd show
 
-# Show service details
-azd service show --service web
+# แสดงข้อมูลโครงการโดยละเอียดในรูปแบบ JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# รับจุดเชื่อมต่อของบริการ
+azd show --output json | jq '.services'
 ```
 
-## 🎯 ขั้นตอนการทำงานด่วน
+## 🎯 Workflow ด่วน
 
-### ขั้นตอนการทำงานสำหรับการพัฒนา
+### Workflow การพัฒนา
 ```bash
-# Start new project
+# เริ่มโครงการใหม่
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# นำไปใช้กับสภาพแวดล้อมพัฒนา
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# ทำการเปลี่ยนแปลงและนำไปใช้ใหม่
 azd deploy
 
-# View logs
-azd logs --follow
+# เปิดแผงควบคุมการติดตามผล
+azd monitor --live
 ```
 
-### ขั้นตอนการทำงานหลายสภาพแวดล้อม
+### Workflow หลายสภาพแวดล้อม
 ```bash
-# Set up environments
+# ตั้งค่าสภาพแวดล้อม
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# นำไปใช้กับ dev
 azd env select dev
 azd up
 
-# Test and promote to staging
+# ทดสอบและโปรโมทไปยัง staging
 azd env select staging
 azd up
 
-# Deploy to production
+# นำไปใช้กับโปรดักชัน
 azd env select production
 azd up
 ```
 
-### ขั้นตอนการแก้ไขปัญหา
+### Workflow การแก้ไขปัญหา
 ```bash
-# Enable debug mode
+# เปิดโหมดดีบัก
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# ตรวจสอบสถานะการติดตั้ง
+azd show
 
-# Validate configuration
-azd config validate
+# ตรวจสอบความถูกต้องของการตั้งค่า
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# เปิดแผงควบคุมการตรวจสอบสำหรับบันทึก
+azd monitor --logs
 
-# Check resource status
+# ตรวจสอบสถานะทรัพยากร
 azd show --output json
 ```
 
-## 🔍 คำสั่งการดีบัก
+## 🔍 คำสั่งดีบัก
 
-### ข้อมูลการดีบัก
+### ข้อมูลดีบัก
 ```bash
-# Enable debug output
+# เปิดใช้งานการแสดงผลแบบดีบัก
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# ปิดการใช้งานเทเลเมทรีเพื่อให้ผลลัพธ์สะอาดขึ้น
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# ตรวจสอบการกำหนดค่าปัจจุบัน
+azd config list
 
-# Check authentication status
+# ตรวจสอบสถานะการตรวจสอบสิทธิ์
 az account show
 ```
 
 ### การดีบักเทมเพลต
 ```bash
-# List available templates with details
+# แสดงรายการเทมเพลตที่มีพร้อมรายละเอียด
 azd template list --output json
 
-# Show template information
+# แสดงข้อมูลของเทมเพลต
 azd template show <template-name>
 
-# Validate template before init
+# ตรวจสอบความถูกต้องของเทมเพลตก่อนเริ่มต้นใช้งาน
 azd template validate <template-name>
 ```
 
 ## 📁 คำสั่งไฟล์และไดเรกทอรี
 
-### โครงสร้างโปรเจกต์
+### โครงสร้างโปรเจค
 ```bash
-# Show current directory structure
-tree /f  # Windows
-find . -type f  # Linux/macOS
+# แสดงโครงสร้างไดเร็กทอรีปัจจุบัน
+tree /f  # วินโดวส์
+find . -type f  # ลินุกซ์/แมคโอเอส
 
-# Navigate to azd project root
+# ไปที่รากโปรเจกต์ azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# แสดงไดเร็กทอรีการตั้งค่า azd
+echo $AZD_CONFIG_DIR  # โดยปกติที่ ~/.azd
 ```
 
 ## 🎨 การจัดรูปแบบผลลัพธ์
 
-### ผลลัพธ์แบบ JSON
+### ผลลัพธ์ JSON
 ```bash
-# Get JSON output for scripting
+# รับผลลัพธ์ JSON สำหรับการเขียนสคริปต์
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# วิเคราะห์ด้วย jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### ผลลัพธ์แบบตาราง
+### ผลลัพธ์ตาราง
 ```bash
-# Format as table
+# จัดรูปแบบเป็นตาราง
 azd env list --output table
-azd service list --output table
+
+# แสดงบริการที่ถูกติดตั้ง
+azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 การรวมคำสั่งทั่วไป
@@ -424,25 +430,25 @@ azd service list --output table
 ### สคริปต์ตรวจสอบสุขภาพ
 ```bash
 #!/bin/bash
-# Quick health check
+# ตรวจสอบสุขภาพอย่างรวดเร็ว
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
-### การตรวจสอบการปรับใช้
+### การตรวจสอบความถูกต้องของดีพลอย
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# การตรวจสอบก่อนการปรับใช้
+azd show
+azd provision --preview  # แสดงตัวอย่างการเปลี่ยนแปลงก่อนการปรับใช้
 az account show
 ```
 
 ### การเปรียบเทียบสภาพแวดล้อม
 ```bash
 #!/bin/bash
-# Compare environments
+# เปรียบเทียบสภาพแวดล้อม
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### สคริปต์ล้างทรัพยากร
+### สคริปต์ทำความสะอาดทรัพยากร
 ```bash
 #!/bin/bash
-# Clean up old environments
+# ทำความสะอาดสภาพแวดล้อมเก่า
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -465,17 +471,17 @@ done
 
 ### ตัวแปรสภาพแวดล้อมทั่วไป
 ```bash
-# Azure configuration
+# การกำหนดค่า Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# การกำหนดค่า AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# การกำหนดค่าของแอปพลิเคชัน
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -484,57 +490,60 @@ export LOG_LEVEL="info"
 
 ### การแก้ไขด่วน
 ```bash
-# Reset authentication
+# รีเซ็ตการรับรองความถูกต้อง
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# บังคับรีเฟรชสภาพแวดล้อม
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# นำส่งบริการทั้งหมดใหม่
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# ตรวจสอบสถานะการนำส่ง
+azd show --output json
 ```
 
 ### คำสั่งกู้คืน
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# กู้คืนจากการปรับใช้ที่ล้มเหลว - ทำความสะอาดและปรับใช้ใหม่
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# จัดเตรียมโครงสร้างพื้นฐานใหม่เท่านั้น
+azd provision
+
+# ปรับใช้แอปพลิเคชันใหม่เท่านั้น
+azd deploy
 ```
 
 ## 💡 เคล็ดลับมือโปร
 
-### ชื่อย่อสำหรับการทำงานที่รวดเร็ว
+### ชื่อย่อเพื่อ workflow เร็วขึ้น
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# เพิ่มเข้าไปในไฟล์ .bashrc หรือ .zshrc ของคุณ
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
 ### ทางลัดฟังก์ชัน
 ```bash
-# Quick environment switching
+# การสลับสภาพแวดล้อมอย่างรวดเร็ว
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# การปรับใช้อย่างรวดเร็วพร้อมการตรวจสอบ
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# สถานะสภาพแวดล้อม
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -542,42 +551,44 @@ azd-status() {
 
 ## 📖 ความช่วยเหลือและเอกสาร
 
-### การขอความช่วยเหลือ
+### ขอความช่วยเหลือ
 ```bash
-# General help
+# ความช่วยเหลือทั่วไป
 azd --help
 azd help
 
-# Command-specific help
+# ความช่วยเหลือเฉพาะคำสั่ง
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# แสดงเวอร์ชันและข้อมูลการสร้าง
 azd version
 azd version --output json
 ```
 
 ### ลิงก์เอกสาร
 ```bash
-# Open documentation in browser
+# เปิดเอกสารในเบราว์เซอร์
 azd docs
 
-# Show template documentation
+# แสดงเอกสารเทมเพลต
 azd template show <template-name> --docs
 ```
 
 ---
 
-**เคล็ดลับ**: บุ๊กมาร์กแผ่นโกงนี้และใช้ `Ctrl+F` เพื่อค้นหาคำสั่งที่คุณต้องการอย่างรวดเร็ว!
+**คำแนะนำ**: ตั้งบุ๊กมาร์กชีทช่วยจำนี้และใช้ `Ctrl+F` เพื่อค้นหาคำสั่งที่คุณต้องการอย่างรวดเร็ว!
 
 ---
 
-**การนำทาง**
-- **บทเรียนก่อนหน้า**: [การตรวจสอบก่อนการปรับใช้](../docs/pre-deployment/preflight-checks.md)
+**เมนูนำทาง**
+- **บทเรียนก่อนหน้า**: [ตรวจสอบก่อนดีพลอย](../docs/pre-deployment/preflight-checks.md)
 - **บทเรียนถัดไป**: [อภิธานศัพท์](glossary.md)
 
 ---
 
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้การแปลมีความถูกต้อง แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาดั้งเดิมควรถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ ขอแนะนำให้ใช้บริการแปลภาษามืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดที่เกิดจากการใช้การแปลนี้
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ข้อจำกัดความรับผิดชอบ**:
+เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษาอัตโนมัติ [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้มีความถูกต้อง แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่แม่นยำ เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลสำคัญแนะนำให้ใช้บริการแปลโดยผู้เชี่ยวชาญด้านมนุษย์ เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดใด ๆ ที่เกิดขึ้นจากการใช้การแปลฉบับนี้
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
