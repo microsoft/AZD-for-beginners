@@ -1,55 +1,46 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-21T16:25:31+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "nl"
-}
--->
-# Voorbeelden - Praktische AZD-sjablonen en configuraties
+# Voorbeelden - Praktische AZD-sjablonen en Configuraties
 
-**Leren door voorbeelden - Georganiseerd per hoofdstuk**
+**Leren door Voorbeelden - Georganiseerd per Hoofdstuk**
 - **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
-- **📖 Hoofdstukindeling**: Voorbeelden georganiseerd op leerniveau
-- **🚀 Lokaal Voorbeeld**: [Retail Multi-Agent Oplossing](retail-scenario.md)
+- **📖 Hoofdstukmapping**: Voorbeelden georganiseerd naar leerniveau
+- **🚀 Lokaal Voorbeeld**: [Retail Multi-Agent Solution](retail-scenario.md)
 - **🤖 Externe AI Voorbeelden**: Links naar Azure Samples repositories
 
 > **📍 BELANGRIJK: Lokale vs Externe Voorbeelden**  
 > Deze repository bevat **4 complete lokale voorbeelden** met volledige implementaties:  
-> - **Azure OpenAI Chat** (GPT-4 implementatie met chatinterface)  
-> - **Container Apps** (Eenvoudige Flask API + Microservices)  
+> - **Azure OpenAI Chat** (GPT-4 deployment met chatinterface)  
+> - **Container Apps** (Eenvoudige Flask API + microservices)  
 > - **Database App** (Web + SQL Database)  
-> - **Retail Multi-Agent** (Enterprise AI Oplossing)  
+> - **Retail Multi-Agent** (Enterprise AI-oplossing)  
 >  
-> Aanvullende voorbeelden zijn **externe referenties** naar Azure-Samples repositories die je kunt klonen.
+> Aanvullende voorbeelden zijn **externe verwijzingen** naar Azure-Samples repositories die je kunt clonen.
 
 ## Introductie
 
-Deze map biedt praktische voorbeelden en referenties om je te helpen Azure Developer CLI te leren door middel van hands-on praktijk. Het Retail Multi-Agent scenario is een complete, productieklare implementatie die in deze repository is opgenomen. Aanvullende voorbeelden verwijzen naar officiële Azure Samples die verschillende AZD-patronen demonstreren.
+Deze map biedt praktische voorbeelden en verwijzingen om je te helpen de Azure Developer CLI te leren door middel van hands-on oefening. Het Retail Multi-Agent scenario is een volledige, productieklare implementatie inbegrepen in deze repository. Aanvullende voorbeelden verwijzen naar officiële Azure Samples die verschillende AZD-patronen demonstreren.
 
-### Legenda voor Complexiteit
+### Legenda Complexiteitsbeoordeling
 
 - ⭐ **Beginner** - Basisconcepten, enkele service, 15-30 minuten
 - ⭐⭐ **Gemiddeld** - Meerdere services, database-integratie, 30-60 minuten
 - ⭐⭐⭐ **Gevorderd** - Complexe architectuur, AI-integratie, 1-2 uur
 - ⭐⭐⭐⭐ **Expert** - Productieklaar, enterprise-patronen, 2+ uur
 
-## 🎯 Wat zit er eigenlijk in deze repository
+## 🎯 Wat Staat Er Eigenlijk in Deze Repository
 
-### ✅ Lokale Implementatie (Klaar voor gebruik)
+### ✅ Lokale Implementatie (Klaar voor Gebruik)
 
-#### [Azure OpenAI Chat Applicatie](azure-openai-chat/README.md) 🆕
-**Complete GPT-4 implementatie met chatinterface inbegrepen in deze repo**
+#### [Azure OpenAI Chat Application](azure-openai-chat/README.md) 🆕
+**Volledige GPT-4 deployment met chatinterface inbegrepen in deze repo**
 
 - **Locatie:** `examples/azure-openai-chat/`
 - **Complexiteit:** ⭐⭐ (Gemiddeld)
 - **Wat is inbegrepen:**
-  - Complete Azure OpenAI implementatie (GPT-4)
+  - Volledige Azure OpenAI deployment (GPT-4)
   - Python command-line chatinterface
-  - Key Vault integratie voor veilige API-sleutels
+  - Key Vault-integratie voor veilige API-sleutels
   - Bicep infrastructuursjablonen
-  - Tokengebruik en kostenbewaking
+  - Tokengebruik en kostenmonitoring
   - Rate limiting en foutafhandeling
 
 **Snelstart:**
@@ -57,7 +48,7 @@ Deze map biedt praktische voorbeelden en referenties om je te helpen Azure Devel
 # Navigeer naar voorbeeld
 cd examples/azure-openai-chat
 
-# Alles implementeren
+# Rol alles uit
 azd up
 
 # Installeer afhankelijkheden en begin met chatten
@@ -67,46 +58,46 @@ python src/chat.py
 
 **Technologieën:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
 
-#### [Container App Voorbeelden](container-app/README.md) 🆕
-**Uitgebreide containerimplementatievoorbeelden inbegrepen in deze repo**
+#### [Container App Examples](container-app/README.md) 🆕
+**Uitgebreide container deployment voorbeelden inbegrepen in deze repo**
 
 - **Locatie:** `examples/container-app/`
-- **Complexiteit:** ⭐-⭐⭐⭐⭐ (Beginner tot Expert)
+- **Complexiteit:** ⭐-⭐⭐⭐⭐ (Beginner tot Gevorderd)
 - **Wat is inbegrepen:**
-  - [Master Gids](container-app/README.md) - Compleet overzicht van containerimplementaties
-  - [Eenvoudige Flask API](../../../examples/container-app/simple-flask-api) - Basis REST API voorbeeld
-  - [Microservices Architectuur](../../../examples/container-app/microservices) - Productieklaar multi-service implementatie
-  - Snelstart, productie- en geavanceerde patronen
+  - [Master Guide](container-app/README.md) - Volledig overzicht van container deployments
+  - [Simple Flask API](../../../examples/container-app/simple-flask-api) - Basis REST API voorbeeld
+  - [Microservices Architecture](../../../examples/container-app/microservices) - Productieklaar multi-service deployment
+  - Snelstart, Productie- en Geavanceerde patronen
   - Monitoring, beveiliging en kostenoptimalisatie
 
 **Snelstart:**
 ```bash
-# Bekijk mastergids
+# Bekijk de mastergids
 cd examples/container-app
 
-# Implementeer eenvoudige Flask API
+# Implementeer eenvoudige Flask-API
 cd simple-flask-api
 azd up
 
-# Implementeer microservices voorbeeld
+# Implementeer voorbeeld van microservices
 cd ../microservices
 azd up
 ```
 
 **Technologieën:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Retail Multi-Agent Oplossing](retail-scenario.md) 🆕
-**Complete productieklare implementatie inbegrepen in deze repo**
+#### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
+**Volledige productieklare implementatie inbegrepen in deze repo**
 
 - **Locatie:** `examples/retail-multiagent-arm-template/`
-- **Complexiteit:** ⭐⭐⭐⭐ (Expert)
+- **Complexiteit:** ⭐⭐⭐⭐ (Gevorderd)
 - **Wat is inbegrepen:**
-  - Complete ARM implementatiesjabloon
-  - Multi-agent architectuur (Klant + Voorraad)
-  - Azure OpenAI integratie
-  - AI Zoeken met RAG
+  - Volledig ARM deployment template
+  - Multi-agent architectuur (Customer + Inventory)
+  - Azure OpenAI-integratie
+  - AI Search met RAG
   - Uitgebreide monitoring
-  - One-click implementatiescript
+  - One-click deployment script
 
 **Snelstart:**
 ```bash
@@ -114,18 +105,18 @@ cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**Technologieën:** Azure OpenAI, AI Zoeken, Container Apps, Cosmos DB, Application Insights
+**Technologieën:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 Externe Azure Voorbeelden (Klonen om te gebruiken)
+## 🔗 Externe Azure Samples (Clonen om te gebruiken)
 
-De volgende voorbeelden worden onderhouden in officiële Azure-Samples repositories. Kloon ze om verschillende AZD-patronen te verkennen:
+De volgende voorbeelden worden onderhouden in officiële Azure-Samples repositories. Clone ze om verschillende AZD-patronen te verkennen:
 
 ### Eenvoudige Applicaties (Hoofdstukken 1-2)
 
-| Sjabloon | Repository | Complexiteit | Services |
-|:---------|:-----------|:-------------|:---------|
+| Template | Repository | Complexiteit | Services |
+|:---------|:-----------|:-----------|:---------|
 | **Python Flask API** | [Lokaal: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
 | **Microservices** | [Lokaal: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Multi-service, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
@@ -134,28 +125,28 @@ De volgende voorbeelden worden onderhouden in officiële Azure-Samples repositor
 
 **Hoe te gebruiken:**
 ```bash
-# Clone een voorbeeld
+# Kloon elk voorbeeld
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
-# Implementeren
+# Uitrollen
 azd up
 ```
 
 ### AI Applicatie Voorbeelden (Hoofdstukken 2, 5, 8)
 
-| Sjabloon | Repository | Complexiteit | Focus |
-|:---------|:-----------|:-------------|:------|
-| **Azure OpenAI Chat** | [Lokaal: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 implementatie |
-| **AI Chat Snelstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Basis AI chat |
-| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent framework |
-| **Zoeken + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG patroon |
+| Template | Repository | Complexiteit | Focus |
+|:---------|:-----------|:-----------|:------|
+| **Azure OpenAI Chat** | [Lokaal: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 deployment |
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Basis AI-chat |
+| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent-framework |
+| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG-patroon |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Enterprise AI |
 
 ### Database & Geavanceerde Patronen (Hoofdstukken 3-8)
 
-| Sjabloon | Repository | Complexiteit | Focus |
-|:---------|:-----------|:-------------|:------|
+| Template | Repository | Complexiteit | Focus |
+|:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Database-integratie |
 | **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
 | **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Multi-service |
@@ -163,25 +154,25 @@ azd up
 
 ## Leerdoelen
 
-Door deze voorbeelden te doorlopen, leer je:
+Door met deze voorbeelden te werken, zul je:
 - Azure Developer CLI-workflows oefenen met realistische applicatiescenario's
-- Verschillende applicatiearchitecturen en hun AZD-implementaties begrijpen
-- Beheersing van Infrastructure as Code-patronen voor diverse Azure-services
-- Configuratiebeheer en omgevingsspecifieke implementatiestrategieën toepassen
-- Monitoring, beveiliging en schaalpatronen implementeren in praktische contexten
-- Ervaring opdoen met het oplossen van problemen en het debuggen van echte implementatiescenario's
+- Verschillende applicatiearchitecturen en hun azd-implementaties begrijpen
+- Infrastructure as Code-patronen voor verschillende Azure-services beheersen
+- Configuratiebeheer en omgevingsspecifieke deploymentstrategieën toepassen
+- Monitoring-, beveiligings- en schaalpatronen implementeren in praktische contexten
+- Ervaring opbouwen met het oplossen van problemen en debuggen van echte deploymentscenario's
 
 ## Leerresultaten
 
-Na het voltooien van deze voorbeelden kun je:
-- Verschillende applicatietypen met vertrouwen implementeren met Azure Developer CLI
-- Aangeleverde sjablonen aanpassen aan je eigen applicatievereisten
-- Eigen infrastructuurpatronen ontwerpen en implementeren met Bicep
-- Complexe multi-service applicaties configureren met de juiste afhankelijkheden
-- Beveiligings-, monitoring- en prestatiebest practices toepassen in echte scenario's
-- Implementaties oplossen en optimaliseren op basis van praktische ervaring
+Na het voltooien van deze voorbeelden zul je in staat zijn om:
+- Verschillende applicatietypes met vertrouwen te deployen met Azure Developer CLI
+- De aangeleverde sjablonen aan te passen aan je eigen applicatievereisten
+- Aangepaste infrastructuurpatronen te ontwerpen en te implementeren met Bicep
+- Complexe multi-service applicaties te configureren met juiste afhankelijkheden
+- Beveiliging-, monitoring- en prestatiebest practices toe te passen in echte scenario's
+- Deployments te troubleshooten en te optimaliseren op basis van praktische ervaring
 
-## Mapstructuur
+## Directorystructuur
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -199,71 +190,71 @@ Azure Samples AZD Templates (linked externally):
 
 ## Snelstart Voorbeelden
 
-> **💡 Nieuw met AZD?** Begin met voorbeeld #1 (Flask API) - het duurt ~20 minuten en leert je de basisconcepten.
+> **💡 Nieuw met AZD?** Begin met voorbeeld #1 (Flask API) - het duurt ~20 minuten en leert kernconcepten.
 
 ### Voor Beginners
 1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Lokaal) ⭐  
-   Implementeer een eenvoudige REST API met schaal-tot-nul  
+   Deploy een eenvoudige REST API met scale-to-zero  
    **Tijd:** 20-25 minuten | **Kosten:** $0-5/maand  
-   **Je leert:** Basis AZD-workflow, containerisatie, health probes  
-   **Verwacht resultaat:** Werkend API-eindpunt dat "Hello, World!" retourneert met monitoring
+   **Wat je leert:** Basis azd-workflow, containerisatie, health probes  
+   **Verwacht resultaat:** Werkende API-endpoint die "Hello, World!" retourneert met monitoring
 
 2. **[Eenvoudige Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Implementeer een Node.js Express webapplicatie met MongoDB  
+   Deploy een Node.js Express webapplicatie met MongoDB  
    **Tijd:** 25-35 minuten | **Kosten:** $10-30/maand  
-   **Je leert:** Database-integratie, omgevingsvariabelen, verbindingsstrings  
-   **Verwacht resultaat:** Todo-lijst app met maak/lezen/bijwerken/verwijderen functionaliteit
+   **Wat je leert:** Database-integratie, omgevingsvariabelen, connection strings  
+   **Verwacht resultaat:** Todo-list app met create/read/update/delete-functionaliteit
 
 3. **[Statische Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
    Host een React statische website met Azure Static Web Apps  
    **Tijd:** 20-30 minuten | **Kosten:** $0-10/maand  
-   **Je leert:** Statische hosting, serverloze functies, CDN-implementatie  
-   **Verwacht resultaat:** React UI met API-backend, automatische SSL, wereldwijde CDN
+   **Wat je leert:** Static hosting, serverless functions, CDN-deploy  
+   **Verwacht resultaat:** React UI met API-backend, automatische SSL, globale CDN
 
 ### Voor Gemiddelde Gebruikers
-4. **[Azure OpenAI Chat Applicatie](../../../examples/azure-openai-chat)** (Lokaal) ⭐⭐  
-   Implementeer GPT-4 met chatinterface en veilige API-sleutelbeheer  
+4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (Lokaal) ⭐⭐  
+   Deploy GPT-4 met chatinterface en veilige API-sleutelbeheer  
    **Tijd:** 35-45 minuten | **Kosten:** $50-200/maand  
-   **Je leert:** Azure OpenAI implementatie, Key Vault integratie, tokenbewaking  
-   **Verwacht resultaat:** Werkende chatapplicatie met GPT-4 en kostenbewaking
+   **Wat je leert:** Azure OpenAI deployment, Key Vault-integratie, tokentracking  
+   **Verwacht resultaat:** Werkende chatapplicatie met GPT-4 en kostenmonitoring
 
 5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Lokaal) ⭐⭐⭐⭐  
    Productieklaar multi-service architectuur  
    **Tijd:** 45-60 minuten | **Kosten:** $50-150/maand  
-   **Je leert:** Servicecommunicatie, berichtwachtrijen, gedistribueerde tracing  
+   **Wat je leert:** Servicecommunicatie, message queuing, gedistribueerde tracing  
    **Verwacht resultaat:** 2-service systeem (API Gateway + Product Service) met monitoring
 
 6. **[Database App - C# met Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
    Webapplicatie met C# API en Azure SQL Database  
    **Tijd:** 30-45 minuten | **Kosten:** $20-80/maand  
-   **Je leert:** Entity Framework, database-migraties, verbindingsbeveiliging  
-   **Verwacht resultaat:** C# API met Azure SQL backend, automatische schema-implementatie
+   **Wat je leert:** Entity Framework, database-migraties, verbindingsbeveiliging  
+   **Verwacht resultaat:** C# API met Azure SQL backend, automatische schema-deploy
 
-7. **[Serverloze Functie - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
+7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
    Python Azure Functions met HTTP-triggers en Cosmos DB  
    **Tijd:** 30-40 minuten | **Kosten:** $10-40/maand  
-   **Je leert:** Event-driven architectuur, serverloze schaalvergroting, NoSQL-integratie  
-   **Verwacht resultaat:** Functie-app die reageert op HTTP-verzoeken met Cosmos DB-opslag
+   **Wat je leert:** Event-driven architectuur, serverless scaling, NoSQL-integratie  
+   **Verwacht resultaat:** Function app die reageert op HTTP-aanvragen met Cosmos DB-opslag
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Multi-service Java applicatie met Container Apps en API-gateway  
+   Multi-service Java-applicatie met Container Apps en API-gateway  
    **Tijd:** 60-90 minuten | **Kosten:** $80-200/maand  
-   **Je leert:** Spring Boot implementatie, service mesh, load balancing  
-   **Verwacht resultaat:** Multi-service Java systeem met service discovery en routing
+   **Wat je leert:** Spring Boot deployment, service mesh, load balancing  
+   **Verwacht resultaat:** Multi-service Java-systeem met service discovery en routing
 
-### Azure AI Foundry Sjablonen
+### Microsoft Foundry Templates
 
 1. **[Azure OpenAI Chat App - Lokaal Voorbeeld](../../../examples/azure-openai-chat)** ⭐⭐  
-   Complete GPT-4 implementatie met chatinterface  
+   Volledige GPT-4 deployment met chatinterface  
    **Tijd:** 35-45 minuten | **Kosten:** $50-200/maand  
-   **Verwacht resultaat:** Werkende chatapplicatie met tokenbewaking en kostenmonitoring
+   **Verwacht resultaat:** Werkende chatapplicatie met tokentracking en kostenmonitoring
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
    Intelligente chatapplicatie met RAG-architectuur  
    **Tijd:** 60-90 minuten | **Kosten:** $100-300/maand  
    **Verwacht resultaat:** RAG-aangedreven chatinterface met documentzoekfunctie en citaties
 
-3. **[AI Documentverwerking](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
+3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Documentanalyse met Azure AI-services  
    **Tijd:** 40-60 minuten | **Kosten:** $20-80/maand  
    **Verwacht resultaat:** API die tekst, tabellen en entiteiten uit geüploade documenten extraheert
@@ -271,72 +262,72 @@ Azure Samples AZD Templates (linked externally):
 4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
    MLOps-workflow met Azure Machine Learning  
    **Tijd:** 2-3 uur | **Kosten:** $150-500/maand  
-   **Verwacht resultaat:** Geautomatiseerde ML-pipeline met training, implementatie en monitoring
+   **Verwacht resultaat:** Geautomatiseerde ML-pijplijn met training, deployment en monitoring
 
-### Realistische Scenario's
+### Praktijkvoorbeelden
 
-#### **Retail Multi-Agent Oplossing** 🆕
-**[Complete Implementatiegids](./retail-scenario.md)**
+#### **Retail Multi-Agent Solution** 🆕
+**[Volledige Implementatiehandleiding](./retail-scenario.md)**
 
-Een uitgebreide, productieklare multi-agent klantenondersteuningsoplossing die enterprise-grade AI applicatie-implementatie met AZD demonstreert. Dit scenario biedt:
+Een uitgebreide, productieklare multi-agent klantenserviceoplossing die enterprise-grade AI-applicatie-deployments met AZD demonstreert. Dit scenario biedt:
 
-- **Complete Architectuur**: Multi-agent systeem met gespecialiseerde klantenservice- en voorraadbeheeragents
-- **Productie-infrastructuur**: Multi-regio Azure OpenAI-implementaties, AI Search, Container Apps en uitgebreide monitoring  
-- **Klaar-om-te-implementeren ARM-template**: Eén klik implementatie met meerdere configuratiemodi (Minimal/Standard/Premium)  
-- **Geavanceerde functies**: Red teaming beveiligingsvalidatie, agent evaluatie framework, kostenoptimalisatie en probleemoplossingsgidsen  
-- **Echte zakelijke context**: Klantenservice use case voor retailers met bestanduploads, zoekintegratie en dynamische schaalbaarheid  
+- **Volledige architectuur**: Multi-agent systeem met gespecialiseerde klantenservice- en voorraadbeheersagenten
+- **Productie-infrastructuur**: Multi-region Azure OpenAI-implementaties, AI Search, Container Apps en uitgebreide monitoring
+- **Klaar-om-te-implementeren ARM Template**: Eenmalige implementatie met meerdere configuratiemodi (Minimal/Standard/Premium)
+- **Geavanceerde functies**: red teaming-beveiligingsvalidatie, agent-evaluatiekader, kostenoptimalisatie en probleemoplossingshandleidingen
+- **Echte zakelijke context**: Klantenondersteuningscase voor detailhandel met bestandsuploads, zoekintegratie en dynamische schaalbaarheid
 
-**Technologieën**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
+**Technologieën**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Complexiteit**: ⭐⭐⭐⭐ (Geavanceerd - Klaar voor productie op ondernemingsniveau)  
+**Complexiteit**: ⭐⭐⭐⭐ (Geavanceerd - Klaar voor enterprise-productie)
 
-**Perfect voor**: AI-ontwikkelaars, solution architects en teams die productie multi-agent systemen bouwen  
+**Perfect voor**: AI-ontwikkelaars, oplossingsarchitecten en teams die productie multi-agentsystemen bouwen
 
-**Snelle start**: Implementeer de complete oplossing in minder dan 30 minuten met de meegeleverde ARM-template via `./deploy.sh -g myResourceGroup`  
+**Snelstart**: Implementeer de volledige oplossing in minder dan 30 minuten met het meegeleverde ARM-sjabloon met `./deploy.sh -g myResourceGroup`
 
-## 📋 Gebruiksinstructies  
+## 📋 Gebruiksinstructies
 
-### Vereisten  
+### Vereisten
 
-Voordat je een voorbeeld uitvoert:  
-- ✅ Azure-abonnement met eigenaar- of bijdragerstoegang  
-- ✅ Azure Developer CLI geïnstalleerd ([Installatiegids](../docs/getting-started/installation.md))  
-- ✅ Docker Desktop actief (voor container voorbeelden)  
-- ✅ Geschikte Azure-quota's (controleer de specifieke vereisten per voorbeeld)  
+Voordat u een voorbeeld uitvoert:
+- ✅ Azure-abonnement met Owner- of Contributor-toegang
+- ✅ Azure Developer CLI geïnstalleerd ([Installatiegids](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop actief (voor container-voorbeelden)
+- ✅ Geschikte Azure-quota's (controleer voorbeeldspecifieke vereisten)
 
-> **💰 Kostenwaarschuwing:** Alle voorbeelden maken echte Azure-resources aan die kosten met zich meebrengen. Zie de individuele README-bestanden voor kostenramingen. Vergeet niet `azd down` uit te voeren wanneer je klaar bent om doorlopende kosten te vermijden.  
+> **💰 Kostenwaarschuwing:** Alle voorbeelden maken echte Azure-resources die kosten met zich meebrengen. Zie de afzonderlijke README-bestanden voor kostenschattingen. Vergeet niet `azd down` uit te voeren wanneer u klaar bent om doorlopende kosten te voorkomen.
 
-### Voorbeelden lokaal uitvoeren  
+### Voorbeelden lokaal uitvoeren
 
-1. **Clone of kopieer voorbeeld**  
+1. **Voorbeeld klonen of kopiëren**
    ```bash
-   # Navigeer naar gewenst voorbeeld
+   # Navigeer naar het gewenste voorbeeld
    cd examples/simple-web-app
    ```
-  
-2. **Initialiseer AZD-omgeving**  
+
+2. **Initialiseer AZD-omgeving**
    ```bash
-   # Initialiseer met bestaande sjabloon
+   # Initialiseren met een bestaand sjabloon
    azd init
    
    # Of maak een nieuwe omgeving
    azd env new my-environment
    ```
-  
-3. **Configureer omgeving**  
+
+3. **Configureer omgeving**
    ```bash
    # Stel vereiste variabelen in
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
-  
-4. **Implementeer**  
+
+4. **Implementeer**
    ```bash
    # Implementeer infrastructuur en applicatie
    azd up
    ```
-  
-5. **Controleer implementatie**  
+
+5. **Verifieer implementatie**
    ```bash
    # Haal service-eindpunten op
    azd env get-values
@@ -344,268 +335,268 @@ Voordat je een voorbeeld uitvoert:
    # Test het eindpunt (voorbeeld)
    curl https://your-app-url.azurecontainer.io/health
    ```
-  
-   **Verwachte succesindicatoren:**  
-   - ✅ `azd up` voltooit zonder fouten  
-   - ✅ Service endpoint retourneert HTTP 200  
-   - ✅ Azure Portal toont status "Running"  
-   - ✅ Application Insights ontvangt telemetrie  
+   
+   **Verwachte succesindicatoren:**
+   - ✅ `azd up` voltooit zonder fouten
+   - ✅ Service-endpoint retourneert HTTP 200
+   - ✅ Azure Portal toont "Running" status
+   - ✅ Application Insights ontvangt telemetrie
 
-> **⚠️ Problemen?** Zie [Veelvoorkomende problemen](../docs/troubleshooting/common-issues.md) voor hulp bij implementatieproblemen  
+> **⚠️ Problemen?** Zie [Veelvoorkomende problemen](../docs/chapter-07-troubleshooting/common-issues.md) voor probleemoplossing bij implementatie
 
-### Voorbeelden aanpassen  
+### Voorbeelden aanpassen
 
-Elk voorbeeld bevat:  
-- **README.md** - Gedetailleerde setup- en aanpassingsinstructies  
-- **azure.yaml** - AZD-configuratie met opmerkingen  
-- **infra/** - Bicep-templates met parameteruitleg  
-- **src/** - Voorbeeldapplicatiecode  
-- **scripts/** - Hulpscripts voor veelvoorkomende taken  
+Elk voorbeeld bevat:
+- **README.md** - Gedetailleerde installatie- en aanpassingsinstructies
+- **azure.yaml** - AZD-configuratie met opmerkingen
+- **infra/** - Bicep-sjablonen met parameteruitleg
+- **src/** - Voorbeeldapplicatiecode
+- **scripts/** - Hulpscripts voor veelvoorkomende taken
 
-## 🎯 Leerdoelen  
+## 🎯 Leerdoelen
 
-### Voorbeeldcategorieën  
+### Voorbeeldcategorieën
 
-#### **Basisimplementaties**  
-- Applicaties met één service  
-- Eenvoudige infrastructuurpatronen  
-- Basisconfiguratiebeheer  
-- Kostenbesparende ontwikkelomgevingen  
+#### **Eenvoudige implementaties**
+- Applicaties met één service
+- Eenvoudige infrastructuurpatronen
+- Basisconfiguratiebeheer
+- Kostenbesparende ontwikkelomgevingen
 
-#### **Geavanceerde scenario's**  
-- Architecturen met meerdere services  
-- Complexe netwerkconfiguraties  
-- Database-integratiepatronen  
-- Beveiligings- en compliance-implementaties  
+#### **Geavanceerde scenario's**
+- Architecturen met meerdere services
+- Complexe netwerkconfiguraties
+- Database-integratiepatronen
+- Implementaties voor beveiliging en compliance
 
-#### **Productieklaar**  
-- Configuraties voor hoge beschikbaarheid  
-- Monitoring en observatie  
-- CI/CD-integratie  
-- Noodhersteloplossingen  
+#### **Productieklare patronen**
+- Configuraties voor hoge beschikbaarheid
+- Monitoring en observeerbaarheid
+- CI/CD-integratie
+- Opstellingen voor disaster recovery
 
-## 📖 Voorbeeldbeschrijvingen  
+## 📖 Voorbeeldbeschrijvingen
 
-### Eenvoudige webapp - Node.js Express  
+### Eenvoudige webapp - Node.js Express
 **Technologieën**: Node.js, Express, MongoDB, Container Apps  
 **Complexiteit**: Beginner  
-**Concepten**: Basisimplementatie, REST API, NoSQL-database-integratie  
+**Concepten**: Basisimplementatie, REST API, NoSQL-database-integratie
 
-### Statische website - React SPA  
+### Statische website - React SPA
 **Technologieën**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Complexiteit**: Beginner  
-**Concepten**: Statische hosting, serverloze backend, moderne webontwikkeling  
+**Concepten**: Statische hosting, serverless-backend, moderne webontwikkeling
 
-### Container App - Python Flask  
+### Container App - Python Flask
 **Technologieën**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Complexiteit**: Beginner  
-**Concepten**: Containerisatie, REST API, schaal-tot-nul, gezondheidscontroles, monitoring  
-**Locatie**: [Lokaal voorbeeld](../../../examples/container-app/simple-flask-api)  
+**Concepten**: Containerisatie, REST API, scale-to-zero, health probes, monitoring  
+**Locatie**: [Lokaal voorbeeld](../../../examples/container-app/simple-flask-api)
 
-### Container App - Microservices Architectuur  
+### Container App - Microservicesarchitectuur
 **Technologieën**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
 **Complexiteit**: Geavanceerd  
-**Concepten**: Architectuur met meerdere services, servicecommunicatie, berichtwachtrijen, gedistribueerde tracing  
-**Locatie**: [Lokaal voorbeeld](../../../examples/container-app/microservices)  
+**Concepten**: Multi-service-architectuur, servicecommunicatie, message queuing, distributed tracing  
+**Locatie**: [Lokaal voorbeeld](../../../examples/container-app/microservices)
 
-### Database App - C# met Azure SQL  
+### Database-app - C# met Azure SQL
 **Technologieën**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Complexiteit**: Gemiddeld  
-**Concepten**: Entity Framework, databaseverbindingen, web API-ontwikkeling  
+**Concepten**: Entity Framework, databaseconnecties, web-API-ontwikkeling
 
-### Serverloze functie - Python Azure Functions  
+### Serverless-functie - Python Azure Functions
 **Technologieën**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Complexiteit**: Gemiddeld  
-**Concepten**: Event-driven architectuur, serverloos computeren, full-stack ontwikkeling  
+**Concepten**: Event-driven architectuur, serverless computing, full-stack ontwikkeling
 
-### Microservices - Java Spring Boot  
+### Microservices - Java Spring Boot
 **Technologieën**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Complexiteit**: Gemiddeld  
-**Concepten**: Microservices communicatie, gedistribueerde systemen, ondernemingspatronen  
+**Concepten**: Microservices-communicatie, gedistribueerde systemen, enterprisepatronen
 
-### Azure AI Foundry Voorbeelden  
+### Microsoft Foundry-voorbeelden
 
-#### Azure OpenAI Chat App  
+#### Azure OpenAI Chat-app
 **Technologieën**: Azure OpenAI, Cognitive Search, App Service  
 **Complexiteit**: Gemiddeld  
-**Concepten**: RAG-architectuur, vectorzoekopdrachten, LLM-integratie  
+**Concepten**: RAG-architectuur, vectorzoekopdrachten, LLM-integratie
 
-#### AI Documentverwerking  
+#### AI-documentverwerking
 **Technologieën**: Azure AI Document Intelligence, Storage, Functions  
 **Complexiteit**: Gemiddeld  
-**Concepten**: Documentanalyse, OCR, data-extractie  
+**Concepten**: Documentanalyse, OCR, data-extractie
 
-#### Machine Learning Pipeline  
+#### Machine learning-pijplijn
 **Technologieën**: Azure ML, MLOps, Container Registry  
 **Complexiteit**: Geavanceerd  
-**Concepten**: Modeltraining, implementatiepijplijnen, monitoring  
+**Concepten**: Modeltraining, implementatiepijplijnen, monitoring
 
-## 🛠 Configuratievoorbeelden  
+## 🛠 Configuratievoorbeelden
 
-De `configurations/`-directory bevat herbruikbare componenten:  
+De map `configurations/` bevat herbruikbare componenten:
 
-### Omgevingsconfiguraties  
-- Instellingen voor ontwikkelomgevingen  
-- Configuraties voor stagingomgevingen  
-- Productieklare configuraties  
-- Multi-regio implementatieopstellingen  
+### Omgevingsconfiguraties
+- Development-omgevingsinstellingen
+- Staging-omgevingsconfiguraties
+- Productieklare configuraties
+- Multi-regio-implementatieopstellingen
 
-### Bicep-modules  
-- Herbruikbare infrastructuurcomponenten  
-- Veelvoorkomende resourcepatronen  
-- Beveiligingsgeharde templates  
-- Kosten-geoptimaliseerde configuraties  
+### Bicep-modules
+- Herbruikbare infrastructuurcomponenten
+- Veelvoorkomende resourcepatronen
+- Security-hardening-sjablonen
+- Kosten-geoptimaliseerde configuraties
 
-### Hulpscripts  
-- Automatisering van omgevingsinstellingen  
-- Database-migratiescripts  
-- Tools voor validatie van implementaties  
-- Hulpmiddelen voor kostenmonitoring  
+### Hulpscripts
+- Automatisering van omgevingssetup
+- Database-migratiescripts
+- Validatietools voor implementatie
+- Hulpprogramma's voor kostenmonitoring
 
-## 🔧 Aanpassingsgids  
+## 🔧 Aanpassingshandleiding
 
-### Voorbeelden aanpassen aan jouw use case  
+### Voorbeelden aanpassen aan uw gebruiksscenario
 
-1. **Controleer vereisten**  
-   - Controleer Azure-servicevereisten  
-   - Verifieer abonnementslimieten  
-   - Begrijp kostenimplicaties  
+1. **Bekijk vereisten**
+   - Controleer Azure-servicevereisten
+   - Verifieer abonnementslimieten
+   - Begrijp kostenimplicaties
 
-2. **Wijzig configuratie**  
-   - Werk `azure.yaml` service-definities bij  
-   - Pas Bicep-templates aan  
-   - Stel omgevingsvariabelen in  
+2. **Wijzig configuratie**
+   - Werk `azure.yaml` service-definities bij
+   - Pas Bicep-sjablonen aan
+   - Stel omgevingsvariabelen bij
 
-3. **Test grondig**  
-   - Implementeer eerst in ontwikkelomgeving  
-   - Valideer functionaliteit  
-   - Test schaalbaarheid en prestaties  
+3. **Test grondig**
+   - Implementeer eerst in de ontwikkelomgeving
+   - Valideer functionaliteit
+   - Test schaling en prestaties
 
-4. **Beveiligingscontrole**  
-   - Controleer toegangsbeheer  
-   - Implementeer geheimenbeheer  
-   - Schakel monitoring en waarschuwingen in  
+4. **Beveiligingsreview**
+   - Controleer toegangscontroles
+   - Implementeer geheimenbeheer
+   - Schakel monitoring en alerting in
 
-## 📊 Vergelijkingsmatrix  
+## 📊 Vergelijkingsmatrix
 
-| Voorbeeld | Services | Database | Auth | Monitoring | Complexiteit |  
-|-----------|----------|----------|------|------------|--------------|  
-| **Azure OpenAI Chat** (Lokaal) | 2 | ❌ | Key Vault | Volledig | ⭐⭐ |  
-| **Python Flask API** (Lokaal) | 1 | ❌ | Basis | Volledig | ⭐ |  
-| **Microservices** (Lokaal) | 5+ | ✅ | Onderneming | Geavanceerd | ⭐⭐⭐⭐ |  
-| Node.js Express Todo | 2 | ✅ | Basis | Basis | ⭐ |  
-| React SPA + Functions | 3 | ✅ | Basis | Volledig | ⭐ |  
-| Python Flask Container | 2 | ❌ | Basis | Volledig | ⭐ |  
-| C# Web API + SQL | 2 | ✅ | Volledig | Volledig | ⭐⭐ |  
-| Python Functions + SPA | 3 | ✅ | Volledig | Volledig | ⭐⭐ |  
-| Java Microservices | 5+ | ✅ | Volledig | Volledig | ⭐⭐ |  
-| Azure OpenAI Chat | 3 | ✅ | Volledig | Volledig | ⭐⭐⭐ |  
-| AI Documentverwerking | 2 | ❌ | Basis | Volledig | ⭐⭐ |  
-| ML Pipeline | 4+ | ✅ | Volledig | Volledig | ⭐⭐⭐⭐ |  
-| **Retail Multi-Agent** (Lokaal) | **8+** | **✅** | **Onderneming** | **Geavanceerd** | **⭐⭐⭐⭐** |  
+| Voorbeeld | Services | Database | Authenticatie | Monitoring | Complexiteit |
+|---------|----------|----------|------|------------|------------|
+| **Azure OpenAI Chat** (Lokaal) | 2 | ❌ | Key Vault | Volledig | ⭐⭐ |
+| **Python Flask API** (Lokaal) | 1 | ❌ | Basis | Volledig | ⭐ |
+| **Microservices** (Lokaal) | 5+ | ✅ | Enterprise | Geavanceerd | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Basis | Basis | ⭐ |
+| React SPA + Functions | 3 | ✅ | Basis | Volledig | ⭐ |
+| Python Flask Container | 2 | ❌ | Basis | Volledig | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Volledig | Volledig | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Volledig | Volledig | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Volledig | Volledig | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Volledig | Volledig | ⭐⭐⭐ |
+| AI-documentverwerking | 2 | ❌ | Basis | Volledig | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Volledig | Volledig | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** (Lokaal) | **8+** | **✅** | **Enterprise** | **Geavanceerd** | **⭐⭐⭐⭐** |
 
-## 🎓 Leerpad  
+## 🎓 Leerpad
 
-### Aanbevolen volgorde  
+### Aanbevolen volgorde
 
-1. **Begin met eenvoudige webapp**  
-   - Leer basisconcepten van AZD  
-   - Begrijp implementatieworkflow  
-   - Oefen met omgevingsbeheer  
+1. **Begin met Eenvoudige webapp**
+   - Leer basisconcepten van AZD
+   - Begrijp de implementatiestroom
+   - Oefen met omgevingsbeheer
 
-2. **Probeer statische website**  
-   - Verken verschillende hostingopties  
-   - Leer over CDN-integratie  
-   - Begrijp DNS-configuratie  
+2. **Probeer Statische website**
+   - Verken verschillende hostingopties
+   - Leer over CDN-integratie
+   - Begrijp DNS-configuratie
 
-3. **Ga verder met Container App**  
-   - Leer basisprincipes van containerisatie  
-   - Begrijp schaalconcepten  
-   - Oefen met Docker  
+3. **Ga naar Container App**
+   - Leer containerisatiebasisprincipes
+   - Begrijp schaalconcepten
+   - Oefen met Docker
 
-4. **Voeg database-integratie toe**  
-   - Leer databasevoorziening  
-   - Begrijp verbindingsstrings  
-   - Oefen geheimenbeheer  
+4. **Voeg database-integratie toe**
+   - Leer databaseprovisioning
+   - Begrijp connectiestrings
+   - Oefen met geheimenbeheer
 
-5. **Verken serverloos**  
-   - Begrijp event-driven architectuur  
-   - Leer over triggers en bindings  
-   - Oefen met API's  
+5. **Verken Serverless**
+   - Begrijp event-driven architectuur
+   - Leer over triggers en bindings
+   - Oefen met API's
 
-6. **Bouw microservices**  
-   - Leer servicecommunicatie  
-   - Begrijp gedistribueerde systemen  
-   - Oefen complexe implementaties  
+6. **Bouw Microservices**
+   - Leer servicecommunicatie
+   - Begrijp gedistribueerde systemen
+   - Oefen met complexe implementaties
 
-## 🔍 Het juiste voorbeeld vinden  
+## 🔍 Het juiste voorbeeld vinden
 
-### Op technologie stack  
-- **Container Apps**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokaal)](../../../examples/container-app/microservices), Java Microservices  
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Lokaal)](../../../examples/container-app/microservices)  
-- **Python**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Lokaal)](../../../examples/container-app/microservices), Python Functions + SPA  
-- **C#**: [Microservices Order Service (Lokaal)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline  
-- **Go**: [Microservices User Service (Lokaal)](../../../examples/container-app/microservices)  
-- **Java**: Java Spring Boot Microservices  
-- **React**: React SPA + Functions  
-- **Containers**: [Python Flask (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokaal)](../../../examples/container-app/microservices), Java Microservices  
-- **Databases**: [Microservices (Lokaal)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
-- **AI/ML**: **[Azure OpenAI Chat (Lokaal)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Documentverwerking, ML Pipeline, **Retail Multi-Agent Solution**  
-- **Multi-Agent Systemen**: **Retail Multi-Agent Solution**  
-- **OpenAI-integratie**: **[Azure OpenAI Chat (Lokaal)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution  
-- **Onderneming Productie**: [Microservices (Lokaal)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
+### Per technologiestack
+- **Container Apps**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokaal)](../../../examples/container-app/microservices), Java Microservices
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Lokaal)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Lokaal)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Microservices Order Service (Lokaal)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Lokaal)](../../../examples/container-app/microservices)
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Containers**: [Python Flask (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokaal)](../../../examples/container-app/microservices), Java Microservices
+- **Databases**: [Microservices (Lokaal)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI-documentverwerking, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
+- **OpenAI Integration**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Enterprise Production**: [Microservices (Lokaal)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Op architectuurpatroon  
-- **Eenvoudige REST API**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api)  
-- **Monolithisch**: Node.js Express Todo, C# Web API + SQL  
-- **Statisch + Serverloos**: React SPA + Functions, Python Functions + SPA  
-- **Microservices**: [Productie Microservices (Lokaal)](../../../examples/container-app/microservices), Java Spring Boot Microservices  
-- **Containerized**: [Python Flask (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokaal)](../../../examples/container-app/microservices)  
-- **AI-gestuurd**: **[Azure OpenAI Chat (Lokaal)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Documentverwerking, ML Pipeline, **Retail Multi-Agent Solution**  
-- **Multi-Agent Architectuur**: **Retail Multi-Agent Solution**  
-- **Onderneming Multi-Service**: [Microservices (Lokaal)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
+### Per architectuurpatroon
+- **Eenvoudige REST API**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api)
+- **Monolithisch**: Node.js Express Todo, C# Web API + SQL
+- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: [Production Microservices (Lokaal)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Gecontaineriseerd**: [Python Flask (Lokaal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokaal)](../../../examples/container-app/microservices)
+- **AI-aangedreven**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI-documentverwerking, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Architectuur**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: [Microservices (Lokaal)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Op complexiteitsniveau  
-- **Beginner**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
-- **Gemiddeld**: **[Azure OpenAI Chat (Lokaal)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Documentverwerking  
-- **Geavanceerd**: ML Pipeline  
-- **Onderneming Productieklaar**: [Microservices (Lokaal)](../../../examples/container-app/microservices) (Multi-service met berichtwachtrijen), **Retail Multi-Agent Solution** (Compleet multi-agent systeem met ARM-template implementatie)  
+### Per complexiteitsniveau
+- **Beginner**: [Python Flask API (Lokaal)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Gemiddeld**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI-documentverwerking
+- **Geavanceerd**: ML Pipeline
+- **Enterprise productieklaar**: [Microservices (Lokaal)](../../../examples/container-app/microservices) (Multi-service met message queuing), **Retail Multi-Agent Solution** (Complete multi-agent-systeem met ARM-sjabloonimplementatie)
 
-## 📚 Aanvullende bronnen  
+## 📚 Aanvullende bronnen
 
-### Documentatielinks  
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)  
-- [Bicep Documentatie](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [Azure Architectuurcentrum](https://learn.microsoft.com/en-us/azure/architecture/)  
+### Documentatielinks
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Communityvoorbeelden  
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)  
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)  
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)  
-- [Todo App met C# en Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)  
-- [Todo App met Python en MongoDB](https://github.com/Azure-Samples/todo-python-mongo)  
-- [Todo App met Node.js en PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React Web App met C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+### Community-voorbeelden
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo-app met Node.js en PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React-webapp met C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps-taak](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions met Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Best Practices
+### Beste praktijken
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Voorbeelden Bijdragen
+## 🤝 Voorbeelden bijdragen
 
 Heb je een nuttig voorbeeld om te delen? We verwelkomen bijdragen!
 
-### Richtlijnen voor Inzending
-1. Volg de bestaande mapstructuur
+### Richtlijnen voor inzendingen
+1. Volg de vastgestelde mappenstructuur
 2. Voeg een uitgebreide README.md toe
 3. Voeg opmerkingen toe aan configuratiebestanden
 4. Test grondig voordat je indient
 5. Voeg kostenramingen en vereisten toe
 
-### Voorbeeld Template Structuur
+### Voorbeeldsjabloonstructuur
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -621,46 +612,46 @@ example-name/
 
 ---
 
-**Pro Tip**: Begin met het eenvoudigste voorbeeld dat past bij jouw technologie-stack en werk geleidelijk naar complexere scenario's. Elk voorbeeld bouwt voort op concepten uit de vorige!
+**Pro Tip**: Begin met het eenvoudigste voorbeeld dat bij je technologiestack past, en werk geleidelijk naar complexere scenario's toe. Elk voorbeeld bouwt voort op concepten uit de vorige voorbeelden!
 
-## 🚀 Klaar om te Beginnen?
+## 🚀 Klaar om te beginnen?
 
-### Jouw Leerpad
+### Jouw leerpad
 
-1. **Helemaal nieuw?** → Begin met [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 minuten)
-2. **Basiskennis van AZD?** → Probeer [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 minuten)
-3. **AI-apps bouwen?** → Begin met [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 minuten) of verken [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ uur)
-4. **Specifieke technologie-stack nodig?** → Gebruik [Het juiste voorbeeld vinden](../../../examples) sectie hierboven
+1. **Volledige beginner?** → Begin met [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 min)
+2. **Heb je basiskennis van AZD?** → Probeer [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 min)
+3. **AI-apps bouwen?** → Begin met [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 min) of verken [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ uur)
+4. **Een specifieke techstack nodig?** → Gebruik de sectie [Het juiste voorbeeld vinden](../../../examples) hierboven
 
-### Volgende Stappen
+### Volgende stappen
 
 - ✅ Bekijk [Vereisten](../../../examples) hierboven
-- ✅ Kies een voorbeeld dat past bij jouw vaardigheidsniveau (zie [Complexiteit Legenda](../../../examples))
-- ✅ Lees de README van het voorbeeld grondig door voordat je het implementeert
-- ✅ Stel een herinnering in om `azd down` uit te voeren na het testen
-- ✅ Deel je ervaring via GitHub Issues of Discussies
+- ✅ Kies een voorbeeld dat bij je vaardigheidsniveau past (zie [Complexiteitslegenda](../../../examples))
+- ✅ Lees de README van het voorbeeld grondig voordat je het implementeert
+- ✅ Zet een herinnering om `azd down` uit te voeren na het testen
+- ✅ Deel je ervaring via GitHub Issues of Discussions
 
-### Hulp Nodig?
+### Hulp nodig?
 
 - 📖 [FAQ](../resources/faq.md) - Veelgestelde vragen beantwoord
-- 🐛 [Probleemoplossingsgids](../docs/troubleshooting/common-issues.md) - Los implementatieproblemen op
-- 💬 [GitHub Discussies](https://github.com/microsoft/AZD-for-beginners/discussions) - Stel vragen aan de community
-- 📚 [Studiegids](../resources/study-guide.md) - Versterk je kennis
+- 🐛 [Troubleshooting Guide](../docs/chapter-07-troubleshooting/common-issues.md) - Los implementatieproblemen op
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Stel vragen aan de community
+- 📚 [Study Guide](../resources/study-guide.md) - Versterk je kennis
 
 ---
 
 **Navigatie**
-- **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
-- **📖 Studiematerialen**: [Studiegids](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Woordenlijst](../resources/glossary.md)
-- **🔧 Hulpbronnen**: [FAQ](../resources/faq.md) | [Probleemoplossing](../docs/troubleshooting/common-issues.md)
+- **📚 Cursusstartpagina**: [AZD For Beginners](../README.md)
+- **📖 Studiemateriaal**: [Study Guide](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)
+- **🔧 Hulpbronnen**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Laatst bijgewerkt: november 2025 | [Meld Problemen](https://github.com/microsoft/AZD-for-beginners/issues) | [Bijdragen Voorbeelden](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Laatst bijgewerkt: November 2025 | [Problemen melden](https://github.com/microsoft/AZD-for-beginners/issues) | [Voorbeelden bijdragen](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, moet u zich ervan bewust zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

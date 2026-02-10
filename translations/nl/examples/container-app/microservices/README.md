@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-21T17:56:32+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "nl"
-}
--->
-# Microservices Architectuur - Container App Voorbeeld
+# Microservices-architectuur - Container App-voorbeeld
 
-⏱️ **Geschatte Tijd**: 25-35 minuten | 💰 **Geschatte Kosten**: ~$50-100/maand | ⭐ **Complexiteit**: Gevorderd
+⏱️ **Geschatte tijd**: 25-35 minuten | 💰 **Geschatte kosten**: ~$50-100/maand | ⭐ **Complexiteit**: Geavanceerd
 
-Een **vereenvoudigde maar functionele** microservices architectuur geïmplementeerd op Azure Container Apps met behulp van AZD CLI. Dit voorbeeld demonstreert communicatie tussen services, container orkestratie en monitoring met een praktische setup van 2 services.
+Een **vereenvoudigde maar functionele** microservices-architectuur die wordt uitgerold naar Azure Container Apps met behulp van AZD CLI. Dit voorbeeld laat service-naar-service communicatie, containerorchestratie en monitoring zien met een praktische opzet van 2 services.
 
-> **📚 Leerbenadering**: Dit voorbeeld begint met een minimale architectuur van 2 services (API Gateway + Backend Service) die je daadwerkelijk kunt implementeren en van kunt leren. Nadat je deze basis beheerst, bieden we richtlijnen voor uitbreiding naar een volledige microservices-ecosysteem.
+> **📚 Leerbenadering**: Dit voorbeeld begint met een minimale architectuur van 2 services (API Gateway + Backend Service) die je daadwerkelijk kunt uitrollen en van kunt leren. Nadat je deze basis beheerst, bieden we begeleiding om uit te breiden naar een volledig microservices-ecosysteem.
 
-## Wat Je Leert
+## Wat je leert
 
-Door dit voorbeeld te voltooien, leer je:
-- Meerdere containers implementeren op Azure Container Apps
+Door dit voorbeeld te voltooien, zul je:
+- Meerdere containers naar Azure Container Apps uitrollen
 - Service-naar-service communicatie implementeren met intern netwerk
-- Omgevingsgebaseerde schaalvergroting en gezondheidscontroles configureren
+- Schaalinstellingen en health checks configureren op basis van de omgeving
 - Gedistribueerde applicaties monitoren met Application Insights
-- Microservices implementatiepatronen en best practices begrijpen
-- Progressieve uitbreiding van eenvoudige naar complexe architecturen
+- Deployment-patronen en best practices voor microservices begrijpen
+- Leren hoe je stapsgewijs uitbreidt van eenvoudige naar complexere architecturen
 
 ## Architectuur
 
-### Fase 1: Wat We Bouwen (Inbegrepen in Dit Voorbeeld)
+### Fase 1: Wat we bouwen (opgenomen in dit voorbeeld)
 
 ```
                     ┌─────────────────────────────┐
@@ -60,18 +51,16 @@ Door dit voorbeeld te voltooien, leer je:
                     └─────────────────────────────┘
 ```
 
-**Waarom Simpel Beginnen?**
-- ✅ Snel implementeren en begrijpen (25-35 minuten)
-- ✅ Leer de kernpatronen van microservices zonder complexiteit
+**Waarom eenvoudig beginnen?**
+- ✅ Snel uitrollen en begrijpen (25-35 minuten)
+- ✅ Leer kernpatronen van microservices zonder complexiteit
 - ✅ Werkende code die je kunt aanpassen en mee experimenteren
-- ✅ Lagere kosten voor leren (~$50-100/maand vs $300-1400/maand)
-- ✅ Vertrouwen opbouwen voordat je databases en message queues toevoegt
+- ✅ Lagere kosten om te leren (~$50-100/maand vs $300-1400/maand)
+- ✅ Bouw vertrouwen op voordat je databases en message queues toevoegt
 
-**Analogie**: Zie het als leren autorijden. Je begint op een lege parkeerplaats (2 services), beheerst de basis, en gaat dan verder naar stadsverkeer (5+ services met databases).
+**Analogie**: Zie het als leren autorijden. Je begint op een lege parkeerplaats (2 services), beheerst de basis en gaat vervolgens naar het stadsverkeer (5+ services met databases).
 
-### Fase 2: Toekomstige Uitbreiding (Referentie Architectuur)
-
-Zodra je de architectuur met 2 services beheerst, kun je uitbreiden naar:
+### Fase 2: Toekomstige uitbreiding (referentiearchitectuur)
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -88,117 +77,117 @@ Full Architecture (Not Included - For Reference)
 
 Zie de sectie "Uitbreidingsgids" aan het einde voor stapsgewijze instructies.
 
-## Inbegrepen Functionaliteiten
+## Inbegrepen functies
 
-✅ **Service Discovery**: Automatische DNS-gebaseerde ontdekking tussen containers  
-✅ **Load Balancing**: Ingebouwde load balancing over replica's  
+✅ **Service discovery**: Automatische DNS-gebaseerde ontdekking tussen containers  
+✅ **Load balancing**: Ingebouwde load balancing over replicas  
 ✅ **Auto-scaling**: Onafhankelijke schaalvergroting per service op basis van HTTP-verzoeken  
-✅ **Gezondheidsmonitoring**: Liveness- en readiness-probes voor beide services  
-✅ **Gedistribueerde Logging**: Gecentraliseerde logging met Application Insights  
-✅ **Intern Netwerk**: Veilige service-naar-service communicatie  
-✅ **Container Orkestratie**: Automatische implementatie en schaalvergroting  
-✅ **Zero-Downtime Updates**: Rolling updates met revisiebeheer  
+✅ **Health monitoring**: Liveness- en readiness-probes voor beide services  
+✅ **Distributed logging**: Gecentraliseerde logging met Application Insights  
+✅ **Internal networking**: Beveiligde service-naar-service communicatie  
+✅ **Containerorchestratie**: Automatische uitrol en schaling  
+✅ **Updates zonder downtime**: Rolling updates met revisiebeheer  
 
 ## Vereisten
 
-### Benodigde Tools
+### Benodigde tools
 
-Controleer voordat je begint of je deze tools hebt geïnstalleerd:
+Controleer voordat je begint of je deze tools geïnstalleerd hebt:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versie 1.0.0 of hoger)  
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versie 1.0.0 of hoger)
    ```bash
    azd version
-   # Verwachte output: azd versie 1.0.0 of hoger
+   # Verwachte uitvoer: azd versie 1.0.0 of hoger
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versie 2.50.0 of hoger)  
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versie 2.50.0 of hoger)
    ```bash
    az --version
-   # Verwachte output: azure-cli 2.50.0 of hoger
+   # Verwachte uitvoer: azure-cli 2.50.0 of hoger
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (voor lokale ontwikkeling/testen - optioneel)  
+3. **[Docker](https://www.docker.com/get-started)** (voor lokale ontwikkeling/testen - optioneel)
    ```bash
    docker --version
-   # Verwachte output: Docker versie 20.10 of hoger
+   # Verwachte uitvoer: Docker-versie 20.10 of hoger
    ```
 
-### Azure Vereisten
+### Azure-vereisten
 
-- Een actieve **Azure-abonnement** ([maak een gratis account aan](https://azure.microsoft.com/free/))
-- Machtigingen om resources te maken in je abonnement
-- **Contributor** rol op het abonnement of resourcegroep
+- Een actief **Azure-abonnement** ([maak een gratis account](https://azure.microsoft.com/free/))
+- Machtigingen om resources in je abonnement te maken
+- De rol **Contributor** op het abonnement of de resource group
 
-### Kennisvereisten
+### Vereiste kennis
 
-Dit is een **gevorderd niveau** voorbeeld. Je zou moeten:
-- Het [Simple Flask API voorbeeld](../../../../../examples/container-app/simple-flask-api) hebben voltooid
-- Basisbegrip hebben van microservices architectuur
-- Bekend zijn met REST API's en HTTP
-- Begrip hebben van containerconcepten
+Dit is een **gevorderd** voorbeeld. Je zou het volgende moeten beheersen:
+- Het voltooien van het [Eenvoudig Flask API-voorbeeld](../../../../../examples/container-app/simple-flask-api) 
+- Basisbegrip van microservices-architectuur
+- Bekendheid met REST-API's en HTTP
+- Begrip van containerconcepten
 
-**Nieuw met Container Apps?** Begin eerst met het [Simple Flask API voorbeeld](../../../../../examples/container-app/simple-flask-api) om de basis te leren.
+**Nieuw met Container Apps?** Begin eerst met het [Eenvoudig Flask API-voorbeeld](../../../../../examples/container-app/simple-flask-api) om de basis te leren.
 
-## Snel Starten (Stapsgewijs)
+## Snelle start (Stap-voor-stap)
 
-### Stap 1: Clone en Navigeer
+### Stap 1: Klonen en navigeren
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Succescontrole**: Controleer of je `azure.yaml` ziet:  
+**✓ Succescontrole**: Controleer of je `azure.yaml` ziet:
 ```bash
 ls
 # Verwacht: README.md, azure.yaml, infra/, src/
 ```
 
-### Stap 2: Authenticeer met Azure
+### Stap 2: Authentiseren bij Azure
 
 ```bash
 azd auth login
 ```
 
-Dit opent je browser voor Azure-authenticatie. Log in met je Azure-gegevens.
+Dit opent je browser voor Azure-authenticatie. Meld je aan met je Azure-referenties.
 
-**✓ Succescontrole**: Je zou moeten zien:  
+**✓ Succescontrole**: Je zou het volgende moeten zien:
 ```
 Logged in to Azure.
 ```
 
-### Stap 3: Initialiseer de Omgeving
+### Stap 3: Initialiseer de omgeving
 
 ```bash
 azd init
 ```
 
-**Prompts die je ziet**:
-- **Omgevingsnaam**: Voer een korte naam in (bijv. `microservices-dev`)
-- **Azure-abonnement**: Selecteer je abonnement
-- **Azure-locatie**: Kies een regio (bijv. `eastus`, `westeurope`)
+**Vragen die je ziet**:
+- **Environment name**: Enter a short name (e.g., `microservices-dev`)
+- **Azure subscription**: Selecteer je abonnement
+- **Azure location**: Kies een regio (bijv. `eastus`, `westeurope`)
 
-**✓ Succescontrole**: Je zou moeten zien:  
+**✓ Succescontrole**: Je zou het volgende moeten zien:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Stap 4: Implementeer Infrastructuur en Services
+### Stap 4: Infrastructuur en services uitrollen
 
 ```bash
 azd up
 ```
 
 **Wat er gebeurt** (duurt 8-12 minuten):
-1. Creëert Container Apps omgeving
-2. Creëert Application Insights voor monitoring
-3. Bouwt API Gateway container (Node.js)
-4. Bouwt Product Service container (Python)
-5. Implementeert beide containers op Azure
-6. Configureert netwerk en gezondheidscontroles
+1. Maakt Container Apps-omgeving aan
+2. Maakt Application Insights aan voor monitoring
+3. Bouwt API Gateway-container (Node.js)
+4. Bouwt Product Service-container (Python)
+5. Rol beide containers naar Azure uit
+6. Configureert netwerken en health checks
 7. Stelt monitoring en logging in
 
-**✓ Succescontrole**: Je zou moeten zien:  
+**✓ Succescontrole**: Je zou het volgende moeten zien:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -206,37 +195,37 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ Tijd**: 8-12 minuten
 
-### Stap 5: Test de Implementatie
+### Stap 5: Test de uitrol
 
 ```bash
 # Haal het gateway-eindpunt op
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Test de gezondheid van de API Gateway
+# Test de gezondheid van de API-gateway
 curl $GATEWAY_URL/health
 
-# Verwachte output:
+# Verwachte uitvoer:
 # {"status":"gezond","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Test productservice via gateway**:  
+**Test de productservice via de gateway**:
 ```bash
-# Lijst producten
+# Producten weergeven
 curl $GATEWAY_URL/api/products
 
-# Verwachte output:
+# Verwachte uitvoer:
 # [
-#   {"id":1,"name":"Laptop","price":999.99,"stock":50},
-#   {"id":2,"name":"Muis","price":29.99,"stock":200},
-#   {"id":3,"name":"Toetsenbord","price":79.99,"stock":150}
+#   {"id":1,"naam":"Laptop","prijs":999.99,"voorraad":50},
+#   {"id":2,"naam":"Muis","prijs":29.99,"voorraad":200},
+#   {"id":3,"naam":"Toetsenbord","prijs":79.99,"voorraad":150}
 # ]
 ```
 
-**✓ Succescontrole**: Beide endpoints retourneren JSON-data zonder fouten.
+**✓ Succescontrole**: Beide endpoints geven JSON-data terug zonder fouten.
 
 ---
 
-**🎉 Gefeliciteerd!** Je hebt een microservices architectuur geïmplementeerd op Azure!
+**🎉 Gefeliciteerd!** Je hebt een microservices-architectuur naar Azure uitgerold!
 
 ## Projectstructuur
 
@@ -270,46 +259,46 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Wat Elk Component Doet:**
+**Wat elk component doet:**
 
 **Infrastructuur (infra/)**:
 - `main.bicep`: Orkestreert alle Azure-resources en hun afhankelijkheden
-- `core/container-apps-environment.bicep`: Creëert de Container Apps omgeving en Azure Container Registry
+- `core/container-apps-environment.bicep`: Maakt de Container Apps-omgeving en Azure Container Registry aan
 - `core/monitor.bicep`: Stelt Application Insights in voor gedistribueerde logging
-- `app/*.bicep`: Individuele container app-definities met schaalvergroting en gezondheidscontroles
+- `app/*.bicep`: Individuele container appdefinities met schaling en health checks
 
 **API Gateway (src/api-gateway/)**:
-- Publiek toegankelijke service die verzoeken doorstuurt naar backend services
-- Implementeert logging, foutafhandeling en verzoekdoorsturing
-- Demonstreert service-naar-service HTTP-communicatie
+- Publiek toegankelijke service die verzoeken naar backendservices doorstuurt
+- Implementeert logging, foutafhandeling en doorsturen van verzoeken
+- Toont service-naar-service HTTP-communicatie
 
 **Product Service (src/product-service/)**:
 - Interne service met productcatalogus (in-memory voor eenvoud)
-- REST API met gezondheidscontroles
-- Voorbeeld van backend microservice patroon
+- REST-API met health checks
+- Voorbeeld van een backend microservicepatroon
 
-## Services Overzicht
+## Overzicht van services
 
 ### API Gateway (Node.js/Express)
 
 **Poort**: 8080  
 **Toegang**: Publiek (externe ingress)  
-**Doel**: Stuurt inkomende verzoeken door naar de juiste backend services  
+**Doel**: Stuurt binnenkomende verzoeken naar de juiste backendservices  
 
 **Endpoints**:
-- `GET /` - Service-informatie
-- `GET /health` - Endpoint voor gezondheidscontrole
-- `GET /api/products` - Doorsturen naar productservice (lijst alles)
-- `GET /api/products/:id` - Doorsturen naar productservice (op ID ophalen)
+- `GET /` - Service information
+- `GET /health` - Health check endpoint
+- `GET /api/products` - Forward to product service (list all)
+- `GET /api/products/:id` - Forward to product service (get by ID)
 
-**Belangrijke Functionaliteiten**:
-- Verzoekdoorsturing met axios
+**Belangrijkste kenmerken**:
+- Verzoekroutering met axios
 - Gecentraliseerde logging
 - Foutafhandeling en time-outbeheer
-- Service discovery via omgevingsvariabelen
+- Service-discovery via omgevingsvariabelen
 - Integratie met Application Insights
 
-**Code Highlight** (`src/api-gateway/app.js`):  
+**Codevoorbeeld** (`src/api-gateway/app.js`):
 ```javascript
 // Interne servicecommunicatie
 app.get('/api/products', async (req, res) => {
@@ -325,19 +314,19 @@ app.get('/api/products', async (req, res) => {
 **Doel**: Beheert productcatalogus met in-memory data  
 
 **Endpoints**:
-- `GET /` - Service-informatie
-- `GET /health` - Endpoint voor gezondheidscontrole
-- `GET /products` - Lijst alle producten
-- `GET /products/<id>` - Haal product op ID op
+- `GET /` - Service information
+- `GET /health` - Health check endpoint
+- `GET /products` - List all products
+- `GET /products/<id>` - Get product by ID
 
-**Belangrijke Functionaliteiten**:
+**Belangrijkste kenmerken**:
 - RESTful API met Flask
 - In-memory productopslag (eenvoudig, geen database nodig)
-- Gezondheidsmonitoring met probes
+- Health-monitoring met probes
 - Gestructureerde logging
 - Integratie met Application Insights
 
-**Datamodel**:  
+**Datamodel**:
 ```python
 {
   "id": 1,
@@ -348,79 +337,79 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Waarom Alleen Intern?**
-De productservice is niet publiekelijk toegankelijk. Alle verzoeken moeten via de API Gateway gaan, wat biedt:
-- Veiligheid: Gecontroleerd toegangspunt
-- Flexibiliteit: Kan backend wijzigen zonder impact op clients
+**Waarom alleen intern?**
+De productservice is niet publiekelijk toegankelijk. Alle verzoeken moeten via de API Gateway lopen, die biedt:
+- Beveiliging: Gecontroleerd toegangspunt
+- Flexibiliteit: Kan de backend wijzigen zonder clients te beïnvloeden
 - Monitoring: Gecentraliseerde verzoeklogging
 
-## Begrip van Service Communicatie
+## Begrijpen van servicecommunicatie
 
-### Hoe Services Met Elkaar Praten
+### Hoe services met elkaar communiceren
 
-In dit voorbeeld communiceert de API Gateway met de Product Service via **interne HTTP-verzoeken**:
+In dit voorbeeld communiceert de API Gateway met de Product Service via **interne HTTP-aanroepen**:
 
 ```javascript
-// API Gateway (src/api-gateway/app.js)
+// API-gateway (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Maak interne HTTP-verzoek
+// Maak interne HTTP-aanvraag
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**Belangrijke Punten**:
+**Belangrijke punten**:
 
-1. **DNS-gebaseerde Ontdekking**: Container Apps biedt automatisch DNS voor interne services
+1. **DNS-gebaseerde ontdekking**: Container Apps verzorgt automatisch DNS voor interne services
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Vereenvoudigd als: `http://product-service` (Container Apps lost dit op)
+   - Simplified as: `http://product-service` (Container Apps resolves it)
 
-2. **Geen Publieke Blootstelling**: Product Service heeft `external: false` in Bicep
-   - Alleen toegankelijk binnen de Container Apps omgeving
+2. **Geen publieke blootstelling**: Product Service heeft `external: false` in Bicep
+   - Alleen toegankelijk binnen de Container Apps-omgeving
    - Niet bereikbaar vanaf het internet
 
-3. **Omgevingsvariabelen**: Service-URL's worden geïnjecteerd tijdens implementatie
+3. **Omgevingsvariabelen**: Service-URL's worden tijdens deployment geïnjecteerd
    - Bicep geeft de interne FQDN door aan de gateway
-   - Geen hardcoded URL's in applicatiecode
+   - Geen hardgecodeerde URL's in de applicatiecode
 
-**Analogie**: Zie dit als kantoorruimtes. De API Gateway is de receptie (publiek toegankelijk), en de Product Service is een kantoorruimte (alleen intern). Bezoekers moeten via de receptie gaan om een kantoor te bereiken.
+**Analogie**: Zie het als kantoorruimtes. De API Gateway is de receptiebalie (publiekelijk), en de Product Service is een kantoorruimte (alleen intern). Bezoekers moeten via de receptie om bij een kantoor te komen.
 
-## Implementatieopties
+## Implementatie-opties
 
-### Volledige Implementatie (Aanbevolen)
+### Volledige implementatie (aanbevolen)
 
 ```bash
-# Implementeer infrastructuur en beide services
+# Implementeer de infrastructuur en beide services
 azd up
 ```
 
-Dit implementeert:
-1. Container Apps omgeving
+Dit wordt uitgerold:
+1. Container Apps-omgeving
 2. Application Insights
 3. Container Registry
-4. API Gateway container
-5. Product Service container
+4. API Gateway-container
+5. Product Service-container
 
 **Tijd**: 8-12 minuten
 
-### Implementeer Individuele Service
+### Een enkele service uitrollen
 
 ```bash
-# Implementeer slechts één service (na de eerste azd up)
+# Implementeer slechts één service (na de initiële azd up)
 azd deploy api-gateway
 
-# Of implementeer productservice
+# Of implementeer de productservice
 azd deploy product-service
 ```
 
-**Gebruikssituatie**: Wanneer je code in één service hebt bijgewerkt en alleen die service opnieuw wilt implementeren.
+**Gebruikssituatie**: Als je code in één service hebt bijgewerkt en alleen die service opnieuw wilt uitrollen.
 
-### Update Configuratie
+### Configuratie bijwerken
 
 ```bash
 # Wijzig schaalparameters
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Herdeploy met nieuwe configuratie
+# Heruitrollen met nieuwe configuratie
 azd up
 ```
 
@@ -431,16 +420,16 @@ azd up
 Beide services zijn geconfigureerd met HTTP-gebaseerde autoscaling in hun Bicep-bestanden:
 
 **API Gateway**:
-- Min replica's: 2 (altijd minimaal 2 voor beschikbaarheid)
-- Max replica's: 20
-- Schaaltrigger: 50 gelijktijdige verzoeken per replica
+- Min replicas: 2 (altijd minstens 2 voor beschikbaarheid)
+- Max replicas: 20
+- Scale trigger: 50 gelijktijdige verzoeken per replica
 
 **Product Service**:
-- Min replica's: 1 (kan naar nul schalen indien nodig)
-- Max replica's: 10
-- Schaaltrigger: 100 gelijktijdige verzoeken per replica
+- Min replicas: 1 (kan indien nodig naar nul schalen)
+- Max replicas: 10
+- Scale trigger: 100 gelijktijdige verzoeken per replica
 
-**Schaal aanpassen** (in `infra/app/*.bicep`):  
+**Schaalconfiguratie aanpassen** (in `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -458,19 +447,19 @@ scale: {
 }
 ```
 
-### Resource Allocatie
+### Resourcetoewijzing
 
 **API Gateway**:
 - CPU: 1.0 vCPU
-- Geheugen: 2 GiB
-- Reden: Verwerkt al het externe verkeer
+- Memory: 2 GiB
+- Reden: Handelt al het externe verkeer af
 
 **Product Service**:
 - CPU: 0.5 vCPU
-- Geheugen: 1 GiB
-- Reden: Lichtgewicht in-memory operaties
+- Memory: 1 GiB
+- Reden: Lichtgewicht in-memory bewerkingen
 
-### Gezondheidscontroles
+### Healthchecks
 
 Beide services bevatten liveness- en readiness-probes:
 
@@ -497,26 +486,29 @@ probes: [
 ]
 ```
 
-**Wat Dit Betekent**:
-- **Liveness**: Als de gezondheidscontrole faalt, herstart Container Apps de container
-- **Readiness**: Als niet gereed, stopt Container Apps met het routeren van verkeer naar die replica
+**Wat dit betekent**:
+- **Liveness**: Als de healthcheck faalt, herstart Container Apps de container
+- **Readiness**: Als niet klaar, stopt Container Apps met het routeren van verkeer naar die replica
 
-## Monitoring & Observatie
 
-### Bekijk Service Logs
+
+## Monitoring & Observeerbaarheid
+
+### Service-logboeken bekijken
 
 ```bash
+# Bekijk logs met azd monitor
+azd monitor --logs
+
+# Of gebruik de Azure CLI voor specifieke Container Apps:
 # Stream logs van API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Bekijk recente productservicelogs
-azd logs product-service --tail 100
-
-# Bekijk alle logs van beide services
-azd logs --follow
+# Bekijk recente logs van de productservice
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**Verwachte Output**:  
+**Verwachte uitvoer**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -524,11 +516,11 @@ azd logs --follow
 [product-service] Retrieved 5 products
 ```
 
-### Application Insights Queries
+### Application Insights-queries
 
-Toegang tot Application Insights in Azure Portal, voer vervolgens deze queries uit:
+Open Application Insights in de Azure Portal en voer dan deze query's uit:
 
-**Vind Langzame Verzoeken**:  
+**Langzame verzoeken vinden**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -537,7 +529,7 @@ requests
 | order by count_ desc
 ```
 
-**Volg Service-naar-Service Verzoeken**:  
+**Service-naar-service oproepen volgen**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -546,7 +538,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Foutpercentage per Service**:  
+**Foutpercentage per service**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -554,7 +546,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Verzoekvolume Over Tijd**:  
+**Verzoekvolume in de tijd**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -562,51 +554,51 @@ requests
 | render timechart
 ```
 
-### Toegang tot Monitoring Dashboard
+### Toegang tot monitoringdashboard
 
 ```bash
-# Haal Application Insights-details op
+# Application Insights-details ophalen
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Open Azure Portal monitoring
+# Open monitoring in het Azure-portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Live Metrics
+### Live-metrics
 
-1. Navigeer naar Application Insights in Azure Portal
-2. Klik op "Live Metrics"
-3. Bekijk realtime verzoeken, fouten en prestaties
-4. Test door uit te voeren: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+1. Navigeer naar Application Insights in de Azure Portal
+2. Klik "Live Metrics"
+3. Zie real-time verzoeken, fouten en prestaties
+4. Test door het uitvoeren van: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Praktische Oefeningen
+## Praktische oefeningen
 
-[Opmerking: Zie volledige oefeningen hierboven in de sectie "Praktische Oefeningen" voor gedetailleerde stapsgewijze oefeningen, inclusief implementatieverificatie, gegevenswijziging, autoscaling tests, foutafhandeling en het toevoegen van een derde service.]
+[Opmerking: Zie de volledige oefeningen hierboven in de sectie "Praktische oefeningen" voor gedetailleerde stap-voor-stap oefeningen inclusief verificatie van de uitrol, gegevenswijziging, autoscaling-tests, foutafhandeling en het toevoegen van een derde service.]
 
 ## Kostenanalyse
 
-### Geschatte Maandelijkse Kosten (Voor Dit 2-Service Voorbeeld)
+### Geschatte maandelijkse kosten (voor dit voorbeeld met 2 services)
 
-| Resource | Configuratie | Geschatte Kosten |
+| Resource | Configuratie | Geschatte kosten |
 |----------|--------------|------------------|
-| API Gateway | 2-20 replica's, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 replica's, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Basisniveau | $5 |
+| API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Basic tier | $5 |
 | Application Insights | 1-2 GB/maand | $5-10 |
 | Log Analytics | 1 GB/maand | $3 |
 | **Totaal** | | **$58-243/maand** |
 
-**Kostenverdeling op Basis van Gebruik**:
+Kostenverdeling op basis van gebruik:
 - **Licht verkeer** (testen/leren): ~$60/maand
 - **Gemiddeld verkeer** (kleine productie): ~$120/maand
-- **Hoog verkeer** (drukke periodes): ~$240/maand
+- **Veel verkeer** (drukke perioden): ~$240/maand
 
-### Tips voor Kostenoptimalisatie
+### Tips voor kostenoptimalisatie
 
-1. **Schalen naar Nul voor Ontwikkeling**:  
+1. **Schaal naar nul voor ontwikkeling**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -614,31 +606,31 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Gebruik Consumption Plan voor Cosmos DB** (wanneer je dit toevoegt):
+2. **Gebruik het Consumption-plan voor Cosmos DB** (wanneer je het toevoegt):
    - Betaal alleen voor wat je gebruikt
    - Geen minimale kosten
 
-3. **Stel Application Insights Sampling in**:  
+3. **Stel sampling in voor Application Insights**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Neem 50% van de verzoeken
+   appInsights.defaultClient.config.samplingPercentage = 50; // Neem een steekproef van 50% van de verzoeken
    ```
 
-4. **Ruim Op Wanneer Niet Nodig**:  
+4. **Opruimen wanneer niet nodig**:
    ```bash
    azd down
    ```
 
-### Gratis Niveau Opties
+### Gratis tier-opties
 Voor leren/testen, overweeg:
-- Gebruik Azure gratis tegoed (eerste 30 dagen)
-- Beperk het aantal replica's tot een minimum
-- Verwijder na het testen (geen doorlopende kosten)
+- Gebruik Azure gratis tegoeden (eerste 30 dagen)
+- Beperk het aantal replica's tot het minimum
+- Verwijder na testen (geen doorlopende kosten)
 
 ---
 
-## Opruimen
+## Cleanup
 
-Om doorlopende kosten te vermijden, verwijder alle resources:
+Om lopende kosten te voorkomen, verwijder alle resources:
 
 ```bash
 azd down --force --purge
@@ -652,27 +644,27 @@ azd down --force --purge
 Typ `y` om te bevestigen.
 
 **Wat wordt verwijderd**:
-- Container Apps-omgeving
+- Container Apps Environment
 - Beide Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
-- Resourcegroep
+- Resource Group
 
 **✓ Controleer opruiming**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Moet leeg terugkeren.
+Zou leeg moeten zijn.
 
 ---
 
 ## Uitbreidingsgids: Van 2 naar 5+ services
 
-Zodra je deze 2-service architectuur beheerst, kun je uitbreiden:
+Zodra je deze 2-service architectuur onder de knie hebt, volgt hier hoe je kunt uitbreiden:
 
-### Fase 1: Voeg database-persistentie toe (volgende stap)
+### Fase 1: Databasepersistentie toevoegen (Volgende stap)
 
 **Voeg Cosmos DB toe voor Product Service**:
 
@@ -689,18 +681,18 @@ Zodra je deze 2-service architectuur beheerst, kun je uitbreiden:
    }
    ```
 
-2. Update de product service om Cosmos DB te gebruiken in plaats van in-memory data
+2. Werk de productservice bij om Cosmos DB te gebruiken in plaats van in-memory data
 
 3. Geschatte extra kosten: ~$25/maand (serverless)
 
-### Fase 2: Voeg een derde service toe (Orderbeheer)
+### Fase 2: Derde service toevoegen (Orderbeheer)
 
 **Maak Order Service**:
 
 1. Nieuwe map: `src/order-service/` (Python/Node.js/C#)
 2. Nieuwe Bicep: `infra/app/order-service.bicep`
-3. Update API Gateway om `/api/orders` te routeren
-4. Voeg Azure SQL Database toe voor order-persistentie
+3. Werk API Gateway bij om `/api/orders` te routeren
+4. Voeg Azure SQL Database toe voor orderpersistentie
 
 **Architectuur wordt**:
 ```
@@ -708,59 +700,59 @@ API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Fase 3: Voeg asynchrone communicatie toe (Service Bus)
+### Fase 3: Asynchrone communicatie toevoegen (Service Bus)
 
-**Implementeer event-gedreven architectuur**:
+**Implementeer gebeurtenisgestuurde architectuur**:
 
 1. Voeg Azure Service Bus toe: `infra/core/servicebus.bicep`
-2. Product Service publiceert "ProductCreated"-events
+2. Product Service publiceert "ProductCreated" events
 3. Order Service abonneert zich op productevents
 4. Voeg Notification Service toe om events te verwerken
 
-**Patroon**: Request/Response (HTTP) + Event-Driven (Service Bus)
+**Patroon**: Request/Response (HTTP) + Event-driven (Service Bus)
 
-### Fase 4: Voeg gebruikersauthenticatie toe
+### Fase 4: Gebruikersauthenticatie toevoegen
 
-**Implementeer User Service**:
+**Implementeer Gebruikersservice**:
 
 1. Maak `src/user-service/` (Go/Node.js)
 2. Voeg Azure AD B2C of aangepaste JWT-authenticatie toe
 3. API Gateway valideert tokens
 4. Services controleren gebruikersrechten
 
-### Fase 5: Productiegereedheid
+### Fase 5: Productieklaar maken
 
 **Voeg deze componenten toe**:
 - Azure Front Door (globale load balancing)
-- Azure Key Vault (geheimenbeheer)
+- Azure Key Vault (geheimbeheer)
 - Azure Monitor Workbooks (aangepaste dashboards)
 - CI/CD-pijplijn (GitHub Actions)
-- Blue-Green Deployments
+- Blue-Green-implementaties
 - Managed Identity voor alle services
 
-**Volledige productiekosten architectuur**: ~$300-1.400/maand
+**Volledige productiekosten**: ~$300-1,400/maand
 
 ---
 
-## Meer leren
+## Meer informatie
 
 ### Gerelateerde documentatie
-- [Azure Container Apps Documentatie](https://learn.microsoft.com/azure/container-apps/)
-- [Microservices Architectuurgids](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights voor Gedistribueerde Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Documentatie](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
+- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### Volgende stappen in deze cursus
-- ← Vorige: [Eenvoudige Flask API](../../../../../examples/container-app/simple-flask-api) - Voorbeeld van een enkele container voor beginners
-- → Volgende: [AI Integratiegids](../../../../../examples/docs/ai-foundry) - Voeg AI-mogelijkheden toe
-- 🏠 [Cursus Home](../../README.md)
+- ← Vorige: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Beginner single-container voorbeeld
+- → Volgende: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI-mogelijkheden toevoegen
+- 🏠 [Course Home](../../README.md)
 
-### Vergelijking: Wanneer gebruik je wat
+### Vergelijking: Wanneer wat te gebruiken
 
-**Enkele Container App** (Eenvoudige Flask API voorbeeld):
+**Single Container App** (Eenvoudig Flask API-voorbeeld):
 - ✅ Eenvoudige applicaties
 - ✅ Monolithische architectuur
-- ✅ Snel te implementeren
+- ✅ Snelle deployment
 - ❌ Beperkte schaalbaarheid
 - **Kosten**: ~$15-50/maand
 
@@ -768,35 +760,35 @@ API Gateway → Product Service (Cosmos DB)
 - ✅ Complexe applicaties
 - ✅ Onafhankelijke schaalbaarheid per service
 - ✅ Teamautonomie (verschillende services, verschillende teams)
-- ❌ Complexer te beheren
+- ❌ Moeilijker te beheren
 - **Kosten**: ~$60-250/maand
 
 **Kubernetes (AKS)**:
 - ✅ Maximale controle en flexibiliteit
-- ✅ Multi-cloud portabiliteit
-- ✅ Geavanceerde netwerken
+- ✅ Multi-cloud draagbaarheid
+- ✅ Geavanceerde netwerkfunctionaliteit
 - ❌ Vereist Kubernetes-expertise
-- **Kosten**: ~$150-500/maand minimum
+- **Kosten**: ~$150-500/maand minimaal
 
-**Aanbeveling**: Begin met Container Apps (dit voorbeeld), schakel over naar AKS alleen als je Kubernetes-specifieke functies nodig hebt.
+**Aanbeveling**: Begin met Container Apps (dit voorbeeld), ga pas naar AKS als je Kubernetes-specifieke functies nodig hebt.
 
 ---
 
 ## Veelgestelde vragen
 
-**V: Waarom slechts 2 services in plaats van 5+?**  
-A: Educatieve opbouw. Beheers de basis (servicecommunicatie, monitoring, schaalbaarheid) met een eenvoudig voorbeeld voordat je complexiteit toevoegt. De patronen die je hier leert, zijn toepasbaar op architecturen met 100 services.
+**Q: Waarom slechts 2 services in plaats van 5+?**  
+A: Educatieve opbouw. Beheers de basisprincipes (servicecommunicatie, monitoring, schaaling) met een eenvoudig voorbeeld vóórdat je complexiteit toevoegt. De patronen die je hier leert, zijn toepasbaar op 100-service architecturen.
 
-**V: Kan ik zelf meer services toevoegen?**  
-A: Absoluut! Volg de uitbreidingsgids hierboven. Elke nieuwe service volgt hetzelfde patroon: maak een src-map, maak een Bicep-bestand, update azure.yaml, implementeer.
+**Q: Kan ik zelf meer services toevoegen?**  
+A: Absoluut! Volg de uitbreidingsgids hierboven. Elke nieuwe service volgt hetzelfde patroon: maak een src-map, maak een Bicep-bestand, werk azure.yaml bij, deploy.
 
-**V: Is dit productie-klaar?**  
-A: Het is een solide basis. Voor productie, voeg toe: managed identity, Key Vault, persistente databases, CI/CD-pijplijn, monitoring alerts en een back-upstrategie.
+**Q: Is dit productieklaar?**  
+A: Het is een solide basis. Voor productie voeg je toe: managed identity, Key Vault, persistente databases, CI/CD-pijplijn, monitoringalerts en backup-strategie.
 
-**V: Waarom geen Dapr of andere service mesh gebruiken?**  
-A: Houd het eenvoudig voor het leren. Zodra je de native Container Apps-netwerken begrijpt, kun je Dapr toevoegen voor geavanceerde scenario's.
+**Q: Waarom geen Dapr of andere service mesh gebruiken?**  
+A: Houd het simpel voor het leerproces. Zodra je native Container Apps-netwerken begrijpt, kun je Dapr toevoegen voor geavanceerde scenario's.
 
-**V: Hoe debug ik lokaal?**  
+**Q: Hoe debug ik lokaal?**  
 A: Draai services lokaal met Docker:
 ```bash
 cd src/api-gateway
@@ -804,25 +796,25 @@ docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**V: Kan ik verschillende programmeertalen gebruiken?**  
-A: Ja! Dit voorbeeld toont Node.js (gateway) + Python (product service). Je kunt elke taal mixen die in containers draait.
+**Q: Kan ik verschillende programmeertalen gebruiken?**  
+A: Ja! Dit voorbeeld toont Node.js (gateway) + Python (productservice). Je kunt elke taal mixen die in containers draait.
 
-**V: Wat als ik geen Azure-tegoed heb?**  
-A: Gebruik de gratis Azure-laag (eerste 30 dagen met nieuwe accounts) of implementeer voor korte testperiodes en verwijder direct.
+**Q: Wat als ik geen Azure-tegoeden heb?**  
+A: Gebruik de Azure free tier (eerste 30 dagen voor nieuwe accounts) of deploy voor korte testperiodes en verwijder direct daarna.
 
 ---
 
-> **🎓 Samenvatting leerpad**: Je hebt geleerd hoe je een multi-service architectuur implementeert met automatische schaalbaarheid, interne netwerken, gecentraliseerde monitoring en productieklare patronen. Deze basis bereidt je voor op complexe gedistribueerde systemen en enterprise microservices-architecturen.
+> **🎓 Samenvatting leerroute**: Je hebt geleerd een multi-service architectuur te deployen met automatische schaaling, interne netwerken, gecentraliseerde monitoring en productieklaarpatronen. Deze basis bereidt je voor op complexe gedistribueerde systemen en enterprise microservices-architecturen.
 
 **📚 Cursusnavigatie:**
-- ← Vorige: [Eenvoudige Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Volgende: [Database Integratie Voorbeeld](../../../../../examples/database-app)
-- 🏠 [Cursus Home](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- ← Vorige: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
+- → Volgende: [Database Integration Example](../../../../../examples/database-app)
+- 🏠 [Course Home](../../../README.md)
+- 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Disclaimer:
+Dit document is vertaald met behulp van de AI-vertalingsdienst Co-op Translator (https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal dient als de gezaghebbende bron te worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

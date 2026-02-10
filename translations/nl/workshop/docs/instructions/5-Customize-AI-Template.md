@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T22:43:56+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "nl"
-}
--->
-# 5. Pas een Template aan
+# 5. Pas een sjabloon aan
 
-!!! tip "AAN HET EINDE VAN DEZE MODULE KUN JE"
+!!! tip "AAN HET EINDE VAN DEZE MODULE KUNT U"
 
-    - [ ] De standaard AI Agent-mogelijkheden verkennen
-    - [ ] AI Search toevoegen met je eigen index
-    - [ ] Tracing-metrics activeren en analyseren
-    - [ ] Een evaluatierun uitvoeren
-    - [ ] Een red-teaming scan uitvoeren
-    - [ ] **Lab 5: Een aanpassingsplan opstellen**
+    - [ ] De standaard AI Agent-mogelijkheden onderzocht
+    - [ ] AI Search toegevoegd met uw eigen index
+    - [ ] Tracing-metrics geactiveerd en geanalyseerd
+    - [ ] Een evaluatieronde uitgevoerd
+    - [ ] Een red-teaming scan uitgevoerd
+    - [ ] **Lab 5: Een aanpassingsplan gemaakt** 
 
 ---
 
 ## 5.1 AI Agent-mogelijkheden
 
-!!! success "Dit hebben we voltooid in Lab 01"
+!!! success "We hebben dit voltooid in Lab 01"
 
-- **Bestandszoekfunctie**: OpenAI's ingebouwde bestandszoekfunctie voor kennisopvraging
-- **Bronvermeldingen**: Automatische bronvermelding in antwoorden
-- **Aanpasbare instructies**: Gedrag en persoonlijkheid van de agent aanpassen
-- **Toolintegratie**: Uitbreidbaar toolsysteem voor aangepaste mogelijkheden
+- **File Search**: OpenAI's ingebouwde bestandszoekfunctie voor kennisopvraging
+- **Citations**: Automatische bronvermelding in antwoorden
+- **Customizable Instructions**: Pas het gedrag en de persoonlijkheid van de agent aan
+- **Tool Integration**: Uitbreidbaar toolsysteem voor aangepaste functionaliteit
 
 ---
 
@@ -36,29 +27,29 @@ CO_OP_TRANSLATOR_METADATA:
 !!! task "Om dit te voltooien moeten we wijzigingen aanbrengen en opnieuw implementeren"    
     
     ```bash title=""
-    # Stel omgevingsvariabelen in
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Upload gegevens en maak mijn index
+    # Upload data and create my index
 
     ```
 
 ---
 
-**OpenAI-bestandszoekfunctie (standaard):**
+**OpenAI File Search (Standaard):**
 
-- Ingebouwd in de Azure AI Agent-service
+- Ingebouwd in Foundry Agents
 - Automatische documentverwerking en indexering
-- Geen extra configuratie nodig
+- Geen extra configuratie vereist
 
-**Azure AI Search (optioneel):**
+**Azure AI Search (Optioneel):**
 
-- Hybride semantische en vectorzoekfunctie
-- Beheer van aangepaste indexen
+- Hybride semantische en vectorzoekopdrachten
+- Aangepast indexbeheer
 - Geavanceerde zoekmogelijkheden
 - Vereist `USE_AZURE_AI_SEARCH_SERVICE=true`
 
@@ -76,37 +67,37 @@ CO_OP_TRANSLATOR_METADATA:
 **Tracing:**
 
 - OpenTelemetry-integratie
-- Verzoek-/antwoordtracking
-- Prestatiemetrics
-- Beschikbaar in het AI Foundry-portaal
+- Volgen van verzoeken/antwoorden
+- Prestatiemaatstaven
+- Beschikbaar in het Microsoft Foundry-portaal
 
 **Logging:**
 
-- Applicatielogs in Container Apps
+- Applicatielogboeken in Container Apps
 - Gestructureerde logging met correlatie-ID's
-- Real-time en historische logweergave
+- Realtime en historische logweergave
 
 ---
 
-## 5.4 [Agent Evaluatie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agent Evaluation](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Lokale evaluatie:**
 
-- Ingebouwde evaluators voor kwaliteitsbeoordeling
+- Ingebouwde beoordelaars voor kwaliteitsbeoordeling
 - Aangepaste evaluatiescripts
-- Prestatiebenchmarking
+- Prestatiebenchmarks
 
 **Continue monitoring:**
 
-- Automatische evaluatie van live interacties
-- Kwaliteitsmetriektracking
-- Detectie van prestatieregressie
+- Automatische evaluatie van live-interacties
+- Bijhouden van kwaliteitsmetriek
+- Detectie van prestatieverslechtering
 
 **CI/CD-integratie:**
 
 - GitHub Actions-workflow
-- Geautomatiseerde tests en evaluatie
-- Statistische vergelijkingstests
+- Geautomatiseerd testen en evaluatie
+- Statistische vergelijkende tests
 
 ---
 
@@ -122,17 +113,19 @@ CO_OP_TRANSLATOR_METADATA:
 
 - Managed Identity voor Azure-services
 - Optionele Azure App Service-authenticatie
-- Basisauthenticatie als fallback voor ontwikkeling
+- Basic-auth fallback voor ontwikkeling
 
-!!! quote "AAN HET EINDE VAN DIT LAB ZOU JE MOETEN HEBBEN"
-    - [ ] Je scenariovereisten gedefinieerd
-    - [ ] Omgevingsvariabelen aangepast (configuratie)
-    - [ ] Agent-instructies aangepast (taak)
-    - [ ] Het aangepaste template geïmplementeerd (app)
-    - [ ] Post-implementatietaken voltooid (handmatig)
-    - [ ] Een testevaluatie uitgevoerd
 
-Dit voorbeeld laat zien hoe je het template kunt aanpassen voor een zakelijke retailtoepassing met twee gespecialiseerde agents en meerdere modelimplementaties.
+
+!!! quote "AAN HET EINDE VAN DIT LAB ZOU U MOETEN HEBBEN"
+    - [ ] Definieer uw scenariovereisten
+    - [ ] Aangepaste omgevingsvariabelen (config)
+    - [ ] Aangepaste agentinstructies (taak)
+    - [ ] Het aangepaste sjabloon uitgerold (app)
+    - [ ] Voltooide post-deployment taken (handmatig)
+    - [ ] Voer een testevaluatie uit
+
+Dit voorbeeld toont hoe het sjabloon kan worden aangepast voor een enterprise retail-usecase met twee gespecialiseerde agenten en meerdere modelimplementaties.
 
 ---
 
@@ -140,15 +133,15 @@ Dit voorbeeld laat zien hoe je het template kunt aanpassen voor een zakelijke re
 
 ### 5.6.1. Scenariovereisten
 
-#### **Agent-implementaties:** 
+#### **Agentimplementaties:** 
 
-   - Shopper Agent: Helpt klanten producten te vinden en te vergelijken
-   - Loyalty Agent: Beheert klantbeloningen en promoties
+   - Shopper-agent: Helpt klanten producten te vinden en te vergelijken
+   - Loyalty-agent: Beheert klantbeloningen en promoties
 
 #### **Modelimplementaties:**
 
    - `gpt-4.1`: Primair chatmodel
-   - `o3`: Redeneermodel voor complexe vragen
+   - `o3`: Redeneermodel voor complexe queries
    - `gpt-4.1-nano`: Lichtgewicht model voor eenvoudige interacties
    - `text-embedding-3-large`: Hoogwaardige embeddings voor zoekopdrachten
 
@@ -157,45 +150,46 @@ Dit voorbeeld laat zien hoe je het template kunt aanpassen voor een zakelijke re
    - Tracing en monitoring ingeschakeld
    - AI Search voor productcatalogus
    - Evaluatiekader voor kwaliteitsborging
-   - Red teaming voor beveiligingsvalidatie
+   - Red-teaming voor veiligheidsvalidatie
 
 ---
 
 ### 5.6.2 Scenario-implementatie
 
-#### 5.6.2.1. Pre-implementatieconfiguratie
 
-Maak een setupscript (`setup-retail.sh`)
+#### 5.6.2.1. Pre-deploy-configuratie
+
+Maak een setup-script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Stel de omgevingsnaam in
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Configureer regio (kies op basis van modelbeschikbaarheid)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Schakel alle optionele diensten in
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Configureer het primaire chatmodel (gpt-4o als dichtstbijzijnde beschikbare optie tot gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Configureer het embeddingmodel voor verbeterde zoekresultaten
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Stel de agentnaam in (maakt de eerste agent aan)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Configureer de zoekindex
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -204,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Agent-instructies
+#### 5.6.2.2: Agentinstructies
 
 Maak `custom-agents/shopper-agent-instructions.md`:
 
@@ -254,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Implementatiescript
+#### 5.6.2.3: Deploymentscript
 
 Maak `deploy-retail.sh`:
 
@@ -264,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Controleer vereisten
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -276,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Stel de omgeving in
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Controleer quota in geselecteerde regio
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -297,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Implementeer infrastructuur en applicatie
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Leg de uitvoer van de implementatie vast
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Haal de URL van de webapp op
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -327,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Post-implementatieconfiguratie
+#### 5.6.2.4: Post-deploymentconfiguratie
 
 Maak `configure-retail-agents.sh`:
 
@@ -336,19 +330,19 @@ Maak `configure-retail-agents.sh`:
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Haal informatie over de implementatie op
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Instructies voor handmatige configuratie
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -373,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -384,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Testen en valideren
+### 5.6.3: Testen en validatie
 
 Maak `test-retail-deployment.sh`:
 
@@ -393,11 +387,11 @@ Maak `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Controleer of omgevingsvariabelen zijn ingesteld
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# Test de beschikbaarheid van de webapplicatie
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -411,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Voer evaluatie uit indien geconfigureerd
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -426,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -435,38 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Verwachte resultaten
+### 5.6.4 Verwachte uitkomsten
 
 Na het volgen van deze implementatiegids heb je:
 
-1. **Geïmplementeerde infrastructuur:**
+1. **Uitgerolde infrastructuur:**
 
-      - AI Foundry-project met modelimplementaties
-      - Container Apps die de webapplicatie hosten
-      - AI Search-service voor productcatalogus
+      - Microsoft Foundry-project met modelimplementaties
+      - Container Apps die de webapp hosten
+      - AI Search-service voor de productcatalogus
       - Application Insights voor monitoring
 
 2. **Initiële agent:**
 
-      - Shopper Agent geconfigureerd met basisinstructies
+      - Shopper-agent geconfigureerd met basisinstructies
       - Bestandszoekfunctie ingeschakeld
       - Tracing en monitoring geconfigureerd
 
 3. **Klaar voor aanpassing:**
 
-      - Kader voor het toevoegen van Loyalty Agent
-      - Templates voor aangepaste instructies
+      - Framework voor het toevoegen van de Loyalty-agent
+      - Aangepaste instructiesjablonen
       - Test- en validatiescripts
-      - Monitoring- en evaluatie-instellingen
+      - Monitoring- en evaluatieconfiguratie
 
-4. **Productiegereedheid:**
+4. **Productieklaarheid:**
 
       - Beveiligingsscans met red teaming
       - Prestatiemonitoring
       - Kwaliteitsevaluatiekader
       - Schaalbare architectuur
 
-Dit voorbeeld laat zien hoe het AZD-template kan worden uitgebreid en aangepast voor specifieke zakelijke scenario's, terwijl best practices voor beveiliging, monitoring en schaalbaarheid worden gehandhaafd.
+Dit voorbeeld toont aan hoe het AZD-sjabloon kan worden uitgebreid en aangepast voor specifieke enterprise-scenario's, terwijl best practices voor beveiliging, monitoring en schaalbaarheid behouden blijven.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Disclaimer:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal geldt als de gezaghebbende bron. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerd geïnterpreteerde informatie die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

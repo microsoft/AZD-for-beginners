@@ -1,34 +1,25 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-21T18:06:27+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "he"
-}
--->
-# דוגמה לאפליקציית קונטיינר - API פשוט עם Flask
+# דוגמת אפליקציית Container פשוטה עם Flask API
 
-**מסלול לימוד:** מתחילים ⭐ | **זמן:** 25-35 דקות | **עלות:** $0-15 לחודש
+**מסלול הלמידה:** מתחילים ⭐ | **זמן:** 25-35 דקות | **עלות:** 0-15$/חודש
 
-API מלא ופעיל ב-Flask Python, פרוס ל-Azure Container Apps באמצעות Azure Developer CLI (azd). דוגמה זו מדגימה פריסה בקונטיינר, סקיילינג אוטומטי ובסיסי ניטור.
+API של Flask עם Python מלא, ומתפקד, מסוג REST, מנוהל באמצעות Azure Container Apps עם כלי Azure Developer CLI (azd). דוגמה זו ממחישה פריסת מכולות, קנה מידה אוטומטי, ועקרונות מעקב.
 
 ## 🎯 מה תלמדו
 
-- לפרוס אפליקציה Python בקונטיינר ל-Azure  
-- להגדיר סקיילינג אוטומטי עם scale-to-zero  
+- לפרוס אפליקציית Python מכולה ל-Azure  
+- להגדיר קנה מידה אוטומטי עם קנה מידה לאפס  
 - ליישם בדיקות בריאות ובדיקות מוכנות  
-- לנטר לוגים ומדדים של האפליקציה  
+- לנטר יומני אפליקציה ומדדים  
 - להשתמש ב-Azure Developer CLI לפריסה מהירה  
 
-## 📦 מה כלול
+## 📦 כלול בחבילה
 
-✅ **אפליקציית Flask** - API מלא עם פעולות CRUD (`src/app.py`)  
-✅ **Dockerfile** - קונפיגורציה מוכנה לפרודקשן בקונטיינר  
-✅ **תשתית Bicep** - סביבה ל-Container Apps ופריסת API  
-✅ **קונפיגורציית AZD** - הגדרת פריסה בפקודה אחת  
-✅ **בדיקות בריאות** - בדיקות חיות ומוכנות מוגדרות  
-✅ **סקיילינג אוטומטי** - 0-10 רפליקות בהתבסס על עומס HTTP  
+✅ **אפליקציית Flask** - REST API מלא עם פעולות CRUD (`src/app.py`)  
+✅ **Dockerfile** - הגדרת מכולה מוכנה לייצור  
+✅ **תשתית Bicep** - סביבת Container Apps ופריסת API  
+✅ **קביעת תצורת AZD** - פריסה בפקודה אחת  
+✅ **בדיקות בריאות** - לימות פעילות והכנות מוגדרות  
+✅ **קנה מידה אוטומטי** - 0-10 שכפולים לפי עומס HTTP  
 
 ## ארכיטקטורה
 
@@ -49,7 +40,7 @@ API מלא ופעיל ב-Flask Python, פרוס ל-Azure Container Apps באמצ
 
 ## דרישות מוקדמות
 
-### נדרש
+### דרוש
 - **Azure Developer CLI (azd)** - [מדריך התקנה](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
 - **מנוי Azure** - [חשבון חינמי](https://azure.microsoft.com/free/)  
 - **Docker Desktop** - [התקנת Docker](https://www.docker.com/products/docker-desktop/) (לבדיקות מקומיות)  
@@ -57,24 +48,24 @@ API מלא ופעיל ב-Flask Python, פרוס ל-Azure Container Apps באמצ
 ### אימות דרישות מוקדמות
 
 ```bash
-# בדוק גרסת azd (צריך 1.5.0 או גבוהה יותר)
+# בדוק את גרסת azd (נדרש 1.5.0 ומעלה)
 azd version
 
-# אמת כניסה ל-Azure
+# אמת את הכניסה ל-Azure
 azd auth login
 
-# בדוק Docker (אופציונלי, לבדיקות מקומיות)
+# בדוק את Docker (אופציונלי, לבדיקות מקומיות)
 docker --version
 ```
 
-## ⏱️ ציר זמן לפריסה
+## ⏱️ טיימליין פריסה
 
 | שלב | משך זמן | מה קורה |
-|-----|----------|---------|
-| הגדרת סביבה | 30 שניות | יצירת סביבה עם azd |
-| בניית קונטיינר | 2-3 דקות | בניית אפליקציית Flask עם Docker |
-| פריסת תשתית | 3-5 דקות | יצירת Container Apps, רישום, ניטור |
-| פריסת אפליקציה | 2-3 דקות | דחיפת תמונה ופריסה ל-Container Apps |
+|-------|----------|--------------||
+| הקמת סביבת עבודה | 30 שניות | יצירת סביבת azd |
+| בניית מכולה | 2-3 דקות | בניית Docker לאפליקציית Flask |
+| פריסת תשתית | 3-5 דקות | יצירת Container Apps, רישום, מעקב |
+| פריסת אפליקציה | 2-3 דקות | העלאת תמונה ופריסה ל-Container Apps |
 | **סה"כ** | **8-12 דקות** | פריסה מלאה מוכנה |
 
 ## התחלה מהירה
@@ -88,19 +79,19 @@ azd env new myflaskapi
 
 # פרוס הכל (תשתית + יישום)
 azd up
-# תתבקש:
+# תתבקש ל:
 # 1. לבחור מנוי Azure
-# 2. לבחור מיקום (לדוגמה, eastus2)
-# 3. להמתין 8-12 דקות לפריסה
+# 2. לבחור מיקום (למשל eastus2)
+# 3. המתן 8-12 דקות לפריסה
 
-# קבל את נקודת הקצה של ה-API
+# קבל את נקודת הקצה של ה-API שלך
 azd env get-values
 
 # בדוק את ה-API
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**תוצאה צפויה:**
+**פלט צפוי:**  
 ```json
 {
   "status": "healthy",
@@ -112,10 +103,10 @@ curl $(azd env get-value API_ENDPOINT)/health
 
 ## ✅ אימות פריסה
 
-### שלב 1: בדיקת סטטוס פריסה
+### שלב 1: בדיקת סטטוס הפריסה
 
 ```bash
-# הצג שירותים שהופעלו
+# צפייה בשירותים שהופעלו
 azd show
 
 # הפלט הצפוי מציג:
@@ -124,16 +115,16 @@ azd show
 # - מצב: פועל
 ```
 
-### שלב 2: בדיקת נקודות קצה של API
+### שלב 2: בדיקת נקודות קצה API
 
 ```bash
-# קבל נקודת קצה API
+# לקבל נקודת קצה של API
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# בדוק בריאות
+# בדוק את בריאות
 curl $API_URL/health
 
-# בדוק נקודת קצה ראשית
+# בדוק את נקודת הקצה השורשית
 curl $API_URL/
 
 # צור פריט
@@ -145,22 +136,25 @@ curl -X POST $API_URL/api/items \
 curl $API_URL/api/items
 ```
 
-**קריטריונים להצלחה:**
-- ✅ נקודת קצה בריאות מחזירה HTTP 200  
-- ✅ נקודת קצה ראשית מציגה מידע על ה-API  
+**קריטריוני הצלחה:**  
+- ✅ נקודת בריאות מחזירה HTTP 200  
+- ✅ נקודת שורש מציגה מידע על ה-API  
 - ✅ POST יוצר פריט ומחזיר HTTP 201  
-- ✅ GET מחזיר פריטים שנוצרו  
+- ✅ GET מחזיר את הפריטים שיצרנו  
 
-### שלב 3: צפייה בלוגים
+### שלב 3: צפייה ביומנים
 
 ```bash
-# זרם יומנים חיים
-azd logs api --follow
+# הזרם יומני רישום חיים באמצעות azd monitor
+azd monitor --logs
 
-# אתה אמור לראות:
+# או השתמש ב-Azure CLI:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
+
+# עליך לראות:
 # - הודעות הפעלה של Gunicorn
 # - יומני בקשות HTTP
-# - יומני מידע של האפליקציה
+# - יומני מידע של היישום
 ```
 
 ## מבנה הפרויקט
@@ -180,10 +174,10 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## נקודות קצה של API
+## נקודות קצה API
 
 | נקודת קצה | שיטה | תיאור |
-|-----------|-------|-------|
+|----------|--------|-------------|
 | `/health` | GET | בדיקת בריאות |
 | `/api/items` | GET | רשימת כל הפריטים |
 | `/api/items` | POST | יצירת פריט חדש |
@@ -202,12 +196,12 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### קונפיגורציית סקיילינג
+### קביעת קנה מידה
 
-ה-API מבצע סקיילינג אוטומטי בהתבסס על תעבורת HTTP:  
-- **מינימום רפליקות**: 0 (סקיילינג לאפס במצב לא פעיל)  
-- **מקסימום רפליקות**: 10  
-- **בקשות מקבילות לכל רפליקה**: 50  
+ה-API מבצע קנה מידה אוטומטי על פי תעבורת HTTP:  
+- **מינימום שכפולים**: 0 (מקשה לקנה מידה לאפס כשהוא במצב לא פעיל)  
+- **מקסימום שכפולים**: 10  
+- **בקשות במקביל לכל שכפול**: 50  
 
 ## פיתוח
 
@@ -221,20 +215,20 @@ pip install -r requirements.txt
 # הפעל את האפליקציה
 python app.py
 
-# בדוק באופן מקומי
+# בדוק מקומית
 curl http://localhost:8000/health
 ```
 
-### בנייה ובדיקת קונטיינר
+### בנייה ובדיקה של מכולה
 
 ```bash
-# בנה תמונת Docker
+# לבנות תמונת Docker
 docker build -t flask-api:local ./src
 
-# הפעל מיכל באופן מקומי
+# להריץ מיכל באופן מקומי
 docker run -p 8000:8000 flask-api:local
 
-# בדוק מיכל
+# לבדוק מיכל
 curl http://localhost:8000/health
 ```
 
@@ -247,14 +241,14 @@ curl http://localhost:8000/health
 azd up
 ```
 
-### פריסת קוד בלבד
+### פריסה של קוד בלבד
 
 ```bash
-# פרס רק את קוד היישום (התשתית לא משתנה)
+# לפרוס רק קוד אפליקציה (התשתית לא השתנתה)
 azd deploy api
 ```
 
-### עדכון קונפיגורציה
+### עדכון תצורה
 
 ```bash
 # עדכן משתני סביבה
@@ -264,25 +258,28 @@ azd env set API_KEY "new-api-key"
 azd deploy api
 ```
 
-## ניטור
+## מעקב
 
-### צפייה בלוגים
+### צפייה ביומנים
 
 ```bash
-# זרם יומנים חיים
-azd logs api --follow
+# הזרם יומן חי באמצעות azd monitor
+azd monitor --logs
 
-# הצג 100 השורות האחרונות
-azd logs api --tail 100
+# או השתמש ב-Azure CLI עבור אפליקציות מכולה:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
+
+# הצג את 100 השורות האחרונות
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
 ### ניטור מדדים
 
 ```bash
-# פתח לוח מחוונים של Azure Monitor
+# פתח את לוח הבקרה של Azure Monitor
 azd monitor --overview
 
-# הצג מדדים ספציפיים
+# צפה במדדים ספציפיים
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
@@ -296,7 +293,7 @@ az monitor metrics list \
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-תגובה צפויה:
+תגובה צפויה:  
 ```json
 {
   "status": "healthy",
@@ -318,45 +315,45 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 ```
 
-## אופטימיזציה עלויות
+## אופטימיזציית עלויות
 
-פריסה זו משתמשת ב-scale-to-zero, כך שמשלמים רק כשה-API מעבד בקשות:
+פריסה זו משתמשת בקנה מידה לאפס, כך שתשלמו רק כאשר ה-API מטפל בבקשות:
 
-- **עלות במצב לא פעיל**: ~$0 לחודש (סקיילינג לאפס)  
-- **עלות פעילה**: ~$0.000024 לשנייה לכל רפליקה  
-- **עלות חודשית צפויה** (שימוש קל): $5-15  
+- **עלות במצב סרק**: כ-0$/חודש (הולך לאפס)  
+- **עלות פעילה**: כ-0.000024$/שנייה לשכפול  
+- **עלות צפויה לחודש** (שימוש קל): 5-15$
 
-### הפחתת עלויות נוספת
+### דרכים להפחתת עלויות נוספות
 
 ```bash
-# הקטן את מספר הרפליקות המרבי עבור פיתוח
+# להקטין את מספר המחשבונות המרביים לסביבת הפיתוח
 azd env set MAX_REPLICAS 3
 
-# השתמש בזמן השבתה קצר יותר
+# להשתמש בזמן המתנה קצר יותר
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 דקות
 ```
 
-## פתרון בעיות
+## תיקון תקלות
 
-### הקונטיינר לא מתחיל
+### המכולה לא מתחילה לפעול
 
 ```bash
-# בדוק יומני מכולה
-azd logs api --tail 100
+# בדוק יומני מכולות באמצעות Azure CLI
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# אמת בניית תמונת Docker באופן מקומי
+# אמת בניות תמונת Docker מקומית
 docker build -t test ./src
 ```
 
 ### ה-API לא נגיש
 
 ```bash
-# אמת שהכניסה היא חיצונית
+# בדוק שהכניסה חיצונית
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### זמני תגובה גבוהים
+### זמני תגובה ארוכים
 
 ```bash
 # בדוק שימוש במעבד/זיכרון
@@ -364,7 +361,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# הגדל משאבים אם נדרש
+# הגדל את המשאבים במידת הצורך
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -380,7 +377,7 @@ azd down --force --purge
 
 ### הרחבת הדוגמה הזו
 
-1. **הוספת מסד נתונים** - שילוב עם Azure Cosmos DB או SQL Database  
+1. **הוספת מסד נתונים** - אינטגרציה עם Azure Cosmos DB או מסד SQL  
    ```bash
    # הוסף מודול Cosmos DB ל-infra/main.bicep
    # עדכן את app.py עם חיבור למסד הנתונים
@@ -388,11 +385,11 @@ azd down --force --purge
 
 2. **הוספת אימות** - יישום Azure AD או מפתחות API  
    ```python
-   # הוסף תוכנת ביניים לאימות ל-app.py
+   # הוסף middleware של אימות ל-app.py
    from functools import wraps
    ```
 
-3. **הגדרת CI/CD** - תהליך עבודה עם GitHub Actions  
+3. **הקמת CI/CD** - זרימת עבודה באמצעות GitHub Actions  
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
@@ -407,41 +404,41 @@ azd down --force --purge
 
 ### דוגמאות קשורות
 
-- **[אפליקציית מסד נתונים](../../../../../examples/database-app)** - דוגמה מלאה עם SQL Database  
-- **[מיקרו-שירותים](../../../../../examples/container-app/microservices)** - ארכיטקטורה מרובת שירותים  
-- **[מדריך ראשי ל-Container Apps](../README.md)** - כל תבניות הקונטיינר  
+- **[אפליקציית מסד נתונים](../../../../../examples/database-app)** - דוגמה מלאה עם מסד SQL  
+- **[מיקרו-שירותים](../../../../../examples/container-app/microservices)** - ארכיטקטורת שירותים מרובים  
+- **[מדריך ראשי ל-Container Apps](../README.md)** - כל דפוסי המכולות  
 
-### משאבי לימוד
+### משאבי למידה
 
-- 📚 [קורס למתחילים עם AZD](../../../README.md) - דף הבית של הקורס  
-- 📚 [תבניות ל-Container Apps](../README.md) - תבניות פריסה נוספות  
+- 📚 [קורס AZD למתחילים](../../../README.md) - דף הבית של הקורס  
+- 📚 [דפוסי Container Apps](../README.md) - דפוסי פריסה נוספים  
 - 📚 [גלריית תבניות AZD](https://azure.github.io/awesome-azd/) - תבניות קהילתיות  
 
 ## משאבים נוספים
 
-### תיעוד
-- **[תיעוד Flask](https://flask.palletsprojects.com/)** - מדריך למסגרת Flask  
+### תיעוד  
+- **[תיעוד Flask](https://flask.palletsprojects.com/)** - מדריך לפריימוורק Flask  
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - תיעוד רשמי של Azure  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - הפניות לפקודות azd  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - מימוש פקודות azd  
 
-### מדריכים
-- **[התחלה מהירה עם Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - פרוס את האפליקציה הראשונה שלך  
-- **[Python ב-Azure](https://learn.microsoft.com/azure/developer/python/)** - מדריך לפיתוח Python  
-- **[שפת Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - תשתית כקוד  
+### מדריכים  
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - פריסת האפליקציה הראשונה שלך  
+- **[Python ב-Azure](https://learn.microsoft.com/azure/developer/python/)** - מדריך פיתוח Python  
+- **[שפת Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - תשתית כשירות קוד
 
-### כלים
-- **[Azure Portal](https://portal.azure.com)** - ניהול משאבים בצורה חזותית  
-- **[תוסף Azure ל-VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - אינטגרציה עם IDE  
+### כלים  
+- **[פורטל Azure](https://portal.azure.com)** - ניהול משאבים חזותי  
+- **[הרחבת VS Code ל-Azure](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - אינטגרציה עם IDE  
 
 ---
 
-**🎉 מזל טוב!** פרסתם API מוכן לפרודקשן עם Flask ל-Azure Container Apps עם סקיילינג אוטומטי וניטור.
+**🎉 מזל טוב!** פרסתם בהצלחה Flask API מוכן לייצור עם Azure Container Apps וקנה מידה אוטומטי ומעקב.
 
-**שאלות?** [פתחו בעיה](https://github.com/microsoft/AZD-for-beginners/issues) או בדקו את [שאלות נפוצות](../../../resources/faq.md)
+**שאלות?** [פתחו בעיה](https://github.com/microsoft/AZD-for-beginners/issues) או בדקו את ה-[שאלות נפוצות](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו נושאים באחריות לאי הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדייק, יש לקחת בחשבון שתירגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור שלו צריך להיחשב כמקור המוסמך. למידע חיוני מומלץ להשתמש בתרגום מקצועי על ידי בני אדם. אנו לא נושאים באחריות לכל אי-הבנה או פרשנות שגויה הנובעות משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-22T11:09:21+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "vi"
-}
--->
 # Ứng Dụng Chat Azure OpenAI
 
 **Lộ trình học:** Trung cấp ⭐⭐ | **Thời gian:** 35-45 phút | **Chi phí:** $50-200/tháng

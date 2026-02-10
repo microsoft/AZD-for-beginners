@@ -1,39 +1,30 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T22:44:13+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "he"
-}
--->
-# 5. התאמה אישית של תבנית
+# 5. להתאים תבנית אישית
 
-!!! tip "בסיום המודול הזה תוכל"
+!!! tip "בסוף המודול הזה תוכל"
 
-    - [ ] לחקור את יכולות ברירת המחדל של סוכן AI
-    - [ ] להוסיף חיפוש AI עם אינדקס משלך
+    - [ ] לחקור את יכולות סוכן ה-AI המובנות
+    - [ ] להוסיף חיפוש AI עם האינדקס שלך
     - [ ] להפעיל ולנתח מדדי מעקב
-    - [ ] לבצע הרצה להערכה
-    - [ ] לבצע סריקת Red-Teaming
+    - [ ] לבצע ריצת הערכה
+    - [ ] להריץ סריקת red-teaming
     - [ ] **מעבדה 5: לבנות תוכנית התאמה אישית**
 
 ---
 
 ## 5.1 יכולות סוכן AI
 
-!!! success "סיימנו את זה במעבדה 01"
+!!! success "סיימנו זאת במעבדה 01"
 
-- **חיפוש קבצים**: חיפוש קבצים מובנה של OpenAI לצורך שליפת מידע
-- **ציטוטים**: ייחוס מקורות אוטומטי בתשובות
-- **הוראות מותאמות אישית**: שינוי התנהגות ואישיות הסוכן
-- **אינטגרציית כלים**: מערכת כלים ניתנת להרחבה ליכולות מותאמות אישית
+- **חיפוש קבצים**: חיפוש קבצים מובנה של OpenAI לשחזור ידע
+- **ציטוטים**: שיוך מקורות אוטומטי בתשובות
+- **הוראות להתאמה אישית**: לשנות את התנהגות ואישיות הסוכן
+- **אינטגרציה עם כלים**: מערכת כלים ניתנת להרחבה ליכולות מותאמות
 
 ---
 
-## 5.2 אפשרויות שליפת מידע
+## 5.2 אפשרויות שחזור ידע
 
-!!! task "כדי להשלים את זה, נצטרך לבצע שינויים ולפרוס מחדש"    
+!!! task "לסיום זה יש צורך בביצוע שינויים ופריסה מחדש"    
     
     ```bash title=""
     # הגדרת משתני סביבה
@@ -43,22 +34,22 @@ CO_OP_TRANSLATOR_METADATA:
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # העלאת נתונים ויצירת אינדקס
+    # העלאת נתונים ויצירת האינדקס שלי
 
     ```
 
 ---
 
-**חיפוש קבצים של OpenAI (ברירת מחדל):**
+**חיפוש קבצים OpenAI (ברירת מחדל):**
 
-- מובנה בשירות סוכן AI של Azure
-- עיבוד מסמכים ואינדוקס אוטומטי
-- אין צורך בהגדרות נוספות
+- מובנה בסוכני Foundry
+- עיבוד ואינדוקס מסמכים אוטומטי
+- אין צורך בקונפיגורציה נוספת
 
-**חיפוש AI של Azure (אופציונלי):**
+**חיפוש Azure AI (אופציונלי):**
 
-- חיפוש סמנטי והיברידי עם וקטורים
-- ניהול אינדקס מותאם אישית
+- חיפוש סמנטי והיברידי ומבוסס וקטורים
+- ניהול אינדקס מותאם
 - יכולות חיפוש מתקדמות
 - דורש `USE_AZURE_AI_SEARCH_SERVICE=true`
 
@@ -66,7 +57,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 5.3 [מעקב וניטור](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "כדי להשלים את זה, נצטרך לבצע שינויים ולפרוס מחדש"    
+!!! task "לסיום זה יש צורך בביצוע שינויים ופריסה מחדש"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -76,15 +67,15 @@ CO_OP_TRANSLATOR_METADATA:
 **מעקב:**
 
 - אינטגרציה עם OpenTelemetry
-- מעקב אחר בקשות/תשובות
+- מעקב כבקשה/תגובה
 - מדדי ביצועים
-- זמין בפורטל AI Foundry
+- זמין בפורטל Microsoft Foundry
 
 **רישום:**
 
-- יומני אפליקציה ב-Container Apps
+- לוגים של האפליקציה ב-Container Apps
 - רישום מובנה עם מזהי קורלציה
-- צפייה ביומנים בזמן אמת ובהיסטוריה
+- צפייה בזמן אמת ובהיסטוריה
 
 ---
 
@@ -92,27 +83,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 **הערכה מקומית:**
 
-- מעריכים מובנים להערכת איכות
+- מעריכי איכות מובנים
 - סקריפטים מותאמים להערכה
-- מדדי ביצועים
+- מדידת ביצועים
 
-**ניטור מתמשך:**
+**ניטור רציף:**
 
 - הערכה אוטומטית של אינטראקציות בזמן אמת
-- מעקב אחר מדדי איכות
+- מעקב אחרי מדדי איכות
 - זיהוי רגרסיות בביצועים
 
-**אינטגרציה עם CI/CD:**
+**אינטגרציה CI/CD:**
 
-- זרימת עבודה של GitHub Actions
+- תהליך ב-GitHub Actions
 - בדיקות והערכות אוטומטיות
 - בדיקות השוואה סטטיסטיות
 
 ---
 
-## 5.5 [סוכן Red Teaming AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [סוכן Red Teaming מבוסס AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**Red Teaming AI:**
+**Red Teaming מבוסס AI:**
 
 - סריקות אבטחה אוטומטיות
 - הערכת סיכונים למערכות AI
@@ -120,83 +111,83 @@ CO_OP_TRANSLATOR_METADATA:
 
 **אימות:**
 
-- Managed Identity לשירותי Azure
-- אימות אופציונלי עם Azure App Service
-- אימות בסיסי לפיתוח
+- זהות מנוהלת לשירותי Azure
+- אימות אופציונלי של Azure App Service
+- אפשרות fallback של אימות בסיסי לפיתוח
 
-!!! quote "בסיום המעבדה הזו תוכל"
-    - [ ] להגדיר את דרישות התרחיש שלך
-    - [ ] להתאים משתני סביבה (config)
-    - [ ] להתאים הוראות סוכן (task)
-    - [ ] לפרוס את התבנית המותאמת (app)
-    - [ ] להשלים משימות לאחר הפריסה (manual)
-    - [ ] להריץ הערכת בדיקה
+!!! quote "בסוף המעבדה הזו עליך להיות"
 
-דוגמה זו מדגימה התאמה אישית של התבנית לשימוש קמעונאי ארגוני עם שני סוכנים מתמחים ופריסות מודלים מרובות.
+    - [ ] הגדרת דרישות התסריט שלך
+    - [ ] התאמת משתני סביבה (config)
+    - [ ] התאמת הוראות הסוכן (task)
+    - [ ] פריסת התבנית המותאמת (app)
+    - [ ] השלמת משימות לאחר הפריסה (manual)
+    - [ ] ריצת הערכה לבחינה
+
+דוגמה זו מדגימה התאמת תבנית לשימוש קמעונאי ארגוני עם שני סוכנים מתמחים ופריסות מרובות של מודלים.
 
 ---
 
 ## 5.6 התאמה אישית עבורך!
 
-### 5.6.1 דרישות תרחיש
+### 5.6.1 דרישות התסריט
 
 #### **פריסות סוכן:** 
 
-   - סוכן קניות: מסייע ללקוחות למצוא ולהשוות מוצרים
-   - סוכן נאמנות: מנהל תגמולים ומבצעים ללקוחות
+   - סוכן קונה: מסייע ללקוחות למצוא ולהשוות מוצרים
+   - סוכן נאמנות: מנהל פרסים ומבצעים ללקוחות
 
-#### **פריסות מודלים:**
+#### **פריסות מודל:**
 
-   - `gpt-4.1`: מודל צ'אט ראשי
-   - `o3`: מודל הסקת מסקנות לשאילתות מורכבות
-   - `gpt-4.1-nano`: מודל קל לשימוש באינטראקציות פשוטות
+   - `gpt-4.1`: מודל שיחה ראשי
+   - `o3`: מודל לוגיקה לשאילתות מורכבות
+   - `gpt-4.1-nano`: מודל קל משקל לאינטראקציות פשוטות
    - `text-embedding-3-large`: הטמעות איכותיות לחיפוש
 
 #### **תכונות:**
 
    - מעקב וניטור מופעלים
-   - חיפוש AI לקטלוג מוצרים
-   - מסגרת הערכה להבטחת איכות
-   - Red Teaming לאימות אבטחה
+   - חיפוש AI לקטלוג המוצרים
+   - מסגרת הערכה לאבטחת איכות
+   - Red teaming לאימות אבטחה
 
 ---
 
-### 5.6.2 יישום תרחיש
+### 5.6.2 יישום התסריט
 
-
-#### 5.6.2.1 הגדרות לפני פריסה
+#### 5.6.2.1. קונפיגורציה לפני פריסה
 
 צור סקריפט הגדרה (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# הגדר שם סביבה
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# הגדר אזור (בחר לפי זמינות המודל)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# הפעל את כל השירותים האופציונליים
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# הגדר מודל צ'אט ראשי (gpt-4o כהכי קרוב זמין ל- gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# הגדר מודל הטמעה לשיפור החיפוש
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# הגדר שם סוכן (ייצור את הסוכן הראשון)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# הגדר אינדקס חיפוש
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -205,7 +196,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: הוראות סוכן
+#### 5.6.2.2: הוראות לסוכן
 
 צור `custom-agents/shopper-agent-instructions.md`:
 
@@ -265,7 +256,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# אמת דרישות מוקדמות
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -277,12 +268,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# הקם סביבה
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# בדוק מכסת משאבים באיזור שנבחר
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +289,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# פרוס תשתית ויישום
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# תפוס פלט הפריסה
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# השג את כתובת ה-URL של אפליקציית האינטרנט
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -328,7 +319,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: הגדרות לאחר פריסה
+#### 5.6.2.4: קונפיגורציה לאחר פריסה
 
 צור `configure-retail-agents.sh`:
 
@@ -337,19 +328,19 @@ echo "4. Test both agents with sample queries"
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# קבל מידע על פריסות
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# הוראות לתצורה ידנית
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +365,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -385,7 +376,7 @@ echo "
 "
 ```
 
-### 5.6.3: בדיקה ואימות
+### 5.6.3: בדיקות ואימות
 
 צור `test-retail-deployment.sh`:
 
@@ -394,11 +385,11 @@ echo "
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# ודא שמשתני סביבה מוגדרים
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# בדוק את זמינות אפליקציית האינטרנט
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +403,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# הרץ הערכה אם מוגדר
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +418,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -438,18 +429,18 @@ Next steps:
 
 ### 5.6.4 תוצאות צפויות
 
-לאחר ביצוע מדריך היישום הזה, יהיו לך:
+לאחר ביצוע המדריך הזה, יהיה לך:
 
 1. **תשתית פרוסה:**
 
-      - פרויקט AI Foundry עם פריסות מודלים
-      - Container Apps שמארחים את אפליקציית האינטרנט
-      - שירות חיפוש AI לקטלוג מוצרים
+      - פרויקט Microsoft Foundry עם פריסות מודל
+      - Container Apps המאכסנות את אפליקציית האינטרנט
+      - שירות חיפוש AI עבור קטלוג המוצרים
       - Application Insights לניטור
 
-2. **סוכן ראשוני:**
+2. **סוכן התחלתי:**
 
-      - סוכן קניות מוגדר עם הוראות בסיסיות
+      - סוכן קונה מוגדר עם הוראות בסיסיות
       - יכולת חיפוש קבצים מופעלת
       - מעקב וניטור מוגדרים
 
@@ -457,17 +448,21 @@ Next steps:
 
       - מסגרת להוספת סוכן נאמנות
       - תבניות הוראות מותאמות אישית
-      - סקריפטים לבדיקות ואימות
-      - הגדרות לניטור והערכה
+      - סקריפטים לבדיקות ולאימות
+      - הגדרת ניטור והערכה
 
 4. **מוכנות לייצור:**
 
-      - סריקות אבטחה עם Red Teaming
+      - סריקות אבטחה עם red teaming
       - ניטור ביצועים
       - מסגרת הערכת איכות
-      - ארכיטקטורה ניתנת להרחבה
+      - אדריכלות מדרגתית
 
-דוגמה זו מדגימה כיצד ניתן להרחיב ולהתאים את תבנית AZD לתרחישים ארגוניים ספציפיים תוך שמירה על שיטות עבודה מומלצות לאבטחה, ניטור ויכולת הרחבה.
+דוגמה זו מדגימה כיצד ניתן להרחיב ולהתאים אישית את תבנית AZD לתסריטים ארגוניים ספציפיים תוך שמירה על שיטות עבודה מומלצות לאבטחה, ניטור והרחבה.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**הסכם אי-אחריות**:  
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדייק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית נחשב למקור הסמכותי. למידע קריטי מומלץ להשתמש בתרגום מקצועי של מתרגם אנושי. איננו אחראים לכל הבנה שגויה או פרשנות מוטעית הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

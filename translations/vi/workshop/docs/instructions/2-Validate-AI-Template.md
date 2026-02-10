@@ -1,240 +1,235 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T23:37:40+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "vi"
-}
--->
 # 2. Xác thực một Mẫu
 
-!!! tip "KẾT THÚC MODULE NÀY BẠN SẼ CÓ THỂ"
+!!! tip "VÀO CUỐI MÔ-ĐUN NÀY BẠN SẼ CÓ THỂ"
 
     - [ ] Phân tích Kiến trúc Giải pháp AI
-    - [ ] Hiểu quy trình triển khai AZD
+    - [ ] Hiểu Quy trình Triển khai AZD
     - [ ] Sử dụng GitHub Copilot để hỗ trợ sử dụng AZD
-    - [ ] **Lab 2:** Triển khai & Xác thực mẫu AI Agents
+    - [ ] **Bài lab 2:** Triển khai & Xác thực mẫu AI Agents
 
 ---
 
+
 ## 1. Giới thiệu
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) hay `azd` là một công cụ dòng lệnh mã nguồn mở giúp đơn giản hóa quy trình làm việc của nhà phát triển khi xây dựng và triển khai ứng dụng lên Azure.
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) hoặc `azd` là một công cụ dòng lệnh mã nguồn mở giúp tinh giản quy trình làm việc của nhà phát triển khi xây dựng và triển khai ứng dụng lên Azure.
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) là các kho lưu trữ tiêu chuẩn bao gồm mã ứng dụng mẫu, tài sản _hạ tầng dưới dạng mã_, và các tệp cấu hình `azd` cho một kiến trúc giải pháp đồng bộ. Việc cung cấp hạ tầng trở nên đơn giản chỉ với lệnh `azd provision` - trong khi sử dụng `azd up` cho phép bạn cung cấp hạ tầng **và** triển khai ứng dụng của mình chỉ trong một lần!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) là các kho lưu trữ tiêu chuẩn hóa bao gồm mã ứng dụng mẫu, tài sản _infrastructure-as-code_, và các tệp cấu hình `azd` cho một kiến trúc giải pháp thống nhất. Việc cấp phát hạ tầng trở nên đơn giản như một lệnh `azd provision` - trong khi sử dụng `azd up` cho phép bạn cấp phát hạ tầng **và** triển khai ứng dụng cùng lúc!
 
-Do đó, việc bắt đầu quy trình phát triển ứng dụng của bạn có thể đơn giản như tìm kiếm mẫu _AZD Starter_ phù hợp nhất với nhu cầu ứng dụng và hạ tầng của bạn - sau đó tùy chỉnh kho lưu trữ để phù hợp với yêu cầu của bạn.
+Kết quả là, việc khởi động quá trình phát triển ứng dụng có thể đơn giản như tìm mẫu _AZD Starter_ phù hợp nhất với nhu cầu ứng dụng và hạ tầng của bạn - sau đó tùy chỉnh kho lưu trữ để phù hợp với yêu cầu kịch bản của bạn.
 
-Trước khi bắt đầu, hãy đảm bảo rằng bạn đã cài đặt Azure Developer CLI.
+Trước khi bắt đầu, hãy đảm bảo bạn đã cài đặt Azure Developer CLI.
 
-1. Mở terminal của VS Code và nhập lệnh sau:
+1. Mở terminal trong VS Code và gõ lệnh sau:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. Bạn sẽ thấy kết quả như thế này!
+1. Bạn sẽ thấy thứ gì đó như thế này!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**Bây giờ bạn đã sẵn sàng chọn và triển khai một mẫu với azd**
+**Bạn giờ đã sẵn sàng để chọn và triển khai một mẫu bằng azd**
 
 ---
 
 ## 2. Lựa chọn Mẫu
 
-Nền tảng Azure AI Foundry đi kèm với [bộ mẫu AZD được khuyến nghị](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) bao gồm các kịch bản giải pháp phổ biến như _tự động hóa quy trình làm việc đa tác nhân_ và _xử lý nội dung đa phương thức_. Bạn cũng có thể khám phá các mẫu này bằng cách truy cập cổng thông tin Azure AI Foundry.
+Nền tảng Microsoft Foundry đi kèm với một [tập các mẫu AZD được khuyến nghị](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) bao phủ các kịch bản giải pháp phổ biến như _tự động hóa quy trình làm việc đa-tác nhân_ và _xử lý nội dung đa mô-đun_. Bạn cũng có thể khám phá các mẫu này bằng cách truy cập cổng Microsoft Foundry.
 
 1. Truy cập [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Đăng nhập vào cổng thông tin Azure AI Foundry khi được yêu cầu - bạn sẽ thấy giao diện như thế này.
+1. Đăng nhập vào cổng Microsoft Foundry khi được yêu cầu - bạn sẽ thấy thứ gì đó giống như hình dưới.
 
-![Pick](../../../../../translated_images/vi/01-pick-template.60d2d5fff5ebc374.webp)
+![Chọn](../../../../../translated_images/vi/01-pick-template.60d2d5fff5ebc374.webp)
 
-Các tùy chọn **Cơ bản** là các mẫu khởi đầu của bạn:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) triển khai một ứng dụng chat cơ bản _với dữ liệu của bạn_ lên Azure Container Apps. Sử dụng mẫu này để khám phá kịch bản chatbot AI cơ bản.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) cũng triển khai một AI Agent tiêu chuẩn (với Azure AI Agent Service). Sử dụng mẫu này để làm quen với các giải pháp AI tác nhân liên quan đến công cụ và mô hình.
+Các tùy chọn **Basic** là các mẫu khởi đầu của bạn:
 
-Truy cập liên kết thứ hai trong một tab trình duyệt mới (hoặc nhấp vào `Open in GitHub` trên thẻ liên quan). Bạn sẽ thấy kho lưu trữ cho mẫu AZD này. Dành một phút để khám phá README. Kiến trúc ứng dụng trông như thế này:
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) triển khai một ứng dụng chat cơ bản _với dữ liệu của bạn_ lên Azure Container Apps. Dùng mẫu này để khám phá kịch bản chatbot AI cơ bản.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) cũng triển khai một AI Agent tiêu chuẩn (với các Foundry Agents). Dùng mẫu này để làm quen với các giải pháp AI theo dạng tác nhân liên quan đến các công cụ và mô hình.
 
-![Arch](../../../../../translated_images/vi/architecture.8cec470ec15c65c7.webp)
+Mở liên kết thứ hai trong một tab trình duyệt mới (hoặc nhấp `Open in GitHub` cho thẻ liên quan). Bạn sẽ thấy kho lưu trữ cho Mẫu AZD này. Dành một phút để khám phá README. Kiến trúc ứng dụng trông như sau:
+
+![Kiến trúc](../../../../../translated_images/vi/architecture.8cec470ec15c65c7.webp)
 
 ---
 
 ## 3. Kích hoạt Mẫu
 
-Hãy thử triển khai mẫu này và đảm bảo rằng nó hợp lệ. Chúng ta sẽ làm theo hướng dẫn trong phần [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+Hãy thử triển khai mẫu này và đảm bảo nó hợp lệ. Chúng ta sẽ theo hướng dẫn trong phần [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
 
-1. Nhấp vào [liên kết này](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - xác nhận hành động mặc định là `Create codespace`
-1. Điều này sẽ mở một tab trình duyệt mới - chờ phiên GitHub Codespaces hoàn tất tải
-1. Mở terminal của VS Code trong Codespaces - nhập lệnh sau:
+1. Nhấp [liên kết này](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - xác nhận hành động mặc định là `Create codespace`
+1. Điều này sẽ mở một tab trình duyệt mới - chờ cho phiên GitHub Codespaces hoàn tất tải
+1. Mở terminal VS Code trong Codespaces - gõ lệnh sau:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Hoàn thành các bước quy trình mà lệnh này sẽ kích hoạt:
+Hoàn thành các bước quy trình làm việc mà lệnh này sẽ kích hoạt:
 
 1. Bạn sẽ được yêu cầu đăng nhập vào Azure - làm theo hướng dẫn để xác thực
-1. Nhập một tên môi trường duy nhất cho bạn - ví dụ, tôi đã sử dụng `nitya-mshack-azd`
-1. Điều này sẽ tạo một thư mục `.azure/` - bạn sẽ thấy một thư mục con với tên môi trường
-1. Bạn sẽ được yêu cầu chọn tên đăng ký - chọn mặc định
-1. Bạn sẽ được yêu cầu chọn vị trí - sử dụng `East US 2`
+1. Nhập một tên môi trường duy nhất cho bạn - ví dụ, tôi đã dùng `nitya-mshack-azd`
+1. Việc này sẽ tạo một thư mục `.azure/` - bạn sẽ thấy một thư mục con với tên env
+1. Bạn sẽ được yêu cầu chọn tên subscription - chọn mặc định
+1. Bạn sẽ được hỏi về vị trí - dùng `East US 2`
 
-Bây giờ, bạn chờ quá trình cung cấp hoàn tất. **Điều này mất khoảng 10-15 phút**
+Bây giờ, bạn chờ cho việc cấp phát hoàn tất. **Điều này mất 10-15 phút**
 
-1. Khi hoàn tất, console của bạn sẽ hiển thị thông báo SUCCESS như thế này:
+1. Khi xong, console của bạn sẽ hiển thị thông báo SUCCESS như sau:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Cổng thông tin Azure của bạn bây giờ sẽ có một nhóm tài nguyên được cung cấp với tên môi trường đó:
+1. Azure Portal của bạn bây giờ sẽ có một resource group đã được cấp phát với tên env đó:
 
-      ![Infra](../../../../../translated_images/vi/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Hạ tầng](../../../../../translated_images/vi/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Bây giờ bạn đã sẵn sàng xác thực hạ tầng và ứng dụng đã triển khai**.
+1. **Bạn giờ đã sẵn sàng để xác thực hạ tầng và ứng dụng đã triển khai**.
 
 ---
 
 ## 4. Xác thực Mẫu
 
-1. Truy cập trang [Resource Groups](https://portal.azure.com/#browse/resourcegroups) trên cổng thông tin Azure - đăng nhập khi được yêu cầu
-1. Nhấp vào RG với tên môi trường của bạn - bạn sẽ thấy trang như trên
+1. Truy cập trang [Resource Groups](https://portal.azure.com/#browse/resourcegroups) của Azure Portal - đăng nhập khi được yêu cầu
+1. Nhấp vào RG cho tên môi trường của bạn - bạn sẽ thấy trang như trên
 
-      - nhấp vào tài nguyên Azure Container Apps
-      - nhấp vào Application Url trong phần _Essentials_ (góc trên bên phải)
+      - nhấp vào resource Azure Container Apps
+      - nhấp vào Application Url trong phần _Essentials_ (phía trên bên phải)
 
-1. Bạn sẽ thấy giao diện người dùng front-end của ứng dụng được lưu trữ như thế này:
+1. Bạn sẽ thấy giao diện front-end ứng dụng được host như thế này:
 
-   ![App](../../../../../translated_images/vi/03-test-application.471910da12c3038e.webp)
+   ![Ứng dụng](../../../../../translated_images/vi/03-test-application.471910da12c3038e.webp)
 
 1. Thử hỏi một vài [câu hỏi mẫu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Hỏi: ```Thủ đô của Pháp là gì?``` 
-      1. Hỏi: ```Lều tốt nhất dưới $200 cho hai người là gì, và nó có những tính năng gì?```
+      1. Hỏi: ```What is the capital of France?``` 
+      1. Hỏi: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. Bạn sẽ nhận được câu trả lời tương tự như hình dưới đây. _Nhưng điều này hoạt động như thế nào?_ 
+1. Bạn sẽ nhận được câu trả lời tương tự như minh họa bên dưới. _Nhưng điều này hoạt động như thế nào?_
 
-      ![App](../../../../../translated_images/vi/03-test-question.521c1e863cbaddb6.webp)
+      ![Ứng dụng](../../../../../translated_images/vi/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5. Xác thực Tác nhân
+## 5. Xác thực Agent
 
-Azure Container App triển khai một endpoint kết nối với AI Agent được cung cấp trong dự án Azure AI Foundry cho mẫu này. Hãy xem điều đó có nghĩa là gì.
+Azure Container App triển khai một endpoint kết nối tới AI Agent được cấp phát trong dự án Microsoft Foundry cho mẫu này. Hãy xem điều đó có nghĩa là gì.
 
-1. Quay lại trang _Overview_ của nhóm tài nguyên trên cổng thông tin Azure
+1. Quay lại trang _Overview_ của resource group trong Azure Portal
 
-1. Nhấp vào tài nguyên `Azure AI Foundry` trong danh sách đó
+1. Nhấp vào resource `Microsoft Foundry` trong danh sách đó
 
-1. Bạn sẽ thấy giao diện này. Nhấp vào nút `Go to Azure AI Foundry Portal`. 
+1. Bạn sẽ thấy như thế này. Nhấp nút `Go to Microsoft Foundry Portal`. 
    ![Foundry](../../../../../translated_images/vi/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. Bạn sẽ thấy trang Dự án Foundry cho ứng dụng AI của bạn
-   ![Project](../../../../../translated_images/vi/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. Bạn sẽ thấy trang Foundry Project cho ứng dụng AI của bạn
+   ![Dự án](../../../../../translated_images/vi/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Nhấp vào `Agents` - bạn sẽ thấy tác nhân mặc định được cung cấp trong dự án của bạn
+1. Nhấp vào `Agents` - bạn sẽ thấy Agent mặc định được cấp phát trong dự án của bạn
    ![Agents](../../../../../translated_images/vi/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Chọn nó - và bạn sẽ thấy chi tiết về tác nhân. Lưu ý các điểm sau:
+1. Chọn nó - và bạn sẽ thấy chi tiết Agent. Lưu ý các điểm sau:
 
-      - Tác nhân sử dụng File Search theo mặc định (luôn luôn)
-      - `Knowledge` của tác nhân cho thấy nó có 32 tệp đã tải lên (cho tìm kiếm tệp)
+      - Agent sử dụng File Search theo mặc định (luôn luôn)
+      - `Knowledge` của agent cho biết nó có 32 tệp được tải lên (cho tìm kiếm tệp)
       ![Agents](../../../../../translated_images/vi/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Tìm tùy chọn `Data+indexes` trong menu bên trái và nhấp để xem chi tiết. 
+1. Tìm tùy chọn `Data+indexes` trong menu bên trái và nhấp để xem chi tiết.
 
-      - Bạn sẽ thấy 32 tệp dữ liệu đã tải lên cho kiến thức.
-      - Những tệp này sẽ tương ứng với 12 tệp khách hàng và 20 tệp sản phẩm trong `src/files` 
-      ![Data](../../../../../translated_images/vi/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - Bạn sẽ thấy 32 tệp dữ liệu được tải lên cho knowledge.
+      - Chúng tương ứng với 12 tệp khách hàng và 20 tệp sản phẩm dưới `src/files`
+      ![Dữ liệu](../../../../../translated_images/vi/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**Bạn đã xác thực hoạt động của Tác nhân!** 
+**Bạn đã xác thực hoạt động của Agent!**
 
-1. Các câu trả lời của tác nhân được dựa trên kiến thức trong các tệp đó. 
-1. Bây giờ bạn có thể đặt câu hỏi liên quan đến dữ liệu đó và nhận được câu trả lời dựa trên thực tế.
-1. Ví dụ: `customer_info_10.json` mô tả 3 giao dịch mua của "Amanda Perez"
+1. Các phản hồi của agent được căn cứ trên kiến thức trong những tệp đó.
+1. Bây giờ bạn có thể hỏi các câu liên quan đến dữ liệu đó, và nhận được các phản hồi có nền tảng.
+1. Ví dụ: `customer_info_10.json` mô tả 3 giao dịch mua do "Amanda Perez" thực hiện
 
-Quay lại tab trình duyệt với endpoint của Container App và hỏi: `Amanda Perez sở hữu những sản phẩm nào?`. Bạn sẽ thấy kết quả như thế này:
+Quay lại tab trình duyệt với endpoint Container App và hỏi: `What products does Amanda Perez own?`. Bạn sẽ thấy thứ gì đó như sau:
 
-![Data](../../../../../translated_images/vi/09-ask-in-aca.4102297fc465a4d5.webp)
+![Dữ liệu](../../../../../translated_images/vi/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. Sân chơi Tác nhân
+## 6. Sân chơi Agent
 
-Hãy xây dựng thêm trực giác về khả năng của Azure AI Foundry, bằng cách thử nghiệm Tác nhân trong Sân chơi Tác nhân.
+Hãy xây dựng thêm trực giác về khả năng của Microsoft Foundry, bằng cách thử Agent trong Agents Playground.
 
-1. Quay lại trang `Agents` trong Azure AI Foundry - chọn tác nhân mặc định
-1. Nhấp vào tùy chọn `Try in Playground` - bạn sẽ nhận được giao diện Sân chơi như thế này
-1. Hỏi cùng câu hỏi: `Amanda Perez sở hữu những sản phẩm nào?`
+1. Quay lại trang `Agents` trong Microsoft Foundry - chọn agent mặc định
+1. Nhấp tùy chọn `Try in Playground` - bạn sẽ thấy giao diện Playground như thế này
+1. Hỏi cùng một câu: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/vi/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Dữ liệu](../../../../../translated_images/vi/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Bạn nhận được câu trả lời tương tự (hoặc gần giống) - nhưng bạn cũng nhận được thông tin bổ sung mà bạn có thể sử dụng để hiểu chất lượng, chi phí, và hiệu suất của ứng dụng AI tác nhân của mình. Ví dụ:
+Bạn nhận được cùng (hoặc tương tự) phản hồi - nhưng bạn cũng nhận thêm thông tin để hiểu chất lượng, chi phí và hiệu năng của ứng dụng tác nhân của bạn. Ví dụ:
 
-1. Lưu ý rằng câu trả lời trích dẫn các tệp dữ liệu được sử dụng để "dựa vào" câu trả lời
-1. Di chuột qua bất kỳ nhãn tệp nào - dữ liệu có khớp với truy vấn và câu trả lời hiển thị của bạn không?
+1. Lưu ý rằng phản hồi trích dẫn các tệp dữ liệu được dùng để "căn cứ" phản hồi
+1. Di chuột qua bất kỳ nhãn tệp nào - dữ liệu có khớp với truy vấn và phản hồi được hiển thị không?
 
-Bạn cũng thấy một hàng _stats_ bên dưới câu trả lời. 
+Bạn cũng thấy một hàng _stats_ phía dưới phản hồi.
 
-1. Di chuột qua bất kỳ chỉ số nào - ví dụ, Safety. Bạn sẽ thấy điều gì đó như thế này
-1. Đánh giá được đưa ra có khớp với trực giác của bạn về mức độ an toàn của câu trả lời không?
+1. Di chuột qua bất kỳ chỉ số nào - ví dụ, Safety. Bạn sẽ thấy thứ gì đó như thế này
+1. Đánh giá có phù hợp với trực giác của bạn về mức độ an toàn của phản hồi không?
 
-      ![Data](../../../../../translated_images/vi/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Dữ liệu](../../../../../translated_images/vi/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
----x
+---
 
-## 7. Khả năng Quan sát Tích hợp
+## 7. Tính quan sát tích hợp sẵn
 
-Khả năng quan sát là việc trang bị cho ứng dụng của bạn để tạo ra dữ liệu có thể được sử dụng để hiểu, gỡ lỗi, và tối ưu hóa hoạt động của nó. Để cảm nhận điều này:
+Observability (khả năng quan sát) là việc trang bị công cụ cho ứng dụng để tạo ra dữ liệu có thể dùng để hiểu, gỡ lỗi và tối ưu hóa hoạt động của ứng dụng. Để có cảm nhận về điều này:
 
-1. Nhấp vào nút `View Run Info` - bạn sẽ thấy giao diện này. Đây là một ví dụ về [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) đang hoạt động. _Bạn cũng có thể xem giao diện này bằng cách nhấp vào Thread Logs trong menu cấp cao nhất_.
+1. Nhấp nút `View Run Info` - bạn sẽ thấy chế độ xem này. Đây là một ví dụ về [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) đang hoạt động. _Bạn cũng có thể xem chế độ này bằng cách nhấp Thread Logs trong menu cấp cao_.
 
-   - Hiểu các bước chạy và công cụ được tác nhân sử dụng
-   - Hiểu tổng số Token (so với số token đầu ra được sử dụng) cho câu trả lời
-   - Hiểu độ trễ và thời gian được sử dụng trong quá trình thực thi
+   - Nắm bắt các bước chạy và công cụ agent đã sử dụng
+   - Hiểu tổng số Token (so với token đầu ra đã dùng) cho phản hồi
+   - Hiểu độ trễ và nơi thời gian đang được tiêu tốn trong quá trình thực thi
 
-      ![Agent](../../../../../translated_images/vi/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![Tác nhân](../../../../../translated_images/vi/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Nhấp vào tab `Metadata` để xem các thuộc tính bổ sung cho lần chạy, có thể cung cấp ngữ cảnh hữu ích để gỡ lỗi các vấn đề sau này.   
+1. Nhấp tab `Metadata` để xem các thuộc tính bổ sung cho lần chạy, có thể cung cấp bối cảnh hữu ích để gỡ lỗi sau này.   
 
-      ![Agent](../../../../../translated_images/vi/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![Tác nhân](../../../../../translated_images/vi/11-view-run-info-metadata.7966986122c7c2df.webp)
 
-1. Nhấp vào tab `Evaluations` để xem các đánh giá tự động được thực hiện trên câu trả lời của tác nhân. Các đánh giá này bao gồm đánh giá an toàn (ví dụ, Self-harm) và đánh giá cụ thể của tác nhân (ví dụ, Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/vi/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+1. Nhấp tab `Evaluations` để xem các tự đánh giá được thực hiện trên phản hồi của agent. Chúng bao gồm các đánh giá an toàn (ví dụ: Tự làm hại) và các đánh giá đặc thù agent (ví dụ: Giải quyết ý định, Tuân thủ tác vụ).
 
-1. Cuối cùng nhưng không kém phần quan trọng, nhấp vào tab `Monitoring` trong menu bên.
+      ![Tác nhân](../../../../../translated_images/vi/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+
+1. Cuối cùng nhưng không kém phần quan trọng, nhấp tab `Monitoring` trong menu bên.
 
       - Chọn tab `Resource usage` trên trang hiển thị - và xem các chỉ số.
-      - Theo dõi việc sử dụng ứng dụng về chi phí (token) và tải (yêu cầu).
-      - Theo dõi độ trễ của ứng dụng từ byte đầu tiên (xử lý đầu vào) đến byte cuối cùng (đầu ra).
+      - Theo dõi việc sử dụng ứng dụng về chi phí (tokens) và tải (yêu cầu).
+      - Theo dõi độ trễ ứng dụng đến byte đầu tiên (xử lý đầu vào) và byte cuối cùng (đầu ra).
 
-      ![Agent](../../../../../translated_images/vi/13-monitoring-resources.5148015f7311807f.webp)
+      ![Tác nhân](../../../../../translated_images/vi/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
 ## 8. Biến Môi trường
 
-Cho đến nay, chúng ta đã đi qua quy trình triển khai trong trình duyệt - và xác thực rằng hạ tầng của chúng ta đã được cung cấp và ứng dụng đã hoạt động. Nhưng để làm việc với ứng dụng _theo cách tiếp cận mã trước_, chúng ta cần cấu hình môi trường phát triển cục bộ của mình với các biến cần thiết để làm việc với các tài nguyên này. Sử dụng `azd` giúp việc này trở nên dễ dàng.
+Cho đến nay, chúng ta đã đi qua triển khai trong trình duyệt - và xác thực rằng hạ tầng của chúng ta đã được cấp phát và ứng dụng hoạt động. Nhưng để làm việc với mã ứng dụng theo hướng _code-first_, chúng ta cần cấu hình môi trường phát triển cục bộ với các biến phù hợp cần thiết để làm việc với các tài nguyên này. Sử dụng `azd` làm cho việc này trở nên dễ dàng.
 
-1. Azure Developer CLI [sử dụng các biến môi trường](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) để lưu trữ và quản lý các cài đặt cấu hình cho các triển khai ứng dụng.
+1. Azure Developer CLI [sử dụng các biến môi trường](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) để lưu trữ và quản lý các thiết lập cấu hình cho các lần triển khai ứng dụng.
 
-1. Các biến môi trường được lưu trữ trong `.azure/<env-name>/.env` - điều này giới hạn chúng trong môi trường `env-name` được sử dụng trong quá trình triển khai và giúp bạn cô lập các môi trường giữa các mục tiêu triển khai khác nhau trong cùng một kho lưu trữ.
+1. Các biến môi trường được lưu trong `.azure/<env-name>/.env` - điều này phạm vi hóa chúng cho môi trường `env-name` được dùng trong triển khai và giúp bạn cô lập các môi trường giữa các mục tiêu triển khai khác nhau trong cùng một repo.
 
-1. Các biến môi trường được tự động tải bởi lệnh `azd` bất cứ khi nào nó thực thi một lệnh cụ thể (ví dụ, `azd up`). Lưu ý rằng `azd` không tự động đọc các biến môi trường _cấp hệ điều hành_ (ví dụ, được đặt trong shell) - thay vào đó sử dụng `azd set env` và `azd get env` để chuyển thông tin trong các script.
+1. Các biến môi trường được `azd` tự động tải bất cứ khi nào nó thực thi một lệnh cụ thể (ví dụ, `azd up`). Lưu ý rằng `azd` không tự động đọc các biến môi trường cấp hệ điều hành (ví dụ, được thiết lập trong shell) - thay vào đó dùng `azd set env` và `azd get env` để chuyển thông tin trong các script.
+
 
 Hãy thử một vài lệnh:
 
-1. Lấy tất cả các biến môi trường được đặt cho `azd` trong môi trường này:
+1. Lấy tất cả biến môi trường được đặt cho `azd` trong môi trường này:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      Bạn sẽ thấy kết quả như:
+      Bạn sẽ thấy thứ gì đó như:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -244,19 +239,19 @@ Hãy thử một vài lệnh:
       ...
       ```
 
-1. Lấy một giá trị cụ thể - ví dụ, tôi muốn biết liệu chúng ta có đặt giá trị `AZURE_AI_AGENT_MODEL_NAME` hay không
+1. Lấy một giá trị cụ thể - ví dụ, tôi muốn biết liệu chúng ta đã đặt giá trị `AZURE_AI_AGENT_MODEL_NAME` hay chưa
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Bạn sẽ thấy kết quả như thế này - giá trị này không được đặt mặc định!
+      Bạn sẽ thấy thứ gì đó như thế này - nó không được đặt theo mặc định!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Đặt một biến môi trường mới cho `azd`. Ở đây, chúng ta cập nhật tên mô hình của tác nhân. _Lưu ý: bất kỳ thay đổi nào được thực hiện sẽ ngay lập tức được phản ánh trong tệp `.azure/<env-name>/.env`.
+1. Đặt một biến môi trường mới cho `azd`. Ở đây, chúng ta cập nhật tên mô hình agent. _Lưu ý: mọi thay đổi sẽ được phản ánh ngay lập tức trong tệp `.azure/<env-name>/.env`.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,30 +259,35 @@ Hãy thử một vài lệnh:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Bây giờ, chúng ta sẽ thấy giá trị đã được đặt:
+      Bây giờ, chúng ta nên thấy giá trị đã được đặt:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Lưu ý rằng một số tài nguyên là cố định (ví dụ, triển khai mô hình) và sẽ yêu cầu nhiều hơn chỉ một lệnh `azd up` để buộc triển khai lại. Hãy thử xóa triển khai ban đầu và triển khai lại với các biến môi trường đã thay đổi.
+1. Lưu ý rằng một số tài nguyên là bền vững (ví dụ: triển khai mô hình) và sẽ yêu cầu hơn chỉ một `azd up` để buộc triển khai lại. Hãy thử xóa triển khai ban đầu và triển khai lại với các biến môi trường đã thay đổi.
 
-1. **Làm mới** Nếu bạn đã triển khai hạ tầng trước đó bằng một mẫu azd - bạn có thể _làm mới_ trạng thái của các biến môi trường cục bộ dựa trên trạng thái hiện tại của triển khai Azure bằng lệnh này:
+1. **Làm mới** Nếu bạn đã từng triển khai hạ tầng trước đó bằng một mẫu azd - bạn có thể _làm mới_ trạng thái các biến môi trường cục bộ dựa trên trạng thái hiện tại của triển khai Azure của bạn bằng lệnh này:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Đây là một cách mạnh mẽ để _đồng bộ_ các biến môi trường giữa hai hoặc nhiều môi trường phát triển cục bộ (ví dụ: nhóm với nhiều nhà phát triển) - cho phép cơ sở hạ tầng đã triển khai đóng vai trò là nguồn dữ liệu chính xác cho trạng thái biến môi trường. Các thành viên trong nhóm chỉ cần _làm mới_ các biến để đồng bộ lại.
+      Đây là một cách mạnh mẽ để _đồng bộ_ các biến môi trường giữa hai hoặc nhiều môi trường phát triển cục bộ (ví dụ: nhóm có nhiều nhà phát triển) - cho phép hạ tầng đã triển khai đóng vai trò là nguồn tham chiếu cho trạng thái các biến môi trường. Các thành viên trong nhóm chỉ cần _làm mới_ các biến để đồng bộ lại.
 
 ---
 
 ## 9. Chúc mừng 🏆
 
-Bạn vừa hoàn thành một quy trình làm việc từ đầu đến cuối, trong đó bạn đã:
+Bạn vừa hoàn thành một quy trình công việc từ đầu đến cuối, trong đó bạn đã:
 
-- [X] Chọn Mẫu AZD Bạn Muốn Sử Dụng
-- [X] Khởi chạy Mẫu Với GitHub Codespaces 
-- [X] Triển khai Mẫu và xác nhận rằng nó hoạt động
+- [X] Đã chọn Mẫu AZD mà bạn muốn sử dụng
+- [X] Đã khởi chạy mẫu bằng GitHub Codespaces 
+- [X] Đã triển khai mẫu và xác nhận nó hoạt động
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Miễn trừ trách nhiệm:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc không chính xác. Văn bản gốc bằng ngôn ngữ gốc nên được coi là nguồn chính thức. Đối với những thông tin quan trọng, nên sử dụng bản dịch do người dịch chuyên nghiệp thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu nhầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

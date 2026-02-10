@@ -1,111 +1,102 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-18T07:49:54+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "vi"
-}
--->
-# Câu hỏi thường gặp (FAQ)
+# Frequently Asked Questions (FAQ)
 
-**Hỗ trợ theo chương**
-- **📚 Trang chủ khóa học**: [AZD For Beginners](../README.md)
-- **🚆 Vấn đề cài đặt**: [Chương 1: Cài đặt & Thiết lập](../docs/getting-started/installation.md)
-- **🤖 Câu hỏi về AI**: [Chương 2: Phát triển ưu tiên AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **🔧 Xử lý sự cố**: [Chương 7: Xử lý sự cố & Gỡ lỗi](../docs/troubleshooting/common-issues.md)
+**Get Help by Chapter**
+- **📚 Course Home**: [AZD cho Người mới bắt đầu](../README.md)
+- **🚆 Installation Issues**: [Chương 1: Cài đặt & Thiết lập](../docs/getting-started/installation.md)
+- **🤖 AI Questions**: [Chương 2: Phát triển ưu tiên AI](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🔧 Troubleshooting**: [Chương 7: Khắc phục sự cố & Gỡ lỗi](../docs/troubleshooting/common-issues.md)
 
-## Giới thiệu
+## Introduction
 
-FAQ toàn diện này cung cấp câu trả lời cho các câu hỏi phổ biến nhất về Azure Developer CLI (azd) và triển khai Azure. Tìm giải pháp nhanh cho các vấn đề thường gặp, hiểu các thực tiễn tốt nhất, và làm rõ các khái niệm cũng như quy trình làm việc của azd.
+FAQ toàn diện này cung cấp câu trả lời cho những câu hỏi thường gặp nhất về Azure Developer CLI (azd) và các triển khai trên Azure. Tìm giải pháp nhanh cho các vấn đề phổ biến, hiểu các phương pháp hay nhất, và làm rõ các khái niệm cùng quy trình làm việc của azd.
 
-## Mục tiêu học tập
+## Learning Goals
 
-Khi xem qua FAQ này, bạn sẽ:
+Bằng cách xem lại FAQ này, bạn sẽ:
 - Tìm câu trả lời nhanh cho các câu hỏi và vấn đề thường gặp về Azure Developer CLI
 - Hiểu các khái niệm và thuật ngữ chính thông qua định dạng Hỏi & Đáp thực tế
-- Truy cập các giải pháp xử lý sự cố cho các vấn đề và lỗi thường gặp
-- Học các thực tiễn tốt nhất thông qua các câu hỏi thường gặp về tối ưu hóa
-- Khám phá các tính năng và khả năng nâng cao thông qua các câu hỏi cấp chuyên gia
-- Tham khảo hướng dẫn về chi phí, bảo mật, và chiến lược triển khai một cách hiệu quả
+- Truy cập các giải pháp khắc phục sự cố cho các lỗi và kịch bản phổ biến
+- Học các phương pháp hay nhất thông qua những câu hỏi thường gặp về tối ưu hóa
+- Khám phá các tính năng nâng cao và khả năng thông qua các câu hỏi cấp chuyên gia
+- Tham khảo hướng dẫn về chi phí, bảo mật và chiến lược triển khai một cách hiệu quả
 
-## Kết quả học tập
+## Learning Outcomes
 
 Với việc tham khảo thường xuyên FAQ này, bạn sẽ có thể:
-- Tự giải quyết các vấn đề thường gặp về Azure Developer CLI bằng các giải pháp được cung cấp
+- Giải quyết các vấn đề phổ biến của Azure Developer CLI một cách độc lập bằng các giải pháp được cung cấp
 - Đưa ra quyết định sáng suốt về chiến lược và cấu hình triển khai
-- Hiểu mối quan hệ giữa azd và các công cụ, dịch vụ Azure khác
-- Áp dụng các thực tiễn tốt nhất dựa trên kinh nghiệm cộng đồng và khuyến nghị của chuyên gia
-- Xử lý sự cố về xác thực, triển khai, và cấu hình một cách hiệu quả
-- Tối ưu hóa chi phí và hiệu suất bằng cách sử dụng các thông tin và khuyến nghị từ FAQ
+- Hiểu mối quan hệ giữa azd và các công cụ/dịch vụ Azure khác
+- Áp dụng các phương pháp tốt nhất dựa trên kinh nghiệm cộng đồng và khuyến nghị chuyên gia
+- Khắc phục các vấn đề xác thực, triển khai và cấu hình một cách hiệu quả
+- Tối ưu hóa chi phí và hiệu năng bằng các hiểu biết và khuyến nghị từ FAQ
 
-## Mục lục
+## Table of Contents
 
-- [Bắt đầu](../../../resources)
-- [Xác thực & Truy cập](../../../resources)
-- [Mẫu & Dự án](../../../resources)
-- [Triển khai & Hạ tầng](../../../resources)
-- [Cấu hình & Môi trường](../../../resources)
-- [Xử lý sự cố](../../../resources)
-- [Chi phí & Thanh toán](../../../resources)
-- [Thực tiễn tốt nhất](../../../resources)
-- [Chủ đề nâng cao](../../../resources)
+- [Getting Started](../../../resources)
+- [Authentication & Access](../../../resources)
+- [Templates & Projects](../../../resources)
+- [Deployment & Infrastructure](../../../resources)
+- [Configuration & Environments](../../../resources)
+- [Troubleshooting](../../../resources)
+- [Cost & Billing](../../../resources)
+- [Best Practices](../../../resources)
+- [Advanced Topics](../../../resources)
 
 ---
 
-## Bắt đầu
+## Getting Started
 
-### Hỏi: Azure Developer CLI (azd) là gì?
-**Đáp**: Azure Developer CLI (azd) là một công cụ dòng lệnh tập trung vào nhà phát triển, giúp tăng tốc thời gian đưa ứng dụng từ môi trường phát triển cục bộ lên Azure. Nó cung cấp các thực tiễn tốt nhất thông qua các mẫu và hỗ trợ toàn bộ vòng đời triển khai.
+### Q: What is Azure Developer CLI (azd)?
+**A**: Azure Developer CLI (azd) là một công cụ dòng lệnh tập trung vào nhà phát triển giúp rút ngắn thời gian đưa ứng dụng từ môi trường phát triển cục bộ lên Azure. Nó cung cấp các phương pháp hay nhất thông qua các mẫu (templates) và hỗ trợ toàn bộ vòng đời triển khai.
 
-### Hỏi: azd khác gì so với Azure CLI?
-**Đáp**: 
-- **Azure CLI**: Công cụ đa mục đích để quản lý tài nguyên Azure
-- **azd**: Công cụ tập trung vào nhà phát triển cho quy trình triển khai ứng dụng
+### Q: How is azd different from Azure CLI?
+**A**: 
+- **Azure CLI**: Công cụ đa năng để quản lý tài nguyên Azure
+- **azd**: Công cụ tập trung vào nhà phát triển cho các luồng công việc triển khai ứng dụng
 - azd sử dụng Azure CLI bên trong nhưng cung cấp các trừu tượng cấp cao hơn cho các kịch bản phát triển phổ biến
-- azd bao gồm các mẫu, quản lý môi trường, và tự động hóa triển khai
+- azd bao gồm các template, quản lý môi trường và tự động hóa triển khai
 
-### Hỏi: Tôi có cần cài đặt Azure CLI để sử dụng azd không?
-**Đáp**: Có, azd yêu cầu Azure CLI để xác thực và một số thao tác. Hãy cài đặt Azure CLI trước, sau đó cài đặt azd.
+### Q: Do I need Azure CLI installed to use azd?
+**A**: Có, azd yêu cầu Azure CLI để xác thực và một số thao tác. Cài đặt Azure CLI trước, sau đó cài đặt azd.
 
-### Hỏi: azd hỗ trợ những ngôn ngữ lập trình nào?
-**Đáp**: azd không phụ thuộc vào ngôn ngữ. Nó hoạt động với:
+### Q: What programming languages does azd support?
+**A**: azd không phụ thuộc ngôn ngữ. Nó làm việc với:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
 - Java
 - Go
 - PHP
-- Các trang web tĩnh
-- Ứng dụng container hóa
+- Trang web tĩnh
+- Ứng dụng container
 
-### Hỏi: Tôi có thể sử dụng azd với các dự án hiện có không?
-**Đáp**: Có! Bạn có thể:
-1. Sử dụng `azd init` để thêm cấu hình azd vào các dự án hiện có
-2. Điều chỉnh các dự án hiện có để phù hợp với cấu trúc mẫu azd
-3. Tạo các mẫu tùy chỉnh dựa trên kiến trúc hiện có của bạn
+### Q: Can I use azd with existing projects?
+**A**: Có! Bạn có thể:
+1. Sử dụng `azd init` để thêm cấu hình azd vào dự án hiện có
+2. Điều chỉnh dự án hiện có để phù hợp với cấu trúc template của azd
+3. Tạo template tùy chỉnh dựa trên kiến trúc hiện có của bạn
 
 ---
 
-## Xác thực & Truy cập
+## Authentication & Access
 
-### Hỏi: Làm thế nào để xác thực với Azure bằng azd?
-**Đáp**: Sử dụng `azd auth login`, thao tác này sẽ mở một cửa sổ trình duyệt để xác thực Azure. Đối với các kịch bản CI/CD, sử dụng service principal hoặc managed identities.
+### Q: How do I authenticate with Azure using azd?
+**A**: Sử dụng `azd auth login` sẽ mở một cửa sổ trình duyệt để xác thực Azure. Trong kịch bản CI/CD, sử dụng service principals hoặc managed identities.
 
-### Hỏi: Tôi có thể sử dụng azd với nhiều subscription Azure không?
-**Đáp**: Có. Sử dụng `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` để chỉ định subscription nào sẽ được sử dụng cho mỗi môi trường.
+### Q: Can I use azd with multiple Azure subscriptions?
+**A**: Có. Sử dụng `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` để chỉ định subscription nào sẽ được sử dụng cho mỗi môi trường.
 
-### Hỏi: Tôi cần quyền gì để triển khai với azd?
-**Đáp**: Thông thường bạn cần:
-- Vai trò **Contributor** trên nhóm tài nguyên hoặc subscription
-- **User Access Administrator** nếu triển khai tài nguyên yêu cầu gán vai trò
-- Quyền cụ thể thay đổi tùy theo mẫu và tài nguyên được triển khai
+### Q: What permissions do I need to deploy with azd?
+**A**: Thông thường bạn cần:
+- Vai trò **Contributor** trên resource group hoặc subscription
+- **User Access Administrator** nếu triển khai các tài nguyên yêu cầu gán vai trò
+- Quyền cụ thể thay đổi tùy theo template và tài nguyên được triển khai
 
-### Hỏi: Tôi có thể sử dụng azd trong các pipeline CI/CD không?
-**Đáp**: Chắc chắn! azd được thiết kế để tích hợp CI/CD. Sử dụng service principal để xác thực và thiết lập biến môi trường cho cấu hình.
+### Q: Can I use azd in CI/CD pipelines?
+**A**: Hoàn toàn có thể! azd được thiết kế để tích hợp CI/CD. Sử dụng service principals để xác thực và đặt biến môi trường cho cấu hình.
 
-### Hỏi: Làm thế nào để xử lý xác thực trong GitHub Actions?
-**Đáp**: Sử dụng Azure Login action với thông tin xác thực service principal:
+### Q: How do I handle authentication in GitHub Actions?
+**A**: Sử dụng Azure Login action với thông tin đăng nhập service principal:
 ```yaml
 - uses: azure/login@v1
   with:
@@ -115,51 +106,51 @@ Với việc tham khảo thường xuyên FAQ này, bạn sẽ có thể:
 
 ---
 
-## Mẫu & Dự án
+## Templates & Projects
 
-### Hỏi: Tôi có thể tìm các mẫu azd ở đâu?
-**Đáp**: 
-- Mẫu chính thức: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Mẫu cộng đồng: Tìm kiếm trên GitHub với từ khóa "azd-template"
-- Sử dụng `azd template list` để duyệt các mẫu có sẵn
+### Q: Where can I find azd templates?
+**A**: 
+- Official templates: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- Community templates: Tìm trên GitHub với từ khóa "azd-template"
+- Sử dụng `azd template list` để duyệt các template có sẵn
 
-### Hỏi: Làm thế nào để tạo một mẫu tùy chỉnh?
-**Đáp**: 
-1. Bắt đầu với cấu trúc mẫu hiện có
-2. Sửa đổi `azure.yaml`, các tệp hạ tầng, và mã ứng dụng
-3. Kiểm tra kỹ với `azd up`
-4. Đăng lên GitHub với các thẻ phù hợp
+### Q: How do I create a custom template?
+**A**: 
+1. Bắt đầu với cấu trúc một template hiện có
+2. Sửa `azure.yaml`, các file hạ tầng, và mã ứng dụng
+3. Kiểm tra kỹ bằng `azd up`
+4. Xuất bản lên GitHub với các tag phù hợp
 
-### Hỏi: Tôi có thể sử dụng azd mà không cần mẫu không?
-**Đáp**: Có, sử dụng `azd init` trong một dự án hiện có để tạo các tệp cấu hình cần thiết. Bạn sẽ cần tự cấu hình `azure.yaml` và các tệp hạ tầng.
+### Q: Can I use azd without a template?
+**A**: Có, sử dụng `azd init` trong một dự án hiện có để tạo các file cấu hình cần thiết. Bạn sẽ cần cấu hình thủ công `azure.yaml` và các file hạ tầng.
 
-### Hỏi: Sự khác biệt giữa mẫu chính thức và mẫu cộng đồng là gì?
-**Đáp**: 
-- **Mẫu chính thức**: Được Microsoft duy trì, cập nhật thường xuyên, tài liệu đầy đủ
-- **Mẫu cộng đồng**: Được tạo bởi các nhà phát triển, có thể có các trường hợp sử dụng chuyên biệt, chất lượng và bảo trì khác nhau
+### Q: What's the difference between official and community templates?
+**A**: 
+- **Official templates**: Được Microsoft duy trì, cập nhật thường xuyên, có tài liệu đầy đủ
+- **Community templates**: Do các nhà phát triển tạo, có thể phục vụ các trường hợp chuyên biệt, chất lượng và bảo trì khác nhau
 
-### Hỏi: Làm thế nào để cập nhật mẫu trong dự án của tôi?
-**Đáp**: Các mẫu không được cập nhật tự động. Bạn có thể:
-1. So sánh và hợp nhất thủ công các thay đổi từ mẫu nguồn
-2. Bắt đầu lại với `azd init` sử dụng mẫu đã cập nhật
-3. Chọn lọc các cải tiến cụ thể từ các mẫu đã cập nhật
+### Q: How do I update a template in my project?
+**A**: Template không được cập nhật tự động. Bạn có thể:
+1. So sánh thủ công và gộp các thay đổi từ template nguồn
+2. Bắt đầu lại với `azd init` sử dụng template đã cập nhật
+3. Chọn lọc các cải tiến cụ thể từ template đã cập nhật
 
 ---
 
-## Triển khai & Hạ tầng
+## Deployment & Infrastructure
 
-### Hỏi: azd có thể triển khai những dịch vụ Azure nào?
-**Đáp**: azd có thể triển khai bất kỳ dịch vụ Azure nào thông qua các mẫu Bicep/ARM, bao gồm:
+### Q: What Azure services can azd deploy?
+**A**: azd có thể triển khai bất kỳ dịch vụ Azure nào qua Bicep/ARM templates, bao gồm:
 - App Services, Container Apps, Functions
 - Cơ sở dữ liệu (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
-- Tài nguyên mạng, bảo mật, và giám sát
+- Mạng, bảo mật và các tài nguyên giám sát
 
-### Hỏi: Tôi có thể triển khai đến nhiều khu vực không?
-**Đáp**: Có, cấu hình nhiều khu vực trong các mẫu Bicep của bạn và đặt tham số vị trí phù hợp cho từng môi trường.
+### Q: Can I deploy to multiple regions?
+**A**: Có, cấu hình nhiều vùng trong template Bicep của bạn và đặt tham số location phù hợp cho mỗi môi trường.
 
-### Hỏi: Làm thế nào để xử lý di chuyển schema cơ sở dữ liệu?
-**Đáp**: Sử dụng deployment hooks trong `azure.yaml`:
+### Q: How do I handle database schema migrations?
+**A**: Sử dụng deployment hooks trong `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -169,48 +160,48 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Hỏi: Tôi có thể chỉ triển khai hạ tầng mà không cần ứng dụng không?
-**Đáp**: Có, sử dụng `azd provision` để chỉ triển khai các thành phần hạ tầng được định nghĩa trong các mẫu của bạn.
+### Q: Can I deploy only infrastructure without applications?
+**A**: Có, sử dụng `azd provision` để chỉ triển khai các thành phần hạ tầng được định nghĩa trong template của bạn.
 
-### Hỏi: Làm thế nào để triển khai đến các tài nguyên Azure hiện có?
-**Đáp**: Đây là thao tác phức tạp và không được hỗ trợ trực tiếp. Bạn có thể:
-1. Nhập các tài nguyên hiện có vào các mẫu Bicep của bạn
-2. Sử dụng tham chiếu tài nguyên hiện có trong các mẫu
-3. Sửa đổi các mẫu để tạo hoặc tham chiếu tài nguyên một cách có điều kiện
+### Q: How do I deploy to existing Azure resources?
+**A**: Điều này phức tạp và không được hỗ trợ trực tiếp. Bạn có thể:
+1. Nhập tài nguyên hiện có vào template Bicep của bạn
+2. Sử dụng tham chiếu tài nguyên hiện có trong template
+3. Sửa template để tạo điều kiện có điều kiện (conditionally) tạo mới hoặc tham chiếu tài nguyên
 
-### Hỏi: Tôi có thể sử dụng Terraform thay vì Bicep không?
-**Đáp**: Hiện tại, azd chủ yếu hỗ trợ các mẫu Bicep/ARM. Hỗ trợ Terraform chưa được cung cấp chính thức, mặc dù có thể có các giải pháp từ cộng đồng.
+### Q: Can I use Terraform instead of Bicep?
+**A**: Hiện tại, azd chủ yếu hỗ trợ Bicep/ARM templates. Hỗ trợ Terraform chưa chính thức, mặc dù có thể có các giải pháp cộng đồng.
 
 ---
 
-## Cấu hình & Môi trường
+## Configuration & Environments
 
-### Hỏi: Làm thế nào để quản lý các môi trường khác nhau (dev, staging, prod)?
-**Đáp**: Tạo các môi trường riêng biệt với `azd env new <environment-name>` và cấu hình các thiết lập khác nhau cho từng môi trường:
+### Q: How do I manage different environments (dev, staging, prod)?
+**A**: Tạo các môi trường riêng với `azd env new <environment-name>` và cấu hình các thiết lập khác nhau cho từng môi trường:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### Hỏi: Cấu hình môi trường được lưu trữ ở đâu?
-**Đáp**: Trong thư mục `.azure` trong thư mục dự án của bạn. Mỗi môi trường có thư mục riêng với các tệp cấu hình.
+### Q: Where are environment configurations stored?
+**A**: Trong thư mục `.azure` bên trong thư mục dự án của bạn. Mỗi môi trường có thư mục riêng với các file cấu hình.
 
-### Hỏi: Làm thế nào để thiết lập cấu hình cụ thể cho từng môi trường?
-**Đáp**: Sử dụng `azd env set` để cấu hình các biến môi trường:
+### Q: How do I set environment-specific configuration?
+**A**: Sử dụng `azd env set` để cấu hình các biến môi trường:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Hỏi: Tôi có thể chia sẻ cấu hình môi trường với các thành viên nhóm không?
-**Đáp**: Thư mục `.azure` chứa thông tin nhạy cảm và không nên được commit vào hệ thống kiểm soát phiên bản. Thay vào đó:
-1. Tài liệu hóa các biến môi trường cần thiết
+### Q: Can I share environment configurations across team members?
+**A**: Thư mục `.azure` chứa thông tin nhạy cảm và không nên được commit vào hệ thống quản lý mã nguồn. Thay vào đó:
+1. Ghi lại các biến môi trường cần thiết
 2. Sử dụng script triển khai để thiết lập môi trường
 3. Sử dụng Azure Key Vault cho cấu hình nhạy cảm
 
-### Hỏi: Làm thế nào để ghi đè các giá trị mặc định của mẫu?
-**Đáp**: Thiết lập các biến môi trường tương ứng với tham số mẫu:
+### Q: How do I override template defaults?
+**A**: Đặt các biến môi trường tương ứng với tham số của template:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -218,95 +209,95 @@ azd env set SKU_NAME "B1"
 
 ---
 
-## Xử lý sự cố
+## Troubleshooting
 
-### Hỏi: Tại sao `azd up` bị lỗi?
-**Đáp**: Các nguyên nhân phổ biến:
-1. **Vấn đề xác thực**: Chạy `azd auth login`
-2. **Quyền không đủ**: Kiểm tra vai trò Azure của bạn
-3. **Xung đột tên tài nguyên**: Thay đổi AZURE_ENV_NAME
-4. **Vấn đề hạn mức/dung lượng**: Kiểm tra khả dụng khu vực
-5. **Lỗi mẫu**: Xác thực các mẫu Bicep
+### Q: Why is `azd up` failing?
+**A**: Các nguyên nhân phổ biến:
+1. **Authentication issues**: Chạy `azd auth login`
+2. **Insufficient permissions**: Kiểm tra phân quyền vai trò Azure của bạn
+3. **Resource naming conflicts**: Thay đổi AZURE_ENV_NAME
+4. **Quota/capacity issues**: Kiểm tra khả năng sẵn có theo vùng
+5. **Template errors**: Xác thực các template Bicep
 
-### Hỏi: Làm thế nào để gỡ lỗi lỗi triển khai?
-**Đáp**: 
-1. Sử dụng `azd deploy --debug` để có đầu ra chi tiết
+### Q: How do I debug deployment failures?
+**A**: 
+1. Sử dụng `azd deploy --debug` để xem đầu ra chi tiết
 2. Kiểm tra lịch sử triển khai trên Azure portal
-3. Xem nhật ký hoạt động trong Azure portal
+3. Xem Activity Log trong Azure portal
 4. Sử dụng `azd show` để hiển thị trạng thái môi trường hiện tại
 
-### Hỏi: Tại sao các biến môi trường của tôi không hoạt động?
-**Đáp**: Kiểm tra:
-1. Tên biến khớp chính xác với tham số mẫu
-2. Giá trị được đặt đúng cách nếu chứa khoảng trắng
-3. Môi trường được chọn: `azd env select <environment>`
-4. Các biến được thiết lập trong môi trường đúng
+### Q: Why are my environment variables not working?
+**A**: Kiểm tra:
+1. Tên biến khớp chính xác với tham số template
+2. Giá trị được đặt trong dấu ngoặc nếu chứa khoảng trắng
+3. Môi trường đã được chọn: `azd env select <environment>`
+4. Biến được thiết lập trong môi trường đúng
 
-### Hỏi: Làm thế nào để dọn dẹp các triển khai thất bại?
-**Đáp**: 
+### Q: How do I clean up failed deployments?
+**A**: 
 ```bash
 azd down --force --purge
 ```
-Thao tác này sẽ xóa tất cả tài nguyên và cấu hình môi trường.
+This removes all resources and environment configuration.
 
-### Hỏi: Tại sao ứng dụng của tôi không truy cập được sau khi triển khai?
-**Đáp**: Kiểm tra:
-1. Triển khai đã hoàn tất thành công
-2. Ứng dụng đang chạy (kiểm tra nhật ký trên Azure portal)
-3. Nhóm bảo mật mạng cho phép lưu lượng
-4. DNS/tên miền tùy chỉnh được cấu hình đúng cách
+### Q: Why is my application not accessible after deployment?
+**A**: Kiểm tra:
+1. Việc triển khai đã hoàn tất thành công
+2. Ứng dụng đang chạy (kiểm tra logs trên Azure portal)
+3. Network security groups cho phép lưu lượng
+4. DNS/tên miền tùy chỉnh được cấu hình đúng
 
 ---
 
-## Chi phí & Thanh toán
+## Cost & Billing
 
-### Hỏi: Triển khai azd sẽ tốn bao nhiêu chi phí?
-**Đáp**: Chi phí phụ thuộc vào:
-- Dịch vụ Azure được triển khai
+### Q: How much will azd deployments cost?
+**A**: Chi phí phụ thuộc vào:
+- Các dịch vụ Azure được triển khai
 - Các cấp dịch vụ/SKU được chọn
-- Sự khác biệt về giá khu vực
-- Mô hình sử dụng
+- Sự khác biệt giá theo vùng
+- Mẫu sử dụng
 
-Sử dụng [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) để ước tính.
+Sử dụng [Máy tính giá Azure](https://azure.microsoft.com/pricing/calculator/) để ước tính.
 
-### Hỏi: Làm thế nào để kiểm soát chi phí trong các triển khai azd?
-**Đáp**: 
-1. Sử dụng các SKU cấp thấp cho môi trường phát triển
-2. Thiết lập ngân sách và cảnh báo Azure
-3. Sử dụng `azd down` để xóa tài nguyên khi không cần thiết
-4. Chọn khu vực phù hợp (chi phí thay đổi theo vị trí)
-5. Sử dụng công cụ Quản lý Chi phí Azure
+### Q: How do I control costs in azd deployments?
+**A**: 
+1. Sử dụng các SKU cấp thấp hơn cho môi trường phát triển
+2. Thiết lập ngân sách và cảnh báo trên Azure
+3. Sử dụng `azd down` để xóa tài nguyên khi không cần
+4. Chọn vùng phù hợp (chi phí thay đổi theo vị trí)
+5. Sử dụng công cụ Azure Cost Management
 
-### Hỏi: Có các tùy chọn miễn phí nào cho các mẫu azd không?
-**Đáp**: Nhiều dịch vụ Azure cung cấp các cấp miễn phí:
-- App Service: Có cấp miễn phí
-- Azure Functions: 1 triệu lần thực thi miễn phí/tháng
-- Cosmos DB: Cấp miễn phí với 400 RU/s
+### Q: Are there free tier options for azd templates?
+**A**: Nhiều dịch vụ Azure cung cấp các mức miễn phí:
+- App Service: Có lớp miễn phí
+- Azure Functions: 1M lượt thực thi miễn phí/tháng
+- Cosmos DB: Mức miễn phí với 400 RU/s
 - Application Insights: 5GB đầu tiên/tháng miễn phí
 
-Cấu hình các mẫu để sử dụng các cấp miễn phí nếu có.
+Cấu hình template để sử dụng các mức miễn phí khi có thể.
 
-### Hỏi: Làm thế nào để ước tính chi phí trước khi triển khai?
-**Đáp**: 
-1. Xem xét `main.bicep` của mẫu để biết tài nguyên nào được tạo
-2. Sử dụng Azure Pricing Calculator với các SKU cụ thể
+### Q: How do I estimate costs before deployment?
+**A**: 
+1. Xem `main.bicep` của template để biết những tài nguyên nào được tạo
+2. Sử dụng Máy tính giá Azure với các SKU cụ thể
 3. Triển khai vào môi trường phát triển trước để theo dõi chi phí thực tế
-4. Sử dụng Quản lý Chi phí Azure để phân tích chi phí chi tiết
+4. Sử dụng Azure Cost Management để phân tích chi phí chi tiết
 
 ---
 
-## Thực tiễn tốt nhất
+## Best Practices
 
-### Hỏi: Các thực tiễn tốt nhất cho cấu trúc dự án azd là gì?
-**Đáp**: 
+### Q: What are the best practices for azd project structure?
+**A**: 
 1. Giữ mã ứng dụng tách biệt khỏi hạ tầng
 2. Sử dụng tên dịch vụ có ý nghĩa trong `azure.yaml`
-3. Thực hiện xử lý lỗi đúng cách trong các script build
-4. Sử dụng cấu hình cụ thể cho từng môi trường
-5. Bao gồm tài liệu đầy đủ
+3. Thực hiện xử lý lỗi thích hợp trong script build
+4. Sử dụng cấu hình theo môi trường
+5. Bao gồm tài liệu toàn diện
 
-### Hỏi: Làm thế nào để tổ chức nhiều dịch vụ trong azd?
-**Đáp**: Sử dụng cấu trúc được khuyến nghị:
+### Q: How should I organize multiple services in azd?
+**A**: Sử dụng cấu trúc được khuyến nghị:
 ```
 ├── src/
 │   ├── web/          # Frontend service
@@ -317,33 +308,33 @@ Cấu hình các mẫu để sử dụng các cấp miễn phí nếu có.
 └── README.md         # Project documentation
 ```
 
-### Hỏi: Tôi có nên commit thư mục `.azure` vào hệ thống kiểm soát phiên bản không?
-**Đáp**: **Không!** Thư mục `.azure` chứa thông tin nhạy cảm. Thêm nó vào `.gitignore`:
+### Q: Should I commit the `.azure` folder to version control?
+**A**: **Không!** Thư mục `.azure` chứa thông tin nhạy cảm. Thêm nó vào `.gitignore`:
 ```gitignore
 .azure/
 ```
 
-### Hỏi: Làm thế nào để xử lý bí mật và cấu hình nhạy cảm?
-**Đáp**: 
+### Q: How do I handle secrets and sensitive configuration?
+**A**: 
 1. Sử dụng Azure Key Vault cho bí mật
-2. Tham chiếu bí mật Key Vault trong cấu hình ứng dụng
-3. Không bao giờ commit bí mật vào hệ thống kiểm soát phiên bản
+2. Tham chiếu bí mật từ Key Vault trong cấu hình ứng dụng
+3. Không bao giờ commit bí mật vào hệ thống quản lý mã nguồn
 4. Sử dụng managed identities cho xác thực giữa các dịch vụ
 
-### Hỏi: Cách tiếp cận được khuyến nghị cho CI/CD với azd là gì?
-**Đáp**: 
-1. Sử dụng các môi trường riêng biệt cho từng giai đoạn (dev/staging/prod)
-2. Thực hiện kiểm tra tự động trước khi triển khai
-3. Sử dụng service principal để xác thực
-4. Lưu trữ cấu hình nhạy cảm trong các biến/secret của pipeline
-5. Thực hiện các cổng phê duyệt cho triển khai sản xuất
+### Q: What's the recommended approach for CI/CD with azd?
+**A**: 
+1. Sử dụng các môi trường riêng cho từng giai đoạn (dev/staging/prod)
+2. Thực hiện kiểm thử tự động trước khi triển khai
+3. Sử dụng service principals cho xác thực
+4. Lưu cấu hình nhạy cảm trong secrets/variables của pipeline
+5. Thiết lập các cổng phê duyệt cho triển khai production
 
 ---
 
-## Chủ đề nâng cao
+## Advanced Topics
 
-### Hỏi: Tôi có thể mở rộng azd với chức năng tùy chỉnh không?
-**Đáp**: Có, thông qua deployment hooks trong `azure.yaml`:
+### Q: Can I extend azd with custom functionality?
+**A**: Có, thông qua deployment hooks trong `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -352,66 +343,68 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Hỏi: Làm thế nào để tích hợp azd với các quy trình DevOps hiện có?
-**Đáp**: 
+### Q: How do I integrate azd with existing DevOps processes?
+**A**: 
 1. Sử dụng các lệnh azd trong các script pipeline hiện có
-2. Chuẩn hóa các mẫu azd trên toàn bộ nhóm
+2. Chuẩn hóa template azd giữa các nhóm
 3. Tích hợp với hệ thống giám sát và cảnh báo hiện có
-4. Sử dụng đầu ra JSON của azd để tích hợp pipeline
+4. Sử dụng đầu ra JSON của azd cho tích hợp pipeline
 
-### Hỏi: Tôi có thể sử dụng azd với Azure DevOps không?
-**Đáp**: Có, azd hoạt động với bất kỳ hệ thống CI/CD nào. Tạo các pipeline Azure DevOps sử dụng các lệnh azd.
+### Q: Can I use azd with Azure DevOps?
+**A**: Có, azd hoạt động với mọi hệ thống CI/CD. Tạo pipeline Azure DevOps sử dụng các lệnh azd.
 
-### Hỏi: Làm thế nào để đóng góp cho azd hoặc tạo các mẫu cộng đồng?
-**Đáp**: 
-1. **Công cụ azd**: Đóng góp tại [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Mẫu**: Tạo các mẫu theo [hướng dẫn mẫu](https://github.com/Azure-Samples/awesome-azd)  
-3. **Tài liệu**: Đóng góp tài liệu tại [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
+### Q: How do I contribute to azd or create community templates?
+**A**:
+1. **Công cụ azd**: Đóng góp vào [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Mẫu**: Tạo các mẫu theo [hướng dẫn mẫu](https://github.com/Azure-Samples/awesome-azd)
+3. **Tài liệu**: Đóng góp vào tài liệu tại [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
-### Hỏi: Lộ trình phát triển của azd là gì?  
-**Đáp**: Xem [lộ trình chính thức](https://github.com/Azure/azure-dev/projects) để biết các tính năng và cải tiến được lên kế hoạch.  
+### Q: Lộ trình cho azd là gì?
+**A**: Xem [lộ trình chính thức](https://github.com/Azure/azure-dev/projects) để biết các tính năng và cải tiến dự kiến.
 
-### Hỏi: Làm thế nào để chuyển đổi từ các công cụ triển khai khác sang azd?  
-**Đáp**:  
-1. Phân tích kiến trúc triển khai hiện tại  
-2. Tạo các mẫu Bicep tương đương  
-3. Cấu hình `azure.yaml` để phù hợp với các dịch vụ hiện tại  
-4. Kiểm tra kỹ lưỡng trong môi trường phát triển  
-5. Chuyển đổi dần dần các môi trường  
+### Q: How do I migrate from other deployment tools to azd?
+**A**: 
+1. Phân tích kiến trúc triển khai hiện tại
+2. Tạo các mẫu Bicep tương đương
+3. Cấu hình `azure.yaml` để khớp với dịch vụ hiện có
+4. Kiểm thử kỹ lưỡng trong môi trường phát triển
+5. Di chuyển dần dần các môi trường
 
 ---
 
 ## Vẫn còn câu hỏi?
 
 ### **Tìm kiếm trước**
-- Xem [tài liệu chính thức](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Tìm kiếm [các vấn đề trên GitHub](https://github.com/Azure/azure-dev/issues) để xem các vấn đề tương tự  
+- Kiểm tra [tài liệu chính thức](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Tìm trong [GitHub issues](https://github.com/Azure/azure-dev/issues) các vấn đề tương tự
 
-### **Nhận hỗ trợ**
-- [Thảo luận trên GitHub](https://github.com/Azure/azure-dev/discussions) - Hỗ trợ từ cộng đồng  
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Câu hỏi kỹ thuật  
-- [Azure Discord](https://discord.gg/azure) - Trò chuyện cộng đồng theo thời gian thực  
+### **Nhận trợ giúp**
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Hỗ trợ cộng đồng
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Câu hỏi kỹ thuật
+- [Azure Discord](https://discord.gg/azure) - Trò chuyện cộng đồng theo thời gian thực
 
-### **Báo cáo vấn đề**
-- [Vấn đề trên GitHub](https://github.com/Azure/azure-dev/issues/new) - Báo cáo lỗi và yêu cầu tính năng  
-- Bao gồm nhật ký liên quan, thông báo lỗi và các bước để tái hiện vấn đề  
+### **Báo cáo sự cố**
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Báo cáo lỗi và yêu cầu tính năng
+- Bao gồm nhật ký liên quan, thông báo lỗi và các bước để tái tạo
 
 ### **Tìm hiểu thêm**
-- [Tài liệu Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Khung Kiến trúc Tốt của Azure](https://learn.microsoft.com/en-us/azure/well-architected/)  
+- [Tài liệu Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Khuôn khổ Well-Architected của Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*FAQ này được cập nhật thường xuyên. Cập nhật lần cuối: Ngày 9 tháng 9 năm 2025*  
+*FAQ này được cập nhật thường xuyên. Cập nhật lần cuối: September 9, 2025*
 
 ---
 
-**Điều hướng**  
-- **Bài học trước**: [Thuật ngữ](glossary.md)  
-- **Bài học tiếp theo**: [Hướng dẫn học tập](study-guide.md)  
+**Điều hướng**
+- **Bài học trước**: [Bảng chú giải](glossary.md)
+- **Bài học tiếp theo**: [Hướng dẫn học](study-guide.md)
 
 ---
 
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Miễn trừ trách nhiệm:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Văn bản gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do người thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

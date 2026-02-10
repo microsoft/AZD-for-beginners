@@ -1,355 +1,359 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T17:38:47+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "he"
-}
--->
-# דף עזר לפקודות - פקודות AZD חיוניות
+# דף רמז לפקודות - פקודות AZD חיוניות
 
-**עזר מהיר לכל הפרקים**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../README.md)
-- **📖 התחלה מהירה**: [פרק 1: יסודות והתחלה מהירה](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 פקודות AI**: [פרק 2: פיתוח מבוסס AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+**עיון מהיר לכל הפרקים**
+- **📚 דף קורס**: [AZD למתחילים](../README.md)
+- **📖 התחלה מהירה**: [פרק 1: בסיס והתחלה מהירה](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 פקודות AI**: [פרק 2: פיתוח עם AI במרכז](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 מתקדם**: [פרק 4: תשתית כקוד](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## מבוא
 
-דף עזר מקיף זה מספק עזר מהיר לפקודות CLI של Azure Developer הנפוצות ביותר, מאורגנות לפי קטגוריות עם דוגמאות מעשיות. מושלם לחיפושים מהירים במהלך פיתוח, פתרון בעיות ותפעול יומיומי עם פרויקטים של azd.
+דף הרמז המקיף הזה מספק עיון מהיר לפקודות הנפוצות ביותר של Azure Developer CLI, מאורגנות לפי קטגוריות עם דוגמאות מעשיות. מושלם לחיפושים מהירים במהלך פיתוח, פתרון בעיות ופעילות יומיומית עם פרויקטים של azd.
 
-## מטרות למידה
+## מטרות הלמידה
 
-על ידי שימוש בדף עזר זה, תוכלו:
+בשימוש בדף רמז זה, תוכל:
 - לקבל גישה מיידית לפקודות וסינטקס חיוניים של Azure Developer CLI
-- להבין את ארגון הפקודות לפי קטגוריות פונקציונליות ושימושים
-- לעיין בדוגמאות מעשיות לתרחישי פיתוח ופריסה נפוצים
+- להבין את ארגון הפקודות לפי קטגוריות פונקציונליות ומקרי שימוש
+- להפנות דוגמאות מעשיות לתרחישים נפוצים של פיתוח ופריסה
 - לגשת לפקודות פתרון בעיות לפתרון מהיר של תקלות
-- למצוא ביעילות אפשרויות תצורה והתאמה מתקדמות
-- לאתר פקודות לניהול סביבות ועבודה עם מספר סביבות
+- למצוא אפשרויות מתקדמות להתאמה וקונפיגורציה ביעילות
+- לאתר פקודות ניהול סביבה ותהליכי עבודה מרובי סביבות
 
-## תוצאות למידה
+## תוצאות הלמידה
 
-עם עיון קבוע בדף עזר זה, תוכלו:
-- לבצע פקודות azd בביטחון ללא צורך בעיון בתיעוד מלא
-- לפתור בעיות נפוצות במהירות באמצעות פקודות אבחון מתאימות
-- לנהל ביעילות מספר סביבות ותרחישי פריסה
-- ליישם תכונות מתקדמות ואפשרויות תצורה של azd לפי הצורך
-- לפתור בעיות פריסה באמצעות רצפי פקודות שיטתיים
-- לייעל תהליכי עבודה באמצעות שימוש יעיל בקיצורי דרך ואפשרויות של azd
+עם הפנייה קבועה לדף רמז זה, תוכל:
+- להריץ פקודות azd בביטחון ללא צורך בהתייחסות לתיעוד מלא
+- לפתור במהירות בעיות נפוצות באמצעות פקודות אבחון מתאימות
+- לנהל ביעילות סביבות ותרחישי פריסה מרובים
+- ליישם תכונות קצה ואפשרויות קונפיגורציה מתקדמות לפי הצורך
+- לטפל בבעיות פריסה באמצעות רצפים שיטתיים של פקודות
+- לאפיין תהליכי עבודה באמצעות קיצורי דרך ואפשרויות azd יעילים
 
 ## פקודות התחלה
 
 ### אימות
 ```bash
-# Login to Azure (uses Azure CLI)
+# התחבר ל-Azure דרך AZD
+azd auth login
+
+# התחבר ל-Azure CLI (AZD משתמש בזה ברמה הפנימית)
 az login
 
-# Check current account
+# בדוק חשבון נוכחי
 az account show
 
-# Set default subscription
+# הגדר את המנוי ברירת המחדל
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# התנתק מ-AZD
+azd auth logout
+
+# התנתק מ-Azure CLI
+az logout
 ```
 
-### אתחול פרויקט
+### התחלת פרויקט
 ```bash
-# Browse available templates
+# עיין בתבניות הזמינות
 azd template list
 
-# Initialize from template
+# אתחל מתבנית
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# אתחל בספרייה הנוכחית
 azd init .
 
-# Initialize with custom name
+# אתחל עם שם מותאם אישית
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## פקודות פריסה עיקריות
+## פקודות פריסה מרכזיות
 
 ### תהליך פריסה מלא
 ```bash
-# Deploy everything (provision + deploy)
+# פרוס הכל (הקמה + פריסה)
 azd up
 
-# Deploy with confirmation prompts disabled
+# פרוס ללא בקשות אישור
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# פרוס לסביבה מסוימת
 azd up --environment production
 
-# Deploy with custom parameters
+# פרוס עם פרמטרים מותאמים אישית
 azd up --parameter location=westus2
 ```
 
 ### תשתית בלבד
 ```bash
-# Provision Azure resources
+# סיפוק משאבי Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 תצוגה מוקדמת של שינויים בתשתית
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# מציג תצוגת הרצה יבשה של אילו משאבים ייווצרו/יעודכנו/יימחקו
+# דומה ל-'terraform plan' או ל-'bicep what-if' - בטוח להרצה, ללא יישום שינויים
 ```
 
 ### אפליקציה בלבד
 ```bash
-# Deploy application code
+# לפרוס קוד יישום
 azd deploy
 
-# Deploy specific service
+# לפרוס שירות מסוים
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# לפרוס את כל השירותים
 azd deploy --all
 ```
 
 ### בנייה ואריזה
 ```bash
-# Build applications
+# לבנות יישומים
 azd package
 
-# Build specific service
+# לבנות שירות מסוים
 azd package --service api
 ```
 
-## 🌍 ניהול סביבות
+## 🌍 ניהול סביבה
 
 ### פעולות סביבה
 ```bash
-# List all environments
+# רשום את כל הסביבות
 azd env list
 
-# Create new environment
+# צור סביבה חדשה
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# בחר סביבה
 azd env select production
 
-# Show current environment
+# הצג את הסביבה הנוכחית
 azd env show
 
-# Refresh environment state
+# רענן את מצב הסביבה
 azd env refresh
 ```
 
 ### משתני סביבה
 ```bash
-# Set environment variable
+# הגדר משתנה סביבה
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# קבל משתנה סביבה
 azd env get API_KEY
 
-# List all environment variables
+# הצג את כל משתני הסביבה
 azd env get-values
 
-# Remove environment variable
+# הסר משתנה סביבה
 azd env unset DEBUG
 ```
 
-## ⚙️ פקודות תצורה
+## ⚙️ פקודות קונפיגורציה
 
-### תצורה גלובלית
+### קונפיגורציה גלובלית
 ```bash
-# List all configuration
+# רשום את כל ההגדרות
 azd config list
 
-# Set global defaults
+# הגדר ברירות מחדל כלליות
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# הסר הגדרה
 azd config unset defaults.location
 
-# Reset all configuration
+# איפוס כל ההגדרות
 azd config reset
 ```
 
-### תצורת פרויקט
+### קונפיגורציה לפרויקט
 ```bash
-# Validate azure.yaml
+# לאמת את azure.yaml
 azd config validate
 
-# Show project information
+# להציג מידע על הפרויקט
 azd show
 
-# Get service endpoints
+# לקבל נקודות קצה של שירותים
 azd show --output json
 ```
 
-## 📊 ניטור ולוגים
+## 📊 ניטור ואבחון
 
-### לוגים של אפליקציה
+### לוח ניטור
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### ניטור
-```bash
-# Open Azure portal for monitoring
+# פתח לוח בקרה למעקב בפורטל Azure
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# פתח מדדים חיים של Application Insights
+azd monitor --live
+
+# פתח לוח יומנים ב-Application Insights
+azd monitor --logs
+
+# פתח סקירה כללית של Application Insights
+azd monitor --overview
+```
+
+### צפייה ביומני מכולות
+```bash
+# הצג יומני רישום דרך Azure CLI (לתמיכות מכולה)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# עקוב אחרי יומני רישום בזמן אמת
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# הצג יומני רישום מפורטל Azure
+azd monitor --logs
+```
+
+### שאילתות לוג אנליטיקס
+```bash
+# גש לאנליטיקת יומני גישה דרך פורטל Azure
+azd monitor --logs
+
+# שאילת יומנים באמצעות Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ פקודות תחזוקה
 
 ### ניקוי
 ```bash
-# Remove all Azure resources
+# הסר את כל המשאבים של Azure
 azd down
 
-# Force delete without confirmation
+# מחק בכפייה ללא אישור
 azd down --force
 
-# Purge soft-deleted resources
+# נקה משאבים שנמחקו באופן רך
 azd down --purge
 
-# Complete cleanup
+# ניקוי מלא
 azd down --force --purge
 ```
 
 ### עדכונים
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# בדוק עדכונים ל-azd
 azd version
 
-# Show system information
-azd info
+# קבל את הגרסה הנוכחית
+azd version
+
+# הצג תצורה נוכחית
+azd config list
 ```
 
 ## 🔧 פקודות מתקדמות
 
-### פייפליין ו-CI/CD
+### צינור ועבודות CI/CD
 ```bash
-# Configure GitHub Actions
+# הגדר פעולות GitHub
 azd pipeline config
 
-# Configure Azure DevOps
+# הגדר Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# הצג קונפיגורציית צינור העבודה
 azd pipeline show
 ```
 
 ### ניהול תשתית
 ```bash
-# Import existing resources
-azd infra import
+# צור תבניות תשתית
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 תצוגה ותכנון תשתית
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# מדמה פריסת תשתית ללא פריסה בפועל
+# מנתח תבניות Bicep/Terraform ומציג:
+# - משאבים להוספה (ירוק +)
+# - משאבים לשינוי (צהוב ~)
+# - משאבים למחיקה (אדום -)
+# בטוח להרצה - לא נעשו שינויים בפועל בסביבת Azure
+
+# מסנתז תשתית מ-azure.yaml
+azd infra synth
 ```
 
-### ניהול שירותים
+### מידע על פרויקט
 ```bash
-# List all services
-azd service list
+# הצג את מצב הפרויקט והנקודות קצה
+azd show
 
-# Show service details
-azd service show --service web
+# הצג פרטים מפורטים של הפרויקט בפורמט JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# קבל נקודות קצה של השירות
+azd show --output json | jq '.services'
 ```
 
 ## 🎯 תהליכי עבודה מהירים
 
 ### תהליך עבודה לפיתוח
 ```bash
-# Start new project
+# התחלת פרויקט חדש
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# פריסה לסביבת פיתוח
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# בצע שינויים ופרוס מחדש
 azd deploy
 
-# View logs
-azd logs --follow
+# פתח לוח מחוונים למעקב
+azd monitor --live
 ```
 
-### תהליך עבודה עם מספר סביבות
+### תהליך עבודה מרובה סביבות
 ```bash
-# Set up environments
+# הגדר סביבת עבודה
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# פרוס לסביבת הפיתוח
 azd env select dev
 azd up
 
-# Test and promote to staging
+# בדוק וקדם לסביבת הביניים
 azd env select staging
 azd up
 
-# Deploy to production
+# פרוס לסביבת הייצור
 azd env select production
 azd up
 ```
 
-### תהליך עבודה לפתרון בעיות
+### תהליך פתרון בעיות
 ```bash
-# Enable debug mode
+# אפשר מצב ניפוי שגיאות
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# בדוק את מצב הפריסה
+azd show
 
-# Validate configuration
-azd config validate
+# אמת את התצורה
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# פתח לוח בקרה למעקב אחרי היומנים
+azd monitor --logs
 
-# Check resource status
+# בדוק את מצב המשאבים
 azd show --output json
 ```
 
@@ -357,29 +361,29 @@ azd show --output json
 
 ### מידע דיבוג
 ```bash
-# Enable debug output
+# הפעלת פלט ניפוי שגיאות
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# השבתת טלמטריה לפלט נקי יותר
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# בדיקת התצורה הנוכחית
+azd config list
 
-# Check authentication status
+# בדיקת מצב האימות
 az account show
 ```
 
 ### דיבוג תבניות
 ```bash
-# List available templates with details
+# הצג תבניות זמינות עם פרטים
 azd template list --output json
 
-# Show template information
+# הצג מידע על התבנית
 azd template show <template-name>
 
-# Validate template before init
+# אמת את התבנית לפני האתחול
 azd template validate <template-name>
 ```
 
@@ -387,36 +391,38 @@ azd template validate <template-name>
 
 ### מבנה פרויקט
 ```bash
-# Show current directory structure
-tree /f  # Windows
-find . -type f  # Linux/macOS
+# הצג מבנה תיקיית עבודה נוכחי
+tree /f  # ווינדוס
+find . -type f  # לינוקס/מק
 
-# Navigate to azd project root
+# נווט לשורש פרויקט azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# הצג תיקיית תצורת azd
+echo $AZD_CONFIG_DIR  # בדרך כלל ~/.azd
 ```
 
 ## 🎨 עיצוב פלט
 
 ### פלט JSON
 ```bash
-# Get JSON output for scripting
+# לקבל פלט JSON עבור סקריפטים
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# לנתח עם jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### פלט טבלה
 ```bash
-# Format as table
+# עיצוב כטבלה
 azd env list --output table
-azd service list --output table
+
+# הצג שירותים שפורסמו
+azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 שילובי פקודות נפוצים
@@ -424,25 +430,25 @@ azd service list --output table
 ### סקריפט בדיקת בריאות
 ```bash
 #!/bin/bash
-# Quick health check
+# בדיקת בריאות מהירה
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
 ### אימות פריסה
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# אימות טרום פריסה
+azd show
+azd provision --preview  # תצוגה מקדימה של שינויים לפני הפריסה
 az account show
 ```
 
 ### השוואת סביבות
 ```bash
 #!/bin/bash
-# Compare environments
+# השווה בין סביבות
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -453,7 +459,7 @@ done
 ### סקריפט ניקוי משאבים
 ```bash
 #!/bin/bash
-# Clean up old environments
+# לנקות סביבות ישנות
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -465,17 +471,17 @@ done
 
 ### משתני סביבה נפוצים
 ```bash
-# Azure configuration
+# תצורת Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# תצורת AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# תצורת היישום
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -484,57 +490,60 @@ export LOG_LEVEL="info"
 
 ### תיקונים מהירים
 ```bash
-# Reset authentication
+# אפס אימות
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# כפה רענון סביבה
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# פרוס מחדש את כל השירותים
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# בדוק מצב פריסה
+azd show --output json
 ```
 
 ### פקודות שחזור
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# לשחזר מהתקנה שנכשלה - לנקות ולהתקין מחדש
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# לפרוס מחדש את התשתית בלבד
+azd provision
+
+# לפרוס מחדש את היישום בלבד
+azd deploy
 ```
 
 ## 💡 טיפים מקצועיים
 
-### קיצורי דרך לתהליכי עבודה מהירים
+### כינויים לתהליך עבודה מהיר יותר
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# הוסף ל-.bashrc או ל-.zshrc שלך
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### קיצורי דרך לפונקציות
+### קיצורי פונקציות
 ```bash
-# Quick environment switching
+# החלפת סביבה מהירה
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# פריסה מהירה עם ניטור
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# מצב הסביבה
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -544,40 +553,42 @@ azd-status() {
 
 ### קבלת עזרה
 ```bash
-# General help
+# עזרה כללית
 azd --help
 azd help
 
-# Command-specific help
+# עזרה ספציפית לפקודה
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# הצג מידע על גרסה ובנייה
 azd version
 azd version --output json
 ```
 
 ### קישורים לתיעוד
 ```bash
-# Open documentation in browser
+# פתח תיעוד בדפדפן
 azd docs
 
-# Show template documentation
+# הצג תיעוד תבנית
 azd template show <template-name> --docs
 ```
 
 ---
 
-**טיפ**: סמנו את דף העזר הזה במועדפים והשתמשו ב-`Ctrl+F` כדי למצוא במהירות את הפקודות שאתם צריכים!
+**טיפ**: סמנו דף רמז זה ושימוש ב-`Ctrl+F` כדי למצוא במהירות את הפקודות הדרושות!
 
 ---
 
 **ניווט**
 - **שיעור קודם**: [בדיקות מקדימות](../docs/pre-deployment/preflight-checks.md)
-- **שיעור הבא**: [מילון מונחים](glossary.md)
+- **שיעור הבא**: [לקסיקון](glossary.md)
 
 ---
 
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור שלו יש להתייחס אליו כמקור הסמכותי. למידע קריטי מומלץ להשתמש בתרגום מקצועי אנושי. אנו לא נישא באחריות לכל אי הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
