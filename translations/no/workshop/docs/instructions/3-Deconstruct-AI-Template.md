@@ -1,26 +1,18 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-24T22:45:54+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "no"
-}
--->
-# 3. Dekonstruer en mal
+# 3. Dekonstruere en mal
 
-!!! tip "VED SLUTTEN AV DENNE MODULEN VIL DU KUNNE"
+!!! tip "PÅ SLUTTEN AV DETTE MODULEN VIL DU KUNNE"
 
-    - [ ] Punkt
-    - [ ] Punkt
-    - [ ] Punkt
-    - [ ] **Lab 3:** 
+    - [ ] Aktivere GitHub Copilot med MCP-servere for Azure-assistanse
+    - [ ] Forstå AZD-malens mappestruktur og komponenter
+    - [ ] Utforske infrastruktur-som-kode (Bicep) organiseringsmønstre
+    - [ ] **Lab 3:** Bruke GitHub Copilot for å utforske og forstå depotarkitektur 
 
 ---
 
-Med AZD-maler og Azure Developer CLI (`azd`) kan vi raskt starte vår AI-utviklingsreise med standardiserte repositorier som gir eksempelkode, infrastruktur og konfigurasjonsfiler - i form av et klart-til-å-deployere _startprosjekt_.
 
-**Men nå må vi forstå prosjektstrukturen og kodebasen - og kunne tilpasse AZD-malen - uten noen tidligere erfaring eller forståelse av AZD!**
+Med AZD-maler og Azure Developer CLI (`azd`) kan vi raskt komme i gang med vår AI-utviklingsreise med standardiserte depoter som gir eksempel-kode, infrastruktur og konfigurasjonsfiler - i form av et klare-til-å-distribuere _starter_ prosjekt.
+
+**Men nå må vi forstå prosjektstrukturen og kodebasen - og være i stand til å tilpasse AZD-malen - uten noen tidligere erfaring eller forståelse av AZD!**
 
 ---
 
@@ -28,13 +20,13 @@ Med AZD-maler og Azure Developer CLI (`azd`) kan vi raskt starte vår AI-utvikli
 
 ### 1.1 Installer GitHub Copilot Chat
 
-Det er på tide å utforske [GitHub Copilot med Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Nå kan vi bruke naturlig språk for å beskrive oppgaven vår på et høyt nivå og få hjelp til utførelsen. For denne labben bruker vi [Copilot Free-planen](https://github.com/github-copilot/signup) som har en månedlig grense for fullføringer og chat-interaksjoner.
+Det er på tide å utforske [GitHub Copilot med Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Nå kan vi bruke naturlig språk for å beskrive oppgaven på et høyt nivå, og få hjelp til utførelsen. For denne laben bruker vi [Copilot Free plan](https://github.com/github-copilot/signup) som har en månedlig grense for fullføringer og chatteinteraksjoner.
 
-Utvidelsen kan installeres fra markedsplassen, men bør allerede være tilgjengelig i ditt Codespaces-miljø. _Klikk `Open Chat` fra Copilot-ikonets rullegardinmeny - og skriv en prompt som `What can you do?`_ - du kan bli bedt om å logge inn. **GitHub Copilot Chat er klar**.
+Utvidelsen kan installeres fra markedsplassen, men skal allerede være tilgjengelig i ditt Codespaces-miljø. _Klikk `Open Chat` fra Copilot-ikonets rullegardin - og skriv en prompt som `What can you do?`_ - du kan bli bedt om å logge inn. **GitHub Copilot Chat er klar**.
 
 ### 1.2. Installer MCP-servere
 
-For at Agent Mode skal være effektiv, trenger den tilgang til de riktige verktøyene for å hjelpe med å hente kunnskap eller utføre handlinger. Her kommer MCP-servere inn. Vi skal konfigurere følgende servere:
+For at Agent mode skal være effektivt, trenger det tilgang til riktige verktøy for å hente kunnskap eller utføre handlinger. Her kan MCP-servere hjelpe. Vi konfigurerer følgende servere:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
@@ -63,9 +55,9 @@ For å aktivere disse:
    }
    ```
 
-??? warning "Du kan få en feil om at `npx` ikke er installert (klikk for å utvide for løsning)"
+??? warning "Du kan få en feil om at `npx` ikke er installert (klikk for å utvide med løsning)"
 
-      For å fikse dette, åpne filen `.devcontainer/devcontainer.json` og legg til denne linjen i funksjonsseksjonen. Bygg deretter containeren på nytt. Du bør nå ha `npx` installert.
+      For å fikse dette, åpne filen `.devcontainer/devcontainer.json` og legg til denne linjen i features-seksjonen. Bygg deretter containeren på nytt. Du skal nå ha `npx` installert.
 
       ```title="" linenums="0"
          "features": {
@@ -78,9 +70,9 @@ For å aktivere disse:
 
 ### 1.3. Test GitHub Copilot Chat
 
-**Bruk først `az login` for å autentisere med Azure fra VS Code-kommandolinjen.**
+**Bruk først `az login` for å autentisere mot Azure fra VS Code kommandolinje.**
 
-Du bør nå kunne spørre om statusen til Azure-abonnementet ditt og stille spørsmål om distribuerte ressurser eller konfigurasjon. Prøv disse promptene:
+Du skal nå kunne spørre om status for Azure-abonnementet ditt, og stille spørsmål om distribuerte ressurser eller konfigurasjon. Prøv disse promptene:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
@@ -90,106 +82,106 @@ Du kan også stille spørsmål om Azure-dokumentasjon og få svar basert på Mic
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Eller du kan be om kodeeksempler for å fullføre en oppgave. Prøv denne prompten:
+Eller du kan be om kodeeksempler for å fullføre en oppgave. Prøv denne prompten.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-I `Ask`-modus vil dette gi kode som du kan kopiere og prøve ut. I `Agent`-modus kan dette gå et skritt videre og opprette relevante ressurser for deg - inkludert oppsett-skript og dokumentasjon - for å hjelpe deg med å utføre oppgaven.
+I `Ask` mode vil dette gi deg kode du kan kopiere og teste ut. I `Agent` mode kan den gå et steg videre og opprette relevante ressurser for deg - inkludert oppsettsskripter og dokumentasjon - for å hjelpe deg å utføre oppgaven.
 
-**Du er nå klar til å begynne å utforske mal-repositoriet**
+**Du er nå rustet til å begynne å utforske maldepotet**
 
 ---
 
-## 2. Dekonstruer arkitektur
+## 2. Dekonstruer arkitekturen
 
-??? prompt "SPØR: Forklar applikasjonsarkitekturen i docs/images/architecture.png i én paragraf"
+??? prompt "SPØR: Forklar applikasjonsarkitekturen i docs/images/architecture.png i 1 avsnitt"
 
-      Denne applikasjonen er en AI-drevet chat-applikasjon bygget på Azure som demonstrerer en moderne agentbasert arkitektur. Løsningen er sentrert rundt en Azure Container App som hoster hovedapplikasjonskoden, som behandler brukerinput og genererer intelligente svar gjennom en AI-agent. 
-      
-      Arkitekturen utnytter Azure AI Foundry Project som grunnlag for AI-funksjonalitet, og kobler til Azure AI Services som gir de underliggende språkmodellene (som GPT-4o-mini) og agentfunksjonalitet. Brukerinteraksjoner flyter gjennom en React-basert frontend til en FastAPI-backend som kommuniserer med AI-agenttjenesten for å generere kontekstuelle svar. 
-      
-      Systemet inkluderer kunnskapshentingsfunksjoner gjennom enten filsøk eller Azure AI Search-tjenesten, som lar agenten få tilgang til og sitere informasjon fra opplastede dokumenter. For operasjonell dyktighet inkluderer arkitekturen omfattende overvåking gjennom Application Insights og Log Analytics Workspace for sporing, logging og ytelsesoptimalisering. 
-      
-      Azure Storage gir blob-lagring for applikasjonsdata og filopplastinger, mens Managed Identity sikrer sikker tilgang mellom Azure-ressurser uten å lagre legitimasjon. Hele løsningen er designet for skalerbarhet og vedlikeholdbarhet, med den containeriserte applikasjonen som automatisk skalerer basert på etterspørsel, samtidig som den gir innebygd sikkerhet, overvåking og CI/CD-funksjoner gjennom Azures administrerte tjenesteøkosystem.
+      Denne applikasjonen er en AI-drevet chat-applikasjon bygget på Azure som demonstrerer en moderne agent-basert arkitektur. Løsningen sentrerer rundt en Azure Container App som hoster hovedapplikasjonskoden, som behandler brukerinput og genererer intelligente svar via en AI-agent.
+
+      Arkitekturen utnytter Microsoft Foundry Project som fundament for AI-funksjonalitet, og kobler til Azure AI-tjenester som leverer underliggende språkmodeller (som GPT-4o-mini) og agentfunksjonalitet. Brukerinteraksjoner flyter gjennom en React-basert frontend til en FastAPI backend som kommuniserer med AI-agenttjenesten for å generere kontekstuelle svar.
+
+      Systemet inkluderer kunnskapsinnhentingsmuligheter gjennom enten filsøk eller Azure AI Search-tjenesten, som lar agenten få tilgang til og sitere informasjon fra opplastede dokumenter. For driftseffektivitet inkluderer arkitekturen omfattende overvåking via Application Insights og Log Analytics Workspace for sporing, logging og ytelsesoptimalisering.
+
+      Azure Storage tilbyr blob-lagring for applikasjonsdata og filopplastinger, mens Managed Identity sikrer sikker tilgang mellom Azure-ressurser uten å lagre legitimasjon. Hele løsningen er designet for skalerbarhet og vedlikehold, med containerisert applikasjon som automatisk skaleres basert på etterspørsel samtidig som den tilbyr innebygd sikkerhet, overvåking og CI/CD-funksjonalitet gjennom Azure sitt forvaltede tjenesteøkosystem.
 
 ![Arkitektur](../../../../../translated_images/no/architecture.48d94861e6e6cdc0.webp)
 
 ---
 
-## 3. Repositoriets struktur
+## 3. Depotstruktur
 
-!!! prompt "SPØR: Forklar mappestrukturen til malen. Start med et visuelt hierarkisk diagram."
+!!! prompt "SPØR: Forklar malens mappestruktur. Begynn med et visuelt hierarkisk diagram."
 
 ??? info "SVAR: Visuelt hierarkisk diagram"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Konfigurasjon og oppsett
-      │   ├── azure.yaml                    # Azure Developer CLI-konfigurasjon
+      ├── 📋 Configuration & Setup
+      │   ├── azure.yaml                    # Konfigurasjon for Azure Developer CLI
       │   ├── docker-compose.yaml           # Lokale utviklingscontainere
       │   ├── pyproject.toml                # Python-prosjektkonfigurasjon
       │   ├── requirements-dev.txt          # Utviklingsavhengigheter
-      │   └── .devcontainer/                # VS Code dev container-oppsett
+      │   └── .devcontainer/                # VS Code dev container oppsett
       │
-      ├── 🏗️ Infrastruktur (infra/)
-      │   ├── main.bicep                    # Hovedinfrastrukturmal
-      │   ├── api.bicep                     # API-spesifikke ressurser
-      │   ├── main.parameters.json          # Infrastrukturparametere
-      │   └── core/                         # Modulære infrastrukturkomponenter
+      ├── 🏗️ Infrastructure (infra/)
+      │   ├── main.bicep                    # Hovedmal for infrastruktur
+      │   ├── api.bicep                     # Ressurser spesifikke for API
+      │   ├── main.parameters.json          # Infrastrukturparametre
+      │   └── core/                         # Modulære infrastrukturelementer
       │       ├── ai/                       # AI-tjenestekonfigurasjoner
-      │       ├── host/                     # Hosting-infrastruktur
+      │       ├── host/                     # Hosting infrastruktur
       │       ├── monitor/                  # Overvåking og logging
       │       ├── search/                   # Azure AI Search-oppsett
       │       ├── security/                 # Sikkerhet og identitet
       │       └── storage/                  # Lagringskonto-konfigurasjoner
       │
-      ├── 💻 Applikasjonskilde (src/)
+      ├── 💻 Application Source (src/)
       │   ├── api/                          # Backend-API
-      │   │   ├── main.py                   # FastAPI-applikasjonsinngang
-      │   │   ├── routes.py                 # API-rutedefinisjoner
-      │   │   ├── search_index_manager.py   # Søksfunksjonalitet
-      │   │   ├── data/                     # API-datahåndtering
-      │   │   ├── static/                   # Statisk webinnhold
+      │   │   ├── main.py                   # FastAPI applikasjonsinngang
+      │   │   ├── routes.py                 # API-rute-definisjoner
+      │   │   ├── search_index_manager.py   # Søkefunksjonalitet
+      │   │   ├── data/                     # API datahåndtering
+      │   │   ├── static/                   # Statisk web-innhold
       │   │   └── templates/                # HTML-maler
       │   ├── frontend/                     # React/TypeScript frontend
-      │   │   ├── package.json              # Node.js-avhengigheter
+      │   │   ├── package.json              # Node.js avhengigheter
       │   │   ├── vite.config.ts            # Vite byggekonfigurasjon
-      │   │   └── src/                      # Frontend-kildekode
-      │   ├── data/                         # Eksempelfiler
+      │   │   └── src/                      # Frontend kildekode
+      │   ├── data/                         # Eksempeldatafiler
       │   │   └── embeddings.csv            # Forhåndsberegnede embeddings
-      │   ├── files/                        # Kunnskapsbasefiler
-      │   │   ├── customer_info_*.json      # Eksempler på kundedata
+      │   ├── files/                        # Kunnskapsbase-filer
+      │   │   ├── customer_info_*.json      # Kundedata-eksempler
       │   │   └── product_info_*.md         # Produktdokumentasjon
       │   ├── Dockerfile                    # Container-konfigurasjon
       │   └── requirements.txt              # Python-avhengigheter
       │
-      ├── 🔧 Automatisering og skript (scripts/)
+      ├── 🔧 Automation & Scripts (scripts/)
       │   ├── postdeploy.sh/.ps1           # Oppsett etter distribusjon
       │   ├── setup_credential.sh/.ps1     # Legitimasjonskonfigurasjon
       │   ├── validate_env_vars.sh/.ps1    # Miljøvalidering
       │   └── resolve_model_quota.sh/.ps1  # Modellkvotehåndtering
       │
-      ├── 🧪 Testing og evaluering
+      ├── 🧪 Testing & Evaluation
       │   ├── tests/                        # Enhets- og integrasjonstester
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agent evalueringsrammeverk
-      │   │   ├── evaluate.py               # Evaluering kjører
+      │   ├── evals/                        # Agent-evalueringsrammeverk
+      │   │   ├── evaluate.py               # Evalueringskjører
       │   │   ├── eval-queries.json         # Testspørringer
       │   │   └── eval-action-data-path.json
       │   ├── sandbox/                      # Utviklingslekeplass
-      │   │   ├── 1-quickstart.py           # Komme i gang eksempler
-      │   │   └── aad-interactive-chat.py   # Autentisering eksempler
-      │   └── airedteaming/                 # AI sikkerhetsevaluering
+      │   │   ├── 1-quickstart.py           # Komme i gang-eksempler
+      │   │   └── aad-interactive-chat.py   # Autentiseringseksempler
+      │   └── airedteaming/                 # AI-sikkerhetsevaluering
       │       └── ai_redteaming.py          # Red team testing
       │
-      ├── 📚 Dokumentasjon (docs/)
+      ├── 📚 Documentation (docs/)
       │   ├── deployment.md                 # Distribusjonsveiledning
       │   ├── local_development.md          # Lokale oppsettsinstruksjoner
       │   ├── troubleshooting.md            # Vanlige problemer og løsninger
-      │   ├── azure_account_setup.md        # Azure-forutsetninger
-      │   └── images/                       # Dokumentasjonsressurser
+      │   ├── azure_account_setup.md        # Azure forutsetninger
+      │   └── images/                       # Dokumentasjonsbilder
       │
-      └── 📄 Prosjektmetadata
+      └── 📄 Project Metadata
          ├── README.md                     # Prosjektoversikt
          ├── CODE_OF_CONDUCT.md           # Retningslinjer for fellesskapet
          ├── CONTRIBUTING.md              # Veiledning for bidrag
@@ -197,20 +189,20 @@ I `Ask`-modus vil dette gi kode som du kan kopiere og prøve ut. I `Agent`-modus
          └── next-steps.md                # Veiledning etter distribusjon
       ```
 
-### 3.1. Kjerneappens arkitektur
+### 3.1. Kjerneapplikasjonsarkitektur
 
-Denne malen følger et **full-stack webapplikasjonsmønster** med:
+Denne malen følger et mønster for **fullstack webapplikasjon** med:
 
 - **Backend**: Python FastAPI med Azure AI-integrasjon
-- **Frontend**: TypeScript/React med Vite byggesystem
-- **Infrastruktur**: Azure Bicep-maler for skyressurser
-- **Containerisering**: Docker for konsistent distribusjon
+- **Frontend**: TypeScript/React med Vite byggeverktøy
+- **Infrastruktur**: Azure Bicep-maler for skyløsninger
+- **Containerisering**: Docker for konsekvent distribusjon
 
 ### 3.2 Infrastruktur som kode (bicep)
 
 Infrastrukturlaget bruker **Azure Bicep**-maler organisert modulært:
 
-   - **`main.bicep`**: Orkestrerer alle Azure-ressurser
+   - **`main.bicep`**: Koordinerer alle Azure-ressurser
    - **`core/` moduler**: Gjenbrukbare komponenter for ulike tjenester
       - AI-tjenester (Azure OpenAI, AI Search)
       - Container-hosting (Azure Container Apps)
@@ -221,63 +213,68 @@ Infrastrukturlaget bruker **Azure Bicep**-maler organisert modulært:
 
 **Backend-API (`src/api/`)**:
 
-- FastAPI-basert REST-API
-- Integrasjon med Azure AI Agent-tjeneste
-- Søkeindekshåndtering for kunnskapshenting
-- Filopplasting og prosesseringsfunksjoner
+- FastAPI-basert REST API
+- Integrasjon med Foundry-agenter
+- Administrasjon av søkeindeks for kunnskapsinnhenting
+- Filopplasting og prosesseringsmuligheter
 
 **Frontend (`src/frontend/`)**:
 
 - Moderne React/TypeScript SPA
-- Vite for rask utvikling og optimaliserte bygg
-- Chat-grensesnitt for agentinteraksjoner
+- Vite for rask utvikling og optimaliserte builds
+- Chattgrensesnitt for agent-interaksjoner
 
 **Kunnskapsbase (`src/files/`)**:
 
-- Eksempler på kunde- og produktdata
-- Demonstrerer filbasert kunnskapshenting
+- Eksempelkunde- og produktdata
+- Demonstrerer filbasert kunnskapsinnhenting
 - Eksempler i JSON- og Markdown-format
+
 
 ### 3.4 DevOps og automatisering
 
 **Skript (`scripts/`)**:
 
 - Plattformuavhengige PowerShell- og Bash-skript
-- Miljøvalidering og oppsett
+- Validering og oppsett av miljø
 - Konfigurasjon etter distribusjon
 - Modellkvotehåndtering
 
 **Azure Developer CLI-integrasjon**:
 
-- `azure.yaml`-konfigurasjon for `azd`-arbeidsflyter
-- Automatisert klargjøring og distribusjon
-- Håndtering av miljøvariabler
+- `azure.yaml` konfigurasjon for `azd` arbeidsflyter
+- Automatisert provisjonering og distribusjon
+- Miljøvariabelhåndtering
 
 ### 3.5 Testing og kvalitetssikring
 
 **Evalueringsrammeverk (`evals/`)**:
 
 - Evaluering av agentens ytelse
-- Test av kvalitet på spørring-svar
+- Testing av spørring-svar-kvalitet
 - Automatisert vurderingspipeline
 
 **AI-sikkerhet (`airedteaming/`)**:
 
-- Red team-testing for AI-sikkerhet
-- Skanning av sikkerhetssårbarheter
-- Ansvarlige AI-praksiser
+- Red team testing for AI-sikkerhet
+- Sårbarhetsskanning
+- Ansvarlig AI-praksis
 
 ---
 
 ## 4. Gratulerer 🏆
 
-Du har med suksess brukt GitHub Copilot Chat med MCP-servere for å utforske repositoriet.
+Du brukte GitHub Copilot Chat med MCP-servere for å utforske depotet.
 
-- [X] Aktivert GitHub Copilot for Azure
-- [X] Forstått applikasjonsarkitekturen
+- [X] Aktiverte GitHub Copilot for Azure
+- [X] Forstod applikasjonsarkitekturen
 - [X] Utforsket AZD-malens struktur
 
-Dette gir deg en forståelse av _infrastruktur som kode_-ressursene for denne malen. Neste steg er å se på konfigurasjonsfilen for AZD.
+Dette gir deg en forståelse av _infrastruktur som kode_-ressursene for denne malen. Neste steg ser vi på konfigurasjonsfilen for AZD.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på det opprinnelige språket bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som følge av bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

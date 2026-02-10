@@ -1,64 +1,61 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-24T22:48:16+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "fi"
-}
--->
-# AZD AI-kehittäjille
+# AZD tekoälykehittäjille
 
-!!! info "TYÖPAJAN KOHDERYHMÄ"
+!!! info "AUDIENCE FOR THIS WORKSHOP"
    
-    Tämä työpaja on tarkoitettu kaikille, jotka haluavat rakentaa AI-agenttisovelluksia Azure AI Foundryssa hyödyntäen huippuluokan työkaluja ja työnkulkuja. Työpaja sopii sekä aloittelijoille että kokeneille kehittäjille, joilla on jonkin verran kokemusta Azuresta, tekoälyn käsitteistä ja Python-koodista. Tarkista ennakkovaatimukset ennen aloittamista.
+    Tämä työpaja on tarkoitettu kaikille, jotka haluavat rakentaa AI Agent -sovelluksia Microsoft Foundryssa hyödyntäen huippuluokan työkaluja ja työnkulkuja. Työpaja sopii sekä aloittelijoille että kokeneille kehittäjille, joilla on jonkin verran tutustumista Azureen, tekoälykonsepteihin ja Python-koodiin. Tarkista vaatimukset ennen aloittamista.
 
     **Kesto:** 3-4 tuntia  
     **Taso:** Aloittelija - Keskitaso  
 
 ---
 
-## Ennakkovaatimukset
 
-- Henkilökohtainen GitHub-tili → [Luo ilmainen tili](https://github.com/signup)
-- Aktiivinen Azure-tili → [Luo ilmainen tili](https://aka.ms/free)
-- Tekoälyn käsitteiden, Python-kehityksen ja komentorivityökalujen tuntemus
+## Pre-Requisites
+
+- Henkilökohtainen GitHub-tili → [Create one for free](https://github.com/signup)
+- Aktiivinen Azure-tili → [Create one for free](https://aka.ms/free)
+- Tuntemus tekoälykonsepteista, Python-kehityksestä ja komentorivityökaluista
 - Kokemusta VS Codesta ja GitHubin työkaluista ja työnkuluista.
 
 ---
 
-## Oppimistavoitteet
+## Learning Objectives
 
-Työpajan lopussa osaat:
+Työpajan lopuksi osaat:
 
-- [X] **Työskennellä Azure Developer CLI:n kanssa** → Azure-resurssien provisiointiin, käyttöönottoon ja hallintaan.
-- [X] **Käyttää AI-sovelluspohjia** → AI-agenttiprojektien käynnistämiseen Azure AI Foundryssa.
-- [X] **Määrittää pohjia** → ominaisuuksille kuten Red Teaming, arvioinnit, jäljitys ja seuranta.
-- [X] **Purkaa ja tutkia** → AZD-pohjia ja työnkulkuja GitHub Copilotin avulla.
-- [X] **Mukauttaa ja ottaa uudelleen käyttöön** → AI-agentin aloituspohja omien vaatimustesi mukaisesti.
-
----
-
-## Työpajan rakenne
-
-Työpaja on jaettu moduuleihin, joista jokainen sisältää käytännön harjoituksen:
-
-1. **Johdanto** - Ymmärrä, mitä AZD-pohjat ovat ja miten ne toimivat
-1. **Valinta** - Löydä oikea "aloituspohja" seuraavaa AI-projektiasi varten
-1. **Vahvistus** - Ota pohja käyttöön ja tutki sitä varmistaaksesi, että se toimii odotetusti
-1. **Purkaminen** - Analysoi pohjan komponentit ja konfiguraatio
-1. **Määrittäminen** - Opi aktivoimaan ja käyttämään Azure AI Foundryn eri ominaisuuksia
-1. **Mukauttaminen** - Rakenna sovellus uudelleen omien tietojesi ja vaatimustesi pohjalta
-1. **Purkutyö** - Opi poistamaan infrastruktuuri ja palauttamaan pehmeästi poistetut resurssit
+- [X] **Käyttää Azure Developer CLI** → luoda, ottaa käyttöön ja hallita Azure-resurssejasi.
+- [X] **Käyttää AI-sovellusmalleja** → käynnistää AI Agent -projekteja Microsoft Foundryssa.
+- [X] **Määrittää malleja** → ominaisuuksia kuten Red Teaming, arvioinnit, jäljitys ja valvonta varten
+- [X] **Purkaa ja tutkia** → AZD-malleja ja työnkulkuja GitHub Copilotin avulla
+- [X] **Mukauta ja ota uudelleen käyttöön** → AI Agent -aloitusmallin, omien vaatimustesi mukaisesti
 
 ---
 
-## Palaute ja ongelmat
+## Workshop Outline
 
-Päivitämme jatkuvasti opetusmateriaalia varmistaaksemme, että se tarjoaa parhaan oppimiskokemuksen aloittelijoille. Arvostamme palautettasi.
+Työpaja on jaettu moduuleihin, joista jokainen sisältää käytännön lab-harjoituksen:
 
-1. Lähetä ongelma tähän repoihin - merkitse se `Workshop` helpottamaan tunnistamista.
-1. Liity Azure AI Foundryn Discordiin - verkostoidu muiden oppijoiden kanssa!
+1. **Introduction** - Get an understanding of what AZD templates are, and how they work
+1. **Selection** - Discover the right "starter" template for your next AI project
+1. **Validation** - Deploy and explore the template to verify it works as advertised
+1. **Deconstruction** - Ota malli osiin ymmärtääksesi sen komponentit ja konfiguraation
+1. **Configuration** - Opi aktivoimaan ja käyttämään eri Microsoft Foundry -ominaisuuksia
+1. **Customization** - Rakenna sovellus uudelleen omien tietojesi ja vaatimustesi pohjalta
+1. **Teardown** - Opi poistamaan infrastruktuuri käytöstä ja palauttamaan pehmeästi poistetut resurssit
 
 ---
 
+## Feedback & Issues
+
+Päivitämme opetussuunnitelmaa aktiivisesti varmistaaksemme parhaan mahdollisen oppimiskokemuksen aloittelijoille. Palautettasi arvostetaan.
+
+1. Avaa issue tässä repossa - merkitse se `Workshop`-tunnisteella.
+1. Liity Microsoft Foundryn Discordiin - verkostoidu muiden oppijoiden kanssa!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Vastuuvapauslauseke:
+
+Tämä asiakirja on käännetty käyttäen tekoälypohjaista käännöspalvelua Co‑op Translator (https://github.com/Azure/co-op-translator). Vaikka pyrimme oikeellisuuteen, huomioithan, että automaattikäännöksissä voi esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää määräävänä lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista käännöstä. Emme ole vastuussa mahdollisista väärinymmärryksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

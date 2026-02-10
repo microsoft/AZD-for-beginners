@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-21T10:26:50+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "da"
-}
--->
-# Microservices Arkitektur - Eksempel på Container App
+# Mikrotjenestearkitektur - Container App-eksempel
 
-⏱️ **Estimeret Tid**: 25-35 minutter | 💰 **Estimeret Omkostning**: ~$50-100/måned | ⭐ **Kompleksitet**: Avanceret
+⏱️ **Anslået tid**: 25-35 minutter | 💰 **Anslået pris**: ~$50-100/måned | ⭐ **Kompleksitet**: Avanceret
 
 **📚 Læringssti:**
-- ← Forrige: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Grundlæggende om enkelt container
-- 🎯 **Du Er Her**: Microservices Arkitektur (2-service fundament)
-- → Næste: [AI Integration](../../../../docs/ai-foundry) - Tilføj intelligens til dine services
-- 🏠 [Kursus Hjem](../../README.md)
+- ← Forrige: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Grundlæggende for enkelt container
+- 🎯 **Du er her**: Mikrotjenestearkitektur (2-tjenesters fundament)
+- → Næste: [AI Integration](../../../../docs/ai-foundry) - Tilføj intelligens til dine tjenester
+- 🏠 [Kursusforside](../../README.md)
 
 ---
 
-En **forenklet men funktionel** microservices arkitektur implementeret i Azure Container Apps ved brug af AZD CLI. Dette eksempel demonstrerer service-til-service kommunikation, container orkestrering og overvågning med en praktisk 2-service opsætning.
+En **forenklet men funktionel** mikrotjenestearkitektur udrullet til Azure Container Apps ved hjælp af AZD CLI. Dette eksempel demonstrerer service-til-service-kommunikation, containerorkestrering og overvågning med en praktisk 2-tjenesters opsætning.
 
-> **📚 Læringsmetode**: Dette eksempel starter med en minimal 2-service arkitektur (API Gateway + Backend Service), som du faktisk kan implementere og lære fra. Når du har mestret dette fundament, giver vi vejledning til at udvide til et fuldt microservices økosystem.
+> **📚 Læringsmetode**: Dette eksempel starter med en minimal 2-tjenesters arkitektur (API Gateway + Backend Service), som du rent faktisk kan udrulle og lære fra. Når du mestrer dette fundament, giver vi vejledning til at udvide til et fuldt mikrotjeneste-økosystem.
 
-## Hvad Du Vil Lære
+## Hvad du vil lære
 
-Ved at gennemføre dette eksempel vil du:
-- Implementere flere containere i Azure Container Apps
-- Implementere service-til-service kommunikation med intern netværk
-- Konfigurere miljøbaseret skalering og sundhedstjek
+Ved at fuldføre dette eksempel vil du:
+- Udrulle flere containere til Azure Container Apps
+- Implementere service-til-service-kommunikation med internt netværk
+- Konfigurere miljøbaseret skalering og helbredstjek
 - Overvåge distribuerede applikationer med Application Insights
-- Forstå implementeringsmønstre og bedste praksis for microservices
-- Lære progressiv udvidelse fra simple til komplekse arkitekturer
+- Forstå udrulningsmønstre og bedste praksis for mikrotjenester
+- Lære progressiv udvidelse fra simpel til kompleks arkitektur
 
 ## Arkitektur
 
-### Fase 1: Hvad Vi Bygger (Inkluderet i Dette Eksempel)
+### Fase 1: Hvad vi bygger (inkluderet i dette eksempel)
 
 ```mermaid
 graph TB
     Internet[Internet/Bruger]
-    Gateway[API Gateway<br/>Node.js Container<br/>Port 8080]
-    Product[Produktservice<br/>Python Container<br/>Port 8000]
-    AppInsights[Applikationsindsigt<br/>Overvågning & Logfiler]
+    Gateway[API-gateway<br/>Node.js-container<br/>Port 8080]
+    Product[Produktservice<br/>Python-container<br/>Port 8000]
+    AppInsights[Application Insights<br/>Overvågning & Logfiler]
     
     Internet -->|HTTPS| Gateway
-    Gateway -->|HTTP Intern| Product
+    Gateway -->|HTTP internt| Product
     Gateway -.->|Telemetri| AppInsights
     Product -.->|Telemetri| AppInsights
     
@@ -57,36 +48,36 @@ graph TB
 **Komponentdetaljer:**
 
 | Komponent | Formål | Adgang | Ressourcer |
-|-----------|--------|--------|------------|
-| **API Gateway** | Ruter eksterne forespørgsler til backend services | Offentlig (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replikaer |
-| **Produktservice** | Håndterer produktkatalog med in-memory data | Kun intern | 0.5 vCPU, 1GB RAM, 1-10 replikaer |
-| **Application Insights** | Centraliseret logning og distribueret sporing | Azure Portal | 1-2 GB/måned dataindtagelse |
+|-----------|--------|--------|-----------|
+| **API Gateway** | Ruter eksterne anmodninger til backend-tjenester | Offentlig (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replicas |
+| **Product Service** | Håndterer produktkatalog med data i hukommelsen | Kun intern | 0.5 vCPU, 1GB RAM, 1-10 replicas |
+| **Application Insights** | Centraliseret logning og distribueret tracing | Azure Portal | 1-2 GB/måned dataindtag |
 
-**Hvorfor Starte Simpelt?**
-- ✅ Implementer og forstå hurtigt (25-35 minutter)
-- ✅ Lær kerne microservices mønstre uden kompleksitet
-- ✅ Arbejdskode, du kan ændre og eksperimentere med
+**Hvorfor starte simpelt?**
+- ✅ Udrul og forstå hurtigt (25-35 minutter)
+- ✅ Lær kerne-mikrotjenestemønstre uden kompleksitet
+- ✅ Fungerende kode, som du kan ændre og eksperimentere med
 - ✅ Lavere omkostninger til læring (~$50-100/måned vs $300-1400/måned)
-- ✅ Opbyg selvtillid før tilføjelse af databaser og meddelelseskøer
+- ✅ Opbyg selvtillid før du tilføjer databaser og beskedkøer
 
-**Analogi**: Tænk på dette som at lære at køre bil. Du starter på en tom parkeringsplads (2 services), mestrer det grundlæggende, og går derefter videre til bytrafik (5+ services med databaser).
+**Analogi**: Tænk på dette som at lære at køre bil. Du starter på en tom parkeringsplads (2 tjenester), mestrer det grundlæggende, og går så videre til bytrafik (5+ tjenester med databaser).
 
-### Fase 2: Fremtidig Udvidelse (Referencearkitektur)
+### Fase 2: Fremtidig udvidelse (referencearkitektur)
 
-Når du har mestret 2-service arkitekturen, kan du udvide til:
+Når du mestrer 2-tjenesters arkitekturen, kan du udvide til:
 
 ```mermaid
 graph TB
     User[Bruger]
-    Gateway[API Gateway<br/>✅ Inkluderet]
-    Product[Produkt Service<br/>✅ Inkluderet]
-    Order[Ordre Service<br/>🔜 Tilføj Næste]
-    UserSvc[Bruger Service<br/>🔜 Tilføj Næste]
-    Notify[Notifikations Service<br/>🔜 Tilføj Sidst]
+    Gateway[API-gateway<br/>✅ Inkluderet]
+    Product[Produktservice<br/>✅ Inkluderet]
+    Order[Ordreservice<br/>🔜 Tilføj næste]
+    UserSvc[Brugerservice<br/>🔜 Tilføj næste]
+    Notify[Notifikationstjeneste<br/>🔜 Tilføj sidst]
     
-    CosmosDB[(Cosmos DB<br/>🔜 Produkt Data)]
-    AzureSQL[(Azure SQL<br/>🔜 Ordre Data)]
-    ServiceBus[Azure Service Bus<br/>🔜 Asynkrone Begivenheder]
+    CosmosDB[(Cosmos DB<br/>🔜 Produktdata)]
+    AzureSQL[(Azure SQL<br/>🔜 Ordredata)]
+    ServiceBus[Azure Service Bus<br/>🔜 Asynkrone hændelser]
     AppInsights[Application Insights<br/>✅ Inkluderet]
     
     User --> Gateway
@@ -98,9 +89,9 @@ graph TB
     Order --> AzureSQL
     UserSvc --> AzureSQL
     
-    Product -.->|ProduktOprettet Begivenhed| ServiceBus
-    ServiceBus -.->|Abonner| Notify
-    ServiceBus -.->|Abonner| Order
+    Product -.->|ProduktOprettet-begivenhed| ServiceBus
+    ServiceBus -.->|Abonnér| Notify
+    ServiceBus -.->|Abonnér| Order
     
     Gateway -.-> AppInsights
     Product -.-> AppInsights
@@ -114,35 +105,35 @@ graph TB
     style UserSvc fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
     style Notify fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
 ```
-Se afsnittet "Udvidelsesguide" i slutningen for trin-for-trin instruktioner.
+Se afsnittet "Udvidelsesguide" til sidst for trin-for-trin instruktioner.
 
-## Inkluderede Funktioner
+## Inkluderede funktioner
 
-✅ **Service Discovery**: Automatisk DNS-baseret opdagelse mellem containere  
-✅ **Load Balancing**: Indbygget load balancing på tværs af replikaer  
-✅ **Auto-skalering**: Uafhængig skalering pr. service baseret på HTTP-forespørgsler  
-✅ **Sundhedsovervågning**: Liveness og readiness probes for begge services  
-✅ **Distribueret Logning**: Centraliseret logning med Application Insights  
-✅ **Intern Netværk**: Sikker service-til-service kommunikation  
-✅ **Container Orkestrering**: Automatisk implementering og skalering  
-✅ **Zero-Downtime Updates**: Rullende opdateringer med revisionsstyring  
+✅ **Tjenesteopdagelse**: Automatisk DNS-baseret opdagelse mellem containere  
+✅ **Load-balancering**: Indbygget load-balancering på tværs af replikaer  
+✅ **Autoskalering**: Uafhængig skalering pr. tjeneste baseret på HTTP-forespørgsler  
+✅ **Sundhedsovervågning**: Liveness- og readiness-prober for begge tjenester  
+✅ **Distribueret logning**: Centraliseret logning med Application Insights  
+✅ **Internt netværk**: Sikker service-til-service-kommunikation  
+✅ **Containerorkestrering**: Automatisk udrulning og skalering  
+✅ **Opdateringer uden nedetid**: Rolling updates med revisionsstyring  
 
 ## Forudsætninger
 
-### Påkrævede Værktøjer
+### Krævede værktøjer
 
-Før du starter, skal du sikre dig, at du har disse værktøjer installeret:
+Før du går i gang, bekræft at du har disse værktøjer installeret:
 
 1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 eller højere)
    ```bash
    azd version
-   # Forventet output: azd version 1.0.0 eller højere
+   # Forventet output: azd version 1.0.0 eller nyere
    ```
 
 2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 eller højere)
    ```bash
    az --version
-   # Forventet output: azure-cli 2.50.0 eller højere
+   # Forventet output: azure-cli 2.50.0 eller nyere
    ```
 
 3. **[Docker](https://www.docker.com/get-started)** (til lokal udvikling/test - valgfrit)
@@ -151,52 +142,52 @@ Før du starter, skal du sikre dig, at du har disse værktøjer installeret:
    # Forventet output: Docker version 20.10 eller højere
    ```
 
-### Bekræft Dit Setup
+### Bekræft din opsætning
 
 Kør disse kommandoer for at bekræfte, at du er klar:
 
 ```bash
 # Tjek Azure Developer CLI
 azd version
-# ✅ Forventet: azd version 1.0.0 eller højere
+# ✅ Forventet: azd version 1.0.0 eller nyere
 
 # Tjek Azure CLI
 az --version
-# ✅ Forventet: azure-cli 2.50.0 eller højere
+# ✅ Forventet: azure-cli 2.50.0 eller nyere
 
-# Tjek Docker (valgfrit)
+# Tjek Docker (valgfri)
 docker --version
-# ✅ Forventet: Docker version 20.10 eller højere
+# ✅ Forventet: Docker version 20.10 eller nyere
 ```
 
-**Succes Kriterier**: Alle kommandoer returnerer versionsnumre, der matcher eller overstiger minimumskravene.
+**Succeskriterier**: Alle kommandoer returnerer versionsnumre, der matcher eller overstiger minimumskravene.
 
-### Azure Krav
+### Azure-krav
 
-- Et aktivt **Azure abonnement** ([opret en gratis konto](https://azure.microsoft.com/free/))
+- Et aktivt **Azure-abonnement** ([opret en gratis konto](https://azure.microsoft.com/free/))
 - Tilladelser til at oprette ressourcer i dit abonnement
-- **Contributor** rolle på abonnementet eller ressourcegruppen
+- Contributor-rollen på abonnementet eller ressourcegruppen
 
-### Vidensforudsætninger
+### Forudgående viden
 
-Dette er et eksempel på **avanceret niveau**. Du bør have:
-- Gennemført [Simple Flask API eksemplet](../../../../examples/container-app/simple-flask-api) 
-- Grundlæggende forståelse af microservices arkitektur
-- Kendskab til REST APIs og HTTP
-- Forståelse af container begreber
+Dette er et avanceret eksempel. Du bør have:
+- Gennemført [Simple Flask API](../../../../examples/container-app/simple-flask-api) 
+- Grundlæggende forståelse af mikrotjenestearkitektur
+- Kendskab til REST API'er og HTTP
+- Forståelse af containerkoncepter
 
-**Ny til Container Apps?** Start med [Simple Flask API eksemplet](../../../../examples/container-app/simple-flask-api) først for at lære det grundlæggende.
+**Ny til Container Apps?** Start med [Simple Flask API](../../../../examples/container-app/simple-flask-api) først for at lære det grundlæggende.
 
-## Hurtig Start (Trin-for-Trin)
+## Hurtigstart (trin for trin)
 
-### Trin 1: Klon og Naviger
+### Trin 1: Klon og naviger
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/microservices
 ```
 
-**✓ Succes Tjek**: Bekræft, at du ser `azure.yaml`:
+**✓ Tjek for succes**: Bekræft, at du ser `azure.yaml`:
 ```bash
 ls
 # Forventet: README.md, azure.yaml, infra/, src/
@@ -208,58 +199,58 @@ ls
 azd auth login
 ```
 
-Dette åbner din browser til Azure-godkendelse. Log ind med dine Azure-legitimationsoplysninger.
+Dette åbner din browser for Azure-godkendelse. Log ind med dine Azure-legitimationsoplysninger.
 
-**✓ Succes Tjek**: Du bør se:
+**✓ Tjek for succes**: Du bør se:
 ```
 Logged in to Azure.
 ```
 
-### Trin 3: Initialiser Miljøet
+### Trin 3: Initialiser miljøet
 
 ```bash
 azd init
 ```
 
-**Prompter, du vil se**:
+**Forespørgsler, du vil blive mødt med**:
 - **Miljønavn**: Indtast et kort navn (f.eks. `microservices-dev`)
-- **Azure abonnement**: Vælg dit abonnement
-- **Azure placering**: Vælg en region (f.eks. `eastus`, `westeurope`)
+- **Azure-abonnement**: Vælg dit abonnement
+- **Azure-region**: Vælg en region (f.eks. `eastus`, `westeurope`)
 
-**✓ Succes Tjek**: Du bør se:
+**✓ Tjek for succes**: Du bør se:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Trin 4: Implementer Infrastruktur og Services
+### Trin 4: Udrul infrastruktur og tjenester
 
 ```bash
 azd up
 ```
 
-**Hvad der sker** (tager 8-12 minutter):
+**Hvad sker der** (tager 8-12 minutter):
 
 ```mermaid
 graph LR
-    A[azd op] --> B[Opret Ressourcegruppe]
-    B --> C[Udrul Containerregister]
+    A[azd op] --> B[Opret ressourcegruppe]
+    B --> C[Udrul containerregister]
     C --> D[Udrul Log Analytics]
     D --> E[Udrul App Insights]
-    E --> F[Opret Container Miljø]
-    F --> G[Byg API Gateway Billede]
-    F --> H[Byg Produktservice Billede]
-    G --> I[Skub til Register]
+    E --> F[Opret containermiljø]
+    F --> G[Byg API-gateway-billede]
+    F --> H[Byg produktservice-billede]
+    G --> I[Push til registeret]
     H --> I
-    I --> J[Udrul API Gateway]
-    I --> K[Udrul Produktservice]
-    J --> L[Konfigurer Ingress & Sundhedstjek]
+    I --> J[Udrul API-gateway]
+    I --> K[Udrul produktservice]
+    J --> L[Konfigurer Ingress & sundhedstjek]
     K --> L
-    L --> M[Udrulning Fuldført ✓]
+    L --> M[Udrulning fuldført ✓]
     
     style A fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style M fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**✓ Succes Tjek**: Du bør se:
+**✓ Tjek for succes**: Du bør se:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -267,13 +258,13 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ Tid**: 8-12 minutter
 
-### Trin 5: Test Implementeringen
+### Trin 5: Test udrulningen
 
 ```bash
-# Hent gateway-endpointen
+# Hent gateway-endpointet
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Test API Gateway-sundhed
+# Test API Gateways sundhed
 curl $GATEWAY_URL/health
 ```
 
@@ -286,9 +277,9 @@ curl $GATEWAY_URL/health
 }
 ```
 
-**Test produktservice gennem gateway**:
+**Test produktservice via gateway**:
 ```bash
-# Liste produkter
+# Vis produkter
 curl $GATEWAY_URL/api/products
 ```
 
@@ -301,11 +292,11 @@ curl $GATEWAY_URL/api/products
 ]
 ```
 
-**✓ Succes Tjek**: Begge endpoints returnerer JSON-data uden fejl.
+**✓ Tjek for succes**: Begge endpoints returnerer JSON-data uden fejl.
 
 ---
 
-**🎉 Tillykke!** Du har implementeret en microservices arkitektur i Azure!
+**🎉 Tillykke!** Du har udrullet en mikrotjenestearkitektur til Azure!
 
 ## Projektstruktur
 
@@ -339,46 +330,46 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Hvad Hver Komponent Gør:**
+**Hvad hver komponent gør:**
 
 **Infrastruktur (infra/)**:
 - `main.bicep`: Orkestrerer alle Azure-ressourcer og deres afhængigheder
-- `core/container-apps-environment.bicep`: Opretter Container Apps miljøet og Azure Container Registry
+- `core/container-apps-environment.bicep`: Opretter Container Apps-miljøet og Azure Container Registry
 - `core/monitor.bicep`: Opsætter Application Insights til distribueret logning
-- `app/*.bicep`: Individuelle container app definitioner med skalering og sundhedstjek
+- `app/*.bicep`: Individuelle container-app-definitioner med skalering og helbredstjek
 
 **API Gateway (src/api-gateway/)**:
-- Offentligt tilgængelig service, der ruter forespørgsler til backend services
-- Implementerer logning, fejlhåndtering og forespørgselsvideresendelse
-- Demonstrerer service-til-service HTTP kommunikation
+- Offentlig service, der ruter anmodninger til backend-tjenester
+- Implementerer logning, fejlhåndtering og videresendelse af forespørgsler
+- Demonstrerer service-til-service HTTP-kommunikation
 
-**Produktservice (src/product-service/)**:
-- Intern service med produktkatalog (in-memory for enkelhed)
-- REST API med sundhedstjek
-- Eksempel på backend microservice mønster
+**Product Service (src/product-service/)**:
+- Intern service med produktkatalog (i hukommelsen for enkelhedens skyld)
+- REST API med helbredstjek
+- Eksempel på backend-mikrotjenestemønster
 
-## Services Oversigt
+## Oversigt over tjenester
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Adgang**: Offentlig (ekstern adgang)  
-**Formål**: Ruter indkommende forespørgsler til passende backend services  
+**Adgang**: Offentlig (ekstern ingress)  
+**Formål**: Ruter indkommende anmodninger til passende backend-tjenester  
 
 **Endpoints**:
-- `GET /` - Serviceinformation
-- `GET /health` - Sundhedstjek endpoint
-- `GET /api/products` - Videresend til produktservice (list alle)
-- `GET /api/products/:id` - Videresend til produktservice (hent efter ID)
+- `GET /` - Service information
+- `GET /health` - Helbredstjek-endpoint
+- `GET /api/products` - Videresend til product service (list alle)
+- `GET /api/products/:id` - Videresend til product service (hent efter ID)
 
 **Nøglefunktioner**:
-- Forespørgselsruting med axios
+- Forespørgselsrouting med axios
 - Centraliseret logning
-- Fejlhåndtering og timeout management
-- Service discovery via miljøvariabler
-- Application Insights integration
+- Fejlhåndtering og timeout-styring
+- Tjenesteopdagelse via miljøvariabler
+- Integration med Application Insights
 
-**Kode Uddrag** (`src/api-gateway/app.js`):
+**Kodeuddrag** (`src/api-gateway/app.js`):
 ```javascript
 // Intern tjenestekommunikation
 app.get('/api/products', async (req, res) => {
@@ -389,24 +380,24 @@ app.get('/api/products', async (req, res) => {
 });
 ```
 
-### Produktservice (Python/Flask)
+### Product Service (Python/Flask)
 
 **Port**: 8000  
-**Adgang**: Kun intern (ingen ekstern adgang)  
-**Formål**: Håndterer produktkatalog med in-memory data  
+**Adgang**: Kun intern (ingen ekstern ingress)  
+**Formål**: Håndterer produktkatalog med data i hukommelsen  
 
 **Endpoints**:
-- `GET /` - Serviceinformation
-- `GET /health` - Sundhedstjek endpoint
+- `GET /` - Service information
+- `GET /health` - Helbredstjek-endpoint
 - `GET /products` - List alle produkter
 - `GET /products/<id>` - Hent produkt efter ID
 
 **Nøglefunktioner**:
 - RESTful API med Flask
-- In-memory produktlager (simpelt, ingen database nødvendig)
-- Sundhedsovervågning med probes
+- Produktlager i hukommelsen (simpelt, ingen database nødvendig)
+- Helbredsmonitorering med prober
 - Struktureret logning
-- Application Insights integration
+- Integration med Application Insights
 
 **Datamodel**:
 ```python
@@ -419,91 +410,91 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Hvorfor Kun Intern?**
-Produktservicen er ikke offentligt eksponeret. Alle forespørgsler skal gå gennem API Gateway, som giver:
+**Hvorfor kun internt?**
+Product Service er ikke eksponeret offentligt. Alle anmodninger skal gå gennem API Gateway, som giver:
 - Sikkerhed: Kontrolleret adgangspunkt
 - Fleksibilitet: Kan ændre backend uden at påvirke klienter
-- Overvågning: Centraliseret forespørgselslogning
+- Overvågning: Centraliseret logning af forespørgsler
 
-## Forståelse af Service Kommunikation
+## Forstå servicekommunikation
 
-### Hvordan Services Kommunikerer
+### Hvordan tjenester kommunikerer med hinanden
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Gateway as API Gateway<br/>(Port 8080)
+    participant User as Bruger
+    participant Gateway as API-gateway<br/>(Port 8080)
     participant Product as Produktservice<br/>(Port 8000)
-    participant AI as Applikationsindsigter
+    participant AI as Applikationsindsigt
     
-    User->>Gateway: GET /api/produkter
+    User->>Gateway: GET /api/products
     Gateway->>AI: Log forespørgsel
-    Gateway->>Product: GET /produkter (intern HTTP)
+    Gateway->>Product: GET /products (intern HTTP)
     Product->>AI: Log forespørgsel
     Product-->>Gateway: JSON-svar [5 produkter]
     Gateway->>AI: Log svar
     Gateway-->>User: JSON-svar [5 produkter]
     
     Note over Gateway,Product: Intern DNS: http://product-service
-    Note over User,AI: Al kommunikation logget og sporet
+    Note over User,AI: Al kommunikation logges og spores
 ```
-I dette eksempel kommunikerer API Gateway med Produktservice ved brug af **interne HTTP-kald**:
+I dette eksempel kommunikerer API Gateway med Product Service ved hjælp af **interne HTTP-opkald**:
 
 ```javascript
-// API Gateway (src/api-gateway/app.js)
+// API-gateway (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Foretag intern HTTP-anmodning
+// Foretag intern HTTP-forespørgsel
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
 **Nøglepunkter**:
 
-1. **DNS-Baseret Opdagelse**: Container Apps leverer automatisk DNS til interne services
-   - Produktservice FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Forenklet som: `http://product-service` (Container Apps løser det)
+1. **DNS-baseret opdagelse**: Container Apps leverer automatisk DNS for interne tjenester
+   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
+   - Forenklet som: `http://product-service` (Container Apps løser den)
 
-2. **Ingen Offentlig Eksponering**: Produktservice har `external: false` i Bicep
-   - Kun tilgængelig inden for Container Apps miljøet
+2. **Ingen offentlig eksponering**: Product Service har `external: false` i Bicep
+   - Kun tilgængelig inden for Container Apps-miljøet
    - Kan ikke nås fra internettet
 
-3. **Miljøvariabler**: Service URLs injiceres ved implementering
-   - Bicep sender den interne FQDN til gatewayen
-   - Ingen hardkodede URLs i applikationskoden
+3. **Miljøvariabler**: Tjeneste-URL'er indsættes ved deployment-tidspunktet
+   - Bicep videregiver den interne FQDN til gateway'en
+   - Ingen hardkodede URL'er i applikationskoden
 
-**Analogi**: Tænk på dette som kontorlokaler. API Gateway er receptionen (offentligt tilgængelig), og Produktservice er et kontor (kun internt). Besøgende skal gå gennem receptionen for at nå ethvert kontor.
+**Analogi**: Tænk på dette som kontorrum. API Gateway er receptionen (offentlig), og Product Service er et kontor (kun internt). Besøgende skal gå gennem receptionen for at komme til et kontor.
 
-## Implementeringsmuligheder
+## Udrulningsmuligheder
 
-### Fuld Implementering (Anbefalet)
+### Fuld udrulning (anbefalet)
 
 ```bash
 # Udrul infrastruktur og begge tjenester
 azd up
 ```
 
-Dette implementerer:
-1. Container Apps miljø
+Dette udruller:
+1. Container Apps-miljø
 2. Application Insights
 3. Container Registry
-4. API Gateway container
-5. Produktservice container
+4. API Gateway-container
+5. Product Service-container
 
 **Tid**: 8-12 minutter
 
-### Implementer Individuel Service
+### Udrul individuel tjeneste
 
 ```bash
-# Udrul kun én tjeneste (efter initial azd op)
+# Udrul kun én tjeneste (efter den indledende azd up)
 azd deploy api-gateway
 
 # Eller udrul produkttjeneste
 azd deploy product-service
 ```
 
-**Brugstilfælde**: Når du har opdateret kode i én service og vil genimplementere kun den service.
+**Brugstilfælde**: Når du har opdateret kode i én tjeneste og kun vil genudrulle den tjeneste.
 
-### Opdater Konfiguration
+### Opdater konfiguration
 
 ```bash
 # Ændr skaleringsparametre
@@ -515,21 +506,21 @@ azd up
 
 ## Konfiguration
 
-### Skalering Konfiguration
+### Skaleringskonfiguration
 
-Begge services er konfigureret med HTTP-baseret autoskalering i deres Bicep-filer:
+Begge tjenester er konfigureret med HTTP-baseret autoskalering i deres Bicep-filer:
 
 **API Gateway**:
-- Min replikaer: 2 (altid mindst 2 for tilgængelighed)
-- Max replikaer: 20
-- Skaleringstrigger: 50 samtidige forespørgsler pr. replika
+- Min replikarer: 2 (altid mindst 2 for tilgængelighed)
+- Maks. replikarer: 20
+- Skaleringsudløser: 50 samtidige forespørgsler pr. replika
 
-**Produktservice**:
-- Min replikaer: 1 (kan skaleres til nul, hvis nødvendigt)
-- Max replikaer: 10
-- Skaleringstrigger: 100 samtidige forespørgsler pr. replika
+**Product Service**:
+- Min replikarer: 1 (kan skaleres til nul om nødvendigt)
+- Maks. replikarer: 10
+- Skaleringsudløser: 100 samtidige forespørgsler pr. replika
 
-**Tilpas Skalering** (i `infra/app/*.bicep`):
+**Tilpas skalering** (i `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -547,21 +538,21 @@ scale: {
 }
 ```
 
-### Ressourceallokering
+### Ressourcetildeling
 
 **API Gateway**:
 - CPU: 1.0 vCPU
 - Hukommelse: 2 GiB
 - Årsag: Håndterer al ekstern trafik
 
-**Produktservice**:
+**Product Service**:
 - CPU: 0.5 vCPU
 - Hukommelse: 1 GiB
 - Årsag: Letvægts in-memory operationer
 
-### Sundhedstjek
+### Helbredstjek
 
-Begge services inkluderer liveness og readiness probes:
+Begge tjenester inkluderer liveness- og readiness-prober:
 
 ```bicep
 probes: [
@@ -586,26 +577,27 @@ probes: [
 ]
 ```
 
-**Hvad Dette Betyder**:
-- **Liveness**: Hvis sundhedstjek fejler, genstarter Container Apps containeren
-- **Readiness**: Hvis ikke klar, stopper Container Apps med at rute trafik til den replika
+**Hvad dette betyder**:
+- **Liveness**: Hvis helbredstjek fejler, genstarter Container Apps containeren
+- **Readiness**: Hvis ikke klar, stopper Container Apps med at sende trafik til den replika
 
-## Overvågning & Observabilitet
+## Overvågning og observerbarhed
 
-### Se Service Logs
+### Se tjenestelogfiler
 
 ```bash
+# Vis logfiler med azd monitor
+azd monitor --logs
+
+# Eller brug Azure CLI til specifikke Container Apps:
 # Stream logfiler fra API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Se nylige produktservice logfiler
-azd logs product-service --tail 100
-
-# Se alle logfiler fra begge tjenester
-azd logs --follow
+# Se nyere logfiler fra produktservicen
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**Forventet Output**:
+**Forventet output**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -613,11 +605,11 @@ azd logs --follow
 [product-service] Retrieved 5 products
 ```
 
-### Application Insights Forespørgsler
+### Application Insights-forespørgsler
 
-Få adgang til Application Insights i Azure Portal, og kør disse forespørgsler:
+Åbn Application Insights i Azure-portalen, og kør derefter disse forespørgsler:
 
-**Find Langsomme Forespørgsler**:
+**Find langsomme forespørgsler**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -626,7 +618,7 @@ requests
 | order by count_ desc
 ```
 
-**Spor Service-til-Service Kald**:
+**Spor service-til-service-opkald**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -635,7 +627,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Fejlrate pr. Service**:
+**Fejlrate pr. tjeneste**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -643,7 +635,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Forespørgselsvolumen Over Tid**:
+**Forespørgselsvolumen over tid**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -651,37 +643,37 @@ requests
 | render timechart
 ```
 
-### Få Adgang til Overvågningsdashboard
+### Adgang til overvågningsdashboard
 
 ```bash
-# Hent Application Insights detaljer
+# Hent oplysninger om Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Åbn Azure Portal overvågning
+# Åbn overvågning i Azure-portalen
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Live Metrics
+### Live-metrikker
 
-1. Naviger til Application Insights i Azure Portal
+1. Naviger til Application Insights i Azure-portalen
 2. Klik på "Live Metrics"
-3. Se realtids forespørgsler, fejl og ydeevne
+3. Se realtidsanmodninger, fejl og ydeevne
 4. Test ved at køre: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Praktiske Øvelser
+## Praktiske øvelser
 
-### Øvelse 1: Tilføj en Ny Produkt Endpoint ⭐ (Let)
+### Øvelse 1: Tilføj et nyt produkt-endpoint ⭐ (Let)
 
-**Mål**: Tilføj en POST endpoint for at oprette nye produkter
+**Mål**: Tilføj et POST-endpoint til at oprette nye produkter
 
-**Udgangspunkt**: `src/product-service/main.py`
+**Startpunkt**: `src/product-service/main.py`
 
 **Trin**:
 
-1. Tilføj denne endpoint efter `get_product` funktionen i `main.py`:
+1. Tilføj dette endpoint efter `get_product`-funktionen i `main.py`:
 
 ```python
 @app.route('/products', methods=['POST'])
@@ -706,10 +698,10 @@ def create_product():
     return jsonify(new_product), 201
 ```
 
-2. Tilføj POST rute til API Gateway (`src/api-gateway/app.js`):
+2. Tilføj POST-rute til API Gateway (`src/api-gateway/app.js`):
 
 ```javascript
-// Tilføj dette efter GET /api/products ruten
+// Tilføj dette efter GET /api/products-ruten
 app.post('/api/products', async (req, res) => {
   try {
     console.log(`Forwarding POST request to ${PRODUCT_SERVICE_URL}/products`);
@@ -727,14 +719,14 @@ app.post('/api/products', async (req, res) => {
 });
 ```
 
-3. Genudrul begge tjenester:
+3. Udrul begge tjenester igen:
 
 ```bash
 azd deploy product-service
 azd deploy api-gateway
 ```
 
-4. Test det nye endpoint:
+4. Test det nye endepunkt:
 
 ```bash
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
@@ -759,24 +751,24 @@ curl $GATEWAY_URL/api/products
 
 **Succeskriterier**:
 - ✅ POST-anmodning returnerer HTTP 201
-- ✅ Nyt produkt vises i GET /api/products listen
-- ✅ Produktet har auto-inkrementeret ID
+- ✅ Nyt produkt vises i GET /api/products-listen
+- ✅ Produktet har et auto-inkrementeret ID
 
 **Tid**: 10-15 minutter
 
 ---
 
-### Øvelse 2: Ændr Autoskalering Regler ⭐⭐ (Mellem)
+### Øvelse 2: Ændr autoscaleringsregler ⭐⭐ (Medium)
 
-**Mål**: Ændr Product Service til at skalere mere aggressivt
+**Mål**: Få Product Service til at skalere mere aggressivt
 
 **Udgangspunkt**: `infra/app/product-service.bicep`
 
 **Trin**:
 
-1. Åbn `infra/app/product-service.bicep` og find `scale` blokken (omkring linje 95)
+1. Åbn `infra/app/product-service.bicep` og find `scale`-blokken (omkring linje 95)
 
-2. Ændr fra:
+2. Skift fra:
 ```bicep
 scale: {
   minReplicas: 1
@@ -818,7 +810,7 @@ scale: {
 azd up
 ```
 
-4. Bekræft den nye skalering-konfiguration:
+4. Bekræft den nye skaleringskonfiguration:
 
 ```bash
 az containerapp show \
@@ -839,33 +831,33 @@ az containerapp show \
 5. Test autoskalering med belastning:
 
 ```bash
-# Generer samtidige anmodninger
+# Generer samtidige forespørgsler
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# Se skalering ske
-azd logs product-service --follow
-# Kig efter: Container Apps skalering begivenheder
+# Se skalering ske ved hjælp af Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
+# Se efter: skaleringshændelser for Container Apps
 ```
 
 **Succeskriterier**:
 - ✅ Product Service kører altid mindst 2 replikaer
-- ✅ Under belastning skalerer til mere end 2 replikaer
-- ✅ Azure Portal viser de nye skalering regler
+- ✅ Under belastning skalerer den til mere end 2 replikaer
+- ✅ Azure-portalen viser de nye skaleringsregler
 
 **Tid**: 15-20 minutter
 
 ---
 
-### Øvelse 3: Tilføj Brugerdefineret Overvågningsforespørgsel ⭐⭐ (Mellem)
+### Øvelse 3: Tilføj brugerdefineret overvågningsforespørgsel ⭐⭐ (Medium)
 
-**Mål**: Opret en brugerdefineret Application Insights forespørgsel for at spore produkt API's ydeevne
+**Mål**: Opret en brugerdefineret Application Insights-forespørgsel til at spore Product API's ydeevne
 
 **Trin**:
 
-1. Naviger til Application Insights i Azure Portal:
+1. Gå til Application Insights i Azure Portal:
    - Gå til Azure Portal
-   - Find din resourcegruppe (rg-microservices-*)
-   - Klik på Application Insights ressource
+   - Find din ressourcegruppe (rg-microservices-*)
+   - Klik på Application Insights-ressourcen
 
 2. Klik på "Logs" i venstre menu
 
@@ -884,7 +876,7 @@ requests
 | render timechart
 ```
 
-4. Klik på "Run" for at udføre forespørgslen
+4. Klik på "Run" for at køre forespørgslen
 
 5. Gem forespørgslen:
    - Klik på "Save"
@@ -900,32 +892,32 @@ for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 7. Opdater forespørgslen for at se data
 
 **✅ Forventet output:**
-- Diagram, der viser anmodningstællinger over tid
+- Diagram, der viser antallet af forespørgsler over tid
 - Gennemsnitlig varighed < 500ms
 - Succesrate = 100%
 - Tidsintervaller på 5 minutter
 
 **Succeskriterier**:
-- ✅ Forespørgslen viser 100+ anmodninger
-- ✅ Succesrate er 100%
+- ✅ Forespørgslen viser 100+ forespørgsler
+- ✅ Succesraten er 100%
 - ✅ Gennemsnitlig varighed < 500ms
-- ✅ Diagram viser 5-minutters tidsintervaller
+- ✅ Diagrammet viser 5-minutters tidsintervaller
 
-**Læringsmål**: Forstå, hvordan man overvåger serviceydelse med brugerdefinerede forespørgsler
+**Læringsudbytte**: Forstå, hvordan man overvåger tjenesteydeevne med brugerdefinerede forespørgsler
 
 **Tid**: 10-15 minutter
 
 ---
 
-### Øvelse 4: Implementer Retry Logik ⭐⭐⭐ (Avanceret)
+### Øvelse 4: Implementer retry-logik ⭐⭐⭐ (Avanceret)
 
-**Mål**: Tilføj retry logik til API Gateway, når Product Service midlertidigt er utilgængelig
+**Mål**: Tilføj retry-logik til API Gateway, når Product Service midlertidigt er utilgængelig
 
 **Udgangspunkt**: `src/api-gateway/app.js`
 
 **Trin**:
 
-1. Installer retry bibliotek:
+1. Installer retry-biblioteket:
 
 ```bash
 cd src/api-gateway
@@ -933,7 +925,7 @@ npm install axios-retry --save
 cd ../..
 ```
 
-2. Opdater `src/api-gateway/app.js` (tilføj efter axios import):
+2. Opdater `src/api-gateway/app.js` (tilføj efter axios-importen):
 
 ```javascript
 const axiosRetry = require('axios-retry');
@@ -945,7 +937,7 @@ axiosRetry(axios, {
     return retryCount * 1000; // 1s, 2s, 3s
   },
   retryCondition: (error) => {
-    // Forsøg igen ved netværksfejl eller 5xx-svar
+    // Genforsøg ved netværksfejl eller 5xx-svar
     return axiosRetry.isNetworkOrIdempotentRequestError(error) ||
            (error.response && error.response.status >= 500);
   }
@@ -960,21 +952,21 @@ console.log('Retry logic configured: 3 retries with exponential backoff');
 azd deploy api-gateway
 ```
 
-4. Test retry adfærd ved at simulere servicefejl:
+4. Test retry-adfærden ved at simulere servicefejl:
 
 ```bash
-# Skaler produktservice til 0 (simuler fejl)
+# Skaler produktservicen til 0 (simuler fejl)
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --min-replicas 0 \
   --max-replicas 0
 
-# Prøv at få adgang til produkter (vil forsøge igen 3 gange)
+# Forsøg at få adgang til produkterne (vil prøve igen 3 gange)
 time curl -v $GATEWAY_URL/api/products
-# Observer: Respons tager ~6 sekunder (1s + 2s + 3s forsøg)
+# Observer: Svaret tager ~6 sekunder (1s + 2s + 3s genforsøg)
 
-# Gendan produktservice
+# Gendan produktservicen
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -982,112 +974,112 @@ az containerapp update \
   --max-replicas 10
 ```
 
-5. Se retry logs:
+5. Se retry-logs:
 
 ```bash
-azd logs api-gateway --tail 50
-# Kig efter: Forsøg på genforsøg meddelelser
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
+# Se efter: beskeder om genforsøg
 ```
 
 **✅ Forventet adfærd:**
-- Anmodninger prøver igen 3 gange før fejl
-- Hver retry venter længere (1s, 2s, 3s)
-- Succesfulde anmodninger efter service genstarter
-- Logs viser retry forsøg
+- Anmodninger genforsøges 3 gange, før de fejler
+- Hvert genforsøg venter længere (1s, 2s, 3s)
+- Vellykkede anmodninger efter servicen genstartes
+- Loggene viser genforsøg
 
 **Succeskriterier**:
-- ✅ Anmodninger prøver igen 3 gange før fejl
-- ✅ Hver retry venter længere (eksponentiel backoff)
-- ✅ Succesfulde anmodninger efter service genstarter
-- ✅ Logs viser retry forsøg
+- ✅ Anmodninger genforsøges 3 gange, før de fejler
+- ✅ Hvert genforsøg venter længere (eksponentiel backoff)
+- ✅ Vellykkede anmodninger efter servicegenstart
+- ✅ Logfiler viser genforsøg
 
-**Læringsmål**: Forstå modstandsdygtighedsmønstre i mikrotjenester (circuit breakers, retries, timeouts)
+**Læringsudbytte**: Forstå robusthedsmønstre i mikrotjenester (circuit breakers, retries, timeouts)
 
 **Tid**: 20-25 minutter
 
 ---
 
-## Videnskontrol
+## Videnstjek
 
-Efter at have gennemført dette eksempel, verificer din forståelse:
+Efter at have gennemført dette eksempel, bekræft din forståelse:
 
-### 1. Servicekommunikation ✓
+### 1. Tjenestekommunikation ✓
 
 Test din viden:
 - [ ] Kan du forklare, hvordan API Gateway opdager Product Service? (DNS-baseret serviceopdagelse)
-- [ ] Hvad sker der, hvis Product Service er nede? (Gateway returnerer 503 fejl)
-- [ ] Hvordan ville du tilføje en tredje service? (Opret ny Bicep-fil, tilføj til main.bicep, opret src-mappe)
+- [ ] Hvad sker der, hvis Product Service er nede? (Gateway returnerer 503-fejl)
+- [ ] Hvordan ville du tilføje en tredje tjeneste? (Opret ny Bicep-fil, tilføj til main.bicep, opret src-mappe)
 
-**Praktisk Verifikation:**
+**Hands-on verifikation:**
 ```bash
-# Simuler tjenestefejl
+# Simuler tjenestesvigt
 az containerapp update --name <product-service-name> --min-replicas 0 --max-replicas 0
 curl $GATEWAY_URL/api/products
-# ✅ Forventet: 503 Service Utilgængelig
+# ✅ Forventet: 503 Tjeneste utilgængelig
 
-# Gendan tjeneste
+# Gendan tjenesten
 az containerapp update --name <product-service-name> --min-replicas 1 --max-replicas 10
 ```
 
-### 2. Overvågning & Observabilitet ✓
+### 2. Overvågning og observerbarhed ✓
 
 Test din viden:
 - [ ] Hvor ser du distribuerede logs? (Application Insights i Azure Portal)
-- [ ] Hvordan sporer du langsomme anmodninger? (Kusto forespørgsel: `requests | where duration > 1000`)
-- [ ] Kan du identificere, hvilken service der forårsagede en fejl? (Tjek `cloud_RoleName` feltet i logs)
+- [ ] Hvordan sporer du langsomme anmodninger? (Kusto-forespørgsel: `requests | where duration > 1000`)
+- [ ] Kan du identificere, hvilken tjeneste forårsagede en fejl? (Tjek feltet `cloud_RoleName` i loggene)
 
-**Praktisk Verifikation:**
+**Hands-on verifikation:**
 ```bash
-# Generer en langsom forespørgselssimulering
+# Generer en simulering af en langsom anmodning
 curl "$GATEWAY_URL/api/products?delay=2000"
 
-# Forespørg Application Insights for langsomme forespørgsler
-# Naviger til Azure Portal → Application Insights → Logs
+# Forespørg Application Insights efter langsomme anmodninger
+# Gå til Azure-portalen → Application Insights → Logs
 # Kør: requests | where duration > 1000 | project timestamp, name, duration, cloud_RoleName
 ```
 
-### 3. Skalering & Ydeevne ✓
+### 3. Skalering og ydeevne ✓
 
 Test din viden:
-- [ ] Hvad udløser autoskalering? (HTTP samtidige anmodningsregler: 50 for gateway, 100 for produkt)
+- [ ] Hvad udløser autoskalering? (HTTP-regler for samtidige anmodninger: 50 for gateway, 100 for product)
 - [ ] Hvor mange replikaer kører nu? (Tjek med `az containerapp revision list`)
 - [ ] Hvordan ville du skalere Product Service til 5 replikaer? (Opdater minReplicas i Bicep)
 
-**Praktisk Verifikation:**
+**Hands-on verifikation:**
 ```bash
 # Generer belastning for at teste autoskalering
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Se replikaer øges
-azd logs api-gateway --follow
-# ✅ Forventet: Se skaleringsevents i logfiler
+# Se replikaer stige ved hjælp af Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+# ✅ Forventet: Se skaleringshændelser i loggene
 ```
 
-**Succeskriterier**: Du kan besvare alle spørgsmål og verificere med praktiske kommandoer.
+**Succeskriterier**: Du kan besvare alle spørgsmålene og verificere dem med praktiske kommandoer.
 
 ---
 
 ## Omkostningsanalyse
 
-### Estimerede Månedlige Omkostninger (For Dette 2-Service Eksempel)
+### Anslåede månedlige omkostninger (for dette 2-tjeneste-eksempel)
 
-| Ressource | Konfiguration | Estimeret Omkostning |
-|-----------|---------------|----------------------|
+| Ressource | Konfiguration | Anslået omkostning |
+|----------|--------------|----------------|
 | API Gateway | 2-20 replikaer, 1 vCPU, 2GB RAM | $30-150 |
 | Product Service | 1-10 replikaer, 0.5 vCPU, 1GB RAM | $15-75 |
 | Container Registry | Basisniveau | $5 |
 | Application Insights | 1-2 GB/måned | $5-10 |
 | Log Analytics | 1 GB/måned | $3 |
-| **Total** | | **$58-243/måned** |
+| **I alt** | | **$58-243/måned** |
 
-### Omkostningsfordeling efter Brug
+### Omkostningsfordeling efter forbrug
 
-**Let trafik** (test/læring): ~$60/måned
+**Lav trafik** (test/indlæring): ~$60/måned
 - API Gateway: 2 replikaer × 24/7 = $30
 - Product Service: 1 replika × 24/7 = $15
 - Overvågning + Registry = $13
 
-**Moderat trafik** (lille produktion): ~$120/måned
+**Middel trafik** (lille produktion): ~$120/måned
 - API Gateway: 5 gennemsnitlige replikaer = $75
 - Product Service: 3 gennemsnitlige replikaer = $45
 - Overvågning + Registry = $13
@@ -1097,7 +1089,7 @@ azd logs api-gateway --follow
 - Product Service: 8 gennemsnitlige replikaer = $120
 - Overvågning + Registry = $13
 
-### Tips til Omkostningsoptimering
+### Tips til omkostningsoptimering
 
 1. **Skaler til nul for udvikling**:
    ```bicep
@@ -1107,13 +1099,13 @@ azd logs api-gateway --follow
    }
    ```
 
-2. **Brug Forbrugsplan for Cosmos DB** (når du tilføjer det):
+2. **Brug Consumption-planen for Cosmos DB** (når du tilføjer det):
    - Betal kun for det, du bruger
-   - Ingen minimumsgebyr
+   - Ingen minimumsafgift
 
-3. **Indstil Application Insights Sampling**:
+3. **Indstil sampling i Application Insights**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Udtag 50% af forespørgsler
+   appInsights.defaultClient.config.samplingPercentage = 50; // Udtag stikprøve af 50 % af forespørgslerne
    ```
 
 4. **Ryd op, når det ikke er nødvendigt**:
@@ -1121,19 +1113,19 @@ azd logs api-gateway --follow
    azd down --force --purge
    ```
 
-### Gratis Niveau Muligheder
+### Gratismuligheder
 
-Til læring/test, overvej:
-- ✅ Brug Azure gratis kreditter ($200 for de første 30 dage med nye konti)
-- ✅ Hold til minimum replikaer (sparer ~50% omkostninger)
-- ✅ Slet efter test (ingen løbende gebyrer)
+Til læring/test overvej:
+- ✅ Brug Azures gratiskredit ($200 de første 30 dage for nye konti)
+- ✅ Hold dig til minimum antal replikaer (spar ~50% af omkostningerne)
+- ✅ Slet efter test (ingen løbende udgifter)
 - ✅ Skaler til nul mellem læringssessioner
 
-**Eksempel**: Kør dette eksempel i 2 timer/dag × 30 dage = ~$5/måned i stedet for $60/måned
+**Eksempel**: At køre dette eksempel 2 timer/dag × 30 dage = ~$5/måned i stedet for $60/måned
 
 ---
 
-## Fejlfinding Hurtig Reference
+## Hurtig fejlfinding
 
 ### Problem: `azd up` fejler med "Subscription not found"
 
@@ -1149,26 +1141,26 @@ azd up
 
 **Diagnose**:
 ```bash
-# Kontroller produktservicelogfiler
-azd logs product-service --tail 50
+# Kontroller produktservicelogfiler ved hjælp af Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
-# Kontroller produktservice sundhed
+# Kontroller produktservicens tilstand
 az containerapp show \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "properties.runningStatus"
 ```
 
-**Almindelige Årsager**:
-1. Product service startede ikke (tjek logs for Python fejl)
-2. Sundhedstjek fejler (bekræft `/health` endpoint fungerer)
-3. Container image build fejlede (tjek registry for image)
+**Almindelige årsager**:
+1. Product-service startede ikke (tjek logs for Python-fejl)
+2. Health check fejler (verificer, at `/health`-endepunktet fungerer)
+3. Container-image build fejlede (tjek registry for billedet)
 
 ### Problem: Autoskalering virker ikke
 
 **Diagnose**:
 ```bash
-# Kontroller nuværende replikaantal
+# Kontroller det aktuelle antal replikaer
 az containerapp revision list \
   --name $(azd env get-values | grep API_GATEWAY | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -1177,14 +1169,14 @@ az containerapp revision list \
 # Generer belastning til test
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Overvåg skaleringsevents
-azd logs api-gateway --follow | grep -i scale
+# Overvåg skaleringhændelser ved hjælp af Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
-**Almindelige Årsager**:
-1. Belastning ikke høj nok til at udløse skalering regel (kræver >50 samtidige anmodninger)
-2. Maksimale replikaer allerede nået (tjek Bicep konfiguration)
-3. Skalering regel forkert konfigureret i Bicep (bekræft concurrentRequests værdi)
+**Almindelige årsager**:
+1. Belastningen er ikke høj nok til at udløse skaleringsreglen (kræver >50 samtidige anmodninger)
+2. Maksimalt antal replikaer er allerede nået (tjek Bicep-konfigurationen)
+3. Skaleringsregel er forkert konfigureret i Bicep (verificer concurrentRequests-værdien)
 
 ### Problem: Application Insights viser ikke logs
 
@@ -1193,37 +1185,37 @@ azd logs api-gateway --follow | grep -i scale
 # Bekræft, at forbindelsesstrengen er indstillet
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Kontroller, om tjenester sender telemetri
+# Kontroller, om tjenesterne sender telemetri
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "properties.InstrumentationKey"
 ```
 
-**Almindelige Årsager**:
-1. Forbindelsesstreng ikke sendt til container (tjek miljøvariabler)
-2. Application Insights SDK ikke konfigureret (bekræft imports i kode)
+**Almindelige årsager**:
+1. Connection string er ikke sendt til containeren (tjek miljøvariablerne)
+2. Application Insights SDK er ikke konfigureret (verificer imports i koden)
 3. Firewall blokerer telemetri (sjældent, tjek netværksregler)
 
 ### Problem: Docker build fejler lokalt
 
 **Diagnose**:
 ```bash
-# Test API Gateway bygning
+# Test af API Gateway-opbygning
 cd src/api-gateway
 docker build -t test-gateway .
 
-# Test Product Service bygning
+# Test af Product Service-opbygning
 cd ../product-service
 docker build -t test-product .
 ```
 
-**Almindelige Årsager**:
+**Almindelige årsager**:
 1. Manglende afhængigheder i package.json/requirements.txt
-2. Dockerfile syntaksfejl
+2. Dockerfile-syntaksfejl
 3. Netværksproblemer ved download af afhængigheder
 
-**Stadig Fastlåst?** Se [Common Issues Guide](../../docs/troubleshooting/common-issues.md) eller [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+**Er du stadig fastlåst?** Se [Vejledning til almindelige problemer](../../docs/chapter-07-troubleshooting/common-issues.md) eller [Fejlfinding for Azure Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
@@ -1242,28 +1234,28 @@ azd down --force --purge
 
 Skriv `y` for at bekræfte.
 
-**Hvad Bliver Slettet**:
-- Container Apps Miljø
+**Hvad slettes**:
+- Container Apps-miljøet
 - Begge Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
-- Resourcegruppe
+- Ressourcegruppe
 
-**✓ Bekræft Oprydning**:
+**✓ Bekræft oprydning**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Skal returnere tomt.
+Bør returnere tomt.
 
 ---
 
-## Udvidelsesguide: Fra 2 til 5+ Tjenester
+## Udvidelsesguide: Fra 2 til 5+ tjenester
 
-Når du har mestret denne 2-service arkitektur, her er hvordan du udvider:
+Når du har mestret denne 2-tjeneste-arkitektur, er her hvordan du udvider:
 
-### Fase 1: Tilføj Database Persistens (Næste Skridt)
+### Fase 1: Tilføj databasepersistens (næste skridt)
 
 **Tilføj Cosmos DB til Product Service**:
 
@@ -1281,139 +1273,139 @@ Når du har mestret denne 2-service arkitektur, her er hvordan du udvider:
    }
    ```
 
-2. Opdater produktservice til at bruge Azure Cosmos DB Python SDK i stedet for in-memory data
+2. Opdater product service til at bruge Azure Cosmos DB Python SDK i stedet for in-memory-data
 
-3. Estimeret ekstra omkostning: ~$25/måned (serverless)
+3. Anslået ekstra omkostning: ~$25/måned (serverløs)
 
-### Fase 2: Tilføj Tredje Service (Ordrehåndtering)
+### Fase 2: Tilføj tredje tjeneste (ordrebehandling)
 
 **Opret Order Service**:
 
 1. Ny mappe: `src/order-service/` (Python/Node.js/C#)
 2. Ny Bicep: `infra/app/order-service.bicep`
 3. Opdater API Gateway til at rute `/api/orders`
-4. Tilføj Azure SQL Database til ordre persistens
+4. Tilføj Azure SQL Database til ordre-persistens
 
-**Arkitekturen bliver**:
+**Arkitektur bliver**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Fase 3: Tilføj Asynkron Kommunikation (Service Bus)
+### Fase 3: Tilføj asynkron kommunikation (Service Bus)
 
-**Implementer Event-Driven Arkitektur**:
+**Implementer event-drevet arkitektur**:
 
 1. Tilføj Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service publicerer "ProductCreated" events
-3. Order Service abonnerer på produkt events
+2. Product Service publicerer "ProductCreated"-events
+3. Order Service abonnerer på produktevents
 4. Tilføj Notification Service til at behandle events
 
 **Mønster**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
-### Fase 4: Tilføj Brugerautentifikation
+### Fase 4: Tilføj brugerautentificering
 
 **Implementer User Service**:
 
 1. Opret `src/user-service/` (Go/Node.js)
-2. Tilføj Azure AD B2C eller brugerdefineret JWT autentifikation
+2. Tilføj Azure AD B2C eller brugerdefineret JWT-autentificering
 3. API Gateway validerer tokens før routing
-4. Tjenester tjekker brugerrettigheder
+4. Services tjekker brugerrettigheder
 
-### Fase 5: Produktionsklarhed
+### Fase 5: Produktionsparathed
 
-**Tilføj Disse Komponenter**:
-- ✅ Azure Front Door (global load balancing)
-- ✅ Azure Key Vault (hemmelighedshåndtering)
-- ✅ Azure Monitor Workbooks (brugerdefinerede dashboards)
-- ✅ CI/CD Pipeline (GitHub Actions)
-- ✅ Blue-Green Deployments
-- ✅ Managed Identity for alle tjenester
+**Tilføj disse komponenter**:
+- ✅ Azure Front Door (global belastningsfordeling)
+- ✅ Azure Key Vault (håndtering af hemmeligheder)
+- ✅ Azure Monitor Workbooks (tilpassede dashboards)
+- ✅ CI/CD-pipeline (GitHub Actions)
+- ✅ Blue-Green-udruleringer
+- ✅ Managed Identity for alle services
 
-**Fuld Produktionsarkitektur Omkostning**: ~$300-1,400/måned
+**Omkostning for fuld produktionsarkitektur**: ~$300-1,400/måned
 
 ---
 
-## Lær Mere
+## Læs mere
 
-### Relateret Dokumentation
-- [Azure Container Apps Dokumentation](https://learn.microsoft.com/azure/container-apps/)
-- [Mikrotjenester Arkitektur Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights for Distribueret Sporing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+### Relateret dokumentation
+- [Azure Container Apps-dokumentation](https://learn.microsoft.com/azure/container-apps/)
+- [Microservices-arkitekturguide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights til distribueret tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI-dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Næste Skridt i Denne Kursus
-- ← Forrige: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Begynder enkelt-container eksempel
-- → Næste: [AI Integration Guide](../../../../docs/ai-foundry) - Tilføj AI kapaciteter
-- 🏠 [Kursus Hjem](../../README.md)
+### Næste skridt i dette kursus
+- ← Forrige: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Begynder single-container-eksempel
+- → Næste: [AI-integrationsvejledning](../../../../docs/ai-foundry) - Tilføj AI-funktionalitet
+- 🏠 [Kursusoversigt](../../README.md)
 
-### Sammenligning: Hvornår Skal Man Bruge Hvad
+### Sammenligning: Hvornår skal man bruge hvad
 
-| Funktion | Enkelt Container | Mikrotjenester (Dette) | Kubernetes (AKS) |
-|----------|------------------|-----------------------|------------------|
-| **Brugsscenarie** | Simple apps | Komplekse apps | Enterprise apps |
-| **Skalerbarhed** | Enkelt service | Per-service skalering | Maksimal fleksibilitet |
-| **Kompleksitet** | Lav | Medium | Høj |
-| **Teamstørrelse** | 1-3 udviklere | 3-10 udviklere | 10+ udviklere |
-| **Omkostning** | ~$15-50/måned | ~$60-250/måned | ~$150-500/måned |
-| **Implementeringstid** | 5-10 minutter | 8-12 minutter | 15-30 minutter |
+| Funktion | Enkelt container | Mikrotjenester (dette) | Kubernetes (AKS) |
+|---------|-----------------|---------------------|------------------|
+| **Anvendelsestilfælde** | Enkle apps | Komplekse apps | Enterprise-apps |
+| **Skalerbarhed** | Enkel tjeneste | Skaler pr. tjeneste | Maksimal fleksibilitet |
+| **Kompleksitet** | Lav | Middel | Høj |
+| **Holdstørrelse** | 1-3 udviklere | 3-10 udviklere | 10+ udviklere |
+| **Omkostninger** | ~$15-50/måned | ~$60-250/måned | ~$150-500/måned |
+| **Udrulningstid** | 5-10 minutter | 8-12 minutter | 15-30 minutter |
 | **Bedst til** | MVP'er, prototyper | Produktionsapps | Multi-cloud, avanceret netværk |
 
 **Anbefaling**: Start med Container Apps (dette eksempel), skift til AKS kun hvis du har brug for Kubernetes-specifikke funktioner.
 
 ---
 
-## Ofte stillede spørgsmål
+## Ofte Stillede Spørgsmål
 
-**Q: Hvorfor kun 2 tjenester i stedet for 5+?**  
-A: Pædagogisk progression. Mest fundamentet (tjenestekommunikation, overvågning, skalering) med et simpelt eksempel, før du tilføjer kompleksitet. De mønstre, du lærer her, gælder også for arkitekturer med 100 tjenester.
+**Sp: Hvorfor kun 2 tjenester i stedet for 5+?**  
+Sv: Pædagogisk progression. Mestring af grundlæggende principper (tjenestekommunikation, overvågning, skalering) med et enkelt eksempel, før du tilføjer kompleksitet. De mønstre, du lærer her, gælder for arkitekturer med 100 tjenester.
 
-**Q: Kan jeg selv tilføje flere tjenester?**  
-A: Absolut! Følg udvidelsesguiden ovenfor. Hver ny tjeneste følger samme mønster: opret src-mappe, opret Bicep-fil, opdater azure.yaml, deploy.
+**Sp: Kan jeg tilføje flere tjenester selv?**  
+Sv: Absolut! Følg udvidelsesguiden ovenfor. Hver ny tjeneste følger samme mønster: opret src-mappe, opret Bicep-fil, opdater azure.yaml, udrul.
 
-**Q: Er dette klar til produktion?**  
-A: Det er et solidt fundament. Til produktion skal du tilføje: managed identity, Key Vault, persistente databaser, CI/CD-pipeline, overvågningsalarmer og backup-strategi.
+**Sp: Er dette produktionsklart?**  
+Sv: Det er et solidt fundament. Til produktion, tilføj: managed identity, Key Vault, persistente databaser, CI/CD-pipeline, overvågningsalarmer og backup-strategi.
 
-**Q: Hvorfor ikke bruge Dapr eller andre service mesh?**  
-A: Hold det simpelt for læringens skyld. Når du forstår native Container Apps-netværk, kan du tilføje Dapr til avancerede scenarier (tilstandshåndtering, pub/sub, bindings).
+**Sp: Hvorfor ikke bruge Dapr eller anden service mesh?**  
+Sv: Hold det enkelt for læring. Når du forstår native Container Apps-netværk, kan du tilføje Dapr for avancerede scenarier (state management, pub/sub, bindings).
 
-**Q: Hvordan debugger jeg lokalt?**  
-A: Kør tjenester lokalt med Docker:  
+**Sp: Hvordan fejlsøger jeg lokalt?**  
+Sv: Kør tjenester lokalt med Docker:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
-  
-**Q: Kan jeg bruge forskellige programmeringssprog?**  
-A: Ja! Dette eksempel viser Node.js (gateway) + Python (produktservice). Du kan blande alle sprog, der kan køre i containere: C#, Go, Java, Ruby, PHP osv.
 
-**Q: Hvad hvis jeg ikke har Azure-kreditter?**  
-A: Brug Azure gratis niveau (de første 30 dage med nye konti får $200 kreditter) eller deploy til korte testperioder og slet straks. Dette eksempel koster ca. $2/dag.
+**Sp: Kan jeg bruge forskellige programmeringssprog?**  
+Sv: Ja! Dette eksempel viser Node.js (gateway) + Python (produktservice). Du kan blande alle sprog, der kører i containere: C#, Go, Java, Ruby, PHP osv.
 
-**Q: Hvordan adskiller dette sig fra Azure Kubernetes Service (AKS)?**  
-A: Container Apps er enklere (ingen Kubernetes-viden nødvendig) men mindre fleksibel. AKS giver dig fuld Kubernetes-kontrol, men kræver mere ekspertise. Start med Container Apps, og skift til AKS, hvis nødvendigt.
+**Sp: Hvad hvis jeg ikke har Azure-kreditter?**  
+Sv: Brug Azure's gratisniveau (de første 30 dage får nye konti $200 i kreditter) eller udrul i korte testperioder og slet med det samme. Dette eksempel koster ~$2/dag.
 
-**Q: Kan jeg bruge dette med eksisterende Azure-tjenester?**  
-A: Ja! Du kan forbinde til eksisterende databaser, storage-konti, Service Bus osv. Opdater Bicep-filer for at referere til eksisterende ressourcer i stedet for at oprette nye.
+**Sp: Hvordan adskiller dette sig fra Azure Kubernetes Service (AKS)?**  
+Sv: Container Apps er enklere (ingen Kubernetes-viden nødvendig) men mindre fleksibel. AKS giver dig fuld Kubernetes-kontrol, men kræver mere ekspertise. Start med Container Apps, og skift til AKS hvis nødvendigt.
+
+**Sp: Kan jeg bruge dette med eksisterende Azure-tjenester?**  
+Sv: Ja! Du kan forbinde til eksisterende databaser, storage accounts, Service Bus osv. Opdater Bicep-filerne til at referere til eksisterende ressourcer i stedet for at oprette nye.
 
 ---
 
-> **🎓 Opsummering af læringssti**: Du har lært at deploye en multi-service arkitektur med automatisk skalering, internt netværk, centraliseret overvågning og produktionsklare mønstre. Dette fundament forbereder dig på komplekse distribuerede systemer og enterprise-mikrotjenestearkitekturer.
+> **🎓 Oversigt over lærestien**: Du har lært at udrulle en arkitektur med flere tjenester med automatisk skalering, intern netværksforbindelse, centraliseret overvågning og produktionsparate mønstre. Dette fundament forbereder dig på komplekse distribuerede systemer og enterprise-mikrotjenestearkitekturer.
 
 **📚 Kursusnavigation:**
-- ← Forrige: [Simple Flask API](../../../../examples/container-app/simple-flask-api)
-- → Næste: [Database Integration Example](../../../../database-app)
-- 🏠 [Kursus Hjem](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- ← Forrige: [Simpel Flask API](../../../../examples/container-app/simple-flask-api)
+- → Næste: [Eksempel på databaseintegration](../../../../database-app)
+- 🏠 [Kursusforside](../../README.md)
+- 📖 [Bedste praksis for Container Apps](../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
-**✨ Tillykke!** Du har gennemført mikrotjenesteeksemplet. Du forstår nu, hvordan man bygger, deployer og overvåger distribuerede applikationer på Azure Container Apps. Klar til at tilføje AI-funktioner? Tjek [AI Integration Guide](../../../../docs/ai-foundry)!
+**✨ Tillykke!** Du har gennemført mikroservice-eksemplet. Du forstår nu, hvordan du bygger, udruller og overvåger distribuerede applikationer på Azure Container Apps. Klar til at tilføje AI-funktioner? Se [AI-integrationsvejledningen](../../../../docs/ai-foundry)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Ansvarsfraskrivelse:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten Co-op Translator (https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets originalsprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

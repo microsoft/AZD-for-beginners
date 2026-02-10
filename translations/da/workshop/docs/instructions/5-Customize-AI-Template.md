@@ -1,70 +1,61 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T21:29:01+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "da"
-}
--->
-# 5. Tilpas en Skabelon
+# 5. Tilpas en skabelon
 
-!!! tip "VED SLUTNINGEN AF DETTE MODUL VIL DU KUNNE"
+!!! tip "I SLUTNINGEN AF DETTE MODUL VIL DU VÆRE I STAND TIL AT"
 
-    - [ ] Udforske standard AI-agentens funktioner
-    - [ ] Tilføje AI-søgning med din egen indeks
-    - [ ] Aktivere og analysere sporingsmetrikker
-    - [ ] Udføre en evalueringskørsel
-    - [ ] Udføre en red-teaming scanning
-    - [ ] **Lab 5: Udarbejde en tilpasningsplan** 
+    - [ ] Undersøgt de standard AI-agentfunktioner
+    - [ ] Tilføjet AI-søgning med dit eget indeks
+    - [ ] Aktiveret og analyseret tracing-metrikker
+    - [ ] Udført en evalueringskørsel
+    - [ ] Udført en red-teaming-scanning
+    - [ ] **Lab 5: Udarbejdet en tilpasningsplan** 
 
 ---
 
-## 5.1 AI-agentens funktioner
+## 5.1 AI-agentfunktioner
 
-!!! success "Dette gennemførte vi i Lab 01"
+!!! success "Vi gennemførte dette i Lab 01"
 
-- **Fil-søgning**: OpenAI's indbyggede fil-søgning til videnshentning
-- **Citeringer**: Automatisk kildeangivelse i svar
-- **Tilpassede instruktioner**: Ændre agentens adfærd og personlighed
-- **Værktøjsintegration**: Udvideligt værktøjssystem til brugerdefinerede funktioner
+- **File Search**: OpenAI's indbyggede filsøgning til videnshentning
+- **Citations**: Automatisk kildeangivelse i svar
+- **Customizable Instructions**: Ændr agentens adfærd og personlighed
+- **Tool Integration**: Udvideligt værktøjssystem til brugerdefinerede funktioner
 
 ---
 
-## 5.2 Muligheder for videnshentning
+## 5.2 Valgmuligheder for videnshentning
 
 !!! task "For at fuldføre dette skal vi foretage ændringer og genudrulle"    
     
     ```bash title=""
-    # Sæt miljøvariabler
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Upload data og opret mit indeks
+    # Upload data and create my index
 
     ```
 
 ---
 
-**OpenAI Fil-søgning (Standard):**
+**OpenAI File Search (Standard):**
 
-- Indbygget i Azure AI Agent-tjenesten
+- Indbygget i Foundry-agenterne
 - Automatisk dokumentbehandling og indeksering
-- Ingen yderligere konfiguration nødvendig
+- Ingen yderligere konfiguration påkrævet
 
-**Azure AI Søgning (Valgfri):**
+**Azure AI Search (Valgfri):**
 
-- Hybrid semantisk og vektorbaseret søgning
-- Brugerdefineret indeksstyring
+- Hybrid semantisk og vektorsøgning
+- Tilpasset indeksadministration
 - Avancerede søgefunktioner
 - Kræver `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Sporing & Overvågning](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Sporing og overvågning](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
 !!! task "For at fuldføre dette skal vi foretage ændringer og genudrulle"    
     
@@ -77,62 +68,64 @@ CO_OP_TRANSLATOR_METADATA:
 
 - OpenTelemetry-integration
 - Sporing af forespørgsler og svar
-- Ydelsesmålinger
-- Tilgængelig i AI Foundry-portalen
+- Ydelsesmetrikker
+- Tilgængelig i Microsoft Foundry-portalen
 
 **Logning:**
 
-- Applikationslogfiler i Container Apps
-- Struktureret logning med korrelations-ID'er
-- Visning af realtids- og historiske logfiler
+- Applikationslogs i Container Apps
+- Struktureret logning med korrelations-id'er
+- Visning af logs i realtid og historik
 
 ---
 
-## 5.4 [Agent Evaluering](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agentevaluering](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Lokal Evaluering:**
+**Lokal evaluering:**
 
 - Indbyggede evaluatorer til kvalitetsvurdering
-- Brugerdefinerede evalueringsscripts
+- Tilpassede evalueringsscripts
 - Ydelsesbenchmarking
 
-**Kontinuerlig Overvågning:**
+**Kontinuerlig overvågning:**
 
 - Automatisk evaluering af live-interaktioner
 - Sporing af kvalitetsmetrikker
-- Detektion af ydelsesregression
+- Registrering af ydelsesregressioner
 
-**CI/CD Integration:**
+**CI/CD-integration:**
 
-- GitHub Actions workflow
+- GitHub Actions-workflow
 - Automatiseret test og evaluering
 - Statistisk sammenligningstest
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming-agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
-- Automatisk sikkerhedsscanning
-- Risikovurdering for AI-systemer
-- Sikkerhedsevaluering på tværs af flere kategorier
+- Automatiseret sikkerhedsscanning
+- Risikovurdering af AI-systemer
+- Sikkerhedsvurdering på tværs af flere kategorier
 
 **Autentificering:**
 
-- Managed Identity for Azure-tjenester
+- Managed Identity til Azure-tjenester
 - Valgfri Azure App Service-autentificering
-- Grundlæggende autentificering som fallback til udvikling
+- Basic auth-fallback til udvikling
 
-!!! quote "VED SLUTNINGEN AF DENNE LAB SKAL DU HAVE"
-    - [ ] Defineret dine scenariekrav
-    - [ ] Tilpasset miljøvariabler (konfiguration)
-    - [ ] Tilpasset agentinstruktioner (opgave)
+
+
+!!! quote "I SLUTNINGEN AF DETTE LAB SKAL DU HAVE"
+    - [ ] Definer dine scenariekrav
+    - [ ] Tilpassede miljøvariabler (konfiguration)
+    - [ ] Tilpassede agentinstruktioner (opgave)
     - [ ] Udrullet den tilpassede skabelon (app)
-    - [ ] Fuldført efter-udrulningsopgaver (manuel)
-    - [ ] Udført en testevaluering
+    - [ ] Fuldført efter-implementeringsopgaver (manuel)
+    - [ ] Kørt en testevaluering
 
-Dette eksempel viser, hvordan man tilpasser skabelonen til en virksomheds detailbrugsscenarie med to specialiserede agenter og flere modeludrulninger.
+Dette eksempel viser, hvordan skabelonen kan tilpasses til et detailhandels‑brugsscenario for virksomheder med to specialiserede agenter og flere modeludrulninger.
 
 ---
 
@@ -142,61 +135,61 @@ Dette eksempel viser, hvordan man tilpasser skabelonen til en virksomheds detail
 
 #### **Agentudrulninger:** 
 
-   - Shopper Agent: Hjælper kunder med at finde og sammenligne produkter
-   - Loyalty Agent: Håndterer kundebelønninger og kampagner
+   - Shopper-agent: Hjælper kunder med at finde og sammenligne produkter
+   - Loyalty-agent: Håndterer kunders belønninger og kampagner
 
 #### **Modeludrulninger:**
 
    - `gpt-4.1`: Primær chatmodel
-   - `o3`: Ræsonneringsmodel til komplekse forespørgsler
+   - `o3`: Resoneringsmodel til komplekse forespørgsler
    - `gpt-4.1-nano`: Letvægtsmodel til simple interaktioner
-   - `text-embedding-3-large`: Højkvalitets embeddings til søgning
+   - `text-embedding-3-large`: Embeddings af høj kvalitet til søgning
 
 #### **Funktioner:**
 
    - Sporings- og overvågningsfunktioner aktiveret
    - AI-søgning til produktkatalog
-   - Evalueringsramme til kvalitetssikring
+   - Evalueringsramme til kvalitets­sikring
    - Red teaming til sikkerhedsvalidering
 
 ---
 
-### 5.6.2 Scenarieimplementering
+### 5.6.2 Implementering af scenariet
 
 
-#### 5.6.2.1. Før-udrulningskonfiguration
+#### 5.6.2.1. Forudgående konfiguration
 
 Opret et opsætningsscript (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Angiv miljønavn
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Konfigurer region (vælg ud fra modeltilgængelighed)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Aktivér alle valgfrie tjenester
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Konfigurer primær chatmodel (gpt-4o som den nærmeste tilgængelige til gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Konfigurer embeddingsmodel til forbedret søgning
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Angiv agentnavn (opretter den første agent)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Konfigurer søgeindeks
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -265,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Valider forudsætninger
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -277,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Opsæt miljø
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Kontroller kvoten i den valgte region
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Udrul infrastrukturen og applikationen
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Indsaml udrulningsoutput
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Hent webappens URL
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -328,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Efter-udrulningskonfiguration
+#### 5.6.2.4: Post-implementeringskonfiguration
 
 Opret `configure-retail-agents.sh`:
 
@@ -337,19 +330,19 @@ Opret `configure-retail-agents.sh`:
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Hent oplysninger om udrulning
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Instruktioner til manuel konfiguration
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -385,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Test og Validering
+### 5.6.3: Test og validering
 
 Opret `test-retail-deployment.sh`:
 
@@ -394,11 +387,11 @@ Opret `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Bekræft, at miljøvariabler er indstillet
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# Test webapplikationens tilgængelighed
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Kør evaluering, hvis konfigureret
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -436,38 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Forventede Resultater
+### 5.6.4 Forventede resultater
 
-Efter at have fulgt denne implementeringsvejledning vil du have:
+Efter at have fulgt denne implementeringsguide vil du have:
 
-1. **Udrullet Infrastruktur:**
+1. **Udrullet infrastruktur:**
 
-      - AI Foundry-projekt med modeludrulninger
+      - Microsoft Foundry-projekt med modeludrulninger
       - Container Apps, der hoster webapplikationen
-      - AI-søgningstjeneste til produktkatalog
+      - AI Search-tjeneste til produktkatalog
       - Application Insights til overvågning
 
-2. **Initial Agent:**
+2. **Indledende agent:**
 
-      - Shopper Agent konfigureret med grundlæggende instruktioner
-      - Fil-søgningsfunktion aktiveret
-      - Sporings- og overvågningsfunktioner konfigureret
+      - Shopper-agent konfigureret med grundlæggende instruktioner
+      - Filsøgningsfunktion aktiveret
+      - Sporings- og overvågningsfunktion konfigureret
 
-3. **Klar til Tilpasning:**
+3. **Klar til tilpasning:**
 
-      - Ramme for tilføjelse af Loyalty Agent
-      - Skabeloner til brugerdefinerede instruktioner
+      - Rammeværk til at tilføje Loyalty-agent
+      - Tilpassede instruktionsskabeloner
       - Test- og valideringsscripts
-      - Overvågnings- og evalueringsopsætning
+      - Opsætning af overvågning og evaluering
 
-4. **Produktionsklarhed:**
+4. **Klar til produktion:**
 
       - Sikkerhedsscanning med red teaming
       - Ydelsesovervågning
-      - Kvalitetsevalueringsramme
+      - Rammeværk for kvalitetsvurdering
       - Skalerbar arkitektur
 
-Dette eksempel viser, hvordan AZD-skabelonen kan udvides og tilpasses til specifikke virksomhedsbrugsscenarier, samtidig med at bedste praksis for sikkerhed, overvågning og skalerbarhed opretholdes.
+Dette eksempel viser, hvordan AZD-skabelonen kan udvides og tilpasses til specifikke virksomhedsscenarier, samtidig med at bedste praksis for sikkerhed, overvågning og skalerbarhed bevares.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Ansvarsfraskrivelse:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales en professionel, menneskelig oversættelse. Vi kan ikke gøres ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

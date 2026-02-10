@@ -1,322 +1,311 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-21T14:35:00+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "no"
-}
--->
 # AZD for nybegynnere: Kursoversikt og læringsrammeverk
 
 ## Kursoversikt
 
-Lær deg Azure Developer CLI (azd) gjennom strukturerte kapitler som er designet for gradvis læring. **Spesiell fokus på AI-applikasjonsutplassering med Microsoft Foundry-integrasjon.**
+Bli mester i Azure Developer CLI (azd) gjennom strukturerte kapitler designet for progressiv læring. **Spesiell fokus på utrulling av AI-applikasjoner med integrasjon av Microsoft Foundry.**
 
 ### Hvorfor dette kurset er viktig for moderne utviklere
 
-Basert på innsikt fra Microsoft Foundry Discord-samfunnet, **ønsker 45 % av utviklere å bruke AZD for AI-arbeidsbelastninger**, men møter utfordringer med:
-- Komplekse AI-arkitekturer med flere tjenester
-- Beste praksis for produksjonsutplassering av AI  
+Basert på innsikt fra Microsoft Foundry Discord-fellesskapet, **45% of developers want to use AZD for AI workloads** men møter utfordringer med:
+- Komplekse multi-tjeneste AI-arkitekturer
+- Beste praksiser for produksjonsutrulling av AI  
 - Integrasjon og konfigurasjon av Azure AI-tjenester
-- Kostnadsoptimalisering for AI-arbeidsbelastninger
-- Feilsøking av AI-spesifikke utplasseringsproblemer
+- Kostnadsoptimalisering for AI-arbeidsmengder
+- Feilsøking av AI-spesifikke utrullingsproblemer
 
-### Kjerne læringsmål
+### Kjerne-læringsmål
 
 Ved å fullføre dette strukturerte kurset vil du:
-- **Beherske AZD-grunnleggende**: Kjernebegreper, installasjon og konfigurasjon
-- **Utplassere AI-applikasjoner**: Bruke AZD med Microsoft Foundry-tjenester
-- **Implementere Infrastructure as Code**: Administrere Azure-ressurser med Bicep-maler
-- **Feilsøke utplasseringer**: Løse vanlige problemer og debugge feil
-- **Optimalisere for produksjon**: Sikkerhet, skalering, overvåking og kostnadsstyring
-- **Bygge multi-agent løsninger**: Utplassere komplekse AI-arkitekturer
+- **Behersk AZD-grunnleggende**: Grunnleggende konsepter, installasjon og konfigurasjon
+- **Utrull AI-applikasjoner**: Bruk AZD med Microsoft Foundry-tjenester
+- **Implementere infrastruktur som kode**: Administrer Azure-ressurser med Bicep-maler
+- **Feilsøk utrullinger**: Løs vanlige problemer og debug feil
+- **Optimaliser for produksjon**: Sikkerhet, skalering, overvåking og kostnadsstyring
+- **Bygg løsninger med flere agenter**: Utrull komplekse AI-arkitekturer
 
 ## 🎓 Workshop-læringsopplevelse
 
 ### Fleksible læringsleveringsalternativer
-Dette kurset er designet for å støtte både **selvstyrt individuell læring** og **fasiliterte workshop-økter**, slik at deltakerne kan få praktisk erfaring med AZD mens de utvikler ferdigheter gjennom interaktive øvelser.
+Dette kurset er designet for å støtte både **selvstyrt individuell læring** og **fasiliterte workshop-økter**, slik at deltakere får praktisk erfaring med AZD samtidig som de utvikler praktiske ferdigheter gjennom interaktive øvelser.
 
 #### 🚀 Selvstyrt læringsmodus
 **Perfekt for individuelle utviklere og kontinuerlig læring**
 
 **Funksjoner:**
-- **Nettleserbasert grensesnitt**: Fullfør MkDocs-drevet workshop tilgjengelig via hvilken som helst nettleser
+- **Nettleserbasert grensesnitt**: Fullt MkDocs-drevet workshop tilgjengelig via enhver nettleser
 - **GitHub Codespaces-integrasjon**: Ett-klikk utviklingsmiljø med forhåndskonfigurerte verktøy
-- **Interaktiv DevContainer-miljø**: Ingen lokal oppsett nødvendig - start koding umiddelbart
-- **Fremdriftssporing**: Innebygde sjekkpunkter og valideringsøvelser
-- **Samfunnsstøtte**: Tilgang til Azure Discord-kanaler for spørsmål og samarbeid
+- **Interaktivt DevContainer-miljø**: Ingen lokal oppsett nødvendig - start koding umiddelbart
+- **Fremdriftssporing**: Innebygde kontrollpunkter og valideringsøvelser
+- **Fellesskapsstøtte**: Tilgang til Azure Discord-kanaler for spørsmål og samarbeid
 
 **Læringsstruktur:**
 - **Fleksibel tidsplan**: Fullfør kapitler i ditt eget tempo over dager eller uker
-- **Sjekkpunktsystem**: Valider læring før du går videre til komplekse emner
-- **Ressursbibliotek**: Omfattende dokumentasjon, eksempler og feilsøkingsguider
-- **Porteføljeutvikling**: Bygg utplasserbare prosjekter for profesjonelle porteføljer
+- **Kontrollpunktsystem**: Verifiser læring før du går videre til mer komplekse emner
+- **Ressursbibliotek**: Omfattende dokumentasjon, eksempler og feilsøkingsveiledninger
+- **Porteføljeutvikling**: Bygg deployerbare prosjekter for profesjonelle porteføljer
 
 **Kom i gang (selvstyrt):**
 ```bash
-# Alternativ 1: GitHub Codespaces (Anbefalt)
-# Naviger til depotet og klikk "Code" → "Create codespace on main"
+# Alternativ 1: GitHub Codespaces (anbefalt)
+# Gå til repositoriet og klikk "Code" → "Create codespace on main"
 
 # Alternativ 2: Lokal utvikling
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Følg oppsettinstruksjonene i workshop/README.md
+# Følg oppsettsinstruksjonene i workshop/README.md
 ```
 
 #### 🏛️ Fasiliterte workshop-økter
 **Ideelt for bedriftsopplæring, bootcamps og utdanningsinstitusjoner**
 
-**Workshop-formatalternativer:**
+**Workshopformatalternativer:**
 
 **📚 Akademisk kursintegrasjon (8-12 uker)**
 - **Universitetsprogrammer**: Semesterlangt kurs med ukentlige 2-timers økter
 - **Bootcamp-format**: Intensivt 3-5 dagers program med daglige 6-8 timers økter
-- **Bedriftsopplæring**: Månedlige teamøkter med praktisk prosjektimplementering
-- **Vurderingsrammeverk**: Oppgaver med karakter, kollegavurderinger og sluttprosjekter
+- **Bedriftstrening**: Månedlige teamøkter med praktisk prosjektimplementering
+- **Vurderingsrammeverk**: Karakterbaserte oppgaver, fagfellevurderinger og avsluttende prosjekter
 
-**🚀 Intensiv workshop (1-3 dager)**
-- **Dag 1**: Grunnlag + AI-utvikling (Kapittel 1-2) - 6 timer
-- **Dag 2**: Konfigurasjon + Infrastruktur (Kapittel 3-4) - 6 timer  
-- **Dag 3**: Avanserte mønstre + Produksjon (Kapittel 5-8) - 8 timer
-- **Oppfølging**: Valgfri 2-ukers veiledning for prosjektfullføring
+**🚀 Intensivt workshop (1-3 dager)**
+- **Dag 1**: Grunnlag + AI-utvikling (Kapitler 1-2) - 6 timer
+- **Dag 2**: Konfigurasjon + Infrastruktur (Kapitler 3-4) - 6 timer  
+- **Dag 3**: Avanserte mønstre + Produksjon (Kapitler 5-8) - 8 timer
+- **Oppfølging**: Valgfri 2-ukers mentorordning for prosjektgjennomføring
 
-**⚡ Executive Briefing (4-6 timer)**
-- **Strategisk oversikt**: AZD-verdi og forretningspåvirkning (1 time)
-- **Praktisk demo**: Utplassere AI-applikasjon fra start til slutt (2 timer)
+**⚡ Lederbriefing (4-6 timer)**
+- **Strategisk oversikt**: AZD verdiforslag og forretningspåvirkning (1 time)
+- **Praktisk demo**: Utrull AI-applikasjon ende-til-ende (2 timer)
 - **Arkitekturgjennomgang**: Enterprise-mønstre og styring (1 time)
-- **Implementeringsplanlegging**: Strategi for organisasjonsadopsjon (1-2 timer)
+- **Implementeringsplanlegging**: Strategi for organisatorisk adopsjon (1-2 timer)
 
 #### 🛠️ Workshop-læringsmetodikk
-**Oppdagelse → Utplassering → Tilpasning tilnærming for praktisk ferdighetsutvikling**
+**Oppdagelse → Utrulling → Tilpasning-tilnærming for praktisk ferdighetsutvikling**
 
-**Fase 1: Oppdagelse (45 minutter)**
-- **Malutforskning**: Evaluere Azure AI Foundry-maler og tjenester
-- **Arkitekturanalyse**: Forstå multi-agent mønstre og utplasseringsstrategier
-- **Behovsvurdering**: Identifisere organisasjonens behov og begrensninger
-- **Miljøoppsett**: Konfigurere utviklingsmiljø og Azure-ressurser
+**Fase 1: Oppdagelse (45 minutes)**
+- **Malutforskning**: Evaluer Microsoft Foundry-maler og -tjenester
+- **Arkitekturanalyse**: Forstå mønstre for flere agenter og utrullingsstrategier
+- **Kravvurdering**: Identifiser organisatoriske behov og begrensninger
+- **Miljøoppsett**: Konfigurer utviklingsmiljø og Azure-ressurser
 
-**Fase 2: Utplassering (2 timer)**
-- **Veiledet implementering**: Trinn-for-trinn utplassering av AI-applikasjoner med AZD
-- **Tjenestekonfigurasjon**: Konfigurere Azure AI-tjenester, endepunkter og autentisering
-- **Sikkerhetsimplementering**: Bruke enterprise sikkerhetsmønstre og tilgangskontroller
-- **Valideringstesting**: Verifisere utplasseringer og feilsøke vanlige problemer
+**Fase 2: Utrulling (2 hours)**
+- **Veiledet implementering**: Trinnvis utrulling av AI-applikasjoner med AZD
+- **Tjenestekonfigurasjon**: Konfigurer Azure AI-tjenester, endepunkter og autentisering
+- **Sikkerhetsimplementering**: Bruk foretaks-sikkerhetsmønstre og tilgangskontroller
+- **Valideringstesting**: Verifiser utrullinger og feilsøk vanlige problemer
 
-**Fase 3: Tilpasning (45 minutter)**
-- **Applikasjonsmodifikasjon**: Tilpasse maler for spesifikke brukstilfeller og krav
-- **Produksjonsoptimalisering**: Implementere overvåking, kostnadsstyring og skaleringsstrategier
-- **Avanserte mønstre**: Utforske multi-agent koordinering og komplekse arkitekturer
-- **Planlegging av neste steg**: Definere læringsvei for videre ferdighetsutvikling
+**Fase 3: Tilpasning (45 minutes)**
+- **Applikasjonsmodifikasjon**: Tilpass maler for spesifikke brukstilfeller og krav
+- **Produksjonsoptimalisering**: Implementer overvåking, kostnadsstyring og skaleringsstrategier
+- **Avanserte mønstre**: Utforsk koordinering mellom flere agenter og komplekse arkitekturer
+- **Planlegging av neste skritt**: Definer læringsvei for videre ferdighetsutvikling
 
-#### 🎯 Workshop-læringsresultater
-**Målbare ferdigheter utviklet gjennom praktisk praksis**
+#### 🎯 Workshop-læringsutbytte
+**Målbare ferdigheter utviklet gjennom praktisk øvelse**
 
 **Tekniske kompetanser:**
-- **Utplassere produksjonsklare AI-applikasjoner**: Lykkes med utplassering og konfigurasjon av AI-drevne løsninger
-- **Beherske Infrastructure as Code**: Lage og administrere tilpassede Bicep-maler
-- **Multi-agent arkitektur**: Implementere koordinerte AI-agentløsninger
-- **Produksjonsklarhet**: Bruke sikkerhets-, overvåkings- og styringsmønstre
-- **Feilsøkingskompetanse**: Selvstendig løse utplasserings- og konfigurasjonsproblemer
+- **Utrull produksjons-AI-applikasjoner**: Utrull og konfigurer AI-drevne løsninger med suksess
+- **Beherske Infrastructure as Code**: Opprett og administrer egendefinerte Bicep-maler
+- **Flere-agent-arkitektur**: Implementer koordinerte løsninger med AI-agenter
+- **Produksjonsberedskap**: Bruk sikkerhets-, overvåkings- og styringsmønstre
+- **Feilsøkingskompetanse**: Løs utrullings- og konfigurasjonsproblemer selvstendig
 
 **Profesjonelle ferdigheter:**
-- **Prosjektledelse**: Lede tekniske team i skyutplasseringsinitiativer
-- **Arkitekturdesign**: Designe skalerbare, kostnadseffektive Azure-løsninger
-- **Kunnskapsoverføring**: Trene og veilede kolleger i AZD beste praksis
-- **Strategisk planlegging**: Påvirke organisasjonens skyadopsjonsstrategier
+- **Prosjektledelse**: Led tekniske team i skyutrullingsinitiativer
+- **Arkitekturdesign**: Design skalerbare, kostnadseffektive Azure-løsninger
+- **Kunnskapsoverføring**: Tren og veilede kolleger i AZD beste praksis
+- **Strategisk planlegging**: Påvirk organisasjonens strategier for skyadopsjon
 
-#### 📋 Workshop-ressurser og materialer
-**Omfattende verktøysett for fasilitatorer og deltakere**
+#### 📋 Workshop-ressurser og materiell
+**Omfattende verktøykasse for fasilitatorer og deltakere**
 
 **For fasilitatorer:**
-- **Instruktørveiledning**: [Workshop Facilitation Guide](workshop/docs/instructor-guide.md) - Tips for planlegging og gjennomføring av økter
-- **Presentasjonsmaterialer**: Lysbildefremvisninger, arkitekturdiagrammer og demo-skript
-- **Vurderingsverktøy**: Praktiske øvelser, kunnskapssjekker og evalueringsrubrikker
-- **Teknisk oppsett**: Miljøkonfigurasjon, feilsøkingsguider og backup-planer
+- **Instruktørguide**: [Workshop Overview](workshop/README.md) - Planlegging og gjennomføring av økter
+- **Presentasjonsmateriell**: Lysbildesett, arkitekturdiagrammer og demoscenarier
+- **Vurderingsverktøy**: Praktiske øvelser, kunnskapstester og evalueringsrubrikker
+- **Teknisk oppsett**: Miljøkonfigurasjon, feilsøkingsveiledninger og beredskapsplaner
 
 **For deltakere:**
 - **Interaktivt workshop-miljø**: [Workshop Materials](workshop/README.md) - Nettleserbasert læringsplattform
-- **Trinn-for-trinn instruksjoner**: [Guided Exercises](../../workshop/docs/instructions) - Detaljerte implementeringsveiledninger  
-- **Referansedokumentasjon**: [AI Workshop Lab](docs/ai-foundry/ai-workshop-lab.md) - AI-fokuserte dybdeanalyser
-- **Samfunnsressurser**: Azure Discord-kanaler, GitHub-diskusjoner og ekspertstøtte
+- **Trinnvise instruksjoner**: [Guided Exercises](../../workshop/docs/instructions) - Detaljerte implementasjonsgjennomganger  
+- **Referansedokumentasjon**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-fokuserte dypdykk
+- **Fellesskapsressurser**: Azure Discord-kanaler, GitHub-diskusjoner og eksperthjelp
 
-#### 🏢 Implementering av workshop for bedrifter
-**Strategier for organisasjonsutplassering og opplæring**
+#### 🏢 Implementering av bedriftsworkshop
+**Organisatoriske utrullings- og opplæringsstrategier**
 
 **Bedriftsopplæringsprogrammer:**
-- **Utvikleropplæring**: Orientering for nyansatte med AZD-grunnleggende (2-4 uker)
-- **Teamkompetanseheving**: Kvartalsvise workshops for eksisterende utviklingsteam (1-2 dager)
+- **Utvikleronboarding**: Introduksjon for nyansatte med AZD-grunnleggende (2-4 uker)
+- **Ferdighetsheving for team**: Kvartalsvise workshops for eksisterende utviklingsteam (1-2 dager)
 - **Arkitekturgjennomgang**: Månedlige økter for senioringeniører og arkitekter (4 timer)
-- **Lederbriefinger**: Workshops for tekniske beslutningstakere (halv dag)
+- **Lederbriefinger**: Lederworkshops for tekniske beslutningstakere (halvdag)
 
 **Implementeringsstøtte:**
-- **Tilpasset workshop-design**: Skreddersydd innhold for spesifikke organisasjonsbehov
-- **Pilotprogramledelse**: Strukturert utrulling med suksessmålinger og tilbakemeldingssløyfer  
-- **Løpende veiledning**: Støtte etter workshop for prosjektimplementering
-- **Samfunnsbygging**: Interne Azure AI-utviklersamfunn og kunnskapsdeling
+- **Tilpasset workshopdesign**: Skreddersydd innhold for spesifikke organisatoriske behov
+- **Pilotprogramstyring**: Strukturert utrulling med suksessmetrikker og tilbakemeldingssløyfer  
+- **Pågående mentorordning**: Støtte etter workshop for prosjektimplementering
+- **Fellesskapsbygging**: Interne Azure AI-utviklerfellesskap og deling av kunnskap
 
-**Suksessmålinger:**
-- **Ferdighetservervelse**: Pre/post vurderinger som måler teknisk kompetansevekst
-- **Utplasseringssuksess**: Prosentandel av deltakere som lykkes med å utplassere produksjonsapplikasjoner
-- **Tid til produktivitet**: Redusert opplæringstid for nye Azure AI-prosjekter
+**Suksessmetrikker:**
+- **Kompetanseanskaffelse**: Pre-/post-vurderinger som måler vekst i teknisk kompetanse
+- **Utrullingssuksess**: Andel deltakere som lykkes med å rulle ut produksjonsapplikasjoner
+- **Tid til produktivitet**: Redusert onboarding-tid for nye Azure AI-prosjekter
 - **Kunnskapsbevaring**: Oppfølgingsvurderinger 3-6 måneder etter workshop
 
 ## 8-kapitlers læringsstruktur
 
-### Kapittel 1: Grunnlag og rask start (30-45 minutter) 🌱
-**Forutsetninger**: Azure-abonnement, grunnleggende kommandolinjekunnskap  
+### Kapittel 1: Grunnlag & Kom i gang (30-45 minutter) 🌱
+**Forutsetninger**: Azure-abonnement, grunnleggende kjennskap til kommandolinjen  
 **Kompleksitet**: ⭐
 
 #### Hva du vil lære
-- Forstå grunnleggende om Azure Developer CLI
+- Forstå Azure Developer CLI-grunnleggende
 - Installere AZD på din plattform  
-- Din første vellykkede utplassering
+- Din første vellykkede utrulling
 - Kjernebegreper og terminologi
 
 #### Læringsressurser
-- [AZD Basics](docs/getting-started/azd-basics.md) - Kjernebegreper
-- [Installation & Setup](docs/getting-started/installation.md) - Plattformspesifikke guider
-- [Your First Project](docs/getting-started/first-project.md) - Praktisk veiledning
-- [Command Cheat Sheet](resources/cheat-sheet.md) - Hurtigreferanse
+- [AZD Grunnleggende](docs/getting-started/azd-basics.md) - Kjernebegreper
+- [Installasjon & oppsett](docs/getting-started/installation.md) - Plattformspesifikke veiledninger
+- [Ditt første prosjekt](docs/getting-started/first-project.md) - Praktisk veiledning
+- [Kommando-hurtigreferanse](resources/cheat-sheet.md) - Hurtigreferanse
 
 #### Praktisk resultat
-Lykkes med å utplassere en enkel webapplikasjon til Azure ved hjelp av AZD
+Utrull en enkel webapplikasjon til Azure ved hjelp av AZD
 
 ---
 
-### Kapittel 2: AI-først utvikling (1-2 timer) 🤖
+### Kapittel 2: AI-fokusert utvikling (1-2 hours) 🤖
 **Forutsetninger**: Kapittel 1 fullført  
 **Kompleksitet**: ⭐⭐
 
 #### Hva du vil lære
 - Microsoft Foundry-integrasjon med AZD
-- Utplassering av AI-drevne applikasjoner
+- Utrulling av AI-drevne applikasjoner
 - Forstå konfigurasjoner for AI-tjenester
 - RAG (Retrieval-Augmented Generation) mønstre
 
 #### Læringsressurser
-- [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md)
+- [Microsoft Foundry-integrasjon](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI-modellutrulling](docs/microsoft-foundry/ai-model-deployment.md)
 - [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **NY**: Omfattende 2-3 timers praktisk lab
-- [Interactive Workshop Guide](workshop/README.md) - **NY**: Nettleserbasert workshop med MkDocs forhåndsvisning
-- [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
-- [Workshop Instructions](../../workshop/docs/instructions) - **NY**: Trinn-for-trinn veiledede øvelser
+- [Interaktiv workshopguide](workshop/README.md) - **NY**: Nettleserbasert workshop med MkDocs-forhåndsvisning
+- [Microsoft Foundry-maler](README.md#featured-microsoft-foundry-templates)
+- [Workshopinstruksjoner](../../workshop/docs/instructions) - **NY**: Trinnvise veiledede øvelser
 
 #### Praktisk resultat
-Utplassere og konfigurere en AI-drevet chatapplikasjon med RAG-funksjonalitet
+Utrull og konfigurer en AI-drevet chatapplikasjon med RAG-funksjonalitet
 
-#### Workshop-læringsvei (valgfri forbedring)
-**NY interaktiv opplevelse**: [Complete Workshop Guide](workshop/README.md)
-1. **Oppdagelse** (30 min): Malvalg og evaluering
-2. **Utplassering** (45 min): Utplassere og validere AI-malens funksjonalitet  
-3. **Dekonstruksjon** (30 min): Forstå malens arkitektur og komponenter
-4. **Konfigurasjon** (30 min): Tilpasse innstillinger og parametere
-5. **Tilpasning** (45 min): Modifisere og iterere for å gjøre det til ditt eget
-6. **Opprydding** (15 min): Rydde opp ressurser og forstå livssyklus
-7. **Avslutning** (15 min): Neste steg og avanserte læringsveier
+#### Workshop læringsløp (valgfri utvidelse)
+**NY Interaktiv opplevelse**: [Fullstendig workshopguide](workshop/README.md)
+1. **Oppdagelse** (30 mins): Malvalg og evaluering
+2. **Utrulling** (45 mins): Rull ut og verifiser AI-malens funksjonalitet  
+3. **Nedbrytning** (30 mins): Forstå malens arkitektur og komponenter
+4. **Konfigurasjon** (30 mins): Tilpass innstillinger og parametere
+5. **Tilpasning** (45 mins): Modifiser og iterer for å gjøre det til ditt
+6. **Opprydding** (15 mins): Rydd opp ressurser og forstå livssyklusen
+7. **Oppsummering** (15 mins): Neste steg og avanserte læringsløp
 
 ---
 
-### Kapittel 3: Konfigurasjon og autentisering (45-60 minutter) ⚙️
+### Kapittel 3: Konfigurasjon & Autentisering (45-60 minutes) ⚙️
 **Forutsetninger**: Kapittel 1 fullført  
 **Kompleksitet**: ⭐⭐
 
 #### Hva du vil lære
-- Miljøkonfigurasjon og administrasjon
-- Beste praksis for autentisering og sikkerhet
-- Ressursnavngivning og organisering
-- Utplasseringer i flere miljøer
+- Miljøkonfigurasjon og -administrasjon
+- Autentisering og sikkerhetsbeste praksis
+- Navngivning og organisering av ressurser
+- Utrullinger til flere miljøer
 
 #### Læringsressurser
-- [Configuration Guide](docs/getting-started/configuration.md) - Miljøoppsett
-- [Authentication & Security Patterns](docs/getting-started/authsecurity.md) - Administrert identitet og Key Vault-integrasjon
-- Eksempler på flere miljøer
+- [Konfigurasjonsveiledning](docs/getting-started/configuration.md) - Miljøoppsett
+- [Autentiserings & sikkerhetsmønstre](docs/getting-started/authsecurity.md) - Managed identity og Key Vault-integrasjon
+- Eksempler for flere miljøer
 
 #### Praktisk resultat
-Administrere flere miljøer med riktig autentisering og sikkerhet
+Administrer flere miljøer med korrekt autentisering og sikkerhet
 
 ---
 
-### Kapittel 4: Infrastructure as Code & Utplassering (1-1.5 timer) 🏗️
-**Forutsetninger**: Kapitler 1-3 fullført  
+### Kapittel 4: Infrastruktur som kode & Utrulling (1-1.5 hours) 🏗️
+**Forutsetninger**: Kapitlene 1-3 fullført  
 **Kompleksitet**: ⭐⭐⭐
 
 #### Hva du vil lære
-- Avanserte utplasseringsmønstre
-- Infrastructure as Code med Bicep
-- Ressursforsyningsstrategier
-- Oppretting av tilpassede maler
+- Avanserte utrullingsmønstre
+- Infrastruktur som kode med Bicep
+- Strategier for ressursprovisjonering
+- Opprettelse av egendefinerte maler
 
-- Utplassering av containeriserte applikasjoner med Azure Container Apps og AZD
+- Utrulling av containeriserte applikasjoner med Azure Container Apps og AZD
 
 #### Læringsressurser
-- [Deployment Guide](docs/deployment/deployment-guide.md) - Fullstendige arbeidsflyter
-- [Provisioning Resources](docs/deployment/provisioning.md) - Ressursadministrasjon
+- [Utrullingsguide](docs/deployment/deployment-guide.md) - Fullstendige arbeidsflyter
+- [Ressursprovisjonering](docs/deployment/provisioning.md) - Ressursadministrasjon
 - Eksempler på containere og mikrotjenester
-- [Container App Examples](examples/container-app/README.md) - Hurtigstart, produksjon og avanserte utplasseringsmønstre
+- [Container App-eksempler](examples/container-app/README.md) - Rask start, produksjon og avanserte utrullingsmønstre
 
 #### Praktisk resultat
-Utplassere komplekse applikasjoner med flere tjenester ved hjelp av tilpassede infrastruktursmaler
+Utrull komplekse flertjenesteapplikasjoner ved bruk av egendefinerte infrastrukturmaler
 
 ---
 
-### Kapittel 5: Multi-agent AI-løsninger (2-3 timer) 🤖🤖
-**Forutsetninger**: Kapitler 1-2 fullført  
+### Kapittel 5: Løsninger med flere agenter (2-3 hours) 🤖🤖
+**Forutsetninger**: Kapitlene 1-2 fullført  
 **Kompleksitet**: ⭐⭐⭐⭐
 
 #### Hva du vil lære
-- Mønstre for multi-agent arkitektur
-- Agentorkestrering og koordinering
-- Produksjonsklare AI-utplasseringer
-- Implementering av kunde- og lageragenter
+- Mønstre for løsninger med flere agenter
+- Orkestrering og koordinering av agenter
+- Produksjonsklare AI-utrullinger
+- Implementasjoner av kunde- og inventaragenter
 
-- Integrering av containeriserte mikrotjenester som en del av agentbaserte løsninger
+- Integrering av containeriserte mikrotjenester som del av agentbaserte løsninger
 
 #### Læringsressurser
 - [Retail Multi-Agent Solution](examples/retail-scenario.md) - Fullstendig implementering
-- [ARM Template Package](../../examples/retail-multiagent-arm-template) - Ett-klikk utplassering
-- Mønstre for multi-agent koordinering
-- [Microservices Architecture Example](../../examples/container-app/microservices) - Tjeneste-til-tjeneste kommunikasjon, asynkron meldingsutveksling og produksjonsutplassering
+- [ARM Template Package](../../examples/retail-multiagent-arm-template) - Ett-klikk-utrulling
+- Koordineringsmønstre for flere agenter
+- [Microservices Architecture Example](../../examples/container-app/microservices) - Tjeneste-til-tjeneste-kommunikasjon, asynkron meldingshåndtering og produksjonsutrulling
 
 #### Praktisk resultat
-Utplassere og administrere en produksjonsklar multi-agent AI-løsning
+Utrull og administrer en produksjonsklar løsning med flere agenter
 
 ---
 
-### Kapittel 6: Validering og planlegging før utplassering (1 time) 🔍
+### Kapittel 6: Validering & Planlegging før utrulling (1 hour) 🔍
 **Forutsetninger**: Kapittel 4 fullført  
 **Kompleksitet**: ⭐⭐
 
 #### Hva du vil lære
 - Kapasitetsplanlegging og ressursvalidering
 - Strategier for valg av SKU
-- Forhåndssjekker og automatisering
-- Kostnadsoptimaliseringsplanlegging
+- Pre-flight-sjekker og automatisering
+- Planlegging for kostnadsoptimalisering
 
 #### Læringsressurser
-- [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Ressursvalidering
-- [SKU Selection](docs/pre-deployment/sku-selection.md) - Kostnadseffektive valg
+- [Kapasitetsplanlegging](docs/pre-deployment/capacity-planning.md) - Ressursvalidering
+- [Valg av SKU](docs/pre-deployment/sku-selection.md) - Kostnadseffektive valg
 - [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automatiserte skript
-- [Application Insights Integration](docs/pre-deployment/application-insights.md) - Overvåking og observasjon
+- [Application Insights Integration](docs/pre-deployment/application-insights.md) - Overvåking og observabilitet
 - [Multi-Agent Coordination Patterns](docs/pre-deployment/coordination-patterns.md) - Strategier for agentorkestrering
 
 #### Praktisk resultat
-Valider og optimaliser distribusjoner før utførelse
-
+Verifiser og optimaliser utrullinger før gjennomføring
 ---
-
-### Kapittel 7: Feilsøking og Debugging (1-1,5 timer) 🔧
-**Forutsetninger**: Ethvert distribusjonskapittel fullført  
+### Kapittel 7: Feilsøking & Debugging (1-1.5 hours) 🔧
+**Forutsetninger**: Et hvilket som helst distribusjonskapittel fullført  
 **Kompleksitet**: ⭐⭐
 
 #### Hva du vil lære
-- Systematiske tilnærminger til debugging
+- Systematiske feilsøkingsmetoder
 - Vanlige problemer og løsninger
 - AI-spesifikk feilsøking
 - Ytelsesoptimalisering
 
 #### Læringsressurser
 - [Vanlige problemer](docs/troubleshooting/common-issues.md) - FAQ og løsninger
-- [Debugging-guide](docs/troubleshooting/debugging.md) - Trinn-for-trinn-strategier
+- [Feilsøkingsguide](docs/troubleshooting/debugging.md) - Trinnvise strategier
 - [AI-spesifikk feilsøking](docs/troubleshooting/ai-troubleshooting.md) - Problemer med AI-tjenester
 
 #### Praktisk resultat
@@ -324,8 +313,8 @@ Diagnostisere og løse vanlige distribusjonsproblemer selvstendig
 
 ---
 
-### Kapittel 8: Produksjon og Enterprise-mønstre (2-3 timer) 🏢
-**Forutsetninger**: Kapitler 1-4 fullført  
+### Kapittel 8: Produksjon & bedriftsmønstre (2-3 hours) 🏢
+**Forutsetninger**: Kapittel 1-4 fullført  
 **Kompleksitet**: ⭐⭐⭐⭐
 
 #### Hva du vil lære
@@ -334,16 +323,16 @@ Diagnostisere og løse vanlige distribusjonsproblemer selvstendig
 - Overvåking og kostnadsoptimalisering
 - Skalerbarhet og styring
 
-- Beste praksis for distribusjon av containerapper i produksjon (sikkerhet, overvåking, kostnad, CI/CD)
+- Beste praksiser for produksjonsutrulling av container-apper (sikkerhet, overvåking, kostnad, CI/CD)
 
 #### Læringsressurser
-- [Beste praksis for produksjons-AI](docs/microsoft-foundry/production-ai-practices.md) - Enterprise-mønstre
-- Mikrotjenester og eksempler for bedrifter
-- Rammeverk for overvåking og styring
+- [Beste praksis for produksjon av AI](docs/microsoft-foundry/production-ai-practices.md) - Bedriftsmønstre
+- Eksempler på mikrotjenester og bedriftsløsninger
+- Overvåkings- og styringsrammeverk
 - [Eksempel på mikrotjenestearkitektur](../../examples/container-app/microservices) - Blue-green/canary-distribusjon, distribuert sporing og kostnadsoptimalisering
 
 #### Praktisk resultat
-Distribuere bedriftsklare applikasjoner med full produksjonskapasitet
+Distribuere bedriftsklare applikasjoner med full produksjonsfunksjonalitet
 
 ---
 
@@ -351,219 +340,219 @@ Distribuere bedriftsklare applikasjoner med full produksjonskapasitet
 
 ### Progressiv ferdighetsbygging
 
-- **🌱 Nybegynnere**: Start med Kapittel 1 (Grunnlag) → Kapittel 2 (AI-utvikling)
-- **🔧 Mellomnivå**: Kapitler 3-4 (Konfigurasjon og infrastruktur) → Kapittel 6 (Validering)
-- **🚀 Avansert**: Kapittel 5 (Multi-agent-løsninger) → Kapittel 7 (Feilsøking)
-- **🏢 Enterprise**: Fullfør alle kapitler, med fokus på Kapittel 8 (Produksjonsmønstre)
+- **🌱 Nybegynnere**: Start med kapittel 1 (Grunnlag) → kapittel 2 (AI-utvikling)
+- **🔧 Mellomnivå**: Kapittel 3-4 (Konfigurasjon & infrastruktur) → kapittel 6 (Validering)
+- **🚀 Avansert**: Kapittel 5 (Multi-agent-løsninger) → kapittel 7 (Feilsøking)
+- **🏢 Bedrift**: Fullfør alle kapitlene, fokus på kapittel 8 (Produksjonsmønstre)
 
-- **Containerapp-sti**: Kapitler 4 (Containerisert distribusjon), 5 (Integrasjon av mikrotjenester), 8 (Beste praksis for produksjon)
+- **Container App-løype**: Kapittel 4 (Containerisert utrulling), 5 (Integrasjon av mikrotjenester), 8 (Beste praksis for produksjon)
 
 ### Kompleksitetsindikatorer
 
-- **⭐ Grunnleggende**: Enkle konsepter, veiledede opplæringer, 30-60 minutter
-- **⭐⭐ Mellomnivå**: Flere konsepter, praktisk øvelse, 1-2 timer  
-- **⭐⭐⭐ Avansert**: Komplekse arkitekturer, tilpassede løsninger, 1-3 timer
-- **⭐⭐⭐⭐ Ekspert**: Produksjonssystemer, enterprise-mønstre, 2-4 timer
+- **⭐ Grunnleggende**: Enkelte konsepter, veiledede opplæringer, 30-60 minutter
+- **⭐⭐ Mellomnivå**: Flere konsepter, praktisk øvelse, 1-2 hours  
+- **⭐⭐⭐ Avansert**: Kompleks arkitektur, tilpassede løsninger, 1-3 timer
+- **⭐⭐⭐⭐ Ekspert**: Produksjonssystemer, bedriftsmønstre, 2-4 timer
 
-### Fleksible læringsstier
+### Fleksible læringsløp
 
-#### 🎯 AI-utvikler hurtigspor (4-6 timer)
-1. **Kapittel 1**: Grunnlag og rask start (45 min)
-2. **Kapittel 2**: AI-først utvikling (2 timer)  
-3. **Kapittel 5**: Multi-agent AI-løsninger (3 timer)
-4. **Kapittel 8**: Beste praksis for produksjons-AI (1 time)
+#### 🎯 AI-utvikler hurtigløype (4-6 hours)
+1. **Kapittel 1**: Grunnlag & Hurtigstart (45 mins)
+2. **Kapittel 2**: AI-først utvikling (2 hours)  
+3. **Kapittel 5**: Multi-agent AI-løsninger (3 hours)
+4. **Kapittel 8**: Produksjons-AI beste praksis (1 hour)
 
-#### 🛠️ Infrastrukturspesialist-sti (5-7 timer)
-1. **Kapittel 1**: Grunnlag og rask start (45 min)
-2. **Kapittel 3**: Konfigurasjon og autentisering (1 time)
-3. **Kapittel 4**: Infrastruktur som kode og distribusjon (1,5 timer)
-4. **Kapittel 6**: Validering og planlegging før distribusjon (1 time)
-5. **Kapittel 7**: Feilsøking og debugging (1,5 timer)
-6. **Kapittel 8**: Produksjon og enterprise-mønstre (2 timer)
+#### 🛠️ Infrastrukturspesialist-løype (5-7 hours)
+1. **Kapittel 1**: Grunnlag & Hurtigstart (45 mins)
+2. **Kapittel 3**: Konfigurasjon & autentisering (1 hour)
+3. **Kapittel 4**: Infrastruktur som kode & utrulling (1.5 hours)
+4. **Kapittel 6**: Forhåndsvalidering og planlegging (1 hour)
+5. **Kapittel 7**: Feilsøking & Debugging (1.5 hours)
+6. **Kapittel 8**: Produksjon & bedriftsmønstre (2 hours)
 
-#### 🎓 Komplett læringsreise (8-12 timer)
-Sekvensiell gjennomføring av alle 8 kapitler med praktisk øvelse og validering
+#### 🎓 Fullstendig læringsreise (8-12 hours)
+Sekvensiell fullføring av alle 8 kapitlene med praktisk øvelse og validering
 
-## Rammeverk for kursfullføring
+## Rammeverk for fullføring av kurset
 
 ### Kunnskapsvalidering
-- **Kapittel-sjekkpunkter**: Praktiske øvelser med målbare resultater
+- **Kapittelkontroller**: Praktiske øvelser med målbare resultater
 - **Praktisk verifisering**: Distribuer fungerende løsninger for hvert kapittel
-- **Progresjonssporing**: Visuelle indikatorer og fullføringsmerker
+- **Fremdriftssporing**: Visuelle indikatorer og fullføringsmerker
 - **Fellesskapsvalidering**: Del erfaringer i Azure Discord-kanaler
 
-### Vurdering av læringsutbytte
+### Vurdering av læringsresultater
 
-#### Fullføring av Kapittel 1-2 (Grunnlag + AI)
-- ✅ Distribuer en enkel webapplikasjon ved hjelp av AZD
-- ✅ Distribuer en AI-drevet chatapplikasjon med RAG
-- ✅ Forstå AZD-kjernekonsepter og AI-integrasjon
+#### Fullføring av kapittel 1-2 (Grunnlag + AI)
+- ✅ Distribuere enkel webapplikasjon ved bruk av AZD
+- ✅ Distribuere AI-basert chatapplikasjon med RAG
+- ✅ Forstå AZD-kjernebegreper og AI-integrasjon
 
-#### Fullføring av Kapittel 3-4 (Konfigurasjon + Infrastruktur)  
-- ✅ Administrer distribusjoner for flere miljøer
-- ✅ Lag tilpassede Bicep-infrastrukturmaler
-- ✅ Implementer sikre autentiseringsmønstre
+#### Fullføring av kapittel 3-4 (Konfigurasjon + infrastruktur)  
+- ✅ Håndtere utrulling i flere miljøer
+- ✅ Lage egendefinerte Bicep-infrastrukturmaler
+- ✅ Implementere sikre autentiseringsmønstre
 
-#### Fullføring av Kapittel 5-6 (Multi-agent + Validering)
-- ✅ Distribuer komplekse multi-agent AI-løsninger
-- ✅ Utfør kapasitetsplanlegging og kostnadsoptimalisering
-- ✅ Implementer automatisert validering før distribusjon
+#### Fullføring av kapittel 5-6 (Multi-agent + validering)
+- ✅ Distribuere kompleks multi-agent AI-løsning
+- ✅ Utføre kapasitetsplanlegging og kostnadsoptimalisering
+- ✅ Implementere automatisert forhåndsvalidering før utrulling
 
-#### Fullføring av Kapittel 7-8 (Feilsøking + Produksjon)
-- ✅ Debug og løs distribusjonsproblemer selvstendig  
-- ✅ Implementer enterprise-overvåking og sikkerhet
-- ✅ Distribuer produksjonsklare applikasjoner med styring
+#### Fullføring av kapittel 7-8 (Feilsøking + Produksjon)
+- ✅ Feilsøke og løse distribusjonsproblemer selvstendig  
+- ✅ Implementere overvåking og sikkerhet på bedriftsnivå
+- ✅ Distribuere produksjonsklare applikasjoner med styring
 
 ### Sertifisering og anerkjennelse
-- **Kursfullføringsmerke**: Fullfør alle 8 kapitler med praktisk validering
+- **Fullføringsmerke for kurset**: Fullfør alle 8 kapitlene med praktisk validering
 - **Fellesskapsanerkjennelse**: Aktiv deltakelse i Microsoft Foundry Discord
 - **Profesjonell utvikling**: Bransjerelevante AZD- og AI-distribusjonsferdigheter
-- **Karrierefremgang**: Bedriftsklare sky-distribusjonsferdigheter
+- **Karrierefremgang**: Bedriftsklare skyutrullingskompetanser
 
-## 🎓 Omfattende læringsutbytte
+## 🎓 Omfattende læringsresultater
 
-### Grunnleggende nivå (Kapitler 1-2)
-Etter fullføring av grunnleggende kapitler vil deltakerne demonstrere:
+### Grunnleggende nivå (Kapittel 1-2)
+Etter fullføring av grunnleggende kapitler vil deltakerne kunne:
 
 **Tekniske ferdigheter:**
-- Distribuere enkle webapplikasjoner til Azure ved hjelp av AZD-kommandoer
-- Konfigurere og distribuere AI-drevne chatapplikasjoner med RAG-funksjonalitet
-- Forstå kjernekonsepter i AZD: maler, miljøer, provisjoneringsarbeidsflyter
-- Integrere Microsoft Foundry-tjenester med AZD-distribusjoner
-- Navigere i Azure AI-tjenestekonfigurasjoner og API-endepunkter
+- Distribuere enkle webapplikasjoner til Azure ved å bruke AZD-kommandoer
+- Konfigurere og distribuere AI-drevne chattapplikasjoner med RAG-funksjonalitet
+- Forstå kjernebegreper i AZD: maler, miljøer, provisjoneringsarbeidsflyter
+- Integrere Microsoft Foundry-tjenester med AZD-utrullinger
+- Navigere Azure AI-tjenestekonfigurasjoner og API-endepunkter
 
 **Profesjonelle ferdigheter:**
-- Følge strukturerte distribusjonsarbeidsflyter for konsistente resultater
+- Følge strukturerte utrullingsarbeidsflyter for konsekvente resultater
 - Feilsøke grunnleggende distribusjonsproblemer ved hjelp av logger og dokumentasjon
-- Kommunisere effektivt om sky-distribusjonsprosesser
-- Anvende beste praksis for sikker AI-tjenesteintegrasjon
+- Kommunisere effektivt om skyutrullingsprosesser
+- Anvende beste praksis for sikker AI-integrasjon
 
 **Læringsverifisering:**
-- ✅ Lykkes med å distribuere `todo-nodejs-mongo`-malen
+- ✅ Distribuere med hell `todo-nodejs-mongo`-malen
 - ✅ Distribuere og konfigurere `azure-search-openai-demo` med RAG
-- ✅ Fullføre interaktive workshop-øvelser (Oppdagelsesfase)
-- ✅ Delta i diskusjoner i Azure Discord-fellesskapet
+- ✅ Fullføre interaktive workshop-øvelser (Discovery phase)
+- ✅ Delta i Azure Discord-fellesskapsdiskusjoner
 
-### Mellomnivå (Kapitler 3-4)
-Etter fullføring av mellomnivåkapitler vil deltakerne demonstrere:
+### Mellomnivå (Kapittel 3-4)
+Etter fullføring av mellomliggende kapitler vil deltakerne kunne:
 
 **Tekniske ferdigheter:**
-- Administrere distribusjoner for flere miljøer (dev, staging, produksjon)
-- Lage tilpassede Bicep-maler for infrastruktur som kode
-- Implementere sikre autentiseringsmønstre med administrert identitet
-- Distribuere komplekse multi-tjenesteapplikasjoner med tilpassede konfigurasjoner
-- Optimalisere ressursprovisjoneringsstrategier for kostnad og ytelse
+- Håndtere utrullinger i flere miljøer (dev, staging, production)
+- Opprette egendefinerte Bicep-maler for infrastruktur som kode
+- Implementere sikre autentiseringsmønstre med managed identity
+- Distribuere komplekse multi-tjenesteapplikasjoner med egendefinerte konfigurasjoner
+- Optimalisere strategier for ressursprovisjonering med tanke på kostnad og ytelse
 
 **Profesjonelle ferdigheter:**
 - Designe skalerbare infrastrukturarkitekturer
-- Implementere sikkerhetsbeste praksis for sky-distribusjoner
-- Dokumentere infrastrukturmønstre for teamarbeid
+- Implementere sikkerhetsbeste praksis for skyutrullinger
+- Dokumentere infrastrukturmønstre for teamt samarbeid
 - Evaluere og velge passende Azure-tjenester for krav
 
 **Læringsverifisering:**
 - ✅ Konfigurere separate miljøer med miljøspesifikke innstillinger
-- ✅ Lage og distribuere en tilpasset Bicep-mal for en multi-tjenesteapplikasjon
-- ✅ Implementere autentisering med administrert identitet for sikker tilgang
-- ✅ Fullføre konfigurasjonsstyringsøvelser med reelle scenarier
+- ✅ Lage og distribuere egendefinert Bicep-mal for multi-tjenesteapplikasjon
+- ✅ Implementere managed identity-autentisering for sikker tilgang
+- ✅ Fullføre konfigurasjonsadministrasjonsøvelser med reelle scenarier
 
-### Avansert nivå (Kapitler 5-6)
-Etter fullføring av avanserte kapitler vil deltakerne demonstrere:
+### Avansert nivå (Kapittel 5-6)
+Etter fullføring av avanserte kapitler vil deltakerne kunne:
 
 **Tekniske ferdigheter:**
 - Distribuere og orkestrere multi-agent AI-løsninger med koordinerte arbeidsflyter
-- Implementere kunde- og lageragentarkitekturer for detaljhandelsscenarier
+- Implementere kunde- og varelageragentarkitekturer for detaljhandelsscenarier
 - Utføre omfattende kapasitetsplanlegging og ressursvalidering
-- Utføre automatisert validering før distribusjon og optimalisering
+- Utføre automatisert forhåndsvalidering og optimalisering før utrulling
 - Designe kostnadseffektive SKU-valg basert på arbeidsbelastningskrav
 
 **Profesjonelle ferdigheter:**
-- Arkitektkomplekse AI-løsninger for produksjonsmiljøer
-- Lede tekniske diskusjoner om AI-distribusjonsstrategier
-- Veilede juniorutviklere i AZD- og AI-distribusjonsbeste praksis
+- Arkitektere komplekse AI-løsninger for produksjonsmiljøer
+- Lede tekniske diskusjoner om AI-utrullingsstrategier
+- Veilede juniorutviklere i AZD og AI-utrulling beste praksis
 - Evaluere og anbefale AI-arkitekturmønstre for forretningskrav
 
 **Læringsverifisering:**
 - ✅ Distribuere komplett detaljhandels multi-agent-løsning med ARM-maler
-- ✅ Demonstrere agentkoordinering og arbeidsflytorkestrering
-- ✅ Fullføre kapasitetsplanleggingsøvelser med reelle ressursbegrensninger
-- ✅ Validere distribusjonsberedskap gjennom automatiserte pre-flight-sjekker
+- ✅ Demonstrere agentkoordinering og orkestrering av arbeidsflyter
+- ✅ Fullføre kapasitetsplanleggingsøvelser med faktiske ressursbegrensninger
+- ✅ Validere utrullingsberedskap gjennom automatiserte pre-flight-sjekker
 
-### Ekspertnivå (Kapitler 7-8)
-Etter fullføring av ekspertkapitler vil deltakerne demonstrere:
+### Ekspertnivå (Kapittel 7-8)
+Etter fullføring av ekspertkapitlene vil deltakerne kunne:
 
 **Tekniske ferdigheter:**
 - Diagnostisere og løse komplekse distribusjonsproblemer selvstendig
-- Implementere enterprise-sikkerhetsmønstre og styringsrammeverk
+- Implementere sikkerhetsmønstre på bedriftsnivå og styringsrammeverk
 - Designe omfattende overvåkings- og varslingsstrategier
-- Optimalisere produksjonsdistribusjoner for skala, kostnad og ytelse
+- Optimalisere produksjonsutrullinger for skala, kostnad og ytelse
 - Etablere CI/CD-pipelines med riktig testing og validering
 
 **Profesjonelle ferdigheter:**
-- Lede enterprise-skytransformasjonsinitiativer
-- Designe og implementere organisatoriske distribusjonsstandarder
+- Lede bedriftens skytransformasjonsinitiativer
+- Designe og implementere organisatoriske utrullingsstandarder
 - Trene og veilede utviklingsteam i avanserte AZD-praksiser
-- Påvirke tekniske beslutninger for enterprise AI-distribusjoner
+- Påvirke tekniske beslutninger for enterprise AI-utrullinger
 
 **Læringsverifisering:**
-- ✅ Løse komplekse multi-tjeneste distribusjonsfeil
-- ✅ Implementere enterprise-sikkerhetsmønstre med samsvarskrav
+- ✅ Løse komplekse feil i multi-tjenesteutrullinger
+- ✅ Implementere bedrifts-sikkerhetsmønstre med samsvarskrav
 - ✅ Designe og distribuere produksjonsovervåking med Application Insights
-- ✅ Fullføre implementering av enterprise-styringsrammeverk
+- ✅ Fullføre implementering av bedriftsstyringsrammeverk
 
-## 🎯 Sertifisering for kursfullføring
+## 🎯 Kursfullføringssertifisering
 
-### Progresjonssporingsrammeverk
-Spor læringsprogresjonen din gjennom strukturerte sjekkpunkter:
+### Rammeverk for fremdriftssporing
+Spor læringsfremgangen din gjennom strukturerte sjekkpunkter:
 
-- [ ] **Kapittel 1**: Grunnlag og rask start ✅
+- [ ] **Kapittel 1**: Grunnlag & Hurtigstart ✅
 - [ ] **Kapittel 2**: AI-først utvikling ✅  
-- [ ] **Kapittel 3**: Konfigurasjon og autentisering ✅
-- [ ] **Kapittel 4**: Infrastruktur som kode og distribusjon ✅
-- [ ] **Kapittel 5**: Multi-agent AI-løsninger ✅
-- [ ] **Kapittel 6**: Validering og planlegging før distribusjon ✅
-- [ ] **Kapittel 7**: Feilsøking og debugging ✅
-- [ ] **Kapittel 8**: Produksjon og enterprise-mønstre ✅
+- [ ] **Kapittel 3**: Konfigurasjon & autentisering ✅
+- [ ] **Kapittel 4**: Infrastruktur som kode & utrulling ✅
+- [ ] **Kapittel 5**: Multi-Agent AI Solutions ✅
+- [ ] **Kapittel 6**: Forhåndsvalidering & planlegging ✅
+- [ ] **Kapittel 7**: Feilsøking & Debugging ✅
+- [ ] **Kapittel 8**: Produksjon & bedriftsmønstre ✅
 
 ### Verifiseringsprosess
 Etter å ha fullført hvert kapittel, verifiser kunnskapen din gjennom:
 
-1. **Fullføring av praktiske øvelser**: Distribuer fungerende løsninger for hvert kapittel
+1. **Fullføring av praktisk øvelse**: Distribuer fungerende løsninger for hvert kapittel
 2. **Kunnskapsvurdering**: Gå gjennom FAQ-seksjoner og fullfør selvvurderinger
 3. **Fellesskapsengasjement**: Del erfaringer og få tilbakemeldinger i Azure Discord
-4. **Porteføljeutvikling**: Dokumenter distribusjonene dine og lærdommene
-5. **Peer Review**: Samarbeid med andre deltakere om komplekse scenarier
+4. **Porteføljeutvikling**: Dokumenter utrullingene dine og erfaringer
+5. **Fagfellevurdering**: Samarbeid med andre lærende om komplekse scenarier
 
-### Fordeler ved kursfullføring
-Etter å ha fullført alle kapitler med verifisering, vil deltakerne ha:
+### Fordeler ved å fullføre kurset
+Etter å ha fullført alle kapitlene med verifisering, vil kandidatene ha:
 
 **Teknisk ekspertise:**
 - **Produksjonserfaring**: Distribuert reelle AI-applikasjoner til Azure-miljøer
-- **Profesjonelle ferdigheter**: Bedriftsklare distribusjons- og feilsøkingsferdigheter  
-- **Arkitekturkunnskap**: Multi-agent AI-løsninger og komplekse infrastrukturmønstre
+- **Profesjonelle ferdigheter**: Bedriftsklare utrullings- og feilsøkingskompetanser  
+- **Arkitekturkunnskap**: Multi-agent AI-løsninger og komplekse infrastruktur-mønstre
 - **Feilsøkingsmestring**: Selvstendig løsning av distribusjons- og konfigurasjonsproblemer
 
 **Profesjonell utvikling:**
-- **Bransjeanerkjennelse**: Verifiserbare ferdigheter innen høy etterspørsel AZD- og AI-distribusjonsområder
-- **Karrierefremgang**: Kvalifikasjoner for roller som skyarkitekt og AI-distribusjonsspesialist
-- **Fellesskapsledelse**: Aktivt medlemskap i Azure-utvikler- og AI-fellesskap
-- **Kontinuerlig læring**: Grunnlag for avansert spesialisering i Microsoft Foundry
+- **Bransjeanerkjennelse**: Verifiserbare ferdigheter innen etterspurte AZD- og AI-utrullingsområder
+- **Karriereutvikling**: Kvalifikasjoner for roller som skyarkitekt og AI-utrullingsspesialist
+- **Fellesskapslederskap**: Aktivt medlemskap i Azure-utvikler- og AI-fellesskap
+- **Kontinuerlig læring**: Grunnlag for avansert Microsoft Foundry-spesialisering
 
-**Porteføljeaktiva:**
-- **Distribuerte løsninger**: Fungerende eksempler på AI-applikasjoner og infrastrukturmønstre
-- **Dokumentasjon**: Omfattende distribusjonsguider og feilsøkingsprosedyrer  
+**Porteføljeelementer:**
+- **Distribuerte løsninger**: Fungerende eksempler på AI-applikasjoner og infrastruktur-mønstre
+- **Dokumentasjon**: Omfattende utrullingsguider og feilsøkingsprosedyrer  
 - **Fellesskapsbidrag**: Diskusjoner, eksempler og forbedringer delt med Azure-fellesskapet
-- **Profesjonelt nettverk**: Forbindelser med Azure-eksperter og AI-distribusjonsutøvere
+- **Profesjonelt nettverk**: Kontakter med Azure-eksperter og fagpersoner innen AI-utrulling
 
-### Læringssti etter kurset
-Nyutdannede er forberedt på avansert spesialisering innen:
-- **Microsoft Foundry-ekspert**: Dyp spesialisering i distribusjon og orkestrering av AI-modeller
-- **Skyarkitekturledelse**: Design og styring av distribusjoner i enterprise-skala
-- **Utviklerfellesskapsledelse**: Bidra til Azure-eksempler og fellesskapsressurser
-- **Bedriftsopplæring**: Undervise i AZD- og AI-distribusjonsferdigheter i organisasjoner
+### Læringsløp etter kurset
+Kandidater er forberedt på avansert spesialisering innen:
+- **Microsoft Foundry-ekspert**: Dyp spesialisering i utrulling og orkestrering av AI-modeller
+- **Ledelse for skyaritektur**: Design og styring av utrullinger i bedriftsmålestokk
+- **Ledelse i utviklerfellesskapet**: Bidra til Azure-eksempler og fellesskapsressurser
+- **Kursvirksomhet i bedrift**: Undervise i AZD- og AI-utrullingsferdigheter internt i organisasjoner
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Ansvarsfraskrivelse:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår som følge av bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

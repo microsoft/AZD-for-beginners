@@ -1,125 +1,122 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T17:31:28+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "no"
-}
--->
 # Kommandooversikt - Essensielle AZD-kommandoer
 
-**Hurtigreferanse for alle kapitler**
-- **📚 Kursoversikt**: [AZD For Nybegynnere](../README.md)
-- **📖 Kom i gang raskt**: [Kapittel 1: Grunnlag & Kom i gang](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI-kommandoer**: [Kapittel 2: AI-First Utvikling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+**Rask Referanse for Alle Kapitler**
+- **📚 Kurs Hjem**: [AZD For Nybegynnere](../README.md)
+- **📖 Rask Start**: [Kapittel 1: Grunnlag & Rask Start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-kommandoer**: [Kapittel 2: AI-Først Utvikling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avansert**: [Kapittel 4: Infrastruktur som kode](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduksjon
 
-Dette omfattende oppslagsarket gir en rask referanse til de mest brukte Azure Developer CLI-kommandoene, organisert etter kategori med praktiske eksempler. Perfekt for raske oppslag under utvikling, feilsøking og daglige operasjoner med azd-prosjekter.
+Dette omfattende juksearket gir rask referanse for de mest brukte Azure Developer CLI-kommandoene, organisert etter kategori med praktiske eksempler. Perfekt for raske oppslag under utvikling, feilsøking og daglige operasjoner med azd-prosjekter.
 
 ## Læringsmål
 
-Ved å bruke dette oppslagsarket vil du:
+Ved å bruke dette juksearket vil du:
 - Ha umiddelbar tilgang til essensielle Azure Developer CLI-kommandoer og syntaks
 - Forstå kommandoorganisering etter funksjonelle kategorier og bruksområder
 - Referere til praktiske eksempler for vanlige utviklings- og distribusjonsscenarier
-- Få tilgang til feilsøkingskommandoer for rask problemløsning
-- Finne avanserte konfigurasjons- og tilpasningsalternativer effektivt
-- Lokalisere kommandoer for miljøstyring og arbeidsflyt med flere miljøer
+- Ha tilgang til feilsøkingskommandoer for rask problemløsning
+- Finne avanserte konfigurasjons- og tilpasningsmuligheter effektivt
+- Lokalisere miljøstyring og multi-miljø arbeidsflyt-kommandoer
 
 ## Læringsutbytte
 
-Med regelmessig bruk av dette oppslagsarket vil du kunne:
-- Utføre azd-kommandoer med selvtillit uten å måtte referere til full dokumentasjon
-- Raskt løse vanlige problemer ved hjelp av passende diagnostiske kommandoer
+Med regelmessig referanse til dette juksearket vil du kunne:
+- Utføre azd-kommandoer med selvtillit uten å måtte se i full dokumentasjon
+- Raskt løse vanlige problemer ved bruk av passende diagnostiske kommandoer
 - Effektivt administrere flere miljøer og distribusjonsscenarier
-- Bruke avanserte azd-funksjoner og konfigurasjonsalternativer etter behov
-- Feilsøke distribusjonsproblemer ved hjelp av systematiske kommandoer
-- Optimalisere arbeidsflyter gjennom effektiv bruk av azd-snarveier og alternativer
+- Anvende avanserte azd-funksjoner og konfigurasjonsmuligheter etter behov
+- Feilsøke distribusjonsproblemer ved hjelp av systematiske kommandosekvenser
+- Optimalisere arbeidsflyter gjennom effektiv bruk av azd-snabbkommandoer og alternativer
 
-## Kom i gang-kommandoer
+## Komme i Gang Kommandoer
 
 ### Autentisering
 ```bash
-# Login to Azure (uses Azure CLI)
+# Logg inn på Azure via AZD
+azd auth login
+
+# Logg inn på Azure CLI (AZD bruker dette under panseret)
 az login
 
-# Check current account
+# Sjekk gjeldende konto
 az account show
 
-# Set default subscription
+# Sett standardabonnement
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# Logg ut fra AZD
+azd auth logout
+
+# Logg ut fra Azure CLI
+az logout
 ```
 
-### Prosjektinitialisering
+### Prosjekt Initialisering
 ```bash
-# Browse available templates
+# Bla gjennom tilgjengelige maler
 azd template list
 
-# Initialize from template
+# Initialiser fra mal
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# Initialiser i gjeldende katalog
 azd init .
 
-# Initialize with custom name
+# Initialiser med egendefinert navn
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Kjernekommandoer for distribusjon
+## Kjerne Distribusjonskommandoer
 
-### Komplett distribusjonsarbeidsflyt
+### Komplett Distribusjonsarbeidsflyt
 ```bash
-# Deploy everything (provision + deploy)
+# Distribuer alt (klargjøring + distribusjon)
 azd up
 
-# Deploy with confirmation prompts disabled
+# Distribuer med bekreftelsesmeldinger deaktivert
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# Distribuer til spesifikt miljø
 azd up --environment production
 
-# Deploy with custom parameters
+# Distribuer med egendefinerte parametere
 azd up --parameter location=westus2
 ```
 
-### Kun infrastruktur
+### Kun Infrastruktur
 ```bash
-# Provision Azure resources
+# Provisionere Azure-ressurser
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 Forhåndsvis infrastrukturendringer
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# Viser en tørrkjøringsvisning av hvilke ressurser som ville blitt opprettet/endret/slettet
+# Ligner på 'terraform plan' eller 'bicep what-if' - trygt å kjøre, ingen endringer blir anvendt
 ```
 
-### Kun applikasjon
+### Kun Applikasjon
 ```bash
-# Deploy application code
+# Distribuer applikasjonskode
 azd deploy
 
-# Deploy specific service
+# Distribuer spesifikk tjeneste
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# Distribuer alle tjenester
 azd deploy --all
 ```
 
-### Bygg og pakk
+### Bygg og Pakk
 ```bash
-# Build applications
+# Bygg applikasjoner
 azd package
 
-# Build specific service
+# Bygg spesifikk tjeneste
 azd package --service api
 ```
 
@@ -127,229 +124,236 @@ azd package --service api
 
 ### Miljøoperasjoner
 ```bash
-# List all environments
+# List opp alle miljøer
 azd env list
 
-# Create new environment
+# Opprett nytt miljø
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# Velg miljø
 azd env select production
 
-# Show current environment
+# Vis gjeldende miljø
 azd env show
 
-# Refresh environment state
+# Oppdater miljøstatus
 azd env refresh
 ```
 
 ### Miljøvariabler
 ```bash
-# Set environment variable
+# Sett miljøvariabel
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# Hent miljøvariabel
 azd env get API_KEY
 
-# List all environment variables
+# List alle miljøvariabler
 azd env get-values
 
-# Remove environment variable
+# Fjern miljøvariabel
 azd env unset DEBUG
 ```
 
 ## ⚙️ Konfigurasjonskommandoer
 
-### Global konfigurasjon
+### Global Konfigurasjon
 ```bash
-# List all configuration
+# List alle konfigurasjoner
 azd config list
 
-# Set global defaults
+# Sett globale standardverdier
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# Fjern konfigurasjon
 azd config unset defaults.location
 
-# Reset all configuration
+# Tilbakestill all konfigurasjon
 azd config reset
 ```
 
 ### Prosjektkonfigurasjon
 ```bash
-# Validate azure.yaml
+# Valider azure.yaml
 azd config validate
 
-# Show project information
+# Vis prosjektinformasjon
 azd show
 
-# Get service endpoints
+# Få tjenestepunkter
 azd show --output json
 ```
 
-## 📊 Overvåking og logger
+## 📊 Overvåking og Diagnostikk
 
-### Applikasjonslogger
+### Overvåkingsdashboard
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### Overvåking
-```bash
-# Open Azure portal for monitoring
+# Åpne Azure-portalen overvåkingsdashbord
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Åpne Application Insights live-metric
+azd monitor --live
+
+# Åpne Application Insights loggblad
+azd monitor --logs
+
+# Åpne Application Insights oversikt
+azd monitor --overview
+```
+
+### Vise Container-logger
+```bash
+# Se logger via Azure CLI (for Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Følg logger i sanntid
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Se logger fra Azure Portal
+azd monitor --logs
+```
+
+### Logganalyse Spørringer
+```bash
+# Få tilgang til Logganalyse via Azure-portalen
+azd monitor --logs
+
+# Spørr i logger ved hjelp av Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ Vedlikeholdskommandoer
 
-### Opprydding
+### Rydding
 ```bash
-# Remove all Azure resources
+# Fjern alle Azure-ressurser
 azd down
 
-# Force delete without confirmation
+# Tving sletting uten bekreftelse
 azd down --force
 
-# Purge soft-deleted resources
+# Rens opp mykt slettede ressurser
 azd down --purge
 
-# Complete cleanup
+# Komplett opprydding
 azd down --force --purge
 ```
 
 ### Oppdateringer
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# Sjekk for azd-oppdateringer
 azd version
 
-# Show system information
-azd info
+# Hent gjeldende versjon
+azd version
+
+# Vis gjeldende konfigurasjon
+azd config list
 ```
 
-## 🔧 Avanserte kommandoer
+## 🔧 Avanserte Kommandoer
 
 ### Pipeline og CI/CD
 ```bash
-# Configure GitHub Actions
+# Konfigurer GitHub Actions
 azd pipeline config
 
-# Configure Azure DevOps
+# Konfigurer Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# Vis pipeline-konfigurasjon
 azd pipeline show
 ```
 
-### Infrastrukturstyring
+### Infrastrukturadministrasjon
 ```bash
-# Import existing resources
-azd infra import
+# Generer infrastrukturmaler
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Infrastrukturforhåndsvisning og planlegging
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Simulerer infrastrukturutplassering uten å distribuere
+# Analyserer Bicep/Terraform-maler og viser:
+# - Ressurser som skal legges til (grønn +)
+# - Ressurser som skal endres (gul ~)
+# - Ressurser som skal slettes (rød -)
+# Trygt å kjøre - ingen faktiske endringer gjort i Azure-miljøet
+
+# Syntetiser infrastruktur fra azure.yaml
+azd infra synth
 ```
 
-### Tjenestestyring
+### Prosjektinformasjon
 ```bash
-# List all services
-azd service list
+# Vis prosjektstatus og endepunkter
+azd show
 
-# Show service details
-azd service show --service web
+# Vis detaljert prosjektinfo som JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Hent tjenestens endepunkter
+azd show --output json | jq '.services'
 ```
 
-## 🎯 Hurtige arbeidsflyter
+## 🎯 Raske Arbeidsflyter
 
 ### Utviklingsarbeidsflyt
 ```bash
-# Start new project
+# Start nytt prosjekt
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# Distribuer til utvikling
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# Gjør endringer og distribuer på nytt
 azd deploy
 
-# View logs
-azd logs --follow
+# Åpne overvåkingsdashboard
+azd monitor --live
 ```
 
-### Arbeidsflyt med flere miljøer
+### Multi-Miljø Arbeidsflyt
 ```bash
-# Set up environments
+# Sett opp miljøer
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# Distribuer til utvikling
 azd env select dev
 azd up
 
-# Test and promote to staging
+# Test og promoter til staging
 azd env select staging
 azd up
 
-# Deploy to production
+# Distribuer til produksjon
 azd env select production
 azd up
 ```
 
 ### Feilsøkingsarbeidsflyt
 ```bash
-# Enable debug mode
+# Aktiver feilsøkingsmodus
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Sjekk distribusjonsstatus
+azd show
 
-# Validate configuration
-azd config validate
+# Validere konfigurasjon
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Åpne overvåkingsdashboard for logger
+azd monitor --logs
 
-# Check resource status
+# Sjekk ressursstatus
 azd show --output json
 ```
 
@@ -357,92 +361,94 @@ azd show --output json
 
 ### Feilsøkingsinformasjon
 ```bash
-# Enable debug output
+# Aktiver feilsøkingsutdata
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# Deaktiver telemetri for renere utdata
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Sjekk gjeldende konfigurasjon
+azd config list
 
-# Check authentication status
+# Sjekk autentiseringsstatus
 az account show
 ```
 
 ### Malfeilsøking
 ```bash
-# List available templates with details
+# List tilgjengelige maler med detaljer
 azd template list --output json
 
-# Show template information
+# Vis malinformasjon
 azd template show <template-name>
 
-# Validate template before init
+# Valider mal før initiering
 azd template validate <template-name>
 ```
 
-## 📁 Fil- og katalogkommandoer
+## 📁 Fil- og Katalogkommandoer
 
 ### Prosjektstruktur
 ```bash
-# Show current directory structure
+# Vis gjeldende katalogstruktur
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
+# Naviger til azd prosjektrot
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# Vis azd konfigurasjonskatalog
+echo $AZD_CONFIG_DIR  # Vanligvis ~/.azd
 ```
 
 ## 🎨 Utdataformatering
 
 ### JSON-utdata
 ```bash
-# Get JSON output for scripting
+# Hent JSON-utdata for skripting
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# Analyser med jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Tabellutdata
 ```bash
-# Format as table
+# Formater som tabell
 azd env list --output table
-azd service list --output table
+
+# Vis distribuerte tjenester
+azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Vanlige kommando-kombinasjoner
+## 🔧 Vanlige Kommando Kombinasjoner
 
-### Helsekontrollskript
+### Helsekontroll Script
 ```bash
 #!/bin/bash
-# Quick health check
+# Rask helsesjekk
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
-### Validering av distribusjon
+### Distribusjonsvalidering
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# Forhåndsgodkjenning før distribusjon
+azd show
+azd provision --preview  # Forhåndsvis endringer før distribusjon
 az account show
 ```
 
 ### Miljøsammenligning
 ```bash
 #!/bin/bash
-# Compare environments
+# Sammenlign miljøer
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### Ressursoppryddingsskript
+### Ressursryddings Script
 ```bash
 #!/bin/bash
-# Clean up old environments
+# Rydd opp gamle miljøer
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -463,121 +469,126 @@ done
 
 ## 📝 Miljøvariabler
 
-### Vanlige miljøvariabler
+### Vanlige Miljøvariabler
 ```bash
-# Azure configuration
+# Azure-konfigurasjon
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# AZD-konfigurasjon
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# Applikasjonskonfigurasjon
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
 ## 🚨 Nødkommandoer
 
-### Rask løsning
+### Raske Fiks
 ```bash
-# Reset authentication
+# Tilbakestill autentisering
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# Tving oppdatering av miljø
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# Distribuer alle tjenester på nytt
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Sjekk distribusjonsstatus
+azd show --output json
 ```
 
 ### Gjenopprettingskommandoer
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Gjenopprett fra mislykket distribusjon - rydd opp og distribuer på nytt
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Reprovisjoner kun infrastrukturen
+azd provision
+
+# Distribuer applikasjonen på nytt alene
+azd deploy
 ```
 
-## 💡 Profftips
+## 💡 Profesjonelle Tips
 
-### Alias for raskere arbeidsflyt
+### Alias for Raskere Arbeidsflyt
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# Legg til i din .bashrc eller .zshrc
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
 ### Funksjonssnarveier
 ```bash
-# Quick environment switching
+# Rask bytte av miljø
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# Rask distribusjon med overvåking
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# Miljøstatus
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
 ```
 
-## 📖 Hjelp og dokumentasjon
+## 📖 Hjelp og Dokumentasjon
 
-### Få hjelp
+### Få Hjelp
 ```bash
-# General help
+# Generell hjelp
 azd --help
 azd help
 
-# Command-specific help
+# Kommando-spesifikk hjelp
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# Vis versjon og byggeinformasjon
 azd version
 azd version --output json
 ```
 
 ### Dokumentasjonslenker
 ```bash
-# Open documentation in browser
+# Åpne dokumentasjon i nettleser
 azd docs
 
-# Show template documentation
+# Vis maldokumentasjon
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tips**: Bokmerk dette oppslagsarket og bruk `Ctrl+F` for raskt å finne kommandoene du trenger!
+**Tips**: Bokmerk dette juksearket og bruk `Ctrl+F` for raskt å finne kommandoene du trenger!
 
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Forhåndssjekk](../docs/pre-deployment/preflight-checks.md)
-- **Neste leksjon**: [Ordliste](glossary.md)
+- **Forrige Leksjon**: [Preflight-sjekker](../docs/pre-deployment/preflight-checks.md)
+- **Neste Leksjon**: [Glossar](glossary.md)
 
 ---
 
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi etterstreber nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Originaldokumentet på det opprinnelige språket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

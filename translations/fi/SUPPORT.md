@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-09T21:07:24+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "fi"
-}
--->
 # TODO: Tämän repositorion ylläpitäjä ei ole vielä muokannut tätä tiedostoa
 
 **REPOSITORION OMISTAJA**: Haluatko asiakaspalvelu- ja tukipalveluita (CSS) tälle tuotteelle/projektille?

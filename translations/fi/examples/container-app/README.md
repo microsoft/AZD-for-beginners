@@ -1,44 +1,35 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T17:47:33+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "fi"
-}
--->
-# Esimerkkejä Container-sovellusten käyttöönotosta AZD:llä
+# Container App -käyttöönottoesimerkit AZD:llä
 
-Tämä hakemisto sisältää kattavia esimerkkejä konttipohjaisten sovellusten käyttöönotosta Azure Container Apps -palveluun Azure Developer CLI:n (AZD) avulla. Esimerkit havainnollistavat todellisia käyttötapoja, parhaita käytäntöjä ja tuotantovalmiita konfiguraatioita.
+Tämä hakemisto sisältää kattavia esimerkkejä säilöitettyjen sovellusten käyttöönotosta Azure Container Appsiin Azure Developer CLI:n (AZD) avulla. Nämä esimerkit demonstroivat käytännön malleja, parhaita käytäntöjä ja tuotantovalmiita määrityksiä.
 
-## 📚 Sisällysluettelo
+## 📚 Table of Contents
 
-- [Yleiskatsaus](../../../../examples/container-app)
-- [Edellytykset](../../../../examples/container-app)
-- [Pikakäynnistysesimerkit](../../../../examples/container-app)
-- [Tuotantoesimerkit](../../../../examples/container-app)
-- [Edistyneet mallit](../../../../examples/container-app)
-- [Parhaat käytännöt](../../../../examples/container-app)
+- [Overview](../../../../examples/container-app)
+- [Prerequisites](../../../../examples/container-app)
+- [Quick Start Examples](../../../../examples/container-app)
+- [Production Examples](../../../../examples/container-app)
+- [Advanced Patterns](../../../../examples/container-app)
+- [Best Practices](../../../../examples/container-app)
 
-## Yleiskatsaus
+## Overview
 
-Azure Container Apps on täysin hallinnoitu serverless-konttialusta, joka mahdollistaa mikropalveluiden ja konttipohjaisten sovellusten ajamisen ilman infrastruktuurin hallintaa. Yhdistettynä AZD:hen saat:
+Azure Container Apps on täysin hallittu serverittömä säilöalusta, joka mahdollistaa mikropalveluiden ja säilöitettyjen sovellusten suorittamisen ilman infrastruktuurin hallintaa. Yhdessä AZD:n kanssa saat:
 
-- **Yksinkertaistettu käyttöönotto**: Yksi komento ottaa kontit käyttöön infrastruktuurin kanssa
-- **Automaattinen skaalaus**: Skaalaus nollasta ulospäin HTTP-liikenteen tai tapahtumien perusteella
-- **Integroitu verkottuminen**: Sisäänrakennettu palveluiden löytäminen ja liikenteen jakaminen
-- **Hallittu identiteetti**: Turvallinen autentikointi Azure-resursseihin
-- **Kustannusoptimointi**: Maksat vain käytetyistä resursseista
+- **Simplified Deployment**: Yksi komento ottaa kontit käyttöön infrastruktuurin kanssa
+- **Automatic Scaling**: Skaalaa nollasta ylös perustuen HTTP-liikenteeseen tai tapahtumiin
+- **Integrated Networking**: Sisäänrakennettu palvelun löytö ja liikenteen jakaminen
+- **Managed Identity**: Turvallinen autentikointi Azure-resursseihin
+- **Cost Optimization**: Maksa vain käyttämistäsi resursseista
 
-## Edellytykset
+## Prerequisites
 
-Ennen aloittamista varmista, että sinulla on:
+Ennen aloittamista, varmista että sinulla on:
 
 ```bash
-# Tarkista AZD-asennus
+# Tarkista AZD:n asennus
 azd version
 
-# Tarkista Azure CLI
+# Tarkista Azure CLI:n asennus
 az version
 
 # Tarkista Docker (mukautettujen kuvien rakentamista varten)
@@ -51,16 +42,16 @@ az login
 
 **Vaaditut Azure-resurssit:**
 - Aktiivinen Azure-tilaus
-- Oikeudet luoda resurssiryhmiä
+- Oikeudet resurssiryhmien luomiseen
 - Pääsy Container Apps -ympäristöön
 
-## Pikakäynnistysesimerkit
+## Quick Start Examples
 
-### 1. Yksinkertainen Web API (Python Flask)
+### 1. Simple Web API (Python Flask)
 
-Ota käyttöön perus REST API Azure Container Apps -palvelussa.
+Ota käyttöön perus REST-API Azure Container Appsilla.
 
-**Esimerkki: Python Flask API**
+**Esimerkki: Python Flask -API**
 
 ```yaml
 # azure.yaml
@@ -77,10 +68,10 @@ services:
 **Käyttöönoton vaiheet:**
 
 ```bash
-# Alusta mallista
+# Alusta mallipohjasta
 azd init --template todo-python-mongo
 
-# Varaa infrastruktuuri ja ota käyttöön
+# Pystytä infrastruktuuri ja ota käyttöön
 azd up
 
 # Testaa käyttöönotto
@@ -88,15 +79,15 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Keskeiset ominaisuudet:**
-- Automaattinen skaalaus 0–10 replikaa
-- Terveystarkistukset ja elossaolotarkistukset
-- Ympäristömuuttujien injektio
+**Tärkeimmät ominaisuudet:**
+- Automaattinen skaalaus 0:sta 10 replikaan
+- Terveystarkistukset ja liveness-tarkistukset
+- Ympäristömuuttujien injektointi
 - Application Insights -integraatio
 
 ### 2. Node.js Express API
 
-Ota käyttöön Node.js-taustapalvelu MongoDB-integraatiolla.
+Ota käyttöön Node.js-backend MongoDB-integraatiolla.
 
 ```bash
 # Alusta Node.js API -malli
@@ -109,8 +100,8 @@ azd env set COLLECTION_NAME todos
 # Ota käyttöön
 azd up
 
-# Näytä lokit
-azd logs api
+# Näytä lokit Azure Monitorin kautta
+azd monitor --logs
 ```
 
 **Infrastruktuurin kohokohdat:**
@@ -156,15 +147,15 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Staattinen käyttöliittymä + API-taustapalvelu
+### 3. Static Frontend + API Backend
 
-Ota käyttöön täysimittainen sovellus, jossa on React-käyttöliittymä ja API-taustapalvelu.
+Ota käyttöön full-stack-sovellus React-frontendilla ja API-backendilla.
 
 ```bash
-# Alusta full-stack-malli
+# Alusta täyden pinon malli
 azd init --template todo-csharp-sql-swa-func
 
-# Tarkista kokoonpano
+# Tarkista konfiguraatio
 cat azure.yaml
 
 # Ota molemmat palvelut käyttöön
@@ -174,11 +165,11 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Tuotantoesimerkit
+## Production Examples
 
-### Esimerkki 1: Mikropalveluarkkitehtuuri
+### Example 1: Microservices Architecture
 
-**Skenaario**: Verkkokauppasovellus, jossa on useita mikropalveluita
+**Skenaario**: Verkkokauppasovellus useilla mikropalveluilla
 
 **Hakemistorakenne:**
 ```
@@ -200,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml-konfiguraatio:**
+**azure.yaml -konfiguraatio:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -236,11 +227,11 @@ azd env set MAX_REPLICAS 50
 # Ota kaikki palvelut käyttöön
 azd up
 
-# Valvo käyttöönottoa
+# Seuraa käyttöönottoa
 azd monitor --overview
 ```
 
-### Esimerkki 2: AI-pohjainen Container-sovellus
+### Example 2: AI-Powered Container App
 
 **Skenaario**: AI-chat-sovellus Azure OpenAI -integraatiolla
 
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Käytä hallittua identiteettiä turvalliseen pääsyyn
+# Käytä hallittua identiteettiä turvalliseen käyttöön
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -329,9 +320,9 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Käyttöönottokomennot:**
+**Käyttöönotto-komennot:**
 ```bash
-# Aseta ympäristö
+# Määritä ympäristö
 azd init --template ai-chat-app
 azd env new dev
 
@@ -342,15 +333,15 @@ azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 # Ota käyttöön
 azd up
 
-# Testaa API
+# Testaa rajapintaa
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Esimerkki 3: Taustatyöntekijä ja jonokäsittely
+### Example 3: Background Worker with Queue Processing
 
-**Skenaario**: Tilausten käsittelyjärjestelmä viestijonolla
+**Skenaario**: Tilauksien käsittelyjärjestelmä viestijonolla
 
 **Hakemistorakenne:**
 ```
@@ -390,7 +381,7 @@ def process_orders():
             # Käsittele tilaus
             print(f"Processing order: {message.content}")
             
-            # Viimeistele viesti
+            # Kokonainen viesti
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -420,7 +411,7 @@ azd init
 # Ota käyttöön jonon kokoonpanolla
 azd up
 
-# Skaalaa työntekijä jonon pituuden mukaan
+# Skaalaa työntekijää jonon pituuden mukaan
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -429,15 +420,15 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Edistyneet mallit
+## Advanced Patterns
 
-### Malli 1: Blue-Green Deployment
+### Pattern 1: Blue-Green Deployment
 
 ```bash
 # Luo uusi revisio ilman liikennettä
 azd deploy api --revision-suffix blue --no-traffic
 
-# Testaa uusi revisio
+# Testaa uutta revisiota
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
 # Jaa liikenne (20% siniselle, 80% nykyiselle)
@@ -446,14 +437,14 @@ az containerapp ingress traffic set \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Täysi siirtyminen siniselle
+# Täysi siirtymä siniselle
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Malli 2: Canary Deployment AZD:llä
+### Pattern 2: Canary Deployment with AZD
 
 **Tiedosto: .azure/dev/config.json**
 ```json
@@ -467,18 +458,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Käyttöönottoskripti:**
+**Käyttöönotto-skripti:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Ota käyttöön uusi revisio 10% liikenteellä
+# Ota uusi versio käyttöön 10 % liikenteestä
 azd deploy api --revision-mode multiple
 
 # Seuraa mittareita
 azd monitor --service api --duration 5m
 
-# Lisää liikennettä vähitellen
+# Lisää liikennettä asteittain
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Malli 3: Monialueinen käyttöönotto
+### Pattern 3: Multi-Region Deployment
 
 **Tiedosto: azure.yaml**
 ```yaml
@@ -538,14 +529,14 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Käyttöönotto:**
 ```bash
-# Ota käyttöön kaikissa alueilla
+# Ota käyttöön kaikissa alueissa
 azd up
 
-# Vahvista päätepisteet
+# Tarkista päätepisteet
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Malli 4: Dapr-integraatio
+### Pattern 4: Dapr Integration
 
 **Tiedosto: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -572,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Sovelluskoodi Daprilla:**
+**Sovelluskoodi Dapr:lla:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -599,20 +590,20 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Parhaat käytännöt
+## Best Practices
 
-### 1. Resurssien organisointi
+### 1. Resource Organization
 
 ```bash
-# Käytä johdonmukaisia nimeämiskäytäntöjä
+# Käytä yhtenäisiä nimeämiskäytäntöjä
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Merkitse resurssit kustannusten seuranta varten
+# Merkitse resurssit kustannusten seurantaa varten
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Turvallisuuden parhaat käytännöt
+### 2. Security Best Practices
 
 ```bicep
 // Always use managed identity
@@ -651,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Suorituskyvyn optimointi
+### 3. Performance Optimization
 
 ```yaml
 # azure.yaml with performance settings
@@ -671,17 +662,19 @@ services:
             concurrent: 100
 ```
 
-### 4. Seuranta ja näkyvyys
+### 4. Monitoring and Observability
 
 ```bash
 # Ota Application Insights käyttöön
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Tarkastele lokitietoja reaaliajassa
-azd logs api --follow
+# Näytä lokit reaaliaikaisesti
+azd monitor --logs
+# Tai käytä Azure CLI:tä Container Appsille:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Seuraa mittareita
-azd monitor --service api
+azd monitor --live
 
 # Luo hälytyksiä
 az monitor metrics alert create \
@@ -692,10 +685,10 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Kustannusoptimointi
+### 5. Cost Optimization
 
 ```bash
-# Skaalaa nollaan, kun ei käytössä
+# Skaalaa nollaan, kun ei ole käytössä
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -712,7 +705,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD-integraatio
+### 6. CI/CD Integration
 
 **GitHub Actions -esimerkki:**
 ```yaml
@@ -744,10 +737,10 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Yleiset komennot
+## Common Commands Reference
 
 ```bash
-# Alusta uusi säilösovellusprojekti
+# Alusta uusi Container App -projekti
 azd init --template <template-name>
 
 # Ota käyttöön infrastruktuuri ja sovellus
@@ -756,29 +749,30 @@ azd up
 # Ota käyttöön vain sovelluskoodi (ohita infrastruktuuri)
 azd deploy
 
-# Varaa vain infrastruktuuri
+# Provisionoi vain infrastruktuuri
 azd provision
 
-# Näytä käyttöönotetut resurssit
+# Näytä käyttöön otetut resurssit
 azd show
 
-# Suoratoista lokit
-azd logs <service-name> --follow
+# Striimaa lokit azd monitorilla tai Azure CLI:llä
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # Valvo sovellusta
 azd monitor --overview
 
-# Poista resurssit
+# Siivoa resurssit
 azd down --force --purge
 ```
 
-## Vianetsintä
+## Troubleshooting
 
-### Ongelma: Kontti ei käynnisty
+### Issue: Container fails to start
 
 ```bash
-# Tarkista lokit
-azd logs api --tail 100
+# Tarkista lokit Azure CLI:n avulla
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # Näytä säiliön tapahtumat
 az containerapp revision show \
@@ -791,10 +785,10 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Ongelma: Ei pääsyä Container-sovelluksen päätepisteeseen
+### Issue: Can't access container app endpoint
 
 ```bash
-# Vahvista ingress-konfiguraatio
+# Tarkista ingressin määritys
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
@@ -807,7 +801,7 @@ az containerapp ingress update \
   --external true
 ```
 
-### Ongelma: Suorituskykyongelmat
+### Issue: Performance problems
 
 ```bash
 # Tarkista resurssien käyttö
@@ -823,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Lisäresurssit ja esimerkit
+## Additional Resources and Examples
 - [Mikropalveluesimerkki](./microservices/README.md)
-- [Yksinkertainen Flash API -esimerkki](./simple-flask-api/README.md)
+- [Yksinkertainen Flask-API -esimerkki](./simple-flask-api/README.md)
 - [Azure Container Apps -dokumentaatio](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [AZD-malligalleria](https://azure.github.io/awesome-azd/)
 - [Container Apps -esimerkit](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep-mallit](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Osallistuminen
+## Contributing
 
-Jos haluat lisätä uusia Container-sovellusesimerkkejä:
+Lisätäksesi uusia Container App -esimerkkejä:
 
 1. Luo uusi alihakemisto esimerkillesi
-2. Sisällytä täydelliset `azure.yaml`, `infra/` ja `src/` tiedostot
-3. Lisää kattava README, jossa on käyttöönottovaiheet
+2. Lisää täydelliset `azure.yaml`, `infra/` ja `src/` -tiedostot
+3. Lisää kattava README, jossa on käyttöönotto-ohjeet
 4. Testaa käyttöönotto komennolla `azd up`
 5. Lähetä pull request
 
 ---
 
-**Tarvitsetko apua?** Liity [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) -yhteisöön saadaksesi tukea ja vastauksia kysymyksiisi.
+**Tarvitsetko apua?** Liity [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) -yhteisöön saadaksesi tukea ja vastauksia.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Vastuuvapauslauseke:
+Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattisissa käännöksissä voi esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää virallisena lähteenä. Kriittisen tiedon osalta suositellaan ammattikääntäjän tekemää käännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

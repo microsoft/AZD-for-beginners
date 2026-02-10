@@ -1,123 +1,271 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6d5c886052b605349d9219cea5f2f6a1",
-  "translation_date": "2026-01-16T12:34:07+00:00",
-  "source_file": "README.md",
-  "language_code": "fi"
-}
--->
-# AZD Aloittelijoille: Rakenteellinen Oppimismatka
+# AZD Aloittelijoille: Jäsennelty Oppimismatka
 
-![AZD-for-beginners](../../../../translated_images/fi/azdbeginners.5527441dd9f74068.webp) 
+![AZD-aloittelijoille](../../translated_images/fi/azdbeginners.5527441dd9f74068.webp) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub-seuraajat](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub-forkit](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub-tähdet](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-## Kurssin Aloitus
+---
 
-Seuraa näitä vaiheita aloittaaksesi AZD-oppimismatkasi:
-
-1. **Forkkaa Repositorio**: Klikkaa [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Klonaa Repositorio**: `git clone https://github.com/microsoft/azd-for-beginners.git`
-3. **Liity Yhteisöön**: [Azure Discord Communities](https://discord.com/invite/ByRwuEEgH4) asiantuntijatukea varten
-4. **Valitse Oppimispolkusi**: Valitse alla oleva luku, joka vastaa kokemustasoasi
-
-### Monikielinen Tuki
-
-#### Automaattiset Käännökset (aina ajan tasalla)
+### Automaattiset käännökset (aina ajan tasalla)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](./README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../br/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](./README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
-> **Haluatko mieluummin kloonata paikallisesti?**
+> **Haluatko kloonata paikallisesti?**
 
-> Tämä repositorio sisältää yli 50 käännöstä, mikä lisää merkittävästi lataustiedoston kokoa. Jos haluat kloonata ilman käännöksiä, käytä sparse checkoutia:  
+> Tämä arkisto sisältää yli 50 käännöstä, mikä kasvattaa latauskokoa merkittävästi. Jos haluat kloonata ilman käännöksiä, käytä sparse checkoutia:
 > ```bash
 > git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
 > cd AZD-for-beginners
 > git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
 > ```
-> Saat kaiken tarvitsemasi kurssin suorittamiseen paljon nopeammalla latauksella.
+> Tämä antaa sinulle kaiken mitä tarvitset kurssin suorittamiseen paljon nopeammalla latauksella.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-## Kurssin Yleiskatsaus
+## 🚀 Mikä on Azure Developer CLI (azd)?
 
-Hallinnoi Azure Developer CLI:tä (azd) rakenteellisten lukujen avulla, jotka on suunniteltu asteittaiseen oppimiseen. **Erityinen painotus AI-sovellusten käyttöönottoon Microsoft Foundry -integraation kanssa.**
+**Azure Developer CLI (azd)** on kehittäjäystävällinen komentorivityökalu, joka tekee sovellusten käyttöönotosta Azureen helppoa. Sen sijaan, että loisit ja yhdistäisit käsin kymmeniä Azure-resursseja, voit ottaa koko sovelluksen käyttöön yhdellä komennolla.
 
-### Miksi Tämä Kurssi On Tärkeä Nykyaikaisille Kehittäjille
+### `azd up` -komennon taika
 
-Microsoft Foundry Discord -yhteisön näkemyksiin perustuen, **45 % kehittäjistä haluaa käyttää AZD:tä AI-työkuormissa** mutta kohtaa haasteita:
-- Monimutkaiset moni-palvelu AI-arkkitehtuurit
-- Parhaat käytännöt AI-tuotantokäyttöönotossa  
-- Azure AI -palveluiden integraatio ja konfigurointi
-- AI-työkuormien kustannusten optimointi
-- AI-spesifisten käyttöönotto-ongelmien vianmääritys
+```bash
+# Tämä yksittäinen komento tekee kaiken:
+# ✅ Luo kaikki Azure-resurssit
+# ✅ Määrittää verkot ja tietoturvan
+# ✅ Kääntää sovelluskoodisi
+# ✅ Julkaisee Azureen
+# ✅ Antaa sinulle toimivan URL-osoitteen
+azd up
+```
+
+**Siinä se!** Ei Azure-portaalissa klikkailua, ei monimutkaisia ARM-malleja ensin opittavaksi, eikä manuaalista konfigurointia - vain toimivia sovelluksia Azureen.
+
+---
+
+## ❓ Azure Developer CLI vs Azure CLI: Mikä on ero?
+
+Tämä on yleisin kysymys, jonka aloittelijat esittävät. Tässä yksinkertainen vastaus:
+
+| Feature | **Azure CLI (`az`)** | **Azure Developer CLI (`azd`)** |
+|---------|---------------------|--------------------------------|
+| **Purpose** | Hallitse yksittäisiä Azure-resursseja | Ota käyttöön kokonaisia sovelluksia |
+| **Mindset** | Infrastruktuuriin keskittyvä | Sovellukseen keskittyvä |
+| **Example** | `az webapp create --name myapp...` | `azd up` |
+| **Learning Curve** | Täytyy tuntea Azure-palvelut | Riittää, että tunnet sovelluksesi |
+| **Best For** | DevOps, infrastruktuuri | Kehittäjät, prototypointi |
+
+### Yksinkertainen vertaus
+
+- **Azure CLI** on kuin kaikki työkalut talon rakentamiseen - vasarat, sahat, naulat. Voit rakentaa mitä tahansa, mutta sinun täytyy osata rakentaminen.
+- **Azure Developer CLI** on kuin urakoitsijan palkkaaminen - kuvailet mitä haluat, ja he hoitavat rakentamisen.
+
+### Milloin käyttää kumpaakin
+
+| Scenario | Use This |
+|----------|----------|
+| "I want to deploy my web app quickly" | `azd up` |
+| "I need to create just a storage account" | `az storage account create` |
+| "I'm building a full AI application" | `azd init --template azure-search-openai-demo` |
+| "I need to debug a specific Azure resource" | `az resource show` |
+| "I want production-ready deployment in minutes" | `azd up --environment production` |
+
+### Ne toimivat yhdessä!
+
+AZD käyttää Azure CLI:tä taustalla. Voit käyttää molempia:
+```bash
+# Ota sovelluksesi käyttöön AZD:n avulla
+azd up
+
+# Säädä sitten tiettyjä resursseja Azure CLI:llä
+az webapp config set --name myapp --always-on true
+```
+
+---
+
+## 🌟 Löydä mallipohjat Awesome AZD:stä
+
+Älä aloita tyhjästä! **Awesome AZD** on yhteisön kokoelma valmiita mallipohjia:
+
+| Resource | Description |
+|----------|-------------|
+| 🔗 [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) | Selaa yli 200 mallia ja ota käyttöön yhdellä napsautuksella |
+| 🔗 [**Submit a Template**](https://github.com/Azure/awesome-azd/issues) | Lähetä oma mallisi yhteisölle |
+| 🔗 [**GitHub Repository**](https://github.com/Azure/awesome-azd) | Lisää tähti ja tutki lähdekoodia |
+
+### Suosittuja tekoälymallipohjia Awesome AZD:stä
+
+```bash
+# RAG-keskustelu Azure OpenAI + AI-haku kanssa
+azd init --template azure-search-openai-demo
+
+# Nopea AI-keskustelusovellus
+azd init --template openai-chat-app-quickstart
+
+# AI-agentteja Foundry-agenttien kanssa
+azd init --template get-started-with-ai-agents
+```
+
+---
+
+## 🎯 Aloittaminen kolmessa askeleessa
+
+### Vaihe 1: Asenna AZD (2 minuuttia)
+
+**Windows:**
+```powershell
+winget install microsoft.azd
+```
+
+**macOS:**
+```bash
+brew tap azure/azd && brew install azd
+```
+
+**Linux:**
+```bash
+curl -fsSL https://aka.ms/install-azd.sh | bash
+```
+
+### Vaihe 2: Kirjaudu Azureen
+
+```bash
+azd auth login
+```
+
+### Vaihe 3: Ota ensimmäinen sovelluksesi käyttöön
+
+```bash
+# Alusta mallipohjasta
+azd init --template todo-nodejs-mongo
+
+# Ota käyttöön Azureen (luo kaiken!)
+azd up
+```
+
+**🎉 Siinä se!** Sovelluksesi on nyt julkaistu Azureen.
+
+### Siivoa ympäristö (älä unohda!)
+
+```bash
+# Remove all resources when done experimenting
+azd down --force --purge
+```
+
+---
+
+## 📚 Kuinka käyttää tätä kurssia
+
+Tämä kurssi on suunniteltu **etenevään oppimiseen** - aloita siltä tasolta, jossa tunnet olosi mukavaksi, ja etene ylöspäin:
+
+| Your Experience | Start Here |
+|-----------------|------------|
+| **Brand new to Azure** | [Chapter 1: Foundation](../..) |
+| **Know Azure, new to AZD** | [Chapter 1: Foundation](../..) |
+| **Want to deploy AI apps** | [Chapter 2: AI-First Development](../..) |
+| **Want hands-on practice** | [🎓 Interaktiivinen työpaja](workshop/README.md) - 3-4 tunnin ohjattu lab |
+| **Need production patterns** | [Chapter 8: Production & Enterprise](../..) |
+
+### Nopea käyttöönotto
+
+1. **Forkkaa tämä arkisto**: [![GitHub-forkit](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Kloonaa se**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
+3. **Hanki apua**: [Azure Discord -yhteisö](https://discord.com/invite/ByRwuEEgH4)
+
+> **Haluatko kloonata paikallisesti?**
+
+> Tämä arkisto sisältää yli 50 käännöstä, mikä kasvattaa latauskokoa merkittävästi. Jos haluat kloonata ilman käännöksiä, käytä sparse checkoutia:
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
+> cd AZD-for-beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> Tämä antaa sinulle kaiken mitä tarvitset kurssin suorittamiseen paljon nopeammalla latauksella.
+
+
+## Kurssin yleiskatsaus
+
+Hallitse Azure Developer CLI (azd) rakenteellisten lukujen kautta, jotka on suunniteltu etenevään oppimiseen. **Erityinen painotus tekoälysovellusten käyttöönottoon Microsoft Foundry -integraation kanssa.**
+
+### Miksi tämä kurssi on välttämätön nykyaikaisille kehittäjille
+
+Microsoft Foundry Discord -yhteisön näkemyksiin perustuen, **45 % kehittäjistä haluaa käyttää AZD:tä tekoälytyökuormiin**, mutta kohtaa haasteita liittyen:
+- Monimutkaiset monipalveluiset tekoälyarkkitehtuurit
+- Tuotantovalmiiden tekoälykäyttöönottojen parhaat käytännöt  
+- Azure AI -palveluiden integrointi ja konfigurointi
+- Kustannusoptimointi tekoälytyökuormille
+- Tekoälyspesifisten käyttöönotto-ongelmien vianmääritys
 
 ### Oppimistavoitteet
 
-Suorittamalla tämän rakenteisen kurssin opit:
-- **Hallitse AZD:n Perusteet**: Peruskäsitteet, asennus ja konfigurointi
-- **Ota AI-sovellukset käyttöön**: Käytä AZD:tä Microsoft Foundry -palveluiden kanssa
-- **Toteuta infrastruktuuri koodina**: Hallitse Azuren resursseja Bicep-mallien avulla
-- **Vianmääritys käyttöönotossa**: Ratkaise yleiset ongelmat ja debuggaa
-- **Optimoi tuotantoon**: Turvallisuus, skaalaus, valvonta ja kustannusten hallinta
-- **Rakenna moni-agenttisia ratkaisuja**: Ota käyttöön monimutkaisia AI-arkkitehtuureja
+Kurssin suorittamisen jälkeen osaat:
+- **Hallita AZD:n perusteet**: ydinkäsitteet, asennus ja konfigurointi
+- **Ottaa tekoälysovelluksia käyttöön**: käytä AZD:tä Microsoft Foundryn palveluiden kanssa
+- **Toteuttaa Infrastructure as Code -periaatteen**: hallinnoi Azure-resursseja Bicep-malleilla
+- **Vianmääritys käyttöönotossa**: ratkaise yleisiä ongelmia ja debuggaa virheitä
+- **Optimoida tuotantoa varten**: tietoturva, skaalaus, valvonta ja kustannusten hallinta
+- **Rakentaa moni-agenttisia ratkaisuja**: ota käyttöön monimutkaisia tekoälyarkkitehtuureja
 
-## 📚 Oppimislukujen Sisältö
+## 🗺️ Kurssikartta: Nopea navigointi luvun mukaan
+
+Jokaisella luvulla on oma README, jossa on oppimistavoitteet, pika-aloitukset ja harjoitukset:
+
+| Chapter | Topic | Lessons | Duration | Complexity |
+|---------|-------|---------|----------|------------|
+| **[Ch 1: Foundation](docs/chapter-01-foundation/README.md)** | Getting Started | [AZD-perusteet](docs/chapter-01-foundation/azd-basics.md) &#124; [Asennus](docs/chapter-01-foundation/installation.md) &#124; [Ensimmäinen projekti](docs/chapter-01-foundation/first-project.md) | 30-45 min | ⭐ |
+| **[Ch 2: AI Development](docs/chapter-02-ai-development/README.md)** | Tekoälylähtöiset sovellukset | [Foundry-integraatio](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [Tekoälyagentit](docs/chapter-02-ai-development/agents.md) &#124; [Mallin käyttöönotto](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [Työpaja](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 hrs | ⭐⭐ |
+| **[Ch 3: Configuration](docs/chapter-03-configuration/README.md)** | Todennus & turvallisuus | [Konfigurointi](docs/chapter-03-configuration/configuration.md) &#124; [Todennus & turvallisuus](docs/chapter-03-configuration/authsecurity.md) | 45-60 min | ⭐⭐ |
+| **[Ch 4: Infrastructure](docs/chapter-04-infrastructure/README.md)** | IaC & käyttöönotto | [Käyttöönotto-opas](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [Provisionointi](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 hrs | ⭐⭐⭐ |
+| **[Ch 5: Moni-agentti](docs/chapter-05-multi-agent/README.md)** | AI-agenttiratkaisut | [Vähittäiskaupan skenaario](examples/retail-scenario.md) &#124; [Koordinointimallit](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 tuntia | ⭐⭐⭐⭐ |
+| **[Ch 6: Ennen käyttöönottoa](docs/chapter-06-pre-deployment/README.md)** | Suunnittelu ja validointi | [Esitarkistukset](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Kapasiteettisuunnittelu](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [SKU-valinta](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [App Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 tunti | ⭐⭐ |
+| **[Ch 7: Vianetsintä](docs/chapter-07-troubleshooting/README.md)** | Debug & Korjaus | [Yleiset ongelmat](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Debuggaus](docs/chapter-07-troubleshooting/debugging.md) &#124; [AI-ongelmat](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 tuntia | ⭐⭐ |
+| **[Ch 8: Tuotanto](docs/chapter-08-production/README.md)** | Yritystason mallit | [Tuotantokäytännöt](docs/chapter-08-production/production-ai-practices.md) | 2-3 tuntia | ⭐⭐⭐⭐ |
+| **[🎓 Workshop](workshop/README.md)** | Käytännön työpaja | [Johdanto](workshop/docs/instructions/0-Introduction.md) &#124; [Valinta](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Validointi](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Purku](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Kokoonpano](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Mukautus](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Purkutoimet](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [Yhteenveto](workshop/docs/instructions/7-Wrap-up.md) | 3-4 tuntia | ⭐⭐ |
+
+**Kokonaiskurssin kesto:** ~10-14 tuntia | **Taidon kehitys:** Aloittelija → Tuotantovalmis
+
+---
+
+## 📚 Oppitunnit
 
 *Valitse oppimispolkusi kokemustason ja tavoitteiden mukaan*
 
-### 🚀 Luku 1: Perusteet & Nopea Aloitus  
-**Esivaatimukset**: Azure-tilaus, perustiedot komentorivistä  
+### 🚀 Luku 1: Perusta & pika-aloitus
+**Esivaatimukset**: Azure-tilaus, perusosaaminen komentoriviltä  
 **Kesto**: 30-45 minuuttia  
-**Vaativuus**: ⭐
+**Vaikeustaso**: ⭐
 
-#### Mitä Opit
-- Azure Developer CLI:n perusteiden ymmärtäminen
+#### Mitä opit
+- Azure Developer CLI:n perusteet
 - AZD:n asentaminen alustallesi
 - Ensimmäinen onnistunut käyttöönotto
 
 #### Oppimateriaalit
 - **🎯 Aloita tästä**: [Mikä on Azure Developer CLI?](../..)
-- **📖 Teoria**: [AZD:n perusteet](docs/getting-started/azd-basics.md) - Keskeiset käsitteet ja termit
-- **⚙️ Asennus**: [Asennus & Konfigurointi](docs/getting-started/installation.md) - Alustakohtaiset ohjeet
-- **🛠️ Käytännön harjoitus**: [Ensimmäinen projekti](docs/getting-started/first-project.md) - Vaiheittainen opas
-- **📋 Pikatiedot**: [Komentojen pikaopas](resources/cheat-sheet.md)
+- **📖 Teoria**: [AZD-perusteet](docs/chapter-01-foundation/azd-basics.md) - Ydinconceptit ja terminologia
+- **⚙️ Asennus**: [Asennus & käyttöönotto](docs/chapter-01-foundation/installation.md) - Alustakohtaiset ohjeet
+- **🛠️ Käytännön harjoitus**: [Ensimmäinen projektisi](docs/chapter-01-foundation/first-project.md) - Askel askeleelta -opas
+- **📋 Pikalähde**: [Komentojen pikaopas](resources/cheat-sheet.md)
 
-#### Käytännön Harjoitukset
+#### Käytännön harjoitukset
 ```bash
-# Nopeustarkastus
+# Nopea asennustarkistus
 azd version
 
-# Ota käyttöön ensimmäinen sovelluksesi
+# Ota ensimmäinen sovelluksesi käyttöön
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Lukujen Tulos**: Onnistuneesti ota käyttöön yksinkertainen web-sovellus Azureen AZD:llä
+**💡 Luvun lopputulos**: Onnistuneesti ota käyttöön yksinkertainen web-sovellus Azureen käyttäen AZD:ta
 
-**✅ Onnistumistodistus:**
+**✅ Onnistumisen varmentaminen:**
 ```bash
-# Luvun 1 suorittamisen jälkeen sinun tulisi osata:
-azd version              # Näyttää asennetun version
-azd init --template todo-nodejs-mongo  # Alustaa projekti
-azd up                  # Julkaisee Azureen
-azd show                # Näyttää käynnissä olevan sovelluksen URL-osoitteen
-# Sovellus avautuu selaimessa ja toimii
-azd down --force --purge  # Puhdistaa resurssit
-```
-
-**📊 Aika-arvio:** 30-45 minuuttia  
-**📈 Taitotaso suorituksen jälkeen:** Pystyy ottamaan käyttöön perussovelluksia itsenäisesti
-
-**✅ Onnistumistodistus:**
-```bash
-# Luvun 1 suorittamisen jälkeen sinun pitäisi osata:
+# Luvun 1 suorittamisen jälkeen sinun pitäisi pystyä:
 azd version              # Näyttää asennetun version
 azd init --template todo-nodejs-mongo  # Alustaa projektin
 azd up                  # Julkaisee Azureen
@@ -126,81 +274,96 @@ azd show                # Näyttää käynnissä olevan sovelluksen URL-osoittee
 azd down --force --purge  # Siivoaa resurssit
 ```
 
-**📊 Aika-arvio:** 30-45 minuuttia  
-**📈 Taitotaso suorituksen jälkeen:** Pystyy ottamaan käyttöön perussovelluksia itsenäisesti
+**📊 Ajankäyttö:** 30-45 minuuttia  
+**📈 Taitotaso lopussa:** Osaa ottaa käyttöön perustason sovelluksia itsenäisesti
+
+**✅ Onnistumisen varmentaminen:**
+```bash
+# Luku 1:n suorittamisen jälkeen sinun pitäisi osata:
+azd version              # Näyttää asennetun version
+azd init --template todo-nodejs-mongo  # Alustaa projektin
+azd up                  # Julkaisee Azureen
+azd show                # Näyttää käynnissä olevan sovelluksen URL-osoitteen
+# Sovellus avautuu selaimessa ja toimii
+azd down --force --purge  # Siivoaa resurssit
+```
+
+**📊 Ajankäyttö:** 30-45 minuuttia  
+**📈 Taitotaso lopussa:** Osaa ottaa käyttöön perustason sovelluksia itsenäisesti
 
 ---
 
-### 🤖 Luku 2: AI-Ensisijainen Kehitys (suositellaan AI-kehittäjille)  
-**Esivaatimukset**: Luku 1 suoritettu  
+### 🤖 Luku 2: Tekoäly-etunenäinen kehitys (suositeltu tekoälykehittäjille)
+**Esivaatimukset**: Luku 1 suoritettuna  
 **Kesto**: 1-2 tuntia  
-**Vaativuus**: ⭐⭐
+**Vaikeustaso**: ⭐⭐
 
-#### Mitä Opit
-- Microsoft Foundryn integraatio AZD:n kanssa
-- AI-vetoisten sovellusten käyttöönotto
-- AI-palvelujen konfiguroinnin ymmärtäminen
+#### Mitä opit
+- Microsoft Foundryn integrointi AZD:n kanssa
+- Tekoälyllä varustettujen sovellusten käyttöönotto
+- Tekoälypalvelujen konfiguraatioiden ymmärtäminen
 
 #### Oppimateriaalit
-- **🎯 Aloita tästä**: [Microsoft Foundry -integraatio](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **📖 Mallit**: [AI-mallien käyttöönotto](docs/microsoft-foundry/ai-model-deployment.md) - AI-mallien käyttöönotto ja hallinta
-- **🛠️ Työpaja**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - Tee AI-ratkaisuistasi AZD-valmiita
-- **🎥 Interaktiivinen opas**: [Työpajan materiaalit](workshop/README.md) - Selainpohjainen oppiminen MkDocs * DevContainer -ympäristössä
-- **📋 Mallipohjat**: [Microsoft Foundryn mallit](../..)
-- **📝 Esimerkit**: [AZD käyttöönottoesimerkit](examples/README.md)
+- **🎯 Aloita tästä**: [Microsoft Foundry -integraatio](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 AI-agentit**: [AI-agenttien opas](docs/chapter-02-ai-development/agents.md) - Ota älykkäät agentit käyttöön AZD:lla
+- **📖 Mallit**: [AI-mallien käyttöönotto](docs/chapter-02-ai-development/ai-model-deployment.md) - Ota mallit käyttöön ja hallinnoi niitä
+- **🛠️ Työpaja**: [AI-työpajan laboratorio](docs/chapter-02-ai-development/ai-workshop-lab.md) - Tee AI-ratkaisuistasi AZD-valmiita
+- **🎥 Interaktiivinen opas**: [Työpajamateriaali](workshop/README.md) - Selainpohjaista oppimista MkDocs * DevContainer -ympäristössä
+- **📋 Mallipohjat**: [Microsoft Foundry -mallit](../..)
+- **📝 Esimerkit**: [AZD:n käyttöönottoesimerkit](examples/README.md)
 
-#### Käytännön Harjoitukset
+#### Käytännön harjoitukset
 ```bash
-# Ota käyttöösi ensimmäinen tekoälysovelluksesi
+# Ota ensimmäinen tekoälysovelluksesi käyttöön
 azd init --template azure-search-openai-demo
 azd up
 
-# Kokeile lisätekoälytemplaatteja
+# Kokeile lisää tekoälymallipohjia
 azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Lukujen Tulos**: Ota käyttöön ja konfiguroi AI-vetoinen chat-sovellus RAG-ominaisuuksilla
+**💡 Luvun lopputulos**: Ota käyttöön ja konfiguroi tekoälyllä toimiva chat-sovellus RAG-ominaisuuksilla
 
-**✅ Onnistumistodistus:**
+**✅ Onnistumisen varmentaminen:**
 ```bash
-# Luvun 2 jälkeen sinun pitäisi pystyä:
+# Luvun 2 jälkeen sinun pitäisi osata:
 azd init --template azure-search-openai-demo
 azd up
-# Testaamaan tekoälykeskustelukäyttöliittymää
-# Kysymään kysymyksiä ja saamaan tekoälypohjaisia vastauksia lähteineen
-# Varmistamaan, että hakutoiminto toimii
-azd monitor  # Tarkistamaan, että Application Insights näyttää telemetrian
+# Testata tekoälychatin käyttöliittymää
+# Esittää kysymyksiä ja saada tekoälyn tuottamia vastauksia lähteineen
+# Varmistaa hakujen integroinnin toimivuus
+azd monitor  # Tarkistaa, että Application Insights näyttää telemetriaa
 azd down --force --purge
 ```
 
-**📊 Aika-arvio:** 1-2 tuntia  
-**📈 Taitotaso suorituksen jälkeen:** Pystyy ottamaan käyttöön ja konfiguroimaan tuotantovalmiit AI-sovellukset  
-**💰 Kustannustietoisuus:** Ymmärtää $80-150/kk kehityskustannukset, $300-3500/kk tuotantokustannukset
+**📊 Ajankäyttö:** 1-2 tuntia  
+**📈 Taitotaso lopussa:** Osaa ottaa käyttöön ja konfiguroida tuotantovalmiita tekoälysovelluksia  
+**💰 Kustannustietoisuus:** Arvioi kehityskustannukset $80-150/kk, tuotantokustannukset $300-3500/kk
 
-#### 💰 AI-käyttöönoton kustannusnäkökohdat
+#### 💰 Kustannusnäkökohdat AI-käyttöönottoihin
 
-**Kehitysympäristö (Arvio $80-150/kk):**
-- Azure OpenAI (Pay-as-you-go): $0-50/kk (token-käytön mukaan)
-- AI-haku (perustaso): $75/kk
-- Container Apps (kulutuksen mukaan): $0-20/kk
-- Tallennustila (standardi): $1-5/kk
+**Kehitysympäristö (Arvio ~ $80-150/kk):**
+- Azure OpenAI (Maksa käytön mukaan): $0-50/kk (riippuen tokenien käytöstä)
+- AI Search (perustaso): $75/kk
+- Container Apps (kulutus): $0-20/kk
+- Tallennustila (Standard): $1-5/kk
 
-**Tuotantoympäristö (Arvio $300-3,500+/kk):**
-- Azure OpenAI (PTU vakaan suorituskyvyn takaamiseksi): $3,000+/kk TAI Maksu käytön mukaan suurissa volyymeissä
-- AI-haku (standarditaso): $250/kk
-- Container Apps (omistettu): $50-100/kk
+**Tuotantoympäristö (Arvio ~ $300-3,500+/kk):**
+- Azure OpenAI (PTU taso tasaisen suorituskyvyn varten): $3,000+/kk TAI Maksa käytön mukaan suurilla volyymeilla
+- AI Search (standard-taso): $250/kk
+- Container Apps (dedikoitu): $50-100/kk
 - Application Insights: $5-50/kk
-- Tallennustila (premium): $10-50/kk
+- Tallennustila (Premium): $10-50/kk
 
-**💡 Kustannusten optimointivinkit:**
-- Käytä **Free Tier** Azure OpenAI -palvelua oppimiseen (sisältää 50 000 tokenia/kk)
-- Suorita `azd down` vapauttaaksesi resursseja, kun et aktiivisesti kehitä
-- Aloita kulutusperusteisella laskutuksella, nosta PTU:hun vain tuotantoon
-- Käytä `azd provision --preview` kustannusten arviointiin ennen käyttöönottoa
-- Ota käyttöön automaattinen skaalaus: maksa vain käytöstä
+**💡 Kustannusten optimointivinkkejä:**
+- Käytä **Free Tier** -Azure OpenAI:ta oppimiseen (50,000 tokenia/kk sisältyy)
+- Suorita `azd down` vapauttaaksesi resursseja, kun et kehitä aktiivisesti
+- Aloita kulutusperusteisella laskutuksella, nosta PTU-tasolle vain tuotantoon
+- Käytä `azd provision --preview` arvioidaksesi kustannuksia ennen käyttöönottoa
+- Ota automaattiskalautuvuus käyttöön: maksa vain todellisesta käytöstä
 
-**Kustannusten Seuranta:**
+**Kustannusten seuranta:**
 ```bash
 # Tarkista arvioidut kuukausittaiset kustannukset
 azd provision --preview
@@ -211,342 +374,354 @@ az consumption budget list --resource-group <your-rg>
 
 ---
 
-### ⚙️ Luku 3: Konfigurointi & Autentikointi  
-**Esivaatimukset**: Luku 1 suoritettu  
+### ⚙️ Luku 3: Konfigurointi & autentikointi
+**Esivaatimukset**: Luku 1 suoritettuna  
 **Kesto**: 45-60 minuuttia  
-**Vaativuus**: ⭐⭐
+**Vaikeustaso**: ⭐⭐
 
-#### Mitä Opit
+#### Mitä opit
 - Ympäristön konfigurointi ja hallinta
-- Autentikointi ja turvallisuuden parhaat käytännöt
+- Autentikointi ja tietoturvan parhaat käytännöt
 - Resurssien nimeäminen ja organisointi
 
 #### Oppimateriaalit
-- **📖 Konfigurointi**: [Konfigurointiopas](docs/getting-started/configuration.md) - Ympäristön asetus
-- **🔐 Turvallisuus**: [Autentikointimallit ja hallittu identiteetti](docs/getting-started/authsecurity.md) - Autentikointimallit
-- **📝 Esimerkit**: [Tietokantasovellus](examples/database-app/README.md) - AZD-tietokantaesimerkit
+- **📖 Konfigurointi**: [Konfigurointiohje](docs/chapter-03-configuration/configuration.md) - Ympäristön asetukset
+- **🔐 Turvallisuus**: [Autentikointimallit ja hallinnoitu identiteetti](docs/chapter-03-configuration/authsecurity.md) - Autentikointimallit
+- **📝 Esimerkit**: [Tietokantasovellus-esimerkki](examples/database-app/README.md) - AZD-tietokantaesimerkit
 
 #### Käytännön harjoitukset
 - Konfiguroi useita ympäristöjä (dev, staging, prod)
-- Ota käyttöön hallittu identiteetin autentikointi
+- Ota hallinnoitu identiteetti käyttöön autentikointiin
 - Toteuta ympäristökohtaiset konfiguraatiot
 
-**💡 Lukujen Tulos**: Hallitse useita ympäristöjä asianmukaisella autentikoinnilla ja turvallisuudella
+**💡 Luvun lopputulos**: Hallitse useita ympäristöjä asianmukaisella autentikoinnilla ja tietoturvalla
 
 ---
 
-### 🏗️ Luku 4: Infrastruktuuri Koodina & Käyttöönotto  
-**Esivaatimukset**: Luvut 1-3 suoritettu  
+### 🏗️ Luku 4: Infrastruktuuri koodina & käyttöönotto
+**Esivaatimukset**: Luvut 1-3 suoritettuina  
 **Kesto**: 1-1.5 tuntia  
-**Vaativuus**: ⭐⭐⭐
+**Vaikeustaso**: ⭐⭐⭐
 
-#### Mitä Opit
+#### Mitä opit
 - Edistyneet käyttöönotto-mallit
-- Infrastruktuuri koodina Bicepillä
+- Infrastruktuuri koodina Bicep:llä
 - Resurssien provisiointistrategiat
 
 #### Oppimateriaalit
-- **📖 Käyttöönotto**: [Käyttöönotto-opas](docs/deployment/deployment-guide.md) - Koko työnkulut
-- **🏗️ Provisiointi**: [Resurssien provisiointi](docs/deployment/provisioning.md) - Azuren resurssien hallinta
-- **📝 Esimerkit**: [Container App -esimerkki](../../examples/container-app) - Kontitettujen sovellusten käyttöönotto
+- **📖 Käyttöönotto**: [Käyttöönotto-opas](docs/chapter-04-infrastructure/deployment-guide.md) - Kokonaiset työnkulut
+- **🏗️ Provisiointi**: [Resurssien provisiointi](docs/chapter-04-infrastructure/provisioning.md) - Azure-resurssien hallinta
+- **📝 Esimerkit**: [Container App -esimerkki](../../examples/container-app) - Konttipohjaiset käyttöönotot
 
 #### Käytännön harjoitukset
-- Luo omia Bicep-malleja
-- Ota käyttöön moni-palvelu-sovelluksia
-- Toteuta blue-green deploy -strategioita
+- Luo mukautettuja Bicep-malleja
+- Ota käyttöön monipalvelusovelluksia
+- Toteuta blue-green -käyttöönotto-strategioita
 
-**💡 Lukujen Tulos**: Ota käyttöön monimutkaisia moni-palvelusovelluksia omilla infrastruktuurimalleilla
+**💡 Luvun lopputulos**: Ota käyttöön monimutkaisia monipalvelusovelluksia käyttäen mukautettuja infrastruktuurimalleja
 
 ---
 
-### 🎯 Luku 5: Moni-Agenttiset AI-Ratkaisut (Edistynyt)  
-**Esivaatimukset**: Luvut 1-2 suoritettu  
+### 🎯 Luku 5: Moni-agenttiset tekoälyratkaisut (Edistynyt)
+**Esivaatimukset**: Luvut 1-2 suoritettuna  
 **Kesto**: 2-3 tuntia  
-**Vaativuus**: ⭐⭐⭐⭐
+**Vaikeustaso**: ⭐⭐⭐⭐
 
-#### Mitä Opit
-- Moni-agenttien arkkitehtuurimallit
-- Agenttien orkestrointi ja koordinointi  
-- Tuotantokäyttövalmiit tekoälyn käyttöönotot
+#### Mitä opit
+- Moni-agenttiarkkitehtuurin mallit
+- Agenttien orkestrointi ja koordinointi
+- Tuotantovalmiit tekoälykäyttöönotot
 
-#### Oppimateriaalit  
-- **🤖 Esitelty projekti**: [Retail Multi-Agent Solution](examples/retail-scenario.md) – Täydellinen toteutus  
-- **🛠️ ARM-mallit**: [ARM Template Package](../../examples/retail-multiagent-arm-template) – Yhden klikkauksen käyttöönotto  
-- **📖 Arkkitehtuuri**: [Moni-agentin koordinointimallit](/docs/pre-deployment/coordination-patterns.md) – Mallit
+#### Oppimateriaalit
+- **🤖 Esitelty projekti**: [Vähittäiskaupan moni-agenttiratkaisu](examples/retail-scenario.md) - Täydellinen toteutus
+- **🛠️ ARM-mallit**: [ARM-mallipaketti](../../examples/retail-multiagent-arm-template) - Yhden klikkauksen käyttöönotto
+- **📖 Arkkitehtuuri**: [Moni-agenttien koordinointimallit](docs/chapter-06-pre-deployment/coordination-patterns.md) - Mallit
 
-#### Käytännön harjoitukset  
+#### Käytännön harjoitukset
 ```bash
-# Ota käyttöön täydellinen vähittäiskaupan moniedustajaratkaisu
+# Ota käyttöön täydellinen vähittäiskaupan moniagenttiratkaisu
 cd examples/retail-multiagent-arm-template
 ./deploy.sh
 
-# Tutki edustajien kokoonpanoja
+# Tutki agenttien kokoonpanoja
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
-  
-**💡 Luvun tavoite**: Ota käyttöön ja hallitse tuotantovalmiita moni-agentin tekoälyratkaisuja Customer- ja Inventory-agenttien kanssa
+
+**💡 Luvun lopputulos**: Ota käyttöön ja hallinnoi tuotantovalmiita moni-agenttisia tekoälyratkaisuja, joissa on Asiakas- ja Varasto-agentit
 
 ---
 
-### 🔍 Luku 6: Esikäyttöönoton validointi ja suunnittelu  
-**Esivaatimukset**: Luku 4 suoritettu  
+### 🔍 Luku 6: Esiennakointi: validointi & suunnittelu
+**Esivaatimukset**: Luku 4 suoritettuna  
 **Kesto**: 1 tunti  
-**Vaativuus**: ⭐⭐
+**Vaikeustaso**: ⭐⭐
 
-#### Mitä opit  
-- Kapasiteettisuunnittelu ja resurssien validointi  
-- SKU-valintastrategiat  
-- Esilento-tarkastukset ja automaatio  
+#### Mitä opit
+- Kapasiteettisuunnittelu ja resurssien validointi
+- SKU-valintastrategiat
+- Esitarkistukset ja automaatio
 
-#### Oppimateriaalit  
-- **📊 Suunnittelu**: [Kapasiteettisuunnittelu](docs/pre-deployment/capacity-planning.md) – Resurssien validointi  
-- **💰 Valinta**: [SKU-valinta](docs/pre-deployment/sku-selection.md) – Kustannustehokkaat valinnat  
-- **✅ Validointi**: [Esilento-tarkistukset](docs/pre-deployment/preflight-checks.md) – Automaattiset skriptit
+#### Oppimateriaalit
+- **📊 Suunnittelu**: [Kapasiteettisuunnittelu](docs/chapter-06-pre-deployment/capacity-planning.md) - Resurssien validointi
+- **💰 Valinta**: [SKU-valinta](docs/chapter-06-pre-deployment/sku-selection.md) - Kustannustehokkaat valinnat
+- **✅ Validointi**: [Esitarkistukset](docs/chapter-06-pre-deployment/preflight-checks.md) - Automaattiset skriptit
 
-#### Käytännön harjoitukset  
-- Suorita kapasiteetin validointiskriptit  
-- Optimoi SKU-valinnat kustannusten mukaan  
-- Ota käyttöön automaattiset esikäyttöönoton tarkastukset
+#### Käytännön harjoitukset
+- Suorita kapasiteetin validointiskriptit
+- Optimoi SKU-valinnat kustannusten mukaan
+- Toteuta automatisoidut esitarkistukset
 
-**💡 Luvun tavoite**: Varmista ja optimoi käyttöönotot ennen toteutusta
-
----
-
-### 🚨 Luku 7: Vianmääritys ja virheenkorjaus  
-**Esivaatimukset**: Minkä tahansa käyttöönotto-luvun suoritus  
-**Kesto**: 1-1,5 tuntia  
-**Vaativuus**: ⭐⭐
-
-#### Mitä opit  
-- Järjestelmälliset virheenkorjausmenetelmät  
-- Yleiset ongelmat ja ratkaisut  
-- Tekoälyyn liittyvä vianmääritys  
-
-#### Oppimateriaalit  
-- **🔧 Yleiset ongelmat**: [Yleiset ongelmat](docs/troubleshooting/common-issues.md) – Usein kysytyt kysymykset ja ratkaisut  
-- **🕵️ Virheenkorjaus**: [Virheenkorjauksen opas](docs/troubleshooting/debugging.md) – Vaiheittaiset strategiat  
-- **🤖 Tekoälyn ongelmat**: [Tekoälykohtainen vianmääritys](docs/troubleshooting/ai-troubleshooting.md) – AI-palvelujen ongelmat
-
-#### Käytännön harjoitukset  
-- Diagnosoi käyttöönoton epäonnistumiset  
-- Ratkaise autentikointiongelmat  
-- Virheenkorjaa AI-palvelujen yhteydet
-
-**💡 Luvun tavoite**: Diagnoosi ja ratkaisu yleisiin käyttöönotto-ongelmiin itsenäisesti
+**💡 Luvun lopputulos**: Varmista ja optimoi käyttöönotot ennen toteutusta
 
 ---
 
-### 🏢 Luku 8: Tuotanto- ja yritysmallit  
-**Esivaatimukset**: Luvut 1-4 suoritettu  
+### 🚨 Luku 7: Vianetsintä & debuggaus
+**Esivaatimukset**: Mikä tahansa käyttöönotto-luku suoritettuna  
+**Kesto**: 1-1.5 tuntia  
+**Vaikeustaso**: ⭐⭐
+
+#### Mitä opit
+- Systemaattiset debuggausmenetelmät
+- Yleiset ongelmat ja ratkaisut
+- Tekoälyyn liittyvä vianetsintä
+
+#### Oppimateriaalit
+- **🔧 Yleiset ongelmat**: [Yleiset ongelmat](docs/chapter-07-troubleshooting/common-issues.md) - UKK ja ratkaisut
+- **🕵️ Debuggaus**: [Debuggausopas](docs/chapter-07-troubleshooting/debugging.md) - Askelsarjat strategiat
+- **🤖 AI-ongelmat**: [Tekoälykohtainen vianetsintä](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Tekoälypalvelujen ongelmat
+
+#### Käytännön harjoitukset
+- Diagnosoi käyttöönoton virheitä
+- Ratkaise autentikointiongelmia
+- Debuggaa tekoälypalveluiden yhteyksiä
+
+**💡 Luvun lopputulos**: Diagnoosi ja ratkaise yleisiä käyttöönotto-ongelmia itsenäisesti
+
+---
+
+### 🏢 Luku 8: Tuotanto & yritystason mallit
+**Esivaatimukset**: Luvut 1-4 suoritettuina  
 **Kesto**: 2-3 tuntia  
-**Vaativuus**: ⭐⭐⭐⭐
+**Vaikeustaso**: ⭐⭐⭐⭐
 
-#### Mitä opit  
-- Tuotantokäyttöönoton strategiat  
-- Yritystason tietoturvamallit  
-- Valvonta ja kustannusoptimointi  
+#### Mitä opit
+- Tuotantokäyttöönotto-strategiat
+- Yritystason tietoturvamallit
+- Seuranta ja kustannusoptimointi
 
-#### Oppimateriaalit  
-- **🏭 Tuotanto**: [Tuotannon AI parhaat käytännöt](docs/microsoft-foundry/production-ai-practices.md) – Yritysmallit  
-- **📝 Esimerkit**: [Mikropalvelu-esimerkki](../../examples/microservices) – Monimutkaiset arkkitehtuurit  
-- **📊 Valvonta**: [Application Insights -integraatio](docs/pre-deployment/application-insights.md) – Valvonta  
+#### Oppimateriaalit
+- **🏭 Tuotanto**: [Tuotannon tekoälyn parhaat käytännöt](docs/chapter-08-production/production-ai-practices.md) - Yritystason mallit
+- **📝 Esimerkit**: [Mikropalveluesimerkki](../../examples/microservices) - Monimutkaiset arkkitehtuurit
+- **📊 Seuranta**: [Application Insights -integraatio](docs/chapter-06-pre-deployment/application-insights.md) - Seuranta
 
-#### Käytännön harjoitukset  
-- Toteuta yritystason tietoturvamallit  
-- Ota käyttöön kattava valvonta  
-- Ota käyttöön tuotantoon asianmukaisella hallinnalla
+#### Käytännön harjoitukset
+- Toteuta yritystason tietoturvakäytännöt
+- Ota käyttöön kattava seuranta
+- Ota tuotantoon hallinnoidulla hallinnolla
 
-**💡 Luvun tavoite**: Ota käyttöön yritystason sovelluksia täysillä tuotantoominaisuuksilla
+**💡 Luvun lopputulos**: Ota käyttöön yritysvalmiita sovelluksia täydellisillä tuotanto-ominaisuuksilla
 
 ---
 
-## 🎓 Työpajan yleiskuvaus: Käytännön oppimiskokemus
+## 🎓 Työpajan yleiskatsaus: Käytännön oppimiskokemus
 
-> **⚠️ TYÖPAJAN TILA: Käynnissä oleva kehitys**  
-> Työpajamateriaalit ovat tällä hetkellä kehityksen ja viimeistelyn alla. Ydinmoduulit ovat toiminnassa, mutta osa kehittyneemmistä osioista on keskeneräisiä. Työskentelemme aktiivisesti saadaksemme kaiken valmiiksi. [Seuraa edistymistä →](workshop/README.md)
+> **⚠️ TYÖPAJAN TILA: Kehitteillä**  
+> Työpajamateriaalit ovat parhaillaan kehitysvaiheessa ja viimeistelyssä. Ydintuotokset toimivat, mutta jotkin edistyneet osiot ovat keskeneräisiä. Työskentelemme aktiivisesti sisällön täydentämiseksi. [Seuraa edistymistä →](workshop/README.md)
 
-### Interaktiiviset työpajamateriaalit  
-**Laaja käytännön oppiminen selainpohjaisten työkalujen ja ohjattujen harjoitusten avulla**
+### Interaktiiviset työpajamateriaalit
+**Kattava käytännön oppiminen selainpohjaisilla työkaluilla ja ohjatuilla harjoituksilla**
+Our workshop materials provide a structured, interactive learning experience that complements the chapter-based curriculum above. The workshop is designed for both self-paced learning and instructor-led sessions.
 
-Työpaja tarjoaa rakenteellisen, interaktiivisen oppimiskokemuksen, joka täydentää yllä mainittua luku- tai moduuliperusteista opetussuunnitelmaa. Työpaja on suunniteltu sekä itsenäiseen opiskeluun että ohjattuun opetukseen.
+#### 🛠️ Työpajan ominaisuudet
+- **Selainpohjainen käyttöliittymä**: Complete MkDocs-powered workshop with search, copy, and theme features
+- **GitHub Codespaces -integraatio**: One-click development environment setup
+- **Jäsennelty oppimispolku**: 8-module guided exercises (3-4 hours total)
+- **Progressiivinen metodologia**: Johdanto → Valinta → Vahvistus → Rakenteen purku → Konfigurointi → Mukauttaminen → Siivoaminen → Yhteenveto
+- **Interaktiivinen DevContainer-ympäristö**: Pre-configured tools and dependencies
 
-#### 🛠️ Työpajan ominaisuuksia  
-- **Selainpohjainen käyttöliittymä**: Täydellinen MkDocs-pohjainen työpaja, jossa haku, kopiointi ja teemaominaisuudet  
-- **GitHub Codespaces -integraatio**: Yhden klikkauksen kehitysympäristön asetukset  
-- **Rakenteinen oppimispolku**: 7 vaiheen ohjatut harjoitukset (3,5 tuntia yhteensä)  
-- **Tutkimus → Käyttöönotto → Mukautus**: Progressiivinen toimintamalli  
-- **Interaktiivinen DevContainer-ympäristö**: Ennakkoon konfiguroidut työkalut ja riippuvuudet  
+#### 📚 Työpajan moduulirakenne
+Työpaja noudattaa **8-moduulista progressiivista menetelmää**, joka vie sinut löytämisestä käyttöönoton hallintaan:
 
-#### 📚 Työpajan rakenne  
-Työpaja seuraa **Tutkimus → Käyttöönotto → Mukautus** -menetelmää:
+| Module | Topic | What You'll Do | Duration |
+|--------|-------|----------------|----------|
+| **0. Johdanto** | Työpajan yleiskatsaus | Ymmärrä oppimistavoitteet, vaatimukset ja työpajan rakenne | 15 min |
+| **1. Valinta** | Mallien löytäminen | Tutki AZD-malleja ja valitse oikea AI-templaatti käyttötapaukseesi | 20 min |
+| **2. Vahvistus** | Ota käyttöön & Varmista | Ota templaatti käyttöön komennolla `azd up` ja varmista, että infrastruktuuri toimii | 30 min |
+| **3. Rakenteen purku** | Ymmärrä rakenne | Käytä GitHub Copilotia tutkiaksesi mallin arkkitehtuuria, Bicep-tiedostoja ja koodin järjestelyä | 30 min |
+| **4. Konfigurointi** | azure.yaml -syväluotaus | Hallitse `azure.yaml`-konfigurointi, elinkaarikoukut ja ympäristömuuttujat | 30 min |
+| **5. Mukauttaminen** | Tee se omaksesi | Ota käyttöön AI Search, jäljitys, arviointi ja mukauta käyttötapaustasi varten | 45 min |
+| **6. Purku** | Siivoa | Poista resurssit turvallisesti komennolla `azd down --purge` | 15 min |
+| **7. Yhteenveto** | Seuraavat askeleet | Käsittele saavutukset, keskeiset käsitteet ja jatka oppimispolkua | 15 min |
 
-1. **Tutkimusvaihe** (45 min)  
-   - Tutustu Microsoft Foundry -malleihin ja -palveluihin  
-   - Ymmärrä moni-agentin arkkitehtuurimallit  
-   - Tarkastele käyttöönoton vaatimuksia ja esivaatimuksia  
+**Workshop Flow:**
+```
+Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
+     ↓            ↓           ↓              ↓               ↓              ↓            ↓           ↓
+  Overview    Find the     Deploy &      Explore        Master         Customize     Clean up    Review &
+             right        verify        code &        azure.yaml      for your      resources   next steps
+             template                   structure                     scenario
+```
 
-2. **Käyttöönotto vaihe** (2 tuntia)  
-   - Käytännön AI-sovellusten käyttöönotto AZD-työkalulla  
-   - Konfiguroi Azure AI -palvelut ja päätelaitteiden päätepisteet  
-   - Toteuta tietoturva- ja autentikointimallit  
-
-3. **Mukautusvaihe** (45 min)  
-   - Muokkaa sovelluksia erityistapauksiin  
-   - Optimoi tuotantokäyttöönotto  
-   - Toteuta valvonta ja kustannusten hallinta  
-
-#### 🚀 Aloita työpaja  
+#### 🚀 Työpajan aloittaminen
 ```bash
 # Vaihtoehto 1: GitHub Codespaces (suositeltu)
-# Napsauta "Code" → "Create codespace on main" repositoriossa
+# Napsauta repositorion "Code" → "Create codespace on main"
 
 # Vaihtoehto 2: Paikallinen kehitys
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Seuraa asennusohjeita tiedostossa workshop/README.md
+# Noudata workshop/README.md-tiedoston asennusohjeita
 ```
-  
-#### 🎯 Työpajan oppimistavoitteet  
-Työpajan suorittamalla osallistujat:  
-- **Ottavat käyttöön tuotantovalmiita AI-sovelluksia**: Käytä AZD-plust Microsoft Foundryn palveluja  
-- **Hallitsevat moni-agentin arkkitehtuurit**: Toteuta koordinoituja tekoälyagenttiratkaisuja  
-- **Toteuttavat tietoturvan parhaat käytännöt**: Konfiguroi autentikointi ja käyttöoikeudet  
-- **Optimoi laajennettavuudelle**: Suunnittele kustannustehokkaita ja suorituskykyisiä käyttöönottoja  
-- **Ratkaisevat käyttöönotto-ongelmia**: Korjaa yleisiä ongelmia itsenäisesti  
 
-#### 📖 Työpajan materiaalit  
-- **🎥 Interaktiivinen opas**: [Workshop Materials](workshop/README.md) – Selainpohjainen oppimisympäristö  
-- **📋 Vaiheittaiset ohjeet**: [Guided Exercises](../../workshop/docs/instructions) – Yksityiskohtaiset läpikäynnit  
-- **🛠️ AI-työpaja laboratorio**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) – AI-kohdistetut harjoitukset  
-- **💡 Pikakäynnistys**: [Workshop Setup Guide](workshop/README.md#quick-start) – Ympäristön konfigurointi  
+#### 🎯 Työpajan oppimistavoitteet
+Työpajan suorittamisen jälkeen osallistujat:
+- **Ota tuotantotekoälysovellukset käyttöön**: Use AZD with Microsoft Foundry services
+- **Hallinnoi moni-agenttiarkkitehtuureja**: Implement coordinated AI agent solutions
+- **Ota tietoturvan parhaat käytännöt käyttöön**: Configure authentication and access control
+- **Optimoi skaalausta varten**: Design cost-effective, performant deployments
+- **Vianmääritys käyttöönottoihin**: Resolve common issues independently
 
-**Täydellinen**: Yrityskoulutukseen, yliopistokursseille, itsenäiseen oppimiseen ja kehittäjäbootcampeihin.
+#### 📖 Työpajan resurssit
+- **🎥 Interaktiivinen opas**: [Työpajan materiaalit](workshop/README.md) - Selainpohjainen oppimisympäristö
+- **📋 Moduulikohtaiset ohjeet**:
+  - [0. Johdanto](workshop/docs/instructions/0-Introduction.md) - Työpajan yleiskatsaus ja tavoitteet
+  - [1. Valinta](workshop/docs/instructions/1-Select-AI-Template.md) - Etsi ja valitse AI-templaatteja
+  - [2. Vahvistus](workshop/docs/instructions/2-Validate-AI-Template.md) - Ota templaatti käyttöön ja varmista
+  - [3. Rakenteen purku](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Tutki mallin arkkitehtuuria
+  - [4. Konfigurointi](workshop/docs/instructions/4-Configure-AI-Template.md) - Hallitse azure.yaml
+  - [5. Mukauttaminen](workshop/docs/instructions/5-Customize-AI-Template.md) - Mukauta käyttötapaustasi
+  - [6. Purku](workshop/docs/instructions/6-Teardown-Infrastructure.md) - Siivoa resurssit
+  - [7. Yhteenveto](workshop/docs/instructions/7-Wrap-up.md) - Kertaus ja seuraavat askeleet
+- **🛠️ AI-työpajalaboratorio**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - AI-keskeiset harjoitukset
+- **💡 Nopea aloitus**: [Työpajan asennusopas](workshop/README.md#quick-start) - Ympäristön konfigurointi
 
----
-
-## 📖 Mikä on Azure Developer CLI?
-
-Azure Developer CLI (azd) on kehittäjäkeskeinen komentorivityökalu, joka nopeuttaa sovellusten rakentamista ja käyttöönottoa Azureen. Se tarjoaa:
-
-- **Mallipohjaiset käyttöönotot** – Käytä valmiita malleja yleisiin sovellusmalleihin  
-- **Infrastruktuuri koodina** – Hallitse Azure-resursseja Bicep- tai Terraform-työkaluilla  
-- **Integroitu työnkulku** – Joustava provisiointi, käyttöönotto ja sovellusten seuranta  
-- **Kehittäjäystävällinen** – Optimoitu kehittäjän tuottavuudelle ja käyttökokemukselle  
-
-### **AZD + Microsoft Foundry: Täydelliset tekoälyn käyttöönotot**
-
-**Miksi AZD AI-ratkaisuille?** AZD vastaa tekoälykehittäjien tärkeimpiin haasteisiin:
-
-- **Tekoälyvalmiit mallit** – Valmiiksi konfiguroidut mallit Azure OpenAI:lle, Cognitive Servicesille ja koneoppimiskuormille  
-- **Turvalliset tekoälyn käyttöönotot** – Sisäänrakennetut tietoturvamallit AI-palveluille, API-avaimille ja mallipäätepisteille  
-- **Tuotantokäyttömallit AI:lle** – Parhaat käytännöt skaalautuviin, kustannustehokkaisiin AI-sovellusprojekteihin  
-- **End-to-end AI-työnkulut** – Mallin kehityksestä tuotantoon asianmukaisella valvonnalla  
-- **Kustannusoptimointi** – Älykkäät resurssien jakamis- ja skaalausstrategiat AI-kuormille  
-- **Microsoft Foundry -integraatio** – Saumaton yhteys Microsoft Foundryn mallikatalogiin ja päätepisteisiin  
+**Sopii erinomaisesti**: Yrityskoulutuksiin, yliopistokursseille, itseopiskeluun ja kehittäjäbootcampeihin.
 
 ---
 
-## 🎯 Mallipohjat ja esimerkkikirjasto
+## 📖 Syväluotaus: AZD:n ominaisuudet
 
-### Esillä: Microsoft Foundry -mallipohjat  
-**Aloita tästä, jos otat AI-sovelluksia käyttöön!**
+Perusteiden lisäksi AZD tarjoaa tehokkaita ominaisuuksia tuotantokäyttöön tarkoitettuihin käyttöönottoihin:
 
-> **Huom:** Nämä mallit esittelevät erilaisia AI-malleja. Osa on ulkoisia Azure Sampleja, osa paikallisia toteutuksia.
+- **Templaatteihin perustuvat käyttöönotot** - Käytä valmiita malleja yleisiin sovelluskuvioihin
+- **Infrastruktuuri koodina** - Hallitse Azure-resursseja käyttämällä Bicep- tai Terraform-työkaluja  
+- **Integroitu työnkulut** - Provisionoi, ota käyttöön ja valvo sovelluksia saumattomasti
+- **Kehittäjäystävällinen** - Optimoitu kehittäjien tuottavuudelle ja käyttökokemukselle
 
-| Malli | Luku | Vaativuus | Palvelut | Tyyppi |
+### **AZD + Microsoft Foundry: Ihanteellinen tekoälykäyttöönottoihin**
+
+**Miksi AZD tekoälyratkaisuihin?** AZD käsittelee tekoälykehittäjien tärkeimpiä haasteita:
+
+- **AI-valmiit mallipohjat** - Esikonfiguroidut mallipohjat Azure OpenAI:lle, Cognitive Servicesille ja ML-kuormituksille
+- **Turvalliset tekoälykäyttöönotot** - Sisäänrakennetut turvallisuusmallit tekoälypalveluille, API-avaimille ja mallien päätepisteille  
+- **Tuotannon tekoälykuviot** - Parhaat käytännöt skaalautuviin, kustannustehokkaisiin tekoälysovellusten käyttöönottoihin
+- **End-to-End -tekoälytyönkulut** - Mallin kehityksestä tuotantoon käyttöönottoon asianmukaisella valvonnalla
+- **Kustannusoptimointi** - Älykkäät resurssien kohdistus- ja skaalausstrategiat tekoälyn kuormituksiin
+- **Microsoft Foundry -integraatio** - Saumaton yhteys Microsoft Foundryn malliluetteloon ja päätepisteisiin
+
+---
+
+## 🎯 Mallipohjat & esimerkkikirjasto
+
+### Esitellyt: Microsoft Foundry -mallit
+**Aloita tästä, jos otat tekoälysovelluksia käyttöön!**
+
+> **Huom:** Nämä templaattiesimerkit demonstroivat erilaisia tekoälykuvioita. Osa on ulkoisia Azure Samples -repositoreita, osa paikallisia toteutuksia.
+
+| Template | Chapter | Complexity | Services | Type |
 |----------|---------|------------|----------|------|
-| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Luku 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Ulkoinen |
-| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Luku 2 | ⭐⭐ | Azure AI Agent Service + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights | Ulkoinen |
+| [**Aloita AI-chatin kanssa**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Luku 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Ulkoinen |
+| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Luku 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Ulkoinen |
 | [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Luku 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Ulkoinen |
 | [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Luku 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Ulkoinen |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Luku 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Ulkoinen |
 | [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Luku 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Ulkoinen |
-| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Luku 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Paikallinen** |
+| [**Vähittäiskaupan moni-agenttiratkaisu**](examples/retail-scenario.md) | Luku 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Paikallinen** |
 
-### Esillä: Täydelliset oppimisskenaariot  
-**Tuotantovalmiit sovellusmallit, jotka on linkitetty oppimislukuihin**
+### Esitellyt: Täydelliset oppimistilanteet
+**Tuotantovalmiit sovellusmallit kartoitettuna oppimislukuihin**
 
-| Malli | Oppimisalue | Vaativuus | Keskeinen oppi |
+| Template | Learning Chapter | Complexity | Key Learning |
 |----------|------------------|------------|--------------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Luku 2 | ⭐ | Perus AI-käyttöönoton mallit |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Luku 2 | ⭐⭐ | RAG-toteutus Azure AI Searchilla |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Luku 4 | ⭐⭐ | Dokumentti-integraatio |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Luku 2 | ⭐⭐ | RAG-implementaatio Azure AI Searchilla |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Luku 4 | ⭐⭐ | Document Intelligence -integraatio |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Luku 5 | ⭐⭐⭐ | Agenttikehys ja funktiokutsut |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Luku 8 | ⭐⭐⭐ | Yritystason AI-orkestrointi |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Luku 5 | ⭐⭐⭐⭐ | Moni-agentin arkkitehtuuri Customer- ja Inventory-agenteilla |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Luku 8 | ⭐⭐⭐ | Yritystason tekoälyorkestrointi |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Luku 5 | ⭐⭐⭐⭐ | Moni-agenttiarkkitehtuuri Customer- ja Inventory-agenteilla |
 
-### Oppiminen esimerkkityypin mukaan
+### Oppiminen esimerkin mukaan
 
-> **📌 Paikalliset vs. Ulkoiset esimerkit:**  
-> **Paikalliset esimerkit** (tässä repossa) = Käyttövalmiita heti  
-> **Ulkoiset esimerkit** (Azure Samples) = Kloonaa linkatusta repoista  
+> **📌 Paikalliset vs. ulkoiset esimerkit:**  
+> **Paikalliset esimerkit** (tässä repossa) = Valmiita käyttää välittömästi  
+> **Ulkoiset esimerkit** (Azure Samples) = Kloonaa linkatuista repositoreista
 
-#### Paikalliset esimerkit (Valmiita käyttää)  
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) – Täydellinen tuotantovalmiiksi toteutus ARM-malleilla  
-  - Moni-agentin arkkitehtuuri (Customer + Inventory-agentit)  
-  - Laaja valvonta ja arviointi  
-  - Yhden klikkauksen käyttöönotto ARM-mallilla  
+#### Paikalliset esimerkit (valmiit käytettäväksi)
+- [**Vähittäiskaupan moni-agenttiratkaisu**](examples/retail-scenario.md) - Täydellinen tuotantovalmiin toteutus ARM-malleilla
+  - Moni-agenttiarkkitehtuuri (Customer + Inventory agents)
+  - Kattava valvonta ja arviointi
+  - Yhden napsautuksen käyttöönotto ARM-mallilla
 
-#### Paikalliset esimerkit – Container-sovellukset (luvut 2–5)  
-**Laaja konttipohjaisten käyttöönottoesimerkkien kokoelma tässä repossa:**  
-- [**Container App Examples**](examples/container-app/README.md) – Täydellinen opas konttikäyttöönottoihin  
-  - [Yksinkertainen Flask API](../../examples/container-app/simple-flask-api) – Perus REST API skaalaus-nollaan  
-  - [Mikropalveluarkkitehtuuri](../../examples/container-app/microservices) – Tuotantovalmiit moni-palvelukäyttöönotot  
-  - Pikakäynnistys, tuotanto ja edistyneet käyttöönotot  
-  - Valvonta, tietoturva ja kustannusohjeistus  
+#### Paikalliset esimerkit - Container-sovellukset (luvut 2-5)
+**Kattavat konttisovellusten käyttöönottoesimerkit tässä repossa:**
+- [**Konttisovellus-esimerkit**](examples/container-app/README.md) - Täydellinen opas konttipohjaisiin käyttöönottoihin
+  - [Yksinkertainen Flask-API](../../examples/container-app/simple-flask-api) - Perus REST-API, joka tukee scale-to-zero
+  - [Mikropalveluarkkitehtuuri](../../examples/container-app/microservices) - Tuotantovalmiit monipalvelukäyttöönotot
+  - Nopea aloitus, tuotanto, ja edistyneet käyttöönotto-kuviot
+  - Valvonta-, turvallisuus- ja kustannusoptimointiohjeet
 
-#### Ulkoiset esimerkit – Yksinkertaiset sovellukset (luvut 1–2)  
-**Kloonaa nämä Azure Sample -repositoriot aloitusta varten:**  
-- [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) – Peruskäyttöönoton mallit  
-- [Staattinen verkkosivusto - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) – Staattisen sisällön käyttöönotto  
-- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) – REST API käyttöönotto  
+#### Ulkoiset esimerkit - Yksinkertaiset sovellukset (luvut 1-2)
+**Kloonaa nämä Azure Samples -repositoriot aloittaaksesi:**
+- [Yksinkertainen Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Perus käyttöönoton mallit
+- [Staattinen verkkosivusto - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Staattisen sisällön käyttöönotto
+- [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST-API:n käyttöönotto
 
-#### Ulkoiset esimerkit – Tietokantaintegraatio (luvut 3–4)  
-- [Tietokantasovellus - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) – Tietokantayhteysmallit  
-- [Funktiot + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) – Serverless-tietojenkäsittely
+#### Ulkoiset esimerkit - Tietokantaintegraatio (luvut 3-4)  
+- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Tietokantayhteyskuviot
+- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless-tietotyönkulku
 
-#### Ulkoiset esimerkit – Edistyneet mallit (luvut 4–8)  
-- [Java-mikropalvelut](https://github.com/Azure-Samples/java-microservices-aca-lab) – Monipalveluarkkitehtuurit  
-- [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) – Taustaprosessointi  
-- [Yritystason ML-putki](https://github.com/Azure-Samples/mlops-v2) – Tuotantovalmiit ML-mallit  
+#### Ulkoiset esimerkit - Edistyneet kuviot (luvut 4-8)
+- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Monipalveluarkkitehtuurit
+- [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Taustaprosessointi  
+- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Tuotantovalmiit ML-mallit
 
-### Ulkoiset mallikokoelmat  
-- [**Virallinen AZD Malligalleria**](https://azure.github.io/awesome-azd/) – Kokoelma virallisia ja yhteisön malleja  
-- [**Azure Developer CLI Mallit**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) – Microsoft Learn -mallidokumentaatio  
-- [**Esimerkkikansio**](examples/README.md) - Paikalliset oppimisesimerkit yksityiskohtaisilla selityksillä
+### Ulkoiset templaattikokoelmat
+- [**Virallinen AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Kuraattu kokoelma virallisista ja yhteisön templaateista
+- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn -templaattidokumentaatio
+- [**Esimerkkihakemisto**](examples/README.md) - Paikalliset oppimisesimerkit yksityiskohtaisine selityksineen
 
 ---
 
-## 📚 Oppimateriaalit & Viitteet
+## 📚 Oppimateriaalit & viitteet
 
-### Nopeat Viitteet
-- [**Komentokooste**](resources/cheat-sheet.md) - Tärkeimmät azd-komennot järjestettyinä lukuihin
-- [**Sanasto**](resources/glossary.md) - Azure- ja azd-termiikka  
-- [**Usein Kysytyt Kysymykset**](resources/faq.md) - Yleiset kysymykset järjestettynä oppimislukuihin
-- [**Opas Harjoitteluun**](resources/study-guide.md) - Kattavat harjoitustehtävät
+### Pikaviitteet
+- [**Komentojen pikaopas**](resources/cheat-sheet.md) - Keskeiset azd-komennot järjestetty luvuittain
+- [**Sanasto**](resources/glossary.md) - Azure- ja azd-terminologia  
+- [**UKK**](resources/faq.md) - Yleisimmät kysymykset järjestetty luvuittain
+- [**Opiskelijan opas**](resources/study-guide.md) - Kattavat harjoitustehtävät
 
-### Käytännön Työpajat
-- [**AI Workshop Lab**](docs/microsoft-foundry/ai-workshop-lab.md) - Tee AI-ratkaisuistasi AZD-jakelukelpoisia (2-3 tuntia)
-- [**Interaktiivinen Työpajaopas**](workshop/README.md) - Selainpohjainen työpaja MkDocs- ja DevContainer-ympäristössä
-- [**Rakenteellinen Oppimispolku**](../../workshop/docs/instructions) - 7-vaiheiset ohjatut harjoitukset (Tutkiminen → Julkaisu → Räätälöinti)
-- [**AZD Aloittelijoille -työpaja**](workshop/README.md) - Täydelliset käytännön materiaalit GitHub Codespaces -integraatiolla
+### Käytännön työpajat
+- [**AI-työpajalaboratorio**](docs/chapter-02-ai-development/ai-workshop-lab.md) - Tee tekoälyratkaisusi AZD-käyttöönottovalmiiksi (2-3 hours)
+- [**Interaktiivinen työpaja**](workshop/README.md) - 8-module guided exercises with MkDocs and GitHub Codespaces
+  - Seuraa: Johdanto → Valinta → Vahvistus → Rakenteen purku → Konfigurointi → Mukauttaminen → Purku → Yhteenveto
 
-### Ulkoiset Oppimateriaalit
+### Ulkoiset oppimisresurssit
 - [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Hinnoittelulaskin](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Status](https://status.azure.com/)
+- [Azure-arkkitehtuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure-hinnoittelulaskin](https://azure.microsoft.com/pricing/calculator/)
+- [Azure-tila](https://status.azure.com/)
 
 ---
 
-## 🔧 Nopea Vianmääritysopas
+## 🔧 Pikainen vianmääritysohje
 
-**Aloittelijoiden yleiset ongelmat ja välittömät ratkaisut:**
+**Yleiset aloittelijoiden kohtaamat ongelmat ja välittömät ratkaisut:**
 
-### ❌ "azd: komentoa ei löydy"
+<details>
+<summary><strong>❌ "azd: command not found"</strong></summary>
 
 ```bash
-# Asenna ensin AZD
+# Asenna AZD ensin
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -556,181 +731,38 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Vahvista asennus
+# Tarkista asennus
 azd version
 ```
+</details>
 
-### ❌ "Tilausta ei löytynyt" tai "Tilausta ei asetettu"
+<details>
+<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
 
 ```bash
-# Listaa saatavilla olevat tilaukset
+# Luettele saatavilla olevat tilaukset
 az account list --output table
 
 # Aseta oletustilaus
 az account set --subscription "<subscription-id-or-name>"
 
-# Aseta AZD-ympäristölle
+# Aseta AZD-ympäristöä varten
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
-# Vahvista
+# Tarkista
 az account show
 ```
+</details>
 
-### ❌ "Riittämätön kiintiö" tai "Kiintiö ylittynyt"
+<details>
+<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
 ```bash
 # Kokeile eri Azure-aluetta
 azd env set AZURE_LOCATION "westus2"
 azd up
 
-# Tai käytä pienempiä SKUja kehityksessä
-# Muokkaa infra/main.parameters.json:
-{
-  "sku": "B1"  // Instead of "P1V2"
-}
-```
-
-### ❌ "azd up" epäonnistuu puolivälissä
-
-```bash
-# Vaihtoehto 1: Puhdista ja yritä uudelleen
-azd down --force --purge
-azd up
-
-# Vaihtoehto 2: Korjaa vain infrastruktuuri
-azd provision
-
-# Vaihtoehto 3: Tarkista yksityiskohtaiset lokit
-azd show
-azd logs
-```
-
-### ❌ "Todennus epäonnistui" tai "Token vanhentunut"
-
-```bash
-# Uudelleenautentikoi
-az logout
-az login
-
-azd auth logout
-azd auth login
-
-# Vahvista todennus
-az account show
-```
-
-### ❌ "Resurssi on jo olemassa" tai nimikonfliktit
-
-```bash
-# AZD luo uniikkeja nimiä, mutta jos tulee ristiriita:
-azd down --force --purge
-
-# Yritä sitten uudelleen uudella ympäristöllä
-azd env new dev-v2
-azd up
-```
-
-### ❌ Mallipohjan käyttöönotto kestää liian kauan
-
-**Normaalit odotusajat:**
-- Yksinkertainen web-sovellus: 5-10 minuuttia
-- Sovellus tietokannalla: 10-15 minuuttia
-- AI-sovellukset: 15-25 minuuttia (OpenAI:n käyttöönotto on hidasta)
-
-```bash
-# Tarkista eteneminen
-azd show
-
-# Jos jumissa yli 30 minuuttia, tarkista Azure-portaali:
-azd monitor
-# Etsi epäonnistuneita käyttöönottoja
-```
-
-### ❌ "Lupa evätty" tai "Kielletty"
-
-```bash
-# Tarkista Azure-roolisi
-az role assignment list --assignee $(az account show --query user.name -o tsv)
-
-# Tarvitset vähintään "Contributor"-roolin
-# Pyydä Azure-järjestelmänvalvojaasi myöntämään:
-# - Contributor (resursseille)
-# - User Access Administrator (rooliasetuksille)
-```
-
-### ❌ Julkaistun sovelluksen URL-osoitetta ei löydy
-
-```bash
-# Näytä kaikki palvelupisteet
-azd show
-
-# Tai avaa Azure Portal
-azd monitor
-
-# Tarkista tietty palvelu
-azd env get-values
-# Etsi *_URL-muuttujia
-```
-
-### 📚 Täydelliset vianmääritysresurssit
-
-- **Yleiset Ongelmat:** [Yksityiskohtaiset ratkaisut](docs/troubleshooting/common-issues.md)
-- **AI-spesifiset ongelmat:** [AI-vianmääritys](docs/troubleshooting/ai-troubleshooting.md)
-- **Debuggausopas:** [Vaiheittainen debuggaus](docs/troubleshooting/debugging.md)
-- **Apua saat:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
-
----
-
-## 🔧 Nopea Vianmääritysopas
-
-**Aloittelijoiden yleiset ongelmat ja välittömät ratkaisut:**
-
-<details>
-<summary><strong>❌ "azd: komentoa ei löydy"</strong></summary>
-
-```bash
-# Asenna ensin AZD
-# Windows (PowerShell):
-winget install microsoft.azd
-
-# macOS:
-brew tap azure/azd && brew install azd
-
-# Linux:
-curl -fsSL https://aka.ms/install-azd.sh | bash
-
-# Vahvista asennus
-azd version
-```
-</details>
-
-<details>
-<summary><strong>❌ "Tilausta ei löytynyt" tai "Tilausta ei asetettu"</strong></summary>
-
-```bash
-# Listaa käytettävissä olevat tilaukset
-az account list --output table
-
-# Aseta oletustilaus
-az account set --subscription "<subscription-id-or-name>"
-
-# Aseta AZD-ympäristölle
-azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
-
-# Vahvista
-az account show
-```
-</details>
-
-<details>
-<summary><strong>❌ "Riittämätön kiintiö" tai "Kiintiö ylittynyt"</strong></summary>
-
-```bash
-# Kokeile eri Azure-aluetta
-azd env set AZURE_LOCATION "westus2"
-azd up
-
-# Tai käytä pienempiä SKU:ja kehityksessä
+# Tai käytä kehityksessä pienempiä SKUja
 # Muokkaa infra/main.parameters.json:
 {
   "sku": "B1"  // Instead of "P1V2"
@@ -739,64 +771,65 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" epäonnistuu puolivälissä</strong></summary>
-
+<summary><strong>❌ "azd up" fails halfway through</strong></summary>
 ```bash
-# Vaihtoehto 1: Puhdista ja yritä uudelleen
+# Vaihtoehto 1: Siivoa ja yritä uudelleen
 azd down --force --purge
 azd up
 
 # Vaihtoehto 2: Korjaa vain infrastruktuuri
 azd provision
 
-# Vaihtoehto 3: Tarkista yksityiskohtaiset lokit
+# Vaihtoehto 3: Tarkista yksityiskohtainen tila
 azd show
-azd logs
+
+# Vaihtoehto 4: Tarkista lokit Azure Monitorissa
+azd monitor --logs
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Todennus epäonnistui" tai "Token vanhentunut"</strong></summary>
+<summary><strong>❌ "Todennus epäonnistui" tai "Tunnus vanhentunut"</strong></summary>
 
 ```bash
-# Vahvista uudelleen
+# Tunnistaudu uudelleen
 az logout
 az login
 
 azd auth logout
 azd auth login
 
-# Tarkista todennus
+# Varmista todennus
 az account show
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Resurssi on jo olemassa" tai nimikonfliktit</strong></summary>
+<summary><strong>❌ "Resurssi on jo olemassa" tai nimeämiskonfliktit</strong></summary>
 
 ```bash
-# AZD luo ainutlaatuisia nimiä, mutta jos syntyy ristiriita:
+# AZD luo ainutlaatuisia nimiä, mutta jos tulee ristiriita:
 azd down --force --purge
 
-# Yritä sitten uudelleen uudella ympäristöllä
+# Sitten yritä uudelleen uudella ympäristöllä
 azd env new dev-v2
 azd up
 ```
 </details>
 
 <details>
-<summary><strong>❌ Mallipohjan käyttöönotto kestää liian kauan</strong></summary>
+<summary><strong>❌ Mallin käyttöönotto kestää liian kauan</strong></summary>
 
 **Normaalit odotusajat:**
-- Yksinkertainen web-sovellus: 5-10 minuuttia
-- Sovellus tietokannalla: 10-15 minuuttia
-- AI-sovellukset: 15-25 minuuttia (OpenAI:n käyttöönotto on hidasta)
+- Yksinkertainen web-sovellus: 5–10 minuuttia
+- Sovellus, jossa on tietokanta: 10–15 minuuttia
+- Tekoälysovellukset: 15–25 minuuttia (OpenAI:n provisiointi on hidasta)
 
 ```bash
 # Tarkista edistyminen
 azd show
 
-# Jos jumissa yli 30 minuuttia, tarkista Azure-portaali:
+# Jos olet jumissa yli 30 minuutin ajan, tarkista Azure-portaali:
 azd monitor
 # Etsi epäonnistuneita käyttöönottoja
 ```
@@ -812,18 +845,18 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # Tarvitset vähintään "Contributor"-roolin
 # Pyydä Azure-järjestelmänvalvojaasi myöntämään:
 # - Contributor (resursseille)
-# - User Access Administrator (roolien määrittämiseen)
+# - User Access Administrator (roolimäärityksiä varten)
 ```
 </details>
 
 <details>
-<summary><strong>❌ Julkaistun sovelluksen URL-osoitetta ei löydy</strong></summary>
+<summary><strong>❌ Käyttöönotetun sovelluksen URL-osoitetta ei löydy</strong></summary>
 
 ```bash
 # Näytä kaikki palvelun päätepisteet
 azd show
 
-# Tai avaa Azure Portal
+# Tai avaa Azure-portaali
 azd monitor
 
 # Tarkista tietty palvelu
@@ -832,82 +865,82 @@ azd env get-values
 ```
 </details>
 
-### 📚 Täydelliset vianmääritysresurssit
+### 📚 Kattavat vianmääritysresurssit
 
-- **Yleiset Ongelmat:** [Yksityiskohtaiset ratkaisut](docs/troubleshooting/common-issues.md)
-- **AI-spesifiset ongelmat:** [AI-vianmääritys](docs/troubleshooting/ai-troubleshooting.md)
-- **Debuggausopas:** [Vaiheittainen debuggaus](docs/troubleshooting/debugging.md)
-- **Apua saat:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
+- **Yleisimmät ongelmat -opas:** [Yksityiskohtaiset ratkaisut](docs/chapter-07-troubleshooting/common-issues.md)
+- **AI-spesifiset ongelmat:** [AI-vianmääritys](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
+- **Vianetsintäopas:** [Vaiheittainen vianetsintä](docs/chapter-07-troubleshooting/debugging.md)
+- **Hanki apua:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🎓 Kurssin Suoritus & Sertifiointi
+## 🎓 Kurssin suorittaminen & sertifiointi
 
-### Edistymisen Seuranta
+### Edistymisen seuranta
 Seuraa oppimisesi edistymistä jokaisen luvun kohdalla:
 
 - [ ] **Luku 1**: Perusteet & Pika-aloitus ✅
-- [ ] **Luku 2**: AI-Ensimmäinen Kehitys ✅  
-- [ ] **Luku 3**: Konfigurointi & Todennus ✅
-- [ ] **Luku 4**: Infrastruktuuri Koodina & Julkaisu ✅
-- [ ] **Luku 5**: Moniagenttiset AI-ratkaisut ✅
-- [ ] **Luku 6**: Esijulkaisuvalidointi & Suunnittelu ✅
-- [ ] **Luku 7**: Vianmääritys & Debuggaus ✅
-- [ ] **Luku 8**: Tuotanto & Yritysmallit ✅
+- [ ] **Luku 2**: Tekoälylähtöinen kehitys ✅  
+- [ ] **Luku 3**: Konfigurointi & todennus ✅
+- [ ] **Luku 4**: Infrastruktuuri koodina & käyttöönotto ✅
+- [ ] **Luku 5**: Moni-agenttiset tekoälyratkaisut ✅
+- [ ] **Luku 6**: Ennakkotarkastus & suunnittelu ✅
+- [ ] **Luku 7**: Vianmääritys & vianetsintä ✅
+- [ ] **Luku 8**: Tuotanto & yritystason mallit ✅
 
-### Oppimisen Varmistus
-Jokaisen luvun jälkeen varmista tietosi seuraavasti:
-1. **Käytännön Harjoitus**: Suorita luvun käytännön julkaisu
-2. **Tietotarkistus**: Käy läpi luvun UKK-osio
+### Oppimisen varmistus
+Kun olet suorittanut kunkin luvun, varmista osaamisesi seuraavasti:
+1. **Käytännön harjoitus**: Suorita luvun käytännön käyttöönotto
+2. **Osaamistarkastus**: Käy läpi luvun UKK-osio
 3. **Yhteisökeskustelu**: Jaa kokemuksesi Azure Discordissa
-4. **Seuraava Luku**: Siirry seuraavalle vaikeustasolle
+4. **Seuraava luku**: Siirry seuraavaan vaativuustasoon
 
-### Kurssin Suoritusetuja
+### Kurssin suorittamisen edut
 Kun olet suorittanut kaikki luvut, sinulla on:
-- **Tuotantokokemus**: Olet julkaissut oikeita AI-sovelluksia Azureen
-- **Ammatilliset Taidot**: Yrityskäyttöön valmiit julkaisutaidot  
-- **Yhteisön Tunnustus**: Aktiivinen jäsen Azure-kehittäjäyhteisössä
-- **Uraedistys**: Kysyntää oleva AZD- ja AI-julkaisuosaaminen
+- **Tuotantokokemus**: Olet ottanut tuotantokäyttöön oikeita tekoälysovelluksia Azureen
+- **Ammatilliset taidot**: Yritysvalmiit käyttöönotto-taidot  
+- **Yhteisön tunnustus**: Aktiivinen jäsen Azure-kehittäjäyhteisössä
+- **Uramahdollisuudet**: Kysytty AZD- ja tekoälykäyttöönotto-osaaminen
 
 ---
 
-## 🤝 Yhteisö & Tuki
+## 🤝 Yhteisö & tuki
 
-### Hae Apua & Tukea
-- **Tekniset Ongelmat**: [Ilmoita virheistä ja pyydä ominaisuuksia](https://github.com/microsoft/azd-for-beginners/issues)
+### Hanki apua & tuki
+- **Tekniset ongelmat**: [Ilmoita bugeista ja pyydä ominaisuuksia](https://github.com/microsoft/azd-for-beginners/issues)
 - **Oppimiskysymykset**: [Microsoft Azure Discord -yhteisö](https://discord.gg/microsoft-azure) ja [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **AI-spesifinen Apua**: Liity [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI-spesifinen apu**: Liity [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Dokumentaatio**: [Virallinen Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Yhteisön Näkemyksiä Microsoft Foundry Discordista
+### Yhteisön oivalluksia Microsoft Foundry Discordista
 
-**Äskettäiset Kyselytulokset #Azure-kanavalta:**
-- **45%** kehittäjistä haluaa käyttää AZD:tä AI-kuormituksiin
-- **Suurimmat haasteet**: Monipalvelujulkaisut, tunnistetietojen hallinta, tuotantovalmius  
-- **Eniten pyydetyt**: AI-spesifiset mallipohjat, vianmääritysoppaat, parhaat käytännöt
+**Viimeaikaiset kyselyn tulokset #Azure-kanavalta:**
+- **45%** kehittäjistä haluaa käyttää AZD:ta tekoälytyökuormiin
+- **Suurimmat haasteet**: Monipalveluiden käyttöönotot, tunnushallinta, tuotantovalmius  
+- **Eniten pyydetyt**: Tekoälykohtaiset mallipohjat, vianmääritysoppaat, parhaat käytännöt
 
-**Liity yhteisöömme saadaksesi:**
-- Jaa kokemuksiasi AZD + AI:sta ja saa apua
-- Pääsyn uusiin AI-mallipohjien esiversioihin
-- Mahdollisuuden vaikuttaa AI-julkaisun parhaisiin käytäntöihin
-- Vaikutusmahdollisuuksia tulevien AI + AZD -ominaisuuksien kehitykseen
+**Liity yhteisöömme ja voit:**
+- Jaa AZD- ja tekoälykokemuksesi ja saa apua
+- Pääsy uusien tekoälymallipohjien varhaisiin esikatseluihin
+- Osallistu tekoälyn käyttöönoton parhaiden käytäntöjen kehittämiseen
+- Vaikuta tuleviin AI + AZD -ominaisuuksiin
 
-### Osallistuminen Kurssin Kehitykseen
-Otamme mielellämme vastaan osallistumisia! Lue [Osallistumisopas](CONTRIBUTING.md) tiedot:
-- **Sisällön Parannukset**: Paranna olemassa olevia lukuja ja esimerkkejä
-- **Uudet Esimerkit**: Lisää käytännön skenaarioita ja mallipohjia  
+### Osallistuminen kurssin kehittämiseen
+Tervetuloa tekemään kontribuutioita! Lue lisätietoja [Osallistumisoppaastamme](CONTRIBUTING.md) koskien:
+- **Sisällön parannukset**: Paranna olemassa olevia lukuja ja esimerkkejä
+- **Uudet esimerkit**: Lisää todellisen maailman skenaarioita ja mallipohjia  
 - **Käännökset**: Auta ylläpitämään monikielistä tukea
-- **Virheraportit**: Paranna täsmällisyyttä ja selkeyttä
-- **Yhteisön Normit**: Noudata osallistavaa yhteisöpolitiikkaamme
+- **Bugit**: Paranna tarkkuutta ja selkeyttä
+- **Yhteisön säännöt**: Noudata osallistavia yhteisöohjeitamme
 
 ---
 
-## 📄 Kurssin Tiedot
+## 📄 Kurssitiedot
 
 ### Lisenssi
-Tämä projekti on lisensoitu MIT-lisenssillä - katso [LICENSE](../../LICENSE) tiedosto saadaksesi lisätietoja.
+Tämä projekti on lisensoitu MIT-lisenssillä - katso lisätiedot [LICENSE](../../LICENSE) -tiedostosta.
 
-### Linkitetyt Microsoftin Oppimateriaalit
+### Liittyvät Microsoftin oppimisresurssit
 
 Tiimimme tuottaa myös muita kattavia oppimiskursseja:
 
@@ -915,14 +948,14 @@ Tiimimme tuottaa myös muita kattavia oppimiskursseja:
 ### LangChain
 [![LangChain4j aloittelijoille](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
 [![LangChain.js aloittelijoille](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
-
+[![LangChain aloittelijoille](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
 ### Azure / Edge / MCP / Agentit
 [![AZD aloittelijoille](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI aloittelijoille](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP aloittelijoille](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI-agentit aloittelijoille](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents aloittelijoille](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
@@ -935,37 +968,38 @@ Tiimimme tuottaa myös muita kattavia oppimiskursseja:
 ---
  
 ### Perusoppiminen
-[![ML aloittelijoille](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Data Science aloittelijoille](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Koneoppiminen aloittelijoille](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data-analytiikka aloittelijoille](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![Tekoäly aloittelijoille](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Kyberturvallisuus aloittelijoille](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Verkkokehitys aloittelijoille](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT aloittelijoille](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR-kehitys aloittelijoille](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### Copilot-sarja
-[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+### Copilot -sarja
+[![Copilot tekoälypariohjelmointiin](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot C#/.NET:lle](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot-seikkailu](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
 ## 🗺️ Kurssin navigointi
 
-**🚀 Valmis aloittamaan oppimisen?**
+**🚀 Valmiina aloittamaan oppimisen?**
 
-**Aloittelijat**: Aloita [Luvusta 1: Perusteet & Nopeasti käyntiin](../..)  
-**AI-kehittäjät**: Siirry suoraan [Lukuun 2: AI-Ensisijainen kehitys](../..)  
-**Kokeneet kehittäjät**: Aloita [Luvusta 3: Konfigurointi & Todentaminen](../..)
+**Aloittelijat**: Aloita kohdasta [Luku 1: Perusteet & Pika-aloitus](../..)
+**AI-kehittäjät**: Siirry kohtaan [Luku 2: AI-ensijainen kehittäminen](../..)  
 
-**Seuraavat vaiheet**: [Aloita luku 1 - AZD perusteet](docs/getting-started/azd-basics.md) →
+**Kokeneet kehittäjät**: Aloita [Luku 3: Konfigurointi ja todennus](../..)
+
+**Seuraavat askeleet**: [Aloita Luku 1 - AZD:n perusteet](docs/chapter-01-foundation/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattikäännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäinen asiakirja omalla kielellään on virallinen lähde. Tärkeiden tietojen osalta suositellaan ammattimaista ihmis käännöstä. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinymmärryksistä tai tulkinnoista.
+Vastuuvapauslauseke:
+Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää auktoritatiivisena lähteenä. Tärkeissä asioissa suositellaan ammattilaisen tekemää ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

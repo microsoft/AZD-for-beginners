@@ -1,518 +1,559 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-21T15:27:39+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "fi"
-}
--->
-# AZD Aloittelijoille: Kurssin Rakenne ja Oppimiskehys
+# AZD Aloittelijoille: Kurssin Rakenne & Oppimisrunko
 
-## Kurssin Yleiskatsaus
+## Kurssin Yleiskuvaus
 
-Hallitse Azure Developer CLI (azd) vaiheittain etenevien lukujen avulla. **Erityinen painotus tekoälysovellusten käyttöönotossa Microsoft Foundry -integraation avulla.**
+Hallinnoi Azure Developer CLI:tä (azd) rakenteellisten lukujen kautta, jotka on suunniteltu etenevään oppimiseen. **Erityinen painopiste AI-sovellusten käyttöönotossa Microsoft Foundry -integraation kanssa.**
 
-### Miksi Tämä Kurssi on Tärkeä Nykyaikaisille Kehittäjille
+### Miksi Tämä Kurssi On Välttämätön Nykykehittäjille
 
-Microsoft Foundry Discord -yhteisön havaintojen mukaan **45 % kehittäjistä haluaa käyttää AZD:tä tekoälytyökuormiin**, mutta he kohtaavat haasteita, kuten:
-- Monimutkaiset monipalveluarkkitehtuurit tekoälylle
-- Parhaat käytännöt tekoälyn tuotantokäyttöönotossa  
+Perustuu Microsoft Foundry Discord -yhteisön näkemyksiin, **45 % kehittäjistä haluaa käyttää AZD:tä AI-kuormien kanssa**, mutta kohtaa haasteita:
+- Monimutkaiset monipalveluisten AI-arkkitehtuurien mallit
+- Tuotannon AI-käyttöönoton parhaat käytännöt  
 - Azure AI -palveluiden integrointi ja konfigurointi
-- Tekoälytyökuormien kustannusten optimointi
-- Tekoälyyn liittyvien käyttöönotto-ongelmien vianmääritys
+- Kustannusten optimointi AI-kuormille
+- AI-spesifisten käyttöönotto-ongelmien vianetsintä
 
 ### Keskeiset Oppimistavoitteet
 
-Kun suoritat tämän rakenteellisen kurssin, opit:
-- **AZD:n Perusteet**: Keskeiset käsitteet, asennus ja konfigurointi
-- **Tekoälysovellusten Käyttöönotto**: AZD:n käyttö Microsoft Foundry -palveluiden kanssa
-- **Infrastructure as Code**: Azure-resurssien hallinta Bicep-mallien avulla
-- **Vianmääritys Käyttöönotossa**: Yleisimpien ongelmien ratkaisu ja virheiden korjaus
-- **Tuotantokäyttöön Optimointi**: Turvallisuus, skaalaus, valvonta ja kustannusten hallinta
-- **Moniagenttiratkaisujen Rakentaminen**: Monimutkaisten tekoälyarkkitehtuurien käyttöönotto
+Suorittamalla tämän rakenteellisen kurssin:
+- **Hallinnoi AZD:n perusteet**: Keskeiset käsitteet, asennus ja konfigurointi
+- **Ota käyttöön AI-sovelluksia**: Käytä AZD:tä Microsoft Foundryn palveluiden kanssa
+- **Toteuta infrastruktuuri koodina**: Hallinnoi Azure-resursseja Bicep-mallien avulla
+- **Vianetsintä käyttöönotossa**: Ratkaise yleisiä ongelmia ja debuggaa ongelmia
+- **Optimoi tuotantoa varten**: Tietoturva, skaalaus, seuranta ja kustannusten hallinta
+- **Rakenna moni-agenttiratkaisuja**: Käyttöönotto monimutkaisille AI-arkkitehtuureille
 
-## 🎓 Työpajan Oppimiskokemus
+## 🎓 Työpajojen Oppimiskokemus
 
-### Joustavat Oppimisen Toteutustavat
-Tämä kurssi tukee sekä **itsenäistä oppimista omaan tahtiin** että **ohjattuja työpajasessioita**, jolloin osallistujat saavat käytännön kokemusta AZD:stä ja kehittävät taitojaan interaktiivisten harjoitusten avulla.
+### Joustavat Oppimisen Toimitustavat
+Tämä kurssi on suunniteltu tukemaan sekä **itseopiskelua** että **ohjattuja työpajasessioita**, jotta oppijat saavat käytännön kokemusta AZD:stä samalla, kun kehittävät käytännön taitoja interaktiivisten harjoitusten kautta.
 
 #### 🚀 Itsenäinen Oppimismoodi
-**Täydellinen yksittäisille kehittäjille ja jatkuvaan oppimiseen**
+**Täydellinen yksittäisille kehittäjille ja jatkuvalle oppimiselle**
 
 **Ominaisuudet:**
-- **Selaimen Kautta Käytettävä Alusta**: MkDocs-pohjainen työpaja, joka on käytettävissä millä tahansa selaimella
-- **GitHub Codespaces -integraatio**: Yhden klikkauksen kehitysympäristö valmiiksi konfiguroiduilla työkaluilla
-- **Interaktiivinen DevContainer-ympäristö**: Ei vaadi paikallista asennusta - aloita koodaus heti
-- **Edistymisen Seuranta**: Sisäänrakennetut tarkistuspisteet ja validointiharjoitukset
-- **Yhteisön Tuki**: Pääsy Azure Discord -kanaviin kysymyksiä ja yhteistyötä varten
+- **Selaimessa toimiva käyttöliittymä**: Täysin MkDocs-pohjainen työpaja, johon pääsee mistä tahansa verkkoselaimesta
+- **GitHub Codespaces -integraatio**: Yhden napsautuksen kehitysympäristö esiasennetuilla työkaluilla
+- **Interaktiivinen DevContainer-ympäristö**: Ei paikallista asennusta – aloita koodaus heti
+- **Edistymisen seuranta**: Sisäänrakennetut tarkistuspisteet ja validointiharjoitukset
+- **Yhteisön tuki**: Pääsy Azure Discord -kanaville kysymyksiä ja yhteistyötä varten
 
-**Oppimisrakenne:**
-- **Joustava Aikataulu**: Suorita luvut omaan tahtiin päivien tai viikkojen aikana
-- **Tarkistuspistejärjestelmä**: Vahvista oppiminen ennen siirtymistä monimutkaisempiin aiheisiin
-- **Resurssikirjasto**: Kattava dokumentaatio, esimerkit ja vianmääritysoppaat
-- **Portfolion Kehittäminen**: Rakenna käyttöön otettavia projekteja ammatillisiin portfolioihin
+**Oppimisen Rakenne:**
+- **Joustava aikataulu**: Suorita luvut omaan tahtiin päivissä tai viikkoina
+- **Tarkistuspistesysteemi**: Vahvista oppimasi ennen siirtymistä vaativampiin aiheisiin
+- **Resurssikirjasto**: Kattava dokumentaatio, esimerkit ja vianetsintäoppaat
+- **Portfolion kehitys**: Rakenna käyttöön otettavia projekteja ammatillisia portfolioita varten
 
-**Aloittaminen (Itsenäinen Oppiminen):**
+**Aloittaminen (Itseopiskelu):**
 ```bash
-# Vaihtoehto 1: GitHub Codespaces (Suositeltu)
-# Siirry arkistoon ja napsauta "Code" → "Create codespace on main"
+# Vaihtoehto 1: GitHub Codespaces (suositeltu)
+# Siirry repositorioon ja klikkaa "Code" → "Create codespace on main"
 
 # Vaihtoehto 2: Paikallinen kehitys
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Seuraa asennusohjeita tiedostossa workshop/README.md
+# Noudata asennusohjeita workshop/README.md-tiedostossa
 ```
 
 #### 🏛️ Ohjatut Työpajasessiot
-**Ihanteellinen yrityskoulutukseen, bootcampeihin ja oppilaitoksille**
+**Ihanteelliset yrityskoulutukseen, bootcampeihin ja oppilaitoksiin**
 
-**Työpajan Muotoiluvaihtoehdot:**
+**Työpajan formaattivaihtoehdot:**
 
-**📚 Akateeminen Kurssi (8-12 viikkoa)**
-- **Yliopisto-ohjelmat**: Lukukauden mittainen kurssi, jossa viikoittain 2 tunnin sessiot
-- **Bootcamp-muoto**: Intensiivinen 3-5 päivän ohjelma, jossa päivittäin 6-8 tunnin sessiot
+**📚 Akateeminen kurssi-integraatio (8-12 viikkoa)**
+- **Yliopisto-ohjelmat**: Lukukauden mittainen kurssi, viikoittaiset 2 tunnin sessiot
+- **Bootcamp-formaatti**: Tehokas 3-5 päivän ohjelma, päivittäiset 6-8 tunnin sessiot
 - **Yrityskoulutus**: Kuukausittaiset tiimisessiot käytännön projektien toteutuksella
-- **Arviointikehys**: Arvioidut tehtävät, vertaisarvioinnit ja lopputyöt
+- **Arviointikehys**: Pisteytetyt tehtävät, vertaisarvostelut ja loppuprojektit
 
-**🚀 Intensiivinen Työpaja (1-3 päivää)**
-- **Päivä 1**: Perusteet + Tekoälykehitys (Luvut 1-2) - 6 tuntia
-- **Päivä 2**: Konfigurointi + Infrastruktuuri (Luvut 3-4) - 6 tuntia  
-- **Päivä 3**: Edistyneet Kuviot + Tuotanto (Luvut 5-8) - 8 tuntia
-- **Seuranta**: Valinnainen 2 viikon mentorointi projektin loppuun saattamiseksi
+**🚀 Intenssiivinen Työpaja (1-3 päivää)**
+- **Päivä 1**: Perusta + AI-kehitys (luvut 1-2) - 6 tuntia
+- **Päivä 2**: Konfigurointi + Infrastruktuuri (luvut 3-4) - 6 tuntia  
+- **Päivä 3**: Edistyneet mallit + Tuotanto (luvut 5-8) - 8 tuntia
+- **Seuranta**: Valinnainen 2 viikon mentorointi projektin loppuunsaattamiseen
 
-**⚡ Johtajille Suunnattu Katsaus (4-6 tuntia)**
-- **Strateginen Yleiskatsaus**: AZD:n arvo ja liiketoimintavaikutus (1 tunti)
-- **Käytännön Demo**: Tekoälysovelluksen käyttöönotto alusta loppuun (2 tuntia)
-- **Arkkitehtuurin Tarkastelu**: Yrityskuvioiden ja hallintamallien tarkastelu (1 tunti)
+**⚡ Johtoryhmän Katsaus (4-6 tuntia)**
+- **Strateginen yleiskuva**: AZD:n arvolupaus ja liiketoiminnan vaikutus (1 tunti)
+- **Käytännön demo**: Koko AI-sovelluksen käyttöönotto (2 tuntia)
+- **Arkkitehtuuriarviointi**: Yritystason mallit ja hallinta (1 tunti)
 - **Toteutussuunnittelu**: Organisaation käyttöönoton strategia (1-2 tuntia)
 
 #### 🛠️ Työpajan Oppimismetodologia
-**Tutkiminen → Käyttöönotto → Mukauttaminen -lähestymistapa käytännön taitojen kehittämiseen**
+**Löytö → Käyttöönotto → Räätälöinti – lähestymistapa käytännön taitojen kehittämiseen**
 
-**Vaihe 1: Tutkiminen (45 minuuttia)**
-- **Mallien Tutkiminen**: Arvioi Azure AI Foundry -mallit ja palvelut
-- **Arkkitehtuurin Analyysi**: Ymmärrä moniagenttikuviot ja käyttöönoton strategiat
-- **Tarpeiden Arviointi**: Tunnista organisaation tarpeet ja rajoitteet
-- **Ympäristön Asetus**: Konfiguroi kehitysympäristö ja Azure-resurssit
+**Vaihe 1: Löytö (45 minuuttia)**
+- **Mallipohjien tutkiskelu**: Arvioi Microsoft Foundryn mallipohjia ja palveluita
+- **Arkkitehtuurianalyysi**: Ymmärrä moni-agenttimallit ja käyttöönoton strategiat
+- **Vaatimusten arviointi**: Tunnista organisaation tarpeet ja rajoitteet
+- **Ympäristön valmistelu**: Konfiguroi kehitysympäristö ja Azure-resurssit
 
 **Vaihe 2: Käyttöönotto (2 tuntia)**
-- **Ohjattu Toteutus**: Tekoälysovellusten vaiheittainen käyttöönotto AZD:n avulla
-- **Palveluiden Konfigurointi**: Konfiguroi Azure AI -palvelut, päätepisteet ja autentikointi
-- **Turvallisuuden Toteutus**: Käytä yritystason turvallisuuskuvioita ja käyttöoikeuksia
-- **Validointitestaus**: Vahvista käyttöönotot ja ratkaise yleisiä ongelmia
+- **Ohjattu toteutus**: Vaiheittainen AI-sovellusten käyttöönotto AZD:llä
+- **Palveluiden konfigurointi**: Aseta Azure AI -palvelut, päätelaitteet ja todentaminen
+- **Tietoturvan toteutus**: Käytä yritystason tietoturvamalleja ja pääsynhallintaa
+- **Validointitestaus**: Vahvista käyttöönotto ja korjaa yleiset ongelmat
 
-**Vaihe 3: Mukauttaminen (45 minuuttia)**
-- **Sovelluksen Muokkaus**: Mukauta malleja erityisiin käyttötapauksiin ja tarpeisiin
-- **Tuotannon Optimointi**: Toteuta valvonta-, kustannustenhallinta- ja skaalausstrategioita
-- **Edistyneet Kuviot**: Tutki moniagenttien koordinointia ja monimutkaisia arkkitehtuureja
-- **Seuraavien Askeleiden Suunnittelu**: Määritä oppimispolku jatkuvaan taitojen kehittämiseen
+**Vaihe 3: Räätälöinti (45 minuuttia)**
+- **Sovelluksen muokkaus**: Mukauta mallipohjia erityistarkoituksiin ja vaatimuksiin
+- **Tuotannon optimointi**: Toteuta seuranta, kustannusten hallinta ja skaalausstrategiat
+- **Edistyneet mallit**: Tutki moni-agenttien koordinointia ja monimutkaisia arkkitehtuureja
+- **Seuraavien askeleiden suunnittelu**: Määrittele oppimispolku taitojen jatkokehitykseen
 
 #### 🎯 Työpajan Oppimistulokset
-**Mitattavat taidot, jotka kehittyvät käytännön harjoittelun kautta**
+**Mitattavat taidot käytännön harjoituksen kautta**
 
-**Tekniset Kompetenssit:**
-- **Tuotantotason Tekoälysovellusten Käyttöönotto**: Onnistunut tekoälyratkaisujen käyttöönotto ja konfigurointi
-- **Infrastructure as Code -osaaminen**: Luo ja hallitse mukautettuja Bicep-malleja
-- **Moniagenttiarkkitehtuuri**: Toteuta koordinoituja tekoälyagenttiratkaisuja
-- **Tuotantovalmius**: Käytä turvallisuus-, valvonta- ja hallintakuvioita
-- **Vianmääritystaito**: Ratkaise itsenäisesti käyttöönotto- ja konfigurointiongelmia
+**Tekniset kyvykkyydet:**
+- **Ota käyttöön tuotantotason AI-sovelluksia**: Onnistuneesti otetut käyttöön ja konfiguroidut AI-ratkaisut
+- **Infrastruktuuri koodina -osaaminen**: Luo ja hallinnoi mukautettuja Bicep-malleja
+- **Moni-agentti-arkkitehtuuri**: Toteuta koordinoituja AI-agenttiratkaisuja
+- **Tuotantovalmius**: Käytä tietoturva-, seuranta- ja hallintamalleja
+- **Vianetsintäosaaminen**: Ratkaise itsenäisesti käyttöönotto- ja konfiguraatio-ongelmia
 
-**Ammatilliset Taidot:**
-- **Projektijohtaminen**: Johda teknisiä tiimejä pilvikäyttöönottohankkeissa
-- **Arkkitehtuurisuunnittelu**: Suunnittele skaalautuvia ja kustannustehokkaita Azure-ratkaisuja
-- **Tiedon Siirto**: Kouluta ja mentoroi kollegoita AZD:n parhaissa käytännöissä
-- **Strateginen Suunnittelu**: Vaikuta organisaation pilvikäyttöönoton strategioihin
+**Ammatilliset taidot:**
+- **Projektijohtaminen**: Johtaa teknisiä tiimejä pilvikäyttöönottohankkeissa
+- **Arkkitehtuurisuunnittelu**: Suunnittele skaalautuvia, kustannustehokkaita Azure-ratkaisuja
+- **Tiedon jakaminen**: Kouluta ja mentoroi kollegoita AZD:n parhaiden käytäntöjen suhteen
+- **Strateginen suunnittelu**: Vaikuta organisaation pilvien omaksumisstrategioihin
 
 #### 📋 Työpajan Resurssit ja Materiaalit
-**Kattava työkalupakki ohjaajille ja oppijoille**
+**Kattava työkaluvalikoima vetäjille ja oppijoille**
 
-**Ohjaajille:**
-- **Ohjaajan Opas**: [Työpajan Ohjausopas](workshop/docs/instructor-guide.md) - Sessioiden suunnittelu ja toteutusvinkit
-- **Esitysmateriaalit**: Diaesitykset, arkkitehtuurikaaviot ja demokäsikirjoitukset
-- **Arviointityökalut**: Käytännön harjoitukset, tietotarkistukset ja arviointirubriikit
-- **Tekninen Asetus**: Ympäristön konfigurointi, vianmääritysoppaat ja varasuunnitelmat
+**Vetäjille:**
+- **Ohjaajan opas**: [Workshop Overview](workshop/README.md) - Sessioiden suunnittelu ja toteutusohjeet
+- **Esitysmateriaalit**: Kalvot, arkkitehtuurikaaviot ja demon skriptit
+- **Arviointivälineet**: Käytännön harjoitukset, tietotarkistukset ja arviointikriteerit
+- **Tekninen valmistelu**: Ympäristön konfigurointi, vianetsintäoppaat ja varasuunnitelmat
 
 **Oppijoille:**
-- **Interaktiivinen Työpajaympäristö**: [Työpajan Materiaalit](workshop/README.md) - Selaimen kautta käytettävä oppimisalusta
-- **Vaiheittaiset Ohjeet**: [Ohjatut Harjoitukset](../../workshop/docs/instructions) - Yksityiskohtaiset toteutusohjeet  
-- **Viitedokumentaatio**: [AI Työpajalaboratorio](docs/ai-foundry/ai-workshop-lab.md) - Tekoälyyn keskittyvät syventävät oppaat
-- **Yhteisön Resurssit**: Azure Discord -kanavat, GitHub-keskustelut ja asiantuntijatuki
+- **Interaktiivinen työpaja-ympäristö**: [Workshop Materials](workshop/README.md) - Selaimessa toimiva oppimisalusta
+- **Vaiheittaiset ohjeet**: [Guided Exercises](../../workshop/docs/instructions) - Yksityiskohtaiset toteutusohjeet  
+- **Viitedokumentaatio**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-painotteiset syväoppimiset
+- **Yhteisön resurssit**: Azure Discord -kanavat, GitHub-keskustelut ja asiantuntijatuki
 
-#### 🏢 Yritystyöpajan Toteutus
+#### 🏢 Yritys Työpajan Toteutus
 **Organisaation käyttöönotto- ja koulutusstrategiat**
 
 **Yrityskoulutusohjelmat:**
-- **Kehittäjien Perehdytys**: Uusien työntekijöiden orientaatio AZD:n perusteilla (2-4 viikkoa)
-- **Tiimien Taitojen Kehittäminen**: Kvartaaleittain järjestettävät työpajat nykyisille kehitystiimeille (1-2 päivää)
-- **Arkkitehtuurin Tarkastelu**: Kuukausittaiset sessiot vanhemmille insinööreille ja arkkitehdeille (4 tuntia)
-- **Johtajien Katsaukset**: Puolen päivän työpajat teknisille päätöksentekijöille
+- **Kehittäjien perehdytys**: Uusien työntekijöiden orientaatio AZD:n perusteisiin (2-4 viikkoa)
+- **Tiimien osaamisen kehittäminen**: Neljännesvuositason työpajat olemassa oleville tiimeille (1-2 päivää)
+- **Arkkitehtuurin tarkastus**: Kuukausittaiset sessiot vanhemmille insinööreille ja arkkitehdeille (4 tuntia)
+- **Johtoryhmän briiffaukset**: Johtajuustyöpajat teknisille päätöksentekijöille (puolipäivä)
 
 **Toteutustuki:**
-- **Mukautettu Työpajasuunnittelu**: Räätälöity sisältö organisaation erityistarpeisiin
-- **Pilottiohjelman Hallinta**: Rakenteellinen käyttöönotto menestysmittareilla ja palautesilmukoilla  
-- **Jatkuva Mentorointi**: Työpajan jälkeinen tuki projektin toteutukseen
-- **Yhteisön Rakentaminen**: Sisäiset Azure AI -kehittäjäyhteisöt ja tiedon jakaminen
+- **Räätälöity työpajasuunnittelu**: Sisältö organisaation tarpeiden mukaisesti
+- **Pilottiohjelman hallinta**: Rakenteellinen käyttöönotto menestysmittareiden ja palautteen keruun kanssa  
+- **Jatkuva mentorointi**: Työpajan jälkeinen tuki projektin toteutukseen
+- **Yhteisön rakentaminen**: Sisäiset Azure AI -kehittäjäyhteisöt ja tiedon jakaminen
 
 **Menestysmittarit:**
-- **Taitojen Hankinta**: Ennen/jälkeen arvioinnit teknisen osaamisen kasvun mittaamiseksi
-- **Käyttöönoton Onnistuminen**: Osallistujien prosenttiosuus, jotka onnistuvat tuotantotason sovellusten käyttöönotossa
-- **Tuottavuuden Nopeus**: Lyhentynyt perehdytysaika uusille Azure AI -projekteille
-- **Tiedon Säilyvyys**: Jälkiarvioinnit 3-6 kuukautta työpajan jälkeen
+- **Taitojen hankinta**: Ennakoiva ja jälkikäteen tehtävä arviointi teknisen osaamisen kehittymisestä
+- **Käyttöönoton onnistuminen**: Osallistujien prosenttiosuus, jotka onnistuneesti ottavat tuotantosovellukset käyttöön
+- **Tuottavuuteen pääsy**: Ohjattu aikaa lyhennetty uusissa Azure AI -projekteissa
+- **Tietämyksen säilyttäminen**: Jälkiseurantatestit 3–6 kuukautta työpajan jälkeen
 
-## 8-luvun Oppimisrakenne
+## 8 Luvun Oppimisrakenne
 
-### Luku 1: Perusteet & Nopea Aloitus (30-45 minuuttia) 🌱
-**Edellytykset**: Azure-tilaus, peruskomentoriviosaaminen  
+### Luku 1: Perusta & Nopeasti Käyntiin (30-45 minuuttia) 🌱
+**Esivaatimukset**: Azure-tilaus, perustiedot komentorivistä  
 **Vaikeustaso**: ⭐
 
 #### Mitä Opit
 - Azure Developer CLI:n perusteiden ymmärtäminen
-- AZD:n asentaminen alustallesi  
+- AZD:n asennus alustallesi  
 - Ensimmäinen onnistunut käyttöönotto
 - Keskeiset käsitteet ja termit
 
-#### Oppimisresurssit
-- [AZD:n Perusteet](docs/getting-started/azd-basics.md) - Keskeiset käsitteet
-- [Asennus & Asetus](docs/getting-started/installation.md) - Alustakohtaiset oppaat
-- [Ensimmäinen Projektisi](docs/getting-started/first-project.md) - Käytännön opas
-- [Komentojen Pikaopas](resources/cheat-sheet.md) - Nopea viite
+#### Oppimateriaalit
+- [AZD Perusteet](docs/getting-started/azd-basics.md) - Keskeiset käsitteet
+- [Asennus & Asetukset](docs/getting-started/installation.md) - Alustakohtaiset ohjeet
+- [Ensimmäinen Projekti](docs/getting-started/first-project.md) - Käytännön opas
+- [Komentojen Pikaopas](resources/cheat-sheet.md) - Nopeakatsaus
 
-#### Käytännön Lopputulos
-Onnistunut yksinkertaisen verkkosovelluksen käyttöönotto Azureen AZD:n avulla
+#### Käytännön Tulos
+Ota käyttöön yksinkertainen web-sovellus Azureen AZD:llä
 
 ---
 
-### Luku 2: Tekoälykeskeinen Kehitys (1-2 tuntia) 🤖
-**Edellytykset**: Luku 1 suoritettu  
+### Luku 2: AI-Ensimmäinen Kehitys (1-2 tuntia) 🤖
+**Esivaatimukset**: Luku 1 suoritettu  
 **Vaikeustaso**: ⭐⭐
 
 #### Mitä Opit
 - Microsoft Foundry -integraatio AZD:n kanssa
-- Tekoälypohjaisten sovellusten käyttöönotto
-- Tekoälypalveluiden konfiguroinnin ymmärtäminen
-- RAG (Retrieval-Augmented Generation) -kuviot
+- AI-pohjaisten sovellusten käyttöönotto
+- AI-palveluiden konfiguroinnin ymmärtäminen
+- RAG (Retrieval-Augmented Generation) -mallit
 
-#### Oppimisresurssit
+#### Oppimateriaalit
 - [Microsoft Foundry -integraatio](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [Tekoälymallin Käyttöönotto](docs/microsoft-foundry/ai-model-deployment.md)
-- [AI Työpajalaboratorio](docs/microsoft-foundry/ai-workshop-lab.md) - **UUSI**: Kattava 2-3 tunnin käytännön laboratorio
-- [Interaktiivinen Työpajaopas](workshop/README.md) - **UUSI**: Selaimen kautta käytettävä työpaja MkDocs-esikatselulla
-- [Microsoft Foundry -mallit](README.md#featured-microsoft-foundry-templates)
-- [Työpajan Ohjeet](../../workshop/docs/instructions) - **UUSI**: Vaiheittaiset ohjatut harjoitukset
+- [AI-mallin käyttöönotto](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Työpajalaki](docs/microsoft-foundry/ai-workshop-lab.md) - **UUSI**: Kattava 2-3 tunnin käytännön laboratorio
+- [Interaktiivinen Työpajaopas](workshop/README.md) - **UUSI**: Selaimessa toimiva työpaja MkDocs-esikatselulla
+- [Microsoft Foundry -mallipohjat](README.md#featured-microsoft-foundry-templates)
+- [Työpajaohjeet](../../workshop/docs/instructions) - **UUSI**: Vaiheittaiset ohjatut harjoitukset
 
-#### Käytännön Lopputulos
-Ota käyttöön ja konfiguroi tekoälypohjainen chat-sovellus RAG-ominaisuuksilla
+#### Käytännön Tulos
+Ota käyttöön ja konfiguroi AI-pohjainen chat-sovellus RAG-ominaisuuksilla
 
 #### Työpajan Oppimispolku (Valinnainen Parannus)
 **UUSI Interaktiivinen Kokemus**: [Täydellinen Työpajaopas](workshop/README.md)
-1. **Tutkiminen** (30 min): Mallien valinta ja arviointi
-2. **Käyttöönotto** (45 min): Tekoälymallin toiminnallisuuden käyttöönotto ja validointi  
-3. **Purkaminen** (30 min): Mallin arkkitehtuurin ja komponenttien ymmärtäminen
-4. **Konfigurointi** (30 min): Asetusten ja parametrien mukauttaminen
-5. **Mukauttaminen** (45 min): Muokkaa ja iteroi tehdäksesi siitä omasi
-6. **Purkaminen** (15 min): Resurssien siivous ja elinkaaren ymmärtäminen
+1. **Löytö** (30 min): Mallipohjan valinta ja arviointi
+2. **Käyttöönotto** (45 min): AI-mallipohjan käyttöönotto ja validointi  
+3. **Purku** (30 min): Mallipohjan arkkitehtuurin ja komponenttien ymmärtäminen
+4. **Konfigurointi** (30 min): Asetuksien ja parametrien räätälöinti
+5. **Räätälöinti** (45 min): Muokkaa ja iteroi omaksesi
+6. **Purkutoimet** (15 min): Resurssien siivous ja elinkaaren ymmärtäminen
 7. **Yhteenveto** (15 min): Seuraavat askeleet ja edistyneet oppimispolut
 
 ---
 
-### Luku 3: Konfigurointi & Autentikointi (45-60 minuuttia) ⚙️
-**Edellytykset**: Luku 1 suoritettu  
+### Luku 3: Konfigurointi & Todentaminen (45-60 minuuttia) ⚙️
+**Esivaatimukset**: Luku 1 suoritettu  
 **Vaikeustaso**: ⭐⭐
 
 #### Mitä Opit
 - Ympäristön konfigurointi ja hallinta
-- Autentikoinnin ja turvallisuuden parhaat käytännöt
-- Resurssien nimeäminen ja organisointi
-- Moniympäristön käyttöönotot
+- Todentaminen ja tietoturvan parhaat käytännöt
+- Resurssien nimeäminen ja järjestäminen
+- Moni-ympäristön käyttöönotot
 
-#### Oppimisresurssit
-- [Konfigurointiopas](docs/getting-started/configuration.md) - Ympäristön asetus
-- [Autentikointi & Turvallisuuskuviot](docs/getting-started/authsecurity.md) - Hallittu identiteetti ja Key Vault -integraatio
-- Moniympäristöesimerkit
+#### Oppimateriaalit
+- [Konfigurointiopas](docs/getting-started/configuration.md) - Ympäristön valmistelu
+- [Todentaminen & Tietoturvamallit](docs/getting-started/authsecurity.md) - Hallittu identiteetti ja Key Vault -integraatio
+- Moni-ympäristö-esimerkit
 
-#### Käytännön Lopputulos
-Hallinnoi useita ympäristöjä asianmukaisella autentikoinnilla ja turvallisuudella
+#### Käytännön Tulos
+Hallinnoi useita ympäristöjä oikeilla todentamis- ja tietoturvakäytännöillä
 
 ---
 
-### Luku 4: Infrastructure as Code & Käyttöönotto (1-1.5 tuntia) 🏗️
-**Edellytykset**: Luvut 1-3 suoritettu  
+### Luku 4: Infrastruktuuri Koodina & Käyttöönotto (1-1.5 tuntia) 🏗️
+**Esivaatimukset**: Luvut 1-3 suoritettu  
 **Vaikeustaso**: ⭐⭐⭐
 
 #### Mitä Opit
-- Edistyneet käyttöönoton kuviot
-- Infrastructure as Code Bicepillä
+- Edistyneet käyttöönoton mallit
+- Infrastruktuuri koodina Bicepillä
 - Resurssien provisiointistrategiat
-- Mukautettujen mallien luominen
+- Räätälöityjen mallipohjien luominen
 
-- Konttien käyttöön otto Azure Container Appsilla ja AZD:llä
+- Konttien käyttöönotto Azure Container Appsilla ja AZD:llä
 
-#### Oppimisresurssit
-- [Käyttöönotto-opas](docs/deployment/deployment-guide.md) - Tä
-Vahvista ja optimoi käyttöönotot ennen toteutusta
+#### Oppimateriaalit
+- [Käyttöönotto-opas](docs/deployment/deployment-guide.md) - Täydelliset työnkulut
+- [Resurssien provisiointi](docs/deployment/provisioning.md) - Resurssien hallinta
+- Kontti- ja mikropalveluesimerkit
+- [Container App -esimerkit](examples/container-app/README.md) - Nopeaan käyntiin, tuotantoon ja edistyneisiin käyttöönottoihin
 
+#### Käytännön Tulos
+Ota käyttöön monimutkaisia monipalvelusovelluksia räätälöidyllä infrastruktuurimallipohjalla
+
+---
+
+### Luku 5: Moni-Agenttinen AI-ratkaisu (2-3 tuntia) 🤖🤖
+**Esivaatimukset**: Luvut 1-2 suoritettu  
+**Vaikeustaso**: ⭐⭐⭐⭐
+
+#### Mitä Opit
+- Moni-agentti-arkkitehtuurimallit
+- Agenttien orkestrointi ja koordinointi
+- Tuotantovalmiit AI-käyttöönotot
+- Asiakas- ja varastoagenttien toteutukset
+
+- Konttipohjaisten mikropalveluiden integrointi agenttipohjaisiin ratkaisuihin
+
+#### Oppimateriaalit
+- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Täydellinen toteutus
+- [ARM Template Package](../../examples/retail-multiagent-arm-template) - Yhden napsautuksen käyttöönotto
+- Moni-agentin koordinointimallit
+- [Mikropalveluarkkitehtuurin Esimerkki](../../examples/container-app/microservices) - Palvelu palvelulle -viestintä, asynkroninen viestintä ja tuotantokäyttöönotto
+
+#### Käytännön Tulos
+Ota käyttöön ja hallinnoi tuotantovalmiita moni-agenttisia AI-ratkaisuja
+
+---
+
+### Luku 6: Ennakkoarviointi & Suunnittelu (1 tunti) 🔍
+**Esivaatimukset**: Luku 4 suoritettu  
+**Vaikeustaso**: ⭐⭐
+
+#### Mitä Opit
+- Kapasiteettisuunnittelu ja resurssien validointi
+- SKU-valintastrategiat
+- Lentotarkastukset ja automaatio
+- Kustannusten optimointisuunnittelu
+
+#### Oppimateriaalit
+- [Kapasiteettisuunnittelu](docs/pre-deployment/capacity-planning.md) - Resurssien validointi
+- [SKU-valinta](docs/pre-deployment/sku-selection.md) - Kustannustehokkaat valinnat
+- [Lentotarkastukset](docs/pre-deployment/preflight-checks.md) - Automatisoidut skriptit
+- [Application Insights -integraatio](docs/pre-deployment/application-insights.md) - Seuranta ja havaittavuus
+- [Moni-Agenttikoordinointimallit](docs/pre-deployment/coordination-patterns.md) - Agentin orkestrointistrategiat
+
+#### Käytännön Tulos
+Validoi ja optimoi käyttöönotot ennen toteutusta
 ---
 
 ### Luku 7: Vianetsintä ja virheenkorjaus (1-1,5 tuntia) 🔧
-**Edellytykset**: Mikä tahansa käyttöönottoon liittyvä luku suoritettu  
-**Vaikeustaso**: ⭐⭐
+**Esivaatimukset**: Jokainen käyttöönotto-luku suoritettu  
+**Vaativuus**: ⭐⭐
 
 #### Mitä opit
-- Järjestelmälliset virheenkorjausmenetelmät
+- Järjestelmälliset virheenkorjauksen menetelmät
 - Yleiset ongelmat ja ratkaisut
-- AI:n erityiset vianetsintämenetelmät
+- AI-spesifinen vianetsintä
 - Suorituskyvyn optimointi
 
 #### Oppimateriaalit
-- [Yleiset ongelmat](docs/troubleshooting/common-issues.md) - FAQ ja ratkaisut
-- [Virheenkorjausopas](docs/troubleshooting/debugging.md) - Vaiheittaiset strategiat
-- [AI:n erityinen vianetsintä](docs/troubleshooting/ai-troubleshooting.md) - AI-palveluiden ongelmat
+- [Yleiset ongelmat](docs/troubleshooting/common-issues.md) - Usein kysytyt kysymykset ja ratkaisut
+- [Virheenkorjausopas](docs/troubleshooting/debugging.md) - Askeleittaiset strategiat
+- [AI-spesifinen vianetsintä](docs/troubleshooting/ai-troubleshooting.md) - AI-palveluiden ongelmat
 
 #### Käytännön tulos
-Diagnosoi ja ratkaise itsenäisesti yleisiä käyttöönottoon liittyviä ongelmia
+Itsenäinen yleisten käyttöönottoon liittyvien ongelmien diagnosointi ja ratkaisu
 
 ---
 
-### Luku 8: Tuotanto- ja yrityskäytännöt (2-3 tuntia) 🏢
-**Edellytykset**: Luvut 1-4 suoritettu  
-**Vaikeustaso**: ⭐⭐⭐⭐
+### Luku 8: Tuotanto- ja yritysmallit (2-3 tuntia) 🏢
+**Esivaatimukset**: Luvut 1-4 suoritetut  
+**Vaativuus**: ⭐⭐⭐⭐
 
 #### Mitä opit
 - Tuotantokäyttöönoton strategiat
-- Yritystason tietoturvakäytännöt
-- Seuranta ja kustannusten optimointi
-- Skaalautuvuus ja hallintakäytännöt
+- Yritysturvallisuuden mallit
+- Seuranta ja kustannusoptimointi
+- Skaalautuvuus ja hallinnointi
 
-- Parhaat käytännöt tuotantokonttisovellusten käyttöönottoon (tietoturva, seuranta, kustannukset, CI/CD)
+- Parhaat käytännöt tuotantokonttiapplikaatioiden käyttöönottoon (turvallisuus, seuranta, kustannukset, CI/CD)
 
 #### Oppimateriaalit
-- [Tuotannon AI:n parhaat käytännöt](docs/microsoft-foundry/production-ai-practices.md) - Yrityskäytännöt
+- [Tuotannon AI parhaat käytännöt](docs/microsoft-foundry/production-ai-practices.md) - Yritysmallit
 - Mikropalvelut ja yritysesimerkit
 - Seuranta- ja hallintakehykset
-- [Mikropalveluarkkitehtuurin esimerkki](../../examples/container-app/microservices) - Blue-green/canary-käyttöönotto, hajautettu jäljitys ja kustannusten optimointi
+- [Mikropalveluarkkitehtuuriesimerkki](../../examples/container-app/microservices) - Blue-green/canary-käyttöönotto, hajautettu seuranta ja kustannusoptimointi
 
 #### Käytännön tulos
-Ota käyttöön yritysvalmiita sovelluksia, joissa on täydet tuotantokyvyt
+Ota käyttöön yritystason sovelluksia täysillä tuotantomahdollisuuksilla
 
 ---
 
-## Oppimisen eteneminen ja vaikeustaso
+## Oppimisen eteneminen ja vaativuustaso
 
-### Taitojen progressiivinen kehittäminen
+### Progressiivinen taitojen rakentaminen
 
-- **🌱 Aloittelijat**: Aloita luvusta 1 (Perusteet) → Luku 2 (AI-kehitys)
-- **🔧 Keskitaso**: Luvut 3-4 (Konfigurointi ja infrastruktuuri) → Luku 6 (Vahvistus)
-- **🚀 Edistynyt**: Luku 5 (Moniagenttiratkaisut) → Luku 7 (Vianetsintä)
-- **🏢 Yritystaso**: Suorita kaikki luvut, keskity lukuun 8 (Tuotantokäytännöt)
+- **🌱 Aloittelijat**: Aloita luvusta 1 (Perusta) → lukuun 2 (AI-kehitys)
+- **🔧 Keskitaso**: Luvut 3-4 (Konfigurointi & infrastruktuuri) → luku 6 (Vahvistus)
+- **🚀 Edistynyt**: Luku 5 (Moniagenttiratkaisut) → luku 7 (Vianetsintä)
+- **🏢 Yritys**: Suorita kaikki luvut, keskity lukuun 8 (Tuotantomallit)
 
-- **Konttisovellusten polku**: Luvut 4 (Konttikäyttöönotto), 5 (Mikropalveluiden integrointi), 8 (Tuotannon parhaat käytännöt)
+- **Container App -polku**: Luvut 4 (Konttien käyttöönotto), 5 (Mikropalvelujen integrointi), 8 (Tuotannon parhaat käytännöt)
 
-### Vaikeustason indikaattorit
+### Vaativuustasojen kuvaajat
 
-- **⭐ Perustaso**: Yksittäiset konseptit, ohjatut tutoriaalit, 30-60 minuuttia
+- **⭐ Perustaso**: Yksittäiset käsitteet, ohjatut harjoitukset, 30-60 minuuttia
 - **⭐⭐ Keskitaso**: Useita konsepteja, käytännön harjoituksia, 1-2 tuntia  
 - **⭐⭐⭐ Edistynyt**: Monimutkaiset arkkitehtuurit, räätälöidyt ratkaisut, 1-3 tuntia
-- **⭐⭐⭐⭐ Asiantuntija**: Tuotantojärjestelmät, yrityskäytännöt, 2-4 tuntia
+- **⭐⭐⭐⭐ Asiantuntija**: Tuotantojärjestelmät, yritysmallit, 2-4 tuntia
 
 ### Joustavat oppimispolut
 
 #### 🎯 AI-kehittäjän pikapolku (4-6 tuntia)
-1. **Luku 1**: Perusteet ja nopea aloitus (45 min)
+1. **Luku 1**: Perusta & pika-aloitus (45 min)
 2. **Luku 2**: AI-ensimmäinen kehitys (2 tuntia)  
-3. **Luku 5**: Moniagenttiset AI-ratkaisut (3 tuntia)
-4. **Luku 8**: Tuotannon AI:n parhaat käytännöt (1 tunti)
+3. **Luku 5**: Moni-agenttisen AI-ratkaisut (3 tuntia)
+4. **Luku 8**: Tuotannon AI parhaat käytännöt (1 tunti)
 
 #### 🛠️ Infrastruktuuriasiantuntijan polku (5-7 tuntia)
-1. **Luku 1**: Perusteet ja nopea aloitus (45 min)
-2. **Luku 3**: Konfigurointi ja autentikointi (1 tunti)
-3. **Luku 4**: Infrastruktuuri koodina ja käyttöönotto (1,5 tuntia)
-4. **Luku 6**: Esikäyttöönoton vahvistus ja suunnittelu (1 tunti)
-5. **Luku 7**: Vianetsintä ja virheenkorjaus (1,5 tuntia)
-6. **Luku 8**: Tuotanto- ja yrityskäytännöt (2 tuntia)
+1. **Luku 1**: Perusta & pika-aloitus (45 min)
+2. **Luku 3**: Konfigurointi & todennus (1 tunti)
+3. **Luku 4**: Infrastruktuuri koodina & käyttöönotto (1,5 tuntia)
+4. **Luku 6**: Ennakkovalidointi & suunnittelu (1 tunti)
+5. **Luku 7**: Vianetsintä & virheenkorjaus (1,5 tuntia)
+6. **Luku 8**: Tuotanto & yritysmallit (2 tuntia)
 
-#### 🎓 Täydellinen oppimismatka (8-12 tuntia)
-Kaikkien 8 luvun suorittaminen järjestyksessä käytännön harjoituksilla ja vahvistuksilla
+#### 🎓 Kokonaisvaltainen oppimismatka (8-12 tuntia)
+Suorita kaikki 8 lukua järjestyksessä käytännön harjoitusten ja validoinnin kanssa
 
 ## Kurssin suorittamisen kehys
 
-### Tiedon vahvistaminen
-- **Lukukohtaiset tarkistuspisteet**: Käytännön harjoituksia mitattavilla tuloksilla
-- **Käytännön vahvistus**: Toimivien ratkaisujen käyttöönotto jokaisessa luvussa
-- **Edistymisen seuranta**: Visuaaliset indikaattorit ja suoritusmerkit
-- **Yhteisön vahvistus**: Kokemusten jakaminen Azure Discord -kanavilla
+### Tiedon vahvistus
+- **Lukujen tarkistuspisteet**: Käytännön tehtäviä mitattavilla tuloksilla
+- **Käytännön varmistus**: Ota käyttöön toimivia ratkaisuja kussakin luvussa
+- **Etenemisen seuranta**: Visuaaliset indikaattorit ja suoritustunnukset
+- **Yhteisön validointi**: Jaa kokemuksia Azure Discord -kanavilla
 
 ### Oppimistulosten arviointi
 
-#### Luvut 1-2 (Perusteet + AI)
-- ✅ Ota käyttöön yksinkertainen verkkosovellus AZD:llä
-- ✅ Ota käyttöön AI-pohjainen chat-sovellus RAG:lla
-- ✅ Ymmärrä AZD:n ydinkonseptit ja AI-integraatio
+#### Lukujen 1-2 suoritus (Perusta + AI)
+- ✅ Ota käyttöön perussovellus AZD:n avulla
+- ✅ Ota käyttöön AI-chat-sovellus RAG:lla
+- ✅ Ymmärrä AZD:n ydinkäsitteet ja AI-integraatio
 
-#### Luvut 3-4 (Konfigurointi + Infrastruktuuri)  
-- ✅ Hallitse monen ympäristön käyttöönottoja
-- ✅ Luo räätälöityjä Bicep-infrastruktuurimalleja
-- ✅ Toteuta turvalliset autentikointikäytännöt
+#### Lukujen 3-4 suoritus (Konfigurointi + infrastruktuuri)  
+- ✅ Hallitse monen ympäristön käyttöönotot
+- ✅ Luo räätälöityjä Bicep-malleja infrastruktuuriin
+- ✅ Toteuta turvalliset todennusmallit
 
-#### Luvut 5-6 (Moniagentti + Vahvistus)
-- ✅ Ota käyttöön monimutkainen moniagenttinen AI-ratkaisu
-- ✅ Suorita kapasiteettisuunnittelu ja kustannusten optimointi
-- ✅ Toteuta automatisoitu esikäyttöönoton vahvistus
+#### Lukujen 5-6 suoritus (Moni-agentti + validointi)
+- ✅ Ota käyttöön monimutkainen moni-agenttinen AI-ratkaisu
+- ✅ Suorita kapasiteettisuunnittelua ja kustannusoptimointia
+- ✅ Toteuta automatisoitu ennakkovalidointi
 
-#### Luvut 7-8 (Vianetsintä + Tuotanto)
-- ✅ Korjaa ja ratkaise käyttöönottoon liittyvät ongelmat itsenäisesti  
-- ✅ Toteuta yritystason seuranta ja tietoturva
-- ✅ Ota käyttöön tuotantovalmiita sovelluksia hallintakäytännöillä
+#### Lukujen 7-8 suoritus (Vianetsintä + tuotanto)
+- ✅ Virheenkorjaa ja ratkaise käyttöönottovirheet itsenäisesti  
+- ✅ Toteuta yritystason seuranta ja turvallisuus
+- ✅ Ota käyttöön tuotantovalmiit sovellukset hallinnalla
 
 ### Sertifiointi ja tunnustus
-- **Kurssin suoritusmerkki**: Suorita kaikki 8 lukua käytännön vahvistuksilla
+- **Kurssin suorittamistunnus**: Suorita kaikki 8 lukua käytännöllisellä validoinnilla
 - **Yhteisön tunnustus**: Aktiivinen osallistuminen Microsoft Foundry Discordissa
-- **Ammatillinen kehitys**: Teollisuudessa relevantit AZD- ja AI-käyttöönoton taidot
-- **Urapolku**: Yritysvalmiit pilvikäyttöönoton kyvyt
+- **Ammatillinen kehitys**: Alan kannalta merkittävät AZD- ja AI-käyttöönotto-taidot
+- **Urapolun eteneminen**: Yritystason pilvikäyttöönottovalmiudet
 
 ## 🎓 Kattavat oppimistulokset
 
 ### Perustaso (Luvut 1-2)
-Perustason lukujen suorittamisen jälkeen oppijat osoittavat:
+Perustason lukujen suorittamisen jälkeen oppijat osaavat:
 
-**Tekniset taidot:**
-- Ota käyttöön yksinkertaisia verkkosovelluksia Azureen AZD-komentojen avulla
-- Konfiguroi ja ota käyttöön AI-pohjaisia chat-sovelluksia RAG-ominaisuuksilla
-- Ymmärrä AZD:n ydinkonseptit: mallit, ympäristöt, provisiointityönkulut
-- Integroi Microsoft Foundry -palvelut AZD-käyttöönottoihin
-- Navigoi Azure AI -palveluiden konfiguraatioissa ja API-päätepisteissä
+**Tekniset kyvyt:**
+- Ota käyttöön yksinkertaisia web-sovelluksia Azureen AZD-komentojen avulla
+- Konfiguroi ja ota käyttöön AI-chat-sovelluksia RAG-ominaisuuksin
+- Ymmärrä AZD:n ydinkäsitteet: mallit, ympäristöt, käyttöönoton työnkulut
+- Integroi Microsoft Foundryn palvelut AZD-käyttöönottoihin
+- Navigoi Azure AI -palveluiden asetuksissa ja API-päätepisteissä
 
 **Ammatilliset taidot:**
-- Noudata jäsenneltyjä käyttöönoton työnkulkuja johdonmukaisten tulosten saavuttamiseksi
-- Ratkaise peruskäyttöönoton ongelmia lokien ja dokumentaation avulla
-- Kommunikoi tehokkaasti pilvikäyttöönoton prosesseista
-- Sovella parhaita käytäntöjä turvalliseen AI-palveluiden integrointiin
+- Noudata rakenteellisia käyttöönoton työnkulkuja johdonmukaisiin tuloksiin
+- Tee perustason vianetsintää lokien ja dokumentaation avulla
+- Viesti tehokkaasti pilvikäyttöönoton prosesseista
+- Käytä parhaita käytäntöjä turvalliseen AI-palveluiden integraatioon
 
-**Oppimisen vahvistus:**
-- ✅ Ota onnistuneesti käyttöön `todo-nodejs-mongo`-malli
-- ✅ Ota käyttöön ja konfiguroi `azure-search-openai-demo` RAG:lla
-- ✅ Suorita interaktiiviset työpajaharjoitukset (Tutkimusvaihe)
+**Oppimisen varmennus:**
+- ✅ Ota käyttöön `todo-nodejs-mongo`-malli onnistuneesti
+- ✅ Ota käyttöön ja konfiguroi `azure-search-openai-demo` RAG:n kanssa
+- ✅ Suorita interaktiiviset työpajaharjoitukset (Discovery-vaihe)
 - ✅ Osallistu Azure Discord -yhteisön keskusteluihin
 
 ### Keskitaso (Luvut 3-4)
-Keskitasoisten lukujen suorittamisen jälkeen oppijat osoittavat:
+Keskitasoisten lukujen suorittamisen jälkeen oppijat osaavat:
 
-**Tekniset taidot:**
-- Hallitse monen ympäristön käyttöönottoja (kehitys, testaus, tuotanto)
-- Luo räätälöityjä Bicep-malleja infrastruktuuri koodina -periaatteella
-- Toteuta turvalliset autentikointikäytännöt hallitulla identiteetillä
-- Ota käyttöön monimutkaisia monipalvelusovelluksia räätälöidyillä konfiguraatioilla
-- Optimoi resurssien provisiointistrategiat kustannusten ja suorituskyvyn kannalta
+**Tekniset kyvyt:**
+- Hallitse monen ympäristön käyttöönotot (dev, staging, tuotanto)
+- Luo räätälöityjä Bicep-malleja infrastruktuurille koodina
+- Toteuta turvallisia todennusmalleja hallituilla identiteeteillä
+- Ota käyttöön monimutkaisia monipalvelusovelluksia räätälöidyillä asetuksilla
+- Optimoi resurssien provisiointistrategioita kustannusten ja suorituskyvyn suhteen
 
 **Ammatilliset taidot:**
 - Suunnittele skaalautuvia infrastruktuuriarkkitehtuureja
-- Toteuta tietoturvan parhaat käytännöt pilvikäyttöönottoihin
-- Dokumentoi infrastruktuurikäytännöt tiimityöskentelyä varten
-- Arvioi ja valitse sopivat Azure-palvelut vaatimusten mukaan
+- Toteuta pilvikäyttöönoton turvallisuuden parhaat käytännöt
+- Dokumentoi infrastruktuurimalleja tiimityötä varten
+- Arvioi ja valitse sopivat Azure-palvelut tarpeiden mukaan
 
-**Oppimisen vahvistus:**
+**Oppimisen varmennus:**
 - ✅ Konfiguroi erilliset ympäristöt ympäristökohtaisilla asetuksilla
-- ✅ Luo ja ota käyttöön räätälöity Bicep-malli monipalvelusovellukselle
-- ✅ Toteuta hallitun identiteetin autentikointi turvallista pääsyä varten
+- ✅ Luo ja ota käyttöön räätälöity Bicep-malli monipalvelusovellukseen
+- ✅ Toteuta hallitun identiteetin todennus turvalliseen pääsyyn
 - ✅ Suorita konfiguraationhallinnan harjoituksia todellisilla skenaarioilla
 
 ### Edistynyt taso (Luvut 5-6)
-Edistyneiden lukujen suorittamisen jälkeen oppijat osoittavat:
+Edistyneiden lukujen jälkeen oppijat osaavat:
 
-**Tekniset taidot:**
+**Tekniset kyvyt:**
 - Ota käyttöön ja orkestroi moniagenttisia AI-ratkaisuja koordinoiduilla työnkuluilla
-- Toteuta asiakas- ja varastoagenttiarkkitehtuurit vähittäiskaupan skenaarioihin
-- Suorita kattava kapasiteettisuunnittelu ja resurssien vahvistus
-- Toteuta automatisoitu esikäyttöönoton vahvistus ja optimointi
-- Suunnittele kustannustehokkaita SKU-valintoja työkuormavaatimusten perusteella
+- Toteuta asiakas- ja varastoagenttien arkkitehtuuri vähittäiskauppaskenaarioihin
+- Tee kattavaa kapasiteettisuunnittelua ja resurssivarmistuksia
+- Suorita automatisoitu ennakkovalidointi ja optimointi ennen käyttöönottoa
+- Suunnittele kustannustehokkaita SKU-valintoja työkuorman mukaan
 
 **Ammatilliset taidot:**
-- Arkkitehtoi monimutkaisia AI-ratkaisuja tuotantoympäristöihin
-- Johda teknisiä keskusteluja AI-käyttöönoton strategioista
+- Arkkitehtuuroi monimutkaisia AI-ratkaisuja tuotantoympäristöihin
+- Johda teknisiä keskusteluja AI-käyttöönottostrategioista
 - Mentoroi juniorikehittäjiä AZD- ja AI-käyttöönoton parhaissa käytännöissä
-- Arvioi ja suosittele AI-arkkitehtuurimalleja liiketoiminnan tarpeisiin
+- Arvioi ja suosittele AI-arkkitehtuurimalleja liiketoimintavaatimuksiin
 
-**Oppimisen vahvistus:**
-- ✅ Ota käyttöön täydellinen vähittäiskaupan moniagenttiratkaisu ARM-malleilla
-- ✅ Demonstroi agenttien koordinointi ja työnkulkujen orkestrointi
+**Oppimisen varmennus:**
+- ✅ Ota käyttöön kokonainen vähittäiskaupan moniagenttiratkaisu ARM-malleilla
+- ✅ Havainnollista agenttien koordinointia ja työnkulun orkestrointia
 - ✅ Suorita kapasiteettisuunnitteluharjoituksia todellisilla resurssirajoituksilla
-- ✅ Vahvista käyttöönoton valmius automatisoiduilla tarkistuksilla
+- ✅ Vahvista käyttöönoton valmiutta automatisoiduilla ennakko-tarkistuksilla
 
 ### Asiantuntijataso (Luvut 7-8)
-Asiantuntijatason lukujen suorittamisen jälkeen oppijat osoittavat:
+Asiantuntijatason lukujen jälkeen oppijat osaavat:
 
-**Tekniset taidot:**
-- Diagnosoi ja ratkaise monimutkaisia käyttöönottoon liittyviä ongelmia itsenäisesti
-- Toteuta yritystason tietoturvakäytännöt ja hallintakehykset
+**Tekniset kyvyt:**
+- Diagnosoi ja ratkaise monimutkaisia käyttöönoton ongelmia itsenäisesti
+- Toteuta yritystason turvallisuusmalleja ja hallintakehyksiä
 - Suunnittele kattavat seuranta- ja hälytysstrategiat
-- Optimoi tuotantokäyttöönotot skaalautuvuuden, kustannusten ja suorituskyvyn kannalta
-- Perusta CI/CD-putkia asianmukaisella testauksella ja vahvistuksella
+- Optimoi tuotantokäyttöönotot skaalautuvuuden, kustannusten ja suorituskyvyn näkökulmasta
+- Perusta CI/CD-putkia asianmukaisilla testeillä ja validoinnilla
 
 **Ammatilliset taidot:**
-- Johda yrityksen pilvitransformaatioprojekteja
+- Johda yrityksen pilvisiirtymäprojekteja
 - Suunnittele ja toteuta organisaation käyttöönoton standardeja
 - Kouluta ja mentoroi kehitystiimejä edistyneissä AZD-käytännöissä
-- Vaikuta teknisiin päätöksiin yrityksen AI-käyttöönottojen osalta
+- Vaikuta teknisiin päätöksiin yrityksen AI-käyttöönotossa
 
-**Oppimisen vahvistus:**
-- ✅ Ratkaise monimutkaisia monipalvelukäyttöönoton virheitä
-- ✅ Toteuta yritystason tietoturvakäytännöt vaatimustenmukaisuusvaatimuksilla
+**Oppimisen varmennus:**
+- ✅ Ratkaise monipalvelujen vikatilanteet monimutkaisissa käyttöönotossa
+- ✅ Toteuta yritystason turvallisuusmallit ja vaatimustenmukaisuus
 - ✅ Suunnittele ja ota käyttöön tuotannon seuranta Application Insightsilla
-- ✅ Suorita yrityksen hallintakehyksen toteutus
+- ✅ Toteuta yrityksen hallintakehys onnistuneesti
 
-## 🎯 Kurssin suorittamisen sertifiointi
+## 🎯 Kurssin suoritustodistus
 
-### Edistymisen seurantakehys
-Seuraa oppimisen etenemistä jäsenneltyjen tarkistuspisteiden avulla:
+### Etenemisen seurannan kehys
+Seuraa oppimisesi etenemistä rakenteellisten tarkastuspisteiden avulla:
 
-- [ ] **Luku 1**: Perusteet ja nopea aloitus ✅
+- [ ] **Luku 1**: Perusta & pika-aloitus ✅
 - [ ] **Luku 2**: AI-ensimmäinen kehitys ✅  
-- [ ] **Luku 3**: Konfigurointi ja autentikointi ✅
-- [ ] **Luku 4**: Infrastruktuuri koodina ja käyttöönotto ✅
+- [ ] **Luku 3**: Konfigurointi & todennus ✅
+- [ ] **Luku 4**: Infrastruktuuri koodina & käyttöönotto ✅
 - [ ] **Luku 5**: Moniagenttiset AI-ratkaisut ✅
-- [ ] **Luku 6**: Esikäyttöönoton vahvistus ja suunnittelu ✅
-- [ ] **Luku 7**: Vianetsintä ja virheenkorjaus ✅
-- [ ] **Luku 8**: Tuotanto- ja yrityskäytännöt ✅
+- [ ] **Luku 6**: Ennakkovalidointi & suunnittelu ✅
+- [ ] **Luku 7**: Vianetsintä & virheenkorjaus ✅
+- [ ] **Luku 8**: Tuotanto & yritysmallit ✅
 
-### Vahvistusprosessi
-Jokaisen luvun suorittamisen jälkeen vahvista tietosi seuraavasti:
+### Varmistusprosessi
+Suoritettuasi kunkin luvun varmista osaamisesi seuraavasti:
 
-1. **Käytännön harjoitusten suorittaminen**: Ota käyttöön toimivia ratkaisuja jokaisessa luvussa
-2. **Tiedon arviointi**: Tarkista FAQ-osat ja suorita itsearvioinnit
+1. **Käytännön tehtävän suoritus**: Ota käyttöön toimivat ratkaisut kussakin luvussa
+2. **Tiedon arviointi**: Tarkastele FAQ-osioita ja tee itsearvioinnit
 3. **Yhteisön osallistuminen**: Jaa kokemuksia ja saa palautetta Azure Discordissa
-4. **Portfolion kehittäminen**: Dokumentoi käyttöönotot ja opitut asiat
-5. **Vertaisarviointi**: Tee yhteistyötä muiden oppijoiden kanssa monimutkaisissa skenaarioissa
+4. **Portfolion kehitys**: Dokumentoi käyttöönotot ja opit
+5. **Vertaisarviointi**: Tee yhteistyötä muiden oppijoiden kanssa monimutkaisissa tilanteissa
 
 ### Kurssin suorittamisen hyödyt
-Kaikkien lukujen suorittamisen ja vahvistuksen jälkeen valmistuneet saavat:
+Suoritettuasi kaikki luvut ja varmennukset sinulla on:
 
 **Tekninen asiantuntemus:**
-- **Tuotantokokemus**: Käyttöönotettu todellisia AI-sovelluksia Azure-ympäristöihin
-- **Ammatilliset taidot**: Yritysvalmiit käyttöönotto- ja vianetsintäkyvyt  
+- **Tuotantokokemus**: Otonut käyttöön todellisia AI-sovelluksia Azure-ympäristöissä
+- **Ammatilliset taidot**: Yritystason käyttöönotto- ja virheenkorjausvalmiudet  
 - **Arkkitehtuuriosaaminen**: Moniagenttiset AI-ratkaisut ja monimutkaiset infrastruktuurimallit
-- **Vianetsintämestaruus**: Itsenäinen käyttöönotto- ja konfigurointiongelmien ratkaisu
+- **Vianetsintäosaaminen**: Käyttöönotto- ja konfigurointiongelmien itsenäinen ratkaisu
 
-**Ammatillinen kehitys:**
-- **Teollisuuden tunnustus**: Todistettavat taidot korkean kysynnän AZD- ja AI-käyttöönottoalueilla
-- **Urapolku**: Pätevyys pilviarkkitehdin ja AI-käyttöönoton asiantuntijan rooleihin
-- **Yhteisön johtajuus**: Aktiivinen jäsenyys Azure-kehittäjä- ja AI-yhteisöissä
-- **Jatkuva oppiminen**: Perusta Microsoft Foundry -erikoistumisen jatkamiselle
+**Ammatillinen kehittyminen:**
+- **Alan tunnustus**: Vahvistetut taidot kysytyissä AZD- ja AI-käyttöönoton osa-alueissa
+- **Urapolun edistyminen**: Pätevyyksiä pilviarkkitehdin ja AI-käyttöönottoasiantuntijan rooleihin
+- **Yhteisöjohtajuus**: Aktiivinen jäsenyys Azure-kehittäjä- ja AI-yhteisöissä
+- **Jatkuva oppiminen**: Perusta edistyneemmille Microsoft Foundry -spesialisoinneille
 
-**Portfolio-omaisuudet:**
-- **Käyttöönotetut ratkaisut**: Toimivia esimerkkejä AI-sovelluksista ja infrastruktuurimalleista
-- **Dokumentaatio**: Kattavat käyttöönotto-oppaat ja vianetsintämenettelyt  
-- **Yhteisön panokset**: Keskustelut, esimerkit ja parannukset jaettu Azure-yhteisössä
-- **Ammatillinen verkosto**: Yhteydet Azure-asiantuntijoihin ja AI-käyttöönoton ammattilaisiin
+**Portfolion sisältö:**
+- **Käyttöönotetut ratkaisut**: Toimivat AI-sovellusesimerkit ja infrastruktuurimallit
+- **Dokumentaatio**: Kattavat käyttöönotto-oppaat ja vianetsintäohjeet  
+- **Yhteisöpanokset**: Keskustelut, esimerkit ja parannukset Azure-yhteisölle
+- **Ammatillinen verkosto**: Yhteydet Azure-asiantuntijoihin ja AI-käyttöönoton harjoittajiin
 
-### Jatkokurssin oppimispolku
-Valmistuneet ovat valmiita edistyneeseen erikoistumiseen:
-- **Microsoft Foundry -asiantuntija**: Syvä erikoistuminen AI-mallien käyttöönottoon ja orkestrointiin
-- **Pilviarkkitehtuurin johtajuus**: Yritystason käyttöönoton suunnittelu ja hallinta
-- **Kehittäjäyhteisön johtajuus
+### Kurssin jälkeinen oppimispolku
+Valmistuneet ovat valmiita edistyneisiin erikoistumisiin liittyen:
+- **Microsoft Foundry Expert**: Syvä erikoistuminen AI-mallien käyttöönottoon ja orkestrointiin
+- **Pilviarkkitehtuurin johtajuus**: Yritystason käyttöönoton suunnittelu ja hallinnointi
+- **Kehittäjäyhteisön johtajuus**: Azure-esimerkkien ja yhteisöresurssien tuottaminen
+- **Yrityskoulutus**: AZD- ja AI-käyttöönotto-osaamisen kouluttaminen organisaatioissa
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattikäännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen omalla kielellä on virallinen lähde. Tärkeiden tietojen kohdalla suosittelemme ammattimaista ihmiskäännöstä. Emme ole vastuussa mahdollisista väärinymmärryksistä tai tulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
