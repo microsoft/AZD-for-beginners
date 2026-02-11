@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T23:40:42+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "ms"
-}
--->
-# 4. Konfigurasi Template
+# 4. Konfigurasikan Template
 
-!!! tip "MENJELANG AKHIR MODUL INI ANDA AKAN DAPAT"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN BOLEH"
 
     - [ ] Memahami tujuan `azure.yaml`
     - [ ] Memahami struktur `azure.yaml`
-    - [ ] Memahami nilai `hooks` dalam kitaran hayat azd
-    - [ ] **Lab 3:** 
+    - [ ] Memahami nilai `hooks` kitar hayat azd
+    - [ ] **Makmal 4:** Terokai dan ubah suai pembolehubah persekitaran
 
 ---
 
 !!! prompt "Apakah fungsi fail `azure.yaml`? Gunakan codefence dan terangkan baris demi baris"
 
-      Fail `azure.yaml` adalah **fail konfigurasi untuk Azure Developer CLI (azd)**. Ia menentukan bagaimana aplikasi anda harus diterapkan ke Azure, termasuk infrastruktur, perkhidmatan, hooks penerapan, dan pembolehubah persekitaran.
+      Fail `azure.yaml` ialah **fail konfigurasi untuk Azure Developer CLI (azd)**. Ia mentakrifkan bagaimana aplikasi anda harus dideploy ke Azure, termasuk infrastruktur, perkhidmatan, hook deployment, dan pembolehubah persekitaran.
 
 ---
 
 ## 1. Tujuan dan Fungsi
 
-Fail `azure.yaml` ini berfungsi sebagai **pelan penerapan** untuk aplikasi ejen AI yang:
+Fail `azure.yaml` ini berfungsi sebagai **cetak biru deployment** untuk aplikasi ejen AI yang:
 
-1. **Mengesahkan persekitaran** sebelum penerapan
+1. **Memastikan persekitaran** sebelum deployment
 2. **Menyediakan perkhidmatan Azure AI** (AI Hub, AI Project, Search, dll.)
-3. **Menerapkan aplikasi Python** ke Azure Container Apps
+3. **Mendeploy aplikasi Python** ke Azure Container Apps
 4. **Mengkonfigurasi model AI** untuk fungsi chat dan embedding
-5. **Menetapkan pemantauan dan penjejakan** untuk aplikasi AI
-6. **Menguruskan senario projek AI Azure** yang baru dan sedia ada
+5. **Menyediakan pemantauan dan penjejakan** untuk aplikasi AI
+6. **Mengendalikan situasi projek Azure AI baru dan sedia ada**
 
-Fail ini membolehkan **penerapan satu perintah** (`azd up`) untuk penyelesaian ejen AI lengkap dengan pengesahan, penyediaan, dan konfigurasi selepas penerapan yang betul.
+Fail ini membolehkan **deployment satu arahan** (`azd up`) bagi penyelesaian ejen AI lengkap dengan pengesahan, penyediaan, dan konfigurasi selepas deployment yang betul.
 
-??? info "Klik Untuk Lihat: `azure.yaml`"
+??? info "Kembangkan Untuk Lihat: `azure.yaml`"
 
-      Fail `azure.yaml` menentukan bagaimana Azure Developer CLI harus menerapkan dan menguruskan aplikasi Ejen AI ini di Azure. Mari kita pecahkan baris demi baris.
+      Fail `azure.yaml` mentakrifkan bagaimana Azure Developer CLI harus mendeploy dan mengurus aplikasi Ejen AI ini dalam Azure. Mari kita huraikan baris demi baris.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: adakah kita memerlukan hooks? 
-      # TODO: adakah kita memerlukan semua pembolehubah?
+      # TODO: adakah kita perlukan hooks? 
+      # TODO: adakah kita perlukan semua pembolehubah ini?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -137,7 +128,7 @@ Fail ini membolehkan **penerapan satu perintah** (`azd up`) untuk penyelesaian e
 
 ## 2. Memecahkan Fail
 
-Mari kita lalui fail ini bahagian demi bahagian, untuk memahami apa yang ia lakukan - dan mengapa.
+Mari kita lalui bahagian fail ini satu persatu, untuk memahami fungsinya - dan sebabnya.
 
 ### 2.1 **Header dan Skema (1-3)**
 
@@ -145,7 +136,7 @@ Mari kita lalui fail ini bahagian demi bahagian, untuk memahami apa yang ia laku
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Baris 1**: Memberikan validasi skema pelayan bahasa YAML untuk sokongan IDE dan IntelliSense
+- **Baris 1**: Menyediakan skema pengesahan YAML language server untuk sokongan IDE dan IntelliSense
 
 ### 2.2 Metadata Projek (5-10)
 
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Baris 5**: Menentukan nama projek yang digunakan oleh Azure Developer CLI
-- **Baris 6-7**: Menyatakan bahawa ini berdasarkan versi template 1.0.2
+- **Baris 5**: Mentakrifkan nama projek yang digunakan oleh Azure Developer CLI
+- **Baris 6-7**: Menyatakan ini berdasarkan template versi 1.0.2
 - **Baris 8-9**: Memerlukan versi Azure Developer CLI 1.14.0 atau lebih tinggi
 
-### 2.3 Hooks Penerapan (11-40)
+### 2.3 Hooks Deploy (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Baris 11-20**: **Hook pra-penerapan** - dijalankan sebelum `azd up`
+- **Baris 11-20**: **Hook pra-deployment** - dijalankan sebelum `azd up`
 
-      - Pada Unix/Linux: Menjadikan skrip validasi boleh dilaksanakan dan menjalankannya
-      - Pada Windows: Menjalankan skrip validasi PowerShell
-      - Kedua-duanya interaktif dan akan menghentikan penerapan jika gagal
+      - Pada Unix/Linux: Jadikan skrip pengesahan boleh dijalankan dan jalankan ia
+      - Pada Windows: Jalankan skrip PowerShell pengesahan
+      - Kedua-duanya interaktif dan akan menghentikan deployment jika gagal
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -199,8 +190,8 @@ hooks:
 ```
 - **Baris 21-30**: **Hook selepas penyediaan** - dijalankan selepas sumber Azure dibuat
 
-  - Menjalankan skrip penulisan pembolehubah persekitaran
-  - Meneruskan penerapan walaupun skrip ini gagal (`continueOnError: true`)
+  - Melaksanakan skrip menulis pembolehubah persekitaran
+  - Teruskan deployment walaupun skrip ini gagal (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Baris 31-40**: **Hook selepas penerapan** - dijalankan selepas penerapan aplikasi
+- **Baris 31-40**: **Hook selepas deployment** - dijalankan selepas aplikasi ditempatkan
 
-  - Menjalankan skrip penyediaan akhir
-  - Meneruskan walaupun skrip gagal
+  - Melaksanakan skrip penyediaan akhir
+  - Teruskan walaupun skrip gagal
 
 ### 2.4 Konfigurasi Perkhidmatan (41-48)
 
-Ini mengkonfigurasi perkhidmatan aplikasi yang anda terapkan.
+Ini mengkonfigurasi perkhidmatan aplikasi yang anda deploy.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,14 +226,14 @@ services:
       remoteBuild: true
 ```
 
-- **Baris 42**: Menentukan perkhidmatan bernama "api_and_frontend"
+- **Baris 42**: Mentakrifkan perkhidmatan bernama "api_and_frontend"
 - **Baris 43**: Menunjuk ke direktori `./src` untuk kod sumber
-- **Baris 44**: Menentukan Python sebagai bahasa pengaturcaraan
+- **Baris 44**: Menyatakan Python sebagai bahasa pengaturcaraan
 - **Baris 45**: Menggunakan Azure Container Apps sebagai platform hosting
 - **Baris 46-48**: Konfigurasi Docker
 
       - Menggunakan "api_and_frontend" sebagai nama imej
-      - Membina imej Docker secara jauh di Azure (bukan secara tempatan)
+      - Membina imej Docker secara jauh dalam Azure (bukan secara lokal)
 
 ### 2.5 Pembolehubah Pipeline (49-76)
 
@@ -287,14 +278,14 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Bahagian ini menentukan pembolehubah persekitaran yang digunakan **semasa penerapan**, disusun mengikut kategori:
+Bahagian ini mentakrifkan pembolehubah persekitaran yang digunakan **semasa deployment**, disusun mengikut kategori:
 
 - **Nama Sumber Azure (Baris 51-60)**:
-      - Nama sumber perkhidmatan Azure teras seperti Resource Group, AI Hub, AI Project, dll.- 
-- **Feature Flags (Baris 61-63)**:
-      - Pembolehubah boolean untuk mengaktifkan/mematikan perkhidmatan Azure tertentu
+      - Nama sumber perkhidmatan Azure teras seperti Kumpulan Sumber, AI Hub, AI Project, dll.- 
+- **Bendera Ciri (Baris 61-63)**:
+      - Pembolehubah boolean untuk menghidupkan/mematikan perkhidmatan Azure tertentu
 - **Konfigurasi Ejen AI (Baris 64-71)**:
-      - Konfigurasi untuk ejen AI utama termasuk nama, ID, tetapan penerapan, butiran model- 
+      - Konfigurasi untuk ejen AI utama termasuk nama, ID, tetapan deployment, butiran model- 
 - **Konfigurasi Embedding AI (Baris 72-79)**:
       - Konfigurasi untuk model embedding yang digunakan untuk carian vektor
 - **Carian dan Pemantauan (Baris 80-84)**:
@@ -302,91 +293,95 @@ Bahagian ini menentukan pembolehubah persekitaran yang digunakan **semasa penera
 
 ---
 
-## 3. Ketahui Pembolehubah Persekitaran
-Pembolehubah persekitaran berikut mengawal konfigurasi dan tingkah laku penerapan anda, disusun mengikut tujuan utama mereka. Kebanyakan pembolehubah mempunyai nilai lalai yang munasabah, tetapi anda boleh menyesuaikannya untuk memenuhi keperluan khusus anda atau sumber Azure sedia ada.
+## 3. Mengenal Pembolehubah Persekitaran
+Pembolehubah persekitaran berikut mengawal konfigurasi dan tingkah laku deployment anda, disusun mengikut tujuan utamanya. Kebanyakan pembolehubah mempunyai nilai lalai yang munasabah, tetapi anda boleh menyesuaikannya mengikut keperluan khusus anda atau sumber Azure sedia ada.
 
 ### 3.1 Pembolehubah Diperlukan 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Konfigurasi Teras Azure
+AZURE_ENV_NAME                    # Nama persekitaran (digunakan dalam penamaan sumber)
+AZURE_LOCATION                    # Wilayah penyebaran
+AZURE_SUBSCRIPTION_ID             # Langganan sasaran
+AZURE_RESOURCE_GROUP              # Nama kumpulan sumber
+AZURE_PRINCIPAL_ID                # Prinsipal pengguna untuk RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Nama Sumber (Dihasilkan secara automatik jika tidak dinyatakan)
+AZURE_AIHUB_NAME                  # Nama hub Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Nama projek AI
+AZURE_AISERVICES_NAME             # Nama akaun perkhidmatan AI
+AZURE_STORAGE_ACCOUNT_NAME        # Nama akaun storan
+AZURE_CONTAINER_REGISTRY_NAME     # Nama registry bekas
+AZURE_KEYVAULT_NAME               # Nama Key Vault (jika digunakan)
 ```
 
 ### 3.2 Konfigurasi Model 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Konfigurasi Model Sembang
+AZURE_AI_AGENT_MODEL_NAME         # Lalai: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Lalai: OpenAI (atau Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Lalai: terkini tersedia
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Nama penempatan untuk model sembang
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Lalai: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Lalai: 80 (ribu TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Konfigurasi Model Penanaman
+AZURE_AI_EMBED_MODEL_NAME         # Lalai: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Lalai: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Lalai: terkini tersedia
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Nama penempatan untuk penanaman
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Lalai: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Lalai: 50 (ribu TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Konfigurasi Ejen
+AZURE_AI_AGENT_NAME               # Nama paparan ejen
+AZURE_EXISTING_AGENT_ID           # Gunakan ejen sedia ada (pilihan)
 ```
 
 ### 3.3 Togol Ciri
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Perkhidmatan Pilihan
+USE_APPLICATION_INSIGHTS         # Lalai: benar
+USE_AZURE_AI_SEARCH_SERVICE      # Lalai: salah
+USE_CONTAINER_REGISTRY           # Lalai: benar
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Pemantauan dan Penjejakan
+ENABLE_AZURE_MONITOR_TRACING     # Lalai: salah
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Lalai: salah
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Konfigurasi Carian
+AZURE_AI_SEARCH_INDEX_NAME       # Nama indeks carian
+AZURE_SEARCH_SERVICE_NAME        # Nama perkhidmatan carian
 ```
 
 ### 3.4 Konfigurasi Projek AI 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Gunakan Sumber Sedia Ada
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ID sumber penuh bagi projek AI sedia ada
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL titik akhir bagi projek sedia ada
 ```
 
 ### 3.5 Semak Pembolehubah Anda
 
-Gunakan Azure Developer CLI untuk melihat dan menguruskan pembolehubah persekitaran anda:
+Gunakan Azure Developer CLI untuk melihat dan mengurus pembolehubah persekitaran anda:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Lihat semua pemboleh ubah persekitaran untuk persekitaran semasa
 azd env get-values
 
-# Get a specific environment variable
+# Dapatkan pemboleh ubah persekitaran tertentu
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Tetapkan pemboleh ubah persekitaran
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Tetapkan beberapa pemboleh ubah dari fail .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

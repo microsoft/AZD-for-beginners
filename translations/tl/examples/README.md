@@ -1,66 +1,57 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-22T10:04:10+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "tl"
-}
--->
-# Mga Halimbawa - Praktikal na AZD Templates at Konfigurasyon
+# Mga Halimbawa - Praktikal na Mga Template at Kumpigurasyon ng AZD
 
 **Pag-aaral sa Pamamagitan ng Halimbawa - Inayos ayon sa Kabanata**
-- **📚 Pahina ng Kurso**: [AZD Para sa Mga Baguhan](../README.md)
-- **📖 Pagkakaugnay ng Kabanata**: Mga halimbawa na inayos ayon sa antas ng kahirapan
-- **🚀 Lokal na Halimbawa**: [Retail Multi-Agent Solution](retail-scenario.md)
-- **🤖 Panlabas na AI Halimbawa**: Mga link sa mga repository ng Azure Samples
+- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../README.md)
+- **📖 Pagmamapa ng Kabanata**: Mga halimbawa inayos ayon sa antas ng pagkatuto
+- **🚀 Lokal na Halimbawa**: [Solusyon na Retail Multi-Agent](retail-scenario.md)
+- **🤖 Mga Panlabas na Halimbawa ng AI**: Mga link sa mga repositoryo ng Azure Samples
 
-> **📍 MAHALAGA: Lokal vs Panlabas na Halimbawa**  
-> Ang repositoryong ito ay naglalaman ng **4 na kumpletong lokal na halimbawa** na may buong implementasyon:  
+> **📍 MAHALAGA: Lokal vs Panlabas na Mga Halimbawa**  
+> Naglalaman ang repositoryong ito ng **4 na kumpletong lokal na halimbawa** na may buong implementasyon:  
 > - **Azure OpenAI Chat** (GPT-4 deployment na may chat interface)  
 > - **Container Apps** (Simpleng Flask API + Microservices)  
 > - **Database App** (Web + SQL Database)  
-> - **Retail Multi-Agent** (Enterprise AI Solution)  
+> - **Retail Multi-Agent** (Solusyong AI para sa Enterprise)  
 >  
-> Ang karagdagang mga halimbawa ay **panlabas na mga sanggunian** sa mga repository ng Azure-Samples na maaari mong i-clone.
+> Ang karagdagang mga halimbawa ay **panlabas na sanggunian** sa mga repositoryo ng Azure-Samples na maaari mong i-clone.
 
 ## Panimula
 
-Ang direktoryong ito ay nagbibigay ng mga praktikal na halimbawa at sanggunian upang matulungan kang matutunan ang Azure Developer CLI sa pamamagitan ng aktwal na pagsasanay. Ang Retail Multi-Agent scenario ay isang kumpleto, handa-sa-produksyon na implementasyon na kasama sa repositoryong ito. Ang karagdagang mga halimbawa ay tumutukoy sa mga opisyal na Azure Samples na nagpapakita ng iba't ibang AZD patterns.
+Nagbibigay ang direktoryong ito ng praktikal na mga halimbawa at sanggunian upang tulungan kang matutunan ang Azure Developer CLI sa pamamagitan ng hands-on na pagsasanay. Ang Retail Multi-Agent na senaryo ay isang kumpleto, production-ready na implementasyon na kasama sa repositoryong ito. Ang karagdagang mga halimbawa ay tumutukoy sa opisyal na Azure Samples na nagpapakita ng iba't ibang pattern ng AZD.
 
-### Alamat ng Antas ng Kahirapan
+### Legend ng Antas ng Kahirapan
 
-- ⭐ **Baguhan** - Mga pangunahing konsepto, iisang serbisyo, 15-30 minuto
-- ⭐⭐ **Panggitna** - Maramihang serbisyo, integrasyon ng database, 30-60 minuto
-- ⭐⭐⭐ **Mataas na Antas** - Kumplikadong arkitektura, integrasyon ng AI, 1-2 oras
-- ⭐⭐⭐⭐ **Dalubhasa** - Handa-sa-produksyon, enterprise patterns, 2+ oras
+- ⭐ **Nagsisimula** - Mga pangunahing konsepto, isang serbisyo lang, 15-30 minuto
+- ⭐⭐ **Intermediate** - Maramihang serbisyo, integrasyon ng database, 30-60 minuto
+- ⭐⭐⭐ **Advanced** - Komplikadong arkitektura, AI integrasyon, 1-2 oras
+- ⭐⭐⭐⭐ **Eksperto** - Production-ready, enterprise patterns, 2+ oras
 
 ## 🎯 Ano ang Nasa Repositoryong Ito
 
-### ✅ Lokal na Implementasyon (Handa nang Gamitin)
+### ✅ Lokal na Implementasyon (Handang Gamitin)
 
-#### [Azure OpenAI Chat Application](azure-openai-chat/README.md) 🆕
-**Kumpletong GPT-4 deployment na may kasamang chat interface sa repo na ito**
+#### [Aplikasyon ng Azure OpenAI Chat](azure-openai-chat/README.md) 🆕
+**Kumpletong deployment ng GPT-4 na may chat interface na kasama sa repo na ito**
 
 - **Lokasyon:** `examples/azure-openai-chat/`
-- **Kahirapan:** ⭐⭐ (Panggitna)
-- **Kasama:**
+- **Kompleksidad:** ⭐⭐ (Intermediate)
+- **Kasama ang:**
   - Kumpletong Azure OpenAI deployment (GPT-4)
-  - Python command-line chat interface
-  - Key Vault integration para sa secure na API keys
-  - Bicep infrastructure templates
+  - Python command-line na chat interface
+  - Integrasyon sa Key Vault para sa secure na API keys
+  - Mga Bicep template para sa imprastruktura
   - Pagsubaybay sa paggamit ng token at gastos
-  - Rate limiting at error handling
+  - Paglilimita ng rate at paghawak ng mga error
 
 **Mabilis na Simula:**
 ```bash
-# Mag-navigate sa halimbawa
+# Pumunta sa halimbawa
 cd examples/azure-openai-chat
 
 # I-deploy ang lahat
 azd up
 
-# I-install ang mga dependency at magsimulang makipag-chat
+# I-install ang mga dependencies at magsimulang makipag-chat
 pip install -r src/requirements.txt
 python src/chat.py
 ```
@@ -68,15 +59,15 @@ python src/chat.py
 **Mga Teknolohiya:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
 
 #### [Mga Halimbawa ng Container App](container-app/README.md) 🆕
-**Komprehensibong halimbawa ng container deployment na kasama sa repo na ito**
+**Komprehensibong mga halimbawa ng deployment ng container ay kasama sa repo na ito**
 
 - **Lokasyon:** `examples/container-app/`
-- **Kahirapan:** ⭐-⭐⭐⭐⭐ (Baguhan hanggang Dalubhasa)
-- **Kasama:**
-  - [Master Guide](container-app/README.md) - Kompletong overview ng container deployments
-  - [Simpleng Flask API](../../../examples/container-app/simple-flask-api) - Pangunahing REST API na halimbawa
-  - [Microservices Architecture](../../../examples/container-app/microservices) - Handa-sa-produksyon na multi-service deployment
-  - Mabilis na Simula, Produksyon, at Advanced na patterns
+- **Kompleksidad:** ⭐-⭐⭐⭐⭐ (Mula Nagsisimula hanggang Advanced)
+- **Kasama ang:**
+  - [Pangunahing Gabay](container-app/README.md) - Kumpletong overview ng mga deployment ng container
+  - [Simpleng Flask API](../../../examples/container-app/simple-flask-api) - Halimbawang basic na REST API
+  - [Arkitektura ng Microservices](../../../examples/container-app/microservices) - Production-ready na multi-service deployment
+  - Mabilis na Simula, Production, at Advanced na mga pattern
   - Monitoring, seguridad, at pag-optimize ng gastos
 
 **Mabilis na Simula:**
@@ -84,27 +75,27 @@ python src/chat.py
 # Tingnan ang pangunahing gabay
 cd examples/container-app
 
-# I-deploy ang simpleng Flask API
+# I-deploy ang simpleng Flask na API
 cd simple-flask-api
 azd up
 
-# I-deploy ang halimbawa ng microservices
+# I-deploy ang halimbawa ng mga microservices
 cd ../microservices
 azd up
 ```
 
 **Mga Teknolohiya:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
-**Kumpletong handa-sa-produksyon na implementasyon na kasama sa repo na ito**
+#### [Solusyon na Retail Multi-Agent](retail-scenario.md) 🆕
+**Kumpletong production-ready na implementasyon na kasama sa repo na ito**
 
 - **Lokasyon:** `examples/retail-multiagent-arm-template/`
-- **Kahirapan:** ⭐⭐⭐⭐ (Mataas na Antas)
-- **Kasama:**
+- **Kompleksidad:** ⭐⭐⭐⭐ (Advanced)
+- **Kasama ang:**
   - Kumpletong ARM deployment template
-  - Multi-agent architecture (Customer + Inventory)
-  - Azure OpenAI integration
-  - AI Search gamit ang RAG
+  - Multi-agent na arkitektura (Customer + Inventory)
+  - Integrasyon ng Azure OpenAI
+  - AI Search na may RAG
   - Komprehensibong monitoring
   - One-click deployment script
 
@@ -120,11 +111,11 @@ cd examples/retail-multiagent-arm-template
 
 ## 🔗 Panlabas na Azure Samples (I-clone para Gamitin)
 
-Ang mga sumusunod na halimbawa ay pinapanatili sa mga opisyal na repository ng Azure-Samples. I-clone ang mga ito upang tuklasin ang iba't ibang AZD patterns:
+Ang mga sumusunod na halimbawa ay pinangangasiwaan sa opisyal na mga repositoryo ng Azure-Samples. I-clone ang mga ito upang tuklasin ang iba't ibang pattern ng AZD:
 
-### Simpleng Aplikasyon (Kabanata 1-2)
+### Mga Simpleng Aplikasyon (Kabanata 1-2)
 
-| Template | Repository | Kahirapan | Mga Serbisyo |
+| Template | Repository | Kompleksidad | Mga Serbisyo |
 |:---------|:-----------|:-----------|:---------|
 | **Python Flask API** | [Lokal: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
 | **Microservices** | [Lokal: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Multi-service, Service Bus, Cosmos DB, SQL |
@@ -144,42 +135,42 @@ azd up
 
 ### Mga Halimbawa ng AI Application (Kabanata 2, 5, 8)
 
-| Template | Repository | Kahirapan | Pokus |
+| Template | Repository | Kompleksidad | Pokus |
 |:---------|:-----------|:-----------|:------|
 | **Azure OpenAI Chat** | [Lokal: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 deployment |
-| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Pangunahing AI chat |
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Basic AI chat |
 | **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent framework |
 | **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG pattern |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Enterprise AI |
 
-### Database at Advanced na Patterns (Kabanata 3-8)
+### Database & Mga Advanced na Pattern (Kabanata 3-8)
 
-| Template | Repository | Kahirapan | Pokus |
+| Template | Repository | Kompleksidad | Pokus |
 |:---------|:-----------|:-----------|:------|
-| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Integrasyon ng database |
+| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Database integration |
 | **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
 | **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Multi-service |
 | **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
-## Mga Layunin sa Pag-aaral
+## Mga Layunin sa Pagkatuto
 
-Sa pamamagitan ng pagtatrabaho sa mga halimbawang ito, ikaw ay:
-- Magpapraktis ng Azure Developer CLI workflows gamit ang makatotohanang application scenarios
-- Mauunawaan ang iba't ibang application architectures at ang kanilang azd implementations
-- Magiging bihasa sa Infrastructure as Code patterns para sa iba't ibang Azure services
-- Mag-aaplay ng configuration management at environment-specific deployment strategies
-- Magpapatupad ng monitoring, seguridad, at scaling patterns sa praktikal na konteksto
-- Magkakaroon ng karanasan sa troubleshooting at debugging ng mga aktwal na deployment scenarios
+Sa pamamagitan ng pagtrabaho sa mga halimbawang ito, ikaw ay:
+- Magsanay ng mga workflow ng Azure Developer CLI gamit ang mga realistic na senaryo ng aplikasyon
+- Mauunawaan ang iba't ibang arkitektura ng aplikasyon at ang kanilang mga azd na implementasyon
+- Mamahusay sa Infrastructure as Code na mga pattern para sa iba't ibang Azure services
+- Mag-aapply ng configuration management at mga deployment strategy na nakalaan sa iba't ibang environment
+- Magpapatupad ng monitoring, seguridad, at scaling na mga pattern sa praktikal na konteksto
+- Makakakuha ng karanasan sa troubleshooting at pag-debug ng mga totoong senaryo ng deployment
 
-## Mga Resulta ng Pag-aaral
+## Mga Kinalabasan ng Pagkatuto
 
-Pagkatapos makumpleto ang mga halimbawang ito, ikaw ay:
-- Makakapag-deploy ng iba't ibang uri ng aplikasyon gamit ang Azure Developer CLI nang may kumpiyansa
-- Makakapag-adapt ng mga ibinigay na template sa iyong sariling application requirements
-- Makakapagdisenyo at makakapag-implement ng custom infrastructure patterns gamit ang Bicep
-- Makakapag-configure ng kumplikadong multi-service applications na may tamang dependencies
-- Makakapag-apply ng security, monitoring, at performance best practices sa mga aktwal na scenario
-- Makakapag-troubleshoot at makakapag-optimize ng deployments batay sa praktikal na karanasan
+Sa pagkumpleto ng mga halimbawang ito, magagawa mong:
+- Mag-deploy ng iba't ibang uri ng aplikasyon gamit ang Azure Developer CLI nang may kumpiyansa
+- Iangkop ang mga ibinigay na template sa iyong sariling mga kahilingan ng aplikasyon
+- Magdisenyo at magpatupad ng custom na mga pattern ng imprastruktura gamit ang Bicep
+- I-configure ang kumplikadong multi-service na mga aplikasyon na may tamang dependencies
+- Mag-apply ng mga best practice sa seguridad, monitoring, at performance sa mga totoong senaryo
+- Mag-troubleshoot at mag-optimize ng mga deployment batay sa praktikal na karanasan
 
 ## Istruktura ng Direktoryo
 
@@ -197,120 +188,120 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Mabilis na Halimbawa ng Simula
+## Mga Mabilis na Halimbawa para Makapagsimula
 
-> **💡 Baguhan sa AZD?** Magsimula sa halimbawa #1 (Flask API) - tumatagal ng ~20 minuto at nagtuturo ng mga pangunahing konsepto.
+> **💡 Bago sa AZD?** Magsimula sa halimbawa #1 (Flask API) - tumatagal ng ~20 minuto at nagtuturo ng mga pangunahing konsepto.
 
-### Para sa Mga Baguhan
+### Para sa mga Nagsisimula
 1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Lokal) ⭐  
-   Mag-deploy ng simpleng REST API na may scale-to-zero  
+   I-deploy ang isang simpleng REST API na may scale-to-zero  
    **Oras:** 20-25 minuto | **Gastos:** $0-5/buwan  
-   **Matututunan Mo:** Pangunahing azd workflow, containerization, health probes  
+   **Matututuhan mo:** Pangunahing azd workflow, containerization, health probes  
    **Inaasahang Resulta:** Gumaganang API endpoint na nagbabalik ng "Hello, World!" na may monitoring
 
-2. **[Simpleng Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Mag-deploy ng Node.js Express web application na may MongoDB  
+2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
+   I-deploy ang isang Node.js Express web application na may MongoDB  
    **Oras:** 25-35 minuto | **Gastos:** $10-30/buwan  
-   **Matututunan Mo:** Integrasyon ng database, environment variables, connection strings  
+   **Matututuhan mo:** Integrasyon ng database, environment variables, connection strings  
    **Inaasahang Resulta:** Todo list app na may create/read/update/delete functionality
 
 3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Mag-host ng React static website gamit ang Azure Static Web Apps  
+   I-host ang isang React static website gamit ang Azure Static Web Apps  
    **Oras:** 20-30 minuto | **Gastos:** $0-10/buwan  
-   **Matututunan Mo:** Static hosting, serverless functions, CDN deployment  
+   **Matututuhan mo:** Static hosting, serverless functions, CDN deployment  
    **Inaasahang Resulta:** React UI na may API backend, automatic SSL, global CDN
 
-### Para sa Mga Intermediate na Gumagamit
+### Para sa mga Intermediate na Gumagamit
 4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (Lokal) ⭐⭐  
-   Mag-deploy ng GPT-4 na may chat interface at secure API key management  
+   I-deploy ang GPT-4 na may chat interface at secure na pamamahala ng API key  
    **Oras:** 35-45 minuto | **Gastos:** $50-200/buwan  
-   **Matututunan Mo:** Azure OpenAI deployment, Key Vault integration, token tracking  
-   **Inaasahang Resulta:** Gumaganang chat application na may GPT-4 at cost monitoring
+   **Matututuhan mo:** Azure OpenAI deployment, integrasyon ng Key Vault, token tracking  
+   **Inaasahang Resulta:** Gumaganang chat application na may GPT-4 at monitoring ng gastos
 
 5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Lokal) ⭐⭐⭐⭐  
-   Handa-sa-produksyon na multi-service architecture  
+   Production-ready na multi-service na arkitektura  
    **Oras:** 45-60 minuto | **Gastos:** $50-150/buwan  
-   **Matututunan Mo:** Service communication, message queuing, distributed tracing  
-   **Inaasahang Resulta:** 2-service system (API Gateway + Product Service) na may monitoring
+   **Matututuhan mo:** Komunikasyon ng serbisyo, message queuing, distributed tracing  
+   **Inaasahang Resulta:** 2-service na sistema (API Gateway + Product Service) na may monitoring
 
 6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
    Web application na may C# API at Azure SQL Database  
    **Oras:** 30-45 minuto | **Gastos:** $20-80/buwan  
-   **Matututunan Mo:** Entity Framework, database migrations, connection security  
+   **Matututuhan mo:** Entity Framework, database migrations, connection security  
    **Inaasahang Resulta:** C# API na may Azure SQL backend, automatic schema deployment
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
    Python Azure Functions na may HTTP triggers at Cosmos DB  
    **Oras:** 30-40 minuto | **Gastos:** $10-40/buwan  
-   **Matututunan Mo:** Event-driven architecture, serverless scaling, NoSQL integration  
+   **Matututuhan mo:** Event-driven na arkitektura, serverless scaling, NoSQL integration  
    **Inaasahang Resulta:** Function app na tumutugon sa HTTP requests na may Cosmos DB storage
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Multi-service Java application na may Container Apps at API gateway  
+   Multi-service na Java application na may Container Apps at API gateway  
    **Oras:** 60-90 minuto | **Gastos:** $80-200/buwan  
-   **Matututunan Mo:** Spring Boot deployment, service mesh, load balancing  
+   **Matututuhan mo:** Spring Boot deployment, service mesh, load balancing  
    **Inaasahang Resulta:** Multi-service Java system na may service discovery at routing
 
-### Azure AI Foundry Templates
+### Microsoft Foundry Templates
 
 1. **[Azure OpenAI Chat App - Lokal na Halimbawa](../../../examples/azure-openai-chat)** ⭐⭐  
    Kumpletong GPT-4 deployment na may chat interface  
    **Oras:** 35-45 minuto | **Gastos:** $50-200/buwan  
-   **Inaasahang Resulta:** Gumaganang chat application na may token tracking at cost monitoring
+   **Inaasahang Resulta:** Gumaganang chat application na may token tracking at monitoring ng gastos
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   Matalinong chat application na may RAG architecture  
+   Intelligent chat application na may RAG architecture  
    **Oras:** 60-90 minuto | **Gastos:** $100-300/buwan  
    **Inaasahang Resulta:** RAG-powered chat interface na may document search at citations
 
 3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Pagsusuri ng dokumento gamit ang Azure AI services  
    **Oras:** 40-60 minuto | **Gastos:** $20-80/buwan  
-   **Inaasahang Resulta:** API na nag-eextract ng text, tables, at entities mula sa mga na-upload na dokumento
+   **Inaasahang Resulta:** API na nag-eextract ng text, tables, at entities mula sa mga in-upload na dokumento
 
 4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
    MLOps workflow gamit ang Azure Machine Learning  
    **Oras:** 2-3 oras | **Gastos:** $150-500/buwan  
    **Inaasahang Resulta:** Automated ML pipeline na may training, deployment, at monitoring
 
-### Mga Real-World Scenario
+### Mga Tunay na Senaryo
 
-#### **Retail Multi-Agent Solution** 🆕
-**[Kumpletong Gabay sa Implementasyon](./retail-scenario.md)**
+#### **Solusyon na Retail Multi-Agent** 🆕
+**[Kompletong Gabay sa Implementasyon](./retail-scenario.md)**
 
-Isang komprehensibo, handa-sa-produksyon na multi-agent customer support solution na nagpapakita ng enterprise-grade AI application deployment gamit ang AZD. Ang scenario na ito ay nagbibigay ng:
+Isang komprehensibo, production-ready na multi-agent customer support solution na nagpapakita ng enterprise-grade na deployment ng AI application gamit ang AZD. Nagbibigay ang senaryong ito ng:
 
-- **Kumpletong Arkitektura**: Multi-agent system na may espesyal na customer service at inventory management agents
-- **Imprastruktura ng Produksyon**: Multi-region Azure OpenAI deployments, AI Search, Container Apps, at komprehensibong monitoring
-- **Handa nang I-deploy na ARM Template**: Isang click na deployment na may iba't ibang configuration modes (Minimal/Standard/Premium)
-- **Mga Advanced na Tampok**: Red teaming security validation, agent evaluation framework, cost optimization, at troubleshooting guides
-- **Tunay na Konteksto ng Negosyo**: Use case para sa customer support ng retailer na may file uploads, search integration, at dynamic scaling
+- **Kumpletong Arkitektura**: Multi-agent na sistema na may mga espesyal na agent para sa customer service at pamamahala ng imbentaryo
+- **Production Infrastructure**: Multi-region Azure OpenAI deployments, AI Search, Container Apps, and comprehensive monitoring
+- **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)
+- **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides
+- **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling
 
-**Mga Teknolohiya**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+**Technologies**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Kompleksidad**: ⭐⭐⭐⭐ (Advanced - Handa para sa Produksyon ng Enterprise)
+**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
 
-**Perpekto para sa**: Mga AI developer, solution architects, at mga team na gumagawa ng production multi-agent systems
+**Perfect for**: AI developers, solution architects, and teams building production multi-agent systems
 
-**Mabilis na Pagsisimula**: I-deploy ang kumpletong solusyon sa loob ng 30 minuto gamit ang kasamang ARM template sa `./deploy.sh -g myResourceGroup`
+**Quick Start**: Deploy the complete solution in under 30 minutes using the included ARM template with `./deploy.sh -g myResourceGroup`
 
 ## 📋 Mga Tagubilin sa Paggamit
 
 ### Mga Kinakailangan
 
 Bago patakbuhin ang anumang halimbawa:
-- ✅ Azure subscription na may Owner o Contributor access
-- ✅ Nakainstall ang Azure Developer CLI ([Installation Guide](../docs/getting-started/installation.md))
-- ✅ Naka-on ang Docker Desktop (para sa mga halimbawa ng container)
-- ✅ Angkop na Azure quotas (suriin ang mga kinakailangan sa bawat halimbawa)
+- ✅ Azure subscription na may access na Owner o Contributor
+- ✅ Naka-install ang Azure Developer CLI ([Gabay sa Pag-install](../docs/chapter-01-foundation/installation.md))
+- ✅ Naka-run ang Docker Desktop (para sa mga halimbawa ng container)
+- ✅ Angkop na Azure quotas (tingnan ang mga kinakailangan para sa bawat halimbawa)
 
-> **💰 Babala sa Gastos:** Ang lahat ng mga halimbawa ay lumilikha ng mga totoong Azure resources na may kaukulang bayarin. Tingnan ang mga indibidwal na README files para sa mga pagtatantya ng gastos. Tandaan na patakbuhin ang `azd down` kapag tapos na upang maiwasan ang patuloy na gastos.
+> **💰 Babala sa Gastos:** Lahat ng halimbawa ay lumilikha ng totoong Azure resources na nagdudulot ng singil. Tingnan ang indibidwal na mga README file para sa mga pagtatantya ng gastos. Tandaan na patakbuhin ang `azd down` kapag tapos na upang maiwasan ang patuloy na singil.
 
-### Pagpapatakbo ng Mga Halimbawa sa Lokal
+### Pagpapatakbo ng Mga Halimbawa Nang Lokal
 
 1. **I-clone o Kopyahin ang Halimbawa**
    ```bash
-   # Mag-navigate sa nais na halimbawa
+   # Pumunta sa nais na halimbawa
    cd examples/simple-web-app
    ```
 
@@ -332,7 +323,7 @@ Bago patakbuhin ang anumang halimbawa:
 
 4. **I-deploy**
    ```bash
-   # I-deploy ang imprastraktura at aplikasyon
+   # I-deploy ang imprastraktura at ang aplikasyon
    azd up
    ```
 
@@ -345,177 +336,177 @@ Bago patakbuhin ang anumang halimbawa:
    curl https://your-app-url.azurecontainer.io/health
    ```
    
-   **Mga Inaasahang Palatandaan ng Tagumpay:**
-   - ✅ Ang `azd up` ay natapos nang walang error
-   - ✅ Ang service endpoint ay nagbabalik ng HTTP 200
-   - ✅ Ang Azure Portal ay nagpapakita ng status na "Running"
-   - ✅ Ang Application Insights ay tumatanggap ng telemetry
+   **Mga Inaasahang Tanda ng Tagumpay:**
+   - ✅ `azd up` completes without errors
+   - ✅ Nagbabalik ang endpoint ng serbisyo ng HTTP 200
+   - ✅ Ipinapakita ng Azure Portal ang status na "Running"
+   - ✅ Tumatanggap ang Application Insights ng telemetry
 
-> **⚠️ Mga Isyu?** Tingnan ang [Common Issues](../docs/troubleshooting/common-issues.md) para sa pag-aayos ng deployment
+> **⚠️ May problema?** Tingnan ang [Karaniwang Mga Isyu](../docs/chapter-07-troubleshooting/common-issues.md) para sa pag-troubleshoot ng deployment
 
 ### Pag-aangkop ng Mga Halimbawa
 
-Ang bawat halimbawa ay naglalaman ng:
-- **README.md** - Detalyadong setup at mga tagubilin sa pagpapasadya
+Bawat halimbawa ay may kasamang:
+- **README.md** - Detalyadong mga tagubilin sa pag-setup at pag-customize
 - **azure.yaml** - AZD configuration na may mga komento
-- **infra/** - Mga Bicep template na may mga paliwanag sa parameter
-- **src/** - Sample na application code
-- **scripts/** - Mga helper script para sa mga karaniwang gawain
+- **infra/** - Mga Bicep template na may mga paliwanag ng parameter
+- **src/** - Halimbawang code ng aplikasyon
+- **scripts/** - Mga helper script para sa karaniwang gawain
 
-## 🎯 Mga Layunin sa Pag-aaral
+## 🎯 Mga Layunin sa Pagkatuto
 
 ### Mga Kategorya ng Halimbawa
 
 #### **Mga Pangunahing Deployment**
-- Mga application na may iisang serbisyo
-- Simpleng mga pattern ng imprastruktura
-- Pangunahing pamamahala ng configuration
-- Mga cost-effective na development setup
+- Single-service applications
+- Simple infrastructure patterns
+- Basic configuration management
+- Cost-effective development setups
 
-#### **Mga Advanced na Scenario**
-- Mga arkitektura na may maraming serbisyo
-- Mga komplikadong configuration ng networking
-- Mga pattern ng integrasyon ng database
-- Mga implementasyon ng seguridad at pagsunod
+#### **Mga Advanced na Senaryo**
+- Multi-service architectures
+- Complex networking configurations
+- Database integration patterns
+- Security and compliance implementations
 
-#### **Mga Pattern na Handa sa Produksyon**
-- Mga configuration na may mataas na availability
-- Monitoring at observability
+#### **Mga Pattern na Handang-Para-sa-Production**
+- High availability configurations
+- Monitoring and observability
 - CI/CD integration
-- Mga setup para sa disaster recovery
+- Disaster recovery setups
 
-## 📖 Mga Deskripsyon ng Halimbawa
+## 📖 Mga Paglalarawan ng Halimbawa
 
 ### Simple Web App - Node.js Express
-**Mga Teknolohiya**: Node.js, Express, MongoDB, Container Apps  
-**Kompleksidad**: Baguhan  
-**Mga Konsepto**: Pangunahing deployment, REST API, integrasyon ng NoSQL database
+**Technologies**: Node.js, Express, MongoDB, Container Apps  
+**Complexity**: Beginner  
+**Concepts**: Basic deployment, REST API, NoSQL database integration
 
 ### Static Website - React SPA
-**Mga Teknolohiya**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Kompleksidad**: Baguhan  
-**Mga Konsepto**: Static hosting, serverless backend, modernong web development
+**Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Complexity**: Beginner  
+**Concepts**: Static hosting, serverless backend, modern web development
 
 ### Container App - Python Flask
-**Mga Teknolohiya**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**Kompleksidad**: Baguhan  
-**Mga Konsepto**: Containerization, REST API, scale-to-zero, health probes, monitoring  
-**Lokasyon**: [Local Example](../../../examples/container-app/simple-flask-api)
+**Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
+**Complexity**: Beginner  
+**Concepts**: Containerization, REST API, scale-to-zero, health probes, monitoring  
+**Location**: [Halimbawa Lokal](../../../examples/container-app/simple-flask-api)
 
 ### Container App - Microservices Architecture
-**Mga Teknolohiya**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Kompleksidad**: Advanced  
-**Mga Konsepto**: Multi-service architecture, service communication, message queuing, distributed tracing  
-**Lokasyon**: [Local Example](../../../examples/container-app/microservices)
+**Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Complexity**: Advanced  
+**Concepts**: Multi-service architecture, service communication, message queuing, distributed tracing  
+**Location**: [Halimbawa Lokal](../../../examples/container-app/microservices)
 
 ### Database App - C# with Azure SQL
-**Mga Teknolohiya**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Kompleksidad**: Intermediate  
-**Mga Konsepto**: Entity Framework, database connections, web API development
+**Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Complexity**: Intermediate  
+**Concepts**: Entity Framework, database connections, web API development
 
 ### Serverless Function - Python Azure Functions
-**Mga Teknolohiya**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Kompleksidad**: Intermediate  
-**Mga Konsepto**: Event-driven architecture, serverless computing, full-stack development
+**Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Complexity**: Intermediate  
+**Concepts**: Event-driven architecture, serverless computing, full-stack development
 
 ### Microservices - Java Spring Boot
-**Mga Teknolohiya**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Kompleksidad**: Intermediate  
-**Mga Konsepto**: Microservices communication, distributed systems, enterprise patterns
+**Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Complexity**: Intermediate  
+**Concepts**: Microservices communication, distributed systems, enterprise patterns
 
-### Mga Halimbawa ng Azure AI Foundry
+### Microsoft Foundry Examples
 
 #### Azure OpenAI Chat App
-**Mga Teknolohiya**: Azure OpenAI, Cognitive Search, App Service  
-**Kompleksidad**: Intermediate  
-**Mga Konsepto**: RAG architecture, vector search, LLM integration
+**Technologies**: Azure OpenAI, Cognitive Search, App Service  
+**Complexity**: Intermediate  
+**Concepts**: RAG architecture, vector search, LLM integration
 
 #### AI Document Processing
-**Mga Teknolohiya**: Azure AI Document Intelligence, Storage, Functions  
-**Kompleksidad**: Intermediate  
-**Mga Konsepto**: Document analysis, OCR, data extraction
+**Technologies**: Azure AI Document Intelligence, Storage, Functions  
+**Complexity**: Intermediate  
+**Concepts**: Document analysis, OCR, data extraction
 
 #### Machine Learning Pipeline
-**Mga Teknolohiya**: Azure ML, MLOps, Container Registry  
-**Kompleksidad**: Advanced  
-**Mga Konsepto**: Model training, deployment pipelines, monitoring
+**Technologies**: Azure ML, MLOps, Container Registry  
+**Complexity**: Advanced  
+**Concepts**: Model training, deployment pipelines, monitoring
 
-## 🛠 Mga Halimbawa ng Configuration
+## 🛠 Mga Halimbawa ng Konfigurasyon
 
-Ang direktoryo ng `configurations/` ay naglalaman ng mga reusable na components:
+Ang `configurations/` directory ay naglalaman ng mga reusable na component:
 
-### Mga Configuration ng Environment
-- Mga setting ng development environment
-- Mga configuration ng staging environment
-- Mga configuration na handa sa produksyon
-- Mga setup ng multi-region deployment
+### Mga Konfigurasyon ng Environment
+- Development environment settings
+- Staging environment configurations
+- Production-ready configurations
+- Multi-region deployment setups
 
-### Mga Bicep Modules
-- Mga reusable na components ng imprastruktura
-- Mga karaniwang pattern ng resources
-- Mga template na pinatibay ang seguridad
-- Mga configuration na optimized sa gastos
+### Bicep Modules
+- Reusable infrastructure components
+- Common resource patterns
+- Security-hardened templates
+- Cost-optimized configurations
 
-### Mga Helper Scripts
-- Automation ng setup ng environment
-- Mga script para sa database migration
-- Mga tools para sa validation ng deployment
-- Mga utilities para sa monitoring ng gastos
+### Helper Scripts
+- Environment setup automation
+- Database migration scripts
+- Deployment validation tools
+- Cost monitoring utilities
 
-## 🔧 Gabay sa Pagpapasadya
+## 🔧 Gabay sa Pag-customize
 
-### Pag-aangkop ng Mga Halimbawa para sa Iyong Gamit
+### Pag-aangkop ng Mga Halimbawa para sa Iyong Use Case
 
 1. **Suriin ang Mga Kinakailangan**
-   - Suriin ang mga kinakailangan sa serbisyo ng Azure
-   - I-verify ang mga limitasyon ng subscription
+   - Suriin ang mga kinakailangan ng Azure service
+   - Beripikahin ang mga limitasyon ng subscription
    - Unawain ang mga implikasyon sa gastos
 
-2. **I-modify ang Configuration**
+2. **Baguhin ang Konfigurasyon**
    - I-update ang `azure.yaml` service definitions
    - I-customize ang mga Bicep template
    - I-adjust ang mga environment variables
 
 3. **Subukan nang Mabuti**
    - I-deploy muna sa development environment
-   - I-validate ang functionality
+   - Beripikahin ang functionality
    - Subukan ang scaling at performance
 
-4. **Review ng Seguridad**
+4. **Pagsusuri sa Seguridad**
    - Suriin ang access controls
-   - Magpatupad ng secrets management
+   - Ipatupad ang secrets management
    - I-enable ang monitoring at alerting
 
-## 📊 Matrix ng Paghahambing
+## 📊 Matriz ng Paghahambing
 
-| Halimbawa | Mga Serbisyo | Database | Auth | Monitoring | Kompleksidad |
-|-----------|--------------|----------|------|------------|--------------|
-| **Azure OpenAI Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
-| **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |
-| **Microservices** (Local) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |
-| Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
-| React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
-| Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
-| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
-| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
-| Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
-| AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
-| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
+| Halimbawa | Mga Serbisyo | Database | Awentikasyon | Pagmomonitor | Kakamplek-sidad |
+|---------|----------|----------|------|------------|------------|
+| **Azure OpenAI Chat** (Lokal) | 2 | ❌ | Key Vault | Buong | ⭐⭐ |
+| **Python Flask API** (Lokal) | 1 | ❌ | Pangunahing | Buong | ⭐ |
+| **Microservices** (Lokal) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Pangunahing | Pangunahing | ⭐ |
+| React SPA + Functions | 3 | ✅ | Pangunahing | Buong | ⭐ |
+| Python Flask Container | 2 | ❌ | Pangunahing | Buong | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Buong | Buong | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Buong | Buong | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Buong | Buong | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Buong | Buong | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Pangunahing | Buong | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Buong | Buong | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** (Lokal) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
-## 🎓 Landas ng Pag-aaral
+## 🎓 Daan ng Pagkatuto
 
-### Inirerekomendang Progresyon
+### Inirerekomendang Pagkakasunod-sunod
 
-1. **Simulan sa Simple Web App**
+1. **Magsimula sa Simple Web App**
    - Matutunan ang mga pangunahing konsepto ng AZD
-   - Unawain ang workflow ng deployment
-   - Magpraktis sa pamamahala ng environment
+   - Unawain ang deployment workflow
+   - Magpraktis ng environment management
 
-2. **Subukan ang Static Website**
-   - Tuklasin ang iba't ibang opsyon sa hosting
-   - Matutunan ang CDN integration
+2. **Subukang ang Static Website**
+   - Siyasatin ang iba't ibang hosting options
+   - Matutunan ang tungkol sa CDN integration
    - Unawain ang DNS configuration
 
 3. **Lumipat sa Container App**
@@ -524,23 +515,23 @@ Ang direktoryo ng `configurations/` ay naglalaman ng mga reusable na components:
    - Magpraktis gamit ang Docker
 
 4. **Magdagdag ng Database Integration**
-   - Matutunan ang database provisioning
+   - Matutunan ang provisioning ng database
    - Unawain ang connection strings
-   - Magpraktis sa secrets management
+   - Magpraktis ng secrets management
 
-5. **Tuklasin ang Serverless**
+5. **Siyasatin ang Serverless**
    - Unawain ang event-driven architecture
    - Matutunan ang tungkol sa triggers at bindings
    - Magpraktis gamit ang APIs
 
-6. **Gumawa ng Microservices**
+6. **Bumuo ng Microservices**
    - Matutunan ang service communication
    - Unawain ang distributed systems
-   - Magpraktis sa mga komplikadong deployment
+   - Magpraktis ng mga komplikadong deployment
 
 ## 🔍 Paghahanap ng Tamang Halimbawa
 
-### Ayon sa Teknolohiya
+### Ayon sa Technology Stack
 - **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
 - **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
 - **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
@@ -565,47 +556,47 @@ Ang direktoryo ng `configurations/` ay naglalaman ng mga reusable na components:
 - **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
 - **Enterprise Multi-Service**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Ayon sa Antas ng Kompleksidad
-- **Baguhan**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+### Ayon sa Antas ng Kakompleksidad
+- **Beginner**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
 - **Intermediate**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **Advanced**: ML Pipeline
-- **Handa sa Produksyon ng Enterprise**: [Microservices (Local)](../../../examples/container-app/microservices) (Multi-service na may message queuing), **Retail Multi-Agent Solution** (Kumpletong multi-agent system na may ARM template deployment)
+- **Enterprise Production-Ready**: [Microservices (Local)](../../../examples/container-app/microservices) (Multi-service with message queuing), **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
 
-## 📚 Karagdagang Resources
+## 📚 Karagdagang Mga Mapagkukunan
 
 ### Mga Link sa Dokumentasyon
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Mga Halimbawa ng Komunidad
+### Mga Halimbawa mula sa Komunidad
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 - [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo App gamit ang Node.js at PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)  
-- [React Web App gamit ang C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)  
-- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)  
-- [Azure Functions gamit ang Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)  
+- [Todo App na may Node.js at PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App na may C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Trabaho ng Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions gamit ang Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Mga Best Practices  
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
-- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)  
+### Pinakamahusay na Kasanayan
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Pag-aambag ng Mga Halimbawa  
+## 🤝 Pag-aambag ng Mga Halimbawa
 
-May kapaki-pakinabang na halimbawa na maibabahagi? Malugod naming tinatanggap ang mga kontribusyon!  
+May kapaki-pakinabang na halimbawa ka bang ibabahagi? Malugod naming tinatanggap ang mga kontribusyon!
 
-### Mga Alituntunin sa Pagsusumite  
-1. Sundin ang itinatag na istruktura ng direktoryo  
-2. Isama ang detalyadong README.md  
-3. Magdagdag ng mga komento sa mga configuration file  
-4. Subukan nang mabuti bago magsumite  
-5. Isama ang mga pagtatantya ng gastos at mga kinakailangan  
+### Mga Patnubay sa Pagsumite
+1. Sundin ang itinatag na istruktura ng direktoryo
+2. Isama ang komprehensibong README.md
+3. Magdagdag ng mga komento sa mga configuration file
+4. Suriing mabuti bago isumite
+5. Isama ang mga pagtataya ng gastos at mga kinakailangan
 
-### Template ng Istruktura ng Halimbawa  
+### Halimbawang Istruktura ng Template
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -618,49 +609,49 @@ example-name/
 ├── .gitignore         # Git ignore rules
 └── docs/              # Additional documentation
 ```
-  
----  
 
-**Tip**: Magsimula sa pinakasimpleng halimbawa na tumutugma sa iyong teknolohiyang stack, pagkatapos ay unti-unting magtrabaho patungo sa mas kumplikadong mga senaryo. Ang bawat halimbawa ay bumubuo sa mga konsepto mula sa mga nauna!  
+---
 
-## 🚀 Handa Ka Na Ba?  
+**Pro Tip**: Magsimula sa pinakapayak na halimbawa na tumutugma sa iyong stack ng teknolohiya, pagkatapos unti-unting umakyat patungo sa mas kumplikadong mga senaryo. Bawat halimbawa ay bumubuo sa mga konsepto mula sa mga naunang mga halimbawa!
 
-### Ang Iyong Landas sa Pag-aaral  
+## 🚀 Handa Ka Na Bang Magsimula?
 
-1. **Baguhan?** → Magsimula sa [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 minuto)  
-2. **May Basic AZD Knowledge?** → Subukan ang [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 minuto)  
-3. **Gumagawa ng AI Apps?** → Magsimula sa [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 minuto) o tuklasin ang [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ oras)  
-4. **Kailangan ng Tiyak na Tech Stack?** → Gamitin ang [Finding the Right Example](../../../examples) na seksyon sa itaas  
+### Iyong Landas sa Pagkatuto
 
-### Mga Susunod na Hakbang  
+1. **Baguhan ka ba?** → Magsimula sa [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 min)
+2. **May Batayang Kaalaman sa AZD?** → Subukan ang [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 min)
+3. **Gumagawa ng AI Apps?** → Magsimula sa [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 min) o tuklasin ang [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ oras)
+4. **Kailangan ng Espesipikong Tech Stack?** → Gamitin ang seksyong [Hanapin ang Tamang Halimbawa](../../../examples) sa itaas
 
-- ✅ Suriin ang [Prerequisites](../../../examples) sa itaas  
-- ✅ Pumili ng halimbawa na tumutugma sa iyong antas ng kasanayan (tingnan ang [Complexity Legend](../../../examples))  
-- ✅ Basahin nang mabuti ang README ng halimbawa bago mag-deploy  
-- ✅ Magtakda ng paalala upang patakbuhin ang `azd down` pagkatapos ng pagsubok  
-- ✅ Ibahagi ang iyong karanasan sa pamamagitan ng GitHub Issues o Discussions  
+### Mga Susunod na Hakbang
 
-### Kailangan ng Tulong?  
+- ✅ Suriin ang [Mga Kinakailangan](../../../examples) sa itaas
+- ✅ Pumili ng halimbawa na tumutugma sa iyong antas ng kasanayan (tingnan ang [Legend ng Antas ng Kahirapan](../../../examples))
+- ✅ Basahin nang mabuti ang README ng halimbawa bago mag-deploy
+- ✅ Mag-set ng paalala na patakbuhin ang `azd down` pagkatapos ng pagsubok
+- ✅ Ibahagi ang iyong karanasan sa pamamagitan ng GitHub Issues o Discussions
 
-- 📖 [FAQ](../resources/faq.md) - Mga karaniwang tanong na nasagot  
-- 🐛 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - Ayusin ang mga isyu sa deployment  
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Magtanong sa komunidad  
-- 📚 [Study Guide](../resources/study-guide.md) - Palakasin ang iyong pag-aaral  
+### Kailangan ng Tulong?
 
----  
+- 📖 [FAQ](../resources/faq.md) - Mga karaniwang tanong na sinagot
+- 🐛 [Gabay sa Pag-troubleshoot](../docs/chapter-07-troubleshooting/common-issues.md) - Ayusin ang mga isyu sa deployment
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Magtanong sa komunidad
+- 📚 [Gabay sa Pag-aaral](../resources/study-guide.md) - Patibayin ang iyong pagkatuto
 
-**Navigation**  
-- **📚 Course Home**: [AZD For Beginners](../README.md)  
-- **📖 Study Materials**: [Study Guide](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)  
-- **🔧 Resources**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/troubleshooting/common-issues.md)  
+---
 
----  
+**Navigasyon**
+- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../README.md)
+- **📖 Mga Materyales sa Pag-aaral**: [Gabay sa Pag-aaral](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Talahulugan](../resources/glossary.md)
+- **🔧 Mga Mapagkukunan**: [FAQ](../resources/faq.md) | [Pag-troubleshoot](../docs/chapter-07-troubleshooting/common-issues.md)
 
-*Huling Na-update: Nobyembre 2025 | [Iulat ang mga Isyu](https://github.com/microsoft/AZD-for-beginners/issues) | [Mag-ambag ng Mga Halimbawa](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*  
+---
+
+*Huling Na-update: Nobyembre 2025 | [Iulat ang Mga Isyu](https://github.com/microsoft/AZD-for-beginners/issues) | [Mag-ambag ng Mga Halimbawa](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Paunawa:
+Isinalin ang dokumentong ito gamit ang serbisyong AI na pagsasalin [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o kamalian. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na pinagkukunan. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na magmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

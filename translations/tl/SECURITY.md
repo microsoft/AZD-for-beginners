@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7229f7490ea61a04330b79651ac4d37e",
-  "translation_date": "2025-09-09T21:19:05+00:00",
-  "source_file": "SECURITY.md",
-  "language_code": "tl"
-}
--->
 ## Seguridad
 
 Seryoso ang Microsoft sa seguridad ng aming mga produktong software at serbisyo, kabilang na ang lahat ng mga repository ng source code sa aming mga organisasyon sa GitHub.

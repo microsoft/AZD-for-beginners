@@ -1,58 +1,49 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-22T09:30:45+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "ms"
-}
--->
 # Contoh - Templat dan Konfigurasi AZD Praktikal
 
 **Belajar Melalui Contoh - Disusun Mengikut Bab**
-- **📚 Kursus Utama**: [AZD Untuk Pemula](../README.md)
-- **📖 Pemetaan Bab**: Contoh disusun mengikut tahap pembelajaran
-- **🚀 Contoh Tempatan**: [Penyelesaian Multi-Ejen Runcit](retail-scenario.md)
-- **🤖 Contoh AI Luaran**: Pautan ke repositori Azure Samples
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../README.md)
+- **📖 Pemetaan Bab**: Contoh dianjurkan mengikut tahap kesukaran pembelajaran
+- **🚀 Contoh Tempatan**: [Penyelesaian Multi-Agen Runcit](retail-scenario.md)
+- **🤖 Contoh AI Luar**: Pautan ke repositori Azure Samples
 
-> **📍 PENTING: Contoh Tempatan vs Luaran**  
+> **📍 PENTING: Contoh Tempatan vs Luar**  
 > Repositori ini mengandungi **4 contoh tempatan lengkap** dengan pelaksanaan penuh:  
-> - **Azure OpenAI Chat** (penggunaan GPT-4 dengan antara muka sembang)  
-> - **Aplikasi Container** (API Flask ringkas + Perkhidmatan Mikro)  
+> - **Azure OpenAI Chat** (penyebaran GPT-4 dengan antara muka sembang)  
+> - **Container Apps** (API Flask Ringkas + Microservices)  
 > - **Aplikasi Pangkalan Data** (Web + Pangkalan Data SQL)  
-> - **Multi-Ejen Runcit** (Penyelesaian AI Perusahaan)  
+> - **Penyelesaian Multi-Agen Runcit** (Penyelesaian AI Enterprise)  
 >  
-> Contoh tambahan adalah **rujukan luaran** kepada repositori Azure-Samples yang boleh anda klon.
+> Contoh tambahan adalah **rujukan luar** kepada repositori Azure-Samples yang boleh anda klon.
 
 ## Pengenalan
 
-Direktori ini menyediakan contoh praktikal dan rujukan untuk membantu anda mempelajari Azure Developer CLI melalui latihan langsung. Senario Multi-Ejen Runcit adalah pelaksanaan lengkap yang sedia untuk pengeluaran yang disertakan dalam repositori ini. Contoh tambahan merujuk kepada Azure Samples rasmi yang menunjukkan pelbagai corak AZD.
+Direktori ini menyediakan contoh praktikal dan rujukan untuk membantu anda mempelajari Azure Developer CLI melalui latihan amali. Senario Multi-Agen Runcit adalah pelaksanaan lengkap yang sedia digunakan untuk pengeluaran dan disertakan dalam repositori ini. Contoh tambahan merujuk kepada Azure Samples rasmi yang menunjukkan pelbagai corak AZD.
 
-### Penilaian Kerumitan
+### Legenda Penarafan Kerumitan
 
 - ⭐ **Pemula** - Konsep asas, satu perkhidmatan, 15-30 minit
 - ⭐⭐ **Pertengahan** - Pelbagai perkhidmatan, integrasi pangkalan data, 30-60 minit
 - ⭐⭐⭐ **Lanjutan** - Seni bina kompleks, integrasi AI, 1-2 jam
-- ⭐⭐⭐⭐ **Pakar** - Sedia untuk pengeluaran, corak perusahaan, 2+ jam
+- ⭐⭐⭐⭐ **Pakar** - Sedia pengeluaran, corak perusahaan, 2+ jam
 
-## 🎯 Apa Yang Terdapat Dalam Repositori Ini
+## 🎯 Apa Sebenarnya Ada Dalam Repositori Ini
 
 ### ✅ Pelaksanaan Tempatan (Sedia Digunakan)
 
-#### [Aplikasi Sembang Azure OpenAI](azure-openai-chat/README.md) 🆕
-**Penggunaan GPT-4 lengkap dengan antara muka sembang disertakan dalam repositori ini**
+#### [Aplikasi Sembang Azure OpenAI](azure-openai-chat/README.md) 🆕  
+**Penyebaran GPT-4 penuh dengan antara muka sembang disertakan dalam repo ini**
 
 - **Lokasi:** `examples/azure-openai-chat/`
 - **Kerumitan:** ⭐⭐ (Pertengahan)
 - **Apa Yang Disertakan:**
-  - Penggunaan Azure OpenAI lengkap (GPT-4)
-  - Antara muka sembang Python baris perintah
+  - Penyebaran Azure OpenAI lengkap (GPT-4)
+  - Antara muka sembang baris perintah Python
   - Integrasi Key Vault untuk kunci API yang selamat
   - Templat infrastruktur Bicep
   - Penjejakan penggunaan token dan kos
   - Had kadar dan pengendalian ralat
 
-**Permulaan Pantas:**
+**Mula Cepat:**
 ```bash
 # Navigasi ke contoh
 cd examples/azure-openai-chat
@@ -60,126 +51,126 @@ cd examples/azure-openai-chat
 # Sebarkan semuanya
 azd up
 
-# Pasang kebergantungan dan mula berbual
+# Pasang kebergantungan dan mula bersembang
 pip install -r src/requirements.txt
 python src/chat.py
 ```
-
+  
 **Teknologi:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
 
-#### [Contoh Aplikasi Container](container-app/README.md) 🆕
-**Contoh penggunaan container yang komprehensif disertakan dalam repositori ini**
+#### [Contoh Aplikasi Container](container-app/README.md) 🆕  
+**Contoh penyebaran container yang menyeluruh disertakan dalam repo ini**
 
 - **Lokasi:** `examples/container-app/`
-- **Kerumitan:** ⭐-⭐⭐⭐⭐ (Pemula hingga Pakar)
+- **Kerumitan:** ⭐-⭐⭐⭐⭐ (Pemula ke Lanjutan)
 - **Apa Yang Disertakan:**
-  - [Panduan Utama](container-app/README.md) - Gambaran keseluruhan lengkap penggunaan container
-  - [API Flask Ringkas](../../../examples/container-app/simple-flask-api) - Contoh API REST asas
-  - [Seni Bina Perkhidmatan Mikro](../../../examples/container-app/microservices) - Penggunaan pelbagai perkhidmatan sedia untuk pengeluaran
-  - Corak Permulaan Pantas, Pengeluaran, dan Lanjutan
+  - [Panduan Utama](container-app/README.md) - Gambaran keseluruhan lengkap penyebaran container
+  - [API Flask Ringkas](../../../examples/container-app/simple-flask-api) - Contoh REST API asas
+  - [Seni Bina Microservices](../../../examples/container-app/microservices) - Penyebaran pelbagai perkhidmatan sedia produksi
+  - Mula Cepat, Pengeluaran, dan Corak Lanjutan
   - Pemantauan, keselamatan, dan pengoptimuman kos
 
-**Permulaan Pantas:**
+**Mula Cepat:**
 ```bash
 # Lihat panduan utama
 cd examples/container-app
 
-# Sebarkan API Flask yang mudah
+# Menggunakan API Flask mudah
 cd simple-flask-api
 azd up
 
-# Sebarkan contoh mikroservis
+# Contoh penggunaan mikroservis
 cd ../microservices
 azd up
 ```
-
+  
 **Teknologi:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Penyelesaian Multi-Ejen Runcit](retail-scenario.md) 🆕
-**Pelaksanaan sedia untuk pengeluaran lengkap disertakan dalam repositori ini**
+#### [Penyelesaian Multi-Agen Runcit](retail-scenario.md) 🆕  
+**Pelaksanaan lengkap yang sedia pengeluaran disertakan dalam repo ini**
 
 - **Lokasi:** `examples/retail-multiagent-arm-template/`
 - **Kerumitan:** ⭐⭐⭐⭐ (Lanjutan)
 - **Apa Yang Disertakan:**
-  - Templat penggunaan ARM lengkap
-  - Seni bina multi-ejen (Pelanggan + Inventori)
+  - Templat penyebaran ARM lengkap
+  - Seni bina multi-agen (Pelanggan + Inventori)
   - Integrasi Azure OpenAI
   - Carian AI dengan RAG
-  - Pemantauan komprehensif
-  - Skrip penggunaan satu klik
+  - Pemantauan menyeluruh
+  - Skrip penyebaran satu klik
 
-**Permulaan Pantas:**
+**Mula Cepat:**
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
-
+  
 **Teknologi:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 Contoh Azure Luaran (Klon untuk Digunakan)
+## 🔗 Contoh Azure Luar (Klon Untuk Gunakan)
 
-Contoh berikut diselenggara dalam repositori rasmi Azure-Samples. Klon untuk meneroka pelbagai corak AZD:
+Contoh berikut dikekalkan dalam repositori Azure-Samples rasmi. Klon untuk terokai corak AZD yang berbeza:
 
-### Aplikasi Ringkas (Bab 1-2)
+### Aplikasi Mudah (Bab 1-2)
 
 | Templat | Repositori | Kerumitan | Perkhidmatan |
 |:---------|:-----------|:-----------|:---------|
-| **API Flask Python** | [Tempatan: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Perkhidmatan Mikro** | [Tempatan: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Pelbagai perkhidmatan, Service Bus, Cosmos DB, SQL |
+| **API Python Flask** | [Tempatan: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| **Microservices** | [Tempatan: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Pelbagai perkhidmatan, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
-| **Container Flask Python** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
+| **Container Python Flask** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
-**Cara Menggunakan:**
+**Cara menggunakan:**
 ```bash
 # Klon mana-mana contoh
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
-# Laksanakan
+# Lancarkan
 azd up
 ```
-
+  
 ### Contoh Aplikasi AI (Bab 2, 5, 8)
 
 | Templat | Repositori | Kerumitan | Fokus |
 |:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [Tempatan: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | Penggunaan GPT-4 |
-| **Permulaan Sembang AI** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Sembang AI asas |
-| **Ejen AI** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Kerangka ejen |
-| **Demo Carian + OpenAI** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | Corak RAG |
-| **Sembang Contoso** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | AI Perusahaan |
+| **Azure OpenAI Chat** | [Tempatan: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | Penyebaran GPT-4 |
+| **Mula Cepat Sembang AI** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Sembang AI asas |
+| **Ejen AI** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Rangka kerja agen |
+| **Cari + Demonstrasi OpenAI** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | Corak RAG |
+| **Sembang Contoso** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | AI perusahaan |
 
 ### Pangkalan Data & Corak Lanjutan (Bab 3-8)
 
 | Templat | Repositori | Kerumitan | Fokus |
 |:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Integrasi pangkalan data |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL tanpa pelayan |
-| **Perkhidmatan Mikro Java** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Pelbagai perkhidmatan |
-| **Pipeline ML** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | Serverless NoSQL |
+| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Pelbagai perkhidmatan |
+| **Saluran ML** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Matlamat Pembelajaran
 
-Dengan mengerjakan contoh-contoh ini, anda akan:
-- Mengamalkan aliran kerja Azure Developer CLI dengan senario aplikasi yang realistik
-- Memahami pelbagai seni bina aplikasi dan pelaksanaan azd mereka
-- Menguasai corak Infrastruktur sebagai Kod untuk pelbagai perkhidmatan Azure
-- Menerapkan pengurusan konfigurasi dan strategi penggunaan khusus persekitaran
-- Melaksanakan corak pemantauan, keselamatan, dan penskalaan dalam konteks praktikal
-- Membina pengalaman dengan penyelesaian masalah dan debugging senario penggunaan sebenar
+Dengan mengusahakan contoh-contoh ini, anda akan:  
+- Amalkan aliran kerja Azure Developer CLI dengan senario aplikasi yang realistik  
+- Fahami seni bina aplikasi berbeza dan pelaksanaan azd mereka  
+- Kuasai corak Infrastruktur sebagai Kod bagi pelbagai perkhidmatan Azure  
+- Terapkan pengurusan konfigurasi dan strategi penyebaran khusus persekitaran  
+- Laksanakan corak pemantauan, keselamatan, dan penskalaan dalam konteks praktikal  
+- Kumpul pengalaman menyelesaikan masalah dan debug senario penyebaran sebenar
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan contoh-contoh ini, anda akan dapat:
-- Menggunakan pelbagai jenis aplikasi menggunakan Azure Developer CLI dengan yakin
-- Menyesuaikan templat yang disediakan kepada keperluan aplikasi anda sendiri
-- Merancang dan melaksanakan corak infrastruktur tersuai menggunakan Bicep
-- Mengkonfigurasi aplikasi pelbagai perkhidmatan yang kompleks dengan kebergantungan yang betul
-- Menerapkan amalan terbaik keselamatan, pemantauan, dan prestasi dalam senario sebenar
-- Menyelesaikan masalah dan mengoptimumkan penggunaan berdasarkan pengalaman praktikal
+Selepas menamatkan contoh-contoh ini, anda mampu:  
+- Menyebarkan pelbagai jenis aplikasi menggunakan Azure Developer CLI dengan yakin  
+- Sesuaikan templat disediakan mengikut keperluan aplikasi anda sendiri  
+- Reka bentuk dan laksanakan corak infrastruktur tersuai menggunakan Bicep  
+- Konfigurasikan aplikasi pelbagai perkhidmatan yang kompleks dengan kebergantungan yang betul  
+- Gunakan amalan terbaik keselamatan, pemantauan, dan prestasi dalam senario sebenar  
+- Selesaikan masalah dan optimumkan penyebaran berdasarkan pengalaman praktikal
 
 ## Struktur Direktori
 
@@ -196,121 +187,121 @@ Azure Samples AZD Templates (linked externally):
     ├── bicep-modules/
     └── scripts/
 ```
+  
+## Contoh Mula Cepat
 
-## Contoh Permulaan Pantas
-
-> **💡 Baru dengan AZD?** Mulakan dengan contoh #1 (API Flask) - ia mengambil masa ~20 minit dan mengajar konsep teras.
+> **💡 Baru dengan AZD?** Mulakan dengan contoh #1 (Flask API) - ia mengambil ~20 minit dan mengajar konsep teras.
 
 ### Untuk Pemula
-1. **[Aplikasi Container - API Flask Python](../../../examples/container-app/simple-flask-api)** (Tempatan) ⭐  
-   Gunakan API REST ringkas dengan skala-ke-sifar  
+1. **[Container App - API Python Flask](../../../examples/container-app/simple-flask-api)** (Tempatan) ⭐  
+   Sebarkan REST API mudah dengan skala ke sifar  
    **Masa:** 20-25 minit | **Kos:** $0-5/bulan  
-   **Anda Akan Belajar:** Aliran kerja azd asas, pengkontenaan, probe kesihatan  
-   **Hasil Dijangka:** Titik akhir API berfungsi yang mengembalikan "Hello, World!" dengan pemantauan
+   **Anda Akan Belajar:** Aliran kerja azd asas, kontena, probe kesihatan  
+   **Hasil Yang Dijangka:** Titik akhir API berfungsi memaparkan "Hello, World!" dengan pemantauan
 
 2. **[Aplikasi Web Ringkas - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Gunakan aplikasi web Node.js Express dengan MongoDB  
+   Sebarkan aplikasi web Node.js Express dengan MongoDB  
    **Masa:** 25-35 minit | **Kos:** $10-30/bulan  
-   **Anda Akan Belajar:** Integrasi pangkalan data, pembolehubah persekitaran, rentetan sambungan  
-   **Hasil Dijangka:** Aplikasi senarai tugasan dengan fungsi buat/baca/kemas kini/hapus
+   **Anda Akan Belajar:** Integrasi pangkalan data, pembolehubah persekitaran, string sambungan  
+   **Hasil Yang Dijangka:** Aplikasi senarai tugasan dengan fungsi buat/baca/kemaskini/hapus
 
 3. **[Laman Web Statik - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
    Hos laman web statik React dengan Azure Static Web Apps  
    **Masa:** 20-30 minit | **Kos:** $0-10/bulan  
-   **Anda Akan Belajar:** Pengehosan statik, fungsi tanpa pelayan, penggunaan CDN  
-   **Hasil Dijangka:** UI React dengan backend API, SSL automatik, CDN global
+   **Anda Akan Belajar:** Hosting statik, fungsi serverless, penyebaran CDN  
+   **Hasil Yang Dijangka:** UI React dengan API backend, SSL automatik, CDN global
 
 ### Untuk Pengguna Pertengahan
 4. **[Aplikasi Sembang Azure OpenAI](../../../examples/azure-openai-chat)** (Tempatan) ⭐⭐  
-   Gunakan GPT-4 dengan antara muka sembang dan pengurusan kunci API yang selamat  
+   Sebarkan GPT-4 dengan antara muka sembang dan pengurusan kunci API selamat  
    **Masa:** 35-45 minit | **Kos:** $50-200/bulan  
-   **Anda Akan Belajar:** Penggunaan Azure OpenAI, integrasi Key Vault, penjejakan token  
-   **Hasil Dijangka:** Aplikasi sembang berfungsi dengan GPT-4 dan pemantauan kos
+   **Anda Akan Belajar:** Penyebaran Azure OpenAI, integrasi Key Vault, penjejakan token  
+   **Hasil Yang Dijangka:** Aplikasi sembang berfungsi dengan GPT-4 dan pemantauan kos
 
-5. **[Aplikasi Container - Perkhidmatan Mikro](../../../examples/container-app/microservices)** (Tempatan) ⭐⭐⭐⭐  
-   Seni bina pelbagai perkhidmatan sedia untuk pengeluaran  
+5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Tempatan) ⭐⭐⭐⭐  
+   Seni bina pelbagai perkhidmatan sedia pengeluaran  
    **Masa:** 45-60 minit | **Kos:** $50-150/bulan  
-   **Anda Akan Belajar:** Komunikasi perkhidmatan, penjadualan mesej, penjejakan teragih  
-   **Hasil Dijangka:** Sistem 2 perkhidmatan (API Gateway + Product Service) dengan pemantauan
+   **Anda Akan Belajar:** Komunikasi perkhidmatan, antrian mesej, pengesanan diedarkan  
+   **Hasil Yang Dijangka:** Sistem 2 perkhidmatan (API Gateway + Perkhidmatan Produk) dengan pemantauan
 
 6. **[Aplikasi Pangkalan Data - C# dengan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
    Aplikasi web dengan API C# dan Pangkalan Data Azure SQL  
    **Masa:** 30-45 minit | **Kos:** $20-80/bulan  
    **Anda Akan Belajar:** Entity Framework, migrasi pangkalan data, keselamatan sambungan  
-   **Hasil Dijangka:** API C# dengan backend Azure SQL, penggunaan skema automatik
+   **Hasil Yang Dijangka:** API C# dengan backend Azure SQL, penyebaran skema automatik
 
-7. **[Fungsi Tanpa Pelayan - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   Fungsi Azure Python dengan pencetus HTTP dan Cosmos DB  
+7. **[Fungsi Serverless - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
+   Fungsi Python Azure dengan pencetus HTTP dan Cosmos DB  
    **Masa:** 30-40 minit | **Kos:** $10-40/bulan  
-   **Anda Akan Belajar:** Seni bina berasaskan acara, penskalaan tanpa pelayan, integrasi NoSQL  
-   **Hasil Dijangka:** Aplikasi fungsi yang bertindak balas kepada permintaan HTTP dengan penyimpanan Cosmos DB
+   **Anda Akan Belajar:** Seni bina berasaskan acara, penskalaan serverless, integrasi NoSQL  
+   **Hasil Yang Dijangka:** Aplikasi fungsi yang bertindak balas kepada permintaan HTTP dengan storan Cosmos DB
 
-8. **[Perkhidmatan Mikro - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Aplikasi Java pelbagai perkhidmatan dengan Container Apps dan API gateway  
+8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
+   Aplikasi Java pelbagai perkhidmatan dengan Container Apps dan gateway API  
    **Masa:** 60-90 minit | **Kos:** $80-200/bulan  
-   **Anda Akan Belajar:** Penggunaan Spring Boot, mesh perkhidmatan, pengimbangan beban  
-   **Hasil Dijangka:** Sistem Java pelbagai perkhidmatan dengan penemuan perkhidmatan dan penghalaan
+   **Anda Akan Belajar:** Penyebaran Spring Boot, jaringan perkhidmatan, imbangan beban  
+   **Hasil Yang Dijangka:** Sistem Java pelbagai perkhidmatan dengan pengesanan perkhidmatan dan penghalaan
 
-### Templat Foundry AI Azure
+### Templat Microsoft Foundry
 
 1. **[Aplikasi Sembang Azure OpenAI - Contoh Tempatan](../../../examples/azure-openai-chat)** ⭐⭐  
-   Penggunaan GPT-4 lengkap dengan antara muka sembang  
+   Penyebaran GPT-4 lengkap dengan antara muka sembang  
    **Masa:** 35-45 minit | **Kos:** $50-200/bulan  
-   **Hasil Dijangka:** Aplikasi sembang berfungsi dengan penjejakan token dan pemantauan kos
+   **Hasil Yang Dijangka:** Aplikasi sembang berfungsi dengan penjejakan token dan pemantauan kos
 
-2. **[Demo Carian + OpenAI Azure](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
+2. **[Azure Search + Demonstrasi OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
    Aplikasi sembang pintar dengan seni bina RAG  
    **Masa:** 60-90 minit | **Kos:** $100-300/bulan  
-   **Hasil Dijangka:** Antara muka sembang berkuasa RAG dengan carian dokumen dan sitasi
+   **Hasil Yang Dijangka:** Antara muka sembang dikuasakan RAG dengan carian dokumen dan sitasi
 
 3. **[Pemprosesan Dokumen AI](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   Analisis dokumen menggunakan perkhidmatan AI Azure  
+   Analisis dokumen menggunakan perkhidmatan Azure AI  
    **Masa:** 40-60 minit | **Kos:** $20-80/bulan  
-   **Hasil Dijangka:** API yang mengekstrak teks, jadual, dan entiti daripada dokumen yang dimuat naik
+   **Hasil Yang Dijangka:** API mengekstrak teks, jadual, dan entiti dari dokumen yang dimuat naik
 
-4. **[Pipeline Pembelajaran Mesin](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   Aliran kerja MLOps dengan Pembelajaran Mesin Azure  
+4. **[Saluran Pembelajaran Mesin](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
+   Aliran kerja MLOps dengan Azure Machine Learning  
    **Masa:** 2-3 jam | **Kos:** $150-500/bulan  
-   **Hasil Dijangka:** Pipeline ML automatik dengan latihan, penggunaan, dan pemantauan
+   **Hasil Yang Dijangka:** Saluran ML automatik dengan latihan, penyebaran, dan pemantauan
 
 ### Senario Dunia Sebenar
 
-#### **Penyelesaian Multi-Ejen Runcit** 🆕
+#### **Penyelesaian Multi-Agen Runcit** 🆕  
 **[Panduan Pelaksanaan Lengkap](./retail-scenario.md)**
 
-Penyelesaian sokongan pelanggan multi-ejen yang komprehensif dan sedia untuk pengeluaran yang menunjukkan penggunaan aplikasi AI perusahaan dengan AZD. Senario ini menyediakan:
+Penyelesaian sokongan pelanggan multi-agen yang menyeluruh dan sedia pengeluaran yang menunjukkan penyebaran aplikasi AI bertaraf perusahaan menggunakan AZD. Senario ini menyediakan:
 
-- **Seni Bina Lengkap**: Sistem multi-ejen dengan ejen perkhidmatan pelanggan dan pengurusan inventori khusus
-- **Infrastruktur Pengeluaran**: Penerapan Azure OpenAI pelbagai rantau, AI Search, Container Apps, dan pemantauan menyeluruh  
-- **Templat ARM Sedia untuk Diterapkan**: Penerapan satu klik dengan pelbagai mod konfigurasi (Minimal/Standard/Premium)  
-- **Ciri Lanjutan**: Pengesahan keselamatan red teaming, rangka kerja penilaian agen, pengoptimuman kos, dan panduan penyelesaian masalah  
+- **Seni Bina Lengkap**: Sistem multi-agen dengan agen perkhidmatan pelanggan dan pengurusan inventori khusus
+- **Infrastruktur Pengeluaran**: Penempatan Azure OpenAI pelbagai rantau, Carian AI, Apl Kontena, dan pemantauan menyeluruh  
+- **Templat ARM Sedia Untuk Diperlukan**: Pelaksanaan satu klik dengan pelbagai mod konfigurasi (Minimal/Standard/Premium)  
+- **Ciri-ciri Lanjutan**: Pengesahan keselamatan red teaming, rangka kerja penilaian ejen, pengoptimuman kos, dan panduan penyelesaian masalah  
 - **Konteks Perniagaan Sebenar**: Kes penggunaan sokongan pelanggan peruncit dengan muat naik fail, integrasi carian, dan penskalaan dinamik  
 
 **Teknologi**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
 
-**Kerumitan**: ⭐⭐⭐⭐ (Lanjutan - Sedia untuk Pengeluaran Perusahaan)  
+**Kesukaran**: ⭐⭐⭐⭐ (Lanjutan - Sedia Pengeluaran Perusahaan)  
 
-**Sesuai untuk**: Pembangun AI, arkitek penyelesaian, dan pasukan yang membina sistem multi-agen pengeluaran  
+**Sesuai untuk**: Pembangun AI, arkitek penyelesaian, dan pasukan yang membina sistem multi-ejen pengeluaran  
 
-**Permulaan Pantas**: Terapkan penyelesaian lengkap dalam masa kurang daripada 30 minit menggunakan templat ARM yang disertakan dengan `./deploy.sh -g myResourceGroup`  
+**Permulaan Pantas**: Lancarkan penyelesaian lengkap dalam masa kurang dari 30 minit menggunakan templat ARM yang disediakan dengan `./deploy.sh -g myResourceGroup`  
 
-## 📋 Arahan Penggunaan  
+## 📋 Arahan Penggunaan
 
-### Prasyarat  
+### Prasyarat
 
-Sebelum menjalankan sebarang contoh:  
+Sebelum menjalankan mana-mana contoh:  
 - ✅ Langganan Azure dengan akses Pemilik atau Penyumbang  
-- ✅ Azure Developer CLI dipasang ([Panduan Pemasangan](../docs/getting-started/installation.md))  
+- ✅ Azure Developer CLI dipasang ([Panduan Pemasangan](../docs/chapter-01-foundation/installation.md))  
 - ✅ Docker Desktop berjalan (untuk contoh kontena)  
 - ✅ Kuota Azure yang sesuai (semak keperluan spesifik contoh)  
 
-> **💰 Amaran Kos:** Semua contoh mencipta sumber Azure sebenar yang akan dikenakan caj. Lihat fail README individu untuk anggaran kos. Ingat untuk menjalankan `azd down` apabila selesai untuk mengelakkan kos berterusan.  
+> **💰 Amaran Kos:** Semua contoh mencipta sumber Azure sebenar yang mengenakan caj. Lihat fail README individu untuk anggaran kos. Ingat untuk menjalankan `azd down` apabila selesai untuk mengelakkan kos berterusan.  
 
-### Menjalankan Contoh Secara Tempatan  
+### Menjalankan Contoh Secara Tempatan
 
 1. **Klon atau Salin Contoh**  
    ```bash
-   # Navigasi ke contoh yang diinginkan
+   # Navigasi ke contoh yang dikehendaki
    cd examples/simple-web-app
    ```
   
@@ -323,20 +314,20 @@ Sebelum menjalankan sebarang contoh:
    azd env new my-environment
    ```
   
-3. **Konfigurasi Persekitaran**  
+3. **Konfigurasikan Persekitaran**  
    ```bash
    # Tetapkan pembolehubah yang diperlukan
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
   
-4. **Terapkan**  
+4. **Lancarkan**  
    ```bash
-   # Sebarkan infrastruktur dan aplikasi
+   # Lancarkan infrastruktur dan aplikasi
    azd up
    ```
   
-5. **Sahkan Penerapan**  
+5. **Sahkan Pelaksanaan**  
    ```bash
    # Dapatkan titik akhir perkhidmatan
    azd env get-values
@@ -345,32 +336,32 @@ Sebelum menjalankan sebarang contoh:
    curl https://your-app-url.azurecontainer.io/health
    ```
   
-   **Petunjuk Kejayaan yang Dijangka:**  
+   **Penunjuk Kejayaan Dijangka:**  
    - ✅ `azd up` selesai tanpa ralat  
-   - ✅ Titik akhir perkhidmatan mengembalikan HTTP 200  
-   - ✅ Portal Azure menunjukkan status "Running"  
+   - ✅ Titik akhir perkhidmatan memulangkan HTTP 200  
+   - ✅ Azure Portal menunjukkan status "Running"  
    - ✅ Application Insights menerima telemetri  
 
-> **⚠️ Masalah?** Lihat [Masalah Biasa](../docs/troubleshooting/common-issues.md) untuk penyelesaian masalah penerapan  
+> **⚠️ Masalah?** Lihat [Isu Biasa](../docs/chapter-07-troubleshooting/common-issues.md) untuk penyelesaian masalah pelaksanaan  
 
-### Menyesuaikan Contoh  
+### Menyesuaikan Contoh
 
-Setiap contoh termasuk:  
-- **README.md** - Arahan persediaan dan penyesuaian terperinci  
-- **azure.yaml** - Konfigurasi AZD dengan komen  
+Setiap contoh mengandungi:  
+- **README.md** - Arahan terperinci untuk penyediaan dan pengubahsuaian  
+- **azure.yaml** - Konfigurasi AZD dengan ulasan  
 - **infra/** - Templat Bicep dengan penjelasan parameter  
-- **src/** - Kod aplikasi contoh  
-- **scripts/** - Skrip pembantu untuk tugas biasa  
+- **src/** - Kod aplikasi sampel  
+- **scripts/** - Skrip pembantu untuk tugasan biasa  
 
-## 🎯 Objektif Pembelajaran  
+## 🎯 Objektif Pembelajaran
 
-### Kategori Contoh  
+### Kategori Contoh
 
-#### **Penerapan Asas**  
+#### **Pelaksanaan Asas**  
 - Aplikasi perkhidmatan tunggal  
 - Corak infrastruktur mudah  
 - Pengurusan konfigurasi asas  
-- Persediaan pembangunan kos efektif  
+- Penetapan pembangunan kos efektif  
 
 #### **Senario Lanjutan**  
 - Seni bina pelbagai perkhidmatan  
@@ -378,118 +369,118 @@ Setiap contoh termasuk:
 - Corak integrasi pangkalan data  
 - Pelaksanaan keselamatan dan pematuhan  
 
-#### **Corak Sedia untuk Pengeluaran**  
+#### **Corak Sedia Pengeluaran**  
 - Konfigurasi ketersediaan tinggi  
 - Pemantauan dan pemerhatian  
 - Integrasi CI/CD  
-- Persediaan pemulihan bencana  
+- Penetapan pemulihan bencana  
 
-## 📖 Penerangan Contoh  
+## 📖 Penerangan Contoh
 
-### Aplikasi Web Mudah - Node.js Express  
+### Apl Web Mudah - Node.js Express  
 **Teknologi**: Node.js, Express, MongoDB, Container Apps  
-**Kerumitan**: Pemula  
-**Konsep**: Penerapan asas, REST API, integrasi pangkalan data NoSQL  
+**Kesukaran**: Pemula  
+**Konsep**: Pelaksanaan asas, API REST, integrasi pangkalan data NoSQL  
 
 ### Laman Web Statik - React SPA  
 **Teknologi**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Kerumitan**: Pemula  
-**Konsep**: Hosting statik, backend tanpa pelayan, pembangunan web moden  
+**Kesukaran**: Pemula  
+**Konsep**: Penghosan statik, backend tanpa server, pembangunan web moden  
 
-### Aplikasi Kontena - Python Flask  
+### Apl Kontena - Python Flask  
 **Teknologi**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**Kerumitan**: Pemula  
-**Konsep**: Pengkontenaan, REST API, penskalaan ke sifar, probe kesihatan, pemantauan  
+**Kesukaran**: Pemula  
+**Konsep**: Pengkontenan, API REST, skala-ke-nol, probes kesihatan, pemantauan  
 **Lokasi**: [Contoh Tempatan](../../../examples/container-app/simple-flask-api)  
 
-### Aplikasi Kontena - Seni Bina Mikroservis  
+### Apl Kontena - Seni Bina Mikroservis  
 **Teknologi**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Kerumitan**: Lanjutan  
-**Konsep**: Seni bina pelbagai perkhidmatan, komunikasi perkhidmatan, antrian mesej, penjejakan teragih  
+**Kesukaran**: Lanjutan  
+**Konsep**: Seni bina pelbagai perkhidmatan, komunikasi perkhidmatan, penjujukan mesej, penjejakan teragih  
 **Lokasi**: [Contoh Tempatan](../../../examples/container-app/microservices)  
 
-### Aplikasi Pangkalan Data - C# dengan Azure SQL  
+### Apl Pangkalan Data - C# dengan Azure SQL  
 **Teknologi**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Kerumitan**: Pertengahan  
+**Kesukaran**: Pertengahan  
 **Konsep**: Entity Framework, sambungan pangkalan data, pembangunan web API  
 
-### Fungsi Tanpa Pelayan - Python Azure Functions  
+### Fungsi Tanpa Server - Python Azure Functions  
 **Teknologi**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Kerumitan**: Pertengahan  
-**Konsep**: Seni bina berasaskan acara, pengkomputeran tanpa pelayan, pembangunan full-stack  
+**Kesukaran**: Pertengahan  
+**Konsep**: Seni bina berasaskan acara, pengkomputeran tanpa server, pembangunan penuh tumpukan  
 
 ### Mikroservis - Java Spring Boot  
 **Teknologi**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Kerumitan**: Pertengahan  
+**Kesukaran**: Pertengahan  
 **Konsep**: Komunikasi mikroservis, sistem teragih, corak perusahaan  
 
-### Contoh Azure AI Foundry  
+### Contoh Microsoft Foundry
 
-#### Aplikasi Chat Azure OpenAI  
+#### Apl Chat Azure OpenAI  
 **Teknologi**: Azure OpenAI, Cognitive Search, App Service  
-**Kerumitan**: Pertengahan  
+**Kesukaran**: Pertengahan  
 **Konsep**: Seni bina RAG, carian vektor, integrasi LLM  
 
 #### Pemprosesan Dokumen AI  
 **Teknologi**: Azure AI Document Intelligence, Storage, Functions  
-**Kerumitan**: Pertengahan  
-**Konsep**: Analisis dokumen, OCR, pengekstrakan data  
+**Kesukaran**: Pertengahan  
+**Konsep**: Analisis dokumen, OCR, ekstraksi data  
 
-#### Saluran Pembelajaran Mesin  
+#### Laluan Pembelajaran Mesin  
 **Teknologi**: Azure ML, MLOps, Container Registry  
-**Kerumitan**: Lanjutan  
-**Konsep**: Latihan model, saluran penerapan, pemantauan  
+**Kesukaran**: Lanjutan  
+**Konsep**: Latihan model, laluan pelaksanaan, pemantauan  
 
-## 🛠 Contoh Konfigurasi  
+## 🛠 Contoh Konfigurasi
 
-Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:  
+Direktori `configurations/` mengandungi komponen boleh guna semula:  
 
 ### Konfigurasi Persekitaran  
 - Tetapan persekitaran pembangunan  
-- Konfigurasi persekitaran pementasan  
-- Konfigurasi sedia untuk pengeluaran  
-- Persediaan penerapan pelbagai rantau  
+- Konfigurasi persekitaran staging  
+- Konfigurasi sedia pengeluaran  
+- Penempatan multi-rantau  
 
 ### Modul Bicep  
-- Komponen infrastruktur yang boleh digunakan semula  
+- Komponen infrastruktur boleh guna semula  
 - Corak sumber biasa  
-- Templat yang diperkuatkan keselamatan  
-- Konfigurasi yang dioptimumkan kos  
+- Templat dikuatkuasakan keselamatan  
+- Konfigurasi pengoptimuman kos  
 
 ### Skrip Pembantu  
-- Automasi persediaan persekitaran  
+- Automasi penyediaan persekitaran  
 - Skrip migrasi pangkalan data  
-- Alat pengesahan penerapan  
+- Alat pengesahan pelaksanaan  
 - Utiliti pemantauan kos  
 
-## 🔧 Panduan Penyesuaian  
+## 🔧 Panduan Penyesuaian
 
-### Menyesuaikan Contoh untuk Kes Penggunaan Anda  
+### Menyesuaikan Contoh Mengikut Kes Penggunaan Anda
 
 1. **Semak Prasyarat**  
-   - Periksa keperluan perkhidmatan Azure  
+   - Semak keperluan perkhidmatan Azure  
    - Sahkan had langganan  
    - Fahami implikasi kos  
 
-2. **Ubah Konfigurasi**  
-   - Kemas kini definisi perkhidmatan `azure.yaml`  
+2. **Ubah Suai Konfigurasi**  
+   - Kemas kini definisi perkhidmatan dalam `azure.yaml`  
    - Sesuaikan templat Bicep  
    - Laraskan pembolehubah persekitaran  
 
 3. **Uji Secara Menyeluruh**  
-   - Terapkan ke persekitaran pembangunan terlebih dahulu  
-   - Sahkan fungsi  
-   - Uji penskalaan dan prestasi  
+   - Lancarkan ke persekitaran pembangunan terlebih dahulu  
+   - Sahkan fungsian  
+   - Uji skalabiliti dan prestasi  
 
-4. **Semakan Keselamatan**  
+4. **Kajian Keselamatan**  
    - Semak kawalan akses  
    - Laksanakan pengurusan rahsia  
-   - Aktifkan pemantauan dan amaran  
+   - Aktifkan pemantauan dan pemberitahuan  
 
-## 📊 Matriks Perbandingan  
+## 📊 Matriks Perbandingan
 
-| Contoh | Perkhidmatan | Pangkalan Data | Auth | Pemantauan | Kerumitan |  
-|---------|----------|----------|------|------------|------------|  
+| Contoh | Perkhidmatan | Pangkalan Data | Pengesahan | Pemantauan | Kesukaran |  
+|---------|--------------|----------------|------------|------------|------------|  
 | **Azure OpenAI Chat** (Tempatan) | 2 | ❌ | Key Vault | Penuh | ⭐⭐ |  
 | **Python Flask API** (Tempatan) | 1 | ❌ | Asas | Penuh | ⭐ |  
 | **Mikroservis** (Tempatan) | 5+ | ✅ | Perusahaan | Lanjutan | ⭐⭐⭐⭐ |  
@@ -501,111 +492,111 @@ Direktori `configurations/` mengandungi komponen yang boleh digunakan semula:
 | Java Mikroservis | 5+ | ✅ | Penuh | Penuh | ⭐⭐ |  
 | Azure OpenAI Chat | 3 | ✅ | Penuh | Penuh | ⭐⭐⭐ |  
 | Pemprosesan Dokumen AI | 2 | ❌ | Asas | Penuh | ⭐⭐ |  
-| Saluran ML | 4+ | ✅ | Penuh | Penuh | ⭐⭐⭐⭐ |  
-| **Multi-Agent Peruncit** (Tempatan) | **8+** | **✅** | **Perusahaan** | **Lanjutan** | **⭐⭐⭐⭐** |  
+| Laluan ML | 4+ | ✅ | Penuh | Penuh | ⭐⭐⭐⭐ |  
+| **Multi-Ejen Peruncit** (Tempatan) | **8+** | **✅** | **Perusahaan** | **Lanjutan** | **⭐⭐⭐⭐** |  
 
-## 🎓 Laluan Pembelajaran  
+## 🎓 Laluan Pembelajaran
 
-### Perkembangan yang Disyorkan  
+### Progression Disyorkan
 
-1. **Mulakan dengan Aplikasi Web Mudah**  
-   - Pelajari konsep asas AZD  
-   - Fahami aliran kerja penerapan  
-   - Latih pengurusan persekitaran  
+1. **Mulakan dengan Apl Web Mudah**  
+   - Pelajari konsep AZD asas  
+   - Fahami aliran kerja pelaksanaan  
+   - Amalkan pengurusan persekitaran  
 
 2. **Cuba Laman Web Statik**  
-   - Terokai pilihan hosting yang berbeza  
-   - Pelajari tentang integrasi CDN  
+   - Terokai pilihan penghosan berbeza  
+   - Pelajari integrasi CDN  
    - Fahami konfigurasi DNS  
 
-3. **Berpindah ke Aplikasi Kontena**  
-   - Pelajari asas pengkontenaan  
+3. **Berpindah ke Apl Kontena**  
+   - Pelajari asas pengkontenan  
    - Fahami konsep penskalaan  
-   - Latih dengan Docker  
+   - Amalkan dengan Docker  
 
 4. **Tambah Integrasi Pangkalan Data**  
    - Pelajari penyediaan pangkalan data  
    - Fahami rentetan sambungan  
-   - Latih pengurusan rahsia  
+   - Amalkan pengurusan rahsia  
 
-5. **Terokai Tanpa Pelayan**  
+5. **Terokai Tanpa Server**  
    - Fahami seni bina berasaskan acara  
-   - Pelajari tentang pencetus dan pengikatan  
-   - Latih dengan API  
+   - Pelajari pencetus dan pengikat  
+   - Amalkan dengan API  
 
 6. **Bina Mikroservis**  
    - Pelajari komunikasi perkhidmatan  
    - Fahami sistem teragih  
-   - Latih penerapan kompleks  
+   - Amalkan pelaksanaan kompleks  
 
-## 🔍 Mencari Contoh yang Sesuai  
+## 🔍 Mencari Contoh Yang Sesuai
 
-### Mengikut Teknologi  
+### Mengikut Tumpukan Teknologi  
 - **Container Apps**: [Python Flask API (Tempatan)](../../../examples/container-app/simple-flask-api), [Mikroservis (Tempatan)](../../../examples/container-app/microservices), Java Mikroservis  
-- **Node.js**: Node.js Express Todo App, [API Gateway Mikroservis (Tempatan)](../../../examples/container-app/microservices)  
-- **Python**: [Python Flask API (Tempatan)](../../../examples/container-app/simple-flask-api), [Perkhidmatan Produk Mikroservis (Tempatan)](../../../examples/container-app/microservices), Python Functions + SPA  
-- **C#**: [Perkhidmatan Pesanan Mikroservis (Tempatan)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, Saluran ML  
-- **Go**: [Perkhidmatan Pengguna Mikroservis (Tempatan)](../../../examples/container-app/microservices)  
+- **Node.js**: Apl Todo Node.js Express, [Microservices API Gateway (Tempatan)](../../../examples/container-app/microservices)  
+- **Python**: [Python Flask API (Tempatan)](../../../examples/container-app/simple-flask-api), [Mikroservis Perkhidmatan Produk (Tempatan)](../../../examples/container-app/microservices), Python Functions + SPA  
+- **C#**: [Mikroservis Perkhidmatan Pesanan (Tempatan)](../../../examples/container-app/microservices), C# Web API + SQL Database, Apl Chat Azure OpenAI, Laluan ML  
+- **Go**: [Mikroservis Perkhidmatan Pengguna (Tempatan)](../../../examples/container-app/microservices)  
 - **Java**: Java Spring Boot Mikroservis  
 - **React**: React SPA + Functions  
 - **Kontena**: [Python Flask (Tempatan)](../../../examples/container-app/simple-flask-api), [Mikroservis (Tempatan)](../../../examples/container-app/microservices), Java Mikroservis  
 - **Pangkalan Data**: [Mikroservis (Tempatan)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
-- **AI/ML**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, Pemprosesan Dokumen AI, Saluran ML, **Penyelesaian Multi-Agent Peruncit**  
-- **Sistem Multi-Agent**: **Penyelesaian Multi-Agent Peruncit**  
-- **Integrasi OpenAI**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, Penyelesaian Multi-Agent Peruncit  
-- **Pengeluaran Perusahaan**: [Mikroservis (Tempatan)](../../../examples/container-app/microservices), **Penyelesaian Multi-Agent Peruncit**  
+- **AI/ML**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, Apl Chat Azure OpenAI, Pemprosesan Dokumen AI, Laluan ML, **Penyelesaian Multi-Ejen Peruncit**  
+- **Sistem Multi-Ejen**: **Penyelesaian Multi-Ejen Peruncit**  
+- **Integrasi OpenAI**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, Penyelesaian Multi-Ejen Peruncit  
+- **Pengeluaran Perusahaan**: [Mikroservis (Tempatan)](../../../examples/container-app/microservices), **Penyelesaian Multi-Ejen Peruncit**  
 
 ### Mengikut Corak Seni Bina  
-- **REST API Mudah**: [Python Flask API (Tempatan)](../../../examples/container-app/simple-flask-api)  
+- **API REST Mudah**: [Python Flask API (Tempatan)](../../../examples/container-app/simple-flask-api)  
 - **Monolitik**: Node.js Express Todo, C# Web API + SQL  
-- **Statik + Tanpa Pelayan**: React SPA + Functions, Python Functions + SPA  
+- **Statik + Tanpa Server**: React SPA + Functions, Python Functions + SPA  
 - **Mikroservis**: [Mikroservis Pengeluaran (Tempatan)](../../../examples/container-app/microservices), Java Spring Boot Mikroservis  
-- **Pengkontenaan**: [Python Flask (Tempatan)](../../../examples/container-app/simple-flask-api), [Mikroservis (Tempatan)](../../../examples/container-app/microservices)  
-- **Dikuasakan AI**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, Pemprosesan Dokumen AI, Saluran ML, **Penyelesaian Multi-Agent Peruncit**  
-- **Seni Bina Multi-Agent**: **Penyelesaian Multi-Agent Peruncit**  
-- **Pelbagai Perkhidmatan Perusahaan**: [Mikroservis (Tempatan)](../../../examples/container-app/microservices), **Penyelesaian Multi-Agent Peruncit**  
+- **Berkontena**: [Python Flask (Tempatan)](../../../examples/container-app/simple-flask-api), [Mikroservis (Tempatan)](../../../examples/container-app/microservices)  
+- **Diperkasa AI**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, Apl Chat Azure OpenAI, Pemprosesan Dokumen AI, Laluan ML, **Penyelesaian Multi-Ejen Peruncit**  
+- **Seni Bina Multi-Ejen**: **Penyelesaian Multi-Ejen Peruncit**  
+- **Multi-Perkhidmatan Perusahaan**: [Mikroservis (Tempatan)](../../../examples/container-app/microservices), **Penyelesaian Multi-Ejen Peruncit**  
 
-### Mengikut Tahap Kerumitan  
+### Mengikut Tahap Kesukaran  
 - **Pemula**: [Python Flask API (Tempatan)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
-- **Pertengahan**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Mikroservis, Azure OpenAI Chat App, Pemprosesan Dokumen AI  
-- **Lanjutan**: Saluran ML  
-- **Sedia untuk Pengeluaran Perusahaan**: [Mikroservis (Tempatan)](../../../examples/container-app/microservices) (Pelbagai perkhidmatan dengan antrian mesej), **Penyelesaian Multi-Agent Peruncit** (Sistem multi-agent lengkap dengan penerapan templat ARM)  
+- **Pertengahan**: **[Azure OpenAI Chat (Tempatan)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Mikroservis, Apl Chat Azure OpenAI, Pemprosesan Dokumen AI  
+- **Lanjutan**: Laluan ML  
+- **Sedia Pengeluaran Perusahaan**: [Mikroservis (Tempatan)](../../../examples/container-app/microservices) (Pelbagai perkhidmatan dengan penjujukan mesej), **Penyelesaian Multi-Ejen Peruncit** (Sistem multi-ejen lengkap dengan templat ARM)  
 
-## 📚 Sumber Tambahan  
+## 📚 Sumber Tambahan
 
 ### Pautan Dokumentasi  
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
-- [Templat AZD Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)  
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)  
 - [Dokumentasi Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
 - [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
 
 ### Contoh Komuniti  
-- [Templat AZD Contoh Azure](https://github.com/Azure-Samples/azd-templates)  
-- [Templat Azure AI Foundry](https://github.com/Azure/ai-foundry-templates)  
+- [Templat AZD Sampel Azure](https://github.com/Azure-Samples/azd-templates)  
+- [Templat Microsoft Foundry](https://github.com/Azure/ai-foundry-templates)  
 - [Galeri Azure Developer CLI](https://azure.github.io/awesome-azd/)  
-- [Aplikasi Todo dengan C# dan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)  
-- [Aplikasi Todo dengan Python dan MongoDB](https://github.com/Azure-Samples/todo-python-mongo)  
+- [Apl Todo dengan C# dan Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)  
+- [Apl Todo dengan Python dan MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Aplikasi Todo dengan Node.js dan PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [Aplikasi Web React dengan API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Kerja Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Pekerjaan Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions dengan Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Amalan Terbaik
-- [Kerangka Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Kerangka Pengambilan Awan](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Rangka Kerja Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Rangka Kerja Pengambilan Cloud](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Menyumbang Contoh
 
-Ada contoh berguna untuk dikongsi? Kami mengalu-alukan sumbangan anda!
+Ada contoh berguna untuk dikongsi? Kami mengalu-alukan sumbangan!
 
 ### Garis Panduan Penyerahan
 1. Ikuti struktur direktori yang telah ditetapkan
-2. Sertakan README.md yang lengkap
-3. Tambahkan komen pada fail konfigurasi
-4. Uji dengan teliti sebelum menyerahkan
+2. Sertakan README.md yang komprehensif
+3. Tambah ulasan pada fail konfigurasi
+4. Uji dengan teliti sebelum menyerah
 5. Sertakan anggaran kos dan prasyarat
 
-### Struktur Template Contoh
+### Struktur Templet Contoh
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -621,46 +612,46 @@ example-name/
 
 ---
 
-**Tip Profesional**: Mulakan dengan contoh paling mudah yang sesuai dengan teknologi anda, kemudian secara beransur-ansur beralih kepada senario yang lebih kompleks. Setiap contoh membina konsep daripada yang sebelumnya!
+**Pro Tip**: Mulakan dengan contoh yang paling mudah yang sesuai dengan rangka teknologi anda, kemudian secara berperingkat naik ke senario yang lebih kompleks. Setiap contoh dibina berdasarkan konsep dari contoh sebelumnya!
 
-## 🚀 Sedia Bermula?
+## 🚀 Sedia untuk Bermula?
 
 ### Laluan Pembelajaran Anda
 
-1. **Pemula Sepenuhnya?** → Mulakan dengan [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 minit)
-2. **Ada Pengetahuan Asas AZD?** → Cuba [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 minit)
-3. **Membina Aplikasi AI?** → Mulakan dengan [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 minit) atau terokai [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ jam)
-4. **Perlu Teknologi Tertentu?** → Gunakan bahagian [Mencari Contoh yang Tepat](../../../examples) di atas
+1. **Pemula Lengkap?** → Mula dengan [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 minit)
+2. **Ada Pengetahuan AZD Asas?** → Cuba [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 minit)
+3. **Membangun Aplikasi AI?** → Mula dengan [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 minit) atau terokai [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, lebih 2 jam)
+4. **Perlu Rangka Teknologi Spesifik?** → Gunakan bahagian [Mencari Contoh Yang Sesuai](../../../examples) di atas
 
 ### Langkah Seterusnya
 
 - ✅ Semak [Prasyarat](../../../examples) di atas
-- ✅ Pilih contoh yang sesuai dengan tahap kemahiran anda (lihat [Legenda Kerumitan](../../../examples))
-- ✅ Baca README contoh dengan teliti sebelum melaksanakan
-- ✅ Tetapkan peringatan untuk menjalankan `azd down` selepas ujian
-- ✅ Kongsi pengalaman anda melalui Isu atau Perbincangan GitHub
+- ✅ Pilih contoh yang sesuai dengan tahap kemahiran anda (rujuk [Legenda Tahap Kerumitan](../../../examples))
+- ✅ Baca README contoh dengan teliti sebelum menterjemah
+- ✅ Tetapkan peringatan untuk jalankan `azd down` selepas ujian
+- ✅ Kongsikan pengalaman anda melalui Isu GitHub atau Perbincangan
 
 ### Perlu Bantuan?
 
 - 📖 [FAQ](../resources/faq.md) - Soalan lazim dijawab
-- 🐛 [Panduan Penyelesaian Masalah](../docs/troubleshooting/common-issues.md) - Baiki isu pelaksanaan
+- 🐛 [Panduan Penyelesaian Masalah](../docs/chapter-07-troubleshooting/common-issues.md) - Betulkan isu penyebaran
 - 💬 [Perbincangan GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Tanya komuniti
 - 📚 [Panduan Pembelajaran](../resources/study-guide.md) - Kukuhkan pembelajaran anda
 
 ---
 
 **Navigasi**
-- **📚 Kursus Utama**: [AZD Untuk Pemula](../README.md)
-- **📖 Bahan Pembelajaran**: [Panduan Pembelajaran](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glosari](../resources/glossary.md)
-- **🔧 Sumber**: [FAQ](../resources/faq.md) | [Penyelesaian Masalah](../docs/troubleshooting/common-issues.md)
+- **📚 Halaman Kursus**: [AZD Untuk Pemula](../README.md)
+- **📖 Bahan Pembelajaran**: [Panduan Pembelajaran](../resources/study-guide.md) | [Lembaran Cepat](../resources/cheat-sheet.md) | [Glosari](../resources/glossary.md)
+- **🔧 Sumber**: [FAQ](../resources/faq.md) | [Penyelesaian Masalah](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Kemaskini Terakhir: November 2025 | [Laporkan Isu](https://github.com/microsoft/AZD-for-beginners/issues) | [Sumbang Contoh](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Terakhir Dikemaskini: November 2025 | [Melaporkan Isu](https://github.com/microsoft/AZD-for-beginners/issues) | [Sumbang Contoh](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sah. Untuk maklumat penting, terjemahan oleh penterjemah manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

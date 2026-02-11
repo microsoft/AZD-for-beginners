@@ -1,47 +1,38 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-22T10:33:33+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ms"
-}
--->
-# Contoh Penerapan Aplikasi Kontena dengan AZD
+# Contoh Penempatan Aplikasi Bekas dengan AZD
 
-Direktori ini mengandungi contoh lengkap untuk menerapkan aplikasi yang telah dikontena ke Azure Container Apps menggunakan Azure Developer CLI (AZD). Contoh-contoh ini menunjukkan corak dunia nyata, amalan terbaik, dan konfigurasi yang sedia untuk produksi.
+Direktori ini mengandungi contoh menyeluruh untuk menempatkan aplikasi berbekas ke Azure Container Apps menggunakan Azure Developer CLI (AZD). Contoh ini menunjukkan corak dunia sebenar, amalan terbaik, dan konfigurasi sedia produksi.
 
-## 📚 Kandungan
+## 📚 Jadual Kandungan
 
-- [Pengenalan](../../../../examples/container-app)
+- [Gambaran Keseluruhan](../../../../examples/container-app)
 - [Prasyarat](../../../../examples/container-app)
-- [Contoh Permulaan Cepat](../../../../examples/container-app)
+- [Contoh Mula Pantas](../../../../examples/container-app)
 - [Contoh Produksi](../../../../examples/container-app)
 - [Corak Lanjutan](../../../../examples/container-app)
 - [Amalan Terbaik](../../../../examples/container-app)
 
-## Pengenalan
+## Gambaran Keseluruhan
 
-Azure Container Apps adalah platform kontena tanpa pelayan yang diurus sepenuhnya, yang membolehkan anda menjalankan perkhidmatan mikro dan aplikasi yang telah dikontena tanpa perlu mengurus infrastruktur. Apabila digabungkan dengan AZD, anda mendapat:
+Azure Container Apps adalah platform bekas tanpa pelayan yang diurus sepenuhnya yang membolehkan anda menjalankan mikroservis dan aplikasi berbekas tanpa mengurus infrastruktur. Apabila digabungkan dengan AZD, anda mendapat:
 
-- **Penerapan Dipermudahkan**: Perintah tunggal untuk menerapkan kontena bersama infrastruktur
-- **Penskalaan Automatik**: Penskalaan ke sifar dan penskalaan keluar berdasarkan trafik HTTP atau acara
-- **Rangkaian Terintegrasi**: Penemuan perkhidmatan terbina dalam dan pembahagian trafik
+- **Penempatan Mudah**: Satu arahan untuk menempatkan bekas dengan infrastruktur
+- **Penalaan Automatik**: Skala ke sifar dan skala keluar berdasarkan trafik HTTP atau acara
+- **Rangkaian Terpadu**: Penemuan perkhidmatan dan pecahan trafik terbina dalam
 - **Identiti Terurus**: Pengesahan selamat ke sumber Azure
-- **Pengoptimuman Kos**: Bayar hanya untuk sumber yang digunakan
+- **Pengoptimuman Kos**: Bayar hanya untuk sumber yang anda gunakan
 
 ## Prasyarat
 
-Sebelum memulakan, pastikan anda mempunyai:
+Sebelum bermula, pastikan anda mempunyai:
 
 ```bash
-# Periksa pemasangan AZD
+# Semak pemasangan AZD
 azd version
 
-# Periksa Azure CLI
+# Semak Azure CLI
 az version
 
-# Periksa Docker (untuk membina imej tersuai)
+# Semak Docker (untuk membina imej tersuai)
 docker --version
 
 # Log masuk ke Azure
@@ -50,17 +41,17 @@ az login
 ```
 
 **Sumber Azure Diperlukan:**
-- Langganan Azure yang aktif
-- Kebenaran untuk mencipta kumpulan sumber
-- Akses ke persekitaran Container Apps
+- Langganan Azure aktif
+- Kebenaran untuk membuat kumpulan sumber
+- Akses persekitaran Container Apps
 
-## Contoh Permulaan Cepat
+## Contoh Mula Pantas
 
-### 1. API Web Mudah (Python Flask)
+### 1. Web API Mudah (Python Flask)
 
-Terapkan REST API asas dengan Azure Container Apps.
+Tempatkan API REST asas dengan Azure Container Apps.
 
-**Contoh: API Python Flask**
+**Contoh: Python Flask API**
 
 ```yaml
 # azure.yaml
@@ -74,29 +65,29 @@ services:
     host: containerapp
 ```
 
-**Langkah Penerapan:**
+**Langkah Penempatan:**
 
 ```bash
 # Mulakan dari templat
 azd init --template todo-python-mongo
 
-# Sediakan infrastruktur dan laksanakan
+# Menyediakan infrastruktur dan menyebarkan
 azd up
 
-# Uji pelaksanaan
+# Uji penyebaran
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Ciri Utama:**
-- Penskalaan automatik dari 0 ke 10 replika
+- Penalaan automatik dari 0 hingga 10 replika
 - Pemeriksaan kesihatan dan liveness
 - Suntikan pembolehubah persekitaran
 - Integrasi Application Insights
 
-### 2. API Node.js Express
+### 2. Node.js Express API
 
-Terapkan backend Node.js dengan integrasi MongoDB.
+Tempatkan backend Node.js dengan integrasi MongoDB.
 
 ```bash
 # Inisialisasi templat API Node.js
@@ -106,11 +97,11 @@ azd init --template todo-nodejs-mongo
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Laksanakan
+# Lancarkan
 azd up
 
-# Lihat log
-azd logs api
+# Lihat log melalui Azure Monitor
+azd monitor --logs
 ```
 
 **Sorotan Infrastruktur:**
@@ -158,16 +149,16 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Frontend Statik + Backend API
 
-Terapkan aplikasi full-stack dengan frontend React dan backend API.
+Tempatkan aplikasi penuh dengan frontend React dan backend API.
 
 ```bash
-# Mulakan templat full-stack
+# Inisialisasi templat sepenuhnya
 azd init --template todo-csharp-sql-swa-func
 
 # Semak konfigurasi
 cat azure.yaml
 
-# Sebarkan kedua-dua perkhidmatan
+# Lancarkan kedua-dua perkhidmatan
 azd up
 
 # Buka aplikasi
@@ -176,9 +167,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Contoh Produksi
 
-### Contoh 1: Seni Bina Perkhidmatan Mikro
+### Contoh 1: Seni Bina Mikroservis
 
-**Senario**: Aplikasi e-dagang dengan pelbagai perkhidmatan mikro
+**Senario**: Aplikasi e-dagang dengan pelbagai mikroservis
 
 **Struktur Direktori:**
 ```
@@ -220,7 +211,7 @@ services:
     host: containerapp
 ```
 
-**Penerapan:**
+**Penempatan:**
 ```bash
 # Mulakan projek
 azd init
@@ -240,9 +231,9 @@ azd up
 azd monitor --overview
 ```
 
-### Contoh 2: Aplikasi Kontena Berkuasa AI
+### Contoh 2: Aplikasi Bekas Berkuasa AI
 
-**Senario**: Aplikasi sembang AI dengan integrasi Azure OpenAI
+**Senario**: Aplikasi chat AI dengan integrasi Azure OpenAI
 
 **Fail: src/ai-chat/app.py**
 ```python
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Gunakan Identiti Terurus untuk akses yang selamat
+# Gunakan Identiti Terurus untuk akses selamat
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -329,9 +320,9 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Perintah Penerapan:**
+**Arahan Penempatan:**
 ```bash
-# Tetapkan persekitaran
+# Sediakan persekitaran
 azd init --template ai-chat-app
 azd env new dev
 
@@ -339,7 +330,7 @@ azd env new dev
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
-# Laksanakan
+# Lancarkan
 azd up
 
 # Uji API
@@ -348,9 +339,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Contoh 3: Pekerja Latar Belakang dengan Pemprosesan Barisan
+### Contoh 3: Pekerja Latar dengan Pemprosesan Antrian
 
-**Senario**: Sistem pemprosesan pesanan dengan barisan mesej
+**Senario**: Sistem pemprosesan pesanan dengan antrian mesej
 
 **Struktur Direktori:**
 ```
@@ -390,7 +381,7 @@ def process_orders():
             # Proses pesanan
             print(f"Processing order: {message.content}")
             
-            # Lengkapkan mesej
+            # Mesej lengkap
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -412,12 +403,12 @@ services:
     host: containerapp
 ```
 
-**Penerapan:**
+**Penempatan:**
 ```bash
 # Inisialisasi
 azd init
 
-# Sebarkan dengan konfigurasi barisan
+# Lancarkan dengan konfigurasi barisan
 azd up
 
 # Skala pekerja berdasarkan panjang barisan
@@ -431,13 +422,13 @@ az containerapp update \
 
 ## Corak Lanjutan
 
-### Corak 1: Penerapan Blue-Green
+### Corak 1: Penempatan Biru-Hijau
 
 ```bash
-# Cipta semakan baru tanpa trafik
+# Buat semakan baharu tanpa trafik
 azd deploy api --revision-suffix blue --no-traffic
 
-# Uji semakan baru
+# Uji semakan baharu
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
 # Bahagikan trafik (20% ke biru, 80% ke semasa)
@@ -446,14 +437,14 @@ az containerapp ingress traffic set \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Peralihan penuh ke biru
+# Alih sepenuhnya ke biru
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Corak 2: Penerapan Canary dengan AZD
+### Corak 2: Penempatan Canary dengan AZD
 
 **Fail: .azure/dev/config.json**
 ```json
@@ -467,18 +458,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Skrip Penerapan:**
+**Skrip Penempatan:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Sebarkan semakan baru dengan 10% trafik
+# Lancarkan semakan baru dengan 10% trafik
 azd deploy api --revision-mode multiple
 
 # Pantau metrik
 azd monitor --service api --duration 5m
 
-# Tingkatkan trafik secara beransur-ansur
+# Tambah trafik secara beransur-ansur
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Corak 3: Penerapan Multi-Region
+### Corak 3: Penempatan Berbilang Wilayah
 
 **Fail: azure.yaml**
 ```yaml
@@ -536,7 +527,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Penerapan:**
+**Penempatan:**
 ```bash
 # Sebarkan ke semua wilayah
 azd up
@@ -604,7 +595,7 @@ def create_order():
 ### 1. Pengurusan Sumber
 
 ```bash
-# Gunakan konvensi penamaan yang konsisten
+# Gunakan konvensyen penamaan yang konsisten
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -612,7 +603,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Amalan Terbaik Keselamatan
+### 2. Amalan Keselamatan Terbaik
 
 ```bicep
 // Always use managed identity
@@ -671,17 +662,19 @@ services:
             concurrent: 100
 ```
 
-### 4. Pemantauan dan Pemerhatian
+### 4. Pemantauan dan Kebolehlihatan
 
 ```bash
 # Aktifkan Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Lihat log secara masa nyata
-azd logs api --follow
+azd monitor --logs
+# Atau gunakan Azure CLI untuk Aplikasi Kontena:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Pantau metrik
-azd monitor --service api
+azd monitor --live
 
 # Cipta amaran
 az monitor metrics alert create \
@@ -704,7 +697,7 @@ az containerapp update \
 # Gunakan instans spot untuk persekitaran pembangunan
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Tetapkan amaran bajet
+# Tetapkan amaran belanjawan
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -744,26 +737,27 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Rujukan Perintah Biasa
+## Rujukan Arahan Umum
 
 ```bash
-# Mulakan projek aplikasi kontena baru
+# Inisialisasi projek aplikasi kontena baru
 azd init --template <template-name>
 
-# Sebarkan infrastruktur dan aplikasi
+# Lancarkan infrastruktur dan aplikasi
 azd up
 
-# Sebarkan hanya kod aplikasi (langkau infrastruktur)
+# Lancarkan hanya kod aplikasi (langkau infrastruktur)
 azd deploy
 
 # Sediakan hanya infrastruktur
 azd provision
 
-# Lihat sumber yang telah disebarkan
+# Lihat sumber yang telah dilancarkan
 azd show
 
-# Alirkan log
-azd logs <service-name> --follow
+# Alirkan log menggunakan azd monitor atau Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <nama-perkhidmatan> --resource-group <nama-rg> --follow
 
 # Pantau aplikasi
 azd monitor --overview
@@ -774,13 +768,13 @@ azd down --force --purge
 
 ## Penyelesaian Masalah
 
-### Isu: Kontena gagal dimulakan
+### Isu: Bekas gagal untuk memulakan
 
 ```bash
-# Semak log
-azd logs api --tail 100
+# Semak log menggunakan Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Lihat acara kontena
+# Lihat acara bekas
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -791,7 +785,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Isu: Tidak dapat mengakses titik akhir aplikasi kontena
+### Isu: Tidak boleh mengakses titik hujung aplikasi bekas
 
 ```bash
 # Sahkan konfigurasi ingress
@@ -800,7 +794,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Periksa jika ingress dalaman diaktifkan
+# Semak jika ingress dalaman diaktifkan
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -810,12 +804,12 @@ az containerapp ingress update \
 ### Isu: Masalah prestasi
 
 ```bash
-# Periksa penggunaan sumber
+# Semak penggunaan sumber
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Tingkatkan sumber
+# Skala naik sumber
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -823,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Sumber Tambahan dan Contoh
-- [Contoh Perkhidmatan Mikro](./microservices/README.md)
-- [Contoh API Flask Mudah](./simple-flask-api/README.md)
+## Sumber dan Contoh Tambahan
+- [Contoh Mikroservis](./microservices/README.md)
+- [Contoh Flash API Mudah](./simple-flask-api/README.md)
 - [Dokumentasi Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Galeri Templat AZD](https://azure.github.io/awesome-azd/)
+- [Galeri Template AZD](https://azure.github.io/awesome-azd/)
 - [Contoh Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Templat Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Template Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Menyumbang
 
-Untuk menyumbang contoh aplikasi kontena baru:
+Untuk menyumbang contoh aplikasi bekas baru:
 
-1. Cipta subdirektori baru dengan contoh anda
-2. Sertakan fail lengkap `azure.yaml`, `infra/`, dan `src/`
-3. Tambahkan README yang komprehensif dengan arahan penerapan
-4. Uji penerapan dengan `azd up`
+1. Buat subdirektori baru dengan contoh anda
+2. Sertakan fail `azure.yaml`, `infra/`, dan `src/` lengkap
+3. Tambah README komprehensif dengan arahan penempatan
+4. Uji penempatan dengan `azd up`
 5. Hantar permintaan tarik
 
 ---
 
-**Perlu Bantuan?** Sertai komuniti [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) untuk sokongan dan soalan.
+**Perlu Bantuan?** Sertai komuniti [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) untuk sokongan dan pertanyaan.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat penting, disarankan terjemahan profesional oleh manusia. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,29 +1,20 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-24T23:37:26+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "ms"
-}
--->
 # AZD Untuk Pembangun AI
 
-!!! info "AUDIEN UNTUK BENGKEL INI"
+!!! info "PENONTON UNTUK WORKSHOP INI"
    
-    Bengkel ini sesuai untuk sesiapa sahaja yang ingin membina aplikasi AI Agentic di Azure AI Foundry dengan menggunakan alat dan aliran kerja terbaik. Bengkel ini sesuai untuk pemula dan pembangun berpengalaman yang mempunyai sedikit pengetahuan tentang Azure, konsep AI, dan kod Python. Sila semak prasyarat sebelum memulakan.
+    Bengkel ini adalah untuk sesiapa sahaja yang ingin membina aplikasi Agen AI di Microsoft Foundry dengan menggunakan alat dan aliran kerja terbaik. Bengkel ini sesuai untuk pemula dan pembangun berpengalaman yang mempunyai sedikit pengetahuan mengenai Azure, konsep AI dan kod Python. Sila semak pra-syarat sebelum anda mula.
 
     **Tempoh:** 3-4 jam  
-    **Tahap:** Pemula hingga Pertengahan  
+    **Tahap:** Pemula ke Pertengahan  
 
 ---
 
 
-## Prasyarat
+## Pra-Syarat
 
-- Akaun GitHub peribadi → [Buat satu secara percuma](https://github.com/signup)
-- Akaun Azure yang aktif → [Buat satu secara percuma](https://aka.ms/free)
-- Pengetahuan asas tentang konsep AI, pembangunan Python, alat baris perintah
+- Akaun GitHub peribadi → [Cipta secara percuma](https://github.com/signup)
+- Akaun Azure aktif → [Cipta secara percuma](https://aka.ms/free)
+- Kefahaman tentang konsep AI, pembangunan Python, alat baris arahan
 - Pengalaman dengan VS Code dan alat serta aliran kerja GitHub.
 
 ---
@@ -32,25 +23,25 @@ CO_OP_TRANSLATOR_METADATA:
 
 Menjelang akhir bengkel ini, anda akan tahu cara untuk:
 
-- [X] **Bekerja dengan Azure Developer CLI** → untuk menyediakan, melancarkan, dan mengurus sumber Azure anda.
-- [X] **Menggunakan Templat Aplikasi AI** → untuk memulakan projek AI Agent di Azure AI Foundry.
-- [X] **Mengkonfigurasi Templat** → untuk ciri seperti Red Teaming, Penilaian, Penjejakan & Pemantauan
-- [X] **Membongkar dan Meneroka** → templat dan aliran kerja AZD menggunakan GitHub Copilot
-- [X] **Menyesuaikan dan Melancarkan Semula** → templat permulaan AI Agent, dengan keperluan khusus anda
+- [X] **Bekerja dengan Azure Developer CLI** → untuk menyediakan, menyebarkan, dan mengurus sumber Azure anda.
+- [X] **Gunakan Templat Aplikasi AI** → untuk memulakan projek Agen AI di Microsoft Foundry.
+- [X] **Konfigurasikan Templat** → untuk ciri seperti Red Teaming, Penilaian, Pengesanan & Pemantauan
+- [X] **Mendekonstruksi dan Meneroka** → templat AZD dan aliran kerja menggunakan GitHub Copilot
+- [X] **Sesuaikan dan Sebarkan Semula** → templat permulaan Agen AI, dengan keperluan khusus anda
 
 ---
 
 ## Rangka Bengkel
 
-Bengkel ini disusun dalam modul-modul, setiap satu disertai dengan latihan makmal praktikal:
+Bengkel ini disusun sebagai modul, setiap satu disokong oleh latihan praktik:
 
-1. **Pengenalan** - Fahami apa itu templat AZD dan cara ia berfungsi
-1. **Pemilihan** - Cari templat "permulaan" yang sesuai untuk projek AI anda yang seterusnya
-1. **Pengesahan** - Lancarkan dan teroka templat untuk memastikan ia berfungsi seperti yang diiklankan
-1. **Pembongkaran** - Bongkar templat untuk memahami komponennya & konfigurasi
-1. **Konfigurasi** - Belajar mengaktifkan dan menggunakan pelbagai ciri Azure AI Foundry
-1. **Penyesuaian** - Bina semula aplikasi dengan data dan keperluan anda
-1. **Pembongkaran Infrastruktur** - Belajar cara menyahperuntukkan infrastruktur dan memulihkan sumber yang dipadam secara lembut
+1. **Pengenalan** - Memahami apa itu templat AZD, dan bagaimana ia berfungsi
+1. **Pemilihan** - Temui templat "permulaan" yang sesuai untuk projek AI anda seterusnya
+1. **Pengesahan** - Sebarkan dan terokai templat untuk mengesahkan ia berfungsi seperti yang dijanjikan
+1. **Dekonstruksi** - Pisahkan templat untuk memahami komponennya & konfigurasi
+1. **Konfigurasi** - Belajar mengaktifkan dan menggunakan pelbagai ciri Microsoft Foundry
+1. **Penyesuaian** - Bina semula aplikasi dengan data dan keperluan anda dalam fikiran
+1. **Pembongkaran** - Belajar menyahprovisikan infrastruktur dan memulihkan sumber yang dipadam secara lembut
 
 ---
 
@@ -58,8 +49,12 @@ Bengkel ini disusun dalam modul-modul, setiap satu disertai dengan latihan makma
 
 Kami sentiasa mengemas kini kurikulum untuk memastikan ia memberikan pengalaman pembelajaran terbaik untuk pemula. Maklum balas anda amat dihargai.
 
-1. Hantar isu pada repo ini - tagkan sebagai `Workshop` untuk kemudahan.
-1. Sertai Discord Azure AI Foundry - berhubung dengan rakan pembelajar!
+1. Hantar isu di repo ini - tag ia dengan `Workshop` untuk kemudahan.
+1. Sertai Microsoft Foundry Discord - berhubung dengan rakan pembelajar!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau kesilapan tafsiran yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

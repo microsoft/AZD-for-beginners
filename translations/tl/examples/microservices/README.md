@@ -1,79 +1,70 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-22T11:05:25+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "tl"
-}
--->
 # Arkitektura ng Microservices - Halimbawa ng Container App
 
-⏱️ **Tinatayang Oras**: 25-35 minuto | 💰 **Tinatayang Gastos**: ~$50-100/buwan | ⭐ **Kumplikado**: Advanced
+⏱️ **Tinatayang Oras**: 25-35 minuto | 💰 **Tinatayang Gastos**: ~$50-100/buwan | ⭐ **Kompleksidad**: Advanced
 
-**📚 Landas ng Pag-aaral:**
-- ← Nakaraan: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Mga pangunahing kaalaman sa single container
-- 🎯 **Narito Ka**: Arkitektura ng Microservices (2-service foundation)
-- → Susunod: [AI Integration](../../../../docs/ai-foundry) - Magdagdag ng katalinuhan sa iyong mga serbisyo
-- 🏠 [Pangunahing Kurso](../../README.md)
+**📚 Landas ng Pagkatuto:**
+- ← Nakaraan: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Mga batayan ng single container
+- 🎯 **Nandito Ka**: Arkitektura ng Microservices (2-service na pundasyon)
+- → Sunod: [AI Integration](../../../../docs/ai-foundry) - Magdagdag ng intelihensya sa iyong mga serbisyo
+- 🏠 [Course Home](../../README.md)
 
 ---
 
-Isang **pinadali ngunit gumaganang** arkitektura ng microservices na na-deploy sa Azure Container Apps gamit ang AZD CLI. Ang halimbawang ito ay nagpapakita ng komunikasyon sa pagitan ng mga serbisyo, container orchestration, at monitoring gamit ang praktikal na 2-service setup.
+Isang **pinasimple ngunit gumagana** na arkitektura ng microservices na naka-deploy sa Azure Container Apps gamit ang AZD CLI. Ipinapakita ng halimbawang ito ang komunikasyon mula serbisyo-sa-serbisyo, pag-orchestrate ng mga container, at pagmo-monitor gamit ang praktikal na 2-service na setup.
 
-> **📚 Paraan ng Pag-aaral**: Ang halimbawang ito ay nagsisimula sa isang minimal na 2-service architecture (API Gateway + Backend Service) na maaari mong i-deploy at matutunan. Pagkatapos maunawaan ang pundasyong ito, nagbibigay kami ng gabay para sa pagpapalawak patungo sa isang buong ecosystem ng microservices.
+> **📚 Paraan ng Pagkatuto**: Nagsisimula ang halimbawang ito sa minimal na 2-service na arkitektura (API Gateway + Backend Service) na maaari mong i-deploy at pag-aralan. Pagkatapos ma-master ang pundasyong ito, nagbibigay kami ng gabay para palawakin ito sa isang buong microservices ecosystem.
 
-## Ano ang Iyong Matututuhan
+## Ano ang Matututuhan Mo
 
-Sa pagtatapos ng halimbawang ito, matututuhan mo:
+Sa pagkumpleto ng halimbawang ito, magagawa mong:
 - Mag-deploy ng maraming container sa Azure Container Apps
-- Magpatupad ng komunikasyon sa pagitan ng mga serbisyo gamit ang internal networking
-- Mag-configure ng environment-based scaling at health checks
-- Mag-monitor ng distributed applications gamit ang Application Insights
-- Maunawaan ang mga pattern at pinakamahusay na kasanayan sa pag-deploy ng microservices
-- Matutunan ang progresibong pagpapalawak mula sa simple patungo sa mas kumplikadong arkitektura
+- Magpatupad ng komunikasyon mula serbisyo-sa-serbisyo gamit ang internal networking
+- I-configure ang scaling batay sa environment at health checks
+- I-monitor ang mga distributed na aplikasyon gamit ang Application Insights
+- Maunawaan ang mga pattern sa pag-deploy ng microservices at best practices
+- Matutunan ang progresibong pagpapalawak mula simple hanggang kumplikadong arkitektura
 
 ## Arkitektura
 
-### Phase 1: Ano ang Ating Itatayo (Kasama sa Halimbawang Ito)
+### Phase 1: Ano ang Binuo Natin (Kasama sa Halimbawang Ito)
 
 ```mermaid
 graph TB
     Internet[Internet/Gumagamit]
-    Gateway[API Gateway<br/>Node.js Container<br/>Port 8080]
-    Product[Serbisyo ng Produkto<br/>Python Container<br/>Port 8000]
-    AppInsights[Application Insights<br/>Pagmamanman at Logs]
+    Gateway[Gateway ng API<br/>Container ng Node.js<br/>Port 8080]
+    Product[Serbisyo ng Produkto<br/>Container ng Python<br/>Port 8000]
+    AppInsights[Mga Insight ng Aplikasyon<br/>Pagmamanman at Mga Log]
     
     Internet -->|HTTPS| Gateway
     Gateway -->|HTTP Panloob| Product
-    Gateway -.->|Telemetriya| AppInsights
-    Product -.->|Telemetriya| AppInsights
+    Gateway -.->|Telemetri| AppInsights
+    Product -.->|Telemetri| AppInsights
     
     style Gateway fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Product fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
     style Internet fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#fff
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:#fff
 ```
-**Mga Detalye ng Komponent:**
+**Detalye ng Komponent:**
 
-| Komponent | Layunin | Access | Mga Resources |
-|-----------|---------|--------|---------------|
-| **API Gateway** | Nagre-route ng mga external na request sa backend services | Pampubliko (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replicas |
-| **Product Service** | Pinamamahalaan ang product catalog gamit ang in-memory data | Internal lamang | 0.5 vCPU, 1GB RAM, 1-10 replicas |
-| **Application Insights** | Sentralisadong logging at distributed tracing | Azure Portal | 1-2 GB/buwan data ingestion |
+| Component | Purpose | Access | Resources |
+|-----------|---------|--------|-----------|
+| **API Gateway** | Nagro-route ng mga external na request sa mga backend na serbisyo | Public (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replicas |
+| **Product Service** | Namamahala ng katalogo ng produkto gamit ang in-memory na data | Internal only | 0.5 vCPU, 1GB RAM, 1-10 replicas |
+| **Application Insights** | Sentralisadong pag-log at distributed tracing | Azure Portal | 1-2 GB/month data ingestion |
 
 **Bakit Magsimula sa Simple?**
-- ✅ Mabilis na ma-deploy at maunawaan (25-35 minuto)
+- ✅ Mabilis na ma-deploy at mauunawaan (25-35 minuto)
 - ✅ Matutunan ang mga pangunahing pattern ng microservices nang walang komplikasyon
 - ✅ Gumaganang code na maaari mong baguhin at subukan
-- ✅ Mas mababang gastos para sa pag-aaral (~$50-100/buwan kumpara sa $300-1400/buwan)
-- ✅ Magkaroon ng kumpiyansa bago magdagdag ng databases at message queues
+- ✅ Mas mababang gastos para sa pagkatuto (~$50-100/buwan vs $300-1400/buwan)
+- ✅ Maging kumpiyansa bago magdagdag ng mga database at message queues
 
-**Analohiya**: Isipin ito na parang pag-aaral magmaneho. Nagsisimula ka sa isang bakanteng parking lot (2 serbisyo), matutunan ang mga pangunahing kaalaman, pagkatapos ay magprogreso sa trapiko sa lungsod (5+ serbisyo na may databases).
+**Paghahambing**: Isipin ito na parang pagkatuto magmaneho. Nagsisimula ka sa isang walang lamang paradahan (2 serbisyo), pinagyayaman ang mga batayan, saka saka lumilipat sa trapiko sa lungsod (5+ serbisyo na may mga database).
 
 ### Phase 2: Hinaharap na Pagpapalawak (Reference Architecture)
 
-Kapag na-master mo na ang 2-service architecture, maaari kang magpalawak sa:
+Kapag na-master mo ang 2-service na arkitektura, maaari mong palawakin sa:
 
 ```mermaid
 graph TB
@@ -82,11 +73,11 @@ graph TB
     Product[Serbisyo ng Produkto<br/>✅ Kasama]
     Order[Serbisyo ng Order<br/>🔜 Idagdag Susunod]
     UserSvc[Serbisyo ng Gumagamit<br/>🔜 Idagdag Susunod]
-    Notify[Serbisyo ng Notipikasyon<br/>🔜 Idagdag Huli]
+    Notify[Serbisyo ng Abiso<br/>🔜 Idagdag Huli]
     
-    CosmosDB[(Cosmos DB<br/>🔜 Datos ng Produkto)]
-    AzureSQL[(Azure SQL<br/>🔜 Datos ng Order)]
-    ServiceBus[Azure Service Bus<br/>🔜 Async na Mga Kaganapan]
+    CosmosDB[(Cosmos DB<br/>🔜 Data ng Produkto)]
+    AzureSQL[(Azure SQL<br/>🔜 Data ng Order)]
+    ServiceBus[Azure Service Bus<br/>🔜 Mga Asinkrong Kaganapan]
     AppInsights[Application Insights<br/>✅ Kasama]
     
     User --> Gateway
@@ -98,7 +89,7 @@ graph TB
     Order --> AzureSQL
     UserSvc --> AzureSQL
     
-    Product -.->|Kaganapan ng ProductCreated| ServiceBus
+    Product -.->|ProductCreated na Kaganapan| ServiceBus
     ServiceBus -.->|Mag-subscribe| Notify
     ServiceBus -.->|Mag-subscribe| Order
     
@@ -114,46 +105,46 @@ graph TB
     style UserSvc fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
     style Notify fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
 ```
-Tingnan ang seksyong "Expansion Guide" sa dulo para sa mga hakbang-hakbang na tagubilin.
+Tingnan ang seksyong "Expansion Guide" sa dulo para sa sunud-sunod na mga tagubilin.
 
-## Mga Kasamang Tampok
+## Mga Tampok na Kasama
 
-✅ **Service Discovery**: Awtomatikong DNS-based discovery sa pagitan ng mga container  
-✅ **Load Balancing**: Built-in load balancing sa mga replicas  
-✅ **Auto-scaling**: Independent scaling per service batay sa HTTP requests  
+✅ **Service Discovery**: Awtomatikong DNS-based na pagtuklas sa pagitan ng mga container  
+✅ **Load Balancing**: Built-in na load balancing sa mga replica  
+✅ **Auto-scaling**: Independent scaling para sa bawat serbisyo batay sa HTTP requests  
 ✅ **Health Monitoring**: Liveness at readiness probes para sa parehong serbisyo  
-✅ **Distributed Logging**: Sentralisadong logging gamit ang Application Insights  
-✅ **Internal Networking**: Secure na komunikasyon sa pagitan ng mga serbisyo  
+✅ **Distributed Logging**: Sentralisadong pag-log gamit ang Application Insights  
+✅ **Internal Networking**: Secure na komunikasyon mula serbisyo-sa-serbisyo  
 ✅ **Container Orchestration**: Awtomatikong pag-deploy at scaling  
 ✅ **Zero-Downtime Updates**: Rolling updates na may revision management  
 
 ## Mga Kinakailangan
 
-### Mga Kinakailangang Tool
+### Mga Kailangang Tool
 
-Bago magsimula, tiyaking naka-install ang mga sumusunod na tool:
+Bago magsimula, siguraduhing naka-install ang mga tool na ito:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (bersyon 1.0.0 o mas mataas)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 o mas mataas)
    ```bash
    azd version
    # Inaasahang output: azd bersyon 1.0.0 o mas mataas
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (bersyon 2.50.0 o mas mataas)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 o mas mataas)
    ```bash
    az --version
    # Inaasahang output: azure-cli 2.50.0 o mas mataas
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (para sa lokal na pag-develop/pagsubok - opsyonal)
+3. **[Docker](https://www.docker.com/get-started)** (para sa lokal na development/testing - opsyonal)
    ```bash
    docker --version
-   # Inaasahang output: Docker bersyon 20.10 o mas mataas
+   # Inaasahang output: Docker bersyon 20.10 o mas bago
    ```
 
 ### I-verify ang Iyong Setup
 
-Patakbuhin ang mga command na ito upang tiyaking handa ka na:
+Patakbuhin ang mga utos na ito para kumpirmahin na handa ka na:
 
 ```bash
 # Suriin ang Azure Developer CLI
@@ -169,25 +160,25 @@ docker --version
 # ✅ Inaasahan: Docker bersyon 20.10 o mas mataas
 ```
 
-**Kriteriya ng Tagumpay**: Ang lahat ng command ay nagbabalik ng mga bersyon na tumutugma o mas mataas sa minimum.
+**Kriteriya ng Tagumpay**: Lahat ng utos ay magbabalik ng mga version number na katumbas o mas mataas kaysa sa minimum.
 
 ### Mga Kinakailangan sa Azure
 
-- Isang aktibong **Azure subscription** ([gumawa ng libreng account](https://azure.microsoft.com/free/))
-- Mga pahintulot upang lumikha ng mga resources sa iyong subscription
+- Isang aktibong **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- Mga permiso para gumawa ng mga resource sa iyong subscription
 - **Contributor** role sa subscription o resource group
 
-### Mga Kinakailangang Kaalaman
+### Mga Kaalamang Kinakailangan
 
-Ito ay isang **advanced-level** na halimbawa. Dapat ay mayroon kang:
-- Natapos ang [Simple Flask API example](../../../../examples/container-app/simple-flask-api) 
-- Pangunahing kaalaman sa arkitektura ng microservices
+Ito ay isang **advanced-level** na halimbawa. Dapat mayroon ka ng:
+- Nakumpleto ang [Simple Flask API example](../../../../examples/container-app/simple-flask-api) 
+- Pangunahing pag-unawa sa arkitektura ng microservices
 - Pamilyar sa REST APIs at HTTP
 - Pag-unawa sa mga konsepto ng container
 
-**Baguhan sa Container Apps?** Magsimula sa [Simple Flask API example](../../../../examples/container-app/simple-flask-api) upang matutunan ang mga pangunahing kaalaman.
+**Bago sa Container Apps?** Magsimula muna sa [Simple Flask API example](../../../../examples/container-app/simple-flask-api) upang matutunan ang mga batayan.
 
-## Mabilis na Pagsisimula (Hakbang-hakbang)
+## Mabilisang Simula (Sunud-sunod)
 
 ### Hakbang 1: I-clone at Mag-navigate
 
@@ -196,7 +187,7 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/microservices
 ```
 
-**✓ Pagsusuri ng Tagumpay**: Tiyaking makikita mo ang `azure.yaml`:
+**✓ Pag-check ng Tagumpay**: Kumpirmahing nakikita mo ang `azure.yaml`:
 ```bash
 ls
 # Inaasahan: README.md, azure.yaml, infra/, src/
@@ -208,9 +199,9 @@ ls
 azd auth login
 ```
 
-Bubuksan nito ang iyong browser para sa Azure authentication. Mag-sign in gamit ang iyong Azure credentials.
+Magbubukas ito ng iyong browser para sa Azure authentication. Mag-sign in gamit ang iyong Azure credentials.
 
-**✓ Pagsusuri ng Tagumpay**: Dapat mong makita:
+**✓ Pag-check ng Tagumpay**: Dapat mong makita:
 ```
 Logged in to Azure.
 ```
@@ -221,12 +212,12 @@ Logged in to Azure.
 azd init
 ```
 
-**Mga Prompt na Makikita Mo**:
-- **Pangalan ng Environment**: Maglagay ng maikling pangalan (hal., `microservices-dev`)
+**Mga prompt na makikita mo**:
+- **Environment name**: Maglagay ng maikling pangalan (hal., `microservices-dev`)
 - **Azure subscription**: Piliin ang iyong subscription
-- **Azure location**: Pumili ng rehiyon (hal., `eastus`, `westeurope`)
+- **Azure location**: Piliin ang rehiyon (hal., `eastus`, `westeurope`)
 
-**✓ Pagsusuri ng Tagumpay**: Dapat mong makita:
+**✓ Pag-check ng Tagumpay**: Dapat mong makita:
 ```
 SUCCESS: New project initialized!
 ```
@@ -237,29 +228,29 @@ SUCCESS: New project initialized!
 azd up
 ```
 
-**Ano ang Nangyayari** (tumatagal ng 8-12 minuto):
+**Ano ang nangyayari** (tumagal ng 8-12 minuto):
 
 ```mermaid
 graph LR
-    A[azd up] --> B[Gumawa ng Resource Group]
+    A[azd up] --> B[Lumikha ng Resource Group]
     B --> C[I-deploy ang Container Registry]
     C --> D[I-deploy ang Log Analytics]
     D --> E[I-deploy ang App Insights]
-    E --> F[Gumawa ng Container Environment]
-    F --> G[Mag-build ng API Gateway Image]
-    F --> H[Mag-build ng Product Service Image]
+    E --> F[Lumikha ng Kapaligiran ng Container]
+    F --> G[Buuin ang Imahe ng API Gateway]
+    F --> H[Buuin ang Imahe ng Product Service]
     G --> I[I-push sa Registry]
     H --> I
     I --> J[I-deploy ang API Gateway]
     I --> K[I-deploy ang Product Service]
-    J --> L[I-configure ang Ingress & Health Checks]
+    J --> L[I-configure ang Ingress at Health Checks]
     K --> L
-    L --> M[Tapos na ang Deployment ✓]
+    L --> M[Kumpleto na ang Pag-deploy ✓]
     
     style A fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style M fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**✓ Pagsusuri ng Tagumpay**: Dapat mong makita:
+**✓ Pag-check ng Tagumpay**: Dapat mong makita:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -277,7 +268,7 @@ GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d
 curl $GATEWAY_URL/health
 ```
 
-**✅ Inaasahang Output**:
+**✅ Inaasahang output:**
 ```json
 {
   "status": "healthy",
@@ -286,13 +277,13 @@ curl $GATEWAY_URL/health
 }
 ```
 
-**Subukan ang product service sa pamamagitan ng gateway**:
+**Subukin ang product service sa pamamagitan ng gateway**:
 ```bash
-# Listahan ng mga produkto
+# Ilista ang mga produkto
 curl $GATEWAY_URL/api/products
 ```
 
-**✅ Inaasahang Output**:
+**✅ Inaasahang output:**
 ```json
 [
   {"id":1,"name":"Laptop","price":999.99,"stock":50},
@@ -301,15 +292,15 @@ curl $GATEWAY_URL/api/products
 ]
 ```
 
-**✓ Pagsusuri ng Tagumpay**: Ang parehong endpoints ay nagbabalik ng JSON data nang walang error.
+**✓ Pag-check ng Tagumpay**: Ang parehong endpoints ay magbabalik ng JSON na data nang walang mga error.
 
 ---
 
 **🎉 Binabati kita!** Na-deploy mo na ang isang arkitektura ng microservices sa Azure!
 
-## Istruktura ng Proyekto
+## Estruktura ng Proyekto
 
-Kasama ang lahat ng mga file ng implementasyon—ito ay isang kumpleto at gumaganang halimbawa:
+Kasama ang lahat ng mga implementation file—kompletong gumaganang halimbawa ito:
 
 ```
 microservices/
@@ -342,18 +333,18 @@ microservices/
 **Ano ang Ginagawa ng Bawat Komponent:**
 
 **Infrastructure (infra/)**:
-- `main.bicep`: Nag-oorganisa ng lahat ng Azure resources at kanilang dependencies
+- `main.bicep`: Ina-orchestrate ang lahat ng Azure resources at ang kanilang mga dependency
 - `core/container-apps-environment.bicep`: Lumilikha ng Container Apps environment at Azure Container Registry
 - `core/monitor.bicep`: Nagse-set up ng Application Insights para sa distributed logging
-- `app/*.bicep`: Mga indibidwal na container app definition na may scaling at health checks
+- `app/*.bicep`: Indibidwal na mga definition ng container app na may scaling at health checks
 
 **API Gateway (src/api-gateway/)**:
-- Pampublikong serbisyo na nagre-route ng mga request sa backend services
-- Nagpapatupad ng logging, error handling, at request forwarding
-- Nagpapakita ng service-to-service HTTP communication
+- Serbisyong nakaharap sa publiko na nagro-route ng mga request sa mga backend na serbisyo
+- Nagpapatupad ng pag-log, error handling, at pag-forward ng request
+- Ipinapakita ang HTTP na komunikasyon mula serbisyo-sa-serbisyo
 
 **Product Service (src/product-service/)**:
-- Internal na serbisyo na may product catalog (in-memory para sa pagiging simple)
+- Internal na serbisyo na may katalogo ng produkto (in-memory para sa pagiging simple)
 - REST API na may health checks
 - Halimbawa ng backend microservice pattern
 
@@ -362,25 +353,25 @@ microservices/
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Access**: Pampubliko (external ingress)  
-**Layunin**: Nagre-route ng mga papasok na request sa tamang backend services  
+**Access**: Public (external ingress)  
+**Layunin**: Ina-route ang papasok na mga request sa angkop na backend na mga serbisyo  
 
 **Endpoints**:
-- `GET /` - Impormasyon ng serbisyo
+- `GET /` - Service information
 - `GET /health` - Health check endpoint
-- `GET /api/products` - I-forward sa product service (listahan ng lahat)
-- `GET /api/products/:id` - I-forward sa product service (kuha batay sa ID)
+- `GET /api/products` - Forward to product service (list all)
+- `GET /api/products/:id` - Forward to product service (get by ID)
 
-**Pangunahing Tampok**:
+**Pangunahing Mga Tampok**:
 - Request routing gamit ang axios
-- Sentralisadong logging
+- Sentralisadong pag-log
 - Error handling at timeout management
-- Service discovery gamit ang environment variables
-- Application Insights integration
+- Service discovery sa pamamagitan ng environment variables
+- Integrasyon ng Application Insights
 
-**Highlight ng Code** (`src/api-gateway/app.js`):
+**Pinakatampok na Code** (`src/api-gateway/app.js`):
 ```javascript
-// Komunikasyon ng panloob na serbisyo
+// Panloob na komunikasyon ng serbisyo
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`, {
     timeout: 5000
@@ -392,21 +383,21 @@ app.get('/api/products', async (req, res) => {
 ### Product Service (Python/Flask)
 
 **Port**: 8000  
-**Access**: Internal lamang (walang external ingress)  
-**Layunin**: Pinamamahalaan ang product catalog gamit ang in-memory data  
+**Access**: Internal only (no external ingress)  
+**Layunin**: Namamahala ng katalogo ng produkto gamit ang in-memory na data  
 
 **Endpoints**:
-- `GET /` - Impormasyon ng serbisyo
+- `GET /` - Service information
 - `GET /health` - Health check endpoint
-- `GET /products` - Listahan ng lahat ng produkto
-- `GET /products/<id>` - Kumuha ng produkto batay sa ID
+- `GET /products` - List all products
+- `GET /products/<id>` - Get product by ID
 
-**Pangunahing Tampok**:
+**Pangunahing Mga Tampok**:
 - RESTful API gamit ang Flask
-- In-memory product store (simple, walang kinakailangang database)
+- In-memory product store (simple, walang kailangan na database)
 - Health monitoring gamit ang probes
 - Structured logging
-- Application Insights integration
+- Integrasyon ng Application Insights
 
 **Data Model**:
 ```python
@@ -420,10 +411,10 @@ app.get('/api/products', async (req, res) => {
 ```
 
 **Bakit Internal Lamang?**
-Ang product service ay hindi pampubliko. Lahat ng request ay dapat dumaan sa API Gateway, na nagbibigay ng:
-- Seguridad: Kinokontrol na access point
-- Kakayahang umangkop: Maaaring baguhin ang backend nang hindi naaapektuhan ang mga kliyente
-- Monitoring: Sentralisadong request logging
+Ang product service ay hindi nakalantad sa publiko. Lahat ng request ay dapat dumaan sa API Gateway, na nagbibigay ng:
+- Seguridad: Kontroladong entry point
+- Kakayahang umangkop: Maaaring baguhin ang backend nang hindi naaapektuhan ang mga client
+- Pagmo-monitor: Sentralisadong pag-log ng mga request
 
 ## Pag-unawa sa Komunikasyon ng Serbisyo
 
@@ -437,20 +428,20 @@ sequenceDiagram
     participant AI as Application Insights
     
     User->>Gateway: GET /api/products
-    Gateway->>AI: I-log ang kahilingan
+    Gateway->>AI: Itala ang kahilingan
     Gateway->>Product: GET /products (panloob na HTTP)
-    Product->>AI: I-log ang query
-    Product-->>Gateway: Tugon ng JSON [5 produkto]
-    Gateway->>AI: I-log ang tugon
-    Gateway-->>User: Tugon ng JSON [5 produkto]
+    Product->>AI: Itala ang query
+    Product-->>Gateway: JSON na tugon [5 produkto]
+    Gateway->>AI: Itala ang tugon
+    Gateway-->>User: JSON na tugon [5 produkto]
     
     Note over Gateway,Product: Panloob na DNS: http://product-service
-    Note over User,AI: Lahat ng komunikasyon ay naka-log at nasubaybayan
+    Note over User,AI: Lahat ng komunikasyon ay naitatala at nasusubaybayan
 ```
-Sa halimbawang ito, ang API Gateway ay nakikipag-usap sa Product Service gamit ang **internal HTTP calls**:
+Sa halimbawang ito, nakikipagkomunika ang API Gateway sa Product Service gamit ang **internal HTTP calls**:
 
 ```javascript
-// API Gateway (src/api-gateway/app.js)
+// Gateway ng API (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
 // Gumawa ng panloob na HTTP na kahilingan
@@ -459,30 +450,30 @@ const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 
 **Pangunahing Punto**:
 
-1. **DNS-Based Discovery**: Awtomatikong nagbibigay ang Container Apps ng DNS para sa internal na mga serbisyo
+1. **DNS-Based Discovery**: Awtomatikong nagbibigay ang Container Apps ng DNS para sa mga internal na serbisyo
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Pinadali bilang: `http://product-service` (nireresolba ito ng Container Apps)
+   - Pinapasimple bilang: `http://product-service` (ni-reresolve ito ng Container Apps)
 
-2. **Walang Pampublikong Exposure**: Ang Product Service ay may `external: false` sa Bicep
-   - Accessible lamang sa loob ng Container Apps environment
-   - Hindi maabot mula sa internet
+2. **Walang Pampublikong Paglalantad**: Ang Product Service ay may `external: false` sa Bicep
+   - Maa-access lamang sa loob ng Container Apps environment
+   - Hindi maaabot mula sa internet
 
-3. **Environment Variables**: Ang mga URL ng serbisyo ay ini-inject sa deployment time
-   - Pinapasa ng Bicep ang internal FQDN sa gateway
-   - Walang hardcoded na URL sa application code
+3. **Environment Variables**: Ang mga URL ng serbisyo ay ini-inject sa oras ng deployment
+   - Ipinapasa ng Bicep ang internal FQDN sa gateway
+   - Walang hardcoded na mga URL sa application code
 
-**Analohiya**: Isipin ito na parang mga opisina. Ang API Gateway ay ang reception desk (pampubliko), at ang Product Service ay isang opisina (internal lamang). Kailangang dumaan ang mga bisita sa reception upang makarating sa anumang opisina.
+**Paghahambing**: Isipin ito na parang mga silid opisina. Ang API Gateway ang receptionist desk (nakaharap sa publiko), at ang Product Service ay isang silid opisina (internal lang). Ang mga bisita ay kailangang dumaan sa reception para marating ang anumang opisina.
 
 ## Mga Opsyon sa Deployment
 
 ### Buong Deployment (Inirerekomenda)
 
 ```bash
-# I-deploy ang imprastraktura at parehong mga serbisyo
+# I-deploy ang imprastruktura at ang parehong mga serbisyo
 azd up
 ```
 
-Ito ay nagde-deploy ng:
+I-de-deploy nito:
 1. Container Apps environment
 2. Application Insights
 3. Container Registry
@@ -494,38 +485,38 @@ Ito ay nagde-deploy ng:
 ### I-deploy ang Indibidwal na Serbisyo
 
 ```bash
-# I-deploy lamang ang isang serbisyo (pagkatapos ng unang azd up)
+# I-deploy lamang ang isang serbisyo (pagkatapos ng paunang azd up)
 azd deploy api-gateway
 
 # O i-deploy ang serbisyo ng produkto
 azd deploy product-service
 ```
 
-**Gamitin Kapag**: May binago kang code sa isang serbisyo at nais mong i-deploy lamang ang serbisyong iyon.
+**Gamit**: Kapag na-update mo ang code sa isang serbisyo at nais mong i-redeploy lamang ang serbisyong iyon.
 
-### I-update ang Configuration
+### I-update ang Konfigurasyon
 
 ```bash
 # Baguhin ang mga parameter ng pag-scale
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# I-redeploy gamit ang bagong configuration
+# I-deploy muli gamit ang bagong konfigurasyon
 azd up
 ```
 
-## Configuration
+## Konfigurasyon
 
 ### Scaling Configuration
 
-Ang parehong serbisyo ay naka-configure gamit ang HTTP-based autoscaling sa kanilang Bicep files:
+Ang parehong serbisyo ay naka-configure gamit ang HTTP-based autoscaling sa kanilang mga Bicep file:
 
 **API Gateway**:
-- Min replicas: 2 (laging may 2 para sa availability)
+- Min replicas: 2 (laging hindi bababa sa 2 para sa availability)
 - Max replicas: 20
 - Scale trigger: 50 concurrent requests bawat replica
 
 **Product Service**:
-- Min replicas: 1 (maaaring mag-scale sa zero kung kinakailangan)
+- Min replicas: 1 (maaaaring mag-scale to zero kung kinakailangan)
 - Max replicas: 10
 - Scale trigger: 100 concurrent requests bawat replica
 
@@ -547,21 +538,21 @@ scale: {
 }
 ```
 
-### Resource Allocation
+### Alokasyon ng Resource
 
 **API Gateway**:
 - CPU: 1.0 vCPU
 - Memory: 2 GiB
-- Dahilan: Pinangangasiwaan ang lahat ng external na traffic
+- Dahilan: Humahawak ng lahat ng external na trapiko
 
 **Product Service**:
 - CPU: 0.5 vCPU
 - Memory: 1 GiB
-- Dahilan: Magaan na in-memory operations
+- Dahilan: Magaan na in-memory na operasyon
 
 ### Health Checks
 
-Ang parehong serbisyo ay may kasamang liveness at readiness probes:
+Ang parehong serbisyo ay may liveness at readiness probes:
 
 ```bicep
 probes: [
@@ -586,23 +577,24 @@ probes: [
 ]
 ```
 
-**Ano ang Ibig Sabihin Nito**:
-- **Liveness**: Kung nabigo ang health check, ire-restart ng Container Apps ang container
-- **Readiness**: Kung hindi handa, ititigil ng Container Apps ang pag-route ng traffic sa replica na iyon
+**Ano ang Kahulugan Nito**:
+- **Liveness**: Kung mabigo ang health check, nire-restart ng Container Apps ang container
+- **Readiness**: Kung hindi pa ready, ititigil ng Container Apps ang pag-route ng trapiko sa replica na iyon
 
-## Monitoring at Observability
+## Monitoring & Observability
 
 ### Tingnan ang Mga Log ng Serbisyo
 
 ```bash
+# Tingnan ang mga log gamit ang azd monitor
+azd monitor --logs
+
+# O gamitin ang Azure CLI para sa tiyak na Container Apps:
 # I-stream ang mga log mula sa API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
 # Tingnan ang mga kamakailang log ng serbisyo ng produkto
-azd logs product-service --tail 100
-
-# Tingnan ang lahat ng log mula sa parehong mga serbisyo
-azd logs --follow
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Inaasahang Output**:
@@ -615,9 +607,9 @@ azd logs --follow
 
 ### Mga Query sa Application Insights
 
-I-access ang Application Insights sa Azure Portal, pagkatapos ay patakbuhin ang mga query na ito:
+Buksan ang Application Insights sa Azure Portal, pagkatapos patakbuhin ang mga query na ito:
 
-**Hanapin ang Mabagal na Mga Request**:
+**Hanapin ang Mabagal na Requests**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -626,7 +618,7 @@ requests
 | order by count_ desc
 ```
 
-**Subaybayan ang Mga Tawag sa Serbisyo**:
+**Subaybayan ang Mga Tawag mula Serbisyo-sa-Serbisyo**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -635,7 +627,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Error Rate ng Bawat Serbisyo**:
+**Rate ng Error ayon sa Serbisyo**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -643,7 +635,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Request Volume sa Paglipas ng Panahon**:
+**Dami ng Request sa Paglipas ng Oras**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -657,7 +649,7 @@ requests
 # Kunin ang mga detalye ng Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Buksan ang Azure Portal monitoring
+# Buksan ang monitoring sa Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
@@ -668,16 +660,16 @@ az monitor app-insights component show \
 
 1. Pumunta sa Application Insights sa Azure Portal
 2. I-click ang "Live Metrics"
-3. Tingnan ang real-time na mga request, pagkabigo, at performance
-4. Subukan sa pamamagitan ng pagtakbo: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+3. Makita ang real-time na mga request, pagkabigo, at performance
+4. Subukan sa pamamagitan ng pagpapatakbo: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Praktikal na Mga Ehersisyo
+## Praktikal na Ehersisyo
 
 ### Ehersisyo 1: Magdagdag ng Bagong Product Endpoint ⭐ (Madali)
 
-**Layunin**: Magdagdag ng POST endpoint upang lumikha ng mga bagong produkto
+**Layunin**: Magdagdag ng POST endpoint para lumikha ng mga bagong produkto
 
-**Simula**: `src/product-service/main.py`
+**Panimulang Punto**: `src/product-service/main.py`
 
 **Mga Hakbang**:
 
@@ -689,7 +681,7 @@ def create_product():
     """Create a new product"""
     data = request.get_json()
     
-    # I-validate ang mga kinakailangang field
+    # Suriin ang mga kinakailangang patlang
     if not data or 'name' not in data or 'price' not in data:
         return jsonify({'error': 'Missing required fields: name, price'}), 400
     
@@ -709,7 +701,7 @@ def create_product():
 2. Idagdag ang POST route sa API Gateway (`src/api-gateway/app.js`):
 
 ```javascript
-// Idagdag ito pagkatapos ng GET /api/products na ruta
+// Idagdag ito pagkatapos ng ruta na GET /api/products
 app.post('/api/products', async (req, res) => {
   try {
     console.log(`Forwarding POST request to ${PRODUCT_SERVICE_URL}/products`);
@@ -750,33 +742,33 @@ curl -X POST $GATEWAY_URL/api/products \
 {"id":6,"name":"USB Cable","description":"","price":9.99,"stock":500}
 ```
 
-5. Siguraduhing lumalabas ito sa listahan:
+5. Suriin na lumilitaw ito sa listahan:
 
 ```bash
 curl $GATEWAY_URL/api/products
-# Dapat ngayon ay magpakita ng 6 na produkto kabilang ang bagong USB Cable
+# Dapat ngayon ay magpapakita ng 6 na produkto, kabilang ang bagong USB cable
 ```
 
-**Mga Pamantayan ng Tagumpay**:
-- ✅ Ang POST request ay nagbabalik ng HTTP 201
-- ✅ Ang bagong produkto ay lumalabas sa GET /api/products listahan
-- ✅ Ang produkto ay may auto-incremented ID
+**Kriteria ng Tagumpay**:
+- ✅ Ang POST na request ay bumabalik ng HTTP 201
+- ✅ Lumilitaw ang bagong produkto sa GET /api/products na listahan
+- ✅ Ang produkto ay may auto-incremented na ID
 
 **Oras**: 10-15 minuto
 
 ---
 
-### Ehersisyo 2: Baguhin ang Mga Panuntunan sa Autoscaling ⭐⭐ (Katamtaman)
+### Ehersisyo 2: Baguhin ang Mga Patakaran ng Autoscaling ⭐⭐ (Katamtaman)
 
-**Layunin**: Baguhin ang Product Service upang mas agresibong mag-scale
+**Layunin**: Baguhin ang Product Service upang mag-scale nang mas agresibo
 
-**Simula**: `infra/app/product-service.bicep`
+**Panimulang Punto**: `infra/app/product-service.bicep`
 
 **Mga Hakbang**:
 
-1. Buksan ang `infra/app/product-service.bicep` at hanapin ang `scale` block (mga linya 95)
+1. Buksan ang `infra/app/product-service.bicep` at hanapin ang `scale` block (mga nasa linya 95)
 
-2. Baguhin mula sa:
+2. Palitan mula sa:
 ```bicep
 scale: {
   minReplicas: 1
@@ -818,7 +810,7 @@ scale: {
 azd up
 ```
 
-4. I-verify ang bagong scaling configuration:
+4. Patunayan ang bagong scaling configuration:
 
 ```bash
 az containerapp show \
@@ -839,26 +831,26 @@ az containerapp show \
 5. Subukan ang autoscaling gamit ang load:
 
 ```bash
-# Bumuo ng magkakasabay na mga kahilingan
+# Gumawa ng sabayang mga kahilingan
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# Panoorin ang pag-scale na mangyari
-azd logs product-service --follow
-# Hanapin: Mga kaganapan sa pag-scale ng Container Apps
+# Panoorin ang pag-scale gamit ang Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
+# Hanapin: mga kaganapan sa pag-scale ng Container Apps
 ```
 
-**Mga Pamantayan ng Tagumpay**:
-- ✅ Ang Product Service ay laging may hindi bababa sa 2 replicas
-- ✅ Sa ilalim ng load, nag-scale ito sa higit sa 2 replicas
-- ✅ Ipinapakita ng Azure Portal ang mga bagong scaling rules
+**Kriteria ng Tagumpay**:
+- ✅ Laging tumatakbo ang Product Service ng hindi bababa sa 2 replicas
+- ✅ Sa ilalim ng load, nag-scale nang higit sa 2 replicas
+- ✅ Ipinapakita ng Azure Portal ang bagong scaling rules
 
 **Oras**: 15-20 minuto
 
 ---
 
-### Ehersisyo 3: Magdagdag ng Custom Monitoring Query ⭐⭐ (Katamtaman)
+### Ehersisyo 3: Magdagdag ng Pasadyang Monitoring Query ⭐⭐ (Katamtaman)
 
-**Layunin**: Gumawa ng custom na Application Insights query upang subaybayan ang performance ng product API
+**Layunin**: Gumawa ng pasadyang Application Insights query para subaybayan ang performance ng Product API
 
 **Mga Hakbang**:
 
@@ -884,14 +876,14 @@ requests
 | render timechart
 ```
 
-4. I-click ang "Run" upang i-execute ang query
+4. I-click ang "Run" upang patakbuhin ang query
 
 5. I-save ang query:
    - I-click ang "Save"
    - Pangalan: "Product API Performance"
    - Kategorya: "Performance"
 
-6. Bumuo ng test traffic:
+6. Gumawa ng test traffic:
 
 ```bash
 for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
@@ -900,28 +892,28 @@ for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 7. I-refresh ang query upang makita ang data
 
 **✅ Inaasahang output:**
-- Chart na nagpapakita ng bilang ng mga request sa paglipas ng panahon
-- Average na tagal < 500ms
-- Success rate = 100%
-- Time bins ng 5 minuto
+- Tsart na nagpapakita ng bilang ng mga request sa paglipas ng panahon
+- Karaniwang tagal < 500ms
+- Rate ng tagumpay = 100%
+- Mga time bin na 5 minuto
 
-**Mga Pamantayan ng Tagumpay**:
-- ✅ Ang query ay nagpapakita ng 100+ na request
-- ✅ Ang success rate ay 100%
-- ✅ Ang average na tagal ay < 500ms
-- ✅ Ang chart ay nagpapakita ng 5-minutong time bins
+**Kriteria ng Tagumpay**:
+- ✅ Ipinapakita ng query ang 100+ na request
+- ✅ Ang rate ng tagumpay ay 100%
+- ✅ Karaniwang tagal < 500ms
+- ✅ Ipinapakita ng tsart ang 5-minutong time bins
 
-**Kinalabasan ng Pagkatuto**: Maunawaan kung paano subaybayan ang performance ng serbisyo gamit ang custom na mga query
+**Kinalabasan ng Pagkatuto**: Maunawaan kung paano subaybayan ang performance ng serbisyo gamit ang pasadyang mga query
 
 **Oras**: 10-15 minuto
 
 ---
 
-### Ehersisyo 4: Magpatupad ng Retry Logic ⭐⭐⭐ (Advanced)
+### Ehersisyo 4: Ipatupad ang Retry Logic ⭐⭐⭐ (Mataas na Antas)
 
-**Layunin**: Magdagdag ng retry logic sa API Gateway kapag pansamantalang hindi available ang Product Service
+**Layunin**: Idagdag ang retry logic sa API Gateway kapag pansamantala na hindi available ang Product Service
 
-**Simula**: `src/api-gateway/app.js`
+**Panimulang Punto**: `src/api-gateway/app.js`
 
 **Mga Hakbang**:
 
@@ -938,14 +930,14 @@ cd ../..
 ```javascript
 const axiosRetry = require('axios-retry');
 
-// I-configure ang lohika ng muling pagsubok
+// I-configure ang lohika ng pag-uulit
 axiosRetry(axios, {
   retries: 3,
   retryDelay: (retryCount) => {
     return retryCount * 1000; // 1s, 2s, 3s
   },
   retryCondition: (error) => {
-    // Muling subukan sa mga error sa network o 5xx na tugon
+    // Muling subukan kapag may mga error sa network o mga 5xx na tugon
     return axiosRetry.isNetworkOrIdempotentRequestError(error) ||
            (error.response && error.response.status >= 500);
   }
@@ -960,21 +952,21 @@ console.log('Retry logic configured: 3 retries with exponential backoff');
 azd deploy api-gateway
 ```
 
-4. Subukan ang retry behavior sa pamamagitan ng pagsasagawa ng service failure:
+4. Subukan ang retry behavior sa pamamagitan ng pagsasagawa ng simulated service failure:
 
 ```bash
-# I-scale ang serbisyo ng produkto sa 0 (gayahin ang pagkabigo)
+# I-scale ang product service sa 0 (gayahin ang pagkabigo)
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --min-replicas 0 \
   --max-replicas 0
 
-# Subukang i-access ang mga produkto (magre-retry ng 3 beses)
+# Subukang i-access ang mga produkto (magtatangkang muli ng 3 beses)
 time curl -v $GATEWAY_URL/api/products
-# Obserbahan: Ang tugon ay tumatagal ng ~6 na segundo (1s + 2s + 3s retries)
+# Obserbahan: Tumatagal ang tugon ng humigit-kumulang 6 segundo (1s + 2s + 3s na mga pagtatangka)
 
-# Ibalik ang serbisyo ng produkto
+# Ibalik ang product service
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -985,23 +977,23 @@ az containerapp update \
 5. Tingnan ang retry logs:
 
 ```bash
-azd logs api-gateway --tail 50
-# Hanapin ang: Mga mensahe ng pagsubok muli
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
+# Hanapin: Mga mensahe ng muling pagtatangka
 ```
 
-**✅ Inaasahang behavior:**
-- Ang mga request ay nagre-retry ng 3 beses bago mag-fail
-- Bawat retry ay naghihintay nang mas matagal (1s, 2s, 3s)
-- Matagumpay na mga request pagkatapos mag-restart ang serbisyo
-- Ang mga log ay nagpapakita ng mga retry attempt
+**✅ Inaasahang pag-uugali:**
+- Ang mga request ay nirere-try nang 3 beses bago mag-fail
+- Bawat retry ay naghihintay nang mas mahaba (1s, 2s, 3s)
+- Nagiging matagumpay ang mga request pagkatapos mag-restart ang serbisyo
+- Ipinapakita ng mga log ang mga pagtatangka ng retry
 
-**Mga Pamantayan ng Tagumpay**:
-- ✅ Ang mga request ay nagre-retry ng 3 beses bago mag-fail
-- ✅ Bawat retry ay naghihintay nang mas matagal (exponential backoff)
-- ✅ Matagumpay na mga request pagkatapos mag-restart ang serbisyo
-- ✅ Ang mga log ay nagpapakita ng mga retry attempt
+**Kriteria ng Tagumpay**:
+- ✅ Ang mga request ay nirere-try nang 3 beses bago mag-fail
+- ✅ Bawat retry ay naghihintay nang mas mahaba (exponential backoff)
+- ✅ Nagiging matagumpay ang mga request pagkatapos mag-restart ang serbisyo
+- ✅ Ipinapakita ng mga log ang mga pagtatangka ng retry
 
-**Kinalabasan ng Pagkatuto**: Maunawaan ang mga resilience pattern sa microservices (circuit breakers, retries, timeouts)
+**Kinalabasan ng Pagkatuto**: Maunawaan ang mga pattern ng resilience sa microservices (circuit breakers, retries, timeouts)
 
 **Oras**: 20-25 minuto
 
@@ -1009,16 +1001,16 @@ azd logs api-gateway --tail 50
 
 ## Pagsusuri ng Kaalaman
 
-Pagkatapos makumpleto ang halimbawang ito, suriin ang iyong kaalaman:
+Pagkatapos makumpleto ang halimbawang ito, patunayan ang iyong pagkaunawa:
 
 ### 1. Komunikasyon ng Serbisyo ✓
 
 Subukan ang iyong kaalaman:
-- [ ] Kaya mo bang ipaliwanag kung paano natutuklasan ng API Gateway ang Product Service? (DNS-based service discovery)
-- [ ] Ano ang mangyayari kung down ang Product Service? (Gateway ay nagbabalik ng 503 error)
-- [ ] Paano ka magdaragdag ng ikatlong serbisyo? (Gumawa ng bagong Bicep file, idagdag sa main.bicep, gumawa ng src folder)
+- [ ] Masasabi mo ba kung paano natutuklasan ng API Gateway ang Product Service? (DNS-based service discovery)
+- [ ] Ano ang nangyayari kung naka-down ang Product Service? (Gateway returns 503 error)
+- [ ] Paano ka magdadagdag ng pangatlong serbisyo? (Gumawa ng bagong Bicep file, idagdag sa main.bicep, gumawa ng src folder)
 
-**Hands-On Verification:**
+**Praktikal na Pagpapatunay:**
 ```bash
 # I-simulate ang pagkabigo ng serbisyo
 az containerapp update --name <product-service-name> --min-replicas 0 --max-replicas 0
@@ -1032,67 +1024,67 @@ az containerapp update --name <product-service-name> --min-replicas 1 --max-repl
 ### 2. Monitoring at Observability ✓
 
 Subukan ang iyong kaalaman:
-- [ ] Saan mo makikita ang distributed logs? (Application Insights sa Azure Portal)
-- [ ] Paano mo susubaybayan ang mababagal na request? (Kusto query: `requests | where duration > 1000`)
-- [ ] Kaya mo bang tukuyin kung aling serbisyo ang nagdulot ng error? (Suriin ang `cloud_RoleName` field sa logs)
+- [ ] Saan mo nakikita ang distributed logs? (Application Insights in Azure Portal)
+- [ ] Paano mo sinusubaybayan ang mabagal na mga request? (Kusto query: `requests | where duration > 1000`)
+- [ ] Maasahan mo bang tukuyin kung aling serbisyo ang nagdulot ng error? (Suriin ang `cloud_RoleName` field sa logs)
 
-**Hands-On Verification:**
+**Praktikal na Pagpapatunay:**
 ```bash
-# Bumuo ng simulation ng mabagal na kahilingan
+# Gumawa ng simulasyon ng mabagal na kahilingan
 curl "$GATEWAY_URL/api/products?delay=2000"
 
-# Mag-query sa Application Insights para sa mga mabagal na kahilingan
-# Mag-navigate sa Azure Portal → Application Insights → Logs
+# I-query ang Application Insights para sa mga mabagal na kahilingan
+# Pumunta sa Azure Portal → Application Insights → Logs
 # Patakbuhin: requests | where duration > 1000 | project timestamp, name, duration, cloud_RoleName
 ```
 
 ### 3. Scaling at Performance ✓
 
 Subukan ang iyong kaalaman:
-- [ ] Ano ang nagti-trigger ng autoscaling? (HTTP concurrent request rules: 50 para sa gateway, 100 para sa produkto)
+- [ ] Ano ang nagti-trigger ng autoscaling? (HTTP concurrent request rules: 50 para sa gateway, 100 para sa product)
 - [ ] Ilang replicas ang tumatakbo ngayon? (Suriin gamit ang `az containerapp revision list`)
-- [ ] Paano mo i-scale ang Product Service sa 5 replicas? (I-update ang minReplicas sa Bicep)
+- [ ] Paano mo isi-scale ang Product Service sa 5 replicas? (I-update ang minReplicas sa Bicep)
 
-**Hands-On Verification:**
+**Praktikal na Pagpapatunay:**
 ```bash
-# Bumuo ng load upang subukan ang autoscaling
+# Lumikha ng load para subukan ang autoscaling
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Panoorin ang pagdami ng mga replika
-azd logs api-gateway --follow
-# ✅ Inaasahan: Makikita ang mga scaling event sa mga log
+# Panoorin ang pagdami ng mga replika gamit ang Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+# ✅ Inaasahan: Makita ang mga kaganapan ng pag-scale sa mga log
 ```
 
-**Mga Pamantayan ng Tagumpay**: Kaya mong sagutin ang lahat ng tanong at i-verify gamit ang hands-on commands.
+**Kriteria ng Tagumpay**: Masasagot mo ang lahat ng mga tanong at mapapatunayan gamit ang mga hands-on na utos.
 
 ---
 
 ## Pagsusuri ng Gastos
 
-### Tinatayang Buwanang Gastos (Para sa Halimbawang 2-Serbisyo)
+### Tinatayang Buwanang Gastos (Para sa Halimbawang 2-Serbisyo na Ito)
 
-| Resource | Configuration | Tinatayang Gastos |
+| Resource | Konfigurasyon | Tinatayang Gastos |
 |----------|--------------|-------------------|
 | API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
 | Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
 | Container Registry | Basic tier | $5 |
-| Application Insights | 1-2 GB/buwan | $5-10 |
-| Log Analytics | 1 GB/buwan | $3 |
+| Application Insights | 1-2 GB/month | $5-10 |
+| Log Analytics | 1 GB/month | $3 |
 | **Kabuuan** | | **$58-243/buwan** |
 
-### Paghahati ng Gastos Ayon sa Paggamit
+### Paghahati ng Gastos ayon sa Paggamit
 
-**Mababang traffic** (pagsusuri/pag-aaral): ~$60/buwan
+**Magaan na trapiko** (testing/pag-aaral): ~$60/buwan
 - API Gateway: 2 replicas × 24/7 = $30
 - Product Service: 1 replica × 24/7 = $15
 - Monitoring + Registry = $13
 
-**Katamtamang traffic** (maliit na produksyon): ~$120/buwan
+**Katamtamang trapiko** (maliit na production): ~$120/buwan
 - API Gateway: 5 avg replicas = $75
 - Product Service: 3 avg replicas = $45
 - Monitoring + Registry = $13
 
-**Mataas na traffic** (abala): ~$240/buwan
+**Mataas na trapiko** (mga abalang panahon): ~$240/buwan
 - API Gateway: 15 avg replicas = $225
 - Product Service: 8 avg replicas = $120
 - Monitoring + Registry = $13
@@ -1107,13 +1099,13 @@ azd logs api-gateway --follow
    }
    ```
 
-2. **Gumamit ng Consumption Plan para sa Cosmos DB** (kapag idinagdag mo ito):
-   - Magbayad lamang para sa nagamit
+2. **Gumamit ng Consumption Plan para sa Cosmos DB** (kapag dinagdag mo ito):
+   - Magbayad lamang para sa ginagamit mo
    - Walang minimum na singil
 
 3. **Itakda ang Application Insights Sampling**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Samplehin ang 50% ng mga kahilingan
+   appInsights.defaultClient.config.samplingPercentage = 50; // Kumuha ng sample mula sa 50% ng mga request
    ```
 
 4. **Linisin Kapag Hindi Kailangan**:
@@ -1121,36 +1113,36 @@ azd logs api-gateway --follow
    azd down --force --purge
    ```
 
-### Mga Libreng Opsyon
+### Mga Opsyon ng Libreng Tier
 
-Para sa pag-aaral/pagsusuri, isaalang-alang:
-- ✅ Gumamit ng Azure free credits ($200 sa unang 30 araw para sa mga bagong account)
-- ✅ Panatilihin sa minimum na replicas (nakakatipid ng ~50% na gastos)
-- ✅ I-delete pagkatapos ng pagsusuri (walang patuloy na singil)
-- ✅ I-scale sa zero sa pagitan ng mga sesyon ng pag-aaral
+Para sa pag-aaral/testing, isaalang-alang:
+- ✅ Gumamit ng Azure free credits ($200 para sa unang 30 araw para sa mga bagong account)
+- ✅ Manatili sa minimum na replicas (nakakatipid ng ~50% na gastos)
+- ✅ I-delete pagkatapos ng testing (walang patuloy na singil)
+- ✅ I-scale sa zero sa pagitan ng mga sesyon ng pagkatuto
 
-**Halimbawa**: Pagpapatakbo ng halimbawang ito sa loob ng 2 oras/araw × 30 araw = ~$5/buwan sa halip na $60/buwan
+**Halimbawa**: Pagpapatakbo ng halimbawang ito ng 2 oras/araw × 30 araw = ~$5/buwan sa halip na $60/buwan
 
 ---
 
-## Mabilisang Gabay sa Pag-troubleshoot
+## Mabilis na Sanggunian sa Pag-troubleshoot
 
-### Problema: `azd up` nabigo sa "Subscription not found"
+### Problema: `azd up` nabibigo na may "Subscription not found"
 
 **Solusyon**:
 ```bash
-# Mag-login muli gamit ang tahasang subscription
+# Mag-log in muli gamit ang tahasang subskripsyon
 az account set --subscription <your-subscription-id>
 azd env set AZURE_SUBSCRIPTION_ID <your-subscription-id>
 azd up
 ```
 
-### Problema: Ang API Gateway ay nagbabalik ng 503 "Product service unavailable"
+### Problema: API Gateway nagbabalik ng 503 "Product service unavailable"
 
 **Diagnose**:
 ```bash
-# Suriin ang mga log ng serbisyo ng produkto
-azd logs product-service --tail 50
+# Suriin ang mga log ng serbisyo ng produkto gamit ang Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
 # Suriin ang kalusugan ng serbisyo ng produkto
 az containerapp show \
@@ -1159,71 +1151,71 @@ az containerapp show \
   --query "properties.runningStatus"
 ```
 
-**Karaniwang Sanhi**:
-1. Hindi nagsimula ang Product service (suriin ang mga log para sa mga error sa Python)
-2. Ang health check ay nabigo (i-verify kung gumagana ang `/health` endpoint)
-3. Nabigo ang pagbuo ng container image (suriin ang registry para sa imahe)
+**Mga Karaniwang Sanhi**:
+1. Hindi nag-start ang Product service (suriin ang mga log para sa mga error sa Python)
+2. Nabibigo ang health check (patunayan na gumagana ang `/health` endpoint)
+3. Nabigo ang pag-build ng container image (suriin ang registry para sa image)
 
 ### Problema: Hindi gumagana ang Autoscaling
 
 **Diagnose**:
 ```bash
-# Suriin ang kasalukuyang bilang ng replika
+# Suriin ang kasalukuyang bilang ng mga replika
 az containerapp revision list \
   --name $(azd env get-values | grep API_GATEWAY | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "[].properties.replicas"
 
-# Bumuo ng load para sa pagsubok
+# Gumawa ng load para subukan
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Panoorin ang mga kaganapan ng pag-scale
-azd logs api-gateway --follow | grep -i scale
+# Subaybayan ang mga kaganapan sa pag-scale gamit ang Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
-**Karaniwang Sanhi**:
-1. Hindi sapat ang load upang ma-trigger ang scale rule (kailangan ng >50 concurrent requests)
+**Mga Karaniwang Sanhi**:
+1. Hindi sapat ang load para mag-trigger ng scale rule (kailangan >50 concurrent requests)
 2. Naabot na ang max replicas (suriin ang Bicep configuration)
-3. Mali ang pagkaka-configure ng scale rule sa Bicep (i-verify ang concurrentRequests value)
+3. Maling pagkakakonfigura ng scale rule sa Bicep (patunayan ang concurrentRequests value)
 
-### Problema: Walang lumalabas na log sa Application Insights
+### Problema: Application Insights hindi nagpapakita ng mga log
 
 **Diagnose**:
 ```bash
-# Tiyaking nakatakda ang connection string
+# Suriin kung nakatakda ang string ng koneksyon
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Suriin kung nagpapadala ng telemetry ang mga serbisyo
+# Suriin kung nagpapadala ang mga serbisyo ng telemetry
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "properties.InstrumentationKey"
 ```
 
-**Karaniwang Sanhi**:
+**Mga Karaniwang Sanhi**:
 1. Hindi naipasa ang connection string sa container (suriin ang environment variables)
-2. Hindi naka-configure ang Application Insights SDK (i-verify ang imports sa code)
-3. Firewall na nagba-block ng telemetry (bihira, suriin ang network rules)
+2. Hindi naka-configure ang Application Insights SDK (suriin ang imports sa code)
+3. Firewall na humaharang sa telemetry (bihira, suriin ang network rules)
 
-### Problema: Nabigo ang Docker build nang lokal
+### Problema: Nabibigo ang Docker build lokal
 
 **Diagnose**:
 ```bash
-# Subukan ang pagbuo ng API Gateway
+# Subukan ang build ng API Gateway
 cd src/api-gateway
 docker build -t test-gateway .
 
-# Subukan ang pagbuo ng Product Service
+# Subukan ang build ng Product Service
 cd ../product-service
 docker build -t test-product .
 ```
 
-**Karaniwang Sanhi**:
-1. Kulang ang dependencies sa package.json/requirements.txt
-2. Mga error sa syntax ng Dockerfile
-3. Mga isyu sa network sa pag-download ng dependencies
+**Mga Karaniwang Sanhi**:
+1. Nawawalang dependencies sa package.json/requirements.txt
+2. Mga syntax error sa Dockerfile
+3. Mga isyu sa network kapag dinownload ang dependencies
 
-**Hindi pa rin maayos?** Tingnan ang [Common Issues Guide](../../docs/troubleshooting/common-issues.md) o [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+**Hindi pa rin malutas?** Tingnan ang [Common Issues Guide](../../docs/chapter-07-troubleshooting/common-issues.md) o [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
@@ -1235,22 +1227,22 @@ Upang maiwasan ang patuloy na singil, i-delete ang lahat ng resources:
 azd down --force --purge
 ```
 
-**Kumpirmasyon ng Prompt**:
+**Prompt ng Kumpirmasyon**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-I-type ang `y` upang kumpirmahin.
+I-type ang `y` para kumpirmahin.
 
-**Ano ang Madi-delete**:
-- Container Apps Environment
+**Ano ang Made-delete**:
+- Kapaligiran ng Container Apps
 - Parehong Container Apps (gateway at product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ I-verify ang Paglilinis**:
+**✓ Patunayan ang Paglilinis**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
@@ -1259,11 +1251,11 @@ Dapat magbalik ng walang laman.
 
 ---
 
-## Gabay sa Pagpapalawak: Mula 2 hanggang 5+ na Serbisyo
+## Gabay sa Pagpapalawak: Mula 2 hanggang 5+ Serbisyo
 
-Kapag nasanay ka na sa arkitektura ng 2-serbisyo, narito kung paano mag-expand:
+Kapag na-master mo na ang 2-serbisyo na arkitektura, narito kung paano magpalawak:
 
-### Phase 1: Magdagdag ng Database Persistence (Susunod na Hakbang)
+### Phase 1: Magdagdag ng Persistence ng Database (Susunod na Hakbang)
 
 **Magdagdag ng Cosmos DB para sa Product Service**:
 
@@ -1281,20 +1273,20 @@ Kapag nasanay ka na sa arkitektura ng 2-serbisyo, narito kung paano mag-expand:
    }
    ```
 
-2. I-update ang product service upang gumamit ng Azure Cosmos DB Python SDK sa halip na in-memory data
+2. I-update ang product service para gumamit ng Azure Cosmos DB Python SDK sa halip na in-memory data
 
 3. Tinatayang karagdagang gastos: ~$25/buwan (serverless)
 
-### Phase 2: Magdagdag ng Ikatlong Serbisyo (Order Management)
+### Phase 2: Magdagdag ng Pangatlong Serbisyo (Order Management)
 
 **Gumawa ng Order Service**:
 
 1. Bagong folder: `src/order-service/` (Python/Node.js/C#)
 2. Bagong Bicep: `infra/app/order-service.bicep`
-3. I-update ang API Gateway upang i-route ang `/api/orders`
-4. Magdagdag ng Azure SQL Database para sa order persistence
+3. I-update ang API Gateway upang mag-route ng `/api/orders`
+4. Magdagdag ng Azure SQL Database para sa persistence ng order
 
-**Magiging Arkitektura**:
+**Nagiging arkitektura**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
@@ -1302,119 +1294,118 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Phase 3: Magdagdag ng Async Communication (Service Bus)
 
-**Magpatupad ng Event-Driven Architecture**:
+**Ipapatupad ang Event-Driven Architecture**:
 
 1. Magdagdag ng Azure Service Bus: `infra/core/servicebus.bicep`
-2. Ang Product Service ay nag-publish ng "ProductCreated" events
-3. Ang Order Service ay nag-subscribe sa product events
-4. Magdagdag ng Notification Service upang magproseso ng events
+2. Naglalathala ang Product Service ng "ProductCreated" events
+3. Ang Order Service ay nag-subscribe sa mga product events
+4. Magdagdag ng Notification Service para iproseso ang mga events
 
 **Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
 ### Phase 4: Magdagdag ng User Authentication
 
-**Magpatupad ng User Service**:
+**Ipapatupad ang User Service**:
 
 1. Gumawa ng `src/user-service/` (Go/Node.js)
-2. Magdagdag ng Azure AD B2C o custom JWT authentication
-3. Ang API Gateway ay nagva-validate ng tokens bago mag-route
-4. Ang mga serbisyo ay nagche-check ng user permissions
+2. Magdagdag ng Azure AD B2C o custom na JWT authentication
+3. Vavalidate ng API Gateway ang mga token bago mag-route
+4. Tinitingnan ng mga serbisyo ang mga permiso ng user
 
-### Phase 5: Production Readiness
+### Phase 5: Kahandaan para sa Produksyon
 
 **Magdagdag ng Mga Komponenteng Ito**:
 - ✅ Azure Front Door (global load balancing)
-- ✅ Azure Key Vault (secret management)
-- ✅ Azure Monitor Workbooks (custom dashboards)
+- ✅ Azure Key Vault (pamamahala ng mga lihim)
+- ✅ Azure Monitor Workbooks (pasadyang dashboards)
 - ✅ CI/CD Pipeline (GitHub Actions)
 - ✅ Blue-Green Deployments
 - ✅ Managed Identity para sa lahat ng serbisyo
 
-**Kabuuang Gastos ng Production Architecture**: ~$300-1,400/buwan
+**Tunay na Gastos ng Buong Produksyon na Arkitektura**: ~$300-1,400/buwan
 
 ---
 
 ## Matuto Pa
 
 ### Kaugnay na Dokumentasyon
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Dokumentasyon ng Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
+- [Gabayan sa Arkitekturang Microservices](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights para sa Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI Dokumentasyon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Mga Susunod na Hakbang sa Kursong Ito
-- ← Nakaraan: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Halimbawa ng beginner single-container
-- → Susunod: [AI Integration Guide](../../../../docs/ai-foundry) - Magdagdag ng AI capabilities
-- 🏠 [Home ng Kurso](../../README.md)
+### Susunod na Mga Hakbang sa Kurso na Ito
+- ← Nakaraan: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Paunang halimbawa ng isang container
+- → Susunod: [AI Integration Guide](../../../../docs/ai-foundry) - Magdagdag ng kakayahan ng AI
+- 🏠 [Bahay ng Kurso](../../README.md)
 
-### Paghahambing: Kailan Gagamitin ang Ano
+### Paghahambing: Kailan Gamitin ang Bawat Isa
 
-| Tampok | Single Container | Microservices (Ito) | Kubernetes (AKS) |
-|--------|------------------|---------------------|------------------|
-| **Gamit** | Simpleng apps | Komplikadong apps | Enterprise apps |
-| **Scalability** | Single service | Per-service scaling | Maximum flexibility |
-| **Kumplikado** | Mababa | Katamtaman | Mataas |
-| **Laki ng Team** | 1-3 developers | 3-10 developers | 10+ developers |
+| Tampok | Isang Container | Microservices (Ito) | Kubernetes (AKS) |
+|---------|-----------------|---------------------|------------------|
+| **Gamit** | Mga simpleng app | Mga komplikadong app | Mga enterprise na app |
+| **Scalability** | Isang serbisyo | Pag-scale kada serbisyo | Pinakamataas na flexibility |
+| **Kompleksidad** | Mababa | Katamtaman | Mataas |
+| **Laki ng Koponan** | 1-3 developers | 3-10 developers | 10+ developers |
 | **Gastos** | ~$15-50/buwan | ~$60-250/buwan | ~$150-500/buwan |
-| **Oras ng Deployment** | 5-10 minuto | 8-12 minuto | 15-30 minuto |
-| **Pinakamahusay Para sa** | MVPs, prototypes | Mga production app | Multi-cloud, advanced networking |
+| **Oras ng Pag-deploy** | 5-10 minuto | 8-12 minuto | 15-30 minuto |
+| **Pinakamainam Para sa** | MVPs, mga prototype | Mga production na app | Maramihang cloud, advanced na networking |
 
-**Rekomendasyon**: Magsimula sa Container Apps (ang halimbawang ito), lumipat sa AKS kung kailangan mo ng mga tampok na partikular sa Kubernetes.
+**Rekomendasyon**: Magsimula sa Container Apps (ang halimbawang ito), lumipat sa AKS kapag kailangan mo ng mga tampok na partikular sa Kubernetes.
 
 ---
 
 ## Mga Madalas Itanong
 
-**Q: Bakit 2 serbisyo lang sa halip na 5+?**  
-A: Para sa edukasyonal na pag-unlad. Unahin ang mga pangunahing kaalaman (komunikasyon ng serbisyo, monitoring, scaling) gamit ang simpleng halimbawa bago magdagdag ng komplikasyon. Ang mga pattern na matututunan mo dito ay naaangkop sa mga arkitektura na may 100 serbisyo.
+**Q: Bakit dalawang serbisyo lang imbes na 5+?**  
+A: Panimulang aralin. Masterin ang mga pundasyon (komunikasyon ng serbisyo, pagmamanman, scaling) gamit ang isang simpleng halimbawa bago magdagdag ng komplikasyon. Ang mga pattern na matututunan mo rito ay naaangkop sa 100-service na arkitektura.
 
-**Q: Pwede ba akong magdagdag ng mas maraming serbisyo?**  
-A: Oo naman! Sundin ang gabay sa pagpapalawak sa itaas. Ang bawat bagong serbisyo ay sumusunod sa parehong pattern: gumawa ng src folder, gumawa ng Bicep file, i-update ang azure.yaml, i-deploy.
+**Q: Maaari ba akong magdagdag ng higit pang mga serbisyo nang mag-isa?**  
+A: Oo naman! Sundin ang expansion guide sa itaas. Ang bawat bagong serbisyo ay sumusunod sa parehong pattern: gumawa ng src folder, gumawa ng Bicep file, i-update ang azure.yaml, i-deploy.
 
-**Q: Handa na ba ito para sa production?**  
-A: Ito ay isang matibay na pundasyon. Para sa production, magdagdag ng: managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, at backup strategy.
+**Q: Ready ba ito para sa production?**  
+A: Ito ay isang matibay na pundasyon. Para sa production, magdagdag ng: managed identity, Key Vault, persistent na mga database, CI/CD pipeline, mga alerto sa pagmamanman, at strategy para sa backup.
 
-**Q: Bakit hindi gumamit ng Dapr o iba pang service mesh?**  
-A: Panatilihing simple para sa pag-aaral. Kapag naintindihan mo na ang native Container Apps networking, maaari kang mag-layer ng Dapr para sa mga advanced na senaryo (state management, pub/sub, bindings).
+**Q: Bakit hindi gumamit ng Dapr o ibang service mesh?**  
+A: Panatilihin itong simple para sa pagkatuto. Kapag naunawaan mo na ang native na networking ng Container Apps, maaari mong i-layer ang Dapr para sa mga advanced na senaryo (state management, pub/sub, bindings).
 
 **Q: Paano ako mag-debug nang lokal?**  
-A: Patakbuhin ang mga serbisyo nang lokal gamit ang Docker:  
+A: Patakbuhin ang mga serbisyo nang lokal gamit ang Docker:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
+**Q: Maaari ba akong gumamit ng iba’t ibang programming languages?**  
+A: Oo! Ipinapakita ng halimbawang ito ang Node.js (gateway) + Python (product service). Maaari mong paghaluin ang anumang mga language na tumatakbo sa loob ng mga container: C#, Go, Java, Ruby, PHP, atbp.
 
-**Q: Pwede bang gumamit ng iba't ibang programming languages?**  
-A: Oo! Ang halimbawang ito ay nagpapakita ng Node.js (gateway) + Python (product service). Maaari kang maghalo ng anumang mga wika na tumatakbo sa containers: C#, Go, Java, Ruby, PHP, atbp.
+**Q: Ano kung wala akong Azure credits?**  
+A: Gamitin ang Azure free tier (unang 30 araw para sa bagong account ay may $200 credits) o i-deploy para sa maiikling testing period at i-delete agad. Ang halimbawang ito ay nagkakahalaga ng humigit-kumulang $2/day.
 
-**Q: Paano kung wala akong Azure credits?**  
-A: Gamitin ang Azure free tier (unang 30 araw sa mga bagong account ay may $200 credits) o mag-deploy para sa maikling testing periods at agad na i-delete. Ang halimbawang ito ay nagkakahalaga ng ~$2/araw.
+**Q: Paano ito naiiba mula sa Azure Kubernetes Service (AKS)?**  
+A: Mas simple ang Container Apps (hindi kailangan ng kaalaman sa Kubernetes) ngunit mas kaunti ang flexibility. Ang AKS ay nagbibigay ng buong kontrol ng Kubernetes ngunit nangangailangan ng mas maraming kadalubhasaan. Magsimula sa Container Apps, mag-graduate sa AKS kung kinakailangan.
 
-**Q: Ano ang pagkakaiba nito sa Azure Kubernetes Service (AKS)?**  
-A: Ang Container Apps ay mas simple (hindi kailangan ng kaalaman sa Kubernetes) ngunit mas limitado. Ang AKS ay nagbibigay ng buong kontrol sa Kubernetes ngunit nangangailangan ng mas maraming kaalaman. Magsimula sa Container Apps, mag-graduate sa AKS kung kinakailangan.
-
-**Q: Pwede ko bang gamitin ito sa mga umiiral na Azure services?**  
-A: Oo! Maaari kang kumonekta sa mga umiiral na databases, storage accounts, Service Bus, atbp. I-update ang mga Bicep file upang i-refer ang mga umiiral na resources sa halip na lumikha ng bago.
-
----
-
-> **🎓 Buod ng Learning Path**: Natutunan mo kung paano mag-deploy ng multi-service architecture na may automatic scaling, internal networking, centralized monitoring, at production-ready patterns. Ang pundasyong ito ay naghahanda sa iyo para sa mas kumplikadong distributed systems at enterprise microservices architectures.
-
-**📚 Course Navigation:**
-- ← Nakaraan: [Simple Flask API](../../../../examples/container-app/simple-flask-api)
-- → Susunod: [Halimbawa ng Database Integration](../../../../database-app)
-- 🏠 [Course Home](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+**Q: Maaari ko bang gamitin ito sa umiiral na mga Azure services?**  
+A: Oo! Maaari kang kumonekta sa umiiral na mga database, storage accounts, Service Bus, atbp. I-update ang mga Bicep file para i-reference ang umiiral na mga resource sa halip na gumawa ng bago.
 
 ---
 
-**✨ Binabati kita!** Natapos mo na ang microservices example. Naiintindihan mo na ngayon kung paano bumuo, mag-deploy, at mag-monitor ng distributed applications sa Azure Container Apps. Handa ka na bang magdagdag ng AI capabilities? Tingnan ang [AI Integration Guide](../../../../docs/ai-foundry)!
+> **🎓 Buod ng Landas ng Pagkatuto**: Natutunan mong i-deploy ang multi-service na arkitektura na may automatic scaling, internal networking, sentralisadong pagmamanman, at mga pattern na handa para sa production. Inihahanda ka ng pundasyong ito para sa mga kumplikadong distributed systems at enterprise microservices architectures.
+
+**📚 Pag-navigate sa Kurso:**
+- ← Previous: [Simple Flask API](../../../../examples/container-app/simple-flask-api)
+- → Next: [Database Integration Example](../../../../database-app)
+- 🏠 [Tahanan ng Kurso](../../README.md)
+- 📖 [Mga Pinakamahuhusay na Gawi para sa Container Apps](../../docs/chapter-04-infrastructure/deployment-guide.md)
+
+---
+
+**✨ Binabati kita!** Nakumpleto mo na ang halimbawa ng microservices. Naiintindihan mo na kung paano bumuo, mag-deploy, at mag-monitor ng mga distributed na aplikasyon sa Azure Container Apps. Handa ka na bang magdagdag ng AI na kakayahan? Tingnan ang [Gabay sa Integrasyon ng AI](../../../../docs/ai-foundry)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+Paunawa:
+Isinalin ang dokumentong ito gamit ang serbisyong AI na pagsasalin [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi eksaktong impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
