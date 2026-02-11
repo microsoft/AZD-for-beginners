@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T12:16:45+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "cs"
-}
--->
-# Jednoduché Flask API - Příklad aplikace v kontejneru
+# Jednoduché Flask API - příklad Container App
 
-**Úroveň znalostí:** Začátečník ⭐ | **Čas:** 25-35 minut | **Cena:** $0-15/měsíc
+**Učební cesta:** Začátečník ⭐ | **Čas:** 25-35 minut | **Cena:** $0-15/měsíc
 
-Kompletní, funkční Python Flask REST API nasazené do Azure Container Apps pomocí Azure Developer CLI (azd). Tento příklad ukazuje základy nasazení kontejneru, automatického škálování a monitorování.
+Kompletní, funkční REST API v Python Flask nasazené do Azure Container Apps pomocí Azure Developer CLI (azd). Tento příklad demonstruje základy nasazení kontejneru, automatického škálování a monitorování.
 
 ## 🎯 Co se naučíte
 
 - Nasadit kontejnerizovanou Python aplikaci do Azure
-- Nastavit automatické škálování s funkcí scale-to-zero
+- Nakonfigurovat automatické škálování se škálováním na nulu
 - Implementovat zdravotní sondy a kontroly připravenosti
-- Monitorovat aplikační logy a metriky
-- Používat Azure Developer CLI pro rychlé nasazení
+- Sledovat protokoly aplikace a metriky
+- Použít Azure Developer CLI pro rychlé nasazení
 
-## 📦 Co je součástí
+## 📦 Co je zahrnuto
 
 ✅ **Flask aplikace** - Kompletní REST API s CRUD operacemi (`src/app.py`)  
 ✅ **Dockerfile** - Konfigurace kontejneru připravená pro produkci  
-✅ **Bicep infrastruktura** - Prostředí Container Apps a nasazení API  
-✅ **Konfigurace AZD** - Nastavení pro nasazení jedním příkazem  
-✅ **Zdravotní sondy** - Konfigurované kontroly živosti a připravenosti  
+✅ **Infrastruktura Bicep** - prostředí Container Apps a nasazení API  
+✅ **Konfigurace AZD** - nastavení nasazení jedním příkazem  
+✅ **Health sondy** - nakonfigurované liveness a readiness kontroly  
 ✅ **Automatické škálování** - 0-10 replik na základě HTTP zátěže  
 
 ## Architektura
@@ -47,17 +38,17 @@ Kompletní, funkční Python Flask REST API nasazené do Azure Container Apps po
 └────────────────────────────────────────┘
 ```
 
-## Předpoklady
+## Požadavky
 
 ### Požadováno
-- **Azure Developer CLI (azd)** - [Průvodce instalací](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure Developer CLI (azd)** - [Návod k instalaci](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure předplatné** - [Bezplatný účet](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Instalace Dockeru](https://www.docker.com/products/docker-desktop/) (pro lokální testování)
+- **Docker Desktop** - [Nainstalovat Docker](https://www.docker.com/products/docker-desktop/) (pro lokální testování)
 
-### Ověření předpokladů
+### Ověření požadavků
 
 ```bash
-# Zkontrolujte verzi azd (potřebná verze 1.5.0 nebo vyšší)
+# Zkontrolujte verzi azd (potřebujete 1.5.0 nebo vyšší)
 azd version
 
 # Ověřte přihlášení do Azure
@@ -70,12 +61,12 @@ docker --version
 ## ⏱️ Časový plán nasazení
 
 | Fáze | Doba trvání | Co se děje |
-|------|-------------|------------|
+|-------|----------|--------------||
 | Nastavení prostředí | 30 sekund | Vytvoření azd prostředí |
-| Sestavení kontejneru | 2-3 minuty | Docker sestaví Flask aplikaci |
+| Sestavení kontejneru | 2-3 minuty | Sestavení Flask aplikace pomocí Dockeru |
 | Zajištění infrastruktury | 3-5 minut | Vytvoření Container Apps, registru, monitorování |
-| Nasazení aplikace | 2-3 minuty | Push image a nasazení do Container Apps |
-| **Celkem** | **8-12 minut** | Kompletní připravené nasazení |
+| Nasazení aplikace | 2-3 minuty | Nahrání image a nasazení do Container Apps |
+| **Celkem** | **8-12 minut** | Nasazení dokončeno a připraveno |
 
 ## Rychlý start
 
@@ -83,17 +74,17 @@ docker --version
 # Přejděte na příklad
 cd examples/container-app/simple-flask-api
 
-# Inicializujte prostředí (vyberte jedinečný název)
+# Inicializujte prostředí (zvolte jedinečné jméno)
 azd env new myflaskapi
 
-# Nasazení všeho (infrastruktura + aplikace)
+# Nasadit vše (infrastruktura + aplikace)
 azd up
 # Budete vyzváni k:
-# 1. Výběru předplatného Azure
-# 2. Výběru umístění (např. eastus2)
-# 3. Počkejte 8-12 minut na nasazení
+# 1. Vyberte předplatné Azure
+# 2. Zvolte umístění (např. eastus2)
+# 3. Počkejte 8–12 minut na nasazení
 
-# Získejte svůj API endpoint
+# Získejte svůj koncový bod API
 azd env get-values
 
 # Otestujte API
@@ -124,16 +115,16 @@ azd show
 # - Stav: Běží
 ```
 
-### Krok 2: Testujte API endpointy
+### Krok 2: Otestujte koncové body API
 
 ```bash
-# Získat API endpoint
+# Získat koncový bod API
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Otestovat zdraví
+# Kontrola stavu
 curl $API_URL/health
 
-# Otestovat kořenový endpoint
+# Test kořenového endpointu
 curl $API_URL/
 
 # Vytvořit položku
@@ -146,21 +137,24 @@ curl $API_URL/api/items
 ```
 
 **Kritéria úspěchu:**
-- ✅ Endpoint zdraví vrací HTTP 200
-- ✅ Root endpoint zobrazuje informace o API
+- ✅ Health endpoint vrátí HTTP 200
+- ✅ Kořenový endpoint zobrazí informace o API
 - ✅ POST vytvoří položku a vrátí HTTP 201
-- ✅ GET vrací vytvořené položky
+- ✅ GET vrátí vytvořené položky
 
-### Krok 3: Zobrazení logů
+### Krok 3: Zobrazit logy
 
 ```bash
-# Streamujte živé logy
-azd logs api --follow
+# Sledujte živé záznamy pomocí azd monitor
+azd monitor --logs
+
+# Nebo použijte Azure CLI:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Měli byste vidět:
-# - Zprávy o spuštění Gunicornu
-# - Logy HTTP požadavků
-# - Logy informací aplikace
+# - zprávy o spuštění Gunicornu
+# - záznamy HTTP požadavků
+# - informační záznamy aplikace
 ```
 
 ## Struktura projektu
@@ -180,23 +174,23 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## API Endpointy
+## API koncové body
 
-| Endpoint | Metoda | Popis |
-|----------|--------|-------|
-| `/health` | GET | Kontrola zdraví |
-| `/api/items` | GET | Seznam všech položek |
-| `/api/items` | POST | Vytvoření nové položky |
-| `/api/items/{id}` | GET | Získání konkrétní položky |
-| `/api/items/{id}` | PUT | Aktualizace položky |
-| `/api/items/{id}` | DELETE | Smazání položky |
+| Koncový bod | Metoda | Popis |
+|----------|--------|-------------|
+| `/health` | GET | Kontrola stavu |
+| `/api/items` | GET | Vypsat všechny položky |
+| `/api/items` | POST | Vytvořit novou položku |
+| `/api/items/{id}` | GET | Získat konkrétní položku |
+| `/api/items/{id}` | PUT | Aktualizovat položku |
+| `/api/items/{id}` | DELETE | Odstranit položku |
 
 ## Konfigurace
 
 ### Proměnné prostředí
 
 ```bash
-# Nastavit vlastní konfiguraci
+# Nastavte vlastní konfiguraci
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
@@ -205,30 +199,30 @@ azd env set MAX_REPLICAS 20
 ### Konfigurace škálování
 
 API se automaticky škáluje na základě HTTP provozu:
-- **Minimální počet replik**: 0 (škáluje na nulu, když je nečinné)
-- **Maximální počet replik**: 10
-- **Počet současných požadavků na repliku**: 50
+- **Minimální repliky**: 0 (škáluje na nulu, když je nečinné)
+- **Maximální repliky**: 10
+- **Současné požadavky na repliku**: 50
 
 ## Vývoj
 
 ### Spuštění lokálně
 
 ```bash
-# Nainstalujte závislosti
+# Nainstalovat závislosti
 cd src
 pip install -r requirements.txt
 
-# Spusťte aplikaci
+# Spustit aplikaci
 python app.py
 
-# Otestujte lokálně
+# Otestovat lokálně
 curl http://localhost:8000/health
 ```
 
 ### Sestavení a testování kontejneru
 
 ```bash
-# Vytvořit Docker image
+# Sestavit Docker obraz
 docker build -t flask-api:local ./src
 
 # Spustit kontejner lokálně
@@ -240,7 +234,7 @@ curl http://localhost:8000/health
 
 ## Nasazení
 
-### Kompletní nasazení
+### Plné nasazení
 
 ```bash
 # Nasadit infrastrukturu a aplikaci
@@ -250,36 +244,39 @@ azd up
 ### Nasazení pouze kódu
 
 ```bash
-# Nasadit pouze aplikační kód (infrastruktura nezměněna)
+# Nasadit pouze kód aplikace (infrastruktura beze změny)
 azd deploy api
 ```
 
 ### Aktualizace konfigurace
 
 ```bash
-# Aktualizovat proměnné prostředí
+# Aktualizujte proměnné prostředí
 azd env set API_KEY "new-api-key"
 
-# Znovu nasadit s novou konfigurací
+# Znovu nasaďte s novou konfigurací
 azd deploy api
 ```
 
 ## Monitorování
 
-### Zobrazení logů
+### Zobrazit logy
 
 ```bash
-# Streamujte živé logy
-azd logs api --follow
+# Streamujte živé protokoly pomocí azd monitor
+azd monitor --logs
 
-# Zobrazte posledních 100 řádků
-azd logs api --tail 100
+# Nebo použijte Azure CLI pro Container Apps:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
+
+# Zobrazit posledních 100 řádků
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Monitorování metrik
+### Sledovat metriky
 
 ```bash
-# Otevřít dashboard Azure Monitor
+# Otevřít řídicí panel Azure Monitor
 azd monitor --overview
 
 # Zobrazit konkrétní metriky
@@ -304,7 +301,7 @@ Očekávaná odpověď:
 }
 ```
 
-### Vytvoření položky
+### Vytvořit položku
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -312,7 +309,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Získání všech položek
+### Získat všechny položky
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -320,19 +317,19 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Optimalizace nákladů
 
-Toto nasazení používá scale-to-zero, takže platíte pouze tehdy, když API zpracovává požadavky:
+Toto nasazení používá škálování na nulu, takže platíte pouze když API zpracovává požadavky:
 
-- **Náklady při nečinnosti**: ~$0/měsíc (škálováno na nulu)
-- **Náklady při aktivitě**: ~$0.000024/sekundu na repliku
-- **Očekávané měsíční náklady** (lehký provoz): $5-15
+- **Náklady v nečinnosti**: ~$0/měsíc (škálováno na nulu)
+- **Aktivní náklady**: ~$0.000024/sekundu za repliku
+- **Odhadované měsíční náklady** (při malém zatížení): $5-15
 
 ### Další snížení nákladů
 
 ```bash
-# Snižte maximální počet replik pro vývoj
+# Snížit maximální počet replik pro vývojové prostředí
 azd env set MAX_REPLICAS 3
 
-# Použijte kratší časový limit nečinnosti
+# Použít kratší časový limit nečinnosti
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minut
 ```
 
@@ -341,35 +338,35 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minut
 ### Kontejner se nespustí
 
 ```bash
-# Zkontrolujte logy kontejneru
-azd logs api --tail 100
+# Zkontrolujte protokoly kontejneru pomocí Azure CLI
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Ověřte, že Docker image se sestavuje lokálně
+# Ověřte lokální sestavení Docker obrazu
 docker build -t test ./src
 ```
 
-### API není dostupné
+### API není přístupné
 
 ```bash
-# Ověřte, že vstup je externí
+# Ověřte, že ingress je externí
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### Vysoké doby odezvy
+### Vysoké časy odezvy
 
 ```bash
-# Zkontrolujte využití CPU/paměti
+# Zkontrolujte využití CPU a paměti
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Zvyšte zdroje, pokud je to potřeba
+# Zvyšte zdroje podle potřeby
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Vyčištění
+## Úklid
 
 ```bash
 # Smazat všechny zdroje
@@ -380,26 +377,26 @@ azd down --force --purge
 
 ### Rozšíření tohoto příkladu
 
-1. **Přidání databáze** - Integrace Azure Cosmos DB nebo SQL Database
+1. **Přidat databázi** - Integrujte Azure Cosmos DB nebo SQL Database
    ```bash
-   # Přidejte modul Cosmos DB do infra/main.bicep
-   # Aktualizujte app.py s připojením k databázi
+   # Přidat modul Cosmos DB do infra/main.bicep
+   # Aktualizovat app.py s připojením k databázi
    ```
 
-2. **Přidání autentizace** - Implementace Azure AD nebo API klíčů
+2. **Přidat autentizaci** - Implementujte Azure AD nebo API klíče
    ```python
    # Přidejte middleware pro autentizaci do app.py
    from functools import wraps
    ```
 
-3. **Nastavení CI/CD** - Workflow GitHub Actions
+3. **Nastavit CI/CD** - pracovní postup GitHub Actions
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Přidání spravované identity** - Zabezpečený přístup k Azure službám
+4. **Přidat spravovanou identitu** - Zabezpečit přístup k službám Azure
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -407,14 +404,14 @@ azd down --force --purge
 
 ### Související příklady
 
-- **[Aplikace s databází](../../../../../examples/database-app)** - Kompletní příklad se SQL databází
+- **[Databázová aplikace](../../../../../examples/database-app)** - Kompletní příklad se SQL databází
 - **[Mikroslužby](../../../../../examples/container-app/microservices)** - Architektura s více službami
 - **[Hlavní průvodce Container Apps](../README.md)** - Všechny vzory kontejnerů
 
-### Výukové materiály
+### Studijní zdroje
 
 - 📚 [Kurz AZD pro začátečníky](../../../README.md) - Hlavní stránka kurzu
-- 📚 [Vzory Container Apps](../README.md) - Další vzory nasazení
+- 📚 [Vzorové postupy Container Apps](../README.md) - Více vzorů nasazení
 - 📚 [Galerie šablon AZD](https://azure.github.io/awesome-azd/) - Šablony od komunity
 
 ## Další zdroje
@@ -422,26 +419,26 @@ azd down --force --purge
 ### Dokumentace
 - **[Dokumentace Flask](https://flask.palletsprojects.com/)** - Průvodce frameworkem Flask
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Oficiální dokumentace Azure
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referenční příručka příkazů azd
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - referenční příručka příkazů azd
 
-### Tutoriály
+### Návody
 - **[Rychlý start Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Nasazení první aplikace
 - **[Python na Azure](https://learn.microsoft.com/azure/developer/python/)** - Průvodce vývojem v Pythonu
 - **[Jazyk Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktura jako kód
 
 ### Nástroje
-- **[Azure Portal](https://portal.azure.com)** - Vizualní správa zdrojů
+- **[Azure Portal](https://portal.azure.com)** - Spravovat prostředky vizuálně
 - **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integrace do IDE
 
 ---
 
-**🎉 Gratulujeme!** Nasadili jste produkčně připravené Flask API do Azure Container Apps s automatickým škálováním a monitorováním.
+**🎉 Gratulujeme!** Nasadili jste produkční Flask API do Azure Container Apps s automatickým škálováním a monitorováním.
 
-**Dotazy?** [Otevřete problém](https://github.com/microsoft/AZD-for-beginners/issues) nebo si přečtěte [FAQ](../../../resources/faq.md)
+**Máte dotazy?** [Otevřete issue](https://github.com/microsoft/AZD-for-beginners/issues) nebo zkontrolujte [Často kladené dotazy (FAQ)](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Vyloučení odpovědnosti:
+Tento dokument byl přeložen pomocí služby pro překlad založené na umělé inteligenci [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nepřebíráme odpovědnost za jakákoli nedorozumění nebo chybné výklady vzniklé z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

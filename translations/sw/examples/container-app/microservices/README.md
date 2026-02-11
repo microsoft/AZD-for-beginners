@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-23T12:05:26+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "sw"
-}
--->
-# Usanifu wa Microservices - Mfano wa Programu ya Kontena
+# Mimarisha ya Microservices - Mfano wa Container App
 
-⏱️ **Muda Unaokadiriwa**: Dakika 25-35 | 💰 **Gharama Inayokadiriwa**: ~$50-100/mwezi | ⭐ **Ugumu**: Juu
+⏱️ **Wakati Unaokadiriwa**: 25-35 dakika | 💰 **Gharama Inayokadiriwa**: ~$50-100/mwezi | ⭐ **Ugumu**: Ngumu
 
-Mfano wa usanifu wa **microservices rahisi lakini unaofanya kazi** uliowekwa kwenye Azure Container Apps kwa kutumia AZD CLI. Mfano huu unaonyesha mawasiliano kati ya huduma, upangaji wa kontena, na ufuatiliaji kwa mpangilio wa huduma mbili wa vitendo.
+Mimarisha ya microservices **iliyorahisishwa lakini yenye utendaji** iliyowekwa kwenye Azure Container Apps kwa kutumia AZD CLI. Mfano huu unaonyesha mawasiliano kati ya huduma, uratibu wa makontena, na ufuatiliaji kwa usanifu wa vitendo wenye huduma 2.
 
-> **📚 Njia ya Kujifunza**: Mfano huu unaanza na usanifu wa huduma mbili wa kiwango cha chini (API Gateway + Huduma ya Nyuma) ambao unaweza kupeleka na kujifunza kutoka kwake. Baada ya kufahamu msingi huu, tunatoa mwongozo wa kupanua hadi mfumo kamili wa microservices.
+> **📚 Mbinu ya Kujifunza**: Mfano huu huanza na usanifu mdogo wa huduma 2 (API Gateway + Huduma ya Backend) ambao unaweza kuutekeleza na kujifunza kutoka kwake. Baada ya kumudu msingi huu, tunatoa mwongozo wa kupanua hadi mfumo kamili wa microservices.
 
-## Utajifunza Nini
+## Utakavyojifunza
 
-Kwa kukamilisha mfano huu, utajifunza:
-- Kuweka kontena nyingi kwenye Azure Container Apps
-- Kutekeleza mawasiliano kati ya huduma kwa kutumia mtandao wa ndani
-- Kusimamia upanuzi kulingana na mazingira na ukaguzi wa afya
-- Kufuatilia programu zilizogawanyika kwa kutumia Application Insights
-- Kuelewa mifumo ya uwekaji wa microservices na mbinu bora
-- Kujifunza upanuzi wa hatua kwa hatua kutoka usanifu rahisi hadi mgumu
+Kwa kumaliza mfano huu, utaj:
+- Zindua makontena mengi kwenye Azure Container Apps
+- Tekeleza mawasiliano kati ya huduma kwa kutumia mtandao wa ndani
+- Sanidi upanuzi kulingana na mazingira na ukaguzi wa afya
+- Fuata programu zilizoenea kwa Application Insights
+- Fahamu mifumo ya uenezaji wa microservices na mbinu bora
+- Jifunze upanuzi wa hatua kwa hatua kutoka muundo rahisi hadi mgumu
 
-## Usanifu
+## Architecture
 
-### Awamu ya 1: Tunachojenga (Kilichojumuishwa Katika Mfano Huu)
+### Phase 1: Hatua ya 1: Tunachojenga (Imejumuishwa Katika Mfano Huu)
 
 ```
                     ┌─────────────────────────────┐
@@ -60,18 +51,18 @@ Kwa kukamilisha mfano huu, utajifunza:
                     └─────────────────────────────┘
 ```
 
-**Kwa Nini Kuanza Rahisi?**
-- ✅ Kuweka na kuelewa haraka (Dakika 25-35)
-- ✅ Kujifunza mifumo ya msingi ya microservices bila ugumu
-- ✅ Msimbo unaofanya kazi ambao unaweza kurekebisha na kujaribu
-- ✅ Gharama ya chini kwa kujifunza (~$50-100/mwezi dhidi ya $300-1400/mwezi)
-- ✅ Kujenga kujiamini kabla ya kuongeza hifadhidata na foleni za ujumbe
+**Kwa Nini Uanze kwa Rahisi?**
+- ✅ Zindua na kuelewa haraka (25-35 dakika)
+- ✅ Jifunze mifumo ya msingi ya microservices bila ugumu
+- ✅ Msimbo unaofanya kazi ambao unaweza kuubadilisha na kujaribu
+- ✅ Gharama ya chini kwa kujifunza (~$50-100/mwezi vs $300-1400/mwezi)
+- ✅ Jenga ujasiri kabla ya kuongeza hifadhidata na foleni za ujumbe
 
-**Mfano**: Fikiria kama kujifunza kuendesha gari. Unaanzia kwenye uwanja wa maegesho tupu (huduma 2), unajifunza misingi, kisha unaendelea kwenye trafiki ya mji (huduma 5+ na hifadhidata).
+**Mfano**: Fikiria hii kama kujifunza kuendesha gari. Unaanza na uwanja wa maegesho tupu (huduma 2), unatajiri msingi, kisha unaendelea kwa trafiki ya mji (huduma 5+ na hifadhidata).
 
-### Awamu ya 2: Upanuzi wa Baadaye (Usanifu wa Marejeleo)
+### Phase 2: Hatua ya 2: Upanuzi wa Baadaye (Usanifu wa Marejeo)
 
-Baada ya kufahamu usanifu wa huduma mbili, unaweza kupanua hadi:
+Mara utakapo mstaafu usanifu wa huduma 2, unaweza kupanua hadi:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -86,137 +77,137 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-Tazama sehemu ya "Mwongozo wa Upanuzi" mwishoni kwa maelekezo ya hatua kwa hatua.
+Tazama sehemu ya "Mwongozo wa Upanuzi" mwishoni kwa maelekezo hatua kwa hatua.
 
 ## Vipengele Vilivyojumuishwa
 
-✅ **Ugunduzi wa Huduma**: Ugunduzi wa DNS kiotomatiki kati ya kontena  
-✅ **Usawazishaji wa Mizigo**: Usawazishaji wa mizigo uliojengwa ndani kwa nakala nyingi  
-✅ **Upanuzi wa Kiotomatiki**: Upanuzi wa kujitegemea kwa kila huduma kulingana na maombi ya HTTP  
-✅ **Ufuatiliaji wa Afya**: Ukaguzi wa liveness na readiness kwa huduma zote mbili  
-✅ **Kumbukumbu Zilizogawanyika**: Kumbukumbu zilizojikita na Application Insights  
+✅ **Kugundua Huduma**: Utafutaji wa DNS kiotomatiki kati ya makontena  
+✅ **Kusawazisha Mzigo**: Kusawazisha mzigo kilichojengwa kwa nakala  
+✅ **Upanuzi Kiotomatiki**: Upanuzi huru kwa kila huduma kulingana na ombi la HTTP  
+✅ **Ufuatiliaji wa Afya**: Probes za liveness na readiness kwa huduma zote mbili  
+✅ **Kulogingia Kusambazwa**: Kuingiza logi kwa pamoja na Application Insights  
 ✅ **Mtandao wa Ndani**: Mawasiliano salama kati ya huduma  
-✅ **Upangaji wa Kontena**: Uwekaji na upanuzi wa kiotomatiki  
-✅ **Sasisho Bila Kusimamisha**: Sasisho za mzunguko na usimamizi wa marekebisho  
+✅ **Uratibu wa Makontena**: Utekelezaji kiotomatiki na upanuzi  
+✅ **Sasisho Bila Kukatwa Huduma**: Sasisho za mzunguko na usimamizi wa matoleo  
 
-## Mahitaji
+## Masharti ya Awali
 
 ### Vifaa Vinavyohitajika
 
-Kabla ya kuanza, hakikisha una vifaa hivi vilivyowekwa:
+Kabla ya kuanza, hakikisha umeweka zana hizi:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (toleo 1.0.0 au zaidi)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (toleo 1.0.0 au juu)
    ```bash
    azd version
-   # Matokeo yanayotarajiwa: toleo la azd 1.0.0 au juu zaidi
+   # Matokeo yanayotarajiwa: azd toleo 1.0.0 au la juu zaidi
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (toleo 2.50.0 au zaidi)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (toleo 2.50.0 au juu)
    ```bash
    az --version
-   # Matokeo yanayotarajiwa: azure-cli 2.50.0 au zaidi
+   # Matokeo yanayotarajiwa: azure-cli 2.50.0 au toleo jipya zaidi
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (kwa maendeleo/majaribio ya ndani - hiari)
+3. **[Docker](https://www.docker.com/get-started)** (kwa maendeleo/kujaribu kwa ndani - hiari)
    ```bash
    docker --version
-   # Matokeo yanayotarajiwa: Toleo la Docker 20.10 au juu zaidi
+   # Matokeo yanayotarajiwa: Docker toleo 20.10 au zaidi
    ```
 
 ### Mahitaji ya Azure
 
-- Usajili wa **Azure** unaofanya kazi ([unda akaunti ya bure](https://azure.microsoft.com/free/))
+- Usajili wa Azure unaofanya kazi ([unda akaunti bure](https://azure.microsoft.com/free/))
 - Ruhusa za kuunda rasilimali kwenye usajili wako
 - Nafasi ya **Contributor** kwenye usajili au kikundi cha rasilimali
 
-### Maarifa Yanayohitajika
+### Mahitaji ya Maarifa
 
-Huu ni mfano wa **kiwango cha juu**. Unapaswa kuwa na:
-- Umekamilisha [Mfano Rahisi wa Flask API](../../../../../examples/container-app/simple-flask-api) 
+Huu ni mfano wa **ngazi ya juu**. Unapaswa kuwa na:
+- Umehitimisha [Mfano wa Simple Flask API](../../../../../examples/container-app/simple-flask-api) 
 - Uelewa wa msingi wa usanifu wa microservices
 - Uzoefu wa REST APIs na HTTP
-- Uelewa wa dhana za kontena
+- Uelewa wa dhana za makontena
 
-**Mgeni kwa Container Apps?** Anza na [Mfano Rahisi wa Flask API](../../../../../examples/container-app/simple-flask-api) kwanza kujifunza misingi.
+**Je, mpya kwa Container Apps?** Anza na [Mfano wa Simple Flask API](../../../../../examples/container-app/simple-flask-api) kwanza kujifunza mambo ya msingi.
 
 ## Mwanzo wa Haraka (Hatua kwa Hatua)
 
-### Hatua ya 1: Kloni na Elekea
+### Hatua 1: Nakili (Clone) na Nenda
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Ukaguzi wa Mafanikio**: Hakikisha unaona `azure.yaml`:
+**✓ Kagua Mafanikio**: Thibitisha unaona `azure.yaml`:
 ```bash
 ls
 # Inatarajiwa: README.md, azure.yaml, infra/, src/
 ```
 
-### Hatua ya 2: Thibitisha na Azure
+### Hatua 2: Thibitisha kwa Azure
 
 ```bash
 azd auth login
 ```
 
-Hii inafungua kivinjari chako kwa uthibitishaji wa Azure. Ingia kwa kutumia maelezo yako ya Azure.
+Hii itafungua kivinjari chako kwa ajili ya uthibitisho wa Azure. Ingia kwa kutumia taarifa zako za Azure.
 
-**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona:
+**✓ Kagua Mafanikio**: Unapaswa kuona:
 ```
 Logged in to Azure.
 ```
 
-### Hatua ya 3: Anzisha Mazingira
+### Hatua 3: Anzisha Mazingira
 
 ```bash
 azd init
 ```
 
-**Maswali utakayoulizwa**:
-- **Jina la Mazingira**: Weka jina fupi (mfano, `microservices-dev`)
-- **Usajili wa Azure**: Chagua usajili wako
-- **Eneo la Azure**: Chagua eneo (mfano, `eastus`, `westeurope`)
+**Vidokezo utakavyoona**:
+- **Jina la mazingira**: Ingiza jina fupi (mfano, `microservices-dev`)
+- **Azure subscription**: Chagua usajili wako
+- **Azure location**: Chagua mkoa (mfano, `eastus`, `westeurope`)
 
-**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona:
+**✓ Kagua Mafanikio**: Unapaswa kuona:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Hatua ya 4: Weka Miundombinu na Huduma
+### Hatua 4: Zindua Miundombinu na Huduma
 
 ```bash
 azd up
 ```
 
-**Kinachotokea** (huchukua dakika 8-12):
-1. Huunda mazingira ya Container Apps
-2. Huunda Application Insights kwa ufuatiliaji
-3. Hujenga kontena la API Gateway (Node.js)
-4. Hujenga kontena la Huduma ya Bidhaa (Python)
-5. Hupeleka kontena zote mbili kwenye Azure
-6. Husimamia mtandao na ukaguzi wa afya
-7. Huanzisha ufuatiliaji na kumbukumbu
+**Ambacho kinatokea** (kinachukua dakika 8-12):
+1. Inaunda mazingira ya Container Apps
+2. Inaunda Application Insights kwa ufuatiliaji
+3. Inajenga kontena la API Gateway (Node.js)
+4. Inajenga kontena la Product Service (Python)
+5. Inaweka kontena zote mbili kwenye Azure
+6. Inasanidi mtandao na ukaguzi wa afya
+7. Inaweka ufuatiliaji na uingizaji wa logi
 
-**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona:
+**✓ Kagua Mafanikio**: Unapaswa kuona:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ Muda**: Dakika 8-12
+**⏱️ Muda**: dakika 8-12
 
-### Hatua ya 5: Jaribu Uwekaji
+### Hatua 5: Jaribu Utekelezaji
 
 ```bash
-# Pata mwisho wa lango la gateway
+# Pata kiunganishi cha lango
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Jaribu afya ya API Gateway
+# Jaribu afya ya lango la API
 curl $GATEWAY_URL/health
 
 # Matokeo yanayotarajiwa:
-# {"hali":"nzima","huduma":"api-gateway","muda":"2025-11-19T10:30:00Z"}
+# {"status":"yenye afya","service":"lango la API","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
 **Jaribu huduma ya bidhaa kupitia gateway**:
@@ -226,21 +217,21 @@ curl $GATEWAY_URL/api/products
 
 # Matokeo yanayotarajiwa:
 # [
-#   {"id":1,"name":"Kompyuta mpakato","price":999.99,"stock":50},
-#   {"id":2,"name":"Panya","price":29.99,"stock":200},
-#   {"id":3,"name":"Kibodi","price":79.99,"stock":150}
+#   {"kitambulisho":1,"jina":"Kompyuta ya mkononi","bei":999.99,"hisa":50},
+#   {"kitambulisho":2,"jina":"Panya wa kompyuta","bei":29.99,"hisa":200},
+#   {"kitambulisho":3,"jina":"Kibodi ya kompyuta","bei":79.99,"hisa":150}
 # ]
 ```
 
-**✓ Ukaguzi wa Mafanikio**: Vituo vyote viwili vinarejesha data ya JSON bila makosa.
+**✓ Kagua Mafanikio**: Vitambulisho vyote viwili vinarudisha data ya JSON bila makosa.
 
 ---
 
-**🎉 Hongera!** Umeweka usanifu wa microservices kwenye Azure!
+**🎉 Hongera!** Umezindua miundo ya microservices kwenye Azure!
 
 ## Muundo wa Mradi
 
-Faili zote za utekelezaji zimejumuishwa—huu ni mfano kamili, unaofanya kazi:
+Faili zote za utekelezaji zipo—huyu ni mfano kamili unaofanya kazi:
 
 ```
 microservices/
@@ -270,72 +261,72 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Kila Sehemu Inafanya Nini:**
+**Kila Kipengele Hufanya Nini:**
 
 **Miundombinu (infra/)**:
-- `main.bicep`: Husimamia rasilimali zote za Azure na utegemezi wake
-- `core/container-apps-environment.bicep`: Huunda mazingira ya Container Apps na Azure Container Registry
-- `core/monitor.bicep`: Huanzisha Application Insights kwa kumbukumbu zilizogawanyika
-- `app/*.bicep`: Ufafanuzi wa programu za kontena binafsi na upanuzi na ukaguzi wa afya
+- `main.bicep`: Inaratibu rasilimali zote za Azure na utegemezi wake
+- `core/container-apps-environment.bicep`: Inaunda mazingira ya Container Apps na Azure Container Registry
+- `core/monitor.bicep`: Inaunda Application Insights kwa kulogisha kwa kusambazwa
+- `app/*.bicep`: Ufafanuzi wa kila container app pamoja na upanuzi na ukaguzi wa afya
 
 **API Gateway (src/api-gateway/)**:
-- Huduma inayokabiliana na umma inayopitisha maombi kwa huduma za nyuma
-- Hutekeleza kumbukumbu, usimamizi wa makosa, na upitishaji wa maombi
-- Huonyesha mawasiliano ya HTTP kati ya huduma
+- Huduma inayoonekana kwa umma inayosafirisha maombi kwa huduma za backend
+- Inatekeleza uingizaji wa logi, utunzaji wa makosa, na upeleka maombi
+- Inaonyesha mawasiliano ya HTTP kati ya huduma
 
-**Huduma ya Bidhaa (src/product-service/)**:
-- Huduma ya ndani yenye orodha ya bidhaa (kwa kumbukumbu kwa urahisi)
+**Product Service (src/product-service/)**:
+- Huduma ya ndani yenye katalogi ya bidhaa (kwa kumbukumbu kwa ajili ya urahisi)
 - REST API yenye ukaguzi wa afya
-- Mfano wa muundo wa huduma ya nyuma
+- Mfano wa mtindo wa microservice wa backend
 
 ## Muhtasari wa Huduma
 
-### API Gateway (Node.js/Express)
+### Lango la API (API Gateway) (Node.js/Express)
 
-**Bandari**: 8080  
-**Ufikiaji**: Umma (ingress ya nje)  
-**Madhumuni**: Kupitisha maombi yanayoingia kwa huduma za nyuma zinazofaa  
+**Port**: 8080  
+**Ufikiaji**: Umma (external ingress)  
+**Madhumuni**: Inapanga maombi yanayoingia kwa huduma za backend zinazofaa  
 
-**Vituo**:
-- `GET /` - Taarifa ya huduma
-- `GET /health` - Kituo cha ukaguzi wa afya
-- `GET /api/products` - Pitisha kwa huduma ya bidhaa (orodhesha zote)
-- `GET /api/products/:id` - Pitisha kwa huduma ya bidhaa (pata kwa ID)
+**Endpoints**:
+- `GET /` - Taarifa za huduma
+- `GET /health` - Endpoint ya ukaguzi wa afya
+- `GET /api/products` - Pepeta kwa huduma ya bidhaa (orodha zote)
+- `GET /api/products/:id` - Pepeta kwa huduma ya bidhaa (pata kwa ID)
 
 **Vipengele Muhimu**:
-- Upitishaji wa maombi kwa axios
-- Kumbukumbu zilizojikita
-- Usimamizi wa makosa na muda wa kusubiri
+- Usambazaji wa ombi kwa kutumia axios
+- Kuloginga kwa pamoja
+- Utunzaji wa makosa na usimamizi wa timeout
 - Ugunduzi wa huduma kupitia vigezo vya mazingira
-- Ujumuishaji wa Application Insights
+- Uunganisho wa Application Insights
 
-**Msimbo wa Msingi** (`src/api-gateway/app.js`):
+**Code Highlight** (`src/api-gateway/app.js`):
 ```javascript
-// Mawasiliano ya huduma ya ndani
+// Mawasiliano ya huduma za ndani
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
 });
 ```
 
-### Huduma ya Bidhaa (Python/Flask)
+### Huduma ya Bidhaa (Product Service) (Python/Flask)
 
-**Bandari**: 8000  
-**Ufikiaji**: Ndani tu (hakuna ingress ya nje)  
-**Madhumuni**: Kusimamia orodha ya bidhaa kwa kumbukumbu ya ndani  
+**Port**: 8000  
+**Ufikiaji**: Ndani tu (hapana ingress ya nje)  
+**Madhumuni**: Inasimamia katalogi ya bidhaa kwa kutumia data kwenye kumbukumbu ya ndani  
 
-**Vituo**:
-- `GET /` - Taarifa ya huduma
-- `GET /health` - Kituo cha ukaguzi wa afya
-- `GET /products` - Orodhesha bidhaa zote
+**Endpoints**:
+- `GET /` - Taarifa za huduma
+- `GET /health` - Endpoint ya ukaguzi wa afya
+- `GET /products` - Orodha ya bidhaa zote
 - `GET /products/<id>` - Pata bidhaa kwa ID
 
 **Vipengele Muhimu**:
-- RESTful API na Flask
-- Hifadhi ya bidhaa ya kumbukumbu (rahisi, hakuna hifadhidata inayohitajika)
+- RESTful API kwa Flask
+- Hifadhi ya bidhaa kwenye kumbukumbu ya ndani (rahisi, hakuna hifadhidata)
 - Ufuatiliaji wa afya kwa probes
-- Kumbukumbu zilizopangiliwa
-- Ujumuishaji wa Application Insights
+- Kuloginga kwa muundo
+- Uunganisho wa Application Insights
 
 **Mfano wa Data**:
 ```python
@@ -348,97 +339,97 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Kwa Nini Ndani Tu?**
-Huduma ya bidhaa haifikiwi moja kwa moja na umma. Maombi yote lazima yapitie API Gateway, ambayo hutoa:
-- Usalama: Sehemu ya ufikiaji inayodhibitiwa
-- Urahisi: Inaweza kubadilisha huduma ya nyuma bila kuathiri wateja
-- Ufuatiliaji: Kumbukumbu za maombi zilizojikita
+**Kwa Nini Ndani Pekee?**
+Huduma ya bidhaa haifunuliwi kwa umma. Maombi yote lazima yapite kupitia Lango la API, ambalo linatoa:
+- Usalama: Sehemu ya udhibiti wa ufikaji
+- Uwezo wa kubadilika: Inaweza kubadilisha backend bila kuathiri wateja
+- Ufuatiliaji: Kuloginga vya pamoja vya maombi
 
 ## Kuelewa Mawasiliano ya Huduma
 
 ### Jinsi Huduma Zinavyowasiliana
 
-Katika mfano huu, API Gateway inawasiliana na Huduma ya Bidhaa kwa kutumia **maombi ya HTTP ya ndani**:
+Katika mfano huu, Lango la API linawasiliana na Huduma ya Bidhaa kwa kutumia **vito vya HTTP vya ndani**:
 
 ```javascript
-// Lango la API (src/api-gateway/app.js)
+// Mlango wa API (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Fanya ombi la ndani la HTTP
+// Tuma ombi la HTTP la ndani
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**Vidokezo Muhimu**:
+**Mambo Muhimu**:
 
-1. **Ugunduzi wa DNS**: Container Apps hutoa DNS kiotomatiki kwa huduma za ndani
-   - FQDN ya Huduma ya Bidhaa: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Imerahisishwa kama: `http://product-service` (Container Apps inatatua)
+1. **Ugunduzi wa Kifaa wa DNS**: Container Apps huweka DNS kwa huduma za ndani kiotomatiki
+   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
+   - Ilarahisishwa kama: `http://product-service` (Container Apps inaitatua)
 
-2. **Hakuna Ufikiaji wa Umma**: Huduma ya Bidhaa ina `external: false` kwenye Bicep
-   - Inafikika tu ndani ya mazingira ya Container Apps
-   - Haiwezi kufikiwa kutoka mtandaoni
+2. **Hakuna Kufunguliwa kwa Umma**: Huduma ya Bidhaa ina `external: false` katika Bicep
+   - Inapatikana tu ndani ya mazingira ya Container Apps
+   - Haiwezi kufikiwa kutoka kwenye intaneti
 
-3. **Vigezo vya Mazingira**: URL za huduma huingizwa wakati wa uwekaji
+3. **Vigezo vya Mazingira**: URL za huduma zinaingizwa wakati wa utekelezaji
    - Bicep hupitisha FQDN ya ndani kwa gateway
-   - Hakuna URL zilizowekwa moja kwa moja kwenye msimbo wa programu
+   - Hakuna URL zilizowekwa moja kwa moja ndani ya msimbo wa programu
 
-**Mfano**: Fikiria kama vyumba vya ofisi. API Gateway ni dawati la mapokezi (inayokabiliana na umma), na Huduma ya Bidhaa ni chumba cha ofisi (ndani tu). Wageni lazima wapitie mapokezi kufikia chumba chochote.
+**Mfano**: Fikiria hii kama vyumba vya ofisi. Lango la API ni dawati la mapokezi (linaloonekana kwa umma), na Huduma ya Bidhaa ni chumba cha ofisi (ndani tu). Wageni lazima wapitie mapokezi ili kufika ofisini.
 
-## Chaguzi za Uwekaji
+## Chaguzi za Utekelezaji
 
-### Uwekaji Kamili (Inapendekezwa)
+### Utekelezaji Kamili (Unaopendekezwa)
 
 ```bash
-# Weka miundombinu na huduma zote mbili
+# Peleka miundombinu na huduma zote mbili
 azd up
 ```
 
-Hii huweka:
+Hii inatekeleza:
 1. Mazingira ya Container Apps
 2. Application Insights
 3. Container Registry
 4. Kontena la API Gateway
-5. Kontena la Huduma ya Bidhaa
+5. Kontena la Product Service
 
-**Muda**: Dakika 8-12
+**Muda**: dakika 8-12
 
-### Weka Huduma Binafsi
+### Zindua Huduma Binafsi
 
 ```bash
-# Peleka huduma moja tu (baada ya azd up ya awali)
+# Sambaza huduma moja tu (baada ya azd up ya awali)
 azd deploy api-gateway
 
-# Au peleka huduma ya bidhaa
+# Au sambaza huduma ya bidhaa
 azd deploy product-service
 ```
 
-**Matumizi**: Unapoboresha msimbo katika huduma moja na unataka kuweka upya huduma hiyo tu.
+**Matumizi**: Unapotengeneza msimbo katika huduma moja na unataka kuirejesha tu huduma hiyo.
 
-### Sasisha Usanidi
+### Sasisha Mipangilio
 
 ```bash
-# Badilisha vigezo vya kupima
+# Badilisha vigezo vya upanuzi
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Tumia upya na usanidi mpya
+# Sambaza tena kwa usanidi mpya
 azd up
 ```
 
-## Usanidi
+## Mipangilio
 
-### Usanidi wa Upanuzi
+### Mipangilio ya Upanuzi
 
-Huduma zote mbili zimeundwa na upanuzi wa kiotomatiki unaotegemea HTTP kwenye faili zao za Bicep:
+Huduma zote zimewekwa na upanuzi unaotegemea HTTP katika mafaili yao ya Bicep:
 
 **API Gateway**:
-- Nakala za chini: 2 (angalau 2 kwa upatikanaji)
+- Nakala za chini: 2 (daima angalau 2 kwa upatikanaji)
 - Nakala za juu: 20
-- Kichocheo cha upanuzi: Maombi 50 ya wakati mmoja kwa nakala
+- Kichocheo cha upanuzi: mashinikizo 50 ya maombi yalayolindana kwa kila nakala
 
-**Huduma ya Bidhaa**:
+**Product Service**:
 - Nakala za chini: 1 (inaweza kupungua hadi sifuri ikiwa inahitajika)
 - Nakala za juu: 10
-- Kichocheo cha upanuzi: Maombi 100 ya wakati mmoja kwa nakala
+- Kichocheo cha upanuzi: mashinikizo 100 ya maombi yalayolindana kwa kila nakala
 
 **Badilisha Upanuzi** (katika `infra/app/*.bicep`):
 ```bicep
@@ -462,17 +453,17 @@ scale: {
 
 **API Gateway**:
 - CPU: 1.0 vCPU
-- Kumbukumbu: 2 GiB
-- Sababu: Hushughulikia trafiki yote ya nje
+- Memory: 2 GiB
+- Sababu: Inashughulikia trafiki yote ya nje
 
-**Huduma ya Bidhaa**:
+**Product Service**:
 - CPU: 0.5 vCPU
-- Kumbukumbu: 1 GiB
-- Sababu: Operesheni nyepesi za kumbukumbu
+- Memory: 1 GiB
+- Sababu: Operesheni za kumbukumbu za ndani nyepesi
 
 ### Ukaguzi wa Afya
 
-Huduma zote mbili zinajumuisha liveness na readiness probes:
+Huduma zote mbili zina probes za liveness na readiness:
 
 ```bicep
 probes: [
@@ -498,22 +489,25 @@ probes: [
 ```
 
 **Hii Inamaanisha**:
-- **Liveness**: Ikiwa ukaguzi wa afya utashindwa, Container Apps itaanza upya kontena
-- **Readiness**: Ikiwa haiko tayari, Container Apps itaacha kuelekeza trafiki kwa nakala hiyo
+- **Liveness**: Ikiwa ukaguzi wa afya unapoteza, Container Apps inarejesha kontena
+- **Readiness**: Ikiwa haiko tayari, Container Apps inazuia kusafirisha trafiki kwa nakala hiyo
 
-## Ufuatiliaji na Uangalizi
 
-### Tazama Kumbukumbu za Huduma
+
+## Ufuatiliaji na Uwezo wa Kuonekana
+
+### Tazama Logi za Huduma
 
 ```bash
-# Tazama kumbukumbu kutoka kwa API Gateway
-azd logs api-gateway --follow
+# Tazama kumbukumbu za matukio kwa kutumia azd monitor
+azd monitor --logs
 
-# Tazama kumbukumbu za huduma ya bidhaa za hivi karibuni
-azd logs product-service --tail 100
+# Au tumia Azure CLI kwa ajili ya Container Apps maalum:
+# Pokea kumbukumbu kwa mtiririko kutoka API Gateway
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Tazama kumbukumbu zote kutoka kwa huduma zote mbili
-azd logs --follow
+# Tazama kumbukumbu za hivi karibuni za huduma ya bidhaa
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Matokeo Yanayotarajiwa**:
@@ -526,9 +520,9 @@ azd logs --follow
 
 ### Maswali ya Application Insights
 
-Fikia Application Insights kwenye Azure Portal, kisha endesha maswali haya:
+Fikia Application Insights katika Azure Portal, kisha endesha maswali haya:
 
-**Pata Maombi Polepole**:
+**Pata Maombi Yaliyo Polepole**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -537,7 +531,7 @@ requests
 | order by count_ desc
 ```
 
-**Fuatilia Mawasiliano ya Huduma kwa Huduma**:
+**Fuata Majiwala ya Huduma kwa Huduma**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -554,7 +548,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Kiasi cha Maombi kwa Wakati**:
+**Kiasi cha Maombi Kwa Muda**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -562,7 +556,7 @@ requests
 | render timechart
 ```
 
-### Fikia Dashibodi ya Ufuatiliaji
+### Pata Dashibodi ya Ufuatiliaji
 
 ```bash
 # Pata maelezo ya Application Insights
@@ -575,34 +569,34 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-### Metriki za Moja kwa Moja
+### Vipimo Moja kwa Moja (Live Metrics)
 
-1. Nenda kwenye Application Insights kwenye Azure Portal
+1. Nenda kwenye Application Insights katika Azure Portal
 2. Bonyeza "Live Metrics"
-3. Tazama maombi ya wakati halisi, kushindwa, na utendaji
+3. Tazama maombi, kushindwa, na utendaji kwa wakati halisi
 4. Jaribu kwa kuendesha: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
 ## Mazoezi ya Vitendo
 
-[Kumbuka: Tazama mazoezi kamili hapo juu katika sehemu ya "Mazoezi ya Vitendo" kwa maelekezo ya hatua kwa hatua ikiwa ni pamoja na uthibitishaji wa uwekaji, marekebisho ya data, majaribio ya upanuzi wa kiotomatiki, usimamizi wa makosa, na kuongeza huduma ya tatu.]
+[Kumbuka: Tazama mazoezi kamili hapo juu katika sehemu ya "Mazoezi ya Vitendo" kwa mazoezi ya kina hatua kwa hatua ikiwa ni pamoja na ukaguzi wa utekelezaji, mabadiliko ya data, majaribio ya upanuzi kiotomatiki, utunzaji wa makosa, na kuongeza huduma ya tatu.]
 
 ## Uchambuzi wa Gharama
 
-### Gharama Zinazokadiriwa kwa Mwezi (Kwa Mfano Huu wa Huduma Mbili)
+### Gharama Zinazokadiriwa kwa Mwezi (kwa Mfano huu wa Huduma 2)
 
-| Rasilimali | Usanidi | Gharama Inayokadiriwa |
-|------------|---------|-----------------------|
-| API Gateway | Nakala 2-20, 1 vCPU, 2GB RAM | $30-150 |
-| Huduma ya Bidhaa | Nakala 1-10, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Kiwango cha Msingi | $5 |
-| Application Insights | 1-2 GB/mwezi | $5-10 |
-| Log Analytics | 1 GB/mwezi | $3 |
-| **Jumla** | | **$58-243/mwezi** |
+| Rasilimali | Mipangilio | Gharama Inayokadiriwa |
+|----------|--------------|----------------|
+| API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Basic tier | $5 |
+| Application Insights | 1-2 GB/month | $5-10 |
+| Log Analytics | 1 GB/month | $3 |
+| **Jumla** | | **$58-243/month** |
 
-**Mgawanyo wa Gharama kwa Matumizi**:
-- **Trafiki Nyepesi** (majaribio/kujifunza): ~$60/mwezi
-- **Trafiki ya Kati** (uzalishaji mdogo): ~$120/mwezi
-- **Trafiki ya Juu** (vipindi vya shughuli nyingi): ~$240/mwezi
+**Uchambuzi wa Gharama Kwa Matumizi**:
+- **Trafiki nyepesi** (majaribio/kujifunza): ~$60/mwezi
+- **Trafiki ya wastani** (uzalishaji mdogo): ~$120/mwezi
+- **Trafiki kubwa** (nyakati za shughuli nyingi): ~$240/mwezi
 
 ### Vidokezo vya Kupunguza Gharama
 
@@ -614,31 +608,31 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Tumia Mpango wa Matumizi kwa Cosmos DB** (unapoiweka):
-   - Lipa tu kwa kile unachotumia
+2. **Tumia Mpango wa Matumizi kwa Cosmos DB** (ukiongeza):
+   - Lipa tu unachotumia
    - Hakuna malipo ya chini
 
-3. **Weka Sampuli ya Application Insights**:
+3. **Weka Sampuli za Application Insights**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Sampuli 50% ya maombi
+   appInsights.defaultClient.config.samplingPercentage = 50; // Chukua sampuli ya 50% ya maombi
    ```
 
-4. **Safisha Unapomaliza**:
+4. **Safisha Wakati Hazi Hitajiki**:
    ```bash
    azd down
    ```
 
-### Chaguo za Kiwango cha Bure
-Kwa kujifunza/kutest, zingatia:
-- Tumia mikopo ya bure ya Azure (siku 30 za kwanza)
-- Weka idadi ya replicas kuwa ndogo
-- Futa baada ya kutest (hakuna gharama zinazoendelea)
+### Chaguzi za Ngazi ya Bure
+Kwa ajili ya kujifunza/kujaribu, zingatia:
+- Tumia mikopo ya bure ya Azure (siku 30 za mwanzo)
+- Weka nakala kwa kiwango cha chini
+- Futa baada ya majaribio (hakuna malipo yanayoendelea)
 
 ---
 
 ## Usafishaji
 
-Ili kuepuka gharama zinazoendelea, futa rasilimali zote:
+Ili kuepuka malipo yanayoendelea, futa rasilimali zote:
 
 ```bash
 azd down --force --purge
@@ -651,13 +645,13 @@ azd down --force --purge
 
 Andika `y` kuthibitisha.
 
-**Kinachofutwa**:
+**Vinavyofutwa**:
 - Mazingira ya Container Apps
-- Container Apps zote mbili (gateway & huduma ya bidhaa)
-- Container Registry
+- Container Apps zote mbili (gateway na huduma ya bidhaa)
+- Rejistri ya Container
 - Application Insights
-- Log Analytics Workspace
-- Resource Group
+- Eneo la Kazi la Log Analytics
+- Kundi la Rasilimali
 
 **✓ Thibitisha Usafishaji**:
 ```bash
@@ -668,11 +662,11 @@ Inapaswa kurudisha tupu.
 
 ---
 
-## Mwongozo wa Kupanua: Kutoka Huduma 2 hadi 5+
+## Mwongozo wa Upanuzi: Kutoka huduma 2 hadi 5+
 
-Ukishamudu usanifu wa huduma 2, hivi ndivyo unavyoweza kupanua:
+Mara utakaposhika vizuri usanifu huu wa huduma 2, hapa ni jinsi ya kupanua:
 
-### Awamu ya 1: Ongeza Uhifadhi wa Database (Hatua Inayofuata)
+### Awamu ya 1: Ongeza Uhifadhi wa Hifadhidata (Hatua Ifuatayo)
 
 **Ongeza Cosmos DB kwa Huduma ya Bidhaa**:
 
@@ -689,7 +683,7 @@ Ukishamudu usanifu wa huduma 2, hivi ndivyo unavyoweza kupanua:
    }
    ```
 
-2. Sasisha huduma ya bidhaa kutumia Cosmos DB badala ya data ya ndani ya kumbukumbu
+2. Sasisha huduma ya bidhaa ili itumie Cosmos DB badala ya data iliyoko kwenye kumbukizi
 
 3. Gharama ya ziada inayokadiriwa: ~$25/mwezi (serverless)
 
@@ -699,46 +693,46 @@ Ukishamudu usanifu wa huduma 2, hivi ndivyo unavyoweza kupanua:
 
 1. Folda mpya: `src/order-service/` (Python/Node.js/C#)
 2. Bicep mpya: `infra/app/order-service.bicep`
-3. Sasisha API Gateway kuelekeza `/api/orders`
-4. Ongeza Azure SQL Database kwa uhifadhi wa oda
+3. Sasisha API Gateway ili ipite `/api/orders`
+4. Ongeza Azure SQL Database kwa ajili ya uhifadhi wa oda
 
-**Usanifu unakuwa**:
+**Usanifu unageuka kuwa**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Awamu ya 3: Ongeza Mawasiliano ya Asynchronous (Service Bus)
+### Awamu ya 3: Ongeza Mawasiliano Asynchronous (Service Bus)
 
-**Tekeleza Usanifu wa Matukio**:
+**Tekeleza Usanifu Unaotegemea Matukio**:
 
 1. Ongeza Azure Service Bus: `infra/core/servicebus.bicep`
 2. Huduma ya Bidhaa inachapisha matukio ya "ProductCreated"
-3. Huduma ya Oda inajiandikisha kwa matukio ya bidhaa
-4. Ongeza Huduma ya Arifa kushughulikia matukio
+3. Huduma ya Oda inasajiliwa kwa matukio ya bidhaa
+4. Ongeza Huduma ya Arifa ili kushughulikia matukio
 
-**Mfumo**: Ombi/Jibu (HTTP) + Matukio (Service Bus)
+**Mfumo**: Request/Response (HTTP) + Inayotegemea Matukio (Service Bus)
 
-### Awamu ya 4: Ongeza Uthibitishaji wa Watumiaji
+### Awamu ya 4: Ongeza Uthibitishaji wa Mtumiaji
 
-**Tekeleza Huduma ya Watumiaji**:
+**Tekeleza Huduma ya Mtumiaji**:
 
 1. Unda `src/user-service/` (Go/Node.js)
 2. Ongeza Azure AD B2C au uthibitishaji wa JWT wa kawaida
 3. API Gateway inathibitisha tokeni
-4. Huduma zinakagua ruhusa za watumiaji
+4. Huduma zinakagua ruhusa za mtumiaji
 
-### Awamu ya 5: Ukomavu wa Uzalishaji
+### Awamu ya 5: Uwezo wa Uzalishaji
 
 **Ongeza Vipengele Hivi**:
-- Azure Front Door (usawazishaji mzigo wa kimataifa)
+- Azure Front Door (mizani ya mzigo ya kimataifa)
 - Azure Key Vault (usimamizi wa siri)
-- Azure Monitor Workbooks (dashibodi maalum)
-- CI/CD Pipeline (GitHub Actions)
-- Blue-Green Deployments
+- Azure Monitor Workbooks (dashibodi zilizobinafsishwa)
+- Mtiririko wa CI/CD (GitHub Actions)
+- Utumaji wa Blue-Green
 - Managed Identity kwa huduma zote
 
-**Gharama Kamili ya Usanifu wa Uzalishaji**: ~$300-1,400/mwezi
+**Gharama ya Usanifu Kamili wa Uzalishaji**: ~$300-1,400/mwezi
 
 ---
 
@@ -747,57 +741,57 @@ API Gateway → Product Service (Cosmos DB)
 ### Nyaraka Zinazohusiana
 - [Nyaraka za Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Mwongozo wa Usanifu wa Microservices](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights kwa Ufuatiliaji wa Kusambazwa](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Application Insights kwa Ufuatiliaji Uliosambazwa](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
 - [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Hatua Zifuatazo Katika Kozi Hii
-- ← Awali: [API Rahisi ya Flask](../../../../../examples/container-app/simple-flask-api) - Mfano wa kontena moja kwa wanaoanza
-- → Ifuatayo: [Mwongozo wa Ushirikiano wa AI](../../../../../examples/docs/ai-foundry) - Ongeza uwezo wa AI
-- 🏠 [Nyumbani kwa Kozi](../../README.md)
+### Hatua Zifuatazo katika Kozi Hii
+- ← Iliyotangulia: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Mfano rahisi wa kontena moja kwa wanaoanza
+- → Ifuatayo: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Ongeza uwezo wa AI
+- 🏠 [Nyumbani ya Kozi](../../README.md)
 
-### Ulinganisho: Wakati wa Kutumia Nini
+### Ulinganisho: Unapotaka Kutumia Nini
 
-**Container App Moja** (Mfano wa API Rahisi ya Flask):
+**Programu ya Kontena Moja** (Mfano wa Simple Flask API):
 - ✅ Programu rahisi
-- ✅ Usanifu wa monolithic
-- ✅ Haraka kupeleka
+- ✅ Usanifu monolithic
+- ✅ Rahisi kupeleka haraka
 - ❌ Uwezo mdogo wa kupanuka
 - **Gharama**: ~$15-50/mwezi
 
 **Microservices** (Mfano huu):
-- ✅ Programu ngumu
-- ✅ Kupanuka kwa uhuru kwa kila huduma
+- ✅ Programu tata
+- ✅ Kupanuka kwa kujitegemea kwa kila huduma
 - ✅ Uhuru wa timu (huduma tofauti, timu tofauti)
-- ❌ Ngumu zaidi kusimamia
+- ❌ Inazidi kuwa ngumu kusimamia
 - **Gharama**: ~$60-250/mwezi
 
 **Kubernetes (AKS)**:
-- ✅ Udhibiti na kubadilika kwa kiwango cha juu
-- ✅ Uwezo wa kutumia wingu tofauti
+- ✅ Udhibiti na urekebishaji wa juu kabisa
+- ✅ Uwezo wa kuhamia kwenye wingu mbalimbali
 - ✅ Mitandao ya hali ya juu
-- ❌ Inahitaji utaalamu wa Kubernetes
-- **Gharama**: ~$150-500/mwezi angalau
+- ❌ Inahitaji ujuzi wa Kubernetes
+- **Gharama**: ~$150-500/mwezi (chini kabisa)
 
-**Pendekezo**: Anza na Container Apps (mfano huu), songa kwa AKS tu ikiwa unahitaji vipengele maalum vya Kubernetes.
+**Mapendekezo**: Anza na Container Apps (mfano huu), hamia kwa AKS tu ikiwa unahitaji vipengele maalum vya Kubernetes.
 
 ---
 
 ## Maswali Yanayoulizwa Mara kwa Mara
 
 **Q: Kwa nini huduma 2 tu badala ya 5+?**  
-A: Maendeleo ya kielimu. Jifunze misingi (mawasiliano ya huduma, ufuatiliaji, kupanuka) kwa mfano rahisi kabla ya kuongeza ugumu. Mifumo unayojifunza hapa inatumika kwa usanifu wa huduma 100.
+A: Mageuzi ya kielimu. Shika misingi (mawasiliano ya huduma, ufuatiliaji, upanaji) kwa mfano rahisi kabla ya kuongeza ugumu. Mifumo unayojifunza hapa inatumika kwa usanifu wa huduma 100.
 
-**Q: Je, naweza kuongeza huduma zaidi mwenyewe?**  
-A: Kabisa! Fuata mwongozo wa upanuzi hapo juu. Kila huduma mpya inafuata mfumo huo huo: unda folda ya src, unda faili ya Bicep, sasisha azure.yaml, peleka.
+**Q: Je, ninaweza kuongeza huduma zaidi mwenyewe?**  
+A: Bila shaka! Fuata mwongozo wa upanuzi ulio hapo juu. Huduma mpya kila moja inafuata muundo ule ule: unda folda src, unda faili la Bicep, sasisha azure.yaml, peleka.
 
-**Q: Je, hii iko tayari kwa uzalishaji?**  
-A: Ni msingi thabiti. Kwa uzalishaji, ongeza: managed identity, Key Vault, databases za kudumu, CI/CD pipeline, arifa za ufuatiliaji, na mkakati wa kuhifadhi nakala.
+**Q: Je, huu uko tayari kwa uzalishaji?**  
+A: Ni msingi thabiti. Kwa uzalishaji, ongeza: utambulisho unaosimamiwa (Managed Identity), Key Vault, hifadhidata za kudumu, mtiririko wa CI/CD, arifa za ufuatiliaji, na mkakati wa nakala rudufu.
 
-**Q: Kwa nini usitumie Dapr au service mesh nyingine?**  
-A: Ifanye iwe rahisi kwa kujifunza. Ukishafahamu mtandao wa asili wa Container Apps, unaweza kuongeza Dapr kwa hali za juu.
+**Q: Kwa nini tusitumie Dapr au service mesh nyingine?**  
+A: Weka rahisi kwa ajili ya kujifunza. Ukielewa mtandao wa asili wa Container Apps, unaweza kuongeza Dapr kwa matukio ya juu.
 
-**Q: Ninawezaje kufanyia kazi kwa ndani?**  
-A: Endesha huduma kwa ndani ukitumia Docker:
+**Q: Ninawezaje kufanya uchunguzi wa hitilafu kwa lokal?**  
+A: Endesha huduma kwenye mashine yako kwa kutumia Docker:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
@@ -805,24 +799,24 @@ docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gatew
 ```
 
 **Q: Je, ninaweza kutumia lugha tofauti za programu?**  
-A: Ndio! Mfano huu unaonyesha Node.js (gateway) + Python (huduma ya bidhaa). Unaweza kuchanganya lugha yoyote inayoweza kuendeshwa kwenye kontena.
+A: Ndiyo! Mfano huu unaonyesha Node.js (gateway) + Python (huduma ya bidhaa). Unaweza kuchanganya lugha zozote zinazoweza kutekelezwa ndani ya container.
 
-**Q: Nifanye nini kama sina mikopo ya Azure?**  
-A: Tumia kiwango cha bure cha Azure (siku 30 za kwanza kwa akaunti mpya) au peleka kwa vipindi vifupi vya majaribio na futa mara moja.
+**Q: Nifanyaje ikiwa sina mikopo ya Azure?**  
+A: Tumia kiwango cha bure cha Azure (siku 30 za mwanzo kwa akaunti mpya) au peleka kwa kipindi kifupi cha majaribio kisha futa mara moja.
 
 ---
 
-> **🎓 Muhtasari wa Njia ya Kujifunza**: Umejifunza jinsi ya kupeleka usanifu wa huduma nyingi na upanuzi wa kiotomatiki, mtandao wa ndani, ufuatiliaji wa kati, na mifumo ya uzalishaji. Msingi huu unakuandaa kwa mifumo ngumu ya kusambazwa na usanifu wa microservices wa kiwango cha biashara.
+> **🎓 Muhtasari wa Njia ya Kujifunza**: Umejifunza kupeleka usanifu wa huduma nyingi unaopata upanuaji wa moja kwa moja, mitandao ya ndani, ufuatiliaji uliokabidhiwa kati, na mifumo inayostahili uzalishaji. Msingi huu unakuandaa kwa mifumo tata iliyogawanywa na usanifu wa microservices ya kampuni.
 
-**📚 Uelekezaji wa Kozi**:
-- ← Awali: [API Rahisi ya Flask](../../../../../examples/container-app/simple-flask-api)
-- → Ifuatayo: [Mfano wa Ushirikiano wa Database](../../../../../examples/database-app)
-- 🏠 [Nyumbani kwa Kozi](../../README.md)
-- 📖 [Mbinu Bora za Container Apps](../../docs/deployment/deployment-guide.md)
+**📚 Utaratibu wa Kozi:**
+- ← Iliyotangulia: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
+- → Ifuatayo: [Database Integration Example](../../../../../examples/database-app)
+- 🏠 [Nyumbani ya Kozi](../../../README.md)
+- 📖 [Mbinu Bora za Container Apps](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Taarifa ya kutokuwa na dhamana:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI Co-op Translator (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokukamilika. Nyaraka ya asili kwa lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatubeba wajibu kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

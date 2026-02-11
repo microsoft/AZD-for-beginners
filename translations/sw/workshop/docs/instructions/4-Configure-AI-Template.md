@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:02:06+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "sw"
-}
--->
 # 4. Sanidi Kiolezo
 
-!!! tip "MWISHO WA MODULI HII UTAWEZA"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Kuelewa madhumuni ya `azure.yaml`
+    - [ ] Kuelewa kusudi la `azure.yaml`
     - [ ] Kuelewa muundo wa `azure.yaml`
-    - [ ] Kuelewa thamani ya `hooks` za azd lifecyle
-    - [ ] **Maabara ya 3:** 
+    - [ ] Kuelewa thamani ya azd lifecycle `hooks`
+    - [ ] **Lab 4:** Chunguza na ubadilishe vigezo vya mazingira
 
 ---
 
-!!! prompt "Faili ya `azure.yaml` inafanya nini? Tumia codefence na eleza mstari kwa mstari"
+!!! prompt "What is the `azure.yaml` file do? Use a codefence and explain it line by line"
 
-      Faili ya `azure.yaml` ni **faili la usanidi kwa Azure Developer CLI (azd)**. Inafafanua jinsi programu yako inavyopaswa kupelekwa kwenye Azure, ikijumuisha miundombinu, huduma, hooks za upelekaji, na vigezo vya mazingira.
+      The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
 
 ---
 
-## 1. Madhumuni na Utendaji
+## 1. Purpose and Functionality
 
-Faili hii ya `azure.yaml` inatumika kama **ramani ya upelekaji** kwa programu ya wakala wa AI ambayo:
+This `azure.yaml` file serves as the **deployment blueprint** for an AI agent application that:
 
-1. **Inathibitisha mazingira** kabla ya upelekaji
-2. **Inatoa huduma za Azure AI** (AI Hub, AI Project, Search, nk.)
+1. **Huthibitisha mazingira** kabla ya utoaji
+2. **Inatayarisha huduma za AI za Azure** (AI Hub, AI Project, Search, n.k.)
 3. **Inapeleka programu ya Python** kwenye Azure Container Apps
-4. **Inasanidi mifano ya AI** kwa mazungumzo na utendaji wa embedding
-5. **Inasanidi ufuatiliaji na uchunguzi** wa programu ya AI
-6. **Inashughulikia hali zote mbili za mradi mpya na uliopo** wa Azure AI
+4. **Inasanidi modeli za AI** kwa ajili ya mazungumzo na embedding
+5. **Inaanzisha ufuatiliaji na tracing** kwa ajili ya programu ya AI
+6. **Inashughulikia kesi za miradi ya Azure AI mpya na iliyopo**
 
-Faili hii inawezesha **upelekaji kwa amri moja** (`azd up`) wa suluhisho kamili la wakala wa AI na uthibitishaji sahihi, utoaji, na usanidi baada ya upelekaji.
+The file enables **one-command deployment** (`azd up`) of a complete AI agent solution with proper validation, provisioning, and post-deployment configuration.
 
-??? info "Panua Ili Kuona: `azure.yaml`"
+??? info "Expand To View: `azure.yaml`"
 
-      Faili ya `azure.yaml` inafafanua jinsi Azure Developer CLI inavyopaswa kupeleka na kudhibiti programu hii ya AI Agent kwenye Azure. Hebu tuichambue mstari kwa mstari.
+      The `azure.yaml` file defines how Azure Developer CLI should deploy and manage this AI Agent application in Azure. Let's break it down line-by-line.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: tunahitaji hooks?
-      # TODO: tunahitaji vigezo vyote?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ Faili hii inawezesha **upelekaji kwa amri moja** (`azd up`) wa suluhisho kamili 
 
 ---
 
-## 2. Kuchambua Faili
+## 2. Deconstructing The File
 
-Hebu tuipitie faili sehemu kwa sehemu, ili kuelewa inachofanya - na kwa nini.
+Let's go through the file section by section, to understand what it does - and why.
 
 ### 2.1 **Kichwa na Schema (1-3)**
 
@@ -145,7 +136,7 @@ Hebu tuipitie faili sehemu kwa sehemu, ili kuelewa inachofanya - na kwa nini.
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Mstari wa 1**: Hutoa uthibitishaji wa schema ya YAML language server kwa msaada wa IDE na IntelliSense
+- **Mstari 1**: Hutoa uthibitishaji wa schema wa language server wa YAML kwa msaada wa IDE na IntelliSense
 
 ### 2.2 Metadata ya Mradi (5-10)
 
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Mstari wa 5**: Inafafanua jina la mradi linalotumiwa na Azure Developer CLI
-- **Mistari ya 6-7**: Inaonyesha kuwa hii inategemea toleo la kiolezo 1.0.2
-- **Mistari ya 8-9**: Inahitaji toleo la Azure Developer CLI 1.14.0 au zaidi
+- **Mstari 5**: Inaeleza jina la mradi linalotumika na Azure Developer CLI
+- **Mistari 6-7**: Inaonyesha kuwa hii inategemea kiolezo toleo 1.0.2
+- **Mistari 8-9**: Inahitaji Azure Developer CLI toleo 1.14.0 au juu zaidi
 
-### 2.3 Hooks za Upelekaji (11-40)
+### 2.3 Hooks za Utoaji (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Mistari ya 11-20**: **Hook ya kabla ya upelekaji** - inaendeshwa kabla ya `azd up`
+- **Mistari 11-20**: **Pre-deployment hook** - hufanya kazi kabla ya `azd up`
 
-      - Kwenye Unix/Linux: Inafanya script ya uthibitishaji iweze kutekelezwa na kuiendesha
-      - Kwenye Windows: Inaendesha script ya uthibitishaji ya PowerShell
-      - Zote ni za maingiliano na zitasimamisha upelekaji ikiwa zitashindwa
+      - Kwa Unix/Linux: Inafanya script ya uthibitisho iwe na ruhusa za utekelezaji na kuikimbia
+      - Kwa Windows: Inakimbia script ya uthibitisho ya PowerShell
+      - Zote zina mwingiliano na zitasimamisha utoaji ikiwa zitatokomeza makosa
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Mistari ya 21-30**: **Hook ya baada ya utoaji** - inaendeshwa baada ya rasilimali za Azure kuundwa
+- **Mistari 21-30**: **Post-provision hook** - hufanya kazi baada ya rasilimali za Azure kuundwa
 
-  - Inaendesha script za kuandika vigezo vya mazingira
-  - Inaendelea na upelekaji hata kama script hizi zitashindwa (`continueOnError: true`)
+  - Inatekeleza script za kuandika vigezo vya mazingira
+  - Inaendelea na utoaji hata kama script hizi zitashindwa (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Mistari ya 31-40**: **Hook ya baada ya upelekaji** - inaendeshwa baada ya upelekaji wa programu
+- **Mistari 31-40**: **Post-deploy hook** - hufanya kazi baada ya utoaji wa programu
 
-  - Inaendesha script za usanidi wa mwisho
+  - Inatekeleza script za usanidi wa mwisho
   - Inaendelea hata kama script zitashindwa
 
-### 2.4 Usanidi wa Huduma (41-48)
+### 2.4 Mipangilio ya Huduma (41-48)
 
-Hii inasanidi huduma ya programu unayoipeleka.
+This configures the application service you are deploying.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Mstari wa 42**: Inafafanua huduma inayoitwa "api_and_frontend"
-- **Mstari wa 43**: Inaelekeza kwenye saraka ya `./src` kwa msimbo wa chanzo
-- **Mstari wa 44**: Inataja Python kama lugha ya programu
-- **Mstari wa 45**: Inatumia Azure Container Apps kama jukwaa la mwenyeji
-- **Mistari ya 46-48**: Usanidi wa Docker
+- **Mstari 42**: Inaeleza huduma yenye jina "api_and_frontend"
+- **Mstari 43**: Inaelekeza kwenye saraka `./src` kwa ajili ya msimbo wa chanzo
+- **Mstari 44**: Inaonyesha Python kama lugha ya programu
+- **Mstari 45**: Inatumia Azure Container Apps kama jukwaa la kuhudumia
+- **Mistari 46-48**: Mipangilio ya Docker
 
       - Inatumia "api_and_frontend" kama jina la picha
-      - Inajenga picha ya Docker kwa mbali kwenye Azure (sio kwa ndani)
+      - Inajenga picha ya Docker kwa mbali kwenye Azure (si kwa kompyuta ya mahali)
 
 ### 2.5 Vigezo vya Pipeline (49-76)
 
-Hivi ni vigezo vya kukusaidia kuendesha `azd` katika pipeline za CI/CD kwa ajili ya otomatiki
+These are variables to help you run `azd` in CI/CD pipelines for automation
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Sehemu hii inafafanua vigezo vya mazingira vinavyotumiwa **wakati wa upelekaji**, vilivyopangwa kwa kategoria:
+This section defines environment variables used **during deployment**, organized by category:
 
-- **Majina ya Rasilimali za Azure (Mistari ya 51-60)**:
-      - Majina ya huduma kuu za Azure kama Resource Group, AI Hub, AI Project, nk.- 
-- **Bendera za Kipengele (Mistari ya 61-63)**:
-      - Vigezo vya Boolean vya kuwezesha/kuzima huduma maalum za Azure
-- **Usanidi wa Wakala wa AI (Mistari ya 64-71)**:
-      - Usanidi wa wakala mkuu wa AI ikijumuisha jina, ID, mipangilio ya upelekaji, maelezo ya modeli- 
-- **Usanidi wa Embedding ya AI (Mistari ya 72-79)**:
-      - Usanidi wa modeli ya embedding inayotumika kwa utafutaji wa vector
-- **Utafutaji na Ufuatiliaji (Mistari ya 80-84)**:
-      - Jina la index ya utafutaji, ID za rasilimali zilizopo, na mipangilio ya ufuatiliaji/uchunguzi
+- **Azure Resource Names (Lines 51-60)**:
+      - Majina ya rasilimali za msingi za Azure, kwa mfano Group ya Rasilimali, AI Hub, AI Project, n.k.
+- **Feature Flags (Lines 61-63)**:
+      - Vigezo vya boolean vya kuwasha/kuzima huduma maalum za Azure
+- **AI Agent Configuration (Lines 64-71)**:
+      - Usanidi kwa ajili ya wakala mkuu wa AI ikijumuisha jina, ID, mipangilio ya utoaji, maelezo ya modeli
+- **AI Embedding Configuration (Lines 72-79)**:
+      - Usanidi wa modeli ya embedding inayotumika kwa ajili ya utaftaji wa vector
+- **Search and Monitoring (Lines 80-84)**:
+      - Jina la index ya utafutaji, IDs za rasilimali zilizopo, na vigezo vya ufuatiliaji/tracing
 
 ---
 
 ## 3. Fahamu Vigezo vya Mazingira
-Vigezo vifuatavyo vya mazingira vinadhibiti usanidi na tabia ya upelekaji wako, vilivyopangwa kulingana na madhumuni yao ya msingi. Vigezo vingi vina chaguo-msingi nzuri, lakini unaweza kuviweka kulingana na mahitaji yako maalum au rasilimali zilizopo za Azure.
+The following environment variables control your deployment's configuration and behavior, organized by their primary purpose. Most variables have sensible defaults, but you can customize them to match your specific requirements or existing Azure resources.
 
-### 3.1 Vigezo Vinavyohitajika 
+### 3.1 Vigezo Zinazohitajika 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Usanidi wa Msingi wa Azure
+AZURE_ENV_NAME                    # Jina la mazingira (linotumika katika kuunda majina ya rasilimali)
+AZURE_LOCATION                    # Eneo la utekelezaji
+AZURE_SUBSCRIPTION_ID             # Usajili lengwa
+AZURE_RESOURCE_GROUP              # Jina la kundi la rasilimali
+AZURE_PRINCIPAL_ID                # Mwenye sifa wa mtumiaji kwa RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Majina ya rasilimali (Yataundwa kwa otomatiki ikiwa hayataelezwi)
+AZURE_AIHUB_NAME                  # Jina la kituo cha Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Jina la mradi wa AI
+AZURE_AISERVICES_NAME             # Jina la akaunti ya huduma za AI
+AZURE_STORAGE_ACCOUNT_NAME        # Jina la akaunti ya uhifadhi
+AZURE_CONTAINER_REGISTRY_NAME     # Jina la rejista ya kontena
+AZURE_KEYVAULT_NAME               # Jina la Key Vault (ikiwa linatumika)
 ```
 
 ### 3.2 Usanidi wa Modeli 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Mpangilio wa Mfano wa Mazungumzo
+AZURE_AI_AGENT_MODEL_NAME         # Chaguo-msingi: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Chaguo-msingi: OpenAI (au Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Chaguo-msingi: toleo la hivi karibuni linalopatikana
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Jina la utekelezaji kwa mfano wa mazungumzo
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Chaguo-msingi: Kawaida
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Chaguo-msingi: 80 (maelfu ya TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Mpangilio wa Mfano wa Embedding
+AZURE_AI_EMBED_MODEL_NAME         # Chaguo-msingi: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Chaguo-msingi: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Chaguo-msingi: toleo la hivi karibuni linalopatikana
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Jina la utekelezaji kwa modeli za embedding
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Chaguo-msingi: Kawaida
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Chaguo-msingi: 50 (maelfu ya TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Mpangilio wa Wakala
+AZURE_AI_AGENT_NAME               # Jina la kuonyesha la wakala
+AZURE_EXISTING_AGENT_ID           # Tumia wakala uliopo (hiari)
 ```
 
-### 3.3 Toggle ya Kipengele
+### 3.3 Mswichi wa Kipengele
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Huduma za Hiari
+USE_APPLICATION_INSIGHTS         # Chaguo-msingi: kweli
+USE_AZURE_AI_SEARCH_SERVICE      # Chaguo-msingi: uongo
+USE_CONTAINER_REGISTRY           # Chaguo-msingi: kweli
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Ufuatiliaji na Upelelezi
+ENABLE_AZURE_MONITOR_TRACING     # Chaguo-msingi: uongo
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Chaguo-msingi: uongo
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Usanidi wa Utafutaji
+AZURE_AI_SEARCH_INDEX_NAME       # Jina la fahirisi ya utafutaji
+AZURE_SEARCH_SERVICE_NAME        # Jina la huduma ya utafutaji
 ```
 
 ### 3.4 Usanidi wa Mradi wa AI 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Tumia rasilimali zilizopo
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Kitambulisho kamili cha rasilimali cha mradi wa AI uliopo
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL ya endpoint ya mradi uliopo
 ```
 
-### 3.5 Angalia Vigezo Vyako
+### 3.5 Kagua Vigezo Vyako
 
-Tumia Azure Developer CLI kuona na kudhibiti vigezo vyako vya mazingira:
+Tumia Azure Developer CLI kuangalia na kusimamia vigezo vyako vya mazingira:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Tazama vigezo vya mazingira vyote kwa mazingira ya sasa
 azd env get-values
 
-# Get a specific environment variable
+# Pata kigezo maalum cha mazingira
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Weka kigezo cha mazingira
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Weka vigezo vingi kutoka kwenye faili .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Taarifa ya kutolea dhamana:
+Dokumenti hii imetafsiriwa kwa kutumia huduma ya utafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nakala ya awali ya dokumenti kwa lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa za muhimu, inashauriwa kutafuta utafsiri wa kitaalamu unaofanywa na mtafsiri wa kibinadamu. Hatuwajibiki kwa uelewa mbaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,43 +1,34 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-23T10:57:10+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "cs"
-}
--->
-# Řešení multi-agentní zákaznické podpory - Scénář pro maloobchodníky
+# Multiagentní řešení zákaznické podpory - scénář pro maloobchodníka
 
-**Kapitola 5: Multi-agentní AI řešení**
-- **📚 Domovská stránka kurzu**: [AZD Pro Začátečníky](../README.md)
-- **📖 Aktuální kapitola**: [Kapitola 5: Multi-agentní AI řešení](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Předpoklady**: [Kapitola 2: AI-First Vývoj](../docs/ai-foundry/azure-ai-foundry-integration.md)
+**Kapitola 5: Multi-Agent AI Solutions**
+- **📚 Domů kurzu**: [AZD Pro Začátečníky](../README.md)
+- **📖 Aktuální kapitola**: [Kapitola 5: Multi-Agent AI řešení](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Předpoklady**: [Kapitola 2: AI-First vývoj](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **➡️ Další kapitola**: [Kapitola 6: Validace před nasazením](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM Šablony**: [Balíček pro nasazení](retail-multiagent-arm-template/README.md)
+- **🚀 ARM šablony**: [Balíček nasazení](retail-multiagent-arm-template/README.md)
 
-> **⚠️ PRŮVODCE ARCHITEKTUROU - NE FUNKČNÍ IMPLEMENTACE**  
-> Tento dokument poskytuje **komplexní návrh architektury** pro vytvoření multi-agentního systému.  
-> **Co je k dispozici:** ARM šablona pro nasazení infrastruktury (Azure OpenAI, AI Search, Container Apps atd.)  
-> **Co musíte vytvořit:** Kód agentů, logiku směrování, frontendové UI, datové pipeline (odhad 80-120 hodin)  
+> **⚠️ ARCHITEKTONICKÝ PRŮVODCE - NEFUNKČNÍ IMPLEMENTACE**  
+> Tento dokument poskytuje **komplexní architektonický plán** pro vytvoření multi-agentního systému.  
+> **Co existuje:** ARM šablona pro nasazení infrastruktury (Azure OpenAI, AI Search, Container Apps, atd.)  
+> **Co musíte vytvořit:** kód agentů, směrovací logika, frontend UI, datové pipeline (odhadem 80–120 hodin)  
 >  
 > **Použijte toto jako:**
 > - ✅ Referenci architektury pro váš vlastní multi-agentní projekt
-> - ✅ Učební pomůcku pro návrhové vzory multi-agentních systémů
-> - ✅ Šablonu infrastruktury pro nasazení Azure zdrojů
-> - ❌ NE hotovou aplikaci připravenou k použití (vyžaduje značný vývoj)
+> - ✅ Výukový průvodce pro návrhové vzory multi-agentních systémů
+> - ✅ Šablonu infrastruktury pro nasazení Azure služeb
+> - ❌ NE hotovou aplikaci k okamžitému spuštění (vyžaduje významný vývoj)
 
 ## Přehled
 
-**Cíl učení:** Pochopit architekturu, rozhodnutí při návrhu a přístup k implementaci pro vytvoření produkčně připraveného multi-agentního chatbotu pro zákaznickou podporu maloobchodníka s pokročilými AI schopnostmi, včetně správy zásob, zpracování dokumentů a inteligentních interakcí se zákazníky.
+**Učební cíl:** Porozumět architektuře, návrhovým rozhodnutím a přístupu k implementaci pro vytvoření produkčně připraveného multi-agentního chatbotu zákaznické podpory pro maloobchodníka se sofistikovanými AI schopnostmi včetně správy zásob, zpracování dokumentů a inteligentních zákaznických interakcí.
 
-**Čas na dokončení:** Čtení + pochopení (2-3 hodiny) | Kompletní implementace (80-120 hodin)
+**Čas na dokončení:** Čtení + porozumění (2–3 hodiny) | Kompletní implementace (80–120 hodin)
 
 **Co se naučíte:**
-- Vzory architektury multi-agentních systémů a principy návrhu
-- Strategie nasazení Azure OpenAI ve více regionech
+- Návrhové vzory a principy architektury pro multi-agentní systémy
+- Strategie nasazení Azure OpenAI v více regionech
 - Integrace AI Search s RAG (Retrieval-Augmented Generation)
-- Rámce pro hodnocení agentů a testování bezpečnosti
+- Rámce pro vyhodnocování agentů a testování bezpečnosti
 - Úvahy o nasazení do produkce a optimalizace nákladů
 
 ## Cíle architektury
@@ -47,39 +38,39 @@ CO_OP_TRANSLATOR_METADATA:
 ### Požadavky systému (pro vaši implementaci)
 
 Produkční řešení zákaznické podpory vyžaduje:
-- **Více specializovaných agentů** pro různé potřeby zákazníků (zákaznický servis + správa zásob)
-- **Nasazení více modelů** s odpovídajícím plánováním kapacity (GPT-4o, GPT-4o-mini, embeddings napříč regiony)
+- **Více specializovaných agentů** pro různé potřeby zákazníků (zákaznická podpora + řízení zásob)
+- **Nasazení více modelů** s řádným plánováním kapacity (GPT-4o, GPT-4o-mini, embeddings napříč regiony)
 - **Dynamickou integraci dat** s AI Search a nahráváním souborů (vektorové vyhledávání + zpracování dokumentů)
-- **Komplexní monitorování** a hodnotící schopnosti (Application Insights + vlastní metriky)
-- **Produkční úroveň bezpečnosti** s validací red teamingem (skenování zranitelností + hodnocení agentů)
+- **Komplexní monitorování** a možnosti vyhodnocování (Application Insights + vlastní metriky)
+- **Bezpečnost na úrovni produkce** s red teaming validací (skener zranitelností + hodnocení agentů)
 
 ### Co tento průvodce poskytuje
 
-✅ **Vzory architektury** - Ověřený návrh pro škálovatelné multi-agentní systémy  
-✅ **Šablony infrastruktury** - ARM šablony pro nasazení všech Azure služeb  
-✅ **Příklady kódu** - Referenční implementace klíčových komponent  
+✅ **Architektonické vzory** - Ověřený návrh pro škálovatelné multi-agentní systémy  
+✅ **Šablony infrastruktury** - ARM šablony nasazující všechny Azure služby  
+✅ **Ukázky kódu** - Referenční implementace klíčových komponent  
 ✅ **Pokyny ke konfiguraci** - Krok za krokem instrukce pro nastavení  
-✅ **Osvědčené postupy** - Strategie pro bezpečnost, monitorování a optimalizaci nákladů  
+✅ **Nejlepší postupy** - Bezpečnost, monitorování, strategie optimalizace nákladů  
 
-❌ **Není zahrnuto** - Kompletní funkční aplikace (vyžaduje vývojové úsilí)
+❌ **Není zahrnuto** - Kompletní funkční aplikace (vyžaduje vývoj)
 
 ## 🗺️ Plán implementace
 
-### Fáze 1: Studium architektury (2-3 hodiny) - ZAČNĚTE ZDE
+### Fáze 1: Studium architektury (2–3 hodiny) - ZAČNĚTE ZDE
 
-**Cíl:** Pochopit návrh systému a interakce komponent
+**Cíl:** Porozumět návrhu systému a interakcím komponent
 
-- [ ] Přečtěte si celý tento dokument
-- [ ] Projděte si diagram architektury a vztahy mezi komponentami
-- [ ] Pochopte vzory multi-agentních systémů a rozhodnutí při návrhu
-- [ ] Prostudujte příklady kódu pro nástroje agentů a směrování
-- [ ] Projděte si odhady nákladů a pokyny pro plánování kapacity
+- [ ] Přečíst si celý tento dokument
+- [ ] Zkontrolovat architektonický diagram a vztahy mezi komponentami
+- [ ] Porozumět multi-agentním vzorům a návrhovým rozhodnutím
+- [ ] Prostudovat ukázky kódu pro nástroje agentů a směrování
+- [ ] Zkontrolovat odhady nákladů a pokyny pro plánování kapacity
 
-**Výsledek:** Jasné pochopení toho, co je třeba vytvořit
+**Výsledek:** Jasné pochopení toho, co je potřeba vybudovat
 
-### Fáze 2: Nasazení infrastruktury (30-45 minut)
+### Fáze 2: Nasazení infrastruktury (30–45 minut)
 
-**Cíl:** Zajistit Azure zdroje pomocí ARM šablony
+**Cíl:** Poskytnout Azure zdroje pomocí ARM šablony
 
 ```bash
 cd retail-multiagent-arm-template
@@ -88,74 +79,74 @@ cd retail-multiagent-arm-template
 
 **Co se nasadí:**
 - ✅ Azure OpenAI (3 regiony: GPT-4o, GPT-4o-mini, embeddings)
-- ✅ AI Search služba (prázdná, vyžaduje konfiguraci indexu)
-- ✅ Prostředí Container Apps (zástupné obrázky)
-- ✅ Účty úložiště, Cosmos DB, Key Vault
-- ✅ Monitorování Application Insights
+- ✅ AI Search service (prázdné, vyžaduje konfiguraci indexu)
+- ✅ Container Apps environment (zástupné image)
+- ✅ Účty pro Storage, Cosmos DB, Key Vault
+- ✅ Monitorování pomocí Application Insights
 
 **Co chybí:**
-- ❌ Kód implementace agentů
-- ❌ Logika směrování
-- ❌ Frontendové UI
-- ❌ Schéma indexu vyhledávání
+- ❌ Implementační kód agentů
+- ❌ Směrovací logika
+- ❌ Frontend UI
+- ❌ Schéma vyhledávacího indexu
 - ❌ Datové pipeline
 
-### Fáze 3: Vytvoření aplikace (80-120 hodin)
+### Fáze 3: Vytvoření aplikace (80–120 hodin)
 
 **Cíl:** Implementovat multi-agentní systém na základě této architektury
 
-1. **Implementace agentů** (30-40 hodin)
-   - Základní třída agentů a rozhraní
-   - Agent zákaznického servisu s GPT-4o
-   - Agent pro správu zásob s GPT-4o-mini
+1. **Implementace agentů** (30–40 hodin)
+   - Základní třída agenta a rozhraní
+   - Customer service agent s GPT-4o
+   - Inventory agent s GPT-4o-mini
    - Integrace nástrojů (AI Search, Bing, zpracování souborů)
 
-2. **Služba směrování** (12-16 hodin)
+2. **Směrovací služba** (12–16 hodin)
    - Logika klasifikace požadavků
    - Výběr a orchestraci agentů
-   - Backend FastAPI/Express
+   - FastAPI/Express backend
 
-3. **Vývoj frontendu** (20-30 hodin)
-   - Uživatelské rozhraní chatu
+3. **Frontend vývoj** (20–30 hodin)
+   - Chat rozhraní UI
    - Funkce nahrávání souborů
-   - Zobrazení odpovědí
+   - Renderování odpovědí
 
-4. **Datová pipeline** (8-12 hodin)
-   - Vytvoření indexu AI Search
+4. **Datová pipeline** (8–12 hodin)
+   - Vytvoření AI Search indexu
    - Zpracování dokumentů s Document Intelligence
-   - Generování a indexování embeddingů
+   - Generování embeddingů a indexování
 
-5. **Monitorování a hodnocení** (10-15 hodin)
-   - Implementace vlastní telemetrie
+5. **Monitorování & Vyhodnocování** (10–15 hodin)
+   - Implementace vlastních telemetrií
    - Rámec pro hodnocení agentů
-   - Skenování bezpečnosti red teamingem
+   - Red team bezpečnostní skener
 
-### Fáze 4: Nasazení a testování (8-12 hodin)
+### Fáze 4: Nasazení & Testování (8–12 hodin)
 
-- Vytvoření Docker obrazů pro všechny služby
-- Nahrání do Azure Container Registry
-- Aktualizace Container Apps s reálnými obrazy
-- Konfigurace proměnných prostředí a tajemství
-- Spuštění testovací sady hodnocení
-- Provádění skenování bezpečnosti
+- Sestavit Docker image pro všechny služby
+- Push do Azure Container Registry
+- Aktualizovat Container Apps na reálné image
+- Nakonfigurovat proměnné prostředí a tajné klíče
+- Spustit sadu evaluačních testů
+- Provesti bezpečnostní skenování
 
-**Celkový odhadovaný čas:** 80-120 hodin pro zkušené vývojáře
+**Celkový odhad práce:** 80–120 hodin pro zkušené vývojáře
 
 ## Architektura řešení
 
-### Diagram architektury
+### Architektonický diagram
 
 ```mermaid
 graph TB
     User[👤 Zákazník] --> LB[Azure Front Door]
-    LB --> WebApp[Webové rozhraní<br/>Container App]
+    LB --> WebApp[Webové rozhraní<br/>Kontejnerová aplikace]
     
-    WebApp --> Router[Agent Router<br/>Container App]
-    Router --> CustomerAgent[Zákaznický agent<br/>Zákaznický servis]
-    Router --> InvAgent[Skladový agent<br/>Správa zásob]
+    WebApp --> Router[Směrovač agentů<br/>Kontejnerová aplikace]
+    Router --> CustomerAgent[Agent zákazníka<br/>Zákaznický servis]
+    Router --> InvAgent[Agent skladu<br/>Správa zásob]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Východní USA 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Západní USA 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Východ USA 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Západ USA 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>Katalog produktů]
     CustomerAgent --> BingSearch[Bing Search API<br/>Informace v reálném čase]
@@ -164,23 +155,23 @@ graph TB
     AISearch --> Storage[Azure Storage<br/>Dokumenty a soubory]
     Storage --> DocIntel[Inteligence dokumentů<br/>Zpracování obsahu]
     
-    OpenAI1 --> Embeddings[Textové vektory<br/>ada-002<br/>Francie Central]
+    OpenAI1 --> Embeddings[Textová vnoření<br/>ada-002<br/>Francie Central]
     OpenAI2 --> Embeddings
     
     Router --> AppInsights[Application Insights<br/>Monitorování]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Hodnotitel<br/>Švýcarsko Sever] --> Evaluation[Hodnotící rámec]
-    RedTeam[Red Team Skener] --> SecurityReports[Zprávy o zabezpečení]
+    GraderModel[GPT-4o Hodnotitel<br/>Severní Švýcarsko] --> Evaluation[Evaluační rámec]
+    RedTeam[Skener Red Teamu] --> SecurityReports[Zprávy o bezpečnosti]
     
-    subgraph "Datová vrstva"
+    subgraph "Vrstva dat"
         Storage
         AISearch
         CosmosDB[Cosmos DB<br/>Historie chatu]
     end
     
-    subgraph "AI Služby"
+    subgraph "AI služby"
         OpenAI1
         OpenAI2
         Embeddings
@@ -189,10 +180,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Monitorování a zabezpečení"
+    subgraph "Monitorování a bezpečnost"
         AppInsights
-        LogAnalytics[Log Analytics Workspace]
-        KeyVault[Azure Key Vault<br/>Tajnosti a konfigurace]
+        LogAnalytics[Pracovní prostor Log Analytics]
+        KeyVault[Azure Key Vault<br/>Tajemství a konfigurace]
         RedTeam
         Evaluation
     end
@@ -208,24 +199,24 @@ graph TB
 ```
 ### Přehled komponent
 
-| Komponenta | Účel | Technologie | Region |
-|------------|------|-------------|--------|
-| **Webový frontend** | Uživatelské rozhraní pro interakce se zákazníky | Container Apps | Primární region |
-| **Směrovač agentů** | Směruje požadavky na odpovídajícího agenta | Container Apps | Primární region |
-| **Agent zákazníků** | Řeší dotazy zákaznického servisu | Container Apps + GPT-4o | Primární region |
-| **Agent zásob** | Spravuje sklad a plnění objednávek | Container Apps + GPT-4o-mini | Primární region |
-| **Azure OpenAI** | Inferenční modely LLM pro agenty | Cognitive Services | Multi-region |
+| Component | Účel | Technologie | Region |
+|-----------|---------|------------|---------|
+| **Web Frontend** | Uživatelské rozhraní pro interakce se zákazníky | Container Apps | Primární region |
+| **Agent Router** | Směruje požadavky na vhodného agenta | Container Apps | Primární region |
+| **Customer Agent** | Zpracovává dotazy zákaznické podpory | Container Apps + GPT-4o | Primární region |
+| **Inventory Agent** | Řídí zásoby a plnění objednávek | Container Apps + GPT-4o-mini | Primární region |
+| **Azure OpenAI** | Inference LLM pro agenty | Cognitive Services | Více regionů |
 | **AI Search** | Vektorové vyhledávání a RAG | AI Search Service | Primární region |
-| **Účet úložiště** | Nahrávání souborů a dokumentů | Blob Storage | Primární region |
+| **Storage Account** | Nahrávání souborů a dokumenty | Blob Storage | Primární region |
 | **Application Insights** | Monitorování a telemetrie | Monitor | Primární region |
-| **Model hodnotitele** | Systém hodnocení agentů | Azure OpenAI | Sekundární region |
+| **Grader Model** | Systém hodnocení agentů | Azure OpenAI | Sekundární region |
 
 ## 📁 Struktura projektu
 
 > **📍 Legenda stavu:**  
 > ✅ = Existuje v repozitáři  
-> 📝 = Referenční implementace (příklad kódu v tomto dokumentu)  
-> 🔨 = Musíte vytvořit
+> 📝 = Referenční implementace (ukázkový kód v tomto dokumentu)  
+> 🔨 = Musíte vytvořit tento komponent
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -374,12 +365,12 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ## 🚀 Rychlý start: Co můžete udělat hned teď
 
-### Možnost 1: Pouze nasazení infrastruktury (30 minut)
+### Možnost 1: Nasadit pouze infrastrukturu (30 minut)
 
-**Co získáte:** Všechny Azure služby nasazené a připravené k vývoji
+**Co získáte:** Všechny Azure služby připravené pro vývoj
 
 ```bash
-# Naklonovat repozitář
+# Klonovat repozitář
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
@@ -393,56 +384,56 @@ az resource list --resource-group myResourceGroup --output table
 **Očekávaný výsledek:**
 - ✅ Azure OpenAI služby nasazeny (3 regiony)
 - ✅ AI Search služba vytvořena (prázdná)
-- ✅ Prostředí Container Apps připraveno
-- ✅ Úložiště, Cosmos DB, Key Vault nakonfigurovány
-- ❌ Žádní funkční agenti (pouze infrastruktura)
+- ✅ Container Apps prostředí připravené
+- ✅ Storage, Cosmos DB, Key Vault nakonfigurovány
+- ❌ Žádní fungující agenti zatím (pouze infrastruktura)
 
-### Možnost 2: Studium architektury (2-3 hodiny)
+### Možnost 2: Studium architektury (2–3 hodiny)
 
-**Co získáte:** Hluboké pochopení vzorů multi-agentních systémů
+**Co získáte:** Hluboké pochopení multi-agentních vzorů
 
-1. Přečtěte si celý tento dokument
-2. Projděte si příklady kódu pro každou komponentu
-3. Pochopte rozhodnutí při návrhu a kompromisy
-4. Prostudujte strategie optimalizace nákladů
-5. Naplánujte svůj přístup k implementaci
+1. Přečíst si celý tento dokument
+2. Prostudovat ukázky kódu pro každou komponentu
+3. Porozumět návrhovým rozhodnutím a kompromisům
+4. Prostudovat strategie optimalizace nákladů
+5. Naplánovat přístup k implementaci
 
 **Očekávaný výsledek:**
 - ✅ Jasný mentální model architektury systému
 - ✅ Pochopení požadovaných komponent
 - ✅ Realistické odhady úsilí
-- ✅ Plán implementace
+- ✅ Implementační plán
 
-### Možnost 3: Vytvoření kompletního systému (80-120 hodin)
+### Možnost 3: Vytvoření kompletního systému (80–120 hodin)
 
 **Co získáte:** Produkčně připravené multi-agentní řešení
 
-1. **Fáze 1:** Nasazení infrastruktury (provedeno výše)
-2. **Fáze 2:** Implementace agentů pomocí níže uvedených příkladů kódu (30-40 hodin)
-3. **Fáze 3:** Vytvoření směrovací služby (12-16 hodin)
-4. **Fáze 4:** Vytvoření frontendového UI (20-30 hodin)
-5. **Fáze 5:** Konfigurace datových pipeline (8-12 hodin)
-6. **Fáze 6:** Přidání monitorování a hodnocení (10-15 hodin)
+1. **Fáze 1:** Nasadit infrastrukturu (provedeno výše)
+2. **Fáze 2:** Implementovat agenty pomocí ukázek kódu níže (30–40 hodin)
+3. **Fáze 3:** Vytvořit směrovací službu (12–16 hodin)
+4. **Fáze 4:** Vytvořit frontend UI (20–30 hodin)
+5. **Fáze 5:** Nakonfigurovat datové pipeline (8–12 hodin)
+6. **Fáze 6:** Přidat monitorování & vyhodnocování (10–15 hodin)
 
 **Očekávaný výsledek:**
 - ✅ Plně funkční multi-agentní systém
-- ✅ Monitorování na úrovni produkce
-- ✅ Validace bezpečnosti
-- ✅ Optimalizované nasazení z hlediska nákladů
+- ✅ Produkční úroveň monitoringu
+- ✅ Bezpečnostní validace
+- ✅ Nasazení s optimalizací nákladů
 
 ---
 
-## 📚 Referenční architektura a průvodce implementací
+## 📚 Referenční architektura & průvodce implementací
 
-Následující sekce poskytují podrobné vzory architektury, příklady konfigurace a referenční kód, které vás provedou implementací.
+Následující sekce poskytují detailní architektonické vzory, konfigurační příklady a referenční kód, který vás provede implementací.
 
 ## Požadavky na počáteční konfiguraci
 
 ### 1. Více agentů a konfigurace
 
-**Cíl**: Nasadit 2 specializované agenty - "Agent zákazníků" (zákaznický servis) a "Zásoby" (správa skladu)
+**Cíl**: Nasadit 2 specializované agenty - "Customer Agent" (zákaznická podpora) a "Inventory" (správa zásob)
 
-> **📝 Poznámka:** Následující azure.yaml a Bicep konfigurace jsou **referenční příklady**, které ukazují, jak strukturovat nasazení multi-agentních systémů. Budete muset vytvořit tyto soubory a odpovídající implementace agentů.
+> **📝 Poznámka:** Následující azure.yaml a Bicep konfigurace jsou **referenční příklady** ukazující, jak strukturovat multi-agentní nasazení. Budete muset vytvořit tyto soubory a odpovídající implementace agentů.
 
 #### Kroky konfigurace:
 
@@ -518,9 +509,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 
 ### 2. Více modelů s plánováním kapacity
 
-**Cíl**: Nasadit chatovací model (zákazníci), embedding model (vyhledávání) a model pro hodnocení (grader) s odpovídajícím řízením kvót
+**Cíl**: Nasadit chat model (Customer), embeddings model (search) a reasoning model (grader) s řádným řízením kvót
 
-#### Strategie pro více regionů:
+#### Strategie více regionů:
 
 ```bicep
 // infra/models.bicep
@@ -564,7 +555,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Konfigurace záložního regionu:
+#### Konfigurace fallbacku regionů:
 
 ```yaml
 # .azure/env/.env.production
@@ -573,11 +564,11 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search s konfigurací datového indexu
+### 3. AI Search s konfigurací indexu dat
 
-**Cíl**: Konfigurovat AI Search pro aktualizace dat a automatizované indexování
+**Cíl**: Nakonfigurovat AI Search pro aktualizace dat a automatické indexování
 
-#### Hook před nasazením:
+#### Pre-provisioning hook:
 
 ```bash
 #!/bin/bash
@@ -585,7 +576,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Vytvořte vyhledávací službu s konkrétním SKU
+# Vytvořit vyhledávací službu s konkrétním SKU
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -594,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Nastavení dat po nasazení:
+#### Post-provisioning nastavení dat:
 
 ```bash
 #!/bin/bash
@@ -602,7 +593,7 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Získat klíč vyhledávací služby
+# Získat klíč služby vyhledávání
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
 # Vytvořit schéma indexu
@@ -618,7 +609,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
 
-#### Schéma indexu vyhledávání:
+#### Schéma vyhledávacího indexu:
 
 ```json
 {
@@ -645,12 +636,12 @@ python ./scripts/upload_search_data.py \
 
 ### 4. Konfigurace nástrojů agentů pro AI Search
 
-**Cíl**: Konfigurovat agenty pro použití AI Search jako nástroje pro ukotvení
+**Cíl**: Konfigurovat agenty tak, aby používali AI Search jako zdroj pro podklady
 
-#### Implementace nástroje pro vyhledávání agentů:
+#### Implementace vyhledávacího nástroje agenta:
 
 ```python
-# src/agents/nástroje/search_tool.py
+# src/agents/tools/search_tool.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -691,7 +682,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
 
-#### Integrace agentů:
+#### Integrace agenta:
 
 ```python
 # src/agents/customer_agent.py
@@ -710,7 +701,7 @@ class CustomerAgent:
         # Připravte kontext pro LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Vygenerujte odpověď s ukotvením
+        # Vygenerujte odpověď s podložením
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -765,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Pipeline pro zpracování dokumentů:
+#### Pipeline zpracování dokumentů:
 
 ```python
 # src/document_processor.py
@@ -805,13 +796,13 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Vytvořit vnoření
+        # Generovat embeddingy
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Indexovat v AI vyhledávání
+        # Indexovat v AI Search
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -848,7 +839,7 @@ output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 #### Nástroj Bing Search:
 
 ```python
-# src/agents/nástroje/bing_search_tool.py
+# src/agents/tools/bing_search_tool.py
 import aiohttp
 import asyncio
 
@@ -889,9 +880,9 @@ class BingSearchTool:
 
 ---
 
-## Monitorování a pozorovatelnost
+## Monitorování & Pozorovatelnost
 
-### 7. Trasování a Application Insights
+### 7. Sledování tras a Application Insights
 
 **Cíl**: Komplexní monitorování s trasovacími logy a Application Insights
 
@@ -948,7 +939,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Implementace vlastní telemetrie:
+#### Implementace vlastních telemetrií:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -962,7 +953,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Konfigurace protokolování
+        # Nastavit protokolování
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -1054,9 +1045,9 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Validace bezpečnosti red teamingem
+### 8. Red Teaming - bezpečnostní validace
 
-**Cíl**: Automatizované testování bezpečnosti agentů a modelů
+**Cíl**: Automatizované bezpečnostní testování pro agenty a modely
 
 #### Konfigurace red teamingu:
 
@@ -1106,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Vypočítat celkové skóre zabezpečení
+        # Vypočítat celkové bezpečnostní skóre
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1175,7 +1166,7 @@ class RedTeamScanner:
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
         # Implementace by odeslala HTTP požadavek na koncový bod agenta
-        # Pro demonstrační účely vrací zástupný symbol
+        # Pro demonstrační účely vrací zástupnou hodnotu
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1197,7 +1188,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Zjednodušená detekce zranitelností
+        # Zjednodušené zjišťování zranitelností
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1232,7 +1223,7 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Základní skórování: 100 - (zranitelnosti / celkem * 100)
+        # Základní skóre: 100 - (počet_zranitelností / celkový_počet * 100)
         if total_strategies == 0:
             return 100.0
         
@@ -1257,13 +1248,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Získejte koncový bod agenta z nasazení
+# Získat koncový bod agenta z nasazení
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Spusťte bezpečnostní skenování
+# Spustit bezpečnostní sken
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1273,11 +1264,11 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Hodnocení agentů s modelem hodnotitele
+### 9. Hodnocení agentů pomocí Grader modelu
 
-**Cíl**: Nasadit hodnotící systém s dedikovaným modelem hodnotitele
+**Cíl**: Nasadit evaluační systém s dedikovaným grader modelem
 
-#### Konfigurace modelu hodnotitele:
+#### Konfigurace grader modelu:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1320,10 +1311,10 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
 }
 ```
 
-#### Rámec pro hodnocení:
+#### Rámec pro vyhodnocování:
 
 ```python
-# src/evaluation/agent_evaluator.py
+# src/hodnocení/hodnotitel_agenta.py
 import asyncio
 import json
 from typing import List, Dict, Any
@@ -1434,7 +1425,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Analyzovat odpověď ve formátu JSON
+            # Parsovat JSON odpověď
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1535,11 +1526,11 @@ class AgentEvaluator:
 
 ---
 
-## Přizpůsobení a aktualizace
+## Přizpůsobení & Aktualizace
 
-### 10. Přizpůsobení Container Apps
+### 10. Přizpůsobení Container App
 
-**Cíl**: Aktualizovat konfiguraci Container Apps a nahradit ji vlastním UI
+**Cíl**: Aktualizovat konfiguraci container app a nahradit ji vlastní UI
 
 #### Dynamická konfigurace:
 
@@ -1557,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Vytvoření vlastního frontendu:
+#### Vlastní build frontendu:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1584,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Skript pro sestavení a nasazení:
+#### Skript pro build a nasazení:
 
 ```bash
 #!/bin/bash
@@ -1592,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Vytvořte vlastní obraz s proměnnými prostředí
+# Sestavit vlastní obraz s proměnnými prostředí
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1600,13 +1591,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Nahrajte do Azure Container Registry
+# Nahrát do Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Aktualizujte kontejnerovou aplikaci
+# Aktualizovat kontejnerovou aplikaci
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1627,13 +1618,13 @@ echo "Frontend deployed successfully!"
 
 **Řešení**:
 ```bash
-# Zkontrolujte aktuální využití kvóty
+# Zkontrolovat aktuální využití kvóty
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Požádejte o navýšení kvóty
+# Požádat o zvýšení kvóty
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1646,11 +1637,11 @@ az support tickets create \
 
 #### 2. Vypršení nasazení modelu
 
-**Problém**: Nasazení modelu selže kvůli vypršení verze API
+**Problém**: Nasazení modelu selže kvůli vypršení API verze
 
 **Řešení**:
 ```python
-# skripty/update_model_versions.py
+# scripts/update_model_versions.py
 import requests
 import json
 
@@ -1693,13 +1684,13 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. Integrace jemného doladění
+#### 3. Integrace fine-tuningu
 
-**Problém**: Jak integrovat jemně doladěné modely do nasazení AZD
+**Problém**: Jak integrovat fine-tuned modely do AZD nasazení
 
 **Řešení**:
 ```python
-# skripty/fine_tuning_pipeline.py
+# scripts/fine_tuning_pipeline.py
 import asyncio
 from openai import AsyncOpenAI
 
@@ -1735,7 +1726,7 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Aktualizujte nasazení pro použití jemně vyladěného modelu
+            # Aktualizovat nasazení, aby používalo doladěný model
             # Toto by zavolalo Azure CLI k aktualizaci nasazení
             return fine_tuned_model
         else:
@@ -1745,13 +1736,13 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ a otevřené možnosti zkoumání
+## FAQ & Otevřené průzkumné možnosti
 
 ### Často kladené otázky
 
-#### Otázka: Existuje snadný způsob, jak nasadit více agentů (návrhový vzor)?
+#### Q: Existuje snadný způsob, jak nasadit více agentů (návrhový vzor)?
 
-**Odpověď: Ano! Použijte vzor Multi-Agent:**
+**A: Ano! Použijte multi-agentní vzor:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1768,9 +1759,9 @@ services:
         }
 ```
 
-#### Otázka: Mohu nasadit "směrovač modelů" jako model (nákladové dopady)?
+#### Q: Mohu nasadit "model router" jako model (náklady)?
 
-**Odpověď: Ano, s pečlivým zvážením:**
+**A: Ano, s opatrným zvážením:**
 
 ```python
 # Implementace směrovače modelu
@@ -1797,22 +1788,22 @@ class ModelRouter:
         pass
 ```
 
-**Nákladové dopady:**
-- **Úspory**: Snížení nákladů o 60-80 % u jednoduchých dotazů
-- **Kompromisy**: Mírné zvýšení latence pro logiku směrování
-- **Monitorování**: Sledování přesnosti vs. nákladové metriky
+**Dopady na náklady:**
+- **Úspory**: 60–80% snížení nákladů pro jednoduché dotazy
+- **Kompromisy**: Mírné zvýšení latence pro směrovací logiku
+- **Monitorování**: Sledovat metriky přesnosti vs. náklady
 
-#### Otázka: Mohu spustit úlohu jemného doladění z azd šablony?
+#### Q: Mohu spustit úlohu fine-tuningu z azd šablony?
 
-**Odpověď: Ano, pomocí hooků po nasazení:**
+**A: Ano, pomocí post-provisioning hooků:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Doladění integrace
+# hooks/postprovision.sh - Integrace doladění
 
 echo "Starting fine-tuning pipeline..."
 
-# Nahrát tréninková data
+# Nahrát trénovací data
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
@@ -1870,7 +1861,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 #### Rámec pro optimalizaci nákladů
 
 ```python
-# src/optimalizace/cost_optimizer.py
+# src/optimization/cost_optimizer.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1912,61 +1903,61 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ Připravená ARM šablona k nasazení
+## ✅ ARM šablona připravená k nasazení
 
-> **✨ TOHLE SKUTEČNĚ EXISTUJE A FUNGUJE!**  
-> Na rozdíl od konceptuálních příkladů kódu výše je ARM šablona **skutečná, funkční infrastruktura**, která je součástí tohoto repozitáře.
+> **✨ TO OPRAVDU EXISTUJE A FUNGUJE!**  
+> Na rozdíl od výše uvedených konceptuálních ukázek kódu je ARM šablona **skutečné, funkční nasazení infrastruktury** zahrnuté v tomto repozitáři.
 
 ### Co tato šablona skutečně dělá
 
-ARM šablona v [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) zajišťuje **veškerou Azure infrastrukturu** potřebnou pro multi-agentní systém. Toto je **jediná komponenta připravená k okamžitému použití** – vše ostatní vyžaduje vývoj.
+ARM šablona v [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) zřizuje **veškerou infrastrukturu Azure** potřebnou pro multi-agentní systém. Toto je **jediná komponenta připravená k okamžitému spuštění** - vše ostatní vyžaduje vývoj.
 
-### Co je součástí ARM šablony
+### Co je zahrnuto v ARM šabloně
 
-ARM šablona umístěná v [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) zahrnuje:
+ARM šablona umístěná v [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) obsahuje:
 
-#### **Kompletní infrastrukturu**
-- ✅ **Multi-regionální Azure OpenAI** nasazení (GPT-4o, GPT-4o-mini, embeddings, grader)
+#### **Kompletní infrastruktura**
+- ✅ **Multi-regionální nasazení Azure OpenAI** (GPT-4o, GPT-4o-mini, embeddings, grader)
 - ✅ **Azure AI Search** s funkcemi vektorového vyhledávání
 - ✅ **Azure Storage** s kontejnery pro dokumenty a nahrávání
-- ✅ **Prostředí Container Apps** s automatickým škálováním
-- ✅ **Agent Router & Frontend** aplikace v kontejnerech
-- ✅ **Cosmos DB** pro uchování historie chatu
-- ✅ **Application Insights** pro komplexní monitoring
-- ✅ **Key Vault** pro bezpečnou správu tajných klíčů
+- ✅ **Container Apps Environment** s automatickým škálováním
+- ✅ **Agent Router & Frontend** containerové aplikace
+- ✅ **Cosmos DB** pro uchovávání historie chatu
+- ✅ **Application Insights** pro komplexní monitorování
+- ✅ **Key Vault** pro bezpečné spravování tajemství
 - ✅ **Document Intelligence** pro zpracování souborů
-- ✅ **Bing Search API** pro získávání aktuálních informací
+- ✅ **Bing Search API** pro informace v reálném čase
 
 #### **Režimy nasazení**
 | Režim | Použití | Zdroje | Odhadované náklady/měsíc |
-|-------|---------|--------|--------------------------|
-| **Minimal** | Vývoj, testování | Základní SKUs, jeden region | $100-370 |
-| **Standard** | Produkce, střední škála | Standardní SKUs, multi-region | $420-1,450 |
-| **Premium** | Podnikové, vysoká škála | Premium SKUs, HA nastavení | $1,150-3,500 |
+|------|----------|-----------|---------------------|
+| **Minimal** | Vývoj, testování | Základní SKU, jedna oblast | $100-370 |
+| **Standard** | Produkce, střední rozsah | Standardní SKU, víceregionové | $420-1,450 |
+| **Premium** | Enterprise, vysoký rozsah | Prémiová SKU, HA nastavení | $1,150-3,500 |
 
 ### 🎯 Rychlé možnosti nasazení
 
-#### Možnost 1: Jedním kliknutím v Azure
+#### Možnost 1: Jednoklikové nasazení do Azure
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Nasadit do Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Možnost 2: Nasazení pomocí Azure CLI
+#### Možnost 2: Nasazení přes Azure CLI
 
 ```bash
-# Naklonujte repozitář
+# Klonovat repozitář
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Udělejte skript pro nasazení spustitelným
+# Nastavit nasazovací skript jako spustitelný
 chmod +x deploy.sh
 
-# Nasazení s výchozím nastavením (Standardní režim)
+# Nasadit s výchozím nastavením (standardní režim)
 ./deploy.sh -g myResourceGroup
 
-# Nasazení pro produkci s prémiovými funkcemi
+# Nasadit do produkce s prémiovými funkcemi
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Nasazení minimální verze pro vývoj
+# Nasadit minimální verzi pro vývoj
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
@@ -2002,20 +1993,20 @@ Po úspěšném nasazení obdržíte:
 
 ### 🔧 Konfigurace po nasazení
 
-ARM šablona zajišťuje zprovoznění infrastruktury. Po nasazení:
+ARM šablona provádí zřizování infrastruktury. Po nasazení:
 
-1. **Konfigurujte index vyhledávání**:
+1. **Konfigurace vyhledávacího indexu**:
    ```bash
-   # Použijte poskytnuté schéma vyhledávání
+   # Použijte poskytnuté vyhledávací schéma
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **Nahrajte počáteční dokumenty**:
+2. **Nahrání počátečních dokumentů**:
    ```bash
-   # Nahrajte manuály produktů a znalostní bázi
+   # Nahrát příručky k produktům a znalostní bázi
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
@@ -2024,7 +2015,7 @@ ARM šablona zajišťuje zprovoznění infrastruktury. Po nasazení:
 
 3. **Nasazení kódu agentů**:
    ```bash
-   # Vytvořte a nasazujte skutečné aplikace agentů
+   # Sestavujte a nasazujte skutečné agentní aplikace
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2048,41 +2039,41 @@ Upravte `azuredeploy.parameters.json` pro přizpůsobení nasazení:
 }
 ```
 
-### 📊 Funkce nasazení
+### 📊 Vlastnosti nasazení
 
 - ✅ **Ověření předpokladů** (Azure CLI, kvóty, oprávnění)
-- ✅ **Multi-regionální vysoká dostupnost** s automatickým přepínáním
-- ✅ **Komplexní monitoring** s Application Insights a Log Analytics
+- ✅ **Vysoká dostupnost v více regionech** s automatickým přepnutím
+- ✅ **Komplexní monitorování** s Application Insights a Log Analytics
 - ✅ **Bezpečnostní osvědčené postupy** s Key Vault a RBAC
 - ✅ **Optimalizace nákladů** s konfigurovatelnými režimy nasazení
-- ✅ **Automatické škálování** na základě vzorců poptávky
-- ✅ **Aktualizace bez výpadků** s revizemi Container Apps
+- ✅ **Automatické škálování** podle vzorců poptávky
+- ✅ **Aktualizace bez výpadků** pomocí revizí Container Apps
 
-### 🔍 Monitoring a správa
+### 🔍 Monitorování a správa
 
-Po nasazení monitorujte své řešení pomocí:
+Po nasazení sledujte své řešení prostřednictvím:
 
-- **Application Insights**: Výkonnostní metriky, sledování závislostí a vlastní telemetrie
+- **Application Insights**: Výkonové metriky, sledování závislostí a vlastní telemetrie
 - **Log Analytics**: Centralizované logování ze všech komponent
-- **Azure Monitor**: Monitoring zdraví a dostupnosti zdrojů
-- **Cost Management**: Sledování nákladů v reálném čase a upozornění na rozpočet
+- **Azure Monitor**: Monitorování stavu zdrojů a dostupnosti
+- **Cost Management**: Sledování nákladů v reálném čase a upozornění rozpočtu
 
 ---
 
 ## 📚 Kompletní průvodce implementací
 
-Tento dokument scénáře spolu s ARM šablonou poskytuje vše potřebné k nasazení produkčně připraveného multi-agentního řešení zákaznické podpory. Implementace zahrnuje:
+Tento scénář spolu s ARM šablonou poskytuje vše potřebné k nasazení produkčně připraveného multi-agentního řešení zákaznické podpory. Implementace zahrnuje:
 
-✅ **Návrh architektury** - Komplexní návrh systému s vazbami mezi komponentami  
-✅ **Zajištění infrastruktury** - Kompletní ARM šablona pro nasazení jedním kliknutím  
-✅ **Konfigurace agentů** - Podrobný postup pro nastavení agentů pro zákazníky a inventář  
-✅ **Multi-modelové nasazení** - Strategické umístění modelů napříč regiony  
-✅ **Integrace vyhledávání** - AI Search s vektorovými funkcemi a indexováním dat  
+✅ **Návrh architektury** - Komplexní návrh systému se vztahy mezi komponentami  
+✅ **Zřizování infrastruktury** - Kompletní ARM šablona pro jednoklikové nasazení  
+✅ **Konfigurace agentů** - Podrobná konfigurace pro agenty Customer a Inventory  
+✅ **Nasazení více modelů** - Strategické rozmístění modelů napříč regiony  
+✅ **Integrace vyhledávání** - AI Search s vektorovými schopnostmi a indexováním dat  
 ✅ **Implementace bezpečnosti** - Red teaming, skenování zranitelností a bezpečné postupy  
-✅ **Monitoring a hodnocení** - Komplexní telemetrie a rámec pro hodnocení agentů  
-✅ **Připravenost na produkci** - Podnikové nasazení s HA a obnovou po havárii  
-✅ **Optimalizace nákladů** - Inteligentní směrování a škálování na základě využití  
-✅ **Průvodce řešením problémů** - Běžné problémy a strategie jejich řešení
+✅ **Monitorování a vyhodnocování** - Komplexní telemetrie a rámec pro hodnocení agentů  
+✅ **Připravenost do produkce** - Podnikově orientované nasazení s HA a disaster recovery  
+✅ **Optimalizace nákladů** - Inteligentní směrování a škálování podle využití  
+✅ **Průvodce řešením problémů** - Běžné problémy a strategie řešení
 
 ---
 
@@ -2090,39 +2081,39 @@ Tento dokument scénáře spolu s ARM šablonou poskytuje vše potřebné k nasa
 
 ### Pokryté vzory architektury
 
-✅ **Návrh multi-agentního systému** - Specializovaní agenti (Zákazník + Inventář) s dedikovanými modely  
-✅ **Multi-regionální nasazení** - Strategické umístění modelů pro optimalizaci nákladů a redundanci  
-✅ **RAG architektura** - Integrace AI Search s vektorovými embeddings pro podložené odpovědi  
+✅ **Návrh multi-agentního systému** - Specializovaní agenti (Customer + Inventory) s dedikovanými modely  
+✅ **Víceregionální nasazení** - Strategické rozmístění modelů pro optimalizaci nákladů a redundanci  
+✅ **RAG architektura** - Integrace AI Search s vektorovými embeddingy pro podložené odpovědi  
 ✅ **Hodnocení agentů** - Dedikovaný grader model pro hodnocení kvality  
-✅ **Bezpečnostní rámec** - Red teaming a vzory skenování zranitelností  
+✅ **Bezpečnostní rámec** - Vzory pro red teaming a skenování zranitelností  
 ✅ **Optimalizace nákladů** - Směrování modelů a strategie plánování kapacity  
-✅ **Monitoring produkce** - Application Insights s vlastní telemetrií  
+✅ **Monitorování v produkci** - Application Insights s vlastní telemetrií  
 
 ### Co tento dokument poskytuje
 
-| Komponenta | Stav | Kde ji najít |
-|------------|------|--------------|
+| Komponenta | Stav | Kde ji najdete |
+|-----------|--------|------------------|
 | **Šablona infrastruktury** | ✅ Připraveno k nasazení | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
 | **Diagramy architektury** | ✅ Kompletní | Mermaid diagram výše |
-| **Příklady kódu** | ✅ Referenční implementace | V celém dokumentu |
-| **Vzory konfigurace** | ✅ Podrobný návod | Sekce 1-10 výše |
-| **Implementace agentů** | 🔨 Musíte vytvořit | ~40 hodin vývoje |
-| **Frontend UI** | 🔨 Musíte vytvořit | ~25 hodin vývoje |
-| **Datové pipeline** | 🔨 Musíte vytvořit | ~10 hodin vývoje |
+| **Ukázky kódu** | ✅ Referenční implementace | V průběhu tohoto dokumentu |
+| **Konfigurační vzory** | ✅ Podrobné pokyny | Sekce 1-10 výše |
+| **Implementace agentů** | 🔨 Vy to vytvoříte | ~40 hodin vývoje |
+| **Frontend UI** | 🔨 Vy to vytvoříte | ~25 hodin vývoje |
+| **Datové pipeline** | 🔨 Vy to vytvoříte | ~10 hodin vývoje |
 
-### Realita: Co skutečně existuje
+### Kontrola reality: Co skutečně existuje
 
-**V repozitáři (Připraveno nyní):**
-- ✅ ARM šablona nasazující 15+ Azure služeb (azuredeploy.json)
-- ✅ Skript nasazení s ověřením (deploy.sh)
+**V repozitáři (připraveno nyní):**
+- ✅ ARM šablona nasazující 15+ služeb Azure (azuredeploy.json)
+- ✅ Skript nasazení s validací (deploy.sh)
 - ✅ Konfigurace parametrů (azuredeploy.parameters.json)
 
-**Odkázáno v dokumentu (Musíte vytvořit):**
+**Odkázáno v dokumentu (vy vytvoříte):**
 - 🔨 Kód implementace agentů (~30-40 hodin)
 - 🔨 Směrovací služba (~12-16 hodin)
-- 🔨 Frontend aplikace (~20-30 hodin)
+- 🔨 Frontendová aplikace (~20-30 hodin)
 - 🔨 Skripty pro nastavení dat (~8-12 hodin)
-- 🔨 Rámec monitoringu (~10-15 hodin)
+- 🔨 Monitorovací rámec (~10-15 hodin)
 
 ### Vaše další kroky
 
@@ -2132,63 +2123,63 @@ cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Pokud chcete vytvořit kompletní systém (80-120 hodin)
-1. ✅ Přečtěte si a pochopte tento dokument architektury (2-3 hodiny)
-2. ✅ Nasazení infrastruktury pomocí ARM šablony (30 minut)
-3. 🔨 Implementace agentů pomocí referenčních vzorů kódu (~40 hodin)
-4. 🔨 Vytvoření směrovací služby s FastAPI/Express (~15 hodin)
-5. 🔨 Vytvoření frontend UI s React/Vue (~25 hodin)
-6. 🔨 Konfigurace datové pipeline a indexu vyhledávání (~10 hodin)
-7. 🔨 Přidání monitoringu a hodnocení (~15 hodin)
-8. ✅ Testování, zabezpečení a optimalizace (~10 hodin)
+#### Pokud chcete postavit celý systém (80-120 hodin)
+1. ✅ Přečtěte si a pochopte tento architektonický dokument (2-3 hodiny)
+2. ✅ Nasadit infrastrukturu pomocí ARM šablony (30 minut)
+3. 🔨 Implementujte agenty podle referenčních vzorů kódu (~40 hodin)
+4. 🔨 Postavte směrovací službu s FastAPI/Express (~15 hodin)
+5. 🔨 Vytvořte frontend UI s React/Vue (~25 hodin)
+6. 🔨 Nakonfigurujte datové pipeline a vyhledávací index (~10 hodin)
+7. 🔨 Přidejte monitorování a vyhodnocování (~15 hodin)
+8. ✅ Testujte, zabezpečte a optimalizujte (~10 hodin)
 
-#### Pokud chcete studovat vzory multi-agentních systémů
-- 📖 Projděte si diagram architektury a vztahy mezi komponentami
-- 📖 Studujte příklady kódu pro SearchTool, BingTool, AgentEvaluator
-- 📖 Pochopte strategii multi-regionálního nasazení
-- 📖 Naučte se rámce hodnocení a bezpečnosti
+#### Pokud se chcete naučit vzory multi-agentních systémů (studium)
+- 📖 Prohlédněte si diagram architektury a vztahy mezi komponentami
+- 📖 Studujte ukázky kódu pro SearchTool, BingTool, AgentEvaluator
+- 📖 Pochopte strategii víceregionálního nasazení
+- 📖 Naučte se rámce pro vyhodnocování a bezpečnost
 - 📖 Aplikujte vzory na své vlastní projekty
 
-### Klíčové poznatky
+### Hlavní poznatky
 
-1. **Infrastruktura vs. aplikace** - ARM šablona poskytuje infrastrukturu; agenti vyžadují vývoj
-2. **Strategie multi-regionálního nasazení** - Strategické umístění modelů snižuje náklady a zlepšuje spolehlivost
-3. **Rámec hodnocení** - Dedikovaný grader model umožňuje kontinuální hodnocení kvality
-4. **Bezpečnost na prvním místě** - Red teaming a skenování zranitelností jsou nezbytné pro produkci
-5. **Optimalizace nákladů** - Inteligentní směrování mezi GPT-4o a GPT-4o-mini šetří 60-80 %
+1. **Infrastruktura vs. Aplikace** - ARM šablona poskytuje infrastrukturu; agenti vyžadují vývoj  
+2. **Strategie víceregionálního nasazení** - Strategické rozmístění modelů snižuje náklady a zlepšuje spolehlivost  
+3. **Rámec pro hodnocení** - Dedikovaný grader model umožňuje kontinuální hodnocení kvality  
+4. **Bezpečnost na prvním místě** - Red teaming a skenování zranitelností jsou pro produkci nezbytné  
+5. **Optimalizace nákladů** - Inteligentní směrování mezi GPT-4o a GPT-4o-mini šetří 60-80%
 
 ### Odhadované náklady
 
 | Režim nasazení | Infrastruktura/měsíc | Vývoj (jednorázově) | Celkem první měsíc |
-|----------------|----------------------|---------------------|--------------------|
-| **Minimal** | $100-370 | $15K-25K (80-120 hod) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (stejný čas) | $15.4K-26.5K |
-| **Premium** | $1,150-3,500 | $15K-25K (stejný čas) | $16.2K-28.5K |
+|-----------------|---------------------|------------------------|-------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120 hod.) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (stejná námaha) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (stejná námaha) | $16.2K-28.5K |
 
-**Poznámka:** Infrastruktura tvoří <5 % celkových nákladů na nové implementace. Hlavní investicí je vývoj.
+**Poznámka:** Infrastruktura tvoří <5 % z celkových nákladů pro nové implementace. Hlavní investicí jsou náklady na vývoj.
 
 ### Související zdroje
 
 - 📚 [Průvodce nasazením ARM šablony](retail-multiagent-arm-template/README.md) - Nastavení infrastruktury
-- 📚 [Nejlepší postupy Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - Nasazení modelů
+- 📚 [Nejlepší postupy Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - Nasazení modelu
 - 📚 [Dokumentace AI Search](https://learn.microsoft.com/azure/search/) - Konfigurace vektorového vyhledávání
-- 📚 [Vzory Container Apps](https://learn.microsoft.com/azure/container-apps/) - Nasazení mikroservis
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Nastavení monitoringu
+- 📚 [Vzory Container Apps](https://learn.microsoft.com/azure/container-apps/) - Nasazení mikroslužeb
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Nastavení monitorování
 
 ### Dotazy nebo problémy?
 
-- 🐛 [Nahlásit problémy](https://github.com/microsoft/AZD-for-beginners/issues) - Chyby šablony nebo dokumentace
-- 💬 [Diskuze na GitHubu](https://github.com/microsoft/AZD-for-beginners/discussions) - Dotazy k architektuře
-- 📖 [FAQ](../../resources/faq.md) - Odpovědi na běžné otázky
-- 🔧 [Průvodce řešením problémů](../../docs/troubleshooting/common-issues.md) - Problémy s nasazením
+- 🐛 [Nahlásit problémy](https://github.com/microsoft/AZD-for-beginners/issues) - Chyby šablony nebo chyby v dokumentaci
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Otázky k architektuře
+- 📖 [FAQ](../resources/faq.md) - Nejčastěji kladené dotazy
+- 🔧 [Průvodce řešením problémů](../docs/troubleshooting/common-issues.md) - Problémy při nasazení
 
 ---
 
-**Tento komplexní scénář poskytuje podnikový návrh architektury pro multi-agentní AI systémy, včetně šablon infrastruktury, pokynů k implementaci a osvědčených postupů pro produkční nasazení sofistikovaných řešení zákaznické podpory s Azure Developer CLI.**
+**Tento komplexní scénář poskytuje podnikovou architektonickou šablonu pro multiagentní AI systémy, včetně šablon infrastruktury, implementačních pokynů a osvědčených postupů pro produkci při budování sofistikovaných řešení zákaznické podpory s Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Prohlášení o vyloučení odpovědnosti:
+Tento dokument byl přeložen pomocí služby pro překlad využívající umělou inteligenci Co‑op Translator (https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, vezměte prosím na vědomí, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za rozhodující zdroj. Pro zásadní informace doporučujeme profesionální lidský překlad. Neneseme odpovědnost za případná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

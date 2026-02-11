@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-10T05:42:59+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "hu"
-}
--->
 # TODO: A repó karbantartója még nem szerkesztette ezt a fájlt
 
 **REPÓ TULAJDONOS**: Szeretne ügyfélszolgálati és támogatási (CSS) segítséget ehhez a termékhez/projekthez?

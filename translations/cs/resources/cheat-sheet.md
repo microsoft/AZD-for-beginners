@@ -1,125 +1,122 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T17:56:37+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "cs"
-}
--->
-# Přehled příkazů - Základní příkazy AZD
+# Cheat Sheet příkazů - Základní příkazy AZD
 
-**Rychlý přehled všech kapitol**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../README.md)
+**Rychlá reference pro všechny kapitoly**
+- **📚 Domovský kurz**: [AZD pro začátečníky](../README.md)
 - **📖 Rychlý start**: [Kapitola 1: Základy & Rychlý start](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Příkazy pro AI**: [Kapitola 2: Vývoj zaměřený na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🤖 AI příkazy**: [Kapitola 2: Vývoj orientovaný na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Pokročilé**: [Kapitola 4: Infrastruktura jako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Úvod
 
-Tento komplexní přehled příkazů poskytuje rychlý přístup k nejčastěji používaným příkazům Azure Developer CLI, uspořádaným podle kategorií s praktickými příklady. Ideální pro rychlé vyhledávání během vývoje, řešení problémů a každodenní práci s projekty azd.
+Tento komplexní přehled poskytuje rychlou referenci pro nejčastěji používané příkazy Azure Developer CLI, uspořádané podle kategorií s praktickými příklady. Ideální pro rychlé vyhledávání během vývoje, řešení problémů a každodenních operací s projekty azd.
 
 ## Cíle učení
 
-Používáním tohoto přehledu příkazů:
-- Získáte okamžitý přístup k základním příkazům Azure Developer CLI a jejich syntaxi
-- Porozumíte organizaci příkazů podle funkčních kategorií a případů použití
-- Budete mít k dispozici praktické příklady pro běžné scénáře vývoje a nasazení
-- Najdete příkazy pro řešení problémů pro rychlé odstranění chyb
-- Efektivně vyhledáte možnosti pokročilé konfigurace a přizpůsobení
-- Snadno najdete příkazy pro správu prostředí a práci s více prostředími
+Používáním tohoto přehledu budete:
+- Mít okamžitý přístup k základním příkazům a syntaxi Azure Developer CLI
+- Rozumět organizaci příkazů podle funkčních kategorií a případů použití
+- Odkazovat se na praktické příklady pro běžné scénáře vývoje a nasazení
+- Získat příkazy pro řešení problémů pro rychlé odstranění chyb
+- Efektivně najít pokročilé možnosti konfigurace a přizpůsobení
+- Najít příkazy pro správu prostředí a pracovní postupy pro více prostředí
 
 ## Výsledky učení
 
-Pravidelným používáním tohoto přehledu příkazů budete schopni:
-- Sebevědomě používat příkazy azd bez nutnosti procházet kompletní dokumentaci
+Pravidelným používáním tohoto přehledu budete schopni:
+- Spouštět příkazy azd sebejistě bez nutnosti nahlížet do úplné dokumentace
 - Rychle řešit běžné problémy pomocí vhodných diagnostických příkazů
 - Efektivně spravovat více prostředí a scénáře nasazení
-- Používat pokročilé funkce azd a možnosti konfigurace podle potřeby
-- Systémově řešit problémy s nasazením pomocí sekvencí příkazů
-- Optimalizovat pracovní postupy efektivním využitím zkratek a možností azd
+- Používat pokročilé funkce azd a konfigurační možnosti podle potřeby
+- Řešit problémy s nasazením pomocí systematických sekvencí příkazů
+- Optimalizovat pracovní postupy prostřednictvím efektivního využití zkratek a možností azd
 
-## Základní příkazy pro začátek
+## Příkazy pro začátek
 
 ### Autentizace
 ```bash
-# Login to Azure (uses Azure CLI)
+# Přihlásit se do Azure přes AZD
+azd auth login
+
+# Přihlásit se do Azure CLI (AZD to používá na pozadí)
 az login
 
-# Check current account
+# Zkontrolovat aktuální účet
 az account show
 
-# Set default subscription
+# Nastavit výchozí předplatné
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# Odhlásit se z AZD
+azd auth logout
+
+# Odhlásit se z Azure CLI
+az logout
 ```
 
 ### Inicializace projektu
 ```bash
-# Browse available templates
+# Procházet dostupné šablony
 azd template list
 
-# Initialize from template
+# Inicializovat z šablony
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# Inicializovat v aktuálním adresáři
 azd init .
 
-# Initialize with custom name
+# Inicializovat s vlastním názvem
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Základní příkazy pro nasazení
+## Hlavní příkazy pro nasazení
 
 ### Kompletní pracovní postup nasazení
 ```bash
-# Deploy everything (provision + deploy)
+# Nasadit vše (příprava + nasazení)
 azd up
 
-# Deploy with confirmation prompts disabled
+# Nasadit s vypnutými potvrzovacími výzvami
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# Nasadit do konkrétního prostředí
 azd up --environment production
 
-# Deploy with custom parameters
+# Nasadit s vlastními parametry
 azd up --parameter location=westus2
 ```
 
 ### Pouze infrastruktura
 ```bash
-# Provision Azure resources
+# Zajistit prostředky v Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 Náhled změn infrastruktury
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# Zobrazuje simulovaný náhled toho, jaké prostředky by byly vytvořeny/upraveny/smazány
+# Podobné 'terraform plan' nebo 'bicep what-if' - bezpečné spustit, nebudou provedeny žádné změny
 ```
 
 ### Pouze aplikace
 ```bash
-# Deploy application code
+# Nasadit kód aplikace
 azd deploy
 
-# Deploy specific service
+# Nasadit konkrétní službu
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# Nasadit všechny služby
 azd deploy --all
 ```
 
 ### Sestavení a balení
 ```bash
-# Build applications
+# Sestavit aplikace
 azd package
 
-# Build specific service
+# Sestavit konkrétní službu
 azd package --service api
 ```
 
@@ -127,36 +124,36 @@ azd package --service api
 
 ### Operace s prostředím
 ```bash
-# List all environments
+# Vypsat všechna prostředí
 azd env list
 
-# Create new environment
+# Vytvořit nové prostředí
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# Vybrat prostředí
 azd env select production
 
-# Show current environment
+# Zobrazit aktuální prostředí
 azd env show
 
-# Refresh environment state
+# Obnovit stav prostředí
 azd env refresh
 ```
 
 ### Proměnné prostředí
 ```bash
-# Set environment variable
+# Nastavit proměnnou prostředí
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# Získat proměnnou prostředí
 azd env get API_KEY
 
-# List all environment variables
+# Vypsat všechny proměnné prostředí
 azd env get-values
 
-# Remove environment variable
+# Odstranit proměnnou prostředí
 azd env unset DEBUG
 ```
 
@@ -164,222 +161,229 @@ azd env unset DEBUG
 
 ### Globální konfigurace
 ```bash
-# List all configuration
+# Vypsat všechna nastavení
 azd config list
 
-# Set global defaults
+# Nastavit globální výchozí hodnoty
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# Odstranit konfiguraci
 azd config unset defaults.location
 
-# Reset all configuration
+# Obnovit všechna nastavení
 azd config reset
 ```
 
 ### Konfigurace projektu
 ```bash
-# Validate azure.yaml
+# Ověřit azure.yaml
 azd config validate
 
-# Show project information
+# Zobrazit informace o projektu
 azd show
 
-# Get service endpoints
+# Získat koncové body služeb
 azd show --output json
 ```
 
-## 📊 Monitoring a logy
+## 📊 Monitorování a diagnostika
 
-### Logy aplikace
+### Monitorovací panel
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### Monitoring
-```bash
-# Open Azure portal for monitoring
+# Otevřít panel monitorování v portálu Azure
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Otevřít živé metriky Application Insights
+azd monitor --live
+
+# Otevřít panel protokolů Application Insights
+azd monitor --logs
+
+# Otevřít přehled Application Insights
+azd monitor --overview
 ```
 
-## 🛠️ Údržbové příkazy
+### Zobrazení logů kontejneru
+```bash
+# Zobrazit protokoly pomocí Azure CLI (pro Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Sledovat protokoly v reálném čase
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Zobrazit protokoly v portálu Azure
+azd monitor --logs
+```
+
+### Dotazy Log Analytics
+```bash
+# Přístup k Log Analytics prostřednictvím Azure Portal
+azd monitor --logs
+
+# Dotazování protokolů pomocí Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
+```
+
+## 🛠️ Příkazy pro údržbu
 
 ### Vyčištění
 ```bash
-# Remove all Azure resources
+# Odstranit všechny prostředky Azure
 azd down
 
-# Force delete without confirmation
+# Vynutit smazání bez potvrzení
 azd down --force
 
-# Purge soft-deleted resources
+# Vymazat dočasně smazané prostředky
 azd down --purge
 
-# Complete cleanup
+# Úplné vyčištění
 azd down --force --purge
 ```
 
 ### Aktualizace
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# Zkontrolovat aktualizace azd
 azd version
 
-# Show system information
-azd info
+# Získat aktuální verzi
+azd version
+
+# Zobrazit aktuální konfiguraci
+azd config list
 ```
 
 ## 🔧 Pokročilé příkazy
 
 ### Pipeline a CI/CD
 ```bash
-# Configure GitHub Actions
+# Konfigurovat GitHub Actions
 azd pipeline config
 
-# Configure Azure DevOps
+# Konfigurovat Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# Zobrazit konfiguraci pipeline
 azd pipeline show
 ```
 
 ### Správa infrastruktury
 ```bash
-# Import existing resources
-azd infra import
+# Vygenerovat šablony infrastruktury
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Náhled a plánování infrastruktury
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Simuluje zřizování infrastruktury bez nasazení
+# Analyzuje šablony Bicep/Terraform a zobrazuje:
+# - Zdroje, které budou přidány (zelené +)
+# - Zdroje, které budou upraveny (žluté ~)
+# - Zdroje, které budou smazány (červené -)
+# Bezpečné spuštění - v prostředí Azure nejsou provedeny žádné skutečné změny
+
+# Sestaví infrastrukturu z azure.yaml
+azd infra synth
 ```
 
-### Správa služeb
+### Informace o projektu
 ```bash
-# List all services
-azd service list
+# Zobrazit stav projektu a koncové body
+azd show
 
-# Show service details
-azd service show --service web
+# Zobrazit podrobné informace o projektu ve formátu JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Získat koncové body služby
+azd show --output json | jq '.services'
 ```
 
 ## 🎯 Rychlé pracovní postupy
 
 ### Pracovní postup vývoje
 ```bash
-# Start new project
+# Zahajte nový projekt
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# Nasaďte do vývojového prostředí
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# Proveďte změny a znovu je nasaďte
 azd deploy
 
-# View logs
-azd logs --follow
+# Otevřete monitorovací panel
+azd monitor --live
 ```
 
-### Pracovní postup s více prostředími
+### Pracovní postup pro více prostředí
 ```bash
-# Set up environments
+# Nastavit prostředí
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# Nasadit na vývojové prostředí (dev)
 azd env select dev
 azd up
 
-# Test and promote to staging
+# Otestovat a nasadit do předprodukčního prostředí (staging)
 azd env select staging
 azd up
 
-# Deploy to production
+# Nasadit do produkčního prostředí
 azd env select production
 azd up
 ```
 
 ### Pracovní postup pro řešení problémů
 ```bash
-# Enable debug mode
+# Povolit režim ladění
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Zkontrolovat stav nasazení
+azd show
 
-# Validate configuration
-azd config validate
+# Ověřit konfiguraci
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Otevřít monitorovací panel pro protokoly
+azd monitor --logs
 
-# Check resource status
+# Zkontrolovat stav zdrojů
 azd show --output json
 ```
 
-## 🔍 Ladicí příkazy
+## 🔍 Příkazy pro ladění
 
 ### Informace pro ladění
 ```bash
-# Enable debug output
+# Povolit ladicí výstup
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# Zakázat telemetrii pro čistší výstup
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Zkontrolovat aktuální konfiguraci
+azd config list
 
-# Check authentication status
+# Zkontrolovat stav ověření
 az account show
 ```
 
 ### Ladění šablon
 ```bash
-# List available templates with details
+# Vypsat dostupné šablony s podrobnostmi
 azd template list --output json
 
-# Show template information
+# Zobrazit informace o šabloně
 azd template show <template-name>
 
-# Validate template before init
+# Ověřit šablonu před inicializací
 azd template validate <template-name>
 ```
 
@@ -387,36 +391,38 @@ azd template validate <template-name>
 
 ### Struktura projektu
 ```bash
-# Show current directory structure
+# Zobrazit aktuální strukturu adresářů
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
+# Přejít do kořenového adresáře projektu azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# Zobrazit adresář konfigurace azd
+echo $AZD_CONFIG_DIR  # Obvykle ~/.azd
 ```
 
-## 🎨 Formátování výstupu
+## 🎨 Formát výstupu
 
-### Výstup ve formátu JSON
+### Výstup JSON
 ```bash
-# Get JSON output for scripting
+# Získat výstup ve formátu JSON pro skriptování
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# Parsovat pomocí jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Výstup ve formátu tabulky
+### Výstup v tabulce
 ```bash
-# Format as table
+# Formátovat jako tabulku
 azd env list --output table
-azd service list --output table
+
+# Zobrazit nasazené služby
+azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 Běžné kombinace příkazů
@@ -424,25 +430,25 @@ azd service list --output table
 ### Skript pro kontrolu stavu
 ```bash
 #!/bin/bash
-# Quick health check
+# Rychlá kontrola stavu
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
 ### Validace nasazení
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# Ověření před nasazením
+azd show
+azd provision --preview  # Náhled změn před nasazením
 az account show
 ```
 
 ### Porovnání prostředí
 ```bash
 #!/bin/bash
-# Compare environments
+# Porovnat prostředí
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -453,7 +459,7 @@ done
 ### Skript pro vyčištění prostředků
 ```bash
 #!/bin/bash
-# Clean up old environments
+# Vyčistit stará prostředí
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -465,17 +471,17 @@ done
 
 ### Běžné proměnné prostředí
 ```bash
-# Azure configuration
+# Konfigurace Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# Konfigurace AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# Konfigurace aplikace
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -484,57 +490,60 @@ export LOG_LEVEL="info"
 
 ### Rychlé opravy
 ```bash
-# Reset authentication
+# Resetovat autentizaci
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# Vynutit obnovení prostředí
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# Znovu nasadit všechny služby
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Zkontrolovat stav nasazení
+azd show --output json
 ```
 
-### Příkazy pro obnovu
+### Příkazy pro obnovení
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Obnova po selhání nasazení - vyčistit a znovu nasadit
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Pouze znovu zřídit infrastrukturu
+azd provision
+
+# Pouze znovu nasadit aplikaci
+azd deploy
 ```
 
-## 💡 Tipy od profesionálů
+## 💡 Užitečné tipy
 
-### Alias pro rychlejší pracovní postupy
+### Zkratky (aliasy) pro rychlejší pracovní postup
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# Přidejte do svého .bashrc nebo .zshrc
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
 ### Zkratky funkcí
 ```bash
-# Quick environment switching
+# Rychlé přepínání prostředí
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# Rychlé nasazení s monitorováním
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# Stav prostředí
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -542,42 +551,44 @@ azd-status() {
 
 ## 📖 Nápověda a dokumentace
 
-### Získání nápovědy
+### Získání pomoci
 ```bash
-# General help
+# Obecná nápověda
 azd --help
 azd help
 
-# Command-specific help
+# Nápověda ke konkrétnímu příkazu
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# Zobrazit informace o verzi a sestavení
 azd version
 azd version --output json
 ```
 
 ### Odkazy na dokumentaci
 ```bash
-# Open documentation in browser
+# Otevřít dokumentaci v prohlížeči
 azd docs
 
-# Show template documentation
+# Zobrazit dokumentaci šablony
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tip**: Uložte si tento přehled příkazů do záložek a použijte `Ctrl+F` pro rychlé nalezení potřebných příkazů!
+**Tip**: Uložte si tento přehled do záložek a použijte `Ctrl+F` pro rychlé nalezení požadovaných příkazů!
 
 ---
 
 **Navigace**
 - **Předchozí lekce**: [Kontroly před nasazením](../docs/pre-deployment/preflight-checks.md)
-- **Další lekce**: [Slovníček](glossary.md)
+- **Další lekce**: [Glosář](glossary.md)
 
 ---
 
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vyloučení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za rozhodující zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo špatné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

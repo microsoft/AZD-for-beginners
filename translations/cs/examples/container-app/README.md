@@ -1,36 +1,27 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T12:02:59+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "cs"
-}
--->
-# Příklady nasazení kontejnerových aplikací s AZD
+# Příklady nasazení Container App s AZD
 
-Tento adresář obsahuje komplexní příklady nasazení kontejnerových aplikací do Azure Container Apps pomocí Azure Developer CLI (AZD). Tyto příklady ukazují reálné vzory, osvědčené postupy a konfigurace připravené pro produkční prostředí.
+Tento adresář obsahuje komplexní příklady nasazení kontejnerizovaných aplikací do Azure Container Apps pomocí Azure Developer CLI (AZD). Tyto příklady demonstrují reálné vzory, osvědčené postupy a konfigurace připravené pro produkci.
 
 ## 📚 Obsah
 
 - [Přehled](../../../../examples/container-app)
-- [Předpoklady](../../../../examples/container-app)
-- [Rychlé příklady](../../../../examples/container-app)
-- [Produkční příklady](../../../../examples/container-app)
+- [Požadavky](../../../../examples/container-app)
+- [Rychlé začátky](../../../../examples/container-app)
+- [Příklady pro produkci](../../../../examples/container-app)
 - [Pokročilé vzory](../../../../examples/container-app)
-- [Osvědčené postupy](../../../../examples/container-app)
+- [Nejlepší postupy](../../../../examples/container-app)
 
-## Přehled
+## Overview
 
-Azure Container Apps je plně spravovaná serverless platforma pro kontejnery, která vám umožňuje provozovat mikroslužby a kontejnerové aplikace bez nutnosti správy infrastruktury. V kombinaci s AZD získáte:
+Azure Container Apps je plně spravovaná serverless platforma pro kontejnery, která vám umožňuje provozovat mikroslužby a kontejnerizované aplikace bez správy infrastruktury. V kombinaci s AZD získáte:
 
-- **Zjednodušené nasazení**: Jediný příkaz nasadí kontejnery s infrastrukturou
-- **Automatické škálování**: Škálování na nulu a škálování na základě HTTP provozu nebo událostí
-- **Integrované sítě**: Vestavěné vyhledávání služeb a rozdělování provozu
+- **Zjednodušené nasazení**: Jediný příkaz nasadí kontejnery i infrastrukturu
+- **Automatické škálování**: Škálování na nulu a škálování podle HTTP provozu nebo událostí
+- **Integrované síťování**: Vestavěné zjišťování služeb a rozdělování provozu
 - **Spravovaná identita**: Bezpečné ověřování k Azure zdrojům
-- **Optimalizace nákladů**: Platíte pouze za zdroje, které využíváte
+- **Optimalizace nákladů**: Platíte pouze za zdroje, které používáte
 
-## Předpoklady
+## Prerequisites
 
 Než začnete, ujistěte se, že máte:
 
@@ -49,16 +40,16 @@ azd auth login
 az login
 ```
 
-**Požadované Azure zdroje:**
-- Aktivní Azure předplatné
-- Oprávnění k vytvoření resource group
+**Požadované Azure prostředky:**
+- Aktivní předplatné Azure
+- Oprávnění k vytváření skupin prostředků
 - Přístup k prostředí Container Apps
 
-## Rychlé příklady
+## Quick Start Examples
 
 ### 1. Jednoduché Web API (Python Flask)
 
-Nasazení základního REST API s Azure Container Apps.
+Nasazení základního REST API do Azure Container Apps.
 
 **Příklad: Python Flask API**
 
@@ -88,18 +79,18 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Klíčové vlastnosti:**
+**Hlavní funkce:**
 - Automatické škálování od 0 do 10 replik
-- Kontroly zdraví a živosti
+- Kontroly stavu a kontroly životaschopnosti
 - Vkládání proměnných prostředí
-- Integrace Application Insights
+- Integrace s Application Insights
 
 ### 2. Node.js Express API
 
-Nasazení backendu Node.js s integrací MongoDB.
+Nasazení backendu v Node.js s integrací MongoDB.
 
 ```bash
-# Inicializovat šablonu API Node.js
+# Inicializovat šablonu Node.js API
 azd init --template todo-nodejs-mongo
 
 # Konfigurovat proměnné prostředí
@@ -109,11 +100,11 @@ azd env set COLLECTION_NAME todos
 # Nasadit
 azd up
 
-# Zobrazit logy
-azd logs api
+# Zobrazit protokoly pomocí Azure Monitoru
+azd monitor --logs
 ```
 
-**Hlavní body infrastruktury:**
+**Hlavní prvky infrastruktury:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -161,7 +152,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 Nasazení full-stack aplikace s React frontendem a API backendem.
 
 ```bash
-# Inicializovat full-stack šablonu
+# Inicializovat šablonu full-stack
 azd init --template todo-csharp-sql-swa-func
 
 # Zkontrolovat konfiguraci
@@ -174,11 +165,11 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Produkční příklady
+## Production Examples
 
-### Příklad 1: Architektura mikroslužeb
+### Příklad 1: Mikroslužbová architektura
 
-**Scénář**: E-commerce aplikace s více mikroslužbami
+**Scénář**: E‑commerce aplikace s více mikroslužbami
 
 **Struktura adresářů:**
 ```
@@ -236,11 +227,11 @@ azd env set MAX_REPLICAS 50
 # Nasadit všechny služby
 azd up
 
-# Sledovat nasazení
+# Monitorovat nasazení
 azd monitor --overview
 ```
 
-### Příklad 2: Kontejnerová aplikace s AI
+### Příklad 2: AI‑řízená Container App
 
 **Scénář**: AI chat aplikace s integrací Azure OpenAI
 
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Použijte spravovanou identitu pro bezpečný přístup
+# Použijte spravovanou identitu pro zabezpečený přístup
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -262,7 +253,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Získejte klíč OpenAI z trezoru klíčů
+    # Získejte klíč OpenAI z Key Vaultu
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -329,13 +320,13 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Příkazy nasazení:**
+**Příkazy pro nasazení:**
 ```bash
 # Nastavit prostředí
 azd init --template ai-chat-app
 azd env new dev
 
-# Konfigurovat OpenAI
+# Nakonfigurovat OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
@@ -348,7 +339,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Příklad 3: Background Worker s frontou zpráv
+### Příklad 3: Pracovník na pozadí se zpracováním fronty
 
 **Scénář**: Systém zpracování objednávek s frontou zpráv
 
@@ -390,7 +381,7 @@ def process_orders():
             # Zpracovat objednávku
             print(f"Processing order: {message.content}")
             
-            # Dokončit zprávu
+            # Kompletní zpráva
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -420,7 +411,7 @@ azd init
 # Nasadit s konfigurací fronty
 azd up
 
-# Škálovat pracovníka na základě délky fronty
+# Škálovat pracovníka podle délky fronty
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -429,18 +420,18 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Pokročilé vzory
+## Advanced Patterns
 
 ### Vzor 1: Blue-Green nasazení
 
 ```bash
-# Vytvořte novou revizi bez provozu
+# Vytvořit novou revizi bez provozu
 azd deploy api --revision-suffix blue --no-traffic
 
-# Otestujte novou revizi
+# Otestovat novou revizi
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Rozdělte provoz (20 % na modrou, 80 % na aktuální)
+# Rozdělit provoz (20 % na modrou revizi, 80 % na současnou revizi)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -467,7 +458,7 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Skript nasazení:**
+**Nasazovací skript:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Vzor 3: Nasazení do více regionů
+### Vzor 3: Víceregionální nasazení
 
 **Soubor: azure.yaml**
 ```yaml
@@ -572,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Aplikační kód s Dapr:**
+**Kód aplikace s Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -599,20 +590,20 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Osvědčené postupy
+## Best Practices
 
 ### 1. Organizace zdrojů
 
 ```bash
-# Používejte konzistentní konvence pojmenování
+# Používejte konzistentní pojmenovací konvence
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Označte zdroje pro sledování nákladů
+# Označujte zdroje pro sledování nákladů
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Osvědčené postupy zabezpečení
+### 2. Nejlepší bezpečnostní postupy
 
 ```bicep
 // Always use managed identity
@@ -671,17 +662,19 @@ services:
             concurrent: 100
 ```
 
-### 4. Monitoring a sledovatelnost
+### 4. Monitorování a observabilita
 
 ```bash
 # Povolit Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Zobrazit logy v reálném čase
-azd logs api --follow
+# Zobrazit protokoly v reálném čase
+azd monitor --logs
+# Nebo použijte Azure CLI pro Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Sledovat metriky
-azd monitor --service api
+azd monitor --live
 
 # Vytvořit upozornění
 az monitor metrics alert create \
@@ -695,16 +688,16 @@ az monitor metrics alert create \
 ### 5. Optimalizace nákladů
 
 ```bash
-# Zmenšit na nulu, když se nepoužívá
+# Škálovat na nulu, když se nepoužívá
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Použijte spot instance pro vývojová prostředí
+# Používat spot instance pro vývojová prostředí
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Nastavte upozornění na rozpočet
+# Nastavit rozpočtová upozornění
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -744,7 +737,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Referenční příkazy
+## Reference běžných příkazů
 
 ```bash
 # Inicializovat nový projekt kontejnerové aplikace
@@ -753,22 +746,23 @@ azd init --template <template-name>
 # Nasadit infrastrukturu a aplikaci
 azd up
 
-# Nasadit pouze aplikační kód (přeskočit infrastrukturu)
+# Nasadit pouze kód aplikace (vynechat infrastrukturu)
 azd deploy
 
 # Zajistit pouze infrastrukturu
 azd provision
 
-# Zobrazit nasazené zdroje
+# Zobrazit nasazené prostředky
 azd show
 
-# Streamovat logy
-azd logs <service-name> --follow
+# Sledovat protokoly pomocí azd monitoru nebo Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # Monitorovat aplikaci
 azd monitor --overview
 
-# Vyčistit zdroje
+# Vyčistit prostředky
 azd down --force --purge
 ```
 
@@ -777,21 +771,21 @@ azd down --force --purge
 ### Problém: Kontejner se nespustí
 
 ```bash
-# Zkontrolujte logy
-azd logs api --tail 100
+# Zkontrolovat protokoly pomocí Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Zobrazte události kontejneru
+# Zobrazit události kontejneru
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# Otestujte lokálně
+# Otestovat lokálně
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problém: Nelze přistupovat k endpointu kontejnerové aplikace
+### Problém: Nelze přistoupit k endpointu kontejnerové aplikace
 
 ```bash
 # Ověřte konfiguraci ingressu
@@ -800,7 +794,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Zkontrolujte, zda je povolen interní ingress
+# Zkontrolujte, zda je interní ingress povolen
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -815,7 +809,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Zvyšte kapacitu zdrojů
+# Zvyšte zdroje
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -825,7 +819,7 @@ az containerapp update \
 
 ## Další zdroje a příklady
 - [Příklad mikroslužeb](./microservices/README.md)
-- [Příklad jednoduchého Flash API](./simple-flask-api/README.md)
+- [Příklad jednoduchého Flask API](./simple-flask-api/README.md)
 - [Dokumentace Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Galerie šablon AZD](https://azure.github.io/awesome-azd/)
 - [Ukázky Container Apps](https://github.com/Azure-Samples/container-apps-samples)
@@ -835,19 +829,19 @@ az containerapp update \
 
 Chcete-li přispět novými příklady kontejnerových aplikací:
 
-1. Vytvořte nový podadresář s vaším příkladem
-2. Zahrňte kompletní soubory `azure.yaml`, `infra/` a `src/`
-3. Přidejte podrobný README s pokyny k nasazení
+1. Vytvořte nový podsložku s vaším příkladem
+2. Zahrňte kompletní `azure.yaml`, `infra/` a `src/` soubory
+3. Přidejte obsáhlý README s instrukcemi nasazení
 4. Otestujte nasazení pomocí `azd up`
 5. Odešlete pull request
 
 ---
 
-**Potřebujete pomoc?** Připojte se ke komunitě [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) pro podporu a dotazy.
+**Potřebujete pomoc?** Přidejte se do komunity [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) pro podporu a dotazy.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+Vyloučení odpovědnosti:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro zásadní informace doporučujeme využít profesionální lidský překlad. Nepřebíráme odpovědnost za jakákoli nedorozumění nebo chybné výklady vzniklé v důsledku použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

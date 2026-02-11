@@ -1,178 +1,171 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
-  "translation_date": "2025-10-16T16:04:03+00:00",
-  "source_file": "workshop/README.md",
-  "language_code": "sw"
-}
--->
 <div align="center">
-  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+  <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🚧 Warsha Inaendelea Kujengwa 🚧
+      🎯 Warsha ya AZD kwa Waendelezaji wa AI
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Warsha hii kwa sasa iko katika hatua ya maendeleo.</strong><br>
-      Yaliyomo yanaweza kuwa hayajakamilika au kubadilika. Rudi tena hivi karibuni kwa masasisho!
+      <strong>Warsha ya vitendo ya kujifunzia jinsi ya kujenga programu za AI kwa kutumia Azure Developer CLI.</strong><br>
+      Komesha moduli 7 ili kumiliki violezo vya AZD na mitiririko ya kazi ya uenezaji wa AI.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Imesasishwa Mwisho: Oktoba 2025
+        📅 Imeasisiwa: Februari 2026
       </span>
     </div>
   </div>
 </div>
 
-# Warsha ya AZD kwa Waendelezaji wa AI
+# AZD for AI Developers Workshop
 
-Karibu kwenye warsha ya vitendo ya kujifunza Azure Developer CLI (AZD) kwa kuzingatia usambazaji wa programu za AI. Warsha hii itakusaidia kupata uelewa wa vitendo wa templeti za AZD kwa hatua 3:
+Karibu kwenye warsha ya vitendo ya kujifunza Azure Developer CLI (AZD) ukiwa na mvuto wa uenezaji wa programu za AI. Warsha hii itakusaidia kupata uelewa wa vitendo wa violezo vya AZD katika hatua 3:
 
-1. **Ugunduzi** - pata templeti inayokufaa.
-1. **Usambazaji** - sambaza na hakikisha inafanya kazi.
-1. **Ubinafsishaji** - rekebisha na iteresha ili iwe yako!
+1. **Discovery** - pata kiolezo kinachokufaa.
+1. **Deployment** - weka na thibitisha kuwa kinafanya kazi
+1. **Customization** - badilisha na rudia ili kiwe chako!
 
-Katika kipindi cha warsha hii, utatambulishwa pia kwa zana kuu za waendelezaji na mtiririko wa kazi, ili kukusaidia kurahisisha safari yako ya maendeleo kutoka mwanzo hadi mwisho.
+Katika mdundo wa warsha hii, pia utatambulishwa kwa zana za msingi za watengenezaji na mitiririko ya kazi, ili kukusaidia kurahisisha safari yako ya maendeleo kutoka mwanzo hadi mwisho.
 
 <br/>
 
-## Mwongozo wa Kutumia Kivinjari
+## Browser-Based Guide
 
-Masomo ya warsha yako katika Markdown. Unaweza kuyapitia moja kwa moja kwenye GitHub - au kuzindua mwonekano wa kivinjari kama inavyoonyeshwa kwenye picha hapa chini.
+Masomo ya warsha yako yako kwa Markdown. Unaweza kuyaviga moja kwa moja kwenye GitHub - au anzisha mwonekano wa kivinjari kama ilivyoonyeshwa kwenye picha ya skrini hapo chini.
 
-![Workshop](../../../translated_images/sw/workshop.75906f133e6f8ba0.webp)
+![Warsha](../../../translated_images/sw/workshop.75906f133e6f8ba0.webp)
 
-Ili kutumia chaguo hili - fanya nakala ya hifadhi kwenye wasifu wako, na uzindue GitHub Codespaces. Mara terminal ya VS Code itakapokuwa hai, andika amri hii:
+Ili kutumia chaguo hili - tengeneza fork ya repository kwenye wasifu wako, na anzisha GitHub Codespaces. Mara terminal ya VS Code itakapokuwa hai, andika amri hii:
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-Baada ya sekunde chache, utaona kidirisha kinachojitokeza. Chagua chaguo la `Fungua kwenye kivinjari`. Mwongozo wa mtandao sasa utafunguka kwenye tabo mpya ya kivinjari. Faida za mwonekano huu:
+Ndani ya sekunde chache, utaona dirisha la pop-up. Chagua chaguo la `Fungua kwenye kivinjari`. Mwongozo wa tovuti sasa utafunguka kwenye kichupo kipya cha kivinjari. Faida kadhaa za mwonekano huu:
 
-1. **Utafutaji wa ndani** - pata maneno muhimu au masomo haraka.
-1. **Ikoni ya kunakili** - weka kipanya juu ya sehemu za msimbo ili kuona chaguo hili.
-1. **Kubadilisha mandhari** - badilisha kati ya mandhari ya giza na mwanga.
-1. **Pata msaada** - bonyeza ikoni ya Discord kwenye sehemu ya chini kujiunga!
+1. **Utafutaji uliojengwa** - pata maneno muhimu au masomo haraka.
+1. **Ikoni ya nakala** - piga kipanya juu ya vibloki vya msimbo ili kuona chaguo hili
+1. **Vibadilisho vya mandhari** - badilisha kati ya mandhari nyeusi na mwanga
+1. **Pata msaada** - bonyeza ikoni ya Discord katika sehemu ya chini ya ukurasa ili kujiunga!
 
 <br/>
 
-## Muhtasari wa Warsha
+## Workshop Overview
 
-**Muda:** Saa 3-4  
-**Kiwango:** Mwanzoni hadi Kati  
-**Mahitaji ya awali:** Uzoefu na Azure, dhana za AI, VS Code & zana za mstari wa amri.
+**Duration:** 3-4 hours  
+**Level:** Beginner to Intermediate  
+**Prerequisites:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
 
-Hii ni warsha ya vitendo ambapo unajifunza kwa kufanya. Mara utakapokamilisha mazoezi, tunapendekeza kupitia mtaala wa AZD Kwa Wanaoanza ili kuendelea na safari yako ya kujifunza kuhusu usalama na mbinu bora za uzalishaji.
+Hii ni warsha ya vitendo ambapo unajifunza kwa kufanya. Mara utakapokamilisha mazoezi, tunapendekeza ukague mtaala wa AZD For Beginners ili kuendelea na safari yako ya kujifunza kuelekea Usalama na mbinu Bora za Uzalishaji.
 
-| Muda| Moduli  | Lengo |
+| Time| Module  | Objective |
 |:---|:---|:---|
-| Dakika 15 | [Utangulizi](docs/instructions/0-Introduction.md) | Weka msingi, elewa malengo |
-| Dakika 30 | [Chagua Templeti ya AI](docs/instructions/1-Select-AI-Template.md) | Chunguza chaguo na chagua mwanzo | 
-| Dakika 30 | [Thibitisha Templeti ya AI](docs/instructions/2-Validate-AI-Template.md) | Sambaza suluhisho la msingi kwenye Azure |
-| Dakika 30 | [Chambua Templeti ya AI](docs/instructions/3-Deconstruct-AI-Template.md) | Chunguza muundo na usanidi |
-| Dakika 30 | [Sanidi Templeti ya AI](docs/instructions/4-Configure-AI-Template.md) | Washa na jaribu vipengele vilivyopo |
-| Dakika 30 | [Binafsisha Templeti ya AI](docs/instructions/5-Customize-AI-Template.md) | Rekebisha templeti kwa mahitaji yako |
-| Dakika 30 | [Ondoa Miundombinu](docs/instructions/6-Teardown-Infrastructure.md) | Safisha na achilia rasilimali |
-| Dakika 15 | [Hitimisho na Hatua Zifuatazo](docs/instructions/7-Wrap-up.md) | Rasilimali za kujifunza, changamoto ya warsha |
+| 15 mins | [Utangulizi](docs/instructions/0-Introduction.md) | Weka muktadha, elewa malengo |
+| 30 mins | [Chagua Kiolezo cha AI](docs/instructions/1-Select-AI-Template.md) | Chunguza chaguzi na chagua mwanzo | 
+| 30 mins | [Thibitisha Kiolezo cha AI](docs/instructions/2-Validate-AI-Template.md) | Weza suluhisho la msingi kwenye Azure |
+| 30 mins | [Changanua Kiolezo cha AI](docs/instructions/3-Deconstruct-AI-Template.md) | Chunguza muundo na usanidi |
+| 30 mins | [Sanidi Kiolezo cha AI](docs/instructions/4-Configure-AI-Template.md) | Washa na ujaribu vipengele vinavyopatikana |
+| 30 mins | [Binafsisha Kiolezo cha AI](docs/instructions/5-Customize-AI-Template.md) | Rekebisha kiolezo kwa mahitaji yako |
+| 30 mins | [Ondoa Miundombinu](docs/instructions/6-Teardown-Infrastructure.md) | Safisha na toa rasilimali |
+| 15 mins | [Hitimisho & Hatua Zifuatazo](docs/instructions/7-Wrap-up.md) | Rasilimali za kujifunza, Changamoto ya Warsha |
 
 <br/>
 
-## Unachojifunza
+## What You'll Learn
 
-Fikiria Templeti ya AZD kama uwanja wa kujifunza wa kuchunguza uwezo mbalimbali na zana za maendeleo kutoka mwanzo hadi mwisho kwenye Azure AI Foundry. Mwisho wa warsha hii, unapaswa kuwa na uelewa wa kiakili wa zana na dhana mbalimbali katika muktadha huu.
+Fikiria Kiolezo cha AZD kama uwanja wa kujifunzia ili kuchunguza uwezo na zana mbalimbali kwa ajili ya maendeleo kutoka mwanzo hadi mwisho kwenye Microsoft Foundry. Mwishoni mwa warsha hii, unapaswa kuwa na hisia ya kibinafsi ya zana na dhana mbalimbali katika muktadha huu.
 
-| Dhana  | Lengo |
+| Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | Elewa amri za zana na mtiririko wa kazi |
-| **Templeti za AZD**| Elewa muundo wa mradi na usanidi |
-| **Wakala wa AI wa Azure**| Tengeneza & sambaza mradi wa Azure AI Foundry  |
-| **Utafutaji wa AI wa Azure**| Washa uhandisi wa muktadha na mawakala |
-| **Ufuatiliaji**| Chunguza ufuatiliaji, uchunguzi na tathmini |
-| **Upimaji wa Usalama**| Chunguza majaribio ya kiusalama na suluhisho |
+| **Azure Developer CLI** | Elewa amri za zana na mitiririko ya kazi|
+| **AZD Templates**| Elewa muundo wa mradi na usanidi|
+| **Azure AI Agent**| Tayarisha na weka mradi wa Microsoft Foundry  |
+| **Azure AI Search**| Wezesha uhandisi wa muktadha kwa kutumia maajenti |
+| **Observability**| Chunguza ufuatiliaji, uangalizi na tathmini |
+| **Red Teaming**| Chunguza majaribio ya kuingiliana na mbinu za kuzuia |
 
 <br/>
 
-## Muundo wa Warsha
+## Workshop Structure
 
-Warsha imeundwa kukuchukua kwenye safari kutoka ugunduzi wa templeti, hadi usambazaji, uchambuzi, na ubinafsishaji - kwa kutumia templeti rasmi ya kuanza [Kuanza na Mawakala wa AI](https://github.com/Azure-Samples/get-started-with-ai-agents) kama msingi.
+Warsha imepangwa kukuchukua kwenye safari kutoka kugundua kiolezo, hadi uenezaji, uchambuzi, na ubinafsishaji - ukitumia kiolezo rasmi cha kuanzia [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) kama msingi.
 
-### [Moduli ya 1: Chagua Templeti ya AI](docs/instructions/1-Select-AI-Template.md) (Dakika 30)
+### [Module 1: Select AI Template](docs/instructions/1-Select-AI-Template.md) (30 mins)
 
-- Templeti za AI ni nini?
-- Ninaweza kupata wapi Templeti za AI?
-- Ninawezaje kuanza kujenga Mawakala wa AI?
-- **Maabara**: Mwanzo wa haraka na GitHub Codespaces
+- Je, violezo vya AI ni nini?
+- Ninatoka wapi kupata Violezo vya AI?
+- Ninawezaje kuanza kujenga Maajenti ya AI?
+- **Maabara**: Mwanzoni kwa GitHub Codespaces
 
-### [Moduli ya 2: Thibitisha Templeti ya AI](docs/instructions/2-Validate-AI-Template.md) (Dakika 30)
+### [Module 2: Validate AI Template](docs/instructions/2-Validate-AI-Template.md) (30 mins)
 
-- Muundo wa Templeti ya AI ni nini?
-- Mtiririko wa Kazi wa Maendeleo ya AZD ni nini?
+- Ni usanifu gani wa Kiolezo cha AI?
+- Ni mtiririko gani wa Maendeleo wa AZD?
 - Ninawezaje kupata msaada na Maendeleo ya AZD?
-- **Maabara**: Sambaza & Thibitisha templeti ya Mawakala wa AI
+- **Maabara**: Weka & Thibitisha kiolezo cha Maajenti ya AI
 
-### [Moduli ya 3: Chambua Templeti ya AI](docs/instructions/3-Deconstruct-AI-Template.md) (Dakika 30)
+### [Module 3: Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
 
 - Chunguza mazingira yako katika `.azure/` 
 - Chunguza usanidi wa rasilimali zako katika `infra/` 
-- Chunguza usanidi wa AZD katika `azure.yaml`s
-- **Maabara**: Rekebisha Vigezo vya Mazingira & Sambaza tena
+- Chunguza usanidi wako wa AZD katika `azure.yaml`s
+- **Maabara**: Badilisha Vigezo vya Mazingira na Uweke tena
 
-### [Moduli ya 4: Sanidi Templeti ya AI](docs/instructions/4-Configure-AI-Template.md) (Dakika 30)
-- Chunguza: Uzalishaji wa Urejeleaji wa Maudhui
-- Chunguza: Tathmini ya Mawakala & Upimaji wa Usalama
-- Chunguza: Ufuatiliaji & Uchunguzi
-- **Maabara**: Chunguza Wakala wa AI + Ufuatiliaji 
+### [Module 4: Configure AI Template](docs/instructions/4-Configure-AI-Template.md) (30 mins)
+- Chunguza: Retrieval Augmented Generation
+- Chunguza: Tathmini ya Maajenti & Red Teaming
+- Chunguza: Ufuatiliaji & Uangalizi
+- **Maabara**: Chunguza Maajenti ya AI + Ufuatiliaji 
 
-### [Moduli ya 5: Binafsisha Templeti ya AI](docs/instructions/5-Customize-AI-Template.md) (Dakika 30)
-- Eleza: PRD na Mahitaji ya Hali
+### [Module 5: Customize AI Template](docs/instructions/5-Customize-AI-Template.md) (30 mins)
+- Eleza: PRD na Mahitaji ya Senario
 - Sanidi: Vigezo vya Mazingira kwa AZD
-- Tekeleza: Vifungo vya Mzunguko wa Maisha kwa kazi za ziada
-- **Maabara**: Binafsisha templeti kwa hali yangu
+- Tekeleza: Lifecycle Hooks kwa kazi zilizoongezwa
+- **Maabara**: Binafsisha kiolezo kwa senario yangu
 
-### [Moduli ya 6: Ondoa Miundombinu](docs/instructions/6-Teardown-Infrastructure.md) (Dakika 30)
-- Rudia: Templeti za AZD ni nini?
+### [Module 6: Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
+- Rudia: Je, violezo vya AZD ni nini?
 - Rudia: Kwa nini utumie Azure Developer CLI?
-- Hatua Zifuatazo: Jaribu templeti tofauti!
+- Hatua Zifuatazo: Jaribu kiolezo tofauti!
 - **Maabara**: Ondoa miundombinu & safisha
 
 <br/>
 
-## Changamoto ya Warsha
+## Workshop Challenge
 
-Unataka kujipima zaidi? Hapa kuna mapendekezo ya miradi - au shiriki mawazo yako nasi!!
+Unataka kujichochea kufanya zaidi? Hapa kuna mapendekezo ya miradi - au shiriki mawazo yako nasi!!
 
-| Mradi | Maelezo |
+| Project | Description |
 |:---|:---|
-|1. **Chambua Templeti ya AI Ngumu** | Tumia mtiririko wa kazi na zana tulizotaja na uone kama unaweza kusambaza, kuthibitisha, na kubinafsisha templeti tofauti ya suluhisho la AI. _Umejifunza nini?_|
-|2. **Binafsisha Kwa Hali Yako**  | Jaribu kuandika PRD (Hati ya Mahitaji ya Bidhaa) kwa hali tofauti. Kisha tumia GitHub Copilot kwenye hifadhi ya templeti yako katika Modeli ya Wakala - na uiombe itengeneze mtiririko wa kazi wa ubinafsishaji kwa ajili yako. _Umejifunza nini? Unawezaje kuboresha mapendekezo haya?_|
+|1. **Changanua Kiolezo Kinachojumuisha** | Tumia mtiririko wa kazi na zana tulizozieleza ukaone kama unaweza kueneza, kuthibitisha, na kubinafsisha kiolezo tofauti cha suluhisho la AI. _Ulipata nini?_|
+|2. **Binafsisha Kwa Senario Yako**  | Jaribu kuandika PRD (Product Requirements Document) kwa senario tofauti. Kisha tumia GitHub Copilot katika repo ya kiolezo chako katika Agent Model - na muulize uundae mtiririko wa kazi wa ubinafsishaji kwako. _Ulipata nini? Unaweza kuboresha vipi mapendekezo haya?_|
 | | |
 
-## Una maoni?
+## Have feedback?
 
-1. Tuma suala kwenye hifadhi hii - weka alama `Workshop` kwa urahisi.
-1. Jiunge na Discord ya Azure AI Foundry - ungana na wenzako!
+1. Tuma issue kwenye repo hii - uitag `Workshop` kwa urahisi.
+1. Jiunge na Microsoft Foundry Discord - ungana na wenzako!
 
 
 | | | 
 |:---|:---|
-| **📚 Nyumbani kwa Kozi**| [AZD Kwa Wanaoanza](../README.md)|
-| **📖 Nyaraka** | [Anza na templeti za AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️Templeti za AI** | [Templeti za Azure AI Foundry](https://ai.azure.com/templates) |
-|**🚀 Hatua Zifuatazo** | [Chukua Changamoto](../../../workshop) |
+| **📚 Nyumba ya Kozi**| [AZD Kwa Waanzilishi](../README.md)|
+| **📖 Nyaraka** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️Violezo vya AI** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 Hatua Zifuatazo** | [Anza Warsha](../../../workshop) |
 | | |
 
 <br/>
 
 ---
 
-**Iliyotangulia:** [Mwongozo wa Kutatua AI](../docs/troubleshooting/ai-troubleshooting.md) | **Inayofuata:** Anza na [Maabara ya 1: Misingi ya AZD](../../../workshop/lab-1-azd-basics)
+**Navigation:** [Kozi Kuu](../README.md) | [Utangulizi](docs/instructions/0-Introduction.md) | [Module 1: Chagua Kiolezo](docs/instructions/1-Select-AI-Template.md)
 
-**Uko tayari kuanza kujenga programu za AI kwa AZD?**
+**Uko tayari kuanza kujenga programu za AI kwa kutumia AZD?**
 
-[Anza Maabara ya 1: Misingi ya AZD →](./lab-1-azd-basics/README.md)
+[Anza Warsha: Utangulizi →](docs/instructions/0-Introduction.md)
 
 ---
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Tamko la kutolea mbali:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuchukuliwa kuwa chanzo cha mamlaka. Kwa taarifa za muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatuwajibiki kwa maelewano au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

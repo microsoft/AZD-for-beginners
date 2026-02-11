@@ -1,48 +1,39 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-23T12:31:06+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "hu"
-}
--->
-# Mikroszolgáltatások architektúra - Konténeralkalmazás példa
+# Mikroszolgáltatások Architektúrája – Container App Példa
 
-⏱️ **Becsült idő**: 25-35 perc | 💰 **Becsült költség**: ~50-100 USD/hó | ⭐ **Nehézségi szint**: Haladó
+⏱️ **Becsült idő**: 25-35 perc | 💰 **Becsült költség**: kb. 50-100 USD/hónap | ⭐ **Bonyolultság**: Haladó
 
 **📚 Tanulási útvonal:**
-- ← Előző: [Egyszerű Flask API](../../../../examples/container-app/simple-flask-api) - Alapvető egykonténeres megoldások
-- 🎯 **Itt tartasz**: Mikroszolgáltatások architektúra (2-szolgáltatásos alap)
-- → Következő: [AI integráció](../../../../docs/ai-foundry) - Intelligencia hozzáadása a szolgáltatásokhoz
-- 🏠 [Tanfolyam kezdőlapja](../../README.md)
+- ← Előző: [Egyszerű Flask API](../../../../examples/container-app/simple-flask-api) – Egyszerű konténer alapok
+- 🎯 **Ön itt tart**: Mikroszolgáltatások architektúrája (2-szolgáltatásos alap)
+- → Következő: [AI Integráció](../../../../docs/ai-foundry) – Intelligencia hozzáadása szolgáltatásaihoz
+- 🏠 [Tanfolyam kezdőlap](../../README.md)
 
 ---
 
-Egy **egyszerűsített, de működőképes** mikroszolgáltatási architektúra, amely az Azure Container Apps segítségével kerül telepítésre az AZD CLI használatával. Ez a példa bemutatja a szolgáltatások közötti kommunikációt, a konténer-orkesztációt és a monitorozást egy gyakorlati, 2 szolgáltatásos beállítással.
+Egy **egyszerűsített, de működőképes** mikroszolgáltatás architektúra, amely AZD CLI használatával van telepítve Azure Container Apps környezetbe. Ez a példa bemutatja a szolgáltatás-szolgáltatás közti kommunikációt, a konténer-orchestrationt és a monitorozást egy gyakorlati 2-szolgáltatásos felállással.
 
-> **📚 Tanulási megközelítés**: Ez a példa egy minimális, 2 szolgáltatásos architektúrával indul (API Gateway + Backend Service), amelyet ténylegesen telepíthetsz és tanulhatsz belőle. Miután elsajátítottad ezt az alapot, útmutatást nyújtunk a teljes mikroszolgáltatási ökoszisztéma kibővítéséhez.
+> **📚 Tanítási megközelítés**: Ez a példa egy minimális 2-szolgáltatásos architektúrával (API Gateway + Backend Service) indul, amelyet ténylegesen telepíthet és tanulhat belőle. Az alapok elsajátítása után útmutatást adunk a teljes mikroszolgáltatás ökoszisztéma bővítéséhez.
 
-## Amit megtanulsz
+## Amit megtanul
 
-E példa elvégzésével:
-- Több konténert telepítesz az Azure Container Apps-re
-- Megvalósítod a szolgáltatások közötti kommunikációt belső hálózaton keresztül
-- Konfigurálod a környezetalapú skálázást és az állapotellenőrzéseket
-- Monitorozod az elosztott alkalmazásokat az Application Insights segítségével
-- Megérted a mikroszolgáltatások telepítési mintáit és legjobb gyakorlatait
-- Megtanulod az egyszerűtől a bonyolultabb architektúrákig történő fokozatos bővítést
+A példa elvégzése után:
+- Több konténert telepít az Azure Container Apps-re
+- Megvalósítja a szolgáltatások közti kommunikációt belső hálózaton keresztül
+- Konfigurál környezet alapú skálázást és egészségellenőrzéseket
+- Monitorozza az elosztott alkalmazásokat az Application Insights segítségével
+- Megérti a mikroszolgáltatás telepítési mintákat és bevált gyakorlatokat
+- Megtanulja, hogyan bővíthet fokozatosan egyszerűtől a bonyolult architektúrákig
 
 ## Architektúra
 
-### 1. fázis: Amit építünk (ebben a példában szerepel)
+### 1. fázis: Amit építünk (Ez a példa tartalmazza)
 
 ```mermaid
 graph TB
     Internet[Internet/Felhasználó]
-    Gateway[API Gateway<br/>Node.js Konténer<br/>Port 8080]
-    Product[Termék Szolgáltatás<br/>Python Konténer<br/>Port 8000]
-    AppInsights[Alkalmazás Insights<br/>Monitorozás & Naplók]
+    Gateway[API Átjáró<br/>Node.js Konténer<br/>8080-as Port]
+    Product[Termék Szolgáltatás<br/>Python Konténer<br/>8000-es Port]
+    AppInsights[Alkalmazás Elemzések<br/>Figyelés & Naplók]
     
     Internet -->|HTTPS| Gateway
     Gateway -->|HTTP Belső| Product
@@ -56,36 +47,36 @@ graph TB
 ```
 **Komponens részletek:**
 
-| Komponens | Cél | Hozzáférés | Erőforrások |
-|-----------|-----|------------|-------------|
-| **API Gateway** | Külső kérések továbbítása a háttérszolgáltatásokhoz | Nyilvános (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replikáció |
-| **Product Service** | Termékkatalógus kezelése memóriában tárolt adatokkal | Csak belső | 0.5 vCPU, 1GB RAM, 1-10 replikáció |
-| **Application Insights** | Központosított naplózás és elosztott nyomkövetés | Azure Portal | 1-2 GB/hó adatbevitel |
+| Komponens | Célja | Hozzáférés | Erőforrások |
+|-----------|---------|--------|-----------|
+| **API Gateway** | Külső kéréseket továbbít a backend szolgáltatásokhoz | Nyilvános (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replika |
+| **Termék szolgáltatás** | Termékkatalógus kezelése memóriában tárolt adatokkal | Csak belső | 0.5 vCPU, 1GB RAM, 1-10 replika |
+| **Application Insights** | Központosított naplózás és elosztott követés | Azure Portal | 1-2 GB/hónap adatfeldolgozás |
 
-**Miért kezdj egyszerűen?**
+**Miért kezdjünk egyszerűen?**
 - ✅ Gyors telepítés és megértés (25-35 perc)
-- ✅ Alapvető mikroszolgáltatási minták megismerése bonyolultság nélkül
-- ✅ Működő kód, amelyet módosíthatsz és kísérletezhetsz vele
-- ✅ Alacsonyabb tanulási költség (~50-100 USD/hó vs 300-1400 USD/hó)
-- ✅ Magabiztosság megszerzése adatbázisok és üzenetküldő sorok hozzáadása előtt
+- ✅ Alap mikroszolgáltatás minták tanulása bonyolultság nélkül
+- ✅ Működő kód, amit módosíthat és tesztelhet
+- ✅ Alacsonyabb költség a tanuláshoz (~50-100 USD/hónap a 300-1400 USD/hónap helyett)
+- ✅ Magabiztosság építése mielőtt adatbázisokat és üzenetsorokat adna hozzá
 
-**Analógia**: Gondolj erre úgy, mint az autóvezetés tanulására. Egy üres parkolóval kezded (2 szolgáltatás), elsajátítod az alapokat, majd haladsz a városi forgalom felé (5+ szolgáltatás adatbázisokkal).
+**Példa**: Olyan, mintha vezetni tanulna. Egy üres parkolóval kezdi (2 szolgáltatás), megtanulja az alapokat, majd továbblép a városi forgalomba (5+ szolgáltatás adatbázisokkal).
 
-### 2. fázis: Jövőbeli bővítés (referencia-architektúra)
+### 2. fázis: Jövőbeli bővítés (Referencia architektúra)
 
-Miután elsajátítottad a 2-szolgáltatásos architektúrát, bővítheted:
+Ha már elsajátította a 2-szolgáltatásos architektúrát, bővíthet a következőkre:
 
 ```mermaid
 graph TB
     User[Felhasználó]
     Gateway[API Gateway<br/>✅ Tartalmazva]
     Product[Termék Szolgáltatás<br/>✅ Tartalmazva]
-    Order[Rendelés Szolgáltatás<br/>🔜 Következőként hozzáadni]
-    UserSvc[Felhasználói Szolgáltatás<br/>🔜 Következőként hozzáadni]
-    Notify[Értesítési Szolgáltatás<br/>🔜 Utolsóként hozzáadni]
+    Order[Rendelés Szolgáltatás<br/>🔜 Következőként hozzáadva]
+    UserSvc[Felhasználó Szolgáltatás<br/>🔜 Következőként hozzáadva]
+    Notify[Értesítési Szolgáltatás<br/>🔜 Utolsóként hozzáadva]
     
     CosmosDB[(Cosmos DB<br/>🔜 Termék Adatok)]
-    AzureSQL[(Azure SQL<br/>🔜 Rendelési Adatok)]
+    AzureSQL[(Azure SQL<br/>🔜 Rendelés Adatok)]
     ServiceBus[Azure Service Bus<br/>🔜 Aszinkron Események]
     AppInsights[Application Insights<br/>✅ Tartalmazva]
     
@@ -114,80 +105,80 @@ graph TB
     style UserSvc fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
     style Notify fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
 ```
-Lásd a "Bővítési útmutató" szekciót a végén a lépésről lépésre történő útmutatásért.
+Lásd a "Bővítési útmutató" részt a végén lépésről lépésre.
 
 ## Tartalmazott funkciók
 
-✅ **Szolgáltatásfelfedezés**: Automatikus DNS-alapú felfedezés a konténerek között  
-✅ **Terheléselosztás**: Beépített terheléselosztás a replikációk között  
-✅ **Automatikus skálázás**: Független skálázás szolgáltatásonként a HTTP kérések alapján  
-✅ **Állapotfigyelés**: Liveness és readiness probe-ok mindkét szolgáltatáshoz  
-✅ **Elosztott naplózás**: Központosított naplózás az Application Insights segítségével  
-✅ **Belső hálózat**: Biztonságos szolgáltatás-szolgáltatás közötti kommunikáció  
-✅ **Konténer-orkesztáció**: Automatikus telepítés és skálázás  
-✅ **Zéró leállási idő frissítések**: Rolling frissítések verziókezeléssel  
+✅ **Szolgáltatás felfedezés**: Automatikus DNS-alapú felfedezés konténerek között  
+✅ **Terheléselosztás**: Beépített terheléselosztás replikák között  
+✅ **Automatikus skálázás**: Szolgáltatásonkénti, HTTP kérések alapján  
+✅ **Egészség monitorozás**: Liveness és readiness ellenőrzések mindkét szolgáltatáshoz  
+✅ **Elosztott naplózás**: Központosított naplózás Application Insights segítségével  
+✅ **Belső hálózat**: Biztonságos szolgáltatás-szolgáltatás közti kommunikáció  
+✅ **Konténer orchestráció**: Automatikus telepítés és skálázás  
+✅ **Zéró leállásos frissítések**: Rolling update verziókezeléssel  
 
 ## Előfeltételek
 
 ### Szükséges eszközök
 
-Mielőtt elkezdenéd, ellenőrizd, hogy ezek az eszközök telepítve vannak:
+A kezdés előtt ellenőrizze, hogy ezek az eszközök telepítve vannak:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (1.0.0 vagy újabb verzió)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (1.0.0-s vagy újabb verzió)
    ```bash
    azd version
-   # Várt kimenet: azd verzió 1.0.0 vagy magasabb
+   # Várt kimenet: azd verzió 1.0.0 vagy újabb
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (2.50.0 vagy újabb verzió)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (2.50.0 vagy magasabb verzió)
    ```bash
    az --version
-   # Várt kimenet: azure-cli 2.50.0 vagy magasabb
+   # Várt kimenet: azure-cli 2.50.0 vagy újabb
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (helyi fejlesztéshez/teszteléshez - opcionális)
+3. **[Docker](https://www.docker.com/get-started)** (helyi fejlesztés/teszteléshez – opcionális)
    ```bash
    docker --version
-   # Várható kimenet: Docker verzió 20.10 vagy magasabb
+   # Várt kimenet: Docker verzió 20.10 vagy újabb
    ```
 
-### Ellenőrizd a beállításaidat
+### Beállítás ellenőrzése
 
-Futtasd ezeket a parancsokat, hogy megbizonyosodj arról, hogy minden rendben van:
+Futtassa ezeket a parancsokat a készenlét megerősítéséhez:
 
 ```bash
-# Ellenőrizze az Azure Developer CLI-t
+# Azure Developer CLI ellenőrzése
 azd version
-# ✅ Várható: azd verzió 1.0.0 vagy magasabb
+# ✅ Várt eredmény: azd verzió 1.0.0 vagy magasabb
 
-# Ellenőrizze az Azure CLI-t
+# Azure CLI ellenőrzése
 az --version
-# ✅ Várható: azure-cli 2.50.0 vagy magasabb
+# ✅ Várt eredmény: azure-cli 2.50.0 vagy magasabb
 
-# Ellenőrizze a Dockert (opcionális)
+# Docker ellenőrzése (opcionális)
 docker --version
-# ✅ Várható: Docker verzió 20.10 vagy magasabb
+# ✅ Várt eredmény: Docker verzió 20.10 vagy magasabb
 ```
 
-**Siker kritérium**: Minden parancs verziószámot ad vissza, amely megfelel vagy meghaladja a minimális követelményeket.
+**Siker kritérium**: Minden parancs a minimális verziószámot eléri vagy meghaladja.
 
 ### Azure követelmények
 
-- Aktív **Azure előfizetés** ([hozz létre ingyenes fiókot](https://azure.microsoft.com/free/))
-- Jogosultság az erőforrások létrehozására az előfizetésedben
-- **Hozzájáruló** szerepkör az előfizetésen vagy erőforráscsoporton
+- Aktív **Azure előfizetés** ([ingyenes fiók létrehozása](https://azure.microsoft.com/free/))
+- Jogosultság erőforrás létrehozására az előfizetésben
+- **Contributor** szerepkör az előfizetésen vagy az erőforráscsoporton belül
 
 ### Tudás előfeltételek
 
-Ez egy **haladó szintű** példa. Szükséges:
-- Az [Egyszerű Flask API példa](../../../../examples/container-app/simple-flask-api) elvégzése
-- Alapvető ismeretek a mikroszolgáltatási architektúráról
-- REST API-k és HTTP ismerete
-- Konténer koncepciók megértése
+Ez egy **haladó szintű** példa. Ajánlott:
+- Elvégezte a [Egyszerű Flask API példát](../../../../examples/container-app/simple-flask-api) 
+- Alap mikroszolgáltatás architektúra ismeretekkel rendelkezik
+- Ismeri a REST API-kat és a HTTP-t
+- Érti a konténer fogalmakat
 
-**Új vagy a Container Apps világában?** Kezdd az [Egyszerű Flask API példával](../../../../examples/container-app/simple-flask-api), hogy megtanuld az alapokat.
+**Új a Container Apps-ben?** Kezdje az [Egyszerű Flask API példával](../../../../examples/container-app/simple-flask-api), hogy elsajátítsa az alapokat.
 
-## Gyors kezdés (lépésről lépésre)
+## Gyors indítás (lépésről lépésre)
 
 ### 1. lépés: Klónozás és navigáció
 
@@ -196,21 +187,21 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/microservices
 ```
 
-**✓ Siker ellenőrzés**: Ellenőrizd, hogy látod az `azure.yaml` fájlt:
+**✓ Siker ellenőrzés**: Ellenőrizze, hogy látható az `azure.yaml`:
 ```bash
 ls
-# Várható: README.md, azure.yaml, infra/, src/
+# Várt: README.md, azure.yaml, infra/, src/
 ```
 
-### 2. lépés: Hitelesítés az Azure-ban
+### 2. lépés: Azure-ba való hitelesítés
 
 ```bash
 azd auth login
 ```
 
-Ez megnyitja a böngészőt az Azure hitelesítéshez. Jelentkezz be az Azure hitelesítő adataiddal.
+Megnyílik a böngésző az Azure hitelesítéshez. Jelentkezzen be Azure fiókjával.
 
-**✓ Siker ellenőrzés**: Ezt kell látnod:
+**✓ Siker ellenőrzés**: Meg kell jelennie:
 ```
 Logged in to Azure.
 ```
@@ -221,12 +212,12 @@ Logged in to Azure.
 azd init
 ```
 
-**Megjelenő kérdések**:
-- **Környezet neve**: Adj meg egy rövid nevet (pl. `microservices-dev`)
-- **Azure előfizetés**: Válaszd ki az előfizetésed
-- **Azure helyszín**: Válassz egy régiót (pl. `eastus`, `westeurope`)
+**Kérdések, amire választ ad:**
+- **Környezet neve**: Adjon meg egy rövid nevet (pl. `microservices-dev`)
+- **Azure előfizetés**: Válassza ki az előfizetését
+- **Azure régió**: Válasszon régiót (pl. `eastus`, `westeurope`)
 
-**✓ Siker ellenőrzés**: Ezt kell látnod:
+**✓ Siker ellenőrzés**: Meg kell jelennie:
 ```
 SUCCESS: New project initialized!
 ```
@@ -237,29 +228,29 @@ SUCCESS: New project initialized!
 azd up
 ```
 
-**Mi történik** (8-12 percet vesz igénybe):
+**Mi történik** (8-12 perc):
 
 ```mermaid
 graph LR
-    A[azd up] --> B[Hozz létre erőforráscsoportot]
-    B --> C[Telepítsd a Container Registry-t]
-    C --> D[Telepítsd a Log Analytics-et]
-    D --> E[Telepítsd az App Insights-ot]
-    E --> F[Hozz létre konténerkörnyezetet]
-    F --> G[Építsd meg az API Gateway képet]
-    F --> H[Építsd meg a Product Service képet]
-    G --> I[Töltsd fel a Registry-be]
+    A[azd up] --> B[Erőforráscsoport létrehozása]
+    B --> C[Konténerregiszter telepítése]
+    C --> D[Log Analytics telepítése]
+    D --> E[App Insights telepítése]
+    E --> F[Konténer környezet létrehozása]
+    F --> G[API Gateway kép építése]
+    F --> H[Termék szolgáltatás kép építése]
+    G --> I[Push a regiszterbe]
     H --> I
-    I --> J[Telepítsd az API Gateway-t]
-    I --> K[Telepítsd a Product Service-t]
-    J --> L[Konfiguráld az Ingress-t és az egészségügyi ellenőrzéseket]
+    I --> J[API Gateway telepítése]
+    I --> K[Termék szolgáltatás telepítése]
+    J --> L[Ingress és állapotellenőrzések konfigurálása]
     K --> L
     L --> M[Telepítés kész ✓]
     
     style A fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style M fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**✓ Siker ellenőrzés**: Ezt kell látnod:
+**✓ Siker ellenőrzés**: Meg kell jelennie:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -270,14 +261,14 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ### 5. lépés: A telepítés tesztelése
 
 ```bash
-# Szerezd meg a gateway végpontot
+# Szerezze be a gateway végpontját
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Teszteld az API Gateway állapotát
+# Tesztelje az API Gateway állapotát
 curl $GATEWAY_URL/health
 ```
 
-**✅ Várható kimenet:**
+**✅ Várt kimenet:**
 ```json
 {
   "status": "healthy",
@@ -286,13 +277,13 @@ curl $GATEWAY_URL/health
 }
 ```
 
-**Teszteld a termékszolgáltatást a gateway-en keresztül**:
+**Tesztelje a termék szolgáltatást a gateway-n keresztül**:
 ```bash
 # Termékek listázása
 curl $GATEWAY_URL/api/products
 ```
 
-**✅ Várható kimenet:**
+**✅ Várt kimenet:**
 ```json
 [
   {"id":1,"name":"Laptop","price":999.99,"stock":50},
@@ -301,15 +292,15 @@ curl $GATEWAY_URL/api/products
 ]
 ```
 
-**✓ Siker ellenőrzés**: Mindkét végpont JSON adatot ad vissza hibák nélkül.
+**✓ Siker ellenőrzés**: Mindkét végpont JSON adatot ad hibamentesen.
 
 ---
 
-**🎉 Gratulálunk!** Sikeresen telepítettél egy mikroszolgáltatási architektúrát az Azure-ra!
+**🎉 Gratulálunk!** Sikeresen telepített egy mikroszolgáltatás architektúrát az Azure-ra!
 
-## Projektstruktúra
+## Projekt struktúra
 
-Minden implementációs fájl mellékelve van—ez egy teljes, működő példa:
+Minden megvalósítási fájl benne van — ez egy teljes, működő példa:
 
 ```
 microservices/
@@ -339,48 +330,48 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Mit csinál az egyes komponens:**
+**Mit csinál mindegyik komponens:**
 
-**Infrastruktúra (infra/):**
-- `main.bicep`: Az összes Azure erőforrás és függőségeik összehangolása
-- `core/container-apps-environment.bicep`: A Container Apps környezet és az Azure Container Registry létrehozása
-- `core/monitor.bicep`: Az Application Insights beállítása az elosztott naplózáshoz
-- `app/*.bicep`: Egyedi konténeralkalmazás-definíciók skálázással és állapotellenőrzésekkel
+**Infrastruktúra (infra/)**:
+- `main.bicep`: Azure erőforrásokat és azok függőségeit irányítja
+- `core/container-apps-environment.bicep`: Létrehozza a Container Apps környezetet és az Azure Container Registry-t
+- `core/monitor.bicep`: Beállítja az Application Insights-ot elosztott naplózáshoz
+- `app/*.bicep`: Egyedi konténer app definíciók skálázással és egészségellenőrzéssel
 
-**API Gateway (src/api-gateway/):**
-- Nyilvános szolgáltatás, amely a kéréseket a háttérszolgáltatásokhoz irányítja
-- Naplózást, hibakezelést és kérés-továbbítást valósít meg
-- Bemutatja a szolgáltatás-szolgáltatás közötti HTTP kommunikációt
+**API Gateway (src/api-gateway/)**:
+- Nyilvános szolgáltatás, amely a kéréseket továbbítja a backend szolgáltatásokhoz
+- Naplózást, hibakezelést és kérés továbbítást valósít meg
+- Bemutatja a szolgáltatás-szolgáltatás közti HTTP kommunikációt
 
-**Product Service (src/product-service/):**
-- Belső szolgáltatás termékkatalógussal (egyszerűség kedvéért memóriában tárolt adatokkal)
-- REST API állapotellenőrzésekkel
-- Példa a háttér mikroszolgáltatási mintára
+**Termék szolgáltatás (src/product-service/)**:
+- Belső szolgáltatás termékkatalógussal (egyszerű memóriában tárolt adat)
+- REST API egészségellenőrzésekkel
+- Példa backend mikroszolgáltatásra
 
 ## Szolgáltatások áttekintése
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Hozzáférés**: Nyilvános (külső elérés)  
-**Cél**: A bejövő kérések továbbítása a megfelelő háttérszolgáltatásokhoz  
+**Hozzáférés**: Nyilvános (külső ingress)  
+**Cél**: Bejövő kérések irányítása a backend szolgáltatásokhoz  
 
 **Végpontok**:
-- `GET /` - Szolgáltatás információ
-- `GET /health` - Állapotellenőrző végpont
-- `GET /api/products` - Továbbítás a termékszolgáltatáshoz (összes listázása)
-- `GET /api/products/:id` - Továbbítás a termékszolgáltatáshoz (azonosító alapján)
+- `GET /` - Szolgáltatás információk
+- `GET /health` - Egészségellenőrző végpont
+- `GET /api/products` - Továbbítás a termék szolgáltatáshoz (összes termék listázása)
+- `GET /api/products/:id` - Továbbítás a termék szolgáltatáshoz (ID alapján lekérdezés)
 
-**Főbb jellemzők**:
-- Kérésirányítás axios-szal
+**Főbb funkciók**:
+- Kérés irányítás axios-szal
 - Központosított naplózás
-- Hibakezelés és időtúllépés kezelése
-- Szolgáltatásfelfedezés környezeti változókon keresztül
+- Hiba kezelés és időkorlát menedzsment
+- Szolgáltatás felfedezés környezeti változókon keresztül
 - Application Insights integráció
 
 **Kódrészlet** (`src/api-gateway/app.js`):
 ```javascript
-// Belső szolgáltatás kommunikáció
+// Belső szolgáltatáskommunikáció
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`, {
     timeout: 5000
@@ -389,22 +380,22 @@ app.get('/api/products', async (req, res) => {
 });
 ```
 
-### Product Service (Python/Flask)
+### Termék szolgáltatás (Python/Flask)
 
 **Port**: 8000  
-**Hozzáférés**: Csak belső (nincs külső elérés)  
-**Cél**: Termékkatalógus kezelése memóriában tárolt adatokkal  
+**Hozzáférés**: Csak belső (nincs külső ingress)  
+**Cél**: Termékkatalógus kezelése memóriában  
 
 **Végpontok**:
-- `GET /` - Szolgáltatás információ
-- `GET /health` - Állapotellenőrző végpont
+- `GET /` - Szolgáltatás információk
+- `GET /health` - Egészségellenőrző végpont
 - `GET /products` - Összes termék listázása
-- `GET /products/<id>` - Termék lekérése azonosító alapján
+- `GET /products/<id>` - Termék lekérése ID alapján
 
-**Főbb jellemzők**:
-- RESTful API Flask-kel
-- Memóriában tárolt termékadatok (egyszerű, nincs szükség adatbázisra)
-- Állapotfigyelés probe-okkal
+**Főbb funkciók**:
+- REST API Flask-kel
+- Memóriában tárolt termék adatbázis (egyszerű, nem kell adatbázis)
+- Egészség monitorozás ellenőrzőkkel
 - Strukturált naplózás
 - Application Insights integráció
 
@@ -420,24 +411,24 @@ app.get('/api/products', async (req, res) => {
 ```
 
 **Miért csak belső?**
-A termékszolgáltatás nem nyilvános. Minden kérésnek az API Gateway-en kell keresztülmennie, amely biztosítja:
-- Biztonság: Ellenőrzött hozzáférési pont
-- Rugalmasság: A háttér megváltoztatható anélkül, hogy a klienseket érintené
-- Monitorozás: Központosított kérésnaplózás
+A termék szolgáltatás nem érhető el nyilvánosan. Minden kérés az API Gateway-n keresztül megy, ami biztosítja:
+- Biztonság: Ellenőrzött elérési pont
+- Rugalmasság: Módosítható backend kliens hatás nélkül
+- Monitorozás: Központosított kérés naplózás
 
 ## Szolgáltatások közötti kommunikáció megértése
 
-### Hogyan kommunikálnak a szolgáltatások egymással
+### Hogyan kommunikálnak egymással a szolgáltatások
 
 ```mermaid
 sequenceDiagram
-    participant User as Felhasználó
+    participant User
     participant Gateway as API Átjáró<br/>(Port 8080)
     participant Product as Termék Szolgáltatás<br/>(Port 8000)
     participant AI as Alkalmazás Elemzések
     
     User->>Gateway: GET /api/products
-    Gateway->>AI: Kérés naplózása
+    Gateway->>AI: Kérelem naplózása
     Gateway->>Product: GET /products (belső HTTP)
     Product->>AI: Lekérdezés naplózása
     Product-->>Gateway: JSON válasz [5 termék]
@@ -445,33 +436,289 @@ sequenceDiagram
     Gateway-->>User: JSON válasz [5 termék]
     
     Note over Gateway,Product: Belső DNS: http://product-service
-    Note over User,AI: Minden kommunikáció naplózva és nyomon követve
+    Note over User,AI: Minden kommunikáció naplózva és követve
 ```
-Ebben a példában az API Gateway belső HTTP hívásokkal kommunikál a Product Service-szel:
+Ebben a példában az API Gateway a Termék szolgáltatással **belső HTTP hívásokkal** kommunikál:
 
 ```javascript
-// API Gateway (src/api-gateway/app.js)
+// API átjáró (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Tegyen belső HTTP kérést
+// Belső HTTP kérés végrehajtása
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**Főbb pontok**:
+**Fő pontok**:
 
-1. **DNS-alapú felfedezés**: A Container Apps automatikusan biztosít DNS-t a belső szolgáltatásokhoz
-   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Egyszerűsítve: `http://product-service` (Container Apps ezt feloldja)
+1. **DNS-alapú felfedezés**: Container Apps automatikusan biztosít DNS-t belső szolgáltatásokhoz
+   - Termék szolgáltatás FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
+   - Egyszerűsítve: `http://product-service` (Container Apps feloldja)
 
-2. **Nincs nyilvános elérés**: A Product Service `external: false` beállítással rendelkezik a Bicep-ben
-   - Csak a Container Apps környezeten belül érhető el
-   - Az internetről nem érhető el
+2. **Nincs nyilvános elérés**: A termék szolgáltatás Bicep-ben `external: false`
+   - Csak a Container Apps környezetből érhető el
+   - Nem elérhető az internetről
 
-3. **Környezeti változók**: A szolgáltatás URL-ek telepítéskor kerülnek beállításra
-   - A Bicep átadja a belső FQDN-t a gateway-nek
-   - Nincsenek hardkódolt URL-ek az alkalmazás kódjában
+3. **Környezeti változók**: Szolgáltatás URL-ek telepítéskor injektálva
+   - Bicep átadja a belső FQDN-t a gateway-nek
+   - Nincsenek keménykódolt URL-ek az alkalmazás kódban
 
-**Analógia**: Gondolj erre úgy, mint egy irodaházra. Az API Gateway a recepció (nyilvános), a Product Service pedig egy irodahelyiség (csak belső). A látogatóknak a recepción keresztül kell eljutniuk bármelyik irodába.
+**Példa**: Olyan, mint egy irodaépület: az API Gateway a portás (nyilvános), a Termék szolgáltatás egy irodahelyiség (csak belső). A látogatóknak a portán keresztül kell bemenniük az irodába.
+
+## Telepítési lehetőségek
+
+### Teljes telepítés (ajánlott)
+
+```bash
+# Infrastruktúra és mindkét szolgáltatás telepítése
+azd up
+```
+
+Ez telepíti:
+1. Container Apps környezetet
+2. Application Insights-ot
+3. Container Registry-t
+4. API Gateway konténert
+5. Termék szolgáltatás konténert
+
+**Idő**: 8-12 perc
+
+### Egyedi szolgáltatás telepítése
+
+```bash
+# Csak egy szolgáltatás telepítése (az azd up első futtatása után)
+azd deploy api-gateway
+
+# Vagy telepítse a termék szolgáltatást
+azd deploy product-service
+```
+
+**Használat**: Ha csak egy szolgáltatásban történt kódfrissítés és azt szeretné ismét telepíteni.
+
+### Konfiguráció frissítése
+
+```bash
+# Módosítsa a skálázási paramétereket
+azd env set GATEWAY_MAX_REPLICAS 30
+
+# Telepítse újra az új konfigurációval
+azd up
+```
+
+## Konfiguráció
+
+### Skálázási beállítások
+
+Mindkét szolgáltatás HTTP-alapú autoskalálással konfigurálva a Bicep fájlokban:
+
+**API Gateway**:
+- Minimum replika: 2 (mindig legalább 2 az elérhetőség miatt)
+- Maximum replika: 20
+- Skálázási trigger: 50 párhuzamos kérés per replika
+
+**Termék szolgáltatás**:
+- Minimum replika: 1 (szükség esetén leállhat)
+- Maximum replika: 10
+- Skálázási trigger: 100 párhuzamos kérés per replika
+
+**Skálázás testreszabása** (`infra/app/*.bicep`):
+```bicep
+scale: {
+  minReplicas: 1
+  maxReplicas: 10
+  rules: [
+    {
+      name: 'http-scale-rule'
+      http: {
+        metadata: {
+          concurrentRequests: '100'  // Adjust this
+        }
+      }
+    }
+  ]
+}
+```
+
+### Erőforrás kiosztás
+
+**API Gateway**:
+- CPU: 1.0 vCPU
+- Memória: 2 GiB
+- Indoklás: Minden külső forgalmat kezeli
+
+**Termék szolgáltatás**:
+- CPU: 0.5 vCPU
+- Memória: 1 GiB
+- Indoklás: Könnyű, memóriában történő műveletek
+
+### Egészség ellenőrzések
+
+Mindkét szolgáltatás tartalmaz élő és készenléti ellenőrzéseket:
+
+```bicep
+probes: [
+  {
+    type: 'Liveness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+  }
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  }
+]
+```
+
+**Mit jelent ez?**
+- **Liveness**: Ha az ellenőrzés hibás, Container Apps újraindítja a konténert
+- **Readiness**: Ha nem kész, Container Apps nem irányít forgalmat a replikára
+
+## Monitorozás és megfigyelhetőség
+
+### Szolgáltatási naplók megtekintése
+
+```bash
+# A naplók megtekintése az azd monitor segítségével
+azd monitor --logs
+
+# Vagy használja az Azure CLI-t egyedi Container Apps-hez:
+# Naplók streamelése az API Gateway-ből
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+
+# A legfrissebb termékszolgáltatás naplók megtekintése
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+```
+
+**Várt eredmény**:
+```
+[api-gateway] API Gateway listening on port 8080
+[api-gateway] Product Service URL: http://product-service
+[api-gateway] GET /api/products 200 - 45ms
+[product-service] Retrieved 5 products
+```
+
+### Alkalmazás Insights lekérdezések
+
+Az Azure Portalban az Application Insights-ot megnyitva futtassa ezeket a lekérdezéseket:
+
+**Lassú kérések keresése**:
+```kusto
+requests
+| where timestamp > ago(1h)
+| where duration > 1000  // Requests taking >1 second
+| summarize count() by name, cloud_RoleName
+| order by count_ desc
+```
+
+**Szolgáltatás-szolgáltatás hívások követése**:
+```kusto
+dependencies
+| where timestamp > ago(1h)
+| where type == "Http"
+| project timestamp, name, target, duration, success
+| order by timestamp desc
+```
+
+**Hibaarány szolgáltatásonként**:
+```kusto
+exceptions
+| where timestamp > ago(24h)
+| summarize errorCount = count() by cloud_RoleName, type
+| order by errorCount desc
+```
+
+**Kérések mennyiségének alakulása az időben**:
+```kusto
+requests
+| where timestamp > ago(1h)
+| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
+| render timechart
+```
+
+### Monitorozó irányítópult elérése
+
+```bash
+# Alkalmazás elemzési adatok lekérése
+azd env get-values | grep APPLICATIONINSIGHTS
+
+# Azure Portal megnyitása a monitorozáshoz
+az monitor app-insights component show \
+  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
+  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
+  --query "appId" -o tsv
+```
+
+### Élő metrikák
+
+1. Navigáljon az Azure Portalban az Application Insights-hoz
+2. Kattintson az „Élő metrikák” menüpontra
+3. Láthatja a valós idejű kéréseket, hibákat és teljesítményt
+4. Tesztelje az alábbi paranccsal: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+
+## Gyakorlati feladatok
+
+### 1. Feladat: Új termék végpont hozzáadása ⭐ (Egyszerű)
+
+**Cél**: POST végpont hozzáadása az új termék létrehozásához
+
+**Kiinduló pont**: `src/product-service/main.py`
+
+**Lépések**:
+
+1. Adja hozzá ezt a végpontot a `get_product` függvény után `main.py`-ben:
+
+```python
+@app.route('/products', methods=['POST'])
+def create_product():
+    """Create a new product"""
+    data = request.get_json()
+    
+    # Kötelező mezők ellenőrzése
+    if not data or 'name' not in data or 'price' not in data:
+        return jsonify({'error': 'Missing required fields: name, price'}), 400
+    
+    new_id = max(p['id'] for p in products) + 1
+    new_product = {
+        'id': new_id,
+        'name': data['name'],
+        'description': data.get('description', ''),
+        'price': float(data['price']),
+        'stock': int(data.get('stock', 0))
+    }
+    products.append(new_product)
+    logger.info(f"Created product {new_id}")
+    return jsonify(new_product), 201
+```
+
+2. Adjon hozzá POST útvonalat az API Gateway-hez (`src/api-gateway/app.js`):
+
+```javascript
+// Add hozzá ezt a GET /api/products útvonal után
+app.post('/api/products', async (req, res) => {
+  try {
+    console.log(`Forwarding POST request to ${PRODUCT_SERVICE_URL}/products`);
+    const response = await axios.post(`${PRODUCT_SERVICE_URL}/products`, req.body, {
+      timeout: 5000
+    });
+    res.status(201).json(response.data);
+  } catch (error) {
+    console.error('Error calling product service:', error.message);
+    res.status(503).json({
+      error: 'Product service unavailable',
+      message: error.message
+    });
+  }
+});
+```
+
 3. Telepítse újra mindkét szolgáltatást:
 
 ```bash
@@ -484,13 +731,13 @@ azd deploy api-gateway
 ```bash
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Hozzon létre egy új terméket
+# Új termék létrehozása
 curl -X POST $GATEWAY_URL/api/products \
   -H "Content-Type: application/json" \
   -d '{"name":"USB Cable","price":9.99,"stock":500}'
 ```
 
-**✅ Várható kimenet:**
+**✅ Várt kimenet:**
 ```json
 {"id":6,"name":"USB Cable","description":"","price":9.99,"stock":500}
 ```
@@ -499,29 +746,29 @@ curl -X POST $GATEWAY_URL/api/products \
 
 ```bash
 curl $GATEWAY_URL/api/products
-# Most már 6 terméket kell mutatnia, beleértve az új USB kábelt.
+# Most már 6 terméket kell mutatnia, beleértve az új USB kábelt is
 ```
 
 **Siker kritériumok**:
-- ✅ A POST kérés HTTP 201-et ad vissza
+- ✅ A POST kérés HTTP 201 választ ad
 - ✅ Az új termék megjelenik a GET /api/products listában
-- ✅ A termék automatikusan növekvő ID-t kap
+- ✅ A terméknek automatikusan növekvő azonosítója van
 
 **Idő**: 10-15 perc
 
 ---
 
-### Gyakorlat 2: Autoscaling szabályok módosítása ⭐⭐ (Közepes)
+### Gyakorlat 2: Módosítsa az Autoscaling szabályokat ⭐⭐ (Közepes)
 
-**Cél**: A Product Service agresszívebb skálázása
+**Cél**: Tegye agresszívebbé a Product Service skálázását
 
-**Kiindulási pont**: `infra/app/product-service.bicep`
+**Kezdőpont**: `infra/app/product-service.bicep`
 
 **Lépések**:
 
-1. Nyissa meg a `infra/app/product-service.bicep` fájlt, és keresse meg a `scale` blokkot (kb. a 95. sor környékén)
+1. Nyissa meg az `infra/app/product-service.bicep` fájlt és keresse meg a `scale` blokkot (kb. 95. sor körül)
 
-2. Módosítsa:
+2. Változtassa meg erről:
 ```bicep
 scale: {
   minReplicas: 1
@@ -572,7 +819,7 @@ az containerapp show \
   --query "properties.template.scale" -o json
 ```
 
-**✅ Várható kimenet:**
+**✅ Várt kimenet:**
 ```json
 {
   "minReplicas": 2,
@@ -581,38 +828,38 @@ az containerapp show \
 }
 ```
 
-5. Tesztelje az autoscalinget terheléssel:
+5. Tesztelje az autoskálázást terheléssel:
 
 ```bash
-# Generáljon egyidejű kéréseket
+# Párhuzamos kérések generálása
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# Figyelje a skálázás folyamatát
-azd logs product-service --follow
-# Keresse: Container Apps skálázási események
+# Figyeld a skálázódást az Azure CLI használatával
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
+# Figyeld a Container Apps skálázódási eseményeit
 ```
 
 **Siker kritériumok**:
-- ✅ A Product Service mindig legalább 2 replikával fut
-- ✅ Terhelés alatt több mint 2 replikára skálázódik
-- ✅ Az Azure Portalon megjelennek az új skálázási szabályok
+- ✅ A Product Service mindig legalább 2 példánnyal fut
+- ✅ Terhelés alatt több mint 2 példányra skálázódik
+- ✅ Az Azure Portalon láthatóak az új skálázási szabályok
 
 **Idő**: 15-20 perc
 
 ---
 
-### Gyakorlat 3: Egyedi monitorozási lekérdezés hozzáadása ⭐⭐ (Közepes)
+### Gyakorlat 3: Egyedi monitorozó lekérdezés hozzáadása ⭐⭐ (Közepes)
 
-**Cél**: Egyedi Application Insights lekérdezés létrehozása a termék API teljesítményének nyomon követésére
+**Cél**: Hozzon létre egy egyedi Application Insights lekérdezést a termék API teljesítmény követésére
 
 **Lépések**:
 
-1. Lépjen az Application Insights-ba az Azure Portalon:
-   - Nyissa meg az Azure Portalt
-   - Keresse meg a resource groupot (rg-microservices-*)
+1. Navigáljon az Application Insights-hoz az Azure Portalon:
+   - Menjen az Azure Portalra
+   - Keresse meg az erőforráscsoportját (rg-microservices-*)
    - Kattintson az Application Insights erőforrásra
 
-2. Kattintson a bal oldali menüben a "Logs" opcióra
+2. Kattintson a bal oldali menüben a "Logs" menüpontra
 
 3. Hozza létre ezt a lekérdezést:
 
@@ -644,29 +891,29 @@ for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 
 7. Frissítse a lekérdezést az adatok megtekintéséhez
 
-**✅ Várható kimenet:**
-- Diagram, amely az időbeli kérés számát mutatja
-- Átlagos időtartam < 500 ms
+**✅ Várt kimenet:**
+- Diagram, amely mutatja a kérés-számokat időben
+- Átlagos válaszidő < 500ms
 - Sikerességi arány = 100%
 - 5 perces időintervallumok
 
 **Siker kritériumok**:
-- ✅ A lekérdezés 100+ kérést mutat
-- ✅ Sikerességi arány 100%
-- ✅ Átlagos időtartam < 500 ms
+- ✅ A lekérdezés több mint 100 kérést mutat
+- ✅ A sikerességi arány 100%
+- ✅ Átlagos válaszidő < 500ms
 - ✅ A diagram 5 perces időintervallumokat jelenít meg
 
-**Tanulási eredmény**: Megérteni, hogyan lehet szolgáltatások teljesítményét egyedi lekérdezésekkel monitorozni
+**Tanulási eredmény**: Megérti, hogyan lehet egyedi lekérdezésekkel figyelni a szolgáltatás teljesítményét
 
 **Idő**: 10-15 perc
 
 ---
 
-### Gyakorlat 4: Retry logika implementálása ⭐⭐⭐ (Haladó)
+### Gyakorlat 4: Visszakísérlési logika megvalósítása ⭐⭐⭐ (Haladó)
 
-**Cél**: Retry logika hozzáadása az API Gatewayhez, amikor a Product Service ideiglenesen nem elérhető
+**Cél**: Visszakísérlési (retry) logika hozzáadása az API Gateway-hez, ha a Product Service átmenetileg nem elérhető
 
-**Kiindulási pont**: `src/api-gateway/app.js`
+**Kezdőpont**: `src/api-gateway/app.js`
 
 **Lépések**:
 
@@ -678,16 +925,16 @@ npm install axios-retry --save
 cd ../..
 ```
 
-2. Frissítse a `src/api-gateway/app.js` fájlt (adja hozzá az axios import után):
+2. Frissítse a `src/api-gateway/app.js` fájlt (az axios import után adja hozzá):
 
 ```javascript
 const axiosRetry = require('axios-retry');
 
-// Állítsa be az újrapróbálkozási logikát
+// Konfigurálja az újrapróbálkozási logikát
 axiosRetry(axios, {
   retries: 3,
   retryDelay: (retryCount) => {
-    return retryCount * 1000; // 1s, 2s, 3s
+    return retryCount * 1000; // 1 mp, 2 mp, 3 mp
   },
   retryCondition: (error) => {
     // Újrapróbálkozás hálózati hibák vagy 5xx válaszok esetén
@@ -699,27 +946,27 @@ axiosRetry(axios, {
 console.log('Retry logic configured: 3 retries with exponential backoff');
 ```
 
-3. Telepítse újra az API Gatewayt:
+3. Telepítse újra az API Gateway-t:
 
 ```bash
 azd deploy api-gateway
 ```
 
-4. Tesztelje a retry viselkedést szolgáltatás hiba szimulálásával:
+4. Tesztelje a retry viselkedést szolgáltatáshiba szimulálásával:
 
 ```bash
-# A termék szolgáltatást skálázza 0-ra (hibát szimulál)
+# Termék szolgáltatás skálázása 0-ra (hibaszimuláció)
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --min-replicas 0 \
   --max-replicas 0
 
-# Próbáljon hozzáférni a termékekhez (3-szor fog újrapróbálkozni)
+# Próbálkozzon a termékek elérésével (3 alkalommal újrapróbálkozás)
 time curl -v $GATEWAY_URL/api/products
-# Megfigyelés: A válasz körülbelül 6 másodpercet vesz igénybe (1s + 2s + 3s újrapróbálkozások)
+# Megfigyelés: a válasz kb. 6 másodpercet vesz igénybe (1s + 2s + 3s újrapróbálkozások)
 
-# Állítsa vissza a termék szolgáltatást
+# Termék szolgáltatás visszaállítása
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -727,26 +974,26 @@ az containerapp update \
   --max-replicas 10
 ```
 
-5. Tekintse meg a retry logokat:
+5. Tekintse meg a retry naplókat:
 
 ```bash
-azd logs api-gateway --tail 50
-# Keresse meg: Újrapróbálkozási kísérlet üzeneteket
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
+# Keresd az ismételt próbálkozásról szóló üzeneteket
 ```
 
-**✅ Várható viselkedés:**
-- A kérések 3-szor próbálkoznak újra, mielőtt sikertelenek lennének
-- Minden újrapróbálkozás hosszabb ideig vár (1s, 2s, 3s)
-- Sikeres kérések a szolgáltatás újraindítása után
-- A logok mutatják az újrapróbálkozási kísérleteket
+**✅ Várt viselkedés:**
+- A kérések 3-szor próbálkoznak újra hibát megelőzően
+- Minden újrapróbálkozás hosszabb várakozási idővel (1s, 2s, 3s)
+- Sikertelen újrapróbálkozás után újrainduló szolgáltatással sikeres kérés
+- Naplók mutatják a visszakísérlési kísérleteket
 
 **Siker kritériumok**:
-- ✅ A kérések 3-szor próbálkoznak újra, mielőtt sikertelenek lennének
-- ✅ Minden újrapróbálkozás hosszabb ideig vár (exponenciális backoff)
-- ✅ Sikeres kérések a szolgáltatás újraindítása után
-- ✅ A logok mutatják az újrapróbálkozási kísérleteket
+- ✅ A kérések 3-szor próbálkoznak újra hibát megelőzően
+- ✅ Minden újrapróbálkozás egyre hosszabb várakozás (exponenciális visszavonás)
+- ✅ Sikertelen újrapróbálkozás után újrainduló szolgáltatással sikeres kérés
+- ✅ Naplók mutatják a visszakísérlések próbálkozásait
 
-**Tanulási eredmény**: Megérteni a mikroszolgáltatásokban alkalmazott reziliencia mintákat (circuit breakers, retry, timeout)
+**Tanulási eredmény**: Megérti a reziliencia mintákat mikroszolgáltatásokban (körkapcsolók, visszakísérés, időkorlátok)
 
 **Idő**: 20-25 perc
 
@@ -754,97 +1001,97 @@ azd logs api-gateway --tail 50
 
 ## Tudásellenőrző pont
 
-A példa befejezése után ellenőrizze tudását:
+A példa befejezése után ellenőrizze a tudását:
 
-### 1. Szolgáltatások közötti kommunikáció ✓
+### 1. Szolgáltatás Kommunikáció ✓
 
-Tesztelje tudását:
-- [ ] El tudja magyarázni, hogyan találja meg az API Gateway a Product Service-t? (DNS-alapú szolgáltatás felfedezés)
-- [ ] Mi történik, ha a Product Service nem elérhető? (Gateway 503 hibát ad vissza)
-- [ ] Hogyan adna hozzá egy harmadik szolgáltatást? (Új Bicep fájl létrehozása, hozzáadás a main.bicep-hez, src mappa létrehozása)
+Tesztelje a tudását:
+- [ ] El tudod magyarázni, hogyan találja meg az API Gateway a Product Service-t? (DNS alapú szolgáltatás felfedezés)
+- [ ] Mi történik, ha a Product Service leáll? (A Gateway 503 hibát ad vissza)
+- [ ] Hogyan adnál hozzá egy harmadik szolgáltatást? (Új Bicep fájl létrehozása, hozzáadása a main.bicep-hez, src mappa létrehozása)
 
-**Gyakorlati ellenőrzés**:
+**Gyakorlat ellenőrzés:**
 ```bash
-# Szolgáltatás meghibásodásának szimulálása
+# Szolgáltatás leállásának szimulálása
 az containerapp update --name <product-service-name> --min-replicas 0 --max-replicas 0
 curl $GATEWAY_URL/api/products
-# ✅ Várható: 503 Szolgáltatás nem elérhető
+# ✅ Várt eredmény: 503 Szolgáltatás nem elérhető
 
-# Szolgáltatás helyreállítása
+# Szolgáltatás visszaállítása
 az containerapp update --name <product-service-name> --min-replicas 1 --max-replicas 10
 ```
 
-### 2. Monitorozás és megfigyelhetőség ✓
+### 2. Monitorozás és Megfigyelhetőség ✓
 
-Tesztelje tudását:
-- [ ] Hol láthatja az elosztott logokat? (Application Insights az Azure Portalon)
-- [ ] Hogyan követné nyomon a lassú kéréseket? (Kusto lekérdezés: `requests | where duration > 1000`)
-- [ ] Fel tudja ismerni, melyik szolgáltatás okozott hibát? (Ellenőrizze a `cloud_RoleName` mezőt a logokban)
+Tesztelje a tudását:
+- [ ] Hol láthatod az elosztott naplókat? (Application Insights az Azure Portalon)
+- [ ] Hogyan követed a lassú kéréseket? (Kusto lekérdezés: `requests | where duration > 1000`)
+- [ ] Ki tudod azonosítani, melyik szolgáltatás okozott hibát? (Nézd meg a `cloud_RoleName` mezőt a naplókban)
 
-**Gyakorlati ellenőrzés**:
+**Gyakorlat ellenőrzés:**
 ```bash
-# Generáljon lassú kérés szimulációt
+# Lassú kérés szimulálása
 curl "$GATEWAY_URL/api/products?delay=2000"
 
-# Lekérdezés az Application Insights-ból lassú kérésekhez
-# Navigáljon az Azure Portál → Application Insights → Naplók
+# Lassú kérések lekérdezése az Application Insights-ból
+# Navigáljon az Azure Portal → Application Insights → Logs oldalra
 # Futtassa: requests | where duration > 1000 | project timestamp, name, duration, cloud_RoleName
 ```
 
-### 3. Skálázás és teljesítmény ✓
+### 3. Skálázás és Teljesítmény ✓
 
-Tesztelje tudását:
-- [ ] Mi váltja ki az autoscalinget? (HTTP egyidejű kérés szabályok: 50 a gatewayhez, 100 a termékhez)
-- [ ] Hány replika fut jelenleg? (Ellenőrizze az `az containerapp revision list` paranccsal)
-- [ ] Hogyan skálázná a Product Service-t 5 replikára? (Frissítse a minReplicas értéket a Bicepben)
+Tesztelje a tudását:
+- [ ] Mi váltja ki az autoskálázást? (HTTP egyidejű kérések szabályai: gateway-nek 50, terméknek 100)
+- [ ] Hány példány fut most? (Ellenőrizd `az containerapp revision list` paranccsal)
+- [ ] Hogyan skáláznád a Product Service-t 5 példányra? (Frissítsd a minReplicas értéket a Bicep-ben)
 
-**Gyakorlati ellenőrzés**:
+**Gyakorlat ellenőrzés:**
 ```bash
-# Terhelés generálása az automatikus skálázás teszteléséhez
+# Terhelés generálása az automatikus méretezés teszteléséhez
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Figyeld a replikák számának növekedését
-azd logs api-gateway --follow
-# ✅ Várható: Skálázási események megjelenése a naplókban
+# Nézd, ahogy a replikák száma nő az Azure CLI segítségével
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+# ✅ Elvárt: Láthatók a méretezési események a naplókban
 ```
 
-**Siker kritériumok**: Minden kérdésre tud válaszolni és gyakorlati parancsokkal ellenőrizni.
+**Siker kritériumok**: Minden kérdésre tudsz válaszolni és ellenőrizni a parancsokkal.
 
 ---
 
 ## Költségelemzés
 
-### Becsült havi költségek (Ehhez a 2-szolgáltatásos példához)
+### Becslés havi költségekre (e hibrid 2-szolgáltatásos példához)
 
 | Erőforrás | Konfiguráció | Becsült költség |
 |----------|--------------|----------------|
-| API Gateway | 2-20 replika, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 replika, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Alap szint | $5 |
-| Application Insights | 1-2 GB/hónap | $5-10 |
-| Log Analytics | 1 GB/hónap | $3 |
-| **Összesen** | | **$58-243/hónap** |
+| API Gateway | 2-20 példány, 1 vCPU, 2GB RAM | 30-150 $ |
+| Product Service | 1-10 példány, 0.5 vCPU, 1GB RAM | 15-75 $ |
+| Container Registry | Alapszint | 5 $ |
+| Application Insights | 1-2 GB/hónap | 5-10 $ |
+| Log Analytics | 1 GB/hónap | 3 $ |
+| **Összesen** | | **58-243 $/hónap** |
 
-### Költségbontás használat szerint
+### Költség bontása használat szerint
 
-**Kis forgalom** (tesztelés/tanulás): ~60$/hónap
-- API Gateway: 2 replika × 24/7 = $30
-- Product Service: 1 replika × 24/7 = $15
-- Monitorozás + Registry = $13
+**Kis forgalom** (tesztelés/tanulás): kb. 60 $/hónap
+- API Gateway: 2 példány × 24/7 = 30 $
+- Product Service: 1 példány × 24/7 = 15 $
+- Monitorozás + Registry = 13 $
 
-**Mérsékelt forgalom** (kis produkció): ~120$/hónap
-- API Gateway: 5 átlagos replika = $75
-- Product Service: 3 átlagos replika = $45
-- Monitorozás + Registry = $13
+**Közepes forgalom** (kis éles): kb. 120 $/hónap
+- API Gateway: átlag 5 példány = 75 $
+- Product Service: átlag 3 példány = 45 $
+- Monitorozás + Registry = 13 $
 
-**Nagy forgalom** (forgalmas időszakok): ~240$/hónap
-- API Gateway: 15 átlagos replika = $225
-- Product Service: 8 átlagos replika = $120
-- Monitorozás + Registry = $13
+**Nagy forgalom** (forgalmi csúcsok): kb. 240 $/hónap
+- API Gateway: átlag 15 példány = 225 $
+- Product Service: átlag 8 példány = 120 $
+- Monitorozás + Registry = 13 $
 
 ### Költségoptimalizálási tippek
 
-1. **Fejlesztéshez skálázás nullára**:
+1. **Fejlesztéshez skálázz nulla példányra**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -852,35 +1099,35 @@ azd logs api-gateway --follow
    }
    ```
 
-2. **Használjon Consumption Plan-t a Cosmos DB-hez** (ha hozzáadja):
-   - Csak a használatért fizet
-   - Nincs minimális díj
+2. **Használd a fogyasztás alapon fizetést Cosmos DB-hez** (amikor hozzáadod):
+   - Csak a használat után fizetsz
+   - Nincs minimum díj
 
-3. **Állítsa be az Application Insights mintavételezést**:
+3. **Állítsd be az Application Insights mintavételezést**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Mintavételezze a kérések 50%-át
+   appInsights.defaultClient.config.samplingPercentage = 50; // Mintavételezés 50% a kérésekből
    ```
 
-4. **Takarítsa el, ha nincs szükség rá**:
+4. **Takarítsd ki, ha nincs rá szükség**:
    ```bash
    azd down --force --purge
    ```
 
-### Ingyenes szint opciók
+### Ingyenes szint lehetőségek
 
-Tanuláshoz/teszteléshez fontolja meg:
-- ✅ Használja az Azure ingyenes krediteket (200$ az első 30 napban új fiókokkal)
-- ✅ Tartsa minimális replikákon (kb. 50%-os költségmegtakarítás)
-- ✅ Törölje tesztelés után (nincs folyamatos díj)
-- ✅ Skálázza nullára a tanulási szünetek között
+Tanuláshoz/teszteléshez érdemes:
+- ✅ Használj Azure ingyenes kreditet (200 $ az első 30 napra új fiókoknál)
+- ✅ Minimális példányszám megtartása (kb. 50% költségmegtakarítás)
+- ✅ Törlés teszt után (nincs folyamatos díj)
+- ✅ Tanulási időszakok között skálázz nulla példányra
 
-**Példa**: Ezt a példát 2 órán keresztül futtatni naponta × 30 nap = ~5$/hónap ahelyett, hogy 60$/hónap lenne
+**Példa**: A példát napi 2 órán át futtatni × 30 nap = kb. 5 $/hónap a 60 $ helyett
 
 ---
 
-## Gyors hibaelhárítási referencia
+## Gyors Referencia Hibakereséshez
 
-### Probléma: `azd up` hibát ad "Subscription not found"
+### Probléma: `azd up` hibát ad „Subscription not found”
 
 **Megoldás**:
 ```bash
@@ -890,14 +1137,14 @@ azd env set AZURE_SUBSCRIPTION_ID <your-subscription-id>
 azd up
 ```
 
-### Probléma: API Gateway 503-at ad vissza "Product service unavailable"
+### Probléma: API Gateway 503-at ad vissza „Product service unavailable”
 
 **Diagnózis**:
 ```bash
-# Ellenőrizze a termékszolgáltatás naplóit
-azd logs product-service --tail 50
+# Termék szolgáltatás naplók ellenőrzése Azure CLI használatával
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
-# Ellenőrizze a termékszolgáltatás állapotát
+# Termék szolgáltatás állapotának ellenőrzése
 az containerapp show \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -905,15 +1152,15 @@ az containerapp show \
 ```
 
 **Gyakori okok**:
-1. A Product Service nem indult el (ellenőrizze a Python hibákat a logokban)
-2. Az egészségügyi ellenőrzés sikertelen (ellenőrizze, hogy a `/health` végpont működik-e)
-3. A konténerkép építése sikertelen (ellenőrizze a registryben a képet)
+1. A termék szolgáltatás nem indult el (ellenőrizze a Python hibákat a naplókban)
+2. Health check sikertelen (/health végpont nem elérhető)
+3. A konténerkép építés sikertelen (ellenőrizze a registry-ben a képet)
 
-### Probléma: Autoscaling nem működik
+### Probléma: Az autoskálázás nem működik
 
 **Diagnózis**:
 ```bash
-# Ellenőrizze az aktuális replikaszámot
+# Ellenőrizze az aktuális replika számát
 az containerapp revision list \
   --name $(azd env get-values | grep API_GATEWAY | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -922,20 +1169,20 @@ az containerapp revision list \
 # Terhelés generálása teszteléshez
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Figyelje a skálázási eseményeket
-azd logs api-gateway --follow | grep -i scale
+# Azure CLI segítségével figyelje a skálázási eseményeket
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
 **Gyakori okok**:
-1. A terhelés nem elég magas a skálázási szabály aktiválásához (szükséges >50 egyidejű kérés)
-2. A maximális replika már elérve (ellenőrizze a Bicep konfigurációt)
-3. A skálázási szabály hibásan van konfigurálva a Bicepben (ellenőrizze a concurrentRequests értéket)
+1. A terhelés nem elég magas az autoskálázáshoz (>50 egyidejű kérés szükséges)
+2. Már elérte a maximális példányszámot (ellenőrizze a Bicep konfigurációt)
+3. Hibás skálázási szabályok a Bicep-ben (ellenőrizze a concurrentRequests értéket)
 
-### Probléma: Application Insights nem mutat logokat
+### Probléma: Application Insights nem jelenít meg naplókat
 
 **Diagnózis**:
 ```bash
-# Ellenőrizze, hogy a kapcsolat karakterlánc be van-e állítva
+# Ellenőrizze, hogy a kapcsolati karakterlánc be van-e állítva
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Ellenőrizze, hogy a szolgáltatások küldenek-e telemetriát
@@ -946,73 +1193,73 @@ az monitor app-insights component show \
 ```
 
 **Gyakori okok**:
-1. A kapcsolati string nincs átadva a konténernek (ellenőrizze a környezeti változókat)
-2. Az Application Insights SDK nincs konfigurálva (ellenőrizze az importokat a kódban)
+1. A connection string nincs átadva a konténernek (ellenőrizze a környezeti változókat)
+2. Nem konfigurálták az Application Insights SDK-t (ellenőrizze a kódban az importokat)
 3. Tűzfal blokkolja a telemetriát (ritka, ellenőrizze a hálózati szabályokat)
 
-### Probléma: Docker build helyben sikertelen
+### Probléma: A Docker build helyileg hibás
 
 **Diagnózis**:
 ```bash
-# Tesztelje az API Gateway buildet
+# API Gateway építés tesztelése
 cd src/api-gateway
 docker build -t test-gateway .
 
-# Tesztelje a Product Service buildet
+# Product Service építés tesztelése
 cd ../product-service
 docker build -t test-product .
 ```
 
 **Gyakori okok**:
-1. Hiányzó függőségek a package.json/requirements.txt-ben
-2. Dockerfile szintaxis hibák
+1. Hiányzó függőségek a package.json-ban/requirements.txt-ben
+2. Hibák a Dockerfile-ban
 3. Hálózati problémák a függőségek letöltésekor
 
-**Még mindig elakadt?** Lásd [Gyakori problémák útmutató](../../docs/troubleshooting/common-issues.md) vagy [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+**Még mindig elakadt?** Lásd a [Gyakori problémák útmutatóját](../../docs/chapter-07-troubleshooting/common-issues.md) vagy az [Azure Container Apps hibakeresési oldalát](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
 ## Takarítás
 
-A folyamatos díjak elkerülése érdekében törölje az összes erőforrást:
+Folyamatos költségek elkerüléséhez töröljön minden erőforrást:
 
 ```bash
 azd down --force --purge
 ```
 
-**Megerősítő prompt**:
+**Megerősítő kérelem**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Írja be, hogy `y` a megerősítéshez.
+Írja be a `y` betűt a megerősítéshez.
 
-**Mi kerül törlésre**:
+**Amit törölni fog:**
 - Container Apps környezet
-- Mindkét Container App (gateway & product service)
+- Mindkét Container App (gateway és product service)
 - Container Registry
 - Application Insights
-- Log Analytics Workspace
-- Resource Group
+- Log Analytics munkaterület
+- Erőforráscsoport
 
 **✓ Takarítás ellenőrzése**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Üresnek kell lennie.
+Üres listának kell visszatérnie.
 
 ---
 
-## Bővítési útmutató: 2-ről 5+ szolgáltatásra
+## Bővítési útmutató: 2-től 5+ szolgáltatásig
 
-Miután elsajátította ezt a 2-szolgáltatásos architektúrát, itt van, hogyan bővítheti:
+Ha már kiismeri ezt a 2-szolgáltatásos architektúrát, itt az útmutató a bővítéshez:
 
-### 1. Fázis: Adatbázis perzisztencia hozzáadása (Következő lépés)
+### 1. fázis: Adatbázis perzisztencia hozzáadása (Következő lépés)
 
-**Cosmos DB hozzáadása a Product Service-hez**:
+**Adjon hozzá Cosmos DB-t a Product Service-hez**:
 
-1. Hozzon létre `infra/core/cosmos.bicep` fájlt:
+1. Hozza létre az `infra/core/cosmos.bicep` fájlt:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -1026,134 +1273,139 @@ Miután elsajátította ezt a 2-szolgáltatásos architektúrát, itt van, hogya
    }
    ```
 
-2. Frissítse a Product Service-t, hogy az Azure Cosmos DB Python SDK-t használja a memória helyett
+2. Frissítse a product service-t, hogy az Azure Cosmos DB Python SDK-t használja a memóriában tárolás helyett
 
-3. Becsült további költség: ~25$/hónap (serverless)
+3. Becsült extra költség: kb. 25 $/hónap (szerver nélküli)
 
-### 2. Fázis: Harmadik szolgáltatás hozzáadása (Order Management)
+### 2. fázis: Harmadik szolgáltatás hozzáadása (Rendelés kezelése)
 
-**Order Service létrehozása**:
+**Hozzon létre Order Service-t**:
 
 1. Új mappa: `src/order-service/` (Python/Node.js/C#)
-2. Új Bicep: `infra/app/order-service.bicep`
-3. Frissítse az API Gatewayt, hogy `/api/orders`-t irányítson
-4. Adjon hozzá Azure SQL Database-t az order perzisztenciához
+2. Új Bicep fájl: `infra/app/order-service.bicep`
+3. Frissítse az API Gateway-t az `/api/orders` útvonal kezelésére
+4. Adjon hozzá Azure SQL adatbázist a rendelés perzisztenciához
 
-**Az architektúra így néz ki**:
+**Az architektúra így alakul:**
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### 3. Fázis: Aszinkron kommunikáció hozzáadása (Service Bus)
+### 3. fázis: Aszinkron kommunikáció hozzáadása (Service Bus)
 
-**Event-Driven Architektúra implementálása**:
+**Valósítson meg eseményvezérelt architektúrát**:
 
 1. Adjon hozzá Azure Service Bus-t: `infra/core/servicebus.bicep`
-2. A Product Service "ProductCreated" eseményeket publikál
+2. A Product Service közzéteszi a "ProductCreated" eseményeket
 3. Az Order Service feliratkozik a termék eseményekre
-4. Adjon hozzá Notification Service-t az események feldolgozásához
+4. Adjon hozzá Notification Service-t az események feldolgozására
 
-**Minta**: Kérés/Válasz (HTTP) + Event-Driven (Service Bus)
+**Minta**: Kérés/Válasz (HTTP) + Eseményvezérelt (Service Bus)
 
-### 4. Fázis: Felhasználói hitelesítés hozzáadása
+### 4. fázis: Felhasználói hitelesítés hozzáadása
 
-**User Service implementálása**:
+**Valósítson meg User Service-t**:
 
-1. Hozzon létre `src/user-service/` (Go/Node.js)
+1. Hozza létre a `src/user-service/` mappát (Go/Node.js)
 2. Adjon hozzá Azure AD B2C-t vagy egyedi JWT hitelesítést
-3. Az API Gateway ellenőrzi a tokeneket az irányítás előtt
-4. A szolgáltatások ellenőrzik a felhasználói jogosultságokat
+3. API Gateway ellenőrzi a tokeneket az útválasztás előtt
+4. A szolgáltatások ellenőrzik a felhasználó jogosultságait
 
-### 5. Fázis: Produkciós készültség
+### 5. fázis: Élesítésre való felkészülés
 
-**Adja hozzá ezeket az elemeket**:
+**Adjon hozzá ezekhez az összetevőkhöz**:
 - ✅ Azure Front Door (globális terheléselosztás)
 - ✅ Azure Key Vault (titokkezelés)
 - ✅ Azure Monitor Workbooks (egyedi műszerfalak)
-- ✅ CI/CD Pipeline (GitHub Actions)
-- ✅ Blue-Green Deployments
-- ✅ Managed Identity minden szolgáltatáshoz
+- ✅ CI/CD csővezeték (GitHub Actions)
+- ✅ Kék-Zöld telepítések
+- ✅ Kezelt identitás minden szolgáltatáshoz
 
-**Teljes produkciós architektúra költsége**: ~300-1,400$/hónap
+**Teljes éles architektúra költsége**: kb. 300-1400 $/hónap
 
 ---
 
-## További információ
+## Tudjon meg többet
 
-### Kapcsolódó dokumentáció
-- [Azure Container Apps Dokumentáció](https://learn.microsoft.com/azure/container-apps/)
-- [Mikroszolgáltatások Architektúra Útmutató](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights az Elosztott Nyomkövetéshez](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+### Kapcsolódó dokumentációk
+- [Azure Container Apps dokumentáció](https://learn.microsoft.com/azure/container-apps/)
+- [Mikroszolgáltatások architektúra útmutató](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights elosztott követéshez](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Következő lépések ebben a kurzusban
-- ← Előző: [Egyszerű Flask API](../../../../examples/container-app/simple-flask-api) - Kezdő egykonténeres példa
-- → Következő: [AI Integrációs Útmutató](../../../../docs/ai-foundry) - AI képességek hozzáadása
-- 🏠 [Kurzus Főoldal](../../README.md)
+### Következő lépések a tanfolyamban
+- ← Előző: [Egyszerű Flask API](../../../../examples/container-app/simple-flask-api) - Kezdő egydobozos példa
+- → Következő: [AI integrációs útmutató](../../../../docs/ai-foundry) - AI képességek hozzáadása
+- 🏠 [Tanfolyam kezdőlap](../../README.md)
 
 ### Összehasonlítás: Mikor mit használjunk
 
-| Funkció | Egykonténeres | Mikroszolgáltatások (Ez) | Kubernetes (AKS) |
-|---------|-----------------|---------------------|------------------|
-| **Felhasználási eset** | Eg
-| **Legjobb választás** | MVP-k, prototípusok | Éles alkalmazások | Multi-cloud, fejlett hálózatkezelés |
+| Funkció | Egydobozos konténer | Mikroszolgáltatások (ez) | Kubernetes (AKS) |
+|---------|---------------------|-------------------------|-----------------|
+| **Alkalmazási terület** | Egyszerű alkalmazások | Összetett alkalmazások | Vállalati alkalmazások |
+| **Skálázhatóság** | Egyszeri szolgáltatás | Szolgáltatásonkénti skálázás | Maximális rugalmasság |
+| **Bonyolultság** | Alacsony | Közepes | Magas |
+| **Csapatméret** | 1-3 fejlesztő | 3-10 fejlesztő | 10+ fejlesztő |
+| **Költség** | kb. 15-50 $/hó | kb. 60-250 $/hó | kb. 150-500 $/hó |
+| **Telepítési idő** | 5-10 perc | 8-12 perc | 15-30 perc |
+| **Legjobb** | MVP-k, prototípusok | Termékalkalmazások | Többfelhős, fejlett hálózatkezelés |
 
-**Ajánlás**: Kezdje a Container Apps-szel (ez a példa), és váltson AKS-re, ha Kubernetes-specifikus funkciókra van szüksége.
+**Ajánlás**: Kezdj a Container Apps-szel (ez a példa), csak akkor válts AKS-re, ha Kubernetes-specifikus funkciókra van szükséged.
 
 ---
 
 ## Gyakran Ismételt Kérdések
 
-**K: Miért csak 2 szolgáltatás, miért nem 5+?**  
-V: Oktatási haladás. Először sajátítsa el az alapokat (szolgáltatások közötti kommunikáció, monitorozás, skálázás) egy egyszerű példával, mielőtt bonyolítaná. Az itt tanult minták alkalmazhatók 100-szolgáltatásos architektúrákra is.
+**K: Miért csak 2 szolgáltatás az 5+ helyett?**  
+V: Oktatási folyamat. Sajátítsd el az alapokat (szolgáltatás kommunikáció, monitorozás, skálázás) egy egyszerű példán keresztül, mielőtt bonyolítanál. Az itt tanult minták 100 szolgáltatásos architektúrákra is alkalmazhatók.
 
-**K: Hozzáadhatok magam több szolgáltatást?**  
-V: Természetesen! Kövesse a fenti bővítési útmutatót. Minden új szolgáltatás ugyanazt a mintát követi: hozzon létre egy `src` mappát, készítsen egy Bicep fájlt, frissítse az `azure.yaml`-t, és telepítse.
+**K: Tudok magam hozzáadni több szolgáltatást?**  
+V: Természetesen! Kövesd a fentebb leírt bővítési útmutatót. Minden új szolgáltatásnál ugyanaz a minta: hozz létre src mappát, készíts Bicep fájlt, frissítsd az azure.yaml-t, telepítsd.
 
-**K: Ez éles környezetre kész?**  
-V: Ez egy szilárd alap. Éles környezethez adjon hozzá: kezelt identitást, Key Vault-ot, tartós adatbázisokat, CI/CD folyamatot, monitorozási riasztásokat és biztonsági mentési stratégiát.
+**K: Ez termékérett?**  
+V: Jó alapot jelent. Termékbe helyezéshez adj hozzá: kezelt identitást, Key Vault-ot, állandó adatbázisokat, CI/CD folyamatot, monitorozási riasztásokat és mentési stratégiát.
 
-**K: Miért nem használunk Dapr-t vagy más service mesh-t?**  
-V: Egyszerűség a tanuláshoz. Miután megértette a natív Container Apps hálózatkezelést, rétegezheti a Dapr-t fejlettebb forgatókönyvekhez (állapotkezelés, pub/sub, kötőelemek).
+**K: Miért ne használjak Dapr-t vagy más service mesh-t?**  
+V: A tanulás kedvéért legyen egyszerű. Ha megérted a natív Container Apps hálózatkezelést, rátehetsz Dapr-t fejlettebb esetekhez (állapotkezelés, pub/sub, kötés).
 
 **K: Hogyan tudok helyben hibakeresni?**  
-V: Futtassa a szolgáltatásokat helyben Dockerrel:  
+V: Futtasd a szolgáltatásokat helyben Docker-rel:  
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
   
-**K: Használhatok különböző programozási nyelveket?**  
-V: Igen! Ez a példa Node.js-t (gateway) és Python-t (termék szolgáltatás) mutat be. Bármilyen nyelvet keverhet, amely konténerekben fut: C#, Go, Java, Ruby, PHP stb.
+**K: Használhatok más programozási nyelveket?**  
+V: Igen! Ez a példa Node.js (gateway) + Python (termék szolgáltatás). Bármi, ami konténerben futtatható: C#, Go, Java, Ruby, PHP stb.
 
 **K: Mi van, ha nincs Azure kreditem?**  
-V: Használja az Azure ingyenes szintjét (az új fiókok az első 30 napban 200 dollár kreditet kapnak), vagy telepítsen rövid tesztelési időszakokra, majd azonnal törölje. Ez a példa körülbelül 2 dollár/nap költséggel jár.
+V: Használd az Azure ingyenes réteget (új fiókoknak az első 30 napban 200$ kredit jár) vagy telepíts rövid tesztelésre, majd töröld azonnal. Ez a példa kb. 2$/napba kerül.
 
-**K: Miben különbözik ez az Azure Kubernetes Service-től (AKS)?**  
-V: A Container Apps egyszerűbb (nincs szükség Kubernetes-ismeretekre), de kevésbé rugalmas. Az AKS teljes Kubernetes-vezérlést biztosít, de több szakértelmet igényel. Kezdje a Container Apps-szel, és váltson AKS-re, ha szükséges.
+**K: Miben különbözik az Azure Kubernetes Service (AKS) a Container Apps-től?**  
+V: A Container Apps egyszerűbb (nem kell Kubernetes tudás), de kevésbé rugalmas. Az AKS teljes Kubernetes irányítást ad, viszont több szakértelmet igényel. Kezdd Container Apps-szel, majd ha kell, lépj AKS-re.
 
-**K: Használhatom ezt meglévő Azure-szolgáltatásokkal?**  
-V: Igen! Csatlakozhat meglévő adatbázisokhoz, tárfiókokhoz, Service Bus-hoz stb. Frissítse a Bicep fájlokat, hogy meglévő erőforrásokra hivatkozzanak, ahelyett, hogy újakat hoznának létre.
-
----
-
-> **🎓 Tanulási útvonal összefoglaló**: Megtanulta, hogyan telepítsen egy több szolgáltatásból álló architektúrát automatikus skálázással, belső hálózatkezeléssel, központosított monitorozással és éles környezetre kész mintákkal. Ez az alap felkészíti Önt összetett elosztott rendszerekre és vállalati mikroszolgáltatás-architektúrákra.
-
-**📚 Tanfolyam navigáció:**
-- ← Előző: [Egyszerű Flask API](../../../../examples/container-app/simple-flask-api)
-- → Következő: [Adatbázis integrációs példa](../../../../database-app)
-- 🏠 [Tanfolyam főoldal](../../README.md)
-- 📖 [Container Apps legjobb gyakorlatok](../../docs/deployment/deployment-guide.md)
+**K: Használhatom ezt meglévő Azure szolgáltatásokkal?**  
+V: Igen! Csatlakozhatsz meglévő adatbázisokhoz, tárfiókokhoz, Service Bus-hoz stb. Frissítsd Bicep fájlokat, hogy meglévő erőforrásokat referáljanak új létrehozása helyett.
 
 ---
 
-**✨ Gratulálunk!** Befejezte a mikroszolgáltatások példáját. Most már érti, hogyan építsen, telepítsen és monitorozzon elosztott alkalmazásokat az Azure Container Apps segítségével. Készen áll AI képességek hozzáadására? Nézze meg az [AI integrációs útmutatót](../../../../docs/ai-foundry)!
+> **🎓 Tanulási Út Áttekintés**: Megtanultad, hogyan telepíts több szolgáltatásos architektúrát automatikus skálázással, belső hálózattal, központosított monitorozással és termékérett mintákkal. Ez az alap felkészít összetett elosztott rendszerek és vállalati mikroszolgáltatási architektúrák kezelésére.
+
+**📚 Kurzus Navigáció:**  
+- ← Előző: [Egyszerű Flask API](../../../../examples/container-app/simple-flask-api)  
+- → Következő: [Adatbázis Integrációs Példa](../../../../database-app)  
+- 🏠 [Kurzus Főoldal](../../README.md)  
+- 📖 [Container Apps Legjobb Gyakorlatai](../../docs/chapter-04-infrastructure/deployment-guide.md)
+
+---
+
+**✨ Gratulálunk!** Befejezted a mikroszolgáltatás példát. Most már érted, hogyan építs, telepíts és monitoroz elosztott alkalmazásokat Azure Container Apps-en. Készen állsz AI képességek hozzáadására? Nézd meg az [AI Integrációs Útmutatót](../../../../docs/ai-foundry)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+**Jogi nyilatkozat**:  
+Ez a dokumentum az AI fordítószolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az anyanyelvén tekintendő hivatalos forrásnak. Kritikus információk esetén professzionális emberi fordítás igénylése javasolt. Nem vállalunk felelősséget az ebből eredő félreértésekért vagy téves értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

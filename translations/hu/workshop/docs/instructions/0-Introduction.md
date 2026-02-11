@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-25T02:18:24+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "hu"
-}
--->
-# AZD az AI fejlesztők számára
+# AZD Az AI Fejlesztők Számára
 
-!!! info "A WORKSHOP CÉLKÖZÖNSÉGE"
+!!! info "A MŰHELYHEZ SZÓLÓ KÖZÖNSÉG"
    
-    Ez a workshop azoknak szól, akik az Azure AI Foundry segítségével szeretnének AI Agent alkalmazásokat építeni, a legjobb eszközöket és munkafolyamatokat kihasználva. A workshop kezdőknek és tapasztalt fejlesztőknek egyaránt alkalmas, akik már valamennyire ismerik az Azure-t, az AI fogalmait és a Python kódot. Kérjük, ellenőrizze az előfeltételeket, mielőtt elkezdi.
+    Ez a műhely mindazok számára szól, akik szeretnének AI Agentic alkalmazásokat építeni a Microsoft Foundry-n a legjobb eszközökkel és munkafolyamatokkal. A műhely kezdőknek és tapasztalt fejlesztőknek egyaránt megfelelő, akiknek van némi ismerete az Azure-ról, az AI fogalmakról és a Python kódról. Kérjük, ellenőrizze az előfeltételeket, mielőtt elkezdi.
 
     **Időtartam:** 3-4 óra  
     **Szint:** Kezdő-től középhaladóig  
@@ -21,45 +12,49 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## Előfeltételek
 
-- Személyes GitHub fiók → [Hozzon létre egyet ingyen](https://github.com/signup)
-- Aktív Azure fiók → [Hozzon létre egyet ingyen](https://aka.ms/free)
-- AI fogalmak, Python fejlesztés, parancssori eszközök ismerete
+- Egy személyes GitHub fiók → [Hozzon létre egyet ingyen](https://github.com/signup)
+- Egy aktív Azure fiók → [Hozzon létre egyet ingyen](https://aka.ms/free)
+- AI fogalmak ismerete, Python fejlesztés, parancssori eszközök használata
 - Tapasztalat VS Code és GitHub eszközökkel és munkafolyamatokkal.
 
 ---
 
-## Tanulási célok
+## Tanulási Célok
 
-A workshop végére képes lesz:
+A műhely végére tudni fogja, hogyan:
 
-- [X] **Az Azure Developer CLI használatára** → Azure erőforrások létrehozására, telepítésére és kezelésére.
-- [X] **AI App Templates használatára** → AI Agent projektek gyorsindítására az Azure AI Foundry-n.
-- [X] **Sablonok konfigurálására** → Olyan funkciókhoz, mint Red Teaming, értékelések, nyomkövetés és monitorozás.
-- [X] **AZD sablonok és munkafolyamatok elemzésére** → GitHub Copilot segítségével.
-- [X] **AI Agent kezdő sablon testreszabására és újratelepítésére** → Saját igényei szerint.
-
----
-
-## Workshop vázlat
-
-A workshop modulokra van osztva, mindegyik egy gyakorlati laborfeladatra épül:
-
-1. **Bevezetés** - Ismerje meg, mik az AZD sablonok, és hogyan működnek.
-1. **Kiválasztás** - Fedezze fel a megfelelő "kezdő" sablont a következő AI projektjéhez.
-1. **Érvényesítés** - Telepítse és vizsgálja meg a sablont, hogy megbizonyosodjon róla, hogy az elvárásoknak megfelel.
-1. **Elemzés** - Vegye szét a sablont, hogy megértse annak összetevőit és konfigurációját.
-1. **Konfiguráció** - Tanulja meg, hogyan aktiválja és használja az Azure AI Foundry különböző funkcióit.
-1. **Testreszabás** - Építse újra az alkalmazást saját adatai és igényei alapján.
-1. **Bontás** - Tanulja meg, hogyan szüntesse meg az infrastruktúrát és állítsa vissza a soft-deleted erőforrásokat.
+- [X] **Dolgozzon Azure Developer CLI-vel** → az Azure erőforrások létrehozásához, telepítéséhez és kezeléséhez.
+- [X] **Használjon AI App sablonokat** → az AI Agent projektek gyors indításához a Microsoft Foundry-n.
+- [X] **Konfigurálja a sablonokat** → olyan funkciókhoz, mint a Red Teaming, értékelések, követés és felügyelet
+- [X] **Bontsa szét és fedezze fel** → az AZD sablonokat és munkafolyamatokat a GitHub Copilot segítségével
+- [X] **Testreszabja és újratelepítse** → az AI Agent indító sablont, saját egyedi igényei szerint
 
 ---
 
-## Visszajelzés és problémák
+## Műhely Felépítése
 
-Folyamatosan frissítjük a tananyagot, hogy a kezdők számára a lehető legjobb tanulási élményt nyújtsa. Értékeljük a visszajelzését.
+A műhely modulokra van bontva, melyeket gyakorlati laboratóriumi feladat köré építettünk:
 
-1. Tegyen közzé egy problémát ezen a repón - címkézze `Workshop`-ként az egyszerűség kedvéért.
-1. Csatlakozzon az Azure AI Foundry Discordhoz - lépjen kapcsolatba más tanulókkal!
+1. **Bevezetés** - Ismerje meg, mik az AZD sablonok, és hogyan működnek
+1. **Kiválasztás** - Fedezze fel a megfelelő „indító” sablont következő AI projektjéhez
+1. **Ellenőrzés** - Telepítse és fedezze fel a sablont, hogy meggyőződjön róla, működik-e a leírtak szerint
+1. **Szétszedés** - Vegye szét a sablont, hogy megértse annak összetevőit és konfigurációját
+1. **Beállítás** - Tanulja meg aktiválni és használni a különböző Microsoft Foundry funkciókat
+1. **Testreszabás** - Építse újra az alkalmazást saját adataival és igényeivel
+1. **Leszerelés** - Tanulja meg a infrastruktúra leszerelését és a lágy törölt erőforrások visszaállítását
 
 ---
 
+## Visszajelzés & Problémák
+
+Folyamatosan frissítjük a tananyagot, hogy a lehető legjobb tanulási élményt nyújtsa a kezdőknek. Köszönjük visszajelzését.
+
+1. Tegyen közzé problémát ebben a repóban – a kényelmes címkézés érdekében használja a `Workshop` címkét.
+1. Csatlakozzon a Microsoft Foundry Discord közösséghez – kapcsolódjon más tanulókkal!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Figyelmeztetés**:  
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár arra törekszünk, hogy a fordítás pontos legyen, kérjük, vegye figyelembe, hogy az automatikus fordítás hibákat vagy pontatlanságokat tartalmazhat. Az eredeti dokumentum az illetékes, hiteles forrás. Kritikus információk esetén javasoljuk, hogy kérjen professzionális emberi fordítást. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

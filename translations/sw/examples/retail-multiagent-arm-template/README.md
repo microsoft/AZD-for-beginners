@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-23T09:42:13+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "sw"
-}
--->
 # Suluhisho la Wakala Wengi wa Rejareja - Kiolezo cha Miundombinu
 
 **Sura ya 5: Kifurushi cha Utekelezaji wa Uzalishaji**  
