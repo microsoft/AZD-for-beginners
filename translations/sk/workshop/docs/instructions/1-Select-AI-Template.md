@@ -1,82 +1,118 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "06d6207eff634aefcaa41739490a5324",
-  "translation_date": "2025-09-25T01:59:17+00:00",
-  "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
-  "language_code": "sk"
-}
--->
 # 1. Vyberte šablónu
 
-!!! tip "NA KONCI TOHTO MODULU BUDETE SCHOPNÍ"
+!!! tip "NA KONCI TOHTO MODULU BUDETE VEDIEŤ"
 
-    - [ ] Opísať, čo sú šablóny AZD
-    - [ ] Objaviť a používať šablóny AZD pre AI
-    - [ ] Začať pracovať so šablónou AI Agents
-    - [ ] **Laboratórium 1:** Rýchly štart AZD s GitHub Codespaces
+    - [ ] Popísať, čo sú AZD šablóny
+    - [ ] Objaviť a používať AZD šablóny pre AI
+    - [ ] Začať so šablónou AI Agents
+    - [ ] **Lab 1:** AZD Rýchly štart s GitHub Codespaces
 
 ---
 
 ## 1. Analógia staviteľa
 
-Vytvorenie moderného AI aplikácie pripraveného pre podnikanie _od nuly_ môže byť náročné. Je to trochu ako stavať svoj nový dom úplne sám, tehlu po tehle. Áno, dá sa to! Ale nie je to najefektívnejší spôsob, ako dosiahnuť požadovaný výsledok!
+Vytvorenie modernej podnikovej AI aplikácie pripravenéj na produkciu _od začiatku_ môže byť zastrašujúce. Je to trochu ako stavať si nový dom sám, tehla po tehle. Áno, dá sa to urobiť! Ale nie je to najefektívnejší spôsob, ako dosiahnuť požadovaný výsledok! 
 
-Namiesto toho často začíname s existujúcim _návrhovým plánom_ a spolupracujeme s architektom na jeho prispôsobení našim osobným požiadavkám. A presne takýto prístup by sme mali zvoliť pri budovaní inteligentných aplikácií. Najskôr nájdite dobrú návrhovú architektúru, ktorá vyhovuje vašej oblasti problému. Potom spolupracujte s architektom riešení na prispôsobení a vývoji riešenia pre váš konkrétny scenár.
+Namiesto toho často začíname s existujúcim _návrhovým plánom_ a spolupracujeme s architektom, aby sme ho prispôsobili našim osobným požiadavkám. A presne to je prístup, ktorý treba zvoliť pri budovaní inteligentných aplikácií. Najprv nájdite dobrú architektúru návrhu, ktorá sedí na váš problémový priestor. Potom spolupracujte s architektom riešení, aby ste prispôsobili a vyvinuli riešenie pre váš konkrétny scenár.
 
-Ale kde nájsť tieto návrhové plány? A ako nájsť architekta, ktorý je ochotný naučiť nás, ako prispôsobiť a nasadiť tieto plány sami? V tomto workshope odpovieme na tieto otázky predstavením troch technológií:
+Kde však tieto návrhové plány nájdeme? A ako nájsť architekta, ktorý nám ochotne ukáže, ako ich upravovať a nasadzovať sami? V tomto workshope na tieto otázky odpovedáme predstavením troch technológií:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - open-source nástroj, ktorý urýchľuje cestu vývojára od lokálneho vývoja (build) k nasadeniu do cloudu (ship).
-1. [Azure AI Foundry Templates](https://ai.azure.com/templates) - štandardizované open-source repozitáre obsahujúce ukážkový kód, infraštruktúru a konfiguračné súbory na nasadenie AI riešenia.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - kódovací agent založený na znalostiach Azure, ktorý nás môže navigovať v kóde a pomáhať pri úpravách - pomocou prirodzeného jazyka.
+1. [Azure Developer CLI](https://aka.ms/azd) - open-source nástroj, ktorý zrýchľuje cestu vývojára od lokálneho vývoja (build) k nasadeniu v cloude (ship).
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - štandardizované open-source repozitáre obsahujúce ukážkový kód, infraštruktúru a konfiguračné súbory pre nasadenie architektúry AI riešenia.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - kódujúci agent založený na znalostiach Azure, ktorý nás môže viesť pri orientácii v kódbáze a vykonávaní zmien pomocou prirodzeného jazyka.
 
-S týmito nástrojmi v rukách môžeme teraz _objaviť_ správnu šablónu, _nasadiť_ ju na overenie funkčnosti a _prispôsobiť_ ju našim konkrétnym scenárom. Poďme sa ponoriť a naučiť sa, ako tieto nástroje fungujú.
+S týmito nástrojmi môžeme teraz _objaviť_ správnu šablónu, _nasadiť_ ju, aby sme overili, že funguje, a _prispôsobiť_ ju podľa našich špecifických scenárov. Poďme na to a naučme sa, ako fungujú.
+
 
 ---
 
 ## 2. Azure Developer CLI
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (alebo `azd`) je open-source príkazový nástroj, ktorý môže urýchliť vašu cestu od kódu k cloudu pomocou sady príkazov priateľských pre vývojárov, ktoré fungujú konzistentne vo vašom IDE (vývoj) a CI/CD (devops) prostredí.
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) je open-source nástroj príkazového riadku, ktorý môže zrýchliť vašu cestu od kódu k cloudu s množstvom príkazov priateľských pre vývojárov, ktoré fungujú konzistentne naprieč vaším IDE (vývoj) a CI/CD (devops) prostrediami.
 
 S `azd` môže byť vaša cesta nasadenia taká jednoduchá ako:
 
-- `azd init` - Inicializuje nový AI projekt z existujúcej šablóny AZD.
-- `azd up` - Zabezpečí infraštruktúru a nasadí vašu aplikáciu v jednom kroku.
-- `azd monitor` - Poskytuje monitorovanie a diagnostiku v reálnom čase pre vašu nasadenú aplikáciu.
-- `azd pipeline config` - Nastaví CI/CD pipeline na automatizáciu nasadenia do Azure.
+- `azd init` - Inicializuje nový AI projekt z existujúcej AZD šablóny.
+- `azd up` - Zabezpečí infraštruktúru a nasadí vašu aplikáciu jedným krokom.
+- `azd monitor` - Získajte monitorovanie a diagnostiku v reálnom čase pre nasadenú aplikáciu.
+- `azd pipeline config` - Nastavte CI/CD pipeline na automatizáciu nasadenia do Azure.
 
-**🎯 | CVIČENIE**: <br/> Preskúmajte príkazový nástroj `azd` vo vašom prostredí GitHub Codespaces. Začnite zadaním tohto príkazu, aby ste zistili, čo nástroj dokáže:
+**🎯 | CVIČENIE**: <br/> Preskúmajte nástroj `azd` v prostredí GitHub Codespaces teraz. Začnite zadaním tohto príkazu, aby ste videli, čo nástroj dokáže:
 
 ```bash title="" linenums="0"
 azd help
 ```
 
-![Flow](../../../../../translated_images/sk/azd-flow.19ea67c2f81eaa66.webp)
+![Tok](../../../../../translated_images/sk/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
-## 3. Šablóna AZD
+## 3. AZD šablóna
 
-Aby `azd` dosiahol toto, potrebuje vedieť, akú infraštruktúru má zabezpečiť, aké konfiguračné nastavenia má uplatniť a akú aplikáciu má nasadiť. Tu prichádzajú na rad [šablóny AZD](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
+Aby `azd` mohol toto dosiahnuť, potrebuje vedieť, akú infraštruktúru má zabezpečiť, aké konfiguračné nastavenia má vynucovať a akú aplikáciu nasadiť. Tu prichádzajú na rad [AZD šablóny](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp). 
 
-Šablóny AZD sú open-source repozitáre, ktoré kombinujú ukážkový kód s infraštruktúrou a konfiguračnými súbormi potrebnými na nasadenie riešenia. 
-Použitím prístupu _Infrastructure-as-Code_ (IaC) umožňujú, aby definície zdrojov šablóny a konfiguračné nastavenia boli verzované (rovnako ako zdrojový kód aplikácie) - čím vytvárajú opakovateľné a konzistentné pracovné postupy medzi používateľmi daného projektu.
+AZD šablóny sú open-source repozitáre, ktoré kombinujú ukážkový kód s infraštruktúrnymi a konfiguračnými súbormi potrebnými na nasadenie architektúry riešenia.
+Použitím prístupu _Infrastructure-as-Code_ (IaC) umožňujú, aby definície zdrojov šablóny a konfiguračné nastavenia boli verziované (rovnako ako zdrojový kód aplikácie) - čím vytvárajú opakovane použiteľné a konzistentné pracovné postupy pre používateľov projektu.
 
-Pri vytváraní alebo opätovnom použití šablóny AZD pre _váš_ scenár zvážte tieto otázky:
+Pri vytváraní alebo znovupoužití AZD šablóny pre _váš_ scenár zvážte tieto otázky:
 
-1. Čo vytvárate? → Existuje šablóna, ktorá obsahuje štartovací kód pre tento scenár?
-1. Ako je vaše riešenie navrhnuté? → Existuje šablóna, ktorá obsahuje potrebné zdroje?
-1. Ako je vaše riešenie nasadené? → Myslite na `azd deploy` s pred/po spracovaní!
-1. Ako ho môžete ďalej optimalizovať? → Myslite na zabudované monitorovanie a automatizačné pipeline!
+1. What are you building? → Existuje šablóna, ktorá obsahuje počiatočný kód pre daný scenár?
+1. How is your solution architected? → Existuje šablóna, ktorá má potrebné zdroje?
+1. How is your solution deployed? → Pomyslite na `azd deploy` s pred- a post-procesnými hookmi!
+1. How can you optimize it further? → Pomyslite na vstavané monitorovanie a automatizované pipeline!
 
 **🎯 | CVIČENIE**: <br/> 
-Navštívte galériu [Awesome AZD](https://azure.github.io/awesome-azd/) a použite filtre na preskúmanie viac ako 250 šablón, ktoré sú momentálne dostupné. Zistite, či nájdete šablónu, ktorá vyhovuje _vašim_ požiadavkám.
+Navštívte galériu [Awesome AZD](https://azure.github.io/awesome-azd/) a použite filtre na preskúmanie viac než 250 dostupných šablón. Pozrite sa, či nájdete tú, ktorá sa hodí k požiadavkám vášho scenára.
 
-![Code](../../../../../translated_images/sk/azd-code-to-cloud.2d9503d69d3400da.webp)
+![Kód](../../../../../translated_images/sk/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
 ## 4. Šablóny AI aplikácií
 
+Pre AI-poháňané aplikácie Microsoft poskytuje špecializované šablóny obsahujúce **Microsoft Foundry** a **Foundry Agents**. Tieto šablóny zrýchľujú vašu cestu k tvorbe inteligentných aplikácií pripravených na produkciu.
+
+### Šablóny Microsoft Foundry & Foundry Agents
+
+Vyberte si nižšie šablónu na nasadenie. Každá šablóna je k dispozícii na [Awesome AZD](https://azure.github.io/awesome-azd/) a môže byť inicializovaná jedným príkazom.
+
+| Šablóna | Popis | Príkaz nasadenia |
+|----------|-------------|----------------|
+| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Chatovacia aplikácia s Retrieval Augmented Generation využívajúcim Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Vytvorte AI agentov s Foundry Agents pre autonómne vykonávanie úloh | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Koordinujte viaceré Foundry Agents pre zložité pracovné toky | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Extrahujte a analyzujte dokumenty pomocou modelov Microsoft Foundry | `azd init -t azure-samples/ai-document-processing` |
+| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Vytvorte inteligentné chatboty s integráciou Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Generujte obrázky pomocou DALL-E prostredníctvom Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
+| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | AI agenti používajúci Semantic Kernel s Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
+| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Viacagentové systémy používajúce rámec AutoGen | `azd init -t azure-samples/autogen-multi-agent` |
+
+### Rýchly štart
+
+1. **Prehliadať šablóny**: Navštívte [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) a filtrovať podľa `AI`, `Agents`, alebo `Microsoft Foundry`
+2. **Vyberte šablónu**: Zvoľte tú, ktorá zodpovedá vášmu prípadu použitia
+3. **Inicializovať**: Spustite príkaz `azd init` pre vybranú šablónu
+4. **Nasadiť**: Spustite `azd up` na zabezpečenie infraštruktúry a nasadenie
+
+**🎯 | CVIČENIE**: <br/>
+Vyberte jednu z vyššie uvedených šablón podľa vášho scenára:
+
+- **Budujete chatbota?** → Začnite s **AI Chat with RAG** alebo **Conversational AI Bot**
+- **Potrebujete autonómnych agentov?** → Vyskúšajte **Foundry Agent Service Starter** alebo **Multi-Agent Orchestration**
+- **Spracúvate dokumenty?** → Použite **AI Document Intelligence**
+- **Chcete AI pomoc pri kódovaní?** → Preskúmajte **Semantic Kernel Agent** alebo **AutoGen Multi-Agent**
+
+```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
+azd init -t azure-samples/azure-search-openai-demo
+azd up
+```
+
+!!! info "Preskúmajte ďalšie šablóny"
+    Galéria [Awesome AZD](https://azure.github.io/awesome-azd/) obsahuje viac než 250 šablón. Použite filtre na nájdenie šablón, ktoré zodpovedajú vašim špecifickým požiadavkám na jazyk, framework a Azure služby.
+
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vyhlásenie o vylúčení zodpovednosti:**
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vzniknuté použitím tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

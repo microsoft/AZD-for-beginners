@@ -1,56 +1,47 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-23T11:34:22+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "sk"
-}
--->
-# Príklady - Praktické šablóny a konfigurácie AZD
+# Príklady - Praktické AZD šablóny a konfigurácie
 
 **Učenie sa na príkladoch - usporiadané podľa kapitol**
-- **📚 Domov kurzu**: [AZD pre začiatočníkov](../README.md)
-- **📖 Mapovanie kapitol**: Príklady usporiadané podľa náročnosti učenia
-- **🚀 Lokálny príklad**: [Riešenie pre maloobchod s viacerými agentmi](retail-scenario.md)
+- **📚 Domov kurzu**: [AZD For Beginners](../README.md)
+- **📖 Mapovanie kapitol**: Príklady usporiadané podľa zložitosti učenia
+- **🚀 Lokálny príklad**: [Retail Multi-Agent Solution](retail-scenario.md)
 - **🤖 Externé AI príklady**: Odkazy na repozitáre Azure Samples
 
 > **📍 DÔLEŽITÉ: Lokálne vs externé príklady**  
-> Tento repozitár obsahuje **4 kompletné lokálne príklady** s plnou implementáciou:  
-> - **Azure OpenAI Chat** (nasadenie GPT-4 s rozhraním pre chat)  
-> - **Container Apps** (Jednoduché Flask API + mikroservisy)  
-> - **Database App** (Web + SQL databáza)  
+> Toto úložisko obsahuje **4 kompletné lokálne príklady** s plnou implementáciou:  
+> - **Azure OpenAI Chat** (nasadenie GPT-4 s chat rozhraním)  
+> - **Container Apps** (Jednoduché Flask API + Mikroservisy)  
+> - **Databázová aplikácia** (Web + SQL databáza)  
 > - **Retail Multi-Agent** (Podnikové AI riešenie)  
 >  
-> Ďalšie príklady sú **externé odkazy** na repozitáre Azure-Samples, ktoré môžete klonovať.
+> Ďalšie príklady sú **externé odkazy** na repozitáre Azure-Samples, ktoré si môžete klonovať.
 
 ## Úvod
 
-Tento adresár poskytuje praktické príklady a odkazy, ktoré vám pomôžu naučiť sa Azure Developer CLI prostredníctvom praktického cvičenia. Scenár Retail Multi-Agent je kompletná, produkčne pripravená implementácia zahrnutá v tomto repozitári. Ďalšie príklady odkazujú na oficiálne Azure Samples, ktoré demonštrujú rôzne vzory AZD.
+Tento adresár poskytuje praktické príklady a odkazy, ktoré vám pomôžu naučiť sa Azure Developer CLI prostredníctvom praktických cvičení. Scenár Retail Multi-Agent je kompletná, produkčná implementácia zahrnutá v tomto úložisku. Ďalšie príklady odkazujú na oficiálne Azure Samples, ktoré demonštrujú rôzne vzory AZD.
 
-### Legenda hodnotenia náročnosti
+### Legenda hodnotenia zložitosti
 
 - ⭐ **Začiatočník** - Základné koncepty, jedna služba, 15-30 minút
 - ⭐⭐ **Stredne pokročilý** - Viac služieb, integrácia databázy, 30-60 minút
-- ⭐⭐⭐ **Pokročilý** - Komplexná architektúra, integrácia AI, 1-2 hodiny
-- ⭐⭐⭐⭐ **Expert** - Produkčne pripravené, podnikové vzory, 2+ hodiny
+- ⭐⭐⭐ **Pokročilý** - Zložitá architektúra, integrácia AI, 1-2 hodiny
+- ⭐⭐⭐⭐ **Expert** - Produkčné vzory, podnikové prístupy, 2+ hodín
 
-## 🎯 Čo je vlastne v tomto repozitári
+## 🎯 Čo sa vlastne nachádza v tomto úložisku
 
 ### ✅ Lokálna implementácia (pripravené na použitie)
 
 #### [Azure OpenAI Chat Application](azure-openai-chat/README.md) 🆕
-**Kompletné nasadenie GPT-4 s rozhraním pre chat zahrnuté v tomto repozitári**
+**Kompletné nasadenie GPT-4 s chat rozhraním zahrnuté v tomto repozitári**
 
 - **Umiestnenie:** `examples/azure-openai-chat/`
-- **Náročnosť:** ⭐⭐ (Stredne pokročilý)
-- **Čo je zahrnuté:**
+- **Zložitosť:** ⭐⭐ (Stredne pokročilý)
+- **Obsahuje:**
   - Kompletné nasadenie Azure OpenAI (GPT-4)
-  - Python príkazové rozhranie pre chat
-  - Integrácia Key Vault pre bezpečné API kľúče
-  - Šablóny infraštruktúry Bicep
+  - Python rozhranie príkazového riadku pre chat
+  - Integrácia s Key Vault pre bezpečné API kľúče
+  - Bicep infraštruktúrne šablóny
   - Sledovanie používania tokenov a nákladov
-  - Obmedzenie rýchlosti a spracovanie chýb
+  - Obmedzovanie rýchlosti a spracovanie chýb
 
 **Rýchly štart:**
 ```bash
@@ -67,46 +58,46 @@ python src/chat.py
 
 **Technológie:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
 
-#### [Príklady aplikácií Container App](container-app/README.md) 🆕
+#### [Príklady Container App](container-app/README.md) 🆕
 **Komplexné príklady nasadenia kontajnerov zahrnuté v tomto repozitári**
 
 - **Umiestnenie:** `examples/container-app/`
-- **Náročnosť:** ⭐-⭐⭐⭐⭐ (Začiatočník až expert)
-- **Čo je zahrnuté:**
-  - [Hlavný sprievodca](container-app/README.md) - Kompletný prehľad nasadenia kontajnerov
+- **Zložitosť:** ⭐-⭐⭐⭐⭐ (Od začiatočníka po experta)
+- **Obsahuje:**
+  - [Hlavný sprievodca](container-app/README.md) - Kompletný prehľad nasadení kontajnerov
   - [Jednoduché Flask API](../../../examples/container-app/simple-flask-api) - Základný príklad REST API
-  - [Architektúra mikroservisov](../../../examples/container-app/microservices) - Produkčne pripravené nasadenie viacerých služieb
-  - Vzory pre rýchly štart, produkciu a pokročilé nasadenie
-  - Monitorovanie, bezpečnosť a optimalizácia nákladov
+  - [Mikroservisy](../../../examples/container-app/microservices) - Produkčné nasadenie s viacerými službami
+  - Rýchly štart, Produkčné a Pokročilé vzory
+  - Monitorovanie, zabezpečenie a optimalizácia nákladov
 
 **Rýchly štart:**
 ```bash
-# Zobraziť hlavného sprievodcu
+# Zobraziť hlavný návod
 cd examples/container-app
 
-# Nasadiť jednoduché Flask API
+# Nasadiť jednoduché API vo Flasku
 cd simple-flask-api
 azd up
 
-# Nasadiť príklad mikroservisov
+# Nasadiť príklad mikroslužieb
 cd ../microservices
 azd up
 ```
 
 **Technológie:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Riešenie pre maloobchod s viacerými agentmi](retail-scenario.md) 🆕
-**Kompletná produkčne pripravená implementácia zahrnutá v tomto repozitári**
+#### [Riešenie Retail Multi-Agent](retail-scenario.md) 🆕
+**Kompletná produkčná implementácia zahrnutá v tomto repozitári**
 
 - **Umiestnenie:** `examples/retail-multiagent-arm-template/`
-- **Náročnosť:** ⭐⭐⭐⭐ (Pokročilý)
-- **Čo je zahrnuté:**
-  - Kompletná šablóna nasadenia ARM
-  - Architektúra viacerých agentov (Zákazník + Inventár)
+- **Zložitosť:** ⭐⭐⭐⭐ (Pokročilý)
+- **Obsahuje:**
+  - Komplexná ARM šablóna nasadenia
+  - Architektúra s viacerými agentmi (Zákazník + Inventár)
   - Integrácia Azure OpenAI
-  - AI vyhľadávanie s RAG
+  - AI Search s RAG
   - Komplexné monitorovanie
-  - Skript na jednorazové nasadenie
+  - Skript na nasadenie jedným klikom
 
 **Rýchly štart:**
 ```bash
@@ -114,27 +105,27 @@ cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**Technológie:** Azure OpenAI, AI vyhľadávanie, Container Apps, Cosmos DB, Application Insights
+**Technológie:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 Externé Azure Samples (klonovať na použitie)
+## 🔗 Externé príklady Azure (Klonujte pre použitie)
 
-Nasledujúce príklady sú udržiavané v oficiálnych repozitároch Azure-Samples. Klonujte ich, aby ste preskúmali rôzne vzory AZD:
+Nasledujúce príklady sú udržiavané v oficiálnych repozitároch Azure-Samples. Naklonujte ich, aby ste preskúmali rôzne vzory AZD:
 
-### Jednoduché aplikácie (kapitoly 1-2)
+### Jednoduché aplikácie (Kapitoly 1-2)
 
-| Šablóna | Repozitár | Náročnosť | Služby |
-|:--------|:----------|:----------|:-------|
+| Šablóna | Repozitár | Zložitosť | Služby |
+|:---------|:-----------|:-----------|:---------|
 | **Python Flask API** | [Lokálne: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Mikroservisy** | [Lokálne: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Viac služieb, Service Bus, Cosmos DB, SQL |
+| **Mikroservisy** | [Lokálne: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Viacslužbové, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
-**Ako používať:**
+Ako používať:
 ```bash
-# Naklonujte akýkoľvek príklad
+# Klonovať ľubovoľný príklad
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
@@ -142,43 +133,43 @@ cd todo-nodejs-mongo
 azd up
 ```
 
-### Príklady AI aplikácií (kapitoly 2, 5, 8)
+### Príklady AI aplikácií (Kapitoly 2, 5, 8)
 
-| Šablóna | Repozitár | Náročnosť | Zameranie |
-|:--------|:----------|:----------|:----------|
+| Šablóna | Repozitár | Zložitosť | Zameranie |
+|:---------|:-----------|:-----------|:------|
 | **Azure OpenAI Chat** | [Lokálne: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | Nasadenie GPT-4 |
 | **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Základný AI chat |
-| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Rámec pre agentov |
-| **Vyhľadávanie + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | Vzor RAG |
+| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Rámec agentov |
+| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG vzor |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Podnikové AI |
 
-### Databázy a pokročilé vzory (kapitoly 3-8)
+### Databázy a pokročilé vzory (Kapitoly 3-8)
 
-| Šablóna | Repozitár | Náročnosť | Zameranie |
-|:--------|:----------|:----------|:----------|
+| Šablóna | Repozitár | Zložitosť | Zameranie |
+|:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Integrácia databázy |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | Serverless NoSQL |
-| **Java mikroservisy** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Viac služieb |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
+| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Viacslužbové |
 | **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Ciele učenia
 
-Prácou na týchto príkladoch sa naučíte:
-- Praktizovať pracovné postupy Azure Developer CLI s realistickými aplikačnými scenármi
-- Porozumieť rôznym architektúram aplikácií a ich implementáciám AZD
-- Ovládnuť vzory Infrastructure as Code pre rôzne služby Azure
-- Aplikovať stratégie správy konfigurácie a nasadenia špecifické pre prostredie
-- Implementovať monitorovanie, bezpečnosť a vzory škálovania v praktických kontextoch
-- Získať skúsenosti s riešením problémov a ladením reálnych scenárov nasadenia
+Pri práci s týmito príkladmi budete:
+- Precvičovať si pracovné postupy Azure Developer CLI s realistickými aplikačnými scenármi
+- Pochopiť rôzne architektúry aplikácií a ich implementácie v azd
+- Ovládnuť vzory Infrastructure as Code pre rôzne Azure služby
+- Aplikovať správu konfigurácií a nasadzovacie stratégie špecifické pre prostredie
+- Implementovať monitorovanie, zabezpečenie a škálovateľnosť v praktických kontextoch
+- Získať skúsenosti s riešením problémov a ladením reálnych nasadení
 
 ## Výsledky učenia
 
 Po dokončení týchto príkladov budete schopní:
-- Sebavedomo nasadiť rôzne typy aplikácií pomocou Azure Developer CLI
+- Istotne nasadzovať rôzne typy aplikácií pomocou Azure Developer CLI
 - Prispôsobiť poskytnuté šablóny vlastným požiadavkám aplikácie
-- Navrhnúť a implementovať vlastné vzory infraštruktúry pomocou Bicep
-- Konfigurovať komplexné aplikácie s viacerými službami s riadnymi závislosťami
-- Aplikovať bezpečnostné, monitorovacie a výkonnostné osvedčené postupy v reálnych scenároch
+- Navrhovať a implementovať vlastné infraštruktúrne vzory pomocou Bicep
+- Konfigurovať zložité viacslužbové aplikácie s korektnými závislosťami
+- Použiť bezpečnostné, monitorovacie a výkonnostné osvedčené postupy v reálnych scenároch
 - Riešiť problémy a optimalizovať nasadenia na základe praktických skúseností
 
 ## Štruktúra adresára
@@ -197,146 +188,146 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Príklady rýchleho štartu
+## Rýchly štart - príklady
 
-> **💡 Nový v AZD?** Začnite s príkladom č. 1 (Flask API) - trvá ~20 minút a učí základné koncepty.
+> **💡 Nový v AZD?** Začnite s príkladom č. 1 (Flask API) - trvá to ~20 minút a naučí základné koncepty.
 
 ### Pre začiatočníkov
 1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Lokálne) ⭐  
-   Nasadenie jednoduchého REST API so škálovaním na nulu  
+   Nasadiť jednoduché REST API so škálovaním na nulu  
    **Čas:** 20-25 minút | **Náklady:** $0-5/mesiac  
-   **Čo sa naučíte:** Základný pracovný postup azd, kontajnerizácia, zdravotné sondy  
+   **Čo sa naučíte:** Základný azd pracovný postup, kontajnerizácia, health probe-y  
    **Očakávaný výsledok:** Funkčný API endpoint vracajúci "Hello, World!" s monitorovaním
 
-2. **[Jednoduchá webová aplikácia - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Nasadenie webovej aplikácie Node.js Express s MongoDB  
+2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
+   Nasadiť Node.js Express webovú aplikáciu s MongoDB  
    **Čas:** 25-35 minút | **Náklady:** $10-30/mesiac  
-   **Čo sa naučíte:** Integrácia databázy, environmentálne premenné, pripojovacie reťazce  
-   **Očakávaný výsledok:** Aplikácia zoznamu úloh s funkciami vytvárania/čítania/aktualizácie/mazania
+   **Čo sa naučíte:** Integrácia databázy, premenné prostredia, connection stringy  
+   **Očakávaný výsledok:** Aplikácia Todo list s CRUD funkciami
 
-3. **[Statická webová stránka - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Hostovanie statickej webovej stránky React s Azure Static Web Apps  
+3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
+   Hostovať statickú webovú stránku React s Azure Static Web Apps  
    **Čas:** 20-30 minút | **Náklady:** $0-10/mesiac  
-   **Čo sa naučíte:** Statické hostovanie, serverless funkcie, nasadenie CDN  
+   **Čo sa naučíte:** Statické hostovanie, serverless funkcie, CDN nasadenie  
    **Očakávaný výsledok:** React UI s API backendom, automatické SSL, globálne CDN
 
 ### Pre stredne pokročilých
 4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (Lokálne) ⭐⭐  
-   Nasadenie GPT-4 s rozhraním pre chat a bezpečnou správou API kľúčov  
+   Nasadiť GPT-4 s chat rozhraním a bezpečným manažmentom API kľúčov  
    **Čas:** 35-45 minút | **Náklady:** $50-200/mesiac  
    **Čo sa naučíte:** Nasadenie Azure OpenAI, integrácia Key Vault, sledovanie tokenov  
    **Očakávaný výsledok:** Funkčná chat aplikácia s GPT-4 a monitorovaním nákladov
 
-5. **[Container App - Mikroservisy](../../../examples/container-app/microservices)** (Lokálne) ⭐⭐⭐⭐  
-   Produkčne pripravená architektúra viacerých služieb  
+5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Lokálne) ⭐⭐⭐⭐  
+   Produkčná multi-service architektúra  
    **Čas:** 45-60 minút | **Náklady:** $50-150/mesiac  
-   **Čo sa naučíte:** Komunikácia medzi službami, fronty správ, distribuované sledovanie  
-   **Očakávaný výsledok:** Systém s 2 službami (API Gateway + Product Service) s monitorovaním
+   **Čo sa naučíte:** Komunikácia služieb, message queuing, distribuované trasovanie  
+   **Očakávaný výsledok:** Systém z 2 služieb (API Gateway + Product Service) s monitorovaním
 
-6. **[Database App - C# s Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
+6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
    Webová aplikácia s C# API a Azure SQL databázou  
    **Čas:** 30-45 minút | **Náklady:** $20-80/mesiac  
-   **Čo sa naučíte:** Entity Framework, migrácie databázy, bezpečnosť pripojenia  
-   **Očakávaný výsledok:** C# API s backendom Azure SQL, automatické nasadenie schémy
+   **Čo sa naučíte:** Entity Framework, migrácie databázy, zabezpečenie pripojení  
+   **Očakávaný výsledok:** C# API s Azure SQL backendom, automatické nasadenie schémy
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   Python Azure Functions s HTTP triggermi a Cosmos DB  
+   Python Azure Functions s HTTP trigger-mi a Cosmos DB  
    **Čas:** 30-40 minút | **Náklady:** $10-40/mesiac  
-   **Čo sa naučíte:** Architektúra založená na udalostiach, serverless škálovanie, integrácia NoSQL  
-   **Očakávaný výsledok:** Funkčná aplikácia reagujúca na HTTP požiadavky s úložiskom Cosmos DB
+   **Čo sa naučíte:** Event-driven architektúra, serverless škálovanie, NoSQL integrácia  
+   **Očakávaný výsledok:** Function app reagujúca na HTTP požiadavky s uložením v Cosmos DB
 
-8. **[Mikroservisy - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Viacslužbová Java aplikácia s Container Apps a API gateway  
+8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
+   Multi-service Java aplikácia s Container Apps a API gateway  
    **Čas:** 60-90 minút | **Náklady:** $80-200/mesiac  
-   **Čo sa naučíte:** Nasadenie Spring Boot, sieť služieb, vyvažovanie záťaže  
-   **Očakávaný výsledok:** Viacslužbový Java systém s objavovaním služieb a smerovaním
+   **Čo sa naučíte:** Nasadenie Spring Boot, service mesh, load balancing  
+   **Očakávaný výsledok:** Viacslužbový Java systém s discovery a routovaním
 
-### Šablóny Azure AI Foundry
+### Microsoft Foundry šablóny
 
-1. **[Azure OpenAI Chat App - Lokálny príklad](../../../examples/azure-openai-chat)** ⭐⭐  
-   Kompletné nasadenie GPT-4 s rozhraním pre chat  
+1. **[Azure OpenAI Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
+   Kompletné nasadenie GPT-4 s chat rozhraním  
    **Čas:** 35-45 minút | **Náklady:** $50-200/mesiac  
-   **Očakávaný výsledok:** Funkčná chat aplikácia so sledovaním tokenov a monitorovaním nákladov
+   **Očakávaný výsledok:** Funkčná chat aplikácia so sledovaním tokenov a nákladov
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   Inteligentná chat aplikácia s architektúrou RAG  
+   Inteligentná chat aplikácia s RAG architektúrou  
    **Čas:** 60-90 minút | **Náklady:** $100-300/mesiac  
    **Očakávaný výsledok:** Chat rozhranie poháňané RAG s vyhľadávaním dokumentov a citáciami
 
-3. **[AI spracovanie dokumentov](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   Analýza dokumentov pomocou služieb Azure AI  
+3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
+   Analýza dokumentov pomocou Azure AI služieb  
    **Čas:** 40-60 minút | **Náklady:** $20-80/mesiac  
    **Očakávaný výsledok:** API extrahujúce text, tabuľky a entity z nahraných dokumentov
 
-4. **[Pipeline strojového učenia](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   Pracovný postup MLOps s Azure Machine Learning  
+4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
+   MLOps pracovný tok s Azure Machine Learning  
    **Čas:** 2-3 hodiny | **Náklady:** $150-500/mesiac  
-   **Očakávaný výsledok:** Automatizovaný ML pipeline s tréningom, nasadením a monitorovaním
+   **Očakávaný výsledok:** Automatizovaný ML pipeline s trénovaním, nasadením a monitorovaním
 
 ### Scenáre z reálneho sveta
 
-#### **Riešenie pre maloobchod s viacerými agentmi** 🆕
+#### **Riešenie Retail Multi-Agent** 🆕
 **[Kompletný sprievodca implementáciou](./retail-scenario.md)**
 
-Komplexné, produkčne pripravené riešenie zákazníckej podpory s viacerými agentmi, ktoré demonštruje podnikové AI aplikácie nasadené pomocou AZD. Tento scenár poskytuje:
+Komplexné, produkčné multi-agentné riešenie zákazníckej podpory, ktoré demonštruje nasadenie podnikovej AI aplikácie pomocou AZD. Tento scenár poskytuje:
 
-- **Kompletná architektúra**: Systém viacerých agentov so špecializovanými agentmi pre zákaznícky servis a správu inventára
-- **Produkčná infraštruktúra**: Multi-regionálne nasadenia Azure OpenAI, AI vyhľadávanie, Container Apps a komplexné monitorovanie  
-- **Pripravená ARM šablóna na nasadenie**: Jedno kliknutie na nasadenie s viacerými režimami konfigurácie (Minimal/Standard/Premium)  
-- **Pokročilé funkcie**: Validácia bezpečnosti red teaming, rámec na hodnotenie agentov, optimalizácia nákladov a návody na riešenie problémov  
-- **Reálny obchodný kontext**: Prípad použitia zákazníckej podpory pre maloobchodníkov s nahrávaním súborov, integráciou vyhľadávania a dynamickým škálovaním  
+- **Kompletná architektúra**: Systém s viacerými agentmi so špecializovanými agentmi pre zákaznícky servis a správu zásob
+- **Produkčná infraštruktúra**: Multi-regionálne nasadenia Azure OpenAI, AI Search, Container Apps a komplexné monitorovanie
+- **ARM šablóna pripravená na nasadenie**: Nasadenie na jedno kliknutie s viacerými režimami konfigurácie (Minimal/Standard/Premium)
+- **Pokročilé funkcie**: Red teaming bezpečnostná validácia, rámec hodnotenia agentov, optimalizácia nákladov a návody na riešenie problémov
+- **Reálny obchodný kontext**: Použitie v zákazníckej podpore maloobchodníka s nahrávaním súborov, integráciou vyhľadávania a dynamickým škálovaním
 
-**Technológie**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
+**Technológie**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Komplexnosť**: ⭐⭐⭐⭐ (Pokročilé - pripravené na produkčné nasadenie v podnikoch)  
+**Zložitosť**: ⭐⭐⭐⭐ (Pokročilé - Pripravené do podnikovej produkcie)
 
-**Ideálne pre**: AI vývojárov, architektov riešení a tímy budujúce produkčné multi-agentové systémy  
+**Vhodné pre**: AI vývojárov, riešenových architektov a tímy budujúce produkčné multi-agentné systémy
 
-**Rýchly štart**: Nasadenie kompletného riešenia za menej ako 30 minút pomocou priloženej ARM šablóny s `./deploy.sh -g myResourceGroup`  
+**Rýchly štart**: Nasadte kompletné riešenie za menej ako 30 minút pomocou priloženej ARM šablóny s `./deploy.sh -g myResourceGroup`
 
-## 📋 Návod na použitie  
+## 📋 Inštrukcie použitia
 
-### Predpoklady  
+### Požiadavky
 
-Pred spustením akéhokoľvek príkladu:  
-- ✅ Azure predplatné s prístupom Owner alebo Contributor  
-- ✅ Nainštalovaný Azure Developer CLI ([Návod na inštaláciu](../docs/getting-started/installation.md))  
-- ✅ Spustený Docker Desktop (pre príklady s kontajnermi)  
-- ✅ Vhodné kvóty Azure (skontrolujte požiadavky konkrétneho príkladu)  
+Pred spustením akéhokoľvek príkladu:
+- ✅ Predplatné Azure s prístupom Owner alebo Contributor
+- ✅ Azure Developer CLI nainštalovaný ([Návod na inštaláciu](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop spustený (pre príklady s kontajnermi)
+- ✅ Primerané kvóty Azure (skontrolujte požiadavky špecifické pre príklad)
 
-> **💰 Upozornenie na náklady:** Všetky príklady vytvárajú skutočné Azure zdroje, ktoré generujú poplatky. Pozrite si jednotlivé README súbory pre odhady nákladov. Nezabudnite spustiť `azd down`, keď skončíte, aby ste sa vyhli pokračujúcim nákladom.  
+> **💰 Varovanie o nákladoch:** Všetky príklady vytvárajú skutočné Azure zdroje, ktoré generujú poplatky. Pozrite si jednotlivé súbory README pre odhad nákladov. Nezabudnite spustiť `azd down` po dokončení, aby ste predišli priebežným poplatkom.
 
-### Spustenie príkladov lokálne  
+### Spúšťanie príkladov lokálne
 
-1. **Klonovanie alebo kopírovanie príkladu**  
+1. **Klonovať alebo skopírovať príklad**
    ```bash
    # Prejdite na požadovaný príklad
    cd examples/simple-web-app
    ```
-  
-2. **Inicializácia AZD prostredia**  
+
+2. **Inicializovať AZD prostredie**
    ```bash
-   # Inicializovať s existujúcou šablónou
+   # Inicializujte pomocou existujúcej šablóny
    azd init
    
-   # Alebo vytvoriť nové prostredie
+   # Alebo vytvorte nové prostredie
    azd env new my-environment
    ```
-  
-3. **Konfigurácia prostredia**  
+
+3. **Nakonfigurovať prostredie**
    ```bash
    # Nastavte požadované premenné
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
-  
-4. **Nasadenie**  
+
+4. **Nasadiť**
    ```bash
    # Nasadiť infraštruktúru a aplikáciu
    azd up
    ```
-  
-5. **Overenie nasadenia**  
+
+5. **Overiť nasadenie**
    ```bash
    # Získajte koncové body služby
    azd env get-values
@@ -344,266 +335,266 @@ Pred spustením akéhokoľvek príkladu:
    # Otestujte koncový bod (príklad)
    curl https://your-app-url.azurecontainer.io/health
    ```
-  
-   **Očakávané indikátory úspechu:**  
-   - ✅ `azd up` dokončené bez chýb  
-   - ✅ Koncový bod služby vracia HTTP 200  
-   - ✅ Azure Portal zobrazuje stav "Running"  
-   - ✅ Application Insights prijíma telemetriu  
+   
+   **Očakávané indikátory úspechu:**
+   - ✅ `azd up` dokončený bez chýb
+   - ✅ Endpunkt služby vracia HTTP 200
+   - ✅ Azure Portal zobrazuje stav "Running"
+   - ✅ Application Insights prijíma telemetriu
 
-> **⚠️ Problémy?** Pozrite si [Bežné problémy](../docs/troubleshooting/common-issues.md) pre riešenie problémov s nasadením  
+> **⚠️ Problémy?** Pozrite si [Bežné problémy](../docs/chapter-07-troubleshooting/common-issues.md) pre riešenie problémov pri nasadení
 
-### Prispôsobenie príkladov  
+### Prispôsobenie príkladov
 
-Každý príklad obsahuje:  
-- **README.md** - Podrobné pokyny na nastavenie a prispôsobenie  
-- **azure.yaml** - Konfigurácia AZD s komentármi  
-- **infra/** - Bicep šablóny s vysvetlením parametrov  
-- **src/** - Ukážkový aplikačný kód  
-- **scripts/** - Pomocné skripty pre bežné úlohy  
+Každý príklad obsahuje:
+- **README.md** - Podrobné inštrukcie na nastavenie a prispôsobenie
+- **azure.yaml** - AZD konfigurácia s komentármi
+- **infra/** - Bicep šablóny s vysvetlením parametrov
+- **src/** - Ukážkový aplikačný kód
+- **scripts/** - Pomocné skripty pre bežné úlohy
 
-## 🎯 Ciele učenia  
+## 🎯 Ciele učenia
 
-### Kategórie príkladov  
+### Kategórie príkladov
 
-#### **Základné nasadenia**  
-- Aplikácie s jednou službou  
-- Jednoduché infraštruktúrne vzory  
-- Základné riadenie konfigurácie  
-- Nákladovo efektívne vývojové nastavenia  
+#### **Základné nasadenia**
+- Jednoslužbové aplikácie
+- Jednoduché vzory infraštruktúry
+- Základné riadenie konfigurácie
+- Nákladovo efektívne vývojové nastavenia
 
-#### **Pokročilé scenáre**  
-- Architektúry s viacerými službami  
-- Komplexné konfigurácie sietí  
-- Vzory integrácie databáz  
-- Implementácie bezpečnosti a súladu  
+#### **Pokročilé scenáre**
+- Viacslužbové architektúry
+- Zložité sieťové konfigurácie
+- Vzory integrácie databáz
+- Implementácie bezpečnosti a súladu
 
-#### **Vzory pripravené na produkciu**  
-- Konfigurácie vysokej dostupnosti  
-- Monitorovanie a pozorovateľnosť  
-- Integrácia CI/CD  
-- Nastavenia obnovy po havárii  
+#### **Vzorové postupy pripravené do produkcie**
+- Konfigurácie vysokého dostupnosti
+- Monitorovanie a pozorovateľnosť
+- Integrácia CI/CD
+- Nastavenia pre obnovu po havárii
 
-## 📖 Popisy príkladov  
+## 📖 Popisy príkladov
 
-### Jednoduchá webová aplikácia - Node.js Express  
+### Jednoduchá webová aplikácia - Node.js Express
 **Technológie**: Node.js, Express, MongoDB, Container Apps  
-**Komplexnosť**: Začiatočník  
-**Koncepty**: Základné nasadenie, REST API, integrácia NoSQL databázy  
+**Zložitosť**: Začiatočník  
+**Koncepty**: Základné nasadenie, REST API, integrácia NoSQL databázy
 
-### Statická webová stránka - React SPA  
+### Statická webová stránka - React SPA
 **Technológie**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Komplexnosť**: Začiatočník  
-**Koncepty**: Statické hosťovanie, serverless backend, moderný webový vývoj  
+**Zložitosť**: Začiatočník  
+**Koncepty**: Statické hostovanie, serverless backend, moderný webový vývoj
 
-### Container App - Python Flask  
+### Container App - Python Flask
 **Technológie**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**Komplexnosť**: Začiatočník  
-**Koncepty**: Kontajnerizácia, REST API, škálovanie na nulu, zdravotné sondy, monitorovanie  
-**Umiestnenie**: [Lokálny príklad](../../../examples/container-app/simple-flask-api)  
+**Zložitosť**: Začiatočník  
+**Koncepty**: Kontajnerizácia, REST API, scale-to-zero, health probe, monitorovanie  
+**Umiestnenie**: [Lokálny príklad](../../../examples/container-app/simple-flask-api)
 
-### Container App - Architektúra mikroservisov  
+### Container App - Mikroservisy
 **Technológie**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Komplexnosť**: Pokročilé  
-**Koncepty**: Architektúra s viacerými službami, komunikácia služieb, fronty správ, distribuované sledovanie  
-**Umiestnenie**: [Lokálny príklad](../../../examples/container-app/microservices)  
+**Zložitosť**: Pokročilé  
+**Koncepty**: Viacslužbová architektúra, komunikácia služieb, zaškrcovanie správ, distribuované trasovanie  
+**Umiestnenie**: [Lokálny príklad](../../../examples/container-app/microservices)
 
-### Databázová aplikácia - C# s Azure SQL  
+### Aplikačná databáza - C# s Azure SQL
 **Technológie**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Komplexnosť**: Stredne pokročilé  
-**Koncepty**: Entity Framework, pripojenia k databáze, vývoj webového API  
+**Zložitosť**: Stredne pokročilé  
+**Koncepty**: Entity Framework, pripojenia k databáze, vývoj webového API
 
-### Serverless funkcia - Python Azure Functions  
+### Serverless funkcia - Python Azure Functions
 **Technológie**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Komplexnosť**: Stredne pokročilé  
-**Koncepty**: Architektúra založená na udalostiach, serverless výpočty, vývoj full-stack aplikácií  
+**Zložitosť**: Stredne pokročilé  
+**Koncepty**: Event-driven architektúra, serverless výpočty, full-stack vývoj
 
-### Mikroservisy - Java Spring Boot  
+### Mikroservisy - Java Spring Boot
 **Technológie**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Komplexnosť**: Stredne pokročilé  
-**Koncepty**: Komunikácia mikroservisov, distribuované systémy, podnikové vzory  
+**Zložitosť**: Stredne pokročilé  
+**Koncepty**: Komunikácia mikroservisov, distribuované systémy, podnikové vzory
 
-### Príklady Azure AI Foundry  
+### Microsoft Foundry príklady
 
-#### Azure OpenAI Chat App  
+#### Azure OpenAI Chat App
 **Technológie**: Azure OpenAI, Cognitive Search, App Service  
-**Komplexnosť**: Stredne pokročilé  
-**Koncepty**: Architektúra RAG, vektorové vyhľadávanie, integrácia LLM  
+**Zložitosť**: Stredne pokročilé  
+**Koncepty**: RAG architektúra, vektorové vyhľadávanie, integrácia LLM
 
-#### AI spracovanie dokumentov  
+#### AI spracovanie dokumentov
 **Technológie**: Azure AI Document Intelligence, Storage, Functions  
-**Komplexnosť**: Stredne pokročilé  
-**Koncepty**: Analýza dokumentov, OCR, extrakcia dát  
+**Zložitosť**: Stredne pokročilé  
+**Koncepty**: Analýza dokumentov, OCR, extrakcia dát
 
-#### Pipeline strojového učenia  
+#### Pipeline strojového učenia
 **Technológie**: Azure ML, MLOps, Container Registry  
-**Komplexnosť**: Pokročilé  
-**Koncepty**: Tréning modelov, nasadzovacie pipeline, monitorovanie  
+**Zložitosť**: Pokročilé  
+**Koncepty**: Tréning modelov, nasadzovacie pipeline, monitorovanie
 
-## 🛠 Príklady konfigurácie  
+## 🛠 Príklady konfigurácií
 
-Adresár `configurations/` obsahuje opakovane použiteľné komponenty:  
+Adresár `configurations/` obsahuje znovupoužiteľné komponenty:
 
-### Konfigurácie prostredia  
-- Nastavenia vývojového prostredia  
-- Konfigurácie staging prostredia  
-- Konfigurácie pripravené na produkciu  
-- Nastavenia nasadenia do viacerých regiónov  
+### Konfigurácie prostredia
+- Nastavenia vývojového prostredia
+- Konfigurácie staging prostredia
+- Konfigurácie pripravené do produkcie
+- Nastavenia pre multi-regionálne nasadenie
 
-### Bicep moduly  
-- Opakovane použiteľné infraštruktúrne komponenty  
-- Bežné vzory zdrojov  
-- Šablóny s posilnenou bezpečnosťou  
-- Nákladovo optimalizované konfigurácie  
+### Bicep moduly
+- Znovupoužiteľné infraštruktúrne komponenty
+- Bežné vzory zdrojov
+- Šablóny tvrdené pre bezpečnosť
+- Konfigurácie optimalizované pre náklady
 
-### Pomocné skripty  
-- Automatizácia nastavenia prostredia  
-- Skripty na migráciu databáz  
-- Nástroje na validáciu nasadenia  
-- Nástroje na monitorovanie nákladov  
+### Pomocné skripty
+- Automatizácia nastavenia prostredia
+- Skripty migrácie databázy
+- Nástroje na validáciu nasadenia
+- Utility na monitorovanie nákladov
 
-## 🔧 Príručka prispôsobenia  
+## 🔧 Návod na prispôsobenie
 
-### Prispôsobenie príkladov pre váš prípad použitia  
+### Prispôsobenie príkladov pre váš prípad použitia
 
-1. **Skontrolujte predpoklady**  
-   - Skontrolujte požiadavky na služby Azure  
-   - Overte limity predplatného  
-   - Pochopte nákladové dôsledky  
+1. **Skontrolujte požiadavky**
+   - Overte požiadavky služieb Azure
+   - Skontrolujte limity predplatného
+   - Pochopte dopady na náklady
 
-2. **Upravte konfiguráciu**  
-   - Aktualizujte definície služieb v `azure.yaml`  
-   - Prispôsobte Bicep šablóny  
-   - Upravte premenné prostredia  
+2. **Upravte konfiguráciu**
+   - Aktualizujte definície služieb v `azure.yaml`
+   - Prispôsobte Bicep šablóny
+   - Upravte premenné prostredia
 
-3. **Dôkladne testujte**  
-   - Najskôr nasadzujte do vývojového prostredia  
-   - Overte funkčnosť  
-   - Testujte škálovanie a výkon  
+3. **Dôkladne otestujte**
+   - Najprv nasadiť do vývojového prostredia
+   - Validovať funkčnosť
+   - Otestovať škálovanie a výkon
 
-4. **Bezpečnostná kontrola**  
-   - Skontrolujte prístupové kontroly  
-   - Implementujte správu tajomstiev  
-   - Aktivujte monitorovanie a upozornenia  
+4. **Bezpečnostné preskúmanie**
+   - Skontrolujte prístupové kontroly
+   - Implementujte správu tajomstiev
+   - Aktivujte monitorovanie a alerty
 
-## 📊 Porovnávacia tabuľka  
+## 📊 Porovnávacia matica
 
-| Príklad | Služby | Databáza | Autentifikácia | Monitorovanie | Komplexnosť |  
-|---------|----------|----------|------|------------|------------|  
-| **Azure OpenAI Chat** (Lokálne) | 2 | ❌ | Key Vault | Plné | ⭐⭐ |  
-| **Python Flask API** (Lokálne) | 1 | ❌ | Základné | Plné | ⭐ |  
-| **Mikroservisy** (Lokálne) | 5+ | ✅ | Podnikové | Pokročilé | ⭐⭐⭐⭐ |  
-| Node.js Express Todo | 2 | ✅ | Základné | Základné | ⭐ |  
-| React SPA + Functions | 3 | ✅ | Základné | Plné | ⭐ |  
-| Python Flask Container | 2 | ❌ | Základné | Plné | ⭐ |  
-| C# Web API + SQL | 2 | ✅ | Plné | Plné | ⭐⭐ |  
-| Python Functions + SPA | 3 | ✅ | Plné | Plné | ⭐⭐ |  
-| Java Microservices | 5+ | ✅ | Plné | Plné | ⭐⭐ |  
-| Azure OpenAI Chat | 3 | ✅ | Plné | Plné | ⭐⭐⭐ |  
-| AI Document Processing | 2 | ❌ | Základné | Plné | ⭐⭐ |  
-| ML Pipeline | 4+ | ✅ | Plné | Plné | ⭐⭐⭐⭐ |  
-| **Retail Multi-Agent** (Lokálne) | **8+** | **✅** | **Podnikové** | **Pokročilé** | **⭐⭐⭐⭐** |  
+| Príklad | Služby | Databáza | Autentifikácia | Monitorovanie | Zložitosť |
+|---------|--------|----------|----------------|---------------|-----------|
+| **Azure OpenAI Chat** (Local) | 2 | ❌ | Key Vault | Plné | ⭐⭐ |
+| **Python Flask API** (Local) | 1 | ❌ | Základné | Plné | ⭐ |
+| **Microservices** (Local) | 5+ | ✅ | Podnikové | Pokročilé | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Základné | Základné | ⭐ |
+| React SPA + Functions | 3 | ✅ | Základné | Plné | ⭐ |
+| Python Flask Container | 2 | ❌ | Základné | Plné | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Plné | Plné | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Plné | Plné | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Plné | Plné | ⭐⭐ |
+| Azure OpenAI Chat | 3 | ✅ | Plné | Plné | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Základné | Plné | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Plné | Plné | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Podnikové** | **Pokročilé** | **⭐⭐⭐⭐** |
 
-## 🎓 Učebná cesta  
+## 🎓 Vzdelávacia cesta
 
-### Odporúčaný postup  
+### Odporúčaný postup
 
-1. **Začnite s jednoduchou webovou aplikáciou**  
-   - Naučte sa základné koncepty AZD  
-   - Pochopte pracovný postup nasadenia  
-   - Precvičte si správu prostredia  
+1. **Začnite s Jednoduchou webovou aplikáciou**
+   - Naučte sa základné koncepty AZD
+   - Pochopte pracovný tok nasadenia
+   - Precvičujte správu prostredí
 
-2. **Vyskúšajte statickú webovú stránku**  
-   - Preskúmajte rôzne možnosti hosťovania  
-   - Naučte sa o integrácii CDN  
-   - Pochopte konfiguráciu DNS  
+2. **Vyskúšajte statickú stránku**
+   - Preskúmajte rôzne možnosti hostingu
+   - Naučte sa o integrácii CDN
+   - Pochopte konfiguráciu DNS
 
-3. **Prejdite na Container App**  
-   - Naučte sa základy kontajnerizácie  
-   - Pochopte koncepty škálovania  
-   - Precvičte si prácu s Dockerom  
+3. **Prejdite na Container App**
+   - Naučte sa základy kontajnerizácie
+   - Pochopte koncepty škálovania
+   - Precvičujte prácu s Dockerom
 
-4. **Pridajte integráciu databázy**  
-   - Naučte sa poskytovanie databáz  
-   - Pochopte pripojovacie reťazce  
-   - Precvičte si správu tajomstiev  
+4. **Pridajte integráciu databázy**
+   - Naučte sa provisioning databázy
+   - Pochopte connection stringy
+   - Precvičujte správu tajomstiev
 
-5. **Preskúmajte serverless**  
-   - Pochopte architektúru založenú na udalostiach  
-   - Naučte sa o triggroch a väzbách  
-   - Precvičte si prácu s API  
+5. **Preskúmajte serverless**
+   - Pochopte event-driven architektúru
+   - Naučte sa o triggeroch a bindings
+   - Precvičujte prácu s API
 
-6. **Budujte mikroservisy**  
-   - Naučte sa komunikáciu služieb  
-   - Pochopte distribuované systémy  
-   - Precvičte si komplexné nasadenia  
+6. **Budujte mikroservisy**
+   - Naučte sa komunikáciu služieb
+   - Pochopte distribuované systémy
+   - Precvičujte zložité nasadenia
 
-## 🔍 Výber správneho príkladu  
+## 🔍 Ako nájsť správny príklad
 
-### Podľa technologického stacku  
-- **Container Apps**: [Python Flask API (Lokálne)](../../../examples/container-app/simple-flask-api), [Mikroservisy (Lokálne)](../../../examples/container-app/microservices), Java Microservices  
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Lokálne)](../../../examples/container-app/microservices)  
-- **Python**: [Python Flask API (Lokálne)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Lokálne)](../../../examples/container-app/microservices), Python Functions + SPA  
-- **C#**: [Microservices Order Service (Lokálne)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline  
-- **Go**: [Microservices User Service (Lokálne)](../../../examples/container-app/microservices)  
-- **Java**: Java Spring Boot Microservices  
-- **React**: React SPA + Functions  
-- **Containers**: [Python Flask (Lokálne)](../../../examples/container-app/simple-flask-api), [Microservices (Lokálne)](../../../examples/container-app/microservices), Java Microservices  
-- **Databases**: [Microservices (Lokálne)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
-- **AI/ML**: **[Azure OpenAI Chat (Lokálne)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**  
-- **Multi-Agent Systems**: **Retail Multi-Agent Solution**  
-- **OpenAI Integration**: **[Azure OpenAI Chat (Lokálne)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution  
-- **Enterprise Production**: [Microservices (Lokálne)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
+### Podľa technologického stacku
+- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Kontajnery**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Databázy**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Systémy**: **Retail Multi-Agent Solution**
+- **OpenAI Integrácia**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Podniková produkcia**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Podľa architektonického vzoru  
-- **Jednoduché REST API**: [Python Flask API (Lokálne)](../../../examples/container-app/simple-flask-api)  
-- **Monolitické**: Node.js Express Todo, C# Web API + SQL  
-- **Statické + Serverless**: React SPA + Functions, Python Functions + SPA  
-- **Mikroservisy**: [Produkčné mikroservisy (Lokálne)](../../../examples/container-app/microservices), Java Spring Boot Microservices  
-- **Kontajnerizované**: [Python Flask (Lokálne)](../../../examples/container-app/simple-flask-api), [Microservices (Lokálne)](../../../examples/container-app/microservices)  
-- **AI-Powered**: **[Azure OpenAI Chat (Lokálne)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**  
-- **Architektúra multi-agentov**: **Retail Multi-Agent Solution**  
-- **Podnikové multi-služby**: [Microservices (Lokálne)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
+### Podľa architektonického vzoru
+- **Jednoduché REST API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
+- **Monolit**: Node.js Express Todo, C# Web API + SQL
+- **Statické + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Mikroservisy**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Kontajnerizované**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)
+- **S podporou AI**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-agentná architektúra**: **Retail Multi-Agent Solution**
+- **Podnikové viacslužbové**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Podľa úrovne komplexnosti  
-- **Začiatočník**: [Python Flask API (Lokálne)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
-- **Stredne pokročilé**: **[Azure OpenAI Chat (Lokálne)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing  
-- **Pokročilé**: ML Pipeline  
-- **Pripravené na produkciu v podnikoch**: [Microservices (Lokálne)](../../../examples/container-app/microservices) (Multi-služby s frontami správ), **Retail Multi-Agent Solution** (Kompletný multi-agentový systém s nasadením ARM šablóny)  
+### Podľa úrovne zložitosti
+- **Začiatočník**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Stredne pokročilé**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Pokročilé**: ML Pipeline
+- **Pripravené do podnikovej produkcie**: [Microservices (Local)](../../../examples/container-app/microservices) (Viacslužbové s message queuing), **Retail Multi-Agent Solution** (Kompletný multi-agentný systém s ARM šablónou na nasadenie)
 
-## 📚 Ďalšie zdroje  
+## 📚 Dodatočné zdroje
 
-### Odkazy na dokumentáciu  
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)  
-- [Bicep Dokumentácia](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
+### Odkazy na dokumentáciu
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Príklady z komunity  
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)  
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)  
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)  
-- [Todo App s C# a Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)  
-- [Todo App s Python a MongoDB](https://github.com/Azure-Samples/todo-python-mongo)  
+### Komunitné príklady
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Todo aplikácia s Node.js a PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [React webová aplikácia s C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
-- [Azure Functions s Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Úloha Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions v Jave](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Najlepšie praktiky
+### Najlepšie postupy
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Prispievanie príkladov
+## 🤝 Príspevky s príkladmi
 
-Máte užitočný príklad na zdieľanie? Radi privítame vaše príspevky!
+Máte užitočný príklad, ktorý chcete zdieľať? Vítame príspevky!
 
 ### Pokyny na odoslanie
-1. Dodržujte stanovenú štruktúru adresárov
-2. Zahrňte podrobný README.md
+1. Dodržujte zabehnutú štruktúru adresárov
+2. Priložte podrobný README.md
 3. Pridajte komentáre do konfiguračných súborov
 4. Dôkladne otestujte pred odoslaním
-5. Zahrňte odhady nákladov a predpoklady
+5. Uveďte odhady nákladov a predpoklady
 
 ### Štruktúra šablóny príkladu
 ```
@@ -621,46 +612,46 @@ example-name/
 
 ---
 
-**Tip pre profesionálov**: Začnite s najjednoduchším príkladom, ktorý zodpovedá vašej technologickej zostave, a postupne prejdite k zložitejším scenárom. Každý príklad stavia na konceptoch z predchádzajúcich!
+**Tip od odborníka**: Začnite s najjednoduchším príkladom, ktorý zodpovedá vášmu technologickému stacku, a potom postupne prejdite na zložitejšie scenáre. Každý príklad nadväzuje na koncepty z predchádzajúcich!
 
 ## 🚀 Pripravení začať?
 
-### Vaša učebná cesta
+### Váš učebný plán
 
-1. **Úplný začiatočník?** → Začnite s [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 minút)
-2. **Máte základné znalosti AZD?** → Skúste [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 minút)
-3. **Budujete AI aplikácie?** → Začnite s [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 minút) alebo preskúmajte [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ hodiny)
-4. **Potrebujete konkrétnu technologickú zostavu?** → Použite sekciu [Nájdenie správneho príkladu](../../../examples) vyššie
+1. **Úplný začiatočník?** → Začnite s [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 min)
+2. **Máte základné znalosti AZD?** → Vyskúšajte [Mikroslužby](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 min)
+3. **Vytvárate AI aplikácie?** → Začnite s [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 min) alebo preskúmajte [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ hodín)
+4. **Potrebujete konkrétny technologický stack?** → Využite sekciu [Nájdenie správneho príkladu](../../../examples) vyššie
 
 ### Ďalšie kroky
 
 - ✅ Skontrolujte [Predpoklady](../../../examples) vyššie
-- ✅ Vyberte príklad zodpovedajúci vašej úrovni zručností (pozrite [Legenda zložitosti](../../../examples))
-- ✅ Dôkladne si prečítajte README príkladu pred nasadením
-- ✅ Nastavte si pripomienku na spustenie `azd down` po testovaní
-- ✅ Podeľte sa o svoje skúsenosti prostredníctvom GitHub Issues alebo Discussions
+- ✅ Vyberte príklad zodpovedajúci vašej úrovni (pozrite si [Legendu zložitosti](../../../examples))
+- ✅ Pred nasadením si dôkladne prečítajte README príkladu
+- ✅ Nastavte si pripomienku spustiť `azd down` po testovaní
+- ✅ Podeľte sa o svoje skúsenosti cez GitHub Issues alebo Discussions
 
 ### Potrebujete pomoc?
 
 - 📖 [FAQ](../resources/faq.md) - Odpovede na bežné otázky
-- 🐛 [Príručka na riešenie problémov](../docs/troubleshooting/common-issues.md) - Oprava problémov s nasadením
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Opýtajte sa komunity
-- 📚 [Študijný materiál](../resources/study-guide.md) - Posilnite svoje učenie
+- 🐛 [Sprievodca riešením problémov](../docs/chapter-07-troubleshooting/common-issues.md) - Opravte problémy s nasadením
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Pýtajte sa komunity
+- 📚 [Študijný sprievodca](../resources/study-guide.md) - Prehĺbte si vedomosti
 
 ---
 
 **Navigácia**
 - **📚 Domov kurzu**: [AZD For Beginners](../README.md)
-- **📖 Študijné materiály**: [Študijný materiál](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glosár](../resources/glossary.md)
-- **🔧 Zdroje**: [FAQ](../resources/faq.md) | [Riešenie problémov](../docs/troubleshooting/common-issues.md)
+- **📖 Študijné materiály**: [Študijný sprievodca](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)
+- **🔧 Zdroje**: [FAQ](../resources/faq.md) | [Riešenie problémov](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Posledná aktualizácia: November 2025 | [Nahlásiť problémy](https://github.com/microsoft/AZD-for-beginners/issues) | [Prispieť príklady](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Naposledy aktualizované: november 2025 | [Nahlásiť problémy](https://github.com/microsoft/AZD-for-beginners/issues) | [Prispieť príklady](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zrieknutie sa zodpovednosti**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Upozornenie:
+Tento dokument bol preložený pomocou AI prekladateľskej služby Co-op Translator (https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za rozhodujúci (autoritatívny) zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie, ktoré vyplývajú z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

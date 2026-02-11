@@ -1,34 +1,25 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T19:25:46+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ro"
-}
--->
-# Simplu API Flask - Exemplu de Aplicație Container
+# Exemplu simplu de API Flask - Aplicație Container
 
-**Cale de învățare:** Începător ⭐ | **Timp:** 25-35 minute | **Cost:** $0-15/lună
+**Parcurs de învățare:** Începător ⭐ | **Durată:** 25-35 minute | **Cost:** 0-15$/lună
 
-Un API REST complet și funcțional, construit cu Python Flask, implementat pe Azure Container Apps folosind Azure Developer CLI (azd). Acest exemplu demonstrează implementarea containerelor, auto-scalarea și elementele de bază ale monitorizării.
+Un API REST Python Flask complet, funcțional, implementat în Azure Container Apps folosind Azure Developer CLI (azd). Acest exemplu demonstrează implementarea containerelor, scalarea automată și bazele monitorizării.
 
-## 🎯 Ce Vei Învăța
+## 🎯 Ce vei învăța
 
-- Implementarea unei aplicații Python containerizate pe Azure
-- Configurarea auto-scalării cu scale-to-zero
-- Implementarea sondelor de sănătate și verificărilor de disponibilitate
-- Monitorizarea jurnalelor și metricilor aplicației
-- Utilizarea Azure Developer CLI pentru implementare rapidă
+- Implementarea unei aplicații Python containerizate în Azure
+- Configurarea scalării automate cu scale-to-zero
+- Implementarea sondelor de sănătate și verificări de pregătire
+- Monitorizarea jurnalelor și a metricilor aplicației
+- Utilizarea Azure Developer CLI pentru o implementare rapidă
 
-## 📦 Ce Este Inclus
+## 📦 Ce este inclus
 
 ✅ **Aplicație Flask** - API REST complet cu operațiuni CRUD (`src/app.py`)  
-✅ **Dockerfile** - Configurație de container pregătită pentru producție  
-✅ **Infrastructură Bicep** - Mediu Container Apps și implementare API  
-✅ **Configurație AZD** - Configurare pentru implementare cu o singură comandă  
-✅ **Sonde de sănătate** - Verificări de disponibilitate și funcționare configurate  
-✅ **Auto-scalare** - 0-10 replici bazate pe încărcarea HTTP  
+✅ **Dockerfile** - Configurație container pregătită pentru producție  
+✅ **Infrastructură Bicep** - Mediu Container Apps și implementarea API-ului  
+✅ **Configurație AZD** - Setup de implementare cu o singură comandă  
+✅ **Sonde de sănătate** - Verificări de liveness și readiness configurate  
+✅ **Scalare automată** - 0-10 replici în funcție de încărcarea HTTP  
 
 ## Arhitectură
 
@@ -47,60 +38,60 @@ Un API REST complet și funcțional, construit cu Python Flask, implementat pe A
 └────────────────────────────────────────┘
 ```
 
-## Cerințe Prealabile
+## Cerințe preliminare
 
 ### Necesare
 - **Azure Developer CLI (azd)** - [Ghid de instalare](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Abonament Azure** - [Cont gratuit](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Instalează Docker](https://www.docker.com/products/docker-desktop/) (pentru testare locală)
+- **Docker Desktop** - [Instalare Docker](https://www.docker.com/products/docker-desktop/) (pentru testare locală)
 
-### Verifică Cerințele Prealabile
+### Verificarea cerințelor preliminare
 
 ```bash
-# Verificați versiunea azd (necesar 1.5.0 sau mai mare)
+# Verifică versiunea azd (necesită 1.5.0 sau mai mare)
 azd version
 
-# Verificați autentificarea Azure
+# Verifică autentificarea Azure
 azd auth login
 
-# Verificați Docker (opțional, pentru testare locală)
+# Verifică Docker (opțional, pentru testare locală)
 docker --version
 ```
 
-## ⏱️ Cronologia Implementării
+## ⏱️ Timp de implementare
 
-| Fază | Durată | Ce Se Întâmplă |
-|------|--------|---------------||
+| Fază | Durată | Ce se întâmplă |
+|-------|----------|--------------||
 | Configurare mediu | 30 secunde | Creare mediu azd |
-| Construire container | 2-3 minute | Construire Docker pentru aplicația Flask |
+| Construire container | 2-3 minute | Docker build aplicație Flask |
 | Provizionare infrastructură | 3-5 minute | Creare Container Apps, registru, monitorizare |
-| Implementare aplicație | 2-3 minute | Împingere imagine și implementare pe Container Apps |
+| Implementare aplicație | 2-3 minute | Push imagine și implementare în Container Apps |
 | **Total** | **8-12 minute** | Implementare completă gata |
 
-## Început Rapid
+## Pornire rapidă
 
 ```bash
-# Navigați la exemplu
+# Navighează la exemplu
 cd examples/container-app/simple-flask-api
 
-# Inițializați mediul (alegeți un nume unic)
+# Inițializează mediul (alege un nume unic)
 azd env new myflaskapi
 
-# Implementați totul (infrastructură + aplicație)
+# Desfășoară totul (infrastructură + aplicație)
 azd up
-# Vi se va solicita să:
-# 1. Selectați abonamentul Azure
-# 2. Alegeți locația (de exemplu, eastus2)
-# 3. Așteptați 8-12 minute pentru implementare
+# Vei fi solicitat să:
+# 1. Selectezi abonamentul Azure
+# 2. Alegi locația (de ex., eastus2)
+# 3. Aștepți 8-12 minute pentru desfășurare
 
-# Obțineți punctul final al API-ului
+# Obține endpoint-ul API-ului tău
 azd env get-values
 
-# Testați API-ul
+# Testează API-ul
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Rezultat Așteptat:**
+**Rezultat așteptat:**
 ```json
 {
   "status": "healthy",
@@ -110,9 +101,9 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Verifică Implementarea
+## ✅ Verificare implementare
 
-### Pasul 1: Verifică Starea Implementării
+### Pasul 1: Verifică starea implementării
 
 ```bash
 # Vizualizați serviciile implementate
@@ -120,20 +111,20 @@ azd show
 
 # Ieșirea așteptată arată:
 # - Serviciu: api
-# - Punct de acces: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Stare: În funcțiune
+# - Endpoint: https://ca-api-[env].xxx.azurecontainerapps.io
+# - Stare: În execuție
 ```
 
-### Pasul 2: Testează Punctele de Acces API
+### Pasul 2: Testează endpoint-urile API
 
 ```bash
-# Obține punctul final API
+# Obține endpointul API
 API_URL=$(azd env get-value API_ENDPOINT)
 
 # Testează sănătatea
 curl $API_URL/health
 
-# Testează punctul final rădăcină
+# Testează endpointul rădăcină
 curl $API_URL/
 
 # Creează un element
@@ -145,25 +136,28 @@ curl -X POST $API_URL/api/items \
 curl $API_URL/api/items
 ```
 
-**Criterii de Succes:**
-- ✅ Endpoint-ul de sănătate returnează HTTP 200
-- ✅ Endpoint-ul rădăcină afișează informații despre API
+**Criterii de succes:**
+- ✅ Endpoint-ul health returnează HTTP 200
+- ✅ Endpoint-ul root afișează informații API
 - ✅ POST creează un element și returnează HTTP 201
 - ✅ GET returnează elementele create
 
-### Pasul 3: Vizualizează Jurnalele
+### Pasul 3: Vizualizează jurnalele
 
 ```bash
-# Transmite jurnale live
-azd logs api --follow
+# Redirecționați în direct jurnalele folosind azd monitor
+azd monitor --logs
 
-# Ar trebui să vezi:
+# Sau folosiți Azure CLI:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
+
+# Ar trebui să vedeți:
 # - Mesaje de pornire Gunicorn
-# - Jurnale de cereri HTTP
-# - Jurnale de informații ale aplicației
+# - Jurnalele cererilor HTTP
+# - Jurnalele de informații ale aplicației
 ```
 
-## Structura Proiectului
+## Structura proiectului
 
 ```
 simple-flask-api/
@@ -180,20 +174,20 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## Puncte de Acces API
+## Endpoint-uri API
 
 | Endpoint | Metodă | Descriere |
-|----------|--------|-----------|
-| `/health` | GET | Verificare sănătate |
-| `/api/items` | GET | Listează toate elementele |
-| `/api/items` | POST | Creează un element nou |
-| `/api/items/{id}` | GET | Obține un element specific |
-| `/api/items/{id}` | PUT | Actualizează un element |
-| `/api/items/{id}` | DELETE | Șterge un element |
+|----------|--------|-------------|
+| `/health` | GET | Verificare stare sănătate |
+| `/api/items` | GET | Listare toate elementele |
+| `/api/items` | POST | Creare element nou |
+| `/api/items/{id}` | GET | Obține element specific |
+| `/api/items/{id}` | PUT | Actualizare element |
+| `/api/items/{id}` | DELETE | Ștergere element |
 
-## Configurare
+## Configurație
 
-### Variabile de Mediu
+### Variabile de mediu
 
 ```bash
 # Setează configurația personalizată
@@ -202,30 +196,30 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Configurare Scalare
+### Configurare scalare
 
-API-ul se scalează automat în funcție de traficul HTTP:
-- **Minim Replici**: 0 (se scalează la zero când este inactiv)
-- **Maxim Replici**: 10
-- **Cereri Concurente per Replică**: 50
+API-ul scalează automat în funcție de traficul HTTP:
+- **Replici minime**: 0 (scalare la zero când este inactiv)
+- **Replici maxime**: 10
+- **Cereri concurente per replică**: 50
 
 ## Dezvoltare
 
-### Rulează Local
+### Rulare locală
 
 ```bash
-# Instalați dependențele
+# Instalează dependențele
 cd src
 pip install -r requirements.txt
 
-# Rulați aplicația
+# Rulează aplicația
 python app.py
 
-# Testați local
+# Testează local
 curl http://localhost:8000/health
 ```
 
-### Construiește și Testează Containerul
+### Construire și testare container
 
 ```bash
 # Construiește imaginea Docker
@@ -240,49 +234,52 @@ curl http://localhost:8000/health
 
 ## Implementare
 
-### Implementare Completă
+### Implementare completă
 
 ```bash
 # Implementați infrastructura și aplicația
 azd up
 ```
 
-### Implementare Doar Cod
+### Implementare doar cod
 
 ```bash
 # Implementați doar codul aplicației (infrastructura neschimbată)
 azd deploy api
 ```
 
-### Actualizează Configurația
+### Actualizare configurație
 
 ```bash
-# Actualizați variabilele de mediu
+# Actualizează variabilele de mediu
 azd env set API_KEY "new-api-key"
 
-# Redistribuiți cu noua configurație
+# Redeploiează cu noua configurație
 azd deploy api
 ```
 
 ## Monitorizare
 
-### Vizualizează Jurnalele
+### Vizualizare jurnale
 
 ```bash
-# Transmite jurnale live
-azd logs api --follow
+# Transmite loguri live folosind azd monitor
+azd monitor --logs
 
-# Vizualizează ultimele 100 de linii
-azd logs api --tail 100
+# Sau folosește Azure CLI pentru Container Apps:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
+
+# Vezi ultimele 100 de linii
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Monitorizează Metricile
+### Monitorizare metrici
 
 ```bash
-# Deschide tabloul de bord Azure Monitor
+# Deschideți tabloul de bord Azure Monitor
 azd monitor --overview
 
-# Vizualizează metrici specifice
+# Vizualizați metrici specifice
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
@@ -290,7 +287,7 @@ az monitor metrics list \
 
 ## Testare
 
-### Verificare Sănătate
+### Verificare stare sănătate
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
@@ -304,7 +301,7 @@ Răspuns așteptat:
 }
 ```
 
-### Creează Element
+### Creare element
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -312,59 +309,59 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Obține Toate Elementele
+### Obține toate elementele
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 ```
 
-## Optimizare Costuri
+## Optimizarea costurilor
 
-Această implementare folosește scale-to-zero, astfel încât plătești doar când API-ul procesează cereri:
+Această implementare folosește scale-to-zero, astfel plătești doar când API-ul procesează cereri:
 
-- **Cost inactiv**: ~$0/lună (scalat la zero)
-- **Cost activ**: ~$0.000024/secundă per replică
-- **Cost lunar estimat** (utilizare redusă): $5-15
+- **Cost inactiv:** ~0$/lună (scalat la zero)
+- **Cost activ:** ~0.000024$/secundă per replică
+- **Cost lunar estimat** (utilizare redusă): 5-15$
 
-### Reducerea Costurilor
+### Reducerea suplimentară a costurilor
 
 ```bash
-# Reduceți numărul maxim de replici pentru dev
+# Reduceți numărul maxim de replici pentru dezvoltare
 azd env set MAX_REPLICAS 3
 
-# Utilizați un timp de așteptare mai scurt
+# Utilizați un timp de așteptare inactiv mai scurt
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minute
 ```
 
 ## Depanare
 
-### Containerul Nu Pornește
+### Containerul nu pornește
 
 ```bash
-# Verificați jurnalele containerului
-azd logs api --tail 100
+# Verificați jurnalele containerului folosind Azure CLI
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Verificați dacă imaginea Docker se construiește local
+# Verificați construirea imaginilor Docker local
 docker build -t test ./src
 ```
 
-### API-ul Nu Este Accesibil
+### API-ul nu este accesibil
 
 ```bash
-# Verificați dacă intrarea este externă
+# Verificați dacă accesul este extern
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### Timpuri de Răspuns Mari
+### Timpuri mari de răspuns
 
 ```bash
-# Verifica utilizarea CPU/Memoriei
+# Verifică utilizarea CPU/Memoriei
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Mărește resursele dacă este necesar
+# Extinde resursele dacă este necesar
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -376,19 +373,19 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
 azd down --force --purge
 ```
 
-## Pași Următori
+## Pașii următori
 
-### Extinde Acest Exemplu
+### Extinde acest exemplu
 
-1. **Adaugă Bază de Date** - Integrează Azure Cosmos DB sau SQL Database
+1. **Adaugă bază de date** - Integrează Azure Cosmos DB sau SQL Database
    ```bash
-   # Adăugați modulul Cosmos DB în infra/main.bicep
-   # Actualizați app.py cu conexiunea la baza de date
+   # Adaugă modulul Cosmos DB în infra/main.bicep
+   # Actualizează app.py cu conexiunea la baza de date
    ```
 
-2. **Adaugă Autentificare** - Implementare Azure AD sau chei API
+2. **Adaugă autentificare** - Implementează Azure AD sau chei API
    ```python
-   # Adăugați middleware de autentificare în app.py
+   # Adaugă middleware-ul de autentificare în app.py
    from functools import wraps
    ```
 
@@ -399,49 +396,49 @@ azd down --force --purge
    on: [push]
    ```
 
-4. **Adaugă Identitate Gestionată** - Acces securizat la serviciile Azure
+4. **Adaugă identitate gestionată** - Acces securizat la servicii Azure
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
    ```
 
-### Exemple Asemănătoare
+### Exemple corelate
 
-- **[Aplicație Bază de Date](../../../../../examples/database-app)** - Exemplu complet cu SQL Database
+- **[Aplicație bază de date](../../../../../examples/database-app)** - Exemplu complet cu SQL Database
 - **[Microservicii](../../../../../examples/container-app/microservices)** - Arhitectură multi-servicii
-- **[Ghid Master Container Apps](../README.md)** - Toate modelele de containere
+- **[Ghid master Container Apps](../README.md)** - Toate modelele de containere
 
-### Resurse de Învățare
+### Resurse de învățare
 
-- 📚 [Curs AZD pentru Începători](../../../README.md) - Curs principal
+- 📚 [Curs AZD pentru începători](../../../README.md) - Pagina principală a cursului
 - 📚 [Modele Container Apps](../README.md) - Mai multe modele de implementare
-- 📚 [Galerie Șabloane AZD](https://azure.github.io/awesome-azd/) - Șabloane comunitare
+- 📚 [Galerie șabloane AZD](https://azure.github.io/awesome-azd/) - Șabloane comunitare
 
-## Resurse Suplimentare
+## Resurse suplimentare
 
 ### Documentație
-- **[Documentație Flask](https://flask.palletsprojects.com/)** - Ghidul framework-ului Flask
+- **[Documentație Flask](https://flask.palletsprojects.com/)** - Ghid Flask framework
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Documentație oficială Azure
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referință comenzi azd
 
 ### Tutoriale
-- **[Quickstart Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Implementează prima ta aplicație
-- **[Python pe Azure](https://learn.microsoft.com/azure/developer/python/)** - Ghid de dezvoltare Python
-- **[Limbaj Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructură ca cod
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Primele implementări
+- **[Python pe Azure](https://learn.microsoft.com/azure/developer/python/)** - Ghid dezvoltare Python
+- **[Limbaj Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructură ca și cod
 
-### Instrumente
-- **[Portal Azure](https://portal.azure.com)** - Gestionează resursele vizual
-- **[Extensie Azure pentru VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integrare IDE
+### Unelte
+- **[Portal Azure](https://portal.azure.com)** - Gestionare vizuală resurse
+- **[Extensie VS Code Azure](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integrare IDE
 
 ---
 
-**🎉 Felicitări!** Ai implementat un API Flask pregătit pentru producție pe Azure Container Apps cu auto-scalare și monitorizare.
+**🎉 Felicitări!** Ai implementat un API Flask pregătit pentru producție în Azure Container Apps cu scalare automată și monitorizare.
 
-**Întrebări?** [Deschide o problemă](https://github.com/microsoft/AZD-for-beginners/issues) sau verifică [FAQ](../../../resources/faq.md)
+**Întrebări?** [Deschide un issue](https://github.com/microsoft/AZD-for-beginners/issues) sau consultă [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere automată AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un vorbitor uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări eronate cauzate de utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

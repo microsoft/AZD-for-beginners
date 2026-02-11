@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-10T05:43:28+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "ro"
-}
--->
 # TODO: Proprietarul acestui depozit nu a editat încă acest fișier
 
 **PROPRIETARUL DEPOZITULUI**: Doriți suport pentru Servicii și Asistență pentru Clienți (CSS) pentru acest produs/proiect?

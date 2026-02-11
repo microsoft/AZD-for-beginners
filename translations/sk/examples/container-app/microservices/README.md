@@ -1,29 +1,20 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-23T12:11:16+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "sk"
-}
--->
-# Architektúra Mikroservisov - Príklad s Kontajnerovými Aplikáciami
+# Architektúra mikroslužieb - príklad Container Apps
 
-⏱️ **Odhadovaný čas**: 25-35 minút | 💰 **Odhadované náklady**: ~50-100 USD/mesiac | ⭐ **Zložitosť**: Pokročilá
+⏱️ **Odhadovaný čas**: 25-35 minút | 💰 **Odhadované náklady**: ~$50-100/mesiac | ⭐ **Zložitosť**: Pokročilé
 
-**Zjednodušená, ale funkčná** architektúra mikroservisov nasadená do Azure Container Apps pomocou AZD CLI. Tento príklad demonštruje komunikáciu medzi službami, orchestráciu kontajnerov a monitorovanie s praktickým nastavením dvoch služieb.
+Jednoduchá, ale funkčná architektúra mikroslužieb nasadená do Azure Container Apps pomocou AZD CLI. Tento príklad demonštruje komunikáciu medzi službami, orchestráciu kontajnerov a monitorovanie na praktickom riešení s 2 službami.
 
-> **📚 Vzdelávací prístup**: Tento príklad začína s minimálnou architektúrou dvoch služieb (API Gateway + Backend Service), ktorú môžete reálne nasadiť a učiť sa z nej. Po zvládnutí základov poskytujeme návod na rozšírenie na plnohodnotný ekosystém mikroservisov.
+> **📚 Prístup k učeniu**: Tento príklad začína s minimálnou architektúrou so 2 službami (API Gateway + backend služba), ktorú si môžete skutočne nasadiť a od ktorej sa môžete učiť. Po zvládnutí základov poskytujeme usmernenie na rozšírenie do plného ekosystému mikroslužieb.
 
 ## Čo sa naučíte
 
-Po dokončení tohto príkladu:
-- Nasadíte viacero kontajnerov do Azure Container Apps
-- Implementujete komunikáciu medzi službami pomocou interných sietí
-- Nakonfigurujete škálovanie a zdravotné kontroly na základe prostredia
-- Budete monitorovať distribuované aplikácie pomocou Application Insights
-- Pochopíte vzory a osvedčené postupy nasadzovania mikroservisov
-- Naučíte sa postupné rozširovanie od jednoduchých po zložité architektúry
+Po dokončení tohto príkladu budete:
+- Nasadzovať viac kontajnerov do Azure Container Apps
+- Implementovať komunikáciu medzi službami s internou sieťou
+- Konfigurovať škálovanie na základe prostredia a kontrolu zdravia
+- Monitorovať distribuované aplikácie pomocou Application Insights
+- Pochopiť vzory nasadenia mikroslužieb a osvedčené postupy
+- Naučiť sa postupné rozširovanie od jednoduchých po zložité architektúry
 
 ## Architektúra
 
@@ -62,16 +53,14 @@ Po dokončení tohto príkladu:
 
 **Prečo začať jednoducho?**
 - ✅ Rýchle nasadenie a pochopenie (25-35 minút)
-- ✅ Naučte sa základné vzory mikroservisov bez zložitosti
+- ✅ Naučíte sa základné vzory mikroslužieb bez zložitosti
 - ✅ Funkčný kód, ktorý môžete upravovať a experimentovať s ním
-- ✅ Nižšie náklady na učenie (~50-100 USD/mesiac oproti 300-1400 USD/mesiac)
-- ✅ Získajte sebadôveru pred pridaním databáz a frontov správ
+- ✅ Nižšie náklady na učenie (~$50-100/mesiac vs $300-1400/mesiac)
+- ✅ Získate sebadôveru pred pridaním databáz a správnych front
 
-**Analógia**: Predstavte si to ako učenie sa šoférovať. Začínate na prázdnom parkovisku (2 služby), zvládnete základy a potom prejdete na mestskú premávku (5+ služieb s databázami).
+**Analógia**: Predstavte si to ako učenie sa šoférovať. Začnete na prázdnom parkovisku (2 služby), osvojíte si základy a potom prejdete do mestskej premávky (5+ služieb s databázami).
 
 ### Fáza 2: Budúce rozšírenie (referenčná architektúra)
-
-Keď zvládnete architektúru s dvoma službami, môžete ju rozšíriť na:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -86,58 +75,58 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-Pozrite si sekciu "Príručka na rozšírenie" na konci pre podrobné pokyny.
+Pozrite si sekciu „Sprievodca rozšírením“ na konci pre krok za krokom inštrukcie.
 
-## Zahrnuté funkcie
+## Obsahované funkcie
 
-✅ **Objavovanie služieb**: Automatické objavovanie DNS medzi kontajnermi  
-✅ **Vyvažovanie záťaže**: Zabudované vyvažovanie záťaže medzi replikami  
-✅ **Automatické škálovanie**: Nezávislé škálovanie pre každú službu na základe HTTP požiadaviek  
-✅ **Monitorovanie zdravia**: Kontroly živosti a pripravenosti pre obe služby  
-✅ **Distribuované logovanie**: Centralizované logovanie pomocou Application Insights  
-✅ **Interné siete**: Bezpečná komunikácia medzi službami  
-✅ **Orchestrácia kontajnerov**: Automatické nasadzovanie a škálovanie  
-✅ **Aktualizácie bez výpadkov**: Postupné aktualizácie s riadením revízií  
+✅ **Service Discovery**: Automatické zisťovanie na základe DNS medzi kontajnermi  
+✅ **Load Balancing**: Vstavané vyváženie záťaže medzi replikami  
+✅ **Auto-scaling**: Nezávislé škálovanie pre každú službu na základe HTTP požiadaviek  
+✅ **Health Monitoring**: Liveness a readiness sondy pre obe služby  
+✅ **Distributed Logging**: Centralizované logovanie s Application Insights  
+✅ **Internal Networking**: Bezpečná komunikácia medzi službami  
+✅ **Container Orchestration**: Automatické nasadenie a škálovanie  
+✅ **Zero-Downtime Updates**: Rolling aktualizácie s riadením revízií  
 
 ## Predpoklady
 
 ### Požadované nástroje
 
-Pred začiatkom overte, že máte nainštalované tieto nástroje:
+Pred začiatkom si overte, že máte nainštalované tieto nástroje:
 
 1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (verzia 1.0.0 alebo vyššia)
    ```bash
    azd version
-   # Očakávaný výstup: azd verzia 1.0.0 alebo vyššia
+   # Očakávaný výstup: azd verzia 1.0.0 alebo novšia
    ```
 
 2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (verzia 2.50.0 alebo vyššia)
    ```bash
    az --version
-   # Očakávaný výstup: azure-cli 2.50.0 alebo vyšší
+   # Očakávaný výstup: azure-cli 2.50.0 alebo novšia
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (na lokálny vývoj/testovanie - voliteľné)
+3. **[Docker](https://www.docker.com/get-started)** (pre lokálny vývoj/testovanie - voliteľné)
    ```bash
    docker --version
-   # Očakávaný výstup: Docker verzia 20.10 alebo vyššia
+   # Očakávaný výstup: Docker verzia 20.10 alebo novšia
    ```
 
-### Požiadavky na Azure
+### Požiadavky pre Azure
 
-- Aktívne **Azure predplatné** ([vytvorte si bezplatný účet](https://azure.microsoft.com/free/))
-- Oprávnenia na vytváranie zdrojov vo vašom predplatnom
-- **Rola prispievateľa** na predplatnom alebo skupine zdrojov
+- Aktívne **predplatné Azure** ([vytvorte bezplatný účet](https://azure.microsoft.com/free/))
+- Povolenia na vytváranie zdrojov vo vašom predplatnom
+- **Rola Contributor** na predplatnom alebo v resource groupe
 
-### Požiadavky na znalosti
+### Potrebné znalosti
 
-Toto je príklad na **pokročilej úrovni**. Mali by ste mať:
-- Dokončený [jednoduchý príklad Flask API](../../../../../examples/container-app/simple-flask-api) 
-- Základné pochopenie architektúry mikroservisov
+Toto je príklad na **pokročilej úrovni**. Mali by ste:
+- Dokončiť [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Základné pochopenie architektúry mikroslužieb
 - Znalosť REST API a HTTP
-- Pochopenie konceptov kontajnerov
+- Pochopenie koncepcie kontajnerov
 
-**Nováčik v Container Apps?** Začnite s [jednoduchým príkladom Flask API](../../../../../examples/container-app/simple-flask-api) na osvojenie základov.
+**Nový v Container Apps?** Najprv začnite s [Simple Flask API example](../../../../../examples/container-app/simple-flask-api), aby ste sa naučili základy.
 
 ## Rýchly štart (krok za krokom)
 
@@ -154,13 +143,13 @@ ls
 # Očakávané: README.md, azure.yaml, infra/, src/
 ```
 
-### Krok 2: Autentifikácia s Azure
+### Krok 2: Autentifikácia v Azure
 
 ```bash
 azd auth login
 ```
 
-Týmto sa otvorí váš prehliadač na autentifikáciu v Azure. Prihláste sa pomocou svojich Azure prihlasovacích údajov.
+Toto otvorí váš prehliadač na autentifikáciu v Azure. Prihláste sa pomocou svojich prihlasovacích údajov do Azure.
 
 **✓ Kontrola úspechu**: Mali by ste vidieť:
 ```
@@ -175,28 +164,28 @@ azd init
 
 **Výzvy, ktoré uvidíte**:
 - **Názov prostredia**: Zadajte krátky názov (napr. `microservices-dev`)
-- **Azure predplatné**: Vyberte svoje predplatné
-- **Azure lokalita**: Vyberte región (napr. `eastus`, `westeurope`)
+- **Predplatné Azure**: Vyberte svoje predplatné
+- **Lokalita Azure**: Zvoľte región (napr. `eastus`, `westeurope`)
 
 **✓ Kontrola úspechu**: Mali by ste vidieť:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Krok 4: Nasadenie infraštruktúry a služieb
+### Krok 4: Nasadiť infraštruktúru a služby
 
 ```bash
 azd up
 ```
 
-**Čo sa deje** (trvá 8-12 minút):
-1. Vytvorí prostredie Container Apps
-2. Vytvorí Application Insights na monitorovanie
-3. Vytvorí kontajner API Gateway (Node.js)
-4. Vytvorí kontajner Product Service (Python)
-5. Nasadí oba kontajnery do Azure
-6. Nakonfiguruje siete a zdravotné kontroly
-7. Nastaví monitorovanie a logovanie
+**Čo sa stane** (trvá 8–12 minút):
+1. Vytvorí sa Container Apps prostredie
+2. Vytvorí sa Application Insights pre monitorovanie
+3. Zostaví sa kontajner API Gateway (Node.js)
+4. Zostaví sa kontajner Product Service (Python)
+5. Nasadia sa oba kontajnery do Azure
+6. Skonfiguruje sa sieťovanie a kontrola zdravia
+7. Nastaví sa monitorovanie a logovanie
 
 **✓ Kontrola úspechu**: Mali by ste vidieť:
 ```
@@ -204,29 +193,29 @@ SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ Čas**: 8-12 minút
+**⏱️ Čas**: 8–12 minút
 
-### Krok 5: Testovanie nasadenia
+### Krok 5: Otestujte nasadenie
 
 ```bash
 # Získajte koncový bod brány
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Otestujte zdravie API Gateway
+# Otestujte zdravie API brány
 curl $GATEWAY_URL/health
 
 # Očakávaný výstup:
-# {"status":"zdravý","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
+# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Testovanie služby produktov cez bránu**:
+**Otestujte produktovú službu cez API Gateway**:
 ```bash
 # Zoznam produktov
 curl $GATEWAY_URL/api/products
 
 # Očakávaný výstup:
 # [
-#   {"id":1,"name":"Laptop","price":999.99,"stock":50},
+#   {"id":1,"name":"Notebook","price":999.99,"stock":50},
 #   {"id":2,"name":"Myš","price":29.99,"stock":200},
 #   {"id":3,"name":"Klávesnica","price":79.99,"stock":150}
 # ]
@@ -236,7 +225,7 @@ curl $GATEWAY_URL/api/products
 
 ---
 
-**🎉 Gratulujeme!** Nasadili ste architektúru mikroservisov do Azure!
+**🎉 Gratulujeme!** Nasadili ste architektúru mikroslužieb do Azure!
 
 ## Štruktúra projektu
 
@@ -270,69 +259,69 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Čo robí každý komponent:**
+**Čo robí každá súčasť:**
 
 **Infraštruktúra (infra/)**:
 - `main.bicep`: Orchestruje všetky Azure zdroje a ich závislosti
-- `core/container-apps-environment.bicep`: Vytvára prostredie Container Apps a Azure Container Registry
-- `core/monitor.bicep`: Nastavuje Application Insights na distribuované logovanie
-- `app/*.bicep`: Definície jednotlivých kontajnerových aplikácií so škálovaním a zdravotnými kontrolami
+- `core/container-apps-environment.bicep`: Vytvára Container Apps prostredie a Azure Container Registry
+- `core/monitor.bicep`: Nastavuje Application Insights pre distribuované logovanie
+- `app/*.bicep`: Individuálne definície container app s konfiguráciou škálovania a sondami zdravia
 
 **API Gateway (src/api-gateway/)**:
-- Verejne prístupná služba, ktorá smeruje požiadavky na backendové služby
-- Implementuje logovanie, spracovanie chýb a presmerovanie požiadaviek
+- Verejne prístupná služba, ktorá smeruje požiadavky na backend služby
+- Implementuje logovanie, ošetrenie chýb a preposielanie požiadaviek
 - Demonštruje HTTP komunikáciu medzi službami
 
 **Product Service (src/product-service/)**:
-- Interná služba s katalógom produktov (pre jednoduchosť v pamäti)
-- REST API so zdravotnými kontrolami
-- Príklad vzoru backendového mikroservisu
+- Interná služba s katalógom produktov (v pamäti pre jednoduchosť)
+- REST API s kontrolami zdravia
+- Príklad vzoru backend mikroslužby
 
 ## Prehľad služieb
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Prístup**: Verejný (externý vstup)  
-**Účel**: Smeruje prichádzajúce požiadavky na príslušné backendové služby  
+**Prístup**: Verejný (externý ingress)  
+**Účel**: Smeruje prichádzajúce požiadavky na príslušné backend služby  
 
 **Koncové body**:
 - `GET /` - Informácie o službe
-- `GET /health` - Koncový bod zdravotnej kontroly
-- `GET /api/products` - Presmerovanie na službu produktov (zoznam všetkých)
-- `GET /api/products/:id` - Presmerovanie na službu produktov (získanie podľa ID)
+- `GET /health` - Kontrola zdravia
+- `GET /api/products` - Preposiela na product service (zoznam)
+- `GET /api/products/:id` - Preposiela na product service (zobraziť podľa ID)
 
-**Kľúčové funkcie**:
+**Hlavné vlastnosti**:
 - Smerovanie požiadaviek pomocou axios
 - Centralizované logovanie
-- Spracovanie chýb a správa časových limitov
-- Objavovanie služieb cez premenné prostredia
+- Ošetrenie chýb a správa timeoutov
+- Zisťovanie služieb cez premenné prostredia
 - Integrácia s Application Insights
 
-**Zvýraznenie kódu** (`src/api-gateway/app.js`):
+**Ukážka kódu** (`src/api-gateway/app.js`):
 ```javascript
-// Interná komunikácia služieb
+// Interná komunikácia medzi službami
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
 });
 ```
 
-### Product Service (Python/Flask)
+### Produktová služba (Python/Flask)
 
 **Port**: 8000  
-**Prístup**: Len interný (žiadny externý vstup)  
-**Účel**: Spravuje katalóg produktov s dátami v pamäti  
+**Prístup**: Iba interný (bez externého ingressu)  
+**Účel**: Spravuje katalóg produktov v pamäti  
 
 **Koncové body**:
 - `GET /` - Informácie o službe
-- `GET /health` - Koncový bod zdravotnej kontroly
+- `GET /health` - Kontrola zdravia
 - `GET /products` - Zoznam všetkých produktov
-- `GET /products/<id>` - Získanie produktu podľa ID
+- `GET /products/<id>` - Zobraziť produkt podľa ID
 
-**Kľúčové funkcie**:
+**Hlavné vlastnosti**:
 - RESTful API s Flask
-- Úložisko produktov v pamäti (jednoduché, bez potreby databázy)
+- Ukladanie produktov v pamäti (jednoduché, nie je potrebná databáza)
 - Monitorovanie zdravia pomocou sond
 - Štruktúrované logovanie
 - Integrácia s Application Insights
@@ -348,45 +337,294 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Prečo len interný prístup?**
-Služba produktov nie je verejne dostupná. Všetky požiadavky musia prejsť cez API Gateway, ktorá poskytuje:
-- Bezpečnosť: Kontrolovaný prístupový bod
-- Flexibilitu: Možnosť zmeniť backend bez ovplyvnenia klientov
+**Prečo len interné?**
+Produktová služba nie je verejne vystavená. Všetky požiadavky musia prejsť cez API Gateway, ktorá poskytuje:
+- Bezpečnosť: Kontrolovaný vstupný bod
+- Flexibilitu: Možnosť meniť backend bez vplyvu na klientov
 - Monitorovanie: Centralizované logovanie požiadaviek
 
 ## Pochopenie komunikácie medzi službami
 
 ### Ako spolu služby komunikujú
 
-V tomto príklade API Gateway komunikuje so službou produktov pomocou **interných HTTP volaní**:
+V tomto príklade API Gateway komunikuje s Product Service pomocou **interných HTTP volaní**:
 
 ```javascript
-// API Gateway (src/api-gateway/app.js)
+// Brána API (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Vykonajte internú HTTP požiadavku
+// Vykonať vnútornú HTTP požiadavku
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
 **Kľúčové body**:
 
-1. **Objavovanie na základe DNS**: Container Apps automaticky poskytuje DNS pre interné služby
-   - FQDN služby produktov: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Zjednodušené ako: `http://product-service` (Container Apps to vyrieši)
+1. **DNS-založené zisťovanie**: Container Apps automaticky poskytuje DNS pre interné služby
+   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
+   - Zjednodušene: `http://product-service` (Container Apps to vyrieši)
 
-2. **Žiadna verejná expozícia**: Služba produktov má `external: false` v Bicep
-   - Prístupná len v prostredí Container Apps
-   - Nedá sa dosiahnuť z internetu
+2. **Žiadne verejné vystavenie**: Product Service má v Bicep `external: false`
+   - Prístupná len v rámci Container Apps prostredia
+   - Nedá sa osloviť z internetu
 
-3. **Premenné prostredia**: URL služieb sú injektované počas nasadzovania
-   - Bicep odovzdáva interný FQDN bráne
-   - Žiadne hardcodované URL v aplikačnom kóde
+3. **Premenné prostredia**: URL služieb sú injektované pri nasadení
+   - Bicep poskytne interné FQDN do gateway
+   - Žiadne pevne zadané URL v aplikačnom kóde
 
-**Analógia**: Predstavte si to ako kancelárske miestnosti. API Gateway je recepcia (verejne prístupná) a služba produktov je kancelárska miestnosť (len interná). Návštevníci musia prejsť cez recepciu, aby sa dostali do akejkoľvek miestnosti.
-Pre učenie/testovanie zvážte:
-- Použitie bezplatných kreditov Azure (prvých 30 dní)
-- Udržiavanie minimálneho počtu replík
-- Odstránenie po testovaní (žiadne priebežné poplatky)
+**Analógia**: Predstavte si to ako kancelárske priestory. API Gateway je recepcia (verejne prístupná) a Product Service je kancelária (iba interná). Návštevníci musia prejsť cez recepciu, aby sa dostali do kancelárie.
+
+## Možnosti nasadenia
+
+### Kompletné nasadenie (odporúčané)
+
+```bash
+# Nasadiť infraštruktúru a obe služby
+azd up
+```
+
+Toto nasadí:
+1. Container Apps prostredie
+2. Application Insights
+3. Container Registry
+4. Kontajner API Gateway
+5. Kontajner Product Service
+
+**Čas**: 8–12 minút
+
+### Nasadiť jednotlivú službu
+
+```bash
+# Nasadiť iba jednu službu (po počiatočnom azd up)
+azd deploy api-gateway
+
+# Alebo nasadiť produktovú službu
+azd deploy product-service
+```
+
+**Prípad použitia**: Keď ste upravili kód v jednej službe a chcete znovu nasadiť len túto službu.
+
+### Aktualizovať konfiguráciu
+
+```bash
+# Zmeniť parametre škálovania
+azd env set GATEWAY_MAX_REPLICAS 30
+
+# Znovu nasadiť s novou konfiguráciou
+azd up
+```
+
+## Konfigurácia
+
+### Konfigurácia škálovania
+
+Obe služby sú nakonfigurované s HTTP-based autoscaling v ich Bicep súboroch:
+
+**API Gateway**:
+- Min. replík: 2 (vždy aspoň 2 pre dostupnosť)
+- Max. replík: 20
+- Spúšťač škálovania: 50 súbežných požiadaviek na repliku
+
+**Product Service**:
+- Min. replík: 1 (možno škálovať na nulu, ak je to potrebné)
+- Max. replík: 10
+- Spúšťač škálovania: 100 súbežných požiadaviek na repliku
+
+**Prispôsobiť škálovanie** (v `infra/app/*.bicep`):
+```bicep
+scale: {
+  minReplicas: 1
+  maxReplicas: 10
+  rules: [
+    {
+      name: 'http-scale-rule'
+      http: {
+        metadata: {
+          concurrentRequests: '100'  // Adjust this
+        }
+      }
+    }
+  ]
+}
+```
+
+### Pridelenie zdrojov
+
+**API Gateway**:
+- CPU: 1.0 vCPU
+- Pamäť: 2 GiB
+- Dôvod: Spracováva celý externý prenos
+
+**Product Service**:
+- CPU: 0.5 vCPU
+- Pamäť: 1 GiB
+- Dôvod: Ľahké operácie v pamäti
+
+### Kontroly stavu
+
+Obe služby obsahujú liveness a readiness sondy:
+
+```bicep
+probes: [
+  {
+    type: 'Liveness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+  }
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 8080
+    }
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  }
+]
+```
+
+**Čo to znamená**:
+- **Liveness**: Ak kontrola zdravia zlyhá, Container Apps reštartuje kontajner
+- **Readiness**: Ak nie je pripravená, Container Apps prestane smerovať premávku na danú repliku
+
+
+
+## Monitorovanie a pozorovateľnosť
+
+### Zobraziť logy služieb
+
+```bash
+# Zobraziť logy pomocou azd monitor
+azd monitor --logs
+
+# Alebo použite Azure CLI pre konkrétne Container Apps:
+# Streamovať logy z API Gateway
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+
+# Zobraziť nedávne logy služby produktu
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
+```
+
+**Očakávaný výstup**:
+```
+[api-gateway] API Gateway listening on port 8080
+[api-gateway] Product Service URL: http://product-service
+[api-gateway] GET /api/products 200 - 45ms
+[product-service] Retrieved 5 products
+```
+
+### Dopyty v Application Insights
+
+Otvorte Application Insights v Azure Porte a potom spustite tieto dopyty:
+
+**Nájsť pomalé požiadavky**:
+```kusto
+requests
+| where timestamp > ago(1h)
+| where duration > 1000  // Requests taking >1 second
+| summarize count() by name, cloud_RoleName
+| order by count_ desc
+```
+
+**Sledovať volania medzi službami**:
+```kusto
+dependencies
+| where timestamp > ago(1h)
+| where type == "Http"
+| project timestamp, name, target, duration, success
+| order by timestamp desc
+```
+
+**Miera chýb podľa služby**:
+```kusto
+exceptions
+| where timestamp > ago(24h)
+| summarize errorCount = count() by cloud_RoleName, type
+| order by errorCount desc
+```
+
+**Objem požiadaviek v čase**:
+```kusto
+requests
+| where timestamp > ago(1h)
+| summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
+| render timechart
+```
+
+### Prístup k monitorovaciemu panelu
+
+```bash
+# Získať podrobnosti o Application Insights
+azd env get-values | grep APPLICATIONINSIGHTS
+
+# Otvoriť monitorovanie v Azure portáli
+az monitor app-insights component show \
+  --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
+  --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
+  --query "appId" -o tsv
+```
+
+### Živé metriky
+
+1. Prejdite do Application Insights v Azure Porte
+2. Kliknite na "Live Metrics"
+3. Zobrať reálne požiadavky, zlyhania a výkon
+4. Otestujte spustením: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+
+## Praktické cvičenia
+
+[Poznámka: Pozrite si plné cvičenia vyššie v sekcii "Praktické cvičenia" pre podrobné krok za krokom cvičenia vrátane overenia nasadenia, úprav dát, testov autoscalingu, ošetrenia chýb a pridania tretej služby.]
+
+## Analýza nákladov
+
+### Odhadované mesačné náklady (pre tento príklad so 2 službami)
+
+| Zdroje | Konfigurácia | Odhadované náklady |
+|----------|--------------|----------------|
+| API Gateway | 2-20 replík, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 replík, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Basic tier | $5 |
+| Application Insights | 1-2 GB/month | $5-10 |
+| Log Analytics | 1 GB/month | $3 |
+| **Celkom** | | **$58-243/mesiac** |
+
+**Rozpis nákladov podľa využitia**:
+- **Nízka prevádzka** (testovanie/učenie): ~ $60/mesiac
+- **Stredná prevádzka** (malá produkcia): ~ $120/mesiac
+- **Vysoká prevádzka** (zaneprázdnené obdobia): ~ $240/mesiac
+
+### Tipy na optimalizáciu nákladov
+
+1. **Škálovanie na nulu pre vývoj**:
+   ```bicep
+   scale: {
+     minReplicas: 0  // Save $30-40/month when not in use
+     maxReplicas: 10
+   }
+   ```
+
+2. **Použite Consumption plán pre Cosmos DB** (keď ho pridáte):
+   - Plaťte len za to, čo použijete
+   - Žiadny minimálny poplatok
+
+3. **Nastavte vzorkovanie v Application Insights**:
+   ```javascript
+   appInsights.defaultClient.config.samplingPercentage = 50; // Vzorkovať 50 % požiadaviek
+   ```
+
+4. **Vyčistite prostredie, keď ho nepotrebujete**:
+   ```bash
+   azd down
+   ```
+
+### Možnosti bezplatnej úrovne
+For learning/testing, consider:
+- Využite bezplatné kredity Azure (prvých 30 dní)
+- Udržujte minimálny počet replík
+- Vymažte po testovaní (žiadne priebežné poplatky)
 
 ---
 
@@ -398,37 +636,37 @@ Aby ste sa vyhli priebežným poplatkom, odstráňte všetky zdroje:
 azd down --force --purge
 ```
 
-**Potvrdenie výzvy**:
+**Výzva na potvrdenie**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Napíšte `y` na potvrdenie.
+Zadajte `y` na potvrdenie.
 
-**Čo sa odstráni**:
+**Čo bude odstránené**:
 - Prostredie Container Apps
-- Obe Container Apps (gateway a product service)
+- Obe Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Overenie vyčistenia**:
+**✓ Overiť vyčistenie**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Malo by vrátiť prázdny výsledok.
+Malo by vrátiť prázdne.
 
 ---
 
-## Sprievodca rozšírením: Od 2 k 5+ službám
+## Návod na rozšírenie: Z 2 na 5+ služieb
 
-Keď zvládnete túto architektúru s 2 službami, tu je návod, ako ju rozšíriť:
+Keď zvládnete túto architektúru so 2 službami, tu je návod, ako ju rozšíriť:
 
-### Fáza 1: Pridanie databázovej perzistencie (ďalší krok)
+### Fáza 1: Pridať perzistenciu databázy (ďalší krok)
 
-**Pridajte Cosmos DB pre Product Service**:
+**Pridať Cosmos DB pre službu produktu**:
 
 1. Vytvorte `infra/core/cosmos.bicep`:
    ```bicep
@@ -443,56 +681,56 @@ Keď zvládnete túto architektúru s 2 službami, tu je návod, ako ju rozšír
    }
    ```
 
-2. Aktualizujte product service, aby používal Cosmos DB namiesto in-memory dát
+2. Aktualizujte službu produktu, aby používala Cosmos DB namiesto dát v pamäti
 
-3. Odhadované dodatočné náklady: ~25 USD/mesiac (serverless)
+3. Odhadovaný dodatočný náklad: približne $25/mesiac (serverless)
 
-### Fáza 2: Pridanie tretej služby (Order Management)
+### Fáza 2: Pridať tretiu službu (správa objednávok)
 
-**Vytvorte Order Service**:
+**Vytvoriť službu objednávok**:
 
-1. Nový priečinok: `src/order-service/` (Python/Node.js/C#)
+1. Nová zložka: `src/order-service/` (Python/Node.js/C#)
 2. Nový Bicep: `infra/app/order-service.bicep`
-3. Aktualizujte API Gateway na smerovanie `/api/orders`
+3. Aktualizujte API Gateway tak, aby presmerovala na `/api/orders`
 4. Pridajte Azure SQL Database pre perzistenciu objednávok
 
-**Architektúra sa stáva**:
+**Architektúra bude**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Fáza 3: Pridanie asynchrónnej komunikácie (Service Bus)
+### Fáza 3: Pridať asynchrónnu komunikáciu (Service Bus)
 
-**Implementujte Event-Driven architektúru**:
+**Implementovať event-driven architektúru**:
 
 1. Pridajte Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service publikuje udalosti "ProductCreated"
-3. Order Service odoberá udalosti produktov
-4. Pridajte Notification Service na spracovanie udalostí
+2. Služba produktu publikuje udalosti "ProductCreated"
+3. Služba objednávok sa prihlási na odber udalostí produktu
+4. Pridajte službu notifikácií na spracovanie udalostí
 
 **Vzor**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
-### Fáza 4: Pridanie autentifikácie používateľov
+### Fáza 4: Pridať autentifikáciu používateľov
 
-**Implementujte User Service**:
+**Implementovať službu používateľov**:
 
 1. Vytvorte `src/user-service/` (Go/Node.js)
 2. Pridajte Azure AD B2C alebo vlastnú JWT autentifikáciu
 3. API Gateway overuje tokeny
-4. Služby kontrolujú oprávnenia používateľov
+4. Služby kontrolujú oprávnenia používateľa
 
-### Fáza 5: Pripravenosť na produkciu
+### Fáza 5: Pripravenosť do produkcie
 
-**Pridajte tieto komponenty**:
-- Azure Front Door (globálne vyvažovanie záťaže)
+**Pridať tieto komponenty**:
+- Azure Front Door (globálne vyrovnávanie záťaže)
 - Azure Key Vault (správa tajomstiev)
-- Azure Monitor Workbooks (vlastné dashboardy)
+- Azure Monitor Workbooks (vlastné panely)
 - CI/CD Pipeline (GitHub Actions)
 - Blue-Green nasadenia
 - Managed Identity pre všetky služby
 
-**Náklady na plnú produkčnú architektúru**: ~300-1 400 USD/mesiac
+**Celkové náklady produkčnej architektúry**: približne $300-1,400/mesiac
 
 ---
 
@@ -501,57 +739,57 @@ API Gateway → Product Service (Cosmos DB)
 ### Súvisiaca dokumentácia
 - [Dokumentácia Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Sprievodca architektúrou mikroservisov](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights pre distribuované sledovanie](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Application Insights pre distribuované trasovanie](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
 - [Dokumentácia Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### Ďalšie kroky v tomto kurze
-- ← Predchádzajúce: [Jednoduché Flask API](../../../../../examples/container-app/simple-flask-api) - Začiatočnícky príklad s jedným kontajnerom
-- → Ďalej: [Sprievodca integráciou AI](../../../../../examples/docs/ai-foundry) - Pridanie AI schopností
+- ← Predchádzajúce: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Začiatočnícky príklad s jedným kontajnerom
+- → Nasledujúce: [Sprievodca integráciou AI](../../../../../examples/docs/ai-foundry) - Pridať AI funkcie
 - 🏠 [Domov kurzu](../../README.md)
 
 ### Porovnanie: Kedy použiť čo
 
-**Jednoduchá Container App** (príklad jednoduchého Flask API):
+**Aplikácia v jednom kontajneri** (príklad Simple Flask API):
 - ✅ Jednoduché aplikácie
 - ✅ Monolitická architektúra
 - ✅ Rýchle nasadenie
 - ❌ Obmedzená škálovateľnosť
-- **Náklady**: ~15-50 USD/mesiac
+- **Cena**: približne $15-50/mesiac
 
-**Mikroservisy** (tento príklad):
+**Mikroslužby** (tento príklad):
 - ✅ Komplexné aplikácie
 - ✅ Nezávislé škálovanie pre každú službu
 - ✅ Autonómia tímov (rôzne služby, rôzne tímy)
-- ❌ Zložitejšie na správu
-- **Náklady**: ~60-250 USD/mesiac
+- ❌ Komplikovanejšie na správu
+- **Cena**: približne $60-250/mesiac
 
 **Kubernetes (AKS)**:
 - ✅ Maximálna kontrola a flexibilita
-- ✅ Prenositeľnosť medzi cloudmi
-- ✅ Pokročilé sieťové možnosti
+- ✅ Prenositeľnosť naprieč cloudmi
+- ✅ Pokročilé sieťovanie
 - ❌ Vyžaduje odborné znalosti Kubernetes
-- **Náklady**: ~150-500 USD/mesiac minimálne
+- **Cena**: približne $150-500/mesiac minimum
 
-**Odporúčanie**: Začnite s Container Apps (tento príklad), prejdite na AKS iba v prípade potreby špecifických funkcií Kubernetes.
+**Odporúčanie**: Začnite s Container Apps (tento príklad), prejdite na AKS len ak potrebujete špecifické funkcionality Kubernetes.
 
 ---
 
 ## Často kladené otázky
 
-**Otázka: Prečo iba 2 služby namiesto 5+?**  
-Odpoveď: Vzdelávací postup. Ovládnite základy (komunikácia medzi službami, monitorovanie, škálovanie) na jednoduchom príklade pred pridaním zložitosti. Vzory, ktoré sa tu naučíte, platia aj pre architektúry so 100 službami.
+**Otázka: Prečo len 2 služby namiesto 5+?**  
+Odpoveď: Vzdelávací postup. Ovládnite základy (komunikácia služieb, monitorovanie, škálovanie) s jednoduchým príkladom pred pridaním zložitosti. Vzorce, ktoré sa tu naučíte, sa dajú použiť v architektúrach s 100 službami.
 
 **Otázka: Môžem pridať viac služieb sám?**  
-Odpoveď: Absolútne! Postupujte podľa sprievodcu rozšírením vyššie. Každá nová služba nasleduje rovnaký vzor: vytvorte priečinok src, vytvorte Bicep súbor, aktualizujte azure.yaml, nasadte.
+Odpoveď: Určite! Postupujte podľa vyššie uvedeného návodu na rozšírenie. Každá nová služba nasleduje ten istý vzor: vytvorte src priečinok, vytvorte Bicep súbor, aktualizujte azure.yaml, nasadte.
 
-**Otázka: Je toto pripravené na produkciu?**  
-Odpoveď: Je to pevný základ. Pre produkciu pridajte: managed identity, Key Vault, perzistentné databázy, CI/CD pipeline, monitorovacie upozornenia a stratégiu zálohovania.
+**Otázka: Je to pripravené na produkciu?**  
+Odpoveď: Je to solídny základ. Pre produkciu pridajte: managed identity, Key Vault, perzistentné databázy, CI/CD pipeline, monitorovacie upozornenia a stratégiu zálohovania.
 
 **Otázka: Prečo nepoužiť Dapr alebo iný service mesh?**  
-Odpoveď: Udržujte to jednoduché na učenie. Keď pochopíte natívne sieťovanie Container Apps, môžete pridať Dapr pre pokročilé scenáre.
+Odpoveď: Pre učenie udržiavajte veci jednoduché. Keď pochopíte natívne sieťovanie Container Apps, môžete pridať Dapr pre pokročilé scenáre.
 
-**Otázka: Ako môžem ladiť lokálne?**  
-Odpoveď: Spustite služby lokálne s Dockerom:
+**Otázka: Ako debugujem lokálne?**  
+Odpoveď: Spustite služby lokálne pomocou Dockeru:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
@@ -559,24 +797,24 @@ docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gatew
 ```
 
 **Otázka: Môžem použiť rôzne programovacie jazyky?**  
-Odpoveď: Áno! Tento príklad ukazuje Node.js (gateway) + Python (product service). Môžete kombinovať akékoľvek jazyky, ktoré bežia v kontajneroch.
+Odpoveď: Áno! Tento príklad ukazuje Node.js (gateway) + Python (služba produktu). Môžete kombinovať ľubovoľné jazyky, ktoré bežia v kontajneroch.
 
 **Otázka: Čo ak nemám Azure kredity?**  
-Odpoveď: Použite bezplatnú vrstvu Azure (prvých 30 dní s novými účtami) alebo nasadzujte na krátke testovacie obdobia a okamžite odstráňte.
+Odpoveď: Využite bezplatnú vrstvu Azure (prvých 30 dní pri nových účtoch) alebo nasadzujte len na krátke testovacie obdobia a okamžite odstráňte.
 
 ---
 
-> **🎓 Zhrnutie vzdelávacej cesty**: Naučili ste sa nasadiť architektúru s viacerými službami s automatickým škálovaním, interným sieťovaním, centralizovaným monitorovaním a vzormi pripravenými na produkciu. Tento základ vás pripraví na komplexné distribuované systémy a podnikové mikroservisné architektúry.
+> **🎓 Zhrnutie učebnej cesty**: Naučili ste sa nasadiť architektúru s viacerými službami s automatickým škálovaním, interným sieťovaním, centralizovaným monitorovaním a vzormi pripravenými na produkciu. Tento základ vás pripraví na zložité distribuované systémy a podnikové architektúry mikroservisov.
 
-**📚 Navigácia v kurze:**
-- ← Predchádzajúce: [Jednoduché Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Ďalej: [Príklad integrácie databázy](../../../../../examples/database-app)
-- 🏠 [Domov kurzu](../../README.md)
-- 📖 [Najlepšie postupy pre Container Apps](../../docs/deployment/deployment-guide.md)
+**📚 Navigácia kurzu:**
+- ← Predchádzajúce: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
+- → Nasledujúce: [Príklad integrácie databázy](../../../../../examples/database-app)
+- 🏠 [Domov kurzu](../../../README.md)
+- 📖 [Najlepšie postupy pre Container Apps](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zrieknutie sa zodpovednosti**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+Vyhlásenie o zodpovednosti:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, berte prosím na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku treba považovať za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia ani nesprávne výklady, ktoré môžu vzniknúť v dôsledku použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

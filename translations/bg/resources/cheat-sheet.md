@@ -1,125 +1,122 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T18:05:27+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "bg"
-}
--->
-# Ръководство за команди - Основни команди на AZD
+# Шпаргалка с команди - Основни команди за AZD
 
 **Бърза справка за всички глави**
-- **📚 Начало на курса**: [AZD за начинаещи](../README.md)
+- **📚 Начална страница на курса**: [AZD за начинаещи](../README.md)
 - **📖 Бърз старт**: [Глава 1: Основи и бърз старт](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Команди**: [Глава 2: Разработка с приоритет на AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Напреднали**: [Глава 4: Инфраструктура като код](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 AI команди**: [Глава 2: Разработка, ориентирана към AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Разширено**: [Глава 4: Инфраструктура като код](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Въведение
 
-Това изчерпателно ръководство предоставя бърза справка за най-често използваните команди на Azure Developer CLI, организирани по категории с практически примери. Идеално за бързи справки по време на разработка, отстраняване на проблеми и ежедневни операции с проекти на azd.
+Тази изчерпателна шпаргалка предоставя бърза справка за най-често използваните команди на Azure Developer CLI, организирани по категории с практични примери. Перфектна за бързи справки по време на разработка, отстраняване на проблеми и ежедневни операции с azd проекти.
 
-## Цели на обучението
+## Учебни цели
 
-С използването на това ръководство ще:
-- Имате незабавен достъп до основни команди и синтаксис на Azure Developer CLI
-- Разберете организацията на командите по функционални категории и случаи на употреба
-- Справяте се с практически примери за често срещани сценарии за разработка и внедряване
-- Достъпвате команди за отстраняване на проблеми за бързо разрешаване на проблеми
-- Намерите напреднали опции за конфигурация и персонализация ефективно
-- Лесно управлявате среди и работни потоци с множество среди
+Като използвате тази шпаргалка, вие ще:
+- Ще имате незабавен достъп до основните команди и синтаксис на Azure Developer CLI
+- Ще разберете организацията на командите по функционални категории и случаи на употреба
+- Ще можете да използвате практически примери за чести сценарии на разработка и разгръщане
+- Ще имате достъп до команди за отстраняване на проблеми за бързо разрешаване на проблеми
+- Ще намерите разширени опции за конфигурация и персонализация ефективно
+- Ще намерите командите за управление на среди и работни потоци с множество среди
 
 ## Резултати от обучението
 
-С редовно използване на това ръководство ще можете:
-- Уверено да изпълнявате команди на azd без да се налага да се консултирате с пълната документация
-- Бързо да разрешавате често срещани проблеми с подходящи диагностични команди
-- Ефективно да управлявате множество среди и сценарии за внедряване
-- Прилагате напреднали функции и опции за конфигурация на azd при нужда
-- Отстранявате проблеми с внедряването чрез систематични последователности от команди
-- Оптимизирате работните потоци чрез ефективно използване на съкращения и опции на azd
+При редовно използване на тази шпаргалка, ще можете да:
+- Изпълнявате azd команди уверено, без да се налага да проверявате цялата документация
+- Бързо разрешавате чести проблеми, използвайки подходящи диагностични команди
+- Ефективно управлявате множество среди и сценарии на разгръщане
+- Прилагате разширени функции на azd и опции за конфигурация при необходимост
+- Отстранявате проблеми при разгръщане, използвайки систематични последователности от команди
+- Оптимизирате работните потоци чрез ефективно използване на алиаси и опции на azd
 
 ## Команди за започване
 
-### Автентикация
+### Удостоверяване
 ```bash
-# Login to Azure (uses Azure CLI)
+# Влезте в Azure чрез AZD
+azd auth login
+
+# Влезте в Azure CLI (AZD използва това на заден план)
 az login
 
-# Check current account
+# Проверете текущия акаунт
 az account show
 
-# Set default subscription
+# Задайте абонамента по подразбиране
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# Излезте от AZD
+azd auth logout
+
+# Излезте от Azure CLI
+az logout
 ```
 
-### Инициализация на проект
+### Инициализация на проекта
 ```bash
-# Browse available templates
+# Преглед на наличните шаблони
 azd template list
 
-# Initialize from template
+# Инициализиране от шаблон
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# Инициализиране в текущата директория
 azd init .
 
-# Initialize with custom name
+# Инициализиране с персонализирано име
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Основни команди за внедряване
+## Основни команди за разгръщане
 
-### Пълен работен процес за внедряване
+### Пълен работен поток за разгръщане
 ```bash
-# Deploy everything (provision + deploy)
+# Разгръщане на всичко (подготовка на ресурси + внедряване)
 azd up
 
-# Deploy with confirmation prompts disabled
+# Разгръщане с изключени подкани за потвърждение
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# Разгръщане в конкретна среда
 azd up --environment production
 
-# Deploy with custom parameters
+# Разгръщане с персонализирани параметри
 azd up --parameter location=westus2
 ```
 
 ### Само инфраструктура
 ```bash
-# Provision Azure resources
+# Осигуряване на ресурси в Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 Преглед на промените в инфраструктурата
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# Показва предварителен (dry-run) изглед на това кои ресурси биха били създадени/променени/изтрити
+# Подобно на 'terraform plan' или 'bicep what-if' - безопасно за изпълнение, без прилагане на промени
 ```
 
 ### Само приложение
 ```bash
-# Deploy application code
+# Разположи кода на приложението
 azd deploy
 
-# Deploy specific service
+# Разположи конкретна услуга
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# Разположи всички услуги
 azd deploy --all
 ```
 
-### Създаване и пакетиране
+### Сглобяване и пакетиране
 ```bash
-# Build applications
+# Създаване на приложения
 azd package
 
-# Build specific service
+# Създаване на конкретна услуга
 azd package --service api
 ```
 
@@ -127,36 +124,36 @@ azd package --service api
 
 ### Операции със среди
 ```bash
-# List all environments
+# Изброи всички среди
 azd env list
 
-# Create new environment
+# Създай нова среда
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# Избери среда
 azd env select production
 
-# Show current environment
+# Покажи текущата среда
 azd env show
 
-# Refresh environment state
+# Освежи състоянието на средата
 azd env refresh
 ```
 
 ### Променливи на средата
 ```bash
-# Set environment variable
+# Задаване на променлива на средата
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# Получаване на променлива на средата
 azd env get API_KEY
 
-# List all environment variables
+# Изброяване на всички променливи на средата
 azd env get-values
 
-# Remove environment variable
+# Премахване на променлива на средата
 azd env unset DEBUG
 ```
 
@@ -164,222 +161,229 @@ azd env unset DEBUG
 
 ### Глобална конфигурация
 ```bash
-# List all configuration
+# Изведи всички конфигурации
 azd config list
 
-# Set global defaults
+# Задай глобални стойности по подразбиране
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# Премахни конфигурацията
 azd config unset defaults.location
 
-# Reset all configuration
+# Нулирай всички конфигурации
 azd config reset
 ```
 
-### Конфигурация на проект
+### Конфигурация на проекта
 ```bash
-# Validate azure.yaml
+# Валидирай azure.yaml
 azd config validate
 
-# Show project information
+# Покажи информация за проекта
 azd show
 
-# Get service endpoints
+# Вземи крайни точки на услугите
 azd show --output json
 ```
 
-## 📊 Мониторинг и логове
+## 📊 Мониторинг и диагностика
 
-### Логове на приложения
+### Табло за мониторинг
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### Мониторинг
-```bash
-# Open Azure portal for monitoring
+# Отворете таблото за мониторинг в портала на Azure
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Отворете живите метрики на Application Insights
+azd monitor --live
+
+# Отворете панела за логове на Application Insights
+azd monitor --logs
+
+# Отворете прегледа на Application Insights
+azd monitor --overview
+```
+
+### Преглед на логове от контейнерите
+```bash
+# Преглед на логове чрез Azure CLI (за Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Следете логовете в реално време
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Преглед на логове от Azure Portal
+azd monitor --logs
+```
+
+### Запитвания в Log Analytics
+```bash
+# Достъп до Log Analytics през портала на Azure
+azd monitor --logs
+
+# Правене на заявки към логовете чрез Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ Команди за поддръжка
 
 ### Почистване
 ```bash
-# Remove all Azure resources
+# Премахване на всички ресурси в Azure
 azd down
 
-# Force delete without confirmation
+# Принудително изтриване без потвърждение
 azd down --force
 
-# Purge soft-deleted resources
+# Изчистване на ресурси, изтрити чрез soft-delete
 azd down --purge
 
-# Complete cleanup
+# Пълно почистване
 azd down --force --purge
 ```
 
 ### Актуализации
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# Проверете за актуализации на azd
 azd version
 
-# Show system information
-azd info
+# Вземете текущата версия
+azd version
+
+# Прегледайте текущата конфигурация
+azd config list
 ```
 
-## 🔧 Напреднали команди
+## 🔧 Разширени команди
 
-### Пайплайн и CI/CD
+### Pipeline и CI/CD
 ```bash
-# Configure GitHub Actions
+# Конфигуриране на GitHub Actions
 azd pipeline config
 
-# Configure Azure DevOps
+# Конфигуриране на Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# Показване на конфигурацията на пайплайна
 azd pipeline show
 ```
 
 ### Управление на инфраструктурата
 ```bash
-# Import existing resources
-azd infra import
+# Генериране на шаблони за инфраструктура
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Преглед и планиране на инфраструктурата
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Симулира предоставяне на инфраструктура без разгръщане
+# Анализира шаблони Bicep/Terraform и показва:
+# - Ресурси, които ще бъдат добавени (зелен +)
+# - Ресурси, които ще бъдат променени (жълт ~)
+# - Ресурси, които ще бъдат изтрити (червен -)
+# Безопасно за изпълнение - няма реални промени в Azure средата
+
+# Синтезира инфраструктура от azure.yaml
+azd infra synth
 ```
 
-### Управление на услуги
+### Информация за проекта
 ```bash
-# List all services
-azd service list
+# Покажи състоянието на проекта и крайните точки
+azd show
 
-# Show service details
-azd service show --service web
+# Покажи подробна информация за проекта в JSON формат
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Вземи крайните точки на услугата
+azd show --output json | jq '.services'
 ```
 
 ## 🎯 Бързи работни потоци
 
-### Работен процес за разработка
+### Работен поток за разработка
 ```bash
-# Start new project
+# Започнете нов проект
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# Разгърнете в средата за разработка
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# Направете промени и ги разгърнете отново
 azd deploy
 
-# View logs
-azd logs --follow
+# Отворете таблото за наблюдение
+azd monitor --live
 ```
 
-### Работен процес с множество среди
+### Работен поток за множество среди
 ```bash
-# Set up environments
+# Настройване на среди
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# Разгръщане в dev
 azd env select dev
 azd up
 
-# Test and promote to staging
+# Тестване и прехвърляне в staging
 azd env select staging
 azd up
 
-# Deploy to production
+# Разгръщане в продукция
 azd env select production
 azd up
 ```
 
-### Работен процес за отстраняване на проблеми
+### Работен поток за отстраняване на проблеми
 ```bash
-# Enable debug mode
+# Активиране на режим за отстраняване на грешки
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Проверка на състоянието на разгръщане
+azd show
 
-# Validate configuration
-azd config validate
+# Проверка на конфигурацията
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Отваряне на таблото за мониторинг на логовете
+azd monitor --logs
 
-# Check resource status
+# Проверка на състоянието на ресурса
 azd show --output json
 ```
 
-## 🔍 Команди за дебъгване
+## 🔍 Команди за отстраняване на грешки
 
-### Информация за дебъгване
+### Информация за отстраняване на грешки
 ```bash
-# Enable debug output
+# Включи отладъчен изход
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# Изключи телеметрията за по-чист изход
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Провери текущата конфигурация
+azd config list
 
-# Check authentication status
+# Провери състоянието на удостоверяването
 az account show
 ```
 
-### Дебъгване на шаблони
+### Отстраняване на грешки в шаблоните
 ```bash
-# List available templates with details
+# Избройте наличните шаблони с подробности
 azd template list --output json
 
-# Show template information
+# Покажете информация за шаблона
 azd template show <template-name>
 
-# Validate template before init
+# Валидирайте шаблона преди инициализация
 azd template validate <template-name>
 ```
 
@@ -387,62 +391,64 @@ azd template validate <template-name>
 
 ### Структура на проекта
 ```bash
-# Show current directory structure
+# Покажи текущата структура на директорията
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
+# Навигирай до кореновата директория на проекта azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# Покажи конфигурационната директория на azd
+echo $AZD_CONFIG_DIR  # Обикновено ~/.azd
 ```
 
 ## 🎨 Форматиране на изхода
 
 ### JSON изход
 ```bash
-# Get JSON output for scripting
+# Получете JSON изход за скриптове
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# Парсирайте с jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Табличен изход
 ```bash
-# Format as table
+# Форматирай като таблица
 azd env list --output table
-azd service list --output table
+
+# Преглед на внедрените услуги
+azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Често срещани комбинации от команди
+## 🔧 Чести комбинации от команди
 
 ### Скрипт за проверка на състоянието
 ```bash
 #!/bin/bash
-# Quick health check
+# Бърза проверка на състоянието
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
-### Валидация на внедряването
+### Валидация на разгръщане
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# Валидация преди внедряване
+azd show
+azd provision --preview  # Преглед на промените преди внедряване
 az account show
 ```
 
 ### Сравнение на среди
 ```bash
 #!/bin/bash
-# Compare environments
+# Сравняване на среди
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -453,7 +459,7 @@ done
 ### Скрипт за почистване на ресурси
 ```bash
 #!/bin/bash
-# Clean up old environments
+# Почистване на стари среди
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -463,78 +469,81 @@ done
 
 ## 📝 Променливи на средата
 
-### Често срещани променливи на средата
+### Чести променливи на средата
 ```bash
-# Azure configuration
+# Конфигурация на Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# Конфигурация на AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# Конфигурация на приложението
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Спешни команди
+## 🚨 Аварийни команди
 
 ### Бързи поправки
 ```bash
-# Reset authentication
+# Нулиране на удостоверяването
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# Принудително опресняване на средата
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# Повторно разгръщане на всички услуги
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Проверка на състоянието на разгръщането
+azd show --output json
 ```
 
 ### Команди за възстановяване
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Възстановяване след неуспешно разгръщане - изчистване и повторно разгръщане
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Само повторно предоставяне на инфраструктурата
+azd provision
+
+# Само повторно разгръщане на приложението
+azd deploy
 ```
 
-## 💡 Полезни съвети
+## 💡 Професионални съвети
 
-### Съкращения за по-бърз работен процес
+### Алиаси за по-бърз работен поток
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# Добавете във вашия .bashrc или .zshrc
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Съкращения за функции
+### Преки пътища за функции
 ```bash
-# Quick environment switching
+# Бързо превключване между среди
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# Бързо разгръщане с мониторинг
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# Статус на средата
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -544,40 +553,42 @@ azd-status() {
 
 ### Получаване на помощ
 ```bash
-# General help
+# Обща помощ
 azd --help
 azd help
 
-# Command-specific help
+# Помощ за конкретна команда
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# Покажи информация за версията и сборката
 azd version
 azd version --output json
 ```
 
 ### Връзки към документация
 ```bash
-# Open documentation in browser
+# Отвори документацията в браузъра
 azd docs
 
-# Show template documentation
+# Покажи документацията за шаблона
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Съвет**: Запазете това ръководство в отметките си и използвайте `Ctrl+F`, за да намерите бързо необходимите команди!
+**Съвет**: Запазете тази шпаргалка в отметки и използвайте `Ctrl+F`, за да намерите бързо командите, от които се нуждаете!
 
 ---
 
 **Навигация**
-- **Предишен урок**: [Проверки преди внедряване](../docs/pre-deployment/preflight-checks.md)
-- **Следващ урок**: [Речник](glossary.md)
+- **Предишен урок**: [Проверки преди разгръщане](../docs/pre-deployment/preflight-checks.md)
+- **Следващ урок**: [Глосар](glossary.md)
 
 ---
 
-**Отказ от отговорност**:  
-Този документ е преведен с помощта на AI услуга за превод [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи може да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Не носим отговорност за недоразумения или погрешни интерпретации, произтичащи от използването на този превод.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Отказ от отговорност**:
+Този документ е преведен с помощта на AI преводаческа услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на оригиналния си език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Не носим отговорност за каквито и да е недоразумения или погрешни тълкувания, произтичащи от използването на този превод.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
