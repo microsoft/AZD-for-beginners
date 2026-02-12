@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-24T10:18:35+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "lt"
-}
--->
 # Azure OpenAI Pokalbių Programa
 
 **Mokymosi lygis:** Vidutinis ⭐⭐ | **Laikas:** 35-45 minutės | **Kaina:** $50-200/mėn

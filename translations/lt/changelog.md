@@ -1,560 +1,1023 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1bc63a39d4cf8fc5cb5c7040344be859",
-  "translation_date": "2025-11-24T09:01:20+00:00",
-  "source_file": "changelog.md",
-  "language_code": "lt"
-}
--->
-# Keitimo žurnalas - AZD pradedantiesiems
+# Pakeitimų žurnalas - AZD Pradedantiesiems
 
 ## Įvadas
 
-Šis keitimo žurnalas dokumentuoja visus svarbius pakeitimus, atnaujinimus ir patobulinimus AZD pradedantiesiems saugykloje. Mes laikomės semantinio versijavimo principų ir palaikome šį žurnalą, kad padėtume vartotojams suprasti, kas pasikeitė tarp versijų.
+Šis pakeitimų žurnalas dokumentuoja visus reikšmingus pakeitimus, atnaujinimus ir patobulinimus AZD Pradedantiesiems saugykloje. Laikomės semantinio versijavimo principų ir palaikome šį žurnalą, kad padėtume vartotojams suprasti, kas pasikeitė tarp versijų.
 
 ## Mokymosi tikslai
 
-Peržiūrėję šį keitimo žurnalą, jūs:
-- Sužinosite apie naujas funkcijas ir turinio papildymus
-- Suprasite patobulinimus, atliktus esamoje dokumentacijoje
-- Seksite klaidų taisymus ir užtikrinsite tikslumą
-- Stebėsite mokymosi medžiagos evoliuciją laikui bėgant
+Peržiūrėję šį pakeitimų žurnalą, jūs:
+- Būsite informuoti apie naujas funkcijas ir turinio papildymus
+- Suprasite patobulinimus esamoje dokumentacijoje
+- Stebėsite klaidų taisymus ir pataisas, kad užtikrintumėte tikslumą
+- Seksite mokymosi medžiagos vystymąsi laikui bėgant
 
 ## Mokymosi rezultatai
 
-Peržiūrėję keitimo žurnalo įrašus, jūs galėsite:
-- Atpažinti naują turinį ir mokymosi išteklius
-- Suprasti, kurios skiltys buvo atnaujintos ar patobulintos
-- Planuoti savo mokymosi kelią pagal naujausią medžiagą
-- Teikti atsiliepimus ir pasiūlymus būsimam tobulinimui
+Peržiūrėję pakeitimų įrašus, galėsite:
+- Nustatyti naują turinį ir išteklius, prieinamus mokymuisi
+- Suprasti, kurios skiltys buvo atnaujintos arba patobulintos
+- Planuoti savo mokymosi kelią remiantis naujausia medžiaga
+- Teikti atsiliepimus ir pasiūlymus tolimesniems patobulinimams
 
 ## Versijų istorija
 
-### [v3.8.0] - 2025-11-19
+### [v3.17.0] - 2026-02-05
 
-#### Išplėstinė dokumentacija: stebėjimas, saugumas ir kelių agentų modeliai
-**Ši versija prideda išsamias A lygio pamokas apie Application Insights integraciją, autentifikavimo modelius ir kelių agentų koordinavimą gamybos diegimams.**
+#### Course Navigation Enhancement
+**Ši versija patobulina README.md skyrių navigaciją su išplėsta lentele.**
+
+#### Changed
+- **Course Map Table**: Patobulinta su tiesioginėmis pamokų nuorodomis, trukmės įverčiais ir sudėtingumo vertinimais
+- **Folder Cleanup**: Pašalinti pasikartojantys seni aplankai (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Link Validation**: Patikrinta visos 21+ vidinės nuorodos Kurso žemėlapio lentelėje
+
+### [v3.16.0] - 2026-02-05
+
+#### Product Name Updates
+**Ši versija atnaujina produktų nuorodas pagal naujausią Microsoft prekės ženklą.**
+
+#### Changed
+- **Azure AI Foundry → Microsoft Foundry**: Visos nuorodos atnaujintos nevertimo failuose
+- **Azure AI Agent Service → Foundry Agents**: Paslaugos pavadinimas atnaujintas, kad atitiktų dabartinį prekės ženklą
+
+#### Files Updated
+- `README.md` - Pagrindinis kurso puslapis
+- `changelog.md` - Versijų istorija
+- `course-outline.md` - Kurso struktūra
+- `docs/chapter-02-ai-development/agents.md` - Vadovas apie AI agentus
+- `examples/README.md` - Pavyzdžių dokumentacija
+- `workshop/README.md` - Dirbtuvių pradžios puslapis
+- `workshop/docs/index.md` - Dirbtuvių indeksas
+- `workshop/docs/instructions/*.md` - Visi dirbtuvių instrukcijų failai
+
+---
+
+### [v3.15.0] - 2026-02-05
+
+#### Major Repository Restructuring: Chapter-Based Folder Names
+**Ši versija pertvarko dokumentaciją į atskirus skyrių aplankus aiškesnei navigacijai.**
+
+#### Folder Renames
+Seni aplankai pakeisti skyriaus numeruotais aplankais:
+- `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
+- `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
+- `docs/deployment/` → `docs/chapter-04-infrastructure/`
+- `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
+- `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
+- Pridėta nauja: `docs/chapter-05-multi-agent/`
+
+#### File Migrations
+| Failas | Iš | Į |
+|------|------|---|
+| azd-basics.md | getting-started/ | chapter-01-foundation/ |
+| installation.md | getting-started/ | chapter-01-foundation/ |
+| first-project.md | getting-started/ | chapter-01-foundation/ |
+| configuration.md | getting-started/ | chapter-03-configuration/ |
+| authsecurity.md | getting-started/ | chapter-03-configuration/ |
+| microsoft-foundry-integration.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| agents.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| ai-model-deployment.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| ai-workshop-lab.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
+| deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
+| provisioning.md | deployment/ | chapter-04-infrastructure/ |
+| All pre-deployment files | pre-deployment/ | chapter-06-pre-deployment/ |
+| All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
+
+#### Added
+- **📚 Chapter README files**: Sukurti README.md failai kiekviename skyriaus aplanke su:
+  - Mokymosi tikslais ir trukme
+  - Pamokų lentele su aprašymais
+  - Greito pradžios komandomis
+  - Navigacija į kitus skyrius
+
+#### Changed
+- **🔗 Updated all internal links**: 78+ kelių atnaujinta visuose dokumentacijos failuose
+- **🗺️ Main README.md**: Atnaujintas Kurso žemėlapis su nauja skyrių struktūra
+- **📝 examples/README.md**: Atnaujinti tarpusavio nuorodų į skyriaus aplankus
+
+#### Removed
+- Seni aplankų struktūra (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+
+---
+
+### [v3.14.0] - 2026-02-05
+
+#### Repository Restructuring: Chapter Navigation
+**Ši versija pridėjo skyrių navigacijos README failus (vėliau pakeista v3.15.0).**
+
+---
+
+### [v3.13.0] - 2026-02-05
+
+#### New AI Agents Guide
+**Ši versija prideda išsamų vadovą AI agentų diegimui su Azure Developer CLI.**
+
+#### Added
+- **🤖 docs/microsoft-foundry/agents.md**: Pilnas vadovas, apimantis:
+  - Kas yra AI agentai ir kuo jie skiriasi nuo pokalbių robotų
+  - Trijų greito paleidimo agentų šablonai (Foundry Agents, Prompty, RAG)
+  - Agentų architektūros modeliai (vienas agentas, RAG, keli agentai)
+  - Įrankių konfigūracija ir pritaikymas
+  - Stebėsena ir metrikų sekimas
+  - Sąnaudų apsvarstymai ir optimizavimas
+  - Dažniausiai pasitaikančios problemos ir jų sprendimas
+  - Trys praktinės užduotys su sėkmės kriterijais
+
+#### Content Structure
+- **Introduction**: Agentų koncepcijos pradedantiesiems
+- **Quick Start**: Diegti agentus su `azd init --template get-started-with-ai-agents`
+- **Architecture Patterns**: Agentų modelių vizualinės schemos
+- **Configuration**: Įrankių nustatymas ir aplinkos kintamieji
+- **Monitoring**: Application Insights integracija
+- **Exercises**: Progresyvios praktinės užduotys (kiekviena 20–45 minučių)
+
+---
+
+### [v3.12.0] - 2026-02-05
+
+#### DevContainer Environment Update
+**Ši versija atnaujina vystymo konteinerio konfigūraciją su moderniais įrankiais ir geresniais numatytaisiais nustatymais AZD mokymosi patirčiai.**
+
+#### Changed
+- **🐳 Base Image**: Atnaujinta iš `python:3.12-bullseye` į `python:3.12-bookworm` (naujausias Debian stable)
+- **📛 Container Name**: Pervadinta iš "Python 3" į "AZD for Beginners" dėl aiškumo
+
+#### Added
+- **🔧 New Dev Container Features**:
+  - `azure-cli` su įjungta Bicep palaikymu
+  - `node:20` (LTS versija AZD šablonams)
+  - `github-cli` šablonų valdymui
+  - `docker-in-docker` konteinerių programų diegimui
+
+- **🔌 Port Forwarding**: Iš anksto sukonfigūruoti prievadai įprastam vystymui:
+  - 8000 (MkDocs peržiūra)
+  - 3000 (Tinklalapiai)
+  - 5000 (Python Flask)
+  - 8080 (API)
+
+- **🧩 New VS Code Extensions**:
+  - `ms-python.vscode-pylance` - Patobulintas Python IntelliSense
+  - `ms-azuretools.vscode-azurefunctions` - Azure Functions palaikymas
+  - `ms-azuretools.vscode-docker` - Docker palaikymas
+  - `ms-azuretools.vscode-bicep` - Bicep kalbos palaikymas
+  - `ms-azure-devtools.azure-resource-groups` - Azure išteklių valdymas
+  - `yzhang.markdown-all-in-one` - Markdown redagavimas
+  - `DavidAnson.vscode-markdownlint` - Markdown lint tikrinimas
+  - `bierner.markdown-mermaid` - Mermaid diagramų palaikymas
+  - `redhat.vscode-yaml` - YAML palaikymas (azure.yaml)
+  - `eamodio.gitlens` - Git vizualizacija
+  - `mhutchie.git-graph` - Git istorija
+
+- **⚙️ VS Code Settings**: Pridėti numatyti nustatymai Python interpretatoriui, formatavimui išsaugant ir tarpų šalinimui
+
+- **📦 Updated requirements-dev.txt**:
+  - Pridėtas MkDocs minify įskiepis
+  - Pridėtas pre-commit kodo kokybei
+  - Pridėti Azure SDK paketai (azure-identity, azure-mgmt-resource)
+
+#### Fixed
+- **Post-Create Command**: Dabar tikrina AZD ir Azure CLI įdiegimą konteinerio paleidimo metu
+
+---
+
+### [v3.11.0] - 2026-02-05
+
+#### Beginner-Friendly README Overhaul
+**Ši versija reikšmingai patobulina README.md, kad jis būtų prieinamesnis pradedantiesiems, ir prideda esminių išteklių AI kūrėjams.**
+
+#### Added
+- **🆚 Azure CLI vs AZD Comparison**: Aiškus paaiškinimas, kada naudoti kurią priemonę su praktiniais pavyzdžiais
+- **🌟 Awesome AZD Links**: Tiesioginės nuorodos į bendruomenės šablonų galeriją ir prisidėjimo išteklius:
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ paruoštų diegimui šablonų
+  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Bendruomenės prisidėjimas
+- **🎯 Quick Start Guide**: Supaprastinta 3 žingsnių pradžia (Įdiegti → Prisijungti → Diegti)
+- **📊 Experience-Based Navigation Table**: Aiškios gairės, kur pradėti priklausomai nuo kūrėjų patirties
+
+#### Changed
+- **README Structure**: Pertvarkyta taip, kad svarbiausia informacija būtų pirmiau
+- **Introduction Section**: Perrašyta, kad paaiškintų "The Magic of `azd up`" visiškai pradedantiesiems
+- **Removed Duplicate Content**: Pašalinta pasikartojanti trikčių šalinimo dalis
+- **Troubleshooting Commands**: Ištaisyta `azd logs` nuoroda, pakeista į galiojantį `azd monitor --logs`
+
+#### Fixed
+- **🔐 Authentication Commands**: Pridėta `azd auth login` ir `azd auth logout` į cheat-sheet.md
+- **Invalid Command References**: Pašalintos likusios `azd logs` nuorodos iš README trikčių šalinimo skilties
+
+#### Notes
+- **Scope**: Pakeitimai taikyti pagrindiniam README.md ir resources/cheat-sheet.md
+- **Target Audience**: Patobulinimai skirti specialiai AZD naujokams
+
+---
+
+### [v3.10.0] - 2026-02-05
+
+#### Azure Developer CLI Command Accuracy Update
+**Ši versija ištaiso neegzistuojančias AZD komandas visoje dokumentacijoje, užtikrindama, kad visi kodo pavyzdžiai naudotų galiojančią Azure Developer CLI sintaksę.**
+
+#### Fixed
+- **🔧 Non-Existent AZD Commands Removed**: Išsamus auditavimas ir neteisingų komandų taisymas:
+  - `azd logs` (neegzistuoja) → pakeista į `azd monitor --logs` arba Azure CLI alternatyvas
+  - `azd service` subkomandos (neegzistuoja) → pakeistos į `azd show` ir Azure CLI
+  - `azd infra import/export/validate` (neegzistuoja) → pašalinta arba pakeista galiojančiomis alternatyvomis
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` flag'ai (neegzistuoja) → pašalinti
+  - `azd provision --what-if/--rollback` flag'ai (neegzistuoja) → atnaujinti naudojant `--preview`
+  - `azd config validate` (neegzistuoja) → pakeista į `azd config list`
+  - `azd info`, `azd history`, `azd metrics` (neegzistuoja) → pašalintos
+
+- **📚 Files Updated with Command Corrections**:
+  - `resources/cheat-sheet.md`: Didelis komandų nuorodų perrašymas
+  - `docs/deployment/deployment-guide.md`: Ištaisyta atstatymo ir diegimo strategijos
+  - `docs/troubleshooting/debugging.md`: Ištaisyta žurnalų analizės skiltis
+  - `docs/troubleshooting/common-issues.md`: Atnaujintos trikčių šalinimo komandos
+  - `docs/troubleshooting/ai-troubleshooting.md`: Ištaisyta AZD derinimo dalis
+  - `docs/getting-started/azd-basics.md`: Ištaisyti stebėjimo komandų pavyzdžiai
+  - `docs/getting-started/first-project.md`: Atnaujinti stebėjimo ir derinimo pavyzdžiai
+  - `docs/getting-started/installation.md`: Ištaisyti pagalbos ir versijos pavyzdžiai
+  - `docs/pre-deployment/application-insights.md`: Ištaisyti žurnalų peržiūros komandos
+  - `docs/pre-deployment/coordination-patterns.md`: Ištaisyti agentų derinimo komandų pavyzdžiai
+
+- **📝 Version Reference Updated**: 
+  - `docs/getting-started/installation.md`: Pakeista kieta nurodyta `1.5.0` versija į generinę `1.x.x` su nuoroda į leidimus
+
+#### Changed
+- **Rollback Strategies**: Dokumentacija atnaujinta naudojant Git pagrįstą atstatymą (AZD neturi vietinio atstatymo)
+- **Log Viewing**: `azd logs` nuorodos pakeistos į `azd monitor --logs`, `azd monitor --live` ir Azure CLI komandas
+- **Performance Section**: Pašalinti neegzistuojantys paralelinio / dalinio diegimo flag'ai, pateiktos galiojančios alternatyvos
+
+#### Technical Details
+- **Galiojantys AZD komandų pavadinimai**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **Galimi azd monitor parametrai**: `--live`, `--logs`, `--overview`
+- **Pašalintos funkcijos**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
+
+#### Pastabos
+- **Patikrinimas**: Komandos patikrintos su Azure Developer CLI v1.23.x
+
+---
+
+### [v3.9.0] - 2026-02-05
+
+#### Dirbtuvės užbaigimas ir dokumentacijos kokybės atnaujinimas
+**Ši versija užbaigia interaktyvius dirbtuvių modulius, ištaiso visus neveikiančius dokumentacijos nuorodų saitų ir pagerina bendrą turinio kokybę AI kūrėjams, naudojantiems Microsoft AZD.**
 
 #### Pridėta
-- **📊 Application Insights integracijos pamoka**: `docs/pre-deployment/application-insights.md`:
-  - AZD orientuotas diegimas su automatiniu paruošimu
+- **📝 CONTRIBUTING.md**: Naujas indėlių gairių dokumentas su:
+  - Aiškiomis instrukcijomis, kaip pranešti apie problemas ir siūlyti pakeitimus
+  - Dokumentacijos standartais naujam turiniui
+  - Kodo pavyzdžių gairėmis ir commit žinučių konvencijomis
+  - Informacija apie bendruomenės įsitraukimą
+
+#### Užbaigta
+- **🎯 Workshop Module 7 (Wrap-up)**: Visiškai užbaigtas užbaigimo modulis su:
+  - Išsamiu dirbtuvių pasiekimų apibendrinimu
+  - Skyriumi apie įgytas pagrindines koncepcijas, apimančiomis AZD, šablonus ir AI Foundry
+  - Rekomendacijomis tolesnei mokymosi kelionei
+  - Dirbtuvių iššūkių pratimais su sunkumo įvertinimais
+  - Bendruomenės atsiliepimų ir palaikymo nuorodomis
+
+- **📚 Workshop Module 3 (Deconstruct)**: Atnaujinti mokymosi tikslai su:
+  - GitHub Copilot su MCP serverių aktyvacijos gairėmis
+  - AZD šablonų aplanko struktūros supratimu
+  - Infrastructure-as-code (Bicep) organizacijos modeliais
+  - Praktinių laboratorinių užduočių instrukcijomis
+
+- **🔧 Workshop Module 6 (Teardown)**: Užbaigta su:
+  - Išteklių valymo ir sąnaudų valdymo tikslais
+  - `azd down` naudojimu saugiam infrastruktūros išjungimui
+  - Minkštai ištrintų kognityvinių paslaugų atkūrimo gairėmis
+  - Papildomomis eksperimentavimo gairėmis GitHub Copilot ir Azure portalo tyrinėjimui
+
+#### Ištaisyta
+- **🔗 Neveikiančių nuorodų taisymai**: Išspręsta 15+ vidinių dokumentacijos nuorodų:
+  - `docs/ai-foundry/ai-model-deployment.md`: Ištaisyti keliai į microsoft-foundry-integration.md
+  - `docs/troubleshooting/ai-troubleshooting.md`: Pataisyti ai-model-deployment.md ir production-ai-practices.md keliai
+  - `docs/getting-started/first-project.md`: Pakeistas neegzistuojantis cicd-integration.md į deployment-guide.md
+  - `examples/retail-scenario.md`: Ištaisyti DUK ir trikčių šalinimo gairių keliai
+  - `examples/container-app/microservices/README.md`: Pataisyti kursų pradžios ir diegimo gairių keliai
+  - `resources/faq.md` ir `resources/glossary.md`: Atnaujintos AI skyriaus nuorodos
+  - `course-outline.md`: Ištaisyti instruktoriaus gido ir AI dirbtuvių laboratorijų nuorodų keliai
+
+- **📅 Dirbtuvių būsenos baneris**: Atnaujinta iš "Under Construction" į aktyvią dirbtuvių būseną su 2026 m. vasario data
+
+- **🔗 Dirbtuvių navigacija**: Ištaisyti neveikiantys navigacijos saitai dirbtuvių README.md rodantys į neegzistuojantį lab-1-azd-basics aplanką
+
+#### Pakeista
+- **Dirbtuvių pristatymas**: Pašalinta "under construction" įspėjimo žyma, dirbtuvės dabar baigtos ir paruoštos naudoti
+- **Navigacijos nuoseklumas**: Užtikrinta, kad visi dirbtuvių moduliai turi tinkamą tarpusavio navigaciją
+- **Mokymosi takelio nuorodos**: Atnaujintos skyriaus kryžminės nuorodos, kad naudotų teisingus microsoft-foundry kelius
+
+#### Patvirtinta
+- ✅ Visos angliškos markdown bylos turi galiojančias vidines nuorodas
+- ✅ Dirbtuvių moduliai 0-7 yra pilni mokymosi tikslų
+- ✅ Navigacija tarp skyrių ir modulių veikia tinkamai
+- ✅ Turinys tinkamas AI kūrėjams, naudojantiems Microsoft AZD
+- ✅ Kalba ir struktūra pritaikyta pradedantiesiems
+- ✅ CONTRIBUTING.md suteikia aiškias gaires bendruomenės dalyviams
+
+#### Techninis įgyvendinimas
+- **Nuorodų patvirtinimas**: Automatizuotas PowerShell skriptas patikrino visas .md vidines nuorodas
+- **Turinio auditavimas**: Rankinė dirbtuvių užbaigtumo ir pritaikomumo pradedantiesiems peržiūra
+- **Navigacijos sistema**: Taikomi nuoseklūs skyrių ir modulių navigacijos modeliai
+
+#### Pastabos
+- **Aprėptis**: Pakeitimai taikyti tik angliškai dokumentacijai
+- **Vertimai**: Vertimų aplankai šioje versijoje nebuvo atnaujinti (automatizuoti vertimai bus sinchronizuoti vėliau)
+- **Dirbtuvių trukmė**: Užbaigtos dirbtuvės dabar teikia 3–4 valandų praktinį mokymą
+
+---
+
+### [v3.8.0] - 2025-11-19
+
+#### Išplėstinė dokumentacija: stebėjimas, saugumas ir daugiaagentės koordinacijos modeliai
+**Ši versija prideda išsamius A klasės pamokas apie Application Insights integraciją, autentifikacijos modelius ir daugiaagentės koordinacijos modelius gamybos diegimams.**
+
+#### Pridėta
+- **📊 Application Insights integracijos pamoka**: faile `docs/pre-deployment/application-insights.md`:
+  - AZD orientuotas diegimas su automatinio teikimo paruošimu
   - Pilni Bicep šablonai Application Insights + Log Analytics
-  - Veikiantys Python programos pavyzdžiai su pritaikyta telemetrija (1 200+ eilučių)
-  - AI/LLM stebėjimo modeliai (Azure OpenAI žetonų/kainų sekimas)
+  - Veikiančios Python programos su pritaikyta telemetrija (1200+ eilučių)
+  - AI/LLM stebėjimo modeliai (Azure OpenAI žetonų/išlaidų sekimas)
   - 6 Mermaid diagramos (architektūra, paskirstytas sekimas, telemetrijos srautas)
   - 3 praktinės užduotys (įspėjimai, prietaisų skydeliai, AI stebėjimas)
-  - Kusto užklausų pavyzdžiai ir kaštų optimizavimo strategijos
-  - Tiesioginė metrikų transliacija ir realaus laiko derinimas
-  - 40-50 minučių mokymosi laikas su gamybai paruoštais modeliais
+  - Kusto užklausų pavyzdžiai ir sąnaudų optimizavimo strategijos
+  - Gyvų metrų srautas ir realaus laiko derinimas
+  - 40–50 minučių mokymosi trukmė su gamybai paruoštais modeliais
 
-- **🔐 Autentifikavimo ir saugumo modelių pamoka**: `docs/getting-started/authsecurity.md`:
-  - 3 autentifikavimo modeliai (prisijungimo eilutės, Key Vault, valdomas identitetas)
-  - Pilni Bicep infrastruktūros šablonai saugiems diegimams
+- **🔐 Autentifikacijos ir saugumo modelių pamoka**: faile `docs/getting-started/authsecurity.md`:
+  - 3 autentifikacijos modeliai (connection strings, Key Vault, managed identity)
+  - Pilni Bicep infrastruktūros šablonai saugioms diegimams
   - Node.js programos kodas su Azure SDK integracija
-  - 3 pilnos užduotys (valdomo identiteto įjungimas, vartotojo priskirtas identitetas, Key Vault rotacija)
-  - Saugumo geriausios praktikos ir RBAC konfigūracijos
-  - Trikčių šalinimo vadovas ir kaštų analizė
-  - Gamybai paruošti autentifikavimo modeliai be slaptažodžių
+  - 3 pilnos užduotys (įjungti managed identity, user-assigned identity, Key Vault rotacija)
+  - Saugumo gerosios praktikos ir RBAC konfigūracijos
+  - Trikčių šalinimo gidas ir sąnaudų analizė
+  - Gamybai paruošti be slaptažodžių autentifikacijos modeliai
 
-- **🤖 Kelių agentų koordinavimo modelių pamoka**: `docs/pre-deployment/coordination-patterns.md`:
-  - 5 koordinavimo modeliai (sekvencinis, lygiagretus, hierarchinis, įvykių pagrindu, konsensusas)
-  - Pilnas orkestratoriaus paslaugos įgyvendinimas (Python/Flask, 1 500+ eilučių)
-  - 3 specializuoti agentai (Tyrėjas, Rašytojas, Redaktorius)
+- **🤖 Daugiaagentės koordinacijos modelių pamoka**: faile `docs/pre-deployment/coordination-patterns.md`:
+  - 5 koordinacijos modeliai (sequential, parallel, hierarchical, event-driven, consensus)
+  - Pilna orkestratoriaus paslaugos implementacija (Python/Flask, 1500+ eilučių)
+  - 3 specializuotos agente implementacijos (Research, Writer, Editor)
   - Service Bus integracija pranešimų eilėms
   - Cosmos DB būsenos valdymas paskirstytoms sistemoms
-  - 6 Mermaid diagramos, rodančios agentų sąveiką
-  - 3 pažangios užduotys (laiko limitų valdymas, pakartojimo logika, grandinės pertraukiklis)
-  - Kaštų suskirstymas ($240-565/mėn.) su optimizavimo strategijomis
+  - 6 Mermaid diagramos, vaizduojančios agentų sąveikas
+  - 3 pažangios užduotys (timeout valdymas, retry logika, circuit breaker)
+  - Sąnaudų suskaidymas ($240-565/month) su optimizavimo strategijomis
   - Application Insights integracija stebėjimui
 
 #### Patobulinta
-- **Prieš diegimą skyrius**: Dabar apima išsamius stebėjimo ir koordinavimo modelius
-- **Pradžios skyrius**: Patobulintas profesionaliais autentifikavimo modeliais
-- **Gamybos pasirengimas**: Visiška aprėptis nuo saugumo iki stebėjimo
+- **Pre-deployment skyrius**: Dabar apima išsamius stebėjimo ir koordinacijos modelius
+- **Getting Started skyrius**: Išplėstas profesionaliais autentifikacijos modeliais
+- **Gamybinis parengimas**: Pilnas aprėptis nuo saugumo iki stebėjimo
 - **Kurso planas**: Atnaujintas, kad nurodytų naujas pamokas 3 ir 6 skyriuose
 
 #### Pakeista
-- **Mokymosi progresija**: Geresnė saugumo ir stebėjimo integracija visame kurse
-- **Dokumentacijos kokybė**: Nuoseklūs A lygio standartai (95-97%) naujose pamokose
-- **Gamybos modeliai**: Visiška aprėptis nuo pradžios iki pabaigos įmonių diegimams
+- **Mokymosi progresas**: Geresnė saugumo ir stebėjimo integracija per visą kursą
+- **Dokumentacijos kokybė**: Nuoseklūs A klasės standartai (95–97%) naujose pamokose
+- **Gamybiniai modeliai**: Pilnas galutinis aprėptis įmonės diegimams
 
-#### Pagerinta
-- **Kūrėjų patirtis**: Aiškus kelias nuo kūrimo iki gamybos stebėjimo
-- **Saugumo standartai**: Profesionalūs autentifikavimo ir paslapčių valdymo modeliai
-- **Stebėjimas**: Visiška Application Insights integracija su AZD
-- **AI darbo krūviai**: Specializuotas stebėjimas Azure OpenAI ir kelių agentų sistemoms
+#### Patobulinta
+- **Kūrėjų patirtis**: Aiškus kelias nuo vystymo iki gamybinio stebėjimo
+- **Saugumo standartai**: Profesionali praktika autentifikacijai ir slaptumų valdymui
+- **Observability**: Pilna Application Insights integracija su AZD
+- **AI darbo krūviai**: Specializuotas stebėjimas Azure OpenAI ir daugiaagentėms sistemoms
 
 #### Patvirtinta
-- ✅ Visos pamokos apima pilną veikiantį kodą (ne fragmentus)
+- ✅ Visos pamokos turi pilnai veikantį kodą (ne fragmentus)
 - ✅ Mermaid diagramos vizualiam mokymuisi (iš viso 19 per 3 pamokas)
-- ✅ Praktinės užduotys su patikrinimo žingsniais (iš viso 9)
-- ✅ Gamybai paruošti Bicep šablonai, diegiami per `azd up`
-- ✅ Kaštų analizė ir optimizavimo strategijos
-- ✅ Trikčių šalinimo vadovai ir geriausios praktikos
-- ✅ Žinių patikrinimo punktai su patikrinimo komandomis
+- ✅ Praktinės užduotys su patvirtinimo žingsniais (iš viso 9)
+- ✅ Gamybai paruošti Bicep šablonai diegiami per `azd up`
+- ✅ Sąnaudų analizė ir optimizavimo strategijos
+- ✅ Trikčių šalinimo gidai ir gerosios praktikos
+- ✅ Žinių patikros su patvirtinimo komandomis
 
 #### Dokumentacijos vertinimo rezultatai
-- **docs/pre-deployment/application-insights.md**: - Išsamus stebėjimo vadovas
+- **docs/pre-deployment/application-insights.md**: - Išsami stebėjimo instrukcija
 - **docs/getting-started/authsecurity.md**: - Profesionalūs saugumo modeliai
-- **docs/pre-deployment/coordination-patterns.md**: - Pažangios kelių agentų architektūros
+- **docs/pre-deployment/coordination-patterns.md**: - Pažangios daugiaagentės architektūros
 - **Bendras naujas turinys**: - Nuoseklūs aukštos kokybės standartai
 
 #### Techninis įgyvendinimas
 - **Application Insights**: Log Analytics + pritaikyta telemetrija + paskirstytas sekimas
-- **Autentifikavimas**: Valdomas identitetas + Key Vault + RBAC modeliai
-- **Kelių agentų modeliai**: Service Bus + Cosmos DB + Container Apps + orkestracija
-- **Stebėjimas**: Tiesioginė metrikų transliacija + Kusto užklausos + įspėjimai + prietaisų skydeliai
-- **Kaštų valdymas**: Mėginių ėmimo strategijos, saugojimo politikos, biudžeto kontrolė
+- **Autentifikacija**: Managed Identity + Key Vault + RBAC modeliai
+- **Daugiaagentė**: Service Bus + Cosmos DB + Container Apps + orkestracija
+- **Stebėjimas**: Gyvi metrikos srautai + Kusto užklausos + įspėjimai + prietaisų skydeliai
+- **Sąnaudų valdymas**: Mėginimo strategijos, saugojimo politikos, biudžeto kontrolė
 
 ### [v3.7.0] - 2025-11-19
 
 #### Dokumentacijos kokybės patobulinimai ir naujas Azure OpenAI pavyzdys
-**Ši versija pagerina dokumentacijos kokybę visoje saugykloje ir prideda pilną Azure OpenAI diegimo pavyzdį su GPT-4 pokalbių sąsaja.**
+**Ši versija pagerina dokumentacijos kokybę visame saugykloje ir prideda pilną Azure OpenAI diegimo pavyzdį su GPT-4 pokalbių sąsaja.**
 
 #### Pridėta
-- **🤖 Azure OpenAI pokalbių pavyzdys**: Pilnas GPT-4 diegimas su veikiančiu įgyvendinimu `examples/azure-openai-chat/`:
+- **🤖 Azure OpenAI pokalbių pavyzdys**: Pilnas GPT-4 diegimas su veikiančia implementacija faile `examples/azure-openai-chat/`:
   - Pilna Azure OpenAI infrastruktūra (GPT-4 modelio diegimas)
-  - Python komandinės eilutės pokalbių sąsaja su pokalbių istorija
-  - Key Vault integracija saugiam API raktų saugojimui
-  - Žetonų naudojimo sekimas ir kaštų įvertinimas
-  - Greičio ribojimas ir klaidų valdymas
-  - Išsamus README su 35-45 minučių diegimo vadovu
+  - Python komandų eilutės pokalbių sąsaja su pokalbių istorija
+  - Key Vault integracija saugiam API rakto saugojimui
+  - Žetonų naudojimo sekimas ir sąnaudų įvertinimas
+  - Srautų ribojimas ir klaidų valdymas
+  - Išsamus README su 35–45 minučių diegimo gidu
   - 11 gamybai paruoštų failų (Bicep šablonai, Python programa, konfigūracija)
-- **📚 Dokumentacijos užduotys**: Pridėtos praktinės užduotys konfigūracijos vadovui:
-  - Užduotis 1: Kelių aplinkų konfigūracija (15 minučių)
-  - Užduotis 2: Paslapčių valdymo praktika (10 minučių)
-  - Aiškūs sėkmės kriterijai ir patikrinimo žingsniai
-- **✅ Diegimo patikrinimas**: Pridėtas patikrinimo skyrius diegimo vadovui:
-  - Sveikatos patikrinimo procedūros
+- **📚 Dokumentacijos pratimai**: Pridėti praktiniai pratimai konfigūracijos gide:
+  - 1 pratimas: Daugiavaržtinė aplinkos konfigūracija (15 minučių)
+  - 2 pratimas: Slaptumų valdymo praktika (10 minučių)
+  - Aiškūs sėkmės kriterijai ir patvirtinimo veiksmai
+- **✅ Diegimo patikrinimas**: Pridėtas patikrinimo skyrius diegimo gide:
+  - Sveikatos tikrinimo procedūros
   - Sėkmės kriterijų kontrolinis sąrašas
-  - Tikėtini rezultatai visoms diegimo komandoms
-  - Greitos trikčių šalinimo nuorodos
+  - Laukiami išvesties rezultatai visuose diegimo komandų žingsniuose
+  - Greita trikčių šalinimo nuoroda
 
 #### Patobulinta
-- **examples/README.md**: Atnaujinta iki A lygio kokybės (93%):
-  - Pridėtas azure-openai-chat į visas atitinkamas skiltis
-  - Atnaujintas vietinių pavyzdžių skaičius nuo 3 iki 4
+- **examples/README.md**: Atnaujinta iki A klasės kokybės (93%):
+  - Pridėtas azure-openai-chat į visas atitinkamas sekcijas
+  - Vietinių pavyzdžių skaičius atnaujintas nuo 3 iki 4
   - Pridėta į AI programų pavyzdžių lentelę
-  - Integruota į Tarpinių vartotojų greitą pradžią
+  - Integruota į Greitą pradžią skirta tarpinio lygio vartotojams
   - Pridėta į Microsoft Foundry šablonų skyrių
-  - Atnaujinta palyginimo matrica ir technologijų paieškos skiltys
-- **Dokumentacijos kokybė**: Pagerinta nuo B+ (87%) iki A- (92%) visame docs aplanke:
-  - Pridėti tikėtini rezultatai prie svarbių komandų pavyzdžių
-  - Įtraukti patikrinimo žingsniai konfigūracijos pakeitimams
-  - Patobulintas praktinis mokymasis su praktinėmis užduotimis
+  - Atnaujintas palyginimo matrica ir technologijų paieškos skyriai
+- **Dokumentacijos kokybė**: Pagerinta iš B+ (87%) → A- (92%) per docs aplanką:
+  - Pridėtos laukiamo išvesties reikšmės prie svarbių komandų pavyzdžių
+  - Įtraukti patvirtinimo veiksmai konfigūracijos pakeitimams
+  - Sustiprintas praktinis mokymasis su veiksminiais pratimais
 
 #### Pakeista
-- **Mokymosi progresija**: Geresnė AI pavyzdžių integracija tarpiniams mokiniams
-- **Dokumentacijos struktūra**: Daugiau veiksmingų užduočių su aiškiais rezultatais
-- **Patikrinimo procesas**: Aiškūs sėkmės kriterijai pridėti prie pagrindinių darbo eigų
+- **Mokymosi progresas**: Geresnė AI pavyzdžių integracija tarpinio lygio mokiniams
+- **Dokumentacijos struktūra**: Daugiau veiksmo užduočių su aiškiais rezultatais
+- **Patikrinimo procesas**: Pridėti aiškūs sėkmės kriterijai pagrindiniuose darbo eigos žingsniuose
 
-#### Pagerinta
-- **Kūrėjų patirtis**: Azure OpenAI diegimas dabar trunka 35-45 minutes (vietoj 60-90 sudėtingesnėms alternatyvoms)
-- **Kaštų skaidrumas**: Aiškūs kaštų įvertinimai ($50-200/mėn.) Azure OpenAI pavyzdžiui
-- **Mokymosi kelias**: AI kūrėjai turi aiškų įėjimo tašką su azure-openai-chat
-- **Dokumentacijos standartai**: Nuoseklūs tikėtini rezultatai ir patikrinimo žingsniai
+#### Patobulinta
+- **Kūrėjų patirtis**: Azure OpenAI diegimas dabar užtrunka 35–45 minutes (vietoje 60–90 minučių sudėtingiems alternatyvams)
+- **Sąnaudų skaidrumas**: Aiškūs sąnaudų įverčiai ($50-200/month) Azure OpenAI pavyzdžiui
+- **Mokymosi takas**: AI kūrėjams suteiktas aiškus įėjimo taškas su azure-openai-chat
+- **Dokumentacijos standartai**: Nuoseklios laukiamo išvesties reikšmės ir patvirtinimo žingsniai
 
 #### Patvirtinta
 - ✅ Azure OpenAI pavyzdys visiškai veikia su `azd up`
-- ✅ Visi 11 įgyvendinimo failų sintaksiškai teisingi
-- ✅ README instrukcijos atitinka tikrąją diegimo patirtį
-- ✅ Dokumentacijos nuorodos atnaujintos daugiau nei 8 vietose
+- ✅ Visos 11 implementacijos bylų sintaksiškai teisingos
+- ✅ README instrukcijos atitinka faktinę diegimo patirtį
+- ✅ Dokumentacijos nuorodos atnaujintos 8+ vietose
 - ✅ Pavyzdžių indeksas tiksliai atspindi 4 vietinius pavyzdžius
 - ✅ Nėra pasikartojančių išorinių nuorodų lentelėse
 - ✅ Visos navigacijos nuorodos teisingos
 
 #### Techninis įgyvendinimas
 - **Azure OpenAI architektūra**: GPT-4 + Key Vault + Container Apps modelis
-- **Saugumas**: Paruoštas valdomas identitetas, paslaptys Key Vault
+- **Saugumas**: Paruošta Managed Identity, slaptumai Key Vault
 - **Stebėjimas**: Application Insights integracija
-- **Kaštų valdymas**: Žetonų sekimas ir naudojimo optimizavimas
-- **Diegimas**: Viena `azd up` komanda visam nustatymui
+- **Sąnaudų valdymas**: Žetonų sekimas ir naudojimo optimizavimas
+- **Diegimas**: Viena `azd up` komanda pilnam paruošimui
 
 ### [v3.6.0] - 2025-11-19
 
-#### Didelis atnaujinimas: konteinerių programų diegimo pavyzdžiai
-**Ši versija pristato išsamius, gamybai paruoštus konteinerių programų diegimo pavyzdžius naudojant Azure Developer CLI (AZD), su pilna dokumentacija ir integracija į mokymosi kelią.**
+#### Pagrindinis atnaujinimas: Container App diegimo pavyzdžiai
+**Ši versija pristato išsamius, gamybai paruoštus konteinerizuotų aplikacijų diegimo pavyzdžius, naudojant Azure Developer CLI (AZD), su pilna dokumentacija ir integracija į mokymosi kelią.**
 
 #### Pridėta
-- **🚀 Konteinerių programų pavyzdžiai**: Nauji vietiniai pavyzdžiai `examples/container-app/`:
-  - [Pagrindinis vadovas](examples/container-app/README.md): Išsamus konteinerizuotų diegimų apžvalga, greita pradžia, gamyba ir pažangūs modeliai
-  - [Paprastas Flask API](../../examples/container-app/simple-flask-api): Pradedantiesiems pritaikytas REST API su mastelio mažinimu iki nulio, sveikatos patikromis, stebėjimu ir trikčių šalinimu
-  - [Mikropaslaugų architektūra](../../examples/container-app/microservices): Gamybai paruoštas daugiapaslaugis diegimas (API vartai, Produktas, Užsakymas, Vartotojas, Pranešimas), asinchroninis pranešimų siuntimas, Service Bus, Cosmos DB, Azure SQL, paskirstytas sekimas, mėlynos-žalios/kanarėlių diegimas
-- **Geriausios praktikos**: Saugumo, stebėjimo, kaštų optimizavimo ir CI/CD gairės konteinerizuotoms darbo apkrovoms
-- **Kodo pavyzdžiai**: Pilnas `azure.yaml`, Bicep šablonai ir daugiakalbiai paslaugų įgyvendinimai (Python, Node.js, C#, Go)
-- **Testavimas ir trikčių šalinimas**: Pilni testavimo scenarijai, stebėjimo komandos, trikčių šalinimo gairės
+- **🚀 Container App pavyzdžiai**: Nauji vietiniai pavyzdžiai faile `examples/container-app/`:
+  - [Master Guide](examples/container-app/README.md): Išsamus konteinerizuotų diegimų apžvalga, greitas startas, gamyba ir pažangūs modeliai
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): Pradedantiesiems pritaikytas REST API su scale-to-zero, sveikatos patikromis, stebėjimu ir trikčių šalinimu
+  - [Microservices Architecture](../../examples/container-app/microservices): Gamybai paruoštas kelių paslaugų diegimas (API Gateway, Product, Order, User, Notification), asinchroniniai pranešimai, Service Bus, Cosmos DB, Azure SQL, paskirstytas sekimas, blue-green/canary diegimas
+- **Gerosios praktikos**: Saugumas, stebėjimas, sąnaudų optimizavimas ir CI/CD gairės konteinerizuotiems krūviams
+- **Kodo pavyzdžiai**: Pilni `azure.yaml`, Bicep šablonai ir daugiakalbių paslaugų implementacijos (Python, Node.js, C#, Go)
+- **Testavimas ir trikčių šalinimas**: Visiško taikymo testavimo scenarijai, stebėjimo komandos, trikčių šalinimo gairės
 
 #### Pakeista
-- **README.md**: Atnaujinta, kad būtų rodomi ir susieti nauji konteinerių programų pavyzdžiai skiltyje "Vietiniai pavyzdžiai - konteinerių programos"
-- **examples/README.md**: Atnaujinta, kad būtų pabrėžti konteinerių programų pavyzdžiai, pridėti palyginimo matricos įrašai ir atnaujintos technologijų/architektūros nuorodos
-- **Kurso planas ir mokymosi vadovas**: Atnaujinta, kad būtų nurodyti nauji konteinerių programų pavyzdžiai ir diegimo modeliai atitinkamuose skyriuose
+- **README.md**: Atnaujintas, kad būtų pabrėžti ir susieti nauji container app pavyzdžiai pagal „Local Examples - Container Applications“
+- **examples/README.md**: Atnaujinta, kad pabrėžtų container app pavyzdžius, pridėtų palyginimo matricos įrašus ir atnaujintų technologijų/architektūros nuorodas
+- **Course Outline & Study Guide**: Atnaujinta, kad nuorodose būtų nauji konteinerių programų pavyzdžiai ir diegimo modeliai atitinkamuose skyriuose
 
 #### Patvirtinta
-- ✅ Visi nauji pavyzdžiai diegiami su `azd up` ir atitinka geriausias praktikas
-- ✅ Dokumentacijos kryžminės nuorodos ir navigacija atnaujintos
-- ✅ Pavyzdžiai apima nuo pradedančiųjų iki pažangių scenarijų, įskaitant gamybos mikropaslaugas
+- ✅ Visi nauji pavyzdžiai gali būti diegiami su `azd up` ir atitinka geriausias praktikas
+- ✅ Dokumentacijos kryžminiai saitai ir naršymas atnaujinti
+- ✅ Pavyzdžiai apima nuo pradedančiųjų iki pažangių scenarijų, įskaitant gamybines mikroservisų sistemas
 
 #### Pastabos
-- **Apimtis**: Tik anglų kalbos dokumentacija ir pavyzdžiai
-- **Kiti žingsniai**: Ateityje išplėsti papildomais pažangiais konteinerių modeliais ir CI/CD automatizavimu
+- **Apimtis**: tik anglų dokumentacija ir pavyzdžiai
+- **Tolimesni veiksmai**: Išplėsti papildomais pažangiais konteinerių modeliais ir CI/CD automatizavimuose būsimuose leidimuose
 
 ### [v3.5.0] - 2025-11-19
 
 #### Produkto pervadinimas: Microsoft Foundry
-**Ši versija įgyvendina išsamų produkto pavadinimo pakeitimą iš "Azure AI Foundry" į "Microsoft Foundry" visoje anglų kalbos dokumentacijoje, atspindint oficialų Microsoft pervadinimą.**
+**Ši versija įgyvendina visapusišką produkto pavadinimo keitimą iš "Microsoft Foundry" į "Microsoft Foundry" visuose anglų dokumentuose, atspindint Microsoft oficialų prekinio ženklo pakeitimą.**
 
 #### Pakeista
-- **🔄 Produkto pavadinimo atnaujinimas**: Visiškas pervadinimas iš "Azure AI Foundry" į "Microsoft Foundry"
-  - Atnaujintos visos nuorodos anglų kalbos dokumentacijoje `docs/` aplanke
-  - Pervadintas aplankas: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Pervadintas failas: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+- **🔄 Product Name Update**: Complete rebranding from "Microsoft Foundry" to "Microsoft Foundry"
+  - Atnaujintos visos nuorodos anglų dokumentacijoje `docs/` aplanke
+  - Pervardintas aplankas: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Pervardytas failas: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
   - Iš viso: 23 turinio nuorodos atnaujintos 7 dokumentacijos failuose
 
 - **📁 Aplankų struktūros pakeitimai**:
   - `docs/ai-foundry/` pervadintas į `docs/microsoft-foundry/`
-  - Visos kryžminės nu
-- **Dirbtuvės**: Dirbtuvių medžiaga (`workshop/`) šiame leidime neatnaujinta
-- **Pavyzdžiai**: Pavyzdiniai failai gali vis dar naudoti senus pavadinimus (bus ištaisyta būsimame atnaujinime)
-- **Išorinės nuorodos**: Išorinės URL ir GitHub saugyklos nuorodos lieka nepakitusios
+  - Visos kryžminės nuorodos atnaujintos, kad atitiktų naują aplankų struktūrą
+  - Naršymo nuorodos patikrintos visuose dokumentuose
 
-#### Migracijos vadovas bendradarbiams
-Jei turite vietines šakas ar dokumentaciją, kuri remiasi sena struktūra:
+- **📄 Failų pervardinimai**:
+  - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Visos vidinės nuorodos atnaujintos, kad nurodytų naują failo pavadinimą
+
+#### Atnaujinti failai
+- **Chapter Documentation** (7 files):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigacijos nuorodų atnaujinimai
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 produkto pavadinimo nuorodos atnaujinimai
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Jau naudoja Microsoft Foundry (iš ankstesnių atnaujinimų)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 nuorodos atnaujinimai (apžvalga, bendruomenės atsiliepimai, dokumentacija)
+  - `docs/getting-started/azd-basics.md` - 4 kryžminės nuorodos atnaujinimai
+  - `docs/getting-started/first-project.md` - 2 skyriaus navigacijos nuorodos atnaujinimai
+  - `docs/getting-started/installation.md` - 2 kito skyriaus nuorodos atnaujinimai
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 nuorodos atnaujinimai (navigacija, Discord bendruomenė)
+  - `docs/troubleshooting/common-issues.md` - 1 navigacijos nuoroda atnaujinta
+  - `docs/troubleshooting/debugging.md` - 1 navigacijos nuoroda atnaujinta
+
+- **Kurso struktūros failai** (2 failai):
+  - `README.md` - 17 nuorodų atnaujinta (kurso apžvalga, skirsnių pavadinimai, šablonų skyrius, bendruomenės įžvalgos)
+  - `course-outline.md` - 14 nuorodų atnaujinta (apžvalga, mokymosi tikslai, skyrių ištekliai)
+
+#### Patvirtinta
+- ✅ Nėra likusių "ai-foundry" aplanko kelių nuorodų anglų dokumentuose
+- ✅ Nėra likusių "Microsoft Foundry" produkto pavadinimo nuorodų anglų dokumentuose
+- ✅ Visi naršymo saitai veikia su nauja aplankų struktūra
+- ✅ Failų ir aplankų pervadinimai sėkmingai atlikti
+- ✅ Kryžminės nuorodos tarp skyrių patikrintos
+
+#### Pastabos
+- **Apimtis**: pakeitimai taikomi tik anglų dokumentacijai `docs/` aplanke
+- **Vertimai**: Vertimų aplankai (`translations/`) šioje versijoje nebuvo atnaujinti
+- **Dirbtuvės**: Dirbtuvių medžiaga (`workshop/`) šioje versijoje nebuvo atnaujinta
+- **Pavyzdžiai**: Pavyzdžių failai vis dar gali nurodyti seną pavadinimą (tai bus sprendžiama būsimame atnaujinime)
+- **Išorinės nuorodos**: Išoriniai URL ir GitHub saugyklos nuorodos liko nepakitusios
+
+#### Migracijos vadovas prisidedantiems
+Jei turite vietinių šakų arba dokumentacijos, nurodančios seną struktūrą:
 1. Atnaujinkite aplankų nuorodas: `docs/ai-foundry/` → `docs/microsoft-foundry/`
 2. Atnaujinkite failų nuorodas: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. Pakeiskite produkto pavadinimą: „Azure AI Foundry“ → „Microsoft Foundry“
+3. Pakeiskite produkto pavadinimą: "Microsoft Foundry" → "Microsoft Foundry"
 4. Patikrinkite, ar visos vidinės dokumentacijos nuorodos vis dar veikia
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Infrastruktūros peržiūros ir patvirtinimo patobulinimai
-**Ši versija pristato išsamų naujos „Azure Developer CLI“ peržiūros funkcijos palaikymą ir pagerina dirbtuvių naudotojų patirtį.**
+#### Infrastruktūros peržiūros ir validavimo patobulinimai
+**Ši versija pristato išsamią palaikymą naujai Azure Developer CLI peržiūros funkcijai ir pagerina dirbtuvių naudotojo patirtį.**
 
 #### Pridėta
-- **🧪 azd provision --preview funkcijos dokumentacija**: Išsamus naujos infrastruktūros peržiūros galimybės aprašymas
-  - Komandų nuorodos ir naudojimo pavyzdžiai atmintinėje
-  - Detali integracija į diegimo vadovą su naudojimo atvejais ir privalumais
-  - Prieš diegimą atliekamų patikrinimų integracija saugesniam diegimui
-  - Pradžios vadovo atnaujinimai su saugumo pirmumo praktika
-- **🚧 Dirbtuvių būsenos baneris**: Profesionalus HTML baneris, nurodantis dirbtuvių kūrimo būseną
-  - Gradientinis dizainas su statybos indikatoriais aiškiam naudotojų informavimui
+- **🧪 azd provision --preview Feature Documentation**: Išsami medžiaga apie naują infrastruktūros peržiūros galimybę
+  - Komandų nuoroda ir naudojimo pavyzdžiai cheat sheete
+  - Išsami integracija diegimo vadove su naudojimo atvejais ir privalumais
+  - Prieš skrydžius (pre-flight) tikrinimo integracija saugesniam diegimo validavimui
+  - Pradžios vadovo atnaujinimai su saugumu pagrįstomis diegimo praktikomis
+- **🚧 Workshop Status Banner**: Profesionali HTML juosta, nurodanti dirbtuvių kūrimo būseną
+  - Gradientinis dizainas su statybos ženklais aiškiai naudotojui komunikuoti
   - Paskutinio atnaujinimo laiko žyma skaidrumui
-  - Mobiliesiems pritaikytas dizainas visų tipų įrenginiams
+  - Mobiliesiems pritaikytas išdėstymas visų įrenginių palaikymui
 
 #### Patobulinta
-- **Infrastruktūros saugumas**: Peržiūros funkcionalumas integruotas visoje diegimo dokumentacijoje
-- **Prieš diegimą atliekamas patvirtinimas**: Automatiniai scenarijai dabar apima infrastruktūros peržiūros testavimą
-- **Kūrėjų darbo eiga**: Atnaujintos komandų sekos, įtraukiant peržiūrą kaip geriausią praktiką
-- **Dirbtuvių patirtis**: Aiškiai nustatyti lūkesčiai naudotojams dėl turinio kūrimo būsenos
+- **Infrastruktūros sauga**: Peržiūros funkcionalumas integruotas visuose diegimo dokumentuose
+- **Priešdieigimo validavimas**: Automatizuoti skriptai dabar apima infrastruktūros peržiūros testavimą
+- **Kūrėjo darbo eiga**: Atnaujintos komandų sekos, įtraukiant peržiūrą kaip gerąją praktiką
+- **Dirbtuvių patirtis**: Aiškiai nustatytos naudotojo lūkesčiai dėl turinio kūrimo būsenos
 
 #### Pakeista
-- **Diegimo geriausios praktikos**: Dabar rekomenduojama peržiūros pirmumo darbo eiga
-- **Dokumentacijos eiga**: Infrastruktūros patvirtinimas perkeltas į ankstesnį mokymosi proceso etapą
-- **Dirbtuvių pateikimas**: Profesionalus būsenos komunikavimas su aiškiu kūrimo grafiku
+- **Diegimo geriausios praktikos**: Dabar rekomenduojama peržiūra-priėjimo darbo eiga
+- **Dokumentacijos eiga**: Infrastruktūros validavimas perkeltas ankstesniame mokymosi procese etape
+- **Dirbtuvių pristatymas**: Profesionali būsena ir aiškus kūrimo laiko grafikas
 
-#### Pagerinta
-- **Saugumo pirmumo požiūris**: Dabar infrastruktūros pakeitimus galima patvirtinti prieš diegimą
-- **Komandos bendradarbiavimas**: Peržiūros rezultatus galima dalintis peržiūrai ir patvirtinimui
-- **Išlaidų supratimas**: Geresnis resursų išlaidų supratimas prieš diegimą
-- **Rizikos mažinimas**: Sumažinta diegimo klaidų tikimybė per išankstinį patvirtinimą
+#### Patobulinta
+- **Saugumo pirmiausia požiūris**: Infrastruktūros pakeitimai dabar gali būti validuoti prieš diegimą
+- **Komandinė bendradarbiavimo galimybė**: Peržiūros rezultatus galima dalintis peržiūrai ir patvirtinimui
+- **Sąnaudų suvokimas**: Geresnis išteklių sąnaudų supratimas prieš provisioninimą
+- **Rizikos mažinimas**: Sumažintas diegimo klaidų skaičius per ankstyvą validavimą
 
-#### Techninė įgyvendinimas
-- **Daugiadokumentinė integracija**: Peržiūros funkcija dokumentuota 4 pagrindiniuose failuose
-- **Komandų šablonai**: Nuosekli sintaksė ir pavyzdžiai visoje dokumentacijoje
-- **Geriausios praktikos integracija**: Peržiūra įtraukta į patvirtinimo darbo eigas ir scenarijus
-- **Vizualiniai indikatoriai**: Aiškūs NAUJOS funkcijos žymėjimai atradimui
+#### Techninė įgyvendinimo dalis
+- **Multi-dokumentų integracija**: Peržiūros funkcija dokumentuota 4 pagrindiniuose failuose
+- **Komandų šablonai**: Vienoda sintaksė ir pavyzdžiai visuose dokumentuose
+- **Geriausių praktikų integracija**: Peržiūra įtraukta į validavimo darbo eigas ir skriptus
+- **Vizualiniai indikatoriai**: Aiškūs NAUJŲ funkcijų žymėjimai lengvam aptikimui
 
 #### Dirbtuvių infrastruktūra
-- **Būsenos komunikavimas**: Profesionalus HTML baneris su gradientiniu stiliumi
-- **Naudotojo patirtis**: Aiški kūrimo būsenos informacija užkerta kelią painiavai
-- **Profesionalus pateikimas**: Išlaikomas saugyklos patikimumas, nustatant lūkesčius
-- **Grafiko skaidrumas**: 2025 m. spalio mėn. paskutinio atnaujinimo laiko žyma atsakomybei
+- **Būseno komunikacija**: Profesionali HTML juosta su gradientiniu stiliumi
+- **Naudotojo patirtis**: Aiški kūrimo būsena užkerta kelią painiavai
+- **Profesionalus pristatymas**: Išlaiko saugyklos patikimumą ir nustato lūkesčius
+- **Laiko skaidrumas**: Paskutinio atnaujinimo data: spalis 2025, skaidrumui
 
 ### [v3.3.0] - 2025-09-24
 
 #### Patobulinta dirbtuvių medžiaga ir interaktyvi mokymosi patirtis
-**Ši versija pristato išsamią dirbtuvių medžiagą su naršyklėje veikiančiais interaktyviais vadovais ir struktūrizuotais mokymosi keliais.**
+**Ši versija pristato išsamią dirbtuvių medžiagą su naršyklėje veikiančiomis interaktyviomis pamokomis ir struktūrizuotais mokymosi keliais.**
 
 #### Pridėta
 - **🎥 Interaktyvus dirbtuvių vadovas**: Naršyklėje veikianti dirbtuvių patirtis su MkDocs peržiūros galimybe
-- **📝 Struktūrizuotos dirbtuvių instrukcijos**: 7 žingsnių vadovaujamas mokymosi kelias nuo atradimo iki pritaikymo
-  - 0-Įvadas: Dirbtuvių apžvalga ir nustatymas
-  - 1-Pasirinkti-AI-Šabloną: Šablonų atradimo ir pasirinkimo procesas
-  - 2-Patvirtinti-AI-Šabloną: Diegimo ir patvirtinimo procedūros
-  - 3-Išskaidyti-AI-Šabloną: Šablono architektūros supratimas
-  - 4-Konfigūruoti-AI-Šabloną: Konfigūravimas ir pritaikymas
-  - 5-Pritaikyti-AI-Šabloną: Pažangūs pakeitimai ir iteracijos
-  - 6-Infrastruktūros-Išardymas: Valymas ir resursų valdymas
-  - 7-Uždarymas: Santrauka ir tolesni žingsniai
+- **📝 Struktūruotos dirbtuvių instrukcijos**: 7 žingsnių vadovaujama mokymosi eiga nuo susipažinimo iki pritaikymo
+  - 0-Introduction: Dirbtuvių apžvalga ir paruošimas
+  - 1-Select-AI-Template: Šablonų atradimas ir pasirinkimo procesas
+  - 2-Validate-AI-Template: Diegimo ir validavimo procedūros
+  - 3-Deconstruct-AI-Template: Šablono architektūros supratimas
+  - 4-Configure-AI-Template: Konfigūravimas ir pritaikymas
+  - 5-Customize-AI-Template: Pažangios modifikacijos ir iteracijos
+  - 6-Teardown-Infrastructure: Valymas ir resursų valdymas
+  - 7-Wrap-up: Santrauka ir tolesni žingsniai
 - **🛠️ Dirbtuvių įrankiai**: MkDocs konfigūracija su Material tema geresnei mokymosi patirčiai
-- **🎯 Praktinis mokymosi kelias**: 3 žingsnių metodologija (Atradimas → Diegimas → Pritaikymas)
-- **📱 GitHub Codespaces integracija**: Sklandi kūrimo aplinkos sąranka
+- **🎯 Praktinis mokymosi kelias**: 3 žingsnių metodika (Atranka → Diegimas → Pritaikymas)
+- **📱 GitHub Codespaces integracija**: Sklandus kūrimo aplinkos paruošimas
 
 #### Patobulinta
-- **AI dirbtuvių laboratorija**: Išplėsta su išsamia 2-3 valandų struktūrizuota mokymosi patirtimi
-- **Dirbtuvių dokumentacija**: Profesionalus pateikimas su navigacija ir vizualiniais elementais
-- **Mokymosi progresija**: Aiškus žingsnis po žingsnio vadovavimas nuo šablono pasirinkimo iki diegimo gamyboje
-- **Kūrėjų patirtis**: Integruoti įrankiai sklandžiai kūrimo darbo eigai
+- **AI Workshop Lab**: Išplėstas su išsamia 2–3 val. struktūruota mokymosi patirtimi
+- **Dirbtuvių dokumentacija**: Profesionalus pateikimas su navigacija ir vizualiais pagalbiniais įrankiais
+- **Mokymosi eiga**: Aiškus žingsnis po žingsnio vadovas nuo šablono pasirinkimo iki gamybinio diegimo
+- **Kūrėjo patirtis**: Integruoti įrankiai supaprastintai kūrėjo darbo eigai
 
-#### Pagerinta
-- **Prieinamumas**: Naršyklėje veikianti sąsaja su paieška, kopijavimo funkcija ir temos perjungimu
-- **Savarankiškas mokymasis**: Lanksti dirbtuvių struktūra, pritaikyta skirtingiems mokymosi tempams
-- **Praktinis pritaikymas**: Realūs AI šablonų diegimo scenarijai
+#### Patobulinta
+- **Prieinamumas**: Naršyklinė sąsaja su paieška, kopijavimo funkcija ir temos perjungimu
+- **Savarankiškas mokymasis**: Lanksti dirbtuvių struktūra, pritaikyta skirtingam mokymosi tempui
+- **Praktinis pritaikymas**: Realaus pasaulio AI šablonų diegimo scenarijai
 - **Bendruomenės integracija**: Discord integracija dirbtuvių palaikymui ir bendradarbiavimui
 
 #### Dirbtuvių funkcijos
-- **Integruota paieška**: Greitas raktinių žodžių ir pamokų atradimas
-- **Kodo blokų kopijavimas**: Užvedus pelę, galima kopijuoti visus kodo pavyzdžius
-- **Temos perjungimas**: Tamsios/šviesios temos palaikymas pagal skirtingus pageidavimus
-- **Vizualiniai elementai**: Ekrano nuotraukos ir diagramos geresniam supratimui
-- **Pagalbos integracija**: Tiesioginė prieiga prie Discord bendruomenės palaikymo
-- **Turinio pateikimas**: Pašalinti dekoratyviniai elementai, siekiant aiškesnio ir profesionalaus formatavimo
-- **Nuorodų struktūra**: Atnaujintos visos vidinės nuorodos, kad palaikytų naują navigacijos sistemą
+- **Įtaisytas paieškos laukelis**: Greitas raktinių žodžių ir pamokų radimas
+- **Kopiavimo blokai**: Galimybė užvesti ir nukopijuoti visus kodo pavyzdžius
+- **Temos perjungimas**: Tamsus/šviesus režimai skirtingiems pageidavimams
+- **Vizualiniai ištekliai**: Ekrano vaizdai ir diagramos geresniam supratimui
+- **Pagalbos integracija**: Tiesioginis Discord priekis bendruomenės palaikymui
+
+### [v3.2.0] - 2025-09-17
+
+#### Didelis navigacijos pertvarkymas ir mokymasis pagal skyrius
+**Ši versija pristato išsamią skyrių pagrindu veikiančią mokymosi struktūrą su pagerinta navigacija visame saugykloje.**
+
+#### Pridėta
+- **📚 Skyrių pagrindu veikianti mokymosi sistema**: Visas kursas pertvarkytas į 8 progresuojančius mokymosi skyrius
+  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
+  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
+  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
+  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
+  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
+  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
+  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
+  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
+- **📚 Išsami navigacijos sistema**: Nuoseklūs navigacijos antraštės ir poraštės visuose dokumentuose
+- **🎯 Progresavimo sekimas**: Kurso užbaigimo kontrolinis sąrašas ir mokymosi patvirtinimo sistema
+- **🗺️ Mokymosi kelio gairės**: Aiškūs įėjimo taškai skirtingiems patirties lygiams ir tikslams
+- **🔗 Kryžminės nuorodos**: Susiję skyriai ir prielaidos aiškiai sujungtos
 
 #### Patobulinta
-- **Prieinamumas**: Pašalintos priklausomybės nuo jaustukų, kad būtų geriau suderinama su ekrano skaitytuvais
-- **Profesionalus įvaizdis**: Švarus, akademinio stiliaus pateikimas, tinkamas įmonių mokymams
-- **Mokymosi patirtis**: Struktūruotas požiūris su aiškiais kiekvienos pamokos tikslais ir rezultatais
-- **Turinio organizavimas**: Geresnis loginis srautas ir ryšys tarp susijusių temų
+- **README struktūra**: Pertvarkyta į struktūruotą mokymosi platformą su skyrių organizacija
+- **Dokumentacijos navigacija**: Kiekviename puslapyje dabar pateikiamas skyriaus kontekstas ir pažangos gairės
+- **Šablonų organizacija**: Pavyzdžiai ir šablonai priskirti atitinkamiems mokymosi skyriams
+- **Išteklių integracija**: Cheat shee'ai, DUK ir studijų vadovai susieti su atitinkamais skyriais
+- **Dirbtuvių integracija**: Praktiniai laboratoriniai darbai priskirti keliems skyriams pagal mokymosi tikslus
+
+#### Pakeista
+- **Mokymosi eiga**: Pereita nuo liniarinės dokumentacijos prie lanksčios skyrių sistemos
+- **Konfigūracijos vieta**: Konfigūracijos vadovas perkeltas į Chapter 3 geresnei mokymosi eigai
+- **AI turinio integracija**: Geresnė AI specifinio turinio integracija per visą mokymo kelią
+- **Gamybinis turinys**: Pažangūs modeliai sujungti į Chapter 8 įmonėms ir pažengusiems mokiniams
+
+#### Patobulinta
+- **Naudotojo patirtis**: Aiškūs navigacijos trupiniai ir skyriaus pažangos indikatoriai
+- **Prieinamumas**: Nuoseklūs navigacijos modeliai lengvesniam kurso naršymui
+- **Profesionalus pateikimas**: Universitetinio tipo kurso struktūra tinkama akademiniam ir įmonių mokymui
+- **Mokymosi efektyvumas**: Sutrumpintas laikas rasti reikiamą turinį per pagerintą organizaciją
+
+#### Techninė įgyvendinimo dalis
+- **Navigacijos antraštės**: Standartizuota skyrių navigacija daugiau nei 40 dokumentų failuose
+- **Poraštės navigacija**: Nuoseklūs pažangos gairės ir skyriaus užbaigimo indikatoriai
+- **Kryžminės nuorodos**: Išsami vidinė nuorodų sistema jungia susijusias sąvokas
+- **Skyrių žemėlapis**: Šablonai ir pavyzdžiai aiškiai susieti su mokymosi tikslais
+
+#### Studijų vadovo patobulinimas
+- **📚 Išsamūs mokymosi tikslai**: Studijų vadovas pertvarkytas, kad atitiktų 8 skyrių sistemą
+- **🎯 Skyrių vertinimas**: Kiekvienas skyrius apima konkrečius mokymosi tikslus ir praktines užduotis
+- **📋 Progreso sekimas**: Savaitinė mokymosi programa su matuojamais rezultatais ir užbaigimo sąrašais
+- **❓ Vertinimo klausimai**: Kiekvienam skyriui skirti žinių patvirtinimo klausimai su profesiniais rezultatais
+- **🛠️ Praktinės užduotys**: Praktinės veiklos su realiais diegimo scenarijais ir trikčių šalinimu
+- **📊 Įgūdžių pažanga**: Aiškus žingsnis nuo pagrindinių sąvokų iki įmonių modelių ir karjeros plėtros
+- **🎓 Sertifikavimo sistema**: Profesinio tobulėjimo rezultatai ir bendruomenės pripažinimas
+- **⏱️ Laiko valdymas**: Struktūruotas 10 savaičių mokymosi planas su etapų patikra
+
+### [v3.1.0] - 2025-09-17
+
+#### Patobulintos Multi-Agent AI sprendimai
+**Ši versija patobulina daugio agentų mažmeninės prekybos sprendimą su geresniu agentų pavadinimu ir atnaujinta dokumentacija.**
+
+#### Pakeista
+- **Multi-Agent Terminology**: Replaced "Cora agent" with "Customer agent" throughout retail multi-agent solution for clearer understanding
+- **Agent Architecture**: Atnaujinta visa dokumentacija, ARM šablonai ir kodo pavyzdžiai, kad būtų naudojamas nuoseklus "Customer agent" pavadinimas
+- **Konfigūracijos pavyzdžiai**: Modernizuoti agento konfigūracijos šablonai su atnaujintomis pavadinimo konvencijomis
+- **Dokumentacijos nuoseklumas**: Užtikrinta, kad visos nuorodos naudotų profesionalius, aprašomuosius agentų pavadinimus
+
+#### Patobulinta
+- **ARM Template Package**: Atnaujintas retail-multiagent-arm-template su Customer agent nuorodomis
+- **Architecture Diagrams**: Atnaujinti Mermaid diagramos su atnaujintu agentų pavadinimu
+- **Code Examples**: Python klasės ir įgyvendinimo pavyzdžiai dabar naudoja CustomerAgent pavadinimą
+- **Environment Variables**: Atnaujinti visi diegimo skriptai naudoja CUSTOMER_AGENT_NAME konvenciją
+
+#### Patobulinta
+- **Kūrėjo patirtis**: Aiškesni agentų vaidmenys ir atsakomybės dokumentacijoje
+- **Paruošta gamybai**: Geresnis atitikimas įmonių pavadinimų konvencijoms
+- **Mokymosi medžiaga**: Intuityvesni agentų pavadinimai mokymosi tikslais
+- **Šablonų naudojimo paprastumas**: Supaprastintas agentų funkcijų ir diegimo modelių supratimas
+
+#### Techninės detalės
+- Atnaujintos Mermaid architektūros diagramos su CustomerAgent nuorodomis
+- Pakeisti CoraAgent klasės pavadinimai į CustomerAgent Python pavyzdžiuose
+- Modifikuotos ARM šablono JSON konfigūracijos, kad naudotų "customer" agentų tipą
+- Atnaujinti aplinkos kintamieji iš CORA_AGENT_* į CUSTOMER_AGENT_* formatą
+- Atnaujintos visos diegimo komandos ir konteinerių konfigūracijos
+
+### [v3.0.0] - 2025-09-12
+
+#### Pagrindiniai pakeitimai - AI kūrėjo orientacija ir Microsoft Foundry integracija
+**Ši versija paverčia saugyklą išsamiais AI orientuotais mokymosi ištekliais su Microsoft Foundry integracija.**
+
+#### Pridėta
+- **🤖 AI-pirmasis mokymosi kelias**: Visas pertvarkymas, teikiantis prioritetą AI kūrėjams ir inžinieriams
+- **Microsoft Foundry Integration Guide**: Išsami dokumentacija, skirta sujungti AZD su Microsoft Foundry paslaugomis
+- **AI Model Deployment Patterns**: Detalus vadovas apimantis modelių parinkimą, konfigūravimą ir gamybos diegimo strategijas
+- **AI Workshop Lab**: 2–3 valandų praktinis seminaras, skirtas perkelti AI programas į AZD diegimui pasirengusias versijas
+- **Production AI Best Practices**: Įmonėms parengti modeliai AI apkrovų mastymui, stebėjimui ir apsaugai
+- **AI-Specific Troubleshooting Guide**: Išsamus trikčių šalinimo vadovas Azure OpenAI, Cognitive Services ir AI diegimo problemoms
+- **AI Template Gallery**: Atrinkta Microsoft Foundry šablonų kolekcija su sudėtingumo įvertinimais
+- **Workshop Materials**: Pilna seminaro struktūra su praktiniais laboratoriniais darbais ir nuorodų medžiaga
+
+#### Patobulinta
+- **README Structure**: Orientuota į AI kūrėjus, su 45% bendruomenės susidomėjimo duomenimis iš Microsoft Foundry Discord
+- **Learning Paths**: Skirtas AI kūrėjų kelias šalia tradicinių mokinių ir DevOps inžinierių kelių
+- **Template Recommendations**: Rekomenduojami AI šablonai, įskaitant azure-search-openai-demo, contoso-chat ir openai-chat-app-quickstart
+- **Community Integration**: Patobulintas Discord bendruomenės palaikymas su AI specifiniais kanalais ir diskusijomis
+
+#### Saugumas ir gamybos orientacija
+- **Managed Identity Patterns**: AI specifinės autentifikacijos ir saugumo konfigūracijos
+- **Cost Optimization**: Žetonų naudojimo sekimas ir biudžeto kontrolė AI apkrovoms
+- **Multi-Region Deployment**: Strategijos pasauliniam AI taikomųjų programų diegimui
+- **Performance Monitoring**: AI specifiniai metrikai ir Application Insights integracija
+
+#### Dokumentacijos kokybė
+- **Linear Course Structure**: Logiška eiga nuo pradedančiojo iki pažangių AI diegimo modelių
+- **Validated URLs**: Visi išoriniai saugyklų saitai patikrinti ir pasiekiami
+- **Complete Reference**: Visi vidiniai dokumentacijos saitai patvirtinti ir veikia
+- **Production Ready**: Įmonėms parengti diegimo modeliai su realaus pasaulio pavyzdžiais
+
+### [v2.0.0] - 2025-09-09
+
+#### Pagrindiniai pakeitimai - saugyklos pertvarkymas ir profesinis pagerinimas
+**Ši versija reiškia reikšmingą saugyklos struktūros ir turinio pateikimo pertvarkymą.**
+
+#### Pridėta
+- **Structured Learning Framework**: Visuose dokumentacijos puslapiuose dabar yra įvadas, mokymosi tikslai ir mokymosi rezultatai
+- **Navigation System**: Pridėtos ankstesnio/kito pamokos nuorodos per visą dokumentaciją, siekiant nuoseklios mokymosi eigos
+- **Study Guide**: Išsamus study-guide.md su mokymosi tikslais, praktikos užduotimis ir vertinimo medžiaga
+- **Professional Presentation**: Pašalintos visos piktogramos (emoji) geresniam pasiekiamumui ir profesionaliam vaizdui
+- **Enhanced Content Structure**: Patobulinta mokymosi medžiagos organizacija ir eiga
+
+#### Pakeista
+- **Documentation Format**: Standartizuota visa dokumentacija su nuoseklia mokymuisi orientuota struktūra
+- **Navigation Flow**: Įgyvendinta logiška eiga per visą mokymosi medžiagą
+- **Content Presentation**: Pašalinti dekoratyviniai elementai, siekiant aiškios, profesionalesnės formos
+- **Link Structure**: Atnaujinti visi vidiniai saitai, kad palaikytų naują navigacijos sistemą
+
+#### Patobulinta
+- **Accessibility**: Pašalintos emoji priklausomybės, siekiant geresnio suderinamumo su ekrano skaitytuvais
+- **Professional Appearance**: Švarus, akademinio stiliaus pateikimas, tinkamas įmonių mokymuisi
+- **Learning Experience**: Struktūrizuotas požiūris su aiškiais tikslais ir rezultatais kiekvienai pamokai
+- **Content Organization**: Geresnė loginė eiga ir ryšys tarp susijusių temų
 
 ### [v1.0.0] - 2025-09-09
 
-#### Pradinis leidimas - Išsamus AZD mokymosi šaltinis
+#### Pradinis leidimas - Visapusiška AZD mokymosi saugykla
 
 #### Pridėta
 - **Pagrindinė dokumentacijos struktūra**
-  - Pilnas pradedančiųjų vadovų serijos rinkinys
-  - Išsamūs diegimo ir paruošimo dokumentai
-  - Detalūs trikčių šalinimo ištekliai ir diagnostikos vadovai
-  - Prieš diegimą patikrinimo įrankiai ir procedūros
+  - Pilna pradžios vadovų serija
+  - Išsami diegimo ir infrastruktūros paruošimo dokumentacija
+  - Išsamios trikčių šalinimo priemonės ir derinimo vadovai
+  - Įrankiai ir procedūros prieš diegimą skirtam patikrinimui
 
-- **Pradedančiųjų modulis**
-  - AZD pagrindai: pagrindinės sąvokos ir terminologija
-  - Diegimo vadovas: platformai specifinės nustatymo instrukcijos
-  - Konfigūracijos vadovas: aplinkos nustatymas ir autentifikacija
-  - Pirmojo projekto pamoka: žingsnis po žingsnio praktinis mokymasis
+- **Pradžios modulis**
+  - AZD pagrindai: Pagrindinės sąvokos ir terminologija
+  - Diegimo vadovas: Platformai specifinės nustatymo instrukcijos
+  - Konfigūracijos vadovas: Aplinkos nustatymas ir autentifikacija
+  - Pirmojo projekto vadovas: Žingsnis po žingsnio praktinis mokymasis
 
-- **Diegimo ir paruošimo modulis**
-  - Diegimo vadovas: pilna darbo eiga dokumentacija
-  - Paruošimo vadovas: infrastruktūra kaip kodas su Bicep
-  - Geriausios praktikos gamybos diegimams
-  - Daugiafunkcinės architektūros modeliai
+- **Diegimo ir aprūpinimo modulis**
+  - Diegimo vadovas: Išsami darbo eigos dokumentacija
+  - Aprūpinimo vadovas: Infrastruktūra kaip kodas su Bicep
+  - Geriausios praktikos gamybiniams diegimams
+  - Daugiaservisės architektūros modeliai
 
-- **Prieš diegimą patikrinimo modulis**
-  - Pajėgumų planavimas: Azure resursų prieinamumo patikrinimas
-  - SKU pasirinkimas: išsamios paslaugų lygio gairės
-  - Prieš skrydį patikrinimai: automatiniai patikrinimo scenarijai (PowerShell ir Bash)
-  - Kainų įvertinimo ir biudžeto planavimo įrankiai
+- **Priešdiegiamosios patikros modulis**
+  - Talpos planavimas: Azure išteklių prieinamumo patikra
+  - SKU parinkimas: Išsamios gairės paslaugų lygiams
+  - Priešdiegiamosios patikros: Automatizuoti patikros scenarijai (PowerShell ir Bash)
+  - Išlaidų apskaičiavimo ir biudžeto planavimo įrankiai
 
 - **Trikčių šalinimo modulis**
-  - Dažnos problemos: dažniausiai pasitaikančios problemos ir jų sprendimai
-  - Diagnostikos vadovas: sistemingas trikčių šalinimo metodas
+  - Dažnos problemos: Dažnai pasitaikančios problemos ir sprendimai
+  - Derinimo vadovas: Sistemingos trikčių šalinimo metodikos
   - Pažangios diagnostikos technikos ir įrankiai
-  - Našumo stebėjimas ir optimizavimas
+  - Veikimo stebėjimas ir optimizavimas
 
 - **Ištekliai ir nuorodos**
-  - Komandų atmintinė: greita nuoroda į pagrindines komandas
-  - Žodynas: išsamūs terminų ir akronimų apibrėžimai
-  - DUK: detalūs atsakymai į dažniausiai užduodamus klausimus
-  - Išorinės nuorodos ir bendruomenės ryšiai
+  - Komandų atmintinė: Greita nuoroda į esmines komandas
+  - Žodynas: Išsami terminų ir santrumpų apibrėžimai
+  - DUK: Išsamūs atsakymai į dažnai užduodamus klausimus
+  - Išorinės išteklių nuorodos ir bendruomenės ryšiai
 
 - **Pavyzdžiai ir šablonai**
-  - Paprasto interneto programos pavyzdys
-  - Statinio tinklalapio diegimo šablonas
-  - Konteinerio programos konfigūracija
+  - Paprasto žiniatinklio taikomosios programos pavyzdys
+  - Statinio svetainės diegimo šablonas
+  - Konteinerizuotos programos konfigūracija
   - Duomenų bazės integracijos modeliai
-  - Mikroservisų architektūros pavyzdžiai
+  - Mikropaslaugų architektūros pavyzdžiai
   - Serverless funkcijų įgyvendinimai
 
 #### Funkcijos
-- **Daugiaplatforminis palaikymas**: Diegimo ir konfigūracijos vadovai Windows, macOS ir Linux
-- **Skirtingi įgūdžių lygiai**: Turinys skirtas studentams ir profesionaliems programuotojams
-- **Praktinis požiūris**: Praktiniai pavyzdžiai ir realaus pasaulio scenarijai
-- **Išsamus aprėptis**: Nuo pagrindinių sąvokų iki pažangių įmonių modelių
-- **Saugumo prioritetas**: Saugumo geriausios praktikos integruotos visame turinyje
-- **Kainų optimizavimas**: Gairės ekonomiškiems diegimams ir resursų valdymui
+- **Multi-Platform Support**: Diegimo ir konfigūracijos vadovai Windows, macOS ir Linux
+- **Multiple Skill Levels**: Turinys skirtas nuo studentų iki profesionalių kūrėjų
+- **Practical Focus**: Praktinis dėmesys — praktiniai pavyzdžiai ir tikroviškos scenos
+- **Comprehensive Coverage**: Nuo pagrindinių sąvokų iki pažangių įmonių modelių
+- **Security-First Approach**: Saugumo geriausios praktikos įtrauktos visur
+- **Cost Optimization**: Gairės kaštų optimizavimui diegimuose ir išteklių valdyme
 
 #### Dokumentacijos kokybė
-- **Detalūs kodo pavyzdžiai**: Praktiniai, išbandyti kodo pavyzdžiai
-- **Žingsnis po žingsnio instrukcijos**: Aiškios, veiksmingos gairės
-- **Išsamus klaidų tvarkymas**: Trikčių šalinimas dažniausiai pasitaikančioms problemoms
-- **Geriausių praktikų integracija**: Pramonės standartai ir rekomendacijos
-- **Versijų suderinamumas**: Naujausia informacija apie Azure paslaugas ir azd funkcijas
+- **Detailed Code Examples**: Praktiniai, išbandyti kodo pavyzdžiai
+- **Step-by-Step Instructions**: Aiškios, praktiškos instrukcijos
+- **Comprehensive Error Handling**: Trikčių šalinimas dažnoms problemoms
+- **Best Practices Integration**: Pramonės standartai ir rekomendacijos
+- **Version Compatibility**: Atitikimas naujausioms Azure paslaugoms ir azd funkcijoms
 
 ## Planuojami būsimi patobulinimai
 
-### Versija 3.1.0 (Planuojama)
-#### AI platformos plėtra
-- **Daugiamodelinis palaikymas**: Integracijos modeliai Hugging Face, Azure Machine Learning ir individualiems modeliams
-- **AI agentų karkasai**: Šablonai LangChain, Semantic Kernel ir AutoGen diegimams
-- **Pažangūs RAG modeliai**: Vektorinės duomenų bazės galimybės už Azure AI Search ribų (Pinecone, Weaviate ir kt.)
-- **AI stebėjimas**: Patobulintas modelių našumo, žetonų naudojimo ir atsakymų kokybės stebėjimas
+### Version 3.1.0 (Planned)
+#### AI platformos išplėtimas
+- **Multi-Model Support**: Integracijos modeliai su Hugging Face, Azure Machine Learning ir pasirinktiniais modeliais
+- **AI Agent Frameworks**: Šablonai LangChain, Semantic Kernel ir AutoGen diegimams
+- **Advanced RAG Patterns**: Vektorinės duomenų bazės parinktys už Azure AI Search ribų (Pinecone, Weaviate ir kt.)
+- **AI Observability**: Patobulintas modelio našumo, žetonų naudojimo ir atsakymų kokybės stebėjimas
 
-#### Programuotojų patirtis
-- **VS Code plėtinys**: Integruota AZD + AI Foundry kūrimo patirtis
-- **GitHub Copilot integracija**: AI padedamas AZD šablonų generavimas
-- **Interaktyvios pamokos**: Praktiniai kodavimo pratimai su automatiniu AI scenarijų patikrinimu
-- **Vaizdo turinys**: Papildomos vaizdo pamokos vizualiems mokiniams, orientuotos į AI diegimus
+#### Kūrėjo patirtis
+- **VS Code Extension**: Integruota AZD + AI Foundry vystymo patirtis
+- **GitHub Copilot Integration**: AI palaikoma AZD šablonų generacija
+- **Interactive Tutorials**: Praktiniai programavimo užsiėmimai su automatiniu tikrinimu AI scenarijoms
+- **Video Content**: Papildomi vaizdo vadovėliai vizualiems besimokantiesiems, orientuoti į AI diegimus
 
-### Versija 4.0.0 (Planuojama)
+### Version 4.0.0 (Planned)
 #### Įmonių AI modeliai
-- **Valdymo karkasas**: AI modelių valdymas, atitiktis ir audito pėdsakai
-- **Daugiaklientinis AI**: Modeliai, skirti aptarnauti kelis klientus su izoliuotomis AI paslaugomis
-- **Edge AI diegimas**: Integracija su Azure IoT Edge ir konteinerių instancijomis
-- **Hibridinis debesų AI**: Daugiadebesų ir hibridinio diegimo modeliai AI darbo krūviams
+- **Governance Framework**: AI modelių valdymas, atitiktis ir audito registrai
+- **Multi-Tenant AI**: Modeliai keliems klientams aptarnauti su izoliuotomis AI paslaugomis
+- **Edge AI Deployment**: Integracija su Azure IoT Edge ir konteinerių instancijomis
+- **Hybrid Cloud AI**: Daugiau debesų ir hibridinių diegimo modelių AI apkrovoms
 
 #### Pažangios funkcijos
-- **AI vamzdynų automatizavimas**: MLOps integracija su Azure Machine Learning vamzdynais
-- **Pažangus saugumas**: Zero-trust modeliai, privatūs galiniai taškai ir pažangi grėsmių apsauga
-- **Našumo optimizavimas**: Pažangūs derinimo ir mastelio strategijos didelio našumo AI programoms
-- **Globalus paskirstymas**: Turinio pristatymo ir kraštinių talpyklų modeliai AI programoms
+- **AI Pipeline Automation**: MLOps integracija su Azure Machine Learning vamzdynais
+- **Advanced Security**: Nulinės pasitikėjimo modeliai, privatūs galiniai taškai ir pažangus grėsmių apsaugos sprendimas
+- **Performance Optimization**: Pažangios derinimo ir mastymo strategijos didelio pralaidumo AI programoms
+- **Global Distribution**: Turinį tiekimo ir edge talpinimo (caching) modeliai AI programoms
 
-### Versija 3.0.0 (Planuojama) - Pakeista dabartiniu leidimu
-#### Siūlomi papildymai - Dabar įgyvendinti v3.0.0
-- ✅ **AI orientuotas turinys**: Išsamus Azure AI Foundry integravimas (Įgyvendinta)
-- ✅ **Interaktyvios pamokos**: Praktinis AI dirbtuvių laboratorijos darbas (Įgyvendinta)
-- ✅ **Pažangus saugumo modulis**: AI specifiniai saugumo modeliai (Įgyvendinta)
-- ✅ **Našumo optimizavimas**: AI darbo krūvio derinimo strategijos (Įgyvendinta)
+### Version 3.0.0 (Planuota) - Pakeista dabartiniu leidimu
+#### Siūlomi papildymai - Dabar įgyvendinta v3.0.0
+- ✅ **AI-Focused Content**: Išsami Microsoft Foundry integracija (įvykdyta)
+- ✅ **Interactive Tutorials**: Praktinis AI seminaro laboratorija (įvykdyta)
+- ✅ **Advanced Security Module**: AI specifiniai saugumo modeliai (įvykdyta)
+- ✅ **Performance Optimization**: AI apkrovų derinimo strategijos (įvykdyta)
 
-### Versija 2.1.0 (Planuojama) - Iš dalies įgyvendinta v3.0.0
-#### Maži patobulinimai - Kai kurie įgyvendinti dabartiniame leidime
-- ✅ **Papildomi pavyzdžiai**: AI orientuoti diegimo scenarijai (Įgyvendinta)
-- ✅ **Išplėstas DUK**: AI specifiniai klausimai ir trikčių šalinimas (Įgyvendinta)
-- **Įrankių integracija**: Patobulintos IDE ir redaktoriaus integracijos gairės
-- ✅ **Stebėjimo plėtra**: AI specifiniai stebėjimo ir įspėjimo modeliai (Įgyvendinta)
+### Version 2.1.0 (Planuota) - Iš dalies įgyvendinta v3.0.0
+#### Nedideli patobulinimai - kai kurie įgyvendinti dabartiniame leidime
+- ✅ **Additional Examples**: AI orientuoti diegimo scenarijai (įvykdyta)
+- ✅ **Extended FAQ**: AI specifiniai klausimai ir trikčių šalinimas (įvykdyta)
+- **Tool Integration**: Patobinti IDE ir redaktorių integracijos vadovai
+- ✅ **Monitoring Expansion**: AI specifiniai stebėjimo ir perspėjimų modeliai (įvykdyta)
 
-#### Vis dar planuojama būsimam leidimui
-- **Mobiliesiems pritaikyta dokumentacija**: Reaguojantis dizainas mobiliesiems mokymams
-- **Prieiga neprisijungus**: Atsisiunčiami dokumentacijos paketai
-- **Patobulinta IDE integracija**: VS Code plėtinys AZD + AI darbo eigoms
-- **Bendruomenės prietaisų skydelis**: Realaus laiko bendruomenės metrikos ir indėlio stebėjimas
+#### Dar planuojama būsimam leidimui
+- **Mobile-Friendly Documentation**: Reaguojantis dizainas mobiliesiems mokymams
+- **Offline Access**: Atsisiunčiami dokumentacijos paketai
+- **Enhanced IDE Integration**: VS Code plėtinys AZD + AI darbo eigoms
+- **Community Dashboard**: Realaus laiko bendruomenės metrikos ir indėlių stebėjimas
 
-## Prisidėjimas prie pakeitimų žurnalo
+## Dalyvavimas pakeitimų žurnale
 
 ### Pakeitimų pranešimas
-Prisidedant prie šio saugyklos, įsitikinkite, kad pakeitimų žurnalo įrašai apima:
+Prisidedant prie šios saugyklos, įsitikinkite, kad įrašai pakeitimų žurnale apima:
 
-1. **Versijos numerį**: Laikantis semantinio versijavimo (major.minor.patch)
-2. **Data**: Leidimo arba atnaujinimo data YYYY-MM-DD formatu
-3. **Kategorija**: Pridėta, Pakeista, Pasenusi, Pašalinta, Ištaisyta, Saugumas
+1. **Versijos numeris**: Laikykitės semantinio versijų valdymo (major.minor.patch)
+2. **Data**: Išleidimo arba atnaujinimo data formatu YYYY-MM-DD
+3. **Kategorija**: Added, Changed, Deprecated, Removed, Fixed, Security
 4. **Aiškus aprašymas**: Trumpas aprašymas, kas pasikeitė
-5. **Poveikio vertinimas**: Kaip pakeitimai veikia esamus vartotojus
+5. **Poveikio vertinimas**: Kaip pakeitimai veikia esamus naudotojus
 
 ### Pakeitimų kategorijos
 
 #### Pridėta
 - Naujos funkcijos, dokumentacijos skyriai ar galimybės
 - Nauji pavyzdžiai, šablonai ar mokymosi ištekliai
-- Papildomi įrankiai, scenarijai ar naudingos priemonės
+- Papildomi įrankiai, skriptai ar paslaugos
 
 #### Pakeista
-- Esamos funkcionalumo ar dokumentacijos modifikacijos
-- Atnaujinimai, siekiant pagerinti aiškumą ar tikslumą
+- Pakeitimai esamai funkcionalumui ar dokumentacijai
+- Atnaujinimai, skirti pagerinti aiškumą ar tikslumą
 - Turinio ar organizacijos pertvarkymas
 
-#### Pasenusi
-- Funkcijos ar metodai, kurie yra palaipsniui šalinami
-- Dokumentacijos skyriai, numatyti pašalinimui
-- Metodai, turintys geresnių alternatyvų
+#### Nebenaudojama
+- Funkcijos ar metodai, kurie palaipsniui pašalinami
+- Dokumentacijos skyriai, planuojami pašalinti
+- Metodai, kuriems yra geresni alternatyvos
 
 #### Pašalinta
 - Funkcijos, dokumentacija ar pavyzdžiai, kurie nebėra aktualūs
-- Pasenusi informacija ar pasenę metodai
-- Perteklinis ar sujungtas turinys
+- Pasenusi informacija ar nebenaudojami metodai
+- Pasikartojantis arba konsoliduotas turinys
 
 #### Ištaisyta
-- Dokumentacijos ar kodo klaidų taisymai
-- Praneštų problemų ar trikčių sprendimas
+- Klaidų taisymai dokumentacijoje ar kode
+- Praneštų problemų ar gedimų sprendimas
 - Tikslumo ar funkcionalumo patobulinimai
 
 #### Saugumas
-- Su saugumu susiję patobulinimai ar taisymai
-- Saugumo geriausių praktikų atnaujinimai
+- Su saugumu susiję patobulinimai arba pataisymai
+- Atnaujinimai dėl geriausių saugumo praktikų
 - Saugumo pažeidžiamumų sprendimas
 
-### Semantinio versijavimo gairės
+### Semantinio versijų valdymo gairės
 
 #### Pagrindinė versija (X.0.0)
-- Pakeitimai, kurie reikalauja vartotojo veiksmų
-- Reikšmingas turinio ar organizacijos pertvarkymas
+- Reikšmingi pakeitimai, reikalaujantys veiksmų iš naudotojo
+- Reikšminga turinio ar organizacijos pertvarka
 - Pakeitimai, keičiantys pagrindinį požiūrį ar metodiką
 
-#### Mažesnė versija (X.Y.0)
-- Naujos funkcijos ar turinio papildymai
+#### Smulkioji versija (X.Y.0)
+- Naujos funkcijos arba turinio priedai
 - Patobulinimai, išlaikantys atgalinį suderinamumą
 - Papildomi pavyzdžiai, įrankiai ar ištekliai
 
-#### Taisymo versija (X.Y.Z)
-- Klaidų taisymai ir pataisymai
+#### Pleistro versija (X.Y.Z)
+- Klaidos taisymai ir pataisymai
 - Nedideli patobulinimai esamam turiniui
-- Paaiškinimai ir maži patobulinimai
+- Paaiškinimai ir smulkūs patobulinimai
 
 ## Bendruomenės atsiliepimai ir pasiūlymai
 
-Aktyviai skatiname bendruomenės atsiliepimus, kad pagerintume šį mokymosi šaltinį:
+Mes aktyviai skatiname bendruomenės atsiliepimus, kad pagerintume šį mokymosi išteklį:
 
 ### Kaip pateikti atsiliepimus
-- **GitHub problemos**: Praneškite apie problemas arba siūlykite patobulinimus (AI specifinės problemos laukiamos)
-- **Discord diskusijos**: Dalinkitės idėjomis ir bendraukite su Azure AI Foundry bendruomene
-- **Pull Requests**: Prisidėkite tiesioginiais turinio patobulinimais, ypač AI šablonais ir vadovais
-- **Azure AI Foundry Discord**: Dalyvaukite #Azure kanale AZD + AI diskusijoms
-- **Bendruomenės forumai**: Dalyvaukite platesnėse Azure programuotojų diskusijose
+- **GitHub Issues**: Praneškite apie problemas arba pasiūlykite patobulinimus (AI specifiškos problemos laukiamos)
+- **Discord Discussions**: Dalinkitės idėjomis ir įsitraukite į Microsoft Foundry bendruomenę
+- **Pull Requests**: Prisidėkite tiesioginėmis turinio pataisomis, ypač AI šablonais ir vadovais
+- **Microsoft Foundry Discord**: Dalyvaukite #Azure kanale AZD + AI diskusijose
+- **Community Forums**: Dalyvaukite platesnėse Azure kūrėjų diskusijose
 
 ### Atsiliepimų kategorijos
-- **AI turinio tikslumas**: Pataisymai AI paslaugų integracijos ir diegimo informacijoje
-- **Mokymosi patirtis**: Pasiūlymai, kaip pagerinti AI programuotojų mokymosi eigą
-- **Trūkstamas AI turinys**: Prašymai dėl papildomų AI šablonų, modelių ar pavyzdžių
-- **Prieinamumas**: Patobulinimai įvairiems mokymosi poreikiams
-- **AI įrankių integracija**: Pasiūlymai geresnei AI kūrimo darbo eigos integracijai
-- **Gamybos AI modeliai**: Įmonių AI diegimo modelių prašymai
+- **AI Content Accuracy**: Pataisymai apie AI paslaugų integraciją ir diegimo informaciją
+- **Learning Experience**: Pasiūlymai geresnei AI kūrėjo mokymosi eigai
+- **Missing AI Content**: Prašymai papildomų AI šablonų, modelių ar pavyzdžių
+- **Accessibility**: Patobulinimai įvairiems mokymosi poreikiams
+- **AI Tool Integration**: Pasiūlymai geresnei AI vystymo darbo eigos integracijai
+- **Production AI Patterns**: Užklausos dėl įmonės lygio AI diegimo modelių
 
 ### Atsakymo įsipareigojimas
-- **Problemos atsakymas**: Per 48 valandas nuo praneštų problemų
-- **Funkcijų prašymai**: Įvertinimas per vieną savaitę
-- **Bendruomenės indėlis**: Peržiūra per vieną savaitę
-- **Saugumo problemos**: Skubus prioritetas su pagreitintu atsakymu
+- **Issue Response**: Per 48 valandas dėl praneštų problemų
+- **Feature Requests**: Įvertinimas per vieną savaitę
+- **Community Contributions**: Peržiūra per vieną savaitę
+- **Security Issues**: Nedelsiant prioritetas su pagreitintu atsaku
 
 ## Priežiūros tvarkaraštis
 
 ### Reguliarūs atnaujinimai
-- **Mėnesiniai peržiūros**: Turinio tikslumo ir nuorodų patikrinimas
-- **Ketvirtiniai atnaujinimai**: Pagrindiniai turinio papildymai ir patobulinimai
-- **Pusmetiniai peržiūros**: Išsamus pertvarkymas ir patobulinimas
-- **Metiniai leidimai**: Pagrindiniai versijų atnaujinimai su reikšmingais patobulinimais
+- **Monthly Reviews**: Turinio tikslumo ir nuorodų patikra
+- **Quarterly Updates**: Reikšmingi turinio priedai ir patobulinimai
+- **Semi-Annual Reviews**: Išsami pertvarka ir patobulinimai
+- **Annual Releases**: Pagrindiniai versijų atnaujinimai su reikšmingais patobulinimais
 
 ### Stebėjimas ir kokybės užtikrinimas
-- **Automatiniai testai**: Reguliarus kodo pavyzdžių ir nuorodų patikrinimas
-- **Bendruomenės atsiliepimų integracija**: Reguliarus vartotojų pasiūlymų įtraukimas
-- **Technologijų atnaujinimai**: Suderinimas su naujausiomis Azure paslaugomis ir azd leidimais
-- **Prieinamumo auditai**: Reguliarus peržiūrėjimas, siekiant įtraukti dizaino principus
+- **Automated Testing**: Reguliarus kodo pavyzdžių ir nuorodų patikrinimas
+- **Community Feedback Integration**: Reguliari vartotojų pasiūlymų integracija
+- **Technology Updates**: Suderinimas su naujausiomis Azure paslaugomis ir azd leidimais
+- **Accessibility Audits**: Reguliarus įtraukaus dizaino principų peržiūrėjimas
 
 ## Versijų palaikymo politika
 
-### Dabartinės versijos palaikymas
-- **Naujausia pagrindinė versija**: Pilnas palaikymas su reguliariais atnaujinimais
-- **Ankstesnė pagrindinė versija**: Saugumo atnaujinimai ir kritiniai pataisymai 12 mėnesių
-- **Senos versijos**: Tik bendruomenės palaikymas, be oficialių atnaujinimų
+### Dabartinis versijų palaikymas
+- **Latest Major Version**: Pilnas palaikymas su reguliariais atnaujinimais
+- **Previous Major Version**: Saugumo atnaujinimai ir kritinės pataisos 12 mėnesių
+- **Legacy Versions**: Tik bendruomenės palaikymas, jokių oficialių atnaujinimų
 
 ### Migracijos gairės
-Kai išleidžiamos pagrindinės versijos, mes teikiame:
-- **Migracijos vadovus**: Žingsnis po žingsnio perėjimo instrukcijas
-- **Suderinamumo pastabas**: Informacija apie esminius pakeitimus
-- **Įrankių palaikymą**: Scenarijus ar priemones, padedančias migracijoje
-- **Bendruomenės palaikymą**: Specialius forumus migracijos klausimams
+Kai išleidžiamos pagrindinės versijos, mes pateikiame:
+- **Migracijos gairės**: Žingsnis po žingsnio perėjimo instrukcijos
+- **Suderinamumo pastabos**: Informacija apie nesuderinamus pakeitimus
+- **Įrankių palaikymas**: Skriptai arba įrankiai, padedantys su migracija
+- **Bendruomenės palaikymas**: Skirti forumai migracijos klausimams
 
 ---
 
-**Navigacija**
+**Naršymas**
 - **Ankstesnė pamoka**: [Studijų vadovas](resources/study-guide.md)
 - **Kita pamoka**: Grįžti į [Pagrindinį README](README.md)
 
-**Sekite naujienas**: Stebėkite šį saugyklą, kad gautumėte pranešimus apie naujus leidimus ir svarbius mokymosi medžiagos atnaujinimus.
+**Būkite informuoti**: Stebėkite šį repozitoriją, kad gautumėte pranešimus apie naujus leidimus ir svarbius mokomosios medžiagos atnaujinimus.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Atsakomybės apribojimas:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą Co-op Translator (https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojamas profesionalus, žmogaus atliktas vertimas. Mes neatsakome už bet kokius nesusipratimus ar neteisingas interpretacijas, atsiradusias dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

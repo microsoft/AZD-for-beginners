@@ -1,64 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-25T02:19:36+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "my"
-}
--->
-# AZD အတွက် AI Developer များ
+# AZD အတွက် AI ဖွံ့ဖြိုးသူများ
 
-!!! info "ဒီ Workshop ရဲ့ ရည်ရွယ်ထားတဲ့သူများ"
+!!! info "ဤ အလုပ်ရုံအတွက် ပါဝင်သူများ"
    
-    ဒီ Workshop က Azure AI Foundry ပေါ်မှာ အကောင်းဆုံး tools နဲ့ workflows တွေကို အသုံးပြုပြီး AI Agentic အက်ပလီကေးရှင်းတွေ တည်ဆောက်ချင်သူတိုင်းအတွက် ဖြစ်ပါတယ်။ Azure, AI အကြောင်းအရာတွေ နဲ့ Python code အပေါ် အတွေ့အကြုံရှိသူများအတွက် သင့်တော်ပြီး၊ အခြေခံကနေ စတင်သူများအတွက်လည်း သင့်တော်ပါတယ်။ စတင်မလုပ်ခင် Pre-requisites တွေကို စစ်ဆေးပါ။
+    ဤ အလုပ်ရုံသည် Microsoft Foundry အပေါ်တွင် အကောင်းဆုံး ကိရိယာများနှင့် workflow များကို အသုံးချ၍ AI Agentic applications များကို တည်ဆောက်လိုသူတိုင်းအတွက် ဖြစ်ပါသည်။ အလုပ်ရုံသည် Azure၊ AI အယူအဆများနှင့် Python ကုဒ်အတော်လေး နားလည်မှုရှိသူဖြစ်စေ၊ အစပြုသူများနှင့် အတွေ့အကြုံရှိ ဖွံ့ဖြိုးသူများနှစ်သပ်လုံးအတွက် သင့်တော်ပါသည်။ စတင်မလုပ်မီ ကြိုတင်လိုအပ်ချက်များကို စစ်ဆေးပါ။
 
-    **ကြာမြင့်ချိန်:** 3-4 နာရီ  
-    **အဆင့်:** အခြေခံမှ အလယ်အလတ်  
-
----
-
-## Pre-Requisites
-
-- ကိုယ်ပိုင် GitHub အကောင့် → [အခမဲ့ ဖန်တီးပါ](https://github.com/signup)
-- အသက်ဝင်နေတဲ့ Azure အကောင့် → [အခမဲ့ ဖန်တီးပါ](https://aka.ms/free)
-- AI အကြောင်းအရာများ၊ Python development၊ Command-line tools အပေါ် ရင်းနှီးမှု
-- VS Code နဲ့ GitHub tools နဲ့ workflows အပေါ် အတွေ့အကြုံရှိမှု
+    **Duration:** 3-4 နာရီ  
+    **Level:** အခြေခံမှ အလယ်အလတ်  
 
 ---
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဒီ Workshop ပြီးဆုံးချိန်မှာ သင်သည် အောက်ပါအရာများကို သိရှိနိုင်ပါမည်-
+## ကြိုတင်လိုအပ်ချက်များ
 
-- [X] **Azure Developer CLI ကို အသုံးပြုခြင်း** → Azure resources တွေကို provision, deploy, နဲ့ manage လုပ်ရန်
-- [X] **AI App Templates အသုံးပြုခြင်း** → Azure AI Foundry ပေါ်မှာ AI Agent project တွေကို စတင်ရန်
-- [X] **Templates တွေကို Configure လုပ်ခြင်း** → Red Teaming, Evaluations, Tracing & Monitoring စတဲ့ features တွေအတွက်
-- [X] **AZD templates နဲ့ workflows တွေကို GitHub Copilot အသုံးပြုပြီး ခွဲခြမ်းစိတ်ဖြာခြင်း**
-- [X] **AI Agent starter template ကို Customize နဲ့ Redeploy လုပ်ခြင်း** → ကိုယ်ပိုင်လိုအပ်ချက်များနှင့်အတူ
+- A personal GitHub account → [အခမဲ့ တစ်ခု ဖန်တီးပါ](https://github.com/signup)
+- လည်ပတ်နေသော Azure အကောင့်တစ်ခု → [အခမဲ့ တစ်ခု ဖန်တီးပါ](https://aka.ms/free)
+- AI အယူအဆများ၊ Python ဖွံ့ဖြိုးရေးနှင့် Command-line ကိရိယာများကို အနည်းငယ် သိရှိထားခြင်း
+- VS Code နှင့် GitHub ကိရိယာများနှင့် workflow များကို အသုံးပြုသည့် အတွေ့အကြုံ။
 
 ---
 
-## Workshop အကြောင်းအရာ
+## သင်ယူရမည့် အဓိက ရည်မွန်းချက်များ
 
-ဒီ Workshop ကို module အနေနဲ့ ဖွဲ့စည်းထားပြီး၊ module တစ်ခုစီမှာ လက်တွေ့ lab exercise တစ်ခုပါဝင်ပါတယ်-
+ဤ အလုပ်ရုံပြီးဆုံးသောအခါ သင်သည် အောက်ပါအရာများကို သိရှိထားမည်။
 
-1. **Introduction** - AZD templates တွေက ဘာလဲ၊ ဘယ်လိုအလုပ်လုပ်လဲဆိုတာကို နားလည်ပါ
-1. **Selection** - ကိုယ့်ရဲ့ AI project အတွက် "starter" template မှန်ကန်တဲ့အရာကို ရှာဖွေပါ
-1. **Validation** - Template ကို deploy လုပ်ပြီး advertised အတိုင်း အလုပ်လုပ်မလုပ် စစ်ဆေးပါ
-1. **Deconstruction** - Template ကို ခွဲခြမ်းစိတ်ဖြာပြီး အစိတ်အပိုင်းတွေ နဲ့ configuration တွေကို နားလည်ပါ
-1. **Configuration** - Azure AI Foundry ရဲ့ features များကို အသုံးပြုဖို့ လေ့လာပါ
-1. **Customization** - ကိုယ့်ရဲ့ data နဲ့လိုအပ်ချက်များအတိုင်း application ကို ပြန်တည်ဆောက်ပါ
-1. **Teardown** - Infrastructure ကို deprovision လုပ်ပြီး soft-deleted resources တွေကို ပြန်ရယူပါ
+- [X] **Work with Azure Developer CLI** → သင့် Azure အရင်းအမြစ်များကို ဖန်တီး၊ တပ်ဆင်နှင့် စီမံခန့်ခွဲရန်။
+- [X] **Use AI App Templates** → Microsoft Foundry ပေါ်တွင် AI Agent ပရောဂျက်များကို အစတင်မြန်ဆန်စေရန် အသုံးပြုရန်။
+- [X] **Configure Templates** → Red Teaming, Evaluations, Tracing & Monitoring ကဲ့သို့သော လုပ်ဆောင်ချက်များအတွက် Templates များကို သတ်မှတ်ပြင်ဆင်ရန်။
+- [X] **Deconstruct and Explore** → GitHub Copilot ကို အသုံးပြုပြီး AZD templates များနှင့် workflow များကို ခွဲစိတ် ဖြေရှင်းလေ့လာရန်။
+- [X] **Customize and Redeploy** → သင့်အလိုအပ်ချက်များအရ AI Agent starter template ကို ကိုယ်ပိုင် ညှိနှိုင်း ပြန်တပ်ဆင်ရန်။
 
 ---
 
-## အကြံပြုချက်များ & ပြဿနာများ
+## အလုပ်ရုံ အကြောင်းအရာ
 
-အခြေခံကနေ စတင်သူများအတွက် အကောင်းဆုံး သင်ယူမှုအတွေ့အကြုံကို ပေးနိုင်ဖို့ curricula ကို အမြဲ update လုပ်နေပါတယ်။ သင့်ရဲ့ အကြံပြုချက်ကို ကျေးဇူးတင်ပါတယ်။
+The workshop is structured as modules, each anchored by a hands-on lab exercise:
 
-1. ဒီ repo မှာ issue တစ်ခု post လုပ်ပါ - `Workshop` ဆိုတဲ့ tag ကို အသုံးပြုပါ။
-1. Azure AI Foundry Discord ကို join လုပ်ပါ - peer learners တွေနဲ့ ချိတ်ဆက်ပါ!
+1. **Introduction** - AZD templates ဆိုတာ ဘာဖြစ်ပြီး ၎င်းတို့ ဘယ်လို လုပ်ဆောင်ကြောင်း နားလည်မှု ရရှိစေရန်
+1. **Selection** - သင့်နောက်ထပ် AI ပရောဂျက်အတွက် သင့်တော်သော "starter" template ကို ရှာဖွေမည်
+1. **Validation** - ကြေညာထားသည့်အတိုင်း အလုပ်လုပ်မှုကို အတည်ပြုရန် template ကို တပ်ဆင်ပြီး လေ့လာမည်
+1. **Deconstruction** - template ကို ခွဲထုတ်၍ ၎င်း၏ အစိတ်အပိုင်းများနှင့် ဖွဲ့စည်းမှုကို နားလည်မည်
+1. **Configuration** - Microsoft Foundry ၏ မတူကွဲပြားသော feature များကို ဖွင့်အသုံးပြုနည်းကို သင်ယူမည်
+1. **Customization** - သင့်ဒေတာနှင့် လိုအပ်ချက်များအရ အက်ပလီကေးရှင်းကို ပြန်လည်တည်ဆောက်မည်
+1. **Teardown** - အင်ဖရာစဒ်ချာကို ဖျက်ပစ်နည်းနှင့် soft-deleted resource များကို ပြန်လည်ယူနည်းကို သင်ယူမည်
 
 ---
 
+## တုံ့ပြန်ချက်များနှင့် ပြဿနာများ
+
+We actively update the curricula to make sure it provides the best learning experience for beginners. Your feedback is appreciated.
+
+1. ဤ repo တွင် issue တင်ပါ - လွယ်ကူစေရန် `Workshop` ဟုပြု tag လုပ်ပါ။
+1. Microsoft Foundry Discord သို့ join ဝင်ပါ - အတူ သင်ယူသူများနှင့် ဆက်သွယ်ကြပါ!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+သတိပေးချက်:
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု Co-op Translator (https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုကို ကြိုးပမ်းသော်လည်း အလိုအလျှောက် ပြန်လည်ဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို မူလဘာသာဖြင့် သတ်မှတ်ထားသော အာဏာပိုင်အရင်းအမြစ်အဖြစ် ယူဆရမည်ဖြစ်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ကျွမ်းကျင်ဘာသာပြန်သူတစ်ဦးအား အသုံးပြု၍ ဘာသာပြန်ရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်နိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မှားဖြစ်အဓိပ္ပာယ်များအတွက် ကျွန်ုပ်တို့ တာဝန်မရှိပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

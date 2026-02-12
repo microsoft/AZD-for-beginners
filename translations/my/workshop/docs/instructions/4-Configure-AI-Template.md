@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:06:15+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "my"
-}
--->
-# 4. Template ကို Configure လုပ်ခြင်း
+# 4. Configure a Template
 
-!!! tip "ဒီ module အဆုံးသတ်တဲ့အချိန်မှာ သင်တတ်မြောက်ထားမယ့်အရာများ"
+!!! tip "ဤမော်ဂျူး အဆုံးသတ်လျင် သင် ပြုလုပ်နိုင်မည်"
 
-    - [ ] `azure.yaml` ရဲ့ ရည်ရွယ်ချက်ကို နားလည်ထားမယ်
-    - [ ] `azure.yaml` ရဲ့ ဖွဲ့စည်းပုံကို နားလည်ထားမယ်
-    - [ ] azd lifecycle `hooks` ရဲ့ အရေးပါမှုကို နားလည်ထားမယ်
-    - [ ] **Lab 3:** 
+    - [ ] Understand the purpose of `azure.yaml`
+    - [ ] Understand the structure of `azure.yaml`
+    - [ ] Understand the value of azd lifecycle `hooks`
+    - [ ] **Lab 4:** Explore and modify environment variables
 
 ---
 
-!!! prompt "`azure.yaml` ဖိုင်ကဘာလုပ်ပေးသလဲ? Codefence ကိုသုံးပြီး တစ်ကြောင်းချင်းရှင်းပြပါ"
+!!! prompt "What is the `azure.yaml` file do? Use a codefence and explain it line by line"
 
-      `azure.yaml` ဖိုင်က **Azure Developer CLI (azd) ရဲ့ configuration ဖိုင်** ဖြစ်ပါတယ်။ ဒီဖိုင်က သင့် application ကို Azure မှာ deploy လုပ်ဖို့အတွက် infrastructure, services, deployment hooks, နဲ့ environment variables တွေကို သတ်မှတ်ပေးပါတယ်။
+      The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
 
 ---
 
-## 1. ရည်ရွယ်ချက်နှင့် လုပ်ဆောင်ချက်
+## 1. Purpose and Functionality
 
-ဒီ `azure.yaml` ဖိုင်က AI agent application တစ်ခုအတွက် **deployment blueprint** အဖြစ် လုပ်ဆောင်ပေးပါတယ်၊ အထူးသဖြင့်:
+This `azure.yaml` file serves as the **deployment blueprint** for an AI agent application that:
 
-1. **Environment ကို validate လုပ်ခြင်း** deployment မလုပ်ခင်
-2. **Azure AI services တွေ provision လုပ်ခြင်း** (AI Hub, AI Project, Search စသည်တို့)
-3. **Python application ကို Azure Container Apps မှာ deploy လုပ်ခြင်း**
-4. **AI models တွေ configure လုပ်ခြင်း** chat နဲ့ embedding functionality အတွက်
-5. **AI application အတွက် monitoring နဲ့ tracing စနစ်များ စီစဉ်ခြင်း**
-6. **အသစ်နဲ့ ရှိပြီးသား** Azure AI project scenarios နှစ်ခုလုံး handle လုပ်ခြင်း
+1. **Validates environment** before deployment
+2. **Provisions Azure AI services** (AI Hub, AI Project, Search, etc.)
+3. **Deploys a Python application** to Azure Container Apps
+4. **Configures AI models** for both chat and embedding functionality
+5. **Sets up monitoring and tracing** for the AI application
+6. **Handles both new and existing** Azure AI project scenarios
 
-ဒီဖိုင်က **တစ် command deployment** (`azd up`) ကို enable လုပ်ပေးပြီး validation, provisioning, နဲ့ post-deployment configuration ကို အဆင်ပြေစွာလုပ်ဆောင်နိုင်ပါတယ်။
+The file enables **one-command deployment** (`azd up`) of a complete AI agent solution with proper validation, provisioning, and post-deployment configuration.
 
 ??? info "Expand To View: `azure.yaml`"
 
-      `azure.yaml` ဖိုင်က Azure Developer CLI ကို ဒီ AI Agent application ကို Azure မှာ deploy နဲ့ manage လုပ်ဖို့ ဘယ်လိုလုပ်ရမယ်ဆိုတာကို သတ်မှတ်ပေးပါတယ်။ အပိုင်းစီကို တစ်ကြောင်းချင်းရှင်းပြပါ။
+      The `azure.yaml` file defines how Azure Developer CLI should deploy and manage this AI Agent application in Azure. Let's break it down line-by-line.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: hooks တွေလိုအပ်လား?
-      # TODO: variables အားလုံးလိုအပ်လား?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,17 +126,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## 2. ဖိုင်ကို ခွဲခြမ်းစိတ်ဖြာခြင်း
+## 2. Deconstructing The File
 
-ဖိုင်ရဲ့ အပိုင်းစီကို သေချာနားလည်ဖို့အတွက် ဘာလုပ်ပေးသလဲ၊ ဘာကြောင့်လိုအပ်လဲဆိုတာကို ရှင်းပြပါ။
+Let's go through the file section by section, to understand what it does - and why.
 
-### 2.1 **Header နဲ့ Schema (1-3)**
+### 2.1 **Header and Schema (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Line 1**: YAML language server schema validation ကို IDE support နဲ့ IntelliSense အတွက် ပေးထားပါတယ်။
+- **Line 1**: YAML language server schema ကို IDE support နှင့် IntelliSense အတွက် သတ်မှတ်ပေးသည်။
 
 ### 2.2 Project Metadata (5-10)
 
@@ -157,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Line 5**: Azure Developer CLI အတွက် project name ကို သတ်မှတ်ထားပါတယ်။
-- **Lines 6-7**: Template version 1.0.2 ကို အသုံးပြုထားပါတယ်။
-- **Lines 8-9**: Azure Developer CLI version 1.14.0 သို့မဟုတ် အထက်ကို လိုအပ်ပါတယ်။
+- **Line 5**: Azure Developer CLI မှ အသုံးပြုမည့် project အမည်ကို သတ်မှတ်သည်။
+- **Lines 6-7**: ဤပရောဂျက်သည် template version 1.0.2 အပေါ် အခြေခံထားသည်ကို ဖော်ပြသည်။
+- **Lines 8-9**: Azure Developer CLI ဗားရှင်း 1.14.0 သို့မဟုတ် ထို့ထက်မြင့် ဗားရှင်း လိုအပ်သည်။
 
 ### 2.3 Deploy Hooks (11-40)
 
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Lines 11-20**: **Pre-deployment hook** - `azd up` မလုပ်ခင် run လုပ်ပါတယ်။
+- **Lines 11-20**: **Pre-deployment hook** - `azd up` များစဉ် မတိုင်ခင် ပြေးဆောင်ရွက်သည်။
 
-      - Unix/Linux မှာ: validation script ကို executable လုပ်ပြီး run လုပ်ပါတယ်။
-      - Windows မှာ: PowerShell validation script ကို run လုပ်ပါတယ်။
-      - နှစ်ခုလုံး interactive ဖြစ်ပြီး fail ဖြစ်ရင် deployment ကို ရပ်တန့်စေပါတယ်။
+      - On Unix/Linux: သတ်မှတ်မှု စစ်ဆေးရေး script ကို executable အဖြစ် ပြောင်းပြီး 실행 မည်
+      - On Windows: PowerShell validation script ကို 실행 မည်
+      - နှစ်ဘက်လုံး interactive ဖြစ်ပြီး အရေးပေါ် အမှားရှိပါက deployment ကို ရပ်ထားမည်
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 21-30**: **Post-provision hook** - Azure resources တွေ create ပြီးတဲ့နောက် run လုပ်ပါတယ်။
+- **Lines 21-30**: **Post-provision hook** - Azure resource များ ဖန်တီးပြီးနောက် ပြေးဆောင်ရွက်သည်
 
-  - Environment variable တွေကိုရေးတဲ့ script တွေကို run လုပ်ပါတယ်။
-  - Script fail ဖြစ်ရင်တောင် deployment ကို ဆက်လုပ်နိုင်ပါတယ် (`continueOnError: true`)
+  - environment variable များ ကိုရေးသွင်းသည့် scripts များကို 실행 မည်
+  - ဤ scripts များ မအောင်မြင်လျှင်ပါ deployment ကို ဆက်လက်လုပ်ဆောင်မည် (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 31-40**: **Post-deploy hook** - application deployment ပြီးတဲ့နောက် run လုပ်ပါတယ်။
+- **Lines 31-40**: **Post-deploy hook** - application ကို deploy ပြီးနောက် ပြေးဆောင်ရွက်သည်
 
-  - Final setup scripts တွေကို run လုပ်ပါတယ်။
-  - Script fail ဖြစ်ရင်တောင် ဆက်လုပ်နိုင်ပါတယ်။
+  - နောက်ဆုံး ပြင်ဆင်မှု scripts များကို 실행 မည်
+  - scripts များ မအောင်မြင်လျှင်ပါ ဆက်လက်လုပ်ဆောင်မည်
 
 ### 2.4 Service Config (41-48)
 
-ဒီအပိုင်းက သင့် application service ကို configure လုပ်ပေးပါတယ်။
+This configures the application service you are deploying.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Line 42**: "api_and_frontend" ဆိုတဲ့ service ကို သတ်မှတ်ထားပါတယ်။
-- **Line 43**: `./src` directory ကို source code အတွက် သတ်မှတ်ထားပါတယ်။
-- **Line 44**: Python ကို programming language အဖြစ် သတ်မှတ်ထားပါတယ်။
-- **Line 45**: Azure Container Apps ကို hosting platform အဖြစ် သတ်မှတ်ထားပါတယ်။
-- **Lines 46-48**: Docker configuration
+- **Line 42**: "api_and_frontend" ဟု အမည်ပေးထားသော service ကို သတ်မှတ်သည်
+- **Line 43**: ကုဒ် များအတွက် `./src` ဒါရိုက်တာကို ကိုးကားသည်
+- **Line 44**: Python ကို programming language အဖြစ် သတ်မှတ်သည်
+- **Line 45**: Azure Container Apps ကို hosting platform အဖြစ် အသုံးပြုသည်
+- **Lines 46-48**: Docker သတ်မှတ်ချက်များ
 
-      - "api_and_frontend" ကို image name အဖြစ် သတ်မှတ်ထားပါတယ်။
-      - Docker image ကို Azure မှာ remote build လုပ်ပါတယ် (local build မဟုတ်ပါ)။
+      - "api_and_frontend" ကို image အမည်အဖြစ် အသုံးပြုသည်
+      - Docker image ကို ဒေသတွင်းမစBuildဘဲ Azure မှအဝေးမှ အဆောက်အအုံလုပ်ပေးသည် (remote build)
 
 ### 2.5 Pipeline Variables (49-76)
 
-CI/CD pipelines မှာ automation အတွက် `azd` ကို run လုပ်ဖို့ variable တွေပါဝင်ပါတယ်။
+These are variables to help you run `azd` in CI/CD pipelines for automation
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-ဒီအပိုင်းက deployment အတွင်း အသုံးပြုမယ့် environment variables တွေကို သတ်မှတ်ထားပြီး category အလိုက် စီစဉ်ထားပါတယ်:
+This section defines environment variables used **during deployment**, organized by category:
 
 - **Azure Resource Names (Lines 51-60)**:
-      - Azure service resource names တွေ e.g., Resource Group, AI Hub, AI Project စသည်တို့
+      - အဓိက Azure ဝန်ဆောင်မှု resource အမည်များ (ဥပမာ Resource Group, AI Hub, AI Project, စသည်)
 - **Feature Flags (Lines 61-63)**:
-      - Azure services အချို့ကို enable/disable လုပ်ဖို့ Boolean variables
+      - အထူး Azure ဝန်ဆောင်မှုများကို ဖွင့်/ပိတ် စေနိုင်သည့် boolean အမျိုးအစား variables များ
 - **AI Agent Configuration (Lines 64-71)**:
-      - Main AI agent အတွက် configuration e.g., name, ID, deployment settings, model details
+      - အဓိက AI agent အတွက် အမည်၊ ID, deployment သတ်မှတ်ချက်များ၊ model ဆိုင်ရာ အသေးစိတ်များ
 - **AI Embedding Configuration (Lines 72-79)**:
-      - Vector search အတွက် embedding model configuration
+      - vector search အတွက် အသုံးပြုမည့် embedding model အတွက် သတ်မှတ်ချက်များ
 - **Search and Monitoring (Lines 80-84)**:
-      - Search index name, existing resource IDs, နဲ့ monitoring/tracing settings
+      - Search index အမည်၊ ရှိပြီးသား resource ID များ၊ နှင့် monitoring/tracing သတ်မှတ်ချက်များ
 
 ---
 
-## 3. Env Variables ကို သိထားပါ
-အောက်ပါ environment variables တွေက သင့် deployment ရဲ့ configuration နဲ့ လုပ်ဆောင်ချက်ကို ထိန်းချုပ်ပေးပြီး အဓိကရည်ရွယ်ချက်အလိုက် စီစဉ်ထားပါတယ်။ Variables အများစုမှာ default values ရှိပြီး သင့်လိုအပ်ချက်နဲ့ Azure resources တွေကို အလိုက်သင့် customize လုပ်နိုင်ပါတယ်။
+## 3. Know Env Variables
+The following environment variables control your deployment's configuration and behavior, organized by their primary purpose. Most variables have sensible defaults, but you can customize them to match your specific requirements or existing Azure resources.
 
-### 3.1 လိုအပ်တဲ့ Variables 
+### 3.1 Required Variables 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Azure အဓိက ဖွဲ့စည်းမှု
+AZURE_ENV_NAME                    # ပတ်ဝန်းကျင် အမည် (ရင်းမြစ်အမည်ပေးရာတွင် အသုံးပြုသည်)
+AZURE_LOCATION                    # တပ်ဆင်မည့် ဒေသ
+AZURE_SUBSCRIPTION_ID             # ပစ်မှတ် subscription
+AZURE_RESOURCE_GROUP              # ရင်းမြစ်အုပ်စု အမည်
+AZURE_PRINCIPAL_ID                # RBAC အတွက် User principal
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# ရင်းမြစ်အမည်များ (မသတ်မှတ်ထားပါက အလိုအလျောက် ဖန်တီးမည်)
+AZURE_AIHUB_NAME                  # Microsoft Foundry hub အမည်
+AZURE_AIPROJECT_NAME              # AI စီမံကိန်း အမည်
+AZURE_AISERVICES_NAME             # AI ဝန်ဆောင်မှု အကောင့် အမည်
+AZURE_STORAGE_ACCOUNT_NAME        # သိုလှောင်မှု အကောင့် အမည်
+AZURE_CONTAINER_REGISTRY_NAME     # Container registry အမည်
+AZURE_KEYVAULT_NAME               # Key Vault အမည် (သုံးထားပါက)
 ```
 
 ### 3.2 Model Configuration 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Chat မော်ဒယ် ဖွဲ့စည်းမှု
+AZURE_AI_AGENT_MODEL_NAME         # ပုံမှန်: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # ပုံမှန်: OpenAI (သို့မဟုတ် Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # ပုံမှန်: လက်ရှိရနိုင်သော နောက်ဆုံး
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Chat မော်ဒယ်အတွက် တပ်ဆင်မှု အမည်
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # ပုံမှန်: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # ပုံမှန်: 80 (ထောင်စု TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Embedding မော်ဒယ် ဖွဲ့စည်းမှု
+AZURE_AI_EMBED_MODEL_NAME         # ပုံမှန်: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # ပုံမှန်: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # ပုံမှန်: လက်ရှိရနိုင်သော နောက်ဆုံး
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Embeddings အတွက် တပ်ဆင်မှု အမည်
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # ပုံမှန်: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # ပုံမှန်: 50 (ထောင်စု TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Agent ဖွဲ့စည်းမှု
+AZURE_AI_AGENT_NAME               # Agent ပြသမည့် အမည်
+AZURE_EXISTING_AGENT_ID           # ရှိပြီးသား Agent ကို အသုံးပြုပါ (ရွေးချယ်စရာ)
 ```
 
 ### 3.3 Feature Toggle
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# ရွေးချယ်နိုင်သော ဝန်ဆောင်မှုများ
+USE_APPLICATION_INSIGHTS         # ပုံမှန်: မှန်
+USE_AZURE_AI_SEARCH_SERVICE      # ပုံမှန်: မမှန်
+USE_CONTAINER_REGISTRY           # ပုံမှန်: မှန်
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# စောင့်ကြည့်ခြင်းနှင့် လမ်းကြောင်းထောက်လှမ်းခြင်း
+ENABLE_AZURE_MONITOR_TRACING     # ပုံမှန်: မမှန်
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # ပုံမှန်: မမှန်
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# ရှာဖွေရေး ဆက်တင်များ
+AZURE_AI_SEARCH_INDEX_NAME       # ရှာဖွေရေး အင်ဒက်စ် အမည်
+AZURE_SEARCH_SERVICE_NAME        # ရှာဖွေရေး ဝန်ဆောင်မှု အမည်
 ```
 
 ### 3.4 AI Project Configuration 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# ရှိပြီးသား အရင်းအမြစ်များကို အသုံးပြုပါ
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ရှိပြီးသား AI စီမံကိန်း၏ အရင်းအမြစ် ID အပြည့်အစုံ
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # ရှိပြီးသား စီမံကိန်း၏ endpoint URL
 ```
 
-### 3.5 Variables ကို စစ်ဆေးပါ
+### 3.5 Check Your Variables
 
-Azure Developer CLI ကို အသုံးပြုပြီး environment variables တွေကို ကြည့်ရှုနဲ့ စီမံနိုင်ပါတယ်:
+Use the Azure Developer CLI to view and manage your environment variables:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# လက်ရှိ ပတ်ဝန်းကျင်အတွက် ပတ်ဝန်းကျင် ပြောင်းလဲတန်ဖိုးများအားလုံးကို ကြည့်ရန်
 azd env get-values
 
-# Get a specific environment variable
+# တိကျသည့် ပတ်ဝန်းကျင် ပြောင်းလဲတန်ဖိုးတစ်ခုကို ရယူရန်
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# ပတ်ဝန်းကျင် ပြောင်းလဲတန်ဖိုးတစ်ခုကို သတ်မှတ်ရန်
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# .env ဖိုင်မှ အများပြားသော ပြောင်းလဲတန်ဖိုးများကို သတ်မှတ်ရန်
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+သတိပေးချက်:
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှုဖြစ်သည့် [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် မှန်ကန်မှုအတွက် ကြိုးပမ်းထားသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း ကျေးဇူးပြု၍ သတိပြုပါ။ မူလစာတမ်းကို ထို၏ မူရင်းဘာသာစကားဖြင့် ရရှိသော မူရင်းစာတမ်းကို တရားဝင် အချက်အလက်အဖြစ် သတ်မှတ်ထားသင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန် အထူးကျွမ်းကျင်သူ၏ ဘာသာပြန်ချက်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာသည့် နားလည်မှုမှားများ သို့မဟုတ် မှတ်ချက်များအတွက် ကျွန်ုပ်တို့သည် တာဝန် မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

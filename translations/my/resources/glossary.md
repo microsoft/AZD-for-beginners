@@ -1,308 +1,370 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-18T13:36:07+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "my"
-}
--->
-# အဘိဓာန် - Azure နှင့် AZD အကြောင်းအရာများ
+# အဘိဓာန် - Azure နှင့် AZD ဆိုင်ရာ အပြောအဆိုများ
 
-**အခန်းအားလုံးအတွက် ရည်ညွှန်းချက်**
-- **📚 သင်တန်းမူလစာမျက်နှာ**: [AZD For Beginners](../README.md)
-- **📖 အခြေခံများကို သင်ယူပါ**: [အခန်း ၁: AZD အခြေခံများ](../docs/getting-started/azd-basics.md)
-- **🤖 AI အကြောင်းအရာများ**: [အခန်း ၂: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+**အခန်းအားလုံးအတွက် ကိုးကားချက်**
+- **📚 သင်ကြားမှု မူလစာမျက်နှာ**: [AZD အစပြုသူများအတွက်](../README.md)
+- **📖 အခြေခံများ သင်ယူရန်**: [အခန်း ၁: AZD အခြေခံများ](../docs/getting-started/azd-basics.md)
+- **🤖 AI သက်ဆိုင်ရာ စကားလုံးများ**: [အခန်း ၂: AI-ဦးစားပေး ဖွံ့ဖြိုးရေး](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## နိဒါန်း
 
-ဤအဘိဓာန်သည် Azure Developer CLI နှင့် Azure cloud development တွင် အသုံးပြုသော အကြောင်းအရာများ၊ အယူအဆများနှင့် အတိုကောက်များအတွက် အဓိပ္ပါယ်များကို ပေးထားသည်။ သင်တန်းစာတမ်းများကို နားလည်ရန်၊ ပြဿနာများကို ဖြေရှင်းရန်နှင့် azd ပရောဂျက်များနှင့် Azure ဝန်ဆောင်မှုများအကြောင်း ဆက်သွယ်ရန် အရေးကြီးသော ရည်ညွှန်းချက်တစ်ခုဖြစ်သည်။
+ဒီကျယ်ပြန့်သော အဘိဓာန်မှာ Azure Developer CLI နှင့် Azure မိုးလုံလေလုံ ဖွံ့ဖြိုးရေးတွင် အသုံးများသော 용어များ၊ အယူအဆများနှင့် အတိုကောက်အသုံးများအတွက် အဓိပ္ပါယ်များကို ဖော်ပြထားပါသည်။ နည်းပညာစာတမ်းများကို နားလည်ရန်၊ ပြသာနာဖြေရှင်းရာတွင် အသုံးပြုရန်နှင့် azd ပရောဂျက်များနှင့် Azure ဝန်ဆောင်မှုများအကြောင်း ထိရောက်စွာ ဆက်သွယ်ရန် မရှိမျှမလွယ်ကူသည့် ကိုးကားစာအုပ်ဖြစ်ပါသည်။
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
+## သင်ယူရမည့် အဓိက ရည်မှန်းချက်များ
 
-ဤအဘိဓာန်ကို အသုံးပြုခြင်းဖြင့် သင်သည်:
-- Azure Developer CLI အကြောင်းအရာများနှင့် အယူအဆများကို နားလည်မည်
-- Azure cloud development အဘိဓာန်နှင့် နည်းပညာဆိုင်ရာ စကားလုံးများကို ကျွမ်းကျင်မည်
-- Infrastructure as Code နှင့် deployment အကြောင်းအရာများကို ထိရောက်စွာ ရည်ညွှန်းနိုင်မည်
-- Azure ဝန်ဆောင်မှုအမည်များ၊ အတိုကောက်များနှင့် ၎င်းတို့၏ ရည်ရွယ်ချက်များကို နားလည်မည်
-- ပြဿနာရှာဖွေခြင်းနှင့် debugging အတွက် အသုံးဝင်သော အဓိပ္ပါယ်များကို ရယူနိုင်မည်
-- Azure architecture နှင့် development အဆင့်မြင့်အကြောင်းအရာများကို သင်ယူမည်
+ဒီအဘိဓာန်ကို အသုံးပြုခြင်းဖြင့် သင်သည်-
+- Azure Developer CLI ၏ အဓိက 용어များနှင့် အယူအဆများကို နားလည်နိုင်မည်
+- Azure မိုးလုံလေလုံ ဖွံ့ဖြိုးရေး၏ ဝေါဟာရနှင့် နည်းပညာဆိုင်ရာ 용어များကို ကျွမ်းကျင်နိုင်မည်
+- Infrastructure as Code နှင့် တပ်ဆင်မှု (deployment) 용어များကို ထိရောက်စွာ ကိုးကားနိုင်မည်
+- Azure ဝန်ဆောင်မှုအမည်များ၊ အတိုကောက်များနှင့် ၎င်းတို့၏ အဓိပ္ပါယ်များကို နားလည်နိုင်မည်
+- ပြဿနာရှာဖွေရေးနှင့် ဒီဘပ်များ (debugging) အတွက် သက်ဆိုင်သော 용어များ၏ အဓိပ္ပါယ်ကို ကြည့်ရှုနိုင်မည်
+- Azure အင်ဂျင်နီယာရေးနှင့် ဖွံ့ဖြိုးရေး ဆိုင်ရာ အဆင့်မြင့် အယူအဆများကို သင်ယူနိုင်မည်
 
 ## သင်ယူပြီးရမည့် ရလဒ်များ
 
-ဤအဘိဓာန်ကို မကြာခဏ ရည်ညွှန်းခြင်းဖြင့် သင်သည်:
-- Azure Developer CLI အကြောင်းအရာများကို မှန်ကန်သောစကားလုံးများဖြင့် ထိရောက်စွာ ဆက်သွယ်နိုင်မည်
-- နည်းပညာဆိုင်ရာ စာတမ်းများနှင့် အမှားစာတိုများကို ပိုမိုရှင်းလင်းစွာ နားလည်နိုင်မည်
-- Azure ဝန်ဆောင်မှုများနှင့် အယူအဆများကို ယုံကြည်မှုဖြင့် လှည့်လည်နိုင်မည်
-- ပြဿနာများကို သင့်တော်သော နည်းပညာဆိုင်ရာ စကားလုံးများဖြင့် ဖြေရှင်းနိုင်မည်
-- အဖွဲ့ဆွေးနွေးပွဲများတွင် မှန်ကန်သော နည်းပညာဆိုင်ရာ စကားလုံးများဖြင့် ပါဝင်ဆွေးနွေးနိုင်မည်
-- Azure cloud development အကြောင်းအရာများကို စနစ်တကျ တိုးချဲ့သင်ယူနိုင်မည်
+ဒီအဘိဓာန်အား အကြိမ်ကြိမ် ကိုးကားခြင်းဖြင့် သင်သည်-
+- Azure Developer CLI ၏ သတ်မှတ်ထားသော 용어များကို သေချာစွာ အသုံးပြု၍ ထိရောက်စွာ ဆက်သွယ်နိုင်မည်
+- နည်းပညာစာတမ်းများနှင့် error မက်ဆေ့များကို ပိုမိုရှင်းလင်းစွာ နားလည်နိုင်မည်
+- Azure ဝန်ဆောင်မှုများနှင့် အယူအဆများကို ယုံကြည်စိတ်ချစွာ လမ်းကြောင်းရှာနိုင်မည်
+- အပြဿနာများကို သက်ဆိုင်ရာ နည်းပညာ အသုံးအနှုန်းများဖြင့် ဖြေရှင်းနိုင်မည်
+- အသင်းအစည်းများ၏ ဆွေးနွေးပွဲများတွင် မှန်ကန်သော နည်းပညာစကားလုံးဖြင့် ပါဝင်ဆောင်ရွက်နိုင်မည်
+- သင်၏ Azure မိုးလုံလေလုံ ဖွံ့ဖြိုးရေး ဗဟုသုတကို စနစ်တကျ တိုးချဲ့နိုင်မည်
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager template ဖြစ်သည်။ JSON အခြေခံထားသော Infrastructure as Code ပုံစံဖြင့် Azure ရင်းမြစ်များကို ကြေညာရေးပုံစံဖြင့် သတ်မှတ်ခြင်းနှင့် တင်သွင်းခြင်းအတွက် အသုံးပြုသည်။
+Azure Resource Manager template။ Azure resources များကို ဖော်ပြ၍ တာဝန်ပေးထားသော JSON-အခြေခံ Infrastructure as Code ဖော်မတ်။
 
 **App Service**  
-Azure ၏ platform-as-a-service (PaaS) ဝန်ဆောင်မှုဖြစ်ပြီး၊ web applications, REST APIs နှင့် mobile backends များကို infrastructure ကို စီမံခန့်ခွဲရန် မလိုဘဲ တင်သွင်းနိုင်သည်။
+web applications, REST APIs, နှင့် mobile backends များကို အုတ်မြစ်စီမံခန့်ခွဲရန်မလိုဘဲ တင်ပြနိုင်ရန် Azure ၏ platform-as-a-service (PaaS) ဝန်ဆောင်မှု။
 
 **Application Insights**  
-Azure ၏ application performance monitoring (APM) ဝန်ဆောင်မှုဖြစ်ပြီး၊ application performance, availability နှင့် usage အကြောင်းအရာများကို နက်နက်ရှိုင်းရှိုင်း သိရှိစေသည်။
+application performance monitoring (APM) ဝန်ဆောင်မှုဖြစ်ပြီး application ၏ အလုပ်ဆောင်မှု၊ ရရှိနိုင်မှုနှင့် အသုံးပြုမှုအပေါ် သေချာသိရှိစေတတ်သည်။
 
 **Azure CLI**  
-Azure ရင်းမြစ်များကို စီမံခန့်ခွဲရန် command-line interface ဖြစ်သည်။ azd မှ authentication နှင့် အချို့သော လုပ်ဆောင်မှုများအတွက် အသုံးပြုသည်။
+Azure resources များကို စီမံရန် အသုံးပြုသော command-line interface။ azd မှ authentication နှင့် အချို့ လုပ်ဆောင်ချက်များအတွက် အသုံးပြုသည်။
 
 **Azure Developer CLI (azd)**  
-Developer များအတွက် အထူးသင့်လျော်သော command-line tool ဖြစ်ပြီး၊ templates နှင့် Infrastructure as Code ကို အသုံးပြု၍ Azure သို့ application များကို တည်ဆောက်ခြင်းနှင့် တင်သွင်းခြင်းလုပ်ငန်းစဉ်ကို အရှိန်မြှင့်ပေးသည်။
+Developer ကို ဦးတည်ထားသော command-line ကိရိယာတစ်ခုဖြစ်ပြီး templates နှင့် Infrastructure as Code များကို အသုံးပြု၍ Azure သို့ application တည်ဆောက်ခြင်းနှင့် တင်သွင်းခြင်း ပြုလုပ်ရာကို မြန်ဆန်စေသည်။
 
 **azure.yaml**  
-azd ပရောဂျက်တစ်ခု၏ အဓိက configuration ဖိုင်ဖြစ်ပြီး၊ services, infrastructure နှင့် deployment hooks များကို သတ်မှတ်ထားသည်။
+azd ပရောဂျက်တစ်ခုအတွက် service များ၊ အကြမ်းဖျင်း အင်ဖရာစတက်ချာ (infrastructure) နှင့် deployment hooks များကို သတ်မှတ်ထားသော အဓိက configuration ဖိုင်။
 
 **Azure Resource Manager (ARM)**  
-Azure ၏ deployment နှင့် management ဝန်ဆောင်မှုဖြစ်ပြီး၊ ရင်းမြစ်များကို ဖန်တီးခြင်း၊ အပ်ဒိတ်လုပ်ခြင်းနှင့် ဖျက်သိမ်းခြင်းအတွက် စီမံခန့်ခွဲမှုအလွှာကို ပေးသည်။
+Azure ၏ deployment နှင့် စီမံခန့်ခွဲရေး ဝန်ဆောင်မှုဖြစ်ပြီး resources များကို ဖန်တီးခြင်း၊ Update ပြုလုပ်ခြင်းနှင့် ဖျက်ခြင်းတို့အတွက် management အလွှာကို ပေးသည်။
 
 ## B
 
 **Bicep**  
-Microsoft မှ ဖွံ့ဖြိုးတိုးတက်စေသော domain-specific language (DSL) ဖြစ်ပြီး၊ Azure ရင်းမြစ်များကို တင်သွင်းရန် အသုံးပြုသည်။ ARM templates ထက် ရိုးရှင်းသော syntax ကို ပေးသည်။
+Microsoft က ဖန်တီးထားသည့် domain-specific language (DSL) တစ်ခုဖြစ်ပြီး Azure resources များကို တပ်ဆင်ရာတွင် အသုံးပြုသည်။ ARM templates ထက် ရိုးရှင်းသည့် စာလုံးပေါင်းပုံစံကို ပေးပြီး ARM သို့ ကုဒ်ကို ကုဒ်ကွန်ပိုင်လ် ပြောင်းပေးသည်။
 
 **Build**  
-Source code ကို compile လုပ်ခြင်း၊ dependencies များကို install လုပ်ခြင်းနှင့် applications များကို တင်သွင်းရန် ပြင်ဆင်ခြင်းလုပ်ငန်းစဉ်ဖြစ်သည်။
+source code ကို ကွန်ပိုင်လ်လုပ်ခြင်း၊ လိုအပ်သော အပစ္စယများကို 설치ခြင်းနှင့် applications များကို တင်သွင်းရန် ပြင်ဆင်ခြင်း။
 
 **Blue-Green Deployment**  
-Downtime နှင့် အန္တရာယ်ကို လျှော့ချရန် identical production environments (blue နှင့် green) နှစ်ခုကို အသုံးပြုသည့် deployment မဟာဗျူဟာဖြစ်သည်။
+downtime နှင့် အန္တရာယ်လျော့ချရန် တူညီသည့် production ပတ်ဝန်းကျင်နှစ်ခု (blue နှင့် green) ကို အသုံးပြုသည့် deployment မျဉ်းစည်းမှု။
 
 ## C
 
 **Container Apps**  
-Azure ၏ serverless container ဝန်ဆောင်မှုဖြစ်ပြီး၊ containerized applications များကို infrastructure ကို စီမံခန့်ခွဲရန် မလိုဘဲ တင်သွင်းနိုင်သည်။
+ကြီးမားသော အင်ဖရာစထီခုမစီမံရပဲ containerized applications များကို လည်ပတ်စေသော Azure ၏ serverless container ဝန်ဆောင်မှု။
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment ဖြစ်သည်။ Code ပြောင်းလဲမှုများကို ပေါင်းစည်းခြင်းနှင့် applications များကို တင်သွင်းခြင်းလုပ်ငန်းစဉ်များကို အလိုအလျောက်လုပ်ဆောင်သည်။
+Continuous Integration/Continuous Deployment။ code ပြင်ဆင်မှုများကို ပေါင်းစည်းခြင်းနှင့် applications များကို အလိုအလျောက် တင်သွင်းခြင်းအတွက် အလိုအလျောက်လုပ်ငန်းစဉ်များ။
 
 **Cosmos DB**  
-Azure ၏ ကမ္ဘာလုံးဆိုင်ရာ ဖြန့်ဝေထားသော multi-model database ဝန်ဆောင်မှုဖြစ်ပြီး၊ throughput, latency, availability နှင့် consistency အတွက် ပြည့်စုံသော SLA များကို ပေးသည်။
+Azure ၏ အပြည်ပြည်ဆိုင်ရာ ဖြန့်ချိထားသည့် multi-model database ဝန်ဆောင်မှုဖြစ်ပြီး throughput၊ latency၊ availability နှင့် consistency အတွက် ပြည့်စုံသော SLA များကို ပေးသည်။
 
 **Configuration**  
-Application အပြုအမူနှင့် deployment ရွေးချယ်မှုများကို ထိန်းချုပ်သည့် settings နှင့် parameters များဖြစ်သည်။
+application အပြုအမူနှင့် တင်သွင်းမှု ရွေးချယ်စရာများကို ထိန်းချုပ်သည့် settings နှင့် parameters များ။
 
 ## D
 
 **Deployment**  
-Applications နှင့် ၎င်းတို့၏ dependencies များကို ရည်မှန်းထားသော infrastructure တွင် တင်သွင်းခြင်းလုပ်ငန်းစဉ်ဖြစ်သည်။
+applications နှင့် ၎င်းတို့၏ သက်ဆိုင်ရာ အပစ္စည်းများကို တင်သွင်း၍ target အင်ဖရာစထ်ချာပေါ်တွင် ပြင်ဆင်ခြင်း။
 
 **Docker**  
-Containerization နည်းပညာကို အသုံးပြု၍ applications များကို ဖွံ့ဖြိုးတိုးတက်စေခြင်း၊ ပို့ဆောင်ခြင်းနှင့် အလုပ်လုပ်စေခြင်းအတွက် platform ဖြစ်သည်။
+containerization နည်းပညာကို အသုံးပြု၍ applications များ ဖန်တီး၊ ပို့ဆောင်နှင့် လည်ပတ်စေသည့် ပလက်ဖောင်း။
 
 **Dockerfile**  
-Docker container image တစ်ခုကို တည်ဆောက်ရန် လိုအပ်သော ညွှန်ကြားချက်များပါရှိသည့် text ဖိုင်ဖြစ်သည်။
+Docker container image တစ်ခုတည်ဆောက်ရန် အချက်အလက်များကို ထည့်သွင်းထားသည့် စာသားဖိုင်။
 
 ## E
 
 **Environment**  
-သင့် application ၏ အထူးသတ်မှတ်ထားသော instance တစ်ခုကို ကိုယ်စားပြုသည့် deployment target (ဥပမာ - development, staging, production) ဖြစ်သည်။
+သင်၏ application ၏ သတ်မှတ်ထားသည့် အထူးသတ်မှတ်ရသော တင်သွင်းရမည့် ပတ်ဝန်းကျင် (ဥပမာ development, staging, production)။
 
 **Environment Variables**  
-Applications များ runtime တွင် access ပြုနိုင်သည့် key-value pairs အဖြစ် သိမ်းဆည်းထားသော configuration values များဖြစ်သည်။
+applications များ runtime တွင် ဝင်ရောက်သုံးနိုင်သည့် key-value အဖြစ် သိမ်းဆည်းထားသော configuration သတင်းအချက်အလက်များ။
 
 **Endpoint**  
-Application သို့မဟုတ် service ကို access ပြုနိုင်သည့် URL သို့မဟုတ် network address ဖြစ်သည်။
+application သို့မဟုတ် service တစ်ခုကို ဝင်ရောက်လက်လှမ်းမီနိုင်သည့် URL သို့မဟုတ် network လိပ်စာ။
 
 ## F
 
 **Function App**  
-Azure ၏ serverless compute ဝန်ဆောင်မှုဖြစ်ပြီး၊ infrastructure ကို စီမံခန့်ခွဲရန် မလိုဘဲ အဖြစ်အပျက်အခြေပြု code များကို အလုပ်လုပ်စေသည်။
+အချက်အလက်များဖြင့် ဖြစ်ပေါ်လာသည့် အဖြစ်များအပေါ် event-driven code များကို လည်ပတ်စေသည့် Azure ၏ serverless compute ဝန်ဆောင်မှု။
 
 ## G
 
 **GitHub Actions**  
-GitHub repositories နှင့် ပေါင်းစည်းထားသော CI/CD platform ဖြစ်ပြီး၊ workflows များကို အလိုအလျောက်လုပ်ဆောင်သည်။
+GitHub repository များနှင့် ပေါင်းစည်းထားသည့် CI/CD ပလက်ဖောင်းဖြစ်ပြီး workflow များကို အလိုအလျောက်လုပ်ဆောင်ရန် တိုက်ရိုက်ထောက်ပံ့ပေးသည်။
 
 **Git**  
-Source code တွင် ပြောင်းလဲမှုများကို ခြေရာခံရန် အသုံးပြုသည့် distributed version control system ဖြစ်သည်။
+source code တွင် ပြောင်းလဲမှုများကို လေ့လာခြင်းနှင့် ထိန်းသိမ်းရာတွင် အသုံးပြုသော distributed version control system။
 
 ## H
 
 **Hooks**  
-Deployment lifecycle ၏ အထူးအချိန်များတွင် (ဥပမာ - preprovision, postprovision, predeploy, postdeploy) အလုပ်လုပ်စေသည့် custom scripts သို့မဟုတ် commands များဖြစ်သည်။
+deployment lifecycle ၏ အချို့အချိန်များတွင် (preprovision, postprovision, predeploy, postdeploy) လည်ပတ်သည့် custom script များ သို့မဟုတ် command များ။
 
 **Host**  
-Application တစ်ခုကို တင်သွင်းမည့် Azure ဝန်ဆောင်မှုအမျိုးအစား (ဥပမာ - appservice, containerapp, function) ဖြစ်သည်။
+application ကို တင်သွင်းမည့် Azure service အမျိုးအစား (ဥပမာ appservice, containerapp, function)။
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Infrastructure ကို လက်ဖြင့်လုပ်ဆောင်ခြင်းမဟုတ်ဘဲ code ဖြင့် သတ်မှတ်ခြင်းနှင့် စီမံခန့်ခွဲခြင်းလုပ်ငန်းစဉ်ဖြစ်သည်။
+လက်ဖြင့်မလုပ်ဘဲ code ဖြင့် အင်ဖရာစတက်ချာကို သတ်မှတ်ခြင်းနှင့် စီမံခန့်ခွဲခြင်း၏ လေ့လာမှု။
 
 **Init**  
-Template တစ်ခုမှ အသစ်သော azd ပရောဂျက်တစ်ခုကို စတင်ခြင်းလုပ်ငန်းစဉ်ဖြစ်သည်။
+အသစ်ထိ စတင် azd ပရောဂျက်ကို အခြေခံ template မှ initialize ပြုလုပ်သော လုပ်ငန်းစဉ်။
 
 ## J
 
 **JSON**  
-JavaScript Object Notation ဖြစ်သည်။ Configuration ဖိုင်များနှင့် API responses များအတွက် အများအားဖြင့် အသုံးပြုသော data interchange format ဖြစ်သည်။
+JavaScript Object Notation။ configuration ဖိုင်များနှင့် API ပြန်လည်ပေးပို့မှုများတွင် မကြာခဏအသုံးပြုသော ဒေတာ အလဲအလှယ် ဖော်မတ်။
 
 **JWT**  
-JSON Web Token ဖြစ်သည်။ JSON object အဖြစ် အချက်အလက်များကို ဘေးကင်းစွာ ပေးပို့ရန်အတွက် စံသတ်မှတ်ချက်ဖြစ်သည်။
+JSON Web Token။ မျိုးစုံပါတီများအကြား အချက်အလက်များကို လုံခြုံစွာ ပို့ဆောင်ရန် အသုံးပြုသော မြေပုံပုံစံ။
 
 ## K
 
 **Key Vault**  
-Secrets, keys နှင့် certificates များကို ဘေးကင်းစွာ သိမ်းဆည်းရန်နှင့် စီမံခန့်ခွဲရန်အတွက် Azure ၏ ဝန်ဆောင်မှုဖြစ်သည်။
+secrets, keys, နှင့် certificates များကို လုံခြုံစိတ်ချစွာ သိမ်းဆည်း၍ စီမံခန့်ခွဲရန် Azure ၏ ဝန်ဆောင်မှု။
 
 **Kusto Query Language (KQL)**  
-Azure Monitor, Application Insights နှင့် အခြား Azure ဝန်ဆောင်မှုများတွင် data ကို ခွဲခြမ်းစိတ်ဖြာရန် အသုံးပြုသည့် query language ဖြစ်သည်။
+Azure Monitor, Application Insights နှင့် အခြား Azure ဝန်ဆောင်မှုများတွင် ဒေတာ विश्लेषण ပြုလုပ်ရန် အသုံးပြုသော query ဘာသာစကား။
 
 ## L
 
 **Load Balancer**  
-ဝင်ရောက်လာသည့် network traffic ကို servers သို့မဟုတ် instances များစွာအကြား ဖြန့်ဝေသည့် ဝန်ဆောင်မှုဖြစ်သည်။
+ဝင်ရောက်လာသော network traffic ကို အများကြီးရှိသော servers သို့ သို့မဟုတ် instances များအကြား ဖြန့်ချိပေးသည့် ဝန်ဆောင်မှု။
 
 **Log Analytics**  
-Cloud နှင့် on-premises ပတ်ဝန်းကျင်များမှ telemetry data များကို စုဆောင်းခြင်း၊ ခွဲခြမ်းစိတ်ဖြာခြင်းနှင့် လုပ်ဆောင်ခြင်းအတွက် Azure ဝန်ဆောင်မှုဖြစ်သည်။
+cloud နှင့် on-premises ပတ်ဝန်းကျင်များထံမှ telemetry ဒေတာများကို စုဆောင်း၊ 分析နှင့် အလုပ်ဆောင်ရန် အသုံးပြုသော Azure ၏ ဝန်ဆောင်မှု။
 
 ## M
 
 **Managed Identity**  
-Azure ဝန်ဆောင်မှုများကို အခြား Azure ဝန်ဆောင်မှုများနှင့် authentication ပြုလုပ်ရန် အလိုအလျောက်စီမံခန့်ခွဲထားသော identity ကို ပေးသည်။
+အခြား Azure ဝန်ဆောင်မှုများသို့ authentication ပြုလုပ်ရာတွင် Azure services များအား အလိုအလျောက် စီမံပေးသည့် identity အင်္ဂါရပ်။
 
 **Microservices**  
-Applications များကို သေးငယ်သော၊ လွတ်လပ်သော ဝန်ဆောင်မှုများအဖြစ် တည်ဆောက်သည့် architectural approach ဖြစ်သည်။
+application များကို သေးငယ်၍ လွတ်လပ်သော service မျိုးများအဖြစ် ဖွဲ့စည်းထားသည့် architecture နည်းလမ်း။
 
 **Monitor**  
-Applications နှင့် infrastructure အကြောင်းအရာများကို အပြည့်အစုံ ကြည့်ရှုနိုင်စေရန် Azure ၏ unified monitoring solution ဖြစ်သည်။
+applications နှင့် အင်ဖရာစထ်ချာတစ်ကြောင်းလုံးပေါ်တွင် observability ပြည့်စုံစေသည့် Azure ၏ တစ်စုတစ်စည်း monitoring ဖြေရှင်းချက်။
 
 ## N
 
 **Node.js**  
-Server-side applications များကို တည်ဆောက်ရန် Chrome ၏ V8 JavaScript engine အပေါ်တွင် တည်ဆောက်ထားသော JavaScript runtime ဖြစ်သည်။
+Chrome ၏ V8 JavaScript engine အပေါ် တည်ဆောက်ထားသည့် JavaScript runtime ဖြစ်ပြီး server-side applications တည်ဆောက်ရန် အသုံးပြုသည်။
 
 **npm**  
-Node.js အတွက် package manager ဖြစ်ပြီး၊ dependencies နှင့် packages များကို စီမံခန့်ခွဲသည်။
+Node.js အတွက် package manager ဖြစ်ပြီး dependencies နှင့် packages များကို စီမံပေးသည်။
 
 ## O
 
 **Output**  
-Infrastructure deployment မှ ပြန်လာသည့် values များဖြစ်ပြီး၊ applications သို့မဟုတ် အခြားရင်းမြစ်များက အသုံးပြုနိုင်သည်။
+infrastructure တပ်ဆင်မှုမှ ပြန်လည်ထုတ်ပေးသည့် တန်ဖိုးများဖြစ်ပြီး applications သို့မဟုတ် အခြား resources များက အသုံးချနိုင်သည်။
 
 ## P
 
 **Package**  
-Application code နှင့် dependencies များကို တင်သွင်းရန် ပြင်ဆင်ခြင်းလုပ်ငန်းစဉ်ဖြစ်သည်။
+application code နှင့် dependencies များကို တင်သွင်းရန် ပြင်ဆင်ခြင်းလုပ်ငန်းစဉ်။
 
 **Parameters**  
-Infrastructure templates များသို့ input အဖြစ် ပေးသွင်းသည့် values များဖြစ်သည်။
+deployment များကို ကိုယ့်လိုချင်သည့်ပုံစံစိတ်ကြိုက် ပြုလုပ်နိုင်ရန် infrastructure templates အထဲသို့ ပေးပို့သည့် input တန်ဖိုးများ။
 
 **PostgreSQL**  
-Azure တွင် managed service အဖြစ် ပံ့ပိုးထားသော open-source relational database system ဖြစ်သည်။
+opensource relational database system အဖြစ် Azure မှ managed service အဖြစ် ထောက်ပံ့ပေးသော ဒေတာဘေ့စ်စနစ်။
 
 **Provisioning**  
-Infrastructure templates တွင် သတ်မှတ်ထားသော Azure ရင်းမြစ်များကို ဖန်တီးခြင်းနှင့် စီမံခန့်ခွဲခြင်းလုပ်ငန်းစဉ်ဖြစ်သည်။
+infrastructure templates တွင် သတ်မှတ်ထားသည့် Azure resources များကို ဖန်တီး၍ ပြင်ဆင်ပေးသည့် လုပ်ငန်းစဉ်။
 
 ## Q
 
 **Quota**  
-Azure subscription သို့မဟုတ် region တစ်ခုတွင် ဖန်တီးနိုင်သည့် ရင်းမြစ်အရေအတွက်အပေါ်ရှိ ကန့်သတ်ချက်များဖြစ်သည်။
+Azure subscription သို့မဟုတ် region တစ်ခုတွင် ဖန်တီးနိုင်သည့် resources အရေအတွက်ပေါ်ရှိ ကန့်သတ်ချက်များ။
 
 ## R
 
 **Resource Group**  
-တူညီသော lifecycle, permissions နှင့် policies များကို မျှဝေသည့် Azure ရင်းမြစ်များအတွက် logical container ဖြစ်သည်။
+တူညီသည့် lifecycle၊ permissions နှင့် မူဝါဒများကို ဝေမျှထားသော Azure resources များအတွက် ရုပ်ပိုင်းဆိုင်ရာ ထုပ်စု (logical container)။
 
 **Resource Token**  
-azd မှ ဖန်တီးထားသော unique string ဖြစ်ပြီး၊ resource names များကို deployments အကြား unique ဖြစ်စေရန် အသုံးပြုသည်။
+resource အမည်များအား deployment အတွင်း တင်သွင်းရာတွင် ထူးခြားပြီး ရယူနိုင်စေရန် azd မှ ထုတ်ပေးသော unique string။
 
 **REST API**  
-HTTP methods များကို အသုံးပြု၍ networked applications များကို ဒီဇိုင်းဆွဲရန်အတွက် architectural style ဖြစ်သည်။
+HTTP method များကို အသုံးပြု၍ networked applications များကိုဒီဇိုင်းဆွဲရာတွင် အသုံးပြုသည့် နည်းလမ်း။
 
 **Rollback**  
-Application သို့မဟုတ် infrastructure configuration ၏ ယခင်ဗားရှင်းသို့ ပြန်သွားခြင်းလုပ်ငန်းစဉ်ဖြစ်သည်။
+application သို့မဟုတ် infrastructure configuration ၏ ယခင်ဗားရှင်းသို့ ပြန်သွားရန် ပြုလုပ်သည့် လုပ်ငန်းစဉ်။
 
 ## S
 
 **Service**  
-azure.yaml တွင် သတ်မှတ်ထားသော application ၏ component (ဥပမာ - web frontend, API backend, database) ဖြစ်သည်။
+azure.yaml ထဲတွင် သတ်မှတ်ထားသည့် သင်၏ application ၏ အပိုင်းအစတစ်ခု (ဥပမာ web frontend, API backend, database)။
 
 **SKU**  
-Stock Keeping Unit ဖြစ်သည်။ Azure ရင်းမြစ်များအတွက် service tiers သို့မဟုတ် performance အဆင့်များကို ကိုယ်စားပြုသည်။
+Stock Keeping Unit။ Azure resources များအတွက် ဝန်ဆောင်မှု အဆင့်များ သို့မဟုတ် လုပ်ဆောင်နိုင်မှုပိုင်းကို ကိုယ်စားပြုသော အမျိုးအစား။
 
 **SQL Database**  
-Microsoft SQL Server အပေါ်အခြေခံထားသော Azure ၏ managed relational database ဝန်ဆောင်မှုဖြစ်သည်။
+Microsoft SQL Server အခြေခံထားသည့် Azure ၏ managed relational database ဝန်ဆောင်မှု။
 
 **Static Web Apps**  
-Source code repositories မှ တည်ဆောက်ခြင်းနှင့် တင်သွင်းခြင်းအတွက် Azure ၏ ဝန်ဆောင်မှုဖြစ်သည်။
+source code repository များမှ ပြန်ထုတ်၍ full-stack web applications များကို တည်ဆောက်သည့် Azure ဝန်ဆောင်မှု။
 
 **Storage Account**  
-Blobs, files, queues နှင့် tables အပါအဝင် data objects များအတွက် cloud storage ကို ပေးသော Azure ဝန်ဆောင်မှုဖြစ်သည်။
+blobs, files, queues, နှင့် tables အပါအဝင် ဒေတာ objects များအတွက် cloud storage ကို ပေးသည့် Azure ဝန်ဆောင်မှု။
 
 **Subscription**  
-Resource groups နှင့် resources များကို ထိန်းသိမ်းထားသည့် Azure account container ဖြစ်ပြီး၊ billing နှင့် access management နှင့် ဆက်စပ်သည်။
+resource groups နှင့် resources များကို ပါဝင်ထားသည့် Azure အကောင့် သိုက်ကွန်တာ၊ billing နှင့် access စီမံခန့်ခွဲမှုနှင့် ပတ်သက်သော အရာ။
 
 ## T
 
 **Template**  
-Application code, infrastructure definitions နှင့် configuration များပါရှိသည့် pre-built project structure ဖြစ်သည်။
+application code, infrastructure အက်ဥပဒေ (definitions), နှင့် common scenarios များအတွက် configuration များ ပါရှိသည့် pre-built project ဖွဲ့စည်းမှု။
 
 **Terraform**  
-Azure အပါအဝင် cloud providers များစွာကို ပံ့ပိုးသည့် open-source Infrastructure as Code tool ဖြစ်သည်။
+Azure အပါအဝင် cloud providers များစွာအတွက် ထောက်ပံ့ပေးသော open-source Infrastructure as Code ကိရိယာ။
 
 **Traffic Manager**  
-Global Azure regions များအကြား traffic ကို ဖြန့်ဝေသည့် Azure ၏ DNS-based traffic load balancer ဖြစ်သည်။
+DNS-အခြေပြု traffic load balancer ဖြစ်ပြီး global Azure regions များအကြား traffic ကို ဖြန့်ချိပေးသည်။
 
 ## U
 
 **URI**  
-Uniform Resource Identifier ဖြစ်သည်။ ရင်းမြစ်တစ်ခုကို သတ်မှတ်သည့် string ဖြစ်သည်။
+Uniform Resource Identifier။ ဗွီသည် resource တစ်ခုကို ရှာဖွေဖော်အောင် သတ်မှတ်သည့် string။
 
 **URL**  
-Uniform Resource Locator ဖြစ်သည်။ ရင်းမြစ်တစ်ခု၏ တည်နေရာနှင့် ၎င်းကို ရယူရန် နည်းလမ်းကို သတ်မှတ်သည်။
+Uniform Resource Locator။ resource တစ်ခုရှိရာနေရာနှင့် ထို resource ကို မည်သို့ ရယူရမည်ကို ဖော်ပြသည့် URI ၏ အမျိုးအစား။
 
 ## V
 
 **Virtual Network (VNet)**  
-Azure တွင် private networks များအတွက် အခြေခံအဆောက်အအုံဖြစ်ပြီး၊ isolation နှင့် segmentation ကို ပေးသည်။
+Azure တွင် ပုဂ္ဂလိက network များအတွက် အခြေခံတည်ဆောက်ပစ္စည်းဖြစ်ပြီး isolation နှင့် segmentation ကို ပေးစွမ်းသည်။
 
 **VS Code**  
-Visual Studio Code ဖြစ်သည်။ Azure နှင့် azd အတွက် အလွန်ကောင်းမွန်သော integration ရှိသည့် လူကြိုက်များသော code editor ဖြစ်သည်။
+Visual Studio Code။ Azure နှင့် azd ဖြင့် ကောင်းစွာ ပေါင်းစည်းနိုင်သည့် လူကြိုက်များသော code editor။
 
 ## W
 
 **Webhook**  
-CI/CD pipelines များတွင် အများအားဖြင့် အသုံးပြုသည့်၊ အထူးဖြစ်ရပ်များဖြင့် trigger လုပ်သည့် HTTP callback ဖြစ်သည်။
+သတ်မှတ်ထားသော events များဖြင့် triggered ဖြစ်သည့် HTTP callback တစ်ခုဖြစ်ကာ CI/CD pipeline များတွင် ခေတ်သုံးအားဖြင့် အသုံးပြုသည်။
 
 **What-if**  
-Deployment တစ်ခုမှ ပြုလုပ်မည့် ပြောင်းလဲမှုများကို အကောင်အထည်မဖော်မီ ကြိုတင်ပြသသည့် Azure ၏ feature ဖြစ်သည်။
+deployment တစ်ခုက ဘာပြောင်းလဲမည်နည်း ကို အကောင်အထည်မဖော်ဘဲ ပြသပေးသည့် Azure အင်္ဂါရပ်။
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language ဖြစ်သည်။ azure.yaml ကဲ့သို့သော configuration ဖိုင်များအတွက် လူနားလည်လွယ်သော data serialization စံသတ်မှတ်ချက်ဖြစ်သည်။
+YAML Ain't Markup Language။ azure.yaml ကဲ့သို့ configuration ဖိုင်များအတွက် အသုံးပြုသော လူဖတ်ရှုရလွယ်သော ဒေတာ serialization စံနှုန်း။
 
 ## Z
 
 **Zone**  
-Redundancy နှင့် high availability ကို ပေးသည့် Azure region အတွင်းရှိ physically separate locations များဖြစ်သည်။
+Azure region အတွင်းရှိ ရုပ်ပိုင်းစိတ်ဖြာထားသော တည်နေရာများဖြစ်ပြီး redundancy နှင့် high availability ကို ပံ့ပိုးပေးသည်။
 
 ---
 
-## အတိုကောက်များ
+## ပုံမှန် အသုံးပြုသော အတိုကောက်များ
 
-| အတိုကောက် | အပြည့်အစုံ | ဖော်ပြချက် |
+| အတိုကောက် | Full Form | ဖော်ပြချက် |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory | Identity နှင့် access management ဝန်ဆောင်မှု |
+| AAD | Azure Active Directory | မှတ်ပုံတင်နှင့် ဝင်ခွင့် စီမံခန့်ခွဲမှု ဝန်ဆောင်မှု |
 | ACR | Azure Container Registry | Container image registry ဝန်ဆောင်မှု |
 | AKS | Azure Kubernetes Service | Managed Kubernetes ဝန်ဆောင်မှု |
-| API | Application Programming Interface | Software တည်ဆောက်ရန်အတွက် protocols များ |
-| ARM | Azure Resource Manager | Azure ၏ deployment နှင့် management ဝန်ဆောင်မှု |
-| CDN | Content Delivery Network | Servers များဖြန့်ဝေထားသော network |
-| CI/CD | Continuous Integration/Continuous Deployment | Automated development practices |
-| CLI | Command Line Interface | Text-based user interface |
-| DNS | Domain Name System | Domain names များကို IP addresses သို့ ပြောင်းလဲသည့် စနစ် |
-| HTTPS | Hypertext Transfer Protocol Secure | HTTP ၏ ဘေးကင်းသော ဗားရှင်း |
-| IaC | Infrastructure as Code | Infrastructure ကို code ဖြင့် စီမံခန့်ခွဲခြင်း |
-|
+| API | Application Programming Interface | ဆော့ဖ်ဝဲ တည်ဆောက်ရာ protocol အစု |
+| ARM | Azure Resource Manager | Azure ၏ deployment နှင့် စီမံခန့်ခွဲရေး ဝန်ဆောင်မှု |
+| CDN | Content Delivery Network | ဖိုင်မျိုးစုံကို ဖြန့်ချိရန် ဝန်ဆောင်မှုကွန်ယက် |
+| CI/CD | Continuous Integration/Continuous Deployment | အလိုအလျောက် ဖွံ့ဖြိုးရေး လုပ်ထုံးလုပ်နည်းများ |
+| CLI | Command Line Interface | စာထဲအခြေခံ အသုံးပြုသူ အင်တာဖေ့စ် |
+| DNS | Domain Name System | domain နာမည်များကို IP လိပ်စာများသို့ ဘာသာပြန်တည်ဆောက်ရေးစနစ် |
+| HTTPS | Hypertext Transfer Protocol Secure | HTTP ၏ လုံခြုံသည့် ဗားရှင်း |
+| IaC | Infrastructure as Code | infrastructure ကို code ဖြင့် စီမံခြင်း |
+| JSON | JavaScript Object Notation | ဒေတာ အလဲအလှယ် ဖော်မတ် |
+| JWT | JSON Web Token | လုံခြုံစွာ အချက်အလက် ပို့ဆောင်ရန် token ဖော်မတ် |
+| KQL | Kusto Query Language | Azure ဒေတာ ဝန်ဆောင်မှုများအတွက် query ဘာသာစကား |
+| RBAC | Role-Based Access Control | အသုံးပြုသူ ရာထူးအပေါ် အခြေခံ၍ ဝင်ခွင့်ထိန်းချုပ်မှု |
+| REST | Representational State Transfer | web services များအတွက် architectural ပုံစံ |
+| SDK | Software Development Kit | ဖွံ့ဖြိုးရေး ကိရိယာစုစည်းမှု |
+| SLA | Service Level Agreement | ဝန်ဆောင်မှု ရရှိနိုင်မှု/စွမ်းဆောင်ရည် အပေါ် ကတိ |
+| SQL | Structured Query Language | relational databases များကို စီမံရန် ဘာသာစကား |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | 암호화 protocols |
+| URI | Uniform Resource Identifier | resource တစ်ခုကို သတ်မှတ်ပေးသည့် string |
+| URL | Uniform Resource Locator | resource ရှိရာနေရာကို ဖော်ပြသည့် URI ၏ အမျိုးအစား |
+| VM | Virtual Machine | ကွန်ပျူတာစနစ်တစ်ခု ကို ဧကရာဇ်ပုံစံ နဲ့ သရုပ်ဖော်ထားသော အရာ |
+| VNet | Virtual Network | Azure တွင် အသုံးပြုသော ပုဂ္ဂလိက network |
+| YAML | YAML Ain't Markup Language | ဒေတာ serialization စံနှုန်း |
 
 ---
 
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရ အရင်းအမြစ်အဖြစ် ရှုလို့ရပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+## Azure ဝန်ဆောင်မှု အမည် မြှုပ်နှံချက်များ
+
+| Common Name | Official Azure Service Name | azd Host Type |
+|-------------|------------------------------|---------------|
+| Web App | Azure App Service | `appservice` |
+| API App | Azure App Service | `appservice` |
+| Container App | Azure Container Apps | `containerapp` |
+| Function | Azure Functions | `function` |
+| Static Site | Azure Static Web Apps | `staticwebapp` |
+| Database | Azure Database for PostgreSQL | `postgres` |
+| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
+| Storage | Azure Storage Account | `storage` |
+| Cache | Azure Cache for Redis | `redis` |
+| Search | Azure Cognitive Search | `search` |
+| Messaging | Azure Service Bus | `servicebus` |
+
+---
+
+## ပတ်သက်ရာ အခြေအနေအလိုက် 용어များ
+
+### ဖွံ့ဖြိုးရေး 용어များ
+- **Hot Reload**: တိုးတက်ရေးအချိန်တွင် application ကို ပိတ်မထားပဲ အလိုအလျောက် အပ်ဒိတ်လုပ်ခြင်း
+- **Build Pipeline**: code များကို တည်ဆောက်၍ စမ်းသပ်ရန် အလိုအလျောက် လုပ်ငန်းစဉ်
+- **Deployment Slot**: App Service အတွင်းရှိ staging ပတ်ဝန်းကျင်
+- **Environment Parity**: development, staging, နှင့် production ပတ်ဝန်းကျင်များကို ဆင်တူရှိအောင် ထိန်းသိမ်းခြင်း
+
+### လုံခြုံရေး 용어များ
+- **Managed Identity**: အလိုအလျောက် credential စီမံခန့်ခွဲမှုကို ပေးသည့် Azure အင်္ဂါရပ်
+- **Key Vault**: secrets, keys, နှင့် certificates များအတွက် လုံခြုံသိမ်းဆည်းရေး
+- **RBAC**: Azure resources များအတွက် role-based ဝင်ရောက်ခွင့် ထိန်းချုပ်မှု
+- **Network Security Group**: network traffic ကို ထိန်းချုပ်ရန် virtual firewall
+
+### စောင့်ကြည့်ရေး 용어များ
+- **Telemetry**: အတိုင်းအတာများနှင့် ဒေတာများကို အလိုအလျှောက် စုဆောင်းခြင်း
+- **Application Performance Monitoring (APM)**: software အလုပ်ဆောင်မှုကို စောင့်ကြည့်ခြင်း
+- **Log Analytics**: log ဒေတာများကို စုဆောင်း၍ 分析 ပြုလုပ်ရန် ဝန်ဆောင်မှု
+- **Alert Rules**: မျှော်လင့်ချက်များ သို့မဟုတ် အခြေအနေများအပေါ် အလိုအလျောက် သတင်းပို့ခြင်း
+
+### တင်သွင်းမှု 용어များ
+- **Blue-Green Deployment**: downtime တဖြည်းဖြည်းလျော့ချသည့် deployment မျဉ်းစည်းမှု
+- **Canary Deployment**: အသုံးပြုသူ တစ်စိတ်တစ်ပိုင်းသို့ အစကြုံစောင့်ကြည့်ဖြင့် အလျော့အစား မိတ်ဆက်ခြင်း
+- **Rolling Update**: application instances များကို တစိတ်တစိတ် အစားထိုးသည့် နည်းလမ်း
+- **Rollback**: ယခင် application ဗားရှင်းသို့ ပြန်လှည့်ခြင်း
+
+---
+
+**အသုံးပြုရန် အကြံပြုချက်**: ဒီအဘိဓာန်ထဲမှ တစ်ခုခုကို မြန်မြန်ရှာဖွေရန် `Ctrl+F` ကို အသုံးပြုပါ။ 용어များကို လိုအပ်သည့်နေရာများတွင် ဆက်သွယ်ဖော်ပြထားပါသည်။
+
+---
+
+**Navigation**
+- **Previous Lesson**: [Cheat Sheet](cheat-sheet.md)
+- **Next Lesson**: [FAQ](faq.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+အသိပေးချက်:
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးပမ်းပါသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် တိကျမှုမရှိမှုများ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူရင်းစာတမ်းကို မူရင်းဘာသာဖြင့် အာဏာပိုင် ရင်းမြစ်အဖြစ် ယူဆသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှ ဖြစ်ပေါ်လာနိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မှားယွင်းစွာ နားလည်မှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

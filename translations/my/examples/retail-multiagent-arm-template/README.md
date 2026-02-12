@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-23T22:33:56+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "my"
-}
--->
 # လက်လီ Multi-Agent Solution - အခြေခံအဆောက်အအုံ Template
 
 **အခန်း ၅: ထုတ်လုပ် Deployment Package**

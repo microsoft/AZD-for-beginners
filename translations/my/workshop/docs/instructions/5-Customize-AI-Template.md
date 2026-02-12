@@ -1,49 +1,40 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-25T02:23:37+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "my"
-}
--->
-# 5. Template ကို Customize လုပ်ခြင်း
+# 5. တမ်းပလိတ်ကို စိတ်ကြိုက် ပြင်ဆင်ခြင်း
 
-!!! tip "ဒီ module အဆုံးသတ်မှာ သင်တတ်မြောက်မည်"
+!!! tip "ဤမော်ဒျူး၏ အဆုံးတွင် သင်မှာ အောက်ပါအရာများကို ပြုလုပ်နိုင်ပါမည်"
 
-    - [ ] Default AI Agent ရဲ့ အစွမ်းအင်များကို လေ့လာပြီး
-    - [ ] ကိုယ်ပိုင် index ဖြင့် AI Search ထည့်သွင်းပြီး
-    - [ ] Tracing metrics ကို ဖွင့်ပြီး အနုနည်းများကို ချင့်ချိန်ပြီး
-    - [ ] အကဲဖြတ်မှု run တစ်ခုကို အောင်မြင်စွာ လုပ်ဆောင်ပြီး
-    - [ ] Red-teaming scan တစ်ခုကို run လုပ်ပြီး
-    - [ ] **Lab 5: Customization Plan တစ်ခုကို တည်ဆောက်ပြီး** 
+    - [ ] မူရင်း AI Agent စွမ်းရည်များကို စူးစမ်းလေ့လာပြီး
+    - [ ] သင်၏ ကိုယ်ပိုင် index ဖြင့် AI ရှာဖွေရေးကို ထည့်သွင်းထားပြီး
+    - [ ] Tracing မက်ထရစ်များကို ဖွင့်လှစ် သုံးသပ်ထားပြီး
+    - [ ] အကဲဖြတ် ပြေးစစ်မှုကို အပြည့်အဝ လုပ်ဆောင်ထားပြီး
+    - [ ] red-teaming စစ်ဆေးမှုကို လုပ်ဆောင်ထားပြီး
+    - [ ] **Lab 5: စိတ်ကြိုက် ပြင်ဆင်မှု စီမံကိန်း တည်ဆောက်ထားသည်**
 
 ---
 
-## 5.1 AI Agent ရဲ့ အစွမ်းအင်များ
+## 5.1 AI Agent စွမ်းရည်များ
 
-!!! success "Lab 01 မှာ ဒီအပိုင်းကို ပြီးမြောက်ခဲ့ပါပြီ"
+!!! success "Lab 01 တွင် ဤအရာကို ပြီးမြောက်ခဲ့ပါသည်"
 
-- **File Search**: OpenAI ရဲ့ built-in file search ကို အသုံးပြု၍ knowledge ကို ရှာဖွေခြင်း
-- **Citations**: အဖြေများတွင် အရင်းအမြစ်ကို အလိုအလျောက် ဖော်ပြခြင်း
-- **Customizable Instructions**: Agent ရဲ့ အပြုအမူနှင့် ပုဂ္ဂိုလ်ရေးကို ပြောင်းလဲနိုင်ခြင်း
-- **Tool Integration**: Custom အစွမ်းအင်များအတွက် Extensible tool system
+- **File Search**: အသိပညာ ရယူခြင်းအတွက် OpenAI ထည့်သွင်းပေးထားသော ဖိုင်ရှာဖွေမှု
+- **Citations**: တုံ့ပြန်ချက်များတွင် အရင်းအမြစ်ကို အလိုအလျောက် ကိုးကားပေးခြင်း
+- **Customizable Instructions**: အေးဂျင့်၏ အပြုအမူနှင့် ပုဂ္ဂိုလ်ရေးကို ပြင်ဆင်နိုင်သော ညွှန်ကြားချက်များ
+- **Tool Integration**: စိတ်ကြိုက် စွမ်းရည်များအတွက် တိုးချဲ့နိုင်သော ကိရိယာ ပေါင်းစည်းမှု
 
 ---
 
-## 5.2 Knowledge Retrieval ရွေးချယ်မှုများ
+## 5.2 အသိပညာ ရယူနည်းများ
 
-!!! task "ဒီအပိုင်းကို ပြီးမြောက်ရန် ပြင်ဆင်ပြီး redeploy လုပ်ရန်လိုအပ်သည်"    
+!!! task "ဤကို ပြီးမြောက်ရန် ပြင်ဆင်ပြီး ပြန်ထုတ်ဖို့ လိုအပ်ပါသည်"    
     
     ```bash title=""
-    # Environment variables ကို သတ်မှတ်ပါ
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Data ကို upload လုပ်ပြီး index ကို ဖန်တီးပါ
+    # Upload data and create my index
 
     ```
 
@@ -51,22 +42,22 @@ CO_OP_TRANSLATOR_METADATA:
 
 **OpenAI File Search (Default):**
 
-- Azure AI Agent service ထဲမှာ built-in ဖြစ်သည်
-- Document ကို အလိုအလျောက် process လုပ်ပြီး index လုပ်ခြင်း
-- ထပ်မံ configuration လုပ်ရန် မလိုအပ်ပါ
+- Foundry Agents အတွက် ထည့်သွင်းပေးထားသည်
+- စာရွက်စာတမ်းများကို အလိုအလျောက် လုပ်ဆောင်၍ index မှတ်ပုံတင်ခြင်း
+- အပိုဆက်တင်ကွန်ဖင်ဖော်မေရိုင်း လိုအပ်မှု မရှိပါ
 
 **Azure AI Search (Optional):**
 
-- Semantic နှင့် vector search ကို ပေါင်းစပ်ထားသည်
-- Custom index ကို စီမံခန့်ခွဲနိုင်သည်
-- အဆင့်မြင့် search အစွမ်းအင်များ
-- `USE_AZURE_AI_SEARCH_SERVICE=true` လိုအပ်သည်
+- Semantic နှင့် Vector ရှာဖွေမှု ပေါင်းစပ်နိုင်မှု
+- index ကို စိတ်ကြိုက် စီမံခန့်ခွဲနိုင်ခြင်း
+- တိုးတက်သော ရှာဖွေရေး စွမ်းရည်များ
+- `USE_AZURE_AI_SEARCH_SERVICE=true` ဖြစ်ရန် လိုအပ်သည်
 
 ---
 
-## 5.3 [Tracing & Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Tracing နှင့် စောင့်ကြည့်ခြင်း](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "ဒီအပိုင်းကို ပြီးမြောက်ရန် ပြင်ဆင်ပြီး redeploy လုပ်ရန်လိုအပ်သည်"    
+!!! task "ဤကို ပြီးမြောက်ရန် ပြင်ဆင်ပြီး ပြန်ထုတ်ဖို့ လိုအပ်ပါသည်"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -75,38 +66,38 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Tracing:**
 
-- OpenTelemetry integration
-- Request/response tracking
-- Performance metrics
-- AI Foundry portal မှာ ရရှိနိုင်သည်
+- OpenTelemetry ပေါင်းစည်းမှု
+- တောင်းဆိုမှု/တုံ့ပြန်မှု လိုက်လံခြင်း
+- ဆောင်ရွက်မှု မက်ထရစ်များ
+- Microsoft Foundry ပေါ်တွင် ရနိုင်ပါသည်
 
 **Logging:**
 
-- Container Apps မှာ Application logs
-- Correlation IDs ဖြင့် structured logging
-- Real-time နှင့် historical log viewing
+- Container Apps များအတွင်း အက်ပလီကေးရှင်း မှတ်တမ်းများ
+- correlation ID များပါပြီး စနစ်တကျ မှတ်တမ်းတင်ခြင်း
+- အချိန်နောက်တရား နှင့် အတိတ် မှတ်တမ်း ကြည့်ရှုနိုင်ခြင်း
 
 ---
 
-## 5.4 [Agent Evaluation](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agent အကဲဖြတ်ခြင်း](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Local Evaluation:**
+**Local အကဲဖြတ်ခြင်း:**
 
-- Quality assessment အတွက် built-in evaluators
-- Custom evaluation scripts
-- Performance benchmarking
+- အရည်အသွေး အကဲဖြတ်ရန် ထည့်သွင်းထားသော အကဲဖြတ်စနစ်များ
+- စိတ်ကြိုက် အကဲဖြတ် စက်ရုပ်များ
+- ဆောင်ရွက်မှု စမ်းသပ်ခြင်း
 
-**Continuous Monitoring:**
+**ဆက်လက် စောင့်ကြည့်ခြင်း:**
 
-- Live interactions ကို အလိုအလျောက် အကဲဖြတ်ခြင်း
-- Quality metrics tracking
-- Performance regression detection
+- တိုက်ရိုက် လှုပ်ရှားမှုများကို အလိုအလျောက် အကဲဖြတ်ခြင်း
+- အရည်အသွေး မက်ထရစ်များကို လိုက်လံခြင်း
+- ဆောင်ရွက်မှု ကျဆင်းမှု ရှာဖွေရေး
 
-**CI/CD Integration:**
+**CI/CD ပေါင်းစည်းမှု:**
 
-- GitHub Actions workflow
-- Automated testing နှင့် evaluation
-- Statistical comparison testing
+- GitHub Actions အလုပ်စဉ်
+- အလိုအလျောက် စမ်းသပ်ခြင်းနှင့် အကဲဖြတ်ခြင်း
+- စာရင်းပညာဆိုင်ရာ နှိုင်းယှဉ်စမ်းသပ်မှု
 
 ---
 
@@ -114,89 +105,89 @@ CO_OP_TRANSLATOR_METADATA:
 
 **AI Red Teaming:**
 
-- Automated security scanning
-- AI systems အတွက် Risk assessment
-- အမျိုးမျိုးသော category များအတွက် Safety evaluation
+- အလိုအလျောက် လုံခြုံရေး စစ်ဆေးခြင်း
+- AI စနစ်များအတွက် အန္တရာယ် အကဲဖြတ်ခြင်း
+- အမျိုးအစား များစွာအလိုက် လုံခြုံရေး အကဲဖြတ်ခြင်း
 
 **Authentication:**
 
-- Azure services အတွက် Managed Identity
-- Optional Azure App Service authentication
-- Development အတွက် Basic auth fallback
+- Azure ဝန်ဆောင်မှုများအတွက် Managed Identity
+- ရွေးချယ်စရာ Azure App Service အတည်ပြုခြင်း
+- ဖွံ့ဖြိုးရေးအတွက် Basic auth fallback
 
-!!! quote "Lab အဆုံးမှာ သင်ရရှိထားမည်"
+!!! quote "ဤ lab အဆုံးတွင် သင်တွင် ရှိသင့်သည်"
+    - [ ] သင်၏ အခြေအနေ တောင်းဆိုချက်များကို သတ်မှတ်ထားပြီး
+    - [ ] ပတ်ဝန်းကျင် ရေစည်းများ (env variables) ကို စိတ်ကြိုက် ပြင်ဆင်ထားပြီး (config)
+    - [ ] အေးဂျင့် ညွှန်ကြားချက်များကို စိတ်ကြိုက် ပြင်ဆင်ထားပြီး (task)
+    - [ ] စိတ်ကြိုက် ပြင်ဆင်ထားသည့် တမ်းပလိတ်ကို တပ်ဆင်ထားပြီး (app)
+    - [ ] တပ်ဆင်ပြီးနောက် လုပ်ဆောင်ရန် လက်မဲ့တာများကို ပြီးမြောက်ထားပြီး (manual)
+    - [ ] စမ်းသပ် အကဲဖြတ်ကို အားဖြင့် လုပ်ဆောင်ထားသည်
 
-    - [ ] Scenario requirements ကို သတ်မှတ်ပြီး
-    - [ ] Env variables ကို customize လုပ်ပြီး (config)
-    - [ ] Agent instructions ကို customize လုပ်ပြီး (task)
-    - [ ] Customized template ကို deploy လုပ်ပြီး (app)
-    - [ ] Post-deployment tasks ကို ပြီးမြောက်ပြီး (manual)
-    - [ ] Test evaluation ကို run လုပ်ပြီး
-
-ဒီဥပမာက Enterprise retail use case အတွက် Template ကို customize လုပ်ခြင်းနှင့် Specialized agents နှစ်ခု၊ Model deployments များကို အသုံးပြုခြင်းကို ပြသထားသည်။
-
----
-
-## 5.6 ကိုယ်ပိုင်အတွက် Customize လုပ်ပါ!
-
-### 5.6.1 Scenario Requirements
-
-#### **Agent Deployments:** 
-
-   - Shopper Agent: Customer များကို Product ရှာဖွေခြင်းနှင့် နှိုင်းယှဉ်ခြင်းအတွက် အကူအညီပေးသည်
-   - Loyalty Agent: Customer rewards နှင့် promotions ကို စီမံခန့်ခွဲသည်
-
-#### **Model Deployments:**
-
-   - `gpt-4.1`: Primary chat model
-   - `o3`: Complex queries အတွက် Reasoning model
-   - `gpt-4.1-nano`: Simple interactions အတွက် Lightweight model
-   - `text-embedding-3-large`: Search အတွက် High-quality embeddings
-
-#### **Features:**
-
-   - Tracing နှင့် monitoring ကို enabled လုပ်ထားသည်
-   - Product catalog အတွက် AI Search
-   - Quality assurance အတွက် Evaluation framework
-   - Security validation အတွက် Red teaming
+ဤဥပမာသည် စီးပွားရေး မျိုးဆက်တင်ထားသည့် retail အသုံးအတွက် တမ်းပလိတ်ကို နှစ်ဦး အထူးပြု အေးဂျင့်များနှင့် မော်ဒယ် တပ်ဆင်မှု မျိုးစုံဖြင့် စိတ်ကြိုက်ပြင်ဆင်ခြင်းကို ဖော်ပြထားသည်။
 
 ---
 
-### 5.6.2 Scenario Implementation
+## 5.6 သင့်အတွက် စိတ်ကြိုက် ပြင်ဆင်ပါ!
 
-#### 5.6.2.1 Pre-Deployment Config
+### 5.6.1. အခြေအနေ တောင်းဆိုချက်များ
 
-Setup script (`setup-retail.sh`) ကို ဖန်တီးပါ
+#### **Agent တပ်ဆင်မှုများ:** 
+
+   - Shopper Agent: ဖောက်သည်များကို ကုန်ပစ္စည်းများကို ရှာဖွေရန်နှင့် နှိုင်းယှဉ်ရန် အကူအညီပေးသည်
+   - Loyalty Agent: ဖောက်သည် အကျိုးခံစားခွင့်များနှင့် ပရိုမိုးရှင်းများကို စီမံခန့်ခွဲသည်
+
+#### **Model တပ်ဆင်မှုများ:**
+
+   - `gpt-4.1`: အဓိက chat မော်ဒယ်
+   - `o3`: ကောက်ချက်ချရန် ရည်ရွယ်သော reasoning မော်ဒယ်
+   - `gpt-4.1-nano`: ရိုးရှင်းသော အပြန်အလှန်များအတွက် အလေးချိန်နည်း မော်ဒယ်
+   - `text-embedding-3-large`: ရှာဖွေမှုအတွက် အရည်အသွေးမြင့် embedding များ
+
+#### **ဖိချာများ:**
+
+   - Tracing နှင့် စောင့်ကြည့်ခြင်း ဖွင့်ထားသည်
+   - ကုန်ပစ္စည်း ကတ်တလော့အတွက် AI Search
+   - အရည်အသွေး အာမခံရေးအတွက် အကဲဖြတ် ခံနည်း
+   - လုံခြုံရေး အတည်ပြုချက်အတွက် red teaming
+
+---
+
+### 5.6.2 အခြေအနေ အကောင်အထည်ဖော်ခြင်း
+
+
+#### 5.6.2.1. တပ်ဆင်ခြင်းမတိုင်မီ ပြင်ဆင်မှု
+
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# ပတ်ဝန်းကျင်အမည်ကို သတ်မှတ်ပါ
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# ဒေသကို ပြင်ဆင်ပါ (မော်ဒယ်ရရှိနိုင်မှုအပေါ် မူတည်၍ ရွေးပါ)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# ရွေးချယ်စရာ ဝန်ဆောင်မှုများအားလုံးကို ဖွင့်ပါ
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# အဓိက စကားပြော မော်ဒယ်ကို ပြင်ဆင်ပါ (gpt-4.1 အနီးဆုံးဖြစ်သော gpt-4o ကို အသုံးပြုပါ)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# ရှာဖွေမှု တိုးတက်စေရန် embedding မော်ဒယ်ကို ပြင်ဆင်ပါ
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# အေးဂျင့်အမည်ကို သတ်မှတ်ပါ (ပထမ အေးဂျင့်ကို ဖန်တီးမည်)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# ရှာဖွေမှု အညွှန်းကို ပြင်ဆင်ပါ
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -205,9 +196,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2 Agent Instructions
+#### 5.6.2.2: Agent ညွှန်ကြားချက်များ
 
-`custom-agents/shopper-agent-instructions.md` ကို ဖန်တီးပါ:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -230,7 +221,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-`custom-agents/loyalty-agent-instructions.md` ကို ဖန်တီးပါ:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -255,9 +246,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3 Deployment Script
+#### 5.6.2.3: တပ်ဆင်ရေး စက်ရုပ်
 
-`deploy-retail.sh` ကို ဖန်တီးပါ:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -265,7 +256,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# လိုအပ်ချက်များကို အတည်ပြုပါ
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -277,12 +268,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# ပတ်ဝန်းကျင်ကို စီစဉ်တပ်ဆင်ပါ
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# ရွေးချယ်ထားသော ဒေသတွင် ကွိုတာကို စစ်ဆေးပါ
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +289,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# အခြေခံအဆောက်အအုံနှင့် အပလီကေးရှင်းကို တပ်ဆင်ပါ
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# တပ်ဆင်မှု၏ ထုတ်လွှင့်ချက်များကို ဖမ်းယူပါ
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# ဝဘ်အက်ပ်၏ URL ကို ရယူပါ
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -328,28 +319,28 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4 Post-Deployment Config
+#### 5.6.2.4: တပ်ဆင်ပြီးနောက် ပြင်ဆင်မှု
 
-`configure-retail-agents.sh` ကို ဖန်တီးပါ:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# တပ်ဆင်မှုဆိုင်ရာ အချက်အလက်များကို ရယူရန်
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# လက်ဖြင့် ဖွဲ့စည်းတပ်ဆင်ခြင်းအတွက် လမ်းညွှန်ချက်များ
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +365,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -385,20 +376,20 @@ echo "
 "
 ```
 
-### 5.6.3 Testing နှင့် Validation
+### 5.6.3: စမ်းသပ်ခြင်းနှင့် အတည်ပြုခြင်း
 
-`test-retail-deployment.sh` ကို ဖန်တီးပါ:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# ပတ်ဝန်းကျင် ပြောင်းလဲနိုင်သော အချက်များ သတ်မှတ်ထားကြောင်း စစ်ဆေးပါ
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# ဝက်ဘ်အက်ပလီကေးရှင်း ရရှိနိုင်မှုကို စမ်းသပ်ပါ
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +403,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# ပြင်ဆင်ထားပါက အကဲဖြတ်မှုကို ပြုလုပ်ပါ
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +418,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -436,38 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 ရလဒ်များ
+### 5.6.4 မျှော်လင့်ရနိုင်သော ထွက်လာမှုများ
 
-ဒီ implementation guide ကို လိုက်နာပြီးနောက် သင်ရရှိမည့်အရာများမှာ:
+After following this implementation guide, you will have:
 
-1. **Deployed Infrastructure:**
+1. **တပ်ဆင်ထားသော အခြေစိုက်အင်ဖရာစရပ်ချာ:**
 
-      - Model deployments ပါဝင်သော AI Foundry project
-      - Web application ကို host လုပ်ထားသော Container Apps
-      - Product catalog အတွက် AI Search service
-      - Monitoring အတွက် Application Insights
+      - Microsoft Foundry project နှင့် model တပ်ဆင်မှုများ
+      - Web application ကို ဟိုက်စတင်ထားသော Container Apps များ
+      - ကုန်ပစ္စည်း ကတ်တလော့အတွက် AI Search ဝန်ဆောင်မှု
+      - စောင့်ကြည့်ရန် Application Insights
 
-2. **Initial Agent:**
+2. **အစ အေးဂျင့်:**
 
-      - Shopper Agent ကို basic instructions ဖြင့် configure လုပ်ထားသည်
-      - File search အစွမ်းအင်ကို enabled လုပ်ထားသည်
-      - Tracing နှင့် monitoring ကို configure လုပ်ထားသည်
+      - အခြေခံ ညွှန်ကြားချက်များဖြင့် ဖွဲ့စည်းထားသော Shopper Agent
+      - ဖိုင်ရှာဖွေရေး စွမ်းရည် ဖွင့်ထားခြင်း
+      - Tracing နှင့် စောင့်ကြည့်ခြင်း စနစ်တကျ ဖွဲ့စည်းထားခြင်း
 
-3. **Customization အတွက် ပြင်ဆင်ထားသည်:**
+3. **စိတ်ကြိုက် ပြင်ဆင်နိုင်ရန် ပြင်ဆင်ထားပြီး:**
 
-      - Loyalty Agent ထည့်သွင်းရန် Framework
-      - Custom instruction templates
-      - Testing နှင့် validation scripts
-      - Monitoring နှင့် evaluation setup
+      - Loyalty Agent ထည့်ရန် ရှိသော ဖရိမ်ဝိတ်
+      - စိတ်ကြိုက် ညွှန်ကြားချက် ရူပဗေဒ များ
+      - စမ်းသပ်ခြင်းနှင့် အတည်ပြုခြင်း စက်ရုပ်များ
+      - စောင့်ကြည့်ခြင်းနှင့် အကဲဖြတ် စနစ်များ
 
-4. **Production Readiness:**
+4. **ထုတ်လုပ်ရေးအဆင်သင့်:**
 
-      - Red teaming ဖြင့် Security scanning
-      - Performance monitoring
-      - Quality evaluation framework
-      - Scalable architecture
+      - red teaming ဖြင့် လုံခြုံရေး စစ်ထုတ်ခြင်း
+      - ဆောင်ရွက်မှု စောင့်ကြည့်ခြင်း
+      - အရည်အသွေး အကဲဖြတ် ဖရိမ်ဝိတ်
+      - တိုးချဲ့နိုင်သော ဆောက်လုပ်ပုံ
 
-ဒီဥပမာက AZD template ကို Enterprise scenarios အတွက် Extension နှင့် Customization လုပ်နိုင်ပုံကို ပြသထားပြီး Security, Monitoring, နှင့် Scalability အတွက် Best practices များကို ထိန်းသိမ်းထားသည်။
+ဤဥပမာသည် AZD တမ်းပလိတ်ကို သီးသန့် စီးပွားရေး အခြေအနေများအတွက် ဘေးလုံခြုံရေး၊ စောင့်ကြည့်ခြင်းနှင့် တိုးချဲ့နိုင်မှု ဆိုင်ရာ အကောင်းဆုံး လက်တွေ့နည်းဗျူဟာများကို ထိန်းသိမ်းထားလျက် တိုးချဲ့ ပြင်ဆင်နိုင်ကြောင်း ပြသလိုက်သည်။
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+အသိပေးချက်:
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု Co-op Translator (https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်စေရေး ကြိုးစားသော်လည်း အလိုအလျှောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူလစာတမ်းကို မူလဘာသာဖြင့် ဖော်ပြထားသော မူရင်းကိုသာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူ့ဘာသာပြန် ဝန်ဆောင်မှုကို အသုံးပြုနိုင်ရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာနိုင်သည့် မနားလည်မှုများ သို့မဟုတ် မှားယွင်းဖော်ပြချက်များအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

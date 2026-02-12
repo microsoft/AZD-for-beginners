@@ -1,59 +1,50 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-23T21:48:31+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "uk"
-}
--->
-# AZD для початківців: План курсу та навчальна структура
+# AZD For Beginners: Course Outline & Learning Framework
 
-## Огляд курсу
+## Course Overview
 
-Опановуйте Azure Developer CLI (azd) через структуровані розділи, розроблені для поступового навчання. **Особливий акцент на розгортанні AI-додатків із інтеграцією Microsoft Foundry.**
+Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Microsoft Foundry integration.**
 
-### Чому цей курс важливий для сучасних розробників
+### Why This Course is Essential for Modern Developers
 
-На основі даних спільноти Microsoft Foundry у Discord, **45% розробників хочуть використовувати AZD для AI-навантажень**, але стикаються з труднощами:
-- Складні архітектури AI з багатьма сервісами
-- Найкращі практики розгортання AI у продакшн
-- Інтеграція та налаштування Azure AI сервісів
-- Оптимізація витрат для AI-навантажень
-- Вирішення специфічних проблем розгортання AI
+Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
+- Complex multi-service AI architectures
+- Production AI deployment best practices  
+- Azure AI service integration and configuration
+- Cost optimization for AI workloads
+- Troubleshooting AI-specific deployment issues
 
-### Основні навчальні цілі
+### Core Learning Objectives
 
-Після завершення цього структурованого курсу ви:
-- **Опануєте основи AZD**: Основні концепції, встановлення та налаштування
-- **Розгортатимете AI-додатки**: Використання AZD із сервісами Microsoft Foundry
-- **Реалізуєте інфраструктуру як код**: Управління ресурсами Azure за допомогою шаблонів Bicep
-- **Вирішуватимете проблеми розгортання**: Усунення поширених проблем і налагодження
-- **Оптимізуєте для продакшн**: Безпека, масштабування, моніторинг і управління витратами
-- **Створюватимете багатокомпонентні рішення**: Розгортання складних AI-архітектур
+By completing this structured course, you will:
+- **Master AZD Fundamentals**: Core concepts, installation, and configuration
+- **Deploy AI Applications**: Use AZD with Microsoft Foundry services
+- **Implement Infrastructure as Code**: Manage Azure resources with Bicep templates
+- **Troubleshoot Deployments**: Resolve common issues and debug problems
+- **Optimize for Production**: Security, scaling, monitoring, and cost management
+- **Build Multi-Agent Solutions**: Deploy complex AI architectures
 
-## 🎓 Навчальний досвід у форматі воркшопу
+## 🎓 Workshop Learning Experience
 
-### Гнучкі варіанти навчання
-Цей курс підтримує як **самостійне навчання**, так і **воркшопи з інструктором**, дозволяючи учасникам отримати практичний досвід роботи з AZD через інтерактивні вправи.
+### Flexible Learning Delivery Options
+This course is designed to support both **self-paced individual learning** and **facilitated workshop sessions**, enabling learners to get hands-on experience with AZD while developing practical skills through interactive exercises.
 
-#### 🚀 Режим самостійного навчання
-**Ідеально для індивідуальних розробників і безперервного навчання**
+#### 🚀 Self-Paced Learning Mode
+**Perfect for individual developers and continuous learning**
 
-**Особливості:**
-- **Інтерфейс у браузері**: Воркшоп на основі MkDocs доступний через будь-який веб-браузер
-- **Інтеграція з GitHub Codespaces**: Одним кліком створюється середовище розробки з попередньо налаштованими інструментами
-- **Інтерактивне середовище DevContainer**: Немає потреби в локальному налаштуванні — починайте кодувати одразу
-- **Відстеження прогресу**: Вбудовані контрольні точки та вправи для перевірки знань
-- **Підтримка спільноти**: Доступ до каналів Azure у Discord для запитань і співпраці
+**Features:**
+- **Browser-Based Interface**: Complete MkDocs-powered workshop accessible through any web browser
+- **GitHub Codespaces Integration**: One-click development environment with pre-configured tools
+- **Interactive DevContainer Environment**: No local setup required - start coding immediately
+- **Progress Tracking**: Built-in checkpoints and validation exercises
+- **Community Support**: Access to Azure Discord channels for questions and collaboration
 
-**Структура навчання:**
-- **Гнучкий графік**: Завершуйте розділи у зручний для вас час протягом днів або тижнів
-- **Система контрольних точок**: Перевіряйте знання перед переходом до складніших тем
-- **Бібліотека ресурсів**: Документація, приклади та посібники з усунення несправностей
-- **Розвиток портфоліо**: Створюйте проекти для професійного портфоліо
+**Learning Structure:**
+- **Flexible Timing**: Complete chapters at your own pace over days or weeks
+- **Checkpoint System**: Validate learning before advancing to complex topics
+- **Resource Library**: Comprehensive documentation, examples, and troubleshooting guides
+- **Portfolio Development**: Build deployable projects for professional portfolios
 
-**Початок роботи (самостійно):**
+**Getting Started (Self-Paced):**
 ```bash
 # Варіант 1: GitHub Codespaces (Рекомендовано)
 # Перейдіть до репозиторію та натисніть "Code" → "Create codespace on main"
@@ -64,447 +55,506 @@ cd azd-for-beginners/workshop
 # Дотримуйтесь інструкцій з налаштування у workshop/README.md
 ```
 
-#### 🏛️ Воркшопи з інструктором
-**Ідеально для корпоративного навчання, буткемпів та освітніх установ**
+#### 🏛️ Facilitated Workshop Sessions
+**Ideal for corporate training, bootcamps, and educational institutions**
 
-**Формати воркшопів:**
+**Workshop Format Options:**
 
-**📚 Інтеграція в академічні курси (8-12 тижнів)**
-- **Університетські програми**: Семестровий курс із щотижневими 2-годинними заняттями
-- **Формат буткемпу**: Інтенсивна програма на 3-5 днів із щоденними заняттями по 6-8 годин
-- **Корпоративне навчання**: Щомісячні сесії для команд із практичним виконанням проектів
-- **Оцінка знань**: Завдання, рецензії колег і фінальні проекти
+**📚 Academic Course Integration (8-12 weeks)**
+- **University Programs**: Semester-long course with weekly 2-hour sessions
+- **Bootcamp Format**: Intensive 3-5 day program with daily 6-8 hour sessions
+- **Corporate Training**: Monthly team sessions with practical project implementation
+- **Assessment Framework**: Graded assignments, peer reviews, and final projects
 
-**🚀 Інтенсивний воркшоп (1-3 дні)**
-- **День 1**: Основи + AI-розробка (Розділи 1-2) - 6 годин
-- **День 2**: Налаштування + Інфраструктура (Розділи 3-4) - 6 годин  
-- **День 3**: Розширені шаблони + Продакшн (Розділи 5-8) - 8 годин
-- **Після воркшопу**: Опціональне 2-тижневе наставництво для завершення проекту
+**🚀 Intensive Workshop (1-3 days)**
+- **Day 1**: Foundation + AI Development (Chapters 1-2) - 6 hours
+- **Day 2**: Configuration + Infrastructure (Chapters 3-4) - 6 hours  
+- **Day 3**: Advanced Patterns + Production (Chapters 5-8) - 8 hours
+- **Follow-up**: Optional 2-week mentorship for project completion
 
-**⚡ Виконавчий брифінг (4-6 годин)**
-- **Стратегічний огляд**: Цінність AZD і вплив на бізнес (1 година)
-- **Практична демонстрація**: Розгортання AI-додатку від початку до кінця (2 години)
-- **Огляд архітектури**: Шаблони для підприємств і управління (1 година)
-- **Планування впровадження**: Стратегія прийняття в організації (1-2 години)
+**⚡ Executive Briefing (4-6 hours)**
+- **Strategic Overview**: AZD value proposition and business impact (1 hour)
+- **Hands-On Demo**: Deploy AI application end-to-end (2 hours)
+- **Architecture Review**: Enterprise patterns and governance (1 hour)
+- **Implementation Planning**: Organizational adoption strategy (1-2 hours)
 
-#### 🛠️ Методологія навчання у воркшопі
-**Підхід Discovery → Deployment → Customization для практичного розвитку навичок**
+#### 🛠️ Workshop Learning Methodology
+**Discovery → Deployment → Customization approach for hands-on skill development**
 
-**Фаза 1: Discovery (45 хвилин)**
-- **Огляд шаблонів**: Оцінка шаблонів і сервісів Azure AI Foundry
-- **Аналіз архітектури**: Розуміння багатокомпонентних шаблонів і стратегій розгортання
-- **Оцінка вимог**: Визначення потреб і обмежень організації
-- **Налаштування середовища**: Конфігурація середовища розробки та ресурсів Azure
+**Phase 1: Discovery (45 minutes)**
+- **Template Exploration**: Evaluate Microsoft Foundry templates and services
+- **Architecture Analysis**: Understand multi-agent patterns and deployment strategies
+- **Requirement Assessment**: Identify organizational needs and constraints
+- **Environment Setup**: Configure development environment and Azure resources
 
-**Фаза 2: Deployment (2 години)**
-- **Кероване впровадження**: Покрокове розгортання AI-додатків за допомогою AZD
-- **Налаштування сервісів**: Конфігурація Azure AI сервісів, кінцевих точок і автентифікації
-- **Реалізація безпеки**: Застосування шаблонів безпеки для підприємств і контролю доступу
-- **Тестування**: Перевірка розгортання та усунення поширених проблем
+**Phase 2: Deployment (2 hours)**
+- **Guided Implementation**: Step-by-step deployment of AI applications with AZD
+- **Service Configuration**: Configure Azure AI services, endpoints, and authentication
+- **Security Implementation**: Apply enterprise security patterns and access controls
+- **Validation Testing**: Verify deployments and troubleshoot common issues
 
-**Фаза 3: Customization (45 хвилин)**
-- **Модифікація додатків**: Адаптація шаблонів для конкретних випадків використання
-- **Оптимізація для продакшн**: Реалізація моніторингу, управління витратами та масштабування
-- **Розширені шаблони**: Дослідження координації багатокомпонентних рішень і складних архітектур
-- **Планування наступних кроків**: Визначення шляху для подальшого розвитку навичок
+**Phase 3: Customization (45 minutes)**
+- **Application Modification**: Adapt templates for specific use cases and requirements
+- **Production Optimization**: Implement monitoring, cost management, and scaling strategies
+- **Advanced Patterns**: Explore multi-agent coordination and complex architectures
+- **Next Steps Planning**: Define learning path for continued skill development
 
-#### 🎯 Результати навчання у воркшопі
-**Вимірювані навички, отримані через практику**
+#### 🎯 Workshop Learning Outcomes
+**Measurable skills developed through hands-on practice**
 
-**Технічні компетенції:**
-- **Розгортання AI-додатків у продакшн**: Успішне розгортання та налаштування AI-рішень
-- **Майстерність у інфраструктурі як коді**: Створення та управління шаблонами Bicep
-- **Багатокомпонентна архітектура**: Реалізація координованих AI-рішень
-- **Готовність до продакшн**: Застосування шаблонів безпеки, моніторингу та управління
-- **Експертиза у вирішенні проблем**: Самостійне усунення проблем розгортання та налаштування
+**Technical Competencies:**
+- **Deploy Production AI Applications**: Successfully deploy and configure AI-powered solutions
+- **Infrastructure as Code Mastery**: Create and manage custom Bicep templates
+- **Multi-Agent Architecture**: Implement coordinated AI agent solutions
+- **Production Readiness**: Apply security, monitoring, and governance patterns
+- **Troubleshooting Expertise**: Independently resolve deployment and configuration issues
 
-**Професійні навички:**
-- **Лідерство у проектах**: Керівництво технічними командами у хмарних ініціативах
-- **Дизайн архітектури**: Проектування масштабованих, економічно ефективних рішень Azure
-- **Передача знань**: Навчання та наставництво колег у найкращих практиках AZD
-- **Стратегічне планування**: Вплив на стратегії прийняття хмарних технологій в організації
+**Professional Skills:**
+- **Project Leadership**: Lead technical teams in cloud deployment initiatives
+- **Architecture Design**: Design scalable, cost-effective Azure solutions
+- **Knowledge Transfer**: Train and mentor colleagues in AZD best practices
+- **Strategic Planning**: Influence organizational cloud adoption strategies
 
-#### 📋 Ресурси та матеріали для воркшопу
-**Комплексний набір інструментів для інструкторів і учасників**
+#### 📋 Workshop Resources and Materials
+**Comprehensive toolkit for facilitators and learners**
 
-**Для інструкторів:**
-- **Посібник інструктора**: [Посібник з проведення воркшопу](workshop/docs/instructor-guide.md) - Поради з планування та проведення сесій
-- **Матеріали для презентацій**: Слайди, діаграми архітектури та сценарії демонстрацій
-- **Інструменти оцінки**: Практичні вправи, перевірка знань і рубрики оцінювання
-- **Технічне налаштування**: Конфігурація середовища, посібники з усунення несправностей і резервні плани
+**For Facilitators:**
+- **Instructor Guide**: [Workshop Overview](workshop/README.md) - Session planning and delivery guidance
+- **Presentation Materials**: Slide decks, architecture diagrams, and demo scripts
+- **Assessment Tools**: Practical exercises, knowledge checks, and evaluation rubrics
+- **Technical Setup**: Environment configuration, troubleshooting guides, and backup plans
 
-**Для учасників:**
-- **Інтерактивне середовище воркшопу**: [Матеріали воркшопу](workshop/README.md) - Платформа для навчання у браузері
-- **Покрокові інструкції**: [Керовані вправи](../../workshop/docs/instructions) - Детальні інструкції з реалізації  
-- **Довідкова документація**: [Лабораторія AI Workshop](docs/ai-foundry/ai-workshop-lab.md) - Глибокі дослідження, орієнтовані на AI
-- **Ресурси спільноти**: Канали Azure у Discord, обговорення на GitHub і підтримка експертів
+**For Learners:**
+- **Interactive Workshop Environment**: [Workshop Materials](workshop/README.md) - Browser-based learning platform
+- **Step-by-Step Instructions**: [Guided Exercises](../../workshop/docs/instructions) - Detailed implementation walkthroughs  
+- **Reference Documentation**: [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - AI-focused deep dives
+- **Community Resources**: Azure Discord channels, GitHub discussions, and expert support
 
-#### 🏢 Реалізація воркшопів для підприємств
-**Стратегії впровадження та навчання в організаціях**
+#### 🏢 Enterprise Workshop Implementation
+**Organizational deployment and training strategies**
 
-**Програми корпоративного навчання:**
-- **Введення для розробників**: Орієнтація нових співробітників із основами AZD (2-4 тижні)
-- **Підвищення кваліфікації команди**: Щоквартальні воркшопи для існуючих команд розробників (1-2 дні)
-- **Огляд архітектури**: Щомісячні сесії для старших інженерів і архітекторів (4 години)
-- **Брифінги для керівництва**: Воркшопи для технічних керівників (пів дня)
+**Corporate Training Programs:**
+- **Developer Onboarding**: New hire orientation with AZD fundamentals (2-4 weeks)
+- **Team Upskilling**: Quarterly workshops for existing development teams (1-2 days)
+- **Architecture Review**: Monthly sessions for senior engineers and architects (4 hours)
+- **Leadership Briefings**: Executive workshops for technical decision makers (half-day)
 
-**Підтримка впровадження:**
-- **Індивідуальний дизайн воркшопу**: Контент, адаптований до потреб організації
-- **Управління пілотними програмами**: Структуроване впровадження з метриками успіху та зворотним зв’язком  
-- **Наставництво**: Підтримка після воркшопу для реалізації проектів
-- **Розвиток спільноти**: Внутрішні спільноти розробників Azure AI та обмін знаннями
+**Implementation Support:**
+- **Custom Workshop Design**: Tailored content for specific organizational needs
+- **Pilot Program Management**: Structured rollout with success metrics and feedback loops  
+- **Ongoing Mentorship**: Post-workshop support for project implementation
+- **Community Building**: Internal Azure AI developer communities and knowledge sharing
 
-**Метрики успіху:**
-- **Засвоєння навичок**: Оцінка до/після для вимірювання зростання технічної компетенції
-- **Успішність розгортання**: Відсоток учасників, які успішно розгорнули додатки у продакшн
-- **Час до продуктивності**: Скорочення часу на адаптацію для нових проектів Azure AI
-- **Збереження знань**: Оцінка через 3-6 місяців після воркшопу
+**Success Metrics:**
+- **Skill Acquisition**: Pre/post assessments measuring technical competency growth
+- **Deployment Success**: Percentage of participants successfully deploying production applications
+- **Time to Productivity**: Reduced onboarding time for new Azure AI projects
+- **Knowledge Retention**: Follow-up assessments 3-6 months post-workshop
 
-## Структура навчання з 8 розділів
+## 8-Chapter Learning Structure
 
-### Розділ 1: Основи та швидкий старт (30-45 хвилин) 🌱
-**Передумови**: Підписка на Azure, базові знання командного рядка  
-**Складність**: ⭐
+### Chapter 1: Foundation & Quick Start (30-45 minutes) 🌱
+**Prerequisites**: Azure subscription, basic command line knowledge  
+**Complexity**: ⭐
 
-#### Що ви дізнаєтесь
-- Розуміння основ Azure Developer CLI
-- Встановлення AZD на вашу платформу  
-- Ваше перше успішне розгортання
-- Основні концепції та термінологія
+#### What You'll Learn
+- Understanding Azure Developer CLI fundamentals
+- Installing AZD on your platform  
+- Your first successful deployment
+- Core concepts and terminology
 
-#### Навчальні ресурси
-- [Основи AZD](docs/getting-started/azd-basics.md) - Основні концепції
-- [Встановлення та налаштування](docs/getting-started/installation.md) - Посібники для різних платформ
-- [Ваш перший проект](docs/getting-started/first-project.md) - Практичний посібник
-- [Шпаргалка команд](resources/cheat-sheet.md) - Швидкий довідник
+#### Learning Resources
+- [AZD Basics](docs/getting-started/azd-basics.md) - Core concepts
+- [Installation & Setup](docs/getting-started/installation.md) - Platform-specific guides
+- [Your First Project](docs/getting-started/first-project.md) - Hands-on tutorial
+- [Command Cheat Sheet](resources/cheat-sheet.md) - Quick reference
 
-#### Практичний результат
-Успішно розгорніть простий веб-додаток в Azure за допомогою AZD
+#### Practical Outcome
+Successfully deploy a simple web application to Azure using AZD
 
 ---
 
-### Розділ 2: Розробка з акцентом на AI (1-2 години) 🤖
-**Передумови**: Завершений Розділ 1  
+### Chapter 2: AI-First Development (1-2 hours) 🤖
+**Prerequisites**: Chapter 1 completed  
+**Complexity**: ⭐⭐
+
+#### What You'll Learn
+- Microsoft Foundry integration with AZD
+- Deploying AI-powered applications
+- Understanding AI service configurations
+- RAG (Retrieval-Augmented Generation) patterns
+
+#### Learning Resources
+- [Microsoft Foundry Integration](docs/microsoft-foundry/microsoft-foundry-integration.md)
+- [AI Model Deployment](docs/microsoft-foundry/ai-model-deployment.md)
+- [AI Workshop Lab](docs/microsoft-foundry/ai-workshop-lab.md) - **НОВЕ**: Comprehensive 2-3 hour hands-on lab
+- [Interactive Workshop Guide](workshop/README.md) - **НОВЕ**: Browser-based workshop with MkDocs preview
+- [Microsoft Foundry Templates](README.md#featured-microsoft-foundry-templates)
+- [Workshop Instructions](../../workshop/docs/instructions) - **НОВЕ**: Step-by-step guided exercises
+
+#### Practical Outcome
+Deploy and configure an AI-powered chat application with RAG capabilities
+
+#### Workshop Learning Path (Optional Enhancement)
+**НОВИЙ інтерактивний досвід**: [Complete Workshop Guide](workshop/README.md)
+1. **Discovery** (30 mins): Template selection and evaluation
+2. **Deployment** (45 mins): Deploy and validate AI template functionality  
+3. **Deconstruction** (30 mins): Understand template architecture and components
+4. **Configuration** (30 mins): Customize settings and parameters
+5. **Customization** (45 mins): Modify and iterate to make it yours
+6. **Teardown** (15 mins): Clean up resources and understand lifecycle
+7. **Wrap-up** (15 mins): Next steps and advanced learning paths
+
+---
+
+### Chapter 3: Configuration & Authentication (45-60 minutes) ⚙️
+**Prerequisites**: Chapter 1 completed  
+**Complexity**: ⭐⭐
+
+#### What You'll Learn
+- Environment configuration and management
+- Authentication and security best practices
+- Resource naming and organization
+- Multi-environment deployments
+
+#### Learning Resources
+- [Configuration Guide](docs/getting-started/configuration.md) - Environment setup
+- [Authentication & Security Patterns](docs/getting-started/authsecurity.md) - Managed identity and Key Vault integration
+- Multi-environment examples
+
+#### Practical Outcome
+Manage multiple environments with proper authentication and security
+
+---
+
+### Chapter 4: Infrastructure as Code & Deployment (1-1.5 hours) 🏗️
+**Prerequisites**: Chapters 1-3 completed  
+**Complexity**: ⭐⭐⭐
+
+#### What You'll Learn
+- Advanced deployment patterns
+- Infrastructure as Code with Bicep
+- Resource provisioning strategies
+- Custom template creation
+
+- Containerized application deployment with Azure Container Apps and AZD
+
+#### Learning Resources
+- [Deployment Guide](docs/deployment/deployment-guide.md) - Complete workflows
+- [Provisioning Resources](docs/deployment/provisioning.md) - Resource management
+- Container and microservices examples
+- [Container App Examples](examples/container-app/README.md) - Quick start, production, and advanced deployment patterns
+
+#### Practical Outcome
+Deploy complex multi-service applications using custom infrastructure templates
+
+---
+
+### Chapter 5: Multi-Agent AI Solutions (2-3 hours) 🤖🤖
+**Prerequisites**: Chapters 1-2 completed  
+**Complexity**: ⭐⭐⭐⭐
+
+#### What You'll Learn
+- Multi-agent architecture patterns
+- Agent orchestration and coordination
+- Production-ready AI deployments
+- Customer and Inventory agent implementations
+
+- Integrating containerized microservices as part of agent-based solutions
+
+#### Learning Resources
+- [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
+- [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click deployment
+- Multi-agent coordination patterns
+- [Microservices Architecture Example](../../examples/container-app/microservices) - Service-to-service communication, async messaging, and production deployment
+
+#### Practical Outcome
+Deploy and manage a production-ready multi-agent AI solution
+
+---
+
+### Chapter 6: Pre-Deployment Validation & Planning (1 hour) 🔍
+**Prerequisites**: Chapter 4 completed  
+**Complexity**: ⭐⭐
+
+#### What You'll Learn
+- Capacity planning and resource validation
+- SKU selection strategies
+- Pre-flight checks and automation
+- Cost optimization planning
+
+#### Learning Resources
+- [Capacity Planning](docs/pre-deployment/capacity-planning.md) - Resource validation
+- [SKU Selection](docs/pre-deployment/sku-selection.md) - Cost-effective choices
+- [Pre-flight Checks](docs/pre-deployment/preflight-checks.md) - Automated scripts
+- [Application Insights Integration](docs/pre-deployment/application-insights.md) - Monitoring and observability
+- [Multi-Agent Coordination Patterns](docs/pre-deployment/coordination-patterns.md) - Agent orchestration strategies
+
+#### Practical Outcome
+Validate and optimize deployments before execution
+
+---
+
+### Розділ 7: Усунення несправностей та налагодження (1-1.5 години) 🔧
+**Передумови**: Будь-який розділ з розгортання завершено  
 **Складність**: ⭐⭐
 
-#### Що ви дізнаєтесь
-- Інтеграція Microsoft Foundry з AZD
-- Розгортання AI-додатків
-- Розуміння налаштувань AI-сервісів
-- Шаблони RAG (Retrieval-Augmented Generation)
-
-#### Навчальні ресурси
-- [Інтеграція Microsoft Foundry](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [Розгортання AI-моделей](docs/microsoft-foundry/ai-model-deployment.md)
-- [Лабораторія AI Workshop](docs/microsoft-foundry/ai-workshop-lab.md) - **НОВЕ**: Комплексна лабораторія на 2-3 години
-- [Інтерактивний посібник воркшопу](workshop/README.md) - **НОВЕ**: Воркшоп у браузері з попереднім переглядом MkDocs
-- [Шаблони Microsoft Foundry](README.md#featured-microsoft-foundry-templates)
-- [Інструкції до воркшопу](../../workshop/docs/instructions) - **НОВЕ**: Покрокові вправи
-
-#### Практичний результат
-Розгорніть і налаштуйте AI-додаток для чату з можливостями RAG
-
-#### Навчальний шлях воркшопу (опціональне розширення)
-**НОВИЙ інтерактивний досвід**: [Повний посібник воркшопу](workshop/README.md)
-1. **Discovery** (30 хв): Вибір і оцінка шаблонів
-2. **Deployment** (45 хв): Розгортання та перевірка функціональності AI-шаблону  
-3. **Deconstruction** (30 хв): Розуміння архітектури та компонентів шаблону
-4. **Configuration** (30 хв): Налаштування параметрів
-5. **Customization** (45 хв): Модифікація та ітерація
-6. **Teardown** (15 хв): Очищення ресурсів і розуміння життєвого циклу
-7. **Wrap-up** (15 хв): Наступні кроки та розширені шляхи навчання
-
----
-
-### Розділ 3: Налаштування та автентифікація (45-60 хвилин) ⚙️
-**Передумови**: Завершений Розділ 1  
-**Складність**: ⭐⭐
-
-#### Що ви дізнаєтесь
-- Налаштування та управління середовищем
-- Найкращі практики автентифікації та безпеки
-- Іменування ресурсів та організація
-- Розгортання в кількох середовищах
-
-#### Навчальні ресурси
-- [Посібник із налаштування](docs/getting-started/configuration.md) - Налаштування середовища
-- [Шаблони автентифікації та безпеки](docs/getting-started/authsecurity.md) - Інтеграція з Managed Identity та Key Vault
-- Приклади для кількох середовищ
-
-#### Практичний результат
-Управляйте кількома середовищами з належною автентифікацією та безпекою
-
----
-
-### Розділ 4: Інфраструктура як код та розгортання (1-1.5 години) 🏗️
-**Передумови**: Завершені Розділи 1-3  
-**Складність**: ⭐⭐⭐
-
-#### Що ви дізнаєтесь
-- Розширені шаблони розгортання
-- Інфраструктура як код із Bicep
-- Стратегії забезпечення ресурсів
-- Створення власних шаблонів
-
-- Розгортання контейнеризованих додатків за допомогою Azure Container Apps та AZD
-
-#### Навчальні ресурси
-- [
-Перевірка та оптимізація розгортань перед виконанням
-
----
-
-### Розділ 7: Виправлення помилок та налагодження (1-1.5 години) 🔧
-**Передумови**: Завершений будь-який розділ про розгортання  
-**Складність**: ⭐⭐
-
-#### Що ви дізнаєтесь
-- Систематичні підходи до налагодження
-- Поширені проблеми та їх вирішення
-- Виправлення помилок, специфічних для AI
+#### Чого ви навчитеся
+- Системні підходи до налагодження
+- Поширені проблеми та рішення
+- Усунення несправностей, специфічних для ШІ
 - Оптимізація продуктивності
 
-#### Навчальні ресурси
-- [Поширені проблеми](docs/troubleshooting/common-issues.md) - FAQ та рішення
-- [Посібник з налагодження](docs/troubleshooting/debugging.md) - Покрокові стратегії
-- [Виправлення помилок AI](docs/troubleshooting/ai-troubleshooting.md) - Проблеми AI-сервісів
+#### Ресурси для навчання
+- [Common Issues](docs/troubleshooting/common-issues.md) - FAQ та рішення
+- [Debugging Guide](docs/troubleshooting/debugging.md) - Покрокові стратегії
+- [AI-Specific Troubleshooting](docs/troubleshooting/ai-troubleshooting.md) - Проблеми сервісів ШІ
 
 #### Практичний результат
-Самостійна діагностика та вирішення поширених проблем із розгортанням
+Самостійно діагностувати та вирішувати поширені проблеми при розгортанні
 
 ---
 
-### Розділ 8: Виробничі та корпоративні шаблони (2-3 години) 🏢
-**Передумови**: Завершені розділи 1-4  
+### Розділ 8: Продукційні та корпоративні патерни (2-3 години) 🏢
+**Передумови**: Розділи 1-4 завершено  
 **Складність**: ⭐⭐⭐⭐
 
-#### Що ви дізнаєтесь
-- Стратегії розгортання у виробничому середовищі
-- Корпоративні шаблони безпеки
+#### Чого ви навчитеся
+- Стратегії продукційного розгортання
+- Патерни безпеки для підприємств
 - Моніторинг та оптимізація витрат
 - Масштабованість та управління
 
-- Найкращі практики для розгортання контейнерних додатків у виробничому середовищі (безпека, моніторинг, витрати, CI/CD)
+- Найкращі практики для розгортання контейнерних додатків у продакшні (безпека, моніторинг, витрати, CI/CD)
 
-#### Навчальні ресурси
-- [Найкращі практики AI у виробництві](docs/microsoft-foundry/production-ai-practices.md) - Корпоративні шаблони
+#### Ресурси для навчання
+- [Production AI Best Practices](docs/microsoft-foundry/production-ai-practices.md) - Корпоративні патерни
 - Приклади мікросервісів та корпоративних рішень
 - Фреймворки моніторингу та управління
-- [Приклад архітектури мікросервісів](../../examples/container-app/microservices) - Розгортання Blue-green/Canary, розподілене трасування та оптимізація витрат
+- [Microservices Architecture Example](../../examples/container-app/microservices) - Blue-green/канарне розгортання, розподілене трасування та оптимізація витрат
 
 #### Практичний результат
-Розгортання додатків, готових до використання у виробничому середовищі, з повними можливостями
+Розгорнути готові до підприємства додатки з повними продукційними можливостями
 
 ---
 
 ## Прогрес навчання та складність
 
-### Прогресивне нарощування навичок
+### Поетапне нарощування навичок
 
-- **🌱 Початківці**: Почніть з Розділу 1 (Основи) → Розділ 2 (Розробка AI)
-- **🔧 Середній рівень**: Розділи 3-4 (Конфігурація та інфраструктура) → Розділ 6 (Перевірка)
-- **🚀 Просунутий рівень**: Розділ 5 (Рішення з багатьма агентами) → Розділ 7 (Виправлення помилок)
-- **🏢 Корпоративний рівень**: Завершіть усі розділи, зосередьтеся на Розділі 8 (Шаблони для виробництва)
+- **🌱 Початківці**: Почніть з Розділу 1 (Основи) → Розділ 2 (Розробка ШІ)
+- **🔧 Середній рівень**: Розділи 3-4 (Конфігурація & Інфраструктура) → Розділ 6 (Валідація)
+- **🚀 Просунутий**: Розділ 5 (Багатоагентні рішення) → Розділ 7 (Усунення несправностей)
+- **🏢 Корпоративний**: Завершити всі розділи, зосередитися на Розділі 8 (Продукційні патерни)
 
-- **Шлях контейнерних додатків**: Розділи 4 (Розгортання контейнерів), 5 (Інтеграція мікросервісів), 8 (Найкращі практики для виробництва)
+- **Шлях для контейнерних додатків**: Розділи 4 (Контейнеризоване розгортання), 5 (Інтеграція мікросервісів), 8 (Кращі практики для продакшну)
 
 ### Індикатори складності
 
-- **⭐ Базовий рівень**: Одиничні концепції, навчальні посібники, 30-60 хвилин
-- **⭐⭐ Середній рівень**: Кілька концепцій, практичні завдання, 1-2 години  
-- **⭐⭐⭐ Просунутий рівень**: Складні архітектури, індивідуальні рішення, 1-3 години
-- **⭐⭐⭐⭐ Експертний рівень**: Виробничі системи, корпоративні шаблони, 2-4 години
+- **⭐ Базовий**: Одна концепція, керовані навчальні матеріали, 30-60 хвилин
+- **⭐⭐ Середній**: Декілька концепцій, практика, 1-2 години  
+- **⭐⭐⭐ Просунутий**: Складні архітектури, індивідуальні рішення, 1-3 години
+- **⭐⭐⭐⭐ Експерт**: Продукційні системи, корпоративні патерни, 2-4 години
 
-### Гнучкі навчальні шляхи
+### Гнучкі шляхи навчання
 
-#### 🎯 Швидкий шлях для AI-розробників (4-6 годин)
-1. **Розділ 1**: Основи та швидкий старт (45 хвилин)
-2. **Розділ 2**: Розробка з фокусом на AI (2 години)  
-3. **Розділ 5**: Рішення з багатьма агентами AI (3 години)
-4. **Розділ 8**: Найкращі практики AI у виробництві (1 година)
+#### 🎯 Швидкий трек для розробника ШІ (4-6 годин)
+1. **Розділ 1**: Основи та швидкий старт (45 хв)
+2. **Розділ 2**: Розробка з фокусом на ШІ (2 години)  
+3. **Розділ 5**: Багатоагентні ШІ-рішення (3 години)
+4. **Розділ 8**: Кращі практики для продукційного ШІ (1 година)
 
 #### 🛠️ Шлях спеціаліста з інфраструктури (5-7 годин)
-1. **Розділ 1**: Основи та швидкий старт (45 хвилин)
+1. **Розділ 1**: Основи та швидкий старт (45 хв)
 2. **Розділ 3**: Конфігурація та автентифікація (1 година)
 3. **Розділ 4**: Інфраструктура як код та розгортання (1.5 години)
-4. **Розділ 6**: Перевірка перед розгортанням та планування (1 година)
-5. **Розділ 7**: Виправлення помилок та налагодження (1.5 години)
-6. **Розділ 8**: Виробничі та корпоративні шаблони (2 години)
+4. **Розділ 6**: Попередня валідація та планування перед розгортанням (1 година)
+5. **Розділ 7**: Усунення несправностей і налагодження (1.5 години)
+6. **Розділ 8**: Продукційні та корпоративні патерни (2 години)
 
-#### 🎓 Повний навчальний шлях (8-12 годин)
-Послідовне завершення всіх 8 розділів із практичними завданнями та перевіркою
+#### 🎓 Повний шлях навчання (8-12 годин)
+Послідовне завершення всіх 8 розділів з практичними вправами та валідацією
 
-## Рамка завершення курсу
+## Структура завершення курсу
 
-### Перевірка знань
-- **Контрольні точки розділів**: Практичні завдання з вимірюваними результатами
-- **Практична перевірка**: Розгортання робочих рішень для кожного розділу
+### Валідація знань
+- **Контрольні точки розділів**: Практичні вправи з вимірюваними результатами
+- **Практична перевірка**: Розгорніть працездатні рішення для кожного розділу
 - **Відстеження прогресу**: Візуальні індикатори та значки завершення
-- **Перевірка спільноти**: Обмін досвідом у Discord-каналах Azure
+- **Валідація спільноти**: Діліться досвідом у каналах Azure Discord
 
-### Оцінка результатів навчання
+### Оцінювання результатів навчання
 
-#### Завершення розділів 1-2 (Основи + AI)
+#### Завершення розділів 1-2 (Основи + ШІ)
 - ✅ Розгорнути базовий веб-додаток за допомогою AZD
-- ✅ Розгорнути чат-додаток на основі AI з RAG
-- ✅ Зрозуміти основні концепції AZD та інтеграцію AI
+- ✅ Розгорнути чат-додаток на базі ШІ з RAG
+- ✅ Зрозуміти основні концепції AZD та інтеграцію ШІ
 
 #### Завершення розділів 3-4 (Конфігурація + Інфраструктура)  
-- ✅ Управляти розгортанням у кількох середовищах
-- ✅ Створити власні шаблони інфраструктури Bicep
-- ✅ Реалізувати безпечні шаблони автентифікації
+- ✅ Керувати розгортаннями в кількох середовищах
+- ✅ Створювати власні Bicep-шаблони інфраструктури
+- ✅ Реалізувати надійні схеми автентифікації
 
-#### Завершення розділів 5-6 (Багатоагентні рішення + Перевірка)
-- ✅ Розгорнути складне рішення з багатьма агентами AI
+#### Завершення розділів 5-6 (Багатоагентні + Валідація)
+- ✅ Розгорнути складне багатоагентне ШІ-рішення
 - ✅ Виконати планування потужностей та оптимізацію витрат
-- ✅ Реалізувати автоматизовану перевірку перед розгортанням
+- ✅ Реалізувати автоматизовану попередню валідацію перед розгортанням
 
-#### Завершення розділів 7-8 (Виправлення помилок + Виробництво)
-- ✅ Самостійно виправляти та вирішувати проблеми з розгортанням  
-- ✅ Реалізувати моніторинг та безпеку корпоративного рівня
-- ✅ Розгорнути додатки, готові до виробництва, з управлінням
+#### Завершення розділів 7-8 (Усунення несправностей + Продукційне)
+- ✅ Налагоджувати та самостійно вирішувати проблеми розгортання  
+- ✅ Впровадити моніторинг та безпеку рівня підприємства
+- ✅ Розгорнути додатки, готові до продакшну, із впровадженими політиками управління
 
 ### Сертифікація та визнання
-- **Значок завершення курсу**: Завершіть усі 8 розділів із практичною перевіркою
-- **Визнання спільноти**: Активна участь у Discord Microsoft Foundry
-- **Професійний розвиток**: Навички розгортання AZD та AI, актуальні для галузі
-- **Кар'єрний ріст**: Можливості розгортання хмарних рішень корпоративного рівня
+- **Бейдж за завершення курсу**: Завершити всі 8 розділів з практичною валідацією
+- **Визнання спільноти**: Активна участь у Microsoft Foundry Discord
+- **Професійний розвиток**: Галузево актуальні навички розгортання AZD та ШІ
+- **Кар'єрний розвиток**: Здатність виконувати розгортання в хмарі на корпоративному рівні
 
 ## 🎓 Комплексні результати навчання
 
-### Рівень основ (Розділи 1-2)
-Після завершення основних розділів учасники продемонструють:
+### Рівень: Основи (Розділи 1-2)
+Після завершення базових розділів учні продемонструють:
 
-**Технічні навички:**
-- Розгортання простих веб-додатків в Azure за допомогою команд AZD
-- Конфігурація та розгортання чат-додатків на основі AI з функціями RAG
-- Розуміння основних концепцій AZD: шаблони, середовища, робочі процеси підготовки
-- Інтеграція сервісів Microsoft Foundry із розгортанням AZD
-- Навігація конфігураціями сервісів Azure AI та API-ендпоінтами
+**Технічні можливості:**
+- Розгортати прості веб-додатки в Azure за допомогою команд AZD
+- Налаштовувати та розгортати чат-додатки на базі ШІ з можливостями RAG
+- Розуміти основні концепції AZD: шаблони, середовища, процеси розгортання
+- Інтегрувати сервіси Microsoft Foundry з розгортаннями AZD
+- Орієнтуватися в налаштуваннях сервісів Azure AI та кінцевих точках API
 
 **Професійні навички:**
-- Дотримання структурованих робочих процесів розгортання для стабільних результатів
-- Виправлення базових проблем із розгортанням за допомогою логів та документації
-- Ефективна комунікація щодо процесів хмарного розгортання
-- Застосування найкращих практик для безпечної інтеграції AI-сервісів
+- Дотримуватися структурованих робочих процесів розгортання для послідовних результатів
+- Усувати базові проблеми розгортання за допомогою логів та документації
+- Ефективно комунікувати про процеси розгортання в хмарі
+- Застосовувати найкращі практики для безпечної інтеграції сервісів ШІ
 
-**Перевірка навчання:**
+**Підтвердження навчання:**
 - ✅ Успішно розгорнути шаблон `todo-nodejs-mongo`
 - ✅ Розгорнути та налаштувати `azure-search-openai-demo` з RAG
-- ✅ Завершити інтерактивні вправи на воркшопі (етап відкриття)
-- ✅ Взяти участь у дискусіях спільноти Azure Discord
+- ✅ Виконати інтерактивні вправи воркшопу (фаза Discovery)
+- ✅ Брати участь у дискусіях спільноти Azure Discord
 
-### Рівень середнього рівня (Розділи 3-4)
-Після завершення розділів середнього рівня учасники продемонструють:
+### Рівень: Середній (Розділи 3-4)
+Після завершення проміжних розділів учні продемонструють:
 
-**Технічні навички:**
-- Управління розгортанням у кількох середовищах (dev, staging, production)
-- Створення власних шаблонів Bicep для інфраструктури як коду
-- Реалізація безпечних шаблонів автентифікації з керованою ідентичністю
-- Розгортання складних додатків із кількома сервісами та власними конфігураціями
-- Оптимізація стратегій підготовки ресурсів для витрат та продуктивності
-
-**Професійні навички:**
-- Проектування масштабованих архітектур інфраструктури
-- Реалізація найкращих практик безпеки для хмарних розгортань
-- Документування шаблонів інфраструктури для командної співпраці
-- Оцінка та вибір відповідних сервісів Azure для вимог
-
-**Перевірка навчання:**
-- ✅ Налаштування окремих середовищ із специфічними налаштуваннями
-- ✅ Створення та розгортання власного шаблону Bicep для додатка з кількома сервісами
-- ✅ Реалізація автентифікації з керованою ідентичністю для безпечного доступу
-- ✅ Завершення вправ із управління конфігурацією на реальних сценаріях
-
-### Рівень просунутого рівня (Розділи 5-6)
-Після завершення розділів просунутого рівня учасники продемонструють:
-
-**Технічні навички:**
-- Розгортання та оркестрація рішень з багатьма агентами AI із координованими робочими процесами
-- Реалізація архітектур агентів для клієнтів та інвентаризації у роздрібних сценаріях
-- Виконання комплексного планування потужностей та перевірки ресурсів
-- Виконання автоматизованої перевірки перед розгортанням та оптимізації
-- Проектування економічно ефективного вибору SKU на основі вимог до навантаження
+**Технічні можливості:**
+- Керувати розгортаннями в кількох середовищах (dev, staging, production)
+- Створювати власні Bicep-шаблони для інфраструктури як коду
+- Реалізувати безпечні схеми автентифікації з використанням керованої ідентичності
+- Розгортати складні багатосервісні додатки з користувацькими налаштуваннями
+- Оптимізувати стратегії забезпечення ресурсів для зниження витрат і підвищення продуктивності
 
 **Професійні навички:**
-- Архітектура складних рішень AI для виробничих середовищ
-- Ведення технічних дискусій щодо стратегій розгортання AI
-- Наставництво молодших розробників у найкращих практиках AZD та AI
-- Оцінка та рекомендація шаблонів архітектури AI для бізнес-вимог
+- Проектувати масштабовані архітектури інфраструктури
+- Впроваджувати найкращі практики безпеки для хмарних розгортань
+- Документувати шаблони інфраструктури для командної співпраці
+- Оцінювати та вибирати відповідні сервіси Azure відповідно до вимог
 
-**Перевірка навчання:**
-- ✅ Розгортання повного роздрібного рішення з багатьма агентами за допомогою ARM-шаблонів
-- ✅ Демонстрація координації агентів та оркестрації робочих процесів
-- ✅ Завершення вправ із планування потужностей на реальних ресурсних обмеженнях
-- ✅ Перевірка готовності до розгортання через автоматизовані перевірки
+**Підтвердження навчання:**
+- ✅ Налаштувати окремі середовища з параметрами, специфічними для кожного середовища
+- ✅ Створити та розгорнути власний Bicep-шаблон для багатосервісного додатка
+- ✅ Реалізувати автентифікацію з використанням керованої ідентичності для безпечного доступу
+- ✅ Виконати вправи з управління конфігураціями на реальних сценаріях
 
-### Рівень експертного рівня (Розділи 7-8)
-Після завершення розділів експертного рівня учасники продемонструють:
+### Рівень: Просунутий (Розділи 5-6)
+Після завершення просунутих розділів учні продемонструють:
 
-**Технічні навички:**
-- Діагностика та вирішення складних проблем із розгортанням самостійно
-- Реалізація корпоративних шаблонів безпеки та фреймворків управління
-- Проектування комплексних стратегій моніторингу та оповіщення
-- Оптимізація виробничих розгортань для масштабування, витрат та продуктивності
-- Встановлення CI/CD-пайплайнів із належним тестуванням та перевіркою
+**Технічні можливості:**
+- Розгортати та оркеструвати багатоагентні ШІ-рішення зі скоординованими робочими процесами
+- Реалізувати архітектури агентів для обробки клієнтів і інвентаризації для роздрібних сценаріїв
+- Проводити комплексне планування потужностей та валідацію ресурсів
+- Виконувати автоматизовану попередню валідацію та оптимізацію перед розгортанням
+- Проектувати економічно ефективний вибір SKU на основі вимог навантаження
 
 **Професійні навички:**
-- Ведення корпоративних ініціатив із хмарної трансформації
-- Проектування та реалізація стандартів розгортання в організації
-- Навчання та наставництво команд розробників у передових практиках AZD
-- Вплив на технічне прийняття рішень для корпоративних розгортань AI
+- Проектувати складні ШІ-рішення для продукційних середовищ
+- Очолювати технічні дискусії щодо стратегій розгортання ШІ
+- Наставляти молодших розробників щодо найкращих практик AZD і розгортання ШІ
+- Оцінювати та рекомендувати патерни архітектури ШІ відповідно до бізнес-вимог
 
-**Перевірка навчання:**
-- ✅ Вирішення складних проблем із розгортанням багатосервісних додатків
-- ✅ Реалізація корпоративних шаблонів безпеки з вимогами відповідності
-- ✅ Проектування та розгортання моніторингу виробництва за допомогою Application Insights
-- ✅ Завершення реалізації фреймворку корпоративного управління
+**Підтвердження навчання:**
+- ✅ Розгорнути повне багатоагентне роздрібне рішення за допомогою ARM-шаблонів
+- ✅ Демонструвати координацію агентів та оркестрацію робочих процесів
+- ✅ Виконати вправи з планування потужностей з реальними обмеженнями ресурсів
+- ✅ Перевірити готовність до розгортання через автоматизовані попередні перевірки
 
-## 🎯 Сертифікація завершення курсу
+### Рівень: Експерт (Розділи 7-8)
+Після завершення експертних розділів учні продемонструють:
 
-### Рамка відстеження прогресу
-Відстежуйте свій прогрес навчання через структуровані контрольні точки:
+**Технічні можливості:**
+- Діагностувати та самостійно вирішувати складні проблеми розгортання
+- Впроваджувати корпоративні схеми безпеки та рамки управління
+- Проектувати всебічні стратегії моніторингу та оповіщення
+- Оптимізувати продукційні розгортання для масштабування, витрат та продуктивності
+- Налагоджувати CI/CD-пайплайни з належним тестуванням та валідацією
+
+**Професійні навички:**
+- Керувати ініціативами з трансформації хмари на рівні підприємства
+- Проектувати та впроваджувати організаційні стандарти розгортання
+- Навчати та наставляти команди розробників щодо просунутих практик AZD
+- Впливати на технічне прийняття рішень щодо корпоративних розгортань ШІ
+
+**Підтвердження навчання:**
+- ✅ Вирішувати складні відмови при розгортанні багатосервісних систем
+- ✅ Впровадити корпоративні патерни безпеки з вимогами відповідності
+- ✅ Проектувати та розгортати продукційний моніторинг з Application Insights
+- ✅ Завершити впровадження корпоративної рамки управління
+
+## 🎯 Сертифікація після завершення курсу
+
+### Система відстеження прогресу
+Відстежуйте свій прогрес у навчанні через структуровані контрольні точки:
 
 - [ ] **Розділ 1**: Основи та швидкий старт ✅
-- [ ] **Розділ 2**: Розробка з фокусом на AI ✅  
-- [ ] **Розділ 3**: Конфігурація та автентифікація ✅
-- [ ] **Розділ 4**: Інфраструктура як код та розгортання ✅
-- [ ] **Розділ 5**: Рішення з багатьма агентами AI ✅
-- [ ] **Розділ 6**: Перевірка перед розгортанням та планування ✅
-- [ ] **Розділ 7**: Виправлення помилок та налагодження ✅
-- [ ] **Розділ 8**: Виробничі та корпоративні шаблони ✅
+- [ ] **Розділ 2**: Розробка з фокусом на ШІ ✅  
+- [ ] **Розділ 3**: Конфігурація & Автентифікація ✅
+- [ ] **Розділ 4**: Інфраструктура як код & Розгортання ✅
+- [ ] **Розділ 5**: Багатоагентні ШІ-рішення ✅
+- [ ] **Розділ 6**: Попередня валідація & Планування ✅
+- [ ] **Розділ 7**: Усунення несправностей & Налагодження ✅
+- [ ] **Розділ 8**: Продукційні & Корпоративні патерни ✅
 
 ### Процес перевірки
-Після завершення кожного розділу перевірте свої знання через:
+Після завершення кожного розділу перевірте свої знання за допомогою:
 
-1. **Завершення практичних вправ**: Розгортання робочих рішень для кожного розділу
-2. **Оцінка знань**: Перегляд розділів FAQ та завершення самоперевірок
-3. **Залучення спільноти**: Обмін досвідом та отримання відгуків у Discord Azure
-4. **Розвиток портфоліо**: Документування своїх розгортань та отриманих уроків
-5. **Рецензія від колег**: Співпраця з іншими учасниками на складних сценаріях
+1. **Виконання практичних вправ**: Розгорніть працездатні рішення для кожного розділу
+2. **Оцінювання знань**: Перегляньте розділи FAQ та пройдіть самооцінки
+3. **Залучення до спільноти**: Діліться досвідом та отримуйте відгуки в Azure Discord
+4. **Розробка портфоліо**: Документуйте свої розгортання та набуті уроки
+5. **Рецензія від колег**: Співпрацюйте з іншими учнями над складними сценаріями
 
-### Переваги завершення курсу
+### Переваги після завершення курсу
 Після завершення всіх розділів із перевіркою випускники отримають:
 
 **Технічна експертиза:**
-- **Досвід у виробництві**: Розгортання реальних AI-додатків у середовищах Azure
-- **Професійні навички**: Можливості розгортання та виправлення помилок корпоративного рівня  
-- **Знання архітектури**: Рішення з багатьма агентами AI та складні шаблони інфраструктури
-- **Майстерність у виправленні помилок**: Самостійне вирішення проблем із розгортанням та конфігурацією
+- **Досвід у продакшні**: Розгорнуті реальні ШІ-додатки в середовищах Azure
+- **Професійні навички**: Здатність виконувати розгортання та усунення несправностей на корпоративному рівні  
+- **Знання архітектури**: Багатоагентні ШІ-рішення та складні шаблони інфраструктури
+- **Майстерність усунення несправностей**: Самостійне вирішення проблем розгортання та конфігурації
 
 **Професійний розвиток:**
-- **Визнання в галузі**: Перевірені навички у високозатребуваних областях AZD та AI
-- **Кар'єрний ріст**: Кваліфікація для ролей архітектора хмарних рішень та спеціаліста з розгортання AI
-- **Лідерство у спільноті**: Активне членство у спільнотах розробників Azure та AI
-- **Безперервне навчання**: Основи для спеціалізації Microsoft Foundry
+- **Визнання в індустрії**: Підтверджувані навички в затребуваних галузях розгортання AZD та ШІ
+- **Кар'єрне зростання**: Кваліфікації для ролей cloud-архітектора та спеціаліста з розгортання ШІ
+- **Лідерство в спільноті**: Активне членство в спільнотах розробників Azure та ШІ
+- **Безперервне навчання**: Підґрунтя для поглибленої спеціалізації в Microsoft Foundry
 
 **Активи портфоліо:**
-- **Розгорнуті рішення**: Робочі приклади AI-додатків та шаблонів інфраструктури
-- **Документа
+- **Розгорнуті рішення**: Працюючі приклади ШІ-додатків та шаблонів інфраструктури
+- **Документація**: Всеохопні посібники з розгортання та процедури усунення несправностей  
+- **Внесок у спільноту**: Дискусії, приклади та покращення, якими діляться з спільнотою Azure
+- **Професійна мережа**: Зв'язки з експертами Azure та практиками розгортання ШІ
+
+### Наступні кроки після курсу
+Випускники готові до поглибленої спеціалізації в:
+- **Експерт Microsoft Foundry**: Глибока спеціалізація в розгортанні моделей ШІ та оркестрації
+- **Лідерство в хмарній архітектурі**: Проектування розгортань масштабу підприємства та управління
+- **Лідерство в спільноті розробників**: Внесок у приклади для Azure та ресурси спільноти
+- **Корпоративне навчання**: Викладання навичок AZD та розгортання ШІ в організаціях
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Відмова від відповідальності**:  
-Цей документ був перекладений за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ на його рідній мові слід вважати авторитетним джерелом. Для критичної інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникають внаслідок використання цього перекладу.
+Відмова від відповідальності:
+Цей документ було перекладено з використанням сервісу автоматичного перекладу ШІ [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ мовою оригіналу слід вважати авторитетним джерелом. Для критичної інформації рекомендується професійний переклад, виконаний людиною. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
