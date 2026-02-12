@@ -1,112 +1,103 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-10-11T15:46:12+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "ta"
-}
--->
-# 5. ஒரு டெம்ப்ளேட்டை தனிப்பயனாக்கவும்
+# 5. ஒரு வார்ப்புருவை தனிப்பயனாக்கு
 
-!!! tip "இந்த மாட்யூலை முடிக்கும்போது நீங்கள் செய்ய முடியும்"
+!!! tip "இந்த மாடியூலின் முடிவில் நீங்கள் இதைச் செய்ய முடியும்"
 
-    - [ ] இயல்புநிலை AI Agent திறன்களை ஆராய்ந்தது
-    - [ ] உங்கள் சொந்த குறியீட்டுடன் AI தேடலைச் சேர்த்தது
-    - [ ] டிரேசிங் அளவுகோள்களை செயல்படுத்தி பகுப்பாய்வு செய்தது
-    - [ ] ஒரு மதிப்பீட்டு இயக்கத்தைச் செயல்படுத்தியது
-    - [ ] ஒரு ரெட்-டீமிங் ஸ்கேன் இயக்கப்பட்டது
-    - [ ] **Lab 5: தனிப்பயனாக்கல் திட்டத்தை உருவாக்கியது**
+    - [ ] இயல்புநிலையான AI முகவர் திறன்களை ஆராய்ந்தது
+    - [ ] உங்கள் சொந்த index உடன் AI Search ஐச் சேர்த்தது
+    - [ ] Tracing மெட்ரிக்ஸை இயக்கு மற்றும் பகுப்பாய்வு செய்தது
+    - [ ] ஒரு மதிப்பீட்டு ஓட்டத்தை செயல்படுத்தியது
+    - [ ] ஒரு ரெட்-டீமிங் ஸ்கேனை நடத்தியது
+    - [ ] **லேப் 5: தனிப்பயனாக்கத் திட்டம் உருவாக்கப்பட்டது** 
 
 ---
 
-## 5.1 AI Agent திறன்கள்
+## 5.1 AI Agent Capabilities
 
-!!! success "இதை Lab 01 இல் முடித்தோம்"
+!!! success "நாம் இதை லேப் 01ல் முடித்தோம்"
 
-- **கோப்பு தேடல்**: OpenAI இன் உள்ளமைக்கப்பட்ட கோப்பு தேடல் அறிவு மீட்புக்காக
-- **மேற்கோள்கள்**: பதில்களில் தானியங்கி மூல அடையாளம்
-- **தனிப்பயனாக்கக்கூடிய வழிமுறைகள்**: முகவர் நடத்தை மற்றும் தன்மையை மாற்றவும்
-- **கருவி ஒருங்கிணைப்பு**: தனிப்பயனாக்கப்பட்ட திறன்களுக்கான விரிவாக்கக்கூடிய கருவி அமைப்பு
+- **கோப்பு தேடல்**: அறிவு பெறுவதற்கான OpenAI இன் உள்ளமைக்கப்பட்ட கோப்பு தேடல்
+- **மூலக் குறிப்புகள்**: பதில்களில் தானாக மூலத்தொடர்புகளை கொடுக்கும்
+- **தனிப்பயனாக்கக்கூடிய வழிமுறைகள்**: முகவரின் நடத்தை மற்றும் தனிப்பட்ட தன்மையை மாற்றவும்
+- **கருவி ஒருங்கிணைப்பு**: தனிப்பயன் திறன்களுக்கு விரிவாக்கக்கூடிய கருவி அமைப்பு
 
 ---
 
-## 5.2 அறிவு மீட்பு விருப்பங்கள்
+## 5.2 Knowledge Retrieval Options
 
-!!! task "இதை முடிக்க நாம் மாற்றங்களைச் செய்ய வேண்டும் மற்றும் மீண்டும் வெளியிட வேண்டும்"    
+!!! task "இதை முடிக்க மாற்றங்கள் செய்து மீண்டும் வெளியிட வேண்டும்"    
     
     ```bash title=""
-    # சூழல் மாறிகள் அமைக்கவும்
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # தரவைப் பதிவேற்றவும் மற்றும் என் குறியீட்டை உருவாக்கவும்
+    # Upload data and create my index
 
     ```
 
 ---
 
-**OpenAI கோப்பு தேடல் (இயல்புநிலை):**
+**OpenAI File Search (Default):**
 
-- Azure AI Agent சேவையில் உள்ளமைக்கப்பட்டுள்ளது
-- தானியங்கி ஆவண செயலாக்கம் மற்றும் குறியீட்டாக்கம்
-- கூடுதல் கட்டமைப்பு தேவையில்லை
+- Foundry முகவரிகளுக்கு உள்ளமைக்கப்பட்டவை
+- ஆவணங்களை தானாக செயலாக்குதல் மற்றும் குறியிடுதல்
+- மேலும் எந்த அமைப்பும் தேவையில்லை
 
-**Azure AI தேடல் (விருப்பம்):**
+**Azure AI Search (Optional):**
 
-- ஹைபிரிட் செமாண்டிக் மற்றும் வெக்டர் தேடல்
-- தனிப்பயனாக்கப்பட்ட குறியீட்டு மேலாண்மை
-- மேம்பட்ட தேடல் திறன்கள்
-- `USE_AZURE_AI_SEARCH_SERVICE=true` தேவை
+- இணைமுறை அர்த்தவியல் மற்றும் வெக்டர் தேடல்
+- தனிப்பயன் index மேலாண்மை
+- மேம்பட்ட தேடல்திறன்கள்
+- Requires `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [டிரேசிங் மற்றும் கண்காணிப்பு](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [பின்தொடர்தலும் கண்காணிப்பும்](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "இதை முடிக்க நாம் மாற்றங்களைச் செய்ய வேண்டும் மற்றும் மீண்டும் வெளியிட வேண்டும்"    
+!!! task "இதை நிறைவேற்ற, மாற்றங்கள் செய்த பின்னர் மீண்டும் வெளியிட வேண்டும்"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**டிரேசிங்:**
+**Tracing:**
 
 - OpenTelemetry ஒருங்கிணைப்பு
-- கோரிக்கை/பதில் கண்காணிப்பு
-- செயல்திறன் அளவுகோல்கள்
-- AI Foundry போர்ட்டலில் கிடைக்கிறது
+- கோரிக்கை/பதில்களின் பின்தொடர்தல்
+- செயல்திறன் மெட்ரிக்ஸ்
+- Microsoft Foundry போர்டலில் கிடைக்கிறது
 
-**பதிவேற்றம்:**
+**Logging:**
 
-- Container Apps இல் பயன்பாட்டு பதிவுகள்
-- தொடர்பு ஐடிகளுடன் அமைக்கப்பட்ட பதிவேற்றம்
-- நேரடி மற்றும் வரலாற்று பதிவுகளைப் பார்வையிடுதல்
+- Container Apps-இல் செயலி பதிவுகள்
+- correlation ID-களுடன் கட்டமைக்கப்பட்ட பதிவு
+- நேரடி மற்றும் வரலாற்றப் பதிவுகளின் பார்வை
 
 ---
 
-## 5.4 [Agent மதிப்பீடு](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [முகவர் மதிப்பீடு](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **உள்ளூர் மதிப்பீடு:**
 
-- தர மதிப்பீட்டுக்கான உள்ளமைக்கப்பட்ட மதிப்பீட்டாளர்கள்
-- தனிப்பயனாக்கப்பட்ட மதிப்பீட்டு ஸ்கிரிப்ட்கள்
-- செயல்திறன் அளவீடு
+- தர மதிப்பீட்டிற்கான உள்ளமைக்கப்பட்ட மதிப்பீட்டிகள்
+- தனிப்பயன் மதிப்பீட்டு ஸ்கிரிப்டுகள்
+- செயல்திறன் பேஞ்ச்மார்கிங்
 
-**தொடர்ச்சியான கண்காணிப்பு:**
+**தொடர்ந்த கண்காணிப்பு:**
 
 - நேரடி தொடர்புகளின் தானியங்கி மதிப்பீடு
-- தர அளவுகோல் கண்காணிப்பு
-- செயல்திறன் பின்தங்கல் கண்டறிதல்
+- தர மெட்ரிக்ஸ் கண்காணித்தல்
+- செயல்திறன் பின்னடைவு கண்டறிதல்
 
 **CI/CD ஒருங்கிணைப்பு:**
 
-- GitHub Actions வேலைநடப்பு
+- GitHub Actions வேலைப்பாடு
 - தானியங்கி சோதனை மற்றும் மதிப்பீடு
-- புள்ளியியல் ஒப்பீட்டு சோதனை
+- புள்ளியியல் ஒப்பிடும் சோதனைகள்
 
 ---
 
@@ -116,87 +107,89 @@ CO_OP_TRANSLATOR_METADATA:
 
 - தானியங்கி பாதுகாப்பு ஸ்கேனிங்
 - AI அமைப்புகளுக்கான அபாய மதிப்பீடு
-- பல பிரிவுகளில் பாதுகாப்பு மதிப்பீடு
+- பல வகைகளில் பாதுகாப்பு மதிப்பீடு
 
 **அங்கீகாரம்:**
 
-- Azure சேவைகளுக்கான மேலாண்மை அடையாளம்
-- விருப்ப Azure App Service அங்கீகாரம்
-- மேம்பாட்டு அடிப்படையிலான அங்கீகாரம்
+- Azure சேவைகளுக்கான Managed Identity
+- விருப்பமான Azure App Service அங்கீகாரம்
+- வளர்ச்சிக்காக அடிப்படை அங்கீகாரம் (fallback)
 
-!!! quote "இந்த Lab முடிவில் நீங்கள் செய்ய வேண்டும்"
-    - [ ] உங்கள் காட்சித் தேவைகளை வரையறுத்தது
-    - [ ] சூழல் மாறிகளை தனிப்பயனாக்கியது (config)
-    - [ ] முகவர் வழிமுறைகளை தனிப்பயனாக்கியது (task)
-    - [ ] தனிப்பயனாக்கப்பட்ட டெம்ப்ளேட்டை வெளியிட்டது (app)
-    - [ ] வெளியீட்டு பிந்தைய பணிகளை முடித்தது (manual)
-    - [ ] ஒரு சோதனை மதிப்பீட்டை இயக்கியது
 
-இந்த உதாரணம் இரண்டு சிறப்பு முகவர்களுடன் மற்றும் பல மாடல் வெளியீடுகளுடன் ஒரு நிறுவன சில்லறை பயன்பாட்டிற்கான டெம்ப்ளேட்டை தனிப்பயனாக்குவதைக் காட்டுகிறது.
 
----
+!!! quote "இந்த லேபின் முடிவில் நீங்கள் பின்வருமமை இருக்க வேண்டும்"
+    - [ ] உங்கள் சூழ்நிலை தேவைகளை வரையறுக்கவும்
+    - [ ] தனிப்பயன் செய்யப்பட்ட சுற்றுச்சூழல் மாறிலிகள் (config)
+    - [ ] தனிப்பயன் முகவர் வழிமுறைகள் (task)
+    - [ ] தனிப்பயனாக்கப்பட்ட வார்ப்புருவை (app) நிறுவியிருத்தல்
+    - [ ] பதிலாக நடைபெறும் பணிகளை முடித்தல் (manual)
+    - [ ] ஒரு சோதனை மதிப்பீட்டை நடத்தவும்
 
-## 5.6 இதை உங்களுக்காக தனிப்பயனாக்குங்கள்!
-
-### 5.6.1. காட்சி தேவைகள்
-
-#### **முகவர் வெளியீடுகள்:** 
-
-   - Shopper Agent: வாடிக்கையாளர்களுக்கு பொருட்களை கண்டறியவும் ஒப்பிடவும் உதவுகிறது
-   - Loyalty Agent: வாடிக்கையாளர் பரிசுகள் மற்றும் விளம்பரங்களை நிர்வகிக்கிறது
-
-#### **மாடல் வெளியீடுகள்:**
-
-   - `gpt-4.1`: முதன்மை உரையாடல் மாடல்
-   - `o3`: சிக்கலான கேள்விகளுக்கான காரண மாடல்
-   - `gpt-4.1-nano`: எளிய தொடர்புகளுக்கான இலகு மாடல்
-   - `text-embedding-3-large`: தேடலுக்கான உயர்தர எம்பெடிங்குகள்
-
-#### **அம்சங்கள்:**
-
-   - டிரேசிங் மற்றும் கண்காணிப்பு செயல்படுத்தப்பட்டது
-   - பொருட்களின் பட்டியலுக்கான AI தேடல்
-   - தர உறுதிப்பாட்டுக்கான மதிப்பீட்டு அமைப்பு
-   - பாதுகாப்பு சரிபார்ப்புக்கான ரெட்-டீமிங்
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-### 5.6.2 காட்சி செயல்படுத்தல்
+## 5.6 Customize It For You!
+
+### 5.6.1. Scenario Requirements
+
+#### **Agent Deployments:** 
+
+   - Shopper Agent: வாடிக்கையாளர்கள் பொருட்களை கண்டுபிடிக்கவும் ஒப்பிடவும் உதவுகிறது
+   - Loyalty Agent: வாடிக்கையாளர் பரிசுகள் மற்றும் சலுகைகளை நிர்வகிக்கிறது
+
+#### **Model Deployments:**
+
+   - `gpt-4.1`: பிரதான கலந்துரையாடல் மாடல்
+   - `o3`: சிக்கலான கேள்விகளுக்கான தார்க்க மாடல்
+   - `gpt-4.1-nano`: எளிய தொடர்புகளுக்கான எளிய மாடல்
+   - `text-embedding-3-large`: தேடலுக்கான உயர் தர embedding-கள்
+
+#### **Features:**
+
+   - பின்தொடர்தலும் கண்காணிப்பும் இயக்கப்பட்டுள்ளது
+   - தயாரிப்பு கதவுக்கான AI Search
+   - தர உறுதிப்பத்திரத்திற்கான மதிப்பீடு கட்டமைப்பு
+   - பாதுகாப்பு சரிபார்க்க ரெட்-டீமிங்
+
+---
+
+### 5.6.2 Scenario Implementation
 
 
-#### 5.6.2.1. வெளியீட்டுக்கு முன் அமைப்பு
+#### 5.6.2.1. Pre-Deployment Config
 
-ஒரு அமைப்பு ஸ்கிரிப்ட்டை உருவாக்கவும் (`setup-retail.sh`)
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# சூழ்நிலை பெயரை அமைக்கவும்
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# பிராந்தியத்தை அமைக்கவும் (மாதிரி கிடைப்பின் அடிப்படையில் தேர்வு செய்யவும்)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# அனைத்து விருப்ப சேவைகளையும் செயல்படுத்தவும்
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# முக்கிய அரட்டை மாதிரியை அமைக்கவும் (gpt-4.1-க்கு மிக அருகில் கிடைக்கும் gpt-4o)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# மேம்பட்ட தேடலுக்காக எம்பெடிங் மாதிரியை அமைக்கவும்
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# ஏஜென்ட் பெயரை அமைக்கவும் (முதல் ஏஜென்டை உருவாக்கும்)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# தேடல் இன்டெக்ஸை அமைக்கவும்
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -205,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: முகவர் வழிமுறைகள்
+#### 5.6.2.2: Agent Instructions
 
-`custom-agents/shopper-agent-instructions.md` உருவாக்கவும்:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -230,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-`custom-agents/loyalty-agent-instructions.md` உருவாக்கவும்:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -255,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: வெளியீட்டு ஸ்கிரிப்ட்
+#### 5.6.2.3: Deployment Script
 
-`deploy-retail.sh` உருவாக்கவும்:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -265,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# முன் நிபந்தனைகளைச் சரிபார்க்கவும்
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -277,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# சூழ்நிலையை அமைக்கவும்
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# தேர்ந்த பிராந்தியத்திலுள்ள ஒதுக்கீடுகளை சரிபார்க்கவும்
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# அடித்தளத்தையும் பயன்பாட்டையும் நிலைநிறுத்தவும்
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# நிலைநிறுத்தலின் வெளியீடுகளை பதிவு செய்யவும்
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# வலை பயன்பாட்டின் URL ஐப் பெறவும்
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -328,28 +321,28 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: வெளியீட்டு பிந்தைய அமைப்பு
+#### 5.6.2.4: Post-Deployment Config
 
-`configure-retail-agents.sh` உருவாக்கவும்:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# வெளியீட்டு தகவல்களைப் பெறவும்
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# கைமுறை கட்டமைப்பிற்கான அறிவுறுத்தல்கள்
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -385,20 +378,20 @@ echo "
 "
 ```
 
-### 5.6.3: சோதனை மற்றும் சரிபார்ப்பு
+### 5.6.3: Testing and Validation
 
-`test-retail-deployment.sh` உருவாக்கவும்:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# சூழல் மாறிலிகள் அமைக்கப்பட்டுள்ளன என்பதை சரிபார்க்கவும்
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# வலை பயன்பாட்டின் கிடைப்பை சோதிக்கவும்
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# கட்டமைக்கப்பட்டால் மதிப்பீட்டை இயக்கவும்
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -436,40 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 எதிர்பார்க்கப்படும் முடிவுகள்
+### 5.6.4 Expected Outcomes
 
-இந்த செயல்படுத்தல் வழிகாட்டியைப் பின்பற்றிய பிறகு, நீங்கள் பெறுவீர்கள்:
+After following this implementation guide, you will have:
 
-1. **வள அமைப்பு:**
+1. **நிறுவப்பட்ட உட்கட்டமைப்பு:**
 
-      - மாடல் வெளியீடுகளுடன் AI Foundry திட்டம்
-      - வலை பயன்பாட்டை ஹோஸ்ட் செய்யும் Container Apps
-      - பொருட்களின் பட்டியலுக்கான AI தேடல் சேவை
-      - கண்காணிப்புக்கான Application Insights
+      - Microsoft Foundry திட்டம் மாடல் பதிவேற்றங்களுடன்
+      - Container Apps மூலம் வலை பயன்பாடு ஹோஸ்ட்டாடாகும்
+      - தயாரிப்பு பட்டியலுக்கான AI Search சேவை
+      - கண்காணிப்பிற்கு Application Insights
 
 2. **ஆரம்ப முகவர்:**
 
-      - Shopper Agent அடிப்படை வழிமுறைகளுடன் அமைக்கப்பட்டது
-      - கோப்பு தேடல் திறன் செயல்படுத்தப்பட்டது
-      - டிரேசிங் மற்றும் கண்காணிப்பு அமைக்கப்பட்டது
+      - Shopper Agent அடிப்படை வழிமுறைகளுடன் கட்டமைக்கப்பட்டுள்ளது
+      - கோப்பு தேடல் திறன் இயக்கப்பட்டுள்ளது
+      - பின்தொடர்தலும் கண்காணிப்பும் அமைக்கப்பட்டன
 
-3. **தனிப்பயனாக்கத்துக்கு தயாராக:**
+3. **தனிப்பயனாக்கத்திற்கு தயாராக:**
 
-      - Loyalty Agent ஐச் சேர்க்கும் அமைப்பு
-      - தனிப்பயனாக்கப்பட்ட வழிமுறைகள் டெம்ப்ளேட்கள்
-      - சோதனை மற்றும் சரிபார்ப்பு ஸ்கிரிப்ட்கள்
-      - கண்காணிப்பு மற்றும் மதிப்பீட்டு அமைப்பு
+      - Loyalty Agent சேர்க்கும் கட்டமைப்பு
+      - தனிப்பயன் வழிமுறை வார்ப்புருக்கள்
+      - சோதனை மற்றும் சரிபார்ப்பு ஸ்கிரிப்டுகள்
+      - கண்காணிப்பு மற்றும் மதிப்பீடு அமைப்பு
 
-4. **உற்பத்தி தயார்நிலை:**
+4. **தயாரிப்பு தயார் நிலை:**
 
-      - ரெட்-டீமிங் மூலம் பாதுகாப்பு ஸ்கேனிங்
-      - செயல்திறன் கண்காணிப்பு
-      - தர மதிப்பீட்டு அமைப்பு
-      - அளவீட்டுக்குரிய கட்டமைப்பு
+      - ரெட்-டீமிங் உடன் பாதுகாப்பு ஸ்கேனிங்
+      - செயல்திறன் கண்காணித்தல்
+      - தர மதிப்பீட்டு கட்டமைப்பு
+      - விரிவாக்கக்கூடிய கட்டமைப்பு
 
-இந்த உதாரணம் AZD டெம்ப்ளேட்டை குறிப்பிட்ட நிறுவன காட்சிகளுக்காக விரிவாக்கி மற்றும் தனிப்பயனாக்குவது எப்படி என்பதை, பாதுகாப்பு, கண்காணிப்பு மற்றும் அளவீட்டு சிறந்த நடைமுறைகளைப் பின்பற்றுவதுடன், விளக்குகிறது.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
-**குறிப்பு**:  
-இந்த ஆவணம் [Co-op Translator](https://github.com/Azure/co-op-translator) என்ற AI மொழிபெயர்ப்பு சேவையைப் பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சிக்கின்றோம், ஆனால் தானியக்க மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கக்கூடும் என்பதை தயவுசெய்து கவனத்தில் கொள்ளுங்கள். அதன் தாய்மொழியில் உள்ள மூல ஆவணம் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்கள் அல்லது தவறான விளக்கங்களுக்கு நாங்கள் பொறுப்பல்ல.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+மறுப்பு அறிக்கை:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டது. நாங்கள் துல்லியத்துக்காக முயற்சி செய்கிறோம் என்றாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது சிக்கல்கள் இருக்கக் கூடும் என்பதை தயவுசெய்து கவனிக்கவும். மூல மொழியில் உள்ள அசல் ஆவணம் தகுதியான அதிகாரப்பூர்வ மூலமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதிலா ஏற்படும் எந்தவொரு தவறான புரிதலுக்கும் அல்லது தவறான விளக்கத்திற்கும் நாங்கள் பொறுப்பாளர்கள் அல்லாம்.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

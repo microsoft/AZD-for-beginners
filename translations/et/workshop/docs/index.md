@@ -1,86 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a87eaee8309cd74837981fdc6834dd9",
-  "translation_date": "2025-10-11T15:42:33+00:00",
-  "source_file": "workshop/docs/index.md",
-  "language_code": "et"
-}
--->
-# AZD töötuba tehisintellekti arendajatele
+# AZD AI arendajate töötoa jaoks
 
 > [!IMPORTANT]  
-> **See töötuba on varustatud juhendiga, mida saate oma kohalikus brauseris eelvaadata. Alustamiseks peate avama GitHub Codespaces'i selles repositooriumis—seejärel oodake, kuni näete aktiivset VS Code terminali, ja sisestage:**  
+> **See töötuba sisaldab töötoa juhendit, mida saate oma lokaalses brauseris eelvaadata. Kohe alustamiseks peate käivitama GitHub Codespaces repositooriumis—seejärel ootama, kuni näete aktiivset VS Code terminali ja tippima:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Te peaksite nägema hüpikakent, mis võimaldab eelvaate lehe avamist brauseris.**
+> **Te peaksite nägema hüpikdialoogi, mis võimaldab eelvaate lehte brauseris avada.**
 
-Tere tulemast praktilisse töötuppa, kus õpitakse kasutama Azure Developer CLI-d (AZD) keskendudes tehisintellekti rakenduste juurutamisele. See töötuba aitab teil omandada praktilise arusaama AZD mallidest kolme sammuga:
+Tere tulemast praktilisse töötuppa, kus õpite Azure Developer CLI-d (AZD) keskendudes AI rakenduste juurutamisele. See töötuba aitab teil omandada rakendusliku arusaama AZD mallidest 3 sammus:
 
-1. **Avastamine** - leidke endale sobiv mall.
-1. **Juurutamine** - juurutage ja veenduge, et see töötab.
-1. **Kohandamine** - muutke ja täiustage, et see vastaks teie vajadustele!
+1. **Avastus** - leidke teile sobiv mall.
+1. **Juurutamine** - juurutage ja kinnitage, et see töötab
+1. **Kohandamine** - muutke ja parendage seda, et see oleks teie oma!
 
-Töötoa käigus tutvustatakse teile ka põhilisi arendustööriistu ja töövooge, mis aitavad teil oma arendusteekonda sujuvamaks muuta.
+Töötoa jooksul tutvustatakse teile ka põhiarendusvahendeid ja töövooge, mis aitavad teil sujuvdada oma lõpp-punktist lõpp-punktini arendusprotsessi.
 
 | | | 
 |:---|:---|
-| **📚 Kursuse avaleht**| [AZD algajatele](../README.md)|
+| **📚 Kursuse kodu**| [AZD algajatele](../README.md)|
 | **📖 Dokumentatsioon** | [Alustamine AI mallidega](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI mallid** | [Azure AI Foundry mallid](https://ai.azure.com/templates) |
-|**🚀 Järgmised sammud** | [Võta vastu väljakutse](../../../../workshop/docs) |
+| **🛠️AI mallid** | [Microsoft Foundry mallid](https://ai.azure.com/templates) |
+|**🚀 Järgmised sammud** | [Võta väljakutse](../../../../workshop/docs) |
 | | |
 
 ## Töötoa ülevaade
 
-**Kestus:** 3-4 tundi  
+**Kestus:** 3–4 tundi  
 **Tase:** Algaja kuni kesktase  
-**Eeltingimused:** Tutvumine Azure'i, tehisintellekti kontseptsioonide, VS Code'i ja käsurea tööriistadega.
+**Eelteadmised:** Tutvumine Azure, AI kontseptsioonide, VS Code ja käsureatööriistadega.
 
-See on praktiline töötuba, kus õpitakse läbi tegemise. Kui olete harjutused lõpetanud, soovitame teil üle vaadata AZD algajatele mõeldud õppekava, et jätkata oma õpiteekonda turvalisuse ja tootlikkuse parimate tavadega.
+See on praktiline töötuba, kus õpite läbi tegutsemise. Kui olete harjutused lõpetanud, soovitame teil vaadata üle AZD algajate õppekava, et jätkata õppimist turvalisuse ja tootlikkuse parimate tavade teemadel.
 
-| Aeg | Moodul  | Eesmärk |
+| Aeg| Modul | Eesmärk |
 |:---|:---|:---|
-| 15 min | Sissejuhatus | Seadke eesmärgid ja mõistke töötoa sisu |
-| 30 min | AI malli valimine | Uurige võimalusi ja valige algmall | 
-| 30 min | AI malli valideerimine | Juurutage vaikimisi lahendus Azure'is |
-| 30 min | AI malli lahtivõtmine | Uurige struktuuri ja konfiguratsiooni |
-| 30 min | AI malli seadistamine | Aktiveerige ja proovige saadaolevaid funktsioone |
-| 30 min | AI malli kohandamine | Kohandage mall vastavalt oma vajadustele |
-| 30 min | Infrastruktuuri eemaldamine | Puhastage ja vabastage ressursid |
+| 15 min | Sissejuhatus | Põhiraamistiku seadmine, eesmärkide mõistmine |
+| 30 min | AI malli valimine | Võimaluste uurimine ja stardimalli valik | 
+| 30 min | AI malli valideerimine | Vaikimisi lahenduse juurutamine Azure'isse |
+| 30 min | AI malli lahtilammutamine | Struktuuri ja seadistuse uurimine |
+| 30 min | AI malli seadistamine | Saadaval funktsioonide aktiveerimine ja proovimine |
+| 30 min | AI malli kohandamine | Mulli kohandamine vastavalt oma vajadustele |
+| 30 min | Taristu lammutamine | Koristamine ja ressursside vabastamine |
 | 15 min | Kokkuvõte ja järgmised sammud | Õppematerjalid, töötoa väljakutse |
 | | |
 
 ## Mida te õpite
 
-Mõelge AZD mallist kui õppimise liivakastist, kus saate uurida erinevaid võimalusi ja tööriistu Azure AI Foundry lõpp-to-lõpp arenduseks. Selle töötoa lõpuks peaksite omandama intuitiivse arusaama erinevatest tööriistadest ja kontseptsioonidest selles kontekstis.
+Mõelge AZD mallile kui õppimise liivakastile, kus avastada erinevaid Microsoft Foundry lõpp-punktist lõpp-punktini arendamise võimekusi ja tööriistu. Pärast selle töötoa läbimist peaksite omandama intuitiivse arusaama erinevatest tööriistadest ja kontseptsioonidest selles kontekstis.
 
-| Kontseptsioon  | Eesmärk |
+| Kontseptsioon | Eesmärk |
 |:---|:---|
-| **Azure Developer CLI** | Mõista tööriista käske ja töövooge |
-| **AZD mallid**| Mõista projekti struktuuri ja konfiguratsiooni |
-| **Azure AI Agent**| Azure AI Foundry projekti ettevalmistamine ja juurutamine |
-| **Azure AI Search**| Konteksti inseneeria võimaldamine agentidega |
-| **Jälgitavus**| Uurige jälgimist, monitooringut ja hindamisi |
-| **Punase meeskonna testimine**| Uurige vastase testimist ja leevendusi |
+| **Azure Developer CLI** | Mõista tööriista käske ja töövooge|
+| **AZD mallid**| Mõista projekti struktuuri ja seadistust|
+| **Azure AI Agent**| Microsoft Foundry projekti loomine ja juurutamine |
+| **Azure AI Search**| Konteksti inseneritöö võimaldamine agentidega |
+| **Jälgitavus**| Uurida jälgimist, seiret ja hindamisi |
+| **Red Teaming**| Uurida vastasmängu testimist ja leevendamist |
 | | |
 
 ## Töötoa moodulid
 
-Valmis alustama? Liikuge läbi töötoa moodulite:
+Valmis alustama? Liikuge töötoa moodulite kaudu:
 
 - [Moodul 1: AI malli valimine](instructions/1-Select-AI-Template.md)
 - [Moodul 2: AI malli valideerimine](instructions/2-Validate-AI-Template.md) 
-- [Moodul 3: AI malli lahtivõtmine](instructions/3-Deconstruct-AI-Template.md)
+- [Moodul 3: AI malli lahtilammutamine](instructions/3-Deconstruct-AI-Template.md)
 - [Moodul 4: AI malli seadistamine](instructions/4-Configure-AI-Template.md)
 - [Moodul 5: AI malli kohandamine](instructions/5-Customize-AI-Template.md)
-- [Moodul 6: Infrastruktuuri eemaldamine](instructions/6-Teardown-Infrastructure.md)
+- [Moodul 6: Taristu lammutamine](instructions/6-Teardown-Infrastructure.md)
 - [Moodul 7: Kokkuvõte ja järgmised sammud](instructions/7-Wrap-up.md)
 
 ## Kas teil on tagasisidet?
 
-Postitage probleem selle repositooriumi kohta (märgistage see `Workshop`) või liituge meiega [Discordis](https://aka.ms/foundry/discord) ja postitage meie `#get-help` kanalisse.
+Postitage probleem selle repositooriumi veateates (tähistage see märksõnaga `Workshop`) või liituge meiega [Discordis](https://aka.ms/foundry/discord) ja postitage meie `#get-help` kanalisse.
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastutusest loobumine**:
+See dokument on tõlgitud AI tõlke teenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, tuleb arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada usaldusväärseks allikaks. Tõsise info puhul soovitatakse kasutada professionaalseid inimtõlke teenuseid. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste või väär tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

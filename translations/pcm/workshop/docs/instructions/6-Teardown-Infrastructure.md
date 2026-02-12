@@ -1,38 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-11-18T19:06:22+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "pcm"
-}
--->
-# 6. Teardown Infrastructure
+# 6. Comot Infrastructure
 
-!!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"
+!!! tip "BY DE TIME YOU FINISH DIS MODULE YOU GO FIT"
 
-    - [ ] Item
-    - [ ] Item
-    - [ ] Item
+    - [ ] Make you sabi why e important to clean up resources and manage cost
+    - [ ] Use `azd down` comot infrastructure safe
+    - [ ] Fit recover soft-deleted Cognitive Service resources if e need
+    - [ ] **Lab 6:** Remove Azure resources and verify say dem don comot
 
 ---
 
 ## Bonus Exercises
 
-Before we go break down di project, take small time do some open-ended exploration.
+Before we tear down the project, use few minutes do some open-ended exploration.
 
-!!! danger "NITYA-TODO: Make some prompts wey you fit try"
+!!! info "Try These Exploration Prompts"
+
+    **Experiment with GitHub Copilot:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Explore the Azure Portal:**
+    
+    1. Check Application Insights metrics wey dey for your deployment
+    2. Check the cost analysis for resources wey you provision
+    3. Check the Microsoft Foundry portal agent playground again
 
 ---
 
 ## Deprovision Infra
 
-1. To break down di infrastructure na as simple as:
+1. Tearing down infrastructure dey easy like dis:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. Di `--purge` flag go make sure say e also clear soft-deleted Cognitive Service resources, so e go free di quota wey dey hold by dis resources. When e finish, you go see something like dis:
+1. The `--purge` flag make sure say e go also purge soft-deleted Cognitive Service resources, so e go release the quota wey those resources dey hold. When e don finish you go see something like dis:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -43,18 +47,18 @@ Before we go break down di project, take small time do some open-ended explorati
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) If you run `azd up` again now, you go notice say di gpt-4.1 model go deploy because di environment variable don change (and e don save) for di local `.azure` folder. 
+1. (Optional) If you run `azd up` again now, you go notice say the gpt-4.1 model go deploy because the environment variable don change (and save) for the local `.azure` folder. 
 
-      Dis na di model deployments **before**:
+      Here be the model deployments **bifo**:
 
-      ![Initial](../../../../../translated_images/pcm/14-deploy-initial.30e4cf1c29b587bc.webp)
+      ![Bifo](../../../../../translated_images/pcm/14-deploy-initial.30e4cf1c29b587bc.webp)
 
-      And dis na di one **after**:
-      ![New](../../../../../translated_images/pcm/14-deploy-new.f7f3c355a3cf7299.webp)
+      And here e be **afta**:
+      ![Afta](../../../../../translated_images/pcm/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI transle-shun service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transle-shun. Even as we dey try make am correct, abeg sabi say AI transle-shun fit get mistake or no dey accurate well. Di original dokyument for im native language na di one wey you go take as di correct source. For important mata, e good make professional human transle-shun dey use. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis transle-shun.
+Disclaimer:
+Dis document na wetin AI translation service Co-op Translator (https://github.com/Azure/co-op-translator) don translate. Even though we dey try make am correct, abeg note say automated translations fit get mistakes or no too correct. Di original document for e original language suppose be di main, trusted source. If na critical information, make una use professional human translator. We no dey liable for any misunderstanding or wrong interpretation wey fit come from this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

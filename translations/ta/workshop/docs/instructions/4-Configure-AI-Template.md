@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-10-11T15:43:19+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "ta"
-}
--->
-# 4. ஒரு டெம்ப்ளேட்டை அமைக்கவும்
+# 4. ஒரு வார்ப்புருளை அமைக்கவும்
 
-!!! tip "இந்த தொகுதியின் முடிவில் நீங்கள் செய்ய முடியும்"
+!!! tip "இந்த மாடியூலை முடித்ததும் நீங்கள் திறமையாக இருப்பீர்கள்"
 
-    - [ ] `azure.yaml`-இன் நோக்கம் புரிந்துகொள்ளப்பட்டது
-    - [ ] `azure.yaml`-இன் அமைப்பு புரிந்துகொள்ளப்பட்டது
-    - [ ] azd வாழ்க்கைச் சுழற்சியின் `hooks`-இன் மதிப்பு புரிந்துகொள்ளப்பட்டது
-    - [ ] **Lab 3:** 
+    - [ ] `azure.yaml`-இன் நோக்கம் புரிந்துகொள்ளுதல்
+    - [ ] `azure.yaml`-இன் கட்டமைப்பு புரிந்துகொள்ளுதல்
+    - [ ] azd lifecycle இன் `hooks`-இன் மதிப்பை புரிந்துகொள்ளுதல்
+    - [ ] **Lab 4:** சுற்றுப்புற மாறிலிகளை ஆராய்ந்து மாற்றுதல்
 
 ---
 
-!!! prompt "`azure.yaml` கோப்பு என்ன செய்கிறது? ஒரு codefence பயன்படுத்தி அதை வரி வரியாக விளக்கவும்"
+!!! prompt "What is the `azure.yaml` file do? Use a codefence and explain it line by line"
 
-      `azure.yaml` கோப்பு என்பது **Azure Developer CLI (azd)-க்கான கட்டமைப்பு கோப்பு** ஆகும். இது உங்கள் பயன்பாட்டை Azure-க்கு எப்படி பிரசுரிக்க வேண்டும் என்பதை வரையறுக்கிறது, அதில் உள்கட்டமைப்பு, சேவைகள், பிரசுர hooks, மற்றும் சூழல் மாறிகள் அடங்கும்.
+      The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
 
 ---
 
-## 1. நோக்கம் மற்றும் செயல்பாடு
+## 1. Purpose and Functionality
 
-இந்த `azure.yaml` கோப்பு AI முகவர் பயன்பாட்டிற்கான **பிரசுர ப்ளூபிரிண்ட்** ஆக செயல்படுகிறது, இது:
+This `azure.yaml` file serves as the **deployment blueprint** for an AI agent application that:
 
-1. **சூழலை சரிபார்க்கிறது** பிரசுரத்திற்கு முன்
-2. **Azure AI சேவைகளை வழங்குகிறது** (AI Hub, AI Project, Search, போன்றவை)
-3. **Python பயன்பாட்டை Azure Container Apps-க்கு பிரசுரிக்கிறது**
-4. **AI மாதிரிகளை அமைக்கிறது** உரையாடல் மற்றும் embedding செயல்பாடுகளுக்கு
-5. **AI பயன்பாட்டிற்கான கண்காணிப்பு மற்றும் டிரேசிங் அமைக்கிறது**
-6. **புதிய மற்றும் ஏற்கனவே உள்ள** Azure AI திட்ட சூழல்களை கையாள்கிறது
+1. **வெளியீட்டிற்கு முன் சுற்றுச்சூழலைச் சரிபார்க்கிறது**
+2. **Azure AI சேவைகளை ஒதுக்குகிறது** (AI Hub, AI Project, Search, முதலியவை)
+3. **Python பயன்பாட்டை** Azure Container Apps-இல் வரவழைக்கிறது
+4. **chat மற்றும் embedding செயல்பாடுகளுக்கான AI மாதிரிகளை** கட்டமைக்கிறது
+5. **AI பயன்பாட்டிற்கு கண்காணிப்பு மற்றும் தடயங்களை** அமைக்கிறது
+6. **புதிய மற்றும் உள்ளமைவுள்ள** Azure AI திட்ட நிலைகளையும் கையாள்கிறது
 
-இந்த கோப்பு **ஒரு கட்டளையில் பிரசுரத்தை** (`azd up`) சரிபார்ப்பு, வழங்கல், மற்றும் பிரசுரத்திற்குப் பிந்தைய அமைப்புடன் முழுமையான AI முகவர் தீர்வை இயக்குகிறது.
+The file enables **one-command deployment** (`azd up`) of a complete AI agent solution with proper validation, provisioning, and post-deployment configuration.
 
-??? info "காண்பிக்க விரிவாக்கவும்: `azure.yaml`"
+??? info "Expand To View: `azure.yaml`"
 
-      `azure.yaml` கோப்பு Azure Developer CLI இந்த AI Agent பயன்பாட்டை Azure-ல் எப்படி பிரசுரிக்க வேண்டும் மற்றும் நிர்வகிக்க வேண்டும் என்பதை வரையறுக்கிறது. அதை வரி வரியாக பிரிக்கலாம்.
+      The `azure.yaml` file defines how Azure Developer CLI should deploy and manage this AI Agent application in Azure. Let's break it down line-by-line.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: hooks தேவைதானா? 
-      # TODO: எல்லா மாறிகளும் தேவைதானா?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,19 +126,19 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## 2. கோப்பை பிரிக்கவும்
+## 2. கோப்பின் பகுப்பாய்வு
 
-கோப்பின் ஒவ்வொரு பகுதியையும், அது என்ன செய்கிறது - மற்றும் ஏன் என்பதைப் புரிந்துகொள்ளப் போகிறோம்.
+Let’s go through the file section by section, to understand what it does - and why.
 
-### 2.1 **Header மற்றும் Schema (1-3)**
+### 2.1 **தலைப்புப் பகுதி மற்றும் ஸ்கீமா (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Line 1**: IDE ஆதரவு மற்றும் IntelliSense-க்கு YAML மொழி சர்வர் schema சரிபார்ப்பு வழங்குகிறது
+- **Line 1**: IDE ஆதரவிற்கும் IntelliSense க்கும் YAML மொழி சர்வர் ஸ்கீமா சரிபார்ப்பை வழங்குகிறது
 
-### 2.2 Project Metadata (5-10)
+### 2.2 திட்ட மேடேட்டா (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Line 5**: Azure Developer CLI-யால் பயன்படுத்தப்படும் திட்டத்தின் பெயரை வரையறுக்கிறது
-- **Lines 6-7**: இது 1.0.2 பதிப்பு டெம்ப்ளேட்டின் அடிப்படையில் உள்ளது என்பதை குறிப்பிடுகிறது
-- **Lines 8-9**: Azure Developer CLI பதிப்பு 1.14.0 அல்லது அதற்கு மேல் தேவை
+- **Line 5**: Azure Developer CLI பயன்படுத்தும் திட்டத்தின் பெயரை வரையறுக்கிறது
+- **Lines 6-7**: இது template பதிப்பு 1.0.2 அடிப்படையில் என்று குறிப்பிடுகிறது
+- **Lines 8-9**: Azure Developer CLI பதிப்பு 1.14.0 அல்லது மேலதிகத்தை தேவையாக்குகிறது
 
-### 2.3 Deploy Hooks (11-40)
+### 2.3 வெளியீட்டு ஹூக்குகள் (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Lines 11-20**: **Pre-deployment hook** - `azd up`-க்கு முன் இயங்குகிறது
+- **Lines 11-20**: **Pre-deployment hook** - `azd up` க்கு முன்பு இயக்கப்படும்
 
-      - Unix/Linux-ல்: சரிபார்ப்பு ஸ்கிரிப்டை செயல்படுத்தக்கூடியதாக மாற்றி அதை இயக்குகிறது
-      - Windows-ல்: PowerShell சரிபார்ப்பு ஸ்கிரிப்டை இயக்குகிறது
-      - இரண்டிலும் interactive ஆக இருக்கும், தோல்வியடைந்தால் deployment நிறுத்தப்படும்
+      - Unix/Linux-இல்: சரிபார்ப்பு ஸ்கிரிப்ட்டை இயக்கக்கூடியதாக மாற்றி அதை இயக்குகிறது
+      - Windows-இல்: PowerShell சரிபார்ப்பு ஸ்கிரிப்ட்டை இயக்குகிறது
+      - இரண்டும் தொடர்பு கொண்டு செயல்படும் மற்றும் அவை தோல்வியடைந்தால் வெளியீட்டை நிறுத்தும்
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 21-30**: **Post-provision hook** - Azure வளங்கள் உருவாக்கப்பட்ட பின் இயங்குகிறது
+- **Lines 21-30**: **Post-provision hook** - Azure வளங்கள் உருவாக்கப்பட்ட பிறகு இயக்கப்படும்
 
-  - சூழல் மாறிகளை எழுதும் ஸ்கிரிப்ட்களை இயக்குகிறது
-  - இந்த ஸ்கிரிப்ட்கள் தோல்வியடைந்தாலும் deployment தொடரும் (`continueOnError: true`)
+  - சுற்றுப்புற மாறிலிகளை எழுதும் ஸ்கிரிப்ட்களை இயக்கு
+  - இந்த ஸ்கிரிப்ட்கள் தோல்வியடைந்தாலும்deployment தொடரும் (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 31-40**: **Post-deploy hook** - பயன்பாட்டின் deployment பின் இயங்குகிறது
+- **Lines 31-40**: **Post-deploy hook** - பயன்பாட்டை வெளியீடு செய்ததும் இயக்கப்படும்
 
-  - இறுதி அமைப்பு ஸ்கிரிப்ட்களை இயக்குகிறது
-  - ஸ்கிரிப்ட்கள் தோல்வியடைந்தாலும் deployment தொடரும்
+  - இறுதி அமைப்பு ஸ்கிரிப்ட்களை நிறைவேற்றுகிறது
+  - ஸ்கிரிப்ட்கள் தோல்வி அடைந்தாலும் தொடர்கிறது
 
-### 2.4 Service Config (41-48)
+### 2.4 சேவை கட்டமைப்பு (41-48)
 
-நீங்கள் பிரசுரிக்க இருக்கும் பயன்பாட்டு சேவையை இது அமைக்கிறது.
+This configures the application service you are deploying.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Line 42**: "api_and_frontend" என்ற சேவையை வரையறுக்கிறது
-- **Line 43**: மூலக் கோப்புகளுக்கான `./src` அடைவை சுட்டுகிறது
-- **Line 44**: Python-ஐ நிரலாக்க மொழியாக குறிப்பிடுகிறது
-- **Line 45**: Azure Container Apps-ஐ ஹோஸ்டிங் தளமாக பயன்படுத்துகிறது
-- **Lines 46-48**: Docker அமைப்பு
+- **Line 42**: "api_and_frontend" என்ற பெயரில் ஒரு சேவையை வரையறுக்கிறது
+- **Line 43**: மூலக் கோடுகளுக்கு `./src` அடைவை காட்டுகிறது
+- **Line 44**: Python மொழியை நிரலாக்க மொழியாகக் குறிப்பிடுகிறது
+- **Line 45**: ஹோஸ்டிங்கிற்கு Azure Container Apps-ஐ பயன்படுத்துகிறது
+- **Lines 46-48**: Docker கட்டமைப்பு
 
-      - "api_and_frontend" என்ற பெயரில் Docker image-ஐ பயன்படுத்துகிறது
-      - Azure-ல் image-ஐ local-ல் அல்லாமல் remote-ஆக உருவாக்குகிறது
+      - image பெயராக "api_and_frontend" ஐப் பயன்படுத்துகிறது
+      - Docker image-ஐ உள்ளகமாக அல்லாமல் Azure இல் தொலை build செய்கிறது
 
-### 2.5 Pipeline Variables (49-76)
+### 2.5 பைப்பிளைன் மாறிலிகள் (49-76)
 
-இவை CI/CD pipelines-ல் `azd`-ஐ இயக்க உதவும் மாறிகள்
+These are variables to help you run `azd` in CI/CD pipelines for automation
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,108 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-இந்த பகுதி **deployment**-இன் போது பயன்படுத்தப்படும் சூழல் மாறிகளை வரையறுக்கிறது, வகைப்படுத்தப்பட்டு:
+This section defines environment variables used **during deployment**, organized by category:
 
 - **Azure Resource Names (Lines 51-60)**:
-      - Resource Group, AI Hub, AI Project போன்ற முக்கிய Azure சேவைகளின் resource பெயர்கள்
+      - முக்கிய Azure சேவை வளப் பெயர்கள், உதாரணமாக Resource Group, AI Hub, AI Project, போன்றவை
 - **Feature Flags (Lines 61-63)**:
-      - குறிப்பிட்ட Azure சேவைகளை இயக்க/முடக்க boolean மாறிகள்
+      - குறிப்பிட்ட Azure சேவைகளை இயக்க/முடக்க Boolean மாறிலிகள்
 - **AI Agent Configuration (Lines 64-71)**:
-      - முக்கிய AI முகவரின் பெயர், ID, deployment அமைப்புகள், மாதிரி விவரங்கள்
+      - முக்கிய AI ஏஜென்டிற்கான அமைப்புகள்: பெயர், ID, deployment அமைப்புகள், மாதிரி விவரங்கள்
 - **AI Embedding Configuration (Lines 72-79)**:
-      - vector search-க்கு பயன்படுத்தப்படும் embedding மாதிரியின் அமைப்பு
-- **Search மற்றும் Monitoring (Lines 80-84)**:
-      - Search index name, ஏற்கனவே உள்ள resource IDs, மற்றும் monitoring/tracing அமைப்புகள்
+      - வெக்டர் தேடலுக்கு பயன்படும் embedding மாதிரிக்கான கட்டமைப்புகள்
+- **Search and Monitoring (Lines 80-84)**:
+      - Search index பெயர், உள்ளமைவிலுள்ள வள ID-கள், மற்றும் கண்காணிப்பு/தடையமைப்பு அமைப்புகள்
 
 ---
 
-## 3. Env Variables-ஐ அறிந்து கொள்ளுங்கள்
-உங்கள் deployment-இன் அமைப்பு மற்றும் நடத்தை கட்டுப்படுத்தும் சூழல் மாறிகள், அவற்றின் முதன்மை நோக்கின் அடிப்படையில் ஒழுங்குபடுத்தப்பட்டுள்ளன. பெரும்பாலான மாறிகள் உணர்வுப்பூர்வமான முன்னிருப்புகளை கொண்டுள்ளன, ஆனால் நீங்கள் அவற்றை உங்கள் குறிப்பிட்ட தேவைகள் அல்லது ஏற்கனவே உள்ள Azure வளங்களுக்கு பொருந்துமாறு தனிப்பயனாக்கலாம்.
+## 3. சுற்றுப்புற மாறிலிகள் பற்றி அறியவும்
+The following environment variables control your deployment's configuration and behavior, organized by their primary purpose. Most variables have sensible defaults, but you can customize them to match your specific requirements or existing Azure resources.
 
-### 3.1 தேவைப்படும் மாறிகள் 
+### 3.1 தேவையான மாறிலிகள் 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# முக்கிய Azure கட்டமைப்பு
+AZURE_ENV_NAME                    # சூழல் பெயர் (வளங்களைப் பெயரிடும்போது பயன்படும்)
+AZURE_LOCATION                    # நியமிப்பு பிராந்தியம்
+AZURE_SUBSCRIPTION_ID             # இலக்கு சந்தா
+AZURE_RESOURCE_GROUP              # வளக் குழு பெயர்
+AZURE_PRINCIPAL_ID                # RBAC க்கான பயனர் பிரதிநிதி
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# வள பெயர்கள் (குறிப்பிடப்படாவிட்டால் தானாக உருவாக்கப்படும்)
+AZURE_AIHUB_NAME                  # Microsoft Foundry மையத்தின் பெயர்
+AZURE_AIPROJECT_NAME              # AI திட்டத்தின் பெயர்
+AZURE_AISERVICES_NAME             # AI சேவைகள் கணக்கு பெயர்
+AZURE_STORAGE_ACCOUNT_NAME        # சேமிப்பு கணக்கு பெயர்
+AZURE_CONTAINER_REGISTRY_NAME     # கண்டெய்னர் பதிவகத்தின் பெயர்
+AZURE_KEYVAULT_NAME               # Key Vault பெயர் (பயன்படுத்தப்பட்டால்)
 ```
 
-### 3.2 Model Configuration 
+### 3.2 மாதிரி கட்டமைப்பு 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# அரட்டை மாதிரி கட்டமைப்பு
+AZURE_AI_AGENT_MODEL_NAME         # இயல்புநிலை: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # இயல்புநிலை: OpenAI (அல்லது Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # இயல்புநிலை: சமீபத்தில் கிடைக்கும்
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # அரட்டை மாதிரிக்கான வினியோகப் பெயர்
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # இயல்புநிலை: சாதாரண
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # இயல்புநிலை: 80 (TPM இல் ஆயிரங்கள்)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# எம்பெட்டிங் மாதிரி கட்டமைப்பு
+AZURE_AI_EMBED_MODEL_NAME         # இயல்புநிலை: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # இயல்புநிலை: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # இயல்புநிலை: சமீபத்தில் கிடைக்கும்
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # எம்பெடிங்குகளுக்கான வினியோகப் பெயர்
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # இயல்புநிலை: சாதாரண
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # இயல்புநிலை: 50 (TPM இல் ஆயிரங்கள்)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# ஏஜெண்ட் அமைப்பு
+AZURE_AI_AGENT_NAME               # ஏஜெண்டின் காட்சிப்பெயர்
+AZURE_EXISTING_AGENT_ID           # முந்தைய ஏஜெண்டை பயன்படுத்தவும் (விருப்பமானது)
 ```
 
-### 3.3 Feature Toggle
+### 3.3 அம்சத் தேர்வு
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# விருப்ப சேவைகள்
+USE_APPLICATION_INSIGHTS         # இயல்புநிலை: உண்மை
+USE_AZURE_AI_SEARCH_SERVICE      # இயல்புநிலை: தவறு
+USE_CONTAINER_REGISTRY           # இயல்புநிலை: உண்மை
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# கண்காணிப்பு மற்றும் டிரேசிங்
+ENABLE_AZURE_MONITOR_TRACING     # இயல்புநிலை: தவறு
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # இயல்புநிலை: தவறு
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# தேடல் கட்டமைப்பு
+AZURE_AI_SEARCH_INDEX_NAME       # தேடல் இன்டெக்ஸ் பெயர்
+AZURE_SEARCH_SERVICE_NAME        # தேடல் சேவை பெயர்
 ```
 
-### 3.4 AI Project Configuration 
+### 3.4 AI திட்ட கட்டமைப்பு 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# உள்ளிருக்கும் வளங்களைப் பயன்படுத்தவும்
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # உள்ளிருக்கும் AI திட்டத்தின் முழு வள அடையாளம் (ID)
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # உள்ளிருக்கும் திட்டத்தின் என்ட்பாயிண்ட் URL
 ```
 
-### 3.5 உங்கள் மாறிகளை சரிபார்க்கவும்
+### 3.5 உங்கள் மாறிலிகளைச் சரிபார்க்கவும்
 
-Azure Developer CLI-யை பயன்படுத்தி உங்கள் சூழல் மாறிகளை காணவும் மற்றும் நிர்வகிக்கவும்:
+Use the Azure Developer CLI to view and manage your environment variables:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# தற்போதைய சூழலுக்கான அனைத்து சூழல் மாறிலிகளையும் காண்க
 azd env get-values
 
-# Get a specific environment variable
+# ஒரு குறிப்பிட்ட சூழல் மாறியை பெறுக
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# ஒரு சூழல் மாறியை அமைக்க
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# ஒரு .env கோப்பிலிருந்து பல சூழல் மாறிலிகளை அமைக்க
 azd env set --from-file .env
 ```
 
 ---
 
-**குறிப்பு**:  
-இந்த ஆவணம் [Co-op Translator](https://github.com/Azure/co-op-translator) என்ற AI மொழிபெயர்ப்பு சேவையைப் பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சிக்கின்றோம், ஆனால் தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான தகவல்கள் இருக்கக்கூடும் என்பதை கவனத்தில் கொள்ளவும். அதன் தாய்மொழியில் உள்ள மூல ஆவணம் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்கள் அல்லது தவறான விளக்கங்களுக்கு நாங்கள் பொறுப்பல்ல.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+மறுப்புரை:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சிக்கிறோம் என்றாலும், தானாக இயங்கும் மொழிபெயர்ப்புகளில் தவறுகள் அல்லது பிழைகள் இருக்கலாம் என்பதை தயவுசெய்து கவனிக்கவும். இயல்பு மொழியில் உள்ள அசல் ஆவணம் அதேநேரத்தில் அதிகாரபூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பயன்படுத்த பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பின் பயன்பாட்டால் நேரிடக்கூடிய எந்தவொரு தவறான புரிதலுக்கும் அல்லது தவறான விளக்கத்திற்கும் நாங்கள் பொறுப்பாக இருக்கமாட்டோம்.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

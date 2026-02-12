@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-24T14:13:35+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "pcm"
-}
--->
 # Microservices Architecture - Container App Example
 
-⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
+⏱️ **How long e go take**: 25-35 minutes | 💰 **How much e fit cost**: ~$50-100/month | ⭐ **Level**: Advanced
 
-Dis one na **simple but e dey work well** microservices architecture wey dem deploy go Azure Container Apps using AZD CLI. Dis example go show how service go dey talk to service, container orchestration, and monitoring with practical 2-service setup.
+Na **simplified but functional** microservices architecture wey dem deploy for Azure Container Apps using AZD CLI. Dis example dey show service-to-service communication, container orchestration, and monitoring with one practical 2-service setup.
 
-> **📚 Learning Approach**: Dis example dey start with small 2-service architecture (API Gateway + Backend Service) wey you fit deploy and learn from. After you don sabi dis foundation well, we go show you how you fit expand am go full microservices ecosystem.
+> **📚 How You Go Learn**: Dis example start small with 2-service architecture (API Gateway + Backend Service) wey you fit deploy and learn from. After you sabi the foundation, we go show how to expand am to full microservices ecosystem.
 
 ## Wetin You Go Learn
 
-If you complete dis example, you go sabi:
-- Deploy plenty containers go Azure Container Apps
-- Make service dey talk to service with internal networking
-- Set environment-based scaling and health checks
-- Monitor distributed applications with Application Insights
+By finishing dis example, you go:
+- Deploy many containers to Azure Container Apps
+- Implement service-to-service communication with internal networking
+- Configure scaling based on environment and set health checks
+- Monitor distributed apps with Application Insights
 - Understand microservices deployment patterns and best practices
-- Learn how to move from simple to complex architectures
+- Learn how to expand step-by-step from simple to complex architectures
 
 ## Architecture
 
-### Phase 1: Wetin We Dey Build (Wey Dis Example Get)
+### Phase 1: Wetin We Dey Build (Included in This Example)
 
 ```
                     ┌─────────────────────────────┐
@@ -60,18 +51,18 @@ If you complete dis example, you go sabi:
                     └─────────────────────────────┘
 ```
 
-**Why We Dey Start Small?**
-- ✅ Deploy and understand am quick (25-35 minutes)
-- ✅ Learn core microservices patterns without wahala
-- ✅ Code wey dey work wey you fit modify and test
-- ✅ E go cheap for learning (~$50-100/month vs $300-1400/month)
-- ✅ Build confidence before you add database and message queues
+**Why Start Simple?**
+- ✅ Deploy and understand quick (25-35 minutes)
+- ✅ Learn core microservices patterns without yawa
+- ✅ Working code wey you fit modify and experiment with
+- ✅ Lower cost for learning (~$50-100/month vs $300-1400/month)
+- ✅ Build confidence before you add databases and message queues
 
-**Analogy**: E be like when you dey learn how to drive. You go start for empty parking lot (2 services), sabi the basics, then move go city traffic (5+ services with database).
+**Analogy**: Think am like learning to drive. You go start for empty parking lot (2 services), master the basics, then move go city traffic (5+ services with databases).
 
 ### Phase 2: Future Expansion (Reference Architecture)
 
-Once you don sabi the 2-service architecture, you fit expand am go:
+Once you don master the 2-service architecture, you fit expand to:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -86,58 +77,58 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-Check "Expansion Guide" section for end for step-by-step instructions.
+See "Expansion Guide" section for step-by-step instructions.
 
-## Features Wey E Get
+## Features Included
 
 ✅ **Service Discovery**: Automatic DNS-based discovery between containers  
 ✅ **Load Balancing**: Built-in load balancing across replicas  
-✅ **Auto-scaling**: Independent scaling per service based on HTTP requests  
+✅ **Auto-scaling**: Each service fit scale on im own based on HTTP requests  
 ✅ **Health Monitoring**: Liveness and readiness probes for both services  
 ✅ **Distributed Logging**: Centralized logging with Application Insights  
 ✅ **Internal Networking**: Secure service-to-service communication  
 ✅ **Container Orchestration**: Automatic deployment and scaling  
 ✅ **Zero-Downtime Updates**: Rolling updates with revision management  
 
-## Wetin You Need Before You Start
+## Prerequisites
 
-### Tools Wey You Go Need
+### Required Tools
 
-Before you start, make sure say you don install dis tools:
+Before you start, make sure sey you get these tools installed:
 
 1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```bash
    azd version
-   # Expected output: azd version 1.0.0 or higher
+   # Wetin suppose show: azd version 1.0.0 wey pass
    ```
 
 2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```bash
    az --version
-   # Expected output: azure-cli 2.50.0 or higher
+   # We dey expect say e go show: azure-cli 2.50.0 or pass
    ```
 
 3. **[Docker](https://www.docker.com/get-started)** (for local development/testing - optional)
    ```bash
    docker --version
-   # Expected output: Docker version 20.10 or higher
+   # Wetin suppose show: Docker version 20.10 or pass
    ```
 
 ### Azure Requirements
 
-- Active **Azure subscription** ([create free account](https://azure.microsoft.com/free/))
-- Permission to create resources for your subscription
-- **Contributor** role for subscription or resource group
+- Active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- Permissions to create resources for your subscription
+- **Contributor** role on the subscription or resource group
 
-### Knowledge Wey You Go Need
+### Knowledge Prerequisites
 
-Dis example na **advanced-level**. You suppose don:
-- Complete [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- Sabi small about microservices architecture
-- Know REST APIs and HTTP
-- Understand container concepts
+Dis one na **advanced-level** example. You suppose:
+- Don finish the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Get basic understanding of microservices architecture
+- Sabi REST APIs and HTTP
+- Get idea how containers dey work
 
-**New to Container Apps?** Start with [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) first to sabi the basics.
+**New to Container Apps?** Start with the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) first make you learn the basics.
 
 ## Quick Start (Step-by-Step)
 
@@ -148,10 +139,10 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Success Check**: Make sure say you see `azure.yaml`:
+**✓ Success Check**: Make sure you see `azure.yaml`:
 ```bash
 ls
-# Expected: README.md, azure.yaml, infra/, src/
+# We dey expect: README.md, azure.yaml, infra/, src/
 ```
 
 ### Step 2: Authenticate with Azure
@@ -174,9 +165,9 @@ azd init
 ```
 
 **Prompts wey you go see**:
-- **Environment name**: Enter short name (e.g., `microservices-dev`)
-- **Azure subscription**: Select your subscription
-- **Azure location**: Choose region (e.g., `eastus`, `westeurope`)
+- **Environment name**: Put short name (e.g., `microservices-dev`)
+- **Azure subscription**: Choose your subscription
+- **Azure location**: Pick region (e.g., `eastus`, `westeurope`)
 
 **✓ Success Check**: You suppose see:
 ```
@@ -190,13 +181,13 @@ azd up
 ```
 
 **Wetin go happen** (e go take 8-12 minutes):
-1. Create Container Apps environment
-2. Create Application Insights for monitoring
-3. Build API Gateway container (Node.js)
-4. Build Product Service container (Python)
-5. Deploy both containers go Azure
-6. Configure networking and health checks
-7. Set up monitoring and logging
+1. E go create Container Apps environment
+2. E go create Application Insights for monitoring
+3. E go build API Gateway container (Node.js)
+4. E go build Product Service container (Python)
+5. E go deploy both containers to Azure
+6. E go configure networking and health checks
+7. E go set up monitoring and logging
 
 **✓ Success Check**: You suppose see:
 ```
@@ -209,22 +200,22 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ### Step 5: Test the Deployment
 
 ```bash
-# Collect di gateway endpoint
+# Get di gateway endpoint
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Test API Gateway health
+# Test how di API Gateway dey
 curl $GATEWAY_URL/health
 
-# Wetin we dey expect:
-# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
+# Wetin we expect as output:
+# {"status":"kampe","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
 **Test product service through gateway**:
 ```bash
-# List products
+# List di product dem
 curl $GATEWAY_URL/api/products
 
-# Wetin we dey expect make e show:
+# Wetin we expect make e show:
 # [
 #   {"id":1,"name":"Laptop","price":999.99,"stock":50},
 #   {"id":2,"name":"Mouse","price":29.99,"stock":200},
@@ -236,11 +227,11 @@ curl $GATEWAY_URL/api/products
 
 ---
 
-**🎉 Congratulations!** You don deploy microservices architecture go Azure!
+**🎉 Congratulation!** You don deploy microservices architecture to Azure!
 
 ## Project Structure
 
-All implementation files dey inside—dis na complete, working example:
+All implementation files dey included—dis na complete, working example:
 
 ```
 microservices/
@@ -273,18 +264,18 @@ microservices/
 **Wetin Each Component Dey Do:**
 
 **Infrastructure (infra/)**:
-- `main.bicep`: E dey arrange all Azure resources and their dependencies
-- `core/container-apps-environment.bicep`: E dey create Container Apps environment and Azure Container Registry
-- `core/monitor.bicep`: E dey set up Application Insights for distributed logging
+- `main.bicep`: Orchestrates all Azure resources and their dependencies
+- `core/container-apps-environment.bicep`: Creates the Container Apps environment and Azure Container Registry
+- `core/monitor.bicep`: Sets up Application Insights for distributed logging
 - `app/*.bicep`: Individual container app definitions with scaling and health checks
 
 **API Gateway (src/api-gateway/)**:
-- Public-facing service wey dey route requests go backend services
-- E dey do logging, error handling, and request forwarding
-- E dey show service-to-service HTTP communication
+- Public-facing service wey dey route requests to backend services
+- Implements logging, error handling, and request forwarding
+- Shows service-to-service HTTP communication
 
 **Product Service (src/product-service/)**:
-- Internal service wey get product catalog (in-memory for simplicity)
+- Internal service wey get product catalog (in-memory to keep am simple)
 - REST API with health checks
 - Example of backend microservice pattern
 
@@ -294,13 +285,13 @@ microservices/
 
 **Port**: 8080  
 **Access**: Public (external ingress)  
-**Purpose**: E dey route incoming requests go backend services  
+**Purpose**: E dey route incoming requests to correct backend services  
 
 **Endpoints**:
 - `GET /` - Service information
 - `GET /health` - Health check endpoint
-- `GET /api/products` - Forward go product service (list all)
-- `GET /api/products/:id` - Forward go product service (get by ID)
+- `GET /api/products` - Forward to product service (list all)
+- `GET /api/products/:id` - Forward to product service (get by ID)
 
 **Key Features**:
 - Request routing with axios
@@ -311,7 +302,7 @@ microservices/
 
 **Code Highlight** (`src/api-gateway/app.js`):
 ```javascript
-// Internal service dey talk to each oda
+// Inside services dey communicate
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
@@ -349,51 +340,51 @@ app.get('/api/products', async (req, res) => {
 ```
 
 **Why Internal Only?**
-Product service no dey exposed publicly. All requests must pass through API Gateway, wey dey provide:
-- Security: Controlled access point
-- Flexibility: Fit change backend without affecting clients
+Product service no dey exposed to public. All requests must pass through the API Gateway, wey dey give:
+- Security: One controlled access point
+- Flexibility: Fit change backend without disturb clients
 - Monitoring: Centralized request logging
 
 ## Understanding Service Communication
 
 ### How Services Dey Talk to Each Other
 
-For dis example, API Gateway dey communicate with Product Service using **internal HTTP calls**:
+For dis example, the API Gateway dey communicate with the Product Service using **internal HTTP calls**:
 
 ```javascript
 // API Gateway (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Make internal HTTP request
+// Send one HTTP request wey dey inside di system.
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**Key Points**:
+**Main Points**:
 
-1. **DNS-Based Discovery**: Container Apps dey automatically provide DNS for internal services
+1. **DNS-Based Discovery**: Container Apps dey provide automatic DNS for internal services
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Simplified as: `http://product-service` (Container Apps dey resolve am)
+   - Simplified as: `http://product-service` (Container Apps go resolve am)
 
 2. **No Public Exposure**: Product Service get `external: false` for Bicep
-   - E dey accessible only inside Container Apps environment
+   - E only dey accessible inside the Container Apps environment
    - Internet no fit reach am
 
-3. **Environment Variables**: Service URLs dey injected during deployment
-   - Bicep dey pass internal FQDN go gateway
-   - No hardcoded URLs for application code
+3. **Environment Variables**: Service URLs dey inject at deployment time
+   - Bicep pass the internal FQDN to the gateway
+   - No hardcoded URLs for the application code
 
-**Analogy**: E be like office rooms. API Gateway na reception desk (public-facing), and Product Service na office room (internal only). Visitors must pass reception before dem fit reach any office.
+**Analogy**: Think am like office rooms. API Gateway na reception desk (public-facing), Product Service na office room (internal only). Visitors must pass reception before dem fit reach any office.
 
 ## Deployment Options
 
 ### Full Deployment (Recommended)
 
 ```bash
-# Set up di infrastructure and di two services
+# Set up di infrastructure an di two services
 azd up
 ```
 
-Dis one go deploy:
+Dis one deploy:
 1. Container Apps environment
 2. Application Insights
 3. Container Registry
@@ -405,22 +396,22 @@ Dis one go deploy:
 ### Deploy Individual Service
 
 ```bash
-# Deploy only one service (afta di first azd up)
+# Deploy just one service (after di initial azd up)
 azd deploy api-gateway
 
-# Or deploy product service
+# Or deploy di product service
 azd deploy product-service
 ```
 
-**Use Case**: If you don update code for one service and wan redeploy only dat service.
+**Use Case**: When you don update code for one service and you wan redeploy only that service.
 
 ### Update Configuration
 
 ```bash
-# Change di scaling parameters
+# Chanja di settings wey dey control how e dey scale
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Redeploy wit new configuration
+# Deploy am again wit di new configuration
 azd up
 ```
 
@@ -428,7 +419,7 @@ azd up
 
 ### Scaling Configuration
 
-Both services dey configured with HTTP-based autoscaling for their Bicep files:
+Both services don configure with HTTP-based autoscaling for their Bicep files:
 
 **API Gateway**:
 - Min replicas: 2 (always at least 2 for availability)
@@ -468,7 +459,7 @@ scale: {
 **Product Service**:
 - CPU: 0.5 vCPU
 - Memory: 1 GiB
-- Reason: E dey do lightweight in-memory operations
+- Reason: Lightweight in-memory operations
 
 ### Health Checks
 
@@ -499,21 +490,24 @@ probes: [
 
 **Wetin Dis Mean**:
 - **Liveness**: If health check fail, Container Apps go restart the container
-- **Readiness**: If e no ready, Container Apps go stop to route traffic go dat replica
+- **Readiness**: If replica no ready, Container Apps no go route traffic to am
+
+
 
 ## Monitoring & Observability
 
 ### View Service Logs
 
 ```bash
-# Stream logs from API Gateway
-azd logs api-gateway --follow
+# Use azd monitor make you see logs
+azd monitor --logs
 
-# See di recent logs for product service
-azd logs product-service --tail 100
+# Abi use Azure CLI for certain Container Apps:
+# Make logs dey stream from API Gateway
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# See all di logs wey dey from di two services
-azd logs --follow
+# See the latest product service logs
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Expected Output**:
@@ -526,7 +520,7 @@ azd logs --follow
 
 ### Application Insights Queries
 
-Enter Application Insights for Azure Portal, then run dis queries:
+Open Application Insights for your app in Azure Portal, then run these queries:
 
 **Find Slow Requests**:
 ```kusto
@@ -565,10 +559,10 @@ requests
 ### Access Monitoring Dashboard
 
 ```bash
-# Collect Application Insights details
+# Make you find di Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Open Azure Portal monitoring
+# Open di Azure Portal to check monitoring
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
@@ -577,18 +571,18 @@ az monitor app-insights component show \
 
 ### Live Metrics
 
-1. Enter Application Insights for Azure Portal
+1. Go Application Insights for your app in Azure Portal
 2. Click "Live Metrics"
-3. See real-time requests, failures, and performance
+3. You go see real-time requests, failures, and performance
 4. Test by running: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
 ## Practical Exercises
 
-[Note: Check full exercises above for "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding third service.]
+[Note: See full exercises above in the "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding a third service.]
 
 ## Cost Analysis
 
-### Estimated Monthly Costs (For Dis 2-Service Example)
+### Estimated Monthly Costs (For This 2-Service Example)
 
 | Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
@@ -614,32 +608,31 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Use Consumption Plan for Cosmos DB** (if you add am):
+2. **Use Consumption Plan for Cosmos DB** (when you add am):
    - Pay only for wetin you use
    - No minimum charge
 
 3. **Set Application Insights Sampling**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Sample 50% of requests
+   appInsights.defaultClient.config.samplingPercentage = 50; // Take sample for 50% of di requests
    ```
 
-4. **Clean Up When You No Need Am**:
+4. **Clean Up When Not Needed**:
    ```bash
    azd down
    ```
 
 ### Free Tier Options
-For learnin/testing, try dis:
-
-- Use Azure free credits (first 30 days)
-- Keep replicas small
-- Delete afta testing (no dey pay ongoing charges)
+For learning/testing, make you consider dis:
+- Use Azure free credits (di first 30 days)
+- Keep replicas to minimum
+- Delete after testing (so e no go dey charge you)
 
 ---
 
 ## Cleanup
 
-To make sure say you no dey pay ongoing charges, delete all di resources:
+Make you delete all resources so e no go dey charge you again:
 
 ```bash
 azd down --force --purge
@@ -654,13 +647,13 @@ Type `y` to confirm.
 
 **Wetin Go Delete**:
 - Container Apps Environment
-- Di two Container Apps (gateway & product service)
+- Both Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Check Cleanup**:
+**✓ Check Say You Don Cleanup**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
@@ -671,7 +664,7 @@ E suppose return empty.
 
 ## Expansion Guide: From 2 to 5+ Services
 
-Once you don sabi dis 2-service architecture, na so you fit expand:
+Once you don sabi dis 2-service architecture, na so you go take expand:
 
 ### Phase 1: Add Database Persistence (Next Step)
 
@@ -701,9 +694,9 @@ Once you don sabi dis 2-service architecture, na so you fit expand:
 1. New folder: `src/order-service/` (Python/Node.js/C#)
 2. New Bicep: `infra/app/order-service.bicep`
 3. Update API Gateway make e route `/api/orders`
-4. Add Azure SQL Database for order persistence
+4. Add Azure SQL Database to store order persistence
 
-**Di Architecture go be**:
+**Architecture becomes**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
@@ -711,27 +704,27 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Phase 3: Add Async Communication (Service Bus)
 
-**Do Event-Driven Architecture**:
+**Implement Event-Driven Architecture**:
 
 1. Add Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service go dey publish "ProductCreated" events
-3. Order Service go dey subscribe to product events
-4. Add Notification Service to process di events
+2. Product Service go publish "ProductCreated" events
+3. Order Service go subscribe to product events
+4. Add Notification Service to process events
 
 **Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
 ### Phase 4: Add User Authentication
 
-**Do User Service**:
+**Implement User Service**:
 
 1. Create `src/user-service/` (Go/Node.js)
 2. Add Azure AD B2C or custom JWT authentication
-3. API Gateway go dey validate tokens
-4. Services go dey check user permissions
+3. API Gateway go validate tokens
+4. Services go check user permissions
 
 ### Phase 5: Production Readiness
 
-**Add Dis Components**:
+**Add These Components**:
 - Azure Front Door (global load balancing)
 - Azure Key Vault (secret management)
 - Azure Monitor Workbooks (custom dashboards)
@@ -756,17 +749,17 @@ API Gateway → Product Service (Cosmos DB)
 - → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Add AI capabilities
 - 🏠 [Course Home](../../README.md)
 
-### Comparison: When to Use Wetin
+### Comparison: When to Use What
 
 **Single Container App** (Simple Flask API example):
 - ✅ Simple applications
 - ✅ Monolithic architecture
-- ✅ Quick deploy
+- ✅ Fast to deploy
 - ❌ Limited scalability
 - **Cost**: ~$15-50/month
 
-**Microservices** (Dis example):
-- ✅ Complex applications
+**Microservices** (This example):
+- ✅ For complex applications
 - ✅ Independent scaling per service
 - ✅ Team autonomy (different services, different teams)
 - ❌ More complex to manage
@@ -776,7 +769,7 @@ API Gateway → Product Service (Cosmos DB)
 - ✅ Maximum control and flexibility
 - ✅ Multi-cloud portability
 - ✅ Advanced networking
-- ❌ E need Kubernetes expertise
+- ❌ Need Kubernetes expertise
 - **Cost**: ~$150-500/month minimum
 
 **Recommendation**: Start with Container Apps (dis example), move to AKS only if you need Kubernetes-specific features.
@@ -785,17 +778,17 @@ API Gateway → Product Service (Cosmos DB)
 
 ## Frequently Asked Questions
 
-**Q: Why only 2 services instead of 5+?**  
-A: Na for learning step by step. Learn di basics (service communication, monitoring, scaling) with simple example before you add more complexity. Di pattern wey you go learn here go work for 100-service architectures.
+**Q: Why na only 2 services instead of 5+?**  
+A: Na educational progression. Make you master the fundamentals (service communication, monitoring, scaling) with small example before you add more wahala. The patterns wey you learn here fit apply to 100-service architectures.
 
-**Q: Fit I add more services myself?**  
-A: Yes! Follow di expansion guide wey dey above. Each new service na di same process: create src folder, create Bicep file, update azure.yaml, deploy.
+**Q: Fit I add more services by myself?**  
+A: Sure! Follow the expansion guide wey dey above. Every new service go follow same pattern: create src folder, create Bicep file, update azure.yaml, deploy.
 
-**Q: Dis one na production-ready?**  
-A: E be solid foundation. For production, add: managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, and backup strategy.
+**Q: E ready for production?**  
+A: E solid as foundation. For production, add: managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, and backup strategy.
 
-**Q: Why we no use Dapr or other service mesh?**  
-A: Make e simple for learning. Once you don understand native Container Apps networking, you fit add Dapr for advanced scenarios.
+**Q: Why you no use Dapr or other service mesh?**  
+A: We dey keep am simple for learning. Once you don understand native Container Apps networking, you fit add Dapr for advanced cases.
 
 **Q: How I go debug locally?**  
 A: Run services locally with Docker:
@@ -806,24 +799,24 @@ docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gatew
 ```
 
 **Q: Fit I use different programming languages?**  
-A: Yes! Dis example dey show Node.js (gateway) + Python (product service). You fit mix any language wey dey run for containers.
+A: Yes! Dis example show Node.js (gateway) + Python (product service). You fit mix any languages wey fit run for containers.
 
-**Q: Wetin I go do if I no get Azure credits?**  
-A: Use Azure free tier (first 30 days for new accounts) or deploy for short testing periods and delete am quick.
+**Q: Wetin if I no get Azure credits?**  
+A: Use Azure free tier (first 30 days with new accounts) or deploy for short testing periods and delete immediately.
 
 ---
 
-> **🎓 Learning Path Summary**: You don learn how to deploy multi-service architecture wey get automatic scaling, internal networking, centralized monitoring, and production-ready patterns. Dis foundation go prepare you for complex distributed systems and enterprise microservices architectures.
+> **🎓 Learning Path Summary**: You don learn how to deploy multi-service architecture with automatic scaling, internal networking, centralized monitoring, and production-ready patterns. Dis foundation go prepare you for complex distributed systems and enterprise microservices architectures.
 
 **📚 Course Navigation:**
 - ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
 - → Next: [Database Integration Example](../../../../../examples/database-app)
-- 🏠 [Course Home](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- 🏠 [Course Home](../../../README.md)
+- 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI transleto service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am correct, abeg sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument for im native language na di main source wey you go trust. For important mata, e good make professional human transleto check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Make una sabi:
+Dis document don translate by AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg note say machine translation fit get mistakes or inaccuracies. The original document for im original language na di official/authoritative source. If na important information, e better make professional human translator do am. We no dey liable for any misunderstanding or wrong interpretation wey fit come from di use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

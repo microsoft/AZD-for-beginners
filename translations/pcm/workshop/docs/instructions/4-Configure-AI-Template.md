@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-11-18T19:04:54+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "pcm"
-}
--->
-# 4. Configure Template
+# 4. Configure a Template
 
 !!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"
 
     - [ ] Understand wetin `azure.yaml` dey do
-    - [ ] Understand how `azure.yaml` dey structured
+    - [ ] Understand di structure of `azure.yaml`
     - [ ] Understand di value of azd lifecycle `hooks`
-    - [ ] **Lab 3:** 
+    - [ ] **Lab 4:** Make una explore and change environment variables
 
 ---
 
-!!! prompt "Wetin `azure.yaml` file dey do? Use codefence explain am line by line"
+!!! prompt "Wetinde di `azure.yaml` file dey do? Use codefence make you explain am line by line"
 
-      Di `azure.yaml` file na di **configuration file for Azure Developer CLI (azd)**. E dey show how your application go deploy for Azure, including infrastructure, services, deployment hooks, and environment variables.
+      The `azure.yaml` file na di **configuration file for Azure Developer CLI (azd)**. E dey define how your application suppose deploy to Azure, including infrastructure, services, deployment hooks, and environment variables.
 
 ---
 
 ## 1. Purpose and Functionality
 
-Dis `azure.yaml` file na di **deployment blueprint** for AI agent application wey:
+This `azure.yaml` file serve as di **deployment blueprint** for an AI agent application wey:
 
-1. **Check environment** before deployment
-2. **Provision Azure AI services** (AI Hub, AI Project, Search, etc.)
-3. **Deploy Python application** go Azure Container Apps
-4. **Set AI models** for chat and embedding functionality
-5. **Arrange monitoring and tracing** for di AI application
-6. **Handle both new and existing** Azure AI project scenarios
+1. **Checks di environment** before deployment
+2. **Sets up Azure AI services** (AI Hub, AI Project, Search, etc.)
+3. **Deploys a Python application** to Azure Container Apps
+4. **Configures AI models** for both chat and embedding functionality
+5. **Sets up monitoring and tracing** for the AI application
+6. **Handles both new and existing** Azure AI project scenarios
 
-Di file dey make am possible to **deploy everything with one command** (`azd up`) for complete AI agent solution with correct validation, provisioning, and post-deployment configuration.
+The file make e possible to do **one-command deployment** (`azd up`) of full AI agent solution wit proper validation, provisioning, and post-deployment configuration.
 
 ??? info "Expand To View: `azure.yaml`"
 
-      Di `azure.yaml` file dey show how Azure Developer CLI go deploy and manage dis AI Agent application for Azure. Make we break am down line by line.
+      The `azure.yaml` file dey explain how Azure Developer CLI go deploy and manage this AI Agent application for Azure. Make we break am down line-by-line.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: we need hooks?
-      # TODO: we need all di variables?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ Di file dey make am possible to **deploy everything with one command** (`azd up`
 
 ---
 
-## 2. Deconstructing Di File
+## 2. Deconstructing The File
 
-Make we go through di file section by section, to understand wetin e dey do - and why.
+Make we go through di file section by section, so you fit sabi wetin e dey do - and why.
 
 ### 2.1 **Header and Schema (1-3)**
 
@@ -145,7 +136,7 @@ Make we go through di file section by section, to understand wetin e dey do - an
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Line 1**: E dey provide YAML language server schema validation for IDE support and IntelliSense
+- **Line 1**: E dey provide YAML language server schema validation make IDE get support and IntelliSense
 
 ### 2.2 Project Metadata (5-10)
 
@@ -157,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Line 5**: E dey define di project name wey Azure Developer CLI go use
-- **Lines 6-7**: E dey show say dis na template version 1.0.2
-- **Lines 8-9**: E dey require Azure Developer CLI version 1.14.0 or higher
+- **Line 5**: E define di project name wey Azure Developer CLI dey use
+- **Lines 6-7**: E show say this one base on template version 1.0.2
+- **Lines 8-9**: E require Azure Developer CLI version 1.14.0 or higher
 
 ### 2.3 Deploy Hooks (11-40)
 
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Lines 11-20**: **Pre-deployment hook** - e dey run before `azd up`
+- **Lines 11-20**: **Pre-deployment hook** - dey run before `azd up`
 
-      - For Unix/Linux: E go make validation script executable and run am
-      - For Windows: E go run PowerShell validation script
-      - Both dey interactive and go stop deployment if dem fail
+      - For Unix/Linux: E make validation script executable and den run am
+      - For Windows: E run PowerShell validation script
+      - Both dey interactive and deployment go stop if dem fail
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 21-30**: **Post-provision hook** - e dey run after Azure resources don create
+- **Lines 21-30**: **Post-provision hook** - dey run after Azure resources don create
 
-  - E dey execute environment variable writing scripts
-  - Deployment go continue even if dis scripts fail (`continueOnError: true`)
+  - E run scripts wey write environment variables
+  - E go continue deployment even if these scripts fail (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 31-40**: **Post-deploy hook** - e dey run after application don deploy
+- **Lines 31-40**: **Post-deploy hook** - dey run after application don deploy
 
-  - E dey execute final setup scripts
-  - Deployment go continue even if scripts fail
+  - E run final setup scripts
+  - E go continue even if scripts fail
 
 ### 2.4 Service Config (41-48)
 
-Dis one dey configure di application service wey you dey deploy.
+This one dey configure di application service wey you dey deploy.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Line 42**: E dey define service wey dem call "api_and_frontend"
-- **Line 43**: E dey point go di `./src` directory for source code
-- **Line 44**: E dey specify Python as di programming language
-- **Line 45**: E dey use Azure Container Apps as di hosting platform
+- **Line 42**: E define service wey dem name "api_and_frontend"
+- **Line 43**: E point to di `./src` directory for source code
+- **Line 44**: E show say language na Python
+- **Line 45**: E use Azure Container Apps as di hosting platform
 - **Lines 46-48**: Docker configuration
 
-      - E dey use "api_and_frontend" as di image name
-      - E dey build di Docker image remotely for Azure (no be locally)
+      - E use "api_and_frontend" as di image name
+      - E build di Docker image remotely for Azure (no build am locally)
 
 ### 2.5 Pipeline Variables (49-76)
 
-Dis na variables wey go help you run `azd` for CI/CD pipelines for automation
+These na variables wey go help you run `azd` for CI/CD pipelines for automation
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,14 +278,14 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Dis section dey define environment variables wey dem go use **during deployment**, e dey organized by category:
+This section define environment variables wey dem dey use **during deployment**, dem organize dem by category:
 
 - **Azure Resource Names (Lines 51-60)**:
-      - Core Azure service resource names e.g, Resource Group, AI Hub, AI Project, etc.- 
+      - Core Azure service resource names e.g, Resource Group, AI Hub, AI Project, etc. 
 - **Feature Flags (Lines 61-63)**:
-      - Boolean variables to enable/disable specific Azure services
+      - Boolean variables wey fit enable/disable specific Azure services
 - **AI Agent Configuration (Lines 64-71)**:
-      - Configuration for main AI agent including name, ID, deployment settings, model details- 
+      - Configuration for main AI agent including name, ID, deployment settings, model details 
 - **AI Embedding Configuration (Lines 72-79)**:
       - Configuration for di embedding model wey dem dey use for vector search
 - **Search and Monitoring (Lines 80-84)**:
@@ -303,71 +294,71 @@ Dis section dey define environment variables wey dem go use **during deployment*
 ---
 
 ## 3. Know Env Variables
-Di environment variables wey dey here dey control how your deployment go configure and behave, e dey organized by wetin dem dey do. Most variables get default values wey make sense, but you fit customize dem to match wetin you need or di Azure resources wey you don already get.
+Di environment variables wey follow control how your deployment go behave and di configuration, dem organize dem by their main purpose. Most variables get sensible defaults, but you fit change dem to match your own requirements or existing Azure resources.
 
 ### 3.1 Required Variables 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Main Azure konfigureshon
+AZURE_ENV_NAME                    # Environment name (dem dey use am for resource naming)
+AZURE_LOCATION                    # Region wey dem go deploy to
+AZURE_SUBSCRIPTION_ID             # Di subscription we dey target
+AZURE_RESOURCE_GROUP              # Di resource group name
+AZURE_PRINCIPAL_ID                # User principal wey RBAC go use
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Resource names (dem go auto-generate if you no specify)
+AZURE_AIHUB_NAME                  # Di Microsoft Foundry hub name
+AZURE_AIPROJECT_NAME              # Di AI project name
+AZURE_AISERVICES_NAME             # Di AI services account name
+AZURE_STORAGE_ACCOUNT_NAME        # Di storage account name
+AZURE_CONTAINER_REGISTRY_NAME     # Di container registry name
+AZURE_KEYVAULT_NAME               # Key Vault name (if dem use am)
 ```
 
 ### 3.2 Model Configuration 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Chat model konfigureshon
+AZURE_AI_AGENT_MODEL_NAME         # Di default: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Di default: OpenAI (or Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Di default: di latest we dey available
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Name we dem use deploy chat model
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Di default: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Di default: 80 (thousands of TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Embedding model konfigureshon
+AZURE_AI_EMBED_MODEL_NAME         # Di default: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Di default: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Di default: di latest we dey available
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Name we dem use deploy embeddings
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Di default: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Di default: 50 (thousands of TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Agent konfigureshon
+AZURE_AI_AGENT_NAME               # Name we agent go show
+AZURE_EXISTING_AGENT_ID           # Use agent we don get (optional)
 ```
 
 ### 3.3 Feature Toggle
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Services wey you fit choose
+USE_APPLICATION_INSIGHTS         # As e dey by default: true
+USE_AZURE_AI_SEARCH_SERVICE      # As e dey by default: false
+USE_CONTAINER_REGISTRY           # As e dey by default: true
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Dey monitor and dey trace
+ENABLE_AZURE_MONITOR_TRACING     # As e dey by default: false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # As e dey by default: false
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Settings wey dey for search
+AZURE_AI_SEARCH_INDEX_NAME       # Name wey search index get
+AZURE_SEARCH_SERVICE_NAME        # Name wey search service get
 ```
 
 ### 3.4 AI Project Configuration 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Use di resources wey don dey
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Di full resource ID for di AI project wey don dey
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # Di endpoint URL for di project wey don dey
 ```
 
 ### 3.5 Check Your Variables
@@ -375,22 +366,22 @@ AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
 Use Azure Developer CLI to view and manage your environment variables:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# See all di environment variables wey dey dis environment
 azd env get-values
 
-# Get a specific environment variable
+# Get one particular environment variable wey you want
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Put one environment variable
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Put plenty environment variables from di .env file
 azd env set --from-file .env
 ```
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI transle-shon service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transle-shon. Even as we dey try make am correct, abeg sabi say AI transle-shon fit get mistake or no dey accurate well. Di original dokyument wey dey for im native language na di main source wey you go fit trust. For important mata, e good make you use professional human transle-shon. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis transle-shon.
+Disclaimer:
+Dis document na translation wey an AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator) do. Even though we dey try make am correct, abeg sabi say automatic translations fit get mistakes or no too accurate. Di original document for im native language na di correct authority. If na important information, make you use professional human translator. We no dey liable for any misunderstanding or misinterpretation wey fit come from dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

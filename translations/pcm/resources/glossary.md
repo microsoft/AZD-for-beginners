@@ -1,181 +1,172 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-11-18T19:09:46+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "pcm"
-}
--->
 # Glossary - Azure and AZD Terminology
 
 **Reference for All Chapters**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Learn Basics**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
-- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduction
 
-Dis glossary na full list wey explain di meaning of di terms, ideas, and short forms wey dem dey use for Azure Developer CLI and Azure cloud development. E go help you sabi di technical docs, solve wahala, and talk well about azd projects and Azure services.
+Dis comprehensive glossary dey give meanings for terms, concepts, and acronyms wey dem dey use for Azure Developer CLI and Azure cloud development. Na important reference to help make technical documentation, troubleshoot wahala, and yan well about azd projects and Azure services.
 
 ## Learning Goals
 
-If you dey use dis glossary, you go:
-- Sabi di main terms and ideas for Azure Developer CLI
-- Master di words and technical terms for Azure cloud development
-- Fit use Infrastructure as Code and deployment terms well
-- Understand di names, short forms, and wetin Azure services dey do
-- Get di meaning of terms wey dey help for troubleshooting and debugging
-- Learn di advanced ideas for Azure architecture and development
+By using dis glossary, you go:
+- Understand important Azure Developer CLI termes and concepts
+- Master Azure cloud development vocabulary and technical terms
+- Refer Infrastructure as Code and deployment terminology sharp sharp
+- Comprehend Azure service names, acronyms, and wetin dem dey do
+- Access definitions wey go help for troubleshooting and debugging
+- Learn advanced Azure architecture and development concepts
 
 ## Learning Outcomes
 
-If you dey check dis glossary often, you go fit:
-- Talk well using correct Azure Developer CLI terms
-- Understand technical docs and error messages better
-- Move around Azure services and ideas with confidence
-- Solve wahala using di right technical words
-- Join team discussions with correct technical language
-- Grow your knowledge for Azure cloud development step by step
+If you dey refer this glossary regular, you go fit:
+- Communicate well using correct Azure Developer CLI terminology
+- Understand technical documentation and error messages clear
+- Move around Azure services and concepts with confidence
+- Troubleshoot issues using the correct technical words
+- Contribute for team discussions with accurate technical language
+- Grow your Azure cloud development knowledge in organized way
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager template. JSON-based Infrastructure as Code format wey dem dey use to define and deploy Azure resources.
+Azure Resource Manager template. JSON-based Infrastructure as Code format wey dem dey use to define and deploy Azure resources declaratively.
 
 **App Service**  
-Azure platform-as-a-service (PaaS) wey dey host web apps, REST APIs, and mobile backends without you managing di infrastructure.
+Azure's platform-as-a-service (PaaS) offering for hosting web applications, REST APIs, and mobile backends without managing infrastructure.
 
 **Application Insights**  
-Azure service wey dey monitor app performance, availability, and usage.
+Azure's application performance monitoring (APM) service wey dey give deep insight into how application dey perform, availability, and usage.
 
 **Azure CLI**  
-Command-line tool wey dey manage Azure resources. azd dey use am for authentication and some operations.
+Command-line interface for managing Azure resources. Na wetin azd dey use for authentication and some operations.
 
 **Azure Developer CLI (azd)**  
-Developer-friendly command-line tool wey dey make am easy to build and deploy apps to Azure using templates and Infrastructure as Code.
+Developer-centered command-line tool wey dey speed up how person build and deploy applications to Azure using templates and Infrastructure as Code.
 
 **azure.yaml**  
-Di main config file for azd project wey dey define services, infrastructure, and deployment hooks.
+The main configuration file for an azd project wey dey define services, infrastructure, and deployment hooks.
 
 **Azure Resource Manager (ARM)**  
-Azure service wey dey help manage and deploy resources.
+Azure service wey dey handle deployment and management; e dey provide management layer for creating, updating, and deleting resources.
 
 ## B
 
 **Bicep**  
-Microsoft language wey dey make am easy to deploy Azure resources. E simple pass ARM templates but e dey compile to ARM.
+Domain-specific language (DSL) wey Microsoft make for deploying Azure resources. E get simpler syntax pass ARM templates and e dey compile to ARM.
 
 **Build**  
-Di process wey dey compile code, install dependencies, and prepare apps for deployment.
+The process of compiling source code, installing dependencies, and preparing applications for deployment.
 
 **Blue-Green Deployment**  
-Deployment strategy wey dey use two production environments (blue and green) to reduce downtime and risk.
+Deployment strategy wey dey use two identical production environments (blue and green) to reduce downtime and risk.
 
 ## C
 
 **Container Apps**  
-Azure serverless container service wey dey run containerized apps without you managing di infrastructure.
+Azure's serverless container service wey allow you run containerized applications without managing complex infrastructure.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Automated way to dey integrate code changes and deploy apps.
+Continuous Integration/Continuous Deployment. Na automated practices to integrate code changes and deploy applications.
 
 **Cosmos DB**  
-Azure global database service wey dey support different models and dey give strong SLAs for throughput, latency, availability, and consistency.
+Azure's globally distributed, multi-model database service wey dey give strong SLAs for throughput, latency, availability, and consistency.
 
 **Configuration**  
-Settings and parameters wey dey control how app go behave and deployment options.
+Settings and parameters wey control how application behave and deployment options.
 
 ## D
 
 **Deployment**  
-Di process wey dey install and configure apps and di things wey dem need for di infrastructure.
+The process of installing and configuring applications and their dependencies on the target infrastructure.
 
 **Docker**  
-Platform wey dey help develop, ship, and run apps using container technology.
+Platform for developing, shipping, and running applications using containerization technology.
 
 **Dockerfile**  
-Text file wey get instructions for building Docker container image.
+Text file wey contain instructions for building a Docker container image.
 
 ## E
 
 **Environment**  
-Di deployment target wey represent one instance of your app (e.g., development, staging, production).
+Deployment target wey represent one specific instance of your application (for example, development, staging, production).
 
 **Environment Variables**  
-Key-value pairs wey dey store config values wey app fit use when e dey run.
+Configuration values wey dem store as key-value pairs wey applications fit access at runtime.
 
 **Endpoint**  
-URL or network address wey you fit use access app or service.
+URL or network address wey people fit use to reach an application or service.
 
 ## F
 
 **Function App**  
-Azure serverless compute service wey dey run event-driven code without you managing di infrastructure.
+Azure's serverless compute service wey make you run event-driven code without managing infrastructure.
 
 ## G
 
 **GitHub Actions**  
-CI/CD platform wey dey work with GitHub repositories to automate workflows.
+CI/CD platform wey integrate with GitHub repositories to automate workflows.
 
 **Git**  
-Distributed version control system wey dey track changes for source code.
+Distributed version control system wey dem dey use to track changes for source code.
 
 ## H
 
 **Hooks**  
-Custom scripts or commands wey dey run for specific points during deployment lifecycle (preprovision, postprovision, predeploy, postdeploy).
+Custom scripts or commands wey dey run for specific points during the deployment lifecycle (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Di Azure service type wey app go dey deploy to (e.g., appservice, containerapp, function).
+The Azure service type wey application go deploy for (for example, appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Di way wey people dey define and manage infrastructure through code instead of manual processes.
+Practice wey dey define and manage infrastructure through code instead of doing am manually.
 
 **Init**  
-Di process wey dey start new azd project, usually from template.
+The process of initializing new azd project, normally from a template.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Format wey people dey use for config files and API responses.
+JavaScript Object Notation. Data interchange format wey people dey use for configuration files and API responses.
 
 **JWT**  
-JSON Web Token. Standard wey dey help transmit information securely between people as JSON object.
+JSON Web Token. Standard to securely send information between parties as a JSON object.
 
 ## K
 
 **Key Vault**  
-Azure service wey dey store and manage secrets, keys, and certificates securely.
+Azure service wey dey securely store and manage secrets, keys, and certificates.
 
 **Kusto Query Language (KQL)**  
-Query language wey dey analyze data for Azure Monitor, Application Insights, and other Azure services.
+Query language wey dem dey use to analyze data for Azure Monitor, Application Insights, and other Azure services.
 
 ## L
 
 **Load Balancer**  
-Service wey dey share incoming network traffic across many servers or instances.
+Service wey dey distribute incoming network traffic across multiple servers or instances.
 
 **Log Analytics**  
-Azure service wey dey collect, analyze, and act on telemetry data from cloud and on-premises environments.
+Azure service for collecting, analyzing, and acting on telemetry data from cloud and on-premises environments.
 
 ## M
 
 **Managed Identity**  
-Azure feature wey dey give Azure services automatic identity to authenticate to other Azure services.
+Azure feature wey give Azure services automatic managed identity to authenticate to other Azure services.
 
 **Microservices**  
-Di way wey people dey build apps as small, independent services.
+Architecture approach wey make application as small, independent services.
 
 **Monitor**  
-Azure monitoring solution wey dey give full-stack observability across apps and infrastructure.
+Azure unified monitoring solution wey dey give full-stack observability across applications and infrastructure.
 
 ## N
 
 **Node.js**  
-JavaScript runtime wey dey use Chrome V8 engine to build server-side apps.
+JavaScript runtime wey build for Chrome's V8 engine for building server-side applications.
 
 **npm**  
 Package manager for Node.js wey dey manage dependencies and packages.
@@ -183,105 +174,105 @@ Package manager for Node.js wey dey manage dependencies and packages.
 ## O
 
 **Output**  
-Values wey dey come from infrastructure deployment wey apps or other resources fit use.
+Values wey infrastructure deployment return wey applications or other resources fit use.
 
 ## P
 
 **Package**  
-Di process wey dey prepare app code and dependencies for deployment.
+The process of preparing application code and dependencies for deployment.
 
 **Parameters**  
-Input values wey dey pass to infrastructure templates to customize deployments.
+Input values wey dem pass to infrastructure templates to customize deployments.
 
 **PostgreSQL**  
-Open-source relational database system wey Azure dey support as managed service.
+Open-source relational database system wey Azure support as a managed service.
 
 **Provisioning**  
-Di process wey dey create and configure Azure resources wey dey defined for infrastructure templates.
+The process of creating and configuring Azure resources wey definitions dey for infrastructure templates.
 
 ## Q
 
 **Quota**  
-Limits wey dey for di amount of resources wey you fit create for Azure subscription or region.
+Limits on how many resources person fit create for an Azure subscription or region.
 
 ## R
 
 **Resource Group**  
-Logical container wey dey hold Azure resources wey get di same lifecycle, permissions, and policies.
+Logical container for Azure resources wey share the same lifecycle, permissions, and policies.
 
 **Resource Token**  
-Unique string wey azd dey generate to make sure resource names dey unique across deployments.
+Unique string wey azd generate to make sure resource names remain unique across deployments.
 
 **REST API**  
-Style for designing networked apps using HTTP methods.
+Architectural style for designing networked applications using HTTP methods.
 
 **Rollback**  
-Di process wey dey go back to di previous version of app or infrastructure config.
+Process of returning to previous version of application or infrastructure configuration.
 
 ## S
 
 **Service**  
-One part of your app wey dey defined for azure.yaml (e.g., web frontend, API backend, database).
+Component of your application wey dem define inside azure.yaml (for example, web frontend, API backend, database).
 
 **SKU**  
-Stock Keeping Unit. E represent di different service tiers or performance levels for Azure resources.
+Stock Keeping Unit. E represent different service tiers or performance levels for Azure resources.
 
 **SQL Database**  
-Azure managed relational database service wey dey use Microsoft SQL Server.
+Azure's managed relational database service wey base on Microsoft SQL Server.
 
 **Static Web Apps**  
-Azure service wey dey build and deploy full-stack web apps from source code repositories.
+Azure service for building and deploying full-stack web applications from source code repositories.
 
 **Storage Account**  
-Azure service wey dey provide cloud storage for data objects like blobs, files, queues, and tables.
+Azure service wey provide cloud storage for data objects like blobs, files, queues, and tables.
 
 **Subscription**  
-Azure account container wey dey hold resource groups and resources, with billing and access management.
+Azure account container wey hold resource groups and resources, plus billing and access management.
 
 ## T
 
 **Template**  
-Pre-built project structure wey get app code, infrastructure definitions, and config for common scenarios.
+Pre-built project structure wey get application code, infrastructure definitions, and configuration for common scenarios.
 
 **Terraform**  
-Open-source Infrastructure as Code tool wey dey support many cloud providers including Azure.
+Open-source Infrastructure as Code tool wey support many cloud providers including Azure.
 
 **Traffic Manager**  
-Azure DNS-based traffic load balancer wey dey share traffic across global Azure regions.
+Azure DNS-based traffic load balancer wey distribute traffic across global Azure regions.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. String wey dey identify one resource.
+Uniform Resource Identifier. Na string wey identify particular resource.
 
 **URL**  
-Uniform Resource Locator. Type of URI wey dey show where resource dey and how to get am.
+Uniform Resource Locator. Type of URI wey tell where resource dey and how to fetch am.
 
 ## V
 
 **Virtual Network (VNet)**  
-Di main building block for private networks for Azure, e dey provide isolation and segmentation.
+Fundamental building block for private networks in Azure, wey provide isolation and segmentation.
 
 **VS Code**  
-Visual Studio Code. Popular code editor wey dey work well with Azure and azd.
+Visual Studio Code. Popular code editor wey get strong Azure and azd integration.
 
 ## W
 
 **Webhook**  
-HTTP callback wey dey trigger when specific events happen, e dey common for CI/CD pipelines.
+HTTP callback wey dey trigger by specific events, often used for CI/CD pipelines.
 
 **What-if**  
-Azure feature wey dey show wetin go change for deployment without actually running am.
+Azure feature wey show wetin deployment go change before e actually run.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Human-readable format wey people dey use for config files like azure.yaml.
+YAML Ain't Markup Language. Human-readable data serialization standard wey dem dey use for configuration files like azure.yaml.
 
 ## Z
 
 **Zone**  
-Separate physical locations inside Azure region wey dey provide redundancy and high availability.
+Physically separate locations inside an Azure region wey provide redundancy and high availability.
 
 ---
 
@@ -293,26 +284,26 @@ Separate physical locations inside Azure region wey dey provide redundancy and h
 | ACR | Azure Container Registry | Container image registry service |
 | AKS | Azure Kubernetes Service | Managed Kubernetes service |
 | API | Application Programming Interface | Set of protocols for building software |
-| ARM | Azure Resource Manager | Azure deployment and management service |
+| ARM | Azure Resource Manager | Azure's deployment and management service |
 | CDN | Content Delivery Network | Distributed network of servers |
 | CI/CD | Continuous Integration/Continuous Deployment | Automated development practices |
 | CLI | Command Line Interface | Text-based user interface |
-| DNS | Domain Name System | System wey dey translate domain names to IP addresses |
+| DNS | Domain Name System | System for translating domain names to IP addresses |
 | HTTPS | Hypertext Transfer Protocol Secure | Secure version of HTTP |
 | IaC | Infrastructure as Code | Managing infrastructure through code |
 | JSON | JavaScript Object Notation | Data interchange format |
 | JWT | JSON Web Token | Token format for secure information transmission |
 | KQL | Kusto Query Language | Query language for Azure data services |
 | RBAC | Role-Based Access Control | Access control method based on user roles |
-| REST | Representational State Transfer | Style for web services |
+| REST | Representational State Transfer | Architectural style for web services |
 | SDK | Software Development Kit | Collection of development tools |
 | SLA | Service Level Agreement | Commitment to service availability/performance |
 | SQL | Structured Query Language | Language for managing relational databases |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Cryptographic protocols |
-| URI | Uniform Resource Identifier | String wey dey identify resource |
-| URL | Uniform Resource Locator | Type of URI wey dey show resource location |
-| VM | Virtual Machine | Emulation of computer system |
-| VNet | Virtual Network | Private network for Azure |
+| URI | Uniform Resource Identifier | String identifying a resource |
+| URL | Uniform Resource Locator | Type of URI specifying resource location |
+| VM | Virtual Machine | Emulation of a computer system |
+| VNet | Virtual Network | Private network in Azure |
 | YAML | YAML Ain't Markup Language | Data serialization standard |
 
 ---
@@ -338,32 +329,32 @@ Separate physical locations inside Azure region wey dey provide redundancy and h
 ## Context-Specific Terms
 
 ### Development Terms
-- **Hot Reload**: E dey update apps automatically during development without restart
-- **Build Pipeline**: Automated process wey dey build and test code
-- **Deployment Slot**: Staging environment inside App Service
-- **Environment Parity**: Making sure development, staging, and production environments dey similar
+- **Hot Reload**: Automatically updating applications during development without restart
+- **Build Pipeline**: Automated process for building and testing code
+- **Deployment Slot**: Staging environment within an App Service
+- **Environment Parity**: Keeping development, staging, and production environments similar
 
 ### Security Terms
-- **Managed Identity**: Azure feature wey dey manage credentials automatically
-- **Key Vault**: Secure place for secrets, keys, and certificates
+- **Managed Identity**: Azure feature providing automatic credential management
+- **Key Vault**: Secure storage for secrets, keys, and certificates
 - **RBAC**: Role-based access control for Azure resources
-- **Network Security Group**: Virtual firewall wey dey control network traffic
+- **Network Security Group**: Virtual firewall for controlling network traffic
 
 ### Monitoring Terms
-- **Telemetry**: Automated way to collect measurements and data
-- **Application Performance Monitoring (APM)**: Monitoring how software dey perform
-- **Log Analytics**: Service wey dey collect and analyze log data
-- **Alert Rules**: Notifications wey dey trigger based on metrics or conditions
+- **Telemetry**: Automated collection of measurements and data
+- **Application Performance Monitoring (APM)**: Monitoring software performance
+- **Log Analytics**: Service for collecting and analyzing log data
+- **Alert Rules**: Automated notifications based on metrics or conditions
 
 ### Deployment Terms
-- **Blue-Green Deployment**: Deployment strategy wey no dey cause downtime
-- **Canary Deployment**: Gradual rollout to small group of users
-- **Rolling Update**: Sequential replacement of app instances
-- **Rollback**: Going back to di previous version of app
+- **Blue-Green Deployment**: Zero-downtime deployment strategy
+- **Canary Deployment**: Gradual rollout to subset of users
+- **Rolling Update**: Sequential replacement of application instances
+- **Rollback**: Reverting to previous application version
 
 ---
 
-**Usage Tip**: Use `Ctrl+F` to quickly find di term wey you dey look for inside dis glossary. Terms dey cross-referenced where e dey necessary.
+**Usage Tip**: Use `Ctrl+F` to quickly search for specific terms in this glossary. Terms are cross-referenced where applicable.
 
 ---
 
@@ -374,6 +365,6 @@ Separate physical locations inside Azure region wey dey provide redundancy and h
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI transleshion service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transleshion. Even as we dey try make am accurate, abeg make you sabi say machine transleshion fit get mistake or no dey correct well. Di original dokyument wey dey for im native language na di main source wey you go fit trust. For important mata, e good make you use professional human transleshion. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis transleshion.
+Disclaimer:
+Dis document na AI translation wey dem do with Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automatic translations fit get errors or wrong parts. Di original document for im own language suppose be di official source. If na important information, make person wey sabi translate am do am (professional human translator). We no dey liable for any misunderstanding or wrong interpretation wey fit come from dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
