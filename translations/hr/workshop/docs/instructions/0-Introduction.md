@@ -1,29 +1,21 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-25T02:19:19+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "hr"
-}
--->
-# AZD Za AI Razvijatelje
+# AZD za AI developere
 
-!!! info "CILJANA PUBLIKA ZA OVU RADIONICU"
+!!! info "PUBLIKA ZA OVU RADIONICU"
    
-    Ova radionica namijenjena je svima koji žele izraditi aplikacije s AI agentima na Azure AI Foundry koristeći vrhunske alate i radne procese. Radionica je prikladna za početnike i iskusne razvijatelje koji imaju osnovno znanje o Azureu, AI konceptima i Python kodu. Provjerite preduvjete prije nego što započnete.
+    Ova radionica je namijenjena svima koji žele graditi AI Agentne aplikacije na Microsoft Foundry koristeći najbolje alate i radne tokove. Radionica je prikladna i za početnike i za iskusne developere koji imaju određeno iskustvo s Azureom, AI konceptima i Python kodom. Molimo provjerite preduvjete prije početka.
 
     **Trajanje:** 3-4 sata  
-    **Razina:** Početna do srednja  
+    **Razina:** Početnička do srednja  
 
 ---
 
+
 ## Preduvjeti
 
-- Osobni GitHub račun → [Kreirajte besplatno](https://github.com/signup)
-- Aktivni Azure račun → [Kreirajte besplatno](https://aka.ms/free)
-- Poznavanje AI koncepata, Python razvoja, alata naredbenog retka
-- Iskustvo s VS Code i GitHub alatima i radnim procesima.
+- Osobni GitHub račun → [Napravite besplatno](https://github.com/signup)
+- Aktivni Azure račun → [Napravite besplatno](https://aka.ms/free)
+- Poznavanje AI koncepata, razvoja u Pythonu, alata naredbenog retka
+- Iskustvo s VS Code i GitHub alatima i radnim tokovima.
 
 ---
 
@@ -31,34 +23,38 @@ CO_OP_TRANSLATOR_METADATA:
 
 Do kraja ove radionice, znat ćete kako:
 
-- [X] **Raditi s Azure Developer CLI** → za postavljanje, implementaciju i upravljanje vašim Azure resursima.
-- [X] **Koristiti AI App Templates** → za brzo pokretanje projekata s AI agentima na Azure AI Foundry.
-- [X] **Konfigurirati predloške** → za značajke poput Red Teaminga, Evaluacija, Praćenja i Monitoringa.
-- [X] **Rastaviti i istražiti** → AZD predloške i radne procese koristeći GitHub Copilot.
-- [X] **Prilagoditi i ponovno implementirati** → početni predložak AI agenta prema vašim specifičnim zahtjevima.
+- [X] **Raditi s Azure Developer CLI** → za kreiranje, implementaciju i upravljanje vašim Azure resursima.
+- [X] **Koristiti AI predloške aplikacija** → za brzi početak AI Agent projekata na Microsoft Foundry.
+- [X] **Konfigurirati predloške** → za značajke poput Red Teaminga, Evaluacija, Tracinga i Monitoringa
+- [X] **Razgraditi i istražiti** → AZD predloške i radne tokove koristeći GitHub Copilot
+- [X] **Prilagoditi i ponovno implementirati** → početni AI Agent predložak, uz vaše prilagođene zahtjeve
 
 ---
 
-## Struktura radionice
+## Plan radionice
 
-Radionica je organizirana u module, svaki s praktičnom vježbom:
+Radionica je strukturirana u module, svaki s praktičnom laboratorijskom vježbom:
 
-1. **Uvod** - Steknite razumijevanje o tome što su AZD predlošci i kako funkcioniraju
-1. **Odabir** - Pronađite pravi "početni" predložak za vaš sljedeći AI projekt
-1. **Validacija** - Implementirajte i istražite predložak kako biste provjerili radi li kako je opisano
-1. **Rastavljanje** - Rastavite predložak kako biste razumjeli njegove komponente i konfiguraciju
-1. **Konfiguracija** - Naučite aktivirati i koristiti različite značajke Azure AI Foundry
-1. **Prilagodba** - Rekonstruirajte aplikaciju s vašim podacima i zahtjevima na umu
-1. **Rastavljanje infrastrukture** - Naučite kako ukloniti infrastrukturu i oporaviti softverski obrisane resurse
+1. **Uvod** - Razumjeti što su AZD predlošci i kako funkcioniraju
+1. **Izbor** - Pronaći pravi "početni" predložak za vaš sljedeći AI projekt
+1. **Validacija** - Implementirati i istražiti predložak kako biste potvrdili njegovu funkcionalnost
+1. **Razgradnja** - Rastaviti predložak kako biste razumjeli njegove komponente i konfiguraciju
+1. **Konfiguracija** - Naučiti kako aktivirati i koristiti različite značajke Microsoft Foundryja
+1. **Prilagodba** - Rekonstruirati aplikaciju uz vaše podatke i zahtjeve
+1. **Zatvaranje** - Naučiti kako de-provizionirati infrastrukturu i vratiti soft-obrisane resurse
 
 ---
 
 ## Povratne informacije i problemi
 
-Aktivno ažuriramo kurikulum kako bismo osigurali najbolje iskustvo učenja za početnike. Vaše povratne informacije su dobrodošle.
+Aktivno ažuriramo nastavni plan kako bismo osigurali najbolje iskustvo učenja za početnike. Vaša povratna informacija je dobrodošla.
 
-1. Objavite problem na ovom repozitoriju - označite ga `Workshop` radi lakšeg prepoznavanja.
-1. Pridružite se Azure AI Foundry Discordu - povežite se s kolegama učenicima!
+1. Objavite problem u ovom repozitoriju - označite ga s `Workshop` radi lakšeg pregleda.
+1. Pridružite se Microsoft Foundry Discordu - povežite se s drugim polaznicima!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Odricanje od odgovornosti**:  
+Ovaj dokument preveden je pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati službenim i vjerodostojnim izvorom. Za važne informacije preporučuje se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

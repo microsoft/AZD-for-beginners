@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:05:10+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "hr"
-}
--->
-# 4. Konfiguriranje predloška
+# 4. Konfigurirajte predložak
 
 !!! tip "NA KRAJU OVOG MODULA MOĆI ĆETE"
 
     - [ ] Razumjeti svrhu `azure.yaml`
     - [ ] Razumjeti strukturu `azure.yaml`
-    - [ ] Razumjeti vrijednost azd životnog ciklusa `hooks`
-    - [ ] **Laboratorij 3:** 
+    - [ ] Razumjeti vrijednost azd lifecycle `hooks`
+    - [ ] **Laboratorij 4:** Istražite i izmijenite varijable okoline
 
 ---
 
-!!! prompt "Što radi datoteka `azure.yaml`? Koristite codefence i objasnite liniju po liniju"
+!!! prompt "Čemu služi datoteka `azure.yaml`? Koristite blok koda i objasnite redak po redak"
 
-      Datoteka `azure.yaml` je **konfiguracijska datoteka za Azure Developer CLI (azd)**. Definira kako vaša aplikacija treba biti implementirana na Azure, uključujući infrastrukturu, usluge, hooks za implementaciju i varijable okruženja.
+      Datoteka `azure.yaml` je **konfiguracijska datoteka za Azure Developer CLI (azd)**. Definira kako se vaša aplikacija treba implementirati u Azure, uključujući infrastrukturu, usluge, hooks za implementaciju i varijable okoline.
 
 ---
 
 ## 1. Svrha i funkcionalnost
 
-Datoteka `azure.yaml` služi kao **plan implementacije** za aplikaciju AI agenta koja:
+Ova datoteka `azure.yaml` služi kao **plan implementacije** za AI agent aplikaciju koja:
 
 1. **Provjerava okruženje** prije implementacije
-2. **Omogućuje Azure AI usluge** (AI Hub, AI Project, Search, itd.)
+2. **Dodjeljuje Azure AI usluge** (AI Hub, AI Project, Search itd.)
 3. **Implementira Python aplikaciju** na Azure Container Apps
-4. **Konfigurira AI modele** za funkcionalnost chata i ugradnje
-5. **Postavlja praćenje i nadzor** za AI aplikaciju
-6. **Rukuje novim i postojećim** scenarijima Azure AI projekata
+4. **Konfigurira AI modele** za chat i embedding funkcionalnost
+5. **Postavlja nadzor i praćenje** za AI aplikaciju
+6. **Podržava nove i postojeće** scenarije Azure AI projekata
 
-Datoteka omogućuje **implementaciju jednim naredbom** (`azd up`) za cjelovito AI agent rješenje s pravilnom validacijom, omogućavanjem i post-implementacijskom konfiguracijom.
+Datoteka omogućuje **implementaciju jednom naredbom** (`azd up`) kompletne AI agentske solucije s odgovarajućom provjerom, dodjelom i post-implementacijskom konfiguracijom.
 
-??? info "Proširi za pregled: `azure.yaml`"
+??? info "Pokaži više: `azure.yaml`"
 
-      Datoteka `azure.yaml` definira kako Azure Developer CLI treba implementirati i upravljati ovom AI Agent aplikacijom na Azure. Razmotrimo je liniju po liniju.
+      Datoteka `azure.yaml` definira kako Azure Developer CLI treba implementirati i upravljati ovom AI Agent aplikacijom u Azure. Pogledajmo je redak po redak.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: trebamo li hooks? 
-      # TODO: trebamo li sve varijable?
+      # TODO: trebaju li nam hooks? 
+      # TODO: trebaju li nam sve varijable?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ Datoteka omogućuje **implementaciju jednim naredbom** (`azd up`) za cjelovito A
 
 ---
 
-## 2. Razlaganje datoteke
+## 2. Analiza datoteke
 
-Prođimo kroz datoteku dio po dio kako bismo razumjeli što radi - i zašto.
+Prođimo kroz datoteku dio po dio kako bismo razumjeli što radi – i zašto.
 
 ### 2.1 **Zaglavlje i shema (1-3)**
 
@@ -145,9 +136,9 @@ Prođimo kroz datoteku dio po dio kako bismo razumjeli što radi - i zašto.
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Linija 1**: Pruža shemu za validaciju YAML jezika za podršku IDE-u i IntelliSense
+- **Redak 1**: Omogućava validaciju sheme YAML jezičnog poslužitelja za podršku u uređivaču i IntelliSense
 
-### 2.2 Metadata projekta (5-10)
+### 2.2 Metapodaci projekta (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Linija 5**: Definira ime projekta koje koristi Azure Developer CLI
-- **Linije 6-7**: Navodi da se temelji na verziji predloška 1.0.2
-- **Linije 8-9**: Zahtijeva verziju Azure Developer CLI 1.14.0 ili noviju
+- **Redak 5**: Definira naziv projekta koji koristi Azure Developer CLI
+- **Redci 6-7**: Navodi da se temelji na predlošku verzije 1.0.2
+- **Redci 8-9**: Zahtijeva verziju Azure Developer CLI 1.14.0 ili noviju
 
 ### 2.3 Hooks za implementaciju (11-40)
 
@@ -178,10 +169,10 @@ hooks:
       continueOnError: false      
 ```
 
-- **Linije 11-20**: **Hook prije implementacije** - pokreće se prije `azd up`
+- **Redci 11-20**: **Hook prije implementacije** - izvršava se prije `azd up`
 
-      - Na Unix/Linux: Čini skriptu za validaciju izvršivom i pokreće je
-      - Na Windows: Pokreće PowerShell skriptu za validaciju
+      - Na Unix/Linux sustavima: Čini skriptu za provjeru varijabli okoline izvršnom i pokreće je
+      - Na Windowsu: Pokreće PowerShell skriptu za provjeru
       - Oba su interaktivna i zaustavit će implementaciju ako ne uspiju
 
 ```yaml  title="" linenums="0"
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linije 21-30**: **Hook nakon omogućavanja** - pokreće se nakon što su Azure resursi stvoreni
+- **Redci 21-30**: **Hook nakon dodjele resursa** - izvršava se nakon stvaranja Azure resursa
 
-  - Izvršava skripte za pisanje varijabli okruženja
-  - Nastavlja implementaciju čak i ako ove skripte ne uspiju (`continueOnError: true`)
+  - Izvršava skripte za zapisivanje varijabli okoline
+  - Nastavlja implementaciju čak i ako skripte zakažu (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,10 +206,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linije 31-40**: **Hook nakon implementacije** - pokreće se nakon implementacije aplikacije
+- **Redci 31-40**: **Hook nakon implementacije** - izvršava se nakon implementacije aplikacije
 
-  - Izvršava završne skripte za postavljanje
-  - Nastavlja čak i ako skripte ne uspiju
+  - Izvršava završne skripte postavljanja
+  - Nastavlja čak i ako skripte zakažu
 
 ### 2.4 Konfiguracija usluge (41-48)
 
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Linija 42**: Definira uslugu nazvanu "api_and_frontend"
-- **Linija 43**: Ukazuje na direktorij `./src` za izvorni kod
-- **Linija 44**: Navodi Python kao programski jezik
-- **Linija 45**: Koristi Azure Container Apps kao platformu za hosting
-- **Linije 46-48**: Konfiguracija Dockera
+- **Redak 42**: Definira uslugu nazvanu "api_and_frontend"
+- **Redak 43**: Upućuje na direktorij `./src` za izvorni kod
+- **Redak 44**: Navodi Python kao programski jezik
+- **Redak 45**: Koristi Azure Container Apps kao platformu za hosting
+- **Redci 46-48**: Docker konfiguracija
 
-      - Koristi "api_and_frontend" kao ime slike
-      - Daljinski gradi Docker sliku u Azureu (ne lokalno)
+      - Koristi ime slike "api_and_frontend"
+      - Gradi Docker sliku udaljeno u Azure (ne lokalno)
 
-### 2.5 Varijable za pipeline (49-76)
+### 2.5 Varijable cjevovoda (49-76)
 
-Ove varijable pomažu u pokretanju `azd` u CI/CD pipeline-ovima za automatizaciju
+Ovo su varijable koje olakšavaju korištenje `azd` u CI/CD cjevovodima za automatizaciju
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Ovaj odjeljak definira varijable okruženja koje se koriste **tijekom implementacije**, organizirane po kategorijama:
+Ovaj odjeljak definira varijable okoline koje se koriste **tijekom implementacije**, organizirane po kategorijama:
 
-- **Imena Azure resursa (Linije 51-60)**:
-      - Ključna imena resursa Azure usluga, npr. Resource Group, AI Hub, AI Project, itd.- 
-- **Zastavice značajki (Linije 61-63)**:
-      - Booleanske varijable za omogućavanje/onemogućavanje određenih Azure usluga
-- **Konfiguracija AI agenta (Linije 64-71)**:
-      - Konfiguracija za glavnog AI agenta uključujući ime, ID, postavke implementacije, detalje modela- 
-- **Konfiguracija AI ugradnje (Linije 72-79)**:
-      - Konfiguracija za model ugradnje koji se koristi za pretraživanje vektora
-- **Pretraživanje i nadzor (Linije 80-84)**:
-      - Ime indeksa pretraživanja, postojeći ID resursa i postavke praćenja/nadzora
+- **Nazivi Azure resursa (Redci 51-60)**:
+      - Glavni nazivi Azure usluga npr. Resource Group, AI Hub, AI Project itd.
+- **Zastavice značajki (Redci 61-63)**:
+      - Booleanske varijable za uključivanje/isključivanje specifičnih Azure usluga
+- **Konfiguracija AI agenta (Redci 64-71)**:
+      - Konfiguracija glavnog AI agenta uključujući ime, ID, postavke implementacije, detalje modela
+- **Konfiguracija AI embeddinga (Redci 72-79)**:
+      - Konfiguracija za embedding model koji se koristi za vektorsko pretraživanje
+- **Pretraživanje i nadzor (Redci 80-84)**:
+      - Ime indeksa za pretraživanje, postojeći ID resursa i postavke nadzora i praćenja
 
 ---
 
-## 3. Poznavanje varijabli okruženja
-Sljedeće varijable okruženja kontroliraju konfiguraciju i ponašanje vaše implementacije, organizirane prema njihovoj primarnoj svrsi. Većina varijabli ima razumne zadane vrijednosti, ali ih možete prilagoditi kako bi odgovarale vašim specifičnim zahtjevima ili postojećim Azure resursima.
+## 3. Upoznajte varijable okoline
+Sljedeće varijable okoline kontroliraju konfiguraciju i ponašanje vaše implementacije, organizirane prema njihovoj primarnoj svrsi. Većina varijabli ima razumne zadane vrijednosti, ali ih možete prilagoditi kako bi odgovarale vašim posebnim zahtjevima ili postojećim Azure resursima.
 
-### 3.1 Obavezne varijable 
+### 3.1 Obvezne varijable 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Osnovna konfiguracija Azure
+AZURE_ENV_NAME                    # Ime okruženja (koristi se u imenovanju resursa)
+AZURE_LOCATION                    # Regija implementacije
+AZURE_SUBSCRIPTION_ID             # Ciljna pretplata
+AZURE_RESOURCE_GROUP              # Ime grupe resursa
+AZURE_PRINCIPAL_ID                # Korisnički glavni račun za RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Imena resursa (automatski generirano ako nije navedeno)
+AZURE_AIHUB_NAME                  # Ime Microsoft Foundry središta
+AZURE_AIPROJECT_NAME              # Ime AI projekta
+AZURE_AISERVICES_NAME             # Ime računa AI usluga
+AZURE_STORAGE_ACCOUNT_NAME        # Ime računa za pohranu
+AZURE_CONTAINER_REGISTRY_NAME     # Ime registra spremnika
+AZURE_KEYVAULT_NAME               # Ime Key Vault-a (ako se koristi)
 ```
 
 ### 3.2 Konfiguracija modela 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Konfiguracija chat modela
+AZURE_AI_AGENT_MODEL_NAME         # Zadano: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Zadano: OpenAI (ili Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Zadano: najnovije dostupno
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Ime implementacije za chat model
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Zadano: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Zadano: 80 (tisuća TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Konfiguracija modela za ugradnju
+AZURE_AI_EMBED_MODEL_NAME         # Zadano: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Zadano: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Zadano: najnovije dostupno
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Ime implementacije za ugradnje
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Zadano: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Zadano: 50 (tisuća TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Konfiguracija agenta
+AZURE_AI_AGENT_NAME               # Prikazno ime agenta
+AZURE_EXISTING_AGENT_ID           # Koristi postojećeg agenta (opcionalno)
 ```
 
-### 3.3 Zastavice značajki
+### 3.3 Prekidač značajki
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Opcionalne usluge
+USE_APPLICATION_INSIGHTS         # Zadano: istina
+USE_AZURE_AI_SEARCH_SERVICE      # Zadano: netočno
+USE_CONTAINER_REGISTRY           # Zadano: istina
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Praćenje i traganje
+ENABLE_AZURE_MONITOR_TRACING     # Zadano: netočno
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Zadano: netočno
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Konfiguracija pretraživanja
+AZURE_AI_SEARCH_INDEX_NAME       # Naziv indeksa za pretraživanje
+AZURE_SEARCH_SERVICE_NAME        # Naziv usluge pretraživanja
 ```
 
 ### 3.4 Konfiguracija AI projekta 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Koristi postojeće resurse
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Puni ID resursa postojećeg AI projekta
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL krajnje točke postojećeg projekta
 ```
 
-### 3.5 Provjera vaših varijabli
+### 3.5 Provjerite svoje varijable
 
-Koristite Azure Developer CLI za pregled i upravljanje vašim varijablama okruženja:
+Koristite Azure Developer CLI za pregled i upravljanje varijablama okoline:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Prikaz svih varijabli okoline za trenutnu okolinu
 azd env get-values
 
-# Get a specific environment variable
+# Dohvati određenu varijablu okoline
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Postavi varijablu okoline
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Postavi više varijabli iz .env datoteke
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Odricanje od odgovornosti**:
+Ovaj dokument preveden je korištenjem AI usluge za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne odgovaramo za bilo kakve nesporazume ili pogrešna tumačenja proizašla iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-23T19:54:15+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "sr"
-}
--->
 # Azure OpenAI Chat Aplikacija
 
 **Nivo učenja:** Srednji ⭐⭐ | **Vreme:** 35-45 minuta | **Cena:** $50-200/mesec

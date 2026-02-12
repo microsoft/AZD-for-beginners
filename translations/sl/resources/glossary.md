@@ -1,146 +1,137 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-18T13:12:04+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "sl"
-}
--->
-# Glosar - Terminologija Azure in AZD
+# Slovar - Terminologija Azure in AZD
 
-**Referenca za vse poglavja**
-- **📚 Domača stran tečaja**: [AZD za začetnike](../README.md)
-- **📖 Naučite se osnov**: [Poglavje 1: Osnove AZD](../docs/getting-started/azd-basics.md)
-- **🤖 AI izrazi**: [Poglavje 2: Razvoj z AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
+**Referenca za vsa poglavja**
+- **📚 Domov tečaja**: [AZD For Beginners](../README.md)
+- **📖 Naučite se osnov**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 Pojmi AI**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Uvod
 
-Ta obsežen glosar ponuja definicije izrazov, konceptov in kratic, ki se uporabljajo pri Azure Developer CLI in razvoju v oblaku Azure. Ključna referenca za razumevanje tehnične dokumentacije, reševanje težav in učinkovito komunikacijo o projektih azd ter storitvah Azure.
+Ta obsežen slovar nudi definicije za izraze, koncepte in okrajšave, ki se uporabljajo v Azure Developer CLI in pri razvoju v oblaku Azure. Ključna referenca za razumevanje tehnične dokumentacije, odpravljanje težav in učinkovito komunikacijo o azd projektih in Azure storitvah.
 
 ## Cilji učenja
 
-Z uporabo tega glosarja boste:
+Z uporabo tega slovarja boste:
 - Razumeli ključne izraze in koncepte Azure Developer CLI
-- Obvladali besedišče in tehnične izraze razvoja v oblaku Azure
-- Učinkovito uporabljali terminologijo za infrastrukturo kot kodo in uvajanje
-- Razumeli imena storitev Azure, kratice in njihove namene
-- Dostopali do definicij za terminologijo odpravljanja težav in razhroščevanja
+- Obvladali besedišče in tehnične izraze za razvoj v oblaku Azure
+- Uporabno referenco za terminologijo Infrastructure as Code in nameščanja
+- Razumeli imena Azure storitev, okrajšave in njihov namen
+- Imeli dostop do definicij za terminologijo pri odpravljanju in razhroščevanju napak
 - Naučili se naprednih konceptov arhitekture in razvoja v Azure
 
 ## Rezultati učenja
 
-Z redno uporabo tega glosarja boste lahko:
-- Učinkovito komunicirali z uporabo pravilne terminologije Azure Developer CLI
+Ob redni rabi tega slovarja boste lahko:
+- Učinkovito komunicirali z ustrezno terminologijo Azure Developer CLI
 - Jasneje razumeli tehnično dokumentacijo in sporočila o napakah
-- Z zaupanjem navigirali med storitvami in koncepti Azure
-- Reševali težave z uporabo ustreznega tehničnega besedišča
-- Prispevali k timskim razpravam z natančnim tehničnim jezikom
-- Sistematično širili svoje znanje o razvoju v oblaku Azure
+- Zaupno krmarili po Azure storitvah in konceptih
+- Odpravljali težave z uporabo primernega tehničnega besedišča
+- Prispevali k timskim razpravam z natančnim tehničnim izrazoslovjem
+- Sistematično razširili svoje znanje razvoja v oblaku Azure
 
 ## A
 
-**ARM predloga**  
-Predloga Azure Resource Manager. Format JSON za infrastrukturo kot kodo, ki se uporablja za deklarativno definiranje in uvajanje virov Azure.
-
+**ARM Template**  
+Azure Resource Manager template. JSON-based Infrastructure as Code format used to define and deploy Azure resources declaratively.
+  
 **App Service**  
-Azurejeva platforma kot storitev (PaaS) za gostovanje spletnih aplikacij, REST API-jev in mobilnih zaledij brez upravljanja infrastrukture.
+Azure's platform-as-a-service (PaaS) offering for hosting web applications, REST APIs, and mobile backends without managing infrastructure.
 
 **Application Insights**  
-Azurejeva storitev za spremljanje zmogljivosti aplikacij (APM), ki ponuja poglobljen vpogled v zmogljivost, razpoložljivost in uporabo aplikacij.
+Azure's application performance monitoring (APM) service that provides deep insights into application performance, availability, and usage.
 
 **Azure CLI**  
-Ukazna vrstica za upravljanje virov Azure. Uporablja jo azd za avtentikacijo in nekatere operacije.
+Command-line interface for managing Azure resources. Used by azd for authentication and some operations.
 
 **Azure Developer CLI (azd)**  
-Razvijalcem prijazno orodje ukazne vrstice, ki pospeši proces gradnje in uvajanja aplikacij v Azure z uporabo predlog in infrastrukture kot kode.
+Developer-centric command-line tool that accelerates the process of building and deploying applications to Azure using templates and Infrastructure as Code.
 
 **azure.yaml**  
-Glavna konfiguracijska datoteka za projekt azd, ki definira storitve, infrastrukturo in uvajalne kljuke.
+The main configuration file for an azd project that defines services, infrastructure, and deployment hooks.
 
 **Azure Resource Manager (ARM)**  
-Azurejeva storitev za uvajanje in upravljanje, ki zagotavlja upravljalni sloj za ustvarjanje, posodabljanje in brisanje virov.
+Azure's deployment and management service that provides a management layer for creating, updating, and deleting resources.
 
 ## B
 
 **Bicep**  
-Domeni specifičen jezik (DSL), ki ga je razvil Microsoft za uvajanje virov Azure. Ponuja enostavnejšo sintakso kot ARM predloge, medtem ko se prevaja v ARM.
+Domain-specific language (DSL) developed by Microsoft for deploying Azure resources. Provides simpler syntax than ARM templates while compiling to ARM.
 
-**Gradnja**  
-Proces prevajanja izvorne kode, nameščanja odvisnosti in priprave aplikacij za uvajanje.
+**Build**  
+Proces prevajanja izvorne kode, nameščanja odvisnosti in priprave aplikacij za nameščanje.
 
-**Blue-Green uvajanje**  
-Strategija uvajanja, ki uporablja dve identični produkcijski okolji (modro in zeleno) za zmanjšanje izpadov in tveganja.
+**Blue-Green Deployment**  
+Strategija nameščanja, ki uporablja dve enaki produkcijski okolji (blue in green) za zmanjšanje izpadov in tveganja.
 
 ## C
 
 **Container Apps**  
-Azurejeva strežniška storitev za kontejnere, ki omogoča izvajanje aplikacij v kontejnerjih brez upravljanja kompleksne infrastrukture.
+Azure's serverless container service that enables running containerized applications without managing complex infrastructure.
 
 **CI/CD**  
-Neprekinjena integracija/neprekinjeno uvajanje. Avtomatizirane prakse za integracijo sprememb kode in uvajanje aplikacij.
+Continuous Integration/Continuous Deployment. Avtomatizirane prakse za integracijo sprememb kode in nameščanje aplikacij.
 
 **Cosmos DB**  
-Azurejeva globalno razporejena, večmodelna podatkovna storitev, ki zagotavlja celovite SLA-je za prepustnost, zakasnitve, razpoložljivost in doslednost.
+Azure's globally distributed, multi-model database service that provides comprehensive SLAs for throughput, latency, availability, and consistency.
 
-**Konfiguracija**  
-Nastavitve in parametri, ki nadzorujejo vedenje aplikacije in možnosti uvajanja.
+**Configuration**  
+Nastavitve in parametri, ki nadzorujejo vedenje aplikacije in možnosti nameščanja.
 
 ## D
 
-**Uvajanje**  
-Proces nameščanja in konfiguriranja aplikacij ter njihovih odvisnosti na ciljno infrastrukturo.
+**Deployment**  
+Proces nameščanja in konfiguracije aplikacij ter njihovih odvisnosti na ciljno infrastrukturo.
 
 **Docker**  
-Platforma za razvoj, dostavo in izvajanje aplikacij z uporabo tehnologije kontejnerizacije.
+Platforma za razvoj, pošiljanje in zagon aplikacij z uporabo tehnologije kontejnerizacije.
 
 **Dockerfile**  
-Besedilna datoteka, ki vsebuje navodila za gradnjo slike Docker kontejnerja.
+Besedilna datoteka, ki vsebuje navodila za gradnjo Docker slike kontejnerja.
 
 ## E
 
-**Okolje**  
-Cilj uvajanja, ki predstavlja specifično instanco vaše aplikacije (npr. razvoj, testiranje, produkcija).
+**Environment**  
+Ciljni prostor za nameščanje, ki predstavlja specifično instanco vaše aplikacije (npr. razvoj, staging, produkcija).
 
-**Okoljske spremenljivke**  
-Konfiguracijske vrednosti, shranjene kot ključ-vrednost pari, ki jih aplikacije lahko dostopajo med izvajanjem.
+**Environment Variables**  
+Konfiguracijske vrednosti shranjene kot pari ključ-vrednost, do katerih lahko aplikacije dostopajo med izvajanjem.
 
-**Končna točka**  
-URL ali omrežni naslov, kjer je mogoče dostopati do aplikacije ali storitve.
+**Endpoint**  
+URL ali omrežni naslov, kjer je aplikacija ali storitev dostopna.
 
 ## F
 
 **Function App**  
-Azurejeva strežniška storitev za računalništvo, ki omogoča izvajanje dogodkovno usmerjene kode brez upravljanja infrastrukture.
+Azure's serverless compute service that enables running event-driven code without managing infrastructure.
 
 ## G
 
 **GitHub Actions**  
-Platforma CI/CD, integrirana z GitHub repozitoriji za avtomatizacijo delovnih tokov.
+CI/CD platforma integrirana z GitHub repozitoriji za avtomatizacijo potekov dela.
 
 **Git**  
-Porazdeljen sistem za nadzor različic, ki se uporablja za sledenje spremembam v izvorni kodi.
+Porazdeljeni sistem za nadzor različic, uporabljen za sledenje sprememb v izvorni kodi.
 
 ## H
 
-**Ključi**  
-Prilagojeni skripti ali ukazi, ki se izvajajo na specifičnih točkah med življenjskim ciklom uvajanja (predpriprava, popopriprava, preduvajanje, popouvajanje).
+**Hooks**  
+Prilagojeni skripti ali ukazi, ki se izvajajo na določenih točkah življenjskega cikla nameščanja (preprovision, postprovision, predeploy, postdeploy).
 
-**Gostitelj**  
-Tip storitve Azure, kjer bo aplikacija uvedena (npr. appservice, containerapp, function).
+**Host**  
+Azure service type where an application will be deployed (e.g., appservice, containerapp, function).
 
 ## I
 
-**Infrastruktura kot koda (IaC)**  
-Praksa definiranja in upravljanja infrastrukture prek kode namesto ročnih procesov.
+**Infrastructure as Code (IaC)**  
+Praksa definiranja in upravljanja infrastrukture z uporabo kode namesto ročnih postopkov.
 
 **Init**  
-Proces inicializacije novega projekta azd, običajno iz predloge.
+Proces inicializacije novega azd projekta, običajno iz predloge.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Format za izmenjavo podatkov, ki se pogosto uporablja za konfiguracijske datoteke in odgovore API-jev.
+JavaScript Object Notation. Format za izmenjavo podatkov, pogosto uporabljen za konfiguracijske datoteke in API odgovore.
 
 **JWT**  
 JSON Web Token. Standard za varno prenašanje informacij med strankami kot JSON objekt.
@@ -148,106 +139,106 @@ JSON Web Token. Standard za varno prenašanje informacij med strankami kot JSON 
 ## K
 
 **Key Vault**  
-Azurejeva storitev za varno shranjevanje in upravljanje skrivnosti, ključev in certifikatov.
+Azure's service for securely storing and managing secrets, keys, and certificates.
 
 **Kusto Query Language (KQL)**  
-Jezik poizvedb, ki se uporablja za analizo podatkov v Azure Monitorju, Application Insights in drugih storitvah Azure.
+Query language used for analyzing data in Azure Monitor, Application Insights, and other Azure services.
 
 ## L
 
 **Load Balancer**  
-Storitev, ki razporeja dohodni omrežni promet med več strežniki ali instancami.
+Storitev, ki porazdeli dohodni omrežni promet med več strežniki ali instanc.
 
 **Log Analytics**  
-Azurejeva storitev za zbiranje, analizo in ukrepanje na podlagi telemetrijskih podatkov iz oblačnih in lokalnih okolij.
+Azure service for collecting, analyzing, and acting on telemetry data from cloud and on-premises environments.
 
 ## M
 
-**Upravljana identiteta**  
-Funkcija Azure, ki storitvam Azure zagotavlja samodejno upravljano identiteto za avtentikacijo do drugih storitev Azure.
+**Managed Identity**  
+Azure feature that provides Azure services with an automatically managed identity for authenticating to other Azure services.
 
-**Mikrostoritve**  
+**Microservices**  
 Arhitekturni pristop, kjer so aplikacije zgrajene kot zbirka majhnih, neodvisnih storitev.
 
 **Monitor**  
-Azurejeva rešitev za spremljanje, ki zagotavlja celovito opazovanje aplikacij in infrastrukture.
+Azure's unified monitoring solution that provides full-stack observability across applications and infrastructure.
 
 ## N
 
 **Node.js**  
-JavaScript runtime, zgrajen na JavaScript motorju V8 za gradnjo strežniških aplikacij.
+JavaScript runtime built on Chrome's V8 JavaScript engine for building server-side applications.
 
 **npm**  
-Upravitelj paketov za Node.js, ki upravlja odvisnosti in pakete.
+Package manager for Node.js that manages dependencies and packages.
 
 ## O
 
-**Izhod**  
-Vrednosti, vrnjene iz uvajanja infrastrukture, ki jih lahko uporabljajo aplikacije ali drugi viri.
+**Output**  
+Vrednosti, ki jih vrne postopek nameščanja infrastrukture in jih lahko uporabljajo aplikacije ali drugi viri.
 
 ## P
 
-**Paketiranje**  
-Proces priprave kode aplikacije in odvisnosti za uvajanje.
+**Package**  
+Proces priprave izvorne kode aplikacije in odvisnosti za nameščanje.
 
-**Parametri**  
-Vhodne vrednosti, posredovane predlogam infrastrukture za prilagoditev uvajanj.
+**Parameters**  
+Vhodne vrednosti, posredovane infrastrukturnim predlogam za prilagajanje nameščanj.
 
 **PostgreSQL**  
-Odprtokodni sistem relacijskih podatkovnih baz, podprt kot upravljana storitev v Azure.
+Open-source relational database system supported as a managed service in Azure.
 
-**Priprava**  
-Proces ustvarjanja in konfiguriranja virov Azure, definiranih v predlogah infrastrukture.
+**Provisioning**  
+Proces ustvarjanja in konfiguracije Azure virov, definiranih v infrastrukturnih predlogah.
 
 ## Q
 
-**Kvota**  
-Omejitve glede količine virov, ki jih je mogoče ustvariti v naročnini ali regiji Azure.
+**Quota**  
+Omejitve glede števila virov, ki jih je mogoče ustvariti v naročnini Azure ali regiji.
 
 ## R
 
-**Skupina virov**  
-Logična posoda za vire Azure, ki delijo isti življenjski cikel, dovoljenja in politike.
+**Resource Group**  
+Logični vsebnik za Azure vire, ki imajo skupno življenjsko dobo, dovoljenja in politike.
 
-**Žeton virov**  
-Edinstven niz, ki ga ustvari azd za zagotavljanje edinstvenosti imen virov med uvajanji.
+**Resource Token**  
+Enoličen niz, ustvarjen z azd za zagotavljanje unikativnosti imen virov pri nameščanju.
 
 **REST API**  
-Arhitekturni slog za oblikovanje omrežnih aplikacij z uporabo metod HTTP.
+Arhitekturni slog za načrtovanje omrežnih aplikacij z uporabo HTTP metod.
 
-**Povrnitev**  
-Proces vračanja na prejšnjo različico aplikacije ali konfiguracije infrastrukture.
+**Rollback**  
+Postopek vrnitve na prejšnjo različico aplikacije ali konfiguracije infrastrukture.
 
 ## S
 
-**Storitev**  
-Komponenta vaše aplikacije, definirana v azure.yaml (npr. spletni frontend, API backend, podatkovna baza).
+**Service**  
+Komponenta vaše aplikacije določena v azure.yaml (npr. spletni frontend, API backend, baza podatkov).
 
 **SKU**  
-Stock Keeping Unit. Predstavlja različne nivoje storitev ali zmogljivosti za vire Azure.
+Stock Keeping Unit. Predstavlja različne ravni storitev ali zmogljivostne stopnje za Azure vire.
 
-**SQL podatkovna baza**  
-Azurejeva upravljana storitev relacijskih podatkovnih baz, ki temelji na Microsoft SQL Serverju.
+**SQL Database**  
+Azure's managed relational database service based on Microsoft SQL Server.
 
 **Static Web Apps**  
-Azurejeva storitev za gradnjo in uvajanje spletnih aplikacij iz repozitorijev izvorne kode.
+Azure service for building and deploying full-stack web applications from source code repositories.
 
-**Račun za shranjevanje**  
-Azurejeva storitev, ki zagotavlja oblačno shranjevanje za podatkovne objekte, vključno z blobi, datotekami, vrstami in tabelami.
+**Storage Account**  
+Azure service that provides cloud storage for data objects including blobs, files, queues, and tables.
 
-**Naročnina**  
-Posoda za račun Azure, ki vsebuje skupine virov in vire, z povezanimi obračuni in upravljanjem dostopa.
+**Subscription**  
+Azure account container that holds resource groups and resources, with associated billing and access management.
 
 ## T
 
-**Predloga**  
-Vnaprej zgrajena struktura projekta, ki vsebuje kodo aplikacije, definicije infrastrukture in konfiguracijo za pogoste scenarije.
+**Template**  
+Predhodno pripravljena struktura projekta, ki vsebuje izvorno kodo aplikacije, definicije infrastrukture in konfiguracijo za pogoste primere uporabe.
 
 **Terraform**  
-Orodje za infrastrukturo kot kodo, ki podpira več ponudnikov oblakov, vključno z Azure.
+Open-source Infrastructure as Code tool that supports multiple cloud providers including Azure.
 
-**Upravitelj prometa**  
-Azurejev DNS-uravnoteževalnik prometa za razporejanje prometa med globalnimi regijami Azure.
+**Traffic Manager**  
+Azure's DNS-based traffic load balancer for distributing traffic across global Azure regions.
 
 ## U
 
@@ -259,55 +250,55 @@ Uniform Resource Locator. Tip URI, ki določa, kje se vir nahaja in kako ga prid
 
 ## V
 
-**Virtualno omrežje (VNet)**  
-Temeljni gradnik za zasebna omrežja v Azure, ki zagotavlja izolacijo in segmentacijo.
+**Virtual Network (VNet)**  
+Fundamental building block for private networks in Azure, providing isolation and segmentation.
 
 **VS Code**  
-Visual Studio Code. Priljubljen urejevalnik kode z odlično integracijo Azure in azd.
+Visual Studio Code. Priljubljeno urejevalnik kode z odlično integracijo za Azure in azd.
 
 ## W
 
 **Webhook**  
-HTTP povratni klic, sprožen s specifičnimi dogodki, pogosto uporabljen v CI/CD tokovih.
+HTTP callback triggered by specific events, commonly used in CI/CD pipelines.
 
 **What-if**  
-Funkcija Azure, ki prikazuje, katere spremembe bi bile izvedene z uvajanjem, ne da bi ga dejansko izvedli.
+Azure feature that shows what changes would be made by a deployment without actually executing it.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Standard za serializacijo podatkov, ki je berljiv za ljudi, uporabljen za konfiguracijske datoteke, kot je azure.yaml.
+YAML Ain't Markup Language. Human-readable data serialization standard used for configuration files like azure.yaml.
 
 ## Z
 
-**Cona**  
-Fizično ločene lokacije znotraj regije Azure, ki zagotavljajo redundanco in visoko razpoložljivost.
+**Zone**  
+Physically separate locations within an Azure region that provide redundancy and high availability.
 
 ---
 
-## Pogoste kratice
+## Pogoste okrajšave
 
-| Kratica | Polni naziv | Opis |
-|---------|-------------|------|
-| AAD | Azure Active Directory | Storitev za upravljanje identitete in dostopa |
+| Acronym | Celotna oblika | Opis |
+|---------|----------------|------|
+| AAD | Azure Active Directory | Storitev za upravljanje identitet in dostopa |
 | ACR | Azure Container Registry | Storitev za registracijo slik kontejnerjev |
-| AKS | Azure Kubernetes Service | Upravljana storitev Kubernetes |
+| AKS | Azure Kubernetes Service | Upravljen Kubernetes servis |
 | API | Application Programming Interface | Nabor protokolov za gradnjo programske opreme |
-| ARM | Azure Resource Manager | Azurejeva storitev za uvajanje in upravljanje |
-| CDN | Content Delivery Network | Razpršeno omrežje strežnikov |
+| ARM | Azure Resource Manager | Azurejeva storitev za nameščanje in upravljanje |
+| CDN | Content Delivery Network | Porazdeljena mreža strežnikov za dostavo vsebin |
 | CI/CD | Continuous Integration/Continuous Deployment | Avtomatizirane razvojne prakse |
 | CLI | Command Line Interface | Besedilni uporabniški vmesnik |
 | DNS | Domain Name System | Sistem za prevajanje domen v IP naslove |
-| HTTPS | Hypertext Transfer Protocol Secure | Varna različica HTTP |
-| IaC | Infrastructure as Code | Upravljanje infrastrukture prek kode |
+| HTTPS | Hypertext Transfer Protocol Secure | Varnostna različica HTTP |
+| IaC | Infrastructure as Code | Upravljanje infrastrukture z uporabo kode |
 | JSON | JavaScript Object Notation | Format za izmenjavo podatkov |
-| JWT | JSON Web Token | Format žetona za varno prenašanje informacij |
-| KQL | Kusto Query Language | Jezik poizvedb za podatkovne storitve Azure |
-| RBAC | Role-Based Access Control | Metoda nadzora dostopa na podlagi vlog |
+| JWT | JSON Web Token | Oblika žetona za varen prenos informacij |
+| KQL | Kusto Query Language | Jezik poizvedb za Azure podatkovne storitve |
+| RBAC | Role-Based Access Control | Metoda nadzora dostopa na osnovi vlog |
 | REST | Representational State Transfer | Arhitekturni slog za spletne storitve |
-| SDK | Software Development Kit | Zbirka razvojnih orodij |
-| SLA | Service Level Agreement | Zaveza glede razpoložljivosti/zmogljivosti storitve |
-| SQL | Structured Query Language | Jezik za upravljanje relacijskih podatkovnih baz |
+| SDK | Software Development Kit | Zbirka orodij za razvoj |
+| SLA | Service Level Agreement | Dogovor o razpoložljivosti/zmogljivosti storitve |
+| SQL | Structured Query Language | Jezik za upravljanje relacijskih baz podatkov |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kriptografski protokoli |
 | URI | Uniform Resource Identifier | Niz, ki identificira vir |
 | URL | Uniform Resource Locator | Tip URI, ki določa lokacijo vira |
@@ -317,61 +308,63 @@ Fizično ločene lokacije znotraj regije Azure, ki zagotavljajo redundanco in vi
 
 ---
 
-## Preslikave imen storitev Azure
+## Preslikave imen Azure storitev
 
-| Splošno ime | Uradno ime storitve Azure | Tip gostitelja azd |
-|-------------|----------------------------|--------------------|
-| Spletna aplikacija | Azure App Service | `appservice` |
-| API aplikacija | Azure App Service | `appservice` |
-| Kontejnerska aplikacija | Azure Container Apps | `containerapp` |
-| Funkcija | Azure Functions | `function` |
-| Statična stran | Azure Static Web Apps | `staticwebapp` |
-| Podatkovna baza | Azure Database for PostgreSQL | `postgres` |
+| Common Name | Official Azure Service Name | azd Host Type |
+|-------------|------------------------------|---------------|
+| Web App | Azure App Service | `appservice` |
+| API App | Azure App Service | `appservice` |
+| Container App | Azure Container Apps | `containerapp` |
+| Function | Azure Functions | `function` |
+| Static Site | Azure Static Web Apps | `staticwebapp` |
+| Database | Azure Database for PostgreSQL | `postgres` |
 | NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Shranjevanje | Azure Storage Account | `storage` |
-| Predpomnilnik | Azure Cache for Redis | `redis` |
-| Iskanje | Azure Cognitive Search | `search` |
-| Sporočanje | Azure Service Bus | `servicebus` |
+| Storage | Azure Storage Account | `storage` |
+| Cache | Azure Cache for Redis | `redis` |
+| Search | Azure Cognitive Search | `search` |
+| Messaging | Azure Service Bus | `servicebus` |
 
 ---
 
-## Izrazi, specifični za kontekst
+## Kontekstno specifični izrazi
 
 ### Razvojni izrazi
-- **Hot Reload**: Samodejno posodabljanje aplikacij med razvojem brez ponovnega zagona
+- **Hot Reload**: Samodejna osvežitev aplikacij med razvojem brez ponovnega zagona
 - **Build Pipeline**: Avtomatiziran proces za gradnjo in testiranje kode
-- **Deployment Slot**: Testno okolje znotraj App Service
-- **Environment Parity**: Ohranjanje podobnosti med razvojnimi, testnimi in produkcijskimi okolji
+- **Deployment Slot**: Staging okolje znotraj App Service
+- **Environment Parity**: Ohranjanje podobnosti razvojnih, staging in produkcijskih okolij
 
 ### Varnostni izrazi
-- **Upravljana identiteta**: Funkcija Azure za samodejno upravljanje poverilnic
-- **Key Vault**: Varno shranjevanje za skrivnosti, ključe in certifikate
-- **RBAC**: Nadzor dostopa na podlagi vlog za vire Azure
-- **Network Security Group**: Virtualni požarni zid za nadzor omrežnega prometa
+- **Managed Identity**: Azure feature providing automatic credential management
+- **Key Vault**: Secure storage for secrets, keys, and certificates
+- **RBAC**: Role-based access control for Azure resources
+- **Network Security Group**: Virtual firewall for controlling network traffic
 
-### Izrazi za spremljanje
-- **Telemetrija**: Avtomatizirano zbiranje meritev in podatkov
-- **Spremljanje zmogljivosti aplikacij (APM)**: Spremljanje zmogljivosti programske opreme
+### Nadzorni izrazi
+- **Telemetry**: Samodejno zbiranje meritev in podatkov
+- **Application Performance Monitoring (APM)**: Nadzorovanje zmogljivosti programske opreme
 - **Log Analytics**: Storitev za zbiranje in analizo dnevniških podatkov
-- **Pravila opozoril**: Avtomatizirana obvestila na podlagi metrik ali pogojev
+- **Alert Rules**: Samodejna obvestila na podlagi metrik ali pogojev
 
-### Izrazi za uvajanje
-- **Blue-Green uvajanje**: Strategija uvajanja brez izpadov
-- **Canary uvajanje**: Postopno uvajanje na podmnožico uporabnikov
+### Izrazi za nameščanje
+- **Blue-Green Deployment**: Strategija nameščanja z ničelnim izpadom
+- **Canary Deployment**: Postopno uvajanje za podmnožico uporabnikov
 - **Rolling Update**: Zaporedna zamenjava instanc aplikacije
-- **Povrnitev**: Vračanje na prejšnjo različico aplikacije
+- **Rollback**: Vrnitev na prejšnjo različico aplikacije
 
 ---
 
-**Nasvet za uporabo**: Uporabite `Ctrl+F` za hitro iskanje specifičnih izrazov v tem glosarju. Izrazi so medsebojno povezani, kjer je to primerno.
+**Nasvet za uporabo**: Uporabite `Ctrl+F` za hitro iskanje specifičnih izrazov v tem slovarju. Izrazi so medsebojno povezani, kjer je to primerno.
 
 ---
 
 **Navigacija**
-- **Prejšnja lekcija**: [Pomočnik](cheat-sheet.md)
-- **Naslednja lekcija**: [Pogosta vprašanja](faq.md)
+- **Prejšnja lekcija**: [Cheat Sheet](cheat-sheet.md)
+- **Naslednja lekcija**: [FAQ](faq.md)
 
 ---
 
-**Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Izjava o omejitvi odgovornosti:
+Ta dokument je bil preveden z uporabo storitve za avtomatsko prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za pomembne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki bi izhajale iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

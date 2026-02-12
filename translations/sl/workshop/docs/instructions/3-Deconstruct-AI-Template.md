@@ -1,26 +1,18 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-25T02:29:58+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "sl"
-}
--->
-# 3. Razčlenitev predloge
+# 3. Razčlenite predlogo
 
-!!! tip "DO KONCA TEGA MODULA BOSTE ZMOGLI"
+!!! tip "NA KONCU TEGA MODULA BOSTE MOGLI"
 
-    - [ ] Postavka
-    - [ ] Postavka
-    - [ ] Postavka
-    - [ ] **Laboratorij 3:** 
+    - [ ] Aktivirati GitHub Copilot z MCP strežniki za pomoč pri Azure
+    - [ ] Razumeti strukturo map in komponente AZD predloge
+    - [ ] Raziskati vzorce organizacije infrastrukture kot kode (Bicep)
+    - [ ] **Lab 3:** Uporabiti GitHub Copilot za raziskovanje in razumevanje arhitekture repozitorija 
 
 ---
 
-S predlogami AZD in Azure Developer CLI (`azd`) lahko hitro začnemo našo pot razvoja AI z uporabo standardiziranih repozitorijev, ki zagotavljajo vzorčno kodo, infrastrukturo in konfiguracijske datoteke - v obliki pripravljene _začetne_ projektne predloge.
 
-**Zdaj pa moramo razumeti strukturo projekta in kodo - ter prilagoditi predlogo AZD - brez predhodnih izkušenj ali razumevanja AZD!**
+Z AZD predlogami in Azure Developer CLI (`azd`) lahko hitro začnemo naše AI razvojno potovanje z standardiziranimi repozitoriji, ki zagotavljajo vzorčno kodo, infrastrukturo in konfiguracijske datoteke - v obliki projekta _starter_, pripravljenega za namestitev.
+
+**Toda zdaj moramo razumeti strukturo projekta in kodo - ter biti sposobni prilagoditi AZD predlogo - brez predhodnih izkušenj ali razumevanja AZD!**
 
 ---
 
@@ -28,18 +20,18 @@ S predlogami AZD in Azure Developer CLI (`azd`) lahko hitro začnemo našo pot r
 
 ### 1.1 Namestite GitHub Copilot Chat
 
-Čas je, da raziščete [GitHub Copilot z Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Zdaj lahko uporabimo naravni jezik za opis naloge na visoki ravni in dobimo pomoč pri izvedbi. Za ta laboratorij bomo uporabili [Copilot Free plan](https://github.com/github-copilot/signup), ki ima mesečno omejitev za dokončanja in interakcije v klepetu.
+Čas je, da raziščemo [GitHub Copilot z Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Sedaj lahko s pomočjo naravnega jezika opišemo naše naloge na visokem nivoju in dobimo pomoč pri izvedbi. Za ta laboratorij bomo uporabili [Copilot Free plan](https://github.com/github-copilot/signup), ki ima mesečno omejitev za zaključke in klepetalne interakcije.
 
-Razširitev je mogoče namestiti iz tržnice, vendar bi morala biti že na voljo v vašem okolju Codespaces. _Kliknite `Open Chat` iz spustnega menija ikone Copilot - in vnesite poziv, kot je `What can you do?`_ - morda boste morali opraviti prijavo. **GitHub Copilot Chat je pripravljen**.
+Razširitev lahko namestite iz trgovine, vendar bi morala biti že na voljo v vašem Codespaces okolju. _Kliknite `Open Chat` v spustnem meniju ikone Copilot - in vnesite poziv, npr. `What can you do?`_ - morda boste pozvani k prijavi. **GitHub Copilot Chat je pripravljen**.
 
 ### 1.2. Namestite MCP strežnike
 
-Da bi bil Agent Mode učinkovit, potrebuje dostop do pravih orodij, ki mu pomagajo pridobiti znanje ali izvesti dejanja. Tukaj pridejo v poštev MCP strežniki. Konfigurirali bomo naslednje strežnike:
+Da bo Agent mode učinkovit, mora imeti dostop do pravih orodij, ki mu pomagajo pridobiti znanje ali izvesti dejanja. Tu lahko pomagajo MCP strežniki. Konfigurirali bomo naslednje strežnike:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
 
-Za aktivacijo teh strežnikov:
+Za aktivacijo teh:
 
 1. Ustvarite datoteko `.vscode/mcp.json`, če ne obstaja
 1. Kopirajte naslednje v to datoteko - in zaženite strežnike!
@@ -63,9 +55,9 @@ Za aktivacijo teh strežnikov:
    }
    ```
 
-??? warning "Morda boste prejeli napako, da `npx` ni nameščen (kliknite za razširitev rešitve)"
+??? warning "Morda boste dobili napako, da `npx` ni nameščen (kliknite za razširitev z rešitvijo)"
 
-      Da to odpravite, odprite datoteko `.devcontainer/devcontainer.json` in dodajte to vrstico v razdelek funkcij. Nato ponovno sestavite vsebnik. Zdaj bi morali imeti nameščen `npx`.
+      Za popravilo odprite datoteko `.devcontainer/devcontainer.json` in dodajte to vrstico v razdelek features. Nato ponovno zgradite kontejner. Zdaj bi morali imeti nameščen `npx`.
 
       ```title="" linenums="0"
          "features": {
@@ -76,41 +68,41 @@ Za aktivacijo teh strežnikov:
 
 ---
 
-### 1.3. Testirajte GitHub Copilot Chat
+### 1.3. Preizkusite GitHub Copilot Chat
 
-**Najprej uporabite `az login` za avtentikacijo z Azure iz ukazne vrstice VS Code.**
+**Najprej uporabite `az login`, da se preverite pri Azure iz ukazne vrstice VS Code.**
 
-Zdaj bi morali biti sposobni poizvedovati o statusu vaše naročnine na Azure in postavljati vprašanja o nameščenih virih ali konfiguraciji. Poskusite te pozive:
+Zdaj bi morali biti sposobni poizvedovati stanje vašega Azure naročnika in postavljati vprašanja o nameščenih virih ali konfiguraciji. Preizkusite te pozive:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-Prav tako lahko postavljate vprašanja o dokumentaciji Azure in dobite odgovore, ki temeljijo na Microsoft Docs MCP strežniku. Poskusite te pozive:
+Lahko tudi postavite vprašanja o Azure dokumentaciji in dobite odgovore, utemeljene na Microsoft Docs MCP strežniku. Preizkusite te pozive:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Lahko pa zahtevate tudi kode za dokončanje naloge. Poskusite ta poziv:
+Ali pa lahko zahtevate primere kode za dokončanje naloge. Poskusite ta poziv.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-V načinu `Ask` bo to zagotovilo kodo, ki jo lahko kopirate in preizkusite. V načinu `Agent` pa lahko gre korak dlje in ustvari ustrezne vire za vas - vključno z nastavitvenimi skripti in dokumentacijo - da vam pomaga izvesti nalogo.
+V načinu "Ask" vam bo to zagotovilo kodo, ki jo lahko kopirate in preizkusite. V načinu "Agent" lahko gre korak dlje in ustvari ustrezne vire za vas - vključno z namestitvenimi skriptami in dokumentacijo - da vam pomaga izvesti to nalogo.
 
-**Zdaj ste pripravljeni začeti raziskovati repozitorij predloge**
+**Zdaj ste opremljeni za začetek raziskovanja repozitorija predloge**
 
 ---
 
 ## 2. Razčlenitev arhitekture
 
-??? prompt "VPRAŠAJ: Pojasnite arhitekturo aplikacije v docs/images/architecture.png v enem odstavku"
+??? prompt "ZAPROSITE: Pojasnite arhitekturo aplikacije v docs/images/architecture.png v enem odstavku"
 
-      Ta aplikacija je AI-podprta klepetalna aplikacija, zgrajena na Azure, ki prikazuje sodobno arhitekturo, temelječo na agentih. Rešitev se osredotoča na Azure Container App, ki gosti glavno aplikacijsko kodo, ki obdeluje uporabniški vnos in generira inteligentne odgovore prek AI agenta. 
+      Ta aplikacija je AI-pogonjena klepetalna aplikacija, zgrajena na Azure, ki prikazuje moderno arhitekturo na osnovi agentov. Rešitev se osredotoča na Azure Container App, ki gosti glavno aplikacijsko kodo, obdeluje uporabniški vnos in generira inteligentne odgovore preko AI agenta.
       
-      Arhitektura izkorišča Azure AI Foundry Project kot osnovo za AI zmogljivosti, povezuje se z Azure AI Services, ki zagotavljajo osnovne jezikovne modele (kot GPT-4o-mini) in funkcionalnost agenta. Interakcije uporabnikov potekajo prek React-osnovanega sprednjega dela do FastAPI zadnjega dela, ki komunicira s storitvijo AI agenta za generiranje kontekstualnih odgovorov. 
+      Arhitektura izkorišča Microsoft Foundry Project kot temelj za AI zmogljivosti, povezuje se z Azure AI Services, ki nudijo osnovne jezikovne modele (kot na primer GPT-4o-mini) in funkcionalnost agentov. Uporabniške interakcije potekajo preko React-sprednjega dela do FastAPI-zaledja, ki komunicira z AI agentno storitvijo za generiranje kontekstualnih odgovorov.
       
-      Sistem vključuje zmogljivosti za pridobivanje znanja prek iskanja datotek ali storitve Azure AI Search, kar omogoča agentu dostop do informacij iz naloženih dokumentov in njihovo citiranje. Za operativno odličnost arhitektura vključuje celovito spremljanje prek Application Insights in Log Analytics Workspace za sledenje, beleženje in optimizacijo zmogljivosti. 
+      Sistem vključuje zmožnosti pridobivanja znanja preko iskanja po datotekah ali storitve Azure AI Search, kar agentu omogoča dostop do naloženih dokumentov in citiranje informacij. Za operativno odličnost arhitektura vključuje celovito nadzorovanje preko Application Insights in Log Analytics Workspace za sledenje, beleženje in optimizacijo zmogljivosti.
       
-      Azure Storage zagotavlja blob shranjevanje za podatke aplikacije in nalaganje datotek, medtem ko Managed Identity zagotavlja varni dostop med Azure viri brez shranjevanja poverilnic. Celotna rešitev je zasnovana za skalabilnost in vzdržljivost, pri čemer aplikacija v vsebniku samodejno skalira glede na povpraševanje, hkrati pa zagotavlja vgrajeno varnost, spremljanje in CI/CD zmogljivosti prek ekosistema upravljanih storitev Azure.
+      Azure Storage zagotavlja blob shrambi za podatke aplikacije in nalaganje datotek, medtem ko Managed Identity zagotavlja varen dostop med Azure viri brez shranjevanja poverilnic. Celotna rešitev je zasnovana za skalabilnost in vzdrževanje, pri čemer se kontejnerizirana aplikacija samodejno skalira glede na povpraševanje in zagotavlja vgrajeno varnost, nadzorovanje in CI/CD zmogljivosti prek upravljanih Azure storitev.
 
 ![Arhitektura](../../../../../translated_images/sl/architecture.48d94861e6e6cdc0.webp)
 
@@ -118,72 +110,72 @@ V načinu `Ask` bo to zagotovilo kodo, ki jo lahko kopirate in preizkusite. V na
 
 ## 3. Struktura repozitorija
 
-!!! prompt "VPRAŠAJ: Pojasnite strukturo mape predloge. Začnite z vizualnim hierarhičnim diagramom."
+!!! prompt "ZAPROSITE: Pojasnite strukturo map predloge. Začnite z vizualnim hierarhičnim diagramom."
 
 ??? info "ODGOVOR: Vizualni hierarhični diagram"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Konfiguracija in nastavitev
+      ├── 📋 Konfiguracija & Namestitev
       │   ├── azure.yaml                    # Konfiguracija Azure Developer CLI
-      │   ├── docker-compose.yaml           # Lokalni razvojni vsebniki
+      │   ├── docker-compose.yaml           # Lokalne razvojne kontejnere
       │   ├── pyproject.toml                # Konfiguracija Python projekta
-      │   ├── requirements-dev.txt          # Odvisnosti za razvoj
-      │   └── .devcontainer/                # Nastavitev VS Code razvojnega vsebnika
+      │   ├── requirements-dev.txt          # Razvojne odvisnosti
+      │   └── .devcontainer/                # Nastavitev VS Code dev kontejnerja
       │
       ├── 🏗️ Infrastruktura (infra/)
-      │   ├── main.bicep                    # Glavna infrastruktura predloga
-      │   ├── api.bicep                     # Viri specifični za API
+      │   ├── main.bicep                    # Glavna predloga infrastrukture
+      │   ├── api.bicep                     # Viri, specifični za API
       │   ├── main.parameters.json          # Parametri infrastrukture
       │   └── core/                         # Modularne komponente infrastrukture
       │       ├── ai/                       # Konfiguracije AI storitev
-      │       ├── host/                     # Gostiteljska infrastruktura
-      │       ├── monitor/                  # Spremljanje in beleženje
+      │       ├── host/                     # Gostujoča infrastruktura
+      │       ├── monitor/                  # Nadzor in beleženje
       │       ├── search/                   # Nastavitev Azure AI Search
       │       ├── security/                 # Varnost in identiteta
-      │       └── storage/                  # Konfiguracije shranjevanja
+      │       └── storage/                  # Konfiguracije Storage računa
       │
       ├── 💻 Izvor aplikacije (src/)
-      │   ├── api/                          # Zadnji del API
-      │   │   ├── main.py                   # Vstopna točka aplikacije FastAPI
-      │   │   ├── routes.py                 # Definicije poti API
+      │   ├── api/                          # Backend API
+      │   │   ├── main.py                   # Vstopna točka FastAPI aplikacije
+      │   │   ├── routes.py                 # Definicije API poti
       │   │   ├── search_index_manager.py   # Funkcionalnost iskanja
-      │   │   ├── data/                     # Upravljanje podatkov API
-      │   │   ├── static/                   # Statična spletna sredstva
+      │   │   ├── data/                     # Upravljanje podatkov API-ja
+      │   │   ├── static/                   # Statične spletne vsebine
       │   │   └── templates/                # HTML predloge
-      │   ├── frontend/                     # Sprednji del React/TypeScript
-      │   │   ├── package.json              # Odvisnosti Node.js
-      │   │   ├── vite.config.ts            # Konfiguracija gradnje Vite
-      │   │   └── src/                      # Izvorna koda sprednjega dela
-      │   ├── data/                         # Vzorčne datoteke podatkov
-      │   │   └── embeddings.csv            # Vnaprej izračunane vdelave
+      │   ├── frontend/                     # React/TypeScript frontend
+      │   │   ├── package.json              # Node.js odvisnosti
+      │   │   ├── vite.config.ts            # Vite build konfiguracija
+      │   │   └── src/                      # Izvorna koda frontenda
+      │   ├── data/                         # Vzorec podatkovnih datotek
+      │   │   └── embeddings.csv            # Predizračunane vektorske predstavitve
       │   ├── files/                        # Datoteke baze znanja
-      │   │   ├── customer_info_*.json      # Vzorčni podatki strank
-      │   │   └── product_info_*.md         # Dokumentacija izdelkov
-      │   ├── Dockerfile                    # Konfiguracija vsebnika
-      │   └── requirements.txt              # Odvisnosti Python
+      │   │   ├── customer_info_*.json      # Vzorci podatkov o strankah
+      │   │   └── product_info_*.md         # Dokumentacija o proizvodih
+      │   ├── Dockerfile                    # Konfiguracija kontejnerja
+      │   └── requirements.txt              # Python odvisnosti
       │
-      ├── 🔧 Avtomatizacija in skripti (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Nastavitev po namestitvi
+      ├── 🔧 Avtomatizacija & Skripte (scripts/)
+      │   ├── postdeploy.sh/.ps1           # Nastavitev po nameščanju
       │   ├── setup_credential.sh/.ps1     # Konfiguracija poverilnic
-      │   ├── validate_env_vars.sh/.ps1    # Validacija okolja
-      │   └── resolve_model_quota.sh/.ps1  # Upravljanje kvote modela
+      │   ├── validate_env_vars.sh/.ps1    # Preverjanje okolijskih spremenljivk
+      │   └── resolve_model_quota.sh/.ps1  # Upravljanje kvot modelov
       │
-      ├── 🧪 Testiranje in ocenjevanje
-      │   ├── tests/                        # Enotno in integracijsko testiranje
+      ├── 🧪 Testiranje & Evalvacija
+      │   ├── tests/                        # Enote in integracijski testi
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Okvir za ocenjevanje agenta
-      │   │   ├── evaluate.py               # Zaganjalnik ocenjevanja
-      │   │   ├── eval-queries.json         # Testne poizvedbe
+      │   ├── evals/                        # Okvir za evalvacijo agentov
+      │   │   ├── evaluate.py               # Zagon evalvacij
+      │   │   ├── eval-queries.json         # Testni poizvedbeni nizi
       │   │   └── eval-action-data-path.json
       │   ├── sandbox/                      # Razvojno igrišče
       │   │   ├── 1-quickstart.py           # Primeri za začetek
       │   │   └── aad-interactive-chat.py   # Primeri avtentikacije
-      │   └── airedteaming/                 # Ocenjevanje varnosti AI
+      │   └── airedteaming/                 # Evalvacija varnosti AI
       │       └── ai_redteaming.py          # Testiranje rdeče ekipe
       │
       ├── 📚 Dokumentacija (docs/)
-      │   ├── deployment.md                 # Vodnik za namestitev
+      │   ├── deployment.md                 # Vodnik za nameščanje
       │   ├── local_development.md          # Navodila za lokalno nastavitev
       │   ├── troubleshooting.md            # Pogoste težave in rešitve
       │   ├── azure_account_setup.md        # Predpogoji za Azure
@@ -191,82 +183,82 @@ V načinu `Ask` bo to zagotovilo kodo, ki jo lahko kopirate in preizkusite. V na
       │
       └── 📄 Metapodatki projekta
          ├── README.md                     # Pregled projekta
-         ├── CODE_OF_CONDUCT.md           # Smernice skupnosti
-         ├── CONTRIBUTING.md              # Vodnik za prispevanje
-         ├── LICENSE                      # Pogoji licence
-         └── next-steps.md                # Vodnik po namestitvi
+         ├── CODE_OF_CONDUCT.md           # Pravila skupnosti
+         ├── CONTRIBUTING.md              # Vodnik za prispevke
+         ├── LICENSE                      # Licenčni pogoji
+         └── next-steps.md                # Navodila po nameščanju
       ```
 
 ### 3.1. Osnovna arhitektura aplikacije
 
-Ta predloga sledi vzorcu **celovite spletne aplikacije** z:
+Ta predloga sledi vzorcu **full-stack spletne aplikacije** z:
 
-- **Zadnji del**: Python FastAPI z integracijo Azure AI
-- **Sprednji del**: TypeScript/React z gradbenim sistemom Vite
+- **Backend**: Python FastAPI z Azure AI integracijo
+- **Frontend**: TypeScript/React z Vite build sistemom
 - **Infrastruktura**: Azure Bicep predloge za oblačne vire
-- **Vsebniki**: Docker za dosledno namestitev
+- **Kontejnerizacija**: Docker za konsistentno nameščanje
 
-### 3.2 Infrastruktura kot koda (bicep)
+### 3.2 Infrastruktura kot koda (Bicep)
 
-Infrastrukturna plast uporablja **Azure Bicep** predloge, organizirane modularno:
+Plast infrastrukture uporablja **Azure Bicep** predloge, organizirane modularno:
 
    - **`main.bicep`**: Orkestrira vse Azure vire
    - **`core/` moduli**: Ponovno uporabne komponente za različne storitve
       - AI storitve (Azure OpenAI, AI Search)
-      - Gostovanje vsebnikov (Azure Container Apps)
-      - Spremljanje (Application Insights, Log Analytics)
+      - Gostovanje kontejnerjev (Azure Container Apps)
+      - Nadzor (Application Insights, Log Analytics)
       - Varnost (Key Vault, Managed Identity)
 
 ### 3.3 Izvor aplikacije (`src/`)
 
-**Zadnji del API (`src/api/`)**:
+**Backend API (`src/api/`)**:
 
-- REST API, temelječ na FastAPI
-- Integracija storitve Azure AI Agent
-- Upravljanje iskalnega indeksa za pridobivanje znanja
-- Zmožnosti nalaganja in obdelave datotek
+- REST API na osnovi FastAPI
+- Integracija Foundry Agents
+- Upravljanje iskalnih indeksov za pridobivanje znanja
+- Možnosti nalaganja in obdelave datotek
 
-**Sprednji del (`src/frontend/`)**:
+**Frontend (`src/frontend/`)**:
 
-- Sodobna React/TypeScript SPA
-- Vite za hitro razvijanje in optimizirane gradnje
+- Moderne React/TypeScript SPA
+- Vite za hiter razvoj in optimizirane gradnje
 - Klepetalni vmesnik za interakcije z agentom
 
 **Baza znanja (`src/files/`)**:
 
-- Vzorčni podatki strank in izdelkov
-- Prikazuje pridobivanje znanja na podlagi datotek
-- Primeri v formatu JSON in Markdown
+- Vzorčni podatki o strankah in izdelkih
+- Prikaz pridobivanja znanja iz datotek
+- Primeri v JSON in Markdown formatih
 
 
-### 3.4 DevOps in avtomatizacija
+### 3.4 DevOps & Avtomatizacija
 
-**Skripti (`scripts/`)**:
+**Skripte (`scripts/`)**:
 
-- Skripti za PowerShell in Bash, združljivi med platformami
-- Validacija in nastavitev okolja
-- Konfiguracija po namestitvi
-- Upravljanje kvote modela
+- Večplatformske PowerShell in Bash skripte
+- Preverjanje in nastavitev okolja
+- Konfiguracija po nameščanju
+- Upravljanje kvot modelov
 
-**Integracija Azure Developer CLI**:
+**Integracija z Azure Developer CLI**:
 
-- Konfiguracija `azure.yaml` za delovne tokove `azd`
-- Avtomatizirano zagotavljanje in namestitev
-- Upravljanje spremenljivk okolja
+- `azure.yaml` konfiguracija za `azd` poteke
+- Samodejno zagotavljanje in nameščanje
+- Upravljanje okolijskih spremenljivk
 
-### 3.5 Testiranje in zagotavljanje kakovosti
+### 3.5 Testiranje & Zagotavljanje kakovosti
 
-**Okvir za ocenjevanje (`evals/`)**:
+**Okvir za evalvacijo (`evals/`)**:
 
-- Ocenjevanje zmogljivosti agenta
-- Testiranje kakovosti poizvedb in odgovorov
-- Avtomatiziran ocenjevalni proces
+- Evalvacija zmogljivosti agentov
+- Preizkušanje kakovosti vprašanji-odgovorov
+- Avtomatizirana ocenjevalna cevovodna integracija
 
 **Varnost AI (`airedteaming/`)**:
 
 - Testiranje rdeče ekipe za varnost AI
-- Pregledovanje ranljivosti
-- Prakse odgovornega AI
+- Pregled ranljivosti in varnostno skeniranje
+- Prakse odgovorne uporabe AI
 
 ---
 
@@ -276,9 +268,13 @@ Uspešno ste uporabili GitHub Copilot Chat z MCP strežniki za raziskovanje repo
 
 - [X] Aktivirali GitHub Copilot za Azure
 - [X] Razumeli arhitekturo aplikacije
-- [X] Raziskali strukturo predloge AZD
+- [X] Raziskali strukturo AZD predloge
 
-To vam daje občutek za _infrastrukturo kot kodo_ za to predlogo. Naslednjič si bomo ogledali konfiguracijsko datoteko za AZD.
+To vam daje vpogled v _infrastrukturo kot kodo_ sredstva za to predlogo. Naslednji korak bo ogled konfiguracijske datoteke za AZD.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Izjava o omejitvi odgovornosti:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve Co-op Translator (https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za avtoritativni vir. Za pomembne informacije priporočamo strokovni prevod, opravljen s strani človeškega prevajalca. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki bi izhajale iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

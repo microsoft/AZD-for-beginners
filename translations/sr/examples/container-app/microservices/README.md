@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-23T19:22:40+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "sr"
-}
--->
-# Микросервисна архитектура - Пример апликације у контејнеру
+# Архитектура микросервиса - пример Container App
 
-⏱️ **Процењено време**: 25-35 минута | 💰 **Процењени трошак**: ~$50-100/месечно | ⭐ **Комплексност**: Напредно
+⏱️ **Оцeњено време**: 25-35 минута | 💰 **Оцeњени трошак**: ~$50-100/месечно | ⭐ **Сложеност**: Напредно
 
-**Поједностављена, али функционална** микросервисна архитектура, распоређена на Azure Container Apps користећи AZD CLI. Овај пример демонстрира комуникацију између сервиса, оркестрацију контејнера и праћење са практичним подешавањем од 2 сервиса.
+Пojедностављена али функционална архитектура микросервиса распоређена на Azure Container Apps користећи AZD CLI. Овај пример демонстрира комуникацију између сервиса, оркестрацију контејнера и надгледање са практичним подешавањем од 2 сервиса.
 
-> **📚 Приступ учењу**: Овај пример почиње са минималном архитектуром од 2 сервиса (API Gateway + Backend Service) коју заправо можете распоредити и учити из ње. Након савладавања основе, пружамо смернице за проширење на комплетан микросервисни екосистем.
+> **📚 Приступ учењу**: Овај пример почиње са минималном архитектуром од 2 сервиса (API Gateway + Backend Service) коју заправо можете распоредити и од које можете учити. Након што савладате овај темељ, дајемо смернице за проширење у пуни екосистем микросервиса.
 
 ## Шта ћете научити
 
-Завршетком овог примера, научићете:
-- Како да распоредите више контејнера на Azure Container Apps
-- Како да имплементирате комуникацију између сервиса са интерним мрежама
-- Како да конфигуришете скалирање засновано на окружењу и провере здравља
-- Како да пратите дистрибуиране апликације помоћу Application Insights
-- Како да разумете обрасце распоређивања микросервиса и најбоље праксе
-- Како да постепено проширите архитектуру од једноставне до сложене
+Завршавањем овог примера ћете:
+- Распоредити више контејнера на Azure Container Apps
+- Имплементирати комуникацију сервиса са сервисом помоћу унутрашњег умрежавања
+- Конфигурисати скалирање на основу окружења и health checks
+- Надгледати дистрибуиране апликације помоћу Application Insights
+- Разумети шаблоне и најбоље праксе распоређивања микросервиса
+- Научити постепено проширење од једноставне до сложене архитектуре
 
 ## Архитектура
 
-### Фаза 1: Шта градимо (укључено у овај пример)
+### Фаза 1: Шта правимо (укључено у овом примеру)
 
 ```
                     ┌─────────────────────────────┐
@@ -62,16 +53,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Зашто почети једноставно?**
 - ✅ Брзо распоређивање и разумевање (25-35 минута)
-- ✅ Учење основних образаца микросервиса без сложености
-- ✅ Радни код који можете модификовати и експериментисати са њим
-- ✅ Мањи трошкови за учење (~$50-100/месечно у односу на $300-1400/месечно)
-- ✅ Стицање самопоуздања пре додавања база података и редова порука
+- ✅ Научите основне шаблоне микросервиса без сложености
+- ✅ Радни код који можете мењати и експериментисати
+- ✅ Нижи трошкови за учење (~$50-100/месечно уместо $300-1400/месечно)
+- ✅ Изградите самопоуздање пре додавања база података и редова порука
 
-**Аналогија**: Замислите ово као учење вожње. Почињете на празном паркингу (2 сервиса), савладате основе, а затим напредујете до градског саобраћаја (5+ сервиса са базама података).
+**Аналогија**: Замислите ово као учење вожње. Почнете на празном паркингу (2 сервиса), савладате основе, па пређете на градски саобраћај (5+ сервиса са базама података).
 
 ### Фаза 2: Будуће проширење (референтна архитектура)
 
-Када савладате архитектуру са 2 сервиса, можете је проширити на:
+Када савладате архитектуру од 2 сервиса, можете је проширити на:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -86,94 +77,94 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-Погледајте одељак "Водич за проширење" на крају за корак-по-корак упутства.
+Погледајте одељак "Expansion Guide" на крају за упутства корак по корак.
 
 ## Укључене функције
 
-✅ **Откривање сервиса**: Аутоматско DNS откривање између контејнера  
-✅ **Расподела оптерећења**: Уграђена расподела оптерећења између реплика  
-✅ **Ауто-скалирање**: Независно скалирање по сервису на основу HTTP захтева  
-✅ **Праћење здравља**: Провере живости и спремности за оба сервиса  
+✅ **Откривање сервиса**: Аутоматско откривање засновано на DNS између контејнера  
+✅ **Расподела оптерећења**: Уграђена расподела оптерећења преко реплика  
+✅ **Аутоматско скалирање**: Независно скалирање по сервису засновано на HTTP захтевима  
+✅ **Провера здравља**: Liveness и readiness probes за оба сервиса  
 ✅ **Дистрибуирано логовање**: Централизовано логовање са Application Insights  
-✅ **Интерно умрежавање**: Сигурна комуникација између сервиса  
+✅ **Унутрашње умрежавање**: Сигурна комуникација сервис-сервис  
 ✅ **Оркестрација контејнера**: Аутоматско распоређивање и скалирање  
-✅ **Ажурирања без прекида рада**: Ролинг ажурирања са управљањем ревизијама  
+✅ **Ажурирања без прекида**: Ролинг ажурирања са управљањем ревизијама  
 
-## Предуслови
+## Претпоставке
 
 ### Потребни алати
 
-Пре почетка, проверите да ли имате инсталиране следеће алате:
+Пре почетка, проверите да имате инсталиране ове алате:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (верзија 1.0.0 или новија)  
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (верзија 1.0.0 или новија)
    ```bash
    azd version
    # Очекивани излаз: azd верзија 1.0.0 или новија
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (верзија 2.50.0 или новија)  
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (верзија 2.50.0 или новија)
    ```bash
    az --version
-   # Очекивани излаз: azure-cli 2.50.0 или новији
+   # Очекивани излаз: azure-cli 2.50.0 или новија
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (за локални развој/тестирање - опционо)  
+3. **[Docker](https://www.docker.com/get-started)** (за локални развој/тестирање - опционално)
    ```bash
    docker --version
    # Очекивани излаз: Docker верзија 20.10 или новија
    ```
 
-### Azure захтеви
+### Захтеви за Azure
 
 - Активна **Azure претплата** ([креирајте бесплатан налог](https://azure.microsoft.com/free/))
 - Дозволе за креирање ресурса у вашој претплати
-- **Contributor** улога на претплати или ресурсној групи
+- Рола **Contributor** на претплати или групи ресурса
 
-### Предзнање
+### Потребно претходно знање
 
-Ово је пример **на напредном нивоу**. Требало би да имате:
-- Завршен [Пример једноставног Flask API-ја](../../../../../examples/container-app/simple-flask-api)  
-- Основно разумевање микросервисне архитектуре
+Ово је пример на **напредном нивоу**. Требало би да сте:
+- Завршили [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Основно разумевање архитектуре микросервиса
 - Познавање REST API-ја и HTTP-а
 - Разумевање концепата контејнера
 
-**Нови сте у Container Apps?** Почните са [Примером једноставног Flask API-ја](../../../../../examples/container-app/simple-flask-api) да бисте научили основе.
+**Ново у Container Apps?** Почните са [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) прво да бисте научили основе.
 
 ## Брзи почетак (корак по корак)
 
-### Корак 1: Клонирајте и навигирајте
+### Корак 1: Клонирање и навигација
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Провера успеха**: Проверите да ли видите `azure.yaml`:
+**✓ Провера успеха**: Уверите се да видите `azure.yaml`:
 ```bash
 ls
 # Очекује се: README.md, azure.yaml, infra/, src/
 ```
 
-### Корак 2: Аутентификујте се са Azure-ом
+### Корак 2: Аутентикација у Azure
 
 ```bash
 azd auth login
 ```
 
-Ово отвара ваш претраживач за Azure аутентификацију. Пријавите се са вашим Azure акредитивима.
+Ово ће отворити ваш прегледач за Azure аутентификацију. Пријавите се помоћу ваших Azure акредитива.
 
 **✓ Провера успеха**: Требало би да видите:
 ```
 Logged in to Azure.
 ```
 
-### Корак 3: Иницијализујте окружење
+### Корак 3: Иницијализација окружења
 
 ```bash
 azd init
 ```
 
-**Питања која ћете видети**:
+Питања која ћете видети:
 - **Име окружења**: Унесите кратко име (нпр. `microservices-dev`)
 - **Azure претплата**: Изаберите вашу претплату
 - **Azure локација**: Изаберите регион (нпр. `eastus`, `westeurope`)
@@ -183,20 +174,20 @@ azd init
 SUCCESS: New project initialized!
 ```
 
-### Корак 4: Распоредите инфраструктуру и сервисе
+### Корак 4: Деплој инфраструктуре и сервиса
 
 ```bash
 azd up
 ```
 
 **Шта се дешава** (траје 8-12 минута):
-1. Креира окружење за Container Apps
-2. Креира Application Insights за праћење
+1. Креира Container Apps окружење
+2. Креира Application Insights за надгледање
 3. Гради API Gateway контејнер (Node.js)
 4. Гради Product Service контејнер (Python)
-5. Распоређује оба контејнера на Azure
-6. Конфигурише умрежавање и провере здравља
-7. Поставља праћење и логовање
+5. Деплој-ује оба контејнера на Azure
+6. Конфигурише мрежу и health checks
+7. Подешава надгледање и логовање
 
 **✓ Провера успеха**: Требало би да видите:
 ```
@@ -206,25 +197,25 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ Време**: 8-12 минута
 
-### Корак 5: Тестирајте распоређивање
+### Корак 5: Тестирање деплоја
 
 ```bash
-# Преузмите крајњу тачку пролаза
+# Добијте крајњу тачку гејтвеја
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Тестирајте здравље API пролаза
+# Тестирајте здравље АПИ гејтвеја
 curl $GATEWAY_URL/health
 
-# Очекивани излаз:
+# Очекујани излаз:
 # {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Тестирајте сервис производа преко gateway-а**:
+**Тестирајте сервис производа преко API Gateway-a**:
 ```bash
 # Листа производа
 curl $GATEWAY_URL/api/products
 
-# Очекивани излаз:
+# Очекујани излаз:
 # [
 #   {"id":1,"name":"Лаптоп","price":999.99,"stock":50},
 #   {"id":2,"name":"Миш","price":29.99,"stock":200},
@@ -232,15 +223,15 @@ curl $GATEWAY_URL/api/products
 # ]
 ```
 
-**✓ Провера успеха**: Оба ендпоинта враћају JSON податке без грешака.
+**✓ Провера успеха**: Оба ендпојнта враћају JSON податке без грешака.
 
 ---
 
-**🎉 Честитамо!** Успешно сте распоредили микросервисну архитектуру на Azure!
+**🎉 Честитамо!** Распоредили сте архитектуру микросервиса на Azure!
 
 ## Структура пројекта
 
-Сви имплементациони фајлови су укључени—ово је комплетан, функционалан пример:
+Сви фајлови имплементације су укључени — ово је комплетан, радни пример:
 
 ```
 microservices/
@@ -270,48 +261,48 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Шта ради свака компонента:**
+**Шта свака компонента ради:**
 
 **Инфраструктура (infra/)**:
 - `main.bicep`: Оркестрира све Azure ресурсе и њихове зависности
-- `core/container-apps-environment.bicep`: Креира окружење за Container Apps и Azure Container Registry
-- `core/monitor.bicep`: Поставља Application Insights за дистрибуирано логовање
-- `app/*.bicep`: Појединачне дефиниције контејнерских апликација са скалирањем и проверама здравља
+- `core/container-apps-environment.bicep`: Креира Container Apps окружење и Azure Container Registry
+- `core/monitor.bicep`: Подешава Application Insights за дистрибуирано логовање
+- `app/*.bicep`: Појединачне дефиниције container app-ова са скалирањем и health checks
 
 **API Gateway (src/api-gateway/)**:
-- Јавно доступан сервис који усмерава захтеве ка позадинским сервисима
+- Јавно-усмерени сервис који прослеђује захтеве ка backend сервисима
 - Имплементира логовање, обраду грешака и прослеђивање захтева
-- Демонстрира HTTP комуникацију између сервиса
+- Демонстрира HTTP комуникацију сервис-сервис
 
 **Product Service (src/product-service/)**:
 - Интерни сервис са каталогом производа (у меморији ради једноставности)
-- REST API са проверама здравља
-- Пример обрасца позадинског микросервиса
+- REST API са health check-овима
+- Пример шаблона backend микросервиса
 
 ## Преглед сервиса
 
 ### API Gateway (Node.js/Express)
 
 **Порт**: 8080  
-**Приступ**: Јаван (екстерни улаз)  
-**Сврха**: Усмерава долазне захтеве ка одговарајућим позадинским сервисима  
+**Приступ**: Јаван (спољашњи ingress)  
+**Сврха**: Прослеђује долазне захтеве одговарајућим backend сервисима  
 
 **Ендпоинти**:
 - `GET /` - Информације о сервису
-- `GET /health` - Ендпоинт за проверу здравља
-- `GET /api/products` - Прослеђује ка сервису производа (листа свих)
-- `GET /api/products/:id` - Прослеђује ка сервису производа (добијање по ID-у)
+- `GET /health` - Health check ендпоинт
+- `GET /api/products` - Прослеђује ка product service (листa свих)
+- `GET /api/products/:id` - Прослеђује ка product service (преузима по ID)
 
 **Кључне карактеристике**:
-- Усмеравање захтева са axios-ом
+- Рутинг захтева помоћу axios-а
 - Централизовано логовање
-- Обрада грешака и управљање временским ограничењима
+- Обрада грешака и управљање временским ограничењем
 - Откривање сервиса преко променљивих окружења
 - Интеграција са Application Insights
 
-**Истакнути код** (`src/api-gateway/app.js`):
+**Истакао код** (`src/api-gateway/app.js`):
 ```javascript
-// Унутрашња комуникација услуга
+// Интерна комуникација сервиса
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
@@ -321,23 +312,23 @@ app.get('/api/products', async (req, res) => {
 ### Product Service (Python/Flask)
 
 **Порт**: 8000  
-**Приступ**: Само интерни (без екстерног улаза)  
+**Приступ**: Само унутрашњи (нема спољашњи ingress)  
 **Сврха**: Управља каталогом производа са подацима у меморији  
 
 **Ендпоинти**:
 - `GET /` - Информације о сервису
-- `GET /health` - Ендпоинт за проверу здравља
+- `GET /health` - Health check ендпоинт
 - `GET /products` - Листа свих производа
-- `GET /products/<id>` - Добијање производа по ID-у
+- `GET /products/<id>` - Преузима производ по ID
 
 **Кључне карактеристике**:
 - RESTful API са Flask-ом
-- Продавница производа у меморији (једноставно, без базе података)
-- Праћење здравља са пробама
+- Стор у меморији за производе (једноставно, није потребна база)
+- Надгледање здравља помоћу probes
 - Структурирано логовање
 - Интеграција са Application Insights
 
-**Модел података**:
+**Податачки модел**:
 ```python
 {
   "id": 1,
@@ -348,53 +339,53 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Зашто само интерно?**
-Сервис производа није јавно доступан. Сви захтеви морају проћи кроз API Gateway, који пружа:
-- Сигурност: Контролисана тачка приступа
-- Флексибилност: Могућност промене позадине без утицаја на клијенте
-- Праћење: Централизовано логовање захтева
+**Зашто само за унутрашњу употребу?**
+Product Service није изложен јавно. Сви захтеви морају проћи кроз API Gateway, који пружа:
+- Безбедност: Контролисана тачка приступа
+- Флексибилност: Може се мењати backend без утицаја на клијенте
+- Надгледање: Централизовано логовање захтева
 
-## Разумевање комуникације између сервиса
+## Разумевање комуникације сервиса
 
-### Како сервиси комуницирају
+### Како сервиси комуницирају међу собом
 
-У овом примеру, API Gateway комуницира са Product Service-ом користећи **интерне HTTP позиве**:
+У овом примеру, API Gateway комуницира са Product Service-ом користећи **унутрашње HTTP позиве**:
 
 ```javascript
-// АПИ капија (src/api-gateway/app.js)
+// API гејтвеј (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Направи интерни HTTP захтев
+// Направити унутрашњи HTTP захтев
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
 **Кључне тачке**:
 
-1. **DNS-базирано откривање**: Container Apps аутоматски обезбеђује DNS за интерне сервисе
-   - FQDN за Product Service: `product-service.internal.<environment>.azurecontainerapps.io`
+1. **Откривање засновано на DNS**: Container Apps аутоматски обезбеђује DNS за унутрашње сервисе
+   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
    - Поједностављено као: `http://product-service` (Container Apps то разрешава)
 
 2. **Нема јавне изложености**: Product Service има `external: false` у Bicep-у
    - Доступан само унутар Container Apps окружења
-   - Не може се приступити са интернета
+   - Не може се достизати са интернета
 
-3. **Променљиве окружења**: URL-ови сервиса се убацују током распоређивања
-   - Bicep прослеђује интерни FQDN ка gateway-у
+3. **Променљиве окружења**: URL-ови сервиса се убацују у време деплоја
+   - Bicep предаје унутрашњи FQDN gateway-у
    - Нема хардкодираних URL-ова у апликационом коду
 
-**Аналогија**: Замислите ово као канцеларијске просторије. API Gateway је рецепција (јавна), а Product Service је канцеларија (само интерна). Посетиоци морају проћи кроз рецепцију да би дошли до било које канцеларије.
+**Аналогија**: Замислите ово као канцеларије. API Gateway је ресепција (јавни), а Product Service је канцеларија (само интерна). Посетиоци морају проћи кроз ресепцију да би дошли до канцеларије.
 
 ## Опције распоређивања
 
-### Комплетно распоређивање (препоручено)
+### Пуно распоређивање (препоручено)
 
 ```bash
-# Разместите инфраструктуру и оба сервиса
+# Разместити инфраструктуру и оба сервиса
 azd up
 ```
 
 Ово распоређује:
-1. Окружење за Container Apps
+1. Container Apps окружење
 2. Application Insights
 3. Container Registry
 4. API Gateway контејнер
@@ -402,25 +393,25 @@ azd up
 
 **Време**: 8-12 минута
 
-### Распоређивање појединачног сервиса
+### Распоред појединачног сервиса
 
 ```bash
-# Разместите само једну услугу (након почетног azd up)
+# Разместите само једну услугу (после почетног azd up)
 azd deploy api-gateway
 
-# Или разместите услугу производа
+# Или разместите услугу „product”
 azd deploy product-service
 ```
 
-**Случај употребе**: Када сте ажурирали код у једном сервису и желите да распоредите само тај сервис.
+**Случај употребе**: Када сте ажурирали код у једном сервису и желите да поново распоредите само тај сервис.
 
 ### Ажурирање конфигурације
 
 ```bash
-# Промените параметре скалирања
+# Променити параметре скалирања
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Поново примените са новом конфигурацијом
+# Поново распоредити са новом конфигурацијом
 azd up
 ```
 
@@ -431,14 +422,14 @@ azd up
 Оба сервиса су конфигурисана са HTTP-базираним аутоскалирањем у њиховим Bicep фајловима:
 
 **API Gateway**:
-- Минималне реплике: 2 (увек бар 2 ради доступности)
-- Максималне реплике: 20
-- Окидач скалирања: 50 истовремених захтева по реплици
+- Мин реплике: 2 (увек најмање 2 за доступност)
+- Макс реплике: 20
+- Тригер скалирања: 50 истовремених захтева по реплици
 
 **Product Service**:
-- Минималне реплике: 1 (може се скалирати на нулу ако је потребно)
-- Максималне реплике: 10
-- Окидач скалирања: 100 истовремених захтева по реплици
+- Мин реплике: 1 (може да скалира на нулу ако је потребно)
+- Макс реплике: 10
+- Тригер скалирања: 100 истовремених захтева по реплици
 
 **Прилагодите скалирање** (у `infra/app/*.bicep`):
 ```bicep
@@ -458,21 +449,21 @@ scale: {
 }
 ```
 
-### Додела ресурса
+### Расподела ресурса
 
 **API Gateway**:
 - CPU: 1.0 vCPU
 - Меморија: 2 GiB
-- Разлог: Обрађује сав екстерни саобраћај
+- Разлог: Обрађује сав спољашњи саобраћај
 
 **Product Service**:
 - CPU: 0.5 vCPU
 - Меморија: 1 GiB
 - Разлог: Лагане операције у меморији
 
-### Провере здравља
+### Проверe здравља
 
-Оба сервиса укључују провере живости и спремности:
+Оба сервиса укључују liveness и readiness probes:
 
 ```bicep
 probes: [
@@ -498,25 +489,28 @@ probes: [
 ```
 
 **Шта ово значи**:
-- **Живост**: Ако провера здравља не успе, Container Apps поново покреће контејнер
-- **Спремност**: Ако није спреман, Container Apps престаје да усмерава саобраћај ка тој реплици
+- **Liveness**: Ако health check не прође, Container Apps рестартује контејнер
+- **Readiness**: Ако није спреман, Container Apps престаје да усмерава саобраћај ка тој реплици
 
-## Праћење и посматрање
+
+
+## Надгледање и опсервабилност
 
 ### Преглед логова сервиса
 
 ```bash
-# Стримујте логове из API Gateway-а
-azd logs api-gateway --follow
+# Погледајте логове помоћу azd monitor
+azd monitor --logs
 
-# Погледајте недавне логове услуге производа
-azd logs product-service --tail 100
+# Или користите Azure CLI за одређене Container Apps:
+# Стримујте логове из API Gateway
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Погледајте све логове из обе услуге
-azd logs --follow
+# Погледајте недавне логове сервиса производа
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**Очекивани излаз**:
+**Очекујани излаз**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -524,9 +518,9 @@ azd logs --follow
 [product-service] Retrieved 5 products
 ```
 
-### Упити у Application Insights
+### Application Insights упити
 
-Приступите Application Insights у Azure порталу, затим покрените ове упите:
+Приступите Application Insights у Azure порталу, па покрените ове упите:
 
 **Пронађите споре захтеве**:
 ```kusto
@@ -537,7 +531,7 @@ requests
 | order by count_ desc
 ```
 
-**Пратите позиве између сервиса**:
+**Праћење позива између сервиса**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -562,86 +556,121 @@ requests
 | render timechart
 ```
 
-### Приступ контролној табли за праћење
+### Приступ контролној табли за надгледање
 
 ```bash
-# Добијте детаље о Application Insights
+# Добијте детаље о Application Insights-у
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Отворите Azure Portal за праћење
+# Отворите надзор у Azure порталу
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Жива метрика
+### Метрике уживо
 
-1. Идите на Application Insights у Azure порталу
-2. Кликните на "Live Metrics"
-3. Погледајте захтеве у реалном времену, неуспехе и перформансе
+1. Идите у Application Insights у Azure порталу
+2. Кликните "Live Metrics"
+3. Видите реал-тиме захтеве, неуспехе и перформансе
 4. Тестирајте покретањем: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
 ## Практичне вежбе
 
-[Напомена: Погледајте комплетне вежбе у одељку "Практичне вежбе" изнад за детаљна корак-по-корак упутства, укључујући верификацију распоређивања, модификацију података, тестове аутоскалирања, обраду грешака и додавање трећег сервиса.]
+[Напомена: Погледајте целе вежбе горе у одељку "Practical Exercises" за детаљне корак-по-корак вежбе које укључују валидацију деплоја, мењање података, тестове аутоскалирања, обраду грешака и додавање трећег сервиса.]
 
 ## Анализа трошкова
 
 ### Процењени месечни трошкови (за овај пример са 2 сервиса)
 
 | Ресурс | Конфигурација | Процењени трошак |
-|--------|---------------|------------------|
+|----------|--------------|----------------|
 | API Gateway | 2-20 реплика, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 реплика, 0.5 vCPU, 
-Za učenje/testiranje, razmotrite:
-- Koristite besplatne Azure kredite (prvih 30 dana)
-- Ograničite broj replika na minimum
-- Obrišite nakon testiranja (bez stalnih troškova)
+| Product Service | 1-10 реплика, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Basic tier | $5 |
+| Application Insights | 1-2 GB/месечно | $5-10 |
+| Log Analytics | 1 GB/месечно | $3 |
+| **Укупно** | | **$58-243/месечно** |
+
+**Расподела трошкова по употреби**:
+- **Низак саобраћај** (тестирање/учење): ~ $60/месечно
+- **Умерен саобраћај** (мала продукција): ~ $120/месечно
+- **Велики саобраћај** (заузето): ~ $240/месечно
+
+### Савети за оптимизацију трошкова
+
+1. **Скалирање на нулу за развој**:
+   ```bicep
+   scale: {
+     minReplicas: 0  // Save $30-40/month when not in use
+     maxReplicas: 10
+   }
+   ```
+
+2. **Користите Consumption план за Cosmos DB** (када га додате):
+   - Плаћате само за оно што користите
+   - Нема минималне наплате
+
+3. **Подесите Application Insights sampling**:
+   ```javascript
+   appInsights.defaultClient.config.samplingPercentage = 50; // Узорковати 50% захтева
+   ```
+
+4. **Очистите ресурсе када нису потребни**:
+   ```bash
+   azd down
+   ```
+
+### Опције бесплатног нивоа
+За учење/тестирање, размотрите:
+- Користите бесплатне Azure кредите (првих 30 дана)
+- Држите минималан број реплика
+- Обришите после тестирања (без сталних трошкова)
 
 ---
 
-## Čišćenje
+## Чишћење
 
-Da biste izbegli stalne troškove, obrišite sve resurse:
+Да бисте избегли сталне трошкове, обришите све ресурсе:
 
 ```bash
 azd down --force --purge
 ```
 
-**Potvrda**:
+**Захтев за потврду**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Unesite `y` za potvrdu.
+Унесите `y` за потврду.
 
-**Šta se briše**:
-- Okruženje za Container Apps
-- Oba Container App-a (gateway i product service)
+**Шта ће бити обрисано**:
+- Container Apps Environment
+- Both Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Proverite čišćenje**:
+**✓ Потврдите чишћење**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Treba da vrati prazno.
+Треба да врати празно.
 
 ---
 
-## Vodič za proširenje: Od 2 do 5+ servisa
+## Водич за проширење: Од 2 до 5+ услуга
 
-Kada savladate arhitekturu sa 2 servisa, evo kako da je proširite:
+Када савладате ову архитектуру са 2 услуге, ево како да је проширите:
 
-### Faza 1: Dodavanje baze podataka (sledeći korak)
+### Фаза 1: Додавање перзистенције базе података (следећи корак)
 
-**Dodajte Cosmos DB za Product Service**:
+**Додајте Cosmos DB за услугу производа**:
 
-1. Kreirajte `infra/core/cosmos.bicep`:
+1. Креирајте `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -654,140 +683,140 @@ Kada savladate arhitekturu sa 2 servisa, evo kako da je proširite:
    }
    ```
 
-2. Ažurirajte Product Service da koristi Cosmos DB umesto podataka u memoriji
+2. Ажурирајте услугу производа да користи Cosmos DB уместо података у меморији
 
-3. Procena dodatnih troškova: ~$25 mesečno (serverless)
+3. Процењени додатни трошак: ~$25/месечно (serverless)
 
-### Faza 2: Dodavanje trećeg servisa (upravljanje narudžbinama)
+### Фаза 2: Додајте трећу услугу (управљање наруџбинама)
 
-**Kreirajte Order Service**:
+**Креирајте услугу наруџбина**:
 
-1. Novi folder: `src/order-service/` (Python/Node.js/C#)
-2. Novi Bicep: `infra/app/order-service.bicep`
-3. Ažurirajte API Gateway da rutira `/api/orders`
-4. Dodajte Azure SQL Database za čuvanje narudžbina
+1. Нова фасцикла: `src/order-service/` (Python/Node.js/C#)
+2. Нови Bicep: `infra/app/order-service.bicep`
+3. Ажурирајте API Gateway да рутира `/api/orders`
+4. Додајте Azure SQL Database за перзистенцију наруџбина
 
-**Arhitektura postaje**:
+**Архитектура постаје**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Faza 3: Dodavanje asinhrone komunikacije (Service Bus)
+### Фаза 3: Додавање асинхроне комуникације (Service Bus)
 
-**Implementirajte arhitekturu zasnovanu na događajima**:
+**Имплементирајте архитектуру засновану на догађајима**:
 
-1. Dodajte Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service objavljuje događaje "ProductCreated"
-3. Order Service se pretplaćuje na događaje proizvoda
-4. Dodajte Notification Service za obradu događaja
+1. Додајте Azure Service Bus: `infra/core/servicebus.bicep`
+2. Услуга производа објављује догађаје "ProductCreated"
+3. Услуга наруџбина се претплаћује на догађаје производа
+4. Додајте Notification Service за обраду догађаја
 
-**Šablon**: Zahtev/odgovor (HTTP) + zasnovano na događajima (Service Bus)
+**Образац**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
-### Faza 4: Dodavanje autentifikacije korisnika
+### Фаза 4: Додавање аутентификације корисника
 
-**Implementirajte User Service**:
+**Имплементирајте услугу корисника**:
 
-1. Kreirajte `src/user-service/` (Go/Node.js)
-2. Dodajte Azure AD B2C ili prilagođenu JWT autentifikaciju
-3. API Gateway proverava tokene
-4. Servisi proveravaju dozvole korisnika
+1. Креирајте `src/user-service/` (Go/Node.js)
+2. Додајте Azure AD B2C или прилагођену JWT аутентификацију
+3. API Gateway валида токене
+4. Услуге проверавају дозволе корисника
 
-### Faza 5: Spremnost za produkciju
+### Фаза 5: Спремност за продукцију
 
-**Dodajte sledeće komponente**:
-- Azure Front Door (globalno balansiranje opterećenja)
-- Azure Key Vault (upravljanje tajnama)
-- Azure Monitor Workbooks (prilagođene kontrolne table)
-- CI/CD pipeline (GitHub Actions)
+**Додајте ове компоненте**:
+- Azure Front Door (global load balancing)
+- Azure Key Vault (secret management)
+- Azure Monitor Workbooks (custom dashboards)
+- CI/CD Pipeline (GitHub Actions)
 - Blue-Green Deployments
-- Managed Identity za sve servise
+- Managed Identity for all services
 
-**Trošak kompletne produkcijske arhitekture**: ~$300-1,400 mesečno
+**Трошак целе продукционе архитектуре**: ~$300-1,400/месечно
 
 ---
 
-## Saznajte više
+## Сазнајте више
 
-### Povezana dokumentacija
-- [Azure Container Apps Dokumentacija](https://learn.microsoft.com/azure/container-apps/)
-- [Vodič za arhitekturu mikroservisa](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights za distribuisano praćenje](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+### Повезана документација
+- [Документација за Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
+- [Водич за архитектуру микросервиса](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights за дистрибуирано праћење](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Документација за Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Sledeći koraci u ovom kursu
-- ← Prethodno: [Jednostavan Flask API](../../../../../examples/container-app/simple-flask-api) - Primer jednostavnog kontejnera za početnike
-- → Sledeće: [Vodič za AI integraciju](../../../../../examples/docs/ai-foundry) - Dodajte AI mogućnosti
-- 🏠 [Početna stranica kursa](../../README.md)
+### Следећи кораци у овом курсу
+- ← Претходно: [Једноставан Flask API](../../../../../examples/container-app/simple-flask-api) - Почетнички пример са једним контејнером
+- → Следеће: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Додајте AI могућности
+- 🏠 [Почетна страница курса](../../README.md)
 
-### Poređenje: Kada koristiti šta
+### Поређење: Када шта користити
 
-**Jedan Container App** (primer jednostavnog Flask API-ja):
-- ✅ Jednostavne aplikacije
-- ✅ Monolitna arhitektura
-- ✅ Brzo za implementaciju
-- ❌ Ograničena skalabilnost
-- **Trošak**: ~$15-50 mesečno
+**Апликација у једном контејнеру** (пример Simple Flask API):
+- ✅ Једноставне апликације
+- ✅ Монолитна архитектура
+- ✅ Брзо за деплој
+- ❌ Ограничена скалабилност
+- **Трошак**: ~$15-50/месечно
 
-**Mikroservisi** (ovaj primer):
-- ✅ Kompleksne aplikacije
-- ✅ Nezavisno skaliranje po servisu
-- ✅ Autonomija timova (različiti servisi, različiti timovi)
-- ❌ Složenije za upravljanje
-- **Trošak**: ~$60-250 mesečno
+**Микросервиси** (Овај пример):
+- ✅ Комплексне апликације
+- ✅ Независно скалирање по услузи
+- ✅ Аутономија тима (различите услуге, различити тимови)
+- ❌ Сложеније за управљање
+- **Трошак**: ~$60-250/месечно
 
 **Kubernetes (AKS)**:
-- ✅ Maksimalna kontrola i fleksibilnost
-- ✅ Portabilnost između oblaka
-- ✅ Napredne mreže
-- ❌ Zahteva ekspertizu za Kubernetes
-- **Trošak**: ~$150-500 mesečno minimum
+- ✅ Максимална контрола и флексибилност
+- ✅ Портабилност између више облака
+- ✅ Напредно мрежно умрежавање
+- ❌ Захтева експертизу за Kubernetes
+- **Трошак**: минимум ~$150-500/месечно
 
-**Preporuka**: Počnite sa Container Apps (ovaj primer), pređite na AKS samo ako su vam potrebne specifične funkcije Kubernetes-a.
+**Препорука**: Почните са Container Apps (овај пример), пређите на AKS само ако су вам потребне функције специфичне за Kubernetes.
 
 ---
 
-## Često postavljana pitanja
+## Често постављана питања
 
-**P: Zašto samo 2 servisa umesto 5+?**  
-O: Edukativni napredak. Savladajte osnove (komunikacija servisa, praćenje, skaliranje) sa jednostavnim primerom pre dodavanja složenosti. Šabloni koje ovde naučite primenjuju se na arhitekture sa 100 servisa.
+**П: Зашто само 2 услуге уместо 5+?**  
+О: Едукативни напредак. Савладајте основе (комуникација између услуга, мониторинг, скалирање) са једноставним примером пре додавања сложености. Обрасци које овде научите важе и за архитектуре са 100 услуга.
 
-**P: Mogu li sam dodati više servisa?**  
-O: Naravno! Pratite vodič za proširenje iznad. Svaki novi servis prati isti šablon: kreirajte src folder, kreirajte Bicep fajl, ažurirajte azure.yaml, implementirajte.
+**П: Могу ли сам додати више услуга?**  
+О: Апсолутно! Пратите горе наведени водич за проширење. Свака нова услуга следи исти образац: креирајте src фасциклу, креирајте Bicep фајл, ажурирајте azure.yaml, и разместите.
 
-**P: Da li je ovo spremno za produkciju?**  
-O: Ovo je solidna osnova. Za produkciju dodajte: managed identity, Key Vault, trajne baze podataka, CI/CD pipeline, monitoring upozorenja i strategiju bekapa.
+**П: Да ли је ово спремно за продукцију?**  
+О: Ово је добра основа. За продукцију додајте: Managed Identity, Key Vault, перзистентне базе података, CI/CD pipeline, аларме за мониторинг и стратегију резервних копија.
 
-**P: Zašto ne koristiti Dapr ili drugi service mesh?**  
-O: Održite jednostavnost za učenje. Kada razumete nativno umrežavanje Container Apps, možete dodati Dapr za napredne scenarije.
+**П: Зашто не користити Dapr или други service mesh?**  
+О: Останите једноставни за учење. Кад разумете нативно умрежавање Container Apps, можете додати Dapr за напредне сценарије.
 
-**P: Kako da debagujem lokalno?**  
-O: Pokrenite servise lokalno sa Docker-om:
+**П: Како дебаговати локално?**  
+О: Покрените сервисе локално уз Docker:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**P: Mogu li koristiti različite programske jezike?**  
-O: Da! Ovaj primer prikazuje Node.js (gateway) + Python (product service). Možete kombinovati bilo koje jezike koji rade u kontejnerima.
+**П: Могу ли користити различите програмске језике?**  
+О: Да! Овај пример показује Node.js (gateway) + Python (услуга производа). Можете мешати било које језике који раде у контејнерима.
 
-**P: Šta ako nemam Azure kredite?**  
-O: Koristite besplatni Azure nivo (prvih 30 dana sa novim nalozima) ili implementirajte za kratke test periode i odmah obrišite.
+**П: Шта ако немам Azure кредите?**  
+О: Користите бесплатни ниво Azure (првих 30 дана за нове налоге) или размештајте само за кратка тестирања и одмах обришите.
 
 ---
 
-> **🎓 Rezime puta učenja**: Naučili ste kako da implementirate arhitekturu sa više servisa sa automatskim skaliranjem, internim umrežavanjem, centralizovanim praćenjem i šablonima spremnim za produkciju. Ova osnova vas priprema za složene distribuirane sisteme i arhitekture mikroservisa za preduzeća.
+> **🎓 Резиме пута учења**: Наравно сте научили како да размештате архитектуру са више услуга са аутоматским скалирањем, унутрашњим умрежавањем, централизованим мониторингом и образцима спремним за продукцију. Ова основа вас припрема за сложене дистрибуиране системе и ентерпрајз микросервисне архитектуре.
 
-**📚 Navigacija kursa**:
-- ← Prethodno: [Jednostavan Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Sledeće: [Primer integracije baze podataka](../../../../../examples/database-app)
-- 🏠 [Početna stranica kursa](../../README.md)
-- 📖 [Najbolje prakse za Container Apps](../../docs/deployment/deployment-guide.md)
+**📚 Навигација курса:**
+- ← Претходно: [Једноставан Flask API](../../../../../examples/container-app/simple-flask-api)
+- → Следеће: [Пример интеграције базе података](../../../../../examples/database-app)
+- 🏠 [Почетна страница курса](../../../README.md)
+- 📖 [Најбоље праксе за Container Apps](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Одрицање од одговорности**:  
-Овај документ је преведен коришћењем услуге за превођење помоћу вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, молимо вас да имате у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати меродавним извором. За критичне информације препоручује се професионални превод од стране људског преводиоца. Не преузимамо одговорност за било каква погрешна тумачења или неспоразуме који могу настати услед коришћења овог превода.
+**Одрицање одговорности**:
+Овај документ је преведен помоћу сервиса за превод уз подршку вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати коначним и ауторитетним извором. За критичне информације препоручује се професионални превод који обављају људи. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која могу настати употребом овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

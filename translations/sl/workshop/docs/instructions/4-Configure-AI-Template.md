@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:05:34+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "sl"
-}
--->
-# 4. Konfiguracija predloge
+# 4. Konfigurirajte predlogo
 
-!!! tip "OB KONCU TEGA MODULA BOSTE ZMOGLI"
+!!! tip "NA KONCU TEGA MODULA BOSTE ZMOGLI"
 
     - [ ] Razumeti namen datoteke `azure.yaml`
     - [ ] Razumeti strukturo datoteke `azure.yaml`
-    - [ ] Razumeti vrednost življenjskih ciklov `hooks` v azd
-    - [ ] **Laboratorij 3:** 
+    - [ ] Razumeti pomen azd življenjskega cikla `hooks`
+    - [ ] **Laboratorij 4:** Raziščite in spremenite spremenljivke okolja
 
 ---
 
-!!! prompt "Kaj počne datoteka `azure.yaml`? Uporabite kodo in jo razložite vrstico po vrstico"
+!!! prompt "Kaj počne datoteka `azure.yaml`? Uporabite blok kode in razložite vrstico za vrstico"
 
-      Datoteka `azure.yaml` je **konfiguracijska datoteka za Azure Developer CLI (azd)**. Določa, kako naj se vaša aplikacija namesti v Azure, vključno z infrastrukturo, storitvami, namestitvenimi kljukami in okoljskimi spremenljivkami.
+      Datoteka `azure.yaml` je **konfiguracijska datoteka za Azure Developer CLI (azd)**. Določa, kako naj bo vaša aplikacija razporejena v Azure, vključno z infrastrukturo, storitvami, namestitvenimi sprožilci (hooks) in spremenljivkami okolja.
 
 ---
 
 ## 1. Namen in funkcionalnost
 
-Datoteka `azure.yaml` služi kot **načrt za namestitev** aplikacije AI agenta, ki:
+Ta datoteka `azure.yaml` služi kot **načrt za namestitev** za aplikacijo AI agenta, ki:
 
 1. **Preveri okolje** pred namestitvijo
 2. **Vzpostavi Azure AI storitve** (AI Hub, AI Project, Search itd.)
-3. **Namesti Python aplikacijo** v Azure Container Apps
-4. **Konfigurira AI modele** za funkcionalnosti klepeta in vdelave
+3. **Razporedi Python aplikacijo** v Azure Container Apps
+4. **Konfigurira AI modele** tako za klepetalno kot za embedding funkcionalnost
 5. **Vzpostavi nadzor in sledenje** za AI aplikacijo
 6. **Obravnava tako nove kot obstoječe** scenarije Azure AI projektov
 
-Datoteka omogoča **namestitev z enim ukazom** (`azd up`) celotne rešitve AI agenta z ustreznim preverjanjem, vzpostavitvijo in konfiguracijo po namestitvi.
+Datoteka omogoča **namestitev z enim ukazom** (`azd up`) celovite rešitve AI agenta z ustreznim preverjanjem, vzpostavitvijo in konfiguracijo po namestitvi.
 
 ??? info "Razširi za ogled: `azure.yaml`"
 
-      Datoteka `azure.yaml` določa, kako naj Azure Developer CLI namesti in upravlja to aplikacijo AI agenta v Azure. Poglejmo jo vrstico po vrstico.
+      Datoteka `azure.yaml` določa, kako naj Azure Developer CLI razporedi in upravlja to aplikacijo AI agenta v Azure. Razčlenimo jo vrstico za vrstico.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: ali potrebujemo kljuke? 
-      # TODO: ali potrebujemo vse spremenljivke?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ Datoteka omogoča **namestitev z enim ukazom** (`azd up`) celotne rešitve AI ag
 
 ---
 
-## 2. Razčlenitev datoteke
+## 2. Razčlenjevanje datoteke
 
-Pojdimo skozi datoteko po odsekih, da razumemo, kaj počne - in zakaj.
+Pojdimo skozi datoteko odsek za odsekom, da razumemo, kaj počne - in zakaj.
 
 ### 2.1 **Glava in shema (1-3)**
 
@@ -145,7 +136,7 @@ Pojdimo skozi datoteko po odsekih, da razumemo, kaj počne - in zakaj.
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Vrstica 1**: Omogoča validacijo sheme YAML jezikovnega strežnika za podporo IDE in IntelliSense
+- **Vrstica 1**: Nudi preverjanje sheme za YAML language server za podporo IDE in IntelliSense
 
 ### 2.2 Metapodatki projekta (5-10)
 
@@ -158,10 +149,10 @@ requiredVersions:
 ```
 
 - **Vrstica 5**: Določa ime projekta, ki ga uporablja Azure Developer CLI
-- **Vrstici 6-7**: Navedeno je, da temelji na predlogi različice 1.0.2
+- **Vrstici 6-7**: Navezano na predlogo različice 1.0.2
 - **Vrstici 8-9**: Zahteva različico Azure Developer CLI 1.14.0 ali novejšo
 
-### 2.3 Namestitvene kljuke (11-40)
+### 2.3 Namestitveni hooki (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Vrstice 11-20**: **Kljuka pred namestitvijo** - se zažene pred `azd up`
+- **Vrstice 11-20**: **Hook pred namestitvijo** - zažene se pred `azd up`
 
-      - Na Unix/Linux: Naredi validacijski skript izvedljiv in ga zažene
-      - Na Windows: Zažene PowerShell validacijski skript
-      - Obe sta interaktivni in ustavita namestitev, če spodletita
+      - On Unix/Linux: Makes validation script executable and runs it
+      - On Windows: Runs PowerShell validation script
+      - Both are interactive and will stop deployment if they fail
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Vrstice 21-30**: **Kljuka po vzpostavitvi** - se zažene po ustvarjanju Azure virov
+- **Vrstice 21-30**: **Hook po vzpostavitvi (post-provision)** - zažene se, ko so Azure viri ustvarjeni
 
-  - Izvede skripte za zapisovanje okoljskih spremenljivk
-  - Nadaljuje namestitev, tudi če ti skripti spodletijo (`continueOnError: true`)
+  - Izvede skripte za zapis spremenljivk okolja
+  - Nadaljuje namestitev tudi če te skripte spod failajo (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Vrstice 31-40**: **Kljuka po namestitvi** - se zažene po namestitvi aplikacije
+- **Vrstice 31-40**: **Hook po namestitvi (post-deploy)** - zažene se po razporeditvi aplikacije
 
-  - Izvede končne nastavitvene skripte
-  - Nadaljuje, tudi če skripti spodletijo
+  - Izvede končne začetne skripte
+  - Nadaljuje tudi če skripte spod failajo
 
 ### 2.4 Konfiguracija storitve (41-48)
 
-To konfigurira storitev aplikacije, ki jo nameščate.
+To konfigurira aplikacijsko storitev, ki jo nameščate.
 
 ```yaml title="" linenums="0"
 services:
@@ -236,17 +227,17 @@ services:
 ```
 
 - **Vrstica 42**: Določa storitev z imenom "api_and_frontend"
-- **Vrstica 43**: Kaže na mapo `./src` za izvorno kodo
-- **Vrstica 44**: Določa Python kot programski jezik
-- **Vrstica 45**: Uporablja Azure Container Apps kot platformo za gostovanje
-- **Vrstice 46-48**: Konfiguracija Dockerja
+- **Vrstica 43**: Kaže na imenik `./src` za izvorno kodo
+- **Vrstica 44**: Navedeno je Python kot programski jezik
+- **Vrstica 45**: Uporablja Azure Container Apps kot gostiteljsko platformo
+- **Vrstici 46-48**: Docker konfiguracija
 
       - Uporablja "api_and_frontend" kot ime slike
-      - Slika Dockerja se gradi na daljavo v Azure (ne lokalno)
+      - Docker sliko gradi oddaljeno v Azure (ne lokalno)
 
-### 2.5 Spremenljivke za pipeline (49-76)
+### 2.5 Spremenljivke pipeline-a (49-76)
 
-To so spremenljivke, ki vam pomagajo zagnati `azd` v CI/CD pipeline za avtomatizacijo
+To so spremenljivke, ki vam pomagajo zagnati `azd` v CI/CD cevovodih za avtomatizacijo
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Ta odsek določa okoljske spremenljivke, uporabljene **med namestitvijo**, organizirane po kategorijah:
+Ta sekcija definira spremenljivke okolja, uporabljene **med namestitvijo**, organizirane po kategorijah:
 
-- **Imena Azure virov (vrstice 51-60)**:
-      - Imena osnovnih storitev Azure, npr. Resource Group, AI Hub, AI Project itd.- 
-- **Zastavice funkcij (vrstice 61-63)**:
-      - Logične spremenljivke za omogočanje/onemogočanje določenih storitev Azure
-- **Konfiguracija AI agenta (vrstice 64-71)**:
-      - Konfiguracija glavnega AI agenta, vključno z imenom, ID-jem, nastavitvami namestitve, podrobnostmi modela- 
-- **Konfiguracija vdelave AI (vrstice 72-79)**:
-      - Konfiguracija modela vdelave, uporabljenega za iskanje vektorjev
-- **Iskanje in nadzor (vrstice 80-84)**:
-      - Ime indeksa iskanja, obstoječi ID-ji virov in nastavitve nadzora/sledenja
+- **Imena Azure virov (Vrstice 51-60)**:
+      - Jedrna imena Azure storitev npr, Resource Group, AI Hub, AI Project itd.- 
+- **Preklop funkcij (Vrstice 61-63)**:
+      - Boolean spremenljivke za vklop/izklop določenih Azure storitev
+- **Konfiguracija AI agenta (Vrstice 64-71)**:
+      - Konfiguracija glavnega AI agenta vključno z imenom, ID-jem, nastavitvami razporeditve in podrobnostmi modela- 
+- **Konfiguracija AI embedding modela (Vrstice 72-79)**:
+      - Konfiguracija embedding modela, ki se uporablja za vektorsko iskanje
+- **Iskanje in nadzor (Vrstice 80-84)**:
+      - Ime iskalnega indeksa, obstoječi ID-ji virov in nastavitve nadzora/sledenja
 
 ---
 
-## 3. Poznavanje okoljskih spremenljivk
-Naslednje okoljske spremenljivke nadzorujejo konfiguracijo in vedenje vaše namestitve, organizirane glede na njihov glavni namen. Večina spremenljivk ima smiselne privzete vrednosti, vendar jih lahko prilagodite, da ustrezajo vašim specifičnim zahtevam ali obstoječim Azure virom.
+## 3. Spoznajte spremenljivke okolja
+Naslednje spremenljivke okolja nadzorujejo konfiguracijo in vedenje vaše namestitve, organizirane po njihovem glavnem namenu. Večina spremenljivk ima smiselne privzete vrednosti, vendar jih lahko prilagodite tako, da ustrezajo vašim specifičnim zahtevam ali obstoječim Azure virom.
 
 ### 3.1 Zahtevane spremenljivke 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Osnovna konfiguracija Azure
+AZURE_ENV_NAME                    # Ime okolja (uporablja se pri poimenovanju virov)
+AZURE_LOCATION                    # Regija nameščanja
+AZURE_SUBSCRIPTION_ID             # Ciljna naročnina
+AZURE_RESOURCE_GROUP              # Ime skupine virov
+AZURE_PRINCIPAL_ID                # Uporabniški principal za RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Imena virov (samodejno ustvarjena, če niso določena)
+AZURE_AIHUB_NAME                  # Ime središča Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Ime AI projekta
+AZURE_AISERVICES_NAME             # Ime računa za AI storitve
+AZURE_STORAGE_ACCOUNT_NAME        # Ime računa za shranjevanje
+AZURE_CONTAINER_REGISTRY_NAME     # Ime registra kontejnerjev
+AZURE_KEYVAULT_NAME               # Ime Key Vaulta (če se uporablja)
 ```
 
 ### 3.2 Konfiguracija modela 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Konfiguracija klepetalnega modela
+AZURE_AI_AGENT_MODEL_NAME         # Privzeto: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Privzeto: OpenAI (ali Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Privzeto: najnovejše razpoložljivo
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Ime nameščanja za klepetalni model
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Privzeto: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Privzeto: 80 (tisoč TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Konfiguracija modela za vdelave
+AZURE_AI_EMBED_MODEL_NAME         # Privzeto: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Privzeto: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Privzeto: najnovejše razpoložljivo
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Ime nameščanja za vdelave
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Privzeto: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Privzeto: 50 (tisoč TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Konfiguracija agenta
+AZURE_AI_AGENT_NAME               # Prikazno ime agenta
+AZURE_EXISTING_AGENT_ID           # Uporabi obstoječega agenta (neobvezno)
 ```
 
 ### 3.3 Preklop funkcij
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Izbirne storitve
+USE_APPLICATION_INSIGHTS         # Privzeto: true
+USE_AZURE_AI_SEARCH_SERVICE      # Privzeto: false
+USE_CONTAINER_REGISTRY           # Privzeto: true
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Spremljanje in sledenje
+ENABLE_AZURE_MONITOR_TRACING     # Privzeto: false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Privzeto: false
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Konfiguracija iskanja
+AZURE_AI_SEARCH_INDEX_NAME       # Ime iskalnega indeksa
+AZURE_SEARCH_SERVICE_NAME        # Ime iskalne storitve
 ```
 
 ### 3.4 Konfiguracija AI projekta 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Uporabi obstoječe vire
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Celoten ID vira obstoječega AI-projekta
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL končne točke obstoječega projekta
 ```
 
 ### 3.5 Preverite svoje spremenljivke
 
-Uporabite Azure Developer CLI za ogled in upravljanje svojih okoljskih spremenljivk:
+Uporabite Azure Developer CLI za ogled in upravljanje vaših spremenljivk okolja:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Prikaži vse okoljske spremenljivke za trenutno okolje
 azd env get-values
 
-# Get a specific environment variable
+# Pridobi določeno okoljsko spremenljivko
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Nastavi okoljsko spremenljivko
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Nastavi več spremenljivk iz datoteke .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Izjava o omejitvi odgovornosti:
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco Co-op Translator (https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas opozarjamo, da avtomatski prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku je treba šteti za zavezujoči vir. Za pomembne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
