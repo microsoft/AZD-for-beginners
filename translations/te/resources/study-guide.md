@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "02c0d6833f050997d358015c9d6b71d9",
-  "translation_date": "2025-11-25T07:44:57+00:00",
-  "source_file": "resources/study-guide.md",
-  "language_code": "te"
-}
--->
 # అధ్యయన గైడ్ - సమగ్ర అభ్యాస లక్ష్యాలు
 
 **లెర్నింగ్ పాత్ నావిగేషన్**

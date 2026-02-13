@@ -1,0 +1,1738 @@
+# ಬಹು-ಏಜೆಂಟ್ ಸಂಯೋಜನೆ ಮಾದರಿಗಳು
+
+⏱️ **ಅಂದಾಜು ಸಮಯ**: 60-75 ನಿಮಿಷಗಳು | 💰 **ಅಂದಾಜು ವೆಚ್ಚ**: ~$100-300/ತಿಂಗಳು | ⭐ **ಸಂಕೀರ್ಣತೆ**: ಉನ್ನತ
+
+**📚 ಕಲಿಕೆ ಮಾರ್ಗ:**
+- ← ಹಿಂದಿನ: [ಸಮರ್ಥ್ಯ ಯೋಜನೆ](capacity-planning.md) - ಸಂಪನ್ಮೂಲ ಗಾತ್ರ ನಿರ್ಧಾರ ಮತ್ತು ಸ್ಕೇಲಿಂಗ್ ತಂತ್ರಗಳು
+- 🎯 **ನೀವು ಇಲ್ಲಿ ಇರುತ್ತೀರಿ**: ಬಹು-ಏಜೆಂಟ್ ಸಂಯೋಜನೆ ಮಾದರಿಗಳು (ಒರ್ಕೆಸ್ಟ್ರೇಷನ್, ಸಂವಹನ, ಸ್ಥಿತಿ ನಿರ್ವಹಣೆ)
+- → ಮುಂದೆ: [SKU ಆಯ್ಕೆ](sku-selection.md) - ಸರಿಯಾದ Azure ಸೇವೆಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡುವುದು
+- 🏠 [ಕೋರ್ಸ್ ಮನೆ](../../README.md)
+
+---
+
+## ನೀವು ಏನು ಕಲಿತೀರಿ
+
+ಈ ಪಾಠವನ್ನು ಪೂರ್ಣಗೊಳಿಸುವ ಮೂಲಕ, ನೀವು:
+- **ಬಹು-ಏಜೆಂಟ್ ವಾಸ್ತುಶಿಲ್ಪ** ಮಾದರಿಗಳನ್ನು ಮತ್ತು ಅವನ್ನು ಯಾವಾಗ ಬಳಸಬೇಕು ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುತ್ತಾರೆ
+- **ಸಂಯೋಜನೆ ಮಾದರಿಗಳನ್ನು** ಅನುಷ್ಠಾನಗೊಳಿಸುತ್ತೀರಿ (ಕೇಂದ್ರೀಕೃತ, ಅಕೇಂದ್ರೀಕೃತ, ಶ್ರೇಣಿಬದ್ಧ)
+- **ಏಜೆಂಟ್ ಸಂವಹನ** ತಂತ್ರಗಳನ್ನು ವಿನ್ಯಾಸ ಮಾಡುತ್ತೀರಿ (ಸಮಕಾಲೀನ, ಅಸಮಕಾಲೀನ, ಈವೆಂಟ್ ಚಾಲಿತ)
+- ವಿತರಿತ ಏಜೆಂಟ್‌ಗಳ ನಡುವೆ **ಹಂಚಿಕೊಂಡ ಸ್ಥಿತಿಯನ್ನು** ನಿರ್ವಹಿಸುತ್ತೀರಿ
+- AZD ಬಳಸಿ Azure ಮೇಲೆ **ಬಹು-ಏಜೆಂಟ್ ವ್ಯವಸ್ಥೆಗಳನ್ನು** ನಿಯೋಜಿಸುತ್ತೀರಿ
+- ವಾಸ್ತವಿಕ AI ಸಂದರ್ಭಗಳಿಗಾಗಿ **ಸಂಯೋಜನೆ ಮಾದರಿಗಳನ್ನು** ಅನ್ವಯಿಸುತ್ತೀರಿ
+- ವಿತರಿತ ಏಜೆಂಟ್ ವ್ಯವಸ್ಥೆಗಳನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಿ ಮತ್ತು ಡಿಬಗ್ಗ್ ಮಾಡುತ್ತೀರಿ
+
+## ಏಕೆ ಬಹು-ಏಜೆಂಟ್ ಸಂಯೋಜನೆ ಮುಖ್ಯವಾಗಿದೆ
+
+### ವಿಕಾಸ: ಏಕ ಏಜೆಂಟ್‌ನಿಂದ ಬಹು-ಏಜೆಂಟ್‌ಗೆ
+
+**ಏಕ ಏಜೆಂಟ್ (ಸರಳ):**
+```
+User → Agent → Response
+```
+- ✅ ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಮತ್ತು ಅನುಷ್ಠಾನಗೊಳಿಸಲು ಸುಲಭ
+- ✅ ಸರಳ ಕಾರ್ಯಗಳಿಗೆ ವೇಗವಾಗಿ
+- ❌ ಏಕ ಮಾದಲಿನ ಸಾಮರ್ಥ್ಯಗಳಿಂದ ಮಿತಿ
+- ❌ ಸಂಕೀರ್ಣ ಕಾರ್ಯಗಳನ್ನು ಪ್ಯಾರಲಲೈಸ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ
+- ❌ ಪರಿಣತಿ ಇಲ್ಲ
+
+**ಬಹು-ಏಜೆಂಟ್ ವ್ಯವಸ್ಥೆ (ಉನ್ನತ):**
+```
+           ┌─────────────┐
+           │ Orchestrator│
+           └──────┬──────┘
+        ┌─────────┼─────────┐
+        │         │         │
+    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
+    │Agent1│  │Agent2│  │Agent3 │
+    │(Plan)│  │(Code)│  │(Review)│
+    └──────┘  └──────┘  └───────┘
+```
+- ✅ ನಿರ್ದಿಷ್ಟ ಕಾರ್ಯಗಳಿಗೆ ಪರಿಣತ ಏಜೆಂಟ್‌ಗಳು
+- ✅ ವೇಗಕ್ಕಾಗಿ ಸಮಾಂತರ ಕಾರ್ಯ ನಿರ್ವಹಣೆ
+- ✅模块ೀಯ ಮತ್ತು ಸಂರಕ್ಷಿಸಬಹುದಾದ
+- ✅ ಸಂಕೀರ್ಣ ಕೆಲಸದ ಪ್ರವಾರ್ಥನೆಗೆ ಉತ್ತಮ
+- ⚠️ ಸಂಯೋಜನೆ ಲಾಜಿಕ್ಸ್ ಅಗತ್ಯವಿದೆ
+
+**ಉಪಮೆ**: ಏಕ ಏಜೆಂಟ್ ಒಬ್ಬ ವ್ಯಕ್ತಿಯಂತೆ ಎಲ್ಲ ಕಾರ್ಯಗಳನ್ನು ಮಾಡುವಂತಿದೆ. ಬಹು-ಏಜೆಂಟ್ ಒಂದು ತಂಡದಂತೆ, ಪ್ರತಿಯೊಬ್ಬ ಸದಸ್ಯನಿಗೆ ವಿಶಿಷ್ಟ ಪರಿಣತಿ (ಶೋಧಕ, ಕೋಡರ್, ವಿಮರ್ಶಕ, ಬರಹಗಾರ) ಇರುತ್ತದೆ ಮತ್ತು ಅವರು گڏ ಕೆಲಸ ಮಾಡುತ್ತಾರೆ.
+
+---
+
+## ಪ್ರಮುಖ ಸಂಯೋಜನೆ ಮಾದರಿಗಳು
+
+### ಮಾದರಿ 1: ಕ್ರಮಬದ್ಧ ಸಂಯೋಜನೆ (ಜವಾಬ್ದಾರಿ ಸರಣಿ)
+
+**ಯಾವಾಗ ಬಳಸಬೇಕು**: ಕಾರ್ಯಗಳು ನಿರ್ದಿಷ್ಟ ಕ್ರಮದಲ್ಲಿ ಪೂರ್ಣಗೊಳಿಸಬೇಕಾಗಿರುವಾಗ, ಪ್ರತಿಯೊಂದು ಏಜೆಂಟ್ ಹಿಂದಿನ ಔಟ್‍ಪುಟ್ ಮೇಲೆ ನಿರ್ಮಾಣಗೊಳ್ಳುತ್ತದೆ.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Orchestrator
+    participant Agent1 as ಸಂಶೋಧನಾ ಏಜೆಂಟ್
+    participant Agent2 as ಲೇಖಕ ಏಜೆಂಟ್
+    participant Agent3 as ಸಂಪಾದಕ ಏಜೆಂಟ್
+    
+    User->>Orchestrator: "ಕೃತಕ ಬುದ್ಧಿಮತ್ತೆ (AI) ಬಗ್ಗೆ ಲೇಖನ ಬರೆಯಿರಿ"
+    Orchestrator->>Agent1: ವಿಷಯವನ್ನು ಸಂಶೋಧಿಸಿ
+    Agent1-->>Orchestrator: ಸಂಶೋಧನಾ ಫಲಿತಾಂಶಗಳು
+    Orchestrator->>Agent2: ಡ್ರಾಫ್ಟ್ ಬರೆಯಿರಿ (ಸಂಶೋಧನೆಯನ್ನು ಬಳಸಿಕೊಂಡು)
+    Agent2-->>Orchestrator: ಡ್ರಾಫ್ಟ್ ಲೇಖನ
+    Orchestrator->>Agent3: ಸಂಪಾದಿಸಿ ಮತ್ತು ಸುಧಾರಿಸಿ
+    Agent3-->>Orchestrator: ಅಂತಿಮ ಲೇಖನ
+    Orchestrator-->>User: ತಿದ್ದಿ ಸುಧಾರಿಸಿದ ಲೇಖನ
+    
+    Note over User,Agent3: ಕ್ರಮಬದ್ಧ: ಪ್ರತಿ ಹಂತವು ಹಿಂದಿನದನ್ನು ಕಾಯುತ್ತದೆ
+```
+**ಲಾಭಗಳು:**
+- ✅ ಸ್ಪಷ್ಟ ಡೇಟಾ ಫ್ಲೋ
+- ✅ ಡಿಬಗ್ ಮಾಡಲು ಸುಲಭ
+- ✅ ನಿರೀಕ್ಷಿತ ನಿರ್ವಹಣಾ ಕ್ರಮ
+
+**ಸೀಮಿತತೆಗಳು:**
+- ❌ ನಿಧಾನ (ಸಮಾಂತರತೆ ಇಲ್ಲ)
+- ❌ ಒಂದು ವೈಫಲ್ಯವೇ ಸಂಪೂರ್ಣ ಸರಣಿಯನ್ನು ಅಡೆದು ಬಿಡುತ್ತದೆ
+- ❌ ಪರಸ್ಪರ ಅವಲಂಬಿತ ಕಾರ್ಯಗಳನ್ನು ನಿಭಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ
+
+**ಉದಾಹರಣೆಯ ಬಳಕೆ ಪ್ರಕರಣಗಳು:**
+- ವಿಷಯ ನಿರ್ಮಾಣ ಪೈಪ್‌ಲೈನ್ (ಶೋಧನೆ → ಬರೆಯುವುದು → ಸಂಪಾದನೆ → ಪ್ರಕಟಣೆ)
+- ಕೋಡ್ ಉತ್ಪಾದನೆ (ಯೋಜನೆ → ಅನುಷ್ಠಾನ → ಪರೀಕ್ಷೆ → ನಿಯೋಜನೆ)
+- ವರದಿ ತಯಾರು (ಡೇಟಾ ಸಂಗ್ರಹ → ವಿಶ್ಲೇಷಣೆಯು → ದೃಶ್ಯೀಕರಣ → ಸಾರಾಂಶ)
+
+---
+
+### ಮಾದರಿ 2: ಸಮಾಂತರ ಸಂಯೋಜನೆ (Fan-Out/Fan-In)
+
+**ಯಾವಾಗ ಬಳಸಬೇಕು**: ಸ್ವತಂತ್ರ ಕಾರ್ಯಗಳು ಒಂದೇ ಸಮಯದಲ್ಲಿ ಚಲಿಸಬಹುದು ಮತ್ತು ಕೊನೆಯಲ್ಲಿ ಫಲಿತಾಂಶಗಳನ್ನು ಸಂಯೋಜಿಸಲಾಗುತ್ತದೆ.
+
+```mermaid
+graph TB
+    User[ಬಳಕೆದಾರ ವಿನಂತಿ]
+    Orchestrator[ಸಂಯೋಜಕ]
+    Agent1[ವಿಶ್ಲೇಷಣಾ ಏಜೆಂಟ್]
+    Agent2[ಶೋಧನಾ ಏಜೆಂಟ್]
+    Agent3[ದತ್ತಾಂಶ ಏಜೆಂಟ್]
+    Aggregator[ಫಲಿತಾಂಶ ಸಂಗ್ರಹಕ]
+    Response[ಸಂಯುಕ್ತ ಪ್ರತಿಕ್ರಿಯೆ]
+    
+    User --> Orchestrator
+    Orchestrator --> Agent1
+    Orchestrator --> Agent2
+    Orchestrator --> Agent3
+    Agent1 --> Aggregator
+    Agent2 --> Aggregator
+    Agent3 --> Aggregator
+    Aggregator --> Response
+    
+    style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
+    style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
+```
+**ಲಾಭಗಳು:**
+- ✅ ವೇಗವಾದ (ಸಮಾಂತರ ನಿರ್ವಹಣೆ)
+- ✅ ದೋಷ ಸಹಿಷ್ಣುತೆ (ಸಿಸಿದ್ದ ಫಲಿತಾಂಶಗಳು ಸ್ವೀಕರಿಸಬಹುದಾದವು)
+- ✅ ಕಾದಂಬರಿ ಸ್ಕೇಲಿಂಗ್
+
+**ಸೀಮಿತತೆಗಳು:**
+- ⚠️ ಫಲಿತಾಂಶಗಳು ಅಕ್ರಮವಾಗಿ ಬರುತ್ತವೆ
+- ⚠️ ಸಮಗ್ರ ಲಾಜಿಕ್ಸ್ ಅವಶ್ಯಕ
+- ⚠️ ಸಂಕೀರ್ಣ ಸ್ಥಿತಿ ನಿರ್ವಹಣೆ
+
+**ಉದಾಹರಣೆಯ ಬಳಕೆ ಪ್ರಕರಣಗಳು:**
+- ಬಹು-ಮೂಲದ ಡೇಟಾ ಸಂಗ್ರಹ (APIs + ಡೇಟಾಬೇಸ್‌ಗಳು + ವೆಬ್ ಸ್ಕ್ರೇಪಿಂಗ್)
+- ಸ್ಪರ್ಧಾತ್ಮಕ ವಿಶ್ಲೇಷಣೆ (ಎಲ್ಲಾ ಮಾದಲಗಳು ಪರಿಹಾರಗಳನ್ನು ಜನರೇಟ್ ಮಾಡುತ್ತವೆ, ಉತ್ತಮವು ಆಯ್ದು ಕೊಂಡುಕೊಳ್ಳಲಾಗುತ್ತದೆ)
+- ಭಾಷಾಂತರ ಸೇವೆಗಳು (ಬಹು ಭಾಷೆಗಳಿಗೆ đồng vaqt ನಲ್ಲಿ ಭಾಷಾಂತರ)
+
+---
+
+### ಮಾದರಿ 3: ಶ್ರೇಣಿಬದ್ಧ ಸಂಯೋಜನೆ (ಮ್ಯಾನೇಜರ್-ವರ್ಕರ್)
+
+**ಯಾವಾಗ ಬಳಸಬೇಕು**: ಉಪ-ಕಾರ್ಯಗಳನ್ನು ಹೊಂದಿರುವ ಸಂಕೀರ್ಣ ಕಾರ್ಯಪ್ರವಾಹಗಳಿಗೆ, ಪ್ರತ.delegate ಅವಶ್ಯಕ.
+
+```mermaid
+graph TB
+    Master[ಮುಖ್ಯ ಸಂಯೋಜಕ]
+    Manager1[ಸಂಶೋಧನಾ ನಿರ್ವಾಹಕ]
+    Manager2[ವಿಷಯ ನಿರ್ವಾಹಕ]
+    W1[ವೆಬ್ ಡೇಟಾ ಸಂಗ್ರಾಹಕ]
+    W2[ಲೇಖನ ವಿಶ್ಲೇಷಕ]
+    W3[ಲೇಖಕ]
+    W4[ಸಂಪಾದಕ]
+    
+    Master --> Manager1
+    Master --> Manager2
+    Manager1 --> W1
+    Manager1 --> W2
+    Manager2 --> W3
+    Manager2 --> W4
+    
+    style Master fill:#FF9800,stroke:#F57C00,stroke-width:3px,color:#fff
+    style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
+    style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
+```
+**ಲಾಭಗಳು:**
+- ✅ ಸಂಕೀರ್ಣ ಕಾರ್ಯಪ್ರವಾಹಗಳನ್ನು ನಿಭಾಯಿಸುತ್ತದೆ
+- ✅模块ೀಯ ಮತ್ತು ಸಂರಕ್ಷಿಸಬಹುದಾದ
+- ✅ ಹೊಣೆಗಾರಿಕೆ ನಡೆಸುವ ಸ್ಪಷ್ಟ ಗಡಿಗಳು
+
+**ಸೀಮಿತತೆಗಳು:**
+- ⚠️ ಹೆಚ್ಚು ಸಂಕೀರ್ಣ ವಾಸ್ತುಶಿಲ್ಪ
+- ⚠️ ಹೆಚ್ಚಿನ ಲೇಟೆನ್ಸಿ (ಬಹುತಲ ಸಂಯೋಜನೆ)
+- ⚠️ ಸೂಕ್ಷ್ಮ ಒರ್ಕೆಸ್ಟ್ರೇಶನ್ ಅಗತ್ಯ
+
+**ಉದಾಹರಣೆಯ ಬಳಕೆ ಪ್ರಕರಣಗಳು:**
+- ಎಂಟರ್‌ಪ್ರೈಸ್ ಡಾಕ್ಯುಮೆಂಟ್ ಪ್ರೊಸೆಸಿಂಗ್ (ವರ್ಗೀಕರಿಸಿ → ರೌಟ್ ಮಾಡಿ → ಪ್ರಕ್ರಿಯೆ ಮಾಡಿ → ಆರ್ಕೈವ್)
+- ಬಹು-ಹಂತದ ಡೇಟಾ ಪೈಪ್‌ಲೈನ್ಗಳು (ಇನ್ಗೆಸ್ಟ್ → ಕ್ಲೀನ್ → ರೂಪಾಂತರ → ವಿಶ್ಲೇಷಣೆ → ವರದಿ)
+- ಸಂಕೀರ್ಣ ಸ್ವಯಂಕ್ರಿಯಾತ್ಮಕ ಕಾರ್ಯಪ್ರವಾಹಗಳು (ಯೋಜನೆ → ಸಂಪನ್ಮೂಲ ನಿಯೋಜನೆ → ಕಾರ್ಯನಿರ್ವಹಣೆ → ಮಾನಿಟರಿಂಗ್)
+
+---
+
+### ಮಾದರಿ 4: ಈವೆಂಟ್ ಚಾಲಿತ ಸಂಯೋಜನೆ (ಪ್ರಕಾಶನ-ಚಂದಾದಾರ)
+
+**ಯಾವಾಗ ಬಳಸಬೇಕು**: ಏಜೆಂಟ್‌ಗಳು ಈವೆಂಟ್‌ಗಳಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬೇಕಾದಾಗ, ಎಡಿಐಡು ಹೊಂದುವ ಮೊದಲು.
+
+```mermaid
+sequenceDiagram
+    participant Agent1 as ಡೇಟಾ ಸಂಗ್ರಾಹಕ
+    participant EventBus as ಏಜರ್ ಸರ್ವಿಸ್ ಬಸ್
+    participant Agent2 as ವಿಶ್ಲೇಷಕ
+    participant Agent3 as ಸೂಚಕ
+    participant Agent4 as ಆರ್ಕೈವರ್
+    
+    Agent1->>EventBus: ಪ್ರಕಟಿಸಿ "ಡೇಟಾ ಸ್ವೀಕರಿಸಲಾಗಿದೆ" ಘಟನೆ
+    EventBus->>Agent2: ಚಂದಾದಾರರಾಗಿ: ಡೇಟಾವನ್ನು ವಿಶ್ಲೇಷಿಸಿ
+    EventBus->>Agent3: ಚಂದಾದಾರರಾಗಿ: ಸೂಚನೆ ಕಳುಹಿಸಿ
+    EventBus->>Agent4: ಚಂದಾದಾರರಾಗಿ: ಡೇಟಾವನ್ನು ಆರ್ಕೈವ್ ಮಾಡಿ
+    
+    Note over Agent1,Agent4: ಎಲ್ಲಾ ಚಂದಾದಾರರು ಸ್ವತಂತ್ರವಾಗಿ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸುತ್ತಾರೆ
+    
+    Agent2->>EventBus: ಪ್ರಕಟಿಸಿ "ವಿಶ್ಲೇಷಣೆ ಪೂರ್ಣವಾಗಿದೆ" ಘಟನ
+    EventBus->>Agent3: ಚಂದಾದಾರರಾಗಿ: ವಿಶ್ಲೇಷಣಾ ವರದಿಯನ್ನು ಕಳುಹಿಸಿ
+```
+**ಲಾಭಗಳು:**
+- ✅ ಏಜೆಂಟ್‌ಗಳ ನಡುವಿನ ನಿಬಂಧನೆಯಿಲ್ಲದ ಅಂಟುನಿಯನ್ನು ಕಡಿಮೆ ಮಾಡುತ್ತದೆ
+- ✅ ಹೊಸ ಏಜೆಂಟ್‌ಗಳನ್ನು ಸೇರಿಸಲು ಸುಲಭ (ಮಾತ್ರ ಚಂದಾದಾರರಾಗುವುದು yeter)
+- ✅ ಅಸಮಕಾಲೀನ ಪ್ರಕ್ರಿಯೆ
+- ✅ ಸ್ಥಿರತೆ (ಸಂದೇಶ ಸ್ಥಿರತೆ)
+
+**ಸೀಮಿತತೆಗಳು:**
+- ⚠️ ಅಂತಿಮ ಸಮ್ಮತಿಕೆ (eventual consistency)
+- ⚠️ ಡಿಬಗ್ಗಿಂಗ್ ಜಟಿಲ
+- ⚠️ ಸಂದೇಶ ಕ್ರಮಣಾ ಸಮಸ್ಯೆಗಳು
+
+**ಉದಾಹರಣೆಯ ಬಳಕೆ ಪ್ರಕರಣಗಳು:**
+- ರಿಯಲ್-ಟೈಮ್ ಮಾನಿಟರಿಂಗ್ ವ್ಯವಸ್ಥೆಗಳು (ಅಲರ್ಟ್‌ಗಳು, ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗಳು, ಲಾಗ್‌ಗಳು)
+- ಬಹು-ಚಾನಲ್ ಘೋಷಣೆಗಳು (ಇಮೇಲ್, SMS, ಪುಶ್, Slack)
+- ಡೇಟಾ ಪ್ರೊಸೆಸಿಂಗ್ ಪೈಪ್‌ಲೈನ್ಗಳು (ಒಂದು ಡೇಟಾದ ಬ್ಯಾಹಾರ್ಥಕರಾದ ಬಳಕೆದಾರರು)
+
+---
+
+### ಮಾದರಿ 5: ಸಮ್ಮತಿಯ ಆಧಾರದ ಸಂಯೋಜನೆ (ಮತದಾನೆ/ಕ್ವಾರಮ್)
+
+**ಯಾವಾಗ ಬಳಸಬೇಕು**: ಮುಂದುವರಿಯುವ ಮೊದಲು ಬಹು ಏಜೆಂಟ್‌ಗಳ ಒಪ್ಪಿಗೆಯ ಅಗತ್ಯವಿದ್ದಾಗ.
+
+```mermaid
+graph TB
+    Input[ಇನ್‌ಪುಟ್ ಕಾರ್ಯ]
+    Agent1[ಏಜೆಂಟ್ 1: GPT-4]
+    Agent2[ಏಜೆಂಟ್ 2: ಕ್ಲಾಡ್]
+    Agent3[ಏಜೆಂಟ್ 3: ಜೆಮಿನಿ]
+    Voter[ಸಮ್ಮತಿ ಮತದಾರ]
+    Output[ಒಪ್ಪಿಗೆಯ ಫಲಿತಾಂಶ]
+    
+    Input --> Agent1
+    Input --> Agent2
+    Input --> Agent3
+    Agent1 --> Voter
+    Agent2 --> Voter
+    Agent3 --> Voter
+    Voter --> Output
+    
+    style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
+```
+**ಲಾಭಗಳು:**
+- ✅ ಹೆಚ್ಚಿನ ನಿಖರತೆ (ಬಹು ಅಭಿಪ್ರಾಯಗಳು)
+- ✅ ದೋಷ ಸಹಿಷ್ಣುತೆ (ತಗ್ಗಿದ ಗುಂಪು ವೈಫಲ್ಯಗಳನ್ನು ಸಹಿಸಬಹುದು)
+- ✅ ಕ್ವಾಲಿಟಿ ಅಶ್ವಸ್ಥತೆ ಒಳಗೊಂಡಿದೆ
+
+**ಸೀಮಿತತೆಗಳು:**
+- ❌ ದುಬಾರಿ (ಬಹು ಮಾದಲ್ ಕರೆಗೆ)
+- ❌ ನಿಧಾನ (ಎಲ್ಲಾ ಏಜೆಂಟ್‌ಗಳನ್ನು ಕಾಯುವುದು)
+- ⚠️ ಸಂಘರ್ಷ ಪರಿಹಾರ ಅಗತ್ಯ
+
+**ಉದಾಹರಣೆಯ ಬಳಕೆ ಪ್ರಕರಣಗಳು:**
+- ವಿಷಯ ನಿಯಂತ್ರಣ (ಬಹು ಮಾದಲ್‌ಗಳು ವಿಷಯವನ್ನು ಪರಿಶೀಲಿಸುತ್ತವೆ)
+- ಕೋಡ್ ರಿವ್ಯೂ (ಬಹು ಲಿಂಟರ್‌ಗಳು/ವಿಶ್ಲೇಷಕರು)
+- ವೈದ್ಯಕೀಯ ನಿರ್ಣಯ (ಬಹು AI ಮಾದಲ್‌ಗಳು, ತಜ್ಞ ದೃಢೀಕರಣ)
+
+---
+
+## ವಾಸ್ತುಶಿಲ್ಪ ಅವಲೋಕನ
+
+### Azure ಮೇಲಿನ ಸಂಪೂರ್ಣ ಬಹು-ಏಜೆಂಟ್ ವ್ಯವಸ್ಥೆ
+
+```mermaid
+graph TB
+    User[ಬಳಕೆದಾರ/API ಕ್ಲೈಂಟ್]
+    APIM[ಅಜೂರ್ API ನಿರ್ವಹಣೆ]
+    Orchestrator[ಒರ್ಕೆಸ್ಟ್ರೇಟರ್ ಸೇವೆ<br/>ಕಂಟೇನರ್ ಅಪ್ಲಿಕೇಶನ್]
+    ServiceBus[ಅಜೂರ್ ಸರ್ವೀಸ್ ಬಸ್<br/>ಇವೆಂಟ್ ಹಬ್]
+    
+    Agent1[ಸಂಶೋಧನಾ ಏಜೆಂಟ್<br/>ಕಂಟೇನರ್ ಅಪ್ಲಿಕೇಶನ್]
+    Agent2[ಲೇಖಕ ಏಜೆಂಟ್<br/>ಕಂಟೇನರ್ ಅಪ್ಲಿಕೇಶನ್]
+    Agent3[ವಿಶ್ಲೇಷಕ ಏಜೆಂಟ್<br/>ಕಂಟೇನರ್ ಅಪ್ಲಿಕೇಶನ್]
+    Agent4[ಪರಿಶೀಲಕ ಏಜೆಂಟ್<br/>ಕಂಟೇನರ್ ಅಪ್ಲಿಕೇಶನ್]
+    
+    CosmosDB[(ಕೋಸ್ಮೋಸ್ DB<br/>ಹಂಚಿದ ಸ್ಥಿತಿ)]
+    Storage[ಅಜೂರ್ ಸ್ಟೋರೇಜ್<br/>ಆರ್ಟ್‌ಫ್ಯಾಕ್ಟ್‌ಗಳು]
+    AppInsights[ಆಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್<br/>ನಿರೀಕ್ಷಣೆ]
+    
+    User --> APIM
+    APIM --> Orchestrator
+    
+    Orchestrator --> ServiceBus
+    ServiceBus --> Agent1
+    ServiceBus --> Agent2
+    ServiceBus --> Agent3
+    ServiceBus --> Agent4
+    
+    Agent1 --> CosmosDB
+    Agent2 --> CosmosDB
+    Agent3 --> CosmosDB
+    Agent4 --> CosmosDB
+    
+    Agent1 --> Storage
+    Agent2 --> Storage
+    Agent3 --> Storage
+    Agent4 --> Storage
+    
+    Orchestrator -.-> AppInsights
+    Agent1 -.-> AppInsights
+    Agent2 -.-> AppInsights
+    Agent3 -.-> AppInsights
+    Agent4 -.-> AppInsights
+    
+    style Orchestrator fill:#FF9800,stroke:#F57C00,stroke-width:3px,color:#fff
+    style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
+    style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
+```
+**ಪ್ರಮುಖ ಘಟಕಗಳು:**
+
+| ಘಟಕ | ಉದ್ದೇಶ | Azure ಸೇವೆ |
+|-----------|---------|---------------|
+| **API Gateway** | ಪ್ರವೇಶ ಬಿಂದು, ದರ-ನಿಗ್ರಹ, ಪ್ರಮಾಣೀಕರಣ | API Management |
+| **Orchestrator** | ಏಜೆಂಟ್ ಕಾರ್ಯಪ್ರವಾಹಗಳನ್ನು ಸಂಯೋಜಿಸುತ್ತದೆ | Container Apps |
+| **Message Queue** | ಅಸಮಕಾಲೀನ ಸಂವಹನ | Service Bus / Event Hubs |
+| **Agents** | ವಿಶೇಷीकೃತ AI ಕಾರ್ಯಕರ್ತರು | Container Apps / Functions |
+| **State Store** | ಹಂಚಿಕೊಂಡ ಸ್ಥಿತಿ, ಕಾರ್ಯಗಳ ಅನುಸರಣೆ | Cosmos DB |
+| **Artifact Storage** | ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳು, ಫಲಿತಾಂಶಗಳು, ಲಾಗ್‌ಗಳು | Blob Storage |
+| **Monitoring** | ವಿತರಿತ ಟ್ರೇಸಿಂಗ್, ಲಾಗ್‌ಗಳು | Application Insights |
+
+---
+
+## ಪೂರ್ವಶರತ್ತುಗಳು
+
+### ಅಗತ್ಯ ಸಾಧನಗಳು
+
+```bash
+# Azure Developer CLI ಅನ್ನು ಪರಿಶೀಲಿಸಿ
+azd version
+# ✅ ನಿರೀಕ್ಷೆ: azd ಆವೃತ್ತি 1.0.0 ಅಥವಾ ಅದರಿಗಿಂತ ಉನ್ನತ
+
+# Azure CLI ಅನ್ನು ಪರಿಶೀಲಿಸಿ
+az --version
+# ✅ ನಿರೀಕ್ಷೆ: azure-cli 2.50.0 ಅಥವಾ ಅದರಿಗಿಂತ ಉನ್ನತ
+
+# ಲೋಕಲ್ ಪರೀಕ್ಷೆಗಾಗಿ Docker ಅನ್ನು ಪರಿಶೀಲಿಸಿ
+docker --version
+# ✅ ನಿರೀಕ್ಷೆ: Docker ಆವೃತ್ತಿ 20.10 ಅಥವಾ ಅದರಿಗಿಂತ ಉನ್ನತ
+```
+
+### Azure ಅಗತ್ಯಗಳು
+
+- ಸಕ್ರಿಯ Azure ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್
+- ರಚಿಸಲು ಅನುಮತಿಗಳು:
+  - Container Apps
+  - Service Bus namespaces
+  - Cosmos DB accounts
+  - Storage accounts
+  - Application Insights
+
+### ಅಗತ್ಯ ಜ್ಞಾನ
+
+ನೀವು ಪೂರ್ಣಗೊಳಿಸಿರಬೇಕು:
+- [ಕಾನ್ಫಿಗರೇಷನ್ ನಿರ್ವಹಣೆ](../chapter-03-configuration/configuration.md)
+- [ಪ್ರಮಾಣಿ & ಭದ್ರತೆ](../chapter-03-configuration/authsecurity.md)
+- [Microservices ಉದಾಹರಣೆ](../../../../examples/microservices)
+
+---
+
+## ಅನುಷ್ಠಾನ ಮಾರ್ಗದರ್ಶಿ
+
+### ಪ್ರಾಜೆಕ್ಟ್ ರಚನೆ
+
+```
+multi-agent-system/
+├── azure.yaml                    # AZD configuration
+├── infra/
+│   ├── main.bicep               # Main infrastructure
+│   ├── core/
+│   │   ├── servicebus.bicep     # Message queue
+│   │   ├── cosmos.bicep         # State store
+│   │   ├── storage.bicep        # Artifact storage
+│   │   └── monitoring.bicep     # Application Insights
+│   └── app/
+│       ├── orchestrator.bicep   # Orchestrator service
+│       └── agent.bicep          # Agent template
+└── src/
+    ├── orchestrator/            # Orchestration logic
+    │   ├── app.py
+    │   ├── workflows.py
+    │   └── Dockerfile
+    ├── agents/
+    │   ├── research/            # Research agent
+    │   ├── writer/              # Writer agent
+    │   ├── analyst/             # Analyst agent
+    │   └── reviewer/            # Reviewer agent
+    └── shared/
+        ├── state_manager.py     # Shared state logic
+        └── message_handler.py   # Message handling
+```
+
+---
+
+## ಪಾಠ 1: ಕ್ರಮಬದ್ಧ ಸಂಯೋಜನೆ ಮಾದರಿ
+
+### ಅನುಷ್ಠಾನ: ವಿಷಯ ನಿರ್ಮಾಣ ಪೈಪ್‌ಲೈನ್
+
+ಒಂದು ಕ್ರಮಬದ್ಧ ಪೈಪ್‌ಲೈನ್ ನಿರ್ಮಿಸೋಣ: ಶೋಧನೆ → ಬರೆಯುವುದು → ಸಂಪಾದನೆ → ಪ್ರಕಟಣೆ
+
+### 1. AZD ಸಂರಚನೆ
+
+**ಫೈಲ್: `azure.yaml`**
+
+```yaml
+name: content-pipeline
+metadata:
+  template: multi-agent-sequential@1.0.0
+
+services:
+  orchestrator:
+    project: ./src/orchestrator
+    language: python
+    host: containerapp
+  
+  research-agent:
+    project: ./src/agents/research
+    language: python
+    host: containerapp
+  
+  writer-agent:
+    project: ./src/agents/writer
+    language: python
+    host: containerapp
+  
+  editor-agent:
+    project: ./src/agents/editor
+    language: python
+    host: containerapp
+```
+
+### 2. ಮೂಲಸೌಕರ್ಯ: ಸಂಯೋಜನೆಗಾಗಿ Service Bus
+
+**ಫೈಲ್: `infra/core/servicebus.bicep`**
+
+```bicep
+param name string
+param location string
+param tags object = {}
+
+resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
+  name: name
+  location: location
+  tags: tags
+  sku: {
+    name: 'Standard'
+    tier: 'Standard'
+  }
+  properties: {
+    minimumTlsVersion: '1.2'
+  }
+}
+
+// Queue for orchestrator → research agent
+resource researchQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview' = {
+  parent: serviceBusNamespace
+  name: 'research-tasks'
+  properties: {
+    maxDeliveryCount: 3
+    lockDuration: 'PT5M'
+    deadLetteringOnMessageExpiration: true
+  }
+}
+
+// Queue for research agent → writer agent
+resource writerQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview' = {
+  parent: serviceBusNamespace
+  name: 'writer-tasks'
+  properties: {
+    maxDeliveryCount: 3
+    lockDuration: 'PT5M'
+  }
+}
+
+// Queue for writer agent → editor agent
+resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview' = {
+  parent: serviceBusNamespace
+  name: 'editor-tasks'
+  properties: {
+    maxDeliveryCount: 3
+    lockDuration: 'PT5M'
+  }
+}
+
+output namespace string = serviceBusNamespace.name
+output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+```
+
+### 3. ಹಂಚಿಕೊಂಡ ಸ್ಥಿತಿ ನಿರ್ವಾಹಕ
+
+**ಫೈಲ್: `src/shared/state_manager.py`**
+
+```python
+from azure.cosmos import CosmosClient, PartitionKey
+from datetime import datetime
+import os
+
+class StateManager:
+    """Manages shared state across agents using Cosmos DB"""
+    
+    def __init__(self):
+        endpoint = os.environ['COSMOS_ENDPOINT']
+        key = os.environ['COSMOS_KEY']
+        
+        self.client = CosmosClient(endpoint, key)
+        self.database = self.client.get_database_client('agent-state')
+        self.container = self.database.get_container_client('tasks')
+    
+    def create_task(self, task_id: str, task_type: str, input_data: dict):
+        """Create a new task"""
+        task = {
+            'id': task_id,
+            'type': task_type,
+            'status': 'pending',
+            'input': input_data,
+            'created_at': datetime.utcnow().isoformat(),
+            'steps': []
+        }
+        self.container.create_item(task)
+        return task
+    
+    def update_task_step(self, task_id: str, step_name: str, result: dict):
+        """Update task with completed step"""
+        task = self.container.read_item(task_id, partition_key=task_id)
+        
+        task['steps'].append({
+            'name': step_name,
+            'completed_at': datetime.utcnow().isoformat(),
+            'result': result
+        })
+        
+        self.container.replace_item(task_id, task)
+        return task
+    
+    def complete_task(self, task_id: str, final_result: dict):
+        """Mark task as complete"""
+        task = self.container.read_item(task_id, partition_key=task_id)
+        task['status'] = 'completed'
+        task['result'] = final_result
+        task['completed_at'] = datetime.utcnow().isoformat()
+        self.container.replace_item(task_id, task)
+        return task
+    
+    def get_task(self, task_id: str):
+        """Retrieve task state"""
+        return self.container.read_item(task_id, partition_key=task_id)
+```
+
+### 4. ಒರ್ಕೆಸ್ಟ್ರೇಟರ್ ಸರ್ವೀಸ್
+
+**ಫೈಲ್: `src/orchestrator/app.py`**
+
+```python
+from flask import Flask, request, jsonify
+from azure.servicebus import ServiceBusClient, ServiceBusMessage
+import json
+import uuid
+import os
+from shared.state_manager import StateManager
+
+app = Flask(__name__)
+state_manager = StateManager()
+
+# Service Bus ಸಂಪರ್ಕ
+servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
+servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({'status': 'healthy', 'service': 'orchestrator'})
+
+@app.route('/create-content', methods=['POST'])
+def create_content():
+    """
+    Sequential workflow: Research → Write → Edit → Publish
+    """
+    data = request.json
+    topic = data.get('topic')
+    
+    if not topic:
+        return jsonify({'error': 'Topic required'}), 400
+    
+    # ಸ್ಥಿತಿ ಸಂಗ್ರಹದಲ್ಲಿ ಕಾರ್ಯವನ್ನು ರಚಿಸಿ
+    task_id = str(uuid.uuid4())
+    task = state_manager.create_task(
+        task_id=task_id,
+        task_type='content_creation',
+        input_data={'topic': topic}
+    )
+    
+    # ಶೋಧನಾ ಏಜೆಂಟ್‌ಗೆ ಸಂದೇಶ ಕಳುಹಿಸಿ (ಪ್ರಥಮ ಹಂತ)
+    sender = servicebus_client.get_queue_sender('research-tasks')
+    message = ServiceBusMessage(
+        body=json.dumps({
+            'task_id': task_id,
+            'topic': topic,
+            'next_queue': 'writer-tasks'  # ಫಲಿತಾಂಶಗಳನ್ನು ಎಲ್ಲಿಗೆ ಕಳುಹಿಸಬೇಕು
+        }),
+        content_type='application/json'
+    )
+    
+    with sender:
+        sender.send_messages(message)
+    
+    return jsonify({
+        'task_id': task_id,
+        'status': 'started',
+        'workflow': 'sequential',
+        'steps': ['research', 'write', 'edit', 'publish'],
+        'message': 'Content creation pipeline initiated'
+    }), 202
+
+@app.route('/task/<task_id>', methods=['GET'])
+def get_task_status(task_id):
+    """Check task status"""
+    try:
+        task = state_manager.get_task(task_id)
+        return jsonify(task)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 404
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
+```
+
+### 5. ಶೋಧನಾ ಏಜೆಂಟ್
+
+**ಫೈಲ್: `src/agents/research/app.py`**
+
+```python
+from azure.servicebus import ServiceBusClient, ServiceBusMessage
+from openai import AzureOpenAI
+import json
+import os
+import time
+from shared.state_manager import StateManager
+
+# ಕ್ಲೈಂಟ್‌ಗಳನ್ನು ಆರಂಭಿಸಿ
+state_manager = StateManager()
+servicebus_client = ServiceBusClient.from_connection_string(
+    os.environ['SERVICEBUS_CONNECTION_STRING']
+)
+
+openai_client = AzureOpenAI(
+    api_key=os.environ['AZURE_OPENAI_API_KEY'],
+    api_version="2024-02-01",
+    azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+)
+
+def process_research_task(message_data):
+    """Process research request and pass to writer"""
+    task_id = message_data['task_id']
+    topic = message_data['topic']
+    next_queue = message_data['next_queue']
+    
+    print(f"🔬 Researching: {topic}")
+    
+    # ಸಂಶೋಧನೆಗಾಗಿ Azure OpenAI ಅನ್ನು ಕರೆ ಮಾಡಿ
+    response = openai_client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
+            {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
+        ],
+        max_tokens=1500
+    )
+    
+    research_results = response.choices[0].message.content
+    
+    # ಸ್ಥಿತಿಯನ್ನು ನವೀಕರಿಸಿ
+    state_manager.update_task_step(
+        task_id=task_id,
+        step_name='research',
+        result={'research': research_results}
+    )
+    
+    # ಮುಂದಿನ ಏಜೆಂಟಿಗೆ (ಲೇಖಕ) ಕಳುಹಿಸಿ
+    sender = servicebus_client.get_queue_sender(next_queue)
+    message = ServiceBusMessage(
+        body=json.dumps({
+            'task_id': task_id,
+            'topic': topic,
+            'research': research_results,
+            'next_queue': 'editor-tasks'
+        }),
+        content_type='application/json'
+    )
+    
+    with sender:
+        sender.send_messages(message)
+    
+    print(f"✅ Research complete for task {task_id}")
+
+def main():
+    """Listen to research queue"""
+    receiver = servicebus_client.get_queue_receiver('research-tasks')
+    
+    print("🔬 Research Agent started, listening for tasks...")
+    
+    with receiver:
+        while True:
+            messages = receiver.receive_messages(max_wait_time=5)
+            for message in messages:
+                try:
+                    message_data = json.loads(str(message))
+                    process_research_task(message_data)
+                    receiver.complete_message(message)
+                except Exception as e:
+                    print(f"❌ Error processing message: {e}")
+                    receiver.abandon_message(message)
+
+if __name__ == '__main__':
+    main()
+```
+
+### 6. ಬರೆಯುವ ಏಜೆಂಟ್
+
+**ಫೈಲ್: `src/agents/writer/app.py`**
+
+```python
+from azure.servicebus import ServiceBusClient, ServiceBusMessage
+from openai import AzureOpenAI
+import json
+import os
+from shared.state_manager import StateManager
+
+state_manager = StateManager()
+servicebus_client = ServiceBusClient.from_connection_string(
+    os.environ['SERVICEBUS_CONNECTION_STRING']
+)
+
+openai_client = AzureOpenAI(
+    api_key=os.environ['AZURE_OPENAI_API_KEY'],
+    api_version="2024-02-01",
+    azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+)
+
+def process_writing_task(message_data):
+    """Write article based on research"""
+    task_id = message_data['task_id']
+    topic = message_data['topic']
+    research = message_data['research']
+    next_queue = message_data['next_queue']
+    
+    print(f"✍️ Writing article: {topic}")
+    
+    # ಲೇಖನವನ್ನು ಬರೆಯಲು Azure OpenAI ಅನ್ನು ಕರೆಮಾಡಿ
+    response = openai_client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
+            {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
+        ],
+        max_tokens=2000
+    )
+    
+    article_draft = response.choices[0].message.content
+    
+    # ಸ್ಥಿತಿಯನ್ನು ನವೀಕರಿಸಿ
+    state_manager.update_task_step(
+        task_id=task_id,
+        step_name='writing',
+        result={'draft': article_draft}
+    )
+    
+    # ಸಂಪಾದಕರಿಗೆ ಕಳುಹಿಸಿ
+    sender = servicebus_client.get_queue_sender(next_queue)
+    message = ServiceBusMessage(
+        body=json.dumps({
+            'task_id': task_id,
+            'topic': topic,
+            'draft': article_draft
+        }),
+        content_type='application/json'
+    )
+    
+    with sender:
+        sender.send_messages(message)
+    
+    print(f"✅ Article draft complete for task {task_id}")
+
+def main():
+    """Listen to writer queue"""
+    receiver = servicebus_client.get_queue_receiver('writer-tasks')
+    
+    print("✍️ Writer Agent started, listening for tasks...")
+    
+    with receiver:
+        while True:
+            messages = receiver.receive_messages(max_wait_time=5)
+            for message in messages:
+                try:
+                    message_data = json.loads(str(message))
+                    process_writing_task(message_data)
+                    receiver.complete_message(message)
+                except Exception as e:
+                    print(f"❌ Error: {e}")
+                    receiver.abandon_message(message)
+
+if __name__ == '__main__':
+    main()
+```
+
+### 7. ಸಂಪಾದಕರ ಏಜೆಂಟ್
+
+**ಫೈಲ್: `src/agents/editor/app.py`**
+
+```python
+from azure.servicebus import ServiceBusClient
+from openai import AzureOpenAI
+import json
+import os
+from shared.state_manager import StateManager
+
+state_manager = StateManager()
+servicebus_client = ServiceBusClient.from_connection_string(
+    os.environ['SERVICEBUS_CONNECTION_STRING']
+)
+
+openai_client = AzureOpenAI(
+    api_key=os.environ['AZURE_OPENAI_API_KEY'],
+    api_version="2024-02-01",
+    azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+)
+
+def process_editing_task(message_data):
+    """Edit and finalize article"""
+    task_id = message_data['task_id']
+    topic = message_data['topic']
+    draft = message_data['draft']
+    
+    print(f"📝 Editing article: {topic}")
+    
+    # ಸಂಪಾದಿಸಲು Azure OpenAI ಅನ್ನು ಕರೆ ಮಾಡಿ
+    response = openai_client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
+            {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
+        ],
+        max_tokens=2000
+    )
+    
+    final_article = response.choices[0].message.content
+    
+    # ಕಾರ್ಯವನ್ನು ಪೂರ್ಣಗೊಂಡಂತೆ ಗುರುತಿಸಿ
+    state_manager.complete_task(
+        task_id=task_id,
+        final_result={
+            'topic': topic,
+            'final_article': final_article,
+            'word_count': len(final_article.split())
+        }
+    )
+    
+    print(f"✅ Article finalized for task {task_id}")
+
+def main():
+    """Listen to editor queue"""
+    receiver = servicebus_client.get_queue_receiver('editor-tasks')
+    
+    print("📝 Editor Agent started, listening for tasks...")
+    
+    with receiver:
+        while True:
+            messages = receiver.receive_messages(max_wait_time=5)
+            for message in messages:
+                try:
+                    message_data = json.loads(str(message))
+                    process_editing_task(message_data)
+                    receiver.complete_message(message)
+                except Exception as e:
+                    print(f"❌ Error: {e}")
+                    receiver.abandon_message(message)
+
+if __name__ == '__main__':
+    main()
+```
+
+### 8. ನಿಯೋಜನೆ ಮತ್ತು ಪರೀಕ್ಷೆ
+
+```bash
+# ಆರಂಭಿಸಿ ಮತ್ತು ನಿಯೋಜಿಸಿ
+azd init
+azd up
+
+# ಆರ್ಕೆಸ್ಟ್ರೇಟರ್ URL ಅನ್ನು ಪಡೆಯಿರಿ
+ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
+
+# ವಿಷಯವನ್ನು ರಚಿಸಿ
+curl -X POST $ORCHESTRATOR_URL/create-content \
+  -H "Content-Type: application/json" \
+  -d '{"topic": "The Future of AI in Healthcare"}'
+```
+
+**✅ ನಿರೀಕ್ಷಿತ ಫಲಿತಾಂಶ:**
+```json
+{
+  "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "started",
+  "workflow": "sequential",
+  "steps": ["research", "write", "edit", "publish"],
+  "message": "Content creation pipeline initiated"
+}
+```
+
+**ಕಾರ್ಯ ಪ್ರಗತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ:**
+```bash
+TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+curl $ORCHESTRATOR_URL/task/$TASK_ID
+```
+
+**✅ ನಿರೀಕ್ಷಿತ ಫಲಿತಾಂಶ (ಸಂಪೂರ್ಣ):**
+```json
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "type": "content_creation",
+  "status": "completed",
+  "steps": [
+    {
+      "name": "research",
+      "completed_at": "2025-11-19T10:30:00Z",
+      "result": {"research": "..."}
+    },
+    {
+      "name": "writing",
+      "completed_at": "2025-11-19T10:32:00Z",
+      "result": {"draft": "..."}
+    }
+  ],
+  "result": {
+    "topic": "The Future of AI in Healthcare",
+    "final_article": "...",
+    "word_count": 1500
+  }
+}
+```
+
+---
+
+## ಪಾಠ 2: ಸಮಾಂತರ ಸಂಯೋಜನೆ ಮಾದರಿ
+
+### ಅನುಷ್ಠಾನ: ಬಹು-ಮೂಲ ಶೋಧಕ್ ಸಂಗ್ರಾಹಕ
+
+ಬಹು-ಮೂಲಗಳಿಂದ ಮಾಹಿತಿ ಒಂದೇ ಸಮಯದಲ್ಲಿ ಸಂಗ್ರಹಿಸುವ ಸಮಾಂತರ ವ್ಯವಸ್ಥೆಯನ್ನು ನಿರ್ಮಿಸೋಣ.
+
+### ಸಮಾಂತರ ಒರ್ಕೆಸ್ಟ್ರೇಟರ್
+
+**ಫೈಲ್: `src/orchestrator/parallel_workflow.py`**
+
+```python
+from flask import Flask, request, jsonify
+from azure.servicebus import ServiceBusClient, ServiceBusMessage
+import json
+import uuid
+import os
+from shared.state_manager import StateManager
+
+app = Flask(__name__)
+state_manager = StateManager()
+
+servicebus_client = ServiceBusClient.from_connection_string(
+    os.environ['SERVICEBUS_CONNECTION_STRING']
+)
+
+@app.route('/research-parallel', methods=['POST'])
+def research_parallel():
+    """
+    Parallel workflow: Multiple agents work simultaneously
+    """
+    data = request.json
+    query = data.get('query')
+    
+    task_id = str(uuid.uuid4())
+    task = state_manager.create_task(
+        task_id=task_id,
+        task_type='parallel_research',
+        input_data={
+            'query': query,
+            'agents': ['web', 'academic', 'news', 'social']
+        }
+    )
+    
+    # ಫ್ಯಾನ್-ಔಟ್: ಎಲ್ಲ ಏಜೆಂಟ್‌ಗಳಿಗೆ ಒಂದೇ ಸಮಯದಲ್ಲಿ ಕಳುಹಿಸಿ
+    agents = [
+        ('web-research-queue', 'web'),
+        ('academic-research-queue', 'academic'),
+        ('news-research-queue', 'news'),
+        ('social-research-queue', 'social')
+    ]
+    
+    for queue_name, agent_type in agents:
+        sender = servicebus_client.get_queue_sender(queue_name)
+        message = ServiceBusMessage(
+            body=json.dumps({
+                'task_id': task_id,
+                'query': query,
+                'agent_type': agent_type,
+                'result_queue': 'aggregation-queue'
+            }),
+            content_type='application/json'
+        )
+        
+        with sender:
+            sender.send_messages(message)
+    
+    return jsonify({
+        'task_id': task_id,
+        'status': 'started',
+        'workflow': 'parallel',
+        'agents_dispatched': 4,
+        'message': 'Parallel research initiated'
+    }), 202
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
+```
+
+### ಸಂಯೋಜನೆ ಲಾಜಿಕ್ಸ್
+
+**ಫೈಲ್: `src/agents/aggregator/app.py`**
+
+```python
+from azure.servicebus import ServiceBusClient
+import json
+import os
+from collections import defaultdict
+from shared.state_manager import StateManager
+
+state_manager = StateManager()
+servicebus_client = ServiceBusClient.from_connection_string(
+    os.environ['SERVICEBUS_CONNECTION_STRING']
+)
+
+# ಪ್ರತಿ ಕಾರ್ಯದ ಫಲಿತಾಂಶಗಳನ್ನು ಅನುಸರಿಸಿ
+task_results = defaultdict(list)
+expected_agents = 4  # ವೆಬ್, ಶೈಕ್ಷಣಿಕ, ಸುದ್ದಿ, ಸಾಮಾಜಿಕ
+
+def process_result(message_data):
+    """Aggregate results from parallel agents"""
+    task_id = message_data['task_id']
+    agent_type = message_data['agent_type']
+    result = message_data['result']
+    
+    # ಫಲಿತಾಂಶವನ್ನು ಸಂಗ್ರಹಿಸಿ
+    task_results[task_id].append({
+        'agent': agent_type,
+        'data': result
+    })
+    
+    print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
+    
+    # ಎಲ್ಲಾ ಏಜೆಂಟ್‌ಗಳು ಪೂರೈಸಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ (ಫ್ಯಾನ್-ಇನ್)
+    if len(task_results[task_id]) == expected_agents:
+        print(f"✅ All agents completed for task {task_id}. Aggregating...")
+        
+        # ಫಲಿತಾಂಶಗಳನ್ನು ಸಂಯೋಜಿಸಿ
+        aggregated = {
+            'query': message_data['query'],
+            'sources': task_results[task_id],
+            'summary': generate_summary(task_results[task_id])
+        }
+        
+        # ಸಂಪೂರ್ಣವಾಗಿ ಗುರುತಿಸಿ
+        state_manager.complete_task(task_id, aggregated)
+        
+        # ಸ್ವಚ್ಛಗೊಳಿಸಿ
+        del task_results[task_id]
+        
+        print(f"✅ Aggregation complete for task {task_id}")
+
+def generate_summary(results):
+    """Generate summary from all sources"""
+    summaries = [r['data'].get('summary', '') for r in results]
+    return '\n\n'.join(summaries)
+
+def main():
+    """Listen to aggregation queue"""
+    receiver = servicebus_client.get_queue_receiver('aggregation-queue')
+    
+    print("📊 Aggregator started, listening for results...")
+    
+    with receiver:
+        while True:
+            messages = receiver.receive_messages(max_wait_time=5)
+            for message in messages:
+                try:
+                    message_data = json.loads(str(message))
+                    process_result(message_data)
+                    receiver.complete_message(message)
+                except Exception as e:
+                    print(f"❌ Error: {e}")
+                    receiver.abandon_message(message)
+
+if __name__ == '__main__':
+    main()
+```
+
+**ಸಮಾಂತರ ಮಾದರಿಯ ಲಾಭಗಳು:**
+- ⚡ **4x ವೇಗವಾಗಿ** (ಏಜೆಂಟ್‌ಗಳು ಸಮಕಾಲೀನವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತವೆ)
+- 🔄 **ದೋಷ ಸಹಿಷ್ಣುತೆ** (ಸಿದ್ದ ಫಲಿತಾಂಶಗಳು ಸ್ವೀಕರಿಸಬಹುದಾದವು)
+- 📈 **ಸ್ಕೇಲಬಲ್** (ಎರಡು ಹೆಚ್ಚು ಏಜೆಂಟ್‌ಗಳನ್ನು ಸುಲಭವಾಗಿ ಸೇರಿಸಬಹುದು)
+
+---
+
+## ಪ್ರಾಯೋಗಿಕ ಅಭ್ಯಾಸಗಳು
+
+### ಅಭ್ಯಾಸ 1: ಟೈಮಔಟ್ ಹ್ಯಾಂಡ್ಲಿಂಗ್ ಸೇರಿಸಿ ⭐⭐ (ಮಧ್ಯಮ)
+
+**ಉದ್ದೇಶ**: aggregator ನಿಂದ ನಿಧಾನ ಏಜೆಂಟ್‌ಗಳಿಗಾಗಿ ಸುದೀರ್ಘವಾಗಿ ಕಾಯಬಾರದು ಯಾಕೆಂದರೆ ಟೈಮಔಟ್ ತರ್ಕವನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ.
+
+**ಹಂತಗಳು**:
+
+1. **aggregator ಗೆ ಟೈಮಔಟ್ ಟ್ರ್ಯಾಕಿಂಗ್ ಸೇರಿಸಿ:**
+
+```python
+from datetime import datetime, timedelta
+
+task_timeouts = {}  # ಟಾಸ್ಕ್_ಐಡಿ -> ಅವಧಿ_ಸಮಯ
+
+def process_result(message_data):
+    task_id = message_data['task_id']
+    
+    # ಮೊದಲ ಫಲಿತಾಂಶದ ಮೇಲೆ ಸಮಯ ಮಿತಿ ನಿಗದಿಪಡಿಸಿ
+    if task_id not in task_timeouts:
+        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
+    
+    task_results[task_id].append({
+        'agent': message_data['agent_type'],
+        'data': message_data['result']
+    })
+    
+    # ಸಂಪೂರ್ಣವಾಯಿತೇ ಅಥವಾ ಸಮಯ ಮೀರಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
+    if len(task_results[task_id]) == expected_agents or \
+       datetime.utcnow() > task_timeouts[task_id]:
+        
+        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
+        
+        aggregated = {
+            'query': message_data['query'],
+            'sources': task_results[task_id],
+            'completed_agents': len(task_results[task_id]),
+            'timed_out': len(task_results[task_id]) < expected_agents
+        }
+        
+        state_manager.complete_task(task_id, aggregated)
+        
+        # ಶುದ್ಧೀಕರಣ
+        del task_results[task_id]
+        del task_timeouts[task_id]
+```
+
+2. **ಕೃತಕ ವಿಳಂಬಗಳೊಂದಿಗೆ ಪರೀಕ್ಷಿಸಿ:**
+
+```python
+# ಒಂದು ಏಜೆಂಟ್‌ನಲ್ಲಿ ನಿಧಾನವಾಗಿ ಪ್ರಕ್ರಿಯೆಯಾಗುವುದನ್ನು ಅನುಕರಿಸಲು ವಿಲಂಬವನ್ನು ಸೇರಿಸಿ
+import time
+time.sleep(35)  # 30 ಸೆಕೆಂಡಿನ ಸಮಯ ಮಿತಿಯನ್ನು ಮೀರುತ್ತದೆ
+```
+
+3. **ನಿಯೋಜಿಸಿ ಮತ್ತು ಪರಿಶೀಲಿಸಿ:**
+
+```bash
+azd deploy aggregator
+
+# ಕಾರ್ಯವನ್ನು ಸಲ್ಲಿಸಿ
+curl -X POST $ORCHESTRATOR_URL/research-parallel \
+  -H "Content-Type: application/json" \
+  -d '{"query": "AI safety research"}'
+
+# 30 ಸೆಕೆಂಡುಗಳ ನಂತರ ಫಲಿತಾಂಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+curl $ORCHESTRATOR_URL/task/$TASK_ID
+```
+
+**✅ ಯಶಸ್ಸಿನ ಮಾನದಂಡಗಳು:**
+- ✅ ಏಜೆಂಟ್‌ಗಳು ಅಪೂರ್ಣವಾಗಿದ್ದರೂ 30 ಸೆಕೆಂಡುಗಳ ನಂತರ ಕೆಲಸ ಪೂರ್ಣಗೊಳ್ಳುತ್ತದೆ
+- ✅ ಪ್ರತಿಕ್ರಿಯೆಯಲ್ಲಿ ಭಾಗ ಫಲಿತಾಂಶಗಳು ಸೂಚಿಸಲಾಗುತ್ತದೆ (`"timed_out": true`)
+- ✅ ಲಭ್ಯವಾಗುವ ಫಲಿತಾಂಶಗಳು ಹಿಂತಿರುಗಿಸಲ್ಪಡುತ್ತವೆ (4ರಲ್ಲಿ 3 ಏಜೆಂಟ್‌ಗಳು)
+
+**ಸಮಯ**: 20-25 ನಿಮಿಷಗಳು
+
+---
+
+### ಅಭ್ಯಾಸ 2: ರಿಟ್ರೈ ಲಾಜಿಕ್ಸ್ ಅನುಷ್ಠಾನಗೊಳಿಸಿ ⭐⭐⭐ (ಉನ್ನತ)
+
+**ಉದ್ದೇಶ**: ವೈಫಲ ಘಟಕಗಳ ಕಾರ್ಯಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮರುಪ್ರಯತ್ನಿಸಿ ಮುಗಿಸುವ ಮೊದಲು.
+
+**ಹಂತಗಳು**:
+
+1. **ಒರ್ಕೆಸ್ಟ್ರೇಟರ್‌ಗೆ ರಿಟ್ರೈ ಟ್ರ್ಯಾಕಿಂಗ್ ಸೇರಿಸಿ:**
+
+```python
+from dataclasses import dataclass
+from typing import Dict
+
+@dataclass
+class RetryConfig:
+    max_retries: int = 3
+    backoff_seconds: int = 5
+
+retry_counts: Dict[str, int] = {}  # ಸಂದೇಶ_ಐಡಿ -> ಮರುಪ್ರಯತ್ನ_ಎಣಿಕೆ
+
+def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
+    """Send message with retry metadata"""
+    message_id = message_data.get('message_id', str(uuid.uuid4()))
+    message_data['message_id'] = message_id
+    message_data['retry_count'] = retry_counts.get(message_id, 0)
+    message_data['max_retries'] = retry_config.max_retries
+    
+    sender = servicebus_client.get_queue_sender(queue_name)
+    message = ServiceBusMessage(
+        body=json.dumps(message_data),
+        content_type='application/json',
+        message_id=message_id
+    )
+    
+    with sender:
+        sender.send_messages(message)
+```
+
+2. **ಏಜೆಂಟ್‌ಗಳಿಗೆ ರಿಟ್ರೈ ಹ್ಯಾಂಡ್ಲರ್ ಸೇರಿಸಿ:**
+
+```python
+def process_with_retry(message, receiver, process_func):
+    """Process message with automatic retry on failure"""
+    try:
+        message_data = json.loads(str(message))
+        
+        # ಸಂದೇಶವನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಿ
+        process_func(message_data)
+        
+        # ಯಶಸ್ವಿ - ಸಂಪೂರ್ಣ
+        receiver.complete_message(message)
+        
+    except Exception as e:
+        message_id = message.message_id
+        retry_count = message_data.get('retry_count', 0)
+        max_retries = message_data.get('max_retries', 3)
+        
+        if retry_count < max_retries:
+            # ಮರುಪ್ರಯತ್ನಿಸಿ: ತ್ಯಜಿಸಿ ಮತ್ತು ಎಣಿಕೆ ಹೆಚ್ಚಿಸಿ ಮತ್ತೆ ಕ್ಯೂಗೆ ಸೇರಿಸಿ
+            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
+            
+            message_data['retry_count'] = retry_count + 1
+            
+            # ಅದೇ ಕ್ಯೂಗೆ ವಿಳಂಬದೊಂದಿಗೆ ಹಿಂತಿರುಗಿಸಿ
+            time.sleep(5 * (retry_count + 1))  # ಘಾತೀಯ ಹಿಂಜರಿಕೆ
+            send_with_retry(queue_name, message_data, RetryConfig())
+            
+            receiver.complete_message(message)  # ಮೂಲವನ್ನು ತೆಗೆದುಹಾಕಿ
+        else:
+            # ಗರಿಷ್ಠ ಮರುಪ್ರಯತ್ನಗಳು ಮೀರಿವೆ - ಡೆಡ್ ಲೆಟರ್ ಕ್ಯೂಗೆ ಸ್ಥಳಾಂತರಿಸಿ
+            print(f"❌ Max retries exceeded for message {message_id}")
+            receiver.dead_letter_message(
+                message,
+                reason="MaxRetriesExceeded",
+                error_description=str(e)
+            )
+```
+
+3. **ಡೆಡ್ ಲೆಟರ್ ಕ್ಯೂ ಅನ್ನು ಮಾನಿಟರ್ ಮಾಡಿ:**
+
+```python
+def monitor_dead_letters():
+    """Check dead letter queue for failed messages"""
+    receiver = servicebus_client.get_queue_receiver(
+        'research-queue',
+        sub_queue='deadletter'
+    )
+    
+    with receiver:
+        messages = receiver.receive_messages(max_wait_time=5)
+        for message in messages:
+            print(f"☠️ Dead letter: {message.message_id}")
+            print(f"Reason: {message.dead_letter_reason}")
+            print(f"Description: {message.dead_letter_error_description}")
+```
+
+**✅ ಯಶಸ್ಸಿನ ಮಾನದಂಡಗಳು:**
+- ✅ ವೈಫಲವಾದ ಕೆಲಸಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮರುಪ್ರಯತ್ನಿಸಲಾಗುತ್ತದೆ (ಗಿಂತಕ чейин 3 ಬಾರಿ)
+- ✅ ಮರುಪ್ರಯತ್ನಗಳ ನಡುವಿನ ಏಕ್ಸ್ಪೋನೆನ್ಶಿಯಲ್ ಬ್ಯಾಕ್‌ಆಫ್ (5s, 10s, 15s)
+- ✅ ಗರಿಷ್ಠ ಮರುಪ್ರಯತ್ನದ ನಂತರ ಸಂದೇಶಗಳು ಡೆಡ್ ಲೆಟರ್ ಕ್ಯೂಗೆ ಹೋಗುತ್ತವೆ
+- ✅ ಡೆಡ್ ಲೆಟರ್ ಕ್ಯೂನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಬಹುದು ಮತ್ತು ರೀಪ್ಲೇ ಮಾಡಬಹುದು
+
+**ಸಮಯ**: 30-40 ನಿಮಿಷಗಳು
+
+---
+
+### ಅಭ್ಯಾಸ 3: ಸರ್ಕ್ಯೂಟ್ ಬ್ರೇಕರ್ ಅನುಷ್ಠಾನಗೊಳಿಸಿ ⭐⭐⭐ (ಉನ್ನತ)
+
+**ಉದ್ದೇಶ**: ವೈಫಲವಾಗುತ್ತಿರುವ ಏಜೆಂಟ್‌ಗಳಿಗೆ ವಿನಂತಿಗಳನ್ನು ನಿಲ್ಲಿಸುವ ಮೂಲಕ ಸರಣಾ ವೈಫಲ್ಯಗಳನ್ನು ತಪ್ಪಿಸಿಕೊಳ್ಳುವುದು.
+
+**ಹಂತಗಳು**:
+
+1. **ಸರ್ಕ್ಯೂಟ್ ಬ್ರೇಕರ್ ಕ್ಲಾಸ್ ರಚಿಸಿ:**
+
+```python
+from enum import Enum
+from datetime import datetime, timedelta
+
+class CircuitState(Enum):
+    CLOSED = "closed"      # ಸಾಮಾನ್ಯ ಕಾರ್ಯಾಚರಣೆ
+    OPEN = "open"          # ವಿಫಲವಾಗುತ್ತಿದೆ, ವಿನಂತಿಗಳನ್ನು ನಿರಾಕರಿಸಿ
+    HALF_OPEN = "half_open"  # ಚೇತರಿಕೆ ಹೊಂದಿದೆಯೇ ಎಂಬುದನ್ನು ಪರೀಕ್ಷಿಸಲಾಗುತ್ತಿದೆ
+
+class CircuitBreaker:
+    def __init__(self, failure_threshold=5, timeout_seconds=60):
+        self.failure_threshold = failure_threshold
+        self.timeout_seconds = timeout_seconds
+        self.failure_count = 0
+        self.last_failure_time = None
+        self.state = CircuitState.CLOSED
+    
+    def call(self, func):
+        """Execute function with circuit breaker protection"""
+        if self.state == CircuitState.OPEN:
+            # ಟೈಮೌಟ್ ಅವಧಿ ಮುಗಿದಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
+            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+                self.state = CircuitState.HALF_OPEN
+                print("🔄 Circuit breaker: HALF_OPEN (testing)")
+            else:
+                raise Exception(f"Circuit breaker OPEN for agent. Try again in {self.timeout_seconds}s")
+        
+        try:
+            result = func()
+            
+            # ಯಶಸ್ಸು
+            if self.state == CircuitState.HALF_OPEN:
+                self.state = CircuitState.CLOSED
+                self.failure_count = 0
+                print("✅ Circuit breaker: CLOSED (recovered)")
+            
+            return result
+            
+        except Exception as e:
+            self.failure_count += 1
+            self.last_failure_time = datetime.utcnow()
+            
+            if self.failure_count >= self.failure_threshold:
+                self.state = CircuitState.OPEN
+                print(f"🔴 Circuit breaker: OPEN (too many failures)")
+            
+            raise e
+```
+
+2. **ಏಜೆಂಟ್ কল್ಸ್‌ಗೆ ಅನ್ವಯಿಸಿ:**
+
+```python
+# ಆರ್ಕೆಸ್ಟ್ರೇಟರ್‌ನಲ್ಲಿ
+agent_circuits = {
+    'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
+    'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
+    'news': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
+    'social': CircuitBreaker(failure_threshold=5, timeout_seconds=60)
+}
+
+def send_to_agent(agent_type, message_data):
+    """Send with circuit breaker protection"""
+    circuit = agent_circuits[agent_type]
+    
+    try:
+        circuit.call(lambda: send_message(agent_type, message_data))
+    except Exception as e:
+        print(f"⚠️ Skipping {agent_type} agent: {e}")
+        # ಇತರೆ ಏಜೆಂಟ್‌ಗಳೊಂದಿಗೆ ಮುಂದುವರಿಸಿ
+```
+
+3. **ಸರ್ಕ್ಯೂಟ್ ಬ್ರೇಕರ್ ಪರಿಶೀಲಿಸಿ:**
+
+```bash
+# ಅನೇಕ ಬಾರಿ ವೈಫಲ್ಯಗಳನ್ನು ಅನುಕರಿಸಿ (ಒಂದು ಏಜೆಂಟ್ ಅನ್ನು ನಿಲ್ಲಿಸಿ)
+az containerapp stop --name web-research-agent --resource-group rg-agents
+
+# ಬಹು ವಿನಂತಿಗಳನ್ನು ಕಳುಹಿಸಿ
+for i in {1..10}; do
+  curl -X POST $ORCHESTRATOR_URL/research-parallel \
+    -H "Content-Type: application/json" \
+    -d '{"query": "test query '$i'"}'
+  sleep 2
+done
+
+# ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ - 5 ವೈಫಲ್ಯಗಳ ನಂತರ ಸರ್ಕ್ಯೂಟ್ ತೆರೆಯಲ್ಪಟ್ಟಿದೆ ಎಂದು ಕಾಣಬೇಕು
+# Container App ಲಾಗ್‌ಗಳಿಗಾಗಿ Azure CLI ಬಳಸಿ:
+az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```
+
+**✅ ಯಶಸ್ಸಿನ ಮಾನದಂಡಗಳು:**
+- ✅ 5 ವೈಫಲ್ಯಗಳ ನಂತರ, ಸರ್ಕ್ಯೂಟ್ ತೆರೆದಿರುತ್ತದೆ (ವಾ೦ತಿಯನ್ನು ನಿರಾಕರಿಸುತ್ತದೆ)
+- ✅ 60 ಸೆಕೆಂಡುಗಳ ನಂತರ, ಸರ್ಕ್ಯೂಟ್ ಹಾಫ್-ಓಪನ್ ಆಗುತ್ತದೆ (ಪುನರ್ ಪುನರ್ಮೂಲ್ಯ ಪರಿಶೀಲನೆ)
+- ✅ ಇತರ ಏಜೆಂಟ್‌ಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಕೆಲಸ جاری ಇರುತ್ತವೆ
+- ✅ ಏಜೆಂಟ್ ಹಿಂಪಡೆಯುತ್ತಿದ್ದರೆ ಸರ್ಕ್ಯೂಟ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮುಚ್ಚುತ್ತದೆ
+
+**ಸಮಯ**: 40-50 ನಿಮಿಷಗಳು
+
+---
+
+## ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಡಿಬಗ್ಗಿಂಗ್
+
+### Application Insights ನೊಂದಿಗೆ ವಿತರಿತ ಟ್ರೇಸಿಂಗ್
+
+**ಫೈಲ್: `src/shared/tracing.py`**
+
+```python
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+from opencensus.ext.azure.trace_exporter import AzureExporter
+from opencensus.trace import config_integration
+from opencensus.trace.tracer import Tracer
+from opencensus.trace.samplers import AlwaysOnSampler
+import logging
+import os
+
+# ಟ್ರೇಸಿಂಗ್ ಅನ್ನು ಸಂರಚಿಸಿ
+config_integration.trace_integrations(['requests', 'logging'])
+
+connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
+
+# ಟ್ರೇಸರ್ ರಚಿಸಿ
+tracer = Tracer(
+    exporter=AzureExporter(connection_string=connection_string),
+    sampler=AlwaysOnSampler()
+)
+
+# ಲಾಗಿಂಗ್ ಅನ್ನು ಸಂರಚಿಸಿ
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler(connection_string=connection_string))
+logger.setLevel(logging.INFO)
+
+def trace_agent_call(agent_name, task_id, operation):
+    """Trace agent operations"""
+    with tracer.span(name=f'{agent_name}.{operation}') as span:
+        span.add_attribute('agent', agent_name)
+        span.add_attribute('task_id', task_id)
+        span.add_attribute('operation', operation)
+        
+        try:
+            result = operation()
+            span.add_attribute('status', 'success')
+            return result
+        except Exception as e:
+            span.add_attribute('status', 'error')
+            span.add_attribute('error', str(e))
+            raise
+```
+
+### Application Insights ಕ್ವೆರಿಗಳು
+
+**ಬಹು-ಏಜೆಂಟ್ ಕಾರ್ಯಪ್ರವಾಹಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ:**
+
+```kusto
+// Trace complete workflow for a task
+traces
+| where customDimensions.task_id == "a1b2c3d4-..."
+| project timestamp, message, customDimensions.agent, customDimensions.operation
+| order by timestamp asc
+```
+
+**ಏಜೆಂಟ್ ಕಾರ್ಯಕ್ಷಮತೆ ಹೋಲಿಕೆ:**
+
+```kusto
+// Compare agent execution times
+dependencies
+| where name contains "agent"
+| summarize 
+    avg_duration = avg(duration),
+    p95_duration = percentile(duration, 95),
+    count = count()
+  by agent = tostring(customDimensions.agent)
+| order by avg_duration desc
+```
+
+**ವಿಫಲತಾ ವಿಶ್ಲೇಷಣೆ:**
+
+```kusto
+// Find which agents fail most
+exceptions
+| where customDimensions.agent != ""
+| summarize 
+    failure_count = count(),
+    unique_errors = dcount(outerMessage)
+  by agent = tostring(customDimensions.agent)
+| order by failure_count desc
+```
+
+---
+
+## ವೆಚ್ಚ ವಿಶ್ಲೇಷಣೆ
+
+### ಬಹು-ಏಜೆಂಟ್ ವ್ಯವಸ್ಥೆಯ ವೆಚ್ಚಗಳು (ಮಾಸಿಕ ಅಂದಾಜು)
+
+| Component | Configuration | Cost |
+|-----------|--------------|------|
+| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
+| **Service Bus** | Standard tier, 10M messages | $10-20 |
+| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
+| **Application Insights** | 5GB ingestion | $10-15 |
+| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
+| **Total** | | **$240-565/month** |
+
+### ವೆಚ್ಚ ಆಪ್ಟಿಮೈಸೇಶನ್ ತಂತ್ರಗಳು
+
+1. **ಸಾಧ್ಯವಾದಲ್ಲಿ serverless ಬಳಸಿ:**
+   ```bicep
+   // Cosmos DB serverless (no minimum cost)
+   properties: {
+     databaseAccountOfferType: 'Standard'
+     capabilities: [{ name: 'EnableServerless' }]
+   }
+   ```
+
+2. **ಐಡಲ್ ನೋಡಿದ್ದಾಗ ಏಜೆಂಟ್‌ಗಳನ್ನು ಶೂನ್ಯಕ್ಕೆ ಸ್ಕೇಲ್ ಮಾಡಿ:**
+   ```bicep
+   scale: {
+     minReplicas: 0  // Scale to zero when no messages
+     maxReplicas: 10
+   }
+   ```
+
+3. **Service Bus ಗೆ ಬ್ಯಾಚಿಂಗ್ ಬಳಸಿ:**
+   ```python
+   # ಸಂದೇಶಗಳನ್ನು ಗುಚ್ಛವಾಗಿ ಕಳುಹಿಸಿ (ಸಸ್ತಾಗಿದೆ)
+   sender.send_messages([message1, message2, message3])
+   ```
+
+4. **ವಾರಂವಾರ ಬಳಸುವ ಫಲಿತಾಂಶಗಳನ್ನು ಕ್ಯಾಶೆ ಮಾಡಿ:**
+   ```python
+   # Azure Cache for Redis ಬಳಸಿ
+   if cache.exists(query_hash):
+       return cache.get(query_hash)
+   ```
+
+---
+
+## ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
+
+### ✅ ಮಾಡುವದು:
+
+1. **ಐಡಂಪೊಟೆಂಟ್ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಬಳಸಿ**
+   ```python
+   # ಏಜೆಂಟ್ ಅದೇ ಸಂದೇಶವನ್ನು ಅನೇಕ ಬಾರಿ ಸುರಕ್ಷಿತವಾಗಿ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಬಹುದು
+   def process_task(task_id):
+       if state_manager.task_exists(task_id):
+           print(f"Task {task_id} already processed, skipping")
+           return
+       # ಕಾರ್ಯವನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ...
+   ```
+
+2. **ವ್ಯಾಪಕ ಲಾಗಿಂಗ್ ಅನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ**
+   ```python
+   logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
+   ```
+
+3. **ಕರೆಲೇಶನ್ IDs ಬಳಸಿ**
+   ```python
+   # task_id ಅನ್ನು ಸಂಪೂರ್ಣ ಕಾರ್ಯಪ್ರವಾಹದ ಮೂಲಕ ಸಾಗಿಸಿ
+   message_data = {
+       'task_id': task_id,  # ಸಂಬಂಧಿತ ಐಡಿ
+       'timestamp': datetime.utcnow().isoformat()
+   }
+   ```
+
+4. **ಸಂದೇಶದ TTL (time-to-live) ಅನ್ನು ಹೊಂದಿಸಿ**
+   ```bicep
+   properties: {
+     defaultMessageTimeToLive: 'PT1H'  // 1 hour max
+   }
+   ```
+
+5. **ಡೆಡ್ ಲೆಟರ್ ಕ್ಯೂಗಳನ್ನು ಗಮನಿಸಿ**
+   ```python
+   # ವಿಫಲವಾದ ಸಂದೇಶಗಳ ನಿಯಮಿತ ವೀಕ್ಷಣೆ
+   monitor_dead_letters()
+   ```
+
+### ❌ ಮಾಡಬೇಡಿ:
+
+1. **ವೃತ್ತಾಕಾರದ ಅವಲಂಬನೆಗಳನ್ನು ಸೃಷ್ಟಿಸಬೇಡಿ**
+   ```python
+   # ❌ ಕೆಟ್ಟ: Agent A → Agent B → Agent A (ಅನಂತ ಲೂಪ್)
+   # ✅ ಉತ್ತಮ: ಸ್ಪಷ್ಟ ದಿಶಾನಿರ್ದಿಷ್ಟ ಚಕ್ರರಹಿತ ಗ್ರಾಫ್ (DAG) ಅನ್ನು ವ್ಯಾಖ್ಯಾನಿಸಿ
+   ```
+
+2. **ಏಜೆಂಟ್ ಥ್ರೆಡ್ಗಳನ್ನು ಅಡೆದಿಡಬೇಡಿ**
+   ```python
+   # ❌ ಕೆಟ್ಟದು: ಸಮಕಾಲಿಕ ಕಾಯುವಿಕೆ
+   while not task_complete:
+       time.sleep(1)
+   
+   # ✅ ಉತ್ತಮ: ಸಂದೇಶ ಕ್ಯೂ ಕಾಲ್‌ಬ್ಯಾಕ್‌ಗಳನ್ನು ಬಳಸಿ
+   ```
+
+3. **ಭಾಗಶಃ ವಿಫಲತೆಗಳನ್ನು ನಿರ್ಲಕ್ಷಿಸಬೇಡಿ**
+   ```python
+   # ❌ ಕೆಟ್ಟದು: ಒಂದು ಏಜೆಂಟ್ ವಿಫಲವಾದರೆ ಸಂಪೂರ್ಣ ಕಾರ್ಯಪ್ರವಾಹವನ್ನು ವಿಫಲಗೊಳಿಸುವುದು
+   # ✅ ಒಳ್ಳೆಯದು: ದೋಷ ಸೂಚಕಗಳೊಂದಿಗೆ ಅಂಶಿಕ ಫಲಿತಾಂಶಗಳನ್ನು ಹಿಂತಿರುಗಿಸಿ
+   ```
+
+4. **ಅನಂತ ಮರುಪ್ರಯತ್ನಗಳನ್ನು ಬಳಸದಿರಿ**
+   ```python
+   # ❌ ಕೆಟ್ಟದು: ಶಾಶ್ವತವಾಗಿ ಪುನರಾಯತ್ನಿಸುವುದು
+   # ✅ ಉತ್ತಮ: max_retries = 3, ನಂತರ ಡೆಡ್ ಲೆಟರ್
+   ```
+
+---
+
+## ಸಮಸ್ಯೆ ಪರಿಹಾರ ಮಾರ್ಗದರ್ಶಿ
+
+### ಸಮಸ್ಯೆ: ಸಂದೇಶಗಳು ಕ್ಯೂನಲ್ಲಿ ಸಿಲುಕಿವೆ
+
+**ಲಕ್ಷಣಗಳು:**
+- ಸಂದೇಶಗಳು ಕ್ಯೂನಲ್ಲಿ ಸಂಗ್ರಹವಾಗುತ್ತಿವೆ
+- ಏಜೆಂಟುಗಳು ಪ್ರೊಸೆಸಿಂಗ್ ಮಾಡುತ್ತಿಲ್ಲ
+- ಟಾಸ್ಕ್ ಸ್ಥಿತಿ "ಬಾಕಿ"ನಲ್ಲಿ ಸಿಲುಕಿದೆ
+
+**ನಿರ್ಣಯ:**
+```bash
+# ಕ್ಯೂ ಆಳತೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+az servicebus queue show \
+  --namespace-name mybus \
+  --name research-tasks \
+  --query "countDetails"
+
+# Azure CLI ಬಳಸಿ ಏಜೆಂಟ್ ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
+```
+
+**ಪರಿಹಾರಗಳು:**
+
+1. **ಏಜೆಂಟ್ ನ ಪ್ರತಿಗಳನ್ನು ಹೆಚ್ಚಿಸಿ:**
+   ```bash
+   az containerapp update \
+     --name research-agent \
+     --min-replicas 3 \
+     --max-replicas 10
+   ```
+
+2. **ಡೆಡ್ ಲೆಟರ್ ಕ್ಯೂ ಪರಿಶೀಲಿಸಿ:**
+   ```bash
+   az servicebus queue show \
+     --namespace-name mybus \
+     --name research-tasks \
+     --query "countDetails.deadLetterMessageCount"
+   ```
+
+---
+
+### ಸಮಸ್ಯೆ: ಟಾಸ್ಕ್ ಟೈಮೌಟ್/ಎಂದಿಗೂ ಪೂರ್ಣಗೊಳ್ಳುವುದಿಲ್ಲ
+
+**ಲಕ್ಷಣಗಳು:**
+- ಟಾಸ್ಕ್ ಸ್ಥಿತಿ "ಪ್ರಗತಿಯಲ್ಲಿ" ಉಳಿಯುತ್ತದೆ
+- ಕೆಲವು ಏಜೆಂಟ್‌ಗಳು ಮುಗಿಸುತ್ತವೆ, ಇತರೆಗಳು ಮುಗಿಸುವುದಿಲ್ಲ
+- ಯಾವುದೇ ದೋಷ ಸಂದೇಶಗಳಿಲ್ಲ
+
+**ನಿರ್ಣಯ:**
+```bash
+# ಟಾಸ್ಕ್ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
+curl $ORCHESTRATOR_URL/task/$TASK_ID
+
+# Application Insights ಅನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಕ್ವೇರಿಯನ್ನು ಓಡಿಸಿ: traces | where customDimensions.task_id == "..."
+```
+
+**ಪರಿಹಾರಗಳು:**
+
+1. **ಸಂಗ್ರಾಹಕದಲ್ಲಿ ಟೈಮೌಟ್ ಅನುಷ್ಠಾನ ಮಾಡಿ (ಅಭ್ಯಾಸ 1)**
+
+2. **Azure Monitor ಬಳಸಿಕೊಂಡು ಏಜೆಂಟ್ ವೈಫಲ್ಯಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ:**
+   ```bash
+   # azd monitor ಮೂಲಕ ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+   azd monitor --logs
+   
+   # ಅಥವಾ ನಿರ್ದಿಷ್ಟ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಲು Azure CLI ಅನ್ನು ಬಳಸಿ
+   az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
+   ```
+
+3. **ಎಲ್ಲಾ ಏಜೆಂಟ್‌ಗಳು ನಿರ್ವಹಣೆಯಲ್ಲಿ ಇದ್ದಾವೆಯೋ ಎಂದು ಪರಿಶೀಲಿಸಿ:**
+   ```bash
+   az containerapp list \
+     --resource-group rg-agents \
+     --query "[].{name:name, status:properties.runningStatus}"
+   ```
+
+---
+
+## ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ
+
+### ಅಧಿಕೃತ ದಸ್ತಾವೇಜುಗಳು
+- [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
+- [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
+- [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
+- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+
+### ಈ ಕೋರ್ಸಿನಲ್ಲಿ ಮುಂದಿನ ಹಂತಗಳು
+- ← ಹಿಂದಿನದು: [ಸಾಮರ್ಥ್ಯ ಯೋಜನೆ](capacity-planning.md)
+- → ಮುಂದಿನದು: [SKU ಆಯ್ಕೆ](sku-selection.md)
+- 🏠 [ಕೋರ್ಸ್ ಹೋಮ್](../../README.md)
+
+### ಸಂಬಂಧಿತ ಉದಾಹರಣೆಗಳು
+- [Microservices Example](../../../../examples/microservices) - ಸೇವಾ ಸಂವಹನ ಮಾದರಿಗಳು
+- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI ಏಕೀಕರಣ
+
+---
+
+## ಸಾರಾಂಶ
+
+**ನೀವು ಕಲಿತಿರುವುದು:**
+- ✅ ಐದು ಸಂಯೋಜನಾ ಮಾದರಿಗಳು (ಕ್ರಮಾನುಗತ, ಸಮಾಂತರ, ಅನುಕ್ರಮಾತ್ಮಕ, ಘಟನೆ-ಚಾಲಿತ, ಸಮ್ಮತಿ)
+- ✅ Azure ಮೇಲೆ ಬಹು-ಏಜೆಂಟ್ ಆರ್ಕಿಟೆಕ್ಚರ್ (Service Bus, Cosmos DB, Container Apps)
+- ✅ ವಿತರಿತ ಏಜೆಂಟ್‌ಗಳ ನಡುವಣ ಸ್ಥಿತಿ ನಿರ್ವಹಣೆ
+- ✅ ಟೈಮೌಟ್ ನಿರ್ವಹಣೆ, ಮರುಪ್ರಯತ್ನಗಳು, ಮತ್ತು ಸರ್ಕ್ಯೂಟ್ ಬ್ರೇಕರ್‌ಗಳು
+- ✅ ವಿತರಿತ ವ್ಯವಸ್ಥೆಗಳ ಮೇಲ್ವಿಚಾರಣೆ ಮತ್ತು ಡಿಬಗಿಂಗ್
+- ✅ ವೆಚ್ಚ ದಕ್ಷತೆ ತಂತ್ರಗಳು
+
+**ಪ್ರಮುಖ takeawayಗಳು:**
+1. **ಸರಿಯಾದ ಮಾದರಿಯನ್ನು ಆರಿಸಿ** - ಕ್ರಮಾನುಗತ: ಕ್ರಮಬದ್ಧ ಕಾರ್ಯಪ್ರವಾಹಗಳಿಗಾಗಿ, ಸಮಾಂತರ: ವೇಗಕ್ಕಾಗಿ, ಘಟನೆ-ಚಾಲಿತ: ಲವಚಿಕತೆಗೆ
+2. **ಸ್ಥಿತಿಯನ್ನು ಜಾಗರೂಕರಾಗಿ ನಿರ್ವಹಿಸಿ** - ಹಂಚಿಕೃತ ಸ್ಥಿತಿಗಾಗಿ Cosmos DB ಅಥವಾ ಅತಿ ಸಮಾನ ಸೇವೆಯನ್ನು ಬಳಸಿ
+3. **ವಿಫಲತೆಯನ್ನು ಶೈಲಿಯುತವಾಗಿ ನಿರ್ವಹಿಸಿ** - ಟೈಮೌಟ್ಗಳು, ಮರುಪ್ರಯತ್ನಗಳು, ಸರ್ಕ್ಯೂಟ್ ಬ್ರೇಕರ್‌ಗಳು, ಡೆಡ್ ಲೆಟರ್ ಕ್ಯೂಗಳು
+4. **ಎಲ್ಲಾವನ್ನೂ ಮೇಲ್ವಿಚಾರಿಸು** - ಡಿಬಗಿಂಗ್‌ಗಾಗಿ ವಿತರಿತ ಟ್ರೇಸಿಂಗ್ ಅಗತ್ಯ
+5. **ವೆಚ್ಚದ ದಕ್ಷತೆಯನ್ನು ಸಾಧಿಸಿ** - ಶೂನ್ಯಕ್ಕೆಸ್ಕೇಲ್ ಮಾಡು, ಸರ್ವರ್‌ಲೆಸ್ ಬಳಸಿ, ಕ್ಯಾಶಿಂಗ್ ಅನುಷ್ಠಾನಗೊಳಿಸಿ
+
+**ಮುಂದಿನ ಹಂತಗಳು:**
+1. ಪ್ರಾಯೋಗಿಕ ಅಭ್ಯಾಸಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ
+2. ನಿಮ್ಮ ಬಳಕೆ ಪ್ರಕರಣಕ್ಕಾಗಿ ಬಹು-ಏಜೆಂಟ್ ವ್ಯವಸ್ಥೆಯನ್ನು ನಿರ್ಮಿಸಿ
+3. ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ವೆಚ್ಚವನ್ನು ಸುಧಾರಿಸಲು [SKU ಆಯ್ಕೆ](sku-selection.md) ಅಧ್ಯಯನಿಸಿ
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+ನಿರಾಕರಣೆ:
+ಈ ದಾಖಲೆ AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ದಯವಿಟ್ಟು ಗಮನಿಸಿ ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸತ್ಯತೆಗಳಿರಬಹುದಾಗಿದೆ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಾಖಲೆಗಳನ್ನು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವುದರಿಂದ ಉಂಟಾದ ಯಾವುದೇ ತಪ್ಪಾದ ಅರ್ಥಗಳು ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳಿಗೆ ನಾವು ಹೊಣೆಗಾರರಾಗುವುದಿಲ್ಲ.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

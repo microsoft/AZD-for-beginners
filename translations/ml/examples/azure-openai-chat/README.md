@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-24T22:13:20+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "ml"
-}
--->
 # Azure OpenAI ചാറ്റ് ആപ്ലിക്കേഷൻ
 
 **പഠന പാത:** ഇടത്തരം ⭐⭐ | **സമയം:** 35-45 മിനിറ്റ് | **ചെലവ്:** $50-200/മാസം

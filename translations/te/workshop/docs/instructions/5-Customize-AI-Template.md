@@ -1,49 +1,40 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-11-25T07:35:48+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "te"
-}
--->
 # 5. టెంప్లేట్‌ను అనుకూలీకరించండి
 
-!!! tip "ఈ మాడ్యూల్ ముగిసే సమయానికి మీరు చేయగలరు"
+!!! tip "ఈ మాడ్యూల్ చివరిలో మీరు చేయగలరు"
 
-    - [ ] డిఫాల్ట్ AI ఏజెంట్ సామర్థ్యాలను అన్వేషించారు
-    - [ ] మీ స్వంత సూచికతో AI సెర్చ్‌ను జోడించారు
-    - [ ] ట్రేసింగ్ మెట్రిక్స్‌ను సక్రియం చేసి విశ్లేషించారు
-    - [ ] ఒక మూల్యాంకన రన్‌ను అమలు చేశారు
-    - [ ] రెడ్-టీమింగ్ స్కాన్‌ను అమలు చేశారు
-    - [ ] **ల్యాబ్ 5: అనుకూలీకరణ ప్రణాళికను రూపొందించారు**
+    - [ ] డిఫాల్ట్ AI ఏజెంట్ సామర్థ్యాలను పరిశీలించారు
+    - [ ] మీ స్వంత ఇండెక్స్‌తో AI సెర్చ్‌ను జోడించారు
+    - [ ] ట్రేసింగ్ మేట్రిక్స్‌ను యాక్టివేట్ చేసి విశ్లేషించారు
+    - [ ] ఒక ارزల్యుయేషన్ రన్‌ను నడిపించారు
+    - [ ] రెడ్-టీమింగ్ స్కాన్‌ను నిర్వహించారు
+    - [ ] **ల్యాబ్ 5: అనుకూలీకరణ ప్రణాళిక ను రూపొందించారు** 
 
 ---
 
 ## 5.1 AI ఏజెంట్ సామర్థ్యాలు
 
-!!! success "మేము ల్యాబ్ 01లో దీన్ని పూర్తి చేశాము"
+!!! success "మనం ఇది ల్యాబ్ 01లో పూర్తి చేసాము"
 
-- **ఫైల్ సెర్చ్**: OpenAI యొక్క బిల్ట్-ఇన్ ఫైల్ సెర్చ్ జ్ఞానాన్ని పొందడానికి
-- **సైటేషన్స్**: ప్రతిస్పందనల్లో ఆటోమేటిక్ సోర్స్ అట్రిబ్యూషన్
-- **అనుకూలీకరించగల సూచనలు**: ఏజెంట్ ప్రవర్తన మరియు వ్యక్తిత్వాన్ని మార్చండి
-- **టూల్ ఇంటిగ్రేషన్**: అనుకూల సామర్థ్యాల కోసం విస్తరించగల టూల్ సిస్టమ్
+- **ఫైల్ సెర్చ్**: జ్ఞాన రిట్రీవల్ కోసం OpenAI యొక్క బిల్ట్-ఇన్ ఫైల్ సెర్చ్
+- **సైటేషన్లు**: ప్రతిస్పందనల్లో ఆటోమేటిక్ మూలం అట్రిబ్యూషన్
+- **అనుకూలీకరించుకునే సూచనలు**: ఏజెంట్ ప్రవర్తన మరియు వ్యక్తిత్వాన్ని మార్చండి
+- **టూల్ ఇంటిగ్రేషన్**: అనుకూల సామర్థ్యాల కోసం విస్తరించదగిన టూల్ సిస్టమ్
 
 ---
 
-## 5.2 జ్ఞానాన్ని పొందే ఎంపికలు
+## 5.2 జ్ఞాన రిట్రీవల్ ఎంపికలు
 
-!!! task "దీన్ని పూర్తి చేయడానికి మేము మార్పులు చేసి మళ్లీ డిప్లాయ్ చేయాలి"    
+!!! task "ఇది పూర్తి చేయడానికి మనకు మార్పులు చేసి మళ్లీ డిప్లాయ్ చేయాల్సి ఉంటుంది"    
     
     ```bash title=""
-    # పర్యావరణ వేరియబుల్స్ సెట్ చేయండి
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # డేటాను అప్‌లోడ్ చేసి నా సూచికను సృష్టించండి
+    # Upload data and create my index
 
     ```
 
@@ -51,22 +42,22 @@ CO_OP_TRANSLATOR_METADATA:
 
 **OpenAI ఫైల్ సెర్చ్ (డిఫాల్ట్):**
 
-- Azure AI ఏజెంట్ సేవలో బిల్ట్-ఇన్
-- ఆటోమేటిక్ డాక్యుమెంట్ ప్రాసెసింగ్ మరియు సూచిక
+- Foundry ఏజెంట్స్‌లో నిర్మించబడినది
+- ఆటోమేటిక్ డాక్యుమెంట్ ప్రాసెసింగ్ మరియు ఇండెక్సింగ్
 - అదనపు కాన్ఫిగరేషన్ అవసరం లేదు
 
-**Azure AI సెర్చ్ (ఐచ్ఛికం):**
+**Azure AI సెర్చ్ (ఎంపిక):**
 
-- హైబ్రిడ్ సెమాంటిక్ మరియు వెక్టర్ సెర్చ్
-- అనుకూల సూచిక నిర్వహణ
+- హైబ్రిడ్ సేమాంటిక్ మరియు వెక్టర్ సెర్చ్
+- కస్టమ్ ఇండెక్స్ నిర్వహణ
 - అధునాతన సెర్చ్ సామర్థ్యాలు
-- `USE_AZURE_AI_SEARCH_SERVICE=true` అవసరం
+- అవసరం: `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [ట్రేసింగ్ & మానిటరింగ్](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "దీన్ని పూర్తి చేయడానికి మేము మార్పులు చేసి మళ్లీ డిప్లాయ్ చేయాలి"    
+!!! task "ఇది పూర్తి చేయడానికి మనకు మార్పులు చేసి మళ్లీ డిప్లాయ్ చేయాల్సి ఉంటుంది"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -76,97 +67,99 @@ CO_OP_TRANSLATOR_METADATA:
 **ట్రేసింగ్:**
 
 - OpenTelemetry ఇంటిగ్రేషన్
-- రిక్వెస్ట్/రెస్పాన్స్ ట్రాకింగ్
-- పనితీరు మెట్రిక్స్
-- AI Foundry పోర్టల్‌లో అందుబాటులో ఉంది
+- రిక్వెస్ట్/రెస్పాన్సు ట్రాకింగ్
+- పర్ఫార్మెన్స్ మేట్రిక్స్
+- Microsoft Foundry పోర్టల్‌లో అందుబాటులో ఉంది
 
 **లాగింగ్:**
 
-- కంటైనర్ యాప్స్‌లో అప్లికేషన్ లాగ్స్
-- సంబంధిత IDsతో స్ట్రక్చర్డ్ లాగింగ్
+- Container Apps‌లో అప్లికేషన్ లాగ్స్
+- కారెలేషన్ IDలతో నిర్మాణాబద్ధ లాగింగ్
 - రియల్-టైమ్ మరియు చారిత్రక లాగ్ వీక్షణ
 
 ---
 
-## 5.4 [ఏజెంట్ మూల్యాంకన](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [ఏజెంట్ మూల్యాంకనం](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**లోకల్ మూల్యాంకన:**
+**లోకల్ మూల్యాంకనం:**
 
-- నాణ్యత అంచనా కోసం బిల్ట్-ఇన్ మూల్యాంకనాలు
-- అనుకూల మూల్యాంకన స్క్రిప్టులు
-- పనితీరు బెంచ్‌మార్కింగ్
+- నాణ్యత అంచనా కోసం బిల్ట్-ఇన్ ఎవాల్యుయేటర్లు
+- కస్టమ్ ఎవాల్యుయేషన్ స్క్రిప్టులు
+- పర్ఫార్మెన్స్ బెంచ్‌మార్కింగ్
 
 **నిరంతర మానిటరింగ్:**
 
-- ప్రత్యక్ష పరస్పర చర్యల ఆటోమేటిక్ మూల్యాంకన
-- నాణ్యత మెట్రిక్స్ ట్రాకింగ్
-- పనితీరు తగ్గుదల గుర్తింపు
+- లైవ్ ఇంటరాక్షన్ల ఆటోమేటిక్ మూల్యాంకనం
+- నాణ్యత మేట్రిక్స్ ట్రాకింగ్
+- పర్ఫార్మెన్స్ రిగ్రెషన్ గుర్తింపు
 
 **CI/CD ఇంటిగ్రేషన్:**
 
 - GitHub Actions వర్క్‌ఫ్లో
-- ఆటోమేటెడ్ టెస్టింగ్ మరియు మూల్యాంకన
-- గణాంకీయమైన పోలిక టెస్టింగ్
+- ఆటోమేటెడ్ టెస్టింగ్ మరియు ఎవాల్యుయేషన్
+- సాంఖ్యిక తులనా పరీక్షలు
 
 ---
 
-## 5.5 [AI రెడ్ టీమింగ్ ఏజెంట్](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI రెడ్-టీమింగ్ ఏజెంట్](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI రెడ్ టీమింగ్:**
+**AI రెడ్-టీమింగ్:**
 
 - ఆటోమేటెడ్ సెక్యూరిటీ స్కానింగ్
-- AI సిస్టమ్స్ కోసం రిస్క్ అంచనా
-- అనేక వర్గాల్లో భద్రతా మూల్యాంకన
+- AI వ్యవస్థల కోసం రిస్క్ అంచనా
+- వివిధ వర్గాలపై భద్రతా మూల్యాంకనం
 
-**ఆథెంటికేషన్:**
+**ప్రామాణీకరణ:**
 
-- Azure సేవల కోసం మేనేజ్‌డ్ ఐడెంటిటీ
-- ఐచ్ఛిక Azure App Service ఆథెంటికేషన్
-- డెవలప్‌మెంట్ కోసం బేసిక్ ఆథ్ ఫాల్‌బ్యాక్
+- Azure సేవల కోసం Managed Identity
+- ఐచ్ఛిక Azure App Service ప్రామాణీకరణ
+- డెవలప్‌మెంట్ కోసం బేసిక్ ఆథ్ ఫాల్బ్యాక్
 
-!!! quote "ఈ ల్యాబ్ ముగిసే సమయానికి మీరు చేయాలి"
-    - [ ] మీ సన్నివేశ అవసరాలను నిర్వచించారు
-    - [ ] పర్యావరణ వేరియబుల్స్‌ను అనుకూలీకరించారు (కాన్ఫిగరేషన్)
-    - [ ] ఏజెంట్ సూచనలను అనుకూలీకరించారు (టాస్క్)
-    - [ ] అనుకూలీకరించిన టెంప్లేట్‌ను డిప్లాయ్ చేశారు (యాప్)
-    - [ ] డిప్లాయ్‌మెంట్ తర్వాత పనులను పూర్తి చేశారు (మాన్యువల్)
-    - [ ] టెస్ట్ మూల్యాంకనను అమలు చేశారు
 
-ఈ ఉదాహరణ రెండు ప్రత్యేక ఏజెంట్లు మరియు అనేక మోడల్ డిప్లాయ్‌మెంట్‌లతో ఎంటర్‌ప్రైజ్ రిటైల్ వినియోగం కోసం టెంప్లేట్‌ను అనుకూలీకరించడం ఎలా చేయాలో చూపిస్తుంది.
+
+!!! quote "ఈ ల్యాబ్ చివరికి మీరు కలిగి ఉండాలి"
+    - [ ] మీ సన్నివేశ అవసరాలను నిర్వచించండి
+    - [ ] env వేరియబుల్స్ (config) అనుకూలీకరించారు
+    - [ ] ఏజెంట్ సూచనలను (టాస్క్) అనుకూలీకరించారు
+    - [ ] అనుకూలీకరించిన టెంప్లేట్ (app) ను డిప్లాయ్ చేశారు
+    - [ ] పోస్ట్-డిప్లాయ్‌మెంట్ పనులను (మ్యాన్యువల్) పూర్తిచేశారు
+    - [ ] ఒక టెస్ట్ ఎవాల్యుయేషన్ నడిపించారు
+
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 మీ కోసం అనుకూలీకరించండి!
+## 5.6 మీ కోసం దీన్ని అనుకూలీకరించండి!
 
 ### 5.6.1. సన్నివేశ అవసరాలు
 
 #### **ఏజెంట్ డిప్లాయ్‌మెంట్‌లు:** 
 
-   - షాపర్ ఏజెంట్: కస్టమర్లకు ఉత్పత్తులను కనుగొనడం మరియు పోల్చడంలో సహాయం చేస్తుంది
-   - లాయల్టీ ఏజెంట్: కస్టమర్ రివార్డ్స్ మరియు ప్రమోషన్లను నిర్వహిస్తుంది
+   - Shopper Agent: కస్టమర్లకు ఉత్పత్తులను కనుగొనడంలో మరియు పోల్చడంలో సహాయపడుతుంది
+   - Loyalty Agent: కస్టమర్ రివార్డ్స్ మరియు ప్రమోషన్లు నిర్వహిస్తుంది
 
 #### **మోడల్ డిప్లాయ్‌మెంట్‌లు:**
 
-   - `gpt-4.1`: ప్రాథమిక చాట్ మోడల్
-   - `o3`: క్లిష్టమైన ప్రశ్నల కోసం తర్కం మోడల్
-   - `gpt-4.1-nano`: సులభమైన పరస్పర చర్యల కోసం తేలికైన మోడల్
-   - `text-embedding-3-large`: సెర్చ్ కోసం అధిక నాణ్యత గల ఎంబెడింగ్స్
+   - `gpt-4.1`: ప్రధాన చాట్ మోడల్
+   - `o3`: క్లిష్ట ప్రశ్నలకు రీజనింగ్ మోడల్
+   - `gpt-4.1-nano`: సులభ పరస్పర చర్యల కోసం లైట్‌వెయిట్ మోడల్
+   - `text-embedding-3-large`: సెర్చ్ కోసం అధిక-నాణ్యత ఎంబెడ్డింగ్స్
 
-#### **ఫీచర్లు:**
+#### **ఫీచర్స్:**
 
-   - ట్రేసింగ్ మరియు మానిటరింగ్ సక్రియం చేయబడింది
-   - ఉత్పత్తి క్యాటలాగ్ కోసం AI సెర్చ్
-   - నాణ్యత హామీ కోసం మూల్యాంకన ఫ్రేమ్‌వర్క్
-   - భద్రతా ధృవీకరణ కోసం రెడ్ టీమింగ్
+   - ట్రేసింగ్ మరియు మానిటరింగ్ ఎనేబుల్ చేయబడ్డాయి
+   - ఉత్పత్తుల కేటలాగ్ కోసం AI సెర్చ్
+   - నాణ్యత భరోసా కోసం ఎవాల్యుయేషన్ ఫ్రేమ్‌వర్క్
+   - భద్రతా ధృవీకరణ కోసం రెడ్-టీమింగ్
 
 ---
 
 ### 5.6.2 సన్నివేశ అమలు
 
 
-#### 5.6.2.1. ప్రీ-డిప్లాయ్‌మెంట్ కాన్ఫిగరేషన్
+#### 5.6.2.1. ప్రీ-డిప్లాయ్‌మెంట్ కాన్ఫిగ్
 
-సెటప్ స్క్రిప్ట్ (`setup-retail.sh`) సృష్టించండి
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -174,7 +167,7 @@ CO_OP_TRANSLATOR_METADATA:
 # పర్యావరణం పేరు సెట్ చేయండి
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# ప్రాంతాన్ని ఆకృతీకరించండి (మోడల్ అందుబాటులో ఆధారంగా ఎంచుకోండి)
+# ప్రాంతాన్ని కాన్ఫిగర్ చేయండి (మోడల్ అందుబాటుపై ఆధారపడి ఎంచుకోండి)
 azd env set AZURE_LOCATION "eastus2"
 
 # అన్ని ఐచ్ఛిక సేవలను ప్రారంభించండి
@@ -182,21 +175,21 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# ప్రాథమిక చాట్ మోడల్‌ను ఆకృతీకరించండి (gpt-4.1 కు దగ్గరగా ఉన్న gpt-4o)
+# ప్రధాన చాట్ మోడల్‌ను కాన్ఫిగర్ చేయండి (gpt-4.1 కు అత్యంత సమీపంగా లభించేదిగా gpt-4o)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# మెరుగైన శోధన కోసం ఎంబెడింగ్ మోడల్‌ను ఆకృతీకరించండి
+# మెరుగైన శోధన కోసం ఎంబెడ్డింగ్ మోడల్‌ను కాన్ఫిగర్ చేయండి
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# ఏజెంట్ పేరు సెట్ చేయండి (మొదటి ఏజెంట్‌ను సృష్టిస్తుంది)
+# ఏజెంట్ పేరును సెట్ చేయండి (ఇది మొదటి ఏజెంట్‌ను సృష్టిస్తుంది)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# శోధన సూచికను ఆకృతీకరించండి
+# శోధన సూచికను కాన్ఫిగర్ చేయండి
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -207,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: ఏజెంట్ సూచనలు
 
-`custom-agents/shopper-agent-instructions.md` సృష్టించండి:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -230,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-`custom-agents/loyalty-agent-instructions.md` సృష్టించండి:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -257,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: డిప్లాయ్‌మెంట్ స్క్రిప్ట్
 
-`deploy-retail.sh` సృష్టించండి:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -277,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# వాతావరణాన్ని ఏర్పాటు చేయండి
+# పర్యావరణాన్ని అమర్చండి
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# ఎంపిక చేసిన ప్రాంతంలో కోటాను తనిఖీ చేయండి
+# ఎంచుకున్న ప్రాంతంలో క్వోటాను తనిఖీ చేయండి
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# మౌలిక సదుపాయాలు మరియు అప్లికేషన్‌ను మోహరించండి
+# మౌలిక సదుపాయాలు మరియు అప్లికేషన్‌ను అమలు చేయండి
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# మోహరింపు అవుట్‌పుట్‌లను క్యాప్చర్ చేయండి
+# డిప్లాయ్‌మెంట్ ఫలితాలను సంగ్రహించండి
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# వెబ్ యాప్ URL పొందండి
+# వెబ్ యాప్ యొక్క URL ను పొందండి
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -328,16 +321,16 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: డిప్లాయ్‌మెంట్ తర్వాత కాన్ఫిగరేషన్
+#### 5.6.2.4: పోస్ట్-డిప్లాయ్‌మెంట్ కాన్ఫిగ్
 
-`configure-retail-agents.sh` సృష్టించండి:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# డిప్లాయ్‌మెంట్ సమాచారం పొందండి
+# డిప్లాయ్‌మెంట్ సమాచారాన్ని 얻ండి
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -349,7 +342,7 @@ echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -387,18 +380,18 @@ echo "
 
 ### 5.6.3: టెస్టింగ్ మరియు ధృవీకరణ
 
-`test-retail-deployment.sh` సృష్టించండి:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# పర్యావరణ వేరియబుల్స్ సెట్ చేయబడ్డాయా అని ధృవీకరించండి
+# పర్యావరణ చరాలు సెట్ చేయబడ్డాయా అని నిర్దారించండి
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# వెబ్ అప్లికేషన్ అందుబాటులో ఉందా అని పరీక్షించండి
+# వెబ్ అప్లికేషన్ లభ్యతను పరీక్షించండి
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# కాన్ఫిగర్ చేయబడితే మూల్యాంకనం నిర్వహించండి
+# స్థాపించబడ్డట్లయితే మూల్యాంకనాన్ని నడపండి
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -436,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 ఆశించిన ఫలితాలు
+### 5.6.4 ఆశించదగిన ఫలితాలు
 
-ఈ అమలు గైడ్‌ను అనుసరించిన తర్వాత, మీరు కలిగి ఉంటారు:
+After following this implementation guide, you will have:
 
-1. **డిప్లాయ్ చేసిన ఇన్‌ఫ్రాస్ట్రక్చర్:**
+1. **డిప్లాయ్ చేయబడిన ఇన్‌ఫ్రాస్ట్రక్చర్:**
 
-      - మోడల్ డిప్లాయ్‌మెంట్‌లతో AI Foundry ప్రాజెక్ట్
-      - వెబ్ అప్లికేషన్‌ను హోస్ట్ చేసే కంటైనర్ యాప్స్
-      - ఉత్పత్తి క్యాటలాగ్ కోసం AI సెర్చ్ సేవ
-      - మానిటరింగ్ కోసం అప్లికేషన్ ఇన్‌సైట్స్
+      - Microsoft Foundry ప్రాజెక్ట్ మోడల్ డిప్లాయ్‌మెంట్‌లతో
+      - వెబ్ అప్లికేషన్‌ను హోస్ట్ చేస్తున్న Container Apps
+      - ఉత్పత్తుల కేటలాగ్ కోసం AI Search సర్వీస్
+      - మానిటరింగ్ కోసం Application Insights
 
-2. **ప్రారంభ ఏజెంట్:**
+2. **ప్రాథమిక ఏజెంట్:**
 
-      - ప్రాథమిక సూచనలతో కాన్ఫిగర్ చేసిన షాపర్ ఏజెంట్
-      - ఫైల్ సెర్చ్ సామర్థ్యం సక్రియం చేయబడింది
-      - ట్రేసింగ్ మరియు మానిటరింగ్ కాన్ఫిగర్ చేయబడింది
+      - Shopper Agent ప్రాథమిక సూచనలతో కాన్ఫిగర్ చేయబడింది
+      - ఫైల్ సెర్చ్ సామర్థ్యం ఎనేబుల్ చేయబడింది
+      - ట్రేసింగ్ మరియు మానిటరింగ్ కాన్ఫిగర్ చేయబడ్డాయి
 
-3. **అనుకూలీకరణకు సిద్ధంగా:**
+3. **అనుకూలీకరణకు సిద్ధం:**
 
-      - లాయల్టీ ఏజెంట్ జోడించడానికి ఫ్రేమ్‌వర్క్
-      - అనుకూల సూచన టెంప్లేట్‌లు
-      - టెస్టింగ్ మరియు ధృవీకరణ స్క్రిప్టులు
-      - మానిటరింగ్ మరియు మూల్యాంకన సెటప్
+      - Loyalty Agent చేర్చడానికి ఫ్రేమ్‌వర్క్
+      - కస్టమ్ సూచన టెంప్లేట్లు
+      - పరీక్ష మరియు ధృవీకరణ స్క్రిప్టులు
+      - మానిటరింగ్ మరియు ఎవాల్యుయేషన్ సెటప్
 
-4. **ప్రొడక్షన్ రెడీనెస్:**
+4. **ప్రొడక్షన్ సిద్ధత:**
 
-      - రెడ్ టీమింగ్‌తో భద్రతా స్కానింగ్
-      - పనితీరు మానిటరింగ్
-      - నాణ్యత మూల్యాంకన ఫ్రేమ్‌వర్క్
+      - రెడ్-టీమింగ్‌తో భద్రతా స్కానింగ్
+      - పర్ఫార్మెన్స్ మానిటరింగ్
+      - నాణ్యత ఎవాల్యుయేషన్ ఫ్రేమ్‌వర్క్
       - స్కేలబుల్ ఆర్కిటెక్చర్
 
-ఈ ఉదాహరణ AZD టెంప్లేట్‌ను ప్రత్యేక ఎంటర్‌ప్రైజ్ సన్నివేశాలకు ఎలా విస్తరించి అనుకూలీకరించాలో, భద్రత, మానిటరింగ్ మరియు స్కేలబిలిటీ కోసం ఉత్తమ పద్ధతులను పాటిస్తూ ఎలా చేయాలో చూపిస్తుంది.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**అస్వీకరణ**:  
-ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వస్థల భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
+నిరాకరణ:
+ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో తప్పులు లేదా లోపాలు ఉండే అవకాశం ఉందని గమనించండి. మూల పత్రాన్ని దాని స్థానిక భాషలో ఉన్న సంచికను అధికారిక మూలంగా పరిగణించాలి. ముఖ్యమైన సమాచారం కోసం నిపుణుల చేతి మానవ అనువాదం సూచించబడుతుంది. ఈ అనువాదం ఉపయోగంతో కలిగే ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడానికి మేము బాధ్యులు కాదని తెలియజేస్తాము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

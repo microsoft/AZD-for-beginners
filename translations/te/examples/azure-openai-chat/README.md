@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-25T07:25:55+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "te"
-}
--->
 # Azure OpenAI చాట్ అప్లికేషన్
 
 **లెర్నింగ్ పాత్:** మధ్యస్థ ⭐⭐ | **సమయం:** 35-45 నిమిషాలు | **ఖర్చు:** $50-200/నెల
