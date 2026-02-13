@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-24T09:58:12+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "lt"
-}
--->
-# Mikroservisų architektūra - Konteinerių programų pavyzdys
+# Mikroservisų architektūra - Container App pavyzdys
 
-⏱️ **Numatomas laikas**: 25-35 minutės | 💰 **Numatoma kaina**: ~$50-100/mėn. | ⭐ **Sudėtingumas**: Pažengęs
+⏱️ **Numatomas laikas**: 25–35 minučių | 💰 **Numatoma kaina**: ~$50-100/mėn. | ⭐ **Sudėtingumas**: Pažengęs
 
-**Supaprastinta, bet funkcionali** mikroservisų architektūra, diegiama Azure Container Apps naudojant AZD CLI. Šis pavyzdys demonstruoja paslaugų tarpusavio komunikaciją, konteinerių orkestraciją ir stebėjimą su praktiniu 2 paslaugų sąrankos pavyzdžiu.
+Supaprastinta, bet funkcinė mikroservisų architektūra, diegiama į Azure Container Apps naudojant AZD CLI. Šis pavyzdys demonstruoja paslaugų tarpusavio komunikaciją, konteinerių orkestravimą ir stebėjimą su praktišku 2 paslaugų rinkiniu.
 
-> **📚 Mokymosi metodas**: Šis pavyzdys prasideda nuo minimalios 2 paslaugų architektūros (API Gateway + Backend Service), kurią galite iš tikrųjų įdiegti ir išmokti. Įvaldę šį pagrindą, pateikiame gaires, kaip plėsti iki pilnos mikroservisų ekosistemos.
+> **📚 Mokymosi metodika**: Šis pavyzdys prasideda nuo minimalios 2 paslaugų architektūros (API vartai + Produktų paslauga), kurią galite iš tiesų išdiegti ir išmokti. Išmokę šiuos pagrindus, pateikiame gaires, kaip plėsti iki pilno mikroservisų ekosistemos.
 
 ## Ko išmoksite
 
 Baigę šį pavyzdį, jūs:
-- Įdiegsite kelis konteinerius į Azure Container Apps
-- Įgyvendinsite paslaugų tarpusavio komunikaciją su vidiniu tinklu
-- Konfigūruosite aplinkos pagrindu veikiančią skalę ir sveikatos patikrinimus
-- Stebėsite paskirstytas programas naudodami Application Insights
-- Suprasite mikroservisų diegimo modelius ir geriausią praktiką
-- Išmoksite palaipsniui plėsti nuo paprastos iki sudėtingos architektūros
+- Išdiegsite kelis konteinerius į Azure Container Apps
+- Įgyvendinsite paslaugų tarpusavio komunikaciją su vidiniu tinklų ryšiu
+- Suconfiguruosite mastelį pagal aplinką ir sveikatos patikras
+- Stebėsite paskirstytas programas su Application Insights
+- Suprasite mikroservisų diegimo šablonus ir geriausias praktikas
+- Išmoksite palaipsniui plėsti architektūrą nuo paprastos iki sudėtingos
 
 ## Architektūra
 
-### 1 etapas: Ką kuriame (įtraukta į šį pavyzdį)
+### 1 etapas: Ką kuriame (įtrauktas į šį pavyzdį)
 
 ```
                     ┌─────────────────────────────┐
@@ -61,17 +52,17 @@ Baigę šį pavyzdį, jūs:
 ```
 
 **Kodėl pradėti paprastai?**
-- ✅ Greitai įdiegti ir suprasti (25-35 minutės)
-- ✅ Išmokti pagrindinius mikroservisų modelius be sudėtingumo
-- ✅ Veikiantis kodas, kurį galite modifikuoti ir eksperimentuoti
-- ✅ Mažesnės mokymosi išlaidos (~$50-100/mėn. prieš $300-1400/mėn.)
-- ✅ Pasitikėjimo ugdymas prieš pridedant duomenų bazes ir pranešimų eilutes
+- ✅ Greitai išdiegti ir suprasti (25–35 minutės)
+- ✅ Išmokti pagrindinius mikroservisų šablonus be sudėtingumo
+- ✅ Veikiantis kodas, kurį galite keisti ir eksperimentuoti
+- ✅ Mažesnės mokymosi sąnaudos (~$50-100/mėn. vs $300-1400/mėn.)
+- ✅ Užauginti pasitikėjimą prieš pridedant duomenų bazes ir žinučių eiles
 
-**Analogija**: Tai kaip mokytis vairuoti. Pradėkite nuo tuščios stovėjimo aikštelės (2 paslaugos), įvaldykite pagrindus, tada pereikite prie miesto eismo (5+ paslaugos su duomenų bazėmis).
+**Analogiška**: Galvokite apie tai kaip apie važiavimo mokymąsi. Pradedate nuo tuščio stovėjimo aikštelės (2 paslaugos), įvaldote pagrindus, tada pereinate į miesto eismą (5+ paslaugų su duomenų bazėmis).
 
-### 2 etapas: Ateities plėtra (nuorodų architektūra)
+### 2 etapas: Ateities plėtra (referencinė architektūra)
 
-Kai įvaldysite 2 paslaugų architektūrą, galite plėsti:
+Kai įvaldysite 2 paslaugų architektūrą, galite išplėsti:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -86,140 +77,140 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-Žr. skyrių „Plėtros vadovas“ pabaigoje, kad gautumėte žingsnis po žingsnio instrukcijas.
+Žr. skirsnį "Expansion Guide" pabaigoje dėl žingsnis po žingsnio instrukcijų.
 
 ## Įtrauktos funkcijos
 
-✅ **Paslaugų atradimas**: Automatinis DNS pagrindu veikiantis atradimas tarp konteinerių  
-✅ **Krovos balansavimas**: Įmontuotas krovos balansavimas tarp replikų  
-✅ **Automatinis skalavimas**: Nepriklausomas skalavimas kiekvienai paslaugai pagal HTTP užklausas  
-✅ **Sveikatos stebėjimas**: Gyvybingumo ir pasirengimo zondai abiem paslaugoms  
+✅ **Paslaugų aptikimas**: Automatinis DNS pagrindu vykstantis aptikimas tarp konteinerių  
+✅ **Load Balancing**: Įmontuotas apkrovos balansavimas tarp replikų  
+✅ **Automatinis mastelio keitimas**: Nepriklausomas mastelio keitimas kiekvienai paslaugai pagal HTTP užklausas  
+✅ **Sveikatos stebėjimas**: Liveness ir readiness patikros abiems paslaugoms  
 ✅ **Paskirstytas žurnalavimas**: Centralizuotas žurnalavimas su Application Insights  
-✅ **Vidinis tinklas**: Saugus paslaugų tarpusavio ryšys  
-✅ **Konteinerių orkestracija**: Automatinis diegimas ir skalavimas  
-✅ **Atnaujinimai be prastovų**: Palaipsniui atnaujinimai su versijų valdymu  
+✅ **Vidinis tinklų ryšys**: Saugus paslaugų tarpusavio bendravimas  
+✅ **Konteinerių orkestravimas**: Automatinis diegimas ir mastelio keitimas  
+✅ **Nulinis gedimų laikas atnaujinant**: Rolling atnaujinimai su revision valdymu  
 
-## Būtinos sąlygos
+## Reikalingos sąlygos
 
 ### Reikalingi įrankiai
 
-Prieš pradėdami, įsitikinkite, kad turite šiuos įrankius:
+Prieš pradėdami, įsitikinkite, kad turite įdiegtus šiuos įrankius:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (1.0.0 ar naujesnė versija)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versija 1.0.0 ar naujesnė)
    ```bash
    azd version
-   # Tikėtinas rezultatas: azd versija 1.0.0 arba naujesnė
+   # Tikėtina išvestis: azd versija 1.0.0 arba naujesnė
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (2.50.0 ar naujesnė versija)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versija 2.50.0 ar naujesnė)
    ```bash
    az --version
-   # Tikėtinas rezultatas: azure-cli 2.50.0 arba naujesnė
+   # Tikėtina išvestis: azure-cli 2.50.0 arba naujesnė
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (vietiniam kūrimui/testavimui - neprivaloma)
+3. **[Docker](https://www.docker.com/get-started)** (vietiniam vystymui/testavimui - neprivaloma)
    ```bash
    docker --version
-   # Tikėtinas rezultatas: Docker versija 20.10 arba naujesnė
+   # Tikėtina išvestis: Docker versija 20.10 arba naujesnė
    ```
 
 ### Azure reikalavimai
 
 - Aktyvi **Azure prenumerata** ([sukurkite nemokamą paskyrą](https://azure.microsoft.com/free/))
 - Leidimai kurti išteklius jūsų prenumeratoje
-- **Contributor** rolė prenumeratoje arba išteklių grupėje
+- **Contributor** rolė prenumeratoje arba resursų grupėje
 
-### Žinių reikalavimai
+### Žinių prielaidos
 
-Tai yra **pažengusio lygio** pavyzdys. Turėtumėte:
-- Baigti [Paprasto Flask API pavyzdį](../../../../../examples/container-app/simple-flask-api) 
-- Turėti pagrindinį mikroservisų architektūros supratimą
-- Susipažinti su REST API ir HTTP
-- Suprasti konteinerių koncepcijas
+Tai yra **pažengusio lygio** pavyzdys. Jums reikėtų:
+- Baigti [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Pagrindinių žinių apie mikroservisų architektūrą
+- Susipažinimo su REST API ir HTTP
+- Supratimo apie konteinerių sąvokas
 
-**Naujokas Container Apps?** Pradėkite nuo [Paprasto Flask API pavyzdžio](../../../../../examples/container-app/simple-flask-api), kad išmoktumėte pagrindus.
+**Naujas Container Apps?** Pradėkite nuo [Simple Flask API example](../../../../../examples/container-app/simple-flask-api), kad išmoktumėte pagrindus.
 
-## Greitas startas (žingsnis po žingsnio)
+## Greitas pradėjimas (žingsnis po žingsnio)
 
-### 1 žingsnis: Klonuokite ir pereikite
+### 1 žingsnis: Nukopijuokite ir pereikite į katalogą
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Sėkmės patikrinimas**: Įsitikinkite, kad matote `azure.yaml`:
+**✓ Sėkmės patikra**: Patikrinkite, ar matote `azure.yaml`:
 ```bash
 ls
 # Tikimasi: README.md, azure.yaml, infra/, src/
 ```
 
-### 2 žingsnis: Autentifikuokitės su Azure
+### 2 žingsnis: Autentifikacija Azure
 
 ```bash
 azd auth login
 ```
 
-Tai atidaro jūsų naršyklę Azure autentifikacijai. Prisijunkite su savo Azure kredencialais.
+Atidarys jūsų naršyklę Azure autentifikacijai. Prisijunkite naudodami savo Azure paskyrą.
 
-**✓ Sėkmės patikrinimas**: Turėtumėte matyti:
+**✓ Sėkmės patikra**: Turėtumėte matyti:
 ```
 Logged in to Azure.
 ```
 
-### 3 žingsnis: Inicializuokite aplinką
+### 3 žingsnis: Inicijuokite aplinką
 
 ```bash
 azd init
 ```
 
-**Klausimai, kuriuos matysite**:
+Klausimai, kuriuos pamatysite:
 - **Aplinkos pavadinimas**: Įveskite trumpą pavadinimą (pvz., `microservices-dev`)
 - **Azure prenumerata**: Pasirinkite savo prenumeratą
-- **Azure vieta**: Pasirinkite regioną (pvz., `eastus`, `westeurope`)
+- **Azure regionas**: Pasirinkite regioną (pvz., `eastus`, `westeurope`)
 
-**✓ Sėkmės patikrinimas**: Turėtumėte matyti:
+**✓ Sėkmės patikra**: Turėtumėte matyti:
 ```
 SUCCESS: New project initialized!
 ```
 
-### 4 žingsnis: Įdiekite infrastruktūrą ir paslaugas
+### 4 žingsnis: Išdiekite infrastruktūrą ir paslaugas
 
 ```bash
 azd up
 ```
 
-**Kas vyksta** (trunka 8-12 minučių):
+**Kas vyksta** (užtrunka 8–12 minučių):
 1. Sukuriama Container Apps aplinka
-2. Sukuriama Application Insights stebėjimui
-3. Sukuriamas API Gateway konteineris (Node.js)
-4. Sukuriamas Product Service konteineris (Python)
-5. Abu konteineriai diegiami į Azure
-6. Konfigūruojamas tinklas ir sveikatos patikrinimai
+2. Sukuriamas Application Insights stebėjimui
+3. Kuriamas API vartų konteineris (Node.js)
+4. Kuriamas Produktų paslaugos konteineris (Python)
+5. Abu konteineriai išdiegti į Azure
+6. Suconfiguruojami tinklai ir sveikatos patikros
 7. Nustatomas stebėjimas ir žurnalavimas
 
-**✓ Sėkmės patikrinimas**: Turėtumėte matyti:
+**✓ Sėkmės patikra**: Turėtumėte matyti:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ Laikas**: 8-12 minučių
+**⏱️ Laikas**: 8–12 minučių
 
 ### 5 žingsnis: Išbandykite diegimą
 
 ```bash
-# Gauti šliuzo galinį tašką
+# Gauti vartų galinį tašką
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Patikrinti API šliuzo būklę
+# Patikrinti API vartų būklę
 curl $GATEWAY_URL/health
 
-# Tikėtinas rezultatas:
-# {"status":"sveikas","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
+# Tikėtinas išvestis:
+# {"status":"veikianti","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Išbandykite produktų paslaugą per gateway**:
+**Išbandykite produktų paslaugą per vartus**:
 ```bash
 # Išvardinti produktus
 curl $GATEWAY_URL/api/products
@@ -232,15 +223,15 @@ curl $GATEWAY_URL/api/products
 # ]
 ```
 
-**✓ Sėkmės patikrinimas**: Abu galiniai taškai grąžina JSON duomenis be klaidų.
+**✓ Sėkmės patikra**: Abu galiniai taškai grąžina JSON duomenis be klaidų.
 
 ---
 
-**🎉 Sveikiname!** Jūs įdiegėte mikroservisų architektūrą į Azure!
+**🎉 Sveikiname!** Jūs išdiegėte mikroservisų architektūrą Azure!
 
 ## Projekto struktūra
 
-Visi įgyvendinimo failai yra įtraukti—tai yra pilnas, veikiantis pavyzdys:
+Visi įgyvendinimo failai yra įtraukti—tai pilnas, veikiančios pavyzdys:
 
 ```
 microservices/
@@ -270,46 +261,46 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Ką daro kiekvienas komponentas:**
+**Ką atlieka kiekvienas komponentas:**
 
 **Infrastruktūra (infra/)**:
-- `main.bicep`: Orkestruoja visus Azure išteklius ir jų priklausomybes
+- `main.bicep`: Orkesruoja visus Azure išteklius ir jų priklausomybes
 - `core/container-apps-environment.bicep`: Sukuria Container Apps aplinką ir Azure Container Registry
 - `core/monitor.bicep`: Nustato Application Insights paskirstytam žurnalavimui
-- `app/*.bicep`: Individualių konteinerių programų apibrėžimai su skalavimu ir sveikatos patikrinimais
+- `app/*.bicep`: Atskirų container app apibrėžimai su masteliu ir sveikatos patikromis
 
-**API Gateway (src/api-gateway/)**:
+**API vartai (src/api-gateway/)**:
 - Viešai prieinama paslauga, nukreipianti užklausas į galines paslaugas
 - Įgyvendina žurnalavimą, klaidų tvarkymą ir užklausų persiuntimą
 - Demonstruoja paslaugų tarpusavio HTTP komunikaciją
 
-**Product Service (src/product-service/)**:
-- Vidinė paslauga su produktų katalogu (paprasta, be duomenų bazės)
-- REST API su sveikatos patikrinimais
-- Galinės mikroservisų paslaugos modelio pavyzdys
+**Produktų paslauga (src/product-service/)**:
+- Vidinė paslauga su produktų katalogu (atmintyje dėl paprastumo)
+- REST API su sveikatos patikromis
+- Pavyzdys backend mikroserviso šablono
 
 ## Paslaugų apžvalga
 
-### API Gateway (Node.js/Express)
+### API vartai (Node.js/Express)
 
 **Portas**: 8080  
-**Prieiga**: Vieša (išorinis įėjimas)  
-**Tikslas**: Nukreipia gaunamas užklausas į tinkamas galines paslaugas  
+**Prieiga**: Vieša (išorinis ingress)  
+**Paskirtis**: Nukreipia atvykusias užklausas į tinkamas galines paslaugas  
 
 **Galiniai taškai**:
 - `GET /` - Paslaugos informacija
-- `GET /health` - Sveikatos patikrinimo galinis taškas
-- `GET /api/products` - Persiuntimas į produktų paslaugą (visų sąrašas)
-- `GET /api/products/:id` - Persiuntimas į produktų paslaugą (pagal ID)
+- `GET /health` - Sveikatos patikros galinis taškas
+- `GET /api/products` - Persiunčiama į produktų paslaugą (visų sąrašas)
+- `GET /api/products/:id` - Persiunčiama į produktų paslaugą (gauti pagal ID)
 
-**Pagrindinės funkcijos**:
-- Užklausų nukreipimas su axios
+**Pagrindinės savybės**:
+- Užklausų maršrutizavimas su axios
 - Centralizuotas žurnalavimas
-- Klaidų tvarkymas ir laiko valdymas
-- Paslaugų atradimas per aplinkos kintamuosius
-- Application Insights integracija
+- Klaidos tvarkymas ir timeout valdymas
+- Paslaugų aptikimas per aplinkos kintamuosius
+- Integracija su Application Insights
 
-**Kodo akcentas** (`src/api-gateway/app.js`):
+**Kodo ištrauka** (`src/api-gateway/app.js`):
 ```javascript
 // Vidinė paslaugų komunikacija
 app.get('/api/products', async (req, res) => {
@@ -318,24 +309,24 @@ app.get('/api/products', async (req, res) => {
 });
 ```
 
-### Product Service (Python/Flask)
+### Produktų paslauga (Python/Flask)
 
 **Portas**: 8000  
-**Prieiga**: Tik vidinė (be išorinio įėjimo)  
-**Tikslas**: Valdo produktų katalogą su paprastais duomenimis  
+**Prieiga**: Tik vidinė (nereikia išorinio ingress)  
+**Paskirtis**: Tvarko produktų katalogą atmintyje  
 
 **Galiniai taškai**:
 - `GET /` - Paslaugos informacija
-- `GET /health` - Sveikatos patikrinimo galinis taškas
-- `GET /products` - Visų produktų sąrašas
+- `GET /health` - Sveikatos patikros galinis taškas
+- `GET /products` - Išvardina visus produktus
 - `GET /products/<id>` - Gauti produktą pagal ID
 
-**Pagrindinės funkcijos**:
+**Pagrindinės savybės**:
 - RESTful API su Flask
-- Paprastas produktų saugojimas (be duomenų bazės)
-- Sveikatos stebėjimas su zondais
+- Produktų saugykla atmintyje (paprasta, nereikia duomenų bazės)
+- Sveikatos stebėjimas su probe'ais
 - Struktūrizuotas žurnalavimas
-- Application Insights integracija
+- Integracija su Application Insights
 
 **Duomenų modelis**:
 ```python
@@ -348,99 +339,99 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Kodėl tik vidinė prieiga?**
-Produktų paslauga nėra viešai prieinama. Visos užklausos turi eiti per API Gateway, kuris užtikrina:
+**Kodėl tik vidinė?**
+Produktų paslauga nėra viešai prieinama. Visos užklausos turi eiti per API vartus, kurie suteikia:
 - Saugumą: Kontroliuojamas prieigos taškas
-- Lankstumą: Galima keisti galinę dalį nepaveikiant klientų
+- Lankstumą: Gali keisti backend be poveikio klientams
 - Stebėjimą: Centralizuotas užklausų žurnalavimas
 
 ## Paslaugų komunikacijos supratimas
 
 ### Kaip paslaugos bendrauja tarpusavyje
 
-Šiame pavyzdyje API Gateway bendrauja su Product Service naudodamas **vidinius HTTP skambučius**:
+Šiame pavyzdyje API vartai bendrauja su Produktų paslauga naudodami **vidines HTTP užklausas**:
 
 ```javascript
-// API Gateway (src/api-gateway/app.js)
+// API vartai (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Atlikti vidinį HTTP užklausą
+// Atlikti vidinę HTTP užklausą
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
 **Pagrindiniai punktai**:
 
-1. **DNS pagrindu veikiantis atradimas**: Container Apps automatiškai suteikia DNS vidinėms paslaugoms
-   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
+1. **DNS pagrindu aptikimas**: Container Apps automatiškai teikia DNS vidinėms paslaugoms
+   - Produktų paslaugos FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
    - Supaprastinta kaip: `http://product-service` (Container Apps tai išsprendžia)
 
-2. **Be viešos prieigos**: Product Service turi `external: false` Bicep faile
+2. **Nėra viešo atvėrimo**: Produktų paslauga turi `external: false` Bicep faile
    - Prieinama tik Container Apps aplinkoje
    - Negalima pasiekti iš interneto
 
-3. **Aplinkos kintamieji**: Paslaugų URL įterpiami diegimo metu
-   - Bicep perduoda vidinį FQDN į gateway
-   - Nėra kietai užkoduotų URL programos kode
+3. **Aplinkos kintamieji**: Paslaugų URL įdedami diegimo metu
+   - Bicep perduoda vidinį FQDN į vartus
+   - Programinėje įrangoje nėra įkoduotų URL
 
-**Analogija**: Tai kaip biuro kambariai. API Gateway yra registratūra (viešai prieinama), o Product Service yra biuro kambarys (tik vidinis). Lankytojai turi eiti per registratūrą, kad pasiektų bet kurį kambarį.
+**Analogiška**: Galvokite apie tai kaip apie biuro kambarius. API vartai yra registratūra (viešas taškas), o Produktų paslauga yra biuro kambarys (tik vidinė). Apsilankytojai turi eiti per registratūrą, kad pasiektų bet kurį kambarį.
 
 ## Diegimo parinktys
 
 ### Pilnas diegimas (rekomenduojama)
 
 ```bash
-# Įdiegti infrastruktūrą ir abi paslaugas
+# Diegti infrastruktūrą ir abi paslaugas
 azd up
 ```
 
-Tai įdiegia:
+Tai diegia:
 1. Container Apps aplinką
 2. Application Insights
 3. Container Registry
-4. API Gateway konteinerį
-5. Product Service konteinerį
+4. API vartų konteinerį
+5. Produktų paslaugos konteinerį
 
-**Laikas**: 8-12 minučių
+**Laikas**: 8–12 minučių
 
-### Diegti atskirą paslaugą
+### Išdiegti atskirą paslaugą
 
 ```bash
-# Įdiegti tik vieną paslaugą (po pradinio azd up)
+# Diegti tik vieną paslaugą (po pradinio azd up)
 azd deploy api-gateway
 
-# Arba įdiegti produkto paslaugą
+# Arba diegti produktų paslaugą
 azd deploy product-service
 ```
 
-**Naudojimo atvejis**: Kai atnaujinote kodą vienoje paslaugoje ir norite iš naujo įdiegti tik tą paslaugą.
+**Naudojimo atvejis**: Kai atnaujinote kodo vienoje paslaugoje ir norite perkrauti tik tą paslaugą.
 
-### Konfigūracijos atnaujinimas
+### Atnaujinti konfigūraciją
 
 ```bash
-# Pakeisti mastelio parametrus
+# Pakeisti skalavimo parametrus
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Perdiegti su nauja konfigūracija
+# Iš naujo įdiegti su nauja konfigūracija
 azd up
 ```
 
 ## Konfigūracija
 
-### Skalavimo konfigūracija
+### Mastelio keitimo konfigūracija
 
-Abi paslaugos yra konfigūruotos su HTTP pagrindu veikiančiu automatinio skalavimo mechanizmu jų Bicep failuose:
+Abi paslaugos yra sukonfiguruotos su HTTP pagrindu veikiančiu automatinio mastelio keitimo mechanizmu savo Bicep failuose:
 
-**API Gateway**:
-- Minimali replikų skaičius: 2 (visada bent 2 dėl prieinamumo)
-- Maksimali replikų skaičius: 20
-- Skalavimo trigeris: 50 vienu metu vykdomų užklausų per repliką
+**API vartai**:
+- Min replikų: 2 (visada bent 2 dėl prieinamumo)
+- Max replikų: 20
+- Mastelio trigeris: 50 vienu metu veikiančių užklausų vienai replikai
 
-**Product Service**:
-- Minimali replikų skaičius: 1 (gali skalauti iki nulio, jei reikia)
-- Maksimali replikų skaičius: 10
-- Skalavimo trigeris: 100 vienu metu vykdomų užklausų per repliką
+**Produktų paslauga**:
+- Min replikų: 1 (gali masteliuotis iki nulio, jei reikia)
+- Max replikų: 10
+- Mastelio trigeris: 100 vienu metu veikiančių užklausų vienai replikai
 
-**Skalavimo pritaikymas** (faile `infra/app/*.bicep`):
+**Tinkinkite mastelį** (faile `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -460,19 +451,19 @@ scale: {
 
 ### Išteklių paskirstymas
 
-**API Gateway**:
+**API vartai**:
 - CPU: 1.0 vCPU
 - Atmintis: 2 GiB
 - Priežastis: Tvarko visą išorinį srautą
 
-**Product Service**:
+**Produktų paslauga**:
 - CPU: 0.5 vCPU
 - Atmintis: 1 GiB
-- Priežastis: Lengvi operacijos su paprastais duomenimis
+- Priežastis: Lengvos atminties operacijos
 
-### Sveikatos patikrinimai
+### Sveikatos patikros
 
-Abi paslaugos apima gyvybingumo ir pasirengimo zondus:
+Abi paslaugos turi liveness ir readiness probe'us:
 
 ```bicep
 probes: [
@@ -498,25 +489,28 @@ probes: [
 ```
 
 **Ką tai reiškia**:
-- **Gyvybingumas**: Jei sveikatos patikrinimas nepavyksta, Container Apps iš naujo paleidžia konteinerį
-- **Pasirengimas**: Jei nepasirengęs, Container Apps sustabdo srauto nukreipimą į tą repliką
+- **Liveness**: Jei sveikatos patikra nepavyksta, Container Apps perkrauna konteinerį
+- **Readiness**: Jei nėra paruošta, Container Apps nustoja nukreipti srautą į tą repliką
 
-## Stebėjimas ir stebėjimo galimybės
+
+
+## Stebėjimas ir matomumas
 
 ### Peržiūrėti paslaugų žurnalus
 
 ```bash
-# Transliuoti žurnalus iš API Gateway
-azd logs api-gateway --follow
+# Peržiūrėkite žurnalus naudodami azd monitor
+azd monitor --logs
 
-# Peržiūrėti naujausius produktų paslaugos žurnalus
-azd logs product-service --tail 100
+# Arba naudokite Azure CLI konkrečioms Container Apps:
+# Transliuokite žurnalus iš API Gateway
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Peržiūrėti visus abiejų paslaugų žurnalus
-azd logs --follow
+# Peržiūrėkite naujausius produkto paslaugos žurnalus
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**Tikėtinas rezultatas**:
+**Tikėtinas išvestis**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -526,7 +520,7 @@ azd logs --follow
 
 ### Application Insights užklausos
 
-Prisijunkite prie Application Insights Azure portale, tada vykdykite šias užklausas:
+Atidarykite Application Insights Azure portale, tada paleiskite šias užklausas:
 
 **Rasti lėtas užklausas**:
 ```kusto
@@ -537,7 +531,7 @@ requests
 | order by count_ desc
 ```
 
-**Sekti paslaugų tarpusavio skambučius**:
+**Sezono paslaugų tarpusavio skambučius**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -554,7 +548,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Užklausų apimtis laikui bėgant**:
+**Užklausų kiekis per laiką**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -562,87 +556,121 @@ requests
 | render timechart
 ```
 
-### Prieiga prie stebėjimo skydelio
+### Prieiga prie stebėjimo informacijos skydelio
 
 ```bash
-# Gauti „Application Insights“ informaciją
+# Gauti Application Insights informaciją
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Atidaryti „Azure Portal“ stebėjimą
+# Atidaryti Azure Portal stebėjimą
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Tiesioginiai metrikos duomenys
+### Gyvi metrika
 
 1. Eikite į Application Insights Azure portale
-2. Spustelėkite „Live Metrics“
+2. Spustelėkite "Live Metrics"
 3. Matykite realaus laiko užklausas, klaidas ir našumą
-4. Testuokite vykdydami: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+4. Išbandykite paleisdami: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Praktiniai pratimai
+## Praktiniai užsiėmimai
 
-[Pastaba: Žr. visus pratimus aukščiau skyriuje „Praktiniai pratimai“, kad gautumėte išsamius žingsnis po žingsnio pratimus, įskaitant diegimo patikrinimą, duomenų modifikavimą, automatinio skalavimo testus, klaidų tvarkymą ir trečios paslaugos pridėjimą.]
+[Pastaba: Žr. pilnus užsiėmimus aukščiau skiltyje "Practical Exercises" dėl detalių žingsnis po žingsnio pratimų, įskaitant diegimo patikrinimą, duomenų modifikavimą, automatinio mastelio testus, klaidų tvarkymą ir trečios paslaugos pridėjimą.]
 
-## Kainų analizė
+## Sąnaudų analizė
 
-### Numatomos mėnesinės išlaidos (šiam 2 paslaugų pavyzdžiui)
+### Apskaičiuotos mėnesinės sąnaudos (už šį 2 paslaugų pavyzdį)
 
-| Išteklius | Konfigūracija | Numatomos išlaidos |
+| Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
-| API Gateway | 2-20 replikų, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 replikų, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Pagrind
-Mokymuisi/testavimui apsvarstykite:
-- Naudokite nemokamus „Azure“ kreditus (pirmas 30 dienų)
-- Laikykitės minimalaus replikų skaičiaus
-- Ištrinkite po testavimo (kad nebūtų nuolatinių išlaidų)
+| API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Basic tier | $5 |
+| Application Insights | 1-2 GB/month | $5-10 |
+| Log Analytics | 1 GB/month | $3 |
+| **Total** | | **$58-243/month** |
+
+**Sąnaudų suskirstymas pagal naudojimą**:
+- **Mažas srautas** (testavimui/mokymuisi): ~$60/mėn.
+- **Vidutinis srautas** (mažai produkcijai): ~$120/mėn.
+- **Didelis srautas** (turtingi periodai): ~$240/mėn.
+
+### Patarimai optimizuoti kaštus
+
+1. **Mastelį nustatykite iki nulio vystymuisi**:
+   ```bicep
+   scale: {
+     minReplicas: 0  // Save $30-40/month when not in use
+     maxReplicas: 10
+   }
+   ```
+
+2. **Naudokite Consumption plan`ą Cosmos DB** (kai jį pridėsite):
+   - Mokėkite tik už tai, ką naudojate
+   - Nėra minimalaus mokesčio
+
+3. **Nustatykite Application Insights samplingą**:
+   ```javascript
+   appInsights.defaultClient.config.samplingPercentage = 50; // Atrinkti 50 % užklausų
+   ```
+
+4. **Išvalykite, kai nenaudojate**:
+   ```bash
+   azd down
+   ```
+
+### Nemokamos pakopos variantai
+For learning/testing, consider:
+- Use Azure free credits (first 30 days)
+- Keep to minimum replicas
+- Delete after testing (no ongoing charges)
 
 ---
 
-## Valymas
+## Cleanup
 
-Kad išvengtumėte nuolatinių išlaidų, ištrinkite visus resursus:
+To avoid ongoing charges, delete all resources:
 
 ```bash
 azd down --force --purge
 ```
 
-**Patvirtinimo užklausa**:
+**Confirmation Prompt**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Įveskite `y`, kad patvirtintumėte.
+Type `y` to confirm.
 
-**Kas bus ištrinta**:
-- „Container Apps“ aplinka
-- Abi „Container Apps“ (gateway ir produktų paslauga)
-- „Container Registry“
-- „Application Insights“
-- „Log Analytics Workspace“
-- Resursų grupė
+**What Gets Deleted**:
+- Container Apps Environment
+- Both Container Apps (gateway & product service)
+- Container Registry
+- Application Insights
+- Log Analytics Workspace
+- Resource Group
 
-**✓ Patikrinkite valymą**:
+**✓ Verify Cleanup**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Turėtų grąžinti tuščią rezultatą.
+Should return empty.
 
 ---
 
-## Plėtros vadovas: nuo 2 iki 5+ paslaugų
+## Expansion Guide: From 2 to 5+ Services
 
-Kai įvaldysite šią 2 paslaugų architektūrą, štai kaip ją išplėsti:
+Once you've mastered this 2-service architecture, here's how to expand:
 
-### 1 etapas: Pridėkite duomenų bazės išsaugojimą (kitas žingsnis)
+### Phase 1: Add Database Persistence (Next Step)
 
-**Pridėkite „Cosmos DB“ produktų paslaugai**:
+**Add Cosmos DB for Product Service**:
 
-1. Sukurkite `infra/core/cosmos.bicep`:
+1. Create `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -655,140 +683,140 @@ Kai įvaldysite šią 2 paslaugų architektūrą, štai kaip ją išplėsti:
    }
    ```
 
-2. Atnaujinkite produktų paslaugą, kad naudotų „Cosmos DB“ vietoj atminties duomenų
+2. Update product service to use Cosmos DB instead of in-memory data
 
-3. Numatoma papildoma kaina: ~25 USD/mėn. (serverless)
+3. Estimated additional cost: ~$25/month (serverless)
 
-### 2 etapas: Pridėkite trečią paslaugą (užsakymų valdymas)
+### Phase 2: Add Third Service (Order Management)
 
-**Sukurkite užsakymų paslaugą**:
+**Create Order Service**:
 
-1. Naujas aplankas: `src/order-service/` (Python/Node.js/C#)
-2. Naujas „Bicep“ failas: `infra/app/order-service.bicep`
-3. Atnaujinkite API Gateway, kad nukreiptų `/api/orders`
-4. Pridėkite „Azure SQL Database“ užsakymų išsaugojimui
+1. New folder: `src/order-service/` (Python/Node.js/C#)
+2. New Bicep: `infra/app/order-service.bicep`
+3. Update API Gateway to route `/api/orders`
+4. Add Azure SQL Database for order persistence
 
-**Architektūra tampa**:
+**Architecture becomes**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### 3 etapas: Pridėkite asinchroninį ryšį (Service Bus)
+### Phase 3: Add Async Communication (Service Bus)
 
-**Įgyvendinkite įvykių valdomą architektūrą**:
+**Implement Event-Driven Architecture**:
 
-1. Pridėkite „Azure Service Bus“: `infra/core/servicebus.bicep`
-2. Produktų paslauga skelbia „ProductCreated“ įvykius
-3. Užsakymų paslauga prenumeruoja produktų įvykius
-4. Pridėkite pranešimų paslaugą įvykiams apdoroti
+1. Add Azure Service Bus: `infra/core/servicebus.bicep`
+2. Product Service publishes "ProductCreated" events
+3. Order Service subscribes to product events
+4. Add Notification Service to process events
 
-**Modelis**: Užklausa/atsakymas (HTTP) + įvykių valdymas (Service Bus)
+**Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
-### 4 etapas: Pridėkite vartotojų autentifikavimą
+### Phase 4: Add User Authentication
 
-**Įgyvendinkite vartotojų paslaugą**:
+**Implement User Service**:
 
-1. Sukurkite `src/user-service/` (Go/Node.js)
-2. Pridėkite „Azure AD B2C“ arba pasirinktą JWT autentifikavimą
-3. API Gateway tikrina tokenus
-4. Paslaugos tikrina vartotojų teises
+1. Create `src/user-service/` (Go/Node.js)
+2. Add Azure AD B2C or custom JWT authentication
+3. API Gateway validates tokens
+4. Services check user permissions
 
-### 5 etapas: Paruošimas gamybai
+### Phase 5: Production Readiness
 
-**Pridėkite šiuos komponentus**:
-- „Azure Front Door“ (globalus apkrovos balansavimas)
-- „Azure Key Vault“ (slaptų duomenų valdymas)
-- „Azure Monitor Workbooks“ (individualūs prietaisų skydeliai)
-- CI/CD pipeline (GitHub Actions)
-- Blue-Green diegimai
-- Valdomos tapatybės visoms paslaugoms
+**Add These Components**:
+- Azure Front Door (global load balancing)
+- Azure Key Vault (secret management)
+- Azure Monitor Workbooks (custom dashboards)
+- CI/CD Pipeline (GitHub Actions)
+- Blue-Green Deployments
+- Managed Identity for all services
 
-**Pilnos gamybos architektūros kaina**: ~300–1,400 USD/mėn.
+**Full Production Architecture Cost**: ~$300-1,400/month
 
 ---
 
-## Sužinokite daugiau
+## Learn More
 
-### Susijusi dokumentacija
-- [Azure Container Apps dokumentacija](https://learn.microsoft.com/azure/container-apps/)
-- [Mikropaslaugų architektūros vadovas](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights paskirstytam sekimui](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+### Related Documentation
+- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
+- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Kiti šio kurso žingsniai
-- ← Ankstesnis: [Paprastas Flask API](../../../../../examples/container-app/simple-flask-api) - Pradedančiųjų vieno konteinerio pavyzdys
-- → Kitas: [AI integracijos vadovas](../../../../../examples/docs/ai-foundry) - Pridėkite AI galimybes
-- 🏠 [Kurso pradžia](../../README.md)
+### Next Steps in This Course
+- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Beginner single-container example
+- → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Add AI capabilities
+- 🏠 [Course Home](../../README.md)
 
-### Palyginimas: kada naudoti ką
+### Comparison: When to Use What
 
-**Vieno konteinerio programa** (Paprasto Flask API pavyzdys):
-- ✅ Paprastos programos
-- ✅ Monolitinė architektūra
-- ✅ Greitas diegimas
-- ❌ Ribotas mastelio keitimas
-- **Kaina**: ~15–50 USD/mėn.
+**Single Container App** (Simple Flask API example):
+- ✅ Simple applications
+- ✅ Monolithic architecture
+- ✅ Fast to deploy
+- ❌ Limited scalability
+- **Cost**: ~$15-50/month
 
-**Mikropaslaugos** (Šis pavyzdys):
-- ✅ Sudėtingos programos
-- ✅ Nepriklausomas paslaugų mastelio keitimas
-- ✅ Komandų autonomija (skirtingos paslaugos, skirtingos komandos)
-- ❌ Sudėtingesnis valdymas
-- **Kaina**: ~60–250 USD/mėn.
+**Microservices** (This example):
+- ✅ Complex applications
+- ✅ Independent scaling per service
+- ✅ Team autonomy (different services, different teams)
+- ❌ More complex to manage
+- **Cost**: ~$60-250/month
 
 **Kubernetes (AKS)**:
-- ✅ Maksimalus valdymas ir lankstumas
-- ✅ Multi-cloud perkeliamumas
-- ✅ Pažangus tinklų kūrimas
-- ❌ Reikalingos Kubernetes žinios
-- **Kaina**: ~150–500 USD/mėn. minimaliai
+- ✅ Maximum control and flexibility
+- ✅ Multi-cloud portability
+- ✅ Advanced networking
+- ❌ Requires Kubernetes expertise
+- **Cost**: ~$150-500/month minimum
 
-**Rekomendacija**: Pradėkite nuo „Container Apps“ (šis pavyzdys), pereikite prie AKS tik tada, jei jums reikia specifinių Kubernetes funkcijų.
+**Recommendation**: Start with Container Apps (this example), move to AKS only if you need Kubernetes-specific features.
 
 ---
 
-## Dažniausiai užduodami klausimai
+## Frequently Asked Questions
 
-**K: Kodėl tik 2 paslaugos, o ne 5+?**  
-A: Mokymosi progresija. Įvaldykite pagrindus (paslaugų komunikacija, stebėjimas, mastelio keitimas) su paprastu pavyzdžiu prieš pridėdami sudėtingumą. Šioje pamokoje išmokti modeliai taikomi ir 100 paslaugų architektūroms.
+**Q: Why only 2 services instead of 5+?**  
+A: Educational progression. Master the fundamentals (service communication, monitoring, scaling) with a simple example before adding complexity. The patterns you learn here apply to 100-service architectures.
 
-**K: Ar galiu pats pridėti daugiau paslaugų?**  
-A: Žinoma! Sekite aukščiau pateiktą plėtros vadovą. Kiekviena nauja paslauga seka tą patį modelį: sukurkite src aplanką, sukurkite Bicep failą, atnaujinkite azure.yaml, diekite.
+**Q: Can I add more services myself?**  
+A: Absolutely! Follow the expansion guide above. Each new service follows the same pattern: create src folder, create Bicep file, update azure.yaml, deploy.
 
-**K: Ar tai paruošta gamybai?**  
-A: Tai tvirta bazė. Gamybai pridėkite: valdomą tapatybę, Key Vault, nuolatines duomenų bazes, CI/CD pipeline, stebėjimo įspėjimus ir atsarginių kopijų strategiją.
+**Q: Is this production-ready?**  
+A: It's a solid foundation. For production, add: managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, and backup strategy.
 
-**K: Kodėl nenaudoti Dapr ar kitų paslaugų tinklų?**  
-A: Supaprastinkite mokymuisi. Kai suprasite natūralų „Container Apps“ tinklų kūrimą, galėsite pridėti Dapr sudėtingesniems scenarijams.
+**Q: Why not use Dapr or other service mesh?**  
+A: Keep it simple for learning. Once you understand native Container Apps networking, you can layer on Dapr for advanced scenarios.
 
-**K: Kaip derinti lokaliai?**  
-A: Paleiskite paslaugas lokaliai su Docker:
+**Q: How do I debug locally?**  
+A: Run services locally with Docker:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**K: Ar galiu naudoti skirtingas programavimo kalbas?**  
-A: Taip! Šiame pavyzdyje parodyta Node.js (gateway) + Python (produktų paslauga). Galite maišyti bet kokias kalbas, kurios veikia konteineriuose.
+**Q: Can I use different programming languages?**  
+A: Yes! This example shows Node.js (gateway) + Python (product service). You can mix any languages that run in containers.
 
-**K: Ką daryti, jei neturiu „Azure“ kreditų?**  
-A: Naudokite „Azure“ nemokamą planą (pirmas 30 dienų su naujomis paskyromis) arba diekite trumpiems testavimo laikotarpiams ir ištrinkite iškart.
+**Q: What if I don't have Azure credits?**  
+A: Use Azure free tier (first 30 days with new accounts) or deploy for short testing periods and delete immediately.
 
 ---
 
-> **🎓 Mokymosi kelio santrauka**: Išmokote diegti kelių paslaugų architektūrą su automatiniu mastelio keitimu, vidiniu tinklų kūrimu, centralizuotu stebėjimu ir gamybai paruoštais modeliais. Ši bazė paruošia jus sudėtingoms paskirstytoms sistemoms ir įmonių mikropaslaugų architektūroms.
+> **🎓 Learning Path Summary**: You've learned to deploy a multi-service architecture with automatic scaling, internal networking, centralized monitoring, and production-ready patterns. This foundation prepares you for complex distributed systems and enterprise microservices architectures.
 
-**📚 Kurso navigacija:**
-- ← Ankstesnis: [Paprastas Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Kitas: [Duomenų bazės integracijos pavyzdys](../../../../../examples/database-app)
-- 🏠 [Kurso pradžia](../../README.md)
-- 📖 [Container Apps geriausios praktikos](../../docs/deployment/deployment-guide.md)
+**📚 Course Navigation:**
+- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
+- → Next: [Database Integration Example](../../../../../examples/database-app)
+- 🏠 [Course Home](../../../README.md)
+- 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+Atsakomybės apribojimas:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą Co-op Translator (https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Svarbios informacijos atveju rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kylančias dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

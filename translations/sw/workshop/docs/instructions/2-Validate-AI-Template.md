@@ -1,241 +1,235 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-25T02:08:32+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "sw"
-}
--->
-# 2. Thibitisha Kiolezo
+# 2. Thibitisha Templati
 
-!!! tip "MWISHO WA MODULI HII UTAWEZA"
+!!! tip "MWISHONI WA MODULI HII UTAWEZA"
 
-    - [ ] Kuchambua Muundo wa Suluhisho la AI
-    - [ ] Kuelewa Mtiririko wa Uwekaji wa AZD
-    - [ ] Kutumia GitHub Copilot kupata msaada kuhusu matumizi ya AZD
-    - [ ] **Maabara ya 2:** Weka & Thibitisha kiolezo cha AI Agents
+    - [ ] Changanua Mimarisho ya Suluhisho la AI
+    - [ ] Elewa Mchakato wa Ueneaji wa AZD
+    - [ ] Tumia GitHub Copilot kupata msaada katika matumizi ya AZD
+    - [ ] **Maabara 2:** Tuma & Thibitisha templeti ya AI Agents
 
 ---
 
+
 ## 1. Utangulizi
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) au `azd` ni zana ya amri ya wazi inayorahisisha mtiririko wa kazi wa msanidi programu wakati wa kujenga na kuweka programu kwenye Azure.
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) ni hifadhi zilizo sanifu zinazojumuisha msimbo wa programu ya mfano, mali za _miundombinu kama msimbo_, na faili za usanidi za `azd` kwa muundo wa suluhisho lenye mshikamano. Kuweka miundombinu kunakuwa rahisi kama amri ya `azd provision` - wakati kutumia `azd up` hukuruhusu kuweka miundombinu **na** kuweka programu yako kwa hatua moja!
+[Violezo vya AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _miundombinu-kama-msimbo_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
 
-Kwa hivyo, kuanza mchakato wako wa maendeleo ya programu kunaweza kuwa rahisi kama kupata _AZD Starter template_ inayokaribia mahitaji ya programu na miundombinu yako - kisha kubadilisha hifadhi ili kufaa mahitaji ya hali yako.
+As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
-Kabla ya kuanza, hakikisha umeweka Azure Developer CLI.
+Before we begin, let's make sure you have the Azure Developer CLI installed.
 
-1. Fungua terminal ya VS Code na andika amri hii:
+1. Open a VS Code terminal and type this command:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. Unapaswa kuona kitu kama hiki!
+1. You should see something like this!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**Sasa uko tayari kuchagua na kuweka kiolezo kwa azd**
+**You are now ready to select and deploy a template with azd**
 
 ---
 
-## 2. Uchaguzi wa Kiolezo
+## 2. Uchaguzi wa Templeti
 
-Jukwaa la Azure AI Foundry linakuja na [seti ya violezo vya AZD vilivyopendekezwa](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) vinavyoshughulikia hali maarufu za suluhisho kama _atomatiki ya mtiririko wa kazi wa mawakala wengi_ na _usindikaji wa maudhui ya njia nyingi_. Unaweza pia kugundua violezo hivi kwa kutembelea portal ya Azure AI Foundry.
+The Microsoft Foundry platform comes with a [seti ya violezo vya AZD vinavyopendekezwa](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
-1. Tembelea [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Ingia kwenye portal ya Azure AI Foundry unapoulizwa - utaona kitu kama hiki.
+1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Pick](../../../../../translated_images/sw/01-pick-template.60d2d5fff5ebc374.webp)
+![Chagua](../../../../../translated_images/sw/01-pick-template.60d2d5fff5ebc374.webp)
 
-Chaguo za **Msingi** ni violezo vyako vya kuanzia:
 
-1. [ ] [Anza na AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) ambayo huweka programu ya mazungumzo ya msingi _na data yako_ kwenye Azure Container Apps. Tumia hii kuchunguza hali ya msingi ya chatbot ya AI.
-1. [X] [Anza na AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) ambayo pia huweka AI Agent ya kawaida (na Huduma ya Azure AI Agent). Tumia hii kufahamiana na suluhisho za AI za mawakala zinazohusisha zana na mifano.
+The **Basic** options are your starter templates:
 
-Tembelea kiungo cha pili kwenye tabo mpya ya kivinjari (au bonyeza `Open in GitHub` kwa kadi inayohusiana). Unapaswa kuona hifadhi ya kiolezo hiki cha AZD. Chukua dakika kuchunguza README. Muundo wa programu unaonekana kama huu:
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _kwa data yako_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
-![Arch](../../../../../translated_images/sw/architecture.8cec470ec15c65c7.webp)
+Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+
+![Mimaro](../../../../../translated_images/sw/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## 3. Uanzishaji wa Kiolezo
+## 3. Uanzishaji wa Templeti
 
-Hebu jaribu kuweka kiolezo hiki na kuhakikisha kuwa ni halali. Tutafuata miongozo katika sehemu ya [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. Bonyeza [kiungo hiki](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - thibitisha hatua ya chaguo-msingi ya `Create codespace`
-1. Hii inafungua tabo mpya ya kivinjari - subiri kikao cha GitHub Codespaces kikamilishe kupakia
-1. Fungua terminal ya VS Code ndani ya Codespaces - andika amri ifuatayo:
+1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
+1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
+1. Open the VS Code terminal in Codespaces - type the following command:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Kamilisha hatua za mtiririko ambazo hii itasababisha:
+Complete the workflow steps that this will trigger:
 
-1. Utaulizwa kuingia kwenye Azure - fuata maelekezo ili kuthibitisha
-1. Ingiza jina la kipekee la mazingira yako - kwa mfano, nilitumia `nitya-mshack-azd`
-1. Hii itaunda folda `.azure/` - utaona folda ndogo yenye jina la mazingira
-1. Utaulizwa kuchagua jina la usajili - chagua chaguo-msingi
-1. Utaulizwa eneo - tumia `East US 2`
+1. You will be prompted to log into Azure - follow instructions to authenticate
+1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
+1. This  will create a `.azure/` folder - you will see a subfolder with the env name
+1. You will be prompted to select a subscription name - select the default
+1. You will be prompted for a location - use `East US 2`
 
-Sasa, subiri mchakato wa kuweka miundombinu ukamilike. **Hii inachukua dakika 10-15**
+Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
-1. Ukimaliza, terminal yako itaonyesha ujumbe wa MAFANIKIO kama huu:
+1. When done, your console will show a SUCCESS message like this:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
+1. Your Azure Portal will now have a provisioned resource group with that env name:
 
-1. Portal yako ya Azure sasa itakuwa na kikundi cha rasilimali kilichowekwa na jina la mazingira hayo:
+      ![Miundombinu](../../../../../translated_images/sw/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-      ![Infra](../../../../../translated_images/sw/02-provisioned-infra.46c706b14f56e0bf.webp)
-
-1. **Sasa uko tayari kuthibitisha miundombinu na programu iliyowekwa.**
-
----
-
-## 4. Uthibitishaji wa Kiolezo
-
-1. Tembelea ukurasa wa [Resource Groups](https://portal.azure.com/#browse/resourcegroups) kwenye Portal ya Azure - ingia unapoulizwa
-1. Bonyeza RG kwa jina la mazingira yako - utaona ukurasa hapo juu
-
-      - bonyeza rasilimali ya Azure Container Apps
-      - bonyeza URL ya Programu katika sehemu ya _Essentials_ (juu kulia)
-
-1. Unapaswa kuona UI ya mbele ya programu iliyohifadhiwa kama hii:
-
-   ![App](../../../../../translated_images/sw/03-test-application.471910da12c3038e.webp)
-
-1. Jaribu kuuliza maswali kadhaa ya [mfano](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
-
-      1. Uliza: ```What is the capital of France?``` 
-      1. Uliza: ```What's the best tent under $200 for two people, and what features does it include?```
-
-1. Unapaswa kupata majibu yanayofanana na yale yaliyoonyeshwa hapa chini. _Lakini hii inafanyaje kazi?_ 
-
-      ![App](../../../../../translated_images/sw/03-test-question.521c1e863cbaddb6.webp)
+1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
-## 5. Uthibitishaji wa Mawakala
+## 4. Uthibitishaji wa Templati
 
-Azure Container App huweka endpoint inayounganisha na AI Agent iliyowekwa katika mradi wa Azure AI Foundry kwa kiolezo hiki. Hebu tuangalie maana ya hili.
+1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Click on RG for your environment name - you see the page above
 
-1. Rudi kwenye ukurasa wa _Overview_ wa Portal ya Azure kwa kikundi chako cha rasilimali
+      - click on the Azure Container Apps resource
+      - click on the Application Url in the _Essentials_ section (kulia juu)
 
-1. Bonyeza rasilimali ya `Azure AI Foundry` katika orodha hiyo
+1. You should see a hosted application front-end UI like this:
 
-1. Unapaswa kuona hii. Bonyeza kitufe cha `Go to Azure AI Foundry Portal`. 
+   ![Programu](../../../../../translated_images/sw/03-test-application.471910da12c3038e.webp)
+
+1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+
+      1. Ask: ```What is the capital of France?``` 
+      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
+
+1. You should get answers similar to what is shown below. _But how does this work?_ 
+
+      ![Programu](../../../../../translated_images/sw/03-test-question.521c1e863cbaddb6.webp)
+
+---
+
+## 5.  Uthibitishaji wa Wakala
+
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
+
+1. Return to the Azure Portal _Overview_ page for your resource group
+
+1. Click on the `Microsoft Foundry` resource in that list
+
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](../../../../../translated_images/sw/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. Unapaswa kuona ukurasa wa Mradi wa Foundry kwa programu yako ya AI
-   ![Project](../../../../../translated_images/sw/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. You should see the Foundry Project page for your AI application
+   ![Mradi](../../../../../translated_images/sw/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Bonyeza `Agents` - utaona Mawakala wa chaguo-msingi waliowekwa katika mradi wako
-   ![Agents](../../../../../translated_images/sw/06-visit-agents.bccb263f77b00a09.webp)
+1. Click on `Agents` - you see the default Agent provisioned in your project
+   ![Wakala](../../../../../translated_images/sw/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Chagua - na utaona maelezo ya Mawakala. Kumbuka yafuatayo:
+1. Select it - and you see the Agent details. Note the following:
 
-      - Mawakala hutumia File Search kwa chaguo-msingi (daima)
-      - `Knowledge` ya Mawakala inaonyesha ina faili 32 zilizopakiwa (kwa utafutaji wa faili)
-      ![Agents](../../../../../translated_images/sw/07-view-agent-details.0e049f37f61eae62.webp)
+      - The agent uses File Search by default (always)
+      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
+      ![Wakala](../../../../../translated_images/sw/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Tafuta chaguo la `Data+indexes` katika menyu ya kushoto na bonyeza kwa maelezo.
+1. Look for the `Data+indexes` option in the left menu and click for details. 
 
-      - Unapaswa kuona faili 32 za data zilizopakiwa kwa maarifa.
-      - Hizi zitahusiana na faili 12 za wateja na faili 20 za bidhaa chini ya `src/files` 
-      ![Data](../../../../../translated_images/sw/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - You should see the 32 data files uploaded for knowledge.
+      - These will correspond to the 12 customer files and 20 product files under `src/files` 
+      ![Taarifa](../../../../../translated_images/sw/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**Umehakiki operesheni ya Mawakala!** 
+**Umehakikisha kuwa Wakala unafanya kazi!** 
 
-1. Majibu ya Mawakala yanategemea maarifa katika faili hizo. 
-1. Sasa unaweza kuuliza maswali yanayohusiana na data hiyo, na kupata majibu yanayofaa.
-1. Mfano: `customer_info_10.json` inaelezea ununuzi 3 uliofanywa na "Amanda Perez"
+1. The agent responses are grounded in the knowledge in those files. 
+1. You can now ask questions related to that data, and get grounded responses.
+1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
-Rudi kwenye tabo ya kivinjari yenye endpoint ya Container App na uliza: `What products does Amanda Perez own?`. Unapaswa kuona kitu kama hiki:
+Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
-![Data](../../../../../translated_images/sw/09-ask-in-aca.4102297fc465a4d5.webp)
+![Taarifa](../../../../../translated_images/sw/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. Uwanja wa Mawakala
+## 6. Uwanja wa Majaribio wa Wakala
 
-Hebu tujenge uelewa zaidi wa uwezo wa Azure AI Foundry, kwa kujaribu Mawakala katika Uwanja wa Mawakala.
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
-1. Rudi kwenye ukurasa wa `Agents` katika Azure AI Foundry - chagua wakala wa chaguo-msingi
-1. Bonyeza chaguo la `Try in Playground` - unapaswa kupata UI ya Uwanja kama huu
-1. Uliza swali lile lile: `What products does Amanda Perez own?`
+1. Return to the `Agents` page in Microsoft Foundry - select the default agent
+1. Click the `Try in Playground` option - you should get a Playground UI like this
+1. Ask the same question: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/sw/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Taarifa](../../../../../translated_images/sw/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Unapata jibu lile lile (au linalofanana) - lakini pia unapata maelezo ya ziada unayoweza kutumia kuelewa ubora, gharama, na utendaji wa programu yako ya mawakala. Kwa mfano:
+You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
 
-1. Kumbuka kuwa jibu linataja faili za data zilizotumika "kuthibitisha" jibu
-1. Peleka mshale juu ya lebo yoyote ya faili hizi - je, data inalingana na swali lako na jibu lililoonyeshwa?
+1. Note that the response cites data files used to "ground" the response
+1. Hover over any of these file labels - does the data match your query and displayed response?
 
-Pia unaona safu ya _stats_ chini ya jibu. 
+You also see a _stats_ row below the response. 
 
-1. Peleka mshale juu ya kipimo chochote - kwa mfano, Usalama. Unaona kitu kama hiki
-1. Je, tathmini inayotolewa inalingana na uelewa wako wa kiwango cha usalama wa jibu?
+1. Hover over any metric - e.g., Safety. You see something like this
+1. Does the assessed rating match your intuition for the response safety level?
 
-      ![Data](../../../../../translated_images/sw/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Taarifa](../../../../../translated_images/sw/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
----x
+---
 
-## 7. Ufuatiliaji wa Ndani
+## 7. Ufuatiliaji uliojengwa ndani
 
-Ufuatiliaji ni kuhusu kuweka vifaa vya programu yako ili kuzalisha data inayoweza kutumika kuelewa, kutatua matatizo, na kuboresha operesheni zake. Ili kupata hisia ya hili:
+Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
-1. Bonyeza kitufe cha `View Run Info` - unapaswa kuona mwonekano huu. Hii ni mfano wa [Ufuatiliaji wa Mawakala](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) katika vitendo. _Unaweza pia kupata mwonekano huu kwa kubonyeza Thread Logs katika menyu ya juu._
+1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - Pata hisia ya hatua za kukimbia na zana zilizotumiwa na wakala
-   - Elewa jumla ya idadi ya Tokeni (vs. matumizi ya tokeni za matokeo) kwa jibu
-   - Elewa ucheleweshaji na mahali muda unatumika katika utekelezaji
+   - Get a sense for the run steps and tools engaged by the agent
+   - Understand total Token count (vs. output tokens usage) for response
+   - Understand the latency and where time is being spent in execution
 
-      ![Agent](../../../../../translated_images/sw/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![Wakala](../../../../../translated_images/sw/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Bonyeza tabo ya `Metadata` ili kuona sifa za ziada za kukimbia, ambazo zinaweza kutoa muktadha muhimu kwa kutatua matatizo baadaye.   
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
-      ![Agent](../../../../../translated_images/sw/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![Wakala](../../../../../translated_images/sw/11-view-run-info-metadata.7966986122c7c2df.webp)
 
-1. Bonyeza tabo ya `Evaluations` ili kuona tathmini za kiotomatiki zilizofanywa kwenye jibu la wakala. Hizi zinajumuisha tathmini za usalama (mfano, Kujidhuru) na tathmini maalum za wakala (mfano, Utatuzi wa nia, Ufuatiliaji wa kazi).
 
-      ![Agent](../../../../../translated_images/sw/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
-1. Mwisho lakini si kwa uchache, bonyeza tabo ya `Monitoring` katika menyu ya upande.
+      ![Wakala](../../../../../translated_images/sw/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-      - Chagua tabo ya `Resource usage` katika ukurasa ulioonyeshwa - na tazama vipimo.
-      - Fuatilia matumizi ya programu kwa gharama (tokeni) na mzigo (maombi).
-      - Fuatilia ucheleweshaji wa programu hadi byte ya kwanza (usindikaji wa pembejeo) na byte ya mwisho (matokeo).
+1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
-      ![Agent](../../../../../translated_images/sw/13-monitoring-resources.5148015f7311807f.webp)
+      - Select `Resource usage` tab in the displayed page - and view the metrics.
+      - Track application usage in terms of costs (tokens) and load (requests).
+      - Track applicaton latency to first byte (input processing) and last byte (output).
+
+      ![Wakala](../../../../../translated_images/sw/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
 ## 8. Vigezo vya Mazingira
 
-Hadi sasa, tumepitia uwekaji katika kivinjari - na kuthibitisha kuwa miundombinu yetu imewekwa na programu inafanya kazi. Lakini kufanya kazi na programu _kwa msingi wa msimbo_, tunahitaji kusanidi mazingira yetu ya maendeleo ya ndani na vigezo husika vinavyohitajika kufanya kazi na rasilimali hizi. Kutumia `azd` hufanya iwe rahisi.
+So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
-1. Azure Developer CLI [hutumia vigezo vya mazingira](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) kuhifadhi na kusimamia mipangilio ya usanidi kwa uwekaji wa programu.
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
 
-1. Vigezo vya mazingira huhifadhiwa katika `.azure/<env-name>/.env` - hii inavipatia mazingira ya `env-name` yaliyotumika wakati wa uwekaji na husaidia kutenganisha mazingira kati ya malengo tofauti ya uwekaji katika hifadhi moja.
+1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
 
-1. Vigezo vya mazingira hupakiwa kiotomatiki na amri ya `azd` kila inapotekeleza amri maalum (mfano, `azd up`). Kumbuka kuwa `azd` haisomi kiotomatiki vigezo vya mazingira vya _OS-level_ (mfano, vilivyowekwa kwenye shell) - badala yake tumia `azd set env` na `azd get env` kuhamisha taarifa ndani ya script.
+1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
 
-Hebu jaribu amri chache:
 
-1. Pata vigezo vyote vya mazingira vilivyowekwa kwa `azd` katika mazingira haya:
+Let's try out a few commands:
+
+1. Get all the environment variables set for `azd` in this environment:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      Unaona kitu kama:
+      You see something like:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -245,19 +239,19 @@ Hebu jaribu amri chache:
       ...
       ```
 
-1. Pata thamani maalum - kwa mfano, nataka kujua kama tumetumia thamani ya `AZURE_AI_AGENT_MODEL_NAME`
+1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Unaona kitu kama hiki - haikuwekwa kwa chaguo-msingi!
+      You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Weka kigezo kipya cha mazingira kwa `azd`. Hapa, tunasasisha jina la mfano wa wakala. _Kumbuka: mabadiliko yoyote yaliyofanywa yataonyeshwa mara moja katika faili `.azure/<env-name>/.env`.
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -265,30 +259,35 @@ Hebu jaribu amri chache:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Sasa, tunapaswa kupata thamani imewekwa:
+      Now, we should find the value is set:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Kumbuka kuwa baadhi ya rasilimali ni za kudumu (mfano, uwekaji wa mifano) na zitahitaji zaidi ya `azd up` kulazimisha uwekaji upya. Hebu jaribu kuondoa uwekaji wa awali na kuweka upya na vigezo vya mazingira vilivyobadilishwa.
+1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **Refresh** Ikiwa hapo awali uliweka miundombinu kwa kutumia kiolezo cha azd - unaweza _kusasisha_ hali ya vigezo vya mazingira ya ndani kulingana na hali ya sasa ya uwekaji wa Azure kwa kutumia amri hii:
+1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Hii ni njia yenye nguvu ya _kusawazisha_ vigezo vya mazingira kati ya mazingira mawili au zaidi ya maendeleo ya ndani (mfano, timu yenye waendelezaji wengi) - ikiruhusu miundombinu iliyotumwa kuwa chanzo cha ukweli kwa hali ya vigezo vya mazingira. Wanachama wa timu wanahitaji tu _kusasisha_ vigezo ili kurudi katika usawazishaji.
+      Hii ni njia yenye nguvu ya _kusawazisha_ vigezo vya mazingira kati ya mazingira mawili au zaidi ya maendeleo ya ndani (kwa mfano, timu yenye waendelezaji wengi) - ikiruhusu miundombinu iliyowekwa kuitumika kama ukweli wa msingi kwa hali ya vigezo vya mazingira. Wanachama wa timu wanahitaji tu _sasisha_ vigezo ili kurudi kusawazishwa.
 
 ---
 
 ## 9. Hongera 🏆
 
-Umemaliza mtiririko wa kazi wa mwisho hadi mwisho ambapo ulifanya:
+Umekamilisha tu mtiririko wa kazi kutoka mwanzo hadi mwisho ambapo ulifanya:
 
-- [X] Kuchagua Kiolezo cha AZD Unachotaka Kutumia
-- [X] Kuzindua Kiolezo na GitHub Codespaces 
-- [X] Kutuma Kiolezo na kuthibitisha kinafanya kazi
+- [X] Ulichagua Kiolezo cha AZD Ulilotaka Kutumia
+- [X] Umezindua Kiolezo kwa GitHub Codespaces 
+- [X] Ulipeleka Kiolezo na kuthibitisha kuwa kinafanya kazi
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Tamko la kutolea lawama:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nakala ya asili ya hati hii katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya mtaalamu wa kibinadamu. Hatuwezi kuwajibika kwa kutokuelewana au tafsiri isiyo sahihi inayotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

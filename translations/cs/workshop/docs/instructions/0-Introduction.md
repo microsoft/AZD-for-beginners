@@ -1,65 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-25T02:18:33+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "cs"
-}
--->
 # AZD pro vývojáře AI
 
-!!! info "CÍLOVÁ SKUPINA WORKSHOPU"
+!!! info "CÍLOVÁ SKUPINA TOHOTO WORKSHOPU"
    
-    Tento workshop je určen pro všechny, kteří chtějí vytvářet aplikace s AI agenty na Azure AI Foundry pomocí špičkových nástrojů a pracovních postupů. Workshop je vhodný jak pro začátečníky, tak pro zkušené vývojáře, kteří mají základní znalosti o Azure, AI konceptech a Pythonu. Před zahájením si prosím ověřte požadavky.
+    Tento workshop je určen pro každého, kdo chce vytvářet agentické AI aplikace na Microsoft Foundry využitím nejlepších dostupných nástrojů a pracovních postupů. Workshop je vhodný jak pro začátečníky, tak pro zkušené vývojáře, kteří mají určité povědomí o Azure, konceptech AI a kódu v Pythonu. Před zahájením prosím zkontrolujte předpoklady.
 
-    **Délka:** 3-4 hodiny  
+    **Doba trvání:** 3-4 hodiny  
     **Úroveň:** Začátečník až středně pokročilý  
 
 ---
 
 
-## Požadavky
+## Předpoklady
 
-- Osobní účet na GitHubu → [Vytvořte si zdarma](https://github.com/signup)
-- Aktivní účet na Azure → [Vytvořte si zdarma](https://aka.ms/free)
-- Znalost AI konceptů, vývoje v Pythonu, nástrojů příkazového řádku
-- Zkušenosti s VS Code a nástroji GitHubu.
+- Osobní účet na GitHubu → [Create one for free](https://github.com/signup)
+- Aktivní účet Azure → [Create one for free](https://aka.ms/free)
+- Znalost konceptů AI, vývoje v Pythonu, nástrojů příkazové řádky
+- Zkušenost s VS Code a nástroji a pracovními postupy GitHubu.
 
 ---
 
-## Cíle workshopu
+## Cíle učení
 
-Na konci tohoto workshopu budete umět:
+Na konci tohoto workshopu budete vědět, jak:
 
-- [X] **Pracovat s Azure Developer CLI** → pro zajištění, nasazení a správu vašich Azure zdrojů.
-- [X] **Používat šablony AI aplikací** → pro rychlý start projektů AI agentů na Azure AI Foundry.
-- [X] **Konfigurovat šablony** → pro funkce jako Red Teaming, hodnocení, sledování a monitorování.
-- [X] **Rozebrat a prozkoumat** → šablony AZD a pracovní postupy pomocí GitHub Copilot.
-- [X] **Přizpůsobit a znovu nasadit** → startovací šablonu AI agenta podle vašich vlastních požadavků.
+- [X] **Work with Azure Developer CLI** → k vytváření, nasazení a správě vašich prostředků v Azure.
+- [X] **Use AI App Templates** →  pro rychlý start projektů AI agentů na Microsoft Foundry.
+- [X] **Configure Templates** →  pro funkce jako Red Teaming, Evaluations, Tracing & Monitoring
+- [X] **Deconstruct and Explore** →  AZD šablony a pracovní postupy pomocí GitHub Copilot
+- [X] **Customize and Redeploy** →  výchozí šablonu AI agenta podle vašich požadavků
 
 ---
 
 ## Osnova workshopu
 
-Workshop je rozdělen do modulů, z nichž každý obsahuje praktické cvičení:
+Workshop je rozdělen do modulů, z nichž je každý spojen s praktickým laboratorním cvičením:
 
-1. **Úvod** - Získejte přehled o tom, co jsou šablony AZD a jak fungují.
-1. **Výběr** - Objevte správnou "startovací" šablonu pro váš další AI projekt.
-1. **Ověření** - Nasazení a prozkoumání šablony pro ověření její funkčnosti.
-1. **Rozebrání** - Rozložení šablony pro pochopení jejích komponent a konfigurace.
-1. **Konfigurace** - Naučte se aktivovat a používat různé funkce Azure AI Foundry.
-1. **Přizpůsobení** - Rekonstrukce aplikace s ohledem na vaše data a požadavky.
-1. **Odstranění** - Naučte se zrušit infrastrukturu a obnovit měkce smazané zdroje.
-
----
-
-## Zpětná vazba a problémy
-
-Pravidelně aktualizujeme obsah, aby poskytoval co nejlepší vzdělávací zážitek pro začátečníky. Vaše zpětná vazba je vítána.
-
-1. Zveřejněte problém v tomto repozitáři - označte ho `Workshop` pro snadnější identifikaci.
-1. Připojte se na Discord Azure AI Foundry - spojte se s ostatními účastníky!
+1. **Introduction** - Získejte přehled o tom, co jsou šablony AZD a jak fungují
+1. **Selection** - Objevte správnou "starter" šablonu pro váš další AI projekt
+1. **Validation** - Nasadit a prozkoumat šablonu a ověřit, že funguje podle očekávání
+1. **Deconstruction** - Rozebrat šablonu, abyste pochopili její komponenty & konfiguraci
+1. **Configuration** - Naučit se aktivovat a používat různé funkce Microsoft Foundry
+1. **Customization** - Přestavět aplikaci s ohledem na vaše data a požadavky
+1. **Teardown** - Naučit se uvolňovat infrastrukturu a obnovovat dočasně smazané prostředky
 
 ---
 
+## Zpětná vazba & problémy
+
+Aktivně aktualizujeme kurikula, abychom zajistili nejlepší vzdělávací zkušenost pro začátečníky. Vaše zpětná vazba je vítána.
+
+1. Vytvořte issue v tomto repozitáři - pro přehlednost jej označte štítkem `Workshop`.
+1. Připojte se na Microsoft Foundry Discord - spojte se s dalšími studenty!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vyloučení odpovědnosti:**
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za rozhodující zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakákoliv nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,15 +1,6 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T01:36:36+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "pl"
-}
--->
-# Przykłady wdrażania aplikacji kontenerowych z AZD
+# Przykłady wdrażania aplikacji kontenerowych za pomocą AZD
 
-Ten katalog zawiera kompleksowe przykłady wdrażania aplikacji kontenerowych do Azure Container Apps za pomocą Azure Developer CLI (AZD). Przykłady te pokazują rzeczywiste wzorce, najlepsze praktyki i konfiguracje gotowe do produkcji.
+Ten katalog zawiera kompleksowe przykłady wdrażania aplikacji konteneryzowanych do Azure Container Apps przy użyciu Azure Developer CLI (AZD). Przykłady te demonstrują rzeczywiste wzorce, najlepsze praktyki oraz konfiguracje gotowe do produkcji.
 
 ## 📚 Spis treści
 
@@ -22,17 +13,17 @@ Ten katalog zawiera kompleksowe przykłady wdrażania aplikacji kontenerowych do
 
 ## Przegląd
 
-Azure Container Apps to w pełni zarządzana platforma kontenerowa typu serverless, która umożliwia uruchamianie mikrousług i aplikacji kontenerowych bez zarządzania infrastrukturą. W połączeniu z AZD otrzymujesz:
+Azure Container Apps to w pełni zarządzana, bezserwerowa platforma kontenerowa, która umożliwia uruchamianie mikrousług i aplikacji konteneryzowanych bez zarządzania infrastrukturą. W połączeniu z AZD otrzymujesz:
 
-- **Uproszczone wdrażanie**: Jedno polecenie wdraża kontenery wraz z infrastrukturą
-- **Automatyczne skalowanie**: Skalowanie do zera i skalowanie w górę w oparciu o ruch HTTP lub zdarzenia
-- **Zintegrowana sieć**: Wbudowane wykrywanie usług i podział ruchu
+- **Uproszczone wdrażanie**: Pojedyncze polecenie wdraża kontenery wraz z infrastrukturą
+- **Automatyczne skalowanie**: Skalowanie do zera i skalowanie w górę na podstawie ruchu HTTP lub zdarzeń
+- **Zintegrowana sieć**: Wbudowane wykrywanie usług i dzielenie ruchu
 - **Zarządzana tożsamość**: Bezpieczne uwierzytelnianie do zasobów Azure
-- **Optymalizacja kosztów**: Płacisz tylko za używane zasoby
+- **Optymalizacja kosztów**: Płacisz tylko za zasoby, z których korzystasz
 
 ## Wymagania wstępne
 
-Przed rozpoczęciem upewnij się, że masz:
+Zanim zaczniesz, upewnij się, że masz:
 
 ```bash
 # Sprawdź instalację AZD
@@ -74,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**Kroki wdrażania:**
+**Kroki wdrożenia:**
 
 ```bash
-# Zainicjuj z szablonu
+# Inicjalizuj z szablonu
 azd init --template todo-python-mongo
 
-# Przygotuj infrastrukturę i wdrożenie
+# Zapewnij infrastrukturę i wdrożenie
 azd up
 
 # Przetestuj wdrożenie
@@ -90,16 +81,16 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 
 **Kluczowe funkcje:**
 - Automatyczne skalowanie od 0 do 10 replik
-- Proby zdrowotne i sprawdzanie żywotności
+- Sondy zdrowia i kontrole żywotności
 - Wstrzykiwanie zmiennych środowiskowych
 - Integracja z Application Insights
 
-### 2. API Node.js Express
+### 2. Node.js Express API
 
 Wdróż backend Node.js z integracją MongoDB.
 
 ```bash
-# Zainicjuj szablon API Node.js
+# Inicjalizuj szablon API Node.js
 azd init --template todo-nodejs-mongo
 
 # Skonfiguruj zmienne środowiskowe
@@ -109,8 +100,8 @@ azd env set COLLECTION_NAME todos
 # Wdróż
 azd up
 
-# Wyświetl logi
-azd logs api
+# Wyświetl logi za pomocą Azure Monitor
+azd monitor --logs
 ```
 
 **Najważniejsze elementy infrastruktury:**
@@ -161,13 +152,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 Wdróż aplikację full-stack z frontendem React i backendem API.
 
 ```bash
-# Zainicjuj szablon full-stack
+# Inicjalizuj szablon full-stack
 azd init --template todo-csharp-sql-swa-func
 
 # Przejrzyj konfigurację
 cat azure.yaml
 
-# Wdróż oba serwisy
+# Wdróż obie usługi
 azd up
 
 # Otwórz aplikację
@@ -220,9 +211,9 @@ services:
     host: containerapp
 ```
 
-**Wdrażanie:**
+**Wdrożenie:**
 ```bash
-# Zainicjuj projekt
+# Inicjalizuj projekt
 azd init
 
 # Ustaw środowisko produkcyjne
@@ -240,7 +231,7 @@ azd up
 azd monitor --overview
 ```
 
-### Przykład 2: Aplikacja kontenerowa z AI
+### Przykład 2: Aplikacja kontenerowa napędzana AI
 
 **Scenariusz**: Aplikacja czatu AI z integracją Azure OpenAI
 
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Użyj zarządzanej tożsamości dla bezpiecznego dostępu
+# Użyj Managed Identity dla bezpiecznego dostępu
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -329,9 +320,9 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Polecenia wdrażania:**
+**Polecenia wdrożenia:**
 ```bash
-# Ustaw środowisko
+# Skonfiguruj środowisko
 azd init --template ai-chat-app
 azd env new dev
 
@@ -348,9 +339,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Przykład 3: Pracownik w tle z przetwarzaniem kolejki
+### Przykład 3: Pracownik działający w tle z przetwarzaniem kolejki
 
-**Scenariusz**: System przetwarzania zamówień z kolejką wiadomości
+**Scenariusz**: System obsługi zamówień z kolejką wiadomości
 
 **Struktura katalogów:**
 ```
@@ -390,7 +381,7 @@ def process_orders():
             # Przetwórz zamówienie
             print(f"Processing order: {message.content}")
             
-            # Ukończ wiadomość
+            # Pełna wiadomość
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -412,7 +403,7 @@ services:
     host: containerapp
 ```
 
-**Wdrażanie:**
+**Wdrożenie:**
 ```bash
 # Inicjalizuj
 azd init
@@ -420,7 +411,7 @@ azd init
 # Wdróż z konfiguracją kolejki
 azd up
 
-# Skaluj pracownika w oparciu o długość kolejki
+# Skaluj pracownika na podstawie długości kolejki
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -434,19 +425,19 @@ az containerapp update \
 ### Wzorzec 1: Wdrażanie Blue-Green
 
 ```bash
-# Utwórz nową wersję bez ruchu
+# Utwórz nową rewizję bez ruchu
 azd deploy api --revision-suffix blue --no-traffic
 
-# Przetestuj nową wersję
+# Przetestuj nową rewizję
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Podziel ruch (20% na niebieski, 80% na obecny)
+# Podziel ruch (20% na niebieską, 80% na obecną)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Pełne przełączenie na niebieski
+# Pełne przełączenie na niebieską
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -467,12 +458,12 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Skrypt wdrażania:**
+**Skrypt wdrożenia:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Wdróż nową wersję z 10% ruchem
+# Wdróż nową rewizję z 10% ruchu
 azd deploy api --revision-mode multiple
 
 # Monitoruj metryki
@@ -486,11 +477,11 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # Poczekaj 5 minut
+  sleep 300  # Czekaj 5 minut
 done
 ```
 
-### Wzorzec 3: Wdrażanie wieloregionowe
+### Wzorzec 3: Wdrażanie wieloregionalne
 
 **Plik: azure.yaml**
 ```yaml
@@ -536,16 +527,16 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Wdrażanie:**
+**Wdrożenie:**
 ```bash
-# Wdróż we wszystkich regionach
+# Wdróż do wszystkich regionów
 azd up
 
 # Zweryfikuj punkty końcowe
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Wzorzec 4: Integracja z Dapr
+### Wzorzec 4: Integracja Dapr
 
 **Plik: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -608,7 +599,7 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Oznacz zasoby do śledzenia kosztów
+# Oznacz zasoby w celu śledzenia kosztów
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -678,10 +669,12 @@ services:
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Przeglądaj logi w czasie rzeczywistym
-azd logs api --follow
+azd monitor --logs
+# Lub użyj Azure CLI dla Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Monitoruj metryki
-azd monitor --service api
+azd monitor --live
 
 # Twórz alerty
 az monitor metrics alert create \
@@ -744,7 +737,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Referencje do często używanych poleceń
+## Najczęściej używane polecenia
 
 ```bash
 # Zainicjuj nowy projekt aplikacji kontenerowej
@@ -756,19 +749,20 @@ azd up
 # Wdróż tylko kod aplikacji (pomiń infrastrukturę)
 azd deploy
 
-# Przygotuj tylko infrastrukturę
+# Utwórz tylko infrastrukturę
 azd provision
 
 # Wyświetl wdrożone zasoby
 azd show
 
-# Strumieniuj logi
-azd logs <service-name> --follow
+# Przesyłaj logi za pomocą azd monitor lub Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <nazwa-usługi> --resource-group <nazwa-grupy-zasobów> --follow
 
 # Monitoruj aplikację
 azd monitor --overview
 
-# Usuń zasoby
+# Wyczyść zasoby
 azd down --force --purge
 ```
 
@@ -777,16 +771,16 @@ azd down --force --purge
 ### Problem: Kontener nie uruchamia się
 
 ```bash
-# Sprawdź logi
-azd logs api --tail 100
+# Sprawdź logi za pomocą Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Wyświetl zdarzenia kontenera
+# Zobacz zdarzenia kontenera
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# Przetestuj lokalnie
+# Testuj lokalnie
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
@@ -815,7 +809,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Skaluj zasoby w górę
+# Zwiększ zasoby
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -825,29 +819,29 @@ az containerapp update \
 
 ## Dodatkowe zasoby i przykłady
 - [Przykład mikrousług](./microservices/README.md)
-- [Przykład prostego Flash API](./simple-flask-api/README.md)
+- [Prosty przykład Flask API](./simple-flask-api/README.md)
 - [Dokumentacja Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Galeria szablonów AZD](https://azure.github.io/awesome-azd/)
 - [Przykłady Container Apps](https://github.com/Azure-Samples/container-apps-samples)
 - [Szablony Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Współtworzenie
+## Wkład w projekt
 
 Aby dodać nowe przykłady aplikacji kontenerowych:
 
-1. Utwórz nowy podkatalog z przykładem
-2. Dołącz kompletne pliki `azure.yaml`, `infra/` i `src/`
-3. Dodaj szczegółowy README z instrukcjami wdrażania
-4. Przetestuj wdrażanie za pomocą `azd up`
-5. Złóż pull request
+1. Utwórz nowy podkatalog z twoim przykładem
+2. Dołącz kompletny `azure.yaml`, katalogi `infra/` i `src/`
+3. Dodaj szczegółowy plik README z instrukcjami wdrożenia
+4. Przetestuj wdrożenie za pomocą `azd up`
+5. Prześlij pull request
 
 ---
 
-**Potrzebujesz pomocy?** Dołącz do społeczności [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) w celu uzyskania wsparcia i zadawania pytań.
+**Potrzebujesz pomocy?** Dołącz do społeczności [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) po wsparcie i pytania.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Ten dokument został przetłumaczony za pomocą usługi tłumaczeń AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być traktowany jako źródło wiarygodne. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

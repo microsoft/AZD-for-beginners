@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-09T18:52:19+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "it"
-}
--->
 # TODO: Il responsabile di questo repository non ha ancora modificato questo file
 
 **PROPRIETARIO DEL REPO**: Vuoi il supporto di Customer Service & Support (CSS) per questo prodotto/progetto?

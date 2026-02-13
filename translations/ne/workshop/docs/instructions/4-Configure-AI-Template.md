@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T13:50:56+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "ne"
-}
--->
-# 4. टेम्प्लेट कन्फिगर गर्नुहोस्
+# 4. Configure a Template
 
-!!! tip "यस मोड्युलको अन्त्यसम्ममा तपाईं सक्षम हुनुहुनेछ"
+!!! tip "यस मोड्युलको अन्त्यसम्म तपाइँ सक्षम हुनुहुनेछ"
 
-    - [ ] `azure.yaml` को उद्देश्य बुझ्नुहोस्
-    - [ ] `azure.yaml` को संरचना बुझ्नुहोस्
-    - [ ] azd लाइफसाइकल `hooks` को मूल्य बुझ्नुहोस्
-    - [ ] **प्रयोगशाला ३:** 
+    - [ ] `azure.yaml` को उद्देश्य बुझ्ने
+    - [ ] `azure.yaml` को संरचना बुझ्ने
+    - [ ] azd lifecycle `hooks` को महत्व बुझ्ने
+    - [ ] **Lab 4:** वातावरण भेरिएबलहरू अन्वेषण र संशोधन गर्ने
 
 ---
 
-!!! prompt "`azure.yaml` फाइल के गर्छ? कोडफेन्स प्रयोग गरेर लाइन-बाइ-लाइन व्याख्या गर्नुहोस्"
+!!! prompt "azure.yaml फाइल के गर्छ? कोडफेन्स प्रयोग गरी लाइन-दर-लाइन व्याख्या गर्नुहोस्"
 
-      `azure.yaml` फाइल **Azure Developer CLI (azd)** को कन्फिगरेसन फाइल हो। यसले तपाईंको एप्लिकेसनलाई Azure मा कसरी डिप्लोय गर्नुपर्छ भन्ने परिभाषित गर्छ, जसमा इन्फ्रास्ट्रक्चर, सेवाहरू, डिप्लोयमेन्ट हुकहरू, र वातावरण चरहरू समावेश छन्।
+      `azure.yaml` फाइल Azure Developer CLI (azd) को **कन्फिगरेसन फाइल** हो। यसले तपाइँको अनुप्रयोग Azure मा कसरी डिप्लोय हुनुपर्छ भनेर परिभाषित गर्छ, जसमा पूर्वाधार, सेवाहरू, डिप्लोयमेन्ट हुकहरू, र वातावरण भेरिएबलहरू समावेश छन्।
 
 ---
 
-## १. उद्देश्य र कार्यक्षमता
+## 1. Purpose and Functionality
 
-यो `azure.yaml` फाइल AI एजेन्ट एप्लिकेसनको लागि **डिप्लोयमेन्ट ब्लूप्रिन्ट** को रूपमा काम गर्छ, जसले:
+यस `azure.yaml` फाइलले AI एजेन्ट अनुप्रयोगको लागि **डिप्लोयमेन्ट ब्लूप्रिन्ट** को रूपमा काम गर्छ जुन:
 
-1. **डिप्लोयमेन्ट अघि वातावरणको मान्यता** सुनिश्चित गर्छ
-2. **Azure AI सेवाहरूको प्रावधान** (AI Hub, AI Project, Search, आदि) गर्छ
-3. **Python एप्लिकेसनलाई Azure Container Apps मा डिप्लोय गर्छ**
-4. **च्याट र एम्बेडिङ कार्यक्षमताका लागि AI मोडेलहरू कन्फिगर गर्छ**
-5. **AI एप्लिकेसनको लागि निगरानी र ट्रेसिङ सेटअप गर्छ**
-6. **नयाँ र विद्यमान** Azure AI प्रोजेक्ट परिदृश्यहरूलाई सम्हाल्छ
+1. **डिप्लोयमेन्ट भन्दा पहिले वातावरणको प्रमाणीकरण गर्छ**
+2. **Azure AI सेवाहरू प्रोभिजन गर्छ** (AI Hub, AI Project, Search, आदि)
+3. **Python अनुप्रयोगलाई Azure Container Apps मा डिप्लोय गर्छ**
+4. **च्याट र इम्बेडिङ कार्यक्षमताका लागि AI मोडेलहरू कन्फिगर गर्छ**
+5. **AI अनुप्रयोगको लागि निगरानी र ट्रेसिङ सेटअप गर्छ**
+6. **नयाँ र विद्यमान दुवै Azure AI प्रोजेक्ट परिदृश्यहरू ह्यान्डल गर्छ**
 
-यो फाइलले **एक-कमाण्ड डिप्लोयमेन्ट** (`azd up`) को माध्यमबाट AI एजेन्ट समाधानको पूर्ण डिप्लोयमेन्टलाई मान्यता, प्रावधान, र पोस्ट-डिप्लोयमेन्ट कन्फिगरेसनको साथ सक्षम बनाउँछ।
+फाइलले उचित प्रमाणीकरण, प्रोभिजनिङ, र पोस्ट-डिप्लोयमेन्ट कन्फिगरेसनसहित एक पूरा AI एजेन्ट समाधानको लागि **एक-कमाण्ड डिप्लोयमेन्ट** (`azd up`) सक्षम बनाउँछ।
 
-??? info "हेर्न विस्तार गर्नुहोस्: `azure.yaml`"
+??? info "विस्तार गर्न हेर्नुहोस्: `azure.yaml`"
 
-      `azure.yaml` फाइलले Azure Developer CLI लाई यो AI एजेन्ट एप्लिकेसनलाई Azure मा कसरी डिप्लोय र व्यवस्थापन गर्ने भनेर परिभाषित गर्छ। यसलाई लाइन-बाइ-लाइन ब्रेकडाउन गरौं।
+      `azure.yaml` फाइलले Azure Developer CLI ले यस AI Agent अनुप्रयोगलाई Azure मा कसरी डिप्लोय र व्यवस्थापन गर्ने भनेर परिभाषित गर्छ। अब यसलाई लाइन-दर-लाइन भांचेर बुझौं।
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: के हामीलाई हुकहरू चाहिन्छ?
-      # TODO: के हामीलाई सबै चरहरू चाहिन्छ?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,19 +126,19 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## २. फाइलको विश्लेषण
+## 2. Deconstructing The File
 
-फाइललाई खण्ड-खण्डमा जाऔं, यसले के गर्छ र किन गर्छ भन्ने बुझ्न।
+अब फाइलको प्रत्येक सेक्सनबाट के गर्छ र किन गर्छन् भन्ने बुझौं।
 
-### २.१ **हेडर र स्किमा (१-३)**
+### 2.1 **Header and Schema (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **लाइन १**: YAML भाषा सर्भर स्किमा मान्यता प्रदान गर्दछ, जसले IDE समर्थन र IntelliSense सक्षम बनाउँछ
+- **Line 1**: IDE समर्थन र IntelliSense का लागि YAML भाषा सर्भर स्कीमा मान्यकरण प्रदान गर्छ
 
-### २.२ प्रोजेक्ट मेटाडाटा (५-१०)
+### 2.2 Project Metadata (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **लाइन ५**: Azure Developer CLI द्वारा प्रयोग गरिएको प्रोजेक्ट नाम परिभाषित गर्छ
-- **लाइन ६-७**: यो टेम्प्लेट संस्करण १.०.२ मा आधारित छ भनी निर्दिष्ट गर्छ
-- **लाइन ८-९**: Azure Developer CLI संस्करण १.१४.० वा उच्च आवश्यक छ
+- **Line 5**: Azure Developer CLI द्वारा प्रयोग गरिने प्रोजेक्ट नाम परिभाषित गर्छ
+- **Lines 6-7**: यो टेम्पलेट संस्करण 1.0.2 मा आधारित भएको निर्दिष्ट गर्छ
+- **Lines 8-9**: Azure Developer CLI संस्करण 1.14.0 वा माथि आवश्यक छ भनेर निर्दिष्ट गर्छ
 
-### २.३ डिप्लोय हुकहरू (११-४०)
+### 2.3 Deploy Hooks (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **लाइन ११-२०**: **प्रि-डिप्लोयमेन्ट हुक** - `azd up` अघि चल्छ
+- **Lines 11-20**: **Pre-deployment hook** - `azd up` अघि चल्दछ
 
-      - Unix/Linux मा: मान्यता स्क्रिप्टलाई कार्यान्वयन योग्य बनाउँछ र चलाउँछ
-      - Windows मा: PowerShell मान्यता स्क्रिप्ट चलाउँछ
-      - दुवै अन्तरक्रियात्मक छन् र असफल भएमा डिप्लोयमेन्ट रोक्छ
+      - Unix/Linux मा: भ्यालिडेसन स्क्रिप्टलाई executable बनाइ runs गर्छ
+      - Windows मा: PowerShell भ्यालिडेसन स्क्रिप्ट चलाउँछ
+      - दुवै interactive छन् र असफल भए deployment रोक्छन्
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **लाइन २१-३०**: **पोस्ट-प्रोभिजन हुक** - Azure स्रोतहरू सिर्जना भएपछि चल्छ
+- **Lines 21-30**: **Post-provision hook** - Azure स्रोतहरू सिर्जना भएपछि चल्दछ
 
-  - वातावरण चर लेख्ने स्क्रिप्टहरू कार्यान्वयन गर्छ
-  - स्क्रिप्ट असफल भए पनि डिप्लोयमेन्ट जारी राख्छ (`continueOnError: true`)
+  - वातावरण भेरिएबल लेख्ने स्क्रिप्टहरू कार्यान्वयन गर्छ
+  - यी स्क्रिप्टहरू असफल भए पनि deployment जारी रहन्छ (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **लाइन ३१-४०**: **पोस्ट-डिप्लोय हुक** - एप्लिकेसन डिप्लोयमेन्ट पछि चल्छ
+- **Lines 31-40**: **Post-deploy hook** - अनुप्रयोग डिप्लोय भएपछि चल्दछ
 
   - अन्तिम सेटअप स्क्रिप्टहरू कार्यान्वयन गर्छ
-  - स्क्रिप्ट असफल भए पनि जारी राख्छ
+  - स्क्रिप्टहरू असफल भए तापनि जारी रहन्छ
 
-### २.४ सेवा कन्फिग (४१-४८)
+### 2.4 Service Config (41-48)
 
-यो तपाईंले डिप्लोय गर्न लागेको एप्लिकेसन सेवाको कन्फिगरेसन हो।
+यसले तपाइँले डिप्लोय गरिरहेको अनुप्रयोग सेवालाई कन्फिगर गर्छ।
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **लाइन ४२**: "api_and_frontend" नामको सेवा परिभाषित गर्छ
-- **लाइन ४३**: स्रोत कोडको लागि `./src` डाइरेक्टरीमा संकेत गर्छ
-- **लाइन ४४**: Python लाई प्रोग्रामिङ भाषा रूपमा निर्दिष्ट गर्छ
-- **लाइन ४५**: Azure Container Apps लाई होस्टिङ प्लेटफर्मको रूपमा प्रयोग गर्छ
-- **लाइन ४६-४८**: Docker कन्फिगरेसन
+- **Line 42**: "api_and_frontend" नामक सेवा परिभाषित गर्छ
+- **Line 43**: स्रोत कोडको लागि `./src` निर्देशिकातर्फ संकेत गर्छ
+- **Line 44**: प्रोग्रामिङ भाषा Python भनेर निर्दिष्ट गर्छ
+- **Line 45**: होस्टिङ प्लेटफर्मको रूपमा Azure Container Apps प्रयोग गर्छ
+- **Lines 46-48**: Docker कन्फिगरेसन
 
-      - "api_and_frontend" लाई इमेज नामको रूपमा प्रयोग गर्छ
-      - Docker इमेजलाई Azure मा टाढाबाट बनाउँछ (स्थानीय रूपमा होइन)
+      - "api_and_frontend" लाई image नामको रूपमा प्रयोग गर्छ
+      - Docker image Azure मा रिमोटमा बिल्ड गर्छ (लोकलमा होइन)
 
-### २.५ पाइपलाइन चरहरू (४९-७६)
+### 2.5 Pipeline Variables (49-76)
 
-यी चरहरूले CI/CD पाइपलाइनमा `azd` चलाउन मद्दत गर्छन्।
+यी भेरिएबलहरूले तपाइँलाई CI/CD पाइपलाइनहरूमा `azd` चलाउँदा अटोमेसन सरल बनाउन मद्दत गर्छन्
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-यो खण्डले **डिप्लोयमेन्टको क्रममा** प्रयोग गरिने वातावरण चरहरू परिभाषित गर्छ, वर्गीकृत गरेर:
+यो सेक्सनले डिप्लोयमेन्टको क्रममा प्रयोग हुने वातावरण भेरिएबलहरू परिभाषित गर्छ, वर्गीकरण अनुसार:
 
-- **Azure स्रोत नामहरू (लाइन ५१-६०)**:
-      - मुख्य Azure सेवा स्रोत नामहरू जस्तै, Resource Group, AI Hub, AI Project, आदि
-- **फिचर फ्ल्यागहरू (लाइन ६१-६३)**:
-      - विशिष्ट Azure सेवाहरू सक्षम/अक्षम गर्न Boolean चरहरू
-- **AI एजेन्ट कन्फिगरेसन (लाइन ६४-७१)**:
-      - मुख्य AI एजेन्टको लागि कन्फिगरेसन जसमा नाम, ID, डिप्लोयमेन्ट सेटिङहरू, मोडेल विवरणहरू समावेश छन्
-- **AI एम्बेडिङ कन्फिगरेसन (लाइन ७२-७९)**:
-      - भेक्टर सर्चको लागि प्रयोग गरिने एम्बेडिङ मोडेलको कन्फिगरेसन
-- **सर्च र निगरानी (लाइन ८०-८४)**:
-      - सर्च इन्डेक्स नाम, विद्यमान स्रोत ID हरू, र निगरानी/ट्रेसिङ सेटिङहरू
+- **Azure Resource Names (Lines 51-60)**:
+      - मुख्य Azure सेवा स्रोत नामहरू जस्तै Resource Group, AI Hub, AI Project, आदि
+- **Feature Flags (Lines 61-63)**:
+      - विशिष्ट Azure सेवाहरू सक्षम/असक्षम गर्न Boolean भेरिएबलहरू
+- **AI Agent Configuration (Lines 64-71)**:
+      - मुख्य AI एजेन्टको लागि नाम, ID, डिप्लोयमेन्ट सेटिङहरू, मोडेल विवरणजस्ता कन्फिगरेसन
+- **AI Embedding Configuration (Lines 72-79)**:
+      - भेक्टर सर्चका लागि प्रयोग हुने इम्बेडिङ मोडेलको कन्फिगरेसन
+- **Search and Monitoring (Lines 80-84)**:
+      - Search index नाम, विद्यमान स्रोत ID हरु, र निगरानी/ट्रेसिङ सेटिङहरू
 
 ---
 
-## ३. वातावरण चरहरू जान्नुहोस्
-तपाईंको डिप्लोयमेन्टको कन्फिगरेसन र व्यवहारलाई नियन्त्रण गर्ने निम्न वातावरण चरहरू, तिनीहरूको प्राथमिक उद्देश्य अनुसार वर्गीकृत छन्। अधिकांश चरहरूमा उपयुक्त डिफल्टहरू छन्, तर तपाईं तिनीहरूलाई आफ्नो विशिष्ट आवश्यकताहरू वा विद्यमान Azure स्रोतहरूसँग मिलाउन अनुकूलित गर्न सक्नुहुन्छ।
+## 3. Know Env Variables
+तलका वातावरण भेरिएबलहरूले तपाइँको डिप्लोयमेन्टको कन्फिगरेसन र व्यवहारलाई नियन्त्रण गर्छन्, प्राथमिक प्रयोजन अनुसार व्यवस्थित। अधिकांश भेरिएबलहरूको विवेकपूर्ण पूर्वनिर्धारित मानहरू हुन्छन्, तर तपाइँले तिनीहरूलाई आफ्ना विशिष्ट आवश्यकताहरू वा विद्यमान Azure स्रोतहरूमा मिलाउन अनुकूलित गर्न सक्नुहुन्छ।
 
-### ३.१ आवश्यक चरहरू 
+### 3.1 Required Variables 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# प्रमुख Azure कन्फिगरेशन
+AZURE_ENV_NAME                    # वातावरण नाम (संसाधन नामकरणमा प्रयोग गरिन्छ)
+AZURE_LOCATION                    # परिनियोजन क्षेत्र
+AZURE_SUBSCRIPTION_ID             # लक्षित सदस्यता
+AZURE_RESOURCE_GROUP              # संसाधन समूहको नाम
+AZURE_PRINCIPAL_ID                # RBAC का लागि प्रयोगकर्ता प्रिन्सिपल
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# संसाधन नामहरू (निर्दिष्ट नगरिएमा स्वचालित रूपमा सिर्जना गरिने)
+AZURE_AIHUB_NAME                  # Microsoft Foundry हब नाम
+AZURE_AIPROJECT_NAME              # AI परियोजना नाम
+AZURE_AISERVICES_NAME             # AI सेवाहरूको खाता नाम
+AZURE_STORAGE_ACCOUNT_NAME        # स्टोरेज खाता नाम
+AZURE_CONTAINER_REGISTRY_NAME     # कन्टेनर रजिस्ट्री नाम
+AZURE_KEYVAULT_NAME               # Key Vault नाम (यदि प्रयोग गरिएको छ भने)
 ```
 
-### ३.२ मोडेल कन्फिगरेसन 
+### 3.2 Model Configuration 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# च्याट मोडेल कन्फिगरेसन
+AZURE_AI_AGENT_MODEL_NAME         # पूर्वनिर्धारित: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # पूर्वनिर्धारित: OpenAI (वा Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # पूर्वनिर्धारित: उपलब्ध नवीनतम
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # च्याट मोडेलको लागि परिनियोजन नाम
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # पूर्वनिर्धारित: मानक
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # पूर्वनिर्धारित: 80 (हजारमा TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# एम्बेडिङ मोडेल कन्फिगरेसन
+AZURE_AI_EMBED_MODEL_NAME         # पूर्वनिर्धारित: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # पूर्वनिर्धारित: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # पूर्वनिर्धारित: उपलब्ध नवीनतम
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # एम्बेडिङको परिनियोजन नाम
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # पूर्वनिर्धारित: मानक
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # पूर्वनिर्धारित: 50 (हजारमा TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# एजेन्ट कन्फिगरेसन
+AZURE_AI_AGENT_NAME               # एजेन्टको प्रदर्शन नाम
+AZURE_EXISTING_AGENT_ID           # पहिले नै रहेको एजेन्ट प्रयोग गर्नुहोस् (वैकल्पिक)
 ```
 
-### ३.३ फिचर टगल
+### 3.3 Feature Toggle
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# वैकल्पिक सेवाहरू
+USE_APPLICATION_INSIGHTS         # पूर्वनिर्धारित: साँचो
+USE_AZURE_AI_SEARCH_SERVICE      # पूर्वनिर्धारित: झुटो
+USE_CONTAINER_REGISTRY           # पूर्वनिर्धारित: साँचो
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# निगरानी र ट्रेसिङ
+ENABLE_AZURE_MONITOR_TRACING     # पूर्वनिर्धारित: झुटो
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # पूर्वनिर्धारित: झुटो
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# खोज विन्यास
+AZURE_AI_SEARCH_INDEX_NAME       # खोज अनुक्रमणिका नाम
+AZURE_SEARCH_SERVICE_NAME        # खोज सेवा नाम
 ```
 
-### ३.४ AI प्रोजेक्ट कन्फिगरेसन 
+### 3.4 AI Project Configuration 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# अवस्थित स्रोतहरू प्रयोग गर्नुहोस्
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # अवस्थित AI परियोजनाको पूर्ण स्रोत आईडी
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # अवस्थित परियोजनाको एन्डपोइन्ट URL
 ```
 
-### ३.५ तपाईंका चरहरू जाँच गर्नुहोस्
+### 3.5 Check Your Variables
 
-Azure Developer CLI प्रयोग गरेर आफ्नो वातावरण चरहरू हेर्न र व्यवस्थापन गर्न सक्नुहुन्छ:
+Azure Developer CLI प्रयोग गरी आफ्नो वातावरण भेरिएबलहरू हेर्न र व्यवस्थापन गर्नुस्:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# हालको वातावरणका सबै वातावरण चरहरू हेर्नुहोस्
 azd env get-values
 
-# Get a specific environment variable
+# कुनै विशेष वातावरण चर प्राप्त गर्नुहोस्
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# वातावरण चर सेट गर्नुहोस्
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# .env फाइलबाट धेरै चरहरू सेट गर्नुहोस्
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+अस्वीकरण:
+यो दस्तावेज AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी सटिकता कायम राख्न प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुन सक्ने सम्भावना हुन्छ। मूल दस्तावेज यसको मूल भाषामा नै अधिकृत स्रोत मानिनेछ। महत्त्वपूर्ण जानकारीको लागि व्यावसायिक मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा व्याख्यात्मक त्रुटिका लागि हामी उत्तरदायी छैनौं।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

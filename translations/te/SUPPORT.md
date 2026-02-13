@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-11-25T06:48:35+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "te"
-}
--->
 # TODO: ఈ ఫైల్‌ను ఈ రిపో యొక్క నిర్వహకుడు ఇంకా సవరించలేదు
 
 **రిపో యజమాని**: ఈ ఉత్పత్తి/ప్రాజెక్ట్‌కు కస్టమర్ సర్వీస్ & సపోర్ట్ (CSS) అవసరమా?

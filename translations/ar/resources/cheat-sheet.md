@@ -1,72 +1,72 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T16:33:39+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "ar"
-}
--->
-# قائمة الأوامر - أوامر AZD الأساسية
+# ورقة غش للأوامر - أوامر AZD الأساسية
 
 **مرجع سريع لجميع الفصول**
-- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../README.md)
-- **📖 البداية السريعة**: [الفصل الأول: الأساسيات والبداية السريعة](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 أوامر الذكاء الاصطناعي**: [الفصل الثاني: تطوير يعتمد على الذكاء الاصطناعي](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 متقدم**: [الفصل الرابع: البنية التحتية ككود](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📚 الصفحة الرئيسية للدورة**: [AZD For Beginners](../README.md)
+- **📖 البدء السريع**: [الفصل 1: الأساس والبدء السريع](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 أوامر الذكاء الاصطناعي**: [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 متقدم**: [الفصل 4: البنية التحتية كرمز](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## المقدمة
+## مقدمة
 
-تقدم هذه القائمة الشاملة مرجعًا سريعًا لأكثر أوامر Azure Developer CLI استخدامًا، مرتبة حسب الفئات مع أمثلة عملية. مثالية للبحث السريع أثناء التطوير، حل المشكلات، والعمليات اليومية مع مشاريع azd.
+توفّر هذه الورقة المرجعية الشاملة مرجعًا سريعًا لأكثر أوامر Azure Developer CLI استخدامًا، منظمة حسب الفئة مع أمثلة عملية. مثالية للبحث السريع أثناء التطوير واستكشاف الأخطاء والعمليات اليومية مع مشاريع azd.
 
 ## أهداف التعلم
 
-باستخدام هذه القائمة، ستتمكن من:
-- الوصول الفوري إلى أوامر Azure Developer CLI الأساسية وصيغها
-- فهم تنظيم الأوامر حسب الفئات الوظيفية وحالات الاستخدام
+باستخدام هذه الورقة المرجعية، ستتمكن من:
+- الوصول الفوري إلى أوامر Azure Developer CLI الأساسية وبناء الجملة الخاص بها
+- فهم تنظيم الأوامر بحسب الفئات الوظيفية وحالات الاستخدام
 - الرجوع إلى أمثلة عملية لسيناريوهات التطوير والنشر الشائعة
-- الوصول إلى أوامر حل المشكلات بسرعة
+- الوصول إلى أوامر استكشاف الأخطاء لإصلاح المشاكل بسرعة
 - العثور على خيارات التكوين والتخصيص المتقدمة بكفاءة
-- إدارة البيئات وعمليات سير العمل متعددة البيئات بسهولة
+- تحديد أوامر إدارة البيئة وسير العمل متعدد البيئات
 
-## نتائج التعلم
+## مخرجات التعلم
 
-مع الرجوع المنتظم إلى هذه القائمة، ستتمكن من:
-- تنفيذ أوامر azd بثقة دون الحاجة إلى الرجوع إلى الوثائق الكاملة
+مع الرجوع المنتظم إلى هذه الورقة المرجعية، ستتمكن من:
+- تنفيذ أوامر azd بثقة دون الرجوع إلى التوثيق الكامل
 - حل المشكلات الشائعة بسرعة باستخدام أوامر التشخيص المناسبة
-- إدارة البيئات المتعددة وسيناريوهات النشر بكفاءة
+- إدارة بيئات متعددة وسيناريوهات نشر بكفاءة
 - تطبيق ميزات azd المتقدمة وخيارات التكوين حسب الحاجة
-- حل مشكلات النشر باستخدام تسلسل أوامر منهجي
-- تحسين سير العمل من خلال الاستخدام الفعال لاختصارات وخيارات azd
+- استكشاف مشكلات النشر باستخدام تسلسلات أوامر منهجية
+- تحسين سير العمل من خلال الاستخدام الفعال للاختصارات والخيارات في azd
 
 ## أوامر البدء
 
 ### المصادقة
 ```bash
-# Login to Azure (uses Azure CLI)
+# تسجيل الدخول إلى Azure عبر AZD
+azd auth login
+
+# تسجيل الدخول إلى Azure CLI (AZD يستخدم هذا ضمنياً)
 az login
 
-# Check current account
+# التحقق من الحساب الحالي
 az account show
 
-# Set default subscription
+# تعيين الاشتراك الافتراضي
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# تسجيل الخروج من AZD
+azd auth logout
+
+# تسجيل الخروج من Azure CLI
+az logout
 ```
 
 ### تهيئة المشروع
 ```bash
-# Browse available templates
+# تصفّح القوالب المتاحة
 azd template list
 
-# Initialize from template
+# التهيئة من قالب
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# التهيئة في المجلد الحالي
 azd init .
 
-# Initialize with custom name
+# التهيئة باسم مخصص
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
@@ -74,89 +74,86 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ### سير عمل النشر الكامل
 ```bash
-# Deploy everything (provision + deploy)
+# نشر كل شيء (تهيئة + نشر)
 azd up
 
-# Deploy with confirmation prompts disabled
+# النشر مع تعطيل مطالبات التأكيد
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# النشر إلى بيئة محددة
 azd up --environment production
 
-# Deploy with custom parameters
+# النشر مع معلمات مخصصة
 azd up --parameter location=westus2
 ```
 
 ### البنية التحتية فقط
 ```bash
-# Provision Azure resources
+# توفير موارد Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 معاينة تغييرات البنية التحتية
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# يعرض معاينة تجريبية لما سيتم إنشاؤه/تعديله/حذفه من الموارد
+# مشابه لـ 'terraform plan' أو 'bicep what-if' - آمن للتشغيل، لن يتم تطبيق أي تغييرات
 ```
 
 ### التطبيق فقط
 ```bash
-# Deploy application code
+# نشر كود التطبيق
 azd deploy
 
-# Deploy specific service
+# نشر خدمة محددة
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# نشر جميع الخدمات
 azd deploy --all
 ```
 
-### البناء والتعبئة
+### البناء والحزم
 ```bash
-# Build applications
+# بناء تطبيقات
 azd package
 
-# Build specific service
+# بناء خدمة محددة
 azd package --service api
 ```
 
-## 🌍 إدارة البيئة
+## 🌍 إدارة البيئات
 
 ### عمليات البيئة
 ```bash
-# List all environments
+# عرض جميع البيئات
 azd env list
 
-# Create new environment
+# إنشاء بيئة جديدة
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# تحديد بيئة
 azd env select production
 
-# Show current environment
+# عرض البيئة الحالية
 azd env show
 
-# Refresh environment state
+# تحديث حالة البيئة
 azd env refresh
 ```
 
 ### متغيرات البيئة
 ```bash
-# Set environment variable
+# تعيين متغير البيئة
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# الحصول على متغير البيئة
 azd env get API_KEY
 
-# List all environment variables
+# عرض جميع متغيرات البيئة
 azd env get-values
 
-# Remove environment variable
+# إزالة متغير البيئة
 azd env unset DEBUG
 ```
 
@@ -164,192 +161,199 @@ azd env unset DEBUG
 
 ### التكوين العام
 ```bash
-# List all configuration
+# عرض جميع الإعدادات
 azd config list
 
-# Set global defaults
+# تعيين الإعدادات الافتراضية العامة
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# إزالة التكوين
 azd config unset defaults.location
 
-# Reset all configuration
+# إعادة تعيين جميع التكوينات
 azd config reset
 ```
 
 ### تكوين المشروع
 ```bash
-# Validate azure.yaml
+# التحقق من ملف azure.yaml
 azd config validate
 
-# Show project information
+# عرض معلومات المشروع
 azd show
 
-# Get service endpoints
+# الحصول على نقاط نهاية الخدمة
 azd show --output json
 ```
 
-## 📊 المراقبة والسجلات
+## 📊 المراقبة والتشخيص
 
-### سجلات التطبيق
+### لوحة مراقبة
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### المراقبة
-```bash
-# Open Azure portal for monitoring
+# افتح لوحة المراقبة في بوابة Azure
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# افتح المقاييس الحية في Application Insights
+azd monitor --live
+
+# افتح لوحة السجلات في Application Insights
+azd monitor --logs
+
+# افتح نظرة عامة على Application Insights
+azd monitor --overview
+```
+
+### عرض سجلات الحاويات
+```bash
+# عرض السجلات عبر Azure CLI (لتطبيقات الحاويات)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# متابعة السجلات في الوقت الحقيقي
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# عرض السجلات من بوابة Azure
+azd monitor --logs
+```
+
+### استعلامات تحليلات السجلات
+```bash
+# الوصول إلى تحليلات السجلات عبر بوابة Azure
+azd monitor --logs
+
+# استعلام السجلات باستخدام Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ أوامر الصيانة
 
-### التنظيف
+### تنظيف
 ```bash
-# Remove all Azure resources
+# إزالة جميع موارد Azure
 azd down
 
-# Force delete without confirmation
+# الحذف القسري دون تأكيد
 azd down --force
 
-# Purge soft-deleted resources
+# حذف نهائي للموارد المحذوفة مؤقتًا
 azd down --purge
 
-# Complete cleanup
+# تنظيف كامل
 azd down --force --purge
 ```
 
-### التحديثات
+### تحديثات
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# التحقق من تحديثات azd
 azd version
 
-# Show system information
-azd info
+# الحصول على الإصدار الحالي
+azd version
+
+# عرض التكوين الحالي
+azd config list
 ```
 
 ## 🔧 أوامر متقدمة
 
-### خطوط الأنابيب وCI/CD
+### قنوات وCI/CD
 ```bash
-# Configure GitHub Actions
+# تكوين إجراءات GitHub
 azd pipeline config
 
-# Configure Azure DevOps
+# تكوين Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# عرض تكوين خط الأنابيب
 azd pipeline show
 ```
 
 ### إدارة البنية التحتية
 ```bash
-# Import existing resources
-azd infra import
+# توليد قوالب البنية التحتية
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 معاينة وتخطيط البنية التحتية
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# يحاكي توفير البنية التحتية دون النشر
+# يحلل قوالب Bicep/Terraform ويعرض:
+# - الموارد التي ستُضاف (أخضر +)
+# - الموارد التي ستُعدّل (أصفر ~)
+# - الموارد التي ستُحذف (أحمر -)
+# آمن للتشغيل - لا تُجرى أي تغييرات فعلية على بيئة Azure
+
+# توليد البنية التحتية من azure.yaml
+azd infra synth
 ```
 
-### إدارة الخدمات
+### معلومات المشروع
 ```bash
-# List all services
-azd service list
+# عرض حالة المشروع ونقاط النهاية
+azd show
 
-# Show service details
-azd service show --service web
+# عرض معلومات المشروع التفصيلية بصيغة JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# الحصول على نقاط النهاية للخدمة
+azd show --output json | jq '.services'
 ```
 
-## 🎯 سير العمل السريع
+## 🎯 سير عمل سريعة
 
 ### سير عمل التطوير
 ```bash
-# Start new project
+# ابدأ مشروعًا جديدًا
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# انشر إلى بيئة التطوير
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# قم بإجراء التغييرات وأعد النشر
 azd deploy
 
-# View logs
-azd logs --follow
+# افتح لوحة المراقبة
+azd monitor --live
 ```
 
-### سير العمل متعدد البيئات
+### سير عمل متعدد البيئات
 ```bash
-# Set up environments
+# إعداد البيئات
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# نشر إلى بيئة التطوير
 azd env select dev
 azd up
 
-# Test and promote to staging
+# اختبار ثم الترقية إلى بيئة الإعداد
 azd env select staging
 azd up
 
-# Deploy to production
+# نشر إلى بيئة الإنتاج
 azd env select production
 azd up
 ```
 
-### سير عمل حل المشكلات
+### سير عمل استكشاف الأخطاء وإصلاحها
 ```bash
-# Enable debug mode
+# تمكين وضع التصحيح
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# التحقق من حالة النشر
+azd show
 
-# Validate configuration
-azd config validate
+# التحقق من صحة التكوين
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# فتح لوحة المراقبة للسجلات
+azd monitor --logs
 
-# Check resource status
+# التحقق من حالة الموارد
 azd show --output json
 ```
 
@@ -357,29 +361,29 @@ azd show --output json
 
 ### معلومات التصحيح
 ```bash
-# Enable debug output
+# تمكين إخراج التصحيح
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# تعطيل القياسات عن بعد للحصول على مخرجات أنظف
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# التحقق من التكوين الحالي
+azd config list
 
-# Check authentication status
+# التحقق من حالة المصادقة
 az account show
 ```
 
 ### تصحيح القوالب
 ```bash
-# List available templates with details
+# قائمة القوالب المتاحة مع التفاصيل
 azd template list --output json
 
-# Show template information
+# عرض معلومات القالب
 azd template show <template-name>
 
-# Validate template before init
+# التحقق من صحة القالب قبل التهيئة
 azd template validate <template-name>
 ```
 
@@ -387,62 +391,64 @@ azd template validate <template-name>
 
 ### هيكل المشروع
 ```bash
-# Show current directory structure
-tree /f  # Windows
-find . -type f  # Linux/macOS
+# إظهار بنية الدليل الحالية
+tree /f  # ويندوز
+find . -type f  # لينوكس/ماك أو إس
 
-# Navigate to azd project root
+# انتقل إلى جذر مشروع azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# عرض دليل تكوين azd
+echo $AZD_CONFIG_DIR  # عادةً ~/.azd
 ```
 
-## 🎨 تنسيق الإخراج
+## 🎨 تنسيق المخرجات
 
-### إخراج JSON
+### مخرجات JSON
 ```bash
-# Get JSON output for scripting
+# احصل على إخراج JSON للبرمجة النصية
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# حلل باستخدام jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### إخراج الجدول
+### مخرجات الجدول
 ```bash
-# Format as table
+# نسّق على شكل جدول
 azd env list --output table
-azd service list --output table
+
+# عرض الخدمات المنشورة
+azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 تركيبات الأوامر الشائعة
+## 🔧 تراكيب الأوامر الشائعة
 
-### نص التحقق من الصحة
+### سكريبت فحص الصحة
 ```bash
 #!/bin/bash
-# Quick health check
+# فحص سريع للحالة الصحية
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
 ### التحقق من النشر
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# التحقق قبل النشر
+azd show
+azd provision --preview  # معاينة التغييرات قبل النشر
 az account show
 ```
 
-### مقارنة البيئة
+### مقارنة البيئات
 ```bash
 #!/bin/bash
-# Compare environments
+# قارن البيئات
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### نص تنظيف الموارد
+### سكريبت تنظيف الموارد
 ```bash
 #!/bin/bash
-# Clean up old environments
+# تنظيف البيئات القديمة
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -465,76 +471,79 @@ done
 
 ### متغيرات البيئة الشائعة
 ```bash
-# Azure configuration
+# تكوين Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# تكوين AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# تكوين التطبيق
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
 ## 🚨 أوامر الطوارئ
 
-### الإصلاحات السريعة
+### إصلاحات سريعة
 ```bash
-# Reset authentication
+# إعادة تعيين المصادقة
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# فرض تحديث البيئة
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# إعادة نشر جميع الخدمات
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# التحقق من حالة النشر
+azd show --output json
 ```
 
 ### أوامر الاسترداد
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# استعادة من نشر فاشل - تنظيف وإعادة نشر
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# إعادة توفير البنية التحتية فقط
+azd provision
+
+# إعادة نشر التطبيق فقط
+azd deploy
 ```
 
 ## 💡 نصائح احترافية
 
-### الأسماء المستعارة لتسريع سير العمل
+### أسماء مستعارة لتسريع سير العمل
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# أضف إلى ملف .bashrc أو .zshrc الخاص بك
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### اختصارات الوظائف
+### اختصارات الدوال
 ```bash
-# Quick environment switching
+# التبديل السريع بين البيئات
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# نشر سريع مع المراقبة
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# حالة البيئة
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -544,40 +553,42 @@ azd-status() {
 
 ### الحصول على المساعدة
 ```bash
-# General help
+# مساعدة عامة
 azd --help
 azd help
 
-# Command-specific help
+# مساعدة خاصة بالأمر
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# عرض معلومات الإصدار والبناء
 azd version
 azd version --output json
 ```
 
 ### روابط الوثائق
 ```bash
-# Open documentation in browser
+# افتح التوثيق في المتصفح
 azd docs
 
-# Show template documentation
+# عرض توثيق القالب
 azd template show <template-name> --docs
 ```
 
 ---
 
-**نصيحة**: قم بوضع إشارة مرجعية على هذه القائمة واستخدم `Ctrl+F` للعثور بسرعة على الأوامر التي تحتاجها!
+**نصيحة**: احفظ هذه الورقة المرجعية وقم باستخدام `Ctrl+F` للعثور بسرعة على الأوامر التي تحتاجها!
 
 ---
 
 **التنقل**
-- **الدرس السابق**: [التحقق المسبق](../docs/pre-deployment/preflight-checks.md)
-- **الدرس التالي**: [المصطلحات](glossary.md)
+- **الدرس السابق**: [فحوصات ما قبل النشر](../docs/pre-deployment/preflight-checks.md)
+- **الدرس التالي**: [مسرد المصطلحات](glossary.md)
 
 ---
 
-**إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+إخلاء مسؤولية:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية بالذكاء الاصطناعي (Co-op Translator) https://github.com/Azure/co-op-translator. بينما نسعى إلى الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار الوثيقة الأصلية بلغتها الأصلية المصدر المرجعي المعتمد. للمعلومات الحساسة أو الحيوية، يُنصح بالاستعانة بترجمة احترافية بشرية. لن نتحمل أي مسؤولية عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

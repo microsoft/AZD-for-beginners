@@ -1,369 +1,360 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-18T10:12:45+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "sk"
-}
--->
-# Glosár - Terminológia Azure a AZD
+# Slovník - Terminológia Azure a AZD
 
-**Referencie pre všetky kapitoly**
-- **📚 Domov kurzu**: [AZD pre začiatočníkov](../README.md)
-- **📖 Naučte sa základy**: [Kapitola 1: Základy AZD](../docs/getting-started/azd-basics.md)
-- **🤖 AI Termíny**: [Kapitola 2: Vývoj orientovaný na AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
+**Odkaz pre všetky kapitoly**
+- **📚 Domov kurzu**: [AZD For Beginners](../README.md)
+- **📖 Naučiť sa základy**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 Termíny AI**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Úvod
 
-Tento komplexný glosár poskytuje definície pojmov, konceptov a skratiek používaných v Azure Developer CLI a vývoji v Azure cloude. Je nevyhnutnou referenciou na pochopenie technickej dokumentácie, riešenie problémov a efektívnu komunikáciu o projektoch azd a službách Azure.
+Tento komplexný slovník poskytuje definície pre pojmy, koncepty a skratky používané v Azure Developer CLI a vývoji v cloude Azure. Základný odkaz pre porozumenie technickej dokumentácie, riešenie problémov a efektívnu komunikáciu o projektoch azd a službách Azure.
 
 ## Ciele učenia
 
-Používaním tohto glosára budete:
+Používaním tohto slovníka budete:
 - Rozumieť základnej terminológii a konceptom Azure Developer CLI
-- Ovládať slovník a technické pojmy vývoja v Azure cloude
-- Efektívne odkazovať na terminológiu infraštruktúry ako kódu a nasadzovania
+- Ovládať slovnú zásobu a technické pojmy vývoja v Azure cloude
+- Efektívne odkazovať na terminológiu Infrastructure as Code a nasadzovania
 - Pochopiť názvy služieb Azure, skratky a ich účely
-- Získať definície na riešenie problémov a terminológiu ladenia
+- Získať definície pre terminológiu pri riešení problémov a ladení
 - Naučiť sa pokročilé koncepty architektúry a vývoja v Azure
 
 ## Výsledky učenia
 
-Pravidelným používaním tohto glosára budete schopní:
-- Efektívne komunikovať pomocou správnej terminológie Azure Developer CLI
+Pravidelným odkazovaním na tento slovník budete schopní:
+- Efektívne komunikovať s použitím správnej terminológie Azure Developer CLI
 - Jasnejšie rozumieť technickej dokumentácii a chybovým hláseniam
-- S istotou sa orientovať v službách a konceptoch Azure
-- Riešiť problémy pomocou vhodného technického slovníka
-- Prispievať k tímovým diskusiám s presným technickým jazykom
+- Sebavedomo sa orientovať v službách a konceptoch Azure
+- Riešiť problémy s použitím vhodnej technickej slovnej zásoby
+- Prispievať do tímových diskusií presným technickým jazykom
 - Systematicky rozširovať svoje znalosti vývoja v Azure cloude
 
 ## A
 
 **ARM Template**  
-Šablóna Azure Resource Manager. Formát infraštruktúry ako kódu založený na JSON, používaný na deklaratívne definovanie a nasadzovanie zdrojov Azure.
+Azure Resource Manager template. JSON-based Infrastructure as Code format used to define and deploy Azure resources declaratively.
 
 **App Service**  
-Platforma ako služba (PaaS) od Azure na hosťovanie webových aplikácií, REST API a mobilných backendov bez správy infraštruktúry.
+Azure's platform-as-a-service (PaaS) offering for hosting web applications, REST APIs, and mobile backends without managing infrastructure.
 
 **Application Insights**  
-Služba monitorovania výkonu aplikácií (APM) od Azure, ktorá poskytuje hlboké náhľady na výkon, dostupnosť a používanie aplikácií.
+Azure's application performance monitoring (APM) service that provides deep insights into application performance, availability, and usage.
 
 **Azure CLI**  
-Rozhranie príkazového riadku na správu zdrojov Azure. Používané azd na autentifikáciu a niektoré operácie.
+Command-line interface for managing Azure resources. Used by azd for authentication and some operations.
 
 **Azure Developer CLI (azd)**  
-Príkazový nástroj zameraný na vývojárov, ktorý urýchľuje proces vytvárania a nasadzovania aplikácií do Azure pomocou šablón a infraštruktúry ako kódu.
+Developer-centric command-line tool that accelerates the process of building and deploying applications to Azure using templates and Infrastructure as Code.
 
 **azure.yaml**  
-Hlavný konfiguračný súbor projektu azd, ktorý definuje služby, infraštruktúru a nasadzovacie háky.
+The main configuration file for an azd project that defines services, infrastructure, and deployment hooks.
 
 **Azure Resource Manager (ARM)**  
-Služba nasadzovania a správy Azure, ktorá poskytuje vrstvu na správu vytvárania, aktualizácie a odstraňovania zdrojov.
+Azure's deployment and management service that provides a management layer for creating, updating, and deleting resources.
 
 ## B
 
 **Bicep**  
-Doménovo špecifický jazyk (DSL) vyvinutý spoločnosťou Microsoft na nasadzovanie zdrojov Azure. Poskytuje jednoduchšiu syntax ako ARM šablóny, pričom sa kompiluje do ARM.
+Domain-specific language (DSL) developed by Microsoft for deploying Azure resources. Provides simpler syntax than ARM templates while compiling to ARM.
 
 **Build**  
-Proces kompilácie zdrojového kódu, inštalácie závislostí a prípravy aplikácií na nasadenie.
+The process of compiling source code, installing dependencies, and preparing applications for deployment.
 
 **Blue-Green Deployment**  
-Stratégia nasadzovania, ktorá používa dve identické produkčné prostredia (modré a zelené) na minimalizáciu prestojov a rizika.
+Deployment strategy that uses two identical production environments (blue and green) to minimize downtime and risk.
 
 ## C
 
 **Container Apps**  
-Serverless kontajnerová služba Azure, ktorá umožňuje spúšťanie kontajnerizovaných aplikácií bez správy zložitej infraštruktúry.
+Azure's serverless container service that enables running containerized applications without managing complex infrastructure.
 
 **CI/CD**  
-Kontinuálna integrácia/kontinuálne nasadzovanie. Automatizované postupy na integráciu zmien kódu a nasadzovanie aplikácií.
+Continuous Integration/Continuous Deployment. Automated practices for integrating code changes and deploying applications.
 
 **Cosmos DB**  
-Globálne distribuovaná, multi-modelová databázová služba Azure, ktorá poskytuje komplexné SLA pre priepustnosť, latenciu, dostupnosť a konzistenciu.
+Azure's globally distributed, multi-model database service that provides comprehensive SLAs for throughput, latency, availability, and consistency.
 
 **Configuration**  
-Nastavenia a parametre, ktoré riadia správanie aplikácie a možnosti nasadenia.
+Settings and parameters that control application behavior and deployment options.
 
 ## D
 
 **Deployment**  
-Proces inštalácie a konfigurácie aplikácií a ich závislostí na cieľovej infraštruktúre.
+The process of installing and configuring applications and their dependencies on target infrastructure.
 
 **Docker**  
-Platforma na vývoj, distribúciu a spúšťanie aplikácií pomocou technológie kontajnerizácie.
+Platform for developing, shipping, and running applications using containerization technology.
 
 **Dockerfile**  
-Textový súbor obsahujúci pokyny na vytvorenie obrazu kontajnera Docker.
+Text file containing instructions for building a Docker container image.
 
 ## E
 
 **Environment**  
-Cieľ nasadenia, ktorý predstavuje konkrétnu inštanciu vašej aplikácie (napr. vývoj, staging, produkcia).
+A deployment target that represents a specific instance of your application (e.g., development, staging, production).
 
 **Environment Variables**  
-Konfiguračné hodnoty uložené ako páry kľúč-hodnota, ku ktorým aplikácie môžu pristupovať počas behu.
+Configuration values stored as key-value pairs that applications can access at runtime.
 
 **Endpoint**  
-URL alebo sieťová adresa, kde je možné pristupovať k aplikácii alebo službe.
+URL or network address where an application or service can be accessed.
 
 ## F
 
 **Function App**  
-Serverless výpočtová služba Azure, ktorá umožňuje spúšťanie kódu riadeného udalosťami bez správy infraštruktúry.
+Azure's serverless compute service that enables running event-driven code without managing infrastructure.
 
 ## G
 
 **GitHub Actions**  
-Platforma CI/CD integrovaná s repozitármi GitHub na automatizáciu pracovných postupov.
+CI/CD platform integrated with GitHub repositories for automating workflows.
 
 **Git**  
-Distribuovaný systém na správu verzií používaný na sledovanie zmien v zdrojovom kóde.
+Distributed version control system used for tracking changes in source code.
 
 ## H
 
 **Hooks**  
-Vlastné skripty alebo príkazy, ktoré sa spúšťajú v konkrétnych bodoch počas životného cyklu nasadzovania (preprovision, postprovision, predeploy, postdeploy).
+Custom scripts or commands that run at specific points during the deployment lifecycle (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Typ služby Azure, kde bude aplikácia nasadená (napr. appservice, containerapp, function).
+The Azure service type where an application will be deployed (e.g., appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Praxe definovania a správy infraštruktúry prostredníctvom kódu namiesto manuálnych procesov.
+Practice of defining and managing infrastructure through code rather than manual processes.
 
 **Init**  
-Proces inicializácie nového projektu azd, zvyčajne zo šablóny.
+The process of initializing a new azd project, typically from a template.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Formát výmeny dát bežne používaný pre konfiguračné súbory a odpovede API.
+JavaScript Object Notation. Data interchange format commonly used for configuration files and API responses.
 
 **JWT**  
-JSON Web Token. Štandard na bezpečný prenos informácií medzi stranami ako JSON objekt.
+JSON Web Token. Standard for securely transmitting information between parties as a JSON object.
 
 ## K
 
 **Key Vault**  
-Služba Azure na bezpečné ukladanie a správu tajomstiev, kľúčov a certifikátov.
+Azure's service for securely storing and managing secrets, keys, and certificates.
 
 **Kusto Query Language (KQL)**  
-Dotazovací jazyk používaný na analýzu dát v Azure Monitor, Application Insights a ďalších službách Azure.
+Query language used for analyzing data in Azure Monitor, Application Insights, and other Azure services.
 
 ## L
 
 **Load Balancer**  
-Služba, ktorá rozdeľuje prichádzajúcu sieťovú prevádzku medzi viaceré servery alebo inštancie.
+Service that distributes incoming network traffic across multiple servers or instances.
 
 **Log Analytics**  
-Služba Azure na zhromažďovanie, analýzu a reakciu na telemetrické dáta z cloudových a lokálnych prostredí.
+Azure service for collecting, analyzing, and acting on telemetry data from cloud and on-premises environments.
 
 ## M
 
 **Managed Identity**  
-Funkcia Azure, ktorá poskytuje službám Azure automaticky spravovanú identitu na autentifikáciu k iným službám Azure.
+Azure feature that provides Azure services with an automatically managed identity for authenticating to other Azure services.
 
 **Microservices**  
-Architektonický prístup, kde sú aplikácie vytvorené ako kolekcia malých, nezávislých služieb.
+Architectural approach where applications are built as a collection of small, independent services.
 
 **Monitor**  
-Jednotné monitorovacie riešenie Azure, ktoré poskytuje úplnú observabilitu naprieč aplikáciami a infraštruktúrou.
+Azure's unified monitoring solution that provides full-stack observability across applications and infrastructure.
 
 ## N
 
 **Node.js**  
-JavaScript runtime postavený na JavaScriptovom engine V8 od Chrome na vytváranie serverových aplikácií.
+JavaScript runtime built on Chrome's V8 JavaScript engine for building server-side applications.
 
 **npm**  
-Správca balíkov pre Node.js, ktorý spravuje závislosti a balíky.
+Package manager for Node.js that manages dependencies and packages.
 
 ## O
 
 **Output**  
-Hodnoty vrátené z nasadenia infraštruktúry, ktoré môžu byť použité aplikáciami alebo inými zdrojmi.
+Values returned from infrastructure deployment that can be used by applications or other resources.
 
 ## P
 
 **Package**  
-Proces prípravy kódu aplikácie a závislostí na nasadenie.
+The process of preparing application code and dependencies for deployment.
 
 **Parameters**  
-Vstupné hodnoty odovzdané šablónam infraštruktúry na prispôsobenie nasadení.
+Input values passed to infrastructure templates to customize deployments.
 
 **PostgreSQL**  
-Open-source relačný databázový systém podporovaný ako spravovaná služba v Azure.
+Open-source relational database system supported as a managed service in Azure.
 
 **Provisioning**  
-Proces vytvárania a konfigurácie zdrojov Azure definovaných v šablónach infraštruktúry.
+The process of creating and configuring Azure resources defined in infrastructure templates.
 
 ## Q
 
 **Quota**  
-Limity na množstvo zdrojov, ktoré je možné vytvoriť v Azure predplatnom alebo regióne.
+Limits on the amount of resources that can be created in an Azure subscription or region.
 
 ## R
 
 **Resource Group**  
-Logický kontajner pre zdroje Azure, ktoré zdieľajú rovnaký životný cyklus, povolenia a politiky.
+Logical container for Azure resources that share the same lifecycle, permissions, and policies.
 
 **Resource Token**  
-Unikátny reťazec generovaný azd na zabezpečenie jedinečnosti názvov zdrojov naprieč nasadeniami.
+Unique string generated by azd to ensure resource names are unique across deployments.
 
 **REST API**  
-Architektonický štýl na navrhovanie sieťových aplikácií pomocou HTTP metód.
+Architectural style for designing networked applications using HTTP methods.
 
 **Rollback**  
-Proces návratu k predchádzajúcej verzii aplikácie alebo konfigurácie infraštruktúry.
+Process of reverting to a previous version of an application or infrastructure configuration.
 
 ## S
 
 **Service**  
-Komponent vašej aplikácie definovaný v azure.yaml (napr. webový frontend, API backend, databáza).
+A component of your application defined in azure.yaml (e.g., web frontend, API backend, database).
 
 **SKU**  
-Stock Keeping Unit. Reprezentuje rôzne úrovne služieb alebo výkonnostné úrovne pre zdroje Azure.
+Stock Keeping Unit. Represents different service tiers or performance levels for Azure resources.
 
 **SQL Database**  
-Spravovaná relačná databázová služba Azure založená na Microsoft SQL Server.
+Azure's managed relational database service based on Microsoft SQL Server.
 
 **Static Web Apps**  
-Služba Azure na vytváranie a nasadzovanie full-stack webových aplikácií zo zdrojových repozitárov.
+Azure service for building and deploying full-stack web applications from source code repositories.
 
 **Storage Account**  
-Služba Azure, ktorá poskytuje cloudové úložisko pre dátové objekty vrátane blobov, súborov, frontov a tabuliek.
+Azure service that provides cloud storage for data objects including blobs, files, queues, and tables.
 
 **Subscription**  
-Kontajner účtu Azure, ktorý obsahuje skupiny zdrojov a zdroje, s pridruženým účtovaním a správou prístupu.
+Azure account container that holds resource groups and resources, with associated billing and access management.
 
 ## T
 
 **Template**  
-Predpripravená štruktúra projektu obsahujúca kód aplikácie, definície infraštruktúry a konfiguráciu pre bežné scenáre.
+Pre-built project structure containing application code, infrastructure definitions, and configuration for common scenarios.
 
 **Terraform**  
-Open-source nástroj infraštruktúry ako kódu, ktorý podporuje viacerých poskytovateľov cloudu vrátane Azure.
+Open-source Infrastructure as Code tool that supports multiple cloud providers including Azure.
 
 **Traffic Manager**  
-DNS-based load balancer Azure na rozdeľovanie prevádzky naprieč globálnymi regiónmi Azure.
+Azure's DNS-based traffic load balancer for distributing traffic across global Azure regions.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Reťazec, ktorý identifikuje konkrétny zdroj.
+Uniform Resource Identifier. String that identifies a particular resource.
 
 **URL**  
-Uniform Resource Locator. Typ URI, ktorý špecifikuje, kde sa zdroj nachádza a ako ho získať.
+Uniform Resource Locator. Type of URI that specifies where a resource is located and how to retrieve it.
 
 ## V
 
 **Virtual Network (VNet)**  
-Základný stavebný blok pre súkromné siete v Azure, poskytujúci izoláciu a segmentáciu.
+Fundamental building block for private networks in Azure, providing isolation and segmentation.
 
 **VS Code**  
-Visual Studio Code. Populárny editor kódu s vynikajúcou integráciou Azure a azd.
+Visual Studio Code. Popular code editor with excellent Azure and azd integration.
 
 ## W
 
 **Webhook**  
-HTTP callback spustený konkrétnymi udalosťami, bežne používaný v CI/CD pipeline.
+HTTP callback triggered by specific events, commonly used in CI/CD pipelines.
 
 **What-if**  
-Funkcia Azure, ktorá ukazuje, aké zmeny by boli vykonané nasadením bez jeho skutočného vykonania.
+Azure feature that shows what changes would be made by a deployment without actually executing it.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Štandard na serializáciu dát čitateľný pre človeka, používaný pre konfiguračné súbory ako azure.yaml.
+YAML Ain't Markup Language. Human-readable data serialization standard used for configuration files like azure.yaml.
 
 ## Z
 
 **Zone**  
-Fyzicky oddelené lokality v rámci regiónu Azure, ktoré poskytujú redundanciu a vysokú dostupnosť.
+Physically separate locations within an Azure region that provide redundancy and high availability.
 
 ---
 
 ## Bežné skratky
 
 | Skratka | Plný názov | Popis |
-|---------|-----------|-------|
-| AAD | Azure Active Directory | Služba správy identít a prístupu |
-| ACR | Azure Container Registry | Služba registrácie obrazov kontajnerov |
+|---------|-----------|-------------|
+| AAD | Azure Active Directory | Služba na správu identity a prístupu |
+| ACR | Azure Container Registry | Služba pre registry kontajnerových obrazov |
 | AKS | Azure Kubernetes Service | Spravovaná služba Kubernetes |
-| API | Application Programming Interface | Sada protokolov na tvorbu softvéru |
-| ARM | Azure Resource Manager | Služba nasadzovania a správy Azure |
-| CDN | Content Delivery Network | Distribuovaná sieť serverov |
-| CI/CD | Continuous Integration/Continuous Deployment | Automatizované vývojové postupy |
-| CLI | Command Line Interface | Textové užívateľské rozhranie |
-| DNS | Domain Name System | Systém na prekladanie doménových mien na IP adresy |
-| HTTPS | Hypertext Transfer Protocol Secure | Bezpečná verzia HTTP |
-| IaC | Infrastructure as Code | Správa infraštruktúry prostredníctvom kódu |
-| JSON | JavaScript Object Notation | Formát výmeny dát |
-| JWT | JSON Web Token | Formát tokenu na bezpečný prenos informácií |
+| API | Application Programming Interface | Sada protokolov pre tvorbu softvéru |
+| ARM | Azure Resource Manager | Nasadzovacia a správcovská služba Azure |
+| CDN | Content Delivery Network | Distribuovaná sieť serverov pre doručovanie obsahu |
+| CI/CD | Continuous Integration/Continuous Deployment | Automatizované praktiky vývoja a nasadzovania |
+| CLI | Command Line Interface | Textové používateľské rozhranie |
+| DNS | Domain Name System | Systém pre preklad doménových mien na IP adresy |
+| HTTPS | Hypertext Transfer Protocol Secure | Zabezpečená verzia HTTP |
+| IaC | Infrastructure as Code | Správa infraštruktúry pomocou kódu |
+| JSON | JavaScript Object Notation | Formát na výmenu dát |
+| JWT | JSON Web Token | Formát tokenu pre bezpečný prenos informácií |
 | KQL | Kusto Query Language | Dotazovací jazyk pre dátové služby Azure |
-| RBAC | Role-Based Access Control | Metóda kontroly prístupu založená na rolách |
+| RBAC | Role-Based Access Control | Riadenie prístupu založené na rolách |
 | REST | Representational State Transfer | Architektonický štýl pre webové služby |
-| SDK | Software Development Kit | Kolekcia vývojových nástrojov |
-| SLA | Service Level Agreement | Záväzok k dostupnosti/výkonu služby |
+| SDK | Software Development Kit | Zostava nástrojov pre vývoj |
+| SLA | Service Level Agreement | Záväzok k dostupnosti/výkonnosti služby |
 | SQL | Structured Query Language | Jazyk na správu relačných databáz |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kryptografické protokoly |
 | URI | Uniform Resource Identifier | Reťazec identifikujúci zdroj |
 | URL | Uniform Resource Locator | Typ URI špecifikujúci umiestnenie zdroja |
 | VM | Virtual Machine | Emulácia počítačového systému |
 | VNet | Virtual Network | Súkromná sieť v Azure |
-| YAML | YAML Ain't Markup Language | Štandard na serializáciu dát |
+| YAML | YAML Ain't Markup Language | Štandard serializácie dát |
 
 ---
 
 ## Mapovanie názvov služieb Azure
 
-| Bežný názov | Oficiálny názov služby Azure | Typ hostiteľa azd |
-|-------------|------------------------------|-------------------|
-| Webová aplikácia | Azure App Service | `appservice` |
-| API aplikácia | Azure App Service | `appservice` |
-| Kontajnerová aplikácia | Azure Container Apps | `containerapp` |
-| Funkcia | Azure Functions | `function` |
-| Statická stránka | Azure Static Web Apps | `staticwebapp` |
-| Databáza | Azure Database for PostgreSQL | `postgres` |
+| Bežný názov | Oficiálny názov služby Azure | azd Host Type |
+|-------------|------------------------------|---------------|
+| Web App | Azure App Service | `appservice` |
+| API App | Azure App Service | `appservice` |
+| Container App | Azure Container Apps | `containerapp` |
+| Function | Azure Functions | `function` |
+| Static Site | Azure Static Web Apps | `staticwebapp` |
+| Database | Azure Database for PostgreSQL | `postgres` |
 | NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Úložisko | Azure Storage Account | `storage` |
+| Storage | Azure Storage Account | `storage` |
 | Cache | Azure Cache for Redis | `redis` |
-| Vyhľadávanie | Azure Cognitive Search | `search` |
-| Správy | Azure Service Bus | `servicebus` |
+| Search | Azure Cognitive Search | `search` |
+| Messaging | Azure Service Bus | `servicebus` |
 
 ---
 
-## Termíny špecifické pre kontext
+## Kontextovo špecifické pojmy
 
-### Vývojové termíny
-- **Hot Reload**: Automatická aktualizácia aplikácií počas vývoja bez reštartu
+### Vývojové pojmy
+- **Hot Reload**: Automatické aktualizovanie aplikácií počas vývoja bez reštartu
 - **Build Pipeline**: Automatizovaný proces na zostavenie a testovanie kódu
-- **Deployment Slot**: Staging prostredie v rámci App Service
-- **Environment Parity**: Udržiavanie podobnosti medzi vývojovým, staging a produkčným prostredím
+- **Deployment Slot**: Stagingové prostredie v rámci App Service
+- **Environment Parity**: Zachovanie podobnosti medzi vývojovým, stagingovým a produkčným prostredím
 
-### Bezpečnostné termíny
-- **Managed Identity**: Funkcia Azure poskytujúca automatickú správu poverení
+### Bezpečnostné pojmy
+- **Managed Identity**: Funkcia Azure poskytujúca automatickú správu prihlasovacích údajov
 - **Key Vault**: Bezpečné úložisko pre tajomstvá, kľúče a certifikáty
-- **RBAC**: Kontrola prístupu založená na rolách pre zdroje Azure
-- **Network Security Group**: Virtuálny firewall na kontrolu sieťovej prevádzky
+- **RBAC**: Riadenie prístupu založené na rolách pre prostriedky Azure
+- **Network Security Group**: Virtuálny firewall na riadenie sieťovej prevádzky
 
-### Monitorovacie termíny
+### Monitorovacie pojmy
 - **Telemetry**: Automatizované zhromažďovanie meraní a dát
-- **Application Performance Monitoring (APM)**: Monitorovanie výkonu softvéru
+- **Application Performance Monitoring (APM)**: Monitorovanie výkonnosti softvéru
 - **Log Analytics**: Služba na zhromažďovanie a analýzu logov
-- **Alert Rules**: Automatizované upozornenia na základe metrík alebo podmienok
+- **Alert Rules**: Automatizované oznámenia založené na metrikách alebo podmienkach
 
-### Termíny nasadzovania
-- **Blue-Green Deployment**: Stratégia nasadzovania bez prestojov
-- **Canary Deployment**: Postupné nasadzovanie pre podmnožinu používateľov
+### Nasadzovacie pojmy
+- **Blue-Green Deployment**: Stratégiu nasadenia bez prestojov
+- **Canary Deployment**: Postupné nasadenie pre podmnožinu používateľov
 - **Rolling Update**: Sekvenčná výmena inštancií aplikácie
 - **Rollback**: Návrat k predchádzajúcej verzii aplikácie
 
 ---
 
-**Tip na použitie**: Použite `Ctrl+F` na rýchle vyhľadanie konkrétnych termínov v tomto glosári. Termíny sú vzájomne prepojené, kde je to vhodné.
+**Tip na použitie**: Použite `Ctrl+F` na rýchle vyhľadanie konkrétnych pojmov v tomto slovníku. Pojmy sú kde to je vhodné prepojené naprieč.
 
 ---
 
@@ -373,5 +364,7 @@ Fyzicky oddelené lokality v rámci regiónu Azure, ktoré poskytujú redundanci
 
 ---
 
-**Zrieknutie sa zodpovednosti**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, berte na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nenesieme zodpovednosť za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Vylúčenie zodpovednosti:
+Tento dokument bol preložený pomocou AI prekladateľskej služby Co-op Translator (https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by sa mal považovať za autoritatívny zdroj. Pri kritických informáciách sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia ani nesprávne výklady, ktoré by vznikli použitím tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

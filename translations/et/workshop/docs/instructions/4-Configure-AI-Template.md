@@ -1,50 +1,41 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-10-11T15:43:44+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "et"
-}
--->
-# 4. Malli seadistamine
+# 4. Konfigureeri mall
 
-!!! tip "PÄRAST SELLE MODULI LÄBIMIST SAAD"
+!!! tip "SELLE MULLUGA LÕPPSA SA SUUDA"
 
-    - [ ] Mõistnud `azure.yaml` faili eesmärki
-    - [ ] Mõistnud `azure.yaml` faili struktuuri
-    - [ ] Mõistnud azd elutsükli `hooks` väärtust
-    - [ ] **Lab 3:** 
+    - [ ] Mõista `azure.yaml` eesmärki
+    - [ ] Mõista `azure.yaml` struktuuri
+    - [ ] Mõista azd elutsükli `hookide` väärtust
+    - [ ] **Lab 4:** Uurida ja muuta keskkonnamuutujaid
 
 ---
 
-!!! prompt "Mida teeb `azure.yaml` fail? Kasuta koodiplokki ja selgita rida-realt"
+!!! prompt "Milleks `azure.yaml` fail on? Kasuta koodilõiku ja selgita seda ridade kaupa"
 
-      `azure.yaml` fail on **Azure Developer CLI (azd)** konfiguratsioonifail. See määratleb, kuidas sinu rakendus peaks Azure'is juurutatama, sealhulgas infrastruktuuri, teenused, juurutamise hooks ja keskkonnamuutujad.
+      `azure.yaml` fail on **Azure Developer CLI (azd) konfiguratsioonifail**. See määratleb, kuidas sinu rakendus tuleks Azure’i juures juurutada, sh infrastruktuuri, teenused, juurutamise hookid ja keskkonnamuutujad.
 
 ---
 
 ## 1. Eesmärk ja funktsionaalsus
 
-See `azure.yaml` fail toimib **juurutamise plaanina** AI agendi rakenduse jaoks, mis:
+See `azure.yaml` fail on **juurutamise plaan** AI-agendi rakendusele, mis:
 
 1. **Kontrollib keskkonda** enne juurutamist
-2. **Haldab Azure AI teenuseid** (AI Hub, AI Project, Search jne)
-3. **Juurutab Python rakenduse** Azure Container Apps platvormile
-4. **Konfigureerib AI mudelid** vestluse ja sisseehitamise funktsionaalsuse jaoks
-5. **Seadistab monitooringu ja jälgimise** AI rakenduse jaoks
-6. **Toetab nii uusi kui ka olemasolevaid** Azure AI projekti stsenaariume
+2. **Varustab Azure AI teenuseid** (AI Hub, AI Project, Search jt)
+3. **Juurutab Python rakenduse** Azure Container Appsi
+4. **Seadistab AI mudelid** nii vestluse kui ka manustamise funktsionaalsuseks
+5. **Seadistab jälgimise ja traceerimise** AI rakendusele
+6. **Halb nii uusi kui olemasolevaid** Azure AI projektide stsenaariume
 
-Fail võimaldab **ühe käsuga juurutamist** (`azd up`) täieliku AI agendi lahenduse jaoks koos korrektse valideerimise, haldamise ja järelkonfiguratsiooniga.
+Fail võimaldab **ühe käsklusega juurutamist** (`azd up`) täismahus AI agentide lahendusele koos korra kontrolli, varustamise ja järelseadistusega.
 
-??? info "Laienda, et näha: `azure.yaml`"
+??? info "Laienda vaatamiseks: `azure.yaml`"
 
-      `azure.yaml` fail määratleb, kuidas Azure Developer CLI peaks juurutama ja haldama seda AI agendi rakendust Azure'is. Vaatame seda rida-realt.
+      `azure.yaml` fail määratleb, kuidas Azure Developer CLI peaks seda AI Agent rakendust Azure’is juurutama ja haldama. Vaatame selle rida-realt läbi.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: kas me vajame hooks? 
+      # TODO: kas me vajame hooke? 
       # TODO: kas me vajame kõiki muutujaid?
 
       name: azd-get-started-with-ai-agents
@@ -135,9 +126,9 @@ Fail võimaldab **ühe käsuga juurutamist** (`azd up`) täieliku AI agendi lahe
 
 ---
 
-## 2. Faili lahtivõtmine
+## 2. Faili lahtimurdmine
 
-Vaatame faili sektsioonide kaupa, et mõista, mida see teeb ja miks.
+Vaatame faili peatükkide kaupa, et mõista, mida see teeb - ja miks.
 
 ### 2.1 **Päis ja skeem (1-3)**
 
@@ -145,7 +136,7 @@ Vaatame faili sektsioonide kaupa, et mõista, mida see teeb ja miks.
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Rida 1**: Pakub YAML keeleserveri skeemi valideerimist IDE toe ja IntelliSense jaoks
+- **Rida 1**: Pakub YAML-keele serveri skeemi valideerimist IDE toe ja IntelliSense jaoks
 
 ### 2.2 Projekti metaandmed (5-10)
 
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Rida 5**: Määratleb projekti nime, mida Azure Developer CLI kasutab
-- **Rida 6-7**: Näitab, et see põhineb malliversioonil 1.0.2
-- **Rida 8-9**: Nõuab Azure Developer CLI versiooni 1.14.0 või uuemat
+- **Rida 5**: Määratleb projekti nime, mida kasutab Azure Developer CLI
+- **Read 6-7**: Näitab, et põhineb malli versioonil 1.0.2
+- **Read 8-9**: Nõuab Azure Developer CLI versiooni 1.14.0 või uuemat
 
-### 2.3 Juurutamise hooks (11-40)
+### 2.3 Juurutamise hookid (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Rida 11-20**: **Eeljuurutamise hook** - käivitatakse enne `azd up`
+- **Read 11-20**: **Eeljuurutuse hook** – töötab enne `azd up`
 
-      - Unix/Linux: Muudab valideerimisskripti käivitatavaks ja käivitab selle
-      - Windows: Käivitab PowerShelli valideerimisskripti
-      - Mõlemad on interaktiivsed ja peatavad juurutamise, kui need ebaõnnestuvad
+      - Unix/Linuxil: teeb valideerimisskripti täidetavaks ja käivitab selle
+      - Windowsil: käivitab PowerShell valideerimisskripti
+      - Mõlemad on interaktiivsed ja katkestavad juurutamise, kui ebaõnnestuvad
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Rida 21-30**: **Järgneva haldamise hook** - käivitatakse pärast Azure'i ressursside loomist
+- **Read 21-30**: **Pärast ressursside loomist hook** – töötab pärast Azure ressursside loomist
 
   - Käivitab keskkonnamuutujate kirjutamise skriptid
-  - Jätkab juurutamist isegi siis, kui need skriptid ebaõnnestuvad (`continueOnError: true`)
+  - Jätkab juurutamist isegi kui need skriptid ebaõnnestuvad (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Rida 31-40**: **Järgneva juurutamise hook** - käivitatakse pärast rakenduse juurutamist
+- **Read 31-40**: **Pärast juurutamist hook** – töötab pärast rakenduse juurutamist
 
   - Käivitab lõplikud seadistusskriptid
-  - Jätkab isegi siis, kui skriptid ebaõnnestuvad
+  - Jätkab ka skriptide ebaõnnestumisel
 
 ### 2.4 Teenuse konfiguratsioon (41-48)
 
-See konfigureerib rakenduse teenuse, mida juurutatakse.
+See konfigureerib rakenduse teenuse, mida sa juurutad.
 
 ```yaml title="" linenums="0"
 services:
@@ -236,17 +227,17 @@ services:
 ```
 
 - **Rida 42**: Määratleb teenuse nimega "api_and_frontend"
-- **Rida 43**: Viitab `./src` kataloogile lähtekoodi jaoks
-- **Rida 44**: Määratleb Python programmeerimiskeelena
-- **Rida 45**: Kasutab Azure Container Apps platvormi hostimiseks
-- **Rida 46-48**: Docker konfiguratsioon
+- **Rida 43**: Näitab `./src` kausta lähtekoodi jaoks
+- **Rida 44**: Määratleb programmeerimiskeeleks Python
+- **Rida 45**: Kasutab hostimise platvormina Azure Container Appsi
+- **Read 46-48**: Docker konfiguratsioon
 
-      - Kasutab "api_and_frontend" pildinime
-      - Ehitab Docker pildi Azure'is kaugjuhtimisega (mitte kohapeal)
+      - Kasutab pildinime "api_and_frontend"
+      - Ehitatakse Dockeri pilt Azure’is eemalt (mitte lokaalselt)
 
-### 2.5 Torujuhtme muutujad (49-76)
+### 2.5 Pipelini muutujad (49-76)
 
-Need on muutujad, mis aitavad `azd` käivitada CI/CD torujuhtmetes automatiseerimiseks.
+Need on muutujad, mis aitavad sul käivitada `azd` CI/CD pipeline’is automaatseks tööks
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,108 +278,113 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-See sektsioon määratleb keskkonnamuutujad, mida kasutatakse **juurutamise ajal**, organiseeritud kategooriate kaupa:
+See osa määratleb keskkonnamuutujad, mida kasutatakse **juurutamise ajal**, kategoriseeritult:
 
-- **Azure'i ressursside nimed (Rida 51-60)**:
-      - Põhilised Azure'i teenuste ressursside nimed, nt Resource Group, AI Hub, AI Project jne
-- **Funktsiooni lülitid (Rida 61-63)**:
-      - Boolean muutujad konkreetsete Azure'i teenuste lubamiseks/keelamiseks
-- **AI agendi konfiguratsioon (Rida 64-71)**:
-      - Põhiagendi konfiguratsioon, sealhulgas nimi, ID, juurutamise seaded, mudeli detailid
-- **AI sisseehitamise konfiguratsioon (Rida 72-79)**:
-      - Sisseehitamise mudeli konfiguratsioon vektoriotsingu jaoks
-- **Otsing ja monitooring (Rida 80-84)**:
-      - Otsinguindeksi nimi, olemasolevate ressursside ID-d ja monitooringu/jälgimise seaded
+- **Azure ressursside nimed (Read 51-60)**:
+      - Põhirakenduste nimed Azure teenuste jaoks (Resource Group, AI Hub, AI Project jne)
+- **Funktsioonide lülitid (Read 61-63)**:
+      - Boolean muutujad, mis lubavad või keelavad spetsiifilisi Azure teenuseid
+- **AI agendi konfiguratsioon (Read 64-71)**:
+      - Põhjalik konfiguratsioon AI agendi nime, ID, juurutamise ja mudelite kohta
+- **AI manustamise konfiguratsioon (Read 72-79)**:
+      - Manustamise mudeli seadistused vektorotsingu jaoks
+- **Otsingu ja jälgimise seaded (Read 80-84)**:
+      - Otsingu indeksi nimi, olemasolevad ressursi IDd ja jälgimise/traceerimise sätted
 
 ---
 
-## 3. Keskkonnamuutujate tundmine
-Järgnevad keskkonnamuutujad kontrollivad sinu juurutamise konfiguratsiooni ja käitumist, organiseeritud nende peamise eesmärgi järgi. Enamikul muutujatel on mõistlikud vaikeseaded, kuid sa saad neid kohandada vastavalt oma konkreetsetele nõuetele või olemasolevatele Azure'i ressurssidele.
+## 3. Tunned Keskkonnamuutujaid
+Järgnevad keskkonnamuutujad kontrollivad sinu juurutuse konfiguratsiooni ja käitumist, korraldatuna nende põhiotstarbe järgi. Enamikul muutujatest on mõistlikud vaikeseaded, kuid saad neid kohandada vastavalt oma konkreetsetele nõuetele või olemasolevatele Azure ressurssidele.
 
-### 3.1 Nõutavad muutujad 
+### 3.1 Nõutavad muutujad
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Azure'i põhikonfiguratsioon
+AZURE_ENV_NAME                    # Keskkonna nimi (kasutatakse ressursside nimetamisel)
+AZURE_LOCATION                    # Paigalduspiirkond
+AZURE_SUBSCRIPTION_ID             # Sihttellimus
+AZURE_RESOURCE_GROUP              # Ressursigrupi nimi
+AZURE_PRINCIPAL_ID                # Kasutaja põhiülem RBAC jaoks
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Ressursside nimed (automaatne genereerimine, kui pole määratud)
+AZURE_AIHUB_NAME                  # Microsoft Foundry keskuse nimi
+AZURE_AIPROJECT_NAME              # AI projekti nimi
+AZURE_AISERVICES_NAME             # AI teenuste konto nimi
+AZURE_STORAGE_ACCOUNT_NAME        # Salvestuskonto nimi
+AZURE_CONTAINER_REGISTRY_NAME     # Konteinerite registri nimi
+AZURE_KEYVAULT_NAME               # Key Vault nimi (kui kasutatakse)
 ```
+  
+### 3.2 Mudeli konfiguratsioon
 
-### 3.2 Mudeli konfiguratsioon 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Vestlusmudeli konfiguratsioon
+AZURE_AI_AGENT_MODEL_NAME         # Vaikimisi: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Vaikimisi: OpenAI (või Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Vaikimisi: uusim saadaval
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Vestlusmudeli juurutamise nimi
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Vaikimisi: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Vaikimisi: 80 (tuhandet TPM-i)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Manustamismudeli konfiguratsioon
+AZURE_AI_EMBED_MODEL_NAME         # Vaikimisi: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Vaikimisi: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Vaikimisi: uusim saadaval
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Manustamise juurutamise nimi
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Vaikimisi: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Vaikimisi: 50 (tuhandet TPM-i)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Agendi konfiguratsioon
+AZURE_AI_AGENT_NAME               # Agendi kuvatav nimi
+AZURE_EXISTING_AGENT_ID           # Kasuta olemasolevat agenti (valikuline)
 ```
+  
+### 3.3 Funktsioonide lüliti
 
-### 3.3 Funktsiooni lüliti
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Valikulised teenused
+USE_APPLICATION_INSIGHTS         # Vaikimisi: tõene
+USE_AZURE_AI_SEARCH_SERVICE      # Vaikimisi: väär
+USE_CONTAINER_REGISTRY           # Vaikimisi: tõene
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Jälgimine ja jälitus
+ENABLE_AZURE_MONITOR_TRACING     # Vaikimisi: väär
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Vaikimisi: väär
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Otsingu konfiguratsioon
+AZURE_AI_SEARCH_INDEX_NAME       # Otsingu indeksi nimi
+AZURE_SEARCH_SERVICE_NAME        # Otsingu teenuse nimi
 ```
+  
+### 3.4 AI projekti konfiguratsioon
 
-### 3.4 AI projekti konfiguratsioon 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Kasuta olemasolevaid ressursse
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Olemasoleva AI projekti täielik ressursi ID
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # Olemasoleva projekti lõpp-punkti URL
 ```
-
+  
 ### 3.5 Kontrolli oma muutujaid
 
-Kasuta Azure Developer CLI-d, et vaadata ja hallata oma keskkonnamuutujaid:
+Kasutage Azure Developer CLI, et vaadata ja hallata oma keskkonnamuutujaid:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Vaata kõiki keskkonnamuutujaid praeguses keskkonnas
 azd env get-values
 
-# Get a specific environment variable
+# Hangi konkreetne keskkonnamuutuja
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Sea keskkonnamuutuja
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Sea mitu muutujat .env failist
 azd env set --from-file .env
 ```
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud, kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks lugeda autoriteetseks allikaks. Olulise teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valede tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlke teenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle emakeeles tuleb pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste ega valesti mõistmiste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

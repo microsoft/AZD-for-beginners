@@ -1,122 +1,113 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-18T06:25:31+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "no"
-}
--->
 # Ordliste - Azure og AZD Terminologi
 
 **Referanse for alle kapitler**
-- **📚 Kursoversikt**: [AZD For Nybegynnere](../README.md)
+- **📚 Kurs Hjem**: [AZD For Nybegynnere](../README.md)
 - **📖 Lær Grunnleggende**: [Kapittel 1: AZD Grunnleggende](../docs/getting-started/azd-basics.md)
-- **🤖 AI Begreper**: [Kapittel 2: AI-First Utvikling](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🤖 AI-termer**: [Kapittel 2: AI-Først Utvikling](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Introduksjon
 
-Denne omfattende ordlisten gir definisjoner for begreper, konsepter og forkortelser som brukes i Azure Developer CLI og Azure skyutvikling. En essensiell referanse for å forstå teknisk dokumentasjon, feilsøke problemer og kommunisere effektivt om azd-prosjekter og Azure-tjenester.
+Denne omfattende ordlisten gir definisjoner for termer, konsepter og forkortelser brukt i Azure Developer CLI og Azure skyutvikling. Essensiell referanse for å forstå teknisk dokumentasjon, feilsøking, og effektiv kommunikasjon om azd prosjekter og Azure-tjenester.
 
 ## Læringsmål
 
 Ved å bruke denne ordlisten vil du:
-- Forstå essensiell terminologi og konsepter for Azure Developer CLI
-- Mestre vokabularet og tekniske begreper for Azure skyutvikling
+- Forstå essensiell Azure Developer CLI terminologi og konsepter
+- Mestre Azure skyutviklings vokabular og tekniske begreper
 - Effektivt referere til Infrastructure as Code og distribusjonsterminologi
-- Forstå Azure-tjenestenavn, forkortelser og deres formål
-- Få tilgang til definisjoner for feilsøking og debugging-terminologi
-- Lære avanserte konsepter innen Azure-arkitektur og utvikling
+- Forstå Azure tjenestenavn, forkortelser og deres formål
+- Få tilgang til definisjoner for feilsøkings- og debugging-termer
+- Lære avanserte Azure arkitektur- og utviklingskonsepter
 
 ## Læringsutbytte
 
-Med regelmessig bruk av denne ordlisten vil du kunne:
-- Kommunisere effektivt ved å bruke korrekt terminologi for Azure Developer CLI
-- Forstå teknisk dokumentasjon og feilmeldinger tydeligere
+Med jevnlig referanse til denne ordlisten, vil du kunne:
+- Kommunisere effektivt med korrekt Azure Developer CLI terminologi
+- Forstå teknisk dokumentasjon og feilmeldinger klarere
 - Navigere Azure-tjenester og konsepter med selvtillit
 - Feilsøke problemer ved å bruke riktig teknisk vokabular
-- Bidra til teamdiskusjoner med presist teknisk språk
-- Systematisk utvide din kunnskap om Azure skyutvikling
+- Bidra i teamdiskusjoner med nøyaktig teknisk språk
+- Utvide din kunnskap om Azure skyutvikling systematisk
 
 ## A
 
-**ARM-mal**  
-Azure Resource Manager-mal. JSON-basert format for Infrastructure as Code som brukes til å definere og distribuere Azure-ressurser deklarativt.
+**ARM Template**  
+Azure Resource Manager-mal. JSON-basert Infrastructure as Code-format brukt til å definere og distribuere Azure-ressurser deklarativt.
 
 **App Service**  
-Azure sin plattform-som-en-tjeneste (PaaS) for hosting av webapplikasjoner, REST API-er og mobile backend-tjenester uten å administrere infrastruktur.
+Azures platform-as-a-service (PaaS) tilbud for hosting av webapplikasjoner, REST API-er, og mobile backend uten å administrere infrastruktur.
 
 **Application Insights**  
-Azure sin tjeneste for applikasjonsytelsesovervåking (APM) som gir dyp innsikt i applikasjonsytelse, tilgjengelighet og bruk.
+Azures applikasjonsytelsesovervåkning (APM) tjeneste som gir dyp innsikt i applikasjonens ytelse, tilgjengelighet, og bruk.
 
 **Azure CLI**  
-Kommandolinjegrensesnitt for administrasjon av Azure-ressurser. Brukes av azd for autentisering og enkelte operasjoner.
+Kommandolinjegrensesnitt for å administrere Azure-ressurser. Brukes av azd for autentisering og noen operasjoner.
 
 **Azure Developer CLI (azd)**  
-Utviklerfokusert kommandolinjeverktøy som akselererer prosessen med å bygge og distribuere applikasjoner til Azure ved hjelp av maler og Infrastructure as Code.
+Utvikler-sentrert kommandolinjeverktøy som akselererer prosessen med å bygge og distribuere applikasjoner til Azure ved hjelp av maler og Infrastructure as Code.
 
 **azure.yaml**  
-Hovedkonfigurasjonsfilen for et azd-prosjekt som definerer tjenester, infrastruktur og distribusjonskoblinger.
+Hovedkonfigurasjonsfil for et azd-prosjekt som definerer tjenester, infrastruktur og distribusjonshaker.
 
 **Azure Resource Manager (ARM)**  
-Azure sin distribusjons- og administrasjonstjeneste som gir et administrasjonslag for oppretting, oppdatering og sletting av ressurser.
+Azures distribusjons- og administrasjonstjeneste som tilbyr et administrasjonslag for å opprette, oppdatere, og slette ressurser.
 
 ## B
 
 **Bicep**  
-Domene-spesifikt språk (DSL) utviklet av Microsoft for distribusjon av Azure-ressurser. Gir enklere syntaks enn ARM-maler mens det kompileres til ARM.
+Domenespesifikt språk (DSL) utviklet av Microsoft for distribusjon av Azure-ressurser. Gir enklere syntaks enn ARM-maler samtidig som det kompileres til ARM.
 
-**Bygg**  
-Prosessen med å kompilere kildekode, installere avhengigheter og forberede applikasjoner for distribusjon.
+**Build**  
+Prosessen med å kompilere kildekode, installere avhengigheter, og forberede applikasjoner for distribusjon.
 
 **Blue-Green Deployment**  
-Distribusjonsstrategi som bruker to identiske produksjonsmiljøer (blå og grønn) for å minimere nedetid og risiko.
+Distribusjonsstrategi som bruker to identiske produksjonsmiljøer (blått og grønt) for å minimere nedetid og risiko.
 
 ## C
 
 **Container Apps**  
-Azure sin serverløse container-tjeneste som gjør det mulig å kjøre containeriserte applikasjoner uten å administrere kompleks infrastruktur.
+Azures serverløse kontenertjeneste som muliggjør kjøring av containeriserte applikasjoner uten å administrere kompleks infrastruktur.
 
 **CI/CD**  
-Kontinuerlig integrasjon/kontinuerlig distribusjon. Automatiserte praksiser for integrering av kodeendringer og distribusjon av applikasjoner.
+Kontinuerlig Integrasjon/Kontinuerlig Distribusjon. Automatiserte praksiser for å integrere kodeendringer og distribuere applikasjoner.
 
 **Cosmos DB**  
-Azure sin globalt distribuerte, multi-modell databasetjeneste som gir omfattende SLA-er for gjennomstrømning, latens, tilgjengelighet og konsistens.
+Azures globalt distribuerte, multimodells database tjeneste som gir omfattende SLA-er for gjennomstrømning, latens, tilgjengelighet og konsistens.
 
-**Konfigurasjon**  
-Innstillinger og parametere som styrer applikasjonsatferd og distribusjonsalternativer.
+**Configuration**  
+Innstillinger og parametere som styrer applikasjonens oppførsel og distribusjonsalternativer.
 
 ## D
 
-**Distribusjon**  
-Prosessen med å installere og konfigurere applikasjoner og deres avhengigheter på mål-infrastruktur.
+**Deployment**  
+Prosessen med å installere og konfigurere applikasjoner og deres avhengigheter på målrettet infrastruktur.
 
 **Docker**  
-Plattform for utvikling, levering og kjøring av applikasjoner ved bruk av containerteknologi.
+Plattform for å utvikle, distribuere og kjøre applikasjoner ved bruk av containerteknologi.
 
 **Dockerfile**  
-Tekstfil som inneholder instruksjoner for å bygge en Docker container-image.
+Tekstfil som inneholder instruksjoner for å bygge et Docker container-bilde.
 
 ## E
 
-**Miljø**  
+**Environment**  
 Et distribusjonsmål som representerer en spesifikk instans av applikasjonen din (f.eks. utvikling, staging, produksjon).
 
-**Miljøvariabler**  
-Konfigurasjonsverdier lagret som nøkkel-verdi-par som applikasjoner kan få tilgang til under kjøring.
+**Environment Variables**  
+Konfigurasjonsverdier lagret som nøkkel-verdi-par som applikasjoner kan hente under kjøring.
 
-**Endepunkt**  
-URL eller nettverksadresse der en applikasjon eller tjeneste kan nås.
+**Endpoint**  
+URL eller nettverksadresse hvor en applikasjon eller tjeneste kan nås.
 
 ## F
 
 **Function App**  
-Azure sin serverløse beregningstjeneste som gjør det mulig å kjøre hendelsesdrevet kode uten å administrere infrastruktur.
+Azures serverløse kjøretjeneste som muliggjør kjøring av hendelsesdrevet kode uten å administrere infrastruktur.
 
 ## G
 
 **GitHub Actions**  
-CI/CD-plattform integrert med GitHub-repositorier for automatisering av arbeidsflyter.
+CI/CD-plattform integrert med GitHub-repositorier for å automatisere arbeidsflyter.
 
 **Git**  
 Distribuert versjonskontrollsystem brukt for å spore endringer i kildekode.
@@ -124,15 +115,15 @@ Distribuert versjonskontrollsystem brukt for å spore endringer i kildekode.
 ## H
 
 **Hooks**  
-Egendefinerte skript eller kommandoer som kjøres på spesifikke punkter i distribusjonslivssyklusen (preprovision, postprovision, predeploy, postdeploy).
+Egendefinerte skript eller kommandoer som kjører på bestemte punkter i distribusjonslivssyklusen (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Azure-tjenestetypen der en applikasjon vil bli distribuert (f.eks. appservice, containerapp, function).
+Azure tjenestetype hvor en applikasjon skal distribueres (f.eks. appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Praksis med å definere og administrere infrastruktur gjennom kode i stedet for manuelle prosesser.
+Praksis for å definere og administrere infrastruktur gjennom kode fremfor manuelle prosesser.
 
 **Init**  
 Prosessen med å initialisere et nytt azd-prosjekt, vanligvis fra en mal.
@@ -140,7 +131,7 @@ Prosessen med å initialisere et nytt azd-prosjekt, vanligvis fra en mal.
 ## J
 
 **JSON**  
-JavaScript Object Notation. Datautvekslingsformat som ofte brukes for konfigurasjonsfiler og API-responser.
+JavaScript Object Notation. Datautvekslingsformat ofte brukt for konfigurasjonsfiler og API-svar.
 
 **JWT**  
 JSON Web Token. Standard for sikker overføring av informasjon mellom parter som et JSON-objekt.
@@ -148,37 +139,37 @@ JSON Web Token. Standard for sikker overføring av informasjon mellom parter som
 ## K
 
 **Key Vault**  
-Azure sin tjeneste for sikker lagring og administrasjon av hemmeligheter, nøkler og sertifikater.
+Azures tjeneste for sikker lagring og håndtering av hemmeligheter, nøkler og sertifikater.
 
 **Kusto Query Language (KQL)**  
-Spørrespråk brukt for analyse av data i Azure Monitor, Application Insights og andre Azure-tjenester.
+Spørrespråk brukt for å analysere data i Azure Monitor, Application Insights, og andre Azure-tjenester.
 
 ## L
 
 **Load Balancer**  
-Tjeneste som fordeler innkommende nettverkstrafikk over flere servere eller instanser.
+Tjeneste som fordeler innkommende nettverkstrafikk på flere servere eller instanser.
 
 **Log Analytics**  
-Azure-tjeneste for innsamling, analyse og handling på telemetridata fra sky- og lokale miljøer.
+Azure-tjeneste for å samle inn, analysere og handle på telemetridata fra sky- og lokale miljøer.
 
 ## M
 
 **Managed Identity**  
 Azure-funksjon som gir Azure-tjenester en automatisk administrert identitet for autentisering til andre Azure-tjenester.
 
-**Mikrotjenester**  
-Arkitektonisk tilnærming der applikasjoner bygges som en samling av små, uavhengige tjenester.
+**Microservices**  
+Arkitekturtilnærming hvor applikasjoner bygges som en samling små, uavhengige tjenester.
 
 **Monitor**  
-Azure sin enhetlige overvåkningsløsning som gir fullstendig observasjon av applikasjoner og infrastruktur.
+Azures enhetlige overvåkningsløsning som tilbyr full-stack observabilitet på tvers av applikasjoner og infrastruktur.
 
 ## N
 
 **Node.js**  
-JavaScript-runtime bygget på Chrome sin V8 JavaScript-motor for bygging av server-side applikasjoner.
+JavaScript-runtime bygget på Chromes V8 JavaScript-motor for server-side applikasjoner.
 
 **npm**  
-Pakkehåndterer for Node.js som administrerer avhengigheter og pakker.
+Pakkehåndterer for Node.js som håndterer avhengigheter og pakker.
 
 ## O
 
@@ -187,67 +178,67 @@ Verdier returnert fra infrastrukturdistribusjon som kan brukes av applikasjoner 
 
 ## P
 
-**Pakke**  
-Prosessen med å forberede applikasjonskode og avhengigheter for distribusjon.
+**Package**  
+Prosessen med å klargjøre applikasjonskode og avhengigheter for distribusjon.
 
-**Parametere**  
-Inndata verdier sendt til infrastrukturmaler for å tilpasse distribusjoner.
+**Parameters**  
+Inndata-verdier sendt til infrastrukturmaler for å tilpasse distribusjoner.
 
 **PostgreSQL**  
-Åpen kildekode relasjonsdatabasesystem støttet som en administrert tjeneste i Azure.
+Åpen kildekode-relasjonsdatabasesystem støttet som en håndtert tjeneste i Azure.
 
 **Provisioning**  
 Prosessen med å opprette og konfigurere Azure-ressurser definert i infrastrukturmaler.
 
 ## Q
 
-**Kvoter**  
+**Quota**  
 Begrensninger på mengden ressurser som kan opprettes i et Azure-abonnement eller region.
 
 ## R
 
-**Ressursgruppe**  
-Logisk container for Azure-ressurser som deler samme livssyklus, tillatelser og policyer.
+**Resource Group**  
+Logisk beholder for Azure-ressurser som deler samme livssyklus, tillatelser og policyer.
 
-**Ressurstoken**  
+**Resource Token**  
 Unik streng generert av azd for å sikre at ressursnavn er unike på tvers av distribusjoner.
 
 **REST API**  
-Arkitektonisk stil for design av nettverksapplikasjoner ved bruk av HTTP-metoder.
+Arkitektonisk stil for å designe nettverksapplikasjoner ved bruk av HTTP-metoder.
 
 **Rollback**  
-Prosessen med å gå tilbake til en tidligere versjon av en applikasjon eller infrastrukturkonfigurasjon.
+Prosess med å gå tilbake til en tidligere versjon av en applikasjon eller infrastrukturkonfigurasjon.
 
 ## S
 
-**Tjeneste**  
-En komponent av applikasjonen din definert i azure.yaml (f.eks. web frontend, API backend, database).
+**Service**  
+En komponent av applikasjonen definert i azure.yaml (f.eks. web frontend, API backend, database).
 
 **SKU**  
-Stock Keeping Unit. Representerer ulike tjenestenivåer eller ytelsesnivåer for Azure-ressurser.
+Stock Keeping Unit. Representerer ulike servicelag eller ytelsesnivåer for Azure-ressurser.
 
 **SQL Database**  
-Azure sin administrerte relasjonsdatabasetjeneste basert på Microsoft SQL Server.
+Azures håndterte relasjonsdatabasetjeneste basert på Microsoft SQL Server.
 
 **Static Web Apps**  
-Azure-tjeneste for bygging og distribusjon av full-stack webapplikasjoner fra kildekoderepositorier.
+Azure-tjeneste for å bygge og distribuere fullstack webapplikasjoner fra kildekoderepositorier.
 
 **Storage Account**  
-Azure-tjeneste som gir skylagring for dataobjekter inkludert blobs, filer, køer og tabeller.
+Azure-tjeneste som tilbyr skylagring for dataobjekter inkludert blobs, filer, køer og tabeller.
 
-**Abonnement**  
-Azure-konto container som holder ressursgrupper og ressurser, med tilhørende fakturering og tilgangsadministrasjon.
+**Subscription**  
+Azure-kontobeholder som inneholder ressursgrupper og ressurser med tilknyttet fakturering og tilgangsstyring.
 
 ## T
 
-**Mal**  
+**Template**  
 Forhåndsbygget prosjektstruktur som inneholder applikasjonskode, infrastrukturdefinisjoner og konfigurasjon for vanlige scenarier.
 
 **Terraform**  
 Åpen kildekode Infrastructure as Code-verktøy som støtter flere skyleverandører inkludert Azure.
 
 **Traffic Manager**  
-Azure sin DNS-baserte trafikkbelastningsbalanserer for distribusjon av trafikk på tvers av globale Azure-regioner.
+Azures DNS-baserte trafikkbelastningsfordeler for å distribuere trafikk på tvers av globale Azure-regioner.
 
 ## U
 
@@ -255,45 +246,45 @@ Azure sin DNS-baserte trafikkbelastningsbalanserer for distribusjon av trafikk p
 Uniform Resource Identifier. Streng som identifiserer en bestemt ressurs.
 
 **URL**  
-Uniform Resource Locator. Type URI som spesifiserer hvor en ressurs er lokalisert og hvordan den kan hentes.
+Uniform Resource Locator. Type URI som spesifiserer hvor en ressurs er lokalisert og hvordan den kan nås.
 
 ## V
 
-**Virtuelt Nettverk (VNet)**  
-Grunnleggende byggestein for private nettverk i Azure, som gir isolasjon og segmentering.
+**Virtual Network (VNet)**  
+Grunnleggende byggestein for private nettverk i Azure som tilbyr isolasjon og segmentering.
 
 **VS Code**  
-Visual Studio Code. Populær kodeeditor med utmerket Azure og azd-integrasjon.
+Visual Studio Code. Populær kodeeditor med utmerket Azure og azd integrasjon.
 
 ## W
 
 **Webhook**  
-HTTP-tilbakekall utløst av spesifikke hendelser, ofte brukt i CI/CD-pipelines.
+HTTP-kall tilbake trigget av spesifikke hendelser, vanlig brukt i CI/CD-pipelines.
 
 **What-if**  
-Azure-funksjon som viser hvilke endringer som ville bli gjort av en distribusjon uten faktisk å utføre den.
+Azure-funksjon som viser hvilke endringer som ville blitt gjort av en distribusjon uten å faktisk utføre den.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Menneskelesbart data-serialiseringsstandard brukt for konfigurasjonsfiler som azure.yaml.
+YAML Ain't Markup Language. Menneskelesbart dataserieringsformat som brukes for konfigurasjonsfiler som azure.yaml.
 
 ## Z
 
-**Sone**  
-Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy tilgjengelighet.
+**Zone**  
+Fysisk separate lokasjoner innen en Azure-region som gir redundans og høy tilgjengelighet.
 
 ---
 
 ## Vanlige Forkortelser
 
-| Forkortelse | Full Form | Beskrivelse |
-|-------------|-----------|-------------|
+| Forkortelse | Fullt Navn | Beskrivelse |
+|---------|-----------|-------------|
 | AAD | Azure Active Directory | Identitets- og tilgangsstyringstjeneste |
-| ACR | Azure Container Registry | Tjeneste for container-image register |
-| AKS | Azure Kubernetes Service | Administrert Kubernetes-tjeneste |
-| API | Application Programming Interface | Sett med protokoller for bygging av programvare |
-| ARM | Azure Resource Manager | Azure sin distribusjons- og administrasjonstjeneste |
+| ACR | Azure Container Registry | Tjeneste for containerbilderegistre |
+| AKS | Azure Kubernetes Service | Håndtert Kubernetes-tjeneste |
+| API | Application Programming Interface | Sett av protokoller for programvarebygging |
+| ARM | Azure Resource Manager | Azures distribusjons- og administrasjonstjeneste |
 | CDN | Content Delivery Network | Distribuert nettverk av servere |
 | CI/CD | Continuous Integration/Continuous Deployment | Automatiserte utviklingspraksiser |
 | CLI | Command Line Interface | Tekstbasert brukergrensesnitt |
@@ -301,8 +292,8 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 | HTTPS | Hypertext Transfer Protocol Secure | Sikker versjon av HTTP |
 | IaC | Infrastructure as Code | Administrasjon av infrastruktur gjennom kode |
 | JSON | JavaScript Object Notation | Datautvekslingsformat |
-| JWT | JSON Web Token | Token-format for sikker informasjonsoverføring |
-| KQL | Kusto Query Language | Spørrespråk for Azure datatjenester |
+| JWT | JSON Web Token | Tokenformat for sikker informasjonsutveksling |
+| KQL | Kusto Query Language | Spørrespråk for Azure-data tjenester |
 | RBAC | Role-Based Access Control | Tilgangskontrollmetode basert på brukerroller |
 | REST | Representational State Transfer | Arkitektonisk stil for webtjenester |
 | SDK | Software Development Kit | Samling av utviklingsverktøy |
@@ -313,11 +304,11 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 | URL | Uniform Resource Locator | Type URI som spesifiserer ressurslokasjon |
 | VM | Virtual Machine | Emulering av et datasystem |
 | VNet | Virtual Network | Privat nettverk i Azure |
-| YAML | YAML Ain't Markup Language | Data-serialiseringsstandard |
+| YAML | YAML Ain't Markup Language | Dataserieringsstandard |
 
 ---
 
-## Azure Tjenestenavn Kartlegging
+## Azure Tjenestenavn Mappings
 
 | Vanlig Navn | Offisielt Azure Tjenestenavn | azd Host Type |
 |-------------|------------------------------|---------------|
@@ -335,43 +326,45 @@ Fysisk separate lokasjoner innenfor en Azure-region som gir redundans og høy ti
 
 ---
 
-## Kontekstspesifikke Begreper
+## Kontekstspesifikke Termer
 
-### Utviklingsbegreper
+### Utviklingstermer
 - **Hot Reload**: Automatisk oppdatering av applikasjoner under utvikling uten omstart
-- **Byggepipeline**: Automatisert prosess for bygging og testing av kode
-- **Distribusjonsspor**: Staging-miljø innenfor en App Service
-- **Miljøparitet**: Holde utviklings-, staging- og produksjonsmiljøer like
+- **Build Pipeline**: Automatisert prosess for bygging og testing av kode
+- **Deployment Slot**: Staging-miljø innenfor en App Service
+- **Environment Parity**: Å holde utviklings-, staging- og produksjonsmiljøer like
 
-### Sikkerhetsbegreper
-- **Managed Identity**: Azure-funksjon som gir automatisk administrasjon av legitimasjon
+### Sikkerhetstermer
+- **Managed Identity**: Azure-funksjon som tilbyr automatisk administrasjon av legitimasjon
 - **Key Vault**: Sikker lagring for hemmeligheter, nøkler og sertifikater
 - **RBAC**: Rollebasert tilgangskontroll for Azure-ressurser
-- **Network Security Group**: Virtuell brannmur for kontroll av nettverkstrafikk
+- **Network Security Group**: Virtuell brannmur for å kontrollere nettverkstrafikk
 
-### Overvåkningsbegreper
-- **Telemetri**: Automatisk innsamling av målinger og data
-- **Applikasjonsytelsesovervåking (APM)**: Overvåking av programvareytelse
+### Overvåkningstermer
+- **Telemetry**: Automatisk innsamling av målinger og data
+- **Application Performance Monitoring (APM)**: Overvåkning av programvareytelse
 - **Log Analytics**: Tjeneste for innsamling og analyse av loggdata
-- **Varslingsregler**: Automatiserte varsler basert på metrikker eller betingelser
+- **Alert Rules**: Automatiserte varsler basert på metrikker eller betingelser
 
-### Distribusjonsbegreper
-- **Blue-Green Deployment**: Null-nedetid distribusjonsstrategi
-- **Canary Deployment**: Gradvis utrulling til en delmengde av brukere
-- **Rullerende oppdatering**: Sekvensiell erstatning av applikasjonsinstanser
-- **Rollback**: Tilbakeføring til tidligere applikasjonsversjon
+### Distribusjonstermer
+- **Blue-Green Deployment**: Null-nedetids distribusjonsstrategi
+- **Canary Deployment**: Gradvis utrulling til en delmengde brukere
+- **Rolling Update**: Sekvensiell utskifting av applikasjonsinstanser
+- **Rollback**: Gå tilbake til tidligere applikasjonsversjon
 
 ---
 
-**Brukertips**: Bruk `Ctrl+F` for raskt å søke etter spesifikke begreper i denne ordlisten. Begreper er kryssreferert der det er relevant.
+**Brukertips**: Bruk `Ctrl+F` for raskt å søke etter spesifikke termer i denne ordlisten. Termer er kryssreferert der det er relevant.
 
 ---
 
 **Navigasjon**
-- **Forrige Leksjon**: [Jukselapp](cheat-sheet.md)
+- **Forrige Leksjon**: [Cheat Sheet](cheat-sheet.md)
 - **Neste Leksjon**: [FAQ](faq.md)
 
 ---
 
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på dets opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår som følge av bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

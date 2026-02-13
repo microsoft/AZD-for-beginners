@@ -1,162 +1,159 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T17:18:58+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "tr"
-}
--->
-# Komut Kılavuzu - Temel AZD Komutları
+# Komut Hızlı Referansı - Temel AZD Komutları
 
-**Tüm Bölümler için Hızlı Referans**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../README.md)
-- **📖 Hızlı Başlangıç**: [Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Komutları**: [Bölüm 2: AI-Öncelikli Geliştirme](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 İleri Düzey**: [Bölüm 4: Kod Olarak Altyapı](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Tüm Bölümler İçin Hızlı Başvuru**
+- **📚 Kurs Ana Sayfası**: [Yeni Başlayanlar İçin AZD](../README.md)
+- **📖 Hızlı Başlangıç**: [Bölüm 1: Temel ve Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Komutları**: [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Gelişmiş**: [Bölüm 4: Altyapı Kod Olarak](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, en sık kullanılan Azure Developer CLI komutları için hızlı bir referans sağlar. Komutlar kategorilere ayrılmıştır ve pratik örneklerle desteklenmiştir. AZD projeleriyle geliştirme, sorun giderme ve günlük operasyonlar sırasında hızlı başvurular için idealdir.
+Bu kapsamlı kısa başvuru, en yaygın kullanılan Azure Developer CLI komutları için kategoriye göre düzenlenmiş pratik örneklerle hızlı bir referans sağlar. azd projeleriyle geliştirme yaparken, sorun giderirken ve günlük işlemler sırasında hızlıca bakmak için idealdir.
 
 ## Öğrenme Hedefleri
 
-Bu kılavuzu kullanarak:
-- Temel Azure Developer CLI komutlarına ve sözdizimine anında erişim sağlayabilirsiniz
-- Komutların işlevsel kategorilere ve kullanım durumlarına göre düzenlenmesini anlayabilirsiniz
-- Yaygın geliştirme ve dağıtım senaryoları için pratik örneklere başvurabilirsiniz
-- Sorun giderme komutlarına hızlı bir şekilde erişebilirsiniz
-- Gelişmiş yapılandırma ve özelleştirme seçeneklerini verimli bir şekilde bulabilirsiniz
-- Çevre yönetimi ve çoklu çevre iş akışı komutlarını kolayca bulabilirsiniz
+Bu kısa başvuru sayfasını kullanarak:
+- Temel Azure Developer CLI komutlarına ve sözdizimine anında erişim sahibi olun
+- Komutların işlevsel kategorilere ve kullanım senaryolarına göre nasıl organize edildiğini anlayın
+- Yaygın geliştirme ve dağıtım senaryoları için pratik örneklere başvurun
+- Hızlı sorun çözümü için teşhis komutlarına erişin
+- Gelişmiş yapılandırma ve özelleştirme seçeneklerini verimli şekilde bulun
+- Ortam yönetimi ve çoklu ortam iş akışı komutlarını hızlıca bulun
 
 ## Öğrenme Çıktıları
 
-Bu kılavuzu düzenli olarak kullanarak:
-- Tam belgeleri incelemeden azd komutlarını güvenle çalıştırabilirsiniz
-- Uygun tanı komutlarını kullanarak yaygın sorunları hızla çözebilirsiniz
-- Birden fazla çevreyi ve dağıtım senaryolarını verimli bir şekilde yönetebilirsiniz
-- Gerekli olduğunda gelişmiş azd özelliklerini ve yapılandırma seçeneklerini uygulayabilirsiniz
-- Sistematik komut dizileri kullanarak dağıtım sorunlarını giderebilirsiniz
-- azd kısayollarını ve seçeneklerini etkili bir şekilde kullanarak iş akışlarını optimize edebilirsiniz
+Bu kısa başvuruyu düzenli olarak kullanarak şunları yapabileceksiniz:
+- azd komutlarını tam belgelere bakmadan güvenle çalıştırın
+- Uygun teşhis komutlarını kullanarak yaygın sorunları hızlıca çözün
+- Birden çok ortamı ve dağıtım senaryosunu verimli şekilde yönetin
+- Gerektiğinde gelişmiş azd özelliklerini ve yapılandırma seçeneklerini uygulayın
+- Dağıtım sorunlarını sistematik komut dizileriyle giderin
+- azd kısayol ve seçeneklerini etkili kullanarak iş akışlarını optimize edin
 
-## Başlangıç Komutları
+## Başlarken Komutları
 
 ### Kimlik Doğrulama
 ```bash
-# Login to Azure (uses Azure CLI)
+# AZD aracılığıyla Azure'a giriş
+azd auth login
+
+# Azure CLI'ye giriş (AZD bunu arka planda kullanır)
 az login
 
-# Check current account
+# Mevcut hesabı kontrol et
 az account show
 
-# Set default subscription
+# Varsayılan aboneliği ayarla
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# AZD'den çıkış yap
+azd auth logout
+
+# Azure CLI'den çıkış yap
+az logout
 ```
 
 ### Proje Başlatma
 ```bash
-# Browse available templates
+# Mevcut şablonlara göz at
 azd template list
 
-# Initialize from template
+# Şablondan başlat
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# Geçerli dizinde başlat
 azd init .
 
-# Initialize with custom name
+# Özel isimle başlat
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Temel Dağıtım Komutları
+## Çekirdek Dağıtım Komutları
 
 ### Tam Dağıtım İş Akışı
 ```bash
-# Deploy everything (provision + deploy)
+# Her şeyi dağıt (kaynak sağlama + dağıtım)
 azd up
 
-# Deploy with confirmation prompts disabled
+# Onay istemleri devre dışı bırakılmış şekilde dağıt
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# Belirli bir ortama dağıt
 azd up --environment production
 
-# Deploy with custom parameters
+# Özel parametrelerle dağıt
 azd up --parameter location=westus2
 ```
 
 ### Sadece Altyapı
 ```bash
-# Provision Azure resources
+# Azure kaynaklarını sağla
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 Altyapı değişikliklerini önizle
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# Hangi kaynakların oluşturulacağını/değiştirileceğini/silineceğini gösteren bir kuru çalıştırma görünümü sunar
+# 'terraform plan' veya 'bicep what-if' ile benzer — çalıştırmak güvenlidir, hiçbir değişiklik uygulanmaz
 ```
 
 ### Sadece Uygulama
 ```bash
-# Deploy application code
+# Uygulama kodunu dağıt
 azd deploy
 
-# Deploy specific service
+# Belirli bir servisi dağıt
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# Tüm servisleri dağıt
 azd deploy --all
 ```
 
 ### Derleme ve Paketleme
 ```bash
-# Build applications
+# Uygulamaları oluşturun
 azd package
 
-# Build specific service
+# Belirli bir servisi oluşturun
 azd package --service api
 ```
 
-## 🌍 Çevre Yönetimi
+## 🌍 Ortam Yönetimi
 
-### Çevre İşlemleri
+### Ortam İşlemleri
 ```bash
-# List all environments
+# Tüm ortamları listele
 azd env list
 
-# Create new environment
+# Yeni ortam oluştur
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# Ortam seç
 azd env select production
 
-# Show current environment
+# Mevcut ortamı göster
 azd env show
 
-# Refresh environment state
+# Ortam durumunu yenile
 azd env refresh
 ```
 
-### Çevre Değişkenleri
+### Ortam Değişkenleri
 ```bash
-# Set environment variable
+# Ortam değişkeni ayarla
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# Ortam değişkenini al
 azd env get API_KEY
 
-# List all environment variables
+# Tüm ortam değişkenlerini listele
 azd env get-values
 
-# Remove environment variable
+# Ortam değişkenini kaldır
 azd env unset DEBUG
 ```
 
@@ -164,222 +161,229 @@ azd env unset DEBUG
 
 ### Genel Yapılandırma
 ```bash
-# List all configuration
+# Tüm yapılandırmaları listele
 azd config list
 
-# Set global defaults
+# Küresel varsayılanları ayarla
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# Yapılandırmayı kaldır
 azd config unset defaults.location
 
-# Reset all configuration
+# Tüm yapılandırmaları sıfırla
 azd config reset
 ```
 
 ### Proje Yapılandırması
 ```bash
-# Validate azure.yaml
+# azure.yaml dosyasını doğrula
 azd config validate
 
-# Show project information
+# Proje bilgilerini göster
 azd show
 
-# Get service endpoints
+# Servis uç noktalarını al
 azd show --output json
 ```
 
-## 📊 İzleme ve Günlükler
+## 📊 İzleme ve Teşhis
 
-### Uygulama Günlükleri
+### İzleme Panosu
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### İzleme
-```bash
-# Open Azure portal for monitoring
+# Azure portalındaki izleme panosunu aç
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Application Insights canlı metriklerini aç
+azd monitor --live
+
+# Application Insights günlükler bölümünü aç
+azd monitor --logs
+
+# Application Insights genel bakışını aç
+azd monitor --overview
+```
+
+### Konteyner Günlüklerini Görüntüleme
+```bash
+# Azure CLI aracılığıyla günlükleri görüntüle (Container Apps için)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Günlükleri gerçek zamanlı olarak takip et
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Azure Portal'dan günlükleri görüntüle
+azd monitor --logs
+```
+
+### Log Analytics Sorguları
+```bash
+# Azure Portal üzerinden Log Analytics'e erişin
+azd monitor --logs
+
+# Azure CLI kullanarak günlükleri sorgulayın
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ Bakım Komutları
 
 ### Temizlik
 ```bash
-# Remove all Azure resources
+# Tüm Azure kaynaklarını sil
 azd down
 
-# Force delete without confirmation
+# Onay olmadan zorla sil
 azd down --force
 
-# Purge soft-deleted resources
+# Geçici olarak silinmiş kaynakları kalıcı olarak sil
 azd down --purge
 
-# Complete cleanup
+# Temizliği tamamla
 azd down --force --purge
 ```
 
 ### Güncellemeler
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# azd güncellemelerini kontrol et
 azd version
 
-# Show system information
-azd info
+# Mevcut sürümü al
+azd version
+
+# Mevcut yapılandırmayı görüntüle
+azd config list
 ```
 
-## 🔧 İleri Düzey Komutlar
+## 🔧 Gelişmiş Komutlar
 
 ### Pipeline ve CI/CD
 ```bash
-# Configure GitHub Actions
+# GitHub Actions'ı yapılandır
 azd pipeline config
 
-# Configure Azure DevOps
+# Azure DevOps'u yapılandır
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# Pipeline yapılandırmasını göster
 azd pipeline show
 ```
 
 ### Altyapı Yönetimi
 ```bash
-# Import existing resources
-azd infra import
+# Altyapı şablonları oluştur
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Altyapı Önizleme ve Planlama
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Dağıtım yapmadan altyapı sağlamayı simüle eder
+# Bicep/Terraform şablonlarını analiz eder ve şunları gösterir:
+# - Eklenecek kaynaklar (yeşil +)
+# - Değiştirilecek kaynaklar (sarı ~)
+# - Silinecek kaynaklar (kırmızı -)
+# Çalıştırmak güvenlidir - Azure ortamında gerçek değişiklik yapılmaz
+
+# azure.yaml'den altyapıyı sentezle
+azd infra synth
 ```
 
-### Hizmet Yönetimi
+### Proje Bilgisi
 ```bash
-# List all services
-azd service list
+# Proje durumunu ve uç noktalarını göster
+azd show
 
-# Show service details
-azd service show --service web
+# Ayrıntılı proje bilgisini JSON olarak göster
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Hizmet uç noktalarını al
+azd show --output json | jq '.services'
 ```
 
 ## 🎯 Hızlı İş Akışları
 
 ### Geliştirme İş Akışı
 ```bash
-# Start new project
+# Yeni proje başlat
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# Geliştirme ortamına dağıt
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# Değişiklik yap ve yeniden dağıt
 azd deploy
 
-# View logs
-azd logs --follow
+# İzleme panosunu aç
+azd monitor --live
 ```
 
-### Çoklu Çevre İş Akışı
+### Çoklu Ortam İş Akışı
 ```bash
-# Set up environments
+# Ortamları kur
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# Geliştirme ortamına dağıt
 azd env select dev
 azd up
 
-# Test and promote to staging
+# Test et ve hazırlık ortamına aktar
 azd env select staging
 azd up
 
-# Deploy to production
+# Üretim ortamına dağıt
 azd env select production
 azd up
 ```
 
 ### Sorun Giderme İş Akışı
 ```bash
-# Enable debug mode
+# Hata ayıklama modunu etkinleştir
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Dağıtım durumunu kontrol et
+azd show
 
-# Validate configuration
-azd config validate
+# Yapılandırmayı doğrula
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Günlükler için izleme panosunu aç
+azd monitor --logs
 
-# Check resource status
+# Kaynak durumunu kontrol et
 azd show --output json
 ```
 
 ## 🔍 Hata Ayıklama Komutları
 
-### Hata Ayıklama Bilgileri
+### Hata Ayıklama Bilgisi
 ```bash
-# Enable debug output
+# Hata ayıklama çıktısını etkinleştir
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# Daha temiz çıktı için telemetriyi devre dışı bırak
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Mevcut yapılandırmayı kontrol et
+azd config list
 
-# Check authentication status
+# Kimlik doğrulama durumunu kontrol et
 az account show
 ```
 
 ### Şablon Hata Ayıklama
 ```bash
-# List available templates with details
+# Kullanılabilir şablonları ayrıntılarıyla listele
 azd template list --output json
 
-# Show template information
+# Şablon bilgilerini göster
 azd template show <template-name>
 
-# Validate template before init
+# init'ten önce şablonu doğrula
 azd template validate <template-name>
 ```
 
@@ -387,62 +391,64 @@ azd template validate <template-name>
 
 ### Proje Yapısı
 ```bash
-# Show current directory structure
+# Geçerli dizin yapısını göster
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
+# azd proje köküne git
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# azd yapılandırma dizinini göster
+echo $AZD_CONFIG_DIR  # Genellikle ~/.azd
 ```
 
-## 🎨 Çıktı Formatlama
+## 🎨 Çıktı Biçimlendirme
 
 ### JSON Çıktısı
 ```bash
-# Get JSON output for scripting
+# Betikleme için JSON çıktısı alın
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# jq ile ayrıştırın
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Tablo Çıktısı
 ```bash
-# Format as table
+# Tablo olarak biçimlendir
 azd env list --output table
-azd service list --output table
+
+# Dağıtılmış hizmetleri görüntüle
+azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 Yaygın Komut Kombinasyonları
 
-### Sağlık Kontrolü Scripti
+### Sağlık Kontrolü Betiği
 ```bash
 #!/bin/bash
-# Quick health check
+# Hızlı sağlık kontrolü
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
 ### Dağıtım Doğrulama
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# Dağıtım öncesi doğrulama
+azd show
+azd provision --preview  # Dağıtmadan önce değişiklikleri önizleyin
 az account show
 ```
 
-### Çevre Karşılaştırması
+### Ortam Karşılaştırması
 ```bash
 #!/bin/bash
-# Compare environments
+# Ortamları karşılaştır
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### Kaynak Temizleme Scripti
+### Kaynak Temizlik Betiği
 ```bash
 #!/bin/bash
-# Clean up old environments
+# Eski ortamları temizle
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -461,123 +467,128 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 Çevre Değişkenleri
+## 📝 Ortam Değişkenleri
 
-### Yaygın Çevre Değişkenleri
+### Yaygın Ortam Değişkenleri
 ```bash
-# Azure configuration
+# Azure yapılandırması
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# AZD yapılandırması
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# Uygulama yapılandırması
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Acil Durum Komutları
+## 🚨 Acil Komutlar
 
-### Hızlı Çözümler
+### Hızlı Düzeltmeler
 ```bash
-# Reset authentication
+# Kimlik doğrulamasını sıfırla
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# Ortamı zorla yenile
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# Tüm servisleri yeniden dağıt
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Dağıtım durumunu kontrol et
+azd show --output json
 ```
 
 ### Kurtarma Komutları
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Başarısız dağıtımdan kurtar - temizle ve yeniden dağıt
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Yalnızca altyapıyı yeniden sağla
+azd provision
+
+# Yalnızca uygulamayı yeniden dağıt
+azd deploy
 ```
 
-## 💡 İpuçları
+## 💡 Uzman İpuçları
 
-### Daha Hızlı İş Akışı için Kısayollar
+### Daha Hızlı İş Akışı İçin Takma Adlar
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# Bunu .bashrc veya .zshrc dosyanıza ekleyin
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
 ### Fonksiyon Kısayolları
 ```bash
-# Quick environment switching
+# Hızlı ortam geçişi
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# İzleme ile hızlı dağıtım
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# Ortam durumu
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
 ```
 
-## 📖 Yardım ve Dokümantasyon
+## 📖 Yardım ve Belgeler
 
 ### Yardım Alma
 ```bash
-# General help
+# Genel yardım
 azd --help
 azd help
 
-# Command-specific help
+# Komutlara özel yardım
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# Sürüm ve derleme bilgilerini göster
 azd version
 azd version --output json
 ```
 
-### Dokümantasyon Linkleri
+### Dokümantasyon Bağlantıları
 ```bash
-# Open documentation in browser
+# Belgeleri tarayıcıda aç
 azd docs
 
-# Show template documentation
+# Şablon belgelerini göster
 azd template show <template-name> --docs
 ```
 
 ---
 
-**İpucu**: Bu kılavuzu yer imlerine ekleyin ve ihtiyacınız olan komutları hızlıca bulmak için `Ctrl+F` kullanın!
+**İpucu**: Bu kısa başvuru sayfasını yer imlerine ekleyin ve ihtiyacınız olan komutları hızlıca bulmak için `Ctrl+F` kullanın!
 
 ---
 
-**Navigasyon**
+**Gezinme**
 - **Önceki Ders**: [Ön Kontroller](../docs/pre-deployment/preflight-checks.md)
 - **Sonraki Ders**: [Sözlük](glossary.md)
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Sorumluluk Reddi:
+Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zekâ çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki versiyonu otoritatif kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu tutulamayız.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

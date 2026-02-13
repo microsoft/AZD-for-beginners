@@ -1,240 +1,235 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T10:59:44+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "fa"
-}
--->
 # 2. اعتبارسنجی یک قالب
 
-!!! tip "در پایان این ماژول شما قادر خواهید بود"
+!!! tip "تا پایان این ماژول قادر خواهید بود"
 
     - [ ] تحلیل معماری راه‌حل هوش مصنوعی
-    - [ ] درک جریان کاری استقرار AZD
+    - [ ] درک گردش کاری استقرار AZD
     - [ ] استفاده از GitHub Copilot برای کمک در استفاده از AZD
-    - [ ] **آزمایشگاه 2:** استقرار و اعتبارسنجی قالب عوامل هوش مصنوعی
+    - [ ] **آزمایشگاه 2:** استقرار و اعتبارسنجی قالب عامل‌های هوش مصنوعی
 
 ---
 
+
 ## 1. مقدمه
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) یا `azd` یک ابزار خط فرمان متن‌باز است که جریان کاری توسعه‌دهنده را هنگام ساخت و استقرار برنامه‌ها در Azure ساده می‌کند.
+The [ابزار خط فرمان Azure Developer](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[قالب‌های AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) مخازن استانداردی هستند که شامل کد نمونه برنامه، دارایی‌های _زیرساخت به عنوان کد_ و فایل‌های پیکربندی `azd` برای یک معماری راه‌حل منسجم می‌باشند. فراهم کردن زیرساخت به سادگی یک فرمان `azd provision` است - در حالی که استفاده از `azd up` به شما امکان می‌دهد زیرساخت را **و** برنامه خود را به صورت یکجا استقرار دهید!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _زیرساخت-به‌صورت-کد_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **و** deploy your application at one shot!
 
-در نتیجه، شروع فرآیند توسعه برنامه شما می‌تواند به سادگی یافتن قالب _AZD Starter_ مناسب باشد که به نیازهای برنامه و زیرساخت شما نزدیک‌تر است - سپس سفارشی‌سازی مخزن برای تطابق با نیازهای سناریوی شما.
+As a result, jumpstarting your application development process can be as simple as finding the right _قالب آغازین AZD_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
-قبل از شروع، مطمئن شوید که Azure Developer CLI نصب شده است.
+Before we begin, let's make sure you have the Azure Developer CLI installed.
 
-1. یک ترمینال VS Code باز کنید و این فرمان را وارد کنید:
+1. Open a VS Code terminal and type this command:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. باید چیزی شبیه به این ببینید!
+1. You should see something like this!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**اکنون آماده انتخاب و استقرار یک قالب با azd هستید**
+**You are now ready to select and deploy a template with azd**
 
 ---
 
 ## 2. انتخاب قالب
 
-پلتفرم Azure AI Foundry با [مجموعه‌ای از قالب‌های AZD توصیه‌شده](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) ارائه می‌شود که سناریوهای راه‌حل محبوب مانند _اتوماسیون جریان کاری چند عاملی_ و _پردازش محتوای چند حالتی_ را پوشش می‌دهند. شما همچنین می‌توانید این قالب‌ها را با بازدید از پورتال Azure AI Foundry کشف کنید.
+The Microsoft Foundry platform comes with a [مجموعه‌ای از قالب‌های AZD پیشنهادی](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _خودکارسازی جریان کاری چندعامل‌ه‌ای_ and _پردازش محتوای چندحالتی_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
-1. به [https://ai.azure.com/templates](https://ai.azure.com/templates) مراجعه کنید
-1. هنگام درخواست وارد پورتال Azure AI Foundry شوید - چیزی شبیه به این خواهید دید.
+1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Pick](../../../../../translated_images/fa/01-pick-template.60d2d5fff5ebc374.webp)
+![انتخاب](../../../../../translated_images/fa/01-pick-template.60d2d5fff5ebc374.webp)
 
-گزینه‌های **Basic** قالب‌های شروع‌کننده شما هستند:
 
-1. [ ] [شروع با چت هوش مصنوعی](https://github.com/Azure-Samples/get-started-with-ai-chat) که یک برنامه چت ساده _با داده‌های شما_ را در Azure Container Apps مستقر می‌کند. از این برای بررسی یک سناریوی چت‌بات هوش مصنوعی ساده استفاده کنید.
-1. [X] [شروع با عوامل هوش مصنوعی](https://github.com/Azure-Samples/get-started-with-ai-agents) که همچنین یک عامل هوش مصنوعی استاندارد (با سرویس عامل هوش مصنوعی Azure) را مستقر می‌کند. از این برای آشنایی با راه‌حل‌های هوش مصنوعی عامل‌محور شامل ابزارها و مدل‌ها استفاده کنید.
+The **Basic** options are your starter templates:
 
-لینک دوم را در یک تب مرورگر جدید باز کنید (یا برای کارت مرتبط روی `Open in GitHub` کلیک کنید). باید مخزن این قالب AZD را ببینید. یک دقیقه وقت بگذارید و README را بررسی کنید. معماری برنامه به این شکل است:
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
-![Arch](../../../../../translated_images/fa/architecture.8cec470ec15c65c7.webp)
+Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+
+![معماری](../../../../../translated_images/fa/architecture.8cec470ec15c65c7.webp)
 
 ---
 
 ## 3. فعال‌سازی قالب
 
-بیایید این قالب را مستقر کنیم و مطمئن شویم که معتبر است. ما دستورالعمل‌های بخش [شروع کار](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) را دنبال خواهیم کرد.
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [شروع به کار](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. روی [این لینک](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) کلیک کنید - اقدام پیش‌فرض برای `Create codespace` را تأیید کنید
-1. این یک تب مرورگر جدید باز می‌کند - منتظر بمانید تا جلسه GitHub Codespaces بارگذاری شود
-1. ترمینال VS Code را در Codespaces باز کنید - فرمان زیر را وارد کنید:
+1. Click [این لینک](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
+1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
+1. Open the VS Code terminal in Codespaces - type the following command:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-مراحل جریان کاری که این فرمان فعال می‌کند را کامل کنید:
+Complete the workflow steps that this will trigger:
 
-1. از شما خواسته می‌شود وارد Azure شوید - دستورالعمل‌ها را برای احراز هویت دنبال کنید
-1. یک نام محیط منحصر به فرد وارد کنید - به عنوان مثال، من از `nitya-mshack-azd` استفاده کردم
-1. این یک پوشه `.azure/` ایجاد می‌کند - یک زیرپوشه با نام محیط خواهید دید
-1. از شما خواسته می‌شود یک نام اشتراک انتخاب کنید - پیش‌فرض را انتخاب کنید
-1. از شما خواسته می‌شود یک مکان انتخاب کنید - از `East US 2` استفاده کنید
+1. You will be prompted to log into Azure - follow instructions to authenticate
+1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
+1. This  will create a `.azure/` folder - you will see a subfolder with the env name
+1. You will be prompted to select a subscription name - select the default
+1. You will be prompted for a location - use `East US 2`
 
-اکنون منتظر بمانید تا فرآیند فراهم‌سازی کامل شود. **این 10-15 دقیقه طول می‌کشد**
+Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
-1. وقتی تمام شد، کنسول شما یک پیام موفقیت مانند این نشان می‌دهد:
+1. When done, your console will show a SUCCESS message like this:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. پورتال Azure شما اکنون یک گروه منابع فراهم‌شده با نام محیط خواهد داشت:
+1. Your Azure Portal will now have a provisioned resource group with that env name:
 
-      ![Infra](../../../../../translated_images/fa/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![زیرساخت](../../../../../translated_images/fa/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **اکنون آماده اعتبارسنجی زیرساخت و برنامه مستقر شده هستید**.
+1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
 ## 4. اعتبارسنجی قالب
 
-1. به صفحه [گروه‌های منابع](https://portal.azure.com/#browse/resourcegroups) در پورتال Azure مراجعه کنید - هنگام درخواست وارد شوید
-1. روی RG برای نام محیط خود کلیک کنید - صفحه بالا را مشاهده خواهید کرد
+1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Click on RG for your environment name - you see the page above
 
       - روی منبع Azure Container Apps کلیک کنید
-      - روی URL برنامه در بخش _Essentials_ (بالا سمت راست) کلیک کنید
+      - روی Application Url در بخش _Essentials_ کلیک کنید (بالا سمت راست)
 
-1. باید یک رابط کاربری جلویی برنامه میزبانی‌شده مانند این را ببینید:
+1. You should see a hosted application front-end UI like this:
 
-   ![App](../../../../../translated_images/fa/03-test-application.471910da12c3038e.webp)
+   ![برنامه](../../../../../translated_images/fa/03-test-application.471910da12c3038e.webp)
 
-1. چند [سوال نمونه](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) را امتحان کنید
+1. Try asking a couple of [سؤال نمونه](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. بپرسید: ```پایتخت فرانسه چیست؟``` 
-      1. بپرسید: ```بهترین چادر زیر 200 دلار برای دو نفر چیست و چه ویژگی‌هایی دارد؟```
+      1. پرسش: ```پایتخت فرانسه کجاست؟``` 
+      1. پرسش: ```بهترین چادر زیر $200 برای دو نفر کدام است و چه ویژگی‌هایی دارد؟```
 
-1. باید پاسخ‌هایی مشابه آنچه در زیر نشان داده شده است دریافت کنید. _اما این چگونه کار می‌کند؟_
+1. You should get answers similar to what is shown below. _But how does this work?_ 
 
-      ![App](../../../../../translated_images/fa/03-test-question.521c1e863cbaddb6.webp)
+      ![برنامه](../../../../../translated_images/fa/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5. اعتبارسنجی عامل
+## 5.  اعتبارسنجی عامل
 
-برنامه Azure Container App یک نقطه پایانی مستقر می‌کند که به عامل هوش مصنوعی فراهم‌شده در پروژه Azure AI Foundry برای این قالب متصل می‌شود. بیایید ببینیم این به چه معناست.
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
-1. به صفحه _Overview_ گروه منابع خود در پورتال Azure بازگردید
+1. Return to the Azure Portal _Overview_ page for your resource group
 
-1. روی منبع `Azure AI Foundry` در آن لیست کلیک کنید
+1. Click on the `Microsoft Foundry` resource in that list
 
-1. باید این را ببینید. روی دکمه `Go to Azure AI Foundry Portal` کلیک کنید. 
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](../../../../../translated_images/fa/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. باید صفحه پروژه Foundry برای برنامه هوش مصنوعی خود را ببینید
-   ![Project](../../../../../translated_images/fa/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. You should see the Foundry Project page for your AI application
+   ![پروژه](../../../../../translated_images/fa/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. روی `Agents` کلیک کنید - عامل پیش‌فرض فراهم‌شده در پروژه خود را مشاهده خواهید کرد
-   ![Agents](../../../../../translated_images/fa/06-visit-agents.bccb263f77b00a09.webp)
+1. Click on `Agents` - you see the default Agent provisioned in your project
+   ![عامل‌ها](../../../../../translated_images/fa/06-visit-agents.bccb263f77b00a09.webp)
 
-1. آن را انتخاب کنید - و جزئیات عامل را مشاهده خواهید کرد. به موارد زیر توجه کنید:
+1. Select it - and you see the Agent details. Note the following:
 
       - عامل به طور پیش‌فرض از File Search استفاده می‌کند (همیشه)
-      - `Knowledge` عامل نشان می‌دهد که 32 فایل آپلود شده است (برای جستجوی فایل)
-      ![Agents](../../../../../translated_images/fa/07-view-agent-details.0e049f37f61eae62.webp)
+      - بخش `Knowledge` عامل نشان می‌دهد که 32 فایل آپلود شده‌اند (برای جستجوی فایل)
+      ![عامل‌ها](../../../../../translated_images/fa/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. گزینه `Data+indexes` را در منوی سمت چپ پیدا کنید و برای جزئیات کلیک کنید. 
+1. Look for the `Data+indexes` option in the left menu and click for details. 
 
-      - باید 32 فایل داده آپلود شده برای دانش را ببینید.
-      - این‌ها با 12 فایل مشتری و 20 فایل محصول در زیر `src/files` مطابقت خواهند داشت 
-      ![Data](../../../../../translated_images/fa/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - باید 32 فایل داده‌ای آپلودشده برای دانش را ببینید.
+      - این‌ها مطابق با 12 فایل مشتری و 20 فایل محصول در زیر `src/files` خواهند بود 
+      ![داده‌ها](../../../../../translated_images/fa/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**عملکرد عامل را اعتبارسنجی کردید!**
+**You validated Agent operation!** 
 
-1. پاسخ‌های عامل بر اساس دانش موجود در آن فایل‌ها است.
-1. اکنون می‌توانید سوالاتی مرتبط با آن داده‌ها بپرسید و پاسخ‌های مبتنی بر دانش دریافت کنید.
-1. مثال: `customer_info_10.json` سه خرید انجام‌شده توسط "Amanda Perez" را توصیف می‌کند
+1. The agent responses are grounded in the knowledge in those files. 
+1. You can now ask questions related to that data, and get grounded responses.
+1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
-به تب مرورگر با نقطه پایانی برنامه Container App بازگردید و بپرسید: `Amanda Perez چه محصولاتی دارد؟`. باید چیزی شبیه به این ببینید:
+Revisit the browser tab with the Container App endpoint and ask: `چه محصولاتی متعلق به Amanda Perez است؟`. You should see something like this:
 
-![Data](../../../../../translated_images/fa/09-ask-in-aca.4102297fc465a4d5.webp)
+![داده‌ها](../../../../../translated_images/fa/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. زمین بازی عامل
+## 6. محیط آزمایشی عامل
 
-بیایید کمی بیشتر با قابلیت‌های Azure AI Foundry آشنا شویم، با امتحان کردن عامل در زمین بازی عوامل.
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
-1. به صفحه `Agents` در Azure AI Foundry بازگردید - عامل پیش‌فرض را انتخاب کنید
-1. گزینه `Try in Playground` را کلیک کنید - باید یک رابط کاربری زمین بازی مانند این دریافت کنید
-1. همان سوال را بپرسید: `Amanda Perez چه محصولاتی دارد؟`
+1. Return to the `Agents` page in Microsoft Foundry - select the default agent
+1. Click the `Try in Playground` option - you should get a Playground UI like this
+1. Ask the same question: `چه محصولاتی متعلق به Amanda Perez است؟`
 
-    ![Data](../../../../../translated_images/fa/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![داده‌ها](../../../../../translated_images/fa/09-ask-in-playground.a1b93794f78fa676.webp)
 
-پاسخ مشابه (یا مشابهی) دریافت می‌کنید - اما همچنین اطلاعات اضافی دریافت می‌کنید که می‌توانید برای درک کیفیت، هزینه، و عملکرد برنامه عامل خود استفاده کنید. برای مثال:
+You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
 
-1. توجه کنید که پاسخ فایل‌های داده‌ای را که برای "پایه‌گذاری" پاسخ استفاده شده‌اند ذکر می‌کند
-1. روی هر یک از برچسب‌های فایل‌ها حرکت کنید - آیا داده‌ها با پرسش شما و پاسخ نمایش داده شده مطابقت دارند؟
+1. Note that the response cites data files used to "ground" the response
+1. Hover over any of these file labels - does the data match your query and displayed response?
 
-همچنین یک ردیف _آمار_ زیر پاسخ مشاهده می‌کنید.
+You also see a _stats_ row below the response. 
 
-1. روی هر متریک حرکت کنید - به عنوان مثال، Safety. چیزی شبیه به این می‌بینید
-1. آیا رتبه‌بندی ارزیابی‌شده با شهود شما برای سطح ایمنی پاسخ مطابقت دارد؟
+1. Hover over any metric - e.g., Safety. You see something like this
+1. Does the assessed rating match your intuition for the response safety level?
 
-      ![Data](../../../../../translated_images/fa/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![داده‌ها](../../../../../translated_images/fa/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
----x
+---
 
-## 7. قابلیت مشاهده داخلی
+## 7. قابلیت مشاهده ساخته‌شده
 
-قابلیت مشاهده به معنای ابزارسازی برنامه شما برای تولید داده‌هایی است که می‌توانند برای درک، اشکال‌زدایی، و بهینه‌سازی عملیات آن استفاده شوند. برای درک این موضوع:
+Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
-1. دکمه `View Run Info` را کلیک کنید - باید این نما را ببینید. این یک نمونه از [ردیابی عامل](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) در عمل است. _شما همچنین می‌توانید این نما را با کلیک بر روی Thread Logs در منوی سطح بالا دریافت کنید_.
+1. Click the `View Run Info` button - you should see this view. This is an example of [ردیابی عامل](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - حس کنید که مراحل اجرا و ابزارهای درگیر شده توسط عامل چیست
-   - تعداد کل Token‌ها (در مقابل استفاده از Token‌های خروجی) برای پاسخ را درک کنید
-   - تأخیر و جایی که زمان در اجرا صرف می‌شود را درک کنید
+   - درک مراحل اجرا و ابزارهای درگیر شده توسط عامل
+   - درک تعداد کل Tokenها (در مقابل مصرف توکن‌های خروجی) برای پاسخ
+   - فهم تأخیر و اینکه زمان در کجا صرف اجرای عملیات می‌شود
 
-      ![Agent](../../../../../translated_images/fa/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![عامل](../../../../../translated_images/fa/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. روی تب `Metadata` کلیک کنید تا ویژگی‌های اضافی برای اجرا را ببینید که ممکن است برای اشکال‌زدایی مشکلات بعدی مفید باشند.   
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
-      ![Agent](../../../../../translated_images/fa/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![عامل](../../../../../translated_images/fa/11-view-run-info-metadata.7966986122c7c2df.webp)
 
-1. روی تب `Evaluations` کلیک کنید تا ارزیابی‌های خودکار انجام‌شده بر روی پاسخ عامل را ببینید. این شامل ارزیابی‌های ایمنی (مانند Self-harm) و ارزیابی‌های خاص عامل (مانند Intent resolution، Task adherence) می‌شود.
 
-      ![Agent](../../../../../translated_images/fa/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
-1. در نهایت، روی تب `Monitoring` در منوی کناری کلیک کنید.
+      ![عامل](../../../../../translated_images/fa/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-      - تب `Resource usage` را در صفحه نمایش داده شده انتخاب کنید - و متریک‌ها را مشاهده کنید.
-      - استفاده از برنامه را از نظر هزینه‌ها (Token‌ها) و بار (درخواست‌ها) پیگیری کنید.
-      - تأخیر برنامه را تا اولین بایت (پردازش ورودی) و آخرین بایت (خروجی) پیگیری کنید.
+1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
-      ![Agent](../../../../../translated_images/fa/13-monitoring-resources.5148015f7311807f.webp)
+      - Select `Resource usage` tab in the displayed page - and view the metrics.
+      - Track application usage in terms of costs (tokens) and load (requests).
+      - Track applicaton latency to first byte (input processing) and last byte (output).
+
+      ![عامل](../../../../../translated_images/fa/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
 ## 8. متغیرهای محیطی
 
-تا اینجا، ما استقرار را در مرورگر بررسی کردیم - و اعتبارسنجی کردیم که زیرساخت ما فراهم شده و برنامه عملیاتی است. اما برای کار با برنامه _کد-اول_، باید محیط توسعه محلی خود را با متغیرهای مربوطه مورد نیاز برای کار با این منابع پیکربندی کنیم. استفاده از `azd` این کار را آسان می‌کند.
+So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
-1. Azure Developer CLI [از متغیرهای محیطی استفاده می‌کند](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) برای ذخیره و مدیریت تنظیمات پیکربندی برای استقرار برنامه‌ها.
+1. The Azure Developer CLI [از متغیرهای محیطی](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
 
-1. متغیرهای محیطی در `.azure/<env-name>/.env` ذخیره می‌شوند - این متغیرها را به محیط `env-name` استفاده‌شده در طول استقرار محدود می‌کند و به شما کمک می‌کند محیط‌ها را بین اهداف استقرار مختلف در همان مخزن جدا کنید.
+1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
 
-1. متغیرهای محیطی به طور خودکار توسط فرمان `azd` بارگذاری می‌شوند هر زمان که یک فرمان خاص اجرا شود (مانند `azd up`). توجه داشته باشید که `azd` به طور خودکار متغیرهای محیطی _سطح سیستم‌عامل_ (مانند تنظیم‌شده در شل) را نمی‌خواند - در عوض از `azd set env` و `azd get env` برای انتقال اطلاعات در اسکریپت‌ها استفاده کنید.
+1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
 
-بیایید چند فرمان را امتحان کنیم:
 
-1. تمام متغیرهای محیطی تنظیم‌شده برای `azd` در این محیط را دریافت کنید:
+Let's try out a few commands:
+
+1. Get all the environment variables set for `azd` in this environment:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      چیزی شبیه به این خواهید دید:
+      You see something like:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -244,19 +239,19 @@ CO_OP_TRANSLATOR_METADATA:
       ...
       ```
 
-1. یک مقدار خاص را دریافت کنید - به عنوان مثال، می‌خواهم بدانم آیا مقدار `AZURE_AI_AGENT_MODEL_NAME` تنظیم شده است
+1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      چیزی شبیه به این خواهید دید - به طور پیش‌فرض تنظیم نشده بود!
+      You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. یک متغیر محیطی جدید برای `azd` تنظیم کنید. در اینجا، نام مدل عامل را به‌روزرسانی می‌کنیم. _توجه: هر تغییری که انجام شود بلافاصله در فایل `.azure/<env-name>/.env` منعکس خواهد شد.
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _توجه: هر تغییری که انجام شود فوراً در فایل `.azure/<env-name>/.env` منعکس خواهد شد.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,30 +259,35 @@ CO_OP_TRANSLATOR_METADATA:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      اکنون باید ببینیم که مقدار تنظیم شده است:
+      Now, we should find the value is set:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. توجه داشته باشید که برخی منابع پایدار هستند (مانند استقرار مدل‌ها) و برای اعمال تغییرات بیشتر از یک `azd up` نیاز دارند. بیایید استقرار اصلی را حذف کنیم و با متغیرهای محیطی تغییر‌یافته دوباره مستقر کنیم.
+1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **تازه‌سازی** اگر قبلاً زیرساختی را با استفاده از یک قالب azd مستقر کرده‌اید - می‌توانید _وضعیت_ متغیرهای محیطی محلی خود را بر اساس وضعیت فعلی استقرار Azure خود با استفاده از این فرمان تازه‌سازی کنید:
+1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      این یک روش قدرتمند برای هماهنگ کردن متغیرهای محیطی بین دو یا چند محیط توسعه محلی است (مثلاً تیمی با چندین توسعه‌دهنده) - به طوری که زیرساخت مستقر شده به عنوان منبع اصلی وضعیت متغیرهای محیطی عمل کند. اعضای تیم به سادگی متغیرها را تازه‌سازی می‌کنند تا دوباره هماهنگ شوند.
+      این یک روش قدرتمند برای _همگام‌سازی_ متغیرهای محیطی بین دو یا چند محیط توسعه محلی (مثلاً تیمی با چند توسعه‌دهنده) است - به‌طوری که زیرساخت مستقر به‌عنوان مرجع اصلی وضعیت متغیرهای محیطی عمل کند. اعضای تیم صرفاً متغیرها را _تازه‌سازی_ می‌کنند تا دوباره همگام شوند.
 
 ---
 
-## 9. تبریک می‌گوییم 🏆
+## 9. تبریک 🏆
 
-شما به تازگی یک جریان کاری کامل را به پایان رساندید که در آن:
+شما همین‌اکنون یک جریان کاری انتها‌به‌انتها را تکمیل کرده‌اید که در آن:
 
-- [X] قالب AZD مورد نظر خود را انتخاب کردید
-- [X] قالب را با GitHub Codespaces راه‌اندازی کردید
-- [X] قالب را مستقر کردید و تأیید کردید که کار می‌کند
+- [X] قالب AZD موردنظر خود را برای استفاده انتخاب کردید
+- [X] قالب را با GitHub Codespaces راه‌اندازی کردید 
+- [X] قالب را مستقر کرده و تأیید کردید که کار می‌کند
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+سلب مسئولیت:
+این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است دارای خطا یا نادرستی باشند. نسخهٔ اصلی سند به زبان مادری آن باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، توصیه می‌شود از ترجمهٔ حرفه‌ای انسانی استفاده شود. ما در قبال هر گونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

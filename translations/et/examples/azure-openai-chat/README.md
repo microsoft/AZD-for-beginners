@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-24T15:01:17+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "et"
-}
--->
 # Azure OpenAI vestlusrakendus
 
 **Õppetasand:** Kesktase ⭐⭐ | **Aeg:** 35-45 minutit | **Kulu:** $50-200/kuus

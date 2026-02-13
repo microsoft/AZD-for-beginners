@@ -1,29 +1,20 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "22ea3f5148517a6012d3e2771584ef87",
-  "translation_date": "2025-11-21T17:55:07+00:00",
-  "source_file": "examples/container-app/microservices/README.md",
-  "language_code": "fi"
-}
--->
-# Mikropalveluarkkitehtuuri - Esimerkki konttisovelluksesta
+# Mikropalveluarkkitehtuuri - Container App -esimerkki
 
-⏱️ **Arvioitu aika**: 25-35 minuuttia | 💰 **Arvioidut kustannukset**: ~50-100 $/kk | ⭐ **Vaikeustaso**: Edistynyt
+⏱️ **Arvioitu aika**: 25-35 minuuttia | 💰 **Arvioidut kustannukset**: ~$50-100/kuukausi | ⭐ **Vaikeustaso**: Edistynyt
 
-**Yksinkertaistettu mutta toimiva** mikropalveluarkkitehtuuri, joka otetaan käyttöön Azure Container Apps -ympäristössä AZD CLI:n avulla. Tämä esimerkki havainnollistaa palveluiden välistä viestintää, konttien orkestrointia ja valvontaa käytännön 2-palvelun kokoonpanolla.
+A **yksinkertaistettu mutta toimiva** mikropalveluarkkitehtuuri, joka on otettu käyttöön Azure Container Apps -palvelussa käyttäen AZD CLI:tä. Tämä esimerkki demonstroi palveluiden välistä viestintää, konttien orkestrointia ja monitorointia käytännöllisellä 2-palvelun kokoonpanolla.
 
-> **📚 Oppimislähestymistapa**: Tämä esimerkki alkaa minimaalisella 2-palvelun arkkitehtuurilla (API Gateway + Backend Service), jonka voit oikeasti ottaa käyttöön ja oppia siitä. Kun hallitset tämän perustan, tarjoamme ohjeita laajentamiseen täyteen mikropalveluekosysteemiin.
+> **📚 Oppimistapa**: Tämä esimerkki alkaa pienellä 2-palvelun arkkitehtuurilla (API Gateway + Backend Service), jonka voit oikeasti ottaa käyttöön ja oppia. Kun olet hallinnut tämän perustan, annamme ohjeita laajentamiseen täydeksi mikropalveluekosysteemiksi.
 
 ## Mitä opit
 
-Tämän esimerkin suorittamalla opit:
-- Ottamaan käyttöön useita kontteja Azure Container Apps -ympäristössä
-- Toteuttamaan palveluiden välistä viestintää sisäisellä verkolla
-- Määrittämään ympäristöön perustuvan skaalauksen ja terveystarkistukset
-- Valvomaan hajautettuja sovelluksia Application Insightsin avulla
-- Ymmärtämään mikropalveluiden käyttöönoton malleja ja parhaita käytäntöjä
-- Laajentamaan arkkitehtuuria yksinkertaisesta monimutkaiseksi vaiheittain
+Tämän esimerkin läpikäynnin jälkeen osaat:
+- Ota useita kontteja käyttöön Azure Container Apps -palveluun
+- Toteuttaa palveluiden välistä viestintää sisäverkon avulla
+- Konfiguroida ympäristöön perustuvaa skaalausta ja terveystarkastuksia
+- Monitoroida hajautettuja sovelluksia Application Insightsilla
+- Ymmärtää mikropalvelujen käyttöönoton malleja ja parhaita käytäntöjä
+- Oppia asteittainen laajentaminen yksinkertaisesta monimutkaiseen arkkitehtuuriin
 
 ## Arkkitehtuuri
 
@@ -61,17 +52,15 @@ Tämän esimerkin suorittamalla opit:
 ```
 
 **Miksi aloittaa yksinkertaisesti?**
-- ✅ Nopea käyttöönotto ja ymmärrys (25-35 minuuttia)
-- ✅ Opit mikropalveluiden perusmallit ilman monimutkaisuutta
+- ✅ Ota käyttöön ja ymmärrä nopeasti (25-35 minuuttia)
+- ✅ Opettele keskeiset mikropalvelumallit ilman monimutkaisuutta
 - ✅ Toimiva koodi, jota voit muokata ja kokeilla
-- ✅ Alhaisemmat oppimiskustannukset (~50-100 $/kk vs. 300-1400 $/kk)
-- ✅ Rakennat itseluottamusta ennen tietokantojen ja viestijonojen lisäämistä
+- ✅ Alhaisemmat oppimiskustannukset (~$50-100/kuukausi vs $300-1400/kuukausi)
+- ✅ Rakenna luottamusta ennen tietokantojen ja viestijonojen lisäämistä
 
-**Vertauskuva**: Ajattele tätä kuin ajamaan oppimista. Aloitat tyhjältä parkkipaikalta (2 palvelua), hallitset perusteet ja siirryt sitten kaupunkiliikenteeseen (5+ palvelua tietokantojen kanssa).
+**Vertauskuva**: Ajattele tätä kuin ajokoulun oppimista. Aloitat tyhjältä parkkipaikalta (2 palvelua), hallitset perusteet ja siirryt sitten kaupunkiliikenteeseen (5+ palvelua tietokantoineen).
 
-### Vaihe 2: Tulevaisuuden laajennus (viitearkkitehtuuri)
-
-Kun hallitset 2-palvelun arkkitehtuurin, voit laajentaa sen:
+### Vaihe 2: Tuleva laajennus (viitearkkitehtuuri)
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -86,69 +75,69 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-Katso "Laajennusopas"-osio lopusta vaiheittaisia ohjeita varten.
+Katso lopusta "Laajennusopas" -osio vaiheittaisia ohjeita varten.
 
 ## Mukana olevat ominaisuudet
 
-✅ **Palveluiden löytäminen**: Automaattinen DNS-pohjainen löytö konttien välillä  
-✅ **Kuormantasaus**: Sisäänrakennettu kuormantasaus replikoiden välillä  
-✅ **Automaattinen skaalaus**: Palvelukohtainen itsenäinen skaalaus HTTP-pyyntöjen perusteella  
-✅ **Terveysvalvonta**: Liveness- ja readiness-tarkistukset molemmille palveluille  
-✅ **Hajautettu lokitus**: Keskitetty lokitus Application Insightsin avulla  
-✅ **Sisäinen verkko**: Turvallinen palveluiden välinen viestintä  
+✅ **Palveluiden löytäminen**: Automaattinen DNS-pohjainen löytäminen konttien välillä  
+✅ **Kuormantasapainotus**: Sisäänrakennettu kuormantasapainotus replikoiden välillä  
+✅ **Automaattinen skaalaus**: Palvelukohtainen skaalaus HTTP-liikenteen perusteella  
+✅ **Terveystarkkailu**: Liveness- ja readiness-probit molemmille palveluille  
+✅ **Hajautettu lokitus**: Keskitetty lokitus Application Insightsilla  
+✅ **Sisäinen verkotus**: Turvallinen palveluiden välinen viestintä  
 ✅ **Konttien orkestrointi**: Automaattinen käyttöönotto ja skaalaus  
-✅ **Keskeytyksettömät päivitykset**: Rolling-päivitykset ja versioiden hallinta  
+✅ **Nolla-aikakatkokset päivityksissä**: Rolling updates revisiohallinnalla  
 
 ## Esivaatimukset
 
-### Tarvittavat työkalut
+### Vaaditut työkalut
 
-Ennen aloittamista varmista, että sinulla on seuraavat työkalut asennettuna:
+Ennen aloittamista varmista, että sinulla on nämä työkalut asennettuna:
 
 1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versio 1.0.0 tai uudempi)
    ```bash
    azd version
-   # Odotettu tulos: azd versio 1.0.0 tai uudempi
+   # Odotettu tuloste: azd-versio 1.0.0 tai uudempi
    ```
 
 2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versio 2.50.0 tai uudempi)
    ```bash
    az --version
-   # Odotettu tulos: azure-cli 2.50.0 tai uudempi
+   # Odotettu tulostus: azure-cli 2.50.0 tai uudempi
    ```
 
 3. **[Docker](https://www.docker.com/get-started)** (paikalliseen kehitykseen/testaukseen - valinnainen)
    ```bash
    docker --version
-   # Odotettu tulos: Docker-versio 20.10 tai uudempi
+   # Odotettu tuloste: Dockerin versio 20.10 tai uudempi
    ```
 
 ### Azure-vaatimukset
 
-- Aktiivinen **Azure-tilaus** ([luo ilmainen tili](https://azure.microsoft.com/free/))
-- Oikeudet resurssien luomiseen tilauksessasi
-- **Contributor**-rooli tilauksessa tai resurssiryhmässä
+- Avoin **Azure-tilaus** ([luo ilmainen tili](https://azure.microsoft.com/free/))
+- Oikeudet luoda resursseja tililläsi
+- **Contributor**-rooli tilillä tai resurssiryhmällä
 
-### Tietämyksen esivaatimukset
+### Tarvittavat ennakkotiedot
 
-Tämä on **edistyneen tason** esimerkki. Sinun tulisi:
-- Olla suorittanut [Simple Flask API -esimerkki](../../../../../examples/container-app/simple-flask-api) 
-- Ymmärtää mikropalveluarkkitehtuurin perusteet
-- Tuntea REST API:t ja HTTP
-- Ymmärtää konttien peruskäsitteet
+Tämä on **edistynyt** esimerkki. Sinulla tulisi olla:
+- Suoritettuna [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Perusymmärrys mikropalveluarkkitehtuurista
+- Tuntemus REST-rajapinnoista ja HTTP:stä
+- Ymmärrys konttiteknologioista
 
-**Uusi Container Apps -ympäristössä?** Aloita [Simple Flask API -esimerkistä](../../../../../examples/container-app/simple-flask-api) oppiaksesi perusteet.
+**Uusi Container Apps -palveluun?** Aloita ensin [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) -esimerkillä oppiaksesi perusteet.
 
-## Pika-aloitus (vaiheittain)
+## Pikakäynnistys (vaihe vaiheelta)
 
-### Vaihe 1: Kloonaa ja siirry
+### Vaihe 1: Kloonaa ja siirry hakemistoon
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Onnistumisen tarkistus**: Varmista, että näet `azure.yaml`-tiedoston:
+**✓ Onnistumistarkistus**: Varmista, että näet `azure.yaml`:
 ```bash
 ls
 # Odotettu: README.md, azure.yaml, infra/, src/
@@ -160,45 +149,45 @@ ls
 azd auth login
 ```
 
-Tämä avaa selaimen Azure-todennusta varten. Kirjaudu sisään Azure-tunnuksillasi.
+Tämä avaa selaimesi Azure-todennusta varten. Kirjaudu sisään Azure-tunnuksillasi.
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä:
 ```
 Logged in to Azure.
 ```
 
-### Vaihe 3: Ympäristön alustaminen
+### Vaihe 3: Alusta ympäristö
 
 ```bash
 azd init
 ```
 
-**Näet seuraavat kehotteet**:
-- **Ympäristön nimi**: Anna lyhyt nimi (esim. `microservices-dev`)
-- **Azure-tilaus**: Valitse tilauksesi
-- **Azure-sijainti**: Valitse alue (esim. `eastus`, `westeurope`)
+**Kehotukset, jotka näet**:
+- **Environment name**: Anna lyhyt nimi (esim. `microservices-dev`)
+- **Azure subscription**: Valitse tilauksesi
+- **Azure location**: Valitse alue (esim. `eastus`, `westeurope`)
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Vaihe 4: Infrastruktuurin ja palveluiden käyttöönotto
+### Vaihe 4: Ota käyttöön infrastruktuuri ja palvelut
 
 ```bash
 azd up
 ```
 
-**Mitä tapahtuu** (kestää 8-12 minuuttia):
+**Mitä tapahtuu** (kesto 8-12 minuuttia):
 1. Luo Container Apps -ympäristön
-2. Luo Application Insights valvontaa varten
-3. Rakentaa API Gateway -kontin (Node.js)
-4. Rakentaa Product Service -kontin (Python)
-5. Ottaa molemmat kontit käyttöön Azuren ympäristössä
-6. Määrittää verkon ja terveystarkistukset
-7. Asettaa valvonnan ja lokituksen
+2. Luo Application Insights monitorointia varten
+3. Kokoa API Gateway -kontti (Node.js)
+4. Kokoa Product Service -kontti (Python)
+5. Ota molemmat kontit käyttöön Azureen
+6. Konfiguroi verkotus ja terveystarkastukset
+7. Ota käyttöön monitorointi ja lokitus
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -206,20 +195,20 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ Aika**: 8-12 minuuttia
 
-### Vaihe 5: Käyttöönoton testaaminen
+### Vaihe 5: Testaa käyttöönotto
 
 ```bash
 # Hae yhdyskäytävän päätepiste
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Testaa API Gatewayn terveys
+# Testaa API-yhdyskäytävän kunto
 curl $GATEWAY_URL/health
 
-# Odotettu tulos:
-# {"status":"terve","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
+# Odotettu tuloste:
+# {"tila":"terve","palvelu":"api-yhdyskäytävä","aikaleima":"2025-11-19T10:30:00Z"}
 ```
 
-**Testaa tuotepalvelua portin kautta**:
+**Testaa tuotepalvelu gatewayn kautta**:
 ```bash
 # Listaa tuotteet
 curl $GATEWAY_URL/api/products
@@ -232,11 +221,11 @@ curl $GATEWAY_URL/api/products
 # ]
 ```
 
-**✓ Onnistumisen tarkistus**: Molemmat päätepisteet palauttavat JSON-dataa ilman virheitä.
+**✓ Onnistumistarkistus**: Molemmat päätepisteet palauttavat JSON-dataa ilman virheitä.
 
 ---
 
-**🎉 Onnittelut!** Olet ottanut mikropalveluarkkitehtuurin käyttöön Azuren ympäristössä!
+**🎉 Onnittelut!** Olet ottanut mikropalveluarkkitehtuurin käyttöön Azureen!
 
 ## Projektin rakenne
 
@@ -272,46 +261,46 @@ microservices/
 
 **Mitä kukin komponentti tekee:**
 
-**Infrastruktuuri (infra/)**:
+**Infrastructure (infra/)**:
 - `main.bicep`: Orkestroi kaikki Azure-resurssit ja niiden riippuvuudet
 - `core/container-apps-environment.bicep`: Luo Container Apps -ympäristön ja Azure Container Registryn
-- `core/monitor.bicep`: Asettaa Application Insightsin hajautettua lokitusta varten
-- `app/*.bicep`: Yksittäisten konttisovellusten määritelmät skaalaus- ja terveystarkistuksilla
+- `core/monitor.bicep`: Asettaa Application Insightsin hajautettuun lokitukseen
+- `app/*.bicep`: Yksittäiset container app -määrittelyt skaalaus- ja terveystarkastusasetuksineen
 
 **API Gateway (src/api-gateway/)**:
-- Julkinen palvelu, joka reitittää pyynnöt taustapalveluille
-- Toteuttaa lokituksen, virheenkäsittelyn ja pyyntöjen välittämisen
-- Havainnollistaa palveluiden välistä HTTP-viestintää
+- Julkinen palvelu, joka reitittää pyynnöt backend-palveluille
+- Toteuttaa lokituksen, virheenkäsittelyn ja pyynnön uudelleenohjauksen
+- Demonstroi palveluiden välistä HTTP-viestintää
 
 **Product Service (src/product-service/)**:
-- Sisäinen palvelu, jossa on tuoteluettelo (yksinkertaisuuden vuoksi muistissa)
-- REST API terveystarkistuksilla
-- Esimerkki taustapalvelun mikropalvelumallista
+- Sisäinen palvelu, joka ylläpitää tuoteluetteloa muistissa yksinkertaisuuden vuoksi
+- REST-rajapinta terveystarkastusreitteineen
+- Esimerkki backend-mikropalvelumallista
 
-## Palveluiden yleiskatsaus
+## Palvelujen yleiskatsaus
 
 ### API Gateway (Node.js/Express)
 
 **Portti**: 8080  
-**Pääsy**: Julkinen (ulkoinen ingress)  
-**Tarkoitus**: Reitittää saapuvat pyynnöt oikeille taustapalveluille  
+**Käyttöoikeus**: Julkinen (ulkoisen liikenteen sallittu)  
+**Tarkoitus**: Reitittää saapuvat pyynnöt oikeisiin backend-palveluihin  
 
 **Päätepisteet**:
-- `GET /` - Palvelutiedot
-- `GET /health` - Terveystarkistuspäätepiste
-- `GET /api/products` - Välittää tuotepalveluun (listaa kaikki)
-- `GET /api/products/:id` - Välittää tuotepalveluun (hakee ID:n perusteella)
+- `GET /` - Tietoa palvelusta
+- `GET /health` - Terveystarkastus
+- `GET /api/products` - Uudelleenohjaa product-palveluun (listaa kaikki)
+- `GET /api/products/:id` - Uudelleenohjaa product-palveluun (hae ID:llä)
 
 **Keskeiset ominaisuudet**:
-- Pyyntöjen reititys axiosin avulla
+- Pyyntöjen reititys axiosilla
 - Keskitetty lokitus
-- Virheenkäsittely ja aikakatkaisujen hallinta
-- Palveluiden löytäminen ympäristömuuttujien avulla
+- Virheenkäsittely ja aikakatkaisut
+- Palvelun löytäminen ympäristömuuttujien kautta
 - Application Insights -integraatio
 
 **Koodin kohokohta** (`src/api-gateway/app.js`):
 ```javascript
-// Sisäinen palveluviestintä
+// Sisäinen palveluiden välinen viestintä
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
@@ -321,20 +310,20 @@ app.get('/api/products', async (req, res) => {
 ### Product Service (Python/Flask)
 
 **Portti**: 8000  
-**Pääsy**: Vain sisäinen (ei ulkoista ingressiä)  
-**Tarkoitus**: Hallinnoi tuoteluetteloa muistissa olevilla tiedoilla  
+**Käyttöoikeus**: Vain sisäinen (ei ulkoista ingressiä)  
+**Tarkoitus**: Hallinnoi tuoteluetteloa muistissa  
 
 **Päätepisteet**:
-- `GET /` - Palvelutiedot
-- `GET /health` - Terveystarkistuspäätepiste
+- `GET /` - Tietoa palvelusta
+- `GET /health` - Terveystarkastus
 - `GET /products` - Listaa kaikki tuotteet
-- `GET /products/<id>` - Hakee tuotteen ID:n perusteella
+- `GET /products/<id>` - Hae tuote ID:llä
 
 **Keskeiset ominaisuudet**:
-- RESTful API Flaskilla
-- Muistissa oleva tuotetietovarasto (yksinkertainen, ei tietokantaa)
-- Terveysvalvonta probeilla
-- Rakenteellinen lokitus
+- RESTful-rajapinta Flaskilla
+- Muistissa pidettävä tuotetietokanta (yksinkertainen, ei tarvetta tietokannalle)
+- Terveystarkkailu probeilla
+- Rakenteinen lokitus
 - Application Insights -integraatio
 
 **Tietomalli**:
@@ -348,20 +337,20 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Miksi vain sisäinen pääsy?**
-Tuotepalvelua ei altisteta julkisesti. Kaikki pyynnöt kulkevat API Gatewayn kautta, mikä tarjoaa:
-- Turvallisuuden: Hallittu pääsypiste
-- Joustavuuden: Taustajärjestelmän voi vaihtaa vaikuttamatta asiakkaisiin
-- Valvonnan: Keskitetty pyyntölokitus
+**Miksi vain sisäinen?**
+Product-palvelu ei ole julkisesti saatavilla. Kaikki pyynnöt on ohjattava API Gatewayn kautta, joka tarjoaa:
+- Turvallisuus: Hallittu pääsypiste
+- Joustavuus: Backendin voi vaihtaa vaikuttamatta asiakkaisiin
+- Monitorointi: Keskitetty pyyntöjen lokitus
 
-## Palveluiden välinen viestintä
+## Palveluiden välisen viestinnän ymmärtäminen
 
 ### Miten palvelut keskustelevat keskenään
 
-Tässä esimerkissä API Gateway kommunikoi Product Servicen kanssa **sisäisten HTTP-kutsujen** avulla:
+Tässä esimerkissä API Gateway kommunikoi Product Service -palvelun kanssa käyttämällä **sisäisiä HTTP-kutsuja**:
 
 ```javascript
-// API-yhdyskäytävä (src/api-gateway/app.js)
+// API-väylä (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
 // Tee sisäinen HTTP-pyyntö
@@ -370,21 +359,21 @@ const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 
 **Keskeiset kohdat**:
 
-1. **DNS-pohjainen löytö**: Container Apps tarjoaa automaattisesti DNS:n sisäisille palveluille
-   - Product Servicen FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Yksinkertaistettuna: `http://product-service` (Container Apps ratkaisee sen)
+1. **DNS-pohjainen löytäminen**: Container Apps tarjoaa automaattisesti DNS:n sisäisille palveluille
+   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
+   - Yksinkertaistettuna: `http://product-service` (Container Apps ratkaisee tämän)
 
-2. **Ei julkista altistusta**: Product Servicellä on `external: false` Bicepissä
-   - Vain Container Apps -ympäristön sisällä saavutettavissa
-   - Ei pääsyä internetistä
+2. **Ei julkista altistusta**: Product Service:ssa on Bicepissä `external: false`
+   - Käytettävissä vain Container Apps -ympäristön sisällä
+   - Ei saavutettavissa internetistä
 
-3. **Ympäristömuuttujat**: Palvelu-URL:t injektoidaan käyttöönoton aikana
-   - Bicep välittää sisäisen FQDN:n portille
+3. **Ympäristömuuttujat**: Palvelu-URL:t injektoidaan käyttöönoton yhteydessä
+   - Bicep välittää sisäisen FQDN:n gatewaylle
    - Ei kovakoodattuja URL-osoitteita sovelluskoodissa
 
-**Vertauskuva**: Ajattele tätä kuin toimistohuoneita. API Gateway on vastaanottotiski (julkinen), ja Product Service on toimistohuone (vain sisäinen). Vierailijoiden on mentävä vastaanoton kautta päästäkseen toimistoon.
+**Vertauskuva**: Ajattele tätä kuin toimiston huoneita. API Gateway on vastaanottotiski (julkinen), ja Product Service on toimistohuone (vain sisäinen). Vierailijat joutuvat menemään vastaanoton kautta päästäkseen mihinkään huoneeseen.
 
-## Käyttöönoton vaihtoehdot
+## Käyttöönotto-optiot
 
 ### Täysi käyttöönotto (suositeltu)
 
@@ -400,45 +389,45 @@ Tämä ottaa käyttöön:
 4. API Gateway -kontin
 5. Product Service -kontin
 
-**Aika**: 8-12 minuuttia
+**Kesto**: 8-12 minuuttia
 
-### Yksittäisen palvelun käyttöönotto
+### Ota käyttöön yksittäinen palvelu
 
 ```bash
-# Ota käyttöön vain yksi palvelu (ensimmäisen azd up -komennon jälkeen)
+# Ota käyttöön vain yksi palvelu (ensimmäisen azd up -suorituksen jälkeen)
 azd deploy api-gateway
 
 # Tai ota käyttöön tuotepalvelu
 azd deploy product-service
 ```
 
-**Käyttötapaus**: Kun olet päivittänyt yhden palvelun koodia ja haluat ottaa käyttöön vain kyseisen palvelun.
+**Käyttötapaus**: Kun olet päivittänyt koodia yhdessä palvelussa ja haluat ottaa vain sen palvelun uudelleen käyttöön.
 
-### Määrittelyn päivitys
+### Päivitä konfiguraatio
 
 ```bash
 # Muuta skaalausparametreja
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Ota käyttöön uudelleen uudella kokoonpanolla
+# Ota uudelleen käyttöön uusi konfiguraatio
 azd up
 ```
 
-## Määrittely
+## Konfiguraatio
 
 ### Skaalausasetukset
 
-Molemmat palvelut on määritetty HTTP-pohjaisella automaattisella skaalauksella niiden Bicep-tiedostoissa:
+Molemmat palvelut on konfiguroitu HTTP-pohjaiseen autoskaalaukseen Bicep-tiedostoissaan:
 
 **API Gateway**:
-- Minimi replikat: 2 (vähintään 2 saatavuutta varten)
-- Maksimi replikat: 20
-- Skaalauslaukaisin: 50 samanaikaista pyyntöä per replika
+- Minimi-instanssit: 2 (aina vähintään 2 saatavilla)
+- Maksimi-instanssit: 20
+- Skaalauksen laukaisin: 50 samanaikaista pyyntöä per instanssi
 
 **Product Service**:
-- Minimi replikat: 1 (voi skaalautua nollaan tarvittaessa)
-- Maksimi replikat: 10
-- Skaalauslaukaisin: 100 samanaikaista pyyntöä per replika
+- Minimi-instanssit: 1 (voi skaalautua nollaan tarvittaessa)
+- Maksimi-instanssit: 10
+- Skaalauksen laukaisin: 100 samanaikaista pyyntöä per instanssi
 
 **Mukauta skaalausta** (tiedostossa `infra/app/*.bicep`):
 ```bicep
@@ -458,21 +447,21 @@ scale: {
 }
 ```
 
-### Resurssien allokointi
+### Resurssien kohdentaminen
 
 **API Gateway**:
 - CPU: 1.0 vCPU
 - Muisti: 2 GiB
-- Syy: Käsittelee kaiken ulkoisen liikenteen
+- Perustelu: Käsittelee kaiken ulkoisen liikenteen
 
 **Product Service**:
 - CPU: 0.5 vCPU
 - Muisti: 1 GiB
-- Syy: Kevyet muistissa olevat toiminnot
+- Perustelu: Kevyt muistipohjainen toiminta
 
-### Terveystarkistukset
+### Terveystarkastukset
 
-Molemmat palvelut sisältävät liveness- ja readiness-probet:
+Molemmat palvelut sisältävät liveness- ja readiness-probit:
 
 ```bicep
 probes: [
@@ -498,22 +487,25 @@ probes: [
 ```
 
 **Mitä tämä tarkoittaa**:
-- **Liveness**: Jos terveystarkistus epäonnistuu, Container Apps käynnistää kontin uudelleen
-- **Readiness**: Jos ei ole valmis, Container Apps lopettaa liikenteen ohjaamisen kyseiselle replikalle
+- **Elinkelpoisuus (liveness)**: Jos terveystarkastus epäonnistuu, Container Apps käynnistää kontin uudelleen
+- **Valmius (readiness)**: Jos palvelu ei ole valmis, Container Apps lopettaa liikenteen ohjaamisen kyseiselle instanssille
 
-## Valvonta ja näkyvyys
 
-### Palvelulokit
+
+## Monitorointi ja havaittavuus
+
+### Palvelulokien tarkastelu
 
 ```bash
-# Suoratoista lokit API Gatewaysta
-azd logs api-gateway --follow
+# Näytä lokit käyttämällä azd monitoria
+azd monitor --logs
 
-# Näytä viimeaikaiset tuotepalvelun lokit
-azd logs product-service --tail 100
+# Tai käytä Azure CLI:tä tiettyihin Container Apps -sovelluksiin:
+# Suoratoista lokit API-gatewayista
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Näytä kaikki lokit molemmista palveluista
-azd logs --follow
+# Näytä tuotepalvelun viimeisimmät lokit
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Odotettu tulos**:
@@ -528,7 +520,7 @@ azd logs --follow
 
 Avaa Application Insights Azure-portaalissa ja suorita nämä kyselyt:
 
-**Etsi hitaat pyynnöt**:
+**Hidaspyyntöjen löytäminen**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -546,7 +538,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Virheprosentti palveluittain**:
+**Virheprosentti palvelukohtaisesti**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -554,7 +546,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Pyyntöjen määrä ajan myötä**:
+**Pyyntöjen määrä ajan funktiona**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -562,13 +554,13 @@ requests
 | render timechart
 ```
 
-### Pääsy valvontapaneeliin
+### Pääsy monitorointipaneeliin
 
 ```bash
-# Hanki Application Insights -tiedot
+# Hae Application Insights -tiedot
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Avaa Azure Portalin valvonta
+# Avaa Azure-portaalin valvonta
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
@@ -579,32 +571,32 @@ az monitor app-insights component show \
 
 1. Siirry Application Insightsiin Azure-portaalissa
 2. Klikkaa "Live Metrics"
-3. Näe reaaliaikaiset pyynnöt, virheet ja suorituskyky
+3. Näet reaaliaikaiset pyynnöt, virheet ja suorituskyvyn
 4. Testaa suorittamalla: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
 ## Käytännön harjoitukset
 
-[Huom: Katso täydelliset harjoitukset yllä olevasta "Käytännön harjoitukset" -osiosta, jossa on yksityiskohtaiset vaiheittaiset ohjeet, mukaan lukien käyttöönoton tarkistus, datan muokkaus, automaattisen skaalauksen testit, virheenkäsittely ja kolmannen palvelun lisääminen.]
+[Huom: Katso täydelliset harjoitukset yllä olevasta "Käytännön harjoitukset" -osiosta yksityiskohtaisia vaiheittaisia harjoituksia varten, jotka sisältävät käyttöönoton tarkistuksen, datan muokkauksen, autoskaalauksen testit, virheenkäsittelyn ja kolmannen palvelun lisäämisen.]
 
 ## Kustannusanalyysi
 
-### Arvioidut kuukausikustannukset (tälle 2-palvelun esimerkille)
+### Arvioidut kuukausikustannukset (tälle 2-palveluesimerkillle)
 
-| Resurssi | Määritys | Arvioidut kustannukset |
-|----------|----------|------------------------|
-| API Gateway | 2-20 replikaa, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 replikaa, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Basic-taso | $5 |
-| Application Insights | 1-2 GB/kk | $5-10 |
-| Log Analytics | 1 GB/kk | $3 |
-| **Yhteensä** | | **$58-243/kk** |
+| Resource | Configuration | Estimated Cost |
+|----------|--------------|----------------|
+| API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Basic tier | $5 |
+| Application Insights | 1-2 GB/month | $5-10 |
+| Log Analytics | 1 GB/month | $3 |
+| **Total** | | **$58-243/month** |
 
-**Kustannusten jakautuminen käytön mukaan**:
-- **Kevyt liikenne** (testaus/oppiminen): ~60 $/kk
-- **Kohtalainen liikenne** (pieni tuotanto): ~120 $/kk
-- **Korkea liikenne** (kiireiset ajat): ~240 $/kk
+**Kustannusjako käytön mukaan**:
+- **Kevyt liikenne** (testaus/oppiminen): ~$60/kuukausi
+- **Kohtalainen liikenne** (pieni tuotanto): ~$120/kuukausi
+- **Kova liikenne** (ruuhka-aika): ~$240/kuukausi
 
-### Kustannusten optimointivinkit
+### Kustannusten optimointivinkkejä
 
 1. **Skaalaa nollaan kehitystä varten**:
    ```bicep
@@ -614,21 +606,31 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Käytä Cosmos DB:n kulutussuunnitelmaa** (kun lisäät sen):
-   - Maksat vain käytöstä
+2. **Käytä Consumption Plania Cosmos DB:lle** (kun lisäät sen):
+   - Maksa vain käyttämästäsi
    - Ei minimimaksua
 
-3. **Aseta
-Oppimista/testausta varten harkitse:
-- Käytä Azuren ilmaisia krediittejä (ensimmäiset 30 päivää)
-- Pidä replikoiden määrä minimissä
-- Poista testauksen jälkeen (ei jatkuvia kuluja)
+3. **Aseta Application Insightsin näytteistys (sampling)**:
+   ```javascript
+   appInsights.defaultClient.config.samplingPercentage = 50; // Näytteenotto 50 % pyynnöistä
+   ```
+
+4. **Siivoa resurssit, kun et tarvitse niitä**:
+   ```bash
+   azd down
+   ```
+
+### Ilmaiset vaihtoehdot
+For learning/testing, consider:
+- Use Azure free credits (first 30 days)
+- Keep to minimum replicas
+- Delete after testing (no ongoing charges)
 
 ---
 
 ## Siivous
 
-Välttääksesi jatkuvat kulut, poista kaikki resurssit:
+Jatkuvien maksujen välttämiseksi poista kaikki resurssit:
 
 ```bash
 azd down --force --purge
@@ -642,8 +644,8 @@ azd down --force --purge
 Kirjoita `y` vahvistaaksesi.
 
 **Mitä poistetaan**:
-- Container Apps -ympäristö
-- Molemmat Container Apps (gateway & product service)
+- Container Apps Environment
+- Both Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
@@ -654,19 +656,19 @@ Kirjoita `y` vahvistaaksesi.
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Tulos pitäisi olla tyhjä.
+Tämän pitäisi palauttaa tyhjä.
 
 ---
 
 ## Laajennusopas: 2 palvelusta 5+ palveluun
 
-Kun olet hallinnut tämän 2-palveluarkkitehtuurin, tässä ohjeet laajentamiseen:
+Kun olet hallinnut tämän 2-palvelun arkkitehtuurin, näin voit laajentaa:
 
-### Vaihe 1: Lisää tietokantapersistenssi (Seuraava askel)
+### Vaihe 1: Lisää tietokantapysyvyys (seuraava askel)
 
-**Lisää Cosmos DB Product Serviceen**:
+**Lisää Cosmos DB Product-palvelulle**:
 
-1. Luo `infra/core/cosmos.bicep`:
+1. Create `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -679,18 +681,18 @@ Kun olet hallinnut tämän 2-palveluarkkitehtuurin, tässä ohjeet laajentamisee
    }
    ```
 
-2. Päivitä product service käyttämään Cosmos DB:tä in-memory-datan sijaan
+2. Päivitä product service käyttämään Cosmos DB:tä muistissa olevan datan sijaan
 
-3. Arvioitu lisäkustannus: ~25 $/kuukausi (serverless)
+3. Arvioitu lisäkustannus: ~$25/kk (serverless)
 
-### Vaihe 2: Lisää kolmas palvelu (Order Management)
+### Vaihe 2: Lisää kolmas palvelu (tilausten hallinta)
 
-**Luo Order Service**:
+**Luo Order-palvelu**:
 
 1. Uusi kansio: `src/order-service/` (Python/Node.js/C#)
 2. Uusi Bicep: `infra/app/order-service.bicep`
 3. Päivitä API Gateway reitittämään `/api/orders`
-4. Lisää Azure SQL Database tilausten tallentamiseen
+4. Lisää Azure SQL Database tilausten pysyvyyttä varten
 
 **Arkkitehtuuri muuttuu**:
 ```
@@ -700,119 +702,119 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Vaihe 3: Lisää asynkroninen viestintä (Service Bus)
 
-**Toteuta tapahtumapohjainen arkkitehtuuri**:
+**Ota käyttöön tapahtumapohjainen arkkitehtuuri**:
 
 1. Lisää Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service julkaisee "ProductCreated"-tapahtumia
-3. Order Service tilaa tuotetapahtumat
+2. Product Service julkaisee "ProductCreated" -tapahtumia
+3. Order Service tilaa product-tapahtumia
 4. Lisää Notification Service käsittelemään tapahtumia
 
-**Malli**: Pyyntö/vastaus (HTTP) + tapahtumapohjainen (Service Bus)
+**Malli**: Pyyntö/Vastaus (HTTP) + Tapahtumapohjainen (Service Bus)
 
-### Vaihe 4: Lisää käyttäjätunnistus
+### Vaihe 4: Lisää käyttäjän todennus
 
-**Toteuta User Service**:
+**Toteuta User-palvelu**:
 
 1. Luo `src/user-service/` (Go/Node.js)
-2. Lisää Azure AD B2C tai mukautettu JWT-tunnistus
-3. API Gateway tarkistaa tunnukset
+2. Lisää Azure AD B2C tai mukautettu JWT-todennus
+3. API Gateway validoi tokenit
 4. Palvelut tarkistavat käyttäjän oikeudet
 
 ### Vaihe 5: Valmius tuotantoon
 
 **Lisää nämä komponentit**:
-- Azure Front Door (globaalin kuormituksen tasapainotus)
-- Azure Key Vault (salaisuuksien hallinta)
-- Azure Monitor Workbooks (mukautetut koontinäytöt)
-- CI/CD-putki (GitHub Actions)
-- Blue-Green-julkaisut
-- Hallittu identiteetti kaikille palveluille
+- Azure Front Door (global load balancing)
+- Azure Key Vault (secret management)
+- Azure Monitor Workbooks (custom dashboards)
+- CI/CD Pipeline (GitHub Actions)
+- Blue-Green Deployments
+- Managed Identity for all services
 
-**Täydellisen tuotantoarkkitehtuurin kustannus**: ~300-1 400 $/kuukausi
+**Koko tuotantoarkkitehtuurin kustannus**: ~$300-1,400/kk
 
 ---
 
 ## Lisätietoja
 
 ### Aiheeseen liittyvä dokumentaatio
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure Container Apps -dokumentaatio](https://learn.microsoft.com/azure/container-apps/)
+- [Mikropalveluarkkitehtuurin opas](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights hajautettuun jäljitykseen](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### Seuraavat askeleet tässä kurssissa
-- ← Edellinen: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Aloittelijan yksinkertainen konttiesimerkki
+- ← Edellinen: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Aloittelijan yksisäiliöesimerkki
 - → Seuraava: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Lisää tekoälyominaisuuksia
-- 🏠 [Kurssin kotisivu](../../README.md)
+- 🏠 [Kurssin etusivu](../../README.md)
 
 ### Vertailu: Milloin käyttää mitä
 
-**Yksi Container App** (Simple Flask API -esimerkki):
+**Yksittäinen Container App** (Simple Flask API -esimerkki):
 - ✅ Yksinkertaiset sovellukset
 - ✅ Monoliittinen arkkitehtuuri
-- ✅ Nopea käyttöönotto
+- ✅ Nopea ottaa käyttöön
 - ❌ Rajoitettu skaalautuvuus
-- **Kustannus**: ~15-50 $/kuukausi
+- **Kustannus**: ~$15-50/kk
 
-**Mikropalvelut** (Tämä esimerkki):
+**Mikropalvelut** (Tässä esimerkissä):
 - ✅ Monimutkaiset sovellukset
-- ✅ Itsenäinen skaalautuvuus per palvelu
+- ✅ Palvelukohtainen itsenäinen skaalaus
 - ✅ Tiimien autonomia (eri palvelut, eri tiimit)
-- ❌ Monimutkaisempi hallita
-- **Kustannus**: ~60-250 $/kuukausi
+- ❌ Hallittavuus monimutkaistuu
+- **Kustannus**: ~$60-250/kk
 
 **Kubernetes (AKS)**:
 - ✅ Maksimaalinen hallinta ja joustavuus
-- ✅ Monipilviportabiliteetti
-- ✅ Edistynyt verkottuminen
-- ❌ Vaatii Kubernetes-osaamista
-- **Kustannus**: ~150-500 $/kuukausi vähintään
+- ✅ Monipilvisovellusten siirrettävyys
+- ✅ Edistynyt verkotus
+- ❌ Edellyttää Kubernetes-osaamista
+- **Kustannus**: ~$150-500/kk vähintään
 
-**Suositus**: Aloita Container Appsilla (tämä esimerkki), siirry AKS:ään vain, jos tarvitset Kubernetes-spesifisiä ominaisuuksia.
+**Suositus**: Aloita Container Appsilla (tämä esimerkki), siirry AKS:ään vain jos tarvitset Kubernetes-spesifisiä ominaisuuksia.
 
 ---
 
 ## Usein kysytyt kysymykset
 
-**K: Miksi vain 2 palvelua eikä 5+?**  
-V: Opetuksellinen eteneminen. Hallitse perusteet (palveluiden välinen viestintä, monitorointi, skaalautuvuus) yksinkertaisella esimerkillä ennen monimutkaisuuden lisäämistä. Tässä opitut mallit pätevät myös 100-palveluarkkitehtuureihin.
+**Q: Miksi vain 2 palvelua 5+:n sijaan?**  
+A: Koulutuksellinen eteneminen. Hallitse perusteet (palvelujen välinen viestintä, valvonta, skaalaus) yksinkertaisella esimerkillä ennen monimutkaisuuden lisäämistä. Tässä opitut mallit pätevät myös 100-palvelun arkkitehtuureihin.
 
-**K: Voinko lisätä itse enemmän palveluita?**  
-V: Ehdottomasti! Seuraa yllä olevaa laajennusopasta. Jokainen uusi palvelu noudattaa samaa kaavaa: luo src-kansio, luo Bicep-tiedosto, päivitä azure.yaml, ota käyttöön.
+**Q: Voinko lisätä lisää palveluja itse?**  
+A: Ehdottomasti! Seuraa yllä olevaa laajennusopasta. Jokainen uusi palvelu noudattaa samaa kaavaa: luo src-kansio, luo Bicep-tiedosto, päivitä azure.yaml, ota käyttöön.
 
-**K: Onko tämä tuotantovalmis?**  
-V: Tämä on vahva perusta. Tuotantoa varten lisää: hallittu identiteetti, Key Vault, pysyvät tietokannat, CI/CD-putki, monitorointihälytykset ja varmuuskopiointistrategia.
+**Q: Onko tämä tuotantovalmiina?**  
+A: Se on hyvä perusta. Tuotantoon lisää: hallittu identiteetti, Key Vault, pysyvät tietokannat, CI/CD-putki, valvontailmoitukset ja varmuuskopiointistrategia.
 
-**K: Miksi ei käytetä Dapr tai muuta palveluverkkoa?**  
-V: Pidä oppiminen yksinkertaisena. Kun ymmärrät Container Apps -verkottamisen, voit lisätä Dapr:n edistyneisiin skenaarioihin.
+**Q: Miksi ei käytetä Dapr:ia tai muuta service mesh -ratkaisua?**  
+A: Pidä asiat yksinkertaisina oppimista varten. Kun ymmärrät Container Appsin natiiviverkottumisen, voit lisätä Dapr:in edistyneempiin skenaarioihin.
 
-**K: Miten debuggaan paikallisesti?**  
-V: Aja palvelut paikallisesti Dockerilla:
+**Q: Miten debuggaan paikallisesti?**  
+A: Aja palvelut paikallisesti Dockerilla:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**K: Voinko käyttää eri ohjelmointikieliä?**  
-V: Kyllä! Tämä esimerkki näyttää Node.js:n (gateway) + Pythonin (product service). Voit yhdistää mitä tahansa kontteihin sopivia kieliä.
+**Q: Voinko käyttää eri ohjelmointikieliä?**  
+A: Kyllä! Tämä esimerkki näyttää Node.js (gateway) + Python (product service). Voit yhdistellä mitä tahansa säiliöissä ajettavia kieliä.
 
-**K: Entä jos minulla ei ole Azure-krediittejä?**  
-V: Käytä Azuren ilmaista tasoa (ensimmäiset 30 päivää uusilla tileillä) tai ota käyttöön lyhyitä testijaksoja ja poista välittömästi.
+**Q: Entä jos minulla ei ole Azure-krediittejä?**  
+A: Käytä Azuren ilmaista tasoa (ensimmäiset 30 päivää uusille tilille) tai ota käyttöönotto vain lyhyeksi testiajaksi ja poista välittömästi.
 
 ---
 
-> **🎓 Oppimispolun yhteenveto**: Olet oppinut ottamaan käyttöön monipalveluarkkitehtuurin, jossa on automaattinen skaalautuvuus, sisäinen verkottuminen, keskitetty monitorointi ja tuotantovalmiit mallit. Tämä perusta valmistaa sinut monimutkaisiin hajautettuihin järjestelmiin ja yritysten mikropalveluarkkitehtuureihin.
+> **🎓 Oppimispolun yhteenveto**: Olet oppinut ottamaan käyttöön monipalveluarkkitehtuurin, jossa on automaattinen skaalaus, sisäinen verkottuminen, keskitetty valvonta ja tuotantovalmiit mallit. Tämä perusta valmistaa sinut monimutkaisiin hajautettuihin järjestelmiin ja yritystason mikropalveluarkkitehtuureihin.
 
 **📚 Kurssin navigointi:**
 - ← Edellinen: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Seuraava: [Database Integration Example](../../../../../examples/database-app)
-- 🏠 [Kurssin kotisivu](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- → Seuraava: [Tietokanta-integraatioesimerkki](../../../../../examples/database-app)
+- 🏠 [Kurssin etusivu](../../../README.md)
+- 📖 [Container Apps -parhaat käytännöt](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattisissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää virallisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mistään tästä käännöksestä johtuvista väärinymmärryksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

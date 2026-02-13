@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-25T02:22:11+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "bg"
-}
--->
 # 5. Персонализиране на шаблон
 
-!!! tip "В КРАЯ НА ТОЗИ МОДУЛ ЩЕ МОЖЕТЕ ДА"
+!!! tip "В КРАЯ НА ТОЗИ МОДУЛ ЩЕ МОЖЕШ"
 
-    - [ ] Разгледате стандартните възможности на AI агент
-    - [ ] Добавите AI търсене с ваш собствен индекс
-    - [ ] Активирате и анализирате метрики за проследяване
-    - [ ] Изпълните оценка на производителността
-    - [ ] Проведете сканиране за уязвимости (red-teaming)
-    - [ ] **Лаборатория 5: Създаване на план за персонализация**
+    - [ ] Разгледали сте стандартните възможности на AI агента
+    - [ ] Добавили сте AI Search със собствен индекс
+    - [ ] Активирали сте и анализирали метриките за трасировка
+    - [ ] Пуснали сте изпълнение за оценка
+    - [ ] Пуснали сте red‑teaming сканиране
+    - [ ] **Лаборатория 5: Изградили сте план за персонализиране** 
 
 ---
 
-## 5.1 Възможности на AI агент
+## 5.1 Възможности на AI агента
 
 !!! success "Завършихме това в Лаборатория 01"
 
-- **Търсене на файлове**: Вградена функция на OpenAI за извличане на знания
-- **Цитиране**: Автоматично приписване на източници в отговорите
-- **Персонализирани инструкции**: Модифициране на поведението и личността на агента
-- **Интеграция на инструменти**: Разширяема система за добавяне на персонализирани възможности
+- **File Search**: OpenAI's built-in file search for knowledge retrieval
+- **Citations**: Automatic source attribution in responses
+- **Customizable Instructions**: Modify agent behavior and personality
+- **Tool Integration**: Extensible tool system for custom capabilities
 
 ---
 
@@ -36,29 +27,29 @@ CO_OP_TRANSLATOR_METADATA:
 !!! task "За да завършим това, трябва да направим промени и да разположим отново"    
     
     ```bash title=""
-    # Задаване на променливи на средата
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Качване на данни и създаване на индекс
+    # Upload data and create my index
 
     ```
 
 ---
 
-**Търсене на файлове в OpenAI (по подразбиране):**
+**OpenAI File Search (Default):**
 
-- Вградено в услугата Azure AI Agent
+- Вградено в Foundry Agents
 - Автоматична обработка и индексиране на документи
-- Не изисква допълнителна конфигурация
+- Не се изисква допълнителна конфигурация
 
-**Azure AI Search (по избор):**
+**Azure AI Search (Optional):**
 
 - Хибридно семантично и векторно търсене
-- Управление на персонализирани индекси
+- Управление на потребителски индекси
 - Разширени възможности за търсене
 - Изисква `USE_AZURE_AI_SEARCH_SERVICE=true`
 
@@ -76,15 +67,15 @@ CO_OP_TRANSLATOR_METADATA:
 **Проследяване:**
 
 - Интеграция с OpenTelemetry
-- Проследяване на заявки и отговори
+- Проследяване на заявки/отговори
 - Метрики за производителност
-- Налични в портала AI Foundry
+- Налични в портала Microsoft Foundry
 
-**Логове:**
+**Логване:**
 
 - Логове на приложенията в Container Apps
-- Структурирано логване с корелационни идентификатори
-- Преглед на логове в реално време и исторически данни
+- Структурирано логване с идентификатори за корелация
+- Преглед на логове в реално време и исторически
 
 ---
 
@@ -92,76 +83,79 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Локална оценка:**
 
-- Вградени инструменти за оценка на качеството
+- Вградени оценители за оценка на качеството
 - Персонализирани скриптове за оценка
 - Бенчмаркинг на производителността
 
 **Непрекъснат мониторинг:**
 
-- Автоматична оценка на взаимодействията в реално време
+- Автоматична оценка на живи интеракции
 - Проследяване на метрики за качество
 - Откриване на регресии в производителността
 
-**Интеграция с CI/CD:**
+**Интеграция CI/CD:**
 
-- Работен процес с GitHub Actions
+- Работен процес в GitHub Actions
 - Автоматизирано тестване и оценка
-- Статистическо сравнение на тестове
+- Статистически сравнителни тестове
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming агент](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
 - Автоматизирано сканиране за сигурност
-- Оценка на рисковете за AI системи
-- Проверка на безопасността в различни категории
+- Оценка на риска за AI системи
+- Оценка на безопасността в различни категории
 
-**Автентикация:**
+**Аутентикация:**
 
-- Управлявана идентичност за Azure услуги
-- Опционална автентикация чрез Azure App Service
-- Резервна автентикация с основни данни за разработка
+- Managed Identity за Azure услуги
+- По избор: удостоверяване на Azure App Service
+- Резервна basic auth опция за разработка
+
+
 
 !!! quote "В КРАЯ НА ТАЗИ ЛАБОРАТОРИЯ ТРЯБВА ДА ИМАТЕ"
-    - [ ] Определени изисквания за сценария
+    - [ ] Определили сте изискванията на вашия сценарий
     - [ ] Персонализирани променливи на средата (конфигурация)
     - [ ] Персонализирани инструкции за агента (задача)
-    - [ ] Разположен персонализиран шаблон (приложение)
-    - [ ] Завършени задачи след разполагане (ръчно)
-    - [ ] Проведено тестово оценяване
+    - [ ] Разположили сте персонализирания шаблон (приложение)
+    - [ ] Завършили сте задачи след разполагането (ръчно)
+    - [ ] Извършили сте тестова оценка
 
-Този пример демонстрира персонализиране на шаблона за корпоративен сценарий в търговията на дребно с два специализирани агента и множество разположения на модели.
+Този пример демонстрира персонализиране на шаблона за корпоративен търговски случай с два специализирани агента и множество разполагания на модели.
 
 ---
 
 ## 5.6 Персонализирайте го за вас!
 
-### 5.6.1. Изисквания за сценария
+### 5.6.1. Изисквания на сценария
 
-#### **Разположения на агенти:** 
+#### **Разполагания на агенти:** 
 
-   - Агенти за пазаруване: Помага на клиентите да намират и сравняват продукти
-   - Агенти за лоялност: Управлява награди и промоции за клиенти
+   - Shopper Agent: Помага на клиентите да намират и сравняват продукти
+   - Loyalty Agent: Управлява наградите и промоциите за клиенти
 
-#### **Разположения на модели:**
+#### **Разполагания на модели:**
 
-   - `gpt-4.1`: Основен модел за чат
-   - `o3`: Модел за разсъждения при сложни запитвания
+   - `gpt-4.1`: Основен чат модел
+   - `o3`: Модел за логическо разсъждение при сложни заявки
    - `gpt-4.1-nano`: Лек модел за прости взаимодействия
    - `text-embedding-3-large`: Висококачествени вграждания за търсене
 
 #### **Функции:**
 
-   - Активирано проследяване и мониторинг
-   - AI търсене за продуктов каталог
-   - Рамка за оценка на качеството
-   - Проверка на сигурността чрез red-teaming
+   - Включено проследяване и мониторинг
+   - AI Search за продуктов каталог
+   - Рамка за оценка за осигуряване на качество
+   - Red teaming за валидация на сигурността
 
 ---
 
 ### 5.6.2 Имплементация на сценария
+
 
 #### 5.6.2.1. Конфигурация преди разполагане
 
@@ -170,32 +164,32 @@ CO_OP_TRANSLATOR_METADATA:
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Задайте име на средата
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Конфигурирайте регион (изберете в зависимост от наличността на моделите)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Активирайте всички незадължителни услуги
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Конфигурирайте основния чат модел (gpt-4o като най-близък наличен до gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Конфигурирайте модел за вграждане за подобрено търсене
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Задайте име на агента (ще създаде първия агент)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Конфигурирайте индекс за търсене
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -204,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Инструкции за агенти
+#### 5.6.2.2: Инструкции за агента
 
 Създайте `custom-agents/shopper-agent-instructions.md`:
 
@@ -264,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Проверете предварителните изисквания
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -276,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Настройте средата
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Проверете квотата в избрания регион
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -297,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Разгърнете инфраструктурата и приложението
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Запишете изходните резултати от разгръщането
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Вземете URL адреса на уеб приложението
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -336,19 +330,19 @@ echo "4. Test both agents with sample queries"
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Вземете информация за разгръщането
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Инструкции за ръчна конфигурация
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -373,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -384,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Тестване и валидиране
+### 5.6.3: Тестване и валидация
 
 Създайте `test-retail-deployment.sh`:
 
@@ -393,11 +387,11 @@ echo "
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Проверете дали променливите на средата са зададени
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# Проверете наличността на уеб приложението
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -411,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Извършете оценка, ако е конфигурирана
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -426,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -441,32 +435,36 @@ Next steps:
 
 1. **Разположена инфраструктура:**
 
-      - Проект AI Foundry с разположения на модели
+      - Microsoft Foundry проект с разполагания на модели
       - Container Apps, хостващи уеб приложението
       - AI Search услуга за продуктов каталог
-      - Application Insights за мониторинг
+      - Application Insights за наблюдение
 
-2. **Начален агент:**
+2. **Първоначален агент:**
 
-      - Агенти за пазаруване, конфигурирани с основни инструкции
-      - Активирана функция за търсене на файлове
+      - Shopper Agent конфигуриран с основни инструкции
+      - Включена възможност за търсене във файлове
       - Конфигурирано проследяване и мониторинг
 
-3. **Готовност за персонализация:**
+3. **Готово за персонализиране:**
 
-      - Рамка за добавяне на агенти за лоялност
+      - Рамка за добавяне на Loyalty Agent
       - Шаблони за персонализирани инструкции
-      - Скриптове за тестване и валидиране
+      - Скриптове за тестване и валидация
       - Настройка за мониторинг и оценка
 
 4. **Готовност за продукция:**
 
-      - Сканиране за сигурност чрез red-teaming
+      - Сканиране за сигурност с red teaming
       - Мониторинг на производителността
       - Рамка за оценка на качеството
-      - Скалируема архитектура
+      - Скалираща се архитектура
 
-Този пример демонстрира как шаблонът AZD може да бъде разширен и персонализиран за специфични корпоративни сценарии, като същевременно се спазват най-добрите практики за сигурност, мониторинг и скалируемост.
+Този пример демонстрира как AZD шаблонът може да бъде разширен и персонализиран за конкретни корпоративни сценарии, като същевременно се спазват добрите практики за сигурност, мониторинг и мащабируемост.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Отказ от отговорност:
+Този документ е преведен чрез автоматизирана услуга за превод с изкуствен интелект [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на оригиналния език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален превод, извършен от човешки преводач. Не носим отговорност за никакви недоразумения или погрешни тълкувания, възникнали в резултат на използването на този превод.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

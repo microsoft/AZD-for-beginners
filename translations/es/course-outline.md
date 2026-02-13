@@ -1,59 +1,50 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a0861541126250c3558d667e9b13c50",
-  "translation_date": "2025-11-19T20:15:38+00:00",
-  "source_file": "course-outline.md",
-  "language_code": "es"
-}
--->
 # AZD Para Principiantes: Esquema del Curso y Marco de Aprendizaje
 
-## Resumen del Curso
+## Descripción del Curso
 
 Domina Azure Developer CLI (azd) a través de capítulos estructurados diseñados para un aprendizaje progresivo. **Enfoque especial en el despliegue de aplicaciones de IA con integración de Microsoft Foundry.**
 
-### Por qué este curso es esencial para los desarrolladores modernos
+### Por Qué Este Curso es Esencial para los Desarrolladores Modernos
 
-Basado en los conocimientos de la comunidad de Discord de Microsoft Foundry, **el 45% de los desarrolladores quieren usar AZD para cargas de trabajo de IA**, pero enfrentan desafíos con:
+Basado en los insights de la comunidad de Microsoft Foundry en Discord, **el 45% de los desarrolladores quiere usar AZD para cargas de trabajo de IA** pero enfrenta desafíos con:
 - Arquitecturas complejas de IA con múltiples servicios
 - Mejores prácticas para el despliegue de IA en producción  
-- Integración y configuración de servicios de Azure AI
+- Integración y configuración de servicios de IA en Azure
 - Optimización de costos para cargas de trabajo de IA
-- Resolución de problemas específicos de despliegue de IA
+- Resolución de problemas específicos en despliegues de IA
 
-### Objetivos principales de aprendizaje
+### Objetivos Principales de Aprendizaje
 
-Al completar este curso estructurado, podrás:
-- **Dominar los fundamentos de AZD**: Conceptos básicos, instalación y configuración
-- **Desplegar aplicaciones de IA**: Usar AZD con servicios de Microsoft Foundry
+Al completar este curso estructurado, tú podrás:
+- **Dominar los Fundamentos de AZD**: Conceptos clave, instalación y configuración
+- **Desplegar Aplicaciones de IA**: Usar AZD con servicios de Microsoft Foundry
 - **Implementar Infraestructura como Código**: Gestionar recursos de Azure con plantillas Bicep
-- **Solucionar problemas de despliegue**: Resolver problemas comunes y depurar errores
-- **Optimizar para producción**: Seguridad, escalabilidad, monitoreo y gestión de costos
-- **Construir soluciones multi-agente**: Desplegar arquitecturas complejas de IA
+- **Solucionar Problemas de Despliegue**: Resolver incidencias comunes y depurar errores
+- **Optimizar para Producción**: Seguridad, escalabilidad, monitoreo y gestión de costos
+- **Construir Soluciones Multi-Agente**: Desplegar arquitecturas avanzadas de IA
 
-## 🎓 Experiencia de Aprendizaje en Taller
+## 🎓 Experiencia de Aprendizaje en el Taller
 
-### Opciones flexibles de entrega de aprendizaje
-Este curso está diseñado para apoyar tanto el **aprendizaje individual a tu propio ritmo** como las **sesiones de taller facilitadas**, permitiendo a los estudiantes obtener experiencia práctica con AZD mientras desarrollan habilidades prácticas a través de ejercicios interactivos.
+### Opciones Flexibles de Modalidad de Aprendizaje  
+Este curso está diseñado para soportar tanto **aprendizaje individual autodirigido** como **sesiones de taller facilitado**, permitiendo a los estudiantes obtener experiencia práctica con AZD mientras desarrollan habilidades a través de ejercicios interactivos.
 
-#### 🚀 Modo de aprendizaje a tu propio ritmo
-**Perfecto para desarrolladores individuales y aprendizaje continuo**
+#### 🚀 Modo de Aprendizaje Autodirigido  
+**Ideal para desarrolladores individuales y aprendizaje continuo**
 
-**Características:**
-- **Interfaz basada en navegador**: Taller impulsado por MkDocs accesible desde cualquier navegador web
-- **Integración con GitHub Codespaces**: Entorno de desarrollo con herramientas preconfiguradas con un solo clic
-- **Entorno interactivo DevContainer**: Sin necesidad de configuración local: comienza a programar de inmediato
-- **Seguimiento del progreso**: Puntos de control integrados y ejercicios de validación
-- **Soporte comunitario**: Acceso a canales de Discord de Azure para preguntas y colaboración
+**Características:**  
+- **Interfaz Basada en Navegador**: Taller completo potenciado por MkDocs accesible desde cualquier navegador web  
+- **Integración con GitHub Codespaces**: Entorno de desarrollo a un clic con herramientas preconfiguradas  
+- **Entorno DevContainer Interactivo**: No se requiere configuración local - comienza a programar de inmediato  
+- **Seguimiento de Progreso**: Puntos de control y ejercicios de validación integrados  
+- **Soporte Comunitario**: Acceso a canales de Azure Discord para preguntas y colaboración
 
-**Estructura de aprendizaje:**
-- **Horario flexible**: Completa los capítulos a tu propio ritmo en días o semanas
-- **Sistema de puntos de control**: Valida el aprendizaje antes de avanzar a temas complejos
-- **Biblioteca de recursos**: Documentación completa, ejemplos y guías de solución de problemas
-- **Desarrollo de portafolio**: Construye proyectos desplegables para portafolios profesionales
+**Estructura del Aprendizaje:**  
+- **Tiempo Flexible**: Completa los capítulos a tu ritmo durante días o semanas  
+- **Sistema de Puntos de Control**: Valida aprendizajes antes de avanzar a temas complejos  
+- **Biblioteca de Recursos**: Documentación completa, ejemplos y guías de solución de problemas  
+- **Desarrollo de Portafolio**: Construye proyectos desplegables para portafolios profesionales
 
-**Cómo empezar (a tu propio ritmo):**
+**Para Empezar (Autodirigido):**  
 ```bash
 # Opción 1: GitHub Codespaces (Recomendado)
 # Navega al repositorio y haz clic en "Code" → "Create codespace on main"
@@ -64,299 +55,298 @@ cd azd-for-beginners/workshop
 # Sigue las instrucciones de configuración en workshop/README.md
 ```
 
-#### 🏛️ Sesiones de taller facilitadas
-**Ideal para capacitación corporativa, bootcamps e instituciones educativas**
+#### 🏛️ Sesiones Facilitadas de Taller  
+**Ideal para formación corporativa, bootcamps y instituciones educativas**
 
-**Opciones de formato de taller:**
+**Opciones de Formato del Taller:**
 
-**📚 Integración en cursos académicos (8-12 semanas)**
-- **Programas universitarios**: Curso semestral con sesiones semanales de 2 horas
-- **Formato bootcamp**: Programa intensivo de 3-5 días con sesiones diarias de 6-8 horas
-- **Capacitación corporativa**: Sesiones mensuales en equipo con implementación práctica de proyectos
-- **Marco de evaluación**: Tareas calificadas, revisiones entre pares y proyectos finales
+**📚 Integración Académica (8-12 semanas)**  
+- **Programas Universitarios**: Curso semestral con sesiones semanales de 2 horas  
+- **Formato Bootcamp**: Programa intensivo de 3-5 días con sesiones diarias de 6-8 horas  
+- **Capacitación Corporativa**: Sesiones mensuales para equipos con implementación práctica de proyectos  
+- **Marco de Evaluación**: Tareas calificadas, revisiones entre pares y proyectos finales
 
-**🚀 Taller intensivo (1-3 días)**
-- **Día 1**: Fundamentos + Desarrollo de IA (Capítulos 1-2) - 6 horas
+**🚀 Taller Intensivo (1-3 días)**  
+- **Día 1**: Fundamentos + Desarrollo de IA (Capítulos 1-2) - 6 horas  
 - **Día 2**: Configuración + Infraestructura (Capítulos 3-4) - 6 horas  
-- **Día 3**: Patrones avanzados + Producción (Capítulos 5-8) - 8 horas
+- **Día 3**: Patrones Avanzados + Producción (Capítulos 5-8) - 8 horas  
 - **Seguimiento**: Mentoría opcional de 2 semanas para completar proyectos
 
-**⚡ Sesión informativa ejecutiva (4-6 horas)**
-- **Resumen estratégico**: Propuesta de valor de AZD e impacto empresarial (1 hora)
-- **Demostración práctica**: Despliegue de una aplicación de IA de principio a fin (2 horas)
-- **Revisión de arquitectura**: Patrones empresariales y gobernanza (1 hora)
-- **Planificación de implementación**: Estrategia de adopción organizacional (1-2 horas)
+**⚡ Resumen Ejecutivo (4-6 horas)**  
+- **Visión Estratégica**: Propuesta de valor de AZD e impacto empresarial (1 hora)  
+- **Demostración Práctica**: Despliegue de aplicación de IA de extremo a extremo (2 horas)  
+- **Revisión de Arquitectura**: Patrones empresariales y gobernanza (1 hora)  
+- **Planificación de Implementación**: Estrategia de adopción organizacional (1-2 horas)
 
-#### 🛠️ Metodología de aprendizaje en taller
-**Enfoque de Descubrimiento → Despliegue → Personalización para el desarrollo de habilidades prácticas**
+#### 🛠️ Metodología de Aprendizaje del Taller  
+**Enfoque Descubrir → Desplegar → Personalizar para desarrollo de habilidades hands-on**
 
-**Fase 1: Descubrimiento (45 minutos)**
-- **Exploración de plantillas**: Evalúa plantillas y servicios de Azure AI Foundry
-- **Análisis de arquitectura**: Comprende patrones multi-agente y estrategias de despliegue
-- **Evaluación de requisitos**: Identifica necesidades y restricciones organizacionales
-- **Configuración del entorno**: Configura el entorno de desarrollo y los recursos de Azure
+**Fase 1: Descubrimiento (45 minutos)**  
+- **Exploración de Plantillas**: Evaluar plantillas y servicios de Microsoft Foundry  
+- **Análisis de Arquitectura**: Comprender patrones multi-agente y estrategias de despliegue  
+- **Evaluación de Requisitos**: Identificar necesidades y restricciones organizacionales  
+- **Configuración del Entorno**: Preparar entorno de desarrollo y recursos Azure
 
-**Fase 2: Despliegue (2 horas)**
-- **Implementación guiada**: Despliegue paso a paso de aplicaciones de IA con AZD
-- **Configuración de servicios**: Configura servicios de Azure AI, puntos finales y autenticación
-- **Implementación de seguridad**: Aplica patrones de seguridad empresarial y controles de acceso
-- **Pruebas de validación**: Verifica despliegues y soluciona problemas comunes
+**Fase 2: Despliegue (2 horas)**  
+- **Implementación Guiada**: Despliegue paso a paso de aplicaciones de IA con AZD  
+- **Configuración de Servicios**: Configurar servicios de IA de Azure, endpoints y autenticación  
+- **Implementación de Seguridad**: Aplicar patrones empresariales de seguridad y controles de acceso  
+- **Pruebas de Validación**: Verificar despliegues y solucionar problemas comunes
 
-**Fase 3: Personalización (45 minutos)**
-- **Modificación de aplicaciones**: Adapta plantillas para casos de uso y requisitos específicos
-- **Optimización para producción**: Implementa estrategias de monitoreo, gestión de costos y escalabilidad
-- **Patrones avanzados**: Explora coordinación multi-agente y arquitecturas complejas
-- **Planificación de próximos pasos**: Define el camino de aprendizaje para el desarrollo continuo de habilidades
+**Fase 3: Personalización (45 minutos)**  
+- **Modificación de Aplicaciones**: Adaptar plantillas a casos de uso y requerimientos específicos  
+- **Optimización para Producción**: Implementar monitoreo, gestión de costos y estrategias de escalado  
+- **Patrones Avanzados**: Explorar coordinación multi-agente y arquitecturas complejas  
+- **Planificación de Próximos Pasos**: Definir ruta de aprendizaje para desarrollo continuo
 
-#### 🎯 Resultados de aprendizaje del taller
-**Habilidades medibles desarrolladas a través de la práctica práctica**
+#### 🎯 Resultados de Aprendizaje del Taller  
+**Habilidades medibles desarrolladas mediante práctica activa**
 
-**Competencias técnicas:**
-- **Desplegar aplicaciones de IA en producción**: Despliega y configura soluciones impulsadas por IA con éxito
-- **Dominio de Infraestructura como Código**: Crea y gestiona plantillas Bicep personalizadas
-- **Arquitectura multi-agente**: Implementa soluciones coordinadas de agentes de IA
-- **Preparación para producción**: Aplica patrones de seguridad, monitoreo y gobernanza
-- **Experiencia en resolución de problemas**: Resuelve de manera independiente problemas de despliegue y configuración
+**Competencias Técnicas:**  
+- **Desplegar Aplicaciones de IA en Producción**: Desplegar y configurar soluciones IA con éxito  
+- **Maestría en Infraestructura como Código**: Crear y gestionar plantillas Bicep personalizadas  
+- **Arquitectura Multi-Agente**: Implementar soluciones coordinadas con agentes IA  
+- **Preparación para Producción**: Aplicar seguridad, monitoreo y patrones de gobernanza  
+- **Experiencia en Solución de Problemas**: Resolver de forma independiente incidencias de despliegue y configuración
 
-**Habilidades profesionales:**
-- **Liderazgo de proyectos**: Lidera equipos técnicos en iniciativas de despliegue en la nube
-- **Diseño de arquitectura**: Diseña soluciones escalables y rentables en Azure
-- **Transferencia de conocimientos**: Capacita y asesora a colegas en las mejores prácticas de AZD
-- **Planificación estratégica**: Influye en las estrategias de adopción de la nube en la organización
+**Habilidades Profesionales:**  
+- **Liderazgo de Proyectos**: Dirigir equipos técnicos en iniciativas de despliegue en la nube  
+- **Diseño de Arquitectura**: Diseñar soluciones Azure escalables y costo-efectivas  
+- **Transferencia de Conocimiento**: Capacitar y mentorizar colegas en mejores prácticas de AZD  
+- **Planificación Estratégica**: Influenciar estrategias de adopción cloud organizacional
 
-#### 📋 Recursos y materiales del taller
+#### 📋 Recursos y Materiales del Taller  
 **Kit completo para facilitadores y estudiantes**
 
-**Para facilitadores:**
-- **Guía del instructor**: [Guía de facilitación del taller](workshop/docs/instructor-guide.md) - Consejos para planificar y llevar a cabo sesiones
-- **Materiales de presentación**: Presentaciones, diagramas de arquitectura y guiones de demostración
-- **Herramientas de evaluación**: Ejercicios prácticos, verificaciones de conocimiento y rúbricas de evaluación
-- **Configuración técnica**: Configuración del entorno, guías de solución de problemas y planes de respaldo
+**Para Facilitadores:**  
+- **Guía del Instructor**: [Visión General del Taller](workshop/README.md) - Planificación y guía de sesiones  
+- **Materiales de Presentación**: Diapositivas, diagramas de arquitectura y scripts para demos  
+- **Herramientas de Evaluación**: Ejercicios prácticos, chequeos de conocimiento y rúbricas de evaluación  
+- **Configuración Técnica**: Configuración del entorno, guías para solución de problemas y planes de contingencia
 
-**Para estudiantes:**
-- **Entorno interactivo del taller**: [Materiales del taller](workshop/README.md) - Plataforma de aprendizaje basada en navegador
-- **Instrucciones paso a paso**: [Ejercicios guiados](../../workshop/docs/instructions) - Tutoriales detallados de implementación  
-- **Documentación de referencia**: [Laboratorio de taller de IA](docs/ai-foundry/ai-workshop-lab.md) - Profundización en IA
-- **Recursos comunitarios**: Canales de Discord de Azure, discusiones en GitHub y soporte de expertos
+**Para Estudiantes:**  
+- **Entorno Interactivo de Taller**: [Materiales del Taller](workshop/README.md) - Plataforma de aprendizaje basada en navegador  
+- **Instrucciones Paso a Paso**: [Ejercicios Guiados](../../workshop/docs/instructions) - Recorridos detallados de implementación  
+- **Documentación de Referencia**: [Laboratorio de Taller de IA](docs/microsoft-foundry/ai-workshop-lab.md) - Profundizaciones enfocadas en IA  
+- **Recursos Comunitarios**: Canales de Azure Discord, discusiones en GitHub y soporte experto
 
-#### 🏢 Implementación de talleres empresariales
+#### 🏢 Implementación de Taller en Empresas  
 **Estrategias de despliegue y capacitación organizacional**
 
-**Programas de capacitación corporativa:**
-- **Incorporación de desarrolladores**: Orientación para nuevos empleados con fundamentos de AZD (2-4 semanas)
-- **Mejora de habilidades del equipo**: Talleres trimestrales para equipos de desarrollo existentes (1-2 días)
-- **Revisión de arquitectura**: Sesiones mensuales para ingenieros senior y arquitectos (4 horas)
-- **Sesiones informativas para líderes**: Talleres ejecutivos para tomadores de decisiones técnicos (medio día)
+**Programas de Capacitación Corporativa:**  
+- **Inducción a Desarrolladores**: Orientación para nuevos empleados con fundamentos de AZD (2-4 semanas)  
+- **Capacitación de Equipos**: Talleres trimestrales para equipos de desarrollo existentes (1-2 días)  
+- **Revisión de Arquitectura**: Sesiones mensuales para ingenieros senior y arquitectos (4 horas)  
+- **Briefings para Liderazgo**: Talleres ejecutivos para tomadores de decisiones técnicas (medio día)
 
-**Soporte de implementación:**
-- **Diseño personalizado de talleres**: Contenido adaptado a necesidades organizacionales específicas
-- **Gestión de programas piloto**: Despliegue estructurado con métricas de éxito y bucles de retroalimentación  
-- **Mentoría continua**: Soporte posterior al taller para la implementación de proyectos
-- **Construcción de comunidad**: Comunidades internas de desarrolladores de Azure AI y compartición de conocimientos
+**Soporte de Implementación:**  
+- **Diseño de Taller Personalizado**: Contenido a medida para necesidades organizacionales específicas  
+- **Gestión de Programa Piloto**: Despliegue estructurado con métricas de éxito y ciclos de retroalimentación  
+- **Mentoría Continua**: Soporte post-taller para implementación de proyectos  
+- **Construcción de Comunidad**: Comunidades internas de desarrolladores Azure IA y intercambio de conocimientos
 
-**Métricas de éxito:**
-- **Adquisición de habilidades**: Evaluaciones antes/después que miden el crecimiento de competencias técnicas
-- **Éxito en despliegues**: Porcentaje de participantes que despliegan aplicaciones en producción con éxito
-- **Tiempo hasta la productividad**: Reducción del tiempo de incorporación para nuevos proyectos de Azure AI
-- **Retención de conocimientos**: Evaluaciones de seguimiento 3-6 meses después del taller
+**Métricas de Éxito:**  
+- **Adquisición de Habilidades**: Evaluaciones pre/post para medir crecimiento en competencia técnica  
+- **Éxito en Despliegues**: Porcentaje de participantes que despliegan aplicaciones en producción con éxito  
+- **Tiempo a Productividad**: Reducción en tiempos de inducción para proyectos Azure IA nuevos  
+- **Retención de Conocimientos**: Evaluaciones de seguimiento 3-6 meses después del taller
 
-## Estructura de aprendizaje en 8 capítulos
+## Estructura de Aprendizaje en 8 Capítulos
 
-### Capítulo 1: Fundamentos y comienzo rápido (30-45 minutos) 🌱
-**Requisitos previos**: Suscripción a Azure, conocimientos básicos de línea de comandos  
+### Capítulo 1: Fundamentos y Inicio Rápido (30-45 minutos) 🌱  
+**Requisitos**: Suscripción a Azure, conocimiento básico de línea de comandos  
 **Complejidad**: ⭐
 
-#### Lo que aprenderás
-- Comprender los fundamentos de Azure Developer CLI
+#### Lo Que Aprenderás  
+- Entender los fundamentos de Azure Developer CLI  
 - Instalar AZD en tu plataforma  
-- Tu primer despliegue exitoso
-- Conceptos y terminología clave
+- Tu primer despliegue exitoso  
+- Conceptos y terminología centrales
 
-#### Recursos de aprendizaje
-- [Fundamentos de AZD](docs/getting-started/azd-basics.md) - Conceptos clave
-- [Instalación y configuración](docs/getting-started/installation.md) - Guías específicas por plataforma
-- [Tu primer proyecto](docs/getting-started/first-project.md) - Tutorial práctico
-- [Hoja de trucos de comandos](resources/cheat-sheet.md) - Referencia rápida
+#### Recursos de Aprendizaje  
+- [Fundamentos de AZD](docs/getting-started/azd-basics.md) - Conceptos principales  
+- [Instalación y Configuración](docs/getting-started/installation.md) - Guías específicas por plataforma  
+- [Tu Primer Proyecto](docs/getting-started/first-project.md) - Tutorial práctico  
+- [Hoja de Referencia de Comandos](resources/cheat-sheet.md) - Guía rápida
 
-#### Resultado práctico
-Desplegar con éxito una aplicación web simple en Azure usando AZD
+#### Resultado Práctico  
+Desplegar exitosamente una aplicación web simple a Azure usando AZD
 
 ---
 
-### Capítulo 2: Desarrollo con enfoque en IA (1-2 horas) 🤖
-**Requisitos previos**: Capítulo 1 completado  
+### Capítulo 2: Desarrollo Priorizando IA (1-2 horas) 🤖  
+**Requisitos**: Capítulo 1 completado  
 **Complejidad**: ⭐⭐
 
-#### Lo que aprenderás
-- Integración de Microsoft Foundry con AZD
-- Despliegue de aplicaciones impulsadas por IA
-- Comprender configuraciones de servicios de IA
+#### Lo Que Aprenderás  
+- Integración de Microsoft Foundry con AZD  
+- Despliegue de aplicaciones con capacidades IA  
+- Comprender configuraciones de servicios IA  
 - Patrones RAG (Generación Aumentada por Recuperación)
 
-#### Recursos de aprendizaje
-- [Integración con Microsoft Foundry](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [Despliegue de modelos de IA](docs/microsoft-foundry/ai-model-deployment.md)
-- [Laboratorio de taller de IA](docs/microsoft-foundry/ai-workshop-lab.md) - **NUEVO**: Laboratorio práctico completo de 2-3 horas
-- [Guía interactiva del taller](workshop/README.md) - **NUEVO**: Taller basado en navegador con vista previa de MkDocs
-- [Plantillas de Microsoft Foundry](README.md#featured-microsoft-foundry-templates)
-- [Instrucciones del taller](../../workshop/docs/instructions) - **NUEVO**: Ejercicios guiados paso a paso
+#### Recursos de Aprendizaje  
+- [Integración Microsoft Foundry](docs/microsoft-foundry/microsoft-foundry-integration.md)  
+- [Despliegue de Modelos de IA](docs/microsoft-foundry/ai-model-deployment.md)  
+- [Laboratorio de Taller de IA](docs/microsoft-foundry/ai-workshop-lab.md) - **NUEVO**: Laboratorio práctico completo de 2-3 horas  
+- [Guía Interactiva del Taller](workshop/README.md) - **NUEVO**: Taller basado en navegador con vista previa MkDocs  
+- [Plantillas Microsoft Foundry](README.md#featured-microsoft-foundry-templates)  
+- [Instrucciones del Taller](../../workshop/docs/instructions) - **NUEVO**: Ejercicios guiados paso a paso
 
-#### Resultado práctico
-Desplegar y configurar una aplicación de chat impulsada por IA con capacidades RAG
+#### Resultado Práctico  
+Desplegar y configurar una aplicación de chat potenciada por IA con capacidades RAG
 
-#### Ruta de aprendizaje del taller (mejora opcional)
-**NUEVA experiencia interactiva**: [Guía completa del taller](workshop/README.md)
-1. **Descubrimiento** (30 mins): Selección y evaluación de plantillas
-2. **Despliegue** (45 mins): Despliega y valida la funcionalidad de la plantilla de IA  
-3. **Deconstrucción** (30 mins): Comprende la arquitectura y componentes de la plantilla
-4. **Configuración** (30 mins): Personaliza configuraciones y parámetros
-5. **Personalización** (45 mins): Modifica e itera para hacerlo tuyo
-6. **Desmontaje** (15 mins): Limpia recursos y comprende el ciclo de vida
-7. **Conclusión** (15 mins): Próximos pasos y rutas de aprendizaje avanzadas
+#### Ruta de Aprendizaje del Taller (Mejora Opcional)  
+**NUEVA Experiencia Interactiva**: [Guía Completa del Taller](workshop/README.md)  
+1. **Descubrimiento** (30 mins): Selección y evaluación de plantillas  
+2. **Despliegue** (45 mins): Desplegar y validar funcionalidad de plantilla IA  
+3. **Desconstrucción** (30 mins): Entender arquitectura y componentes de plantilla  
+4. **Configuración** (30 mins): Personalizar configuraciones y parámetros  
+5. **Personalización** (45 mins): Modificar y iterar para hacerlo tuyo  
+6. **Desmontaje** (15 mins): Limpieza de recursos y comprensión del ciclo de vida  
+7. **Cierre** (15 mins): Próximos pasos y rutas avanzadas de aprendizaje
 
 ---
 
-### Capítulo 3: Configuración y autenticación (45-60 minutos) ⚙️
-**Requisitos previos**: Capítulo 1 completado  
+### Capítulo 3: Configuración y Autenticación (45-60 minutos) ⚙️  
+**Requisitos**: Capítulo 1 completado  
 **Complejidad**: ⭐⭐
 
-#### Lo que aprenderás
-- Configuración y gestión del entorno
-- Mejores prácticas de autenticación y seguridad
-- Nomenclatura y organización de recursos
+#### Lo Que Aprenderás  
+- Configuración y gestión de entornos  
+- Autenticación y mejores prácticas de seguridad  
+- Nomenclatura y organización de recursos  
 - Despliegues en múltiples entornos
 
-#### Recursos de aprendizaje
-- [Guía de configuración](docs/getting-started/configuration.md) - Configuración del entorno
-- [Patrones de autenticación y seguridad](docs/getting-started/authsecurity.md) - Integración de identidad administrada y Key Vault
-- Ejemplos de múltiples entornos
+#### Recursos de Aprendizaje  
+- [Guía de Configuración](docs/getting-started/configuration.md) - Configuración de entorno  
+- [Autenticación y Patrones de Seguridad](docs/getting-started/authsecurity.md) - Identidad gestionada e integración con Key Vault  
+- Ejemplos multi-entorno
 
-#### Resultado práctico
-Gestionar múltiples entornos con la autenticación y seguridad adecuadas
+#### Resultado Práctico  
+Gestionar múltiples entornos con autenticación y seguridad adecuadas
 
 ---
 
-### Capítulo 4: Infraestructura como Código y Despliegue (1-1.5 horas) 🏗️
-**Requisitos previos**: Capítulos 1-3 completados  
+### Capítulo 4: Infraestructura como Código y Despliegue (1-1.5 horas) 🏗️  
+**Requisitos**: Capítulos 1-3 completados  
 **Complejidad**: ⭐⭐⭐
 
-#### Lo que aprenderás
-- Patrones avanzados de despliegue
-- Infraestructura como Código con Bicep
-- Estrategias de aprovisionamiento de recursos
+#### Lo Que Aprenderás  
+- Patrones avanzados de despliegue  
+- Infraestructura como Código con Bicep  
+- Estrategias de aprovisionamiento de recursos  
 - Creación de plantillas personalizadas
 
-- Despliegue de aplicaciones en contenedores con Azure Container Apps y AZD
+- Despliegue de aplicaciones contenerizadas con Azure Container Apps y AZD
 
-#### Recursos de aprendizaje
-- [Guía de despliegue](docs/deployment/deployment-guide.md) - Flujos de trabajo completos
-- [Aprovisionamiento de recursos](docs/deployment/provisioning.md) - Gestión de recursos
-- Ejemplos de contenedores y microservicios
-- [Ejemplos de aplicaciones en contenedores](examples/container-app/README.md) - Patrones de despliegue rápido, producción y avanzado
+#### Recursos de Aprendizaje  
+- [Guía de Despliegue](docs/deployment/deployment-guide.md) - Flujos de trabajo completos  
+- [Aprovisionamiento de Recursos](docs/deployment/provisioning.md) - Gestión de recursos  
+- Ejemplos de contenedores y microservicios  
+- [Ejemplos de Container App](examples/container-app/README.md) - Inicio rápido, producción y patrones avanzados de despliegue
 
-#### Resultado práctico
-Desplegar aplicaciones complejas con múltiples servicios utilizando plantillas de infraestructura personalizadas
+#### Resultado Práctico  
+Desplegar aplicaciones complejas multi-servicio usando plantillas de infraestructura personalizadas
 
 ---
 
-### Capítulo 5: Soluciones de IA Multi-Agente (2-3 horas) 🤖🤖
-**Requisitos previos**: Capítulos 1-2 completados  
+### Capítulo 5: Soluciones Multi-Agente de IA (2-3 horas) 🤖🤖  
+**Requisitos**: Capítulos 1-2 completados  
 **Complejidad**: ⭐⭐⭐⭐
 
-#### Lo que aprenderás
-- Patrones de arquitectura multi-agente
-- Orquestación y coordinación de agentes
-- Despliegues de IA listos para producción
+#### Lo Que Aprenderás  
+- Patrones de arquitectura multi-agente  
+- Orquestación y coordinación de agentes  
+- Despliegues de IA listos para producción  
 - Implementaciones de agentes de cliente e inventario
 
-- Integración de microservicios en contenedores como parte de soluciones basadas en agentes
+- Integración de microservicios contenerizados como parte de soluciones basadas en agentes
 
-#### Recursos de aprendizaje
-- [Solución multi-agente para retail](examples/retail-scenario.md) - Implementación completa
-- [Paquete de plantillas ARM](../../examples/retail-multiagent-arm-template) - Despliegue con un clic
-- Patrones de coordinación multi-agente
-- [Ejemplo de arquitectura de microservicios](../../examples/container-app/microservices) - Comunicación entre servicios, mensajería asíncrona y despliegue en producción
+#### Recursos de Aprendizaje  
+- [Solución Multi-Agente Retail](examples/retail-scenario.md) - Implementación completa  
+- [Paquete de Plantillas ARM](../../examples/retail-multiagent-arm-template) - Despliegue con un clic  
+- Patrones de coordinación multi-agente  
+- [Ejemplo de Arquitectura de Microservicios](../../examples/container-app/microservices) - Comunicación servicio a servicio, mensajería asíncrona y despliegue en producción
 
-#### Resultado práctico
-Desplegar y gestionar una solución de IA multi-agente lista para producción
+#### Resultado Práctico  
+Desplegar y gestionar una solución IA multi-agente lista para producción
 
 ---
 
-### Capítulo 6: Validación previa al despliegue y planificación (1 hora) 🔍
-**Requisitos previos**: Capítulo 4 completado  
+### Capítulo 6: Validación y Planificación Previa al Despliegue (1 hora) 🔍  
+**Requisitos**: Capítulo 4 completado  
 **Complejidad**: ⭐⭐
 
-#### Lo que aprenderás
-- Planificación de capacidad y validación de recursos
-- Estrategias de selección de SKU
-- Verificaciones previas y automatización
-- Planificación de optimización de costos
+#### Lo Que Aprenderás  
+- Planificación de capacidad y validación de recursos  
+- Estrategias de selección de SKU  
+- Chequeos previos y automatización  
+- Planificación para optimización de costos
 
-#### Recursos de aprendizaje
-- [Planificación de capacidad](docs/pre-deployment/capacity-planning.md) - Validación de recursos
-- [Selección de SKU](docs/pre-deployment/sku-selection.md) - Elecciones rentables
-- [Verificaciones previas](docs/pre-deployment/preflight-checks.md) - Scripts automatizados
-- [Integración de Application Insights](docs/pre-deployment/application-insights.md) - Monitoreo y observabilidad
-- [Patrones de coordinación multi-agente](docs/pre-deployment/coordination-patterns.md) - Estrategias de orquestación de agentes
+#### Recursos de Aprendizaje  
+- [Planificación de Capacidad](docs/pre-deployment/capacity-planning.md) - Validación de recursos  
+- [Selección de SKU](docs/pre-deployment/sku-selection.md) - Elecciones costo-efectivas  
+- [Chequeos Previos](docs/pre-deployment/preflight-checks.md) - Scripts automatizados  
+- [Integración Application Insights](docs/pre-deployment/application-insights.md) - Monitoreo y observabilidad  
+- [Patrones de Coordinación Multi-Agente](docs/pre-deployment/coordination-patterns.md) - Estrategias de orquestación de agentes
 
-#### Resultado práctico
-Validar y optimizar implementaciones antes de la ejecución
-
+#### Resultado Práctico  
+Validar y optimizar despliegues antes de la ejecución
 ---
 
-### Capítulo 7: Solución de problemas y depuración (1-1.5 horas) 🔧
-**Requisitos previos**: Cualquier capítulo de implementación completado  
+### Capítulo 7: Solución de Problemas y Depuración (1-1.5 horas) 🔧
+**Requisitos previos**: Cualquier capítulo de despliegue completado  
 **Complejidad**: ⭐⭐
 
 #### Lo que aprenderás
 - Enfoques sistemáticos para la depuración
-- Problemas comunes y sus soluciones
+- Problemas comunes y soluciones
 - Solución de problemas específicos de IA
 - Optimización del rendimiento
 
 #### Recursos de aprendizaje
 - [Problemas comunes](docs/troubleshooting/common-issues.md) - Preguntas frecuentes y soluciones
 - [Guía de depuración](docs/troubleshooting/debugging.md) - Estrategias paso a paso
-- [Solución de problemas específicos de IA](docs/troubleshooting/ai-troubleshooting.md) - Problemas con servicios de IA
+- [Solución de problemas específicos de IA](docs/troubleshooting/ai-troubleshooting.md) - Problemas de servicios de IA
 
 #### Resultado práctico
-Diagnosticar y resolver de manera independiente problemas comunes de implementación
+Diagnosticar y resolver de forma independiente problemas comunes de despliegue
 
 ---
 
-### Capítulo 8: Patrones de producción y empresariales (2-3 horas) 🏢
+### Capítulo 8: Patrones de Producción y Empresa (2-3 horas) 🏢
 **Requisitos previos**: Capítulos 1-4 completados  
 **Complejidad**: ⭐⭐⭐⭐
 
 #### Lo que aprenderás
-- Estrategias de implementación en producción
+- Estrategias de despliegue en producción
 - Patrones de seguridad empresarial
 - Monitoreo y optimización de costos
 - Escalabilidad y gobernanza
 
-- Mejores prácticas para implementaciones de aplicaciones en contenedores en producción (seguridad, monitoreo, costos, CI/CD)
+- Mejores prácticas para despliegues de aplicaciones en contenedores en producción (seguridad, monitoreo, costos, CI/CD)
 
 #### Recursos de aprendizaje
 - [Mejores prácticas de IA en producción](docs/microsoft-foundry/production-ai-practices.md) - Patrones empresariales
-- Ejemplos de microservicios y empresariales
+- Ejemplos de microservicios y empresas
 - Marcos de monitoreo y gobernanza
-- [Ejemplo de arquitectura de microservicios](../../examples/container-app/microservices) - Implementación blue-green/canary, trazabilidad distribuida y optimización de costos
+- [Ejemplo de arquitectura de microservicios](../../examples/container-app/microservices) - Despliegue blue-green/canary, rastreo distribuido y optimización de costos
 
 #### Resultado práctico
-Implementar aplicaciones listas para producción con capacidades empresariales completas
+Desplegar aplicaciones listas para producción con capacidades empresariales completas
 
 ---
 
-## Progresión de aprendizaje y complejidad
+## Progresión de Aprendizaje y Complejidad
 
-### Desarrollo progresivo de habilidades
+### Construcción progresiva de habilidades
 
-- **🌱 Principiantes**: Comienza con el Capítulo 1 (Fundamentos) → Capítulo 2 (Desarrollo de IA)
+- **🌱 Principiantes**: Comenzar con Capítulo 1 (Fundamentos) → Capítulo 2 (Desarrollo IA)
 - **🔧 Intermedio**: Capítulos 3-4 (Configuración e Infraestructura) → Capítulo 6 (Validación)
-- **🚀 Avanzado**: Capítulo 5 (Soluciones Multi-Agente) → Capítulo 7 (Solución de problemas)
-- **🏢 Empresarial**: Completa todos los capítulos, enfocándote en el Capítulo 8 (Patrones de Producción)
+- **🚀 Avanzado**: Capítulo 5 (Soluciones Multi-Agente) → Capítulo 7 (Solución de Problemas)
+- **🏢 Empresarial**: Completar todos los capítulos, enfocarse en Capítulo 8 (Patrones de Producción)
 
-- **Ruta de aplicaciones en contenedores**: Capítulos 4 (Implementación en contenedores), 5 (Integración de microservicios), 8 (Mejores prácticas de producción)
+- **Ruta App Contenedor**: Capítulos 4 (Despliegue en contenedores), 5 (Integración de microservicios), 8 (Mejores prácticas en producción)
 
 ### Indicadores de complejidad
 
@@ -367,203 +357,203 @@ Implementar aplicaciones listas para producción con capacidades empresariales c
 
 ### Rutas de aprendizaje flexibles
 
-#### 🎯 Ruta rápida para desarrolladores de IA (4-6 horas)
-1. **Capítulo 1**: Fundamentos e inicio rápido (45 minutos)
-2. **Capítulo 2**: Desarrollo centrado en IA (2 horas)  
-3. **Capítulo 5**: Soluciones de IA Multi-Agente (3 horas)
-4. **Capítulo 8**: Mejores prácticas de IA en producción (1 hora)
+#### 🎯 Ruta rápida para desarrolladores IA (4-6 horas)
+1. **Capítulo 1**: Fundamentos y arranque rápido (45 min)
+2. **Capítulo 2**: Desarrollo con enfoque IA (2 horas)  
+3. **Capítulo 5**: Soluciones de IA multi-agente (3 horas)
+4. **Capítulo 8**: Mejores prácticas IA en producción (1 hora)
 
-#### 🛠️ Ruta para especialistas en infraestructura (5-7 horas)
-1. **Capítulo 1**: Fundamentos e inicio rápido (45 minutos)
+#### 🛠️ Ruta especialista en infraestructura (5-7 horas)
+1. **Capítulo 1**: Fundamentos y arranque rápido (45 min)
 2. **Capítulo 3**: Configuración y autenticación (1 hora)
-3. **Capítulo 4**: Infraestructura como código e implementación (1.5 horas)
-4. **Capítulo 6**: Validación y planificación previa a la implementación (1 hora)
+3. **Capítulo 4**: Infraestructura como código y despliegue (1.5 horas)
+4. **Capítulo 6**: Validación y planificación pre-despliegue (1 hora)
 5. **Capítulo 7**: Solución de problemas y depuración (1.5 horas)
-6. **Capítulo 8**: Patrones de producción y empresariales (2 horas)
+6. **Capítulo 8**: Patrones de producción y empresa (2 horas)
 
-#### 🎓 Ruta completa de aprendizaje (8-12 horas)
-Completar secuencialmente los 8 capítulos con práctica práctica y validación
+#### 🎓 Trayectoria completa de aprendizaje (8-12 horas)
+Finalización secuencial de los 8 capítulos con práctica y validación
 
-## Marco de finalización del curso
+## Marco para la finalización del curso
 
-### Validación de conocimientos
+### Validación del conocimiento
 - **Puntos de control por capítulo**: Ejercicios prácticos con resultados medibles
-- **Verificación práctica**: Implementar soluciones funcionales para cada capítulo
-- **Seguimiento del progreso**: Indicadores visuales e insignias de finalización
-- **Validación comunitaria**: Compartir experiencias en los canales de Discord de Azure
+- **Verificación práctica**: Desplegar soluciones funcionales para cada capítulo
+- **Seguimiento de progreso**: Indicadores visuales y insignias de finalización
+- **Validación comunitaria**: Compartir experiencias en canales de Azure Discord
 
 ### Evaluación de resultados de aprendizaje
 
-#### Finalización de los capítulos 1-2 (Fundamentos + IA)
-- ✅ Implementar una aplicación web básica usando AZD
-- ✅ Implementar una aplicación de chat impulsada por IA con RAG
-- ✅ Comprender los conceptos básicos de AZD y la integración de IA
+#### Finalización de capítulos 1-2 (Fundamentos + IA)
+- ✅ Desplegar aplicación web básica usando AZD
+- ✅ Desplegar aplicación de chat con IA y RAG
+- ✅ Comprender conceptos centrales de AZD e integración IA
 
-#### Finalización de los capítulos 3-4 (Configuración + Infraestructura)  
-- ✅ Gestionar implementaciones en múltiples entornos
-- ✅ Crear plantillas de infraestructura personalizadas con Bicep
+#### Finalización de capítulos 3-4 (Configuración + Infraestructura)  
+- ✅ Gestionar despliegues en múltiples entornos
+- ✅ Crear plantillas Bicep personalizadas para infraestructura
 - ✅ Implementar patrones de autenticación segura
 
-#### Finalización de los capítulos 5-6 (Multi-Agente + Validación)
-- ✅ Implementar una solución compleja de IA multi-agente
+#### Finalización de capítulos 5-6 (Multi-Agente + Validación)
+- ✅ Desplegar solución IA multi-agente compleja
 - ✅ Realizar planificación de capacidad y optimización de costos
-- ✅ Implementar validación automatizada previa a la implementación
+- ✅ Implementar validación automatizada pre-despliegue
 
-#### Finalización de los capítulos 7-8 (Solución de problemas + Producción)
-- ✅ Depurar y resolver problemas de implementación de manera independiente  
-- ✅ Implementar monitoreo y seguridad de nivel empresarial
-- ✅ Implementar aplicaciones listas para producción con gobernanza
+#### Finalización de capítulos 7-8 (Solución de Problemas + Producción)
+- ✅ Depurar y resolver problemas de despliegue de forma independiente  
+- ✅ Implementar monitoreo empresarial y seguridad
+- ✅ Desplegar aplicaciones listas para producción con gobernanza
 
 ### Certificación y reconocimiento
 - **Insignia de finalización del curso**: Completar los 8 capítulos con validación práctica
-- **Reconocimiento comunitario**: Participación activa en el Discord de Microsoft Foundry
-- **Desarrollo profesional**: Habilidades relevantes para la implementación de AZD e IA
-- **Avance profesional**: Capacidades de implementación en la nube listas para empresas
+- **Reconocimiento comunitario**: Participación activa en Microsoft Foundry Discord
+- **Desarrollo profesional**: Habilidades relevantes en despliegue AZD e IA
+- **Avance profesional**: Capacidades para despliegues en la nube empresariales
 
-## 🎓 Resultados de aprendizaje completos
+## 🎓 Resultados de aprendizaje comprensivos
 
-### Nivel básico (Capítulos 1-2)
-Al completar los capítulos básicos, los estudiantes demostrarán:
+### Nivel Fundamentos (Capítulos 1-2)
+Al completar los capítulos de fundamentos, los aprendices demostrarán:
 
 **Capacidades técnicas:**
-- Implementar aplicaciones web simples en Azure usando comandos AZD
-- Configurar e implementar aplicaciones de chat impulsadas por IA con capacidades RAG
-- Comprender los conceptos básicos de AZD: plantillas, entornos, flujos de trabajo de aprovisionamiento
-- Integrar servicios de Microsoft Foundry con implementaciones de AZD
-- Navegar por configuraciones de servicios de Azure AI y puntos finales de API
+- Desplegar aplicaciones web simples a Azure usando comandos AZD
+- Configurar y desplegar aplicaciones de chat con IA y capacidades RAG
+- Entender conceptos centrales de AZD: plantillas, entornos, flujos de aprovisionamiento
+- Integrar servicios Microsoft Foundry con despliegues AZD
+- Navegar configuraciones de servicios IA Azure y puntos de acceso API
 
 **Habilidades profesionales:**
-- Seguir flujos de trabajo de implementación estructurados para obtener resultados consistentes
-- Solucionar problemas básicos de implementación utilizando registros y documentación
-- Comunicar eficazmente los procesos de implementación en la nube
-- Aplicar mejores prácticas para la integración segura de servicios de IA
+- Seguir flujos de trabajo estructurados para resultados consistentes
+- Resolver problemas básicos de despliegue usando registros y documentación
+- Comunicar efectivamente procesos de despliegue en la nube
+- Aplicar mejores prácticas para integración segura de servicios IA
 
-**Verificación de aprendizaje:**
-- ✅ Implementar con éxito la plantilla `todo-nodejs-mongo`
-- ✅ Implementar y configurar `azure-search-openai-demo` con RAG
+**Verificación del aprendizaje:**
+- ✅ Desplegar exitosamente plantilla `todo-nodejs-mongo`
+- ✅ Desplegar y configurar `azure-search-openai-demo` con RAG
 - ✅ Completar ejercicios interactivos del taller (fase de descubrimiento)
-- ✅ Participar en discusiones comunitarias en Discord de Azure
+- ✅ Participar en discusiones de la comunidad Azure Discord
 
-### Nivel intermedio (Capítulos 3-4)
-Al completar los capítulos intermedios, los estudiantes demostrarán:
+### Nivel Intermedio (Capítulos 3-4)
+Al completar los capítulos intermedios, los aprendices demostrarán:
 
 **Capacidades técnicas:**
-- Gestionar implementaciones en múltiples entornos (desarrollo, pruebas, producción)
-- Crear plantillas personalizadas de Bicep para infraestructura como código
-- Implementar patrones de autenticación segura con identidad administrada
-- Implementar aplicaciones complejas de múltiples servicios con configuraciones personalizadas
-- Optimizar estrategias de aprovisionamiento de recursos para costos y rendimiento
+- Gestionar despliegues en múltiples entornos (dev, staging, producción)
+- Crear plantillas Bicep personalizadas para infraestructura como código
+- Implementar autenticación segura con identidad gestionada
+- Desplegar aplicaciones multi-servicio complejas con configuraciones personalizadas
+- Optimizar estrategias de aprovisionamiento para costos y rendimiento
 
 **Habilidades profesionales:**
 - Diseñar arquitecturas de infraestructura escalables
-- Implementar mejores prácticas de seguridad para implementaciones en la nube
-- Documentar patrones de infraestructura para la colaboración en equipo
-- Evaluar y seleccionar servicios de Azure adecuados para los requisitos
+- Implementar mejores prácticas de seguridad en despliegues en la nube
+- Documentar patrones de infraestructura para colaboración en equipo
+- Evaluar y seleccionar servicios Azure apropiados para requerimientos
 
-**Verificación de aprendizaje:**
-- ✅ Configurar entornos separados con configuraciones específicas por entorno
-- ✅ Crear e implementar una plantilla personalizada de Bicep para una aplicación de múltiples servicios
-- ✅ Implementar autenticación con identidad administrada para acceso seguro
+**Verificación del aprendizaje:**
+- ✅ Configurar entornos separados con configuraciones específicas
+- ✅ Crear y desplegar plantilla Bicep personalizada para aplicación multi-servicio
+- ✅ Implementar autenticación con identidad gestionada para acceso seguro
 - ✅ Completar ejercicios de gestión de configuración con escenarios reales
 
-### Nivel avanzado (Capítulos 5-6)
-Al completar los capítulos avanzados, los estudiantes demostrarán:
+### Nivel Avanzado (Capítulos 5-6)
+Al completar los capítulos avanzados, los aprendices demostrarán:
 
 **Capacidades técnicas:**
-- Implementar y orquestar soluciones de IA multi-agente con flujos de trabajo coordinados
-- Implementar arquitecturas de agentes de cliente e inventario para escenarios minoristas
-- Realizar planificación de capacidad y validación de recursos de manera integral
-- Ejecutar validación automatizada previa a la implementación y optimización
-- Diseñar selecciones de SKU rentables basadas en los requisitos de carga de trabajo
+- Desplegar y orquestar soluciones IA multi-agente con flujos de trabajo coordinados
+- Implementar arquitecturas de agentes de Cliente e Inventario para escenarios retail
+- Realizar planificación exhaustiva de capacidad y validación de recursos
+- Ejecutar validación automatizada pre-despliegue y optimización
+- Diseñar selecciones de SKU rentables según requisitos de carga de trabajo
 
 **Habilidades profesionales:**
-- Diseñar soluciones de IA complejas para entornos de producción
-- Liderar discusiones técnicas sobre estrategias de implementación de IA
-- Mentorear a desarrolladores junior en mejores prácticas de AZD e implementación de IA
-- Evaluar y recomendar patrones de arquitectura de IA para requisitos empresariales
+- Arquitectar soluciones IA complejas para entornos de producción
+- Dirigir discusiones técnicas sobre estrategias de despliegue IA
+- Guiar a desarrolladores junior en mejores prácticas AZD e IA
+- Evaluar y recomendar patrones de arquitectura IA para necesidades de negocio
 
-**Verificación de aprendizaje:**
-- ✅ Implementar una solución completa de retail multi-agente con plantillas ARM
+**Verificación del aprendizaje:**
+- ✅ Desplegar solución multi-agente retail completa con plantillas ARM
 - ✅ Demostrar coordinación de agentes y orquestación de flujos de trabajo
-- ✅ Completar ejercicios de planificación de capacidad con restricciones reales de recursos
-- ✅ Validar la preparación de la implementación mediante verificaciones automatizadas previas
+- ✅ Completar ejercicios de planificación de capacidad con restricciones reales
+- ✅ Validar preparado para despliegue mediante chequeos automatizados
 
-### Nivel experto (Capítulos 7-8)
-Al completar los capítulos expertos, los estudiantes demostrarán:
+### Nivel Experto (Capítulos 7-8)
+Al completar los capítulos expertos, los aprendices demostrarán:
 
 **Capacidades técnicas:**
-- Diagnosticar y resolver problemas complejos de implementación de manera independiente
-- Implementar patrones de seguridad de nivel empresarial y marcos de gobernanza
+- Diagnosticar y resolver problemas complejos de despliegue de forma independiente
+- Implementar patrones de seguridad y gobernanza empresarial
 - Diseñar estrategias completas de monitoreo y alertas
-- Optimizar implementaciones en producción para escala, costo y rendimiento
-- Establecer pipelines CI/CD con pruebas y validación adecuadas
+- Optimizar despliegues de producción para escala, costo y rendimiento
+- Establecer pipelines CI/CD con pruebas y validación adecuada
 
 **Habilidades profesionales:**
-- Liderar iniciativas de transformación en la nube empresarial
-- Diseñar e implementar estándares organizacionales de implementación
-- Capacitar y mentorear equipos de desarrollo en prácticas avanzadas de AZD
-- Influir en la toma de decisiones técnicas para implementaciones empresariales de IA
+- Liderar iniciativas empresariales de transformación en la nube
+- Diseñar e implementar estándares organizacionales de despliegue
+- Capacitar y mentorizar equipos de desarrollo en prácticas avanzadas AZD
+- Influir en la toma de decisiones técnicas para despliegues IA empresariales
 
-**Verificación de aprendizaje:**
-- ✅ Resolver fallos complejos de implementación de múltiples servicios
-- ✅ Implementar patrones de seguridad empresarial con requisitos de cumplimiento
-- ✅ Diseñar e implementar monitoreo en producción con Application Insights
-- ✅ Completar la implementación de un marco de gobernanza empresarial
+**Verificación del aprendizaje:**
+- ✅ Resolver fallos complejos en despliegue multi-servicio
+- ✅ Implementar patrones de seguridad empresarial con cumplimiento normativo
+- ✅ Diseñar y desplegar monitoreo de producción con Application Insights
+- ✅ Completar implementación de marco de gobernanza empresarial
 
 ## 🎯 Certificación de finalización del curso
 
-### Marco de seguimiento del progreso
+### Marco para seguimiento del progreso
 Sigue tu progreso de aprendizaje a través de puntos de control estructurados:
 
-- [ ] **Capítulo 1**: Fundamentos e inicio rápido ✅
-- [ ] **Capítulo 2**: Desarrollo centrado en IA ✅  
+- [ ] **Capítulo 1**: Fundamentos y arranque rápido ✅
+- [ ] **Capítulo 2**: Desarrollo con enfoque IA ✅  
 - [ ] **Capítulo 3**: Configuración y autenticación ✅
-- [ ] **Capítulo 4**: Infraestructura como código e implementación ✅
-- [ ] **Capítulo 5**: Soluciones de IA Multi-Agente ✅
-- [ ] **Capítulo 6**: Validación y planificación previa a la implementación ✅
+- [ ] **Capítulo 4**: Infraestructura como código y despliegue ✅
+- [ ] **Capítulo 5**: Soluciones IA multi-agente ✅
+- [ ] **Capítulo 6**: Validación y planificación pre-despliegue ✅
 - [ ] **Capítulo 7**: Solución de problemas y depuración ✅
-- [ ] **Capítulo 8**: Patrones de producción y empresariales ✅
+- [ ] **Capítulo 8**: Patrones de producción y empresa ✅
 
 ### Proceso de verificación
-Después de completar cada capítulo, verifica tus conocimientos a través de:
+Después de completar cada capítulo, verifica tu conocimiento mediante:
 
-1. **Finalización de ejercicios prácticos**: Implementar soluciones funcionales para cada capítulo
-2. **Evaluación de conocimientos**: Revisar secciones de preguntas frecuentes y completar autoevaluaciones
-3. **Participación comunitaria**: Compartir experiencias y recibir retroalimentación en Discord de Azure
-4. **Desarrollo de portafolio**: Documentar tus implementaciones y lecciones aprendidas
-5. **Revisión por pares**: Colaborar con otros estudiantes en escenarios complejos
+1. **Completar ejercicios prácticos**: Desplegar soluciones funcionales para cada capítulo
+2. **Evaluación de conocimientos**: Revisar secciones de preguntas frecuentes y autoevaluaciones
+3. **Participación comunitaria**: Compartir experiencias y recibir retroalimentación en Azure Discord
+4. **Desarrollo de portafolio**: Documentar despliegues y lecciones aprendidas
+5. **Revisión entre pares**: Colaborar con otros aprendices en escenarios complejos
 
-### Beneficios de completar el curso
+### Beneficios de la finalización del curso
 Al completar todos los capítulos con verificación, los graduados tendrán:
 
 **Experiencia técnica:**
-- **Experiencia en producción**: Implementar aplicaciones reales de IA en entornos de Azure
-- **Habilidades profesionales**: Capacidades de implementación y solución de problemas listas para empresas  
-- **Conocimiento de arquitectura**: Soluciones de IA multi-agente y patrones de infraestructura complejos
-- **Dominio de solución de problemas**: Resolución independiente de problemas de implementación y configuración
+- **Experiencia en producción**: Desplegado aplicaciones IA reales en entornos Azure
+- **Habilidades profesionales**: Capacidades de despliegue y solución de problemas listas para empresa  
+- **Conocimiento de arquitectura**: Soluciones IA multi-agente y patrones de infraestructura complejos
+- **Dominio de solución de problemas**: Resolución independiente de problemas de despliegue y configuración
 
 **Desarrollo profesional:**
-- **Reconocimiento en la industria**: Habilidades verificables en áreas de alta demanda como AZD e implementación de IA
-- **Avance profesional**: Calificaciones para roles de arquitecto en la nube y especialista en implementación de IA
-- **Liderazgo comunitario**: Membresía activa en comunidades de desarrolladores de Azure e IA
-- **Aprendizaje continuo**: Base para especialización avanzada en Microsoft Foundry
+- **Reconocimiento industrial**: Habilidades verificables en áreas de alta demanda AZD e IA
+- **Avance profesional**: Calificaciones para roles de arquitecto cloud y especialista en despliegue IA
+- **Liderazgo comunitario**: Membresía activa en comunidades de desarrolladores Azure e IA
+- **Aprendizaje continuo**: Base para especialización avanzada Microsoft Foundry
 
 **Activos de portafolio:**
-- **Soluciones implementadas**: Ejemplos funcionales de aplicaciones de IA y patrones de infraestructura
-- **Documentación**: Guías completas de implementación y procedimientos de solución de problemas  
-- **Contribuciones comunitarias**: Discusiones, ejemplos y mejoras compartidas con la comunidad de Azure
-- **Red profesional**: Conexiones con expertos de Azure y practicantes de implementación de IA
+- **Soluciones desplegadas**: Ejemplos funcionales de aplicaciones IA y patrones de infraestructura
+- **Documentación**: Guías completas de despliegue y procedimientos de solución de problemas  
+- **Contribuciones comunitarias**: Discusiones, ejemplos y mejoras compartidas con la comunidad Azure
+- **Red profesional**: Conexiones con expertos Azure y profesionales en despliegue IA
 
-### Ruta de aprendizaje posterior al curso
-Los graduados estarán preparados para especializaciones avanzadas en:
-- **Experto en Microsoft Foundry**: Especialización profunda en implementación y orquestación de modelos de IA
-- **Liderazgo en arquitectura en la nube**: Diseño e implementación de despliegues a escala empresarial
-- **Liderazgo en la comunidad de desarrolladores**: Contribuir a ejemplos de Azure y recursos comunitarios
-- **Capacitación corporativa**: Enseñar habilidades de implementación de AZD e IA dentro de organizaciones
+### Ruta de aprendizaje post-curso
+Los graduados están preparados para especializaciones avanzadas en:
+- **Experto Microsoft Foundry**: Especialización profunda en despliegue y orquestación de modelos IA
+- **Liderazgo en arquitectura cloud**: Diseño y gobernanza de despliegues a escala empresarial
+- **Liderazgo en comunidad de desarrolladores**: Contribución a muestras Azure y recursos comunitarios
+- **Formación corporativa**: Enseñanza de habilidades AZD y despliegue IA en organizaciones
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+**Aviso legal**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción profesional realizada por humanos. No nos hacemos responsables por malentendidos o interpretaciones erróneas derivadas del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

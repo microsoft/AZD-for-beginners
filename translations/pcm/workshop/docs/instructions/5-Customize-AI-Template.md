@@ -1,39 +1,30 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-11-18T19:06:58+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "pcm"
-}
--->
-# 5. Customize Template
+# 5. Customize di Template
 
-!!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"
+!!! tip "BY THE END OF THIS MODULE YOU GO FIT"
 
-    - [ ] Check di default AI Agent Capabilities
-    - [ ] Add AI Search wit your own index
-    - [ ] Activate and analyze Tracing metrics
-    - [ ] Run evaluation test
-    - [ ] Run red-teaming scan
-    - [ ] **Lab 5: Build Customization Plan**
+    - [ ] Don explore di default AI Agent capabilities
+    - [ ] Don add AI Search wit your own index
+    - [ ] Don activate an analyze Tracing metrics
+    - [ ] Don run one evaluation
+    - [ ] Don run red-teaming scan
+    - [ ] **Lab 5: Don build Customization Plan** 
 
 ---
 
 ## 5.1 AI Agent Capabilities
 
-!!! success "We don finish dis one for Lab 01"
+!!! success "We don complete dis for Lab 01"
 
-- **File Search**: OpenAI get built-in file search wey dey help retrieve knowledge
-- **Citations**: E dey automatically show source for response
-- **Customizable Instructions**: You fit change di agent behavior and personality
-- **Tool Integration**: E get system wey you fit extend for custom capabilities
+- **File Search**: OpenAI's built-in file search for knowledge retrieval
+- **Citations**: Automatic source attribution in responses
+- **Customizable Instructions**: Modify agent behavior and personality
+- **Tool Integration**: Extensible tool system for custom capabilities
 
 ---
 
 ## 5.2 Knowledge Retrieval Options
 
-!!! task "To finish dis one, we go need change and redeploy"    
+!!! task "To complete dis we need make changes and redeploy"    
     
     ```bash title=""
     # Set environment variables
@@ -51,22 +42,22 @@ CO_OP_TRANSLATOR_METADATA:
 
 **OpenAI File Search (Default):**
 
-- E dey inside Azure AI Agent service
-- E dey process and index document automatically
-- No need extra configuration
+- Built-in to Foundry Agents
+- Automatic document processing and indexing
+- No additional configuration required
 
 **Azure AI Search (Optional):**
 
 - Hybrid semantic and vector search
-- You fit manage custom index
+- Custom index management
 - Advanced search capabilities
-- E need `USE_AZURE_AI_SEARCH_SERVICE=true`
+- Require `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [Tracing & Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "To finish dis one, we go need change and redeploy"    
+!!! task "To complete dis we need make changes and redeploy"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -75,16 +66,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Tracing:**
 
-- OpenTelemetry dey inside
-- E dey track request/response
-- E dey show performance metrics
-- You fit see am for AI Foundry portal
+- OpenTelemetry integration
+- Request/response tracking
+- Performance metrics
+- Available in Microsoft Foundry portal
 
 **Logging:**
 
-- Application logs dey Container Apps
-- Structured logging wey get correlation IDs
-- You fit see logs for real-time and old ones
+- Application logs in Container Apps
+- Structured logging with correlation IDs
+- Real-time and historical log viewing
 
 ---
 
@@ -92,21 +83,21 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Local Evaluation:**
 
-- E get evaluators wey dey check quality
-- You fit use custom evaluation scripts
-- E dey benchmark performance
+- Built-in evaluators for quality assessment
+- Custom evaluation scripts
+- Performance benchmarking
 
 **Continuous Monitoring:**
 
-- E dey automatically evaluate live interactions
-- E dey track quality metrics
-- E dey detect performance regression
+- Automatic evaluation of live interactions
+- Quality metrics tracking
+- Performance regression detection
 
 **CI/CD Integration:**
 
-- GitHub Actions workflow dey
-- Automated testing and evaluation dey
-- E dey compare testing results statistically
+- GitHub Actions workflow
+- Automated testing and evaluation
+- Statistical comparison testing
 
 ---
 
@@ -114,26 +105,27 @@ CO_OP_TRANSLATOR_METADATA:
 
 **AI Red Teaming:**
 
-- E dey scan security automatically
-- E dey check risk for AI systems
-- E dey evaluate safety for different categories
+- Automated security scanning
+- Risk assessment for AI systems
+- Safety evaluation across multiple categories
 
 **Authentication:**
 
-- Managed Identity dey for Azure services
-- Optional Azure App Service authentication dey
-- Basic auth fallback dey for development
+- Managed Identity for Azure services
+- Optional Azure App Service authentication
+- Basic auth fallback for development
 
-!!! quote "BY THE END OF THIS LAB YOU GO DON"
 
-    - [ ] Define your scenario requirements
+
+!!! quote "BY THE END OF THIS LAB YOU GO GET"
+    - [ ] Make clear wetin your scenario need
     - [ ] Customize env variables (config)
     - [ ] Customize agent instructions (task)
     - [ ] Deploy di customized template (app)
     - [ ] Finish post-deployment tasks (manual)
     - [ ] Run test evaluation
 
-Dis example dey show how to customize di template for enterprise retail use case wey get two specialized agents and multiple model deployments.
+This example dey show how to customize di template for enterprise retail use case wit two specialized agents and multiple model deployments.
 
 ---
 
@@ -143,8 +135,8 @@ Dis example dey show how to customize di template for enterprise retail use case
 
 #### **Agent Deployments:** 
 
-   - Shopper Agent: E dey help customers find and compare products
-   - Loyalty Agent: E dey manage customer rewards and promotions
+   - Shopper Agent: Dey help customers find and compare products
+   - Loyalty Agent: Dey manage customer rewards and promotions
 
 #### **Model Deployments:**
 
@@ -155,10 +147,10 @@ Dis example dey show how to customize di template for enterprise retail use case
 
 #### **Features:**
 
-   - Tracing and monitoring dey enabled
-   - AI Search dey for product catalog
-   - Evaluation framework dey for quality assurance
-   - Red teaming dey for security validation
+   - Tracing and monitoring don enable
+   - AI Search for product catalog
+   - Evaluation framework for quality assurance
+   - Red teaming for security validation
 
 ---
 
@@ -167,37 +159,37 @@ Dis example dey show how to customize di template for enterprise retail use case
 
 #### 5.6.2.1. Pre-Deployment Config
 
-Create setup script (`setup-retail.sh`)
+Create di setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Set di environment name
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Pick region (choose based on which model dey available)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Turn on all di optional services
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Set di primary chat model (gpt-4o na di closest wey dey available to gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Set di embedding model to make search better
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Set agent name (e go create di first agent)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Set di search index
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -266,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Make sure say di requirements don ready
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -278,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Set up di environment
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Check di quota for di region wey you select
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -299,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Deploy di infrastructure and di application
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Collect di deployment outputs
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Get di web app URL
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -338,19 +330,19 @@ Create `configure-retail-agents.sh`:
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Get di deployment information
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Steps to configure am by hand
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -375,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -395,11 +387,11 @@ Create `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Check say environment variables don set
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# Test if web app dey available
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -413,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Run di evaluation if e don set
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -428,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -437,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Expected Outcomes
+### 5.6.4 Wetin You Go Get
 
-After you follow dis implementation guide, you go don:
+After you follow dis implementation guide, you go get:
 
-1. **Deploy Infrastructure:**
+1. **Deployed Infrastructure:**
 
-      - AI Foundry project wey get model deployments
-      - Container Apps wey dey host di web application
-      - AI Search service wey dey for product catalog
-      - Application Insights wey dey monitor
+      - Microsoft Foundry project wey get model deployments
+      - Container Apps wey host di web application
+      - AI Search service for product catalog
+      - Application Insights for monitoring
 
 2. **Initial Agent:**
 
-      - Shopper Agent wey don configure wit basic instructions
-      - File search capability wey don enable
-      - Tracing and monitoring wey don configure
+      - Shopper Agent don configure wit basic instructions
+      - File search capability don enable
+      - Tracing an monitoring don configure
 
 3. **Ready for Customization:**
 
-      - Framework wey go add Loyalty Agent
+      - Framework to add Loyalty Agent
       - Custom instruction templates
       - Testing and validation scripts
       - Monitoring and evaluation setup
 
 4. **Production Readiness:**
 
-      - Security scanning wey red teaming dey do
+      - Security scanning wit red teaming
       - Performance monitoring
       - Quality evaluation framework
       - Scalable architecture
 
-Dis example dey show how di AZD template fit extend and customize for specific enterprise scenarios while e still dey follow best practices for security, monitoring, and scalability.
+This example dey show how the AZD template fit extend an customize for specific enterprise scenarios while still dey maintain best practices for security, monitoring, an scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even though we dey try make am correct, abeg make you sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument wey dey for im native language na di one wey you go take as di correct source. For important information, e good make professional human translator check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Disclaimer:
+Dis dokument na wetin AI translation service Co-op Translator (https://github.com/Azure/co-op-translator) translate. Even though we dey try make am correct, abeg note say automated translation fit get mistakes or wrong meaning. The original dokument for im original language suppose be di correct, true source. For crucial information, better make person use professional human translator. We no go responsible for any misunderstanding or wrong interpretation wey fit come from dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

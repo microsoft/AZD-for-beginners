@@ -1,216 +1,210 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-10-11T15:45:00+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "et"
-}
--->
-# 2. Malli valideerimine
+# 2. Kontrolli mall
 
-!!! tip "PÄRAST SELLE MODULI LÄBIMIST SAAD"
+!!! tip "Selle mooduli lõpuks SUUDA SA"
 
-    - [ ] Analüüsida AI lahenduse arhitektuuri
-    - [ ] Mõista AZD juurutamise töövoogu
-    - [ ] Kasutada GitHub Copilotit AZD kasutamise abistamiseks
-    - [ ] **Lab 2:** Juurutada ja valideerida AI agentide mall
+    - [ ] Analüüsida AI lahenduste arhitektuuri
+    - [ ] Mõista AZD juurutusprotsessi
+    - [ ] Kasutada GitHub Copilotit abi saamiseks AZD kasutamisel
+    - [ ] **Labor 2:** AI agentide malli juurutamine ja valideerimine
 
 ---
 
+
 ## 1. Sissejuhatus
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) ehk `azd` on avatud lähtekoodiga käsurea tööriist, mis lihtsustab arendaja töövoogu rakenduste loomisel ja juurutamisel Azure'i. 
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) ehk `azd` on avatud lähtekoodiga käsureatööriist, mis lihtsustab arendaja töövoogu rakenduste loomisel ja juurutamisel Azure’i platvormile.
 
-[AZD mallid](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) on standardiseeritud repositooriumid, mis sisaldavad näidisrakenduse koodi, _infrastruktuuri kui koodi_ ressursse ja `azd` konfiguratsioonifaile tervikliku lahenduse arhitektuuri jaoks. Infrastruktuuri ettevalmistamine muutub sama lihtsaks kui `azd provision` käsk - samas kui `azd up` võimaldab infrastruktuuri ettevalmistamist **ja** rakenduse juurutamist ühe korraga!
+[AZD mallid](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) on standardiseeritud hoidlad, mis sisaldavad näidiskoodi, _tarkvara infrastruktuuri koodina_ ning `azd` konfiguratsioonifaile koordineeritud lahenduse arhitektuuri jaoks. Infrastruktuuri loomine toimub nii lihtsalt kui `azd provision` käsk - samas `azd up` võimaldab juurutada infrastruktuuri **ja** rakenduse korraga!
 
-Seega võib rakenduse arendamise alustamine olla sama lihtne kui leida sobiv _AZD Starter mall_, mis vastab kõige paremini teie rakenduse ja infrastruktuuri vajadustele - ning seejärel kohandada repositooriumi vastavalt teie stsenaariumi nõuetele.
+Seetõttu võib rakenduse arenduse käivitamine olla sama lihtne kui leida sobiv _AZD Startermall_, mis vastab kõige enam teie rakenduse ja infrastruktuuri vajadustele ning seejärel kohandada hoidlat vastavalt teie stsenaariumile.
 
-Enne alustamist veenduge, et teil on Azure Developer CLI installitud.
+Enne alustamist veendume, et teil oleks Azure Developer CLI paigaldatud.
 
-1. Avage VS Code terminal ja sisestage järgmine käsk:
+1. Ava VS Code terminal ja sisesta järgmine käsk:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. Peaksite nägema midagi sellist!
+1. Peaks välja tulema midagi sellist!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**Olete nüüd valmis valima ja juurutama malli azd abil**
+**Nüüd oled valmis valima ja juurutama malli azd-ga**
 
 ---
 
-## 2. Malli valik
+## 2. Malle valik
 
-Azure AI Foundry platvormil on [soovitatud AZD mallide komplekt](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started), mis hõlmab populaarseid lahenduse stsenaariume nagu _multi-agent töövoo automatiseerimine_ ja _multi-modal sisu töötlemine_. Neid malle saate avastada ka Azure AI Foundry portaalis.
+Microsoft Foundry platvorm sisaldab [soovitatud AZD malle](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started), mis katavad populaarseid lahenduste stsenaariumeid nagu _mitmeagendi töövoo automatiseerimine_ ja _mitmemodaalne sisu töötlemine_. Neid malle saab avastada ka Microsoft Foundry portaali külastades.
 
-1. Külastage [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Logige sisse Azure AI Foundry portaali, kui seda küsitakse - näete midagi sellist.
+1. Külasta [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Logi sisse Microsoft Foundry portaali, kui see küsitakse – näed midagi sellist.
 
-![Vali](../../../../../translated_images/et/01-pick-template.60d2d5fff5ebc374.webp)
+![Pick](../../../../../translated_images/et/01-pick-template.60d2d5fff5ebc374.webp)
 
-**Basic** valikud on teie algusmallid:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat), mis juurutab lihtsa vestlusrakenduse _teie andmetega_ Azure Container Apps'i. Kasutage seda, et uurida lihtsat AI vestlusrobotite stsenaariumi.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents), mis juurutab standardse AI agendi (koos Azure AI Agent Service'iga). Kasutage seda, et tutvuda agentlike AI lahendustega, mis hõlmavad tööriistu ja mudeleid.
+**Basic** valikud on sinu startermallid:
 
-Avage teine link uues brauseri vahekaardis (või klõpsake `Open in GitHub` seotud kaardil). Peaksite nägema selle AZD malli repositooriumi. Võtke minut, et uurida README-d. Rakenduse arhitektuur näeb välja selline:
+1. [ ] [Alusta AI vestlusega](https://github.com/Azure-Samples/get-started-with-ai-chat), mis juurutab lihtsa vestlusrakenduse _sinu andmetega_ Azure Container Apps keskkonda. Kasuta seda lihtsa AI vestlusroboti stsenaariumi uurimiseks.
+1. [X] [Alusta AI agentidega](https://github.com/Azure-Samples/get-started-with-ai-agents), mis samuti juurutab standardse AI agendi (Foundry agentidega). Kasuta seda, et tutvuda agentse AI lahendustega, mis hõlmavad tööriistu ja mudeleid.
 
-![Arhitektuur](../../../../../translated_images/et/architecture.8cec470ec15c65c7.webp)
+Külasta teist lingi uues brauseri vahekaardis (või klõpsa seotud kaardi juures `Open in GitHub`). Näed selle AZD malli hoidlat. Võta minut ja vaata README läbi. Rakenduse arhitektuur näeb välja selline:
+
+![Arch](../../../../../translated_images/et/architecture.8cec470ec15c65c7.webp)
 
 ---
 
 ## 3. Malli aktiveerimine
 
-Proovime juurutada seda malli ja veenduda, et see on kehtiv. Järgime juhiseid [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) jaotises.
+Proovime seda malli juurutada ja veenduda, et see oleks kehtiv. Järgime juhiseid jaotises [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
 
-1. Klõpsake [sellel lingil](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - kinnitage vaikimisi toiming `Create codespace`
-1. See avab uue brauseri vahekaardi - oodake, kuni GitHub Codespaces seanss on täielikult laaditud
-1. Avage Codespaces'is VS Code terminal - sisestage järgmine käsk:
+1. Klõpsa [seda linki](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - kinnita vaikevalik „Create codespace“
+1. Avaneb uus brauseri vahekaart – oota, kuni GitHub Codespaces sessioon laeb lõpuni
+1. Ava VS Code terminal Codespaces - sisesta järgmine käsk:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Täitke töövoo sammud, mida see käivitab:
+Läbiviidavad töövoo sammud:
 
-1. Teile kuvatakse Azure'i sisselogimise juhised - järgige autentimise juhiseid
-1. Sisestage ainulaadne keskkonna nimi - näiteks kasutasin `nitya-mshack-azd`
-1. See loob `.azure/` kausta - näete alamkausta keskkonna nimega
-1. Teile kuvatakse tellimuse nime valik - valige vaikimisi
-1. Teile kuvatakse asukoha valik - kasutage `East US 2`
+1. Sind palutakse Azure’i sisse logida – järgi autentimisjuhiseid
+1. Sisesta oma unikaalne keskkonna nimi – näiteks mina kasutasin `nitya-mshack-azd`
+1. See loob `.azure/` kausta – näed selle alamkausta keskkonna nimega
+1. Sind palutakse valida tellimuse nimi – vali vaikimisi
+1. Sind palutakse valida asukoht – kasuta `East US 2`
 
-Nüüd oodake, kuni ettevalmistamine on lõpule viidud. **See võtab 10-15 minutit**
+Nüüd oota, kuni provisioning lõpetatakse. **See võtab 10-15 minutit**
 
-1. Kui valmis, näete konsoolis EDUKA sõnumit, mis näeb välja selline:
+1. Kui valmis, näed konsoolis sõnumit SUCCESS järgmiselt:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Teie Azure'i portaalis on nüüd ettevalmistatud ressursigrupp selle keskkonna nimega:
+1. Sinu Azure portalis on nüüd loodud selle keskkonnanimega ressursside grupp:
 
       ![Infra](../../../../../translated_images/et/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Olete nüüd valmis valideerima juurutatud infrastruktuuri ja rakendust**.
+1. **Oled nüüd valmis valideerima juurutatud infrastruktuuri ja rakendust**.
 
 ---
 
 ## 4. Malli valideerimine
 
-1. Külastage Azure'i portaali [Resource Groups](https://portal.azure.com/#browse/resourcegroups) lehte - logige sisse, kui seda küsitakse
-1. Klõpsake oma keskkonna nimega ressursigrupil - näete ülaltoodud lehte
+1. Külasta Azure portaali [Resource Groups](https://portal.azure.com/#browse/resourcegroups) lehte – logi sisse kui küsitakse
+1. Klikka oma keskkonnanimel olevale RG-le – näed eelpoololevat lehte
 
-      - klõpsake Azure Container Apps ressursil
-      - klõpsake _Essentials_ sektsiooni (paremal ülal) Application Url lingil
+      - kliki Azure Container Apps ressursil
+      - kliki rakenduse URL-ile _Essentials_ sektsioonis (paremal ülal)
 
-1. Peaksite nägema hostitud rakenduse esikülje kasutajaliidest, mis näeb välja selline:
+1. Näed võõrustatud rakenduse kasutajaliidest sellisena:
 
-   ![Rakendus](../../../../../translated_images/et/03-test-application.471910da12c3038e.webp)
+   ![App](../../../../../translated_images/et/03-test-application.471910da12c3038e.webp)
 
-1. Proovige küsida paar [näidisküsimust](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Proovi küsida paar [näidisküsimust](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Küsige: ```Mis on Prantsusmaa pealinn?``` 
-      1. Küsige: ```Milline on parim telk alla $200 kahele inimesele ja millised omadused sellel on?```
+      1. Küsi: ```Mis on Prantsusmaa pealinn?``` 
+      1. Küsi: ```Mis on parim telk alla $200 kahe inimese jaoks ja millised on selle omadused?```
 
-1. Peaksite saama vastuseid, mis on sarnased allpool näidatule. _Aga kuidas see töötab?_ 
+1. Saad vastused, mis näevad välja sarnased järgmisega. _Kuidas see toimib?_
 
-      ![Rakendus](../../../../../translated_images/et/03-test-question.521c1e863cbaddb6.webp)
+      ![App](../../../../../translated_images/et/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
 ## 5. Agendi valideerimine
 
-Azure Container App juurutab lõpp-punkti, mis ühendub AI agendiga, mis on ettevalmistatud selle malli Azure AI Foundry projektis. Vaatame, mida see tähendab.
+Azure Container App juurutab lõpp-punkti, mis ühendub AI agendiga, mis loodi Microsoft Foundry projektis selle malli jaoks. Vaatame, mida see tähendab.
 
-1. Naaske Azure'i portaali _Overview_ lehele oma ressursigrupi jaoks
+1. Tagasi Azure Portaali _Ülevaate_ lehele oma ressursside grupis
 
-1. Klõpsake loendis `Azure AI Foundry` ressursil
+1. Kliki loetelus `Microsoft Foundry` ressursile
 
-1. Peaksite nägema seda. Klõpsake `Go to Azure AI Foundry Portal` nuppu. 
+1. Näed seda. Klõpsa nupule `Go to Microsoft Foundry Portal`. 
    ![Foundry](../../../../../translated_images/et/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. Peaksite nägema Foundry projekti lehte oma AI rakenduse jaoks
-   ![Projekt](../../../../../translated_images/et/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. Näed Foundry projekti lehte oma AI rakenduse jaoks
+   ![Project](../../../../../translated_images/et/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Klõpsake `Agents` - näete vaikimisi agenti, mis on teie projektis ettevalmistatud
-   ![Agendid](../../../../../translated_images/et/06-visit-agents.bccb263f77b00a09.webp)
+1. Klõpsa `Agents` – näed projekti vaikeseadistusega agenti
+   ![Agents](../../../../../translated_images/et/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Valige see - ja näete agendi üksikasju. Pange tähele järgmist:
+1. Vali see – näed agendi üksikasju. Pane tähele järgmist:
 
-      - Agent kasutab vaikimisi failide otsingut (alati)
-      - Agendi `Knowledge` näitab, et üles laaditud on 32 faili (failide otsinguks)
-      ![Agendid](../../../../../translated_images/et/07-view-agent-details.0e049f37f61eae62.webp)
+      - Agent kasutab vaikimisi File Search’i (alati)
+      - Agendi `Knowledge` näitab, et on üles laaditud 32 faili (failis otsingu jaoks)
+      ![Agents](../../../../../translated_images/et/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Otsige vasakpoolsest menüüst `Data+indexes` valikut ja klõpsake, et näha üksikasju. 
+1. Vali vasakpoolsest menüüst `Data+indexes` ja klõpsa detailide vaatamiseks.
 
-      - Peaksite nägema 32 andmefaili, mis on üles laaditud teadmiste jaoks.
-      - Need vastavad 12 kliendifailile ja 20 toote failile kaustas `src/files` 
-      ![Andmed](../../../../../translated_images/et/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - Näed, et teadmiste all on üles laaditud 32 andmefaili.
+      - Need vastavad 12 kliendi failile ja 20 tootefailile kaustas `src/files`
+      ![Data](../../../../../translated_images/et/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**Olete valideerinud agendi toimimise!** 
+**Sa valideerisid agendi toimimise!**
 
-1. Agendi vastused põhinevad nende failide teadmistel. 
-1. Nüüd saate esitada küsimusi, mis on seotud nende andmetega, ja saada põhjendatud vastuseid.
-1. Näide: `customer_info_10.json` kirjeldab "Amanda Perez" kolme ostu
+1. Agendi vastused tuginevad neile teadmisi sisaldavatele failidele.
+1. Nüüd võid küsida andmestikku puudutavaid küsimusi ja saada asjakohaseid vastuseid.
+1. Näide: `customer_info_10.json` kirjeldab Amanda Perezi tehtud 3 ostu.
 
-Naaske brauseri vahekaardile, kus on Container App lõpp-punkt, ja küsige: `Milliseid tooteid Amanda Perez omab?`. Peaksite nägema midagi sellist:
+Mine tagasi brauseri vahekaardile Container Appi lõpp-punktiga ja küsi: `Milliseid tooteid Amanda Perez omab?`. Näed midagi sellist:
 
-![Andmed](../../../../../translated_images/et/09-ask-in-aca.4102297fc465a4d5.webp)
+![Data](../../../../../translated_images/et/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
 ## 6. Agendi mänguväljak
 
-Tutvume Azure AI Foundry võimalustega, proovides agenti mänguväljakul. 
+Saa veidi parema ettekujutuse Microsoft Foundry võimekusest, proovides agendit Agents Playground’s.
 
-1. Naaske Azure AI Foundry lehele `Agents` - valige vaikimisi agent
-1. Klõpsake `Try in Playground` valikut - peaksite saama mänguväljaku kasutajaliidese, mis näeb välja selline
-1. Küsige sama küsimust: `Milliseid tooteid Amanda Perez omab?`
+1. Tagasi Microsoft Foundry `Agents` lehele - vali vaikimisi agent
+1. Klõpsa valikut `Try in Playground` - näed Playground kasutajaliidest nagu allpool
+1. Küsi sama küsimust: `Milliseid tooteid Amanda Perez omab?`
 
-    ![Andmed](../../../../../translated_images/et/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Data](../../../../../translated_images/et/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Saate sama (või sarnase) vastuse - kuid näete ka täiendavat teavet, mida saate kasutada oma agentliku rakenduse kvaliteedi, kulude ja jõudluse mõistmiseks. Näiteks:
+Saad sama (või sarnase) vastuse – aga saad ka lisainfot, mida kasutada, et mõista oma agendi rakenduse kvaliteeti, kulusid ja jõudlust. Näiteks:
 
-1. Pange tähele, et vastus viitab andmefailidele, mida kasutati vastuse "põhjendamiseks"
-1. Hõljutage kursorit mõne faili sildi kohal - kas andmed vastavad teie päringule ja kuvatud vastusele?
+1. Pane tähele, et vastus viitab kasutatud andmefailidele, mis “põhinevad” vastusel
+1. Hoia hiirt nende failide peal – kas andmed vastavad sinu küsimusele ja näidatud vastusele?
 
-Näete ka _statistika_ rida vastuse all. 
+Näed allpool ka _statistika_ rida.
 
-1. Hõljutage kursorit mõne mõõdiku kohal - näiteks Safety. Näete midagi sellist
-1. Kas hinnang vastab teie intuitsioonile vastuse ohutuse taseme kohta?
+1. Hoia hiirt üle mõne mõõdiku – nt turvalisus. Näed midagi sellist
+1. Kas hinnang vastab sinu intuitsioonile vastuse turvalisuse taseme kohta?
 
-      ![Andmed](../../../../../translated_images/et/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Data](../../../../../translated_images/et/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
----x
+---
 
 ## 7. Sisseehitatud jälgitavus
 
-Jälgitavus tähendab rakenduse instrumenteerimist, et genereerida andmeid, mida saab kasutada selle toimimise mõistmiseks, silumiseks ja optimeerimiseks. Selle mõistmiseks:
+Jälgitavus tähendab, et rakendus on instrumenditud andmete genereerimiseks, mida saab kasutada tema toimimise mõistmiseks, silumiseks ja optimeerimiseks. Selle tunnetamiseks:
 
-1. Klõpsake `View Run Info` nuppu - peaksite nägema seda vaadet. See on näide [Agendi jälgimisest](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) tegevuses. _Selle vaate saate ka, klõpsates Thread Logs ülemise menüü tasemel_.
+1. Klõpsa nuppu `View Run Info` – näed järgmist vaadet. See on näide [Agendi jälitamisest](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) tegevuses. _Seda vaadet saad ka menüüst valides Thread Logs_.
 
-   - Saage ülevaade agendi käivitamise sammudest ja tööriistadest
-   - Mõistke vastuse jaoks kasutatud kogutokenite arvu (vs. väljundtokenite kasutus)
-   - Mõistke latentsust ja kus kulub aega täitmise ajal
+   - Saa ülevaade agendi töövoo sammudest ja kasutatud tööriistadest
+   - Mõista kogu Tokenite arvu (vt väljundtokenite kasutust) vastuse kohta
+   - Mõista latentsust ja kus aeg täitmise ajal kulub
 
       ![Agent](../../../../../translated_images/et/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Klõpsake `Metadata` vahekaarti, et näha täiendavaid atribuute käivitamise kohta, mis võivad pakkuda kasulikku konteksti hilisemate probleemide silumiseks.   
+1. Klõpsa vahekaarti `Metadata`, et näha täiendavaid atribuute jooksu kohta, mis võivad hiljem silumisel kasulikud olla.
 
       ![Agent](../../../../../translated_images/et/11-view-run-info-metadata.7966986122c7c2df.webp)
 
-1. Klõpsake `Evaluations` vahekaarti, et näha automaatseid hinnanguid agendi vastuse kohta. Need hõlmavad ohutuse hinnanguid (nt enesevigastus) ja agendispetsiifilisi hinnanguid (nt kavatsuse lahendamine, ülesande järgimine).
+
+1. Klõpsa vahekaarti `Evaluations`, et näha agendi vastuse automaatseid hinnanguid. Need sisaldavad turvalisuse hindamist (nt enesevigastuse risk) ning agendispetsiifilisi hinnanguid (nt kavatsuse tuvastamine, ülesande järgimine).
 
       ![Agent](../../../../../translated_images/et/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Viimaks, klõpsake külgriba menüüs `Monitoring` vahekaarti.
+1. Lõpuks, klõpsa külgmenüüs `Monitoring` vahekaarti.
 
-      - Valige kuvatud lehel `Resource usage` vahekaart - ja vaadake mõõdikuid.
-      - Jälgige rakenduse kasutust kulude (tokenid) ja koormuse (päringud) osas.
-      - Jälgige rakenduse latentsust esimese baidini (sisendi töötlemine) ja viimase baidini (väljund).
+      - Vali kuvataval lehel `Resource usage` vahekaart – ja vaata mõõdikuid.
+      - Jälgi rakenduse kasutust kulude (tokenite) ja koormuse (päringute) osas.
+      - Jälgi rakenduse latentsust esimese baidi (sisendi töötlemine) ja viimase baidi (väljundi) osas.
 
       ![Agent](../../../../../translated_images/et/13-monitoring-resources.5148015f7311807f.webp)
 
@@ -218,23 +212,23 @@ Jälgitavus tähendab rakenduse instrumenteerimist, et genereerida andmeid, mida
 
 ## 8. Keskkonnamuutujad
 
-Siiani oleme läbinud juurutamise brauseris - ja valideerinud, et meie infrastruktuur on ettevalmistatud ja rakendus töötab. Kuid rakendusega _koodipõhiselt_ töötamiseks peame konfigureerima oma kohaliku arenduskeskkonna vastavate muutujatega, mis on vajalikud nende ressurssidega töötamiseks. `azd` kasutamine teeb selle lihtsaks.
+Praeguseks oleme käsitlenud brauseris juurutamist ning veendunud, et meie infrastruktuur on loodud ja rakendus töötab. Kuid, et töötada rakenduse _koodist lähtuvalt_, tuleb meil oma lokaalne arenduskeskkond konfigureerida vastavate muutujatega, mis on vajalikud nende ressurssidega töötamiseks. `azd` kasutamine teeb selle lihtsaks.
 
-1. Azure Developer CLI [kasutab keskkonnamuutujaid](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash), et salvestada ja hallata rakenduse juurutamise konfiguratsiooniseadeid.
+1. Azure Developer CLI [kasutab keskkonnamuutujaid](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) rakenduste juurutuste konfiguratsiooniseadete salvestamiseks ja haldamiseks.
 
-1. Keskkonnamuutujad salvestatakse `.azure/<env-name>/.env` - see piirab need juurutamise ajal kasutatud `env-name` keskkonnaga ja aitab eraldada keskkondi erinevate juurutamise sihtmärkide vahel samas repositooriumis.
+1. Keskkonnamuutujad salvestatakse faili `.azure/<env-name>/.env` – see piirab need kindla `env-name` keskkonnaga, mida kasutati juurutamisel, ning aitab hoida keskkonnad isolatsioonis eri juurutusi käsitlevates samades hoidlates.
 
-1. Keskkonnamuutujad laaditakse automaatselt `azd` käsu poolt, kui see täidab konkreetset käsku (nt `azd up`). Pange tähele, et `azd` ei loe automaatselt _OS-taseme_ keskkonnamuutujaid (nt shellis määratud) - selle asemel kasutage `azd set env` ja `azd get env`, et edastada teavet skriptide sees.
+1. Keskkonnamuutujad laaditakse automaatselt `azd` käsu käivitamisel (nt `azd up`). Pane tähele, et `azd` ei loe automaatselt _OS tasandi_ keskkonnamuutujaid (nt mis on seatud shellis) – selle asemel kasuta `azd set env` ja `azd get env`, et skriptide vahel infot vahetada.
 
 Proovime mõnda käsku:
 
-1. Hankige kõik keskkonnamuutujad, mis on `azd` jaoks selles keskkonnas määratud:
+1. Saada kõik selle keskkonna `azd` jaoks seatud keskkonnamuutujad:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      Näete midagi sellist:
+      Näed midagi sellist:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -244,19 +238,19 @@ Proovime mõnda käsku:
       ...
       ```
 
-1. Hankige konkreetne väärtus - näiteks tahan teada, kas oleme määranud `AZURE_AI_AGENT_MODEL_NAME` väärtuse
+1. Saada konkreetne väärtus – nt tahan teada, kas on seatud `AZURE_AI_AGENT_MODEL_NAME` väärtus
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Näete midagi sellist - seda ei olnud vaikimisi määratud!
+      Näed midagi sellist – see ei olnud vaikimisi seatud!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Määrake uus keskkonnamuutuja `azd` jaoks. Siin uuendame agendi mudeli nime. _Märkus: kõik tehtud muudatused kajastuvad kohe `.azure/<env-name>/.env` failis.
+1. Sea uus keskkonnamuutuja `azd` jaoks. Siin uuendame agendi mudelinime. _Märkus: kõik tehtud muutused kajastuvad kohe failis `.azure/<env-name>/.env`._
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,32 +258,35 @@ Proovime mõnda käsku:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Nüüd peaksime leidma, et väärtus on määratud:
+      Nüüd peaks väärtus seatud olema:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Pange tähele, et mõned ressursid on püsivad (nt mudeli juurutused) ja vajavad rohkem kui lihtsalt `azd up`, et sundida uuesti juurutamist. Proovime algse juurutamise eemaldamist ja uuesti juurutamist muudetud keskkonnamuutujatega.
+1. Pane tähele, et mõned ressursid on püsivad (nt mudelijuurutused) ja neid ei saa sundjuurutada lihtsalt `azd up` käsuga. Proovime algse juurutuse maha võtta ja seejärel juurutada uuesti muudetud keskkonnamuutujatega.
 
-1. **Värskenda** Kui olete varem infrastruktuuri juurutanud azd malliga - saate _värskendada_ oma kohalike keskkonnamuutujate olekut, lähtudes Azure'i juurutamise praegusest olekust, kasutades seda käsku:
+1. **Värskenda** Kui oled varem juurutanud infrastruktuuri azd malliga, võid oma lokaalse keskkonnamuutujate oleku uuendada vastavalt Azure'i juurutuse praegusele olukorrale, kasutades seda käsku:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      See on võimas viis _sünkroonida_ keskkonnamuutujaid mitme kohaliku arenduskeskkonna vahel (nt meeskond, kus on mitu arendajat) – võimaldades juurutatud infrastruktuuril olla keskkonnamuutujate oleku tõepunkt. Meeskonnaliikmed lihtsalt _värskendavad_ muutujaid, et uuesti sünkroonis olla.
+See on võimas viis sünkroonida keskkonnamuutujaid kahe või enama kohalikus arenduskeskkonnas (nt meeskond mitme arendajaga) – võimaldades juurutatud infrastruktuuril toimida keskkonnamuutujate oleku aluseks. Meeskonnaliikmed lihtsalt _värskendavad_ muutujaid, et taas sünkroonis olla.
 
 ---
 
 ## 9. Palju õnne 🏆
 
-Sa just lõpetasid tervikliku töövoo, kus sa:
+Sa just lõpetasid kogu töövoo, kus sa:
 
-- [X] Valisid AZD mall, mida soovid kasutada
-- [X] Käivitasid malli GitHub Codespaces abil
-- [X] Juurutasid malli ja kinnitasid, et see töötab
+- [X] Valisid AZD malli, mida soovid kasutada
+- [X] Käivitasid malli GitHub Codespacesiga
+- [X] Juurutasid malli ja kontrollisid, et see töötab
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokumenti selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastutusest loobumine**:
+See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise info puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse või valesti mõistmise eest, mis võib sellest tõlkest tekkida.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

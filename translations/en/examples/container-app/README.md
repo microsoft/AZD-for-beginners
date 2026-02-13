@@ -1,15 +1,6 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-25T13:43:38+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "en"
-}
--->
 # Container App Deployment Examples with AZD
 
-This directory contains detailed examples for deploying containerized applications to Azure Container Apps using Azure Developer CLI (AZD). These examples showcase real-world patterns, best practices, and production-ready configurations.
+This directory contains comprehensive examples for deploying containerized applications to Azure Container Apps using Azure Developer CLI (AZD). These examples demonstrate real-world patterns, best practices, and production-ready configurations.
 
 ## 📚 Table of Contents
 
@@ -22,17 +13,17 @@ This directory contains detailed examples for deploying containerized applicatio
 
 ## Overview
 
-Azure Container Apps is a fully managed serverless container platform that allows you to run microservices and containerized applications without managing infrastructure. When used with AZD, you benefit from:
+Azure Container Apps is a fully managed serverless container platform that enables you to run microservices and containerized applications without managing infrastructure. When combined with AZD, you get:
 
-- **Simplified Deployment**: Deploy containers and infrastructure with a single command
-- **Automatic Scaling**: Scale to zero or scale out based on HTTP traffic or events
+- **Simplified Deployment**: Single command deploys containers with infrastructure
+- **Automatic Scaling**: Scale to zero and scale out based on HTTP traffic or events
 - **Integrated Networking**: Built-in service discovery and traffic splitting
 - **Managed Identity**: Secure authentication to Azure resources
-- **Cost Optimization**: Pay only for the resources you use
+- **Cost Optimization**: Pay only for resources you use
 
 ## Prerequisites
 
-Before starting, make sure you have:
+Before getting started, ensure you have:
 
 ```bash
 # Check AZD installation
@@ -50,15 +41,15 @@ az login
 ```
 
 **Required Azure Resources:**
-- An active Azure subscription
-- Permissions to create resource groups
-- Access to a Container Apps environment
+- Active Azure subscription
+- Resource group creation permissions
+- Container Apps environment access
 
 ## Quick Start Examples
 
 ### 1. Simple Web API (Python Flask)
 
-Deploy a basic REST API using Azure Container Apps.
+Deploy a basic REST API with Azure Container Apps.
 
 **Example: Python Flask API**
 
@@ -109,8 +100,8 @@ azd env set COLLECTION_NAME todos
 # Deploy
 azd up
 
-# View logs
-azd logs api
+# View logs via Azure Monitor
+azd monitor --logs
 ```
 
 **Infrastructure Highlights:**
@@ -158,7 +149,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Static Frontend + API Backend
 
-Deploy a full-stack application with a React frontend and an API backend.
+Deploy a full-stack application with React frontend and API backend.
 
 ```bash
 # Initialize full-stack template
@@ -678,10 +669,12 @@ services:
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # View logs in real-time
-azd logs api --follow
+azd monitor --logs
+# Or use Azure CLI for Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Monitor metrics
-azd monitor --service api
+azd monitor --live
 
 # Create alerts
 az monitor metrics alert create \
@@ -762,8 +755,9 @@ azd provision
 # View deployed resources
 azd show
 
-# Stream logs
-azd logs <service-name> --follow
+# Stream logs using azd monitor or Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # Monitor application
 azd monitor --overview
@@ -777,8 +771,8 @@ azd down --force --purge
 ### Issue: Container fails to start
 
 ```bash
-# Check logs
-azd logs api --tail 100
+# Check logs using Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # View container events
 az containerapp revision show \
@@ -837,7 +831,7 @@ To contribute new container app examples:
 
 1. Create a new subdirectory with your example
 2. Include complete `azure.yaml`, `infra/`, and `src/` files
-3. Add a detailed README with deployment instructions
+3. Add comprehensive README with deployment instructions
 4. Test deployment with `azd up`
 5. Submit a pull request
 
@@ -848,6 +842,6 @@ To contribute new container app examples:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+**Disclaimer**:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

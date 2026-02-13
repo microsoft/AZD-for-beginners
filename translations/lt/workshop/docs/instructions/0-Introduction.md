@@ -1,64 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-25T02:19:57+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "lt"
-}
--->
-# AZD AI kūrėjams
+# AZD dirbtinio intelekto kūrėjams
 
-!!! info "SKIRTA ŠIAM SEMINARUI"
+!!! info "DIRBTUVĖS DALYVIAI"
    
-    Šis seminaras skirtas visiems, norintiems kurti AI agentines programas naudojant Azure AI Foundry ir pasitelkiant pažangiausius įrankius bei darbo eigas. Seminaras tinka tiek pradedantiesiems, tiek patyrusiems kūrėjams, turintiems tam tikrų žinių apie Azure, AI koncepcijas ir Python kodą. Prieš pradėdami, patikrinkite reikalavimus.
+    Šios dirbtuvės skirtos visiems, norintiems kurti AI agentų programas Microsoft Foundry, naudojant geriausios klasės įrankius ir darbo eigas. Dirbtuvės tinka tiek pradedantiesiems, tiek patyrusiems kūrėjams, turintiems tam tikrą pažinimą apie Azure, AI koncepcijas ir Python kodą. Prieš pradėdami patikrinkite išankstines sąlygas.
 
-    **Trukmė:** 3–4 valandos  
-    **Lygis:** Pradedantysis iki vidutinio  
+    **Trukmė:** 3-4 valandos  
+    **Lygis:** Nuo pradedančiųjų iki vidutinio  
 
 ---
 
-## Reikalavimai
 
-- Asmeninė GitHub paskyra → [Sukurkite nemokamai](https://github.com/signup)
-- Aktyvi Azure paskyra → [Sukurkite nemokamai](https://aka.ms/free)
-- Susipažinimas su AI koncepcijomis, Python programavimu, komandų eilutės įrankiais
+## Išankstiniai reikalavimai
+
+- A personal GitHub account → [Create one for free](https://github.com/signup)
+- An active Azure account → [Create one for free](https://aka.ms/free)
+- Pažintis su AI koncepcijomis, Python programavimu ir komandinės eilutės įrankiais
 - Patirtis naudojant VS Code ir GitHub įrankius bei darbo eigas.
 
 ---
 
 ## Mokymosi tikslai
 
-Seminaro pabaigoje jūs sužinosite, kaip:
+Baigę šias dirbtuves, sužinosite, kaip:
 
-- [X] **Dirbti su Azure Developer CLI** → kad galėtumėte paruošti, diegti ir valdyti savo Azure išteklius.
-- [X] **Naudoti AI programų šablonus** → kad galėtumėte greitai pradėti AI agentų projektus Azure AI Foundry.
-- [X] **Konfigūruoti šablonus** → funkcijoms, tokioms kaip Red Teaming, vertinimai, sekimas ir stebėjimas.
-- [X] **Išskaidyti ir tyrinėti** → AZD šablonus ir darbo eigas naudojant GitHub Copilot.
-- [X] **Pritaikyti ir iš naujo diegti** → AI agento pradinį šabloną pagal savo individualius reikalavimus.
+- [X] **Work with Azure Developer CLI** → aprūpinti, diegti ir valdyti jūsų Azure išteklius.
+- [X] **Use AI App Templates** →  greitai pradėti AI agentų projektus Microsoft Foundry.
+- [X] **Configure Templates** →  funkcijoms, tokioms kaip Red Teaming, vertinimai, sekimas ir stebėjimas
+- [X] **Deconstruct and Explore** →  analizuoti ir tyrinėti AZD šablonus ir darbo eigas naudojant GitHub Copilot
+- [X] **Customize and Redeploy** →  pritaikyti ir iš naujo diegti AI agento pradžios šabloną pagal jūsų reikalavimus
 
 ---
 
-## Seminaro struktūra
+## Dirbtuvių planas
 
-Seminaras suskirstytas į modulius, kiekvienas iš jų apima praktinį laboratorinį pratimą:
+Dirbtuvės suskirstytos į modulius, kurių kiekvienas pagrįstas praktiniu laboratoriniu užsiėmimu:
 
 1. **Įvadas** - Supraskite, kas yra AZD šablonai ir kaip jie veikia
-1. **Pasirinkimas** - Atraskite tinkamą „pradinį“ šabloną savo kitam AI projektui
-1. **Patvirtinimas** - Diekite ir tyrinėkite šabloną, kad įsitikintumėte, jog jis veikia kaip numatyta
-1. **Išskaidymas** - Išardykite šabloną, kad suprastumėte jo komponentus ir konfigūraciją
-1. **Konfigūracija** - Sužinokite, kaip aktyvuoti ir naudoti įvairias Azure AI Foundry funkcijas
-1. **Pritaikymas** - Rekonstruokite programą, atsižvelgdami į savo duomenis ir reikalavimus
-1. **Išardymas** - Sužinokite, kaip panaikinti infrastruktūrą ir atkurti minkštai ištrintus išteklius
+1. **Pasirinkimas** - Atraskite tinkamą "starter" šabloną jūsų kitam AI projektui
+1. **Validacija** - Diegti ir ištirti šabloną, kad patikrintumėte, ar jis veikia kaip nurodyta
+1. **Išardymas** - Išardykite šabloną, kad suprastumėte jo komponentus ir konfigūraciją
+1. **Konfigūravimas** - Išmokite įjungti ir naudoti įvairias Microsoft Foundry funkcijas
+1. **Pritaikymas** - Perstatykite programą atsižvelgdami į savo duomenis ir reikalavimus
+1. **Teardown** - Išmokite atjungti ir pašalinti infrastruktūrą bei atkurti minkštai ištrintus išteklius
 
 ---
 
 ## Atsiliepimai ir problemos
 
-Mes nuolat atnaujiname mokymo programą, kad ji suteiktų geriausią mokymosi patirtį pradedantiesiems. Jūsų atsiliepimai yra labai vertingi.
+Mes aktyviai atnaujiname mokymo programą, kad užtikrintume geriausią mokymosi patirtį pradedantiesiems. Būsime dėkingi už jūsų atsiliepimus.
 
-1. Pateikite problemą šiame repozitoriume – pažymėkite ją `Workshop` patogumui.
-1. Prisijunkite prie Azure AI Foundry Discord – susisiekite su kitais mokymosi dalyviais!
+1. Paskelbkite problemą šiame repozitoriume - pažymėkite ją žyma `Workshop` patogumui.
+1. Prisijunkite prie Microsoft Foundry Discord - susisiekite su kitais besimokančiais!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų, žmogaus atliktą vertimą. Neprisiimame atsakomybės už bet kokius nesusipratimus ar neteisingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

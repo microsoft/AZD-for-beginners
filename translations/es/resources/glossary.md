@@ -1,98 +1,89 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-17T15:12:29+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "es"
-}
--->
-# Glosario - Terminología de Azure y AZD
+# Glossary - Azure and AZD Terminology
 
-**Referencia para Todos los Capítulos**  
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)  
-- **📖 Aprende lo Básico**: [Capítulo 1: Fundamentos de AZD](../docs/getting-started/azd-basics.md)  
-- **🤖 Términos de IA**: [Capítulo 2: Desarrollo con IA Primero](../docs/ai-foundry/azure-ai-foundry-integration.md)  
+**Reference for All Chapters**
+- **📚 Course Home**: [AZD para Principiantes](../README.md)
+- **📖 Learn Basics**: [Capítulo 1: Conceptos Básicos de AZD](../docs/getting-started/azd-basics.md)
+- **🤖 AI Terms**: [Capítulo 2: Desarrollo centrado en IA](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
-## Introducción
+## Introduction
 
-Este glosario completo proporciona definiciones de términos, conceptos y acrónimos utilizados en Azure Developer CLI y en el desarrollo en la nube de Azure. Es una referencia esencial para comprender la documentación técnica, resolver problemas y comunicarse eficazmente sobre proyectos azd y servicios de Azure.
+Este glosario completo proporciona definiciones de términos, conceptos y siglas utilizados en Azure Developer CLI y el desarrollo en la nube de Azure. Referencia esencial para comprender la documentación técnica, resolver problemas y comunicarse eficazmente sobre proyectos azd y servicios de Azure.
 
-## Objetivos de Aprendizaje
+## Learning Goals
 
-Al utilizar este glosario, podrás:  
-- Comprender la terminología y los conceptos esenciales de Azure Developer CLI  
-- Dominar el vocabulario y los términos técnicos del desarrollo en la nube de Azure  
-- Referenciar de manera eficiente la terminología de Infraestructura como Código y despliegue  
-- Comprender los nombres, acrónimos y propósitos de los servicios de Azure  
-- Acceder a definiciones para resolver problemas y depurar errores  
-- Aprender conceptos avanzados de arquitectura y desarrollo en Azure  
+Al utilizar este glosario, usted:
+- Entenderá la terminología y los conceptos esenciales de Azure Developer CLI
+- Dominará el vocabulario y los términos técnicos del desarrollo en la nube de Azure
+- Consultará eficazmente la terminología de Infrastructure as Code y despliegue
+- Comprenderá los nombres de servicios de Azure, acrónimos y sus propósitos
+- Accederá a definiciones para terminología de resolución de problemas y depuración
+- Aprenderá conceptos avanzados de arquitectura y desarrollo en Azure
 
-## Resultados de Aprendizaje
+## Learning Outcomes
 
-Con el uso regular de este glosario, serás capaz de:  
-- Comunicarte eficazmente utilizando la terminología adecuada de Azure Developer CLI  
-- Comprender con mayor claridad la documentación técnica y los mensajes de error  
-- Navegar por los servicios y conceptos de Azure con confianza  
-- Resolver problemas utilizando el vocabulario técnico apropiado  
-- Contribuir a discusiones de equipo con un lenguaje técnico preciso  
-- Ampliar sistemáticamente tu conocimiento sobre el desarrollo en la nube de Azure  
+Con la consulta regular de este glosario, podrá:
+- Comunicarse eficazmente usando la terminología adecuada de Azure Developer CLI
+- Entender la documentación técnica y los mensajes de error con mayor claridad
+- Navegar por los servicios y conceptos de Azure con confianza
+- Resolver problemas usando el vocabulario técnico apropiado
+- Contribuir a las discusiones de equipo con lenguaje técnico preciso
+- Ampliar su conocimiento del desarrollo en la nube de Azure de forma sistemática
 
 ## A
 
 **Plantilla ARM**  
-Plantilla de Azure Resource Manager. Formato JSON de Infraestructura como Código utilizado para definir y desplegar recursos de Azure de manera declarativa.
+Azure Resource Manager template. Formato JSON de Infrastructure as Code usado para definir y desplegar recursos de Azure de forma declarativa.
 
 **App Service**  
-Oferta de plataforma como servicio (PaaS) de Azure para alojar aplicaciones web, APIs REST y backends móviles sin necesidad de gestionar infraestructura.
+La oferta platform-as-a-service (PaaS) de Azure para alojar aplicaciones web, APIs REST y backends móviles sin gestionar la infraestructura.
 
 **Application Insights**  
-Servicio de monitoreo del rendimiento de aplicaciones (APM) de Azure que proporciona información detallada sobre el rendimiento, la disponibilidad y el uso de las aplicaciones.
+Servicio de Application Performance Monitoring (APM) de Azure que proporciona información profunda sobre el rendimiento, disponibilidad y uso de las aplicaciones.
 
 **Azure CLI**  
 Interfaz de línea de comandos para gestionar recursos de Azure. Utilizada por azd para autenticación y algunas operaciones.
 
 **Azure Developer CLI (azd)**  
-Herramienta de línea de comandos centrada en desarrolladores que acelera el proceso de creación y despliegue de aplicaciones en Azure utilizando plantillas e Infraestructura como Código.
+Herramienta de línea de comandos centrada en desarrolladores que acelera el proceso de construir y desplegar aplicaciones en Azure usando plantillas e Infrastructure as Code.
 
 **azure.yaml**  
-Archivo de configuración principal de un proyecto azd que define servicios, infraestructura y hooks de despliegue.
+El archivo de configuración principal de un proyecto azd que define servicios, infraestructura y hooks de despliegue.
 
 **Azure Resource Manager (ARM)**  
-Servicio de despliegue y gestión de Azure que proporciona una capa de gestión para crear, actualizar y eliminar recursos.
+Servicio de despliegue y administración de Azure que proporciona una capa de gestión para crear, actualizar y eliminar recursos.
 
 ## B
 
 **Bicep**  
-Lenguaje específico de dominio (DSL) desarrollado por Microsoft para desplegar recursos de Azure. Ofrece una sintaxis más sencilla que las plantillas ARM mientras se compila en ARM.
+Lenguaje específico de dominio (DSL) desarrollado por Microsoft para desplegar recursos de Azure. Ofrece una sintaxis más simple que las plantillas ARM mientras compila a ARM.
 
 **Compilación**  
-Proceso de compilar código fuente, instalar dependencias y preparar aplicaciones para su despliegue.
+El proceso de compilar el código fuente, instalar dependencias y preparar las aplicaciones para su despliegue.
 
-**Despliegue Azul-Verde**  
+**Despliegue Blue-Green**  
 Estrategia de despliegue que utiliza dos entornos de producción idénticos (azul y verde) para minimizar el tiempo de inactividad y el riesgo.
 
 ## C
 
 **Container Apps**  
-Servicio sin servidor de contenedores de Azure que permite ejecutar aplicaciones en contenedores sin gestionar infraestructura compleja.
+Servicio serverless de contenedores de Azure que permite ejecutar aplicaciones conteinerizadas sin gestionar infraestructura compleja.
 
 **CI/CD**  
 Integración Continua/Despliegue Continuo. Prácticas automatizadas para integrar cambios de código y desplegar aplicaciones.
 
 **Cosmos DB**  
-Servicio de base de datos globalmente distribuida y multimodelo de Azure que ofrece SLA completos para rendimiento, latencia, disponibilidad y consistencia.
+Servicio de base de datos multimodelo y distribuido globalmente de Azure que ofrece SLAs integrales para throughput, latencia, disponibilidad y consistencia.
 
 **Configuración**  
 Ajustes y parámetros que controlan el comportamiento de la aplicación y las opciones de despliegue.
 
 ## D
 
-**Despliegue**  
-Proceso de instalar y configurar aplicaciones y sus dependencias en la infraestructura objetivo.
+**Implementación**  
+El proceso de instalar y configurar aplicaciones y sus dependencias en la infraestructura objetivo.
 
 **Docker**  
-Plataforma para desarrollar, enviar y ejecutar aplicaciones utilizando tecnología de contenedores.
+Plataforma para desarrollar, distribuir y ejecutar aplicaciones usando tecnología de contenedores.
 
 **Dockerfile**  
 Archivo de texto que contiene instrucciones para construir una imagen de contenedor Docker.
@@ -100,26 +91,26 @@ Archivo de texto que contiene instrucciones para construir una imagen de contene
 ## E
 
 **Entorno**  
-Destino de despliegue que representa una instancia específica de tu aplicación (por ejemplo, desarrollo, pruebas, producción).
+Un destino de despliegue que representa una instancia específica de su aplicación (por ejemplo, desarrollo, staging, producción).
 
 **Variables de Entorno**  
-Valores de configuración almacenados como pares clave-valor a los que las aplicaciones pueden acceder en tiempo de ejecución.
+Valores de configuración almacenados como pares clave-valor que las aplicaciones pueden acceder en tiempo de ejecución.
 
-**Punto Final**  
+**Endpoint**  
 URL o dirección de red donde se puede acceder a una aplicación o servicio.
 
 ## F
 
 **Function App**  
-Servicio de cómputo sin servidor de Azure que permite ejecutar código basado en eventos sin gestionar infraestructura.
+Servicio de cómputo serverless de Azure que permite ejecutar código orientado a eventos sin gestionar infraestructura.
 
 ## G
 
 **GitHub Actions**  
-Plataforma de CI/CD integrada con repositorios de GitHub para automatizar flujos de trabajo.
+Plataforma CI/CD integrada con repositorios de GitHub para automatizar flujos de trabajo.
 
 **Git**  
-Sistema de control de versiones distribuido utilizado para rastrear cambios en el código fuente.
+Sistema de control de versiones distribuido usado para rastrear cambios en el código fuente.
 
 ## H
 
@@ -131,73 +122,73 @@ El tipo de servicio de Azure donde se desplegará una aplicación (por ejemplo, 
 
 ## I
 
-**Infraestructura como Código (IaC)**  
-Práctica de definir y gestionar infraestructura a través de código en lugar de procesos manuales.
+**Infrastructure as Code (IaC)**  
+Práctica de definir y gestionar la infraestructura mediante código en lugar de procesos manuales.
 
 **Init**  
-Proceso de inicializar un nuevo proyecto azd, típicamente desde una plantilla.
+El proceso de inicializar un nuevo proyecto azd, típicamente desde una plantilla.
 
 ## J
 
 **JSON**  
-Notación de Objetos de JavaScript. Formato de intercambio de datos comúnmente utilizado para archivos de configuración y respuestas de API.
+JavaScript Object Notation. Formato de intercambio de datos comúnmente usado para archivos de configuración y respuestas de API.
 
 **JWT**  
-Token Web JSON. Estándar para transmitir información de manera segura entre partes como un objeto JSON.
+JSON Web Token. Estándar para transmitir información de forma segura entre partes como un objeto JSON.
 
 ## K
 
 **Key Vault**  
 Servicio de Azure para almacenar y gestionar de forma segura secretos, claves y certificados.
 
-**Lenguaje de Consulta Kusto (KQL)**  
-Lenguaje de consulta utilizado para analizar datos en Azure Monitor, Application Insights y otros servicios de Azure.
+**Kusto Query Language (KQL)**  
+Lenguaje de consulta usado para analizar datos en Azure Monitor, Application Insights y otros servicios de Azure.
 
 ## L
 
-**Balanceador de Carga**  
+**Load Balancer**  
 Servicio que distribuye el tráfico de red entrante entre múltiples servidores o instancias.
 
 **Log Analytics**  
-Servicio de Azure para recopilar, analizar y actuar sobre datos de telemetría de entornos en la nube y locales.
+Servicio de Azure para recopilar, analizar y actuar sobre datos de telemetría desde entornos en la nube y locales.
 
 ## M
 
-**Identidad Administrada**  
-Función de Azure que proporciona a los servicios de Azure una identidad gestionada automáticamente para autenticarse en otros servicios de Azure.
+**Managed Identity**  
+Funcionalidad de Azure que proporciona a los servicios de Azure una identidad administrada automáticamente para autenticarse con otros servicios de Azure.
 
 **Microservicios**  
-Enfoque arquitectónico donde las aplicaciones se construyen como una colección de pequeños servicios independientes.
+Enfoque arquitectónico donde las aplicaciones se construyen como una colección de servicios pequeños e independientes.
 
 **Monitor**  
-Solución de monitoreo unificada de Azure que proporciona observabilidad de pila completa en aplicaciones e infraestructura.
+Solución unificada de monitorización de Azure que proporciona observabilidad completa a través de aplicaciones e infraestructura.
 
 ## N
 
 **Node.js**  
-Entorno de ejecución de JavaScript basado en el motor V8 de Chrome para construir aplicaciones del lado del servidor.
+Runtime de JavaScript construido sobre el motor V8 de Chrome para crear aplicaciones del lado del servidor.
 
 **npm**  
-Gestor de paquetes para Node.js que gestiona dependencias y paquetes.
+Administrador de paquetes para Node.js que gestiona dependencias y paquetes.
 
 ## O
 
-**Salida**  
+**Output**  
 Valores devueltos por el despliegue de infraestructura que pueden ser utilizados por aplicaciones u otros recursos.
 
 ## P
 
-**Paquete**  
-Proceso de preparar el código de la aplicación y sus dependencias para el despliegue.
+**Empaquetado**  
+El proceso de preparar el código de la aplicación y sus dependencias para el despliegue.
 
 **Parámetros**  
-Valores de entrada pasados a plantillas de infraestructura para personalizar despliegues.
+Valores de entrada pasados a las plantillas de infraestructura para personalizar los despliegues.
 
 **PostgreSQL**  
-Sistema de base de datos relacional de código abierto soportado como servicio gestionado en Azure.
+Sistema de base de datos relacional de código abierto soportado como servicio administrado en Azure.
 
 **Aprovisionamiento**  
-Proceso de crear y configurar recursos de Azure definidos en plantillas de infraestructura.
+El proceso de crear y configurar recursos de Azure definidos en plantillas de infraestructura.
 
 ## Q
 
@@ -206,14 +197,14 @@ Límites en la cantidad de recursos que se pueden crear en una suscripción o re
 
 ## R
 
-**Grupo de Recursos**  
-Contenedor lógico para recursos de Azure que comparten el mismo ciclo de vida, permisos y políticas.
+**Grupo de recursos**  
+Contenedor lógico para recursos de Azure que comparten el mismo ciclo de vida, permisos y directivas.
 
-**Token de Recurso**  
-Cadena única generada por azd para garantizar que los nombres de los recursos sean únicos en los despliegues.
+**Token de recurso**  
+Cadena única generada por azd para asegurar que los nombres de recursos sean únicos entre despliegues.
 
-**API REST**  
-Estilo arquitectónico para diseñar aplicaciones en red utilizando métodos HTTP.
+**REST API**  
+Estilo arquitectónico para diseñar aplicaciones en red usando métodos HTTP.
 
 **Reversión**  
 Proceso de volver a una versión anterior de una aplicación o configuración de infraestructura.
@@ -221,22 +212,22 @@ Proceso de volver a una versión anterior de una aplicación o configuración de
 ## S
 
 **Servicio**  
-Un componente de tu aplicación definido en azure.yaml (por ejemplo, frontend web, backend API, base de datos).
+Componente de su aplicación definido en azure.yaml (por ejemplo, frontend web, backend API, base de datos).
 
 **SKU**  
-Unidad de Mantenimiento de Stock. Representa diferentes niveles de servicio o rendimiento para recursos de Azure.
+Stock Keeping Unit. Representa diferentes niveles de servicio o niveles de rendimiento para recursos de Azure.
 
-**Base de Datos SQL**  
-Servicio de base de datos relacional gestionado de Azure basado en Microsoft SQL Server.
+**Base de datos SQL**  
+Servicio de base de datos relacional administrado de Azure basado en Microsoft SQL Server.
 
-**Aplicaciones Web Estáticas**  
-Servicio de Azure para construir y desplegar aplicaciones web de pila completa desde repositorios de código fuente.
+**Static Web Apps**  
+Servicio de Azure para construir y desplegar aplicaciones web completas desde repositorios de código fuente.
 
-**Cuenta de Almacenamiento**  
-Servicio de Azure que proporciona almacenamiento en la nube para objetos de datos como blobs, archivos, colas y tablas.
+**Cuenta de almacenamiento**  
+Servicio de Azure que proporciona almacenamiento en la nube para objetos de datos incluyendo blobs, archivos, colas y tablas.
 
 **Suscripción**  
-Contenedor de cuenta de Azure que contiene grupos de recursos y recursos, con gestión asociada de facturación y acceso.
+Contenedor de cuenta de Azure que aloja grupos de recursos y recursos, con facturación y gestión de acceso asociadas.
 
 ## T
 
@@ -244,23 +235,23 @@ Contenedor de cuenta de Azure que contiene grupos de recursos y recursos, con ge
 Estructura de proyecto preconstruida que contiene código de aplicación, definiciones de infraestructura y configuración para escenarios comunes.
 
 **Terraform**  
-Herramienta de Infraestructura como Código de código abierto que soporta múltiples proveedores de nube, incluido Azure.
+Herramienta de Infrastructure as Code de código abierto que soporta múltiples proveedores de nube, incluyendo Azure.
 
 **Traffic Manager**  
-Balanceador de carga basado en DNS de Azure para distribuir tráfico entre regiones globales de Azure.
+Balanceador de carga basado en DNS de Azure para distribuir el tráfico a través de regiones globales de Azure.
 
 ## U
 
 **URI**  
-Identificador Uniforme de Recursos. Cadena que identifica un recurso en particular.
+Uniform Resource Identifier. Cadena que identifica un recurso en particular.
 
 **URL**  
-Localizador Uniforme de Recursos. Tipo de URI que especifica dónde se encuentra un recurso y cómo recuperarlo.
+Uniform Resource Locator. Tipo de URI que especifica dónde se encuentra un recurso y cómo recuperarlo.
 
 ## V
 
-**Red Virtual (VNet)**  
-Bloque fundamental para redes privadas en Azure, proporcionando aislamiento y segmentación.
+**Virtual Network (VNet)**  
+Pilar fundamental para redes privadas en Azure, proporcionando aislamiento y segmentación.
 
 **VS Code**  
 Visual Studio Code. Editor de código popular con excelente integración con Azure y azd.
@@ -268,15 +259,15 @@ Visual Studio Code. Editor de código popular con excelente integración con Azu
 ## W
 
 **Webhook**  
-Callback HTTP activado por eventos específicos, comúnmente utilizado en pipelines de CI/CD.
+Callback HTTP activado por eventos específicos, comúnmente usado en pipelines de CI/CD.
 
 **What-if**  
-Función de Azure que muestra qué cambios se realizarían en un despliegue sin ejecutarlo realmente.
+Funcionalidad de Azure que muestra qué cambios se harían con un despliegue sin ejecutarlo realmente.
 
 ## Y
 
 **YAML**  
-YAML No es un Lenguaje de Marcado. Estándar de serialización de datos legible para humanos utilizado para archivos de configuración como azure.yaml.
+YAML Ain't Markup Language. Estándar de serialización de datos legible por humanos usado para archivos de configuración como azure.yaml.
 
 ## Z
 
@@ -287,47 +278,47 @@ Ubicaciones físicamente separadas dentro de una región de Azure que proporcion
 
 ## Acrónimos Comunes
 
-| Acrónimo | Forma Completa | Descripción |
-|---------|----------------|-------------|
+| Acronym | Full Form | Description |
+|---------|-----------|-------------|
 | AAD | Azure Active Directory | Servicio de gestión de identidad y acceso |
 | ACR | Azure Container Registry | Servicio de registro de imágenes de contenedores |
-| AKS | Azure Kubernetes Service | Servicio gestionado de Kubernetes |
-| API | Interfaz de Programación de Aplicaciones | Conjunto de protocolos para construir software |
-| ARM | Azure Resource Manager | Servicio de despliegue y gestión de Azure |
-| CDN | Red de Entrega de Contenido | Red distribuida de servidores |
-| CI/CD | Integración Continua/Despliegue Continuo | Prácticas de desarrollo automatizadas |
-| CLI | Interfaz de Línea de Comandos | Interfaz de usuario basada en texto |
-| DNS | Sistema de Nombres de Dominio | Sistema para traducir nombres de dominio a direcciones IP |
-| HTTPS | Protocolo Seguro de Transferencia de Hipertexto | Versión segura de HTTP |
-| IaC | Infraestructura como Código | Gestión de infraestructura a través de código |
-| JSON | Notación de Objetos de JavaScript | Formato de intercambio de datos |
-| JWT | Token Web JSON | Formato de token para transmisión segura de información |
-| KQL | Lenguaje de Consulta Kusto | Lenguaje de consulta para servicios de datos de Azure |
-| RBAC | Control de Acceso Basado en Roles | Método de control de acceso basado en roles de usuario |
-| REST | Transferencia de Estado Representacional | Estilo arquitectónico para servicios web |
-| SDK | Kit de Desarrollo de Software | Conjunto de herramientas de desarrollo |
-| SLA | Acuerdo de Nivel de Servicio | Compromiso con la disponibilidad/rendimiento del servicio |
-| SQL | Lenguaje de Consulta Estructurada | Lenguaje para gestionar bases de datos relacionales |
-| SSL/TLS | Capa de Conexión Segura/Seguridad de la Capa de Transporte | Protocolos criptográficos |
-| URI | Identificador Uniforme de Recursos | Cadena que identifica un recurso |
-| URL | Localizador Uniforme de Recursos | Tipo de URI que especifica la ubicación de un recurso |
-| VM | Máquina Virtual | Emulación de un sistema informático |
-| VNet | Red Virtual | Red privada en Azure |
-| YAML | YAML No es un Lenguaje de Marcado | Estándar de serialización de datos |
+| AKS | Azure Kubernetes Service | Servicio administrado de Kubernetes |
+| API | Application Programming Interface | Conjunto de protocolos para construir software |
+| ARM | Azure Resource Manager | Servicio de despliegue y administración de Azure |
+| CDN | Content Delivery Network | Red distribuida de servidores |
+| CI/CD | Continuous Integration/Continuous Deployment | Prácticas automatizadas de desarrollo |
+| CLI | Command Line Interface | Interfaz de usuario basada en texto |
+| DNS | Domain Name System | Sistema para traducir nombres de dominio a direcciones IP |
+| HTTPS | Hypertext Transfer Protocol Secure | Versión segura de HTTP |
+| IaC | Infrastructure as Code | Gestión de infraestructura mediante código |
+| JSON | JavaScript Object Notation | Formato de intercambio de datos |
+| JWT | JSON Web Token | Formato de token para transmisión segura de información |
+| KQL | Kusto Query Language | Lenguaje de consulta para servicios de datos de Azure |
+| RBAC | Role-Based Access Control | Método de control de acceso basado en roles de usuario |
+| REST | Representational State Transfer | Estilo arquitectónico para servicios web |
+| SDK | Software Development Kit | Conjunto de herramientas de desarrollo |
+| SLA | Service Level Agreement | Compromiso sobre disponibilidad/rendimiento del servicio |
+| SQL | Structured Query Language | Lenguaje para gestionar bases de datos relacionales |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Protocolos criptográficos |
+| URI | Uniform Resource Identifier | Cadena que identifica un recurso |
+| URL | Uniform Resource Locator | Tipo de URI que especifica la ubicación de un recurso |
+| VM | Virtual Machine | Emulación de un sistema informático |
+| VNet | Virtual Network | Red privada en Azure |
+| YAML | YAML Ain't Markup Language | Estándar de serialización de datos |
 
 ---
 
-## Mapeo de Nombres de Servicios de Azure
+## Azure Service Name Mappings
 
-| Nombre Común | Nombre Oficial del Servicio de Azure | Tipo de Host azd |
-|--------------|-------------------------------------|------------------|
-| Aplicación Web | Azure App Service | `appservice` |
-| Aplicación API | Azure App Service | `appservice` |
-| Aplicación en Contenedor | Azure Container Apps | `containerapp` |
-| Función | Azure Functions | `function` |
-| Sitio Estático | Azure Static Web Apps | `staticwebapp` |
-| Base de Datos | Azure Database for PostgreSQL | `postgres` |
-| Base de Datos NoSQL | Azure Cosmos DB | `cosmosdb` |
+| Common Name | Official Azure Service Name | azd Host Type |
+|-------------|------------------------------|---------------|
+| Aplicación web | Azure App Service | `appservice` |
+| API App | Azure App Service | `appservice` |
+| Container App | Azure Container Apps | `containerapp` |
+| Function | Azure Functions | `function` |
+| Sitio estático | Azure Static Web Apps | `staticwebapp` |
+| Base de datos | Azure Database for PostgreSQL | `postgres` |
+| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
 | Almacenamiento | Azure Storage Account | `storage` |
 | Caché | Azure Cache for Redis | `redis` |
 | Búsqueda | Azure Cognitive Search | `search` |
@@ -335,43 +326,45 @@ Ubicaciones físicamente separadas dentro de una región de Azure que proporcion
 
 ---
 
-## Términos Específicos del Contexto
+## Context-Specific Terms
 
-### Términos de Desarrollo
-- **Recarga en Caliente**: Actualización automática de aplicaciones durante el desarrollo sin reinicio  
-- **Pipeline de Construcción**: Proceso automatizado para construir y probar código  
-- **Slot de Despliegue**: Entorno de pruebas dentro de un App Service  
-- **Paridad de Entorno**: Mantener similares los entornos de desarrollo, pruebas y producción  
+### Development Terms
+- **Recarga en caliente**: Actualización automática de aplicaciones durante el desarrollo sin reinicio
+- **Pipeline de compilación**: Proceso automatizado para construir y probar código
+- **Deployment Slot**: Entorno de staging dentro de un App Service
+- **Paridad de entorno**: Mantener entornos de desarrollo, staging y producción similares
 
-### Términos de Seguridad
-- **Identidad Administrada**: Función de Azure que proporciona gestión automática de credenciales  
-- **Key Vault**: Almacenamiento seguro para secretos, claves y certificados  
-- **RBAC**: Control de acceso basado en roles para recursos de Azure  
-- **Grupo de Seguridad de Red**: Cortafuegos virtual para controlar el tráfico de red  
+### Security Terms
+- **Managed Identity**: Funcionalidad de Azure que proporciona gestión automática de credenciales
+- **Key Vault**: Almacenamiento seguro para secretos, claves y certificados
+- **RBAC**: Control de acceso basado en roles para recursos de Azure
+- **Network Security Group**: Firewall virtual para controlar el tráfico de red
 
-### Términos de Monitoreo
-- **Telemetría**: Recopilación automatizada de mediciones y datos  
-- **Monitoreo del Rendimiento de Aplicaciones (APM)**: Monitoreo del rendimiento del software  
-- **Log Analytics**: Servicio para recopilar y analizar datos de registros  
-- **Reglas de Alertas**: Notificaciones automáticas basadas en métricas o condiciones  
+### Monitoring Terms
+- **Telemetry**: Recopilación automatizada de mediciones y datos
+- **Application Performance Monitoring (APM)**: Monitorización del rendimiento del software
+- **Log Analytics**: Servicio para recopilar y analizar datos de registro
+- **Alert Rules**: Notificaciones automatizadas basadas en métricas o condiciones
 
-### Términos de Despliegue
-- **Despliegue Azul-Verde**: Estrategia de despliegue sin tiempo de inactividad  
-- **Despliegue Canary**: Implementación gradual para un subconjunto de usuarios  
-- **Actualización Continua**: Reemplazo secuencial de instancias de la aplicación  
-- **Reversión**: Volver a una versión anterior de la aplicación  
-
----
-
-**Consejo de Uso**: Usa `Ctrl+F` para buscar rápidamente términos específicos en este glosario. Los términos están referenciados cruzadamente donde sea aplicable.
+### Deployment Terms
+- **Despliegue Blue-Green**: Estrategia de despliegue sin tiempo de inactividad
+- **Canary Deployment**: Implementación gradual a un subconjunto de usuarios
+- **Actualización por oleadas (Rolling Update)**: Reemplazo secuencial de instancias de la aplicación
+- **Reversión**: Volver a una versión anterior de la aplicación
 
 ---
 
-**Navegación**  
-- **Lección Anterior**: [Hoja de Referencia](cheat-sheet.md)  
-- **Próxima Lección**: [Preguntas Frecuentes](faq.md)  
+**Consejo de uso**: Use `Ctrl+F` para buscar rápidamente términos específicos en este glosario. Los términos están referenciados cruzadamente donde corresponde.
 
 ---
 
-**Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+**Navigation**
+- **Previous Lesson**: [Hoja de referencia](cheat-sheet.md)
+- **Next Lesson**: [Preguntas Frecuentes](faq.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Descargo de responsabilidad:
+Este documento ha sido traducido usando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

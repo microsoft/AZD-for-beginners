@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T21:37:59+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "el"
-}
--->
-# 4. Ρύθμιση Προτύπου
+# 4. Διαμόρφωση ενός Προτύπου
 
-!!! tip "ΜΕΧΡΙ ΤΟ ΤΕΛΟΣ ΑΥΤΗΣ ΤΗΣ ΕΝΟΤΗΤΑΣ ΘΑ ΜΠΟΡΕΙΤΕ ΝΑ"
+!!! tip "ΜΕ ΤΟ ΤΕΛΟΣ ΑΥΤΟΥ ΤΟΥ ΜΟΝΤΟΥΛΟΥ ΘΑ ΜΠΟΡΕΙΤΕ ΝΑ"
 
-    - [ ] Κατανοήσετε τον σκοπό του `azure.yaml`
-    - [ ] Κατανοήσετε τη δομή του `azure.yaml`
-    - [ ] Κατανοήσετε την αξία των `hooks` στον κύκλο ζωής του azd
-    - [ ] **Εργαστήριο 3:** 
+    - [ ] Να κατανοήσετε τον σκοπό του `azure.yaml`
+    - [ ] Να κατανοήσετε τη δομή του `azure.yaml`
+    - [ ] Να κατανοήσετε την αξία των `hooks` του κύκλου ζωής του azd
+    - [ ] **Lab 4:** Εξερευνήστε και τροποποιήστε τις μεταβλητές περιβάλλοντος
 
 ---
 
-!!! prompt "Τι κάνει το αρχείο `azure.yaml`; Χρησιμοποιήστε ένα codefence και εξηγήστε το γραμμή προς γραμμή"
+!!! prompt "Τι κάνει το αρχείο `azure.yaml`; Χρησιμοποιήστε ένα μπλοκ κώδικα και εξηγήστε το γραμμή προς γραμμή"
 
-      Το αρχείο `azure.yaml` είναι το **αρχείο ρυθμίσεων για το Azure Developer CLI (azd)**. Ορίζει πώς η εφαρμογή σας πρέπει να αναπτυχθεί στο Azure, συμπεριλαμβανομένων της υποδομής, των υπηρεσιών, των hooks ανάπτυξης και των μεταβλητών περιβάλλοντος.
+      Το αρχείο `azure.yaml` είναι το **αρχείο διαμόρφωσης για το Azure Developer CLI (azd)**. Ορίζει πώς θα αναπτυχθεί η εφαρμογή σας στο Azure, συμπεριλαμβανομένης της υποδομής, των υπηρεσιών, των hooks ανάπτυξης και των μεταβλητών περιβάλλοντος.
 
 ---
 
 ## 1. Σκοπός και Λειτουργικότητα
 
-Το αρχείο `azure.yaml` λειτουργεί ως **οδηγός ανάπτυξης** για μια εφαρμογή AI agent που:
+Αυτό το αρχείο `azure.yaml` λειτουργεί ως το **σχέδιο ανάπτυξης** για μια εφαρμογή AI agent που:
 
-1. **Επαληθεύει το περιβάλλον** πριν την ανάπτυξη
+1. **Επικυρώνει το περιβάλλον** πριν την ανάπτυξη
 2. **Παρέχει υπηρεσίες Azure AI** (AI Hub, AI Project, Search, κ.λπ.)
 3. **Αναπτύσσει μια εφαρμογή Python** σε Azure Container Apps
-4. **Ρυθμίζει μοντέλα AI** για συνομιλία και λειτουργικότητα ενσωμάτωσης
-5. **Εγκαθιστά παρακολούθηση και ανίχνευση** για την εφαρμογή AI
-6. **Διαχειρίζεται τόσο νέα όσο και υπάρχοντα** σενάρια έργων Azure AI
+4. **Διαμορφώνει μοντέλα AI** για λειτουργίες συνομιλίας και ενσωμάτωσης (embedding)
+5. **Ρυθμίζει παρακολούθηση και εντοπισμό (tracing)** για την εφαρμογή AI
+6. **Χειρίζεται σενάρια νέου και υφιστάμενου** Azure AI έργου
 
-Το αρχείο επιτρέπει **ανάπτυξη με μία εντολή** (`azd up`) μιας ολοκληρωμένης λύσης AI agent με σωστή επαλήθευση, παροχή και ρύθμιση μετά την ανάπτυξη.
+Το αρχείο επιτρέπει **αυτόματη ανάπτυξη με μία εντολή** (`azd up`) μιας πλήρους λύσης AI agent με την κατάλληλη επικύρωση, παροχή πόρων και μετα-αναπτυξιακή διαμόρφωση.
 
-??? info "Επέκταση για προβολή: `azure.yaml`"
+??? info "Αναπτύξτε για προβολή: `azure.yaml`"
 
-      Το αρχείο `azure.yaml` ορίζει πώς το Azure Developer CLI πρέπει να αναπτύξει και να διαχειριστεί αυτήν την εφαρμογή AI Agent στο Azure. Ας το αναλύσουμε γραμμή προς γραμμή.
+      Το αρχείο `azure.yaml` καθορίζει πώς το Azure Developer CLI θα πρέπει να αναπτύσσει και να διαχειρίζεται αυτήν την εφαρμογή AI Agent στο Azure. Ας το αναλύσουμε γραμμή-γραμμή.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: χρειαζόμαστε hooks; 
-      # TODO: χρειαζόμαστε όλες τις μεταβλητές;
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## 2. Ανάλυση του Αρχείου
+## 2. Αποδόμηση του Αρχείου
 
-Ας εξετάσουμε το αρχείο τμήμα προς τμήμα, για να κατανοήσουμε τι κάνει - και γιατί.
+Ας περάσουμε το αρχείο τμήμα-τμήμα, για να κατανοήσουμε τι κάνει - και γιατί.
 
 ### 2.1 **Επικεφαλίδα και Σχήμα (1-3)**
 
@@ -145,7 +136,7 @@ CO_OP_TRANSLATOR_METADATA:
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Γραμμή 1**: Παρέχει επικύρωση σχήματος YAML για υποστήριξη IDE και IntelliSense
+- **Line 1**: Παρέχει επικύρωση σχήματος για το YAML language server για υποστήριξη IDE και IntelliSense
 
 ### 2.2 Μεταδεδομένα Έργου (5-10)
 
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Γραμμή 5**: Ορίζει το όνομα του έργου που χρησιμοποιείται από το Azure Developer CLI
-- **Γραμμές 6-7**: Καθορίζει ότι βασίζεται σε πρότυπο έκδοσης 1.0.2
-- **Γραμμές 8-9**: Απαιτεί έκδοση 1.14.0 ή νεότερη του Azure Developer CLI
+- **Line 5**: Ορίζει το όνομα του έργου που χρησιμοποιείται από το Azure Developer CLI
+- **Lines 6-7**: Δηλώνει ότι βασίζεται σε πρότυπο έκδοσης 1.0.2
+- **Lines 8-9**: Απαιτεί έκδοση Azure Developer CLI 1.14.0 ή νεότερη
 
-### 2.3 Hooks Ανάπτυξης (11-40)
+### 2.3 Hooks ανάπτυξης (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,10 +169,10 @@ hooks:
       continueOnError: false      
 ```
 
-- **Γραμμές 11-20**: **Hook πριν την ανάπτυξη** - εκτελείται πριν το `azd up`
+- **Lines 11-20**: **Hook πριν την ανάπτυξη** - εκτελείται πριν το `azd up`
 
-      - Σε Unix/Linux: Κάνει το script επαλήθευσης εκτελέσιμο και το εκτελεί
-      - Σε Windows: Εκτελεί script επαλήθευσης PowerShell
+      - Στο Unix/Linux: Κάνει το script επικύρωσης εκτελέσιμο και το τρέχει
+      - Στα Windows: Εκτελεί το PowerShell script επικύρωσης
       - Και τα δύο είναι διαδραστικά και θα σταματήσουν την ανάπτυξη αν αποτύχουν
 
 ```yaml  title="" linenums="0"
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Γραμμές 21-30**: **Hook μετά την παροχή** - εκτελείται αφού δημιουργηθούν οι πόροι Azure
+- **Lines 21-30**: **Hook μετά την παροχή πόρων** - εκτελείται μετά τη δημιουργία των πόρων Azure
 
-  - Εκτελεί scripts για εγγραφή μεταβλητών περιβάλλοντος
-  - Συνεχίζει την ανάπτυξη ακόμα κι αν αυτά τα scripts αποτύχουν (`continueOnError: true`)
+  - Εκτελεί scripts που γράφουν μεταβλητές περιβάλλοντος
+  - Συνεχίζει την ανάπτυξη ακόμα και αν αυτά τα scripts αποτύχουν (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Γραμμές 31-40**: **Hook μετά την ανάπτυξη** - εκτελείται μετά την ανάπτυξη της εφαρμογής
+- **Lines 31-40**: **Hook μετά την ανάπτυξη** - εκτελείται μετά την ανάπτυξη της εφαρμογής
 
-  - Εκτελεί τελικά scripts ρύθμισης
-  - Συνεχίζει ακόμα κι αν τα scripts αποτύχουν
+  - Εκτελεί τα τελικά scripts ρύθμισης
+  - Συνεχίζει ακόμη κι αν τα scripts αποτύχουν
 
-### 2.4 Ρύθμιση Υπηρεσίας (41-48)
+### 2.4 Διαμόρφωση Υπηρεσίας (41-48)
 
-Αυτή η ενότητα ρυθμίζει την υπηρεσία εφαρμογής που αναπτύσσετε.
+This configures the application service you are deploying.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Γραμμή 42**: Ορίζει μια υπηρεσία με όνομα "api_and_frontend"
-- **Γραμμή 43**: Δείχνει στον φάκελο `./src` για τον πηγαίο κώδικα
-- **Γραμμή 44**: Καθορίζει την Python ως γλώσσα προγραμματισμού
-- **Γραμμή 45**: Χρησιμοποιεί το Azure Container Apps ως πλατφόρμα φιλοξενίας
-- **Γραμμές 46-48**: Ρύθμιση Docker
+- **Line 42**: Ορίζει μια υπηρεσία με όνομα "api_and_frontend"
+- **Line 43**: Δείχνει στον κατάλογο `./src` για τον πηγαίο κώδικα
+- **Line 44**: Καθορίζει την Python ως γλώσσα προγραμματισμού
+- **Line 45**: Χρησιμοποιεί τα Azure Container Apps ως πλατφόρμα φιλοξενίας
+- **Lines 46-48**: Διαμόρφωση Docker
 
-      - Χρησιμοποιεί το "api_and_frontend" ως όνομα εικόνας
+      - Χρησιμοποιεί "api_and_frontend" ως όνομα εικόνας
       - Δημιουργεί την εικόνα Docker απομακρυσμένα στο Azure (όχι τοπικά)
 
 ### 2.5 Μεταβλητές Pipeline (49-76)
 
-Αυτές είναι μεταβλητές για να βοηθήσουν στην εκτέλεση του `azd` σε CI/CD pipelines για αυτοματοποίηση
+These are variables to help you run `azd` in CI/CD pipelines for automation
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Αυτή η ενότητα ορίζει μεταβλητές περιβάλλοντος που χρησιμοποιούνται **κατά την ανάπτυξη**, οργανωμένες ανά κατηγορία:
+This section defines environment variables used **during deployment**, organized by category:
 
-- **Ονόματα Πόρων Azure (Γραμμές 51-60)**:
-      - Ονόματα βασικών πόρων υπηρεσιών Azure, π.χ., Resource Group, AI Hub, AI Project, κ.λπ.- 
-- **Flags Λειτουργιών (Γραμμές 61-63)**:
-      - Μεταβλητές Boolean για ενεργοποίηση/απενεργοποίηση συγκεκριμένων υπηρεσιών Azure
-- **Ρύθμιση AI Agent (Γραμμές 64-71)**:
-      - Ρύθμιση για τον κύριο AI agent, συμπεριλαμβανομένου του ονόματος, ID, ρυθμίσεων ανάπτυξης, λεπτομερειών μοντέλου- 
-- **Ρύθμιση Ενσωμάτωσης AI (Γραμμές 72-79)**:
-      - Ρύθμιση για το μοντέλο ενσωμάτωσης που χρησιμοποιείται για αναζήτηση vector
-- **Αναζήτηση και Παρακολούθηση (Γραμμές 80-84)**:
-      - Όνομα ευρετηρίου αναζήτησης, υπάρχοντα IDs πόρων και ρυθμίσεις παρακολούθησης/ανίχνευσης
+- **Azure Resource Names (Lines 51-60)**:
+      - Βασικά ονόματα πόρων υπηρεσιών Azure π.χ. Resource Group, AI Hub, AI Project, κ.λπ.
+- **Feature Flags (Lines 61-63)**:
+      - Μεταβλητές boolean για ενεργοποίηση/απενεργοποίηση συγκεκριμένων υπηρεσιών Azure
+- **AI Agent Configuration (Lines 64-71)**:
+      - Διαμόρφωση για τον κύριο AI agent συμπεριλαμβανομένου ονόματος, ID, ρυθμίσεων ανάπτυξης, λεπτομερειών μοντέλου
+- **AI Embedding Configuration (Lines 72-79)**:
+      - Διαμόρφωση για το μοντέλο ενσωμάτωσης που χρησιμοποιείται για αναζήτηση διανυσμάτων
+- **Search and Monitoring (Lines 80-84)**:
+      - Όνομα ευρετηρίου αναζήτησης, υπάρχοντα IDs πόρων και ρυθμίσεις παρακολούθησης/εντοπισμού (tracing)
 
 ---
 
 ## 3. Γνωρίστε τις Μεταβλητές Περιβάλλοντος
-Οι παρακάτω μεταβλητές περιβάλλοντος ελέγχουν τη ρύθμιση και τη συμπεριφορά της ανάπτυξής σας, οργανωμένες ανά κύριο σκοπό. Οι περισσότερες μεταβλητές έχουν λογικές προεπιλογές, αλλά μπορείτε να τις προσαρμόσετε ώστε να ταιριάζουν στις συγκεκριμένες απαιτήσεις σας ή στους υπάρχοντες πόρους Azure.
+Οι παρακάτω μεταβλητές περιβάλλοντος ελέγχουν τη διαμόρφωση και τη συμπεριφορά της ανάπτυξής σας, οργανωμένες ανά τον κύριο σκοπό τους. Οι περισσότερες μεταβλητές έχουν λογικές προεπιλογές, αλλά μπορείτε να τις προσαρμόσετε ώστε να ταιριάζουν στις συγκεκριμένες απαιτήσεις ή τα υπάρχοντα Azure resources σας.
 
 ### 3.1 Απαιτούμενες Μεταβλητές 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Βασική διαμόρφωση Azure
+AZURE_ENV_NAME                    # Όνομα περιβάλλοντος (χρησιμοποιείται στην ονομασία πόρων)
+AZURE_LOCATION                    # Περιοχή ανάπτυξης
+AZURE_SUBSCRIPTION_ID             # Στοχευμένη συνδρομή
+AZURE_RESOURCE_GROUP              # Όνομα ομάδας πόρων
+AZURE_PRINCIPAL_ID                # Κύριος χρήστη για RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Ονόματα πόρων (Δημιουργούνται αυτόματα αν δεν καθοριστούν)
+AZURE_AIHUB_NAME                  # Όνομα κόμβου Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Όνομα έργου AI
+AZURE_AISERVICES_NAME             # Όνομα λογαριασμού υπηρεσιών AI
+AZURE_STORAGE_ACCOUNT_NAME        # Όνομα λογαριασμού αποθήκευσης
+AZURE_CONTAINER_REGISTRY_NAME     # Όνομα μητρώου κοντέινερ
+AZURE_KEYVAULT_NAME               # Όνομα Key Vault (εάν χρησιμοποιείται)
 ```
 
-### 3.2 Ρύθμιση Μοντέλου 
+### 3.2 Διαμόρφωση Μοντέλου 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Διαμόρφωση μοντέλου συνομιλίας
+AZURE_AI_AGENT_MODEL_NAME         # Προεπιλογή: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Προεπιλογή: OpenAI (ή Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Προεπιλογή: πιο πρόσφατο διαθέσιμο
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Όνομα ανάπτυξης για το μοντέλο συνομιλίας
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Προεπιλογή: Τυπικό
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Προεπιλογή: 80 (χιλιάδες TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Διαμόρφωση μοντέλου ενσωμάτωσης
+AZURE_AI_EMBED_MODEL_NAME         # Προεπιλογή: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Προεπιλογή: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Προεπιλογή: πιο πρόσφατο διαθέσιμο
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Όνομα ανάπτυξης για τις ενσωματώσεις
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Προεπιλογή: Τυπικό
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Προεπιλογή: 50 (χιλιάδες TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Διαμόρφωση πράκτορα
+AZURE_AI_AGENT_NAME               # Όνομα εμφάνισης πράκτορα
+AZURE_EXISTING_AGENT_ID           # Χρήση υπάρχοντος πράκτορα (προαιρετικό)
 ```
 
-### 3.3 Εναλλαγή Λειτουργιών
+### 3.3 Εναλλαγή Χαρακτηριστικών
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Προαιρετικές Υπηρεσίες
+USE_APPLICATION_INSIGHTS         # Προεπιλογή: αληθές
+USE_AZURE_AI_SEARCH_SERVICE      # Προεπιλογή: ψευδές
+USE_CONTAINER_REGISTRY           # Προεπιλογή: αληθές
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Παρακολούθηση και Ιχνηλάτηση
+ENABLE_AZURE_MONITOR_TRACING     # Προεπιλογή: ψευδές
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Προεπιλογή: ψευδές
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Διαμόρφωση Αναζήτησης
+AZURE_AI_SEARCH_INDEX_NAME       # Όνομα ευρετηρίου αναζήτησης
+AZURE_SEARCH_SERVICE_NAME        # Όνομα υπηρεσίας αναζήτησης
 ```
 
-### 3.4 Ρύθμιση Έργου AI 
+### 3.4 Διαμόρφωση Έργου AI 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Χρησιμοποιήστε υπάρχοντες πόρους
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Πλήρες αναγνωριστικό πόρου του υπάρχοντος έργου τεχνητής νοημοσύνης
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # Διεύθυνση URL του σημείου τερματισμού του υπάρχοντος έργου
 ```
 
 ### 3.5 Ελέγξτε τις Μεταβλητές σας
 
-Χρησιμοποιήστε το Azure Developer CLI για να δείτε και να διαχειριστείτε τις μεταβλητές περιβάλλοντος:
+Χρησιμοποιήστε το Azure Developer CLI για να δείτε και να διαχειριστείτε τις μεταβλητές περιβάλλοντος σας:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Προβολή όλων των μεταβλητών περιβάλλοντος για το τρέχον περιβάλλον
 azd env get-values
 
-# Get a specific environment variable
+# Λήψη μιας συγκεκριμένης μεταβλητής περιβάλλοντος
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Ορισμός μιας μεταβλητής περιβάλλοντος
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Ορισμός πολλαπλών μεταβλητών από αρχείο .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Αποποίηση ευθυνών:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Αν και καταβάλλουμε κάθε δυνατή προσπάθεια για ακρίβεια, παρακαλούμε να λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από επαγγελματία μεταφραστή. Δεν φέρουμε ευθύνη για οποιεσδήποτε παρανοήσεις ή λανθασμένες ερμηνείες που προκύψουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

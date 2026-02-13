@@ -1,40 +1,31 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-25T02:24:19+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "lt"
-}
--->
-# 5. Pritaikyti šabloną
+# 5. Tinkinkite šabloną
 
-!!! tip "BAIGĘ ŠĮ MODULĮ GALĖSITE"
+!!! tip "ŠIO MODULIO PABAIGOJE GALĖSITE"
 
-    - [ ] Išnagrinėti numatytas AI agento galimybes
-    - [ ] Pridėti AI paiešką su savo indeksu
-    - [ ] Aktyvuoti ir analizuoti sekimo metrikas
-    - [ ] Atlikti vertinimo testą
-    - [ ] Atlikti saugumo patikrinimą (red-teaming)
-    - [ ] **Laboratorija 5: Sukurti pritaikymo planą**
+    - [ ] Išnagrinėjote numatytąsias AI agento galimybes
+    - [ ] Pridėjote AI paiešką su savo indeksu
+    - [ ] Įjungėte ir analizavote sekimo metrikas
+    - [ ] Paleidote vertinimą
+    - [ ] Atlikote red-teaming skenavimą
+    - [ ] **Laboratorija 5: Sukurtas pritaikymo planas** 
 
 ---
 
 ## 5.1 AI agento galimybės
 
-!!! success "Tai atlikome Laboratorijoje 01"
+!!! success "Mes tai užbaigėme 01 laboratorijoje"
 
-- **Failų paieška**: OpenAI integruota failų paieška žinių gavimui
-- **Citatos**: Automatinis šaltinių nurodymas atsakymuose
-- **Pritaikomos instrukcijos**: Galimybė keisti agento elgesį ir asmenybę
-- **Įrankių integracija**: Išplečiama įrankių sistema papildomoms funkcijoms
+- **Failų paieška**: OpenAI įmontuota failų paieška žinių gavimui
+- **Cituotės**: Automatinis šaltinių nurodymas atsakymuose
+- **Konfigūruojamos instrukcijos**: Modifikuokite agento elgesį ir asmenybę
+- **Įrankių integracija**: Išplečiama įrankių sistema pritaikytoms galimybėms
 
 ---
 
 ## 5.2 Žinių gavimo parinktys
 
-!!! task "Norėdami tai atlikti, turime atlikti pakeitimus ir iš naujo diegti"
-
+!!! task "Norint tai atlikti, turime padaryti pakeitimus ir iš naujo diegti"    
+    
     ```bash title=""
     # Nustatyti aplinkos kintamuosius
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
@@ -43,7 +34,7 @@ CO_OP_TRANSLATOR_METADATA:
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Įkelti duomenis ir sukurti savo indeksą
+    # Įkelti duomenis ir sukurti mano indeksą
 
     ```
 
@@ -51,23 +42,23 @@ CO_OP_TRANSLATOR_METADATA:
 
 **OpenAI failų paieška (numatytoji):**
 
-- Integruota į Azure AI Agent paslaugą
+- Įdiegta Foundry agentuose
 - Automatinis dokumentų apdorojimas ir indeksavimas
-- Papildomos konfigūracijos nereikia
+- Nereikia papildomos konfigūracijos
 
-**Azure AI paieška (pasirinktinė):**
+**Azure AI Search (pasirinktinai):**
 
 - Hibridinė semantinė ir vektorinė paieška
 - Individualus indeksų valdymas
-- Išplėstinės paieškos galimybės
-- Reikalingas `USE_AZURE_AI_SEARCH_SERVICE=true`
+- Pažangios paieškos galimybės
+- Reikalauja `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Sekimas ir stebėjimas](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Sekimas ir stebėsena](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Norėdami tai atlikti, turime atlikti pakeitimus ir iš naujo diegti"
-
+!!! task "Norint tai atlikti, turime padaryti pakeitimus ir iš naujo diegti"    
+    
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
@@ -77,126 +68,128 @@ CO_OP_TRANSLATOR_METADATA:
 
 - OpenTelemetry integracija
 - Užklausų/atsakymų sekimas
-- Našumo metrikos
-- Prieinama AI Foundry portale
+- Veikimo metrikos
+- Prieinama Microsoft Foundry portale
 
-**Žurnalai:**
+**Žurnalavimas:**
 
-- Programos žurnalai Container Apps
-- Struktūrizuoti žurnalai su koreliacijos ID
-- Realiojo laiko ir istorinių žurnalų peržiūra
+- Programos žurnalai Container Apps aplinkoje
+- Struktūruotas žurnalavimas su koreliacijos ID
+- Realaus laiko ir istorinių žurnalų peržiūra
 
 ---
 
-## 5.4 [Agento vertinimas](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agentų vertinimas](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Vietinis vertinimas:**
 
-- Integruoti vertinimo įrankiai kokybės analizei
-- Individualūs vertinimo scenarijai
-- Našumo palyginimas
+- Įmontuoti vertintojai kokybės įvertinimui
+- Individualūs vertinimo skriptai
+- Veikimo našumo etalonavimas
 
-**Nuolatinis stebėjimas:**
+**Nuolatinė stebėsena:**
 
 - Automatinis gyvų sąveikų vertinimas
-- Kokybės metrikų stebėjimas
-- Našumo regresijos aptikimas
+- Kokybės metrų sekimas
+- Veikimo regresijos aptikimas
 
 **CI/CD integracija:**
 
 - GitHub Actions darbo eiga
-- Automatinis testavimas ir vertinimas
-- Statistinis palyginimo testavimas
+- Automatizuotas testavimas ir vertinimas
+- Statistinio palyginimo testavimas
 
 ---
 
-## 5.5 [AI saugumo patikrinimo agentas](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI saugumo patikrinimas:**
+**AI Red Teaming:**
 
-- Automatinis saugumo skenavimas
+- Automatizuotas saugumo skanavimas
 - Rizikos vertinimas AI sistemoms
-- Saugumo vertinimas įvairiose kategorijose
+- Saugumo vertinimas keliomis kategorijomis
 
 **Autentifikacija:**
 
-- Valdomas identitetas Azure paslaugoms
-- Pasirinktinė Azure App Service autentifikacija
-- Paprasta autentifikacija vystymo aplinkoje
+- Valdomoji tapatybė Azure paslaugoms
+- Neprivaloma Azure App Service autentifikacija
+- Paprastas autentifikacijos (basic auth) atsarginis variantas plėtojant
 
-!!! quote "BAIGĘ ŠIĄ LABORATORIJĄ TURĖTUMĖTE"
 
-    - [ ] Apibrėžti savo scenarijaus reikalavimus
-    - [ ] Pritaikyti aplinkos kintamuosius (konfigūracija)
-    - [ ] Pritaikyti agento instrukcijas (užduotis)
-    - [ ] Įdiegti pritaikytą šabloną (programa)
-    - [ ] Atlikti po diegimo užduotis (rankiniu būdu)
-    - [ ] Atlikti testavimo vertinimą
 
-Šis pavyzdys demonstruoja, kaip pritaikyti šabloną įmonės mažmeninės prekybos scenarijui su dviem specializuotais agentais ir keliais modelių diegimais.
+!!! quote "ŠIOS LABORATORIJOS PABAIGOJE TURĖTUMĖTE"
+    - [ ] Apibrėžėte savo scenarijaus reikalavimus
+    - [ ] Pritaikėte aplinkos kintamuosius (konfigūracija)
+    - [ ] Pritaikėte agento instrukcijas (užduotis)
+    - [ ] Išdiegėte pritaikytą šabloną (programa)
+    - [ ] Atlikote po diegimo užduotis (rankiniu būdu)
+    - [ ] Paleidote testinį vertinimą
+
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Pritaikykite sau!
+## 5.6 Pritaikykite tai savo poreikiams!
 
 ### 5.6.1. Scenarijaus reikalavimai
 
-#### **Agento diegimai:** 
+#### **Agent Deployments:** 
 
-   - Pirkėjo agentas: Padeda klientams rasti ir palyginti produktus
-   - Lojalumo agentas: Valdo klientų apdovanojimus ir akcijas
+   - Shopper Agent: Padeda klientams rasti ir palyginti produktus
+   - Loyalty Agent: Tvarko klientų atlygius ir akcijas
 
-#### **Modelių diegimai:**
+#### **Model Deployments:**
 
    - `gpt-4.1`: Pagrindinis pokalbių modelis
-   - `o3`: Modelis sudėtingiems užklausoms
+   - `o3`: Samprotavimo modelis sudėtingoms užklausoms
    - `gpt-4.1-nano`: Lengvas modelis paprastoms sąveikoms
    - `text-embedding-3-large`: Aukštos kokybės įterpimai paieškai
 
-#### **Funkcijos:**
+#### **Features:**
 
-   - Įjungtas sekimas ir stebėjimas
-   - AI paieška produktų katalogui
+   - Sekimas ir stebėsena įjungti
+   - AI Search produktų katalogui
    - Vertinimo sistema kokybės užtikrinimui
-   - Saugumo patikrinimas (red-teaming)
+   - Red teaming saugumo patikrai
 
 ---
 
 ### 5.6.2 Scenarijaus įgyvendinimas
 
-#### 5.6.2.1. Prieš diegimą konfigūracija
 
-Sukurkite nustatymo scenarijų (`setup-retail.sh`)
+#### 5.6.2.1. Priešdiegiama konfigūracija
+
+Sukurkite parengimo skriptą (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Nustatyti aplinkos pavadinimą
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Konfigūruokite regioną (rinkitės pagal modelio prieinamumą)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Įjungti visas neprivalomas paslaugas
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Konfigūruoti pagrindinį pokalbių modelį (gpt-4o yra artimiausias prieinamas gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Konfigūruoti įterpimų modelį geresnei paieškai
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Nustatyti agento pavadinimą (sukurs pirmąjį agentą)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Konfigūruoti paieškos indeksą
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -205,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Agento instrukcijos
+#### 5.6.2.2: Agentų instrukcijos
 
 Sukurkite `custom-agents/shopper-agent-instructions.md`:
 
@@ -255,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Diegimo scenarijus
+#### 5.6.2.3: Diegimo skriptas
 
 Sukurkite `deploy-retail.sh`:
 
@@ -265,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Patikrinti išankstines sąlygas
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -277,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Paruošti aplinką
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Patikrinti kvotą pasirinktame regione
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Diegti infrastruktūrą ir programą
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Užfiksuoti diegimo išvestis
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Gauti žiniatinklio programos URL
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -337,19 +330,19 @@ Sukurkite `configure-retail-agents.sh`:
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Gauti informacijos apie diegimą
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Nurodymai rankiniam konfigūravimui
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -385,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Testavimas ir validacija
+### 5.6.3: Testavimas ir patikra
 
 Sukurkite `test-retail-deployment.sh`:
 
@@ -394,11 +387,11 @@ Sukurkite `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Patikrinti, ar aplinkos kintamieji nustatyti
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# Patikrinti žiniatinklio programos prieinamumą
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Paleisti įvertinimą, jei sukonfigūruota
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -438,36 +431,40 @@ Next steps:
 
 ### 5.6.4 Tikėtini rezultatai
 
-Po šio įgyvendinimo vadovo turėsite:
+Įgyvendinę šį vadovą, turėsite:
 
-1. **Įdiegtą infrastruktūrą:**
+1. **Išdiegta infrastruktūra:**
 
-      - AI Foundry projektą su modelių diegimais
-      - Container Apps, talpinančias interneto programą
-      - AI paieškos paslaugą produktų katalogui
+      - Microsoft Foundry projektas su modelių diegimais
+      - Container Apps, talpinančios žiniatinklio programą
+      - AI Search paslauga produktų katalogui
       - Application Insights stebėjimui
 
-2. **Pradinį agentą:**
+2. **Pradinis agentas:**
 
-      - Pirkėjo agentą su pagrindinėmis instrukcijomis
-      - Įjungtą failų paieškos funkciją
-      - Konfigūruotą sekimą ir stebėjimą
+      - Shopper Agent sukonfigūruotas su pagrindinėmis instrukcijomis
+      - Įjungta failų paieškos galimybė
+      - Konfigūruotas sekimas ir stebėsena
 
-3. **Pasiruošimą pritaikymui:**
+3. **Paruošta pritaikymui:**
 
-      - Lojalumo agento pridėjimo sistemą
-      - Individualių instrukcijų šablonus
-      - Testavimo ir validacijos scenarijus
-      - Stebėjimo ir vertinimo nustatymus
+      - Pagrindas Loyalty Agent pridėjimui
+      - Pritaikomų instrukcijų šablonai
+      - Testavimo ir patikros skriptai
+      - Stebėjimo ir vertinimo nustatymai
 
-4. **Parengimą gamybai:**
+4. **Paruošta gamybai:**
 
-      - Saugumo skenavimą su red-teaming
-      - Našumo stebėjimą
-      - Kokybės vertinimo sistemą
-      - Skalabilią architektūrą
+      - Saugumo skenavimas su red teaming
+      - Veikimo stebėjimas
+      - Kokybės vertinimo sistema
+      - Skalės palaikanti architektūra
 
-Šis pavyzdys demonstruoja, kaip AZD šabloną galima išplėsti ir pritaikyti specifiniams įmonės scenarijams, laikantis geriausių saugumo, stebėjimo ir skalabilumo praktikų.
+Šis pavyzdys parodo, kaip AZD šablonas gali būti išplėstas ir pritaikytas konkretiems įmonės scenarijams, laikantis geriausių saugumo, stebėjimo ir skalavimo praktikų.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Atsakomybės apribojimas:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas gimtąja kalba turėtų būti laikomas pagrindiniu šaltiniu. Esant kritinei informacijai, rekomenduojame kreiptis į profesionalų vertėją. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

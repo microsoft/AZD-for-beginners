@@ -1,59 +1,50 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
-  "translation_date": "2025-11-18T19:03:14+00:00",
-  "source_file": "workshop/README.md",
-  "language_code": "pcm"
-}
--->
 <div align="center">
-  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+  <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🚧 Workshop Dey Under Construction 🚧
+      🎯 AZD for AI Developers Workshop
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Dis workshop still dey under active development.</strong><br>
-      E fit no complete or e fit change. Abeg check back later for updates!
+      <strong>Na hands-on workshop wey go show you how to build AI applications with Azure Developer CLI.</strong><br>
+      Finish 7 modules make you sabi AZD templates and how to deploy AI workflows.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Last Updated: October 2025
+        📅 Last Updated: February 2026
       </span>
     </div>
   </div>
 </div>
 
-# AZD Workshop for AI Developers
+# AZD for AI Developers Workshop
 
-Welcome to di hands-on workshop wey go teach you how to use Azure Developer CLI (AZD) to deploy AI applications. Dis workshop go help you sabi how to use AZD templates in 3 steps:
+Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop helps you gain an applied understanding of AZD templates in 3 steps:
 
-1. **Discovery** - find di template wey go fit you.
-1. **Deployment** - deploy am and confirm say e dey work.
-1. **Customization** - change am and make am your own!
+1. **Discovery** - find the template that is right for you.
+1. **Deployment** - deploy and validate that it works
+1. **Customization** - modify and iterate to make it yours!
 
-For dis workshop, you go also learn about di main developer tools and workflows wey go help you make your development journey smooth from start to finish.
+Over the course of this workshop, you will also be introduced to core developer tools and workflows, to help you streamline your end-to-end development journey.
 
 <br/>
 
 ## Browser-Based Guide
 
-Di workshop lessons dey for Markdown. You fit check dem directly for GitHub - or you fit open browser-based preview like di screenshot below.
+The workshop lessons are in Markdown. You can navigate them directly in GitHub - or launch a browser-based preview as shown in the screenshot below.
 
 ![Workshop](../../../translated_images/pcm/workshop.75906f133e6f8ba0.webp)
 
-To use dis option - fork di repository go your profile, then open GitHub Codespaces. Once di VS Code terminal don active, type dis command:
+To use this option - fork the repository to your profile, and launch GitHub Codespaces. Once the VS Code terminal is active, type this command:
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-After some seconds, you go see pop-up dialog. Select di option wey talk say `Open in browser`. Di web-based guide go open for new browser tab. Benefits of dis preview include:
+In a few seconds, you will see a pop-up dialog. Select the option to `Open in browser`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
 
-1. **Built-in search** - find keywords or lessons quick quick.
-1. **Copy icon** - hover over codeblocks to see di option.
-1. **Theme toggle** - switch between dark and light themes.
-1. **Get help** - click di Discord icon for footer to join!
+1. **Built-in search** - find keywords or lessons quickly.
+1. **Copy icon** - hover over codeblocks to see this option
+1. **Theme toggle** - switch between dark and light themes
+1. **Get help** - click the Discord icon in footer to join!
 
 <br/>
 
@@ -61,62 +52,62 @@ After some seconds, you go see pop-up dialog. Select di option wey talk say `Ope
 
 **Duration:** 3-4 hours  
 **Level:** Beginner to Intermediate  
-**Prerequisites:** You need to sabi Azure, AI concepts, VS Code & command-line tools.
+**Prerequisites:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
 
-Dis na hands-on workshop wey you go learn by doing. After you finish di exercises, we go recommend make you check di AZD For Beginners curriculum to continue your learning journey about Security and Productivity best practices.
+This na hands-on workshop wey you go learn by doing. When you finish the exercises, we recommend make you check the AZD For Beginners curriculum to continue your learning journey into Security and Productivity best practices.
 
 | Time| Module  | Objective |
 |:---|:---|:---|
-| 15 mins | [Introduction](docs/instructions/0-Introduction.md) | Understand di goals and set di stage |
-| 30 mins | [Select AI Template](docs/instructions/1-Select-AI-Template.md) | Explore options and choose starter | 
-| 30 mins | [Validate AI Template](docs/instructions/2-Validate-AI-Template.md) | Deploy default solution go Azure |
-| 30 mins | [Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | Check di structure and configuration |
-| 30 mins | [Configure AI Template](docs/instructions/4-Configure-AI-Template.md) | Activate and test di features wey dey |
-| 30 mins | [Customize AI Template](docs/instructions/5-Customize-AI-Template.md) | Change di template to fit your needs |
+| 15 mins | [Introduction](docs/instructions/0-Introduction.md) | Set di stage, sabi wetin we dey try achieve |
+| 30 mins | [Select AI Template](docs/instructions/1-Select-AI-Template.md) | Explore options and pick starter | 
+| 30 mins | [Validate AI Template](docs/instructions/2-Validate-AI-Template.md) | Deploy default solution to Azure |
+| 30 mins | [Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | Explore structure and configuration |
+| 30 mins | [Configure AI Template](docs/instructions/4-Configure-AI-Template.md) | Activate and try available features |
+| 30 mins | [Customize AI Template](docs/instructions/5-Customize-AI-Template.md) | Adapt the template to your needs |
 | 30 mins | [Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) | Cleanup and release resources |
 | 15 mins | [Wrap-Up & Next Steps](docs/instructions/7-Wrap-up.md) | Learning resources, Workshop challenge |
 
 <br/>
 
-## Wetin You Go Learn
+## What You'll Learn
 
-Think of di AZD Template as learning sandbox wey you fit use explore different tools and capabilities for end-to-end development on Azure AI Foundry. By di end of dis workshop, you go sabi di tools and concepts well well.
+Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
 
 | Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | Sabi di tool commands and workflows |
-| **AZD Templates**| Understand project structure and config |
-| **Azure AI Agent**| Provision & deploy Azure AI Foundry project  |
+| **Azure Developer CLI** | Understand tool commands and workflows|
+| **AZD Templates**| Understand project structure and config|
+| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
 | **Azure AI Search**| Enable context engineering with agents |
-| **Observability**| Check tracing, monitoring and evaluations |
-| **Red Teaming**| Test for adversarial issues and fix dem |
+| **Observability**| Explore tracing, monitoring and evaluations |
+| **Red Teaming**| Explore adversarial testing and mitigations |
 
 <br/>
 
 ## Workshop Structure
 
-Di workshop dey structured to carry you go from template discovery, to deployment, deconstruction, and customization - using di official [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template as di base.
+The workshop is structured to take you on a journey from template discovery, to deployment, deconstruction, and customization - using the official [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template as the basis.
 
 ### [Module 1: Select AI Template](docs/instructions/1-Select-AI-Template.md) (30 mins)
 
 - Wetin be AI Templates?
-- Where I fit find AI Templates?
-- How I fit start to build AI Agents?
+- Where you fit find AI Templates?
+- How you go take start to build AI Agents?
 - **Lab**: Quickstart with GitHub Codespaces
 
 ### [Module 2: Validate AI Template](docs/instructions/2-Validate-AI-Template.md) (30 mins)
 
-- Wetin be di AI Template Architecture?
-- Wetin be di AZD Development Workflow?
-- How I fit get help with AZD Development?
+- Wetin be the AI Template Architecture?
+- Wetin be the AZD Development Workflow?
+- How you fit get help with AZD Development?
 - **Lab**: Deploy & Validate AI Agents template
 
 ### [Module 3: Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
 
-- Check your environment for `.azure/` 
-- Check your resource setup for `infra/` 
-- Check your AZD configuration for `azure.yaml`s
-- **Lab**: Change Environment Variables & Redeploy
+- Explore your environment in `.azure/` 
+- Explore your resource setup in `infra/` 
+- Explore your AZD configuration in `azure.yaml`s
+- **Lab**: Modify Environment Variables & Redeploy
 
 ### [Module 4: Configure AI Template](docs/instructions/4-Configure-AI-Template.md) (30 mins)
 - Explore: Retrieval Augmented Generation
@@ -131,50 +122,50 @@ Di workshop dey structured to carry you go from template discovery, to deploymen
 - **Lab**: Customize template for my scenario
 
 ### [Module 6: Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
-- Recap: Wetin be AZD Templates?
-- Recap: Why I go use Azure Developer CLI?
-- Next Steps: Try another template!
+- Recap: What are AZD Templates?
+- Recap: Why use Azure Developer CLI?
+- Next Steps: Try a different template!
 - **Lab**: Deprovision infrastructure & cleanup
 
 <br/>
 
 ## Workshop Challenge
 
-You wan challenge yourself do more? Check dis project suggestions - or share your ideas with us!!
+Wey you wan challenge yourself do more? Here be some project ideas - or share your own ideas with us!!
 
 | Project | Description |
 |:---|:---|
-|1. **Deconstruct A Complex AI Template** | Use di workflow and tools wey we talk about and see if you fit deploy, validate, and customize another AI solution template. _Wetin you learn?_|
-|2. **Customize With Your Scenario**  | Try write PRD (Product Requirements Document) for another scenario. Then use GitHub Copilot for your template repo in Agent Model - and ask am to generate customization workflow for you. _Wetin you learn? How you fit improve di suggestions?_|
+|1. **Deconstruct A Complex AI Template** | Use the workflow and tools we outline make you try deploy, validate, and customize another AI solution template. _Wetin you learn?_|
+|2. **Customize With Your Scenario**  | Try write PRD (Product Requirements Document) for another scenario. Then use GitHub Copilot inside your template repo for Agent Model - and ask am to generate a customization workflow for you. _Wetin you learn? How you fit improve these ideas?_|
 | | |
 
-## You Get Feedback?
+## Have feedback?
 
-1. Post issue for dis repo - tag am `Workshop` for easy identification.
-1. Join di Azure AI Foundry Discord - connect with your peers!
+1. Post an issue on this repo - tag am `Workshop` so e go easy.
+1. Join the Microsoft Foundry Discord - connect with other people like you!
 
 
 | | | 
 |:---|:---|
 | **📚 Course Home**| [AZD For Beginners](../README.md)|
 | **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Azure AI Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](../../../workshop) |
+| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 Next Steps** | [Begin Workshop](../../../workshop) |
 | | |
 
 <br/>
 
 ---
 
-**Previous:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Next:** Start with [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
+**Navigation:** [Main Course](../README.md) | [Introduction](docs/instructions/0-Introduction.md) | [Module 1: Select Template](docs/instructions/1-Select-AI-Template.md)
 
-**Ready to start to build AI applications with AZD?**
+**Ready to start building AI applications with AZD?**
 
-[Start Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
+[Begin Workshop: Introduction →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg make you sabi say automated translations fit get mistake or no dey correct well. Di original dokyument for di native language na di main source wey you go trust. For important information, e better make professional human translation dey use. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Disclaimer:
+Dis document na AI translation dem use translate (Co‑op Translator: https://github.com/Azure/co-op-translator). We dey try make everything correct, but abeg note say automated translation fit get mistakes or wrong sense. The original document for im original language na the authority one. If na serious matter, make you use professional human translator. We no dey responsible for any misunderstanding or wrong interpretation wey fit come from this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

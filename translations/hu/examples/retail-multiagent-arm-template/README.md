@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-23T10:21:33+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "hu"
-}
--->
 # Kiskereskedelmi Többügynökös Megoldás - Infrastruktúra Sablon
 
 **5. fejezet: Éles telepítési csomag**

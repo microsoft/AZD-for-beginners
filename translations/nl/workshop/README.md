@@ -1,44 +1,35 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
-  "translation_date": "2025-10-16T15:56:28+00:00",
-  "source_file": "workshop/README.md",
-  "language_code": "nl"
-}
--->
 <div align="center">
-  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+  <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🚧 Workshop in ontwikkeling 🚧
+      🎯 AZD-workshop voor AI-ontwikkelaars
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Deze workshop is momenteel in actieve ontwikkeling.</strong><br>
-      De inhoud kan incompleet zijn of nog veranderen. Kom binnenkort terug voor updates!
+      <strong>Een praktijkgerichte workshop voor het bouwen van AI-toepassingen met Azure Developer CLI.</strong><br>
+      Voltooi 7 modules om AZD-sjablonen en AI-implementatieworkflows te beheersen.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Laatst bijgewerkt: oktober 2025
+        📅 Laatst bijgewerkt: februari 2026
       </span>
     </div>
   </div>
 </div>
 
-# AZD voor AI Developers Workshop
+# AZD-workshop voor AI-ontwikkelaars
 
-Welkom bij de praktische workshop om Azure Developer CLI (AZD) te leren, met een focus op het implementeren van AI-toepassingen. Deze workshop helpt je een praktische kennis op te doen van AZD-sjablonen in 3 stappen:
+Welkom bij de praktische workshop voor het leren van Azure Developer CLI (AZD) met een focus op het uitrollen van AI-toepassingen. Deze workshop helpt je een toegepaste begrip van AZD-sjablonen te krijgen in 3 stappen:
 
-1. **Ontdekken** - vind het sjabloon dat bij jou past.
-1. **Implementeren** - implementeer en controleer of het werkt.
-1. **Aanpassen** - wijzig en pas aan om het eigen te maken!
+1. **Ontdekking** - vind het sjabloon dat bij je past.
+1. **Implementatie** - implementeer en controleer dat het werkt
+1. **Aanpassing** - pas het aan en blijf itereren om het eigen te maken!
 
-Tijdens deze workshop maak je ook kennis met essentiële ontwikkeltools en workflows, die je helpen je end-to-end ontwikkelproces te stroomlijnen.
+Tijdens deze workshop word je ook geïntroduceerd in kernontwikkelaarstools en workflows, om je end-to-end ontwikkeltraject te stroomlijnen.
 
 <br/>
 
-## Browser-gebaseerde gids
+## Browsergebaseerde gids
 
-De workshoplessen zijn in Markdown. Je kunt ze direct in GitHub bekijken - of een browser-gebaseerde preview starten zoals weergegeven in de onderstaande screenshot.
+De workshoplessen zijn in Markdown. Je kunt ze rechtstreeks in GitHub doorlopen - of een browsergebaseerde preview starten zoals weergegeven in de screenshot hieronder.
 
 ![Workshop](../../../translated_images/nl/workshop.75906f133e6f8ba0.webp)
 
@@ -48,131 +39,133 @@ Om deze optie te gebruiken - fork de repository naar je profiel en start GitHub 
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-Na een paar seconden verschijnt er een pop-updialoog. Selecteer de optie `Open in browser`. De webgebaseerde gids opent nu in een nieuw browsertabblad. Enkele voordelen van deze preview:
+Binnen een paar seconden zie je een pop-upvenster. Selecteer de optie `Openen in browser`. De webgebaseerde gids wordt nu geopend in een nieuw browsertabblad. Enkele voordelen van deze preview:
 
 1. **Ingebouwde zoekfunctie** - vind snel trefwoorden of lessen.
-1. **Kopieer-icoon** - beweeg over codeblokken om deze optie te zien.
-1. **Thema wisselen** - schakel tussen donkere en lichte thema's.
-1. **Hulp krijgen** - klik op het Discord-icoon in de footer om mee te doen!
+1. **Kopieericoon** - beweeg de muis over codeblokken om deze optie te zien
+1. **Thema-schakelaar** - wissel tussen donkere en lichte thema's
+1. **Krijg hulp** - klik op het Discord-pictogram in de voettekst om mee te doen!
 
 <br/>
 
-## Workshopoverzicht
+## Overzicht van de workshop
 
 **Duur:** 3-4 uur  
-**Niveau:** Beginner tot gemiddeld  
-**Vereisten:** Basiskennis van Azure, AI-concepten, VS Code & command-line tools.
+**Niveau:** Beginner tot Gevorderd  
+**Vereisten:** Bekendheid met Azure, AI-concepten, VS Code & commandoregeltools.
 
-Dit is een praktische workshop waarin je leert door te doen. Nadat je de oefeningen hebt voltooid, raden we aan om de AZD For Beginners-cursus te bekijken om je leertraject voort te zetten met beveiliging en productiviteitsbest practices.
+Dit is een praktijkgerichte workshop waarin je leert door te doen. Zodra je de oefeningen hebt voltooid, raden we aan de AZD For Beginners-curriculum te bekijken om je leertraject voort te zetten richting beveiliging en productiviteitsbest practices.
 
-| Tijd | Module  | Doelstelling |
+| Tijd| Module  | Doel |
 |:---|:---|:---|
-| 15 min | [Introductie](docs/instructions/0-Introduction.md) | De basis leggen, doelen begrijpen |
-| 30 min | [Selecteer AI-sjabloon](docs/instructions/1-Select-AI-Template.md) | Opties verkennen en starter kiezen | 
-| 30 min | [Valideer AI-sjabloon](docs/instructions/2-Validate-AI-Template.md) | Standaardoplossing implementeren in Azure |
-| 30 min | [Ontleed AI-sjabloon](docs/instructions/3-Deconstruct-AI-Template.md) | Structuur en configuratie verkennen |
-| 30 min | [Configureer AI-sjabloon](docs/instructions/4-Configure-AI-Template.md) | Functies activeren en uitproberen |
-| 30 min | [Pas AI-sjabloon aan](docs/instructions/5-Customize-AI-Template.md) | Sjabloon aanpassen aan jouw behoeften |
-| 30 min | [Infrastructuur afbreken](docs/instructions/6-Teardown-Infrastructure.md) | Opruimen en middelen vrijmaken |
-| 15 min | [Afronding & Volgende stappen](docs/instructions/7-Wrap-up.md) | Leermiddelen, workshopuitdaging |
+| 15 min | [Introductie](docs/instructions/0-Introduction.md) | De context schetsen en de doelstellingen begrijpen |
+| 30 min | [Selecteer AI-sjabloon](docs/instructions/1-Select-AI-Template.md) | Verken opties en kies een starter | 
+| 30 min | [Valideer AI-sjabloon](docs/instructions/2-Validate-AI-Template.md) | Implementeer de standaardoplossing in Azure |
+| 30 min | [Deconstrueer AI-sjabloon](docs/instructions/3-Deconstruct-AI-Template.md) | Verken structuur en configuratie |
+| 30 min | [Configureer AI-sjabloon](docs/instructions/4-Configure-AI-Template.md) | Activeer en probeer beschikbare functies |
+| 30 min | [Personaliseer AI-sjabloon](docs/instructions/5-Customize-AI-Template.md) | Pas het sjabloon aan op jouw behoeften |
+| 30 min | [Opruimen infrastructuur](docs/instructions/6-Teardown-Infrastructure.md) | Opruimen en vrijgeven van resources |
+| 15 min | [Afronding & vervolgstappen](docs/instructions/7-Wrap-up.md) | Leermiddelen, workshopuitdaging |
 
 <br/>
 
-## Wat je leert
+## Wat je zult leren
 
-Zie het AZD-sjabloon als een leeromgeving om verschillende mogelijkheden en tools te verkennen voor end-to-end ontwikkeling op Azure AI Foundry. Aan het einde van deze workshop heb je een intuïtief begrip van verschillende tools en concepten in deze context.
+Beschouw het AZD-sjabloon als een leersandbox om verschillende mogelijkheden en tools voor end-to-end ontwikkeling op Microsoft Foundry te verkennen. Aan het einde van deze workshop zou je een intuïtief gevoel moeten hebben voor verschillende tools en concepten in deze context.
 
-| Concept  | Doelstelling |
+| Concept  | Doel |
 |:---|:---|
-| **Azure Developer CLI** | Begrijp toolcommando's en workflows |
-| **AZD-sjablonen** | Begrijp projectstructuur en configuratie |
-| **Azure AI Agent** | Voorzie & implementeer Azure AI Foundry-project |
-| **Azure AI Search** | Context engineering met agents inschakelen |
-| **Observability** | Tracing, monitoring en evaluaties verkennen |
-| **Red Teaming** | Adversarial testing en mitigaties verkennen |
+| **Azure Developer CLI** | Begrijp commando's en workflows van de tool|
+| **AZD Templates**| Begrijp projectstructuur en configuratie|
+| **Azure AI Agent**| Provisioning en implementatie van een Microsoft Foundry-project  |
+| **Azure AI Search**| Context-engineering met agenten mogelijk maken |
+| **Observability**| Verken tracing, monitoring en evaluaties |
+| **Red Teaming**| Verken adversarial testen en mitigaties |
 
 <br/>
 
-## Workshopstructuur
+## Structuur van de workshop
 
-De workshop is gestructureerd om je mee te nemen op een reis van het ontdekken van sjablonen, naar implementatie, ontleding en aanpassing - met gebruik van de officiële [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter-sjabloon als basis.
+De workshop is zo opgezet dat je een traject doorloopt van sjabloonontdekking, naar implementatie, deconstructie en personalisatie - met het officiële [Aan de slag met AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter-sjabloon als basis.
 
-### [Module 1: Selecteer AI-sjabloon](docs/instructions/1-Select-AI-Template.md) (30 min)
+### [Module 1: Selecteer AI-sjabloon](docs/instructions/1-Select-AI-Template.md) (30 mins)
 
 - Wat zijn AI-sjablonen?
 - Waar kan ik AI-sjablonen vinden?
-- Hoe kan ik beginnen met het bouwen van AI Agents?
-- **Lab**: Snelle start met GitHub Codespaces
+- Hoe kan ik beginnen met het bouwen van AI-agenten?
+- **Lab**: Snelstart met GitHub Codespaces
 
-### [Module 2: Valideer AI-sjabloon](docs/instructions/2-Validate-AI-Template.md) (30 min)
+### [Module 2: Valideer AI-sjabloon](docs/instructions/2-Validate-AI-Template.md) (30 mins)
 
 - Wat is de architectuur van het AI-sjabloon?
 - Wat is de AZD-ontwikkelworkflow?
 - Hoe kan ik hulp krijgen bij AZD-ontwikkeling?
-- **Lab**: Implementeer & valideer AI Agents-sjabloon
+- **Lab**: Implementeer & valideer het AI Agents-sjabloon
 
-### [Module 3: Ontleed AI-sjabloon](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
+### [Module 3: Deconstrueer AI-sjabloon](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
 
 - Verken je omgeving in `.azure/` 
-- Verken je resource setup in `infra/` 
+- Verken je resource-setup in `infra/` 
 - Verken je AZD-configuratie in `azure.yaml`s
-- **Lab**: Wijzig omgevingsvariabelen & herimplementeer
+- **Lab**: Wijzig omgevingsvariabelen & implementeer opnieuw
 
-### [Module 4: Configureer AI-sjabloon](docs/instructions/4-Configure-AI-Template.md) (30 min)
+### [Module 4: Configureer AI-sjabloon](docs/instructions/4-Configure-AI-Template.md) (30 mins)
 - Verken: Retrieval Augmented Generation
-- Verken: Agent Evaluatie & Red Teaming
+- Verken: Agent-evaluatie & Red Teaming
 - Verken: Tracing & Monitoring
-- **Lab**: Verken AI Agent + Observability 
+- **Lab**: Verken AI-agent + observeerbaarheid 
 
-### [Module 5: Pas AI-sjabloon aan](docs/instructions/5-Customize-AI-Template.md) (30 min)
+### [Module 5: Personaliseer AI-sjabloon](docs/instructions/5-Customize-AI-Template.md) (30 mins)
 - Definieer: PRD met scenariovereisten
-- Configureer: Omgevingsvariabelen voor AZD
-- Implementeer: Lifecycle Hooks voor extra taken
-- **Lab**: Pas sjabloon aan voor mijn scenario
+- Configureer: omgevingsvariabelen voor AZD
+- Implementeer: levenscyclus-hooks voor extra taken
+- **Lab**: Personaliseer sjabloon voor mijn scenario
 
-### [Module 6: Breek infrastructuur af](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+### [Module 6: Opruimen infrastructuur](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
 - Samenvatting: Wat zijn AZD-sjablonen?
 - Samenvatting: Waarom Azure Developer CLI gebruiken?
 - Volgende stappen: Probeer een ander sjabloon!
-- **Lab**: Deprovision infrastructuur & opruimen
+- **Lab**: Deprovision infrastructuur & opschonen
 
 <br/>
 
-## Workshopuitdaging
+## Workshop-uitdaging
 
-Wil je jezelf uitdagen om meer te doen? Hier zijn enkele projectvoorstellen - of deel je ideeën met ons!!
+Wil je jezelf meer uitdagen? Hier zijn enkele projectvoorstellen - of deel je ideeën met ons!!
 
 | Project | Beschrijving |
 |:---|:---|
-|1. **Ontleed een complex AI-sjabloon** | Gebruik de workflow en tools die we hebben beschreven en kijk of je een ander AI-oplossingssjabloon kunt implementeren, valideren en aanpassen. _Wat heb je geleerd?_|
-|2. **Pas aan met jouw scenario**  | Probeer een PRD (Product Requirements Document) te schrijven voor een ander scenario. Gebruik vervolgens GitHub Copilot in je sjabloonrepo in Agent Model - en vraag het om een aanpassingsworkflow voor je te genereren. _Wat heb je geleerd? Hoe kun je deze suggesties verbeteren?_|
+|1. **Deconstrueer een complex AI-sjabloon** | Gebruik de workflow en tools die we hebben beschreven en kijk of je een ander AI-oplossingssjabloon kunt implementeren, valideren en aanpassen. _Wat heb je geleerd?_|
+|2. **Personaliseer met jouw scenario**  | Probeer een PRD (Product Requirements Document) te schrijven voor een ander scenario. Gebruik vervolgens GitHub Copilot in je sjabloonrepo in Agent Model - en vraag het om een personalisatieworkflow voor je te genereren. _Wat heb je geleerd? Hoe zou je deze suggesties kunnen verbeteren?_|
 | | |
 
-## Feedback geven?
+## Feedback?
 
-1. Plaats een issue op deze repo - tag het `Workshop` voor gemak.
-1. Doe mee met de Azure AI Foundry Discord - verbind met je peers!
+1. Plaats een issue in deze repo - tag het met `Workshop` voor het gemak.
+1. Word lid van de Microsoft Foundry Discord - verbind met je collega’s!
 
 
 | | | 
 |:---|:---|
-| **📚 Cursus Home**| [AZD For Beginners](../README.md)|
-| **📖 Documentatie** | [Aan de slag met AI-sjablonen](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI-sjablonen** | [Azure AI Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Volgende stappen** | [Neem de uitdaging aan](../../../workshop) |
+| **📚 Course Home**| [AZD voor Beginners](../README.md)|
+| **📖 Documentation** | [Aan de slag met AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Templates** | [Microsoft Foundry-sjablonen](https://ai.azure.com/templates) |
+|**🚀 Next Steps** | [Begin workshop](../../../workshop) |
 | | |
 
 <br/>
 
 ---
 
-**Vorige:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **Volgende:** Begin met [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
+**Navigatie:** [Hoofdcursus](../README.md) | [Introductie](docs/instructions/0-Introduction.md) | [Module 1: Selecteer sjabloon](docs/instructions/1-Select-AI-Template.md)
 
-**Klaar om te beginnen met het bouwen van AI-toepassingen met AZD?**
+**Klaar om AI-toepassingen te gaan bouwen met AZD?**
 
-[Begin Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
+[Begin Workshop: Introductie →](docs/instructions/0-Introduction.md)
 
 ---
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Disclaimer:
+Dit document is vertaald met behulp van de AI-vertalingsservice Co-op Translator (https://github.com/Azure/co-op-translator). Hoewel wij naar nauwkeurigheid streven, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onjuistheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

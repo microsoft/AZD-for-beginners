@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "763a733399ea9f55f6418d1efe13c12b",
-  "translation_date": "2025-11-24T21:06:22+00:00",
-  "source_file": "CODE_OF_CONDUCT.md",
-  "language_code": "kn"
-}
--->
 # ಮೈಕ್ರೋಸಾಫ್ಟ್ ಓಪನ್ ಸೋರ್ಸ್ ನಡವಳಿಕೆ ನಿಯಮಾವಳಿ
 
 ಈ ಯೋಜನೆ [ಮೈಕ್ರೋಸಾಫ್ಟ್ ಓಪನ್ ಸೋರ್ಸ್ ನಡವಳಿಕೆ ನಿಯಮಾವಳಿ](https://opensource.microsoft.com/codeofconduct/) ಅನ್ನು ಅಳವಡಿಸಿಕೊಂಡಿದೆ.

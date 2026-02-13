@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-24T14:57:42+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "ta"
-}
--->
 # Azure OpenAI Chat பயன்பாடு
 
 **கற்றல் பாதை:** நடுத்தர ⭐⭐ | **நேரம்:** 35-45 நிமிடங்கள் | **செலவு:** $50-200/மாதம்

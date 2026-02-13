@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T21:38:28+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "th"
-}
--->
 # 4. กำหนดค่าเทมเพลต
 
-!!! tip "เมื่อจบโมดูลนี้ คุณจะสามารถ"
+!!! tip "เมื่อสิ้นสุดโมดูลนี้คุณจะสามารถ"
 
     - [ ] เข้าใจวัตถุประสงค์ของ `azure.yaml`
     - [ ] เข้าใจโครงสร้างของ `azure.yaml`
-    - [ ] เข้าใจคุณค่าของ `hooks` ในวงจรชีวิตของ azd
-    - [ ] **Lab 3:** 
+    - [ ] เข้าใจคุณค่าของ azd lifecycle `hooks`
+    - [ ] **แลป 4:** สำรวจและแก้ไขตัวแปรสภาพแวดล้อม
 
 ---
 
-!!! prompt "ไฟล์ `azure.yaml` ทำหน้าที่อะไร? ใช้ codefence และอธิบายทีละบรรทัด"
+!!! prompt "ไฟล์ `azure.yaml` ทำหน้าที่อะไร? ใช้โค้ดเฟ้นซ์และอธิบายบรรทัดต่อบรรทัด"
 
-      ไฟล์ `azure.yaml` คือ **ไฟล์การตั้งค่าของ Azure Developer CLI (azd)** ซึ่งกำหนดวิธีการที่แอปพลิเคชันของคุณจะถูกปรับใช้ใน Azure รวมถึงโครงสร้างพื้นฐาน บริการ hooks การปรับใช้ และตัวแปรสภาพแวดล้อม
+      ไฟล์ `azure.yaml` คือ **ไฟล์กำหนดค่าสำหรับ Azure Developer CLI (azd)** ซึ่งกำหนดวิธีการที่แอปพลิเคชันของคุณควรถูกปรับใช้ไปยัง Azure รวมถึงโครงสร้างพื้นฐาน บริการ กฎล็อคการปรับใช้ และตัวแปรสภาพแวดล้อม
 
 ---
 
-## 1. วัตถุประสงค์และการทำงาน
+## 1. วัตถุประสงค์และฟังก์ชันการทำงาน
 
-ไฟล์ `azure.yaml` นี้ทำหน้าที่เป็น **แผนการปรับใช้** สำหรับแอปพลิเคชัน AI agent ที่:
+ไฟล์ `azure.yaml` นี้ทำหน้าที่เป็น **แผนผังการปรับใช้** สำหรับแอปพลิเคชันตัวแทน AI ที่:
 
 1. **ตรวจสอบสภาพแวดล้อม** ก่อนการปรับใช้
-2. **จัดเตรียมบริการ Azure AI** (AI Hub, AI Project, Search ฯลฯ)
-3. **ปรับใช้แอปพลิเคชัน Python** ไปยัง Azure Container Apps
-4. **ตั้งค่าโมเดล AI** สำหรับการใช้งานทั้งการสนทนาและการฝังข้อมูล
-5. **ตั้งค่าการตรวจสอบและการติดตาม** สำหรับแอปพลิเคชัน AI
-6. **รองรับทั้งโครงการ Azure AI ใหม่และที่มีอยู่**
+2. **จัดเตรียมบริการ AI ของ Azure** (AI Hub, AI Project, Search ฯลฯ)
+3. **ปรับใช้แอปพลิเคชัน Python** ลงใน Azure Container Apps
+4. **กำหนดค่าโมเดล AI** สำหรับทั้งฟังก์ชันการแชทและฝังตัว
+5. **ตั้งค่าการติดตามและตรวจสอบ** สำหรับแอป AI
+6. **รองรับสถานการณ์โปรเจ็กต์ AI ของ Azure ทั้งใหม่และที่มีอยู่**
 
-ไฟล์นี้ช่วยให้สามารถปรับใช้โซลูชัน AI agent ได้ด้วย **คำสั่งเดียว** (`azd up`) พร้อมการตรวจสอบ การจัดเตรียม และการตั้งค่าหลังการปรับใช้อย่างเหมาะสม
+ไฟล์นี้ช่วยให้การปรับใช้โซลูชันตัวแทน AI อย่างครบถ้วนด้วยคำสั่งเดียว (`azd up`) ด้วยการตรวจสอบ จัดเตรียม และตั้งค่าหลังการปรับใช้อย่างเหมาะสม
 
-??? info "คลิกเพื่อดู: `azure.yaml`"
+??? info "ขยายเพื่อดู: `azure.yaml`"
 
-      ไฟล์ `azure.yaml` กำหนดวิธีที่ Azure Developer CLI จะปรับใช้และจัดการแอปพลิเคชัน AI Agent นี้ใน Azure มาดูรายละเอียดทีละบรรทัดกัน
+      ไฟล์ `azure.yaml` กำหนดวิธีที่ Azure Developer CLI ควรปรับใช้และจัดการแอปตัวแทน AI นี้ใน Azure มาลงรายละเอียดทีละบรรทัดกัน
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: เราต้องการ hooks หรือไม่?
-      # TODO: เราต้องการตัวแปรทั้งหมดหรือไม่?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,19 +126,19 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## 2. การวิเคราะห์ไฟล์
+## 2. การแยกวิเคราะห์ไฟล์
 
-มาดูไฟล์นี้ทีละส่วนเพื่อทำความเข้าใจว่ามันทำอะไรและทำไม
+มาดูไฟล์เป็นส่วนๆ เพื่อทำความเข้าใจว่าทำอะไร และเพราะเหตุใด
 
-### 2.1 **ส่วนหัวและ Schema (1-3)**
+### 2.1 **ส่วนหัวและสคีมา (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **บรรทัดที่ 1**: ให้การตรวจสอบ schema ของ YAML language server เพื่อรองรับ IDE และ IntelliSense
+- **บรรทัดที่ 1**: ให้ YAML language server ใช้ตรวจสอบสคีมาสำหรับสนับสนุน IDE และ IntelliSense
 
-### 2.2 ข้อมูลเมตาของโปรเจกต์ (5-10)
+### 2.2 ข้อมูลเมทาดาท้าของโปรเจ็กต์ (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **บรรทัดที่ 5**: กำหนดชื่อโปรเจกต์ที่ใช้โดย Azure Developer CLI
-- **บรรทัดที่ 6-7**: ระบุว่าใช้เทมเพลตเวอร์ชัน 1.0.2
+- **บรรทัดที่ 5**: กำหนดชื่อโปรเจ็กต์ที่ Azure Developer CLI ใช้
+- **บรรทัดที่ 6-7**: กำหนดว่าใช้เทมเพลตเวอร์ชัน 1.0.2
 - **บรรทัดที่ 8-9**: ต้องการ Azure Developer CLI เวอร์ชัน 1.14.0 หรือสูงกว่า
 
-### 2.3 Deploy Hooks (11-40)
+### 2.3 ตะขอปรับใช้ (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **บรรทัดที่ 11-20**: **Pre-deployment hook** - รันก่อน `azd up`
+- **บรรทัดที่ 11-20**: **ตะขอก่อนปรับใช้** - ทำงานก่อน `azd up`
 
-      - บน Unix/Linux: ทำให้สคริปต์การตรวจสอบสามารถรันได้และรันสคริปต์นั้น
-      - บน Windows: รันสคริปต์ PowerShell สำหรับการตรวจสอบ
-      - ทั้งสองแบบเป็นแบบ interactive และจะหยุดการปรับใช้หากล้มเหลว
+      - บน Unix/Linux: ทำให้สคริปต์ตรวจสอบตัวแปรสภาพแวดล้อมสามารถรันได้แล้วรันมัน
+      - บน Windows: รันสคริปต์ PowerShell เพื่อตรวจสอบ
+      - ทั้งคู่เป็นแบบโต้ตอบ และจะหยุดกระบวนการถ้าล้มเหลว
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **บรรทัดที่ 21-30**: **Post-provision hook** - รันหลังจากสร้างทรัพยากร Azure
+- **บรรทัดที่ 21-30**: **ตะขอหลังจัดเตรียม** - ทำงานหลังจากสร้างทรัพยากร Azure เสร็จ
 
-  - รันสคริปต์การเขียนตัวแปรสภาพแวดล้อม
-  - ดำเนินการปรับใช้ต่อแม้ว่าสคริปต์จะล้มเหลว (`continueOnError: true`)
+  - รันสคริปต์เขียนตัวแปรสภาพแวดล้อม
+  - ยังคงดำเนินการต่อแม้ว่าสคริปต์เหล่านี้จะล้มเหลว (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **บรรทัดที่ 31-40**: **Post-deploy hook** - รันหลังจากปรับใช้แอปพลิเคชัน
+- **บรรทัดที่ 31-40**: **ตะขอหลังปรับใช้** - ทำงานหลังปรับใช้แอปพลิเคชันเสร็จ
 
-  - รันสคริปต์การตั้งค่าขั้นสุดท้าย
-  - ดำเนินการต่อแม้ว่าสคริปต์จะล้มเหลว
+  - รันสคริปต์ตั้งค่าสุดท้าย
+  - ดำเนินการต่อแม้ว่าสคริปต์ล้มเหลว
 
-### 2.4 การตั้งค่าบริการ (41-48)
+### 2.4 ตั้งค่าบริการ (41-48)
 
-ส่วนนี้กำหนดค่าบริการแอปพลิเคชันที่คุณกำลังปรับใช้
+ส่วนนี้กำหนดการตั้งค่าบริการแอปพลิเคชันที่คุณจะปรับใช้
 
 ```yaml title="" linenums="0"
 services:
@@ -236,17 +227,17 @@ services:
 ```
 
 - **บรรทัดที่ 42**: กำหนดบริการชื่อ "api_and_frontend"
-- **บรรทัดที่ 43**: ชี้ไปที่ไดเรกทอรี `./src` สำหรับซอร์สโค้ด
-- **บรรทัดที่ 44**: ระบุว่าใช้ Python เป็นภาษาการเขียนโปรแกรม
-- **บรรทัดที่ 45**: ใช้ Azure Container Apps เป็นแพลตฟอร์มโฮสต์
-- **บรรทัดที่ 46-48**: การตั้งค่า Docker
+- **บรรทัดที่ 43**: ชี้ไปยังไดเรกทอรี `./src` สำหรับซอร์สโค้ด
+- **บรรทัดที่ 44**: ระบุภาษาโปรแกรมเป็น Python
+- **บรรทัดที่ 45**: ใช้ Azure Container Apps เป็นโฮสต์
+- **บรรทัดที่ 46-48**: ตั้งค่า Docker
 
-      - ใช้ "api_and_frontend" เป็นชื่อภาพ
-      - สร้างภาพ Docker ใน Azure (ไม่ใช่ในเครื่อง)
+      - ใช้ชื่ออิมเมจ "api_and_frontend"
+      - สร้างอิมเมจ Docker จากระยะไกลบน Azure (ไม่ใช่ท้องถิ่น)
 
 ### 2.5 ตัวแปร Pipeline (49-76)
 
-ตัวแปรเหล่านี้ช่วยให้คุณรัน `azd` ใน CI/CD pipelines เพื่อการทำงานอัตโนมัติ
+ตัวแปรเหล่านี้ช่วยให้คุณใช้ `azd` ใน pipeline CI/CD เพื่อทำให้เป็นอัตโนมัติ
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-ส่วนนี้กำหนดตัวแปรสภาพแวดล้อมที่ใช้ **ระหว่างการปรับใช้** โดยจัดหมวดหมู่ดังนี้:
+ส่วนนี้กำหนดตัวแปรสภาพแวดล้อมที่ใช้ **ระหว่างการปรับใช้** แบ่งตามประเภท:
 
 - **ชื่อทรัพยากร Azure (บรรทัดที่ 51-60)**:
       - ชื่อทรัพยากรบริการหลักของ Azure เช่น Resource Group, AI Hub, AI Project ฯลฯ
-- **Feature Flags (บรรทัดที่ 61-63)**:
-      - ตัวแปร Boolean เพื่อเปิด/ปิดบริการ Azure เฉพาะ
-- **การตั้งค่า AI Agent (บรรทัดที่ 64-71)**:
-      - การตั้งค่าสำหรับ AI agent หลัก รวมถึงชื่อ, ID, การตั้งค่าการปรับใช้, รายละเอียดโมเดล
-- **การตั้งค่า AI Embedding (บรรทัดที่ 72-79)**:
-      - การตั้งค่าสำหรับโมเดล embedding ที่ใช้สำหรับการค้นหาแบบเวกเตอร์
+- **ตัวควบคุมฟีเจอร์ (บรรทัดที่ 61-63)**:
+      - ตัวแปรบูลีนเพื่อเปิด/ปิดบริการ Azure เฉพาะ
+- **การตั้งค่าตัวแทน AI (บรรทัดที่ 64-71)**:
+      - การตั้งค่าสำหรับตัวแทน AI หลัก เช่น ชื่อ, ID, การตั้งค่าปรับใช้, รายละเอียดโมเดล
+- **การตั้งค่าฝังตัว AI (บรรทัดที่ 72-79)**:
+      - การตั้งค่าสำหรับโมเดลฝังตัวที่ใช้ในการค้นหาด้วยเวกเตอร์
 - **การค้นหาและการตรวจสอบ (บรรทัดที่ 80-84)**:
-      - ชื่อดัชนีการค้นหา, ID ทรัพยากรที่มีอยู่, และการตั้งค่าการตรวจสอบ/การติดตาม
+      - ชื่อดัชนีการค้นหา, ID ทรัพยากรที่มีอยู่, และการตั้งค่าการติดตาม/ตรวจสอบ
 
 ---
 
-## 3. รู้จักตัวแปรสภาพแวดล้อม
-ตัวแปรสภาพแวดล้อมต่อไปนี้ควบคุมการตั้งค่าและพฤติกรรมของการปรับใช้ของคุณ โดยจัดหมวดหมู่ตามวัตถุประสงค์หลัก ตัวแปรส่วนใหญ่มีค่าเริ่มต้นที่เหมาะสม แต่คุณสามารถปรับแต่งให้ตรงกับความต้องการเฉพาะหรือทรัพยากร Azure ที่มีอยู่
+## 3. ตัวแปรสภาพแวดล้อมที่ควรรู้
+ตัวแปรสภาพแวดล้อมต่อไปนี้ควบคุมการกำหนดค่าและพฤติกรรมการปรับใช้ของคุณ โดยจัดกลุ่มตามวัตถุประสงค์หลัก ตัวแปรส่วนใหญ่มีค่าเริ่มต้นที่สมเหตุสมผล แต่คุณสามารถปรับแต่งให้ตรงกับความต้องการเฉพาะหรือทรัพยากร Azure ที่มีอยู่
 
 ### 3.1 ตัวแปรที่จำเป็น
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# การกำหนดค่า Azure หลัก
+AZURE_ENV_NAME                    # ชื่อสภาพแวดล้อม (ใช้ในการตั้งชื่อทรัพยากร)
+AZURE_LOCATION                    # ภูมิภาคสำหรับการปรับใช้
+AZURE_SUBSCRIPTION_ID             # การสมัครสมาชิกเป้าหมาย
+AZURE_RESOURCE_GROUP              # ชื่อกลุ่มทรัพยากร
+AZURE_PRINCIPAL_ID                # ผู้ใช้หลักสำหรับ RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# ชื่อทรัพยากร (สร้างโดยอัตโนมัติถ้าไม่ได้ระบุ)
+AZURE_AIHUB_NAME                  # ชื่อฮับ Microsoft Foundry
+AZURE_AIPROJECT_NAME              # ชื่อโครงการ AI
+AZURE_AISERVICES_NAME             # ชื่อบัญชีบริการ AI
+AZURE_STORAGE_ACCOUNT_NAME        # ชื่อบัญชีที่เก็บข้อมูล
+AZURE_CONTAINER_REGISTRY_NAME     # ชื่อรีจิสตรีคอนเทนเนอร์
+AZURE_KEYVAULT_NAME               # ชื่อ Key Vault (ถ้าใช้)
 ```
 
 ### 3.2 การตั้งค่าโมเดล
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# การกำหนดค่ารูปแบบแชท
+AZURE_AI_AGENT_MODEL_NAME         # ค่าเริ่มต้น: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # ค่าเริ่มต้น: OpenAI (หรือ Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # ค่าเริ่มต้น: เวอร์ชันล่าสุดที่มี
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # ชื่อการติดตั้งสำหรับรูปแบบแชท
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # ค่าเริ่มต้น: มาตรฐาน
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # ค่าเริ่มต้น: 80 (พัน TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# การกำหนดค่ารูปแบบฝัง
+AZURE_AI_EMBED_MODEL_NAME         # ค่าเริ่มต้น: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # ค่าเริ่มต้น: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # ค่าเริ่มต้น: เวอร์ชันล่าสุดที่มี
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # ชื่อการติดตั้งสำหรับการฝัง
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # ค่าเริ่มต้น: มาตรฐาน
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # ค่าเริ่มต้น: 50 (พัน TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# การกำหนดค่าตัวแทน
+AZURE_AI_AGENT_NAME               # ชื่อแสดงตัวแทน
+AZURE_EXISTING_AGENT_ID           # ใช้ตัวแทนที่มีอยู่แล้ว (ไม่บังคับ)
 ```
 
-### 3.3 การเปิด/ปิดฟีเจอร์
+### 3.3 การสลับฟีเจอร์
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# บริการเพิ่มเติม
+USE_APPLICATION_INSIGHTS         # ค่าเริ่มต้น: จริง
+USE_AZURE_AI_SEARCH_SERVICE      # ค่าเริ่มต้น: เท็จ
+USE_CONTAINER_REGISTRY           # ค่าเริ่มต้น: จริง
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# การติดตามและตรวจสอบ
+ENABLE_AZURE_MONITOR_TRACING     # ค่าเริ่มต้น: เท็จ
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # ค่าเริ่มต้น: เท็จ
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# การตั้งค่าการค้นหา
+AZURE_AI_SEARCH_INDEX_NAME       # ชื่อดัชนีการค้นหา
+AZURE_SEARCH_SERVICE_NAME        # ชื่อบริการค้นหา
 ```
 
-### 3.4 การตั้งค่าโครงการ AI
+### 3.4 การตั้งค่าโปรเจ็กต์ AI
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# ใช้ทรัพยากรที่มีอยู่แล้ว
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # รหัสทรัพยากรเต็มของโครงการ AI ที่มีอยู่
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL จุดเชื่อมต่อของโครงการที่มีอยู่
 ```
 
 ### 3.5 ตรวจสอบตัวแปรของคุณ
 
-ใช้ Azure Developer CLI เพื่อดูและจัดการตัวแปรสภาพแวดล้อมของคุณ:
+ใช้ Azure Developer CLI เพื่อตรวจดูและจัดการตัวแปรสภาพแวดล้อมของคุณ:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# ดูตัวแปรสภาพแวดล้อมทั้งหมดสำหรับสภาพแวดล้อมปัจจุบัน
 azd env get-values
 
-# Get a specific environment variable
+# รับค่าตัวแปรสภาพแวดล้อมเฉพาะ
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# ตั้งค่าตัวแปรสภาพแวดล้อม
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# ตั้งค่าตัวแปรหลายตัวจากไฟล์ .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ข้อจำกัดความรับผิดชอบ**:  
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้ความแม่นยำสูงสุด กรุณาทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อน เอกสารต้นฉบับในภาษาต้นฉบับถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลสำคัญแนะนำให้ใช้บริการแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดที่เกิดขึ้นจากการใช้การแปลนี้
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,85 +1,76 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-22T08:15:43+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "vi"
-}
--->
 # Giải pháp Hỗ trợ Khách hàng Đa Tác nhân - Kịch bản Nhà bán lẻ
 
 **Chương 5: Giải pháp AI Đa Tác nhân**
-- **📚 Trang chủ khóa học**: [AZD Dành cho Người mới bắt đầu](../README.md)
+- **📚 Trang Khóa học**: [AZD For Beginners](../README.md)
 - **📖 Chương hiện tại**: [Chương 5: Giải pháp AI Đa Tác nhân](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Điều kiện tiên quyết**: [Chương 2: Phát triển AI-First](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **➡️ Chương tiếp theo**: [Chương 6: Xác thực trước khi triển khai](../docs/pre-deployment/capacity-planning.md)
-- **🚀 Mẫu ARM**: [Gói Triển khai](retail-multiagent-arm-template/README.md)
+- **⬅️ Yêu cầu tiên quyết**: [Chương 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Chương tiếp theo**: [Chương 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
+- **🚀 Mẫu ARM**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
 > **⚠️ HƯỚNG DẪN KIẾN TRÚC - KHÔNG PHẢI TRIỂN KHAI HOẠT ĐỘNG**  
 > Tài liệu này cung cấp một **bản thiết kế kiến trúc toàn diện** để xây dựng hệ thống đa tác nhân.  
-> **Những gì đã có:** Mẫu ARM để triển khai hạ tầng (Azure OpenAI, AI Search, Container Apps, v.v.)  
-> **Những gì bạn cần xây dựng:** Mã tác nhân, logic định tuyến, giao diện UI, đường dẫn dữ liệu (ước tính 80-120 giờ)  
+> **Những gì tồn tại:** ARM template để triển khai hạ tầng (Azure OpenAI, AI Search, Container Apps, v.v.)  
+> **Những gì bạn phải xây dựng:** Mã tác nhân, logic định tuyến, giao diện frontend, đường ống dữ liệu (ước tính 80-120 giờ)  
 >  
-> **Sử dụng tài liệu này như:**
-> - ✅ Tham khảo kiến trúc cho dự án đa tác nhân của bạn
-> - ✅ Hướng dẫn học về các mẫu thiết kế đa tác nhân
+> **Sử dụng điều này như:**
+> - ✅ Tham chiếu kiến trúc cho dự án đa tác nhân của bạn
+> - ✅ Hướng dẫn học tập cho các mẫu thiết kế đa tác nhân
 > - ✅ Mẫu hạ tầng để triển khai tài nguyên Azure
-> - ❌ KHÔNG phải ứng dụng sẵn sàng chạy (cần phát triển đáng kể)
+> - ❌ KHÔNG phải là ứng dụng sẵn sàng chạy (cần phát triển đáng kể)
 
 ## Tổng quan
 
-**Mục tiêu học tập:** Hiểu kiến trúc, các quyết định thiết kế, và cách tiếp cận triển khai để xây dựng chatbot hỗ trợ khách hàng đa tác nhân sẵn sàng sản xuất cho nhà bán lẻ với các khả năng AI tiên tiến bao gồm quản lý hàng tồn kho, xử lý tài liệu, và tương tác thông minh với khách hàng.
+**Mục tiêu học tập:** Hiểu kiến trúc, quyết định thiết kế và cách tiếp cận triển khai để xây dựng một chatbot hỗ trợ khách hàng đa tác nhân sẵn sàng cho môi trường sản xuất dành cho nhà bán lẻ, với các khả năng AI tinh vi bao gồm quản lý tồn kho, xử lý tài liệu và tương tác thông minh với khách hàng.
 
-**Thời gian hoàn thành:** Đọc + Hiểu (2-3 giờ) | Xây dựng triển khai hoàn chỉnh (80-120 giờ)
+**Thời gian hoàn thành:** Đọc + Hiểu (2-3 giờ) | Xây dựng Triển khai hoàn chỉnh (80-120 giờ)
 
 **Những gì bạn sẽ học:**
-- Các mẫu kiến trúc đa tác nhân và nguyên tắc thiết kế
+- Mẫu kiến trúc đa tác nhân và nguyên tắc thiết kế
 - Chiến lược triển khai Azure OpenAI đa vùng
 - Tích hợp AI Search với RAG (Retrieval-Augmented Generation)
-- Khung đánh giá tác nhân và kiểm tra bảo mật
-- Các cân nhắc triển khai sản xuất và tối ưu hóa chi phí
+- Khung đánh giá tác nhân và kiểm thử bảo mật
+- Các cân nhắc triển khai sản xuất và tối ưu chi phí
 
 ## Mục tiêu Kiến trúc
 
-**Trọng tâm giáo dục:** Kiến trúc này minh họa các mẫu doanh nghiệp cho hệ thống đa tác nhân.
+**Trọng tâm đào tạo:** Kiến trúc này trình bày các mẫu doanh nghiệp cho hệ thống đa tác nhân.
 
-### Yêu cầu hệ thống (Cho triển khai của bạn)
+### Yêu cầu hệ thống (Cho phần triển khai của bạn)
 
-Một giải pháp hỗ trợ khách hàng sản xuất yêu cầu:
-- **Nhiều tác nhân chuyên biệt** cho các nhu cầu khác nhau của khách hàng (Dịch vụ Khách hàng + Quản lý Hàng tồn kho)
-- **Triển khai đa mô hình** với kế hoạch dung lượng phù hợp (GPT-4o, GPT-4o-mini, embeddings trên các vùng)
+Một giải pháp hỗ trợ khách hàng cho môi trường sản xuất cần:
+- **Nhiều tác nhân chuyên biệt** cho các nhu cầu khách hàng khác nhau (Dịch vụ Khách hàng + Quản lý Tồn kho)
+- **Triển khai đa mô hình** với kế hoạch năng lực phù hợp (GPT-4o, GPT-4o-mini, embeddings trên nhiều vùng)
 - **Tích hợp dữ liệu động** với AI Search và tải lên tệp (tìm kiếm vector + xử lý tài liệu)
-- **Khả năng giám sát và đánh giá toàn diện** (Application Insights + các chỉ số tùy chỉnh)
-- **Bảo mật cấp sản xuất** với xác thực red teaming (quét lỗ hổng + đánh giá tác nhân)
+- **Giám sát toàn diện** và khả năng đánh giá (Application Insights + số liệu tùy chỉnh)
+- **Bảo mật chuẩn sản xuất** với kiểm thử red teaming (quét lỗ hổng + đánh giá tác nhân)
 
-### Những gì hướng dẫn này cung cấp
+### Hướng dẫn này cung cấp
 
 ✅ **Mẫu Kiến trúc** - Thiết kế đã được chứng minh cho hệ thống đa tác nhân có thể mở rộng  
-✅ **Mẫu Hạ tầng** - Mẫu ARM triển khai tất cả các dịch vụ Azure  
+✅ **Mẫu Hạ tầng** - ARM templates triển khai tất cả dịch vụ Azure  
 ✅ **Ví dụ Mã** - Triển khai tham khảo cho các thành phần chính  
 ✅ **Hướng dẫn Cấu hình** - Hướng dẫn thiết lập từng bước  
-✅ **Thực hành tốt nhất** - Chiến lược bảo mật, giám sát, tối ưu hóa chi phí  
+✅ **Thực hành Tốt nhất** - Bảo mật, giám sát, chiến lược tối ưu chi phí  
 
-❌ **Không bao gồm** - Ứng dụng hoạt động hoàn chỉnh (cần nỗ lực phát triển)
+❌ **Không Bao gồm** - Ứng dụng hoạt động hoàn chỉnh (cần nỗ lực phát triển)
 
 ## 🗺️ Lộ trình Triển khai
 
 ### Giai đoạn 1: Nghiên cứu Kiến trúc (2-3 giờ) - BẮT ĐẦU TẠI ĐÂY
 
-**Mục tiêu:** Hiểu thiết kế hệ thống và tương tác giữa các thành phần
+**Mục tiêu:** Hiểu thiết kế hệ thống và sự tương tác giữa các thành phần
 
 - [ ] Đọc toàn bộ tài liệu này
-- [ ] Xem xét sơ đồ kiến trúc và mối quan hệ giữa các thành phần
+- [ ] Xem sơ đồ kiến trúc và mối quan hệ giữa các thành phần
 - [ ] Hiểu các mẫu đa tác nhân và quyết định thiết kế
-- [ ] Nghiên cứu ví dụ mã cho các công cụ và định tuyến tác nhân
-- [ ] Xem xét ước tính chi phí và hướng dẫn lập kế hoạch dung lượng
+- [ ] Nghiên cứu ví dụ mã cho công cụ tác nhân và định tuyến
+- [ ] Xem lại ước tính chi phí và hướng dẫn lập kế hoạch năng lực
 
 **Kết quả:** Hiểu rõ những gì bạn cần xây dựng
 
 ### Giai đoạn 2: Triển khai Hạ tầng (30-45 phút)
 
-**Mục tiêu:** Cung cấp tài nguyên Azure bằng mẫu ARM
+**Mục tiêu:** Cung cấp tài nguyên Azure bằng ARM template
 
 ```bash
 cd retail-multiagent-arm-template
@@ -88,58 +79,58 @@ cd retail-multiagent-arm-template
 
 **Những gì được triển khai:**
 - ✅ Azure OpenAI (3 vùng: GPT-4o, GPT-4o-mini, embeddings)
-- ✅ Dịch vụ AI Search (trống, cần cấu hình index)
-- ✅ Môi trường Container Apps (hình ảnh placeholder)
-- ✅ Tài khoản lưu trữ, Cosmos DB, Key Vault
-- ✅ Giám sát Application Insights
+- ✅ AI Search service (rỗng, cần cấu hình index)
+- ✅ Container Apps environment (ảnh placeholder)
+- ✅ Storage accounts, Cosmos DB, Key Vault
+- ✅ Application Insights để giám sát
 
 **Những gì còn thiếu:**
 - ❌ Mã triển khai tác nhân
 - ❌ Logic định tuyến
-- ❌ Giao diện UI
-- ❌ Schema index tìm kiếm
-- ❌ Đường dẫn dữ liệu
+- ❌ Giao diện frontend
+- ❌ Lược đồ index tìm kiếm
+- ❌ Đường ống dữ liệu
 
 ### Giai đoạn 3: Xây dựng Ứng dụng (80-120 giờ)
 
 **Mục tiêu:** Triển khai hệ thống đa tác nhân dựa trên kiến trúc này
 
 1. **Triển khai Tác nhân** (30-40 giờ)
-   - Lớp cơ sở tác nhân và giao diện
+   - Lớp tác nhân cơ sở và các interface
    - Tác nhân dịch vụ khách hàng với GPT-4o
-   - Tác nhân hàng tồn kho với GPT-4o-mini
+   - Tác nhân tồn kho với GPT-4o-mini
    - Tích hợp công cụ (AI Search, Bing, xử lý tệp)
 
 2. **Dịch vụ Định tuyến** (12-16 giờ)
    - Logic phân loại yêu cầu
-   - Lựa chọn và điều phối tác nhân
+   - Lựa chọn và phối hợp tác nhân
    - Backend FastAPI/Express
 
-3. **Phát triển Giao diện UI** (20-30 giờ)
-   - Giao diện trò chuyện
-   - Chức năng tải lên tệp
+3. **Phát triển Frontend** (20-30 giờ)
+   - Giao diện chat
+   - Chức năng tải tệp lên
    - Hiển thị phản hồi
 
-4. **Đường dẫn Dữ liệu** (8-12 giờ)
+4. **Đường ống Dữ liệu** (8-12 giờ)
    - Tạo index AI Search
    - Xử lý tài liệu với Document Intelligence
-   - Tạo embeddings và index
+   - Tạo embedding và đưa vào index
 
 5. **Giám sát & Đánh giá** (10-15 giờ)
    - Triển khai telemetry tùy chỉnh
    - Khung đánh giá tác nhân
-   - Quét bảo mật red team
+   - Trình quét bảo mật red team
 
-### Giai đoạn 4: Triển khai & Kiểm tra (8-12 giờ)
+### Giai đoạn 4: Triển khai & Kiểm thử (8-12 giờ)
 
-- Xây dựng hình ảnh Docker cho tất cả các dịch vụ
+- Xây dựng Docker images cho tất cả dịch vụ
 - Đẩy lên Azure Container Registry
-- Cập nhật Container Apps với hình ảnh thực
+- Cập nhật Container Apps với ảnh thực tế
 - Cấu hình biến môi trường và bí mật
-- Chạy bộ kiểm tra đánh giá
+- Chạy bộ kiểm thử đánh giá
 - Thực hiện quét bảo mật
 
-**Tổng thời gian ước tính:** 80-120 giờ cho các nhà phát triển có kinh nghiệm
+**Tổng ước tính nỗ lực:** 80-120 giờ cho các nhà phát triển có kinh nghiệm
 
 ## Kiến trúc Giải pháp
 
@@ -150,29 +141,29 @@ graph TB
     User[👤 Khách hàng] --> LB[Azure Front Door]
     LB --> WebApp[Giao diện Web<br/>Ứng dụng Container]
     
-    WebApp --> Router[Router Đại lý<br/>Ứng dụng Container]
-    Router --> CustomerAgent[Đại lý Khách hàng<br/>Dịch vụ Khách hàng]
-    Router --> InvAgent[Đại lý Kho<br/>Quản lý Hàng tồn kho]
+    WebApp --> Router[Bộ định tuyến Agent<br/>Ứng dụng Container]
+    Router --> CustomerAgent[Agent Khách hàng<br/>Dịch vụ Khách hàng]
+    Router --> InvAgent[Agent Kho hàng<br/>Quản lý Kho]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Đông Mỹ 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Tây Mỹ 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Đông Hoa Kỳ 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Tây Hoa Kỳ 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>Danh mục Sản phẩm]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Thông tin Thời gian thực]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Thông tin theo thời gian thực]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>Tài liệu & Tệp tin]
-    Storage --> DocIntel[Trí tuệ Tài liệu<br/>Xử lý Nội dung]
+    AISearch --> Storage[Azure Storage<br/>Tài liệu & Tệp]
+    Storage --> DocIntel[Document Intelligence<br/>Xử lý Nội dung]
     
-    OpenAI1 --> Embeddings[Nhúng Văn bản<br/>ada-002<br/>Trung tâm Pháp]
+    OpenAI1 --> Embeddings[Nhúng Văn bản<br/>ada-002<br/>Pháp Trung tâm]
     OpenAI2 --> Embeddings
     
     Router --> AppInsights[Application Insights<br/>Giám sát]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Đánh giá<br/>Bắc Thụy Sĩ] --> Evaluation[Khung Đánh giá]
-    RedTeam[Máy quét Đội Đỏ] --> SecurityReports[Báo cáo Bảo mật]
+    GraderModel[GPT-4o Grader<br/>Thụy Sĩ Bắc] --> Evaluation[Khung Đánh giá]
+    RedTeam[Red Team Scanner] --> SecurityReports[Báo cáo Bảo mật]
     
     subgraph "Lớp Dữ liệu"
         Storage
@@ -191,7 +182,7 @@ graph TB
     
     subgraph "Giám sát & Bảo mật"
         AppInsights
-        LogAnalytics[Không gian làm việc Phân tích Nhật ký]
+        LogAnalytics[Không gian làm việc Log Analytics]
         KeyVault[Azure Key Vault<br/>Bí mật & Cấu hình]
         RedTeam
         Evaluation
@@ -206,26 +197,26 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-### Tổng quan về Thành phần
+### Tổng quan Thành phần
 
 | Thành phần | Mục đích | Công nghệ | Vùng |
 |-----------|---------|------------|---------|
-| **Giao diện Web** | Giao diện người dùng cho tương tác khách hàng | Container Apps | Vùng chính |
-| **Định tuyến Tác nhân** | Định tuyến yêu cầu đến tác nhân phù hợp | Container Apps | Vùng chính |
-| **Tác nhân Khách hàng** | Xử lý các truy vấn dịch vụ khách hàng | Container Apps + GPT-4o | Vùng chính |
-| **Tác nhân Hàng tồn kho** | Quản lý hàng hóa và thực hiện | Container Apps + GPT-4o-mini | Vùng chính |
+| **Web Frontend** | Giao diện người dùng cho tương tác khách hàng | Container Apps | Vùng chính |
+| **Agent Router** | Định tuyến yêu cầu tới tác nhân phù hợp | Container Apps | Vùng chính |
+| **Customer Agent** | Xử lý các truy vấn dịch vụ khách hàng | Container Apps + GPT-4o | Vùng chính |
+| **Inventory Agent** | Quản lý tồn kho và thực hiện đơn hàng | Container Apps + GPT-4o-mini | Vùng chính |
 | **Azure OpenAI** | Suy luận LLM cho các tác nhân | Cognitive Services | Đa vùng |
-| **AI Search** | Tìm kiếm vector và RAG | Dịch vụ AI Search | Vùng chính |
-| **Tài khoản Lưu trữ** | Tải lên tệp và tài liệu | Blob Storage | Vùng chính |
+| **AI Search** | Tìm kiếm véc-tơ và RAG | AI Search Service | Vùng chính |
+| **Storage Account** | Tải lên tệp và tài liệu | Blob Storage | Vùng chính |
 | **Application Insights** | Giám sát và telemetry | Monitor | Vùng chính |
-| **Mô hình Grader** | Hệ thống đánh giá tác nhân | Azure OpenAI | Vùng phụ |
+| **Grader Model** | Hệ thống đánh giá tác nhân | Azure OpenAI | Vùng phụ |
 
 ## 📁 Cấu trúc Dự án
 
-> **📍 Trạng thái:**  
-> ✅ = Có trong kho lưu trữ  
+> **📍 Chú thích Trạng thái:**  
+> ✅ = Tồn tại trong kho mã  
 > 📝 = Triển khai tham khảo (ví dụ mã trong tài liệu này)  
-> 🔨 = Bạn cần tạo cái này
+> 🔨 = Bạn cần tạo mục này
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -372,18 +363,18 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Bắt đầu nhanh: Những gì bạn có thể làm ngay bây giờ
+## 🚀 Bắt đầu Nhanh: Những gì bạn có thể làm ngay bây giờ
 
-### Tùy chọn 1: Chỉ triển khai hạ tầng (30 phút)
+### Tùy chọn 1: Chỉ Triển khai Hạ tầng (30 phút)
 
-**Những gì bạn nhận được:** Tất cả các dịch vụ Azure được cung cấp và sẵn sàng phát triển
+**Những gì bạn nhận được:** Tất cả dịch vụ Azure được cung cấp sẵn và sẵn sàng cho phát triển
 
 ```bash
 # Sao chép kho lưu trữ
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# Triển khai cơ sở hạ tầng
+# Triển khai hạ tầng
 ./deploy.sh -g myResourceGroup -m standard
 
 # Xác minh triển khai
@@ -392,9 +383,9 @@ az resource list --resource-group myResourceGroup --output table
 
 **Kết quả mong đợi:**
 - ✅ Dịch vụ Azure OpenAI được triển khai (3 vùng)
-- ✅ Dịch vụ AI Search được tạo (trống)
+- ✅ Dịch vụ AI Search được tạo (rỗng)
 - ✅ Môi trường Container Apps sẵn sàng
-- ✅ Lưu trữ, Cosmos DB, Key Vault được cấu hình
+- ✅ Storage, Cosmos DB, Key Vault được cấu hình
 - ❌ Chưa có tác nhân hoạt động (chỉ hạ tầng)
 
 ### Tùy chọn 2: Nghiên cứu Kiến trúc (2-3 giờ)
@@ -402,49 +393,49 @@ az resource list --resource-group myResourceGroup --output table
 **Những gì bạn nhận được:** Hiểu sâu về các mẫu đa tác nhân
 
 1. Đọc toàn bộ tài liệu này
-2. Xem xét ví dụ mã cho từng thành phần
-3. Hiểu các quyết định thiết kế và đánh đổi
-4. Nghiên cứu chiến lược tối ưu hóa chi phí
-5. Lập kế hoạch cách tiếp cận triển khai của bạn
+2. Xem ví dụ mã cho từng thành phần
+3. Hiểu quyết định thiết kế và các đánh đổi
+4. Nghiên cứu chiến lược tối ưu chi phí
+5. Lên kế hoạch triển khai của bạn
 
 **Kết quả mong đợi:**
-- ✅ Mô hình tinh thần rõ ràng về kiến trúc hệ thống
+- ✅ Mô hình tư duy rõ ràng về kiến trúc hệ thống
 - ✅ Hiểu các thành phần cần thiết
 - ✅ Ước tính nỗ lực thực tế
 - ✅ Kế hoạch triển khai
 
-### Tùy chọn 3: Xây dựng Hệ thống Hoàn chỉnh (80-120 giờ)
+### Tùy chọn 3: Xây dựng Hệ thống hoàn chỉnh (80-120 giờ)
 
-**Những gì bạn nhận được:** Giải pháp đa tác nhân sẵn sàng sản xuất
+**Những gì bạn nhận được:** Giải pháp đa tác nhân sẵn sàng cho môi trường sản xuất
 
-1. **Giai đoạn 1:** Triển khai hạ tầng (đã hoàn thành ở trên)
+1. **Giai đoạn 1:** Triển khai hạ tầng (đã nêu ở trên)
 2. **Giai đoạn 2:** Triển khai các tác nhân sử dụng ví dụ mã dưới đây (30-40 giờ)
-3. **Giai đoạn 3:** Xây dựng dịch vụ định tuyến (12-16 giờ)
-4. **Giai đoạn 4:** Tạo giao diện UI (20-30 giờ)
-5. **Giai đoạn 5:** Cấu hình đường dẫn dữ liệu (8-12 giờ)
+3. **Giai đoạn 3:** Xây dịch vụ định tuyến (12-16 giờ)
+4. **Giai đoạn 4:** Tạo giao diện frontend (20-30 giờ)
+5. **Giai đoạn 5:** Cấu hình đường ống dữ liệu (8-12 giờ)
 6. **Giai đoạn 6:** Thêm giám sát & đánh giá (10-15 giờ)
 
 **Kết quả mong đợi:**
 - ✅ Hệ thống đa tác nhân hoạt động đầy đủ
-- ✅ Giám sát cấp sản xuất
+- ✅ Giám sát chuẩn sản xuất
 - ✅ Xác thực bảo mật
-- ✅ Triển khai tối ưu hóa chi phí
+- ✅ Triển khai tối ưu chi phí
 
 ---
 
 ## 📚 Tham khảo Kiến trúc & Hướng dẫn Triển khai
 
-Các phần sau cung cấp các mẫu kiến trúc chi tiết, ví dụ cấu hình, và mã tham khảo để hướng dẫn triển khai của bạn.
+Các phần sau cung cấp các mẫu kiến trúc chi tiết, ví dụ cấu hình và mã tham khảo để hướng dẫn triển khai của bạn.
 
 ## Yêu cầu Cấu hình Ban đầu
 
 ### 1. Nhiều Tác nhân & Cấu hình
 
-**Mục tiêu**: Triển khai 2 tác nhân chuyên biệt - "Tác nhân Khách hàng" (dịch vụ khách hàng) và "Hàng tồn kho" (quản lý hàng hóa)
+**Mục tiêu**: Triển khai 2 tác nhân chuyên biệt - "Customer Agent" (dịch vụ khách hàng) và "Inventory" (quản lý tồn kho)
 
-> **📝 Lưu ý:** Các cấu hình azure.yaml và Bicep sau đây là **ví dụ tham khảo** cho cách cấu trúc triển khai đa tác nhân. Bạn sẽ cần tạo các tệp này và triển khai các tác nhân tương ứng.
+> **📝 Lưu ý:** Các file azure.yaml và cấu hình Bicep dưới đây là **ví dụ tham khảo** cho cách cấu trúc triển khai đa tác nhân. Bạn sẽ cần tạo các file này và triển khai mã tác nhân tương ứng.
 
-#### Các bước Cấu hình:
+#### Các Bước Cấu hình:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -516,11 +507,11 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Nhiều Mô hình với Kế hoạch Dung lượng
+### 2. Nhiều Mô hình với Lập kế hoạch Năng lực
 
-**Mục tiêu**: Triển khai mô hình trò chuyện (Khách hàng), mô hình embeddings (tìm kiếm), và mô hình lý luận (grader) với quản lý hạn ngạch phù hợp
+**Mục tiêu**: Triển khai mô hình chat (Customer), mô hình embeddings (tìm kiếm), và mô hình suy luận (grader) với quản lý quota phù hợp
 
-#### Chiến lược Đa Vùng:
+#### Chiến lược đa vùng:
 
 ```bicep
 // infra/models.bicep
@@ -575,9 +566,9 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 ### 3. AI Search với Cấu hình Index Dữ liệu
 
-**Mục tiêu**: Cấu hình AI Search cho cập nhật dữ liệu và index tự động
+**Mục tiêu**: Cấu hình AI Search để cập nhật dữ liệu và tự động lập chỉ mục
 
-#### Hook Trước Triển khai:
+#### Hook Tiền Cung cấp:
 
 ```bash
 #!/bin/bash
@@ -594,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Thiết lập Dữ liệu Sau Triển khai:
+#### Thiết lập Dữ liệu Sau Cung cấp:
 
 ```bash
 #!/bin/bash
@@ -611,14 +602,14 @@ curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Tải lên tài liệu ban đầu
+# Tải lên các tài liệu ban đầu
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
 
-#### Schema Index Tìm kiếm:
+#### Lược đồ Index Tìm kiếm:
 
 ```json
 {
@@ -645,9 +636,9 @@ python ./scripts/upload_search_data.py \
 
 ### 4. Cấu hình Công cụ Tác nhân cho AI Search
 
-**Mục tiêu**: Cấu hình các tác nhân sử dụng AI Search như một công cụ nền tảng
+**Mục tiêu**: Cấu hình các tác nhân để sử dụng AI Search làm công cụ làm nền tảng
 
-#### Triển khai Công cụ Tìm kiếm Tác nhân:
+#### Triển khai Công cụ Tìm kiếm cho Tác nhân:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -710,7 +701,7 @@ class CustomerAgent:
         # Chuẩn bị ngữ cảnh cho LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Tạo phản hồi với cơ sở
+        # Tạo phản hồi có căn cứ
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -724,7 +715,7 @@ class CustomerAgent:
 
 ### 5. Tích hợp Lưu trữ Tải lên Tệp
 
-**Mục tiêu**: Cho phép các tác nhân xử lý các tệp tải lên (hướng dẫn, tài liệu) cho ngữ cảnh RAG
+**Mục tiêu**: Cho phép tác nhân xử lý các tệp được tải lên (sổ tay, tài liệu) cho ngữ cảnh RAG
 
 #### Cấu hình Lưu trữ:
 
@@ -765,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Đường dẫn Xử lý Tài liệu:
+#### Đường ống Xử lý Tài liệu:
 
 ```python
 # src/document_processor.py
@@ -785,13 +776,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Tải xuống tệp từ lưu trữ blob
+        # Tải tệp từ lưu trữ blob
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Trích xuất văn bản bằng Trí tuệ Tài liệu
+        # Trích xuất văn bản bằng Document Intelligence
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -811,7 +802,7 @@ class DocumentProcessor:
             input=text_content
         )
         
-        # Lập chỉ mục trong Tìm kiếm AI
+        # Lập chỉ mục trong AI Search
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -823,9 +814,9 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Tích hợp Tìm kiếm Bing
+### 6. Tích hợp Bing Search
 
-**Mục tiêu**: Thêm khả năng tìm kiếm Bing cho thông tin thời gian thực
+**Mục tiêu**: Thêm khả năng tìm kiếm thời gian thực bằng Bing Search
 
 #### Thêm Tài nguyên Bicep:
 
@@ -845,10 +836,10 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Công cụ Tìm kiếm Bing:
+#### Công cụ Bing Search:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# src/tác_nhân/công_cụ/công_cụ_tìm_kiếm_bing.py
 import aiohttp
 import asyncio
 
@@ -889,11 +880,11 @@ class BingSearchTool:
 
 ---
 
-## Giám sát & Khả năng Quan sát
+## Giám sát & Khả năng quan sát
 
-### 7. Theo dõi và Application Insights
+### 7. Tracing và Application Insights
 
-**Mục tiêu**: Giám sát toàn diện với nhật ký theo dõi và Application Insights
+**Mục tiêu**: Giám sát toàn diện với logs trace và Application Insights
 
 #### Cấu hình Application Insights:
 
@@ -993,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Cắt bớt để bảo mật
+            'query': query[:100],  # Rút gọn để bảo vệ quyền riêng tư
             'results_found': str(results_count > 0)
         }
         
@@ -1054,9 +1045,9 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Xác thực Bảo mật Red Teaming
+### 8. Kiểm thử Bảo mật Red Teaming
 
-**Mục tiêu**: Kiểm tra bảo mật tự động cho các tác nhân và mô hình
+**Mục tiêu**: Kiểm thử bảo mật tự động cho các tác nhân và mô hình
 
 #### Cấu hình Red Teaming:
 
@@ -1106,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Tính toán điểm bảo mật tổng thể
+        # Tính điểm bảo mật tổng thể
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1174,8 +1165,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Triển khai sẽ gửi yêu cầu HTTP đến điểm cuối của tác nhân
-        # Để trình diễn, trả về giá trị giữ chỗ
+        # Phần triển khai sẽ gửi yêu cầu HTTP tới endpoint của agent
+        # Vì mục đích demo, trả về giá trị giữ chỗ
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1197,7 +1188,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Phát hiện lỗ hổng đơn giản hóa
+        # Phát hiện lỗ hổng được đơn giản hóa
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1232,7 +1223,7 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Điểm cơ bản: 100 - (lỗ hổng / tổng số * 100)
+        # Cách tính điểm cơ bản: 100 - (vulnerabilities / total * 100)
         if total_strategies == 0:
             return 100.0
         
@@ -1249,7 +1240,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Đường dẫn Bảo mật Tự động:
+#### Đường ống Bảo mật Tự động:
 
 ```bash
 #!/bin/bash
@@ -1257,7 +1248,7 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Lấy điểm cuối của tác nhân từ triển khai
+# Lấy điểm cuối của agent từ bản triển khai
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1350,7 +1341,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Tính toán các chỉ số tóm tắt
+        # Tính các chỉ số tóm tắt
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1496,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Cấu hình Bộ Kiểm tra:
+#### Cấu hình Các Trường hợp Kiểm thử:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1539,7 +1530,7 @@ class AgentEvaluator:
 
 ### 10. Tùy chỉnh Container App
 
-**Mục tiêu**: Cập nhật cấu hình container app và thay thế bằng UI tùy chỉnh
+**Mục tiêu**: Cập nhật cấu hình container app và thay thế bằng giao diện tùy chỉnh
 
 #### Cấu hình Động:
 
@@ -1557,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Xây dựng Giao diện Tùy chỉnh:
+#### Xây dựng Frontend Tùy chỉnh:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1584,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Kịch bản Xây dựng và Triển khai:
+#### Script Xây dựng và Triển khai:
 
 ```bash
 #!/bin/bash
@@ -1592,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Xây dựng hình ảnh tùy chỉnh với các biến môi trường
+# Xây dựng image tùy chỉnh với các biến môi trường
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1617,13 +1608,13 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Hướng dẫn Khắc phục sự cố
+## 🔧 Hướng dẫn Khắc phục Sự cố
 
-### Các vấn đề thường gặp và giải pháp
+### Các sự cố thường gặp và giải pháp
 
-#### 1. Giới hạn Hạn ngạch Container Apps
+#### 1. Giới hạn Quota Container Apps
 
-**Vấn đề**: Triển khai thất bại do giới hạn hạn ngạch vùng
+**Vấn đề**: Triển khai thất bại do giới hạn quota vùng
 
 **Giải pháp**:
 ```bash
@@ -1646,7 +1637,7 @@ az support tickets create \
 
 #### 2. Hết hạn Triển khai Mô hình
 
-**Vấn đề**: Triển khai mô hình thất bại do phiên bản API hết hạn
+**Vấn đề**: Triển khai mô hình thất bại do phiên bản API đã hết hạn
 
 **Giải pháp**:
 ```python
@@ -1656,7 +1647,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Điều này sẽ gọi API Azure OpenAI để lấy các phiên bản hiện tại
+    # Điều này sẽ gọi API của Azure OpenAI để lấy các phiên bản hiện tại
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1695,7 +1686,7 @@ if __name__ == "__main__":
 
 #### 3. Tích hợp Fine-tuning
 
-**Vấn đề**: Làm thế nào để tích hợp các mô hình fine-tuned vào triển khai AZD
+**Vấn đề**: Cách tích hợp các mô hình fine-tuned vào triển khai AZD
 
 **Giải pháp**:
 ```python
@@ -1735,7 +1726,7 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Cập nhật triển khai để sử dụng mô hình đã tinh chỉnh
+            # Cập nhật triển khai để sử dụng mô hình được tinh chỉnh
             # Điều này sẽ gọi Azure CLI để cập nhật triển khai
             return fine_tuned_model
         else:
@@ -1745,13 +1736,13 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ & Khám phá Mở rộng
+## Câu hỏi thường gặp & Khám phá mở
 
 ### Các câu hỏi thường gặp
 
-#### Hỏi: Có cách dễ dàng nào để triển khai nhiều tác nhân (mẫu thiết kế)?
+#### H: Có cách dễ dàng để triển khai nhiều tác nhân (mẫu thiết kế) không?
 
-**Đáp: Có! Sử dụng Mẫu Đa Tác nhân:**
+**Đ: Có! Sử dụng Mẫu Đa Tác nhân:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1768,12 +1759,12 @@ services:
         }
 ```
 
-#### Hỏi: Tôi có thể triển khai "model router" như một mô hình (tác động chi phí)?
+#### H: Tôi có thể triển khai "model router" như một mô hình không (tác động chi phí)?
 
-**Đáp: Có, với sự cân nhắc cẩn thận:**
+**Đ: Có, với cân nhắc kỹ lưỡng:**
 
 ```python
-# Triển khai Bộ định tuyến Mô hình
+# Triển khai bộ định tuyến mô hình
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1793,22 +1784,22 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Triển khai sẽ tính toán tiềm năng tiết kiệm
+        # Việc triển khai sẽ tính toán các khoản tiết kiệm tiềm năng
         pass
 ```
 
 **Tác động chi phí:**
 - **Tiết kiệm**: Giảm chi phí 60-80% cho các truy vấn đơn giản
-- **Đánh đổi**: Tăng nhẹ độ trễ cho logic định tuyến
-- **Giám sát**: Theo dõi độ chính xác so với các chỉ số chi phí
+- **Đánh đổi**: Tăng trễ nhẹ cho logic định tuyến
+- **Giám sát**: Theo dõi độ chính xác so với các số liệu chi phí
 
-#### Hỏi: Tôi có thể bắt đầu một công việc fine-tuning từ mẫu azd không?
+#### H: Tôi có thể bắt đầu một job fine-tuning từ azd template không?
 
-**Đáp: Có, sử dụng hook sau triển khai:**
+**Đ: Có, sử dụng hook sau khi cung cấp:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Tinh chỉnh tích hợp
+# hooks/postprovision.sh - Tích hợp tinh chỉnh
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1867,7 +1858,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-#### Khung Tối ưu hóa Chi phí
+#### Khung Tối ưu Chi phí
 
 ```python
 # src/optimization/cost_optimizer.py
@@ -1879,7 +1870,7 @@ class CostOptimizer:
         """Analyze usage to recommend optimizations"""
         recommendations = []
         
-        # Phân tích sử dụng mô hình
+        # Phân tích việc sử dụng mô hình
         model_usage = self.analytics.get_model_usage()
         for model, usage in model_usage.items():
             if usage['utilization'] < 0.3:
@@ -1915,62 +1906,62 @@ class CostOptimizer:
 ## ✅ Mẫu ARM Sẵn Sàng Triển Khai
 
 > **✨ ĐIỀU NÀY THỰC SỰ TỒN TẠI VÀ HOẠT ĐỘNG!**  
-> Không giống như các ví dụ mã khái niệm ở trên, mẫu ARM này là một **hạ tầng triển khai thực tế, hoạt động** được bao gồm trong kho lưu trữ này.
+> Không giống như các ví dụ mã mang tính khái niệm phía trên, mẫu ARM là một **bản triển khai hạ tầng thực sự, hoạt động** được bao gồm trong kho lưu trữ này.
 
 ### Mẫu Này Thực Sự Làm Gì
 
-Mẫu ARM tại [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) cung cấp **toàn bộ hạ tầng Azure** cần thiết cho hệ thống đa tác nhân. Đây là **thành phần duy nhất sẵn sàng chạy** - mọi thứ khác cần phát triển thêm.
+Mẫu ARM tại [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) cấp phát **tất cả hạ tầng Azure** cần thiết cho hệ thống đa tác nhân. Đây là **thành phần duy nhất sẵn sàng chạy** - mọi thứ khác đều yêu cầu phát triển.
 
 ### Những Gì Được Bao Gồm Trong Mẫu ARM
 
-Mẫu ARM nằm tại [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) bao gồm:
+Mẫu ARM nằm trong [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) bao gồm:
 
 #### **Hạ Tầng Hoàn Chỉnh**
 - ✅ **Triển khai Azure OpenAI đa vùng** (GPT-4o, GPT-4o-mini, embeddings, grader)
 - ✅ **Azure AI Search** với khả năng tìm kiếm vector
-- ✅ **Azure Storage** với các container tài liệu và tải lên
-- ✅ **Môi trường Container Apps** với khả năng tự động mở rộng
-- ✅ **Ứng dụng Router & Frontend** trong container
-- ✅ **Cosmos DB** để lưu trữ lịch sử trò chuyện
-- ✅ **Application Insights** để giám sát toàn diện
+- ✅ **Azure Storage** với container tài liệu và upload
+- ✅ **Container Apps Environment** với tự động mở rộng
+- ✅ **Agent Router & Frontend** container apps
+- ✅ **Cosmos DB** để lưu trữ lịch sử chat
+- ✅ **Application Insights** cho giám sát toàn diện
 - ✅ **Key Vault** để quản lý bí mật an toàn
-- ✅ **Document Intelligence** để xử lý tệp tin
-- ✅ **Bing Search API** để cung cấp thông tin thời gian thực
+- ✅ **Document Intelligence** để xử lý tệp
+- ✅ **Bing Search API** cho thông tin thời gian thực
 
 #### **Chế Độ Triển Khai**
-| Chế Độ | Trường Hợp Sử Dụng | Tài Nguyên | Chi Phí Ước Tính/Tháng |
-|--------|--------------------|------------|------------------------|
-| **Tối Thiểu** | Phát triển, Kiểm thử | SKUs cơ bản, Một vùng | $100-370 |
-| **Tiêu Chuẩn** | Sản xuất, Quy mô vừa | SKUs tiêu chuẩn, Đa vùng | $420-1,450 |
-| **Cao Cấp** | Doanh nghiệp, Quy mô lớn | SKUs cao cấp, Cấu hình HA | $1,150-3,500 |
+| Mode | Use Case | Resources | Estimated Cost/Month |
+|------|----------|-----------|---------------------|
+| **Minimal** | Development, Testing | Basic SKUs, Single region | $100-370 |
+| **Standard** | Production, Moderate scale | Standard SKUs, Multi-region | $420-1,450 |
+| **Premium** | Enterprise, High scale | Premium SKUs, HA setup | $1,150-3,500 |
 
 ### 🎯 Tùy Chọn Triển Khai Nhanh
 
-#### Tùy Chọn 1: Triển Khai Azure Một Lần Nhấp
+#### Option 1: One-Click Azure Deployment
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Triển khai lên Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Tùy Chọn 2: Triển Khai Azure CLI
+#### Option 2: Azure CLI Deployment
 
 ```bash
-# Sao chép kho lưu trữ
+# Sao chép kho mã nguồn
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Làm cho tập lệnh triển khai có thể thực thi
+# Cấp quyền thực thi cho tập lệnh triển khai
 chmod +x deploy.sh
 
-# Triển khai với cài đặt mặc định (Chế độ tiêu chuẩn)
+# Triển khai với cài đặt mặc định (chế độ tiêu chuẩn)
 ./deploy.sh -g myResourceGroup
 
-# Triển khai cho sản xuất với các tính năng cao cấp
+# Triển khai cho môi trường sản xuất với các tính năng cao cấp
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
 # Triển khai phiên bản tối thiểu cho phát triển
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Tùy Chọn 3: Triển Khai Trực Tiếp Mẫu ARM
+#### Option 3: Direct ARM Template Deployment
 
 ```bash
 # Tạo nhóm tài nguyên
@@ -1984,7 +1975,7 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### Kết Quả Mẫu
+### Outputs của Mẫu
 
 Sau khi triển khai thành công, bạn sẽ nhận được:
 
@@ -2002,11 +1993,11 @@ Sau khi triển khai thành công, bạn sẽ nhận được:
 
 ### 🔧 Cấu Hình Sau Triển Khai
 
-Mẫu ARM xử lý việc cung cấp hạ tầng. Sau khi triển khai:
+Mẫu ARM xử lý việc cấp phát hạ tầng. Sau khi triển khai:
 
 1. **Cấu hình Search Index**:
    ```bash
-   # Sử dụng lược đồ tìm kiếm được cung cấp
+   # Sử dụng sơ đồ tìm kiếm được cung cấp
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
@@ -2022,7 +2013,7 @@ Mẫu ARM xử lý việc cung cấp hạ tầng. Sau khi triển khai:
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Triển khai Mã Tác Nhân**:
+3. **Triển khai Mã Agent**:
    ```bash
    # Xây dựng và triển khai các ứng dụng tác nhân thực tế
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
@@ -2034,7 +2025,7 @@ Mẫu ARM xử lý việc cung cấp hạ tầng. Sau khi triển khai:
 
 ### 🎛️ Tùy Chỉnh
 
-Chỉnh sửa `azuredeploy.parameters.json` để tùy chỉnh triển khai của bạn:
+Chỉnh `azuredeploy.parameters.json` để tùy chỉnh triển khai của bạn:
 
 ```json
 {
@@ -2050,81 +2041,81 @@ Chỉnh sửa `azuredeploy.parameters.json` để tùy chỉnh triển khai củ
 
 ### 📊 Tính Năng Triển Khai
 
-- ✅ **Xác thực yêu cầu trước** (Azure CLI, hạn mức, quyền)
-- ✅ **Đa vùng với khả năng sẵn sàng cao** và tự động chuyển đổi dự phòng
+- ✅ **Xác nhận điều kiện tiên quyết** (Azure CLI, quota, quyền)
+- ✅ **Độ sẵn sàng cao đa vùng** với chuyển đổi dự phòng tự động
 - ✅ **Giám sát toàn diện** với Application Insights và Log Analytics
 - ✅ **Thực hành bảo mật tốt nhất** với Key Vault và RBAC
-- ✅ **Tối ưu hóa chi phí** với các chế độ triển khai có thể cấu hình
-- ✅ **Mở rộng tự động** dựa trên mô hình nhu cầu
-- ✅ **Cập nhật không gián đoạn** với các phiên bản Container Apps
+- ✅ **Tối ưu chi phí** với chế độ triển khai có thể cấu hình
+- ✅ **Tự động mở rộng** dựa trên mô hình nhu cầu
+- ✅ **Cập nhật không downtime** với các revision của Container Apps
 
-### 🔍 Giám Sát và Quản Lý
+### 🔍 Giám sát và Quản lý
 
-Sau khi triển khai, giám sát giải pháp của bạn thông qua:
+Sau khi triển khai, giám sát giải pháp của bạn qua:
 
-- **Application Insights**: Các chỉ số hiệu suất, theo dõi phụ thuộc, và telemetry tùy chỉnh
-- **Log Analytics**: Nhật ký tập trung từ tất cả các thành phần
-- **Azure Monitor**: Giám sát sức khỏe và khả năng sẵn sàng của tài nguyên
-- **Quản lý Chi Phí**: Theo dõi chi phí thời gian thực và cảnh báo ngân sách
+- **Application Insights**: số liệu hiệu năng, theo dõi phụ thuộc, và telemetry tùy chỉnh
+- **Log Analytics**: ghi nhật ký tập trung từ tất cả thành phần
+- **Azure Monitor**: giám sát sức khỏe và tính khả dụng của tài nguyên
+- **Cost Management**: theo dõi chi phí theo thời gian thực và cảnh báo ngân sách
 
 ---
 
 ## 📚 Hướng Dẫn Triển Khai Hoàn Chỉnh
 
-Tài liệu kịch bản này kết hợp với mẫu ARM cung cấp mọi thứ cần thiết để triển khai một giải pháp hỗ trợ khách hàng đa tác nhân sẵn sàng sản xuất. Việc triển khai bao gồm:
+Tài liệu kịch bản này kết hợp với mẫu ARM cung cấp mọi thứ cần thiết để triển khai một giải pháp hỗ trợ khách hàng đa tác nhân sẵn sàng cho môi trường production. Việc triển khai bao gồm:
 
 ✅ **Thiết Kế Kiến Trúc** - Thiết kế hệ thống toàn diện với mối quan hệ giữa các thành phần  
-✅ **Cung Cấp Hạ Tầng** - Mẫu ARM hoàn chỉnh cho triển khai một lần nhấp  
-✅ **Cấu Hình Tác Nhân** - Thiết lập chi tiết cho các tác nhân Khách hàng và Hàng tồn kho  
-✅ **Triển Khai Đa Mô Hình** - Đặt mô hình chiến lược trên các vùng  
+✅ **Cấp Phát Hạ Tầng** - Mẫu ARM hoàn chỉnh cho triển khai một lần nhấp  
+✅ **Cấu Hình Agent** - Thiết lập chi tiết cho các agent Khách hàng và Hàng tồn kho  
+✅ **Triển Khai Đa Mô Hình** - Cân nhắc đặt mô hình chiến lược theo vùng  
 ✅ **Tích Hợp Tìm Kiếm** - AI Search với khả năng vector và lập chỉ mục dữ liệu  
-✅ **Triển Khai Bảo Mật** - Đội đỏ, quét lỗ hổng, và thực hành an toàn  
-✅ **Giám Sát & Đánh Giá** - Telemetry toàn diện và khung đánh giá tác nhân  
-✅ **Sẵn Sàng Sản Xuất** - Triển khai cấp doanh nghiệp với HA và khôi phục thảm họa  
-✅ **Tối Ưu Hóa Chi Phí** - Định tuyến thông minh và mở rộng dựa trên sử dụng  
-✅ **Hướng Dẫn Khắc Phục Sự Cố** - Các vấn đề phổ biến và chiến lược giải quyết
+✅ **Thực Thi Bảo Mật** - Red teaming, quét lỗ hổng, và thực hành an toàn  
+✅ **Giám sát & Đánh Giá** - Telemetry toàn diện và khung đánh giá agent  
+✅ **Sẵn Sàng Cho Production** - Triển khai cấp doanh nghiệp với HA và phục hồi thảm họa  
+✅ **Tối ưu Chi Phí** - Chuyển tuyến thông minh và tự động mở rộng theo mức sử dụng  
+✅ **Hướng Dẫn Khắc Phục Sự Cố** - Các vấn đề phổ biến và chiến lược khắc phục
 
 ---
 
-## 📊 Tóm Tắt: Những Gì Bạn Đã Học
+## 📊 Tóm Tắt: Bạn Đã Học Được Gì
 
-### Mẫu Kiến Trúc Đã Được Bao Phủ
+### Mẫu Kiến Trúc Đã Được Trình Bày
 
-✅ **Thiết Kế Hệ Thống Đa Tác Nhân** - Các tác nhân chuyên biệt (Khách hàng + Hàng tồn kho) với mô hình riêng  
-✅ **Triển Khai Đa Vùng** - Đặt mô hình chiến lược để tối ưu hóa chi phí và tăng độ tin cậy  
-✅ **Kiến Trúc RAG** - Tích hợp AI Search với vector embeddings để cung cấp câu trả lời chính xác  
-✅ **Đánh Giá Tác Nhân** - Mô hình grader chuyên dụng để đánh giá chất lượng  
-✅ **Khung Bảo Mật** - Đội đỏ và các mẫu quét lỗ hổng  
-✅ **Tối Ưu Hóa Chi Phí** - Chiến lược định tuyến mô hình và lập kế hoạch năng lực  
-✅ **Giám Sát Sản Xuất** - Application Insights với telemetry tùy chỉnh  
+✅ **Thiết Kế Hệ Thống Đa Tác Nhân** - Các agent chuyên biệt (Khách hàng + Hàng tồn kho) với mô hình riêng  
+✅ **Triển Khai Đa Vùng** - Đặt mô hình chiến lược để tối ưu chi phí và độ dự phòng  
+✅ **Kiến Trúc RAG** - Tích hợp AI Search với embeddings vector để trả lời có cơ sở  
+✅ **Đánh Giá Agent** - Mô hình grader chuyên dụng để đánh giá chất lượng  
+✅ **Khung Bảo Mật** - Mô hình red teaming và quét lỗ hổng  
+✅ **Tối ưu Chi Phí** - Chuyển tuyến mô hình và hoạch định năng lực  
+✅ **Giám sát Production** - Application Insights với telemetry tùy chỉnh  
 
-### Những Gì Tài Liệu Này Cung Cấp
+### Tài Liệu Này Cung Cấp Gì
 
-| Thành Phần | Trạng Thái | Nơi Tìm Thấy |
-|------------|------------|--------------|
-| **Mẫu Hạ Tầng** | ✅ Sẵn Sàng Triển Khai | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Sơ Đồ Kiến Trúc** | ✅ Hoàn Chỉnh | Sơ đồ Mermaid ở trên |
-| **Ví Dụ Mã** | ✅ Triển Khai Tham Khảo | Trong tài liệu này |
-| **Mẫu Cấu Hình** | ✅ Hướng Dẫn Chi Tiết | Các phần 1-10 ở trên |
-| **Triển Khai Tác Nhân** | 🔨 Bạn Tự Xây Dựng | ~40 giờ phát triển |
-| **Giao Diện Người Dùng Frontend** | 🔨 Bạn Tự Xây Dựng | ~25 giờ phát triển |
-| **Dòng Dữ Liệu** | 🔨 Bạn Tự Xây Dựng | ~10 giờ phát triển |
+| Component | Status | Where to Find It |
+|-----------|--------|------------------|
+| **Infrastructure Template** | ✅ Ready to Deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Complete | Mermaid diagram above |
+| **Code Examples** | ✅ Reference Implementations | Throughout this document |
+| **Configuration Patterns** | ✅ Detailed Guidance | Sections 1-10 above |
+| **Agent Implementations** | 🔨 You Build This | ~40 hours development |
+| **Frontend UI** | 🔨 You Build This | ~25 hours development |
+| **Data Pipelines** | 🔨 You Build This | ~10 hours development |
 
 ### Kiểm Tra Thực Tế: Những Gì Thực Sự Tồn Tại
 
-**Trong Kho Lưu Trữ (Sẵn Sàng Ngay):**
-- ✅ Mẫu ARM triển khai hơn 15 dịch vụ Azure (azuredeploy.json)
+**Trong Kho (Sẵn Sàng Ngay):**
+- ✅ Mẫu ARM triển khai 15+ dịch vụ Azure (azuredeploy.json)
 - ✅ Script triển khai với xác thực (deploy.sh)
 - ✅ Cấu hình tham số (azuredeploy.parameters.json)
 
-**Được Tham Chiếu Trong Tài Liệu (Bạn Tự Tạo):**
-- 🔨 Mã triển khai tác nhân (~30-40 giờ)
-- 🔨 Dịch vụ định tuyến (~12-16 giờ)
+**Được Tham Chiếu Trong Tài Liệu (Bạn Tạo):**
+- 🔨 Mã triển khai agent (~30-40 giờ)
+- 🔨 Dịch vụ routing (~12-16 giờ)
 - 🔨 Ứng dụng frontend (~20-30 giờ)
 - 🔨 Script thiết lập dữ liệu (~8-12 giờ)
 - 🔨 Khung giám sát (~10-15 giờ)
 
-### Các Bước Tiếp Theo Của Bạn
+### Bước Tiếp Theo của Bạn
 
 #### Nếu Bạn Muốn Triển Khai Hạ Tầng (30 phút)
 ```bash
@@ -2135,60 +2126,60 @@ cd retail-multiagent-arm-template
 #### Nếu Bạn Muốn Xây Dựng Hệ Thống Hoàn Chỉnh (80-120 giờ)
 1. ✅ Đọc và hiểu tài liệu kiến trúc này (2-3 giờ)
 2. ✅ Triển khai hạ tầng bằng mẫu ARM (30 phút)
-3. 🔨 Triển khai tác nhân sử dụng các mẫu mã tham khảo (~40 giờ)
-4. 🔨 Xây dựng dịch vụ định tuyến với FastAPI/Express (~15 giờ)
+3. 🔨 Triển khai agent sử dụng các mẫu mã tham khảo (~40 giờ)
+4. 🔨 Xây dịch vụ routing với FastAPI/Express (~15 giờ)
 5. 🔨 Tạo giao diện frontend với React/Vue (~25 giờ)
-6. 🔨 Cấu hình dòng dữ liệu và chỉ mục tìm kiếm (~10 giờ)
+6. 🔨 Cấu hình pipeline dữ liệu và chỉ mục tìm kiếm (~10 giờ)
 7. 🔨 Thêm giám sát và đánh giá (~15 giờ)
-8. ✅ Kiểm tra, bảo mật, và tối ưu hóa (~10 giờ)
+8. ✅ Kiểm thử, bảo mật và tối ưu (~10 giờ)
 
-#### Nếu Bạn Muốn Học Các Mẫu Đa Tác Nhân (Nghiên Cứu)
-- 📖 Xem sơ đồ kiến trúc và mối quan hệ giữa các thành phần
-- 📖 Nghiên cứu các ví dụ mã cho SearchTool, BingTool, AgentEvaluator
+#### Nếu Bạn Muốn Học Các Mẫu Đa Tác Nhân (Học)
+- 📖 Xem lại sơ đồ kiến trúc và mối quan hệ giữa các thành phần
+- 📖 Nghiên cứu ví dụ mã cho SearchTool, BingTool, AgentEvaluator
 - 📖 Hiểu chiến lược triển khai đa vùng
-- 📖 Tìm hiểu khung đánh giá và bảo mật
-- 📖 Áp dụng các mẫu vào dự án của riêng bạn
+- 📖 Học khung đánh giá và bảo mật
+- 📖 Áp dụng các mẫu vào dự án của bạn
 
-### Những Điều Quan Trọng
+### Những Điểm Chính
 
-1. **Hạ Tầng vs. Ứng Dụng** - Mẫu ARM cung cấp hạ tầng; các tác nhân cần phát triển thêm
-2. **Chiến Lược Đa Vùng** - Đặt mô hình chiến lược giảm chi phí và cải thiện độ tin cậy
+1. **Hạ tầng vs. Ứng dụng** - Mẫu ARM cung cấp hạ tầng; các agent cần phát triển
+2. **Chiến lược Đa Vùng** - Đặt mô hình chiến lược giúp giảm chi phí và tăng độ tin cậy
 3. **Khung Đánh Giá** - Mô hình grader chuyên dụng cho phép đánh giá chất lượng liên tục
-4. **Bảo Mật Là Ưu Tiên** - Đội đỏ và quét lỗ hổng là cần thiết cho sản xuất
-5. **Tối Ưu Hóa Chi Phí** - Định tuyến thông minh giữa GPT-4o và GPT-4o-mini tiết kiệm 60-80%
+4. **Bảo Mật Trước Tiên** - Red teaming và quét lỗ hổng là cần thiết cho môi trường production
+5. **Tối ưu Chi Phí** - Chuyển tuyến thông minh giữa GPT-4o và GPT-4o-mini tiết kiệm 60-80%
 
 ### Chi Phí Ước Tính
 
-| Chế Độ Triển Khai | Hạ Tầng/Tháng | Phát Triển (Một Lần) | Tổng Tháng Đầu Tiên |
-|-------------------|---------------|----------------------|---------------------|
-| **Tối Thiểu** | $100-370 | $15K-25K (80-120 giờ) | $15.1K-25.4K |
-| **Tiêu Chuẩn** | $420-1,450 | $15K-25K (cùng nỗ lực) | $15.4K-26.5K |
-| **Cao Cấp** | $1,150-3,500 | $15K-25K (cùng nỗ lực) | $16.2K-28.5K |
+| Deployment Mode | Infrastructure/Month | Development (One-Time) | Total First Month |
+|-----------------|---------------------|------------------------|-------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
 
 **Lưu ý:** Hạ tầng chiếm <5% tổng chi phí cho các triển khai mới. Nỗ lực phát triển là khoản đầu tư chính.
 
 ### Tài Nguyên Liên Quan
 
-- 📚 [Hướng Dẫn Triển Khai Mẫu ARM](retail-multiagent-arm-template/README.md) - Thiết lập hạ tầng
-- 📚 [Thực Hành Tốt Nhất Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - Triển khai mô hình
-- 📚 [Tài Liệu AI Search](https://learn.microsoft.com/azure/search/) - Cấu hình tìm kiếm vector
-- 📚 [Mẫu Container Apps](https://learn.microsoft.com/azure/container-apps/) - Triển khai microservices
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Thiết lập hạ tầng
+- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Triển khai mô hình
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Cấu hình tìm kiếm vector
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Triển khai microservices
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Thiết lập giám sát
 
-### Câu Hỏi hoặc Vấn Đề?
+### Câu hỏi hoặc Vấn đề?
 
-- 🐛 [Báo Cáo Vấn Đề](https://github.com/microsoft/AZD-for-beginners/issues) - Lỗi mẫu hoặc tài liệu
-- 💬 [Thảo Luận GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Câu hỏi về kiến trúc
-- 📖 [FAQ](../../resources/faq.md) - Câu hỏi thường gặp
-- 🔧 [Hướng Dẫn Khắc Phục Sự Cố](../../docs/troubleshooting/common-issues.md) - Vấn đề triển khai
+- 🐛 [Báo cáo sự cố](https://github.com/microsoft/AZD-for-beginners/issues) - Lỗi mẫu hoặc sai sót tài liệu
+- 💬 [Thảo luận trên GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Câu hỏi kiến trúc
+- 📖 [FAQ](../resources/faq.md) - Các câu hỏi thường gặp đã được trả lời
+- 🔧 [Hướng dẫn Khắc phục Sự cố](../docs/troubleshooting/common-issues.md) - Các vấn đề triển khai
 
 ---
 
-**Kịch bản toàn diện này cung cấp một bản thiết kế kiến trúc cấp doanh nghiệp cho các hệ thống AI đa tác nhân, hoàn chỉnh với mẫu hạ tầng, hướng dẫn triển khai, và các thực hành tốt nhất để xây dựng các giải pháp hỗ trợ khách hàng tinh vi với Azure Developer CLI.**
+**Kịch bản toàn diện này cung cấp bản thiết kế kiến trúc cấp doanh nghiệp cho hệ thống AI đa tác nhân, hoàn chỉnh với mẫu hạ tầng, hướng dẫn triển khai và thực hành tốt nhất cho production để xây dựng các giải pháp hỗ trợ khách hàng tinh vi với Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Miễn trừ trách nhiệm:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng bản dịch chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

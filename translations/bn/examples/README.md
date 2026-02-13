@@ -1,185 +1,176 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-20T11:47:18+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "bn"
-}
--->
-# উদাহরণ - ব্যবহারিক AZD টেমপ্লেট এবং কনফিগারেশন
+# উদাহরণসমূহ - ব্যবহারিক AZD টেমপ্লেট এবং কনফিগারেশন
 
-**উদাহরণ থেকে শেখা - অধ্যায় অনুযায়ী সংগঠিত**
-- **📚 কোর্স হোম**: [AZD For Beginners](../README.md)
-- **📖 অধ্যায় ম্যাপিং**: শেখার জটিলতার ভিত্তিতে উদাহরণগুলি সংগঠিত
-- **🚀 স্থানীয় উদাহরণ**: [রিটেইল মাল্টি-এজেন্ট সলিউশন](retail-scenario.md)
-- **🤖 বাহ্যিক AI উদাহরণ**: Azure Samples রিপোজিটরির লিঙ্ক
+**উদাহরণ থেকে শেখা - অধ্যায় অনুসারে সংগঠিত**
+- **📚 কোর্স হোম**: [AZD নবাগতদের জন্য](../README.md)
+- **📖 অধ্যায় মানচিত্র**: শেখার জটিলতা অনুযায়ী সংগঠিত উদাহরণসমূহ
+- **🚀 লোকাল উদাহরণ**: [রিটেইল মাল্টি-এজেন্ট সলিউশন](retail-scenario.md)
+- **🤖 এক্সটার্নাল AI উদাহরণ**: Azure Samples রিপোজিটরি লিঙ্কসমূহ
 
-> **📍 গুরুত্বপূর্ণ: স্থানীয় বনাম বাহ্যিক উদাহরণ**  
-> এই রিপোজিটরিতে **৪টি সম্পূর্ণ স্থানীয় উদাহরণ** রয়েছে সম্পূর্ণ বাস্তবায়ন সহ:  
-> - **Azure OpenAI Chat** (GPT-4 ডিপ্লয়মেন্ট চ্যাট ইন্টারফেস সহ)  
-> - **Container Apps** (সাধারণ Flask API + মাইক্রোসার্ভিস)  
+> **📍 গুরুত্বপূর্ণ: লোকাল বনাম এক্সটার্নাল উদাহরণ**  
+> এই রিপোজিটরিতে পূর্ণ বাস্তবায়নসহ **4টি সম্পূর্ণ লোকাল উদাহরণ** রয়েছে:  
+> - **Azure OpenAI Chat** (GPT-4 ডিপ্লয়মেন্ট সহ চ্যাট ইন্টারফেস)  
+> - **Container Apps** (সাধারণ Flask API + মাইক্রোসার্ভিসেস)  
 > - **Database App** (ওয়েব + SQL ডাটাবেস)  
 > - **Retail Multi-Agent** (এন্টারপ্রাইজ AI সলিউশন)  
 >  
-> অতিরিক্ত উদাহরণগুলি **বাহ্যিক রেফারেন্স** Azure-Samples রিপোজিটরিতে যা আপনি ক্লোন করতে পারেন।
+> অতিরিক্ত উদাহরণগুলি আপনি ক্লোন করতে পারবেন এমন Azure-Samples রিপোজিটরির **এক্সটার্নাল রেফারেন্স**।
 
 ## পরিচিতি
 
-এই ডিরেক্টরি ব্যবহারিক উদাহরণ এবং রেফারেন্স প্রদান করে যা আপনাকে হাতে-কলমে অনুশীলনের মাধ্যমে Azure Developer CLI শিখতে সাহায্য করবে। রিটেইল মাল্টি-এজেন্ট দৃশ্য একটি সম্পূর্ণ, প্রোডাকশন-রেডি বাস্তবায়ন যা এই রিপোজিটরিতে অন্তর্ভুক্ত। অতিরিক্ত উদাহরণগুলি বিভিন্ন AZD প্যাটার্ন প্রদর্শনকারী অফিসিয়াল Azure Samples রেফারেন্স করে।
+এই ডিরেক্টরি আপনাকে হাতে-কলমে অনুশীলনের মাধ্যমে Azure Developer CLI শিখতে সহায়তার জন্য ব্যবহারিক উদাহরণ ও রেফারেন্স প্রদান করে। রিটেইল মাল্টি-এজেন্ট সিনারিওটি এই রিপোজিটরিতে অন্তর্ভুক্ত একটি পূর্ণাঙ্গ, প্রোডাকশন-রেডি ইমপ্লিমেন্টেশন। অতিরিক্ত উদাহরণগুলি বিভিন্ন AZD প্যাটার্ন প্রদর্শন করে এমন অফিসিয়াল Azure Samples-কে রেফারেন্স করে।
 
 ### জটিলতা রেটিং লেজেন্ড
 
-- ⭐ **শুরু** - মৌলিক ধারণা, একক সার্ভিস, ১৫-৩০ মিনিট
-- ⭐⭐ **মধ্যম** - একাধিক সার্ভিস, ডাটাবেস ইন্টিগ্রেশন, ৩০-৬০ মিনিট
-- ⭐⭐⭐ **উন্নত** - জটিল আর্কিটেকচার, AI ইন্টিগ্রেশন, ১-২ ঘণ্টা
-- ⭐⭐⭐⭐ **বিশেষজ্ঞ** - প্রোডাকশন-রেডি, এন্টারপ্রাইজ প্যাটার্ন, ২+ ঘণ্টা
+- ⭐ **প্রারম্ভিক** - মৌলিক ধারণা, একক সার্ভিস, 15-30 মিনিট
+- ⭐⭐ **মধ্যবর্তী** - একাধিক সার্ভিস, ডাটাবেস ইন্টিগ্রেশন, 30-60 মিনিট
+- ⭐⭐⭐ **উন্নত** - জটিল আর্কিটেকচার, AI ইন্টিগ্রেশন, 1-2 ঘন্টা
+- ⭐⭐⭐⭐ **বিশেষজ্ঞ** - প্রোডাকশন-রেডি, এন্টারপ্রাইজ প্যাটার্ন, 2+ ঘন্টা
 
-## 🎯 এই রিপোজিটরিতে কী আছে
+## 🎯 এই রিপোজিটরিতে আসলে কি আছে
 
-### ✅ স্থানীয় বাস্তবায়ন (ব্যবহারের জন্য প্রস্তুত)
+### ✅ লোকাল ইমপ্লিমেন্টেশন (ব্যবহারের জন্য প্রস্তুত)
 
-#### [Azure OpenAI Chat Application](azure-openai-chat/README.md) 🆕
-**GPT-4 ডিপ্লয়মেন্ট চ্যাট ইন্টারফেস সহ সম্পূর্ণ বাস্তবায়ন**
+#### [Azure OpenAI চ্যাট অ্যাপ্লিকেশন](azure-openai-chat/README.md) 🆕
+**এই রিপোজিটরিতে চ্যাট ইন্টারফেসসহ সম্পূর্ণ GPT-4 ডিপ্লয়মেন্ট অন্তর্ভুক্ত**
 
 - **অবস্থান:** `examples/azure-openai-chat/`
-- **জটিলতা:** ⭐⭐ (মধ্যম)
-- **অন্তর্ভুক্ত বিষয়:**
+- **জটিলতা:** ⭐⭐ (মধ্যবর্তী)
+- **কী অন্তর্ভুক্ত আছে:**
   - সম্পূর্ণ Azure OpenAI ডিপ্লয়মেন্ট (GPT-4)
-  - পাইথন কমান্ড-লাইন চ্যাট ইন্টারফেস
-  - Key Vault ইন্টিগ্রেশন নিরাপদ API কী-এর জন্য
+  - Python কমান্ড-লাইন চ্যাট ইন্টারফেস
+  - সিকিউর API কী-এর জন্য Key Vault ইন্টিগ্রেশন
   - Bicep ইনফ্রাস্ট্রাকচার টেমপ্লেট
   - টোকেন ব্যবহার এবং খরচ ট্র্যাকিং
   - রেট লিমিটিং এবং ত্রুটি পরিচালনা
 
-**শুরু করার জন্য:**
+**দ্রুত শুরু:**
 ```bash
-# উদাহরণে নেভিগেট করুন
+# উদাহরণে যান
 cd examples/azure-openai-chat
 
-# সবকিছু মোতায়েন করুন
+# সবকিছু ডিপ্লয় করুন
 azd up
 
-# নির্ভরশীলতা ইনস্টল করুন এবং চ্যাটিং শুরু করুন
+# নির্ভরশীল প্যাকেজগুলো ইনস্টল করে চ্যাট শুরু করুন
 pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-**প্রযুক্তি:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
+**প্রযুক্তিগুলো:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
 
-#### [Container App Examples](container-app/README.md) 🆕
-**সম্পূর্ণ কন্টেইনার ডিপ্লয়মেন্ট উদাহরণ এই রিপোজিটরিতে অন্তর্ভুক্ত**
+#### [Container App উদাহরণসমূহ](container-app/README.md) 🆕
+**এই রিপোজিটরিতে বিস্তৃত কনটেইনার ডিপ্লয়মেন্ট উদাহরণসমূহ অন্তর্ভুক্ত**
 
 - **অবস্থান:** `examples/container-app/`
-- **জটিলতা:** ⭐-⭐⭐⭐⭐ (শুরু থেকে বিশেষজ্ঞ)
-- **অন্তর্ভুক্ত বিষয়:**
-  - [মাস্টার গাইড](container-app/README.md) - কন্টেইনার ডিপ্লয়মেন্টের সম্পূর্ণ ওভারভিউ
-  - [Simple Flask API](../../../examples/container-app/simple-flask-api) - মৌলিক REST API উদাহরণ
-  - [Microservices Architecture](../../../examples/container-app/microservices) - প্রোডাকশন-রেডি মাল্টি-সার্ভিস ডিপ্লয়মেন্ট
-  - দ্রুত শুরু, প্রোডাকশন এবং উন্নত প্যাটার্ন
-  - মনিটরিং, নিরাপত্তা এবং খরচ অপ্টিমাইজেশন
+- **জটিলতা:** ⭐-⭐⭐⭐⭐ (প্রারম্ভিক থেকে উন্নত)
+- **কী অন্তর্ভুক্ত আছে:**
+  - [মাস্টার গাইড](container-app/README.md) - কনটেইনার ডিপ্লয়মেন্টের সম্পূর্ণ ওভারভিউ
+  - [সাধারণ Flask API](../../../examples/container-app/simple-flask-api) - ব্যাসিক REST API উদাহরণ
+  - [মাইক্রোসার্ভিস আর্কিটেকচার](../../../examples/container-app/microservices) - প্রোডাকশন-রেডি মাল্টি-সার্ভিস ডিপ্লয়মেন্ট
+  - দ্রুত শুরু, প্রোডাকশন, এবং উন্নত প্যাটার্নসমূহ
+  - মনিটরিং, সিকিউরিটি, এবং খরচ অপ্টিমাইজেশন
 
-**শুরু করার জন্য:**
+**দ্রুত শুরু:**
 ```bash
 # মাস্টার গাইড দেখুন
 cd examples/container-app
 
-# সহজ Flask API স্থাপন করুন
+# সহজ Flask API ডিপ্লয় করুন
 cd simple-flask-api
 azd up
 
-# মাইক্রোসার্ভিস উদাহরণ স্থাপন করুন
+# মাইক্রোসার্ভিসের উদাহরণ ডিপ্লয় করুন
 cd ../microservices
 azd up
 ```
 
-**প্রযুক্তি:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
+**প্রযুক্তিগুলো:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
-**সম্পূর্ণ প্রোডাকশন-রেডি বাস্তবায়ন এই রিপোজিটরিতে অন্তর্ভুক্ত**
+#### [রিটেইল মাল্টি-এজেন্ট সলিউশন](retail-scenario.md) 🆕
+**এই রিপোজিটরিতে সম্পূর্ণ প্রোডাকশন-রেডি ইমপ্লিমেন্টেশন অন্তর্ভুক্ত**
 
 - **অবস্থান:** `examples/retail-multiagent-arm-template/`
 - **জটিলতা:** ⭐⭐⭐⭐ (উন্নত)
-- **অন্তর্ভুক্ত বিষয়:**
+- **কী অন্তর্ভুক্ত আছে:**
   - সম্পূর্ণ ARM ডিপ্লয়মেন্ট টেমপ্লেট
   - মাল্টি-এজেন্ট আর্কিটেকচার (কাস্টমার + ইনভেন্টরি)
   - Azure OpenAI ইন্টিগ্রেশন
-  - AI Search with RAG
+  - RAG সহ AI সার্চ
   - বিস্তৃত মনিটরিং
   - এক-ক্লিক ডিপ্লয়মেন্ট স্ক্রিপ্ট
 
-**শুরু করার জন্য:**
+**দ্রুত শুরু:**
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**প্রযুক্তি:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
+**প্রযুক্তিগুলো:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 বাহ্যিক Azure Samples (ব্যবহারের জন্য ক্লোন করুন)
+## 🔗 এক্সটার্নাল Azure স্যাম্পলস (ক্লোন করে ব্যবহার করুন)
 
-নিম্নলিখিত উদাহরণগুলি অফিসিয়াল Azure-Samples রিপোজিটরিতে সংরক্ষিত। বিভিন্ন AZD প্যাটার্ন অন্বেষণ করতে এগুলি ক্লোন করুন:
+নিচের উদাহরণগুলো অফিসিয়াল Azure-Samples রিপোজিটরিতে রক্ষণাবেক্ষণ করা হয়। বিভিন্ন AZD প্যাটার্ন অন্বেষণ করার জন্য এগুলো ক্লোন করুন:
 
-### সাধারণ অ্যাপ্লিকেশন (অধ্যায় ১-২)
+### সহজ অ্যাপ্লিকেশনসমূহ (অধ্যায় 1-2)
 
 | টেমপ্লেট | রিপোজিটরি | জটিলতা | সার্ভিস |
 |:---------|:-----------|:-----------|:---------|
-| **Python Flask API** | [স্থানীয়: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Microservices** | [স্থানীয়: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | মাল্টি-সার্ভিস, Service Bus, Cosmos DB, SQL |
+| **Python Flask API** | [লোকাল: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| **Microservices** | [লোকাল: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | মাল্টি-সার্ভিস, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
-**ব্যবহারের পদ্ধতি:**
+**কিভাবে ব্যবহার করবেন:**
 ```bash
-# যেকোনো উদাহরণ ক্লোন করুন
+# কোনো উদাহরণ ক্লোন করুন
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
-# মোতায়েন করুন
+# ডেপ্লয় করুন
 azd up
 ```
 
-### AI অ্যাপ্লিকেশন উদাহরণ (অধ্যায় ২, ৫, ৮)
+### AI অ্যাপ্লিকেশন উদাহরণসমূহ (অধ্যায় 2, 5, 8)
 
 | টেমপ্লেট | রিপোজিটরি | জটিলতা | ফোকাস |
 |:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [স্থানীয়: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 ডিপ্লয়মেন্ট |
-| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | মৌলিক AI চ্যাট |
-| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | এজেন্ট ফ্রেমওয়ার্ক |
-| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG প্যাটার্ন |
-| **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | এন্টারপ্রাইজ AI |
+| **Azure OpenAI Chat** | [লোকাল: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 ডিপ্লয়মেন্ট |
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Basic AI chat |
+| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent framework |
+| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG pattern |
+| **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Enterprise AI |
 
-### ডাটাবেস ও উন্নত প্যাটার্ন (অধ্যায় ৩-৮)
+### ডাটাবেস ও উন্নত প্যাটার্ন (অধ্যায় 3-8)
 
 | টেমপ্লেট | রিপোজিটরি | জটিলতা | ফোকাস |
 |:---------|:-----------|:-----------|:------|
-| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | ডাটাবেস ইন্টিগ্রেশন |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL সার্ভারলেস |
-| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | মাল্টি-সার্ভিস |
+| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Database integration |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
+| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Multi-service |
 | **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## শেখার লক্ষ্য
 
-এই উদাহরণগুলি সম্পন্ন করার মাধ্যমে আপনি:
-- বাস্তব অ্যাপ্লিকেশন দৃশ্যের সাথে Azure Developer CLI ওয়ার্কফ্লো অনুশীলন করবেন
-- বিভিন্ন অ্যাপ্লিকেশন আর্কিটেকচার এবং তাদের AZD বাস্তবায়ন বুঝতে পারবেন
-- বিভিন্ন Azure সার্ভিসের জন্য Infrastructure as Code প্যাটার্ন আয়ত্ত করবেন
-- কনফিগারেশন ম্যানেজমেন্ট এবং পরিবেশ-নির্দিষ্ট ডিপ্লয়মেন্ট কৌশল প্রয়োগ করবেন
-- বাস্তব প্রেক্ষাপটে মনিটরিং, নিরাপত্তা এবং স্কেলিং প্যাটার্ন বাস্তবায়ন করবেন
-- বাস্তব ডিপ্লয়মেন্ট দৃশ্যের ত্রুটি সংশোধন এবং ডিবাগিং অভিজ্ঞতা অর্জন করবেন
+- এই উদাহরণগুলি অনুসরণ করে কাজ করে আপনি পারবেন:
+- বাস্তবসম্মত অ্যাপ্লিকেশন পরিস্থিতিতে Azure Developer CLI ওয়ার্কফ্লো প্র্যাকটিস করা
+- বিভিন্ন অ্যাপ্লিকেশন আর্কিটেকচার এবং সেগুলির azd ইমপ্লিমেন্টেশন বুঝতে পারা
+- বিভিন্ন Azure সার্ভিসের জন্য Infrastructure as Code প্যাটার্নে দক্ষতা অর্জন করা
+- কনফিগারেশন ম্যানেজমেন্ট এবং পরিবেশ-নির্দিষ্ট ডিপ্লয়মেন্ট কৌশল প্রয়োগ করা
+- বাস্তব পরিস্থিতিতে মনিটরিং, সিকিউরিটি, এবং স্কেলিং প্যাটার্ন বাস্তবায়ন করা
+- প্রকৃত ডিপ্লয়মেন্ট পরিস্থিতিতে ট্রাবলশুটিং এবং ডিবাগিং-এর অভিজ্ঞতা গড়ে তোলা
 
 ## শেখার ফলাফল
 
-এই উদাহরণগুলি সম্পন্ন করার পরে আপনি:
-- আত্মবিশ্বাসের সাথে Azure Developer CLI ব্যবহার করে বিভিন্ন অ্যাপ্লিকেশন টাইপ ডিপ্লয় করতে পারবেন
-- প্রদত্ত টেমপ্লেটগুলি আপনার নিজস্ব অ্যাপ্লিকেশন প্রয়োজনীয়তার সাথে মানিয়ে নিতে পারবেন
-- Bicep ব্যবহার করে কাস্টম ইনফ্রাস্ট্রাকচার প্যাটার্ন ডিজাইন এবং বাস্তবায়ন করতে পারবেন
-- সঠিক নির্ভরতা সহ জটিল মাল্টি-সার্ভিস অ্যাপ্লিকেশন কনফিগার করতে পারবেন
-- বাস্তব দৃশ্যে নিরাপত্তা, মনিটরিং এবং পারফরম্যান্সের সেরা অনুশীলন প্রয়োগ করতে পারবেন
-- বাস্তব অভিজ্ঞতার ভিত্তিতে ডিপ্লয়মেন্ট ত্রুটি সংশোধন এবং অপ্টিমাইজ করতে পারবেন
+এই উদাহরণগুলো সম্পন্ন করলে আপনি সক্ষম হবেন:
+- আত্মবিশ্বাসের সাথে Azure Developer CLI ব্যবহার করে বিভিন্ন ধরনের অ্যাপ্লিকেশন ডিপ্লয় করা
+- প্রদত্ত টেমপ্লেটগুলো আপনার নিজস্ব অ্যাপ্লিকেশন প্রয়োজন অনুযায়ী অভিযোজিত করা
+- Bicep ব্যবহার করে কাস্টম ইনফ্রাস্ট্রাকচার প্যাটার্ন ডিজাইন ও ইমপ্লিমেন্ট করা
+- সঠিক ডিপেন্ডেন্সিসহ জটিল মাল্টি-সার্ভিস অ্যাপ্লিকেশন কনফিগার করা
+- বাস্তব পরিস্থিতিতে সিকিউরিটি, মনিটরিং, এবং পারফর্ম্যান্সের সেরা অনুশীলন প্রয়োগ করা
+- ব্যবহারিক অভিজ্ঞতার ভিত্তিতে ডিপ্লয়মেন্ট ট্রাবলশুট ও অপ্টিমাইজ করা
 
 ## ডিরেক্টরি স্ট্রাকচার
 
@@ -197,156 +188,165 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## দ্রুত শুরু উদাহরণ
+## দ্রুত শুরু উদাহরণসমূহ
 
-> **💡 AZD-এ নতুন?** উদাহরণ #১ (Flask API) দিয়ে শুরু করুন - এটি ~২০ মিনিট সময় নেয় এবং মূল ধারণাগুলি শেখায়।
+> **💡 AZD-এ নতুন?** উদাহরণ #1 (Flask API) দিয়ে শুরু করুন - এটি ~20 মিনিট সময় লাগে এবং কোর কনসেপ্টগুলো শেখায়।
 
-### শুরু করার জন্য
-1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (স্থানীয়) ⭐  
-   একটি সাধারণ REST API ডিপ্লয় করুন স্কেল-টু-জিরো সহ  
-   **সময়:** ২০-২৫ মিনিট | **খরচ:** $০-৫/মাস  
-   **আপনি শিখবেন:** মৌলিক azd ওয়ার্কফ্লো, কন্টেইনারাইজেশন, হেলথ প্রোব  
-   **প্রত্যাশিত ফলাফল:** "Hello, World!" রিটার্ন করা একটি কার্যকর API এন্ডপয়েন্ট মনিটরিং সহ
+### প্রারম্ভিকদের জন্য
+1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (লোকাল) ⭐  
+   একটি সিম্পল REST API ডিপ্লয় করুন, scale-to-zero সহ  
+   **সময়:** 20-25 মিনিট | **খরচ:** $0-5/মাস  
+   **আপনি কি শিখবেন:** বেসিক azd ওয়ার্কফ্লো, কনটেইনারাইজেশন, হেলথ প্রোবস  
+   **আশান্বিত ফলাফল:** মনিটরিংসহ একটি কার্যকর API এন্ডপয়েন্ট যা "Hello, World!" রিটার্ন করে
 
 2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   MongoDB সহ একটি Node.js Express ওয়েব অ্যাপ্লিকেশন ডিপ্লয় করুন  
-   **সময়:** ২৫-৩৫ মিনিট | **খরচ:** $১০-৩০/মাস  
-   **আপনি শিখবেন:** ডাটাবেস ইন্টিগ্রেশন, পরিবেশ ভেরিয়েবল, কানেকশন স্ট্রিং  
-   **প্রত্যাশিত ফলাফল:** তৈরি/পড়া/আপডেট/মুছে ফেলার কার্যকারিতা সহ টুডো লিস্ট অ্যাপ
+   MongoDB সহ একটি Node.js Express ওয়েব অ্যাপ ডিপ্লয় করুন  
+   **সময়:** 25-35 মিনিট | **খরচ:** $10-30/মাস  
+   **আপনি কি শিখবেন:** ডাটাবেস ইন্টিগ্রেশন, এনভায়রনমেন্ট ভ্যারিয়েবল, কানেকশন স্ট্রিংস  
+   **আশান্বিত ফলাফল:** তৈরি/পড়া/আপডেট/ডিলিট কার্যকারিতা সহ Todo লিস্ট অ্যাপ
 
 3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Azure Static Web Apps সহ একটি React স্ট্যাটিক ওয়েবসাইট হোস্ট করুন  
-   **সময়:** ২০-৩০ মিনিট | **খরচ:** $০-১০/মাস  
-   **আপনি শিখবেন:** স্ট্যাটিক হোস্টিং, সার্ভারলেস ফাংশন, CDN ডিপ্লয়মেন্ট  
-   **প্রত্যাশিত ফলাফল:** React UI API ব্যাকএন্ড সহ, স্বয়ংক্রিয় SSL, গ্লোবাল CDN
+   Azure Static Web Apps দিয়ে একটি React স্ট্যাটিক ওয়েবসাইট হোস্ট করুন  
+   **সময়:** 20-30 মিনিট | **খরচ:** $0-10/মাস  
+   **আপনি কি শিখবেন:** স্ট্যাটিক হোস্টিং, সার্ভারলেস ফাংশন, CDN ডিপ্লয়মেন্ট  
+   **আশান্বিত ফলাফল:** API ব্যাকএন্ডসহ React UI, স্বয়ংক্রিয় SSL, গ্লোবাল CDN
 
-### মধ্যম ব্যবহারকারীদের জন্য
-4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (স্থানীয়) ⭐⭐  
-   GPT-4 চ্যাট ইন্টারফেস এবং নিরাপদ API কী ব্যবস্থাপনা সহ ডিপ্লয় করুন  
-   **সময়:** ৩৫-৪৫ মিনিট | **খরচ:** $৫০-২০০/মাস  
-   **আপনি শিখবেন:** Azure OpenAI ডিপ্লয়মেন্ট, Key Vault ইন্টিগ্রেশন, টোকেন ট্র্যাকিং  
-   **প্রত্যাশিত ফলাফল:** GPT-4 এবং খরচ মনিটরিং সহ কার্যকর চ্যাট অ্যাপ্লিকেশন
+### মধ্যবর্তী ব্যবহারকারীদের জন্য
+4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (লোকাল) ⭐⭐  
+   GPT-4 চ্যাট ইন্টারফেস এবং সিকিউর API কী ম্যানেজমেন্ট সহ ডিপ্লয় করুন  
+   **সময়:** 35-45 মিনিট | **খরচ:** $50-200/মাস  
+   **আপনি কি শিখবেন:** Azure OpenAI ডিপ্লয়মেন্ট, Key Vault ইন্টিগ্রেশন, টোকেন ট্র্যাকিং  
+   **আশান্বিত ফলাফল:** GPT-4 এবং খরচ মনিটরিং সহ একটি কার্যকর চ্যাট অ্যাপ্লিকেশন
 
-5. **[Container App - Microservices](../../../examples/container-app/microservices)** (স্থানীয়) ⭐⭐⭐⭐  
+5. **[Container App - Microservices](../../../examples/container-app/microservices)** (লোকাল) ⭐⭐⭐⭐  
    প্রোডাকশন-রেডি মাল্টি-সার্ভিস আর্কিটেকচার  
-   **সময়:** ৪৫-৬০ মিনিট | **খরচ:** $৫০-১৫০/মাস  
-   **আপনি শিখবেন:** সার্ভিস কমিউনিকেশন, মেসেজ কুইং, ডিস্ট্রিবিউটেড ট্রেসিং  
-   **প্রত্যাশিত ফলাফল:** মনিটরিং সহ ২-সার্ভিস সিস্টেম (API Gateway + Product Service)
+   **সময়:** 45-60 মিনিট | **খরচ:** $50-150/মাস  
+   **আপনি কি শিখবেন:** সার্ভিস কমিউনিকেশন, মেসেজ কিউয়িং, ডিস্ট্রিবিউটেড ট্রেসিং  
+   **আশান্বিত ফলাফল:** 2-সার্ভিস সিস্টেম (API Gateway + Product Service) মনিটরিং সহ
 
 6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   C# API এবং Azure SQL ডাটাবেস সহ ওয়েব অ্যাপ্লিকেশন  
-   **সময়:** ৩০-৪৫ মিনিট | **খরচ:** $২০-৮০/মাস  
-   **আপনি শিখবেন:** Entity Framework, ডাটাবেস মাইগ্রেশন, কানেকশন নিরাপত্তা  
-   **প্রত্যাশিত ফলাফল:** C# API Azure SQL ব্যাকএন্ড সহ, স্বয়ংক্রিয় স্কিমা ডিপ্লয়মেন্ট
+   C# API এবং Azure SQL Database সহ ওয়েব অ্যাপ্লিকেশন  
+   **সময়:** 30-45 মিনিট | **খরচ:** $20-80/মাস  
+   **আপনি কি শিখবেন:** Entity Framework, ডাটাবেস মাইগ্রেশন, কানেকশন সিকিউরিটি  
+   **আশান্বিত ফলাফল:** Azure SQL ব্যাকএন্ড সহ C# API, স্বয়ংক্রিয় স্কিমা ডিপ্লয়মেন্ট
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
    HTTP ট্রিগার এবং Cosmos DB সহ Python Azure Functions  
-   **সময়:** ৩০-৪০ মিনিট | **খরচ:** $১০-৪০/মাস  
-   **আপনি শিখবেন:** ইভেন্ট-চালিত আর্কিটেকচার, সার্ভারলেস স্কেলিং, NoSQL ইন্টিগ্রেশন  
-   **প্রত্যাশিত ফলাফল:** Cosmos DB স্টোরেজ সহ HTTP অনুরোধে সাড়া দেওয়া ফাংশন অ্যাপ
+   **সময়:** 30-40 মিনিট | **খরচ:** $10-40/মাস  
+   **আপনি কি শিখবেন:** ইভেন্ট-চালিত আর্কিটেকচার, সার্ভারলেস স্কেলিং, NoSQL ইন্টিগ্রেশন  
+   **আশান্বিত ফলাফল:** HTTP রিকোয়েস্টের প্রতিক্রিয়ায় Cosmos DB স্টোরেজ ব্যবহার করে একটি ফাংশন অ্যাপ
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
    Container Apps এবং API গেটওয়ে সহ মাল্টি-সার্ভিস Java অ্যাপ্লিকেশন  
-   **সময়:** ৬০-৯০ মিনিট | **খরচ:** $৮০-২০০/মাস  
-   **আপনি শিখবেন:** Spring Boot ডিপ্লয়মেন্ট, সার্ভিস মেশ, লোড ব্যালেন্সিং  
-   **প্রত্যাশিত ফলাফল:** সার্ভিস ডিসকভারি এবং রাউটিং সহ মাল্টি-সার্ভিস Java সিস্টেম
+   **সময়:** 60-90 মিনিট | **খরচ:** $80-200/মাস  
+   **আপনি কি শিখবেন:** Spring Boot ডিপ্লয়মেন্ট, সার্ভিস মেশ, লোড ব্যালান্সিং  
+   **আশান্বিত ফলাফল:** সার্ভিস ডিসকভারি এবং রাউটিং সহ মাল্টি-সার্ভিস Java সিস্টেম
 
-### Azure AI Foundry টেমপ্লেট
+### Microsoft Foundry টেমপ্লেট
 
-1. **[Azure OpenAI Chat App - স্থানীয় উদাহরণ](../../../examples/azure-openai-chat)** ⭐⭐  
-   GPT-4 ডিপ্লয়মেন্ট চ্যাট ইন্টারফেস সহ  
-   **সময়:** ৩৫-৪৫ মিনিট | **খরচ:** $৫০-২০০/মাস  
-   **প্রত্যাশিত ফলাফল:** টোকেন ট্র্যাকিং এবং খরচ মনিটরিং সহ কার্যকর চ্যাট অ্যাপ্লিকেশন
+1. **[Azure OpenAI Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
+   GPT-4 চ্যাট ইন্টারফেসসহ সম্পূর্ণ ডিপ্লয়মেন্ট  
+   **সময়:** 35-45 মিনিট | **খরচ:** $50-200/মাস  
+   **আশান্বিত ফলাফল:** টোকেন ট্র্যাকিং এবং খরচ মনিটরিং সহ একটি কার্যকর চ্যাট অ্যাপ্লিকেশন
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   RAG আর্কিটেকচার সহ বুদ্ধিমান চ্যাট অ্যাপ্লিকেশন  
-   **সময়:** ৬০-৯০ মিনিট | **খরচ:** $১০০-৩০০/মাস  
-   **প্রত্যাশিত ফলাফল:** ডকুমেন্ট সার্চ এবং সাইটেশন সহ RAG-চালিত চ্যাট ইন্টারফেস
+   RAG আর্কিটেকচারের সাথে ইন্টেলিজেন্ট চ্যাট অ্যাপ্লিকেশন  
+   **সময়:** 60-90 মিনিট | **খরচ:** $100-300/মাস  
+   **আশান্বিত ফলাফল:** ডকুমেন্ট সার্চ এবং উত্সসহ RAG-চালিত চ্যাট ইন্টারফেস
 
 3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Azure AI সার্ভিস ব্যবহার করে ডকুমেন্ট বিশ্লেষণ  
-   **সময়:** ৪০-৬০ মিনিট | **খরচ:** $২০-৮০/মাস  
-   **প্রত্যাশিত ফলাফল:** আপলোড করা ডকুমেন্ট থেকে টেক্সট, টেবিল এবং এন্টিটি বের করার API
+   **সময়:** 40-60 মিনিট | **খরচ:** $20-80/মাস  
+   **আশান্বিত ফলাফল:** আপলোড করা ডকুমেন্ট থেকে টেক্সট, টেবিল, এবং এন্টিটি বের করে দেওয়ার API
 
 4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
    Azure Machine Learning সহ MLOps ওয়ার্কফ্লো  
-   **সময়:** ২-৩ ঘণ্টা | **খরচ:** $১৫০-৫০০/মাস  
-   **প্রত্যাশিত ফলাফল:** ট্রেনিং, ডিপ্লয়মেন্ট এবং মনিটরিং
-- **প্রোডাকশন ইনফ্রাস্ট্রাকচার**: মাল্টি-রিজিয়ন Azure OpenAI ডিপ্লয়মেন্ট, AI সার্চ, কন্টেইনার অ্যাপস এবং বিস্তৃত মনিটরিং
-- **রেডি-টু-ডিপ্লয় ARM টেমপ্লেট**: এক-ক্লিক ডিপ্লয়মেন্ট, একাধিক কনফিগারেশন মোড (মিনিমাল/স্ট্যান্ডার্ড/প্রিমিয়াম)
-- **উন্নত ফিচারসমূহ**: রেড টিমিং সিকিউরিটি ভ্যালিডেশন, এজেন্ট ইভালুয়েশন ফ্রেমওয়ার্ক, খরচ অপ্টিমাইজেশন এবং সমস্যা সমাধানের গাইড
-- **বাস্তব ব্যবসায়িক প্রেক্ষাপট**: খুচরা বিক্রেতার কাস্টমার সাপোর্ট ব্যবহারের ক্ষেত্রে ফাইল আপলোড, সার্চ ইন্টিগ্রেশন এবং ডাইনামিক স্কেলিং
+   **সময়:** 2-3 ঘন্টা | **খরচ:** $150-500/মাস  
+   **আশান্বিত ফলাফল:** ট্রেনিং, ডিপ্লয়মেন্ট, এবং মনিটরিংসহ স্বয়ংক্রিয় ML পাইপলাইন
 
-**প্রযুক্তি**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+### বাস্তব-জগতের পরিস্থিতি
 
-**জটিলতা**: ⭐⭐⭐⭐ (উন্নত - এন্টারপ্রাইজ প্রোডাকশন রেডি)
+#### **রিটেইল মাল্টি-এজেন্ট সলিউশন** 🆕
+**[সম্পূর্ণ ইমপ্লিমেন্টেশন গাইড](./retail-scenario.md)**
 
-**উপযুক্ত**: AI ডেভেলপার, সলিউশন আর্কিটেক্ট এবং প্রোডাকশন মাল্টি-এজেন্ট সিস্টেম তৈরির দল
+একটি বিস্তৃত, প্রোডাকশন-রেডি মাল্টি-এজেন্ট কাস্টমার সাপোর্ট সলিউশন যা AZD দিয়ে এন্টারপ্রাইজ-গ্রেড AI অ্যাপ্লিকেশন ডিপ্লয়মেন্ট প্রদর্শন করে। এই সিনারিওটি প্রদান করে:
 
-**দ্রুত শুরু**: অন্তর্ভুক্ত ARM টেমপ্লেট ব্যবহার করে সম্পূর্ণ সমাধান ৩০ মিনিটের মধ্যে ডিপ্লয় করুন `./deploy.sh -g myResourceGroup` কমান্ড দিয়ে
+- **সম্পূর্ণ আর্কিটেকচার**: বিশেষায়িত কাস্টমার সার্ভিস এবং ইনভেন্টরি ম্যানেজমেন্ট এজেন্টসহ মাল্টি-এজেন্ট সিস্টেম
+- **Production Infrastructure**: Multi-region Azure OpenAI deployments, AI Search, Container Apps, and comprehensive monitoring
+- **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)
+- **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides
+- **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling
 
-## 📋 ব্যবহারের নির্দেশিকা
+**Technologies**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-### প্রয়োজনীয়তা
+**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
 
-যেকোন উদাহরণ চালানোর আগে:
-- ✅ Azure সাবস্ক্রিপশন যার Owner বা Contributor অ্যাক্সেস আছে
-- ✅ Azure Developer CLI ইনস্টল করা ([ইনস্টলেশন গাইড](../docs/getting-started/installation.md))
-- ✅ Docker Desktop চালু (কন্টেইনার উদাহরণের জন্য)
-- ✅ প্রাসঙ্গিক Azure কোটাসমূহ (উদাহরণ-নির্দিষ্ট প্রয়োজনীয়তা পরীক্ষা করুন)
+**Perfect for**: AI developers, solution architects, and teams building production multi-agent systems
 
-> **💰 খরচ সতর্কতা:** সমস্ত উদাহরণ বাস্তব Azure রিসোর্স তৈরি করে যা খরচ সৃষ্টি করে। খরচের অনুমানের জন্য পৃথক README ফাইল দেখুন। চলমান খরচ এড়াতে কাজ শেষ হলে `azd down` চালান।
+**Quick Start**: Deploy the complete solution in under 30 minutes using the included ARM template with `./deploy.sh -g myResourceGroup`
 
-### স্থানীয়ভাবে উদাহরণ চালানো
+## 📋 ব্যবহার নির্দেশিকা
 
-1. **উদাহরণ ক্লোন বা কপি করুন**  
+### পূর্বশর্তসমূহ
+
+Before running any example:
+- ✅ Azure subscription with Owner or Contributor access
+- ✅ Azure Developer CLI installed ([Installation Guide](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop running (for container examples)
+- ✅ Appropriate Azure quotas (check example-specific requirements)
+
+> **💰 খরচ সতর্কীকরণ:** All examples create real Azure resources that incur charges. See individual README files for cost estimates. Remember to run `azd down` when done to avoid ongoing costs.
+
+### লোকালি উদাহরণ চালানো
+
+1. **Clone or Copy Example**
    ```bash
-   # পছন্দসই উদাহরণে নেভিগেট করুন
+   # ইচ্ছিত উদাহরণে যান
    cd examples/simple-web-app
    ```
-  
-2. **AZD পরিবেশ ইনিশিয়ালাইজ করুন**  
+
+2. **Initialize AZD Environment**
    ```bash
-   # বিদ্যমান টেমপ্লেট দিয়ে আরম্ভ করুন
+   # বিদ্যমান টেমপ্লেট দিয়ে শুরু করুন
    azd init
    
    # অথবা নতুন পরিবেশ তৈরি করুন
    azd env new my-environment
    ```
-  
-3. **পরিবেশ কনফিগার করুন**  
+
+3. **Configure Environment**
    ```bash
    # প্রয়োজনীয় ভেরিয়েবল সেট করুন
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
-  
-4. **ডিপ্লয় করুন**  
+
+4. **Deploy**
    ```bash
-   # অবকাঠামো এবং অ্যাপ্লিকেশন স্থাপন করুন
+   # ইনফ্রাস্ট্রাকচার এবং অ্যাপ্লিকেশন স্থাপন করুন
    azd up
    ```
-  
-5. **ডিপ্লয়মেন্ট যাচাই করুন**  
+
+5. **Verify Deployment**
    ```bash
-   # পরিষেবা এন্ডপয়েন্টগুলি পান
+   # সার্ভিস এন্ডপয়েন্টগুলো পান
    azd env get-values
    
-   # এন্ডপয়েন্ট পরীক্ষা করুন (উদাহরণ)
+   # এন্ডপয়েন্টটি পরীক্ষা করুন (উদাহরণ)
    curl https://your-app-url.azurecontainer.io/health
    ```
-  
-   **সফলতার প্রত্যাশিত সূচকসমূহ:**
-   - ✅ `azd up` কোনো ত্রুটি ছাড়াই সম্পন্ন হয়
-   - ✅ সার্ভিস এন্ডপয়েন্ট HTTP 200 রিটার্ন করে
-   - ✅ Azure পোর্টালে "Running" স্ট্যাটাস দেখায়
-   - ✅ Application Insights টেলিমেট্রি গ্রহণ করছে
+   
+   **Expected Success Indicators:**
+   - ✅ `azd up` completes without errors
+   - ✅ Service endpoint returns HTTP 200
+   - ✅ Azure Portal shows "Running" status
+   - ✅ Application Insights receiving telemetry
 
-> **⚠️ সমস্যা?** ডিপ্লয়মেন্ট সমস্যার সমাধানের জন্য [Common Issues](../docs/troubleshooting/common-issues.md) দেখুন
+> **⚠️ সমস্যা হচ্ছে?** Deployment troubleshooting দেখুন [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md)
 
-### উদাহরণ কাস্টমাইজ করা
+### উদাহরণগুলো অভিযোজিত করা
 
-প্রত্যেক উদাহরণ অন্তর্ভুক্ত করে:
+প্রতিটি উদাহরণ অন্তর্ভুক্ত করে:
 - **README.md** - বিস্তারিত সেটআপ এবং কাস্টমাইজেশন নির্দেশিকা
 - **azure.yaml** - মন্তব্যসহ AZD কনফিগারেশন
 - **infra/** - প্যারামিটার ব্যাখ্যাসহ Bicep টেমপ্লেট
@@ -355,135 +355,135 @@ Azure Samples AZD Templates (linked externally):
 
 ## 🎯 শেখার উদ্দেশ্য
 
-### উদাহরণ বিভাগসমূহ
+### উদাহরণ শ্রেণীবিভাগ
 
-#### **বেসিক ডিপ্লয়মেন্ট**
-- একক-সার্ভিস অ্যাপ্লিকেশন
-- সহজ ইনফ্রাস্ট্রাকচার প্যাটার্ন
-- বেসিক কনফিগারেশন ম্যানেজমেন্ট
-- খরচ-সাশ্রয়ী ডেভেলপমেন্ট সেটআপ
+#### **Basic Deployments**
+- Single-service applications
+- Simple infrastructure patterns
+- Basic configuration management
+- Cost-effective development setups
 
-#### **উন্নত পরিস্থিতি**
-- মাল্টি-সার্ভিস আর্কিটেকচার
-- জটিল নেটওয়ার্কিং কনফিগারেশন
-- ডাটাবেস ইন্টিগ্রেশন প্যাটার্ন
-- সিকিউরিটি এবং কমপ্লায়েন্স ইমপ্লিমেন্টেশন
+#### **Advanced Scenarios**
+- Multi-service architectures
+- Complex networking configurations
+- Database integration patterns
+- Security and compliance implementations
 
-#### **প্রোডাকশন-রেডি প্যাটার্ন**
-- উচ্চ প্রাপ্যতা কনফিগারেশন
-- মনিটরিং এবং অবজারভেবিলিটি
-- CI/CD ইন্টিগ্রেশন
-- ডিজাস্টার রিকভারি সেটআপ
+#### **Production-Ready Patterns**
+- High availability configurations
+- Monitoring and observability
+- CI/CD integration
+- Disaster recovery setups
 
 ## 📖 উদাহরণ বর্ণনা
 
-### সিম্পল ওয়েব অ্যাপ - Node.js Express
-**প্রযুক্তি**: Node.js, Express, MongoDB, Container Apps  
-**জটিলতা**: বিগিনার  
-**ধারণা**: বেসিক ডিপ্লয়মেন্ট, REST API, NoSQL ডাটাবেস ইন্টিগ্রেশন
+### Simple Web App - Node.js Express
+**Technologies**: Node.js, Express, MongoDB, Container Apps  
+**Complexity**: Beginner  
+**Concepts**: Basic deployment, REST API, NoSQL database integration
 
-### স্ট্যাটিক ওয়েবসাইট - React SPA
-**প্রযুক্তি**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**জটিলতা**: বিগিনার  
-**ধারণা**: স্ট্যাটিক হোস্টিং, সার্ভারলেস ব্যাকএন্ড, আধুনিক ওয়েব ডেভেলপমেন্ট
+### Static Website - React SPA
+**Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Complexity**: Beginner  
+**Concepts**: Static hosting, serverless backend, modern web development
 
-### কন্টেইনার অ্যাপ - Python Flask
-**প্রযুক্তি**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**জটিলতা**: বিগিনার  
-**ধারণা**: কন্টেইনারাইজেশন, REST API, স্কেল-টু-জিরো, হেলথ প্রোবস, মনিটরিং  
-**অবস্থান**: [স্থানীয় উদাহরণ](../../../examples/container-app/simple-flask-api)
+### Container App - Python Flask
+**Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
+**Complexity**: Beginner  
+**Concepts**: Containerization, REST API, scale-to-zero, health probes, monitoring  
+**Location**: [Local Example](../../../examples/container-app/simple-flask-api)
 
-### কন্টেইনার অ্যাপ - মাইক্রোসার্ভিস আর্কিটেকচার
-**প্রযুক্তি**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**জটিলতা**: উন্নত  
-**ধারণা**: মাল্টি-সার্ভিস আর্কিটেকচার, সার্ভিস কমিউনিকেশন, মেসেজ কিউইং, ডিস্ট্রিবিউটেড ট্রেসিং  
-**অবস্থান**: [স্থানীয় উদাহরণ](../../../examples/container-app/microservices)
+### Container App - Microservices Architecture
+**Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Complexity**: Advanced  
+**Concepts**: Multi-service architecture, service communication, message queuing, distributed tracing  
+**Location**: [Local Example](../../../examples/container-app/microservices)
 
-### ডাটাবেস অ্যাপ - C# with Azure SQL
-**প্রযুক্তি**: C# ASP.NET Core, Azure SQL Database, App Service  
-**জটিলতা**: মধ্যবর্তী  
-**ধারণা**: Entity Framework, ডাটাবেস কানেকশন, ওয়েব API ডেভেলপমেন্ট
+### Database App - C# with Azure SQL
+**Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Complexity**: Intermediate  
+**Concepts**: Entity Framework, database connections, web API development
 
-### সার্ভারলেস ফাংশন - Python Azure Functions
-**প্রযুক্তি**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**জটিলতা**: মধ্যবর্তী  
-**ধারণা**: ইভেন্ট-ড্রিভেন আর্কিটেকচার, সার্ভারলেস কম্পিউটিং, ফুল-স্ট্যাক ডেভেলপমেন্ট
+### Serverless Function - Python Azure Functions
+**Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Complexity**: Intermediate  
+**Concepts**: Event-driven architecture, serverless computing, full-stack development
 
-### মাইক্রোসার্ভিস - Java Spring Boot
-**প্রযুক্তি**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**জটিলতা**: মধ্যবর্তী  
-**ধারণা**: মাইক্রোসার্ভিস কমিউনিকেশন, ডিস্ট্রিবিউটেড সিস্টেম, এন্টারপ্রাইজ প্যাটার্ন
+### Microservices - Java Spring Boot
+**Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Complexity**: Intermediate  
+**Concepts**: Microservices communication, distributed systems, enterprise patterns
 
-### Azure AI Foundry উদাহরণ
+### Microsoft Foundry Examples
 
-#### Azure OpenAI চ্যাট অ্যাপ
-**প্রযুক্তি**: Azure OpenAI, Cognitive Search, App Service  
-**জটিলতা**: মধ্যবর্তী  
-**ধারণা**: RAG আর্কিটেকচার, ভেক্টর সার্চ, LLM ইন্টিগ্রেশন
+#### Azure OpenAI Chat App
+**Technologies**: Azure OpenAI, Cognitive Search, App Service  
+**Complexity**: Intermediate  
+**Concepts**: RAG architecture, vector search, LLM integration
 
-#### AI ডকুমেন্ট প্রসেসিং
-**প্রযুক্তি**: Azure AI Document Intelligence, Storage, Functions  
-**জটিলতা**: মধ্যবর্তী  
-**ধারণা**: ডকুমেন্ট বিশ্লেষণ, OCR, ডেটা এক্সট্রাকশন
+#### AI Document Processing
+**Technologies**: Azure AI Document Intelligence, Storage, Functions  
+**Complexity**: Intermediate  
+**Concepts**: Document analysis, OCR, data extraction
 
-#### মেশিন লার্নিং পাইপলাইন
-**প্রযুক্তি**: Azure ML, MLOps, Container Registry  
-**জটিলতা**: উন্নত  
-**ধারণা**: মডেল ট্রেনিং, ডিপ্লয়মেন্ট পাইপলাইন, মনিটরিং
+#### Machine Learning Pipeline
+**Technologies**: Azure ML, MLOps, Container Registry  
+**Complexity**: Advanced  
+**Concepts**: Model training, deployment pipelines, monitoring
 
 ## 🛠 কনফিগারেশন উদাহরণ
 
-`configurations/` ডিরেক্টরিতে পুনঃব্যবহারযোগ্য উপাদান রয়েছে:
+The `configurations/` directory contains reusable components:
 
-### পরিবেশ কনফিগারেশন
-- ডেভেলপমেন্ট পরিবেশ সেটিংস
-- স্টেজিং পরিবেশ কনফিগারেশন
-- প্রোডাকশন-রেডি কনফিগারেশন
-- মাল্টি-রিজিয়ন ডিপ্লয়মেন্ট সেটআপ
+### Environment Configurations
+- Development environment settings
+- Staging environment configurations
+- Production-ready configurations
+- Multi-region deployment setups
 
-### Bicep মডিউল
-- পুনঃব্যবহারযোগ্য ইনফ্রাস্ট্রাকচার উপাদান
-- সাধারণ রিসোর্স প্যাটার্ন
-- সিকিউরিটি-হার্ডেনড টেমপ্লেট
-- খরচ-অপ্টিমাইজড কনফিগারেশন
+### Bicep Modules
+- Reusable infrastructure components
+- Common resource patterns
+- Security-hardened templates
+- Cost-optimized configurations
 
-### সহায়ক স্ক্রিপ্ট
-- পরিবেশ সেটআপ অটোমেশন
-- ডাটাবেস মাইগ্রেশন স্ক্রিপ্ট
-- ডিপ্লয়মেন্ট যাচাই সরঞ্জাম
-- খরচ মনিটরিং ইউটিলিটি
+### Helper Scripts
+- Environment setup automation
+- Database migration scripts
+- Deployment validation tools
+- Cost monitoring utilities
 
 ## 🔧 কাস্টমাইজেশন গাইড
 
-### আপনার ব্যবহারের ক্ষেত্রে উদাহরণ মানিয়ে নেওয়া
+### আপনার ব্যবহারের জন্য উদাহরণ অভিযোজন করা
 
 1. **প্রয়োজনীয়তা পর্যালোচনা করুন**
-   - Azure সার্ভিস প্রয়োজনীয়তা পরীক্ষা করুন
-   - সাবস্ক্রিপশন সীমা যাচাই করুন
-   - খরচের প্রভাব বুঝুন
+   - Check Azure service requirements
+   - Verify subscription limits
+   - Understand cost implications
 
 2. **কনফিগারেশন পরিবর্তন করুন**
-   - `azure.yaml` সার্ভিস ডেফিনিশন আপডেট করুন
-   - Bicep টেমপ্লেট কাস্টমাইজ করুন
-   - পরিবেশ ভেরিয়েবল সমন্বয় করুন
+   - Update `azure.yaml` service definitions
+   - Customize Bicep templates
+   - Adjust environment variables
 
-3. **ভালোভাবে পরীক্ষা করুন**
-   - প্রথমে ডেভেলপমেন্ট পরিবেশে ডিপ্লয় করুন
-   - কার্যকারিতা যাচাই করুন
-   - স্কেলিং এবং পারফরম্যান্স পরীক্ষা করুন
+3. **পর্যাপ্তভাবে পরীক্ষা করুন**
+   - Deploy to development environment first
+   - Validate functionality
+   - Test scaling and performance
 
-4. **সিকিউরিটি রিভিউ করুন**
-   - অ্যাক্সেস কন্ট্রোল পর্যালোচনা করুন
-   - সিক্রেট ম্যানেজমেন্ট ইমপ্লিমেন্ট করুন
-   - মনিটরিং এবং অ্যালার্টিং সক্রিয় করুন
+4. **সিকিউরিটি রিভিউ**
+   - Review access controls
+   - Implement secrets management
+   - Enable monitoring and alerting
 
-## 📊 তুলনামূলক ম্যাট্রিক্স
+## 📊 তুলনা ম্যাট্রিক্স
 
-| উদাহরণ | সার্ভিস | ডাটাবেস | অথ | মনিটরিং | জটিলতা |
+| Example | Services | Database | Auth | Monitoring | Complexity |
 |---------|----------|----------|------|------------|------------|
-| **Azure OpenAI চ্যাট** (স্থানীয়) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
-| **Python Flask API** (স্থানীয়) | 1 | ❌ | Basic | Full | ⭐ |
-| **মাইক্রোসার্ভিস** (স্থানীয়) | 5+ | ✅ | এন্টারপ্রাইজ | উন্নত | ⭐⭐⭐⭐ |
+| **Azure OpenAI Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
+| **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |
+| **Microservices** (Local) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
 | React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
 | Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
@@ -493,91 +493,108 @@ Azure Samples AZD Templates (linked externally):
 | Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
-| **রিটেইল মাল্টি-এজেন্ট** (স্থানীয়) | **8+** | **✅** | **এন্টারপ্রাইজ** | **উন্নত** | **⭐⭐⭐⭐** |
+| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
 ## 🎓 শেখার পথ
 
-### প্রস্তাবিত অগ্রগতি
+### সাজেস্টেড অগ্রগতি
 
-1. **সিম্পল ওয়েব অ্যাপ দিয়ে শুরু করুন**
-   - বেসিক AZD ধারণা শিখুন
-   - ডিপ্লয়মেন্ট ওয়ার্কফ্লো বুঝুন
-   - পরিবেশ ব্যবস্থাপনা অনুশীলন করুন
+1. **Start with Simple Web App**
+   - Learn basic AZD concepts
+   - Understand deployment workflow
+   - Practice environment management
 
-2. **স্ট্যাটিক ওয়েবসাইট চেষ্টা করুন**
-   - বিভিন্ন হোস্টিং অপশন অন্বেষণ করুন
-   - CDN ইন্টিগ্রেশন শিখুন
-   - DNS কনফিগারেশন বুঝুন
+2. **Try Static Website**
+   - Explore different hosting options
+   - Learn about CDN integration
+   - Understand DNS configuration
 
-3. **কন্টেইনার অ্যাপে যান**
-   - কন্টেইনারাইজেশনের বেসিক শিখুন
-   - স্কেলিং ধারণা বুঝুন
-   - Docker নিয়ে অনুশীলন করুন
+3. **Move to Container App**
+   - Learn containerization basics
+   - Understand scaling concepts
+   - Practice with Docker
 
-4. **ডাটাবেস ইন্টিগ্রেশন যোগ করুন**
-   - ডাটাবেস প্রভিশনিং শিখুন
-   - কানেকশন স্ট্রিং বুঝুন
-   - সিক্রেট ম্যানেজমেন্ট অনুশীলন করুন
+4. **Add Database Integration**
+   - Learn database provisioning
+   - Understand connection strings
+   - Practice secrets management
 
-5. **সার্ভারলেস অন্বেষণ করুন**
-   - ইভেন্ট-ড্রিভেন আর্কিটেকচার বুঝুন
-   - ট্রিগার এবং বাইন্ডিং শিখুন
-   - API নিয়ে অনুশীলন করুন
+5. **Explore Serverless**
+   - Understand event-driven architecture
+   - Learn about triggers and bindings
+   - Practice with APIs
 
-6. **মাইক্রোসার্ভিস তৈরি করুন**
-   - সার্ভিস কমিউনিকেশন শিখুন
-   - ডিস্ট্রিবিউটেড সিস্টেম বুঝুন
-   - জটিল ডিপ্লয়মেন্ট অনুশীলন করুন
+6. **Build Microservices**
+   - Learn service communication
+   - Understand distributed systems
+   - Practice complex deployments
 
 ## 🔍 সঠিক উদাহরণ খুঁজে পাওয়া
 
 ### প্রযুক্তি স্ট্যাক অনুযায়ী
-- **কন্টেইনার অ্যাপস**: [Python Flask API (স্থানীয়)](../../../examples/container-app/simple-flask-api), [মাইক্রোসার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [মাইক্রোসার্ভিস API Gateway (স্থানীয়)](../../../examples/container-app/microservices)
-- **Python**: [Python Flask API (স্থানীয়)](../../../examples/container-app/simple-flask-api), [মাইক্রোসার্ভিস প্রোডাক্ট সার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), Python Functions + SPA
-- **C#**: [মাইক্রোসার্ভিস অর্ডার সার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
-- **Go**: [মাইক্রোসার্ভিস ইউজার সার্ভিস (স্থানীয়)](../../../examples/container-app/microservices)
+- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)
 - **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
-- **কন্টেইনারস**: [Python Flask (স্থানীয়)](../../../examples/container-app/simple-flask-api), [মাইক্রোসার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), Java Microservices
-- **ডাটাবেস**: [মাইক্রোসার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Azure OpenAI Chat (স্থানীয়)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **রিটেইল মাল্টি-এজেন্ট সলিউশন**
-- **মাল্টি-এজেন্ট সিস্টেম**: **রিটেইল মাল্টি-এজেন্ট সলিউশন**
-- **OpenAI ইন্টিগ্রেশন**: **[Azure OpenAI Chat (স্থানীয়)](../../../examples/azure-openai-chat)**, রিটেইল মাল্টি-এজেন্ট সলিউশন
-- **এন্টারপ্রাইজ প্রোডাকশন**: [মাইক্রোসার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), **রিটেইল মাল্টি-এজেন্ট সলিউশন**
+- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Databases**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
+- **OpenAI Integration**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Enterprise Production**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
 ### আর্কিটেকচার প্যাটার্ন অনুযায়ী
-- **সিম্পল REST API**: [Python Flask API (স্থানীয়)](../../../examples/container-app/simple-flask-api)
-- **মনোলিথিক**: Node.js Express Todo, C# Web API + SQL
-- **স্ট্যাটিক + সার্ভারলেস**: React SPA + Functions, Python Functions + SPA
-- **মাইক্রোসার্ভিস**: [প্রোডাকশন মাইক্রোসার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), Java Spring Boot Microservices
-- **কন্টেইনারাইজড**: [Python Flask (স্থানীয়)](../../../examples/container-app/simple-flask-api), [মাইক্রোসার্ভিস (স্থানীয়)](../../../examples/container-app/microservices)
-- **AI-পাওয়ারড**: **[Azure OpenAI Chat (স্থানীয়)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **রিটেইল মাল্টি-এজেন্ট সলিউশন**
-- **মাল্টি-এজেন্ট আর্কিটেকচার**: **রিটেইল মাল্টি-এজেন্ট সলিউশন**
-- **এন্টারপ্রাইজ মাল্টি-সার্ভিস**: [মাইক্রোসার্ভিস (স্থানীয়)](../../../examples/container-app/microservices), **রিটেইল মাল্টি-এজেন্ট সলিউশন**
+- **Simple REST API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
+- **Monolithic**: Node.js Express Todo, C# Web API + SQL
+- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Containerized**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)
+- **AI-Powered**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### জটিলতার স্তর অনুযায়ী
-- **বিগিনার**: [Python Flask API (স্থানীয়)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **মধ্যবর্তী**: **[Azure OpenAI Chat (স্থানীয়)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure
-- [নোড.জেএস এবং পোস্টগ্রেসকিউএল দিয়ে টুডু অ্যাপ](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [রিঅ্যাক্ট ওয়েব অ্যাপ সি# এপিআই সহ](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [অ্যাজুর কন্টেইনার অ্যাপস জব](https://github.com/Azure-Samples/container-apps-jobs)
-- [জাভা সহ অ্যাজুর ফাংশনস](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+### জটিলতা স্তর অনুযায়ী
+- **Beginner**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Intermediate**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Advanced**: ML Pipeline
+- **Enterprise Production-Ready**: [Microservices (Local)](../../../examples/container-app/microservices) (Multi-service with message queuing), **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
+
+## 📚 অতিরিক্ত সম্পদ
+
+### ডকুমেন্টেশন লিংক
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+
+### কমিউনিটি উদাহরণ
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [টুডো অ্যাপ (Node.js এবং PostgreSQL)](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React ওয়েব অ্যাপ (C# API)](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps জব](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions (Java)](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### সেরা অনুশীলন
-- [অ্যাজুর ওয়েল-আর্কিটেক্টেড ফ্রেমওয়ার্ক](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [ক্লাউড অ্যাডপশন ফ্রেমওয়ার্ক](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 উদাহরণে অবদান রাখুন
+## 🤝 উদাহরণ জমা দিন
 
-কোনো দরকারী উদাহরণ শেয়ার করতে চান? আমরা অবদানকে স্বাগত জানাই!
+কোনো কার্যকর উদাহরণ ভাগ করতে চান? আমরা অবদানকে স্বাগত জানাই!
 
 ### জমা দেওয়ার নির্দেশিকা
-1. প্রতিষ্ঠিত ডিরেক্টরি কাঠামো অনুসরণ করুন
-2. বিস্তারিত README.md অন্তর্ভুক্ত করুন
-3. কনফিগারেশন ফাইলগুলিতে মন্তব্য যোগ করুন
-4. জমা দেওয়ার আগে ভালোভাবে পরীক্ষা করুন
-5. খরচের অনুমান এবং প্রয়োজনীয়তা অন্তর্ভুক্ত করুন
+1. স্থাপিত ডিরেক্টরি স্ট্রাকচার অনুসরণ করুন
+2. বিস্তৃত README.md অন্তর্ভুক্ত করুন
+3. কনফিগারেশন ফাইলগুলোতে মন্তব্য যোগ করুন
+4. জমা দেওয়ার আগে সম্পূর্ণরূপে পরীক্ষা করুন
+5. খরচ অনুমান এবং পূর্বশর্ত যুক্ত করুন
 
 ### উদাহরণ টেমপ্লেট কাঠামো
 ```
@@ -595,46 +612,46 @@ example-name/
 
 ---
 
-**প্রো টিপ**: আপনার প্রযুক্তি স্ট্যাকের সাথে মিলে এমন সবচেয়ে সহজ উদাহরণ দিয়ে শুরু করুন, তারপর ধীরে ধীরে আরও জটিল পরিস্থিতিতে এগিয়ে যান। প্রতিটি উদাহরণ পূর্ববর্তী উদাহরণের ধারণাগুলির উপর ভিত্তি করে তৈরি!
+**Pro Tip**: আপনার টেকনোলজি স্ট্যাককে মেলে এমন সবচেয়ে সাধারণ উদাহরণ দিয়ে শুরু করুন, তারপর ধীরে ধীরে আরও জটিল পরিস্থিতিতে এগিয়ে যান। প্রতিটি উদাহরণ পূর্ববর্তীগুলোর ধারণার উপর ভিত্তি করে তৈরি!
 
 ## 🚀 শুরু করতে প্রস্তুত?
 
 ### আপনার শেখার পথ
 
-1. **সম্পূর্ণ নতুন?** → [ফ্লাস্ক এপিআই](../../../examples/container-app/simple-flask-api) দিয়ে শুরু করুন (⭐, ২০ মিনিট)
-2. **মৌলিক AZD জ্ঞান আছে?** → [মাইক্রোসার্ভিসেস](../../../examples/container-app/microservices) চেষ্টা করুন (⭐⭐⭐⭐, ৬০ মিনিট)
-3. **এআই অ্যাপ তৈরি করছেন?** → [অ্যাজুর ওপেনএআই চ্যাট](../../../examples/azure-openai-chat) দিয়ে শুরু করুন (⭐⭐, ৩৫ মিনিট) অথবা [রিটেইল মাল্টি-এজেন্ট](retail-scenario.md) অন্বেষণ করুন (⭐⭐⭐⭐, ২+ ঘণ্টা)
-4. **নির্দিষ্ট প্রযুক্তি স্ট্যাক প্রয়োজন?** → [সঠিক উদাহরণ খুঁজে পাওয়া](../../../examples) বিভাগটি ব্যবহার করুন
+1. **সম্পূর্ণ নবাগত?** → [Flask API](../../../examples/container-app/simple-flask-api) দিয়ে শুরু করুন (⭐, 20 মিনিট)
+2. **AZD সম্পর্কে প্রাথমিক জ্ঞান আছে?** → [Microservices](../../../examples/container-app/microservices) চেষ্টা করুন (⭐⭐⭐⭐, 60 মিনিট)
+3. **AI অ্যাপ তৈরি করছেন?** → [Azure OpenAI Chat](../../../examples/azure-openai-chat) দিয়ে শুরু করুন (⭐⭐, 35 মিনিট) অথবা [Retail Multi-Agent](retail-scenario.md) অন্বেষণ করুন (⭐⭐⭐⭐, 2+ ঘন্টা)
+4. **নির্দিষ্ট টেক স্ট্যাক দরকার?** → উপরের [সঠিক উদাহরণ খোঁজা](../../../examples) সেকশনটি ব্যবহার করুন
 
-### পরবর্তী পদক্ষেপ
+### পরবর্তী ধাপ
 
-- ✅ উপরের [প্রয়োজনীয়তা](../../../examples) পর্যালোচনা করুন
-- ✅ আপনার দক্ষতার স্তরের সাথে মিলে এমন একটি উদাহরণ নির্বাচন করুন (দেখুন [জটিলতা রেটিং লেজেন্ড](../../../examples))
-- ✅ উদাহরণের README ভালোভাবে পড়ুন ডিপ্লয় করার আগে
-- ✅ পরীক্ষা করার পরে `azd down` চালানোর জন্য একটি রিমাইন্ডার সেট করুন
-- ✅ আপনার অভিজ্ঞতা শেয়ার করুন GitHub Issues বা Discussions এর মাধ্যমে
+- ✅ উপরে থাকা [Prerequisites](../../../examples) পর্যালোচনা করুন
+- ✅ আপনার দক্ষতার স্তরের সঙ্গে মেলে এমন একটি উদাহরণ নির্বাচন করুন (দেখুন [জটিলতা লেজেন্ড](../../../examples))
+- ✅ ডেপ্লয় করার আগে উদাহরণটির README মনোযোগ দিয়ে পড়ুন
+- ✅ পরীক্ষার পরে `azd down` চালানোর জন্য একটি রিমাইন্ডার সেট করুন
+- ✅ আপনার অভিজ্ঞতা GitHub Issues বা Discussions-এর মাধ্যমে শেয়ার করুন
 
 ### সাহায্য প্রয়োজন?
 
 - 📖 [FAQ](../resources/faq.md) - সাধারণ প্রশ্নের উত্তর
-- 🐛 [সমস্যা সমাধানের গাইড](../docs/troubleshooting/common-issues.md) - ডিপ্লয়মেন্ট সমস্যাগুলি ঠিক করুন
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - কমিউনিটির সাথে প্রশ্ন করুন
-- 📚 [স্টাডি গাইড](../resources/study-guide.md) - আপনার শেখা শক্তিশালী করুন
+- 🐛 [Troubleshooting Guide](../docs/chapter-07-troubleshooting/common-issues.md) - ডেপ্লয়মেন্ট সমস্যা সমাধান করুন
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - কমিউনিটির কাছে প্রশ্ন করুন
+- 📚 [Study Guide](../resources/study-guide.md) - আপনার শেখা দৃঢ় করুন
 
 ---
 
 **নেভিগেশন**
 - **📚 কোর্স হোম**: [AZD For Beginners](../README.md)
-- **📖 স্টাডি ম্যাটেরিয়ালস**: [স্টাডি গাইড](../resources/study-guide.md) | [চিট শিট](../resources/cheat-sheet.md) | [গ্লসারি](../resources/glossary.md)
-- **🔧 রিসোর্সেস**: [FAQ](../resources/faq.md) | [সমস্যা সমাধান](../docs/troubleshooting/common-issues.md)
+- **📖 অধ্যয়ন উপকরণ**: [Study Guide](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)
+- **🔧 রিসোর্স**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*সর্বশেষ আপডেট: নভেম্বর ২০২৫ | [সমস্যা রিপোর্ট করুন](https://github.com/microsoft/AZD-for-beginners/issues) | [উদাহরণে অবদান রাখুন](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*সর্বশেষ হালনাগাদ: নভেম্বর 2025 | [সমস্যা রিপোর্ট করুন](https://github.com/microsoft/AZD-for-beginners/issues) | [উদাহরণ যোগ করুন](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**অস্বীকৃতি**:  
-এই নথিটি AI অনুবাদ পরিষেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাসাধ্য সঠিকতার জন্য চেষ্টা করি, তবে অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল ভাষায় থাকা নথিটিকে প্রামাণিক উৎস হিসেবে বিবেচনা করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য, পেশাদার মানব অনুবাদ সুপারিশ করা হয়। এই অনুবাদ ব্যবহারের ফলে কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যা হলে আমরা দায়বদ্ধ থাকব না।
+**দায়-অস্বীকার**:
+এই নথিটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাসাধ্য সঠিকতা নিশ্চিত করার চেষ্টা করি; তবুও অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসামঞ্জস্য থাকতে পারে। মূল ভাষায় থাকা নথিটিকেই প্রামাণিক উৎস হিসেবে গণ্য করা উচিত। জরুরি বা গুরুত্বপূর্ণ তথ্যের ক্ষেত্রে পেশাদার মানব অনুবাদ গ্রহণ করা সুপারিশ করা হয়। এই অনুবাদ ব্যবহারের ফলে সৃষ্ট যেকোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়ী নই।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

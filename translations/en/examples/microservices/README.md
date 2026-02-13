@@ -1,20 +1,11 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-25T13:49:19+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "en"
-}
--->
 # Microservices Architecture - Container App Example
 
 ⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
 
 **📚 Learning Path:**
-- ← Previous: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Basics of a single container
+- ← Previous: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Single container basics
 - 🎯 **You Are Here**: Microservices Architecture (2-service foundation)
-- → Next: [AI Integration](../../../../docs/ai-foundry) - Adding intelligence to your services
+- → Next: [AI Integration](../../../../docs/ai-foundry) - Add intelligence to your services
 - 🏠 [Course Home](../../README.md)
 
 ---
@@ -595,14 +586,15 @@ probes: [
 ### View Service Logs
 
 ```bash
+# View logs using azd monitor
+azd monitor --logs
+
+# Or use Azure CLI for specific Container Apps:
 # Stream logs from API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
 # View recent product service logs
-azd logs product-service --tail 100
-
-# View all logs from both services
-azd logs --follow
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Expected Output**:
@@ -768,13 +760,13 @@ curl $GATEWAY_URL/api/products
 
 ### Exercise 2: Modify Autoscaling Rules ⭐⭐ (Medium)
 
-**Goal**: Adjust Product Service to scale more aggressively
+**Goal**: Change Product Service to scale more aggressively
 
 **Starting Point**: `infra/app/product-service.bicep`
 
 **Steps**:
 
-1. Open `infra/app/product-service.bicep` and locate the `scale` block (around line 95)
+1. Open `infra/app/product-service.bicep` and find the `scale` block (around line 95)
 
 2. Change from:
 ```bicep
@@ -818,7 +810,7 @@ scale: {
 azd up
 ```
 
-4. Verify the new scaling configuration:
+4. Verify new scaling configuration:
 
 ```bash
 az containerapp show \
@@ -836,21 +828,21 @@ az containerapp show \
 }
 ```
 
-5. Test autoscaling under load:
+5. Test autoscaling with load:
 
 ```bash
 # Generate concurrent requests
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# Watch scaling happen
-azd logs product-service --follow
+# Watch scaling happen using Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
 # Look for: Container Apps scaling events
 ```
 
 **Success Criteria**:
 - ✅ Product Service always runs at least 2 replicas
 - ✅ Under load, scales to more than 2 replicas
-- ✅ Azure Portal reflects the new scaling rules
+- ✅ Azure Portal shows new scaling rules
 
 **Time**: 15-20 minutes
 
@@ -858,18 +850,18 @@ azd logs product-service --follow
 
 ### Exercise 3: Add Custom Monitoring Query ⭐⭐ (Medium)
 
-**Goal**: Create a custom Application Insights query to monitor product API performance
+**Goal**: Create a custom Application Insights query to track product API performance
 
 **Steps**:
 
 1. Navigate to Application Insights in Azure Portal:
-   - Open Azure Portal
-   - Locate your resource group (rg-microservices-*)
-   - Select the Application Insights resource
+   - Go to Azure Portal
+   - Find your resource group (rg-microservices-*)
+   - Click on Application Insights resource
 
 2. Click "Logs" in the left menu
 
-3. Create the following query:
+3. Create this query:
 
 ```kusto
 requests
@@ -897,7 +889,7 @@ requests
 for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 ```
 
-7. Refresh the query to view data
+7. Refresh the query to see data
 
 **✅ Expected output:**
 - Chart showing request counts over time
@@ -911,7 +903,7 @@ for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 - ✅ Average duration < 500ms
 - ✅ Chart displays 5-minute time bins
 
-**Learning Outcome**: Learn how to monitor service performance using custom queries
+**Learning Outcome**: Understand how to monitor service performance with custom queries
 
 **Time**: 10-15 minutes
 
@@ -919,13 +911,13 @@ for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 
 ### Exercise 4: Implement Retry Logic ⭐⭐⭐ (Advanced)
 
-**Goal**: Add retry logic to API Gateway for handling temporary unavailability of Product Service
+**Goal**: Add retry logic to API Gateway when Product Service is temporarily unavailable
 
 **Starting Point**: `src/api-gateway/app.js`
 
 **Steps**:
 
-1. Install the retry library:
+1. Install retry library:
 
 ```bash
 cd src/api-gateway
@@ -985,7 +977,7 @@ az containerapp update \
 5. View retry logs:
 
 ```bash
-azd logs api-gateway --tail 50
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
 # Look for: Retry attempt messages
 ```
 
@@ -1009,7 +1001,7 @@ azd logs api-gateway --tail 50
 
 ## Knowledge Checkpoint
 
-After completing this example, confirm your understanding:
+After completing this example, verify your understanding:
 
 ### 1. Service Communication ✓
 
@@ -1058,8 +1050,8 @@ Test your knowledge:
 # Generate load to test autoscaling
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Watch replicas increase
-azd logs api-gateway --follow
+# Watch replicas increase using Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 # ✅ Expected: See scaling events in logs
 ```
 
@@ -1139,7 +1131,7 @@ For learning/testing, consider:
 
 **Solution**:
 ```bash
-# Log in again with explicit subscription
+# Login again with explicit subscription
 az account set --subscription <your-subscription-id>
 azd env set AZURE_SUBSCRIPTION_ID <your-subscription-id>
 azd up
@@ -1149,8 +1141,8 @@ azd up
 
 **Diagnose**:
 ```bash
-# Check product service logs
-azd logs product-service --tail 50
+# Check product service logs using Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
 # Check product service health
 az containerapp show \
@@ -1177,8 +1169,8 @@ az containerapp revision list \
 # Generate load to test
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Watch scaling events
-azd logs api-gateway --follow | grep -i scale
+# Watch scaling events using Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
 **Common Causes**:
@@ -1223,7 +1215,7 @@ docker build -t test-product .
 2. Dockerfile syntax errors
 3. Network issues downloading dependencies
 
-**Still Stuck?** See [Common Issues Guide](../../docs/troubleshooting/common-issues.md) or [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+**Still Stuck?** See [Common Issues Guide](../../docs/chapter-07-troubleshooting/common-issues.md) or [Azure Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
@@ -1356,7 +1348,7 @@ API Gateway → Product Service (Cosmos DB)
 | **Complexity** | Low | Medium | High |
 | **Team Size** | 1-3 developers | 3-10 developers | 10+ developers |
 | **Cost** | ~$15-50/month | ~$60-250/month | ~$150-500/month |
-| **Deployment Time** | 5-10 minutes | 8-12 minutes | 15-30 minutes |
+| **Deployment Time** | 5-10 minutes | 8-12 minutes | 15-30 minutes
 | **Best For** | MVPs, prototypes | Production apps | Multi-cloud, advanced networking |
 
 **Recommendation**: Start with Container Apps (this example), move to AKS only if you need Kubernetes-specific features.
@@ -1366,47 +1358,46 @@ API Gateway → Product Service (Cosmos DB)
 ## Frequently Asked Questions
 
 **Q: Why only 2 services instead of 5+?**  
-A: To ensure a smooth learning curve. Master the basics (service communication, monitoring, scaling) with a simple example before introducing more complexity. The principles you learn here can be applied to architectures with 100 services.
+A: Educational progression. Master the fundamentals (service communication, monitoring, scaling) with a simple example before adding complexity. The patterns you learn here apply to 100-service architectures.
 
 **Q: Can I add more services myself?**  
-A: Absolutely! Follow the expansion guide above. Each new service follows the same steps: create a `src` folder, create a Bicep file, update `azure.yaml`, and deploy.
+A: Absolutely! Follow the expansion guide above. Each new service follows the same pattern: create src folder, create Bicep file, update azure.yaml, deploy.
 
 **Q: Is this production-ready?**  
-A: It's a strong starting point. For production, consider adding: managed identity, Key Vault, persistent databases, a CI/CD pipeline, monitoring alerts, and a backup strategy.
+A: It's a solid foundation. For production, add: managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, and backup strategy.
 
 **Q: Why not use Dapr or other service mesh?**  
-A: To keep things simple for learning purposes. Once you understand the native networking in Container Apps, you can add Dapr for advanced features (state management, pub/sub, bindings).
+A: Keep it simple for learning. Once you understand native Container Apps networking, you can layer on Dapr for advanced scenarios (state management, pub/sub, bindings).
 
 **Q: How do I debug locally?**  
-A: Run the services locally using Docker:  
+A: Run services locally with Docker:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-
 **Q: Can I use different programming languages?**  
-A: Yes! This example uses Node.js (gateway) and Python (product service). You can mix any languages that run in containers: C#, Go, Java, Ruby, PHP, etc.
+A: Yes! This example shows Node.js (gateway) + Python (product service). You can mix any languages that run in containers: C#, Go, Java, Ruby, PHP, etc.
 
 **Q: What if I don't have Azure credits?**  
-A: Use the Azure free tier (new accounts get $200 in credits for the first 30 days) or deploy for short testing periods and delete resources immediately. This example costs about $2/day.
+A: Use Azure free tier (first 30 days with new accounts get $200 credits) or deploy for short testing periods and delete immediately. This example costs ~$2/day.
 
 **Q: How is this different from Azure Kubernetes Service (AKS)?**  
-A: Container Apps is simpler (no Kubernetes expertise required) but less flexible. AKS provides full Kubernetes control but demands more knowledge. Start with Container Apps and move to AKS if necessary.
+A: Container Apps is simpler (no Kubernetes knowledge needed) but less flexible. AKS gives you full Kubernetes control but requires more expertise. Start with Container Apps, graduate to AKS if needed.
 
 **Q: Can I use this with existing Azure services?**  
-A: Yes! You can connect to existing databases, storage accounts, Service Bus, etc. Just update the Bicep files to reference existing resources instead of creating new ones.
+A: Yes! You can connect to existing databases, storage accounts, Service Bus, etc. Update Bicep files to reference existing resources instead of creating new ones.
 
 ---
 
-> **🎓 Learning Path Summary**: You've learned how to deploy a multi-service architecture with automatic scaling, internal networking, centralized monitoring, and production-ready patterns. This foundation equips you to handle complex distributed systems and enterprise microservices architectures.
+> **🎓 Learning Path Summary**: You've learned to deploy a multi-service architecture with automatic scaling, internal networking, centralized monitoring, and production-ready patterns. This foundation prepares you for complex distributed systems and enterprise microservices architectures.
 
 **📚 Course Navigation:**
 - ← Previous: [Simple Flask API](../../../../examples/container-app/simple-flask-api)
 - → Next: [Database Integration Example](../../../../database-app)
 - 🏠 [Course Home](../../README.md)
-- 📖 [Container Apps Best Practices](../../docs/deployment/deployment-guide.md)
+- 📖 [Container Apps Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
@@ -1415,6 +1406,6 @@ A: Yes! You can connect to existing databases, storage accounts, Service Bus, et
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+Disclaimer:
+This document has been translated using AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

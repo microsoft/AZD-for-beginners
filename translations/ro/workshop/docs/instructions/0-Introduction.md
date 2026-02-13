@@ -1,64 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-25T02:18:50+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "ro"
-}
--->
-# AZD Pentru Dezvoltatori AI
+# AZD pentru Dezvoltatori AI
 
-!!! info "PUBLICUL ȚINTĂ AL ACESTUI ATELIER"
+!!! info "PUBLICUL ȚINTĂ PENTRU ACEST WORKSHOP"
    
-    Acest atelier este destinat oricui dorește să construiască aplicații AI Agentic pe Azure AI Foundry, utilizând cele mai bune instrumente și fluxuri de lucru. Atelierul este potrivit atât pentru începători, cât și pentru dezvoltatori experimentați care au o anumită familiaritate cu Azure, conceptele AI și codul Python. Vă rugăm să verificați cerințele preliminare înainte de a începe.
+    Acest workshop este destinat oricui dorește să construiască aplicații AI Agentic pe Microsoft Foundry prin utilizarea celor mai bune instrumente și fluxuri de lucru. Workshop-ul este potrivit atât pentru începători, cât și pentru dezvoltatori experimentați care au unele cunoștințe despre Azure, concepte AI și cod Python. Vă rugăm să verificați cerințele prealabile înainte de a începe.
 
-    **Durată:** 3-4 ore  
+    **Durata:** 3-4 ore  
     **Nivel:** Începător până la Intermediar  
 
 ---
 
-## Cerințe Preliminare
+
+## Cerințe Prealabile
 
 - Un cont personal GitHub → [Creează unul gratuit](https://github.com/signup)
 - Un cont Azure activ → [Creează unul gratuit](https://aka.ms/free)
-- Familiaritate cu conceptele AI, dezvoltarea în Python, instrumente de linie de comandă
-- Experiență cu VS Code și instrumentele și fluxurile de lucru GitHub.
+- Familiaritate cu conceptele AI, dezvoltare Python, instrumente de linie de comandă
+- Experiență cu instrumentele și fluxurile de lucru VS Code și GitHub.
 
 ---
 
 ## Obiective de Învățare
 
-Până la finalul acestui atelier, veți ști cum să:
+La finalul acestui workshop, veți ști cum să:
 
 - [X] **Lucrați cu Azure Developer CLI** → pentru a provisiona, implementa și gestiona resursele Azure.
-- [X] **Utilizați Șabloane de Aplicații AI** → pentru a începe rapid proiecte AI Agent pe Azure AI Foundry.
-- [X] **Configurați Șabloanele** → pentru funcționalități precum Red Teaming, Evaluări, Urmărire și Monitorizare.
-- [X] **Deconstruiți și Explorați** → șabloanele și fluxurile de lucru AZD folosind GitHub Copilot.
-- [X] **Personalizați și Reimplementați** → șablonul de start AI Agent, conform cerințelor dvs. personalizate.
+- [X] **Utilizați Șabloane pentru Aplicații AI** → pentru a începe rapid proiecte AI Agent pe Microsoft Foundry.
+- [X] **Configurați Șabloane** → pentru caracteristici precum Red Teaming, Evaluări, Urmărire și Monitorizare
+- [X] **Deconstruiți și Explorați** → șabloanele și fluxurile AZD folosind GitHub Copilot
+- [X] **Personalizați și Redeploați** → șablonul de start AI Agent, cu cerințele dvs. personalizate
 
 ---
 
-## Structura Atelierului
+## Structura Workshop-ului
 
-Atelierul este structurat în module, fiecare având un exercițiu practic:
+Workshop-ul este structurat în module, fiecare ancorat de un exercițiu practic:
 
-1. **Introducere** - Înțelegeți ce sunt șabloanele AZD și cum funcționează.
-1. **Selecție** - Descoperiți șablonul "starter" potrivit pentru următorul dvs. proiect AI.
-1. **Validare** - Implementați și explorați șablonul pentru a verifica dacă funcționează conform așteptărilor.
-1. **Deconstrucție** - Descompuneți șablonul pentru a înțelege componentele și configurația acestuia.
-1. **Configurație** - Învățați să activați și să utilizați diferite funcționalități ale Azure AI Foundry.
+1. **Introducere** - Obțineți o înțelegere a ceea ce sunt șabloanele AZD și cum funcționează
+1. **Selecție** - Descoperiți șablonul „starter” potrivit pentru următorul vostru proiect AI
+1. **Validare** - Implementați și explorați șablonul pentru a verifica dacă funcționează conform descrierii
+1. **Deconstrucție** - Demontați șablonul pentru a înțelege componentele și configurația sa
+1. **Configurare** - Învațați să activați și să utilizați diferite caracteristici Microsoft Foundry
 1. **Personalizare** - Reconstruiți aplicația având în vedere datele și cerințele dvs.
-1. **Demontare** - Învățați să deprovisionați infrastructura și să recuperați resursele șterse temporar.
+1. **Demontare** - Învațați să dezprovisionați infrastructura și să recuperați resursele șterse moale
 
 ---
 
-## Feedback & Probleme
+## Feedback și Probleme
 
-Actualizăm activ curricula pentru a ne asigura că oferă cea mai bună experiență de învățare pentru începători. Feedback-ul dvs. este apreciat.
+Actualizăm activ curricula pentru a asigura cea mai bună experiență de învățare pentru începători. Feedback-ul dvs. este apreciat.
 
-1. Postați o problemă pe acest repo - etichetați-o `Workshop` pentru comoditate.
-1. Alăturați-vă Discord-ului Azure AI Foundry - conectați-vă cu alți cursanți!
+1. Postați o problemă în acest repo - etichetați-o `Workshop` pentru comoditate.
+1. Alăturați-vă Discord-ului Microsoft Foundry - conectați-vă cu alți cursanți!
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm nicio responsabilitate pentru eventualele neînțelegeri sau interpretări greșite care pot rezulta din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

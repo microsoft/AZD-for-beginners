@@ -1,64 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-24T21:34:20+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "da"
-}
--->
-# AZD For AI-udviklere
+# AZD for AI-udviklere
 
 !!! info "MÅLGRUPPE FOR DENNE WORKSHOP"
    
-    Denne workshop er for alle, der ønsker at bygge AI-agentapplikationer på Azure AI Foundry ved at udnytte de bedste værktøjer og arbejdsgange. Workshoppen er egnet til både begyndere og erfarne udviklere, der har en vis fortrolighed med Azure, AI-koncepter og Python-kode. Tjek venligst forudsætningerne, før du begynder.
+    Denne workshop er for alle, der ønsker at bygge AI-agentiske applikationer på Microsoft Foundry ved at udnytte førsteklasses værktøjer og arbejdsgange. Workshoppen er velegnet til både begyndere og erfarne udviklere, der har en vis fortrolighed med Azure, AI-koncepter og Python-kode. Tjek venligst forudsætningerne, før du begynder.
 
     **Varighed:** 3-4 timer  
     **Niveau:** Begynder til mellemniveau  
 
 ---
 
+
 ## Forudsætninger
 
-- En personlig GitHub-konto → [Opret en gratis](https://github.com/signup)
-- En aktiv Azure-konto → [Opret en gratis](https://aka.ms/free)
+- En personlig GitHub-konto → [Opret en gratis konto](https://github.com/signup)
+- En aktiv Azure-konto → [Opret en gratis konto](https://aka.ms/free)
 - Fortrolighed med AI-koncepter, Python-udvikling, kommandolinjeværktøjer
-- Erfaring med VS Code og GitHub-værktøjer og arbejdsgange.
+- Erfaring med VS Code samt GitHub-værktøjer og arbejdsprocesser.
 
 ---
 
 ## Læringsmål
 
-Ved afslutningen af denne workshop vil du kunne:
+Efter denne workshop vil du vide, hvordan du:
 
-- [X] **Arbejde med Azure Developer CLI** → til at klargøre, implementere og administrere dine Azure-ressourcer.
-- [X] **Bruge AI App Templates** → til at kickstarte AI-agentprojekter på Azure AI Foundry.
-- [X] **Konfigurere skabeloner** → til funktioner som Red Teaming, Evalueringer, Sporing og Overvågning.
-- [X] **Dele og udforske** → AZD-skabeloner og arbejdsgange ved hjælp af GitHub Copilot.
-- [X] **Tilpasse og genimplementere** → AI-agentens startskabelon med dine egne krav.
+- [X] **Arbejd med Azure Developer CLI** → til at oprette, implementere og administrere dine Azure-ressourcer.
+- [X] **Brug AI-appskabeloner** →  til at igangsætte AI-agentprojekter på Microsoft Foundry.
+- [X] **Konfigurér skabeloner** →  for funktioner som Red Teaming, evalueringer, sporing & overvågning
+- [X] **Nedbryd og udforsk** →  AZD-skabeloner og workflows ved hjælp af GitHub Copilot
+- [X] **Tilpas og genudrul** →  AI-agentens startskabelon med dine tilpassede krav
 
 ---
 
 ## Workshopoversigt
 
-Workshoppen er struktureret som moduler, hver med en praktisk labøvelse:
+Workshoppen er struktureret i moduler, hver centreret omkring en praktisk laboratorieøvelse:
 
-1. **Introduktion** - Få en forståelse af, hvad AZD-skabeloner er, og hvordan de fungerer.
-1. **Udvælgelse** - Find den rette "start"-skabelon til dit næste AI-projekt.
-1. **Validering** - Implementer og udforsk skabelonen for at verificere, at den fungerer som forventet.
-1. **Dekonstruktion** - Tag skabelonen fra hinanden for at forstå dens komponenter og konfiguration.
-1. **Konfiguration** - Lær at aktivere og bruge forskellige Azure AI Foundry-funktioner.
-1. **Tilpasning** - Rekonstruer applikationen med dine data og krav i tankerne.
-1. **Nedtagning** - Lær at afvikle infrastruktur og gendanne blødt-slettede ressourcer.
-
----
-
-## Feedback & Problemer
-
-Vi opdaterer løbende pensum for at sikre, at det giver den bedste læringsoplevelse for begyndere. Din feedback er værdsat.
-
-1. Opret en issue på dette repo - tag den med `Workshop` for nemheds skyld.
-1. Deltag i Azure AI Foundry Discord - forbind med andre lærende!
+1. **Introduktion** - Få en forståelse af, hvad AZD-skabeloner er, og hvordan de fungerer
+1. **Valg** - Find den rigtige "starter" -skabelon til dit næste AI-projekt
+1. **Validering** - Udrul og udforsk skabelonen for at bekræfte, at den fungerer som annonceret
+1. **Nedbrydning** - Tag skabelonen fra hinanden for at forstå dens komponenter & konfiguration
+1. **Konfiguration** - Lær at aktivere og bruge forskellige Microsoft Foundry-funktioner
+1. **Tilpasning** - Genopbyg applikationen med dine data og krav i tankerne
+1. **Nedtagning** - Lær at afprovisionere infrastruktur og gendanne soft-slettede ressourcer
 
 ---
 
+## Feedback & problemer
+
+Vi opdaterer aktivt læseplanerne for at sikre, at de giver den bedste læringsoplevelse for begyndere. Din feedback er værdsat.
+
+1. Opret en issue i dette repo - tag den `Workshop` for nemheds skyld.
+1. Deltag i Microsoft Foundry Discord - forbind dig med andre kursister!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Ansvarsfraskrivelse:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten Co-op Translator (https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel, menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

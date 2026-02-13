@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:01:45+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "en"
-}
--->
 # 4. Configure a Template
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
@@ -14,11 +5,11 @@ CO_OP_TRANSLATOR_METADATA:
     - [ ] Understand the purpose of `azure.yaml`
     - [ ] Understand the structure of `azure.yaml`
     - [ ] Understand the value of azd lifecycle `hooks`
-    - [ ] **Lab 3:** 
+    - [ ] **Lab 4:** Explore and modify environment variables
 
 ---
 
-!!! prompt "What does the `azure.yaml` file do? Use a codefence and explain it line by line"
+!!! prompt "What is the `azure.yaml` file do? Use a codefence and explain it line by line"
 
       The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
 
@@ -26,9 +17,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 1. Purpose and Functionality
 
-The `azure.yaml` file serves as the **deployment blueprint** for an AI agent application that:
+This `azure.yaml` file serves as the **deployment blueprint** for an AI agent application that:
 
-1. **Validates the environment** before deployment
+1. **Validates environment** before deployment
 2. **Provisions Azure AI services** (AI Hub, AI Project, Search, etc.)
 3. **Deploys a Python application** to Azure Container Apps
 4. **Configures AI models** for both chat and embedding functionality
@@ -290,11 +281,11 @@ pipeline:
 This section defines environment variables used **during deployment**, organized by category:
 
 - **Azure Resource Names (Lines 51-60)**:
-      - Core Azure service resource names e.g., Resource Group, AI Hub, AI Project, etc.
+      - Core Azure service resource names e.g, Resource Group, AI Hub, AI Project, etc.- 
 - **Feature Flags (Lines 61-63)**:
       - Boolean variables to enable/disable specific Azure services
 - **AI Agent Configuration (Lines 64-71)**:
-      - Configuration for main AI agent including name, ID, deployment settings, model details
+      - Configuration for main AI agent including name, ID, deployment settings, model details- 
 - **AI Embedding Configuration (Lines 72-79)**:
       - Configuration for the embedding model used for vector search
 - **Search and Monitoring (Lines 80-84)**:
@@ -316,7 +307,7 @@ AZURE_RESOURCE_GROUP              # Resource group name
 AZURE_PRINCIPAL_ID                # User principal for RBAC
 
 # Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
+AZURE_AIHUB_NAME                  # Microsoft Foundry hub name
 AZURE_AIPROJECT_NAME              # AI project name
 AZURE_AISERVICES_NAME             # AI services account name
 AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
@@ -334,7 +325,7 @@ AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
 AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
 AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
 
-# Embedding Model Configuration  
+# Embedding Model Configuration
 AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
 AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
 AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
@@ -390,3 +381,7 @@ azd env set --from-file .env
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Disclaimer:
+This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,47 +1,38 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T19:13:04+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ro"
-}
--->
-# Exemple de implementare a aplicațiilor containerizate cu AZD
+# Exemple de implementare Container App cu AZD
 
-Acest director conține exemple detaliate pentru implementarea aplicațiilor containerizate în Azure Container Apps folosind Azure Developer CLI (AZD). Aceste exemple demonstrează modele reale, bune practici și configurații pregătite pentru producție.
+Acest director conține exemple cuprinzătoare pentru implementarea aplicațiilor containerizate în Azure Container Apps folosind Azure Developer CLI (AZD). Aceste exemple demonstrează modele din lumea reală, cele mai bune practici și configurații pregătite pentru producție.
 
 ## 📚 Cuprins
 
 - [Prezentare generală](../../../../examples/container-app)
-- [Prerechizite](../../../../examples/container-app)
-- [Exemple rapide](../../../../examples/container-app)
-- [Exemple pentru producție](../../../../examples/container-app)
+- [Cerințe preliminare](../../../../examples/container-app)
+- [Exemple de pornire rapidă](../../../../examples/container-app)
+- [Exemple de producție](../../../../examples/container-app)
 - [Modele avansate](../../../../examples/container-app)
-- [Bune practici](../../../../examples/container-app)
+- [Cele mai bune practici](../../../../examples/container-app)
 
 ## Prezentare generală
 
-Azure Container Apps este o platformă serverless complet gestionată care permite rularea microserviciilor și aplicațiilor containerizate fără a gestiona infrastructura. În combinație cu AZD, obțineți:
+Azure Container Apps este o platformă complet gestionată de containere serverless care vă permite să rulați microservicii și aplicații containerizate fără a gestiona infrastructura. Combinată cu AZD, obțineți:
 
-- **Implementare simplificată**: O singură comandă pentru implementarea containerelor cu infrastructură
-- **Scalare automată**: Scalare la zero și extindere bazată pe trafic HTTP sau evenimente
-- **Rețea integrată**: Descoperire de servicii și divizare a traficului integrate
+- **Implementare simplificată**: O singură comandă implementează containerele cu infrastructura
+- **Scalare automată**: Scalare la zero și scalare în funcție de traficul HTTP sau evenimente
+- **Rețea integrată**: Descoperire de servicii și împărțire a traficului încorporată
 - **Identitate gestionată**: Autentificare securizată la resursele Azure
-- **Optimizare costuri**: Plătiți doar pentru resursele utilizate
+- **Optimizare a costurilor**: Plătiți doar pentru resursele pe care le utilizați
 
-## Prerechizite
+## Cerințe preliminare
 
 Înainte de a începe, asigurați-vă că aveți:
 
 ```bash
-# Verifica instalarea AZD
+# Verificați instalarea AZD
 azd version
 
-# Verifica Azure CLI
+# Verificați Azure CLI
 az version
 
-# Verifica Docker (pentru construirea imaginilor personalizate)
+# Verificați Docker (pentru construirea imaginilor personalizate)
 docker --version
 
 # Autentificare în Azure
@@ -54,9 +45,9 @@ az login
 - Permisiuni pentru crearea grupurilor de resurse
 - Acces la mediul Container Apps
 
-## Exemple rapide
+## Exemple de pornire rapidă
 
-### 1. API Web simplu (Python Flask)
+### 1. API web simplu (Python Flask)
 
 Implementați un API REST de bază cu Azure Container Apps.
 
@@ -74,46 +65,46 @@ services:
     host: containerapp
 ```
 
-**Pași de implementare:**
+**Pași pentru implementare:**
 
 ```bash
-# Inițializați din șablon
+# Inițializează din șablon
 azd init --template todo-python-mongo
 
-# Asigurați infrastructura și implementați
+# Asigură infrastructura și implementează
 azd up
 
-# Testați implementarea
+# Testează implementarea
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Caracteristici cheie:**
 - Scalare automată de la 0 la 10 replici
-- Probe de sănătate și verificări de funcționare
-- Injectare de variabile de mediu
-- Integrare cu Application Insights
+- Probe de stare și verificări de liveness
+- Injecție de variabile de mediu
+- Integrare Application Insights
 
 ### 2. API Node.js Express
 
 Implementați un backend Node.js cu integrare MongoDB.
 
 ```bash
-# Inițializați șablonul API Node.js
+# Inițializează șablonul API Node.js
 azd init --template todo-nodejs-mongo
 
-# Configurați variabilele de mediu
+# Configurează variabilele de mediu
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Implementați
+# Publică
 azd up
 
-# Vizualizați jurnalele
-azd logs api
+# Vizualizează jurnalele prin Azure Monitor
+azd monitor --logs
 ```
 
-**Aspecte ale infrastructurii:**
+**Repere infrastructură:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -156,29 +147,29 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Frontend static + Backend API
+### 3. Frontend static + API backend
 
 Implementați o aplicație full-stack cu frontend React și backend API.
 
 ```bash
-# Inițializați șablonul full-stack
+# Inițializează șablonul full-stack
 azd init --template todo-csharp-sql-swa-func
 
-# Revizuiți configurația
+# Revizuiește configurația
 cat azure.yaml
 
-# Implementați ambele servicii
+# Desfășoară ambele servicii
 azd up
 
-# Deschideți aplicația
+# Deschide aplicația
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Exemple pentru producție
+## Exemple de producție
 
 ### Exemplu 1: Arhitectură microservicii
 
-**Scenariu**: Aplicație de e-commerce cu mai multe microservicii
+**Scenariu**: Aplicație e-commerce cu multiple microservicii
 
 **Structura directorului:**
 ```
@@ -222,27 +213,27 @@ services:
 
 **Implementare:**
 ```bash
-# Inițializați proiectul
+# Inițializează proiectul
 azd init
 
-# Setați mediul de producție
+# Setează mediul de producție
 azd env new production
 
-# Configurați setările de producție
+# Configurează setările de producție
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Implementați toate serviciile
+# Desfășoară toate serviciile
 azd up
 
-# Monitorizați implementarea
+# Monitorizează desfășurarea
 azd monitor --overview
 ```
 
-### Exemplu 2: Aplicație containerizată bazată pe AI
+### Exemplu 2: Container App cu inteligență artificială
 
-**Scenariu**: Aplicație de chat AI cu integrare Azure OpenAI
+**Scenariu**: Aplicație chat AI cu integrare Azure OpenAI
 
 **Fișier: src/ai-chat/app.py**
 ```python
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Utilizați Identitatea Gestionată pentru acces securizat
+# Utilizați Managed Identity pentru acces securizat
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -331,26 +322,26 @@ module aiChatApp './app/container-app.bicep' = {
 
 **Comenzi de implementare:**
 ```bash
-# Configurați mediul
+# Configurează mediul
 azd init --template ai-chat-app
 azd env new dev
 
-# Configurați OpenAI
+# Configurează OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
-# Implementați
+# Implementare
 azd up
 
-# Testați API-ul
+# Testează API-ul
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Exemplu 3: Worker de fundal cu procesare în coadă
+### Exemplu 3: Worker în fundal cu procesare coadă
 
-**Scenariu**: Sistem de procesare a comenzilor cu coadă de mesaje
+**Scenariu**: Sistem de procesare comenzi cu coadă de mesaje
 
 **Structura directorului:**
 ```
@@ -390,7 +381,7 @@ def process_orders():
             # Procesează comanda
             print(f"Processing order: {message.content}")
             
-            # Finalizează mesajul
+            # Mesaj complet
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -417,7 +408,7 @@ services:
 # Inițializează
 azd init
 
-# Distribuie cu configurația cozii
+# Desfășurare cu configurarea cozii
 azd up
 
 # Scalează lucrătorul în funcție de lungimea cozii
@@ -434,13 +425,13 @@ az containerapp update \
 ### Model 1: Implementare Blue-Green
 
 ```bash
-# Creează o nouă revizie fără trafic
+# Creați o nouă revizie fără trafic
 azd deploy api --revision-suffix blue --no-traffic
 
-# Testează noua revizie
+# Testați noua revizie
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Împarte traficul (20% către albastru, 80% către curent)
+# Împărțiți traficul (20% către albastru, 80% către curent)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -472,10 +463,10 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# Implementați o revizie nouă cu 10% trafic
+# Implementați noua revizie cu 10% trafic
 azd deploy api --revision-mode multiple
 
-# Monitorizați metricile
+# Monitorizați metricele
 azd monitor --service api --duration 5m
 
 # Creșteți traficul treptat
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Model 3: Implementare multi-regională
+### Model 3: Implementare Multi-Regiune
 
 **Fișier: azure.yaml**
 ```yaml
@@ -538,10 +529,10 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Implementare:**
 ```bash
-# Distribuie în toate regiunile
+# Implementați în toate regiunile
 azd up
 
-# Verifică punctele de acces
+# Verificați punctele finale
 azd show --output json | jq '.services.api.endpoints'
 ```
 
@@ -589,7 +580,7 @@ def create_order():
             value={'status': 'pending'}
         )
         
-        # Publică eveniment
+        # Publică evenimentul
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -599,12 +590,12 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Bune practici
+## Cele mai bune practici
 
 ### 1. Organizarea resurselor
 
 ```bash
-# Utilizați convenții de denumire consistente
+# Folosiți convenții de denumire consistente
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -612,7 +603,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Bune practici de securitate
+### 2. Cele mai bune practici de securitate
 
 ```bicep
 // Always use managed identity
@@ -678,10 +669,12 @@ services:
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Vizualizează jurnalele în timp real
-azd logs api --follow
+azd monitor --logs
+# Sau folosește Azure CLI pentru Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Monitorizează metricile
-azd monitor --service api
+azd monitor --live
 
 # Creează alerte
 az monitor metrics alert create \
@@ -695,16 +688,16 @@ az monitor metrics alert create \
 ### 5. Optimizarea costurilor
 
 ```bash
-# Scalează la zero când nu este utilizat
+# Scalare la zero când nu este utilizat
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Folosește instanțe spot pentru medii de dezvoltare
+# Folosiți instanțe spot pentru mediile de dezvoltare
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Configurează alerte de buget
+# Configurați alertele pentru buget
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -744,41 +737,42 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Referință pentru comenzi comune
+## Referință comenzi comune
 
 ```bash
-# Inițializați un nou proiect de aplicație container
+# Inițializează un nou proiect de aplicație containerizată
 azd init --template <template-name>
 
-# Implementați infrastructura și aplicația
+# Deplasează infrastructura și aplicația
 azd up
 
-# Implementați doar codul aplicației (omiteți infrastructura)
+# Deplasează doar codul aplicației (omite infrastructura)
 azd deploy
 
-# Proviționați doar infrastructura
+# Pregătește doar infrastructura
 azd provision
 
-# Vizualizați resursele implementate
+# Vizualizează resursele deplasate
 azd show
 
-# Transmiteți jurnalele
-azd logs <service-name> --follow
+# Transmite logurile folosind azd monitor sau Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <nume-serviciu> --resource-group <nume-grup-resurse> --follow
 
-# Monitorizați aplicația
+# Monitorizează aplicația
 azd monitor --overview
 
-# Curățați resursele
+# Curăță resursele
 azd down --force --purge
 ```
 
-## Depanare
+## Rezolvarea problemelor
 
-### Problemă: Containerul nu pornește
+### Problemă: Container-ul nu pornește
 
 ```bash
-# Verificați jurnalele
-azd logs api --tail 100
+# Verificați jurnalele folosind Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # Vizualizați evenimentele containerului
 az containerapp revision show \
@@ -791,16 +785,16 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problemă: Nu se poate accesa endpoint-ul aplicației containerizate
+### Problemă: Nu se poate accesa endpoint-ul aplicației container
 
 ```bash
-# Verificați configurația de intrare
+# Verificați configurația ingress
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Verificați dacă intrarea internă este activată
+# Verificați dacă ingress-ul intern este activat
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -810,12 +804,12 @@ az containerapp ingress update \
 ### Problemă: Probleme de performanță
 
 ```bash
-# Verifica utilizarea resurselor
+# Verifică utilizarea resurselor
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Extinde resursele
+# Mărește resursele
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -825,19 +819,19 @@ az containerapp update \
 
 ## Resurse și exemple suplimentare
 - [Exemplu Microservicii](./microservices/README.md)
-- [Exemplu API Flash simplu](./simple-flask-api/README.md)
+- [Exemplu API Flask simplu](./simple-flask-api/README.md)
 - [Documentație Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Galerie de șabloane AZD](https://azure.github.io/awesome-azd/)
-- [Exemple Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Șabloane Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Galerie template-uri AZD](https://azure.github.io/awesome-azd/)
+- [Sample-uri Container Apps](https://github.com/Azure-Samples/container-apps-samples)
+- [Template-uri Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Contribuții
 
 Pentru a contribui cu noi exemple de aplicații containerizate:
 
 1. Creați un subdirector nou cu exemplul dvs.
-2. Includeți fișierele complete `azure.yaml`, `infra/` și `src/`
-3. Adăugați un README detaliat cu instrucțiuni de implementare
+2. Includeți fișiere complete `azure.yaml`, `infra/` și `src/`
+3. Adăugați un README cuprinzător cu instrucțiuni de implementare
 4. Testați implementarea cu `azd up`
 5. Trimiteți un pull request
 
@@ -849,5 +843,5 @@ Pentru a contribui cu noi exemple de aplicații containerizate:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să oferim o traducere precisă, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa authoritative. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări eronate rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

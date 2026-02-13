@@ -1,54 +1,45 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-18T13:10:48+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "sl"
-}
--->
 # Pogosto zastavljena vprašanja (FAQ)
 
 **Pomoč po poglavjih**
 - **📚 Domača stran tečaja**: [AZD za začetnike](../README.md)
-- **🚆 Težave pri namestitvi**: [Poglavje 1: Namestitev in nastavitev](../docs/getting-started/installation.md)
-- **🤖 Vprašanja o umetni inteligenci**: [Poglavje 2: Razvoj z AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **🔧 Odpravljanje težav**: [Poglavje 7: Odpravljanje težav in razhroščevanje](../docs/troubleshooting/common-issues.md)
+- **🚆 Težave z namestitvijo**: [Poglavje 1: Namestitev in nastavitev](../docs/getting-started/installation.md)
+- **🤖 Vprašanja o AI**: [Poglavje 2: Razvoj, osredotočen na AI](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🔧 Odpravljanje napak**: [Poglavje 7: Odpravljanje napak in razhroščevanje](../docs/troubleshooting/common-issues.md)
 
 ## Uvod
 
-Ta obsežen FAQ ponuja odgovore na najpogostejša vprašanja o Azure Developer CLI (azd) in uvajanju v Azure. Poiščite hitre rešitve za pogoste težave, spoznajte najboljše prakse in pridobite pojasnila o konceptih ter delovnih tokovih azd.
+Ta obsežen FAQ vsebuje odgovore na najpogostejša vprašanja o Azure Developer CLI (azd) in razmestitvah v Azure. Najdete hitre rešitve za pogoste težave, razumete najboljše prakse in dobite pojasnila glede konceptov in delovnih tokov azd.
 
 ## Cilji učenja
 
-Z pregledom tega FAQ boste:
-- Hitro našli odgovore na pogosta vprašanja in težave v zvezi z Azure Developer CLI
+Z branjem tega FAQ boste:
+- Hitro našli odgovore na pogosta vprašanja in težave z Azure Developer CLI
 - Razumeli ključne koncepte in terminologijo prek praktičnega formata vprašanj in odgovorov
-- Dostopali do rešitev za odpravljanje pogostih težav in scenarijev napak
-- Spoznali najboljše prakse prek pogosto zastavljenih vprašanj o optimizaciji
-- Odkrijte napredne funkcije in zmogljivosti prek vprašanj na strokovni ravni
-- Učinkovito pridobili smernice o stroških, varnosti in strategijah uvajanja
+- Dostopali do rešitev za odpravljanje težav pri pogostih napakah in scenarijih
+- Spoznali najboljše prakse skozi pogosto zastavljena vprašanja o optimizaciji
+- Odkrijete napredne funkcije in zmogljivosti skozi vprašanja na strokovni ravni
+- Učinkovito poiskali smernice glede stroškov, varnosti in strategije razmestitve
 
 ## Rezultati učenja
 
 Z rednim sklicevanjem na ta FAQ boste lahko:
-- Samostojno reševali pogoste težave z Azure Developer CLI z uporabo ponujenih rešitev
-- Sprejemali informirane odločitve o strategijah in konfiguracijah uvajanja
-- Razumeli povezavo med azd in drugimi orodji ter storitvami Azure
-- Uporabljali najboljše prakse na podlagi izkušenj skupnosti in priporočil strokovnjakov
-- Učinkovito odpravljali težave z avtentikacijo, uvajanjem in konfiguracijo
-- Optimizirali stroške in zmogljivost z vpogledi ter priporočili iz FAQ
+- Samostojno reševali pogoste težave z Azure Developer CLI z uporabo podanih rešitev
+- Sprejemali informirane odločitve o strategijah in nastavitvah razmestitve
+- Razumeli razmerje med azd in drugimi orodji ter storitvami Azure
+- Uporabili najboljše prakse na podlagi izkušenj skupnosti in strokovnih priporočil
+- Učinkovito odpravljali težave z overjanjem, razmestitvijo in konfiguracijo
+- Optimizirali stroške in zmogljivost z uporabo vpogledov in priporočil iz FAQ
 
-## Kazalo vsebine
+## Table of Contents
 
 - [Začetek](../../../resources)
-- [Avtentikacija in dostop](../../../resources)
-- [Predloge in projekti](../../../resources)
-- [Uvajanje in infrastruktura](../../../resources)
-- [Konfiguracija in okolja](../../../resources)
-- [Odpravljanje težav](../../../resources)
-- [Stroški in obračunavanje](../../../resources)
-- [Najboljše prakse](../../../resources)
+- [Avtentikacija & dostop](../../../resources)
+- [Predloge & projekti](../../../resources)
+- [Razmestitev & infrastruktura](../../../resources)
+- [Konfiguracija & okolja](../../../resources)
+- [Odpravljanje napak](../../../resources)
+- [Stroški & obračunavanje](../../../resources)
+- [Priporočene prakse](../../../resources)
 - [Napredne teme](../../../resources)
 
 ---
@@ -56,17 +47,17 @@ Z rednim sklicevanjem na ta FAQ boste lahko:
 ## Začetek
 
 ### V: Kaj je Azure Developer CLI (azd)?
-**O**: Azure Developer CLI (azd) je orodje ukazne vrstice, osredotočeno na razvijalce, ki pospeši čas, potreben za prenos vaše aplikacije iz lokalnega razvojnega okolja v Azure. Ponuja najboljše prakse prek predlog in pomaga pri celotnem življenjskem ciklu uvajanja.
+**O**: Azure Developer CLI (azd) je orodje ukazne vrstice, osredotočeno na razvijalce, ki pospeši čas, potreben, da vaša aplikacija preide iz lokalnega razvojnega okolja v Azure. Zagotavlja najboljše prakse prek predlog in pomaga v celotnem življenjskem ciklu razmestitve.
 
 ### V: Kako se azd razlikuje od Azure CLI?
 **O**: 
 - **Azure CLI**: Orodje splošnega namena za upravljanje virov Azure
-- **azd**: Orodje, osredotočeno na razvijalce, za delovne tokove uvajanja aplikacij
+- **azd**: Orodje, osredotočeno na razvijalce, za delovne tokove razmestitve aplikacij
 - azd uporablja Azure CLI interno, vendar ponuja višje abstrakcije za pogoste razvojne scenarije
-- azd vključuje predloge, upravljanje okolij in avtomatizacijo uvajanja
+- azd vključuje predloge, upravljanje okolij in avtomatizacijo razmestitve
 
-### V: Ali moram imeti nameščen Azure CLI za uporabo azd?
-**O**: Da, azd zahteva Azure CLI za avtentikacijo in nekatere operacije. Najprej namestite Azure CLI, nato pa azd.
+### V: Ali potrebujem Azure CLI nameščen za uporabo azd?
+**O**: Da, azd zahteva Azure CLI za overjanje in nekatere operacije. Najprej namestite Azure CLI, nato azd.
 
 ### V: Katere programske jezike podpira azd?
 **O**: azd je neodvisen od jezika. Deluje z:
@@ -77,35 +68,35 @@ Z rednim sklicevanjem na ta FAQ boste lahko:
 - Go
 - PHP
 - Statične spletne strani
-- Kontejnerske aplikacije
+- Aplikacije v vsebnikih
 
-### V: Ali lahko uporabljam azd z obstoječimi projekti?
-**O**: Da! Lahko:
-1. Uporabite `azd init` za dodajanje konfiguracije azd obstoječim projektom
-2. Prilagodite obstoječe projekte, da ustrezajo strukturi predloge azd
-3. Ustvarite prilagojene predloge na podlagi vaše obstoječe arhitekture
+### V: Lahko uporabljam azd z obstoječimi projekti?
+**O**: Seveda! Lahko:
+1. Uporabite `azd init`, da dodate azd konfiguracijo obstoječim projektom
+2. Prilagodite obstoječe projekte, da ustrezajo strukturi azd predloge
+3. Ustvarite lastne predloge na podlagi vaše obstoječe arhitekture
 
 ---
 
-## Avtentikacija in dostop
+## Avtentikacija & dostop
 
-### V: Kako se avtenticiram z Azure z uporabo azd?
-**O**: Uporabite `azd auth login`, ki bo odprl okno brskalnika za avtentikacijo v Azure. Za scenarije CI/CD uporabite servisne principe ali upravljane identitete.
+### V: Kako se avtenticiram v Azure z uporabo azd?
+**O**: Uporabite `azd auth login`, ki bo odprl okno brskalnika za avtentikacijo v Azure. Za CI/CD scenarije uporabite service principal-e ali upravljane identitete.
 
-### V: Ali lahko uporabljam azd z več naročninami Azure?
-**O**: Da. Uporabite `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` za določitev, katero naročnino uporabiti za vsako okolje.
+### V: Ali lahko uporabim azd z več Azure naročninami?
+**O**: Da. Uporabite `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`, da določite, katero naročnino uporabljati za vsako okolje.
 
-### V: Katere pravice potrebujem za uvajanje z azd?
+### V: Katere pravice potrebujem za razmestitev z azd?
 **O**: Običajno potrebujete:
-- Vlogo **Contributor** na skupini virov ali naročnini
-- **User Access Administrator**, če uvajate vire, ki zahtevajo dodelitve vlog
-- Specifične pravice se razlikujejo glede na predlogo in uvajane vire
+- **Contributor** vlogo na skupini virov ali naročnini
+- **User Access Administrator**, če razmestite vire, ki zahtevajo dodelitve vlog
+- Specifična dovoljenja se razlikujejo glede na predlogo in razporejene vire
 
 ### V: Ali lahko uporabljam azd v CI/CD cevovodih?
-**O**: Seveda! azd je zasnovan za integracijo CI/CD. Za avtentikacijo uporabite servisne principe in nastavite okoljske spremenljivke za konfiguracijo.
+**O**: Absolutno! azd je zasnovan za integracijo v CI/CD. Uporabite service principal-e za overjanje in nastavite spremenljivke okolja za konfiguracijo.
 
-### V: Kako ravnam z avtentikacijo v GitHub Actions?
-**O**: Uporabite Azure Login action z poverilnicami servisnega principa:
+### V: Kako upravljam avtentikacijo v GitHub Actions?
+**O**: Uporabite Azure Login action z poverilnicami service principala:
 ```yaml
 - uses: azure/login@v1
   with:
@@ -115,51 +106,51 @@ Z rednim sklicevanjem na ta FAQ boste lahko:
 
 ---
 
-## Predloge in projekti
+## Predloge & projekti
 
-### V: Kje lahko najdem predloge azd?
+### V: Kje najdem azd predloge?
 **O**: 
 - Uradne predloge: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Predloge skupnosti: Iskanje na GitHubu za "azd-template"
-- Uporabite `azd template list` za brskanje po razpoložljivih predlogah
+- Predloge skupnosti: Poiščite na GitHubu "azd-template"
+- Uporabite `azd template list` za pregled razpoložljivih predlog
 
-### V: Kako ustvarim prilagojeno predlogo?
+### V: Kako ustvarim lastno predlogo?
 **O**: 
-1. Začnite s strukturo obstoječe predloge
+1. Začnite z obstoječo strukturo predloge
 2. Spremenite `azure.yaml`, infrastrukturne datoteke in kodo aplikacije
-3. Temeljito preizkusite z `azd up`
-4. Objavite na GitHubu z ustreznimi oznakami
+3. Temeljito testirajte z `azd up`
+4. Objavite na GitHub z ustreznimi oznakami
 
 ### V: Ali lahko uporabljam azd brez predloge?
-**O**: Da, uporabite `azd init` v obstoječem projektu za ustvarjanje potrebnih konfiguracijskih datotek. Ročno boste morali konfigurirati `azure.yaml` in infrastrukturne datoteke.
+**O**: Da, uporabite `azd init` v obstoječem projektu, da ustvarite potrebne konfiguracijske datoteke. Ročno boste morali konfigurirati `azure.yaml` in infrastrukturne datoteke.
 
 ### V: Kakšna je razlika med uradnimi in predlogami skupnosti?
 **O**: 
-- **Uradne predloge**: Vzdržuje Microsoft, redno posodablja, obsežna dokumentacija
-- **Predloge skupnosti**: Ustvarjajo razvijalci, lahko imajo specializirane primere uporabe, različno kakovost in vzdrževanje
+- **Uradne predloge**: Vzdržuje Microsoft, redno posodobljene, obsežna dokumentacija
+- **Predloge skupnosti**: Ustvarjene s strani razvijalcev, lahko specializirane, različno kakovostno vzdrževanje
 
-### V: Kako posodobim predlogo v svojem projektu?
+### V: Kako posodobim predlogo v mojem projektu?
 **O**: Predloge se ne posodabljajo samodejno. Lahko:
 1. Ročno primerjate in združite spremembe iz izvorne predloge
-2. Začnete na novo z `azd init` z uporabo posodobljene predloge
-3. Izberete specifične izboljšave iz posodobljenih predlog
+2. Začnete znova z `azd init` z uporabo posodobljene predloge
+3. Izberete posamezne izboljšave iz posodobljenih predlog
 
 ---
 
-## Uvajanje in infrastruktura
+## Razmestitev & infrastruktura
 
-### V: Katere storitve Azure lahko azd uvede?
-**O**: azd lahko uvede katero koli storitev Azure prek predlog Bicep/ARM, vključno z:
+### V: Katere Azure storitve lahko azd razmesti?
+**O**: azd lahko razmesti katerokoli Azure storitev prek Bicep/ARM predlog, vključno z:
 - App Services, Container Apps, Functions
-- Baze podatkov (SQL, PostgreSQL, Cosmos DB)
+- Podatkovnimi bazami (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
-- Omrežne, varnostne in nadzorne vire
+- Omrežjem, varnostjo in orodji za nadzor
 
-### V: Ali lahko uvedem v več regij?
-**O**: Da, konfigurirajte več regij v svojih predlogah Bicep in ustrezno nastavite parameter lokacije za vsako okolje.
+### V: Ali lahko razmestim v več regijah?
+**O**: Da, konfigurirajte več regij v vaših Bicep predlogah in ustrezno nastavite parameter location za vsako okolje.
 
-### V: Kako ravnam z migracijami sheme baze podatkov?
-**O**: Uporabite kljuke uvajanja v `azure.yaml`:
+### V: Kako upravljam migracije sheme podatkovne baze?
+**O**: Uporabite deployment hooks v `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -169,23 +160,23 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### V: Ali lahko uvedem samo infrastrukturo brez aplikacij?
-**O**: Da, uporabite `azd provision` za uvedbo samo infrastrukturnih komponent, definiranih v vaših predlogah.
+### V: Ali lahko razmestim samo infrastrukturo brez aplikacij?
+**O**: Da, uporabite `azd provision`, da razmestite samo infrastrukturne komponente, definirane v vaših predlogah.
 
-### V: Kako uvedem v obstoječe vire Azure?
-**O**: To je zapleteno in ni neposredno podprto. Lahko:
-1. Uvozite obstoječe vire v svoje predloge Bicep
-2. Uporabite obstoječe reference virov v predlogah
-3. Spremenite predloge, da pogojno ustvarijo ali referencirajo vire
+### V: Kako razmestim na obstoječe Azure vire?
+**O**: To je kompleksno in ni neposredno podprto. Lahko:
+1. Uvozite obstoječe vire v vaše Bicep predloge
+2. Uporabite reference na obstoječe vire v predlogah
+3. Spremenite predloge, da pogojno ustvarjajo ali referencirajo vire
 
 ### V: Ali lahko uporabljam Terraform namesto Bicep?
-**O**: Trenutno azd primarno podpira predloge Bicep/ARM. Podpora za Terraform ni uradno na voljo, čeprav lahko obstajajo rešitve skupnosti.
+**O**: Trenutno azd primarno podpira Bicep/ARM predloge. Podpora za Terraform ni uradno na voljo, vendar lahko obstajajo rešitve skupnosti.
 
 ---
 
-## Konfiguracija in okolja
+## Konfiguracija & okolja
 
-### V: Kako upravljam različna okolja (razvoj, testiranje, produkcija)?
+### V: Kako upravljam različna okolja (dev, staging, prod)?
 **O**: Ustvarite ločena okolja z `azd env new <environment-name>` in konfigurirajte različne nastavitve za vsako:
 ```bash
 azd env new development
@@ -193,24 +184,24 @@ azd env new staging
 azd env new production
 ```
 
-### V: Kje so shranjene konfiguracije okolja?
-**O**: V mapi `.azure` znotraj vaše projektne mape. Vsako okolje ima svojo mapo s konfiguracijskimi datotekami.
+### V: Kje se shranjujejo konfiguracije okolij?
+**O**: V mapi `.azure` znotraj vašega projektnega imenika. Vsako okolje ima svojo mapo z konfiguracijskimi datotekami.
 
 ### V: Kako nastavim konfiguracijo, specifično za okolje?
-**O**: Uporabite `azd env set` za konfiguracijo okoljskih spremenljivk:
+**O**: Uporabite `azd env set` za konfiguracijo spremenljivk okolja:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
 ### V: Ali lahko delim konfiguracije okolja med člani ekipe?
-**O**: Mapa `.azure` vsebuje občutljive informacije in je ne smete vključiti v nadzor različic. Namesto tega:
-1. Dokumentirajte zahtevane okoljske spremenljivke
-2. Uporabite skripte uvajanja za nastavitev okolij
-3. Uporabite Azure Key Vault za občutljivo konfiguracijo
+**O**: Mapa `.azure` vsebuje občutljive informacije in je ne smete vnašati v sistem za nadzor različic. Namesto tega:
+1. Dokumentirajte zahtevane spremenljivke okolja
+2. Uporabite skripte za razmestitev za nastavitev okolij
+3. Uporabite Azure Key Vault za občutljive konfiguracije
 
 ### V: Kako preglasim privzete nastavitve predloge?
-**O**: Nastavite okoljske spremenljivke, ki ustrezajo parametrom predloge:
+**O**: Nastavite spremenljivke okolja, ki ustrezajo parametrom predloge:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -218,91 +209,91 @@ azd env set SKU_NAME "B1"
 
 ---
 
-## Odpravljanje težav
+## Odpravljanje napak
 
-### V: Zakaj `azd up` ne uspe?
+### V: Zakaj se `azd up` ne uspe?
 **O**: Pogosti vzroki:
 1. **Težave z avtentikacijo**: Zaženite `azd auth login`
 2. **Nezadostne pravice**: Preverite dodelitve vlog v Azure
 3. **Konflikti pri poimenovanju virov**: Spremenite AZURE_ENV_NAME
-4. **Težave s kvotami/kapaciteto**: Preverite razpoložljivost regije
-5. **Napake v predlogi**: Validirajte predloge Bicep
+4. **Omejitve/kapaciteta**: Preverite razpoložljivost po regijah
+5. **Napake v predlogah**: Validirajte Bicep predloge
 
-### V: Kako razhroščujem napake pri uvajanju?
+### V: Kako razhroščim neuspehe razmestitve?
 **O**: 
-1. Uporabite `azd deploy --debug` za podroben izpis
-2. Preverite zgodovino uvajanja v portalu Azure
-3. Preglejte dnevnik aktivnosti v portalu Azure
+1. Uporabite `azd deploy --debug` za podrobnejši izpis
+2. Preverite zgodovino razmestitev v Azure portalu
+3. Preglejte Activity Log v Azure portalu
 4. Uporabite `azd show` za prikaz trenutnega stanja okolja
 
-### V: Zakaj moje okoljske spremenljivke ne delujejo?
+### V: Zakaj moje spremenljivke okolja ne delujejo?
 **O**: Preverite:
 1. Imena spremenljivk se natančno ujemajo s parametri predloge
-2. Vrednosti so pravilno navedene, če vsebujejo presledke
+2. Vrednosti so ustrezno zapisane v narekovajih, če vsebujejo presledke
 3. Izbrano je pravo okolje: `azd env select <environment>`
-4. Spremenljivke so nastavljene v pravilnem okolju
+4. Spremenljivke so nastavljene v pravem okolju
 
-### V: Kako počistim neuspele uvedbe?
+### V: Kako očistim neuspešne razmestitve?
 **O**: 
 ```bash
 azd down --force --purge
 ```
 To odstrani vse vire in konfiguracijo okolja.
 
-### V: Zakaj moja aplikacija ni dostopna po uvedbi?
+### V: Zakaj moja aplikacija ni dostopna po razmestitvi?
 **O**: Preverite:
-1. Uvedba je bila uspešno zaključena
-2. Aplikacija deluje (preverite dnevnike v portalu Azure)
-3. Omrežne varnostne skupine dovoljujejo promet
-4. DNS/prilagojene domene so pravilno konfigurirane
+1. Ali je razmestitev uspešno zaključena
+2. Ali aplikacija teče (preverite dnevnike v Azure portalu)
+3. Ali omrežne varnostne skupine dovolijo promet
+4. Ali so DNS/lastne domene pravilno konfigurirane
 
 ---
 
-## Stroški in obračunavanje
+## Stroški & obračunavanje
 
-### V: Koliko bodo stali uvodi azd?
+### V: Koliko bodo stali azd razmestitve?
 **O**: Stroški so odvisni od:
-- Uvedenih storitev Azure
+- Azure storitev, ki so razmeščene
 - Izbranih nivojev storitev/SKU-jev
-- Regijskih razlik v cenah
+- Cenovnih razlik med regijami
 - Vzorcev uporabe
 
 Uporabite [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) za ocene.
 
-### V: Kako nadzorujem stroške pri uvajanjih azd?
+### V: Kako nadziram stroške pri azd razmestitvah?
 **O**: 
-1. Uporabite nižje nivoje SKU za razvojna okolja
-2. Nastavite proračune in opozorila v Azure
-3. Uporabite `azd down` za odstranitev virov, ko niso potrebni
-4. Izberite ustrezne regije (stroški se razlikujejo glede na lokacijo)
-5. Uporabite orodja za upravljanje stroškov Azure
+1. Uporabite nižji razred SKU-jev za razvojna okolja
+2. Nastavite Azure proračune in opozorila
+3. Uporabite `azd down`, da odstranite vire, ko niso potrebni
+4. Izberite primerne regije (stroški se razlikujejo glede na lokacijo)
+5. Uporabite orodja Azure Cost Management
 
-### V: Ali obstajajo možnosti brezplačnega nivoja za predloge azd?
-**O**: Veliko storitev Azure ponuja brezplačne nivoje:
-- App Service: Na voljo brezplačen nivo
+### V: Ali obstajajo brezplačne možnosti za azd predloge?
+**O**: Veliko Azure storitev nudi brezplačne sloje:
+- App Service: na voljo brezplačen sloj
 - Azure Functions: 1M brezplačnih izvedb/mesec
-- Cosmos DB: Brezplačen nivo z 400 RU/s
-- Application Insights: Prvih 5GB/mesec brezplačno
+- Cosmos DB: brezplačen sloj z 400 RU/s
+- Application Insights: prvih 5GB/mesec brezplačno
 
-Konfigurirajte predloge za uporabo brezplačnih nivojev, kjer so na voljo.
+Konfigurirajte predloge, da kjer je mogoče uporabijo brezplačne sloje.
 
-### V: Kako ocenim stroške pred uvedbo?
+### V: Kako ocenim stroške pred razmestitvijo?
 **O**: 
-1. Preglejte `main.bicep` predloge, da vidite, kateri viri so ustvarjeni
+1. Preglejte `main.bicep` v predlogi, da vidite, kateri viri se ustvarijo
 2. Uporabite Azure Pricing Calculator z določenimi SKU-ji
-3. Najprej uvedite v razvojno okolje za spremljanje dejanskih stroškov
+3. Najprej razmestite v razvojno okolje za spremljanje dejanskih stroškov
 4. Uporabite Azure Cost Management za podrobno analizo stroškov
 
 ---
 
-## Najboljše prakse
+## Priporočene prakse
 
-### V: Katere so najboljše prakse za strukturo projektov azd?
+### V: Katere so najboljše prakse za strukturo azd projekta?
 **O**: 
 1. Ločite kodo aplikacije od infrastrukture
 2. Uporabite smiselna imena storitev v `azure.yaml`
-3. Implementirajte ustrezno obravnavo napak v skriptih gradnje
-4. Uporabite konfiguracijo, specifično za okolje
+3. Implementirajte ustrezno obravnavo napak v skriptah za gradnjo
+4. Uporabite konfiguracijo specifično za okolje
 5. Vključite obsežno dokumentacijo
 
 ### V: Kako naj organiziram več storitev v azd?
@@ -317,7 +308,7 @@ Konfigurirajte predloge za uporabo brezplačnih nivojev, kjer so na voljo.
 └── README.md         # Project documentation
 ```
 
-### V: Ali naj mapo `.azure` vključim v nadzor različic?
+### V: Ali naj zabeležim mapo `.azure` v sistem za nadzor različic?
 **O**: **Ne!** Mapa `.azure` vsebuje občutljive informacije. Dodajte jo v `.gitignore`:
 ```gitignore
 .azure/
@@ -326,24 +317,24 @@ Konfigurirajte predloge za uporabo brezplačnih nivojev, kjer so na voljo.
 ### V: Kako ravnam s skrivnostmi in občutljivo konfiguracijo?
 **O**: 
 1. Uporabite Azure Key Vault za skrivnosti
-2. Reference skrivnosti Key Vault v konfiguraciji aplikacije
-3. Nikoli ne vključujte skrivnosti v nadzor različic
+2. Referencirajte skrivnosti Key Vault v konfiguraciji aplikacije
+3. Nikoli ne vnašajte skrivnosti v sistem za nadzor različic
 4. Uporabite upravljane identitete za avtentikacijo med storitvami
 
 ### V: Kakšen je priporočeni pristop za CI/CD z azd?
 **O**: 
-1. Uporabite ločena okolja za vsako fazo (razvoj/testiranje/produkcija)
-2. Implementirajte avtomatizirano testiranje pred uvedbo
-3. Za avtentikacijo uporabite servisne principe
-4. Shranite občutljivo konfiguracijo v skrivnosti/spremenljivke cevovoda
-5. Implementirajte odobritvene korake za produkcijske uvedbe
+1. Uporabite ločena okolja za vsako fazo (dev/staging/prod)
+2. Implementirajte avtomatizirane teste pred razmestitvijo
+3. Uporabite service principal-e za overjanje
+4. Shranjujte občutljivo konfiguracijo v skrivnostih/spremenljivkah cevovoda
+5. Uvedite odobritvena vrata za produkcijske razmestitve
 
 ---
 
 ## Napredne teme
 
 ### V: Ali lahko razširim azd s prilagojeno funkcionalnostjo?
-**O**: Da, prek kljuk uvajanja v `azure.yaml`:
+**O**: Da, preko deployment hook-ov v `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -352,66 +343,68 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### V: Kako integriram azd z obstoječimi procesi DevOps?
+### V: Kako integriram azd z obstoječimi DevOps procesi?
 **O**: 
-1. Uporabite ukaze azd v obstoječih skriptih cevovoda
-2. Standardizirajte predloge azd med ekipami
+1. Uporabite azd ukaze v obstoječih skriptah cevovodov
+2. Standardizirajte azd predloge v celotni ekipi
 3. Integrirajte z obstoječim nadzorom in opozarjanjem
-4. Uporabite JSON izhod azd za integracijo cevovoda
+4. Uporabite JSON izhod azd za integracijo v cevovode
 
 ### V: Ali lahko uporabljam azd z Azure DevOps?
-**O**: Da, azd deluje z vsakim sistemom CI/CD. Ustvarite cevovode Azure DevOps, ki uporabljajo ukaze azd.
+**O**: Da, azd deluje z katerimkoli CI/CD sistemom. Ustvarite Azure DevOps pipeline-e, ki uporabljajo azd ukaze.
 
-### V: Kako prispevam k azd ali ustvarim predloge skupnosti?
-**O**: 
-1. **Orodje azd**: Prispevajte k [Azure/azure-dev](https://github.com/Azure/
-2. **Predloge**: Ustvarite predloge v skladu s [smernicami za predloge](https://github.com/Azure-Samples/awesome-azd)  
-3. **Dokumentacija**: Prispevajte k dokumentaciji na [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
+### V: Kako prispevati k azd ali ustvariti predloge skupnosti?
+**O**:
+1. **azd orodje**: Prispevajte v [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Predloge**: Ustvarite predloge v skladu s [smernicami za predloge](https://github.com/Azure-Samples/awesome-azd)
+3. **Dokumentacija**: Prispevajte k dokumentaciji na [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
-### V: Kakšen je načrt za azd?  
-**O**: Oglejte si [uradni načrt](https://github.com/Azure/azure-dev/projects) za načrtovane funkcije in izboljšave.  
+### Q: What's the roadmap for azd?
+**A**: Check the [official roadmap](https://github.com/Azure/azure-dev/projects) for planned features and improvements.
 
-### V: Kako migriram z drugih orodij za uvajanje na azd?  
-**O**:  
-1. Analizirajte trenutno arhitekturo uvajanja  
-2. Ustvarite ustrezne Bicep predloge  
-3. Konfigurirajte `azure.yaml`, da ustreza trenutnim storitvam  
-4. Temeljito testirajte v razvojnem okolju  
-5. Postopoma migrirajte okolja  
-
----
-
-## Imate še vprašanja?  
-
-### **Najprej poiščite**  
-- Preverite [uradno dokumentacijo](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Poiščite [GitHub težave](https://github.com/Azure/azure-dev/issues) za podobne težave  
-
-### **Poiščite pomoč**  
-- [GitHub razprave](https://github.com/Azure/azure-dev/discussions) - Podpora skupnosti  
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Tehnična vprašanja  
-- [Azure Discord](https://discord.gg/azure) - Klepet skupnosti v realnem času  
-
-### **Prijavite težave**  
-- [GitHub težave](https://github.com/Azure/azure-dev/issues/new) - Poročila o napakah in zahteve za funkcije  
-- Vključite ustrezne dnevnike, sporočila o napakah in korake za reprodukcijo  
-
-### **Izvedite več**  
-- [Dokumentacija za Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
+### Q: How do I migrate from other deployment tools to azd?
+**A**: 
+1. Analyze current deployment architecture
+2. Create equivalent Bicep templates
+3. Configure `azure.yaml` to match current services
+4. Test thoroughly in development environment
+5. Gradually migrate environments
 
 ---
 
-*Ta FAQ se redno posodablja. Zadnja posodobitev: 9. september 2025*  
+## Imate še vprašanja?
+
+### **Najprej poiščite**
+- Preverite [uradno dokumentacijo](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Poiščite [GitHub issues](https://github.com/Azure/azure-dev/issues) za podobne težave
+
+### **Poiščite pomoč**
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Podpora skupnosti
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Tehnična vprašanja
+- [Azure Discord](https://discord.gg/azure) - Pogovor skupnosti v realnem času
+
+### **Prijavite težave**
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Poročila o napakah in predlogi za funkcije
+- Priložite ustrezne dnevnike, sporočila o napakah in korake za reprodukcijo
+
+### **Izvedite več**
+- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigacija**  
-- **Prejšnja lekcija**: [Slovar](glossary.md)  
-- **Naslednja lekcija**: [Vodnik za študij](study-guide.md)  
+*Ta pogosta vprašanja se redno posodabljajo. Zadnja posodobitev: 9. september 2025*
 
 ---
 
-**Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+**Navigacija**
+- **Prejšnja lekcija**: [Pojmovnik](glossary.md)
+- **Naslednja lekcija**: [Študijski vodič](study-guide.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Izjava o omejitvi odgovornosti:
+Ta dokument je bil preveden z uporabo storitve za strojno prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v izvornem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Nismo odgovorni za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

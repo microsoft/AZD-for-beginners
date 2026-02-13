@@ -1,43 +1,34 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-11-18T19:13:47+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "pcm"
-}
--->
-# Frequently Asked Questions (FAQ)
+# Wetin People Dey Ask (FAQ)
 
-**Get Help by Chapter**
+**Find Help by Chapter**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
-- **🚆 Installation Wahala**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
-- **🤖 AI Questions**: [Chapter 2: AI-First Development](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **🚆 Installation Issues**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
+- **🤖 AI Questions**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **🔧 Troubleshooting**: [Chapter 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
 
 ## Introduction
 
-Dis FAQ dey answer di common questions wey people dey ask about Azure Developer CLI (azd) and how to deploy for Azure. E go help you find quick solution to wahala, understand di best way to do am, and clear your mind about azd concepts and workflows.
+Dis full FAQ go give answers to di common kweschons wey people dey ask about Azure Developer CLI (azd) and Azure deployments. E go help you find quick solutions to common problems, understand beta practices, and clear tori on azd concepts and how things dey flow.
 
 ## Learning Goals
 
-If you read dis FAQ well, you go:
-- Get quick answer to di common wahala wey dey happen with Azure Developer CLI
-- Understand di main ideas and words wey dem dey use through Q&A wey dey practical
-- See solution to wahala wey dey happen often and error wey fit show
-- Learn di best way to do am through di common questions wey people dey ask about optimization
-- Discover di advanced features and wetin dem fit do through expert-level questions
-- Get guidance about cost, security, and deployment strategy fast
+By reading dis FAQ, you go:
+- Find quick answers to common Azure Developer CLI kweschons and wahala
+- Understand key concepts and terms through practical Q&A style
+- Access troubleshooting solutions for frequent problems and error cases
+- Learn best practices from common kweschons about optimization
+- Discover advanced features and wetin dem fit do through expert-level kweschons
+- Quickly check guidance about cost, security, and deployment strategy
 
 ## Learning Outcomes
 
-If you dey use dis FAQ often, you go fit:
-- Solve di common wahala wey dey happen with Azure Developer CLI by yourself with di solution wey dem provide
-- Make better decision about how you go deploy and configure your app
-- Understand how azd and other Azure tools and services dey work together
-- Use di best way to do am wey community and experts don recommend
-- Solve wahala wey dey happen with authentication, deployment, and configuration well
-- Use di FAQ advice to reduce cost and make performance better
+If you dey refer to dis FAQ regular, you go fit:
+- Solve common Azure Developer CLI wahala by yourself using di solutions wey dey here
+- Make informed decisions about deployment strategies and configuration
+- Understand how azd take relate with other Azure tools and services
+- Use best practices based on community experience and expert suggestions
+- Troubleshoot authentication, deployment, and configuration problems well
+- Optimize cost and performance using di tips and recommendations for dis FAQ
 
 ## Table of Contents
 
@@ -56,20 +47,20 @@ If you dey use dis FAQ often, you go fit:
 ## Getting Started
 
 ### Q: Wetin be Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) na tool wey developers dey use for command-line wey dey make am fast to move your app from your local development environment go Azure. E dey provide templates wey dey follow di best way to do am and e dey help for di whole deployment process.
+**A**: Azure Developer CLI (azd) na tool wey developers dey use for command-line to speed up how dem take move application from local development environment go Azure. E dey give best practices through templates and e dey help for the whole deployment lifecycle.
 
-### Q: Wetin be di difference between azd and Azure CLI?
+### Q: How azd different from Azure CLI?
 **A**: 
-- **Azure CLI**: Na general tool wey dey manage Azure resources
-- **azd**: Na tool wey developers dey use for application deployment workflows
-- azd dey use Azure CLI inside but e dey provide higher-level way to do di common development things
-- azd get templates, environment management, and e dey automate deployment
+- **Azure CLI**: Tool wey fit do plenty tins to manage Azure resources
+- **azd**: Tool wey focus on developers and application deployment flows
+- azd dey use Azure CLI inside but e dey provide higher-level abstractions for common development scenarios
+- azd get templates, environment management, and deployment automation
 
-### Q: I need to install Azure CLI before I fit use azd?
-**A**: Yes, azd dey need Azure CLI for authentication and some operations. First install Azure CLI, then install azd.
+### Q: Do I need Azure CLI installed to use azd?
+**A**: Yes, azd need Azure CLI for authentication and some operations. Install Azure CLI first, then install azd.
 
-### Q: Which programming languages azd dey support?
-**A**: azd no dey choose language. E dey work with:
+### Q: Wetin programming languages azd support?
+**A**: azd dey language-agnostic. E dey work with:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -79,33 +70,33 @@ If you dey use dis FAQ often, you go fit:
 - Static websites
 - Containerized applications
 
-### Q: I fit use azd for project wey I don already get?
-**A**: Yes! You fit:
-1. Use `azd init` to add azd configuration for di project wey you don already get
-2. Change di project wey you don already get to match azd template structure
-3. Create custom templates wey dey follow di architecture wey you don already get
+### Q: Fit I use azd with existing projects?
+**A**: Yes! You fit either:
+1. Use `azd init` to add azd configuration to existing projects
+2. Adapt existing projects to match azd template structure
+3. Create custom templates based on your current architecture
 
 ---
 
 ## Authentication & Access
 
-### Q: How I go take authenticate with Azure using azd?
-**A**: Use `azd auth login` wey go open browser window for Azure authentication. For CI/CD, use service principals or managed identities.
+### Q: How I go authenticate with Azure using azd?
+**A**: Use `azd auth login` wey go open browser window for Azure authentication. For CI/CD scenarios, use service principals or managed identities.
 
-### Q: I fit use azd with plenty Azure subscriptions?
-**A**: Yes. Use `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` to choose di subscription wey you wan use for each environment.
+### Q: Fit I use azd with multiple Azure subscriptions?
+**A**: Yes. Use `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` to tell which subscription make each environment use.
 
-### Q: Which permission I need to deploy with azd?
+### Q: Wetin permissions I need to deploy with azd?
 **A**: Normally you go need:
-- **Contributor** role for di resource group or subscription
+- **Contributor** role on the resource group or subscription
 - **User Access Administrator** if you dey deploy resources wey need role assignments
-- Di permission wey you need fit change based on di template and resources wey you dey deploy
+- Specific permissions fit change base on template and resources wey you dey deploy
 
-### Q: I fit use azd for CI/CD pipelines?
-**A**: Of course! azd dey work well for CI/CD integration. Use service principals for authentication and set environment variables for configuration.
+### Q: Fit I use azd for CI/CD pipelines?
+**A**: Sure! azd dem design am for CI/CD integration. Use service principals for authentication and set environment variables for configuration.
 
-### Q: How I go take handle authentication for GitHub Actions?
-**A**: Use di Azure Login action with service principal credentials:
+### Q: How I handle authentication for GitHub Actions?
+**A**: Use the Azure Login action with service principal credentials:
 ```yaml
 - uses: azure/login@v1
   with:
@@ -117,49 +108,49 @@ If you dey use dis FAQ often, you go fit:
 
 ## Templates & Projects
 
-### Q: Where I fit find azd templates?
+### Q: Where I go find azd templates?
 **A**: 
 - Official templates: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Community templates: Search GitHub for "azd-template"
-- Use `azd template list` to see di templates wey dey available
+- Community templates: search GitHub for "azd-template"
+- Use `azd template list` to browse di templates wey dey available
 
-### Q: How I go take create custom template?
+### Q: How I go create custom template?
 **A**: 
-1. Start with di template structure wey dey already
-2. Change `azure.yaml`, infrastructure files, and application code
-3. Test am well with `azd up`
-4. Publish am for GitHub with di correct tags
+1. Start with one template wey already exist
+2. Modify `azure.yaml`, infrastructure files, and application code
+3. Test well with `azd up`
+4. Publish to GitHub with correct tags
 
-### Q: I fit use azd without template?
-**A**: Yes, use `azd init` for di project wey you don already get to create di configuration files wey you need. You go need configure `azure.yaml` and infrastructure files by yourself.
+### Q: Fit I use azd without template?
+**A**: Yes, run `azd init` inside existing project to create the configuration files wey you need. You go still need configure `azure.yaml` and infrastructure files by hand.
 
-### Q: Wetin be di difference between official and community templates?
+### Q: Wetin difference between official and community templates?
 **A**: 
-- **Official templates**: Microsoft dey maintain am, dem dey update am often, e get better documentation
-- **Community templates**: Developers dey create am, e fit get special use cases, di quality and maintenance fit dey different
+- **Official templates**: Microsoft dey maintain dem, dem dey update regularly, and dem get good documentation
+- **Community templates**: Developers create dem, fit get special use cases, and quality/maintenance fit vary
 
-### Q: How I go take update template for my project?
-**A**: Templates no dey update by themselves. You fit:
-1. Compare and merge di changes from di source template by yourself
-2. Start afresh with `azd init` using di updated template
-3. Pick di specific improvement wey dey di updated templates
+### Q: How I go update template for my project?
+**A**: Templates no dey update automatic. You fit:
+1. Manually compare and merge changes from the source template
+2. Start fresh with `azd init` using the updated template
+3. Cherry-pick specific improvements from updated templates
 
 ---
 
 ## Deployment & Infrastructure
 
 ### Q: Which Azure services azd fit deploy?
-**A**: azd fit deploy any Azure service through Bicep/ARM templates, like:
+**A**: azd fit deploy any Azure service through Bicep/ARM templates, including:
 - App Services, Container Apps, Functions
 - Databases (SQL, PostgreSQL, Cosmos DB)
 - Storage, Key Vault, Application Insights
 - Networking, security, and monitoring resources
 
-### Q: I fit deploy for plenty regions?
-**A**: Yes, configure plenty regions for your Bicep templates and set di location parameter well for each environment.
+### Q: Fit I deploy to multiple regions?
+**A**: Yes, configure multiple regions in your Bicep templates and set the location parameter correct for each environment.
 
-### Q: How I go take handle database schema migrations?
-**A**: Use deployment hooks for `azure.yaml`:
+### Q: How I go handle database schema migrations?
+**A**: Use deployment hooks inside `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -169,48 +160,48 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: I fit deploy only infrastructure without applications?
-**A**: Yes, use `azd provision` to deploy only di infrastructure wey dey di templates.
+### Q: Fit I deploy only infrastructure without applications?
+**A**: Yes, use `azd provision` to deploy only the infrastructure parts wey dey defined in your templates.
 
-### Q: How I go take deploy to Azure resources wey don already dey?
-**A**: E dey complex and azd no dey support am directly. You fit:
-1. Add di resources wey don already dey to your Bicep templates
-2. Use di resources wey don already dey for templates
-3. Change templates to create or use di resources wey don already dey
+### Q: How I go deploy to existing Azure resources?
+**A**: E dey complex and no dey directly supported. You fit:
+1. Import existing resources into your Bicep templates
+2. Use existing resource references inside templates
+3. Modify templates to conditionally create or reference resources
 
-### Q: I fit use Terraform instead of Bicep?
-**A**: For now, azd dey support Bicep/ARM templates. Terraform no dey officially supported, but community fit get solution.
+### Q: Fit I use Terraform instead of Bicep?
+**A**: For now, azd mainly support Bicep/ARM templates. Official Terraform support no dey yet, but community solutions fit dey.
 
 ---
 
 ## Configuration & Environments
 
-### Q: How I go take manage different environments (dev, staging, prod)?
-**A**: Create different environments with `azd env new <environment-name>` and configure di settings for each:
+### Q: How I go manage different environments (dev, staging, prod)?
+**A**: Create separate environments with `azd env new <environment-name>` and configure different settings for each:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### Q: Where dem dey store environment configurations?
-**A**: For di `.azure` folder wey dey your project directory. Each environment get im own folder with configuration files.
+### Q: Where environment configurations dey stored?
+**A**: For the `.azure` folder inside your project directory. Each environment get im own folder with configuration files.
 
-### Q: How I go take set environment-specific configuration?
+### Q: How I go set environment-specific configuration?
 **A**: Use `azd env set` to configure environment variables:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: I fit share environment configurations with my team members?
-**A**: Di `.azure` folder get sensitive information and e no suppose dey version control. Instead:
-1. Write down di environment variables wey dem need
+### Q: Fit I share environment configurations among team members?
+**A**: The `.azure` folder get sensitive info and dem no suppose commit am to version control. Instead:
+1. Document the environment variables wey need set
 2. Use deployment scripts to set up environments
 3. Use Azure Key Vault for sensitive configuration
 
-### Q: How I go take change di default settings for template?
-**A**: Set environment variables wey match di template parameters:
+### Q: How I go override template defaults?
+**A**: Set environment variables wey match the template parameters:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -220,93 +211,93 @@ azd env set SKU_NAME "B1"
 
 ## Troubleshooting
 
-### Q: Why `azd up` no dey work?
-**A**: Di common reasons na:
-1. **Authentication wahala**: Run `azd auth login`
-2. **Permission no dey enough**: Check your Azure role assignments
-3. **Resource name dey clash**: Change AZURE_ENV_NAME
-4. **Quota/capacity wahala**: Check di availability for di region
-5. **Template error**: Validate di Bicep templates
+### Q: Why `azd up` dey fail?
+**A**: Common reasons:
+1. **Authentication issues**: Run `azd auth login`
+2. **Insufficient permissions**: Check your Azure role assignments
+3. **Resource naming conflicts**: Change AZURE_ENV_NAME
+4. **Quota/capacity issues**: Check regional availability
+5. **Template errors**: Validate Bicep templates
 
-### Q: How I go take debug deployment wahala?
+### Q: How I go debug deployment failures?
 **A**: 
-1. Use `azd deploy --debug` to see di full output
-2. Check di deployment history for Azure portal
-3. Look di Activity Log for Azure portal
-4. Use `azd show` to see di current environment state
+1. Use `azd deploy --debug` for verbose output
+2. Check Azure portal deployment history
+3. Review Activity Log inside Azure portal
+4. Use `azd show` to display current environment state
 
 ### Q: Why my environment variables no dey work?
 **A**: Check:
-1. Di variable names dey match di template parameters well
-2. Di values dey quoted well if dem get space
-3. Di environment dey selected: `azd env select <environment>`
-4. Di variables dey set for di correct environment
+1. Variable names match template parameters exactly
+2. Values dey properly quoted if dem get spaces
+3. Environment don dey selected: `azd env select <environment>`
+4. Variables don set for the correct environment
 
-### Q: How I go take clean failed deployments?
+### Q: How I go clean up failed deployments?
 **A**: 
 ```bash
 azd down --force --purge
 ```
-Dis go remove all resources and environment configuration.
+This removes all resources and environment configuration.
 
-### Q: Why my app no dey accessible after deployment?
+### Q: Why my application no open after deployment?
 **A**: Check:
-1. Di deployment finish well
-2. Di app dey run (check di logs for Azure portal)
-3. Di Network security groups dey allow traffic
-4. DNS/custom domains dey configured well
+1. Deployment finish successful
+2. Application dey run (check logs for Azure portal)
+3. Network security groups allow traffic
+4. DNS/custom domains don configure correct
 
 ---
 
 ## Cost & Billing
 
 ### Q: How much azd deployments go cost?
-**A**: Di cost dey depend on:
-- Di Azure services wey you deploy
-- Di service tiers/SKUs wey you choose
-- Di price for di region
+**A**: Cost dey depend on:
+- Azure services wey you deploy
+- Service tiers/SKUs wey you choose
+- Regional pricing differences
 - How you dey use am
 
-Use di [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to estimate.
+Use the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to get estimate.
 
-### Q: How I go take control cost for azd deployments?
+### Q: How I go control costs for azd deployments?
 **A**: 
-1. Use di lower-tier SKUs for development environments
+1. Use lower-tier SKUs for development environments
 2. Set up Azure budgets and alerts
-3. Use `azd down` to remove resources if you no dey use dem
-4. Choose di region wey dey cheaper (price dey change by location)
+3. Use `azd down` to remove resources when you no need dem
+4. Choose the correct regions (cost differ by location)
 5. Use Azure Cost Management tools
 
-### Q: azd templates get free tier options?
-**A**: Plenty Azure services get free tiers:
+### Q: Dem dey free tier options for azd templates?
+**A**: Many Azure services get free tiers:
 - App Service: Free tier dey
 - Azure Functions: 1M free executions/month
 - Cosmos DB: Free tier with 400 RU/s
 - Application Insights: First 5GB/month free
 
-Configure templates to use di free tiers if e dey available.
+Configure templates to use free tiers where dem dey available.
 
-### Q: How I go take estimate cost before deployment?
+### Q: How I go estimate costs before deployment?
 **A**: 
-1. Check di template `main.bicep` to see di resources wey dem go create
-2. Use Azure Pricing Calculator with di specific SKUs
-3. Deploy for development environment first to monitor di real cost
-4. Use Azure Cost Management to analyze di cost well
+1. Review template `main.bicep` to see which resources dem go create
+2. Use Azure Pricing Calculator with the specific SKUs
+3. Deploy to a development environment first to watch real costs
+4. Use Azure Cost Management for detailed cost analysis
 
 ---
 
 ## Best Practices
 
-### Q: Wetin be di best way to arrange azd project structure?
+### Q: Wetin be best practices for azd project structure?
 **A**: 
-1. Keep di app code separate from di infrastructure
-2. Use service names wey make sense for `azure.yaml`
-3. Handle errors well for build scripts
-4. Use configuration wey dey specific to environment
-5. Add better documentation
+1. Keep application code separate from infrastructure
+2. Use clear service names inside `azure.yaml`
+3. Put proper error handling for build scripts
+4. Use environment-specific configuration
+5. Include good documentation
 
-### Q: How I go take arrange plenty services for azd?
-**A**: Use di recommended structure:
+### Q: How I go organize multiple services for azd?
+**A**: Use the recommended structure:
 ```
 ├── src/
 │   ├── web/          # Frontend service
@@ -317,33 +308,33 @@ Configure templates to use di free tiers if e dey available.
 └── README.md         # Project documentation
 ```
 
-### Q: I suppose commit di `.azure` folder for version control?
-**A**: **No!** Di `.azure` folder get sensitive information. Add am to `.gitignore`:
+### Q: I suppose commit the `.azure` folder to version control?
+**A**: **No!** The `.azure` folder get sensitive information. Add am to `.gitignore`:
 ```gitignore
 .azure/
 ```
 
-### Q: How I go take handle secrets and sensitive configuration?
+### Q: How I go handle secrets and sensitive configuration?
 **A**: 
 1. Use Azure Key Vault for secrets
-2. Reference di Key Vault secrets for app configuration
-3. No ever commit secrets for version control
+2. Reference Key Vault secrets in application configuration
+3. Never commit secrets to version control
 4. Use managed identities for service-to-service authentication
 
-### Q: Wetin be di best way to do CI/CD with azd?
+### Q: Wetin the recommended approach for CI/CD with azd?
 **A**: 
-1. Use different environments for each stage (dev/staging/prod)
-2. Test everything well before deployment
+1. Use separate environments for each stage (dev/staging/prod)
+2. Run automated tests before deployment
 3. Use service principals for authentication
-4. Store sensitive configuration for pipeline secrets/variables
-5. Add approval gates for production deployments
+4. Store sensitive configuration in pipeline secrets/variables
+5. Put approval gates for production deployments
 
 ---
 
 ## Advanced Topics
 
-### Q: I fit add custom functionality for azd?
-**A**: Yes, through deployment hooks for `azure.yaml`:
+### Q: Fit I extend azd with custom functionality?
+**A**: Yes, through deployment hooks inside `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -352,68 +343,68 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: How I go take use azd with di DevOps process wey I don already get?
+### Q: How I go integrate azd with existing DevOps processes?
 **A**: 
-1. Use azd commands for di pipeline scripts wey you don already get
-2. Make azd templates standard for di team
-3. Add am to di monitoring and alerting wey you don already get
-4. Use di JSON output for azd to connect am with pipeline
+1. Use azd commands inside your existing pipeline scripts
+2. Standardize on azd templates across teams
+3. Integrate with your monitoring and alerting setup
+4. Use azd JSON output for pipeline integration
 
-### Q: I fit use azd with Azure DevOps?
-**A**: Yes, azd dey work with any CI/CD system. Create Azure DevOps pipelines wey dey use azd commands.
+### Q: Fit I use azd with Azure DevOps?
+**A**: Yes, azd go work with any CI/CD system. Create Azure DevOps pipelines wey run azd commands.
 
-### Q: How I go take contribute to azd or create community templates?
+### Q: How I go contribute to azd or create community templates?
+**A**:
+1. **azd tool**: Help contribute for [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Templates**: Create templates wey follow di [template guidelines](https://github.com/Azure-Samples/awesome-azd)
+3. **Documentation**: Contribute to docs for [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+
+### Q: Wetin be di roadmap for azd?
+**A**: See di [official roadmap](https://github.com/Azure/azure-dev/projects) for di features wey dem don plan an di improvements.
+
+### Q: How I go migrate from other deployment tools to azd?
 **A**: 
-1. **azd tool**: Make you help for [Azure/azure-dev](https://github.com/Azure/azure-dev)  
-2. **Templates**: Make templates wey follow [template guidelines](https://github.com/Azure-Samples/awesome-azd)  
-3. **Documentation**: Help for docs for [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
-
-### Q: Wetin be the roadmap for azd?  
-**A**: Check the [official roadmap](https://github.com/Azure/azure-dev/projects) to see the plans for new features and improvements.  
-
-### Q: How I go fit move from other deployment tools go azd?  
-**A**:  
-1. Look your current deployment setup well  
-2. Make Bicep templates wey match am  
-3. Set `azure.yaml` to fit your current services  
-4. Test am well for development environment  
-5. Small small, move your environments  
+1. Check di current deployment architecture
+2. Create Bicep templates wey dey equivalent
+3. Configure `azure.yaml` make e match di current services
+4. Test am well for development environment
+5. Migrate di environments small-small
 
 ---
 
-## You still get questions?  
+## You still get questions?
 
-### **Search First**  
-- Check the [official documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Search [GitHub issues](https://github.com/Azure/azure-dev/issues) to see if person don get the same wahala  
+### **Search First**
+- Check di [official documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Search [GitHub issues](https://github.com/Azure/azure-dev/issues) for similar problem dem
 
-### **Get Help**  
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Community go fit help you  
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Ask technical questions  
-- [Azure Discord](https://discord.gg/azure) - Chat with community for real-time  
+### **Get Help**
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Support from di community
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Technical questions
+- [Azure Discord](https://discord.gg/azure) - Real-time chat with di community
 
-### **Report Issues**  
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Report bugs or ask for new features  
-- Add logs, error messages, and steps wey show how the problem take happen  
+### **Report Issues**
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Bug reports and feature requests
+- Include relevant logs, error messages, and steps wey fit reproduce am
 
-### **Learn More**  
-- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)  
-
----
-
-*Dis FAQ dey update regularly. Last update: September 9, 2025*  
+### **Learn More**
+- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**  
-- **Previous Lesson**: [Glossary](glossary.md)  
-- **Next Lesson**: [Study Guide](study-guide.md)  
+*Dis FAQ dey updated regular. Last updated: September 9, 2025*
+
+---
+
+**Navigation**
+- **Previous Lesson**: [Glossary](glossary.md)
+- **Next Lesson**: [Study Guide](study-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even as we dey try make am accurate, abeg sabi say automated translations fit get mistake or no dey correct well. Di original dokyument for im native language na di main source wey you go trust. For important information, e good make professional human translation dey use. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+Disclaimer:
+Dis dokument don translate wit AI translation service wey dem dey call Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automatic translations fit get mistakes or no too accurate. Di original dokument for im original language na im be di authoritative source. If na serious or important information, e better make professional human translator check or translate am. We no dey responsible for any misunderstanding or wrong interpretation wey fit come from using dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

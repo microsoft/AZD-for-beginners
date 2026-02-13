@@ -1,84 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a87eaee8309cd74837981fdc6834dd9",
-  "translation_date": "2025-09-24T13:39:37+00:00",
-  "source_file": "workshop/docs/index.md",
-  "language_code": "bn"
-}
--->
-# AZD for AI Developers Workshop
+# AI ডেভেলপারদের জন্য AZD কর্মশালা
 
 > [!IMPORTANT]  
-> **এই ওয়ার্কশপটি একটি গাইড দিয়ে সাজানো হয়েছে যা আপনি আপনার লোকাল ব্রাউজারে প্রিভিউ করতে পারেন। শুরু করতে, আপনাকে অবশ্যই এই রিপোজিটরিতে GitHub Codespaces চালু করতে হবে—তারপর একটি সক্রিয় VS Code টার্মিনাল দেখতে অপেক্ষা করুন এবং টাইপ করুন:**  
+> **এই কর্মশালায় একটি ওয়ার্কশপ গাইড সংযুক্ত আছে যা আপনি আপনার লোকাল ব্রাউজারে প্রিভিউ করতে পারবেন। শুরু করতে, আপনাকে রিপোতে GitHub Codespaces চালু করতে হবে—তারপর একটি সক্রিয় VS Code টার্মিনাল দেখা পর্যন্ত অপেক্ষা করে টাইপ করুন:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **আপনার ব্রাউজারে প্রিভিউ পেজ খুলতে একটি পপ-আপ ডায়ালগ দেখতে পাওয়া উচিত।**
+> **আপনি একটি পপ-আপ ডায়ালগ দেখতে পাবেন যা ব্রাউজারে প্রিভিউ পেজটি খুলতে বলবে।**
 
-Azure Developer CLI (AZD) শিখতে এবং AI অ্যাপ্লিকেশন ডিপ্লয়মেন্টে ফোকাস করে এই হাতে-কলমে ওয়ার্কশপে আপনাকে স্বাগতম। এই ওয়ার্কশপটি আপনাকে AZD টেমপ্লেট সম্পর্কে তিনটি ধাপে প্রয়োগযোগ্য ধারণা অর্জনে সাহায্য করবে:
+Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop helps you gain an applied understanding of AZD templates in 3 steps:
 
-1. **অনুসন্ধান** - আপনার জন্য সঠিক টেমপ্লেটটি খুঁজুন।
-1. **ডিপ্লয়মেন্ট** - ডিপ্লয় করুন এবং নিশ্চিত করুন যে এটি কাজ করছে।
-1. **কাস্টমাইজেশন** - এটি আপনার প্রয়োজন অনুযায়ী পরিবর্তন করুন এবং পুনরাবৃত্তি করুন!
+1. **অন্বেষণ** - আপনার জন্য উপযুক্ত টেমপ্লেটটি খুঁজে নিন।
+1. **ডিপ্লয়মেন্ট** - ডিপ্লয় করুন এবং এটি কাজ করছে কিনা যাচাই করুন
+1. **কাস্টমাইজেশন** - এটি আপনার মতো করে সংশোধন ও পুনরাবৃত্তি করুন!
 
-এই ওয়ার্কশপের সময়, আপনাকে মূল ডেভেলপার টুল এবং ওয়ার্কফ্লো সম্পর্কেও পরিচিত করা হবে, যা আপনার সম্পূর্ণ ডেভেলপমেন্ট যাত্রাকে সহজতর করতে সাহায্য করবে।
+Over the course of this workshop, you will also be introduced to core developer tools and workflows, to help you streamline your end-to-end development journey.
 
 | | | 
 |:---|:---|
-| **📚 কোর্স হোম**| [AZD For Beginners](../README.md)|
+| **📚 Course Home**| [AZD নবাগতদের জন্য](../README.md)|
 | **📖 ডকুমেন্টেশন** | [AI টেমপ্লেট দিয়ে শুরু করুন](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI টেমপ্লেট** | [Azure AI Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 পরবর্তী ধাপ** | [চ্যালেঞ্জ গ্রহণ করুন](../../../../workshop/docs) |
+| **🛠️AI Templates** | [Microsoft Foundry টেমপ্লেট](https://ai.azure.com/templates) |
+|**🚀 পরবর্তী ধাপ** | [চ্যালেঞ্জ নিন](../../../../workshop/docs) |
 | | |
 
-## ওয়ার্কশপের সংক্ষিপ্ত বিবরণ
+## কর্মশালা ওভারভিউ
 
-**সময়কাল:** ৩-৪ ঘণ্টা  
-**স্তর:** প্রাথমিক থেকে মধ্যম  
-**প্রয়োজনীয়তা:** Azure, AI ধারণা, VS Code এবং কমান্ড-লাইন টুল সম্পর্কে পরিচিতি।
+**সময়কাল:** 3-4 ঘন্টা  
+**স্তর:** শুরুকারী থেকে মধ্যম  
+**প্রয়োজনীয়তা:** Azure, AI ধারণা, VS Code ও কমান্ড-লাইন টুলগুলোর সঙ্গে পরিচিতি।
 
-এটি একটি হাতে-কলমে ওয়ার্কশপ যেখানে আপনি কাজ করে শিখবেন। একবার আপনি অনুশীলনগুলো সম্পন্ন করলে, আমরা AZD For Beginners কারিকুলাম পর্যালোচনা করার পরামর্শ দিই যাতে আপনি সিকিউরিটি এবং প্রোডাক্টিভিটি সেরা অনুশীলন সম্পর্কে আরও শিখতে পারেন।
+This is a hands-on workshop where you learn by doing. Once you have completed the exercises, we recommend reviewing the AZD নবাগতদের জন্য পাঠ্যক্রমটি to continue your learning journey into Security and Productivity best practices.
 
-| সময়| মডিউল  | লক্ষ্য |
+| Time| Module  | Objective |
 |:---|:---|:---|
-| ১৫ মিনিট | পরিচিতি | লক্ষ্যগুলো বুঝুন এবং প্রস্তুতি নিন |
-| ৩০ মিনিট | AI টেমপ্লেট নির্বাচন | অপশনগুলো অন্বেষণ করুন এবং স্টার্টার বাছুন | 
-| ৩০ মিনিট | AI টেমপ্লেট যাচাই | ডিফল্ট সলিউশন Azure-এ ডিপ্লয় করুন |
-| ৩০ মিনিট | AI টেমপ্লেট বিশ্লেষণ | গঠন এবং কনফিগারেশন অন্বেষণ করুন |
-| ৩০ মিনিট | AI টেমপ্লেট কনফিগার করুন | উপলব্ধ ফিচারগুলো সক্রিয় করুন এবং চেষ্টা করুন |
-| ৩০ মিনিট | AI টেমপ্লেট কাস্টমাইজ করুন | আপনার প্রয়োজন অনুযায়ী টেমপ্লেটটি পরিবর্তন করুন |
-| ৩০ মিনিট | অবকাঠামো অপসারণ | রিসোর্সগুলো পরিষ্কার করুন এবং মুক্ত করুন |
-| ১৫ মিনিট | সমাপ্তি এবং পরবর্তী ধাপ | শেখার রিসোর্স, ওয়ার্কশপ চ্যালেঞ্জ |
+| 15 mins | ভূমিকা | Set the stage, understand the goals |
+| 30 mins | AI টেমপ্লেট নির্বাচন করুন | বিকল্পগুলো অন্বেষণ করে একটি স্টার্টার নির্বাচন করা | 
+| 30 mins | AI টেমপ্লেট যাচাই | ডিফল্ট সলিউশনটি Azure-এ ডিপ্লয় করা |
+| 30 mins | AI টেমপ্লেট বিশ্লেষণ | স্ট্রাকচার এবং কনফিগারেশন অন্বেষণ করা |
+| 30 mins | AI টেমপ্লেট কনফিগার করুন | উপলব্ধ ফিচারগুলো সক্রিয় করে পরীক্ষা করা |
+| 30 mins | AI টেমপ্লেট কাস্টমাইজ করুন | টেমপ্লেটটি আপনার প্রয়োজন অনুযায়ী অভিযোজিত করা |
+| 30 mins | Teardown Infrastructure | রিসোর্স সাফ করা এবং মুক্তি দেওয়া |
+| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
 | | |
 
-## আপনি কী শিখবেন
+## আপনি যা শিখবেন
 
-AZD টেমপ্লেটকে একটি শেখার স্যান্ডবক্স হিসেবে ভাবুন যেখানে Azure AI Foundry-তে এন্ড-টু-এন্ড ডেভেলপমেন্টের বিভিন্ন সক্ষমতা এবং টুল অন্বেষণ করা যায়। এই ওয়ার্কশপ শেষে, আপনি এই প্রসঙ্গে বিভিন্ন টুল এবং ধারণার জন্য একটি স্বজ্ঞাত ধারণা অর্জন করবেন।
+Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
 
-| ধারণা  | লক্ষ্য |
+| Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | টুল কমান্ড এবং ওয়ার্কফ্লো সম্পর্কে বুঝুন |
-| **AZD টেমপ্লেট**| প্রজেক্টের গঠন এবং কনফিগারেশন সম্পর্কে বুঝুন |
-| **Azure AI Agent**| Azure AI Foundry প্রজেক্ট প্রভিশন এবং ডিপ্লয় করুন |
-| **Azure AI Search**| এজেন্টের সাথে কনটেক্সট ইঞ্জিনিয়ারিং সক্রিয় করুন |
-| **অবজারভেবিলিটি**| ট্রেসিং, মনিটরিং এবং মূল্যায়ন অন্বেষণ করুন |
-| **রেড টিমিং**| প্রতিকূল পরীক্ষণ এবং প্রতিরোধ অন্বেষণ করুন |
+| **Azure Developer CLI** | টুলের কমান্ড এবং ওয়ার্কফ্লোগুলো বুঝুন |
+| **AZD Templates**| প্রকল্পের কাঠামো এবং কনফিগ কিভাবে কাজ করে তা বুঝুন |
+| **Azure AI Agent**| প্রোভিশন এবং Microsoft Foundry প্রকল্প ডিপ্লয় করা |
+| **Azure AI Search**| এজেন্টদের মাধ্যমে কনটেক্সট ইঞ্জিনিয়ারিং সক্ষম করা |
+| **Observability**| ট্রেসিং, মনিটরিং এবং মূল্যায়ন অন্বেষণ করা |
+| **Red Teaming**| অ্যাডভারসারিয়াল টেস্টিং ও প্রতিরোধ ব্যবস্থা অন্বেষণ করা |
 | | |
 
-## ওয়ার্কশপ মডিউল
+## কর্মশালা মডিউলসমূহ
 
-শুরু করতে প্রস্তুত? ওয়ার্কশপ মডিউলগুলোতে নেভিগেট করুন:
+Ready to get started? Navigate through the workshop modules:
 
-- [মডিউল ১: AI টেমপ্লেট নির্বাচন](instructions/1-Select-AI-Template.md)
-- [মডিউল ২: AI টেমপ্লেট যাচাই](instructions/2-Validate-AI-Template.md) 
-- [মডিউল ৩: AI টেমপ্লেট বিশ্লেষণ](instructions/3-Deconstruct-AI-Template.md)
-- [মডিউল ৪: AI টেমপ্লেট কনফিগার করুন](instructions/4-Configure-AI-Template.md)
-- [মডিউল ৫: AI টেমপ্লেট কাস্টমাইজ করুন](instructions/5-Customize-AI-Template.md)
-- [মডিউল ৬: অবকাঠামো অপসারণ](instructions/6-Teardown-Infrastructure.md)
-- [মডিউল ৭: সমাপ্তি এবং পরবর্তী ধাপ](instructions/7-Wrap-up.md)
+- [মডিউল 1: AI টেমপ্লেট নির্বাচন করুন](instructions/1-Select-AI-Template.md)
+- [মডিউল 2: AI টেমপ্লেট যাচাই](instructions/2-Validate-AI-Template.md) 
+- [মডিউল 3: AI টেমপ্লেট বিশ্লেষণ](instructions/3-Deconstruct-AI-Template.md)
+- [মডিউল 4: AI টেমপ্লেট কনফিগার](instructions/4-Configure-AI-Template.md)
+- [মডিউল 5: AI টেমپ্লেট কাস্টমাইজ](instructions/5-Customize-AI-Template.md)
+- [মডিউল 6: ইনফ্রাস্ট্রাকচার অপসারণ](instructions/6-Teardown-Infrastructure.md)
+- [মডিউল 7: সারসংক্ষেপ ও পরবর্তী ধাপ](instructions/7-Wrap-up.md)
 
-## আপনার মতামত আছে?
+## Have feedback?
 
-এই রিপোজিটরিতে একটি ইস্যু পোস্ট করুন (ট্যাগ করুন `Workshop`) অথবা আমাদের [Discord](https://aka.ms/foundry/discord)-এ যোগ দিন এবং আমাদের `#get-help` চ্যানেলে পোস্ট করুন।
+এই রিপোতে একটি ইস্যু পোস্ট করুন (ট্যাগ করুন `Workshop`) অথবা আমাদের [Discord](https://aka.ms/foundry/discord) এ যোগ দিন এবং আমাদের `#get-help` চ্যানেলে পোস্ট করুন
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+অস্বীকৃতি:
+এই নথিটি AI অনুবাদ পরিষেবা Co-op Translator (https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাযথতার চেষ্টা করলেও স্বয়ংক্রিয় অনুবাদে ত্রুটি বা ভুল থাকতে পারে তা অনুগ্রহ করে মনোযোগ দিন। মূল নথিটি তার নিজ ভাষায়ই কর্তৃত্বপূর্ণ উৎস হিসেবে বিবেচিত হওয়া উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদের পরামর্শ দেওয়া হয়। এই অনুবাদ ব্যবহারের ফলে যে কোনো ভুলবোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়ী নই।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

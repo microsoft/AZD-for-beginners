@@ -1,676 +1,1024 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1bc63a39d4cf8fc5cb5c7040344be859",
-  "translation_date": "2025-11-19T17:57:39+00:00",
-  "source_file": "changelog.md",
-  "language_code": "ja"
-}
--->
-# 変更履歴 - AZD初心者向け
+# 変更ログ - AZD For Beginners
 
 ## はじめに
 
-この変更履歴は、AZD初心者向けリポジトリにおけるすべての重要な変更、更新、改善を記録しています。セマンティックバージョニングの原則に従い、バージョン間で何が変更されたかをユーザーが理解できるよう、このログを維持しています。
+この変更ログは、AZD For Beginners リポジトリにおけるすべての注目すべき変更、更新、および改善点を記録します。セマンティック バージョニングの原則に従い、バージョン間で何が変わったかを利用者が理解できるようにこのログを維持しています。
 
 ## 学習目標
 
-この変更履歴を確認することで、以下を達成できます：
-- 新機能やコンテンツ追加についての情報を把握する
-- 既存のドキュメントの改善点を理解する
-- バグ修正や正確性向上の追跡
-- 学習資料の進化を時系列で追う
+この変更ログを確認することで、次のことができます:
+- 新機能やコンテンツの追加について把握できる
+- 既存ドキュメントの改善点を理解できる
+- バグ修正や訂正を追跡し、正確性を確保できる
+- 学習資料の進化を時間を追って追える
 
-## 学習成果
+## 学習到達目標
 
-変更履歴を確認した後、以下が可能になります：
-- 学習に利用できる新しいコンテンツやリソースを特定する
-- 更新または改善されたセクションを理解する
-- 最新の資料に基づいて学習計画を立てる
-- 将来の改善に向けたフィードバックや提案を提供する
+変更ログのエントリを確認した後、あなたは以下ができるようになります:
+- 学習に利用できる新しいコンテンツやリソースを特定できる
+- どのセクションが更新・改善されたかを理解できる
+- 最新の教材に基づいて学習計画を立てることができる
+- 今後の改善のためにフィードバックや提案を提供できる
 
 ## バージョン履歴
 
-### [v3.8.0] - 2025-11-19
+### [v3.17.0] - 2026-02-05
 
-#### 高度なドキュメント: モニタリング、セキュリティ、マルチエージェントパターン
-**このバージョンでは、Application Insights統合、認証パターン、マルチエージェントの調整に関する本格的なレッスンを追加しました。**
+#### コースナビゲーションの強化
+**このバージョンでは、README.md の章ナビゲーションを改善し、表形式を強化しました。**
+
+#### 変更点
+- **コースマップ表**: 直接のレッスンリンク、所要時間の目安、および複雑さの評価を追加して強化しました
+- **フォルダ整理**: 重複していた古いフォルダ (deployment/, getting-started/, pre-deployment/, troubleshooting/) を削除しました
+- **リンク検証**: コースマップ表内の21件以上の内部リンクをすべて検証しました
+
+### [v3.16.0] - 2026-02-05
+
+#### 製品名の更新
+**このバージョンでは、製品参照を現在の Microsoft ブランドに更新しました。**
+
+#### 変更点
+- **Azure AI Foundry → Microsoft Foundry**: 非翻訳ファイル全体の参照を更新しました
+- **Azure AI Agent Service → Foundry Agents**: サービス名を現在のブランドに合わせて更新しました
+
+#### 更新されたファイル
+- `README.md` - メインコースのランディングページ
+- `changelog.md` - バージョン履歴
+- `course-outline.md` - コース構成
+- `docs/chapter-02-ai-development/agents.md` - AI エージェント ガイド
+- `examples/README.md` - サンプルドキュメント
+- `workshop/README.md` - ワークショップのランディングページ
+- `workshop/docs/index.md` - ワークショップの目次
+- `workshop/docs/instructions/*.md` - すべてのワークショップ指示ファイル
+
+---
+
+### [v3.15.0] - 2026-02-05
+
+#### 主要なリポジトリ再構成: 章ベースのフォルダ名
+**このバージョンでは、より明確なナビゲーションのためにドキュメントを専用の章フォルダに再構成しました。**
+
+#### フォルダ名の変更
+古いフォルダは章番号付きのフォルダに置き換えられました:
+- `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
+- `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
+- `docs/deployment/` → `docs/chapter-04-infrastructure/`
+- `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
+- `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
+- Added new: `docs/chapter-05-multi-agent/`
+
+#### ファイル移行
+| ファイル | 元 | 移動先 |
+|------|------|---|
+| azd-basics.md | getting-started/ | chapter-01-foundation/ |
+| installation.md | getting-started/ | chapter-01-foundation/ |
+| first-project.md | getting-started/ | chapter-01-foundation/ |
+| configuration.md | getting-started/ | chapter-03-configuration/ |
+| authsecurity.md | getting-started/ | chapter-03-configuration/ |
+| microsoft-foundry-integration.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| agents.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| ai-model-deployment.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| ai-workshop-lab.md | microsoft-foundry/ | chapter-02-ai-development/ |
+| production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
+| deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
+| provisioning.md | deployment/ | chapter-04-infrastructure/ |
+| All pre-deployment files | pre-deployment/ | chapter-06-pre-deployment/ |
+| All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### 追加
-- **📊 Application Insights統合レッスン**: `docs/pre-deployment/application-insights.md`に追加：
-  - AZDを活用した自動プロビジョニング付きデプロイメント
-  - Application Insights + Log Analytics用の完全なBicepテンプレート
-  - カスタムテレメトリを備えたPythonアプリケーション（1,200+行）
-  - AI/LLMモニタリングパターン（Azure OpenAIトークン/コスト追跡）
-  - 6つのMermaid図（アーキテクチャ、分散トレーシング、テレメトリフロー）
-  - 3つのハンズオン演習（アラート、ダッシュボード、AIモニタリング）
-  - Kustoクエリ例とコスト最適化戦略
+- **📚 章の README ファイル**: 各章フォルダに README.md を作成し、以下を含む:
+  - 学習目標と所要時間
+  - 説明付きのレッスン表
+  - クイックスタートコマンド
+  - 他の章へのナビゲーション
+
+#### 変更点
+- **🔗 すべての内部リンクを更新**: ドキュメント全体で78件以上のパスを更新しました
+- **🗺️ メイン README.md**: 新しい章構成でコースマップを更新しました
+- **📝 examples/README.md**: 章フォルダへの相互参照を更新しました
+
+#### 削除
+- 旧フォルダ構成 (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+
+---
+
+### [v3.14.0] - 2026-02-05
+
+#### リポジトリ再構成: 章ナビゲーション
+**このバージョンでは章ナビゲーションの README ファイルを追加しました（v3.15.0 により置き換えられました）。**
+
+---
+
+### [v3.13.0] - 2026-02-05
+
+#### 新しい AI エージェント ガイド
+**このバージョンでは、Azure Developer CLI を使用して AI エージェントをデプロイするための包括的なガイドを追加しました。**
+
+#### 追加
+- **🤖 docs/microsoft-foundry/agents.md**: 以下を網羅する完全なガイド:
+  - AI エージェントとは何か、およびチャットボットとどのように異なるか
+  - 3つのクイックスタートエージェントテンプレート（Foundry Agents、Prompty、RAG）
+  - エージェントのアーキテクチャパターン（単一エージェント、RAG、マルチエージェント）
+  - ツールの設定とカスタマイズ
+  - 監視とメトリクストラッキング
+  - コストに関する考慮事項と最適化
+  - 一般的なトラブルシューティングシナリオ
+  - 成功基準を含む3つの実践演習
+
+#### コンテンツ構成
+- **導入**: 初心者向けのエージェント概念
+- **クイックスタート**: `azd init --template get-started-with-ai-agents` でエージェントをデプロイ
+- **アーキテクチャパターン**: エージェントパターンの図解
+- **構成**: ツール設定と環境変数
+- **監視**: Application Insights との統合
+- **演習**: 漸進的な実践学習（各20〜45分）
+
+---
+
+### [v3.12.0] - 2026-02-05
+
+#### DevContainer 環境の更新
+**このバージョンでは、AZD 学習体験のためにモダンなツールとより良いデフォルトを用いた開発コンテナ構成を更新しました。**
+
+#### 変更点
+- **🐳 ベースイメージ**: `python:3.12-bullseye` から `python:3.12-bookworm`（最新のDebian安定版）に更新
+- **📛 コンテナ名**: 明確化のため "Python 3" から "AZD for Beginners" に名前を変更しました
+
+#### 追加
+- **🔧 新しい Dev Container 機能**:
+  - Bicep サポートが有効な `azure-cli`
+  - `node:20`（AZD テンプレート向けの LTS バージョン）
+  - テンプレート管理用の `github-cli`
+  - コンテナアプリのデプロイ用 `docker-in-docker`
+
+- **🔌 ポート転送**: 一般的な開発のために事前設定されたポート:
+  - 8000（MkDocs プレビュー）
+  - 3000（Web アプリ）
+  - 5000（Python Flask）
+  - 8080（API）
+
+- **🧩 新しい VS Code 拡張機能**:
+  - `ms-python.vscode-pylance` - 強化された Python IntelliSense
+  - `ms-azuretools.vscode-azurefunctions` - Azure Functions サポート
+  - `ms-azuretools.vscode-docker` - Docker サポート
+  - `ms-azuretools.vscode-bicep` - Bicep 言語サポート
+  - `ms-azure-devtools.azure-resource-groups` - Azure リソース管理
+  - `yzhang.markdown-all-in-one` - Markdown 編集
+  - `DavidAnson.vscode-markdownlint` - Markdown リント
+  - `bierner.markdown-mermaid` - Mermaid 図のサポート
+  - `redhat.vscode-yaml` - YAML サポート（azure.yaml 用）
+  - `eamodio.gitlens` - Git 可視化
+  - `mhutchie.git-graph` - Git 履歴
+
+- **⚙️ VS Code の設定**: Python インタプリタ、保存時のフォーマット、空白トリミングのデフォルト設定を追加しました
+
+- **📦 requirements-dev.txt の更新**:
+  - MkDocs minify プラグインを追加
+  - コード品質のための pre-commit を追加
+  - Azure SDK パッケージ（azure-identity、azure-mgmt-resource）を追加
+
+#### 修正
+- **作成後コマンド**: コンテナ起動時に AZD と Azure CLI のインストールを確認するようになりました
+
+---
+
+### [v3.11.0] - 2026-02-05
+
+#### 初心者向け README の大幅改訂
+**このバージョンでは README.md を大幅に改善し、初心者にとってよりアクセスしやすくし、AI 開発者向けの重要なリソースを追加しました。**
+
+#### 追加
+- **🆚 Azure CLI と AZD の比較**: 各ツールをいつ使うべきかを実用的な例とともに明確に説明
+- **🌟 Awesome AZD リンク**: コミュニティテンプレートギャラリーと貢献リソースへの直接リンク:
+  - [Awesome AZD ギャラリー](https://azure.github.io/awesome-azd/) - 200以上のデプロイ準備済みテンプレート
+  - [テンプレートを提出する](https://github.com/Azure/awesome-azd/issues) - コミュニティへの貢献
+- **🎯 クイックスタートガイド**: 簡略化された3ステップの開始セクション（インストール → ログイン → デプロイ）
+- **📊 経験ベースのナビゲーション表**: 開発者の経験に基づいてどこから始めるべきかを明確に案内
+
+#### 変更点
+- **README の構成**: 段階的な開示を意識して再編成し、重要な情報を先に配置しました
+- **導入セクション**: 完全な初心者向けに「The Magic of `azd up`」を説明するように書き直しました
+- **重複コンテンツの削除**: 重複していたトラブルシューティングセクションを削除しました
+- **トラブルシューティングコマンド**: `azd logs` の参照を有効な `azd monitor --logs` に修正しました
+
+#### 修正
+- **🔐 認証コマンド**: `azd auth login` と `azd auth logout` を cheat-sheet.md に追加しました
+- **無効なコマンド参照**: README のトラブルシューティングセクションから残っていた `azd logs` を削除しました
+
+#### 注記
+- **対象範囲**: 変更は main README.md と resources/cheat-sheet.md に適用されました
+- **対象読者**: 変更は特に AZD に不慣れな開発者を対象としています
+
+---
+
+### [v3.10.0] - 2026-02-05
+
+#### Azure Developer CLI コマンドの正確性の更新
+**このバージョンでは、ドキュメント全体の存在しない AZD コマンドを修正し、すべてのコード例が有効な Azure Developer CLI 構文を使用するようにしました。**
+
+#### 修正
+- **🔧 存在しない AZD コマンドの削除**: 無効なコマンドの包括的な監査と修正:
+  - `azd logs`（存在しません）→ `azd monitor --logs` または Azure CLI の代替で置き換え
+  - `azd service` サブコマンド（存在しません）→ `azd show` および Azure CLI に置き換え
+  - `azd infra import/export/validate`（存在しません）→ 削除または有効な代替案に置き換え
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` フラグ（存在しません）→ 削除
+  - `azd provision --what-if/--rollback` フラグ（存在しません）→ `--preview` を使用するように更新
+  - `azd config validate`（存在しません）→ `azd config list` に置き換え
+  - `azd info`、`azd history`、`azd metrics`（存在しません）→ 削除
+
+  - **📚 コマンド修正を反映した更新ファイル**:
+    - `resources/cheat-sheet.md`: コマンド参照の大幅な見直し
+    - `docs/deployment/deployment-guide.md`: ロールバックとデプロイ戦略を修正
+    - `docs/troubleshooting/debugging.md`: ログ分析セクションを修正
+    - `docs/troubleshooting/common-issues.md`: トラブルシューティングコマンドを更新
+    - `docs/troubleshooting/ai-troubleshooting.md`: AZD デバッグセクションを修正
+    - `docs/getting-started/azd-basics.md`: 監視コマンドを修正
+    - `docs/getting-started/first-project.md`: 監視およびデバッグの例を更新
+    - `docs/getting-started/installation.md`: ヘルプおよびバージョン例を修正
+    - `docs/pre-deployment/application-insights.md`: ログ表示コマンドを修正
+    - `docs/pre-deployment/coordination-patterns.md`: エージェントのデバッグコマンドを修正
+
+  - **📝 バージョン参照の更新**:
+    - `docs/getting-started/installation.md`: 固定の `1.5.0` バージョンを汎用の `1.x.x` に変更し、リリースへのリンクを追加しました
+
+#### 変更点
+- **ロールバック戦略**: ドキュメントを Git ベースのロールバックを使用するように更新しました（AZD にはネイティブなロールバックはありません）
+- **ログ表示**: `azd logs` の参照を `azd monitor --logs`、`azd monitor --live`、および Azure CLI コマンドに置き換えました
+- **パフォーマンス セクション**: 存在しない並列/増分デプロイメントフラグを削除し、有効な代替案を提供しました
+
+#### 技術的詳細
+- **有効な AZD コマンド**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **有効な azd monitor フラグ**: `--live`, `--logs`, `--overview`
+- **削除された機能**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
+
+#### 注記
+- **検証**: コマンドは Azure Developer CLI v1.23.x に対して検証済み
+
+---
+
+### [v3.9.0] - 2026-02-05
+
+#### ワークショップ完了とドキュメント品質の更新
+**このバージョンはインタラクティブなワークショップモジュールを完了し、壊れたドキュメントリンクをすべて修正し、Microsoft AZD を利用する AI 開発者向けのコンテンツ品質を向上させます。**
+
+#### Added
+- **📝 CONTRIBUTING.md**: 新しいコントリビューションガイド文書:
+  - 問題の報告と変更提案のための明確な手順
+  - 新しいコンテンツのためのドキュメント基準
+  - コード例に関するガイドラインとコミットメッセージの規約
+  - コミュニティ参加に関する情報
+
+#### Completed
+- **🎯 Workshop Module 7 (Wrap-up)**: 完全に完了した総括モジュール（以下を含む）:
+  - ワークショップの成果の包括的な要約
+  - AZD、テンプレート、および AI Foundry を網羅する習得した主要概念のセクション
+  - 学習継続のための推奨事項
+  - 難易度評価付きのワークショップ課題演習
+  - コミュニティのフィードバックおよびサポートへのリンク
+
+- **📚 Workshop Module 3 (Deconstruct)**: 更新された学習目標（以下を含む）:
+  - MCP サーバーを使用した GitHub Copilot の有効化ガイダンス
+  - AZD テンプレートのフォルダ構成の理解
+  - Infrastructure-as-code (Bicep) の組織化パターン
+  - ハンズオン ラボの手順
+
+- **🔧 Workshop Module 6 (Teardown)**: 完了（以下を含む）:
+  - リソースのクリーンアップとコスト管理の目的
+  - `azd down` の使用法による安全なインフラのデプロビジョニング
+  - ソフト削除された Cognitive Services の復元ガイダンス
+  - GitHub Copilot と Azure ポータル向けの追加探索プロンプト
+
+#### Fixed
+- **🔗 壊れたリンクの修正**: 15件以上の内部ドキュメントリンクを修正:
+  - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md へのパスを修正
+  - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md と production-ai-practices.md へのパスを修正
+  - `docs/getting-started/first-project.md`: 存在しない cicd-integration.md を deployment-guide.md に置き換え
+  - `examples/retail-scenario.md`: FAQ とトラブルシューティング ガイドへのパスを修正
+  - `examples/container-app/microservices/README.md`: コースホームとデプロイ ガイドへのパスを修正
+  - `resources/faq.md` and `resources/glossary.md`: AI 章の参照を更新
+  - `course-outline.md`: インストラクター ガイドと AI ワークショップ ラボの参照を修正
+
+- **📅 Workshop Status Banner**: 「Under Construction」からアクティブなワークショップステータスに更新（2026年2月）
+- **🔗 Workshop Navigation**: workshop README.md 内の、存在しない lab-1-azd-basics フォルダを指していた壊れたナビゲーションリンクを修正
+
+#### Changed
+- **ワークショップの提示**: 「under construction」警告を削除し、ワークショップは完了して使用可能になりました
+- **ナビゲーションの一貫性**: すべてのワークショップモジュールが適切なモジュール間ナビゲーションを持つように保証
+- **学習パス参照**: 章間参照を正しい microsoft-foundry パスを使用するよう更新
+
+#### Validated
+- ✅ すべての英語の markdown ファイルが有効な内部リンクを持つ
+- ✅ ワークショップモジュール 0-7 が学習目標とともに完了
+- ✅ 章およびモジュール間のナビゲーションが正しく機能する
+- ✅ コンテンツは Microsoft AZD を使用する AI 開発者に適している
+- ✅ 全体を通して初心者に優しい言語と構成が維持されている
+- ✅ CONTRIBUTING.md がコミュニティ貢献者向けの明確なガイダンスを提供している
+
+#### Technical Implementation
+- **リンク検証**: 自動 PowerShell スクリプトがすべての .md 内部リンクを検証
+- **コンテンツ監査**: ワークショップの完全性と初心者への適合性の手動レビュー
+- **ナビゲーションシステム**: 一貫した章とモジュールのナビゲーションパターンを適用
+
+#### Notes
+- **適用範囲**: 変更は英語のドキュメントのみに適用
+- **翻訳**: このバージョンでは翻訳フォルダは更新されていません（自動翻訳は後で同期されます）
+- **ワークショップ所要時間**: 完全なワークショップは現在 3～4 時間のハンズオン学習を提供
+
+---
+
+### [v3.8.0] - 2025-11-19
+
+#### 高度なドキュメント: 監視、セキュリティ、およびマルチエージェントパターン
+**このバージョンは Application Insights 統合、認証パターン、および本番環境デプロイ向けのマルチエージェント調整に関する包括的な A グレードのレッスンを追加します。**
+
+#### Added
+- **📊 Application Insights Integration Lesson**: in `docs/pre-deployment/application-insights.md`:
+  - 自動プロビジョニングによる AZD に焦点を当てたデプロイ
+  - Application Insights + Log Analytics 用の完全な Bicep テンプレート
+  - カスタムテレメトリを備えた動作する Python アプリケーション（1,200 行以上）
+  - AI/LLM 監視パターン（Azure OpenAI のトークン/コスト追跡）
+  - 6つの Mermaid 図（アーキテクチャ、分散トレーシング、テレメトリフロー）
+  - 3つのハンズオン演習（アラート、ダッシュボード、AI 監視）
+  - Kusto クエリ例とコスト最適化戦略
   - ライブメトリクスストリーミングとリアルタイムデバッグ
-  - 学習時間40-50分、実運用向けパターン
+  - 本番対応パターンで 40～50 分の学習時間
 
-- **🔐 認証とセキュリティパターンレッスン**: `docs/getting-started/authsecurity.md`に追加：
-  - 3つの認証パターン（接続文字列、Key Vault、マネージドID）
-  - 安全なデプロイメント用の完全なBicepインフラテンプレート
-  - Azure SDK統合を備えたNode.jsアプリケーションコード
-  - 3つの完全な演習（マネージドIDの有効化、ユーザー割り当てID、Key Vaultローテーション）
-  - セキュリティのベストプラクティスとRBAC構成
+- **🔐 Authentication & Security Patterns Lesson**: in `docs/getting-started/authsecurity.md`:
+  - 3つの認証パターン（接続文字列、Key Vault、マネージド ID）
+  - セキュアなデプロイのための完全な Bicep インフラテンプレート
+  - Azure SDK 統合を含む Node.js アプリケーションコード
+  - 3つの完全な演習（マネージド ID の有効化、ユーザー割り当て ID、Key Vault 回転）
+  - セキュリティのベストプラクティスと RBAC 構成
   - トラブルシューティングガイドとコスト分析
-  - 実運用向けのパスワードレス認証パターン
+  - 本番対応のパスワードレス認証パターン
 
-- **🤖 マルチエージェント調整パターンレッスン**: `docs/pre-deployment/coordination-patterns.md`に追加：
-  - 5つの調整パターン（順次、並列、階層型、イベント駆動型、コンセンサス）
-  - 完全なオーケストレーターサービス実装（Python/Flask、1,500+行）
-  - 3つの専門エージェント実装（リサーチ、ライター、エディター）
-  - メッセージキュー用のService Bus統合
-  - 分散システムの状態管理用Cosmos DB
-  - エージェント間の相互作用を示す6つのMermaid図
+- **🤖 Multi-Agent Coordination Patterns Lesson**: in `docs/pre-deployment/coordination-patterns.md`:
+  - 5つのコーディネーションパターン（逐次、並列、階層、イベント駆動、コンセンサス）
+  - オーケストレーターサービスの完全実装（Python/Flask、1,500 行以上）
+  - 3つの専門エージェント実装（Research、Writer、Editor）
+  - メッセージキューイングのための Service Bus 統合
+  - 分散システムのための Cosmos DB 状態管理
+  - エージェント間相互作用を示す 6つの Mermaid 図
   - 3つの高度な演習（タイムアウト処理、リトライロジック、サーキットブレーカー）
-  - コスト内訳（月額$240-565）と最適化戦略
-  - モニタリング用Application Insights統合
+  - 最適化戦略を含むコスト内訳（$240–565/月）
+  - 監視のための Application Insights 統合
 
-#### 強化
-- **事前デプロイメント章**: モニタリングと調整パターンを包括的に追加
-- **入門章**: プロフェッショナルな認証パターンを強化
-- **運用準備**: セキュリティから可観測性まで完全カバー
-- **コース概要**: 第3章と第6章の新しいレッスンを参照するよう更新
+#### Enhanced
+- **プレデプロイメント章**: 包括的な監視とコーディネーションパターンを含むようになった
+- **Getting Started 章**: プロフェッショナルな認証パターンで強化された
+- **本番準備性**: セキュリティから可観測性までの完全なカバレッジ
+- **コース概要**: 第3章と第6章の新しいレッスンを参照するように更新
 
-#### 変更
-- **学習進行**: コース全体でセキュリティとモニタリングの統合を改善
-- **ドキュメント品質**: 新しいレッスンで一貫したAグレード基準（95-97%）を維持
-- **運用パターン**: エンタープライズデプロイメント向けの完全なエンドツーエンドカバー
+#### Changed
+- **学習の進行**: コース全体でセキュリティと監視の統合が向上
+- **ドキュメント品質**: 新しいレッスン全体で一貫した A 級基準（95-97%）
+- **プロダクションパターン**: エンタープライズ導入のためのエンドツーエンドの完全なカバレッジ
 
-#### 改善
-- **開発者体験**: 開発から運用モニタリングへの明確な道筋
-- **セキュリティ基準**: 認証と秘密管理のプロフェッショナルパターン
-- **可観測性**: AZDを活用した完全なApplication Insights統合
-- **AIワークロード**: Azure OpenAIとマルチエージェントシステム向けの専門モニタリング
+#### Improved
+- **開発者体験**: 開発から本番監視への明確な道筋
+- **セキュリティ基準**: 認証とシークレット管理のためのプロフェッショナルパターン
+- **可観測性**: AZD と統合された完全な Application Insights
+- **AI ワークロード**: Azure OpenAI とマルチエージェントシステム向けの専門的な監視
 
-#### 検証済み
-- ✅ すべてのレッスンに完全な動作コードを含む（スニペットではない）
-- ✅ 視覚的学習のためのMermaid図（合計19個）
-- ✅ 検証ステップ付きのハンズオン演習（合計9個）
-- ✅ `azd up`でデプロイ可能な運用準備済みBicepテンプレート
+#### Validated
+- ✅ すべてのレッスンに完全な動作コード（スニペットではない）が含まれている
+- ✅ 視覚学習のための Mermaid 図（3 レッスン合計 19 図）
+- ✅ 検証手順付きのハンズオン演習（合計 9）
+- ✅ `azd up` でデプロイ可能な本番対応の Bicep テンプレート
 - ✅ コスト分析と最適化戦略
 - ✅ トラブルシューティングガイドとベストプラクティス
-- ✅ 検証コマンド付きの知識チェックポイント
+- ✅ 検証コマンドを含む知識チェックポイント
 
-#### ドキュメント評価結果
-- **docs/pre-deployment/application-insights.md**: - 包括的なモニタリングガイド
+#### Documentation Grading Results
+- **docs/pre-deployment/application-insights.md**: - 包括的な監視ガイド
 - **docs/getting-started/authsecurity.md**: - プロフェッショナルなセキュリティパターン
 - **docs/pre-deployment/coordination-patterns.md**: - 高度なマルチエージェントアーキテクチャ
-- **新規コンテンツ全体**: - 一貫した高品質基準
+- **Overall New Content**: - 一貫した高品質基準
 
-#### 技術的実装
+#### Technical Implementation
 - **Application Insights**: Log Analytics + カスタムテレメトリ + 分散トレーシング
-- **認証**: マネージドID + Key Vault + RBACパターン
-- **マルチエージェント**: Service Bus + Cosmos DB + Container Apps + オーケストレーション
-- **モニタリング**: ライブメトリクス + Kustoクエリ + アラート + ダッシュボード
-- **コスト管理**: サンプリング戦略、保持ポリシー、予算管理
+- **Authentication**: Managed Identity + Key Vault + RBAC パターン
+- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + オーケストレーション
+- **Monitoring**: ライブメトリクス + Kusto クエリ + アラート + ダッシュボード
+- **Cost Management**: サンプリング戦略、保持ポリシー、予算管理
 
 ### [v3.7.0] - 2025-11-19
 
-#### ドキュメント品質改善と新しいAzure OpenAI例
-**このバージョンでは、リポジトリ全体のドキュメント品質を向上させ、GPT-4チャットインターフェースを備えた完全なAzure OpenAIデプロイメント例を追加しました。**
+#### ドキュメント品質の改善と新しい Azure OpenAI 例
+**このバージョンはリポジトリ全体のドキュメント品質を強化し、GPT-4 チャットインターフェイスを備えた完全な Azure OpenAI デプロイ例を追加します。**
 
-#### 追加
-- **🤖 Azure OpenAIチャット例**: `examples/azure-openai-chat/`に完全なGPT-4デプロイメントを追加：
-  - 完全なAzure OpenAIインフラ（GPT-4モデルデプロイメント）
-  - 会話履歴付きPythonコマンドラインチャットインターフェース
-  - APIキーの安全な保存用Key Vault統合
-  - トークン使用量追跡とコスト推定
+#### Added
+- **🤖 Azure OpenAI Chat Example**: Complete GPT-4 deployment with working implementation in `examples/azure-openai-chat/`:
+  - 完全な Azure OpenAI インフラ（GPT-4 モデルのデプロイ）
+  - 会話履歴を備えた Python コマンドラインチャットインターフェース
+  - API キーの安全な保存のための Key Vault 統合
+  - トークン使用量の追跡とコスト見積もり
   - レート制限とエラーハンドリング
-  - 35-45分のデプロイメントガイドを含む包括的なREADME
-  - 運用準備済みファイル11個（Bicepテンプレート、Pythonアプリ、設定）
+  - 35〜45 分のデプロイガイドを含む包括的な README
+  - 本番対応のファイル 11 件（Bicep テンプレート、Python アプリ、設定）
 
-- **📚 ドキュメント演習**: 設定ガイドにハンズオン練習問題を追加：
-  - 演習1: マルチ環境設定（15分）
-  - 演習2: 秘密管理の練習（10分）
-  - 明確な成功基準と検証ステップ
+- **📚 Documentation Exercises**: 設定ガイドにハンズオン実践演習を追加:
+  - 演習 1: マルチ環境構成（15 分）
+  - 演習 2: シークレット管理の実践（10 分）
+  - 明確な成功基準と検証手順
 
-- **✅ デプロイメント検証**: デプロイメントガイドに検証セクションを追加：
+- **✅ Deployment Verification**: デプロイガイドに検証セクションを追加:
   - ヘルスチェック手順
   - 成功基準チェックリスト
-  - すべてのデプロイメントコマンドの期待される出力
-  - トラブルシューティングの簡易リファレンス
+  - すべてのデプロイコマンドの期待される出力
+  - トラブルシューティングのクイックリファレンス
 
-#### 強化
-- **examples/README.md**: Aグレード品質（93%）に更新：
-  - azure-openai-chatをすべての関連セクションに追加
-  - ローカル例の数を3から4に更新
-  - AIアプリケーション例表に追加
+#### Enhanced
+- **examples/README.md**: A グレード品質（93%）に更新:
+  - azure-openai-chat を関連セクションすべてに追加
+  - ローカル例の数を 3 から 4 に更新
+  - AI アプリケーション例の表に追加
   - 中級ユーザー向けクイックスタートに統合
-  - Azure AI Foundryテンプレートセクションに追加
-  - 比較マトリックスと技術発見セクションを更新
-
-- **ドキュメント品質**: B+（87%）→ A-（92%）に向上：
+  - Microsoft Foundry テンプレートセクションに追加
+  - 比較マトリクスと技術探索セクションを更新
+- **ドキュメント品質**: docs フォルダ全体で B+ (87%) → A- (92%) に改善:
   - 重要なコマンド例に期待される出力を追加
-  - 設定変更の検証ステップを含む
-  - 実践的な演習を強化
+  - 設定変更の検証手順を含めた
+  - 実践的な演習でハンズオン学習を強化
 
-#### 変更
-- **学習進行**: 中級学習者向けにAI例の統合を改善
-- **ドキュメント構造**: 明確な成果を伴うより実践的な演習
-- **検証プロセス**: 主要なワークフローに明示的な成功基準を追加
+#### Changed
+- **学習の進行**: 中級学習者向けに AI 例の統合を改善
+- **ドキュメント構造**: 明確な成果を伴う実行可能な演習を増加
+- **検証プロセス**: 主要なワークフローに明確な成功基準を追加
 
-#### 改善
-- **開発者体験**: Azure OpenAIデプロイメントが35-45分で完了（複雑な代替案では60-90分）
-- **コスト透明性**: Azure OpenAI例の明確なコスト推定（月額$50-200）
-- **学習パス**: AI開発者がazure-openai-chatで明確なエントリーポイントを得る
-- **ドキュメント基準**: 一貫した期待される出力と検証ステップ
+#### Improved
+- **開発者体験**: Azure OpenAI のデプロイは現在 35～45 分で完了（複雑な代替案の 60～90 分に対して）
+- **コストの透明性**: Azure OpenAI 例の明確なコスト見積もり（$50–200/月）
+- **学習パス**: AI 開発者は azure-openai-chat による明確なエントリーポイントを持つ
+- **ドキュメント基準**: 一貫した期待出力と検証手順
 
-#### 検証済み
-- ✅ Azure OpenAI例は`azd up`で完全に動作
-- ✅ 実装ファイル11個すべて構文的に正しい
-- ✅ READMEの指示が実際のデプロイメント体験と一致
-- ✅ ドキュメントリンクが8箇所以上で更新済み
-- ✅ 例のインデックスがローカル例4つを正確に反映
-- ✅ 表内に重複する外部リンクなし
+#### Validated
+- ✅ Azure OpenAI の例は `azd up` で完全に機能する
+- ✅ すべての 11 個の実装ファイルが構文的に正しい
+- ✅ README の手順が実際のデプロイ体験と一致する
+- ✅ ドキュメントリンクが 8 箇所以上で更新されている
+- ✅ 例のインデックスが 4 つのローカル例を正確に反映している
+- ✅ テーブル内に重複する外部リンクはない
 - ✅ すべてのナビゲーション参照が正しい
 
-#### 技術的実装
-- **Azure OpenAIアーキテクチャ**: GPT-4 + Key Vault + Container Appsパターン
-- **セキュリティ**: マネージドID対応、Key Vaultに秘密を保存
-- **モニタリング**: Application Insights統合
-- **コスト管理**: トークン追跡と使用量最適化
-- **デプロイメント**: 完全セットアップ用の単一`azd up`コマンド
+#### Technical Implementation
+- **Azure OpenAI Architecture**: GPT-4 + Key Vault + Container Apps パターン
+- **Security**: マネージド ID 準備済み、シークレットは Key Vault に格納
+- **Monitoring**: Application Insights 統合
+- **Cost Management**: トークン追跡と使用の最適化
+- **Deployment**: 単一の `azd up` コマンドによる完全セットアップ
 
 ### [v3.6.0] - 2025-11-19
 
-#### 大規模アップデート: コンテナアプリデプロイメント例
-**このバージョンでは、Azure Developer CLI (AZD)を使用した包括的で運用準備済みのコンテナアプリケーションデプロイメント例を導入し、完全なドキュメントと学習パスへの統合を行いました。**
+#### 大規模アップデート: コンテナアプリのデプロイ例
+**このバージョンは Azure Developer CLI (AZD) を使用した、包括的で本番対応のコンテナアプリケーションデプロイ例を導入し、完全なドキュメントと学習パスへの統合を行います。**
 
-#### 追加
-- **🚀 コンテナアプリ例**: `examples/container-app/`に新しいローカル例を追加：
-  - [マスターガイド](examples/container-app/README.md): コンテナ化されたデプロイメントの完全概要、クイックスタート、運用、高度なパターン
-  - [シンプルFlask API](../../examples/container-app/simple-flask-api): 初心者向けREST API（スケールゼロ、ヘルスプローブ、モニタリング、トラブルシューティング）
-  - [マイクロサービスアーキテクチャ](../../examples/container-app/microservices): 運用準備済みのマルチサービスデプロイメント（API Gateway、Product、Order、User、Notification）、非同期メッセージング、Service Bus、Cosmos DB、Azure SQL、分散トレーシング、ブルーグリーン/カナリアデプロイメント
+#### Added
+- **🚀 Container App Examples**: 新しいローカル例を `examples/container-app/` に追加:
+  - [マスターガイド](examples/container-app/README.md): コンテナ化されたデプロイの完全な概要、クイックスタート、本番および高度なパターン
+  - [シンプルな Flask API](../../examples/container-app/simple-flask-api): スケール・トゥ・ゼロ、ヘルスプローブ、監視、トラブルシューティングを備えた初心者向けの REST API
+  - [マイクロサービスアーキテクチャ](../../examples/container-app/microservices): 本番対応のマルチサービスデプロイ（API Gateway、Product、Order、User、Notification）、非同期メッセージング、Service Bus、Cosmos DB、Azure SQL、分散トレーシング、ブルー/グリーンおよびカナリアデプロイメント
+- **ベストプラクティス**: コンテナ化ワークロード向けのセキュリティ、監視、コスト最適化、CI/CD ガイダンス
+- **コードサンプル**: 完全な `azure.yaml`、Bicep テンプレート、および多言語サービス実装（Python、Node.js、C#、Go）
+- **テスト & トラブルシューティング**: エンドツーエンドのテストシナリオ、監視コマンド、トラブルシューティングガイダンス
 
-- **ベストプラクティス**: コンテナ化されたワークロードのセキュリティ、モニタリング、コスト最適化、CI/CDガイダンス
-- **コードサンプル**: 完全な`azure.yaml`、Bicepテンプレート、多言語サービス実装（Python、Node.js、C#、Go）
-- **テストとトラブルシューティング**: エンドツーエンドのテストシナリオ、モニタリングコマンド、トラブルシューティングガイダンス
+#### Changed
+- **README.md**: 「Local Examples - Container Applications」の下で新しいコンテナアプリ例を取り上げ、リンクを更新
+- **examples/README.md**: コンテナアプリ例を強調表示し、比較マトリクスのエントリを追加し、技術/アーキテクチャ参照を更新
+- **Course Outline & Study Guide**: 関連章の新しいコンテナーアプリの例とデプロイ パターンを参照するように更新
 
-#### 変更
-- **README.md**: "ローカル例 - コンテナアプリケーション"セクションに新しいコンテナアプリ例を追加
-- **examples/README.md**: コンテナアプリ例を強調表示し、比較マトリックスエントリを追加、技術/アーキテクチャ参照を更新
-- **コース概要と学習ガイド**: 新しいコンテナアプリ例とデプロイメントパターンを関連章に参照するよう更新
+#### Validated
+- ✅ すべての新しい例は `azd up` でデプロイ可能であり、ベストプラクティスに従っています
+- ✅ ドキュメントの相互リンクとナビゲーションを更新済み
+- ✅ 例は初心者から上級者までのシナリオをカバーしており、プロダクションのマイクロサービスも含む
 
-#### 検証済み
-- ✅ 新しい例は`azd up`でデプロイ可能でベストプラクティスに従う
-- ✅ ドキュメントのクロスリンクとナビゲーションが更新済み
-- ✅ 初心者から高度なシナリオまでカバーする例を提供
-
-#### 注意事項
-- **範囲**: 英語ドキュメントと例のみ
-- **次のステップ**: 将来のリリースで追加の高度なコンテナパターンとCI/CD自動化を拡張
+#### Notes
+- **Scope**: 英語のドキュメントと例のみ
+- **Next Steps**: 将来のリリースで追加の高度なコンテナ パターンと CI/CD 自動化を拡張
 
 ### [v3.5.0] - 2025-11-19
 
-#### 製品リブランディング: Microsoft Foundry
-**このバージョンでは、すべての英語ドキュメントにおいて製品名を「Azure AI Foundry」から「Microsoft Foundry」に変更する包括的なリブランディングを実施しました。**
+#### Product Rebranding: Microsoft Foundry
+**このバージョンでは、英語ドキュメント全体での製品名の包括的な変更を実施しています。"Microsoft Foundry" から "Microsoft Foundry" への変更を反映しています。**
 
-#### 変更
-- **🔄 製品名更新**: 英語ドキュメント内のすべての参照を「Azure AI Foundry」から「Microsoft Foundry」に変更
-  - `docs/`フォルダー内のすべての参照を更新
-  - フォルダー名変更: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - ファイル名変更: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - 合計: 7つのドキュメントファイル内で23のコンテンツ参照を更新
+#### Changed
+- **🔄 Product Name Update**: "Microsoft Foundry" から "Microsoft Foundry" への完全なリブランド
+  - `docs/` フォルダー内の英語ドキュメント全体の参照を更新
+  - フォルダー名の変更: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - ファイル名の変更: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - 合計: 7つのドキュメント ファイルにわたる23件のコンテンツ参照を更新
 
-- **📁 フォルダー構造変更**:
-  - `docs/ai-foundry/`を`docs/microsoft-foundry/`にリネーム
-  - すべてのクロス参照を新しいフォルダー構造に更新
-  - ドキュメント全体のナビゲーションリンクを検証
+- **📁 Folder Structure Changes**:
+  - `docs/ai-foundry/` を `docs/microsoft-foundry/` にリネーム
+  - すべての相互参照を新しいフォルダー構造に合わせて更新
+  - ドキュメント全体でナビゲーションのリンクを検証済み
 
-- **📄 ファイル名変更**:
+- **📄 File Renames**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - すべての内部リンクを新しいファイル名に更新
+  - すべての内部リンクを新しいファイル名を参照するように更新
 
-#### 更新されたファイル
-- **章ドキュメント**（7ファイル）:
-  - `docs/microsoft-foundry/ai-model-deployment.md` - ナビゲーションリンク3箇所を更新
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 製品名参照4箇所を更新
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - 既にMicrosoft Foundryを使用（以前の更新から）
-  - `docs/microsoft-foundry/production-ai-practices.md` - 参照3箇所を更新（概要、コミュニティフィードバック、ドキュメント）
-  - `docs/getting-started/azd-basics.md` - クロス参照リンク4箇所を更新
-  - `docs/getting-started/first-project.md` - 章ナビゲーションリンク2箇所を更新
-  - `docs/getting-started/installation.md` - 次章リンク
-- **ワークショップ**: ワークショップ資料 (`workshop/`) はこのバージョンでは更新されていません
-- **例**: サンプルファイルは依然として旧命名を参照している可能性があります（今後の更新で対応予定）
-- **外部リンク**: 外部URLおよびGitHubリポジトリの参照は変更されていません
+#### Updated Files
+- **Chapter Documentation** (7 files):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - ナビゲーション リンクを3か所更新
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 製品名参照を4か所更新
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - 既に Microsoft Foundry を使用 (以前の更新から)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 参照を3か所更新 (概要、コミュニティ フィードバック、ドキュメント)
+  - `docs/getting-started/azd-basics.md` - クロスリファレンス リンクを4か所更新
+  - `docs/getting-started/first-project.md` - 章ナビゲーション リンクを2か所更新
+  - `docs/getting-started/installation.md` - 次の章へのリンクを2か所更新
+  - `docs/troubleshooting/ai-troubleshooting.md` - 参照を3か所更新 (ナビゲーション、Discord コミュニティ)
+  - `docs/troubleshooting/common-issues.md` - ナビゲーション リンクを1か所更新
+  - `docs/troubleshooting/debugging.md` - ナビゲーション リンクを1か所更新
 
-#### コントリビューター向け移行ガイド
-ローカルブランチや旧構造を参照しているドキュメントがある場合:
-1. フォルダ参照を更新: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+- **Course Structure Files** (2 files):
+  - `README.md` - リファレンスを17か所更新 (コース概要、章タイトル、テンプレート セクション、コミュニティの洞察)
+  - `course-outline.md` - リファレンスを14か所更新 (概要、学習目標、章のリソース)
+
+#### Validated
+- ✅ 英語ドキュメントに残る "ai-foundry" フォルダー パス参照はゼロ
+- ✅ 英語ドキュメントに残る "Microsoft Foundry" の製品名参照はゼロ
+- ✅ 新しいフォルダー構造でナビゲーションリンクはすべて機能
+- ✅ ファイルとフォルダーのリネームは正常に完了
+- ✅ 章間の相互参照を検証済み
+
+#### Notes
+- **Scope**: 変更は `docs/` フォルダー内の英語ドキュメントにのみ適用
+- **Translations**: 翻訳フォルダー (`translations/`) はこのバージョンで更新されていません
+- **Workshop**: ワークショップ資料 (`workshop/`) はこのバージョンで更新されていません
+- **Examples**: 例ファイルはまだレガシーな命名を参照している場合があります（今後の更新で対処予定）
+- **External Links**: 外部の URL および GitHub リポジトリ参照は変更なし
+
+#### Migration Guide for Contributors
+ローカル ブランチや旧構造を参照しているドキュメントがある場合:
+1. フォルダー参照を更新: `docs/ai-foundry/` → `docs/microsoft-foundry/`
 2. ファイル参照を更新: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. 製品名を置き換え: "Azure AI Foundry" → "Microsoft Foundry"
-4. 内部ドキュメントリンクがすべて機能することを確認
+3. 製品名を置換: "Microsoft Foundry" → "Microsoft Foundry"
+4. すべての内部ドキュメントリンクが正しく動作することを検証
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### インフラプレビューと検証の強化
-**このバージョンでは、新しいAzure Developer CLIプレビュー機能の包括的なサポートとワークショップユーザー体験の向上を導入します。**
+#### Infrastructure Preview and Validation Enhancements
+**このバージョンでは、新しい Azure Developer CLI のプレビュー機能に対する包括的なサポートを導入し、ワークショップのユーザー体験を強化しています。**
 
-#### 追加
-- **🧪 azd provision --preview 機能ドキュメント**: 新しいインフラプレビュー機能の包括的な説明
-  - コマンドリファレンスとチートシートでの使用例
-  - プロビジョニングガイドに統合された詳細なユースケースと利点
-  - 安全なデプロイメント検証のための事前チェック統合
-  - 安全第一のデプロイメントプラクティスを含む入門ガイドの更新
-- **🚧 ワークショップステータスバナー**: ワークショップ開発状況を示すプロフェッショナルなHTMLバナー
-  - ユーザーに明確に伝えるためのグラデーションデザインと工事中のインジケーター
-  - 透明性を確保するための最終更新日時
-  - すべてのデバイスに対応したモバイルレスポンシブデザイン
+#### Added
+- **🧪 azd provision --preview Feature Documentation**: 新しいインフラプレビュー機能の包括的なカバレッジ
+  - コマンド参照とチートシートでの使用例
+  - プロビジョニング ガイドへの詳細な統合（ユースケースと利点）
+  - より安全なデプロイ検証のための事前チェック統合
+  - 安全最優先のデプロイ手順を含む入門ガイドの更新
+- **🚧 Workshop Status Banner**: ワークショップ開発状況を示すプロフェッショナルな HTML バナー
+  - 明確なユーザーコミュニケーションのためのグラデーション デザインと工事表示
+  - 透明性のための最終更新タイムスタンプ
+  - すべてのデバイスでのモバイル対応デザイン
 
-#### 強化
-- **インフラ安全性**: プレビュー機能をデプロイメントドキュメント全体に統合
-- **事前デプロイメント検証**: 自動スクリプトにインフラプレビューテストを追加
-- **開発者ワークフロー**: プレビューを含むコマンドシーケンスをベストプラクティスとして更新
-- **ワークショップ体験**: コンテンツ開発状況に関する明確な期待値設定
+#### Enhanced
+- **Infrastructure Safety**: プレビュー機能をデプロイ関連ドキュメント全体に統合
+- **Pre-deployment Validation**: 自動化スクリプトにインフラプレビューテストを含めるように変更
+- **Developer Workflow**: コマンドシーケンスを更新し、プレビューをベストプラクティスとして含める
+- **Workshop Experience**: コンテンツ開発状況に関する明確な期待値をユーザーに提示
 
-#### 変更
-- **デプロイメントベストプラクティス**: プレビュー優先のワークフローが推奨アプローチに
-- **ドキュメントフロー**: インフラ検証を学習プロセスの早い段階に移動
-- **ワークショッププレゼンテーション**: 開発タイムラインを明確に示すプロフェッショナルなステータスコミュニケーション
+#### Changed
+- **Deployment Best Practices**: プレビュー優先のワークフローを推奨アプローチに変更
+- **Documentation Flow**: インフラ検証を学習プロセスの早い段階に移動
+- **Workshop Presentation**: 明確な開発タイムラインを示すプロフェッショナルなステータス表示
 
-#### 改善
-- **安全第一アプローチ**: デプロイメント前にインフラ変更を検証可能
-- **チームコラボレーション**: プレビュー結果を共有してレビューと承認が可能
-- **コスト意識**: プロビジョニング前にリソースコストをより良く理解
-- **リスク軽減**: 事前検証によるデプロイメント失敗の削減
+#### Improved
+- **Safety-First Approach**: インフラ変更をデプロイ前に検証できるようになった
+- **Team Collaboration**: プレビュー結果をレビューや承認のために共有可能
+- **Cost Awareness**: プロビジョニング前にリソースコストをより理解可能
+- **Risk Mitigation**: 事前検証によりデプロイ失敗を削減
 
-#### 技術的実装
-- **マルチドキュメント統合**: プレビュー機能を4つの主要ファイルにわたってドキュメント化
-- **コマンドパターン**: ドキュメント全体で一貫した構文と例を使用
-- **ベストプラクティス統合**: 検証ワークフローとスクリプトにプレビューを含む
-- **視覚的インジケーター**: 新機能を明確に示すマークで発見しやすく
+#### Technical Implementation
+- **Multi-document Integration**: プレビュー機能を4つの主要ファイルにわたってドキュメント化
+- **Command Patterns**: ドキュメント全体で一貫した構文と例を提供
+- **Best Practice Integration**: バリデーション ワークフローとスクリプトにプレビューを統合
+- **Visual Indicators**: 新機能の発見性を高める明確な NEW マーク
 
-#### ワークショップインフラ
-- **ステータスコミュニケーション**: グラデーションスタイリングを使用したプロフェッショナルなHTMLバナー
-- **ユーザー体験**: 開発状況を明確に示し混乱を防止
-- **プロフェッショナルなプレゼンテーション**: リポジトリの信頼性を維持しつつ期待値を設定
-- **タイムラインの透明性**: 2025年10月の最終更新日時で説明責任を果たす
+#### Workshop Infrastructure
+- **Status Communication**: グラデーションスタイルのプロフェッショナルな HTML バナー
+- **User Experience**: 開発状況の明確化により混乱を防止
+- **Professional Presentation**: 期待値を設定しつつリポジトリの信頼性を維持
+- **Timeline Transparency**: 最終更新タイムスタンプは October 2025（説明責任のため）
 
 ### [v3.3.0] - 2025-09-24
 
-#### ワークショップ資料とインタラクティブ学習体験の強化
-**このバージョンでは、ブラウザベースのインタラクティブガイドと構造化された学習パスを備えた包括的なワークショップ資料を導入します。**
+#### Enhanced Workshop Materials and Interactive Learning Experience
+**このバージョンでは、ブラウザベースのインタラクティブガイドと構造化された学習パスを備えた包括的なワークショップ資料を導入しています。**
 
-#### 追加
-- **🎥 インタラクティブワークショップガイド**: MkDocsプレビュー機能を備えたブラウザベースのワークショップ体験
-- **📝 構造化されたワークショップ手順**: 発見からカスタマイズまでの7ステップのガイド付き学習パス
-  - 0-イントロダクション: ワークショップ概要とセットアップ
-  - 1-AIテンプレート選択: テンプレートの発見と選択プロセス
-  - 2-AIテンプレート検証: デプロイメントと検証手順
-  - 3-AIテンプレート分解: テンプレートアーキテクチャの理解
-  - 4-AIテンプレート設定: 設定とカスタマイズ
-  - 5-AIテンプレートカスタマイズ: 高度な修正と反復
-  - 6-インフラの解体: クリーンアップとリソース管理
-  - 7-まとめ: 要約と次のステップ
-- **🛠️ ワークショップツール**: Materialテーマを使用したMkDocs構成で学習体験を向上
-- **🎯 実践的学習パス**: 3ステップの方法論（発見 → デプロイメント → カスタマイズ）
-- **📱 GitHub Codespaces統合**: シームレスな開発環境セットアップ
+#### Added
+- **🎥 Interactive Workshop Guide**: MkDocs プレビュー機能を備えたブラウザベースのワークショップ体験
+- **📝 Structured Workshop Instructions**: 発見からカスタマイズまでの7段階のガイド付き学習パス
+  - 0-Introduction: ワークショップの概要とセットアップ
+  - 1-Select-AI-Template: テンプレートの発見と選択プロセス
+  - 2-Validate-AI-Template: デプロイと検証手順
+  - 3-Deconstruct-AI-Template: テンプレートのアーキテクチャの理解
+  - 4-Configure-AI-Template: 設定とカスタマイズ
+  - 5-Customize-AI-Template: 上級の変更と反復
+  - 6-Teardown-Infrastructure: クリーンアップとリソース管理
+  - 7-Wrap-up: まとめと次のステップ
+- **🛠️ Workshop Tooling**: Material テーマを使用した MkDocs 構成で学習体験を強化
+- **🎯 Hands-On Learning Path**: 3ステップの方法論（Discovery → Deployment → Customization）
+- **📱 GitHub Codespaces Integration**: シームレスな開発環境セットアップ
 
-#### 強化
-- **AIワークショップラボ**: 2～3時間の構造化された学習体験を備えた拡張版
-- **ワークショップドキュメント**: ナビゲーションと視覚的補助を備えたプロフェッショナルなプレゼンテーション
-- **学習の進行**: テンプレート選択から本番デプロイメントまでの明確なステップバイステップガイド
-- **開発者体験**: 開発ワークフローを簡素化する統合ツール
+#### Enhanced
+- **AI Workshop Lab**: 2～3時間の構造化された学習体験で拡張
+- **Workshop Documentation**: ナビゲーションと視覚支援を備えたプロフェッショナルな提示
+- **Learning Progression**: テンプレート選択からプロダクションデプロイまでの段階的な明確な案内
+- **Developer Experience**: 開発ワークフローを合理化する統合ツール
 
-#### 改善
-- **アクセシビリティ**: 検索、コピー機能、テーマ切り替えを備えたブラウザベースのインターフェース
-- **自己ペース学習**: 異なる学習速度に対応する柔軟なワークショップ構造
-- **実践的応用**: 実際のAIテンプレートデプロイメントシナリオ
-- **コミュニティ統合**: ワークショップサポートとコラボレーションのためのDiscord統合
+#### Improved
+- **Accessibility**: 検索、コピー機能、テーマ切替を備えたブラウザベースのインターフェース
+- **Self-Paced Learning**: 学習速度の違いに対応する柔軟なワークショップ構成
+- **Practical Application**: 実用的な AI テンプレートのデプロイシナリオ
+- **Community Integration**: ワークショップサポートと共同作業のための Discord 統合
 
-#### ワークショップ機能
-- **内蔵検索**: キーワードとレッスンの迅速な発見
-- **コードブロックのコピー**: すべてのコード例にホバーしてコピー機能を追加
-- **テーマ切り替え**: ダーク/ライトモードのサポートで異なる好みに対応
-- **視覚的アセット**: 理解を深めるスクリーンショットと図解
-- **ヘルプ統合**: コミュニティサポートのためのDiscordへの直接アクセス
+#### Workshop Features
+- **Built-in Search**: キーワードやレッスンの素早い検索
+- **Copy Code Blocks**: すべてのコード例でホバーしてコピー可能な機能
+- **Theme Toggle**: 好みに応じたダーク/ライトモードのサポート
+- **Visual Assets**: 理解を深めるスクリーンショットと図解
+- **Help Integration**: コミュニティサポートのための直接的な Discord アクセス
 
 ### [v3.2.0] - 2025-09-17
 
-#### 大規模なナビゲーション再構築と章ベースの学習システム
-**このバージョンでは、リポジトリ全体にわたるナビゲーションを強化し、章ベースの学習構造を導入します。**
+#### Major Navigation Restructuring and Chapter-Based Learning System
+**このバージョンでは、リポジトリ全体にわたる強化されたナビゲーションと章ベースの学習構造を導入しています。**
 
-#### 追加
-- **📚 章ベースの学習システム**: コース全体を8つの進行的な学習章に再構築
-  - 第1章: 基礎とクイックスタート (⭐ - 30～45分)
-  - 第2章: AI優先開発 (⭐⭐ - 1～2時間)
-  - 第3章: 設定と認証 (⭐⭐ - 45～60分)
-  - 第4章: コードとしてのインフラとデプロイメント (⭐⭐⭐ - 1～1.5時間)
-  - 第5章: マルチエージェントAIソリューション (⭐⭐⭐⭐ - 2～3時間)
-  - 第6章: 事前デプロイメント検証と計画 (⭐⭐ - 1時間)
-  - 第7章: トラブルシューティングとデバッグ (⭐⭐ - 1～1.5時間)
-  - 第8章: 本番とエンタープライズパターン (⭐⭐⭐⭐ - 2～3時間)
-- **📚 包括的ナビゲーションシステム**: すべてのドキュメントに一貫したナビゲーションヘッダーとフッターを追加
-- **🎯 進捗追跡**: コース完了チェックリストと学習検証システム
-- **🗺️ 学習パスガイダンス**: 異なる経験レベルと目標に応じた明確なエントリーポイント
-- **🔗 クロスリファレンスナビゲーション**: 関連章と前提条件を明確にリンク
+#### Added
+- **📚 Chapter-Based Learning System**: コース全体を8つの進行的な学習章に再構成
+  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
+  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
+  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
+  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
+  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
+  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
+  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
+  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
+- **📚 Comprehensive Navigation System**: すべてのドキュメントで一貫したナビゲーション ヘッダーとフッターを実装
+- **🎯 Progress Tracking**: コース完了チェックリストと学習検証システム
+- **🗺️ Learning Path Guidance**: 異なる経験レベルと目標に対する明確なエントリーポイント
+- **🔗 Cross-Reference Navigation**: 関連章と前提条件を明確にリンク
 
-#### 強化
-- **README構造**: 章ベースの組織化された学習プラットフォームに変換
-- **ドキュメントナビゲーション**: すべてのページに章のコンテキストと進行ガイダンスを追加
-- **テンプレートの組織化**: 適切な学習章にマッピングされた例とテンプレート
-- **リソース統合**: チートシート、FAQ、学習ガイドを関連章に接続
-- **ワークショップ統合**: 複数の章の学習目標にマッピングされたハンズオンラボ
+#### Enhanced
+- **README Structure**: 章ベースの組織で構造化された学習プラットフォームに変換
+- **Documentation Navigation**: すべてのページに章のコンテキストと進行案内を追加
+- **Template Organization**: 例とテンプレートを適切な学習章にマッピング
+- **Resource Integration**: チートシート、FAQ、スタディガイドを関連章に接続
+- **Workshop Integration**: ハンズオンラボを複数の章学習目標にマッピング
 
-#### 変更
-- **学習の進行**: 線形ドキュメントから柔軟な章ベースの学習に移行
-- **設定の配置**: 学習フローを改善するために設定ガイドを第3章に再配置
-- **AIコンテンツ統合**: 学習の旅全体でAI固有のコンテンツをより良く統合
-- **本番コンテンツ**: エンタープライズ学習者向けに第8章に統合された高度なパターン
+#### Changed
+- **Learning Progression**: 線形ドキュメントから柔軟な章ベース学習に移行
+- **Configuration Placement**: 設定ガイドをより良い学習フローのために Chapter 3 に再配置
+- **AI Content Integration**: 学習の旅全体で AI 固有のコンテンツをより良く統合
+- **Production Content**: 上級パターンを企業向け学習者のために Chapter 8 に集約
 
-#### 改善
-- **ユーザー体験**: 明確なナビゲーションパンくずリストと章の進行インジケーター
-- **アクセシビリティ**: コース移動を容易にする一貫したナビゲーションパターン
-- **プロフェッショナルなプレゼンテーション**: 学術および企業トレーニングに適した大学スタイルのコース構造
-- **学習効率**: 改善された組織化により関連コンテンツを見つける時間を短縮
+#### Improved
+- **User Experience**: 明確なナビゲーションのパンくずリストと章の進行インジケーター
+- **Accessibility**: コース移動を容易にする一貫したナビゲーション パターン
+- **Professional Presentation**: 学術や企業研修に適した大学風のコース構成
+- **Learning Efficiency**: 改善された構成により関連コンテンツへの到達時間を短縮
 
-#### 技術的実装
-- **ナビゲーションヘッダー**: 40以上のドキュメントファイルにわたる標準化された章ナビゲーション
-- **フッターナビゲーション**: 一貫した進行ガイダンスと章完了インジケーター
-- **クロスリンク**: 関連する概念を接続する包括的な内部リンクシステム
-- **章マッピング**: 学習目標に明確に関連付けられたテンプレートと例
+#### Technical Implementation
+- **Navigation Headers**: 40+ のドキュメントファイルにわたる標準化された章ナビゲーション
+- **Footer Navigation**: 一貫した進行案内と章完了インジケーター
+- **Cross-Linking**: 関連概念を結ぶ包括的な内部リンクシステム
+- **Chapter Mapping**: テンプレートと例を学習目標に明確に関連付け
 
-#### 学習ガイドの強化
-- **📚 包括的学習目標**: 8章システムに合わせて再構築された学習ガイド
-- **🎯 章ベースの評価**: 各章には具体的な学習目標と実践的な演習を含む
-- **📋 進捗追跡**: 測定可能な成果と完了チェックリストを備えた週ごとの学習スケジュール
-- **❓ 評価質問**: 各章の知識検証質問とプロフェッショナルな成果
-- **🛠️ 実践的演習**: 実際のデプロイメントシナリオとトラブルシューティングを伴うハンズオン活動
-- **📊 スキル進行**: 基本概念からエンタープライズパターンへの明確な進歩とキャリア開発の焦点
-- **🎓 認定フレームワーク**: プロフェッショナルな開発成果とコミュニティ認識システム
-- **⏱️ タイムライン管理**: マイルストーン検証を伴う構造化された10週間の学習計画
+#### Study Guide Enhancement
+- **📚 Comprehensive Learning Objectives**: 8章システムに合わせて再構成された詳細な学習目標
+- **🎯 Chapter-Based Assessment**: 各章に特定の学習目標と実践課題を含む
+- **📋 Progress Tracking**: 測定可能な成果と完了チェックリストを含む週間学習スケジュール
+- **❓ Assessment Questions**: 各章の知識検証質問とプロフェッショナルな成果
+- **🛠️ Practical Exercises**: 実際のデプロイシナリオとトラブルシューティングを伴うハンズオン活動
+- **📊 Skill Progression**: 基本概念から企業向けパターンまでの明確なスキル進行とキャリア開発の焦点
+- **🎓 Certification Framework**: 専門的な開発成果とコミュニティでの認知システム
+- **⏱️ Timeline Management**: マイルストーン検証を含む10週間の構造化された学習計画
 
 ### [v3.1.0] - 2025-09-17
 
-#### マルチエージェントAIソリューションの強化
-**このバージョンでは、エージェント命名の改善とドキュメントの強化により、マルチエージェント小売ソリューションを向上させます。**
+#### Enhanced Multi-Agent AI Solutions
+**このバージョンでは、小売向けマルチエージェント ソリューションを改善し、エージェント命名とドキュメントを強化しています。**
 
-#### 変更
-- **マルチエージェント用語**: 小売マルチエージェントソリューション全体で「Coraエージェント」を「Customerエージェント」に置き換え、理解を明確化
-- **エージェントアーキテクチャ**: すべてのドキュメント、ARMテンプレート、コード例を一貫した「Customerエージェント」命名に更新
-- **設定例**: 更新された命名規則を使用してエージェント設定パターンを近代化
-- **ドキュメントの一貫性**: すべての参照をプロフェッショナルで説明的なエージェント名に統一
+#### Changed
+- **Multi-Agent Terminology**: 小売マルチエージェント ソリューション全体で "Cora agent" を "Customer agent" に置き換え、より明確に
+- **Agent Architecture**: すべてのドキュメント、ARM テンプレート、およびコード例を一貫した "Customer agent" 命名に更新
+- **Configuration Examples**: 命名規則を更新したモダンなエージェント構成パターン
+- **Documentation Consistency**: すべての参照が専門的で記述的なエージェント名を使用するように保証
 
-#### 強化
-- **ARMテンプレートパッケージ**: Customerエージェント参照を含むretail-multiagent-arm-templateを更新
-- **アーキテクチャ図**: 更新されたエージェント命名を反映したMermaid図
-- **コード例**: Pythonクラスと実装例がCustomerAgent命名を使用
-- **環境変数**: すべてのデプロイメントスクリプトをCUSTOMER_AGENT_NAME規則に更新
+#### Enhanced
+- **ARM Template Package**: retail-multiagent-arm-template を Customer agent 参照で更新
+- **Architecture Diagrams**: 更新されたエージェント命名で Mermaid 図をリフレッシュ
+- **Code Examples**: Python クラスと実装例で CustomerAgent 命名を使用
+- **Environment Variables**: すべてのデプロイスクリプトを CUSTOMER_AGENT_NAME の慣例で更新
 
-#### 改善
-- **開発者体験**: ドキュメント内のエージェントの役割と責任を明確化
-- **本番準備**: エンタープライズ命名規則との整合性を向上
-- **学習資料**: 教育目的でより直感的なエージェント命名
-- **テンプレートの使いやすさ**: エージェント機能とデプロイメントパターンの理解を簡素化
+#### Improved
+- **Developer Experience**: ドキュメントにおけるエージェントの役割と責任をより明確化
+- **Production Readiness**: エンタープライズの命名規則との整合性を向上
+- **Learning Materials**: 教育目的におけるより直感的なエージェント命名
+- **Template Usability**: エージェントの機能とデプロイパターンの理解を簡素化
 
-#### 技術的詳細
-- CustomerAgent参照を含むMermaidアーキテクチャ図を更新
-- Python例でCoraAgentクラス名をCustomerAgentに置き換え
-- ARMテンプレートJSON構成を「customer」エージェントタイプに変更
-- 環境変数をCORA_AGENT_*からCUSTOMER_AGENT_*パターンに変更
-- すべてのデプロイメントコマンドとコンテナ構成を更新
+#### Technical Details
+- Updated Mermaid architecture diagrams with CustomerAgent references
+- Replaced CoraAgent class names with CustomerAgent in Python examples
+- Modified ARM template JSON configurations to use "customer" agent type
+- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
+- Refreshed all deployment commands and container configurations
 
 ### [v3.0.0] - 2025-09-12
 
-#### 主要変更 - AI開発者向けフォーカスとAzure AI Foundry統合
-**このバージョンでは、リポジトリを包括的なAI学習リソースに変革し、Azure AI Foundry統合を導入します。**
+#### Major Changes - AI Developer Focus and Microsoft Foundry Integration
+**This version transforms the repository into a comprehensive AI-focused learning resource with Microsoft Foundry integration.**
 
-#### 追加
-- **🤖 AI優先学習パス**: AI開発者とエンジニアを優先する完全な再構築
-- **Azure AI Foundry統合ガイド**: AZDとAzure AI Foundryサービスを接続するための包括的なドキュメント
-- **AIモデルデプロイメントパターン**: モデル選択、設定、および本番デプロイメント戦略をカバーする詳細ガイド
-- **AIワークショップラボ**: AZDデプロイ可能なソリューションにAIアプリケーションを変換するための2～3時間のハンズオンワークショップ
-- **本番AIベストプラクティス**: AIワークロードのスケーリング、監視、セキュリティのための
-- **コンテンツの提示**: 装飾要素を削除し、明確でプロフェッショナルなフォーマットに変更
-- **リンク構造**: 新しいナビゲーションシステムに対応するよう内部リンクを更新
+#### Added
+- **🤖 AI-First Learning Path**: AI開発者とエンジニアを優先した完全な再構成
+- **Microsoft Foundry Integration Guide**: AZDをMicrosoft Foundryサービスと接続するための包括的なドキュメント
+- **AI Model Deployment Patterns**: モデル選定、構成、および本番デプロイ戦略を網羅した詳細ガイド
+- **AI Workshop Lab**: AIアプリケーションをAZDでデプロイ可能なソリューションへ変換する2〜3時間のハンズオンワークショップ
+- **Production AI Best Practices**: スケーリング、監視、AIワークロードのセキュリティに関するエンタープライズ向けパターン
+- **AI-Specific Troubleshooting Guide**: Azure OpenAI、Cognitive Services、およびAIデプロイに関する包括的なトラブルシューティング
+- **AI Template Gallery**: 複雑度評価付きのMicrosoft Foundryテンプレートの注目コレクション
+- **Workshop Materials**: ハンズオンラボと参照資料を含む完全なワークショップ構成
 
-#### 改善点
-- **アクセシビリティ**: スクリーンリーダーの互換性向上のため絵文字依存を削除
-- **プロフェッショナルな外観**: 企業向け学習に適したクリーンで学術的なスタイル
-- **学習体験**: 各レッスンの明確な目標と成果を伴う構造化されたアプローチ
-- **コンテンツの整理**: 関連トピック間の論理的な流れと接続性を向上
+#### Enhanced
+- **README Structure**: Microsoft Foundry Discordの45%のコミュニティ興味データに基づいたAI開発者向け構成
+- **Learning Paths**: 学生やDevOpsエンジニア向けの従来のパスと並行する、専用のAI開発者向けジャーニー
+- **Template Recommendations**: azure-search-openai-demo、contoso-chat、openai-chat-app-quickstartを含む注目のAIテンプレート
+- **Community Integration**: AI専用チャンネルとディスカッションを備えたDiscordコミュニティサポートの強化
+
+#### Security & Production Focus
+- **Managed Identity Patterns**: AI固有の認証およびセキュリティ構成
+- **Cost Optimization**: トークン使用状況の追跡とAIワークロードの予算管理
+- **Multi-Region Deployment**: グローバルなAIアプリケーションデプロイのための戦略
+- **Performance Monitoring**: AI固有のメトリクスとApplication Insights統合
+
+#### Documentation Quality
+- **Linear Course Structure**: 初級から上級のAIデプロイパターンへの論理的な進行
+- **Validated URLs**: すべての外部リポジトリリンクを検証済みでアクセス可能
+- **Complete Reference**: すべての内部ドキュメントリンクを検証済みで機能的
+- **Production Ready**: 実世界の例を伴うエンタープライズデプロイパターン
+
+### [v2.0.0] - 2025-09-09
+
+#### Major Changes - Repository Restructure and Professional Enhancement
+**This version represents a significant overhaul of the repository structure and content presentation.**
+
+#### Added
+- **Structured Learning Framework**: すべてのドキュメントページに Introduction、Learning Goals、Learning Outcomes セクションを追加
+- **Navigation System**: ガイド付き学習進行を提供するために、すべてのドキュメントに前/次レッスンリンクを追加
+- **Study Guide**: 学習目標、演習、評価資料を含む包括的な study-guide.md
+- **Professional Presentation**: アクセシビリティとプロフェッショナルな外観を向上させるためにすべての絵文字アイコンを削除
+- **Enhanced Content Structure**: 学習資料の構成と流れを改善
+
+#### Changed
+- **Documentation Format**: 一貫した学習重視の構造で全ドキュメントを標準化
+- **Navigation Flow**: すべての学習資料で論理的な進行を実装
+- **Content Presentation**: 装飾要素を排し、明確でプロフェッショナルなフォーマットに
+- **Link Structure**: 新しいナビゲーションシステムをサポートするために内部リンクを更新
+
+#### Improved
+- **Accessibility**: スクリーンリーダー互換性向上のため絵文字依存を削除
+- **Professional Appearance**: エンタープライズ学習に適した清潔で学術的な表示
+- **Learning Experience**: 各レッスンの明確な目標と成果を伴う構造化アプローチ
+- **Content Organization**: 関連トピック間の論理的な流れと接続を改善
 
 ### [v1.0.0] - 2025-09-09
 
-#### 初回リリース - 包括的なAZD学習リポジトリ
-
-#### 追加
-- **コアドキュメント構造**
-  - 完全な入門ガイドシリーズ
-  - 包括的なデプロイとプロビジョニングのドキュメント
-  - 詳細なトラブルシューティングリソースとデバッグガイド
-  - デプロイ前の検証ツールと手順
-
-- **入門モジュール**
-  - AZDの基本: コア概念と用語
-  - インストールガイド: プラットフォーム別のセットアップ手順
-  - 設定ガイド: 環境設定と認証
-  - 初めてのプロジェクトチュートリアル: ステップバイステップの実践学習
-
-- **デプロイとプロビジョニングモジュール**
-  - デプロイガイド: 完全なワークフロードキュメント
-  - プロビジョニングガイド: Bicepを使用したインフラストラクチャコード
-  - 本番環境デプロイのベストプラクティス
-  - マルチサービスアーキテクチャパターン
-
-- **デプロイ前検証モジュール**
-  - キャパシティプランニング: Azureリソースの利用可能性検証
-  - SKU選択: 包括的なサービス層ガイダンス
-  - 事前チェック: 自動検証スクリプト（PowerShellとBash）
-  - コスト見積もりと予算計画ツール
-
-- **トラブルシューティングモジュール**
-  - 一般的な問題: よくある問題とその解決策
-  - デバッグガイド: 系統的なトラブルシューティング手法
-  - 高度な診断技術とツール
-  - パフォーマンス監視と最適化
-
-- **リソースと参考資料**
-  - コマンドチートシート: 必須コマンドのクイックリファレンス
-  - 用語集: 包括的な用語と略語の定義
-  - FAQ: よくある質問への詳細な回答
-  - 外部リソースリンクとコミュニティ接続
-
-- **例とテンプレート**
-  - シンプルなWebアプリケーションの例
-  - 静的ウェブサイトのデプロイテンプレート
-  - コンテナアプリケーションの設定
-  - データベース統合パターン
-  - マイクロサービスアーキテクチャの例
-  - サーバーレス関数の実装
-
-#### 特徴
-- **マルチプラットフォーム対応**: Windows、macOS、Linux向けのインストールと設定ガイド
-- **多様なスキルレベル**: 学生からプロの開発者まで対応したコンテンツ
-- **実践的な焦点**: 実例と現実的なシナリオ
-- **包括的なカバレッジ**: 基本概念から高度な企業向けパターンまで
-- **セキュリティ重視のアプローチ**: セキュリティのベストプラクティスを全体に統合
-- **コスト最適化**: コスト効率の良いデプロイとリソース管理のガイダンス
-
-#### ドキュメントの品質
-- **詳細なコード例**: 実践的でテスト済みのコードサンプル
-- **ステップバイステップの指示**: 明確で実行可能なガイダンス
-- **包括的なエラーハンドリング**: よくある問題のトラブルシューティング
-- **ベストプラクティスの統合**: 業界標準と推奨事項
-- **バージョン互換性**: 最新のAzureサービスとazd機能に対応
-
-## 今後の拡張計画
-
-### バージョン3.1.0（予定）
-#### AIプラットフォームの拡張
-- **マルチモデル対応**: Hugging Face、Azure Machine Learning、カスタムモデルの統合パターン
-- **AIエージェントフレームワーク**: LangChain、Semantic Kernel、AutoGenデプロイ用テンプレート
-- **高度なRAGパターン**: Azure AI Search以外のベクターデータベースオプション（Pinecone、Weaviateなど）
-- **AI可観測性**: モデルパフォーマンス、トークン使用量、応答品質の監視強化
-
-#### 開発者体験
-- **VS Code拡張機能**: AZD + AI Foundryの統合開発体験
-- **GitHub Copilot統合**: AI支援によるAZDテンプレート生成
-- **インタラクティブチュートリアル**: AIシナリオ向けの自動検証付きハンズオンコーディング演習
-- **ビデオコンテンツ**: AIデプロイに焦点を当てた視覚学習者向け補足ビデオチュートリアル
-
-### バージョン4.0.0（予定）
-#### 企業向けAIパターン
-- **ガバナンスフレームワーク**: AIモデルのガバナンス、コンプライアンス、監査トレイル
-- **マルチテナントAI**: 複数顧客向けの分離されたAIサービス提供パターン
-- **エッジAIデプロイ**: Azure IoT Edgeおよびコンテナインスタンスとの統合
-- **ハイブリッドクラウドAI**: AIワークロードのマルチクラウドおよびハイブリッドデプロイパターン
-
-#### 高度な機能
-- **AIパイプラインの自動化**: Azure Machine LearningパイプラインとのMLOps統合
-- **高度なセキュリティ**: ゼロトラストパターン、プライベートエンドポイント、高度な脅威保護
-- **パフォーマンス最適化**: 高スループットAIアプリケーション向けの高度なチューニングとスケーリング戦略
-- **グローバル配信**: AIアプリケーション向けのコンテンツ配信とエッジキャッシングパターン
-
-### バージョン3.0.0（予定） - 現在のリリースで実装済み
-#### 提案された追加機能 - v3.0.0で実装済み
-- ✅ **AI中心のコンテンツ**: 包括的なAzure AI Foundry統合（完了）
-- ✅ **インタラクティブチュートリアル**: ハンズオンAIワークショップラボ（完了）
-- ✅ **高度なセキュリティモジュール**: AI特有のセキュリティパターン（完了）
-- ✅ **パフォーマンス最適化**: AIワークロードのチューニング戦略（完了）
-
-### バージョン2.1.0（予定） - 現在のリリースで部分的に実装
-#### 小規模な拡張 - 一部は現在のリリースで完了
-- ✅ **追加例**: AI中心のデプロイシナリオ（完了）
-- ✅ **拡張FAQ**: AI特有の質問とトラブルシューティング（完了）
-- **ツール統合**: 強化されたIDEおよびエディタ統合ガイド
-- ✅ **監視の拡張**: AI特有の監視とアラートパターン（完了）
-
-#### 今後のリリースで予定
-- **モバイル対応ドキュメント**: モバイル学習向けのレスポンシブデザイン
-- **オフラインアクセス**: ダウンロード可能なドキュメントパッケージ
-- **強化されたIDE統合**: AZD + AIワークフロー向けのVS Code拡張機能
-- **コミュニティダッシュボード**: リアルタイムのコミュニティメトリクスと貢献度追跡
-
-## 変更履歴への貢献
-
-### 変更の報告
-このリポジトリに貢献する際は、変更履歴エントリに以下を含めてください:
-
-1. **バージョン番号**: セマンティックバージョニング（major.minor.patch）に従う
-2. **日付**: リリースまたは更新日（YYYY-MM-DD形式）
-3. **カテゴリ**: Added, Changed, Deprecated, Removed, Fixed, Security
-4. **明確な説明**: 変更内容を簡潔に記述
-5. **影響評価**: 変更が既存ユーザーに与える影響
-
-### 変更カテゴリ
+#### Initial Release - Comprehensive AZD Learning Repository
 
 #### Added
-- 新機能、ドキュメントセクション、または機能
-- 新しい例、テンプレート、または学習リソース
-- 追加のツール、スクリプト、またはユーティリティ
+- **Core Documentation Structure**
+  - Complete getting-started guide series
+  - Comprehensive deployment and provisioning documentation
+  - Detailed troubleshooting resources and debugging guides
+  - Pre-deployment validation tools and procedures
+
+- **Getting Started Module**
+  - AZD Basics: Core concepts and terminology
+  - Installation Guide: Platform-specific setup instructions
+  - Configuration Guide: Environment setup and authentication
+  - First Project Tutorial: Step-by-step hands-on learning
+
+- **Deployment and Provisioning Module**
+  - Deployment Guide: Complete workflow documentation
+  - Provisioning Guide: Infrastructure as Code with Bicep
+  - Best practices for production deployments
+  - Multi-service architecture patterns
+
+- **Pre-deployment Validation Module**
+  - Capacity Planning: Azure resource availability validation
+  - SKU Selection: Comprehensive service tier guidance
+  - Pre-flight Checks: Automated validation scripts (PowerShell and Bash)
+  - Cost estimation and budget planning tools
+
+- **Troubleshooting Module**
+  - Common Issues: Frequently encountered problems and solutions
+  - Debugging Guide: Systematic troubleshooting methodologies
+  - Advanced diagnostic techniques and tools
+  - Performance monitoring and optimization
+
+- **Resources and References**
+  - Command Cheat Sheet: Quick reference for essential commands
+  - Glossary: Comprehensive terminology and acronym definitions
+  - FAQ: Detailed answers to common questions
+  - External resource links and community connections
+
+- **Examples and Templates**
+  - Simple Web Application example
+  - Static Website deployment template
+  - Container Application configuration
+  - Database integration patterns
+  - Microservices architecture examples
+  - Serverless function implementations
+
+#### Features
+- **Multi-Platform Support**: Installation and configuration guides for Windows, macOS, and Linux
+- **Multiple Skill Levels**: Content designed for students through professional developers
+- **Practical Focus**: Hands-on examples and real-world scenarios
+- **Comprehensive Coverage**: From basic concepts to advanced enterprise patterns
+- **Security-First Approach**: Security best practices integrated throughout
+- **Cost Optimization**: Guidance for cost-effective deployments and resource management
+
+#### Documentation Quality
+- **Detailed Code Examples**: Practical, tested code samples
+- **Step-by-Step Instructions**: Clear, actionable guidance
+- **Comprehensive Error Handling**: Troubleshooting for common issues
+- **Best Practices Integration**: Industry standards and recommendations
+- **Version Compatibility**: Up-to-date with latest Azure services and azd features
+
+## Planned Future Enhancements
+
+### Version 3.1.0 (Planned)
+#### AI Platform Expansion
+- **Multi-Model Support**: Integration patterns for Hugging Face, Azure Machine Learning, and custom models
+- **AI Agent Frameworks**: Templates for LangChain, Semantic Kernel, and AutoGen deployments
+- **Advanced RAG Patterns**: Vector database options beyond Azure AI Search (Pinecone, Weaviate, etc.)
+- **AI Observability**: Enhanced monitoring for model performance, token usage, and response quality
+
+#### Developer Experience
+- **VS Code Extension**: Integrated AZD + AI Foundry development experience
+- **GitHub Copilot Integration**: AI-assisted AZD template generation
+- **Interactive Tutorials**: Hands-on coding exercises with automated validation for AI scenarios
+- **Video Content**: Supplementary video tutorials for visual learners focusing on AI deployments
+
+### Version 4.0.0 (Planned)
+#### Enterprise AI Patterns
+- **Governance Framework**: AI model governance, compliance, and audit trails
+- **Multi-Tenant AI**: Patterns for serving multiple customers with isolated AI services
+- **Edge AI Deployment**: Integration with Azure IoT Edge and container instances
+- **Hybrid Cloud AI**: Multi-cloud and hybrid deployment patterns for AI workloads
+
+#### Advanced Features
+- **AI Pipeline Automation**: MLOps integration with Azure Machine Learning pipelines
+- **Advanced Security**: Zero-trust patterns, private endpoints, and advanced threat protection
+- **Performance Optimization**: Advanced tuning and scaling strategies for high-throughput AI applications
+- **Global Distribution**: Content delivery and edge caching patterns for AI applications
+
+### Version 3.0.0 (Planned) - Superseded by Current Release
+#### Proposed Additions - Now Implemented in v3.0.0
+- ✅ **AI-Focused Content**: Comprehensive Microsoft Foundry integration (Completed)
+- ✅ **Interactive Tutorials**: Hands-on AI workshop lab (Completed)
+- ✅ **Advanced Security Module**: AI-specific security patterns (Completed)
+- ✅ **Performance Optimization**: AI workload tuning strategies (Completed)
+
+### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
+#### Minor Enhancements - Some Completed in Current Release
+- ✅ **Additional Examples**: AI-focused deployment scenarios (Completed)
+- ✅ **Extended FAQ**: AI-specific questions and troubleshooting (Completed)
+- **Tool Integration**: Enhanced IDE and editor integration guides
+- ✅ **Monitoring Expansion**: AI-specific monitoring and alerting patterns (Completed)
+
+#### Still Planned for Future Release
+- **Mobile-Friendly Documentation**: Responsive design for mobile learning
+- **Offline Access**: Downloadable documentation packages
+- **Enhanced IDE Integration**: VS Code extension for AZD + AI workflows
+- **Community Dashboard**: Real-time community metrics and contribution tracking
+
+## Contributing to the Changelog
+
+### Reporting Changes
+When contributing to this repository, please ensure changelog entries include:
+
+1. **Version Number**: Following semantic versioning (major.minor.patch)
+2. **Date**: Release or update date in YYYY-MM-DD format
+3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
+4. **Clear Description**: Concise description of what changed
+5. **Impact Assessment**: How changes affect existing users
+
+### Change Categories
+
+#### Added
+- New features, documentation sections, or capabilities
+- New examples, templates, or learning resources
+- Additional tools, scripts, or utilities
 
 #### Changed
-- 既存の機能やドキュメントの修正
-- 明確さや正確性を向上させる更新
-- コンテンツや構成の再編成
+- Modifications to existing functionality or documentation
+- Updates to improve clarity or accuracy
+- Restructuring of content or organization
 
 #### Deprecated
-- 廃止予定の機能やアプローチ
-- 削除予定のドキュメントセクション
-- より良い代替手段がある方法
+- Features or approaches that are being phased out
+- Documentation sections scheduled for removal
+- Methods that have better alternatives
 
 #### Removed
-- もはや関連性のない機能、ドキュメント、または例
-- 古い情報や廃止されたアプローチ
-- 冗長または統合されたコンテンツ
+- Features, documentation, or examples that are no longer relevant
+- Outdated information or deprecated approaches
+- Redundant or consolidated content
 
 #### Fixed
-- ドキュメントやコードのエラー修正
-- 報告された問題や課題の解決
-- 正確性や機能性の向上
+- Corrections to errors in documentation or code
+- Resolution of reported issues or problems
+- Improvements to accuracy or functionality
 
 #### Security
-- セキュリティ関連の改善や修正
-- セキュリティベストプラクティスの更新
-- セキュリティ脆弱性の解決
+- Security-related improvements or fixes
+- Updates to security best practices
+- Resolution of security vulnerabilities
 
-### セマンティックバージョニングガイドライン
+### Semantic Versioning Guidelines
 
-#### メジャーバージョン（X.0.0）
-- ユーザーアクションを必要とする破壊的変更
-- コンテンツや構成の大幅な再編成
-- 基本的なアプローチや方法論を変更する変更
+#### Major Version (X.0.0)
+- Breaking changes that require user action
+- Significant restructuring of content or organization
+- Changes that alter the fundamental approach or methodology
 
-#### マイナーバージョン（X.Y.0）
-- 新機能やコンテンツの追加
-- 後方互換性を維持した拡張
-- 追加の例、ツール、またはリソース
+#### Minor Version (X.Y.0)
+- New features or content additions
+- Enhancements that maintain backward compatibility
+- Additional examples, tools, or resources
 
-#### パッチバージョン（X.Y.Z）
-- バグ修正と訂正
-- 既存コンテンツの小規模な改善
-- 明確化や小さな拡張
+#### Patch Version (X.Y.Z)
+- Bug fixes and corrections
+- Minor improvements to existing content
+- Clarifications and small enhancements
 
-## コミュニティからのフィードバックと提案
+## Community Feedback and Suggestions
 
-この学習リソースを改善するため、コミュニティからのフィードバックを積極的に受け付けています:
+We actively encourage community feedback to improve this learning resource:
 
-### フィードバックの提供方法
-- **GitHub Issues**: 問題の報告や改善提案（AI特有の問題も歓迎）
-- **Discord Discussions**: アイデアの共有やAzure AI Foundryコミュニティとの交流
-- **Pull Requests**: 特にAIテンプレートやガイドの直接的な改善への貢献
-- **Azure AI Foundry Discord**: AZD + AIに関する#Azureチャンネルでの参加
-- **コミュニティフォーラム**: より広範なAzure開発者ディスカッションへの参加
+### How to Provide Feedback
+- **GitHub Issues**: Report problems or suggest improvements (AI-specific issues welcome)
+- **Discord Discussions**: Share ideas and engage with the Microsoft Foundry community
+- **Pull Requests**: Contribute direct improvements to content, especially AI templates and guides
+- **Microsoft Foundry Discord**: Participate in #Azure channel for AZD + AI discussions
+- **Community Forums**: Participate in broader Azure developer discussions
 
-### フィードバックカテゴリ
-- **AIコンテンツの正確性**: AIサービス統合やデプロイ情報の修正
-- **学習体験**: AI開発者向け学習フローの改善提案
-- **不足しているAIコンテンツ**: 追加のAIテンプレート、パターン、または例のリクエスト
-- **アクセシビリティ**: 多様な学習ニーズへの改善
-- **AIツール統合**: AI開発ワークフロー統合の改善提案
-- **本番AIパターン**: 企業向けAIデプロイパターンのリクエスト
+### Feedback Categories
+- **AI Content Accuracy**: Corrections to AI service integration and deployment information
+- **Learning Experience**: Suggestions for improved AI developer learning flow
+- **Missing AI Content**: Requests for additional AI templates, patterns, or examples
+- **Accessibility**: Improvements for diverse learning needs
+- **AI Tool Integration**: Suggestions for better AI development workflow integration
+- **Production AI Patterns**: Enterprise AI deployment pattern requests
 
-### 応答の約束
-- **問題への応答**: 報告された問題には48時間以内に対応
-- **機能リクエスト**: 1週間以内に評価
-- **コミュニティ貢献**: 1週間以内にレビュー
-- **セキュリティ問題**: 優先的に即時対応
+### Response Commitment
+- **Issue Response**: Within 48 hours for reported problems
+- **Feature Requests**: Evaluation within one week
+- **Community Contributions**: Review within one week
+- **Security Issues**: Immediate priority with expedited response
 
-## メンテナンススケジュール
+## Maintenance Schedule
 
-### 定期的な更新
-- **月次レビュー**: コンテンツの正確性とリンクの検証
-- **四半期ごとの更新**: 主要なコンテンツ追加と改善
-- **半年ごとのレビュー**: 包括的な再編成と強化
-- **年次リリース**: 主要バージョンの更新と大幅な改善
+### Regular Updates
+- **Monthly Reviews**: Content accuracy and link validation
+- **Quarterly Updates**: Major content additions and improvements
+- **Semi-Annual Reviews**: Comprehensive restructuring and enhancement
+- **Annual Releases**: Major version updates with significant improvements
 
-### 監視と品質保証
-- **自動テスト**: コード例とリンクの定期的な検証
-- **コミュニティフィードバックの統合**: ユーザー提案の定期的な取り込み
-- **技術更新**: 最新のAzureサービスとazdリリースに合わせた調整
-- **アクセシビリティ監査**: 包括的なデザイン原則の定期的なレビュー
+### Monitoring and Quality Assurance
+- **Automated Testing**: Regular validation of code examples and links
+- **Community Feedback Integration**: Regular incorporation of user suggestions
+- **Technology Updates**: Alignment with latest Azure services and azd releases
+- **Accessibility Audits**: Regular review for inclusive design principles
 
-## バージョンサポートポリシー
+## Version Support Policy
 
-### 現行バージョンサポート
-- **最新のメジャーバージョン**: 定期的な更新を伴う完全サポート
-- **前のメジャーバージョン**: 12か月間のセキュリティ更新と重要な修正
-- **レガシーバージョン**: コミュニティサポートのみ、公式更新なし
+### Current Version Support
+- **Latest Major Version**: Full support with regular updates
+- **Previous Major Version**: Security updates and critical fixes for 12 months
+- **Legacy Versions**: Community support only, no official updates
 
-### 移行ガイダンス
-メジャーバージョンがリリースされる際には、以下を提供します:
-- **移行ガイド**: ステップバイステップの移行手順
-- **互換性ノート**: 破壊的変更に関する詳細
-- **ツールサポート**: 移行を支援するスクリプトやユーティリティ
-- **コミュニティサポート**: 移行に関する質問専用フォーラム
+### Migration Guidance
+When major versions are released, we provide:
+- **Migration Guides**: ステップごとの移行手順
+- **Compatibility Notes**: 破壊的変更に関する詳細
+- **Tool Support**: マイグレーションを支援するスクリプトやユーティリティ
+- **Community Support**: 移行に関する質問のための専用フォーラム
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [学習ガイド](resources/study-guide.md)
-- **次のレッスン**: [メインREADME](README.md)に戻る
+**Navigation**
+- **Previous Lesson**: [学習ガイド](resources/study-guide.md)
+- **Next Lesson**: [メイン README](README.md) に戻る
 
-**最新情報を入手**: このリポジトリをウォッチして、新しいリリースや学習資料の重要な更新情報を受け取ってください。
+**Stay Updated**: このリポジトリをウォッチして、新しいリリースや学習資料に関する重要な更新の通知を受け取ってください。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:  
-この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確さが含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の使用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+免責事項：
+この文書は AI 翻訳サービス「Co‑op Translator」（https://github.com/Azure/co-op-translator）を用いて翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があります。原文（元の言語による文書）を正本としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用に起因するいかなる誤解や誤った解釈についても、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

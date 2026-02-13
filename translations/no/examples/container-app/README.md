@@ -1,41 +1,32 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T17:45:27+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "no"
-}
--->
-# Eksempler på Distribusjon av Container-apper med AZD
+# Eksempler på distribusjon av Container App med AZD
 
-Denne katalogen inneholder omfattende eksempler for å distribuere containeriserte applikasjoner til Azure Container Apps ved bruk av Azure Developer CLI (AZD). Disse eksemplene viser virkelige mønstre, beste praksis og produksjonsklare konfigurasjoner.
+Denne mappen inneholder omfattende eksempler for distribusjon av containeriserte applikasjoner til Azure Container Apps ved hjelp av Azure Developer CLI (AZD). Disse eksemplene demonstrerer virkelige mønstre, beste praksis og produksjonsklare konfigurasjoner.
 
 ## 📚 Innholdsfortegnelse
 
 - [Oversikt](../../../../examples/container-app)
 - [Forutsetninger](../../../../examples/container-app)
-- [Hurtigstart Eksempler](../../../../examples/container-app)
+- [Raske start-eksempler](../../../../examples/container-app)
 - [Produksjonseksempler](../../../../examples/container-app)
-- [Avanserte Mønstre](../../../../examples/container-app)
-- [Beste Praksis](../../../../examples/container-app)
+- [Avanserte mønstre](../../../../examples/container-app)
+- [Beste praksis](../../../../examples/container-app)
 
 ## Oversikt
 
-Azure Container Apps er en fullstendig administrert serverløs containerplattform som lar deg kjøre mikrotjenester og containeriserte applikasjoner uten å måtte administrere infrastrukturen. Når det kombineres med AZD, får du:
+Azure Container Apps er en fullt administrert serverløs containerplattform som gjør det mulig å kjøre mikrotjenester og containeriserte applikasjoner uten å administrere infrastruktur. Når det kombineres med AZD, får du:
 
-- **Forenklet Distribusjon**: Én kommando distribuerer containere med infrastruktur
-- **Automatisk Skalering**: Skaler til null og utvid basert på HTTP-trafikk eller hendelser
-- **Integrert Nettverk**: Innebygd tjenesteoppdagelse og trafikkdeling
-- **Administrert Identitet**: Sikker autentisering til Azure-ressurser
-- **Kostnadsoptimalisering**: Betal kun for ressursene du bruker
+- **Forenklet distribusjon**: Enkelt kommando distribuerer containere med infrastruktur
+- **Automatisk skalering**: Skaler til null og skaler ut basert på HTTP-trafikk eller hendelser
+- **Integrert nettverk**: Innebygd tjenesteoppdagelse og trafikkdeling
+- **Administrert identitet**: Sikker autentisering til Azure-ressurser
+- **Kostnadsoptimalisering**: Betal bare for ressursene du bruker
 
 ## Forutsetninger
 
-Før du starter, sørg for at du har:
+Før du begynner, sørg for å ha:
 
 ```bash
-# Sjekk AZD installasjon
+# Sjekk AZD-installasjon
 azd version
 
 # Sjekk Azure CLI
@@ -44,21 +35,21 @@ az version
 # Sjekk Docker (for å bygge tilpassede bilder)
 docker --version
 
-# Logg inn på Azure
+# Logg inn i Azure
 azd auth login
 az login
 ```
 
-**Påkrevde Azure-ressurser:**
-- Aktivt Azure-abonnement
-- Tillatelser til å opprette ressursgrupper
+**Nødvendige Azure-ressurser:**
+- Aktiv Azure-abonnement
+- Tillatelser for å opprette ressursgrupper
 - Tilgang til Container Apps-miljø
 
-## Hurtigstart Eksempler
+## Raske start-eksempler
 
-### 1. Enkel Web-API (Python Flask)
+### 1. Enkel Web API (Python Flask)
 
-Distribuer et grunnleggende REST API med Azure Container Apps.
+Distribuer en grunnleggende REST API med Azure Container Apps.
 
 **Eksempel: Python Flask API**
 
@@ -80,7 +71,7 @@ services:
 # Initialiser fra mal
 azd init --template todo-python-mongo
 
-# Klargjør infrastruktur og distribuer
+# Sett opp infrastruktur og distribuer
 azd up
 
 # Test distribusjonen
@@ -90,13 +81,13 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 
 **Nøkkelfunksjoner:**
 - Autoskalering fra 0 til 10 replikaer
-- Helseprober og liveness-sjekker
-- Injeksjon av miljøvariabler
+- Helsekontroller og liveness-sjekker
+- Innsetting av miljøvariabler
 - Integrasjon med Application Insights
 
 ### 2. Node.js Express API
 
-Distribuer en Node.js-backend med MongoDB-integrasjon.
+Distribuer en Node.js backend med MongoDB-integrasjon.
 
 ```bash
 # Initialiser Node.js API-mal
@@ -109,8 +100,8 @@ azd env set COLLECTION_NAME todos
 # Distribuer
 azd up
 
-# Vis logger
-azd logs api
+# Vis logger via Azure Monitor
+azd monitor --logs
 ```
 
 **Infrastrukturhøydepunkter:**
@@ -156,9 +147,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Statisk Frontend + API Backend
+### 3. Statisk frontend + API backend
 
-Distribuer en fullstack-applikasjon med React-frontend og API-backend.
+Distribuer en full-stack applikasjon med React frontend og API backend.
 
 ```bash
 # Initialiser full-stack mal
@@ -180,7 +171,7 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 **Scenario**: E-handelsapplikasjon med flere mikrotjenester
 
-**Katalogstruktur:**
+**Mappestruktur:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -200,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml Konfigurasjon:**
+**azure.yaml-konfigurasjon:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -240,9 +231,9 @@ azd up
 azd monitor --overview
 ```
 
-### Eksempel 2: AI-drevet Container-app
+### Eksempel 2: AI-drevet Container App
 
-**Scenario**: AI-chatapplikasjon med Azure OpenAI-integrasjon
+**Scenario**: AI chat-applikasjon med Azure OpenAI-integrasjon
 
 **Fil: src/ai-chat/app.py**
 ```python
@@ -348,11 +339,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Eksempel 3: Bakgrunnsarbeider med Købehandling
+### Eksempel 3: Bakgrunnsarbeider med købehandling
 
-**Scenario**: Ordrebehandlingssystem med meldingskø
+**Scenario**: Ordrehåndteringssystem med meldingskø
 
-**Katalogstruktur:**
+**Mappestruktur:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -429,9 +420,9 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Avanserte Mønstre
+## Avanserte mønstre
 
-### Mønster 1: Blå-Grønn Distribusjon
+### Mønster 1: Blue-Green distribusjon
 
 ```bash
 # Opprett ny revisjon uten trafikk
@@ -440,7 +431,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # Test den nye revisjonen
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Del trafikk (20% til blå, 80% til nåværende)
+# Del trafikk (20 % til blå, 80 % til nåværende)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -453,7 +444,7 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Mønster 2: Kanaridistribusjon med AZD
+### Mønster 2: Canary-distribusjon med AZD
 
 **Fil: .azure/dev/config.json**
 ```json
@@ -472,7 +463,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# Distribuer ny revisjon med 10% trafikk
+# Distribuer ny revisjon med 10 % trafikk
 azd deploy api --revision-mode multiple
 
 # Overvåk metrikker
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Mønster 3: Multi-Region Distribusjon
+### Mønster 3: Multiregion-distribusjon
 
 **Fil: azure.yaml**
 ```yaml
@@ -599,12 +590,12 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Beste Praksis
+## Beste praksis
 
 ### 1. Ressursorganisering
 
 ```bash
-# Bruk konsistente navnekonvensjoner
+# Bruk konsekvente navnekonvensjoner
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -612,7 +603,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Sikkerhetspraksis
+### 2. Sikkerhets beste praksis
 
 ```bicep
 // Always use managed identity
@@ -671,17 +662,19 @@ services:
             concurrent: 100
 ```
 
-### 4. Overvåking og Observabilitet
+### 4. Overvåking og observabilitet
 
 ```bash
 # Aktiver Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Se logger i sanntid
-azd logs api --follow
+azd monitor --logs
+# Eller bruk Azure CLI for Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Overvåk målinger
-azd monitor --service api
+# Overvåk måledata
+azd monitor --live
 
 # Opprett varsler
 az monitor metrics alert create \
@@ -701,7 +694,7 @@ az containerapp update \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Bruk spot-instanser for utviklingsmiljøer
+# Bruk spot-forekomster for utviklingsmiljøer
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
 # Sett opp budsjettvarsler
@@ -714,7 +707,7 @@ az consumption budget create \
 
 ### 6. CI/CD-integrasjon
 
-**GitHub Actions Eksempel:**
+**GitHub Actions-eksempel:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -744,7 +737,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Referanse for Vanlige Kommandoer
+## Vanlige kommandoer referanse
 
 ```bash
 # Initialiser nytt containerapp-prosjekt
@@ -756,16 +749,17 @@ azd up
 # Distribuer kun applikasjonskode (hopp over infrastruktur)
 azd deploy
 
-# Klargjør kun infrastruktur
+# Tilrettelegg kun infrastruktur
 azd provision
 
 # Vis distribuerte ressurser
 azd show
 
-# Strøm logger
-azd logs <service-name> --follow
+# Strøm logger med azd monitor eller Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# Overvåk applikasjon
+# Overvåk applikasjonen
 azd monitor --overview
 
 # Rydd opp i ressurser
@@ -774,13 +768,13 @@ azd down --force --purge
 
 ## Feilsøking
 
-### Problem: Containeren starter ikke
+### Problem: Container starter ikke
 
 ```bash
-# Sjekk logger
-azd logs api --tail 100
+# Sjekk logger ved hjelp av Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Vis beholderhendelser
+# Vis containerhendelser
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -791,16 +785,16 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problem: Kan ikke få tilgang til container-appens endepunkt
+### Problem: Kan ikke få tilgang til container app-endepunkt
 
 ```bash
-# Verifiser ingresskonfigurasjon
+# Bekreft inngangsconfigurasjon
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Sjekk om intern ingress er aktivert
+# Sjekk om intern inngang er aktivert
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -823,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Tilleggsressurser og Eksempler
+## Ytterligere ressurser og eksempler
 - [Mikrotjenester Eksempel](./microservices/README.md)
-- [Enkel Flask API Eksempel](./simple-flask-api/README.md)
+- [Enkelt Flask API Eksempel](./simple-flask-api/README.md)
 - [Azure Container Apps Dokumentasjon](https://learn.microsoft.com/azure/container-apps/)
 - [AZD Malgalleri](https://azure.github.io/awesome-azd/)
 - [Container Apps Eksempler](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep Maler](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Bicep-maler](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Bidra
 
-For å bidra med nye container-app-eksempler:
+For å bidra med nye container app-eksempler:
 
-1. Opprett en ny underkatalog med eksempelet ditt
+1. Opprett en ny undermappe med eksempelet ditt
 2. Inkluder komplette `azure.yaml`, `infra/` og `src/` filer
 3. Legg til en omfattende README med distribusjonsinstruksjoner
 4. Test distribusjonen med `azd up`
-5. Send inn en pull request
+5. Send en pull request
 
 ---
 
-**Trenger du hjelp?** Bli med i [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)-fellesskapet for støtte og spørsmål.
+**Trenger du hjelp?** Bli med i [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) for støtte og spørsmål.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

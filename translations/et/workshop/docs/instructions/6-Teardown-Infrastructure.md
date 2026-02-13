@@ -1,39 +1,43 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-10-11T15:45:45+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "et"
-}
--->
-# 6. Infrastruktuuri lammutamine
+# 6. Tehniline infrastruktuur
 
-!!! tip "PÄRAST SELLE MOODULI LÄBIMIST SAAD SA"
+!!! tip "SESI MÄÄRATUD MÄÄRATLUSES OLETE SUUTNUD"
 
-    - [ ] Üksus
-    - [ ] Üksus
-    - [ ] Üksus
+    - [ ] Mõista ressursi puhastamise ja kulude haldamise tähtsust
+    - [ ] Kasutada `azd down` infrastruktuuri turvaliseks eemaldamiseks
+    - [ ] Taastada vajadusel pehme kustutusega kognitiivseid teenuseid
+    - [ ] **Lab 6:** Puhastada Azure'i ressursid ja kontrollida eemaldamist
 
 ---
 
-## Lisaharjutused
+## Boonusülesanded
 
-Enne projekti lammutamist võta paar minutit, et teha avatud uurimistööd.
+Enne projekti eemaldamist võta mõni minut avatud uurimiseks.
 
-!!! danger "NITYA-TODO: Koosta mõned prooviküsimused"
+!!! info "Proovi neid uurimiskäsklusi"
+
+    **Katseta GitHub Copilotiga:**
+    
+    1. Küsi: `Milliseid teisi AZD malle võiksin proovida mitmeagendi stsenaariumide jaoks?`
+    2. Küsi: `Kuidas kohandada agendi juhiseid tervishoiu kasutusjuhtumi jaoks?`
+    3. Küsi: `Millised keskkonnamuutujad kontrollivad kulude optimeerimist?`
+    
+    **Uuri Azure'i portaali:**
+    
+    1. Vaata üle Application Insightsi mõõdikud oma juurutuse jaoks
+    2. Kontrolli pakutud ressursside kulude analüüsi
+    3. Uuri veel kord Microsoft Foundry portaali agendi mänguväljakut
 
 ---
 
 ## Infrastruktuuri eemaldamine
 
-1. Infrastruktuuri lammutamine on sama lihtne kui:
-
+1. Infrastruktuuri eemaldamine on sama lihtne kui:
+      
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. `--purge` lipp tagab, et see kustutab ka pehmelt kustutatud Cognitive Service ressursid, vabastades nende ressursside poolt hoitava kvoodi. Kui protsess on lõpule viidud, näed midagi sellist:
-
+1. Lipp `--purge` tagab, et pehme kustutusega kognitiivsed teenused ka eemaldatakse, vabastades nende ressursside poolt hõivatud kvota. Kui protsess on lõpetatud, näed midagi sellist:
+      
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
@@ -43,16 +47,18 @@ Enne projekti lammutamist võta paar minutit, et teha avatud uurimistööd.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Valikuline) Kui käivitad nüüd uuesti `azd up`, märkad, et gpt-4.1 mudel juurutatakse, kuna keskkonnamuutuja muudeti (ja salvestati) kohalikus `.azure` kaustas.
+1. (Valikuline) Kui nüüd uuesti käivitad `azd up`, märkad, et gpt-4.1 mudel juurutatakse, kuna keskkonnamuutuja muudeti (ja salvestati) kohalikus `.azure` kaustas. 
 
       Siin on mudeli juurutused **enne**:
 
-      ![Algne](../../../../../translated_images/et/14-deploy-initial.30e4cf1c29b587bc.webp)
+      ![Initial](../../../../../translated_images/et/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       Ja siin on see **pärast**:
-      ![Uus](../../../../../translated_images/et/14-deploy-new.f7f3c355a3cf7299.webp)
+      ![New](../../../../../translated_images/et/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastutusest loobumine**:  
+See dokument on tõlgitud AI-tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust tagada, palun arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks käsitleda autoriteetse allikana. Olulise teabe puhul soovitatakse professionaalset inimtõlget. Me ei vastuta selle tõlge kasutamisega seotud arusaamatuste ega väärarusaamade eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

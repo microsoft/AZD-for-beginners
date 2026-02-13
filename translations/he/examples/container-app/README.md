@@ -1,47 +1,38 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T17:51:32+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "he"
-}
--->
-# דוגמאות לפריסת אפליקציות קונטיינר עם AZD
+# דוגמאות לפריסת אפליקציות מכולות עם AZD
 
-תיקייה זו מכילה דוגמאות מקיפות לפריסת אפליקציות מבוססות קונטיינר ל-Azure Container Apps באמצעות Azure Developer CLI (AZD). הדוגמאות מציגות תבניות מעשיות, שיטות עבודה מומלצות וקונפיגורציות מוכנות לייצור.
+תיקיה זו מכילה דוגמאות מקיפות לפריסת אפליקציות מכולות ל-Azure Container Apps באמצעות Azure Developer CLI (AZD). דוגמאות אלו מציגות תבניות עבודה מהעולם האמיתי, שיטות עבודה מומלצות, ותצורות מוכנות לייצור.
 
-## 📚 תוכן עניינים
+## 📚 תכולת העניינים
 
 - [סקירה כללית](../../../../examples/container-app)
 - [דרישות מוקדמות](../../../../examples/container-app)
-- [דוגמאות להתחלה מהירה](../../../../examples/container-app)
+- [דוגמאות התחלה מהירה](../../../../examples/container-app)
 - [דוגמאות לייצור](../../../../examples/container-app)
 - [תבניות מתקדמות](../../../../examples/container-app)
 - [שיטות עבודה מומלצות](../../../../examples/container-app)
 
 ## סקירה כללית
 
-Azure Container Apps היא פלטפורמת קונטיינרים מנוהלת לחלוטין, המאפשרת להריץ מיקרו-שירותים ואפליקציות מבוססות קונטיינר ללא צורך בניהול תשתית. בשילוב עם AZD, תקבלו:
+Azure Container Apps היא פלטפורמת מכולות מנוהלת לחלוטין ללא שרתים, המאפשרת להריץ מיקרו-שירותים ואפליקציות מכולות ללא ניהול תשתית. בשילוב עם AZD, אתה מקבל:
 
-- **פריסה פשוטה**: פקודה אחת לפריסת קונטיינרים עם תשתית
-- **סקיילינג אוטומטי**: סקיילינג לאפס או החוצה בהתאם לתעבורת HTTP או אירועים
-- **רשת משולבת**: גילוי שירות מובנה וחלוקת תעבורה
+- **פריסה מפושטת**: פקודה אחת לפריסת מכולות עם תשתית
+- **קנה מידה אוטומטי**: קנה מידה לאפס ופריסה בהתאם לתעבורת HTTP או אירועים
+- **רשת משולבת**: גילוי שירות מובנה והפרדת תעבורה
 - **זהות מנוהלת**: אימות מאובטח למשאבי Azure
-- **אופטימיזציית עלויות**: תשלום רק עבור המשאבים בהם משתמשים
+- **אופטימיזציית עלויות**: תשלום רק עבור המשאבים שבהם אתה משתמש
 
 ## דרישות מוקדמות
 
-לפני שמתחילים, ודאו שיש לכם:
+לפני שמתחילים, ודא שיש לך:
 
 ```bash
 # בדוק התקנת AZD
 azd version
 
-# בדוק Azure CLI
+# בדוק את Azure CLI
 az version
 
-# בדוק Docker (לבניית תמונות מותאמות אישית)
+# בדוק את Docker (לבניית תמונות מותאמות אישית)
 docker --version
 
 # התחבר ל-Azure
@@ -54,11 +45,11 @@ az login
 - הרשאות ליצירת קבוצת משאבים
 - גישה לסביבת Container Apps
 
-## דוגמאות להתחלה מהירה
+## דוגמאות התחלה מהירה
 
-### 1. API פשוט (Python Flask)
+### 1. API ווב פשוט (Python Flask)
 
-פריסת REST API בסיסי עם Azure Container Apps.
+פרוס API REST בסיסי עם Azure Container Apps.
 
 **דוגמה: Python Flask API**
 
@@ -77,10 +68,10 @@ services:
 **שלבי פריסה:**
 
 ```bash
-# אתחל מתבנית
+# אתחול מתבנית
 azd init --template todo-python-mongo
 
-# ספק תשתית ופרוס
+# הקצה תשתית ופרוס
 azd up
 
 # בדוק את הפריסה
@@ -89,31 +80,31 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **תכונות עיקריות:**
-- סקיילינג אוטומטי מ-0 עד 10 רפליקות
-- בדיקות בריאות וחיות
+- קנה מידה אוטומטי מ-0 עד 10 שכפולים
+- בדיקות בריאות ובדיקות חיות
 - הזרקת משתני סביבה
 - אינטגרציה עם Application Insights
 
-### 2. API של Node.js Express
+### 2. Node.js Express API
 
-פריסת Backend של Node.js עם אינטגרציה ל-MongoDB.
+פרוס backend ב-Node.js עם אינטגרציה ל-MongoDB.
 
 ```bash
-# אתחל תבנית API של Node.js
+# אתחול תבנית API של Node.js
 azd init --template todo-nodejs-mongo
 
-# הגדר משתני סביבה
+# קבע משתני סביבה
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
 # פרוס
 azd up
 
-# הצג יומנים
-azd logs api
+# הצג יומנים באמצעות Azure Monitor
+azd monitor --logs
 ```
 
-**הדגשים בתשתית:**
+**היבטי תשתית מרכזיים:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -156,21 +147,21 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. פרונטנד סטטי + Backend API
+### 3. Frontend סטטי + backend API
 
-פריסת אפליקציה Full-Stack עם פרונטנד React ו-Backend API.
+פרוס אפליקציית full-stack עם React ב-front ו-API ב-backend.
 
 ```bash
-# אתחל תבנית פול-סטאק
+# אתחול תבנית פול-סטאק
 azd init --template todo-csharp-sql-swa-func
 
-# סקור את התצורה
+# סקירת תצורה
 cat azure.yaml
 
-# פרוס את שני השירותים
+# פריסה של שני השירותים
 azd up
 
-# פתח את היישום
+# פתיחת היישום
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
@@ -178,7 +169,7 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### דוגמה 1: ארכיטקטורת מיקרו-שירותים
 
-**תרחיש**: אפליקציית מסחר אלקטרוני עם מספר מיקרו-שירותים
+**תרחיש**: אפליקציית e-commerce עם מיקרו-שירותים מרובים
 
 **מבנה תיקיות:**
 ```
@@ -200,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**קונפיגורציית azure.yaml:**
+**תצורת azure.yaml:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -222,13 +213,13 @@ services:
 
 **פריסה:**
 ```bash
-# אתחל פרויקט
+# אתחול הפרויקט
 azd init
 
 # הגדר סביבת ייצור
 azd env new production
 
-# הגדר הגדרות ייצור
+# קבע הגדרות ייצור
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -236,13 +227,13 @@ azd env set MAX_REPLICAS 50
 # פרוס את כל השירותים
 azd up
 
-# עקוב אחר הפריסה
+# עקוב אחרי הפריסה
 azd monitor --overview
 ```
 
-### דוגמה 2: אפליקציית קונטיינר מבוססת AI
+### דוגמה 2: אפליקציית מכולה עם בינה מלאכותית
 
-**תרחיש**: אפליקציית צ'אט AI עם אינטגרציה ל-Azure OpenAI
+**תרחיש**: אפליקציית שיחה מבוססת AI עם אינטגרציה ל-Azure OpenAI
 
 **קובץ: src/ai-chat/app.py**
 ```python
@@ -262,7 +253,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # קבל מפתח OpenAI מכספת המפתחות
+    # קבל מפתח OpenAI מ-Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -331,18 +322,18 @@ module aiChatApp './app/container-app.bicep' = {
 
 **פקודות פריסה:**
 ```bash
-# הגדר סביבה
+# להגדיר סביבה
 azd init --template ai-chat-app
 azd env new dev
 
-# הגדר את OpenAI
+# להגדיר את OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
-# פרוס
+# לפרוס
 azd up
 
-# בדוק את ה-API
+# לבדוק את ה-API
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
@@ -390,7 +381,7 @@ def process_orders():
             # לעבד הזמנה
             print(f"Processing order: {message.content}")
             
-            # להשלים הודעה
+            # הודעה מלאה
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -414,13 +405,13 @@ services:
 
 **פריסה:**
 ```bash
-# אתחל
+# אתחול
 azd init
 
-# פרוס עם תצורת תור
+# פריסה עם תצורת תור
 azd up
 
-# שנה את גודל העובד בהתאם לאורך התור
+# להתאים את סקייל העובד לפי אורך התור
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -431,7 +422,7 @@ az containerapp update \
 
 ## תבניות מתקדמות
 
-### תבנית 1: פריסה כחול-ירוק
+### תבנית 1: פריסת כחולה-ירוקה
 
 ```bash
 # צור גרסה חדשה ללא תנועה
@@ -440,20 +431,20 @@ azd deploy api --revision-suffix blue --no-traffic
 # בדוק את הגרסה החדשה
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# פצל תנועה (20% לכחול, 80% לנוכחי)
+# חלק את התנועה (20% לכחול, 80% לנוכחי)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# מעבר מלא לכחול
+# העברה מלאה לכחול
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### תבנית 2: פריסת Canary עם AZD
+### תבנית 2: פריסת קנרי עם AZD
 
 **קובץ: .azure/dev/config.json**
 ```json
@@ -472,13 +463,13 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# פרוס גרסה חדשה עם 10% תעבורה
+# לפרוס גרסה חדשה עם 10% מהתנועה
 azd deploy api --revision-mode multiple
 
-# עקוב אחר מדדים
+# לנטר מדדים
 azd monitor --service api --duration 5m
 
-# הגדל את התעבורה בהדרגה
+# להגדיל את התנועה בהדרגה
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### תבנית 3: פריסה מרובת אזורים
+### תבנית 3: פריסה רב-אזורית
 
 **קובץ: azure.yaml**
 ```yaml
@@ -541,11 +532,11 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 # פרוס לכל האזורים
 azd up
 
-# אמת נקודות קצה
+# אמת את נקודות הקצה
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### תבנית 4: אינטגרציה עם Dapr
+### תבנית 4: אינטגרציית Dapr
 
 **קובץ: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -612,7 +603,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. שיטות עבודה מומלצות לאבטחה
+### 2. שיטות אבטחה מומלצות
 
 ```bicep
 // Always use managed identity
@@ -674,14 +665,16 @@ services:
 ### 4. ניטור ותצפית
 
 ```bash
-# הפעל תובנות יישום
+# הפעלת Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# צפה ביומנים בזמן אמת
-azd logs api --follow
+# הצג יומנים בזמן אמת
+azd monitor --logs
+# או השתמש ב-Azure CLI עבור Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# עקוב אחר מדדים
-azd monitor --service api
+# ניטור מדדים
+azd monitor --live
 
 # צור התראות
 az monitor metrics alert create \
@@ -695,16 +688,16 @@ az monitor metrics alert create \
 ### 5. אופטימיזציית עלויות
 
 ```bash
-# קנה מידה לאפס כאשר אינו בשימוש
+# להקטין לאפס כשהמערכת לא בשימוש
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# השתמש במופעים זמניים עבור סביבות פיתוח
+# השתמש במקרים ספוט לסביבות פיתוח
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# הגדר התראות תקציב
+# להגדיר התראות תקציב
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -712,7 +705,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. אינטגרציה עם CI/CD
+### 6. אינטגרציית CI/CD
 
 **דוגמה ל-GitHub Actions:**
 ```yaml
@@ -747,7 +740,7 @@ jobs:
 ## הפניות לפקודות נפוצות
 
 ```bash
-# אתחל פרויקט אפליקציית מיכל חדש
+# אתחול פרויקט אפליקציית קונטיינר חדשה
 azd init --template <template-name>
 
 # פרוס תשתית ואפליקציה
@@ -759,13 +752,14 @@ azd deploy
 # ספק רק תשתית
 azd provision
 
-# הצג משאבים שפורסו
+# הצג משאבים שפורסמו
 azd show
 
-# זרם יומנים
-azd logs <service-name> --follow
+# הזרם יומנים באמצעות azd monitor או Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# עקוב אחר אפליקציה
+# נטר אפליקציה
 azd monitor --overview
 
 # נקה משאבים
@@ -774,33 +768,33 @@ azd down --force --purge
 
 ## פתרון בעיות
 
-### בעיה: הקונטיינר לא מצליח להתחיל
+### בעיה: המכולה נכשלת בפתיחה
 
 ```bash
-# בדוק יומנים
-azd logs api --tail 100
+# בדוק יומנים באמצעות Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# הצג אירועי מכולה
+# הצג אירועים של מכולות
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# בדוק באופן מקומי
+# בדוק מקומית
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### בעיה: אין גישה לנקודת הקצה של אפליקציית הקונטיינר
+### בעיה: אין גישה לנקודת הקצה של אפליקציית המכולה
 
 ```bash
-# אמת את תצורת הכניסה
+# אמת תצורת ingress
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# בדוק אם הכניסה הפנימית מופעלת
+# בדוק אם ingress פנימי מופעל
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -810,7 +804,7 @@ az containerapp ingress update \
 ### בעיה: בעיות ביצועים
 
 ```bash
-# בדוק את ניצול המשאבים
+# בדוק שימוש במשאבים
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
@@ -824,30 +818,30 @@ az containerapp update \
 ```
 
 ## משאבים ודוגמאות נוספים
-- [דוגמת מיקרו-שירותים](./microservices/README.md)
-- [דוגמת Flash API פשוטה](./simple-flask-api/README.md)
+- [דוגמה למיקרו-שירותים](./microservices/README.md)
+- [דוגמה פשוטה ל-Flash API](./simple-flask-api/README.md)
 - [תיעוד Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [גלריית תבניות AZD](https://azure.github.io/awesome-azd/)
-- [דוגמאות ל-Container Apps](https://github.com/Azure-Samples/container-apps-samples)
+- [דוגמאות Container Apps](https://github.com/Azure-Samples/container-apps-samples)
 - [תבניות Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## תרומה
 
-כדי לתרום דוגמאות חדשות לאפליקציות קונטיינר:
+לתרום דוגמאות חדשות לאפליקציות מכולות:
 
-1. צרו תיקיית משנה חדשה עם הדוגמה שלכם
-2. כללו קבצי `azure.yaml`, `infra/`, ו-`src/` מלאים
-3. הוסיפו README מקיף עם הוראות פריסה
-4. בדקו את הפריסה עם `azd up`
-5. שלחו Pull Request
+1. צור תיקיית משנה חדשה עם הדוגמה שלך
+2. כלול קבצי `azure.yaml`, `infra/`, ו-`src/` מלאים
+3. הוסף קובץ README מקיף עם הוראות פריסה
+4. בדוק פריסה עם `azd up`
+5. הגש בקשת משיכה
 
 ---
 
-**צריכים עזרה?** הצטרפו לקהילת [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) לקבלת תמיכה ושאלות.
+**צריך עזרה?** הצטרף לקהילה של [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) לתמיכה ושאלות.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדייק, יש להיות מודעים לכך שתרגומים אוטומטיים עלולים לכלול שגיאות או אי דיוקים. המסמך המקורי בשפת המקור מהווה את המקור הסמכותי. למידע קריטי מומלץ לפנות לתרגום מקצועי על ידי אדם. אנו לא נושאים באחריות על כל אי הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

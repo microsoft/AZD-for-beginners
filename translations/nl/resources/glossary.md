@@ -1,73 +1,64 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-18T07:02:28+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "nl"
-}
--->
 # Glossarium - Azure en AZD Terminologie
 
 **Referentie voor alle hoofdstukken**
-- **📚 Cursus Home**: [AZD Voor Beginners](../README.md)
-- **📖 Basis leren**: [Hoofdstuk 1: AZD Basisprincipes](../docs/getting-started/azd-basics.md)
-- **🤖 AI Termen**: [Hoofdstuk 2: AI-First Ontwikkeling](../docs/ai-foundry/azure-ai-foundry-integration.md)
+- **📚 Cursus Startpagina**: [AZD For Beginners](../README.md)
+- **📖 Leer de basis**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 AI-termen**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
-## Introductie
+## Inleiding
 
-Dit uitgebreide glossarium biedt definities voor termen, concepten en acroniemen die worden gebruikt in Azure Developer CLI en Azure cloudontwikkeling. Essentiële referentie voor het begrijpen van technische documentatie, het oplossen van problemen en het effectief communiceren over azd-projecten en Azure-diensten.
+Dit uitgebreide glossarium biedt definities voor termen, concepten en acroniemen die worden gebruikt in de Azure Developer CLI en Azure cloudontwikkeling. Essentiële referentie voor het begrijpen van technische documentatie, het oplossen van problemen en het effectief communiceren over azd-projecten en Azure-services.
 
 ## Leerdoelen
 
-Door gebruik te maken van dit glossarium, zul je:
-- Essentiële terminologie en concepten van Azure Developer CLI begrijpen
-- De woordenschat en technische termen van Azure cloudontwikkeling beheersen
-- Terminologie van Infrastructure as Code en implementatie efficiënt kunnen raadplegen
-- Namen, acroniemen en doeleinden van Azure-diensten begrijpen
-- Definities voor probleemoplossing en foutopsporingsterminologie kunnen raadplegen
-- Geavanceerde concepten van Azure-architectuur en ontwikkeling leren
+Door dit woordenboek te gebruiken, zult u:
+- De essentiële terminologie en concepten van de Azure Developer CLI begrijpen
+- De woordenschat en technische termen van Azure-cloudontwikkeling beheersen
+- Efficiënt verwijzen naar Infrastructure as Code- en implementatieterminologie
+- Azure-servicenamen, acroniemen en hun doeleinden begrijpen
+- Toegang krijgen tot definities voor probleemoplossing en debuggingterminologie
+- Geavanceerde Azure-architectuur- en ontwikkelingsconcepten leren
 
 ## Leerresultaten
 
-Met regelmatig gebruik van dit glossarium zul je in staat zijn om:
-- Effectief te communiceren met de juiste terminologie van Azure Developer CLI
+Met regelmatige verwijzing naar dit glossarium zult u in staat zijn om:
+- Effectief te communiceren met de juiste terminologie van de Azure Developer CLI
 - Technische documentatie en foutmeldingen duidelijker te begrijpen
-- Vertrouwd te navigeren door Azure-diensten en concepten
-- Problemen op te lossen met behulp van passende technische woordenschat
+- Zelfverzekerd door Azure-services en -concepten te navigeren
+- Problemen op te lossen met geschikte technische terminologie
 - Bij te dragen aan teamdiscussies met nauwkeurige technische taal
-- Systematisch je kennis van Azure cloudontwikkeling uit te breiden
+- Uw kennis van Azure-cloudontwikkeling systematisch uit te breiden
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager-template. JSON-gebaseerd Infrastructure as Code-formaat dat wordt gebruikt om Azure-resources declaratief te definiëren en te implementeren.
+Azure Resource Manager-sjabloon. Op JSON gebaseerde Infrastructure as Code-indeling die wordt gebruikt om Azure-resources declaratief te definiëren en te implementeren.
 
 **App Service**  
-Azure's platform-as-a-service (PaaS)-aanbod voor het hosten van webapplicaties, REST API's en mobiele backends zonder infrastructuurbeheer.
+Azure's platform-as-a-service (PaaS)-aanbod voor het hosten van webapplicaties, REST-API's en mobiele backends zonder beheer van de onderliggende infrastructuur.
 
 **Application Insights**  
-Azure's applicatieprestatiebewakingsdienst (APM) die diepgaande inzichten biedt in applicatieprestaties, beschikbaarheid en gebruik.
+Azure's application performance monitoring (APM)-service die diepgaande inzichten biedt in applicatieprestaties, beschikbaarheid en gebruik.
 
 **Azure CLI**  
-Command-line interface voor het beheren van Azure-resources. Gebruikt door azd voor authenticatie en sommige bewerkingen.
+Commandoregelinterface voor het beheren van Azure-resources. Wordt door azd gebruikt voor authenticatie en enkele bewerkingen.
 
 **Azure Developer CLI (azd)**  
-Ontwikkelaarsgerichte command-line tool die het proces van het bouwen en implementeren van applicaties naar Azure versnelt met behulp van templates en Infrastructure as Code.
+Ontwikkelaarsgerichte commandoregeltool die het proces van het bouwen en implementeren van toepassingen naar Azure versnelt met behulp van sjablonen en Infrastructure as Code.
 
 **azure.yaml**  
-Het belangrijkste configuratiebestand voor een azd-project dat diensten, infrastructuur en implementatiehooks definieert.
+Het hoofdconfiguratiebestand voor een azd-project dat services, infrastructuur en implementatiehooks definieert.
 
 **Azure Resource Manager (ARM)**  
-Azure's implementatie- en beheerdienst die een beheerslaag biedt voor het maken, bijwerken en verwijderen van resources.
+Azure's implementatie- en beheerservice die een beheerslaag biedt voor het maken, bijwerken en verwijderen van resources.
 
 ## B
 
 **Bicep**  
-Domeinspecifieke taal (DSL) ontwikkeld door Microsoft voor het implementeren van Azure-resources. Biedt een eenvoudiger syntaxis dan ARM-templates terwijl het compileert naar ARM.
+Domeinspecifieke taal (DSL) ontwikkeld door Microsoft voor het implementeren van Azure-resources. Biedt een eenvoudigere syntaxis dan ARM-sjablonen en compileert naar ARM.
 
 **Build**  
-Het proces van het compileren van broncode, installeren van afhankelijkheden en voorbereiden van applicaties voor implementatie.
+Het proces van het compileren van broncode, installeren van afhankelijkheden en het voorbereiden van applicaties voor implementatie.
 
 **Blue-Green Deployment**  
 Implementatiestrategie die twee identieke productieomgevingen (blauw en groen) gebruikt om downtime en risico te minimaliseren.
@@ -75,7 +66,7 @@ Implementatiestrategie die twee identieke productieomgevingen (blauw en groen) g
 ## C
 
 **Container Apps**  
-Azure's serverloze containerdienst waarmee containerized applicaties kunnen worden uitgevoerd zonder complexe infrastructuur te beheren.
+Azure's serverless containerdienst die het uitvoeren van gecontaineriseerde applicaties mogelijk maakt zonder het beheren van complexe infrastructuur.
 
 **CI/CD**  
 Continuous Integration/Continuous Deployment. Geautomatiseerde praktijken voor het integreren van codewijzigingen en het implementeren van applicaties.
@@ -83,35 +74,35 @@ Continuous Integration/Continuous Deployment. Geautomatiseerde praktijken voor h
 **Cosmos DB**  
 Azure's wereldwijd gedistribueerde, multi-model databaseservice die uitgebreide SLA's biedt voor doorvoer, latentie, beschikbaarheid en consistentie.
 
-**Configuratie**  
-Instellingen en parameters die het gedrag van applicaties en implementatieopties bepalen.
+**Configuration**  
+Instellingen en parameters die het gedrag van de applicatie en implementatieopties regelen.
 
 ## D
 
-**Implementatie**  
-Het proces van het installeren en configureren van applicaties en hun afhankelijkheden op doelinfrastructuur.
+**Deployment**  
+Het proces van het installeren en configureren van applicaties en hun afhankelijkheden op de doelinfrastructuur.
 
 **Docker**  
-Platform voor het ontwikkelen, verzenden en uitvoeren van applicaties met behulp van containertechnologie.
+Platform voor het ontwikkelen, verzenden en uitvoeren van applicaties met containerisatietechnologie.
 
 **Dockerfile**  
 Tekstbestand met instructies voor het bouwen van een Docker-containerimage.
 
 ## E
 
-**Omgeving**  
-Een implementatiedoel dat een specifieke instantie van je applicatie vertegenwoordigt (bijv. ontwikkeling, staging, productie).
+**Environment**  
+Een implementatiedoel dat een specifieke instantie van uw applicatie vertegenwoordigt (bijv. development, staging, production).
 
-**Omgevingsvariabelen**  
-Configuratiewaarden opgeslagen als sleutel-waardeparen die applicaties tijdens runtime kunnen benaderen.
+**Environment Variables**  
+Configuratiewaarden opgeslagen als key-value paren die applicaties tijdens runtime kunnen benaderen.
 
 **Endpoint**  
-URL of netwerkadres waar een applicatie of dienst toegankelijk is.
+URL of netwerkadres waar een applicatie of service toegankelijk is.
 
 ## F
 
 **Function App**  
-Azure's serverloze computerdienst waarmee event-driven code kan worden uitgevoerd zonder infrastructuurbeheer.
+Azure's serverless compute-service waarmee event-gedreven code kan worden uitgevoerd zonder dat infrastructuurbeheer nodig is.
 
 ## G
 
@@ -124,18 +115,18 @@ Gedistribueerd versiebeheersysteem dat wordt gebruikt voor het bijhouden van wij
 ## H
 
 **Hooks**  
-Aangepaste scripts of commando's die op specifieke punten tijdens de implementatielevenscyclus worden uitgevoerd (preprovision, postprovision, predeploy, postdeploy).
+Aangepaste scripts of commando's die op specifieke momenten tijdens de implementatielevenscyclus worden uitgevoerd (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Het type Azure-dienst waar een applicatie wordt geïmplementeerd (bijv. appservice, containerapp, function).
+Het type Azure-service waarop een applicatie wordt geïmplementeerd (bijv. appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Praktijk van het definiëren en beheren van infrastructuur via code in plaats van handmatige processen.
+De praktijk van het definiëren en beheren van infrastructuur via code in plaats van handmatige processen.
 
 **Init**  
-Het proces van het initialiseren van een nieuw azd-project, meestal vanuit een template.
+Het proces van het initialiseren van een nieuw azd-project, meestal vanuit een sjabloon.
 
 ## J
 
@@ -143,34 +134,34 @@ Het proces van het initialiseren van een nieuw azd-project, meestal vanuit een t
 JavaScript Object Notation. Gegevensuitwisselingsformaat dat vaak wordt gebruikt voor configuratiebestanden en API-responses.
 
 **JWT**  
-JSON Web Token. Standaard voor het veilig verzenden van informatie tussen partijen als een JSON-object.
+JSON Web Token. Standaard voor het veilig overdragen van informatie tussen partijen als een JSON-object.
 
 ## K
 
 **Key Vault**  
-Azure's dienst voor het veilig opslaan en beheren van geheimen, sleutels en certificaten.
+Azure-service voor het veilig opslaan en beheren van secrets, sleutels en certificaten.
 
 **Kusto Query Language (KQL)**  
-Querytaal die wordt gebruikt voor het analyseren van gegevens in Azure Monitor, Application Insights en andere Azure-diensten.
+Querytaal die wordt gebruikt voor het analyseren van gegevens in Azure Monitor, Application Insights en andere Azure-services.
 
 ## L
 
 **Load Balancer**  
-Dienst die inkomend netwerkverkeer verdeelt over meerdere servers of instanties.
+Service die binnenkomend netwerkverkeer verdeelt over meerdere servers of instanties.
 
 **Log Analytics**  
-Azure-dienst voor het verzamelen, analyseren en reageren op telemetriegegevens van cloud- en on-premises omgevingen.
+Azure-service voor het verzamelen, analyseren en handelen op telemetriegegevens van cloud- en on-premisesomgevingen.
 
 ## M
 
 **Managed Identity**  
-Azure-functie die Azure-diensten voorziet van een automatisch beheerde identiteit voor authenticatie bij andere Azure-diensten.
+Azure-functie die Azure-services een automatisch beheerde identiteit biedt voor authenticatie bij andere Azure-services.
 
 **Microservices**  
-Architecturale benadering waarbij applicaties worden gebouwd als een verzameling van kleine, onafhankelijke diensten.
+Architecturale aanpak waarbij applicaties worden opgebouwd als een verzameling van kleine, onafhankelijke services.
 
 **Monitor**  
-Azure's uniforme bewakingsoplossing die volledige stack-observatie biedt over applicaties en infrastructuur.
+Azure's uniforme monitoringoplossing die full-stack observability biedt over applicaties en infrastructuur.
 
 ## N
 
@@ -183,26 +174,26 @@ Pakketbeheerder voor Node.js die afhankelijkheden en pakketten beheert.
 ## O
 
 **Output**  
-Waarden die worden geretourneerd door infrastructuurimplementatie en kunnen worden gebruikt door applicaties of andere resources.
+Waarden die worden geretourneerd uit infrastructuurimplementatie en door applicaties of andere resources kunnen worden gebruikt.
 
 ## P
 
 **Package**  
-Het proces van het voorbereiden van applicatiecode en afhankelijkheden voor implementatie.
+Het proces van het klaarmaken van applicatiecode en afhankelijkheden voor implementatie.
 
 **Parameters**  
-Invoerwaarden die worden doorgegeven aan infrastructuurtemplates om implementaties aan te passen.
+Invoegwaarden die worden doorgegeven aan infrastructuursjablonen om implementaties aan te passen.
 
 **PostgreSQL**  
-Open-source relationeel databasesysteem dat wordt ondersteund als een beheerde dienst in Azure.
+Open-source relationeel databasesysteem dat wordt ondersteund als een beheerde service in Azure.
 
 **Provisioning**  
-Het proces van het maken en configureren van Azure-resources die zijn gedefinieerd in infrastructuurtemplates.
+Het proces van het creëren en configureren van Azure-resources die zijn gedefinieerd in infrastructuursjablonen.
 
 ## Q
 
 **Quota**  
-Limieten op de hoeveelheid resources die kunnen worden gemaakt in een Azure-abonnement of regio.
+Limieten op de hoeveelheid resources die in een Azure-subscriptie of regio kunnen worden aangemaakt.
 
 ## R
 
@@ -210,30 +201,30 @@ Limieten op de hoeveelheid resources die kunnen worden gemaakt in een Azure-abon
 Logische container voor Azure-resources die dezelfde levenscyclus, machtigingen en beleidsregels delen.
 
 **Resource Token**  
-Unieke string gegenereerd door azd om ervoor te zorgen dat resourcenamen uniek zijn over implementaties.
+Unieke tekenreeks gegenereerd door azd om te zorgen dat resourcenamen uniek zijn over implementaties heen.
 
 **REST API**  
-Architecturale stijl voor het ontwerpen van netwerkapplicaties met behulp van HTTP-methoden.
+Architectuurstijl voor het ontwerpen van netwerkapplicaties met gebruik van HTTP-methoden.
 
 **Rollback**  
-Proces van terugkeren naar een eerdere versie van een applicatie of infrastructuurconfiguratie.
+Proces van terugkeren naar een vorige versie van een applicatie of infrastructuurconfiguratie.
 
 ## S
 
 **Service**  
-Een component van je applicatie gedefinieerd in azure.yaml (bijv. web frontend, API backend, database).
+Een component van uw applicatie gedefinieerd in azure.yaml (bijv. web frontend, API backend, database).
 
 **SKU**  
-Stock Keeping Unit. Vertegenwoordigt verschillende serviceniveaus of prestatieniveaus voor Azure-resources.
+Stock Keeping Unit. Vertegenwoordigt verschillende servicetiers of prestatieniveaus voor Azure-resources.
 
 **SQL Database**  
 Azure's beheerde relationele databaseservice gebaseerd op Microsoft SQL Server.
 
 **Static Web Apps**  
-Azure-dienst voor het bouwen en implementeren van full-stack webapplicaties vanuit broncode-repositories.
+Azure-service voor het bouwen en implementeren van full-stack webapplicaties vanuit broncode-repositories.
 
 **Storage Account**  
-Azure-dienst die cloudopslag biedt voor gegevensobjecten zoals blobs, bestanden, wachtrijen en tabellen.
+Azure-service die cloudopslag biedt voor dataobjecten waaronder blobs, bestanden, queues en tabellen.
 
 **Subscription**  
 Azure-accountcontainer die resourcegroepen en resources bevat, met bijbehorende facturering en toegangsbeheer.
@@ -241,7 +232,7 @@ Azure-accountcontainer die resourcegroepen en resources bevat, met bijbehorende 
 ## T
 
 **Template**  
-Voorgebouwde projectstructuur met applicatiecode, infrastructuurdefinities en configuratie voor veelvoorkomende scenario's.
+Vooraf opgebouwde projectstructuur met applicatiecode, infrastructuurdefinities en configuratie voor veelvoorkomende scenario's.
 
 **Terraform**  
 Open-source Infrastructure as Code-tool die meerdere cloudproviders ondersteunt, waaronder Azure.
@@ -252,7 +243,7 @@ Azure's DNS-gebaseerde verkeersloadbalancer voor het verdelen van verkeer over w
 ## U
 
 **URI**  
-Uniform Resource Identifier. String die een specifieke resource identificeert.
+Uniform Resource Identifier. Reeks die een bepaald resource identificeert.
 
 **URL**  
 Uniform Resource Locator. Type URI dat specificeert waar een resource zich bevindt en hoe deze kan worden opgehaald.
@@ -260,7 +251,7 @@ Uniform Resource Locator. Type URI dat specificeert waar een resource zich bevin
 ## V
 
 **Virtual Network (VNet)**  
-Fundamenteel bouwblok voor privé-netwerken in Azure, dat isolatie en segmentatie biedt.
+Fundamentele bouwsteen voor private netwerken in Azure, die isolatie en segmentatie biedt.
 
 **VS Code**  
 Visual Studio Code. Populaire code-editor met uitstekende Azure- en azd-integratie.
@@ -268,15 +259,15 @@ Visual Studio Code. Populaire code-editor met uitstekende Azure- en azd-integrat
 ## W
 
 **Webhook**  
-HTTP-callback die wordt geactiveerd door specifieke gebeurtenissen, vaak gebruikt in CI/CD-pijplijnen.
+HTTP-callback die wordt geactiveerd door specifieke gebeurtenissen, veelal gebruikt in CI/CD-pijplijnen.
 
 **What-if**  
-Azure-functie die laat zien welke wijzigingen zouden worden aangebracht door een implementatie zonder deze daadwerkelijk uit te voeren.
+Azure-functie die toont welke wijzigingen een implementatie zou maken zonder deze daadwerkelijk uit te voeren.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Menselijk leesbare gegevensserialisatiestandaard die wordt gebruikt voor configuratiebestanden zoals azure.yaml.
+YAML Ain't Markup Language. Menselijk leesbare dataserialisatienorm die wordt gebruikt voor configuratiebestanden zoals azure.yaml.
 
 ## Z
 
@@ -285,42 +276,42 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 
 ---
 
-## Veelvoorkomende Acroniemen
+## Veelvoorkomende acroniemen
 
-| Acroniem | Volledige Naam | Beschrijving |
-|---------|----------------|--------------|
-| AAD | Azure Active Directory | Identiteits- en toegangsbeheer |
-| ACR | Azure Container Registry | Container image registry service |
-| AKS | Azure Kubernetes Service | Beheerde Kubernetes-dienst |
-| API | Application Programming Interface | Protocolset voor softwareontwikkeling |
-| ARM | Azure Resource Manager | Azure's implementatie- en beheerdienst |
+| Acroniem | Volledige vorm | Beschrijving |
+|---------|-----------|-------------|
+| AAD | Azure Active Directory | Identiteits- en toegangsbeheer-service |
+| ACR | Azure Container Registry | Container image registry-service |
+| AKS | Azure Kubernetes Service | Beheerde Kubernetes-service |
+| API | Application Programming Interface | Set protocollen voor het bouwen van software |
+| ARM | Azure Resource Manager | Azure's implementatie- en beheerservice |
 | CDN | Content Delivery Network | Gedistribueerd netwerk van servers |
 | CI/CD | Continuous Integration/Continuous Deployment | Geautomatiseerde ontwikkelingspraktijken |
 | CLI | Command Line Interface | Tekstgebaseerde gebruikersinterface |
 | DNS | Domain Name System | Systeem voor het vertalen van domeinnamen naar IP-adressen |
-| HTTPS | Hypertext Transfer Protocol Secure | Veilige versie van HTTP |
-| IaC | Infrastructure as Code | Infrastructuurbeheer via code |
+| HTTPS | Hypertext Transfer Protocol Secure | Versleutelde versie van HTTP |
+| IaC | Infrastructure as Code | Beheer van infrastructuur via code |
 | JSON | JavaScript Object Notation | Gegevensuitwisselingsformaat |
 | JWT | JSON Web Token | Tokenformaat voor veilige informatieoverdracht |
-| KQL | Kusto Query Language | Querytaal voor Azure-datadiensten |
-| RBAC | Role-Based Access Control | Toegangsbeheer op basis van gebruikersrollen |
-| REST | Representational State Transfer | Architecturale stijl voor webservices |
-| SDK | Software Development Kit | Verzameling ontwikkeltools |
-| SLA | Service Level Agreement | Garantie voor servicebeschikbaarheid/prestaties |
-| SQL | Structured Query Language | Taal voor relationele databases |
+| KQL | Kusto Query Language | Querytaal voor Azure-gegevensservices |
+| RBAC | Role-Based Access Control | Toegangscontrolemethode op basis van gebruikersrollen |
+| REST | Representational State Transfer | Architectuurstijl voor webservices |
+| SDK | Software Development Kit | Verzameling van ontwikkeltools |
+| SLA | Service Level Agreement | Verplichting voor servicebeschikbaarheid/prestatie |
+| SQL | Structured Query Language | Taal voor het beheren van relationele databases |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Cryptografische protocollen |
-| URI | Uniform Resource Identifier | String die een resource identificeert |
+| URI | Uniform Resource Identifier | Reeks die een resource identificeert |
 | URL | Uniform Resource Locator | Type URI dat de locatie van een resource specificeert |
 | VM | Virtual Machine | Emulatie van een computersysteem |
-| VNet | Virtual Network | Privé-netwerk in Azure |
-| YAML | YAML Ain't Markup Language | Gegevensserialisatiestandaard |
+| VNet | Virtual Network | Privénetwerk in Azure |
+| YAML | YAML Ain't Markup Language | Dataserialisatienorm |
 
 ---
 
-## Azure Service Naam Mapping
+## Azure-servicenaam mapping
 
-| Algemene Naam | Officiële Azure Service Naam | azd Host Type |
-|---------------|------------------------------|---------------|
+| Algemene naam | Officiële Azure-servicenaam | azd Host Type |
+|-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
@@ -335,43 +326,45 @@ Fysiek gescheiden locaties binnen een Azure-regio die redundantie en hoge beschi
 
 ---
 
-## Contextspecifieke Termen
+## Context-specifieke termen
 
 ### Ontwikkelingstermen
-- **Hot Reload**: Automatisch bijwerken van applicaties tijdens ontwikkeling zonder herstart
+- **Hot Reload**: Automatisch bijwerken van applicaties tijdens ontwikkeling zonder opnieuw te starten
 - **Build Pipeline**: Geautomatiseerd proces voor het bouwen en testen van code
-- **Deployment Slot**: Stagingomgeving binnen een App Service
-- **Environment Parity**: Ontwikkeling, staging en productieomgevingen gelijk houden
+- **Deployment Slot**: Staging-omgeving binnen een App Service
+- **Environment Parity**: Het gelijktrekken van development-, staging- en productieomgevingen
 
 ### Beveiligingstermen
-- **Managed Identity**: Azure-functie die automatische inloggegevensbeheer biedt
-- **Key Vault**: Veilige opslag voor geheimen, sleutels en certificaten
-- **RBAC**: Rolgebaseerde toegangscontrole voor Azure-resources
-- **Network Security Group**: Virtuele firewall voor het beheren van netwerkverkeer
+- **Managed Identity**: Azure-functie die automatische credentialbeheer biedt
+- **Key Vault**: Veilige opslag voor secrets, sleutels en certificaten
+- **RBAC**: Role-based access control voor Azure-resources
+- **Network Security Group**: Virtuele firewall voor het controleren van netwerkverkeer
 
-### Bewakingstermen
-- **Telemetrie**: Geautomatiseerde verzameling van metingen en gegevens
-- **Application Performance Monitoring (APM)**: Bewaking van softwareprestaties
-- **Log Analytics**: Dienst voor het verzamelen en analyseren van loggegevens
-- **Alert Rules**: Geautomatiseerde meldingen op basis van metrics of voorwaarden
+### Monitoringtermen
+- **Telemetry**: Geautomatiseerde verzameling van metingen en gegevens
+- **Application Performance Monitoring (APM)**: Monitoring van softwareprestaties
+- **Log Analytics**: Service voor het verzamelen en analyseren van loggegevens
+- **Alert Rules**: Geautomatiseerde meldingen gebaseerd op metriek of voorwaarden
 
 ### Implementatietermen
-- **Blue-Green Deployment**: Implementatiestrategie zonder downtime
+- **Blue-Green Deployment**: Zero-downtime implementatiestrategie
 - **Canary Deployment**: Geleidelijke uitrol naar een subset van gebruikers
 - **Rolling Update**: Sequentiële vervanging van applicatie-instanties
-- **Rollback**: Terugkeren naar een eerdere applicatieversie
+- **Rollback**: Terugkeren naar een vorige applicatieversie
 
 ---
 
-**Gebruikstip**: Gebruik `Ctrl+F` om snel specifieke termen in dit glossarium te zoeken. Termen zijn waar van toepassing onderling gekoppeld.
+**Gebruikstip**: Gebruik `Ctrl+F` om snel naar specifieke termen in dit woordenboek te zoeken. Termen zijn kruisverwezen waar van toepassing.
 
 ---
 
 **Navigatie**
-- **Vorige Les**: [Cheat Sheet](cheat-sheet.md)
-- **Volgende Les**: [FAQ](faq.md)
+- **Vorige les**: [Cheat Sheet](cheat-sheet.md)
+- **Volgende les**: [FAQ](faq.md)
 
 ---
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Disclaimer:
+Dit document is vertaald met behulp van de AI-vertalingsdienst Co-op Translator (https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

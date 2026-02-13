@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7229f7490ea61a04330b79651ac4d37e",
-  "translation_date": "2025-09-10T05:54:34+00:00",
-  "source_file": "SECURITY.md",
-  "language_code": "ro"
-}
--->
 ## Securitate
 
 Microsoft tratează cu maximă seriozitate securitatea produselor și serviciilor noastre software, inclusiv toate depozitele de cod sursă din organizațiile noastre de pe GitHub.

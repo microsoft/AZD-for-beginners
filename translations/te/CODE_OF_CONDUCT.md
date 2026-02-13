@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "763a733399ea9f55f6418d1efe13c12b",
-  "translation_date": "2025-11-25T06:48:52+00:00",
-  "source_file": "CODE_OF_CONDUCT.md",
-  "language_code": "te"
-}
--->
 # మైక్రోసాఫ్ట్ ఓపెన్ సోర్స్ ప్రవర్తనా నియమావళి
 
 ఈ ప్రాజెక్ట్ [మైక్రోసాఫ్ట్ ఓపెన్ సోర్స్ ప్రవర్తనా నియమావళి](https://opensource.microsoft.com/codeofconduct/)ను అనుసరించింది.

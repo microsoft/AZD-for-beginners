@@ -1,38 +1,29 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-22T10:30:12+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "vi"
-}
--->
-# Ví dụ Triển khai Ứng dụng Container với AZD
+# Ví dụ Triển khai Container App với AZD
 
-Thư mục này chứa các ví dụ toàn diện về cách triển khai ứng dụng container lên Azure Container Apps bằng Azure Developer CLI (AZD). Các ví dụ này minh họa các mô hình thực tế, các phương pháp tốt nhất và cấu hình sẵn sàng cho sản xuất.
+Thư mục này chứa các ví dụ toàn diện để triển khai các ứng dụng đóng gói container lên Azure Container Apps bằng Azure Developer CLI (AZD). Các ví dụ này trình bày các mô hình thực tế, các thực hành tốt nhất và các cấu hình sẵn sàng cho sản xuất.
 
 ## 📚 Mục lục
 
-- [Tổng quan](../../../../examples/container-app)
-- [Yêu cầu trước](../../../../examples/container-app)
-- [Ví dụ Bắt đầu Nhanh](../../../../examples/container-app)
-- [Ví dụ Sản xuất](../../../../examples/container-app)
-- [Mô hình Nâng cao](../../../../examples/container-app)
-- [Phương pháp Tốt nhất](../../../../examples/container-app)
+- [Overview](../../../../examples/container-app)
+- [Prerequisites](../../../../examples/container-app)
+- [Quick Start Examples](../../../../examples/container-app)
+- [Production Examples](../../../../examples/container-app)
+- [Advanced Patterns](../../../../examples/container-app)
+- [Best Practices](../../../../examples/container-app)
 
-## Tổng quan
+## Overview
 
-Azure Container Apps là nền tảng container serverless được quản lý hoàn toàn, cho phép bạn chạy các microservices và ứng dụng container mà không cần quản lý hạ tầng. Khi kết hợp với AZD, bạn sẽ có:
+Azure Container Apps là một nền tảng container serverless được quản lý hoàn toàn cho phép bạn chạy các microservice và ứng dụng đóng gói container mà không cần quản lý hạ tầng. Khi kết hợp với AZD, bạn có được:
 
-- **Triển khai Đơn giản**: Lệnh duy nhất triển khai container cùng với hạ tầng
-- **Tự động Mở rộng**: Mở rộng từ 0 và mở rộng dựa trên lưu lượng HTTP hoặc sự kiện
-- **Kết nối Mạng Tích hợp**: Khám phá dịch vụ và phân chia lưu lượng được tích hợp sẵn
-- **Danh tính Quản lý**: Xác thực an toàn với tài nguyên Azure
-- **Tối ưu hóa Chi phí**: Chỉ trả tiền cho tài nguyên bạn sử dụng
+- **Triển khai đơn giản**: Một lệnh triển khai các container với hạ tầng
+- **Tự động mở rộng**: Mở rộng về 0 và mở rộng dựa trên lưu lượng HTTP hoặc sự kiện
+- **Mạng tích hợp**: Khám phá dịch vụ tích hợp sẵn và phân tách lưu lượng
+- **Managed Identity**: Xác thực an toàn tới các tài nguyên Azure
+- **Tối ưu hóa chi phí**: Chỉ trả cho các tài nguyên bạn sử dụng
 
-## Yêu cầu trước
+## Prerequisites
 
-Trước khi bắt đầu, hãy đảm bảo bạn có:
+Trước khi bắt đầu, đảm bảo bạn đã có:
 
 ```bash
 # Kiểm tra cài đặt AZD
@@ -41,7 +32,7 @@ azd version
 # Kiểm tra Azure CLI
 az version
 
-# Kiểm tra Docker (để xây dựng hình ảnh tùy chỉnh)
+# Kiểm tra Docker (để xây dựng ảnh tùy chỉnh)
 docker --version
 
 # Đăng nhập vào Azure
@@ -49,18 +40,18 @@ azd auth login
 az login
 ```
 
-**Tài nguyên Azure cần thiết:**
-- Đăng ký Azure đang hoạt động
-- Quyền tạo nhóm tài nguyên
-- Quyền truy cập môi trường Container Apps
+**Required Azure Resources:**
+- Active Azure subscription
+- Resource group creation permissions
+- Container Apps environment access
 
-## Ví dụ Bắt đầu Nhanh
+## Quick Start Examples
 
-### 1. API Web Đơn giản (Python Flask)
+### 1. Simple Web API (Python Flask)
 
 Triển khai một REST API cơ bản với Azure Container Apps.
 
-**Ví dụ: Python Flask API**
+**Example: Python Flask API**
 
 ```yaml
 # azure.yaml
@@ -74,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**Các bước triển khai:**
+**Deployment Steps:**
 
 ```bash
 # Khởi tạo từ mẫu
 azd init --template todo-python-mongo
 
-# Cung cấp cơ sở hạ tầng và triển khai
+# Cung cấp hạ tầng và triển khai
 azd up
 
 # Kiểm tra việc triển khai
@@ -88,13 +79,13 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Các tính năng chính:**
-- Tự động mở rộng từ 0 đến 10 bản sao
-- Kiểm tra sức khỏe và kiểm tra trạng thái sống
-- Tiêm biến môi trường
-- Tích hợp Application Insights
+**Key Features:**
+- Auto-scaling from 0 to 10 replicas
+- Health probes and liveness checks
+- Environment variable injection
+- Application Insights integration
 
-### 2. API Node.js Express
+### 2. Node.js Express API
 
 Triển khai backend Node.js với tích hợp MongoDB.
 
@@ -102,18 +93,18 @@ Triển khai backend Node.js với tích hợp MongoDB.
 # Khởi tạo mẫu API Node.js
 azd init --template todo-nodejs-mongo
 
-# Cấu hình các biến môi trường
+# Cấu hình biến môi trường
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
 # Triển khai
 azd up
 
-# Xem nhật ký
-azd logs api
+# Xem nhật ký qua Azure Monitor
+azd monitor --logs
 ```
 
-**Điểm nổi bật về hạ tầng:**
+**Infrastructure Highlights:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -156,15 +147,15 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Frontend Tĩnh + Backend API
+### 3. Static Frontend + API Backend
 
-Triển khai ứng dụng full-stack với React frontend và backend API.
+Triển khai một ứng dụng đầy đủ với frontend React và backend API.
 
 ```bash
 # Khởi tạo mẫu full-stack
 azd init --template todo-csharp-sql-swa-func
 
-# Xem xét cấu hình
+# Xem lại cấu hình
 cat azure.yaml
 
 # Triển khai cả hai dịch vụ
@@ -174,13 +165,13 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Ví dụ Sản xuất
+## Production Examples
 
-### Ví dụ 1: Kiến trúc Microservices
+### Example 1: Microservices Architecture
 
-**Kịch bản**: Ứng dụng thương mại điện tử với nhiều microservices
+**Scenario**: Ứng dụng thương mại điện tử với nhiều microservice
 
-**Cấu trúc thư mục:**
+**Directory Structure:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -200,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**Cấu hình azure.yaml:**
+**azure.yaml Configuration:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -220,7 +211,7 @@ services:
     host: containerapp
 ```
 
-**Triển khai:**
+**Deployment:**
 ```bash
 # Khởi tạo dự án
 azd init
@@ -228,21 +219,21 @@ azd init
 # Thiết lập môi trường sản xuất
 azd env new production
 
-# Cấu hình cài đặt sản xuất
+# Cấu hình các cài đặt cho môi trường sản xuất
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Triển khai tất cả các dịch vụ
+# Triển khai tất cả dịch vụ
 azd up
 
-# Giám sát triển khai
+# Giám sát việc triển khai
 azd monitor --overview
 ```
 
-### Ví dụ 2: Ứng dụng Container Tích hợp AI
+### Example 2: AI-Powered Container App
 
-**Kịch bản**: Ứng dụng chat AI với tích hợp Azure OpenAI
+**Scenario**: Ứng dụng chat AI với tích hợp Azure OpenAI
 
 **Tệp: src/ai-chat/app.py**
 ```python
@@ -329,7 +320,7 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Lệnh triển khai:**
+**Các lệnh triển khai:**
 ```bash
 # Thiết lập môi trường
 azd init --template ai-chat-app
@@ -348,9 +339,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Ví dụ 3: Worker Nền với Xử lý Hàng đợi
+### Example 3: Background Worker with Queue Processing
 
-**Kịch bản**: Hệ thống xử lý đơn hàng với hàng đợi tin nhắn
+**Scenario**: Hệ thống xử lý đơn hàng với hàng đợi tin nhắn
 
 **Cấu trúc thư mục:**
 ```
@@ -390,7 +381,7 @@ def process_orders():
             # Xử lý đơn hàng
             print(f"Processing order: {message.content}")
             
-            # Hoàn thành tin nhắn
+            # Thông điệp hoàn chỉnh
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -412,7 +403,7 @@ services:
     host: containerapp
 ```
 
-**Triển khai:**
+**Deployment:**
 ```bash
 # Khởi tạo
 azd init
@@ -420,7 +411,7 @@ azd init
 # Triển khai với cấu hình hàng đợi
 azd up
 
-# Tăng giảm công nhân dựa trên độ dài hàng đợi
+# Điều chỉnh quy mô worker dựa trên độ dài hàng đợi
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -429,18 +420,18 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Mô hình Nâng cao
+## Advanced Patterns
 
-### Mô hình 1: Triển khai Blue-Green
+### Pattern 1: Blue-Green Deployment
 
 ```bash
-# Tạo phiên bản mới mà không có lưu lượng truy cập
+# Tạo bản sửa đổi mới không có lưu lượng
 azd deploy api --revision-suffix blue --no-traffic
 
-# Kiểm tra phiên bản mới
+# Kiểm tra bản sửa đổi mới
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Chia lưu lượng truy cập (20% đến blue, 80% đến hiện tại)
+# Phân chia lưu lượng (20% đến blue, 80% đến current)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -453,7 +444,7 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Mô hình 2: Triển khai Canary với AZD
+### Pattern 2: Canary Deployment with AZD
 
 **Tệp: .azure/dev/config.json**
 ```json
@@ -467,7 +458,7 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Script triển khai:**
+**Deployment Script:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -475,7 +466,7 @@ az containerapp ingress traffic set \
 # Triển khai phiên bản mới với 10% lưu lượng
 azd deploy api --revision-mode multiple
 
-# Giám sát các chỉ số
+# Giám sát chỉ số
 azd monitor --service api --duration 5m
 
 # Tăng dần lưu lượng
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Mô hình 3: Triển khai Đa Vùng
+### Pattern 3: Multi-Region Deployment
 
 **Tệp: azure.yaml**
 ```yaml
@@ -536,16 +527,16 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Triển khai:**
+**Deployment:**
 ```bash
-# Triển khai đến tất cả các khu vực
+# Triển khai tới tất cả các vùng
 azd up
 
 # Xác minh các điểm cuối
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Mô hình 4: Tích hợp Dapr
+### Pattern 4: Dapr Integration
 
 **Tệp: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -599,9 +590,9 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Phương pháp Tốt nhất
+## Best Practices
 
-### 1. Tổ chức Tài nguyên
+### 1. Resource Organization
 
 ```bash
 # Sử dụng quy ước đặt tên nhất quán
@@ -612,7 +603,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Phương pháp Bảo mật Tốt nhất
+### 2. Security Best Practices
 
 ```bicep
 // Always use managed identity
@@ -651,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Tối ưu hóa Hiệu suất
+### 3. Performance Optimization
 
 ```yaml
 # azure.yaml with performance settings
@@ -671,17 +662,19 @@ services:
             concurrent: 100
 ```
 
-### 4. Giám sát và Quan sát
+### 4. Monitoring and Observability
 
 ```bash
 # Bật Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Xem nhật ký theo thời gian thực
-azd logs api --follow
+azd monitor --logs
+# Hoặc sử dụng Azure CLI cho Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Giám sát các chỉ số
-azd monitor --service api
+# Giám sát số liệu
+azd monitor --live
 
 # Tạo cảnh báo
 az monitor metrics alert create \
@@ -692,16 +685,16 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Tối ưu hóa Chi phí
+### 5. Cost Optimization
 
 ```bash
-# Thu nhỏ về không khi không sử dụng
+# Thu nhỏ về 0 khi không sử dụng
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Sử dụng các phiên bản spot cho môi trường phát triển
+# Sử dụng spot instances cho môi trường phát triển
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
 # Thiết lập cảnh báo ngân sách
@@ -712,7 +705,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. Tích hợp CI/CD
+### 6. CI/CD Integration
 
 **Ví dụ GitHub Actions:**
 ```yaml
@@ -744,26 +737,27 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Tham chiếu Lệnh Thông dụng
+## Common Commands Reference
 
 ```bash
 # Khởi tạo dự án ứng dụng container mới
 azd init --template <template-name>
 
-# Triển khai cơ sở hạ tầng và ứng dụng
+# Triển khai hạ tầng và ứng dụng
 azd up
 
-# Chỉ triển khai mã ứng dụng (bỏ qua cơ sở hạ tầng)
+# Chỉ triển khai mã ứng dụng (bỏ qua hạ tầng)
 azd deploy
 
-# Chỉ cung cấp cơ sở hạ tầng
+# Chỉ cung cấp hạ tầng
 azd provision
 
-# Xem tài nguyên đã triển khai
+# Xem các tài nguyên đã triển khai
 azd show
 
-# Truyền phát nhật ký
-azd logs <service-name> --follow
+# Xem nhật ký theo thời gian thực bằng azd monitor hoặc Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # Giám sát ứng dụng
 azd monitor --overview
@@ -772,15 +766,15 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Xử lý sự cố
+## Troubleshooting
 
 ### Vấn đề: Container không khởi động được
 
 ```bash
-# Kiểm tra nhật ký
-azd logs api --tail 100
+# Kiểm tra nhật ký bằng Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Xem sự kiện container
+# Xem các sự kiện của container
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -791,7 +785,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Vấn đề: Không thể truy cập endpoint ứng dụng container
+### Vấn đề: Không thể truy cập endpoint của ứng dụng container
 
 ```bash
 # Xác minh cấu hình ingress
@@ -807,7 +801,7 @@ az containerapp ingress update \
   --external true
 ```
 
-### Vấn đề: Vấn đề về hiệu suất
+### Vấn đề: Sự cố hiệu năng
 
 ```bash
 # Kiểm tra việc sử dụng tài nguyên
@@ -815,7 +809,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Tăng quy mô tài nguyên
+# Mở rộng tài nguyên
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -823,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Tài nguyên và Ví dụ Bổ sung
-- [Ví dụ Microservices](./microservices/README.md)
-- [Ví dụ Flash API Đơn giản](./simple-flask-api/README.md)
-- [Tài liệu Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Thư viện Mẫu AZD](https://azure.github.io/awesome-azd/)
-- [Mẫu Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Mẫu Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+## Tài nguyên và ví dụ bổ sung
+- [Microservices Example](./microservices/README.md)
+- [Simple Flash API Example](./simple-flask-api/README.md)
+- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
+- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Đóng góp
 
-Để đóng góp các ví dụ ứng dụng container mới:
+Để đóng góp các ví dụ container app mới:
 
 1. Tạo một thư mục con mới với ví dụ của bạn
-2. Bao gồm đầy đủ các tệp `azure.yaml`, `infra/`, và `src/`
-3. Thêm README chi tiết với hướng dẫn triển khai
+2. Bao gồm đầy đủ `azure.yaml`, `infra/`, và `src/` files
+3. Thêm README toàn diện với hướng dẫn triển khai
 4. Kiểm tra triển khai với `azd up`
 5. Gửi pull request
 
 ---
 
-**Cần hỗ trợ?** Tham gia cộng đồng [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) để được hỗ trợ và đặt câu hỏi.
+**Cần trợ giúp?** Tham gia cộng đồng [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) để được hỗ trợ và đặt câu hỏi.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn thông tin có thẩm quyền. Đối với những thông tin quan trọng, nên sử dụng bản dịch do người dịch chuyên nghiệp thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,34 +1,25 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-22T10:45:21+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "ms"
-}
--->
-# API Flask Mudah - Contoh Aplikasi Kontena
+# Simple Flask API - Contoh Aplikasi Kontena
 
 **Laluan Pembelajaran:** Pemula ⭐ | **Masa:** 25-35 minit | **Kos:** $0-15/bulan
 
-API REST Python Flask yang lengkap dan berfungsi, diterapkan ke Azure Container Apps menggunakan Azure Developer CLI (azd). Contoh ini menunjukkan penerapan kontena, penskalaan automatik, dan asas pemantauan.
+Satu API REST Python Flask yang lengkap dan berfungsi telah dideploy ke Azure Container Apps menggunakan Azure Developer CLI (azd). Contoh ini menunjukkan asas penyebaran kontena, penskalaan auto, dan pemantauan.
 
-## 🎯 Apa Yang Anda Akan Pelajari
+## 🎯 Apa Yang Akan Anda Pelajari
 
-- Menerapkan aplikasi Python yang dikontena ke Azure
-- Mengkonfigurasi penskalaan automatik dengan penskalaan-ke-sifar
-- Melaksanakan probe kesihatan dan pemeriksaan kesediaan
-- Memantau log aplikasi dan metrik
-- Menggunakan Azure Developer CLI untuk penerapan pantas
+- Menyebarkan aplikasi Python yang dikontena ke Azure  
+- Mengkonfigurasi penskalaan auto dengan skala-ke-nol  
+- Melaksanakan probe kesihatan dan pemeriksaan kesediaan  
+- Memantau log dan metrik aplikasi  
+- Menggunakan Azure Developer CLI untuk penyebaran cepat
 
-## 📦 Apa Yang Disertakan
+## 📦 Apa Yang Termasuk
 
-✅ **Aplikasi Flask** - API REST lengkap dengan operasi CRUD (`src/app.py`)  
-✅ **Dockerfile** - Konfigurasi kontena siap produksi  
-✅ **Infrastruktur Bicep** - Persekitaran Container Apps dan penerapan API  
-✅ **Konfigurasi AZD** - Persediaan penerapan dengan satu perintah  
-✅ **Probe Kesihatan** - Pemeriksaan liveness dan kesediaan dikonfigurasi  
-✅ **Penskalaan Automatik** - 0-10 replika berdasarkan beban HTTP  
+✅ **Aplikasi Flask** - REST API lengkap dengan operasi CRUD (`src/app.py`)  
+✅ **Dockerfile** - Konfigurasi kontena sedia produksi  
+✅ **Infrastruktur Bicep** - Persekitaran Container Apps dan penyebaran API  
+✅ **Konfigurasi AZD** - Satu arahan untuk penyediaan penyebaran  
+✅ **Probe Kesihatan** - Pemeriksaan liveness dan readiness telah disediakan  
+✅ **Penskalaan Auto** - 0-10 replika berdasarkan beban HTTP  
 
 ## Seni Bina
 
@@ -57,27 +48,27 @@ API REST Python Flask yang lengkap dan berfungsi, diterapkan ke Azure Container 
 ### Sahkan Prasyarat
 
 ```bash
-# Periksa versi azd (perlu 1.5.0 atau lebih tinggi)
+# Semak versi azd (perlu 1.5.0 atau lebih tinggi)
 azd version
 
 # Sahkan log masuk Azure
 azd auth login
 
-# Periksa Docker (pilihan, untuk ujian tempatan)
+# Semak Docker (pilihan, untuk ujian tempatan)
 docker --version
 ```
 
-## ⏱️ Garis Masa Penerapan
+## ⏱️ Garis Masa Penyebaran
 
 | Fasa | Tempoh | Apa Yang Berlaku |
-|------|--------|------------------|
-| Persediaan persekitaran | 30 saat | Buat persekitaran azd |
-| Bina kontena | 2-3 minit | Docker membina aplikasi Flask |
-| Penyediaan infrastruktur | 3-5 minit | Buat Container Apps, registry, pemantauan |
-| Terapkan aplikasi | 2-3 minit | Tolak imej dan terapkan ke Container Apps |
-| **Jumlah** | **8-12 minit** | Penerapan lengkap siap |
+|-------|----------|--------------||
+| Penyediaan persekitaran | 30 saat | Membuat persekitaran azd |
+| Bina kontena | 2-3 minit | Docker bina aplikasi Flask |
+| Sediakan infrastruktur | 3-5 minit | Membuat Container Apps, registry, pemantauan |
+| Sebarkan aplikasi | 2-3 minit | Tekan imej dan sebar ke Container Apps |
+| **Jumlah** | **8-12 minit** | Penyebaran lengkap sedia |
 
-## Permulaan Pantas
+## Mula Pantas
 
 ```bash
 # Navigasi ke contoh
@@ -86,12 +77,12 @@ cd examples/container-app/simple-flask-api
 # Inisialisasi persekitaran (pilih nama unik)
 azd env new myflaskapi
 
-# Sebarkan semuanya (infrastruktur + aplikasi)
+# Terapkan semuanya (infrastruktur + aplikasi)
 azd up
 # Anda akan diminta untuk:
 # 1. Pilih langganan Azure
-# 2. Pilih lokasi (contohnya, eastus2)
-# 3. Tunggu 8-12 minit untuk penyebaran
+# 2. Pilih lokasi (contoh, eastus2)
+# 3. Tunggu 8-12 minit untuk penerapan
 
 # Dapatkan titik akhir API anda
 azd env get-values
@@ -110,18 +101,18 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Sahkan Penerapan
+## ✅ Sahkan Penyebaran
 
-### Langkah 1: Periksa Status Penerapan
+### Langkah 1: Semak Status Penyebaran
 
 ```bash
-# Lihat perkhidmatan yang dideploy
+# Lihat perkhidmatan yang telah disebarkan
 azd show
 
 # Output yang dijangka menunjukkan:
 # - Perkhidmatan: api
-# - Titik Akhir: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Status: Berjalan
+# - Titik hujung: https://ca-api-[env].xxx.azurecontainerapps.io
+# - Status: Sedang Berjalan
 ```
 
 ### Langkah 2: Uji Endpoint API
@@ -130,13 +121,13 @@ azd show
 # Dapatkan titik akhir API
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Uji kesihatan
+# Ujian kesihatan
 curl $API_URL/health
 
-# Uji titik akhir root
+# Ujian titik akhir akar
 curl $API_URL/
 
-# Cipta item
+# Buat satu item
 curl -X POST $API_URL/api/items \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Item", "description": "My first item"}'
@@ -146,16 +137,19 @@ curl $API_URL/api/items
 ```
 
 **Kriteria Kejayaan:**
-- ✅ Endpoint kesihatan mengembalikan HTTP 200
-- ✅ Endpoint root menunjukkan maklumat API
-- ✅ POST mencipta item dan mengembalikan HTTP 201
-- ✅ GET mengembalikan item yang dicipta
+- ✅ Endpoint kesihatan pulangkan HTTP 200  
+- ✅ Endpoint root tunjuk maklumat API  
+- ✅ POST buat item dan pulangkan HTTP 201  
+- ✅ GET pulangkan item yang dibuat
 
 ### Langkah 3: Lihat Log
 
 ```bash
-# Strim log langsung
-azd logs api --follow
+# Alirkan log secara langsung menggunakan azd monitor
+azd monitor --logs
+
+# Atau gunakan Azure CLI:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Anda sepatutnya melihat:
 # - Mesej permulaan Gunicorn
@@ -183,10 +177,10 @@ simple-flask-api/
 ## Endpoint API
 
 | Endpoint | Kaedah | Penerangan |
-|----------|--------|-----------|
+|----------|--------|-------------|
 | `/health` | GET | Pemeriksaan kesihatan |
 | `/api/items` | GET | Senaraikan semua item |
-| `/api/items` | POST | Cipta item baharu |
+| `/api/items` | POST | Buat item baru |
 | `/api/items/{id}` | GET | Dapatkan item tertentu |
 | `/api/items/{id}` | PUT | Kemas kini item |
 | `/api/items/{id}` | DELETE | Padam item |
@@ -204,10 +198,10 @@ azd env set MAX_REPLICAS 20
 
 ### Konfigurasi Penskalaan
 
-API secara automatik menskalakan berdasarkan trafik HTTP:
-- **Replika Minimum**: 0 (menskalakan ke sifar apabila tidak aktif)
-- **Replika Maksimum**: 10
-- **Permintaan Serentak per Replika**: 50
+API secara automatik menyesuaikan skala berdasarkan trafik HTTP:  
+- **Replika Minimum**: 0 (skala ke sifar apabila menganggur)  
+- **Replika Maksimum**: 10  
+- **Permintaan Serentak per Replika**: 50  
 
 ## Pembangunan
 
@@ -221,7 +215,7 @@ pip install -r requirements.txt
 # Jalankan aplikasi
 python app.py
 
-# Uji secara tempatan
+# Uji secara setempat
 curl http://localhost:8000/health
 ```
 
@@ -231,36 +225,36 @@ curl http://localhost:8000/health
 # Bina imej Docker
 docker build -t flask-api:local ./src
 
-# Jalankan kontena secara tempatan
+# Jalankan bekas secara tempatan
 docker run -p 8000:8000 flask-api:local
 
-# Uji kontena
+# Uji bekas
 curl http://localhost:8000/health
 ```
 
-## Penerapan
+## Penyebaran
 
-### Penerapan Penuh
+### Penyebaran Penuh
 
 ```bash
-# Sebarkan infrastruktur dan aplikasi
+# Sediakan infrastruktur dan aplikasi
 azd up
 ```
 
-### Penerapan Kod Sahaja
+### Penyebaran Hanya Kod
 
 ```bash
-# Sebarkan hanya kod aplikasi (infrastruktur tidak berubah)
+# Hanya gunakan kod aplikasi sahaja (infrastruktur tidak berubah)
 azd deploy api
 ```
 
 ### Kemas Kini Konfigurasi
 
 ```bash
-# Kemas kini pembolehubah persekitaran
+# Kemas kini pemboleh ubah persekitaran
 azd env set API_KEY "new-api-key"
 
-# Lakukan penyebaran semula dengan konfigurasi baharu
+# Pasang semula dengan konfigurasi baru
 azd deploy api
 ```
 
@@ -269,11 +263,14 @@ azd deploy api
 ### Lihat Log
 
 ```bash
-# Strim log secara langsung
-azd logs api --follow
+# Alirkan log langsung menggunakan azd monitor
+azd monitor --logs
+
+# Atau gunakan Azure CLI untuk Container Apps:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Lihat 100 baris terakhir
-azd logs api --tail 100
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
 ### Pantau Metrik
@@ -304,7 +301,7 @@ Respons dijangka:
 }
 ```
 
-### Cipta Item
+### Buat Item
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -320,16 +317,16 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Pengoptimuman Kos
 
-Penerapan ini menggunakan penskalaan-ke-sifar, jadi anda hanya membayar apabila API memproses permintaan:
+Penyebaran ini menggunakan skala-ke-nol, jadi anda hanya membayar apabila API memproses permintaan:
 
-- **Kos tidak aktif**: ~$0/bulan (menskalakan ke sifar)
-- **Kos aktif**: ~$0.000024/saat per replika
-- **Kos bulanan dijangka** (penggunaan ringan): $5-15
+- **Kos menganggur**: ~ $0/bulan (diskala ke sifar)  
+- **Kos aktif**: ~ $0.000024/saat setiap replika  
+- **Kos bulanan dijangka** (penggunaan ringan): $5-15  
 
 ### Kurangkan Kos Lagi
 
 ```bash
-# Kurangkan maksimum replika untuk dev
+# Kurangkan skala maksimum replika untuk pembangunan
 azd env set MAX_REPLICAS 3
 
 # Gunakan masa tamat tidak aktif yang lebih pendek
@@ -338,17 +335,17 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minit
 
 ## Penyelesaian Masalah
 
-### Kontena Tidak Bermula
+### Kontena Tidak Mula
 
 ```bash
-# Periksa log kontena
-azd logs api --tail 100
+# Semak log kontena menggunakan Azure CLI
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
 # Sahkan binaan imej Docker secara tempatan
 docker build -t test ./src
 ```
 
-### API Tidak Dapat Diakses
+### API Tidak Boleh Diakses
 
 ```bash
 # Sahkan ingress adalah luaran
@@ -359,20 +356,20 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
 ### Masa Respons Tinggi
 
 ```bash
-# Periksa penggunaan CPU/Memori
+# Semak penggunaan CPU/Memori
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Tingkatkan sumber jika diperlukan
+# Tingkatkan sumber jika perlu
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Pembersihan
+## Bersihkan
 
 ```bash
-# Padam semua sumber
+# Padamkan semua sumber daya
 azd down --force --purge
 ```
 
@@ -380,26 +377,26 @@ azd down --force --purge
 
 ### Kembangkan Contoh Ini
 
-1. **Tambah Pangkalan Data** - Integrasi Azure Cosmos DB atau SQL Database
+1. **Tambah Pangkalan Data** - Integrasi Azure Cosmos DB atau SQL Database  
    ```bash
    # Tambah modul Cosmos DB ke infra/main.bicep
    # Kemas kini app.py dengan sambungan pangkalan data
    ```
 
-2. **Tambah Pengesahan** - Laksanakan Azure AD atau kunci API
+2. **Tambah Pengesahan** - Laksanakan Azure AD atau kunci API  
    ```python
    # Tambah middleware pengesahan ke app.py
    from functools import wraps
    ```
 
-3. **Tetapkan CI/CD** - Alur kerja GitHub Actions
+3. **Sediakan CI/CD** - Aliran kerja GitHub Actions  
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Tambah Identiti Terurus** - Akses selamat ke perkhidmatan Azure
+4. **Tambah Identiti Terurus** - Akses selamat kepada perkhidmatan Azure  
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -407,41 +404,41 @@ azd down --force --purge
 
 ### Contoh Berkaitan
 
-- **[Aplikasi Pangkalan Data](../../../../../examples/database-app)** - Contoh lengkap dengan SQL Database
-- **[Mikroservis](../../../../../examples/container-app/microservices)** - Seni bina pelbagai perkhidmatan
+- **[Aplikasi Pangkalan Data](../../../../../examples/database-app)** - Contoh lengkap dengan SQL Database  
+- **[Mikroservis](../../../../../examples/container-app/microservices)** - Seni bina pelbagai perkhidmatan  
 - **[Panduan Utama Container Apps](../README.md)** - Semua corak kontena
 
 ### Sumber Pembelajaran
 
-- 📚 [Kursus AZD Untuk Pemula](../../../README.md) - Halaman utama kursus
-- 📚 [Corak Container Apps](../README.md) - Lebih banyak corak penerapan
+- 📚 [Kursus AZD Untuk Pemula](../../../README.md) - Rumah kursus utama  
+- 📚 [Corak Container Apps](../README.md) - Lebih banyak corak penyebaran  
 - 📚 [Galeri Templat AZD](https://azure.github.io/awesome-azd/) - Templat komuniti
 
 ## Sumber Tambahan
 
 ### Dokumentasi
-- **[Dokumentasi Flask](https://flask.palletsprojects.com/)** - Panduan rangka kerja Flask
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Dokumentasi rasmi Azure
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Rujukan perintah azd
+- **[Dokumentasi Flask](https://flask.palletsprojects.com/)** - Panduan rangka kerja Flask  
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Dokumen rasmi Azure  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Rujukan arahan azd
 
 ### Tutorial
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Terapkan aplikasi pertama anda
-- **[Python di Azure](https://learn.microsoft.com/azure/developer/python/)** - Panduan pembangunan Python
+- **[Permulaan Pantas Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Sebarkan aplikasi pertama anda  
+- **[Python di Azure](https://learn.microsoft.com/azure/developer/python/)** - Panduan pembangunan Python  
 - **[Bahasa Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktur sebagai kod
 
 ### Alat
-- **[Azure Portal](https://portal.azure.com)** - Urus sumber secara visual
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integrasi IDE
+- **[Portal Azure](https://portal.azure.com)** - Urus sumber secara visual  
+- **[Sambungan VS Code Azure](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integrasi IDE
 
 ---
 
-**🎉 Tahniah!** Anda telah menerapkan API Flask siap produksi ke Azure Container Apps dengan penskalaan automatik dan pemantauan.
+**🎉 Tahniah!** Anda telah menyebarkan API Flask yang sedia produksi ke Azure Container Apps dengan penskalaan auto dan pemantauan.
 
 **Ada soalan?** [Buka isu](https://github.com/microsoft/AZD-for-beginners/issues) atau semak [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

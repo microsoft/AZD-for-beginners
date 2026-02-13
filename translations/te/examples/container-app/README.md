@@ -1,64 +1,55 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-25T07:06:14+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "te"
-}
--->
-# AZD తో కంటైనర్ యాప్ డిప్లాయ్‌మెంట్ ఉదాహరణలు
+# AZDతో కంటైనర్ యాప్ అమలు ఉదాహరణలు
 
-ఈ డైరెక్టరీలో Azure Developer CLI (AZD) ఉపయోగించి Azure Container Apps కు కంటైనర్ యాప్‌లను డిప్లాయ్ చేయడానికి సమగ్ర ఉదాహరణలు ఉన్నాయి. ఈ ఉదాహరణలు వాస్తవ ప్రపంచ నమూనాలు, ఉత్తమ పద్ధతులు, మరియు ప్రొడక్షన్-రెడీ కాన్ఫిగరేషన్లను చూపిస్తాయి.
+ఈ డైరెక్టరీలో Azure Developer CLI (AZD) ఉపయోగించి Azure Container Apps కు కంటైనర్‌షైజ్డ్ అప్లికేషన్లను అమలు చేయడానికి సమగ్ర ఉదాహరణలు ఉన్నాయి. ఈ ఉదాహరణలు వాస్తవ ప్రపంచ నమూనాలు, ఉత్తమ పద్ధతులు మరియు ప్రొడక్షన్-రెడి కాన్ఫిగరేషన్‌లను చూపిస్తాయి.
 
-## 📚 విషయ సూచిక
+## 📚 Table of Contents
 
-- [అవలోకనం](../../../../examples/container-app)
-- [ముందస్తు అవసరాలు](../../../../examples/container-app)
-- [త్వరిత ప్రారంభ ఉదాహరణలు](../../../../examples/container-app)
-- [ప్రొడక్షన్ ఉదాహరణలు](../../../../examples/container-app)
-- [అధునాతన నమూనాలు](../../../../examples/container-app)
-- [ఉత్తమ పద్ధతులు](../../../../examples/container-app)
+- [Overview](../../../../examples/container-app)
+- [Prerequisites](../../../../examples/container-app)
+- [Quick Start Examples](../../../../examples/container-app)
+- [Production Examples](../../../../examples/container-app)
+- [Advanced Patterns](../../../../examples/container-app)
+- [Best Practices](../../../../examples/container-app)
 
-## అవలోకనం
+## Overview
 
-Azure Container Apps అనేది పూర్తిగా నిర్వహించబడే సర్వర్‌లెస్ కంటైనర్ ప్లాట్‌ఫారమ్, ఇది మైక్రోసర్వీసులు మరియు కంటైనర్ యాప్‌లను ఇన్‌ఫ్రాస్ట్రక్చర్‌ను నిర్వహించకుండా నడపడానికి అనుమతిస్తుంది. AZD తో కలిపి, మీరు పొందగలిగేది:
+Azure Container Apps ఒక పూర్తిగా నిర్వహించబడే సర్వర్‌లెస్ కంటైనర్ ప్లాట్‌ఫారమ్ ఇది మైక్రోసర్వీసులు మరియు కంటైనరైజ్డ్ అప్లికేషన్లను ఇన్‌ఫ్రాస్ట్రక్చర్ నిర్వహణ లేకుండా నడిపించడానికి అనుమతిస్తుంది. AZDతో కలిపితే, మీరు పొందుతారు:
 
-- **సులభమైన డిప్లాయ్‌మెంట్**: ఒకే ఆదేశంతో కంటైనర్‌లు మరియు ఇన్‌ఫ్రాస్ట్రక్చర్‌ను డిప్లాయ్ చేయడం
-- **ఆటోమేటిక్ స్కేలింగ్**: HTTP ట్రాఫిక్ లేదా ఈవెంట్ల ఆధారంగా జీరో నుండి స్కేల్ అవుట్ చేయడం
-- **ఇంటిగ్రేటెడ్ నెట్‌వర్కింగ్**: బిల్ట్-ఇన్ సర్వీస్ డిస్కవరీ మరియు ట్రాఫిక్ స్ప్లిటింగ్
-- **మ్యానేజ్డ్ ఐడెంటిటీ**: Azure వనరులకు సురక్షిత ధృవీకరణ
+- **సరళీకృత అమలు**: ఇన్‌ఫ్రాస్ట్రక్చర్‌తో కూడిన కంటైనర్లను ఒక కమాండ్‌తో అమలు చేయండి
+- **స్వయంచాలక స్కేలింగ్**: HTTP ట్రాఫిక్ లేదా ఈవెంట్స్ ఆధారంగా జీరో నుంచి స్కేలు అవుట్ వరకు
+- **ఇన్‌గ్రేటెడ్ నెట్‌వర్కింగ్**: బిల్ట్-ఇన్ సర్వీస్ డిస్కవరీ మరియు ట్రాఫిక్ స్ప్లిటింగ్
+- **నిర్వహిత ఐడెంటిటీ**: Azure వనరులకు సురక్షిత ప్రమాణీకరణ
 - **ఖర్చు ఆప్టిమైజేషన్**: మీరు ఉపయోగించే వనరులకు మాత్రమే చెల్లించండి
 
-## ముందస్తు అవసరాలు
+## Prerequisites
 
-ప్రారంభించడానికి ముందు, మీ వద్ద ఉండాలి:
+ప్రారంభించడానికి ముందు, మీరు కలిగి ఉండాల్సింది:
 
 ```bash
 # AZD ఇన్‌స్టాలేషన్‌ను తనిఖీ చేయండి
 azd version
 
-# Azure CLI ను తనిఖీ చేయండి
+# Azure CLIని తనిఖీ చేయండి
 az version
 
-# Docker ను తనిఖీ చేయండి (కస్టమ్ ఇమేజ్‌లను నిర్మించడానికి)
+# Dockerని తనిఖీ చేయండి (కస్టమ్ ఇమేజ్‌లు నిర్మించడానికి)
 docker --version
 
-# Azure లో లాగిన్ అవ్వండి
+# Azureలో లాగిన్ అవ్వండి
 azd auth login
 az login
 ```
 
 **అవసరమైన Azure వనరులు:**
-- యాక్టివ్ Azure సబ్‌స్క్రిప్షన్
-- రిసోర్స్ గ్రూప్ క్రియేషన్ అనుమతులు
-- కంటైనర్ యాప్‌ల వాతావరణ యాక్సెస్
+- సక్రియ Azure subscription
+- Resource group సృష్టించడానికి అనుమతులు
+- Container Apps ఎన్విరాన్మెంట్ యాక్సెస్
 
-## త్వరిత ప్రారంభ ఉదాహరణలు
+## Quick Start Examples
 
-### 1. సింపుల్ వెబ్ API (Python Flask)
+### 1. సాదారణ వెబ్ API (Python Flask)
 
-Azure Container Apps తో ఒక బేసిక్ REST API ని డిప్లాయ్ చేయండి.
+Azure Container Apps ఉపయోగించి ఒక ప్రాథమిక REST APIని అమలు చేయండి.
 
 **ఉదాహరణ: Python Flask API**
 
@@ -74,46 +65,46 @@ services:
     host: containerapp
 ```
 
-**డిప్లాయ్‌మెంట్ స్టెప్స్:**
+**డిప్లాయ్‌మెంట్ దశలు:**
 
 ```bash
 # టెంప్లేట్ నుండి ప్రారంభించండి
 azd init --template todo-python-mongo
 
-# మౌలిక సదుపాయాలను అందించండి మరియు మోహరించండి
+# మౌలిక సదుపాయాలను ఏర్పాటు చేసి, వాటిని డిప్లాయ్ చేయండి
 azd up
 
-# మోహరింపును పరీక్షించండి
+# డిప్లాయ్‌మెంట్‌ను పరీక్షించండి
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**ముఖ్యమైన ఫీచర్లు:**
-- 0 నుండి 10 రిప్లికాల వరకు ఆటో-స్కేలింగ్
-- హెల్త్ ప్రోబ్స్ మరియు లైవ్‌నెస్ చెక్‌లు
-- ఎన్విరాన్‌మెంట్ వేరియబుల్ ఇంజెక్షన్
-- అప్లికేషన్ ఇన్‌సైట్స్ ఇంటిగ్రేషన్
+**ప్రధాన ఫీచర్లు:**
+- 0 నుండి 10 రిప్లికాలకు ఆటో-స్కేలింగ్
+- హెల్త్ ప్రోబ్స్ మరియు లైవ్‌నెస్ తనిఖీలు
+- ఎన్విరాన్‌మెంట్ వేరియబుల్‌ల ఇంజెక్షన్
+- Application Insights ఇంటిగ్రేషన్
 
 ### 2. Node.js Express API
 
-MongoDB ఇంటిగ్రేషన్‌తో Node.js బ్యాక్‌ఎండ్‌ను డిప్లాయ్ చేయండి.
+MongoDB అనుసంధానంతో Node.js బ్యాక్‌ఎండ్‌ను అమలు చేయండి.
 
 ```bash
-# Node.js API టెంప్లేట్ ప్రారంభించండి
+# Node.js API టెంప్లేట్‌ను ప్రారంభించండి
 azd init --template todo-nodejs-mongo
 
-# పర్యావరణ వేరియబుల్స్‌ను ఆకృతీకరించండి
+# పర్యావరణ వేరియబుల్‌లను కాన్ఫిగర్ చేయండి
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# మోహరించండి
+# డిప్లాయ్ చేయండి
 azd up
 
-# లాగ్‌లను వీక్షించండి
-azd logs api
+# Azure Monitor ద్వారా లాగ్‌లను వీక్షించండి
+azd monitor --logs
 ```
 
-**ఇన్‌ఫ్రాస్ట్రక్చర్ హైలైట్స్:**
+**ఇన్‌ఫ్రాస్ట్రక్చర్ ముఖ్యాంశాలు:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -156,31 +147,31 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. స్టాటిక్ ఫ్రంట్‌ఎండ్ + API బ్యాక్‌ఎండ్
+### 3. స్టాటిక్ ఫ్రంటెండ్ + API బ్యాక్‌ఎండ్
 
-React ఫ్రంట్‌ఎండ్ మరియు API బ్యాక్‌ఎండ్‌తో పూర్తి-స్టాక్ అప్లికేషన్‌ను డిప్లాయ్ చేయండి.
+React ఫ్రంటెండ్ మరియు API బ్యాక్‌ఎండ్‌తో ఫుల్-స్టాక్ అప్లికేషన్‌ను అమలు చేయండి.
 
 ```bash
-# పూర్తి-స్టాక్ టెంప్లేట్ ప్రారంభించండి
+# ఫుల్-స్టాక్ టెంప్లేట్‌ను ప్రారంభించండి
 azd init --template todo-csharp-sql-swa-func
 
-# కాన్ఫిగరేషన్ సమీక్షించండి
+# కాన్ఫిగరేషన్‌ను సమీక్షించండి
 cat azure.yaml
 
-# రెండు సేవలను డిప్లాయ్ చేయండి
+# రెండు సేవలను అమలు చేయండి
 azd up
 
-# అప్లికేషన్ తెరవండి
+# అప్లికేషన్‌ను తెరవండి
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## ప్రొడక్షన్ ఉదాహరణలు
+## Production Examples
 
-### ఉదాహరణ 1: మైక్రోసర్వీసెస్ ఆర్కిటెక్చర్
+### Example 1: Microservices Architecture
 
-**సన్నివేశం**: మల్టిపుల్ మైక్రోసర్వీసులతో ఈ-కామర్స్ అప్లికేషన్
+**సన్నివేశం**: బహుముఖ మైక్రోసర్వీసులుతో కూడిన E-commerce అప్లికేషన్
 
-**డైరెక్టరీ స్ట్రక్చర్:**
+**డైరెక్టరీ నిర్మాణం:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -222,27 +213,27 @@ services:
 
 **డిప్లాయ్‌మెంట్:**
 ```bash
-# ప్రాజెక్ట్ ప్రారంభించండి
+# ప్రాజెక్ట్‌ను ప్రారంభించండి
 azd init
 
-# ఉత్పత్తి వాతావరణాన్ని సెట్ చేయండి
+# ప్రొడక్షన్ వాతావరణాన్ని సెట్ చేయండి
 azd env new production
 
-# ఉత్పత్తి సెట్టింగులను ఆకృతీకరించండి
+# ప్రొడక్షన్ సెట్టింగులను కాన్ఫిగర్ చేయండి
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# అన్ని సేవలను మోహరించండి
+# అన్ని సేవలను డిప్లాయ్ చేయండి
 azd up
 
-# మోహరింపును పర్యవేక్షించండి
+# డిప్లాయ్‌మెంట్‌ను పర్యవేక్షించండి
 azd monitor --overview
 ```
 
-### ఉదాహరణ 2: AI-పవర్డ్ కంటైనర్ యాప్
+### Example 2: AI-Powered Container App
 
-**సన్నివేశం**: Azure OpenAI ఇంటిగ్రేషన్‌తో AI చాట్ అప్లికేషన్
+**సన్నివేశం**: Azure OpenAI అనుసంధానంతో AI చాట్ అప్లికేషన్
 
 **ఫైల్: src/ai-chat/app.py**
 ```python
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# సురక్షితమైన ప్రాప్యత కోసం మేనేజ్డ్ ఐడెంటిటీని ఉపయోగించండి
+# సురక్షిత యాక్సెస్ కోసం Managed Identityను ఉపయోగించండి
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -262,7 +253,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # కీ వాల్ట్ నుండి OpenAI కీని పొందండి
+    # Key Vault నుండి OpenAI కీని పొందండి
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -329,30 +320,30 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**డిప్లాయ్‌మెంట్ ఆదేశాలు:**
+**డిప్లాయ్‌మెంట్ కమాండ్లు:**
 ```bash
-# పరిసరాలను ఏర్పాటు చేయండి
+# పరిసరాన్ని సెట్ చేయండి
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAI ను ఆకృతీకరించండి
+# OpenAIని కాన్ఫిగర్ చేయండి
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
-# మోహరించండి
+# డిప్లాయ్ చేయండి
 azd up
 
-# API ను పరీక్షించండి
+# APIని పరీక్షించండి
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### ఉదాహరణ 3: బ్యాక్‌గ్రౌండ్ వర్కర్ క్యూయూ ప్రాసెసింగ్‌తో
+### Example 3: Background Worker with Queue Processing
 
-**సన్నివేశం**: మెసేజ్ క్యూయుతో ఆర్డర్ ప్రాసెసింగ్ సిస్టమ్
+**సన్నివేశం**: మెసేజ్ క్యూ తో ఆర్డర్ ప్రాసెసింగ్ సిస్టమ్
 
-**డైరెక్టరీ స్ట్రక్చర్:**
+**డైరెక్టరీ నిర్మాణం:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -417,10 +408,10 @@ services:
 # ప్రారంభించండి
 azd init
 
-# క్యూలో కాన్ఫిగరేషన్‌తో పంపిణీ చేయండి
+# క్యూలు కాన్ఫిగరేషన్‌తో అమర్చండి
 azd up
 
-# క్యూలో పొడవు ఆధారంగా వర్కర్‌ను స్కేల్ చేయండి
+# క్యూలు పొడవు ఆధారంగా వర్కర్‌ను స్కేల్ చేయండి
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -429,31 +420,31 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## అధునాతన నమూనాలు
+## Advanced Patterns
 
-### నమూనా 1: బ్లూ-గ్రీన్ డిప్లాయ్‌మెంట్
+### Pattern 1: బ్లూ-గ్రీన్ డిప్లాయ్‌మెంట్
 
 ```bash
-# ట్రాఫిక్ లేకుండా కొత్త రివిజన్ సృష్టించండి
+# ట్రాఫిక్ లేకుండా కొత్త రివిజన్‌ను సృష్టించండి
 azd deploy api --revision-suffix blue --no-traffic
 
 # కొత్త రివిజన్‌ను పరీక్షించండి
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# ట్రాఫిక్‌ను విభజించండి (20% బ్లూ, 80% ప్రస్తుతానికి)
+# ట్రాఫిక్‌ను విభజించండి (బ్లూకు 20%, ప్రస్తుతానికి 80%)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# పూర్తిగా బ్లూ కు మారండి
+# పూర్తిగా బ్లూకి మార్చండి
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### నమూనా 2: AZD తో కానరీ డిప్లాయ్‌మెంట్
+### Pattern 2: AZDతో కనరీ డిప్లాయ్‌మెంట్
 
 **ఫైల్: .azure/dev/config.json**
 ```json
@@ -475,10 +466,10 @@ az containerapp ingress traffic set \
 # కొత్త రివిజన్‌ను 10% ట్రాఫిక్‌తో డిప్లాయ్ చేయండి
 azd deploy api --revision-mode multiple
 
-# మెట్రిక్స్‌ను మానిటర్ చేయండి
+# మెట్రిక్స్‌ను పర్యవేక్షించండి
 azd monitor --service api --duration 5m
 
-# ట్రాఫిక్‌ను క్రమంగా పెంచండి
+# ట్రాఫిక్‌ను మెల్లగా పెంచండి
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### నమూనా 3: మల్టీ-రీజియన్ డిప్లాయ్‌మెంట్
+### Pattern 3: బహు-రిజియన్ డిప్లాయ్‌మెంట్
 
 **ఫైల్: azure.yaml**
 ```yaml
@@ -538,14 +529,14 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **డిప్లాయ్‌మెంట్:**
 ```bash
-# అన్ని ప్రాంతాలకు మోహరించండి
+# అన్ని ప్రాంతాలలో అమర్చండి
 azd up
 
-# ఎండ్‌పాయింట్లను ధృవీకరించండి
+# ఎండ్‌పాయింట్లను నిర్ధారించండి
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### నమూనా 4: Dapr ఇంటిగ్రేషన్
+### Pattern 4: Dapr ఇంటిగ్రేషన్
 
 **ఫైల్: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -572,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Dapr తో అప్లికేషన్ కోడ్:**
+**Daprతో అప్లికేషన్ కోడ్:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -582,14 +573,14 @@ app = Flask(__name__)
 @app.route('/orders', methods=['POST'])
 def create_order():
     with DaprClient() as client:
-        # స్థితిని సేవ్ చేయండి
+        # స్థితిని నిల్వ చేయండి
         client.save_state(
             store_name='statestore',
             key='order-123',
             value={'status': 'pending'}
         )
         
-        # ఈవెంట్‌ను ప్రచురించండి
+        # సంఘటనను ప్రచురించండి
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -599,20 +590,20 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## ఉత్తమ పద్ధతులు
+## Best Practices
 
-### 1. వనరుల ఆర్గనైజేషన్
+### 1. వనరు ఆర్గనైజేషన్
 
 ```bash
-# స్థిరమైన పేరు పెట్టే నియమాలను ఉపయోగించండి
+# సమానమైన పేరుల నియమావళులను ఉపయోగించండి
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# ఖర్చు ట్రాకింగ్ కోసం వనరులను ట్యాగ్ చేయండి
+# ఖర్చుల ట్రాకింగ్ కోసం వనరులను ట్యాగ్ చేయండి
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. సెక్యూరిటీ ఉత్తమ పద్ధతులు
+### 2. భద్రత ఉత్తమ పద్ధతులు
 
 ```bicep
 // Always use managed identity
@@ -674,14 +665,16 @@ services:
 ### 4. మానిటరింగ్ మరియు ఆబ్జర్వబిలిటీ
 
 ```bash
-# అప్లికేషన్ ఇన్‌సైట్స్‌ను ప్రారంభించండి
+# Application Insights ను సక్రియం చేయండి
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# లాగ్‌లను రియల్-టైమ్‌లో చూడండి
-azd logs api --follow
+# రియల్-టైమ్‌లో లాగ్‌లను వీక్షించండి
+azd monitor --logs
+# లేదా Container Apps కోసం Azure CLI ఉపయోగించండి:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# మెట్రిక్స్‌ను మానిటర్ చేయండి
-azd monitor --service api
+# మీట్రిక్స్‌ను పర్యవేక్షించండి
+azd monitor --live
 
 # అలర్ట్‌లను సృష్టించండి
 az monitor metrics alert create \
@@ -695,16 +688,16 @@ az monitor metrics alert create \
 ### 5. ఖర్చు ఆప్టిమైజేషన్
 
 ```bash
-# ఉపయోగంలో లేకపోతే జీరోకి స్కేల్ చేయండి
+# ఉపయోగంలో లేకపోతే శూన్యానికి స్కేల్ చేయండి
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# డెవలప్‌మెంట్ పరిసరాల కోసం స్పాట్ ఇన్‌స్టాన్స్‌లను ఉపయోగించండి
+# డెవ్ పరిసరాల కోసం స్పాట్ ఇన్‌స్టాన్సులను ఉపయోగించండి
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# బడ్జెట్ అలర్ట్‌లను సెటప్ చేయండి
+# బడ్జెట్ అలెర్ట్లను ఏర్పాటు చేయండి
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -744,43 +737,44 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## సాధారణ ఆదేశాల సూచన
+## Common Commands Reference
 
 ```bash
-# కొత్త కంటైనర్ యాప్ ప్రాజెక్ట్‌ను ప్రారంభించండి
+# కొత్త కంటైనర్ యాప్ ప్రాజెక్టును ప్రారంభించండి
 azd init --template <template-name>
 
-# మౌలిక సదుపాయాలు మరియు అప్లికేషన్‌ను మోహరించండి
+# ఇన్ఫ్రాస్ట్రక్చర్ మరియు అప్లికేషన్‌ను అమలు చేయండి
 azd up
 
-# కేవలం అప్లికేషన్ కోడ్‌ను మోహరించండి (మౌలిక సదుపాయాలను వదిలివేయండి)
+# కేవలం అప్లికేషన్ కోడ్‌ను మాత్రమే అమలు చేయండి (ఇన్ఫ్రాస్ట్రక్చర్‌ను తప్పించుకోండి)
 azd deploy
 
-# కేవలం మౌలిక సదుపాయాలను అందించండి
+# కేవలం ఇన్ఫ్రాస్ట్రక్చర్‌ను మాత్రమే ఏర్పాటు చేయండి
 azd provision
 
-# మోహరించిన వనరులను వీక్షించండి
+# డిప్లాయ్ చేసిన వనరులను చూడండి
 azd show
 
-# లాగ్‌లను స్ట్రీమ్ చేయండి
-azd logs <service-name> --follow
+# azd monitor లేదా Azure CLI ఉపయోగించి లాగ్‌లను 스트్రీమ్ చేయండి
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# అప్లికేషన్‌ను పర్యవేక్షించండి
+# అప్లికేషన్‌ను మానిటర్ చేయండి
 azd monitor --overview
 
-# వనరులను శుభ్రం చేయండి
+# వనరులను తొలగించండి
 azd down --force --purge
 ```
 
-## సమస్యల పరిష్కారం
+## Troubleshooting
 
-### సమస్య: కంటైనర్ ప్రారంభం అవ్వడం లేదు
+### సమస్య: కంటైనర్ ప్రారంభం కావడం విఫలమవుతుంది
 
 ```bash
-# లాగ్‌లను తనిఖీ చేయండి
-azd logs api --tail 100
+# Azure CLI ఉపయోగించి లాగ్‌లను తనిఖీ చేయండి
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# కంటైనర్ ఈవెంట్‌లను వీక్షించండి
+# కంటైనర్ ఈవెంట్లను వీక్షించండి
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -791,16 +785,16 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### సమస్య: కంటైనర్ యాప్ ఎండ్‌పాయింట్ యాక్సెస్ చేయలేకపోతున్నాను
+### సమస్య: కంటైనర్ యాప్ ఎండ్పాయింట్‌కు యాక్సెస్ చేయలేరు
 
 ```bash
-# ఇన్‌గ్రెస్ కాన్ఫిగరేషన్‌ను ధృవీకరించండి
+# ఇన్‌గ్రెస్స్ కాన్ఫిగరేషన్‌ను నిర్ధారించండి
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# అంతర్గత ఇన్‌గ్రెస్ ప్రారంభించబడిందా అని తనిఖీ చేయండి
+# అంతర్గత ఇన్‌గ్రెస్స్ ఎనేబుల్ అయిందో లేదో తనిఖీ చేయండి
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -825,29 +819,29 @@ az containerapp update \
 
 ## అదనపు వనరులు మరియు ఉదాహరణలు
 - [మైక్రోసర్వీసెస్ ఉదాహరణ](./microservices/README.md)
-- [సింపుల్ ఫ్లాష్ API ఉదాహరణ](./simple-flask-api/README.md)
+- [సాధారణ Flask API ఉదాహరణ](./simple-flask-api/README.md)
 - [Azure Container Apps డాక్యుమెంటేషన్](https://learn.microsoft.com/azure/container-apps/)
 - [AZD టెంప్లేట్స్ గ్యాలరీ](https://azure.github.io/awesome-azd/)
-- [కంటైనర్ యాప్‌ల ఉదాహరణలు](https://github.com/Azure-Samples/container-apps-samples)
+- [Container Apps నమూనాలు](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep టెంప్లేట్స్](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## సహకారం
+## కాంట్రిబ్యూట్ చేయడం
 
-కొత్త కంటైనర్ యాప్ ఉదాహరణలను సహకరించడానికి:
+కొత్త container app ఉదాహరణలను కాంట్రిబ్యూట్ చేయడానికి:
 
 1. మీ ఉదాహరణతో కొత్త సబ్‌డైరెక్టరీని సృష్టించండి
-2. పూర్తి `azure.yaml`, `infra/`, మరియు `src/` ఫైళ్లను చేర్చండి
-3. డిప్లాయ్‌మెంట్ సూచనలతో సమగ్ర README చేర్చండి
+2. పూర్తిచేసిన `azure.yaml`, `infra/`, మరియు `src/` ఫైల్స్‌ను చేర్చండి
+3. డిప్లాయ్‌మెంట్ సూచనలతో కూడిన విస్తృత READMEని జోడించండి
 4. `azd up` తో డిప్లాయ్‌మెంట్‌ను పరీక్షించండి
 5. పుల్ రిక్వెస్ట్‌ను సమర్పించండి
 
 ---
 
-**సహాయం కావాలా?** [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) కమ్యూనిటీని చేరండి మద్దతు మరియు ప్రశ్నల కోసం.
+**సహాయం కావాలా?** మద్దతు మరియు ప్రశ్నల కోసం [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) కమ్యూనిటీలో చేరండి.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**అస్వీకరణ**:  
-ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏదైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
+నిరాకరణ:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, స్వయంచాలక అనువాదాల్లో లోపాలు లేదా తప్పుదోషాలు ఉండే అవకాశం ఉంది అని దయచేసి గమనించండి. మూల పత్రాన్ని దాని స్థానిక భాషలోని అధికారిక మూలంగా పరిగణించాలి. ముఖ్యమైన సమాచారం కోసం వృత్తిపరమైన మానవ అనువాదం చేయించుకోవాలని సిఫార్సు చేయబడుతుంది. ఈ అనువాదాన్ని ఉపయోగించడం వలన ఏర్పడిన ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడంపై మేము బాధ్యులు కాదు.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

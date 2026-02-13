@@ -1,75 +1,66 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-10-11T15:55:27+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "et"
-}
--->
-# Korduma kippuvad küsimused (KKK)
+# Sageli Küsitud Küsimused (KKK)
 
-**Abi saamine peatükkide kaupa**
-- **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
-- **🚆 Paigaldusprobleemid**: [Peatükk 1: Paigaldus ja seadistamine](../docs/getting-started/installation.md)
-- **🤖 AI küsimused**: [Peatükk 2: AI-põhine arendus](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **🔧 Tõrkeotsing**: [Peatükk 7: Tõrkeotsing ja silumine](../docs/troubleshooting/common-issues.md)
+**Abi peatükkide kaupa**
+- **📚 Kursuse koduleht**: [AZD algajatele](../README.md)
+- **🚆 Paigaldusprobleemid**: [1. peatükk: paigaldus ja seadistamine](../docs/getting-started/installation.md)
+- **🤖 Tehisintellekti küsimused**: [2. peatükk: AI-esimese arendamine](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🔧 Tõrkeotsing**: [7. peatükk: tõrkeotsing ja silumine](../docs/troubleshooting/common-issues.md)
 
 ## Sissejuhatus
 
-See põhjalik KKK annab vastused kõige levinumatele küsimustele Azure Developer CLI (azd) ja Azure'i juurutuste kohta. Leia kiireid lahendusi tavaprobleemidele, mõista parimaid praktikaid ja saa selgust azd kontseptsioonide ja töövoogude osas.
+See põhjalik KKK annab vastused kõige sagedasematele Azure Developer CLI (azd) ja Azure juurutustega seotud küsimustele. Leia kiireid lahendusi levinud probleemidele, mõista parimaid praktikaid ning saa selgust azd mõistete ja tööprotsesside osas.
 
-## Õppimise eesmärgid
+## Õppe eesmärgid
 
-Selle KKK ülevaatamisega saad:
-- Leida kiireid vastuseid tavapärastele Azure Developer CLI küsimustele ja probleemidele
-- Mõista olulisi kontseptsioone ja terminoloogiat praktilise küsimuste-vastuste formaadi kaudu
-- Juurdepääsu tõrkeotsingu lahendustele sagedaste probleemide ja veastsenaariumide korral
-- Õppida parimaid praktikaid optimeerimise kohta levinud küsimuste kaudu
-- Avastada edasijõudnud funktsioone ja võimalusi ekspertide tasemel küsimuste kaudu
-- Viidata kulude, turvalisuse ja juurutusstrateegia juhistele tõhusalt
+Selle KKK läbi vaatades:
+- Leiad kiireid vastuseid Azure Developer CLI sagedastele küsimustele ja probleemidele
+- Mõistad põhikontseptsioone ja termineid praktilise Q&A formaadis
+- Saad ligipääsu tõrkeotsingu lahendustele sagedastele vigadele ja probleemidele
+- Õpid parimaid praktikaid optimeerimise valdkonnas enamlevinud küsimuste põhjal
+- Avastad edasijõudnute taseme funktsioone ja võimeid ekspertküsimuste kaudu
+- Saad efektiivseid viiteid kulude, turvalisuse ja juurutusstrateegiate juhendamiseks
 
 ## Õpitulemused
 
-Selle KKK regulaarse kasutamisega suudad:
-- Lahendada tavapäraseid Azure Developer CLI probleeme iseseisvalt, kasutades pakutud lahendusi
-- Teha teadlikke otsuseid juurutusstrateegiate ja konfiguratsioonide kohta
-- Mõista azd ja teiste Azure'i tööriistade ja teenuste vahelist seost
-- Rakendada parimaid praktikaid, mis põhinevad kogukonna kogemustel ja ekspertide soovitustel
-- Tõrkeotsingut teha autentimise, juurutuse ja konfiguratsiooniprobleemide korral tõhusalt
-- Optimeerida kulusid ja jõudlust, kasutades KKK teadmisi ja soovitusi
+Korrapäraselt sellele KKK-le viidates suudad sa:
+- Iseseisvalt lahendada Azure Developer CLI üldiseid probleeme pakutud lahenduste abil
+- Teha informeeritud otsuseid juurutusstrateegiate ja konfiguratsioonide osas
+- Mõista seost azd ja teiste Azure tööriistade ning teenuste vahel
+- Rakendada parimaid praktikaid vastavalt kogukonna kogemusele ja ekspertide soovitustele
+- Efektiivselt tõrkeotsinguid teha autentimise, juurutuse ja seadistuse probleemide korral
+- Optimeerida kulusid ja jõudlust kasutades KKK infot ja soovitusi
 
 ## Sisukord
 
 - [Alustamine](../../../resources)
-- [Autentimine ja juurdepääs](../../../resources)
-- [Mallid ja projektid](../../../resources)
-- [Juurutus ja infrastruktuur](../../../resources)
-- [Konfiguratsioon ja keskkonnad](../../../resources)
+- [Autentimine ja Ligipääs](../../../resources)
+- [Mallid ja Projektid](../../../resources)
+- [Juurutus ja Taristu](../../../resources)
+- [Seadistamine ja Keskkonnad](../../../resources)
 - [Tõrkeotsing](../../../resources)
-- [Kulud ja arveldus](../../../resources)
-- [Parimad praktikad](../../../resources)
-- [Edasijõudnud teemad](../../../resources)
+- [Kulud ja Arveldus](../../../resources)
+- [Parimad Praktikad](../../../resources)
+- [Edasijõudnud Teemad](../../../resources)
 
 ---
 
 ## Alustamine
 
-### Q: Mis on Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) on arendajakeskne käsurea tööriist, mis kiirendab rakenduse viimist kohalikust arenduskeskkonnast Azure'i. See pakub parimaid praktikaid mallide kaudu ja aitab kogu juurutustsüklis.
+### K: Mis on Azure Developer CLI (azd)?
+**V**: Azure Developer CLI (azd) on arendajasõbralik käsureatööriist, mis kiirendab sinu rakenduse jõudmist lokaalsest arenduskeskkonnast Azure'i. See pakub parimaid praktikaid mallide kaudu ja aitab kogu juurutustsükli vältel.
 
-### Q: Kuidas erineb azd Azure CLI-st?
-**A**: 
-- **Azure CLI**: Üldotstarbeline tööriist Azure'i ressursside haldamiseks
-- **azd**: Arendajatele suunatud tööriist rakenduste juurutusvoogude jaoks
-- azd kasutab Azure CLI-d sisemiselt, kuid pakub kõrgema taseme abstraktsioone tavapäraste arendussenaariumide jaoks
-- azd sisaldab malle, keskkonnahaldust ja juurutuse automatiseerimist
+### K: Kuidas erineb azd Azure CLI-st?
+**V**: 
+- **Azure CLI**: Üldotstarbeline tööriist Azure ressursside haldamiseks
+- **azd**: Arendajale suunatud tööriist rakenduste juurutuse töövoogude jaoks
+- azd kasutab sisemiselt Azure CLI-d, kuid pakub kõrgema taseme abstraktsioone tavapäraste arendusstsenaariumite jaoks
+- azd sisaldab malle, keskkondade haldust ja juurutuse automatiseerimist
 
-### Q: Kas azd kasutamiseks on vaja Azure CLI-d?
-**A**: Jah, azd vajab Azure CLI-d autentimiseks ja mõnede toimingute jaoks. Paigalda esmalt Azure CLI, seejärel azd.
+### K: Kas azd kasutamiseks peab Azure CLI olema installitud?
+**V**: Jah, azd vajab autentimiseks ja mõnedeks toiminguteks Azure CLI-d. Paigalda esmalt Azure CLI, seejärel azd.
 
-### Q: Milliseid programmeerimiskeeli azd toetab?
-**A**: azd on keeleagnostiline. See töötab:
+### K: Milliseid programmeerimiskeeli azd toetab?
+**V**: azd ei ole keeltesõltuv. Toetatud on:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
@@ -77,35 +68,35 @@ Selle KKK regulaarse kasutamisega suudad:
 - Go
 - PHP
 - Staatilised veebilehed
-- Konteineripõhised rakendused
+- Konteineritud rakendused
 
-### Q: Kas saan kasutada azd-d olemasolevate projektidega?
-**A**: Jah! Sa saad:
-1. Kasutada `azd init`, et lisada azd konfiguratsioon olemasolevatele projektidele
-2. Kohandada olemasolevaid projekte, et need vastaksid azd mallistruktuurile
-3. Luua kohandatud malle, mis põhinevad sinu olemasoleval arhitektuuril
+### K: Kas ma saan kasutada azd olemasolevate projektidega?
+**V**: Jah! Võid kas:
+1. Kasutada `azd init`, et lisada azd konfiguratsioon olemasolevatesse projektidesse
+2. Kohandada olemasolevaid projekte, et sobitada azd malli struktuuriga
+3. Luua kohandatud malle oma olemasoleva arhitektuuri põhjal
 
 ---
 
-## Autentimine ja juurdepääs
+## Autentimine ja Ligipääs
 
-### Q: Kuidas autentida Azure'is azd abil?
-**A**: Kasuta `azd auth login`, mis avab brauseriakna Azure'i autentimiseks. CI/CD stsenaariumide jaoks kasuta teenusepõhimõtteid või hallatud identiteete.
+### K: Kuidas azd-ga Azure'i autentida?
+**V**: Kasuta käsku `azd auth login`, mis avab brauseriakna Azure'i autentimiseks. CI/CD stsenaariumite korral kasuta teenusprincipaale või hallatud identiteete.
 
-### Q: Kas azd-d saab kasutada mitme Azure'i tellimusega?
-**A**: Jah. Kasuta `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`, et määrata, millist tellimust iga keskkonna jaoks kasutada.
+### K: Kas azd saab kasutada mitme Azure tellimusega?
+**V**: Jah. Kasuta käsku `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`, et määrata iga keskkonna jaoks sobiv tellimus.
 
-### Q: Milliseid õigusi on vaja azd abil juurutamiseks?
-**A**: Tavaliselt on vaja:
-- **Kaastöötaja** rolli ressursigrupil või tellimusel
-- **Kasutaja juurdepääsu administraator**, kui juurutatakse ressursse, mis vajavad rollide määramist
-- Spetsiifilised õigused sõltuvad mallist ja juurutatavatest ressurssidest
+### K: Milliseid õiguseid on azd-ga juurutamiseks vaja?
+**V**: Tavaliselt on vaja:
+- **Contributor** rolli ressursside grupis või tellimuses
+- **User Access Administrator** rolli, kui juurutatakse ressursse, mis vajavad rolli määramist
+- Konkreetseid õiguseid nõuab mall ning juurutatud ressursid
 
-### Q: Kas azd-d saab kasutada CI/CD torujuhtmetes?
-**A**: Absoluutselt! azd on loodud CI/CD integratsiooniks. Kasuta autentimiseks teenusepõhimõtteid ja seadista keskkonnamuutujad konfiguratsiooniks.
+### K: Kas azd-d saab kasutada CI/CD torujuhtmetes?
+**V**: Absoluutselt! azd on loodud CI/CD süsteemidega integreerimiseks. Kasuta autentimiseks teenusprincipaale ja seadista konfiguratsiooni keskkonnamuutujate kaudu.
 
-### Q: Kuidas hallata autentimist GitHub Actionsis?
-**A**: Kasuta Azure Login actionit teenusepõhimõtte mandaadiga:
+### K: Kuidas toimida autentimisega GitHub Actionsis?
+**V**: Kasuta Azure Login actionit teenusprinstriandi volitustega:
 ```yaml
 - uses: azure/login@v1
   with:
@@ -115,51 +106,51 @@ Selle KKK regulaarse kasutamisega suudad:
 
 ---
 
-## Mallid ja projektid
+## Mallid ja Projektid
 
-### Q: Kust leida azd malle?
-**A**: 
+### K: Kus ma leian azd malle?
+**V**: 
 - Ametlikud mallid: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Kogukonna mallid: GitHubi otsing "azd-template"
-- Kasuta `azd template list`, et sirvida saadaolevaid malle
+- Kogukonna mallid: otsi GitHubist "azd-template"
+- Kasuta `azd template list`, et vaadata saadaolevaid malle
 
-### Q: Kuidas luua kohandatud malli?
-**A**: 
-1. Alusta olemasoleva mallistruktuuriga
-2. Muuda `azure.yaml`, infrastruktuurifaile ja rakenduse koodi
-3. Testi põhjalikult `azd up` abil
-4. Avalda GitHubis sobivate siltidega
+### K: Kuidas luua kohandatud mall?
+**V**: 
+1. Alusta olemasoleva malli struktuurist
+2. Muuda `azure.yaml`, taristu faile ja rakenduse koodi
+3. Testi põhjalikult käsuga `azd up`
+4. Avalda GitHubis koos sobivate siltidega
 
-### Q: Kas azd-d saab kasutada ilma mallita?
-**A**: Jah, kasuta `azd init` olemasolevas projektis, et luua vajalikud konfiguratsioonifailid. Pead käsitsi seadistama `azure.yaml` ja infrastruktuurifailid.
+### K: Kas ma saan kasutada azd-d malli ilma?
+**V**: Jah, kasuta `azd init` olemasolevas projektis vajalike konfiguratsioonifailide loomiseks. Sa pead käsitsi seadistama `azure.yaml` ja taristufailid.
 
-### Q: Mis vahe on ametlikel ja kogukonna mallidel?
-**A**: 
-- **Ametlikud mallid**: Microsofti hallatud, regulaarselt uuendatud, põhjalik dokumentatsioon
-- **Kogukonna mallid**: Arendajate loodud, võivad olla spetsialiseeritud kasutusjuhtumid, erinev kvaliteet ja hooldus
+### K: Mis vahe on ametlikel ja kogukonna mallidel?
+**V**: 
+- **Ametlikud mallid**: Microsofti hallatavad, regulaarselt uuendatud, põhjalik dokumentatsioon
+- **Kogukonna mallid**: Arendajate loodud, võivad olla spetsiifilisemate kasutusjuhtumitega, kvaliteet ja hooldus varieeruvad
 
-### Q: Kuidas uuendada malli oma projektis?
-**A**: Mallid ei uuene automaatselt. Sa saad:
-1. Käsitsi võrrelda ja ühendada muudatusi algmallist
-2. Alustada uuesti `azd init` abil, kasutades uuendatud malli
-3. Valikuliselt lisada konkreetseid täiustusi uuendatud mallidest
+### K: Kuidas uuendada malli oma projektis?
+**V**: Mallid ei uuene automaatselt. Võid:
+1. Käsi võrrelda ja ühendada muudatusi allikmalliga
+2. Alustada uuesti käsuga `azd init`, kasutades uuendatud malli
+3. Valikuliselt rakendada konkreetseid täiustusi uuendatud mallidest
 
 ---
 
-## Juurutus ja infrastruktuur
+## Juurutus ja Taristu
 
-### Q: Milliseid Azure'i teenuseid saab azd abil juurutada?
-**A**: azd saab juurutada kõiki Azure'i teenuseid Bicep/ARM mallide kaudu, sealhulgas:
-- Rakendusteenused, konteinerirakendused, funktsioonid
+### K: Milliseid Azure teenuseid azd saab juurutada?
+**V**: azd saab juurutada kõiki Azure teenuseid Bicep/ARM mallide kaudu, sh:
+- App Services, Container Apps, Functions
 - Andmebaasid (SQL, PostgreSQL, Cosmos DB)
-- Salvestusruum, Key Vault, Application Insights
-- Võrgustik, turvalisus ja jälgimisressursid
+- Storage, Key Vault, Application Insights
+- Võrgustik, turvalisus ja monitooringu ressursid
 
-### Q: Kas saan juurutada mitmesse piirkonda?
-**A**: Jah, konfigureeri mitu piirkonda oma Bicep mallides ja määra asukoha parameeter vastavalt igale keskkonnale.
+### K: Kas saan juurutada mitmesse piirkonda?
+**V**: Jah, seadista mitu piirkonda oma Bicep mallides ja määra parameeter location vastavalt keskkonnale.
 
-### Q: Kuidas hallata andmebaasi skeemi migratsioone?
-**A**: Kasuta juurutuskonksusid `azure.yaml`-is:
+### K: Kuidas lahendada andmebaasi skeemi migratsioone?
+**V**: Kasuta juurutuse konksusid `azure.yaml` failis:
 ```yaml
 hooks:
   postdeploy:
@@ -169,48 +160,48 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: Kas saan juurutada ainult infrastruktuuri ilma rakendusteta?
-**A**: Jah, kasuta `azd provision`, et juurutada ainult mallides määratletud infrastruktuurikomponendid.
+### K: Kas saan juurutada ainult taristu ilma rakendusteta?
+**V**: Jah, kasuta `azd provision` ainult taristu komponentide juurutamiseks, mis on defineeritud mallides.
 
-### Q: Kuidas juurutada olemasolevatele Azure'i ressurssidele?
-**A**: See on keeruline ja otseselt ei toetata. Sa saad:
-1. Importida olemasolevad ressursid oma Bicep mallidesse
-2. Kasutada mallides olemasolevate ressursside viiteid
-3. Muuta malle, et tingimuslikult luua või viidata ressurssidele
+### K: Kuidas juurutada olemasolevatele Azure ressurssidele?
+**V**: See on keeruline ja mitte otseselt toetatud. Võid:
+1. Impordida olemasolevad ressursid oma Bicep mallidesse
+2. Kasutada malli olemasolevate ressursside viiteid
+3. Muuta malle tingimuslikuks ressursside loomise või viitamise jaoks
 
-### Q: Kas saan kasutada Terraformi Bicepi asemel?
-**A**: Hetkel toetab azd peamiselt Bicep/ARM malle. Terraformi tugi ei ole ametlikult saadaval, kuigi kogukonna lahendused võivad eksisteerida.
+### K: Kas ma saan kasutada Terraformi Bicep asemel?
+**V**: Praegu toetab azd peamiselt Bicep/ARM malle. Terraformi toe ametlik puudumine, kuigi kogukonnal võivad olla lahendused.
 
 ---
 
-## Konfiguratsioon ja keskkonnad
+## Seadistamine ja Keskkonnad
 
-### Q: Kuidas hallata erinevaid keskkondi (arendus, testimine, tootmine)?
-**A**: Loo eraldi keskkonnad `azd env new <environment-name>` abil ja konfigureeri igaühe jaoks erinevad seaded:
+### K: Kuidas hallata erinevaid keskkondi (dev, staging, prod)?
+**V**: Loo eraldi keskkonnad käsuga `azd env new <keskkonna_nimi>` ja seadista igaühele erinevad sätted:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### Q: Kus hoitakse keskkonna konfiguratsioone?
-**A**: `.azure` kaustas sinu projekti kataloogis. Igal keskkonnal on oma kaust konfiguratsioonifailidega.
+### K: Kus asuvad keskkondade konfiguratsioonid?
+**V**: Projekti kaustas `.azure` kaustas. Igal keskkonnal on oma kaust konfiguratsioonifailidega.
 
-### Q: Kuidas seadistada keskkonnaspetsiifilist konfiguratsiooni?
-**A**: Kasuta `azd env set`, et konfigureerida keskkonnamuutujaid:
+### K: Kuidas seada keskkonnipõhiseid konfiguratsioone?
+**V**: Kasuta `azd env set` keskkonnamuutujate seadistamiseks:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: Kas keskkonna konfiguratsioone saab jagada meeskonnaliikmete vahel?
-**A**: `.azure` kaust sisaldab tundlikku teavet ja seda ei tohiks versioonihaldusse lisada. Selle asemel:
+### K: Kas keskkonnapäringuid saab jagada meeskonnaliikmete vahel?
+**V**: `.azure` kaust sisaldab tundlikku infot ja seda ei tohiks versioonihaldusesse panna. Selle asemel:
 1. Dokumenteeri vajalikud keskkonnamuutujad
 2. Kasuta juurutusskripte keskkondade seadistamiseks
 3. Kasuta Azure Key Vaulti tundliku konfiguratsiooni jaoks
 
-### Q: Kuidas muuta malli vaikeseadeid?
-**A**: Määra keskkonnamuutujad, mis vastavad malliparameetritele:
+### K: Kuidas ületada mallide vaikeväärtusi?
+**V**: Sea keskkonnamuutujad, mis vastavad malliparameetritele:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -220,93 +211,93 @@ azd env set SKU_NAME "B1"
 
 ## Tõrkeotsing
 
-### Q: Miks `azd up` ebaõnnestub?
-**A**: Levinud põhjused:
-1. **Autentimisprobleemid**: Käivita `azd auth login`
-2. **Ebapiisavad õigused**: Kontrolli oma Azure'i rollide määramisi
-3. **Ressursinimede konfliktid**: Muuda AZURE_ENV_NAME
-4. **Kvoodi/mahuprobleemid**: Kontrolli piirkondlikku saadavust
-5. **Mallivead**: Valideeri Bicep mallid
+### K: Miks `azd up` ebaõnnestub?
+**V**: Levinumad põhjused:
+1. **Autentimise probleemid**: Käivita `azd auth login`
+2. **Ebapiisavad õigused**: Kontrolli Azure rollimäärajate seadeid
+3. **Ressursside nimede konfliktid**: Muuda AZURE_ENV_NAME väärtust
+4. **Kvoodi/mahu probleemid**: Kontrolli piirkondlikku saadavust
+5. **Mallide vead**: Kontrolli Bicep mallide korrektseid valideerimisi
 
-### Q: Kuidas siluda juurutuse tõrkeid?
-**A**: 
-1. Kasuta `azd deploy --debug` üksikasjaliku väljundi jaoks
-2. Kontrolli Azure'i portaali juurutusajalugu
-3. Vaata tegevuslogi Azure'i portaalis
-4. Kasuta `azd show`, et kuvada praeguse keskkonna olek
+### K: Kuidas siluda juurutuse ebaõnnestumisi?
+**V**: 
+1. Kasuta `azd deploy --debug` detailsemaks väljundiks
+2. Vaata Azure portaalis juurutuse ajalugu
+3. Sirvi tegevuste logi Azure portaali kaudu
+4. Kasuta `azd show`, et kuvada praeguse keskkonna seisundit
 
-### Q: Miks minu keskkonnamuutujad ei tööta?
-**A**: Kontrolli:
-1. Muutujanimed vastavad täpselt malliparameetritele
-2. Väärtused on õigesti tsitaatides, kui need sisaldavad tühikuid
-3. Keskkond on valitud: `azd env select <environment>`
-4. Muutujad on määratud õiges keskkonnas
+### K: Miks minu keskkonnamuutujad ei toimi?
+**V**: Kontrolli:
+1. Muutujate nimed peavad täpselt vastama malliparameetritele
+2. Väärtused peavad olema korrektselt tsiteeritud, kui need sisaldavad tühikuid
+3. On valitud õige keskkond: `azd env select <keskkond>`
+4. Muutujad on seadmest sobivas keskkonnas
 
-### Q: Kuidas puhastada ebaõnnestunud juurutusi?
-**A**: 
+### K: Kuidas puhastada ebaõnnestunud juurutusi?
+**V**: 
 ```bash
 azd down --force --purge
 ```
 See eemaldab kõik ressursid ja keskkonna konfiguratsiooni.
 
-### Q: Miks minu rakendus ei ole pärast juurutust kättesaadav?
-**A**: Kontrolli:
-1. Juurutus on edukalt lõpule viidud
-2. Rakendus töötab (kontrolli logisid Azure'i portaalis)
-3. Võrguturbegrupid lubavad liiklust
+### K: Miks minu rakendus pole pärast juurutust kättesaadav?
+**V**: Kontrolli:
+1. Juurutus lõppes edukalt
+2. Rakendus töötab (kontrolli logisid Azure portaali kaudu)
+3. Võrgu turvarühmad lubavad liiklust
 4. DNS/kohandatud domeenid on õigesti konfigureeritud
 
 ---
 
-## Kulud ja arveldus
+## Kulud ja Arveldus
 
-### Q: Kui palju azd juurutused maksavad?
-**A**: Kulud sõltuvad:
-- Juurutatud Azure'i teenustest
-- Teenuse tasemetest/SKU-dest
+### K: Kui palju maksavad azd juurutused?
+**V**: Kulud sõltuvad:
+- Juhtutatud Azure teenustest
+- Valitud teenuse tasemest/SKUdest
 - Piirkondlikest hinnavahedest
-- Kasutamismustritest
+- Kasutusmustritest
 
-Kasuta [Azure'i hinnakalkulaatorit](https://azure.microsoft.com/pricing/calculator/) hinnangute saamiseks.
+Kasutage [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) hinnangu saamiseks.
 
-### Q: Kuidas kontrollida kulusid azd juurutustes?
-**A**: 
-1. Kasuta madalama taseme SKU-sid arenduskeskkondade jaoks
-2. Sea üles Azure'i eelarved ja hoiatused
-3. Kasuta `azd down`, et eemaldada ressursid, kui neid ei vajata
-4. Vali sobivad piirkonnad (kulud varieeruvad asukoha järgi)
-5. Kasuta Azure'i kulude haldamise tööriistu
+### K: Kuidas kontrollida kulusid azd juurutustel?
+**V**: 
+1. Kasuta arenduskeskkondades madalama taseme SKU-sid
+2. Seadista Azure eelarved ja hoiatused
+3. Kasuta `azd down` mittevajalikeks ressursside eemaldamiseks
+4. Valige sobivad piirkonnad (kulud piirkonniti erinevad)
+5. Kasuta Azure Cost Management tööriistu
 
-### Q: Kas azd mallidel on tasuta taseme valikud?
-**A**: Paljudel Azure'i teenustel on tasuta tasemed:
-- Rakendusteenus: Saadaval tasuta tase
-- Azure Functions: 1M tasuta täitmist kuus
-- Cosmos DB: Tasuta tase 400 RU/s
-- Application Insights: Esimesed 5GB kuus tasuta
+### K: Kas azd mallidele on saadaval tasuta tasemed?
+**V**: Paljud Azure teenused pakuvad tasuta tasemeid:
+- App Service: tasuta tase olemas
+- Azure Functions: 1M tasuta käivitust kuus
+- Cosmos DB: tasuta tase 400 RU/s
+- Application Insights: esimesed 5GB kuus tasuta
 
-Konfigureeri mallid, et kasutada tasuta tasemeid, kui need on saadaval.
+Seadista mallid tasuta tasemete kasutamiseks, kus võimalik.
 
-### Q: Kuidas hinnata kulusid enne juurutust?
-**A**: 
-1. Vaata malli `main.bicep`, et näha, millised ressursid luuakse
-2. Kasuta Azure'i hinnakalkulaatorit konkreetsete SKU-dega
+### K: Kuidas hinnata kulusid enne juurutust?
+**V**: 
+1. Vaata malli `main.bicep` faili, et näha, milliseid ressursse luuakse
+2. Kasuta Azure Pricing Calculator kindlate SKU-dega
 3. Juuruta esmalt arenduskeskkonda, et jälgida tegelikke kulusid
-4. Kasuta Azure'i kulude haldamist üksikasjaliku kuluanalüüsi jaoks
+4. Kasuta Azure Cost Management detailseks kulude analüüsiks
 
 ---
 
-## Parimad praktikad
+## Parimad Praktikad
 
-### Q: Millised on parimad praktikad azd projekti struktuuri jaoks?
-**A**: 
-1. Hoia rakenduse kood infrastruktuurist eraldi
-2. Kasuta tähenduslikke teenusenimesid `azure.yaml`-is
-3. Rakenda korralik veakäsitlus ehitusskriptides
-4. Kasuta keskkonnaspetsiifilist konfiguratsiooni
+### K: Millised on parimad praktikad azd projekti struktuuri jaoks?
+**V**: 
+1. Hoia rakenduse kood eraldi taristust
+2. Kasuta `azure.yaml` failis tähenduslikke teenusenimesid
+3. Rakenda vigade korrektne käsitlemine build-skriptides
+4. Kasuta keskkonnapõhist konfiguratsiooni
 5. Lisa põhjalik dokumentatsioon
 
-### Q: Kuidas korraldada mitut teenust azd-s?
-**A**: Kasuta soovitatud struktuuri:
+### K: Kuidas organiseerida mitut teenust azd's?
+**V**: Kasuta soovitatud struktuuri:
 ```
 ├── src/
 │   ├── web/          # Frontend service
@@ -317,33 +308,33 @@ Konfigureeri mallid, et kasutada tasuta tasemeid, kui need on saadaval.
 └── README.md         # Project documentation
 ```
 
-### Q: Kas `.azure` kausta tuleks versioonihaldusse lisada?
-**A**: **Ei!** `.azure` kaust sisaldab tundlikku teavet. Lisa see `.gitignore`-i:
+### K: Kas ma peaksin `.azure` kausta versioonihaldusse panema?
+**V**: **Ei!** `.azure` kaust sisaldab tundlikku infot. Lisa ta `.gitignore` faili:
 ```gitignore
 .azure/
 ```
 
-### Q: Kuidas hallata paroole ja tundlikku konfiguratsiooni?
-**A**: 
-1. Kasuta Azure Key Vaulti paroolide jaoks
-2. Viita Key Vaulti paroolidele rakenduse konfiguratsioonis
-3. Ära kunagi lisa paroole versioonihaldusse
-4. Kasuta hallatud identiteete teenustevaheliseks autentimiseks
+### K: Kuidas käituda saladuste ja tundliku konfiguratsiooniga?
+**V**: 
+1. Kasuta saladuste haldamiseks Azure Key Vaulti
+2. Viita Key Vaulti saladustele rakenduse konfiguratsioonis
+3. Ära kunagi pane saladusi versioonihaldusse
+4. Kasuta teenuste autentimiseks hallatud identiteete
 
-### Q: Milline on soovitatav lähenemine CI/CD-le azd-ga?
-**A**: 
-1. Kasuta eraldi keskkondi iga etapi jaoks (arendus/testimine/tootmine)
-2. Rakenda automatiseeritud testimine enne juurutust
-3. Kasuta autentimiseks teenusepõhimõtteid
-4. Hoia tundlik konfiguratsioon torujuhtme salajastes/muutujates
-5. Rakenda tootmise juurutuste jaoks kinnitamisväravaid
+### K: Milline on soovituslik lähenemine CI/CD-le azd-s?
+**V**: 
+1. Kasuta iga etapi (dev/staging/prod) jaoks eraldi keskkondi
+2. Rakenda automatiseeritud testimist enne juurutust
+3. Kasuta autentimiseks teenusprincipaale
+4. Hoia tundlik konfiguratsioon torujuhtme saladustes/muutujates
+5. Rakenda heakskiidu väravaid tootmisele juurutamisel
 
 ---
 
-## Edasijõudnud teemad
+## Edasijõudnud Teemad
 
-### Q: Kas azd-d saab laiendada kohandatud funktsionaalsusega?
-**A**: Jah, juurutuskonksude kaudu `azure.yaml`-is:
+### K: Kas ma saan laiendada azd-d kohandatud funktsionaalsusega?
+**V**: Jah, `azure.yaml` failis juurutuse konksude kaudu:
 ```yaml
 hooks:
   predeploy:
@@ -352,63 +343,68 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: Kuidas integreerida azd olemasolevate DevOps protsessidega?
-**A**: 
-1. Kasuta azd käske olemasolevates torujuhtmeskriptides
-2. Standardiseeri azd mallid meeskondade vahel
-3. Integreeri olemasoleva jälgimise ja hoiatamisega
-4. Kasuta azd JSON-väljundit torujuhtme integratsiooniks
-
-### Q: Kas azd-d saab kasutada Azure DevOpsiga?
-**A**
-1. **azd tööriist**: Panusta [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Mallid**: Loo malle vastavalt [mallide juhistele](https://github.com/Azure-Samples/awesome-azd)
-3. **Dokumentatsioon**: Panusta dokumentatsiooni [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
-
-### K: Mis on azd tööriista teekaart?
-**V**: Vaata [ametlikku teekaarti](https://github.com/Azure/azure-dev/projects), et näha planeeritud funktsioone ja täiustusi.
-
-### K: Kuidas migreerida teistelt juurutustööriistadelt azd-le?
+### K: Kuidas integreerida azd olemasolevate DevOps protsessidega?
 **V**: 
-1. Analüüsi praegust juurutusstruktuuri
-2. Loo samaväärsed Bicep-mallid
-3. Konfigureeri `azure.yaml`, et see vastaks praegustele teenustele
-4. Testi põhjalikult arenduskeskkonnas
-5. Migreeri keskkonnad järk-järgult
+1. Kasuta azd käske olemasolevates pipeline skriptides
+2. Standardiseeri azd mallid meeskondade vahel
+3. Integreeri olemasoleva monitooringu ja alarmide süsteemiga
+4. Kasuta azd JSON väljundit torujuhtme integratsiooniks
+
+### K: Kas azd-d saab kasutada Azure DevOpsiga?
+**V**: Jah, azd töötab iga CI/CD süsteemiga. Loo Azure DevOps torujuhtmed, mis kasutavad azd käske.
+
+### K: Kuidas panustada azd arendusse või luua kogukonna malle?
+**V**: 
+1. **azd tööriist**: Panusta aadressil [Azure/azure-dev](https://github.com/Azure/azure-dev)  
+2. **Mallid**: Loo malle järgides [mallide juhendeid](https://github.com/Azure-Samples/awesome-azd)  
+3. **Dokumentatsioon**: Panusta dokumentatsiooni aadressil [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
+
+### K: Milline on azd arengukava?  
+**V**: Vaata [ametlikku arengukava](https://github.com/Azure/azure-dev/projects), et näha planeeritud funktsioone ja täiustusi.  
+
+### K: Kuidas ma migreerin teistest paigaldustööriistadest azd-le?  
+**V**:  
+1. Analüüsi praegust paigaldusarhitektuuri  
+2. Loo ekvivalentne Bicep mall  
+3. Konfigureeri `azure.yaml` sobivaks praeguste teenustega  
+4. Testi põhjalikult arenduskeskkonnas  
+5. Migreeri järk-järgult keskkonnad  
 
 ---
 
-## Kas sul on veel küsimusi?
+## Kas Sul on endiselt küsimusi?
 
-### **Otsi esmalt**
-- Vaata [ametlikku dokumentatsiooni](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- Otsi [GitHubi probleemide](https://github.com/Azure/azure-dev/issues) hulgast sarnaseid küsimusi
+### **Otsi esmalt**  
+- Vaata [ametlikku dokumentatsiooni](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- Otsi sarnaseid probleeme [GitHub'i probleemidest](https://github.com/Azure/azure-dev/issues)  
 
-### **Küsi abi**
-- [GitHubi arutelud](https://github.com/Azure/azure-dev/discussions) - Kogukonna tugi
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Tehnilised küsimused
-- [Azure Discord](https://discord.gg/azure) - Reaalajas kogukonna vestlus
+### **Saada abi**  
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) – Ühiskondlik tugi  
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) – Tehnilised küsimused  
+- [Azure Discord](https://discord.gg/azure) – Otseühendus kogukonnaga  
 
-### **Teata probleemidest**
-- [GitHubi probleemid](https://github.com/Azure/azure-dev/issues/new) - Vigade raportid ja funktsioonide soovid
-- Lisa asjakohased logid, veateated ja sammud probleemi taastamiseks
+### **Teata probleemidest**  
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) – Veaaruanded ja uute funktsioonide ettepanekud  
+- Lisa asjakohased logid, veateated ja sammud vea kordamiseks  
 
-### **Õpi rohkem**
-- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure arhitektuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure hästi arhitektuuri raamistik](https://learn.microsoft.com/en-us/azure/well-architected/)
-
----
-
-*See KKK uuendatakse regulaarselt. Viimati uuendatud: 9. september 2025*
+### **Õpi rohkem**  
+- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Azure arhitektuuri keskus](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure hästi arhitektuuri juhend](https://learn.microsoft.com/en-us/azure/well-architected/)  
 
 ---
 
-**Navigeerimine**
-- **Eelmine õppetund**: [Sõnastik](glossary.md)
-- **Järgmine õppetund**: [Õppejuhend](study-guide.md)
+*Seda korduma kippuvate küsimuste nimekirja uuendatakse regulaarselt. Viimane uuendus: 9. september 2025*  
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+**Navigatsioon**  
+- **Eelmine peatükk**: [Terminid](glossary.md)  
+- **Järgmine peatükk**: [Õpijuhend](study-guide.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastutusest loobumine**:
+See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüdleme täpsuse poole, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleb pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse ega valesti mõistmise eest, mis võivad tuleneda selle tõlke kasutamisest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

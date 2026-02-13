@@ -1,90 +1,81 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-11-24T22:31:52+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "kn"
-}
--->
 # 5. ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡುವುದು
 
-!!! tip "ಈ ಘಟಕದ ಅಂತ್ಯದ ವೇಳೆಗೆ ನೀವು ಮಾಡಬಲ್ಲಿರಿ"
+!!! tip "ಈ ಅಧ್ಯಾಯದ ಕೊನೆಯಲ್ಲಿ ನೀವು ಈ ಕಾರ್ಯಗಳನ್ನು ಮಾಡಲು ಸಾಮರ್ಥ್ಯ ಹೊಂದಿರುತ್ತೀರಿ"
 
     - [ ] ಡೀಫಾಲ್ಟ್ AI ಏಜೆಂಟ್ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಅನ್ವೇಷಿಸಲಾಗಿದೆ
-    - [ ] ನಿಮ್ಮದೇ ಆದ ಸೂಚ್ಯಂಕದೊಂದಿಗೆ AI ಶೋಧವನ್ನು ಸೇರಿಸಲಾಗಿದೆ
+    - [ ] ನಿಮ್ಮ ಸ್ವಂತ ಸೂಚ್ಯಂಕದೊಂದಿಗೆ AI ಹುಡುಕಾಟವನ್ನು ಸೇರಿಸಲಾಗಿದೆ
     - [ ] ಟ್ರೇಸಿಂಗ್ ಮೆಟ್ರಿಕ್ಸ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ ಮತ್ತು ವಿಶ್ಲೇಷಿಸಲಾಗಿದೆ
-    - [ ] ಮೌಲ್ಯಮಾಪನ ರನ್ ಅನ್ನು ನಿರ್ವಹಿಸಲಾಗಿದೆ
-    - [ ] ರೆಡ್-ಟೀಮಿಂಗ್ ಸ್ಕ್ಯಾನ್ ಅನ್ನು ನಿರ್ವಹಿಸಲಾಗಿದೆ
-    - [ ] **ಲ್ಯಾಬ್ 5: ಕಸ್ಟಮೈಜೇಶನ್ ಯೋಜನೆಯನ್ನು ನಿರ್ಮಿಸಲಾಗಿದೆ**
+    - [ ] ಮೌಲ್ಯಮಾಪನ ಚಾಲನೆ ನಡೆಸಲಾಗಿದೆ
+    - [ ] ರೆಡ್‑ಟೀಮಿಂಗ್ ಸ್ಕ್ಯಾನ್ ನಡೆಸಲಾಗಿದೆ
+    - [ ] **Lab 5: ಕಸ್ಟಮೈಜೆಶನ್ ಯೋಜನೆಯನ್ನು ರಚಿಸಲಾಗಿದೆ** 
 
 ---
 
 ## 5.1 AI ಏಜೆಂಟ್ ಸಾಮರ್ಥ್ಯಗಳು
 
-!!! success "ನಾವು ಇದನ್ನು ಲ್ಯಾಬ್ 01 ನಲ್ಲಿ ಪೂರ್ಣಗೊಳಿಸಿದ್ದೇವೆ"
+!!! success "ನಾವು ಇದನ್ನು Lab 01ರಲ್ಲಿ ಪೂರ್ಣಗೊಳಿಸಿದ್ದೇವೆ"
 
-- **ಫೈಲ್ ಶೋಧ**: OpenAI ನ ಅಂತರ್ನಿರ್ಮಿತ ಫೈಲ್ ಶೋಧ ಜ್ಞಾನ ಹಿಂಪಡೆಯಲು
-- **ಉಲ್ಲೇಖಗಳು**: ಪ್ರತಿಕ್ರಿಯೆಗಳಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತ ಮೂಲ ಉಲ್ಲೇಖ
-- **ಕಸ್ಟಮೈಜ್ ಮಾಡಬಹುದಾದ ಸೂಚನೆಗಳು**: ಏಜೆಂಟ್ ನ ವರ್ತನೆ ಮತ್ತು ವ್ಯಕ್ತಿತ್ವವನ್ನು ಬದಲಾಯಿಸಿ
-- **ಟೂಲ್ ಇಂಟಿಗ್ರೇಶನ್**: ಕಸ್ಟಮ್ ಸಾಮರ್ಥ್ಯಗಳಿಗಾಗಿ ವಿಸ್ತಾರಯೋಗ್ಯ ಟೂಲ್ ವ್ಯವಸ್ಥೆ
+- **File Search**: ಜ್ಞಾನ ಹಿಂಪಡೆಯಲು OpenAI ನೊಳಗಿನ ಫೈಲ್ ಹುಡುಕಾಟ
+- **Citations**: ಪ್ರತ್ಯುತ್ತರಗಳಲ್ಲಿ స్వಯಂಚಾಲಿತ ಮೂಲ ಉಲ್ಲೇಖನ
+- **Customizable Instructions**: ಏಜೆಂಟ್ ವರ್ತನೆ ಮತ್ತು ವ್ಯಕ್ತಿತ್ವವನ್ನು ತಿದ್ದುಪಡಿ ಮಾಡಬಹುದು
+- **Tool Integration**: ಕಸ್ಟಮ್ ಸಾಮರ್ಥ್ಯಗಳಿಗಾಗಿ ವಿಸ್ತರಿಸಲಾಗಬಹುದಾದ ಟೂಲ್ ಸಿಸ್ಟಮ್
 
 ---
 
 ## 5.2 ಜ್ಞಾನ ಹಿಂಪಡೆಯುವ ಆಯ್ಕೆಗಳು
 
-!!! task "ಇದನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ನಾವು ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಬೇಕು ಮತ್ತು ಪುನಃ ನಿಯೋಜಿಸಬೇಕು"    
+!!! task "ಇದನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ನಮಗೆ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಿ ಪುನಃ ಜಾರಿಗೆ ತರಬೇಕಾಗಿದೆ"    
     
     ```bash title=""
-    # ಪರಿಸರ ವ್ಯತ್ಯಾಸಗಳನ್ನು ಹೊಂದಿಸಿ
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # ಡೇಟಾವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ನನ್ನ ಸೂಚ್ಯಂಕವನ್ನು ರಚಿಸಿ
+    # Upload data and create my index
 
     ```
 
 ---
 
-**OpenAI ಫೈಲ್ ಶೋಧ (ಡೀಫಾಲ್ಟ್):**
+**OpenAI ಫೈಲ್ ಹುಡುಕಾಟ (ಡೀಫಾಲ್ಟ್):**
 
-- Azure AI ಏಜೆಂಟ್ ಸೇವೆಗೆ ಅಂತರ್ನಿರ್ಮಿತ
-- ಸ್ವಯಂಚಾಲಿತ ಡಾಕ್ಯುಮೆಂಟ್ ಪ್ರಕ್ರಿಯೆ ಮತ್ತು ಸೂಚ್ಯಂಕ
-- ಯಾವುದೇ ಹೆಚ್ಚುವರಿ ಸಂರಚನೆ ಅಗತ್ಯವಿಲ್ಲ
+- Foundry ಏಜೆಂಟ್‌ಗಳಿಗೆ ಒಳಗೇರಿಸಲಾಗಿದೆ
+- ದಾಖಲೆಗಳ ಸ್ವಯಂಚಾಲಿತ ಪ್ರಕ್ರಿಯೆ ಮತ್ತು ಸೂಚ್ಯಂಕೀಕರಣ
+- ಯಾವುದೇ ಹೆಚ್ಚುವರಿ ಕಾನ್ಫಿಗರೇಶನ್ ಅಗತ್ಯವಿಲ್ಲ
 
-**Azure AI ಶೋಧ (ಐಚ್ಛಿಕ):**
+**Azure AI Search (ಐಚ್ಛಿಕ):**
 
-- ಹೈಬ್ರಿಡ್ ಅರ್ಥಪೂರ್ಣ ಮತ್ತು ವೆಕ್ಟರ್ ಶೋಧ
+- ಹೈಬ್ರಿಡ್ ಸೈಮ್ಯಾಂಟಿಕ್ ಮತ್ತು ವೆಕ್ಟರ್ ಹುಡುಕಾಟ
 - ಕಸ್ಟಮ್ ಸೂಚ್ಯಂಕ ನಿರ್ವಹಣೆ
-- ಪ್ರಗತಿಶೀಲ ಶೋಧ ಸಾಮರ್ಥ್ಯಗಳು
-- `USE_AZURE_AI_SEARCH_SERVICE=true` ಅಗತ್ಯವಿದೆ
+- ಅತ್ಯಾಧುನಿಕ ಹುಡುಕಾಟ ಸಾಮರ್ಥ್ಯಗಳು
+- ಅಗತ್ಯವಿದೆ `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [ಟ್ರೇಸಿಂಗ್ ಮತ್ತು ಮಾನಿಟರಿಂಗ್](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "ಇದನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ನಾವು ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಬೇಕು ಮತ್ತು ಪುನಃ ನಿಯೋಜಿಸಬೇಕು"    
+!!! task "ಇದನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ನಮಗೆ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಿ ಪುನಃ ಜಾರಿಗೆ ತರಬೇಕಾಗಿದೆ"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**ಟ್ರೇಸಿಂಗ್:**
+**ಟ್ರೆಸಿಂಗ್:**
 
-- OpenTelemetry ಇಂಟಿಗ್ರೇಶನ್
+- OpenTelemetry ಏಕೀಕರಣ
 - ವಿನಂತಿ/ಪ್ರತಿಕ್ರಿಯೆ ಟ್ರ್ಯಾಕಿಂಗ್
-- ಕಾರ್ಯಕ್ಷಮತೆ ಮೆಟ್ರಿಕ್ಸ್
-- AI Foundry ಪೋರ್ಟಲ್ ನಲ್ಲಿ ಲಭ್ಯವಿದೆ
+- ಕಾರ್ಯಕ್ಷಮತಾ ಮೆಟ್ರಿಕ್ಸ್
+- Microsoft Foundry ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಲಭ್ಯ
 
 **ಲಾಗಿಂಗ್:**
 
-- ಕಂಟೈನರ್ ಆ್ಯಪ್ಸ್ ನಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಲಾಗ್‌ಗಳು
-- ಸಂಬಂಧಿತ ID ಗಳೊಂದಿಗೆ ರಚಿತ ಲಾಗಿಂಗ್
-- ರಿಯಲ್-ಟೈಮ್ ಮತ್ತು ಐತಿಹಾಸಿಕ ಲಾಗ್ ವೀಕ್ಷಣೆ
+- Container Apps ನಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಲಾಗ್ಗಳು
+- ಸಂಬಂಧಿತ IDs ಬಳಸಿ ರಚಿತ ಲಾಗಿಂಗ್
+- ರಿಯಲ್‑ಟೈಮ್ ಮತ್ತು ಐತಿಹಾಸಿಕ ಲಾಗ್ ವೀಕ್ಷಣೆ
 
 ---
 
@@ -92,80 +83,83 @@ CO_OP_TRANSLATOR_METADATA:
 
 **ಸ್ಥಳೀಯ ಮೌಲ್ಯಮಾಪನ:**
 
-- ಗುಣಮಟ್ಟದ ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ ಅಂತರ್ನಿರ್ಮಿತ ಮೌಲ್ಯಮಾಪಕರು
+- ಗುಣಮಟ್ಟ ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ ಒಳಗಿನ ಮೌಲ್ಯಮಾಪಕರ
 - ಕಸ್ಟಮ್ ಮೌಲ್ಯಮಾಪನ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು
-- ಕಾರ್ಯಕ್ಷಮತೆ ಬೆಂಚ್ಮಾರ್ಕಿಂಗ್
+- ಕಾರ್ಯಕ್ಷಮತಾ ಬೆಂಚ್ಮಾರ್ಕಿಂಗ್
 
 **ನಿರಂತರ ಮಾನಿಟರಿಂಗ್:**
 
 - ಲೈವ್ ಸಂವಹನಗಳ ಸ್ವಯಂಚಾಲಿತ ಮೌಲ್ಯಮಾಪನ
-- ಗುಣಮಟ್ಟದ ಮೆಟ್ರಿಕ್ಸ್ ಟ್ರ್ಯಾಕಿಂಗ್
-- ಕಾರ್ಯಕ್ಷಮತೆ ಹಿಂಜರಿತ ಪತ್ತೆ
+- ಗುಣಮಟ್ಟ ಮೆಟ್ರಿಕ್ ಟ್ರ್ಯಾಕಿಂಗ್
+- ಕಾರ್ಯಕ್ಷಮತೆ ಹಿನ್ನಡೆ ಪತ್ತೆ
 
-**CI/CD ಇಂಟಿಗ್ರೇಶನ್:**
+**CI/CD ಏಕೀಕರಣ:**
 
-- GitHub Actions ವರ್ಕ್‌ಫ್ಲೋ
-- ಸ್ವಯಂಚಾಲಿತ ಪರೀಕ್ಷೆ ಮತ್ತು ಮೌಲ್ಯಮಾಪನ
-- ಅಂಕಿ-ಅಂಶಗಳ ಹೋಲಿಕೆ ಪರೀಕ್ಷೆ
+- GitHub Actions ವರ್ಕ್ಫ್ಲೋ
+- ಸ್ವಯಂಚಾಲಿತ ಟೆಸ್ಟಿಂಗ್ ಮತ್ತು ಮೌಲ್ಯಮಾಪನ
+- ಸಾಂಖ್ಯಿಕ ಹೋಲಿಕೆ ಪರೀಕ್ಷೆ
 
 ---
 
-## 5.5 [AI ರೆಡ್ ಟೀಮಿಂಗ್ ಏಜೆಂಟ್](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI ರೆಡ್‑ಟೀಮಿಂಗ್ ಏಜೆಂಟ್](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI ರೆಡ್ ಟೀಮಿಂಗ್:**
+**AI ರೆಡ್‑ಟೀಮಿಂಗ್:**
 
-- ಸ್ವಯಂಚಾಲಿತ ಭದ್ರತಾ ಸ್ಕ್ಯಾನಿಂಗ್
+- ಸ್ವಯಂಚಾಲಿತ ಭದ್ರತಾ ಸ್ಕ್ಯಾನೇರ್
 - AI ವ್ಯವಸ್ಥೆಗಳಿಗಾಗಿ ಅಪಾಯ ಮೌಲ್ಯಮಾಪನ
-- ಅನೇಕ ವರ್ಗಗಳಲ್ಲಿ ಸುರಕ್ಷತಾ ಮೌಲ್ಯಮಾಪನ
+- ಬಹುಪಾಲು ವರ್ಗಗಳಲ್ಲಿ ಸುರಕ್ಷತಾ ಮೌಲ್ಯಮಾಪನ
 
 **ಪ್ರಮಾಣೀಕರಣ:**
 
-- Azure ಸೇವೆಗಳಿಗಾಗಿ ನಿರ್ವಹಿತ ಗುರುತಿನ ಚಿಹ್ನೆ
+- Azure ಸೇವೆಗಳಿಗೆ Managed Identity
 - ಐಚ್ಛಿಕ Azure App Service ಪ್ರಮಾಣೀಕರಣ
-- ಅಭಿವೃದ್ಧಿಗಾಗಿ ಮೂಲಭೂತ ಪ್ರಮಾಣೀಕರಣFallback
+- ಅಭಿವೃದ್ಧಿಗಾಗಿ ಮೂಲ auth ಬ್ಯಾಕ್ಫಾಲ್
 
-!!! quote "ಈ ಲ್ಯಾಬ್ ಅಂತ್ಯದ ವೇಳೆಗೆ ನೀವು ಹೊಂದಿರಬೇಕು"
-    - [ ] ನಿಮ್ಮ ದೃಶ್ಯಾವಲೋಕನದ ಅಗತ್ಯಗಳನ್ನು ವ್ಯಾಖ್ಯಾನಿಸಲಾಗಿದೆ
-    - [ ] ಪರಿಸರ ವ್ಯತ್ಯಾಸಗಳನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಲಾಗಿದೆ (ಕಾನ್ಫಿಗ್)
-    - [ ] ಏಜೆಂಟ್ ಸೂಚನೆಗಳನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಲಾಗಿದೆ (ಟಾಸ್ಕ್)
-    - [ ] ಕಸ್ಟಮೈಸ್ ಮಾಡಿದ ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ನಿಯೋಜಿಸಲಾಗಿದೆ (ಆ್ಯಪ್)
-    - [ ] ನಿಯೋಜನೆಯ ನಂತರದ ಕಾರ್ಯಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗಿದೆ (ಮ್ಯಾನುಯಲ್)
-    - [ ] ಪರೀಕ್ಷಾ ಮೌಲ್ಯಮಾಪನವನ್ನು ನಿರ್ವಹಿಸಲಾಗಿದೆ
 
-ಈ ಉದಾಹರಣೆ ಎರಡು ವಿಶೇಷ ಏಜೆಂಟ್‌ಗಳು ಮತ್ತು ಅನೇಕ ಮಾದರಿ ನಿಯೋಜನೆಗಳೊಂದಿಗೆ ಎಂಟರ್‌ಪ್ರೈಸ್ ರಿಟೇಲ್ ಬಳಕೆ ಪ್ರಕರಣಕ್ಕಾಗಿ ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡುವುದು ಹೇಗೆ ಎಂಬುದನ್ನು ತೋರಿಸುತ್ತದೆ.
+
+!!! quote "ಈ ಲ್ಯಾಬ್‌ನ ಅಂತ್ಯಕ್ಕೆ ನಿಮ್ಮ ಬಳಿ ಇರಬೇಕು"
+    - [ ] ನಿಮ್ಮ ಸನ್ನಿವೇಶದ ಅಗತ್ಯಗಳನ್ನು ನಿರ್ಧರಿಸಿ
+    - [ ] ಕಸ್ಟಮೈಸ್ ಮಾಡಿದ env ಚರಗಳು (config)
+    - [ ] ಕಸ್ಟಮೈಸ್ ಮಾಡಿದ ಏಜೆಂಟ್ ಸೂಚನೆಗಳು (task)
+    - [ ] ಕಸ್ಟಮೈಸ್ ಮಾಡಲಾದ ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ನಿಯೋಜಿಸಲಾಗುವುದು (app)
+    - [ ] ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್ ನಂತರದ ಕಾರ್ಯಗಳನ್ನು ಮುಗಿಸಿ (manual)
+    - [ ] ಪರೀಕ್ಷಾ ಮೌಲ್ಯಮಾಪನ ನಡೆಸಿ
+
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 ನಿಮ್ಮಿಗಾಗಿ ಕಸ್ಟಮೈಸ್ ಮಾಡಿ!
+## 5.6 ನಿಮ್ಮಿಗಾಗಿ ಅದನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ!
 
-### 5.6.1. ದೃಶ್ಯಾವಲೋಕನದ ಅಗತ್ಯಗಳು
+### 5.6.1. ಸನ್ನಿವೇಶದ ಅಗತ್ಯಗಳು
 
 #### **ಏಜೆಂಟ್ ನಿಯೋಜನೆಗಳು:** 
 
-   - ಶಾಪರ್ ಏಜೆಂಟ್: ಗ್ರಾಹಕರು ಉತ್ಪನ್ನಗಳನ್ನು ಹುಡುಕಲು ಮತ್ತು ಹೋಲಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ
-   - ಲಾಯಲ್ಟಿ ಏಜೆಂಟ್: ಗ್ರಾಹಕ ಪ್ರಶಸ್ತಿಗಳು ಮತ್ತು ಪ್ರಚಾರಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತದೆ
+   - Shopper Agent: ಗ್ರಾಹಕರಿಗೆ ಉತ್ಪನ್ನಗಳನ್ನು ಹುಡುಕಲು ಮತ್ತು ಹೋಲಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ
+   - Loyalty Agent: ಗ್ರಾಹಕರ ರಿವಾರ್ಡ್‌ಗಳು ಮತ್ತು ಪ್ರಚಾರಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತದೆ
 
 #### **ಮಾದರಿ ನಿಯೋಜನೆಗಳು:**
 
    - `gpt-4.1`: ಪ್ರಾಥಮಿಕ ಚಾಟ್ ಮಾದರಿ
-   - `o3`: ಸಂಕೀರ್ಣ ಪ್ರಶ್ನೆಗಳಿಗೆ ತಾರ್ಕಿಕ ಮಾದರಿ
-   - `gpt-4.1-nano`: ಸರಳ ಸಂವಹನಗಳಿಗೆ ತೂಕದ ಕಡಿಮೆ ಮಾದರಿ
-   - `text-embedding-3-large`: ಶೋಧಕ್ಕಾಗಿ ಉನ್ನತ ಗುಣಮಟ್ಟದ ಎಂಬೆಡಿಂಗ್‌ಗಳು
+   - `o3`: ಜಟಿಲ ವಿನಂತಿಗಳಿಗೆ ತರ್ಕ ಮಾದರಿ
+   - `gpt-4.1-nano`: ಸರಳ ಸಂವಹನಗಳಿಗೆ ಲಘು-ತೂಕ ಮಾದರಿ
+   - `text-embedding-3-large`: ಹುಡುಕಾಟಕ್ಕಾಗಿ ಉನ್ನತ-ನಾಣ್ಯತೆಯ ಎಂಬೆಡಿಂಗ್ಸ್
 
 #### **ವೈಶಿಷ್ಟ್ಯಗಳು:**
 
    - ಟ್ರೇಸಿಂಗ್ ಮತ್ತು ಮಾನಿಟರಿಂಗ್ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ
-   - ಉತ್ಪನ್ನ ಕ್ಯಾಟಲಾಗ್‌ಗಾಗಿ AI ಶೋಧ
-   - ಗುಣಮಟ್ಟದ ಖಾತರಿಗಾಗಿ ಮೌಲ್ಯಮಾಪನ ಚಟುವಟಿಕೆ
-   - ಭದ್ರತಾ ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ ರೆಡ್ ಟೀಮಿಂಗ್
+   - ಉತ್ಪನ್ನ ಕಾಟಾಲಾಗ್‌ಗೆ AI ಹುಡುಕಾಟ
+   - ಗುಣಮಟ್ಟ ಭರವಸೆಗಾಗಿ ಮೌಲ್ಯಮಾಪನ ಫ್ರೇಮ್‌ವರ್ಕ್
+   - ಭದ್ರತಾ ಮಾನ್ಯತೆಗಾಗಿ ರೆಡ್‑ಟೀಮಿಂಗ್
 
 ---
 
-### 5.6.2 ದೃಶ್ಯಾವಲೋಕನದ ಅನುಷ್ಠಾನ
+### 5.6.2 ಸನ್ನಿವೇಶ ಜಾರಿಗೆ
 
-#### 5.6.2.1. ನಿಯೋಜನೆಗೆ ಮುನ್ನದ ಕಾನ್ಫಿಗ್
 
-`setup-retail.sh` ಎಂಬ ಸೆಟಪ್ ಸ್ಕ್ರಿಪ್ಟ್ ರಚಿಸಿ
+#### 5.6.2.1. ಪೂರ್ವ-ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್ ಕಾನ್ಫಿಗ್
+
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -173,7 +167,7 @@ CO_OP_TRANSLATOR_METADATA:
 # ಪರಿಸರದ ಹೆಸರನ್ನು ಹೊಂದಿಸಿ
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# ಪ್ರದೇಶವನ್ನು ಸಂರಚಿಸಿ (ಮಾದರಿಯ ಲಭ್ಯತೆಯ ಆಧಾರದ ಮೇಲೆ ಆಯ್ಕೆಮಾಡಿ)
+# ಪ್ರದೇಶವನ್ನು ಸಂರಚಿಸಿ (ಮಾದರಿ ಲಭ್ಯತೆಯ ಆಧಾರದ ಮೇಲೆ ಆಯ್ಕೆಮಾಡಿ)
 azd env set AZURE_LOCATION "eastus2"
 
 # ಎಲ್ಲಾ ಐಚ್ಛಿಕ ಸೇವೆಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
@@ -181,7 +175,7 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# ಪ್ರಾಥಮಿಕ ಚಾಟ್ ಮಾದರಿಯನ್ನು ಸಂರಚಿಸಿ (gpt-4.1 ಗೆ ಹತ್ತಿರವಾದ gpt-4o ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ)
+# ಪ್ರಾಥಮಿಕ ಚಾಟ್ ಮಾದರಿಯನ್ನು ಸಂರಚಿಸಿ (gpt-4.1 ಗೆ ಅತ್ಯಂತ ಸಮೀಪವಿರುವ ಮತ್ತು ಲಭ್ಯವಿರುವ ಮಾದರಿ: gpt-4o)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
@@ -192,10 +186,10 @@ azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# ಏಜೆಂಟ್ ಹೆಸರನ್ನು ಹೊಂದಿಸಿ (ಮೊದಲ ಏಜೆಂಟ್ ಅನ್ನು ರಚಿಸಲಾಗುತ್ತದೆ)
+# ಏಜೆಂಟ್ ಹೆಸರನ್ನು ಹೊಂದಿಸಿ (ಮೊದಲ ಏಜೆಂಟ್ ಸೃಷ್ಟಿಯಾಗುತ್ತದೆ)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# ಹುಡುಕಾಟ ಸೂಚಿಯನ್ನು ಸಂರಚಿಸಿ
+# ಹುಡುಕಾಟ ಸೂಚ್ಯಂಕವನ್ನು ಸಂರಚಿಸಿ
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -206,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: ಏಜೆಂಟ್ ಸೂಚನೆಗಳು
 
-`custom-agents/shopper-agent-instructions.md` ರಚಿಸಿ:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -229,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-`custom-agents/loyalty-agent-instructions.md` ರಚಿಸಿ:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -256,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: ನಿಯೋಜನೆ ಸ್ಕ್ರಿಪ್ಟ್
 
-`deploy-retail.sh` ರಚಿಸಿ:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -264,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# ಪೂರ್ವಶರತ್ತುಗಳನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
+# ಮುಂಚಿತ ಅಗತ್ಯಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -297,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಯೋಜಿಸಿ
+# ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಯೋಜಿಸಿ
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# ನಿಯೋಜನೆಯ ಔಟ್‌ಪುಟ್‌ಗಳನ್ನು ಹಿಡಿಯಿರಿ
+# ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್ ಔಟ್‌ಪುಟ್‌ಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್ URL ಅನ್ನು ಪಡೆಯಿರಿ
+# ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್‌ನ URL ಅನ್ನು ಪಡೆಯಿರಿ
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -327,28 +321,28 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: ನಿಯೋಜನೆಯ ನಂತರದ ಕಾನ್ಫಿಗ್
+#### 5.6.2.4: ಪೋಸ್ಟ್-ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್ ಕಾನ್ಫಿಗ್
 
-`configure-retail-agents.sh` ರಚಿಸಿ:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# ನಿಯೋಜನೆ ಮಾಹಿತಿಯನ್ನು ಪಡೆಯಿರಿ
+# ಡಿಪ್ಲಾಯ್ಮೆಂಟ್ ಮಾಹಿತಿಯನ್ನು ಪಡೆಯಿರಿ
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# ಕೈಯಿಂದ ಸಂರಚನೆಗಾಗಿ ಸೂಚನೆಗಳು
+# ಹಸ್ತಚಾಲಿತ ಸಂರಚನೆಗಾಗಿ ಸೂಚನೆಗಳು
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -373,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -386,18 +380,18 @@ echo "
 
 ### 5.6.3: ಪರೀಕ್ಷೆ ಮತ್ತು ಮಾನ್ಯತೆ
 
-`test-retail-deployment.sh` ರಚಿಸಿ:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# ಪರಿಸರ ಚಲಾಯಮಾನಗಳು ಹೊಂದಿಸಲಾಗಿದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
+# ಪರಿಸರ ಚರಗಳು ನಿಗದಿಯಾಗಿರುವುದನ್ನು ಪರಿಶೀಲಿಸಿ
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್ ಲಭ್ಯತೆ ಪರೀಕ್ಷಿಸಿ
+# ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್ ಲಭ್ಯತೆಯನ್ನು ಪರೀಕ್ಷಿಸಿ
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -411,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# ಸಂರಚನೆ ಮಾಡಿದರೆ ಮೌಲ್ಯಮಾಪನವನ್ನು ಚಲಾಯಿಸಿ
+# ಸಂರಚಿಸಲಾದರೆ ಮೌಲ್ಯಮಾಪನವನ್ನು ಚಲಾಯಿಸಿ
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -426,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -437,40 +431,41 @@ Next steps:
 
 ### 5.6.4 ನಿರೀಕ್ಷಿತ ಫಲಿತಾಂಶಗಳು
 
-ಈ ಅನುಷ್ಠಾನ ಮಾರ್ಗದರ್ಶಿಯನ್ನು ಅನುಸರಿಸಿದ ನಂತರ, ನೀವು ಹೊಂದಿರುವಿರಿ:
+After following this implementation guide, you will have:
 
-1. **ನಿಯೋಜಿತ ಮೂಲಸೌಕರ್ಯ:**
+1. **ನಿಯೋಜಿಸಲ್ಪಟ್ಟ ಮೂಲಸೌಕರ್ಯ:**
 
-      - ಮಾದರಿ ನಿಯೋಜನೆಗಳೊಂದಿಗೆ AI Foundry ಪ್ರಾಜೆಕ್ಟ್
-      - ವೆಬ್ ಆ್ಯಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಹೋಸ್ಟ್ ಮಾಡುವ ಕಂಟೈನರ್ ಆ್ಯಪ್ಸ್
-      - ಉತ್ಪನ್ನ ಕ್ಯಾಟಲಾಗ್‌ಗಾಗಿ AI ಶೋಧ ಸೇವೆ
-      - ಮಾನಿಟರಿಂಗ್‌ಗಾಗಿ ಆ್ಯಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್
+      - Microsoft Foundry ಯೋಜನೆ ಮಾದರಿ ನಿಯೋಜನೆಗಳೊಂದಿಗೆ
+      - ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಹೋಸ್ಟ್ ಮಾಡುವ Container Apps
+      - ಉತ್ಪನ್ನ ಕಾಟಾಲಾಗ್‌ಗೆ AI Search ಸೇವೆ
+      - ಮಾನಿಟರಿಂಗ್‌ಗೆ Application Insights
 
-2. **ಪ್ರಾರಂಭಿಕ ಏಜೆಂಟ್:**
+2. **ಪ್ರಾಥಮಿಕ ಏಜೆಂಟ್:**
 
-      - ಮೂಲ ಸೂಚನೆಗಳೊಂದಿಗೆ ಶಾಪರ್ ಏಜೆಂಟ್ ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
-      - ಫೈಲ್ ಶೋಧ ಸಾಮರ್ಥ್ಯ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ
-      - ಟ್ರೇಸಿಂಗ್ ಮತ್ತು ಮಾನಿಟರಿಂಗ್ ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
+      - Shopper Agent ಮೂಲಭೂತ ಸೂಚನೆಗಳೊಂದಿಗೆ ಸಂರಚಿಸಲಾಗಿದೆ
+      - ಫೈಲ್ ಹುಡುಕಾಟ ಸಾಮರ್ಥ್ಯ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ
+      - ಟ್ರೇಸಿಂಗ್ ಮತ್ತು ಮಾನಿಟರಿಂಗ್ ಸಂರಚಿಸಲಾಗಿದೆ
 
-3. **ಕಸ್ಟಮೈಜೇಶನ್‌ಗಾಗಿ ಸಿದ್ಧ:**
+3. **ಕಸ್ಟಮೈಜೆಷನ್‌ಗೆ ಸಿದ್ಧವಾಗಿದೆ:**
 
-      - ಲಾಯಲ್ಟಿ ಏಜೆಂಟ್ ಸೇರಿಸಲು ಚಟುವಟಿಕೆ
-      - ಕಸ್ಟಮ್ ಸೂಚನೆ ಟೆಂಪ್ಲೇಟ್‌ಗಳು
+      - Loyalty Agent ಸೇರಿಸುವುದಕ್ಕಾಗಿ ಫ್ರೇಮ್‌ವರ್ಕ್
+      - ಕಸ್ಟಮ್ ಸೂಚನಾ ಟೆಂಪ್ಲೇಟ್ಗಳು
       - ಪರೀಕ್ಷೆ ಮತ್ತು ಮಾನ್ಯತೆ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು
-      - ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಮೌಲ್ಯಮಾಪನ ಸೆಟಪ್
+      - ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಮೌಲ್ಯಮಾಪನ ವ್ಯವಸ್ಥೆ
 
-4. **ಉತ್ಪಾದನಾ ಸಿದ್ಧತೆ:**
+4. **ಉತ್ಪಾದನೆ ಸಿದ್ಧತೆ:**
 
-      - ರೆಡ್ ಟೀಮಿಂಗ್‌ನೊಂದಿಗೆ ಭದ್ರತಾ ಸ್ಕ್ಯಾನಿಂಗ್
-      - ಕಾರ್ಯಕ್ಷಮತೆ ಮಾನಿಟರಿಂಗ್
-      - ಗುಣಮಟ್ಟದ ಮೌಲ್ಯಮಾಪನ ಚಟುವಟಿಕೆ
-      - ವಿಸ್ತಾರಯೋಗ್ಯ ಆರ್ಕಿಟೆಕ್ಚರ್
+      - ರೆಡ್‑ಟೀಮಿಂಗ್ ಮೂಲಕ ಭದ್ರತಾ ಸ್ಕ್ಯಾನಿಂಗ್
+      - ಕಾರ್ಯಕ್ಷಮತೆಯ ಮಾನಿಟರಿಂಗ್
+      - ಗುಣಮಟ್ಟ ಮೌಲ್ಯಮಾಪನ ಫ್ರೇಮ್‌ವರ್ಕ್
+      - ವಿಸ್ತಾರಗೊಳ್ಳಬಹುದಾದ ಸಂರಚನೆ
 
-ಈ ಉದಾಹರಣೆ AZD ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ನಿರ್ದಿಷ್ಟ ಎಂಟರ್‌ಪ್ರೈಸ್ ದೃಶ್ಯಾವಲೋಕನಗಳಿಗೆ ಹೇಗೆ ವಿಸ್ತರಿಸಬಹುದು ಮತ್ತು ಕಸ್ಟಮೈಸ್ ಮಾಡಬಹುದು ಎಂಬುದನ್ನು ತೋರಿಸುತ್ತದೆ, ಭದ್ರತೆ, ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ವಿಸ್ತಾರಯೋಗ್ಯತೆಯ ಉತ್ತಮ ಅಭ್ಯಾಸಗಳನ್ನು ಉಳಿಸಿಕೊಂಡು.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ಅಸಮಾಕ್ಷಿಕೆ**:  
-ಈ ದಸ್ತಾವೇಜು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯಿಗಾಗಿ ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ದಯವಿಟ್ಟು ಗಮನಿಸಿ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸಮಾಕ್ಷಿತೆಗಳು ಇರಬಹುದು. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಸ್ತಾವೇಜು ಪ್ರಾಮಾಣಿಕ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಮಹತ್ವದ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವ ಮೂಲಕ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಗಳ ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳ ಬಗ್ಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
+ಅಸ್ವೀಕರಣ:
+
+ಈ ದಸ್ತಾವೇಜನ್ನು AI ಭಾಷಾಂತರ ಸೇವೆ Co-op Translator (https://github.com/Azure/co-op-translator) ಬಳಸಿ ಭಾಷಾಂತರಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಗೆ ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ ಸಹ, ಸ್ವಯಂಚಾಲಿತ ಭಾಷಾಂತರಗಳಲ್ಲಿ ತಪ್ಪುಗಳು ಅಥವಾ ಅಶುದ್ಧತೆಗಳಿರುವ ಸಾಧ್ಯತೆ ಇದೆ ಎಂಬುದನ್ನು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಸ್ತಾವೇಜನ್ನು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರವಾದ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಭಾಷಾಂತರವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಭಾಷಾಂತರದ ಬಳಕೆಯಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ಅಸಮಂಜಸತೆಗಳು ಅಥವಾ ತಪ್ಪಾಗಿ ವ್ಯಾಖ್ಯಾನವಾಗುವ ಪರಿಣಾಮಗಳಿಗೆ ನಾವು ಹೊಣೆಗಾರರಾಗಿರುವುದಿಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

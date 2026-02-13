@@ -1,111 +1,102 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a82d27b84022e9b7c7a163f99fa1fd25",
-  "translation_date": "2025-09-18T14:16:51+00:00",
-  "source_file": "resources/faq.md",
-  "language_code": "lt"
-}
--->
 # Dažniausiai užduodami klausimai (DUK)
 
 **Pagalba pagal skyrių**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
 - **🚆 Diegimo problemos**: [1 skyrius: Diegimas ir nustatymas](../docs/getting-started/installation.md)
-- **🤖 AI klausimai**: [2 skyrius: AI-pirmasis kūrimas](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **🔧 Trikčių šalinimas**: [7 skyrius: Trikčių šalinimas ir derinimas](../docs/troubleshooting/common-issues.md)
+- **🤖 AI klausimai**: [2 skyrius: AI-pirmasis vystymas](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **🔧 Gedimų šalinimas**: [7 skyrius: Gedimų šalinimas ir derinimas](../docs/troubleshooting/common-issues.md)
 
-## Įvadas
+## Introduction
 
-Šis išsamus DUK pateikia atsakymus į dažniausiai užduodamus klausimus apie „Azure Developer CLI“ (azd) ir „Azure“ diegimus. Čia rasite greitus sprendimus įprastoms problemoms, geriausią praktiką ir paaiškinimus apie azd koncepcijas bei darbo eigas.
+Ši išsami DUK (dažniausiai užduodamų klausimų) dalis pateikia atsakymus į dažniausiai pasitaikančius klausimus apie Azure Developer CLI (azd) ir diegimus Azure. Rasite greitus sprendimus dažnoms problemoms, suprasite geriausias praktikas ir gausite paaiškinimus apie azd sąvokas ir darbo eigas.
 
-## Mokymosi tikslai
+## Learning Goals
 
-Peržiūrėdami šį DUK, jūs:
-- Rasite greitus atsakymus į dažniausiai pasitaikančius „Azure Developer CLI“ klausimus ir problemas
-- Suprasite pagrindines sąvokas ir terminus per praktinį klausimų-atsakymų formatą
-- Pasieksite trikčių šalinimo sprendimus dažnoms problemoms ir klaidų scenarijams
-- Išmoksite geriausią praktiką per dažniausiai užduodamus klausimus apie optimizavimą
+Peržiūrėję šią DUK, jūs:
+- Greitai rasite atsakymus į dažniausiai pasitaikančius Azure Developer CLI klausimus ir problemas
+- Suprasite pagrindines sąvokas ir terminologiją per praktinį klausimų ir atsakymų formatą
+- Gaunate prieigą prie trikčių šalinimo sprendimų dažnoms problemoms ir klaidų scenarijams
+- Išmoksite geriausių praktikų optimizavimo klausimais
 - Atraskite pažangias funkcijas ir galimybes per ekspertų lygio klausimus
-- Efektyviai naudositės informacija apie išlaidas, saugumą ir diegimo strategijas
+- Efektyviai rasite informaciją apie kainas, saugumą ir diegimo strategijas
 
-## Mokymosi rezultatai
+## Learning Outcomes
 
-Reguliariai naudodamiesi šiuo DUK, galėsite:
-- Savarankiškai spręsti dažniausiai pasitaikančias „Azure Developer CLI“ problemas naudodamiesi pateiktais sprendimais
+Reguliariai naudojantis šia DUK, jūs sugebėsite:
+- Savarankiškai spręsti dažniausias Azure Developer CLI problemas, pasinaudodami pateiktais sprendimais
 - Priimti pagrįstus sprendimus dėl diegimo strategijų ir konfigūracijų
-- Suprasti azd ryšį su kitais „Azure“ įrankiais ir paslaugomis
-- Taikyti geriausią praktiką, remiantis bendruomenės patirtimi ir ekspertų rekomendacijomis
-- Efektyviai šalinti autentifikavimo, diegimo ir konfigūracijos problemas
-- Optimizuoti išlaidas ir našumą, naudodamiesi DUK įžvalgomis ir rekomendacijomis
+- Suprasti azd ryšį su kitais Azure įrankiais ir paslaugomis
+- Taikyti geriausias praktikas, remiantis bendruomenės patirtimi ir ekspertų rekomendacijomis
+- Efektyviai spręsti autentifikacijos, diegimo ir konfigūracijos problemas
+- Optimizuoti išlaidas ir našumą pasinaudodami DUK įžvalgomis ir rekomendacijomis
 
-## Turinys
+## Table of Contents
 
-- [Pradžia](../../../resources)
-- [Autentifikavimas ir prieiga](../../../resources)
-- [Šablonai ir projektai](../../../resources)
-- [Diegimas ir infrastruktūra](../../../resources)
-- [Konfigūracija ir aplinkos](../../../resources)
-- [Trikčių šalinimas](../../../resources)
-- [Išlaidos ir sąskaitos](../../../resources)
-- [Geriausia praktika](../../../resources)
-- [Pažangios temos](../../../resources)
+- [Getting Started](../../../resources)
+- [Authentication & Access](../../../resources)
+- [Templates & Projects](../../../resources)
+- [Deployment & Infrastructure](../../../resources)
+- [Configuration & Environments](../../../resources)
+- [Troubleshooting](../../../resources)
+- [Cost & Billing](../../../resources)
+- [Best Practices](../../../resources)
+- [Advanced Topics](../../../resources)
 
 ---
 
-## Pradžia
+## Getting Started
 
-### K: Kas yra „Azure Developer CLI“ (azd)?
-**A**: „Azure Developer CLI“ (azd) yra kūrėjams skirtas komandų eilutės įrankis, kuris pagreitina jūsų programos perkėlimą iš vietinės kūrimo aplinkos į „Azure“. Jis siūlo geriausią praktiką per šablonus ir padeda viso diegimo ciklo metu.
+### Q: What is Azure Developer CLI (azd)?
+**A**: Azure Developer CLI (azd) yra į kūrėją orientuotas komandų eilutės įrankis, kuris pagreitina jūsų programos nuo vietinės kūrimo aplinkos perkėlimą į Azure. Jis teikia geriausias praktikas per šablonus ir padeda visame diegimo gyvenimo cikle.
 
-### K: Kaip azd skiriasi nuo „Azure CLI“?
+### Q: How is azd different from Azure CLI?
 **A**: 
-- **Azure CLI**: Bendros paskirties įrankis „Azure“ išteklių valdymui
-- **azd**: Kūrėjams skirtas įrankis programų diegimo darbo eigoms
-- azd naudoja „Azure CLI“ viduje, bet siūlo aukštesnio lygio abstrakcijas dažniems kūrimo scenarijams
-- azd apima šablonus, aplinkos valdymą ir diegimo automatizavimą
+- **Azure CLI**: Bendros paskirties įrankis Azure ištekliams valdyti
+- **azd**: Į kūrėją orientuotas įrankis programų diegimo darbo eigai
+- azd naudoja Azure CLI viduje, bet suteikia aukštesnio lygio abstrakcijas dažnai pasitaikančioms kūrimo situacijoms
+- azd apima šablonus, aplinkų valdymą ir diegimo automatizavimą
 
-### K: Ar man reikia įdiegti „Azure CLI“, kad galėčiau naudoti azd?
-**A**: Taip, azd reikalauja „Azure CLI“ autentifikavimui ir kai kurioms operacijoms. Pirmiausia įdiekite „Azure CLI“, tada azd.
+### Q: Do I need Azure CLI installed to use azd?
+**A**: Taip, azd reikalauja Azure CLI autentifikacijai ir kai kurioms operacijoms. Pirmiausia įdiekite Azure CLI, tada įdiekite azd.
 
-### K: Kokias programavimo kalbas palaiko azd?
-**A**: azd yra nepriklausomas nuo kalbos. Jis veikia su:
+### Q: What programming languages does azd support?
+**A**: azd nepriklauso nuo konkrečios kalbos. Jis veikia su:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
 - Java
 - Go
 - PHP
-- Statinės svetainės
-- Konteinerizuotos programos
+- Statiniais tinklalapiais
+- Docker konteinerizuotomis programomis
 
-### K: Ar galiu naudoti azd su esamais projektais?
-**A**: Taip! Galite:
-1. Naudoti `azd init`, kad pridėtumėte azd konfigūraciją prie esamų projektų
-2. Pritaikyti esamus projektus, kad atitiktų azd šablonų struktūrą
-3. Kurti pasirinktinius šablonus, remiantis jūsų esama architektūra
+### Q: Can I use azd with existing projects?
+**A**: Taip! Galite arba:
+1. Naudoti `azd init`, kad pridėtumėte azd konfigūraciją esamiems projektams
+2. Pritaikyti esamus projektus, kad jie atitiktų azd šablonų struktūrą
+3. Kurti pasirinktinius šablonus, paremtus jūsų esama architektūra
 
 ---
 
-## Autentifikavimas ir prieiga
+## Authentication & Access
 
-### K: Kaip autentifikuotis su „Azure“ naudojant azd?
-**A**: Naudokite `azd auth login`, kuris atidarys naršyklės langą „Azure“ autentifikavimui. CI/CD scenarijams naudokite paslaugų principus arba valdomas tapatybes.
+### Q: How do I authenticate with Azure using azd?
+**A**: Naudokite `azd auth login`, kuris atidarys naršyklės langą Azure autentifikacijai. CI/CD scenarijams naudokite paslaugų principus (service principals) arba valdomas tapatybes (managed identities).
 
-### K: Ar galiu naudoti azd su keliais „Azure“ prenumeratais?
-**A**: Taip. Naudokite `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`, kad nurodytumėte, kurią prenumeratą naudoti kiekvienai aplinkai.
+### Q: Can I use azd with multiple Azure subscriptions?
+**A**: Taip. Naudokite `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>`, kad nurodytumėte, kuri prenumerata naudoti kiekvienai aplinkai.
 
-### K: Kokius leidimus man reikia turėti, kad galėčiau diegti su azd?
-**A**: Paprastai jums reikia:
-- **Contributor** vaidmens išteklių grupėje arba prenumeratoje
-- **User Access Administrator**, jei diegiate išteklius, kuriems reikia vaidmenų priskyrimo
+### Q: What permissions do I need to deploy with azd?
+**A**: Paprastai reikalinga:
+- **Contributor** rolė resursų grupei arba prenumeratai
+- **User Access Administrator**, jei diegiate išteklius, kuriems reikalingi rolės priskyrimai
 - Konkretūs leidimai priklauso nuo šablono ir diegiamų išteklių
 
-### K: Ar galiu naudoti azd CI/CD vamzdynuose?
-**A**: Žinoma! azd yra sukurtas CI/CD integracijai. Naudokite paslaugų principus autentifikavimui ir nustatykite aplinkos kintamuosius konfigūracijai.
+### Q: Can I use azd in CI/CD pipelines?
+**A**: Absoliučiai! azd yra sukurtas CI/CD integracijai. Naudokite paslaugų principus autentifikacijai ir nustatykite aplinkos kintamuosius konfigūracijai.
 
-### K: Kaip tvarkyti autentifikavimą „GitHub Actions“?
-**A**: Naudokite „Azure Login“ veiksmą su paslaugų principo kredencialais:
+### Q: How do I handle authentication in GitHub Actions?
+**A**: Naudokite Azure Login veiksmą su paslaugų principo kredencialais:
 ```yaml
 - uses: azure/login@v1
   with:
@@ -115,51 +106,51 @@ Reguliariai naudodamiesi šiuo DUK, galėsite:
 
 ---
 
-## Šablonai ir projektai
+## Templates & Projects
 
-### K: Kur galiu rasti azd šablonus?
+### Q: Where can I find azd templates?
 **A**: 
 - Oficialūs šablonai: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Bendruomenės šablonai: „GitHub“ paieška „azd-template“
-- Naudokite `azd template list`, kad peržiūrėtumėte galimus šablonus
+- Bendruomenės šablonai: GitHub paieška pagal "azd-template"
+- Naudokite `azd template list`, kad peržiūrėtumėte prieinamus šablonus
 
-### K: Kaip sukurti pasirinktą šabloną?
+### Q: How do I create a custom template?
 **A**: 
 1. Pradėkite nuo esamos šablono struktūros
-2. Pakeiskite `azure.yaml`, infrastruktūros failus ir programos kodą
+2. Modifikuokite `azure.yaml`, infrastruktūros failus ir programos kodą
 3. Kruopščiai išbandykite su `azd up`
-4. Publikuokite „GitHub“ su tinkamomis žymomis
+4. Paskelbkite GitHub su tinkamais žymėmis
 
-### K: Ar galiu naudoti azd be šablono?
-**A**: Taip, naudokite `azd init` esamame projekte, kad sukurtumėte reikiamus konfigūracijos failus. Jums reikės rankiniu būdu konfigūruoti `azure.yaml` ir infrastruktūros failus.
+### Q: Can I use azd without a template?
+**A**: Taip, naudokite `azd init` esamame projekte, kad sukurtumėte reikalingus konfigūracijos failus. Reikės rankiniu būdu sukonfigūruoti `azure.yaml` ir infrastruktūros failus.
 
-### K: Kuo skiriasi oficialūs ir bendruomenės šablonai?
+### Q: What's the difference between official and community templates?
 **A**: 
-- **Oficialūs šablonai**: Prižiūrimi „Microsoft“, reguliariai atnaujinami, išsamiai dokumentuoti
-- **Bendruomenės šablonai**: Sukurti kūrėjų, gali turėti specializuotus naudojimo atvejus, skirtingą kokybę ir priežiūrą
+- **Oficialūs šablonai**: Prižiūrimi Microsoft, reguliariai atnaujinami, išsami dokumentacija
+- **Bendruomenės šablonai**: Sukuriami kūrėjų, gali būti specializuoti, kokybė ir priežiūra gali skirtis
 
-### K: Kaip atnaujinti šabloną savo projekte?
-**A**: Šablonai nėra automatiškai atnaujinami. Galite:
+### Q: How do I update a template in my project?
+**A**: Šablonai nėra atnaujinami automatiškai. Galite:
 1. Rankiniu būdu palyginti ir sujungti pakeitimus iš šaltinio šablono
 2. Pradėti iš naujo su `azd init`, naudojant atnaujintą šabloną
-3. Pasirinkti konkrečius patobulinimus iš atnaujintų šablonų
+3. Išrinkti (cherry-pick) konkrečius patobulinimus iš atnaujintų šablonų
 
 ---
 
-## Diegimas ir infrastruktūra
+## Deployment & Infrastructure
 
-### K: Kokias „Azure“ paslaugas gali diegti azd?
-**A**: azd gali diegti bet kokias „Azure“ paslaugas per Bicep/ARM šablonus, įskaitant:
+### Q: What Azure services can azd deploy?
+**A**: azd gali diegti bet kurią Azure paslaugą per Bicep/ARM šablonus, įskaitant:
 - App Services, Container Apps, Functions
-- Duomenų bazes (SQL, PostgreSQL, Cosmos DB)
+- Duomenų bazių sprendimus (SQL, PostgreSQL, Cosmos DB)
 - Saugyklą, Key Vault, Application Insights
 - Tinklo, saugumo ir stebėjimo išteklius
 
-### K: Ar galiu diegti į kelis regionus?
-**A**: Taip, konfigūruokite kelis regionus savo Bicep šablonuose ir tinkamai nustatykite vietos parametrą kiekvienai aplinkai.
+### Q: Can I deploy to multiple regions?
+**A**: Taip, sukonfigūruokite kelis regionus savo Bicep šablonuose ir nustatykite location parametrą tinkamai kiekvienai aplinkai.
 
-### K: Kaip tvarkyti duomenų bazės schemos migracijas?
-**A**: Naudokite diegimo kabliukus `azure.yaml`:
+### Q: How do I handle database schema migrations?
+**A**: Naudokite diegimo kabliukus (deployment hooks) `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -169,48 +160,48 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### K: Ar galiu diegti tik infrastruktūrą be programų?
+### Q: Can I deploy only infrastructure without applications?
 **A**: Taip, naudokite `azd provision`, kad diegtumėte tik infrastruktūros komponentus, apibrėžtus jūsų šablonuose.
 
-### K: Kaip diegti į esamus „Azure“ išteklius?
+### Q: How do I deploy to existing Azure resources?
 **A**: Tai sudėtinga ir nėra tiesiogiai palaikoma. Galite:
 1. Importuoti esamus išteklius į savo Bicep šablonus
 2. Naudoti esamų išteklių nuorodas šablonuose
-3. Pakeisti šablonus, kad sąlygiškai sukurtų arba nurodytų išteklius
+3. Modifikuoti šablonus, kad sąlygiškai kurtų arba nuorodintųsi į išteklius
 
-### K: Ar galiu naudoti „Terraform“ vietoj Bicep?
-**A**: Šiuo metu azd daugiausia palaiko Bicep/ARM šablonus. „Terraform“ palaikymas nėra oficialiai prieinamas, nors bendruomenės sprendimai gali egzistuoti.
+### Q: Can I use Terraform instead of Bicep?
+**A**: Šiuo metu azd iš esmės palaiko Bicep/ARM šablonus. Oficiali Terraform parama nėra prieinama, nors gali būti bendruomenės sprendimų.
 
 ---
 
-## Konfigūracija ir aplinkos
+## Configuration & Environments
 
-### K: Kaip valdyti skirtingas aplinkas (dev, staging, prod)?
-**A**: Sukurkite atskiras aplinkas su `azd env new <environment-name>` ir konfigūruokite skirtingus nustatymus kiekvienai:
+### Q: How do I manage different environments (dev, staging, prod)?
+**A**: Sukurkite atskiras aplinkas su `azd env new <environment-name>` ir sukonfigūruokite skirtingus nustatymus kiekvienai:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### K: Kur saugomos aplinkos konfigūracijos?
+### Q: Where are environment configurations stored?
 **A**: `.azure` aplanke jūsų projekto kataloge. Kiekviena aplinka turi savo aplanką su konfigūracijos failais.
 
-### K: Kaip nustatyti aplinkai specifinę konfigūraciją?
-**A**: Naudokite `azd env set`, kad konfigūruotumėte aplinkos kintamuosius:
+### Q: How do I set environment-specific configuration?
+**A**: Naudokite `azd env set`, kad sukonfigūruotumėte aplinkos kintamuosius:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### K: Ar galiu dalintis aplinkos konfigūracijomis su komandos nariais?
-**A**: `.azure` aplankas turi jautrią informaciją ir neturėtų būti įtrauktas į versijų kontrolę. Vietoj to:
-1. Dokumentuokite reikiamus aplinkos kintamuosius
-2. Naudokite diegimo scenarijus aplinkoms nustatyti
-3. Naudokite „Azure Key Vault“ jautriai konfigūracijai
+### Q: Can I share environment configurations across team members?
+**A**: `.azure` aplankas talpina jautrią informaciją ir neturėtų būti įtrauktas į versijų valdymą. Vietoje to:
+1. Dokumentuokite reikalingus aplinkos kintamuosius
+2. Naudokite diegimo skriptus aplinkų nustatymui
+3. Naudokite Azure Key Vault jautriai konfigūracijai
 
-### K: Kaip pakeisti šablono numatytuosius nustatymus?
-**A**: Nustatykite aplinkos kintamuosius, kurie atitinka šablono parametrus:
+### Q: How do I override template defaults?
+**A**: Nustatykite aplinkos kintamuosius, atitinkančius šablono parametrus:
 ```bash
 azd env set LOCATION "West US 2"
 azd env set SKU_NAME "B1"
@@ -218,94 +209,94 @@ azd env set SKU_NAME "B1"
 
 ---
 
-## Trikčių šalinimas
+## Troubleshooting
 
-### K: Kodėl `azd up` nepavyksta?
-**A**: Dažniausios priežastys:
-1. **Autentifikavimo problemos**: Paleiskite `azd auth login`
-2. **Nepakankami leidimai**: Patikrinkite savo „Azure“ vaidmenų priskyrimus
-3. **Išteklių pavadinimų konfliktai**: Pakeiskite AZURE_ENV_NAME
-4. **Kvotos/pajėgumo problemos**: Patikrinkite regioninį prieinamumą
-5. **Šablono klaidos**: Patikrinkite Bicep šablonus
+### Q: Why is `azd up` failing?
+**A**: Dažni priežastys:
+1. **Autentifikacijos problemos**: Vykdykite `azd auth login`
+2. **Nepakankamos teisės**: Patikrinkite savo Azure rolės priskyrimus
+3. **Išteklių vardų konfliktai**: Pakeiskite AZURE_ENV_NAME
+4. **Kvotų/pajėgumų problemos**: Patikrinkite regiono prieinamumą
+5. **Šablonų klaidos**: Patvirtinkite Bicep šablonus
 
-### K: Kaip derinti diegimo klaidas?
+### Q: How do I debug deployment failures?
 **A**: 
-1. Naudokite `azd deploy --debug` išsamiai informacijai
-2. Patikrinkite „Azure“ portalo diegimo istoriją
-3. Peržiūrėkite veiklos žurnalą „Azure“ portale
-4. Naudokite `azd show`, kad parodytumėte dabartinę aplinkos būseną
+1. Naudokite `azd deploy --debug` detalizuotam išvedimui
+2. Patikrinkite Azure portal diegimo istoriją
+3. Peržiūrėkite Activity Log Azure portale
+4. Naudokite `azd show`, kad parodytumėte dabartinės aplinkos būseną
 
-### K: Kodėl mano aplinkos kintamieji neveikia?
+### Q: Why are my environment variables not working?
 **A**: Patikrinkite:
 1. Kintamųjų pavadinimai tiksliai atitinka šablono parametrus
-2. Vertės tinkamai įrašytos, jei jos turi tarpus
-3. Pasirinkta aplinka: `azd env select <environment>`
-4. Kintamieji nustatyti tinkamoje aplinkoje
+2. Reikšmės tinkamai užbrauktos kabutėmis, jei jose yra tarpai
+3. Aplinka pasirinkta: `azd env select <environment>`
+4. Kintamieji nustatyti teisingoje aplinkoje
 
-### K: Kaip išvalyti nepavykusius diegimus?
+### Q: How do I clean up failed deployments?
 **A**: 
 ```bash
 azd down --force --purge
 ```
-Tai pašalina visus išteklius ir aplinkos konfigūraciją.
+This removes all resources and environment configuration.
 
-### K: Kodėl mano programa nepasiekiama po diegimo?
+### Q: Why is my application not accessible after deployment?
 **A**: Patikrinkite:
-1. Diegimas sėkmingai baigtas
-2. Programa veikia (patikrinkite žurnalus „Azure“ portale)
-3. Tinklo saugumo grupės leidžia srautą
-4. DNS/pasirinktiniai domenai tinkamai sukonfigūruoti
+1. Ar diegimas sėkmingai užbaigtas
+2. Ar programa veikia (patikrinkite žurnalus Azure portale)
+3. Ar tinklo saugumo grupės leidžia srautą
+4. Ar DNS / pritaikyti domenai sukonfigūruoti teisingai
 
 ---
 
-## Išlaidos ir sąskaitos
+## Cost & Billing
 
-### K: Kiek kainuos azd diegimai?
+### Q: How much will azd deployments cost?
 **A**: Išlaidos priklauso nuo:
-- Diegiamų „Azure“ paslaugų
-- Paslaugų lygių/SKU pasirinkimo
+- Diegiamų Azure paslaugų
+- Pasirinktų paslaugų lygių/SKU
 - Regioninių kainų skirtumų
 - Naudojimo modelių
 
-Naudokite [„Azure“ kainų skaičiuoklę](https://azure.microsoft.com/pricing/calculator/) sąmatoms.
+Naudokite [Azure kainų skaičiuoklę](https://azure.microsoft.com/pricing/calculator/) apskaičiavimams.
 
-### K: Kaip kontroliuoti išlaidas azd diegimuose?
+### Q: How do I control costs in azd deployments?
 **A**: 
-1. Naudokite žemesnio lygio SKU kūrimo aplinkoms
-2. Nustatykite „Azure“ biudžetus ir įspėjimus
+1. Naudokite mažesnio lygio SKU kūrimo aplinkoms
+2. Nustatykite Azure biudžetus ir įspėjimus
 3. Naudokite `azd down`, kad pašalintumėte išteklius, kai jų nereikia
-4. Pasirinkite tinkamus regionus (išlaidos skiriasi pagal vietą)
-5. Naudokite „Azure“ išlaidų valdymo įrankius
+4. Pasirinkite tinkamus regionus (kainos skiriasi pagal vietą)
+5. Naudokite Azure Cost Management įrankius
 
-### K: Ar yra nemokamų lygių azd šablonams?
-**A**: Daugelis „Azure“ paslaugų siūlo nemokamus lygius:
-- App Service: Galimas nemokamas lygis
+### Q: Are there free tier options for azd templates?
+**A**: Daugelis Azure paslaugų siūlo nemokamus lygius:
+- App Service: prieinama nemokama pakopa
 - Azure Functions: 1M nemokamų vykdymų per mėnesį
-- Cosmos DB: Nemokamas lygis su 400 RU/s
-- Application Insights: Pirmieji 5GB/mėn nemokami
+- Cosmos DB: nemokamas lygis su 400 RU/s
+- Application Insights: pirmi 5GB/mėn nemokamai
 
-Konfigūruokite šablonus, kad naudotumėte nemokamus lygius, kur jie yra.
+Suformuokite šablonus, kad naudotų nemokamus lygius, kai jie yra prieinami.
 
-### K: Kaip įvertinti išlaidas prieš diegimą?
+### Q: How do I estimate costs before deployment?
 **A**: 
-1. Peržiūrėkite šablono `main.bicep`, kad pamatytumėte, kokie ištekliai sukuriami
-2. Naudokite „Azure“ kainų skaičiuoklę su konkrečiais SKU
+1. Peržiūrėkite šablono `main.bicep`, kad pamatytumėte, kokie ištekliai bus sukurti
+2. Naudokite Azure kainų skaičiuoklę su konkrečiais SKU
 3. Pirmiausia diegkite į kūrimo aplinką, kad stebėtumėte faktines išlaidas
-4. Naudokite „Azure“ išlaidų valdymą detaliai išlaidų analizei
+4. Naudokite Azure Cost Management detaliai išlaidų analizei
 
 ---
 
-## Geriausia praktika
+## Best Practices
 
-### K: Kokios yra geriausios praktikos azd projekto struktūrai?
+### Q: What are the best practices for azd project structure?
 **A**: 
 1. Laikykite programos kodą atskirai nuo infrastruktūros
 2. Naudokite prasmingus paslaugų pavadinimus `azure.yaml`
-3. Įgyvendinkite tinkamą klaidų tvarkymą kūrimo scenarijuose
+3. Įgyvendinkite tinkamą klaidų tvarkymą build skriptuose
 4. Naudokite aplinkai specifinę konfigūraciją
 5. Įtraukite išsamią dokumentaciją
 
-### K: Kaip organizuoti kelias paslaugas azd?
+### Q: How should I organize multiple services in azd?
 **A**: Naudokite rekomenduojamą struktūrą:
 ```
 ├── src/
@@ -317,55 +308,103 @@ Konfigūruokite šablonus, kad naudotumėte nemokamus lygius, kur jie yra.
 └── README.md         # Project documentation
 ```
 
-### K: Ar turėčiau įtraukti `.azure` aplanką į versijų kontrolę?
-**A**: **Ne!**
-2. **Šablonai**: Kurkite šablonus laikydamiesi [šablonų gairių](https://github.com/Azure-Samples/awesome-azd)  
-3. **Dokumentacija**: Prisidėkite prie dokumentacijos [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)  
+### Q: Should I commit the `.azure` folder to version control?
+**A**: **Ne!** `.azure` aplanke yra jautri informacija. Įtraukite jį į `.gitignore`:
+```gitignore
+.azure/
+```
 
-### Klausimas: Koks yra azd planas?  
-**A**: Peržiūrėkite [oficialų planą](https://github.com/Azure/azure-dev/projects), kuriame pateikiamos numatytos funkcijos ir patobulinimai.  
+### Q: How do I handle secrets and sensitive configuration?
+**A**: 
+1. Naudokite Azure Key Vault slapties informacijai
+2. Nurodykite Key Vault slaptį programos konfigūracijoje
+3. Niekada neįkelkite slaptos informacijos į versijų valdymą
+4. Naudokite valdomas tapatybes paslaugų tarpusavio autentifikacijai
 
-### Klausimas: Kaip pereiti nuo kitų diegimo įrankių prie azd?  
-**A**:  
-1. Išanalizuokite dabartinę diegimo architektūrą  
-2. Sukurkite lygiaverčius Bicep šablonus  
-3. Suformuokite `azure.yaml`, kad atitiktų dabartines paslaugas  
-4. Kruopščiai išbandykite vystymo aplinkoje  
-5. Palaipsniui perkelkite aplinkas  
-
----
-
-## Vis dar turite klausimų?  
-
-### **Pirmiausia ieškokite**  
-- Peržiūrėkite [oficialią dokumentaciją](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- Ieškokite [GitHub problemų](https://github.com/Azure/azure-dev/issues) dėl panašių situacijų  
-
-### **Gaukite pagalbos**  
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Bendruomenės pagalba  
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Techniniai klausimai  
-- [Azure Discord](https://discord.gg/azure) - Bendruomenės pokalbiai realiu laiku  
-
-### **Praneškite apie problemas**  
-- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Pranešimai apie klaidas ir funkcijų užklausos  
-- Įtraukite atitinkamus žurnalus, klaidų pranešimus ir veiksmus, kaip atkurti problemą  
-
-### **Sužinokite daugiau**  
-- [Azure Developer CLI dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)  
-- [Azure gerai suprojektuotos architektūros pagrindai](https://learn.microsoft.com/en-us/azure/well-architected/)  
+### Q: What's the recommended approach for CI/CD with azd?
+**A**: 
+1. Naudokite atskiras aplinkas kiekvienam etapui (dev/staging/prod)
+2. Įgyvendinkite automatizuotus testus prieš diegimą
+3. Naudokite paslaugų principus autentifikacijai
+4. Laikykite jautrią konfigūraciją pipeline slaptuose kintamuosiuose / variabluose
+5. Įgyvendinkite patvirtinimo vartus produkciniams diegimams
 
 ---
 
-*Šis DUK yra reguliariai atnaujinamas. Paskutinį kartą atnaujinta: 2025 m. rugsėjo 9 d.*  
+## Advanced Topics
+
+### Q: Can I extend azd with custom functionality?
+**A**: Taip, per diegimo kabliukus `azure.yaml`:
+```yaml
+hooks:
+  predeploy:
+    run: ./scripts/custom-setup.sh
+  postdeploy:
+    run: ./scripts/custom-config.sh
+```
+
+### Q: How do I integrate azd with existing DevOps processes?
+**A**: 
+1. Naudokite azd komandas esamuose pipeline skriptuose
+2. Standartizuokite azd šablonus tarp komandų
+3. Integruokite su esama stebėsena ir įspėjimais
+4. Naudokite azd JSON išvestį pipeline integracijai
+
+### Q: Can I use azd with Azure DevOps?
+**A**: Taip, azd veikia su bet kuriuo CI/CD sistema. Kurkite Azure DevOps pipelines, kurie naudoja azd komandas.
+
+### Q: How do I contribute to azd or create community templates?
+**A**:
+1. **azd įrankis**: Prisidėkite prie [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Šablonai**: Kurkite šablonus pagal [šablonų gaires](https://github.com/Azure-Samples/awesome-azd)
+3. **Dokumentacija**: Prisidėkite prie dokumentacijos projekte [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+
+### Q: Kokia yra azd plėtros gairė?
+**A**: Patikrinkite [oficialų veiksmų planą](https://github.com/Azure/azure-dev/projects) dėl planuojamų funkcijų ir patobulinimų.
+
+### Q: Kaip migruoti iš kitų diegimo įrankių į azd?
+**A**: 
+1. Išanalizuokite esamą diegimo architektūrą
+2. Sukurkite ekvivalentinius Bicep šablonus
+3. Sukonfigūruokite `azure.yaml` taip, kad atitiktų esamas paslaugas
+4. Išsamiai išbandykite kūrimo aplinkoje
+5. Palaipsniui perkelkite aplinkas
 
 ---
 
-**Navigacija**  
-- **Ankstesnė pamoka**: [Žodynėlis](glossary.md)  
-- **Kita pamoka**: [Mokymosi vadovas](study-guide.md)  
+## Vis dar turite klausimų?
+
+### **Pirmiausia ieškokite**
+- Patikrinkite [oficialią dokumentaciją](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Ieškokite [GitHub issues](https://github.com/Azure/azure-dev/issues) panašių problemų
+
+### **Gaukite pagalbą**
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Bendruomenės palaikymas
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Techniniai klausimai
+- [Azure Discord](https://discord.gg/azure) - Bendruomenės pokalbis realiu laiku
+
+### **Praneškite apie problemas**
+- [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Klaidų pranešimai ir funkcijų prašymai
+- Įtraukite atitinkamus žurnalus, klaidų pranešimus ir veiksmus, kaip atkurti problemą
+
+### **Sužinokite daugiau**
+- [Azure Developer CLI dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius dėl šio vertimo naudojimo.
+*Šis DUK reguliariai atnaujinamas. Paskutinį kartą atnaujinta: 2025 m. rugsėjo 9 d.*
+
+---
+
+**Navigacija**
+- **Ankstesnė pamoka**: [Žodynas](glossary.md)
+- **Kita pamoka**: [Studijų vadovas](study-guide.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turi būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kylančias dėl šio vertimo naudojimo.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

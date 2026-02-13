@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T12:14:03+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "ar"
-}
--->
-# 4. إعداد قالب
+# 4. تكوين قالب
 
 !!! tip "بنهاية هذه الوحدة ستكون قادرًا على"
 
     - [ ] فهم الغرض من `azure.yaml`
-    - [ ] فهم هيكل `azure.yaml`
-    - [ ] فهم قيمة `hooks` في دورة حياة azd
-    - [ ] **المختبر 3:**
+    - [ ] فهم بنية `azure.yaml`
+    - [ ] فهم أهمية `hooks` في دورة حياة azd
+    - [ ] **التمرين 4:** استكشاف وتعديل متغيرات البيئة
 
 ---
 
-!!! prompt "ما هو ملف `azure.yaml`؟ استخدم سياج الكود واشرحه سطرًا بسطر"
+!!! prompt "ما الذي يفعله ملف `azure.yaml`؟ استخدم كتلة تعليمات برمجية واشرحه سطرًا بسطرًا"
 
-      ملف `azure.yaml` هو **ملف التكوين الخاص بـ Azure Developer CLI (azd)**. يحدد كيفية نشر تطبيقك على Azure، بما في ذلك البنية التحتية والخدمات وخطافات النشر ومتغيرات البيئة.
+      ملف `azure.yaml` هو **ملف التكوين لأداة Azure Developer CLI (azd)**. يحدد كيفية نشر تطبيقك إلى Azure، بما في ذلك البنية التحتية والخدمات وخطوات الربط الخاصة بالنشر ومتغيرات البيئة.
 
 ---
 
 ## 1. الغرض والوظائف
 
-يعمل ملف `azure.yaml` كـ **مخطط نشر** لتطبيق وكيل الذكاء الاصطناعي الذي:
+يعمل ملف `azure.yaml` هذا كـ **مخطط نشر** لتطبيق وكيل ذكاء اصطناعي يقوم بما يلي:
 
-1. **يتحقق من البيئة** قبل النشر
-2. **يوفر خدمات Azure AI** (AI Hub، AI Project، البحث، إلخ.)
-3. **ينشر تطبيق Python** على Azure Container Apps
-4. **يُعد نماذج الذكاء الاصطناعي** للدردشة ووظائف التضمين
-5. **يُعد المراقبة والتتبع** لتطبيق الذكاء الاصطناعي
-6. **يتعامل مع سيناريوهات المشاريع الجديدة والقائمة** في Azure AI
+1. **التحقق من البيئة** قبل النشر
+2. **يوفر خدمات Azure AI** (AI Hub, AI Project, Search، إلخ.)
+3. **ينشر تطبيق Python** إلى Azure Container Apps
+4. **يُكوّن نماذج AI** لكل من وظائف الدردشة والتضمين
+5. **يهيئ المراقبة والتتبُّع** لتطبيق الذكاء الاصطناعي
+6. **يتعامل مع كلٍ من** سيناريوهات مشروعات Azure AI الجديدة والموجودة
 
-يُمكّن الملف **النشر بأمر واحد** (`azd up`) لحل وكيل الذكاء الاصطناعي الكامل مع التحقق المناسب، والتوفير، وتكوين ما بعد النشر.
+يُمكّن الملف من **نشر بأمر واحد** (`azd up`) لحل وكيل ذكاء اصطناعي كامل مع التحقق السليم والتوفير والتكوين بعد النشر.
 
-??? info "اضغط للتوسيع: `azure.yaml`"
+??? info "انقر للتوسيع لعرض: `azure.yaml`"
 
-      يحدد ملف `azure.yaml` كيفية نشر وإدارة تطبيق وكيل الذكاء الاصطناعي هذا في Azure باستخدام Azure Developer CLI. دعنا نحلله سطرًا بسطر.
+      يحدد ملف `azure.yaml` كيف يجب على Azure Developer CLI نشر وإدارة تطبيق وكيل الذكاء الاصطناعي هذا في Azure. دعنا نقسمه سطرًا بسطرًا.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: هل نحتاج إلى الخطافات؟
-      # TODO: هل نحتاج إلى جميع المتغيرات؟
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -137,7 +128,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 2. تفكيك الملف
 
-دعنا نستعرض الملف قسمًا قسمًا لفهم ما يفعله - ولماذا.
+سنمر عبر الملف قسمًا تلو الآخر، لفهم ما يفعله — ولماذا.
 
 ### 2.1 **الرأس والمخطط (1-3)**
 
@@ -145,9 +136,9 @@ CO_OP_TRANSLATOR_METADATA:
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **السطر 1**: يوفر التحقق من صحة مخطط خادم لغة YAML لدعم IDE و IntelliSense
+- **السطر 1**: يوفر تحقق مخطط خادم لغة YAML لدعم بيئة التطوير المتكاملة وIntelliSense
 
-### 2.2 بيانات المشروع الوصفية (5-10)
+### 2.2 بيانات تعريف المشروع (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **السطر 5**: يحدد اسم المشروع المستخدم بواسطة Azure Developer CLI
-- **السطران 6-7**: يحدد أن هذا يعتمد على إصدار القالب 1.0.2
-- **السطران 8-9**: يتطلب إصدار Azure Developer CLI 1.14.0 أو أعلى
+- **السطر 5**: يحدد اسم المشروع الذي تستخدمه Azure Developer CLI
+- **الأسطر 6-7**: يحدد أن هذا يعتمد على قالب بالإصدار 1.0.2
+- **الأسطر 8-9**: يتطلب إصدار Azure Developer CLI 1.14.0 أو أعلى
 
 ### 2.3 خطافات النشر (11-40)
 
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **السطران 11-20**: **خطاف ما قبل النشر** - يتم تشغيله قبل `azd up`
+- **الأسطر 11-20**: **خطاف قبل النشر** - يعمل قبل `azd up`
 
-      - على Unix/Linux: يجعل البرنامج النصي للتحقق قابلاً للتنفيذ ويشغله
-      - على Windows: يشغل برنامج PowerShell النصي للتحقق
-      - كلاهما تفاعلي وسيتوقف النشر إذا فشل
+      - على Unix/Linux: يجعل سكربت التحقق قابلاً للتنفيذ ويشغله
+      - على Windows: يشغّل سكربت التحقق PowerShell
+      - كلاهما تفاعلي وسيوقف النشر إذا فشل
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **السطران 21-30**: **خطاف ما بعد التوفير** - يتم تشغيله بعد إنشاء موارد Azure
+- **الأسطر 21-30**: **خطاف ما بعد التوفير** - يعمل بعد إنشاء موارد Azure
 
-  - يشغل البرامج النصية لكتابة متغيرات البيئة
-  - يستمر النشر حتى إذا فشلت هذه البرامج النصية (`continueOnError: true`)
+  - ينفذ سكربتات كتابة متغيرات البيئة
+  - يواصل النشر حتى لو فشلت هذه السكربتات (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **السطران 31-40**: **خطاف ما بعد النشر** - يتم تشغيله بعد نشر التطبيق
+- **الأسطر 31-40**: **خطاف ما بعد النشر** - يعمل بعد نشر التطبيق
 
-  - يشغل البرامج النصية للإعداد النهائي
-  - يستمر حتى إذا فشلت البرامج النصية
+  - ينفذ سكربتات الإعداد النهائية
+  - يستمر حتى لو فشلت السكربتات
 
 ### 2.4 تكوين الخدمة (41-48)
 
-هذا يُعد خدمة التطبيق التي تقوم بنشرها.
+هذا يكوّن خدمة التطبيق التي تقوم بنشرها.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **السطر 42**: يحدد خدمة باسم "api_and_frontend"
-- **السطر 43**: يشير إلى دليل `./src` لشفرة المصدر
-- **السطر 44**: يحدد Python كلغة البرمجة
+- **السطر 42**: يعرّف خدمة باسم "api_and_frontend"
+- **السطر 43**: يشير إلى الدليل `./src` لمصدر الشيفرة
+- **السطر 44**: يحدد Python كلغة برمجة
 - **السطر 45**: يستخدم Azure Container Apps كمنصة استضافة
-- **السطران 46-48**: تكوين Docker
+- **الأسطر 46-48**: تكوين Docker
 
-      - يستخدم "api_and_frontend" كاسم للصورة
+      - يستخدم "api_and_frontend" كاسم الصورة
       - يبني صورة Docker عن بُعد في Azure (وليس محليًا)
 
 ### 2.5 متغيرات خط الأنابيب (49-76)
 
-هذه هي المتغيرات التي تساعدك على تشغيل `azd` في خطوط أنابيب CI/CD للتشغيل الآلي
+هذه متغيرات لمساعدتك على تشغيل `azd` في خطوط أنابيب CI/CD للأتمتة
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,87 +278,87 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-يحدد هذا القسم متغيرات البيئة المستخدمة **أثناء النشر**، مرتبة حسب الفئة:
+هذا القسم يحدد متغيرات البيئة المستخدمة **أثناء النشر**، منظمة حسب الفئة:
 
-- **أسماء موارد Azure (السطران 51-60)**:
-      - أسماء موارد خدمات Azure الأساسية مثل مجموعة الموارد، AI Hub، AI Project، إلخ.
-- **علامات الميزات (السطران 61-63)**:
+- **أسماء موارد Azure (الأسطر 51-60)**:
+      - أسماء موارد خدمات Azure الأساسية مثل Resource Group و AI Hub و AI Project إلخ.
+- **أعلام الميزات (الأسطر 61-63)**:
       - متغيرات منطقية لتمكين/تعطيل خدمات Azure محددة
-- **تكوين وكيل الذكاء الاصطناعي (السطران 64-71)**:
+- **تكوين وكيل الذكاء الاصطناعي (الأسطر 64-71)**:
       - تكوين الوكيل الرئيسي للذكاء الاصطناعي بما في ذلك الاسم، المعرف، إعدادات النشر، تفاصيل النموذج
-- **تكوين التضمين للذكاء الاصطناعي (السطران 72-79)**:
-      - تكوين النموذج المستخدم للبحث المتجهي
-- **البحث والمراقبة (السطران 80-84)**:
-      - اسم فهرس البحث، معرفات الموارد الحالية، وإعدادات المراقبة/التتبع
+- **تكوين تضمين AI (الأسطر 72-79)**:
+      - تكوين نموذج التضمين المستخدم للبحث الشعاعي
+- **البحث والمراقبة (الأسطر 80-84)**:
+      - اسم فهرس البحث، معرفات الموارد الموجودة، وإعدادات المراقبة/التتبُّع
 
 ---
 
-## 3. معرفة متغيرات البيئة
-تتحكم متغيرات البيئة التالية في تكوين وسلوك النشر الخاص بك، مرتبة حسب الغرض الأساسي لها. معظم المتغيرات لها قيم افتراضية معقولة، ولكن يمكنك تخصيصها لتتناسب مع متطلباتك المحددة أو موارد Azure الحالية.
+## 3. تعرّف على متغيرات البيئة
+تتحكم متغيرات البيئة التالية في تكوين وسلوك نشرِك، ومُنظمة حسب الغرض الأساسي منها. تمتلك معظم المتغيرات قيمًا افتراضية معقولة، لكن يمكنك تخصيصها لتطابق متطلباتك أو موارد Azure الموجودة.
 
 ### 3.1 المتغيرات المطلوبة 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# تكوين Azure الأساسي
+AZURE_ENV_NAME                    # اسم البيئة (يُستخدم في تسمية الموارد)
+AZURE_LOCATION                    # منطقة النشر
+AZURE_SUBSCRIPTION_ID             # الاشتراك المستهدف
+AZURE_RESOURCE_GROUP              # اسم مجموعة الموارد
+AZURE_PRINCIPAL_ID                # المستخدم الرئيسي لـ RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# أسماء الموارد (تُنشأ تلقائيًا إذا لم تُحدد)
+AZURE_AIHUB_NAME                  # اسم مركز Microsoft Foundry
+AZURE_AIPROJECT_NAME              # اسم مشروع الذكاء الاصطناعي
+AZURE_AISERVICES_NAME             # اسم حساب خدمات الذكاء الاصطناعي
+AZURE_STORAGE_ACCOUNT_NAME        # اسم حساب التخزين
+AZURE_CONTAINER_REGISTRY_NAME     # اسم سجل الحاويات
+AZURE_KEYVAULT_NAME               # اسم Key Vault (إذا تم استخدامه)
 ```
 
 ### 3.2 تكوين النموذج 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# تكوين نموذج الدردشة
+AZURE_AI_AGENT_MODEL_NAME         # الافتراضي: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # الافتراضي: OpenAI (أو Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # الافتراضي: الأحدث المتاح
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # اسم النشر لنموذج الدردشة
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # الافتراضي: القياسي
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # الافتراضي: 80 (آلاف TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# تكوين نموذج التضمين
+AZURE_AI_EMBED_MODEL_NAME         # الافتراضي: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # الافتراضي: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # الافتراضي: الأحدث المتاح
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # اسم النشر لنماذج التضمين
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # الافتراضي: القياسي
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # الافتراضي: 50 (آلاف TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# تكوين الوكيل
+AZURE_AI_AGENT_NAME               # اسم العرض للوكيل
+AZURE_EXISTING_AGENT_ID           # استخدام وكيل موجود (اختياري)
 ```
 
 ### 3.3 تبديل الميزات
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# خدمات اختيارية
+USE_APPLICATION_INSIGHTS         # الافتراضي: صحيح
+USE_AZURE_AI_SEARCH_SERVICE      # الافتراضي: غير صحيح
+USE_CONTAINER_REGISTRY           # الافتراضي: صحيح
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# المراقبة والتتبع
+ENABLE_AZURE_MONITOR_TRACING     # الافتراضي: غير صحيح
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # الافتراضي: غير صحيح
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# تكوين البحث
+AZURE_AI_SEARCH_INDEX_NAME       # اسم فهرس البحث
+AZURE_SEARCH_SERVICE_NAME        # اسم خدمة البحث
 ```
 
-### 3.4 تكوين مشروع الذكاء الاصطناعي 
+### 3.4 تكوين مشروع AI 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# استخدم الموارد الحالية
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # المعرّف الكامل للمورد لمشروع الذكاء الاصطناعي الموجود
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # عنوان URL لنقطة النهاية للمشروع الموجود
 ```
 
 ### 3.5 تحقق من متغيراتك
@@ -375,18 +366,22 @@ AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
 استخدم Azure Developer CLI لعرض وإدارة متغيرات البيئة الخاصة بك:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# عرض جميع متغيرات البيئة للبيئة الحالية
 azd env get-values
 
-# Get a specific environment variable
+# احصل على متغير بيئة محدد
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# تعيين متغير بيئة
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# تعيين متغيرات متعددة من ملف .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**إخلاء المسؤولية**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). على الرغم من سعينا لتحقيق الدقة، يرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحساسة أو الهامة، يُنصح بالاستعانة بترجمة بشرية احترافية. لا نتحمّل أي مسؤولية عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

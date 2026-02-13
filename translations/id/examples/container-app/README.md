@@ -1,15 +1,6 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-22T10:31:51+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "id"
-}
--->
-# Contoh Penerapan Aplikasi Container dengan AZD
+# Contoh Penyebaran Container App dengan AZD
 
-Direktori ini berisi contoh lengkap untuk menerapkan aplikasi yang dikontainerisasi ke Azure Container Apps menggunakan Azure Developer CLI (AZD). Contoh-contoh ini menunjukkan pola dunia nyata, praktik terbaik, dan konfigurasi siap produksi.
+Direktori ini berisi contoh komprehensif untuk menyebarkan aplikasi yang dikontainerkan ke Azure Container Apps menggunakan Azure Developer CLI (AZD). Contoh-contoh ini menunjukkan pola dunia nyata, praktik terbaik, dan konfigurasi siap-produksi.
 
 ## 📚 Daftar Isi
 
@@ -22,12 +13,12 @@ Direktori ini berisi contoh lengkap untuk menerapkan aplikasi yang dikontaineris
 
 ## Ikhtisar
 
-Azure Container Apps adalah platform container serverless yang sepenuhnya dikelola yang memungkinkan Anda menjalankan microservices dan aplikasi yang dikontainerisasi tanpa perlu mengelola infrastruktur. Ketika digabungkan dengan AZD, Anda mendapatkan:
+Azure Container Apps adalah platform container serverless terkelola penuh yang memungkinkan Anda menjalankan microservices dan aplikasi yang dikontainerkan tanpa mengelola infrastruktur. Saat dikombinasikan dengan AZD, Anda mendapatkan:
 
-- **Penerapan yang Disederhanakan**: Perintah tunggal untuk menerapkan container dengan infrastruktur
-- **Skalabilitas Otomatis**: Skalabilitas hingga nol dan keluar berdasarkan lalu lintas HTTP atau peristiwa
+- **Penyebaran Sederhana**: Satu perintah menyebarkan container beserta infrastrukturnya
+- **Skalabilitas Otomatis**: Dapat skala ke nol dan skala keluar berdasarkan lalu lintas HTTP atau peristiwa
 - **Jaringan Terintegrasi**: Penemuan layanan bawaan dan pembagian lalu lintas
-- **Identitas Terkelola**: Autentikasi aman ke sumber daya Azure
+- **Managed Identity**: Otentikasi aman ke sumber daya Azure
 - **Optimasi Biaya**: Bayar hanya untuk sumber daya yang Anda gunakan
 
 ## Prasyarat
@@ -41,7 +32,7 @@ azd version
 # Periksa Azure CLI
 az version
 
-# Periksa Docker (untuk membangun gambar kustom)
+# Periksa Docker (untuk membangun image kustom)
 docker --version
 
 # Masuk ke Azure
@@ -56,11 +47,11 @@ az login
 
 ## Contoh Memulai Cepat
 
-### 1. Web API Sederhana (Python Flask)
+### 1. API Web Sederhana (Python Flask)
 
-Terapkan REST API dasar dengan Azure Container Apps.
+Sebarkan REST API dasar dengan Azure Container Apps.
 
-**Contoh: Python Flask API**
+**Contoh: API Python Flask**
 
 ```yaml
 # azure.yaml
@@ -74,29 +65,29 @@ services:
     host: containerapp
 ```
 
-**Langkah Penerapan:**
+**Langkah-Langkah Penyebaran:**
 
 ```bash
-# Inisialisasi dari template
+# Inisialisasi dari templat
 azd init --template todo-python-mongo
 
 # Menyediakan infrastruktur dan menerapkan
 azd up
 
-# Uji penerapan
+# Uji penyebaran
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Fitur Utama:**
 - Skalabilitas otomatis dari 0 hingga 10 replika
-- Pemeriksaan kesehatan dan kelangsungan hidup
-- Penyuntikan variabel lingkungan
+- Probe kesehatan dan pemeriksaan liveness
+- Injeksi variabel lingkungan
 - Integrasi Application Insights
 
-### 2. Node.js Express API
+### 2. API Node.js Express
 
-Terapkan backend Node.js dengan integrasi MongoDB.
+Sebarkan backend Node.js dengan integrasi MongoDB.
 
 ```bash
 # Inisialisasi template API Node.js
@@ -106,11 +97,11 @@ azd init --template todo-nodejs-mongo
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Deploy
+# Terapkan
 azd up
 
-# Lihat log
-azd logs api
+# Lihat log melalui Azure Monitor
+azd monitor --logs
 ```
 
 **Sorotan Infrastruktur:**
@@ -158,7 +149,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Frontend Statis + Backend API
 
-Terapkan aplikasi full-stack dengan frontend React dan backend API.
+Sebarkan aplikasi full-stack dengan frontend React dan backend API.
 
 ```bash
 # Inisialisasi template full-stack
@@ -176,9 +167,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Contoh Produksi
 
-### Contoh 1: Arsitektur Microservices
+### Contoh 1: Arsitektur Mikroservis
 
-**Skenario**: Aplikasi e-commerce dengan beberapa microservices
+**Skenario**: Aplikasi e-commerce dengan beberapa mikroservis
 
 **Struktur Direktori:**
 ```
@@ -220,7 +211,7 @@ services:
     host: containerapp
 ```
 
-**Penerapan:**
+**Penyebaran:**
 ```bash
 # Inisialisasi proyek
 azd init
@@ -228,7 +219,7 @@ azd init
 # Atur lingkungan produksi
 azd env new production
 
-# Konfigurasi pengaturan produksi
+# Konfigurasikan pengaturan produksi
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -236,11 +227,11 @@ azd env set MAX_REPLICAS 50
 # Sebarkan semua layanan
 azd up
 
-# Pantau penyebaran
+# Pantau penerapan
 azd monitor --overview
 ```
 
-### Contoh 2: Aplikasi Container Berbasis AI
+### Contoh 2: Container App Bertenaga AI
 
 **Skenario**: Aplikasi chat AI dengan integrasi Azure OpenAI
 
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Gunakan Identitas Terkelola untuk akses yang aman
+# Gunakan Managed Identity untuk akses yang aman
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -262,7 +253,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Dapatkan kunci OpenAI dari Key Vault
+    # Ambil kunci OpenAI dari Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -329,13 +320,13 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Perintah Penerapan:**
+**Perintah Penyebaran:**
 ```bash
 # Siapkan lingkungan
 azd init --template ai-chat-app
 azd env new dev
 
-# Konfigurasi OpenAI
+# Konfigurasikan OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
@@ -350,7 +341,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
 
 ### Contoh 3: Pekerja Latar Belakang dengan Pemrosesan Antrian
 
-**Skenario**: Sistem pemrosesan pesanan dengan antrian pesan
+**Skenario**: Sistem pemrosesan pesanan dengan antrean pesan
 
 **Struktur Direktori:**
 ```
@@ -390,7 +381,7 @@ def process_orders():
             # Proses pesanan
             print(f"Processing order: {message.content}")
             
-            # Selesaikan pesan
+            # Pesan lengkap
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -412,15 +403,15 @@ services:
     host: containerapp
 ```
 
-**Penerapan:**
+**Penyebaran:**
 ```bash
 # Inisialisasi
 azd init
 
-# Terapkan dengan konfigurasi antrian
+# Terapkan dengan konfigurasi antrean
 azd up
 
-# Skala pekerja berdasarkan panjang antrian
+# Skalakan worker berdasarkan panjang antrean
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -431,7 +422,7 @@ az containerapp update \
 
 ## Pola Lanjutan
 
-### Pola 1: Penerapan Blue-Green
+### Pola 1: Penyebaran Blue-Green
 
 ```bash
 # Buat revisi baru tanpa lalu lintas
@@ -440,7 +431,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # Uji revisi baru
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Bagi lalu lintas (20% ke biru, 80% ke saat ini)
+# Bagi lalu lintas (20% ke biru, 80% ke versi saat ini)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -453,7 +444,7 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Pola 2: Penerapan Canary dengan AZD
+### Pola 2: Penyebaran Canary dengan AZD
 
 **File: .azure/dev/config.json**
 ```json
@@ -467,12 +458,12 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Script Penerapan:**
+**Skrip Penyebaran:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Sebarkan revisi baru dengan 10% lalu lintas
+# Menerapkan revisi baru dengan 10% lalu lintas
 azd deploy api --revision-mode multiple
 
 # Pantau metrik
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Pola 3: Penerapan Multi-Region
+### Pola 3: Penyebaran Multi-Region
 
 **File: azure.yaml**
 ```yaml
@@ -536,7 +527,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Penerapan:**
+**Penyebaran:**
 ```bash
 # Sebarkan ke semua wilayah
 azd up
@@ -589,7 +580,7 @@ def create_order():
             value={'status': 'pending'}
         )
         
-        # Publikasikan acara
+        # Publikasikan peristiwa
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -601,7 +592,7 @@ def create_order():
 
 ## Praktik Terbaik
 
-### 1. Organisasi Sumber Daya
+### 1. Pengorganisasian Sumber Daya
 
 ```bash
 # Gunakan konvensi penamaan yang konsisten
@@ -651,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Optimasi Performa
+### 3. Optimasi Kinerja
 
 ```yaml
 # azure.yaml with performance settings
@@ -677,11 +668,13 @@ services:
 # Aktifkan Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Lihat log secara real-time
-azd logs api --follow
+# Lihat log secara waktu nyata
+azd monitor --logs
+# Atau gunakan Azure CLI untuk Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Pantau metrik
-azd monitor --service api
+azd monitor --live
 
 # Buat peringatan
 az monitor metrics alert create \
@@ -695,7 +688,7 @@ az monitor metrics alert create \
 ### 5. Optimasi Biaya
 
 ```bash
-# Skala ke nol saat tidak digunakan
+# Skalakan ke nol saat tidak digunakan
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -747,40 +740,41 @@ jobs:
 ## Referensi Perintah Umum
 
 ```bash
-# Inisialisasi proyek aplikasi kontainer baru
+# Inisialisasi proyek aplikasi container baru
 azd init --template <template-name>
 
-# Menerapkan infrastruktur dan aplikasi
+# Terapkan infrastruktur dan aplikasi
 azd up
 
-# Menerapkan hanya kode aplikasi (lewati infrastruktur)
+# Terapkan hanya kode aplikasi (lewati infrastruktur)
 azd deploy
 
-# Menyediakan hanya infrastruktur
+# Sediakan hanya infrastruktur
 azd provision
 
-# Melihat sumber daya yang diterapkan
+# Lihat sumber daya yang telah diterapkan
 azd show
 
-# Streaming log
-azd logs <service-name> --follow
+# Alirkan log menggunakan azd monitor atau Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# Memantau aplikasi
+# Pantau aplikasi
 azd monitor --overview
 
-# Membersihkan sumber daya
+# Bersihkan sumber daya
 azd down --force --purge
 ```
 
 ## Pemecahan Masalah
 
-### Masalah: Container gagal memulai
+### Masalah: Kontainer gagal untuk memulai
 
 ```bash
-# Periksa log
-azd logs api --tail 100
+# Periksa log menggunakan Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Lihat acara kontainer
+# Lihat peristiwa kontainer
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -807,10 +801,10 @@ az containerapp ingress update \
   --external true
 ```
 
-### Masalah: Masalah performa
+### Masalah: Masalah kinerja
 
 ```bash
-# Periksa pemanfaatan sumber daya
+# Periksa penggunaan sumber daya
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
@@ -824,30 +818,30 @@ az containerapp update \
 ```
 
 ## Sumber Daya dan Contoh Tambahan
-- [Contoh Microservices](./microservices/README.md)
-- [Contoh Flash API Sederhana](./simple-flask-api/README.md)
+- [Contoh Mikroservis](./microservices/README.md)
+- [Contoh API Flask Sederhana](./simple-flask-api/README.md)
 - [Dokumentasi Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Galeri Template AZD](https://azure.github.io/awesome-azd/)
-- [Contoh Container Apps](https://github.com/Azure-Samples/container-apps-samples)
+- [Sampel Container Apps](https://github.com/Azure-Samples/container-apps-samples)
 - [Template Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Kontribusi
 
-Untuk berkontribusi pada contoh aplikasi container baru:
+Untuk berkontribusi contoh aplikasi container baru:
 
-1. Buat subdirektori baru dengan contoh Anda
-2. Sertakan file lengkap `azure.yaml`, `infra/`, dan `src/`
-3. Tambahkan README yang komprehensif dengan instruksi penerapan
-4. Uji penerapan dengan `azd up`
-5. Kirimkan pull request
+1. Buat subdirektori baru untuk contoh Anda
+2. Sertakan file `azure.yaml`, `infra/`, dan `src/` secara lengkap
+3. Tambahkan README yang komprehensif dengan instruksi penyebaran
+4. Uji penyebaran dengan `azd up`
+5. Ajukan pull request
 
 ---
 
-**Butuh Bantuan?** Bergabunglah dengan komunitas [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) untuk dukungan dan pertanyaan.
+**Butuh Bantuan?** Bergabung dengan komunitas [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) untuk dukungan dan pertanyaan.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan hasil yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang salah yang timbul dari penggunaan terjemahan ini.
+Penafian:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai ketepatan, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi yang sangat penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,38 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T13:43:24+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "ne"
-}
--->
-# ६. पूर्वाधार हटाउने
+# 6. Teardown Infrastructure
 
-!!! tip "यस मोड्युलको अन्त्यसम्ममा तपाईं सक्षम हुनुहुनेछ"
+!!! tip "यस मोड्युलको अन्त्यसम्म तपाईं सक्षम हुनुहुनेछ"
 
-    - [ ] वस्तु
-    - [ ] वस्तु
-    - [ ] वस्तु
+    - [ ] स्रोत क्लिनअप र लागत व्यवस्थापनको महत्त्व बुझ्नुहोस्
+    - [ ] सुरक्षित रूपमा पूर्वाधार हटाउन `azd down` प्रयोग गर्नुहोस्
+    - [ ] आवश्यक परे सफ्ट-डिलिट गरिएका Cognitive Service सेवा पुन:प्राप्त गर्नुहोस्
+    - [ ] **Lab 6:** Azure स्रोतहरू सफा गर्नुहोस् र हटाइएको छ कि छैन जाँच गर्नुहोस्
 
 ---
 
-## बोनस अभ्यासहरू
+## Bonus Exercises
 
-परियोजना हटाउनु अघि, केही समय लिएर स्वतन्त्र अन्वेषण गर्नुहोस्।
+Before we tear down the project, take a few minutes to do some open-ended exploration.
 
-!!! danger "नित्य-टु-डु: प्रयास गर्नका लागि केही सुझावहरू दिनुहोस्"
+!!! info "यी अन्वेषण प्रेरणाहरू प्रयास गर्नुहोस्"
+
+    **GitHub Copilot सँग प्रयोगात्मक परीक्षण गर्नुहोस्:**
+    
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
+    
+    **Azure Portal अन्वेषण गर्नुहोस्:**
+    
+    1. तपाइँको परिनियोजनका लागि Application Insights मेट्रिक्स समीक्षा गर्नुहोस्
+    2. प्राविजन गरिएका स्रोतहरूको लागत विश्लेषण जाँच गर्नुहोस्
+    3. Microsoft Foundry पोर्टल एजेन्ट प्लेग्राउण्ड फेरि एकपटक अन्वेषण गर्नुहोस्
 
 ---
 
-## पूर्वाधार हटाउनुहोस्
+## Deprovision Infra
 
-1. पूर्वाधार हटाउनु यति सजिलो छ:
+1. पूर्वाधार हटाउन यति सरल छ:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. `--purge` फ्ल्यागले सुनिश्चित गर्दछ कि यसले नरम-डिलिट गरिएका Cognitive Service स्रोतहरू पनि हटाउँछ, जसले गर्दा यी स्रोतहरूले राखेको कोटा मुक्त हुन्छ। पूरा भएपछि तपाईंले यस्तो देख्नुहुनेछ:
+1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -43,14 +47,18 @@ CO_OP_TRANSLATOR_METADATA:
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (वैकल्पिक) यदि तपाईं अहिले `azd up` पुन: चलाउनुहुन्छ भने, तपाईंले देख्नुहुनेछ कि gpt-4.1 मोडेल तैनात हुन्छ किनभने वातावरण चर स्थानीय `.azure` फोल्डरमा परिवर्तन (र सुरक्षित) गरिएको थियो। 
+1. (Optional) If you now run `azd up` again, you will notice the gpt-4.1 model gets deployed since the environment variable was changed (and saved) in the local `.azure` folder. 
 
-      यहाँ मोडेल तैनातीहरू **पहिले**:
+      Here is the model deployments **before**:
 
       ![प्रारम्भिक](../../../../../translated_images/ne/14-deploy-initial.30e4cf1c29b587bc.webp)
 
-      र यहाँ यो **पछि**:
+      And here it is **after**:
       ![नयाँ](../../../../../translated_images/ne/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+अस्वीकरण:
+यो दस्तावेज AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा असंगतता हुन सक्छ। मूल दस्तावेजलाई यसको मूल भाषामा अधिकार सम्पन्न स्रोत मानिनु पर्छ। महत्वपूर्ण जानकारीको लागि व्यावसायिक मानव अनुवाद सिफारिश गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार छैनौं।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

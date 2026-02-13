@@ -1,32 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T15:03:43+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "tr"
-}
--->
-# 2. Bir Şablonu Doğrulama
+# 2. Bir Şablonu Doğrulayın
 
 !!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLECEKSİNİZ"
 
-    - [ ] Yapay Zeka Çözüm Mimarisi'ni analiz etme
-    - [ ] AZD Dağıtım İş Akışını anlama
-    - [ ] GitHub Copilot'u kullanarak AZD hakkında yardım alma
-    - [ ] **Lab 2:** AI Agents şablonunu dağıtma ve doğrulama
+    - [ ] AI Çözüm Mimarisini analiz etmek
+    - [ ] AZD Dağıtım İş Akışını anlamak
+    - [ ] AZD kullanımında yardım almak için GitHub Copilot kullanmak
+    - [ ] **Laboratuvar 2:** AI Agents şablonunu Dağıtma ve Doğrulama
 
 ---
 
+
 ## 1. Giriş
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) veya `azd`, Azure'a uygulama geliştirirken ve dağıtırken geliştirici iş akışını kolaylaştıran açık kaynaklı bir komut satırı aracıdır.
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) veya `azd`, uygulamaları Azure'a oluşturup dağıtırken geliştirici iş akışını kolaylaştıran açık kaynaklı bir komut satırı aracıdır.
 
-[AZD Şablonları](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates), örnek uygulama kodu, _altyapı kodu_ varlıkları ve `azd` yapılandırma dosyalarını içeren standartlaştırılmış depolardır. Altyapıyı sağlamak, bir `azd provision` komutuyla basitleşir - ve `azd up` kullanarak altyapıyı **ve** uygulamanızı tek seferde dağıtabilirsiniz!
+[AZD Şablonları](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) örnek uygulama kodu, altyapı-kod olarak varlıklar ve tutarlı bir çözüm mimarisi için `azd` yapılandırma dosyalarını içeren standart depolardır. Altyapıyı sağlamak, bir `azd provision` komutu kadar basit hale gelir - aynı zamanda `azd up` kullanmak altyapıyı sağlarken uygulamanızı tek seferde dağıtmanızı sağlar!
 
-Sonuç olarak, uygulama geliştirme sürecinize başlamak, uygulamanıza ve altyapı ihtiyaçlarınıza en yakın olan _AZD Başlangıç Şablonu_'nu bulmak kadar basit olabilir - ardından depoyu senaryo gereksinimlerinize göre özelleştirebilirsiniz.
+Sonuç olarak, uygulama geliştirme sürecinizi başlatmak, uygulama ve altyapı ihtiyaçlarınıza en yakın gelen doğru _AZD Başlangıç şablonunu_ bulmak ve ardından senaryonuza göre depo özelleştirmek kadar basit olabilir.
 
-Başlamadan önce, Azure Developer CLI'nin yüklü olduğundan emin olalım.
+Başlamadan önce, Azure Developer CLI'nizin kurulu olduğundan emin olalım.
 
 1. VS Code terminalini açın ve şu komutu yazın:
 
@@ -34,207 +26,210 @@ Başlamadan önce, Azure Developer CLI'nin yüklü olduğundan emin olalım.
       azd version
       ```
 
-1. Şuna benzer bir şey görmelisiniz!
+1. Şunun gibi bir şey görmelisiniz!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**Artık bir şablon seçmeye ve azd ile dağıtmaya hazırsınız**
+**Artık azd ile bir şablon seçmeye ve dağıtmaya hazırsınız**
 
 ---
 
 ## 2. Şablon Seçimi
 
-Azure AI Foundry platformu, _çoklu ajan iş akışı otomasyonu_ ve _çok modlu içerik işleme_ gibi popüler çözüm senaryolarını kapsayan [önerilen AZD şablonları](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) setiyle birlikte gelir. Bu şablonları Azure AI Foundry portalını ziyaret ederek de keşfedebilirsiniz.
+Microsoft Foundry platformu, _çok ajanlı iş akışı otomasyonu_ ve _çok modlu içerik işleme_ gibi popüler çözüm senaryolarını kapsayan [önerilen AZD şablonları kümesi](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) ile gelir. Bu şablonları Microsoft Foundry portalını ziyaret ederek de keşfedebilirsiniz.
 
-1. [https://ai.azure.com/templates](https://ai.azure.com/templates) adresini ziyaret edin
-1. Azure AI Foundry portalına giriş yapın - şuna benzer bir şey göreceksiniz.
+1. Ziyaret edin: [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. İstendiğinde Microsoft Foundry portalına giriş yapın - şunun gibi bir şey göreceksiniz.
 
-![Pick](../../../../../translated_images/tr/01-pick-template.60d2d5fff5ebc374.webp)
+![Seç](../../../../../translated_images/tr/01-pick-template.60d2d5fff5ebc374.webp)
 
-**Temel** seçenekler başlangıç şablonlarınızdır:
 
-1. [ ] [AI Chat ile Başlayın](https://github.com/Azure-Samples/get-started-with-ai-chat), verilerinizle birlikte Azure Container Apps'e temel bir sohbet uygulaması dağıtır. Temel bir yapay zeka sohbet botu senaryosunu keşfetmek için bunu kullanın.
-1. [X] [AI Agents ile Başlayın](https://github.com/Azure-Samples/get-started-with-ai-agents), Azure AI Agent Service ile standart bir AI Agent'ı dağıtır. Araçlar ve modeller içeren ajan tabanlı yapay zeka çözümlerine aşina olmak için bunu kullanın.
+**Basic** seçenekleri başlangıç şablonlarınızdır:
 
-İkinci bağlantıyı yeni bir tarayıcı sekmesinde ziyaret edin (veya ilgili kart için `GitHub'da Aç` seçeneğine tıklayın). Bu AZD Şablonu için depoyu görmelisiniz. README dosyasını incelemek için bir dakikanızı ayırın. Uygulama mimarisi şu şekilde görünüyor:
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) – temelde bir sohbet uygulamasını _verilerinizle birlikte_ Azure Container Apps üzerine dağıtır. Basit bir AI sohbet botu senaryosunu keşfetmek için bunu kullanın.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) – Foundry Agents ile standart bir AI Agent (ajan) da dağıtır. Araçlar ve modeller içeren ajan tabanlı AI çözümlerine aşina olmak için bunu kullanın.
 
-![Arch](../../../../../translated_images/tr/architecture.8cec470ec15c65c7.webp)
+İkinci bağlantıyı yeni bir tarayıcı sekmesinde açın (veya ilgili kart için `Open in GitHub` tıklayın). Bu AZD Şablonu için depoyu görmelisiniz. README dosyasını incelemek için bir dakika ayırın. Uygulama mimarisi şu şekilde görünüyor:
+
+![Mimari](../../../../../translated_images/tr/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## 3. Şablon Aktivasyonu
+## 3. Şablon Etkinleştirme
 
-Bu şablonu dağıtmaya çalışalım ve geçerli olduğundan emin olalım. [Başlarken](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) bölümündeki yönergeleri takip edeceğiz.
+Bu şablonu dağıtmaya çalışalım ve geçerli olduğunu doğrulayalım. [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) bölümündeki yönergeleri izleyeceğiz.
 
-1. [Bu bağlantıya](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) tıklayın - varsayılan `Create codespace` eylemini onaylayın
-1. Bu, yeni bir tarayıcı sekmesi açar - GitHub Codespaces oturumunun yüklenmesini bekleyin
-1. Codespaces'te VS Code terminalini açın - şu komutu yazın:
+1. Bu bağlantıya tıklayın: [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - `Create codespace` için varsayılan işlemi onaylayın
+1. Bu yeni bir tarayıcı sekmesi açar - GitHub Codespaces oturumu yüklenene kadar bekleyin
+1. Codespaces içindeki VS Code terminalini açın - şu komutu yazın:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Bu işlemle tetiklenen iş akışı adımlarını tamamlayın:
+Bu tetikleyeceği iş akışı adımlarını tamamlayın:
 
 1. Azure'a giriş yapmanız istenecek - kimlik doğrulama talimatlarını izleyin
-1. Kendinize özgü bir ortam adı girin - örneğin, `nitya-mshack-azd` kullandım
-1. Bu, bir `.azure/` klasörü oluşturacak - ortam adıyla bir alt klasör göreceksiniz
+1. Kendiniz için benzersiz bir ortam adı girin - ör., ben `nitya-mshack-azd` kullandım
+1. Bu bir `.azure/` klasörü oluşturacak - ortam adı ile bir alt klasör göreceksiniz
 1. Bir abonelik adı seçmeniz istenecek - varsayılanı seçin
 1. Bir konum seçmeniz istenecek - `East US 2` kullanın
 
-Şimdi, sağlama işleminin tamamlanmasını bekleyin. **Bu işlem 10-15 dakika sürer**
+Şimdi, sağlama işleminin tamamlanmasını bekleyin. **Bu 10-15 dakika sürer**
 
-1. İşlem tamamlandığında, konsolunuzda şu gibi bir BAŞARI mesajı göreceksiniz:
+1. Tamamlandığında, konsolunuz şu şekilde bir BAŞARI mesajı gösterecektir:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Azure Portalınızda artık o ortam adıyla sağlanmış bir kaynak grubu olacak:
+1. Azure Portal'ınız artık o ortam adıyla sağlanmış bir kaynak grubuna sahip olacak:
 
-      ![Infra](../../../../../translated_images/tr/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Altyapı](../../../../../translated_images/tr/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Artık dağıtılan altyapıyı ve uygulamayı doğrulamaya hazırsınız.**
+1. **Artık dağıtılan altyapıyı ve uygulamayı doğrulamaya hazırsınız**.
 
 ---
 
 ## 4. Şablon Doğrulama
 
-1. Azure Portal [Kaynak Grupları](https://portal.azure.com/#browse/resourcegroups) sayfasını ziyaret edin - giriş yapmanız istenecek
-1. Ortam adınız için RG'ye tıklayın - yukarıdaki sayfayı göreceksiniz
+1. Azure Portal [Kaynak Grupları](https://portal.azure.com/#browse/resourcegroups) sayfasını ziyaret edin - istendiğinde giriş yapın
+1. Ortam adınız için RG'ye tıklayın - yukarıdaki sayfayı görmelisiniz
 
       - Azure Container Apps kaynağına tıklayın
-      - _Essentials_ bölümündeki (sağ üst) Uygulama URL'sine tıklayın
+      - _Essentials_ bölümündeki Uygulama URL'sine tıklayın (sağ üst)
 
-1. Şuna benzer bir barındırılan uygulama ön yüzü UI'si görmelisiniz:
+1. Şu gibi barındırılan bir uygulama ön yüzü UI'si görmelisiniz:
 
-   ![App](../../../../../translated_images/tr/03-test-application.471910da12c3038e.webp)
+   ![Uygulama](../../../../../translated_images/tr/03-test-application.471910da12c3038e.webp)
 
-1. Birkaç [örnek soru](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) sormayı deneyin
+1. Birkaç [örnek soru](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) sorun
 
-      1. Sorun: ```Fransa'nın başkenti nedir?``` 
-      1. Sorun: ```İki kişi için 200 doların altında en iyi çadır hangisidir ve hangi özelliklere sahiptir?```
+      1. Sorun: ```What is the capital of France?``` 
+      1. Sorun: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. Aşağıda gösterilenlere benzer yanıtlar almalısınız. _Peki bu nasıl çalışıyor?_ 
+1. Aşağıda gösterildiğine benzer yanıtlar almalısınız. _Peki bu nasıl çalışıyor?_ 
 
-      ![App](../../../../../translated_images/tr/03-test-question.521c1e863cbaddb6.webp)
+      ![Uygulama](../../../../../translated_images/tr/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
 ## 5. Ajan Doğrulama
 
-Azure Container App, bu şablon için Azure AI Foundry projesinde sağlanan AI Agent'a bağlanan bir uç nokta dağıtır. Bunun ne anlama geldiğine bir göz atalım.
+Azure Container App, bu şablon için Microsoft Foundry projesinde sağlanan AI Agent'e bağlanan bir uç nokta dağıtır. Bunun ne anlama geldiğine bir bakalım.
 
-1. Kaynak grubunuzun Azure Portal _Genel Bakış_ sayfasına geri dönün
+1. Kaynak grubunuzun Azure Portal _Overview_ sayfasına geri dönün
 
-1. Listedeki `Azure AI Foundry` kaynağına tıklayın
+1. Listede `Microsoft Foundry` kaynağına tıklayın
 
-1. Şunu görmelisiniz. `Go to Azure AI Foundry Portal` düğmesine tıklayın. 
+1. Şunu görmelisiniz. `Go to Microsoft Foundry Portal` düğmesine tıklayın. 
    ![Foundry](../../../../../translated_images/tr/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. AI uygulamanız için Foundry Proje sayfasını görmelisiniz
-   ![Project](../../../../../translated_images/tr/05-visit-foundry-portal.d734e98135892d7e.webp)
+   ![Proje](../../../../../translated_images/tr/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. `Agents` sekmesine tıklayın - projenizde sağlanan varsayılan Agent'ı göreceksiniz
-   ![Agents](../../../../../translated_images/tr/06-visit-agents.bccb263f77b00a09.webp)
+1. `Agents` üzerine tıklayın - projenizde sağlanmış varsayılan Agent'i görürsünüz
+   ![Ajanlar](../../../../../translated_images/tr/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Seçin - ve Agent ayrıntılarını göreceksiniz. Şunlara dikkat edin:
+1. Seçin - ve Ajan ayrıntılarını görürsünüz. Aşağıdakilere dikkat edin:
 
-      - Agent varsayılan olarak Dosya Arama kullanır (her zaman)
-      - Agent'ın `Knowledge` kısmı, dosya arama için 32 dosya yüklendiğini gösterir
-      ![Agents](../../../../../translated_images/tr/07-view-agent-details.0e049f37f61eae62.webp)
+      - Ajan varsayılan olarak File Search kullanır (her zaman)
+      - Ajanın `Knowledge` kısmı, bilgi için 32 dosya yüklendiğini gösterir
+      ![Ajanlar](../../../../../translated_images/tr/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Sol menüdeki `Data+indexes` seçeneğini arayın ve ayrıntılar için tıklayın. 
+1. Sol menüde `Data+indexes` seçeneğini arayın ve ayrıntılar için tıklayın. 
 
-      - Bilgi için yüklenen 32 veri dosyasını görmelisiniz.
-      - Bunlar `src/files` altındaki 12 müşteri dosyası ve 20 ürün dosyasına karşılık gelir
-      ![Data](../../../../../translated_images/tr/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - Bilgi için yüklenmiş 32 veri dosyasını görmelisiniz.
+      - Bunlar `src/files` altında bulunan 12 müşteri dosyası ve 20 ürün dosyası ile eşleşir
+      ![Veri](../../../../../translated_images/tr/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**Agent operasyonunu doğruladınız!** 
+**Ajan işlemini doğruladınız!**
 
-1. Agent yanıtları, bu dosyalardaki bilgilere dayalıdır. 
-1. Artık bu verilerle ilgili sorular sorabilir ve dayalı yanıtlar alabilirsiniz.
-1. Örnek: `customer_info_10.json`, "Amanda Perez" tarafından yapılan 3 satın alımı açıklar.
+1. Ajan yanıtları bu dosyalardaki bilgiye dayanır.
+1. Artık bu verilerle ilgili sorular sorabilir ve dayanağı olan yanıtlar alabilirsiniz.
+1. Örnek: `customer_info_10.json`, "Amanda Perez" tarafından yapılan 3 satın almayı açıklar
 
-Container App uç noktasıyla tarayıcı sekmesine geri dönün ve şunu sorun: `Amanda Perez hangi ürünlere sahip?`. Şuna benzer bir şey görmelisiniz:
+Container App uç noktası içeren tarayıcı sekmesine geri dönün ve sorun: `What products does Amanda Perez own?`. Şunun gibi bir şey görmelisiniz:
 
-![Data](../../../../../translated_images/tr/09-ask-in-aca.4102297fc465a4d5.webp)
+![Veri](../../../../../translated_images/tr/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
 ## 6. Ajan Oyun Alanı
 
-Azure AI Foundry'nin yetenekleri hakkında biraz daha sezgi geliştirelim ve Agent'ı Agents Playground'da deneyelim. 
+Microsoft Foundry'nin yetenekleri hakkında biraz daha sezgi geliştirmek için Ajanı Agents Playground'da çalıştıralım.
 
-1. Azure AI Foundry'deki `Agents` sayfasına geri dönün - varsayılan agent'ı seçin
-1. `Try in Playground` seçeneğine tıklayın - şu şekilde bir Playground UI'si almalısınız
-1. Aynı soruyu sorun: `Amanda Perez hangi ürünlere sahip?`
+1. Microsoft Foundry'de `Agents` sayfasına geri dönün - varsayılan ajanı seçin
+1. `Try in Playground` seçeneğine tıklayın - şu gibi bir Playground UI elde etmelisiniz
+1. Aynı soruyu sorun: `What products does Amanda Perez own?`
 
-    ![Data](../../../../../translated_images/tr/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Veri](../../../../../translated_images/tr/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Aynı (veya benzer) yanıtı alırsınız - ancak ayrıca ajan uygulamanızın kalitesini, maliyetini ve performansını anlamak için kullanabileceğiniz ek bilgiler de alırsınız. Örneğin:
+Aynı (veya benzer) yanıtı alırsınız - ancak ayrıca ajan uygulamanızın kalitesini, maliyetini ve performansını anlamak için kullanabileceğiniz ek bilgiler de elde edersiniz. Örneğin:
 
-1. Yanıtın "dayandırıldığı" veri dosyalarını belirttiğini fark edin
-1. Bu dosya etiketlerinin üzerine gelin - sorgunuz ve görüntülenen yanıtla veri eşleşiyor mu?
+1. Yanıtın "dayanmak" için kullanılan veri dosyalarını alıntıladığını fark edin
+1. Bu dosya etiketlerinin herhangi birinin üzerine gelin - veri, sorgunuzla ve görüntülenen yanıtla eşleşiyor mu?
 
-Yanıtın altında bir _istatistik_ satırı da görürsünüz. 
+Yanıtın altında bir de _istatistikler_ satırı görürsünüz.
 
-1. Herhangi bir metriğin üzerine gelin - örneğin, Güvenlik. Şuna benzer bir şey görürsünüz
-1. Değerlendirilen derecelendirme, yanıtın güvenlik seviyesi için sezginizle eşleşiyor mu?
+1. Herhangi bir metriğin üzerine gelin - ör., Safety. Şunun gibi bir şey görürsünüz
+1. Değerlendirilen puanlama, yanıt güvenlik düzeyi için sezginizle eşleşiyor mu?
 
-      ![Data](../../../../../translated_images/tr/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Veri](../../../../../translated_images/tr/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
----x
+---
 
-## 7. Dahili Gözlemlenebilirlik
+## 7. Yerleşik Gözlemlenebilirlik
 
-Gözlemlenebilirlik, uygulamanızı çalışmasını anlamak, hata ayıklamak ve optimize etmek için kullanılabilecek veri üretmek üzere enstrümanlamaktır. Bunun için bir fikir edinmek için:
+Gözlemlenebilirlik, uygulamanızın operasyonlarını anlamak, hata ayıklamak ve optimize etmek için kullanılabilecek veri üretmesi amacıyla enstrümantasyon yapmaktır. Bunun bir örneğini görmek için:
 
-1. `View Run Info` düğmesine tıklayın - bu görünümü görmelisiniz. Bu, [Agent izleme](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) örneğidir. _Bu görünüme üst düzey menüdeki Thread Logs'a tıklayarak da ulaşabilirsiniz._
+1. `View Run Info` düğmesine tıklayın - bu görünümü görmelisiniz. Bu, çalışan bir [Agent izleme](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) örneğidir. _Bu görünümü ayrıca üst düzey menüde Thread Logs'a tıklayarak da alabilirsiniz_.
 
-   - Agent tarafından kullanılan çalışma adımları ve araçlar hakkında bilgi edinin
-   - Yanıt için toplam Token sayısını (vs. çıktı token kullanımı) anlayın
-   - Gecikmeyi ve yürütmede zamanın nerede harcandığını anlayın
+   - Ajanın çalıştırma adımlarını ve kullanılan araçları anlayın
+   - Yanıt için toplam Token sayısını (ve çıktı token kullanımı karşılaştırmasını) anlayın
+   - Gecikmeyi ve yürütme sırasında zamanın nerede harcandığını anlayın
 
-      ![Agent](../../../../../translated_images/tr/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![Ajan](../../../../../translated_images/tr/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. `Metadata` sekmesine tıklayın ve daha sonra sorunları ayıklamak için yararlı bağlam sağlayabilecek çalıştırma için ek öznitelikleri görün.   
+1. Çalışma için hata ayıklama bağlamı sağlayabilecek ek öznitelikleri görmek için `Metadata` sekmesine tıklayın.   
 
-      ![Agent](../../../../../translated_images/tr/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![Ajan](../../../../../translated_images/tr/11-view-run-info-metadata.7966986122c7c2df.webp)
 
-1. `Evaluations` sekmesine tıklayın ve agent yanıtı üzerinde yapılan otomatik değerlendirmeleri görün. Bunlar güvenlik değerlendirmelerini (örneğin, Kendine zarar verme) ve agent'a özgü değerlendirmeleri (örneğin, Niyet çözümü, Görev uyumu) içerir.
 
-      ![Agent](../../../../../translated_images/tr/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+1. `Evaluations` sekmesine tıklayarak ajan yanıtı üzerinde otomatik yapılan değerlendirmeleri görün. Bunlar güvenlik değerlendirmelerini (örn., Self-harm) ve ajanla ilgili değerlendirmeleri (örn., Niyet çözümü, Göreve uyum) içerir.
 
-1. Son olarak, yan menüdeki `Monitoring` sekmesine tıklayın.
+      ![Ajan](../../../../../translated_images/tr/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-      - Görüntülenen sayfada `Resource usage` sekmesini seçin ve metrikleri görüntüleyin.
-      - Uygulama kullanımını maliyetler (tokenlar) ve yük (istekler) açısından takip edin.
-      - İlk bayta (girdi işleme) ve son bayta (çıktı) kadar uygulama gecikmesini takip edin.
+1. Son olarak, kenar çubuğu menüsünde `Monitoring` sekmesine tıklayın.
 
-      ![Agent](../../../../../translated_images/tr/13-monitoring-resources.5148015f7311807f.webp)
+      - Görüntülenen sayfada `Resource usage` sekmesini seçin - ve metrikleri görüntüleyin.
+      - Maliyet (tokenlar) ve yük (istekler) açısından uygulama kullanımını izleyin.
+      - Uygulama için ilk byte (girdi işleme) ve son byte (çıktı) gecikmesini izleyin.
+
+      ![Ajan](../../../../../translated_images/tr/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
 ## 8. Ortam Değişkenleri
 
-Şimdiye kadar, tarayıcıda dağıtımı yürüttük - ve altyapımızın sağlandığını ve uygulamanın çalıştığını doğruladık. Ancak uygulamayla _kod odaklı_ çalışmak için, bu kaynaklarla çalışmak için gereken ilgili değişkenleri içeren yerel geliştirme ortamımızı yapılandırmamız gerekiyor. `azd` kullanmak bunu kolaylaştırır.
+Şimdiye kadar dağıtımı tarayıcıda gezindik ve altyapımızın sağlandığını ve uygulamanın çalıştığını doğruladık. Ancak uygulama ile _kod-öncelikli_ çalışmak için, bu kaynaklarla çalışmak için gereken ilgili değişkenlerle yerel geliştirme ortamımızı yapılandırmamız gerekir. `azd` kullanmak bunu kolaylaştırır.
 
-1. Azure Developer CLI [ortam değişkenlerini kullanır](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) uygulama dağıtımları için yapılandırma ayarlarını depolamak ve yönetmek için.
+1. Azure Developer CLI [uygulama dağıtımları için yapılandırma ayarlarını saklamak ve yönetmek amacıyla ortam değişkenlerini kullanır](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash).
 
-1. Ortam değişkenleri `.azure/<env-name>/.env` içinde depolanır - bu, dağıtım sırasında kullanılan `env-name` ortamına göre kapsamlanır ve aynı depoda farklı dağıtım hedefleri arasında ortamları izole etmenize yardımcı olur.
+1. Ortam değişkenleri `.azure/<env-name>/.env` içinde saklanır - bu onları dağıtım sırasında kullanılan `env-name` ortamına özgü kılar ve aynı depo içindeki farklı dağıtım hedefleri arasında ortamları izole etmenize yardımcı olur.
 
-1. Ortam değişkenleri, `azd` komutu belirli bir komut (örneğin, `azd up`) çalıştırdığında otomatik olarak yüklenir. `azd`'nin _OS düzeyindeki_ ortam değişkenlerini (örneğin, kabukta ayarlanan) otomatik olarak okumadığını unutmayın - bunun yerine, bilgiler arasında geçiş yapmak için `azd set env` ve `azd get env` kullanın.
+1. Ortam değişkenleri, `azd` komutu belirli bir komut yürüttüğünde (örn., `azd up`) otomatik olarak yüklenir. `azd` işletim sistemi seviyesindeki ortam değişkenlerini (örn., shell içinde ayarlanmış olanları) otomatik olarak okumaz - bunun yerine betikler içinde bilgiyi aktarmak için `azd set env` ve `azd get env` kullanın.
 
-Birkaç komut deneyelim:
 
-1. Bu ortamda `azd` için ayarlanan tüm ortam değişkenlerini alın:
+Birkaç komutu deneyelim:
+
+1. Bu ortam için `azd` ile ayarlanmış tüm ortam değişkenlerini alın:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      Şuna benzer bir şey görürsünüz:
+      Şunun gibi bir şey görürsünüz:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -244,19 +239,19 @@ Birkaç komut deneyelim:
       ...
       ```
 
-1. Belirli bir değeri alın - örneğin, `AZURE_AI_AGENT_MODEL_NAME` değerini ayarlayıp ayarlamadığımızı öğrenmek istiyorum
+1. Belirli bir değeri alın - ör., `AZURE_AI_AGENT_MODEL_NAME` değerinin ayarlanıp ayarlanmadığını bilmek istiyorum
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Şuna benzer bir şey görürsünüz - varsayılan olarak ayarlanmamış!
+      Şunun gibi bir şey görürsünüz - varsayılan olarak ayarlanmamıştı!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. `azd` için yeni bir ortam değişkeni ayarlayın. Burada, agent model adını güncelliyoruz. _Not: yapılan değişiklikler hemen `.azure/<env-name>/.env` dosyasında yansıtılacaktır._
+1. `azd` için yeni bir ortam değişkeni ayarlayın. Burada, ajan model adını güncelliyoruz. _Not: yapılan değişiklikler `.azure/<env-name>/.env` dosyasında hemen yansıtılacaktır._
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,30 +259,35 @@ Birkaç komut deneyelim:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Şimdi, değerin ayarlandığını görmeliyiz:
+      Şimdi değerin ayarlandığını görmeliyiz:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Bazı kaynaklar kalıcıdır (örneğin, model dağıtımları) ve yeniden dağıtımı zorlamak için yalnızca bir `azd up` yeterli olmayacaktır. Orijinal dağıtımı kaldırmayı ve değiştirilen ortam değişkenleriyle yeniden dağıtmayı deneyelim.
+1. Bazı kaynakların kalıcı olduğunu (örn., model dağıtımları) ve yeniden dağıtımı zorlamak için sadece bir `azd up`'dan daha fazlasını gerektirebileceğini unutmayın. Orijinal dağıtımı kaldırıp değiştirilen ortam değişkenleriyle yeniden dağıtmayı deneyelim.
 
-1. **Yenileme** Daha önce bir azd şablonu kullanarak altyapı sağladıysanız - bu komutla Azure dağıtımınızın mevcut durumuna dayalı olarak yerel ortam değişkenlerinizin durumunu _yenileyebilirsiniz_:
+1. **Yenileme** Daha önce bir azd şablonu kullanarak altyapı dağıttıysanız - yerel ortam değişkenlerinizin durumunu Azure dağıtımınızın mevcut durumuna göre yenilemek için şu komutu kullanabilirsiniz:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Bu, ortam değişkenlerini birden fazla yerel geliştirme ortamı arasında senkronize etmenin güçlü bir yoludur (örneğin, birden fazla geliştiriciden oluşan bir ekip) - dağıtılmış altyapının ortam değişkeni durumu için referans noktası olarak hizmet etmesine olanak tanır. Ekip üyeleri, değişkenleri basitçe _yenileyerek_ senkronize duruma geri dönebilir.
+      Bu, iki veya daha fazla yerel geliştirme ortamı (ör. birden fazla geliştiricinin olduğu bir ekip) arasında ortam değişkenlerini _eşitlemenin_ güçlü bir yoludur - dağıtılan altyapının ortam değişkenlerinin durumunu gerçek kaynak olarak kabul etmesini sağlar. Ekip üyeleri sadece değişkenleri _yenileyerek_ tekrar senkronize olurlar.
 
 ---
 
 ## 9. Tebrikler 🏆
 
-Az önce uçtan uca bir iş akışını tamamladınız ve şunları yaptınız:
+Az önce uçtan uca bir iş akışını tamamladınız:
 
 - [X] Kullanmak İstediğiniz AZD Şablonunu Seçtiniz
-- [X] Şablonu GitHub Codespaces ile Başlattınız
-- [X] Şablonu Dağıttınız ve çalıştığını doğruladınız
+- [X] Şablonu GitHub Codespaces ile Başlattınız 
+- [X] Şablonu dağıttınız ve çalıştığını doğruladınız
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Sorumluluk Reddi:
+Bu belge, yapay zeka çeviri servisi Co-op Translator (https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı nedeniyle oluşabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

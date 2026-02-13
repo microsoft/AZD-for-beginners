@@ -1,85 +1,76 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-21T15:31:43+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "fi"
-}
--->
-# Moniagenttinen asiakastukiratkaisu - Vähittäiskaupan skenaario
+# Moni-agenttinen asiakastukiratkaisu - Vähittäiskaupan skenaario
 
-**Luku 5: Moniagenttiset tekoälyratkaisut**
-- **📚 Kurssin kotisivu**: [AZD For Beginners](../README.md)
-- **📖 Nykyinen luku**: [Luku 5: Moniagenttiset tekoälyratkaisut](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Esitiedot**: [Luku 2: AI-First-kehitys](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **➡️ Seuraava luku**: [Luku 6: Ennen käyttöönottoa tehtävä validointi](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM-mallit**: [Käyttöönottopaketti](retail-multiagent-arm-template/README.md)
+**Luku 5: Moni-agenttiset tekoälyratkaisut**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../README.md)
+- **📖 Nykyinen luku**: [Luku 5: Moni-agenttiset tekoälyratkaisut](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Esivaatimukset**: [Luku 2: AI-First - kehitys](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Seuraava luku**: [Luku 6: Esijakelun validointi](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM-mallit**: [Asennuspaketti](retail-multiagent-arm-template/README.md)
 
-> **⚠️ ARKKITEHTUURIOPAS - EI TOIMIVA TOTEUTUS**  
-> Tämä dokumentti tarjoaa **kattavan arkkitehtuurisuunnitelman** moniagenttisen järjestelmän rakentamiseen.  
-> **Mitä on valmiina:** ARM-malli infrastruktuurin käyttöönottoon (Azure OpenAI, AI Search, Container Apps jne.)  
-> **Mitä sinun täytyy rakentaa:** Agenttikoodi, reitityslogiikka, käyttöliittymä, dataputket (arvioitu 80-120 tuntia)  
+> **⚠️ ARKKITEHTUURI-OPAS - EI VALMIS TOTEUTUS**  
+> Tämä asiakirja tarjoaa **kattavan arkkitehtuurisuunnitelman** moni-agenttijärjestelmän rakentamiseen.  
+> **Mitä on olemassa:** ARM-malli infrastruktuurin käyttöönottoon (Azure OpenAI, AI Search, Container Apps, jne.)  
+> **Mitä sinun täytyy rakentaa:** Agenttikoodi, reitityslogiikka, frontend-käyttöliittymä, datanputket (arvio 80–120 tuntia)  
 >  
-> **Käytä tätä seuraavasti:**
-> - ✅ Arkkitehtuuriviite omaan moniagenttiseen projektiisi
-> - ✅ Oppaana moniagenttisten suunnittelumallien oppimiseen
+> **Käytä tätä:**
+> - ✅ Arkkitehtuuriviitteenä omalle moni-agenttiprojektille
+> - ✅ Oppaana moni-agenttisuunnittelumalleihin
 > - ✅ Infrastruktuurimallina Azure-resurssien käyttöönottoon
-> - ❌ EI valmiina toimiva sovellus (vaatii merkittävää kehitystyötä)
+> - ❌ EI valmis-toimiva sovellus (vaatii merkittävää kehitystä)
 
 ## Yleiskatsaus
 
-**Oppimistavoite:** Ymmärtää arkkitehtuuri, suunnittelupäätökset ja toteutustapa tuotantovalmiin moniagenttisen asiakastukibotin rakentamiseksi vähittäiskauppiaalle. Botilla on kehittyneitä tekoälyominaisuuksia, kuten varastonhallinta, asiakirjojen käsittely ja älykkäät asiakasvuorovaikutukset.
+**Oppimistavoite:** Ymmärtää arkkitehtuuri, suunnittelupäätökset ja toteutuslähestymistapa tuotantovalmiin moni-agenttisen asiakastukichatbotin rakentamiseen vähittäiskauppiaalle, jolla on kehittyneet tekoälyominaisuudet kuten varastonhallinta, asiakirjakäsittely ja älykkäät asiakaskohtaamiset.
 
-**Aika suorittaa:** Lukeminen + ymmärtäminen (2-3 tuntia) | Täydellisen toteutuksen rakentaminen (80-120 tuntia)
+**Arvioitu aika:** Lukeminen ja ymmärtäminen (2–3 tuntia) | Täydellisen toteutuksen rakentaminen (80–120 tuntia)
 
 **Mitä opit:**
-- Moniagenttiset arkkitehtuurimallit ja suunnitteluperiaatteet
-- Monialueiset Azure OpenAI -käyttöönotto-strategiat
+- Moni-agenttiarkkitehtuurimallit ja suunnitteluperiaatteet
+- Monialueiset Azure OpenAI -käyttöönottojen strategiat
 - AI Search -integraatio RAG:n (Retrieval-Augmented Generation) kanssa
 - Agenttien arviointi- ja turvallisuustestauskehykset
-- Tuotantokäyttöönoton huomioitavat asiat ja kustannusoptimointi
+- Tuotantoon käyttöönoton huomioinnit ja kustannusoptimointi
 
 ## Arkkitehtuurin tavoitteet
 
-**Koulutuksellinen painopiste:** Tämä arkkitehtuuri esittelee yritystason malleja moniagenttisille järjestelmille.
+**Opetuksellinen painopiste:** Tämä arkkitehtuuri esittää yritystason malleja moni-agenttijärjestelmille.
 
-### Järjestelmävaatimukset (toteutustasi varten)
+### Järjestelmävaatimukset (Sinun toteutuksellesi)
 
-Tuotantotason asiakastukiratkaisu vaatii:
-- **Useita erikoistuneita agentteja** eri asiakastarpeisiin (asiakaspalvelu + varastonhallinta)
-- **Monimallikäyttöönotto** asianmukaisella kapasiteettisuunnittelulla (GPT-4o, GPT-4o-mini, upotukset eri alueilla)
-- **Dynaaminen dataintegraatio** AI Searchin ja tiedostojen latausten kanssa (vektorihaku + asiakirjojen käsittely)
-- **Kattavat valvonta- ja arviointiominaisuudet** (Application Insights + mukautetut mittarit)
-- **Tuotantotason turvallisuus** punatiimien validoinnilla (haavoittuvuuksien skannaus + agenttien arviointi)
+Tuotantokelpoinen asiakastukiratkaisu vaatii:
+- **Useita erikoistuneita agenteja** eri asiakastarpeisiin (asiakaspalvelu + varastonhallinta)
+- **Monimallinen käyttöönotto** asianmukaisella kapasiteettisuunnittelulla (GPT-4o, GPT-4o-mini, embeddings eri alueilla)
+- **Dynaaminen dataintegraatio** AI Searchin ja tiedostolatausten kanssa (vektorihaku + asiakirjakäsittely)
+- **Kattava monitorointi** ja arviointikyvykkyydet (Application Insights + räätälöidyt metriikat)
+- **Tuotantotason turvallisuus** red teaming -validoinnilla (haavoittuvuusskannaus + agenttien arviointi)
 
 ### Mitä tämä opas tarjoaa
 
-✅ **Arkkitehtuurimallit** - Todistetut suunnitelmat skaalautuville moniagenttisille järjestelmille  
-✅ **Infrastruktuurimallit** - ARM-mallit kaikkien Azure-palveluiden käyttöönottoon  
-✅ **Koodiesimerkit** - Viitetoteutukset keskeisille komponenteille  
-✅ **Konfigurointiohjeet** - Vaiheittaiset asennusohjeet  
-✅ **Parhaat käytännöt** - Turvallisuus, valvonta, kustannusoptimointistrategiat  
+✅ **Arkkitehtuurimallit** - Todistetut suunnitelmat skaalautuville moni-agenttijärjestelmille  
+✅ **Infrastruktuurimallit** - ARM-mallit, jotka ottavat käyttöön kaikki Azure-palvelut  
+✅ **Koodiesimerkit** - Viitetoteutuksia keskeisille komponenteille  
+✅ **Konfiguraatio-ohjeet** - Vaiheittaiset asennusohjeet  
+✅ **Parhaat käytännöt** - Turvallisuus, monitorointi, kustannusoptimointistrategiat  
 
-❌ **Ei sisälly** - Täysin toimiva sovellus (vaatii kehitystyötä)
+❌ **Ei sisälly** - Täydellinen toimiva sovellus (vaatii kehitystyötä)
 
-## 🗺️ Toteutuksen etenemissuunnitelma
+## 🗺️ Toteutussuunnitelma
 
-### Vaihe 1: Tutustu arkkitehtuuriin (2-3 tuntia) - ALOITA TÄSTÄ
+### Vaihe 1: Tutki arkkitehtuuria (2-3 tuntia) - ALOITA TÄSTÄ
 
 **Tavoite:** Ymmärtää järjestelmän suunnittelu ja komponenttien vuorovaikutus
 
-- [ ] Lue tämä dokumentti kokonaan
+- [ ] Lue tämä koko asiakirja
 - [ ] Tarkastele arkkitehtuurikaaviota ja komponenttien suhteita
-- [ ] Ymmärrä moniagenttiset mallit ja suunnittelupäätökset
-- [ ] Tutki koodiesimerkkejä agenttityökaluista ja reitityksestä
+- [ ] Ymmärrä moni-agenttimallit ja suunnittelupäätökset
+- [ ] Tutki koodiesimerkkejä agenttien työkaluista ja reitityksestä
 - [ ] Tarkastele kustannusarvioita ja kapasiteettisuunnittelun ohjeita
 
-**Lopputulos:** Selkeä käsitys siitä, mitä sinun täytyy rakentaa
+**Tulos:** Selkeä ymmärrys siitä, mitä sinun tarvitsee rakentaa
 
-### Vaihe 2: Ota infrastruktuuri käyttöön (30-45 minuuttia)
+### Vaihe 2: Ota infrastruktuuri käyttöön (30–45 minuuttia)
 
-**Tavoite:** Azure-resurssien provisiointi ARM-mallin avulla
+**Tavoite:** Ota Azure-resurssit käyttöön ARM-mallilla
 
 ```bash
 cd retail-multiagent-arm-template
@@ -87,8 +78,8 @@ cd retail-multiagent-arm-template
 ```
 
 **Mitä otetaan käyttöön:**
-- ✅ Azure OpenAI (3 aluetta: GPT-4o, GPT-4o-mini, upotukset)
-- ✅ AI Search -palvelu (tyhjä, vaatii indeksin konfiguroinnin)
+- ✅ Azure OpenAI (3 aluetta: GPT-4o, GPT-4o-mini, embeddings)
+- ✅ AI Search -palvelu (tyhjä, tarvitsee indeksointikokoonpanon)
 - ✅ Container Apps -ympäristö (paikkamerkkikuvat)
 - ✅ Tallennustilit, Cosmos DB, Key Vault
 - ✅ Application Insights -valvonta
@@ -96,50 +87,50 @@ cd retail-multiagent-arm-template
 **Mitä puuttuu:**
 - ❌ Agenttien toteutuskoodi
 - ❌ Reitityslogiikka
-- ❌ Käyttöliittymä
-- ❌ Hakemiston indeksin skeema
-- ❌ Dataputket
+- ❌ Frontend-käyttöliittymä
+- ❌ Hakemistoindeksin skeema
+- ❌ Datanputket
 
-### Vaihe 3: Rakenna sovellus (80-120 tuntia)
+### Vaihe 3: Rakenna sovellus (80–120 tuntia)
 
-**Tavoite:** Toteuta moniagenttinen järjestelmä tämän arkkitehtuurin pohjalta
+**Tavoite:** Toteuta moni-agenttijärjestelmä tämän arkkitehtuurin mukaisesti
 
-1. **Agenttien toteutus** (30-40 tuntia)
+1. **Agenttien toteutus** (30–40 tuntia)
    - Perusagenttiluokka ja rajapinnat
-   - Asiakaspalveluagentti GPT-4o:lla
-   - Varastoagentti GPT-4o-minillä
-   - Työkalujen integraatiot (AI Search, Bing, tiedostojen käsittely)
+   - Asiakasagentti GPT-4o:lla
+   - Varastoagentti GPT-4o-mini:llä
+   - Työkalujen integraatiot (AI Search, Bing, tiedostokäsittely)
 
-2. **Reitityspalvelu** (12-16 tuntia)
+2. **Reitityspalvelu** (12–16 tuntia)
    - Pyyntöjen luokittelulogiikka
    - Agenttien valinta ja orkestrointi
-   - FastAPI/Express-taustajärjestelmä
+   - FastAPI/Express backend
 
-3. **Käyttöliittymän kehitys** (20-30 tuntia)
-   - Keskustelukäyttöliittymä
-   - Tiedostojen lataustoiminnallisuus
+3. **Frontend-kehitys** (20–30 tuntia)
+   - Chat-käyttöliittymä
+   - Tiedostolataustoiminnallisuus
    - Vastausten renderöinti
 
-4. **Dataputki** (8-12 tuntia)
-   - AI Search -indeksin luonti
-   - Asiakirjojen käsittely Document Intelligencella
-   - Upotusten generointi ja indeksointi
+4. **Dataputki** (8–12 tuntia)
+   - AI Search -indeksin luominen
+   - Asiakirjakäsittely Document Intelligencella
+   - Embeddingien luonti ja indeksointi
 
-5. **Valvonta ja arviointi** (10-15 tuntia)
-   - Mukautetun telemetrian toteutus
+5. **Seuranta & arviointi** (10–15 tuntia)
+   - Räätälöidyn telemetrian toteutus
    - Agenttien arviointikehys
-   - Punatiimin turvallisuusskanneri
+   - Red team -turvaskanneri
 
-### Vaihe 4: Käyttöönotto ja testaus (8-12 tuntia)
+### Vaihe 4: Ota käyttöön & testaa (8–12 tuntia)
 
 - Rakenna Docker-kuvat kaikille palveluille
-- Työnnä Azure Container Registryyn
-- Päivitä Container Apps oikeilla kuvilla
-- Määritä ympäristömuuttujat ja salaisuudet
-- Suorita arviointitestisarja
-- Tee turvallisuusskannaus
+- Puske kuvat Azure Container Registryyn
+- Päivitä Container Apps aidolla kuvilla
+- Konfiguroi ympäristömuuttujat ja salaisuudet
+- Aja arviointitestisetti
+- Suorita turvallisuusskannaus
 
-**Arvioitu kokonaisaika:** 80-120 tuntia kokeneille kehittäjille
+**Arvioitu kokonaisponnistus:** 80–120 tuntia kokeneille kehittäjille
 
 ## Ratkaisun arkkitehtuuri
 
@@ -148,31 +139,31 @@ cd retail-multiagent-arm-template
 ```mermaid
 graph TB
     User[👤 Asiakas] --> LB[Azure Front Door]
-    LB --> WebApp[Web-käyttöliittymä<br/>Container App]
+    LB --> WebApp[Web-etupää<br/>Säiliösovellus]
     
-    WebApp --> Router[Agenttireititin<br/>Container App]
-    Router --> CustomerAgent[Asiakaspalveluagentti<br/>Asiakaspalvelu]
+    WebApp --> Router[Agenttireititin<br/>Säiliösovellus]
+    Router --> CustomerAgent[Asiakasagentti<br/>Asiakaspalvelu]
     Router --> InvAgent[Varastoagentti<br/>Varastonhallinta]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Itä Yhdysvallat 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Länsi Yhdysvallat 2]
+    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
+    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
     
-    CustomerAgent --> AISearch[Azure AI Haku<br/>Tuotekatalogi]
-    CustomerAgent --> BingSearch[Bing Haku API<br/>Reaaliaikainen tieto]
+    CustomerAgent --> AISearch[Azure AI Search<br/>Tuotekatalogi]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Reaaliaikainen tieto]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Tallennus<br/>Dokumentit & Tiedostot]
-    Storage --> DocIntel[Dokumenttianalytiikka<br/>Sisällön käsittely]
+    AISearch --> Storage[Azure Storage<br/>Asiakirjat & Tiedostot]
+    Storage --> DocIntel[Asiakirjaäly<br/>Sisällön käsittely]
     
-    OpenAI1 --> Embeddings[Tekstiuutokset<br/>ada-002<br/>Keski-Ranska]
+    OpenAI1 --> Embeddings[Tekstien upotukset<br/>ada-002<br/>France Central]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Sovellustiedot<br/>Seuranta]
+    Router --> AppInsights[Application Insights<br/>Valvonta]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Arvioija<br/>Pohjois-Sveitsi] --> Evaluation[Arviointikehys]
-    RedTeam[Punatiimin skanneri] --> SecurityReports[Turvaraportit]
+    GraderModel[GPT-4o Arvioija<br/>Switzerland North] --> Evaluation[Arviointikehys]
+    RedTeam[Red Team -skanneri] --> SecurityReports[Turvaraportit]
     
     subgraph "Tietokerros"
         Storage
@@ -189,7 +180,7 @@ graph TB
         BingSearch
     end
     
-    subgraph "Seuranta & Turvallisuus"
+    subgraph "Valvonta & Turvallisuus"
         AppInsights
         LogAnalytics[Lokianalytiikan työtila]
         KeyVault[Azure Key Vault<br/>Salaisuudet & Konfiguraatio]
@@ -208,23 +199,23 @@ graph TB
 ```
 ### Komponenttien yleiskatsaus
 
-| Komponentti | Tarkoitus | Teknologia | Alue |
-|-------------|-----------|------------|------|
-| **Web-käyttöliittymä** | Käyttäjän vuorovaikutus asiakaspalvelun kanssa | Container Apps | Ensisijainen alue |
-| **Agenttireititin** | Ohjaa pyynnöt oikealle agentille | Container Apps | Ensisijainen alue |
-| **Asiakasagentti** | Käsittelee asiakaspalvelukyselyt | Container Apps + GPT-4o | Ensisijainen alue |
-| **Varastoagentti** | Hallitsee varastoa ja tilausten täyttöä | Container Apps + GPT-4o-mini | Ensisijainen alue |
-| **Azure OpenAI** | LLM-päätelmät agenteille | Cognitive Services | Monialueinen |
-| **AI Search** | Vektorihaku ja RAG | AI Search Service | Ensisijainen alue |
-| **Tallennustili** | Tiedostojen lataukset ja asiakirjat | Blob Storage | Ensisijainen alue |
-| **Application Insights** | Valvonta ja telemetria | Monitor | Ensisijainen alue |
-| **Arviointimalli** | Agenttien arviointijärjestelmä | Azure OpenAI | Toissijainen alue |
+| Component | Purpose | Technology | Region |
+|-----------|---------|------------|---------|
+| **Web Frontend** | User interface for customer interactions | Container Apps | Primary Region |
+| **Agent Router** | Routes requests to appropriate agent | Container Apps | Primary Region |
+| **Customer Agent** | Handles customer service queries | Container Apps + GPT-4o | Primary Region |
+| **Inventory Agent** | Manages stock and fulfillment | Container Apps + GPT-4o-mini | Primary Region |
+| **Azure OpenAI** | LLM inference for agents | Cognitive Services | Multi-region |
+| **AI Search** | Vector search and RAG | AI Search Service | Primary Region |
+| **Storage Account** | File uploads and documents | Blob Storage | Primary Region |
+| **Application Insights** | Monitoring and telemetry | Monitor | Primary Region |
+| **Grader Model** | Agent evaluation system | Azure OpenAI | Secondary Region |
 
 ## 📁 Projektin rakenne
 
-> **📍 Tilan selitys:**  
-> ✅ = On olemassa repositoriossa  
-> 📝 = Viitetoteutus (koodiesimerkki tässä dokumentissa)  
+> **📍 Tila-merkinnät:**  
+> ✅ = Löytyy repositoriosta  
+> 📝 = Viitteellinen toteutus (koodiesimerkki tässä asiakirjassa)  
 > 🔨 = Sinun täytyy luoda tämä
 
 ```
@@ -372,21 +363,21 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Pika-aloitus: Mitä voit tehdä heti
+## 🚀 Pikakäynnistys: Mitä voit tehdä heti
 
-### Vaihtoehto 1: Ota käyttöön vain infrastruktuuri (30 minuuttia)
+### Vaihtoehto 1: Asenna vain infrastruktuuri (30 minuuttia)
 
-**Mitä saat:** Kaikki Azure-palvelut provisioituina ja valmiina kehitykseen
+**Mitä saat:** Kaikki Azure-palvelut provisioituna ja valmiina kehitykseen
 
 ```bash
-# Kloonaa arkisto
+# Kloonaa repositorio
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
 # Ota infrastruktuuri käyttöön
 ./deploy.sh -g myResourceGroup -m standard
 
-# Vahvista käyttöönotto
+# Varmista käyttöönotto
 az resource list --resource-group myResourceGroup --output table
 ```
 
@@ -395,56 +386,56 @@ az resource list --resource-group myResourceGroup --output table
 - ✅ AI Search -palvelu luotu (tyhjä)
 - ✅ Container Apps -ympäristö valmis
 - ✅ Tallennus, Cosmos DB, Key Vault konfiguroitu
-- ❌ Ei vielä toimivia agentteja (vain infrastruktuuri)
+- ❌ Ei toimivia agenteja vielä (vain infrastruktuuri)
 
-### Vaihtoehto 2: Tutustu arkkitehtuuriin (2-3 tuntia)
+### Vaihtoehto 2: Tutki arkkitehtuuria (2-3 tuntia)
 
-**Mitä saat:** Syvällinen ymmärrys moniagenttisista malleista
+**Mitä saat:** Syvällinen ymmärrys moni-agenttimalleista
 
-1. Lue tämä dokumentti kokonaan
-2. Tarkastele koodiesimerkkejä jokaisesta komponentista
+1. Lue tämä koko asiakirja
+2. Tarkastele koodiesimerkkejä jokaiselle komponentille
 3. Ymmärrä suunnittelupäätökset ja kompromissit
 4. Tutki kustannusoptimointistrategioita
-5. Suunnittele toteutustapasi
+5. Suunnittele toteutuslähestymistapasi
 
 **Odotettu lopputulos:**
-- ✅ Selkeä mielikuva järjestelmän arkkitehtuurista
+- ✅ Selkeä mentaalimalli järjestelmäarkkitehtuurista
 - ✅ Ymmärrys tarvittavista komponenteista
 - ✅ Realistiset työmääräarviot
 - ✅ Toteutussuunnitelma
 
-### Vaihtoehto 3: Rakenna täydellinen järjestelmä (80-120 tuntia)
+### Vaihtoehto 3: Rakenna täydellinen järjestelmä (80–120 tuntia)
 
-**Mitä saat:** Tuotantovalmiin moniagenttisen ratkaisun
+**Mitä saat:** Tuotantovalmiin moni-agentti-ratkaisun
 
 1. **Vaihe 1:** Ota infrastruktuuri käyttöön (tehty yllä)
-2. **Vaihe 2:** Toteuta agentit alla olevien koodiesimerkkien avulla (30-40 tuntia)
-3. **Vaihe 3:** Rakenna reitityspalvelu (12-16 tuntia)
-4. **Vaihe 4:** Luo käyttöliittymä (20-30 tuntia)
-5. **Vaihe 5:** Konfiguroi dataputket (8-12 tuntia)
-6. **Vaihe 6:** Lisää valvonta ja arviointi (10-15 tuntia)
+2. **Vaihe 2:** Toteuta agentit käyttämällä alla olevia koodiesimerkkejä (30–40 tuntia)
+3. **Vaihe 3:** Rakenna reitityspalvelu (12–16 tuntia)
+4. **Vaihe 4:** Luo frontend-käyttöliittymä (20–30 tuntia)
+5. **Vaihe 5:** Konfiguroi datanputket (8–12 tuntia)
+6. **Vaihe 6:** Lisää seuranta ja arviointi (10–15 tuntia)
 
 **Odotettu lopputulos:**
-- ✅ Täysin toimiva moniagenttinen järjestelmä
-- ✅ Tuotantotason valvonta
+- ✅ Täysin toimiva moni-agenttijärjestelmä
+- ✅ Tuotantotason monitorointi
 - ✅ Turvallisuusvalidointi
-- ✅ Kustannusoptimoitu käyttöönotto
+- ✅ Kustannustehokas käyttöönotto
 
 ---
 
-## 📚 Arkkitehtuuriviite ja toteutusopas
+## 📚 Arkkitehtuuriviite & toteutusopas
 
-Seuraavat osiot tarjoavat yksityiskohtaisia arkkitehtuurimalleja, konfigurointiesimerkkejä ja viitekoodia toteutuksen ohjaamiseksi.
+Seuraavat osiot tarjoavat yksityiskohtaisia arkkitehtuurimalleja, konfiguraatioesimerkkejä ja viitekoodia toteutuksesi ohjaamiseksi.
 
-## Alustavat konfigurointivaatimukset
+## Alkuperäiset konfiguraatiovaatimukset
 
-### 1. Useat agentit ja konfigurointi
+### 1. Useita agenteja & konfiguraatio
 
-**Tavoite**: Ota käyttöön 2 erikoistunutta agenttia - "Asiakasagentti" (asiakaspalvelu) ja "Varasto" (varastonhallinta)
+**Tavoite**: Ota käyttöön 2 erikoistettua agenttia - "Asiakasagentti" (asiakaspalvelu) ja "Varasto" (varastonhallinta)
 
-> **📝 Huom:** Seuraavat azure.yaml- ja Bicep-konfiguraatiot ovat **viite-esimerkkejä**, jotka näyttävät, kuinka moniagenttiset käyttöönotot voidaan jäsentää. Sinun täytyy luoda nämä tiedostot ja vastaavat agenttien toteutukset.
+> **📝 Huomautus:** Seuraavat azure.yaml- ja Bicep-konfiguraatiot ovat **viite-esimerkkejä**, jotka näyttävät, miten moni-agenttien käyttöönotto kannattaa jäsentää. Sinun täytyy luoda nämä tiedostot ja vastaavat agenttien toteutukset.
 
-#### Konfigurointivaiheet:
+#### Konfiguraation vaiheet:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -516,11 +507,11 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Useat mallit ja kapasiteettisuunnittelu
+### 2. Useita malleja ja kapasiteettisuunnittelu
 
-**Tavoite**: Ota käyttöön keskustelumalli (asiakas), upotusmalli (haku) ja päättelymalli (arvioija) asianmukaisella kiintiöiden hallinnalla
+**Tavoite**: Ota käyttöön chatti-malli (Customer), embeddings-malli (haku) ja päättelymalli (grader) asianmukaisella kiintiöiden hallinnalla
 
-#### Monialuestrategia:
+#### Monialueinen strategia:
 
 ```bicep
 // infra/models.bicep
@@ -564,7 +555,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Alueen varajärjestelmän konfigurointi:
+#### Alueen varajärjestelykonfiguraatio:
 
 ```yaml
 # .azure/env/.env.production
@@ -573,11 +564,11 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search ja datan indeksikonfigurointi
+### 3. AI Search ja indeksointikonfiguraatio
 
-**Tavoite**: Konfiguroi AI Search datan päivityksiä ja automaattista indeksointia varten
+**Tavoite**: Konfiguroi AI Search datapäivityksiä ja automaattista indeksointia varten
 
-#### Esiprovisiointikoukku:
+#### Esiprovistionointikoukku:
 
 ```bash
 #!/bin/bash
@@ -594,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Jälkiprovisioinnin datan asennus:
+#### Jälkiprovistionoinnin datakonfiguraatio:
 
 ```bash
 #!/bin/bash
@@ -611,14 +602,14 @@ curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Lataa alkuperäiset asiakirjat
+# Lataa aloitusdokumentit
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
 
-#### Hakemiston indeksin skeema:
+#### Hakemistoindeksin skeema:
 
 ```json
 {
@@ -643,14 +634,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Agenttityökalujen konfigurointi AI Searchille
+### 4. Agenttien työkalukonfiguraatio AI Searchille
 
-**Tavoite**: Konfiguroi agentit käyttämään AI Searchia perustyökaluna
+**Tavoite**: Konfiguroi agentit käyttämään AI Searchia perustelutyökaluna
 
 #### Agentin hakutyökalun toteutus:
 
 ```python
-# src/agents/tools/hakutyökalu.py
+# src/agentit/työkalut/hakutyökalu.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -691,7 +682,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
 
-#### Agentin integrointi:
+#### Agentin integraatio:
 
 ```python
 # src/agents/customer_agent.py
@@ -704,13 +695,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # Etsi ensin asiaankuuluva konteksti
+        # Etsi ensin olennaista kontekstia
         search_results = await self.search_tool.search_products(user_query)
         
         # Valmistele konteksti LLM:lle
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Luo vastaus perustuen kontekstiin
+        # Luo vastaus ankkuroinnin avulla
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -722,9 +713,9 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Tiedostojen latauksen tallennusintegraatio
+### 5. Tiedostolatausten tallennusintegraatio
 
-**Tavoite**: Mahdollista agenteille ladattujen tiedostojen (ohjeet, asiakirjat) käsittely RAG-kontekstia varten
+**Tavoite**: Mahdollista agenttien käsitellä ladattuja tiedostoja (käyttöohjeet, asiakirjat) RAG-kontekstia varten
 
 #### Tallennuskonfiguraatio:
 
@@ -765,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Asiakirjojen käsittelyputki:
+#### Asiakirjakäsittelyputki:
 
 ```python
 # src/document_processor.py
@@ -791,7 +782,7 @@ class DocumentProcessor:
             blob=blob_name
         )
         
-        # Poimi teksti Document Intelligence -työkalulla
+        # Poimi teksti Document Intelligence -palvelulla
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -805,13 +796,13 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Luo upotuksia
+        # Luo upotukset
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Indeksoi AI-hakuun
+        # Indeksoi AI Searchissa
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -848,7 +839,7 @@ output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 #### Bing-hakutyökalu:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# src/agentit/työkalut/bing_haku_työkalu.py
 import aiohttp
 import asyncio
 
@@ -889,11 +880,11 @@ class BingSearchTool:
 
 ---
 
-## Valvonta ja havainnointi
+## Valvonta & havaittavuus
 
-### 7. Jäljitys ja Application Insights
+### 7. Seuranta ja Application Insights
 
-**Tavoite**: Kattava valvonta jäljityslokien ja Application Insightsin avulla
+**Tavoite**: Kattava monitorointi jäljityslokeilla ja Application Insightsilla
 
 #### Application Insights -konfiguraatio:
 
@@ -948,7 +939,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Mukautetun telemetrian toteutus:
+#### Räätälöidyn telemetrian toteutus:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -1054,14 +1045,14 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Punatiimin turvallisuusvalidointi
+### 8. Red teaming -turvatarkastus
 
 **Tavoite**: Automaattinen turvallisuustestaus agenteille ja malleille
 
-#### Punatiimin konfiguraatio:
+#### Red teaming -konfiguraatio:
 
 ```python
-# src/turvallisuus/punainen_tiimi_skanneri.py
+# src/security/red_team_scanner.py
 import asyncio
 from typing import List, Dict
 import json
@@ -1106,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Laske kokonaisvaltainen turvallisuuspisteytys
+        # Laske kokonaisvaltainen tietoturvapistemäärä
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1175,7 +1166,7 @@ class RedTeamScanner:
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
         # Toteutus lähettäisi HTTP-pyynnön agentin päätepisteeseen
-        # Demoa varten palautetaan paikkamerkki
+        # Esittelyä varten palautetaan paikkamerkki
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1232,14 +1223,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Peruspisteytys: 100 - (haavoittuvuudet / kokonaismäärä * 100)
+        # Peruspisteytys: 100 - (haavoittuvuudet / yhteensä * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Vähennä pisteitä vakavuuden perusteella
+        # Vähennä pistemäärää vakavuuden mukaan
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1263,7 +1254,7 @@ AGENT_ENDPOINT=$(az containerapp show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Suorita tietoturvatarkistus
+# Suorita tietoturvaskannaus
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1360,7 +1351,7 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # Hanki agentin vastaus
+        # Hae agentin vastaus
         agent_response = await self._get_agent_response(user_query)
         
         # Arvioi vastaus
@@ -1535,11 +1526,11 @@ class AgentEvaluator:
 
 ---
 
-## Mukautukset ja päivitykset
+## Mukauttaminen & päivitykset
 
-### 10. Container App -mukautukset
+### 10. Container Appin mukauttaminen
 
-**Tavoite**: Päivitä Container App -konfiguraatio ja korvaa mukautetulla käyttöliittymällä
+**Tavoite**: Päivitä container app -konfiguraatio ja korvaa se omalla käyttöliittymällä
 
 #### Dynaaminen konfiguraatio:
 
@@ -1557,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Mukautetun käyttöliittymän rakentaminen:
+#### Räätälöity frontend-rakennus:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1592,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Rakenna mukautettu kuva ympäristömuuttujilla
+# Rakenna mukautettu kuva ympäristömuuttujien avulla
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1606,7 +1597,7 @@ az acr build \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Päivitä konttisovellus
+# Päivitä säilösovellus
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1617,11 +1608,11 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Vianmääritysopas
+## 🔧 Vianetsintäopas
 
 ### Yleiset ongelmat ja ratkaisut
 
-#### 1. Container Apps -kiintiörajoitukset
+#### 1. Container Appsin kiintiörajoitukset
 
 **Ongelma**: Käyttöönotto epäonnistuu alueellisten kiintiörajoitusten vuoksi
 
@@ -1633,7 +1624,7 @@ az containerapp env show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Pyydä kiintiön korotusta
+# Pyydä kiintiön lisäystä
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1644,7 +1635,7 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Mallin käyttöönoton vanhentuminen
+#### 2. Mallin käyttöönoton vanheneminen
 
 **Ongelma**: Mallin käyttöönotto epäonnistuu vanhentuneen API-version vuoksi
 
@@ -1656,7 +1647,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Tämä kutsuisi Azure OpenAI API:a saadakseen nykyiset versiot
+    # Tämä kutsuisi Azure OpenAI -rajapintaa saadakseen nykyiset versiot
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1673,7 +1664,7 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Lue ja päivitä malli
+    # Lue ja päivitä mallipohja
     with open(template_path, 'r') as f:
         content = f.read()
     
@@ -1693,9 +1684,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. Hienosäätöintegraatio
+#### 3. Hienosäädön integraatio
 
-**Ongelma**: Kuinka integroida hienosäädetyt mallit AZD-käyttöönottoon
+**Ongelma**: Miten integroida hienosäädetyt mallit AZD-käyttöönottoon
 
 **Ratkaisu**:
 ```python
@@ -1745,62 +1736,228 @@ class FineTuningPipeline:
 
 ---
 
-## Usein kysytyt
-## ✅ Valmiiksi käyttöön otettava ARM-malli
+## UKK & avoin tutkimus
 
-> **✨ TÄMÄ ON OIKEASTI OLEMASSA JA TOIMII!**  
-> Toisin kuin yllä olevat konseptuaaliset koodiesimerkit, tämä ARM-malli on **todellinen, toimiva infrastruktuurin käyttöönotto**, joka sisältyy tähän arkistoon.
+### Usein kysytyt kysymykset
+
+#### K: Onko olemassa helppoa tapaa ottaa käyttöön useita agenteja (suunnittelumalli)?
+
+**V: Kyllä! Käytä moni-agenttimallia:**
+
+```yaml
+# azure.yaml - Multi-Agent Configuration
+services:
+  agent-orchestrator:
+    project: ./infra
+    host: containerapp
+    config:
+      AGENTS: |
+        {
+          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+        }
+```
+
+#### K: Voinko ottaa "mallireitittimen" käyttöön mallina (kustannusvaikutukset)?
+
+**V: Kyllä, huolellisella harkinnalla:**
+
+```python
+# Mallireitittimen toteutus
+class ModelRouter:
+    def __init__(self):
+        self.routing_rules = {
+            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
+        }
+    
+    async def route_request(self, query: str, context: dict):
+        """Route request to most cost-effective model"""
+        complexity_score = self._analyze_complexity(query)
+        
+        if complexity_score < 0.3:
+            return self.routing_rules["simple_queries"]
+        else:
+            return self.routing_rules["complex_reasoning"]
+    
+    def estimate_cost_savings(self, usage_patterns: dict):
+        """Estimate cost savings from intelligent routing"""
+        # Toteutus laskisi mahdolliset säästöt
+        pass
+```
+
+**Kustannusvaikutukset:**
+- **Säästöt**: 60–80 % kustannussäästö yksinkertaisissa kyselyissä
+- **Kompromissit**: Pieni latenssin kasvu reitityslogiikalle
+- **Seuranta**: Seuraa tarkkuutta vs. kustannus -metriikoita
+
+#### K: Voinko käynnistää hienosäätötyön azd-mallista?
+
+**V: Kyllä, käyttämällä jälkiprovistionointikoukkuja:**
+
+```bash
+#!/bin/bash
+# hooks/postprovision.sh - Hienosäädön integrointi
+
+echo "Starting fine-tuning pipeline..."
+
+# Lataa koulutusdata
+TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
+  --data-path "./data/fine_tuning/training.jsonl" \
+  --openai-key "$AZURE_OPENAI_API_KEY")
+
+# Käynnistä hienosäätötehtävä
+FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
+  --training-file-id "$TRAINING_FILE_ID" \
+  --model "gpt-4o-mini")
+
+# Tallenna työn tunnus seurantaa varten
+echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
+
+echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
+echo "Monitor progress with: azd hooks run monitor-fine-tuning"
+```
+
+### Edistyneet skenaariot
+
+#### Monialueinen käyttöönotto-strategia
+
+```bicep
+// infra/multi-region.bicep
+param regions array = ['eastus2', 'westeurope', 'australiaeast']
+
+resource primaryRegionGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
+  name: '${resourceGroupName}-primary'
+  location: regions[0]
+}
+
+resource secondaryRegionGroups 'Microsoft.Resources/resourceGroups@2023-07-01' = [for i in range(1, length(regions) - 1): {
+  name: '${resourceGroupName}-${regions[i]}'
+  location: regions[i]
+}]
+
+// Traffic Manager for global load balancing
+resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = {
+  name: '${projectName}-tm'
+  location: 'global'
+  properties: {
+    profileStatus: 'Enabled'
+    trafficRoutingMethod: 'Performance'
+    dnsConfig: {
+      relativeName: '${projectName}-global'
+      ttl: 30
+    }
+    monitorConfig: {
+      protocol: 'HTTPS'
+      port: 443
+      path: '/health'
+    }
+  }
+}
+```
+
+#### Kustannusoptimointikehys
+
+```python
+# src/optimointi/kustannus_optimoija.py
+class CostOptimizer:
+    def __init__(self, usage_analytics):
+        self.analytics = usage_analytics
+    
+    def analyze_usage_patterns(self):
+        """Analyze usage to recommend optimizations"""
+        recommendations = []
+        
+        # Mallin käytön analyysi
+        model_usage = self.analytics.get_model_usage()
+        for model, usage in model_usage.items():
+            if usage['utilization'] < 0.3:
+                recommendations.append({
+                    'type': 'capacity_reduction',
+                    'resource': model,
+                    'current_capacity': usage['capacity'],
+                    'recommended_capacity': usage['capacity'] * 0.7,
+                    'estimated_savings': usage['monthly_cost'] * 0.3
+                })
+        
+        # Huippuaikojen analyysi
+        peak_patterns = self.analytics.get_peak_patterns()
+        if peak_patterns['variance'] > 0.6:
+            recommendations.append({
+                'type': 'auto_scaling',
+                'description': 'High variance detected, enable auto-scaling',
+                'estimated_savings': peak_patterns['potential_savings']
+            })
+        
+        return recommendations
+    
+    def implement_recommendations(self, recommendations):
+        """Automatically implement cost optimizations"""
+        for rec in recommendations:
+            if rec['type'] == 'capacity_reduction':
+                self._update_model_capacity(rec)
+            elif rec['type'] == 'auto_scaling':
+                self._enable_auto_scaling(rec)
+```
+
+---
+## ✅ Valmis käyttöönotettavaksi ARM-malli
+
+> **✨ TÄMÄ OIKEASTI ON JA TOIMII!**  
+> Toisin kuin yllä olevat käsitteelliset koodiesimerkit, ARM-malli on **todellinen, toimiva infrastruktuurin käyttöönotto**, joka sisältyy tähän repositorioon.
 
 ### Mitä tämä malli oikeasti tekee
 
-ARM-malli [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) luo **kaiken tarvittavan Azure-infrastruktuurin** monitoimijajärjestelmälle. Tämä on **ainoa käyttövalmis komponentti** – kaikki muu vaatii kehitystyötä.
+ARM-malli polussa [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) provisioi **kaiken Azure-infrastruktuurin**, joka tarvitaan moniagenttijärjestelmälle. Tämä on **ainoa valmiiksi suoritettava komponentti** — kaikki muu vaatii kehitystä.
 
 ### Mitä ARM-malli sisältää
 
-ARM-malli, joka sijaitsee kansiossa [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template), sisältää:
+ARM-malli sijainnissa [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) sisältää:
 
 #### **Täydellinen infrastruktuuri**
-- ✅ **Monialueiset Azure OpenAI** -käyttöönotot (GPT-4o, GPT-4o-mini, upotukset, arvioija)
-- ✅ **Azure AI Search** vektorihakuominaisuuksilla
-- ✅ **Azure Storage** asiakirja- ja latauskonteilla
-- ✅ **Container Apps Environment** automaattisella skaalauksella
-- ✅ **Agent Router & Frontend** -konttisovellukset
-- ✅ **Cosmos DB** keskusteluhistorian tallennukseen
-- ✅ **Application Insights** kattavaan seurantaan
+- ✅ **Monialueiset Azure OpenAI** -asennukset (GPT-4o, GPT-4o-mini, embeddings, grader)
+- ✅ **Azure AI Search** vektorihakutoiminnoilla
+- ✅ **Azure Storage** asiakirja- ja latauskontit
+- ✅ **Container Apps Environment** automaattisella skaalaauksella
+- ✅ **Agent Router & Frontend** container appseina
+- ✅ **Cosmos DB** keskusteluhistorian pysyvyyteen
+- ✅ **Application Insights** kattavaan monitorointiin
 - ✅ **Key Vault** turvalliseen salaisuuksien hallintaan
 - ✅ **Document Intelligence** tiedostojen käsittelyyn
-- ✅ **Bing Search API** reaaliaikaiseen tiedonhakuun
+- ✅ **Bing Search API** reaaliaikaista tietoa varten
 
-#### **Käyttöönoton tilat**
-| Tila | Käyttötarkoitus | Resurssit | Arvioitu kuukausikustannus |
-|------|----------------|-----------|---------------------------|
-| **Minimal** | Kehitys, testaus | Perus-SKU:t, yksi alue | $100-370 |
-| **Standard** | Tuotanto, keskisuuri skaalautuvuus | Standard-SKU:t, monialueinen | $420-1,450 |
-| **Premium** | Yritystason, suuri skaalautuvuus | Premium-SKU:t, HA-asennus | $1,150-3,500 |
+#### **Käyttöönottotilat**
+| Mode | Use Case | Resources | Estimated Cost/Month |
+|------|----------|-----------|---------------------|
+| **Minimal** | Development, Testing | Basic SKUs, Single region | $100-370 |
+| **Standard** | Production, Moderate scale | Standard SKUs, Multi-region | $420-1,450 |
+| **Premium** | Enterprise, High scale | Premium SKUs, HA setup | $1,150-3,500 |
 
 ### 🎯 Nopeat käyttöönoton vaihtoehdot
 
-#### Vaihtoehto 1: Yhden napsautuksen Azure-käyttöönotto
+#### Vaihtoehto 1: Yhden klikkauksen Azure-käyttöönotto
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Ota käyttöön Azureen](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 #### Vaihtoehto 2: Azure CLI -käyttöönotto
 
 ```bash
-# Kloonaa arkisto
+# Kloonaa repositorio
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Tee käyttöönotto-skripti suoritettavaksi
+# Anna käyttöönotto-skriptille suoritusoikeudet
 chmod +x deploy.sh
 
-# Ota käyttöön oletusasetuksilla (Standard-tila)
+# Ota käyttöön oletusasetuksilla (vakio-tila)
 ./deploy.sh -g myResourceGroup
 
-# Ota käyttöön tuotantoa varten premium-ominaisuuksilla
+# Ota tuotantokäyttöön premium-ominaisuuksilla
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Ota käyttöön kehitystä varten minimaalinen versio
+# Ota kehitystä varten käyttöön minimaalinen versio
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
@@ -1810,7 +1967,7 @@ chmod +x deploy.sh
 # Luo resurssiryhmä
 az group create --name myResourceGroup --location eastus2
 
-# Ota käyttöön malli suoraan
+# Ota malli käyttöön suoraan
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1836,9 +1993,9 @@ Onnistuneen käyttöönoton jälkeen saat:
 
 ### 🔧 Käyttöönoton jälkeinen konfigurointi
 
-ARM-malli hoitaa infrastruktuurin luomisen. Käyttöönoton jälkeen:
+ARM-malli huolehtii infrastruktuurin provisioinnista. Käyttöönoton jälkeen:
 
-1. **Määritä hakemistoindeksi**:
+1. **Määritä hakemisto**:
    ```bash
    # Käytä annettua hakuskeemaa
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
@@ -1847,9 +2004,9 @@ ARM-malli hoitaa infrastruktuurin luomisen. Käyttöönoton jälkeen:
      -d @../data/search-schema.json
    ```
 
-2. **Lataa alkuperäiset asiakirjat**:
+2. **Lataa aloitusasiakirjat**:
    ```bash
-   # Lataa tuotemanuaalit ja tietopohja
+   # Lataa tuotteen käyttöohjeet ja tietopankki
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
@@ -1868,7 +2025,7 @@ ARM-malli hoitaa infrastruktuurin luomisen. Käyttöönoton jälkeen:
 
 ### 🎛️ Mukautusvaihtoehdot
 
-Muokkaa tiedostoa `azuredeploy.parameters.json` mukauttaaksesi käyttöönottoa:
+Muokkaa `azuredeploy.parameters.json` mukauttaaksesi käyttöönottoasi:
 
 ```json
 {
@@ -1884,79 +2041,79 @@ Muokkaa tiedostoa `azuredeploy.parameters.json` mukauttaaksesi käyttöönottoa:
 
 ### 📊 Käyttöönoton ominaisuudet
 
-- ✅ **Esivaatimusten tarkistus** (Azure CLI, kiintiöt, käyttöoikeudet)
-- ✅ **Monialueinen korkea käytettävyys** automaattisella vikasietotilalla
-- ✅ **Kattava seuranta** Application Insightsin ja Log Analyticsin avulla
+- ✅ **Esivaatimusten tarkistus** (Azure CLI, kiintiöt, oikeudet)
+- ✅ **Monialueinen korkea saatavuus** automaattisella vikatilansiirrolla
+- ✅ **Kattava monitorointi** Application Insightsin ja Log Analyticsin avulla
 - ✅ **Turvallisuuden parhaat käytännöt** Key Vaultin ja RBAC:n avulla
-- ✅ **Kustannusoptimointi** mukautettavilla käyttöönoton tiloilla
-- ✅ **Automaattinen skaalaus** kysynnän mukaan
-- ✅ **Keskeytyksetön päivitys** Container Apps -versioilla
+- ✅ **Kustannusoptimointi** konfiguroitavilla käyttöönoton tiloilla
+- ✅ **Automaattinen skaalaus** kuormituksen mukaan
+- ✅ **Nollakatkosten päivitykset** Container Apps -versioiden avulla
 
 ### 🔍 Seuranta ja hallinta
 
-Kun käyttöönotto on valmis, seuraa ratkaisua seuraavilla työkaluilla:
+Kun ratkaisu on otettu käyttöön, seuraa sitä:
 
-- **Application Insights**: Suorituskykymittarit, riippuvuuksien seuranta ja mukautettu telemetria
-- **Log Analytics**: Keskitetty lokien hallinta kaikista komponenteista
-- **Azure Monitor**: Resurssien terveyden ja käytettävyyden seuranta
+- **Application Insights**: Suorituskykymittarit, riippuvuusseuranta ja mukautettu telmetria
+- **Log Analytics**: Keskitetty lokitus kaikista komponenteista
+- **Azure Monitor**: Resurssien tila ja saatavuuden seuranta
 - **Cost Management**: Reaaliaikainen kustannusseuranta ja budjettihälytykset
 
 ---
 
 ## 📚 Täydellinen toteutusopas
 
-Tämä skenaariodokumentti yhdessä ARM-mallin kanssa tarjoaa kaiken tarvittavan tuotantovalmiin monitoimija-asiakastukiratkaisun käyttöönottoon. Toteutus kattaa:
+Tämä tilannekuvauksen dokumentti yhdistettynä ARM-malliin tarjoaa kaiken tarvittavan tuotantovalmiin moniagenttiasiakastukiratkaisun käyttöönottoon. Toteutus kattaa:
 
-✅ **Arkkitehtuurisuunnittelu** - Kattava järjestelmän suunnittelu komponenttien suhteilla  
-✅ **Infrastruktuurin luominen** - Täydellinen ARM-malli yhden napsautuksen käyttöönottoon  
-✅ **Agenttien konfigurointi** - Yksityiskohtaiset ohjeet asiakas- ja varastoagenttien asennukseen  
-✅ **Monimallin käyttöönotto** - Strateginen mallien sijoittelu eri alueille  
-✅ **Hakutoiminnon integrointi** - AI-haku vektorikyvyillä ja datan indeksoinnilla  
-✅ **Turvallisuuden toteutus** - Red teaming, haavoittuvuuksien skannaus ja turvalliset käytännöt  
-✅ **Seuranta ja arviointi** - Kattava telemetria ja agenttien arviointikehys  
+✅ **Arkkitehtuurin suunnittelu** - Kattava järjestelmän suunnittelu ja komponenttien suhteet  
+✅ **Infrastruktuurin käyttöönotto** - Täydellinen ARM-malli yhden klikkauksen käyttöönottoa varten  
+✅ **Agenttien konfigurointi** - Yksityiskohtainen määritys Customer- ja Inventory-agenteille  
+✅ **Monimalli-käyttöönotto** - Mallien strateginen sijoittelu eri alueille  
+✅ **Hakuintgrointi** - AI Search vektoritoiminnoilla ja tietojen indeksoinnilla  
+✅ **Tietoturvan toteutus** - Red teaming, haavoittuvuusskannaus ja turvalliset käytännöt  
+✅ **Seuranta & arviointi** - Kattava telemetria ja agenttien arviointikehys  
 ✅ **Tuotantovalmius** - Yritystason käyttöönotto HA:lla ja katastrofipalautuksella  
 ✅ **Kustannusoptimointi** - Älykäs reititys ja käyttöön perustuva skaalaus  
-✅ **Vianetsintäopas** - Yleiset ongelmat ja ratkaisustrategiat
+✅ **Vianmääritysopas** - Yleiset ongelmat ja ratkaisut
 
 ---
 
-## 📊 Yhteenveto: Mitä olet oppinut
+## 📊 Yhteenveto: Mitä opit
 
 ### Käsitellyt arkkitehtuurimallit
 
-✅ **Monitoimijajärjestelmän suunnittelu** - Erikoistuneet agentit (Asiakas + Varasto) omilla malleillaan  
+✅ **Moniagenttijärjestelmän suunnittelu** - Erikoistuneet agentit (Customer + Inventory) omistetuilla malleilla  
 ✅ **Monialueinen käyttöönotto** - Strateginen mallien sijoittelu kustannusten optimointiin ja redundanssiin  
-✅ **RAG-arkkitehtuuri** - AI-haku vektoripohjaisilla upotuksilla perusteltuihin vastauksiin  
-✅ **Agenttien arviointi** - Omistettu arvioijamalli laadun arviointiin  
-✅ **Turvallisuuskehys** - Red teaming ja haavoittuvuuksien skannausmallit  
-✅ **Kustannusoptimointi** - Mallien reititys ja kapasiteetin suunnittelustrategiat  
-✅ **Tuotannon seuranta** - Application Insights mukautetulla telemetrialla  
+✅ **RAG-arkkitehtuuri** - AI Search -integraatio vektoriupotuksilla perusteltuihin vastauksiin  
+✅ **Agenttien arviointi** - Erillinen grader-malli laadun arviointiin  
+✅ **Turvallisuuskehys** - Red teaming ja haavoittuvuusskannausmallit  
+✅ **Kustannusoptimointi** - Mallireititys ja kapasiteettisuunnittelu  
+✅ **Tuotantoseuranta** - Application Insights mukautetulla telemetrialla  
 
 ### Mitä tämä dokumentti tarjoaa
 
-| Komponentti | Tila | Missä se löytyy |
-|-------------|------|-----------------|
-| **Infrastruktuurimalli** | ✅ Valmis käyttöönottoon | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Arkkitehtuurikaaviot** | ✅ Valmiit | Yllä oleva Mermaid-kaavio |
-| **Koodiesimerkit** | ✅ Viiteimplementoinnit | Koko dokumentissa |
-| **Konfigurointimallit** | ✅ Yksityiskohtaiset ohjeet | Kohdat 1-10 yllä |
-| **Agenttien toteutukset** | 🔨 Sinä rakennat tämän | ~40 tuntia kehitystä |
+| Component | Status | Where to Find It |
+|-----------|--------|------------------|
+| **Infrastructure Template** | ✅ Valmis käyttöönotettavaksi | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Valmis | Mermaid-kaavio yllä |
+| **Code Examples** | ✅ Viitetoteutukset | Läpi tämän dokumentin |
+| **Configuration Patterns** | ✅ Yksityiskohtaiset ohjeet | Osiot 1–10 yllä |
+| **Agent Implementations** | 🔨 Sinä rakennat tämän | ~40 tuntia kehitystä |
 | **Frontend UI** | 🔨 Sinä rakennat tämän | ~25 tuntia kehitystä |
-| **Dataputket** | 🔨 Sinä rakennat tämän | ~10 tuntia kehitystä |
+| **Data Pipelines** | 🔨 Sinä rakennat tämän | ~10 tuntia kehitystä |
 
-### Todellisuustarkistus: Mitä oikeasti on olemassa
+### Todellisuuden tarkastus: Mitä oikeasti on olemassa
 
-**Arkistossa (Valmiina nyt):**
+**Repositoriossa (valmis nyt):**
 - ✅ ARM-malli, joka ottaa käyttöön yli 15 Azure-palvelua (azuredeploy.json)
-- ✅ Käyttöönottoskripti tarkistuksella (deploy.sh)
-- ✅ Parametrien konfigurointi (azuredeploy.parameters.json)
+- ✅ Käyttöönotto-skripti validoinnilla (deploy.sh)
+- ✅ Parametrikonfiguraatio (azuredeploy.parameters.json)
 
-**Dokumentissa viitattu (Sinä luot):**
-- 🔨 Agenttien toteutuskoodi (~30-40 tuntia)
-- 🔨 Reitityspalvelu (~12-16 tuntia)
-- 🔨 Frontend-sovellus (~20-30 tuntia)
-- 🔨 Datakonfigurointiskriptit (~8-12 tuntia)
-- 🔨 Seurantakehys (~10-15 tuntia)
+**Dokumentissa mainitut (sinä luot):**
+- 🔨 Agenttien toteutuskoodi (~30–40 tuntia)
+- 🔨 Reitityspalvelu (~12–16 tuntia)
+- 🔨 Frontend-sovellus (~20–30 tuntia)
+- 🔨 Datan valmisteluskriptit (~8–12 tuntia)
+- 🔨 Monitorointikehys (~10–15 tuntia)
 
 ### Seuraavat askeleesi
 
@@ -1967,62 +2124,62 @@ cd retail-multiagent-arm-template
 ```
 
 #### Jos haluat rakentaa koko järjestelmän (80-120 tuntia)
-1. ✅ Lue ja ymmärrä tämä arkkitehtuuridokumentti (2-3 tuntia)
-2. ✅ Ota infrastruktuuri käyttöön ARM-mallilla (30 minuuttia)
-3. 🔨 Toteuta agentit viitekoodimallien avulla (~40 tuntia)
-4. 🔨 Rakenna reitityspalvelu FastAPI/Expressillä (~15 tuntia)
-5. 🔨 Luo frontend UI Reactilla/Vuella (~25 tuntia)
-6. 🔨 Konfiguroi dataputki ja hakemistoindeksi (~10 tuntia)
-7. 🔨 Lisää seuranta ja arviointi (~15 tuntia)
-8. ✅ Testaa, turvaa ja optimoi (~10 tuntia)
+1. ✅ Lue ja ymmärrä tämä arkkitehtuuridokumentti (2–3 tuntia)  
+2. ✅ Ota infrastruktuuri käyttöön ARM-mallin avulla (30 minuuttia)  
+3. 🔨 Toteuta agentit viitemallien mukaisesti (~40 tuntia)  
+4. 🔨 Rakenna reitityspalvelu FastAPI/Expressillä (~15 tuntia)  
+5. 🔨 Luo frontend-käyttöliittymä Reactilla/Vue'lla (~25 tuntia)  
+6. 🔨 Konfiguroi datan putki ja hakemisto (~10 tuntia)  
+7. 🔨 Lisää monitorointi ja arviointi (~15 tuntia)  
+8. ✅ Testaa, varmista turvallisuus ja optimoi (~10 tuntia)
 
-#### Jos haluat oppia monitoimijamalleista (Opiskele)
+#### Jos haluat oppia moniagenttimallit (opiskelu)
 - 📖 Tarkastele arkkitehtuurikaaviota ja komponenttien suhteita
-- 📖 Tutki koodiesimerkkejä SearchToolille, BingToolille, AgentEvaluatorille
+- 📖 Opiskele koodiesimerkkejä SearchToolille, BingToolille ja AgentEvaluatorille
 - 📖 Ymmärrä monialueisen käyttöönoton strategia
-- 📖 Opi arviointi- ja turvallisuuskehyksiä
-- 📖 Sovella malleja omiin projekteihisi
+- 📖 Opi arviointi- ja turvallisuuskehykset
+- 📖 Käytä malleja omissa projekteissasi
 
-### Tärkeimmät opit
+### Keskeiset opit
 
-1. **Infrastruktuuri vs. sovellus** - ARM-malli tarjoaa infrastruktuurin; agentit vaativat kehitystä
-2. **Monialueinen strategia** - Strateginen mallien sijoittelu vähentää kustannuksia ja parantaa luotettavuutta
-3. **Arviointikehys** - Omistettu arvioijamalli mahdollistaa jatkuvan laadun arvioinnin
-4. **Turvallisuus ensin** - Red teaming ja haavoittuvuuksien skannaus ovat välttämättömiä tuotannossa
-5. **Kustannusoptimointi** - Älykäs reititys GPT-4o:n ja GPT-4o-minin välillä säästää 60-80 %
+1. **Infrastruktuuri vs. sovellus** - ARM-malli tarjoaa infrastruktuurin; agentit vaativat kehitystä  
+2. **Monialueinen strategia** - Strateginen mallien sijoittelu vähentää kustannuksia ja parantaa luotettavuutta  
+3. **Arviointikehys** - Erillinen grader-malli mahdollistaa jatkuvan laadun arvioinnin  
+4. **Turvallisuus ensin** - Red teaming ja haavoittuvuusskannaus ovat välttämättömiä tuotannossa  
+5. **Kustannusoptimointi** - Älykäs reititys GPT-4o:n ja GPT-4o-minin välillä säästää 60–80 %
 
 ### Arvioidut kustannukset
 
-| Käyttöönoton tila | Infrastruktuuri/kk | Kehitys (kertaluonteinen) | Ensimmäisen kuukauden kokonaiskustannus |
-|-------------------|--------------------|---------------------------|----------------------------------------|
-| **Minimal** | $100-370 | $15K-25K (80-120 h) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (sama työmäärä) | $15.4K-26.5K |
-| **Premium** | $1,150-3,500 | $15K-25K (sama työmäärä) | $16.2K-28.5K |
+| Deployment Mode | Infrastructure/Month | Development (One-Time) | Total First Month |
+|-----------------|---------------------|------------------------|-------------------|
+| **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
 
-**Huom:** Infrastruktuuri on alle 5 % uusien toteutusten kokonaiskustannuksista. Kehitystyö on suurin investointi.
+**Huom:** Infrastruktuuri on <5 % kokonaiskustannuksista uusissa toteutuksissa. Kehitystyö on merkittävin investointi.
 
 ### Aiheeseen liittyvät resurssit
 
-- 📚 [ARM-mallin käyttöönotto-opas](retail-multiagent-arm-template/README.md) - Infrastruktuurin asennus
-- 📚 [Azure OpenAI parhaat käytännöt](https://learn.microsoft.com/azure/ai-services/openai/) - Mallien käyttöönotto
-- 📚 [AI-hakudokumentaatio](https://learn.microsoft.com/azure/search/) - Vektorihakukonfiguraatio
-- 📚 [Container Apps -mallit](https://learn.microsoft.com/azure/container-apps/) - Mikropalveluiden käyttöönotto
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Seurannan asennus
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Infrastruktuurin käyttöönotto
+- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Mallien käyttöönotto
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Vektorihakukonfiguraatio
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Mikropalvelujen käyttöönotto
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Monitoroinnin käyttöönotto
 
 ### Kysymyksiä tai ongelmia?
 
-- 🐛 [Ilmoita ongelmista](https://github.com/microsoft/AZD-for-beginners/issues) - Mallivirheet tai dokumentaatiovirheet
-- 💬 [GitHub-keskustelut](https://github.com/microsoft/AZD-for-beginners/discussions) - Arkkitehtuurikysymykset
-- 📖 [FAQ](../../resources/faq.md) - Yleiset kysymykset vastattuina
-- 🔧 [Vianetsintäopas](../../docs/troubleshooting/common-issues.md) - Käyttöönotto-ongelmat
+- 🐛 [Report Issues](https://github.com/microsoft/AZD-for-beginners/issues) - Mallin virheet tai dokumentaatio-ongelmat
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Arkkitehtuuriin liittyvät kysymykset
+- 📖 [FAQ](../resources/faq.md) - Yleiset kysymykset ja vastaukset
+- 🔧 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - Käyttöönotto-ongelmat
 
 ---
 
-**Tämä kattava skenaario tarjoaa yritystason arkkitehtuurimallin monitoimijaisten AI-järjestelmien rakentamiseen, sisältäen infrastruktuurimallit, toteutusohjeet ja tuotannon parhaat käytännöt kehittyneiden asiakastukiratkaisujen luomiseen Azure Developer CLI:llä.**
+**Tämä kattava skenaario tarjoaa yritystason arkkitehtuurisuunnitelman moniagentti-AI-järjestelmille, sisältäen infrastruktuurimallit, toteutusohjeet ja tuotannon parhaat käytännöt monimutkaisten asiakastukiratkaisujen rakentamiseen Azure Developer CLI:llä.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Tärkeissä tiedoissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Vastuuvapauslauseke:
+Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua Co-op Translator (https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattisissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää virallisena lähteenä. Tärkeiden tietojen kohdalla suositellaan ammattimaista ihmiskääntäjää. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

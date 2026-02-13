@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7229f7490ea61a04330b79651ac4d37e",
-  "translation_date": "2025-09-10T05:54:05+00:00",
-  "source_file": "SECURITY.md",
-  "language_code": "sw"
-}
--->
 ## Usalama
 
 Microsoft inachukulia usalama wa bidhaa na huduma zetu za programu kwa uzito, ikijumuisha hazina zote za msimbo chanzo katika mashirika yetu ya GitHub.

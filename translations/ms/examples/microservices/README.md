@@ -1,48 +1,39 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-22T11:03:13+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "ms"
-}
--->
-# Seni Bina Mikroservis - Contoh Aplikasi Kontena
+# Seni Bina Microservices - Contoh Aplikasi Bekas
 
-⏱️ **Anggaran Masa**: 25-35 minit | 💰 **Anggaran Kos**: ~$50-100/bulan | ⭐ **Kerumitan**: Lanjutan
+⏱️ **Anggaran Masa**: 25-35 minit | 💰 **Anggaran Kos**: ~RM210-420/bulan | ⭐ **Kerumitan**: Lanjutan
 
 **📚 Laluan Pembelajaran:**
-- ← Sebelumnya: [API Flask Ringkas](../../../../examples/container-app/simple-flask-api) - Asas kontena tunggal
-- 🎯 **Anda Di Sini**: Seni Bina Mikroservis (asas 2 perkhidmatan)
-- → Seterusnya: [Integrasi AI](../../../../docs/ai-foundry) - Tambah kecerdasan pada perkhidmatan anda
-- 🏠 [Halaman Utama Kursus](../../README.md)
+- ← Sebelumnya: [API Flask Mudah](../../../../examples/container-app/simple-flask-api) - Asas bekas tunggal
+- 🎯 **Anda Di Sini**: Seni Bina Microservices (asas 2 perkhidmatan)
+- → Seterusnya: [Integrasi AI](../../../../docs/ai-foundry) - Tambah kecerdasan kepada perkhidmatan anda
+- 🏠 [Kursus Utama](../../README.md)
 
 ---
 
-Seni bina mikroservis yang **ringkas tetapi berfungsi** yang dikerahkan ke Azure Container Apps menggunakan AZD CLI. Contoh ini menunjukkan komunikasi antara perkhidmatan, orkestrasi kontena, dan pemantauan dengan tetapan 2 perkhidmatan yang praktikal.
+Sebuah seni bina microservices yang **dipermudah tetapi berfungsi** yang dipasang ke Azure Container Apps menggunakan AZD CLI. Contoh ini mempamerkan komunikasi antara perkhidmatan, orkestrasi bekas, dan pemantauan dengan setup praktikal 2 perkhidmatan.
 
-> **📚 Pendekatan Pembelajaran**: Contoh ini bermula dengan seni bina 2 perkhidmatan yang minimum (API Gateway + Perkhidmatan Backend) yang boleh anda kerahkan dan pelajari. Selepas menguasai asas ini, kami menyediakan panduan untuk berkembang ke ekosistem mikroservis penuh.
+> **📚 Pendekatan Pembelajaran**: Contoh ini bermula dengan seni bina 2 perkhidmatan minimum (API Gateway + Perkhidmatan Backend) yang anda boleh pasang dan pelajari. Setelah menguasai asas ini, kami menyediakan panduan untuk pengembangan ekosistem microservices sepenuhnya.
 
-## Apa Yang Anda Akan Pelajari
+## Apa Yang Akan Anda Pelajari
 
-Dengan melengkapkan contoh ini, anda akan:
-- Mengerahkan pelbagai kontena ke Azure Container Apps
+Dengan menyelesaikan contoh ini, anda akan:
+- Memasang pelbagai bekas ke Azure Container Apps
 - Melaksanakan komunikasi antara perkhidmatan dengan rangkaian dalaman
-- Mengkonfigurasi penskalaan berdasarkan persekitaran dan pemeriksaan kesihatan
+- Mengkonfigurasi skala berdasarkan persekitaran dan pemeriksaan kesihatan
 - Memantau aplikasi teragih dengan Application Insights
-- Memahami corak dan amalan terbaik pengkerahan mikroservis
-- Belajar pengembangan progresif daripada seni bina ringkas ke kompleks
+- Memahami corak dan amalan terbaik penyebaran microservices
+- Belajar pengembangan progresif dari seni bina mudah ke kompleks
 
 ## Seni Bina
 
-### Fasa 1: Apa Yang Kita Bina (Termasuk Dalam Contoh Ini)
+### Fasa 1: Apa Yang Kita Bangunkan (Termasuk Dalam Contoh Ini)
 
 ```mermaid
 graph TB
     Internet[Internet/Pengguna]
-    Gateway[API Gateway<br/>Node.js Container<br/>Port 8080]
-    Product[Perkhidmatan Produk<br/>Python Container<br/>Port 8000]
-    AppInsights[Application Insights<br/>Pemantauan & Log]
+    Gateway[Pintu API<br/>Kontena Node.js<br/>Port 8080]
+    Product[Perkhidmatan Produk<br/>Kontena Python<br/>Port 8000]
+    AppInsights[Penemuan Aplikasi<br/>Pemantauan & Log]
     
     Internet -->|HTTPS| Gateway
     Gateway -->|HTTP Dalaman| Product
@@ -58,22 +49,22 @@ graph TB
 
 | Komponen | Tujuan | Akses | Sumber |
 |-----------|---------|--------|-----------|
-| **API Gateway** | Mengarahkan permintaan luaran ke perkhidmatan backend | Awam (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replika |
-| **Perkhidmatan Produk** | Mengurus katalog produk dengan data dalam memori | Dalaman sahaja | 0.5 vCPU, 1GB RAM, 1-10 replika |
-| **Application Insights** | Log berpusat dan penjejakan teragih | Portal Azure | 1-2 GB/bulan pengambilan data |
+| **API Gateway** | Merutekan permintaan luaran ke perkhidmatan backend | Awam (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replika |
+| **Perkhidmatan Produk** | Mengurus katalog produk dengan data dalam-memori | Dalaman sahaja | 0.5 vCPU, 1GB RAM, 1-10 replika |
+| **Application Insights** | Log berpusat dan pengesanan teragih | Azure Portal | 1-2 GB/bulan penyerapan data |
 
-**Kenapa Bermula Dengan Ringkas?**
-- ✅ Kerahkan dan fahami dengan cepat (25-35 minit)
-- ✅ Pelajari corak mikroservis teras tanpa kerumitan
-- ✅ Kod yang berfungsi untuk anda ubah dan eksperimen
-- ✅ Kos pembelajaran lebih rendah (~$50-100/bulan berbanding $300-1400/bulan)
-- ✅ Tingkatkan keyakinan sebelum menambah pangkalan data dan antrian mesej
+**Kenapa Mulakan Dengan Mudah?**
+- ✅ Pasang dan fahami dengan cepat (25-35 minit)
+- ✅ Belajar corak asas microservices tanpa kerumitan
+- ✅ Kod berfungsi yang boleh anda ubah dan cuba eksperimen
+- ✅ Kos lebih rendah untuk pembelajaran (~RM210-420/bulan berbanding RM1260-5880/bulan)
+- ✅ Bina keyakinan sebelum menambah pangkalan data dan barisan mesej
 
-**Analogi**: Anggap ini seperti belajar memandu. Anda bermula di tempat letak kereta kosong (2 perkhidmatan), kuasai asas, kemudian maju ke lalu lintas bandar (5+ perkhidmatan dengan pangkalan data).
+**Analogi**: Anggap ini seperti belajar memandu. Anda mulakan dengan tempat letak kereta kosong (2 perkhidmatan), kuasai asas, kemudian maju ke trafik bandar (5+ perkhidmatan dengan pangkalan data).
 
-### Fasa 2: Pengembangan Masa Depan (Rujukan Seni Bina)
+### Fasa 2: Pengembangan Masa Depan (Seni Bina Rujukan)
 
-Setelah anda menguasai seni bina 2 perkhidmatan, anda boleh mengembangkannya kepada:
+Setelah menguasai seni bina 2 perkhidmatan, anda boleh mengembangkan kepada:
 
 ```mermaid
 graph TB
@@ -82,11 +73,11 @@ graph TB
     Product[Perkhidmatan Produk<br/>✅ Termasuk]
     Order[Perkhidmatan Pesanan<br/>🔜 Tambah Seterusnya]
     UserSvc[Perkhidmatan Pengguna<br/>🔜 Tambah Seterusnya]
-    Notify[Perkhidmatan Pemberitahuan<br/>🔜 Tambah Terakhir]
+    Notify[Perkhidmatan Pemberitahuan<br/>🔜 Tambah Akhir]
     
     CosmosDB[(Cosmos DB<br/>🔜 Data Produk)]
     AzureSQL[(Azure SQL<br/>🔜 Data Pesanan)]
-    ServiceBus[Azure Service Bus<br/>🔜 Acara Asinkron]
+    ServiceBus[Azure Service Bus<br/>🔜 Acara Async]
     AppInsights[Application Insights<br/>✅ Termasuk]
     
     User --> Gateway
@@ -98,7 +89,7 @@ graph TB
     Order --> AzureSQL
     UserSvc --> AzureSQL
     
-    Product -.->|Acara ProductCreated| ServiceBus
+    Product -.->|Acara ProdukDicipta| ServiceBus
     ServiceBus -.->|Langgan| Notify
     ServiceBus -.->|Langgan| Order
     
@@ -116,36 +107,36 @@ graph TB
 ```
 Lihat bahagian "Panduan Pengembangan" di akhir untuk arahan langkah demi langkah.
 
-## Ciri-Ciri Yang Termasuk
+## Ciri Termasuk
 
-✅ **Penemuan Perkhidmatan**: Penemuan automatik berdasarkan DNS antara kontena  
-✅ **Pengimbangan Beban**: Pengimbangan beban terbina dalam di antara replika  
-✅ **Auto-scaling**: Penskalaan bebas bagi setiap perkhidmatan berdasarkan permintaan HTTP  
-✅ **Pemantauan Kesihatan**: Probe liveness dan readiness untuk kedua-dua perkhidmatan  
+✅ **Penemuan Perkhidmatan**: Penemuan automatik berasaskan DNS antara bekas  
+✅ **Beban Seimbang**: Beban seimbang terpasang merentasi replika  
+✅ **Auto-scaling**: Skala bebas perkhidmatan berdasarkan permintaan HTTP  
+✅ **Pemantauan Kesihatan**: Pemeriksaan liveness dan readiness untuk kedua perkhidmatan  
 ✅ **Log Teragih**: Log berpusat dengan Application Insights  
-✅ **Rangkaian Dalaman**: Komunikasi perkhidmatan-ke-perkhidmatan yang selamat  
-✅ **Orkestrasi Kontena**: Pengkerahan dan penskalaan automatik  
-✅ **Kemas Kini Tanpa Henti**: Kemas kini bergulir dengan pengurusan semakan  
+✅ **Rangkaian Dalaman**: Komunikasi perkhidmatan antara perkhidmatan yang selamat  
+✅ **Orkestrasi Bekas**: Penyebaran dan penskalaan automatik  
+✅ **Kemas Kini Tanpa Henti**: Kemas kini bergulung dengan pengurusan revisi  
 
 ## Prasyarat
 
-### Alat Yang Diperlukan
+### Alat Diperlukan
 
-Sebelum memulakan, pastikan anda telah memasang alat-alat ini:
+Sebelum bermula, pastikan alat-alat berikut dipasang:
 
 1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versi 1.0.0 atau lebih tinggi)
    ```bash
    azd version
-   # Jangkaan output: versi azd 1.0.0 atau lebih tinggi
+   # Output yang dijangkakan: versi azd 1.0.0 atau lebih tinggi
    ```
 
 2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versi 2.50.0 atau lebih tinggi)
    ```bash
    az --version
-   # Output yang dijangka: azure-cli 2.50.0 atau lebih tinggi
+   # Jangkaan keluaran: azure-cli 2.50.0 atau lebih tinggi
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (untuk pembangunan/pengujian tempatan - pilihan)
+3. **[Docker](https://www.docker.com/get-started)** (untuk pembangunan/ujian tempatan - pilihan)
    ```bash
    docker --version
    # Output yang dijangka: Versi Docker 20.10 atau lebih tinggi
@@ -153,64 +144,64 @@ Sebelum memulakan, pastikan anda telah memasang alat-alat ini:
 
 ### Sahkan Persediaan Anda
 
-Jalankan arahan ini untuk mengesahkan anda sudah bersedia:
+Jalankan arahan berikut untuk mengesahkan anda sedia:
 
 ```bash
 # Semak Azure Developer CLI
 azd version
-# ✅ Dijangka: azd versi 1.0.0 atau lebih tinggi
+# ✅ Dijangkakan: azd versi 1.0.0 atau lebih tinggi
 
 # Semak Azure CLI
 az --version
-# ✅ Dijangka: azure-cli 2.50.0 atau lebih tinggi
+# ✅ Dijangkakan: azure-cli 2.50.0 atau lebih tinggi
 
 # Semak Docker (pilihan)
 docker --version
-# ✅ Dijangka: Docker versi 20.10 atau lebih tinggi
+# ✅ Dijangkakan: versi Docker 20.10 atau lebih tinggi
 ```
 
-**Kriteria Kejayaan**: Semua arahan mengembalikan nombor versi yang sepadan atau lebih tinggi.
+**Kriteria Kejayaan**: Semua arahan memaparkan nombor versi yang memenuhi atau melebihi minimum.
 
 ### Keperluan Azure
 
-- Langganan **Azure** yang aktif ([buat akaun percuma](https://azure.microsoft.com/free/))
+- Langganan **Azure aktif** ([cipta akaun percuma](https://azure.microsoft.com/free/))
 - Kebenaran untuk mencipta sumber dalam langganan anda
 - Peranan **Contributor** pada langganan atau kumpulan sumber
 
-### Pengetahuan Prasyarat
+### Prasyarat Pengetahuan
 
-Ini adalah contoh **tahap lanjutan**. Anda seharusnya:
-- Telah melengkapkan [contoh API Flask Ringkas](../../../../examples/container-app/simple-flask-api) 
-- Memahami asas seni bina mikroservis
-- Biasa dengan REST API dan HTTP
-- Memahami konsep kontena
+Ini adalah contoh **peringkat lanjutan**. Anda perlu:
+- Menyelesaikan [contoh Simple Flask API](../../../../examples/container-app/simple-flask-api) 
+- Memahami asas seni bina microservices
+- Familiar dengan REST API dan HTTP
+- Faham konsep bekas
 
-**Baru dengan Aplikasi Kontena?** Mulakan dengan [contoh API Flask Ringkas](../../../../examples/container-app/simple-flask-api) terlebih dahulu untuk mempelajari asas.
+**Baru dengan Container Apps?** Mulakan dengan [contoh Simple Flask API](../../../../examples/container-app/simple-flask-api) dahulu untuk belajar asas.
 
-## Permulaan Pantas (Langkah-demi-Langkah)
+## Mula Cepat (Langkah demi Langkah)
 
-### Langkah 1: Klon dan Navigasi
+### Langkah 1: Clone dan Navigasi
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/microservices
 ```
 
-**✓ Semak Kejayaan**: Sahkan anda melihat `azure.yaml`:
+**✓ Semak Kejayaan**: Sahkan anda nampak `azure.yaml`:
 ```bash
 ls
 # Dijangka: README.md, azure.yaml, infra/, src/
 ```
 
-### Langkah 2: Sahkan Dengan Azure
+### Langkah 2: Log Masuk ke Azure
 
 ```bash
 azd auth login
 ```
 
-Ini akan membuka pelayar anda untuk pengesahan Azure. Log masuk dengan kelayakan Azure anda.
+Ini akan membuka pelayar anda untuk pengesahan Azure. Masuk dengan kelayakan Azure anda.
 
-**✓ Semak Kejayaan**: Anda seharusnya melihat:
+**✓ Semak Kejayaan**: Anda harus lihat:
 ```
 Logged in to Azure.
 ```
@@ -221,45 +212,45 @@ Logged in to Azure.
 azd init
 ```
 
-**Prompt yang akan anda lihat**:
-- **Nama persekitaran**: Masukkan nama pendek (contoh, `microservices-dev`)
+**Arahan yang anda akan lihat**:
+- **Nama persekitaran**: Masukkan nama ringkas (contoh: `microservices-dev`)
 - **Langganan Azure**: Pilih langganan anda
-- **Lokasi Azure**: Pilih kawasan (contoh, `eastus`, `westeurope`)
+- **Lokasi Azure**: Pilih rantau (contoh: `eastus`, `westeurope`)
 
-**✓ Semak Kejayaan**: Anda seharusnya melihat:
+**✓ Semak Kejayaan**: Anda harus lihat:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Langkah 4: Kerahkan Infrastruktur dan Perkhidmatan
+### Langkah 4: Pasang Infrastruktur dan Perkhidmatan
 
 ```bash
 azd up
 ```
 
-**Apa yang berlaku** (mengambil masa 8-12 minit):
+**Apa yang berlaku** (ambil masa 8-12 minit):
 
 ```mermaid
 graph LR
     A[azd up] --> B[Cipta Kumpulan Sumber]
-    B --> C[Susun Daftar Kontena]
-    C --> D[Susun Log Analitik]
-    D --> E[Susun Wawasan Aplikasi]
+    B --> C[Sebar Registri Kontena]
+    C --> D[Sebar Log Analytics]
+    D --> E[Sebar App Insights]
     E --> F[Cipta Persekitaran Kontena]
     F --> G[Bina Imej API Gateway]
     F --> H[Bina Imej Perkhidmatan Produk]
-    G --> I[Tolak ke Daftar]
+    G --> I[Tolak ke Registri]
     H --> I
-    I --> J[Susun API Gateway]
-    I --> K[Susun Perkhidmatan Produk]
-    J --> L[Konfigurasi Ingress & Pemeriksaan Kesihatan]
+    I --> J[Sebar API Gateway]
+    I --> K[Sebar Perkhidmatan Produk]
+    J --> L[Konfigurasikan Ingress & Pemeriksaan Kesihatan]
     K --> L
-    L --> M[Penghantaran Selesai ✓]
+    L --> M[Penempatan Lengkap ✓]
     
     style A fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style M fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**✓ Semak Kejayaan**: Anda seharusnya melihat:
+**✓ Semak Kejayaan**: Anda harus lihat:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -267,17 +258,17 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ Masa**: 8-12 minit
 
-### Langkah 5: Uji Pengkerahan
+### Langkah 5: Uji Penyebaran
 
 ```bash
-# Dapatkan titik akhir gerbang
+# Dapatkan titik akhir gateway
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
 # Uji kesihatan API Gateway
 curl $GATEWAY_URL/health
 ```
 
-**✅ Output yang dijangka:**
+**✅ Output Dijangka:**
 ```json
 {
   "status": "healthy",
@@ -288,11 +279,11 @@ curl $GATEWAY_URL/health
 
 **Uji perkhidmatan produk melalui gateway**:
 ```bash
-# Senaraikan produk
+# Senarai produk
 curl $GATEWAY_URL/api/products
 ```
 
-**✅ Output yang dijangka:**
+**✅ Output Dijangka:**
 ```json
 [
   {"id":1,"name":"Laptop","price":999.99,"stock":50},
@@ -301,15 +292,15 @@ curl $GATEWAY_URL/api/products
 ]
 ```
 
-**✓ Semak Kejayaan**: Kedua-dua titik akhir mengembalikan data JSON tanpa ralat.
+**✓ Semak Kejayaan**: Kedua-dua endpoint mengembalikan data JSON tanpa ralat.
 
 ---
 
-**🎉 Tahniah!** Anda telah mengerahkan seni bina mikroservis ke Azure!
+**🎉 Tahniah!** Anda telah memasang seni bina microservices ke Azure!
 
 ## Struktur Projek
 
-Semua fail pelaksanaan disertakan—ini adalah contoh lengkap dan berfungsi:
+Semua fail pelaksanaan disertakan—ini contoh lengkap dan berfungsi:
 
 ```
 microservices/
@@ -339,41 +330,41 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**Apa Yang Setiap Komponen Lakukan:**
+**Apa Fungsi Setiap Komponen:**
 
 **Infrastruktur (infra/)**:
-- `main.bicep`: Mengatur semua sumber Azure dan kebergantungan mereka
+- `main.bicep`: Mengorkestrasi semua sumber Azure dan kebergantungan mereka
 - `core/container-apps-environment.bicep`: Mencipta persekitaran Container Apps dan Azure Container Registry
-- `core/monitor.bicep`: Menyediakan Application Insights untuk log teragih
-- `app/*.bicep`: Definisi aplikasi kontena individu dengan penskalaan dan pemeriksaan kesihatan
+- `core/monitor.bicep`: Menyediakan Application Insights untuk logging teragih
+- `app/*.bicep`: Definisi aplikasi bekas individu dengan penskalaan dan pemeriksaan kesihatan
 
 **API Gateway (src/api-gateway/)**:
-- Perkhidmatan yang menghadap awam yang mengarahkan permintaan ke perkhidmatan backend
-- Melaksanakan log, pengendalian ralat, dan pemajuan permintaan
-- Menunjukkan komunikasi HTTP perkhidmatan-ke-perkhidmatan
+- Perkhidmatan berhadapan awam yang merutekan permintaan ke perkhidmatan backend
+- Melaksanakan logging, pengendalian ralat, dan pemajuan permintaan
+- Mempamerkan komunikasi HTTP antara perkhidmatan
 
 **Perkhidmatan Produk (src/product-service/)**:
-- Perkhidmatan dalaman dengan katalog produk (dalam memori untuk kesederhanaan)
+- Perkhidmatan dalaman dengan katalog produk (dalam-memori untuk mudah)
 - REST API dengan pemeriksaan kesihatan
-- Contoh corak mikroservis backend
+- Contoh corak microservice backend
 
 ## Gambaran Keseluruhan Perkhidmatan
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Akses**: Awam (ingress luaran)  
-**Tujuan**: Mengarahkan permintaan masuk ke perkhidmatan backend yang sesuai  
+**Akses**: Awam (ingress luar)  
+**Tujuan**: Merutekan permintaan masuk ke perkhidmatan backend yang sesuai  
 
-**Titik Akhir**:
+**Endpoint**:
 - `GET /` - Maklumat perkhidmatan
-- `GET /health` - Titik akhir pemeriksaan kesihatan
-- `GET /api/products` - Maju ke perkhidmatan produk (senarai semua)
-- `GET /api/products/:id` - Maju ke perkhidmatan produk (dapatkan mengikut ID)
+- `GET /health` - Endpoint pemeriksaan kesihatan
+- `GET /api/products` - Terus ke perkhidmatan produk (senaraikan semua)
+- `GET /api/products/:id` - Terus ke perkhidmatan produk (dapatkan mengikut ID)
 
 **Ciri Utama**:
-- Pengarahan permintaan dengan axios
-- Log berpusat
+- Perutean permintaan dengan axios
+- Logging berpusat
 - Pengendalian ralat dan pengurusan timeout
 - Penemuan perkhidmatan melalui pembolehubah persekitaran
 - Integrasi Application Insights
@@ -392,20 +383,20 @@ app.get('/api/products', async (req, res) => {
 ### Perkhidmatan Produk (Python/Flask)
 
 **Port**: 8000  
-**Akses**: Dalaman sahaja (tiada ingress luaran)  
-**Tujuan**: Mengurus katalog produk dengan data dalam memori  
+**Akses**: Dalaman sahaja (tiada ingress luar)  
+**Tujuan**: Mengurus katalog produk dengan data dalam-memori  
 
-**Titik Akhir**:
+**Endpoint**:
 - `GET /` - Maklumat perkhidmatan
-- `GET /health` - Titik akhir pemeriksaan kesihatan
-- `GET /products` - Senarai semua produk
+- `GET /health` - Endpoint pemeriksaan kesihatan
+- `GET /products` - Senaraikan semua produk
 - `GET /products/<id>` - Dapatkan produk mengikut ID
 
 **Ciri Utama**:
 - API RESTful dengan Flask
-- Kedai produk dalam memori (ringkas, tiada pangkalan data diperlukan)
-- Pemantauan kesihatan dengan probe
-- Log berstruktur
+- Penyimpanan produk dalam memori (mudah, tiada pangkalan data)
+- Pemantauan kesihatan dengan probes
+- Logging berstruktur
 - Integrasi Application Insights
 
 **Model Data**:
@@ -420,37 +411,37 @@ app.get('/api/products', async (req, res) => {
 ```
 
 **Kenapa Dalaman Sahaja?**
-Perkhidmatan produk tidak didedahkan secara awam. Semua permintaan mesti melalui API Gateway, yang menyediakan:
+Perkhidmatan produk tidak didedahkan secara umum. Semua permintaan mesti melalui API Gateway, yang menyediakan:
 - Keselamatan: Titik akses terkawal
-- Fleksibiliti: Boleh menukar backend tanpa menjejaskan klien
-- Pemantauan: Log permintaan berpusat
+- Fleksibiliti: Boleh ubah backend tanpa menjejaskan klien
+- Pemantauan: Logging permintaan berpusat
 
-## Memahami Komunikasi Perkhidmatan
+## Memahami Komunikasi Antara Perkhidmatan
 
-### Bagaimana Perkhidmatan Berkomunikasi Antara Satu Sama Lain
+### Bagaimana Perkhidmatan Berkomunikasi
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Gateway as API Gateway<br/>(Port 8080)
     participant Product as Perkhidmatan Produk<br/>(Port 8000)
-    participant AI as Wawasan Aplikasi
+    participant AI as Application Insights
     
-    User->>Gateway: GET /api/products
+    User->>Gateway: DAPATKAN /api/products
     Gateway->>AI: Log permintaan
-    Gateway->>Product: GET /products (HTTP dalaman)
+    Gateway->>Product: DAPATKAN /products (HTTP dalaman)
     Product->>AI: Log pertanyaan
-    Product-->>Gateway: Respons JSON [5 produk]
-    Gateway->>AI: Log respons
-    Gateway-->>User: Respons JSON [5 produk]
+    Product-->>Gateway: Tindak balas JSON [5 produk]
+    Gateway->>AI: Log tindak balas
+    Gateway-->>User: Tindak balas JSON [5 produk]
     
     Note over Gateway,Product: DNS Dalaman: http://product-service
-    Note over User,AI: Semua komunikasi direkod dan dijejak
+    Note over User,AI: Semua komunikasi direkod dan dikesan
 ```
 Dalam contoh ini, API Gateway berkomunikasi dengan Perkhidmatan Produk menggunakan **panggilan HTTP dalaman**:
 
 ```javascript
-// Gerbang API (src/api-gateway/app.js)
+// Pintu Gerbang API (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
 // Buat permintaan HTTP dalaman
@@ -459,7 +450,7 @@ const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 
 **Perkara Penting**:
 
-1. **Penemuan Berdasarkan DNS**: Container Apps secara automatik menyediakan DNS untuk perkhidmatan dalaman
+1. **Penemuan Berasaskan DNS**: Container Apps secara automatik menyediakan DNS untuk perkhidmatan dalaman
    - FQDN Perkhidmatan Produk: `product-service.internal.<environment>.azurecontainerapps.io`
    - Dipermudahkan sebagai: `http://product-service` (Container Apps menyelesaikannya)
 
@@ -467,49 +458,49 @@ const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
    - Hanya boleh diakses dalam persekitaran Container Apps
    - Tidak boleh dicapai dari internet
 
-3. **Pembolehubah Persekitaran**: URL perkhidmatan disuntik semasa pengkerahan
+3. **Pembolehubah Persekitaran**: URL perkhidmatan disuntik pada masa penyebaran
    - Bicep menghantar FQDN dalaman ke gateway
-   - Tiada URL yang dikodkan keras dalam kod aplikasi
+   - Tiada URL keras dalam kod aplikasi
 
-**Analogi**: Anggap ini seperti bilik pejabat. API Gateway adalah meja resepsi (menghadap awam), dan Perkhidmatan Produk adalah bilik pejabat (dalaman sahaja). Pelawat mesti melalui resepsi untuk mencapai mana-mana bilik.
+**Analogi**: Anggap ini seperti bilik pejabat. API Gateway adalah kaunter penerimaan (berhadapan awam), dan Perkhidmatan Produk adalah bilik pejabat (hanya dalaman). Pelawat mesti melalui kaunter untuk sampai ke mana-mana bilik pejabat.
 
-## Pilihan Pengkerahan
+## Pilihan Penyebaran
 
-### Pengkerahan Penuh (Disyorkan)
+### Penyebaran Penuh (Disyorkan)
 
 ```bash
-# Sebarkan infrastruktur dan kedua-dua perkhidmatan
+# Menyebarkan infrastruktur dan kedua-dua perkhidmatan
 azd up
 ```
 
-Ini mengerahkan:
+Ini memasang:
 1. Persekitaran Container Apps
 2. Application Insights
 3. Container Registry
-4. Kontena API Gateway
-5. Kontena Perkhidmatan Produk
+4. Bekas API Gateway
+5. Bekas Perkhidmatan Produk
 
 **Masa**: 8-12 minit
 
-### Kerahkan Perkhidmatan Individu
+### Pasang Perkhidmatan Individu
 
 ```bash
-# Sebarkan hanya satu perkhidmatan (selepas azd up awal)
+# Hanya terapkan satu perkhidmatan (selepas azd up awal)
 azd deploy api-gateway
 
-# Atau sebarkan perkhidmatan produk
+# Atau terapkan perkhidmatan produk
 azd deploy product-service
 ```
 
-**Kes Penggunaan**: Apabila anda telah mengemas kini kod dalam satu perkhidmatan dan ingin mengerahkan semula hanya perkhidmatan itu.
+**Kes Penggunaan**: Apabila anda mengemaskini kod dalam satu perkhidmatan dan mahu pasang semula hanya perkhidmatan itu.
 
 ### Kemas Kini Konfigurasi
 
 ```bash
-# Tukar parameter penskalaan
+# Tukar parameter penyesuaian
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Lakukan penyebaran semula dengan konfigurasi baru
+# Kedar semula dengan konfigurasi baru
 azd up
 ```
 
@@ -517,17 +508,17 @@ azd up
 
 ### Konfigurasi Penskalaan
 
-Kedua-dua perkhidmatan dikonfigurasi dengan penskalaan automatik berdasarkan HTTP dalam fail Bicep mereka:
+Kedua-dua perkhidmatan dikonfigurasikan dengan auto-scaling berasaskan HTTP dalam fail Bicep mereka:
 
 **API Gateway**:
-- Replika minimum: 2 (sentiasa sekurang-kurangnya 2 untuk ketersediaan)
-- Replika maksimum: 20
-- Pencetus penskalaan: 50 permintaan serentak setiap replika
+- Minimum replika: 2 (sentiasa minimum 2 untuk ketersediaan)
+- Maksimum replika: 20
+- Pencetus skala: 50 permintaan serentak setiap replika
 
 **Perkhidmatan Produk**:
-- Replika minimum: 1 (boleh berskala ke sifar jika diperlukan)
-- Replika maksimum: 10
-- Pencetus penskalaan: 100 permintaan serentak setiap replika
+- Minimum replika: 1 (boleh skala ke sifar jika perlu)
+- Maksimum replika: 10
+- Pencetus skala: 100 permintaan serentak setiap replika
 
 **Sesuaikan Penskalaan** (dalam `infra/app/*.bicep`):
 ```bicep
@@ -557,11 +548,11 @@ scale: {
 **Perkhidmatan Produk**:
 - CPU: 0.5 vCPU
 - Memori: 1 GiB
-- Sebab: Operasi dalam memori yang ringan
+- Sebab: Operasi dalam-memori ringan
 
 ### Pemeriksaan Kesihatan
 
-Kedua-dua perkhidmatan termasuk probe liveness dan readiness:
+Kedua-dua perkhidmatan termasuk probes liveness dan readiness:
 
 ```bicep
 probes: [
@@ -586,23 +577,24 @@ probes: [
 ]
 ```
 
-**Apa Maksudnya**:
-- **Liveness**: Jika pemeriksaan kesihatan gagal, Container Apps akan memulakan semula kontena
-- **Readiness**: Jika tidak bersedia, Container Apps akan berhenti mengarahkan trafik ke replika itu
+**Apa Maksud Ini**:
+- **Liveness**: Jika pemeriksaan kesihatan gagal, Container Apps memulakan semula bekas
+- **Readiness**: Jika tidak sedia, Container Apps menghentikan perutean trafik ke replika itu
 
-## Pemantauan & Pemerhatian
+## Pemantauan & Kebolehlihatan
 
 ### Lihat Log Perkhidmatan
 
 ```bash
+# Lihat log menggunakan azd monitor
+azd monitor --logs
+
+# Atau guna Azure CLI untuk Aplikasi Kontena tertentu:
 # Alirkan log dari API Gateway
-azd logs api-gateway --follow
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
 # Lihat log perkhidmatan produk terkini
-azd logs product-service --tail 100
-
-# Lihat semua log dari kedua-dua perkhidmatan
-azd logs --follow
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
 **Output Dijangka**:
@@ -615,9 +607,9 @@ azd logs --follow
 
 ### Pertanyaan Application Insights
 
-Akses Application Insights di Portal Azure, kemudian jalankan pertanyaan ini:
+Akses Application Insights dalam Azure Portal, kemudian jalankan pertanyaan berikut:
 
-**Cari Permintaan Lambat**:
+**Cari Permintaan Perlahan**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -626,7 +618,7 @@ requests
 | order by count_ desc
 ```
 
-**Jejak Panggilan Perkhidmatan-ke-Perkhidmatan**:
+**Jejak Panggilan Antara Perkhidmatan**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -643,7 +635,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Jumlah Permintaan Mengikut Masa**:
+**Isipadu Permintaan Mengikut Masa**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -651,37 +643,37 @@ requests
 | render timechart
 ```
 
-### Akses Papan Pemantauan
+### Akses Papan Pemuka Pemantauan
 
 ```bash
 # Dapatkan butiran Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Buka pemantauan Portal Azure
+# Buka pemantauan Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Metrik Langsung
+### Metrik Masa Nyata
 
-1. Navigasi ke Application Insights di Portal Azure
-2. Klik "Metrik Langsung"
-3. Lihat permintaan masa nyata, kegagalan, dan prestasi
+1. Pergi ke Application Insights di Azure Portal
+2. Klik "Live Metrics"
+3. Lihat permintaan, kegagalan, dan prestasi masa nyata
 4. Uji dengan menjalankan: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
 ## Latihan Praktikal
 
-### Latihan 1: Tambah Titik Akhir Produk Baru ⭐ (Mudah)
+### Latihan 1: Tambah Endpoint Produk Baru ⭐ (Mudah)
 
-**Matlamat**: Tambah titik akhir POST untuk mencipta produk baru
+**Matlamat**: Tambah endpoint POST untuk mencipta produk baru
 
-**Titik Permulaan**: `src/product-service/main.py`
+**Titik Mula**: `src/product-service/main.py`
 
-**Langkah-Langkah**:
+**Langkah**:
 
-1. Tambah titik akhir ini selepas fungsi `get_product` dalam `main.py`:
+1. Tambah endpoint ini selepas fungsi `get_product` dalam `main.py`:
 
 ```python
 @app.route('/products', methods=['POST'])
@@ -727,14 +719,14 @@ app.post('/api/products', async (req, res) => {
 });
 ```
 
-3. Lakukan semula penyebaran kedua-dua perkhidmatan:
+3. Susun semula kedua-dua perkhidmatan:
 
 ```bash
 azd deploy product-service
 azd deploy api-gateway
 ```
 
-4. Uji endpoint baru:
+4. Uji titik akhir baru:
 
 ```bash
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
@@ -745,7 +737,7 @@ curl -X POST $GATEWAY_URL/api/products \
   -d '{"name":"USB Cable","price":9.99,"stock":500}'
 ```
 
-**✅ Output yang dijangka:**
+**✅ Output dijangka:**
 ```json
 {"id":6,"name":"USB Cable","description":"","price":9.99,"stock":500}
 ```
@@ -754,29 +746,29 @@ curl -X POST $GATEWAY_URL/api/products \
 
 ```bash
 curl $GATEWAY_URL/api/products
-# Sekarang sepatutnya menunjukkan 6 produk termasuk Kabel USB baru
+# Sekarang harus menunjukkan 6 produk termasuk Kabel USB baru
 ```
 
 **Kriteria Kejayaan**:
 - ✅ Permintaan POST mengembalikan HTTP 201
 - ✅ Produk baru muncul dalam senarai GET /api/products
-- ✅ Produk mempunyai ID yang bertambah secara automatik
+- ✅ Produk mempunyai ID yang auto-berkembang
 
 **Masa**: 10-15 minit
 
 ---
 
-### Latihan 2: Ubah Peraturan Autoscaling ⭐⭐ (Sederhana)
+### Latihan 2: Ubah Peraturan Autoskala ⭐⭐ (Sederhana)
 
-**Matlamat**: Ubah Product Service untuk skala lebih agresif
+**Matlamat**: Tukar Perkhidmatan Produk supaya skala lebih agresif
 
-**Titik Permulaan**: `infra/app/product-service.bicep`
+**Titik Mula**: `infra/app/product-service.bicep`
 
-**Langkah-langkah**:
+**Langkah**:
 
 1. Buka `infra/app/product-service.bicep` dan cari blok `scale` (sekitar baris 95)
 
-2. Ubah daripada:
+2. Tukar daripada:
 ```bicep
 scale: {
   minReplicas: 1
@@ -812,7 +804,7 @@ scale: {
 }
 ```
 
-3. Lakukan semula penyebaran infrastruktur:
+3. Susun semula infrastruktur:
 
 ```bash
 azd up
@@ -827,7 +819,7 @@ az containerapp show \
   --query "properties.template.scale" -o json
 ```
 
-**✅ Output yang dijangka:**
+**✅ Output dijangka:**
 ```json
 {
   "minReplicas": 2,
@@ -836,21 +828,21 @@ az containerapp show \
 }
 ```
 
-5. Uji autoscaling dengan beban:
+5. Uji autoskala dengan beban:
 
 ```bash
-# Hasilkan permintaan serentak
+# Jana permintaan serentak
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# Perhatikan penskalaan berlaku
-azd logs product-service --follow
-# Cari: Acara penskalaan Aplikasi Kontena
+# Saksikan penskalaan berlaku menggunakan Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
+# Cari untuk: acara penskalaan Container Apps
 ```
 
 **Kriteria Kejayaan**:
-- ✅ Product Service sentiasa menjalankan sekurang-kurangnya 2 replika
+- ✅ Perkhidmatan Produk sentiasa menjalankan sekurang-kurangnya 2 replika
 - ✅ Di bawah beban, skala kepada lebih daripada 2 replika
-- ✅ Portal Azure menunjukkan peraturan skala baru
+- ✅ Azure Portal menunjukkan peraturan skala baru
 
 **Masa**: 15-20 minit
 
@@ -858,12 +850,12 @@ azd logs product-service --follow
 
 ### Latihan 3: Tambah Pertanyaan Pemantauan Tersuai ⭐⭐ (Sederhana)
 
-**Matlamat**: Cipta pertanyaan Application Insights tersuai untuk menjejaki prestasi API produk
+**Matlamat**: Cipta pertanyaan tersuai Application Insights untuk mengesan prestasi API produk
 
-**Langkah-langkah**:
+**Langkah**:
 
-1. Navigasi ke Application Insights di Portal Azure:
-   - Pergi ke Portal Azure
+1. Pergi ke Application Insights di Azure Portal:
+   - Pergi ke Azure Portal
    - Cari kumpulan sumber anda (rg-microservices-*)
    - Klik pada sumber Application Insights
 
@@ -884,14 +876,14 @@ requests
 | render timechart
 ```
 
-4. Klik "Run" untuk melaksanakan pertanyaan
+4. Klik "Run" untuk jalankan pertanyaan
 
 5. Simpan pertanyaan:
    - Klik "Save"
    - Nama: "Prestasi API Produk"
    - Kategori: "Prestasi"
 
-6. Hasilkan trafik ujian:
+6. Jana trafik ujian:
 
 ```bash
 for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
@@ -899,17 +891,17 @@ for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 
 7. Segarkan pertanyaan untuk melihat data
 
-**✅ Output yang dijangka:**
-- Carta menunjukkan jumlah permintaan dari masa ke masa
+**✅ Output dijangka:**
+- Carta yang menunjukkan bilangan permintaan sepanjang masa
 - Purata tempoh < 500ms
 - Kadar kejayaan = 100%
-- Bins masa 5 minit
+- Kumpulan masa 5 minit
 
 **Kriteria Kejayaan**:
 - ✅ Pertanyaan menunjukkan 100+ permintaan
-- ✅ Kadar kejayaan adalah 100%
+- ✅ Kadar kejayaan ialah 100%
 - ✅ Purata tempoh < 500ms
-- ✅ Carta memaparkan bins masa 5 minit
+- ✅ Carta memaparkan kumpulan masa 5 minit
 
 **Hasil Pembelajaran**: Fahami cara memantau prestasi perkhidmatan dengan pertanyaan tersuai
 
@@ -917,15 +909,15 @@ for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 
 ---
 
-### Latihan 4: Laksanakan Logik Ulang Coba ⭐⭐⭐ (Lanjutan)
+### Latihan 4: Laksanakan Logik Cuba Semula ⭐⭐⭐ (Lanjutan)
 
-**Matlamat**: Tambah logik ulang coba pada API Gateway apabila Product Service tidak tersedia buat sementara waktu
+**Matlamat**: Tambah logik cuba semula pada API Gateway apabila Perkhidmatan Produk tidak tersedia sementara
 
-**Titik Permulaan**: `src/api-gateway/app.js`
+**Titik Mula**: `src/api-gateway/app.js`
 
-**Langkah-langkah**:
+**Langkah**:
 
-1. Pasang pustaka ulang coba:
+1. Pasang perpustakaan cuba semula:
 
 ```bash
 cd src/api-gateway
@@ -938,14 +930,14 @@ cd ../..
 ```javascript
 const axiosRetry = require('axios-retry');
 
-// Konfigurasikan logik percubaan semula
+// Konfigurasikan logik cuba semula
 axiosRetry(axios, {
   retries: 3,
   retryDelay: (retryCount) => {
     return retryCount * 1000; // 1s, 2s, 3s
   },
   retryCondition: (error) => {
-    // Cuba semula pada ralat rangkaian atau respons 5xx
+    // Cuba semula jika berlaku ralat rangkaian atau respons 5xx
     return axiosRetry.isNetworkOrIdempotentRequestError(error) ||
            (error.response && error.response.status >= 500);
   }
@@ -954,25 +946,25 @@ axiosRetry(axios, {
 console.log('Retry logic configured: 3 retries with exponential backoff');
 ```
 
-3. Lakukan semula penyebaran API Gateway:
+3. Susun semula API Gateway:
 
 ```bash
 azd deploy api-gateway
 ```
 
-4. Uji tingkah laku ulang coba dengan mensimulasikan kegagalan perkhidmatan:
+4. Uji tingkah laku cuba semula dengan mensimulasikan kegagalan perkhidmatan:
 
 ```bash
-# Skala perkhidmatan produk kepada 0 (simulasi kegagalan)
+# Skala perkhidmatan produk ke 0 (sintesis kegagalan)
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --min-replicas 0 \
   --max-replicas 0
 
-# Cuba akses produk (akan mencuba semula 3 kali)
+# Cuba akses produk (akan cuba semula 3 kali)
 time curl -v $GATEWAY_URL/api/products
-# Perhatikan: Respons mengambil masa ~6 saat (1s + 2s + 3s percubaan semula)
+# Perhatikan: Respons mengambil masa ~6 saat (1s + 2s + 3s cuba semula)
 
 # Pulihkan perkhidmatan produk
 az containerapp update \
@@ -982,85 +974,85 @@ az containerapp update \
   --max-replicas 10
 ```
 
-5. Lihat log ulang coba:
+5. Lihat log cuba semula:
 
 ```bash
-azd logs api-gateway --tail 50
-# Cari: Mesej percubaan semula
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
+# Cari: Mesej cubaan semula gagal
 ```
 
-**✅ Tingkah laku yang dijangka:**
-- Permintaan ulang coba 3 kali sebelum gagal
-- Setiap ulang coba menunggu lebih lama (1s, 2s, 3s)
+**✅ Tingkah laku dijangka:**
+- Permintaan cuba semula 3 kali sebelum gagal
+- Setiap cuba semula menunggu lebih lama (1s, 2s, 3s)
 - Permintaan berjaya selepas perkhidmatan dimulakan semula
-- Log menunjukkan percubaan ulang coba
+- Log menunjukkan percubaan cuba semula
 
 **Kriteria Kejayaan**:
-- ✅ Permintaan ulang coba 3 kali sebelum gagal
-- ✅ Setiap ulang coba menunggu lebih lama (exponential backoff)
+- ✅ Permintaan cuba semula 3 kali sebelum gagal
+- ✅ Setiap cuba semula menunggu lebih lama (penangguhan eksponen)
 - ✅ Permintaan berjaya selepas perkhidmatan dimulakan semula
-- ✅ Log menunjukkan percubaan ulang coba
+- ✅ Log menunjukkan percubaan cuba semula
 
-**Hasil Pembelajaran**: Fahami corak ketahanan dalam microservices (circuit breakers, ulang coba, timeout)
+**Hasil Pembelajaran**: Fahami corak ketahanan dalam mikroservis (pemutus litar, cuba semula, tamat masa)
 
 **Masa**: 20-25 minit
 
 ---
 
-## Titik Semakan Pengetahuan
+## Titik Semak Pengetahuan
 
 Selepas melengkapkan contoh ini, sahkan pemahaman anda:
 
 ### 1. Komunikasi Perkhidmatan ✓
 
 Uji pengetahuan anda:
-- [ ] Bolehkah anda menerangkan bagaimana API Gateway menemui Product Service? (Penemuan perkhidmatan berasaskan DNS)
-- [ ] Apa yang berlaku jika Product Service tidak berfungsi? (Gateway mengembalikan ralat 503)
-- [ ] Bagaimana anda akan menambah perkhidmatan ketiga? (Cipta fail Bicep baru, tambah ke main.bicep, cipta folder src)
+- [ ] Bolehkah anda terangkan bagaimana API Gateway menemui Perkhidmatan Produk? (penemuan perkhidmatan berasaskan DNS)
+- [ ] Apa yang berlaku jika Perkhidmatan Produk tidak berfungsi? (Gateway mengembalikan ralat 503)
+- [ ] Bagaimana anda menambah perkhidmatan ketiga? (Cipta fail Bicep baru, tambah ke main.bicep, cipta folder src)
 
-**Pengesahan Praktikal**:
+**Pengesahan Praktikal:**
 ```bash
-# Simulasikan kegagalan perkhidmatan
+# Menyimulasikan kegagalan perkhidmatan
 az containerapp update --name <product-service-name> --min-replicas 0 --max-replicas 0
 curl $GATEWAY_URL/api/products
 # ✅ Dijangka: 503 Perkhidmatan Tidak Tersedia
 
-# Pulihkan perkhidmatan
+# Mengembalikan perkhidmatan
 az containerapp update --name <product-service-name> --min-replicas 1 --max-replicas 10
 ```
 
-### 2. Pemantauan & Pemerhatian ✓
+### 2. Pemantauan & Kebolehlihatan ✓
 
 Uji pengetahuan anda:
-- [ ] Di mana anda melihat log teragih? (Application Insights di Portal Azure)
-- [ ] Bagaimana anda menjejaki permintaan yang lambat? (Pertanyaan Kusto: `requests | where duration > 1000`)
-- [ ] Bolehkah anda mengenal pasti perkhidmatan mana yang menyebabkan ralat? (Periksa medan `cloud_RoleName` dalam log)
+- [ ] Di mana anda melihat log diedarkan? (Application Insights di Azure Portal)
+- [ ] Bagaimana anda mengesan permintaan perlahan? (Pertanyaan Kusto: `requests | where duration > 1000`)
+- [ ] Bolehkah anda kenal pasti perkhidmatan yang menyebabkan ralat? (Semak medan `cloud_RoleName` dalam log)
 
-**Pengesahan Praktikal**:
+**Pengesahan Praktikal:**
 ```bash
 # Hasilkan simulasi permintaan perlahan
 curl "$GATEWAY_URL/api/products?delay=2000"
 
-# Pertanyaan Application Insights untuk permintaan perlahan
-# Navigasi ke Portal Azure → Application Insights → Log
+# Kuiri Application Insights untuk permintaan perlahan
+# Navigasi ke Azure Portal → Application Insights → Logs
 # Jalankan: requests | where duration > 1000 | project timestamp, name, duration, cloud_RoleName
 ```
 
 ### 3. Skala & Prestasi ✓
 
 Uji pengetahuan anda:
-- [ ] Apa yang mencetuskan autoscaling? (Peraturan permintaan serentak HTTP: 50 untuk gateway, 100 untuk produk)
-- [ ] Berapa banyak replika yang sedang berjalan sekarang? (Periksa dengan `az containerapp revision list`)
-- [ ] Bagaimana anda akan menskala Product Service kepada 5 replika? (Kemas kini minReplicas dalam Bicep)
+- [ ] Apakah yang mencetuskan autoskala? (Peraturan permintaan serentak HTTP: 50 untuk gateway, 100 untuk produk)
+- [ ] Berapa banyak replika sedang berjalan sekarang? (Semak dengan `az containerapp revision list`)
+- [ ] Bagaimana anda skala Perkhidmatan Produk ke 5 replika? (Kemas kini minReplicas dalam Bicep)
 
-**Pengesahan Praktikal**:
+**Pengesahan Praktikal:**
 ```bash
-# Hasilkan beban untuk menguji penskalaan automatik
+# Hasilkan beban untuk menguji pengskalaan automatik
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Perhatikan peningkatan replika
-azd logs api-gateway --follow
-# ✅ Dijangka: Lihat acara penskalaan dalam log
+# Pantau peningkatan replika menggunakan Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
+# ✅ Dijangka: Lihat peristiwa penskalaan dalam log
 ```
 
 **Kriteria Kejayaan**: Anda boleh menjawab semua soalan dan mengesahkan dengan arahan praktikal.
@@ -1072,29 +1064,29 @@ azd logs api-gateway --follow
 ### Anggaran Kos Bulanan (Untuk Contoh 2-Perkhidmatan Ini)
 
 | Sumber | Konfigurasi | Anggaran Kos |
-|--------|-------------|--------------|
+|----------|--------------|--------------|
 | API Gateway | 2-20 replika, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 replika, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Tier asas | $5 |
+| Perkhidmatan Produk | 1-10 replika, 0.5 vCPU, 1GB RAM | $15-75 |
+| Container Registry | Tahap asas | $5 |
 | Application Insights | 1-2 GB/bulan | $5-10 |
 | Log Analytics | 1 GB/bulan | $3 |
 | **Jumlah** | | **$58-243/bulan** |
 
 ### Pecahan Kos Mengikut Penggunaan
 
-**Trafik ringan** (ujian/pembelajaran): ~$60/bulan
+**Trafik ringan** (ujian/pembelajaran): ~ $60/bulan
 - API Gateway: 2 replika × 24/7 = $30
-- Product Service: 1 replika × 24/7 = $15
+- Perkhidmatan Produk: 1 replika × 24/7 = $15
 - Pemantauan + Registry = $13
 
-**Trafik sederhana** (pengeluaran kecil): ~$120/bulan
+**Trafik sederhana** (pengeluaran kecil): ~ $120/bulan
 - API Gateway: 5 replika purata = $75
-- Product Service: 3 replika purata = $45
+- Perkhidmatan Produk: 3 replika purata = $45
 - Pemantauan + Registry = $13
 
-**Trafik tinggi** (tempoh sibuk): ~$240/bulan
+**Trafik tinggi** (tempoh sibuk): ~ $240/bulan
 - API Gateway: 15 replika purata = $225
-- Product Service: 8 replika purata = $120
+- Perkhidmatan Produk: 8 replika purata = $120
 - Pemantauan + Registry = $13
 
 ### Petua Pengoptimuman Kos
@@ -1113,7 +1105,7 @@ azd logs api-gateway --follow
 
 3. **Tetapkan Sampling Application Insights**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Sampel 50% daripada permintaan
+   appInsights.defaultClient.config.samplingPercentage = 50; // Contoh 50% daripada permintaan
    ```
 
 4. **Bersihkan Apabila Tidak Diperlukan**:
@@ -1121,7 +1113,7 @@ azd logs api-gateway --follow
    azd down --force --purge
    ```
 
-### Pilihan Tier Percuma
+### Pilihan Tahap Percuma
 
 Untuk pembelajaran/ujian, pertimbangkan:
 - ✅ Gunakan kredit percuma Azure ($200 untuk 30 hari pertama dengan akaun baru)
@@ -1129,30 +1121,30 @@ Untuk pembelajaran/ujian, pertimbangkan:
 - ✅ Padam selepas ujian (tiada caj berterusan)
 - ✅ Skala ke kosong antara sesi pembelajaran
 
-**Contoh**: Menjalankan contoh ini selama 2 jam/hari × 30 hari = ~$5/bulan berbanding $60/bulan
+**Contoh**: Menjalankan contoh ini 2 jam/hari × 30 hari = ~ $5/bulan berbanding $60/bulan
 
 ---
 
-## Rujukan Penyelesaian Masalah
+## Rujukan Pantas Penyelesaian Masalah
 
 ### Masalah: `azd up` gagal dengan "Subscription not found"
 
 **Penyelesaian**:
 ```bash
-# Log masuk semula dengan langganan eksplisit
+# Log masuk semula dengan langganan secara eksplisit
 az account set --subscription <your-subscription-id>
 azd env set AZURE_SUBSCRIPTION_ID <your-subscription-id>
 azd up
 ```
 
-### Masalah: API Gateway mengembalikan 503 "Product service unavailable"
+### Masalah: API Gateway mengembalikan 503 "Perkhidmatan produk tidak tersedia"
 
-**Diagnosis**:
+**Diagnosa**:
 ```bash
-# Periksa log perkhidmatan produk
-azd logs product-service --tail 50
+# Semak log perkhidmatan produk menggunakan Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
-# Periksa kesihatan perkhidmatan produk
+# Semak kesihatan perkhidmatan produk
 az containerapp show \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -1160,37 +1152,37 @@ az containerapp show \
 ```
 
 **Punca Biasa**:
-1. Perkhidmatan produk tidak bermula (periksa log untuk ralat Python)
-2. Pemeriksaan kesihatan gagal (sahkan endpoint `/health` berfungsi)
-3. Pembinaan imej kontena gagal (periksa registry untuk imej)
+1. Perkhidmatan produk tidak bermula (semak log untuk ralat Python)
+2. Pemeriksaan kesihatan gagal (sah `/health` berfungsi)
+3. Pembinaan imej container gagal (semak registry untuk imej)
 
-### Masalah: Autoscaling tidak berfungsi
+### Masalah: Autoskala tidak berfungsi
 
-**Diagnosis**:
+**Diagnosa**:
 ```bash
-# Periksa bilangan replika semasa
+# Semak kiraan replika semasa
 az containerapp revision list \
   --name $(azd env get-values | grep API_GATEWAY | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "[].properties.replicas"
 
-# Hasilkan beban untuk ujian
+# Jana beban untuk ujian
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Pantau acara penskalaan
-azd logs api-gateway --follow | grep -i scale
+# Pantau acara penalaan menggunakan Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
 **Punca Biasa**:
 1. Beban tidak cukup tinggi untuk mencetuskan peraturan skala (perlu >50 permintaan serentak)
-2. Replika maksimum telah dicapai (periksa konfigurasi Bicep)
-3. Peraturan skala salah dikonfigurasi dalam Bicep (sahkan nilai concurrentRequests)
+2. Replika maksimum sudah dicapai (semak konfigurasi Bicep)
+3. Peraturan skala salah konfigurasi dalam Bicep (sahkan nilai concurrentRequests)
 
-### Masalah: Application Insights tidak menunjukkan log
+### Masalah: Application Insights tidak memaparkan log
 
-**Diagnosis**:
+**Diagnosa**:
 ```bash
-# Sahkan rentetan sambungan telah ditetapkan
+# Sahkan rentetan sambungan ditetapkan
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Periksa jika perkhidmatan menghantar telemetri
@@ -1201,35 +1193,35 @@ az monitor app-insights component show \
 ```
 
 **Punca Biasa**:
-1. String sambungan tidak dihantar ke kontena (periksa pembolehubah persekitaran)
-2. SDK Application Insights tidak dikonfigurasi (sahkan import dalam kod)
-3. Firewall menyekat telemetri (jarang berlaku, periksa peraturan rangkaian)
+1. Rentetan sambungan tidak diserahkan kepada container (semak pembolehubah persekitaran)
+2. SDK Application Insights tidak dikonfigurasikan (sahkan import dalam kod)
+3. Firewall menghalang telemetri (jarang, semak peraturan rangkaian)
 
-### Masalah: Pembinaan Docker gagal secara tempatan
+### Masalah: Docker build gagal secara tempatan
 
-**Diagnosis**:
+**Diagnosa**:
 ```bash
-# Uji binaan API Gateway
+# Ujian binaan API Gateway
 cd src/api-gateway
 docker build -t test-gateway .
 
-# Uji binaan Perkhidmatan Produk
+# Ujian binaan Perkhidmatan Produk
 cd ../product-service
 docker build -t test-product .
 ```
 
 **Punca Biasa**:
-1. Kebergantungan hilang dalam package.json/requirements.txt
-2. Kesalahan sintaks Dockerfile
+1. Kekurangan kebergantungan dalam package.json/requirements.txt
+2. Ralat sintaks Dockerfile
 3. Masalah rangkaian memuat turun kebergantungan
 
-**Masih Buntu?** Lihat [Panduan Isu Biasa](../../docs/troubleshooting/common-issues.md) atau [Penyelesaian Masalah Azure Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+**Masih Tersangkut?** Lihat [Panduan Isu Biasa](../../docs/chapter-07-troubleshooting/common-issues.md) atau [Penyelesaian Masalah Azure Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
 ## Pembersihan
 
-Untuk mengelakkan caj berterusan, padamkan semua sumber:
+Untuk mengelakkan caj berterusan, padam semua sumber:
 
 ```bash
 azd down --force --purge
@@ -1240,11 +1232,11 @@ azd down --force --purge
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Taip `y` untuk mengesahkan.
+Taip `y` untuk sahkan.
 
-**Apa Yang Dipadamkan**:
+**Apa Yang Dipadam**:
 - Persekitaran Container Apps
-- Kedua-dua Container Apps (gateway & product service)
+- Kedua-dua Container Apps (gateway & perkhidmatan produk)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
@@ -1255,17 +1247,17 @@ Taip `y` untuk mengesahkan.
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Harus mengembalikan kosong.
+Patut mengembalikan kosong.
 
 ---
 
-## Panduan Pengembangan: Dari 2 ke 5+ Perkhidmatan
+## Panduan Perluasan: Dari 2 ke 5+ Perkhidmatan
 
-Setelah anda menguasai seni bina 2-perkhidmatan ini, berikut adalah cara untuk berkembang:
+Setelah anda menguasai seni bina 2-perkhidmatan ini, berikut cara mengembangkannya:
 
-### Fasa 1: Tambah Ketekalan Pangkalan Data (Langkah Seterusnya)
+### Fasa 1: Tambah Penyimpanan Pangkalan Data (Langkah Seterusnya)
 
-**Tambah Cosmos DB untuk Product Service**:
+**Tambah Cosmos DB untuk Perkhidmatan Produk**:
 
 1. Cipta `infra/core/cosmos.bicep`:
    ```bicep
@@ -1283,16 +1275,16 @@ Setelah anda menguasai seni bina 2-perkhidmatan ini, berikut adalah cara untuk b
 
 2. Kemas kini perkhidmatan produk untuk menggunakan Azure Cosmos DB Python SDK dan bukannya data dalam memori
 
-3. Anggaran kos tambahan: ~$25/bulan (serverless)
+3. Anggaran kos tambahan: ~ $25/bulan (serverless)
 
 ### Fasa 2: Tambah Perkhidmatan Ketiga (Pengurusan Pesanan)
 
-**Cipta Order Service**:
+**Cipta Perkhidmatan Pesanan**:
 
 1. Folder baru: `src/order-service/` (Python/Node.js/C#)
 2. Bicep baru: `infra/app/order-service.bicep`
-3. Kemas kini API Gateway untuk mengarahkan `/api/orders`
-4. Tambah Azure SQL Database untuk ketekalan pesanan
+3. Kemas kini API Gateway untuk laluan `/api/orders`
+4. Tambah Azure SQL Database untuk penyimpanan pesanan
 
 **Seni bina menjadi**:
 ```
@@ -1300,37 +1292,37 @@ API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Fasa 3: Tambah Komunikasi Asinkron (Service Bus)
+### Fasa 3: Tambah Komunikasi Async (Service Bus)
 
 **Laksanakan Seni Bina Berasaskan Acara**:
 
 1. Tambah Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service menerbitkan acara "ProductCreated"
-3. Order Service melanggan acara produk
-4. Tambah Notification Service untuk memproses acara
+2. Perkhidmatan Produk menerbitkan acara "ProductCreated"
+3. Perkhidmatan Pesanan melanggan acara produk
+4. Tambah Perkhidmatan Pemberitahuan untuk memproses acara
 
-**Corak**: Permintaan/Balasan (HTTP) + Berasaskan Acara (Service Bus)
+**Corak**: Permintaan/Respons (HTTP) + Berasaskan Acara (Service Bus)
 
 ### Fasa 4: Tambah Pengesahan Pengguna
 
-**Laksanakan User Service**:
+**Laksanakan Perkhidmatan Pengguna**:
 
 1. Cipta `src/user-service/` (Go/Node.js)
 2. Tambah Azure AD B2C atau pengesahan JWT tersuai
-3. API Gateway mengesahkan token sebelum mengarahkan
-4. Perkhidmatan memeriksa kebenaran pengguna
+3. API Gateway mengesahkan token sebelum laluan
+4. Perkhidmatan menyemak kebenaran pengguna
 
 ### Fasa 5: Kesediaan Pengeluaran
 
 **Tambah Komponen Ini**:
-- ✅ Azure Front Door (pengimbangan beban global)
+- ✅ Azure Front Door (imbangan beban global)
 - ✅ Azure Key Vault (pengurusan rahsia)
 - ✅ Azure Monitor Workbooks (papan pemuka tersuai)
-- ✅ CI/CD Pipeline (GitHub Actions)
-- ✅ Penyebaran Blue-Green
-- ✅ Managed Identity untuk semua perkhidmatan
+- ✅ Paip CI/CD (GitHub Actions)
+- ✅ Pengeluaran Biru-Hijau
+- ✅ Identiti Terkawal untuk semua perkhidmatan
 
-**Kos Seni Bina Pengeluaran Penuh**: ~$300-1,400/bulan
+**Kos Seni Bina Penuh Pengeluaran**: ~ $300-1,400/bulan
 
 ---
 
@@ -1338,82 +1330,82 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Dokumentasi Berkaitan
 - [Dokumentasi Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Panduan Seni Bina Microservices](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights untuk Penjejakan Teragih](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Panduan Seni Bina Mikroservis](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights untuk Jejakan Teragih](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Langkah Seterusnya dalam Kursus Ini
-- ← Sebelumnya: [API Flask Mudah](../../../../examples/container-app/simple-flask-api) - Contoh pemula satu kontena
+### Langkah Seterusnya Dalam Kursus Ini
+- ← Sebelumnya: [API Flask Mudah](../../../../examples/container-app/simple-flask-api) - Contoh mudah dengan satu container
 - → Seterusnya: [Panduan Integrasi AI](../../../../docs/ai-foundry) - Tambah keupayaan AI
-- 🏠 [Halaman Utama Kursus](../../README.md)
+- 🏠 [Laman Utama Kursus](../../README.md)
 
-### Perbandingan: Bila Nak Guna Apa
+### Perbandingan: Bila Menggunakan Apa
 
-| Ciri | Kontena Tunggal | Microservices (Ini) | Kubernetes (AKS) |
-|------|-----------------|---------------------|------------------|
+| Ciri | Single Container | Mikroservis (Ini) | Kubernetes (AKS) |
+|---------|-----------------|---------------------|------------------|
 | **Kes Penggunaan** | Aplikasi mudah | Aplikasi kompleks | Aplikasi perusahaan |
-| **Kebolehskalaan** | Perkhidmatan tunggal | Skala per perkhidmatan | Fleksibiliti maksimum |
+| **Skalabiliti** | Perkhidmatan tunggal | Skala per perkhidmatan | Fleksibiliti maksimum |
 | **Kerumitan** | Rendah | Sederhana | Tinggi |
 | **Saiz Pasukan** | 1-3 pembangun | 3-10 pembangun | 10+ pembangun |
-| **Kos** | ~$15-50/bulan | ~$60-250/bulan | ~$150-500/bulan |
+| **Kos** | ~ $15-50/bulan | ~ $60-250/bulan | ~ $150-500/bulan |
 | **Masa Penyebaran** | 5-10 minit | 8-12 minit | 15-30 minit |
 | **Terbaik Untuk** | MVP, prototaip | Aplikasi pengeluaran | Multi-cloud, rangkaian lanjutan |
 
-**Cadangan**: Mulakan dengan Container Apps (contoh ini), beralih ke AKS hanya jika anda memerlukan ciri khusus Kubernetes.
+**Cadangan**: Mula dengan Container Apps (contoh ini), beralih ke AKS hanya jika anda memerlukan ciri khusus Kubernetes.
 
 ---
 
 ## Soalan Lazim
 
-**S: Kenapa hanya 2 perkhidmatan dan bukan 5+?**  
-J: Perkembangan pembelajaran. Kuasai asas (komunikasi perkhidmatan, pemantauan, penskalaan) dengan contoh yang mudah sebelum menambah kerumitan. Corak yang anda pelajari di sini boleh digunakan untuk seni bina 100 perkhidmatan.
+**S: Mengapa hanya 2 perkhidmatan dan bukan 5+?**  
+J: Progres pendidikan. Kuasai asas (komunikasi perkhidmatan, pemantauan, penskalaan) dengan contoh mudah sebelum menambah kerumitan. Corak yang anda pelajari di sini digunakan untuk seni bina 100 perkhidmatan.
 
 **S: Bolehkah saya tambah lebih banyak perkhidmatan sendiri?**  
-J: Sudah tentu! Ikuti panduan pengembangan di atas. Setiap perkhidmatan baru mengikuti corak yang sama: buat folder src, buat fail Bicep, kemas kini azure.yaml, laksanakan.
+J: Sudah tentu! Ikuti panduan pengembangan di atas. Setiap perkhidmatan baru mengikuti corak yang sama: buat folder src, buat fail Bicep, kemas kini azure.yaml, lancarkan.
 
 **S: Adakah ini sedia untuk pengeluaran?**  
-J: Ia adalah asas yang kukuh. Untuk pengeluaran, tambahkan: identiti terurus, Key Vault, pangkalan data berterusan, saluran CI/CD, amaran pemantauan, dan strategi sandaran.
+J: Ia asas yang kukuh. Untuk pengeluaran, tambah: identiti terurus, Key Vault, pangkalan data persistens, saluran CI/CD, amaran pemantauan, dan strategi sandaran.
 
-**S: Kenapa tidak gunakan Dapr atau mesh perkhidmatan lain?**  
-J: Kekalkan kesederhanaan untuk pembelajaran. Setelah anda memahami rangkaian Container Apps asli, anda boleh menambah Dapr untuk senario lanjutan (pengurusan keadaan, pub/sub, pengikatan).
+**S: Mengapa tidak gunakan Dapr atau mesh perkhidmatan lain?**  
+J: Kekalkan mudah untuk pembelajaran. Setelah anda faham rangkaian Container Apps asli, anda boleh tambah Dapr untuk senario lanjutan (pengurusan keadaan, pub/sub, bindings).
 
-**S: Bagaimana saya debug secara tempatan?**  
-J: Jalankan perkhidmatan secara tempatan dengan Docker:  
+**S: Bagaimana saya debug secara lokal?**  
+J: Jalankan perkhidmatan secara lokal dengan Docker:  
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
   
-**S: Bolehkah saya gunakan bahasa pengaturcaraan yang berbeza?**  
-J: Ya! Contoh ini menunjukkan Node.js (gateway) + Python (perkhidmatan produk). Anda boleh mencampur mana-mana bahasa yang berjalan dalam kontena: C#, Go, Java, Ruby, PHP, dll.
+**S: Bolehkah saya menggunakan bahasa pengaturcaraan berbeza?**  
+J: Ya! Contoh ini menunjukkan Node.js (pintu masuk) + Python (perkhidmatan produk). Anda boleh gabungkan mana-mana bahasa yang berjalan dalam kontena: C#, Go, Java, Ruby, PHP, dan lain-lain.
 
-**S: Bagaimana jika saya tidak mempunyai kredit Azure?**  
-J: Gunakan tier percuma Azure (30 hari pertama dengan akaun baru mendapat kredit $200) atau laksanakan untuk tempoh ujian pendek dan hapuskan segera. Contoh ini berharga ~$2/hari.
+**S: Bagaimana jika saya tidak ada kredit Azure?**  
+J: Gunakan lapisan percuma Azure (30 hari pertama dengan akaun baru dapat kredit $200) atau lancarkan untuk tempoh ujian pendek dan padam segera. Contoh ini kos ~$2/hari.
 
-**S: Bagaimana ini berbeza daripada Azure Kubernetes Service (AKS)?**  
-J: Container Apps lebih mudah (tidak memerlukan pengetahuan Kubernetes) tetapi kurang fleksibel. AKS memberikan kawalan penuh Kubernetes tetapi memerlukan lebih banyak kepakaran. Mulakan dengan Container Apps, tingkatkan ke AKS jika diperlukan.
+**S: Apa bezanya dengan Azure Kubernetes Service (AKS)?**  
+J: Container Apps lebih mudah (tidak perlu tahu Kubernetes) tetapi kurang fleksibel. AKS beri kawalan penuh Kubernetes tapi perlukan kepakaran lebih. Mula dengan Container Apps, beralih ke AKS jika perlu.
 
-**S: Bolehkah saya gunakan ini dengan perkhidmatan Azure sedia ada?**  
-J: Ya! Anda boleh menyambung ke pangkalan data sedia ada, akaun storan, Service Bus, dll. Kemas kini fail Bicep untuk merujuk kepada sumber sedia ada dan bukannya mencipta yang baru.
+**S: Bolehkah saya guna ini dengan perkhidmatan Azure sedia ada?**  
+J: Ya! Anda boleh sambung ke pangkalan data sedia ada, akaun storan, Service Bus, dan lain-lain. Kemas kini fail Bicep untuk rujuk sumber sedia ada, tidak buat baru.
 
 ---
 
-> **🎓 Ringkasan Laluan Pembelajaran**: Anda telah belajar untuk melaksanakan seni bina pelbagai perkhidmatan dengan penskalaan automatik, rangkaian dalaman, pemantauan berpusat, dan corak sedia pengeluaran. Asas ini menyediakan anda untuk sistem teragih yang kompleks dan seni bina mikroservis perusahaan.
+> **🎓 Ringkasan Laluan Pembelajaran**: Anda telah belajar melancarkan seni bina multi-perkhidmatan dengan penskalaan automatik, rangkaian dalaman, pemantauan pusat, dan corak sedia pengeluaran. Asas ini sediakan anda untuk sistem teragih kompleks dan seni bina mikroservis perusahaan.
 
 **📚 Navigasi Kursus:**
-- ← Sebelumnya: [API Flask Mudah](../../../../examples/container-app/simple-flask-api)
+- ← Sebelum: [Simple Flask API](../../../../examples/container-app/simple-flask-api)
 - → Seterusnya: [Contoh Integrasi Pangkalan Data](../../../../database-app)
-- 🏠 [Halaman Utama Kursus](../../README.md)
-- 📖 [Amalan Terbaik Container Apps](../../docs/deployment/deployment-guide.md)
+- 🏠 [Laman Utama Kursus](../../README.md)
+- 📖 [Amalan Terbaik Container Apps](../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
-**✨ Tahniah!** Anda telah melengkapkan contoh mikroservis. Anda kini memahami cara membina, melaksanakan, dan memantau aplikasi teragih di Azure Container Apps. Sedia untuk menambah keupayaan AI? Lihat [Panduan Integrasi AI](../../../../docs/ai-foundry)!
+**✨ Tahniah!** Anda telah lengkap contoh mikroservis. Kini anda faham cara bina, lancar, dan pantau aplikasi teragih di Azure Container Apps. Sedia untuk tambah keupayaan AI? Lihat [Panduan Integrasi AI](../../../../docs/ai-foundry)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

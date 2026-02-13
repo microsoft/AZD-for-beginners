@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-24T12:14:32+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "ur"
-}
--->
-# 4. ٹیمپلیٹ کو ترتیب دیں
+# 4. ایک ٹیمپلیٹ ترتیب دیں
 
-!!! tip "اس ماڈیول کے اختتام تک آپ یہ کرنے کے قابل ہوں گے"
+!!! tip "اس ماڈیول کے اختتام تک آپ قابل ہو جائیں گے"
 
-    - [ ] `azure.yaml` کا مقصد سمجھنا
-    - [ ] `azure.yaml` کی ساخت کو سمجھنا
-    - [ ] azd لائف سائیکل `hooks` کی اہمیت کو سمجھنا
-    - [ ] **لیب 3:** 
+    - [ ] `azure.yaml` کا مقصد سمجھیں
+    - [ ] `azure.yaml` کی ساخت کو سمجھیں
+    - [ ] azd lifecycle `hooks` کی اہمیت کو سمجھیں
+    - [ ] **لیب 4:** ماحول کے متغیرات کو دریافت اور ترمیم کریں
 
 ---
 
-!!! prompt "`azure.yaml` فائل کیا کرتی ہے؟ کوڈفینس استعمال کریں اور اسے لائن بہ لائن وضاحت کریں"
+!!! prompt "`azure.yaml` فائل کیا کرتی ہے؟ کوڈفینس کا استعمال کریں اور لائن بہ لائن وضاحت کریں"
 
-      `azure.yaml` فائل **Azure Developer CLI (azd)** کے لیے کنفیگریشن فائل ہے۔ یہ وضاحت کرتی ہے کہ آپ کی ایپلیکیشن کو Azure پر کیسے ڈیپلائی کیا جائے، جس میں انفراسٹرکچر، سروسز، ڈیپلائیمنٹ ہکس، اور ماحول کے متغیرات شامل ہیں۔
+      `azure.yaml` فائل **Azure Developer CLI (azd)** کے لیے تشکیل کی فائل ہے۔ یہ تعریف کرتی ہے کہ آپ کی ایپلیکیشن کو Azure پر کیسے تعینات کیا جانا چاہیے، جس میں انفراسٹرکچر، خدمات، تعیناتی hooks، اور ماحول کے متغیرات شامل ہیں۔
 
 ---
 
 ## 1. مقصد اور فعالیت
 
-یہ `azure.yaml` فائل ایک AI ایجنٹ ایپلیکیشن کے لیے **ڈیپلائیمنٹ بلیوپرنٹ** کے طور پر کام کرتی ہے جو:
+یہ `azure.yaml` فائل ایک AI ایجنٹ ایپلیکیشن کے لیے **تعیناتی خاکہ** کے طور پر کام کرتی ہے جو:
 
-1. **ماحول کی تصدیق کرتی ہے** ڈیپلائیمنٹ سے پہلے
-2. **Azure AI سروسز فراہم کرتی ہے** (AI Hub، AI Project، Search، وغیرہ)
-3. **Python ایپلیکیشن کو Azure Container Apps پر ڈیپلائی کرتی ہے**
-4. **AI ماڈلز کو ترتیب دیتی ہے** چیٹ اور ایمبیڈنگ فنکشنلٹی کے لیے
-5. **مانیٹرنگ اور ٹریسنگ سیٹ اپ کرتی ہے** AI ایپلیکیشن کے لیے
-6. **نئے اور موجودہ** Azure AI پروجیکٹ کے منظرنامے سنبھالتی ہے
+1. تعیناتی سے پہلے **ماحول کی توثیق** کرتی ہے
+2. **Azure AI خدمات** فراہم کرتی ہے (AI Hub، AI Project، Search وغیرہ)
+3. Azure Container Apps پر **Python ایپلیکیشن تعینات کرتی ہے**
+4. چیٹ اور ایمبیڈنگ فنکشنالٹی کے لیے **AI ماڈلز کو ترتیب دیتی ہے**
+5. AI ایپلیکیشن کے لیے **مانیٹرنگ اور ٹریسنگ** سیٹ اپ کرتی ہے
+6. نئے اور موجودہ **Azure AI پروجیکٹ کے حالات** کو سنبھالتی ہے
 
-یہ فائل **ایک کمانڈ ڈیپلائیمنٹ** (`azd up`) کو ممکن بناتی ہے، جس میں مناسب تصدیق، فراہمی، اور ڈیپلائیمنٹ کے بعد کی ترتیب شامل ہے۔
+یہ فائل ایک مکمل AI ایجنٹ حل کی **ایک کمانڈ تعیناتی** (`azd up`) ممکن بناتی ہے جس میں مناسب توثیق، پروویژننگ، اور تعیناتی کے بعد کی ترتیب شامل ہے۔
 
-??? info "دیکھنے کے لیے وسعت دیں: `azure.yaml`"
+??? info "مکمل دیکھنے کے لیے بڑھائیں: `azure.yaml`"
 
-      `azure.yaml` فائل وضاحت کرتی ہے کہ Azure Developer CLI کو اس AI ایجنٹ ایپلیکیشن کو Azure میں کیسے ڈیپلائی اور مینیج کرنا چاہیے۔ آئیے اسے لائن بہ لائن توڑ کر دیکھتے ہیں۔
+      `azure.yaml` فائل وضاحت کرتی ہے کہ Azure Developer CLI اس AI ایجنٹ ایپلیکیشن کو Azure میں کیسے تعینات اور منظم کرے۔ آئیے اسے لائن بہ لائن دیکھتے ہیں۔
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: کیا ہمیں ہکس کی ضرورت ہے؟
-      # TODO: کیا ہمیں تمام متغیرات کی ضرورت ہے؟
+      # TODO: کیا ہمیں hooks کی ضرورت ہے؟ 
+      # TODO: کیا ہمیں تمام variables کی ضرورت ہے؟
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,9 +126,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## 2. فائل کو ڈی کنسٹرکٹ کرنا
+## 2. فائل کی وضاحت
 
-آئیے فائل کو سیکشن بہ سیکشن دیکھتے ہیں تاکہ یہ سمجھ سکیں کہ یہ کیا کرتی ہے - اور کیوں۔
+آئیے فائل کو سیکشن بہ سیکشن دیکھتے ہیں تاکہ سمجھ سکیں کہ یہ کیا کرتی ہے اور کیوں۔
 
 ### 2.1 **ہیڈر اور اسکیمہ (1-3)**
 
@@ -145,7 +136,7 @@ CO_OP_TRANSLATOR_METADATA:
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **لائن 1**: IDE سپورٹ اور IntelliSense کے لیے YAML لینگویج سرور اسکیمہ کی توثیق فراہم کرتا ہے
+- **لائن 1**: IDE سپورٹ اور IntelliSense کے لیے YAML لینگویج سرور اسکیمہ کی تصدیق فراہم کرتا ہے
 
 ### 2.2 پروجیکٹ میٹا ڈیٹا (5-10)
 
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **لائن 5**: پروجیکٹ کا نام وضاحت کرتا ہے جو Azure Developer CLI استعمال کرتا ہے
-- **لائنز 6-7**: وضاحت کرتا ہے کہ یہ ٹیمپلیٹ ورژن 1.0.2 پر مبنی ہے
-- **لائنز 8-9**: Azure Developer CLI ورژن 1.14.0 یا اس سے زیادہ کی ضرورت ہے
+- **لائن 5**: Azure Developer CLI کے ذریعہ استعمال ہونے والا پروجیکٹ نام متعین کرتا ہے
+- **لائنز 6-7**: بتاتا ہے کہ یہ ٹیمپلیٹ ورژن 1.0.2 پر مبنی ہے
+- **لائنز 8-9**: Azure Developer CLI ورژن 1.14.0 یا اس سے اوپر کی ضرورت ہے
 
-### 2.3 ڈیپلائی ہکس (11-40)
+### 2.3 تعیناتی hooks (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **لائنز 11-20**: **پری ڈیپلائیمنٹ ہک** - `azd up` سے پہلے چلتا ہے
+- **لائنز 11-20**: **پری-تعیناتی ہک** - `azd up` سے پہلے چلتا ہے
 
-      - Unix/Linux پر: ویلیڈیشن اسکرپٹ کو قابل عمل بناتا ہے اور اسے چلاتا ہے
-      - Windows پر: پاور شیل ویلیڈیشن اسکرپٹ چلاتا ہے
-      - دونوں انٹرایکٹو ہیں اور اگر ناکام ہوں تو ڈیپلائیمنٹ روک دیں گے
+      - Unix/Linux پر: توثیقی اسکرپٹ کو قابلِ عمل بناتا ہے اور چلایا جاتا ہے
+      - Windows پر: PowerShell توثیقی اسکرپٹ چلائی جاتی ہے
+      - دونوں انٹرایکٹو ہیں اور ناکامی کی صورت میں تعیناتی روک دیتے ہیں
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **لائنز 21-30**: **پوسٹ پروویژن ہک** - Azure وسائل کے بننے کے بعد چلتا ہے
+- **لائنز 21-30**: **پوسٹ-پروویژن ہک** - Azure وسائل کے بننے کے بعد چلتا ہے
 
-  - ماحول کے متغیرات لکھنے والے اسکرپٹس کو چلاتا ہے
-  - اگر یہ اسکرپٹس ناکام ہوں تو بھی ڈیپلائیمنٹ جاری رکھتا ہے (`continueOnError: true`)
+  - ماحول کے متغیرات لکھنے والے اسکرپٹس چلائے جاتے ہیں
+  - اگر یہ اسکرپٹس ناکام ہوں تو بھی تعیناتی جاری رہتی ہے (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **لائنز 31-40**: **پوسٹ ڈیپلائی ہک** - ایپلیکیشن ڈیپلائیمنٹ کے بعد چلتا ہے
+- **لائنز 31-40**: **پوسٹ-تعیناتی ہک** - ایپلیکیشن کی تعیناتی کے بعد چلتا ہے
 
-  - آخری سیٹ اپ اسکرپٹس کو چلاتا ہے
-  - اسکرپٹس ناکام ہونے پر بھی جاری رہتا ہے
+  - آخری سیٹ اپ اسکرپٹس چلاتا ہے
+  - اگر اسکرپٹس ناکام ہوں تو بھی جاری رہتا ہے
 
-### 2.4 سروس کنفیگریشن (41-48)
+### 2.4 سروس کی تشکیل (41-48)
 
-یہ آپ کی ایپلیکیشن سروس کو ترتیب دیتا ہے جو آپ ڈیپلائی کر رہے ہیں۔
+یہ اس ایپلیکیشن سروس کو ترتیب دیتا ہے جسے آپ تعینات کر رہے ہیں۔
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **لائن 42**: ایک سروس "api_and_frontend" کے نام سے وضاحت کرتا ہے
-- **لائن 43**: سورس کوڈ کے لیے `./src` ڈائریکٹری کی طرف اشارہ کرتا ہے
-- **لائن 44**: Python کو پروگرامنگ زبان کے طور پر وضاحت کرتا ہے
-- **لائن 45**: Azure Container Apps کو ہوسٹنگ پلیٹ فارم کے طور پر استعمال کرتا ہے
-- **لائنز 46-48**: Docker کنفیگریشن
+- **لائن 42**: "api_and_frontend" نامی سروس کی تعریف کرتا ہے
+- **لائن 43**: سورس کوڈ کے لیے `./src` فولڈر کی نشاندہی کرتا ہے
+- **لائن 44**: پروگرامنگ زبان Python متعین کی گئی ہے
+- **لائن 45**: میزبان پلیٹ فارم کے طور پر Azure Container Apps استعمال کرتا ہے
+- **لائنز 46-48**: ڈاکر کی تشکیل
 
-      - "api_and_frontend" کو امیج نام کے طور پر استعمال کرتا ہے
-      - Docker امیج کو Azure میں ریموٹلی بناتا ہے (لوکل میں نہیں)
+      - "api_and_frontend" کو امیج کے نام کے طور پر استعمال کرتا ہے
+      - Azure میں ڈاکر امیج کو دور سے بناتا ہے (مقامی نہیں)
 
 ### 2.5 پائپ لائن متغیرات (49-76)
 
-یہ متغیرات آپ کو CI/CD پائپ لائنز میں `azd` چلانے میں مدد دیتے ہیں
+یہ وہ متغیرات ہیں جو آپ کو CI/CD پائپ لائنز میں `azd` چلانے میں مدد دیتے ہیں تاکہ خودکاری ممکن ہو
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-یہ سیکشن وضاحت کرتا ہے کہ **ڈیپلائیمنٹ کے دوران** استعمال ہونے والے ماحول کے متغیرات، جو زمرے کے لحاظ سے منظم ہیں:
+یہ سیکشن وہ ماحول کے متغیرات مخصوص کرتا ہے جو **تعیناتی کے دوران** استعمال ہوتے ہیں، درج ذیل زمروں میں منظم:
 
 - **Azure وسائل کے نام (لائنز 51-60)**:
-      - بنیادی Azure سروس وسائل کے نام جیسے Resource Group، AI Hub، AI Project، وغیرہ
-- **فیچر فلیگز (لائنز 61-63)**:
-      - مخصوص Azure سروسز کو فعال/غیر فعال کرنے کے لیے بولین متغیرات
-- **AI ایجنٹ کنفیگریشن (لائنز 64-71)**:
-      - مرکزی AI ایجنٹ کے لیے کنفیگریشن، جس میں نام، ID، ڈیپلائیمنٹ سیٹنگز، ماڈل کی تفصیلات شامل ہیں
-- **AI ایمبیڈنگ کنفیگریشن (لائنز 72-79)**:
-      - ایمبیڈنگ ماڈل کے لیے کنفیگریشن جو ویکٹر سرچ کے لیے استعمال ہوتا ہے
-- **سرچ اور مانیٹرنگ (لائنز 80-84)**:
-      - سرچ انڈیکس کا نام، موجودہ وسائل کے IDs، اور مانیٹرنگ/ٹریسنگ سیٹنگز
+      - بنیادی Azure سروسز کے وسائل کے نام جیسے Resource Group، AI Hub، AI Project وغیرہ
+- **فیچر کے جھنڈے (لائنز 61-63)**:
+      - مخصوص Azure خدمات کو فعال/غیر فعال کرنے کے لیے بولین متغیرات
+- **AI ایجنٹ کی ترتیب (لائنز 64-71)**:
+      - مرکزی AI ایجنٹ کی تشکیل بشمول نام، ID، تعیناتی کی ترتیبات، ماڈل کی تفصیلات
+- **AI ایمبیڈنگ کی تشکیل (لائنز 72-79)**:
+      - ویکٹر تلاش کے لیے استعمال ہونے والے ایمبیڈنگ ماڈل کی ترتیب
+- **تلاش اور مانیٹرنگ (لائنز 80-84)**:
+      - تلاش انڈیکس کا نام، موجودہ وسائل کی IDs، اور مانیٹرنگ/ٹریسنگ کی ترتیبات
 
 ---
 
 ## 3. ماحول کے متغیرات کو جانیں
-مندرجہ ذیل ماحول کے متغیرات آپ کے ڈیپلائیمنٹ کی کنفیگریشن اور رویے کو کنٹرول کرتے ہیں، ان کے بنیادی مقصد کے لحاظ سے منظم ہیں۔ زیادہ تر متغیرات کے معقول ڈیفالٹس ہیں، لیکن آپ انہیں اپنی مخصوص ضروریات یا موجودہ Azure وسائل کے مطابق حسب ضرورت بنا سکتے ہیں۔
+مندرجہ ذیل ماحول کے متغیرات آپ کی تعیناتی کی تشکیل اور رویے کو کنٹرول کرتے ہیں، جنہیں ان کے بنیادی مقصد کے مطابق منظم کیا گیا ہے۔ زیادہ تر متغیرات معقول ڈیفالٹس رکھتے ہیں، لیکن آپ انہیں اپنی مخصوص ضروریات یا موجودہ Azure وسائل کے مطابق حسب ضرورت بنا سکتے ہیں۔
 
 ### 3.1 ضروری متغیرات 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# مرکزی ایژر کنفیگریشن
+AZURE_ENV_NAME                    # ماحول کا نام (وسیلے کے نام میں استعمال ہوتا ہے)
+AZURE_LOCATION                    # تعیناتی کا خطہ
+AZURE_SUBSCRIPTION_ID             # ہدف کی رکنیت
+AZURE_RESOURCE_GROUP              # وسائل کے گروپ کا نام
+AZURE_PRINCIPAL_ID                # RBAC کے لئے صارف کا پرنسپل
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# وسائل کے نام (اگر مخصوص نہ کیے جائیں تو خود بخود تیار ہوتے ہیں)
+AZURE_AIHUB_NAME                  # مائیکروسافٹ فاؤنڈری حب کا نام
+AZURE_AIPROJECT_NAME              # AI پروجیکٹ کا نام
+AZURE_AISERVICES_NAME             # AI خدمات اکاؤنٹ کا نام
+AZURE_STORAGE_ACCOUNT_NAME        # اسٹوریج اکاؤنٹ کا نام
+AZURE_CONTAINER_REGISTRY_NAME     # کنٹینر رجسٹری کا نام
+AZURE_KEYVAULT_NAME               # کی والٹ کا نام (اگر استعمال ہو)
 ```
 
-### 3.2 ماڈل کنفیگریشن 
+### 3.2 ماڈل کی تشکیل 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# چیٹ ماڈل کی تشکیل
+AZURE_AI_AGENT_MODEL_NAME         # ڈیفالٹ: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # ڈیفالٹ: OpenAI (یا Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # ڈیفالٹ: تازہ ترین دستیاب
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # چیٹ ماڈل کے لیے ڈپلائمنٹ نام
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # ڈیفالٹ: معیاری
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # ڈیفالٹ: 80 (ہزاروں TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# ایمبیڈنگ ماڈل کی تشکیل
+AZURE_AI_EMBED_MODEL_NAME         # ڈیفالٹ: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # ڈیفالٹ: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # ڈیفالٹ: تازہ ترین دستیاب
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # ایمبیڈنگ کے لیے ڈپلائمنٹ نام
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # ڈیفالٹ: معیاری
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # ڈیفالٹ: 50 (ہزاروں TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# ایجنٹ کی تشکیل
+AZURE_AI_AGENT_NAME               # ایجنٹ کا ڈسپلے نام
+AZURE_EXISTING_AGENT_ID           # موجودہ ایجنٹ استعمال کریں (اختیاری)
 ```
 
 ### 3.3 فیچر ٹوگل
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# اختیاری خدمات
+USE_APPLICATION_INSIGHTS         # ڈیفالٹ: درست
+USE_AZURE_AI_SEARCH_SERVICE      # ڈیفالٹ: غلط
+USE_CONTAINER_REGISTRY           # ڈیفالٹ: درست
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# نگرانی اور ٹریسنگ
+ENABLE_AZURE_MONITOR_TRACING     # ڈیفالٹ: غلط
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # ڈیفالٹ: غلط
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# تلاش کی ترتیب
+AZURE_AI_SEARCH_INDEX_NAME       # تلاش کے انڈیکس کا نام
+AZURE_SEARCH_SERVICE_NAME        # تلاش کی خدمت کا نام
 ```
 
-### 3.4 AI پروجیکٹ کنفیگریشن 
+### 3.4 AI پروجیکٹ کی تشکیل 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# موجودہ وسائل کا استعمال کریں
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # موجودہ AI پروجیکٹ کا مکمل ریسورس آئی ڈی
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # موجودہ پروجیکٹ کا اینڈ پوائنٹ یو آر ایل
 ```
 
 ### 3.5 اپنے متغیرات چیک کریں
 
-Azure Developer CLI استعمال کریں تاکہ اپنے ماحول کے متغیرات کو دیکھیں اور مینیج کریں:
+اپنے ماحول کے متغیرات دیکھنے اور منظم کرنے کے لیے Azure Developer CLI استعمال کریں:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# موجودہ ماحول کے تمام ماحول کی متغیرات دیکھیں
 azd env get-values
 
-# Get a specific environment variable
+# ایک مخصوص ماحول کی متغیر حاصل کریں
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# ایک ماحول کی متغیر سیٹ کریں
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# .env فائل سے متعدد متغیرات سیٹ کریں
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**دستخطی نوٹ**:
+یہ دستاویز اے آئی ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم ذہن نشین رکھیں کہ خودکار ترجمے میں غلطیاں یا غیر یقینی معلومات ہو سکتی ہیں۔ اصل دستاویز کو اس کی مادری زبان میں معتبر ماخذ سمجھا جانا چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم قبول نہیں کرتے۔
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

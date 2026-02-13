@@ -1,448 +1,454 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T18:02:28+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "ro"
-}
--->
-# Foaie de parcurs a comenzilor - Comenzi esențiale AZD
+# Fișă de Comenzi Rapidă - Comenzi Esențiale AZD
 
-**Referință rapidă pentru toate capitolele**
-- **📚 Acasă curs**: [AZD Pentru Începători](../README.md)
-- **📖 Start Rapid**: [Capitolul 1: Fundamente & Start Rapid](../README.md#-chapter-1-foundation--quick-start)
+**Referință Rapidă pentru Toate Capitolele**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../README.md)
+- **📖 Start Rapid**: [Capitolul 1: Bază & Start Rapid](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 Comenzi AI**: [Capitolul 2: Dezvoltare AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avansat**: [Capitolul 4: Infrastructură ca Cod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introducere
 
-Această foaie de parcurs cuprinzătoare oferă o referință rapidă pentru cele mai utilizate comenzi Azure Developer CLI, organizate pe categorii cu exemple practice. Perfectă pentru consultări rapide în timpul dezvoltării, depanării și operațiunilor zilnice cu proiectele azd.
+Această fișă de comenzi cuprinzătoare oferă o referință rapidă pentru cele mai utilizate comenzi Azure Developer CLI, organizate pe categorii cu exemple practice. Perfectă pentru verificări rapide în timpul dezvoltării, depanării și operațiunilor zilnice cu proiecte azd.
 
-## Obiective de învățare
+## Obiective de Învățare
 
-Prin utilizarea acestei foi de parcurs, vei:
-- Avea acces instant la comenzile esențiale Azure Developer CLI și sintaxa acestora
+Folosind această fișă de comenzi, vei:
+- Avea acces instant la comenzile și sintaxa esențială Azure Developer CLI
 - Înțelege organizarea comenzilor pe categorii funcționale și cazuri de utilizare
 - Consulta exemple practice pentru scenarii comune de dezvoltare și implementare
 - Accesa comenzi de depanare pentru rezolvarea rapidă a problemelor
 - Găsi opțiuni avansate de configurare și personalizare eficient
-- Localiza comenzi pentru gestionarea mediului și fluxuri de lucru multi-mediu
+- Localiza comenzi pentru gestionarea mediului și fluxuri multi-mediu
 
-## Rezultate de învățare
+## Rezultate de Învățare
 
-Cu referințe regulate la această foaie de parcurs, vei putea:
-- Executa comenzi azd cu încredere fără a consulta documentația completă
-- Rezolva rapid problemele comune utilizând comenzi de diagnostic adecvate
-- Gestiona eficient mai multe medii și scenarii de implementare
-- Aplica funcționalități avansate azd și opțiuni de configurare după necesitate
-- Depana problemele de implementare utilizând secvențe sistematice de comenzi
+Referindu-te regulat la această fișă de comenzi, vei putea:
+- Executa comenzile azd cu încredere fără să mai consulți documentația completă
+- Rezolva rapid probleme comune folosind comenzile de diagnostic adecvate
+- Gestionează eficient multiple medii și scenarii de implementare
+- Aplica funcționalități avansate azd și opțiuni de configurare după necesități
+- Depana probleme de implementare cu secvențe de comenzi sistematice
 - Optimiza fluxurile de lucru prin utilizarea eficientă a scurtăturilor și opțiunilor azd
 
-## Comenzi de început
+## Comenzi Pentru Început
 
 ### Autentificare
 ```bash
-# Login to Azure (uses Azure CLI)
+# Autentificare în Azure prin AZD
+azd auth login
+
+# Autentificare în Azure CLI (AZD folosește acest lucru în fundal)
 az login
 
-# Check current account
+# Verifică contul curent
 az account show
 
-# Set default subscription
+# Setează abonamentul implicit
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# Deconectare din AZD
+azd auth logout
+
+# Deconectare din Azure CLI
+az logout
 ```
 
-### Inițializarea proiectului
+### Inițializarea Proiectului
 ```bash
-# Browse available templates
+# Răsfoiește șabloanele disponibile
 azd template list
 
-# Initialize from template
+# Inițializează din șablon
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# Inițializează în directorul curent
 azd init .
 
-# Initialize with custom name
+# Inițializează cu nume personalizat
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Comenzi principale de implementare
+## Comenzi Principale de Implementare
 
-### Flux complet de implementare
+### Flux Complet de Implementare
 ```bash
-# Deploy everything (provision + deploy)
+# Deplasează totul (provizionare + implementare)
 azd up
 
-# Deploy with confirmation prompts disabled
+# Deplasează cu solicitările de confirmare dezactivate
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# Deplasează într-un mediu specific
 azd up --environment production
 
-# Deploy with custom parameters
+# Deplasează cu parametri personalizați
 azd up --parameter location=westus2
 ```
 
-### Doar infrastructura
+### Doar Infrastructură
 ```bash
-# Provision Azure resources
+# Configurare resurse Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 Previziune a modificărilor infrastructurii
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# Arată o vedere simulatǎ a resurselor care ar fi create/modificate/șterse
+# Similar cu 'terraform plan' sau 'bicep what-if' - sigur de rulat, fără modificări aplicate
 ```
 
-### Doar aplicația
+### Doar Aplicație
 ```bash
-# Deploy application code
+# Implementați codul aplicației
 azd deploy
 
-# Deploy specific service
+# Implementați serviciul specific
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# Implementați toate serviciile
 azd deploy --all
 ```
 
-### Construire și pachetare
+### Construire și Împachetare
 ```bash
-# Build applications
+# Construiește aplicații
 azd package
 
-# Build specific service
+# Construiește serviciul specific
 azd package --service api
 ```
 
-## 🌍 Gestionarea mediului
+## 🌍 Gestionarea Mediului
 
-### Operațiuni de mediu
+### Operațiuni pe Mediu
 ```bash
-# List all environments
+# Listează toate mediile
 azd env list
 
-# Create new environment
+# Creează un mediu nou
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# Selectează mediul
 azd env select production
 
-# Show current environment
+# Afișează mediul curent
 azd env show
 
-# Refresh environment state
+# Reîmprospătează starea mediului
 azd env refresh
 ```
 
-### Variabile de mediu
+### Variabile de Mediu
 ```bash
-# Set environment variable
+# Setează variabila de mediu
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# Obține variabila de mediu
 azd env get API_KEY
 
-# List all environment variables
+# Listează toate variabilele de mediu
 azd env get-values
 
-# Remove environment variable
+# Elimină variabila de mediu
 azd env unset DEBUG
 ```
 
-## ⚙️ Comenzi de configurare
+## ⚙️ Comenzi de Configurare
 
-### Configurare globală
+### Configurare Globală
 ```bash
-# List all configuration
+# Listează toate configurațiile
 azd config list
 
-# Set global defaults
+# Setează valorile implicite globale
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# Elimină configurația
 azd config unset defaults.location
 
-# Reset all configuration
+# Resetează toate configurațiile
 azd config reset
 ```
 
-### Configurare proiect
+### Configurare Proiect
 ```bash
-# Validate azure.yaml
+# Validează azure.yaml
 azd config validate
 
-# Show project information
+# Afișează informații despre proiect
 azd show
 
-# Get service endpoints
+# Obține punctele finale ale serviciului
 azd show --output json
 ```
 
-## 📊 Monitorizare și jurnale
+## 📊 Monitorizare și Diagnostic
 
-### Jurnale aplicație
+### Panou Monitorizare
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### Monitorizare
-```bash
-# Open Azure portal for monitoring
+# Deschide tabloul de bord de monitorizare din portalul Azure
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Deschide metricele în direct din Application Insights
+azd monitor --live
+
+# Deschide panoul de jurnale din Application Insights
+azd monitor --logs
+
+# Deschide prezentarea generală din Application Insights
+azd monitor --overview
 ```
 
-## 🛠️ Comenzi de întreținere
+### Vizualizare Jurnale Container
+```bash
+# Vizualizați jurnalele prin Azure CLI (pentru aplicații containerizate)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Urmăriți jurnalele în timp real
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Vizualizați jurnalele din portalul Azure
+azd monitor --logs
+```
+
+### Interogări Log Analytics
+```bash
+# Accesați Log Analytics prin portalul Azure
+azd monitor --logs
+
+# Interogați jurnalele folosind Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
+```
+
+## 🛠️ Comenzi de Mentenanță
 
 ### Curățare
 ```bash
-# Remove all Azure resources
+# Elimină toate resursele Azure
 azd down
 
-# Force delete without confirmation
+# Ștergere forțată fără confirmare
 azd down --force
 
-# Purge soft-deleted resources
+# Curăță resursele șterse soft
 azd down --purge
 
-# Complete cleanup
+# Curățare completă
 azd down --force --purge
 ```
 
 ### Actualizări
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# Verifică pentru actualizări azd
 azd version
 
-# Show system information
-azd info
+# Obține versiunea curentă
+azd version
+
+# Vizualizează configurația curentă
+azd config list
 ```
 
-## 🔧 Comenzi avansate
+## 🔧 Comenzi Avansate
 
 ### Pipeline și CI/CD
 ```bash
-# Configure GitHub Actions
+# Configurează GitHub Actions
 azd pipeline config
 
-# Configure Azure DevOps
+# Configurează Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# Afișează configurația pipeline-ului
 azd pipeline show
 ```
 
-### Gestionarea infrastructurii
+### Gestionarea Infrastructurii
 ```bash
-# Import existing resources
-azd infra import
+# Generează șabloane de infrastructură
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Previziune și planificare a infrastructurii
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Simulează aprovizionarea infrastructurii fără a implementa
+# Analizează șabloanele Bicep/Terraform și afișează:
+# - Resurse ce urmează a fi adăugate (verde +)
+# - Resurse ce urmează a fi modificate (galben ~)
+# - Resurse ce urmează a fi șterse (roșu -)
+# Sigur de rulat - nu se fac modificări reale în mediul Azure
+
+# Sintezează infrastructura din azure.yaml
+azd infra synth
 ```
 
-### Gestionarea serviciilor
+### Informații Proiect
 ```bash
-# List all services
-azd service list
+# Afișează starea proiectului și punctele finale
+azd show
 
-# Show service details
-azd service show --service web
+# Afișează informații detaliate despre proiect în format JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Obține punctele finale ale serviciului
+azd show --output json | jq '.services'
 ```
 
-## 🎯 Fluxuri rapide de lucru
+## 🎯 Fluxuri Rapide
 
-### Flux de lucru pentru dezvoltare
+### Flux de Dezvoltare
 ```bash
-# Start new project
+# Începe proiect nou
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# Publică în dezvoltare
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# Fă modificări și republică
 azd deploy
 
-# View logs
-azd logs --follow
+# Deschide panoul de monitorizare
+azd monitor --live
 ```
 
-### Flux de lucru multi-mediu
+### Flux Multi-Mediu
 ```bash
-# Set up environments
+# Configurează mediile
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# Fă deploy în dev
 azd env select dev
 azd up
 
-# Test and promote to staging
+# Testează și promovează în staging
 azd env select staging
 azd up
 
-# Deploy to production
+# Fă deploy în producție
 azd env select production
 azd up
 ```
 
-### Flux de lucru pentru depanare
+### Flux de Depanare
 ```bash
-# Enable debug mode
+# Activează modul de depanare
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Verifică starea implementării
+azd show
 
-# Validate configuration
-azd config validate
+# Validează configurația
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Deschide panoul de monitorizare pentru jurnale
+azd monitor --logs
 
-# Check resource status
+# Verifică starea resurselor
 azd show --output json
 ```
 
-## 🔍 Comenzi de depanare
+## 🔍 Comenzi de Debugging
 
-### Informații de depanare
+### Informații Debug
 ```bash
-# Enable debug output
+# Activează ieșirea de depanare
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# Dezactivează telemetria pentru o ieșire mai curată
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Verifică configurația curentă
+azd config list
 
-# Check authentication status
+# Verifică starea autentificării
 az account show
 ```
 
-### Depanare șabloane
+### Debugging Șabloane
 ```bash
-# List available templates with details
+# Listează șabloanele disponibile cu detalii
 azd template list --output json
 
-# Show template information
+# Afișează informații despre șablon
 azd template show <template-name>
 
-# Validate template before init
+# Validează șablonul înainte de inițializare
 azd template validate <template-name>
 ```
 
-## 📁 Comenzi pentru fișiere și directoare
+## 📁 Comenzi pentru Fișiere și Directoare
 
-### Structura proiectului
+### Structura Proiectului
 ```bash
-# Show current directory structure
+# Afișează structura directorului curent
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
+# Navighează la rădăcina proiectului azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# Afișează directorul de configurare azd
+echo $AZD_CONFIG_DIR  # De obicei ~/.azd
 ```
 
-## 🎨 Formatarea ieșirii
+## 🎨 Formatare Ieșire
 
 ### Ieșire JSON
 ```bash
-# Get JSON output for scripting
+# Obține ieșire JSON pentru scripting
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# Parsează cu jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Ieșire tabel
+### Ieșire Tabel
 ```bash
-# Format as table
+# Formatează ca tabel
 azd env list --output table
-azd service list --output table
+
+# Vizualizează serviciile desfășurate
+azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Combinații comune de comenzi
+## 🔧 Combinații Comune de Comenzi
 
-### Script de verificare a sănătății
+### Script Verificare Sănătate
 ```bash
 #!/bin/bash
-# Quick health check
+# Verificare rapidă a stării de sănătate
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
-### Validarea implementării
+### Validare Implementare
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# Validare înainte de implementare
+azd show
+azd provision --preview  # Vizualizare modificări înainte de implementare
 az account show
 ```
 
-### Compararea mediilor
+### Comparare Medii
 ```bash
 #!/bin/bash
-# Compare environments
+# Compară mediile
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### Script de curățare a resurselor
+### Script Curățare Resurse
 ```bash
 #!/bin/bash
-# Clean up old environments
+# Curăță mediile vechi
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -461,123 +467,128 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 Variabile de mediu
+## 📝 Variabile de Mediu
 
-### Variabile de mediu comune
+### Variabile Comune de Mediu
 ```bash
-# Azure configuration
+# Configurare Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# Configurare AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# Configurare aplicație
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Comenzi de urgență
+## 🚨 Comenzi de Urgență
 
-### Soluții rapide
+### Remedieri Rapide
 ```bash
-# Reset authentication
+# Resetați autentificarea
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# Forțează reîmprospătarea mediului
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# Redeplasați toate serviciile
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Verificați starea implementării
+azd show --output json
 ```
 
-### Comenzi de recuperare
+### Comenzi de Recuperare
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Recuperați după o implementare eșuată - curățați și implementați din nou
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Reprovisionați doar infrastructura
+azd provision
+
+# Reimplementați doar aplicația
+azd deploy
 ```
 
-## 💡 Sfaturi utile
+## 💡 Sfaturi Profesionale
 
-### Aliasuri pentru fluxuri de lucru mai rapide
+### Aliasuri pentru Flux Mai Rapid
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# Adaugă în fișierul tău .bashrc sau .zshrc
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Scurtături funcționale
+### Scurtături Funcții
 ```bash
-# Quick environment switching
+# Comutare rapidă a mediului
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# Implementare rapidă cu monitorizare
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# Starea mediului
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
 ```
 
-## 📖 Ajutor și documentație
+## 📖 Ajutor și Documentație
 
-### Obținerea ajutorului
+### Obținerea Ajutorului
 ```bash
-# General help
+# Ajutor general
 azd --help
 azd help
 
-# Command-specific help
+# Ajutor specific comenzi
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# Afișează versiunea și informațiile despre build
 azd version
 azd version --output json
 ```
 
-### Linkuri documentație
+### Legături Documentație
 ```bash
-# Open documentation in browser
+# Deschideți documentația în browser
 azd docs
 
-# Show template documentation
+# Afișați documentația șablonului
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Sfaturi**: Salvează această foaie de parcurs și folosește `Ctrl+F` pentru a găsi rapid comenzile de care ai nevoie!
+**Sfat**: Marchează această fișă de comenzi și folosește `Ctrl+F` pentru a găsi rapid comenzile de care ai nevoie!
 
 ---
 
 **Navigare**
-- **Lecția anterioară**: [Verificări preliminare](../docs/pre-deployment/preflight-checks.md)
-- **Lecția următoare**: [Glosar](glossary.md)
+- **Lecția Anterioară**: [Verificări Preliminare](../docs/pre-deployment/preflight-checks.md)
+- **Lecția Următoare**: [Glosar](glossary.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să țineți cont că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

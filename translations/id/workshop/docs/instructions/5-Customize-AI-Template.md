@@ -1,49 +1,40 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T23:32:53+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "id"
-}
--->
-# 5. Kustomisasi Template
+# 5. Customize a Template
 
-!!! tip "SETELAH SELESAI MODUL INI, ANDA AKAN MAMPU"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
 
-    - [ ] Mengeksplorasi kemampuan default AI Agent
+    - [ ] Menjelajahi kemampuan agen AI bawaan
     - [ ] Menambahkan AI Search dengan indeks Anda sendiri
     - [ ] Mengaktifkan dan menganalisis metrik Tracing
-    - [ ] Melakukan evaluasi
-    - [ ] Melakukan pemindaian red-teaming
-    - [ ] **Lab 5: Membuat Rencana Kustomisasi**
+    - [ ] Menjalankan evaluasi
+    - [ ] Menjalankan pemindaian red-teaming
+    - [ ] **Lab 5: Membuat Rencana Kustomisasi** 
 
 ---
 
-## 5.1 Kemampuan AI Agent
+## 5.1 AI Agent Capabilities
 
-!!! success "Kita telah menyelesaikan ini di Lab 01"
+!!! success "Kami menyelesaikannya di Lab 01"
 
-- **File Search**: Pencarian file bawaan OpenAI untuk pengambilan informasi
-- **Citations**: Atribusi sumber otomatis dalam respons
-- **Customizable Instructions**: Modifikasi perilaku dan kepribadian agen
-- **Tool Integration**: Sistem alat yang dapat diperluas untuk kemampuan khusus
+- **Pencarian File**: Pencarian file bawaan OpenAI untuk pengambilan pengetahuan
+- **Sitasi**: Atribusi sumber otomatis dalam respons
+- **Instruksi yang Dapat Disesuaikan**: Mengubah perilaku dan kepribadian agen
+- **Integrasi Alat**: Sistem alat yang dapat diperluas untuk kemampuan kustom
 
 ---
 
-## 5.2 Opsi Pengambilan Informasi
+## 5.2 Opsi Pengambilan Pengetahuan
 
-!!! task "Untuk menyelesaikan ini, kita perlu melakukan perubahan dan redeploy"    
+!!! task "Untuk menyelesaikan ini kita perlu melakukan perubahan dan mendeploy ulang"    
     
     ```bash title=""
-    # Setel variabel lingkungan
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Unggah data dan buat indeks saya
+    # Upload data and create my index
 
     ```
 
@@ -51,40 +42,40 @@ CO_OP_TRANSLATOR_METADATA:
 
 **OpenAI File Search (Default):**
 
-- Tertanam dalam layanan Azure AI Agent
-- Pemrosesan dan pengindeksan dokumen otomatis
-- Tidak memerlukan konfigurasi tambahan
+- Bawaan di Foundry Agents
+- Pemrosesan dokumen dan pengindeksan otomatis
+- Tidak diperlukan konfigurasi tambahan
 
 **Azure AI Search (Opsional):**
 
-- Pencarian semantik dan vektor hybrid
-- Pengelolaan indeks khusus
+- Pencarian semantik dan vektor hibrida
+- Manajemen indeks kustom
 - Kemampuan pencarian lanjutan
 - Memerlukan `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Tracing & Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Pelacakan & Pemantauan](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Untuk menyelesaikan ini, kita perlu melakukan perubahan dan redeploy"    
+!!! task "Untuk menyelesaikan ini kita perlu melakukan perubahan dan mendeploy ulang"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Tracing:**
+**Pelacakan:**
 
 - Integrasi OpenTelemetry
 - Pelacakan permintaan/respons
 - Metrik kinerja
-- Tersedia di portal AI Foundry
+- Tersedia di portal Microsoft Foundry
 
-**Logging:**
+**Pencatatan:**
 
 - Log aplikasi di Container Apps
-- Logging terstruktur dengan ID korelasi
-- Melihat log secara real-time dan historis
+- Pencatatan terstruktur dengan ID korelasi
+- Melihat log waktu nyata dan historis
 
 ---
 
@@ -93,109 +84,112 @@ CO_OP_TRANSLATOR_METADATA:
 **Evaluasi Lokal:**
 
 - Evaluator bawaan untuk penilaian kualitas
-- Skrip evaluasi khusus
-- Benchmarking kinerja
+- Skrip evaluasi kustom
+- Benchmark kinerja
 
 **Pemantauan Berkelanjutan:**
 
-- Evaluasi otomatis interaksi langsung
+- Evaluasi otomatis dari interaksi langsung
 - Pelacakan metrik kualitas
 - Deteksi regresi kinerja
 
 **Integrasi CI/CD:**
 
-- Workflow GitHub Actions
+- Alur kerja GitHub Actions
 - Pengujian dan evaluasi otomatis
 - Pengujian perbandingan statistik
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [Agen Red Teaming AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI Red Teaming:**
+**Red Teaming AI:**
 
 - Pemindaian keamanan otomatis
 - Penilaian risiko untuk sistem AI
-- Evaluasi keamanan di berbagai kategori
+- Evaluasi keselamatan di berbagai kategori
 
 **Autentikasi:**
 
 - Managed Identity untuk layanan Azure
-- Opsional autentikasi Azure App Service
-- Basic auth sebagai fallback untuk pengembangan
+- Autentikasi Azure App Service opsional
+- Fallback autentikasi dasar untuk pengembangan
 
-!!! quote "SETELAH SELESAI LAB INI, ANDA HARUS TELAH"
-    - [ ] Mendefinisikan kebutuhan skenario Anda
-    - [ ] Mengkustomisasi variabel lingkungan (config)
-    - [ ] Mengkustomisasi instruksi agen (task)
-    - [ ] Melakukan deploy template yang telah dikustomisasi (app)
-    - [ ] Menyelesaikan tugas pasca-deploy (manual)
-    - [ ] Melakukan evaluasi pengujian
 
-Contoh ini menunjukkan cara mengkustomisasi template untuk kasus penggunaan ritel perusahaan dengan dua agen khusus dan beberapa deployment model.
+
+!!! quote "PADA AKHIR LAB INI ANDA HARUS MEMILIKI"
+    - [ ] Menentukan persyaratan skenario Anda
+    - [ ] Menyesuaikan variabel env (konfigurasi)
+    - [ ] Menyesuaikan instruksi agen (tugas)
+    - [ ] Menerapkan template yang disesuaikan (aplikasi)
+    - [ ] Menyelesaikan tugas pasca-deployment (manual)
+    - [ ] Menjalankan evaluasi uji
+
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Kustomisasi untuk Anda!
+## 5.6 Customize It For You!
 
-### 5.6.1. Kebutuhan Skenario
+### 5.6.1. Scenario Requirements
 
-#### **Deployment Agen:** 
+#### **Penempatan Agen:** 
 
    - Shopper Agent: Membantu pelanggan menemukan dan membandingkan produk
    - Loyalty Agent: Mengelola hadiah dan promosi pelanggan
 
-#### **Deployment Model:**
+#### **Penyebaran Model:**
 
    - `gpt-4.1`: Model chat utama
-   - `o3`: Model penalaran untuk pertanyaan kompleks
+   - `o3`: Model penalaran untuk kueri kompleks
    - `gpt-4.1-nano`: Model ringan untuk interaksi sederhana
    - `text-embedding-3-large`: Embedding berkualitas tinggi untuk pencarian
 
 #### **Fitur:**
 
-   - Tracing dan monitoring diaktifkan
+   - Pelacakan dan pemantauan diaktifkan
    - AI Search untuk katalog produk
-   - Kerangka evaluasi untuk penjaminan kualitas
+   - Kerangka evaluasi untuk jaminan kualitas
    - Red teaming untuk validasi keamanan
 
 ---
 
-### 5.6.2 Implementasi Skenario
+### 5.6.2 Scenario Implementation
 
-#### 5.6.2.1. Konfigurasi Pra-Deploy
 
-Buat skrip setup (`setup-retail.sh`)
+#### 5.6.2.1. Pre-Deployment Config
+
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Tetapkan nama lingkungan
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Konfigurasikan wilayah (pilih berdasarkan ketersediaan model)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Aktifkan semua layanan opsional
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Konfigurasikan model chat utama (gpt-4o sebagai yang paling mendekati gpt-4.1 yang tersedia)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Konfigurasikan model embedding untuk pencarian yang ditingkatkan
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Tetapkan nama agen (akan membuat agen pertama)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Konfigurasikan indeks pencarian
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -204,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Instruksi Agen
+#### 5.6.2.2: Agent Instructions
 
-Buat `custom-agents/shopper-agent-instructions.md`:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -229,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Buat `custom-agents/loyalty-agent-instructions.md`:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -254,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Skrip Deploy
+#### 5.6.2.3: Deployment Script
 
-Buat `deploy-retail.sh`:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -264,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Validasi prasyarat
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -276,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Siapkan lingkungan
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Periksa kuota di wilayah yang dipilih
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -297,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Terapkan infrastruktur dan aplikasi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Ambil keluaran penerapan
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Dapatkan URL aplikasi web
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -327,28 +321,28 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfigurasi Pasca-Deploy
+#### 5.6.2.4: Post-Deployment Config
 
-Buat `configure-retail-agents.sh`:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Dapatkan informasi penyebaran
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Instruksi untuk konfigurasi manual
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -373,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -384,20 +378,20 @@ echo "
 "
 ```
 
-### 5.6.3: Pengujian dan Validasi
+### 5.6.3: Testing and Validation
 
-Buat `test-retail-deployment.sh`:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Verifikasi bahwa variabel lingkungan telah disetel
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# Uji ketersediaan aplikasi web
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -411,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Jalankan evaluasi jika dikonfigurasi
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -426,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -439,34 +433,38 @@ Next steps:
 
 Setelah mengikuti panduan implementasi ini, Anda akan memiliki:
 
-1. **Infrastruktur yang Terdeploy:**
+1. **Infrastruktur yang Disebarkan:**
 
-      - Proyek AI Foundry dengan deployment model
+      - Proyek Microsoft Foundry dengan penyebaran model
       - Container Apps yang menjadi host aplikasi web
       - Layanan AI Search untuk katalog produk
-      - Application Insights untuk monitoring
+      - Application Insights untuk pemantauan
 
 2. **Agen Awal:**
 
       - Shopper Agent dikonfigurasi dengan instruksi dasar
       - Kemampuan pencarian file diaktifkan
-      - Tracing dan monitoring dikonfigurasi
+      - Pelacakan dan pemantauan dikonfigurasi
 
-3. **Siap untuk Kustomisasi:**
+3. **Siap Untuk Kustomisasi:**
 
       - Kerangka kerja untuk menambahkan Loyalty Agent
-      - Template instruksi khusus
+      - Template instruksi kustom
       - Skrip pengujian dan validasi
-      - Pengaturan monitoring dan evaluasi
+      - Pengaturan pemantauan dan evaluasi
 
 4. **Kesiapan Produksi:**
 
       - Pemindaian keamanan dengan red teaming
-      - Monitoring kinerja
+      - Pemantauan kinerja
       - Kerangka evaluasi kualitas
       - Arsitektur yang dapat diskalakan
 
-Contoh ini menunjukkan bagaimana template AZD dapat diperluas dan dikustomisasi untuk skenario perusahaan tertentu sambil mempertahankan praktik terbaik untuk keamanan, monitoring, dan skalabilitas.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Penafian:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

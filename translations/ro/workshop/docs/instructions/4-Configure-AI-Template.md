@@ -1,50 +1,41 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:03:53+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "ro"
-}
--->
-# 4. Configurarea unui Șablon
+# 4. Configurează un Șablon
 
 !!! tip "LA SFÂRȘITUL ACESTUI MODUL VEI FI CAPABIL SĂ"
 
     - [ ] Înțelegi scopul fișierului `azure.yaml`
     - [ ] Înțelegi structura fișierului `azure.yaml`
-    - [ ] Înțelegi valoarea `hooks` din ciclul de viață azd
-    - [ ] **Laborator 3:** 
+    - [ ] Înțelegi valoarea `hook`-urilor din ciclul de viață azd
+    - [ ] **Laborator 4:** Explorează și modifică variabilele de mediu
 
 ---
 
 !!! prompt "Ce face fișierul `azure.yaml`? Folosește un bloc de cod și explică-l linie cu linie"
 
-      Fișierul `azure.yaml` este **fișierul de configurare pentru Azure Developer CLI (azd)**. Acesta definește modul în care aplicația ta ar trebui să fie implementată în Azure, incluzând infrastructura, serviciile, hook-urile de implementare și variabilele de mediu.
+      Fișierul `azure.yaml` este **fișierul de configurare pentru Azure Developer CLI (azd)**. Definește modul în care aplicația ta trebuie să fie implementată pe Azure, incluzând infrastructura, serviciile, hook-urile de implementare și variabilele de mediu.
 
 ---
 
 ## 1. Scop și Funcționalitate
 
-Fișierul `azure.yaml` servește drept **plan de implementare** pentru o aplicație agent AI care:
+Acest fișier `azure.yaml` servește drept **plan de implementare** pentru o aplicație agent AI care:
 
 1. **Validează mediul** înainte de implementare
-2. **Provoacă servicii Azure AI** (AI Hub, AI Project, Search etc.)
-3. **Implementează o aplicație Python** în Azure Container Apps
-4. **Configurează modele AI** pentru funcționalități de chat și embedding
+2. **Provisionează servicii Azure AI** (AI Hub, AI Project, Search, etc.)
+3. **Deplasează o aplicație Python** pe Azure Container Apps
+4. **Configurează modelele AI** pentru funcționalități de chat și embedding
 5. **Setează monitorizarea și trasabilitatea** pentru aplicația AI
-6. **Gestionează atât scenarii noi cât și existente** pentru proiectele Azure AI
+6. **Gestionează scenariile atât pentru proiecte AI noi, cât și existente**
 
-Fișierul permite **implementarea cu o singură comandă** (`azd up`) a unei soluții complete de agent AI, cu validare corespunzătoare, provizionare și configurare post-implementare.
+Fișierul permite o **implementare cu o singură comandă** (`azd up`) a unei soluții complete pentru agent AI, cu validare adecvată, provisioning și configurare post-implementare.
 
-??? info "Extinde pentru a vizualiza: `azure.yaml`"
+??? info "Extinde pentru a vedea: `azure.yaml`"
 
-      Fișierul `azure.yaml` definește modul în care Azure Developer CLI ar trebui să implementeze și să gestioneze această aplicație agent AI în Azure. Să-l analizăm linie cu linie.
+      Fișierul `azure.yaml` definește cum ar trebui Azure Developer CLI să implementeze și să gestioneze această aplicație Agent AI pe Azure. Hai să îl analizăm linie cu linie.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: avem nevoie de hooks? 
+      # TODO: avem nevoie de hook-uri? 
       # TODO: avem nevoie de toate variabilele?
 
       name: azd-get-started-with-ai-agents
@@ -135,19 +126,19 @@ Fișierul permite **implementarea cu o singură comandă** (`azd up`) a unei sol
 
 ---
 
-## 2. Deconstruirea Fișierului
+## 2. Demontarea Fișierului
 
-Să parcurgem fișierul secțiune cu secțiune, pentru a înțelege ce face - și de ce.
+Să parcurgem fișierul secțiune cu secțiune, ca să înțelegem ce face - și de ce.
 
-### 2.1 **Header și Schema (1-3)**
+### 2.1 **Antet și Schema (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Linia 1**: Oferă validare schema YAML pentru suport IDE și IntelliSense
+- **Linia 1**: Oferă validarea schemei pentru serverul de limbaj YAML, pentru suport IDE și IntelliSense
 
-### 2.2 Metadata Proiectului (5-10)
+### 2.2 Metadate Proiect (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Linia 5**: Definește numele proiectului utilizat de Azure Developer CLI
-- **Liniile 6-7**: Specifică faptul că se bazează pe o versiune de șablon 1.0.2
-- **Liniile 8-9**: Necesită versiunea 1.14.0 sau mai mare a Azure Developer CLI
+- **Linia 5**: Definește numele proiectului folosit de Azure Developer CLI
+- **Liniile 6-7**: Specifică faptul că este bazat pe un șablon versiunea 1.0.2
+- **Liniile 8-9**: Solicită versiunea 1.14.0 sau mai mare a Azure Developer CLI
 
 ### 2.3 Hook-uri de Implementare (11-40)
 
@@ -180,8 +171,8 @@ hooks:
 
 - **Liniile 11-20**: **Hook pre-implementare** - rulează înainte de `azd up`
 
-      - Pe Unix/Linux: Face scriptul de validare executabil și îl rulează
-      - Pe Windows: Rulează scriptul de validare PowerShell
+      - Pe Unix/Linux: face scriptul de validare executabil și îl rulează
+      - Pe Windows: rulează scriptul PowerShell de validare
       - Ambele sunt interactive și vor opri implementarea dacă eșuează
 
 ```yaml  title="" linenums="0"
@@ -197,9 +188,9 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Liniile 21-30**: **Hook post-provizionare** - rulează după ce resursele Azure sunt create
+- **Liniile 21-30**: **Hook post-provișionare** - rulează după ce resursele Azure sunt create
 
-  - Rulează scripturi pentru scrierea variabilelor de mediu
+  - Execută scripturi care scriu variabilele de mediu
   - Continuă implementarea chiar dacă aceste scripturi eșuează (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
@@ -217,12 +208,12 @@ hooks:
 ```
 - **Liniile 31-40**: **Hook post-implementare** - rulează după implementarea aplicației
 
-  - Rulează scripturi finale de configurare
+  - Execută scripturi finale de configurare
   - Continuă chiar dacă scripturile eșuează
 
-### 2.4 Configurarea Serviciului (41-48)
+### 2.4 Configurare Serviciu (41-48)
 
-Aceasta configurează serviciul aplicației pe care îl implementezi.
+Aceasta configurează serviciul aplicației pe care o implementezi.
 
 ```yaml title="" linenums="0"
 services:
@@ -238,11 +229,11 @@ services:
 - **Linia 42**: Definește un serviciu numit "api_and_frontend"
 - **Linia 43**: Indică directorul `./src` pentru codul sursă
 - **Linia 44**: Specifică Python ca limbaj de programare
-- **Linia 45**: Utilizează Azure Container Apps ca platformă de găzduire
+- **Linia 45**: Folosește Azure Container Apps ca platformă de găzduire
 - **Liniile 46-48**: Configurare Docker
 
-      - Utilizează "api_and_frontend" ca nume al imaginii
-      - Construiește imaginea Docker de la distanță în Azure (nu local)
+      - Folosește "api_and_frontend" ca nume imagine
+      - Construiește imaginea Docker remot în Azure (nu local)
 
 ### 2.5 Variabile Pipeline (49-76)
 
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Această secțiune definește variabilele de mediu utilizate **în timpul implementării**, organizate pe categorii:
+Această secțiune definește variabilele de mediu folosite **în timpul implementării**, organizate pe categorii:
 
-- **Nume Resurse Azure (Liniile 51-60)**:
-      - Nume ale serviciilor de bază Azure, ex. Resource Group, AI Hub, AI Project etc.- 
+- **Numele Resurselor Azure (Liniile 51-60)**:
+      - Numele resurselor cheie Azure, ex: Grup de Resurse, AI Hub, AI Project, etc.
 - **Flag-uri Funcționalitate (Liniile 61-63)**:
-      - Variabile booleene pentru activarea/dezactivarea anumitor servicii Azure
-- **Configurație Agent AI (Liniile 64-71)**:
-      - Configurație pentru agentul AI principal, incluzând nume, ID, setări de implementare, detalii model- 
-- **Configurație Embedding AI (Liniile 72-79)**:
-      - Configurație pentru modelul de embedding utilizat pentru căutarea vectorială
+      - Variabile booleene pentru activarea/dezactivarea unor servicii specifice Azure
+- **Configurare Agent AI (Liniile 64-71)**:
+      - Configurare pentru agentul AI principal inclusiv nume, ID, setări de implementare, detalii model
+- **Configurare AI Embedding (Liniile 72-79)**:
+      - Configurare pentru modelul embedding folosit pentru căutare vectorială
 - **Căutare și Monitorizare (Liniile 80-84)**:
-      - Nume index de căutare, ID-uri resurse existente și setări de monitorizare/trasabilitate
+      - Numele indexului de căutare, ID-uri de resurse existente și setările de monitorizare/trasabilitate
 
 ---
 
 ## 3. Cunoaște Variabilele de Mediu
-Următoarele variabile de mediu controlează configurația și comportamentul implementării tale, organizate după scopul lor principal. Majoritatea variabilelor au valori implicite rezonabile, dar le poți personaliza pentru a se potrivi cerințelor tale specifice sau resurselor Azure existente.
+Următoarele variabile de mediu controlează configurația și comportamentul implementării tale, organizate după scopul principal. Majoritatea variabilelor au valori implicite rezonabile, dar le poți personaliza pentru a se potrivi cerințelor tale specifice sau resurselor Azure existente.
 
-### 3.1 Variabile Necesare 
+### 3.1 Variabile Obligatorii 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Configurație principală Azure
+AZURE_ENV_NAME                    # Numele mediului (folosit în denumirea resurselor)
+AZURE_LOCATION                    # Regiunea de implementare
+AZURE_SUBSCRIPTION_ID             # Abonamentul țintă
+AZURE_RESOURCE_GROUP              # Numele grupului de resurse
+AZURE_PRINCIPAL_ID                # Principalul utilizator pentru RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Numele resurselor (generate automat dacă nu sunt specificate)
+AZURE_AIHUB_NAME                  # Numele hub-ului Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Numele proiectului AI
+AZURE_AISERVICES_NAME             # Numele contului serviciilor AI
+AZURE_STORAGE_ACCOUNT_NAME        # Numele contului de stocare
+AZURE_CONTAINER_REGISTRY_NAME     # Numele registrului de containere
+AZURE_KEYVAULT_NAME               # Numele Key Vault (dacă este folosit)
 ```
 
-### 3.2 Configurație Model 
+### 3.2 Configurare Model 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Configurarea modelului de chat
+AZURE_AI_AGENT_MODEL_NAME         # Implicit: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Implicit: OpenAI (sau Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Implicit: cea mai recentă disponibilă
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Numele implementării pentru modelul de chat
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Implicit: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Implicit: 80 (mii de TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Configurarea modelului de încorporare
+AZURE_AI_EMBED_MODEL_NAME         # Implicit: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Implicit: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Implicit: cea mai recentă disponibilă
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Numele implementării pentru încorporări
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Implicit: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Implicit: 50 (mii de TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Configurarea agentului
+AZURE_AI_AGENT_NAME               # Numele afișat al agentului
+AZURE_EXISTING_AGENT_ID           # Folosește agentul existent (opțional)
 ```
 
-### 3.3 Activare Funcționalități
+### 3.3 Comutator Funcționalitate
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Servicii opționale
+USE_APPLICATION_INSIGHTS         # Implicit: adevărat
+USE_AZURE_AI_SEARCH_SERVICE      # Implicit: fals
+USE_CONTAINER_REGISTRY           # Implicit: adevărat
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Monitorizare și trasare
+ENABLE_AZURE_MONITOR_TRACING     # Implicit: fals
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Implicit: fals
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Configurare căutare
+AZURE_AI_SEARCH_INDEX_NAME       # Numele indexului de căutare
+AZURE_SEARCH_SERVICE_NAME        # Numele serviciului de căutare
 ```
 
-### 3.4 Configurație Proiect AI 
+### 3.4 Configurare Proiect AI 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Folosiți resursele existente
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ID-ul complet al resursei proiectului AI existent
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL-ul endpoint-ului proiectului existent
 ```
 
 ### 3.5 Verifică Variabilele Tale
 
-Folosește Azure Developer CLI pentru a vizualiza și gestiona variabilele de mediu:
+Folosește Azure Developer CLI pentru a vizualiza și gestiona variabilele tale de mediu:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Vizualizați toate variabilele de mediu pentru mediul curent
 azd env get-values
 
-# Get a specific environment variable
+# Obțineți o variabilă de mediu specifică
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Setați o variabilă de mediu
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Setați mai multe variabile dintr-un fișier .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere automată AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritativă. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventuale neînțelegeri sau interpretări eronate rezultate din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

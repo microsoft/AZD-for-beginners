@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fc2d5d2f2f572c99876be92d82680e22",
-  "translation_date": "2025-11-20T10:16:54+00:00",
-  "source_file": "examples/azure-openai-chat/README.md",
-  "language_code": "ru"
-}
--->
 # Приложение для чата Azure OpenAI
 
 **Уровень обучения:** Средний ⭐⭐ | **Время:** 35-45 минут | **Стоимость:** $50-200/месяц

@@ -1,67 +1,58 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77db71c83f2e7fbc9f50320bd1cc7116",
-  "translation_date": "2025-11-20T22:37:43+00:00",
-  "source_file": "examples/retail-scenario.md",
-  "language_code": "tr"
-}
--->
-# Çoklu Ajanlı Müşteri Destek Çözümü - Perakendeci Senaryosu
+# Çok Ajanlı Müşteri Destek Çözümü - Perakendeci Senaryosu
 
-**Bölüm 5: Çoklu Ajanlı Yapay Zeka Çözümleri**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../README.md)
-- **📖 Mevcut Bölüm**: [Bölüm 5: Çoklu Ajanlı Yapay Zeka Çözümleri](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Ön Gereklilikler**: [Bölüm 2: Yapay Zeka-Öncelikli Geliştirme](../docs/ai-foundry/azure-ai-foundry-integration.md)
-- **➡️ Sonraki Bölüm**: [Bölüm 6: Dağıtım Öncesi Doğrulama](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM Şablonları**: [Dağıtım Paketi](retail-multiagent-arm-template/README.md)
+**Bölüm 5: Çok Ajanlı AI Çözümleri**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
+- **📖 Mevcut Bölüm**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Önkoşullar**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Sonraki Bölüm**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM Şablonları**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
-> **⚠️ MİMARİ KILAVUZ - ÇALIŞAN BİR UYGULAMA DEĞİL**  
-> Bu belge, çoklu ajanlı bir sistem oluşturmak için **kapsamlı bir mimari planı** sunar.  
-> **Mevcut olanlar:** Altyapı dağıtımı için ARM şablonu (Azure OpenAI, AI Search, Container Apps, vb.)  
-> **Sizin yapmanız gerekenler:** Ajan kodu, yönlendirme mantığı, ön uç arayüzü, veri hatları (tahmini 80-120 saat)  
+> **⚠️ MİMARİ REHBERİ - ÇALIŞAN UYGULAMA DEĞİL**  
+> Bu belge, çok ajanlı bir sistem oluşturmak için kapsamlı bir mimari taslağı sağlar.  
+> **Mevcut olan:** Altyapı dağıtımı için ARM şablonu (Azure OpenAI, AI Search, Container Apps, vb.)  
+> **Sizden istenen:** Ajan kodu, yönlendirme mantığı, ön uç UI, veri hatları (tahmini 80-120 saat)  
 >  
 > **Bunu şu amaçlarla kullanın:**
-> - ✅ Kendi çoklu ajan projeniz için mimari referans
-> - ✅ Çoklu ajan tasarım desenleri için öğrenme rehberi
+> - ✅ Kendi çok ajanlı projeniz için mimari referans
+> - ✅ Çok ajanlı tasarım desenlerini öğrenme rehberi
 > - ✅ Azure kaynaklarını dağıtmak için altyapı şablonu
-> - ❌ Çalışmaya hazır bir uygulama değil (önemli ölçüde geliştirme gerektirir)
+> - ❌ Çalıştırmaya hazır bir uygulama değil (önemli geliştirme gerektirir)
 
 ## Genel Bakış
 
-**Öğrenme Hedefi:** Envanter yönetimi, belge işleme ve akıllı müşteri etkileşimleri gibi gelişmiş yapay zeka yeteneklerine sahip, üretime hazır bir çoklu ajanlı müşteri destek sohbet robotu oluşturmak için mimariyi, tasarım kararlarını ve uygulama yaklaşımını anlamak.
+**Öğrenme Hedefi:** Envanter yönetimi, belge işleme ve akıllı müşteri etkileşimleri dahil gelişmiş AI yeteneklerine sahip bir perakendeci için üretime hazır çok ajanlı müşteri destek chatbotu oluşturmanın mimarisini, tasarım kararlarını ve uygulama yaklaşımını anlamak.
 
-**Tamamlama Süresi:** Okuma + Anlama (2-3 saat) | Tam Uygulama Geliştirme (80-120 saat)
+**Tamamlama Süresi:** Okuma + Anlama (2-3 saat) | Tam Uygulama Oluşturma (80-120 saat)
 
-**Öğrenecekleriniz:**
-- Çoklu ajan mimari desenleri ve tasarım ilkeleri
+**Neler Öğreneceksiniz:**
+- Çok ajanlı mimari desenleri ve tasarım ilkeleri
 - Çok bölgeli Azure OpenAI dağıtım stratejileri
 - RAG (Retrieval-Augmented Generation) ile AI Search entegrasyonu
 - Ajan değerlendirme ve güvenlik test çerçeveleri
-- Üretim dağıtımına yönelik hususlar ve maliyet optimizasyonu
+- Üretim dağıtım hususları ve maliyet optimizasyonu
 
 ## Mimari Hedefler
 
-**Eğitimsel Odak:** Bu mimari, çoklu ajan sistemleri için kurumsal desenleri gösterir.
+**Eğitsel Odak:** Bu mimari, çok ajanlı sistemler için kurumsal desenleri gösterir.
 
-### Sistem Gereksinimleri (Kendi Uygulamanız İçin)
+### Sistem Gereksinimleri (Uygulamanız için)
 
-Üretim seviyesinde bir müşteri destek çözümü şunları gerektirir:
-- **Farklı müşteri ihtiyaçları için birden fazla uzman ajan** (Müşteri Hizmetleri + Envanter Yönetimi)
-- **Doğru kapasite planlamasıyla çoklu model dağıtımı** (GPT-4o, GPT-4o-mini, bölgeler arası gömüler)
-- **AI Search ve dosya yüklemeleriyle dinamik veri entegrasyonu** (vektör arama + belge işleme)
+Bir üretim müşteri destek çözümü gerektirir:
+- **Farklı müşteri ihtiyaçları için birden çok uzmanlaşmış ajan** (Müşteri Hizmetleri + Envanter Yönetimi)
+- **Doğru kapasite planlaması ile çoklu model dağıtımı** (GPT-4o, GPT-4o-mini, bölgeler arası embeddingler)
+- **AI Search ve dosya yüklemeleri ile dinamik veri entegrasyonu** (vektör arama + belge işleme)
 - **Kapsamlı izleme** ve değerlendirme yetenekleri (Application Insights + özel metrikler)
-- **Üretim seviyesinde güvenlik** ile kırmızı ekip doğrulaması (zafiyet taraması + ajan değerlendirmesi)
+- **Üretim düzeyinde güvenlik** ile red teaming doğrulaması (zafiyet taraması + ajan değerlendirmesi)
 
 ### Bu Kılavuzun Sağladıkları
 
-✅ **Mimari Desenler** - Ölçeklenebilir çoklu ajan sistemleri için kanıtlanmış tasarım  
+✅ **Mimari Desenler** - Ölçeklenebilir çok ajanlı sistemler için kanıtlanmış tasarım  
 ✅ **Altyapı Şablonları** - Tüm Azure hizmetlerini dağıtan ARM şablonları  
-✅ **Kod Örnekleri** - Temel bileşenler için referans uygulamalar  
+✅ **Kod Örnekleri** - Ana bileşenler için referans uygulamalar  
 ✅ **Yapılandırma Rehberi** - Adım adım kurulum talimatları  
 ✅ **En İyi Uygulamalar** - Güvenlik, izleme, maliyet optimizasyonu stratejileri  
 
-❌ **Dahil Değil** - Tam çalışan bir uygulama (geliştirme çabası gerektirir)
+❌ **Dahil Değil** - Tam çalışan uygulama (geliştirme çabası gerektirir)
 
 ## 🗺️ Uygulama Yol Haritası
 
@@ -69,40 +60,40 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Hedef:** Sistem tasarımını ve bileşen etkileşimlerini anlamak
 
-- [ ] Bu belgeyi tamamen okuyun
-- [ ] Mimari diyagramı ve bileşen ilişkilerini inceleyin
-- [ ] Çoklu ajan desenlerini ve tasarım kararlarını anlayın
+- [ ] Bu dokümanı tamamen okuyun
+- [ ] Mimari diyagramını ve bileşen ilişkilerini gözden geçirin
+- [ ] Çok ajanlı desenleri ve tasarım kararlarını anlayın
 - [ ] Ajan araçları ve yönlendirme için kod örneklerini inceleyin
-- [ ] Maliyet tahminlerini ve kapasite planlama rehberini gözden geçirin
+- [ ] Maliyet tahmini ve kapasite planlaması rehberini gözden geçirin
 
-**Sonuç:** Ne inşa etmeniz gerektiğine dair net bir anlayış
+**Çıktı:** İnşa etmeniz gerekenler hakkında net bir anlayış
 
 ### Aşama 2: Altyapıyı Dağıtma (30-45 dakika)
 
-**Hedef:** ARM şablonunu kullanarak Azure kaynaklarını sağlama
+**Hedef:** ARM şablonu kullanarak Azure kaynaklarını sağlamak
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**Dağıtılanlar:**
-- ✅ Azure OpenAI (3 bölge: GPT-4o, GPT-4o-mini, gömüler)
-- ✅ AI Search hizmeti (boş, dizin yapılandırması gerekiyor)
-- ✅ Container Apps ortamı (yer tutucu görüntüler)
+**Neler Dağıtılır:**
+- ✅ Azure OpenAI (3 bölge: GPT-4o, GPT-4o-mini, embeddings)
+- ✅ AI Search hizmeti (boş, indeks yapılandırması gerektirir)
+- ✅ Container Apps ortamı (yer tutucu imajlar)
 - ✅ Depolama hesapları, Cosmos DB, Key Vault
 - ✅ Application Insights izleme
 
 **Eksik Olanlar:**
 - ❌ Ajan uygulama kodu
 - ❌ Yönlendirme mantığı
-- ❌ Ön uç arayüzü
-- ❌ Arama dizin şeması
+- ❌ Ön uç UI
+- ❌ Arama indeks şeması
 - ❌ Veri hatları
 
-### Aşama 3: Uygulama Geliştirme (80-120 saat)
+### Aşama 3: Uygulamayı İnşa Etme (80-120 saat)
 
-**Hedef:** Bu mimariye dayalı çoklu ajan sistemi uygulamak
+**Hedef:** Bu mimariye göre çok ajanlı sistemi uygulamak
 
 1. **Ajan Uygulaması** (30-40 saat)
    - Temel ajan sınıfı ve arayüzler
@@ -110,31 +101,31 @@ cd retail-multiagent-arm-template
    - GPT-4o-mini ile envanter ajanı
    - Araç entegrasyonları (AI Search, Bing, dosya işleme)
 
-2. **Yönlendirme Hizmeti** (12-16 saat)
+2. **Yönlendirme Servisi** (12-16 saat)
    - İstek sınıflandırma mantığı
    - Ajan seçimi ve orkestrasyonu
-   - FastAPI/Express arka ucu
+   - FastAPI/Express backend
 
 3. **Ön Uç Geliştirme** (20-30 saat)
-   - Sohbet arayüzü
+   - Sohbet arayüzü UI
    - Dosya yükleme işlevselliği
-   - Yanıt işleme
+   - Yanıtların render edilmesi
 
 4. **Veri Hattı** (8-12 saat)
-   - AI Search dizin oluşturma
-   - Belge işleme ile Belge Zekası
-   - Gömü oluşturma ve dizinleme
+   - AI Search indeks oluşturma
+   - Document Intelligence ile belge işleme
+   - Embedding oluşturma ve indeksleme
 
-5. **İzleme ve Değerlendirme** (10-15 saat)
+5. **İzleme & Değerlendirme** (10-15 saat)
    - Özel telemetri uygulaması
    - Ajan değerlendirme çerçevesi
-   - Kırmızı ekip güvenlik tarayıcısı
+   - Red team güvenlik tarayıcısı
 
-### Aşama 4: Dağıtım ve Test (8-12 saat)
+### Aşama 4: Dağıt ve Test Et (8-12 saat)
 
-- Tüm hizmetler için Docker görüntüleri oluşturun
-- Azure Container Registry'ye gönderin
-- Gerçek görüntülerle Container Apps'i güncelleyin
+- Tüm servisler için Docker imajları oluşturun
+- Azure Container Registry'ye push edin
+- Container Apps'i gerçek imajlarla güncelleyin
 - Ortam değişkenlerini ve sırları yapılandırın
 - Değerlendirme test paketini çalıştırın
 - Güvenlik taraması yapın
@@ -148,31 +139,31 @@ cd retail-multiagent-arm-template
 ```mermaid
 graph TB
     User[👤 Müşteri] --> LB[Azure Front Door]
-    LB --> WebApp[Web Ön Uç<br/>Container Uygulaması]
+    LB --> WebApp[Web Ön Uç<br/>Konteyner Uygulaması]
     
-    WebApp --> Router[Agent Yönlendirici<br/>Container Uygulaması]
-    Router --> CustomerAgent[Müşteri Temsilcisi<br/>Müşteri Hizmetleri]
-    Router --> InvAgent[Envanter Temsilcisi<br/>Stok Yönetimi]
+    WebApp --> Router[Ajan Yönlendirici<br/>Konteyner Uygulaması]
+    Router --> CustomerAgent[Müşteri Ajanı<br/>Müşteri Hizmeti]
+    Router --> InvAgent[Envanter Ajanı<br/>Stok Yönetimi]
     
     CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Doğu ABD 2]
     InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Batı ABD 2]
     
     CustomerAgent --> AISearch[Azure AI Arama<br/>Ürün Kataloğu]
-    CustomerAgent --> BingSearch[Bing Arama API'si<br/>Gerçek Zamanlı Bilgi]
+    CustomerAgent --> BingSearch[Bing Arama API<br/>Gerçek Zamanlı Bilgi]
     InvAgent --> AISearch
     
     AISearch --> Storage[Azure Depolama<br/>Belgeler ve Dosyalar]
-    Storage --> DocIntel[Belge Zekası<br/>İçerik İşleme]
+    Storage --> DocIntel[Doküman Zekası<br/>İçerik İşleme]
     
-    OpenAI1 --> Embeddings[Metin Gömüleri<br/>ada-002<br/>Fransa Merkezi]
+    OpenAI1 --> Embeddings[Metin Gömeleri<br/>ada-002<br/>Fransa Merkezi]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Uygulama İçgörüleri<br/>İzleme]
+    Router --> AppInsights[Application Insights<br/>İzleme]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Değerlendirici<br/>İsviçre Kuzey] --> Evaluation[Değerlendirme Çerçevesi]
-    RedTeam[Kırmızı Takım Tarayıcı] --> SecurityReports[Güvenlik Raporları]
+    GraderModel[GPT-4o Derecelendirici<br/>İsviçre Kuzey] --> Evaluation[Değerlendirme Çerçevesi]
+    RedTeam[Kırmızı Takım Tarayıcısı] --> SecurityReports[Güvenlik Raporları]
     
     subgraph "Veri Katmanı"
         Storage
@@ -180,7 +171,7 @@ graph TB
         CosmosDB[Cosmos DB<br/>Sohbet Geçmişi]
     end
     
-    subgraph "AI Hizmetleri"
+    subgraph "Yapay Zeka Servisleri"
         OpenAI1
         OpenAI2
         Embeddings
@@ -191,8 +182,8 @@ graph TB
     
     subgraph "İzleme ve Güvenlik"
         AppInsights
-        LogAnalytics[Log Analitik Çalışma Alanı]
-        KeyVault[Azure Anahtar Kasası<br/>Gizli Bilgiler ve Yapılandırma]
+        LogAnalytics[Log Analytics Çalışma Alanı]
+        KeyVault[Azure Key Vault<br/>Sırlar & Yapılandırma]
         RedTeam
         Evaluation
     end
@@ -206,26 +197,26 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-### Bileşen Genel Bakışı
+### Bileşen Genel Bakış
 
 | Bileşen | Amaç | Teknoloji | Bölge |
-|---------|------|-----------|-------|
-| **Web Ön Ucu** | Müşteri etkileşimleri için kullanıcı arayüzü | Container Apps | Birincil Bölge |
-| **Ajan Yönlendirici** | İstekleri uygun ajana yönlendirir | Container Apps | Birincil Bölge |
-| **Müşteri Ajanı** | Müşteri hizmetleri sorgularını işler | Container Apps + GPT-4o | Birincil Bölge |
-| **Envanter Ajanı** | Stok ve sipariş yönetimi | Container Apps + GPT-4o-mini | Birincil Bölge |
-| **Azure OpenAI** | Ajanlar için LLM çıkarımı | Cognitive Services | Çoklu Bölge |
-| **AI Search** | Vektör arama ve RAG | AI Search Hizmeti | Birincil Bölge |
-| **Depolama Hesabı** | Dosya yüklemeleri ve belgeler | Blob Storage | Birincil Bölge |
+|-----------|---------|------------|---------|
+| **Web Frontend** | Müşteri etkileşimleri için kullanıcı arayüzü | Container Apps | Birincil Bölge |
+| **Agent Router** | İstekleri uygun ajana yönlendirir | Container Apps | Birincil Bölge |
+| **Customer Agent** | Müşteri hizmetleri sorgularını işler | Container Apps + GPT-4o | Birincil Bölge |
+| **Inventory Agent** | Stok ve sipariş yönetimini sağlar | Container Apps + GPT-4o-mini | Birincil Bölge |
+| **Azure OpenAI** | Ajanlar için LLM çıkarımı | Cognitive Services | Çok Bölge |
+| **AI Search** | Vektör arama ve RAG | AI Search Service | Birincil Bölge |
+| **Storage Account** | Dosya yüklemeleri ve belgeler | Blob Storage | Birincil Bölge |
 | **Application Insights** | İzleme ve telemetri | Monitor | Birincil Bölge |
-| **Değerlendirme Modeli** | Ajan değerlendirme sistemi | Azure OpenAI | İkincil Bölge |
+| **Grader Model** | Ajan değerlendirme sistemi | Azure OpenAI | İkincil Bölge |
 
 ## 📁 Proje Yapısı
 
-> **📍 Durum Simgesi:**  
+> **📍 Durum Açıklaması:**  
 > ✅ = Depoda mevcut  
 > 📝 = Referans uygulama (bu belgede kod örneği)  
-> 🔨 = Sizin oluşturmanız gerekiyor
+> 🔨 = Oluşturmanız gerekiyor
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -372,11 +363,11 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Hızlı Başlangıç: Şimdi Yapabilecekleriniz
+## 🚀 Hızlı Başlangıç: Şu Anda Yapabilecekleriniz
 
-### Seçenek 1: Sadece Altyapıyı Dağıtın (30 dakika)
+### Seçenek 1: Sadece Altyapıyı Dağıt (30 dakika)
 
-**Elde edeceğiniz:** Tüm Azure hizmetleri sağlanmış ve geliştirmeye hazır
+**Neler elde edersiniz:** Geliştirme için tüm Azure servisleri sağlanmış ve hazır
 
 ```bash
 # Depoyu klonla
@@ -391,7 +382,7 @@ az resource list --resource-group myResourceGroup --output table
 ```
 
 **Beklenen sonuç:**
-- ✅ Azure OpenAI hizmetleri dağıtıldı (3 bölge)
+- ✅ Azure OpenAI servisleri dağıtıldı (3 bölge)
 - ✅ AI Search hizmeti oluşturuldu (boş)
 - ✅ Container Apps ortamı hazır
 - ✅ Depolama, Cosmos DB, Key Vault yapılandırıldı
@@ -399,50 +390,50 @@ az resource list --resource-group myResourceGroup --output table
 
 ### Seçenek 2: Mimarinin İncelenmesi (2-3 saat)
 
-**Elde edeceğiniz:** Çoklu ajan desenleri hakkında derinlemesine bilgi
+**Neler elde edersiniz:** Çok ajanlı desenler hakkında derinlemesine anlayış
 
-1. Bu belgeyi tamamen okuyun
+1. Bu dokümanı tamamen okuyun
 2. Her bileşen için kod örneklerini inceleyin
-3. Tasarım kararlarını ve ödünleşimleri anlayın
-4. Maliyet optimizasyonu stratejilerini inceleyin
+3. Tasarım kararlarını ve trade-off'ları anlayın
+4. Maliyet optimizasyonu stratejilerini çalışın
 5. Uygulama yaklaşımınızı planlayın
 
 **Beklenen sonuç:**
-- ✅ Sistem mimarisi hakkında net bir zihinsel model
+- ✅ Sistem mimarisinin net zihinsel modeli
 - ✅ Gerekli bileşenlerin anlaşılması
 - ✅ Gerçekçi çaba tahminleri
 - ✅ Uygulama planı
 
-### Seçenek 3: Tam Sistemi Geliştirin (80-120 saat)
+### Seçenek 3: Tam Sistemi İnşa Et (80-120 saat)
 
-**Elde edeceğiniz:** Üretime hazır çoklu ajan çözümü
+**Neler elde edersiniz:** Üretime hazır çok ajanlı çözüm
 
-1. **Aşama 1:** Altyapıyı dağıtın (yukarıda tamamlandı)
-2. **Aşama 2:** Aşağıdaki kod örneklerini kullanarak ajanları uygulayın (30-40 saat)
-3. **Aşama 3:** Yönlendirme hizmetini oluşturun (12-16 saat)
-4. **Aşama 4:** Ön uç arayüzü oluşturun (20-30 saat)
+1. **Aşama 1:** Altyapıyı dağıtın (yukarıda yapıldı)
+2. **Aşama 2:** Ajanları aşağıdaki kod örneklerini kullanarak uygulayın (30-40 saat)
+3. **Aşama 3:** Yönlendirme servisini oluşturun (12-16 saat)
+4. **Aşama 4:** Ön uç UI oluşturun (20-30 saat)
 5. **Aşama 5:** Veri hatlarını yapılandırın (8-12 saat)
-6. **Aşama 6:** İzleme ve değerlendirme ekleyin (10-15 saat)
+6. **Aşama 6:** İzleme & değerlendirme ekleyin (10-15 saat)
 
 **Beklenen sonuç:**
-- ✅ Tam işlevsel çoklu ajan sistemi
-- ✅ Üretim seviyesinde izleme
+- ✅ Tam işlevsel çok ajanlı sistem
+- ✅ Üretim düzeyinde izleme
 - ✅ Güvenlik doğrulaması
-- ✅ Maliyet optimize edilmiş dağıtım
+- ✅ Maliyet optimizasyonu yapılmış dağıtım
 
 ---
 
-## 📚 Mimari Referans ve Uygulama Rehberi
+## 📚 Mimari Referans ve Uygulama Kılavuzu
 
-Aşağıdaki bölümler, uygulamanız için ayrıntılı mimari desenler, yapılandırma örnekleri ve referans kodlar sağlar.
+Aşağıdaki bölümler uygulamanız için ayrıntılı mimari desenler, yapılandırma örnekleri ve referans kod sağlar.
 
-## Başlangıç Yapılandırma Gereksinimleri
+## İlk Yapılandırma Gereksinimleri
 
-### 1. Birden Fazla Ajan ve Yapılandırma
+### 1. Birden Çok Ajan & Yapılandırma
 
-**Hedef**: 2 uzman ajan dağıtımı - "Müşteri Ajanı" (müşteri hizmetleri) ve "Envanter" (stok yönetimi)
+**Hedef**: 2 uzmanlaşmış ajan dağıtın - "Customer Agent" (müşteri hizmetleri) ve "Inventory" (stok yönetimi)
 
-> **📝 Not:** Aşağıdaki azure.yaml ve Bicep yapılandırmaları, çoklu ajan dağıtımlarını nasıl yapılandıracağınızı gösteren **referans örneklerdir**. Bu dosyaları ve ilgili ajan uygulamalarını oluşturmanız gerekecek.
+> **📝 Not:** Aşağıdaki azure.yaml ve Bicep yapılandırmaları çok ajanlı dağıtımların nasıl yapılandırılacağına dair **referans örneklerdir**. Bu dosyaları ve ilgili ajan uygulamalarını siz oluşturmalısınız.
 
 #### Yapılandırma Adımları:
 
@@ -476,7 +467,7 @@ services:
         }
 ```
 
-#### Bicep Şablon Güncellemeleri:
+#### Bicep Şablonu Güncellemeleri:
 
 ```bicep
 // infra/agents.bicep
@@ -516,9 +507,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Kapasite Planlamasıyla Çoklu Model
+### 2. Kapasite Planlaması ile Çoklu Modeller
 
-**Hedef**: Sohbet modeli (Müşteri), gömüler modeli (arama) ve akıl yürütme modeli (değerlendirici) ile doğru kota yönetimi
+**Hedef**: Sohbet modeli (Müşteri), embedding modeli (arama) ve akıl yürütme modeli (grader) için uygun kota yönetimi ile dağıtım
 
 #### Çok Bölgeli Strateji:
 
@@ -573,11 +564,11 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search ile Veri Dizin Yapılandırması
+### 3. AI Search ile Veri İndeks Yapılandırması
 
-**Hedef**: Veri güncellemeleri ve otomatik dizinleme için AI Search yapılandırması
+**Hedef**: Veri güncellemeleri ve otomatik indeksleme için AI Search yapılandırmak
 
-#### Ön Sağlama Kancası:
+#### Ön-Provisioning Hook:
 
 ```bash
 #!/bin/bash
@@ -585,7 +576,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Belirli SKU ile arama hizmeti oluştur
+# Belirli bir SKU ile arama hizmeti oluştur
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -594,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Sağlama Sonrası Veri Kurulumu:
+#### Sonrası Provisioning Veri Kurulumu:
 
 ```bash
 #!/bin/bash
@@ -605,7 +596,7 @@ echo "Configuring AI Search indexes and uploading initial data..."
 # Arama hizmeti anahtarını al
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Dizin şeması oluştur
+# İndeks şemasını oluştur
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
@@ -618,7 +609,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
 
-#### Arama Dizin Şeması:
+#### Arama İndeks Şeması:
 
 ```json
 {
@@ -643,14 +634,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. AI Search için Ajan Araç Yapılandırması
+### 4. Ajan Araç Yapılandırması için AI Search
 
-**Hedef**: Ajanların AI Search'ü bir bağlama aracı olarak kullanmasını sağlama
+**Hedef**: Ajanların AI Search'i bir dayanak aracı olarak kullanacak şekilde yapılandırılması
 
 #### Ajan Arama Aracı Uygulaması:
 
 ```python
-# src/agents/tools/arama_aracı.py
+# kaynak/ajanlar/araçlar/arama_araci.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -704,13 +695,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # Öncelikle ilgili bağlamı arayın
+        # Önce ilgili bağlamı ara
         search_results = await self.search_tool.search_products(user_query)
         
-        # LLM için bağlamı hazırlayın
+        # LLM için bağlamı hazırla
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Dayanak ile yanıt oluşturun
+        # Temellendirilmiş yanıt oluştur
         response = await self.openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -724,7 +715,7 @@ class CustomerAgent:
 
 ### 5. Dosya Yükleme Depolama Entegrasyonu
 
-**Hedef**: Ajanların yüklenen dosyaları (kılavuzlar, belgeler) RAG bağlamı için işlemesini sağlama
+**Hedef**: Ajanların yüklenen dosyaları (kullanım kılavuzları, belgeler) RAG bağlamı için işleyebilmesini sağlamak
 
 #### Depolama Yapılandırması:
 
@@ -765,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Belge İşleme Hattı:
+#### Belge İşleme Boru Hattı:
 
 ```python
 # src/document_processor.py
@@ -785,13 +776,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Blob depolama alanından dosya indir
+        # Blob depolamasından dosyayı indir
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Belge Zekası kullanarak metin çıkar
+        # Document Intelligence kullanarak metni çıkar
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -805,13 +796,13 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Gömü oluştur
+        # Embedding'ler oluştur
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # AI Arama'da indeksle
+        # AI Search'te dizine ekle
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -825,9 +816,9 @@ class DocumentProcessor:
 
 ### 6. Bing Arama Entegrasyonu
 
-**Hedef**: Gerçek zamanlı bilgi için Bing Arama yeteneklerini ekleme
+**Hedef**: Gerçek zamanlı bilgi için Bing Arama yetenekleri eklemek
 
-#### Bicep Kaynak Ekleme:
+#### Bicep Kaynak Eklemesi:
 
 ```bicep
 // infra/bing-search.bicep
@@ -889,11 +880,11 @@ class BingSearchTool:
 
 ---
 
-## İzleme ve Gözlemlenebilirlik
+## İzleme & Gözlemlenebilirlik
 
 ### 7. İzleme ve Application Insights
 
-**Hedef**: İzleme günlükleri ve Application Insights ile kapsamlı izleme
+**Hedef**: İzleme günlükleri ve application insights ile kapsamlı izleme
 
 #### Application Insights Yapılandırması:
 
@@ -962,7 +953,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Günlüğü yapılandır
+        # Günlük kaydını yapılandır
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -1054,14 +1045,14 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Kırmızı Ekip Güvenlik Doğrulaması
+### 8. Red Team Güvenlik Doğrulaması
 
 **Hedef**: Ajanlar ve modeller için otomatik güvenlik testleri
 
-#### Kırmızı Ekip Yapılandırması:
+#### Red Team Yapılandırması:
 
 ```python
-# src/güvenlik/kırmızı_takım_taraması.py
+# src/security/red_team_scanner.py
 import asyncio
 from typing import List, Dict
 import json
@@ -1174,7 +1165,7 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Uygulama, ajan uç noktasına HTTP isteği gönderecek
+        # Uygulama, ajan uçnoktasına HTTP isteği gönderecek
         # Demo amaçlı, yer tutucu döndürülüyor
         import aiohttp
         
@@ -1232,7 +1223,7 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Temel puanlama: 100 - (zafiyetler / toplam * 100)
+        # Temel puanlama: 100 - (vulnerabilities / total * 100)
         if total_strategies == 0:
             return 100.0
         
@@ -1249,7 +1240,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Otomatik Güvenlik Hattı:
+#### Otomatik Güvenlik Boru Hattı:
 
 ```bash
 #!/bin/bash
@@ -1273,11 +1264,11 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Değerlendirici Model ile Ajan Değerlendirmesi
+### 9. Grader Model ile Ajan Değerlendirmesi
 
-**Hedef**: Özel değerlendirici model ile değerlendirme sistemi dağıtımı
+**Hedef**: Ayrılmış bir grader modeli ile değerlendirme sistemini dağıtmak
 
-#### Değerlendirici Model Yapılandırması:
+#### Grader Model Yapılandırması:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1480,7 +1471,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Performans derecelendirmesi
+        # Performans değerlendirmesi
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1496,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Test Durumları Yapılandırması:
+#### Test Vaka Yapılandırması:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1535,11 +1526,11 @@ class AgentEvaluator:
 
 ---
 
-## Özelleştirme ve Güncellemeler
+## Özelleştirme & Güncellemeler
 
 ### 10. Container App Özelleştirmesi
 
-**Hedef**: Container app yapılandırmasını güncelleyin ve özel bir arayüzle değiştirin
+**Hedef**: Container app yapılandırmasını güncellemek ve özel UI ile değiştirmek
 
 #### Dinamik Yapılandırma:
 
@@ -1557,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Özel Ön Uç Geliştirme:
+#### Özel Ön Uç Derlemesi:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1584,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Derleme ve Dağıtım Komutu:
+#### Derleme ve Dağıtım Betiği:
 
 ```bash
 #!/bin/bash
@@ -1592,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Ortam değişkenleri ile özel görüntü oluştur
+# Ortam değişkenleriyle özel görüntü oluştur
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1606,7 +1597,7 @@ az acr build \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Konteyner uygulamasını güncelle
+# Konteyner uygulamayı güncelle
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1621,9 +1612,9 @@ echo "Frontend deployed successfully!"
 
 ### Yaygın Sorunlar ve Çözümleri
 
-#### 1. Container Apps Kota Sınırları
+#### 1. Container Apps Kota Limitleri
 
-**Sorun**: Bölgesel kota sınırları nedeniyle dağıtım başarısız oluyor
+**Problemler**: Bölgesel kota limitleri nedeniyle dağıtım başarısız oluyor
 
 **Çözüm**:
 ```bash
@@ -1633,7 +1624,7 @@ az containerapp env show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Kota artırımı talep et
+# Kota artışı talep et
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1644,9 +1635,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Model Dağıtım Süresi Dolması
+#### 2. Model Dağıtımı Süresi Dolması
 
-**Sorun**: API sürümünün süresi dolduğu için model dağıtımı başarısız oluyor
+**Problemler**: Model dağıtımı, API sürümü süresi dolduğu için başarısız oluyor
 
 **Çözüm**:
 ```python
@@ -1656,7 +1647,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Bu, mevcut sürümleri almak için Azure OpenAI API'sini çağırır
+    # Bu, mevcut sürümleri almak için Azure OpenAI API'sini çağırır.
     latest_versions = {
         "gpt-4o": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1695,7 +1686,7 @@ if __name__ == "__main__":
 
 #### 3. İnce Ayar Entegrasyonu
 
-**Sorun**: İnce ayarlı modelleri AZD dağıtımına nasıl entegre edebilirim?
+**Problemler**: İnce ayarlı modeller nasıl AZD dağıtımına entegre edilir
 
 **Çözüm**:
 ```python
@@ -1735,7 +1726,7 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Dağıtımı ince ayar yapılmış modeli kullanacak şekilde güncelle
+            # Dağıtımı, ince ayarlı modeli kullanacak şekilde güncelle
             # Bu, dağıtımı güncellemek için Azure CLI'yi çağırır
             return fine_tuned_model
         else:
@@ -1745,13 +1736,13 @@ class FineTuningPipeline:
 
 ---
 
-## SSS ve Açık Uçlu Keşif
+## SSS & Açık Uçlu Keşif
 
 ### Sıkça Sorulan Sorular
 
-#### S: Birden fazla ajanı kolayca dağıtmanın bir yolu var mı (tasarım deseni)?
+#### S: Birden çok ajan dağıtmak için kolay bir yol var mı (tasarım deseni)?
 
-**C: Evet! Çoklu Ajan Desenini kullanın:**
+**C: Evet! Çok Ajanlı Deseni kullanın:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1768,9 +1759,9 @@ services:
         }
 ```
 
-#### S: "Model yönlendirici"yi bir model olarak dağıtabilir miyim (maliyet etkileri)?
+#### S: "Model yönlendiricisini" bir model olarak dağıtabilir miyim (maliyet etkileri)?
 
-**C: Evet, dikkatli bir şekilde:**
+**C: Evet, dikkatli değerlendirme ile:**
 
 ```python
 # Model Yönlendirici Uygulaması
@@ -1798,17 +1789,17 @@ class ModelRouter:
 ```
 
 **Maliyet Etkileri:**
-- **Tasarruf**: Basit sorgular için %60-80 maliyet azaltımı
-- **Ödünleşimler**: Yönlendirme mantığı için hafif gecikme artışı
-- **İzleme**: Doğruluk ve maliyet metriklerini takip edin
+- **Tasarruf:** Basit sorgular için %60-80 maliyet azalması
+- **Takaslar:** Yönlendirme mantığı için hafif gecikme artışı
+- **İzleme:** Doğruluk vs. maliyet metriklerini izleyin
 
-#### S: Bir azd şablonundan ince ayar işi başlatabilir miyim?
+#### S: azd şablonundan ince ayar işi başlatabilir miyim?
 
-**C: Evet, sağlama sonrası kancaları kullanarak:**
+**C: Evet, post-provisioning hook'ları kullanarak:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Entegrasyonu İyileştirme
+# hooks/postprovision.sh - İnce Ayar Entegrasyonu
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1817,7 +1808,7 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# İyileştirme işini başlat
+# İnce ayar işini başlat
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4o-mini")
@@ -1867,7 +1858,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-#### Maliyet Optimizasyon Çerçevesi
+#### Maliyet Optimizasyonu Çerçevesi
 
 ```python
 # src/optimization/cost_optimizer.py
@@ -1891,7 +1882,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Yoğun zaman analizi
+        # Yoğun saat analizi
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1915,42 +1906,42 @@ class CostOptimizer:
 ## ✅ Dağıtıma Hazır ARM Şablonu
 
 > **✨ BU GERÇEKTEN VAR VE ÇALIŞIYOR!**  
-> Yukarıdaki kavramsal kod örneklerinin aksine, ARM şablonu bu depoda yer alan **gerçek, çalışan bir altyapı dağıtımıdır**.
+> Yukarıdaki kavramsal kod örneklerinin aksine, ARM şablonu bu depoda bulunan **gerçek, çalışan bir altyapı dağıtımıdır**.
 
-### Bu Şablon Gerçekte Ne Yapar?
+### Bu Şablon Gerçekten Ne Yapar
 
-[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) içindeki ARM şablonu, çoklu ajan sistemine ihtiyaç duyulan **tüm Azure altyapısını** sağlar. Bu, **çalıştırmaya hazır tek bileşendir** - diğer her şey geliştirme gerektirir.
+The ARM template at [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) provisions **all Azure infrastructure** needed for the multi-agent system. This is the **only ready-to-run component** - everything else requires development.
 
-### ARM Şablonunda Neler Var?
+### ARM Şablonunda Neler Var
 
-[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) konumundaki ARM şablonu şunları içerir:
+The ARM template located in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) includes:
 
 #### **Tam Altyapı**
 - ✅ **Çok bölgeli Azure OpenAI** dağıtımları (GPT-4o, GPT-4o-mini, embeddings, grader)
-- ✅ **Azure AI Search** ile vektör arama yetenekleri
-- ✅ **Azure Storage** ile belge ve yükleme konteynerleri
-- ✅ **Container Apps Environment** ile otomatik ölçeklendirme
-- ✅ **Agent Router & Frontend** konteyner uygulamaları
-- ✅ **Cosmos DB** ile sohbet geçmişi kalıcılığı
-- ✅ **Application Insights** ile kapsamlı izleme
-- ✅ **Key Vault** ile güvenli gizli yönetimi
-- ✅ **Document Intelligence** ile dosya işleme
-- ✅ **Bing Search API** ile gerçek zamanlı bilgi
+- ✅ **Azure AI Search** vektör arama yetenekleri ile
+- ✅ **Azure Storage** belge ve yükleme konteynerleri ile
+- ✅ **Container Apps Environment** otomatik ölçeklendirme ile
+- ✅ **Agent Router & Frontend** container uygulamaları
+- ✅ **Cosmos DB** sohbet geçmişi kalıcılığı için
+- ✅ **Application Insights** kapsamlı izleme için
+- ✅ **Key Vault** güvenli gizli yönetimi için
+- ✅ **Document Intelligence** dosya işleme için
+- ✅ **Bing Search API** gerçek zamanlı bilgi için
 
 #### **Dağıtım Modları**
-| Mod | Kullanım Durumu | Kaynaklar | Tahmini Maliyet/Ay |
-|------|----------------|-----------|---------------------|
-| **Minimal** | Geliştirme, Test | Temel SKUs, Tek bölge | $100-370 |
-| **Standart** | Üretim, Orta ölçek | Standart SKUs, Çok bölgeli | $420-1,450 |
-| **Premium** | Kurumsal, Yüksek ölçek | Premium SKUs, HA yapılandırması | $1,150-3,500 |
+| Mod | Kullanım | Kaynaklar | Tahmini Maliyet/Ay |
+|------|----------|-----------|---------------------|
+| **Minimal** | Geliştirme, Test | Temel SKU'lar, Tek bölge | $100-370 |
+| **Standard** | Prodüksiyon, Orta ölçek | Standart SKU'lar, Çok bölge | $420-1,450 |
+| **Premium** | Kurumsal, Yüksek ölçek | Premium SKU'lar, HA kurulumu | $1,150-3,500 |
 
 ### 🎯 Hızlı Dağıtım Seçenekleri
 
-#### Seçenek 1: Tek Tıkla Azure Dağıtımı
+#### Seçenek 1: Tek Tıklamayla Azure Dağıtımı
 
 [![Azure'a Dağıt](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Seçenek 2: Azure CLI ile Dağıtım
+#### Option 2: Azure CLI Deployment
 
 ```bash
 # Depoyu klonla
@@ -1963,20 +1954,20 @@ chmod +x deploy.sh
 # Varsayılan ayarlarla dağıt (Standart mod)
 ./deploy.sh -g myResourceGroup
 
-# Premium özelliklerle üretim için dağıt
+# Üretim için premium özelliklerle dağıt
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Geliştirme için minimal versiyonu dağıt
+# Geliştirme için minimal sürümü dağıt
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Seçenek 3: Doğrudan ARM Şablonu Dağıtımı
+#### Option 3: Direct ARM Template Deployment
 
 ```bash
-# Kaynak grubu oluştur
+# Kaynak grubu oluşturun
 az group create --name myResourceGroup --location eastus2
 
-# Şablonu doğrudan dağıt
+# Şablonu doğrudan dağıtın
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1986,7 +1977,7 @@ az deployment group create \
 
 ### Şablon Çıktıları
 
-Başarılı bir dağıtımdan sonra şunları alacaksınız:
+Başarılı dağıtımın ardından şunları alacaksınız:
 
 ```json
 {
@@ -2002,7 +1993,7 @@ Başarılı bir dağıtımdan sonra şunları alacaksınız:
 
 ### 🔧 Dağıtım Sonrası Yapılandırma
 
-ARM şablonu altyapı sağlama işlemini gerçekleştirir. Dağıtımdan sonra:
+ARM şablonu altyapı sağlanmasını yönetir. Dağıtımdan sonra:
 
 1. **Arama İndeksini Yapılandırın**:
    ```bash
@@ -2013,9 +2004,9 @@ ARM şablonu altyapı sağlama işlemini gerçekleştirir. Dağıtımdan sonra:
      -d @../data/search-schema.json
    ```
 
-2. **İlk Belgeleri Yükleyin**:
+2. **Başlangıç Belgelerini Yükleyin**:
    ```bash
-   # Ürün kılavuzlarını ve bilgi tabanını yükle
+   # Ürün kılavuzlarını ve bilgi tabanını yükleyin
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
@@ -2024,7 +2015,7 @@ ARM şablonu altyapı sağlama işlemini gerçekleştirir. Dağıtımdan sonra:
 
 3. **Ajan Kodunu Dağıtın**:
    ```bash
-   # Gerçek ajan uygulamalarını oluştur ve dağıt
+   # Gerçek ajan uygulamalarını oluşturun ve dağıtın
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2050,77 +2041,77 @@ Dağıtımınızı özelleştirmek için `azuredeploy.parameters.json` dosyasın
 
 ### 📊 Dağıtım Özellikleri
 
-- ✅ **Önkoşul doğrulama** (Azure CLI, kotalar, izinler)
-- ✅ **Çok bölgeli yüksek kullanılabilirlik** ile otomatik hata toleransı
+- ✅ **Önkoşullar doğrulaması** (Azure CLI, kota, izinler)
+- ✅ **Çok bölgeli yüksek erişilebilirlik** otomatik hata geçişi ile
 - ✅ **Kapsamlı izleme** Application Insights ve Log Analytics ile
 - ✅ **Güvenlik en iyi uygulamaları** Key Vault ve RBAC ile
 - ✅ **Maliyet optimizasyonu** yapılandırılabilir dağıtım modları ile
-- ✅ **Talep modellerine dayalı otomatik ölçeklendirme**
-- ✅ **Sıfır kesinti güncellemeleri** Container Apps revizyonları ile
+- ✅ **Talep modellerine göre otomatik ölçeklendirme**
+- ✅ **Sıfır kesintiyle güncellemeler** Container Apps revizyonları ile
 
 ### 🔍 İzleme ve Yönetim
 
-Dağıtım tamamlandıktan sonra çözümünüzü şu yollarla izleyebilirsiniz:
+Dağıtıldıktan sonra çözümünüzü şunlar aracılığıyla izleyin:
 
 - **Application Insights**: Performans metrikleri, bağımlılık takibi ve özel telemetri
-- **Log Analytics**: Tüm bileşenlerden merkezi günlük kaydı
-- **Azure Monitor**: Kaynak sağlığı ve kullanılabilirlik izleme
-- **Maliyet Yönetimi**: Gerçek zamanlı maliyet takibi ve bütçe uyarıları
+- **Log Analytics**: Tüm bileşenlerden merkezi günlükleme
+- **Azure Monitor**: Kaynak sağlığı ve erişilebilirlik izleme
+- **Cost Management**: Gerçek zamanlı maliyet takibi ve bütçe uyarıları
 
 ---
 
 ## 📚 Tam Uygulama Kılavuzu
 
-Bu senaryo dokümanı ve ARM şablonu, üretime hazır bir çoklu ajan müşteri destek çözümünü dağıtmak için gereken her şeyi sağlar. Uygulama şunları kapsar:
+This scenario document combined with the ARM template provides everything needed to deploy a production-ready multi-agent customer support solution. The implementation covers:
 
-✅ **Mimari Tasarım** - Bileşen ilişkileriyle kapsamlı sistem tasarımı  
-✅ **Altyapı Sağlama** - Tek tıkla dağıtım için tam ARM şablonu  
+✅ **Mimari Tasarım** - Bileşen ilişkilendirmeleri ile kapsamlı sistem tasarımı  
+✅ **Altyapı Sağlanması** - Tek tıklamayla dağıtım için eksiksiz ARM şablonu  
 ✅ **Ajan Yapılandırması** - Müşteri ve Envanter ajanları için ayrıntılı kurulum  
-✅ **Çoklu Model Dağıtımı** - Bölgeler arasında stratejik model yerleştirme  
-✅ **Arama Entegrasyonu** - Vektör yetenekleri ve veri indeksleme ile AI Search  
-✅ **Güvenlik Uygulaması** - Red teaming, güvenlik taramaları ve güvenli uygulamalar  
+✅ **Çoklu Model Dağıtımı** - Modellerin bölgeler arasında stratejik yerleştirilmesi  
+✅ **Arama Entegrasyonu** - Vektör yetenekleri ve veri indekslemesi ile AI Search  
+✅ **Güvenlik Uygulaması** - Red teaming, zafiyet tarama ve güvenli uygulamalar  
 ✅ **İzleme ve Değerlendirme** - Kapsamlı telemetri ve ajan değerlendirme çerçevesi  
 ✅ **Üretim Hazırlığı** - HA ve felaket kurtarma ile kurumsal düzeyde dağıtım  
-✅ **Maliyet Optimizasyonu** - Akıllı yönlendirme ve kullanım tabanlı ölçeklendirme  
+✅ **Maliyet Optimizasyonu** - Akıllı yönlendirme ve kullanıma dayalı ölçeklendirme  
 ✅ **Sorun Giderme Kılavuzu** - Yaygın sorunlar ve çözüm stratejileri
 
 ---
 
-## 📊 Özet: Neler Öğrendiniz?
+## 📊 Özet: Neler Öğrendiniz
 
-### Ele Alınan Mimari Modeller
+### Ele Alınan Mimari Desenler
 
-✅ **Çoklu Ajan Sistem Tasarımı** - Özel modellerle (Müşteri + Envanter) uzman ajanlar  
-✅ **Çok Bölgeli Dağıtım** - Maliyet optimizasyonu ve yedeklilik için stratejik model yerleştirme  
-✅ **RAG Mimarisi** - Vektör embeddings ile AI Search entegrasyonu  
-✅ **Ajan Değerlendirme** - Kalite değerlendirmesi için özel grader modeli  
-✅ **Güvenlik Çerçevesi** - Red teaming ve güvenlik tarama modelleri  
+✅ **Çoklu Ajan Sistemi Tasarımı** - Özel ajanlar (Müşteri + Envanter) ve adanmış modeller  
+✅ **Çok Bölge Dağıtımı** - Maliyet optimizasyonu ve yedeklilik için modellerin stratejik yerleştirilmesi  
+✅ **RAG Mimarisi** - Temellendirilmiş yanıtlar için vektör embedding'leri ile AI Search entegrasyonu  
+✅ **Ajan Değerlendirmesi** - Kalite değerlendirmesi için adanmış grader modeli  
+✅ **Güvenlik Çerçevesi** - Red teaming ve zafiyet tarama desenleri  
 ✅ **Maliyet Optimizasyonu** - Model yönlendirme ve kapasite planlama stratejileri  
 ✅ **Üretim İzleme** - Özel telemetri ile Application Insights  
 
-### Bu Doküman Ne Sağlar?
+### Bu Belge Neler Sağlıyor
 
-| Bileşen | Durum | Nerede Bulunur? |
+| Bileşen | Durum | Nerede Bulunur |
 |-----------|--------|------------------|
-| **Altyapı Şablonu** | ✅ Dağıtıma Hazır | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Mimari Diyagramlar** | ✅ Tamamlandı | Yukarıdaki Mermaid diyagramı |
-| **Kod Örnekleri** | ✅ Referans Uygulamalar | Bu doküman boyunca |
-| **Yapılandırma Modelleri** | ✅ Ayrıntılı Rehberlik | Yukarıdaki Bölüm 1-10 |
-| **Ajan Uygulamaları** | 🔨 Siz Yapıyorsunuz | ~40 saat geliştirme |
-| **Ön Uç Arayüzü** | 🔨 Siz Yapıyorsunuz | ~25 saat geliştirme |
-| **Veri Hatları** | 🔨 Siz Yapıyorsunuz | ~10 saat geliştirme |
+| **Infrastructure Template** | ✅ Dağıtıma Hazır | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Tamamlandı | Yukarıdaki Mermaid diyagramı |
+| **Code Examples** | ✅ Referans Uygulamalar | Bu belgenin tamamında |
+| **Configuration Patterns** | ✅ Ayrıntılı Rehberlik | Yukarıdaki 1-10. bölümler |
+| **Agent Implementations** | 🔨 Bunu Siz İnşa Edersiniz | ~40 saat geliştirme |
+| **Frontend UI** | 🔨 Bunu Siz İnşa Edersiniz | ~25 saat geliştirme |
+| **Data Pipelines** | 🔨 Bunu Siz İnşa Edersiniz | ~10 saat geliştirme |
 
-### Gerçeklik Kontrolü: Mevcut Olanlar
+### Gerçek Durum: Gerçekte Neler Var
 
-**Depoda (Şu Anda Hazır):**
-- ✅ 15+ Azure hizmetini dağıtan ARM şablonu (azuredeploy.json)
-- ✅ Doğrulama ile dağıtım betiği (deploy.sh)
+**Depoda (Şimdi Hazır):**
+- ✅ 15+'den fazla Azure servisini dağıtan ARM şablonu (azuredeploy.json)
+- ✅ Doğrulama içeren dağıtım betiği (deploy.sh)
 - ✅ Parametre yapılandırması (azuredeploy.parameters.json)
 
-**Dokümanda Referans Verilenler (Siz Oluşturuyorsunuz):**
+**Belgede Atıf Yapılanlar (Siz Oluşturacaksınız):**
 - 🔨 Ajan uygulama kodu (~30-40 saat)
-- 🔨 Yönlendirme hizmeti (~12-16 saat)
-- 🔨 Ön uç uygulama (~20-30 saat)
+- 🔨 Yönlendirme servisi (~12-16 saat)
+- 🔨 Frontend uygulaması (~20-30 saat)
 - 🔨 Veri kurulum betikleri (~8-12 saat)
 - 🔨 İzleme çerçevesi (~10-15 saat)
 
@@ -2132,63 +2123,63 @@ cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Tüm Sistemi İnşa Etmek İstiyorsanız (80-120 saat)
-1. ✅ Bu mimari dokümanını okuyun ve anlayın (2-3 saat)
+#### Tam Sistemi Kurmak İstiyorsanız (80-120 saat)
+1. ✅ Bu mimari belgesini okuyun ve anlayın (2-3 saat)
 2. ✅ ARM şablonunu kullanarak altyapıyı dağıtın (30 dakika)
-3. 🔨 Referans kod modellerini kullanarak ajanları uygulayın (~40 saat)
-4. 🔨 FastAPI/Express ile yönlendirme hizmeti oluşturun (~15 saat)
-5. 🔨 React/Vue ile ön uç arayüzü oluşturun (~25 saat)
+3. 🔨 Ajanları referans kod desenleri kullanarak uygulayın (~40 saat)
+4. 🔨 FastAPI/Express ile yönlendirme servisini oluşturun (~15 saat)
+5. 🔨 React/Vue ile frontend arayüzü oluşturun (~25 saat)
 6. 🔨 Veri hattını ve arama indeksini yapılandırın (~10 saat)
 7. 🔨 İzleme ve değerlendirme ekleyin (~15 saat)
 8. ✅ Test edin, güvenli hale getirin ve optimize edin (~10 saat)
 
-#### Çoklu Ajan Modellerini Öğrenmek İstiyorsanız (Çalışma)
+#### Çoklu Ajan Desenlerini Öğrenmek İstiyorsanız (Çalışma)
 - 📖 Mimari diyagramı ve bileşen ilişkilerini inceleyin
 - 📖 SearchTool, BingTool, AgentEvaluator için kod örneklerini inceleyin
-- 📖 Çok bölgeli dağıtım stratejisini anlayın
+- 📖 Çok bölge dağıtım stratejisini anlayın
 - 📖 Değerlendirme ve güvenlik çerçevelerini öğrenin
-- 📖 Kendi projelerinize bu modelleri uygulayın
+- 📖 Desenleri kendi projelerinize uygulayın
 
 ### Temel Çıkarımlar
 
-1. **Altyapı ve Uygulama** - ARM şablonu altyapıyı sağlar; ajanlar geliştirme gerektirir
-2. **Çok Bölgeli Strateji** - Stratejik model yerleştirme maliyetleri düşürür ve güvenilirliği artırır
-3. **Değerlendirme Çerçevesi** - Özel grader modeli sürekli kalite değerlendirmesi sağlar
-4. **Önce Güvenlik** - Red teaming ve güvenlik taramaları üretim için gereklidir
-5. **Maliyet Optimizasyonu** - GPT-4o ve GPT-4o-mini arasında akıllı yönlendirme %60-80 tasarruf sağlar
+1. **Altyapı vs. Uygulama** - ARM şablonu altyapı sağlar; ajanlar geliştirme gerektirir  
+2. **Çok Bölge Stratejisi** - Modellerin stratejik yerleştirilmesi maliyetleri azaltır ve güvenilirliği artırır  
+3. **Değerlendirme Çerçevesi** - Adanmış grader modeli sürekli kalite değerlendirmesini sağlar  
+4. **Önce Güvenlik** - Red teaming ve zafiyet taraması üretim için esastır  
+5. **Maliyet Optimizasyonu** - GPT-4o ile GPT-4o-mini arasındaki akıllı yönlendirme %60-80 tasarruf sağlar
 
 ### Tahmini Maliyetler
 
-| Dağıtım Modu | Altyapı/Ay | Geliştirme (Tek Seferlik) | İlk Ay Toplamı |
+| Dağıtım Modu | Altyapı/Ay | Geliştirme (Tek Seferlik) | Toplam İlk Ay |
 |-----------------|---------------------|------------------------|-------------------|
 | **Minimal** | $100-370 | $15K-25K (80-120 saat) | $15.1K-25.4K |
-| **Standart** | $420-1,450 | $15K-25K (aynı çaba) | $15.4K-26.5K |
+| **Standard** | $420-1,450 | $15K-25K (aynı çaba) | $15.4K-26.5K |
 | **Premium** | $1,150-3,500 | $15K-25K (aynı çaba) | $16.2K-28.5K |
 
-**Not:** Yeni uygulamalar için altyapı maliyeti toplam maliyetin <%5'idir. Geliştirme çabası ana yatırımdır.
+**Not:** Altyapı yeni uygulamalar için toplam maliyetin %5'inden azdır. Geliştirme çabası ana yatırım kalemidir.
 
 ### İlgili Kaynaklar
 
 - 📚 [ARM Şablonu Dağıtım Kılavuzu](retail-multiagent-arm-template/README.md) - Altyapı kurulumu
 - 📚 [Azure OpenAI En İyi Uygulamaları](https://learn.microsoft.com/azure/ai-services/openai/) - Model dağıtımı
-- 📚 [AI Search Dokümantasyonu](https://learn.microsoft.com/azure/search/) - Vektör arama yapılandırması
-- 📚 [Container Apps Modelleri](https://learn.microsoft.com/azure/container-apps/) - Mikro hizmet dağıtımı
+- 📚 [AI Search Belgeleri](https://learn.microsoft.com/azure/search/) - Vektör arama yapılandırması
+- 📚 [Container Apps Desenleri](https://learn.microsoft.com/azure/container-apps/) - Mikroservis dağıtımı
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - İzleme kurulumu
 
 ### Sorular veya Sorunlar?
 
-- 🐛 [Sorun Bildirin](https://github.com/microsoft/AZD-for-beginners/issues) - Şablon hataları veya dokümantasyon hataları
+- 🐛 [Sorun Bildir](https://github.com/microsoft/AZD-for-beginners/issues) - Şablon hataları veya dokümantasyon hataları
 - 💬 [GitHub Tartışmaları](https://github.com/microsoft/AZD-for-beginners/discussions) - Mimari sorular
-- 📖 [SSS](../../resources/faq.md) - Yaygın soruların yanıtları
-- 🔧 [Sorun Giderme Kılavuzu](../../docs/troubleshooting/common-issues.md) - Dağıtım sorunları
+- 📖 [SSS](../resources/faq.md) - Yaygın sorulara cevaplar
+- 🔧 [Sorun Giderme Kılavuzu](../docs/troubleshooting/common-issues.md) - Dağıtım sorunları
 
 ---
 
-**Bu kapsamlı senaryo, Azure Developer CLI ile çoklu ajanlı AI sistemleri için kurumsal düzeyde bir mimari plan, altyapı şablonları, uygulama rehberliği ve üretim en iyi uygulamaları sunar.**
+**Bu kapsamlı senaryo, çok ajanlı AI sistemleri için kurumsal düzeyde bir mimari taslak sağlar; altyapı şablonları, uygulama rehberliği ve Azure Developer CLI ile sofistike müşteri destek çözümleri oluşturmak için üretim en iyi uygulamalarını içerir.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+**Feragatname**:
+Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

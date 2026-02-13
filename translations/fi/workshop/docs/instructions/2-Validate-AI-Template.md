@@ -1,216 +1,210 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7816c6ec50c694c331e7c6092371be4d",
-  "translation_date": "2025-09-24T22:49:17+00:00",
-  "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
-  "language_code": "fi"
-}
--->
-# 2. Mallin validointi
+# 2. Vahvista mallipohja
 
-!!! tip "TÄMÄN OSION LOPUSSA OSAAAT"
+!!! tip "TÄMÄN MODUULIN LOPPUUN MENNESSÄ OSAAT"
 
-    - [ ] Analysoida tekoälyratkaisun arkkitehtuuria
-    - [ ] Ymmärtää AZD:n käyttöönoton työnkulun
-    - [ ] Käyttää GitHub Copilotia AZD:n käytön apuna
-    - [ ] **Lab 2:** Tekoälyagenttien mallin käyttöönotto ja validointi
+    - [ ] Analysoida tekoälyratkaisun arkkitehtuuri
+    - [ ] Ymmärtää AZD:n käyttöönoton työnkulku
+    - [ ] Käyttää GitHub Copilotia saadakseen apua AZD:n käytössä
+    - [ ] **Lab 2:** Ota käyttöön ja vahvista AI Agents -mallipohja
 
 ---
 
+
 ## 1. Johdanto
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) eli `azd` on avoimen lähdekoodin komentorivityökalu, joka yksinkertaistaa kehittäjän työnkulkua sovellusten rakentamisessa ja käyttöönotossa Azureen.
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD-mallit](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) ovat standardoituja arkistoja, jotka sisältävät esimerkkisovelluskoodia, _infrastruktuurikoodia_ ja `azd`-konfiguraatiotiedostoja yhtenäisen ratkaisun arkkitehtuurin luomiseksi. Infrastruktuurin käyttöönotto on yhtä helppoa kuin `azd provision` -komennon käyttö, kun taas `azd up` mahdollistaa infrastruktuurin käyttöönoton **ja** sovelluksen käyttöönoton yhdellä kertaa!
+[AZD-mallit](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastruktuuri-koodina_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
 
-Tämän ansiosta sovelluskehitysprosessin aloittaminen voi olla yhtä helppoa kuin oikean _AZD-aloitusmallin_ löytäminen, joka vastaa sovelluksesi ja infrastruktuurisi tarpeita, ja arkiston mukauttaminen omiin vaatimuksiisi.
+As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter -mallipohja_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
-Ennen kuin aloitamme, varmista, että Azure Developer CLI on asennettu.
+Before we begin, let's make sure you have the Azure Developer CLI installed.
 
-1. Avaa VS Code -pääte ja kirjoita tämä komento:
+1. Open a VS Code terminal and type this command:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. Näet jotain tällaista!
+1. You should see something like this!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**Olet nyt valmis valitsemaan ja ottamaan mallin käyttöön azd:llä**
+**You are now ready to select and deploy a template with azd**
 
 ---
 
-## 2. Mallin valinta
+## 2. Mallipohjan valinta
 
-Azure AI Foundry -alusta sisältää [joukon suositeltuja AZD-malleja](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started), jotka kattavat suosittuja ratkaisuskenaarioita, kuten _moniagenttityönkulun automatisointi_ ja _monimodaalinen sisällön käsittely_. Voit myös tutustua näihin malleihin Azure AI Foundry -portaalissa.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
-1. Siirry osoitteeseen [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Kirjaudu Azure AI Foundry -portaaliin, kun sinua pyydetään - näet jotain tällaista.
+1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Pick](../../../../../translated_images/fi/01-pick-template.60d2d5fff5ebc374.webp)
+![Valitse](../../../../../translated_images/fi/01-pick-template.60d2d5fff5ebc374.webp)
 
-**Perusvaihtoehdot** ovat aloitusmallejasi:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat), joka ottaa käyttöön yksinkertaisen chat-sovelluksen _omilla tiedoillasi_ Azure Container Appsissa. Käytä tätä tutustuaksesi yksinkertaiseen tekoälychatbot-skenaarioon.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents), joka ottaa käyttöön standardin tekoälyagentin (Azure AI Agent Service). Käytä tätä tutustuaksesi agenttipohjaisiin tekoälyratkaisuihin, jotka sisältävät työkaluja ja malleja.
+The **Basic** options are your starter templates:
 
-Avaa toinen linkki uudessa selaimen välilehdessä (tai napsauta `Open in GitHub` liittyvää korttia varten). Näet tämän AZD-mallin arkiston. Tutustu README-tiedostoon minuutin ajan. Sovelluksen arkkitehtuuri näyttää tältä:
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
-![Arch](../../../../../translated_images/fi/architecture.8cec470ec15c65c7.webp)
+Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+
+![Arkkitehtuuri](../../../../../translated_images/fi/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## 3. Mallin aktivointi
+## 3. Mallipohjan aktivointi
 
-Kokeillaan ottaa tämä malli käyttöön ja varmistetaan, että se on toimiva. Seuraamme [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) -osion ohjeita.
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. Napsauta [tätä linkkiä](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - vahvista oletustoiminto `Create codespace`
-1. Tämä avaa uuden selaimen välilehden - odota, että GitHub Codespaces -istunto latautuu
-1. Avaa VS Code -pääte Codespacesissa - kirjoita seuraava komento:
+1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
+1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
+1. Open the VS Code terminal in Codespaces - type the following command:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Suorita työnkulun vaiheet, jotka tämä käynnistää:
+Complete the workflow steps that this will trigger:
 
-1. Sinua pyydetään kirjautumaan Azureen - seuraa ohjeita todentamiseen
-1. Anna ympäristöllesi yksilöllinen nimi - esim. käytin `nitya-mshack-azd`
-1. Tämä luo `.azure/`-kansion - näet alikansion ympäristön nimellä
-1. Sinua pyydetään valitsemaan tilauksen nimi - valitse oletus
-1. Sinua pyydetään sijaintia - käytä `East US 2`
+1. You will be prompted to log into Azure - follow instructions to authenticate
+1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
+1. This  will create a `.azure/` folder - you will see a subfolder with the env name
+1. You will be prompted to select a subscription name - select the default
+1. You will be prompted for a location - use `East US 2`
 
-Nyt odotat, että käyttöönotto valmistuu. **Tämä kestää 10-15 minuuttia**
+Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
-1. Kun valmis, konsolissasi näkyy ONNISTUMISVIESTI, kuten tämä:
+1. When done, your console will show a SUCCESS message like this:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Azure-portaalissasi on nyt provisionoitu resurssiryhmä kyseisellä ympäristön nimellä:
+1. Your Azure Portal will now have a provisioned resource group with that env name:
 
-      ![Infra](../../../../../translated_images/fi/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Infrastruktuuri](../../../../../translated_images/fi/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Olet nyt valmis validoimaan käyttöön otetun infrastruktuurin ja sovelluksen**.
+1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
-## 4. Mallin validointi
+## 4. Mallipohjan validointi
 
-1. Siirry Azure-portaalin [Resurssiryhmät](https://portal.azure.com/#browse/resourcegroups) -sivulle - kirjaudu sisään, kun sinua pyydetään
-1. Napsauta ympäristön nimen RG:tä - näet yllä olevan sivun
+1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Click on RG for your environment name - you see the page above
 
-      - napsauta Azure Container Apps -resurssia
-      - napsauta _Essentials_-osion (oikea yläkulma) Application URL -linkkiä
+      - click on the Azure Container Apps resource
+      - click on the Application Url in the _Essentials_ section (top right)
 
-1. Näet isännöidyn sovelluksen käyttöliittymän, kuten tämä:
+1. You should see a hosted application front-end UI like this:
 
-   ![App](../../../../../translated_images/fi/03-test-application.471910da12c3038e.webp)
+   ![Sovellus](../../../../../translated_images/fi/03-test-application.471910da12c3038e.webp)
 
-1. Kokeile kysyä muutama [esimerkkikysymys](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Kysy: ```What is the capital of France?``` 
-      1. Kysy: ```What's the best tent under $200 for two people, and what features does it include?```
+      1. Ask: ```What is the capital of France?``` 
+      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. Saat vastauksia, jotka ovat samanlaisia kuin alla. _Mutta miten tämä toimii?_ 
+1. You should get answers similar to what is shown below. _But how does this work?_ 
 
-      ![App](../../../../../translated_images/fi/03-test-question.521c1e863cbaddb6.webp)
+      ![Sovellus](../../../../../translated_images/fi/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
 ## 5. Agentin validointi
 
-Azure Container App ottaa käyttöön päätepisteen, joka yhdistyy tekoälyagenttiin, joka on provisionoitu tämän mallin Azure AI Foundry -projektissa. Katsotaanpa, mitä tämä tarkoittaa.
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
-1. Palaa Azure-portaalin _Yleiskatsaus_-sivulle resurssiryhmällesi
+1. Return to the Azure Portal _Overview_ page for your resource group
 
-1. Napsauta `Azure AI Foundry` -resurssia luettelossa
+1. Click on the `Microsoft Foundry` resource in that list
 
-1. Näet tämän. Napsauta `Go to Azure AI Foundry Portal` -painiketta. 
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](../../../../../translated_images/fi/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. Näet Foundry-projektisivun tekoälysovelluksellesi
-   ![Project](../../../../../translated_images/fi/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. You should see the Foundry Project page for your AI application
+   ![Projekti](../../../../../translated_images/fi/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Napsauta `Agents` - näet projektisi oletusagentin
-   ![Agents](../../../../../translated_images/fi/06-visit-agents.bccb263f77b00a09.webp)
+1. Click on `Agents` - you see the default Agent provisioned in your project
+   ![Agentit](../../../../../translated_images/fi/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Valitse se - ja näet agentin tiedot. Huomaa seuraavat asiat:
+1. Select it - and you see the Agent details. Note the following:
 
-      - Agentti käyttää oletuksena File Search -toimintoa (aina)
-      - Agentin `Knowledge` osoittaa, että sillä on 32 tiedostoa ladattuna (tiedostohakuun)
-      ![Agents](../../../../../translated_images/fi/07-view-agent-details.0e049f37f61eae62.webp)
+      - The agent uses File Search by default (always)
+      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
+      ![Agentit](../../../../../translated_images/fi/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Etsi vasemman valikon `Data+indexes`-vaihtoehto ja napsauta saadaksesi lisätietoja. 
+1. Look for the `Data+indexes` option in the left menu and click for details. 
 
-      - Näet 32 tietotiedostoa ladattuna tiedoksi.
-      - Nämä vastaavat 12 asiakastiedostoa ja 20 tuotetiedostoa `src/files`-kansiossa 
+      - You should see the 32 data files uploaded for knowledge.
+      - These will correspond to the 12 customer files and 20 product files under `src/files` 
       ![Data](../../../../../translated_images/fi/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**Olet validoinut agentin toiminnan!** 
+**You validated Agent operation!** 
 
-1. Agentin vastaukset perustuvat näiden tiedostojen sisältämään tietoon. 
-1. Voit nyt esittää kysymyksiä, jotka liittyvät näihin tietoihin, ja saada perusteltuja vastauksia.
-1. Esimerkki: `customer_info_10.json` kuvaa "Amanda Perezin" tekemät 3 ostosta.
+1. The agent responses are grounded in the knowledge in those files. 
+1. You can now ask questions related to that data, and get grounded responses.
+1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
-Palaa selaimen välilehteen, jossa on Container App -päätepiste, ja kysy: `What products does Amanda Perez own?`. Näet jotain tällaista:
+Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
 ![Data](../../../../../translated_images/fi/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. Agenttien leikkikenttä
+## 6. Agent Playground
 
-Rakennetaan hieman enemmän intuitiota Azure AI Foundryn ominaisuuksista ottamalla agentti kokeiluun Agents Playgroundissa. 
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
-1. Palaa Azure AI Foundryn `Agents`-sivulle - valitse oletusagentti
-1. Napsauta `Try in Playground` -vaihtoehtoa - saat Playground-käyttöliittymän, kuten tämä
-1. Kysy sama kysymys: `What products does Amanda Perez own?`
+1. Return to the `Agents` page in Microsoft Foundry - select the default agent
+1. Click the `Try in Playground` option - you should get a Playground UI like this
+1. Ask the same question: `What products does Amanda Perez own?`
 
     ![Data](../../../../../translated_images/fi/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Saat saman (tai samanlaisen) vastauksen - mutta saat myös lisätietoja, joita voit käyttää sovelluksesi laadun, kustannusten ja suorituskyvyn ymmärtämiseen. Esimerkiksi:
+You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
 
-1. Huomaa, että vastaus viittaa tiedostotietoihin, joita käytettiin vastauksen "perustamiseen".
-1. Vie hiiri minkä tahansa näiden tiedostotunnisteiden päälle - vastaavatko tiedot kyselyäsi ja näytettyä vastausta?
+1. Note that the response cites data files used to "ground" the response
+1. Hover over any of these file labels - does the data match your query and displayed response?
 
-Näet myös _tilastot_-rivillä vastauksen alla. 
+You also see a _stats_ row below the response. 
 
-1. Vie hiiri minkä tahansa mittarin päälle - esim. Safety. Näet jotain tällaista.
-1. Vastaako arvioitu luokitus intuitiotasi vastauksen turvallisuustasosta?
+1. Hover over any metric - e.g., Safety. You see something like this
+1. Does the assessed rating match your intuition for the response safety level?
 
       ![Data](../../../../../translated_images/fi/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
----x
+---
 
-## 7. Sisäänrakennettu havainnointi
+## 7. Sisäänrakennettu observoitavuus
 
-Havainnointi tarkoittaa sovelluksen instrumentointia tuottamaan dataa, jota voidaan käyttää sen toiminnan ymmärtämiseen, virheiden korjaamiseen ja optimointiin. Saadaksesi käsityksen tästä:
+Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
-1. Napsauta `View Run Info` -painiketta - näet tämän näkymän. Tämä on esimerkki [Agentin jäljityksestä](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) toiminnassa. _Voit myös saada tämän näkymän napsauttamalla Thread Logs -valikkoa._
+1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - Saat käsityksen agentin suoritusvaiheista ja käytetyistä työkaluista
-   - Ymmärrä kokonais Token-määrä (vs. ulostulotokenien käyttö) vastauksessa
-   - Ymmärrä viive ja missä aikaa kuluu suorituksessa
+   - Get a sense for the run steps and tools engaged by the agent
+   - Understand total Token count (vs. output tokens usage) for response
+   - Understand the latency and where time is being spent in execution
 
       ![Agent](../../../../../translated_images/fi/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Napsauta `Metadata`-välilehteä nähdäksesi lisäominaisuuksia suoritukselle, jotka voivat tarjota hyödyllistä kontekstia virheiden korjaamiseen myöhemmin.   
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
       ![Agent](../../../../../translated_images/fi/11-view-run-info-metadata.7966986122c7c2df.webp)
 
-1. Napsauta `Evaluations`-välilehteä nähdäksesi automaattiset arviot agentin vastauksesta. Näihin kuuluvat turvallisuusarviot (esim. Itsevahingoittaminen) ja agenttikohtaiset arviot (esim. Tarkoituksen ratkaisu, Tehtävän noudattaminen).
+
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
       ![Agent](../../../../../translated_images/fi/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Viimeisenä mutta ei vähäisimpänä, napsauta `Monitoring`-välilehteä sivuvalikossa.
+1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
-      - Valitse `Resource usage`-välilehti näytetyssä sivussa - ja tarkastele mittareita.
-      - Seuraa sovelluksen käyttöä kustannusten (tokenit) ja kuormituksen (pyynnöt) osalta.
-      - Seuraa sovelluksen viivettä ensimmäiseen tavuun (syötteen käsittely) ja viimeiseen tavuun (ulostulo).
+      - Select `Resource usage` tab in the displayed page - and view the metrics.
+      - Track application usage in terms of costs (tokens) and load (requests).
+      - Track applicaton latency to first byte (input processing) and last byte (output).
 
       ![Agent](../../../../../translated_images/fi/13-monitoring-resources.5148015f7311807f.webp)
 
@@ -218,23 +212,24 @@ Havainnointi tarkoittaa sovelluksen instrumentointia tuottamaan dataa, jota void
 
 ## 8. Ympäristömuuttujat
 
-Tähän mennessä olemme käyneet läpi käyttöönoton selaimessa - ja varmistaneet, että infrastruktuuri on provisionoitu ja sovellus toimii. Mutta työskennelläksemme sovelluksen kanssa _koodipohjaisesti_, meidän on konfiguroitava paikallinen kehitysympäristömme tarvittavilla muuttujilla, jotka liittyvät näihin resursseihin. `azd` tekee tämän helpoksi.
+So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
-1. Azure Developer CLI [käyttää ympäristömuuttujia](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) tallentaakseen ja hallitakseen konfiguraatioasetuksia sovellusten käyttöönottoa varten.
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
 
-1. Ympäristömuuttujat tallennetaan `.azure/<env-name>/.env` -tiedostoon - tämä rajaa ne käyttöönoton aikana käytettyyn `env-name`-ympäristöön ja auttaa eristämään ympäristöt eri käyttöönottojen välillä samassa arkistossa.
+1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
 
-1. Ympäristömuuttujat ladataan automaattisesti `azd`-komennolla aina, kun se suorittaa tietyn komennon (esim. `azd up`). Huomaa, että `azd` ei automaattisesti lue _käyttöjärjestelmätason_ ympäristömuuttujia (esim. asetettu shellissä) - sen sijaan käytä `azd set env` ja `azd get env` siirtääksesi tietoja skriptien sisällä.
+1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
 
-Kokeillaan muutamia komentoja:
 
-1. Hae kaikki ympäristömuuttujat, jotka on asetettu `azd`-ympäristössä:
+Let's try out a few commands:
+
+1. Get all the environment variables set for `azd` in this environment:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      Näet jotain tällaista:
+      You see something like:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
@@ -244,19 +239,19 @@ Kokeillaan muutamia komentoja:
       ...
       ```
 
-1. Hae tietty arvo - esim. haluan tietää, onko `AZURE_AI_AGENT_MODEL_NAME`-arvo asetettu
+1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Näet jotain tällaista - sitä ei asetettu oletuksena!
+      You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Aseta uusi ympäristömuuttuja `azd`:lle. Tässä päivitämme agenttimallin nimen. _Huom: kaikki tehdyt muutokset näkyvät välittömästi `.azure/<env-name>/.env`-tiedostossa.
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,30 +259,35 @@ Kokeillaan muutamia komentoja:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Nyt meidän pitäisi löytää arvo asetettuna:
+      Now, we should find the value is set:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Huomaa, että jotkut resurssit ovat pysyviä (esim. mallin käyttöönotot) ja vaativat enemmän kuin pelkän `azd up`-komennon pakottaakseen uudelleenkäyttöönoton. Kokeillaan alkuperäisen käyttöönoton purkamista ja uudelleenkäyttöönottoa muutetuilla ympäristömuuttujilla.
+1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **Päivitä** Jos olet aiemmin ottanut infrastruktuurin käyttöön azd-mallilla - voit _päivittää_ paikallisten ympäristömuuttujien tilan Azure-käyttöönoton nykytilan perusteella käyttämällä tätä komentoa:
+1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Tämä on tehokas tapa _synkronoida_ ympäristömuuttujat kahden tai useamman paikallisen kehitysympäristön välillä (esim. tiimi, jossa on useita kehittäjiä) - mahdollistaen, että käyttöönotettu infrastruktuuri toimii ympäristömuuttujien tilan peruslähteenä. Tiimin jäsenet voivat yksinkertaisesti _päivittää_ muuttujat pysyäkseen synkronoituna.
+      Tämä on tehokas tapa _synkronoida_ ympäristömuuttujia kahden tai useamman paikallisen kehitysympäristön välillä (esim. monikehittäjätiimi) - jolloin käyttöön otettu infrastruktuuri toimii ympäristömuuttujien tilan totuuden lähteenä. Tiimin jäsenet yksinkertaisesti _päivittävät_ muuttujat palatakseen synkroniin.
 
 ---
 
 ## 9. Onnittelut 🏆
 
-Olet juuri suorittanut alusta loppuun kulkevan työnkulun, jossa:
+Olet juuri suorittanut päästä päähän -työnkulun, jossa:
 
 - [X] Valitsit haluamasi AZD-mallin
-- [X] Käynnistit mallin GitHub Codespacesissa
-- [X] Otit mallin käyttöön ja varmistit sen toimivuuden
+- [X] Käynnistit mallin GitHub Codespacesissa 
+- [X] Otit mallin käyttöön ja varmistit, että se toimii
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Vastuuvapauslauseke:
+Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla Co-op Translatorin avulla (https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automatisoidut käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää virallisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

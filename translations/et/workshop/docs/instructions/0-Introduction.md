@@ -1,67 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-10-11T15:46:02+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "et"
-}
--->
-# AZD AI arendajatele
+# AZD tehisintellekti arendajatele
 
-!!! info "TÖÖTOA SIHTRÜHM"
+!!! info "SIHTRÜHM SELLELE TÖÖTOALE"
    
-    See töötuba on mõeldud kõigile, kes soovivad luua AI-agentide rakendusi Azure AI Foundry platvormil, kasutades parimaid tööriistu ja töövooge. Töötuba sobib nii algajatele kui ka kogenud arendajatele, kes on tuttavad Azure'i, tehisintellekti kontseptsioonide ja Pythoniga. Enne alustamist kontrollige eeltingimusi.
+    See töötuba on mõeldud kõigile, kes soovivad luua AI Agentici rakendusi Microsoft Foundryl, kasutades parimaid tööriistu ja töövooge. Töötuba sobib nii algajatele kui ka kogenud arendajatele, kellel on mõningased teadmised Azure’ist, tehisintellekti kontseptsioonidest ja Python-koodist. Enne alustamist vaadake eeltingimused üle.
 
     **Kestus:** 3-4 tundi  
-    **Tase:** Algaja kuni Kesktase  
+    **Tase:** Algaja kuni kesktase  
 
 ---
 
 
 ## Eeltingimused
 
-- Isiklik GitHubi konto → [Loo tasuta konto](https://github.com/signup)
-- Aktiivne Azure'i konto → [Loo tasuta konto](https://aka.ms/free)
-- Teadlikkus tehisintellekti kontseptsioonidest, Pythoni arendusest ja käsurea tööriistadest
-- Kogemus VS Code'i ja GitHubi tööriistade ning töövoogudega.
+- Isiklik GitHub'i konto → [Loo see tasuta](https://github.com/signup)
+- Aktiivne Azure’i konto → [Loo see tasuta](https://aka.ms/free)
+- Tutvumine tehisintellekti kontseptsioonidega, Python-arendusega, käsurea tööriistadega
+- Kogemus VS Code'i ning GitHubi tööriistade ja töövoogudega.
 
 ---
 
 ## Õpieesmärgid
 
-Töötoa lõpuks oskate:
+Selle töötoa lõpuks oskad sa:
 
-- [X] **Töötada Azure Developer CLI-ga** → Azure'i ressursside ettevalmistamiseks, juurutamiseks ja haldamiseks.
-- [X] **Kasutada AI rakenduste malle** → et alustada AI-agentide projekte Azure AI Foundry platvormil.
-- [X] **Konfigureerida malle** → funktsioonide jaoks nagu Red Teaming, hindamised, jälgimine ja monitooring.
-- [X] **Dekonstrueerida ja uurida** → AZD malle ja töövooge, kasutades GitHub Copiloti.
-- [X] **Kohandada ja uuesti juurutada** → AI-agendi algmalli vastavalt oma vajadustele.
+- [X] **Töötada Azure Developer CLI-ga** → et hankeid, juurutada ja hallata oma Azure ressursse.
+- [X] **Kasutada AI rakenduste malle** → Microsoft Foundryl AI Agent projektide kiireks alustamiseks.
+- [X] **Konfigureerida malle** → nagu Red Teaming, hindamised, jälgimine ja monitooring.
+- [X] **Lammutada ja uurida** → AZD malle ja töövooge GitHub Copiloti abil.
+- [X] **Kohandada ja uuesti juurutada** → AI Agendi algmall, vastavalt oma kohandatud nõuetele.
 
 ---
 
-## Töötoa ülevaade
+## Töötuba plaan
 
-Töötuba on jaotatud mooduliteks, millest igaüks sisaldab praktilist harjutust:
+Töötuba koosneb moodulitest, millest igaüks sisaldab praktilist laboratoorset harjutust:
 
-1. **Sissejuhatus** - Saage ülevaade, mis on AZD mallid ja kuidas need töötavad.
-1. **Valik** - Leidke oma järgmise AI-projekti jaoks sobiv "stardimall".
-1. **Kinnitamine** - Juurutage ja uurige malli, et veenduda selle toimimises.
-1. **Dekonstrueerimine** - Võtke mall osadeks, et mõista selle komponente ja konfiguratsiooni.
-1. **Konfigureerimine** - Õppige aktiveerima ja kasutama erinevaid Azure AI Foundry funktsioone.
-1. **Kohandamine** - Koostage rakendus uuesti, pidades silmas oma andmeid ja nõudeid.
-1. **Lammutamine** - Õppige infrastruktuuri eemaldama ja pehmelt kustutatud ressursse taastama.
+1. **Sissejuhatus** - Saage aru, mis on AZD mallid ja kuidas need töötavad
+1. **Valik** - Avastage sobiv “algus” mall oma järgmise AI projekti jaoks
+1. **Kinnitamine** - Juurutage ja uurige malli, et veenduda selle korrektsuses
+1. **Lammutamine** - Võtke mall lahti, et mõista selle komponente ja seadistusi
+1. **Konfiguratsioon** - Õppige aktiveerima ja kasutama erinevaid Microsoft Foundry funktsioone
+1. **Kohandamine** - REhitage rakendus oma andmete ja nõuete alusel
+1. **Lõpetamine** - Õppige infrastruktuuri eemaldama ja pehmo-kustutatud ressursse taastama
 
 ---
 
 ## Tagasiside ja probleemid
 
-Uuendame pidevalt õppekava, et pakkuda algajatele parimat õpikogemust. Teie tagasiside on väga oodatud.
+Uuendame õppekavu aktiivselt, et pakkuda parimat õpikogemust algajatele. Teie tagasisidet hinnatakse.
 
-1. Postitage probleem selle repositooriumi kohta - märgistage see `Workshop` mugavuse huvides.
-1. Liituge Azure AI Foundry Discordiga - looge ühendus teiste õppijatega!
+1. Postitage probleem selles reposis - märgistage see `Workshop` silti kasutades mugavuse huvides.
+1. Liituge Microsoft Foundry Discordiga - ühenduge kaasõppijatega!
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Eriestuslausest**:  
+See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüame tagada täpsust, palun pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles on autoriteetne allikas. Kriitilise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tekkida võivate arusaamatuste või valesti mõistmiste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

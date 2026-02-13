@@ -1,42 +1,33 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T21:28:42+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "sv"
-}
--->
-# 5. Anpassa en Mall
+# 5. Anpassa en mall
 
-!!! tip "VID SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"
+!!! tip "I SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"
 
-    - [ ] Utforskat standardfunktionerna för AI-agenten
-    - [ ] Lagt till AI-sökning med din egen index
+    - [ ] Utforskat standardfunktionerna för AI‑agenter
+    - [ ] Lade till AI‑sökning med ditt eget index
     - [ ] Aktiverat och analyserat spårningsmetrik
-    - [ ] Genomfört en utvärderingskörning
-    - [ ] Genomfört en red-teaming-skanning
-    - [ ] **Lab 5: Skapat en anpassningsplan** 
+    - [ ] Utförde en utvärderingskörning
+    - [ ] Utförde en red‑team‑skanning
+    - [ ] **Lab 5: Byggde en anpassningsplan** 
 
 ---
 
-## 5.1 Funktioner hos AI-agenten
+## 5.1 AI-agentfunktioner
 
-!!! success "Detta slutförde vi i Lab 01"
+!!! success "Vi genomförde detta i Lab 01"
 
-- **Fil-sökning**: OpenAI:s inbyggda fil-sökning för kunskapsinhämtning
-- **Källhänvisningar**: Automatisk källattribution i svar
+- **File Search**: OpenAI's built-in file search for knowledge retrieval
+- **Källhänvisningar**: Automatisk källangivelse i svar
 - **Anpassningsbara instruktioner**: Ändra agentens beteende och personlighet
-- **Verktygsintegration**: Utbyggbart verktygssystem för anpassade funktioner
+- **Verktygsintegration**: Ett utbyggbart verktygssystem för anpassade funktioner
 
 ---
 
-## 5.2 Alternativ för kunskapsinhämtning
+## 5.2 Alternativ för kunskapsåtervinning
 
-!!! task "För att slutföra detta behöver vi göra ändringar och återimplementera"    
+!!! task "För att slutföra detta måste vi göra ändringar och distribuera igen"    
     
     ```bash title=""
-    # Ställ in miljövariabler
+    # Ange miljövariabler
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
@@ -49,24 +40,24 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-**OpenAI Fil-sökning (Standard):**
+**OpenAI File Search (Default):**
 
-- Inbyggt i Azure AI Agent-tjänsten
+- Inbyggd i Foundry Agents
 - Automatisk dokumentbearbetning och indexering
 - Ingen ytterligare konfiguration krävs
 
-**Azure AI Sökning (Valfritt):**
+**Azure AI Search (Optional):**
 
 - Hybrid semantisk och vektorsökning
 - Anpassad indexhantering
-- Avancerade sökfunktioner
+- Avancerade sökmöjligheter
 - Kräver `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Spårning & Övervakning](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Spårning & övervakning](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "För att slutföra detta behöver vi göra ändringar och återimplementera"    
+!!! task "För att slutföra detta måste vi göra ändringar och distribuera igen"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -75,16 +66,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Spårning:**
 
-- OpenTelemetry-integration
-- Spårning av förfrågningar och svar
-- Prestandametrik
-- Tillgängligt i AI Foundry-portalen
+- Integration med OpenTelemetry
+- Spårning av förfrågningar/svar
+- Prestandamått
+- Tillgängligt i Microsoft Foundry‑portalen
 
 **Loggning:**
 
 - Applikationsloggar i Container Apps
-- Strukturerad loggning med korrelations-ID
-- Realtids- och historisk loggvisning
+- Strukturerad loggning med korrelations‑ID:n
+- Visning av realtids‑ och historiska loggar
 
 ---
 
@@ -94,45 +85,47 @@ CO_OP_TRANSLATOR_METADATA:
 
 - Inbyggda utvärderare för kvalitetsbedömning
 - Anpassade utvärderingsskript
-- Prestandabenchmarking
+- Prestandajämförelser
 
 **Kontinuerlig övervakning:**
 
 - Automatisk utvärdering av liveinteraktioner
-- Spårning av kvalitetsmetrik
-- Upptäckt av prestandaregression
+- Spårning av kvalitetsmått
+- Upptäckt av prestandaregressioner
 
-**CI/CD Integration:**
+**CI/CD-integration:**
 
-- GitHub Actions-arbetsflöde
+- GitHub Actions‑arbetsflöde
 - Automatiserad testning och utvärdering
-- Statistisk jämförelsetestning
+- Statistisk jämförande testning
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming-agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
-- Automatisk säkerhetsskanning
-- Riskbedömning för AI-system
+- Automatiserad säkerhetsskanning
+- Riskbedömning för AI‑system
 - Säkerhetsutvärdering över flera kategorier
 
 **Autentisering:**
 
-- Hanterad identitet för Azure-tjänster
-- Valfri autentisering via Azure App Service
-- Grundläggande autentisering som reserv för utveckling
+- Managed Identity för Azure‑tjänster
+- Valfri Azure App Service‑autentisering
+- Fallback till grundläggande autentisering för utveckling
 
-!!! quote "VID SLUTET AV DETTA LABB BÖR DU HA"
-    - [ ] Definierat dina scenariokrav
-    - [ ] Anpassat miljövariabler (konfiguration)
-    - [ ] Anpassat agentinstruktioner (uppgift)
-    - [ ] Implementerat den anpassade mallen (app)
-    - [ ] Slutfört efterimplementeringsuppgifter (manuellt)
-    - [ ] Genomfört en testutvärdering
 
-Detta exempel visar hur man anpassar mallen för ett företagsdetaljhandelsfall med två specialiserade agenter och flera modellimplementeringar.
+
+!!! quote "I SLUTET AV DETTA LABB BÖR DU HA"
+    - [ ] Definiera dina scenariokrav
+    - [ ] Anpassade miljövariabler (config)
+    - [ ] Anpassade agentinstruktioner (task)
+    - [ ] Distribuerade den anpassade mallen (app)
+    - [ ] Slutfört efterdriftsuppgifter (manual)
+    - [ ] Kör en testutvärdering
+
+Detta exempel visar hur man anpassar mallen för ett företagsinriktat detaljhandelsfall med två specialiserade agenter och flera modelldistributioner.
 
 ---
 
@@ -140,63 +133,63 @@ Detta exempel visar hur man anpassar mallen för ett företagsdetaljhandelsfall 
 
 ### 5.6.1. Scenariokrav
 
-#### **Agentimplementeringar:** 
+#### **Agent Deployments:** 
 
    - Shopper Agent: Hjälper kunder att hitta och jämföra produkter
    - Loyalty Agent: Hanterar kundbelöningar och kampanjer
 
-#### **Modellimplementeringar:**
+#### **Model Deployments:**
 
-   - `gpt-4.1`: Primär chattmodell
-   - `o3`: Resoneringsmodell för komplexa frågor
-   - `gpt-4.1-nano`: Lättviktsmodell för enkla interaktioner
-   - `text-embedding-3-large`: Högkvalitativa inbäddningar för sökning
+   - `gpt-4.1`: Primary chat model
+   - `o3`: Reasoning model for complex queries
+   - `gpt-4.1-nano`: Lightweight model for simple interactions
+   - `text-embedding-3-large`: High-quality embeddings for search
 
 #### **Funktioner:**
 
    - Spårning och övervakning aktiverat
-   - AI-sökning för produktkatalog
-   - Utvärderingsramverk för kvalitetskontroll
+   - AI Search för produktkatalogen
+   - Utvärderingsramverk för kvalitetssäkring
    - Red teaming för säkerhetsvalidering
 
 ---
 
-### 5.6.2 Scenarieimplementering
+### 5.6.2 Implementering av scenariot
 
 
-#### 5.6.2.1. Förimplementeringskonfiguration
+#### 5.6.2.1. Fördriftskonfiguration
 
-Skapa ett installationsskript (`setup-retail.sh`)
+Skapa ett setup‑skript (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Ange miljöns namn
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Konfigurera region (välj baserat på modellens tillgänglighet)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Aktivera alla valfria tjänster
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Konfigurera primär chattmodell (gpt-4o som den närmast tillgängliga motsvarigheten till gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Konfigurera embeddingsmodell för förbättrad sökning
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Ange agentnamn (kommer att skapa den första agenten)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Konfigurera sökindex
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -255,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Implementeringsskript
+#### 5.6.2.3: Distributionsskript
 
 Skapa `deploy-retail.sh`:
 
@@ -265,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Validera förutsättningar
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -277,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Konfigurera miljön
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Kontrollera kvot i vald region
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Driftsätt infrastruktur och applikation
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Samla in utdata från distributionen
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Hämta URL för webbappen
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -328,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Efterimplementeringskonfiguration
+#### 5.6.2.4: Efterdriftskonfiguration
 
 Skapa `configure-retail-agents.sh`:
 
@@ -337,19 +330,19 @@ Skapa `configure-retail-agents.sh`:
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Hämta distributionsinformation
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Instruktioner för manuell konfiguration
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -394,11 +387,11 @@ Skapa `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Kontrollera att miljövariablerna är satta
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# Testa webbapplikationens tillgänglighet
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Kör utvärdering om det är konfigurerat
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -438,36 +431,40 @@ Next steps:
 
 ### 5.6.4 Förväntade resultat
 
-Efter att ha följt denna implementeringsguide kommer du att ha:
+Efter att ha följt denna implementationsguide kommer du att ha:
 
-1. **Implementerad Infrastruktur:**
+1. **Distribuerad infrastruktur:**
 
-      - AI Foundry-projekt med modellimplementeringar
+      - Microsoft Foundry‑projekt med modelldistributioner
       - Container Apps som hostar webbapplikationen
-      - AI-söktjänst för produktkatalog
+      - AI Search‑tjänst för produktkatalogen
       - Application Insights för övervakning
 
-2. **Initial Agent:**
+2. **Initial agent:**
 
       - Shopper Agent konfigurerad med grundläggande instruktioner
-      - Fil-sökningsfunktion aktiverad
-      - Spårning och övervakning konfigurerad
+      - Filsökningsfunktion aktiverad
+      - Spårning och övervakning konfigurerade
 
-3. **Redo för Anpassning:**
+3. **Redo för anpassning:**
 
       - Ramverk för att lägga till Loyalty Agent
-      - Anpassade instruktionstemplates
-      - Test- och valideringsskript
-      - Övervaknings- och utvärderingsinställningar
+      - Mallar för anpassade instruktioner
+      - Skript för testning och validering
+      - Uppsättning för övervakning och utvärdering
 
 4. **Produktionsberedskap:**
 
       - Säkerhetsskanning med red teaming
       - Prestandaövervakning
-      - Kvalitetsutvärderingsramverk
+      - Ramverk för kvalitetsutvärdering
       - Skalbar arkitektur
 
-Detta exempel visar hur AZD-mallen kan utökas och anpassas för specifika företagsfall samtidigt som bästa praxis för säkerhet, övervakning och skalbarhet bibehålls.
+Detta exempel visar hur AZD‑mallen kan utökas och anpassas för specifika företagscenarier samtidigt som bästa praxis för säkerhet, övervakning och skalbarhet bevaras.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Ansvarsfriskrivning:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter att vara korrekta, vänligen observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

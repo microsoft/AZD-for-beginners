@@ -1,39 +1,30 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-25T02:20:42+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "hu"
-}
--->
-# 5. Sablon testreszabása
+# 5. Testreszabás egy sablonhoz
 
 !!! tip "A MODUL VÉGÉRE KÉPES LESZ"
 
-    - [ ] Felfedezni az alapértelmezett AI ügynök képességeit
-    - [ ] Saját indexszel AI keresést hozzáadni
-    - [ ] Aktiválni és elemezni a nyomkövetési metrikákat
-    - [ ] Végrehajtani egy értékelési futtatást
-    - [ ] Végrehajtani egy red-teaming vizsgálatot
-    - [ ] **5. labor: Testreszabási terv készítése**
+    - [ ] Felfedezte az alapértelmezett AI ügynök képességeket
+    - [ ] Hozzáadta az AI keresést a saját indexszel
+    - [ ] Aktiválta és elemezte a Tracing metrikákat
+    - [ ] Lefuttatott egy értékelési futást
+    - [ ] Lefuttatott egy red-teaming vizsgálatot
+    - [ ] **5. Labor: Elkészítette a Testreszabási Tervet**
 
 ---
 
-## 5.1 AI ügynök képességei
+## 5.1 AI Ügynök Képességek
 
-!!! success "Ezt az 1. laborban teljesítettük"
+!!! success "Ezt befejeztük az 01-es laborban"
 
-- **Fájlkeresés**: Az OpenAI beépített fájlkeresése tudásvisszakereséshez
+- **Fájlkeresés**: OpenAI beépített fájlkeresése tudáslekéréshez
 - **Hivatkozások**: Automatikus forrásmegjelölés a válaszokban
-- **Testreszabható utasítások**: Az ügynök viselkedésének és személyiségének módosítása
+- **Testreszabható utasítások**: Módosítható az ügynök viselkedése és személyisége
 - **Eszközintegráció**: Bővíthető eszközrendszer egyedi képességekhez
 
 ---
 
-## 5.2 Tudásvisszakeresési lehetőségek
+## 5.2 Tudáslekérési lehetőségek
 
-!!! task "Ehhez módosításokat kell végeznünk és újra kell telepítenünk"    
+!!! task "A befejezéshez módosításokra és újratelepítésre van szükség"    
     
     ```bash title=""
     # Környezeti változók beállítása
@@ -43,74 +34,74 @@ CO_OP_TRANSLATOR_METADATA:
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Adatok feltöltése és saját index létrehozása
+    # Adatok feltöltése és index létrehozása
 
     ```
 
 ---
 
-**OpenAI fájlkeresés (alapértelmezett):**
+**OpenAI Fájlkeresés (Alapértelmezett):**
 
-- Beépítve az Azure AI ügynök szolgáltatásba
+- Beépített a Foundry ügynökökben
 - Automatikus dokumentumfeldolgozás és indexelés
-- Nincs szükség további konfigurációra
+- További konfiguráció nem szükséges
 
-**Azure AI keresés (opcionális):**
+**Azure AI Search (opcionális):**
 
-- Hibrid szemantikai és vektorkeresés
+- Hibrid szemantikus és vektoros keresés
 - Egyedi indexkezelés
 - Fejlett keresési képességek
-- Szükséges: `USE_AZURE_AI_SEARCH_SERVICE=true`
+- Szükséges a `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Nyomkövetés és monitorozás](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Tracing és Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Ehhez módosításokat kell végeznünk és újra kell telepítenünk"    
+!!! task "A befejezéshez módosításokra és újratelepítésre van szükség"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Nyomkövetés:**
+**Tracing:**
 
 - OpenTelemetry integráció
-- Kérés/válasz nyomon követése
-- Teljesítménymérő adatok
-- Elérhető az AI Foundry portálon
+- Lekérések/válaszok nyomon követése
+- Teljesítménymutatók
+- Elérhető a Microsoft Foundry portálban
 
 **Naplózás:**
 
-- Alkalmazásnaplók a Container Apps-ben
-- Strukturált naplózás korrelációs azonosítókkal
-- Valós idejű és történeti naplómegtekintés
+- Alkalmazásnaplók Container Apps-ben
+- Strukturált naplózás összefüggésazonosítókkal
+- Valós idejű és történelmi naplómegjelenítés
 
 ---
 
-## 5.4 [Ügynök értékelése](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Ügynök Értékelés](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Helyi értékelés:**
 
-- Beépített értékelők a minőség felméréséhez
-- Egyedi értékelési szkriptek
-- Teljesítmény benchmarking
+- Beépített értékelők minőségértékeléshez
+- Egyedi értékelő szkriptek
+- Teljesítmény-összehasonlítás
 
-**Folyamatos monitorozás:**
+**Folyamatos monitoring:**
 
 - Élő interakciók automatikus értékelése
-- Minőségi metrikák nyomon követése
-- Teljesítményregresszió észlelése
+- Minőségi mérőszámok követése
+- Teljesítmény regresszió észlelése
 
 **CI/CD integráció:**
 
-- GitHub Actions munkafolyamat
-- Automatikus tesztelés és értékelés
-- Statisztikai összehasonlító tesztelés
+- GitHub Actions folyamat
+- Automatizált tesztelés és értékelés
+- Statisztikai összehasonlító tesztek
 
 ---
 
-## 5.5 [AI Red Teaming ügynök](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming Ügynök](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
@@ -120,19 +111,21 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Hitelesítés:**
 
-- Kezelt identitás az Azure szolgáltatásokhoz
+- Kezelt identitás Azure szolgáltatásokhoz
 - Opcionális Azure App Service hitelesítés
-- Alapvető hitelesítés fejlesztéshez
+- Alapvető hitelesítés fejlesztéshez tartalék lehetőségként
 
-!!! quote "A LABOR VÉGÉRE EL KELL ÉRNIE"
-    - [ ] Meghatározni a forgatókönyv követelményeit
-    - [ ] Testreszabni a környezeti változókat (konfiguráció)
-    - [ ] Testreszabni az ügynök utasításait (feladat)
-    - [ ] Telepíteni a testreszabott sablont (alkalmazás)
-    - [ ] Teljesíteni az utótelepítési feladatokat (kézi)
-    - [ ] Tesztértékelést futtatni
 
-Ez a példa bemutatja, hogyan lehet testreszabni a sablont egy vállalati kiskereskedelmi felhasználási esethez, két specializált ügynökkel és több modell telepítéssel.
+
+!!! quote "ENNEK A LABORNÁL A VÉGREHAJTÁS UTÁN RENDELKEZNED KELL"
+    - [ ] Meghatározta a forgatókönyv követelményeit
+    - [ ] Testreszabta a környezeti változókat (konfig)
+    - [ ] Testreszabta az ügynök utasításokat (feladat)
+    - [ ] Telepítette a testreszabott sablont (alkalmazás)
+    - [ ] Elvégezte az utólagos telepítési feladatokat (kézi)
+    - [ ] Lefuttatott egy tesztértékelést
+
+Ez a példa bemutatja a sablon testreszabását egy vállalati kiskereskedelmi felhasználási esethez két specializált ügynökkel és több modelltelepítéssel.
 
 ---
 
@@ -142,61 +135,61 @@ Ez a példa bemutatja, hogyan lehet testreszabni a sablont egy vállalati kisker
 
 #### **Ügynök telepítések:** 
 
-   - Vásárlói ügynök: Segít az ügyfeleknek termékeket keresni és összehasonlítani
+   - Vásárlói ügynök: Segíti az ügyfeleket a termékek megtalálásában és összehasonlításában
    - Hűség ügynök: Kezeli az ügyféljutalmakat és promóciókat
 
 #### **Modell telepítések:**
 
-   - `gpt-4.1`: Elsődleges chat modell
-   - `o3`: Érvelési modell összetett kérdésekhez
-   - `gpt-4.1-nano`: Könnyű modell egyszerű interakciókhoz
+   - `gpt-4.1`: Elsődleges csevegő modell
+   - `o3`: Összetett lekérdezésekhez gondolkodási modell
+   - `gpt-4.1-nano`: Könnyűsúlyú modell egyszerű interakciókhoz
    - `text-embedding-3-large`: Kiváló minőségű beágyazások kereséshez
 
 #### **Funkciók:**
 
-   - Nyomkövetés és monitorozás engedélyezve
-   - AI keresés a termékkatalógushoz
-   - Értékelési keretrendszer a minőségbiztosításhoz
-   - Red teaming a biztonsági validációhoz
+   - Tracing és monitorozás engedélyezve
+   - AI Keresés a termékkatalógushoz
+   - Értékelési keretrendszer minőségbiztosításhoz
+   - Red teaming a biztonság validálásához
 
 ---
 
-### 5.6.2 Forgatókönyv megvalósítása
+### 5.6.2 Forgatókönyv megvalósítás
 
 
-#### 5.6.2.1. Előtelepítési konfiguráció
+#### 5.6.2.1. Telepítés előtti konfiguráció
 
-Hozzon létre egy beállítási szkriptet (`setup-retail.sh`)
+Készítsen egy telepítőszkriptet (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# Környezet név beállítása
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# Régió beállítása (a modell elérhetősége alapján válasszon)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# Minden opcionális szolgáltatás engedélyezése
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# Elsődleges chat modell konfigurálása (gpt-4o, mint a gpt-4.1-hez legközelebb álló elérhető)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# Beágyazási modell konfigurálása a fejlettebb kereséshez
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# Ügynök neve beállítása (első ügynök létrehozásra kerül)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# Keresési index konfigurálása
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -207,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: Ügynök utasítások
 
-Hozzon létre `custom-agents/shopper-agent-instructions.md`:
+Készítse el a `custom-agents/shopper-agent-instructions.md` fájlt:
 
 ```markdown
 # Shopper Agent Instructions
@@ -230,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Hozzon létre `custom-agents/loyalty-agent-instructions.md`:
+Készítse el a `custom-agents/loyalty-agent-instructions.md` fájlt:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -257,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: Telepítési szkript
 
-Hozzon létre `deploy-retail.sh`:
+Készítse el a `deploy-retail.sh` fájlt:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -265,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# Előfeltételek ellenőrzése
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -277,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# Környezet beállítása
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# Kvóta ellenőrzése a kiválasztott régióban
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -298,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# Infrastruktúra és alkalmazás telepítése
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# Telepítési eredmények rögzítése
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# Webalkalmazás URL-jének lekérése
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -328,28 +321,28 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Utótelepítési konfiguráció
+#### 5.6.2.4: Utólagos konfiguráció
 
-Hozzon létre `configure-retail-agents.sh`:
+Készítse el a `configure-retail-agents.sh` fájlt:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# Telepítési információk lekérése
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# Utasítások a kézi beállításhoz
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -374,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -387,18 +380,18 @@ echo "
 
 ### 5.6.3: Tesztelés és validáció
 
-Hozzon létre `test-retail-deployment.sh`:
+Készítse el a `test-retail-deployment.sh` fájlt:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# Ellenőrizze, hogy a környezeti változók be vannak-e állítva
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# A webalkalmazás elérhetőségének tesztelése
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -412,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# Futtassa az értékelést, ha konfigurálva van
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -436,38 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Várható eredmények
+### 5.6.4 Várt eredmények
 
-Az útmutató követése után a következőket érheti el:
+A megvalósítási útmutató követése után a következőkkel fog rendelkezni:
 
 1. **Telepített infrastruktúra:**
 
-      - AI Foundry projekt modell telepítésekkel
-      - Container Apps a webalkalmazás hosztolásához
-      - AI keresési szolgáltatás a termékkatalógushoz
+      - Microsoft Foundry projekt modelltelepítésekkel
+      - Container Apps, mely hosztolja a webalkalmazást
+      - AI Keresési szolgáltatás a termékkatalógushoz
       - Application Insights a monitorozáshoz
 
 2. **Kezdeti ügynök:**
 
       - Vásárlói ügynök alapvető utasításokkal konfigurálva
       - Fájlkeresési képesség engedélyezve
-      - Nyomkövetés és monitorozás konfigurálva
+      - Tracing és monitorozás beállítva
 
-3. **Testreszabásra kész:**
+3. **Készen a testreszabásra:**
 
       - Keretrendszer a Hűség ügynök hozzáadásához
-      - Egyedi utasítássablonok
+      - Egyedi utasítás sablonok
       - Tesztelési és validációs szkriptek
-      - Monitorozási és értékelési beállítások
+      - Monitorozási és értékelési beállítás
 
-4. **Gyártási készenlét:**
+4. **Termelési érettség:**
 
-      - Biztonsági vizsgálat red teaming segítségével
+      - Biztonsági vizsgálat red teaminggel
       - Teljesítmény monitorozás
       - Minőségértékelési keretrendszer
       - Skálázható architektúra
 
-Ez a példa bemutatja, hogyan lehet az AZD sablont kiterjeszteni és testreszabni specifikus vállalati forgatókönyvekhez, miközben betartja a biztonság, monitorozás és skálázhatóság legjobb gyakorlatait.
+Ez a példa bemutatja, hogyan bővíthető és szabható testre az AZD sablon specifikus vállalati forgatókönyvekhez, miközben megőrzik a legjobb gyakorlatokat a biztonság, monitorozás és skálázhatóság terén.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi Nyilatkozat**:
+Ezt a dokumentumot az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) használatával fordítottuk. Bár törekszünk a pontos fordításra, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén professzionális, emberi fordítást javaslunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ezen fordítás használatából ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

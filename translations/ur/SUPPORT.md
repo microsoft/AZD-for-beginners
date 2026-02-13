@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-09T18:51:18+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "ur"
-}
--->
 # TODO: اس ریپو کے منتظم نے ابھی تک اس فائل میں ترمیم نہیں کی ہے
 
 **ریپو مالک**: کیا آپ اس پروڈکٹ/پروجیکٹ کے لیے کسٹمر سروس اور سپورٹ (CSS) چاہتے ہیں؟

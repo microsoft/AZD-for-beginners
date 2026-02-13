@@ -1,33 +1,24 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-24T10:53:30+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "hi"
-}
--->
-# 5. टेम्पलेट को कस्टमाइज़ करें
+# 5. एक टेम्पलेट को अनुकूलित करें
 
 !!! tip "इस मॉड्यूल के अंत तक आप सक्षम होंगे"
 
-    - [ ] डिफ़ॉल्ट AI एजेंट क्षमताओं का पता लगाया
-    - [ ] अपने स्वयं के इंडेक्स के साथ AI सर्च जोड़ा
-    - [ ] ट्रेसिंग मेट्रिक्स को सक्रिय किया और विश्लेषण किया
-    - [ ] एक मूल्यांकन रन निष्पादित किया
-    - [ ] रेड-टीमिंग स्कैन निष्पादित किया
-    - [ ] **लैब 5: कस्टमाइज़ेशन प्लान बनाया**
+    - [ ] डिफ़ॉल्ट AI एजेंट क्षमताओं का अन्वेषण किया
+    - [ ] अपने इंडेक्स के साथ AI Search जोड़ा
+    - [ ] ट्रेसिंग मीट्रिक्स को सक्रिय किया और विश्लेषण किया
+    - [ ] एक मूल्यांकन रन चलाया
+    - [ ] रेड-टीमिंग स्कैन चलाया
+    - [ ] **Lab 5: अनुकूलन योजना बनाई** 
 
 ---
 
-## 5.1 AI एजेंट क्षमताएं
+## 5.1 AI एजेंट क्षमताएँ
 
-!!! success "हमने इसे लैब 01 में पूरा किया"
+!!! success "हमने यह Lab 01 में पूरा कर लिया"
 
-- **फाइल सर्च**: OpenAI की बिल्ट-इन फाइल सर्च ज्ञान पुनर्प्राप्ति के लिए
-- **संदर्भ**: प्रतिक्रियाओं में स्वचालित स्रोत संदर्भ
-- **कस्टमाइज़ेबल निर्देश**: एजेंट के व्यवहार और व्यक्तित्व को संशोधित करें
-- **टूल इंटीग्रेशन**: कस्टम क्षमताओं के लिए एक्स्टेंसिबल टूल सिस्टम
+- **File Search**: OpenAI का अंतर्निर्मित फ़ाइल खोज ज्ञान पुनर्प्राप्ति के लिए
+- **Citations**: उत्तरों में स्रोतों का स्वचालित उद्धरण
+- **Customizable Instructions**: एजेंट के व्यवहार और व्यक्तित्व को संशोधित करने की क्षमता
+- **Tool Integration**: कस्टम क्षमताओं के लिए विस्तार योग्य टूल सिस्टम
 
 ---
 
@@ -36,31 +27,31 @@ CO_OP_TRANSLATOR_METADATA:
 !!! task "इसे पूरा करने के लिए हमें बदलाव करने और पुनः तैनात करने की आवश्यकता है"    
     
     ```bash title=""
-    # पर्यावरण वेरिएबल सेट करें
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # डेटा अपलोड करें और अपना इंडेक्स बनाएं
+    # Upload data and create my index
 
     ```
 
 ---
 
-**OpenAI फाइल सर्च (डिफ़ॉल्ट):**
+**OpenAI फ़ाइल खोज (डिफ़ॉल्ट):**
 
-- Azure AI एजेंट सेवा में बिल्ट-इन
-- स्वचालित दस्तावेज़ प्रसंस्करण और इंडेक्सिंग
+- Foundry एजेंटों में निर्मित
+- दस्तावेज़ों की स्वचालित प्रोसेसिंग और इंडेक्सिंग
 - कोई अतिरिक्त कॉन्फ़िगरेशन आवश्यक नहीं
 
-**Azure AI सर्च (वैकल्पिक):**
+**Azure AI Search (वैकल्पिक):**
 
-- हाइब्रिड सेमांटिक और वेक्टर सर्च
+- हाइब्रिड सैमान्टिक और वेक्टर सर्च
 - कस्टम इंडेक्स प्रबंधन
-- उन्नत सर्च क्षमताएं
-- `USE_AZURE_AI_SEARCH_SERVICE=true` की आवश्यकता है
+- उन्नत खोज क्षमताएं
+- इसकी आवश्यकता है: `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
@@ -75,16 +66,16 @@ CO_OP_TRANSLATOR_METADATA:
 
 **ट्रेसिंग:**
 
-- OpenTelemetry इंटीग्रेशन
+- OpenTelemetry एकीकरण
 - अनुरोध/प्रतिक्रिया ट्रैकिंग
-- प्रदर्शन मेट्रिक्स
-- AI Foundry पोर्टल में उपलब्ध
+- प्रदर्शन मीट्रिक्स
+- Microsoft Foundry पोर्टल में उपलब्ध
 
 **लॉगिंग:**
 
-- कंटेनर ऐप्स में एप्लिकेशन लॉग्स
-- कोरिलेशन IDs के साथ संरचित लॉगिंग
-- रीयल-टाइम और ऐतिहासिक लॉग देखने की सुविधा
+- Container Apps में एप्लिकेशन लॉग
+- कॉरिलेशन आईडी के साथ संरचित लॉगिंग
+- रीयल-टाइम और ऐतिहासिक लॉग देखने की क्षमता
 
 ---
 
@@ -92,17 +83,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 **स्थानीय मूल्यांकन:**
 
-- गुणवत्ता आकलन के लिए बिल्ट-इन मूल्यांकनकर्ता
-- कस्टम मूल्यांकन स्क्रिप्ट्स
+- गुणवत्ता आकलन के लिए अंतर्निहित मूल्यांकन उपकरण
+- कस्टम मूल्यांकन स्क्रिप्ट
 - प्रदर्शन बेंचमार्किंग
 
-**निरंतर मॉनिटरिंग:**
+**निरंतर निगरानी:**
 
-- लाइव इंटरैक्शन का स्वचालित मूल्यांकन
-- गुणवत्ता मेट्रिक्स ट्रैकिंग
-- प्रदर्शन प्रतिगमन का पता लगाना
+- लाइव इंटरैक्शन के स्वचालित मूल्यांकन
+- गुणवत्ता मीट्रिक्स की ट्रैकिंग
+- प्रदर्शन रिग्रेशन का पता लगाना
 
-**CI/CD इंटीग्रेशन:**
+**CI/CD एकीकरण:**
 
 - GitHub Actions वर्कफ़्लो
 - स्वचालित परीक्षण और मूल्यांकन
@@ -110,92 +101,95 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## 5.5 [AI रेड टीमिंग एजेंट](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI रेड-टीमिंग एजेंट](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI रेड टीमिंग:**
+**AI रेड-टीमिंग:**
 
 - स्वचालित सुरक्षा स्कैनिंग
-- AI सिस्टम के लिए जोखिम आकलन
+- AI प्रणालियों के लिए जोखिम आकलन
 - कई श्रेणियों में सुरक्षा मूल्यांकन
 
 **प्रमाणीकरण:**
 
-- Azure सेवाओं के लिए प्रबंधित पहचान
+- Azure सेवाओं के लिए Managed Identity
 - वैकल्पिक Azure App Service प्रमाणीकरण
-- विकास के लिए बेसिक ऑथ फॉलबैक
+- डेवलपमेंट के लिए बेसिक ऑथ विकल्प
+
+
 
 !!! quote "इस लैब के अंत तक आपके पास होना चाहिए"
-    - [ ] अपने परिदृश्य आवश्यकताओं को परिभाषित किया
-    - [ ] पर्यावरण वेरिएबल्स को कस्टमाइज़ किया (कॉन्फ़िग)
-    - [ ] एजेंट निर्देशों को कस्टमाइज़ किया (टास्क)
-    - [ ] कस्टमाइज़ किए गए टेम्पलेट को तैनात किया (ऐप)
-    - [ ] पोस्ट-डिप्लॉयमेंट कार्य पूरे किए (मैनुअल)
+    - [ ] परिदृश्य आवश्यकताएँ परिभाषित करें
+    - [ ] अनुकूलित env वेरिएबल्स (config)
+    - [ ] अनुकूलित एजेंट निर्देश (task)
+    - [ ] अनुकूलित टेम्पलेट तैनात किया गया (app)
+    - [ ] पोस्ट-डिप्लॉयमेंट कार्य (manual) पूरा किया
     - [ ] एक परीक्षण मूल्यांकन चलाया
 
-यह उदाहरण दिखाता है कि कैसे एक एंटरप्राइज़ रिटेल उपयोग केस के लिए टेम्पलेट को कस्टमाइज़ किया जा सकता है, जिसमें दो विशेष एजेंट और कई मॉडल तैनाती शामिल हैं।
+यह उदाहरण दो विशेष एजेंट और कई मॉडल तैनाती के साथ एक एंटरप्राइज़ रिटेल उपयोग मामले के लिए टेम्पलेट को अनुकूलित करने का प्रदर्शन करता है।
 
 ---
 
-## 5.6 इसे अपने लिए कस्टमाइज़ करें!
+## 5.6 इसे अपने लिए अनुकूलित करें!
 
-### 5.6.1. परिदृश्य आवश्यकताएं
+### 5.6.1. परिदृश्य आवश्यकताएँ
 
 #### **एजेंट तैनाती:** 
 
-   - शॉपर एजेंट: ग्राहकों को उत्पाद खोजने और तुलना करने में मदद करता है
-   - लॉयल्टी एजेंट: ग्राहक पुरस्कार और प्रमोशन प्रबंधित करता है
+   - Shopper Agent: ग्राहकों को उत्पाद खोजने और तुलना करने में मदद करता है
+   - Loyalty Agent: ग्राहक पुरस्कार और प्रमोशन का प्रबंधन करता है
 
 #### **मॉडल तैनाती:**
 
    - `gpt-4.1`: प्राथमिक चैट मॉडल
-   - `o3`: जटिल प्रश्नों के लिए तर्कसंगत मॉडल
+   - `o3`: जटिल प्रश्नों के लिए तर्क मॉडल
    - `gpt-4.1-nano`: सरल इंटरैक्शन के लिए हल्का मॉडल
-   - `text-embedding-3-large`: सर्च के लिए उच्च गुणवत्ता वाले एम्बेडिंग
+   - `text-embedding-3-large`: खोज के लिए उच्च-गुणवत्ता इम्बेडिंग
 
-#### **विशेषताएं:**
+#### **विशेषताएँ:**
 
    - ट्रेसिंग और मॉनिटरिंग सक्षम
-   - उत्पाद कैटलॉग के लिए AI सर्च
-   - गुणवत्ता आश्वासन के लिए मूल्यांकन फ्रेमवर्क
-   - सुरक्षा मान्यता के लिए रेड टीमिंग
+   - उत्पाद कैटलॉग के लिए AI Search
+   - गुणवत्ता आश्वासन के लिए मूल्यांकन फ़्रेमवर्क
+   - सुरक्षा मान्यता के लिए रेड-टीमिंग
 
 ---
 
 ### 5.6.2 परिदृश्य कार्यान्वयन
 
+
 #### 5.6.2.1. प्री-डिप्लॉयमेंट कॉन्फ़िग
 
-एक सेटअप स्क्रिप्ट बनाएं (`setup-retail.sh`)
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Set environment name
+# पर्यावरण का नाम सेट करें
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configure region (choose based on model availability)
+# क्षेत्र कॉन्फ़िगर करें (मॉडल उपलब्धता के आधार पर चुनें)
 azd env set AZURE_LOCATION "eastus2"
 
-# Enable all optional services
+# सभी वैकल्पिक सेवाओं को सक्षम करें
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
+# प्राथमिक चैट मॉडल कॉन्फ़िगर करें (gpt-4o, gpt-4.1 के सबसे नज़दीकी उपलब्ध विकल्प के रूप में)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configure embedding model for enhanced search
+# सुधरित खोज के लिए एम्बेडिंग मॉडल कॉन्फ़िगर करें
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Set agent name (will create first agent)
+# एजेंट का नाम सेट करें (पहला एजेंट बनाया जाएगा)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configure search index
+# खोज सूचकांक कॉन्फ़िगर करें
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -206,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: एजेंट निर्देश
 
-`custom-agents/shopper-agent-instructions.md` बनाएं:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -229,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-`custom-agents/loyalty-agent-instructions.md` बनाएं:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -254,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: तैनाती स्क्रिप्ट
+#### 5.6.2.3: डिप्लॉयमेंट स्क्रिप्ट
 
-`deploy-retail.sh` बनाएं:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -264,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Validate prerequisites
+# पूर्वापेक्षाएँ सत्यापित करें
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -276,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Set up environment
+# पर्यावरण सेट करें
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Check quota in selected region
+# चयनित क्षेत्र में कोटा की जाँच करें
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -297,29 +291,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Deploy infrastructure and application
+# बुनियादी ढांचा और एप्लिकेशन तैनात करें
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capture deployment outputs
+# तैनाती के आउटपुट कैप्चर करें
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Get the web app URL
+# वेब ऐप का URL प्राप्त करें
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -329,26 +323,26 @@ echo "4. Test both agents with sample queries"
 
 #### 5.6.2.4: पोस्ट-डिप्लॉयमेंट कॉन्फ़िग
 
-`configure-retail-agents.sh` बनाएं:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Get deployment information
+# डिप्लॉयमेंट की जानकारी प्राप्त करें
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instructions for manual configuration
+# मैनुअल कॉन्फ़िगरेशन के निर्देश
 echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -373,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -384,20 +378,20 @@ echo "
 "
 ```
 
-### 5.6.3: परीक्षण और मान्यता
+### 5.6.3: परीक्षण और सत्यापन
 
-`test-retail-deployment.sh` बनाएं:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Verify environment variables are set
+# सुनिश्चित करें कि पर्यावरण चर सेट हैं
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test web application availability
+# वेब अनुप्रयोग की उपलब्धता का परीक्षण करें
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -411,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Run evaluation if configured
+# यदि कॉन्फ़िगर किया गया है तो मूल्यांकन चलाएँ
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -426,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -437,36 +431,40 @@ Next steps:
 
 ### 5.6.4 अपेक्षित परिणाम
 
-इस कार्यान्वयन गाइड का पालन करने के बाद, आपके पास होगा:
+इस कार्यान्वयन मार्गदर्शिका का पालन करने के बाद, आपके पास निम्न होंगे:
 
-1. **तैनात इंफ्रास्ट्रक्चर:**
+1. **तैनात इन्फ्रास्ट्रक्चर:**
 
-      - मॉडल तैनाती के साथ AI Foundry प्रोजेक्ट
-      - वेब एप्लिकेशन होस्ट करने वाले कंटेनर ऐप्स
-      - उत्पाद कैटलॉग के लिए AI सर्च सेवा
-      - मॉनिटरिंग के लिए एप्लिकेशन इनसाइट्स
+      - मॉडल तैनाती के साथ Microsoft Foundry प्रोजेक्ट
+      - वेब एप्लिकेशन होस्ट करने वाले Container Apps
+      - उत्पाद कैटलॉग के लिए AI Search सर्विस
+      - मॉनिटरिंग के लिए Application Insights
 
-2. **प्रारंभिक एजेंट:**
+2. **प्रारम्भिक एजेंट:**
 
-      - शॉपर एजेंट बुनियादी निर्देशों के साथ कॉन्फ़िगर किया गया
-      - फाइल सर्च क्षमता सक्षम
-      - ट्रेसिंग और मॉनिटरिंग कॉन्फ़िगर किया गया
+      - Shopper Agent बुनियादी निर्देशों के साथ कॉन्फ़िगर किया गया
+      - फ़ाइल खोज क्षमता सक्षम की गई
+      - ट्रेसिंग और मॉनिटरिंग कॉन्फ़िगर की गई
 
-3. **कस्टमाइज़ेशन के लिए तैयार:**
+3. **अनुकूलन के लिए तैयार:**
 
-      - लॉयल्टी एजेंट जोड़ने के लिए फ्रेमवर्क
-      - कस्टम निर्देश टेम्पलेट्स
-      - परीक्षण और मान्यता स्क्रिप्ट्स
+      - Loyalty Agent जोड़ने के लिए फ़्रेमवर्क
+      - कस्टम निर्देश टेम्पलेट
+      - परीक्षण और सत्यापन स्क्रिप्ट
       - मॉनिटरिंग और मूल्यांकन सेटअप
 
-4. **प्रोडक्शन रेडीनेस:**
+4. **प्रोडक्शन के लिए तैयार:**
 
-      - रेड टीमिंग के साथ सुरक्षा स्कैनिंग
-      - प्रदर्शन मॉनिटरिंग
-      - गुणवत्ता मूल्यांकन फ्रेमवर्क
+      - रेड-टीमिंग के साथ सुरक्षा स्कैनिंग
+      - प्रदर्शन निगरानी
+      - गुणवत्ता मूल्यांकन फ़्रेमवर्क
       - स्केलेबल आर्किटेक्चर
 
-यह उदाहरण दिखाता है कि AZD टेम्पलेट को कैसे विस्तारित और कस्टमाइज़ किया जा सकता है, ताकि विशिष्ट एंटरप्राइज़ परिदृश्यों के लिए सर्वोत्तम सुरक्षा, मॉनिटरिंग और स्केलेबिलिटी प्रथाओं को बनाए रखा जा सके।
+यह उदाहरण दिखाता है कि AZD टेम्पलेट को सुरक्षा, मॉनिटरिंग, और स्केलेबिलिटी के सर्वोत्तम अभ्यासों को बनाए रखते हुए विशेष एंटरप्राइज़ परिदृश्यों के लिए कैसे बढ़ाया और अनुकूलित किया जा सकता है।
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+अस्वीकरण:
+यह दस्तावेज़ AI अनुवाद सेवा (Co-op Translator: https://github.com/Azure/co-op-translator) का उपयोग करके अनुवादित किया गया है। हम सटीकता के लिए प्रयासशील हैं, फिर भी कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ को उसकी मूल भाषा में ही अधिकृत स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए पेशेवर मानव अनुवाद की सिफारिश की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

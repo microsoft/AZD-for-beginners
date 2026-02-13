@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:04:14+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "bg"
-}
--->
 # 4. Конфигуриране на шаблон
 
-!!! tip "В КРАЯ НА ТОЗИ МОДУЛ ЩЕ МОЖЕТЕ"
+!!! tip "До края на този модул ще можете"
 
-    - [ ] Да разберете предназначението на `azure.yaml`
-    - [ ] Да разберете структурата на `azure.yaml`
-    - [ ] Да разберете стойността на `hooks` в жизнения цикъл на azd
-    - [ ] **Лаборатория 3:** 
-
----
-
-!!! prompt "Какво прави файлът `azure.yaml`? Използвайте кодов блок и обяснете го ред по ред"
-
-      Файлът `azure.yaml` е **конфигурационният файл за Azure Developer CLI (azd)**. Той определя как вашето приложение трябва да бъде разположено в Azure, включително инфраструктура, услуги, hooks за разполагане и променливи на средата.
+    - [ ] Разберете целта на `azure.yaml`
+    - [ ] Разберете структурата на `azure.yaml`
+    - [ ] Разберете значението на lifecycle `hooks` в azd
+    - [ ] **Лаборатория 4:** Проучете и модифицирайте променливите на средата
 
 ---
 
-## 1. Предназначение и функционалност
+!!! prompt "Какво прави файлът `azure.yaml`? Използвайте блок с код и обяснете ред по ред"
 
-Файлът `azure.yaml` служи като **план за разполагане** на приложение за AI агент, което:
+      Файлът `azure.yaml` е **конфигурационният файл за Azure Developer CLI (azd)**. Той определя как вашето приложение трябва да бъде разположено в Azure, включително инфраструктура, услуги, hook-ове за разгръщане и променливи на средата.
 
-1. **Проверява средата** преди разполагане
-2. **Осигурява Azure AI услуги** (AI Hub, AI Project, Search и др.)
-3. **Разполага Python приложение** в Azure Container Apps
-4. **Конфигурира AI модели** за чат и функционалност за вграждане
-5. **Настройва мониторинг и проследяване** за AI приложението
-6. **Работи както с нови, така и със съществуващи** сценарии за Azure AI проекти
+---
 
-Файлът позволява **разполагане с една команда** (`azd up`) на цялостно решение за AI агент с правилна проверка, осигуряване и конфигурация след разполагане.
+## 1. Цел и функционалност
 
-??? info "Разгънете за преглед: `azure.yaml`"
+Този `azure.yaml` файл служи като **план за разгръщане** за приложение с AI агент, което:
 
-      Файлът `azure.yaml` определя как Azure Developer CLI трябва да разположи и управлява това приложение за AI агент в Azure. Нека го разгледаме ред по ред.
+1. **Проверява средата** преди разгръщане
+2. **Създава ресурси на Azure AI** (AI Hub, AI Project, Search и др.)
+3. **Разгръща Python приложение** в Azure Container Apps
+4. **Конфигурира AI модели** както за чат, така и за embedding функционалност
+5. **Настройва наблюдение и проследяване** за AI приложението
+6. **Поддържа както нови, така и съществуващи** сценарии на Azure AI проект
+
+Файлът позволява **разгръщане с една команда** (`azd up`) на пълно AI агентно решение с правилна проверка, създаване на ресурси и последваща конфигурация след разгръщане.
+
+??? info "Разгънете, за да видите: `azure.yaml`"
+
+      Файлът `azure.yaml` определя как Azure Developer CLI да разгръща и управлява това приложение с AI агент в Azure. Нека го разгледаме ред по ред.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: нуждаем ли се от hooks? 
-      # TODO: нуждаем ли се от всички променливи?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,19 +126,19 @@ CO_OP_TRANSLATOR_METADATA:
 
 ---
 
-## 2. Разглеждане на файла
+## 2. Разглобяване на файла
 
-Нека преминем през файла секция по секция, за да разберем какво прави - и защо.
+Нека преминем през файла секция по секция, за да разберем какво прави — и защо.
 
-### 2.1 **Заглавие и схема (1-3)**
+### 2.1 **Хедър и схема (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Ред 1**: Осигурява схема за валидиране на YAML езиковия сървър за IDE поддръжка и IntelliSense
+- **Ред 1**: Осигурява схема за валидиране от YAML language server за поддръжка в IDE и IntelliSense
 
-### 2.2 Метаданни на проекта (5-10)
+### 2.2 Проектни метаданни (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Ред 5**: Определя името на проекта, използвано от Azure Developer CLI
-- **Редове 6-7**: Указва, че това е базирано на шаблон версия 1.0.2
-- **Редове 8-9**: Изисква версия на Azure Developer CLI 1.14.0 или по-нова
+- **Ред 5**: Дефинира името на проекта, използвано от Azure Developer CLI
+- **Редове 6-7**: Посочва, че е базиран на шаблон версия 1.0.2
+- **Редове 8-9**: Изисква Azure Developer CLI версия 1.14.0 или по-нова
 
-### 2.3 Hooks за разполагане (11-40)
+### 2.3 Hook-ове за разгръщане (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Редове 11-20**: **Hook преди разполагане** - изпълнява се преди `azd up`
+- **Редове 11-20**: **Hook преди разгръщане (pre-deployment)** - изпълнява се преди `azd up`
 
-      - На Unix/Linux: Прави скрипта за валидиране изпълним и го стартира
-      - На Windows: Стартира PowerShell скрипт за валидиране
-      - И двете са интерактивни и ще спрат разполагането, ако се провалят
+      - На Unix/Linux: Прави валидационния скрипт изпълним и го стартира
+      - В Windows: Изпълнява PowerShell валидационния скрипт
+      - И в двата случая са интерактивни и ще спрат разгръщането, ако не успеят
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Редове 21-30**: **Hook след осигуряване** - изпълнява се след създаване на Azure ресурси
+- **Редове 21-30**: **Hook след осигуряване на ресурси (post-provision)** - изпълнява се след като Azure ресурсите са създадени
 
-  - Изпълнява скриптове за запис на променливи на средата
-  - Продължава разполагането, дори ако тези скриптове се провалят (`continueOnError: true`)
+  - Изпълнява скриптове за записване на променливите на средата
+  - Продължава разгръщането дори ако тези скриптове се провалят (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Редове 31-40**: **Hook след разполагане** - изпълнява се след разполагане на приложението
+- **Редове 31-40**: **Hook след разгръщане (post-deploy)** - изпълнява се след разгръщането на приложението
 
   - Изпълнява финални скриптове за настройка
-  - Продължава, дори ако скриптовете се провалят
+  - Продължава дори ако скриптовете се провалят
 
 ### 2.4 Конфигурация на услугата (41-48)
 
-Това конфигурира услугата на приложението, което разполагате.
+Това конфигурира услугата на приложението, която разгръщате.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Ред 42**: Определя услуга с име "api_and_frontend"
+- **Ред 42**: Дефинира услуга с име "api_and_frontend"
 - **Ред 43**: Посочва директорията `./src` за изходния код
-- **Ред 44**: Указва Python като програмен език
-- **Ред 45**: Използва Azure Container Apps като платформа за хостинг
-- **Редове 46-48**: Конфигурация на Docker
+- **Ред 44**: Определя Python като програмния език
+- **Ред 45**: Използва Azure Container Apps като хостинг платформа
+- **Редове 46-48**: Docker конфигурация
 
-      - Използва "api_and_frontend" като име на изображението
-      - Изгражда Docker изображението дистанционно в Azure (не локално)
+      - Използва "api_and_frontend" като име на изображение
+      - Компилира Docker изображението отдалечено в Azure (не локално)
 
-### 2.5 Променливи за pipeline (49-76)
+### 2.5 Променливи на pipeline-а (49-76)
 
-Това са променливи, които помагат за автоматизацията на `azd` в CI/CD pipelines.
+Това са променливи, които помагат при изпълнението на `azd` в CI/CD pipeline-и за автоматизация
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Тази секция дефинира променливи на средата, използвани **по време на разполагане**, организирани по категории:
+Този раздел дефинира променливи на средата, използвани **по време на разгръщане**, организирани по категории:
 
 - **Имена на Azure ресурси (Редове 51-60)**:
-      - Основни имена на ресурси за Azure услуги, напр. Resource Group, AI Hub, AI Project и др.
-- **Функционални флагове (Редове 61-63)**:
-      - Булеви променливи за активиране/деактивиране на специфични Azure услуги
-- **Конфигурация на AI агент (Редове 64-71)**:
-      - Конфигурация за основния AI агент, включително име, ID, настройки за разполагане, детайли за модела
-- **Конфигурация за вграждане на AI (Редове 72-79)**:
-      - Конфигурация за модела за вграждане, използван за векторно търсене
-- **Търсене и мониторинг (Редове 80-84)**:
-      - Име на индекс за търсене, съществуващи ID на ресурси и настройки за мониторинг/проследяване
+      - Основните имена на Azure услуги, напр., Resource Group, AI Hub, AI Project и др.
+- **Флагове за функции (Редове 61-63)**:
+      - Булеви променливи за включване/изключване на конкретни Azure услуги
+- **Конфигурация на AI агента (Редове 64-71)**:
+      - Конфигурация за основния AI агент, включително име, ID, настройки за разгръщане, подробности за модела
+- **Конфигурация на AI embedding (Редове 72-79)**:
+      - Конфигурация за модела за embedding, използван за векторно търсене
+- **Търсене и наблюдение (Редове 80-84)**:
+      - Име на индекс за търсене, ID-та на съществуващи ресурси и настройки за наблюдение/проследяване
 
 ---
 
-## 3. Познаване на променливите на средата
-Следните променливи на средата контролират конфигурацията и поведението на вашето разполагане, организирани според основната им цел. Повечето променливи имат разумни стойности по подразбиране, но можете да ги персонализирате, за да съответстват на вашите специфични изисквания или съществуващи Azure ресурси.
+## 3. Запознайте се с променливите на средата
+Следните променливи на средата контролират конфигурацията и поведението на вашето разгръщане, организирани според тяхното основно предназначение. Повечето променливи имат разумни стойности по подразбиране, но можете да ги персонализирате, за да съответстват на вашите конкретни изисквания или съществуващи Azure ресурси.
 
 ### 3.1 Задължителни променливи 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Основна конфигурация на Azure
+AZURE_ENV_NAME                    # Име на средата (използва се при именуване на ресурси)
+AZURE_LOCATION                    # Регион за разполагане
+AZURE_SUBSCRIPTION_ID             # Целеви абонамент
+AZURE_RESOURCE_GROUP              # Име на ресурсна група
+AZURE_PRINCIPAL_ID                # Потребителски принципал за RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Имена на ресурси (генерират се автоматично, ако не са посочени)
+AZURE_AIHUB_NAME                  # Име на хъб на Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Име на проект за ИИ
+AZURE_AISERVICES_NAME             # Име на акаунт за ИИ услуги
+AZURE_STORAGE_ACCOUNT_NAME        # Име на акаунт за съхранение
+AZURE_CONTAINER_REGISTRY_NAME     # Име на регистър за контейнери
+AZURE_KEYVAULT_NAME               # Име на Key Vault (ако се използва)
 ```
 
 ### 3.2 Конфигурация на модела 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Конфигурация на чат модел
+AZURE_AI_AGENT_MODEL_NAME         # По подразбиране: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # По подразбиране: OpenAI (или Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # По подразбиране: най-новата налична
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Име на разгръщане за чат модела
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # По подразбиране: Стандартен
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # По подразбиране: 80 (хиляди TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Конфигурация на модел за вграждане
+AZURE_AI_EMBED_MODEL_NAME         # По подразбиране: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # По подразбиране: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # По подразбиране: най-новата налична
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Име на разгръщане за вграждания
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # По подразбиране: Стандартен
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # По подразбиране: 50 (хиляди TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Конфигурация на агент
+AZURE_AI_AGENT_NAME               # Показвано име на агента
+AZURE_EXISTING_AGENT_ID           # Използвайте съществуващ агент (по избор)
 ```
 
-### 3.3 Функционални флагове
+### 3.3 Флагове за функции
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Незадължителни услуги
+USE_APPLICATION_INSIGHTS         # По подразбиране: включено
+USE_AZURE_AI_SEARCH_SERVICE      # По подразбиране: изключено
+USE_CONTAINER_REGISTRY           # По подразбиране: включено
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Наблюдение и проследяване
+ENABLE_AZURE_MONITOR_TRACING     # По подразбиране: изключено
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # По подразбиране: изключено
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Конфигурация за търсене
+AZURE_AI_SEARCH_INDEX_NAME       # Име на индекса за търсене
+AZURE_SEARCH_SERVICE_NAME        # Име на услугата за търсене
 ```
 
-### 3.4 Конфигурация на AI проект 
+### 3.4 Конфигурация на AI проекта 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Използване на съществуващи ресурси
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Пълен идентификатор на ресурса на съществуващ AI проект
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL на крайна точка на съществуващ проект
 ```
 
-### 3.5 Проверка на вашите променливи
+### 3.5 Проверете вашите променливи
 
-Използвайте Azure Developer CLI, за да преглеждате и управлявате вашите променливи на средата:
+Използвайте Azure Developer CLI, за да прегледате и управлявате променливите на средата си:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Преглед на всички променливи на средата в текущата среда
 azd env get-values
 
-# Get a specific environment variable
+# Получаване на конкретна променлива на средата
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Задаване на променлива на средата
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Задаване на множество променливи от .env файл
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Отказ от отговорност:
+Този документ е преведен с помощта на AI услуга за превод [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на оригиналния език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Не поемаме отговорност за каквито и да е недоразумения или погрешни тълкувания, произтичащи от използването на този превод.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

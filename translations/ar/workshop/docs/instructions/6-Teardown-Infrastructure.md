@@ -1,38 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-24T12:06:15+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "ar"
-}
--->
 # 6. تفكيك البنية التحتية
 
-!!! tip "بنهاية هذه الوحدة ستكون قادرًا على"
+!!! tip "بنهاية هذه الوحدة، ستتمكن من"
 
-    - [ ] عنصر
-    - [ ] عنصر
-    - [ ] عنصر
+    - [ ] فهم أهمية تنظيف الموارد وإدارة التكاليف
+    - [ ] استخدام `azd down` لإلغاء توفير البنية التحتية بأمان
+    - [ ] استعادة خدمات Cognitive المحذوفة مؤقتًا عند الحاجة
+    - [ ] **Lab 6:** تنظيف موارد Azure والتحقق من إزالتها
 
 ---
 
 ## تمارين إضافية
 
-قبل أن نقوم بتفكيك المشروع، خذ بضع دقائق لاستكشاف بعض الأفكار المفتوحة.
+قبل أن نقوم بتفكيك المشروع، خذ بضع دقائق للقيام ببعض الاستكشاف الحر.
 
-!!! danger "NITYA-TODO: قم بتحديد بعض الأفكار للتجربة"
+!!! info "جرّب هذه المطالبات للاستكشاف"
+
+    **جرب GitHub Copilot:**
+    
+    1. اسأل: `What other AZD templates could I try for multi-agent scenarios?`
+    2. اسأل: `How can I customize the agent instructions for a healthcare use case?`
+    3. اسأل: `What environment variables control cost optimization?`
+    
+    **استكشف بوابة Azure:**
+    
+    1. راجع مقاييس Application Insights لنشرك
+    2. تحقق من تحليل التكاليف للموارد التي تم توفيرها
+    3. استكشف ملعب الوكلاء في بوابة Microsoft Foundry مرة أخرى
 
 ---
 
-## إلغاء تخصيص البنية التحتية
+## إلغاء توفير البنية التحتية
 
-1. تفكيك البنية التحتية يتم بسهولة عبر:
+1. تفكيك البنية التحتية سهل مثل:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. العلم `--purge` يضمن أيضًا حذف الموارد المحذوفة بشكل ناعم لخدمات الذكاء الاصطناعي، مما يحرر الحصة التي تحتفظ بها هذه الموارد. بمجرد الانتهاء، سترى شيئًا مثل هذا:
+1. يضمن العلم `--purge` أنه يقوم أيضًا بمسح موارد خدمات Cognitive المحذوفة مؤقتًا، وبالتالي تحرير الحصة المحتجوزة بواسطة هذه الموارد. بمجرد اكتماله سترى شيئًا مثل هذا:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -43,14 +47,18 @@ CO_OP_TRANSLATOR_METADATA:
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (اختياري) إذا قمت الآن بتشغيل `azd up` مرة أخرى، ستلاحظ أن نموذج gpt-4.1 يتم نشره لأن متغير البيئة تم تغييره (وتم حفظه) في المجلد المحلي `.azure`.
+1. (اختياري) إذا قمت الآن بتشغيل `azd up` مرة أخرى، ستلاحظ أنه يتم نشر نموذج gpt-4.1 لأن متغير البيئة تم تغييره (وحُفظ) في المجلد المحلي `.azure`. 
 
-      هنا عمليات نشر النموذج **قبل**:
+      إليك نشرات النماذج **قبل**:
 
-      ![Initial](../../../../../translated_images/ar/14-deploy-initial.30e4cf1c29b587bc.webp)
+      ![الأولية](../../../../../translated_images/ar/14-deploy-initial.30e4cf1c29b587bc.webp)
 
       وهنا **بعد**:
-      ![New](../../../../../translated_images/ar/14-deploy-new.f7f3c355a3cf7299.webp)
+      ![الجديدة](../../../../../translated_images/ar/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+إخلاء المسؤولية:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). رغم سعينا لتحقيق الدقة، يرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار الوثيقة الأصلية بلغتها الأصلية المرجع المعتمد. بالنسبة للمعلومات الحيوية، يُنصح بالاستعانة بترجمة احترافية بشرية. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

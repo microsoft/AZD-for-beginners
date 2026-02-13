@@ -1,45 +1,36 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:07:09+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "lt"
-}
--->
-# 4. Konfigūruokite šabloną
+# 4. Configure a Template
 
-!!! tip "BAIGĘ ŠĮ MODULĮ GALĖSITE"
+!!! tip "MODULIO PABAIGOJE GALĖSITE"
 
     - [ ] Suprasti `azure.yaml` paskirtį
     - [ ] Suprasti `azure.yaml` struktūrą
-    - [ ] Suprasti azd gyvavimo ciklo `hooks` vertę
-    - [ ] **Laboratorinis darbas 3:** 
+    - [ ] Suprasti azd gyvenimo ciklo `hooks` reikšmę
+    - [ ] **Laboratorija 4:** Išnagrinėti ir pakeisti aplinkos kintamuosius
 
 ---
 
-!!! prompt "Ką daro `azure.yaml` failas? Naudokite kodų bloką ir paaiškinkite eilutė po eilutės"
+!!! prompt "Ką daro `azure.yaml` failas? Naudokite kodo bloką ir paaiškinkite eilutė po eilutės"
 
-      `azure.yaml` failas yra **konfigūracijos failas Azure Developer CLI (azd)**. Jame apibrėžiama, kaip jūsų aplikacija turėtų būti diegiama Azure, įskaitant infrastruktūrą, paslaugas, diegimo hooks ir aplinkos kintamuosius.
+      `azure.yaml` failas yra **konfigūracijos failas Azure Developer CLI (azd)**. Jame apibrėžiama, kaip jūsų programa turėtų būti diegiama į Azure, įskaitant infrastruktūrą, paslaugas, diegimo hooks ir aplinkos kintamuosius.
 
 ---
 
-## 1. Paskirtis ir funkcionalumas
+## 1. Purpose and Functionality
 
-Šis `azure.yaml` failas veikia kaip **diegimo planas** AI agento aplikacijai, kuri:
+This `azure.yaml` file serves as the **deployment blueprint** for an AI agent application that:
 
-1. **Patikrina aplinką** prieš diegimą
-2. **Sukuria Azure AI paslaugas** (AI Hub, AI Project, Search ir kt.)
-3. **Diegia Python aplikaciją** Azure Container Apps
-4. **Konfigūruoja AI modelius** pokalbių ir įterpimo funkcionalumui
-5. **Nustato stebėjimą ir sekimą** AI aplikacijai
-6. **Tvarko tiek naujus, tiek esamus** Azure AI projektų scenarijus
+1. **Validates environment** before deployment
+2. **Provisions Azure AI services** (AI Hub, AI Project, Search, etc.)
+3. **Deploys a Python application** to Azure Container Apps
+4. **Configures AI models** for both chat and embedding functionality
+5. **Sets up monitoring and tracing** for the AI application
+6. **Handles both new and existing** Azure AI project scenarios
 
-Failas leidžia **vieno komandos diegimą** (`azd up`) pilnam AI agento sprendimui su tinkamu patikrinimu, sukūrimu ir po diegimo konfigūracija.
+The file enables **one-command deployment** (`azd up`) of a complete AI agent solution with proper validation, provisioning, and post-deployment configuration.
 
-??? info "Išplėskite, kad pamatytumėte: `azure.yaml`"
+??? info "Išplėsti, kad pamatytumėte: `azure.yaml`"
 
-      `azure.yaml` failas apibrėžia, kaip Azure Developer CLI turėtų diegti ir valdyti šią AI agento aplikaciją Azure. Pažvelkime į jį eilutė po eilutės.
+      `azure.yaml` failas apibrėžia, kaip Azure Developer CLI turėtų diegti ir valdyti šią AI agento programą Azure. Paaiškinkime ją eilutė po eilutės.
 
       ```yaml title="" linenums="0"
 
@@ -135,19 +126,19 @@ Failas leidžia **vieno komandos diegimą** (`azd up`) pilnam AI agento sprendim
 
 ---
 
-## 2. Failo analizė
+## 2. Deconstructing The File
 
-Pažvelkime į failą skyrius po skyriaus, kad suprastume, ką jis daro ir kodėl.
+Let's go through the file section by section, to understand what it does - and why.
 
-### 2.1 **Antraštė ir schema (1-3)**
+### 2.1 **Header and Schema (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **1 eilutė**: Pateikia YAML kalbos serverio schemos validaciją IDE palaikymui ir IntelliSense
+- **Line 1**: Suteikia YAML language server schemos validaciją IDE palaikymui ir IntelliSense
 
-### 2.2 Projekto metaduomenys (5-10)
+### 2.2 Project Metadata (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -157,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **5 eilutė**: Apibrėžia projekto pavadinimą, naudojamą Azure Developer CLI
-- **6-7 eilutės**: Nurodo, kad tai pagrįsta šablono versija 1.0.2
-- **8-9 eilutės**: Reikalauja Azure Developer CLI versijos 1.14.0 ar naujesnės
+- **Line 5**: Nustato projekto vardą, kurį naudoja Azure Developer CLI
+- **Lines 6-7**: Nurodo, kad tai remiasi šablonu versijos 1.0.2
+- **Lines 8-9**: Reikalauja Azure Developer CLI versijos 1.14.0 arba naujesnės
 
-### 2.3 Diegimo hooks (11-40)
+### 2.3 Deploy Hooks (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **11-20 eilutės**: **Prieš diegimą hook** - vykdomas prieš `azd up`
+- **Lines 11-20**: **Hook prieš diegimą (pre-deployment)** - vyksta prieš `azd up`
 
-      - Unix/Linux: Padaro validacijos skriptą vykdomą ir paleidžia jį
-      - Windows: Paleidžia PowerShell validacijos skriptą
-      - Abu yra interaktyvūs ir sustabdys diegimą, jei nepavyks
+      - Unix/Linux: padaro patikros skriptą vykdomu ir jį paleidžia
+      - Windows: paleidžia PowerShell patikros skriptą
+      - Abu yra interaktyvūs ir nutrauks diegimą, jei nepavyks
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **21-30 eilutės**: **Po resursų sukūrimo hook** - vykdomas po Azure resursų sukūrimo
+- **Lines 21-30**: **Post-provision hook** - vyksta po Azure išteklių sukūrimo
 
   - Vykdo aplinkos kintamųjų rašymo skriptus
-  - Tęsia diegimą, net jei šie skriptai nepavyksta (`continueOnError: true`)
+  - Tęsiama diegimas net jei šie skriptai nepavyksta (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **31-40 eilutės**: **Po diegimo hook** - vykdomas po aplikacijos diegimo
+- **Lines 31-40**: **Post-deploy hook** - vyksta po programos diegimo
 
-  - Vykdo galutinius nustatymo skriptus
-  - Tęsia, net jei skriptai nepavyksta
+  - Vykdo galutinius sąrankos skriptus
+  - Tęsiama, net jei skriptai nepavyksta
 
-### 2.4 Paslaugų konfigūracija (41-48)
+### 2.4 Service Config (41-48)
 
-Ši konfigūracija apibrėžia aplikacijos paslaugą, kurią diegiate.
+This configures the application service you are deploying.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **42 eilutė**: Apibrėžia paslaugą pavadinimu "api_and_frontend"
-- **43 eilutė**: Nurodo `./src` katalogą kaip šaltinio kodą
-- **44 eilutė**: Nurodo Python kaip programavimo kalbą
-- **45 eilutė**: Naudoja Azure Container Apps kaip talpinimo platformą
-- **46-48 eilutės**: Docker konfigūracija
+- **Line 42**: Apibrėžia paslaugą pavadinimu "api_and_frontend"
+- **Line 43**: Nurodo `./src` katalogą su šaltinio kodu
+- **Line 44**: Nurodo Python kaip programavimo kalbą
+- **Line 45**: Naudoja Azure Container Apps kaip talpinimo platformą
+- **Lines 46-48**: Docker konfigūracija
 
-      - Naudoja "api_and_frontend" kaip vaizdo pavadinimą
-      - Nuotoliniu būdu Azure sukuria Docker vaizdą (ne lokaliai)
+      - Naudoja "api_and_frontend" kaip atvaizdo (image) pavadinimą
+      - Docker atvaizdas yra kuriamas nuotoliniu būdu Azure (ne lokaliai)
 
-### 2.5 Vamzdyno kintamieji (49-76)
+### 2.5 Pipeline Variables (49-76)
 
-Tai kintamieji, padedantys paleisti `azd` CI/CD vamzdynuose automatizavimui
+These are variables to help you run `azd` in CI/CD pipelines for automation
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Šiame skyriuje apibrėžiami aplinkos kintamieji, naudojami **diegimo metu**, suskirstyti pagal kategorijas:
+This section defines environment variables used **during deployment**, organized by category:
 
-- **Azure resursų pavadinimai (51-60 eilutės)**:
-      - Pagrindinių Azure paslaugų resursų pavadinimai, pvz., Resource Group, AI Hub, AI Project ir kt.- 
-- **Funkcijų vėliavėlės (61-63 eilutės)**:
-      - Loginiai kintamieji, skirti įjungti/išjungti tam tikras Azure paslaugas
-- **AI agento konfigūracija (64-71 eilutės)**:
-      - Pagrindinio AI agento konfigūracija, įskaitant pavadinimą, ID, diegimo nustatymus, modelio detales- 
-- **AI įterpimo konfigūracija (72-79 eilutės)**:
-      - Konfigūracija įterpimo modeliui, naudojamam vektorinėje paieškoje
-- **Paieška ir stebėjimas (80-84 eilutės)**:
-      - Paieškos indekso pavadinimas, esamų resursų ID ir stebėjimo/sekimo nustatymai
+- **Azure Resource Names (Lines 51-60)**:
+      - Pagrindiniai Azure paslaugų išteklių pavadinimai pvz., Resource Group, AI Hub, AI Project ir kt.
+- **Feature Flags (Lines 61-63)**:
+      - Boolean tipo kintamieji, skirtūs įjungti/išjungti tam tikras Azure paslaugas
+- **AI Agent Configuration (Lines 64-71)**:
+      - Pagrindinio AI agente konfigūracijos, įskaitant pavadinimą, ID, diegimo nustatymus, modelio detales
+- **AI Embedding Configuration (Lines 72-79)**:
+      - Įterpimo modelio, naudojamo vektoriniam paieškai, konfigūracija
+- **Search and Monitoring (Lines 80-84)**:
+      - Paieškos indekso pavadinimas, esamų išteklių ID ir stebėjimo / tracing nustatymai
 
 ---
 
-## 3. Žinokite aplinkos kintamuosius
-Šie aplinkos kintamieji kontroliuoja jūsų diegimo konfigūraciją ir elgesį, suskirstyti pagal jų pagrindinę paskirtį. Dauguma kintamųjų turi logiškus numatytuosius nustatymus, tačiau galite juos pritaikyti pagal savo specifinius reikalavimus ar esamus Azure resursus.
+## 3. Know Env Variables
+The following environment variables control your deployment's configuration and behavior, organized by their primary purpose. Most variables have sensible defaults, but you can customize them to match your specific requirements or existing Azure resources.
 
-### 3.1 Privalomi kintamieji 
+### 3.1 Required Variables 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Pagrindinė Azure konfigūracija
+AZURE_ENV_NAME                    # Aplinkos pavadinimas (naudojamas resursų pavadinimuose)
+AZURE_LOCATION                    # Diegimo regionas
+AZURE_SUBSCRIPTION_ID             # Tikslinė prenumerata
+AZURE_RESOURCE_GROUP              # Resursų grupės pavadinimas
+AZURE_PRINCIPAL_ID                # Vartotojo principalas RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Resursų pavadinimai (jei nenurodyta, sugeneruojami automatiškai)
+AZURE_AIHUB_NAME                  # Microsoft Foundry hub pavadinimas
+AZURE_AIPROJECT_NAME              # DI projekto pavadinimas
+AZURE_AISERVICES_NAME             # DI paslaugų paskyros pavadinimas
+AZURE_STORAGE_ACCOUNT_NAME        # Saugojimo paskyros pavadinimas
+AZURE_CONTAINER_REGISTRY_NAME     # Konteinerių registro pavadinimas
+AZURE_KEYVAULT_NAME               # Raktų saugyklos pavadinimas (jei naudojama)
 ```
 
-### 3.2 Modelio konfigūracija 
+### 3.2 Model Configuration 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Pokalbių modelio konfigūracija
+AZURE_AI_AGENT_MODEL_NAME         # Numatytoji: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Numatytoji: OpenAI (arba Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Numatytoji: naujausia prieinama
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Diegimo pavadinimas pokalbių modeliui
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Numatytoji: Standartinis
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Numatytoji: 80 (tūkstančių TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Įterpimų modelio konfigūracija
+AZURE_AI_EMBED_MODEL_NAME         # Numatytoji: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Numatytoji: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Numatytoji: naujausia prieinama
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Diegimo pavadinimas įterpimams
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Numatytoji: Standartinis
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Numatytoji: 50 (tūkstančių TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Agento konfigūracija
+AZURE_AI_AGENT_NAME               # Agento rodomas pavadinimas
+AZURE_EXISTING_AGENT_ID           # Naudoti esamą agentą (pasirinktinai)
 ```
 
-### 3.3 Funkcijų perjungimas
+### 3.3 Feature Toggle
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Pasirenkamos paslaugos
+USE_APPLICATION_INSIGHTS         # Numatytasis: true
+USE_AZURE_AI_SEARCH_SERVICE      # Numatytasis: false
+USE_CONTAINER_REGISTRY           # Numatytasis: true
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Monitoravimas ir sekimas
+ENABLE_AZURE_MONITOR_TRACING     # Numatytasis: false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Numatytasis: false
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Paieškos konfigūracija
+AZURE_AI_SEARCH_INDEX_NAME       # Paieškos indekso pavadinimas
+AZURE_SEARCH_SERVICE_NAME        # Paieškos paslaugos pavadinimas
 ```
 
-### 3.4 AI projekto konfigūracija 
+### 3.4 AI Project Configuration 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Naudoti esamus išteklius
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Esamo dirbtinio intelekto projekto pilnas resurso ID
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # Esamo projekto galinio taško URL
 ```
 
-### 3.5 Patikrinkite savo kintamuosius
+### 3.5 Check Your Variables
 
-Naudokite Azure Developer CLI, kad peržiūrėtumėte ir valdytumėte savo aplinkos kintamuosius:
+Use the Azure Developer CLI to view and manage your environment variables:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Rodyti visus dabartinės aplinkos kintamuosius
 azd env get-values
 
-# Get a specific environment variable
+# Gauti konkretų aplinkos kintamąjį
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Nustatyti aplinkos kintamąjį
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Nustatyti kelis kintamuosius iš .env failo
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turi būti laikomas pagrindiniu šaltiniu. Svarbios informacijos atveju rekomenduojamas profesionalus vertimas, atliktas žmogaus vertėjo. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

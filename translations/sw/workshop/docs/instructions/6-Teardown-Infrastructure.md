@@ -1,38 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6539a34c770f3ceff282370d72ee74dc",
-  "translation_date": "2025-09-25T02:17:11+00:00",
-  "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
-  "language_code": "sw"
-}
--->
-# 6. Kuvunja Miundombinu
+# 6. Kuondoa Miundombinu
 
 !!! tip "MWISHO WA MODULI HII UTAWEZA"
 
-    - [ ] Kipengele
-    - [ ] Kipengele
-    - [ ] Kipengele
+    - [ ] Kuelewa umuhimu wa kusafisha rasilimali na usimamizi wa gharama
+    - [ ] Tumia `azd down` kuondoa miundombinu kwa usalama
+    - [ ] Rejesha huduma za kognitifa zilizofutwa kwa muda inapohitajika
+    - [ ] **Maabara 6:** Safisha rasilimali za Azure na thibitisha uondoaji
 
 ---
 
 ## Mazoezi ya Ziada
 
-Kabla ya kuvunja mradi, tumia dakika chache kufanya uchunguzi wa wazi.
+Kabla ya kuondoa mradi, chukua dakika chache kufanya uchunguzi wa wazi.
 
-!!! danger "NITYA-TODO: Eleza baadhi ya maoni ya kujaribu"
+!!! info "Jaribu Haya Maelekezo ya Uchunguzi"
+
+    **Jaribu GitHub Copilot:**
+    
+    1. Uliza: `Ni templates gani nyingine za AZD ninaweza kujaribu kwa matukio ya mawakala wengi?`
+    2. Uliza: `Ninawezaje kubinafsisha maagizo ya wakala kwa matumizi ya huduma za afya?`
+    3. Uliza: `Ni vigezo vya mazingira vinavyodhibiti uboreshaji wa gharama?`
+    
+    **Chunguza Portal ya Azure:**
+    
+    1. Kagua vipimo vya Application Insights kwa uanzishaji wako
+    2. Angalia uchambuzi wa gharama kwa rasilimali zilizotolewa
+    3. Chunguza tena eneo la mchezo la wakala kwenye portal ya Microsoft Foundry
 
 ---
 
-## Kuondoa Miundombinu
+## Ondoa Miundombinu
 
-1. Kuvunja miundombinu ni rahisi kama:
+1. Kuondoa miundombinu ni rahisi kama:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. Bendera ya `--purge` inahakikisha kuwa pia inafuta rasilimali za Huduma ya Akili zilizofutwa kwa muda, hivyo kuachilia mgao uliozuiliwa na rasilimali hizi. Ukimaliza utaona kitu kama hiki:
+1. Bendera `--purge` inahakikisha pia inafuta huduma za Cognitive zilizofutwa kwa muda, hivyo kuachilia quota inayoshikiliwa na huduma hizi. Mara baada ya kukamilika utaona kitu kama hiki:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -43,14 +47,18 @@ Kabla ya kuvunja mradi, tumia dakika chache kufanya uchunguzi wa wazi.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Hiari) Ikiwa sasa utaendesha `azd up` tena, utagundua kuwa modeli ya gpt-4.1 inatolewa kwa kuwa mabadiliko ya mazingira yamebadilishwa (na kuhifadhiwa) katika folda ya ndani ya `.azure`.
+1. (Hiari) Ikiwa sasa utaendesha `azd up` tena, utaona mfano gpt-4.1 utawekwa kwani kigezo cha mazingira kilibadilishwa (na kuhifadhiwa) katika saraka ya ndani `.azure`. 
 
-      Hapa kuna utoaji wa modeli **kabla**:
+      Hapa kuna uwekaji wa modeli **kabla**:
 
       ![Awali](../../../../../translated_images/sw/14-deploy-initial.30e4cf1c29b587bc.webp)
 
-      Na hapa iko **baada**:
+      Na hapa ni **baada**:
       ![Mpya](../../../../../translated_images/sw/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Taarifa ya kutokuhusika:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator] (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri zilizofanywa kwa njia ya kiotomatiki zinaweza kuwa na makosa au kasoro. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo rasmi. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya mtaalamu wa kibinadamu. Sisi hatuwajibiki kwa kutokuelewana au tafsiri isiyo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

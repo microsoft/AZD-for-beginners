@@ -1,48 +1,40 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4e403f041411361140d6beb88ab2a181",
-  "translation_date": "2025-09-24T23:35:05+00:00",
-  "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
-  "language_code": "vi"
-}
--->
-# 3. Phân Tích Một Mẫu Template
+# 3. Phân tích một Mẫu
 
-!!! tip "KẾT THÚC MODULE NÀY BẠN SẼ CÓ THỂ"
+!!! tip "KHI KẾT THÚC MÔ-ĐUN NÀY BẠN SẼ CÓ THỂ"
 
-    - [ ] Mục
-    - [ ] Mục
-    - [ ] Mục
-    - [ ] **Lab 3:** 
+    - [ ] Kích hoạt GitHub Copilot với máy chủ MCP để hỗ trợ Azure
+    - [ ] Hiểu cấu trúc thư mục và các thành phần của mẫu AZD
+    - [ ] Khám phá các mẫu tổ chức hạ tầng-dưới-dạng-mã (Bicep)
+    - [ ] **Lab 3:** Sử dụng GitHub Copilot để khám phá và hiểu cấu trúc kho mã 
 
 ---
 
-Với các mẫu AZD và Azure Developer CLI (`azd`), chúng ta có thể nhanh chóng bắt đầu hành trình phát triển AI với các kho lưu trữ tiêu chuẩn cung cấp mã mẫu, cơ sở hạ tầng và tệp cấu hình - dưới dạng một dự án _khởi đầu_ sẵn sàng triển khai.
 
-**Nhưng bây giờ, chúng ta cần hiểu cấu trúc dự án và mã nguồn - và có thể tùy chỉnh mẫu AZD - mà không cần kinh nghiệm hoặc hiểu biết trước về AZD!**
+Với các mẫu AZD và Azure Developer CLI (`azd`) chúng ta có thể nhanh chóng khởi động hành trình phát triển AI với các kho mẫu chuẩn hóa cung cấp mã ví dụ, hạ tầng và tệp cấu hình - dưới dạng một dự án _starter_ sẵn sàng để triển khai.
+
+**Nhưng giờ đây, chúng ta cần hiểu cấu trúc dự án và mã nguồn - và có thể tùy chỉnh mẫu AZD - mà không cần bất kỳ kinh nghiệm hay hiểu biết trước về AZD!**
 
 ---
 
-## 1. Kích Hoạt GitHub Copilot
+## 1. Kích hoạt GitHub Copilot
 
-### 1.1 Cài Đặt GitHub Copilot Chat
+### 1.1 Cài đặt GitHub Copilot Chat
 
-Đã đến lúc khám phá [GitHub Copilot với Chế Độ Agent](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Bây giờ, chúng ta có thể sử dụng ngôn ngữ tự nhiên để mô tả nhiệm vụ ở mức độ cao và nhận hỗ trợ trong việc thực hiện. Trong bài lab này, chúng ta sẽ sử dụng [gói Copilot Free](https://github.com/github-copilot/signup) có giới hạn hàng tháng cho các lần hoàn thành và tương tác chat.
+Đã đến lúc khám phá [GitHub Copilot với Chế độ Agent](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Bây giờ, chúng ta có thể dùng ngôn ngữ tự nhiên để mô tả nhiệm vụ ở mức cao và nhận trợ giúp trong thực thi. Trong bài lab này, chúng ta sẽ sử dụng [gói Copilot Free](https://github.com/github-copilot/signup) có giới hạn hàng tháng cho các hoàn thành và tương tác chat.
 
-Phần mở rộng có thể được cài đặt từ marketplace, nhưng nên đã có sẵn trong môi trường Codespaces của bạn. _Nhấp vào `Open Chat` từ menu thả xuống của biểu tượng Copilot - và nhập một lời nhắc như `What can you do?`_ - bạn có thể được yêu cầu đăng nhập. **GitHub Copilot Chat đã sẵn sàng**.
+Phần mở rộng có thể được cài từ marketplace, nhưng thường đã có sẵn trong môi trường Codespaces của bạn. _Nhấp `Open Chat` từ menu thả xuống biểu tượng Copilot - và gõ một lời nhắc như `What can you do?`_ - bạn có thể được yêu cầu đăng nhập. **GitHub Copilot Chat đã sẵn sàng**.
 
-### 1.2. Cài Đặt MCP Servers
+### 1.2. Cài đặt máy chủ MCP
 
-Để chế độ Agent hoạt động hiệu quả, nó cần truy cập vào các công cụ phù hợp để giúp truy xuất kiến thức hoặc thực hiện hành động. Đây là lúc MCP servers có thể giúp ích. Chúng ta sẽ cấu hình các server sau:
+Để Chế độ Agent hoạt động hiệu quả, nó cần truy cập các công cụ phù hợp để giúp lấy kiến thức hoặc thực hiện hành động. Đây là nơi máy chủ MCP có thể hữu ích. Chúng ta sẽ cấu hình các máy chủ sau:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+1. [Máy chủ Azure MCP](../../../../../workshop/docs/instructions)
+1. [Máy chủ Microsoft Docs MCP](../../../../../workshop/docs/instructions)
 
-Để kích hoạt các server này:
+Để kích hoạt các máy chủ này:
 
-1. Tạo một tệp có tên `.vscode/mcp.json` nếu chưa tồn tại
-1. Sao chép nội dung sau vào tệp đó - và khởi động các server!
+1. Tạo một tệp có tên `.vscode/mcp.json` nếu nó chưa tồn tại
+1. Sao chép nội dung sau vào tệp đó - và khởi động các máy chủ!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -63,9 +55,9 @@ Phần mở rộng có thể được cài đặt từ marketplace, nhưng nên 
    }
    ```
 
-??? warning "Bạn có thể gặp lỗi rằng `npx` chưa được cài đặt (nhấp để mở rộng cách khắc phục)"
+??? warning "Bạn có thể gặp lỗi cho biết `npx` chưa được cài đặt (bấm để mở rộng để sửa)"
 
-      Để khắc phục, hãy mở tệp `.devcontainer/devcontainer.json` và thêm dòng này vào phần features. Sau đó, xây dựng lại container. Bây giờ bạn sẽ có `npx` được cài đặt.
+      Để khắc phục, hãy mở tệp `.devcontainer/devcontainer.json` và thêm dòng này vào phần features. Sau đó xây dựng lại container. Bây giờ bạn sẽ có `npx` được cài đặt.
 
       ```title="" linenums="0"
          "features": {
@@ -76,208 +68,213 @@ Phần mở rộng có thể được cài đặt từ marketplace, nhưng nên 
 
 ---
 
-### 1.3. Kiểm Tra GitHub Copilot Chat
+### 1.3. Kiểm tra GitHub Copilot Chat
 
-**Đầu tiên sử dụng `az login` để xác thực với Azure từ dòng lệnh của VS Code.**
+**Trước tiên sử dụng `az login` để xác thực với Azure từ dòng lệnh VS Code.**
 
-Bây giờ bạn có thể truy vấn trạng thái đăng ký Azure của mình và đặt câu hỏi về các tài nguyên hoặc cấu hình đã triển khai. Thử các lời nhắc sau:
+Bạn bây giờ nên có thể truy vấn trạng thái đăng ký Azure của mình, và hỏi các câu về tài nguyên đã triển khai hoặc cấu hình. Hãy thử các lời nhắc sau:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-Bạn cũng có thể đặt câu hỏi về tài liệu Azure và nhận câu trả lời dựa trên Microsoft Docs MCP server. Thử các lời nhắc sau:
+Bạn cũng có thể hỏi về tài liệu Azure và nhận phản hồi dựa trên máy chủ Microsoft Docs MCP. Thử các lời nhắc sau:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Hoặc bạn có thể yêu cầu các đoạn mã để hoàn thành một nhiệm vụ. Thử lời nhắc này.
+Hoặc bạn có thể yêu cầu đoạn mã để hoàn thành một nhiệm vụ. Thử lời nhắc này.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-Trong chế độ `Ask`, điều này sẽ cung cấp mã mà bạn có thể sao chép-dán và thử nghiệm. Trong chế độ `Agent`, điều này có thể tiến xa hơn và tạo các tài nguyên liên quan cho bạn - bao gồm các tập lệnh thiết lập và tài liệu - để giúp bạn thực hiện nhiệm vụ đó.
+Ở chế độ `Ask`, điều này sẽ cung cấp mã mà bạn có thể sao chép-dán và thử. Ở chế độ `Agent`, điều này có thể tiến thêm một bước và tạo các tài nguyên liên quan cho bạn - bao gồm script thiết lập và tài liệu - để giúp bạn thực hiện nhiệm vụ đó.
 
-**Bây giờ bạn đã sẵn sàng để bắt đầu khám phá kho lưu trữ mẫu**
-
----
-
-## 2. Phân Tích Kiến Trúc
-
-??? prompt "ASK: Giải thích kiến trúc ứng dụng trong docs/images/architecture.png trong 1 đoạn văn"
-
-      Ứng dụng này là một ứng dụng chat được hỗ trợ bởi AI được xây dựng trên Azure, minh họa kiến trúc hiện đại dựa trên agent. Giải pháp tập trung vào một Azure Container App lưu trữ mã ứng dụng chính, xử lý đầu vào của người dùng và tạo phản hồi thông minh thông qua một agent AI. 
-      
-      Kiến trúc tận dụng Dự Án Azure AI Foundry làm nền tảng cho các khả năng AI, kết nối với các Dịch Vụ AI của Azure cung cấp các mô hình ngôn ngữ cơ bản (như GPT-4o-mini) và chức năng agent. Tương tác của người dùng được truyền qua frontend dựa trên React đến backend FastAPI, nơi giao tiếp với dịch vụ agent AI để tạo phản hồi theo ngữ cảnh. 
-      
-      Hệ thống tích hợp khả năng truy xuất kiến thức thông qua tìm kiếm tệp hoặc dịch vụ Azure AI Search, cho phép agent truy cập và trích dẫn thông tin từ các tài liệu đã tải lên. Để đảm bảo hoạt động xuất sắc, kiến trúc bao gồm giám sát toàn diện thông qua Application Insights và Log Analytics Workspace để theo dõi, ghi nhật ký và tối ưu hóa hiệu suất. 
-      
-      Azure Storage cung cấp lưu trữ blob cho dữ liệu ứng dụng và tệp tải lên, trong khi Managed Identity đảm bảo truy cập an toàn giữa các tài nguyên Azure mà không cần lưu trữ thông tin đăng nhập. Toàn bộ giải pháp được thiết kế để mở rộng và duy trì, với ứng dụng container tự động mở rộng dựa trên nhu cầu đồng thời cung cấp bảo mật, giám sát và khả năng CI/CD tích hợp thông qua hệ sinh thái dịch vụ được quản lý của Azure.
-
-![Architecture](../../../../../translated_images/vi/architecture.48d94861e6e6cdc0.webp)
+**Bạn hiện đã được trang bị để bắt đầu khám phá kho mẫu**
 
 ---
 
-## 3. Cấu Trúc Kho Lưu Trữ
+## 2. Phân tích Kiến trúc
 
-!!! prompt "ASK: Giải thích cấu trúc thư mục mẫu. Bắt đầu với sơ đồ phân cấp trực quan."
+??? prompt "HỎI: Giải thích kiến trúc ứng dụng trong docs/images/architecture.png trong 1 đoạn"
 
-??? info "ANSWER: Sơ Đồ Phân Cấp Trực Quan"
+      Ứng dụng này là một ứng dụng chat được hỗ trợ bởi AI triển khai trên Azure, thể hiện một kiến trúc hiện đại dựa trên agent. Giải pháp tập trung quanh một Azure Container App lưu trữ mã ứng dụng chính, xử lý đầu vào của người dùng và tạo phản hồi thông minh thông qua một agent AI.
+      
+      Kiến trúc tận dụng Microsoft Foundry Project làm nền tảng cho các khả năng AI, kết nối tới Azure AI Services cung cấp các mô hình ngôn ngữ nền tảng (như GPT-4o-mini) và chức năng agent. Tương tác người dùng được điều hướng qua frontend dựa trên React đến backend FastAPI, nơi giao tiếp với dịch vụ agent AI để tạo ra các phản hồi ngữ cảnh.
+      
+      Hệ thống kết hợp khả năng truy xuất kiến thức thông qua tìm kiếm tệp hoặc dịch vụ Azure AI Search, cho phép agent truy cập và trích dẫn thông tin từ tài liệu đã tải lên. Vì mục tiêu vận hành xuất sắc, kiến trúc bao gồm giám sát toàn diện qua Application Insights và Log Analytics Workspace để theo dõi, ghi log và tối ưu hiệu năng.
+      
+      Azure Storage cung cấp blob storage cho dữ liệu ứng dụng và tệp tải lên, trong khi Managed Identity đảm bảo truy cập an toàn giữa các tài nguyên Azure mà không lưu trữ thông tin xác thực. Toàn bộ giải pháp được thiết kế để có khả năng mở rộng và dễ bảo trì, với ứng dụng container hóa tự động mở rộng theo nhu cầu đồng thời cung cấp bảo mật, giám sát và khả năng CI/CD tích hợp thông qua hệ sinh thái dịch vụ được quản lý của Azure.
+
+![Kiến trúc](../../../../../translated_images/vi/architecture.48d94861e6e6cdc0.webp)
+
+---
+
+## 3. Cấu trúc Kho mã
+
+!!! prompt "HỎI: Giải thích cấu trúc thư mục mẫu. Bắt đầu với sơ đồ phân cấp trực quan."
+
+??? info "TRẢ LỜI: Sơ đồ phân cấp trực quan"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Cấu Hình & Thiết Lập
-      │   ├── azure.yaml                    # Cấu hình Azure Developer CLI
-      │   ├── docker-compose.yaml           # Container phát triển cục bộ
-      │   ├── pyproject.toml                # Cấu hình dự án Python
-      │   ├── requirements-dev.txt          # Các phụ thuộc phát triển
-      │   └── .devcontainer/                # Thiết lập container dev của VS Code
+      ├── 📋 Configuration & Setup
+      │   ├── azure.yaml                    # Azure Developer CLI configuration
+      │   ├── docker-compose.yaml           # Local development containers
+      │   ├── pyproject.toml                # Python project configuration
+      │   ├── requirements-dev.txt          # Development dependencies
+      │   └── .devcontainer/                # VS Code dev container setup
       │
-      ├── 🏗️ Cơ Sở Hạ Tầng (infra/)
-      │   ├── main.bicep                    # Mẫu cơ sở hạ tầng chính
-      │   ├── api.bicep                     # Tài nguyên dành riêng cho API
-      │   ├── main.parameters.json          # Tham số cơ sở hạ tầng
-      │   └── core/                         # Các thành phần cơ sở hạ tầng mô-đun
-      │       ├── ai/                       # Cấu hình dịch vụ AI
-      │       ├── host/                     # Cơ sở hạ tầng lưu trữ
-      │       ├── monitor/                  # Giám sát và ghi nhật ký
-      │       ├── search/                   # Thiết lập Azure AI Search
-      │       ├── security/                 # Bảo mật và danh tính
-      │       └── storage/                  # Cấu hình tài khoản lưu trữ
+      ├── 🏗️ Infrastructure (infra/)
+      │   ├── main.bicep                    # Main infrastructure template
+      │   ├── api.bicep                     # API-specific resources
+      │   ├── main.parameters.json          # Infrastructure parameters
+      │   └── core/                         # Modular infrastructure components
+      │       ├── ai/                       # AI service configurations
+      │       ├── host/                     # Hosting infrastructure
+      │       ├── monitor/                  # Monitoring and logging
+      │       ├── search/                   # Azure AI Search setup
+      │       ├── security/                 # Security and identity
+      │       └── storage/                  # Storage account configs
       │
-      ├── 💻 Mã Nguồn Ứng Dụng (src/)
-      │   ├── api/                          # API backend
-      │   │   ├── main.py                   # Điểm vào ứng dụng FastAPI
-      │   │   ├── routes.py                 # Định nghĩa route API
-      │   │   ├── search_index_manager.py   # Chức năng tìm kiếm
-      │   │   ├── data/                     # Xử lý dữ liệu API
-      │   │   ├── static/                   # Tài sản web tĩnh
-      │   │   └── templates/                # Mẫu HTML
-      │   ├── frontend/                     # Frontend React/TypeScript
-      │   │   ├── package.json              # Phụ thuộc Node.js
-      │   │   ├── vite.config.ts            # Cấu hình build Vite
-      │   │   └── src/                      # Mã nguồn frontend
-      │   ├── data/                         # Tệp dữ liệu mẫu
-      │   │   └── embeddings.csv            # Embedding đã tính trước
-      │   ├── files/                        # Tệp cơ sở kiến thức
-      │   │   ├── customer_info_*.json      # Mẫu dữ liệu khách hàng
-      │   │   └── product_info_*.md         # Tài liệu sản phẩm
-      │   ├── Dockerfile                    # Cấu hình container
-      │   └── requirements.txt              # Phụ thuộc Python
+      ├── 💻 Application Source (src/)
+      │   ├── api/                          # Backend API
+      │   │   ├── main.py                   # FastAPI application entry
+      │   │   ├── routes.py                 # API route definitions
+      │   │   ├── search_index_manager.py   # Search functionality
+      │   │   ├── data/                     # API data handling
+      │   │   ├── static/                   # Static web assets
+      │   │   └── templates/                # HTML templates
+      │   ├── frontend/                     # React/TypeScript frontend
+      │   │   ├── package.json              # Node.js dependencies
+      │   │   ├── vite.config.ts            # Vite build configuration
+      │   │   └── src/                      # Frontend source code
+      │   ├── data/                         # Sample data files
+      │   │   └── embeddings.csv            # Pre-computed embeddings
+      │   ├── files/                        # Knowledge base files
+      │   │   ├── customer_info_*.json      # Customer data samples
+      │   │   └── product_info_*.md         # Product documentation
+      │   ├── Dockerfile                    # Container configuration
+      │   └── requirements.txt              # Python dependencies
       │
-      ├── 🔧 Tự Động Hóa & Tập Lệnh (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Thiết lập sau triển khai
-      │   ├── setup_credential.sh/.ps1     # Cấu hình thông tin đăng nhập
-      │   ├── validate_env_vars.sh/.ps1    # Xác thực môi trường
-      │   └── resolve_model_quota.sh/.ps1  # Quản lý hạn mức mô hình
+      ├── 🔧 Automation & Scripts (scripts/)
+      │   ├── postdeploy.sh/.ps1           # Post-deployment setup
+      │   ├── setup_credential.sh/.ps1     # Credential configuration
+      │   ├── validate_env_vars.sh/.ps1    # Environment validation
+      │   └── resolve_model_quota.sh/.ps1  # Model quota management
       │
-      ├── 🧪 Kiểm Tra & Đánh Giá
-      │   ├── tests/                        # Kiểm tra đơn vị và tích hợp
+      ├── 🧪 Testing & Evaluation
+      │   ├── tests/                        # Unit and integration tests
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Khung đánh giá agent
-      │   │   ├── evaluate.py               # Trình chạy đánh giá
-      │   │   ├── eval-queries.json         # Truy vấn kiểm tra
+      │   ├── evals/                        # Agent evaluation framework
+      │   │   ├── evaluate.py               # Evaluation runner
+      │   │   ├── eval-queries.json         # Test queries
       │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Sân chơi phát triển
-      │   │   ├── 1-quickstart.py           # Ví dụ bắt đầu nhanh
-      │   │   └── aad-interactive-chat.py   # Ví dụ xác thực
-      │   └── airedteaming/                 # Đánh giá an toàn AI
-      │       └── ai_redteaming.py          # Kiểm tra red team
+      │   ├── sandbox/                      # Development playground
+      │   │   ├── 1-quickstart.py           # Getting started examples
+      │   │   └── aad-interactive-chat.py   # Authentication examples
+      │   └── airedteaming/                 # AI safety evaluation
+      │       └── ai_redteaming.py          # Red team testing
       │
-      ├── 📚 Tài Liệu (docs/)
-      │   ├── deployment.md                 # Hướng dẫn triển khai
-      │   ├── local_development.md          # Hướng dẫn thiết lập cục bộ
-      │   ├── troubleshooting.md            # Các vấn đề thường gặp & cách khắc phục
-      │   ├── azure_account_setup.md        # Các yêu cầu Azure
-      │   └── images/                       # Tài sản tài liệu
+      ├── 📚 Documentation (docs/)
+      │   ├── deployment.md                 # Deployment guide
+      │   ├── local_development.md          # Local setup instructions
+      │   ├── troubleshooting.md            # Common issues & fixes
+      │   ├── azure_account_setup.md        # Azure prerequisites
+      │   └── images/                       # Documentation assets
       │
-      └── 📄 Metadata Dự Án
-         ├── README.md                     # Tổng quan dự án
-         ├── CODE_OF_CONDUCT.md           # Nguyên tắc cộng đồng
-         ├── CONTRIBUTING.md              # Hướng dẫn đóng góp
-         ├── LICENSE                      # Điều khoản giấy phép
-         └── next-steps.md                # Hướng dẫn sau triển khai
+      └── 📄 Project Metadata
+         ├── README.md                     # Project overview
+         ├── CODE_OF_CONDUCT.md           # Community guidelines
+         ├── CONTRIBUTING.md              # Contribution guide
+         ├── LICENSE                      # License terms
+         └── next-steps.md                # Post-deployment guidance
       ```
 
-### 3.1. Kiến Trúc Ứng Dụng Cốt Lõi
+### 3.1. Kiến trúc Ứng dụng Chính
 
-Mẫu này tuân theo mô hình **ứng dụng web full-stack** với:
+Mẫu này theo một mô hình **ứng dụng web full-stack** với:
 
-- **Backend**: Python FastAPI tích hợp Azure AI
+- **Backend**: REST API dựa trên Python FastAPI với tích hợp Azure AI
 - **Frontend**: TypeScript/React với hệ thống build Vite
-- **Cơ Sở Hạ Tầng**: Mẫu Azure Bicep cho tài nguyên đám mây
-- **Container hóa**: Docker để triển khai nhất quán
+- **Infrastructure**: các mẫu Azure Bicep cho tài nguyên đám mây
+- **Containerization**: Docker cho việc triển khai nhất quán
 
-### 3.2 Cơ Sở Hạ Tầng Dưới Dạng Mã (bicep)
+### 3.2 Hạ tầng dưới dạng mã (bicep)
 
-Lớp cơ sở hạ tầng sử dụng các mẫu **Azure Bicep** được tổ chức theo mô-đun:
+Lớp hạ tầng sử dụng các mẫu **Azure Bicep** được tổ chức theo mô-đun:
 
    - **`main.bicep`**: Điều phối tất cả tài nguyên Azure
-   - **`core/` modules**: Các thành phần tái sử dụng cho các dịch vụ khác nhau
-      - Dịch vụ AI (Azure OpenAI, AI Search)
-      - Lưu trữ container (Azure Container Apps)
-      - Giám sát (Application Insights, Log Analytics)
-      - Bảo mật (Key Vault, Managed Identity)
+   - **`core/` modules**: Các thành phần có thể tái sử dụng cho các dịch vụ khác nhau
+      - AI services (Azure OpenAI, AI Search)
+      - Container hosting (Azure Container Apps)
+      - Monitoring (Application Insights, Log Analytics)
+      - Security (Key Vault, Managed Identity)
 
-### 3.3 Mã Nguồn Ứng Dụng (`src/`)
+### 3.3 Nguồn Ứng dụng (`src/`)
 
-**API Backend (`src/api/`)**:
+**Backend API (`src/api/`)**:
 
 - REST API dựa trên FastAPI
-- Tích hợp dịch vụ Agent AI của Azure
-- Quản lý chỉ mục tìm kiếm để truy xuất kiến thức
+- Tích hợp Foundry Agents
+- Quản lý chỉ mục tìm kiếm cho truy xuất kiến thức
 - Khả năng tải lên và xử lý tệp
 
 **Frontend (`src/frontend/`)**:
 
-- SPA React/TypeScript hiện đại
-- Vite để phát triển nhanh và build tối ưu
+- Ứng dụng SPA hiện đại React/TypeScript
+- Vite cho phát triển nhanh và build tối ưu
 - Giao diện chat cho tương tác với agent
 
-**Cơ Sở Kiến Thức (`src/files/`)**:
+**Knowledge Base (`src/files/`)**:
 
-- Dữ liệu khách hàng và sản phẩm mẫu
+- Mẫu dữ liệu khách hàng và sản phẩm
 - Minh họa truy xuất kiến thức dựa trên tệp
-- Các ví dụ định dạng JSON và Markdown
+- Ví dụ định dạng JSON và Markdown
 
-### 3.4 DevOps & Tự Động Hóa
 
-**Tập Lệnh (`scripts/`)**:
+### 3.4 DevOps & Tự động hóa
 
-- Tập lệnh PowerShell và Bash đa nền tảng
-- Xác thực và thiết lập môi trường
-- Cấu hình sau triển khai
+**Scripts (`scripts/`)**:
+
+- Script PowerShell và Bash đa nền tảng
+- Kiểm tra và thiết lập môi trường
+- Cấu hình sau khi triển khai
 - Quản lý hạn mức mô hình
 
-**Tích Hợp Azure Developer CLI**:
+**Tích hợp Azure Developer CLI**:
 
-- Cấu hình `azure.yaml` cho các workflow `azd`
-- Tự động cung cấp và triển khai
+- Cấu hình `azure.yaml` cho workflow `azd`
+- Cấp phát và triển khai tự động
 - Quản lý biến môi trường
 
-### 3.5 Kiểm Tra & Đảm Bảo Chất Lượng
+### 3.5 Kiểm thử & Đảm bảo Chất lượng
 
-**Khung Đánh Giá (`evals/`)**:
+**Evaluation Framework (`evals/`)**:
 
-- Đánh giá hiệu suất agent
-- Kiểm tra chất lượng truy vấn-phản hồi
+- Đánh giá hiệu năng agent
+- Kiểm thử chất lượng phản hồi truy vấn
 - Pipeline đánh giá tự động
 
-**An Toàn AI (`airedteaming/`)**:
+**AI Safety (`airedteaming/`)**:
 
-- Kiểm tra red team cho an toàn AI
+- Kiểm thử red team cho an toàn AI
 - Quét lỗ hổng bảo mật
 - Thực hành AI có trách nhiệm
 
 ---
 
-## 4. Chúc Mừng 🏆
+## 4. Chúc mừng 🏆
 
-Bạn đã sử dụng thành công GitHub Copilot Chat với MCP servers để khám phá kho lưu trữ.
+Bạn đã sử dụng thành công GitHub Copilot Chat với các máy chủ MCP để khám phá kho mã.
 
-- [X] Kích hoạt GitHub Copilot cho Azure
-- [X] Hiểu Kiến Trúc Ứng Dụng
-- [X] Khám phá cấu trúc mẫu AZD
+- [X] Đã kích hoạt GitHub Copilot cho Azure
+- [X] Hiểu Kiến trúc Ứng dụng
+- [X] Đã khám phá cấu trúc mẫu AZD
 
-Điều này giúp bạn có cái nhìn về các tài sản _cơ sở hạ tầng dưới dạng mã_ cho mẫu này. Tiếp theo, chúng ta sẽ xem xét tệp cấu hình cho AZD.
+Điều này giúp bạn hiểu các tài sản _hạ tầng dưới dạng mã_ cho mẫu này. Tiếp theo, chúng ta sẽ xem tệp cấu hình cho AZD.
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Miễn trừ trách nhiệm:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo tính chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa sai sót hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn chính thức. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

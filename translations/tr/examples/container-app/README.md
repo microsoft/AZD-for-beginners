@@ -1,15 +1,6 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-20T23:14:25+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "tr"
-}
--->
-# AZD ile Container Uygulama Dağıtım Örnekleri
+# AZD ile Container App Dağıtım Örnekleri
 
-Bu dizin, Azure Developer CLI (AZD) kullanarak Azure Container Apps'e konteynerleştirilmiş uygulamaları dağıtmak için kapsamlı örnekler içerir. Bu örnekler, gerçek dünya senaryolarını, en iyi uygulamaları ve üretime hazır yapılandırmaları göstermektedir.
+Bu dizin, Azure Developer CLI (AZD) kullanarak Azure Container Apps'e konteynerleştirilmiş uygulamaları dağıtmak için kapsamlı örnekler içerir. Bu örnekler gerçek dünya desenlerini, en iyi uygulamaları ve üretime hazır yapılandırmaları göstermektedir.
 
 ## 📚 İçindekiler
 
@@ -20,39 +11,39 @@ Bu dizin, Azure Developer CLI (AZD) kullanarak Azure Container Apps'e konteynerl
 - [Gelişmiş Desenler](../../../../examples/container-app)
 - [En İyi Uygulamalar](../../../../examples/container-app)
 
-## Genel Bakış
+## Overview
 
-Azure Container Apps, altyapıyı yönetmeden mikro hizmetler ve konteynerleştirilmiş uygulamalar çalıştırmanıza olanak tanıyan tamamen yönetilen bir sunucusuz konteyner platformudur. AZD ile birleştirildiğinde şunları elde edersiniz:
+Azure Container Apps, altyapıyı yönetmeden mikroservisleri ve konteynerleştirilmiş uygulamaları çalıştırmanızı sağlayan tam yönetilen bir sunucusuz konteyner platformudur. AZD ile birleştirildiğinde, şunları elde edersiniz:
 
-- **Basitleştirilmiş Dağıtım**: Tek bir komutla konteynerleri altyapı ile birlikte dağıtma
-- **Otomatik Ölçeklendirme**: HTTP trafiği veya olaylara göre sıfırdan ölçeklendirme ve dışa ölçeklendirme
-- **Entegre Ağ**: Dahili hizmet keşfi ve trafik bölme
+- **Basitleştirilmiş Dağıtım**: Altyapı ile konteynerleri tek komutla dağıtma
+- **Otomatik Ölçeklendirme**: HTTP trafiğine veya olaylara göre sıfıra kadar ölçeklendirme ve yatay ölçeklendirme
+- **Entegre Ağ Yönetimi**: Yerleşik servis keşfi ve trafik bölme
 - **Yönetilen Kimlik**: Azure kaynaklarına güvenli kimlik doğrulama
-- **Maliyet Optimizasyonu**: Yalnızca kullandığınız kaynaklar için ödeme yapma
+- **Maliyet Optimizasyonu**: Yalnızca kullandığınız kaynaklar için ödeme
 
 ## Ön Koşullar
 
-Başlamadan önce şunlara sahip olduğunuzdan emin olun:
+Başlamadan önce, şu özelliklere sahip olduğunuzdan emin olun:
 
 ```bash
-# AZD kurulumunu kontrol et
+# AZD kurulumunu kontrol edin
 azd version
 
-# Azure CLI'yi kontrol et
+# Azure CLI'yi kontrol edin
 az version
 
-# Docker'ı kontrol et (özel görüntüler oluşturmak için)
+# Docker'ı kontrol edin (özel imajlar oluşturmak için)
 docker --version
 
-# Azure'a giriş yap
+# Azure'a giriş yapın
 azd auth login
 az login
 ```
 
 **Gerekli Azure Kaynakları:**
-- Aktif bir Azure aboneliği
+- Aktif Azure aboneliği
 - Kaynak grubu oluşturma izinleri
-- Container Apps ortamına erişim
+- Container Apps ortam erişimi
 
 ## Hızlı Başlangıç Örnekleri
 
@@ -80,7 +71,7 @@ services:
 # Şablondan başlat
 azd init --template todo-python-mongo
 
-# Altyapıyı sağla ve dağıt
+# Altyapıyı oluştur ve dağıt
 azd up
 
 # Dağıtımı test et
@@ -88,15 +79,15 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Ana Özellikler:**
-- 0'dan 10 replikaya otomatik ölçeklendirme
-- Sağlık kontrolleri ve canlılık kontrolleri
+**Temel Özellikler:**
+- 0'dan 10 replika arası otomatik ölçeklendirme
+- Sağlık kontrolleri ve canlılık denetimleri
 - Ortam değişkeni enjeksiyonu
 - Application Insights entegrasyonu
 
 ### 2. Node.js Express API
 
-MongoDB entegrasyonu ile bir Node.js backend dağıtın.
+MongoDB entegrasyonlu bir Node.js arka ucu dağıtın.
 
 ```bash
 # Node.js API şablonunu başlat
@@ -109,11 +100,11 @@ azd env set COLLECTION_NAME todos
 # Dağıt
 azd up
 
-# Günlükleri görüntüle
-azd logs api
+# Azure Monitor aracılığıyla günlükleri görüntüle
+azd monitor --logs
 ```
 
-**Altyapı Özellikleri:**
+**Altyapı Öne Çıkanlar:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -156,9 +147,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Statik Frontend + API Backend
+### 3. Statik Ön Yüz + API Arka Uç
 
-React frontend ve API backend ile tam yığın bir uygulama dağıtın.
+React ön yüzü ve API arka ucu ile tam yığın bir uygulama dağıtın.
 
 ```bash
 # Tam yığın şablonunu başlat
@@ -167,7 +158,7 @@ azd init --template todo-csharp-sql-swa-func
 # Yapılandırmayı gözden geçir
 cat azure.yaml
 
-# Her iki hizmeti dağıt
+# Her iki servisi dağıt
 azd up
 
 # Uygulamayı aç
@@ -176,9 +167,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Üretim Örnekleri
 
-### Örnek 1: Mikro Hizmetler Mimarisi
+### Örnek 1: Mikroservis Mimarisi
 
-**Senaryo**: Birden fazla mikro hizmet içeren e-ticaret uygulaması
+**Senaryo**: Birden çok mikroservisli e-ticaret uygulaması
 
 **Dizin Yapısı:**
 ```
@@ -236,13 +227,13 @@ azd env set MAX_REPLICAS 50
 # Tüm hizmetleri dağıt
 azd up
 
-# Dağıtımı izleme
+# Dağıtımı izle
 azd monitor --overview
 ```
 
-### Örnek 2: Yapay Zeka Destekli Container Uygulaması
+### Örnek 2: Yapay Zeka Destekli Container App
 
-**Senaryo**: Azure OpenAI entegrasyonu ile yapay zeka sohbet uygulaması
+**Senaryo**: Azure OpenAI entegrasyonlu yapay zeka sohbet uygulaması
 
 **Dosya: src/ai-chat/app.py**
 ```python
@@ -262,7 +253,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # OpenAI anahtarını Anahtar Kasası'ndan alın
+    # OpenAI anahtarını Key Vault'tan alın
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -331,7 +322,7 @@ module aiChatApp './app/container-app.bicep' = {
 
 **Dağıtım Komutları:**
 ```bash
-# Ortamı ayarla
+# Ortamı kur
 azd init --template ai-chat-app
 azd env new dev
 
@@ -348,9 +339,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Örnek 3: Kuyruk İşleme ile Arka Plan İşçisi
+### Örnek 3: Kuyruk İşlemeli Arka Plan İşçisi
 
-**Senaryo**: Mesaj kuyruğu ile sipariş işleme sistemi
+**Senaryo**: Mesaj kuyruğuyla sipariş işleme sistemi
 
 **Dizin Yapısı:**
 ```
@@ -387,10 +378,10 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Siparişi işleme
+            # İşlem sırası
             print(f"Processing order: {message.content}")
             
-            # Mesajı tamamla
+            # Tam mesaj
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -417,10 +408,10 @@ services:
 # Başlat
 azd init
 
-# Kuyruk yapılandırması ile dağıt
+# Kuyruk yapılandırmasıyla dağıt
 azd up
 
-# Kuyruk uzunluğuna göre işçiyi ölçeklendir
+# Kuyruk uzunluğuna göre çalışanı ölçeklendir
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -431,7 +422,7 @@ az containerapp update \
 
 ## Gelişmiş Desenler
 
-### Desen 1: Mavi-Yeşil Dağıtım
+### Desen 1: Blue-Green Dağıtımı
 
 ```bash
 # Trafik olmadan yeni revizyon oluştur
@@ -440,20 +431,20 @@ azd deploy api --revision-suffix blue --no-traffic
 # Yeni revizyonu test et
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Trafiği böl (20% maviye, 80% mevcut olana)
+# Trafiği böl (%20 blue'a, %80 mevcut revizyona)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Tam geçiş maviye
+# blue'a tam geçiş
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Desen 2: AZD ile Kanarya Dağıtımı
+### Desen 2: AZD ile Canary Dağıtımı
 
 **Dosya: .azure/dev/config.json**
 ```json
@@ -467,7 +458,7 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Dağıtım Scripti:**
+**Dağıtım Betiği:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Desen 3: Çok Bölge Dağıtımı
+### Desen 3: Çok Bölgeli Dağıtım
 
 **Dosya: azure.yaml**
 ```yaml
@@ -538,10 +529,10 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Dağıtım:**
 ```bash
-# Tüm bölgelere dağıt
+# Tüm bölgelere dağıtın
 azd up
 
-# Uç noktaları doğrula
+# Uç noktaları doğrulayın
 azd show --output json | jq '.services.api.endpoints'
 ```
 
@@ -589,7 +580,7 @@ def create_order():
             value={'status': 'pending'}
         )
         
-        # Etkinliği yayınla
+        # Olayı yayınla
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -604,7 +595,7 @@ def create_order():
 ### 1. Kaynak Organizasyonu
 
 ```bash
-# Tutarlı adlandırma kurallarını kullanın
+# Tutarlı adlandırma kuralları kullanın
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -674,16 +665,18 @@ services:
 ### 4. İzleme ve Gözlemlenebilirlik
 
 ```bash
-# Uygulama İçgörülerini Etkinleştir
+# Application Insights'ı etkinleştir
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Günlükleri gerçek zamanlı olarak görüntüle
-azd logs api --follow
+# Günlükleri gerçek zamanlı görüntüle
+azd monitor --logs
+# Veya Container Apps için Azure CLI'yi kullan:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Metrikleri izleyin
-azd monitor --service api
+# Metrikleri izle
+azd monitor --live
 
-# Uyarılar oluşturun
+# Uyarılar oluştur
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -701,7 +694,7 @@ az containerapp update \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Geliştirme ortamları için spot örnekler kullan
+# Geliştirme ortamları için spot örneklerini kullan
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
 # Bütçe uyarıları ayarla
@@ -744,28 +737,29 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Sık Kullanılan Komutlar Referansı
+## Yaygın Komutlar Referansı
 
 ```bash
-# Yeni konteyner uygulama projesini başlat
+# Yeni container uygulama projesini başlat
 azd init --template <template-name>
 
-# Altyapı ve uygulamayı dağıt
+# Altyapıyı ve uygulamayı dağıt
 azd up
 
-# Sadece uygulama kodunu dağıt (altyapıyı atla)
+# Yalnızca uygulama kodunu dağıt (altyapıyı atla)
 azd deploy
 
-# Sadece altyapıyı sağla
+# Sadece altyapıyı hazırla
 azd provision
 
-# Dağıtılan kaynakları görüntüle
+# Dağıtılmış kaynakları görüntüle
 azd show
 
-# Günlükleri akış olarak izle
-azd logs <service-name> --follow
+# azd monitor veya Azure CLI kullanarak günlükleri izle
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# Uygulamayı izleme
+# Uygulamayı izle
 azd monitor --overview
 
 # Kaynakları temizle
@@ -777,37 +771,37 @@ azd down --force --purge
 ### Sorun: Konteyner başlatılamıyor
 
 ```bash
-# Günlükleri kontrol et
-azd logs api --tail 100
+# Azure CLI kullanarak günlükleri kontrol edin
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Konteyner olaylarını görüntüle
+# Konteyner olaylarını görüntüleyin
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# Yerel olarak test et
+# Yerel olarak test edin
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Sorun: Konteyner uygulama uç noktasına erişilemiyor
+### Sorun: Konteyner uygulaması uç noktasına erişilemiyor
 
 ```bash
-# Giriş yapılandırmasını doğrula
+# Ingress yapılandırmasını doğrulayın
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Dahili girişin etkin olup olmadığını kontrol et
+# Dahili ingress'in etkin olup olmadığını kontrol edin
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### Sorun: Performans problemleri
+### Sorun: Performans sorunları
 
 ```bash
 # Kaynak kullanımını kontrol et
@@ -815,7 +809,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Kaynakları artır
+# Kaynakları ölçeklendir
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -824,7 +818,7 @@ az containerapp update \
 ```
 
 ## Ek Kaynaklar ve Örnekler
-- [Mikro Hizmetler Örneği](./microservices/README.md)
+- [Mikroservis Örneği](./microservices/README.md)
 - [Basit Flash API Örneği](./simple-flask-api/README.md)
 - [Azure Container Apps Belgeleri](https://learn.microsoft.com/azure/container-apps/)
 - [AZD Şablon Galerisi](https://azure.github.io/awesome-azd/)
@@ -833,12 +827,12 @@ az containerapp update \
 
 ## Katkıda Bulunma
 
-Yeni container uygulama örnekleri eklemek için:
+Yeni container app örnekleri eklemek için:
 
-1. Örneğinizle yeni bir alt dizin oluşturun
+1. Yeni örneğinizle bir alt dizin oluşturun
 2. Tam `azure.yaml`, `infra/` ve `src/` dosyalarını ekleyin
-3. Dağıtım talimatlarıyla kapsamlı bir README ekleyin
-4. `azd up` ile dağıtımı test edin
+3. Dağıtım talimatları içeren kapsamlı README ekleyin
+4. Dağıtımı `azd up` ile test edin
 5. Bir pull request gönderin
 
 ---
@@ -848,6 +842,6 @@ Yeni container uygulama örnekleri eklemek için:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Feragatname:
+Bu belge, AI çeviri servisi [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba gösterilse de, otomatik çevirilerin hata veya eksiklikler içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki hâli yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkan herhangi bir yanlış anlaşılma veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

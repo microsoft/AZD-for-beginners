@@ -1,64 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-24T23:37:32+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "tl"
-}
--->
-# AZD Para sa AI Developers
+# AZD Para sa Mga Developer ng AI
 
-!!! info "AUDIENCE PARA SA WORKSHOP NA ITO"
+!!! info "AUDIENCE FOR THIS WORKSHOP"
    
-    Ang workshop na ito ay para sa sinumang nais bumuo ng mga AI Agentic application gamit ang Azure AI Foundry sa pamamagitan ng paggamit ng pinakamahusay na mga tool at workflow. Ang workshop ay angkop para sa parehong mga baguhan at may karanasang developer na may kaunting kaalaman sa Azure, mga konsepto ng AI, at Python code. Pakisuri ang mga kinakailangan bago magsimula.
+    Ang workshop na ito ay para sa sinumang nais makabuo ng mga Agentic na aplikasyon ng AI sa Microsoft Foundry sa pamamagitan ng paggamit ng mga pinakamahusay na kasangkapan at workflow. Ang workshop ay angkop para sa mga baguhan at may karanasang developer na may kaunting pamilyaridad sa Azure, mga konsepto ng AI at code ng Python. Pakisuri ang mga pre-requisites bago ka magsimula.
 
-    **Tagal:** 3-4 oras  
-    **Antas:** Baguhan hanggang Intermediate  
+    **Tagal:** 3-4 na oras  
+    **Antas:** Mula Baguhan hanggang Intermedyado  
 
 ---
+
 
 ## Mga Kinakailangan
 
-- Isang personal na GitHub account → [Gumawa ng libre](https://github.com/signup)
-- Isang aktibong Azure account → [Gumawa ng libre](https://aka.ms/free)
-- Kaalaman sa mga konsepto ng AI, Python development, at mga tool sa Command-line
-- Karanasan sa VS Code at mga tool at workflow ng GitHub.
+- Isang personal na GitHub account → [Gumawa ng isa nang libre](https://github.com/signup)
+- Isang aktibong Azure account → [Gumawa ng isa nang libre](https://aka.ms/free)
+- Pamilyaridad sa mga konsepto ng AI, pag-develop sa Python, mga command-line na tool
+- Karanasan sa VS Code at mga kasangkapan at workflow ng GitHub.
 
 ---
 
-## Mga Layunin sa Pag-aaral
+## Mga Layunin sa Pagkatuto
 
 Sa pagtatapos ng workshop na ito, malalaman mo kung paano:
 
-- [X] **Gumamit ng Azure Developer CLI** → upang mag-provision, mag-deploy, at pamahalaan ang iyong mga Azure resources.
-- [X] **Gumamit ng AI App Templates** → upang mabilis na simulan ang mga proyekto ng AI Agent sa Azure AI Foundry.
-- [X] **I-configure ang Templates** → para sa mga tampok tulad ng Red Teaming, Evaluations, Tracing & Monitoring.
-- [X] **I-deconstruct at I-explore** → ang AZD templates at workflows gamit ang GitHub Copilot.
-- [X] **I-customize at I-redeploy** → ang AI Agent starter template, ayon sa iyong mga pangangailangan.
+- [X] **Gumamit ng Azure Developer CLI** → para mag-provision, mag-deploy, at pamahalaan ang iyong mga Azure resources.
+- [X] **Gamitin ang AI App Templates** → upang simulan agad ang mga proyekto ng AI Agent sa Microsoft Foundry.
+- [X] **I-configure ang Templates** → para sa mga tampok tulad ng Red Teaming, Evaluations, Tracing & Monitoring
+- [X] **I-deconstruct at Galugarin** → ang mga AZD templates at workflows gamit ang GitHub Copilot
+- [X] **I-customize at I-redeploy** → ang AI Agent starter template, ayon sa iyong mga pasadyang kinakailangan
 
 ---
 
 ## Balangkas ng Workshop
 
-Ang workshop ay nakaayos sa mga module, bawat isa ay may kasamang hands-on na lab exercise:
+Ang workshop ay nakaayos sa mga module, na ang bawat isa ay naka-angkla sa isang hands-on na lab na pagsasanay:
 
-1. **Introduksyon** - Alamin kung ano ang AZD templates at kung paano ito gumagana.
-1. **Pagpili** - Tuklasin ang tamang "starter" template para sa iyong susunod na AI project.
-1. **Pagpapatunay** - I-deploy at i-explore ang template upang matiyak na gumagana ito ayon sa inaasahan.
-1. **Pag-deconstruct** - Alamin ang mga bahagi at configuration ng template.
-1. **Pag-configure** - Matutong i-activate at gamitin ang iba't ibang tampok ng Azure AI Foundry.
-1. **Pag-customize** - I-reconstruct ang application gamit ang iyong data at mga pangangailangan.
-1. **Pag-teardown** - Matutong mag-deprovision ng infrastructure at mag-recover ng soft-deleted resources.
-
----
-
-## Feedback at Mga Isyu
-
-Patuloy naming ina-update ang kurikulum upang matiyak na nagbibigay ito ng pinakamahusay na karanasan sa pag-aaral para sa mga baguhan. Ang iyong feedback ay pinahahalagahan.
-
-1. Mag-post ng isyu sa repo na ito - lagyan ng tag na `Workshop` para sa kaginhawahan.
-1. Sumali sa Azure AI Foundry Discord - makipag-ugnayan sa mga kapwa nag-aaral!
+1. **Panimula** - Maunawaan kung ano ang mga AZD template, at kung paano sila gumagana
+1. **Pagpili** - Tuklasin ang tamang "starter" template para sa iyong susunod na proyekto ng AI
+1. **Pagpapatunay** - I-deploy at galugarin ang template upang beripikahin na gumagana ito ayon sa ipinangako
+1. **Pag-deconstruct** - Hiwain ang template upang maunawaan ang mga bahagi at konfigurasyon nito
+1. **Konfigurasyon** - Matutong i-activate at gamitin ang iba't ibang tampok ng Microsoft Foundry
+1. **Pag-customize** - I-rekonstrak ang aplikasyon gamit ang iyong data at mga kinakailangan
+1. **Pag-teardown** - Matutong mag-deprovision ng imprastruktura at mabawi ang mga soft-deleted na resources
 
 ---
 
+## Feedback & Issues
+
+Aktibo naming ina-update ang kurikulum upang matiyak na nagbibigay ito ng pinakamahusay na karanasan sa pagkatuto para sa mga baguhan. Pinahahalagahan ang iyong feedback.
+
+1. Mag-post ng isyu sa repo na ito - i-tag ito `Workshop` para sa kaginhawaan.
+1. Sumali sa Microsoft Foundry Discord - kumonekta sa kapwa nag-aaral!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Paunawa:
+Isinalin ang dokumentong ito gamit ang serbisyong AI na tagasalin [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na pinagkukunan. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling isinasagawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na magmumula sa paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

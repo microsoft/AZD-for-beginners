@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-09T18:51:59+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "pa"
-}
--->
 # TODO: ਇਸ ਰਿਪੋਜ਼ਟਰੀ ਦੇ ਮਾਲਕ ਨੇ ਅਜੇ ਤੱਕ ਇਸ ਫਾਈਲ ਨੂੰ ਸੋਧਿਆ ਨਹੀਂ ਹੈ
 
 **ਰਿਪੋਜ਼ਟਰੀ ਮਾਲਕ**: ਕੀ ਤੁਸੀਂ ਇਸ ਪ੍ਰੋਡਕਟ/ਪ੍ਰੋਜੈਕਟ ਲਈ ਕਸਟਮਰ ਸਰਵਿਸ ਅਤੇ ਸਹਾਇਤਾ (CSS) ਚਾਹੁੰਦੇ ਹੋ?

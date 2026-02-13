@@ -1,178 +1,171 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
-  "translation_date": "2025-10-16T15:17:22+00:00",
-  "source_file": "workshop/README.md",
-  "language_code": "es"
-}
--->
 <div align="center">
-  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+  <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🚧 Taller en Construcción 🚧
+      🎯 Taller AZD para desarrolladores de IA
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Este taller está actualmente en desarrollo activo.</strong><br>
-      El contenido puede estar incompleto o sujeto a cambios. ¡Vuelve pronto para más actualizaciones!
+      <strong>Un taller práctico para crear aplicaciones de IA con Azure Developer CLI.</strong><br>
+      Completa 7 módulos para dominar plantillas AZD y flujos de trabajo de despliegue de IA.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Última actualización: Octubre 2025
+        📅 Última actualización: febrero de 2026
       </span>
     </div>
   </div>
 </div>
 
-# Taller AZD para Desarrolladores de IA
+# Taller AZD para desarrolladores de IA
 
-Bienvenido al taller práctico para aprender a usar Azure Developer CLI (AZD) con un enfoque en el despliegue de aplicaciones de IA. Este taller te ayudará a obtener un entendimiento aplicado de las plantillas de AZD en 3 pasos:
+Bienvenido al taller práctico para aprender Azure Developer CLI (AZD) con un enfoque en el despliegue de aplicaciones de IA. Este taller te ayuda a obtener una comprensión aplicada de las plantillas AZD en 3 pasos:
 
-1. **Descubrimiento** - encuentra la plantilla adecuada para ti.
-1. **Despliegue** - despliega y valida que funcione.
-1. **Personalización** - modifica e itera para adaptarla a tus necesidades.
+1. **Descubrimiento** - encuentra la plantilla que te conviene.
+1. **Despliegue** - desplegar y validar que funciona
+1. **Personalización** - modifica e itera para que sea tuya!
 
-A lo largo de este taller, también se te presentarán herramientas y flujos de trabajo esenciales para desarrolladores, que te ayudarán a optimizar tu proceso de desarrollo de principio a fin.
+Over the course of this workshop, you will also be introduced to core developer tools and workflows, to help you streamline your end-to-end development journey.
 
 <br/>
 
-## Guía Basada en Navegador
+## Guía basada en el navegador
 
-Las lecciones del taller están en formato Markdown. Puedes navegar directamente en GitHub o lanzar una vista previa en el navegador como se muestra en la captura de pantalla a continuación.
+The workshop lessons are in Markdown. You can navigate them directly in GitHub - or launch a browser-based preview as shown in the screenshot below.
 
 ![Taller](../../../translated_images/es/workshop.75906f133e6f8ba0.webp)
 
-Para usar esta opción, haz un fork del repositorio en tu perfil y lanza GitHub Codespaces. Una vez que el terminal de VS Code esté activo, escribe este comando:
+To use this option - fork the repository to your profile, and launch GitHub Codespaces. Once the VS Code terminal is active, type this command:
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-En unos segundos, verás un cuadro de diálogo emergente. Selecciona la opción `Abrir en el navegador`. La guía basada en la web se abrirá en una nueva pestaña del navegador. Algunos beneficios de esta vista previa:
+In a few seconds, you will see a pop-up dialog. Select the option to `Abrir en el navegador`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
 
 1. **Búsqueda integrada** - encuentra palabras clave o lecciones rápidamente.
-1. **Icono de copiar** - pasa el cursor sobre los bloques de código para ver esta opción.
-1. **Cambio de tema** - alterna entre temas oscuro y claro.
-1. **Obtén ayuda** - haz clic en el icono de Discord en el pie de página para unirte.
+1. **Icono de copiar** - pasa el cursor sobre los bloques de código para ver esta opción
+1. **Alternar tema** - cambia entre los temas oscuro y claro
+1. **Obtener ayuda** - haz clic en el icono de Discord en el pie para unirte!
 
 <br/>
 
-## Resumen del Taller
+## Descripción general del taller
 
-**Duración:** 3-4 horas  
-**Nivel:** Principiante a Intermedio  
-**Requisitos previos:** Familiaridad con Azure, conceptos de IA, VS Code y herramientas de línea de comandos.
+**Duration:** 3-4 hours  
+**Level:** Beginner to Intermediate  
+**Prerequisites:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
 
-Este es un taller práctico donde aprenderás haciendo. Una vez que completes los ejercicios, te recomendamos revisar el currículo de AZD Para Principiantes para continuar tu aprendizaje en mejores prácticas de Seguridad y Productividad.
+Este es un taller práctico donde aprendes haciendo. Una vez que hayas completado los ejercicios, recomendamos revisar el AZD For Beginners curriculum to continue your learning journey into Security and Productivity best practices.
 
-| Tiempo | Módulo  | Objetivo |
+| Tiempo| Módulo  | Objetivo |
 |:---|:---|:---|
-| 15 mins | [Introducción](docs/instructions/0-Introduction.md) | Establecer el contexto, entender los objetivos |
-| 30 mins | [Seleccionar Plantilla de IA](docs/instructions/1-Select-AI-Template.md) | Explorar opciones y elegir un inicio | 
-| 30 mins | [Validar Plantilla de IA](docs/instructions/2-Validate-AI-Template.md) | Desplegar solución predeterminada en Azure |
-| 30 mins | [Descomponer Plantilla de IA](docs/instructions/3-Deconstruct-AI-Template.md) | Explorar estructura y configuración |
-| 30 mins | [Configurar Plantilla de IA](docs/instructions/4-Configure-AI-Template.md) | Activar y probar funciones disponibles |
-| 30 mins | [Personalizar Plantilla de IA](docs/instructions/5-Customize-AI-Template.md) | Adaptar la plantilla a tus necesidades |
-| 30 mins | [Desmontar Infraestructura](docs/instructions/6-Teardown-Infrastructure.md) | Limpiar y liberar recursos |
-| 15 mins | [Conclusión y Próximos Pasos](docs/instructions/7-Wrap-up.md) | Recursos de aprendizaje, desafío del taller |
+| 15 mins | [Introducción](docs/instructions/0-Introduction.md) | Set the stage, understand the goals |
+| 30 mins | [Seleccionar plantilla de IA](docs/instructions/1-Select-AI-Template.md) | Explora opciones y elige una plantilla inicial | 
+| 30 mins | [Validar plantilla de IA](docs/instructions/2-Validate-AI-Template.md) | Desplegar la solución predeterminada en Azure |
+| 30 mins | [Desconstruir plantilla de IA](docs/instructions/3-Deconstruct-AI-Template.md) | Explora la estructura y la configuración |
+| 30 mins | [Configurar plantilla de IA](docs/instructions/4-Configure-AI-Template.md) | Activa y prueba las funciones disponibles |
+| 30 mins | [Personalizar plantilla de IA](docs/instructions/5-Customize-AI-Template.md) | Adapta la plantilla a tus necesidades |
+| 30 mins | [Desmantelar infraestructura](docs/instructions/6-Teardown-Infrastructure.md) | Cleanup and release resources |
+| 15 mins | [Wrap-Up & Next Steps](docs/instructions/7-Wrap-up.md) | Learning resources, Workshop challenge |
 
 <br/>
 
-## Lo que Aprenderás
+## What You'll Learn
 
-Piensa en la Plantilla AZD como un espacio de aprendizaje para explorar diversas capacidades y herramientas para el desarrollo de principio a fin en Azure AI Foundry. Al final de este taller, deberías tener una comprensión intuitiva de varias herramientas y conceptos en este contexto.
+Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
 
 | Concepto  | Objetivo |
 |:---|:---|
-| **Azure Developer CLI** | Entender comandos y flujos de trabajo de la herramienta |
-| **Plantillas AZD** | Comprender la estructura del proyecto y la configuración |
-| **Agente de Azure AI** | Provisión y despliegue del proyecto Azure AI Foundry |
-| **Azure AI Search** | Habilitar ingeniería de contexto con agentes |
-| **Observabilidad** | Explorar trazabilidad, monitoreo y evaluaciones |
-| **Red Teaming** | Explorar pruebas adversariales y mitigaciones |
+| **Azure Developer CLI** | Entender los comandos y flujos de trabajo de la herramienta|
+| **Plantillas AZD**| Entender la estructura del proyecto y la configuración|
+| **Azure AI Agent**| Provisión y despliegue de un proyecto de Microsoft Foundry  |
+| **Azure AI Search**| Habilitar ingeniería de contexto con agentes |
+| **Observabilidad**| Explorar trazado, monitorización y evaluaciones |
+| **Red Teaming**| Explorar pruebas adversariales y mitigaciones |
 
 <br/>
 
-## Estructura del Taller
+## Estructura del taller
 
-El taller está estructurado para llevarte en un viaje desde el descubrimiento de plantillas, hasta el despliegue, descomposición y personalización, utilizando la plantilla oficial [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) como base.
+The workshop is structured to take you on a journey from template discovery, to deployment, deconstruction, and customization - using the official [Introducción a los agentes de IA](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template as the basis.
 
-### [Módulo 1: Seleccionar Plantilla de IA](docs/instructions/1-Select-AI-Template.md) (30 mins)
+### [Módulo 1: Seleccionar plantilla de IA](docs/instructions/1-Select-AI-Template.md) (30 mins)
 
-- ¿Qué son las Plantillas de IA?
-- ¿Dónde puedo encontrar Plantillas de IA?
-- ¿Cómo puedo empezar a construir Agentes de IA?
+- ¿Qué son las plantillas de IA?
+- ¿Dónde puedo encontrar plantillas de IA?
+- ¿Cómo puedo empezar a crear agentes de IA?
 - **Laboratorio**: Inicio rápido con GitHub Codespaces
 
-### [Módulo 2: Validar Plantilla de IA](docs/instructions/2-Validate-AI-Template.md) (30 mins)
+### [Módulo 2: Validar plantilla de IA](docs/instructions/2-Validate-AI-Template.md) (30 mins)
 
-- ¿Cuál es la arquitectura de la Plantilla de IA?
-- ¿Cuál es el flujo de trabajo de desarrollo con AZD?
-- ¿Cómo puedo obtener ayuda con el desarrollo en AZD?
-- **Laboratorio**: Desplegar y validar la plantilla de Agentes de IA
+- ¿Cuál es la arquitectura de la plantilla de IA?
+- ¿Cuál es el flujo de trabajo de desarrollo de AZD?
+- ¿Cómo puedo obtener ayuda con el desarrollo de AZD?
+- **Laboratorio**: Desplegar y validar la plantilla de agentes de IA
 
-### [Módulo 3: Descomponer Plantilla de IA](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
+### [Módulo 3: Desconstruir plantilla de IA](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
 
-- Explorar tu entorno en `.azure/` 
-- Explorar tu configuración de recursos en `infra/` 
-- Explorar tu configuración de AZD en `azure.yaml`s
+- Explora tu entorno en `.azure/` 
+- Explora la configuración de recursos en `infra/` 
+- Explora tu configuración de AZD en `azure.yaml`s
 - **Laboratorio**: Modificar variables de entorno y volver a desplegar
 
-### [Módulo 4: Configurar Plantilla de IA](docs/instructions/4-Configure-AI-Template.md) (30 mins)
-- Explorar: Generación Aumentada por Recuperación
-- Explorar: Evaluación de Agentes y Red Teaming
-- Explorar: Trazabilidad y Monitoreo
-- **Laboratorio**: Explorar Agente de IA + Observabilidad 
+### [Módulo 4: Configurar plantilla de IA](docs/instructions/4-Configure-AI-Template.md) (30 mins)
+- Explora: Generación aumentada por recuperación
+- Explora: Evaluación de agentes y Red Teaming
+- Explora: Trazado y monitorización
+- **Laboratorio**: Explora Agente de IA + Observabilidad 
 
-### [Módulo 5: Personalizar Plantilla de IA](docs/instructions/5-Customize-AI-Template.md) (30 mins)
-- Definir: PRD con Requisitos de Escenario
-- Configurar: Variables de Entorno para AZD
-- Implementar: Hooks de Ciclo de Vida para tareas adicionales
-- **Laboratorio**: Personalizar plantilla para mi escenario
+### [Módulo 5: Personalizar plantilla de IA](docs/instructions/5-Customize-AI-Template.md) (30 mins)
+- Define: PRD with Scenario Requirements
+- Configura: Environment Variables for AZD
+- Implementa: Lifecycle Hooks for added tasks
+- **Laboratorio**: Personaliza la plantilla para mi escenario
 
-### [Módulo 6: Desmontar Infraestructura](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
-- Recapitulación: ¿Qué son las Plantillas AZD?
-- Recapitulación: ¿Por qué usar Azure Developer CLI?
-- Próximos Pasos: ¡Prueba una plantilla diferente!
-- **Laboratorio**: Desprovisionar infraestructura y limpiar
+### [Módulo 6: Desmantelar infraestructura](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
+- Recap: What are AZD Templates?
+- Recap: Why use Azure Developer CLI?
+- Próximos pasos: ¡Prueba una plantilla diferente!
+- **Laboratorio**: Dar de baja la infraestructura y limpieza
 
 <br/>
 
-## Desafío del Taller
+## Reto del taller
 
-¿Quieres desafiarte a hacer más? Aquí tienes algunas sugerencias de proyectos, ¡o comparte tus ideas con nosotros!
+¿Quieres desafiarte a hacer más? Aquí hay algunas sugerencias de proyectos - o comparte tus ideas con nosotros!!
 
 | Proyecto | Descripción |
 |:---|:---|
-|1. **Descomponer una Plantilla de IA Compleja** | Usa el flujo de trabajo y las herramientas que hemos descrito y ve si puedes desplegar, validar y personalizar una plantilla de solución de IA diferente. _¿Qué aprendiste?_|
-|2. **Personalizar con tu Escenario**  | Intenta escribir un PRD (Documento de Requisitos del Producto) para un escenario diferente. Luego usa GitHub Copilot en tu repositorio de plantillas en el modelo de Agente y pídele que genere un flujo de trabajo de personalización para ti. _¿Qué aprendiste? ¿Cómo podrías mejorar estas sugerencias?_|
+|1. **Desconstruye una plantilla de IA compleja** | Usa el flujo de trabajo y las herramientas que describimos y comprueba si puedes desplegar, validar y personalizar una plantilla de solución de IA diferente. _¿Qué aprendiste?_|
+|2. **Personaliza con tu escenario**  | Intenta redactar un PRD (Product Requirements Document) para un escenario distinto. Luego usa GitHub Copilot en el repositorio de la plantilla en Agent Model - y pídele que genere un flujo de trabajo de personalización para ti. _¿Qué aprendiste? ¿Cómo podrías mejorar estas sugerencias?_|
 | | |
 
 ## ¿Tienes comentarios?
 
-1. Publica un issue en este repositorio - etiquétalo como `Workshop` para mayor comodidad.
-1. Únete al Discord de Azure AI Foundry - conecta con tus compañeros.
+1. Publica un issue en este repositorio - etiquétalo `Workshop` por conveniencia.
+1. Únete al Discord de Microsoft Foundry - conéctate con tus compañeros!
 
 
 | | | 
 |:---|:---|
-| **📚 Inicio del Curso**| [AZD Para Principiantes](../README.md)|
-| **📖 Documentación** | [Comenzar con plantillas de IA](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️Plantillas de IA** | [Plantillas de Azure AI Foundry](https://ai.azure.com/templates) |
-|**🚀 Próximos Pasos** | [Acepta el Desafío](../../../workshop) |
+| **📚 Inicio del curso**| [AZD Para Principiantes](../README.md)|
+| **📖 Documentación** | [Comienza con plantillas de IA](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️Plantillas de IA** | [Plantillas de Microsoft Foundry](https://ai.azure.com/templates) |
+|**🚀 Próximos pasos** | [Comenzar taller](../../../workshop) |
 | | |
 
 <br/>
 
 ---
 
-**Anterior:** [Guía de Solución de Problemas de IA](../docs/troubleshooting/ai-troubleshooting.md) | **Siguiente:** Comienza con [Laboratorio 1: Fundamentos de AZD](../../../workshop/lab-1-azd-basics)
+**Navegación:** [Curso principal](../README.md) | [Introducción](docs/instructions/0-Introduction.md) | [Módulo 1: Seleccionar plantilla](docs/instructions/1-Select-AI-Template.md)
 
-**¿Listo para comenzar a construir aplicaciones de IA con AZD?**
+**¿Listo para comenzar a crear aplicaciones de IA con AZD?**
 
-[Comienza el Laboratorio 1: Fundamentos de AZD →](./lab-1-azd-basics/README.md)
+[Comenzar taller: Introducción →](docs/instructions/0-Introduction.md)
 
 ---
 
-**Descargo de responsabilidad**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Descargo de responsabilidad:
+Este documento ha sido traducido utilizando el servicio de traducción automática con IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,36 +1,27 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-23T12:13:15+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "sw"
-}
--->
-# API Rahisi ya Flask - Mfano wa Programu ya Kontena
+# Simple Flask API - Container App Example
 
-**Njia ya Kujifunza:** Mwanzoni ⭐ | **Muda:** Dakika 25-35 | **Gharama:** $0-15/mwezi
+**Njia ya Kujifunza:** Beginner ⭐ | **Muda:** 25-35 minutes | **Gharama:** $0-15/month
 
-API kamili ya Python Flask REST iliyowekwa kwenye Azure Container Apps kwa kutumia Azure Developer CLI (azd). Mfano huu unaonyesha uwekaji wa kontena, upanuzi wa kiotomatiki, na misingi ya ufuatiliaji.
+Programu kamili, inayofanya kazi ya Python Flask REST API iliyopewa kwenye Azure Container Apps kwa kutumia Azure Developer CLI (azd). Mfano huu unaonyesha utekelezaji wa kontena, upanuzi wa kiotomatiki, na misingi ya ufuatiliaji.
 
-## 🎯 Utajifunza Nini
+## 🎯 Nini Utajifunza
 
-- Weka programu ya Python iliyowekwa kwenye kontena kwenye Azure
-- Sanidi upanuzi wa kiotomatiki na scale-to-zero
-- Tekeleza uchunguzi wa afya na ukaguzi wa utayari
-- Fuatilia kumbukumbu za programu na vipimo
-- Tumia Azure Developer CLI kwa uwekaji wa haraka
+- Kuzindua programu ya Python iliyohifadhiwa kwenye kontena kwenye Azure
+- Kusanidi upanuzi wa kiotomatiki (auto-scaling) pamoja na scale-to-zero
+- Kutekeleza probes za afya na ukaguzi wa utayari
+- Kufuatilia magogo na vipimo vya programu
+- Kutumia Azure Developer CLI kwa utekelezaji wa haraka
 
-## 📦 Kinachojumuishwa
+## 📦 Vinavyomo
 
-✅ **Programu ya Flask** - API kamili ya REST na operesheni za CRUD (`src/app.py`)  
-✅ **Dockerfile** - Usanidi wa kontena tayari kwa uzalishaji  
-✅ **Miundombinu ya Bicep** - Mazingira ya Container Apps na uwekaji wa API  
-✅ **Usanidi wa AZD** - Usanidi wa amri moja kwa uwekaji  
-✅ **Uchunguzi wa Afya** - Ukaguzi wa liveness na utayari umesanidiwa  
-✅ **Upanuzi wa Kiotomatiki** - Nakala 0-10 kulingana na mzigo wa HTTP  
+✅ **Flask Application** - REST API kamili na shughuli za CRUD (`src/app.py`)  
+✅ **Dockerfile** - Usanidi wa kontena unaotumika uzalishaji  
+✅ **Bicep Infrastructure** - Mazingira ya Container Apps na utekelezaji wa API  
+✅ **AZD Configuration** - Usanidi wa utekelezaji kwa amri moja  
+✅ **Health Probes** - Ukaguzi wa uhai na utayari umewekwa  
+✅ **Auto-scaling** - nakala 0-10 kulingana na mzigo wa HTTP  
 
-## Muundo wa Kifaa
+## Architecture
 
 ```
 ┌─────────────────────────────────────────┐
@@ -47,17 +38,17 @@ API kamili ya Python Flask REST iliyowekwa kwenye Azure Container Apps kwa kutum
 └────────────────────────────────────────┘
 ```
 
-## Mahitaji
+## Mahitaji ya awali
 
-### Yanayohitajika
-- **Azure Developer CLI (azd)** - [Mwongozo wa usakinishaji](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Usajili wa Azure** - [Akaunti ya bure](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Sakinisha Docker](https://www.docker.com/products/docker-desktop/) (kwa majaribio ya ndani)
+### Inahitajika
+- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (kwa upimaji wa ndani)
 
 ### Thibitisha Mahitaji
 
 ```bash
-# Angalia toleo la azd (unahitaji 1.5.0 au zaidi)
+# Angalia toleo la azd (inahitaji 1.5.0 au ya juu)
 azd version
 
 # Thibitisha kuingia kwa Azure
@@ -67,33 +58,33 @@ azd auth login
 docker --version
 ```
 
-## ⏱️ Muda wa Uwekaji
+## ⏱️ Muda wa Utekelezaji
 
-| Awamu | Muda | Kinachotokea |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| Usanidi wa mazingira | Sekunde 30 | Unda mazingira ya azd |
-| Jenga kontena | Dakika 2-3 | Jenga programu ya Flask kwa Docker |
-| Toa miundombinu | Dakika 3-5 | Unda Container Apps, rejista, ufuatiliaji |
-| Weka programu | Dakika 2-3 | Sukuma picha na weka kwenye Container Apps |
-| **Jumla** | **Dakika 8-12** | Uwekaji kamili tayari |
+| Environment setup | 30 seconds | Create azd environment |
+| Build container | 2-3 minutes | Docker build Flask app |
+| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
+| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
+| **Total** | **8-12 minutes** | Complete deployment ready |
 
-## Mwanzo wa Haraka
+## Anza Haraka
 
 ```bash
-# Elekea kwenye mfano
+# Nenda kwenye mfano
 cd examples/container-app/simple-flask-api
 
 # Anzisha mazingira (chagua jina la kipekee)
 azd env new myflaskapi
 
-# Peleka kila kitu (miundombinu + programu)
+# Sambaza yote (miundombinu + programu)
 azd up
-# Utatakiwa:
+# Utaulizwa kufanya:
 # 1. Chagua usajili wa Azure
-# 2. Chagua eneo (mfano, eastus2)
-# 3. Subiri dakika 8-12 kwa ajili ya upelekaji
+# 2. Chagua eneo (kwa mfano, eastus2)
+# 3. Subiri dakika 8-12 kwa ajili ya usambazaji
 
-# Pata mwisho wa API yako
+# Pata kiunganishi cha API yako
 azd env get-values
 
 # Jaribu API
@@ -110,9 +101,9 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Thibitisha Uwekaji
+## ✅ Thibitisha Utekelezaji
 
-### Hatua ya 1: Angalia Hali ya Uwekaji
+### Hatua 1: Angalia Hali ya Utekelezaji
 
 ```bash
 # Tazama huduma zilizowekwa
@@ -120,17 +111,17 @@ azd show
 
 # Matokeo yanayotarajiwa yanaonyesha:
 # - Huduma: api
-# - Endpoint: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Hali: Inaendelea
+# - Kiunganisho: https://ca-api-[env].xxx.azurecontainerapps.io
+# - Hali: Inafanya kazi
 ```
 
-### Hatua ya 2: Jaribu Njia za API
+### Hatua 2: Jaribu Vituo vya API
 
 ```bash
 # Pata mwisho wa API
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Jaribu afya
+# Jaribu hali ya afya
 curl $API_URL/health
 
 # Jaribu mwisho wa mzizi
@@ -146,20 +137,23 @@ curl $API_URL/api/items
 ```
 
 **Vigezo vya Mafanikio:**
-- ✅ Njia ya afya inarudisha HTTP 200
-- ✅ Njia ya mzizi inaonyesha taarifa za API
-- ✅ POST inaunda kipengee na kurudisha HTTP 201
-- ✅ GET inarudisha vipengee vilivyoundwa
+- ✅ Health endpoint returns HTTP 200
+- ✅ Root endpoint shows API information
+- ✅ POST creates item and returns HTTP 201
+- ✅ GET returns created items
 
-### Hatua ya 3: Tazama Kumbukumbu
+### Hatua 3: Tazama Magogo
 
 ```bash
-# Tazama kumbukumbu za moja kwa moja
-azd logs api --follow
+# Tiririsha kumbukumbu za moja kwa moja kwa kutumia azd monitor
+azd monitor --logs
+
+# Au tumia Azure CLI:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Unapaswa kuona:
-# - Ujumbe wa kuanzisha Gunicorn
-# - Kumbukumbu za maombi ya HTTP
+# - Ujumbe za kuanzishaji wa Gunicorn
+# - Kumbukumbu za maombi za HTTP
 # - Kumbukumbu za taarifa za programu
 ```
 
@@ -180,12 +174,12 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## Njia za API
+## Vituo vya API
 
-| Njia | Njia | Maelezo |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | Ukaguzi wa afya |
-| `/api/items` | GET | Orodhesha vipengee vyote |
+| `/api/items` | GET | Orodhesha vitu vyote |
 | `/api/items` | POST | Unda kipengee kipya |
 | `/api/items/{id}` | GET | Pata kipengee maalum |
 | `/api/items/{id}` | PUT | Sasisha kipengee |
@@ -204,24 +198,24 @@ azd env set MAX_REPLICAS 20
 
 ### Usanidi wa Upanuzi
 
-API inapanuka kiotomatiki kulingana na trafiki ya HTTP:
-- **Nakala za Chini**: 0 (inapungua hadi sifuri ikiwa haifanyi kazi)
-- **Nakala za Juu**: 10
-- **Maombi ya Wakati Mmoja kwa Nakala**: 50
+API inapanuka kwa kiotomatiki kulingana na trafiki ya HTTP:
+- **Min Replicas**: 0 (inapanuka hadi sifuri wakati haifanyi kazi)
+- **Max Replicas**: 10
+- **Concurrent Requests per Replica**: 50
 
 ## Maendeleo
 
-### Endesha Ndani
+### Endesha kwa Kompyuta Yako
 
 ```bash
-# Sakinisha utegemezi
+# Sakinisha vitegemezi
 cd src
 pip install -r requirements.txt
 
 # Endesha programu
 python app.py
 
-# Jaribu ndani ya nchi
+# Fanya majaribio kwenye kompyuta yako
 curl http://localhost:8000/health
 ```
 
@@ -231,26 +225,26 @@ curl http://localhost:8000/health
 # Jenga picha ya Docker
 docker build -t flask-api:local ./src
 
-# Endesha kontena kwa ndani
+# Endesha kontena kwenye mashine ya ndani
 docker run -p 8000:8000 flask-api:local
 
 # Jaribu kontena
 curl http://localhost:8000/health
 ```
 
-## Uwekaji
+## Utekelezaji
 
-### Uwekaji Kamili
+### Utekelezaji Kamili
 
 ```bash
-# Weka miundombinu na programu
+# Sambaza miundombinu na programu
 azd up
 ```
 
-### Uwekaji wa Nambari Pekee
+### Utekelezaji wa Msimbo Pekee
 
 ```bash
-# Peleka tu msimbo wa programu (miundombinu haijabadilika)
+# Weka tu msimbo wa programu (miundombinu isibadilike)
 azd deploy api
 ```
 
@@ -260,20 +254,23 @@ azd deploy api
 # Sasisha vigezo vya mazingira
 azd env set API_KEY "new-api-key"
 
-# Tuma upya na usanidi mpya
+# Zindua tena kwa usanidi mpya
 azd deploy api
 ```
 
 ## Ufuatiliaji
 
-### Tazama Kumbukumbu
+### Tazama Magogo
 
 ```bash
-# Tazama kumbukumbu za moja kwa moja
-azd logs api --follow
+# Tiririsha kumbukumbu za moja kwa moja kwa kutumia azd monitor
+azd monitor --logs
+
+# Au tumia Azure CLI kwa Container Apps:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Tazama mistari 100 ya mwisho
-azd logs api --tail 100
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
 ### Fuatilia Vipimo
@@ -312,7 +309,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Pata Vipengee Vyote
+### Pata Vitu Vyote
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -320,38 +317,38 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Uboreshaji wa Gharama
 
-Uwekaji huu unatumia scale-to-zero, kwa hivyo unalipa tu wakati API inashughulikia maombi:
+Utekelezaji huu unatumia scale-to-zero, kwa hivyo unalipa tu wakati API inashughulikia maombi:
 
-- **Gharama ya kutokufanya kazi**: ~$0/mwezi (imepungua hadi sifuri)
-- **Gharama ya kufanya kazi**: ~$0.000024/sekunde kwa nakala
-- **Gharama ya kila mwezi inayotarajiwa** (matumizi madogo): $5-15
+- **Gharama wakati haifanyi kazi**: ~$0/month (inabaki hadi sifuri)
+- **Gharama ya uendeshaji**: ~$0.000024/second per replica
+- **Gharama inayotarajiwa kwa mwezi** (matumizi mepesi): $5-15
 
 ### Punguza Gharama Zaidi
 
 ```bash
-# Punguza idadi ya nakala za juu kwa maendeleo
+# Punguza idadi ya juu ya nakala kwa ajili ya mazingira ya maendeleo
 azd env set MAX_REPLICAS 3
 
-# Tumia muda mfupi wa kusubiri bila kazi
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # Dakika 5
+# Tumia muda mfupi wa kutokuwa na shughuli
+azd env set SCALE_TO_ZERO_TIMEOUT 300  # dakika 5
 ```
 
-## Utatuzi wa Shida
+## Utatuzi wa Matatizo
 
-### Kontena Halianzi
+### Kontena Haianzi
 
 ```bash
-# Angalia magogo ya kontena
-azd logs api --tail 100
+# Angalia kumbukumbu za kontena kwa kutumia Azure CLI
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Thibitisha picha ya Docker inajengwa ndani ya nchi
+# Thibitisha kwamba picha za Docker zinajengwa kwa ndani (lokali)
 docker build -t test ./src
 ```
 
-### API Haipatikani
+### API Haiwezi Kufikiwa
 
 ```bash
-# Thibitisha kuingia ni ya nje
+# Thibitisha kuwa ingress ni ya nje
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
@@ -359,17 +356,17 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
 ### Muda Mrefu wa Majibu
 
 ```bash
-# Angalia matumizi ya CPU/Kumbukumbu
+# Angalia matumizi ya CPU/kumbukumbu
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Ongeza rasilimali ikiwa inahitajika
+# Panua rasilimali ikiwa zinahitajika
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Kusafisha
+## Ondoa Rasilimali
 
 ```bash
 # Futa rasilimali zote
@@ -380,68 +377,68 @@ azd down --force --purge
 
 ### Panua Mfano Huu
 
-1. **Ongeza Hifadhidata** - Unganisha Azure Cosmos DB au SQL Database
+1. **Add Database** - Integrate Azure Cosmos DB or SQL Database
    ```bash
    # Ongeza moduli ya Cosmos DB kwenye infra/main.bicep
    # Sasisha app.py na muunganisho wa hifadhidata
    ```
 
-2. **Ongeza Uthibitishaji** - Tekeleza Azure AD au funguo za API
+2. **Add Authentication** - Implement Azure AD or API keys
    ```python
    # Ongeza middleware ya uthibitishaji kwenye app.py
    from functools import wraps
    ```
 
-3. **Sanidi CI/CD** - Mtiririko wa kazi wa GitHub Actions
+3. **Set Up CI/CD** - GitHub Actions workflow
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Ongeza Utambulisho Ulioendeshwa** - Fikia huduma za Azure kwa usalama
+4. **Add Managed Identity** - Secure access to Azure services
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
    ```
 
-### Mifano Inayohusiana
+### Mifano Iliyohusiana
 
-- **[Programu ya Hifadhidata](../../../../../examples/database-app)** - Mfano kamili na SQL Database
-- **[Huduma Ndogo](../../../../../examples/container-app/microservices)** - Muundo wa huduma nyingi
-- **[Mwongozo Mkuu wa Container Apps](../README.md)** - Mifumo yote ya kontena
+- **[Database App](../../../../../examples/database-app)** - Mfano kamili na SQL Database
+- **[Microservices](../../../../../examples/container-app/microservices)** - Muundo wa huduma nyingi
+- **[Container Apps Master Guide](../README.md)** - Mifumo yote ya container
 
 ### Rasilimali za Kujifunza
 
-- 📚 [Kozi ya AZD Kwa Wanaoanza](../../../README.md) - Nyumbani kwa kozi kuu
-- 📚 [Mifumo ya Container Apps](../README.md) - Mifumo zaidi ya uwekaji
-- 📚 [Matunzio ya Violezo vya AZD](https://azure.github.io/awesome-azd/) - Violezo vya jamii
+- 📚 [AZD For Beginners Course](../../../README.md) - Ukurasa mkuu wa kozi
+- 📚 [Container Apps Patterns](../README.md) - Mifumo zaidi ya utekelezaji
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Violezo vya jamii
 
-## Rasilimali za Ziada
+## Rasilimali Zaidi
 
 ### Nyaraka
-- **[Nyaraka za Flask](https://flask.palletsprojects.com/)** - Mwongozo wa mfumo wa Flask
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Mwongozo wa mfumo wa Flask
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Nyaraka rasmi za Azure
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Marejeleo ya amri za azd
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Marejeo ya amri za azd
 
 ### Mafunzo
-- **[Mwanzo wa Haraka wa Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Weka programu yako ya kwanza
-- **[Python kwenye Azure](https://learn.microsoft.com/azure/developer/python/)** - Mwongozo wa maendeleo ya Python
-- **[Lugha ya Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Miundombinu kama nambari
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Weka programu yako ya kwanza
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Mwongozo wa maendeleo ya Python
+- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Miundombinu kama msimbo
 
 ### Zana
-- **[Azure Portal](https://portal.azure.com)** - Dhibiti rasilimali kwa taswira
-- **[Kiendelezi cha Azure cha VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Muunganisho wa IDE
+- **[Azure Portal](https://portal.azure.com)** - Dhibiti rasilimali kwa mtazamo wa kioo
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Uunganisho wa IDE
 
 ---
 
-**🎉 Hongera!** Umeweka API ya Flask tayari kwa uzalishaji kwenye Azure Container Apps na upanuzi wa kiotomatiki na ufuatiliaji.
+**🎉 Hongera!** Umeweka Flask API tayari kwa uzalishaji kwenye Azure Container Apps ikiwa na upanuzi wa kiotomatiki na ufuatiliaji.
 
-**Maswali?** [Fungua suala](https://github.com/microsoft/AZD-for-beginners/issues) au angalia [Maswali Yanayoulizwa Mara kwa Mara](../../../resources/faq.md)
+**Maswali?** [Fungua issue](https://github.com/microsoft/AZD-for-beginners/issues) au angalia [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+Taarifa ya Kutoweka Dhamana:
+Hati hii imetafsiriwa kwa kutumia huduma ya utafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au hitilafu. Hati ya asili katika lugha yake ya mama inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia utafsiri wa kitaalamu uliofanywa na mtu. Hatuwajibiki kwa uelewa mbaya au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

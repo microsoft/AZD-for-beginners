@@ -1,448 +1,454 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T17:46:37+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "tl"
-}
--->
-# Command Cheat Sheet - Mahahalagang AZD Commands
+# Command Cheat Sheet - Mahalagang Mga Utos ng AZD
 
-**Mabilisang Gabay para sa Lahat ng Kabanata**
-- **📚 Kurso Home**: [AZD Para sa Mga Baguhan](../README.md)
-- **📖 Mabilisang Simula**: [Kabanata 1: Pundasyon at Mabilisang Simula](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Commands**: [Kabanata 2: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Advanced**: [Kabanata 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Mabilis na Sanggunian para sa Lahat ng Kabanata**
+- **📚 Tahanan ng Kurso**: [AZD Para sa Mga Nagsisimula](../README.md)
+- **📖 Mabilis na Pagsisimula**: [Kabanata 1: Pundasyon at Mabilis na Pagsisimula](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Mga Utos ng AI**: [Kabanata 2: Pag-unlad na Unahin ang AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Advanced**: [Kabanata 4: Imprastruktura bilang Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Panimula
 
-Ang komprehensibong cheat sheet na ito ay nagbibigay ng mabilisang gabay para sa mga karaniwang ginagamit na Azure Developer CLI commands, inayos ayon sa kategorya na may mga praktikal na halimbawa. Perpekto para sa mabilisang paghanap habang nagde-develop, nagtroubleshoot, at sa pang-araw-araw na operasyon gamit ang mga azd projects.
+Ang komprehensibong cheat sheet na ito ay nagbibigay ng mabilisang sanggunian para sa mga pinaka-karaniwang ginagamit na Azure Developer CLI na mga utos, inayos ayon sa kategorya na may praktikal na mga halimbawa. Perpekto para sa mabilisang paghahanap habang nagde-develop, nag-troubleshoot, at sa pang-araw-araw na operasyon ng mga azd na proyekto.
 
-## Mga Layunin sa Pag-aaral
+## Mga Layunin sa Pagkatuto
 
 Sa paggamit ng cheat sheet na ito, ikaw ay:
-- Magkakaroon ng instant na access sa mahahalagang Azure Developer CLI commands at syntax
-- Maiintindihan ang organisasyon ng mga command ayon sa functional na kategorya at mga use case
-- Makakahanap ng mga praktikal na halimbawa para sa karaniwang development at deployment scenarios
-- Makakagamit ng troubleshooting commands para sa mabilisang pagresolba ng mga isyu
-- Makakahanap ng advanced na configuration at customization options nang madali
-- Makakagamit ng mga command para sa pamamahala ng environment at multi-environment workflow
+- Magkakaroon ng agarang akses sa mahahalagang Azure Developer CLI na mga utos at sintaks
+- Mauunawaan ang pag-aayos ng mga utos ayon sa mga kategoryang pang-funksyon at mga gamit
+- Makakakuha ng mga praktikal na halimbawa para sa mga karaniwang senaryo ng pag-develop at pag-deploy
+- Makakakuha ng akses sa mga utos para sa troubleshooting para sa mabilisang pagresolba ng mga isyu
+- Mabilis na mahahanap ang mga advanced na opsyon sa konfigurasyon at pag-customize
+- Matutunton ang pamamahala ng environment at mga utos para sa multi-environment workflow
 
-## Mga Resulta ng Pag-aaral
+## Mga Kinalabasan ng Pagkatuto
 
-Sa regular na paggamit ng cheat sheet na ito, magagawa mong:
-- Magpatakbo ng mga azd commands nang may kumpiyansa nang hindi kinakailangang tingnan ang buong dokumentasyon
-- Mabilisang maresolba ang mga karaniwang isyu gamit ang tamang diagnostic commands
-- Epektibong pamahalaan ang maraming environment at deployment scenarios
-- Magamit ang mga advanced na tampok at configuration options ng azd kung kinakailangan
-- Magtroubleshoot ng mga isyu sa deployment gamit ang sistematikong sequence ng mga command
-- Ma-optimize ang workflows sa pamamagitan ng epektibong paggamit ng azd shortcuts at options
+Sa regular na paggamit ng cheat sheet na ito, ikaw ay magagawang:
+- Isakatuparan ang mga azd na utos nang may kumpiyansa nang hindi na kumukunsulta sa buong dokumentasyon
+- Mabilis na lutasin ang mga karaniwang isyu gamit ang angkop na mga diagnostic na utos
+- Epektibong pamahalaan ang maramihang environment at mga senaryo ng pag-deploy
+- Ipatupad ang mga advanced na tampok ng azd at mga opsyon sa konfigurasyon ayon sa kailangan
+- I-troubleshoot ang mga isyu sa pag-deploy gamit ang sistematikong pagkakasunod ng mga utos
+- I-optimize ang mga workflow sa pamamagitan ng mabisang paggamit ng mga shortcut at opsyon ng azd
 
-## Mga Pangunahing Command sa Pagsisimula
+## Mga Utos para sa Pagsisimula
 
-### Authentication
+### Awentikasyon
 ```bash
-# Login to Azure (uses Azure CLI)
+# Mag-login sa Azure gamit ang AZD
+azd auth login
+
+# Mag-login sa Azure CLI (ginagamit ito ng AZD sa likod ng mga eksena)
 az login
 
-# Check current account
+# Suriin ang kasalukuyang account
 az account show
 
-# Set default subscription
+# Itakda ang default na subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# Mag-logout mula sa AZD
+azd auth logout
+
+# Mag-logout mula sa Azure CLI
+az logout
 ```
 
-### Pag-initialize ng Proyekto
+### Pag-inisyalisa ng Proyekto
 ```bash
-# Browse available templates
+# Mag-browse ng mga magagamit na template
 azd template list
 
-# Initialize from template
+# I-initialize mula sa template
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# I-initialize sa kasalukuyang direktoryo
 azd init .
 
-# Initialize with custom name
+# I-initialize gamit ang pasadyang pangalan
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Mga Pangunahing Deployment Commands
+## Pangunahing Mga Utos ng Pag-deploy
 
-### Kumpletong Deployment Workflow
+### Kumpletong Daloy ng Pag-deploy
 ```bash
-# Deploy everything (provision + deploy)
+# I-deploy ang lahat (provision + deploy)
 azd up
 
-# Deploy with confirmation prompts disabled
+# I-deploy na naka-disable ang mga prompt ng kumpirmasyon
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# I-deploy sa partikular na kapaligiran
 azd up --environment production
 
-# Deploy with custom parameters
+# I-deploy gamit ang pasadyang mga parameter
 azd up --parameter location=westus2
 ```
 
-### Infrastructure Lamang
+### Imprastruktura Lamang
 ```bash
-# Provision Azure resources
+# Mag-provision ng mga resource sa Azure
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 I-preview ang mga pagbabago sa imprastruktura
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# Ipinapakita ang dry-run na tanawin kung anong mga resource ang malilikha, mababago, o matatanggal
+# Kahawig ng 'terraform plan' o 'bicep what-if' — ligtas patakbuhin, walang pagbabago ang ilalapat
 ```
 
-### Application Lamang
+### Aplikasyon Lamang
 ```bash
-# Deploy application code
+# I-deploy ang code ng aplikasyon
 azd deploy
 
-# Deploy specific service
+# I-deploy ang partikular na serbisyo
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# I-deploy ang lahat ng serbisyo
 azd deploy --all
 ```
 
-### Build at Package
+### Pagbuo at Pag-package
 ```bash
-# Build applications
+# Bumuo ng mga aplikasyon
 azd package
 
-# Build specific service
+# Bumuo ng tiyak na serbisyo
 azd package --service api
 ```
 
 ## 🌍 Pamamahala ng Environment
 
-### Mga Operasyon sa Environment
+### Mga Operasyon ng Environment
 ```bash
-# List all environments
+# Ilista ang lahat ng kapaligiran
 azd env list
 
-# Create new environment
+# Gumawa ng bagong kapaligiran
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# Piliin ang kapaligiran
 azd env select production
 
-# Show current environment
+# Ipakita ang kasalukuyang kapaligiran
 azd env show
 
-# Refresh environment state
+# I-refresh ang estado ng kapaligiran
 azd env refresh
 ```
 
-### Mga Environment Variables
+### Mga Variable ng Environment
 ```bash
-# Set environment variable
+# Itakda ang variable ng kapaligiran
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# Kunin ang variable ng kapaligiran
 azd env get API_KEY
 
-# List all environment variables
+# Ilista ang lahat ng mga variable ng kapaligiran
 azd env get-values
 
-# Remove environment variable
+# Alisin ang variable ng kapaligiran
 azd env unset DEBUG
 ```
 
-## ⚙️ Mga Configuration Commands
+## ⚙️ Mga Utos ng Konfigurasyon
 
-### Global Configuration
+### Global na Konfigurasyon
 ```bash
-# List all configuration
+# Ilista ang lahat ng mga konfigurasyon
 azd config list
 
-# Set global defaults
+# Itakda ang mga global na default
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# Alisin ang konfigurasyon
 azd config unset defaults.location
 
-# Reset all configuration
+# I-reset ang lahat ng konfigurasyon
 azd config reset
 ```
 
-### Configuration ng Proyekto
+### Konfigurasyon ng Proyekto
 ```bash
-# Validate azure.yaml
+# I-validate ang azure.yaml
 azd config validate
 
-# Show project information
+# Ipakita ang impormasyon ng proyekto
 azd show
 
-# Get service endpoints
+# Kunin ang mga endpoint ng serbisyo
 azd show --output json
 ```
 
-## 📊 Monitoring at Logs
+## 📊 Pagmo-monitor at Diagnostiko
 
-### Application Logs
+### Dashboard ng Pagmo-monitor
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### Monitoring
-```bash
-# Open Azure portal for monitoring
+# Buksan ang dashboard ng pagsubaybay sa Azure portal
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Buksan ang live na metrics ng Application Insights
+azd monitor --live
+
+# Buksan ang blade ng mga log ng Application Insights
+azd monitor --logs
+
+# Buksan ang pangkalahatang-ideya ng Application Insights
+azd monitor --overview
 ```
 
-## 🛠️ Mga Maintenance Commands
-
-### Cleanup
+### Pagtingin sa Mga Logs ng Container
 ```bash
-# Remove all Azure resources
+# Tingnan ang mga log gamit ang Azure CLI (para sa Container Apps)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# Sundan ang mga log nang real-time
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Tingnan ang mga log mula sa Azure Portal
+azd monitor --logs
+```
+
+### Mga Query ng Log Analytics
+```bash
+# I-access ang Log Analytics sa Azure Portal
+azd monitor --logs
+
+# Mag-query ng mga log gamit ang Azure CLI
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
+```
+
+## 🛠️ Mga Utos para sa Pangangalaga
+
+### Paglilinis
+```bash
+# Tanggalin ang lahat ng mga resource ng Azure
 azd down
 
-# Force delete without confirmation
+# Puwersahang tanggalin nang walang kumpirmasyon
 azd down --force
 
-# Purge soft-deleted resources
+# Permanenteng tanggalin ang mga soft-deleted na resource
 azd down --purge
 
-# Complete cleanup
+# Ganap na paglilinis
 azd down --force --purge
 ```
 
-### Updates
+### Mga Update
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# Suriin kung may mga update para sa azd
 azd version
 
-# Show system information
-azd info
+# Kunin ang kasalukuyang bersyon
+azd version
+
+# Tingnan ang kasalukuyang konfigurasyon
+azd config list
 ```
 
-## 🔧 Mga Advanced na Commands
+## 🔧 Mga Advanced na Utos
 
 ### Pipeline at CI/CD
 ```bash
-# Configure GitHub Actions
+# I-configure ang GitHub Actions
 azd pipeline config
 
-# Configure Azure DevOps
+# I-configure ang Azure DevOps
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# Ipakita ang konfigurasyon ng pipeline
 azd pipeline show
 ```
 
-### Pamamahala ng Infrastructure
+### Pamamahala ng Imprastruktura
 ```bash
-# Import existing resources
-azd infra import
+# Gumawa ng mga template ng imprastruktura
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 Paunang Pagtingin at Pagpaplano ng Imprastruktura
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# Gina-gaya ang pag-provision ng imprastruktura nang hindi ito ide-deploy
+# Sinusuri ang mga template ng Bicep/Terraform at ipinapakita:
+# - Mga resource na idaragdag (berde +)
+# - Mga resource na babaguhin (dilaw ~)
+# - Mga resource na tatanggalin (pula -)
+# Ligtas patakbuhin - walang aktwal na pagbabago na gagawin sa kapaligiran ng Azure
+
+# Buuin ang imprastruktura mula sa azure.yaml
+azd infra synth
 ```
 
-### Pamamahala ng Serbisyo
+### Impormasyon ng Proyekto
 ```bash
-# List all services
-azd service list
+# Ipakita ang katayuan ng proyekto at mga endpoint
+azd show
 
-# Show service details
-azd service show --service web
+# Ipakita ang detalyadong impormasyon ng proyekto bilang JSON
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# Kunin ang mga endpoint ng serbisyo
+azd show --output json | jq '.services'
 ```
 
-## 🎯 Mabilisang Workflows
+## 🎯 Mabilis na Mga Workflow
 
-### Workflow ng Development
+### Workflow ng Pag-develop
 ```bash
-# Start new project
+# Magsimula ng bagong proyekto
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# I-deploy sa development
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# Gumawa ng mga pagbabago at i-deploy muli
 azd deploy
 
-# View logs
-azd logs --follow
+# Buksan ang dashboard ng pagmamanman
+azd monitor --live
 ```
 
-### Workflow ng Multi-Environment
+### Workflow para sa Maramihang Environment
 ```bash
-# Set up environments
+# Ihanda ang mga kapaligiran
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# I-deploy sa dev
 azd env select dev
 azd up
 
-# Test and promote to staging
+# Subukan at i-promote sa staging
 azd env select staging
 azd up
 
-# Deploy to production
+# I-deploy sa produksyon
 azd env select production
 azd up
 ```
 
-### Workflow ng Troubleshooting
+### Workflow para sa Troubleshooting
 ```bash
-# Enable debug mode
+# Paganahin ang debug mode
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# Suriin ang katayuan ng deployment
+azd show
 
-# Validate configuration
-azd config validate
+# I-validate ang konfigurasyon
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# Buksan ang dashboard ng pagmamanman para sa mga log
+azd monitor --logs
 
-# Check resource status
+# Suriin ang katayuan ng mga resource
 azd show --output json
 ```
 
-## 🔍 Mga Debugging Commands
+## 🔍 Mga Utos para sa Debugging
 
-### Debug Information
+### Impormasyon para sa Debug
 ```bash
-# Enable debug output
+# Paganahin ang output ng debug
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# I-disable ang telemetry para sa mas malinis na output
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# Suriin ang kasalukuyang konfigurasyon
+azd config list
 
-# Check authentication status
+# Suriin ang katayuan ng pagpapatunay
 az account show
 ```
 
-### Template Debugging
+### Debugging ng Template
 ```bash
-# List available templates with details
+# Ilista ang mga magagamit na template kasama ang mga detalye
 azd template list --output json
 
-# Show template information
+# Ipakita ang impormasyon ng template
 azd template show <template-name>
 
-# Validate template before init
+# Beripikahin ang template bago i-init
 azd template validate <template-name>
 ```
 
-## 📁 Mga Command sa File at Directory
+## 📁 Mga Utos para sa File at Directory
 
 ### Estruktura ng Proyekto
 ```bash
-# Show current directory structure
+# Ipakita ang kasalukuyang istruktura ng direktoryo
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigate to azd project root
+# Pumunta sa ugat ng proyekto ng azd
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# Ipakita ang direktoryo ng konfigurasyon ng azd
+echo $AZD_CONFIG_DIR  # Karaniwan ~/.azd
 ```
 
-## 🎨 Output Formatting
+## 🎨 Pag-format ng Output
 
-### JSON Output
+### Output na JSON
 ```bash
-# Get JSON output for scripting
+# Kumuha ng JSON na output para sa scripting
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# I-parse gamit ang jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Table Output
+### Output sa Talahanayan
 ```bash
-# Format as table
+# I-format bilang talahanayan
 azd env list --output table
-azd service list --output table
+
+# Tingnan ang mga naka-deploy na serbisyo
+azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Karaniwang Kombinasyon ng Command
+## 🔧 Karaniwang Kombinasyon ng Mga Utos
 
-### Health Check Script
+### Script para sa Health Check
 ```bash
 #!/bin/bash
-# Quick health check
+# Mabilis na pagsusuri sa kalusugan
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
-### Deployment Validation
+### Pagpapatunay ng Pag-deploy
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# Pagpapatunay bago i-deploy
+azd show
+azd provision --preview  # I-preview ang mga pagbabago bago i-deploy
 az account show
 ```
 
 ### Paghahambing ng Environment
 ```bash
 #!/bin/bash
-# Compare environments
+# Ihambing ang mga kapaligiran
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -450,10 +456,10 @@ for env in dev staging production; do
 done
 ```
 
-### Resource Cleanup Script
+### Script para sa Paglilinis ng Mga Resource
 ```bash
 #!/bin/bash
-# Clean up old environments
+# Linisin ang mga lumang kapaligiran
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -461,80 +467,83 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 Environment Variables
+## 📝 Mga Variable ng Environment
 
-### Karaniwang Environment Variables
+### Mga Karaniwang Variable ng Environment
 ```bash
-# Azure configuration
+# Konfigurasyon ng Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# Konfigurasyon ng AZD
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# Konfigurasyon ng aplikasyon
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Mga Emergency Commands
+## 🚨 Mga Pang-emergency na Utos
 
 ### Mabilisang Pag-aayos
 ```bash
-# Reset authentication
+# I-reset ang awtentikasyon
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# Pilitin ang pag-refresh ng kapaligiran
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# I-deploy muli ang lahat ng serbisyo
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# Suriin ang katayuan ng pag-deploy
+azd show --output json
 ```
 
-### Mga Recovery Commands
+### Mga Utos para sa Pagbawi
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# Mabawi mula sa nabigong deployment - linisin at muling i-deploy
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# Muling i-provision ang imprastruktura lamang
+azd provision
+
+# Muling i-deploy ang aplikasyon lamang
+azd deploy
 ```
 
-## 💡 Mga Pro Tips
+## 💡 Mga Pro Tip
 
-### Aliases para sa Mas Mabilis na Workflow
+### Mga Alias para sa Mas Mabilis na Workflow
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# Idagdag sa iyong .bashrc o .zshrc
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Mga Shortcut ng Function
+### Mga Shortcut para sa Mga Function
 ```bash
-# Quick environment switching
+# Mabilis na pagpapalit ng kapaligiran
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# Mabilis na pag-deploy na may pagsubaybay
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# Katayuan ng kapaligiran
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -544,40 +553,42 @@ azd-status() {
 
 ### Pagkuha ng Tulong
 ```bash
-# General help
+# Pangkalahatang tulong
 azd --help
 azd help
 
-# Command-specific help
+# Tulong na tukoy sa utos
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# Ipakita ang impormasyon tungkol sa bersyon at pagbuo
 azd version
 azd version --output json
 ```
 
 ### Mga Link sa Dokumentasyon
 ```bash
-# Open documentation in browser
+# Buksan ang dokumentasyon sa browser
 azd docs
 
-# Show template documentation
+# Ipakita ang dokumentasyon ng template
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tip**: I-bookmark ang cheat sheet na ito at gamitin ang `Ctrl+F` para mabilisang mahanap ang mga command na kailangan mo!
+**Tip**: I-bookmark ang cheat sheet na ito at gamitin ang `Ctrl+F` para mabilis na hanapin ang mga utos na kailangan mo!
 
 ---
 
-**Pag-navigate**
-- **Nakaraang Aralin**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **Susunod na Aralin**: [Glossary](glossary.md)
+**Navigasyon**
+- **Nakaraang Aralin**: [Mga Preflight Checks](../docs/pre-deployment/preflight-checks.md)
+- **Susunod na Aralin**: [Glosaryo](glossary.md)
 
 ---
 
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Paunawa:
+Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong salin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Ang orihinal na dokumento sa katutubong wika nito ang dapat ituring na awtoritatibong pinagkukunan. Para sa mga kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling‑tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,112 +1,103 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4a896781acb2a7bebb3c4c66c4f46e7f",
-  "translation_date": "2025-11-23T22:32:18+00:00",
-  "source_file": "examples/README.md",
-  "language_code": "my"
-}
--->
-# ဥပမာများ - AZD Template နှင့် Configuration များအတွက် လက်တွေ့အသုံးပြုနိုင်သော လမ်းညွှန်
+# ဥပမာများ - လက်တွေ့ AZD ဖောင်တမ်းများနှင့် ဖွဲ့စည်းမှုများ
 
-**ဥပမာများမှ သင်ယူခြင်း - အခန်းအလိုက် စီစဉ်ထားခြင်း**
-- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD For Beginners](../README.md)
-- **📖 အခန်းအလိုက် စီစဉ်မှု**: သင်ယူမှု အခက်အခဲအလိုက် စီစဉ်ထားသော ဥပမာများ
-- **🚀 ဒေသတွင်း ဥပမာ**: [Retail Multi-Agent Solution](retail-scenario.md)
-- **🤖 ပြင်ပ AI ဥပမာများ**: Azure Samples repositories link များ
+**ဥပမာဖြင့် သင်ယူရန် - အခန်းအလိုက် စီစဉ်ထားသည်**
+- **📚 ကို႔သင်ခန်းစာ မူလစာမျက်နှာ**: [AZD စတင်သူများအတွက်](../README.md)
+- **📖 အခန်း မြေပုံစနစ်**: သင်ယူခြင်း၏ အခွင့်အလမ်းအမျိုးအစားအရ ဥပမာများ စီစဉ်ထားသည်
+- **🚀 ကိုယ်ပိုင် ဥပမာ**: [Retail Multi-Agent Solution](retail-scenario.md)
+- **🤖 ပြင်ပ AI ဥပမာများ**: Azure Samples ကိုင်တွယ်ထားသည့် repository များသို့ လင့်ခ်များ
 
-> **📍 အရေးကြီး: ဒေသတွင်း vs ပြင်ပ ဥပမာများ**  
-> ဤ repository တွင် **အပြည့်အစုံသော ဒေသတွင်း ဥပမာ ၄ ခု** ပါဝင်ပြီး အကောင်အထည်ဖော်ထားသည်။  
-> - **Azure OpenAI Chat** (GPT-4 chat interface ဖြင့် deployment)  
-> - **Container Apps** (Simple Flask API + Microservices)  
+> **📍 အရေးကြီး: ကိုယ်ပိုင် ဥပမာများနှင့် ပြင်ပ ဥပမာများ**  
+> ဤ repository တွင် အပြည့်အစုံ တည်ဆောက်ထားသော **ကိုယ်ပိုင် ဥပမာ 4 ခု** ပါဝင်သည်။  
+> - **Azure OpenAI Chat** (GPT-4 ဖြန့်ချိမှုနှင့် ဆက်သွယ်ပြောဆိုမည့် အင်တာဖေ့စ်)  
+> - **Container Apps** (Simple Flask API + မိုက်ကရိုစားဗစ်များ)  
 > - **Database App** (Web + SQL Database)  
-> - **Retail Multi-Agent** (Enterprise AI Solution)  
+> - **Retail Multi-Agent** (စီးပွားရေး AI ဖြေရှင်းချက်)  
 >  
-> အပိုဆောင်း ဥပမာများမှာ Azure-Samples repositories မှ **ပြင်ပ ရင်းမြစ်များ** ဖြစ်ပြီး clone လုပ်နိုင်ပါသည်။
+> အပိုထပ်ထည့်ထားသော ဥပမာများမှာ clone ယူနိုင်သော Azure-Samples repository များသို့ ညွှန်ပြထားသော **ပြင်ပ ရည်ညွှန်းချက်များ** ဖြစ်သည်။
 
 ## နိဒါန်း
 
-ဤ directory သည် Azure Developer CLI ကို လက်တွေ့ကျကျ လေ့ကျင့်ရန်အတွက် လက်တွေ့ ဥပမာများနှင့် ရင်းမြစ်များကို ပံ့ပိုးပေးသည်။ Retail Multi-Agent scenario သည် ဤ repository တွင် ပါဝင်သော အပြည့်အစုံ၊ ထုတ်လုပ်မှုအဆင့် အကောင်အထည်ဖော်မှုဖြစ်သည်။ အပိုဆောင်း ဥပမာများမှာ AZD pattern များကို ပြသသည့် တရားဝင် Azure Samples များကို ရည်ညွှန်းသည်။
+ဤ directory သည် Azure Developer CLI ကို လက်တွေ့ကျကျ လေ့လာနိုင်စေရန် လက်တွဲ လေ့ကျင့်ရေး ဥပမာများနှင့် ရည်ညွှန်းချက်များကို ပေးထားသည်။ Retail Multi-Agent သဘောတရားသည် ဤ repository တွင် ပါဝင်သည့် စီးပွားရေး အသုံးပြုနိုင်အဆင့် အပြည့်အစုံဖြစ်သော အကောင်အထည်ဖော်မှုတစ်ခုဖြစ်သည်။ အပိုအတိုးပေးထားသည့် ဥပမာများမှာ မတူညီသော AZD ပုံစံများကို ပြသသည့် တရားဝင် Azure Samples များကို ရည်ညွှန်းထားသည်။
 
-### အခက်အခဲ အဆင့်သတ်မှတ်ချက်
+### ရှုပ်ထွေးမှု အဆင့် အညွှန်း
 
-- ⭐ **Beginner** - အခြေခံအကြောင်းအရာများ၊ တစ်ခုတည်းသော service၊ ၁၅-၃၀ မိနစ်
-- ⭐⭐ **Intermediate** - အများအပြားသော service များ၊ database ပေါင်းစည်းမှု၊ ၃၀-၆၀ မိနစ်
-- ⭐⭐⭐ **Advanced** - ရှုပ်ထွေးသော architecture၊ AI ပေါင်းစည်းမှု၊ ၁-၂ နာရီ
-- ⭐⭐⭐⭐ **Expert** - ထုတ်လုပ်မှုအဆင့်၊ စီးပွားရေး pattern များ၊ ၂ နာရီနှင့်အထက်
+- ⭐ **စတင်သူ** - အခြေခံ အ概念များ၊ တစ်ဝန်ဆောင်မှုတည်း၊ 15-30 မိနစ်
+- ⭐⭐ **အလယ်အလတ်** - ဝန်ဆောင်မှုမျိုးစုံ၊ ဒေတာဘေ့စ် ပေါင်းစည်းမှု၊ 30-60 မိနစ်
+- ⭐⭐⭐ **မြင့်မား** - ဖွဲ့စည်းမှု မျိုးစုံ၊ AI ပေါင်းစည်းမှု၊ 1-2 နာရီ
+- ⭐⭐⭐⭐ **အထူးကျွမ်းကျင်သူ** - ထုတ်လုပ်မှုအသင့်၊ စီးပွားရေး ပုံစံများ၊ 2 နာရီထက်များ
 
-## 🎯 ဤ Repository တွင် ပါဝင်သော အချက်အလက်များ
+## 🎯 ဤ Repository တွင် အရာများ ဘာတွေ ပါလဲ
 
-### ✅ ဒေသတွင်း အကောင်အထည်ဖော်မှု (အသုံးပြုရန် အသင့်)
+### ✅ ကိုယ်ပိုင် အကောင်အထည် (အသုံးပြုရန် အသင့်)
 
 #### [Azure OpenAI Chat Application](azure-openai-chat/README.md) 🆕
-**ဤ repo တွင် ပါဝင်သော GPT-4 deployment နှင့် chat interface အပြည့်အစုံ**
+**ဤ repo ထဲတွင် GPT-4 ဖြန့်ချိမှုနှင့် ဆွေးနွေးမှု အင်တာဖေ့စ် အပြည့်အစုံ ပါရှိသည်**
 
-- **တည်နေရာ**: `examples/azure-openai-chat/`
-- **အခက်အခဲ**: ⭐⭐ (Intermediate)
-- **ပါဝင်သောအရာများ**:
-  - Azure OpenAI deployment (GPT-4) အပြည့်အစုံ
-  - Python command-line chat interface
+- **တည်နေရာ:** `examples/azure-openai-chat/`
+- **အခက်အခဲ:** ⭐⭐ (အလယ်အလတ်)
+- **ပါဝင်သည့်အရာများ:**
+  - Azure OpenAI ဖြန့်ချိမှု အပြည့်အစုံ (GPT-4)
+  - Python command-line ဆွေးနွေးမှု အင်တာဖေ့စ်
   - API key များအတွက် Key Vault ပေါင်းစည်းမှု
-  - Bicep infrastructure templates
-  - Token အသုံးပြုမှုနှင့် ကုန်ကျစရိတ် ထိန်းချုပ်မှု
-  - Rate limiting နှင့် error handling
+  - Bicep အဆောက်အအုံ ဖောင့်တမ်းများ
+  - တိုကင် အသုံးပြုမှုနှင့် ကုန်ကျစရိတ် မှတ်တမ်းတင်ခြင်း
+  - နှုန်းချိန် ကန့်သတ်ခြင်းနှင့် အမှားကိုင်တွယ်မှုပုံစံများ
 
 **Quick Start:**
 ```bash
-# ဥပမာသို့သွားပါ
+# ဥပမာသို့ သွားပါ
 cd examples/azure-openai-chat
 
-# အားလုံးကိုဖြန့်ချိပါ
+# အားလုံးကို ဖြန့်ချိပါ
 azd up
 
-# လိုအပ်သောအရာများကိုတပ်ဆင်ပြီးစကားပြောရန်စတင်ပါ
+# လိုအပ်သော dependency များကို ထည့်သွင်းပြီး စကားပြောခြင်းကို စတင်ပါ
 pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-**နည်းပညာများ**: Azure OpenAI, GPT-4, Key Vault, Python, Bicep
+**နည်းပညာများ:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
 
 #### [Container App Examples](container-app/README.md) 🆕
-**ဤ repo တွင် ပါဝင်သော container deployment ဥပမာများ**
+**ဤ repo တွင် ကွန်တိနာ ဖြန့်ချိမှု အပြည့်အစုံ ပါရှိသည်**
 
-- **တည်နေရာ**: `examples/container-app/`
-- **အခက်အခဲ**: ⭐-⭐⭐⭐⭐ (Beginner မှ Advanced အထိ)
-- **ပါဝင်သောအရာများ**:
-  - [Master Guide](container-app/README.md) - container deployment များအတွက် အပြည့်အစုံ လမ်းညွှန်
+- **တည်နေရာ:** `examples/container-app/`
+- **အခက်အခဲ:** ⭐-⭐⭐⭐⭐ (စတင်သူမှ မြင့်မားသူအထိ)
+- **ပါဝင်သည့်အရာများ:**
+  - [Master Guide](container-app/README.md) - ကွန်တိနာ ဖြန့်ချိမှုများ၏ အနှစ်ချုပ်
   - [Simple Flask API](../../../examples/container-app/simple-flask-api) - အခြေခံ REST API ဥပမာ
-  - [Microservices Architecture](../../../examples/container-app/microservices) - ထုတ်လုပ်မှုအဆင့် multi-service deployment
-  - Quick Start, Production, နှင့် Advanced pattern များ
-  - Monitoring, security, နှင့် cost optimization
+  - [Microservices Architecture](../../../examples/container-app/microservices) - ထုတ်လုပ်ရေး အဆင့်သင့် မာလတီ-ဆာဗစ် ဖြန့်ချိမှု
+  - Quick Start, Production, နှင့် Advanced ပုံစံများ
+  - မော်နီတာရေး၊ လုံခြုံရေး၊ နှင့် ကုန်ကျစရိတ် တိုးတက်မှုများ
 
 **Quick Start:**
 ```bash
-# မာစတာလမ်းညွှန်ကိုကြည့်ပါ
+# ဦးဆောင်လမ်းညွှန်ကိုကြည့်ရန်
 cd examples/container-app
 
-# ရိုးရှင်းသော Flask API ကိုထုတ်လုပ်ပါ
+# ရိုးရှင်းသော Flask API ကိုတပ်ဆင်ရန်
 cd simple-flask-api
 azd up
 
-# မိုက်ခရိုဆာဗစ်များနမူနာကိုထုတ်လုပ်ပါ
+# မိုက်ခရိုဆာဗစ် ဥပမာကို တပ်ဆင်ရန်
 cd ../microservices
 azd up
 ```
 
-**နည်းပညာများ**: Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
+**နည်းပညာများ:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
 #### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
-**ဤ repo တွင် ပါဝင်သော ထုတ်လုပ်မှုအဆင့် အကောင်အထည်ဖော်မှု**
+**ဤ repo တွင် ထုတ်လုပ်ရေး အသင့် အပြည့်အစုံ ပါရှိသော အကောင်အထည်**
 
-- **တည်နေရာ**: `examples/retail-multiagent-arm-template/`
-- **အခက်အခဲ**: ⭐⭐⭐⭐ (Advanced)
-- **ပါဝင်သောအရာများ**:
-  - ARM deployment template အပြည့်အစုံ
-  - Multi-agent architecture (Customer + Inventory)
+- **တည်နေရာ:** `examples/retail-multiagent-arm-template/`
+- **အခက်အခဲ:** ⭐⭐⭐⭐ (မြင့်မား)
+- **ပါဝင်သည့်အရာများ:**
+  - ARM ဖြန့်ချိမှု ဖောင်တမ်း အပြည့်အစုံ
+  - Multi-agent ဖွဲ့စည်းမှု (Customer + Inventory)
   - Azure OpenAI ပေါင်းစည်းမှု
-  - AI Search with RAG
-  - Monitoring အပြည့်အစုံ
-  - One-click deployment script
+  - RAG ဖြင့် AI Search
+  - ကျယ်ပြန့်သော မော်နီတာရေးအချက်အလက်များ
+  - One-click ဖြန့်ချိရေး script
 
 **Quick Start:**
 ```bash
@@ -114,74 +105,74 @@ cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**နည်းပညာများ**: Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
+**နည်းပညာများ:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 ပြင်ပ Azure Samples (Clone လုပ်ရန်)
+## 🔗 ပြင်ပ Azure Samples (Clone ယူ၍ အသုံးပြုနိုင်ပါသည်)
 
-အောက်ပါ ဥပမာများကို တရားဝင် Azure-Samples repositories တွင် ထိန်းသိမ်းထားသည်။ AZD pattern များကို လေ့လာရန် clone လုပ်ပါ:
+အောက်ပါ ဥပမာများသည် တရားဝင် Azure-Samples repositories များတွင် ထိန်းသိမ်းထားသည်။ မိတ္တူကူး၍ မတူညီသော AZD ပုံစံများကို လေ့လာပါ။
 
-### အခြေခံ အပလီကေးရှင်းများ (အခန်း ၁-၂)
+### ရိုးရှင်းသော အက်ပလိကေးရှင်းများ (အခန်း 1-2)
 
-| Template | Repository | အခက်အခဲ | Services |
+| Template | Repository | Complexity | Services |
 |:---------|:-----------|:-----------|:---------|
-| **Python Flask API** | [Local: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Microservices** | [Local: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Multi-service, Service Bus, Cosmos DB, SQL |
+| **Python Flask API** | [ဒေသ (Local): simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| **Microservices** | [ဒေသ (Local): microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | မာလတီ-ဆာဗစ်၊ Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
-**အသုံးပြုရန် နည်းလမ်း:**
+**အသုံးပြုပုံ:**
 ```bash
-# မည်သည့်နမူနာမဆို ကူးယူပါ
+# မည့်သည့်ဥပမာကိုမဆို ကလုန်းလုပ်ပါ
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
-# တင်သွင်းပါ
+# တပ်ဆင်ပါ
 azd up
 ```
 
-### AI အပလီကေးရှင်း ဥပမာများ (အခန်း ၂, ၅, ၈)
+### AI အက်ပလိကေးရှင်း ဥပမာများ (အခန်း 2, 5, 8)
 
-| Template | Repository | အခက်အခဲ | အဓိက |
+| Template | Repository | Complexity | Focus |
 |:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [Local: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 deployment |
-| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | အခြေခံ AI chat |
-| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent framework |
-| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG pattern |
+| **Azure OpenAI Chat** | [ဒေသ (Local): azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 ဖြန့်ချိမှု |
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | အခြေခံ AI စကားဝိုင်း |
+| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | အေဂျင့် ဖရိမ်းဝက်크 |
+| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG ပုံစံ |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | စီးပွားရေး AI |
 
-### Database & Advanced Patterns (အခန်း ၃-၈)
+### ဒေတာဘေ့စ်နှင့် အဆင့်မြင့် ပုံစံများ (အခန်း 3-8)
 
-| Template | Repository | အခက်အခဲ | အဓိက |
+| Template | Repository | Complexity | Focus |
 |:---------|:-----------|:-----------|:------|
-| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Database integration |
+| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | ဒေတာဘေ့စ် ပေါင်းစည်းမှု |
 | **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
-| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Multi-service |
+| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | မာလတီ-ဆာဗစ် |
 | **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
-## သင်ယူရည်မှန်းချက်များ
+## သင်ယူမှု ရည်မှန်းချက်များ
 
-ဤဥပမာများကို လေ့ကျင့်ခြင်းဖြင့် သင်သည်:
-- လက်တွေ့ကျကျ application scenario များဖြင့် Azure Developer CLI workflow များကို လေ့ကျင့်နိုင်မည်
-- အမျိုးမျိုးသော application architecture များနှင့် ၎င်းတို့၏ azd implementation များကို နားလည်နိုင်မည်
-- Azure service များအတွက် Infrastructure as Code pattern များကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
-- Configuration management နှင့် ပတ်ဝန်းကျင်အလိုက် deployment strategy များကို အသုံးချနိုင်မည်
-- Monitoring, security, နှင့် scaling pattern များကို လက်တွေ့ context များတွင် အကောင်အထည်ဖော်နိုင်မည်
-- လက်တွေ့ deployment scenario များတွင် ပြဿနာရှာဖွေခြင်းနှင့် debugging လုပ်ငန်းစဉ်များကို ကျွမ်းကျင်စွာ ဆောင်ရွက်နိုင်မည်
+ဤ ဥပမာများအား လက်တွေ့ လုပ်ဆောင်ခြင်းဖြင့် သင်သည်:
+- အမှန်တကယ် အသုံးချနိုင်သော application များနှင့် Azure Developer CLI workflow များကို လေ့ကျင့်နိုင်မည်
+- မတူညီသည့် application ဖွဲ့စည်းမှုများနှင့် ၎င်းတို့၏ azd အကောင်အထည်ဖော်မှုများကို နားလည်သိရှိမည်
+- မတူညီသော Azure ဝန်ဆောင်မှုများအတွက် Infrastructure as Code ပုံစံများကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်မည်
+- ပတ်ဝန်းကျင်အထူး deployment နဲ့ configuration စီမံခန့်ခွဲမှုများကို ကျင့်သုံးနိုင်မည်
+- မော်နီတာရေး၊ လုံခြုံရေးနှင့် တိုးချဲ့နိုင်မှု ပုံစံများအား လက်တွေ့အသုံးပြုနိုင်မည်
+- တကယ့် deployment အခက်အခဲများကို ဖြေရှင်းခြင်းနှင့် ပြဿနာရှာဖွေခြင်း အတွေ့အကြုံ ရရှိမည်
 
-## သင်ယူရလဒ်များ
+## သင်ယူပြီးရမည့် နောက်ဆက်တွဲ အကျိုးသက်ရောက်မှုများ
 
-ဤဥပမာများကို ပြီးမြောက်စွာ လေ့ကျင့်ပြီးပါက သင်သည်:
-- Azure Developer CLI ကို အသုံးပြု၍ အမျိုးမျိုးသော application များကို ယုံကြည်စွာ deploy လုပ်နိုင်မည်
-- ပေးထားသော template များကို သင့် application လိုအပ်ချက်များအတွက် ပြောင်းလဲနိုင်မည်
-- Bicep အသုံးပြု၍ မိမိစိတ်ကြိုက် infrastructure pattern များကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်နိုင်မည်
-- Dependency များကို မှန်ကန်စွာ ပေါင်းစည်းထားသော ရှုပ်ထွေးသော multi-service application များကို configure လုပ်နိုင်မည်
-- လက်တွေ့ scenario များတွင် security, monitoring, နှင့် performance အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများကို အသုံးပြုနိုင်မည်
-- လက်တွေ့ deployment များကို troubleshooting နှင့် optimize လုပ်နိုင်မည်
+ဥပမာများကို ပြီးမြောက်စွာ လုပ်ဆောင်ပြီးနောက် သင်သည်:
+- Azure Developer CLI ကို အသုံးပြုပြီး မတူညီသော application အမျိုးအစားများကို ကိုယ့်အလိုက် ဖြန့်ချိနိုင်မည်
+- ပေးထားသည့် ဖောင်တမ်းများကို ကိုယ့် application လိုအပ်ချက်များအတိုင်း ညှိနှိုင်းပြင်ဆင်နိုင်မည်
+- Bicep အသုံးပြုပြီး ကိုယ့်ပုဂ္ဂိုလ်ရေး အဆောက်အအုံ ပုံစံများကို ဒီဇိုင်းဆွဲတည်ဆောက်နိုင်မည်
+- လိုအပ်သည့် လုပ်ငန်းကြီးများအတွက် dependencies များကို သတ်မှတ်ပြီး မာလတီ-ဆာဗစ် applications များကို ဖောင့်ချတည်ဆောက်နိုင်မည်
+- လုံခြုံရေး၊ မော်နီတာရေးနှင့် စွမ်းဆောင်ရည် တိုးတက်ရေး အကောင်းဆုံးနည်းလမ်းများကို လက်တွေ့အသုံးချနိုင်မည်
+- လက်တွေ့အခြေအနေများအပေါ် အခြေခံ၍ deployment များကို ပြဿနာဖြေရှင်းခြင်းနှင့် မြှင့်တင်ခြင်းများ ပြုလုပ်နိုင်မည်
 
-## Directory ဖွဲ့စည်းမှု
+## ဖိုင်ဖွဲ့စည်းတည်နေရာ
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -197,286 +188,298 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Quick Start ဥပမာများ
+## အမြန် စတင်ရန် ဥပမာများ
 
-> **💡 AZD အသစ်စတင်သူများအတွက်**: ဥပမာ #1 (Flask API) ဖြင့် စတင်ပါ - ၂၀ မိနစ်ခန့်သာ ကြာပြီး အခြေခံအကြောင်းအရာများကို သင်ပေးပါသည်။
+> **💡 AZD ကို မသိသေးပါသလား?** ဥပမာ #1 (Flask API) ဖြင့် စတင်ပါ - အချိန် ~20 မိနစ်ယူလိမ့်မည်နှင့် အခြေခံ အယူအဆများကို သင်ကြားပေးပါမည်။
 
-### Beginner များအတွက်
-1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Local) ⭐  
-   Scale-to-zero ဖြင့် အခြေခံ REST API တစ်ခုကို deploy လုပ်ပါ  
-   **အချိန်**: ၂၀-၂၅ မိနစ် | **ကုန်ကျစရိတ်**: $0-5/month  
-   **သင်လေ့လာမည့်အရာများ**: အခြေခံ azd workflow, containerization, health probes  
-   **မျှော်မှန်းရလဒ်**: "Hello, World!" ပြန်ပေးသော monitoring ပါဝင်သည့် API endpoint
+### စတင်သူများအတွက်
+1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (ဒေသ) ⭐  
+   scale-to-zero ဖြင့် ရိုးရှင်းသော REST API တစ်ခု ဖြန့်ချိပါ  
+   **အချိန်:** 20-25 မိနစ် | **ကုန်ကျစရိတ်:** $0-5/လ  
+   **သင်ယူရန်:** အခြေခံ azd workflow, containerization, health probes  
+   **မျှော်မှန်းသည့် ရလဒ်:** "Hello, World!" ပြန်လည်ထုတ်ပေးမည့် အလုပ်လုပ်နိုင်သော API endpoint နှင့် မော်နီတာရေး
 
 2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   MongoDB ဖြင့် Node.js Express web application တစ်ခု deploy လုပ်ပါ  
-   **အချိန်**: ၂၅-၃၅ မိနစ် | **ကုန်ကျစရိတ်**: $10-30/month  
-   **သင်လေ့လာမည့်အရာများ**: Database integration, environment variables, connection strings  
-   **မျှော်မှန်းရလဒ်**: Create/read/update/delete လုပ်ဆောင်နိုင်သည့် Todo list app
+   MongoDB နှင့် Node.js Express web application တစ်ခု ဖြန့်ချိပါ  
+   **အချိန်:** 25-35 မိနစ် | **ကုန်ကျစရိတ်:** $10-30/လ  
+   **သင်ယူရန်:** ဒေတာဘေ့စ် ပေါင်းစည်းမှု, environment variables, connection strings  
+   **မျှော်မှန်းသည့် ရလဒ်:** create/read/update/delete အလုပ်လုပ်နိုင်သည့် Todo list app
 
 3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Azure Static Web Apps ဖြင့် React static website တစ်ခု host လုပ်ပါ  
-   **အချိန်**: ၂၀-၃၀ မိနစ် | **ကုန်ကျစရိတ်**: $0-10/month  
-   **သင်လေ့လာမည့်အရာများ**: Static hosting, serverless functions, CDN deployment  
-   **မျှော်မှန်းရလဒ်**: React UI နှင့် API backend, automatic SSL, global CDN
+   Azure Static Web Apps ဖြင့် React static website ကို မက်စ်တင်ပါ  
+   **အချိန်:** 20-30 မိနစ် | **ကုန်ကျစရိတ်:** $0-10/လ  
+   **သင်ယူရန်:** Static hosting, serverless functions, CDN ဖြန့်ချိမှု  
+   **မျှော်မှန်းသည့် ရလဒ်:** API backend ပါရှိသည့် React UI, automatic SSL, global CDN
 
-### Intermediate အသုံးပြုသူများအတွက်
-4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (Local) ⭐⭐  
-   GPT-4 နှင့် chat interface ကို secure API key management ဖြင့် deploy လုပ်ပါ  
-   **အချိန်**: ၃၅-၄၅ မိနစ် | **ကုန်ကျစရိတ်**: $50-200/month  
-   **သင်လေ့လာမည့်အရာများ**: Azure OpenAI deployment, Key Vault integration, token tracking  
-   **မျှော်မှန်းရလဒ်**: GPT-4 နှင့် cost monitoring ပါဝင်သည့် chat application
+### အလယ်အလတ် သုံးသူများအတွက်
+4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (ဒေသ) ⭐⭐  
+   GPT-4 ဖြန့်ချိမှုနှင့် စကားပြောအင်တာဖေ့စ်၊ API key များလုံခြုံစွာ စီမံခြင်း  
+   **အချိန်:** 35-45 မိနစ် | **ကုန်ကျစရိတ်:** $50-200/လ  
+   **သင်ယူရန်:** Azure OpenAI ဖြန့်ချိမှု, Key Vault ပေါင်းစည်းမှု, တိုကင် ချက်ပိုင်း ထိန်းသိမ်းမှု  
+   **မျှော်မှန်းသည့် ရလဒ်:** GPT-4 ပါရှိသော စကားဝိုင်းအက်ပလိကေးရှင်းနှင့် ကုန်ကျစရိတ် မော်နီတာရေး
 
-5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Local) ⭐⭐⭐⭐  
-   ထုတ်လုပ်မှုအဆင့် multi-service architecture  
-   **အချိန်**: ၄၅-၆၀ မိနစ် | **ကုန်ကျစရိတ်**: $50-150/month  
-   **သင်လေ့လာမည့်အရာများ**: Service communication, message queuing, distributed tracing  
-   **မျှော်မှန်းရလဒ်**: Monitoring ပါဝင်သည့် 2-service system (API Gateway + Product Service)
+5. **[Container App - Microservices](../../../examples/container-app/microservices)** (ဒေသ) ⭐⭐⭐⭐  
+   ထုတ်လုပ်ရေးအသင့် မာလတီ-ဆာဗစ် ဖွဲ့စည်းမှု  
+   **အချိန်:** 45-60 မိနစ် | **ကုန်ကျစရိတ်:** $50-150/လ  
+   **သင်ယူရန်:** ဝန်ဆောင်မှု ဆက်သွယ်ရေး, message queuing, distributed tracing  
+   **မျှော်မှန်းသည့် ရလဒ်:** API Gateway + Product Service ပါရှိသည့် 2-စနစ် စနစ်နှင့် မော်နီတာရေး
 
 6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   C# API နှင့် Azure SQL Database ပါဝင်သည့် web application  
-   **အချိန်**: ၃၀-၄၅ မိနစ် | **ကုန်ကျစရိတ်**: $20-80/month  
-   **သင်လေ့လာမည့်အရာများ**: Entity Framework, database migrations, connection security  
-   **မျှော်မှန်းရလဒ်**: Azure SQL backend နှင့် automatic schema deployment ပါဝင်သည့် C# API
+   C# API နှင့် Azure SQL Database ပါသော Web application  
+   **အချိန်:** 30-45 မိနစ် | **ကုန်ကျစရိတ်:** $20-80/လ  
+   **သင်ယူရန်:** Entity Framework, database migrations, connection security  
+   **မျှော်မှန်းသည့် ရလဒ်:** Azure SQL backend နဲ့ C# API၊ အလိုအလျောက် schema ဖြန့်ချိမှု
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   HTTP triggers နှင့် Cosmos DB ပါဝင်သည့် Python Azure Functions  
-   **အချိန်**: ၃၀-၄၀ မိနစ် | **ကုန်ကျစရိတ်**: $10-40/month  
-   **သင်လေ့လာမည့်အရာများ**: Event-driven architecture, serverless scaling, NoSQL integration  
-   **မျှော်မှန်းရလဒ်**: Cosmos DB storage ဖြင့် HTTP requests ကို တုံ့ပြန်သော Function app
+   HTTP triggers နှင့် Cosmos DB ပါသည့် Python Azure Functions  
+   **အချိန်:** 30-40 မိနစ် | **ကုန်ကျစရိတ်:** $10-40/လ  
+   **သင်ယူရန်:** event-driven architecture, serverless scaling, NoSQL ပေါင်းစည်းမှု  
+   **မျှော်မှန်းသည့် ရလဒ်:** HTTP request များကို တုံ့ပြန်နိုင်သည့် Function app နှင့် Cosmos DB သိုလှောင်မှု
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Container Apps နှင့် API gateway ပါဝင်သည့် multi-service Java application  
-   **အချိန်**: ၆၀-၉၀ မိနစ် | **ကုန်ကျစရိတ်**: $80-200/month  
-   **သင်လေ့လာမည့်အရာများ**: Spring Boot deployment, service mesh, load balancing  
-   **မျှော်မှန်းရလဒ်**: Service discovery နှင့် routing ပါဝင်သည့် multi-service Java system
+   Container Apps နှင့် API gateway ပါသည့် မာလတီ-ဆာဗစ် Java application  
+   **အချိန်:** 60-90 မိနစ် | **ကုန်ကျစရိတ်:** $80-200/လ  
+   **သင်ယူရန်:** Spring Boot ဖြန့်ချိမှု, service mesh, load balancing  
+   **မျှော်မှန်းသည့် ရလဒ်:** service discovery နှင့် routing ပါရှိသည့် မာလတီ-ဆာဗစ် Java စနစ်
 
-### Azure AI Foundry Template များ
+### Microsoft Foundry ဖောင်တမ်းများ
 
 1. **[Azure OpenAI Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
-   GPT-4 deployment နှင့် chat interface အပြည့်အစုံ  
-   **အချိန်**: ၃၅-၄၅ မိနစ် | **ကုန်ကျစရိတ်**: $50-200/month  
-   **မျှော်မှန်းရလဒ်**: Token tracking နှင့် cost monitoring ပါဝင်သည့် chat application
+   GPT-4 ဖြန့်ချိမှုနှင့် စကားဝိုင်း အင်တာဖေ့စ် အပြည့်အစုံ  
+   **အချိန်:** 35-45 မိနစ် | **ကုန်ကျစရိတ်:** $50-200/လ  
+   **မျှော်မှန်းသည့် ရလဒ်:** တိုကင် များကို မှတ်တမ်းတင်နိုင်သည့် စကားဝိုင်း အက်ပလိကေးရှင်း
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   RAG architecture ဖြင့် intelligent chat application  
-   **အချိန်**: ၆၀-၉၀ မိနစ် | **ကုန်ကျစရိတ်**: $100-300/month  
-   **မျှော်မှန်းရလဒ်**: Document search နှင့် citations ပါဝင်သည့် RAG-powered chat interface
+   RAG ဖွဲ့စည်းမှုပါရှိသည့် တိုးတက်သော စကားဝိုင်း အက်ပလိကေးရှင်း  
+   **အချိန်:** 60-90 မိနစ် | **ကုန်ကျစရိတ်:** $100-300/လ  
+   **မျှော်မှန်းသည့် ရလဒ်:** စာရွက်စာတမ်းရှာဖွေရေးနှင့် ကိုးကားချက်များပါရှိသည့် RAG အားဖြင့် အလုပ်လုပ်သော စကားဝိုင်း
 
 3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   Azure AI services အသုံးပြု၍ document analysis  
-   **အချိန်**: ၄၀-၆၀ မိနစ် | **ကုန်ကျစရိတ်**: $20-80/month  
-   **မျှော်မှန်းရလဒ်**: Upload လုပ်ထားသော document များမှ text, tables, နှင့် entities ကို API ဖြင့် extract လုပ်ခြင်း
+   Azure AI ဝန်ဆောင်မှုများကို အသုံးပြု၍ စာရွက်စာတမ်း विश्लेषण  
+   **အချိန်:** 40-60 မိနစ် | **ကုန်ကျစရိတ်:** $20-80/လ  
+   **မျှော်မှန်းသည့် ရလဒ်:** တင်သွင်းထားသော စာရွက်စာတမ်းများမှ စာသား၊ ဇယားများနှင့် အရာဝတ္ထုများ ထုတ်ယူမည့် API
 
-4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/ml
-- **ထုတ်လုပ်မှုအခြေခံအဆောက်အအုံ**: Multi-region Azure OpenAI တည်ဆောက်မှုများ၊ AI ရှာဖွေမှု၊ Container Apps နှင့် စုံလင်သောစောင့်ကြည့်မှု
-- **အသင့်အသုံးပြုနိုင်သော ARM Template**: တစ်ချက်နှိပ်ပြီး deployment ပြုလုပ်နိုင်မှု၊ အမျိုးမျိုးသော configuration modes (Minimal/Standard/Premium) ဖြင့်
-- **အဆင့်မြင့်အင်္ဂါရပ်များ**: Red teaming လုံခြုံရေးစစ်ဆေးမှု၊ agent အကဲဖြတ်မှုစနစ်၊ ကုန်ကျစရိတ်အပေါ်ထိန်းချုပ်မှုနှင့် ပြဿနာဖြေရှင်းလမ်းညွှန်များ
-- **စစ်မှန်သောစီးပွားရေးအခြေအနေ**: Retailer ဖောက်သည်ပံ့ပိုးမှုအတွက် file upload, search integration နှင့် dynamic scaling ပါဝင်သော use case
+4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
+   Azure Machine Learning ဖြင့် MLOps workflow  
+   **အချိန်:** 2-3 နာရီ | **ကုန်ကျစရိတ်:** $150-500/လ  
+   **မျှော်မှန်းသည့် ရလဒ်:** သင်တန်းမှု၊ ဖြန့်ချိမှု နှင့် မော်နီတာရေး ပါရှိသည့် အလိုအလျောက် ML pipeline
 
-**နည်းပညာများ**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+### အမှန်တကယ် အသုံးချနိုင်သော ရောနှောမှုများ
 
-**ရှုပ်ထွေးမှုအဆင့်**: ⭐⭐⭐⭐ (အဆင့်မြင့် - စီးပွားရေးထုတ်လုပ်မှုအဆင့်)
+#### **Retail Multi-Agent Solution** 🆕
+**[အပြည့်အစုံ အကောင်အထည်ဖော်လမ်းညွှန်](./retail-scenario.md)**
 
-**အကောင်းဆုံးသင့်လျော်မှု**: AI ဖွံ့ဖြိုးရေးသူများ၊ solution architects များနှင့် ထုတ်လုပ်မှု multi-agent စနစ်များတည်ဆောက်နေသောအဖွဲ့များ
+AZD ဖြင့် ထုတ်လုပ်ရေး အသင့်၊ စီးပွားရေးအဆင့် AI application ဖြန့်ချိမှုကို ပြသသည့် ကာတွန်းတစ်ခုဖြစ်သည်။ ဤဇာတ်ကောင်တွင် သင့်အား ပေးစွမ်းသည်မှာ -
 
-**အမြန်စတင်ရန်**: `./deploy.sh -g myResourceGroup` ဖြင့် ARM template ကို အသုံးပြု၍ ၃၀ မိနစ်အတွင်း အပြည့်အစုံဖြေရှင်းချက်ကို deploy ပြုလုပ်ပါ။
+- **အပြည့်အစုံ ဖွဲ့စည်းပုံ**: ဖောက်သည် ဝန်ဆောင်မှုနှင့် လက်ကျန် စီမံခန့်ခွဲမှုအေဂျင့်များပါရှိသည့် multi-agent စနစ်
+- **Production Infrastructure**: Multi-region Azure OpenAI deployments, AI Search, Container Apps, and comprehensive monitoring
+- **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)
+- **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides
+- **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling
 
-## 📋 အသုံးပြုမှုညွှန်ကြားချက်များ
+**Technologies**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-### လိုအပ်ချက်များ
+**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
 
-မည်သည့်ဥပမာကိုမဆို run မပြုမီ:
-- ✅ Owner သို့မဟုတ် Contributor access ပါသော Azure subscription
-- ✅ Azure Developer CLI install ပြုလုပ်ပြီး ([Installation Guide](../docs/getting-started/installation.md))
-- ✅ Docker Desktop run လုပ်နေ (container ဥပမာများအတွက်)
-- ✅ သင့်လျော်သော Azure quotas (ဥပမာ-specific လိုအပ်ချက်များကိုစစ်ဆေးပါ)
+**Perfect for**: AI developers, solution architects, and teams building production multi-agent systems
 
-> **💰 ကုန်ကျစရိတ်သတိပေးချက်**: ဤဥပမာများသည် အမှန်တကယ် Azure resources များကိုဖန်တီးပြီး ကုန်ကျစရိတ်ရှိစေသည်။ တစ်ခုချင်းစီ README ဖိုင်များတွင် ကုန်ကျစရိတ်ခန့်မှန်းချက်များကိုကြည့်ပါ။ အဆင့်သတ်မှတ်ပြီးနောက် `azd down` ကို run လုပ်ပါ။
+**Quick Start**: Deploy the complete solution in under 30 minutes using the included ARM template with `./deploy.sh -g myResourceGroup`
 
-### ဥပမာများကို ဒေသတွင်းတွင် run လုပ်ခြင်း
+## 📋 အသုံးပြုနည်း ညွှန်ကြားချက်များ
 
-1. **ဥပမာကို Clone သို့မဟုတ် Copy ပြုလုပ်ပါ**
+### မလိုအပ်မီ
+
+Before running any example:
+- ✅ Azure subscription with Owner or Contributor access
+- ✅ Azure Developer CLI installed ([Installation Guide](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop running (for container examples)
+- ✅ Appropriate Azure quotas (check example-specific requirements)
+
+> **💰 စရိတ် သတိပေးချက်:** All examples create real Azure resources that incur charges. See individual README files for cost estimates. Remember to run `azd down` when done to avoid ongoing costs.
+
+### ပုံမှန်အား locally examples များ चलाउनနည်း
+
+1. **Clone or Copy Example**
    ```bash
-   # ရွေးချယ်လိုသော နမူနာသို့ သွားပါ
+   # လိုချင်သော ဥပမာသို့ သွားပါ
    cd examples/simple-web-app
    ```
 
-2. **AZD Environment ကို Initialize ပြုလုပ်ပါ**
+2. **Initialize AZD Environment**
    ```bash
-   # ရှိပြီးသား template ကို စတင်ပါ
+   # ရှိပြီးသား နမူနာဖြင့် စတင်ပါ
    azd init
    
-   # သို့မဟုတ် အခြား environment အသစ်တစ်ခုကို ဖန်တီးပါ
+   # သို့မဟုတ် အသစ်သော ပတ်ဝန်းကျင် ဖန်တီးပါ
    azd env new my-environment
    ```
 
-3. **Environment ကို Configure ပြုလုပ်ပါ**
+3. **Configure Environment**
    ```bash
-   # လိုအပ်သောအပြောင်းလဲများကို သတ်မှတ်ပါ
+   # လိုအပ်သော ဗားရီးယားများကို သတ်မှတ်ပါ
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
 
-4. **Deploy ပြုလုပ်ပါ**
+4. **Deploy**
    ```bash
-   # အခြေခံအဆောက်အအုံနှင့် အက်ပလီကေးရှင်းကို တင်သွင်းပါ
+   # အခြေခံအဆောက်အဦးနှင့် အက်ပလီကေးရှင်းကို ဖြန့်ချိပါ
    azd up
    ```
 
-5. **Deployment ကို Verify ပြုလုပ်ပါ**
+5. **Verify Deployment**
    ```bash
-   # ဝန်ဆောင်မှုအဆုံးစွန်များကိုရယူပါ
+   # ဝန်ဆောင်မှု endpoints များကို ရယူပါ
    azd env get-values
    
-   # အဆုံးစွန်ကိုစမ်းသပ်ပါ (ဥပမာ)
+   # endpoint ကို စမ်းသပ်ပါ (ဥပမာ)
    curl https://your-app-url.azurecontainer.io/health
    ```
    
-   **အောင်မြင်မှုအညွှန်းများ:**
-   - ✅ `azd up` အမှားမရှိဘဲပြီးဆုံးသည်
-   - ✅ Service endpoint သည် HTTP 200 ကိုပြန်ပေးသည်
-   - ✅ Azure Portal တွင် "Running" status ပြသသည်
-   - ✅ Application Insights သို့ telemetry ရောက်ရှိနေသည်
+   **Expected Success Indicators:**
+   - ✅ `azd up` completes without errors
+   - ✅ Service endpoint returns HTTP 200
+   - ✅ Azure Portal shows "Running" status
+   - ✅ Application Insights receiving telemetry
 
-> **⚠️ ပြဿနာများ?** Deployment troubleshooting အတွက် [Common Issues](../docs/troubleshooting/common-issues.md) ကိုကြည့်ပါ။
+> **⚠️ ပြဿနာများ ရှိပါသလား?** See [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) for deployment troubleshooting
 
-### ဥပမာများကို ပြင်ဆင်ခြင်း
+### ဥပမာများကို ကိုင်တွယ်ချိန် အက်ဒပ်
 
-ဥပမာတစ်ခုချင်းစီတွင်ပါဝင်သည်:
-- **README.md** - အသေးစိတ် setup နှင့် customization ညွှန်ကြားချက်များ
-- **azure.yaml** - AZD configuration (မှတ်ချက်များပါဝင်သည်)
-- **infra/** - Bicep templates (parameter ရှင်းလင်းချက်များပါဝင်သည်)
-- **src/** - နမူနာ application code
-- **scripts/** - သုံးစွဲမှုများအတွက် အကူအညီ script များ
+Each example includes:
+- **README.md** - အသေးစိတ် စတင်ခြင်းနှင့် ပုံစံပြင်ဆင်မှု ညွှန်ကြားချက်များ
+- **azure.yaml** - AZD ဖိုင်ကော်ဖီဂျာရေးရှင်းနှင့် မှတ်ချက်များ
+- **infra/** - parameter ရှင်းလင်းချက်များပါရှိသော Bicep ပုံစံများ
+- **src/** - နမူနာ application ကုဒ်
+- **scripts/** - ပုံမှန် အလုပ်များအတွက် အကူအ assistance စကရစ်များ
 
-## 🎯 သင်ယူမှုရည်မှန်းချက်များ
+## 🎯 သင်ယူရမည့် ရည်ရွယ်ချက်များ
 
 ### ဥပမာအမျိုးအစားများ
 
-#### **အခြေခံ Deployment များ**
-- Single-service applications
-- ရိုးရှင်းသော infrastructure patterns
-- အခြေခံ configuration management
-- ကုန်ကျစရိတ်သက်သာသော ဖွံ့ဖြိုးရေး setup များ
+#### **အခြေခံ တင်သွင်းမှုများ**
+- တစ်ခုတည်း ဝန်ဆောင်မှု applications
+- ရိုးရှင်းသော အင်ဖရာပုံစံများ
+- မူဝါဒ ဖိုင်ဖိဆိုင်းချုပ် စီမံခန့်ခွဲမှု
+- စျေးနှုန်းသက်သာသည့် ဖွံ့ဖြိုးရေး အတည်ပြုစနစ်များ
 
-#### **အဆင့်မြင့်အခြေအနေများ**
-- Multi-service architectures
-- ရှုပ်ထွေးသော networking configurations
-- Database integration patterns
-- လုံခြုံရေးနှင့်လိုက်နာမှုဆိုင်ရာအကောင်အထည်ဖော်မှုများ
+#### **တိုးတက်ထားသော အခြေအနေများ**
+- အများစုပင် ဝန်ဆောင်မှု ဆောက်လုပ်ပုံများ
+- တည်ဆောက်ရေး ရှုပ်ထွေးသော ကြိုးပင်ကွန်ရက် ဖော်ပြချက်များ
+- ဒေတာဘေ့စ် ပေါင်းစည်းမှု ပုံစံများ
+- လုံခြုံရေးနှင့် ကန့်သတ်ချက် အသုံးချမှုများ
 
-#### **ထုတ်လုပ်မှုအဆင့်ပုံစံများ**
-- High availability configurations
-- Monitoring နှင့် observability
-- CI/CD integration
-- Disaster recovery setups
+#### **ထုတ်လုပ်မှု အသင့် ပုံစံများ**
+- အမြင့်တင်ရရှိမှု ဖော်ပြချက်များ
+- မော်နီတာင်နှင့် ကြည့်ရှုနိုင်မှု
+- CI/CD ပေါင်းစည်းမှု
+- မတော်တဆဖြေရှင်းရေး ပြင်ဆင်မှုများ
 
 ## 📖 ဥပမာဖော်ပြချက်များ
 
-### ရိုးရှင်းသော Web App - Node.js Express
-**နည်းပညာများ**: Node.js, Express, MongoDB, Container Apps  
-**ရှုပ်ထွေးမှု**: Beginner  
-**အယူအဆများ**: အခြေခံ deployment, REST API, NoSQL database integration
+### Simple Web App - Node.js Express
+**Technologies**: Node.js, Express, MongoDB, Container Apps  
+**Complexity**: Beginner  
+**Concepts**: Basic deployment, REST API, NoSQL database integration
 
 ### Static Website - React SPA
-**နည်းပညာများ**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**ရှုပ်ထွေးမှု**: Beginner  
-**အယူအဆများ**: Static hosting, serverless backend, modern web development
+**Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Complexity**: Beginner  
+**Concepts**: Static hosting, serverless backend, modern web development
 
 ### Container App - Python Flask
-**နည်းပညာများ**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**ရှုပ်ထွေးမှု**: Beginner  
-**အယူအဆများ**: Containerization, REST API, scale-to-zero, health probes, monitoring  
-**တည်နေရာ**: [Local Example](../../../examples/container-app/simple-flask-api)
+**Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
+**Complexity**: Beginner  
+**Concepts**: Containerization, REST API, scale-to-zero, health probes, monitoring  
+**Location**: [Local Example](../../../examples/container-app/simple-flask-api)
 
 ### Container App - Microservices Architecture
-**နည်းပညာများ**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**ရှုပ်ထွေးမှု**: Advanced  
-**အယူအဆများ**: Multi-service architecture, service communication, message queuing, distributed tracing  
-**တည်နေရာ**: [Local Example](../../../examples/container-app/microservices)
+**Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Complexity**: Advanced  
+**Concepts**: Multi-service architecture, service communication, message queuing, distributed tracing  
+**Location**: [Local Example](../../../examples/container-app/microservices)
 
 ### Database App - C# with Azure SQL
-**နည်းပညာများ**: C# ASP.NET Core, Azure SQL Database, App Service  
-**ရှုပ်ထွေးမှု**: Intermediate  
-**အယူအဆများ**: Entity Framework, database connections, web API development
+**Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Complexity**: Intermediate  
+**Concepts**: Entity Framework, database connections, web API development
 
 ### Serverless Function - Python Azure Functions
-**နည်းပညာများ**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**ရှုပ်ထွေးမှု**: Intermediate  
-**အယူအဆများ**: Event-driven architecture, serverless computing, full-stack development
+**Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Complexity**: Intermediate  
+**Concepts**: Event-driven architecture, serverless computing, full-stack development
 
 ### Microservices - Java Spring Boot
-**နည်းပညာများ**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**ရှုပ်ထွေးမှု**: Intermediate  
-**အယူအဆများ**: Microservices communication, distributed systems, enterprise patterns
+**Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Complexity**: Intermediate  
+**Concepts**: Microservices communication, distributed systems, enterprise patterns
 
-### Azure AI Foundry Examples
+### Microsoft Foundry Examples
 
 #### Azure OpenAI Chat App
-**နည်းပညာများ**: Azure OpenAI, Cognitive Search, App Service  
-**ရှုပ်ထွေးမှု**: Intermediate  
-**အယူအဆများ**: RAG architecture, vector search, LLM integration
+**Technologies**: Azure OpenAI, Cognitive Search, App Service  
+**Complexity**: Intermediate  
+**Concepts**: RAG architecture, vector search, LLM integration
 
 #### AI Document Processing
-**နည်းပညာများ**: Azure AI Document Intelligence, Storage, Functions  
-**ရှုပ်ထွေးမှု**: Intermediate  
-**အယူအဆများ**: Document analysis, OCR, data extraction
+**Technologies**: Azure AI Document Intelligence, Storage, Functions  
+**Complexity**: Intermediate  
+**Concepts**: Document analysis, OCR, data extraction
 
 #### Machine Learning Pipeline
-**နည်းပညာများ**: Azure ML, MLOps, Container Registry  
-**ရှုပ်ထွေးမှု**: Advanced  
-**အယူအဆများ**: Model training, deployment pipelines, monitoring
+**Technologies**: Azure ML, MLOps, Container Registry  
+**Complexity**: Advanced  
+**Concepts**: Model training, deployment pipelines, monitoring
 
-## 🛠 Configuration ဥပမာများ
+## 🛠 ဖိုင်ကို ကိုယ်ကျင့်သတ်မှတ် စနစ်များ
 
-`configurations/` directory တွင် အသုံးပြုနိုင်သော components များပါဝင်သည်:
+The `configurations/` directory contains reusable components:
 
-### Environment Configurations
-- ဖွံ့ဖြိုးရေးအတွက် environment settings
-- Staging environment configurations
-- ထုတ်လုပ်မှုအဆင့် configurations
-- Multi-region deployment setups
+### ပတ်ဝန်းကျင် ဖော်ပြချက်များ
+- ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင် ဆက်တင်များ
+- Staging ပတ်ဝန်းကျင် ဖော်ပြချက်များ
+- ထုတ်လုပ်မှု အသင့် ဖော်ပြချက်များ
+- မူတည်ရာ မျိုးစုံ ဒေသ တင်သွင်းမှု စနစ်များ
 
 ### Bicep Modules
-- အသုံးပြုနိုင်သော infrastructure components
-- ရိုးရှင်းသော resource patterns
-- လုံခြုံရေးအတွက် အထူးပြု templates
-- ကုန်ကျစရိတ်သက်သာသော configurations
+- အသုံးပြုနိုင်သော အင်ဖရာ ကွန်ပွန်နင့်များ
+- ပုံမှန် ရင်းမြစ် ပုံစံများ
+- လုံခြုံရေး အားကောင်းစေသော ပုံစံများ
+- စရိတ် သက်သာစေသော ဖော်ပြချက်များ
 
-### Helper Scripts
-- Environment setup automation
-- Database migration scripts
-- Deployment validation tools
-- ကုန်ကျစရိတ်စောင့်ကြည့်မှု utilities
+### အကူအညီ စကရစ်များ
+- ပတ်ဝန်းကျင် စတင်စနစ် အလိုအလျောက်လုပ်ငန်းများ
+- ဒေတာဘေ့စ် မိုင်းရေးရှင်း စကရစ်များ
+- တင်သွင်းချက် အတည်ပြု တစ်စိတ်တစ်ပိုင်း ကိရိယာများ
+- စရိတ် စောင့်ကြည့်ရေး ကိရိယာများ
 
-## 🔧 Customization Guide
+## 🔧 အမှန်တကယ် ပြင်ဆင်ရန် လမ်းညွှန်
 
-### သင့် Use Case အတွက် ဥပမာများကို ပြင်ဆင်ခြင်း
+### သင့်အသုံးအတွက် ဥပမာများကို ကိုက်ညီစေခြင်း
 
-1. **လိုအပ်ချက်များကို ပြန်လည်စစ်ဆေးပါ**
-   - Azure service လိုအပ်ချက်များကိုစစ်ဆေးပါ
-   - Subscription အကန့်အသတ်များကိုစစ်ဆေးပါ
-   - ကုန်ကျစရိတ်အကျိုးဆက်များကိုနားလည်ပါ
+1. **Prerequisites များကို ပြန်လည်စစ်ဆေးပါ**
+   - Azure ဝန်ဆောင်မှု လိုအပ်ချက်များကို စစ်ဆေးပါ
+   - Subscription ကန့်သတ်ချက်များကို အတည်ပြုပါ
+   - စရိတ် သက်ရောက်မှုများကို နားလည်ပါ
 
 2. **Configuration ကို ပြင်ဆင်ပါ**
-   - `azure.yaml` service definitions ကို update ပြုလုပ်ပါ
-   - Bicep templates ကို customize ပြုလုပ်ပါ
-   - Environment variables ကိုပြင်ဆင်ပါ
+   - `azure.yaml` ဝန်ဆောင်မှု အမည်သတ်မှတ်ချက်များကို အပ်ဒိတ်လုပ်ပါ
+   - Bicep ပုံစံများကို အသုံးပြုရန် ပြင်ဆင်ပါ
+   - ပတ်ဝန်းကျင် အခြေအနေ များကို ချိန်ညှိပါ
 
-3. **အပြည့်အဝ စမ်းသပ်ပါ**
-   - ဖွံ့ဖြိုးရေး environment တွင် deploy ပြုလုပ်ပါ
-   - လုပ်ဆောင်မှုကိုအတည်ပြုပါ
-   - Scaling နှင့် performance ကိုစမ်းသပ်ပါ
+3. **စမ်းသပ်မှုကို ပြုလုပ်ပါ**
+   - ဦးစွာ ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်သို့ တင်သွင်းပါ
+   - လုပ်ဆောင်ချက်များကို အတည်ပြုပါ
+   - စွမ်းဆောင်ရည်နှင့် အတိုင်းအတာ စမ်းသပ်ပါ
 
-4. **လုံခြုံရေးစစ်ဆေးမှု**
-   - Access controls ကိုပြန်လည်စစ်ဆေးပါ
-   - Secrets management ကိုအကောင်အထည်ဖော်ပါ
-   - Monitoring နှင့် alerting ကို enable ပြုလုပ်ပါ
+4. **လုံခြုံရေး ပြန်လည်သုံးသပ်ပါ**
+   - ဝင်ရောက်ခွင့်ထိန်းချုပ်မှုများကို ကြည့်ပါ
+   - Secrets စီမံခန့်ခွဲမှု ကို အကောင်အထည်ဖော်ပါ
+   - မော်နီတာင်နှင့် အကြောင်းကြားမှုများ ဖွင့်ပါ
 
-## 📊 Comparison Matrix
+## 📊 နှိုင်းယှဉ် စာရင်းဇယား
 
-| ဥပမာ | Services | Database | Auth | Monitoring | ရှုပ်ထွေးမှု |
+| Example | Services | Database | Auth | Monitoring | Complexity |
 |---------|----------|----------|------|------------|------------|
 | **Azure OpenAI Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
 | **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |
@@ -492,43 +495,44 @@ Azure Samples AZD Templates (linked externally):
 | ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
 | **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
-## 🎓 Learning Path
+## 🎓 သင်ယူရေး လမ်းကြောင်း
 
-### အကြံပြုထားသော အဆင့်လိုက်တိုးတက်မှု
+### အကြံပြု တိုးတက်မှု ခြေလှမ်းများ
 
-1. **ရိုးရှင်းသော Web App ဖြင့် စတင်ပါ**
-   - AZD အခြေခံအယူအဆများကိုလေ့လာပါ
-   - Deployment workflow ကိုနားလည်ပါ
-   - Environment management ကိုလေ့ကျင့်ပါ
+1. **Simple Web App နဲ့ စတင်ပါ**
+   - AZD အခြေခံแนวคิดများကို သင်ယူပါ
+   - တင်သွင်းရေး လုပ်ငန်းစဉ်ကို နားလည်ပါ
+   - ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှုကို လေ့ကျင့်ပါ
 
-2. **Static Website ကို စမ်းသပ်ပါ**
-   - Hosting options များကိုလေ့လာပါ
-   - CDN integration ကိုနားလည်ပါ
-   - DNS configuration ကိုနားလည်ပါ
+2. **Static Website ကို ကြိုးစားပါ**
+   - မတူညီသည့် ဟိုစတင်း ရွေးချယ်မှုများကို နေ့လည်လေ့လာပါ
+   - CDN ပေါင်းစည်းမှုကို စူးစမ်းပါ
+   - DNS ဖော်ပြချက်ကို နားလည်ပါ
 
-3. **Container App သို့ ရွှေ့ပါ**
-   - Containerization အခြေခံကိုလေ့လာပါ
-   - Scaling အယူအဆများကိုနားလည်ပါ
-   - Docker ဖြင့်လေ့ကျင့်ပါ
+3. **Container App သို့ တိုးတက်ပါ**
+   - ကွန်တိန်နာ အခြေခံများကို သင်ယူပါ
+   - အတိုင်းအတာချိန် ဆိုင်ရာ แนวคิดများကို နားလည်ပါ
+   - Docker ဖြင့် လက်တွေ့ကျက်သရေ အလုပ်လုပ်ပါ
 
-4. **Database Integration ကို ထည့်ပါ**
-   - Database provisioning ကိုလေ့လာပါ
-   - Connection strings ကိုနားလည်ပါ
-   - Secrets management ကိုလေ့ကျင့်ပါ
+4. **ဒေတာဘေ့စ် ပေါင်းစည်းမှု ထည့်ပါ**
+   - ဒေတာဘေ့စ် ပေးသွင်းရေးကို သင်ယူပါ
+   - connection string များကို နားလည်ပါ
+   - secrets စီမံခန့်ခွဲမှုကို လေ့ကျင့်ပါ
 
-5. **Serverless ကို စမ်းသပ်ပါ**
-   - Event-driven architecture ကိုနားလည်ပါ
-   - Triggers နှင့် bindings ကိုလေ့လာပါ
-   - APIs ဖြင့်လေ့ကျင့်ပါ
+5. **Serverless ကို လေ့လာပါ**
+   - Event-driven ဖွဲ့စည်းမှုကို နားလည်ပါ
+   - Trigger နှင့် Binding မျိုးစုံကို သင်ယူပါ
+   - API များနှင့် လက်တွေ့ လေ့ကျင့်ပါ
 
-6. **Microservices ကို တည်ဆောက်ပါ**
-   - Service communication ကိုလေ့လာပါ
-   - Distributed systems ကိုနားလည်ပါ
-   - ရှုပ်ထွေးသော deployments များကိုလေ့ကျင့်ပါ
+6. **Microservices ဆောက်လုပ်ပါ**
+   - ဝန်ဆောင်မှု ဆက်သွယ်မှုများကို သင်ယူပါ
+   - ဖန်တီးချုပ် စနစ်များကို နားလည်ပါ
+   - ရှုပ်ထွေးသော တင်သွင်းရေးများကို လေ့ကျင့်ပါ
 
-## 🔍 သင့်အတွက် သင့်လျော်သော ဥပမာရှာဖွေခြင်း
+## 🔍 ကိုယ့်အတွက် မှန်ကန်တဲ့ ဥပမာ ရှာဖွေရန်
 
-### နည်းပညာ Stack အလိုက်
+### နည်းပညာ စတက်
+
 - **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
 - **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
 - **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
@@ -543,7 +547,7 @@ Azure Samples AZD Templates (linked externally):
 - **OpenAI Integration**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
 - **Enterprise Production**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Architecture Pattern အလိုက်
+### အင်ဂျင်နီယာ အဆင့်ပုံစံ အလိုက်
 - **Simple REST API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
 - **Monolithic**: Node.js Express Todo, C# Web API + SQL
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
@@ -553,47 +557,47 @@ Azure Samples AZD Templates (linked externally):
 - **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
 - **Enterprise Multi-Service**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### ရှုပ်ထွေးမှုအဆင့်အလိုက်
+### ပြတ်သားမှု အဆင့်အလိုက်
 - **Beginner**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
 - **Intermediate**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
 - **Advanced**: ML Pipeline
 - **Enterprise Production-Ready**: [Microservices (Local)](../../../examples/container-app/microservices) (Multi-service with message queuing), **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
 
-## 📚 အပိုဆောင်းအရင်းအမြစ်များ
+## 📚 ထပ်ဆင့် အရင်းအမြစ်များ
 
-### Documentation Links
+### စာတမ်းလင့်ခ်များ
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Azure AI Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Community Examples
+### အသိုင်းအဝိုင်း ဥပမာများ
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Azure AI Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 - [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React Web App with C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Node.js နှင့် PostgreSQL ဖြင့် Todo အက်ပ်](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [C# API ဖြင့် React ဝက်ဘ် အက်ပ်](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
-- [Azure Functions with Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Java ဖြင့် Azure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### အကောင်းဆုံး လုပ်ဆောင်ရန်နည်းလမ်းများ
+### အကောင်းဆုံး လက်တွေ့လုပ်ထုံးလုပ်နည်းများ
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 ဥပမာများ ထည့်သွင်းရန်
+## 🤝 ဥပမာများ ပံ့ပိုးရန်
 
-အသုံးဝင်သော ဥပမာတစ်ခုကို မျှဝေချင်ပါသလား? ကျွန်ုပ်တို့သည် ထည့်သွင်းမှုများကို ကြိုဆိုပါသည်!
+ဝေငှရန် အသုံးဝင်သော ဥပမာတစ်ခု ရှိပါသလား? ကျွန်တော်တို့သည် အထောက်အပံ့များကို ကြိုဆိုပါသည်!
 
 ### တင်သွင်းရန် လမ်းညွှန်ချက်များ
-1. သတ်မှတ်ထားသော ဖိုင်ဖွဲ့စည်းမှုကို လိုက်နာပါ  
-2. ပြည့်စုံသော README.md ကို ထည့်သွင်းပါ  
-3. ဖိုင်များတွင် မှတ်ချက်များ ထည့်သွင်းပါ  
-4. တင်သွင်းမီ စမ်းသပ်မှု ပြုလုပ်ပါ  
-5. ကုန်ကျစရိတ် ခန့်မှန်းချက်များနှင့် လိုအပ်ချက်များ ထည့်သွင်းပါ  
+1. အစီအစဉ်တည်ဆောက်ထားသည့် directory ဖွဲ့စည်းပုံကို လိုက်နာပါ
+2. အပြည့်အစုံ README.md ထည့်ပါ
+3. configuration ဖိုင်များတွင် မှတ်ချက်များ ထည့်ပါ
+4. တင်သွင်းမီ ကောင်းစွာ စစ်ဆေးပါ
+5. ကုန်ကျစရိတ် ခန့်မှန်းချက်များ နှင့် ကြိုတင်လိုအပ်ချက်များ ထည့်ပါ
 
-### ဥပမာ ဖိုင်ဖွဲ့စည်းမှု
+### ဥပမာ စမ်းနမူနာ ဖွဲ့စည်းပုံ
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -609,46 +613,46 @@ example-name/
 
 ---
 
-**အကြံပြုချက်**: သင့်နည်းပညာစနစ်နှင့် ကိုက်ညီသော အလွယ်ဆုံး ဥပမာမှ စတင်ပြီး၊ နောက်ပိုင်းတွင် ပိုမိုရှုပ်ထွေးသော အခြေအနေများသို့ တဖြည်းဖြည်း တိုးတက်ပါ။ ဤဥပမာများသည် ယခင်အကြောင်းအရာများကို အခြေခံထားသည်။
+**Pro Tip**: သင့်နည်းပညာ စတက်နှင့် ကိုက်ညီသည့် အနည်းဆုံး ရိုးရှင်းသော ဥပမာနဲ့ စတင်ပါ၊ ထို့နောက် များပြီး ချိန်ခါလာသော နည်းပညာဆိုင်ရာ အခြေအနေပေါ် ကိုက်ညီစေရန် တဖြည်းဖြည်း မြှင့်တင်ပါ။ ဥပမာတိုင်းသည် ယခင် ဥပမာများ၏ အယူအဆများပေါ်တွင် တည်ဆောက်ထားသည်။
 
-## 🚀 စတင်ရန် အသင့်ဖြစ်ပြီလား?
+## 🚀 စတင်ရန် အသင့်လား?
 
-### သင့်၏ သင်ကြားမှုလမ်းကြောင်း
+### သင်လေ့လာရန် လမ်းစဉ်
 
-1. **အခြေခံမရှိသေးပါလား?** → [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 မိနစ်) ဖြင့် စတင်ပါ  
-2. **AZD အခြေခံကို သိပြီးပါသလား?** → [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 မိနစ်) ကို စမ်းကြည့်ပါ  
-3. **AI အက်ပ်များ တည်ဆောက်နေပါသလား?** → [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 မိနစ်) သို့မဟုတ် [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ နာရီ) ကို စမ်းကြည့်ပါ  
-4. **သင့်နည်းပညာစနစ်အတွက် သီးသန့်လိုအပ်ချက်ရှိပါသလား?** → [Finding the Right Example](../../../examples) အပိုင်းကို အသုံးပြုပါ  
+1. **လုံးဝ စတင်သူလား?** → [Flask API](../../../examples/container-app/simple-flask-api) ဖြင့် စတင်ပါ (⭐, 20 မိနစ်)
+2. **AZD အခြေခံ သိမြင်မှု ရှိပါသလား?** → [Microservices](../../../examples/container-app/microservices) ကို လုပျစားကြည့်ပါ (⭐⭐⭐⭐, 60 မိနစ်)
+3. **AI အက်ပ်များ တည်ဆောက်နေပါသလား?** → [Azure OpenAI Chat](../../../examples/azure-openai-chat) ဖြင့် စတင်ပါ (⭐⭐, 35 မိနစ်) သို့မဟုတ် [Retail Multi-Agent](retail-scenario.md) ကို စူးစမ်းပါ (⭐⭐⭐⭐, 2+ နာရီ)
+4. **တိတိကျကျ နည်းပညာ စတက် လိုအပ်ပါသလား?** → အထက်ပါ [မှန်ကန်သော ဥပမာ ရှာဖွေရေး](../../../examples) အပိုင်းကို အသုံးပြုပါ
 
-### နောက်တစ်ဆင့်များ
+### နောက်ဆက်တွဲ အဆင့်များ
 
-- ✅ အထက်ပါ [Prerequisites](../../../examples) ကို ပြန်လည်သုံးသပ်ပါ  
-- ✅ သင့်ကျွမ်းကျင်မှုအဆင့်နှင့် ကိုက်ညီသော ဥပမာတစ်ခုကို ရွေးချယ်ပါ ([Complexity Legend](../../../examples) ကို ကြည့်ပါ)  
-- ✅ ဥပမာ၏ README ကို တိတိကျကျ ဖတ်ရှုပါ  
-- ✅ စမ်းသပ်ပြီးနောက် `azd down` ကို ပြုလုပ်ရန် သတိပေးချက် ထားပါ  
-- ✅ GitHub Issues သို့မဟုတ် Discussions မှတစ်ဆင့် သင့်အတွေ့အကြုံကို မျှဝေပါ  
+- ✅ အထက်ပါ [လိုအပ်ချက်များ](../../../examples) ကို ပြန်လည်သုံးသပ်ပါ
+- ✅ သင့် ကျွမ်းကျင်မှု အဆင့်နှင့် ကိုက်ညီသော ဥပမာကို ရွေးပါ (ကြည့်ရန် [Complexity Legend](../../../examples))
+- ✅ ထည့်သွင်းမီ ဥပမာ၏ README ကို အရေးကြီးစွာ ဖတ်ပါ
+- ✅ စမ်းသပ်ပြီးနောက် `azd down` ကို चलရန် မှတ်ချက် ထားပါ
+- ✅ GitHub Issues သို့မဟုတ် Discussions မှတဆင့် သင့် အတွေ့အကြုံကို ဝေစုပါ
 
-### အကူအညီလိုအပ်ပါသလား?
+### အကူအညီ လိုပါသလား?
 
-- 📖 [FAQ](../resources/faq.md) - မေးလေ့ရှိသော မေးခွန်းများ  
-- 🐛 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - တင်သွင်းမှု ပြဿနာများကို ဖြေရှင်းပါ  
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - အသိုင်းအဝိုင်းနှင့် မေးမြန်းပါ  
-- 📚 [Study Guide](../resources/study-guide.md) - သင့်၏ သင်ကြားမှုကို တိုးတက်စေပါ  
+- 📖 [FAQ](../resources/faq.md) - အမြဲမေးတော့သော မေးခွန်းများဖြေကြားချက်များ
+- 🐛 [Troubleshooting Guide](../docs/chapter-07-troubleshooting/common-issues.md) - deployment ပြဿနာများကို ဖြေရှင်းရန်
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - ကွန်မြူနစ်ဖြင့် ဆွေးနွေးရန်
+- 📚 [Study Guide](../resources/study-guide.md) - သင်ယူမှုကို အားကျစေရန်
 
 ---
 
 **Navigation**
-- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD For Beginners](../README.md)  
-- **📖 သင်ကြားမှု ပစ္စည်းများ**: [Study Guide](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)  
-- **🔧 အရင်းအမြစ်များ**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/troubleshooting/common-issues.md)  
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Study Materials**: [Study Guide](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)
+- **🔧 Resources**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*နောက်ဆုံးအပ်ဒိတ်: နိုဝင်ဘာ 2025 | [ပြဿနာများรายงาน](https://github.com/microsoft/AZD-for-beginners/issues) | [ဥပမာများ ထည့်သွင်းပါ](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*နောက်ဆုံး အပ်ဒိတ်ပြုထားသည်: နိုဝင်ဘာ 2025 | [Report Issues](https://github.com/microsoft/AZD-for-beginners/issues) | [Contribute Examples](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+အသိပေးချက်:
+ဤစာတမ်းကို AI ဘာသာပြန် ဝန်ဆောင်မှု "Co-op Translator" (https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် တိကျမှုနည်းပါးမှုများ ပါဝင်နိုင်ကြောင်း ကျေးဇူးပြု၍ သတိပြုပါ။ မူရင်းစာတမ်းကို သဘာဝဘာသာဖြင့် ရေးသားထားသော မူရင်းကို အာဏာပိုင် မဲဖြင့်ယူဆရန် သင့်တော်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူမီ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်ချက်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာသော နားမလည်မှုများ သို့မဟုတ် မမှန်ကန်စွာ အဓိပ္ပာယ်ယူမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မရှိပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

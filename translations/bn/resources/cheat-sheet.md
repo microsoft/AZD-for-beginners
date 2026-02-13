@@ -1,125 +1,122 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "2a5f480ef9bf86e8f4dd1340d077fff3",
-  "translation_date": "2025-10-24T16:56:33+00:00",
-  "source_file": "resources/cheat-sheet.md",
-  "language_code": "bn"
-}
--->
-# কমান্ড চিট শিট - গুরুত্বপূর্ণ AZD কমান্ডসমূহ
+# কমান্ড চিট শিট - প্রয়োজনীয় AZD কমান্ড
 
-**সব অধ্যায়ের দ্রুত রেফারেন্স**
-- **📚 কোর্স হোম**: [AZD For Beginners](../README.md)
-- **📖 দ্রুত শুরু**: [অধ্যায় ১: ভিত্তি ও দ্রুত শুরু](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI কমান্ডসমূহ**: [অধ্যায় ২: AI-প্রথম উন্নয়ন](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 উন্নত**: [অধ্যায় ৪: কোড হিসেবে অবকাঠামো](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**সব অধ্যায়ের জন্য দ্রুত রেফারেন্স**
+- **📚 কোর্স হোম**: [AZD নবাগতদের জন্য](../README.md)
+- **📖 দ্রুত শুরু**: [অধ্যায় ১: ভিত্তি ও দ্রুত শুরু](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 এআই কমান্ড**: [অধ্যায় ২: এআই-প্রথম ডেভেলপমেন্ট](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 উন্নত**: [অধ্যায় ৪: ইনফ্রাস্ট্রাকচার অ্যাজ কোড](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## পরিচিতি
+## ভূমিকা
 
-এই বিস্তৃত চিট শিটটি সবচেয়ে বেশি ব্যবহৃত Azure Developer CLI কমান্ডগুলোর দ্রুত রেফারেন্স প্রদান করে, যা বিভাগ অনুযায়ী সংগঠিত এবং ব্যবহারিক উদাহরণসহ। এটি উন্নয়ন, সমস্যা সমাধান এবং দৈনন্দিন AZD প্রকল্প পরিচালনার সময় দ্রুত রেফারেন্সের জন্য উপযুক্ত।
+এই বিস্তৃত চিট শিটটি সবচেয়ে সাধারণভাবে ব্যবহৃত Azure Developer CLI কমান্ডগুলোর জন্য দ্রুত রেফারেন্স প্রদান করে, বিভাগভিত্তিক ও বাস্তব উদাহরণসহ সংগঠিত। azd প্রকল্পে ডেভেলপমেন্ট, সমস্যাসমাধান, এবং দৈনন্দিন অপারেশনের সময় দ্রুত খোঁজার জন্য উপযুক্ত।
 
 ## শেখার লক্ষ্য
 
-এই চিট শিট ব্যবহার করে আপনি:
-- গুরুত্বপূর্ণ Azure Developer CLI কমান্ড এবং সিনট্যাক্সের তাৎক্ষণিক অ্যাক্সেস পাবেন
-- কার্যকরী বিভাগ এবং ব্যবহার কেস অনুযায়ী কমান্ড সংগঠনের ধারণা পাবেন
-- সাধারণ উন্নয়ন এবং ডিপ্লয়মেন্ট পরিস্থিতির জন্য ব্যবহারিক উদাহরণ রেফারেন্স করতে পারবেন
-- দ্রুত সমস্যা সমাধানের জন্য ট্রাবলশুটিং কমান্ড খুঁজে পাবেন
-- উন্নত কনফিগারেশন এবং কাস্টমাইজেশন অপশন সহজে খুঁজে পাবেন
-- পরিবেশ ব্যবস্থাপনা এবং বহু-পরিবেশের ওয়ার্কফ্লো কমান্ড খুঁজে পাবেন
+By using this cheat sheet, you will:
+- প্রয়োজনীয় Azure Developer CLI কমান্ড এবং সিনট্যাক্সে তৎক্ষণাত অ্যাক্সেস পাবেন
+- কার্যগত বিভাগ ও ব্যবহারের কেস অনুযায়ী কমান্ডের সংগঠন বোঝতে পারবেন
+- সাধারণ ডেভেলপমেন্ট এবং ডেপ্লয়মেন্ট পরিস্থিতির জন্য ব্যবহারিক উদাহরণ রেফারেন্স করতে পারবেন
+- দ্রুত সমস্যা সমাধানের জন্য ট্রবলশ্যুটিং কমান্ড অ্যাক্সেস করতে পারবেন
+- উন্নত কনফিগারেশন এবং কাস্টমাইজেশন অপশন কার্যকরভাবে খুঁজে পেতে পারবেন
+- পরিবেশ ব্যবস্থাপনা এবং একাধিক পরিবেশের ওয়ার্কফ্লো সম্পর্কিত কমান্ডগুলো সন্ধান করতে সক্ষম হবেন
 
 ## শেখার ফলাফল
 
-এই চিট শিট নিয়মিত রেফারেন্স করে আপনি:
-- সম্পূর্ণ ডকুমেন্টেশন রেফারেন্স না করেই আত্মবিশ্বাসের সাথে azd কমান্ড চালাতে পারবেন
-- সঠিক ডায়াগনস্টিক কমান্ড ব্যবহার করে সাধারণ সমস্যাগুলো দ্রুত সমাধান করতে পারবেন
-- একাধিক পরিবেশ এবং ডিপ্লয়মেন্ট পরিস্থিতি দক্ষতার সাথে পরিচালনা করতে পারবেন
-- প্রয়োজন অনুযায়ী উন্নত azd ফিচার এবং কনফিগারেশন অপশন প্রয়োগ করতে পারবেন
-- সিস্টেমেটিক কমান্ড সিকোয়েন্স ব্যবহার করে ডিপ্লয়মেন্ট সমস্যাগুলো সমাধান করতে পারবেন
-- কার্যকরভাবে azd শর্টকাট এবং অপশন ব্যবহার করে ওয়ার্কফ্লো অপ্টিমাইজ করতে পারবেন
+With regular reference to this cheat sheet, you will be able to:
+- পূর্ণ ডকুমেন্টেশন দেখার দরকার ছাড়াই azd কমান্ড আত্মবিশ্বাসের সাথে চালাতে পারবেন
+- উপযুক্ত ডায়াগনস্টিক কমান্ড ব্যবহার করে দ্রুত সাধারণ সমস্যার সমাধান করতে পারবেন
+- একাধিক পরিবেশ এবং ডেপ্লয়মেন্ট পরিস্থিতি কার্যকরভাবে পরিচালনা করতে সক্ষম হবেন
+- প্রয়োজন অনুযায়ী উন্নত azd বৈশিষ্ট্য এবং কনফিগারেশন অপশন প্রয়োগ করতে পারবেন
+- সিস্টেম্যাটিক কমান্ড সিকোয়েন্স ব্যবহার করে ডেপ্লয়মেন্ট সমস্যাগুলো ট্রবলশুট করতে পারবেন
+- azd শর্টকাট এবং অপশনগুলো কার্যকরভাবে ব্যবহার করে ওয়ার্কফ্লো অপ্টিমাইজ করতে পারবেন
 
 ## শুরু করার কমান্ডসমূহ
 
 ### প্রমাণীকরণ
 ```bash
-# Login to Azure (uses Azure CLI)
+# AZD ব্যবহার করে Azure-এ লগইন
+azd auth login
+
+# Azure CLI-তে লগইন (AZD এটি অন্তর্নিহিতভাবে ব্যবহার করে)
 az login
 
-# Check current account
+# বর্তমান অ্যাকাউন্ট পরীক্ষা করুন
 az account show
 
-# Set default subscription
+# ডিফল্ট সাবস্ক্রিপশন সেট করুন
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
+
+# AZD থেকে লগআউট করুন
+azd auth logout
+
+# Azure CLI থেকে লগআউট করুন
+az logout
 ```
 
 ### প্রকল্প আরম্ভ
 ```bash
-# Browse available templates
+# উপলব্ধ টেমপ্লেট ব্রাউজ করুন
 azd template list
 
-# Initialize from template
+# টেমপ্লেট থেকে শুরু করুন
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Initialize in current directory
+# বর্তমান ডিরেক্টরিতে শুরু করুন
 azd init .
 
-# Initialize with custom name
+# কাস্টম নাম দিয়ে শুরু করুন
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## মূল ডিপ্লয়মেন্ট কমান্ডসমূহ
+## মূল ডেপ্লয়মেন্ট কমান্ডসমূহ
 
-### সম্পূর্ণ ডিপ্লয়মেন্ট ওয়ার্কফ্লো
+### সম্পূর্ণ ডেপ্লয়মেন্ট ওয়ার্কফ্লো
 ```bash
-# Deploy everything (provision + deploy)
+# সবকিছু ডিপ্লয় করুন (প্রোভিশন + ডিপ্লয়)
 azd up
 
-# Deploy with confirmation prompts disabled
+# নিশ্চিতকরণ প্রম্পটগুলো নিষ্ক্রিয় করে ডিপ্লয় করুন
 azd up --confirm-with-no-prompt
 
-# Deploy to specific environment
+# নির্দিষ্ট পরিবেশে ডিপ্লয় করুন
 azd up --environment production
 
-# Deploy with custom parameters
+# কাস্টম প্যারামিটার ব্যবহার করে ডিপ্লয় করুন
 azd up --parameter location=westus2
 ```
 
 ### শুধুমাত্র অবকাঠামো
 ```bash
-# Provision Azure resources
+# Azure রিসোর্স প্রোভিশন করুন
 azd provision
 
-# 🧪 Preview infrastructure changes (NEW)
+# 🧪 অবকাঠামো পরিবর্তনের পূর্বরূপ
 azd provision --preview
-# Shows a dry-run view of what resources would be created/modified/deleted
-# Similar to 'terraform plan' or 'bicep what-if' - safe to run, no changes applied
-
-# Provision with what-if analysis
-azd provision --what-if
+# কোন রিসোর্স তৈরি/পরিবর্তিত/মুছে ফেলা হবে তার একটি ড্রাই-রান ভিউ দেখায়
+# 'terraform plan' বা 'bicep what-if' এর অনুরূপ - চালাতে নিরাপদ, কোনো পরিবর্তন প্রয়োগ করা হয় না
 ```
 
 ### শুধুমাত্র অ্যাপ্লিকেশন
 ```bash
-# Deploy application code
+# অ্যাপ্লিকেশন কোড মোতায়েন করা
 azd deploy
 
-# Deploy specific service
+# নির্দিষ্ট সার্ভিস মোতায়েন করা
 azd deploy --service web
 azd deploy --service api
 
-# Deploy all services
+# সমস্ত সার্ভিস মোতায়েন করা
 azd deploy --all
 ```
 
 ### বিল্ড এবং প্যাকেজ
 ```bash
-# Build applications
+# অ্যাপ্লিকেশন তৈরি করুন
 azd package
 
-# Build specific service
+# নির্দিষ্ট সার্ভিস তৈরি করুন
 azd package --service api
 ```
 
@@ -127,36 +124,36 @@ azd package --service api
 
 ### পরিবেশ অপারেশন
 ```bash
-# List all environments
+# সমস্ত পরিবেশ তালিকা করুন
 azd env list
 
-# Create new environment
+# নতুন পরিবেশ তৈরি করুন
 azd env new development
 azd env new staging --location westus2
 
-# Select environment
+# পরিবেশ নির্বাচন করুন
 azd env select production
 
-# Show current environment
+# বর্তমান পরিবেশ দেখান
 azd env show
 
-# Refresh environment state
+# পরিবেশের অবস্থা হালনাগাদ করুন
 azd env refresh
 ```
 
-### পরিবেশ ভেরিয়েবল
+### পরিবেশ ভেরিয়েবলসমূহ
 ```bash
-# Set environment variable
+# পরিবেশ ভেরিয়েবল সেট করুন
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Get environment variable
+# পরিবেশ ভেরিয়েবল পান
 azd env get API_KEY
 
-# List all environment variables
+# সমস্ত পরিবেশ ভেরিয়েবল তালিকা করুন
 azd env get-values
 
-# Remove environment variable
+# পরিবেশ ভেরিয়েবল মুছুন
 azd env unset DEBUG
 ```
 
@@ -164,192 +161,199 @@ azd env unset DEBUG
 
 ### গ্লোবাল কনফিগারেশন
 ```bash
-# List all configuration
+# সমস্ত কনফিগারেশন তালিকা করুন
 azd config list
 
-# Set global defaults
+# গ্লোবাল ডিফল্ট সেট করুন
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove configuration
+# কনফিগারেশন সরান
 azd config unset defaults.location
 
-# Reset all configuration
+# সমস্ত কনফিগারেশন রিসেট করুন
 azd config reset
 ```
 
 ### প্রকল্প কনফিগারেশন
 ```bash
-# Validate azure.yaml
+# azure.yaml যাচাই করুন
 azd config validate
 
-# Show project information
+# প্রকল্পের তথ্য দেখান
 azd show
 
-# Get service endpoints
+# সার্ভিস এন্ডপয়েন্টগুলি পান
 azd show --output json
 ```
 
-## 📊 মনিটরিং এবং লগ
+## 📊 মনিটরিং এবং ডায়াগনস্টিকস
 
-### অ্যাপ্লিকেশন লগ
+### মনিটরিং ড্যাশবোর্ড
 ```bash
-# View logs from all services
-azd logs
-
-# View logs from specific service
-azd logs --service api
-
-# Follow logs in real-time
-azd logs --follow
-
-# View logs since specific time
-azd logs --since 1h
-azd logs --since "2024-01-01 10:00:00"
-
-# Filter logs by level
-azd logs --level error
-```
-
-### মনিটরিং
-```bash
-# Open Azure portal for monitoring
+# Azure পোর্টাল মনিটরিং ড্যাশবোর্ড খুলুন
 azd monitor
 
-# Open Application Insights
-azd monitor --insights
+# Application Insights লাইভ মেট্রিক্স খুলুন
+azd monitor --live
+
+# Application Insights লগস ব্লেড খুলুন
+azd monitor --logs
+
+# Application Insights ওভারভিউ খুলুন
+azd monitor --overview
+```
+
+### কনটেইনার লগ দেখা
+```bash
+# Azure CLI দিয়ে লগ দেখুন (Container Apps-এর জন্য)
+az containerapp logs show --name <app-name> --resource-group <rg-name>
+
+# রিয়েল-টাইমে লগ অনুসরণ করুন
+az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+
+# Azure Portal থেকে লগ দেখুন
+azd monitor --logs
+```
+
+### লগ অ্যানালিটিক্স কোয়েরি
+```bash
+# Azure Portal-এর মাধ্যমে Log Analytics অ্যাক্সেস করুন
+azd monitor --logs
+
+# Azure CLI ব্যবহার করে লগগুলি অনুসন্ধান করুন
+az monitor log-analytics query \
+  --workspace <workspace-id> \
+  --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
 ## 🛠️ রক্ষণাবেক্ষণ কমান্ডসমূহ
 
-### ক্লিনআপ
+### সাফাই
 ```bash
-# Remove all Azure resources
+# সব Azure রিসোর্স মুছে ফেলুন
 azd down
 
-# Force delete without confirmation
+# নিশ্চিতকরণ ছাড়াই জোরপূর্বক মুছে ফেলুন
 azd down --force
 
-# Purge soft-deleted resources
+# সফট-ডিলিট করা রিসোর্সগুলো স্থায়ীভাবে নির্মূল করুন
 azd down --purge
 
-# Complete cleanup
+# সম্পূর্ণ পরিষ্করণ
 azd down --force --purge
 ```
 
-### আপডেট
+### আপডেটস
 ```bash
-# Check for azd updates
-azd version --check-for-updates
-
-# Get current version
+# azd আপডেট পরীক্ষা করুন
 azd version
 
-# Show system information
-azd info
+# বর্তমান সংস্করণ পান
+azd version
+
+# বর্তমান কনফিগারেশন দেখুন
+azd config list
 ```
 
 ## 🔧 উন্নত কমান্ডসমূহ
 
 ### পাইপলাইন এবং CI/CD
 ```bash
-# Configure GitHub Actions
+# GitHub Actions কনফিগার করুন
 azd pipeline config
 
-# Configure Azure DevOps
+# Azure DevOps কনফিগার করুন
 azd pipeline config --provider azdo
 
-# Show pipeline configuration
+# পাইপলাইন কনফিগারেশন দেখান
 azd pipeline show
 ```
 
 ### অবকাঠামো ব্যবস্থাপনা
 ```bash
-# Import existing resources
-azd infra import
+# ইনফ্রাসট্রাকচার টেমপ্লেট তৈরি করুন
+azd infra generate
 
-# Export infrastructure template
-azd infra export
-
-# Validate infrastructure
-azd infra validate
-
-# 🧪 Infrastructure Preview & Planning (NEW)
+# 🧪 ইনফ্রাসট্রাকচার প্রিভিউ ও পরিকল্পনা
 azd provision --preview
-# Simulates infrastructure provisioning without deploying
-# Analyzes Bicep/Terraform templates and shows:
-# - Resources to be added (green +)
-# - Resources to be modified (yellow ~) 
-# - Resources to be deleted (red -)
-# Safe to run - no actual changes made to Azure environment
+# ডিপ্লয় করা ছাড়াই ইনফ্রাসট্রাকচার প্রোভিশনিং অনুকরণ করে
+# Bicep/Terraform টেমপ্লেটগুলো বিশ্লেষণ করে এবং প্রদর্শন করে:
+# - যোগ করা হবে এমন রিসোর্সসমূহ (সবুজ +)
+# - পরিবর্তিত হবে এমন রিসোর্সসমূহ (হলুদ ~)
+# - মুছে ফেলা হবে এমন রিসোর্সসমূহ (লাল -)
+# নিরাপদভাবে চালানো যায় - Azure পরিবেশে কোনো বাস্তব পরিবর্তন করা হবে না
+
+# azure.yaml থেকে ইনফ্রাসট্রাকচার সংশ্লেষণ করুন
+azd infra synth
 ```
 
-### সার্ভিস ব্যবস্থাপনা
+### প্রকল্প তথ্য
 ```bash
-# List all services
-azd service list
+# প্রকল্পের অবস্থা এবং এন্ডপয়েন্ট দেখান
+azd show
 
-# Show service details
-azd service show --service web
+# প্রকল্পের বিস্তারিত তথ্য JSON হিসেবে দেখান
+azd show --output json
 
-# Restart service
-azd service restart --service api
+# সার্ভিসের এন্ডপয়েন্টগুলো পান
+azd show --output json | jq '.services'
 ```
 
-## 🎯 দ্রুত ওয়ার্কফ্লো
+## 🎯 দ্রুত ওয়ার্কফ্লোসমূহ
 
-### উন্নয়ন ওয়ার্কফ্লো
+### ডেভেলপমেন্ট ওয়ার্কফ্লো
 ```bash
-# Start new project
+# নতুন প্রকল্প শুরু করুন
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Deploy to development
+# ডেভেলপমেন্টে ডেপ্লয় করুন
 azd env new dev
 azd up
 
-# Make changes and redeploy
+# পরিবর্তন করুন এবং পুনরায় ডেপ্লয় করুন
 azd deploy
 
-# View logs
-azd logs --follow
+# মনিটরিং ড্যাশবোর্ড খুলুন
+azd monitor --live
 ```
 
-### বহু-পরিবেশ ওয়ার্কফ্লো
+### মাল্টি-এনভায়রনমেন্ট ওয়ার্কফ্লো
 ```bash
-# Set up environments
+# পরিবেশগুলো সেট আপ করুন
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Deploy to dev
+# ডেভ-এ ডেপ্লয় করুন
 azd env select dev
 azd up
 
-# Test and promote to staging
+# পরীক্ষা করে স্টেজিং-এ উন্নীত করুন
 azd env select staging
 azd up
 
-# Deploy to production
+# প্রোডাকশনে ডেপ্লয় করুন
 azd env select production
 azd up
 ```
 
-### ট্রাবলশুটিং ওয়ার্কফ্লো
+### সমস্যা সমাধান ওয়ার্কফ্লো
 ```bash
-# Enable debug mode
+# ডিবাগ মোড সক্রিয় করুন
 export AZD_DEBUG=true
 
-# Check system info
-azd info
+# ডিপ্লয়মেন্টের অবস্থা পরীক্ষা করুন
+azd show
 
-# Validate configuration
-azd config validate
+# কনফিগারেশন যাচাই করুন
+azd config list
 
-# View detailed logs
-azd logs --level debug --since 1h
+# লগের জন্য মনিটরিং ড্যাশবোর্ড খুলুন
+azd monitor --logs
 
-# Check resource status
+# রিসোর্সের অবস্থা পরীক্ষা করুন
 azd show --output json
 ```
 
@@ -357,92 +361,94 @@ azd show --output json
 
 ### ডিবাগ তথ্য
 ```bash
-# Enable debug output
+# ডিবাগ আউটপুট সক্রিয় করুন
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Disable telemetry for cleaner output
+# পরিষ্কার আউটপুটের জন্য টেলিমেট্রি নিষ্ক্রিয় করুন
 export AZD_DISABLE_TELEMETRY=true
 
-# Get system information
-azd info
+# বর্তমান কনফিগারেশন পরীক্ষা করুন
+azd config list
 
-# Check authentication status
+# প্রমাণীকরণ অবস্থা পরীক্ষা করুন
 az account show
 ```
 
 ### টেমপ্লেট ডিবাগিং
 ```bash
-# List available templates with details
+# উপলব্ধ টেমপ্লেটগুলো বিস্তারিতসহ তালিকাভুক্ত করুন
 azd template list --output json
 
-# Show template information
+# টেমপ্লেটের তথ্য দেখান
 azd template show <template-name>
 
-# Validate template before init
+# init এর আগে টেমপ্লেট যাচাই করুন
 azd template validate <template-name>
 ```
 
-## 📁 ফাইল এবং ডিরেক্টরি কমান্ডসমূহ
+## 📁 ফাইল ও ডিরেক্টরি কমান্ডসমূহ
 
 ### প্রকল্প কাঠামো
 ```bash
-# Show current directory structure
-tree /f  # Windows
-find . -type f  # Linux/macOS
+# বর্তমান ডিরেক্টরি কাঠামো দেখান
+tree /f  # উইন্ডোজ
+find . -type f  # লিনাক্স/ম্যাকওএস
 
-# Navigate to azd project root
+# azd প্রকল্পের মূল ডিরেক্টরিতে যান
 cd $(azd root)
 
-# Show azd configuration directory
-echo $AZD_CONFIG_DIR  # Usually ~/.azd
+# azd কনফিগারেশন ডিরেক্টরি দেখান
+echo $AZD_CONFIG_DIR  # সাধারণত ~/.azd
 ```
 
 ## 🎨 আউটপুট ফরম্যাটিং
 
 ### JSON আউটপুট
 ```bash
-# Get JSON output for scripting
+# স্ক্রিপ্টিংয়ের জন্য JSON আউটপুট পান
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parse with jq
+# jq দিয়ে পার্স করুন
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### টেবিল আউটপুট
 ```bash
-# Format as table
+# টেবিল হিসেবে বিন্যাস করুন
 azd env list --output table
-azd service list --output table
+
+# ডিপ্লয় করা সার্ভিসগুলো দেখুন
+azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 সাধারণ কমান্ড সংমিশ্রণ
+## 🔧 সাধারণ কমান্ড কম্বিনেশনসমূহ
 
-### স্বাস্থ্য পরীক্ষা স্ক্রিপ্ট
+### হেলথ চেক স্ক্রিপ্ট
 ```bash
 #!/bin/bash
-# Quick health check
+# দ্রুত স্বাস্থ্য পরীক্ষা
 azd show
 azd env show
-azd logs --level error --since 10m
+azd monitor --logs
 ```
 
-### ডিপ্লয়মেন্ট যাচাইকরণ
+### ডেপ্লয়মেন্ট ভ্যালিডেশন
 ```bash
 #!/bin/bash
-# Pre-deployment validation
-azd config validate
-azd provision --preview  # 🧪 NEW: Preview changes before deploying
+# ডিপ্লয়মেন্টের আগে যাচাই
+azd show
+azd provision --preview  # ডিপ্লয় করার আগে পরিবর্তনগুলোর পূর্বরূপ দেখুন
 az account show
 ```
 
 ### পরিবেশ তুলনা
 ```bash
 #!/bin/bash
-# Compare environments
+# পরিবেশগুলিকে তুলনা করুন
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -453,7 +459,7 @@ done
 ### রিসোর্স ক্লিনআপ স্ক্রিপ্ট
 ```bash
 #!/bin/bash
-# Clean up old environments
+# পুরানো পরিবেশগুলো পরিষ্কার করুন
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -461,21 +467,21 @@ azd env list | grep -E "(dev-|test-)" | while read env; do
 done
 ```
 
-## 📝 পরিবেশ ভেরিয়েবল
+## 📝 পরিবেশ ভেরিয়েবলসমূহ
 
-### সাধারণ পরিবেশ ভেরিয়েবল
+### সাধারণ পরিবেশ ভেরিয়েবলসমূহ
 ```bash
-# Azure configuration
+# Azure কনফিগারেশন
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD configuration
+# AZD কনফিগারেশন
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Application configuration
+# অ্যাপ্লিকেশন কনফিগারেশন
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -484,100 +490,105 @@ export LOG_LEVEL="info"
 
 ### দ্রুত সমাধান
 ```bash
-# Reset authentication
+# প্রমাণীকরণ পুনরায় সেট করুন
 az account clear
 az login
 
-# Force refresh environment
-azd env refresh --force
+# পরিবেশ জোর করে রিফ্রেশ করুন
+azd env refresh
 
-# Restart all services
-azd service restart --all
+# সমস্ত সেবা পুনরায় ডিপ্লয় করুন
+azd deploy
 
-# Quick rollback
-azd deploy --rollback
+# ডিপ্লয়মেন্টের অবস্থা পরীক্ষা করুন
+azd show --output json
 ```
 
 ### পুনরুদ্ধার কমান্ডসমূহ
 ```bash
-# Recover from failed deployment
-azd provision --continue-on-error
-azd deploy --ignore-errors
+# ব্যর্থ ডিপ্লয়মেন্ট থেকে পুনরুদ্ধার - পরিষ্কার করে পুনরায় ডিপ্লয় করা
+azd down --force --purge
+azd up
 
-# Clean slate recovery
-azd down --force
-azd up --confirm-with-no-prompt
+# শুধুমাত্র অবকাঠামো পুনরায় প্রদান
+azd provision
+
+# শুধুমাত্র অ্যাপ্লিকেশন পুনরায় ডিপ্লয় করা
+azd deploy
 ```
 
-## 💡 প্রো টিপস
+## 💡 পেশাদার টিপস
 
-### দ্রুত ওয়ার্কফ্লোর জন্য এলিয়াস
+### দ্রুত ওয়ার্কফ্লোর জন্য আলিয়াস
 ```bash
-# Add to your .bashrc or .zshrc
-alias azdup='azd up --confirm-with-no-prompt'
-alias azdl='azd logs --follow'
+# আপনার .bashrc বা .zshrc-এ যোগ করুন
+alias azdup='azd up'
+alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
 ### ফাংশন শর্টকাট
 ```bash
-# Quick environment switching
+# দ্রুত পরিবেশ পরিবর্তন
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Quick deployment with logs
+# মনিটরিং সহ দ্রুত ডিপ্লয়মেন্ট
 azd-deploy-watch() {
-    azd deploy --service $1 && azd logs --service $1 --follow
+    azd deploy --service $1 && azd monitor --live
 }
 
-# Environment status
+# পরিবেশের অবস্থা
 azd-status() {
-    echo "Current environment: $(azd env show --output json | jq -r '.name')"
+    echo "Current environment:"
+    azd env show
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
 ```
 
-## 📖 সাহায্য এবং ডকুমেন্টেশন
+## 📖 সহায়তা ও ডকুমেন্টেশন
 
-### সাহায্য পাওয়া
+### সহায়তা নেওয়া
 ```bash
-# General help
+# সাধারণ সাহায্য
 azd --help
 azd help
 
-# Command-specific help
+# কমান্ড-নির্দিষ্ট সাহায্য
 azd up --help
 azd env --help
 azd config --help
 
-# Show version and build info
+# সংস্করণ ও বিল্ড তথ্য দেখান
 azd version
 azd version --output json
 ```
 
 ### ডকুমেন্টেশন লিঙ্কসমূহ
 ```bash
-# Open documentation in browser
+# ব্রাউজারে ডকুমেন্টেশন খুলুন
 azd docs
 
-# Show template documentation
+# টেমপ্লেটের ডকুমেন্টেশন দেখান
 azd template show <template-name> --docs
 ```
 
 ---
 
-**টিপ**: এই চিট শিটটি বুকমার্ক করুন এবং `Ctrl+F` ব্যবহার করে দ্রুত প্রয়োজনীয় কমান্ড খুঁজুন!
+**টিপ**: এই চিট শিটটি বুকমার্ক করুন এবং যে কমান্ডগুলো আপনাকে লাগবে দ্রুত খুঁজে পেতে `Ctrl+F` ব্যবহার করুন!
 
 ---
 
 **নেভিগেশন**
-- **পূর্ববর্তী পাঠ**: [প্রিফ্লাইট চেক](../docs/pre-deployment/preflight-checks.md)
+- **পূর্ববর্তী পাঠ**: [প্রিফ্লাইট চেকস](../docs/pre-deployment/preflight-checks.md)
 - **পরবর্তী পাঠ**: [শব্দকোষ](glossary.md)
 
 ---
 
-**অস্বীকৃতি**:  
-এই নথিটি AI অনুবাদ পরিষেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাসাধ্য সঠিকতার জন্য চেষ্টা করি, তবে অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল ভাষায় থাকা নথিটিকে প্রামাণিক উৎস হিসেবে বিবেচনা করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য, পেশাদার মানব অনুবাদ সুপারিশ করা হয়। এই অনুবাদ ব্যবহারের ফলে কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়ী থাকব না।
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+অস্বীকারোক্তি:
+এই নথিটি AI অনুবাদ সেবা Co-op Translator (https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। যদিও আমরা সঠিকতা নিশ্চিত করার চেষ্টা করি, অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা ভুল থাকতে পারে। মূল ভাষায় থাকা মূল নথিটাকেই প্রামাণিক উৎস হিসেবে গণ্য করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ পরামর্শযোগ্য। এই অনুবাদ ব্যবহারের ফলে উদ্ভূত কোনো ভুল বোঝাবুঝি বা ভ্রান্ত ব্যাখ্যার জন্য আমরা দায়ী নই।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

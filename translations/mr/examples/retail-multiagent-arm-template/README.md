@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-20T12:50:20+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "mr"
-}
--->
 # रिटेल मल्टी-एजंट सोल्यूशन - इन्फ्रास्ट्रक्चर टेम्पलेट
 
 **अध्याय ५: उत्पादन तैनाती पॅकेज**

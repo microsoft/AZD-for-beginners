@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-24T21:32:45+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "ml"
-}
--->
 # റീട്ടെയിൽ മൾട്ടി-ഏജന്റ് സൊല്യൂഷൻ - ഇൻഫ്രാസ്ട്രക്ചർ ടെംപ്ലേറ്റ്
 
 **അധ്യായം 5: പ്രൊഡക്ഷൻ ഡിപ്ലോയ്മെന്റ് പാക്കേജ്**

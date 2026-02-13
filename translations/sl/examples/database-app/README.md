@@ -1,82 +1,73 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-23T23:21:07+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "sl"
-}
--->
-# Uvajanje Microsoft SQL baze podatkov in spletne aplikacije z AZD
+# Razmestitev Microsoft SQL podatkovne baze in spletne aplikacije z AZD
 
-⏱️ **Ocenjeni čas**: 20-30 minut | 💰 **Ocenjeni stroški**: ~15-25 €/mesec | ⭐ **Kompleksnost**: Srednja
+⏱️ **Ocenjeni čas**: 20-30 minut | 💰 **Ocenjeni strošek**: ~$15-25/mesec | ⭐ **Kompleksnost**: Srednja
 
-Ta **popoln, delujoč primer** prikazuje, kako uporabiti [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) za uvajanje spletne aplikacije Python Flask z Microsoft SQL bazo podatkov v Azure. Vsa koda je vključena in testirana—brez zunanjih odvisnosti.
+Ta **popoln, delujoč primer** prikazuje, kako uporabiti [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) za razmestitev spletne aplikacije Python Flask z Microsoft SQL bazo podatkov v Azure. Vsa koda je vključena in testirana—brez zunanjih odvisnosti.
 
 ## Kaj se boste naučili
 
 Z dokončanjem tega primera boste:
-- Uvedli večnivojsko aplikacijo (spletna aplikacija + baza podatkov) z infrastrukturo kot kodo
-- Konfigurirali varne povezave z bazo podatkov brez trdega kodiranja gesel
-- Spremljali zdravje aplikacije z Application Insights
+- Razmestili večslojno aplikacijo (spletna aplikacija + baza) z uporabo infrastrukture kot kode
+- Konfigurirali varne povezave z bazo brez vnašanja skrivnosti v kodo
+- Nadzorovali zdravje aplikacije z Application Insights
 - Učinkovito upravljali Azure vire z AZD CLI
-- Sledili najboljšim praksam Azure za varnost, optimizacijo stroškov in opazovanje
+- Sledili najboljšim praksam Azure za varnost, optimizacijo stroškov in opazljivost
 
 ## Pregled scenarija
-- **Spletna aplikacija**: Python Flask REST API s povezavo z bazo podatkov
-- **Baza podatkov**: Azure SQL baza podatkov z vzorčnimi podatki
-- **Infrastruktura**: Ustvarjena z Bicep (modularne, ponovno uporabne predloge)
-- **Uvajanje**: Popolnoma avtomatizirano z ukazi `azd`
-- **Spremljanje**: Application Insights za dnevnike in telemetrijo
+- **Spletna aplikacija**: Python Flask REST API s povezavo na bazo
+- **Podatkovna baza**: Azure SQL Database z vzorčnimi podatki
+- **Infrastruktura**: Zagotovljena z Bicep (modularne, ponovno uporabne predloge)
+- **Razmestitev**: Popolnoma avtomatizirano z ukazi `azd`
+- **Nadzor**: Application Insights za dnevnike in telemetrijo
 
 ## Predpogoji
 
 ### Potrebna orodja
 
-Pred začetkom preverite, ali imate nameščena naslednja orodja:
+Pred začetkom preverite, da imate nameščena naslednja orodja:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (različica 2.50.0 ali novejša)
    ```sh
    az --version
-   # Pričakovani rezultat: azure-cli 2.50.0 ali višji
+   # Pričakovani izhod: azure-cli 2.50.0 ali novejša
    ```
 
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (različica 1.0.0 ali novejša)
    ```sh
    azd version
-   # Pričakovani izhod: azd različica 1.0.0 ali višja
+   # Pričakovan izhod: azd različica 1.0.0 ali novejša
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (za lokalni razvoj)
    ```sh
    python --version
-   # Pričakovani rezultat: Python 3.8 ali novejši
+   # Pričakovani izhod: Python 3.8 ali novejši
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (neobvezno, za lokalni razvoj v kontejnerjih)
+4. **[Docker](https://www.docker.com/get-started)** (neobvezno, za lokalni razvoj v vsebnikih)
    ```sh
    docker --version
-   # Pričakovani rezultat: Docker različica 20.10 ali višja
+   # Pričakovani izhod: različica Dockera 20.10 ali novejša
    ```
 
 ### Zahteve za Azure
 
 - Aktivna **Azure naročnina** ([ustvarite brezplačen račun](https://azure.microsoft.com/free/))
-- Dovoljenja za ustvarjanje virov v vaši naročnini
-- **Lastnik** ali **Sodelavec** v naročnini ali skupini virov
+- Pooblastila za ustvarjanje virov v vaši naročnini
+- **Owner** ali **Contributor** vloga na naročnini ali v skupini virov
 
-### Zahteve glede znanja
+### Predznanje
 
-To je primer **srednje zahtevnosti**. Poznati morate:
-- Osnovne operacije ukazne vrstice
-- Temeljne koncepte oblaka (viri, skupine virov)
+To je primer **srednje zahtevnosti**. Poznati bi morali:
+- Osnovne ukaze v ukazni vrstici
+- Osnovne koncepte oblaka (viri, skupine virov)
 - Osnovno razumevanje spletnih aplikacij in baz podatkov
 
-**Nov v AZD?** Najprej začnite z [vodnikom za začetek](../../docs/getting-started/azd-basics.md).
+**Ste novi pri AZD?** Oglejte si najprej [vodnik za začetek](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## Arhitektura
 
-Ta primer uvaja dvonivojsko arhitekturo s spletno aplikacijo in SQL bazo podatkov:
+Ta primer razmestitve vključuje dvonivojsko arhitekturo s spletno aplikacijo in SQL bazo podatkov:
 
 ```
 ┌─────────────────┐        ┌──────────────────────┐
@@ -96,20 +87,20 @@ Ta primer uvaja dvonivojsko arhitekturo s spletno aplikacijo in SQL bazo podatko
                            └──────────────────────┘
 ```
 
-**Uvajanje virov:**
-- **Skupina virov**: Posoda za vse vire
-- **Načrt storitve aplikacij**: Gostovanje na Linuxu (B1 nivo za stroškovno učinkovitost)
-- **Spletna aplikacija**: Python 3.11 z Flask aplikacijo
-- **SQL strežnik**: Upravljan strežnik baze podatkov z najmanj TLS 1.2
-- **SQL baza podatkov**: Osnovni nivo (2GB, primeren za razvoj/testiranje)
-- **Application Insights**: Spremljanje in beleženje
-- **Delovni prostor za analitiko dnevnikov**: Centralizirano shranjevanje dnevnikov
+**Razmestitev virov:**
+- **Skupina virov**: Kontejner za vse vire
+- **App Service Plan**: Gostovanje na Linuxu (B1 nivo zaradi stroškovne učinkovitosti)
+- **Web App**: Python 3.11 runtime z aplikacijo Flask
+- **SQL Server**: Upravljan strežnik baze podatkov z vsaj TLS 1.2
+- **SQL Database**: Osnovni nivo (2GB, primeren za razvoj/testiranje)
+- **Application Insights**: Nadzor in beleženje
+- **Log Analytics Workspace**: Centralizirano shranjevanje dnevnikov
 
-**Primerjava**: To je kot restavracija (spletna aplikacija) s hladilnico (baza podatkov). Stranke naročajo z menija (API končne točke), kuhinja (Flask aplikacija) pa pridobiva sestavine (podatke) iz hladilnice. Vodja restavracije (Application Insights) spremlja vse, kar se dogaja.
+**Primer**: Predstavljajte si to kot restavracijo (spletna aplikacija) z večjim zamrzovalnikom (podatkovna baza). Stranke naročajo s menija (API končne točke), kuhinja (Flask aplikacija) pridobi sestavine (podatke) iz zamrzovalnika. Vodja restavracije (Application Insights) spremlja vse, kar se dogaja.
 
 ## Struktura map
 
-Vse datoteke so vključene v ta primer—brez zunanjih odvisnosti:
+Vse datoteke so vključene v ta primer—brez potrebnih zunanjih odvisnosti:
 
 ```
 examples/database-app/
@@ -136,13 +127,13 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**Kaj počne vsaka datoteka:**
-- **azure.yaml**: Pove AZD, kaj naj uvede in kje
+**Kaj dela vsaka datoteka:**
+- **azure.yaml**: Pove AZD, kaj naj razmestiti in kam
 - **infra/main.bicep**: Orkestrira vse Azure vire
-- **infra/resources/*.bicep**: Posamezne definicije virov (modularne za ponovno uporabo)
+- **infra/resources/*.bicep**: Posamezne definicije virov (modularno za ponovno uporabo)
 - **src/web/app.py**: Flask aplikacija z logiko baze podatkov
-- **requirements.txt**: Odvisnosti Python paketov
-- **Dockerfile**: Navodila za kontejnerizacijo za uvajanje
+- **requirements.txt**: Odvisnosti paketov Python
+- **Dockerfile**: Navodila za kontejnerizacijo za razmestitev
 
 ## Hitri začetek (korak za korakom)
 
@@ -153,21 +144,21 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Preverjanje uspešnosti**: Preverite, ali vidite `azure.yaml` in mapo `infra/`:
+**✓ Preverjanje uspeha**: Preverite, da vidite `azure.yaml` in mapo `infra/`:
 ```sh
 ls
 # Pričakovano: README.md, azure.yaml, infra/, src/
 ```
 
-### Korak 2: Prijavite se v Azure
+### Korak 2: Avtentikacija v Azure
 
 ```sh
 azd auth login
 ```
 
-To odpre vaš brskalnik za prijavo v Azure. Prijavite se s svojimi Azure poverilnicami.
+To odpre vaš brskalnik za Azure avtentikacijo. Prijavite se z vašimi Azure poverilnicami.
 
-**✓ Preverjanje uspešnosti**: Videti bi morali:
+**✓ Preverjanje uspeha**: Morali bi videti:
 ```
 Logged in to Azure.
 ```
@@ -178,76 +169,76 @@ Logged in to Azure.
 azd init
 ```
 
-**Kaj se zgodi**: AZD ustvari lokalno konfiguracijo za vaše uvajanje.
+**Kaj se zgodi**: AZD ustvari lokalno konfiguracijo za vašo razmestitev.
 
 **Pozivi, ki jih boste videli**:
 - **Ime okolja**: Vnesite kratko ime (npr. `dev`, `myapp`)
-- **Azure naročnina**: Izberite svojo naročnino s seznama
-- **Azure lokacija**: Izberite regijo (npr. `eastus`, `westeurope`)
+- **Azure naročnina**: Izberite vašo naročnino s seznama
+- **Lokacija Azure**: Izberite regijo (npr. `eastus`, `westeurope`)
 
-**✓ Preverjanje uspešnosti**: Videti bi morali:
+**✓ Preverjanje uspeha**: Morali bi videti:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Korak 4: Uvedite Azure vire
+### Korak 4: Zagotovitev virov v Azure
 
 ```sh
 azd provision
 ```
 
-**Kaj se zgodi**: AZD uvede vso infrastrukturo (traja 5-8 minut):
+**Kaj se zgodi**: AZD razmestí vso infrastrukturo (traja 5–8 minut):
 1. Ustvari skupino virov
-2. Ustvari SQL strežnik in bazo podatkov
-3. Ustvari načrt storitve aplikacij
-4. Ustvari spletno aplikacijo
+2. Ustvari SQL Server in bazo
+3. Ustvari App Service Plan
+4. Ustvari Web App
 5. Ustvari Application Insights
 6. Konfigurira omrežje in varnost
 
-**Pozvani boste za**:
+**Boste pozvani za**:
 - **Uporabniško ime SQL skrbnika**: Vnesite uporabniško ime (npr. `sqladmin`)
 - **Geslo SQL skrbnika**: Vnesite močno geslo (shranite ga!)
 
-**✓ Preverjanje uspešnosti**: Videti bi morali:
+**✓ Preverjanje uspeha**: Morali bi videti:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Čas**: 5-8 minut
+**⏱️ Čas**: 5–8 minut
 
-### Korak 5: Uvedite aplikacijo
+### Korak 5: Razmestitev aplikacije
 
 ```sh
 azd deploy
 ```
 
-**Kaj se zgodi**: AZD zgradi in uvede vašo Flask aplikacijo:
+**Kaj se zgodi**: AZD zgradi in razmesti vašo Flask aplikacijo:
 1. Pakira Python aplikacijo
 2. Zgradi Docker kontejner
-3. Potisne v Azure spletno aplikacijo
-4. Inicializira bazo podatkov z vzorčnimi podatki
+3. Potisne v Azure Web App
+4. Inicializira bazo s primeri podatkov
 5. Zažene aplikacijo
 
-**✓ Preverjanje uspešnosti**: Videti bi morali:
+**✓ Preverjanje uspeha**: Morali bi videti:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Čas**: 3-5 minut
+**⏱️ Čas**: 3–5 minut
 
-### Korak 6: Oglejte si aplikacijo
+### Korak 6: Ogled aplikacije v brskalniku
 
 ```sh
 azd browse
 ```
 
-To odpre vašo uvedeno spletno aplikacijo v brskalniku na `https://app-<unique-id>.azurewebsites.net`
+To odpre vašo razmestjeno spletno aplikacijo v brskalniku na `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Preverjanje uspešnosti**: Videti bi morali JSON izhod:
+**✓ Preverjanje uspeha**: Morali bi videti JSON izhod:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -260,14 +251,14 @@ To odpre vašo uvedeno spletno aplikacijo v brskalniku na `https://app-<unique-i
 }
 ```
 
-### Korak 7: Testirajte API končne točke
+### Korak 7: Preizkusite API končne točke
 
-**Preverjanje zdravja** (preverite povezavo z bazo podatkov):
+**Preverjanje stanja** (preverite povezavo z bazo):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**Pričakovani odziv**:
+**Pričakovani odgovor**:
 ```json
 {
   "status": "healthy",
@@ -275,12 +266,12 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**Seznam izdelkov** (vzorec podatkov):
+**Seznam izdelkov** (vzorčni podatki):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**Pričakovani odziv**:
+**Pričakovani odgovor**:
 ```json
 [
   {
@@ -294,73 +285,73 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**Pridobite posamezen izdelek**:
+**Pridobi posamezen izdelek**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Preverjanje uspešnosti**: Vse končne točke vrnejo JSON podatke brez napak.
+**✓ Preverjanje uspeha**: Vse končne točke vrnejo JSON podatke brez napak.
 
 ---
 
-**🎉 Čestitke!** Uspešno ste uvedli spletno aplikacijo z bazo podatkov v Azure z uporabo AZD.
+**🎉 Čestitamo!** Uspešno ste razmestili spletno aplikacijo z bazo v Azure z uporabo AZD.
 
-## Podrobna konfiguracija
+## Poglobljen pregled konfiguracije
 
 ### Spremenljivke okolja
 
-Gesla so varno upravljana prek konfiguracije Azure App Service—**nikoli trdo kodirana v izvorni kodi**.
+Skrivnosti se varno upravljajo prek konfiguracije Azure App Service—**nikoli trdo zakodirane v izvorni kodi**.
 
 **Samodejno konfigurirano z AZD**:
-- `SQL_CONNECTION_STRING`: Povezava z bazo podatkov z šifriranimi poverilnicami
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Telemetrijska končna točka za spremljanje
+- `SQL_CONNECTION_STRING`: Povezava z bazo s šifriranimi poverilnicami
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Končna točka telemetrije za nadzor
 - `SCM_DO_BUILD_DURING_DEPLOYMENT`: Omogoča samodejno namestitev odvisnosti
 
-**Kje so gesla shranjena**:
-1. Med `azd provision` vnesete SQL poverilnice prek varnih pozivov
-2. AZD jih shrani v lokalno datoteko `.azure/<env-name>/.env` (izključeno iz Git-a)
-3. AZD jih vključi v konfiguracijo Azure App Service (šifrirano v mirovanju)
+**Kje so skrivnosti shranjene**:
+1. Med `azd provision` zagotovite SQL poverilnice prek varnih pozivov
+2. AZD jih shrani v lokalno datoteko `.azure/<env-name>/.env` (izključeno iz Gita)
+3. AZD jih injicira v konfiguracijo Azure App Service (šifrirano v mirovanju)
 4. Aplikacija jih bere prek `os.getenv()` med izvajanjem
 
 ### Lokalni razvoj
 
-Za lokalno testiranje ustvarite `.env` datoteko iz vzorca:
+Za lokalno testiranje ustvarite datoteko `.env` iz vzorca:
 
 ```sh
 cp .env.sample .env
-# Uredite .env z vašo lokalno povezavo do baze podatkov
+# Uredi datoteko .env z lokalno povezavo do baze podatkov
 ```
 
-**Delovni tok lokalnega razvoja**:
+**Potek dela za lokalni razvoj**:
 ```sh
 # Namestite odvisnosti
 cd src/web
 pip install -r requirements.txt
 
-# Nastavite okoljske spremenljivke
+# Nastavite spremenljivke okolja
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
 # Zaženite aplikacijo
 python app.py
 ```
 
-**Testirajte lokalno**:
+**Preizkusite lokalno**:
 ```sh
 curl http://localhost:8000/health
-# Pričakovano: {"status": "zdravo", "database": "povezan"}
+# Pričakovano: {"stanje": "zdravo", "baza": "povezana"}
 ```
 
 ### Infrastruktura kot koda
 
-Vsi Azure viri so definirani v **Bicep predlogah** (mapa `infra/`):
+Vsi Azure viri so definirani v **Bicep predlogah** (`infra/` mapa):
 
 - **Modularna zasnova**: Vsaka vrsta vira ima svojo datoteko za ponovno uporabo
-- **Parametrizirano**: Prilagodite nivoje, regije, poimenovalne konvencije
-- **Najboljše prakse**: Sledi standardom poimenovanja Azure in privzetim varnostnim nastavitvam
-- **Sledljivo**: Spremembe infrastrukture so sledene v Git-u
+- **Parametrizirano**: Prilagodite SKU-je, regije, konvencije poimenovanja
+- **Najboljše prakse**: Sledi Azure standardom poimenovanja in privzetim varnostnim nastavitvam
+- **Nadzor različic**: Spremembe infrastrukture so sledene v Gitu
 
 **Primer prilagoditve**:
-Za spremembo nivoja baze podatkov uredite `infra/resources/sql-database.bicep`:
+Če želite spremeniti nivo baze, uredite `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -369,72 +360,72 @@ sku: {
 }
 ```
 
-## Najboljše prakse za varnost
+## Najboljše varnostne prakse
 
-Ta primer sledi najboljšim praksam za varnost v Azure:
+Ta primer sledi najboljšim varnostnim praksam Azure:
 
-### 1. **Brez gesel v izvorni kodi**
-- ✅ Poverilnice shranjene v konfiguraciji Azure App Service (šifrirano)
-- ✅ `.env` datoteke izključene iz Git-a prek `.gitignore`
-- ✅ Gesla posredovana prek varnih parametrov med uvajanjem
+### 1. **Brez skrivnosti v izvorni kodi**
+- ✅ Poverilnice shranjene v konfiguraciji Azure App Service (šifrirane)
+- ✅ Datoteke `.env` izključene iz Gita prek `.gitignore`
+- ✅ Skrivnosti posredovane prek varnih parametrov med zagotavljanjem
 
 ### 2. **Šifrirane povezave**
-- ✅ Najmanj TLS 1.2 za SQL strežnik
-- ✅ Obvezno HTTPS za spletno aplikacijo
-- ✅ Povezave z bazo podatkov uporabljajo šifrirane kanale
+- ✅ Najmanj TLS 1.2 za SQL Server
+- ✅ Zahtevano samo HTTPS za Web App
+- ✅ Povezave z bazo uporabljajo šifrirane kanale
 
 ### 3. **Omrežna varnost**
-- ✅ SQL strežniški požarni zid konfiguriran za dovoljenje samo Azure storitvam
-- ✅ Dostop do javnega omrežja omejen (lahko se dodatno zaklene z zasebnimi končnimi točkami)
-- ✅ FTPS onemogočen na spletni aplikaciji
+- ✅ Firewall SQL Serverja nastavljen tako, da dovoli samo Azure storitve
+- ✅ Javni dostop do omrežja omejen (lahko dodatno zavarovano s Private Endpoints)
+- ✅ FTPS onemogočen na Web App
 
 ### 4. **Avtentikacija in avtorizacija**
 - ⚠️ **Trenutno**: SQL avtentikacija (uporabniško ime/geslo)
 - ✅ **Priporočilo za produkcijo**: Uporabite Azure Managed Identity za avtentikacijo brez gesla
 
 **Za nadgradnjo na Managed Identity** (za produkcijo):
-1. Omogočite upravljano identiteto na spletni aplikaciji
-2. Dodelite identiteti SQL dovoljenja
-3. Posodobite povezovalni niz za uporabo upravljane identitete
-4. Odstranite avtentikacijo na podlagi gesla
+1. Omogočite managed identity na Web App
+2. Dodelite identiteti dovoljenja v SQL
+3. Posodobite connection string, da uporablja managed identity
+4. Odstranite avtentikacijo na podlagi gesel
 
 ### 5. **Revizija in skladnost**
 - ✅ Application Insights beleži vse zahteve in napake
-- ✅ SQL baza podatkov omogoča revizijo (lahko se konfigurira za skladnost)
+- ✅ Revizija SQL baze omogočena (lahko je konfigurirana za skladnost)
 - ✅ Vsi viri označeni za upravljanje
 
 **Varnostni kontrolni seznam pred produkcijo**:
 - [ ] Omogočite Azure Defender za SQL
-- [ ] Konfigurirajte zasebne končne točke za SQL bazo podatkov
-- [ ] Omogočite požarni zid spletne aplikacije (WAF)
-- [ ] Uvedite Azure Key Vault za rotacijo gesel
-- [ ] Konfigurirajte avtentikacijo Azure AD
+- [ ] Konfigurirajte Private Endpoints za SQL bazo
+- [ ] Omogočite Web Application Firewall (WAF)
+- [ ] Uvedite Azure Key Vault za rotacijo skrivnosti
+- [ ] Konfigurirajte Azure AD avtentikacijo
 - [ ] Omogočite diagnostično beleženje za vse vire
 
 ## Optimizacija stroškov
 
-**Ocenjeni mesečni stroški** (november 2025):
+**Ocenjeni mesečni stroški** (stanje november 2025):
 
 | Vir | SKU/Nivo | Ocenjeni strošek |
-|-----|----------|------------------|
-| Načrt storitve aplikacij | B1 (Osnovni) | ~13 €/mesec |
-| SQL baza podatkov | Osnovni (2GB) | ~5 €/mesec |
-| Application Insights | Plačilo po porabi | ~2 €/mesec (nizek promet) |
-| **Skupaj** | | **~20 €/mesec** |
+|----------|----------|----------------|
+| App Service Plan | B1 (Basic) | ~$13/month |
+| SQL Database | Basic (2GB) | ~$5/month |
+| Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
+| **Skupaj** | | **~$20/month** |
 
-**💡 Nasveti za varčevanje**:
+**💡 Nasveti za varčevanje stroškov**:
 
 1. **Uporabite brezplačni nivo za učenje**:
-   - Načrt storitve aplikacij: F1 nivo (brezplačno, omejene ure)
-   - SQL baza podatkov: Uporabite strežnik Azure SQL Database serverless
-   - Application Insights: 5GB/mesec brezplačnega vnosa
+   - App Service: F1 nivo (brezplačno, omejene ure)
+   - SQL Database: Uporabite Azure SQL Database serverless
+   - Application Insights: 5GB/month free ingestion
 
-2. **Ustavite vire, ko jih ne uporabljate**:
+2. **Ustavite vire, ko niso v uporabi**:
    ```sh
-   # Ustavite spletno aplikacijo (baza podatkov še vedno zaračunava)
+   # Ustavi spletno aplikacijo (baza podatkov še vedno povzroča stroške)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Znova zaženite, ko je potrebno
+   # Ponovno zaženi po potrebi
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
@@ -444,46 +435,46 @@ Ta primer sledi najboljšim praksam za varnost v Azure:
    ```
    To odstrani VSE vire in ustavi stroške.
 
-4. **Razvojni vs. produkcijski nivoji**:
+4. **Razvojna in produkcijska SKU-ja**:
    - **Razvoj**: Osnovni nivo (uporabljen v tem primeru)
    - **Produkcija**: Standardni/Premium nivo z redundanco
 
-**Spremljanje stroškov**:
-- Oglejte si stroške v [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Nastavite opozorila o stroških, da se izognete presenečenjem
+**Nadzor stroškov**:
+- Ogled stroškov v [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Nastavite opozorila o stroških, da se izognete nepričakovanim stroškom
 - Označite vse vire z `azd-env-name` za sledenje
 
-**Alternativa brezplačnemu nivoju**:
-Za učne namene lahko spremenite `infra/resources/app-service-plan.bicep`:
+**Brezplačna alternativa**:
+Za učenje lahko spremenite `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Opomba**: Brezplačni nivo ima omejitve (60 min/dan CPU, brez vedno vklopljenega).
+**Opomba**: Brezplačni nivo ima omejitve (60 min/dan CPU, brez always-on).
 
-## Spremljanje in opazovanje
+## Nadzor in opazljivost
 
 ### Integracija Application Insights
 
 Ta primer vključuje **Application Insights** za celovito spremljanje:
 
-**Kaj se spremlja**:
-- ✅ HTTP zahteve (zakasnitve, statusne kode, končne točke)
+**Kaj se nadzira**:
+- ✅ HTTP zahtevki (zakasnitev, statusne kode, končne točke)
 - ✅ Napake in izjeme aplikacije
 - ✅ Prilagojeno beleženje iz Flask aplikacije
-- ✅ Zdravje povezave z bazo podatkov
-- ✅ Meritve zmogljivosti (CPU, pomnilnik)
+- ✅ Zdravje povezave z bazo
+- ✅ Merilniki zmogljivosti (CPU, pomnilnik)
 
 **Dostop do Application Insights**:
 1. Odprite [Azure Portal](https://portal.azure.com)
-2. Pojdite v svojo skupino virov (`rg-<env-name>`)
+2. Pomaknite se v vašo skupino virov (`rg-<env-name>`)
 3. Kliknite na Application Insights vir (`appi-<unique-id>`)
 
-**Uporabne poizvedbe** (Application Insights → Dnevniki):
+**Uporabne poizvedbe** (Application Insights → Logs):
 
-**Prikaži vse zahteve**:
+**Poglej vse zahtevke**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -499,7 +490,7 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Preveri končno točko zdravja**:
+**Preverite health endpoint**:
 ```kusto
 requests
 | where name contains "health"
@@ -508,27 +499,27 @@ requests
 
 ### Revizija SQL baze podatkov
 
-**Revizija SQL baze podatkov je omogočena** za sledenje:
-- Vzorcev dostopa do baze podatkov
-- Neuspelih poskusov prijave
+**Revizija SQL baze je omogočena** za sledenje:
+- Vzorcev dostopa do baze
+- Poskusov neuspešne prijave
 - Sprememb sheme
 - Dostopa do podatkov (za skladnost)
 
 **Dostop do revizijskih dnevnikov**:
-1. Azure Portal → SQL baza podatkov → Revizija
-2. Oglejte si dnevnike v delovnem prostoru Log Analytics
+1. Azure Portal → SQL Database → Auditing
+2. Ogled dnevnikov v Log Analytics workspace
 
-### Spremljanje v realnem času
+### Nadzor v realnem času
 
-**Ogled živih metrik**:
-1. Application Insights → Žive metrike
-2. Oglejte si zahteve, napake in zmogljivost v realnem času
+**Poglejte žive meritve**:
+1. Application Insights → Live Metrics
+2. Oglejte si zahtevke, napake in zmogljivost v realnem času
 
 **Nastavite opozorila**:
 Ustvarite opozorila za kritične dogodke:
-- HTTP 500 napake > 5 v 5 minutah
-- Neuspešne povezave z bazo podatkov
-- Dolgi odzivni časi (>2 sekundi)
+- HTTP 500 napak > 5 v 5 minutah
+- Napake povezave z bazo
+- Visoki časi odziva (>2 sekund)
 
 **Primer ustvarjanja opozorila**:
 ```sh
@@ -544,7 +535,7 @@ az monitor metrics alert create \
 
 ### Pogoste težave in rešitve
 
-#### 1. `azd provision` ne uspe z "Lokacija ni na voljo"
+#### 1. `azd provision` ne uspe z napako "Location not available"
 
 **Simptom**:
 ```
@@ -557,7 +548,7 @@ Izberite drugo regijo Azure ali registrirajte ponudnika virov:
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. Povezava s SQL ne uspe med uvajanjem
+#### 2. Povezava s SQL ne uspe med nameščanjem
 
 **Simptom**:
 ```
@@ -565,34 +556,34 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 ```
 
 **Rešitev**:
-- Preverite, ali požarni zid SQL strežnika omogoča storitve Azure (samodejno konfigurirano)
-- Preverite, ali je geslo za SQL administratorja pravilno vneseno med `azd provision`
-- Prepričajte se, da je SQL strežnik popolnoma vzpostavljen (lahko traja 2-3 minute)
+- Preverite, ali požarni zid SQL strežnika dovoljuje storitve Azure (samodejno konfigurirano)
+- Preverite, ali je bilo geslo skrbnika za SQL pravilno vneseno med `azd provision`
+- Poskrbite, da je SQL Server popolnoma vzpostavljen (lahko traja 2-3 minute)
 
 **Preverite povezavo**:
 ```sh
-# Iz Azure Portal pojdite na SQL Database → Urejevalnik poizvedb
-# Poskusite se povezati s svojimi poverilnicami
+# V Azure portalu pojdite na SQL Database → Urejevalnik poizvedb
+# Poskusite se povezati s svojimi prijavnimi podatki
 ```
 
-#### 3. Spletna aplikacija prikazuje "Napaka aplikacije"
+#### 3. Spletna aplikacija prikazuje "Application Error"
 
 **Simptom**:
-Brskalnik prikazuje generično stran z napako.
+Brskalnik prikaže splošno stran z napako.
 
 **Rešitev**:
-Preverite dnevniške zapise aplikacije:
+Preverite dnevnike aplikacije:
 ```sh
-# Ogled nedavnih dnevnikov
+# Prikaži nedavne dnevnike
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
 **Pogosti vzroki**:
-- Manjkajoče okoljske spremenljivke (preverite App Service → Konfiguracija)
-- Neuspešna namestitev Python paketov (preverite dnevnike uvajanja)
-- Napaka pri inicializaciji baze podatkov (preverite povezljivost SQL)
+- Manjkajoče spremenljivke okolja (preverite App Service → Konfiguracija)
+- Namestitev Python paketov ni uspela (preverite dnevnike nameščanja)
+- Napaka pri inicializaciji baze podatkov (preverite povezljivost s SQL)
 
-#### 4. `azd deploy` ne uspe z "Napaka pri gradnji"
+#### 4. `azd deploy` ne uspe z "Build Error"
 
 **Simptom**:
 ```
@@ -601,17 +592,17 @@ Error: Failed to build project
 
 **Rešitev**:
 - Prepričajte se, da `requirements.txt` nima sintaktičnih napak
-- Preverite, ali je Python 3.11 določen v `infra/resources/web-app.bicep`
-- Preverite, ali ima Dockerfile pravilno osnovno sliko
+- Preverite, da je Python 3.11 naveden v `infra/resources/web-app.bicep`
+- Preverite, da Dockerfile uporablja pravilno osnovno sliko
 
-**Odpravljanje težav lokalno**:
+**Odpravljanje napak lokalno**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Neavtorizirano" pri izvajanju ukazov AZD
+#### 5. "Unauthorized" pri izvajanju AZD ukazov
 
 **Simptom**:
 ```
@@ -625,55 +616,55 @@ azd auth login
 az login
 ```
 
-Preverite, ali imate ustrezne pravice (vloga Contributor) na naročnini.
+Preverite, da imate pravilne pravice (vloga Contributor) na naročnino.
 
 #### 6. Visoki stroški baze podatkov
 
 **Simptom**:
-Nepričakovan račun Azure.
+Nepričakovani račun za Azure.
 
 **Rešitev**:
-- Preverite, ali ste pozabili zagnati `azd down` po testiranju
-- Preverite, ali SQL baza podatkov uporablja osnovni nivo (ne Premium)
+- Preverite, ali ste po testiranju pozabili izvesti `azd down`
+- Preverite, da SQL Database uporablja stopnjo Basic (ne Premium)
 - Preglejte stroške v Azure Cost Management
-- Nastavite opozorila o stroških
+- Nastavite opozorila za stroške
 
 ### Pridobivanje pomoči
 
-**Prikaži vse okoljske spremenljivke AZD**:
+**Prikaži vse AZD spremenljivke okolja**:
 ```sh
 azd env get-values
 ```
 
-**Preverite stanje uvajanja**:
+**Preverite stanje nameščanja**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Dostop do dnevniških zapisov aplikacije**:
+**Dostop do dnevnikov aplikacije**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
 **Potrebujete več pomoči?**
-- [AZD Vodnik za odpravljanje težav](../../docs/troubleshooting/common-issues.md)
-- [Azure App Service Odpravljanje težav](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL Odpravljanje težav](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+- [Vodnik za odpravljanje težav AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Odpravljanje težav Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Odpravljanje težav z Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## Praktične vaje
 
-### Naloga 1: Preverite svoje uvajanje (Začetnik)
+### Vaja 1: Preverite svojo namestitev (Začetnik)
 
-**Cilj**: Preverite, ali so vsi viri uvedeni in aplikacija deluje.
+**Cilj**: Potrdite, da so vsi viri nameščeni in da aplikacija deluje.
 
 **Koraki**:
-1. Naštejte vse vire v svoji skupini virov:
+1. Prikažite vse vire v vaši skupini virov:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Pričakovano**: 6-7 virov (Spletna aplikacija, SQL strežnik, SQL baza podatkov, načrt storitve App Service, Application Insights, Log Analytics)
+   **Pričakovano**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. Testirajte vse API končne točke:
+2. Preizkusite vse API končne točke:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
@@ -683,20 +674,20 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    **Pričakovano**: Vse vrnejo veljaven JSON brez napak
 
 3. Preverite Application Insights:
-   - Pojdite na Application Insights v Azure Portal
-   - Odprite "Live Metrics"
-   - Osvežite brskalnik na spletni aplikaciji
-   **Pričakovano**: Vidite zahteve v realnem času
+   - Pojdite v Application Insights v Azure Portal
+   - Pojdite na "Live Metrics"
+   - Osvežite stran spletne aplikacije v brskalniku
+   **Pričakovano**: Videti zahtevke v realnem času
 
-**Merila uspeha**: Vsi 6-7 virov obstajajo, vse končne točke vračajo podatke, Live Metrics prikazuje aktivnost.
+**Kriteriji uspeha**: Vsi 6-7 viri obstajajo, vse končne točke vračajo podatke, Live Metrics prikazuje aktivnost.
 
 ---
 
-### Naloga 2: Dodajte novo API končno točko (Srednje zahtevno)
+### Vaja 2: Dodajte novo API končno točko (Srednje zahtevno)
 
 **Cilj**: Razširite Flask aplikacijo z novo končno točko.
 
-**Začetna koda**: Trenutne končne točke v `src/web/app.py`
+**Izhodiščna koda**: Trenutne končne točke v `src/web/app.py`
 
 **Koraki**:
 1. Uredite `src/web/app.py` in dodajte novo končno točko po funkciji `get_product()`:
@@ -733,22 +724,22 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. Uvedite posodobljeno aplikacijo:
+2. Razmestite posodobljeno aplikacijo:
    ```sh
    azd deploy
    ```
 
-3. Testirajte novo končno točko:
+3. Preizkusite novo končno točko:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Pričakovano**: Vrne izdelke, ki ustrezajo "laptop"
+   **Pričakovano**: Vrne izdelke, ki se ujemajo z "laptop"
 
-**Merila uspeha**: Nova končna točka deluje, vrača filtrirane rezultate, se pojavi v dnevnikih Application Insights.
+**Kriteriji uspeha**: Nova končna točka deluje, vrača filtrirane rezultate, se prikaže v dnevnikih Application Insights.
 
 ---
 
-### Naloga 3: Dodajte spremljanje in opozorila (Napredno)
+### Vaja 3: Dodajte spremljanje in opozorila (Napredno)
 
 **Cilj**: Nastavite proaktivno spremljanje z opozorili.
 
@@ -772,26 +763,26 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. Sprožite opozorilo z povzročanjem napak:
+2. Sprožite opozorilo tako, da povzročite napake:
    ```sh
-   # Zahtevajte neobstoječ izdelek
+   # Zahteva za neobstoječ izdelek
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Preverite, ali se je opozorilo sprožilo:
+3. Preverite, ali je opozorilo sproženo:
    - Azure Portal → Alerts → Alert Rules
-   - Preverite svoj e-poštni naslov (če je konfiguriran)
+   - Preverite svoj e-poštni predal (če je konfigurirano)
 
-**Merila uspeha**: Pravilo opozorila je ustvarjeno, se sproži ob napakah, obvestila so prejeta.
+**Kriteriji uspeha**: Pravilo opozorila je ustvarjeno, se sproži ob napakah, prejmete obvestila.
 
 ---
 
-### Naloga 4: Spremembe sheme baze podatkov (Napredno)
+### Vaja 4: Spremembe sheme baze podatkov (Napredno)
 
 **Cilj**: Dodajte novo tabelo in spremenite aplikacijo, da jo uporablja.
 
 **Koraki**:
-1. Povežite se z SQL bazo podatkov prek Azure Portal Query Editor
+1. Povežite se z SQL Database prek Azure Portal Query Editor
 
 2. Ustvarite novo tabelo `categories`:
    ```sql
@@ -810,39 +801,39 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Posodobite `src/web/app.py`, da vključuje informacije o kategorijah v odgovore
+3. Posodobite `src/web/app.py`, da v odzivih vključuje informacije o kategorijah
 
-4. Uvedite in testirajte
+4. Razmestite in preizkusite
 
-**Merila uspeha**: Nova tabela obstaja, izdelki prikazujejo informacije o kategorijah, aplikacija še vedno deluje.
+**Kriteriji uspeha**: Nova tabela obstaja, izdelki prikazujejo informacije o kategorijah, aplikacija še vedno deluje.
 
 ---
 
-### Naloga 5: Uvedite predpomnjenje (Strokovno)
+### Vaja 5: Implementirajte predpomnjenje (Strokovno)
 
 **Cilj**: Dodajte Azure Redis Cache za izboljšanje zmogljivosti.
 
 **Koraki**:
 1. Dodajte Redis Cache v `infra/main.bicep`
-2. Posodobite `src/web/app.py`, da predpomni poizvedbe izdelkov
+2. Posodobite `src/web/app.py`, da predpomni poizvedbe po izdelkih
 3. Izmerite izboljšanje zmogljivosti z Application Insights
-4. Primerjajte odzivne čase pred/po predpomnjenju
+4. Primerjajte čase odziva pred/po predpomnjenju
 
-**Merila uspeha**: Redis je uveden, predpomnjenje deluje, odzivni časi se izboljšajo za >50%.
+**Kriteriji uspeha**: Redis je razmeščen, predpomnjenje deluje, časi odziva so izboljšani za >50%.
 
-**Namig**: Začnite z [dokumentacijo Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Namig**: Začnite z [Dokumentacija Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Čiščenje
 
-Da se izognete stalnim stroškom, izbrišite vse vire po končanem delu:
+Da se izognete nadaljnjim stroškom, izbrišite vse vire, ko končate:
 
 ```sh
 azd down
 ```
 
-**Potrditev**:
+**Poziv za potrditev**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
@@ -850,13 +841,13 @@ azd down
 Vnesite `y` za potrditev.
 
 **✓ Preverjanje uspeha**: 
-- Vsi viri so izbrisani iz Azure Portal
-- Ni stalnih stroškov
-- Lokalna mapa `.azure/<env-name>` se lahko izbriše
+- Vsi viri so izbrisani iz Azure Portala
+- Brez nadaljnjih stroškov
+- Lokalno mapo `.azure/<env-name>` lahko izbrišete
 
 **Alternativa** (obdržite infrastrukturo, izbrišite podatke):
 ```sh
-# Izbriši samo skupino virov (ohrani AZD konfiguracijo)
+# Izbriši samo skupino virov (ohrani konfiguracijo AZD)
 az group delete --name rg-<env-name> --yes
 ```
 ## Več informacij
@@ -869,51 +860,51 @@ az group delete --name rg-<env-name> --yes
 - [Referenca jezika Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ### Naslednji koraki v tem tečaju
-- **[Primer aplikacij s kontejnerji](../../../../examples/container-app)**: Uvedite mikrostoritve z Azure Container Apps
-- **[Vodnik za integracijo AI](../../../../docs/ai-foundry)**: Dodajte AI zmogljivosti svoji aplikaciji
-- **[Najboljše prakse uvajanja](../../docs/deployment/deployment-guide.md)**: Vzorci uvajanja v produkcijo
+- **[Primer Container Apps](../../../../examples/container-app)**: Razmestite mikroservise z Azure Container Apps
+- **[Vodnik za integracijo AI](../../../../docs/ai-foundry)**: Dodajte AI zmožnosti svoji aplikaciji
+- **[Najboljše prakse razmestitve](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Vzorci razmestitve v produkcijo
 
 ### Napredne teme
 - **Upravljana identiteta**: Odstranite gesla in uporabite avtentikacijo Azure AD
-- **Zasebne končne točke**: Zavarujte povezave z bazo podatkov znotraj virtualnega omrežja
-- **Integracija CI/CD**: Avtomatizirajte uvajanja z GitHub Actions ali Azure DevOps
-- **Več okolij**: Nastavite razvojna, testna in produkcijska okolja
-- **Migracije baze podatkov**: Uporabite Alembic ali Entity Framework za različice sheme
+- **Zasebne končne točke**: Zavarujte povezave do baze znotraj virtualnega omrežja
+- **Integracija CI/CD**: Avtomatizirajte razmestitve z GitHub Actions ali Azure DevOps
+- **Več okolij**: Nastavite razvojno, preizkusno in produkcijsko okolje
+- **Migracije baze podatkov**: Uporabite Alembic ali Entity Framework za verzioniranje sheme
 
 ### Primerjava z drugimi pristopi
 
-**AZD vs. ARM predloge**:
-- ✅ AZD: Višja raven abstrakcije, enostavnejši ukazi
+**AZD v primerjavi z ARM predlogami**:
+- ✅ AZD: Višja abstrakcija, enostavnejši ukazi
 - ⚠️ ARM: Bolj obsežno, podrobnejši nadzor
 
-**AZD vs. Terraform**:
-- ✅ AZD: Azure-native, integrirano z Azure storitvami
+**AZD v primerjavi s Terraformom**:
+- ✅ AZD: Nativno za Azure, integrirano s storitvami Azure
 - ⚠️ Terraform: Podpora za več oblakov, večji ekosistem
 
-**AZD vs. Azure Portal**:
-- ✅ AZD: Ponovljivo, pod nadzorom različic, avtomatizirano
-- ⚠️ Portal: Ročni kliki, težko reproducirati
+**AZD v primerjavi z Azure Portal**:
+- ✅ AZD: Ponovljivo, verzionirano, avtomatizirano
+- ⚠️ Portal: Ročno klikkanje, težko reproducirati
 
-**Pomislite na AZD kot**: Docker Compose za Azure—poenostavljena konfiguracija za kompleksna uvajanja.
+**AZD si predstavljajte kot**: Docker Compose za Azure—poenostavljena konfiguracija za kompleksna razmestitve.
 
 ---
 
 ## Pogosta vprašanja
 
-**V: Ali lahko uporabim drug programski jezik?**  
-O: Seveda! Zamenjajte `src/web/` z Node.js, C#, Go ali katerim koli jezikom. Posodobite `azure.yaml` in Bicep ustrezno.
+**Q: Ali lahko uporabim drug programski jezik?**  
+A: Da! Zamenjajte `src/web/` z Node.js, C#, Go ali katerim koli drugim jezikom. Posodobite `azure.yaml` in Bicep ustrezno.
 
-**V: Kako dodam več baz podatkov?**  
-O: Dodajte še en modul SQL baze podatkov v `infra/main.bicep` ali uporabite PostgreSQL/MySQL iz storitev Azure Database.
+**Q: Kako dodam več baz podatkov?**  
+A: Dodajte še en modul SQL Database v `infra/main.bicep` ali uporabite PostgreSQL/MySQL iz storitev Azure Database.
 
-**V: Ali lahko to uporabim za produkcijo?**  
-O: To je izhodišče. Za produkcijo dodajte: upravljano identiteto, zasebne končne točke, redundanco, strategijo varnostnih kopij, WAF in izboljšano spremljanje.
+**Q: Ali lahko to uporabim v produkciji?**  
+A: To je izhodišče. Za produkcijo dodajte: upravljano identiteto, zasebne končne točke, redundanco, strategijo varnostnih kopij, WAF in izboljšano spremljanje.
 
-**V: Kaj če želim uporabiti kontejnerje namesto uvajanja kode?**  
-O: Oglejte si [Primer aplikacij s kontejnerji](../../../../examples/container-app), ki uporablja Docker kontejnerje povsod.
+**Q: Kaj, če želim uporabiti kontejnerje namesto razmestitve kode?**  
+A: Oglejte si [Primer Container Apps](../../../../examples/container-app), ki uporablja Docker kontejnerje povsod.
 
-**V: Kako se povežem z bazo podatkov iz svojega lokalnega računalnika?**  
-O: Dodajte svoj IP v požarni zid SQL strežnika:
+**Q: Kako se povežem z bazo iz lokalnega računalnika?**  
+A: Dodajte svoj IP v požarni zid SQL Serverja:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -923,21 +914,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**V: Ali lahko uporabim obstoječo bazo podatkov namesto ustvarjanja nove?**  
-O: Da, spremenite `infra/main.bicep`, da se sklicuje na obstoječi SQL strežnik, in posodobite parametre povezovalnega niza.
+**Q: Ali lahko uporabim obstoječo bazo namesto ustvarjanja nove?**  
+A: Da, prilagodite `infra/main.bicep`, da se sklicuje na obstoječi SQL Server in posodobite parametre niza za povezavo.
 
 ---
 
-> **Opomba:** Ta primer prikazuje najboljše prakse za uvajanje spletne aplikacije z bazo podatkov z uporabo AZD. Vključuje delujočo kodo, obsežno dokumentacijo in praktične vaje za utrjevanje znanja. Za produkcijska uvajanja preglejte varnostne, skalabilne, skladnostne in stroškovne zahteve, specifične za vašo organizacijo.
+> **Opomba:** Ta primer prikazuje najboljše prakse za razmestitev spletne aplikacije z bazo podatkov z uporabo AZD. Vključuje delujočo kodo, obsežno dokumentacijo in praktične vaje za utrditev učenja. Za razmestitve v produkcijo preglejte varnostne, skalabilnostne, skladnostne in stroškovne zahteve, ki so značilne za vašo organizacijo.
 
-**📚 Navigacija po tečaju:**
-- ← Prejšnje: [Primer aplikacij s kontejnerji](../../../../examples/container-app)
-- → Naslednje: [Vodnik za integracijo AI](../../../../docs/ai-foundry)
+**📚 Navigacija tečaja:**
+- ← Prejšnja: [Primer Container Apps](../../../../examples/container-app)
+- → Naslednja: [Vodnik za integracijo AI](../../../../docs/ai-foundry)
 - 🏠 [Domača stran tečaja](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatski prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku naj se šteje za avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+**Izjava o omejitvi odgovornosti**:
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

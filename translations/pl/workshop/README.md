@@ -1,178 +1,171 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
-  "translation_date": "2025-10-16T15:44:19+00:00",
-  "source_file": "workshop/README.md",
-  "language_code": "pl"
-}
--->
 <div align="center">
-  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+  <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🚧 Warsztat w budowie 🚧
+      🎯 Warsztaty AZD dla programistów AI
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Ten warsztat jest obecnie aktywnie rozwijany.</strong><br>
-      Treści mogą być niekompletne lub ulegać zmianom. Wróć wkrótce, aby zobaczyć aktualizacje!
+      <strong>Warsztaty praktyczne z budowania aplikacji AI za pomocą Azure Developer CLI.</strong><br>
+      Wykonaj 7 modułów, aby opanować szablony AZD i przepływy pracy wdrażania AI.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Ostatnia aktualizacja: październik 2025
+        📅 Ostatnia aktualizacja: luty 2026
       </span>
     </div>
   </div>
 </div>
 
-# Warsztat AZD dla deweloperów AI
+# Warsztaty AZD dla programistów AI
 
-Witamy w praktycznym warsztacie dotyczącym nauki Azure Developer CLI (AZD) z naciskiem na wdrażanie aplikacji AI. Ten warsztat pomoże Ci zdobyć praktyczne zrozumienie szablonów AZD w 3 krokach:
+Witamy na warsztatach praktycznych do nauki Azure Developer CLI (AZD) z naciskiem na wdrażanie aplikacji AI. Te warsztaty pomogą Ci zdobyć praktyczną wiedzę o szablonach AZD w 3 krokach:
 
 1. **Odkrywanie** - znajdź szablon odpowiedni dla siebie.
-1. **Wdrażanie** - wdrożenie i weryfikacja działania.
-1. **Dostosowanie** - modyfikacja i iteracja, aby dopasować do swoich potrzeb!
+1. **Wdrożenie** - wdroż i zweryfikuj, że działa
+1. **Dostosowanie** - zmodyfikuj i iteruj, aby był Twój!
 
-Podczas warsztatu poznasz również podstawowe narzędzia i przepływy pracy dewelopera, które pomogą Ci usprawnić proces rozwoju od początku do końca.
+W trakcie warsztatów poznasz również podstawowe narzędzia i przepływy pracy programisty, które pomogą usprawnić Twój proces tworzenia od początku do końca.
 
 <br/>
 
-## Przewodnik w przeglądarce
+## Przewodnik przeglądarkowy
 
-Lekcje warsztatowe są zapisane w formacie Markdown. Możesz je przeglądać bezpośrednio na GitHubie lub uruchomić podgląd w przeglądarce, jak pokazano na poniższym zrzucie ekranu.
+Lekcje warsztatowe są w formacie Markdown. Możesz nawigować po nich bezpośrednio na GitHub - lub uruchomić podgląd w przeglądarce, jak pokazano na zrzucie ekranu poniżej.
 
-![Warsztat](../../../translated_images/pl/workshop.75906f133e6f8ba0.webp)
+![Workshop](../../../translated_images/pl/workshop.75906f133e6f8ba0.webp)
 
-Aby skorzystać z tej opcji - zrób fork repozytorium na swoim profilu i uruchom GitHub Codespaces. Gdy terminal VS Code będzie aktywny, wpisz następujące polecenie:
+Aby skorzystać z tej opcji — zatwierdź repozytorium do swojego profilu, a następnie uruchom GitHub Codespaces. Gdy terminal VS Code będzie aktywny, wpisz to polecenie:
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-Po kilku sekundach pojawi się okno dialogowe. Wybierz opcję `Open in browser`. Przewodnik w przeglądarce otworzy się w nowej karcie. Korzyści z tego podglądu:
+W ciągu kilku sekund zobaczysz wyskakujące okienko. Wybierz opcję `Open in browser`. Przewodnik internetowy otworzy się teraz na nowej karcie przeglądarki. Niektóre korzyści tego podglądu:
 
 1. **Wbudowane wyszukiwanie** - szybko znajdź słowa kluczowe lub lekcje.
-1. **Ikona kopiowania** - najedź na bloki kodu, aby zobaczyć tę opcję.
-1. **Przełącznik motywu** - zmieniaj między motywem ciemnym a jasnym.
+1. **Ikona kopiowania** - najeżdżaj na bloki kodu, by zobaczyć tę opcję
+1. **Przełącznik motywu** - zmieniaj między trybem ciemnym a jasnym
 1. **Uzyskaj pomoc** - kliknij ikonę Discord w stopce, aby dołączyć!
 
 <br/>
 
-## Przegląd warsztatu
+## Przegląd warsztatów
 
 **Czas trwania:** 3-4 godziny  
 **Poziom:** Początkujący do średniozaawansowanego  
-**Wymagania wstępne:** Znajomość Azure, podstaw AI, VS Code i narzędzi wiersza poleceń.
+**Wymagania wstępne:** Znajomość Azure, koncepcji AI, VS Code i narzędzi wiersza poleceń.
 
-To praktyczny warsztat, w którym uczysz się poprzez działanie. Po ukończeniu ćwiczeń zalecamy zapoznanie się z programem AZD dla początkujących, aby kontynuować naukę w zakresie najlepszych praktyk dotyczących bezpieczeństwa i produktywności.
+To warsztaty praktyczne, na których uczysz się przez działanie. Po zakończeniu ćwiczeń zalecamy przegląd programu AZD dla początkujących, aby kontynuować naukę na temat najlepszych praktyk związanych z bezpieczeństwem i produktywnością.
 
-| Czas | Moduł  | Cel |
+| Czas| Moduł  | Cel |
 |:---|:---|:---|
-| 15 min | [Wprowadzenie](docs/instructions/0-Introduction.md) | Ustawienie sceny, zrozumienie celów |
-| 30 min | [Wybór szablonu AI](docs/instructions/1-Select-AI-Template.md) | Eksploracja opcji i wybór szablonu startowego | 
-| 30 min | [Weryfikacja szablonu AI](docs/instructions/2-Validate-AI-Template.md) | Wdrożenie domyślnego rozwiązania na Azure |
-| 30 min | [Analiza szablonu AI](docs/instructions/3-Deconstruct-AI-Template.md) | Eksploracja struktury i konfiguracji |
-| 30 min | [Konfiguracja szablonu AI](docs/instructions/4-Configure-AI-Template.md) | Aktywacja i testowanie dostępnych funkcji |
-| 30 min | [Dostosowanie szablonu AI](docs/instructions/5-Customize-AI-Template.md) | Adaptacja szablonu do własnych potrzeb |
-| 30 min | [Usuwanie infrastruktury](docs/instructions/6-Teardown-Infrastructure.md) | Czyszczenie i zwalnianie zasobów |
-| 15 min | [Podsumowanie i kolejne kroki](docs/instructions/7-Wrap-up.md) | Zasoby edukacyjne, wyzwanie warsztatowe |
+| 15 min | [Wprowadzenie](docs/instructions/0-Introduction.md) | Wprowadzenie, cele |
+| 30 min | [Wybierz szablon AI](docs/instructions/1-Select-AI-Template.md) | Poznaj opcje i wybierz startowy | 
+| 30 min | [Zweryfikuj szablon AI](docs/instructions/2-Validate-AI-Template.md) | Wdróż domyślne rozwiązanie w Azure |
+| 30 min | [Rozbierz szablon AI](docs/instructions/3-Deconstruct-AI-Template.md) | Poznaj strukturę i konfigurację |
+| 30 min | [Skonfiguruj szablon AI](docs/instructions/4-Configure-AI-Template.md) | Aktywuj i przetestuj dostępne funkcje |
+| 30 min | [Dostosuj szablon AI](docs/instructions/5-Customize-AI-Template.md) | Dopasuj szablon do swoich potrzeb |
+| 30 min | [Demontaż infrastruktury](docs/instructions/6-Teardown-Infrastructure.md) | Sprzątanie i zwolnienie zasobów |
+| 15 min | [Podsumowanie i dalsze kroki](docs/instructions/7-Wrap-up.md) | Materiały edukacyjne, wyzwanie warsztatowe |
 
 <br/>
 
 ## Czego się nauczysz
 
-Traktuj szablon AZD jako piaskownicę edukacyjną do eksploracji różnych możliwości i narzędzi dla kompleksowego rozwoju na platformie Azure AI Foundry. Po ukończeniu warsztatu powinieneś intuicyjnie rozumieć różne narzędzia i koncepcje w tym kontekście.
+Pomyśl o szablonie AZD jak o piaskownicy do nauki, aby eksplorować różne możliwości i narzędzia do kompleksowego tworzenia na Microsoft Foundry. Po zakończeniu tych warsztatów powinieneś mieć intuicyjne wyczucie różnych narzędzi i koncepcji w tym kontekście.
 
 | Koncepcja  | Cel |
 |:---|:---|
 | **Azure Developer CLI** | Zrozumienie poleceń narzędzia i przepływów pracy |
-| **Szablony AZD**| Zrozumienie struktury projektu i konfiguracji |
-| **Agent Azure AI**| Tworzenie i wdrażanie projektu Azure AI Foundry |
-| **Azure AI Search**| Włączanie inżynierii kontekstowej z agentami |
-| **Obserwowalność**| Eksploracja śledzenia, monitorowania i ewaluacji |
-| **Testy Red Teaming**| Eksploracja testów przeciwdziałających i ich rozwiązań |
+| **Szablony AZD** | Poznanie struktury projektu i konfiguracji |
+| **Azure AI Agent** | Provisioning & wdrażanie projektów Microsoft Foundry |
+| **Azure AI Search** | Umożliwienie inżynierii kontekstu z agentami |
+| **Obserwowalność** | Poznaj śledzenie, monitorowanie i ewaluacje |
+| **Red Teaming** | Poznaj testy przeciwstawne i środki zaradcze |
 
 <br/>
 
 ## Struktura warsztatu
 
-Warsztat jest zaprojektowany tak, aby przeprowadzić Cię przez proces od odkrycia szablonu, przez wdrożenie, analizę, aż po dostosowanie - wykorzystując oficjalny szablon startowy [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) jako podstawę.
+Warsztaty prowadzą Cię krok po kroku od odkrywania szablonów, przez wdrażanie, rozbiórkę i dostosowywanie — używając oficjalnego szablonu startowego [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) jako podstawy.
 
-### [Moduł 1: Wybór szablonu AI](docs/instructions/1-Select-AI-Template.md) (30 min)
+### [Moduł 1: Wybierz szablon AI](docs/instructions/1-Select-AI-Template.md) (30 min)
 
 - Czym są szablony AI?
-- Gdzie mogę znaleźć szablony AI?
-- Jak mogę zacząć budować agentów AI?
+- Gdzie znaleźć szablony AI?
+- Jak rozpocząć budowę agentów AI?
 - **Laboratorium**: Szybki start z GitHub Codespaces
 
-### [Moduł 2: Weryfikacja szablonu AI](docs/instructions/2-Validate-AI-Template.md) (30 min)
+### [Moduł 2: Zweryfikuj szablon AI](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
 - Jaka jest architektura szablonu AI?
-- Jaki jest przepływ pracy w AZD?
-- Jak mogę uzyskać pomoc w rozwoju AZD?
-- **Laboratorium**: Wdrożenie i weryfikacja szablonu agentów AI
+- Jak wygląda przepływ pracy rozwoju AZD?
+- Gdzie szukać pomocy przy rozwoju AZD?
+- **Laboratorium**: Wdróż i zweryfikuj szablon agentów AI
 
-### [Moduł 3: Analiza szablonu AI](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
+### [Moduł 3: Rozbierz szablon AI](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
-- Eksploracja środowiska w `.azure/` 
-- Eksploracja konfiguracji zasobów w `infra/` 
-- Eksploracja konfiguracji AZD w `azure.yaml`
-- **Laboratorium**: Modyfikacja zmiennych środowiskowych i ponowne wdrożenie
+- Poznaj swoje środowisko w `.azure/`
+- Poznaj zainstalowane zasoby w `infra/`
+- Poznaj konfigurację AZD w `azure.yaml`
+- **Laboratorium**: Modyfikuj zmienne środowiskowe i ponownie wdrażaj
 
-### [Moduł 4: Konfiguracja szablonu AI](docs/instructions/4-Configure-AI-Template.md) (30 min)
-- Eksploracja: Retrieval Augmented Generation
-- Eksploracja: Ocena agentów i testy Red Teaming
-- Eksploracja: Śledzenie i monitorowanie
-- **Laboratorium**: Eksploracja agenta AI + obserwowalność 
+### [Moduł 4: Skonfiguruj szablon AI](docs/instructions/4-Configure-AI-Template.md) (30 min)
+- Poznaj: Generowanie wspomagane przez pozyskiwanie (Retrieval Augmented Generation)
+- Poznaj: Ewaluacje agentów i Red Teaming
+- Poznaj: Śledzenie i monitorowanie
+- **Laboratorium**: Eksploruj agenta AI i obserwowalność
 
-### [Moduł 5: Dostosowanie szablonu AI](docs/instructions/5-Customize-AI-Template.md) (30 min)
-- Definiowanie: PRD z wymaganiami scenariusza
-- Konfiguracja: Zmienne środowiskowe dla AZD
-- Implementacja: Lifecycle Hooks dla dodatkowych zadań
-- **Laboratorium**: Dostosowanie szablonu do mojego scenariusza
+### [Moduł 5: Dostosuj szablon AI](docs/instructions/5-Customize-AI-Template.md) (30 min)
+- Zdefiniuj: PRD z wymaganiami scenariusza
+- Skonfiguruj: zmienne środowiskowe dla AZD
+- Wdroż: haki cyklu życia do dodatkowych zadań
+- **Laboratorium**: Dostosuj szablon do mojego scenariusza
 
-### [Moduł 6: Usuwanie infrastruktury](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
-- Podsumowanie: Czym są szablony AZD?
-- Podsumowanie: Dlaczego warto korzystać z Azure Developer CLI?
+### [Moduł 6: Demontaż infrastruktury](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+- Przypomnienie: Czym są szablony AZD?
+- Przypomnienie: Dlaczego używać Azure Developer CLI?
 - Kolejne kroki: Wypróbuj inny szablon!
-- **Laboratorium**: Usunięcie infrastruktury i czyszczenie
+- **Laboratorium**: Deprowizja infrastruktury i sprzątanie
 
 <br/>
 
 ## Wyzwanie warsztatowe
 
-Chcesz się sprawdzić i zrobić coś więcej? Oto kilka propozycji projektów - lub podziel się swoimi pomysłami z nami!!
+Chcesz podjąć się większego wyzwania? Oto kilka propozycji projektów — lub podziel się swoimi pomysłami z nami!
 
 | Projekt | Opis |
 |:---|:---|
-|1. **Analiza złożonego szablonu AI** | Wykorzystaj opisany przepływ pracy i narzędzia, aby wdrożyć, zweryfikować i dostosować inny szablon rozwiązania AI. _Czego się nauczyłeś?_|
-|2. **Dostosowanie do własnego scenariusza**  | Spróbuj napisać PRD (Product Requirements Document) dla innego scenariusza. Następnie użyj GitHub Copilot w repozytorium szablonu w trybie Agent Model - i poproś go o wygenerowanie dla Ciebie przepływu dostosowania. _Czego się nauczyłeś? Jak możesz ulepszyć te sugestie?_|
+|1. **Rozbierz złożony szablon AI** | Użyj opisanych przepływów i narzędzi, sprawdź, czy potrafisz wdrożyć, zweryfikować i dostosować inny szablon rozwiązania AI. _Czego się nauczyłeś?_ |
+|2. **Dostosuj do swojego scenariusza**  | Spróbuj napisać PRD (dokument wymagań produktu) dla innego scenariusza. Następnie użyj GitHub Copilot w repozytorium szablonu w trybie Agent Model i poproś o wygenerowanie przepływu pracy dostosowującego. _Czego się nauczyłeś? Jak możesz udoskonalić te sugestie?_ |
 | | |
 
 ## Masz uwagi?
 
-1. Zgłoś problem w tym repozytorium - oznacz go tagiem `Workshop` dla wygody.
-1. Dołącz do Discorda Azure AI Foundry - połącz się z innymi uczestnikami!
+1. Zgłoś problem w tym repozytorium — oznacz go tagiem `Workshop`, aby ułatwić identyfikację.
+1. Dołącz do Discorda Microsoft Foundry — połącz się z innymi uczestnikami!
 
 
 | | | 
 |:---|:---|
-| **📚 Strona główna kursu**| [AZD dla początkujących](../README.md)|
+| **📚 Strona kursu**| [AZD dla początkujących](../README.md)|
 | **📖 Dokumentacja** | [Rozpocznij pracę z szablonami AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ Szablony AI** | [Szablony Azure AI Foundry](https://ai.azure.com/templates) |
-|**🚀 Kolejne kroki** | [Podejmij wyzwanie](../../../workshop) |
+| **🛠️ Szablony AI** | [Szablony Microsoft Foundry](https://ai.azure.com/templates) |
+|**🚀 Kolejne kroki** | [Rozpocznij warsztat](../../../workshop) |
 | | |
 
 <br/>
 
 ---
 
-**Poprzednie:** [Przewodnik rozwiązywania problemów AI](../docs/troubleshooting/ai-troubleshooting.md) | **Następne:** Rozpocznij od [Laboratorium 1: Podstawy AZD](../../../workshop/lab-1-azd-basics)
+**Nawigacja:** [Główny kurs](../README.md) | [Wprowadzenie](docs/instructions/0-Introduction.md) | [Moduł 1: Wybierz szablon](docs/instructions/1-Select-AI-Template.md)
 
-**Gotowy, aby zacząć budować aplikacje AI z AZD?**
+**Gotowy, by zacząć budować aplikacje AI z AZD?**
 
-[Rozpocznij Laboratorium 1: Podstawy AZD →](./lab-1-azd-basics/README.md)
+[Rozpocznij warsztat: Wprowadzenie →](docs/instructions/0-Introduction.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Niniejszy dokument został przetłumaczony przy użyciu automatycznej usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że staramy się zapewnić dokładność, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być traktowany jako źródło autorytatywne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego, ludzkiego tłumaczenia. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

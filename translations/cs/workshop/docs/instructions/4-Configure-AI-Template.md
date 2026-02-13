@@ -1,51 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b4a16f82d68f5820d574acd8946843e4",
-  "translation_date": "2025-09-25T02:02:58+00:00",
-  "source_file": "workshop/docs/instructions/4-Configure-AI-Template.md",
-  "language_code": "cs"
-}
--->
-# 4. Konfigurace šablony
+# 4. Nakonfigurujte šablonu
 
 !!! tip "NA KONCI TOHOTO MODULU BUDETE SCHOPNI"
 
-    - [ ] Porozumět účelu souboru `azure.yaml`
-    - [ ] Porozumět struktuře souboru `azure.yaml`
-    - [ ] Porozumět hodnotě životního cyklu `hooks` v azd
-    - [ ] **Lab 3:** 
+    - [ ] Pochopit účel souboru `azure.yaml`
+    - [ ] Pochopit strukturu souboru `azure.yaml`
+    - [ ] Pochopit hodnotu životního cyklu azd `hooks`
+    - [ ] **Lab 4:** Prozkoumat a upravit proměnné prostředí
 
 ---
 
-!!! prompt "Co dělá soubor `azure.yaml`? Použijte codefence a vysvětlete ho řádek po řádku"
+!!! prompt "Co dělá soubor `azure.yaml`? Použijte blok kódu a vysvětlete jej řádek po řádku"
 
-      Soubor `azure.yaml` je **konfigurační soubor pro Azure Developer CLI (azd)**. Definuje, jak by měla být vaše aplikace nasazena do Azure, včetně infrastruktury, služeb, nasazovacích hooků a environmentálních proměnných.
+      Soubor `azure.yaml` je **konfigurační soubor pro Azure Developer CLI (azd)**. Definuje, jak by měla být vaše aplikace nasazena do Azure, včetně infrastruktury, služeb, spouštěčů nasazení a proměnných prostředí.
 
 ---
 
 ## 1. Účel a funkčnost
 
-Soubor `azure.yaml` slouží jako **plán nasazení** pro aplikaci AI agenta, která:
+Tento soubor `azure.yaml` slouží jako **plán nasazení** pro aplikaci AI agenta, která:
 
 1. **Ověřuje prostředí** před nasazením
-2. **Zajišťuje Azure AI služby** (AI Hub, AI Project, Search, atd.)
-3. **Nasazuje Python aplikaci** do Azure Container Apps
-4. **Konfiguruje AI modely** pro chat a funkci embedování
-5. **Nastavuje monitoring a sledování** pro AI aplikaci
-6. **Řeší nové i existující** scénáře Azure AI projektů
+2. **Zajistí Azure AI služby** (AI Hub, AI Project, Search atd.)
+3. **Nasadí Python aplikaci** do Azure Container Apps
+4. **Konfiguruje AI modely** pro chat i embedding funkčnost
+5. **Nastaví monitorování a trasování** pro AI aplikaci
+6. **Řeší jak nové, tak existující** scénáře Azure AI projektů
 
-Soubor umožňuje **nasazení jedním příkazem** (`azd up`) kompletního řešení AI agenta s řádnou validací, zajištěním a konfigurací po nasazení.
+Soubor umožňuje **nasazení jedním příkazem** (`azd up`) kompletního řešení AI agenta s řádnou validací, provisioningem a post-deployment konfigurací.
 
 ??? info "Rozbalit pro zobrazení: `azure.yaml`"
 
-      Soubor `azure.yaml` definuje, jak by měl Azure Developer CLI nasadit a spravovat tuto aplikaci AI agenta v Azure. Pojďme si ho rozebrat řádek po řádku.
+      Soubor `azure.yaml` definuje, jak by měl Azure Developer CLI nasadit a spravovat tuto aplikaci AI agenta v Azure. Pojďme jej rozebrat řádek po řádku.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: potřebujeme hooky? 
-      # TODO: potřebujeme všechny proměnné?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -135,17 +126,17 @@ Soubor umožňuje **nasazení jedním příkazem** (`azd up`) kompletního řeš
 
 ---
 
-## 2. Rozbor souboru
+## 2. Rozebrání souboru
 
 Pojďme projít soubor sekci po sekci, abychom pochopili, co dělá - a proč.
 
-### 2.1 **Hlavička a schéma (1-3)**
+### 2.1 **Záhlaví a schéma (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Řádek 1**: Poskytuje validaci schématu YAML language serveru pro podporu IDE a IntelliSense
+- **Line 1**: Poskytuje validaci schématu pro YAML language server pro podporu v IDE a IntelliSense
 
 ### 2.2 Metadata projektu (5-10)
 
@@ -157,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Řádek 5**: Definuje název projektu používaný Azure Developer CLI
-- **Řádky 6-7**: Určuje, že je založen na šabloně verze 1.0.2
-- **Řádky 8-9**: Vyžaduje verzi Azure Developer CLI 1.14.0 nebo vyšší
+- **Line 5**: Definuje název projektu používaný Azure Developer CLI
+- **Lines 6-7**: Určuje, že je založeno na šabloně verze 1.0.2
+- **Lines 8-9**: Vyžaduje verzi Azure Developer CLI 1.14.0 nebo vyšší
 
 ### 2.3 Nasazovací hooky (11-40)
 
@@ -178,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Řádky 11-20**: **Hook před nasazením** - spouští se před `azd up`
+- **Lines 11-20**: **Přednasazovací hook** - spouští se před `azd up`
 
-      - Na Unix/Linux: Zpřístupní validační skript a spustí ho
-      - Na Windows: Spustí validační skript v PowerShellu
-      - Oba jsou interaktivní a zastaví nasazení, pokud selžou
+      - Na Unix/Linux: Udělá validační skript spustitelným a spustí jej
+      - Na Windows: Spustí PowerShell validační skript
+      - Oba jsou interaktivní a nasazení zastaví, pokud selžou
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -197,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Řádky 21-30**: **Hook po zajištění** - spouští se po vytvoření Azure zdrojů
+- **Lines 21-30**: **Hook po zprovoznění** - spouští se po vytvoření zdrojů Azure
 
-  - Spouští skripty pro zápis environmentálních proměnných
-  - Pokračuje v nasazení, i když tyto skripty selžou (`continueOnError: true`)
+  - Spouští skripty zapisující proměnné prostředí
+  - Nasazení pokračuje i když tyto skripty selžou (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -215,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Řádky 31-40**: **Hook po nasazení** - spouští se po nasazení aplikace
+- **Lines 31-40**: **Hook po nasazení** - spouští se po nasazení aplikace
 
-  - Spouští finální nastavovací skripty
-  - Pokračuje, i když skripty selžou
+  - Spouští finální instalační skripty
+  - Pokračuje i když skripty selžou
 
 ### 2.4 Konfigurace služby (41-48)
 
-Tato sekce konfiguruje službu aplikace, kterou nasazujete.
+Tato konfigurace definuje aplikaci, kterou nasazujete.
 
 ```yaml title="" linenums="0"
 services:
@@ -235,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Řádek 42**: Definuje službu nazvanou "api_and_frontend"
-- **Řádek 43**: Ukazuje na adresář `./src` pro zdrojový kód
-- **Řádek 44**: Určuje Python jako programovací jazyk
-- **Řádek 45**: Používá Azure Container Apps jako platformu pro hosting
-- **Řádky 46-48**: Konfigurace Dockeru
+- **Line 42**: Definuje službu s názvem "api_and_frontend"
+- **Line 43**: Ukazuje na adresář `./src` se zdrojovým kódem
+- **Line 44**: Určuje Python jako programovací jazyk
+- **Line 45**: Používá Azure Container Apps jako hostingovou platformu
+- **Lines 46-48**: Docker konfigurace
 
       - Používá "api_and_frontend" jako název image
-      - Vytváří Docker image vzdáleně v Azure (ne lokálně)
+      - Sestavuje Docker image vzdáleně v Azure (ne lokálně)
 
 ### 2.5 Proměnné pipeline (49-76)
 
-Tyto proměnné pomáhají při automatizaci `azd` v CI/CD pipelinech.
+Jedná se o proměnné, které vám pomohou spouštět `azd` v CI/CD pipeline pro automatizaci
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -287,106 +278,110 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Tato sekce definuje environmentální proměnné používané **během nasazení**, organizované podle kategorií:
+Tato sekce definuje proměnné prostředí používané **během nasazení**, uspořádané podle kategorií:
 
 - **Názvy Azure zdrojů (Řádky 51-60)**:
-      - Názvy klíčových Azure služeb, např. Resource Group, AI Hub, AI Project, atd.- 
+      - Základní názvy Azure služeb, např. Resource Group, AI Hub, AI Project atd.
 - **Přepínače funkcí (Řádky 61-63)**:
-      - Boolean proměnné pro povolení/zakázání specifických Azure služeb
+      - Booleovské proměnné pro povolení/zakázání konkrétních Azure služeb
 - **Konfigurace AI agenta (Řádky 64-71)**:
-      - Konfigurace hlavního AI agenta včetně názvu, ID, nastavení nasazení, detailů modelu- 
-- **Konfigurace embedování AI (Řádky 72-79)**:
-      - Konfigurace embedovacího modelu používaného pro vektorové vyhledávání
-- **Vyhledávání a monitoring (Řádky 80-84)**:
-      - Název indexu vyhledávání, existující ID zdrojů a nastavení monitoringu/sledování
+      - Konfigurace hlavního AI agenta včetně názvu, ID, nastavení nasazení, detailů modelu
+- **Konfigurace AI embeddingu (Řádky 72-79)**:
+      - Konfigurace embedding modelu používaného pro vektorové vyhledávání
+- **Vyhledávání a monitorování (Řádky 80-84)**:
+      - Název indexu pro vyhledávání, existující ID zdrojů a nastavení monitorování/trasování
 
 ---
 
-## 3. Znalost environmentálních proměnných
-Následující environmentální proměnné ovládají konfiguraci a chování vašeho nasazení, organizované podle jejich hlavního účelu. Většina proměnných má rozumné výchozí hodnoty, ale můžete je přizpůsobit tak, aby odpovídaly vašim specifickým požadavkům nebo existujícím Azure zdrojům.
+## 3. Poznejte proměnné prostředí
+Následující proměnné prostředí řídí konfiguraci a chování vašeho nasazení, uspořádané podle jejich hlavního účelu. Většina proměnných má rozumné výchozí hodnoty, ale můžete je upravit tak, aby odpovídaly vašim konkrétním požadavkům nebo existujícím Azure zdrojům.
 
-### 3.1 Povinné proměnné 
+### 3.1 Požadované proměnné 
 
 ```bash title="" linenums="0"
-# Core Azure Configuration
-AZURE_ENV_NAME                    # Environment name (used in resource naming)
-AZURE_LOCATION                    # Deployment region
-AZURE_SUBSCRIPTION_ID             # Target subscription
-AZURE_RESOURCE_GROUP              # Resource group name
-AZURE_PRINCIPAL_ID                # User principal for RBAC
+# Základní konfigurace Azure
+AZURE_ENV_NAME                    # Název prostředí (používá se při pojmenovávání prostředků)
+AZURE_LOCATION                    # Region nasazení
+AZURE_SUBSCRIPTION_ID             # Cílové předplatné
+AZURE_RESOURCE_GROUP              # Název skupiny prostředků
+AZURE_PRINCIPAL_ID                # Uživatelský principal pro RBAC
 
-# Resource Names (Auto-generated if not specified)
-AZURE_AIHUB_NAME                  # AI Foundry hub name
-AZURE_AIPROJECT_NAME              # AI project name
-AZURE_AISERVICES_NAME             # AI services account name
-AZURE_STORAGE_ACCOUNT_NAME        # Storage account name
-AZURE_CONTAINER_REGISTRY_NAME     # Container registry name
-AZURE_KEYVAULT_NAME               # Key Vault name (if used)
+# Názvy prostředků (automaticky generovány, pokud nejsou zadány)
+AZURE_AIHUB_NAME                  # Název hubu Microsoft Foundry
+AZURE_AIPROJECT_NAME              # Název AI projektu
+AZURE_AISERVICES_NAME             # Název účtu služeb AI
+AZURE_STORAGE_ACCOUNT_NAME        # Název účtu úložiště
+AZURE_CONTAINER_REGISTRY_NAME     # Název registru kontejnerů
+AZURE_KEYVAULT_NAME               # Název Key Vaultu (pokud je použit)
 ```
 
 ### 3.2 Konfigurace modelu 
 ```bash title="" linenums="0"
-# Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Default: 80 (thousands of TPM)
+# Konfigurace chatovacího modelu
+AZURE_AI_AGENT_MODEL_NAME         # Výchozí: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # Výchozí: OpenAI (nebo Microsoft)
+AZURE_AI_AGENT_MODEL_VERSION      # Výchozí: nejnovější dostupný
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Název nasazení pro chatovací model
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Výchozí: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Výchozí: 80 (tisíce TPM)
 
-# Embedding Model Configuration  
-AZURE_AI_EMBED_MODEL_NAME         # Default: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Default: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Default: latest available
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Deployment name for embeddings
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Default: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Default: 50 (thousands of TPM)
+# Konfigurace embedovacího modelu
+AZURE_AI_EMBED_MODEL_NAME         # Výchozí: text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # Výchozí: OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # Výchozí: nejnovější dostupný
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Název nasazení pro embeddingy
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Výchozí: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Výchozí: 50 (tisíce TPM)
 
-# Agent Configuration
-AZURE_AI_AGENT_NAME               # Agent display name
-AZURE_EXISTING_AGENT_ID           # Use existing agent (optional)
+# Konfigurace agenta
+AZURE_AI_AGENT_NAME               # Zobrazovaný název agenta
+AZURE_EXISTING_AGENT_ID           # Použít existujícího agenta (volitelné)
 ```
 
 ### 3.3 Přepínače funkcí
 ```bash title="" linenums="0"
-# Optional Services
-USE_APPLICATION_INSIGHTS         # Default: true
-USE_AZURE_AI_SEARCH_SERVICE      # Default: false
-USE_CONTAINER_REGISTRY           # Default: true
+# Volitelné služby
+USE_APPLICATION_INSIGHTS         # Výchozí: true
+USE_AZURE_AI_SEARCH_SERVICE      # Výchozí: false
+USE_CONTAINER_REGISTRY           # Výchozí: true
 
-# Monitoring and Tracing
-ENABLE_AZURE_MONITOR_TRACING     # Default: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Default: false
+# Monitorování a trasování
+ENABLE_AZURE_MONITOR_TRACING     # Výchozí: false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Výchozí: false
 
-# Search Configuration
-AZURE_AI_SEARCH_INDEX_NAME       # Search index name
-AZURE_SEARCH_SERVICE_NAME        # Search service name
+# Konfigurace vyhledávání
+AZURE_AI_SEARCH_INDEX_NAME       # Název vyhledávacího indexu
+AZURE_SEARCH_SERVICE_NAME        # Název vyhledávací služby
 ```
 
 ### 3.4 Konfigurace AI projektu 
 ```bash title="" linenums="0"
-# Use Existing Resources
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full resource ID of existing AI project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint URL of existing project
+# Použít existující zdroje
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Úplné ID zdroje existujícího AI projektu
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL koncového bodu existujícího projektu
 ```
 
-### 3.5 Kontrola vašich proměnných
+### 3.5 Zkontrolujte své proměnné
 
-Použijte Azure Developer CLI k zobrazení a správě vašich environmentálních proměnných:
+Použijte Azure Developer CLI ke zobrazení a správě vašich proměnných prostředí:
 
 ```bash title="" linenums="0"
-# View all environment variables for current environment
+# Zobrazit všechny proměnné aktuálního prostředí
 azd env get-values
 
-# Get a specific environment variable
+# Získat konkrétní proměnnou prostředí
 azd env get-value AZURE_ENV_NAME
 
-# Set an environment variable
+# Nastavit proměnnou prostředí
 azd env set AZURE_LOCATION eastus
 
-# Set multiple variables from a .env file
+# Nastavit více proměnných ze souboru .env
 azd env set --from-file .env
 ```
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení o vyloučení odpovědnosti**:
+Tento dokument byl přeložen pomocí služby překladu založené na umělé inteligenci [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za rozhodující zdroj. Pro důležité informace doporučujeme využít profesionální lidský překlad. Nejsme odpovědni za žádná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

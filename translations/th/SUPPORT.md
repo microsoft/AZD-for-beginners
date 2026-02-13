@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-09T21:06:53+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "th"
-}
--->
 # TODO: ผู้ดูแลของ repo นี้ยังไม่ได้แก้ไขไฟล์นี้
 
 **เจ้าของ REPO**: คุณต้องการการสนับสนุนจากฝ่ายบริการลูกค้าและช่วยเหลือ (CSS) สำหรับผลิตภัณฑ์/โปรเจกต์นี้หรือไม่?

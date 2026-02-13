@@ -1,20 +1,11 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-19T20:47:28+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "ko"
-}
--->
 # AZD를 사용한 컨테이너 앱 배포 예제
 
-이 디렉터리에는 Azure Developer CLI (AZD)를 사용하여 Azure Container Apps에 컨테이너화된 애플리케이션을 배포하는 포괄적인 예제가 포함되어 있습니다. 이 예제들은 실제 사용 사례, 모범 사례, 그리고 프로덕션 준비가 완료된 구성을 보여줍니다.
+이 디렉터리에는 Azure Developer CLI(AZD)를 사용하여 Azure Container Apps에 컨테이너화된 애플리케이션을 배포하는 종합적인 예제가 포함되어 있습니다. 이 예제들은 실제 사용 사례, 모범 사례 및 프로덕션 준비 구성을 보여줍니다.
 
 ## 📚 목차
 
 - [개요](../../../../examples/container-app)
-- [사전 요구 사항](../../../../examples/container-app)
+- [필수 조건](../../../../examples/container-app)
 - [빠른 시작 예제](../../../../examples/container-app)
 - [프로덕션 예제](../../../../examples/container-app)
 - [고급 패턴](../../../../examples/container-app)
@@ -22,17 +13,17 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 개요
 
-Azure Container Apps는 인프라를 관리하지 않고도 마이크로서비스와 컨테이너화된 애플리케이션을 실행할 수 있는 완전 관리형 서버리스 컨테이너 플랫폼입니다. AZD와 결합하면 다음과 같은 이점을 얻을 수 있습니다:
+Azure Container Apps는 서버 인프라를 관리하지 않고도 마이크로서비스 및 컨테이너화된 애플리케이션을 실행할 수 있는 완전 관리형 서버리스 컨테이너 플랫폼입니다. AZD와 결합하면 다음과 같은 이점이 있습니다:
 
-- **간소화된 배포**: 단일 명령으로 컨테이너와 인프라를 배포
-- **자동 확장**: HTTP 트래픽 또는 이벤트에 따라 0에서 확장 및 축소
+- **간편한 배포**: 단일 명령으로 컨테이너와 인프라 배포
+- **자동 확장**: HTTP 트래픽 또는 이벤트에 따라 0부터 확장
 - **통합 네트워킹**: 내장된 서비스 검색 및 트래픽 분할
-- **관리형 ID**: Azure 리소스에 대한 안전한 인증
+- **관리형 아이덴티티**: Azure 리소스에 대한 안전한 인증
 - **비용 최적화**: 사용한 리소스에 대해서만 비용 지불
 
-## 사전 요구 사항
+## 필수 조건
 
-시작하기 전에 다음을 준비하세요:
+시작하기 전에 다음이 준비되어 있어야 합니다:
 
 ```bash
 # AZD 설치 확인
@@ -41,7 +32,7 @@ azd version
 # Azure CLI 확인
 az version
 
-# Docker 확인 (사용자 정의 이미지를 빌드하기 위해)
+# Docker 확인 (맞춤 이미지 빌드를 위해)
 docker --version
 
 # Azure에 로그인
@@ -50,15 +41,15 @@ az login
 ```
 
 **필수 Azure 리소스:**
-- 활성화된 Azure 구독
+- 활성 Azure 구독
 - 리소스 그룹 생성 권한
-- Container Apps 환경 접근 권한
+- 컨테이너 앱 환경 접근 권한
 
 ## 빠른 시작 예제
 
 ### 1. 간단한 웹 API (Python Flask)
 
-Azure Container Apps로 기본 REST API를 배포합니다.
+기본 REST API를 Azure Container Apps에 배포합니다.
 
 **예제: Python Flask API**
 
@@ -89,28 +80,28 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **주요 기능:**
-- 0에서 10개의 복제본으로 자동 확장
-- 상태 점검 및 생존성 점검
+- 0에서 10개 복제본까지 자동 확장
+- 상태 프로브 및 라이브니스 검사
 - 환경 변수 주입
 - Application Insights 통합
 
 ### 2. Node.js Express API
 
-MongoDB 통합을 포함한 Node.js 백엔드를 배포합니다.
+MongoDB 통합이 포함된 Node.js 백엔드 배포.
 
 ```bash
 # Node.js API 템플릿 초기화
 azd init --template todo-nodejs-mongo
 
-# 환경 변수를 구성
+# 환경 변수 구성
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
 # 배포
 azd up
 
-# 로그 보기
-azd logs api
+# Azure 모니터를 통해 로그 보기
+azd monitor --logs
 ```
 
 **인프라 하이라이트:**
@@ -158,19 +149,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. 정적 프론트엔드 + API 백엔드
 
-React 프론트엔드와 API 백엔드를 포함한 풀스택 애플리케이션을 배포합니다.
+React 프론트엔드와 API 백엔드가 포함된 풀스택 애플리케이션 배포.
 
 ```bash
 # 풀스택 템플릿 초기화
 azd init --template todo-csharp-sql-swa-func
 
-# 구성 검토
+# 구성을 검토합니다
 cat azure.yaml
 
-# 두 서비스를 배포
+# 두 서비스를 배포합니다
 azd up
 
-# 애플리케이션 열기
+# 애플리케이션을 엽니다
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
@@ -178,7 +169,7 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### 예제 1: 마이크로서비스 아키텍처
 
-**시나리오**: 여러 마이크로서비스를 포함한 전자상거래 애플리케이션
+**시나리오**: 여러 마이크로서비스를 가진 전자상거래 애플리케이션
 
 **디렉터리 구조:**
 ```
@@ -242,7 +233,7 @@ azd monitor --overview
 
 ### 예제 2: AI 기반 컨테이너 앱
 
-**시나리오**: Azure OpenAI 통합을 포함한 AI 채팅 애플리케이션
+**시나리오**: Azure OpenAI와 통합된 AI 채팅 애플리케이션
 
 **파일: src/ai-chat/app.py**
 ```python
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# 보안 액세스를 위해 관리 ID 사용
+# 안전한 액세스를 위해 관리 ID 사용
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -329,7 +320,7 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**배포 명령:**
+**배포 명령어:**
 ```bash
 # 환경 설정
 azd init --template ai-chat-app
@@ -348,7 +339,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### 예제 3: 큐 처리 백그라운드 워커
+### 예제 3: 큐 처리 배경 작업자
 
 **시나리오**: 메시지 큐를 사용하는 주문 처리 시스템
 
@@ -417,10 +408,10 @@ services:
 # 초기화
 azd init
 
-# 대기열 구성으로 배포
+# 큐 구성으로 배포
 azd up
 
-# 대기열 길이에 따라 작업자 확장
+# 큐 길이에 따라 워커 확장
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -434,26 +425,26 @@ az containerapp update \
 ### 패턴 1: 블루-그린 배포
 
 ```bash
-# 트래픽 없이 새 리비전을 생성합니다
+# 트래픽 없이 새 리비전 생성
 azd deploy api --revision-suffix blue --no-traffic
 
-# 새 리비전을 테스트합니다
+# 새 리비전 테스트
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# 트래픽을 분할합니다 (20%는 블루, 80%는 현재로)
+# 트래픽 분할 (20%는 블루, 80%는 현재)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# 블루로 완전 전환
+# 블루로 전체 이전
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### 패턴 2: AZD를 사용한 카나리 배포
+### 패턴 2: AZD와 함께하는 카나리아 배포
 
 **파일: .azure/dev/config.json**
 ```json
@@ -472,13 +463,13 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# 10% 트래픽으로 새 리비전을 배포합니다
+# 10% 트래픽으로 새 리비전 배포
 azd deploy api --revision-mode multiple
 
-# 메트릭을 모니터링합니다
+# 지표 모니터링
 azd monitor --service api --duration 5m
 
-# 트래픽을 점진적으로 증가시킵니다
+# 트래픽 점진적 증가
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -486,7 +477,7 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # 5분 동안 기다립니다
+  sleep 300  # 5분 대기
 done
 ```
 
@@ -572,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Dapr를 사용하는 애플리케이션 코드:**
+**Dapr를 활용한 애플리케이션 코드:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -601,7 +592,7 @@ def create_order():
 
 ## 모범 사례
 
-### 1. 리소스 조직화
+### 1. 리소스 구성
 
 ```bash
 # 일관된 명명 규칙을 사용하세요
@@ -671,19 +662,21 @@ services:
             concurrent: 100
 ```
 
-### 4. 모니터링 및 가시성
+### 4. 모니터링 및 관측 가능성
 
 ```bash
 # 애플리케이션 인사이트 활성화
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# 실시간으로 로그 보기
-azd logs api --follow
+# 실시간 로그 보기
+azd monitor --logs
+# 또는 컨테이너 앱용 Azure CLI 사용:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # 메트릭 모니터링
-azd monitor --service api
+azd monitor --live
 
-# 알림 생성
+# 경고 생성
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -695,13 +688,13 @@ az monitor metrics alert create \
 ### 5. 비용 최적화
 
 ```bash
-# 사용하지 않을 때 0으로 축소
+# 사용하지 않을 때 0으로 조정
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# 개발 환경에 스팟 인스턴스 사용
+# 개발 환경에는 스팟 인스턴스 사용
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
 # 예산 알림 설정
@@ -744,7 +737,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## 일반 명령어 참조
+## 자주 사용하는 명령어 참고
 
 ```bash
 # 새 컨테이너 앱 프로젝트 초기화
@@ -753,7 +746,7 @@ azd init --template <template-name>
 # 인프라 및 애플리케이션 배포
 azd up
 
-# 애플리케이션 코드만 배포 (인프라 제외)
+# 애플리케이션 코드만 배포 (인프라 생략)
 azd deploy
 
 # 인프라만 프로비저닝
@@ -762,8 +755,9 @@ azd provision
 # 배포된 리소스 보기
 azd show
 
-# 로그 스트리밍
-azd logs <service-name> --follow
+# azd 모니터 또는 Azure CLI를 사용하여 로그 스트리밍
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # 애플리케이션 모니터링
 azd monitor --overview
@@ -774,11 +768,11 @@ azd down --force --purge
 
 ## 문제 해결
 
-### 문제: 컨테이너가 시작되지 않음
+### 이슈: 컨테이너가 시작되지 않음
 
 ```bash
-# 로그 확인
-azd logs api --tail 100
+# Azure CLI를 사용하여 로그 확인
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # 컨테이너 이벤트 보기
 az containerapp revision show \
@@ -786,28 +780,28 @@ az containerapp revision show \
   --resource-group rg-myapp \
   --revision latest
 
-# 로컬에서 테스트
+# 로컬에서 테스트하기
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### 문제: 컨테이너 앱 엔드포인트에 접근할 수 없음
+### 이슈: 컨테이너 앱 엔드포인트에 접근 불가
 
 ```bash
-# 인그레스 구성을 확인하십시오
+# 인그레스 구성을 확인하세요
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# 내부 인그레스가 활성화되어 있는지 확인하십시오
+# 내부 인그레스가 활성화되어 있는지 확인하세요
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### 문제: 성능 문제
+### 이슈: 성능 문제
 
 ```bash
 # 리소스 사용량 확인
@@ -833,21 +827,21 @@ az containerapp update \
 
 ## 기여하기
 
-새로운 컨테이너 앱 예제를 기여하려면:
+새 컨테이너 앱 예제를 기여하려면:
 
-1. 예제와 함께 새 하위 디렉터리를 만듭니다.
-2. 완전한 `azure.yaml`, `infra/`, `src/` 파일을 포함합니다.
-3. 배포 지침이 포함된 포괄적인 README를 추가합니다.
-4. `azd up`으로 배포를 테스트합니다.
-5. 풀 리퀘스트를 제출합니다.
+1. 예제용 새 하위 디렉터리를 생성
+2. 완전한 `azure.yaml`, `infra/`, `src/` 파일 포함
+3. 배포 지침이 포함된 포괄적인 README 작성
+4. `azd up` 명령으로 배포 테스트
+5. 풀 리퀘스트 제출
 
 ---
 
-**도움이 필요하신가요?** [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 커뮤니티에 가입하여 지원 및 질문을 받아보세요.
+**도움이 필요하세요?** 지원 및 질문은 [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 커뮤니티에 참여하세요.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있습니다. 원본 문서의 원어 버전이 권위 있는 자료로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나, 자동 번역에는 오류나 부정확한 부분이 있을 수 있음을 알려드립니다. 원문 문서가 권위 있는 출처로 간주되어야 합니다. 중요한 정보에 대해서는 전문 번역가의 번역을 권장합니다. 본 번역의 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

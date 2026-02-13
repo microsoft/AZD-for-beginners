@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b7244261ee19497082edf33bcce64717",
-  "translation_date": "2025-09-10T05:42:51+00:00",
-  "source_file": "SUPPORT.md",
-  "language_code": "sw"
-}
--->
 # TODO: Msimamizi wa repo hii bado hajahariri faili hili
 
 **MMILIKI WA REPO**: Je, unataka msaada wa Huduma kwa Wateja na Usaidizi (CSS) kwa bidhaa/mradi huu?

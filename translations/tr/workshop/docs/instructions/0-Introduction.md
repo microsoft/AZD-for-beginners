@@ -1,64 +1,60 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e3a6c07efed58baba33b43c69174aef8",
-  "translation_date": "2025-09-24T15:00:32+00:00",
-  "source_file": "workshop/docs/instructions/0-Introduction.md",
-  "language_code": "tr"
-}
--->
-# AZD AI Geliştiricileri İçin
+# AZD Yapay Zeka Geliştiricileri İçin
 
-!!! info "BU ATÖLYE ÇALIŞMASININ HEDEF KİTLESİ"
+!!! info "AUDIENCE FOR THIS WORKSHOP"
    
-    Bu atölye çalışması, Azure AI Foundry üzerinde en iyi araçları ve iş akışlarını kullanarak AI Agentic uygulamaları geliştirmek isteyen herkes için tasarlanmıştır. Atölye, Azure, yapay zeka kavramları ve Python kodu hakkında temel bilgiye sahip hem yeni başlayanlar hem de deneyimli geliştiriciler için uygundur. Başlamadan önce ön koşulları kontrol ettiğinizden emin olun.
+    Bu atölye, Microsoft Foundry üzerinde en iyi araçlar ve iş akışlarından yararlanarak AI Agent uygulamaları geliştirmek isteyen herkes içindir. Atölye, Azure, yapay zeka kavramları ve Python kodu konusunda bir miktar aşinalığı olan hem yeni başlayanlara hem de deneyimli geliştiricilere uygundur. Başlamadan önce ön koşulları kontrol edin.
 
-    **Süre:** 3-4 saat  
-    **Seviye:** Başlangıçtan Orta Düzeye  
+    **Duration:** 3-4 hours  
+    **Level:** Beginner to Intermediate  
 
 ---
 
+
 ## Ön Koşullar
 
-- Kişisel bir GitHub hesabı → [Ücretsiz bir hesap oluşturun](https://github.com/signup)
-- Aktif bir Azure hesabı → [Ücretsiz bir hesap oluşturun](https://aka.ms/free)
-- Yapay zeka kavramları, Python geliştirme, Komut satırı araçları hakkında bilgi sahibi olmak
-- VS Code ve GitHub araçları ve iş akışlarıyla deneyim sahibi olmak.
+- Bir kişisel GitHub hesabı → [Ücretsiz bir tane oluşturun](https://github.com/signup)
+- Aktif bir Azure hesabı → [Create one for free](https://aka.ms/free)
+- Yapay zeka kavramlarına, Python geliştirmeye, komut satırı araçlarına aşinalık
+- VS Code ve GitHub araçları ile iş akışları konusunda deneyim.
 
 ---
 
 ## Öğrenme Hedefleri
 
-Bu atölye çalışmasının sonunda şunları öğrenmiş olacaksınız:
+Bu atölyenin sonunda şunları yapmayı öğreneceksiniz:
 
-- [X] **Azure Developer CLI ile Çalışmak** → Azure kaynaklarınızı sağlamak, dağıtmak ve yönetmek.
-- [X] **AI Uygulama Şablonlarını Kullanmak** → Azure AI Foundry üzerinde AI Agent projelerine hızlı bir başlangıç yapmak.
-- [X] **Şablonları Yapılandırmak** → Red Teaming, Değerlendirmeler, İzleme ve Takip gibi özellikler için yapılandırma yapmak.
-- [X] **AZD Şablonlarını ve İş Akışlarını İncelemek** → GitHub Copilot kullanarak şablonları ve iş akışlarını deşifre etmek.
-- [X] **Özelleştirme ve Yeniden Dağıtım** → AI Agent başlangıç şablonunu kendi özel gereksinimlerinize göre özelleştirmek ve yeniden dağıtmak.
-
----
-
-## Atölye Çalışması İçeriği
-
-Atölye çalışması, her biri uygulamalı bir laboratuvar egzersiziyle desteklenen modüller halinde yapılandırılmıştır:
-
-1. **Giriş** - AZD şablonlarının ne olduğunu ve nasıl çalıştığını anlayın
-1. **Seçim** - Bir sonraki AI projeniz için doğru "başlangıç" şablonunu keşfedin
-1. **Doğrulama** - Şablonu dağıtın ve vaat edildiği gibi çalıştığını doğrulamak için keşfedin
-1. **Deşifre Etme** - Şablonu bileşenlerini ve yapılandırmasını anlamak için parçalarına ayırın
-1. **Yapılandırma** - Farklı Azure AI Foundry özelliklerini etkinleştirmeyi ve kullanmayı öğrenin
-1. **Özelleştirme** - Uygulamayı kendi verileriniz ve gereksinimleriniz doğrultusunda yeniden oluşturun
-1. **Kaldırma** - Altyapıyı kaldırmayı ve yumuşak silinmiş kaynakları kurtarmayı öğrenin
+- [X] **Azure Developer CLI ile çalışmak** → Azure kaynaklarınızı sağlamak, dağıtmak ve yönetmek.
+- [X] **AI Uygulama Şablonlarını Kullanmak** → Microsoft Foundry'da AI Agent projelerini hızlı başlatmak için.
+- [X] **Şablonları Yapılandırmak** → Red Teaming, Değerlendirmeler, İzleme & Takip gibi özellikler için
+- [X] **Parçalara Ayırma ve Keşfetme** → GitHub Copilot kullanarak AZD şablonlarını ve iş akışlarını incelemek
+- [X] **Özelleştirme ve Yeniden Dağıtma** → AI Agent başlangıç şablonunu, kendi özel gereksinimlerinizle yeniden dağıtmak
 
 ---
 
-## Geri Bildirim ve Sorunlar
+## Atölye İçeriği
 
-Müfredatı, yeni başlayanlar için en iyi öğrenme deneyimini sunacak şekilde sürekli güncelliyoruz. Geri bildiriminiz bizim için değerlidir.
+Atölye modüllere ayrılmıştır; her biri uygulamalı bir laboratuvar egzersizi ile desteklenmiştir:
 
-1. Bu depoda bir sorun gönderin - kolaylık olması için `Workshop` etiketi ekleyin.
-1. Azure AI Foundry Discord'a katılın - diğer öğrenenlerle bağlantı kurun!
+1. **Giriş** - AZD şablonlarının ne olduğunu ve nasıl çalıştıklarını anlamak
+1. **Seçim** - Bir sonraki AI projeniz için doğru "starter" şablonunu keşfetmek
+1. **Doğrulama** - Şablonu dağıtıp inceleyerek vaat edildiği gibi çalıştığını doğrulamak
+1. **Parçalarına Ayırma** - Şablonu parçalarına ayırarak bileşenlerini ve yapılandırmasını anlamak
+1. **Yapılandırma** - Farklı Microsoft Foundry özelliklerini etkinleştirmeyi ve kullanmayı öğrenmek
+1. **Özelleştirme** - Uygulamayı verileriniz ve gereksinimleriniz doğrultusunda yeniden yapılandırmak
+1. **Kaldırma** - Altyapıyı deprovision etmeyi ve yumuşak silinmiş kaynakları geri yüklemeyi öğrenmek
 
 ---
 
+## Geri Bildirim & Sorunlar
+
+Müfredatı, yeni başlayanlar için en iyi öğrenme deneyimini sağlamak adına düzenli olarak güncelliyoruz. Geri bildiriminiz bizim için değerlidir.
+
+1. Bu repo üzerinde bir issue yayınlayın - kolaylık olması için `Workshop` etiketi ekleyin.
+1. Microsoft Foundry Discord'a katılın - diğer öğrenenlerle bağlantı kurun!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Sorumluluk Reddi:
+Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya eksiklikler içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hâli yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucu oluşabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

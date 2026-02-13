@@ -1,22 +1,13 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "60caadc3b57dccb9e6c413b5ccace90b",
-  "translation_date": "2025-09-25T02:20:06+00:00",
-  "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
-  "language_code": "en"
-}
--->
 # 5. Customize a Template
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Explore the default AI Agent Capabilities
-    - [ ] Add AI Search with your own index
-    - [ ] Activate and analyze Tracing metrics
-    - [ ] Execute an evaluation run
-    - [ ] Perform a red-teaming scan
-    - [ ] **Lab 5: Build a Customization Plan** 
+    - [ ] Explored the default AI Agent Capabilities
+    - [ ] Added AI Search with your own index
+    - [ ] Activated and analyzed Tracing metrics
+    - [ ] Executed an evaluation run
+    - [ ] Executed a red-teaming scan
+    - [ ] **Lab 5: Built a Customization Plan** 
 
 ---
 
@@ -24,10 +15,10 @@ CO_OP_TRANSLATOR_METADATA:
 
 !!! success "We completed this in Lab 01"
 
-- **File Search**: OpenAI's built-in file search for retrieving knowledge
-- **Citations**: Automatic attribution of sources in responses
-- **Customizable Instructions**: Adjust agent behavior and personality
-- **Tool Integration**: Extensible tool system for adding custom capabilities
+- **File Search**: OpenAI's built-in file search for knowledge retrieval
+- **Citations**: Automatic source attribution in responses
+- **Customizable Instructions**: Modify agent behavior and personality
+- **Tool Integration**: Extensible tool system for custom capabilities
 
 ---
 
@@ -51,7 +42,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 **OpenAI File Search (Default):**
 
-- Built into the Azure AI Agent service
+- Built-in to Foundry Agents
 - Automatic document processing and indexing
 - No additional configuration required
 
@@ -76,9 +67,9 @@ CO_OP_TRANSLATOR_METADATA:
 **Tracing:**
 
 - OpenTelemetry integration
-- Tracks requests and responses
+- Request/response tracking
 - Performance metrics
-- Available in the AI Foundry portal
+- Available in Microsoft Foundry portal
 
 **Logging:**
 
@@ -92,15 +83,15 @@ CO_OP_TRANSLATOR_METADATA:
 
 **Local Evaluation:**
 
-- Built-in evaluators for assessing quality
+- Built-in evaluators for quality assessment
 - Custom evaluation scripts
 - Performance benchmarking
 
 **Continuous Monitoring:**
 
 - Automatic evaluation of live interactions
-- Tracks quality metrics
-- Detects performance regressions
+- Quality metrics tracking
+- Performance regression detection
 
 **CI/CD Integration:**
 
@@ -127,8 +118,8 @@ CO_OP_TRANSLATOR_METADATA:
 
 
 !!! quote "BY THE END OF THIS LAB YOU SHOULD HAVE"
-    - [ ] Defined your scenario requirements
-    - [ ] Customized environment variables (config)
+    - [ ] Defind your scenario requirements
+    - [ ] Customized env variables (config)
     - [ ] Customized agent instructions (task)
     - [ ] Deployed the customized template (app)
     - [ ] Completed post-deployment tasks (manual)
@@ -144,7 +135,7 @@ This example demonstrates customizing the template for an enterprise retail use 
 
 #### **Agent Deployments:** 
 
-   - Shopper Agent: Assists customers in finding and comparing products
+   - Shopper Agent: Helps customers find and compare products
    - Loyalty Agent: Manages customer rewards and promotions
 
 #### **Model Deployments:**
@@ -315,14 +306,14 @@ if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
     echo "🌐 Web Application: $APP_URL"
     echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 AI Foundry Portal: https://ai.azure.com"
+    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
 else
     echo "⚠️  Deployment completed but unable to retrieve URL"
     echo "Run 'azd show' for deployment details"
 fi
 
 echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in AI Foundry portal"
+echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
 echo "2. Upload product catalog to search index"
 echo "3. Configure custom agent instructions"
 echo "4. Test both agents with sample queries"
@@ -351,7 +342,7 @@ echo "
 🤖 Agent Configuration:
 
 1. **Update Shopper Agent Instructions:**
-   - Go to AI Foundry portal: https://ai.azure.com
+   - Go to Microsoft Foundry portal: https://ai.azure.com
    - Navigate to your project
    - Select Agents tab
    - Edit the existing agent
@@ -376,7 +367,7 @@ echo "
    - Verify citations and search functionality
 
 📊 Monitoring Setup:
-- Tracing: Available in AI Foundry > Tracing tab
+- Tracing: Available in Microsoft Foundry > Tracing tab
 - Logs: Azure Portal > Container Apps > Monitoring > Log Stream
 - Evaluation: Run python evals/evaluate.py
 
@@ -429,7 +420,7 @@ echo "
 
 Next steps:
 1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in AI Foundry portal
+2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
 3. Upload your product catalog and loyalty program data
 4. Configure agent instructions for your specific use case
 5. Run comprehensive testing with your retail scenarios
@@ -444,7 +435,7 @@ After following this implementation guide, you will have:
 
 1. **Deployed Infrastructure:**
 
-      - AI Foundry project with model deployments
+      - Microsoft Foundry project with model deployments
       - Container Apps hosting the web application
       - AI Search service for product catalog
       - Application Insights for monitoring
@@ -473,3 +464,7 @@ This example demonstrates how the AZD template can be extended and customized fo
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Disclaimer:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

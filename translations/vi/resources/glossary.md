@@ -1,62 +1,53 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f16d2988a24670d1b6aa2372de1a231a",
-  "translation_date": "2025-09-18T07:51:07+00:00",
-  "source_file": "resources/glossary.md",
-  "language_code": "vi"
-}
--->
-# Thuật ngữ - Azure và AZD
+# Bảng Thuật Ngữ - Thuật Ngữ Azure và AZD
 
-**Tham khảo cho tất cả các chương**
-- **📚 Trang chủ khóa học**: [AZD Cho Người Mới Bắt Đầu](../README.md)
-- **📖 Học cơ bản**: [Chương 1: Cơ bản về AZD](../docs/getting-started/azd-basics.md)
-- **🤖 Thuật ngữ AI**: [Chương 2: Phát triển ưu tiên AI](../docs/ai-foundry/azure-ai-foundry-integration.md)
+**Tài liệu tham khảo cho tất cả các chương**
+- **📚 Trang Khóa Học**: [AZD For Beginners](../README.md)
+- **📖 Học Cơ Bản**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 Thuật Ngữ AI**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Giới thiệu
 
-Bảng thuật ngữ toàn diện này cung cấp định nghĩa cho các thuật ngữ, khái niệm và từ viết tắt được sử dụng trong Azure Developer CLI và phát triển đám mây Azure. Đây là tài liệu tham khảo thiết yếu để hiểu tài liệu kỹ thuật, xử lý sự cố và giao tiếp hiệu quả về các dự án azd và dịch vụ Azure.
+Bảng thuật ngữ toàn diện này cung cấp định nghĩa cho các thuật ngữ, khái niệm và từ viết tắt được sử dụng trong Azure Developer CLI và phát triển đám mây Azure. Là tài liệu tham khảo thiết yếu để hiểu tài liệu kỹ thuật, khắc phục sự cố và giao tiếp hiệu quả về các dự án azd và dịch vụ Azure.
 
 ## Mục tiêu học tập
 
-Khi sử dụng bảng thuật ngữ này, bạn sẽ:
-- Hiểu các thuật ngữ và khái niệm cơ bản của Azure Developer CLI
-- Nắm vững từ vựng và thuật ngữ kỹ thuật trong phát triển đám mây Azure
-- Tra cứu thuật ngữ về cơ sở hạ tầng dưới dạng mã và triển khai một cách hiệu quả
-- Hiểu tên dịch vụ Azure, từ viết tắt và mục đích của chúng
-- Truy cập định nghĩa cho các thuật ngữ xử lý sự cố và gỡ lỗi
-- Học các khái niệm nâng cao về kiến trúc và phát triển Azure
+Bằng cách sử dụng bảng thuật ngữ này, bạn sẽ:
+- Hiểu các thuật ngữ và khái niệm thiết yếu của Azure Developer CLI
+- Thành thạo từ vựng và các thuật ngữ kỹ thuật về phát triển đám mây Azure
+- Tham khảo hiệu quả thuật ngữ về Hạ tầng như Mã và triển khai
+- Hiểu tên dịch vụ Azure, các từ viết tắt và mục đích của chúng
+- Truy cập các định nghĩa để khắc phục sự cố và gỡ lỗi
+- Học các khái niệm phát triển và kiến trúc Azure nâng cao
 
 ## Kết quả học tập
 
 Với việc tham khảo thường xuyên bảng thuật ngữ này, bạn sẽ có thể:
-- Giao tiếp hiệu quả bằng cách sử dụng đúng thuật ngữ của Azure Developer CLI
-- Hiểu rõ hơn tài liệu kỹ thuật và thông báo lỗi
-- Tự tin điều hướng các dịch vụ và khái niệm của Azure
-- Xử lý sự cố bằng cách sử dụng từ vựng kỹ thuật phù hợp
-- Đóng góp vào các cuộc thảo luận nhóm với ngôn ngữ kỹ thuật chính xác
-- Mở rộng kiến thức về phát triển đám mây Azure một cách có hệ thống
+- Giao tiếp hiệu quả bằng cách sử dụng thuật ngữ Azure Developer CLI chính xác
+- Hiểu tài liệu kỹ thuật và thông báo lỗi rõ ràng hơn
+- Điều hướng các dịch vụ và khái niệm Azure với sự tự tin
+- Khắc phục sự cố bằng từ vựng kỹ thuật phù hợp
+- Đóng góp vào thảo luận nhóm bằng ngôn ngữ kỹ thuật chính xác
+- Mở rộng kiến thức phát triển đám mây Azure một cách có hệ thống
 
 ## A
 
 **ARM Template**  
-Mẫu Azure Resource Manager. Định dạng cơ sở hạ tầng dưới dạng mã dựa trên JSON được sử dụng để định nghĩa và triển khai tài nguyên Azure một cách khai báo.
+Azure Resource Manager template. Định dạng Hạ tầng như Mã dựa trên JSON được sử dụng để định nghĩa và triển khai các tài nguyên Azure theo cách khai báo.
 
 **App Service**  
-Dịch vụ nền tảng (PaaS) của Azure để lưu trữ ứng dụng web, REST API và backend di động mà không cần quản lý cơ sở hạ tầng.
+Dịch vụ nền tảng dạng dịch vụ (PaaS) của Azure để lưu trữ ứng dụng web, REST API và backend di động mà không cần quản lý hạ tầng.
 
 **Application Insights**  
-Dịch vụ giám sát hiệu suất ứng dụng (APM) của Azure cung cấp thông tin sâu sắc về hiệu suất, khả dụng và mức sử dụng của ứng dụng.
+Dịch vụ giám sát hiệu năng ứng dụng (APM) của Azure cung cấp cái nhìn sâu về hiệu suất, tính khả dụng và cách sử dụng ứng dụng.
 
 **Azure CLI**  
-Giao diện dòng lệnh để quản lý tài nguyên Azure. Được sử dụng bởi azd để xác thực và một số thao tác.
+Giao diện dòng lệnh để quản lý tài nguyên Azure. Được azd sử dụng để xác thực và một số thao tác.
 
 **Azure Developer CLI (azd)**  
-Công cụ dòng lệnh tập trung vào nhà phát triển, giúp tăng tốc quá trình xây dựng và triển khai ứng dụng lên Azure bằng cách sử dụng mẫu và cơ sở hạ tầng dưới dạng mã.
+Công cụ dòng lệnh dành cho nhà phát triển giúp tăng tốc quá trình xây dựng và triển khai ứng dụng lên Azure bằng cách sử dụng các mẫu và Hạ tầng như Mã.
 
 **azure.yaml**  
-Tệp cấu hình chính cho một dự án azd, định nghĩa các dịch vụ, cơ sở hạ tầng và các hook triển khai.
+Tệp cấu hình chính cho một dự án azd định nghĩa các dịch vụ, hạ tầng và các hook triển khai.
 
 **Azure Resource Manager (ARM)**  
 Dịch vụ triển khai và quản lý của Azure cung cấp một lớp quản lý để tạo, cập nhật và xóa tài nguyên.
@@ -64,10 +55,10 @@ Dịch vụ triển khai và quản lý của Azure cung cấp một lớp quả
 ## B
 
 **Bicep**  
-Ngôn ngữ miền cụ thể (DSL) được Microsoft phát triển để triển khai tài nguyên Azure. Cung cấp cú pháp đơn giản hơn so với ARM templates trong khi vẫn biên dịch sang ARM.
+Ngôn ngữ đặc thù ngành (DSL) được Microsoft phát triển để triển khai tài nguyên Azure. Cung cấp cú pháp đơn giản hơn so với mẫu ARM trong khi biên dịch thành ARM.
 
 **Build**  
-Quá trình biên dịch mã nguồn, cài đặt các phụ thuộc và chuẩn bị ứng dụng để triển khai.
+Quá trình biên dịch mã nguồn, cài đặt phụ thuộc và chuẩn bị ứng dụng để triển khai.
 
 **Blue-Green Deployment**  
 Chiến lược triển khai sử dụng hai môi trường sản xuất giống hệt nhau (blue và green) để giảm thiểu thời gian ngừng hoạt động và rủi ro.
@@ -75,35 +66,35 @@ Chiến lược triển khai sử dụng hai môi trường sản xuất giống
 ## C
 
 **Container Apps**  
-Dịch vụ container serverless của Azure cho phép chạy các ứng dụng container hóa mà không cần quản lý cơ sở hạ tầng phức tạp.
+Dịch vụ container serverless của Azure cho phép chạy các ứng dụng đóng gói trong container mà không cần quản lý hạ tầng phức tạp.
 
 **CI/CD**  
-Tích hợp liên tục/Triển khai liên tục. Các thực hành tự động hóa để tích hợp thay đổi mã và triển khai ứng dụng.
+Continuous Integration/Continuous Deployment. Các thực hành tự động để tích hợp thay đổi mã và triển khai ứng dụng.
 
 **Cosmos DB**  
-Dịch vụ cơ sở dữ liệu đa mô hình, phân phối toàn cầu của Azure cung cấp SLA toàn diện về thông lượng, độ trễ, khả dụng và tính nhất quán.
+Dịch vụ cơ sở dữ liệu đa mô hình, phân phối toàn cầu của Azure cung cấp các SLA toàn diện cho thông lượng, độ trễ, tính khả dụng và tính nhất quán.
 
 **Configuration**  
-Các thiết lập và tham số điều khiển hành vi ứng dụng và tùy chọn triển khai.
+Các cài đặt và tham số điều khiển hành vi ứng dụng và các tùy chọn triển khai.
 
 ## D
 
 **Deployment**  
-Quá trình cài đặt và cấu hình ứng dụng cùng các phụ thuộc của nó trên cơ sở hạ tầng mục tiêu.
+Quá trình cài đặt và cấu hình ứng dụng cùng các phụ thuộc của chúng trên hạ tầng mục tiêu.
 
 **Docker**  
-Nền tảng để phát triển, vận chuyển và chạy ứng dụng bằng công nghệ container hóa.
+Nền tảng để phát triển, đóng gói và chạy ứng dụng bằng công nghệ container hóa.
 
 **Dockerfile**  
-Tệp văn bản chứa các hướng dẫn để xây dựng hình ảnh container Docker.
+Tệp văn bản chứa các hướng dẫn để xây dựng image container Docker.
 
 ## E
 
 **Environment**  
-Mục tiêu triển khai đại diện cho một phiên bản cụ thể của ứng dụng của bạn (ví dụ: phát triển, staging, sản xuất).
+Một mục tiêu triển khai đại diện cho một phiên bản cụ thể của ứng dụng của bạn (ví dụ: development, staging, production).
 
 **Environment Variables**  
-Các giá trị cấu hình được lưu trữ dưới dạng cặp khóa-giá trị mà ứng dụng có thể truy cập khi chạy.
+Giá trị cấu hình được lưu dưới dạng cặp khóa-giá trị mà ứng dụng có thể truy cập lúc chạy.
 
 **Endpoint**  
 URL hoặc địa chỉ mạng nơi một ứng dụng hoặc dịch vụ có thể được truy cập.
@@ -111,120 +102,120 @@ URL hoặc địa chỉ mạng nơi một ứng dụng hoặc dịch vụ có th
 ## F
 
 **Function App**  
-Dịch vụ tính toán serverless của Azure cho phép chạy mã theo sự kiện mà không cần quản lý cơ sở hạ tầng.
+Dịch vụ compute serverless của Azure cho phép chạy mã theo sự kiện mà không cần quản lý hạ tầng.
 
 ## G
 
 **GitHub Actions**  
-Nền tảng CI/CD tích hợp với kho lưu trữ GitHub để tự động hóa quy trình làm việc.
+Nền tảng CI/CD tích hợp với kho lưu trữ GitHub để tự động hóa các workflow.
 
 **Git**  
-Hệ thống kiểm soát phiên bản phân tán được sử dụng để theo dõi các thay đổi trong mã nguồn.
+Hệ thống kiểm soát phiên bản phân tán dùng để theo dõi thay đổi trong mã nguồn.
 
 ## H
 
 **Hooks**  
-Các script hoặc lệnh tùy chỉnh chạy tại các điểm cụ thể trong vòng đời triển khai (preprovision, postprovision, predeploy, postdeploy).
+Các script hoặc lệnh tùy chỉnh chạy tại các thời điểm cụ thể trong vòng đời triển khai (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Loại dịch vụ Azure nơi ứng dụng sẽ được triển khai (ví dụ: appservice, containerapp, function).
+Loại dịch vụ Azure nơi một ứng dụng sẽ được triển khai (ví dụ: appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Thực hành định nghĩa và quản lý cơ sở hạ tầng thông qua mã thay vì các quy trình thủ công.
+Thực hành định nghĩa và quản lý hạ tầng thông qua mã thay vì các quy trình thủ công.
 
 **Init**  
-Quá trình khởi tạo một dự án azd mới, thường từ một mẫu.
+Quá trình khởi tạo một dự án azd mới, thường dựa trên một mẫu.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Định dạng trao đổi dữ liệu thường được sử dụng cho tệp cấu hình và phản hồi API.
+JavaScript Object Notation. Định dạng trao đổi dữ liệu thường dùng cho tệp cấu hình và phản hồi API.
 
 **JWT**  
-JSON Web Token. Tiêu chuẩn để truyền thông tin một cách an toàn giữa các bên dưới dạng đối tượng JSON.
+JSON Web Token. Chuẩn để truyền thông tin an toàn giữa các bên dưới dạng một đối tượng JSON.
 
 ## K
 
 **Key Vault**  
-Dịch vụ của Azure để lưu trữ và quản lý an toàn các bí mật, khóa và chứng chỉ.
+Dịch vụ của Azure để lưu trữ và quản lý bí mật, khóa và chứng chỉ một cách an toàn.
 
 **Kusto Query Language (KQL)**  
-Ngôn ngữ truy vấn được sử dụng để phân tích dữ liệu trong Azure Monitor, Application Insights và các dịch vụ Azure khác.
+Ngôn ngữ truy vấn dùng để phân tích dữ liệu trong Azure Monitor, Application Insights và các dịch vụ Azure khác.
 
 ## L
 
 **Load Balancer**  
-Dịch vụ phân phối lưu lượng mạng đến nhiều máy chủ hoặc phiên bản.
+Dịch vụ phân phối lưu lượng mạng đến nhiều máy chủ hoặc instance.
 
 **Log Analytics**  
-Dịch vụ Azure để thu thập, phân tích và hành động dựa trên dữ liệu telemetry từ môi trường đám mây và tại chỗ.
+Dịch vụ của Azure để thu thập, phân tích và hành động dựa trên dữ liệu telemetry từ môi trường đám mây và tại chỗ.
 
 ## M
 
 **Managed Identity**  
-Tính năng của Azure cung cấp cho các dịch vụ Azure một danh tính được quản lý tự động để xác thực với các dịch vụ Azure khác.
+Tính năng của Azure cung cấp danh tính được quản lý tự động cho các dịch vụ Azure để xác thực tới các dịch vụ Azure khác.
 
 **Microservices**  
-Cách tiếp cận kiến trúc nơi ứng dụng được xây dựng dưới dạng tập hợp các dịch vụ nhỏ, độc lập.
+Cách tiếp cận kiến trúc nơi ứng dụng được xây dựng như một tập hợp các dịch vụ nhỏ, độc lập.
 
 **Monitor**  
-Giải pháp giám sát hợp nhất của Azure cung cấp khả năng quan sát toàn diện trên ứng dụng và cơ sở hạ tầng.
+Giải pháp giám sát hợp nhất của Azure cung cấp khả năng quan sát toàn diện cho ứng dụng và hạ tầng.
 
 ## N
 
 **Node.js**  
-Runtime JavaScript được xây dựng trên công cụ JavaScript V8 của Chrome để xây dựng ứng dụng phía máy chủ.
+Runtime JavaScript được xây dựng trên engine V8 của Chrome để xây dựng ứng dụng phía máy chủ.
 
 **npm**  
-Trình quản lý gói cho Node.js, quản lý các phụ thuộc và gói.
+Trình quản lý gói cho Node.js quản lý phụ thuộc và gói.
 
 ## O
 
 **Output**  
-Các giá trị được trả về từ triển khai cơ sở hạ tầng có thể được sử dụng bởi ứng dụng hoặc các tài nguyên khác.
+Các giá trị trả về từ việc triển khai hạ tầng có thể được ứng dụng hoặc tài nguyên khác sử dụng.
 
 ## P
 
 **Package**  
-Quá trình chuẩn bị mã ứng dụng và các phụ thuộc để triển khai.
+Quá trình chuẩn bị mã ứng dụng và phụ thuộc để triển khai.
 
 **Parameters**  
-Các giá trị đầu vào được truyền vào các mẫu cơ sở hạ tầng để tùy chỉnh triển khai.
+Các giá trị đầu vào được truyền cho mẫu hạ tầng để tùy chỉnh triển khai.
 
 **PostgreSQL**  
-Hệ thống cơ sở dữ liệu quan hệ mã nguồn mở được hỗ trợ dưới dạng dịch vụ được quản lý trong Azure.
+Hệ quản trị cơ sở dữ liệu quan hệ mã nguồn mở được hỗ trợ dưới dạng dịch vụ được quản lý trong Azure.
 
 **Provisioning**  
-Quá trình tạo và cấu hình tài nguyên Azure được định nghĩa trong các mẫu cơ sở hạ tầng.
+Quá trình tạo và cấu hình các tài nguyên Azure được định nghĩa trong các mẫu hạ tầng.
 
 ## Q
 
 **Quota**  
-Giới hạn về số lượng tài nguyên có thể được tạo trong một đăng ký hoặc khu vực Azure.
+Giới hạn về số lượng tài nguyên có thể được tạo trong một subscription hoặc vùng của Azure.
 
 ## R
 
 **Resource Group**  
-Container logic cho các tài nguyên Azure chia sẻ cùng vòng đời, quyền và chính sách.
+Vùng chứa logic cho các tài nguyên Azure chia sẻ cùng vòng đời, quyền và chính sách.
 
 **Resource Token**  
-Chuỗi duy nhất được tạo bởi azd để đảm bảo tên tài nguyên là duy nhất trong các lần triển khai.
+Chuỗi duy nhất được azd tạo ra để đảm bảo tên tài nguyên là duy nhất giữa các lần triển khai.
 
 **REST API**  
-Phong cách kiến trúc để thiết kế ứng dụng mạng sử dụng các phương thức HTTP.
+Kiến trúc để thiết kế ứng dụng mạng sử dụng các phương thức HTTP.
 
 **Rollback**  
-Quá trình quay lại phiên bản trước của ứng dụng hoặc cấu hình cơ sở hạ tầng.
+Quá trình quay trở lại phiên bản trước của ứng dụng hoặc cấu hình hạ tầng.
 
 ## S
 
 **Service**  
-Một thành phần của ứng dụng được định nghĩa trong azure.yaml (ví dụ: giao diện web, backend API, cơ sở dữ liệu).
+Một thành phần của ứng dụng của bạn được định nghĩa trong azure.yaml (ví dụ: web frontend, API backend, database).
 
 **SKU**  
-Đơn vị lưu trữ. Đại diện cho các cấp dịch vụ hoặc mức hiệu suất khác nhau cho tài nguyên Azure.
+Stock Keeping Unit. Đại diện cho các tầng dịch vụ hoặc mức hiệu năng khác nhau cho tài nguyên Azure.
 
 **SQL Database**  
 Dịch vụ cơ sở dữ liệu quan hệ được quản lý của Azure dựa trên Microsoft SQL Server.
@@ -236,91 +227,91 @@ Dịch vụ Azure để xây dựng và triển khai ứng dụng web full-stack
 Dịch vụ Azure cung cấp lưu trữ đám mây cho các đối tượng dữ liệu bao gồm blobs, files, queues và tables.
 
 **Subscription**  
-Container tài khoản Azure chứa các nhóm tài nguyên và tài nguyên, với quản lý thanh toán và quyền truy cập liên quan.
+Thùng chứa tài khoản Azure chứa resource groups và tài nguyên, cùng với quản lý thanh toán và quyền truy cập.
 
 ## T
 
 **Template**  
-Cấu trúc dự án được xây dựng sẵn chứa mã ứng dụng, định nghĩa cơ sở hạ tầng và cấu hình cho các kịch bản phổ biến.
+Cấu trúc dự án được dựng sẵn chứa mã ứng dụng, định nghĩa hạ tầng và cấu hình cho các kịch bản phổ biến.
 
 **Terraform**  
-Công cụ cơ sở hạ tầng dưới dạng mã mã nguồn mở hỗ trợ nhiều nhà cung cấp đám mây bao gồm Azure.
+Công cụ Hạ tầng như Mã mã nguồn mở hỗ trợ nhiều nhà cung cấp đám mây bao gồm Azure.
 
 **Traffic Manager**  
-Trình cân bằng tải DNS của Azure để phân phối lưu lượng trên các khu vực Azure toàn cầu.
+Bộ cân bằng tải dựa trên DNS của Azure để phân phối lưu lượng giữa các vùng Azure trên toàn cầu.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Chuỗi xác định một tài nguyên cụ thể.
+Uniform Resource Identifier. Chuỗi nhận dạng một tài nguyên cụ thể.
 
 **URL**  
-Uniform Resource Locator. Loại URI chỉ định vị trí tài nguyên và cách truy xuất nó.
+Uniform Resource Locator. Loại URI chỉ rõ nơi một tài nguyên được lưu và cách để truy xuất nó.
 
 ## V
 
 **Virtual Network (VNet)**  
-Khối xây dựng cơ bản cho mạng riêng trong Azure, cung cấp sự cô lập và phân đoạn.
+Khối xây dựng cơ bản cho mạng riêng trong Azure, cung cấp khả năng cô lập và phân vùng.
 
 **VS Code**  
-Visual Studio Code. Trình chỉnh sửa mã phổ biến với tích hợp tuyệt vời với Azure và azd.
+Visual Studio Code. Trình soạn thảo mã phổ biến với tích hợp Azure và azd tốt.
 
 ## W
 
 **Webhook**  
-HTTP callback được kích hoạt bởi các sự kiện cụ thể, thường được sử dụng trong các pipeline CI/CD.
+HTTP callback được kích hoạt bởi các sự kiện cụ thể, thường dùng trong pipeline CI/CD.
 
 **What-if**  
-Tính năng của Azure hiển thị những thay đổi sẽ được thực hiện bởi một triển khai mà không thực sự thực thi nó.
+Tính năng của Azure hiển thị những thay đổi sẽ được thực hiện bởi một lần triển khai mà không thực sự thực thi nó.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Tiêu chuẩn tuần tự hóa dữ liệu dễ đọc dành cho con người, được sử dụng cho các tệp cấu hình như azure.yaml.
+YAML Ain't Markup Language. Chuẩn tuần tự hóa dữ liệu dễ đọc cho con người được sử dụng cho các tệp cấu hình như azure.yaml.
 
 ## Z
 
 **Zone**  
-Các vị trí vật lý riêng biệt trong một khu vực Azure cung cấp khả năng dự phòng và tính khả dụng cao.
+Các vị trí vật lý tách biệt trong một vùng Azure cung cấp khả năng dự phòng và tính sẵn sàng cao.
 
 ---
 
-## Các từ viết tắt phổ biến
+## Các Từ Viết Tắt Thông Dụng
 
-| Từ viết tắt | Tên đầy đủ | Mô tả |
-|-------------|-----------|-------|
-| AAD | Azure Active Directory | Dịch vụ quản lý danh tính và quyền truy cập |
-| ACR | Azure Container Registry | Dịch vụ đăng ký hình ảnh container |
+| Acronym | Full Form | Description |
+|---------|-----------|-------------|
+| AAD | Azure Active Directory | Dịch vụ quản lý danh tính và truy cập |
+| ACR | Azure Container Registry | Dịch vụ đăng ký image container |
 | AKS | Azure Kubernetes Service | Dịch vụ Kubernetes được quản lý |
-| API | Application Programming Interface | Tập hợp các giao thức để xây dựng phần mềm |
+| API | Application Programming Interface | Giao diện lập trình ứng dụng |
 | ARM | Azure Resource Manager | Dịch vụ triển khai và quản lý của Azure |
-| CDN | Content Delivery Network | Mạng lưới phân phối máy chủ |
-| CI/CD | Continuous Integration/Continuous Deployment | Thực hành phát triển tự động |
-| CLI | Command Line Interface | Giao diện người dùng dựa trên văn bản |
-| DNS | Domain Name System | Hệ thống chuyển đổi tên miền thành địa chỉ IP |
+| CDN | Content Delivery Network | Mạng lưới phân phối nội dung |
+| CI/CD | Continuous Integration/Continuous Deployment | Các thực hành phát triển tự động |
+| CLI | Command Line Interface | Giao diện dòng lệnh |
+| DNS | Domain Name System | Hệ thống chuyển đổi tên miền sang địa chỉ IP |
 | HTTPS | Hypertext Transfer Protocol Secure | Phiên bản bảo mật của HTTP |
-| IaC | Infrastructure as Code | Quản lý cơ sở hạ tầng thông qua mã |
+| IaC | Infrastructure as Code | Quản lý hạ tầng thông qua mã |
 | JSON | JavaScript Object Notation | Định dạng trao đổi dữ liệu |
 | JWT | JSON Web Token | Định dạng token để truyền thông tin an toàn |
-| KQL | Kusto Query Language | Ngôn ngữ truy vấn cho các dịch vụ dữ liệu Azure |
+| KQL | Kusto Query Language | Ngôn ngữ truy vấn cho dịch vụ dữ liệu Azure |
 | RBAC | Role-Based Access Control | Phương pháp kiểm soát truy cập dựa trên vai trò |
-| REST | Representational State Transfer | Phong cách kiến trúc cho dịch vụ web |
+| REST | Representational State Transfer | Kiến trúc cho dịch vụ web |
 | SDK | Software Development Kit | Bộ công cụ phát triển phần mềm |
-| SLA | Service Level Agreement | Cam kết về khả dụng/hiệu suất dịch vụ |
+| SLA | Service Level Agreement | Cam kết về tính khả dụng/hiệu năng dịch vụ |
 | SQL | Structured Query Language | Ngôn ngữ quản lý cơ sở dữ liệu quan hệ |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Giao thức mã hóa |
-| URI | Uniform Resource Identifier | Chuỗi xác định tài nguyên |
-| URL | Uniform Resource Locator | Loại URI chỉ định vị trí tài nguyên |
-| VM | Virtual Machine | Mô phỏng hệ thống máy tính |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Các giao thức mật mã |
+| URI | Uniform Resource Identifier | Chuỗi nhận dạng một tài nguyên |
+| URL | Uniform Resource Locator | Loại URI chỉ rõ vị trí tài nguyên |
+| VM | Virtual Machine | Mô phỏng một hệ thống máy tính |
 | VNet | Virtual Network | Mạng riêng trong Azure |
-| YAML | YAML Ain't Markup Language | Tiêu chuẩn tuần tự hóa dữ liệu |
+| YAML | YAML Ain't Markup Language | Chuẩn tuần tự hóa dữ liệu |
 
 ---
 
-## Tên dịch vụ Azure
+## Ánh xạ Tên Dịch Vụ Azure
 
-| Tên thông dụng | Tên dịch vụ chính thức của Azure | Loại Host azd |
-|----------------|----------------------------------|---------------|
+| Common Name | Official Azure Service Name | azd Host Type |
+|-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
@@ -335,35 +326,35 @@ Các vị trí vật lý riêng biệt trong một khu vực Azure cung cấp kh
 
 ---
 
-## Thuật ngữ theo ngữ cảnh
+## Thuật Ngữ Theo Ngữ Cảnh
 
-### Thuật ngữ phát triển
+### Thuật ngữ Phát triển
 - **Hot Reload**: Tự động cập nhật ứng dụng trong quá trình phát triển mà không cần khởi động lại
-- **Build Pipeline**: Quy trình tự động để xây dựng và kiểm tra mã
+- **Build Pipeline**: Quá trình tự động để build và kiểm thử mã
 - **Deployment Slot**: Môi trường staging trong App Service
-- **Environment Parity**: Giữ cho các môi trường phát triển, staging và sản xuất giống nhau
+- **Environment Parity**: Giữ cho các môi trường development, staging và production tương đồng
 
-### Thuật ngữ bảo mật
-- **Managed Identity**: Tính năng của Azure cung cấp quản lý thông tin xác thực tự động
-- **Key Vault**: Lưu trữ an toàn cho các bí mật, khóa và chứng chỉ
-- **RBAC**: Kiểm soát truy cập dựa trên vai trò cho tài nguyên Azure
+### Thuật ngữ Bảo mật
+- **Managed Identity**: Tính năng Azure cung cấp quản lý thông tin xác thực tự động
+- **Key Vault**: Kho lưu trữ an toàn cho bí mật, khóa và chứng chỉ
+- **RBAC**: Kiểm soát truy cập theo vai trò cho các tài nguyên Azure
 - **Network Security Group**: Tường lửa ảo để kiểm soát lưu lượng mạng
 
-### Thuật ngữ giám sát
-- **Telemetry**: Thu thập tự động các số liệu và dữ liệu
-- **Application Performance Monitoring (APM)**: Giám sát hiệu suất phần mềm
+### Thuật ngữ Giám sát
+- **Telemetry**: Thu thập tự động các phép đo và dữ liệu
+- **Application Performance Monitoring (APM)**: Giám sát hiệu năng phần mềm
 - **Log Analytics**: Dịch vụ thu thập và phân tích dữ liệu log
 - **Alert Rules**: Thông báo tự động dựa trên các số liệu hoặc điều kiện
 
-### Thuật ngữ triển khai
-- **Blue-Green Deployment**: Chiến lược triển khai không thời gian ngừng hoạt động
-- **Canary Deployment**: Triển khai dần dần cho một phần nhỏ người dùng
-- **Rolling Update**: Thay thế tuần tự các phiên bản ứng dụng
-- **Rollback**: Quay lại phiên bản ứng dụng trước đó
+### Thuật ngữ Triển khai
+- **Blue-Green Deployment**: Chiến lược triển khai không gián đoạn
+- **Canary Deployment**: Triển khai dần dần cho một tập con người dùng
+- **Rolling Update**: Thay thế tuần tự các instance của ứng dụng
+- **Rollback**: Quay về phiên bản ứng dụng trước đó
 
 ---
 
-**Mẹo sử dụng**: Sử dụng `Ctrl+F` để nhanh chóng tìm kiếm các thuật ngữ cụ thể trong bảng thuật ngữ này. Các thuật ngữ được tham chiếu chéo khi áp dụng.
+**Mẹo sử dụng**: Sử dụng `Ctrl+F` để nhanh chóng tìm các thuật ngữ cụ thể trong bảng thuật ngữ này. Các thuật ngữ được tham chiếu chéo khi áp dụng.
 
 ---
 
@@ -373,5 +364,7 @@ Các vị trí vật lý riêng biệt trong một khu vực Azure cung cấp kh
 
 ---
 
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp từ con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+Miễn trừ trách nhiệm:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo tính chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Văn bản gốc bằng ngôn ngữ ban đầu nên được coi là nguồn thông tin chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do người thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hay diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

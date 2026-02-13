@@ -1,48 +1,39 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "eb3a4803a1e80a7f2e64f6bf63738c0f",
-  "translation_date": "2025-11-23T19:37:56+00:00",
-  "source_file": "examples/microservices/README.md",
-  "language_code": "ro"
-}
--->
-# Arhitectura Microservicii - Exemplu de Aplicație Container
+# Arhitectură Microservicii - Exemplu Container App
 
-⏱️ **Timp Estimat**: 25-35 minute | 💰 **Cost Estimat**: ~$50-100/lună | ⭐ **Complexitate**: Avansată
+⏱️ **Timp estimat**: 25-35 minute | 💰 **Cost estimat**: ~50-100$/lună | ⭐ **Complexitate**: Avansat
 
-**📚 Parcurs de Învățare:**
-- ← Anterior: [API Simplu Flask](../../../../examples/container-app/simple-flask-api) - Bazele unui container unic
-- 🎯 **Ești Aici**: Arhitectura Microservicii (fundament cu 2 servicii)
-- → Următor: [Integrare AI](../../../../docs/ai-foundry) - Adaugă inteligență serviciilor tale
-- 🏠 [Pagina Principală a Cursului](../../README.md)
+**📚 Parcurs de învățare:**  
+- ← Anterior: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Bazele containerului unic  
+- 🎯 **Ești aici**: Arhitectura Microserviciilor (bază 2 servicii)  
+- → Următor: [AI Integration](../../../../docs/ai-foundry) - Adaugă inteligență serviciilor tale  
+- 🏠 [Pagina principală curs](../../README.md)
 
 ---
 
-O **arhitectură simplificată dar funcțională** de microservicii, implementată pe Azure Container Apps folosind AZD CLI. Acest exemplu demonstrează comunicarea între servicii, orchestrarea containerelor și monitorizarea într-o configurație practică cu 2 servicii.
+O arhitectură microservicii **simplificată, dar funcțională**, implementată pe Azure Container Apps folosind AZD CLI. Acest exemplu demonstrează comunicarea între servicii, orchestrarea containerelor și monitorizarea într-un setup practic cu 2 servicii.
 
-> **📚 Abordare de Învățare**: Acest exemplu începe cu o arhitectură minimă de 2 servicii (API Gateway + Serviciu Backend) pe care o poți implementa și învăța. După ce stăpânești această bază, oferim ghidare pentru extinderea către un ecosistem complet de microservicii.
+> **📚 Abordare de învățare**: Acest exemplu începe cu o arhitectură minimă cu 2 servicii (API Gateway + Backend Service) pe care o poți efectiv implementa și studia. După ce stăpânești această bază, oferim ghiduri pentru extinderea la un ecosistem complet de microservicii.
 
-## Ce Vei Învăța
+## Ce vei învăța
 
-După finalizarea acestui exemplu, vei:
-- Implementa mai multe containere pe Azure Container Apps
-- Realiza comunicarea între servicii cu rețele interne
-- Configura scalarea bazată pe mediu și verificările de sănătate
-- Monitoriza aplicații distribuite cu Application Insights
-- Înțelege modelele de implementare ale microserviciilor și cele mai bune practici
-- Învăța extinderea progresivă de la arhitecturi simple la complexe
+Prin completarea acestui exemplu, vei:  
+- Implementa multiple containere pe Azure Container Apps  
+- Implementa comunicare între servicii cu rețea internă  
+- Configura scalarea și verificările de sănătate în funcție de mediu  
+- Monitoriza aplicații distribuite cu Application Insights  
+- Înțelege modele și bune practici pentru implementarea microserviciilor  
+- Învață extinderea progresivă de la arhitecturi simple la complexe
 
 ## Arhitectură
 
-### Faza 1: Ce Construim (Inclus în Acest Exemplu)
+### Faza 1: Ce construim (inclus în acest exemplu)
 
 ```mermaid
 graph TB
     Internet[Internet/Utilizator]
-    Gateway[Gateway API<br/>Container Node.js<br/>Port 8080]
+    Gateway[Poartă API<br/>Container Node.js<br/>Port 8080]
     Product[Serviciu Produs<br/>Container Python<br/>Port 8000]
-    AppInsights[Application Insights<br/>Monitorizare & Jurnale]
+    AppInsights[Informații Aplicație<br/>Monitorizare & Jurnale]
     
     Internet -->|HTTPS| Gateway
     Gateway -->|HTTP Intern| Product
@@ -53,40 +44,40 @@ graph TB
     style Product fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
     style Internet fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#fff
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:#fff
-```
-**Detalii Componentă:**
+```  
+**Detalii componente:**
 
 | Componentă | Scop | Acces | Resurse |
-|------------|------|-------|---------|
-| **API Gateway** | Direcționează cererile externe către serviciile backend | Public (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replici |
-| **Serviciu Produse** | Gestionează catalogul de produse cu date în memorie | Doar intern | 0.5 vCPU, 1GB RAM, 1-10 replici |
-| **Application Insights** | Jurnalizare centralizată și trasabilitate distribuită | Portal Azure | 1-2 GB/lună ingestie de date |
+|------------|-------|-------|---------|
+| **API Gateway** | Redirecționează cererile externe către serviciile backend | Public (HTTPS) | 1 vCPU, 2GB RAM, 2-20 replici |
+| **Product Service** | Gestionează catalogul de produse în memorie | Doar intern | 0.5 vCPU, 1GB RAM, 1-10 replici |
+| **Application Insights** | Logare centralizată și trasare distribuită | Azure Portal | 1-2 GB/lună ingestie date |
 
-**De ce să Începem Simplu?**
-- ✅ Implementare și înțelegere rapidă (25-35 minute)
-- ✅ Învățare a modelelor de bază ale microserviciilor fără complexitate
-- ✅ Cod funcțional pe care îl poți modifica și experimenta
-- ✅ Costuri reduse pentru învățare (~$50-100/lună vs $300-1400/lună)
-- ✅ Construirea încrederii înainte de a adăuga baze de date și cozi de mesaje
+**De ce începem simplu?**  
+- ✅ Implementare și înțelegere rapidă (25-35 minute)  
+- ✅ Învață tiparele microserviciilor fără complexitate  
+- ✅ Cod funcțional pe care îl poți modifica și experimenta  
+- ✅ Cost redus pentru învățare (~50-100$/lună vs 300-1400$/lună)  
+- ✅ Construiește încredere înainte de a adăuga baze de date și cozi de mesaje
 
-**Analogie**: Gândește-te la asta ca la învățarea condusului. Începi într-o parcare goală (2 servicii), stăpânești bazele, apoi progresezi către traficul urban (5+ servicii cu baze de date).
+**Analogie**: E ca și cum înveți să conduci. Începi într-o parcare goală (2 servicii), stăpânești bazele, apoi treci la trafic urban (5+ servicii cu baze de date).
 
-### Faza 2: Extindere Viitoare (Arhitectură de Referință)
+### Faza 2: Extinderea viitoare (Arhitectură de referință)
 
-După ce stăpânești arhitectura cu 2 servicii, poți extinde către:
+După ce stăpânești arhitectura cu 2 servicii, poți extinde la:
 
 ```mermaid
 graph TB
     User[Utilizator]
-    Gateway[Gateway API<br/>✅ Inclus]
+    Gateway[API Gateway<br/>✅ Inclus]
     Product[Serviciu Produs<br/>✅ Inclus]
-    Order[Serviciu Comenzi<br/>🔜 Adaugă Următor]
-    UserSvc[Serviciu Utilizator<br/>🔜 Adaugă Următor]
-    Notify[Serviciu Notificări<br/>🔜 Adaugă Ultimul]
+    Order[Serviciu Comandă<br/>🔜 Adaugă Următorul]
+    UserSvc[Serviciu Utilizator<br/>🔜 Adaugă Următorul]
+    Notify[Serviciu Notificare<br/>🔜 Adaugă Ultimul]
     
     CosmosDB[(Cosmos DB<br/>🔜 Date Produs)]
-    AzureSQL[(Azure SQL<br/>🔜 Date Comenzi)]
-    ServiceBus[Azure Service Bus<br/>🔜 Evenimente Asincrone]
+    AzureSQL[(Azure SQL<br/>🔜 Date Comandă)]
+    ServiceBus[Azure Service Bus<br/>🔜 Evenimente Async]
     AppInsights[Application Insights<br/>✅ Inclus]
     
     User --> Gateway
@@ -98,7 +89,7 @@ graph TB
     Order --> AzureSQL
     UserSvc --> AzureSQL
     
-    Product -.->|Eveniment ProductCreated| ServiceBus
+    Product -.->|Eveniment ProdusCreat| ServiceBus
     ServiceBus -.->|Abonare| Notify
     ServiceBus -.->|Abonare| Order
     
@@ -113,171 +104,171 @@ graph TB
     style Order fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
     style UserSvc fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
     style Notify fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#fff
-```
-Vezi secțiunea "Ghid de Extindere" la final pentru instrucțiuni pas cu pas.
+```  
+Vezi secțiunea „Ghid de extindere” la final pentru instrucțiuni pas cu pas.
 
-## Funcționalități Incluse
+## Funcționalități incluse
 
-✅ **Descoperirea Serviciilor**: Descoperire automată bazată pe DNS între containere  
-✅ **Balansare de Sarcină**: Balansare de sarcină integrată între replici  
+✅ **Descoperire Servicii**: Descoperire automată DNS între containere  
+✅ **Echilibrare Sarcină**: Echilibrare încorporată între replici  
 ✅ **Auto-scalare**: Scalare independentă per serviciu bazată pe cereri HTTP  
-✅ **Monitorizare Sănătate**: Probele de liveness și readiness pentru ambele servicii  
-✅ **Jurnalizare Distribuită**: Jurnalizare centralizată cu Application Insights  
-✅ **Rețea Internă**: Comunicare sigură între servicii  
-✅ **Orchestrare Containere**: Implementare și scalare automată  
-✅ **Actualizări Fără Timp de Nefuncționare**: Actualizări progresive cu gestionarea reviziilor  
+✅ **Monitorizare Stare**: Probe de liveness și readiness pentru ambele servicii  
+✅ **Logare Distribuită**: Logare centralizată cu Application Insights  
+✅ **Rețea Internă**: Comunicare securizată între servicii  
+✅ **Orchestrare Containere**: Deploy și scalare automată  
+✅ **Actualizări fără întrerupere**: Actualizări progresive cu managementul reviziilor  
 
-## Cerințe Prealabile
+## Cerințe preliminare
 
-### Instrumente Necesare
+### Unelte necesare
 
-Înainte de a începe, verifică dacă ai aceste instrumente instalate:
+Înainte de a începe, verifică dacă ai instalate următoarele unelte:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versiunea 1.0.0 sau mai mare)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versiunea 1.0.0 sau mai mare)  
    ```bash
    azd version
-   # Rezultatul așteptat: versiunea azd 1.0.0 sau mai mare
+   # Ieșire așteptată: versiunea azd 1.0.0 sau mai mare
    ```
-
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versiunea 2.50.0 sau mai mare)
+  
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versiunea 2.50.0 sau mai mare)  
    ```bash
    az --version
-   # Rezultatul așteptat: azure-cli 2.50.0 sau mai mare
+   # Rezultatul așteptat: azure-cli 2.50.0 sau mai nou
    ```
-
-3. **[Docker](https://www.docker.com/get-started)** (pentru dezvoltare/testare locală - opțional)
+  
+3. **[Docker](https://www.docker.com/get-started)** (pentru dezvoltare/testare locală - opțional)  
    ```bash
    docker --version
-   # Rezultatul așteptat: Versiunea Docker 20.10 sau mai mare
+   # Output așteptat: versiunea Docker 20.10 sau mai nouă
    ```
-
-### Verifică Configurația
+  
+### Verifică setup-ul
 
 Rulează aceste comenzi pentru a confirma că ești pregătit:
 
 ```bash
-# Verificați Azure Developer CLI
+# Verifică Azure Developer CLI
 azd version
-# ✅ Așteptat: versiunea azd 1.0.0 sau mai mare
+# ✅ Așteptat: azd versiunea 1.0.0 sau mai mare
 
-# Verificați Azure CLI
+# Verifică Azure CLI
 az --version
 # ✅ Așteptat: azure-cli 2.50.0 sau mai mare
 
-# Verificați Docker (opțional)
+# Verifică Docker (opțional)
 docker --version
 # ✅ Așteptat: versiunea Docker 20.10 sau mai mare
 ```
-
-**Criterii de Succes**: Toate comenzile returnează numere de versiune care se potrivesc sau depășesc minimul.
+  
+**Criterii de succes**: Toate comenzile returnează versiuni egale sau mai noi decât cele minime specificate.
 
 ### Cerințe Azure
 
-- Un **abonament Azure** activ ([creează un cont gratuit](https://azure.microsoft.com/free/))
-- Permisiuni pentru a crea resurse în abonamentul tău
-- Rolul **Contributor** pe abonament sau grupul de resurse
+- Un **abonament Azure activ** ([creează un cont gratuit](https://azure.microsoft.com/free/))  
+- Permisiuni pentru crearea resurselor în abonament  
+- Rol **Contributor** pe abonament sau grup de resurse
 
-### Cerințe de Cunoștințe
+### Cunoștințe necesare
 
-Acesta este un exemplu de **nivel avansat**. Ar trebui să ai:
-- Finalizat exemplul [API Simplu Flask](../../../../examples/container-app/simple-flask-api) 
-- Înțelegere de bază a arhitecturii microserviciilor
-- Familiaritate cu API-urile REST și HTTP
-- Înțelegerea conceptelor de container
+Acesta este un exemplu de **nivel avansat**. Trebuie să ai:  
+- Exemplul [Simple Flask API](../../../../examples/container-app/simple-flask-api) completat  
+- Înțelegere de bază a arhitecturii microserviciilor  
+- Familiaritate cu REST API-uri și HTTP  
+- Înțelegerea conceptelor de containere
 
-**Nou în Container Apps?** Începe cu exemplul [API Simplu Flask](../../../../examples/container-app/simple-flask-api) pentru a învăța bazele.
+**Ești nou la Container Apps?** Începe cu exemplul [Simple Flask API](../../../../examples/container-app/simple-flask-api) pentru a învăța bazele.
 
-## Start Rapid (Pas cu Pas)
+## Pornire rapidă (pas cu pas)
 
-### Pasul 1: Clonează și Navighează
+### Pasul 1: Clonează și navighează
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/microservices
 ```
-
-**✓ Verificare Succes**: Verifică dacă vezi `azure.yaml`:
+  
+**✓ Verificare succes**: Confirmă că vezi `azure.yaml`:  
 ```bash
 ls
 # Așteptat: README.md, azure.yaml, infra/, src/
 ```
-
-### Pasul 2: Autentificare cu Azure
+  
+### Pasul 2: Autentificare Azure
 
 ```bash
 azd auth login
 ```
+  
+Se deschide browserul pentru autentificare Azure. Conectează-te cu datele tale.
 
-Aceasta deschide browserul pentru autentificarea Azure. Conectează-te cu acreditările tale Azure.
-
-**✓ Verificare Succes**: Ar trebui să vezi:
+**✓ Verificare succes**: Ar trebui să vezi:  
 ```
 Logged in to Azure.
 ```
-
-### Pasul 3: Inițializează Mediul
+  
+### Pasul 3: Initializează mediul
 
 ```bash
 azd init
 ```
+  
+**Prompturi afișate**:  
+- **Nume mediu**: Introdu un nume scurt (ex: `microservices-dev`)  
+- **Abonament Azure**: Selectează-ți abonamentul  
+- **Regiune Azure**: Alege o regiune (ex: `eastus`, `westeurope`)
 
-**Prompturi pe care le vei vedea**:
-- **Nume mediu**: Introdu un nume scurt (ex.: `microservices-dev`)
-- **Abonament Azure**: Selectează abonamentul tău
-- **Locație Azure**: Alege o regiune (ex.: `eastus`, `westeurope`)
-
-**✓ Verificare Succes**: Ar trebui să vezi:
+**✓ Verificare succes**: Ar trebui să vezi:  
 ```
 SUCCESS: New project initialized!
 ```
-
-### Pasul 4: Implementare Infrastructură și Servicii
+  
+### Pasul 4: Implementează infrastructura și serviciile
 
 ```bash
 azd up
 ```
-
-**Ce se întâmplă** (durează 8-12 minute):
+  
+**Ce se întâmplă** (8-12 minute):  
 
 ```mermaid
 graph LR
-    A[azd sus] --> B[Creare Grup de Resurse]
-    B --> C[Implementare Registru de Containere]
-    C --> D[Implementare Log Analytics]
-    D --> E[Implementare App Insights]
-    E --> F[Creare Mediu de Containere]
-    F --> G[Construire Imagine API Gateway]
-    F --> H[Construire Imagine Serviciu Produs]
-    G --> I[Împingere în Registru]
+    A[azd up] --> B[Creează Grup de Resurse]
+    B --> C[Deplasează Registrul de Containere]
+    C --> D[Deplasează Log Analytics]
+    D --> E[Deplasează App Insights]
+    E --> F[Creează Mediu de Containere]
+    F --> G[Construiește Imaginea API Gateway]
+    F --> H[Construiește Imaginea Serviciului de Produse]
+    G --> I[Împinge în Registru]
     H --> I
-    I --> J[Implementare API Gateway]
-    I --> K[Implementare Serviciu Produs]
-    J --> L[Configurare Ingress & Verificări de Sănătate]
+    I --> J[Deplasează API Gateway]
+    I --> K[Deplasează Serviciul de Produse]
+    J --> L[Configurează Ingres și Verificări de Sănătate]
     K --> L
-    L --> M[Implementare Finalizată ✓]
+    L --> M[Deploiere Finalizată ✓]
     
     style A fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style M fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
-```
-**✓ Verificare Succes**: Ar trebui să vezi:
+```  
+**✓ Verificare succes**: Ar trebui să vezi:  
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
-
+  
 **⏱️ Timp**: 8-12 minute
 
-### Pasul 5: Testează Implementarea
+### Pasul 5: Testează implementarea
 
 ```bash
 # Obține punctul final al gateway-ului
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# Testează sănătatea API Gateway
+# Testează starea de sănătate a API Gateway-ului
 curl $GATEWAY_URL/health
 ```
-
-**✅ Rezultat așteptat:**
+  
+**✅ Rezultat așteptat:**  
 ```json
 {
   "status": "healthy",
@@ -285,14 +276,14 @@ curl $GATEWAY_URL/health
   "timestamp": "2025-11-19T10:30:00Z"
 }
 ```
-
-**Testează serviciul de produse prin gateway**:
+  
+**Testează serviciul de produse prin gateway**:  
 ```bash
 # Listează produsele
 curl $GATEWAY_URL/api/products
 ```
-
-**✅ Rezultat așteptat:**
+  
+**✅ Rezultat așteptat:**  
 ```json
 [
   {"id":1,"name":"Laptop","price":999.99,"stock":50},
@@ -300,16 +291,16 @@ curl $GATEWAY_URL/api/products
   {"id":3,"name":"Keyboard","price":79.99,"stock":150}
 ]
 ```
-
-**✓ Verificare Succes**: Ambele puncte de acces returnează date JSON fără erori.
+  
+**✓ Verificare succes**: Ambele endpoint-uri returnează date JSON fără erori.
 
 ---
 
-**🎉 Felicitări!** Ai implementat o arhitectură de microservicii pe Azure!
+**🎉 Felicitări!** Ai implementat o arhitectură microservicii pe Azure!
 
-## Structura Proiectului
+## Structura proiectului
 
-Toate fișierele de implementare sunt incluse—acesta este un exemplu complet și funcțional:
+Toate fișierele de implementare sunt incluse — acesta este un exemplu complet și funcțional:
 
 ```
 microservices/
@@ -338,49 +329,49 @@ microservices/
         ├── requirements.txt         # Python dependencies
         └── Dockerfile               # Container definition
 ```
+  
+**Ce face fiecare componentă:**
 
-**Ce Face Fiecare Componentă:**
+**Infrastructură (infra/):**  
+- `main.bicep`: Ordonează toate resursele Azure și dependențele lor  
+- `core/container-apps-environment.bicep`: Creează mediul Container Apps și Azure Container Registry  
+- `core/monitor.bicep`: Configurează Application Insights pentru logare distribuită  
+- `app/*.bicep`: Definiții individuale pentru container apps cu scalare și probe de sănătate
 
-**Infrastructură (infra/)**:
-- `main.bicep`: Orchestrarea tuturor resurselor Azure și a dependențelor lor
-- `core/container-apps-environment.bicep`: Creează mediul Container Apps și Azure Container Registry
-- `core/monitor.bicep`: Configurează Application Insights pentru jurnalizare distribuită
-- `app/*.bicep`: Definiții individuale ale aplicațiilor container cu scalare și verificări de sănătate
+**API Gateway (src/api-gateway/):**  
+- Serviciu expus public care redirecționează cererile către backend  
+- Implementează logare, tratare erori și redirecționare cereri  
+- Demonstrează comunicare HTTP între servicii
 
-**API Gateway (src/api-gateway/)**:
-- Serviciu orientat spre public care direcționează cererile către serviciile backend
-- Implementează jurnalizare, gestionarea erorilor și redirecționarea cererilor
-- Demonstrează comunicarea HTTP între servicii
+**Product Service (src/product-service/):**  
+- Serviciu intern cu catalog produse în memorie (simplu)  
+- REST API cu probe de sănătate  
+- Exemplu de microserviciu backend
 
-**Serviciu Produse (src/product-service/)**:
-- Serviciu intern cu catalog de produse (în memorie pentru simplitate)
-- API REST cu verificări de sănătate
-- Exemplu de model backend microserviciu
-
-## Prezentare Generală a Serviciilor
+## Prezentare servicii
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
 **Acces**: Public (ingress extern)  
-**Scop**: Direcționează cererile primite către serviciile backend corespunzătoare  
+**Scop**: Redirecționează cererile către serviciile backend corespunzătoare  
 
-**Puncte de Acces**:
-- `GET /` - Informații despre serviciu
-- `GET /health` - Punct de verificare a sănătății
-- `GET /api/products` - Redirecționează către serviciul de produse (listare toate)
-- `GET /api/products/:id` - Redirecționează către serviciul de produse (obține după ID)
+**Endpoints**:  
+- `GET /` - Informații serviciu  
+- `GET /health` - Verificare stare  
+- `GET /api/products` - Redirecționează către serviciul produselor (listare)  
+- `GET /api/products/:id` - Redirecționează către serviciul produselor (detalii după ID)
 
-**Funcționalități Cheie**:
-- Redirecționarea cererilor cu axios
-- Jurnalizare centralizată
-- Gestionarea erorilor și a timeout-urilor
-- Descoperirea serviciilor prin variabile de mediu
+**Caracteristici cheie**:  
+- Redirecționare cereri cu axios  
+- Logare centralizată  
+- Tratare erori și timeout-uri  
+- Descoperire servicii prin variabile de mediu  
 - Integrare Application Insights
 
-**Fragment de Cod** (`src/api-gateway/app.js`):
+**Fragment cod** (`src/api-gateway/app.js`):  
 ```javascript
-// Comunicare între servicii interne
+// Comunicare internă de servicii
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`, {
     timeout: 5000
@@ -388,27 +379,27 @@ app.get('/api/products', async (req, res) => {
   res.json(response.data);
 });
 ```
-
-### Serviciu Produse (Python/Flask)
+  
+### Product Service (Python/Flask)
 
 **Port**: 8000  
 **Acces**: Doar intern (fără ingress extern)  
-**Scop**: Gestionează catalogul de produse cu date în memorie  
+**Scop**: Gestionează catalogul de produse în memorie  
 
-**Puncte de Acces**:
-- `GET /` - Informații despre serviciu
-- `GET /health` - Punct de verificare a sănătății
-- `GET /products` - Listează toate produsele
-- `GET /products/<id>` - Obține produsul după ID
+**Endpoints**:  
+- `GET /` - Informații serviciu  
+- `GET /health` - Verificare stare  
+- `GET /products` - Listează toate produsele  
+- `GET /products/<id>` - Obține produs după ID
 
-**Funcționalități Cheie**:
-- API RESTful cu Flask
-- Stocare de produse în memorie (simplu, fără bază de date)
-- Monitorizare sănătate cu probe
-- Jurnalizare structurată
+**Caracteristici cheie**:  
+- API RESTful cu Flask  
+- Magazin produse în memorie (simplu, fără bază de date)  
+- Monitorizare stare cu probe  
+- Logare structurată  
 - Integrare Application Insights
 
-**Model de Date**:
+**Model date**:  
 ```python
 {
   "id": 1,
@@ -418,118 +409,118 @@ app.get('/api/products', async (req, res) => {
   "stock": 50
 }
 ```
+  
+**De ce doar intern?**  
+Serviciul de produse nu este expus public. Toate cererile trec prin API Gateway care oferă:  
+- Securitate: punct de acces controlat  
+- Flexibilitate: poți schimba backend-ul fără a afecta clienții  
+- Monitorizare: logare centralizată a cererilor
 
-**De ce Doar Intern?**
-Serviciul de produse nu este expus public. Toate cererile trebuie să treacă prin API Gateway, care oferă:
-- Securitate: Punct de acces controlat
-- Flexibilitate: Poți schimba backend-ul fără a afecta clienții
-- Monitorizare: Jurnalizare centralizată a cererilor
+## Înțelegerea comunicării între servicii
 
-## Înțelegerea Comunicării între Servicii
-
-### Cum Comunică Serviciile Între Ele
+### Cum comunică serviciile între ele
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Gateway as API Gateway<br/>(Port 8080)
-    participant Product as Serviciul de Produse<br/>(Port 8000)
+    participant Product as Serviciu Produs<br/>(Port 8000)
     participant AI as Application Insights
     
-    User->>Gateway: GET /api/produse
-    Gateway->>AI: Înregistrează cererea
-    Gateway->>Product: GET /produse (HTTP intern)
-    Product->>AI: Înregistrează interogarea
+    User->>Gateway: GET /api/products
+    Gateway->>AI: Înregistrare cerere
+    Gateway->>Product: GET /products (HTTP intern)
+    Product->>AI: Înregistrare interogare
     Product-->>Gateway: Răspuns JSON [5 produse]
-    Gateway->>AI: Înregistrează răspunsul
+    Gateway->>AI: Înregistrare răspuns
     Gateway-->>User: Răspuns JSON [5 produse]
     
     Note over Gateway,Product: DNS intern: http://product-service
-    Note over User,AI: Toată comunicarea este înregistrată și urmărită
-```
-În acest exemplu, API Gateway comunică cu Serviciul Produse folosind **apeluri HTTP interne**:
+    Note over User,AI: Toată comunicația este înregistrată și trasată
+```  
+În acest exemplu, API Gateway comunică cu Product Service folosind **apeluri HTTP interne**:
 
 ```javascript
-// Gateway API (src/api-gateway/app.js)
+// API Gateway (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Efectuați cerere HTTP internă
+// Efectuează o cerere HTTP internă
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
+  
+**Puncte cheie**:
 
-**Puncte Cheie**:
+1. **Descoperire DNS**: Container Apps oferă DNS automat pentru serviciile interne  
+   - FQDN Product Service: `product-service.internal.<environment>.azurecontainerapps.io`  
+   - Simplificat: `http://product-service` (Container Apps îl rezolvă)
 
-1. **Descoperire Bazată pe DNS**: Container Apps oferă automat DNS pentru servicii interne
-   - FQDN Serviciu Produse: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Simplificat ca: `http://product-service` (Container Apps îl rezolvă)
+2. **Fără expunere publică**: Product Service are `external: false` în Bicep  
+   - Accesibil doar din interiorul mediului Container Apps  
+   - Nu este accesibil de pe internet
 
-2. **Fără Expunere Publică**: Serviciul Produse are `external: false` în Bicep
-   - Accesibil doar în mediul Container Apps
-   - Nu poate fi accesat de pe internet
+3. **Variabile de mediu**: URL-urile serviciilor sunt injectate la implementare  
+   - Bicep trece FQDN-ul intern către gateway  
+   - Nu există URL-uri hardcodate în codul aplicației
 
-3. **Variabile de Mediu**: URL-urile serviciilor sunt injectate la momentul implementării
-   - Bicep transmite FQDN-ul intern către gateway
-   - Fără URL-uri hardcodate în codul aplicației
+**Analogie**: E ca într-un birou. API Gateway este recepția (publică), iar Product Service este un birou (numai pentru intern). Vizitatorii trebuie să treacă prin recepție pentru a ajunge în birou.
 
-**Analogie**: Gândește-te la asta ca la camerele de birou. API Gateway este recepția (orientată spre public), iar Serviciul Produse este o cameră de birou (doar internă). Vizitatorii trebuie să treacă prin recepție pentru a ajunge la orice cameră.
+## Opțiuni de implementare
 
-## Opțiuni de Implementare
-
-### Implementare Completă (Recomandată)
+### Implementare completă (recomandat)
 
 ```bash
-# Implementați infrastructura și ambele servicii
+# Desfășurați infrastructura și ambele servicii
 azd up
 ```
-
-Aceasta implementează:
-1. Mediul Container Apps
-2. Application Insights
-3. Container Registry
-4. Container API Gateway
-5. Container Serviciu Produse
+  
+Aceasta implementează:  
+1. Mediu Container Apps  
+2. Application Insights  
+3. Container Registry  
+4. Container API Gateway  
+5. Container Product Service
 
 **Timp**: 8-12 minute
 
-### Implementare Serviciu Individual
+### Implementează serviciul individual
 
 ```bash
-# Implementați doar un serviciu (după azd up inițial)
+# Desfășurați un singur serviciu (după azd up inițial)
 azd deploy api-gateway
 
-# Sau implementați serviciul de produs
+# Sau desfășurați serviciul de produs
 azd deploy product-service
 ```
+  
+**Caz de utilizare**: Când ai modificat cod într-un singur serviciu și vrei să redeploy-ezi doar acel serviciu.
 
-**Caz de Utilizare**: Când ai actualizat codul într-un serviciu și vrei să implementezi doar acel serviciu.
-
-### Actualizare Configurație
+### Actualizează configurația
 
 ```bash
-# Schimbă parametrii de scalare
+# Schimbați parametrii de scalare
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Redistribuie cu noua configurație
+# Redeploy cu noua configurație
 azd up
 ```
-
+  
 ## Configurație
 
-### Configurație Scalare
+### Configurare scalare
 
 Ambele servicii sunt configurate cu auto-scalare bazată pe HTTP în fișierele Bicep:
 
-**API Gateway**:
-- Min replici: 2 (întotdeauna cel puțin 2 pentru disponibilitate)
-- Max replici: 20
-- Trigger scalare: 50 cereri simultane per replică
+**API Gateway**:  
+- Min replici: 2 (măcar 2 pentru disponibilitate)  
+- Max replici: 20  
+- Trigger scalare: 50 cereri concurente per replică
 
-**Serviciu Produse**:
-- Min replici: 1 (poate scala la zero dacă este necesar)
-- Max replici: 10
-- Trigger scalare: 100 cereri simultane per replică
+**Product Service**:  
+- Min replici: 1 (poate scala la zero dacă e nevoie)  
+- Max replici: 10  
+- Trigger scalare: 100 cereri concurente per replică
 
-**Personalizează Scalarea** (în `infra/app/*.bicep`):
+**Personalizare scalare** (în `infra/app/*.bicep`):  
 ```bicep
 scale: {
   minReplicas: 1
@@ -546,20 +537,20 @@ scale: {
   ]
 }
 ```
+  
+### Alocare resurse
 
-### Alocare Resurse
-
-**API Gateway**:
-- CPU: 1.0 vCPU
-- Memorie: 2 GiB
+**API Gateway**:  
+- CPU: 1.0 vCPU  
+- Memorie: 2 GiB  
 - Motiv: Gestionează tot traficul extern
 
-**Serviciu Produse**:
-- CPU: 0.5 vCPU
-- Memorie: 1 GiB
+**Product Service**:  
+- CPU: 0.5 vCPU  
+- Memorie: 1 GiB  
 - Motiv: Operațiuni ușoare în memorie
 
-### Verificări de Sănătate
+### Probe de sănătate
 
 Ambele servicii includ probe de liveness și readiness:
 
@@ -585,39 +576,40 @@ probes: [
   }
 ]
 ```
-
-**Ce Înseamnă Acest Lucru**:
-- **Liveness**: Dacă verificarea sănătății eșuează, Container Apps repornește containerul
-- **Readiness**: Dacă nu este gata, Container Apps oprește direcționarea traficului către acea replică
+  
+**Ce înseamnă asta**:  
+- **Liveness**: Dacă verificarea stării eșuează, Container Apps repornește containerul  
+- **Readiness**: Dacă nu e gata, Container Apps oprește traficul către replica respectivă
 
 ## Monitorizare și Observabilitate
 
-### Vizualizare Jurnale Servicii
+### Vizualizează log-urile serviciilor
 
 ```bash
-# Transmite jurnale de la API Gateway
-azd logs api-gateway --follow
+# Vizualizați jurnalele folosind azd monitor
+azd monitor --logs
 
-# Vizualizează jurnalele recente ale serviciului de produse
-azd logs product-service --tail 100
+# Sau utilizați Azure CLI pentru aplicații containerizate specifice:
+# Transmiteți jurnalele de la API Gateway
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Vizualizează toate jurnalele de la ambele servicii
-azd logs --follow
+# Vizualizați jurnalele recente ale serviciului de produse
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
-
-**Rezultat Așteptat**:
+  
+**Rezultat așteptat**:  
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
 [api-gateway] GET /api/products 200 - 45ms
 [product-service] Retrieved 5 products
 ```
-
+  
 ### Interogări Application Insights
 
-Accesează Application Insights în Portalul Azure, apoi rulează aceste interogări:
+Accesează Application Insights din Azure Portal, apoi rulează aceste interogări:
 
-**Găsește Cereri Lente**:
+**Găsește cererile lente**:  
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -625,8 +617,8 @@ requests
 | summarize count() by name, cloud_RoleName
 | order by count_ desc
 ```
-
-**Urmărește Apelurile Serviciu-la-Serviciu**:
+  
+**Urmărește apelurile între servicii**:  
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -634,50 +626,50 @@ dependencies
 | project timestamp, name, target, duration, success
 | order by timestamp desc
 ```
-
-**Rata Erorilor pe Serviciu**:
+  
+**Rata erorilor pe serviciu**:  
 ```kusto
 exceptions
 | where timestamp > ago(24h)
 | summarize errorCount = count() by cloud_RoleName, type
 | order by errorCount desc
 ```
-
-**Volumul Cererilor în Timp**:
+  
+**Volum cereri în timp**:  
 ```kusto
 requests
 | where timestamp > ago(1h)
 | summarize requestCount = count() by bin(timestamp, 5m), cloud_RoleName
 | render timechart
 ```
-
-### Accesare Tablou de Bord Monitorizare
+  
+### Accesează dashboard-ul de monitorizare
 
 ```bash
 # Obține detalii despre Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Deschide monitorizarea portalului Azure
+# Deschide monitorizarea în Portalul Azure
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
+  
+### Metrici Live
 
-### Metrice Live
+1. Mergi la Application Insights în Azure Portal  
+2. Click pe „Live Metrics”  
+3. Vezi cererile, erorile și performanța în timp real  
+4. Testează cu: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-1. Navighează la Application Insights în Portalul Azure
-2. Click pe "Live Metrics"
-3. Vezi cererile, erorile și performanța în timp real
-4. Testează rulând: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+## Exerciții practice
 
-## Exerciții Practice
+### Exercițiul 1: Adaugă un endpoint nou produs ⭐ (Ușor)
 
-### Exercițiul 1: Adaugă un Nou Endpoint pentru Produse ⭐ (Ușor)
+**Obiectiv**: Adaugă un endpoint POST pentru crearea de produse noi
 
-**Scop**: Adaugă un endpoint POST pentru a crea produse noi
-
-**Punct de Pornire**: `src/product-service/main.py`
+**Punct de plecare**: `src/product-service/main.py`
 
 **Pași**:
 
@@ -705,11 +697,11 @@ def create_product():
     logger.info(f"Created product {new_id}")
     return jsonify(new_product), 201
 ```
-
-2. Adaugă ruta POST la API Gateway (`src/api-gateway/app.js`):
+  
+2. Adaugă ruta POST în API Gateway (`src/api-gateway/app.js`):
 
 ```javascript
-// Adăugați acest lucru după ruta GET /api/products
+// Adaugă asta după ruta GET /api/products
 app.post('/api/products', async (req, res) => {
   try {
     console.log(`Forwarding POST request to ${PRODUCT_SERVICE_URL}/products`);
@@ -727,7 +719,7 @@ app.post('/api/products', async (req, res) => {
 });
 ```
 
-3. Redeployați ambele servicii:
+3. Redeploați ambele servicii:
 
 ```bash
 azd deploy product-service
@@ -745,7 +737,7 @@ curl -X POST $GATEWAY_URL/api/products \
   -d '{"name":"USB Cable","price":9.99,"stock":500}'
 ```
 
-**✅ Rezultatul așteptat:**
+**✅ Rezultat așteptat:**
 ```json
 {"id":6,"name":"USB Cable","description":"","price":9.99,"stock":500}
 ```
@@ -760,23 +752,23 @@ curl $GATEWAY_URL/api/products
 **Criterii de succes**:
 - ✅ Cererea POST returnează HTTP 201
 - ✅ Produsul nou apare în lista GET /api/products
-- ✅ Produsul are ID incrementat automat
+- ✅ Produsul are ID auto-incrementat
 
 **Timp**: 10-15 minute
 
 ---
 
-### Exercițiul 2: Modificați regulile de autoscalare ⭐⭐ (Mediu)
+### Exercițiul 2: Modificarea Regulilor de Autoscalare ⭐⭐ (Mediu)
 
-**Obiectiv**: Schimbați Product Service pentru a scala mai agresiv
+**Scop**: Modifică Product Service pentru a scala mai agresiv
 
 **Punct de pornire**: `infra/app/product-service.bicep`
 
 **Pași**:
 
-1. Deschideți `infra/app/product-service.bicep` și găsiți blocul `scale` (aproximativ linia 95)
+1. Deschide `infra/app/product-service.bicep` și găsește blocul `scale` (aproximativ linia 95)
 
-2. Schimbați de la:
+2. Schimbă de la:
 ```bicep
 scale: {
   minReplicas: 1
@@ -812,7 +804,7 @@ scale: {
 }
 ```
 
-3. Redeployați infrastructura:
+3. Redeploați infrastructura:
 
 ```bash
 azd up
@@ -827,7 +819,7 @@ az containerapp show \
   --query "properties.template.scale" -o json
 ```
 
-**✅ Rezultatul așteptat:**
+**✅ Rezultat așteptat:**
 ```json
 {
   "minReplicas": 2,
@@ -836,40 +828,40 @@ az containerapp show \
 }
 ```
 
-5. Testați autoscalarea sub încărcare:
+5. Testați autoscalarea cu încărcare:
 
 ```bash
-# Generează cereri simultane
+# Generează cereri concurente
 for i in {1..500}; do curl $GATEWAY_URL/api/products & done
 
-# Observă cum are loc scalarea
-azd logs product-service --follow
-# Caută: Evenimente de scalare ale Container Apps
+# Urmărește scalarea folosind Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --follow
+# Caută: evenimente de scalare Container Apps
 ```
 
 **Criterii de succes**:
-- ✅ Product Service rulează mereu cel puțin 2 replici
-- ✅ Sub încărcare, scalează la mai mult de 2 replici
+- ✅ Product Service rulează întotdeauna cel puțin 2 replici
+- ✅ La încărcare, scalați la mai mult de 2 replici
 - ✅ Portalul Azure afișează noile reguli de scalare
 
 **Timp**: 15-20 minute
 
 ---
 
-### Exercițiul 3: Adăugați o interogare personalizată de monitorizare ⭐⭐ (Mediu)
+### Exercițiul 3: Adăugarea unei Interogări Personalizate de Monitorizare ⭐⭐ (Mediu)
 
-**Obiectiv**: Creați o interogare personalizată în Application Insights pentru a urmări performanța API-ului de produse
+**Scop**: Creează o interogare personalizată Application Insights pentru a monitoriza performanța API-ului produsului
 
 **Pași**:
 
 1. Navigați la Application Insights în Azure Portal:
-   - Accesați Azure Portal
-   - Găsiți grupul de resurse (rg-microservices-*)
-   - Faceți clic pe resursa Application Insights
+   - Mergi la Azure Portal
+   - Găsește grupul tău de resurse (rg-microservices-*)
+   - Dă click pe resursa Application Insights
 
-2. Faceți clic pe "Logs" în meniul din stânga
+2. Apasă "Logs" în meniul din stânga
 
-3. Creați această interogare:
+3. Creează această interogare:
 
 ```kusto
 requests
@@ -884,48 +876,48 @@ requests
 | render timechart
 ```
 
-4. Faceți clic pe "Run" pentru a executa interogarea
+4. Apasă "Run" pentru a executa interogarea
 
-5. Salvați interogarea:
-   - Faceți clic pe "Save"
+5. Salvează interogarea:
+   - Apasă "Save"
    - Nume: "Product API Performance"
    - Categorie: "Performance"
 
-6. Generați trafic de test:
+6. Generează trafic de test:
 
 ```bash
 for i in {1..100}; do curl $GATEWAY_URL/api/products; sleep 1; done
 ```
 
-7. Reîmprospătați interogarea pentru a vedea datele
+7. Reîmprospătează interogarea pentru a vedea datele
 
-**✅ Rezultatul așteptat:**
+**✅ Rezultat așteptat:**
 - Grafic care arată numărul de cereri în timp
 - Durata medie < 500ms
 - Rata de succes = 100%
-- Interval de timp de 5 minute
+- Intervale de timp de 5 minute
 
 **Criterii de succes**:
-- ✅ Interogarea arată 100+ cereri
+- ✅ Interogarea afișează peste 100 cereri
 - ✅ Rata de succes este 100%
 - ✅ Durata medie < 500ms
 - ✅ Graficul afișează intervale de timp de 5 minute
 
-**Rezultat de învățare**: Înțelegeți cum să monitorizați performanța serviciilor cu interogări personalizate
+**Rezultat învățare**: Înțelege cum să monitorizezi performanța serviciului cu interogări personalizate
 
 **Timp**: 10-15 minute
 
 ---
 
-### Exercițiul 4: Implementați logica de retry ⭐⭐⭐ (Avansat)
+### Exercițiul 4: Implementarea Logicii de Retry ⭐⭐⭐ (Avansat)
 
-**Obiectiv**: Adăugați logica de retry în API Gateway când Product Service este temporar indisponibil
+**Scop**: Adaugă logică de retry la API Gateway când Product Service este temporar indisponibil
 
 **Punct de pornire**: `src/api-gateway/app.js`
 
 **Pași**:
 
-1. Instalați biblioteca de retry:
+1. Instalează biblioteca de retry:
 
 ```bash
 cd src/api-gateway
@@ -933,19 +925,19 @@ npm install axios-retry --save
 cd ../..
 ```
 
-2. Actualizați `src/api-gateway/app.js` (adăugați după importul axios):
+2. Actualizează `src/api-gateway/app.js` (adaugă după importul axios):
 
 ```javascript
 const axiosRetry = require('axios-retry');
 
-// Configurați logica de reîncercare
+// Configurează logica de reîncercare
 axiosRetry(axios, {
   retries: 3,
   retryDelay: (retryCount) => {
     return retryCount * 1000; // 1s, 2s, 3s
   },
   retryCondition: (error) => {
-    // Reîncercați în cazul erorilor de rețea sau răspunsurilor 5xx
+    // Reîncearcă la erori de rețea sau răspunsuri 5xx
     return axiosRetry.isNetworkOrIdempotentRequestError(error) ||
            (error.response && error.response.status >= 500);
   }
@@ -954,27 +946,27 @@ axiosRetry(axios, {
 console.log('Retry logic configured: 3 retries with exponential backoff');
 ```
 
-3. Redeployați API Gateway:
+3. Redeploați API Gateway:
 
 ```bash
 azd deploy api-gateway
 ```
 
-4. Testați comportamentul de retry simulând o defecțiune a serviciului:
+4. Testați comportamentul retry simulând o cădere a serviciului:
 
 ```bash
-# Redimensionați serviciul de produse la 0 (simulați eșecul)
+# Reduceți serviciul de produs la 0 (simulați eșecul)
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --min-replicas 0 \
   --max-replicas 0
 
-# Încercați să accesați produsele (va încerca de 3 ori)
+# Încercați să accesați produsele (va reîncerca de 3 ori)
 time curl -v $GATEWAY_URL/api/products
-# Observați: Răspunsul durează ~6 secunde (1s + 2s + 3s încercări)
+# Observați: Răspunsul durează ~6 secunde (1s + 2s + 3s reîncercări)
 
-# Restaurați serviciul de produse
+# Restaurare serviciu de produs
 az containerapp update \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -982,43 +974,43 @@ az containerapp update \
   --max-replicas 10
 ```
 
-5. Vizualizați logurile de retry:
+5. Vizualizați logurile retry:
 
 ```bash
-azd logs api-gateway --tail 50
-# Căutați: Mesaje de încercare de reîncercare
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --tail 50
+# Caută: Mesaje pentru încercări de retry
 ```
 
 **✅ Comportament așteptat:**
-- Cererile se retry de 3 ori înainte de a eșua
+- Cererile sunt reîncercate de 3 ori înainte să eșueze
 - Fiecare retry așteaptă mai mult (1s, 2s, 3s)
-- Cererile reușesc după repornirea serviciului
+- Cereri reușite după repornirea serviciului
 - Logurile arată încercările de retry
 
 **Criterii de succes**:
-- ✅ Cererile se retry de 3 ori înainte de a eșua
-- ✅ Fiecare retry așteaptă mai mult (backoff exponențial)
-- ✅ Cererile reușesc după repornirea serviciului
+- ✅ Cererile sunt reîncercate de 3 ori înainte să eșueze
+- ✅ Fiecare retry așteaptă mai mult (retry exponentiel)
+- ✅ Cereri reușite după repornirea serviciului
 - ✅ Logurile arată încercările de retry
 
-**Rezultat de învățare**: Înțelegeți modelele de reziliență în microservicii (circuit breakers, retry, timeouts)
+**Rezultat învățare**: Înțelege modelele de reziliență în microservicii (circuit breakers, retry-uri, timeout-uri)
 
 **Timp**: 20-25 minute
 
 ---
 
-## Punct de verificare a cunoștințelor
+## Verificare de cunoștințe
 
-După finalizarea acestui exemplu, verificați-vă înțelegerea:
+După ce ai terminat acest exemplu, verifică-ți înțelegerea:
 
 ### 1. Comunicare între servicii ✓
 
-Testați-vă cunoștințele:
-- [ ] Puteți explica cum API Gateway descoperă Product Service? (Descoperire bazată pe DNS)
-- [ ] Ce se întâmplă dacă Product Service este offline? (Gateway returnează eroarea 503)
-- [ ] Cum ați adăuga un al treilea serviciu? (Creați un nou fișier Bicep, adăugați-l în main.bicep, creați folderul src)
+Testează-ți cunoștințele:
+- [ ] Poți explica cum API Gateway descoperă Product Service? (descoperire a serviciului bazată pe DNS)
+- [ ] Ce se întâmplă dacă Product Service este oprit? (Gateway returnează eroare 503)
+- [ ] Cum adaugi un al treilea serviciu? (creezi un nou fișier Bicep, îl adaugi la main.bicep, creezi un folder src)
 
-**Verificare practică**:
+**Verificare practică:**
 ```bash
 # Simulează eșecul serviciului
 az containerapp update --name <product-service-name> --min-replicas 0 --max-replicas 0
@@ -1029,73 +1021,73 @@ curl $GATEWAY_URL/api/products
 az containerapp update --name <product-service-name> --min-replicas 1 --max-replicas 10
 ```
 
-### 2. Monitorizare și observabilitate ✓
+### 2. Monitorizare și Observabilitate ✓
 
-Testați-vă cunoștințele:
-- [ ] Unde vedeți logurile distribuite? (Application Insights în Azure Portal)
-- [ ] Cum urmăriți cererile lente? (Interogare Kusto: `requests | where duration > 1000`)
-- [ ] Puteți identifica ce serviciu a cauzat o eroare? (Verificați câmpul `cloud_RoleName` în loguri)
+Testează-ți cunoștințele:
+- [ ] Unde vezi logurile distribuite? (Application Insights în Azure Portal)
+- [ ] Cum urmărești cererile lente? (interogare Kusto: `requests | where duration > 1000`)
+- [ ] Poți identifica ce serviciu a cauzat o eroare? (verifică câmpul `cloud_RoleName` în loguri)
 
-**Verificare practică**:
+**Verificare practică:**
 ```bash
-# Generează o simulare de cerere lentă
+# Generează o simulare de solicitare lentă
 curl "$GATEWAY_URL/api/products?delay=2000"
 
-# Interoghează Application Insights pentru cereri lente
+# Interoghează Application Insights pentru solicitări lente
 # Navighează la Azure Portal → Application Insights → Logs
 # Rulează: requests | where duration > 1000 | project timestamp, name, duration, cloud_RoleName
 ```
 
 ### 3. Scalare și performanță ✓
 
-Testați-vă cunoștințele:
-- [ ] Ce declanșează autoscalarea? (Reguli de cereri HTTP concurente: 50 pentru gateway, 100 pentru produs)
-- [ ] Câte replici rulează acum? (Verificați cu `az containerapp revision list`)
-- [ ] Cum ați scala Product Service la 5 replici? (Actualizați minReplicas în Bicep)
+Testează-ți cunoștințele:
+- [ ] Ce declanșează autoscalarea? (reguli de cereri concurente HTTP: 50 pentru gateway, 100 pentru produs)
+- [ ] Câte replici rulează acum? (verifică cu `az containerapp revision list`)
+- [ ] Cum scazi Product Service la 5 replici? (actualizezi minReplicas în Bicep)
 
-**Verificare practică**:
+**Verificare practică:**
 ```bash
-# Generează sarcină pentru a testa autoscalarea
+# Generează încărcare pentru a testa scalarea automată
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Urmărește creșterea replicilor
-azd logs api-gateway --follow
+# Monitorizează creșterea replicilor folosind Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 # ✅ Așteptat: Vezi evenimentele de scalare în jurnale
 ```
 
-**Criterii de succes**: Puteți răspunde la toate întrebările și verifica cu comenzi practice.
+**Criterii de succes**: Poți răspunde la toate întrebările și verifica cu comenzile practice.
 
 ---
 
 ## Analiza costurilor
 
-### Costuri estimate lunare (Pentru acest exemplu cu 2 servicii)
+### Costuri lunare estimate (pentru acest exemplu cu 2 servicii)
 
 | Resursă | Configurație | Cost estimat |
-|---------|--------------|--------------|
+|----------|--------------|--------------|
 | API Gateway | 2-20 replici, 1 vCPU, 2GB RAM | $30-150 |
 | Product Service | 1-10 replici, 0.5 vCPU, 1GB RAM | $15-75 |
-| Container Registry | Tier de bază | $5 |
+| Container Registry | Nivel basic | $5 |
 | Application Insights | 1-2 GB/lună | $5-10 |
 | Log Analytics | 1 GB/lună | $3 |
 | **Total** | | **$58-243/lună** |
 
-### Defalcarea costurilor pe utilizare
+### Despărțirea costurilor după utilizare
 
 **Trafic redus** (testare/învățare): ~60$/lună
 - API Gateway: 2 replici × 24/7 = $30
 - Product Service: 1 replică × 24/7 = $15
-- Monitorizare + Registry = $13
+- Monitorizare + Registru = $13
 
-**Trafic moderat** (producție mică): ~120$/lună
+**Trafic moderat** (mică producție): ~120$/lună
 - API Gateway: 5 replici medii = $75
 - Product Service: 3 replici medii = $45
-- Monitorizare + Registry = $13
+- Monitorizare + Registru = $13
 
-**Trafic intens** (perioade aglomerate): ~240$/lună
+**Trafic mare** (perioade aglomerate): ~240$/lună
 - API Gateway: 15 replici medii = $225
 - Product Service: 8 replici medii = $120
-- Monitorizare + Registry = $13
+- Monitorizare + Registru = $13
 
 ### Sfaturi pentru optimizarea costurilor
 
@@ -1107,16 +1099,16 @@ azd logs api-gateway --follow
    }
    ```
 
-2. **Folosiți Consumption Plan pentru Cosmos DB** (când îl adăugați):
-   - Plătiți doar pentru ceea ce utilizați
-   - Fără taxe minime
+2. **Folosiți planul de consum pentru Cosmos DB** (când îl adăugați):
+   - Plătiți doar pentru ce utilizați
+   - Fără taxă minimă
 
-3. **Setați Sampling în Application Insights**:
+3. **Setați eșantionarea Application Insights**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Eșantionează 50% din cereri
+   appInsights.defaultClient.config.samplingPercentage = 50; // Eșantionarea a 50% dintre cereri
    ```
 
-4. **Ștergeți resursele când nu sunt necesare**:
+4. **Curățați când nu este necesar**:
    ```bash
    azd down --force --purge
    ```
@@ -1124,35 +1116,35 @@ azd logs api-gateway --follow
 ### Opțiuni gratuite
 
 Pentru învățare/testare, luați în considerare:
-- ✅ Folosiți credite gratuite Azure ($200 pentru primele 30 de zile cu conturi noi)
-- ✅ Mențineți replicile la minimum (economisiți ~50% din costuri)
-- ✅ Ștergeți după testare (fără taxe continue)
+- ✅ Folosește credite gratuite Azure ($200 pentru primele 30 zile la conturi noi)
+- ✅ Țineți numărul minim de replici (economisește ~50% costuri)
+- ✅ Ștergeți după testare (fără costuri continue)
 - ✅ Scalați la zero între sesiunile de învățare
 
-**Exemplu**: Rularea acestui exemplu timp de 2 ore/zi × 30 zile = ~5$/lună în loc de 60$/lună
+**Exemplu**: Rularea acestui exemplu 2 ore/zi × 30 zile = ~5$/lună în loc de 60$/lună
 
 ---
 
 ## Referință rapidă pentru depanare
 
-### Problemă: `azd up` eșuează cu "Subscription not found"
+### Problema: `azd up` eșuează cu "Subscription not found"
 
 **Soluție**:
 ```bash
-# Conectați-vă din nou cu abonament explicit
+# Autentificați-vă din nou cu abonament explicit
 az account set --subscription <your-subscription-id>
 azd env set AZURE_SUBSCRIPTION_ID <your-subscription-id>
 azd up
 ```
 
-### Problemă: API Gateway returnează 503 "Product service unavailable"
+### Problema: API Gateway returnează 503 "Product service unavailable"
 
-**Diagnosticare**:
+**Diagnosticați**:
 ```bash
-# Verificați jurnalele serviciului de produs
-azd logs product-service --tail 50
+# Verificați jurnalele serviciului de produs folosind Azure CLI
+az containerapp logs show --name product-service --resource-group $RG_NAME --tail 50
 
-# Verificați sănătatea serviciului de produs
+# Verificați starea de sănătate a serviciului de produs
 az containerapp show \
   --name $(azd env get-values | grep PRODUCT_SERVICE | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -1160,35 +1152,35 @@ az containerapp show \
 ```
 
 **Cauze comune**:
-1. Product service nu a pornit (verificați logurile pentru erori Python)
-2. Health check eșuează (verificați dacă endpoint-ul `/health` funcționează)
-3. Build-ul imaginii containerului a eșuat (verificați registry-ul pentru imagine)
+1. Serviciul product nu a pornit (verifică logurile pentru erori Python)
+2. Health check eșuat (verifică endpoint-ul `/health`)
+3. Build-ul imaginii container a eșuat (verifică registrul pentru imagine)
 
-### Problemă: Autoscalarea nu funcționează
+### Problema: Autoscalarea nu funcționează
 
-**Diagnosticare**:
+**Diagnosticați**:
 ```bash
-# Verificați numărul curent de replici
+# Verifică numărul actual de replici
 az containerapp revision list \
   --name $(azd env get-values | grep API_GATEWAY | head -1 | cut -d '/' -f5) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "[].properties.replicas"
 
-# Generați sarcină pentru testare
+# Generează sarcină pentru testare
 for i in {1..1000}; do curl $GATEWAY_URL/api/products & done
 
-# Urmăriți evenimentele de scalare
-azd logs api-gateway --follow | grep -i scale
+# Urmărește evenimentele de scalare folosind Azure CLI
+az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow | grep -i scale
 ```
 
 **Cauze comune**:
-1. Încărcarea nu este suficient de mare pentru a declanșa regula de scalare (necesar >50 cereri concurente)
-2. Numărul maxim de replici a fost deja atins (verificați configurația Bicep)
-3. Regula de scalare configurată greșit în Bicep (verificați valoarea concurrentRequests)
+1. Încărcarea nu este suficient de mare să activeze regula de scalare (>50 cereri concurente)
+2. Numărul maxim de replici deja atins (verifică configurația Bicep)
+3. Regula de scalare greșit configurată în Bicep (verifică valoarea concurrentRequests)
 
-### Problemă: Application Insights nu afișează loguri
+### Problema: Application Insights nu afișează loguri
 
-**Diagnosticare**:
+**Diagnosticați**:
 ```bash
 # Verificați dacă șirul de conexiune este setat
 azd env get-values | grep APPLICATIONINSIGHTS
@@ -1201,35 +1193,35 @@ az monitor app-insights component show \
 ```
 
 **Cauze comune**:
-1. String-ul de conexiune nu este transmis containerului (verificați variabilele de mediu)
-2. SDK-ul Application Insights nu este configurat (verificați importurile în cod)
-3. Firewall-ul blochează telemetria (rar, verificați regulile de rețea)
+1. String-ul de conexiune nu este trecut în container (verifică variabilele de mediu)
+2. SDK Application Insights nu este configurat (verifică importurile în cod)
+3. Firewall blochează telemetria (rar, verifică regulile de rețea)
 
-### Problemă: Build-ul Docker eșuează local
+### Problema: Build Docker eșuează local
 
-**Diagnosticare**:
+**Diagnosticați**:
 ```bash
-# Testați construirea API Gateway
+# Testare compilare API Gateway
 cd src/api-gateway
 docker build -t test-gateway .
 
-# Testați construirea serviciului de produs
+# Testare compilare serviciu produs
 cd ../product-service
 docker build -t test-product .
 ```
 
 **Cauze comune**:
-1. Dependențe lipsă în package.json/requirements.txt
+1. Lipsesc dependențe în package.json/requirements.txt
 2. Erori de sintaxă în Dockerfile
 3. Probleme de rețea la descărcarea dependențelor
 
-**Încă aveți probleme?** Consultați [Ghidul de probleme comune](../../docs/troubleshooting/common-issues.md) sau [Depanare Azure Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+**Încă blocat?** Vezi [Ghid probleme comune](../../docs/chapter-07-troubleshooting/common-issues.md) sau [Depanare Azure Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 
 ---
 
 ## Curățare
 
-Pentru a evita taxele continue, ștergeți toate resursele:
+Pentru a evita costuri continue, șterge toate resursele:
 
 ```bash
 azd down --force --purge
@@ -1240,17 +1232,17 @@ azd down --force --purge
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Tastați `y` pentru a confirma.
+Tastează `y` pentru a confirma.
 
 **Ce se șterge**:
 - Mediul Container Apps
-- Ambele Container Apps (gateway & product service)
+- Ambele Container Apps (gateway și product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Grupul de resurse
 
-**✓ Verificați curățarea**:
+**✓ Verificare curățare**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
@@ -1259,15 +1251,15 @@ Ar trebui să returneze gol.
 
 ---
 
-## Ghid de extindere: De la 2 la 5+ servicii
+## Ghid de extindere: de la 2 la 5+ servicii
 
-După ce ați stăpânit această arhitectură cu 2 servicii, iată cum să extindeți:
+După ce ai stăpânit această arhitectură cu 2 servicii, iată cum să extinzi:
 
-### Faza 1: Adăugați persistența bazei de date (Pasul următor)
+### Faza 1: Adăugarea persistenței bazei de date (Pas următor)
 
-**Adăugați Cosmos DB pentru Product Service**:
+**Adaugă Cosmos DB pentru Product Service**:
 
-1. Creați `infra/core/cosmos.bicep`:
+1. Creează `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -1281,18 +1273,18 @@ După ce ați stăpânit această arhitectură cu 2 servicii, iată cum să exti
    }
    ```
 
-2. Actualizați Product Service pentru a utiliza Azure Cosmos DB Python SDK în loc de date în memorie
+2. Actualizează product service pentru a folosi Azure Cosmos DB Python SDK în loc de date în memorie
 
 3. Cost suplimentar estimat: ~25$/lună (serverless)
 
-### Faza 2: Adăugați al treilea serviciu (Order Management)
+### Faza 2: Adăugarea unui al treilea serviciu (Gestionare comenzi)
 
-**Creați Order Service**:
+**Creează Order Service**:
 
 1. Folder nou: `src/order-service/` (Python/Node.js/C#)
 2. Bicep nou: `infra/app/order-service.bicep`
-3. Actualizați API Gateway pentru a ruta `/api/orders`
-4. Adăugați Azure SQL Database pentru persistența comenzilor
+3. Actualizează API Gateway să ruteze `/api/orders`
+4. Adaugă Azure SQL Database pentru persistența comenzilor
 
 **Arhitectura devine**:
 ```
@@ -1300,35 +1292,35 @@ API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Faza 3: Adăugați comunicare asincronă (Service Bus)
+### Faza 3: Adăugarea comunicației asincrone (Service Bus)
 
-**Implementați arhitectura bazată pe evenimente**:
+**Implementare arhitectură bazată pe evenimente**:
 
-1. Adăugați Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service publică evenimente "ProductCreated"
-3. Order Service se abonează la evenimentele produsului
-4. Adăugați Notification Service pentru procesarea evenimentelor
+1. Adaugă Azure Service Bus: `infra/core/servicebus.bicep`
+2. Product Service publică evenimente „ProductCreated”
+3. Order Service se abonează la evenimentele produse
+4. Adaugă Notification Service pentru procesarea evenimentelor
 
-**Model**: Request/Response (HTTP) + Event-Driven (Service Bus)
+**Pattern**: Cerere/Răspuns (HTTP) + Evenimente (Service Bus)
 
-### Faza 4: Adăugați autentificare utilizator
+### Faza 4: Adăugarea autentificării utilizator
 
-**Implementați User Service**:
+**Implementare User Service**:
 
-1. Creați `src/user-service/` (Go/Node.js)
-2. Adăugați Azure AD B2C sau autentificare JWT personalizată
+1. Creează `src/user-service/` (Go/Node.js)
+2. Adaugă Azure AD B2C sau autentificare JWT personalizată
 3. API Gateway validează token-urile înainte de rutare
-4. Serviciile verifică permisiunile utilizatorului
+4. Serviciile verifică permisiunile utilizatorilor
 
 ### Faza 5: Pregătire pentru producție
 
-**Adăugați aceste componente**:
-- ✅ Azure Front Door (balansare globală a încărcării)
-- ✅ Azure Key Vault (gestionarea secretelor)
+**Adaugă aceste componente**:
+- ✅ Azure Front Door (load balancing global)
+- ✅ Azure Key Vault (gestionare secrete)
 - ✅ Azure Monitor Workbooks (dashboard-uri personalizate)
 - ✅ Pipeline CI/CD (GitHub Actions)
-- ✅ Deployments Blue-Green
-- ✅ Managed Identity pentru toate serviciile
+- ✅ Deploy-uri Blue-Green
+- ✅ Identitate gestionată pentru toate serviciile
 
 **Cost arhitectură completă pentru producție**: ~300-1,400$/lună
 
@@ -1337,83 +1329,83 @@ API Gateway → Product Service (Cosmos DB)
 ## Aflați mai multe
 
 ### Documentație relevantă
-- [Documentație Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Ghidul arhitecturii microserviciilor](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Documentația Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
+- [Ghid arhitectură Microservicii](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
 - [Application Insights pentru tracing distribuit](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Documentație Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Documentația Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### Pași următori în acest curs
-- ← Anterior: [API Flask simplu](../../../../examples/container-app/simple-flask-api) - Exemplu simplu cu un singur container
-- → Următor: [Ghid de integrare AI](../../../../docs/ai-foundry) - Adăugați capabilități AI
-- 🏠 [Pagina principală a cursului](../../README.md)
+- ← Anterior: [Simple Flask API](../../../../examples/container-app/simple-flask-api) - Exemplu simplu cu un singur container
+- → Următor: [Ghid integrare AI](../../../../docs/ai-foundry) - Adăugarea capabilităților AI
+- 🏠 [Acasă curs](../../README.md)
 
-### Comparație: Când să folosiți ce
+### Comparativ: Când să folosești ce anume
 
-| Caracteristică | Container unic | Microservicii (Acesta) | Kubernetes (AKS) |
-|----------------|----------------|------------------------|------------------|
-| **Caz de utilizare** | Aplicații simple | Aplicații complexe | Aplicații enterprise |
-| **Scalabilitate** | Serviciu unic | Scalare pe serviciu | Flexibilitate maximă |
-| **Complexitate** | Scăzută | Medie | Ridicată |
-| **Dimensiunea echipei** | 1-3 dezvoltatori | 3-10 dezvoltatori | 10+ dezvoltatori |
+| Caracteristică | Container unic | Microservicii (acesta) | Kubernetes (AKS) |
+|----------------|----------------|-----------------------|------------------|
+| **Caz de folosire** | Aplicații simple | Aplicații complexe | Aplicații enterprise |
+| **Scalabilitate** | Un singur serviciu | Scalare per serviciu | Flexibilitate maximă |
+| **Complexitate** | Mică | Medie | Mare |
+| **Dimensiune echipă** | 1-3 dezvoltatori | 3-10 dezvoltatori | Peste 10 dezvoltatori |
 | **Cost** | ~15-50$/lună | ~60-250$/lună | ~150-500$/lună |
-| **Timp de deploy** | 5-10 minute | 8-12 minute | 15-30 minute |
-| **Cel mai potrivit pentru** | MVP-uri, prototipuri | Aplicații de producție | Multi-cloud, rețele avansate |
+| **Timp implementare** | 5-10 minute | 8-12 minute | 15-30 minute |
+| **Potrivit pentru** | MVP-uri, prototipuri | Aplicații de producție | Multi-cloud, rețelistică avansată |
 
-**Recomandare**: Începeți cu Container Apps (acest exemplu), treceți la AKS doar dacă aveți nevoie de funcționalități specifice Kubernetes.
+**Recomandare**: Începe cu Container Apps (acest exemplu), treci la AKS doar dacă ai nevoie de funcționalități specifice Kubernetes.
 
 ---
 
 ## Întrebări frecvente
 
 **Î: De ce doar 2 servicii în loc de 5+?**  
-R: Progres educațional. Stăpâniți elementele de bază (comunicarea între servicii, monitorizarea, scalarea) cu un exemplu simplu înainte de a adăuga complexitate. Modelele pe care le învățați aici se aplică arhitecturilor cu 100 de servicii.
+R: Progres educațional. Stăpânește elementele de bază (comunicarea serviciilor, monitorizarea, scalarea) cu un exemplu simplu înainte de a adăuga complexitate. Modelele pe care le înveți aici se aplică arhitecturilor cu 100 de servicii.
 
-**Î: Pot să adaug mai multe servicii singur?**  
-R: Absolut! Urmați ghidul de extindere de mai sus. Fiecare serviciu nou urmează același model: creați folderul src, creați fișierul Bicep, actualizați azure.yaml, implementați.
+**Î: Pot adăuga singur mai multe servicii?**  
+R: Absolut! Urmează ghidul de extindere de mai sus. Fiecare serviciu nou urmează același tipar: creează folderul src, creează fișierul Bicep, actualizează azure.yaml, deployază.
 
-**Î: Este pregătit pentru producție?**  
-R: Este o fundație solidă. Pentru producție, adăugați: identitate gestionată, Key Vault, baze de date persistente, pipeline CI/CD, alerte de monitorizare și strategie de backup.
+**Î: Este gata pentru producție?**  
+R: Este o bază solidă. Pentru producție, adaugă: identitate gestionată, Key Vault, baze de date persistente, pipeline CI/CD, alerte de monitorizare și strategie de backup.
 
 **Î: De ce să nu folosesc Dapr sau alt service mesh?**  
-R: Păstrați lucrurile simple pentru învățare. După ce înțelegeți rețelele native ale Container Apps, puteți adăuga Dapr pentru scenarii avansate (gestionarea stării, pub/sub, legături).
+R: Pentru simplitate în învățare. Odată ce înțelegi networking-ul nativ al Container Apps, poți adăuga Dapr pentru scenarii avansate (gestionare stare, pub/sub, bindings).
 
-**Î: Cum pot depana local?**  
-R: Rulați serviciile local cu Docker:  
+**Î: Cum pot debuga local?**  
+R: Rulează serviciile local cu Docker:  
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
   
-**Î: Pot folosi limbaje de programare diferite?**  
-R: Da! Acest exemplu arată Node.js (gateway) + Python (serviciul de produse). Puteți combina orice limbaje care rulează în containere: C#, Go, Java, Ruby, PHP etc.
+**Î: Pot folosi alte limbaje de programare?**  
+R: Da! Acest exemplu arată Node.js (gateway) + Python (serviciu produs). Poți combina orice limbaje care rulează în containere: C#, Go, Java, Ruby, PHP etc.
 
 **Î: Ce fac dacă nu am credite Azure?**  
-R: Folosiți nivelul gratuit Azure (primele 30 de zile cu conturi noi primesc credite de $200) sau implementați pentru perioade scurte de testare și ștergeți imediat. Acest exemplu costă ~2$/zi.
+R: Folosește nivelul gratuit Azure (primele 30 zile cont nou primești 200$ credite) sau deployează pentru perioade scurte de testare și șterge imediat. Acest exemplu costă aproximativ 2$/zi.
 
-**Î: Cum diferă acest lucru de Azure Kubernetes Service (AKS)?**  
-R: Container Apps este mai simplu (nu necesită cunoștințe Kubernetes), dar mai puțin flexibil. AKS vă oferă control complet Kubernetes, dar necesită mai multă expertiză. Începeți cu Container Apps, treceți la AKS dacă este necesar.
+**Î: Cum diferă asta de Azure Kubernetes Service (AKS)?**  
+R: Container Apps este mai simplu (nu trebuie să știi Kubernetes) dar mai puțin flexibil. AKS îți dă control complet Kubernetes dar cere mai multă expertiză. Începe cu Container Apps, treci la AKS dacă este nevoie.
 
-**Î: Pot folosi acest lucru cu servicii Azure existente?**  
-R: Da! Puteți conecta la baze de date existente, conturi de stocare, Service Bus etc. Actualizați fișierele Bicep pentru a face referire la resursele existente în loc să creați altele noi.
-
----
-
-> **🎓 Rezumatul traseului de învățare**: Ați învățat să implementați o arhitectură multi-serviciu cu scalare automată, rețea internă, monitorizare centralizată și modele pregătite pentru producție. Această fundație vă pregătește pentru sisteme distribuite complexe și arhitecturi microservicii de nivel enterprise.
-
-**📚 Navigare în curs:**
-- ← Anterior: [API simplu Flask](../../../../examples/container-app/simple-flask-api)
-- → Următor: [Exemplu de integrare a bazei de date](../../../../database-app)
-- 🏠 [Pagina principală a cursului](../../README.md)
-- 📖 [Cele mai bune practici pentru Container Apps](../../docs/deployment/deployment-guide.md)
+**Î: Pot folosi asta cu servicii Azure existente?**  
+R: Da! Poți conecta la baze de date, conturi de stocare, Service Bus etc. actuale. Modifică fișierele Bicep pentru a face referire la resursele existente în loc să creezi altele noi.
 
 ---
 
-**✨ Felicitări!** Ați finalizat exemplul de microservicii. Acum înțelegeți cum să construiți, implementați și monitorizați aplicații distribuite pe Azure Container Apps. Sunteți gata să adăugați capabilități AI? Consultați [Ghidul de integrare AI](../../../../docs/ai-foundry)!
+> **🎓 Rezumat Parcurs de Învățare**: Ai învățat să deployezi o arhitectură multi-serviciu cu scalare automată, networking intern, monitorizare centralizată și modele gata pentru producție. Această bază te pregătește pentru sisteme distribuite complexe și arhitecturi enterprise de microservicii.
+
+**📚 Navigare Curs:**
+- ← Anterior: [Simple Flask API](../../../../examples/container-app/simple-flask-api)
+- → Următor: [Exemplu Integrare Bază de Date](../../../../database-app)
+- 🏠 [Acasă Curs](../../README.md)
+- 📖 [Cele Mai Bune Practici Container Apps](../../docs/chapter-04-infrastructure/deployment-guide.md)
+
+---
+
+**✨ Felicitări!** Ai finalizat exemplul de microservicii. Acum înțelegi cum să construiești, deployezi și monitorizezi aplicații distribuite pe Azure Container Apps. Pregătit să adaugi capabilități AI? Vezi [Ghidul de Integrare AI](../../../../docs/ai-foundry)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa maternă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus utilizând serviciul de traducere automată [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să țineți cont că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, este recomandată traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventuale neînțelegeri sau interpretări greșite care pot apărea ca urmare a utilizării acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

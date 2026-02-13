@@ -1,36 +1,27 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-21T09:39:47+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "sv"
-}
--->
-# Exempel på distribution av containerappar med AZD
+# Container App Distributionsexempel med AZD
 
-Den här katalogen innehåller omfattande exempel för att distribuera containeriserade applikationer till Azure Container Apps med Azure Developer CLI (AZD). Exemplen visar verkliga mönster, bästa praxis och produktionsklara konfigurationer.
+Detta bibliotek innehåller omfattande exempel för att distribuera containeriserade applikationer till Azure Container Apps med Azure Developer CLI (AZD). Dessa exempel visar verkliga mönster, bästa praxis och produktionsredo konfigurationer.
 
-## 📚 Innehållsförteckning
+## 📚 Table of Contents
 
-- [Översikt](../../../../examples/container-app)
-- [Förutsättningar](../../../../examples/container-app)
-- [Snabbstartsexempel](../../../../examples/container-app)
-- [Produktionsklara exempel](../../../../examples/container-app)
-- [Avancerade mönster](../../../../examples/container-app)
-- [Bästa praxis](../../../../examples/container-app)
+- [Overview](../../../../examples/container-app)
+- [Prerequisites](../../../../examples/container-app)
+- [Quick Start Examples](../../../../examples/container-app)
+- [Production Examples](../../../../examples/container-app)
+- [Advanced Patterns](../../../../examples/container-app)
+- [Best Practices](../../../../examples/container-app)
 
-## Översikt
+## Overview
 
-Azure Container Apps är en fullt hanterad serverlös containerplattform som gör det möjligt att köra mikrotjänster och containeriserade applikationer utan att behöva hantera infrastrukturen. När det kombineras med AZD får du:
+Azure Container Apps är en fullt hanterad serverlös containerplattform som gör att du kan köra mikrotjänster och containeriserade applikationer utan att hantera infrastrukturen. När det kombineras med AZD får du:
 
-- **Förenklad distribution**: En enda kommando distribuerar containrar med infrastruktur
-- **Automatisk skalning**: Skalning till noll och utökning baserat på HTTP-trafik eller händelser
-- **Integrerat nätverk**: Inbyggd tjänstupptäckt och trafikdelning
-- **Hanterad identitet**: Säker autentisering till Azure-resurser
-- **Kostnadsoptimering**: Betala endast för resurser du använder
+- **Simplified Deployment**: Enkelt kommando distribuerar containrar med infrastruktur
+- **Automatic Scaling**: Skalning till noll och utifrån baserat på HTTP-trafik eller händelser
+- **Integrated Networking**: Inbyggd tjänsteupptäckt och trafikdelning
+- **Managed Identity**: Säker autentisering mot Azure-resurser
+- **Cost Optimization**: Betala endast för de resurser du använder
 
-## Förutsättningar
+## Prerequisites
 
 Innan du börjar, se till att du har:
 
@@ -54,9 +45,9 @@ az login
 - Behörighet att skapa resursgrupper
 - Åtkomst till Container Apps-miljö
 
-## Snabbstartsexempel
+## Quick Start Examples
 
-### 1. Enkel webb-API (Python Flask)
+### 1. Simple Web API (Python Flask)
 
 Distribuera ett grundläggande REST-API med Azure Container Apps.
 
@@ -77,10 +68,10 @@ services:
 **Distributionssteg:**
 
 ```bash
-# Initiera från mall
+# Initiera från en mall
 azd init --template todo-python-mongo
 
-# Tillhandahåll infrastruktur och distribuera
+# Provisionera infrastruktur och distribuera
 azd up
 
 # Testa distributionen
@@ -89,9 +80,9 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Nyckelfunktioner:**
-- Automatisk skalning från 0 till 10 repliker
-- Hälsokontroller och liveness-checkar
-- Miljövariabelinjektion
+- Autoskalning från 0 till 10 repliker
+- Hälsokontroller och livenesskontroller
+- Injektion av miljövariabler
 - Integration med Application Insights
 
 ### 2. Node.js Express API
@@ -109,8 +100,8 @@ azd env set COLLECTION_NAME todos
 # Distribuera
 azd up
 
-# Visa loggar
-azd logs api
+# Visa loggar via Azure Monitor
+azd monitor --logs
 ```
 
 **Infrastrukturhöjdpunkter:**
@@ -156,15 +147,15 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Statisk frontend + API-backend
+### 3. Static Frontend + API Backend
 
 Distribuera en fullstack-applikation med React-frontend och API-backend.
 
 ```bash
-# Initiera fullstack-mall
+# Initiera fullstackmall
 azd init --template todo-csharp-sql-swa-func
 
-# Granska konfiguration
+# Granska konfigurationen
 cat azure.yaml
 
 # Distribuera båda tjänsterna
@@ -174,11 +165,11 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Produktionsklara exempel
+## Production Examples
 
-### Exempel 1: Mikrotjänstarkitektur
+### Example 1: Microservices Architecture
 
-**Scenario**: E-handelsapplikation med flera mikrotjänster
+**Scenariot**: E-handelsapplikation med flera mikrotjänster
 
 **Katalogstruktur:**
 ```
@@ -240,9 +231,9 @@ azd up
 azd monitor --overview
 ```
 
-### Exempel 2: AI-driven containerapp
+### Example 2: AI-Powered Container App
 
-**Scenario**: AI-chattapplikation med Azure OpenAI-integration
+**Scenariot**: AI-chattapplikation med Azure OpenAI-integration
 
 **Fil: src/ai-chat/app.py**
 ```python
@@ -331,7 +322,7 @@ module aiChatApp './app/container-app.bicep' = {
 
 **Distributionskommandon:**
 ```bash
-# Ställ in miljö
+# Ställ in miljön
 azd init --template ai-chat-app
 azd env new dev
 
@@ -348,9 +339,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Exempel 3: Bakgrundsprocess med köhantering
+### Example 3: Background Worker with Queue Processing
 
-**Scenario**: Orderhanteringssystem med meddelandekö
+**Scenariot**: Orderhanteringssystem med meddelandekö
 
 **Katalogstruktur:**
 ```
@@ -390,7 +381,7 @@ def process_orders():
             # Bearbeta order
             print(f"Processing order: {message.content}")
             
-            # Slutför meddelande
+            # Fullständigt meddelande
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -429,9 +420,9 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Avancerade mönster
+## Advanced Patterns
 
-### Mönster 1: Blue-Green-distribution
+### Pattern 1: Blue-Green Deployment
 
 ```bash
 # Skapa ny revision utan trafik
@@ -440,20 +431,20 @@ azd deploy api --revision-suffix blue --no-traffic
 # Testa den nya revisionen
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Dela trafik (20% till blå, 80% till nuvarande)
+# Dela trafiken (20% till blå, 80% till nuvarande)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Full övergång till blå
+# Fullständig övergång till blå
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Mönster 2: Canary-distribution med AZD
+### Pattern 2: Canary Deployment with AZD
 
 **Fil: .azure/dev/config.json**
 ```json
@@ -472,7 +463,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# Distribuera ny revision med 10% trafik
+# Distribuera ny revision med 10 % av trafiken
 azd deploy api --revision-mode multiple
 
 # Övervaka mätvärden
@@ -490,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Mönster 3: Multi-region-distribution
+### Pattern 3: Multi-Region Deployment
 
 **Fil: azure.yaml**
 ```yaml
@@ -545,7 +536,7 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Mönster 4: Dapr-integration
+### Pattern 4: Dapr Integration
 
 **Fil: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -599,9 +590,9 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Bästa praxis
+## Best Practices
 
-### 1. Resursorganisation
+### 1. Resource Organization
 
 ```bash
 # Använd konsekventa namngivningskonventioner
@@ -612,7 +603,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Säkerhetsbästa praxis
+### 2. Security Best Practices
 
 ```bicep
 // Always use managed identity
@@ -651,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Prestandaoptimering
+### 3. Performance Optimization
 
 ```yaml
 # azure.yaml with performance settings
@@ -671,19 +662,21 @@ services:
             concurrent: 100
 ```
 
-### 4. Övervakning och insyn
+### 4. Monitoring and Observability
 
 ```bash
 # Aktivera Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Visa loggar i realtid
-azd logs api --follow
+azd monitor --logs
+# Eller använd Azure CLI för Container Apps:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Övervaka mätvärden
-azd monitor --service api
+azd monitor --live
 
-# Skapa varningar
+# Skapa aviseringar
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -692,10 +685,10 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Kostnadsoptimering
+### 5. Cost Optimization
 
 ```bash
-# Skala till noll när den inte används
+# Skala ner till noll när det inte används
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -712,9 +705,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD-integration
+### 6. CI/CD Integration
 
-**Exempel på GitHub Actions:**
+**GitHub Actions-exempel:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -744,43 +737,44 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Vanliga kommandoreferenser
+## Common Commands Reference
 
 ```bash
-# Initiera nytt containerapp-projekt
+# Initiera ett nytt containerapp-projekt
 azd init --template <template-name>
 
 # Distribuera infrastruktur och applikation
 azd up
 
-# Distribuera endast applikationskod (hoppa över infrastruktur)
+# Distribuera endast applikationskoden (hoppa över infrastrukturen)
 azd deploy
 
-# Tillhandahåll endast infrastruktur
+# Provisionera endast infrastruktur
 azd provision
 
 # Visa distribuerade resurser
 azd show
 
-# Strömma loggar
-azd logs <service-name> --follow
+# Strömma loggar med azd monitor eller Azure CLI
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# Övervaka applikation
+# Övervaka applikationen
 azd monitor --overview
 
-# Rensa resurser
+# Rensa upp resurser
 azd down --force --purge
 ```
 
-## Felsökning
+## Troubleshooting
 
 ### Problem: Containern startar inte
 
 ```bash
-# Kontrollera loggar
-azd logs api --tail 100
+# Kontrollera loggar med Azure CLI
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Visa behändelse för container
+# Visa containerhändelser
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -794,7 +788,7 @@ docker run -p 8000:8000 api:local
 ### Problem: Kan inte komma åt containerappens slutpunkt
 
 ```bash
-# Verifiera ingresskonfiguration
+# Verifiera ingresskonfigurationen
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
@@ -823,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Ytterligare resurser och exempel
+## Additional Resources and Examples
 - [Exempel på mikrotjänster](./microservices/README.md)
-- [Exempel på enkel Flask-API](./simple-flask-api/README.md)
-- [Dokumentation för Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
-- [Exempel på Container Apps](https://github.com/Azure-Samples/container-apps-samples)
+- [Enkelt Flash API-exempel](./simple-flask-api/README.md)
+- [Azure Container Apps-dokumentation](https://learn.microsoft.com/azure/container-apps/)
+- [AZD-mallgalleri](https://azure.github.io/awesome-azd/)
+- [Container Apps-samples](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep-mallar](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Bidra
+## Contributing
 
-För att bidra med nya exempel på containerappar:
+För att bidra med nya containerapp-exempel:
 
-1. Skapa en ny underkatalog med ditt exempel
+1. Skapa en ny undermapp med ditt exempel
 2. Inkludera kompletta `azure.yaml`, `infra/` och `src/`-filer
 3. Lägg till en omfattande README med distributionsinstruktioner
 4. Testa distributionen med `azd up`
-5. Skicka in en pull request
+5. Skicka en pull request
 
 ---
 
-**Behöver du hjälp?** Gå med i [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)-communityn för support och frågor.
+**Behöver du hjälp?** Gå med i [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) communityn för support och frågor.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, bör det noteras att automatiserade översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Ansvarsfriskrivning:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess ursprungsspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,64 +1,55 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d9a2ec55ebb3688baf26e691b1703e76",
-  "translation_date": "2025-11-23T23:08:35+00:00",
-  "source_file": "examples/container-app/README.md",
-  "language_code": "my"
-}
--->
-# AZD ဖြင့် Container App တင်သွင်းမှု ဥပမာများ
+# AZD ဖြင့် Container App တာဝန်ပေး ပုံများ
 
-ဤဖိုင်တွဲတွင် Azure Developer CLI (AZD) ကို အသုံးပြု၍ Azure Container Apps သို့ containerized application များကို တင်သွင်းရန်အတွက် အပြည့်အစုံသော ဥပမာများ ပါဝင်သည်။ ဤဥပမာများသည် အမှန်တကယ်အသုံးပြုနိုင်သော ပုံစံများ၊ အကောင်းဆုံးအလေ့အကျင့်များနှင့် ထုတ်လုပ်မှုအဆင့်တွင် အသင့်ဖြစ်သော configuration များကို ပြသထားသည်။
+ဤ ဒါရိုက်တာတွင် Azure Developer CLI (AZD) ကို အသုံးပြု၍ Azure Container Apps သို့ ကွန်တိန်နာ အက်ပ်များကို တပ်ဆင်ရာတွင် အသုံးဝင်သော ပြည့်စုံသည့် ဥပမာများပါဝင်သည်။ ဤဥပမာများသည် အကောင်အထည်ဖော်ရန် သင့်လျော်သော ပုံစံများ၊ အကောင်းဆုံး လေ့ကျင့်မှုများနှင့် ထုတ်လုပ်မှုပိုင်း အဆင်သင့် ဖွဲ့စည်းမှုများကို ပြသသည်။
 
-## 📚 အကြောင်းအရာများ
+## 📚 အကြောင်းအရာ စာရင်း
 
-- [အကျဉ်းချုပ်](../../../../examples/container-app)
+- [အနှစ်ချုပ်](../../../../examples/container-app)
 - [လိုအပ်ချက်များ](../../../../examples/container-app)
-- [အမြန်စတင်မှု ဥပမာများ](../../../../examples/container-app)
+- [လျှင်မြန် စတင် ဥပမာများ](../../../../examples/container-app)
 - [ထုတ်လုပ်မှု ဥပမာများ](../../../../examples/container-app)
-- [အဆင့်မြင့် ပုံစံများ](../../../../examples/container-app)
-- [အကောင်းဆုံးအလေ့အကျင့်များ](../../../../examples/container-app)
+- [တိုးတက်သော ပုံစံများ](../../../../examples/container-app)
+- [အကောင်းဆုံး အလေ့အကျင့်များ](../../../../examples/container-app)
 
-## အကျဉ်းချုပ်
+## အနှစ်ချုပ်
 
-Azure Container Apps သည် infrastructure ကို စီမံခန့်ခွဲရန် မလိုအပ်ဘဲ microservices နှင့် containerized application များကို အလုံးစုံစီမံခန့်ခွဲထားသော serverless container platform ဖြစ်သည်။ AZD နှင့် ပေါင်းစပ်သုံးစွဲပါက-
+Azure Container Apps သည် အပြည့်အစုံ စီမံခန့်ခွဲထားသည့် serverless ကွန်တိန်နာပလက်ဖောင်းဖြစ်ပြီး မိโခဆိုက်ဆာဝစ်များနှင့် ကွန်တိန်နာ အက်ပ်များကို အခြေခံအင်ဖရန်စထရပ် မစီမံဘဲ ဖြည့်ဆည်းပြေးနိုင်စေသည်။ AZD နှင့် တွဲဖက်သည့်အခါ သင်ရရှိမည့် အကျိုးအမြတ်များမှာ -
 
-- **တင်သွင်းမှု လွယ်ကူမှု**: container များကို infrastructure နှင့်အတူ single command ဖြင့် deploy လုပ်နိုင်သည်
-- **အလိုအလျောက် အရွယ်အစားချဲ့ထွင်မှု**: HTTP traffic သို့မဟုတ် event များအပေါ်မူတည်၍ zero မှ အပြင်သို့ ချဲ့ထွင်နိုင်သည်
-- **ပေါင်းစည်းထားသော network**: service discovery နှင့် traffic splitting ကို built-in အနေဖြင့် ပံ့ပိုးပေးသည်
-- **Managed Identity**: Azure resources များအတွက် လုံခြုံသော authentication
-- **ကုန်ကျစရိတ် အထိရောက်မှု**: သုံးစွဲသော resources များအပေါ်သာ ပေးဆောင်ရမည်
+- **တပ်ဆင်မှုကို ရိုးရှင်းစေခြင်း**: တစ်ခုသော command ဖြင့် ကွန်တိန်နာများနှင့် အင်ဖရာစထရပ်ကို တပြိုင်နက် တပ်ဆင်ပေးသည်
+- **အလိုအလျောက် တိုးချဲ့ခြင်း**: HTTP traffic သို့မဟုတ် အဖြစ်အပျက်များအပေါ် အခြေခံ၍ zero ထိ ဆိမ့်ချထားရန်နှင့် တိုးချဲ့ရန် စီမံနိုင်သည်
+- **ပေါင်းစည်းထားသည့် ကွန်ယက်ဆက်သွယ်မှု**: စာဝန်ဆောင်မှု ရှာဖွေရေးနှင့် traffic ဗဟိုခွဲခြားမှု အတွင်းပေါင်းစည်းထားသည်
+- **စီမံထားသည့် အကြောင်းအရာ အတိုင်ပင်ခံ**: Azure အရင်းအမြစ်များသို့ လုံခြုံစိတ်ချသော authentication ပေးသည်
+- **ကုန်ကျစရိတ် ထိန်းသိမ်းမှု**: သုံးစွဲသည့် အရင်းအမြစ်များအတွက်သာ ပေးချေပါ
 
 ## လိုအပ်ချက်များ
 
-စတင်ရန်မတိုင်မီ၊ သင်မှာ-
+စတင်မီ အောက်ပါ အချက်များ ရှိကြောင်း သေချာပါစေ -
 
 ```bash
-# AZD တပ်ဆင်မှုကို စစ်ဆေးပါ
+# AZD ထည့်သွင်းထားမှုကို စစ်ဆေးပါ
 azd version
 
 # Azure CLI ကို စစ်ဆေးပါ
 az version
 
-# Docker ကို စစ်ဆေးပါ (စိတ်ကြိုက်ပုံစံများကို တည်ဆောက်ရန်)
+# Docker ကို စစ်ဆေးပါ (စိတ်ကြိုက် image များ ဖန်တီးရန်)
 docker --version
 
-# Azure သို့ ဝင်ရောက်ပါ
+# Azure သို့ လော့ဂ်အင် ဝင်ပါ
 azd auth login
 az login
 ```
 
-**လိုအပ်သော Azure Resources:**
-- အကျိုးရှိသော Azure subscription
+**လိုအပ်သော Azure အရင်းအမြစ်များ:**
+- အသက်ဝင်သည့် Azure subscription
 - Resource group ဖန်တီးခွင့်
-- Container Apps ပတ်ဝန်းကျင် access
+- Container Apps ပတ်ဝန်းကျင် ထိန်းကျောင်းခွင့်
 
-## အမြန်စတင်မှု ဥပမာများ
+## လျှင်မြန် စတင် ဥပမာများ
 
 ### 1. ရိုးရှင်းသော Web API (Python Flask)
 
-Azure Container Apps ဖြင့် အခြေခံ REST API တင်သွင်းပါ။
+Azure Container Apps ဖြင့် အခြေခံ REST API တစ်ခုကို တပ်ဆင်ပါ။
 
 **ဥပမာ: Python Flask API**
 
@@ -74,46 +65,46 @@ services:
     host: containerapp
 ```
 
-**တင်သွင်းခြင်း အဆင့်များ:**
+**တပ်ဆင်ခြင်း အဆင့်များ:**
 
 ```bash
-# အခြေခံပုံစံမှ စတင်ပါ
+# နမူနာမှ စတင်ပြုလုပ်ရန်
 azd init --template todo-python-mongo
 
-# အခြေခံအဆောက်အအုံကို ပြင်ဆင်ပြီး တင်သွင်းပါ
+# အောက်ခံအဆောက်အအုံကို စီမံထည့်သွင်းပြီး တပ်ဆင်ရန်
 azd up
 
-# တင်သွင်းမှုကို စမ်းသပ်ပါ
+# တပ်ဆင်မှုကို စမ်းသပ်ရန်
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**အဓိက အင်္ဂါရပ်များ:**
-- 0 မှ 10 replicas အထိ auto-scaling
-- Health probes နှင့် liveness checks
-- Environment variable injection
-- Application Insights ပေါင်းစည်းမှု
+**အဓိက လက္ခဏာများ:**
+- 0 မှ 10 replica အထိ အလိုအလျောက် တိုးချဲ့နိုင်ခြင်း
+- Health probes နှင့် liveness စစ်ဆေးမှုများ
+- ပတ်ဝန်းကျင် (environment) ကိန်းတန်ဖိုးများ ထည့်သွင်းပေးခြင်း
+- Application Insights တွဲဖက် အသုံးပြုခြင်း
 
 ### 2. Node.js Express API
 
-MongoDB integration ပါသော Node.js backend တင်သွင်းပါ။
+MongoDB တွဲဖက်ထားသည့် Node.js backend ကို တပ်ဆင်ပါ။
 
 ```bash
-# Node.js API template ကို စတင်ပါ
+# Node.js API ပုံစံကို စတင်ပြုလုပ်ပါ
 azd init --template todo-nodejs-mongo
 
-# ပတ်ဝန်းကျင် variable များကို ပြင်ဆင်ပါ
+# ပတ်ဝန်းကျင် တန်ဖိုးများကို ပြင်ဆင်ပါ
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# တင်သွင်းပါ
+# ဖြန့်ချိပါ
 azd up
 
-# log များကို ကြည့်ပါ
-azd logs api
+# Azure Monitor မှတဆင့် လော့ဂ်များကို ကြည့်ရှုပါ
+azd monitor --logs
 ```
 
-**Infrastructure အထူးအချက်များ:**
+**အင်ဖရာစထရပ် အဓိက အချက်များ:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -158,29 +149,29 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Static Frontend + API Backend
 
-React frontend နှင့် API backend ပါသော full-stack application တင်သွင်းပါ။
+React frontend နှင့် API backend ပါဝင်သည့် စုံလင်သော application တစ်ခုကို တပ်ဆင်ပါ။
 
 ```bash
-# အပြည့်အစုံ stack template ကို စတင်ပါ
+# full-stack နမူနာကို စတင်ပြုလုပ်ပါ
 azd init --template todo-csharp-sql-swa-func
 
-# configuration ကို ပြန်လည်သုံးသပ်ပါ
+# ချိန်ညှိချက်များကို ပြန်လည်သုံးသပ်ပါ
 cat azure.yaml
 
-# service နှစ်ခုလုံးကို deploy လုပ်ပါ
+# ဝန်ဆောင်မှုနှစ်ခုစလုံးကို ဖြန့်ချိပါ
 azd up
 
-# application ကို ဖွင့်ပါ
+# အပလီကေးရှင်းကို ဖွင့်ပါ
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
 ## ထုတ်လုပ်မှု ဥပမာများ
 
-### ဥပမာ 1: Microservices Architecture
+### ဥပမာ 1: Microservices ဖွဲ့စည်းပုံ
 
-**အခြေအနေ**: Microservices များပါသော E-commerce application
+**အခြေအနေ**: မျိုးစုံ microservices များဖြင့် E-commerce အက်ပ်တည်ဆောက်ခြင်း
 
-**Directory Structure:**
+**ဖိုင်ဖွဲ့စည်းပုံ:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -200,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml Configuration:**
+**azure.yaml ဖွဲ့စည်းချက်:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -220,31 +211,31 @@ services:
     host: containerapp
 ```
 
-**တင်သွင်းမှု:**
+**တပ်ဆင်ရန်:**
 ```bash
 # ပရောဂျက်ကို စတင်ပါ
 azd init
 
-# ထုတ်လုပ်မှု ပတ်ဝန်းကျင်ကို သတ်မှတ်ပါ
+# ထုတ်လုပ်ရေး ပတ်ဝန်းကျင်ကို သတ်မှတ်ပါ
 azd env new production
 
-# ထုတ်လုပ်မှု ဆက်တင်များကို ဖွဲ့စည်းပါ
+# ထုတ်လုပ်ရေး ဆက်တင်များကို ဖွဲ့စည်းပါ
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# ဝန်ဆောင်မှုအားလုံးကို တင်သွင်းပါ
+# ဝန်ဆောင်မှုအားလုံးကို ဖြန့်ချိပါ
 azd up
 
-# တင်သွင်းမှုကို စောင့်ကြည့်ပါ
+# ဖြန့်ချိမှုကို စောင့်ကြည့်ပါ
 azd monitor --overview
 ```
 
-### ဥပမာ 2: AI-Powered Container App
+### ဥပမာ 2: AI ဆိုင်ရာ Container App
 
-**အခြေအနေ**: Azure OpenAI integration ပါသော AI chat application
+**အခြေအနေ**: Azure OpenAI တွဲဖက်ထားသည့် AI စကားပြော အက်ပ်
 
-**File: src/ai-chat/app.py**
+**ဖိုင်: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -253,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# စနစ်စီမံခန့်ခွဲမှုကို လုံခြုံစွာ အသုံးပြုပါ။
+# Managed Identity ကို လုံခြုံစိတ်ချစွာ ဝင်ရောက်ရန် အသုံးပြုပါ
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -262,7 +253,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Key Vault မှ OpenAI key ကို ရယူပါ။
+    # Key Vault မှ OpenAI ကီးကို ရယူပါ
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -277,7 +268,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: azure.yaml**
+**ဖိုင်: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -287,7 +278,7 @@ services:
     host: containerapp
 ```
 
-**File: infra/main.bicep**
+**ဖိုင်: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -329,17 +320,17 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**တင်သွင်းမှု Commands:**
+**တပ်ဆင်ရေး အမိန့်များ:**
 ```bash
-# ပတ်ဝန်းကျင်ကို စနစ်တကျ ပြင်ဆင်ပါ
+# ပတ်ဝန်းကျင်ကို ပြင်ဆင်ပါ
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAI ကို ဖွဲ့စည်းပါ
+# OpenAI ကို ပြင်ဆင်ပါ
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
 
-# တင်သွင်းပါ
+# တပ်ဆင်ပါ
 azd up
 
 # API ကို စမ်းသပ်ပါ
@@ -348,11 +339,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### ဥပမာ 3: Background Worker with Queue Processing
+### ဥပမာ 3: Queue ကို အသုံးပြုသော Background Worker
 
-**အခြေအနေ**: Message queue ပါသော order processing system
+**အခြေအနေ**: မက်ဆေ့ခ်် queue ဖြင့် အော်ဒါ ပြုလုပ်စီမံရေး စနစ်
 
-**Directory Structure:**
+**ဖိုင်ဖွဲ့စည်းပုံ:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -369,7 +360,7 @@ queue-worker/
     └── worker/
 ```
 
-**File: src/worker/processor.py**
+**ဖိုင်: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -387,17 +378,17 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # အမှာစာကိုလုပ်ဆောင်ပါ
+            # အမှာစာကို လုပ်ဆောင်ပါ
             print(f"Processing order: {message.content}")
             
-            # သတင်းစကားကိုပြီးစီးပါ
+            # မက်ဆေ့ခ်ျအား ပြီးစီးပါ
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
     process_orders()
 ```
 
-**File: azure.yaml**
+**ဖိုင်: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -412,15 +403,15 @@ services:
     host: containerapp
 ```
 
-**တင်သွင်းမှု:**
+**တပ်ဆင်ရန်:**
 ```bash
-# စတင်မည်
+# စတင်ရန်
 azd init
 
-# အဆင့်လိုက်တန်းစီမှု configuration ဖြင့် Deploy လုပ်မည်
+# တန်းစနစ်ဖွဲ့စည်းပုံဖြင့် တပ်ဆင်ခြင်း
 azd up
 
-# တန်းစီမှုအရှည်အပေါ်မူတည်၍ အလုပ်သမားကိုအတိုင်းအတာချမည်
+# တန်းအရှည်ပေါ်မူတည်၍ worker များကို တိုးချဲ့ခြင်း
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -429,33 +420,33 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## အဆင့်မြင့် ပုံစံများ
+## တိုးတက်သော ပုံစံများ
 
-### ပုံစံ 1: Blue-Green Deployment
+### ပုံစံ 1: Blue-Green တပ်ဆင်မှု
 
 ```bash
-# လမ်းပန်းဆက်သွယ်မှုမပါဘဲ အခြေခံအဆင့်အသစ်ကို ဖန်တီးပါ
+# traffic မပေးဘဲ revision အသစ်တစ်ခု ဖန်တီးပါ
 azd deploy api --revision-suffix blue --no-traffic
 
-# အခြေခံအဆင့်အသစ်ကို စမ်းသပ်ပါ
+# revision အသစ်ကို စမ်းသပ်ပါ
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# လမ်းပန်းဆက်သွယ်မှုကို ခွဲဝေပါ (20% ကို အပြာရောင်၊ 80% ကို လက်ရှိ)
+# traffic ကို ခွဲပေးပါ (20% ကို blue သို့၊ 80% ကို current သို့)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# အပြာရောင်သို့ အပြည့်အဝ ပြောင်းပါ
+# blue သို့ အပြည့်အဝ ပြောင်းရွှေ့ပါ
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### ပုံစံ 2: Canary Deployment with AZD
+### ပုံစံ 2: AZD ဖြင့် Canary တပ်ဆင်မှု
 
-**File: .azure/dev/config.json**
+**ဖိုင်: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -467,18 +458,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**တင်သွင်းမှု Script:**
+**တပ်ဆင်ရေး script:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# ၁၀% လမ်းကြောင်းဖြင့် အဆင့်သစ်ကို တင်ပါ
+# ဗားရှင်းအသစ်ကို ထရက်ဖစ် 10% ဖြင့် ဖြန့်ချေပါ
 azd deploy api --revision-mode multiple
 
-# အချက်အလက်များကို စောင့်ကြည့်ပါ
+# မက်ထရစ်များကို စောင့်ကြည့်ပါ
 azd monitor --service api --duration 5m
 
-# လမ်းကြောင်းကို တဖြည်းဖြည်းတိုးပါ
+# ထရက်ဖစ်ကို တဖြည်းဖြည်း တိုးမြှင့်ပါ
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -486,13 +477,13 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # ၅ မိနစ်စောင့်ပါ
+  sleep 300  # ၅ မိနစ် စောင့်ပါ
 done
 ```
 
-### ပုံစံ 3: Multi-Region Deployment
+### ပုံစံ 3: ဒေသအများပြား တပ်ဆင်မှု
 
-**File: azure.yaml**
+**ဖိုင်: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -506,7 +497,7 @@ services:
       - southeastasia
 ```
 
-**File: infra/multi-region.bicep**
+**ဖိုင်: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -536,18 +527,18 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**တင်သွင်းမှု:**
+**တပ်ဆင်ရန်:**
 ```bash
-# တိုင်းဒေသအားလုံးသို့ တင်သွင်းပါ
+# ဒေသအားလုံးသို့ ဖြန့်ချိပါ
 azd up
 
-# အဆုံးစွန်များကို အတည်ပြုပါ
+# endpoints များကို စစ်ဆေးပါ
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### ပုံစံ 4: Dapr Integration
+### ပုံစံ 4: Dapr တွဲဖက်မှု
 
-**File: infra/app/dapr-enabled.bicep**
+**ဖိုင်: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -572,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Dapr ပါ application code:**
+**Dapr ပါဝင်သည့် အက်ပ်ကုဒ်:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -582,14 +573,14 @@ app = Flask(__name__)
 @app.route('/orders', methods=['POST'])
 def create_order():
     with DaprClient() as client:
-        # အခြေအနေကို သိမ်းဆည်းပါ။
+        # အခြေအနေကို သိမ်းဆည်းရန်
         client.save_state(
             store_name='statestore',
             key='order-123',
             value={'status': 'pending'}
         )
         
-        # အဖြစ်အပျက်ကို ထုတ်ဝေပါ။
+        # အဖြစ်အပျက်ကို ထုတ်ပြန်ပါ
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -599,20 +590,20 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## အကောင်းဆုံးအလေ့အကျင့်များ
+## အကောင်းဆုံး အလေ့အကျင့်များ
 
-### 1. Resource စီမံခန့်ခွဲမှု
+### 1. အရင်းအမြစ် စီမံခန့်ခွဲမှု
 
 ```bash
-# အမည်ပေးမှုစနစ်များကိုအမြဲတမ်းတူညီစွာအသုံးပြုပါ
+# တစ်စွဲတည်းသော အမည်ပေးစည်းမျဉ်းများကို အသုံးပြုပါ
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# ကုန်ကျစရိတ်ခြေရာခံရန်အရင်းအမြစ်များကိုတံဆိပ်ကပ်ပါ
+# ကုန်ကျစရိတ် တွက်ချက်ရန် အရင်းအမြစ်များကို အမှတ်အသားပေးပါ
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. လုံခြုံရေး အကောင်းဆုံးအလေ့အကျင့်များ
+### 2. လုံခြုံရေး အကောင်းဆုံး လက်တွေ့ကျကျ
 
 ```bicep
 // Always use managed identity
@@ -651,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. စွမ်းဆောင်ရည် အထိရောက်မှု
+### 3. လုပ်ဆောင်ချက် တိုးတက်စေခြင်း
 
 ```yaml
 # azure.yaml with performance settings
@@ -671,19 +662,21 @@ services:
             concurrent: 100
 ```
 
-### 4. စောင့်ကြည့်မှုနှင့် အမြင်အာရုံ
+### 4. စောင့်ကြည့်မှုနှင့် ကြည့်နိုင်မှု
 
 ```bash
-# အက်ပလီကေးရှင်းအိုင်ဆိုက်များကိုဖွင့်ပါ
+# Application Insights ကို ဖွင့်ပါ
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# အချိန်နှင့်တပြေးညီ လော့ဂ်များကိုကြည့်ရှုပါ
-azd logs api --follow
+# လော့ဂ်များကို တိုက်ရိုက် ကြည့်ရှုပါ
+azd monitor --logs
+# သို့မဟုတ် Container Apps အတွက် Azure CLI ကို အသုံးပြုပါ:
+az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# မီထရစ်များကိုကြည့်ရှုပါ
-azd monitor --service api
+# မက်ထရစ်များကို စောင့်ကြည့်ပါ
+azd monitor --live
 
-# အချက်ပေးချက်များကိုဖန်တီးပါ
+# အသိပေးချက်များ ဖန်တီးပါ
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -692,19 +685,19 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. ကုန်ကျစရိတ် အထိရောက်မှု
+### 5. ကုန်ကျစရိတ် ထိန်းသိမ်းခြင်း
 
 ```bash
-# အသုံးမပြုသောအခါ အ صفر သို့ချိန်ညှိပါ
+# အသုံးမပြုသောအချိန်တွင် အရွယ်အစားကို သုညအထိ လျော့ချပါ
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# ဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်များအတွက် spot instances ကိုအသုံးပြုပါ
+# ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်များအတွက် Spot instance များကို အသုံးပြုပါ
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# ဘတ်ဂျက်သတိပေးချက်များကိုတပ်ဆင်ပါ
+# ဘတ်ဂျက် သတိပေးချက်များကို တပ်ဆင်ပါ
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -712,7 +705,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD Integration
+### 6. CI/CD တွဲဖက်မှု
 
 **GitHub Actions ဥပမာ:**
 ```yaml
@@ -744,78 +737,79 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## အများဆုံး အသုံးပြုသော Commands
+## အသုံးများသော အမိန့်များ
 
 ```bash
-# အကန့်အသတ်အသစ် app ပရောဂျက်ကို စတင်ပါ
+# container app အသစ်အတွက် ပရောဂျက်ကို စတင်ဖန်တီးပါ
 azd init --template <template-name>
 
-# အခြေခံအဆောက်အအုံနှင့် အပလီကေးရှင်းကို တင်ပါ
+# အခြေခံအဆောက်အအုံနှင့် အက်ပလီကေးရှင်းကို တပ်ဆင်ပါ
 azd up
 
-# အပလီကေးရှင်းကုဒ်ကိုသာ တင်ပါ (အခြေခံအဆောက်အအုံကို ကျော်ပါ)
+# အက်ပလီကေးရှင်းကုဒ်သာ တပ်ဆင်ပါ (အခြေခံအဆောက်အအုံကို ကျော်လွှားပါ)
 azd deploy
 
-# အခြေခံအဆောက်အအုံကိုသာ စီစဉ်ပါ
+# အခြေခံအဆောက်အအုံသာ ပံ့ပိုးတည်ဆောက်ပါ
 azd provision
 
-# တင်ထားသော အရင်းအမြစ်များကို ကြည့်ရှုပါ
+# တပ်ဆင်ပြီးသော အရင်းအမြစ်များကို ကြည့်ရှုပါ
 azd show
 
-# လော့ဂ်များကို စီးဆင်းကြည့်ရှုပါ
-azd logs <service-name> --follow
+# azd monitor သို့မဟုတ် Azure CLI အသုံးပြု၍ လော့ဂ်များကို စီးဆင်းကြည့်ပါ
+azd monitor --logs
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# အပလီကေးရှင်းကို စောင့်ကြည့်ပါ
+# အက်ပလီကေးရှင်းကို ကြီးကြပ်ပါ
 azd monitor --overview
 
 # အရင်းအမြစ်များကို ရှင်းလင်းပါ
 azd down --force --purge
 ```
 
-## ပြဿနာများ ဖြေရှင်းခြင်း
+## ပြဿနာဖြေရှင်းခြင်း
 
-### ပြဿနာ: Container စတင်ရန် မအောင်မြင်ပါ
+### ပြဿနာ: Container စတင် မနိုင်ခြင်း
 
 ```bash
-# လော့ဂ်များကို စစ်ဆေးပါ
-azd logs api --tail 100
+# Azure CLI ကို အသုံးပြု၍ လော့ဂ်များ စစ်ဆေးပါ
+az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# ကွန်တိန်နာ အဖြစ်အပျက်များကို ကြည့်ရှုပါ
+# ကွန်တိန်နာ အဖြစ်အပျက်များ ကြည့်ရှုပါ
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# ဒေသတွင်းတွင် စမ်းသပ်ပါ
+# သင့်စက်ပေါ်တွင် စမ်းသပ်ပါ
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### ပြဿနာ: Container app endpoint ကို access မရနိုင်ပါ
+### ပြဿနာ: Container app endpoint သို့ ဝင်ရောက် မရခြင်း
 
 ```bash
-# အင်ဂရက်စ် configuration ကိုအတည်ပြုပါ
+# ingress ဖွဲ့စည်းမှုကို စစ်ဆေးပါ
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# အတွင်းအင်ဂရက်စ်ဖွင့်ထားသည်ကိုစစ်ဆေးပါ
+# အတွင်းပိုင်း ingress ကို ဖွင့်ထားပြီးသားလား စစ်ဆေးပါ
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### ပြဿနာ: စွမ်းဆောင်ရည် ပြဿနာများ
+### ပြဿနာ: လုပ်ဆောင်ချက် ပြဿနာများ
 
 ```bash
-# အရင်းအမြစ်အသုံးပြုမှုကိုစစ်ဆေးပါ
+# အရင်းအမြစ်အသုံးပြုမှုကို စစ်ဆေးပါ
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# အရင်းအမြစ်များကိုတိုးချဲ့ပါ
+# အရင်းအမြစ်များကို တိုးမြှင့်ပါ
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -823,31 +817,32 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## အပိုဆောင်း အရင်းအမြစ်များနှင့် ဥပမာများ
+## အပို အရင်းအမြစ်များနှင့် ဥပမာများ
 - [Microservices ဥပမာ](./microservices/README.md)
-- [Simple Flash API ဥပမာ](./simple-flask-api/README.md)
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
-- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
+- [ရိုးရှင်းသော Flash API ဥပမာ](./simple-flask-api/README.md)
+- [Azure Container Apps စာတမ်း](https://learn.microsoft.com/azure/container-apps/)
+- [AZD Templates ပြခန်း](https://azure.github.io/awesome-azd/)
+- [Container Apps နမူနာများ](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## ပံ့ပိုးမှု
+## အထောက်အပံ့ပေးရန်
 
-Container app ဥပမာအသစ်များ ပံ့ပိုးရန်:
+Container app ဥပမာအသစ်များ ပံ့ပိုးပေးလိုပါက -
 
-1. သင့်ဥပမာပါ subdirectory အသစ်တစ်ခု ဖန်တီးပါ
-2. အပြည့်အစုံသော `azure.yaml`, `infra/`, နှင့် `src/` ဖိုင်များ ထည့်ပါ
-3. တင်သွင်းမှု အညွှန်းများပါသော README ထည့်ပါ
-4. `azd up` ဖြင့် တင်သွင်းမှု စမ်းသပ်ပါ
+1. သင့် ဥပမာအတွက် စက်လေးအသစ်တစ်ခု ဖန်တီးပါ
+2. ပြည့်စုံသော `azure.yaml`, `infra/`, နှင့် `src/` ဖိုင်များ ထည့်သွင်းပါ
+3. တပ်ဆင်သည့် အဆင့်များ ပါသော README အပြည့်အစုံ ထည့်ပါ
+4. `azd up` ဖြင့် တပ်ဆင်မှုကို စမ်းသပ်ပါ
 5. Pull request တင်ပါ
 
 ---
 
-**အကူအညီလိုပါသလား?** [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) community တွင် ပံ့ပိုးမှုနှင့် မေးခွန်းများအတွက် ပါဝင်ဆွေးနွေးပါ။
+**အကူအညီ လိုပါသလား?** အထောက်အပံ့နှင့် မေးခွန်းများအတွက် [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) အသိုင်းအဝိုင်းသို့ ဝင်ရောက်ပါ။
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားယူမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+တာဝန်မယူကြောင်း အသိပေးချက်
+
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် မှန်ကန်မှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှန်ကန်မှုမရှိမှုများ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူလစာတမ်းကို ၎င်း၏ မူလဘာသာဖြင့် အာဏာသက်သေ အရင်းအမြစ်အဖြစ် ထင်မြင်ရမည်ဖြစ်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် ကုမ္ပဏီ/ပရော်ဖက်ရှင်နယ် လူဘာသာပြန်မှ ဘာသာပြန်ပေးရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုရာမှ ဖြစ်ပေါ်နိုင်သည့် နားလည်မှုမမှန်ခြင်းများ သို့မဟုတ် မှားယွင်းသော ပြဿနာများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

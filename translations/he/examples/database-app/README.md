@@ -1,82 +1,73 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "10bf998e2d70c35d713fbe6905841b95",
-  "translation_date": "2025-11-21T18:18:49+00:00",
-  "source_file": "examples/database-app/README.md",
-  "language_code": "he"
-}
--->
-# פריסת מסד נתונים של Microsoft SQL ואפליקציית ווב עם AZD
+# פריסה של מסד נתונים Microsoft SQL ואפליקציית ווב באמצעות AZD
 
-⏱️ **זמן משוער**: 20-30 דקות | 💰 **עלות משוערת**: ~$15-25 לחודש | ⭐ **רמת קושי**: בינונית
+⏱️ **זמן משוער**: 20-30 דקות | 💰 **עלות משוערת**: ~15-25$ לחודש | ⭐ **מורכבות**: בינוני
 
-דוגמה **מלאה ועובדת** זו מדגימה כיצד להשתמש ב-[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) כדי לפרוס אפליקציית ווב Python Flask עם מסד נתונים Microsoft SQL ב-Azure. כל הקוד כלול ונבדק—אין צורך בתלות חיצונית.
+הדוגמה **המלאה והעובדת** הזו מדגימה כיצד להשתמש ב-[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) כדי לפרוס אפליקציית ווב ב-Python Flask עם מסד נתונים Microsoft SQL ל-Azure. כל הקוד כלול ונבדק—לא נדרשות תלות חיצונית.
 
 ## מה תלמדו
 
-על ידי השלמת דוגמה זו, תלמדו:
-- לפרוס אפליקציה מרובת שכבות (אפליקציית ווב + מסד נתונים) באמצעות תשתית כקוד
-- להגדיר חיבורים מאובטחים למסד נתונים ללא קידוד סודות בקוד
+בסיום דוגמה זו, תוכל:
+- לפרוס אפליקציה רב-שכבתית (אפליקציית ווב + מסד נתונים) באמצעות Infrastructure-as-Code
+- להגדיר חיבורי מסד נתונים מאובטחים ללא הצפנת סודות בתוך הקוד
 - לנטר את בריאות האפליקציה עם Application Insights
 - לנהל משאבי Azure ביעילות עם AZD CLI
-- לעקוב אחר שיטות העבודה המומלצות של Azure לאבטחה, אופטימיזציית עלויות וניטור
+- לפעול לפי שיטות העבודה המומלצות של Azure לאבטחה, אופטימיזציה של עלויות וצפייה
 
-## סקירת תרחיש
-- **אפליקציית ווב**: API REST של Python Flask עם חיבור למסד נתונים
-- **מסד נתונים**: Azure SQL Database עם נתוני דוגמה
-- **תשתית**: נפרסת באמצעות Bicep (תבניות מודולריות לשימוש חוזר)
-- **פריסה**: אוטומטית לחלוטין עם פקודות `azd`
-- **ניטור**: Application Insights עבור לוגים וטלמטריה
+## סקירת התרחיש
+- **אפליקציית ווב**: REST API ב-Python Flask עם חיבור למסד נתונים
+- **מסד הנתונים**: Azure SQL Database עם נתוני דוגמה
+- **תשתית**: פרוסה באמצעות Bicep (תבניות מודולריות וניתנות לשימוש חוזר)
+- **פריסה**: אוטומטית במלואה בעזרת פקודות `azd`
+- **ניטור**: Application Insights ללוגים וטלטמטריה
 
 ## דרישות מוקדמות
 
 ### כלים נדרשים
 
-לפני שתתחילו, ודאו שהכלים הבאים מותקנים:
+לפני התחלה, וודאו שהתקנתם את הכלים הבאים:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (גרסה 2.50.0 או גבוהה יותר)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (גרסה 2.50.0 ומעלה)
    ```sh
    az --version
-   # תוצאה צפויה: azure-cli 2.50.0 או גבוה יותר
+   # פלט צפוי: azure-cli גרסה 2.50.0 או גבוהה יותר
    ```
 
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (גרסה 1.0.0 או גבוהה יותר)
+2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (גרסה 1.0.0 ומעלה)
    ```sh
    azd version
-   # תוצאה צפויה: גרסת azd 1.0.0 או גבוהה יותר
+   # פלט צפוי: גרסת azd 1.0.0 או גבוהה יותר
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (לפיתוח מקומי)
    ```sh
    python --version
-   # תוצאה צפויה: פייתון 3.8 או גבוה יותר
+   # פלט צפוי: פייתון 3.8 או גרסה גבוהה יותר
    ```
 
 4. **[Docker](https://www.docker.com/get-started)** (אופציונלי, לפיתוח מקומי במכולות)
    ```sh
    docker --version
-   # תוצאה צפויה: גרסת Docker 20.10 או גבוהה יותר
+   # פלט צפוי: גרסת דוקר 20.10 או גבוהה יותר
    ```
 
 ### דרישות Azure
 
-- מנוי **Azure** פעיל ([צרו חשבון חינמי](https://azure.microsoft.com/free/))
-- הרשאות ליצירת משאבים במנוי שלכם
-- תפקיד **Owner** או **Contributor** במנוי או בקבוצת המשאבים
+- מנוי **Azure פעיל** ([צור חשבון חינם](https://azure.microsoft.com/free/))
+- הרשאות ליצירת משאבים במנוי שלך
+- תפקיד **בעלים** או **משתתף** על המנוי או קבוצת המשאבים
 
-### ידע מוקדם
+### דרישות ידע
 
-זו דוגמה ברמת **ביניים**. עליכם להכיר:
-- פעולות בסיסיות בשורת הפקודה
+זו דוגמה **בינונית-רמת**. מומלץ להכיר:
+- פעולות שורת פקודה בסיסיות
 - מושגי ענן בסיסיים (משאבים, קבוצות משאבים)
 - הבנה בסיסית של אפליקציות ווב ומסדי נתונים
 
-**חדשים ב-AZD?** התחילו עם [מדריך ההתחלה](../../docs/getting-started/azd-basics.md) תחילה.
+**חדש ב-AZD?** התחילו עם [מדריך התחלת העבודה](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## ארכיטקטורה
 
-דוגמה זו פורסת ארכיטקטורה דו-שכבתית עם אפליקציית ווב ומסד נתונים SQL:
+בדוגמה זו מתפרסת ארכיטקטורה דו-שכבתית עם אפליקציית ווב ומסד נתונים SQL:
 
 ```
 ┌─────────────────┐        ┌──────────────────────┐
@@ -98,18 +89,18 @@ CO_OP_TRANSLATOR_METADATA:
 
 **פריסת משאבים:**
 - **קבוצת משאבים**: מיכל לכל המשאבים
-- **App Service Plan**: אירוח מבוסס לינוקס (רמת B1 לחיסכון בעלויות)
-- **אפליקציית ווב**: סביבת Python 3.11 עם אפליקציית Flask
+- **תוכנית App Service**: אירוח מבוסס Linux (דרגת B1 לחיסכון בעלויות)
+- **אפליקציית ווב**: סביבת ריצה Python 3.11 עם אפליקציית Flask
 - **שרת SQL**: שרת מסד נתונים מנוהל עם TLS 1.2 מינימום
-- **מסד נתונים SQL**: רמת Basic (2GB, מתאים לפיתוח/בדיקות)
+- **מסד נתונים SQL**: דרגת Basic (2GB, מתאים לפיתוח/בדיקות)
 - **Application Insights**: ניטור ולוגים
-- **Log Analytics Workspace**: אחסון לוגים מרכזי
+- **Workpace של Log Analytics**: אחסון מרכזי ללוגים
 
-**אנלוגיה**: חשבו על זה כמו מסעדה (אפליקציית ווב) עם מקפיא (מסד נתונים). לקוחות מזמינים מהתפריט (נקודות קצה של API), והמטבח (אפליקציית Flask) שולף מרכיבים (נתונים) מהמקפיא. מנהל המסעדה (Application Insights) עוקב אחרי כל מה שקורה.
+**אנלוגיה**: חשבו על זה כמו מסעדה (אפליקציית ווב) עם מקפיא גדול (מסד הנתונים). הלקוחות מזמינים מהתפריט (נקודות קצה של API), והמטבח (אפליקציית Flask) שולף מרכיבים (נתונים) מהמקפיא. מנהל המסעדה (Application Insights) עוקב אחרי כל מה שקורה.
 
-## מבנה תיקיות
+## מבנה התיקיות
 
-כל הקבצים כלולים בדוגמה זו—אין צורך בתלות חיצונית:
+כל הקבצים כלולים בדוגמה זו—לא נדרשות תלות חיצונית:
 
 ```
 examples/database-app/
@@ -136,38 +127,38 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**מה עושה כל קובץ:**
-- **azure.yaml**: מגדיר ל-AZD מה לפרוס ואיפה
-- **infra/main.bicep**: מתזמר את כל משאבי Azure
-- **infra/resources/*.bicep**: הגדרות משאבים בודדים (מודולריים לשימוש חוזר)
+**מה כל קובץ עושה:**
+- **azure.yaml**: מגדיר ל-AZD מה לפרוס ולאן
+- **infra/main.bicep**: מנחה את כל משאבי Azure
+- **infra/resources/*.bicep**: הגדרות משאב בודדים (מודולריות לשימוש חוזר)
 - **src/web/app.py**: אפליקציית Flask עם לוגיקת מסד נתונים
 - **requirements.txt**: תלות חבילות Python
-- **Dockerfile**: הוראות מכולה לפריסה
+- **Dockerfile**: הוראות קונטיינר לפריסה
 
 ## התחלה מהירה (שלב-אחר-שלב)
 
-### שלב 1: שיבטו ונווטו
+### שלב 1: שכפול וניווט
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ בדיקת הצלחה**: ודאו שאתם רואים את `azure.yaml` ותיקיית `infra/`:
+**✓ בדיקת הצלחה**: ודא שאתה רואה את `azure.yaml` ואת תיקיית `infra/`:
 ```sh
 ls
 # צפוי: README.md, azure.yaml, infra/, src/
 ```
 
-### שלב 2: אימות מול Azure
+### שלב 2: התחברות ל-Azure
 
 ```sh
 azd auth login
 ```
 
-זה יפתח את הדפדפן שלכם לאימות מול Azure. התחברו עם האישורים שלכם.
+זה פתח את הדפדפן לאימות ב-Azure. היכנס עם פרטי Azure שלך.
 
-**✓ בדיקת הצלחה**: אתם אמורים לראות:
+**✓ בדיקת הצלחה**: תראה:
 ```
 Logged in to Azure.
 ```
@@ -178,14 +169,14 @@ Logged in to Azure.
 azd init
 ```
 
-**מה קורה**: AZD יוצר תצורה מקומית לפריסה שלכם.
+**מה קורה**: AZD יוצר הגדרה מקומית לפריסה שלך.
 
-**הנחיות שתראו**:
-- **שם סביבה**: הזינו שם קצר (למשל, `dev`, `myapp`)
-- **מנוי Azure**: בחרו את המנוי שלכם מהרשימה
-- **מיקום Azure**: בחרו אזור (למשל, `eastus`, `westeurope`)
+**שאלות שתקבל**:
+- **שם הסביבה**: הכנס שם קצר (למשל, `dev`, `myapp`)
+- **מנוי Azure**: בחר את המנוי מהרשימה
+- **מיקום Azure**: בחר אזור (למשל, `eastus`, `westeurope`)
 
-**✓ בדיקת הצלחה**: אתם אמורים לראות:
+**✓ בדיקת הצלחה**: תראה:
 ```
 SUCCESS: New project initialized!
 ```
@@ -196,19 +187,19 @@ SUCCESS: New project initialized!
 azd provision
 ```
 
-**מה קורה**: AZD פורסת את כל התשתית (לוקח 5-8 דקות):
-1. יוצרת קבוצת משאבים
-2. יוצרת שרת SQL ומסד נתונים
-3. יוצרת App Service Plan
-4. יוצרת אפליקציית ווב
-5. יוצרת Application Insights
-6. מגדירה רשתות ואבטחה
+**מה קורה**: AZD מפריס את כל התשתית (אורך זמן 5-8 דקות):
+1. יוצר קבוצת משאבים
+2. יוצר שרת SQL ומסד נתונים
+3. יוצר תוכנית App Service
+4. יוצר אפליקציית ווב
+5. יוצר Application Insights
+6. מגדיר רשת ואבטחה
 
-**תתבקשו להזין**:
-- **שם משתמש מנהל SQL**: הזינו שם משתמש (למשל, `sqladmin`)
-- **סיסמת מנהל SQL**: הזינו סיסמה חזקה (שמרו אותה!)
+**תתבקש לספק**:
+- **שם משתמש מנהל SQL**: הכנס שם משתמש (למשל, `sqladmin`)
+- **סיסמת מנהל SQL**: הכנס סיסמה חזקה (שמור אותה!)
 
-**✓ בדיקת הצלחה**: אתם אמורים לראות:
+**✓ בדיקת הצלחה**: תראה:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -223,14 +214,14 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd deploy
 ```
 
-**מה קורה**: AZD בונה ופורסת את אפליקציית Flask שלכם:
-1. אורזת את אפליקציית Python
-2. בונה את מכולת Docker
-3. דוחפת ל-Azure Web App
-4. מאתחלת את מסד הנתונים עם נתוני דוגמה
-5. מפעילה את האפליקציה
+**מה קורה**: AZD בונה ומפריס את אפליקציית Flask שלך:
+1. מארז את אפליקציית ה-Python
+2. בונה את מכולת ה-Docker
+3. דוחף לאפליקציית ווב ב-Azure
+4. מאתחל את מסד הנתונים עם נתוני דוגמה
+5. מפעיל את האפליקציה
 
-**✓ בדיקת הצלחה**: אתם אמורים לראות:
+**✓ בדיקת הצלחה**: תראה:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -245,9 +236,9 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd browse
 ```
 
-זה יפתח את אפליקציית הווב שלכם בדפדפן בכתובת `https://app-<unique-id>.azurewebsites.net`
+זה פותח את אפליקציית הווב שהופעלה בדפדפן בכתובת `https://app-<unique-id>.azurewebsites.net`
 
-**✓ בדיקת הצלחה**: אתם אמורים לראות פלט JSON:
+**✓ בדיקת הצלחה**: תראה פלט JSON:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -260,9 +251,9 @@ azd browse
 }
 ```
 
-### שלב 7: בדיקת נקודות הקצה של ה-API
+### שלב 7: בדיקת נקודות קצה של ה-API
 
-**בדיקת בריאות** (אימות חיבור למסד נתונים):
+**בדיקת בריאות** (ודא חיבור למסד הנתונים):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
@@ -294,7 +285,7 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**קבלת מוצר בודד**:
+**קבלת מוצר יחיד**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
@@ -303,35 +294,35 @@ curl https://app-<your-id>.azurewebsites.net/products/1
 
 ---
 
-**🎉 מזל טוב!** פרסתם בהצלחה אפליקציית ווב עם מסד נתונים ל-Azure באמצעות AZD.
+**🎉 ברכות!** פרסת בהצלחה אפליקציית ווב עם מסד נתונים ל-Azure באמצעות AZD.
 
-## תצורה מעמיקה
+## ניתוח הגדרות
 
 ### משתני סביבה
 
-סודות מנוהלים בצורה מאובטחת דרך תצורת Azure App Service—**לעולם לא מקודדים בקוד המקור**.
+סודות מנוהלים בצורה מאובטחת דרך הגדרות Azure App Service—**מעולם לא מוצפנים ישירות בקוד המקור**.
 
 **מוגדר אוטומטית על ידי AZD**:
-- `SQL_CONNECTION_STRING`: חיבור למסד נתונים עם אישורים מוצפנים
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: נקודת קצה לטלמטריה
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: מאפשר התקנת תלות אוטומטית
+- `SQL_CONNECTION_STRING`: מחרוזת חיבור למסד הנתונים עם אישורים מוצפנים
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: נקודת קצה לטלטמטריה לניטור
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: מאפשר התקנת תלות אוטומטית בזמן פריסה
 
-**איפה נשמרים הסודות**:
-1. במהלך `azd provision`, אתם מספקים אישורי SQL דרך הנחיות מאובטחות
-2. AZD שומר אותם בקובץ `.azure/<env-name>/.env` המקומי (מוחרג מ-Git)
-3. AZD מזריק אותם לתצורת Azure App Service (מוצפן במנוחה)
+**היכן נשמרים הסודות**:
+1. בעת `azd provision`, אתה מספק פרטי SQL דרך פרמטרים מאובטחים
+2. AZD שומר אותם בקובץ `.azure/<env-name>/.env` מקומי (מנוטרל ב-git)
+3. AZD מזריק אותם להגדרות Azure App Service (מוצפן במנוחה)
 4. האפליקציה קוראת אותם דרך `os.getenv()` בזמן ריצה
 
 ### פיתוח מקומי
 
-לבדיקות מקומיות, צרו קובץ `.env` מהדוגמה:
+לבדיקות מקומיות, צור קובץ `.env` מתוך הדוגמה:
 
 ```sh
 cp .env.sample .env
-# ערוך את .env עם חיבור מסד הנתונים המקומי שלך
+# ערוך את קובץ .env עם חיבור מסד הנתונים המקומי שלך
 ```
 
-**תהליך עבודה לפיתוח מקומי**:
+**זרימת פיתוח מקומי**:
 ```sh
 # התקן תלותים
 cd src/web
@@ -350,17 +341,17 @@ curl http://localhost:8000/health
 # צפוי: {"status": "healthy", "database": "connected"}
 ```
 
-### תשתית כקוד
+### Infrastructure as Code
 
 כל משאבי Azure מוגדרים בתבניות **Bicep** (`infra/` תיקייה):
 
-- **עיצוב מודולרי**: לכל סוג משאב יש קובץ משלו לשימוש חוזר
-- **מפרמטר**: התאמה אישית של SKUs, אזורים, מוסכמות שמות
-- **שיטות עבודה מומלצות**: עוקב אחרי סטנדרטים של Azure ונקודות ברירת מחדל לאבטחה
-- **נשלט גרסה**: שינויים בתשתית מתועדים ב-Git
+- **עיצוב מודולרי**: לכל סוג משאב קובץ נפרד לשימוש חוזר
+- **פרמטרים**: ניתן להתאים SKUs, אזורים, שמות
+- **שיטות העבודה המומלצות**: מבוסס על סטנדרטים של Azure ואבטחה ברירת מחדל
+- **שליטה בגרסאות**: שינויים בתשתית מנוהלים בגיט
 
-**דוגמת התאמה אישית**:
-כדי לשנות את רמת מסד הנתונים, ערכו את `infra/resources/sql-database.bicep`:
+**דוגמת התאמה**:
+כדי לשנות את דרגת מסד הנתונים, ערוך את `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -371,119 +362,119 @@ sku: {
 
 ## שיטות עבודה מומלצות לאבטחה
 
-דוגמה זו עוקבת אחרי שיטות העבודה המומלצות של Azure לאבטחה:
+הדוגמה הזו פועלת לפי שיטות האבטחה המומלצות של Azure:
 
 ### 1. **אין סודות בקוד המקור**
-- ✅ אישורים נשמרים בתצורת Azure App Service (מוצפן)
-- ✅ קבצי `.env` מוחרגים מ-Git דרך `.gitignore`
-- ✅ סודות מועברים דרך פרמטרים מאובטחים במהלך הפריסה
+- ✅ אישורים שמורים בהגדרות Azure App Service (מוצפן)
+- ✅ קבצי `.env` אינם ב-Git (.gitignore)
+- ✅ סודות מועברים בפרמטרים מאובטחים בפריסה
 
 ### 2. **חיבורים מוצפנים**
-- ✅ TLS 1.2 מינימום עבור שרת SQL
-- ✅ HTTPS בלבד מופעל עבור אפליקציית ווב
-- ✅ חיבורים למסד נתונים משתמשים בערוצים מוצפנים
+- ✅ TLS 1.2 מינימום לשרת SQL
+- ✅ HTTPS בלבד לאפליקציית הווב
+- ✅ חיבורי מסד נתונים משתמשים בערוצים מוצפנים
 
 ### 3. **אבטחת רשת**
 - ✅ חומת אש של שרת SQL מוגדרת לאפשר רק שירותי Azure
-- ✅ גישה לרשת ציבורית מוגבלת (ניתן להחמיר עם Private Endpoints)
-- ✅ FTPS מושבת באפליקציית ווב
+- ✅ גישה ציבורית מוגבלת (ניתן להוסיף Private Endpoints לאבטחה נוספת)
+- ✅ FTPS מושבת באפליקציית הווב
 
-### 4. **אימות והרשאה**
+### 4. **אימות והרשאות**
 - ⚠️ **נוכחי**: אימות SQL (שם משתמש/סיסמה)
-- ✅ **המלצה לפרודקשן**: השתמשו ב-Azure Managed Identity לאימות ללא סיסמה
+- ✅ **המלצת ייצור**: השתמש בזהות מנוהלת של Azure לאימות ללא סיסמאות
 
-**כדי לשדרג ל-Managed Identity** (לפרודקשן):
-1. הפעילו Managed Identity באפליקציית ווב
-2. העניקו הרשאות SQL לזהות
-3. עדכנו את מחרוזת החיבור לשימוש ב-Managed Identity
-4. הסירו אימות מבוסס סיסמה
+**כדי לשדרג לזהות מנוהלת** (לייצור):
+1. הפעל זהות מנוהלת באפליקציית הווב
+2. הענק הרשאות SQL לזהות
+3. עדכן את מחרוזת החיבור לשימוש בזהות מנוהלת
+4. הסר את אימות בסיסמאות
 
 ### 5. **ביקורת וציות**
-- ✅ Application Insights מתעד את כל הבקשות והשגיאות
-- ✅ ביקורת מסד נתונים SQL מופעלת (ניתן להגדיר לציות)
-- ✅ כל המשאבים מתויגים למטרות ניהול
+- ✅ Application Insights מנהל רישום של כל הבקשות והטעויות
+- ✅ ביקורת מסד נתונים SQL מופעלת (ניתן להגדיר לצרכי ציות)
+- ✅ כל המשאבים מתויגים לממשל
 
-**רשימת בדיקות אבטחה לפני פרודקשן**:
-- [ ] הפעלת Azure Defender עבור SQL
-- [ ] הגדרת Private Endpoints למסד נתונים SQL
-- [ ] הפעלת Web Application Firewall (WAF)
-- [ ] יישום Azure Key Vault לסיבוב סודות
-- [ ] הגדרת אימות Azure AD
-- [ ] הפעלת לוגים דיאגנוסטיים לכל המשאבים
+**רשימת בדיקה לאבטחה לפני ייצור**:
+- [ ] הפעל Azure Defender עבור SQL
+- [ ] הגדר Private Endpoints למסד הנתונים SQL
+- [ ] הפעל Web Application Firewall (WAF)
+- [ ] הטמע Azure Key Vault לסיבוב סודות
+- [ ] הגדר אימות Azure AD
+- [ ] הפעל רישום ביקור לכל המשאבים
 
-## אופטימיזציית עלויות
+## אופטימיזציה של עלויות
 
 **עלויות חודשיות משוערות** (נכון לנובמבר 2025):
 
-| משאב | SKU/רמה | עלות משוערת |
+| משאב | SKU/דרגה | עלות משוערת |
 |----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~$13 לחודש |
-| SQL Database | Basic (2GB) | ~$5 לחודש |
-| Application Insights | תשלום לפי שימוש | ~$2 לחודש (תעבורה נמוכה) |
-| **סה"כ** | | **~$20 לחודש** |
+| App Service Plan | B1 (בסיס) | ~13$ לחודש |
+| SQL Database | Basic (2GB) | ~5$ לחודש |
+| Application Insights | תשלום לפי שימוש | ~2$ לחודש (תעבורה נמוכה) |
+| **סה"כ** | | **~20$ לחודש** |
 
 **💡 טיפים לחיסכון בעלויות**:
 
-1. **השתמשו ברמת חינם ללמידה**:
-   - App Service: רמת F1 (חינם, שעות מוגבלות)
-   - SQL Database: השתמשו ב-Azure SQL Database serverless
-   - Application Insights: 5GB/חודש חינם
+1. **השתמש בדרגת חינם ללמידה**:
+   - App Service: דרגת F1 (חינם, שעות מוגבלות)
+   - SQL Database: השתמש בשירות serverless של Azure SQL Database
+   - Application Insights: טביעת 5GB לחודש חינם
 
-2. **עצרו משאבים כשאינם בשימוש**:
+2. **עצור משאבים כשלא בשימוש**:
    ```sh
-   # לעצור את אפליקציית האינטרנט (המסד נתונים עדיין מחייב)
+   # עצור את אפליקציית האינטרנט (המסד עדיין מחייב)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # להפעיל מחדש כשצריך
+   # הפעל מחדש כשנדרש
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **מחקו הכל לאחר בדיקות**:
+3. **מחק הכל לאחר בדיקות**:
    ```sh
    azd down
    ```
-   זה יסיר את כל המשאבים ויעצור חיובים.
+   זה מסיר את כל המשאבים ועוצר חיובים.
 
-4. **רמות פיתוח מול פרודקשן**:
-   - **פיתוח**: רמת Basic (משמשת בדוגמה זו)
-   - **פרודקשן**: רמת Standard/Premium עם יתירות
+4. **דרגות פיתוח לעומת ייצור**:
+   - **פיתוח**: דרגת Basic (בדוגמה זו)
+   - **ייצור**: דרגת Standard/Premium עם רדונדנס
 
-**מעקב עלויות**:
-- צפו בעלויות ב-[Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- הגדירו התראות עלויות כדי להימנע מהפתעות
-- תייגו את כל המשאבים עם `azd-env-name` למעקב
+**ניטור עלויות**:
+- צפה בעלויות ב-[Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- הגדר התראות מחירים למניעת הפתעות
+- תייג את כל המשאבים עם `azd-env-name` למעקב
 
-**אלטרנטיבה חינמית**:
-למטרות למידה, תוכלו לשנות את `infra/resources/app-service-plan.bicep`:
+**חלופה בדרגת חינם**:
+לצורכי למידה, ניתן לשנות את `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**הערה**: לרמת חינם יש מגבלות (60 דקות/יום CPU, ללא always-on).
+**הערה**: דרגת חינם כוללת מגבלות (60 דק' CPU ליום, ללא Always On).
 
-## ניטור ונצפות
+## ניטור וצפייה
 
-### אינטגרציית Application Insights
+### אינטגרציה עם Application Insights
 
-דוגמה זו כוללת **Application Insights** לניטור מקיף:
+הדוגמה כוללת **Application Insights** לניטור מקיף:
 
 **מה מנוטר**:
-- ✅ בקשות HTTP (זמן תגובה, קודי סטטוס, נקודות קצה)
-- ✅ שגיאות וחריגים באפליקציה
-- ✅ לוגים מותאמים אישית מאפליקציית Flask
-- ✅ בריאות חיבור למסד נתונים
-- ✅ מדדי ביצועים (CPU, זיכרון)
+- ✅ בקשות HTTP (השיהוי, קודי מצב, נקודות קצה)
+- ✅ שגיאות והחרגות באפליקציה
+- ✅ לוגים מותאמים מאפליקציית Flask
+- ✅ בריאות חיבורי מסד נתונים
+- ✅ מדדים בביצועים (CPU, זיכרון)
 
 **גישה ל-Application Insights**:
-1. פתחו את [Azure Portal](https://portal.azure.com)
-2. נווטו לקבוצת המשאבים שלכם (`rg-<env-name>`)
-3. לחצו על משאב Application Insights (`appi-<unique-id>`)
+1. פתח את [פורטל Azure](https://portal.azure.com)
+2. עבור לקבוצת המשאבים שלך (`rg-<env-name>`)
+3. לחץ על משאב Application Insights (`appi-<unique-id>`)
 
-**שאילתות שימושיות** (Application Insights → Logs):
+**שאילתות שימושיות** (Application Insights → לוגים):
 
-**צפו בכל הבקשות**:
+**הצג את כל הבקשות**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -491,7 +482,7 @@ requests
 | project timestamp, name, url, resultCode, duration
 ```
 
-**מצאו שגיאות**:
+**מצא שגיאות**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -499,7 +490,7 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**בדקו את נקודת הקצה של הבריאות**:
+**בדוק נקודת בריאות**:
 ```kusto
 requests
 | where name contains "health"
@@ -508,29 +499,29 @@ requests
 
 ### ביקורת מסד נתונים SQL
 
-**ביקורת מסד נתונים SQL מופעלת** כדי לעקוב אחרי:
-- דפוסי גישה למסד נתונים
-- ניסיונות כניסה שנכשלו
-- שינויים בסכימה
-- גישה לנתונים (למטרות ציות)
+**ביקורת מסד נתונים SQL מופעלת** למעקב על:
+- דפוסי גישה למסד הנתונים
+- ניסיונות התחברות נכשלות
+- שינויים בסכמות
+- גישה לנתונים (לצורכי ציות)
 
-**גישה ללוגי ביקורת**:
-1. Azure Portal → SQL Database → Auditing
-2. צפו בלוגים ב-Log Analytics workspace
+**גישה ללוג ביקורת**:
+1. פורטל Azure → מסד נתונים SQL → ביקורת
+2. צפה בלוגים ב-Log Analytics workspace
 
 ### ניטור בזמן אמת
 
-**צפו במדדים חיים**:
+**הצג מדדים חיים**:
 1. Application Insights → Live Metrics
-2. ראו בקשות, כשלונות וביצועים בזמן אמת
+2. צפה בבקשות, כישלונות וביצועים בזמן אמת
 
-**הגדירו התראות**:
-צרו התראות לאירועים קריטיים:
-- שגיאות HTTP 500 > 5 ב-5 דקות
-- כשלונות חיבור למסד נתונים
+**הגדרת התראות**:
+צור התראות לאירועים קריטיים:
+- שגיאות HTTP 500 > 5 בתוך 5 דקות
+- כישלונות חיבור למסד הנתונים
 - זמני תגובה גבוהים (>2 שניות)
 
-**דוגמה ליצירת התראה**:
+**דוגמת יצירת התראה**:  
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -539,167 +530,169 @@ az monitor metrics alert create \
   --condition "avg requests/duration > 2000" \
   --description "Alert when response time exceeds 2 seconds"
 ```
-
+  
 ## פתרון בעיות
 
 ### בעיות נפוצות ופתרונות
 
-#### 1. `azd provision` נכשל עם "מיקום לא זמין"
+#### 1. `azd provision` נכשל עם "Location not available"
 
-**תסמין**:
+**תסמין**:  
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
-
-**פתרון**:
-בחר אזור Azure אחר או רשום את ספק המשאבים:
+  
+**פתרון**:  
+בחר אזור Azure שונה או הירשם לספק המשאבים:  
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
+  
+#### 2. כשל בחיבור ל-SQL במהלך הפריסה
 
-#### 2. חיבור SQL נכשל במהלך הפריסה
-
-**תסמין**:
+**תסמין**:  
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
+  
+**פתרון**:  
+- אמת שהחומת אש של SQL Server מאפשרת שירותי Azure (מוגדר אוטומטית)  
+- ודא שסיסמת מנהל SQL הוקלדה נכון בזמן `azd provision`  
+- ודא ש-SQL Server סופק במלואו (יכול לקחת 2-3 דקות)
 
-**פתרון**:
-- ודא שחומת האש של SQL Server מאפשרת שירותי Azure (מוגדר אוטומטית)
-- בדוק שהסיסמה של מנהל SQL הוזנה נכון במהלך `azd provision`
-- ודא ש-SQL Server הוקצה במלואו (יכול לקחת 2-3 דקות)
-
-**אימות חיבור**:
+**אמת חיבור**:  
 ```sh
-# מתוך פורטל Azure, עבור למסד נתונים SQL → עורך שאילתות
+# מ הפורטל של Azure, עבור ל SQL Database → עורך השאילתות
 # נסה להתחבר עם האישורים שלך
 ```
+  
+#### 3. אפליקציית רשת מציגה "Application Error"
 
-#### 3. אפליקציית האינטרנט מציגה "שגיאת אפליקציה"
-
-**תסמין**:
+**תסמין**:  
 הדפדפן מציג דף שגיאה כללי.
 
-**פתרון**:
-בדוק את יומני האפליקציה:
+**פתרון**:  
+בדוק יומני האפליקציה:  
 ```sh
 # הצג יומנים אחרונים
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
+  
+**סיבות נפוצות**:  
+- משתני סביבה חסרים (בדוק App Service → Configuration)  
+- התקנת חבילת Python נכשלה (בדוק יומני פריסה)  
+- שגיאת אתחול בסיס נתונים (בדוק חיבוריות SQL)
 
-**גורמים נפוצים**:
-- משתני סביבה חסרים (בדוק App Service → Configuration)
-- התקנת חבילות Python נכשלה (בדוק יומני פריסה)
-- שגיאת אתחול מסד נתונים (בדוק את חיבור ה-SQL)
+#### 4. `azd deploy` נכשל עם "Build Error"
 
-#### 4. `azd deploy` נכשל עם "שגיאת בנייה"
-
-**תסמין**:
+**תסמין**:  
 ```
 Error: Failed to build project
 ```
+  
+**פתרון**:  
+- ודא שקובץ `requirements.txt` ללא שגיאות תחביר  
+- בדוק ש-Python 3.11 מוגדר בקובץ `infra/resources/web-app.bicep`  
+- אמת שקובץ Dockerfile משתמש בתמונת בסיס נכונה
 
-**פתרון**:
-- ודא שאין שגיאות תחביר ב-`requirements.txt`
-- בדוק ש-Python 3.11 מוגדר ב-`infra/resources/web-app.bicep`
-- ודא ש-Dockerfile מכיל תמונת בסיס נכונה
-
-**ניפוי שגיאות מקומי**:
+**ניפוי באגים מקומי**:  
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
+  
+#### 5. "Unauthorized" בעת הרצת פקודות AZD
 
-#### 5. "לא מורשה" בעת הרצת פקודות AZD
-
-**תסמין**:
+**תסמין**:  
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
-
-**פתרון**:
-התחבר מחדש ל-Azure:
+  
+**פתרון**:  
+התחבר מחדש ל-Azure:  
 ```sh
 azd auth login
 az login
 ```
+  
+ודא שיש לך הרשאות נכונות (תפקיד Contributor) במנוי.
 
-ודא שיש לך הרשאות מתאימות (תפקיד Contributor) במנוי.
+#### 6. עלויות גבוהות של מסד הנתונים
 
-#### 6. עלויות מסד נתונים גבוהות
+**תסמין**:  
+חשבונית Azure בלתי צפויה.
 
-**תסמין**:
-חשבון Azure בלתי צפוי.
-
-**פתרון**:
-- בדוק אם שכחת להריץ `azd down` לאחר הבדיקה
-- ודא שמסד הנתונים של SQL משתמש בשכבת Basic (לא Premium)
-- סקור עלויות ב-Azure Cost Management
+**פתרון**:  
+- בדוק אם שכחת להריץ `azd down` לאחר הבדיקה  
+- אמת ש-SQL Database משתמש ברמת Basic (לא Premium)  
+- בדוק עלויות בניהול עלויות Azure  
 - הגדר התראות עלויות
 
 ### קבלת עזרה
 
-**הצג את כל משתני הסביבה של AZD**:
+**הצג את כל משתני הסביבה של AZD**:  
 ```sh
 azd env get-values
 ```
-
-**בדוק את מצב הפריסה**:
+  
+**בדוק סטטוס פריסה**:  
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
-
-**גש ליומני האפליקציה**:
+  
+**גש ליומני האפליקציה**:  
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
-
-**צריך עוד עזרה?**
-- [מדריך פתרון בעיות AZD](../../docs/troubleshooting/common-issues.md)
-- [פתרון בעיות Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+  
+**צריך עזרה נוספת?**  
+- [מדריך פתרון בעיות AZD](../../docs/chapter-07-troubleshooting/common-issues.md)  
+- [פתרון בעיות Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)  
 - [פתרון בעיות Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## תרגילים מעשיים
 
-### תרגיל 1: אימות הפריסה שלך (מתחילים)
+### תרגיל 1: אמת את הפריסה שלך (מתחילים)
 
-**מטרה**: ודא שכל המשאבים נפרסו והאפליקציה פועלת.
+**מטרה**: לאשר שכל המשאבים מוטמעים והאפליקציה פועלת.
 
-**שלבים**:
-1. רשום את כל המשאבים בקבוצת המשאבים שלך:
+**שלבים**:  
+1. רשום את כל המשאבים בקבוצת המשאבים שלך:  
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **צפוי**: 6-7 משאבים (אפליקציית אינטרנט, SQL Server, מסד נתונים SQL, תוכנית שירות אפליקציה, Application Insights, Log Analytics)
+  
+**צפוי**: 6-7 משאבים (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. בדוק את כל נקודות הקצה של ה-API:
+2. בדוק את כל נקודות הקצה של ה-API:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **צפוי**: כולן מחזירות JSON תקין ללא שגיאות
+  
+**צפוי**: כולן מחזירות JSON תקין ללא שגיאות
 
-3. בדוק את Application Insights:
-   - נווט ל-Application Insights בפורטל Azure
-   - עבור ל-"Live Metrics"
-   - רענן את הדפדפן שלך באפליקציית האינטרנט
-   **צפוי**: ראה בקשות מופיעות בזמן אמת
+3. בדוק את Application Insights:  
+   - גש ל-Application Insights בפורטל Azure  
+   - עבור ל-"Live Metrics"  
+   - רענן את הדפדפן באפליקציית הרשת  
+   **צפוי**: לראות בקשות מופיעות בזמן אמת
 
 **קריטריוני הצלחה**: כל 6-7 המשאבים קיימים, כל נקודות הקצה מחזירות נתונים, Live Metrics מציג פעילות.
 
 ---
 
-### תרגיל 2: הוסף נקודת קצה חדשה ל-API (בינוני)
+### תרגיל 2: הוסף נקודת API חדשה (ביניים)
 
-**מטרה**: הרחב את אפליקציית Flask עם נקודת קצה חדשה.
+**מטרה**: להרחיב את אפליקציית Flask עם נקודת קצה חדשה.
 
-**קוד התחלתי**: נקודות הקצה הנוכחיות ב-`src/web/app.py`
+**קוד התחלתי**: נקודות הקצה הנוכחיות בקובץ `src/web/app.py`
 
-**שלבים**:
-1. ערוך את `src/web/app.py` והוסף נקודת קצה חדשה אחרי הפונקציה `get_product()`:
+**שלבים**:  
+1. ערוך את הקובץ `src/web/app.py` והוסף נקודת קצה חדשה אחרי הפונקציה `get_product()`:  
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -732,36 +725,37 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            logger.error(f"Error searching products: {str(e)}")
            return jsonify({'error': str(e)}), 500
    ```
-
-2. פרוס את האפליקציה המעודכנת:
+  
+2. פרוס את האפליקציה המעודכנת:  
    ```sh
    azd deploy
    ```
-
-3. בדוק את נקודת הקצה החדשה:
+  
+3. בדוק את נקודת הקצה החדשה:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **צפוי**: מחזיר מוצרים התואמים ל-"laptop"
+  
+**צפוי**: מחזירה מוצרים התואמים ל-"laptop"
 
-**קריטריוני הצלחה**: נקודת הקצה החדשה פועלת, מחזירה תוצאות מסוננות, מופיעה ביומני Application Insights.
+**קריטריוני הצלחה**: נקודת הקצה החדשה עובדת, מחזירה תוצאות מסוננות, מופיעה ביומני Application Insights.
 
 ---
 
-### תרגיל 3: הוסף ניטור והתראות (מתקדם)
+### תרגיל 3: הוסף ניטור והתראות (מתקדמים)
 
-**מטרה**: הגדר ניטור פרואקטיבי עם התראות.
+**מטרה**: להקים ניטור פרואקטיבי עם התראות.
 
-**שלבים**:
-1. צור התראה עבור שגיאות HTTP 500:
+**שלבים**:  
+1. צור התראה לשגיאות HTTP 500:  
    ```sh
-   # קבל מזהה משאב של Application Insights
+   # לקבלת מזהה משאבי Application Insights
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # צור התראה
+   # ליצור התראה
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -771,29 +765,29 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --evaluation-frequency 1m \
      --description "Alert when >5 failed requests in 5 minutes"
    ```
-
-2. גרום לשגיאות כדי להפעיל את ההתראה:
+  
+2. הפעל את ההתראה על ידי יצירת שגיאות:  
    ```sh
    # בקש מוצר שאינו קיים
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
+  
+3. בדוק אם ההתראה הופעלה:  
+   - פורטל Azure → התראות → כללי התראה  
+   - בדוק את האימייל שלך (אם מוגדר)
 
-3. בדוק אם ההתראה הופעלה:
-   - פורטל Azure → התראות → חוקי התראה
-   - בדוק את הדוא"ל שלך (אם הוגדר)
-
-**קריטריוני הצלחה**: חוק ההתראה נוצר, מופעל על שגיאות, מתקבלות התראות.
+**קריטריוני הצלחה**: כלל התראה נוצר, מופעל על שגיאות, מתקבלות התראות.
 
 ---
 
-### תרגיל 4: שינויים בסכמת מסד הנתונים (מתקדם)
+### תרגיל 4: שינויים בסכמת מסד הנתונים (מתקדמים)
 
 **מטרה**: הוסף טבלה חדשה ועדכן את האפליקציה להשתמש בה.
 
-**שלבים**:
-1. התחבר למסד הנתונים של SQL דרך עורך השאילתות בפורטל Azure
+**שלבים**:  
+1. התחבר למסד הנתונים SQL דרך עורך השאילתות בפורטל Azure
 
-2. צור טבלת `categories` חדשה:
+2. צור טבלה חדשה `categories`:  
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -809,26 +803,26 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ALTER TABLE products ADD category_id INT;
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
-
-3. עדכן את `src/web/app.py` לכלול מידע על קטגוריות בתגובות
+  
+3. עדכן את `src/web/app.py` לכלול מידע על הקטגוריות בתגובות
 
 4. פרוס ובדוק
 
-**קריטריוני הצלחה**: הטבלה החדשה קיימת, מוצרים מציגים מידע על קטגוריות, האפליקציה עדיין פועלת.
+**קריטריוני הצלחה**: טבלה חדשה קיימת, המוצרים מציגים מידע על קטגוריות, האפליקציה פועלת כהלכה.
 
 ---
 
 ### תרגיל 5: יישום מטמון (מומחה)
 
-**מטרה**: הוסף Azure Redis Cache לשיפור הביצועים.
+**מטרה**: הוסף Azure Redis Cache לשיפור ביצועים.
 
-**שלבים**:
-1. הוסף Redis Cache ל-`infra/main.bicep`
-2. עדכן את `src/web/app.py` למטמון שאילתות מוצרים
-3. מדוד שיפור ביצועים עם Application Insights
+**שלבים**:  
+1. הוסף Redis Cache ל-`infra/main.bicep`  
+2. עדכן את `src/web/app.py` כדי לבצע מטמון של שאילתות מוצר  
+3. מדוד שיפור ביצועים עם Application Insights  
 4. השווה זמני תגובה לפני/אחרי המטמון
 
-**קריטריוני הצלחה**: Redis נפרס, המטמון פועל, זמני התגובה משתפרים ביותר מ-50%.
+**קריטריוני הצלחה**: Redis פרוס, המטמון עובד, זמני תגובה משתפרים ביותר מ-50%.
 
 **רמז**: התחל עם [תיעוד Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
@@ -836,84 +830,85 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 ## ניקוי
 
-כדי להימנע מחיובים מתמשכים, מחק את כל המשאבים בסיום:
+כדי למנוע חיובים מתמשכים, מחק את כל המשאבים בסיום:
 
 ```sh
 azd down
 ```
-
-**אישור**:
+  
+**בקשת אישור**:  
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
-
+  
 הקלד `y` לאישור.
 
-**✓ בדיקת הצלחה**: 
-- כל המשאבים נמחקו מפורטל Azure
-- אין חיובים מתמשכים
-- ניתן למחוק את התיקייה המקומית `.azure/<env-name>`
+**✓ בדיקת הצלחה**:  
+- כל המשאבים נמחקו מפורטל Azure  
+- אין חיובים מתמשכים  
+- תיקיית `.azure/<env-name>` המקומית ניתנת למחיקה
 
-**חלופה** (שמור על התשתית, מחק נתונים):
+**חלופה** (שמור את התשתית, מחק את הנתונים):  
 ```sh
-# מחק רק את קבוצת המשאבים (שמור את תצורת AZD)
+# מחק רק את קבוצת המשאבים (השאר את תצורת AZD)
 az group delete --name rg-<env-name> --yes
 ```
-## למידע נוסף
+  
+## ללמוד עוד
 
-### תיעוד קשור
-- [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [תיעוד מסד נתונים Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/)
-- [תיעוד Azure App Service](https://learn.microsoft.com/azure/app-service/)
-- [תיעוד Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [תיעוד שפת Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+### תיעוד קשור  
+- [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
+- [תיעוד Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)  
+- [תיעוד Azure App Service](https://learn.microsoft.com/azure/app-service/)  
+- [תיעוד Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)  
+- [מדריך שפת Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### השלבים הבאים בקורס זה
-- **[דוגמת אפליקציות קונטיינר](../../../../examples/container-app)**: פרוס מיקרו-שירותים עם Azure Container Apps
-- **[מדריך אינטגרציית AI](../../../../docs/ai-foundry)**: הוסף יכולות AI לאפליקציה שלך
-- **[שיטות פריסה מומלצות](../../docs/deployment/deployment-guide.md)**: דפוסי פריסה לייצור
+### צעדים הבאים בקורס זה  
+- **[דוגמת Container Apps](../../../../examples/container-app)**: פריסת מיקרו-שירותים עם Azure Container Apps  
+- **[מדריך אינטגרציה עם AI](../../../../docs/ai-foundry)**: הוסף יכולות AI לאפליקציה שלך  
+- **[שיטות עבודה מומלצות לפריסה](../../docs/chapter-04-infrastructure/deployment-guide.md)**: דפוסי פריסה בסביבת ייצור
 
-### נושאים מתקדמים
-- **Managed Identity**: הסר סיסמאות והשתמש באימות Azure AD
-- **Private Endpoints**: אבטח חיבורי מסד נתונים בתוך רשת וירטואלית
-- **CI/CD Integration**: אוטומציה של פריסות עם GitHub Actions או Azure DevOps
-- **Multi-Environment**: הגדר סביבות פיתוח, בדיקות וייצור
-- **Database Migrations**: השתמש ב-Alembic או Entity Framework לגרסאות סכמות
+### נושאים מתקדמים  
+- **זהות מנוהלת**: הסר סיסמאות והשתמש באימות Azure AD  
+- **נקודות קצה פרטיות**: אבטח חיבורים למסד הנתונים בתוך רשת וירטואלית  
+- **אינטגרציית CI/CD**: אוטומציה של פריסות עם GitHub Actions או Azure DevOps  
+- **סביבות מרובות**: הקם סביבות פיתוח, בדיקה וייצור  
+- **הגירות מסד נתונים**: השתמש ב-Alembic או Entity Framework לניהול גרסאות סכמת הנתונים
 
-### השוואה לגישות אחרות
+### השוואה לשיטות אחרות
 
-**AZD לעומת ARM Templates**:
-- ✅ AZD: הפשטה ברמה גבוהה, פקודות פשוטות
-- ⚠️ ARM: מפורט יותר, שליטה גרנולרית
+**AZD מול תבניות ARM**:  
+- ✅ AZD: רמת הפשטה גבוהה יותר, פקודות פשוטות  
+- ⚠️ ARM: מפורט יותר, שליטה מדויקת
 
-**AZD לעומת Terraform**:
-- ✅ AZD: מקורי ל-Azure, משולב עם שירותי Azure
-- ⚠️ Terraform: תמיכה בריבוי עננים, אקוסיסטם רחב יותר
+**AZD מול Terraform**:  
+- ✅ AZD: טבעי ל-Azure, משולב עם שירותי Azure  
+- ⚠️ Terraform: תומך רב-ענני, מערכת אקולוגית גדולה
 
-**AZD לעומת פורטל Azure**:
-- ✅ AZD: ניתן לשחזור, נשלט בגרסאות, ניתן לאוטומציה
-- ⚠️ פורטל: קליקים ידניים, קשה לשחזור
+**AZD מול פורטל Azure**:  
+- ✅ AZD: ניתן להרצה מחדש, נשלט בגרסאות, ניתן לאוטומציה  
+- ⚠️ פורטל: פעולות ידניות, קשה לשכפול
 
-**חשוב על AZD כ**: Docker Compose עבור Azure—תצורה פשוטה לפריסות מורכבות.
+**חשוב על AZD בתור**: Docker Compose ל-Azure — קונפигураציה פשוטה לפריסות מורכבות.
 
 ---
 
 ## שאלות נפוצות
 
-**ש: האם אני יכול להשתמש בשפת תכנות אחרת?**  
-ת: כן! החלף את `src/web/` ב-Node.js, C#, Go או כל שפה אחרת. עדכן את `azure.yaml` ו-Bicep בהתאם.
+**ש: האם אפשר להשתמש בשפת תכנות אחרת?**  
+ת: כן! החלף את `src/web/` ל-Node.js, C#, Go או כל שפה אחרת. עדכן את `azure.yaml` ו-Bicep בהתאם.
 
-**ש: איך אני מוסיף עוד מסדי נתונים?**  
-ת: הוסף מודול מסד נתונים SQL נוסף ב-`infra/main.bicep` או השתמש ב-PostgreSQL/MySQL משירותי מסדי הנתונים של Azure.
+**ש: איך מוסיפים מסדי נתונים נוספים?**  
+ת: הוסף מודול SQL Database נוסף ב-`infra/main.bicep` או השתמש ב-PostgreSQL/MySQL משירותי Azure Database.
 
-**ש: האם אני יכול להשתמש בזה לייצור?**  
-ת: זהו נקודת התחלה. לייצור, הוסף: Managed Identity, Private Endpoints, יתירות, אסטרטגיית גיבוי, WAF וניטור משופר.
+**ש: האם אפשר להשתמש בזה בייצור?**  
+ת: זו נקודת התחלה. לייצור, הוסף: זהות מנוהלת, נקודות קצה פרטיות, ורנונדציה, אסטרטגיית גיבוי, WAF וניטור משופר.
 
-**ש: מה אם אני רוצה להשתמש בקונטיינרים במקום פריסת קוד?**  
-ת: עיין ב-[דוגמת אפליקציות קונטיינר](../../../../examples/container-app) שמשתמשת בקונטיינרים של Docker לאורך כל הדרך.
+**ש: מה אם אני רוצה להשתמש במיכלים במקום פריסת קוד?**  
+ת: עיין ב-[דוגמת Container Apps](../../../../examples/container-app) שמשתמשת במיכלי Docker לאורך כל הדרך.
 
-**ש: איך אני מתחבר למסד הנתונים מהמחשב המקומי שלי?**  
-ת: הוסף את ה-IP שלך לחומת האש של SQL Server:
+**ש: איך מתחברים למסד הנתונים מהמחשב המקומי?**  
+ת: הוסף את כתובת ה-IP שלך לחומת האש של SQL Server:  
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -922,22 +917,22 @@ az sql server firewall-rule create \
   --start-ip-address <your-ip> \
   --end-ip-address <your-ip>
 ```
-
-**ש: האם אני יכול להשתמש במסד נתונים קיים במקום ליצור חדש?**  
-ת: כן, עדכן את `infra/main.bicep` כדי להתייחס ל-SQL Server קיים ועדכן את פרמטרי מחרוזת החיבור.
+  
+**ש: האם אפשר להשתמש במסד נתונים קיים במקום ליצור חדש?**  
+ת: כן, ערוך את `infra/main.bicep` כדי להפנות ל-SQL Server קיים ועדכן את פרמטרי מחרוזת החיבור.
 
 ---
 
-> **הערה:** דוגמה זו מדגימה שיטות עבודה מומלצות לפריסת אפליקציית אינטרנט עם מסד נתונים באמצעות AZD. היא כוללת קוד עובד, תיעוד מקיף ותרגילים מעשיים לחיזוק הלמידה. לפריסות ייצור, סקור דרישות אבטחה, סקיילינג, תאימות ועלויות ספציפיות לארגון שלך.
+> **הערה:** דוגמה זו ממחישה שיטות עבודה מומלצות לפריסת אפליקציית רשת עם מסד נתונים באמצעות AZD. היא כוללת קוד עובד, תיעוד מקיף ותרגילים מעשיים לחיזוק הלמידה. לפריסות ייצור, בדוק דרישות אבטחה, סקיילינג, תאימות ועלויות ספציפיות לארגונך.
 
-**📚 ניווט בקורס:**
-- ← קודם: [דוגמת אפליקציות קונטיינר](../../../../examples/container-app)
-- → הבא: [מדריך אינטגרציית AI](../../../../docs/ai-foundry)
-- 🏠 [דף הבית של הקורס](../../README.md)
+**📚 ניווט בקורס:**  
+- ← קודם: [דוגמת Container Apps](../../../../examples/container-app)  
+- → הבא: [מדריך אינטגרציה עם AI](../../../../docs/ai-foundry)  
+- 🏠 [בית הקורס](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+**הצהרת אי-אחריות**:  
+מסמך זה תורגם באמצעות שירות התרגום האוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). על אף שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים לכלול שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב למקור הסמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. אנו אינם אחראים לכל הבנה שגויה או פרשנות שגויה הנובעות משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

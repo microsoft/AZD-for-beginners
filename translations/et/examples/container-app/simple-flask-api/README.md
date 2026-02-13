@@ -1,34 +1,25 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9e7f581a238c1bf7f9f31a2ba118a90c",
-  "translation_date": "2025-11-24T14:18:50+00:00",
-  "source_file": "examples/container-app/simple-flask-api/README.md",
-  "language_code": "et"
-}
--->
-# Lihtne Flask API - Konteinerirakenduse näide
+# Lihtne Flask API - konteinerirakenduse näide
 
-**Õppetasand:** Algaja ⭐ | **Aeg:** 25-35 minutit | **Maksumus:** $0-15/kuus
+**Õppeteekond:** Algaja ⭐ | **Aeg:** 25-35 minutit | **Kulu:** 0-15 $ kuus
 
-Täielik ja töötav Python Flask REST API, mis on juurutatud Azure Container Apps abil, kasutades Azure Developer CLI-d (azd). See näide demonstreerib konteinerite juurutamist, automaatset skaleerimist ja jälgimise põhitõdesid.
+Töökindel Python Flask REST API, mis on juurutatud Azure Container Apps keskkonda, kasutades Azure Developer CLI (azd). See näide demonstreerib konteineri juurutamist, automaatset skaleerimist ja põhiseiret.
 
-## 🎯 Mida õpid
+## 🎯 Mida sa õpid
 
-- Juurutada konteineriseeritud Python rakendus Azure'i
-- Konfigureerida automaatset skaleerimist koos nullini skaleerimisega
-- Rakendada tervisekontrolli ja valmisoleku kontrolli
+- Juurutada konteineriseeritud Python rakendus Azure’i
+- Konfigureerida automaatne skaleerimine koos skaleerimisega nullini
+- Rakendada terviseproove ja valmiduse kontrolle
 - Jälgida rakenduse logisid ja mõõdikuid
-- Kasutada Azure Developer CLI-d kiireks juurutamiseks
+- Kasutada Azure Developer CLI kiireks juurutamiseks
 
-## 📦 Mis on kaasas
+## 📦 Mida see sisaldab
 
-✅ **Flask rakendus** - Täielik REST API koos CRUD operatsioonidega (`src/app.py`)  
-✅ **Dockerfile** - Tootmisvalmis konteineri konfiguratsioon  
-✅ **Bicep infrastruktuur** - Container Apps keskkond ja API juurutamine  
-✅ **AZD konfiguratsioon** - Ühe käsuga juurutamise seadistus  
-✅ **Tervisekontrollid** - Liveness ja valmisoleku kontrollid konfigureeritud  
-✅ **Automaatne skaleerimine** - 0-10 replikaid HTTP koormuse alusel  
+✅ **Flaski rakendus** - Täielik REST API koos CRUD operatsioonidega (`src/app.py`)  
+✅ **Dockerfile** - Tootmiskõlbulik konteineri konfiguratsioon  
+✅ **Bicep infrastruktuur** - Container Apps keskkond ja API juurutus  
+✅ **AZD konfiguratsioon** - Ühekäsuline juurutuseadistus  
+✅ **Terviseproovid** - Liveness ja readiness kontrollid seadistatud  
+✅ **Automaatne skaleerimine** - 0-10 koopiat HTTP koormuse põhjal  
 
 ## Arhitektuur
 
@@ -49,7 +40,7 @@ Täielik ja töötav Python Flask REST API, mis on juurutatud Azure Container Ap
 
 ## Eeltingimused
 
-### Vajalik
+### Nõutud
 - **Azure Developer CLI (azd)** - [Paigaldusjuhend](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure tellimus** - [Tasuta konto](https://azure.microsoft.com/free/)
 - **Docker Desktop** - [Paigalda Docker](https://www.docker.com/products/docker-desktop/) (kohalikuks testimiseks)
@@ -57,46 +48,46 @@ Täielik ja töötav Python Flask REST API, mis on juurutatud Azure Container Ap
 ### Kontrolli eeltingimusi
 
 ```bash
-# Kontrolli azd versiooni (vaja 1.5.0 või uuemat)
+# Kontrolli azd versiooni (vajalik 1.5.0 või uuem)
 azd version
 
-# Kontrolli Azure'i sisselogimist
+# Kontrolli Azure sisse logimist
 azd auth login
 
-# Kontrolli Dockeri (valikuline, kohalikuks testimiseks)
+# Kontrolli Dockerit (valikuline, lokaalseks testimiseks)
 docker --version
 ```
 
-## ⏱️ Juurutamise ajakava
+## ⏱️ Juurutuse ajaskaala
 
 | Faas | Kestus | Mis toimub |
-|------|--------|------------|
-| Keskkonna seadistamine | 30 sekundit | Loo azd keskkond |
-| Konteineri ehitamine | 2-3 minutit | Docker ehitab Flask rakenduse |
-| Infrastruktuuri loomine | 3-5 minutit | Loo Container Apps, register, jälgimine |
-| Rakenduse juurutamine | 2-3 minutit | Pildi üleslaadimine ja juurutamine Container Apps-i |
-| **Kokku** | **8-12 minutit** | Täielik juurutamine valmis |
+|-------|----------|--------------||
+| Keskkonna seadistus | 30 sekundit | Loo azd keskkond |
+| Konteineri ehitus | 2-3 minutit | Ehita Dockeriga Flask rakendus |
+| Infrastruktuuri loomine | 3-5 minutit | Loo Container Apps, register, monitooring |
+| Rakenduse juurutus | 2-3 minutit | Lükka pilt ja juuruta Container Apps keskkonda |
+| **Kõik kokku** | **8-12 minutit** | Juurutus lõpetatud ja valmis |
 
 ## Kiire algus
 
 ```bash
-# Navigeeri näitele
+# Navigeeri näidise juurde
 cd examples/container-app/simple-flask-api
 
-# Initsialiseeri keskkond (vali unikaalne nimi)
+# Initsialiseeri keskkond (valige unikaalne nimi)
 azd env new myflaskapi
 
-# Paigalda kõik (infrastruktuur + rakendus)
+# Paigalda kõik (taristu + rakendus)
 azd up
-# Teile kuvatakse järgmised juhised:
-# 1. Valige Azure'i tellimus
-# 2. Valige asukoht (nt eastus2)
-# 3. Oodake 8-12 minutit paigaldamiseks
+# Sulle esitatakse järgmised küsimused:
+# 1. Vali Azure tellimus
+# 2. Vali asukoht (nt eastus2)
+# 3. Oota 8–12 minutit paigalduseks
 
-# Hankige oma API lõpp-punkt
+# Hangi oma API lõpp-punkt
 azd env get-values
 
-# Testige API-d
+# Testi API-t
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
@@ -110,57 +101,60 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Kontrolli juurutamist
+## ✅ Kontrolli juurutust
 
-### Samm 1: Kontrolli juurutamise staatust
+### Samm 1: Kontrolli juurutuse staatust
 
 ```bash
 # Vaata juurutatud teenuseid
 azd show
 
-# Oodatav väljund näitab:
+# Oodatud väljund näitab:
 # - Teenus: api
 # - Lõpp-punkt: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Staatus: Töötav
+# - Olekur: Töötamas
 ```
 
 ### Samm 2: Testi API lõpp-punkte
 
 ```bash
-# Hangi API lõpp-punkt
+# API lõpp-punkti hankimine
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Testi tervist
+# Tervise kontrollimine
 curl $API_URL/health
 
-# Testi juurlõpp-punkti
+# Juure lõpp-punkti testimine
 curl $API_URL/
 
-# Loo üksus
+# Üksuse loomine
 curl -X POST $API_URL/api/items \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Item", "description": "My first item"}'
 
-# Hangi kõik üksused
+# Kõigi üksuste hankimine
 curl $API_URL/api/items
 ```
 
 **Edu kriteeriumid:**
-- ✅ Tervisekontrolli lõpp-punkt tagastab HTTP 200
-- ✅ Juure lõpp-punkt kuvab API teavet
-- ✅ POST loob elemendi ja tagastab HTTP 201
-- ✅ GET tagastab loodud elemendid
+- ✅ Tervise lõpp-punkt annab HTTP 200 vastuse
+- ✅ Juure lõpp-punkt kuvab API infot
+- ✅ POST loob kirje ja tagastab HTTP 201
+- ✅ GET tagastab loodud kirjed
 
 ### Samm 3: Vaata logisid
 
 ```bash
-# Edasta reaalajas logisid
-azd logs api --follow
+# Voogesitage reaalajas logisid, kasutades azd monitori
+azd monitor --logs
 
-# Sa peaksid nägema:
+# Või kasutage Azure CLI-d:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
+
+# Te peaksite nägema:
 # - Gunicorni käivitussõnumeid
-# - HTTP päringute logisid
-# - Rakenduse info logisid
+# - HTTP-päringu logisid
+# - Rakenduse teabe logisid
 ```
 
 ## Projekti struktuur
@@ -183,13 +177,13 @@ simple-flask-api/
 ## API lõpp-punktid
 
 | Lõpp-punkt | Meetod | Kirjeldus |
-|------------|--------|-----------|
+|----------|--------|-------------|
 | `/health` | GET | Tervisekontroll |
-| `/api/items` | GET | Kuvab kõik elemendid |
-| `/api/items` | POST | Loob uue elemendi |
-| `/api/items/{id}` | GET | Kuvab konkreetse elemendi |
-| `/api/items/{id}` | PUT | Uuendab elementi |
-| `/api/items/{id}` | DELETE | Kustutab elemendi |
+| `/api/items` | GET | Kõik kirjed |
+| `/api/items` | POST | Uue kirje loomine |
+| `/api/items/{id}` | GET | Konkreetne kirje |
+| `/api/items/{id}` | PUT | Kirje uuendamine |
+| `/api/items/{id}` | DELETE | Kirje kustutamine |
 
 ## Konfiguratsioon
 
@@ -204,14 +198,14 @@ azd env set MAX_REPLICAS 20
 
 ### Skaleerimise konfiguratsioon
 
-API skaleerub automaatselt HTTP liikluse alusel:
-- **Minimaalne replika arv**: 0 (skaleerub nullini, kui pole aktiivne)
-- **Maksimaalne replika arv**: 10
-- **Konkureerivad päringud replika kohta**: 50
+API skaleerub automaatselt HTTP liikluse põhjal:
+- **Minimaalne koopiate arv**: 0 (skaleerib nullini, kui pole koormust)
+- **Maksimaalne koopiate arv**: 10
+- **Konkurentsete päringute arv koopia kohta**: 50
 
-## Arendus
+## Arendamine
 
-### Käivita kohalikult
+### Käivita kohapeal
 
 ```bash
 # Paigalda sõltuvused
@@ -225,61 +219,64 @@ python app.py
 curl http://localhost:8000/health
 ```
 
-### Ehitamine ja testimine konteineris
+### Konteineri ehitus ja testimine
 
 ```bash
 # Ehita Dockeri pilt
 docker build -t flask-api:local ./src
 
-# Käivita konteiner kohapeal
+# Käivita konteiner lokaalselt
 docker run -p 8000:8000 flask-api:local
 
 # Testi konteinerit
 curl http://localhost:8000/health
 ```
 
-## Juurutamine
+## Juurutus
 
-### Täielik juurutamine
+### Täielik juurutus
 
 ```bash
 # Paigalda infrastruktuur ja rakendus
 azd up
 ```
 
-### Ainult koodi juurutamine
+### Ainult koodi juurutus
 
 ```bash
-# Paigalda ainult rakenduse kood (infrastruktuur muutmata)
+# Kasuta ainult rakenduse koodi juurutamist (taristu muutmata)
 azd deploy api
 ```
 
-### Konfiguratsiooni uuendamine
+### Konfiguratsiooni uuendus
 
 ```bash
 # Uuenda keskkonnamuutujaid
 azd env set API_KEY "new-api-key"
 
-# Paigalda uuesti uue konfiguratsiooniga
+# Taaspaiguta uue konfiguratsiooniga
 azd deploy api
 ```
 
-## Jälgimine
+## Monitooring
 
-### Vaata logisid
+### Logide vaatamine
 
 ```bash
-# Edasta reaalajas logisid
-azd logs api --follow
+# Voogesita reaalajas logisid, kasutades azd monitori
+azd monitor --logs
+
+# Või kasuta Azure CLI-d konteineri rakenduste jaoks:
+az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Vaata viimaseid 100 rida
-azd logs api --tail 100
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Jälgi mõõdikuid
+### Mõõdikute jälgimine
 
 ```bash
-# Ava Azure Monitori juhtpaneel
+# Ava Azure Monitori armatuurlaud
 azd monitor --overview
 
 # Vaata konkreetseid mõõdikuid
@@ -296,7 +293,7 @@ az monitor metrics list \
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-Oodatav vastus:
+Oodatud vastus:
 ```json
 {
   "status": "healthy",
@@ -304,7 +301,7 @@ Oodatav vastus:
 }
 ```
 
-### Elemendi loomine
+### Kirje loomine
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -312,7 +309,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Kõigi elementide kuvamine
+### Kõikide kirjete päring
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -320,43 +317,43 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Kulude optimeerimine
 
-See juurutamine kasutab nullini skaleerimist, seega maksad ainult siis, kui API töötleb päringuid:
+See juurutus kasutab skaleerimist nullini, seega maksad ainult siis, kui API töötleb päringuid:
 
-- **Tühikäigu kulu**: ~$0/kuus (skaleeritud nullini)
-- **Aktiivne kulu**: ~$0.000024/sekund replika kohta
-- **Eeldatav kuukulu** (kerge kasutus): $5-15
+- **Tühikäigu kulu**: ~0 $/kuu (skaleeritud nullini)
+- **Aktiivne kulu**: ~0.000024 $/sekund koopia kohta
+- **Oodatav kuu kulu** (kerge kasutus): 5-15 $
 
-### Kulude edasine vähendamine
+### Kulude veelgi vähendamine
 
 ```bash
-# Vähenda maksimaalsete replikaate arvu arenduses
+# Maksimaalsete koopiate arvu vähendamine arenduseks
 azd env set MAX_REPLICAS 3
 
-# Kasuta lühemat jõudeoleku ajavahemikku
+# Kasuta lühemat seisuaega
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutit
 ```
 
-## Tõrkeotsing
+## Probleemilahendus
 
 ### Konteiner ei käivitu
 
 ```bash
-# Kontrolli konteineri logisid
-azd logs api --tail 100
+# Kontrolli konteineri logisid, kasutades Azure CLI-d
+az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Kontrolli, kas Dockeri pilt ehitatakse kohapeal
+# Vea Docker pildi kohalikku ehitamist
 docker build -t test ./src
 ```
 
 ### API pole ligipääsetav
 
 ```bash
-# Kontrolli, et sisenemine on väline
+# Kontrolli, et sisenemine oleks väline
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### Kõrged vastuseajad
+### Kõrged latentsusajad
 
 ```bash
 # Kontrolli CPU/mälu kasutust
@@ -364,12 +361,12 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Suurenda ressursse, kui vaja
+# Suurenda ressursse vajadusel
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Puhastamine
+## Koristamine
 
 ```bash
 # Kustuta kõik ressursid
@@ -378,28 +375,28 @@ azd down --force --purge
 
 ## Järgmised sammud
 
-### Laienda seda näidet
+### Selle näite laiendamine
 
-1. **Lisa andmebaas** - Integreeri Azure Cosmos DB või SQL andmebaas
+1. **Lisa andmebaas** - integreeri Azure Cosmos DB või SQL andmebaas  
    ```bash
-   # Lisa Cosmos DB moodul infra/main.bicep faili
-   # Uuenda app.py andmebaasiühendusega
+   # Lisa Cosmos DB moodul infra/main.bicep failile
+   # Uuenda app.py faili andmebaasi ühendusega
    ```
 
-2. **Lisa autentimine** - Rakenda Azure AD või API võtmed
+2. **Lisa autentimine** - rakenda Azure AD või API võtmed  
    ```python
-   # Lisa autentimise vahend app.py-le
+   # Lisa autentimismiddleware app.py-sse
    from functools import wraps
    ```
 
-3. **Seadista CI/CD** - GitHub Actions töövoog
+3. **Seadista CI/CD** - GitHub Actions töövoog  
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Lisa hallatud identiteet** - Turvaline juurdepääs Azure teenustele
+4. **Lisa haldatud identiteet** - turvaline ligipääs Azure teenustele  
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -407,41 +404,41 @@ azd down --force --purge
 
 ### Seotud näited
 
-- **[Andmebaasi rakendus](../../../../../examples/database-app)** - Täielik näide SQL andmebaasiga
-- **[Mikroteenused](../../../../../examples/container-app/microservices)** - Mitme teenuse arhitektuur
-- **[Container Apps põhijuhend](../README.md)** - Kõik konteinerite mustrid
+- **[Andmebaasi rakendus](../../../../../examples/database-app)** - Täielik näide SQL andmebaasiga  
+- **[Mikroteenused](../../../../../examples/container-app/microservices)** - Mitme teenuse arhitektuur  
+- **[Container Apps meisterjuhend](../README.md)** - Kõik konteinerite mustrid
 
 ### Õppematerjalid
 
-- 📚 [AZD algajatele kursus](../../../README.md) - Peamine kursuse leht
-- 📚 [Container Apps mustrid](../README.md) - Rohkem juurutamise mustreid
+- 📚 [AZD algajatele kursus](../../../README.md) - Peamine kursuse kodu  
+- 📚 [Container Apps mustrid](../README.md) - Rohkem juurutuse mustreid  
 - 📚 [AZD mallide galerii](https://azure.github.io/awesome-azd/) - Kogukonna mallid
 
 ## Täiendavad ressursid
 
 ### Dokumentatsioon
-- **[Flask dokumentatsioon](https://flask.palletsprojects.com/)** - Flask raamistik juhend
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Ametlik Azure dokumentatsioon
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd käsu viide
+- **[Flaski dokumentatsioon](https://flask.palletsprojects.com/)** - Flask raamistik juhend  
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Azure ametlik dokumentatsioon  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd käsurea viide
 
-### Õpetused
-- **[Container Apps kiirstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Juuruta oma esimene rakendus
-- **[Python Azure'is](https://learn.microsoft.com/azure/developer/python/)** - Python arenduse juhend
-- **[Bicep keel](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktuur koodina
+### Juhendid
+- **[Container Apps kiire algus](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Sinu esimese rakenduse juurutus  
+- **[Python Azure'is](https://learn.microsoft.com/azure/developer/python/)** - Python arenduse juhend  
+- **[Bicep keel](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktuuri koodina
 
 ### Tööriistad
-- **[Azure portaal](https://portal.azure.com)** - Halda ressursse visuaalselt
+- **[Azure Portaal](https://portal.azure.com)** - Haldusliides ressursside jaoks  
 - **[VS Code Azure laiendus](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integratsioon
 
 ---
 
-**🎉 Palju õnne!** Oled juurutanud tootmisvalmis Flask API Azure Container Apps-i automaatse skaleerimise ja jälgimisega.
+**🎉 Palju õnne!** Sa oled juurutanud tootmiskõlbuliku Flask API Azure Container Apps keskkonda koos automaatse skaleerimise ja monitooringuga.
 
-**Küsimused?** [Ava probleem](https://github.com/microsoft/AZD-for-beginners/issues) või vaata [KKK](../../../resources/faq.md)
+**Küsimused?** [Ava probleem](https://github.com/microsoft/AZD-for-beginners/issues) või vaata [KKK-d](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame täpsust, palun pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks lugeda autoriteetseks allikaks. Kriitilise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse või valesti mõistmise eest, mis tuleneb selle tõlke kasutamisest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

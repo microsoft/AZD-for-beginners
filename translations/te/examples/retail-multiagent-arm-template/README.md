@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1a8d383064bdb1ee923677a145de53ea",
-  "translation_date": "2025-11-25T07:03:14+00:00",
-  "source_file": "examples/retail-multiagent-arm-template/README.md",
-  "language_code": "te"
-}
--->
 # రిటైల్ మల్టీ-ఏజెంట్ సొల్యూషన్ - ఇన్‌ఫ్రాస్ట్రక్చర్ టెంప్లేట్
 
 **5వ అధ్యాయం: ప్రొడక్షన్ డిప్లాయ్‌మెంట్ ప్యాకేజ్**

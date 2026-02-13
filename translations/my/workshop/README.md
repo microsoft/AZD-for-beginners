@@ -1,177 +1,170 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "390da1a5d0feb705fa0eb9940f6f3b27",
-  "translation_date": "2025-10-16T16:17:42+00:00",
-  "source_file": "workshop/README.md",
-  "language_code": "my"
-}
--->
 <div align="center">
-  <div style="background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); border: 2px solid #e55a2b;">
+  <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🚧 Workshop အဆောက်အအုံ ဆောက်လုပ်နေဆဲ 🚧
+      🎯 AZD သုံးသော AI ဖန်တီးသူများအတွက် လက်တွေ့ အလုပ်ရုံ
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>ဒီ Workshop ကို လက်ရှိ ဖွံ့ဖြိုးတိုးတက်မှုအဆင့်တွင် ရှိနေပါသည်။</strong><br>
-      အကြောင်းအရာများ မပြည့်စုံသို့မဟုတ် ပြောင်းလဲမှုများ ရှိနိုင်ပါသည်။ အပ်ဒိတ်များအတွက် မကြာမီ ပြန်လည်ကြည့်ပါ!
+      <strong>Azure Developer CLI ဖြင့် AI လျှောက်လွှာများ တည်ဆောက်ရန် အတွက် လက်တွေ့ လေ့ကျင့်ခန်း။</strong><br>
+      AZD template များနှင့် AI တပ်ဆင်ရေး workflow များကို ကျွမ်းကျင်စွာ သင်ယူနိုင်ရန် မော်ဂျူး 7 ခု ပြီးစီးပါ။
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 နောက်ဆုံး အပ်ဒိတ်: အောက်တိုဘာ 2025
+        📅 နောက်ဆုံး အပ်ဒိတ်: ဖေဖော်ဝါရီ 2026
       </span>
     </div>
   </div>
 </div>
 
-# AZD for AI Developers Workshop
+# AZD သုံးသော AI ဖန်တီးသူများအတွက် လက်တွေ့ အလုပ်ရုံ
 
-Azure Developer CLI (AZD) ကို အသုံးပြု၍ AI application များကို deploy လုပ်ခြင်းကို သင်ယူရန်အတွက် လက်တွေ့ Workshop သို့ ကြိုဆိုပါသည်။ ဒီ Workshop သည် AZD templates ကို နားလည်ရန် အောက်ပါ ၃ ချက်ဖြင့် ကူညီပေးပါသည်-
+AZD (Azure Developer CLI) ကို AI အပလီကေးရှင်းများ တပ်ဆင်ရာတွင် အထူး အလေးပေးပြီး လက်တွင်လုပ် လေ့ကျင့်နိုင်သော အလုပ်ရုံသို့ ကြိုဆိုပါသည်။ ဤအလုပ်ရုံသည် AZD template များကို သုံးလေ့လာရန် အောက်ပါ 3 ချန်အားဖြင့် ကူညီပေးပါသည်။
 
-1. **ရှာဖွေခြင်း** - သင့်အတွက် သင့်လျော်သော template ကို ရှာဖွေပါ။
-1. **Deploy လုပ်ခြင်း** - deploy လုပ်ပြီး အလုပ်လုပ်မှုကို အတည်ပြုပါ။
-1. **အပြောင်းအလဲလုပ်ခြင်း** - သင့်လိုအပ်ချက်အတိုင်း ပြင်ဆင်ပါ။
+1. **ရှာဖွေခြင်း (Discovery)** - သင့်အတွက် ကိုက်ညီသော template ကို ရှာပါ။
+1. **တပ်ဆင်ခြင်း (Deployment)** - တပ်ဆင်ပြီး အလုပ်လုပ်ကြောင်း စစ်ဆေးပါ။
+1. **စိတ်ကြိုက်ပြင်ဆင်ခြင်း (Customization)** - ပြင်ဆင်၍ သင့်အတိုင်း ပြုလုပ်ပါ!
 
-ဒီ Workshop အတွင်း Developer tools များနှင့် workflows များကိုလည်း မိတ်ဆက်ပေးမည်ဖြစ်ပြီး သင့် Development ခရီးစဉ်ကို ပိုမိုလွယ်ကူစေမည့် နည်းလမ်းများကို သင်ယူနိုင်ပါမည်။
+ဤအလုပ်ရုံတစ်လျှောက်တွင် core developer tools နှင့် workflow များကိုလည်း မိတ်ဆက်ပေးမည်ဖြစ်ပြီး သင်၏ end-to-end ဖန်တီးမှု ခရီးကို ပိုမိုလျှော့ချနိုင်စေရန် ကူညီပေးပါသည်။
 
 <br/>
 
 ## Browser-Based Guide
 
-Workshop သင်ခန်းစာများကို Markdown ဖြင့် ရေးသားထားပါသည်။ GitHub တွင် တိုက်ရိုက် navigation လုပ်နိုင်သလို - အောက်ပါ screenshot တွင် ပြထားသည့်အတိုင်း browser-based preview ကိုလည်း ဖွင့်နိုင်ပါသည်။
+အလုပ်ရုံသင်ခန်းစာများကို Markdown ဖိုင်များအနေနှင့် ထည့်သွင်းထားသည်။ GitHub မှတိုက်ရိုက် သွားရောက်ဖတ်ရှုနိုင်ပြီး - သို့မဟုတ် အောက်ပါ screenshot တုန်ပြအတိုင်း browser-based preview ကို ဖွင့်နိုင်သည်။
 
-![Workshop](../../../translated_images/my/workshop.75906f133e6f8ba0.webp)
+![အလုပ်ရုံ](../../../translated_images/my/workshop.75906f133e6f8ba0.webp)
 
-ဒီ option ကို အသုံးပြုရန် - repository ကို သင့် profile သို့ fork လုပ်ပြီး GitHub Codespaces ကို ဖွင့်ပါ။ VS Code terminal အလုပ်လုပ်နေသောအခါ အောက်ပါ command ကို ရိုက်ထည့်ပါ-
+ဤရွေးချယ်မှုကို အသုံးပြုရန် - သိုလှောင်တိုက် (repository) ကို သင့် profile သို့ fork ပြုလုပ်ပြီး GitHub Codespaces ကို ဖွင့်ပါ။ VS Code terminal လှတ်မိလျှင် အောက်ပါ command ကို ရိုက်ထည့်ပါ။
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-အချို့စက္ကန့်အတွင်း pop-up dialog တစ်ခုကို တွေ့ပါမည်။ `Open in browser` ကို ရွေးချယ်ပါ။ Web-based guide သည် browser tab အသစ်တွင် ဖွင့်ပါမည်။ ဒီ preview ၏ အကျိုးကျေးဇူးများမှာ-
+အချိန်အနည်းငယ်အတွင်း pop-up dialog တစ်ခု ပြရန် တွေ့ရမည်။ `Open in browser` ရွေးချယ်မှုကို ရွေးပါ။ ဝဘ်အခြေခံလမ်းညွှန်ကို ယင်းနောက် သစ်သစ် browser tab ဖြင့် ဖွင့်မည်။ ထို preview ၏ အကျိုးကျေးဇူးများအနက် အချို့မှာ -
 
-1. **Built-in search** - keyword များ သို့မဟုတ် သင်ခန်းစာများကို အလွယ်တကူ ရှာဖွေပါ။
-1. **Copy icon** - codeblocks အပေါ်တွင် hover လုပ်ပြီး ဒီ option ကို ရှာပါ။
-1. **Theme toggle** - အနက်ရောင်နှင့် အဖြူရောင် themes အကြား ပြောင်းပါ။
-1. **အကူအညီရယူရန်** - footer တွင် Discord icon ကို နှိပ်ပြီး ပူးပေါင်းပါ။
+1. **Built-in search** - keyword များ သို့ သင်ခန်းစာများကို အလျင်အမြန် ရှာဖွေရန်။
+1. **Copy icon** - codeblock များပေါ်တွင် ကိုးစိပ်၍ ဤရွေးချယ်မှုကို မြင်ရမည်။
+1. **Theme toggle** - အမှောင်နှင့် ပျော့ပြောင် အပြာရောင် ပုံစံများ ပြောင်းလဲနိုင်မှု။
+1. **Get help** - footer တွင် ရှိသော Discord အိုင်ကွန်ကို နှိပ်၍ ဝင်ရောက်ကူညီမှုယူနိုင်သည်။
 
 <br/>
 
-## Workshop Overview
+## အလုပ်ရုံ အနှစ်ချုပ်
 
-**ကြာမြင့်ချိန်:** ၃-၄ နာရီ  
-**အဆင့်:** Beginner မှ Intermediate  
-**လိုအပ်ချက်များ:** Azure, AI concepts, VS Code နှင့် command-line tools အပေါ် ရင်းနှီးမှု။
+**ကြာချိန်:** 3-4 နာရီ  
+**အဆင့်:** မစကန့်မှ အလယ်အလတ်အထိ  
+**လိုအပ်ချက်များ:** Azure, AI အလိုအလာများ၊ VS Code နှင့် command-line ကိရိယာများနှင့် သင်တတ်မှုရှိထားရန်။
 
-ဒီ Workshop သည် လက်တွေ့လုပ်ဆောင်ခြင်းမှတစ်ဆင့် သင်ယူရန် ရည်ရွယ်ထားသည်။ လေ့ကျင့်ခန်းများ ပြီးဆုံးပြီးပါက AZD For Beginners curriculum ကို ပြန်လည်သုံးသပ်ရန် အကြံပြုပါသည်။ Security နှင့် Productivity အကောင်းဆုံး လေ့ကျင့်မှုများကို ဆက်လက်လေ့လာနိုင်ပါသည်။
+ဤသည်မှာ လက်တွေ့လုပ်ဆောင်ကာ သင်ယူသည့် အလုပ်ရုံဖြစ်သည်။ လေ့ကျင့်မှုများကို ပြီးမြောက်သည့်အခါ AZD For Beginners သင်ရိုးအစီအစဉ်ကို ပြန်လည်ဆန်းစစ်ရန် အကြံပြုပါသည်၊ သို့မဟုတ် Security နှင့် Productivity အကောင်းဆုံးလက်ကျင့်စနစ်များကို လေ့လာလျက် ဆက်လက်တိုးတက်နိုင်မည်ဖြစ်သည်။
 
-| အချိန်| Module  | ရည်ရွယ်ချက် |
+| Time| Module  | Objective |
 |:---|:---|:---|
-| ၁၅ မိနစ် | [Introduction](docs/instructions/0-Introduction.md) | ရည်ရွယ်ချက်များကို နားလည်ရန် |
-| ၃၀ မိနစ် | [Select AI Template](docs/instructions/1-Select-AI-Template.md) | ရွေးချယ်မှုများကို ရှာဖွေပြီး စတင်ရန် | 
-| ၃၀ မိနစ် | [Validate AI Template](docs/instructions/2-Validate-AI-Template.md) | Azure တွင် default solution ကို deploy လုပ်ရန် |
-| ၃၀ မိနစ် | [Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | ဖွဲ့စည်းမှုနှင့် configuration ကို ရှာဖွေရန် |
-| ၃၀ မိနစ် | [Configure AI Template](docs/instructions/4-Configure-AI-Template.md) | ရရှိနိုင်သော features များကို စမ်းသပ်ရန် |
-| ၃၀ မိနစ် | [Customize AI Template](docs/instructions/5-Customize-AI-Template.md) | Template ကို သင့်လိုအပ်ချက်အတိုင်း ပြင်ဆင်ရန် |
-| ၃၀ မိနစ် | [Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) | Resources များကို ရှင်းလင်းပြီး ပြန်လွှတ်ရန် |
-| ၁၅ မိနစ် | [Wrap-Up & Next Steps](docs/instructions/7-Wrap-up.md) | သင်ခန်းစာများ၊ Workshop challenge |
+| 15 မိနစ် | [နိဒါန်း](docs/instructions/0-Introduction.md) | နိဒါန်း ပေး၍ ရည်မှန်းချက်များကို နားလည်စေခြင်း |
+| 30 မိနစ် | [AI Template ရွေးချယ်ခြင်း](docs/instructions/1-Select-AI-Template.md) | ရွေးချယ်စရာများကို စူးစမ်းပြီး စတင်ရန် template ရွေးခြင်း | 
+| 30 မိနစ် | [AI Template စစ်ဆေးခြင်း](docs/instructions/2-Validate-AI-Template.md) | ပုံမှန် ဖြေရှင်းချက်ကို Azure သို့ တပ်ဆင်ခြင်း |
+| 30 မိနစ် | [AI Template ဖယ်ရှင်းခွဲခြင်း](docs/instructions/3-Deconstruct-AI-Template.md) | ဖွဲ့စည်းပုံနှင့် ဖွဲ့စည်းထိန်းသိမ်းမှုကို စူးစမ်းခြင်း |
+| 30 မိနစ် | [AI Template ဖော်ဆောင်မှုများ ပြုပြင်ခြင်း](docs/instructions/4-Configure-AI-Template.md) | ရရှိနိုင်သော လက္ခဏာများကို ဖွင့်လှစ်၍ စမ်းသပ်ခြင်း |
+| 30 မိနစ် | [AI Template ကို ရိုးမပြောင်း ပြုပြင်ခြင်း](docs/instructions/5-Customize-AI-Template.md) | သင့်လိုအပ်ချက်အတိုင်း template ကို ကိုက်ညီစေရန် ပြုပြင်ခြင်း |
+| 30 မိနစ် | [ဘလော့ကျင်း အဆောက်အဦး ဖျက်ပစ်ခြင်း](docs/instructions/6-Teardown-Infrastructure.md) | အရင်းအမြစ်များကို ရှင်းလင်း၍ လွှတ်ပေးခြင်း |
+| 15 မိနစ် | [အနှစ်ချုပ် & နောက်တစ်ဆင့်များ](docs/instructions/7-Wrap-up.md) | သင်ယူရေး အရင်းအမြစ်များ၊ အလုပ်ရုံ စိန်ခေါ်မှု |
 
 <br/>
 
-## သင်လေ့လာနိုင်မည့်အရာများ
+## သင်ဘာတွေ သင်ယူနိုင်မလဲ
 
-AZD Template ကို Azure AI Foundry တွင် end-to-end development အတွက် အမျိုးမျိုးသော tool များနှင့် အခွင့်အာဏာများကို ရှာဖွေဖို့ learning sandbox အဖြစ် သတ်မှတ်ပါ။ Workshop ပြီးဆုံးသည့်အခါ သင့်အနေဖြင့် ဒီ context တွင် tool များနှင့် concepts များကို intuitive sense ရရှိထားမည်ဖြစ်သည်။
+AZD Template ကို Microsoft Foundry ပေါ်တွင် end-to-end ဖန်တီးမှုများအတွက် စူးစမ်းလေ့လာရန် တက်ကြွသော စမ်းသပ်ရန်ကွင်း (learning sandbox) အဖြစ် ထည့်သတ်ပါ။ ဤအလုပ်ရုံ အဆုံးတွင် သင်သည် ဤသက်ဆိုင်ရာ ကိရိယာများနှင့် အယူအဆများအပေါ် သဘောကို သိရှိထားနိုင်မည်။
 
-| Concept  | ရည်ရွယ်ချက် |
+| Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | Tool commands နှင့် workflows ကို နားလည်ရန် |
-| **AZD Templates**| Project ဖွဲ့စည်းမှုနှင့် config ကို နားလည်ရန် |
-| **Azure AI Agent**| Azure AI Foundry project ကို provision & deploy လုပ်ရန် |
-| **Azure AI Search**| Agent များနှင့် context engineering ကို enable လုပ်ရန် |
-| **Observability**| Tracing, monitoring နှင့် evaluations ကို ရှာဖွေရန် |
-| **Red Teaming**| Adversarial testing နှင့် mitigations ကို ရှာဖွေရန် |
+| **Azure Developer CLI** | ကိရိယာ အမိန့်များနှင့် workflow များကို နားလည်ခြင်း |
+| **AZD Templates**| ပရောဂျက် ဖွဲ့စည်းပုံနှင့် ဖော်ပြချက်များကို နားလည်ခြင်း |
+| **Azure AI Agent**| Microsoft Foundry ပရောဂျက်ကို provision နှင့် တပ်ဆင်ခြင်း  |
+| **Azure AI Search**| agents များဖြင့် context engineering ကို ဖွင့်လှစ်ခြင်း |
+| **Observability**| tracing၊ monitoring နှင့် အကဲဖြတ်မှုများကို စူးစမ်းခြင်း |
+| **Red Teaming**| ရန်သူအတိုက်အခိုက် စမ်းသပ်ခြင်းများနှင့် ထိန်းချုပ်နည်းများကို စူးစမ်းခြင်း |
 
 <br/>
 
-## Workshop Structure
+## အလုပ်ရုံ ဖွဲ့စည်းပုံ
 
-ဒီ Workshop သည် template ရှာဖွေမှုမှ စတင်ပြီး deployment, deconstruction, customization အထိ ခရီးစဉ်တစ်ခုအဖြစ် ဖွဲ့စည်းထားသည်။ [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template ကို အခြေခံထားသည်။
+ဤအလုပ်ရုံကို template ရှာဖွေခြင်းမှ စတင်ကာ တပ်ဆင်ခြင်း၊ ဖယ်ရှင်းခွဲခြင်းနှင့် စိတ်ကြိုက် ပြုပြင်ခြင်းများအား သင်ခန်းစာအဆင့်လိုက်ဖြင့် ခရီးအဖြစ် ဖွဲ့ထားသည် - အခြေခံ အစရှိသည့် template အနေဖြင့် တရားဝင် [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template ကို အသုံးပြုထားသည်။
 
-### [Module 1: Select AI Template](docs/instructions/1-Select-AI-Template.md) (၃၀ မိနစ်)
+### [Module 1: AI Template ရွေးချယ်ခြင်း](docs/instructions/1-Select-AI-Template.md) (30 မိနစ်)
 
-- AI Templates ဆိုတာဘာလဲ?
-- AI Templates ကို ဘယ်မှာ ရှာနိုင်မလဲ?
-- AI Agents ကို ဘယ်လို စတင်တည်ဆောက်နိုင်မလဲ?
-- **Lab**: GitHub Codespaces ဖြင့် Quickstart
+- AI Templates ဆိုတာ ဘာလဲ?
+- AI Templates များကို ဘယ်မှာ ရှာတွေ့နိုင်မလဲ?
+- AI Agents ဖန်တီးခြင်းကို ဘယ်လို စတင်လဲ?
+- **ဓါတ်ပုံ အထောက်အကူညီ (Lab)**: GitHub Codespaces ဖြင့် Quickstart
 
-### [Module 2: Validate AI Template](docs/instructions/2-Validate-AI-Template.md) (၃၀ မိနစ်)
+### [Module 2: AI Template စစ်ဆေးခြင်း](docs/instructions/2-Validate-AI-Template.md) (30 မိနစ်)
 
-- AI Template Architecture ဆိုတာဘာလဲ?
-- AZD Development Workflow ဆိုတာဘာလဲ?
-- AZD Development အတွက် အကူအညီကို ဘယ်လိုရယူနိုင်မလဲ?
-- **Lab**: AI Agents template ကို Deploy & Validate
+- AI Template အင်ဂျင်နီယာ ဖွဲ့စည်းပုံ ဆိုင်ရာ မည်သည်ကို ရှင်းပြပါ?
+- AZD Development Workflow ဆိုတာ ဘာလဲ?
+- AZD Development အတွက် အကူအညီကို ဘယ်လို ရယူနိုင်မလဲ?
+- **ဓါတ်ပုံ အထောက်အကူညီ (Lab)**: AI Agents template ကို တပ်ဆင်၍ စစ်ဆေးခြင်း
 
-### [Module 3: Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (၃၀ မိနစ်)
+### [Module 3: AI Template ဖယ်ရှင်းခွဲခြင်း](docs/instructions/3-Deconstruct-AI-Template.md) (30 မိနစ်)
 
-- `.azure/` တွင် သင့် environment ကို ရှာဖွေပါ။
-- `infra/` တွင် သင့် resource setup ကို ရှာဖွေပါ။
-- `azure.yaml` တွင် AZD configuration ကို ရှာဖွေပါ။
-- **Lab**: Environment Variables ကို ပြင်ဆင်ပြီး Redeploy လုပ်ပါ။
+- သင့်ပတ်ဝန်းကျင်ကို `.azure/` ထဲတွင် စူးစမ်းပါ 
+- သင့် resource စီမံထားမှုကို `infra/` တွင် စူးစမ်းပါ 
+- သင့် AZD ဖော်ပြချက်ကို `azure.yaml`s တွင် စူးစမ်းပါ
+- **ဓါတ်ပုံ အထောက်အကူညီ (Lab)**: Environment Variables များကို ပြင်ဆင်ပြီး ပြန်တပ်ဆင်ခြင်း
 
-### [Module 4: Configure AI Template](docs/instructions/4-Configure-AI-Template.md) (၃၀ မိနစ်)
-- ရှာဖွေပါ: Retrieval Augmented Generation
-- ရှာဖွေပါ: Agent Evaluation & Red Teaming
-- ရှာဖွေပါ: Tracing & Monitoring
-- **Lab**: AI Agent + Observability ကို ရှာဖွေပါ 
+### [Module 4: AI Template ဖော်ဆောင်မှုများ ပြုပြင်ခြင်း](docs/instructions/4-Configure-AI-Template.md) (30 မိနစ်)
+- စူးစမ်းပါ: Retrieval Augmented Generation
+- စူးစမ်းပါ: Agent အကဲဖြတ်ခြင်း နှင့် Red Teaming
+- စူးစမ်းပါ: Tracing နှင့် Monitoring
+- **ဓါတ်ပုံ အထောက်အကူညီ (Lab)**: AI Agent + Observability ကို စူးစမ်းခြင်း
 
-### [Module 5: Customize AI Template](docs/instructions/5-Customize-AI-Template.md) (၃၀ မိနစ်)
-- PRD ကို Scenario Requirements ဖြင့် သတ်မှတ်ပါ။
-- AZD အတွက် Environment Variables ကို Configure လုပ်ပါ။
-- Lifecycle Hooks ကို ထည့်သွင်းပြီး အပို tasks များကို Implement လုပ်ပါ။
-- **Lab**: Template ကို သင့် scenario အတွက် Customize လုပ်ပါ။
+### [Module 5: AI Template ကို စိတ်ကြိုက် ပြုပြင်ခြင်း](docs/instructions/5-Customize-AI-Template.md) (30 မိနစ်)
+- သတ်မှတ်ပါ: Scenario လိုအပ်ချက်များနှင့် PRD
+- ဖော်ပြပါ: AZD အတွက် Environment Variables များကို ပြင်ဆင်ခြင်း
+- အကောင်အထည်ဖော်ပါ: lifecycle hooks များဖြင့် လုပ်ငန်းများ ထည့်သွင်းခြင်း
+- **ဓါတ်ပုံ အထောက်အကူညီ (Lab)**: သင့်လေ့လာချက်အတွက် template ကို စိတ်ကြိုက် ပြင်ဆင်ခြင်း
 
-### [Module 6: Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) (၃၀ မိနစ်)
-- AZD Templates ဆိုတာဘာလဲဆိုတာ ပြန်လည်သုံးသပ်ပါ။
-- Azure Developer CLI ကို ဘာကြောင့် အသုံးပြုသင့်လဲဆိုတာ ပြန်လည်သုံးသပ်ပါ။
-- နောက်တစ်ခု template ကို စမ်းသပ်ပါ!
-- **Lab**: Infrastructure ကို Deprovision လုပ်ပြီး Cleanup လုပ်ပါ။
+### [Module 6: အဆောက်အဦး ဖျက်ပစ်ရေး](docs/instructions/6-Teardown-Infrastructure.md) (30 မိနစ်)
+- ပြန်လည်သတိပေးပါ: AZD Templates များ คือ ဘာလဲ?
+- ပြန်လည်သတိပေးပါ: Azure Developer CLI ကို ဘာကြောင့် သုံးသင့်သလဲ?
+- နောက်တစ်ဆင့်များ: မတူညီသော template တစ်ခုကို စမ်းသပ်ပါ!
+- **ဓါတ်ပုံ အထောက်အကူညီ (Lab)**: အဆောက်အဦးများကို deprovision နှင့် ရှင်းလင်းခြင်း
 
 <br/>
 
-## Workshop Challenge
+## အလုပ်ရုံ စိန်ခေါ်မှု
 
-ပိုမိုစိန်ခေါ်မှုများကို လုပ်ဆောင်လိုပါသလား? အောက်ပါ project အကြံပြုချက်များကို ကြည့်ပါ - သို့မဟုတ် သင့်အကြံများကို ကျွန်ုပ်တို့နှင့် မျှဝေပါ!!
+အပိုဆောင်း စိန်ခေါ်မှုများ လျှောက်ထားရန် စိတ်ဝင်စားပါသလား? ဤနေရာတွင် project အကြံပေးချက်များရှိသည် - သို့မဟုတ် သင့်စိတ်ကူးများကို ငါတို့နှင့် မျှဝေပါ!!
 
-| Project | ဖော်ပြချက် |
+| Project | Description |
 |:---|:---|
-|1. **Deconstruct A Complex AI Template** | ကျွန်ုပ်တို့ ဖော်ပြထားသော workflow နှင့် tools ကို အသုံးပြု၍ အခြား AI solution template ကို deploy, validate, customize လုပ်နိုင်မလား စမ်းသပ်ပါ။ _သင်ဘာတွေ သင်ယူနိုင်ခဲ့သလဲ?_|
-|2. **Customize With Your Scenario**  | အခြား scenario အတွက် PRD (Product Requirements Document) တစ်ခုရေးရန် ကြိုးစားပါ။ ထို့နောက် GitHub Copilot ကို သင့် template repo တွင် Agent Model ဖြင့် အသုံးပြုပြီး customization workflow ကို generate လုပ်ရန် တောင်းဆိုပါ။ _သင်ဘာတွေ သင်ယူနိုင်ခဲ့သလဲ? ဒီအကြံများကို ဘယ်လိုတိုးတက်အောင်လုပ်နိုင်မလဲ?_|
+|1. **ရှုပ်ထွေးသော AI Template တစ်ခု ဖယ်ရှင်းခွဲခြင်း** | ကျွန်ုပ်တို့ ဖော်ပြထားသည့် workflow နှင့် ကိရိယာများကို အသုံးပြုပြီး မည်သည့် အခြား AI solution template ကိုမဆို တပ်ဆင်၊ စစ်ဆေးနှင့် စိတ်ကြိုက်ပြုပြင်နိုင်ပါသလား စမ်းသပ်ပါ။ _ဘာတွေ သင်ယူရသလဲ?_|
+|2. **သင့် စာရင်းအင်း Scenario ဖြင့် စိတ်ကြိုက် ပြုပြင်ခြင်း**  | မတူညီသော scenario အတွက် PRD (Product Requirements Document) ရေးကြည့်ပါ။ ထို့နောက် Agent Model ထဲရှိ template repo တွင် GitHub Copilot ကို အသုံးပြု၍ customization workflow တစ်ခု တောင်းဆိုပါ။ _ဘာတွေ သင်ယူရသလဲ? ဤအကြံအစည်များကို ဘယ်လို တိုးတက်စေနိုင်မလဲ?_|
 | | |
 
-## အကြံပြုချက်ရှိပါသလား?
+## တုံ့ပြန်ချက်ရှိပါသလား?
 
-1. ဒီ repo တွင် issue တစ်ခု post လုပ်ပါ - `Workshop` ဟု tag လုပ်ပါ။
-1. Azure AI Foundry Discord ကို join လုပ်ပါ - သင့်အတူတူသူများနှင့် ချိတ်ဆက်ပါ။
+1. ဤ repo သို့ issue တင်ပါ - အကူအညီအဆင်ပြေစေရန် `Workshop` ဟူသော tag ဖြင့် စတင်သတ်မှတ်ပါ။
+1. Microsoft Foundry Discord သို့ ဝင်ပါ - သင့်အသိုင်းအဝိုင်းနှင့် ဆက်သွယ်ဆုံပါ။
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD For Beginners](../README.md)|
-| **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Azure AI Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](../../../workshop) |
+| **📚 သင်တန်း မူလစာမျက်နှာ**| [AZD For Beginners](../README.md)|
+| **📖 စာတမ်းများ** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 နောက်တစ်ဆင့်များ** | [အလုပ်ရုံ စတင်ရန်](../../../workshop) |
 | | |
 
 <br/>
 
 ---
 
-**အရင်:** [AI Troubleshooting Guide](../docs/troubleshooting/ai-troubleshooting.md) | **နောက်တစ်ခု:** [Lab 1: AZD Basics](../../../workshop/lab-1-azd-basics)
+**Navigation:** [หลักสูตรหลัก](../README.md) | [နိဒါန်း](docs/instructions/0-Introduction.md) | [Module 1: AI Template ရွေးချယ်ခြင်း](docs/instructions/1-Select-AI-Template.md)
 
-**AZD ဖြင့် AI applications တည်ဆောက်ရန် အသင့်ဖြစ်ပါပြီလား?**
+**AZD ဖြင့် AI လျှောက်လွှာများ တည်ဆောက်ရန် စတင်ရန် အသင့်ပါသလား?**
 
-[Begin Lab 1: AZD Foundations →](./lab-1-azd-basics/README.md)
+[အလုပ်ရုံ စတင်ပါ: နိဒါန်း →](docs/instructions/0-Introduction.md)
 
 ---
 
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+အသိပေးချက်:
+ဒီစာတမ်းကို AI ဘာသာပြန်စနစ်ဖြစ်သည့် [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်စေရန် ကြိုးပမ်းပါသဖြင့် သို့သော် အလိုအလျောက်ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် တိကျမှားယွင်းမှုများ ရှိနိုင်ကြောင်း ကျေးဇူးပြု၍ သတိပြုပါ။ မူလဘာသာဖြင့် ရရှိထားသော မူရင်းစာတမ်းကို အမှန်တကယ်ကိုယ်စားပြုသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ပရော်ဖက်ရှင်နယ် ဘာသာပြန်သူမှ ဘာသာပြန်ပေးခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာသည့် နားလည်မှုပျက်ကွက်ခြင်းများ သို့မဟုတ် မမှန်ကန်သော အဓိပ္ပာယ်ဖော်ပြချက်များအပေါ် ကျွန်ုပ်တို့သည် တာဝန်ယူမည်မဟုတ်ပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
