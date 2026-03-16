@@ -1,6 +1,6 @@
 # Capítulo 8: Patrones de Producción y Empresariales
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duración**: 2-3 hours | **⭐ Complejidad**: Avanzado
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 2-3 horas | **⭐ Complejidad**: Avanzado
 
 ---
 
@@ -8,63 +8,56 @@
 
 Este capítulo cubre patrones de despliegue listos para empresas, endurecimiento de seguridad, monitoreo y optimización de costos para cargas de trabajo de IA en producción.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
 Al completar este capítulo, usted:
-- Desplegar aplicaciones resilientes en múltiples regiones
-- Implementar patrones de seguridad empresariales
-- Configurar monitoreo integral
-- Optimizar costos a escala
-- Configurar canalizaciones CI/CD con AZD
+- Desplegará aplicaciones resilientes multi-región
+- Implementará patrones de seguridad empresariales
+- Configurará monitoreo integral
+- Optimizará costos a gran escala
+- Configurará pipelines CI/CD con AZD
 
 ---
 
 ## 📚 Lecciones
 
-| # | Lección | Descripción | Time |
+| # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
 | 1 | [Prácticas de IA en Producción](production-ai-practices.md) | Patrones de despliegue empresarial | 90 min |
 
 ---
 
-## 🚀 Lista de verificación de producción
+## 🚀 Lista de Verificación para Producción
 
-- [ ] Despliegue multirregión para resiliencia
+- [ ] Despliegue multi-región para resiliencia
 - [ ] Identidad administrada para autenticación (sin claves)
 - [ ] Application Insights para monitoreo
-- [ ] Presupuestos de costos y alertas configurados
+- [ ] Presupuestos y alertas de costos configurados
 - [ ] Escaneo de seguridad habilitado
-- [ ] Integración de canalización CI/CD
+- [ ] Integración de pipeline CI/CD
 - [ ] Plan de recuperación ante desastres
 
 ---
 
-## 🏗️ Patrones de arquitectura
+## 🏗️ Patrones de Arquitectura
 
-### Patrón 1: IA de microservicios
+### Patrón 1: Microservicios de IA
 
+```mermaid
+graph LR
+    Gateway[API Gateway] --> AI[Servicio de IA] --> Models[Modelos de Microsoft Foundry]
+    Gateway --> Auth[Servicio de Autenticación]
+    AI --> Data[Almacén de Datos]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Patrón 2: IA basada en eventos
 
-### Patrón 2: IA dirigida por eventos
-
+```mermaid
+graph LR
+    EventGrid[Cuadrícula de Eventos] --> Functions[Funciones] --> Pipeline[Tubería de IA]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Mejores prácticas de seguridad
+## 🔐 Mejores Prácticas de Seguridad
 
 ```bicep
 // Use managed identity
@@ -83,11 +76,11 @@ properties: {
 
 ---
 
-## 💰 Optimización de costos
+## 💰 Optimización de Costos
 
-| Estrategia | Ahorros |
+| Estrategia | Ahorro |
 |----------|---------|
-| Escalar a cero (Container Apps) | 60-80% |
+| Escalado a cero (Container Apps) | 60-80% |
 | Usar niveles de consumo para desarrollo | 50-70% |
 | Escalado programado | 30-50% |
 | Capacidad reservada | 20-40% |
@@ -103,13 +96,13 @@ az consumption budget create \
 
 ---
 
-## 📊 Configuración de monitoreo
+## 📊 Configuración de Monitoreo
 
 ```bash
 # Transmitir registros
 azd monitor --logs
 
-# Comprobar Application Insights
+# Consultar Application Insights
 azd monitor
 
 # Ver métricas
@@ -122,21 +115,21 @@ az monitor metrics list --resource <resource-id>
 
 | Dirección | Capítulo |
 |-----------|---------|
-| **Anterior** | [Capítulo 7: Solución de problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso completado** | [Course Home](../../README.md) |
+| **Anterior** | [Capítulo 7: Solución de Problemas](../chapter-07-troubleshooting/README.md) |
+| **Curso Completo** | [Inicio del Curso](../../README.md) |
 
 ---
 
-## 📖 Recursos relacionados
+## 📖 Recursos Relacionados
 
-- [Guía de agentes de IA](../chapter-02-ai-development/agents.md)
+- [Guía de Agentes de IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Soluciones multiagente](../chapter-05-multi-agent/README.md)
-- [Ejemplo de microservicios](../../examples/microservices/README.md)
+- [Soluciones Multi-Agente](../chapter-05-multi-agent/README.md)
+- [Ejemplo de Microservicios](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Descargo de responsabilidad:
-Este documento ha sido traducido utilizando el servicio de traducción automática por IA Co-op Translator (https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

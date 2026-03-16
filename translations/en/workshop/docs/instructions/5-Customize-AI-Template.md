@@ -118,7 +118,7 @@
 
 
 !!! quote "BY THE END OF THIS LAB YOU SHOULD HAVE"
-    - [ ] Defind your scenario requirements
+    - [ ] Defined your scenario requirements
     - [ ] Customized env variables (config)
     - [ ] Customized agent instructions (task)
     - [ ] Deployed the customized template (app)
@@ -175,8 +175,8 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configure primary chat model (gpt-4o as closest available to gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Configure primary chat model (gpt-4.1 as closest available to gpt-4.1)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
@@ -280,7 +280,7 @@ echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -465,6 +465,6 @@ This example demonstrates how the AZD template can be extended and customized fo
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

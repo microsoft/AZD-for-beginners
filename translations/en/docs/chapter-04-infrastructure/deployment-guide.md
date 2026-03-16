@@ -9,7 +9,7 @@
 
 ## Introduction
 
-This## Understanding the Deployment Processcomprehensive guide covers everything you need to know about deploying applications using Azure Developer CLI, from basic single-command deployments to advanced production scenarios with custom hooks, multiple environments, and CI/CD integration. Master the complete deployment lifecycle with practical examples and best practices.
+This comprehensive guide covers everything you need to know about deploying applications using Azure Developer CLI, from basic single-command deployments to advanced production scenarios with custom hooks, multiple environments, and CI/CD integration. Master the complete deployment lifecycle with practical examples and best practices.
 
 ## Learning Goals
 
@@ -689,7 +689,7 @@ echo "Full deployment: $(date)" > deployment-log.txt
 # Make a code change
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Deploy only code (fast)
+# Deploy code only (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -944,5 +944,5 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

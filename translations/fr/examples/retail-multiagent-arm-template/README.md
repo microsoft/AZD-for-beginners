@@ -1,114 +1,114 @@
-# Solution multi-agents pour le commerce de détail - Modèle d'infrastructure
+# Solution multi-agent Retail - Modèle d'infrastructure
 
 **Chapitre 5 : Package de déploiement en production**
-- **📚 Accueil du cours** : [AZD pour débutants](../../README.md)
-- **📖 Chapitre associé** : [Chapitre 5 : Solutions IA multi-agents](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Guide du scénario** : [Architecture complète](../retail-scenario.md)
-- **🎯 Déploiement rapide** : [Déploiement en un clic](../../../../examples/retail-multiagent-arm-template)
+- **📚 Page du cours**: [AZD For Beginners](../../README.md)
+- **📖 Chapitre connexe**: [Chapitre 5 : Solutions d'IA multi-agent](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Guide du scénario**: [Architecture complète](../retail-scenario.md)
+- **🎯 Déploiement rapide**: [Déploiement en un clic](../../../../examples/retail-multiagent-arm-template)
 
-> **⚠️ MODÈLE D'INFRASTRUCTURE UNIQUEMENT**  
-> Ce modèle ARM déploie des **ressources Azure** pour un système multi-agents.  
+> **⚠️ MODÈLE D'INFRASTRUCTURE SEULEMENT**  
+> Ce modèle ARM déploie des **ressources Azure** pour un système multi-agent.  
 >  
 > **Ce qui est déployé (15-25 minutes) :**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings dans 3 régions)
-> - ✅ Service de recherche IA (vide, prêt pour la création d'index)
-> - ✅ Applications conteneurs (images de remplacement, prêtes pour votre code)
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings across 3 regions)
+> - ✅ Service Azure AI Search (vide, prêt pour la création d'index)
+> - ✅ Container Apps (images de substitution, prêt pour votre code)
 > - ✅ Stockage, Cosmos DB, Key Vault, Application Insights
 >  
-> **Ce qui n'est PAS inclus (nécessite un développement) :**
-> - ❌ Code d'implémentation des agents (Agent client, Agent inventaire)
-> - ❌ Logique de routage et points de terminaison API
-> - ❌ Interface utilisateur de chat frontend
+> **Ce qui N'est PAS inclus (nécessite du développement) :**
+> - ❌ Code d'implémentation des agents (Customer Agent, Inventory Agent)
+> - ❌ Logique de routage et endpoints API
+> - ❌ Interface chat frontend
 > - ❌ Schémas d'index de recherche et pipelines de données
-> - ❌ **Effort de développement estimé : 80-120 heures**
+> - ❌ **Estimation de l'effort de développement : 80-120 heures**
 >  
 > **Utilisez ce modèle si :**
-> - ✅ Vous souhaitez provisionner une infrastructure Azure pour un projet multi-agents
-> - ✅ Vous prévoyez de développer séparément l'implémentation des agents
+> - ✅ Vous souhaitez provisionner l'infrastructure Azure pour un projet multi-agent
+> - ✅ Vous prévoyez de développer l'implémentation des agents séparément
 > - ✅ Vous avez besoin d'une base d'infrastructure prête pour la production
 >  
-> **Ne l'utilisez pas si :**
-> - ❌ Vous attendez une démonstration multi-agents fonctionnelle immédiatement
-> - ❌ Vous recherchez des exemples de code d'application complet
+> **N'utilisez pas si :**
+> - ❌ Vous attendez une démo multi-agent fonctionnelle immédiatement
+> - ❌ Vous recherchez des exemples complets de code applicatif
 
-## Aperçu
+## Vue d'ensemble
 
-Ce répertoire contient un modèle complet Azure Resource Manager (ARM) pour déployer la **fondation d'infrastructure** d'un système de support client multi-agents. Le modèle provisionne tous les services Azure nécessaires, correctement configurés et interconnectés, prêts pour le développement de votre application.
+Ce répertoire contient un modèle Azure Resource Manager (ARM) complet pour déployer la **fondation d'infrastructure** d'un système de support client multi-agent. Le modèle provisionne tous les services Azure nécessaires, correctement configurés et interconnectés, prêts pour le développement de votre application.
 
-**Après le déploiement, vous aurez :** Une infrastructure Azure prête pour la production  
-**Pour compléter le système, vous aurez besoin :** Du code des agents, de l'interface utilisateur frontend et de la configuration des données (voir [Guide d'architecture](../retail-scenario.md))
+**Après le déploiement, vous disposerez de :** Infrastructure Azure prête pour la production  
+**Pour compléter le système, vous avez besoin de :** Code des agents, UI frontend et configuration des données (voir [Guide d'architecture](../retail-scenario.md))
 
 ## 🎯 Ce qui est déployé
 
-### Infrastructure principale (Statut après déploiement)
+### Infrastructure principale (État après le déploiement)
 
-✅ **Services Azure OpenAI** (Prêts pour les appels API)
-  - Région principale : Déploiement GPT-4o (capacité de 20K TPM)
-  - Région secondaire : Déploiement GPT-4o-mini (capacité de 10K TPM)
-  - Région tertiaire : Modèle d'embeddings textuels (capacité de 30K TPM)
-  - Région d'évaluation : Modèle évaluateur GPT-4o (capacité de 15K TPM)
+✅ **Microsoft Foundry Models Services** (Prêt pour les appels API)
+  - Région principale : déploiement gpt-4.1 (capacité 20K TPM)
+  - Région secondaire : déploiement gpt-4.1-mini (capacité 10K TPM)
+  - Région tertiaire : modèle d'embeddings textuels (capacité 30K TPM)
+  - Région d'évaluation : modèle gradeur gpt-4.1 (capacité 15K TPM)
   - **Statut :** Entièrement fonctionnel - appels API possibles immédiatement
 
-✅ **Recherche IA Azure** (Vide - prêt pour la configuration)
+✅ **Azure AI Search** (Vide - prêt pour la configuration)
   - Capacités de recherche vectorielle activées
-  - Niveau standard avec 1 partition, 1 réplique
-  - **Statut :** Service opérationnel, mais nécessite la création d'index
-  - **Action requise :** Créer un index de recherche avec votre schéma
+  - Niveau Standard avec 1 partition, 1 réplique
+  - **Statut :** Service en cours d'exécution, mais nécessite la création d'un index
+  - **Action requise :** Créez un index de recherche avec votre schéma
 
-✅ **Compte de stockage Azure** (Vide - prêt pour les téléchargements)
-  - Conteneurs Blob : `documents`, `uploads`
-  - Configuration sécurisée (HTTPS uniquement, aucun accès public)
+✅ **Compte de stockage Azure** (Vide - prêt pour les uploads)
+  - Conteneurs blob : `documents`, `uploads`
+  - Configuration sécurisée (HTTPS uniquement, pas d'accès public)
   - **Statut :** Prêt à recevoir des fichiers
-  - **Action requise :** Télécharger vos données produits et documents
+  - **Action requise :** Téléversez vos données produits et documents
 
-⚠️ **Environnement d'applications conteneurs** (Images de remplacement déployées)
-  - Application de routage des agents (image par défaut nginx)
-  - Application frontend (image par défaut nginx)
-  - Configuration d'auto-scaling (0-10 instances)
+⚠️ **Environnement Container Apps** (Images de substitution déployées)
+  - Application routeur d'agents (image nginx par défaut)
+  - Application frontend (image nginx par défaut)
+  - Autoscaling configuré (0-10 instances)
   - **Statut :** Conteneurs de remplacement en cours d'exécution
-  - **Action requise :** Construire et déployer vos applications d'agents
+  - **Action requise :** Construisez et déployez vos applications d'agents
 
 ✅ **Azure Cosmos DB** (Vide - prêt pour les données)
-  - Base de données et conteneur préconfigurés
-  - Optimisé pour les opérations à faible latence
-  - TTL activé pour le nettoyage automatique
-  - **Statut :** Prêt à stocker l'historique des chats
+  - Base de données et conteneur pré-configurés
+  - Optimisé pour des opérations à faible latence
+  - TTL activé pour nettoyage automatique
+  - **Statut :** Prêt à stocker l'historique des conversations
 
 ✅ **Azure Key Vault** (Optionnel - prêt pour les secrets)
   - Suppression douce activée
   - RBAC configuré pour les identités gérées
   - **Statut :** Prêt à stocker les clés API et chaînes de connexion
 
-✅ **Application Insights** (Optionnel - surveillance active)
-  - Connecté à l'espace de travail Log Analytics
+✅ **Application Insights** (Optionnel - monitoring actif)
+  - Connecté à un espace de travail Log Analytics
   - Métriques personnalisées et alertes configurées
   - **Statut :** Prêt à recevoir la télémétrie de vos applications
 
-✅ **Intelligence documentaire** (Prêt pour les appels API)
-  - Niveau S0 pour les charges de travail en production
-  - **Statut :** Prêt à traiter les documents téléchargés
+✅ **Document Intelligence** (Prêt pour les appels API)
+  - Niveau S0 pour charges de travail en production
+  - **Statut :** Prêt à traiter les documents téléversés
 
-✅ **API Bing Search** (Prêt pour les appels API)
-  - Niveau S1 pour les recherches en temps réel
+✅ **Bing Search API** (Prêt pour les appels API)
+  - Niveau S1 pour recherches en temps réel
   - **Statut :** Prêt pour les requêtes de recherche web
 
 ### Modes de déploiement
 
-| Mode | Capacité OpenAI | Instances de conteneurs | Niveau de recherche | Redondance de stockage | Idéal pour |
-|------|-----------------|-------------------------|---------------------|-----------------------|------------|
-| **Minimal** | 10K-20K TPM | 0-2 répliques | Basique | LRS (Local) | Développement/test, apprentissage, preuve de concept |
-| **Standard** | 30K-60K TPM | 2-5 répliques | Standard | ZRS (Zone) | Production, trafic modéré (<10K utilisateurs) |
-| **Premium** | 80K-150K TPM | 5-10 répliques, redondance zonale | Premium | GRS (Géo) | Entreprise, trafic élevé (>10K utilisateurs), SLA 99,99% |
+| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
+|------|-----------------|---------------------|-------------|-------------------|----------|
+| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, learning, proof-of-concept |
+| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
+| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
 
 **Impact sur les coûts :**
-- **Minimal → Standard :** Augmentation des coûts ~4x (100-370 $/mois → 420-1 450 $/mois)
-- **Standard → Premium :** Augmentation des coûts ~3x (420-1 450 $/mois → 1 150-3 500 $/mois)
-- **Choisissez en fonction de :** Charge attendue, exigences SLA, contraintes budgétaires
+- **Minimal → Standard :** ~4x augmentation des coûts ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium :** ~3x augmentation des coûts ($420-1,450/mo → $1,150-3,500/mo)
+- **Choisir en fonction de :** Charge prévue, exigences SLA, contraintes budgétaires
 
-**Planification de la capacité :**
-- **TPM (Tokens Par Minute) :** Total sur tous les déploiements de modèles
-- **Instances de conteneurs :** Plage d'auto-scaling (répliques min-max)
-- **Niveau de recherche :** Impacte les performances des requêtes et les limites de taille des index
+**Planification de capacité :**
+- **TPM (Tokens Per Minute) :** Total à travers tous les déploiements de modèles
+- **Instances de conteneur :** Plage d'auto-scaling (min-max replicas)
+- **Niveau de recherche :** Impacte les performances de requête et les limites de taille d'index
 
 ## 📋 Prérequis
 
@@ -119,59 +119,59 @@ Ce répertoire contient un modèle complet Azure Resource Manager (ARM) pour dé
    az login      # Authentifier
    ```
 
-2. **Abonnement Azure actif** avec accès Propriétaire ou Contributeur
+2. **Abonnement Azure actif** avec accès Owner ou Contributor
    ```bash
    az account show  # Vérifier l'abonnement
    ```
 
 ### Quotas Azure requis
 
-Avant le déploiement, vérifiez les quotas suffisants dans vos régions cibles :
+Avant le déploiement, vérifiez que vous disposez de quotas suffisants dans vos régions cibles :
 
 ```bash
-# Vérifiez la disponibilité d'Azure OpenAI dans votre région
+# Vérifiez la disponibilité des modèles Microsoft Foundry dans votre région
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# Vérifiez le quota OpenAI (exemple pour gpt-4o)
+# Vérifiez le quota OpenAI (exemple pour gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# Vérifiez le quota des applications de conteneur
+# Vérifiez le quota des Container Apps
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
 **Quotas minimaux requis :**
-- **Azure OpenAI :** 3-4 déploiements de modèles dans plusieurs régions
-  - GPT-4o : 20K TPM (Tokens Par Minute)
-  - GPT-4o-mini : 10K TPM
+- **Microsoft Foundry Models :** 3-4 déploiements de modèles dans plusieurs régions
+  - gpt-4.1 : 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini : 10K TPM
   - text-embedding-ada-002 : 30K TPM
-  - **Remarque :** GPT-4o peut être en liste d'attente dans certaines régions - vérifiez [disponibilité des modèles](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Applications conteneurs :** Environnement géré + 2-10 instances de conteneurs
-- **Recherche IA :** Niveau standard (Basique insuffisant pour la recherche vectorielle)
-- **Cosmos DB :** Débit provisionné standard
+  - **Remarque :** gpt-4.1 peut être sur liste d'attente dans certaines régions - vérifiez la [disponibilité des modèles](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps :** Environnement géré + 2-10 instances de conteneur
+- **AI Search :** Niveau Standard (Basic insuffisant pour la recherche vectorielle)
+- **Cosmos DB :** Throughput provisionné standard
 
 **Si les quotas sont insuffisants :**
-1. Accédez au portail Azure → Quotas → Demander une augmentation
+1. Allez dans Azure Portal → Quotas → Request increase
 2. Ou utilisez Azure CLI :
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
 3. Envisagez des régions alternatives avec disponibilité
 
 ## 🚀 Déploiement rapide
 
-### Option 1 : Utilisation de Azure CLI
+### Option 1 : Utilisation d'Azure CLI
 
 ```bash
-# Cloner ou télécharger les fichiers modèles
+# Cloner ou télécharger les fichiers du modèle
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
@@ -189,7 +189,7 @@ chmod +x deploy.sh
 
 [![Déployer sur Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Option 3 : Utilisation directe de Azure CLI
+### Option 3 : Utiliser Azure CLI directement
 
 ```bash
 # Créer un groupe de ressources
@@ -202,37 +202,37 @@ az deployment group create \
   --parameters azuredeploy.parameters.json
 ```
 
-## ⏱️ Chronologie du déploiement
+## ⏱️ Chronologie de déploiement
 
 ### À quoi s'attendre
 
 | Phase | Durée | Ce qui se passe |
-|-------|-------|-----------------||
-| **Validation du modèle** | 30-60 secondes | Azure valide la syntaxe et les paramètres du modèle ARM |
-| **Configuration du groupe de ressources** | 10-20 secondes | Crée le groupe de ressources (si nécessaire) |
-| **Provisionnement OpenAI** | 5-8 minutes | Crée 3-4 comptes OpenAI et déploie les modèles |
-| **Applications conteneurs** | 3-5 minutes | Crée l'environnement et déploie les conteneurs de remplacement |
-| **Recherche et stockage** | 2-4 minutes | Provisionne le service de recherche IA et les comptes de stockage |
+|-------|----------|--------------||
+| **Template Validation** | 30-60 seconds | Azure valide la syntaxe du modèle ARM et les paramètres |
+| **Resource Group Setup** | 10-20 seconds | Crée le groupe de ressources (si nécessaire) |
+| **OpenAI Provisioning** | 5-8 minutes | Crée 3-4 comptes OpenAI et déploie les modèles |
+| **Container Apps** | 3-5 minutes | Crée l'environnement et déploie des conteneurs de substitution |
+| **Search & Storage** | 2-4 minutes | Provisionne le service AI Search et les comptes de stockage |
 | **Cosmos DB** | 2-3 minutes | Crée la base de données et configure les conteneurs |
-| **Configuration de la surveillance** | 2-3 minutes | Configure Application Insights et Log Analytics |
-| **Configuration RBAC** | 1-2 minutes | Configure les identités gérées et les permissions |
-| **Déploiement total** | **15-25 minutes** | Infrastructure complète prête |
+| **Monitoring Setup** | 2-3 minutes | Configure Application Insights et Log Analytics |
+| **RBAC Configuration** | 1-2 minutes | Configure les identités gérées et les permissions |
+| **Total Deployment** | **15-25 minutes** | Complete infrastructure ready |
 
 **Après le déploiement :**
-- ✅ **Infrastructure prête :** Tous les services Azure provisionnés et opérationnels
-- ⏱️ **Développement d'application :** 80-120 heures (votre responsabilité)
-- ⏱️ **Configuration des index :** 15-30 minutes (nécessite votre schéma)
-- ⏱️ **Téléchargement des données :** Variable selon la taille du dataset
-- ⏱️ **Tests et validation :** 2-4 heures
+- ✅ **Infrastructure prête :** Tous les services Azure provisionnés et en cours d'exécution
+- ⏱️ **Développement applicatif :** 80-120 heures (votre responsabilité)
+- ⏱️ **Configuration d'index :** 15-30 minutes (requiert votre schéma)
+- ⏱️ **Téléversement des données :** Variable selon la taille du jeu de données
+- ⏱️ **Tests & validation :** 2-4 heures
 
 ---
 
-## ✅ Vérification du succès du déploiement
+## ✅ Vérifier le succès du déploiement
 
-### Étape 1 : Vérifiez le provisionnement des ressources (2 minutes)
+### Étape 1 : Vérifier l'approvisionnement des ressources (2 minutes)
 
 ```bash
-# Vérifiez que toutes les ressources ont été déployées avec succès
+# Vérifier que toutes les ressources ont été déployées avec succès
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -241,7 +241,7 @@ az resource list \
 
 **Attendu :** Tableau vide (toutes les ressources affichent le statut "Succeeded")
 
-### Étape 2 : Vérifiez les déploiements Azure OpenAI (3 minutes)
+### Étape 2 : Vérifier les déploiements des Microsoft Foundry Models (3 minutes)
 
 ```bash
 # Lister tous les comptes OpenAI
@@ -262,13 +262,13 @@ az cognitiveservices account deployment list \
 ```
 
 **Attendu :** 
-- 3-4 comptes OpenAI (régions principale, secondaire, tertiaire, évaluation)
-- 1-2 déploiements de modèles par compte (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 3-4 comptes OpenAI (régions primaire, secondaire, tertiaire, d'évaluation)
+- 1-2 déploiements de modèles par compte (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### Étape 3 : Testez les points de terminaison de l'infrastructure (5 minutes)
+### Étape 3 : Tester les points de terminaison de l'infrastructure (5 minutes)
 
 ```bash
-# Obtenir les URL de l'application conteneur
+# Obtenir les URL de l'application Container
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
@@ -285,10 +285,10 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 ```
 
 **Attendu :** 
-- Les applications conteneurs affichent le statut "Running"
-- Nginx de remplacement répond avec HTTP 200 ou 404 (pas encore de code d'application)
+- Les Container Apps affichent le statut "Running"
+- Le nginx de substitution répond avec HTTP 200 ou 404 (pas de code applicatif encore)
 
-### Étape 4 : Vérifiez l'accès API Azure OpenAI (3 minutes)
+### Étape 4 : Vérifier l'accès API aux Microsoft Foundry Models (3 minutes)
 
 ```bash
 # Obtenir le point de terminaison et la clé OpenAI
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Tester le déploiement de GPT-4o
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Tester le déploiement de gpt-4.1
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,27 +312,27 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**Attendu :** Réponse JSON avec complétion de chat (confirme que OpenAI est fonctionnel)
+**Attendu :** Réponse JSON avec complétion de chat (confirme que OpenAI fonctionne)
 
 ### Ce qui fonctionne vs. ce qui ne fonctionne pas
 
 **✅ Fonctionne après le déploiement :**
-- Modèles Azure OpenAI déployés et acceptant les appels API
-- Service de recherche IA opérationnel (vide, pas encore d'index)
-- Applications conteneurs opérationnelles (images nginx de remplacement)
-- Comptes de stockage accessibles et prêts pour les téléchargements
+- Modèles Microsoft Foundry Models déployés et acceptant les appels API
+- Service AI Search en cours d'exécution (vide, pas d'index)
+- Container Apps en cours d'exécution (images nginx de substitution)
+- Comptes de stockage accessibles et prêts pour les uploads
 - Cosmos DB prêt pour les opérations de données
-- Application Insights collectant la télémétrie de l'infrastructure
+- Application Insights collectant la télémétrie d'infrastructure
 - Key Vault prêt pour le stockage des secrets
 
-**❌ Ne fonctionne pas encore (nécessite un développement) :**
-- Points de terminaison des agents (aucun code d'application déployé)
-- Fonctionnalité de chat (nécessite une implémentation frontend + backend)
+**❌ Pas encore fonctionnel (nécessite du développement) :**
+- Endpoints des agents (aucun code applicatif déployé)
+- Fonctionnalité de chat (nécessite frontend + backend)
 - Requêtes de recherche (aucun index de recherche créé)
-- Pipeline de traitement des documents (aucune donnée téléchargée)
-- Télémétrie personnalisée (nécessite l'instrumentation des applications)
+- Pipeline de traitement des documents (aucune donnée téléversée)
+- Télémétrie personnalisée (nécessite instrumentation applicative)
 
-**Prochaines étapes :** Voir [Configuration post-déploiement](../../../../examples/retail-multiagent-arm-template) pour développer et déployer votre application
+**Étapes suivantes :** Voir [Configuration post-déploiement](../../../../examples/retail-multiagent-arm-template) pour développer et déployer votre application
 
 ---
 
@@ -340,15 +340,15 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 
 ### Paramètres du modèle
 
-| Paramètre | Type | Valeur par défaut | Description |
-|-----------|------|-------------------|-------------|
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
 | `projectName` | string | "retail" | Préfixe pour tous les noms de ressources |
-| `location` | string | Emplacement du groupe de ressources | Région principale de déploiement |
-| `secondaryLocation` | string | "westus2" | Région secondaire pour le déploiement multi-régions |
+| `location` | string | Resource group location | Région de déploiement principale |
+| `secondaryLocation` | string | "westus2" | Région secondaire pour le déploiement multi-région |
 | `tertiaryLocation` | string | "francecentral" | Région pour le modèle d'embeddings |
 | `environmentName` | string | "dev" | Désignation de l'environnement (dev/staging/prod) |
 | `deploymentMode` | string | "standard" | Configuration de déploiement (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Activer le déploiement multi-régions |
+| `enableMultiRegion` | bool | true | Activer le déploiement multi-région |
 | `enableMonitoring` | bool | true | Activer Application Insights et la journalisation |
 | `enableSecurity` | bool | true | Activer Key Vault et la sécurité renforcée |
 
@@ -379,28 +379,19 @@ Modifiez `azuredeploy.parameters.json` :
 
 ## 🏗️ Aperçu de l'architecture
 
+```mermaid
+graph TD
+    Frontend[Interface frontale<br/>Application conteneurisée] --> Router[Routeur d'agents<br/>Application conteneurisée] --> Agents[Agents<br/>Client + Inventaire]
+    Router --> Search[Recherche IA<br/>Base de données vectorielle]
+    Router --> Models[Modèles Microsoft Foundry<br/>Multi-région]
+    Agents --> Storage[Stockage<br/>Documents]
+    Search --> CosmosDB[Cosmos DB<br/>Historique de chat]
+    Models --> AppInsights[App Insights<br/>Surveillance]
+    Storage --> KeyVault[Coffre de clés<br/>Secrets]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ## 📖 Utilisation du script de déploiement
 
-Le script `deploy.sh` offre une expérience de déploiement interactive :
+Le script `deploy.sh` fournit une expérience de déploiement interactive :
 
 ```bash
 # Afficher l'aide
@@ -409,7 +400,7 @@ Le script `deploy.sh` offre une expérience de déploiement interactive :
 # Déploiement de base
 ./deploy.sh -g myResourceGroup
 
-# Déploiement avancé avec paramètres personnalisés
+# Déploiement avancé avec des paramètres personnalisés
 ./deploy.sh \
   -g myProductionRG \
   -p companyname \
@@ -428,16 +419,16 @@ Le script `deploy.sh` offre une expérience de déploiement interactive :
 
 ### Fonctionnalités du script
 
-- ✅ **Validation des prérequis** (Azure CLI, statut de connexion, fichiers de modèle)
-- ✅ **Gestion des groupes de ressources** (création si inexistant)
+- ✅ **Validation des prérequis** (Azure CLI, état de connexion, fichiers de modèle)
+- ✅ **Gestion du groupe de ressources** (création si n'existe pas)
 - ✅ **Validation du modèle** avant le déploiement
-- ✅ **Suivi de progression** avec sortie colorée
-- ✅ **Affichage des résultats du déploiement**
-- ✅ **Guidance post-déploiement**
+- ✅ **Suivi de la progression** avec sortie colorée
+- ✅ **Affichage des sorties de déploiement**
+- ✅ **Guidage post-déploiement**
 
 ## 📊 Surveillance du déploiement
 
-### Vérifiez le statut du déploiement
+### Vérifier l'état du déploiement
 
 ```bash
 # Lister les déploiements
@@ -448,7 +439,7 @@ az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Surveiller la progression du déploiement
+# Suivre l'avancement du déploiement
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -456,49 +447,49 @@ az deployment group create \
   --verbose
 ```
 
-### Résultats du déploiement
+### Sorties de déploiement
 
-Après un déploiement réussi, les résultats suivants sont disponibles :
+Après un déploiement réussi, les sorties suivantes sont disponibles :
 
-- **URL frontend** : Point de terminaison public pour l'interface web
-- **URL du routeur** : Point de terminaison API pour le routeur des agents
-- **Points de terminaison OpenAI** : Points de terminaison des services OpenAI principaux et secondaires
-- **Service de recherche** : Point de terminaison du service de recherche IA Azure
-- **Compte de stockage** : Nom du compte de stockage pour les documents
+- **Frontend URL** : Point de terminaison public pour l'interface web
+- **Router URL** : Point de terminaison API pour le routeur d'agents
+- **OpenAI Endpoints** : Points de terminaison des services OpenAI primaire et secondaire
+- **Search Service** : Point de terminaison du service Azure AI Search
+- **Storage Account** : Nom du compte de stockage pour les documents
 - **Key Vault** : Nom du Key Vault (si activé)
-- **Application Insights** : Nom du service de surveillance (si activé)
+- **Application Insights** : Nom du service de monitoring (si activé)
 
-## 🔧 Post-déploiement : Prochaines étapes
-> **📝 Important :** L'infrastructure est déployée, mais vous devez développer et déployer le code de l'application.
+## 🔧 Post-déploiement : Étapes suivantes
+> **📝 Important:** L'infrastructure est déployée, mais vous devez développer et déployer le code de l'application.
 
-### Phase 1 : Développer les applications d'agent (Votre responsabilité)
+### Phase 1: Développer les applications d'agents (Votre responsabilité)
 
-Le modèle ARM crée des **Container Apps vides** avec des images nginx de remplacement. Vous devez :
+The ARM template creates **empty Container Apps** with placeholder nginx images. You must:
 
-**Développement requis :**
+**Développement requis:**
 1. **Implémentation des agents** (30-40 heures)
-   - Agent de service client avec intégration GPT-4o
-   - Agent d'inventaire avec intégration GPT-4o-mini
+   - Agent de service client avec intégration gpt-4.1
+   - Agent d'inventaire avec intégration gpt-4.1-mini
    - Logique de routage des agents
 
 2. **Développement Frontend** (20-30 heures)
-   - Interface utilisateur de chat (React/Vue/Angular)
-   - Fonctionnalité de téléchargement de fichiers
-   - Rendu et mise en forme des réponses
+   - Interface de chat UI (React/Vue/Angular)
+   - Fonctionnalité de téléversement de fichiers
+   - Rendu et formatage des réponses
 
-3. **Services Backend** (12-16 heures)
+3. **Services backend** (12-16 heures)
    - Routeur FastAPI ou Express
    - Middleware d'authentification
-   - Intégration de la télémétrie
+   - Intégration de télémétrie
 
-**Voir :** [Guide d'architecture](../retail-scenario.md) pour des modèles d'implémentation détaillés et des exemples de code
+See: [Guide d'architecture](../retail-scenario.md) for detailed implementation patterns and code examples
 
-### Phase 2 : Configurer l'index de recherche AI (15-30 minutes)
+### Phase 2: Configurer l'index de recherche IA (15-30 minutes)
 
-Créez un index de recherche correspondant à votre modèle de données :
+Create a search index matching your data model:
 
 ```bash
-# Obtenez les détails du service de recherche
+# Obtenir les détails du service de recherche
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -508,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# Créez un index avec votre schéma (exemple)
+# Créer un index avec votre schéma (exemple)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -529,16 +520,16 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
   }'
 ```
 
-**Ressources :**
-- [Conception du schéma d'index de recherche AI](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+**Ressources:**
+- [Conception du schéma d'index de recherche IA](https://learn.microsoft.com/azure/search/search-what-is-an-index)
 - [Configuration de la recherche vectorielle](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Phase 3 : Téléchargez vos données (Durée variable)
+### Phase 3: Téléversement de vos données (Durée variable)
 
-Une fois que vous avez les données produits et documents :
+Once you have product data and documents:
 
 ```bash
-# Obtenez les détails du compte de stockage
+# Obtenir les détails du compte de stockage
 STORAGE_NAME=$(az storage account list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -548,14 +539,14 @@ STORAGE_KEY=$(az storage account keys list \
   --resource-group myResourceGroup \
   --query "[0].value" -o tsv)
 
-# Téléchargez vos documents
+# Téléversez vos documents
 az storage blob upload-batch \
   --destination documents \
   --source /path/to/your/product/docs \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# Exemple : Téléchargez un fichier unique
+# Exemple : Téléversement d'un seul fichier
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -564,12 +555,12 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### Phase 4 : Construire et déployer vos applications (8-12 heures)
+### Phase 4: Construisez et déployez vos applications (8-12 heures)
 
-Une fois que vous avez développé le code de vos agents :
+Once you've developed your agent code:
 
 ```bash
-# 1. Créer un registre de conteneurs Azure (si nécessaire)
+# 1. Créer un registre Azure Container Registry (si nécessaire)
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
@@ -584,7 +575,7 @@ docker push myregistry.azurecr.io/agent-router:v1
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. Mettre à jour les applications de conteneurs avec vos images
+# 4. Mettre à jour les Container Apps avec vos images
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -606,7 +597,7 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### Phase 5 : Tester votre application (2-4 heures)
+### Phase 5: Testez votre application (2-4 heures)
 
 ```bash
 # Obtenez l'URL de votre application
@@ -615,7 +606,7 @@ ROUTER_URL=$(az containerapp show \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Tester le point de terminaison de l'agent (une fois votre code déployé)
+# Testez le point de terminaison de l'agent (une fois que votre code est déployé)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -630,50 +621,50 @@ az containerapp logs show \
   --follow
 ```
 
-### Ressources d'implémentation
+### Implementation Resources
 
-**Architecture et conception :**
-- 📖 [Guide complet d'architecture](../retail-scenario.md) - Modèles d'implémentation détaillés
-- 📖 [Modèles de conception multi-agents](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+**Architecture et conception:**
+- 📖 [Guide d'architecture complet](../retail-scenario.md) - Modèles d'implémentation détaillés
+- 📖 [Modèles de conception multi-agent](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
-**Exemples de code :**
-- 🔗 [Exemple de chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo) - Modèle RAG
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Framework d'agent (C#)
+**Exemples de code:**
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - patron RAG
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Framework d'agents (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Orchestration d'agents (Python)
 - 🔗 [AutoGen](https://github.com/microsoft/autogen) - Conversations multi-agents
 
-**Effort total estimé :**
-- Déploiement de l'infrastructure : 15-25 minutes (✅ Terminé)
-- Développement des applications : 80-120 heures (🔨 Votre travail)
-- Tests et optimisation : 15-25 heures (🔨 Votre travail)
+**Effort total estimé:**
+- Déploiement de l'infrastructure: 15-25 minutes (✅ Complete)
+- Développement des applications: 80-120 heures (🔨 Your work)
+- Tests et optimisation: 15-25 heures (🔨 Your work)
 
 ## 🛠️ Dépannage
 
 ### Problèmes courants
 
-#### 1. Quota Azure OpenAI dépassé
+#### 1. Quota Microsoft Foundry Models dépassé
 
 ```bash
 # Vérifier l'utilisation actuelle du quota
 az cognitiveservices usage list --location eastus2
 
-# Demander une augmentation de quota
+# Demander une augmentation du quota
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
 #### 2. Échec du déploiement des Container Apps
 
 ```bash
-# Vérifiez les journaux de l'application conteneur
+# Vérifier les journaux de l'application conteneurisée
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# Redémarrez l'application conteneur
+# Redémarrer l'application conteneurisée
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
@@ -695,12 +686,12 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
 ### Validation du déploiement
 
 ```bash
-# Valider que toutes les ressources sont créées
+# Vérifier que toutes les ressources sont créées
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Vérifier l'état de santé des ressources
+# Vérifier la santé des ressources
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -710,18 +701,18 @@ az resource list \
 ## 🔐 Considérations de sécurité
 
 ### Gestion des clés
-- Tous les secrets sont stockés dans Azure Key Vault (lorsqu'activé)
-- Les Container Apps utilisent une identité managée pour l'authentification
-- Les comptes de stockage ont des paramètres sécurisés par défaut (HTTPS uniquement, pas d'accès public aux blobs)
+- Tous les secrets sont stockés dans Azure Key Vault (lorsqu'il est activé)
+- Les Container Apps utilisent une identité gérée pour l'authentification
+- Les comptes de stockage ont des paramètres par défaut sécurisés (HTTPS uniquement, aucun accès public aux blobs)
 
 ### Sécurité réseau
 - Les Container Apps utilisent un réseau interne lorsque possible
-- Le service de recherche est configuré avec l'option des points de terminaison privés
+- Le service de recherche est configuré avec l'option de points de terminaison privés
 - Cosmos DB est configuré avec les permissions minimales nécessaires
 
 ### Configuration RBAC
 ```bash
-# Assigner les rôles nécessaires pour l'identité gérée
+# Attribuer les rôles nécessaires à l'identité gérée
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
@@ -733,12 +724,12 @@ az role assignment create \
 ### Estimations des coûts (mensuels, USD)
 
 | Mode | OpenAI | Container Apps | Recherche | Stockage | Total estimé |
-|------|--------|----------------|-----------|----------|--------------|
+|------|--------|----------------|--------|---------|------------|
 | Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
-### Suivi des coûts
+### Surveillance des coûts
 
 ```bash
 # Configurer des alertes budgétaires
@@ -753,9 +744,9 @@ az consumption budget create \
 
 ## 🔄 Mises à jour et maintenance
 
-### Mises à jour des modèles
-- Versionnez les fichiers de modèles ARM
-- Testez les modifications dans un environnement de développement d'abord
+### Mises à jour du modèle
+- Placez les fichiers du modèle ARM sous contrôle de version
+- Testez les modifications d'abord dans l'environnement de développement
 - Utilisez le mode de déploiement incrémental pour les mises à jour
 
 ### Mises à jour des ressources
@@ -769,25 +760,25 @@ az deployment group create \
 ```
 
 ### Sauvegarde et récupération
-- Sauvegarde automatique activée pour Cosmos DB
-- Suppression réversible activée pour Key Vault
-- Révisions des Container Apps maintenues pour un retour en arrière
+- Sauvegarde automatique de Cosmos DB activée
+- Soft delete de Key Vault activé
+- Les révisions des Container Apps sont conservées pour le rollback
 
 ## 📞 Support
 
-- **Problèmes de modèle :** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Support Azure :** [Portail de support Azure](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **Communauté :** [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Problèmes de template**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Support Azure**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Communauté**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ Prêt à déployer votre solution multi-agents ?**
+**⚡ Prêt à déployer votre solution multi-agent?**
 
-Commencez avec : `./deploy.sh -g myResourceGroup`
+Start with: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne sommes pas responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+Clause de non-responsabilité :
+Ce document a été traduit à l'aide du service de traduction par IA Co-op Translator (https://github.com/Azure/co-op-translator). Bien que nous fassions tout notre possible pour garantir l'exactitude, veuillez noter que les traductions automatiques peuvent comporter des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction professionnelle humaine est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou de mauvaises interprétations résultant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

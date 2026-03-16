@@ -37,6 +37,20 @@
 > This gives you everything you need to complete the course with a much faster download.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
+## 🆕 What's New in azd Today
+
+Azure Developer CLI has grown beyond traditional web apps and APIs. Today, azd is the single tool for deploying **any** application to Azure—including AI-powered applications and intelligent agents.
+
+Here's what that means for you:
+
+- **AI agents are now first-class azd workloads.** You can initialize, deploy, and manage AI agent projects using the same `azd init` → `azd up` workflow you already know.
+- **Microsoft Foundry integration** brings model deployment, agent hosting, and AI service configuration directly into the azd template ecosystem.
+- **The core workflow hasn't changed.** Whether you're deploying a todo app, a microservice, or a multi-agent AI solution, the commands are the same.
+
+If you've used azd before, AI support is a natural extension—not a separate tool or an advanced track. If you're starting fresh, you'll learn one workflow that works for everything.
+
+---
+
 ## 🚀 What is Azure Developer CLI (azd)?
 
 **Azure Developer CLI (azd)** is a developer-friendly command-line tool that makes it simple to deploy applications to Azure. Instead of manually creating and connecting dozens of Azure resources, you can deploy entire applications with a single command.
@@ -110,7 +124,7 @@ Don't start from scratch! **Awesome AZD** is the community collection of ready-t
 ### Popular AI Templates from Awesome AZD
 
 ```bash
-# RAG Chat with Azure OpenAI + AI Search
+# RAG Chat with Microsoft Foundry Models + AI Search
 azd init --template azure-search-openai-demo
 
 # Quick AI Chat Application
@@ -287,20 +301,6 @@ azd down --force --purge  # Cleans up resources
 **📊 Time Investment:** 30-45 minutes  
 **📈 Skill Level After:** Can deploy basic applications independently
 
-**✅ Success Validation:**
-```bash
-# After completing Chapter 1, you should be able to:
-azd version              # Shows installed version
-azd init --template todo-nodejs-mongo  # Initializes project
-azd up                  # Deploys to Azure
-azd show                # Displays running app URL
-# Application opens in browser and works
-azd down --force --purge  # Cleans up resources
-```
-
-**📊 Time Investment:** 30-45 minutes  
-**📈 Skill Level After:** Can deploy basic applications independently
-
 ---
 
 ### 🤖 Chapter 2: AI-First Development (Recommended for AI Developers)
@@ -354,20 +354,20 @@ azd down --force --purge
 #### 💰 Cost Considerations for AI Deployments
 
 **Development Environment (Estimated $80-150/month):**
-- Azure OpenAI (Pay-as-you-go): $0-50/month (based on token usage)
+- Microsoft Foundry Models (Pay-as-you-go): $0-50/month (based on token usage)
 - AI Search (Basic tier): $75/month
 - Container Apps (Consumption): $0-20/month
 - Storage (Standard): $1-5/month
 
 **Production Environment (Estimated $300-3,500+/month):**
-- Azure OpenAI (PTU for consistent performance): $3,000+/month OR Pay-as-go with high volume
+- Microsoft Foundry Models (PTU for consistent performance): $3,000+/month OR Pay-as-you-go with high volume
 - AI Search (Standard tier): $250/month
 - Container Apps (Dedicated): $50-100/month
 - Application Insights: $5-50/month
 - Storage (Premium): $10-50/month
 
 **💡 Cost Optimization Tips:**
-- Use **Free Tier** Azure OpenAI for learning (50,000 tokens/month included)
+- Use **Free Tier** Microsoft Foundry Models for learning (Azure OpenAI 50,000 tokens/month included)
 - Run `azd down` to deallocate resources when not actively developing
 - Start with consumption-based billing, upgrade to PTU only for production
 - Use `azd provision --preview` to estimate costs before deployment
@@ -535,7 +535,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 
 ## 🎓 Workshop Overview: Hands-On Learning Experience
 
-> **⚠️ WORKSHOP STATUS: Active Development**
+> **⚠️ WORKSHOP STATUS: Active Development**  
 > The workshop materials are currently being developed and refined. Core modules are functional, but some advanced sections are incomplete. We're actively working to complete all content. [Track progress →](workshop/README.md)
 
 ### Interactive Workshop Materials
@@ -623,7 +623,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 
 **Why AZD for AI Solutions?** AZD addresses the top challenges AI developers face:
 
-- **AI-Ready Templates** - Pre-configured templates for Azure OpenAI, Cognitive Services, and ML workloads
+- **AI-Ready Templates** - Pre-configured templates for Microsoft Foundry Models, Cognitive Services, and ML workloads
 - **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints  
 - **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
 - **End-to-End AI Workflows** - From model development to production deployment with proper monitoring
@@ -722,6 +722,12 @@ Beyond the basics, AZD provides powerful features for production deployments:
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Azure Status](https://status.azure.com/)
 
+### AI Agent Skills for Your Editor
+- [**Microsoft Azure Skills on skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - 37 open agent skills for Azure AI, Foundry, deployment, diagnostics, cost optimization, and more. Install them in GitHub Copilot, Cursor, Claude Code, or any supported agent:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
+
 ---
 
 ## 🔧 Quick Troubleshooting Guide
@@ -764,6 +770,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az account show
 ```
 </details>
+
 <details>
 <summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
@@ -784,17 +791,17 @@ azd up
 <summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
-# Option 1: Clean and retry
+# Opcion 1: Limpiar y reintentar
 azd down --force --purge
 azd up
 
-# Option 2: Just fix infrastructure
+# Opcion 2: Solo arreglar la infraestructura
 azd provision
 
-# Option 3: Check detailed status
+# Opcion 3: Comprobar el estado detallado
 azd show
 
-# Option 4: Check logs in Azure Monitor
+# Opcion 4: Revisar los registros en Azure Monitor
 azd monitor --logs
 ```
 </details>
@@ -1010,6 +1017,6 @@ Our team produces other comprehensive learning courses:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

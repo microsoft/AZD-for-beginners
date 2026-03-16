@@ -43,25 +43,18 @@ By completing this chapter, you will:
 
 ### Pattern 1: Microservices AI
 
+```mermaid
+graph LR
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Pattern 2: Event-Driven AI
 
+```mermaid
+graph LR
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Security Best Practices
@@ -137,6 +130,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,42 +1,42 @@
-# 4. Configurez un Modèle
+# 4. Configurer un modèle
 
-!!! tip "À LA FIN DE CE MODULE, VOUS SEREZ CAPABLE DE"
+!!! tip "À LA FIN DE CE MODULE, VOUS SAUREZ"
 
-    - [ ] Comprendre le but du fichier `azure.yaml`
-    - [ ] Comprendre la structure du fichier `azure.yaml`
-    - [ ] Comprendre la valeur des `hooks` du cycle de vie azd
-    - [ ] **Lab 4 :** Explorer et modifier les variables d’environnement
-
----
-
-!!! prompt "Que fait le fichier `azure.yaml` ? Utilisez une zone de code et expliquez-le ligne par ligne"
-
-      Le fichier `azure.yaml` est le **fichier de configuration pour Azure Developer CLI (azd)**. Il définit comment votre application doit être déployée sur Azure, incluant l'infrastructure, les services, les hooks de déploiement et les variables d’environnement.
+    - [ ] Comprendre l'objectif de `azure.yaml`
+    - [ ] Comprendre la structure de `azure.yaml`
+    - [ ] Comprendre l'intérêt des `hooks` du cycle de vie d'azd
+    - [ ] **Laboratoire 4 :** Explorer et modifier les variables d'environnement
 
 ---
 
-## 1. But et Fonctionnalité
+!!! prompt "Que fait le fichier `azure.yaml` ? Utilisez un bloc de code et expliquez-le ligne par ligne"
 
-Ce fichier `azure.yaml` sert de **plan de déploiement** pour une application d’agent IA qui :
+      Le fichier `azure.yaml` est le **fichier de configuration pour Azure Developer CLI (azd)**. Il définit comment votre application doit être déployée sur Azure, notamment l'infrastructure, les services, les hooks de déploiement et les variables d'environnement.
 
-1. **Valide l’environnement** avant le déploiement
-2. **Provisionne des services Azure AI** (AI Hub, AI Project, Search, etc.)
-3. **Déploie une application Python** dans Azure Container Apps
-4. **Configure les modèles IA** pour les fonctionnalités chat et embedding
-5. **Configure la surveillance et le traçage** pour l’application IA
-6. **Gère les scénarios de projet IA Azure nouveaux et existants**
+---
 
-Le fichier permet un **déploiement en une seule commande** (`azd up`) d’une solution complète d’agent IA avec validation, provisionnement et configuration post-déploiement adéquates.
+## 1. Objectif et fonctionnalité
 
-??? info "Développer pour voir : `azure.yaml`"
+Ce fichier `azure.yaml` sert de **plan de déploiement** pour une application d'agent IA qui :
 
-      Le fichier `azure.yaml` définit comment Azure Developer CLI doit déployer et gérer cette application d’agent IA dans Azure. Décortiquons-le ligne par ligne.
+1. **Valide l'environnement** avant le déploiement
+2. **Provisionne les services Azure AI** (AI Hub, AI Project, Search, etc.)
+3. **Déploie une application Python** sur Azure Container Apps
+4. **Configure les modèles d'IA** pour les fonctionnalités de chat et d'embedding
+5. Met en place la surveillance et le traçage pour l'application IA
+6. **Gère à la fois les scénarios de projets Azure AI nouveaux et existants**
+
+Le fichier permet un **déploiement en une seule commande** (`azd up`) d'une solution complète d'agent IA avec une validation, un provisionnement et une configuration post-déploiement appropriés.
+
+??? info "Développer pour afficher : `azure.yaml`"
+
+      Le fichier `azure.yaml` définit comment Azure Developer CLI doit déployer et gérer cette application d'agent IA sur Azure. Décomposons-le ligne par ligne.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: avons-nous besoin de hooks ? 
-      # TODO: avons-nous besoin de toutes les variables ?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -126,19 +126,19 @@ Le fichier permet un **déploiement en une seule commande** (`azd up`) d’une s
 
 ---
 
-## 2. Déconstruction Du Fichier
+## 2. Déconstruction du fichier
 
-Passons en revue chaque section du fichier pour comprendre ce qu’elle fait et pourquoi.
+Parcourons le fichier section par section pour comprendre ce qu'il fait et pourquoi.
 
-### 2.1 **En-tête et Schéma (1-3)**
+### 2.1 **En-tête et schéma (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Ligne 1** : Fournit la validation de schéma YAML language server pour le support IDE et IntelliSense
+- **Ligne 1** : Fournit la validation du schéma pour le serveur de langage YAML afin de supporter l'IDE et IntelliSense
 
-### 2.2 Métadonnées du Projet (5-10)
+### 2.2 Métadonnées du projet (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -149,10 +149,10 @@ requiredVersions:
 ```
 
 - **Ligne 5** : Définit le nom du projet utilisé par Azure Developer CLI
-- **Lignes 6-7** : Spécifie que c’est basé sur un modèle version 1.0.2
-- **Lignes 8-9** : Requiert Azure Developer CLI version 1.14.0 ou supérieure
+- **Lignes 6-7** : Indique que cela est basé sur un template version 1.0.2
+- **Lignes 8-9** : Exige Azure Developer CLI version 1.14.0 ou supérieure
 
-### 2.3 Hooks de Déploiement (11-40)
+### 2.3 Hooks de déploiement (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -169,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Lignes 11-20** : **Hook pré-déploiement** – s’exécute avant `azd up`
+- **Lignes 11-20** : **Hook pré-déploiement** - s'exécute avant `azd up`
 
-      - Sur Unix/Linux : Rend le script de validation exécutable et l’exécute
-      - Sur Windows : Exécute le script PowerShell de validation
-      - Les deux sont interactifs et interrompent le déploiement en cas d’échec
+      - Sur Unix/Linux : Rend le script de validation exécutable et l'exécute
+      - Sur Windows : Exécute le script de validation PowerShell
+      - Les deux sont interactifs et arrêteront le déploiement s'ils échouent
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -188,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lignes 21-30** : **Hook post-provisionnement** – s’exécute après la création des ressources Azure
+- **Lignes 21-30** : **Hook post-provisionnement** - s'exécute après la création des ressources Azure
 
-  - Exécute les scripts d’écriture des variables d’environnement
-  - Continue le déploiement même si ces scripts échouent (`continueOnError: true`)
+  - Exécute des scripts d'écriture des variables d'environnement
+  - Poursuit le déploiement même si ces scripts échouent (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -206,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lignes 31-40** : **Hook post-déploiement** – s’exécute après le déploiement de l’application
+- **Lignes 31-40** : **Hook post-déploiement** - s'exécute après le déploiement de l'application
 
   - Exécute les scripts de configuration finale
-  - Continue même en cas d’échec des scripts
+  - Poursuit même si les scripts échouent
 
-### 2.4 Configuration du Service (41-48)
+### 2.4 Configuration du service (41-48)
 
-Cette section configure le service applicatif que vous déployez.
+Cela configure le service d'application que vous déployez.
 
 ```yaml title="" linenums="0"
 services:
@@ -227,17 +227,17 @@ services:
 ```
 
 - **Ligne 42** : Définit un service nommé "api_and_frontend"
-- **Ligne 43** : Cible le dossier `./src` pour le code source
+- **Ligne 43** : Pointe vers le répertoire `./src` pour le code source
 - **Ligne 44** : Spécifie Python comme langage de programmation
-- **Ligne 45** : Utilise Azure Container Apps comme plateforme d’hébergement
+- **Ligne 45** : Utilise Azure Container Apps comme plateforme d'hébergement
 - **Lignes 46-48** : Configuration Docker
 
-      - Utilise "api_and_frontend" comme nom d’image
-      - Construit l’image Docker à distance dans Azure (pas localement)
+      - Utilise "api_and_frontend" comme nom d'image
+      - Construit l'image Docker à distance dans Azure (pas localement)
 
-### 2.5 Variables de Pipeline (49-76)
+### 2.5 Variables de pipeline (49-76)
 
-Ce sont des variables pour vous aider à exécuter `azd` dans des pipelines CI/CD pour automatisation
+Ce sont des variables pour vous aider à exécuter `azd` dans des pipelines CI/CD pour l'automatisation
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -278,95 +278,95 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Cette section définit les variables d’environnement utilisées **pendant le déploiement**, organisées par catégorie :
+Cette section définit les variables d'environnement utilisées **pendant le déploiement**, organisées par catégorie :
 
-- **Noms de ressources Azure (Lignes 51-60)** :
-      - Noms des ressources de services Azure de base, par ex. : Groupe de ressources, AI Hub, AI Project, etc.
-- **Flags de fonctionnalités (Lignes 61-63)** :
+- **Azure Resource Names (Lines 51-60)**:
+      - Noms des ressources Azure principales, par ex., Resource Group, AI Hub, AI Project, etc.- 
+- **Feature Flags (Lines 61-63)**:
       - Variables booléennes pour activer/désactiver des services Azure spécifiques
-- **Configuration de l’Agent IA (Lignes 64-71)** :
-      - Configuration de l’agent IA principal incluant nom, ID, paramètres de déploiement, détails du modèle
-- **Configuration d’Embedding IA (Lignes 72-79)** :
-      - Configuration du modèle d’embedding utilisé pour la recherche vectorielle
-- **Recherche et Surveillance (Lignes 80-84)** :
-      - Nom de l’index de recherche, IDs de ressources existantes, et paramètres de surveillance/traçage
+- **AI Agent Configuration (Lines 64-71)**:
+      - Configuration de l'agent IA principal incluant nom, ID, paramètres de déploiement, détails du modèle- 
+- **AI Embedding Configuration (Lines 72-79)**:
+      - Configuration pour le modèle d'embedding utilisé pour la recherche vectorielle
+- **Search and Monitoring (Lines 80-84)**:
+      - Nom de l'index de recherche, IDs de ressources existantes, et paramètres de supervision/traçage
 
 ---
 
-## 3. Connaître les Variables d’Environnement
-Les variables d’environnement suivantes contrôlent la configuration et le comportement de votre déploiement, organisées par leur but principal. La plupart des variables ont des valeurs par défaut raisonnables, mais vous pouvez les personnaliser pour correspondre à vos besoins spécifiques ou ressources Azure existantes.
+## 3. Connaître les variables d'environnement
+Les variables d'environnement suivantes contrôlent la configuration et le comportement de votre déploiement, organisées selon leur objectif principal. La plupart des variables ont des valeurs par défaut raisonnables, mais vous pouvez les personnaliser pour correspondre à vos besoins spécifiques ou aux ressources Azure existantes.
 
-### 3.1 Variables Requises
+### 3.1 Variables requises 
 
 ```bash title="" linenums="0"
-# Configuration de base Azure
-AZURE_ENV_NAME                    # Nom de l'environnement (utilisé dans la dénomination des ressources)
+# Configuration Azure principale
+AZURE_ENV_NAME                    # Nom de l'environnement (utilisé dans le nommage des ressources)
 AZURE_LOCATION                    # Région de déploiement
 AZURE_SUBSCRIPTION_ID             # Abonnement cible
 AZURE_RESOURCE_GROUP              # Nom du groupe de ressources
-AZURE_PRINCIPAL_ID                # Principal utilisateur pour RBAC
+AZURE_PRINCIPAL_ID                # Principal d'utilisateur pour RBAC
 
 # Noms des ressources (générés automatiquement si non spécifiés)
 AZURE_AIHUB_NAME                  # Nom du hub Microsoft Foundry
-AZURE_AIPROJECT_NAME              # Nom du projet IA
-AZURE_AISERVICES_NAME             # Nom du compte des services IA
+AZURE_AIPROJECT_NAME              # Nom du projet d'IA
+AZURE_AISERVICES_NAME             # Nom du compte des services d'IA
 AZURE_STORAGE_ACCOUNT_NAME        # Nom du compte de stockage
 AZURE_CONTAINER_REGISTRY_NAME     # Nom du registre de conteneurs
 AZURE_KEYVAULT_NAME               # Nom du Key Vault (si utilisé)
 ```
 
-### 3.2 Configuration du Modèle
+### 3.2 Configuration du modèle 
 ```bash title="" linenums="0"
 # Configuration du modèle de chat
-AZURE_AI_AGENT_MODEL_NAME         # Par défaut : gpt-4o-mini
+AZURE_AI_AGENT_MODEL_NAME         # Par défaut : gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Par défaut : OpenAI (ou Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Par défaut : dernière version disponible
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Nom de déploiement pour le modèle de chat
+AZURE_AI_AGENT_MODEL_VERSION      # Par défaut : la dernière disponible
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Nom du déploiement pour le modèle de chat
 AZURE_AI_AGENT_DEPLOYMENT_SKU     # Par défaut : Standard
 AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Par défaut : 80 (milliers de TPM)
 
-# Configuration du modèle d'intégration
+# Configuration du modèle d'embedding
 AZURE_AI_EMBED_MODEL_NAME         # Par défaut : text-embedding-3-small
 AZURE_AI_EMBED_MODEL_FORMAT       # Par défaut : OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Par défaut : dernière version disponible
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Nom de déploiement pour les intégrations
+AZURE_AI_EMBED_MODEL_VERSION      # Par défaut : la dernière disponible
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Nom du déploiement pour les embeddings
 AZURE_AI_EMBED_DEPLOYMENT_SKU     # Par défaut : Standard
 AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Par défaut : 50 (milliers de TPM)
 
 # Configuration de l'agent
-AZURE_AI_AGENT_NAME               # Nom affiché de l'agent
-AZURE_EXISTING_AGENT_ID           # Utiliser un agent existant (optionnel)
+AZURE_AI_AGENT_NAME               # Nom d'affichage de l'agent
+AZURE_EXISTING_AGENT_ID           # Utiliser un agent existant (facultatif)
 ```
 
-### 3.3 Bascule de Fonctionnalités
+### 3.3 Activation des fonctionnalités
 ```bash title="" linenums="0"
-# Services facultatifs
-USE_APPLICATION_INSIGHTS         # Par défaut : vrai
-USE_AZURE_AI_SEARCH_SERVICE      # Par défaut : faux
-USE_CONTAINER_REGISTRY           # Par défaut : vrai
+# Services optionnels
+USE_APPLICATION_INSIGHTS         # Par défaut : true
+USE_AZURE_AI_SEARCH_SERVICE      # Par défaut : false
+USE_CONTAINER_REGISTRY           # Par défaut : true
 
 # Surveillance et traçage
-ENABLE_AZURE_MONITOR_TRACING     # Par défaut : faux
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Par défaut : faux
+ENABLE_AZURE_MONITOR_TRACING     # Par défaut : false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Par défaut : false
 
 # Configuration de recherche
 AZURE_AI_SEARCH_INDEX_NAME       # Nom de l'index de recherche
 AZURE_SEARCH_SERVICE_NAME        # Nom du service de recherche
 ```
 
-### 3.4 Configuration du Projet IA
+### 3.4 Configuration du projet IA 
 ```bash title="" linenums="0"
 # Utiliser les ressources existantes
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ID complet de la ressource du projet IA existant
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ID complet de la ressource du projet d'IA existant
 AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL du point de terminaison du projet existant
 ```
 
-### 3.5 Vérifiez Vos Variables
+### 3.5 Vérifiez vos variables
 
-Utilisez Azure Developer CLI pour voir et gérer vos variables d’environnement :
+Utilisez Azure Developer CLI pour afficher et gérer vos variables d'environnement :
 
 ```bash title="" linenums="0"
-# Voir toutes les variables d'environnement pour l'environnement actuel
+# Afficher toutes les variables d'environnement pour l'environnement actuel
 azd env get-values
 
 # Obtenir une variable d'environnement spécifique
@@ -382,6 +382,6 @@ azd env set --from-file .env
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertissement** :  
-Ce document a été traduit à l’aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçons d’assurer l’exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source officielle. Pour les informations critiques, une traduction professionnelle humaine est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou d’interprétations erronées résultant de l’utilisation de cette traduction.
+**Avis de non-responsabilité** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des imprécisions. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un traducteur humain. Nous déclinons toute responsabilité pour tout malentendu ou mauvaise interprétation résultant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

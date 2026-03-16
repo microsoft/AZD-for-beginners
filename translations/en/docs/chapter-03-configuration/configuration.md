@@ -31,6 +31,32 @@ After completing this lesson, you will be able to:
 
 This comprehensive guide covers all aspects of configuring Azure Developer CLI for optimal development and deployment workflows.
 
+## Understanding AI Agents in an azd Project
+
+If you're new to AI agents, here's a simple way to think about them within the azd world.
+
+### What Is an Agent?
+
+An agent is a piece of software that can receive a request, reason about it, and take actions—often by calling an AI model, looking up data, or invoking other services. In an azd project, an agent is just another **service** alongside your web frontend or API backend.
+
+### How Agents Fit Into the azd Project Structure
+
+An azd project is made up of three layers: **infrastructure**, **code**, and **configuration**. Agents plug into these layers the same way any other service does:
+
+| Layer | What It Does for a Traditional App | What It Does for an Agent |
+|-------|-------------------------------------|---------------------------|
+| **Infrastructure** (`infra/`) | Provisions a web app and database | Provisions an AI model endpoint, search index, or agent host |
+| **Code** (`src/`) | Contains your frontend and API source code | Contains your agent logic and prompt definitions |
+| **Configuration** (`azure.yaml`) | Lists your services and their hosting targets | Lists your agent as a service, pointing to its code and host |
+
+### The Role of `azure.yaml`
+
+You don't need to memorize the syntax right now. Conceptually, `azure.yaml` is the file where you tell azd: *"Here are the services that make up my application, and here's where to find their code."*
+
+When your project includes an AI agent, `azure.yaml` simply lists that agent as one of the services. azd then knows to provision the right infrastructure (like an Microsoft Foundry Models endpoint or a Container App to host the agent) and deploy your agent code—just as it would for a web app or API.
+
+This means there's nothing fundamentally new to learn. If you understand how azd manages a web service, you already understand how it manages an agent.
+
 ## Configuration Hierarchy
 
 azd uses a hierarchical configuration system:
@@ -519,7 +545,7 @@ database:
 ### 3. Version Control Considerations
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/config.json         # Environment configurations (contain resource IDs)
 .azure/*/.env               # Environment variables (may contain secrets)
 .env                        # Local environment file
 ```
@@ -626,6 +652,6 @@ azd env get DB_PASSWORD  # Should show actual value
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

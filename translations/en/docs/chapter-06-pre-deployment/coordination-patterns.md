@@ -36,18 +36,12 @@ User → Agent → Response
 - ❌ No specialization
 
 **Multi-Agent System (Advanced):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Specialized agents for specific tasks
+```mermaid
+graph TD
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```- ✅ Specialized agents for specific tasks
 - ✅ Parallel execution for speed
 - ✅ Modular and maintainable
 - ✅ Better at complex workflows
@@ -82,7 +76,6 @@ sequenceDiagram
     
     Note over User,Agent3: Sequential: Each step waits for previous
 ```
-
 **Benefits:**
 - ✅ Clear data flow
 - ✅ Easy to debug
@@ -232,7 +225,7 @@ sequenceDiagram
 ```mermaid
 graph TB
     Input[Input Task]
-    Agent1[Agent 1: GPT-4]
+    Agent1[Agent 1: gpt-4.1]
     Agent2[Agent 2: Claude]
     Agent3[Agent 3: Gemini]
     Voter[Consensus Voter]
@@ -662,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Call Azure OpenAI for research
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -751,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Call Azure OpenAI to write article
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -838,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Call Azure OpenAI to edit
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -887,10 +880,19 @@ if __name__ == '__main__':
 ### 8. Deploy and Test
 
 ```bash
-# Initialize and deploy
+# Option A: Template-based deployment
 azd init
 azd up
 
+# Option B: Agent manifest deployment (requires extension)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for all `azd ai` flags and options.
+
+```bash
 # Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -1502,7 +1504,7 @@ exceptions
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operations | $5-10 |
 | **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
 | **Total** | | **$240-565/month** |
 
 ### Cost Optimization Strategies
@@ -1705,7 +1707,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Related Examples
 - [Microservices Example](../../../../examples/microservices) - Service communication patterns
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI integration
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI integration
 
 ---
 
@@ -1734,6 +1736,6 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

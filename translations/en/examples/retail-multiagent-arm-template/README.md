@@ -10,7 +10,7 @@
 > This ARM template deploys **Azure resources** for a multi-agent system.  
 >  
 > **What gets deployed (15-25 minutes):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings across 3 regions)
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings across 3 regions)
 > - ✅ AI Search service (empty, ready for index creation)
 > - ✅ Container Apps (placeholder images, ready for your code)
 > - ✅ Storage, Cosmos DB, Key Vault, Application Insights
@@ -42,11 +42,11 @@ This directory contains a comprehensive Azure Resource Manager (ARM) template fo
 
 ### Core Infrastructure (Status After Deployment)
 
-✅ **Azure OpenAI Services** (Ready for API calls)
-  - Primary region: GPT-4o deployment (20K TPM capacity)
-  - Secondary region: GPT-4o-mini deployment (10K TPM capacity)
+✅ **Microsoft Foundry Models Services** (Ready for API calls)
+  - Primary region: gpt-4.1 deployment (20K TPM capacity)
+  - Secondary region: gpt-4.1-mini deployment (10K TPM capacity)
   - Tertiary region: Text embeddings model (30K TPM capacity)
-  - Evaluation region: GPT-4o grader model (15K TPM capacity)
+  - Evaluation region: gpt-4.1 grader model (15K TPM capacity)
   - **Status:** Fully functional - can make API calls immediately
 
 ✅ **Azure AI Search** (Empty - ready for configuration)
@@ -129,15 +129,15 @@ This directory contains a comprehensive Azure Resource Manager (ARM) template fo
 Before deployment, verify sufficient quotas in your target regions:
 
 ```bash
-# Check Azure OpenAI availability in your region
+# Check Microsoft Foundry Models availability in your region
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# Verify OpenAI quota (example for gpt-4o)
+# Verify OpenAI quota (example for gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
 # Check Container Apps quota
 az provider show \
@@ -146,11 +146,11 @@ az provider show \
 ```
 
 **Minimum Required Quotas:**
-- **Azure OpenAI:** 3-4 model deployments across regions
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+- **Microsoft Foundry Models:** 3-4 model deployments across regions
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Note:** GPT-4o may have waitlist in some regions - check [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+  - **Note:** gpt-4.1 may have waitlist in some regions - check [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - **Container Apps:** Managed environment + 2-10 container instances
 - **AI Search:** Standard tier (Basic insufficient for vector search)
 - **Cosmos DB:** Standard provisioned throughput
@@ -162,7 +162,7 @@ az provider show \
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
 3. Consider alternative regions with availability
 
@@ -241,7 +241,7 @@ az resource list \
 
 **Expected:** Empty table (all resources show "Succeeded" status)
 
-### Step 2: Verify Azure OpenAI Deployments (3 minutes)
+### Step 2: Verify Microsoft Foundry Models Deployments (3 minutes)
 
 ```bash
 # List all OpenAI accounts
@@ -263,7 +263,7 @@ az cognitiveservices account deployment list \
 
 **Expected:** 
 - 3-4 OpenAI accounts (primary, secondary, tertiary, evaluation regions)
-- 1-2 model deployments per account (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 1-2 model deployments per account (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
 ### Step 3: Test Infrastructure Endpoints (5 minutes)
 
@@ -288,7 +288,7 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 - Container Apps show "Running" status
 - Placeholder nginx responds with HTTP 200 or 404 (no application code yet)
 
-### Step 4: Verify Azure OpenAI API Access (3 minutes)
+### Step 4: Verify Microsoft Foundry Models API Access (3 minutes)
 
 ```bash
 # Get OpenAI endpoint and key
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Test GPT-4o deployment
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Test gpt-4.1 deployment
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -317,7 +317,7 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 ### What's Working vs. What's Not
 
 **✅ Working After Deployment:**
-- Azure OpenAI models deployed and accepting API calls
+- Microsoft Foundry Models models deployed and accepting API calls
 - AI Search service running (empty, no indexes yet)
 - Container Apps running (placeholder nginx images)
 - Storage accounts accessible and ready for uploads
@@ -379,25 +379,16 @@ Edit `azuredeploy.parameters.json`:
 
 ## 🏗️ Architecture Overview
 
+```mermaid
+graph TD
+    Frontend[Frontend<br/>Container App] --> Router[Agent Router<br/>Container App] --> Agents[Agents<br/>Customer + Inv]
+    Router --> Search[AI Search<br/>Vector DB]
+    Router --> Models[Microsoft Foundry Models<br/>Multi-region]
+    Agents --> Storage[Storage<br/>Documents]
+    Search --> CosmosDB[Cosmos DB<br/>Chat History]
+    Models --> AppInsights[App Insights<br/>Monitoring]
+    Storage --> KeyVault[Key Vault<br/>Secrets]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ## 📖 Deployment Script Usage
 
 The `deploy.sh` script provides an interactive deployment experience:
@@ -477,8 +468,8 @@ The ARM template creates **empty Container Apps** with placeholder nginx images.
 
 **Required Development:**
 1. **Agent Implementation** (30-40 hours)
-   - Customer service agent with GPT-4o integration
-   - Inventory agent with GPT-4o-mini integration
+   - Customer service agent with gpt-4.1 integration
+   - Inventory agent with gpt-4.1-mini integration
    - Agent routing logic
 
 2. **Frontend Development** (20-30 hours)
@@ -637,7 +628,7 @@ az containerapp logs show \
 - 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Code Examples:**
-- 🔗 [Azure OpenAI Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG pattern
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG pattern
 - 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agent framework (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agent orchestration (Python)
 - 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent conversations
@@ -651,7 +642,7 @@ az containerapp logs show \
 
 ### Common Issues
 
-#### 1. Azure OpenAI Quota Exceeded
+#### 1. Microsoft Foundry Models Quota Exceeded
 
 ```bash
 # Check current quota usage
@@ -661,7 +652,7 @@ az cognitiveservices usage list --location eastus2
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
 #### 2. Container Apps Deployment Failed
@@ -788,6 +779,6 @@ Start with: `./deploy.sh -g myResourceGroup`
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

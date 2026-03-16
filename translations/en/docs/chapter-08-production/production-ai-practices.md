@@ -27,23 +27,16 @@ Based on our community poll results, these are the top challenges developers fac
 
 **When to use**: Complex AI applications with multiple capabilities
 
+```mermaid
+graph TD
+    Frontend[Web Frontend] --- Gateway[API Gateway] --- LB[Load Balancer]
+    Gateway --> Chat[Chat Service]
+    Gateway --> Image[Image Service]
+    Gateway --> Text[Text Service]
+    Chat --> OpenAI[Microsoft Foundry Models]
+    Image --> Vision[Computer Vision]
+    Text --> DocIntel[Document Intelligence]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
 **AZD Implementation**:
 
 ```yaml
@@ -115,6 +108,37 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
   }
 }
 ```
+
+## Thinking About AI Agent Health
+
+When a traditional web app breaks, the symptoms are familiar: a page doesn't load, an API returns an error, or a deployment fails. AI-powered applications can break in all those same ways—but they can also misbehave in subtler ways that don't produce obvious error messages.
+
+This section helps you build a mental model for monitoring AI workloads so you know where to look when things don't seem right.
+
+### How Agent Health Differs from Traditional App Health
+
+A traditional app either works or it doesn't. An AI agent can appear to work but produce poor results. Think of agent health in two layers:
+
+| Layer | What to Watch | Where to Look |
+|-------|--------------|---------------|
+| **Infrastructure health** | Is the service running? Are resources provisioned? Are endpoints reachable? | `azd monitor`, Azure Portal resource health, container/app logs |
+| **Behavior health** | Is the agent responding accurately? Are responses timely? Is the model being called correctly? | Application Insights traces, model call latency metrics, response quality logs |
+
+Infrastructure health is familiar—it's the same for any azd app. Behavior health is the new layer that AI workloads introduce.
+
+### Where to Look When AI Apps Don't Behave as Expected
+
+If your AI application isn't producing the results you expect, here's a conceptual checklist:
+
+1. **Start with the basics.** Is the app running? Can it reach its dependencies? Check `azd monitor` and resource health just as you would for any app.
+2. **Check the model connection.** Is your application successfully calling the AI model? Failed or timed-out model calls are the most common cause of AI app issues and will show up in your application logs.
+3. **Look at what the model received.** AI responses depend on the input (the prompt and any retrieved context). If the output is wrong, the input is usually wrong. Check whether your application is sending the right data to the model.
+4. **Review response latency.** AI model calls are slower than typical API calls. If your app feels sluggish, check whether model response times have increased—this can indicate throttling, capacity limits, or region-level congestion.
+5. **Watch for cost signals.** Unexpected spikes in token usage or API calls can indicate a loop, a misconfigured prompt, or excessive retries.
+
+You don't need to master observability tooling right away. The key takeaway is that AI applications have an extra layer of behavior to monitor, and azd's built-in monitoring (`azd monitor`) gives you a starting point for investigating both layers.
+
+---
 
 ## Security Best Practices
 
@@ -922,12 +946,198 @@ Based on Microsoft Foundry Discord community feedback:
 - ❌ Not testing failure scenarios
 - ❌ Deploying without health checks
 
-## Additional Resources
+## AZD AI CLI Commands and Extensions
 
+AZD includes a growing set of AI-specific commands and extensions that streamline production AI workflows. These tools bridge the gap between local development and production deployment for AI workloads.
+
+### AZD Extensions for AI
+
+AZD uses an extension system to add AI-specific capabilities. Install and manage extensions with:
+
+```bash
+# List all available extensions (including AI)
+azd extension list
+
+# Install the Foundry agents extension
+azd extension install azure.ai.agents
+
+# Install the fine-tuning extension
+azd extension install azure.ai.finetune
+
+# Install the custom models extension
+azd extension install azure.ai.models
+
+# Upgrade all installed extensions
+azd extension upgrade --all
+```
+
+**Available AI extensions:**
+
+| Extension | Purpose | Status |
+|-----------|---------|--------|
+| `azure.ai.agents` | Foundry Agent Service management | Preview |
+| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
+| `azure.ai.models` | Foundry custom models | Preview |
+| `azure.coding-agent` | Coding agent configuration | Available |
+
+### Initializing Agent Projects with `azd ai agent init`
+
+The `azd ai agent init` command scaffolds a production-ready AI agent project integrated with Microsoft Foundry Agent Service:
+
+```bash
+# Initialize a new agent project from an agent manifest
+azd ai agent init -m <manifest-path-or-uri>
+
+# Initialize and target a specific Foundry project
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Initialize with a custom source directory
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Target Container Apps as the host
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Key flags:**
+
+| Flag | Description |
+|------|-------------|
+| `-m, --manifest` | Path or URI to an agent manifest to add to your project |
+| `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
+| `-s, --src` | Directory to download the agent definition (defaults to `src/<agent-id>`) |
+| `--host` | Override the default host (e.g., `containerapp`) |
+| `-e, --environment` | The azd environment to use |
+
+**Production tip**: Use `--project-id` to connect directly to an existing Foundry project, keeping your agent code and cloud resources linked from the start.
+
+### Model Context Protocol (MCP) with `azd mcp`
+
+AZD includes built-in MCP server support (Alpha), enabling AI agents and tools to interact with your Azure resources through a standardized protocol:
+
+```bash
+# Start the MCP server for your project
+azd mcp start
+
+# Manage tool consent for MCP operations
+azd mcp consent
+```
+
+The MCP server exposes your azd project context—environments, services, and Azure resources—to AI-powered development tools. This enables:
+
+- **AI-assisted deployment**: Let coding agents query your project state and trigger deployments
+- **Resource discovery**: AI tools can discover what Azure resources your project uses
+- **Environment management**: Agents can switch between dev/staging/production environments
+
+### Infrastructure Generation with `azd infra generate`
+
+For production AI workloads, you can generate and customize Infrastructure as Code rather than relying on automatic provisioning:
+
+```bash
+# Generate Bicep/Terraform files from your project definition
+azd infra generate
+```
+
+This writes IaC to disk so you can:
+- Review and audit infrastructure before deploying
+- Add custom security policies (network rules, private endpoints)
+- Integrate with existing IaC review processes
+- Version control infrastructure changes separately from application code
+
+### Production Lifecycle Hooks
+
+AZD hooks let you inject custom logic at every stage of the deployment lifecycle—critical for production AI workflows:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# Run a specific hook manually during development
+azd hooks run predeploy
+```
+
+**Recommended production hooks for AI workloads:**
+
+| Hook | Use Case |
+|------|----------|
+| `preprovision` | Validate subscription quotas for AI model capacity |
+| `postprovision` | Configure private endpoints, deploy model weights |
+| `predeploy` | Run AI safety tests, validate prompt templates |
+| `postdeploy` | Smoke test agent responses, verify model connectivity |
+
+### CI/CD Pipeline Configuration
+
+Use `azd pipeline config` to connect your project to GitHub Actions or Azure Pipelines with secure Azure authentication:
+
+```bash
+# Configure CI/CD pipeline (interactive)
+azd pipeline config
+
+# Configure with a specific provider
+azd pipeline config --provider github
+```
+
+This command:
+- Creates a service principal with least-privilege access
+- Configures federated credentials (no stored secrets)
+- Generates or updates your pipeline definition file
+- Sets required environment variables in your CI/CD system
+
+**Production workflow with pipeline config:**
+
+```bash
+# 1. Set up production environment
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. Configure the pipeline
+azd pipeline config --provider github
+
+# 3. Pipeline runs azd deploy on every push to main
+```
+
+### Adding Components with `azd add`
+
+Incrementally add Azure services to an existing project:
+
+```bash
+# Add a new service component interactively
+azd add
+```
+
+This is particularly useful for expanding production AI applications—for example, adding a vector search service, a new agent endpoint, or a monitoring component to an existing deployment.
+
+## Additional Resources
 - **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 open agent skills for Azure AI, Foundry, deployment, cost optimization, and diagnostics. Install in your editor:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
@@ -936,13 +1146,13 @@ Based on Microsoft Foundry Discord community feedback:
 - **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
 - **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Course Complete**: [AZD For Beginners](../../README.md)
+- **� Course Complete**: [AZD For Beginners](../../README.md)
 
 **Remember**: Production AI workloads require careful planning, monitoring, and continuous optimization. Start with these patterns and adapt them to your specific requirements.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service https://github.com/Azure/co-op-translator. While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

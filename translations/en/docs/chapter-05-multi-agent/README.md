@@ -31,32 +31,27 @@ By completing this chapter, you will:
 ## 🚀 Quick Start
 
 ```bash
-# Deploy the retail multi-agent solution
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Or use the template directly
+# Option 1: Deploy from a template
 azd init --template agent-openai-python-prompty
 azd up
+
+# Option 2: Deploy from an agent manifest (requires azure.ai.agents extension)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
 ```
+
+> **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
 ---
 
 ## 🤖 Multi-Agent Architecture
 
+```mermaid
+graph TD
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
-
 ---
 
 ## 🎯 Featured Solution: Retail Multi-Agent
@@ -72,7 +67,7 @@ The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrate
 
 | Service | Purpose |
 |---------|---------|
-| Azure OpenAI | Language understanding |
+| Microsoft Foundry Models | Language understanding |
 | Azure AI Search | Product catalog |
 | Cosmos DB | Agent state and memory |
 | Container Apps | Agent hosting |
@@ -98,8 +93,6 @@ The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrate
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-The text is already in English. Here it is:
-
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

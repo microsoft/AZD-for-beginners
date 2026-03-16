@@ -7,13 +7,11 @@
 - **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 - **🤖 Related**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**Previous:** [Production AI Practices](../chapter-08-production/production-ai-practices.md) | **Next:** [AZD Basics](../chapter-01-foundation/azd-basics.md)
-
 This comprehensive troubleshooting guide addresses common issues when deploying AI solutions with AZD, providing solutions and debugging techniques specific to Azure AI services.
 
 ## Table of Contents
 
-- [Azure OpenAI Service Issues](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry Models Service Issues](../../../../docs/chapter-07-troubleshooting)
 - [Azure AI Search Problems](../../../../docs/chapter-07-troubleshooting)
 - [Container Apps Deployment Issues](../../../../docs/chapter-07-troubleshooting)
 - [Authentication and Permission Errors](../../../../docs/chapter-07-troubleshooting)
@@ -22,7 +20,7 @@ This comprehensive troubleshooting guide addresses common issues when deploying 
 - [Cost and Quota Management](../../../../docs/chapter-07-troubleshooting)
 - [Debugging Tools and Techniques](../../../../docs/chapter-07-troubleshooting)
 
-## Azure OpenAI Service Issues
+## Microsoft Foundry Models Service Issues
 
 ### Issue: OpenAI Service Unavailable in Region
 
@@ -32,7 +30,7 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Causes:**
-- Azure OpenAI not available in selected region
+- Microsoft Foundry Models not available in selected region
 - Quota exhausted in preferred regions
 - Regional capacity constraints
 
@@ -104,7 +102,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -363,7 +361,7 @@ app = FastAPI(lifespan=lifespan)
 
 **Symptoms:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **Solutions:**
@@ -475,7 +473,7 @@ az cognitiveservices account list-models \
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -712,19 +710,19 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 ```python
 # Cost-aware model selection
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
+    'gpt-4.1-mini': 0.00015,  # per 1K tokens
+    'gpt-4.1': 0.03,          # per 1K tokens
     'gpt-35-turbo': 0.0015  # per 1K tokens
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
 ## Debugging Tools and Techniques
@@ -747,6 +745,26 @@ azd monitor --live
 # Check environment variables
 azd env get-values
 ```
+
+### AZD AI Extension Commands for Diagnostics
+
+If you deployed agents using `azd ai agent init`, these additional tools are available:
+
+```bash
+# Ensure the agents extension is installed
+azd extension install azure.ai.agents
+
+# Re-initialize or update an agent from a manifest
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Use the MCP server to let AI tools query project state
+azd mcp start
+
+# Generate infrastructure files for review and audit
+azd infra generate
+```
+
+> **Tip:** Use `azd infra generate` to write IaC to disk so you can inspect exactly what resources were provisioned. This is invaluable when debugging resource configuration issues. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
 ### Application Debugging
 
@@ -853,9 +871,10 @@ def monitor_performance(func):
 
 ## Resources
 
-- [Azure OpenAI Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Install Azure troubleshooting skills in your editor: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
@@ -865,11 +884,11 @@ def monitor_performance(func):
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
 - **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 - **🤖 Related**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📖 Reference**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:  
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, a professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

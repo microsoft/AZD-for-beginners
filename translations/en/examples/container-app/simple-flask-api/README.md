@@ -23,21 +23,13 @@ A complete, working Python Flask REST API deployed to Azure Container Apps using
 
 ## Architecture
 
+```mermaid
+graph TD
+    subgraph ACA[Azure Container Apps Environment]
+        Flask[Flask API Container<br/>Health endpoints<br/>REST API<br/>Auto-scaling 0-10 replicas]
+        AppInsights[Application Insights]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
-
 ## Prerequisites
 
 ### Required
@@ -439,6 +431,6 @@ azd down --force --purge
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
