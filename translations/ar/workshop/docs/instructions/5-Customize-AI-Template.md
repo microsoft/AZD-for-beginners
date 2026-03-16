@@ -1,30 +1,30 @@
 # 5. تخصيص قالب
 
-!!! tip "بنهاية هذه الوحدة ستكون قادراً على"
+!!! tip "بنهاية هذه الوحدة ستكون قادرًا على"
 
-    - [ ] استكشاف قدرات وكيل الذكاء الاصطناعي الافتراضية
-    - [ ] إضافة بحث الذكاء الاصطناعي مع فهرسك الخاص
+    - [ ] استكشاف قدرات وكلاء الذكاء الاصطناعي الافتراضية
+    - [ ] إضافة بحث الذكاء الاصطناعي باستخدام الفهرس الخاص بك
     - [ ] تفعيل وتحليل مقاييس التتبع
     - [ ] تنفيذ تشغيل تقييم
-    - [ ] تنفيذ مسح فريق الاختراق (red-teaming)
+    - [ ] تنفيذ فحص الفريق الأحمر
     - [ ] **المختبر 5: وضع خطة تخصيص** 
 
 ---
 
-## 5.1 قدرات وكيل الذكاء الاصطناعي
+## 5.1 قدرات وكلاء الذكاء الاصطناعي
 
 !!! success "أكملنا هذا في المختبر 01"
 
-- **بحث الملفات**: بحث الملفات المدمج في OpenAI لاسترجاع المعرفة
-- **الاستشهادات**: نسب المصادر تلقائياً في الاستجابات
-- **التعليمات القابلة للتخصيص**: تعديل سلوك وشخصية الوكيل
-- **تكامل الأدوات**: نظام أدوات قابل للتوسيع لإمكانات مخصصة
+- **بحث في الملفات**: OpenAI's built-in file search for knowledge retrieval
+- **الاستشهادات**: نسب المصادر تلقائيًا في الردود
+- **تعليمات قابلة للتخصيص**: تعديل سلوك الوكيل وشخصيته
+- **تكامل الأدوات**: نظام أدوات قابل للتوسيع لإضافة قدرات مخصصة
 
 ---
 
 ## 5.2 خيارات استرجاع المعرفة
 
-!!! task "لإكمال ذلك نحتاج لإجراء تغييرات وإعادة النشر"    
+!!! task "لإكمال هذا نحتاج إلى إجراء تغييرات وإعادة النشر"    
     
     ```bash title=""
     # Set environment variables
@@ -40,117 +40,117 @@
 
 ---
 
-**OpenAI File Search (الافتراضي):**
+**OpenAI File Search (Default):**
 
-- مدمج في Foundry Agents
-- معالجة المستندات والفهرسة تلقائياً
-- لا يتطلب تكوين إضافي
+- مدمج في وكلاء Foundry
+- معالجة المستندات والفهرسة تلقائيًا
+- لا حاجة لتكوين إضافي
 
-**Azure AI Search (اختياري):**
+**Azure AI Search (Optional):**
 
-- بحث هجين دلالي ومتجهي
-- إدارة فهرس مخصصة
-- إمكانات بحث متقدمة
+- بحث هجين دلالي ومتجه
+- إدارة فهرس مخصص
+- قدرات بحث متقدمة
 - يتطلب `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [التتبع والمراقبة](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "لإكمال ذلك نحتاج لإجراء تغييرات وإعادة النشر"    
+!!! task "لإكمال هذا نحتاج إلى إجراء تغييرات وإعادة النشر"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**التتبع:**
+التتبع:
 
 - تكامل OpenTelemetry
 - تتبع الطلب/الاستجابة
 - مقاييس الأداء
 - متاح في بوابة Microsoft Foundry
 
-**التسجيل:**
+التسجيل:
 
 - سجلات التطبيق في Container Apps
-- تسجيل منظم مع معرفات الربط (correlation IDs)
+- تسجيل منظم مع معرفات الارتباط
 - عرض السجلات في الوقت الحقيقي والتاريخي
 
 ---
 
-## 5.4 [تقييم الوكلاء](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [تقييم الوكيل](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**التقييم المحلي:**
+التقييم المحلي:
 
-- مقيمون مدمجون لتقييم الجودة
-- سكربتات تقييم مخصصة
-- قياس أداء معياري
+- مقَيّمات مدمجة لتقييم الجودة
+- نصوص تقييم مخصصة
+- قياس أداء
 
-**المراقبة المستمرة:**
+المراقبة المستمرة:
 
 - تقييم تلقائي للتفاعلات الحية
 - تتبع مقاييس الجودة
-- اكتشاف تراجعات الأداء
+- كشف تراجعات الأداء
 
-**تكامل CI/CD:**
+تكامل CI/CD:
 
 - سير عمل GitHub Actions
-- اختبارات وتقييم تلقائي
-- اختبارات المقارنة الإحصائية
+- اختبار وتقييم آلي
+- اختبار المقارنة الإحصائية
 
 ---
 
-## 5.5 [وكيل فريق الاختراق للذكاء الاصطناعي](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [وكيل الفريق الأحمر للذكاء الاصطناعي](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**فريق الاختراق للذكاء الاصطناعي:**
+اختبار الفريق الأحمر للذكاء الاصطناعي:
 
-- فحص أمني تلقائي
+- مسح أمني آلي
 - تقييم المخاطر لأنظمة الذكاء الاصطناعي
 - تقييم السلامة عبر فئات متعددة
 
-**المصادقة:**
+المصادقة:
 
 - Managed Identity لخدمات Azure
 - مصادقة Azure App Service اختيارية
-- أسلوب المصادقة الأساسي كخيار احتياطي للتطوير
+- الرجوع إلى المصادقة الأساسية أثناء التطوير
 
 
 
 !!! quote "بنهاية هذا المختبر يجب أن تكون قد"
-    - [ ] حددت متطلبات السيناريو الخاص بك
-    - [ ] خصّصت متغيرات البيئة (التكوين)
-    - [ ] خصّصت تعليمات الوكيل (المهمة)
-    - [ ] نشرت القالب المخصص (التطبيق)
-    - [ ] أتممت مهام ما بعد النشر (يدوياً)
-    - [ ] نفذت تقييم اختبار
+    - [ ] حدد متطلبات السيناريو الخاص بك
+    - [ ] تخصيص متغيرات البيئة (التكوين)
+    - [ ] تخصيص تعليمات الوكيل (المهمة)
+    - [ ] نشر القالب المخصص (التطبيق)
+    - [ ] إكمال مهام ما بعد النشر (يدوي)
+    - [ ] تشغيل تقييم تجريبي
 
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
+يوضح هذا المثال تخصيص القالب لحالة استخدام مؤسسية في مجال البيع بالتجزئة مع وكيلين متخصصين ونشر عدة نماذج.
 
 ---
 
-## 5.6 خصّصه من أجلك!
+## 5.6 خصصه لك!
 
 ### 5.6.1. متطلبات السيناريو
 
 #### **نشر الوكلاء:** 
 
-   - وكيل المتسوق: يساعد العملاء في العثور على المنتجات ومقارنتها
-   - وكيل الولاء: يدير مكافآت العملاء والعروض الترويجية
+   - Shopper Agent: يساعد العملاء في العثور على المنتجات ومقارنتها
+   - Loyalty Agent: يدير مكافآت وعروض العملاء
 
 #### **نشر النماذج:**
 
-   - `gpt-4.1`: نموذج الدردشة الأساسي
+   - `gpt-4.1`: النموذج الأساسي للدردشة
    - `o3`: نموذج الاستدلال للاستفسارات المعقدة
    - `gpt-4.1-nano`: نموذج خفيف للتفاعلات البسيطة
-   - `text-embedding-3-large`: تمثيلات عالية الجودة للبحث
+   - `text-embedding-3-large`: تضمينات عالية الجودة للبحث
 
 #### **الميزات:**
 
-   - تم تفعيل التتبع والمراقبة
+   - تم تمكين التتبع والمراقبة
    - AI Search لفهرس المنتجات
    - إطار تقييم لضمان الجودة
-   - فريق اختراق للتحقق من الأمان
+   - اختبار الفريق الأحمر من أجل التحقق الأمني
 
 ---
 
@@ -159,7 +159,7 @@ This example demonstrates customizing the template for an enterprise retail use 
 
 #### 5.6.2.1. تكوين ما قبل النشر
 
-إنشاء سكربت إعداد (`setup-retail.sh`)
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -175,8 +175,8 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# تكوين نموذج الدردشة الأساسي (gpt-4o كأقرب إصدار متاح إلى gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# تكوين نموذج المحادثة الأساسي (gpt-4.1 كالأقرب المتاح إلى gpt-4.1)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
@@ -186,7 +186,7 @@ azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# تعيين اسم الوكيل (سيؤدي إلى إنشاء الوكيل الأول)
+# تعيين اسم الوكيل (سيُنشئ الوكيل الأول)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # تكوين فهرس البحث
@@ -200,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: تعليمات الوكلاء
 
-إنشاء `custom-agents/shopper-agent-instructions.md`:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-إنشاء `custom-agents/loyalty-agent-instructions.md`:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -250,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: سكربت النشر
 
-إنشاء `deploy-retail.sh`:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -275,12 +275,12 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# التحقق من الحصة في المنطقة المختارة
+# التحقق من الحصة في المنطقة المحددة
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -323,14 +323,14 @@ echo "4. Test both agents with sample queries"
 
 #### 5.6.2.4: تكوين ما بعد النشر
 
-إنشاء `configure-retail-agents.sh`:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# احصل على معلومات النشر
+# الحصول على معلومات النشر
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -380,7 +380,7 @@ echo "
 
 ### 5.6.3: الاختبار والتحقق
 
-إنشاء `test-retail-deployment.sh`:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -391,7 +391,7 @@ echo "🧪 Testing retail deployment..."
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# اختبر توفر تطبيق الويب
+# اختبار توفر تطبيق الويب
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# شغّل التقييم إذا كان مُكوَّنًا
+# شغّل التقييم إذا تم تكوينه
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -431,40 +431,40 @@ Next steps:
 
 ### 5.6.4 النتائج المتوقعة
 
-بعد اتباع دليل التنفيذ هذا، سيكون لديك:
+بعد اتباع دليل التنفيذ هذا، ستحصل على:
 
 1. **البنية التحتية المنشورة:**
 
-      - مشروع Microsoft Foundry مع نشرات للنماذج
+      - مشروع Microsoft Foundry مع نشر النماذج
       - Container Apps تستضيف تطبيق الويب
       - خدمة AI Search لفهرس المنتجات
       - Application Insights للمراقبة
 
-2. **الوكيل المبدئي:**
+2. **الوكيل الأولي:**
 
-      - وكيل المتسوق مهيأ بتعليمات أساسية
-      - تمكين قدرة بحث الملفات
+      - Shopper Agent مُكوّن بتعليمات أساسية
+      - تم تمكين قدرة البحث في الملفات
       - تم تكوين التتبع والمراقبة
 
-3. **جاهزية للتخصيص:**
+3. **جاهز للتخصيص:**
 
-      - إطار لإضافة وكيل الولاء
+      - إطار لإضافة Loyalty Agent
       - قوالب تعليمات مخصصة
       - سكربتات الاختبار والتحقق
       - إعداد المراقبة والتقييم
 
-4. **جاهزية للإنتاج:**
+4. **الجاهزية للإنتاج:**
 
-      - فحص أمني باستخدام فريق الاختراق
+      - فحص أمني باستخدام فريق الاختبار الأحمر
       - مراقبة الأداء
       - إطار تقييم الجودة
       - بنية قابلة للتوسع
 
-This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
+يوضح هذا المثال كيف يمكن توسيع قالب AZD وتخصيصه لسيناريوهات مؤسسية محددة مع الحفاظ على أفضل الممارسات للأمان والمراقبة وقابلية التوسع.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 إخلاء المسؤولية:
-تمت ترجمة هذه الوثيقة باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يُرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار الوثيقة الأصلية بلغتها الأم المصدر الموثوق. للمعلومات الحساسة أو الحرجة، يوصَى باستعانة مترجم بشري محترف. لا نتحمل أي مسؤولية عن سوء الفهم أو التفسيرات الخاطئة الناجمة عن استخدام هذه الترجمة.
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لا نتحمل أي مسؤولية عن أي سوء فهم أو تأويل ينشأ عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

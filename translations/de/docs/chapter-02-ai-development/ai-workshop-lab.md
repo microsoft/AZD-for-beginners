@@ -1,57 +1,57 @@
-# KI-Workshop Labor: Machen Sie Ihre KI-Lösungen AZD-bereitstellbar
+# AI Workshop Lab: Ihre KI-Lösungen AZD-bereit machen
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Kapitel 2 - KI-First-Entwicklung
-- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **📚 Kursstart**: [AZD für Einsteiger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
+- **⬅️ Vorheriges**: [Bereitstellung von KI-Modellen](ai-model-deployment.md)
+- **➡️ Nächstes**: [Best Practices für Produktions-KI](production-ai-practices.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
 ## Workshop Overview
 
-Dieses praktische Labor führt Entwickler durch den Prozess, eine vorhandene KI-Vorlage zu übernehmen und sie mit Azure Developer CLI (AZD) bereitzustellen. Sie lernen grundlegende Muster für produktionsreife KI-Bereitstellungen mit Microsoft Foundry-Diensten kennen.
+Dieses praxisorientierte Labor führt Entwickler durch den Prozess, eine vorhandene KI-Vorlage zu übernehmen und sie mit dem Azure Developer CLI (AZD) bereitzustellen. Sie lernen wesentliche Muster für Produktions-KI-Bereitstellungen mit Microsoft Foundry-Diensten kennen.
 
-**Dauer:** 2-3 Stunden  
-**Level:** Mittelstufe  
-**Voraussetzungen:** Grundlegende Azure-Kenntnisse, Vertrautheit mit KI/ML-Konzepten
+**Duration:** 2-3 hours  
+**Level:** Intermediate  
+**Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
 
-## 🎓 Lernziele
+## 🎓 Learning Objectives
 
 Am Ende dieses Workshops werden Sie in der Lage sein:
-- ✅ Eine vorhandene KI-Anwendung in AZD-Vorlagen zu konvertieren
-- ✅ Microsoft Foundry-Dienste mit AZD zu konfigurieren
-- ✅ Sichere Anmeldeinformationsverwaltung für KI-Dienste zu implementieren
-- ✅ Produktionsreife KI-Anwendungen mit Monitoring bereitzustellen
-- ✅ Häufige Probleme bei KI-Bereitstellungen zu beheben
+- ✅ Eine bestehende KI-Anwendung so konvertieren, dass sie AZD-Vorlagen verwendet
+- ✅ Microsoft Foundry-Dienste mit AZD konfigurieren
+- ✅ Sichere Verwaltung von Zugangsdaten für KI-Dienste implementieren
+- ✅ Produktionsreife KI-Anwendungen mit Monitoring bereitstellen
+- ✅ Häufige Probleme bei KI-Bereitstellungen beheben
 
-## Voraussetzungen
+## Prerequisites
 
-### Erforderliche Werkzeuge
+### Required Tools
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) installiert
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installiert
 - [Git](https://git-scm.com/) installiert
 - Code-Editor (VS Code empfohlen)
 
-### Azure-Ressourcen
-- Azure-Abonnement mit Contributor-Berechtigungen
-- Zugang zu Azure OpenAI-Diensten (oder Möglichkeit, Zugang anzufordern)
+### Azure Resources
+- Azure-Abonnement mit Contributor-Zugriff
+- Zugriff auf Microsoft Foundry Models-Dienste (oder Möglichkeit, Zugriff zu beantragen)
 - Berechtigung zum Erstellen von Ressourcengruppen
 
-### Fachliche Voraussetzungen
-- Grundlegendes Verständnis der Azure-Dienste
-- Vertrautheit mit Kommandozeilenoberflächen
+### Knowledge Prerequisites
+- Grundlegendes Verständnis von Azure-Diensten
+- Vertrautheit mit Kommandozeilen-Schnittstellen
 - Grundlegende KI/ML-Konzepte (APIs, Modelle, Prompts)
 
-## Labor-Einrichtung
+## Lab Setup
 
-### Schritt 1: Umgebung vorbereiten
+### Step 1: Environment Preparation
 
-1. **Überprüfen Sie die Tool-Installationen:**
+1. **Verify tool installations:**
 ```bash
-# Überprüfe die AZD-Installation
+# AZD-Installation prüfen
 azd version
 
-# Überprüfe die Azure CLI
+# Azure CLI prüfen
 az --version
 
 # Bei Azure anmelden
@@ -59,17 +59,17 @@ az login
 azd auth login
 ```
 
-2. **Klonen Sie das Workshop-Repository:**
+2. **Clone the workshop repository:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Modul 1: Verständnis der AZD-Struktur für KI-Anwendungen
+## Module 1: Understanding AZD Structure for AI Applications
 
-### Aufbau einer KI-AZD-Vorlage
+### Anatomy of an AI AZD Template
 
-Erkunden Sie die Schlüsseldokumente in einer KI-fertigen AZD-Vorlage:
+Untersuchen Sie die wichtigen Dateien in einer KI-bereiten AZD-Vorlage:
 
 ```
 azure-search-openai-demo/
@@ -78,7 +78,7 @@ azure-search-openai-demo/
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Azure OpenAI configuration
+│       ├── openai.bicep    # Microsoft Foundry Models configuration
 │       ├── search.bicep    # Cognitive Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
@@ -86,46 +86,46 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Laborübung 1.1: Erkunden der Konfiguration**
+### **Lab Exercise 1.1: Explore the Configuration**
 
-1. **Untersuchen Sie die azure.yaml Datei:**
+1. **Examine the azure.yaml file:**
 ```bash
 cat azure.yaml
 ```
 
-**Worauf Sie achten sollten:**
+**What to look for:**
 - Dienstdefinitionen für KI-Komponenten
 - Zuordnungen von Umgebungsvariablen
 - Host-Konfigurationen
 
-2. **Überprüfen Sie die main.bicep Infrastruktur:**
+2. **Review the main.bicep infrastructure:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Wichtige KI-Muster zu identifizieren:**
-- Bereitstellung des Azure OpenAI-Dienstes
+**Key AI patterns to identify:**
+- Bereitstellung des Microsoft Foundry Models-Dienstes
 - Integration von Cognitive Search
 - Sichere Schlüsselverwaltung
 - Netzwerk-Sicherheitskonfigurationen
 
-### **Diskussionspunkt:** Warum diese Muster für KI wichtig sind
+### **Discussion Point:** Why These Patterns Matter for AI
 
-- **Dienstabhängigkeiten**: KI-Apps benötigen oft mehrere koordinierte Dienste
-- **Sicherheit**: API-Schlüssel und Endpunkte müssen sicher verwaltet werden
-- **Skalierbarkeit**: KI-Workloads haben besondere Skalierungsanforderungen
-- **Kostenmanagement**: KI-Dienste können teuer werden, wenn sie nicht richtig konfiguriert sind
+- **Service Dependencies**: KI-Anwendungen erfordern oft mehrere koordinierte Dienste
+- **Security**: API-Schlüssel und Endpunkte müssen sicher verwaltet werden
+- **Scalability**: KI-Workloads haben spezielle Skalierungsanforderungen
+- **Cost Management**: KI-Dienste können teuer werden, wenn sie nicht richtig konfiguriert sind
 
-## Modul 2: Bereiten Sie Ihre erste KI-Anwendung bereit
+## Module 2: Deploy Your First AI Application
 
-### Schritt 2.1: Umgebung initialisieren
+### Step 2.1: Initialize the Environment
 
-1. **Erstellen Sie eine neue AZD-Umgebung:**
+1. **Create a new AZD environment:**
 ```bash
 azd env new myai-workshop
 ```
 
-2. **Setzen Sie die erforderlichen Parameter:**
+2. **Set required parameters:**
 ```bash
 # Legen Sie Ihre bevorzugte Azure-Region fest
 azd env set AZURE_LOCATION eastus
@@ -134,76 +134,76 @@ azd env set AZURE_LOCATION eastus
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 ```
 
-### Schritt 2.2: Infrastruktur und Anwendung bereitstellen
+### Step 2.2: Deploy the Infrastructure and Application
 
-1. **Bereitstellen mit AZD:**
+1. **Deploy with AZD:**
 ```bash
 azd up
 ```
 
-**Was während `azd up` passiert:**
-- ✅ Stellt den Azure OpenAI-Dienst bereit
+**What happens during `azd up`:**
+- ✅ Stellt den Microsoft Foundry Models-Dienst bereit
 - ✅ Erstellt den Cognitive Search-Dienst
 - ✅ Richtet einen App Service für die Webanwendung ein
 - ✅ Konfiguriert Netzwerk und Sicherheit
-- ✅ Stellt Anwendungscode bereit
+- ✅ Stellt den Anwendungscode bereit
 - ✅ Richtet Monitoring und Protokollierung ein
 
-2. **Überwachen Sie den Bereitstellungsfortschritt** und notieren Sie die erstellten Ressourcen.
+2. **Monitor the deployment progress** and note the resources being created.
 
-### Schritt 2.3: Verifizieren Sie Ihre Bereitstellung
+### Step 2.3: Verify Your Deployment
 
-1. **Prüfen Sie die bereitgestellten Ressourcen:**
+1. **Check the deployed resources:**
 ```bash
 azd show
 ```
 
-2. **Öffnen Sie die bereitgestellte Anwendung:**
+2. **Open the deployed application:**
 ```bash
 azd show --output json | grep "webAppUrl"
 ```
 
-3. **Testen Sie die KI-Funktionalität:**
+3. **Test the AI functionality:**
    - Navigieren Sie zur Webanwendung
-   - Probieren Sie Beispielanfragen aus
+   - Testen Sie Beispielabfragen
    - Verifizieren Sie, dass KI-Antworten funktionieren
 
-### **Laborübung 2.1: Fehlerbehebungsübung**
+### **Lab Exercise 2.1: Troubleshooting Practice**
 
-**Szenario**: Ihre Bereitstellung war erfolgreich, aber die KI antwortet nicht.
+**Scenario**: Ihre Bereitstellung war erfolgreich, aber die KI reagiert nicht.
 
-**Häufige Probleme, die Sie überprüfen sollten:**
-1. **OpenAI API-Schlüssel**: Überprüfen Sie, ob sie korrekt gesetzt sind
-2. **Modellverfügbarkeit**: Prüfen Sie, ob Ihre Region das Modell unterstützt
-3. **Netzwerkkonnektivität**: Stellen Sie sicher, dass die Dienste kommunizieren können
-4. **RBAC-Berechtigungen**: Überprüfen Sie, ob die App auf OpenAI zugreifen kann
+**Common issues to check:**
+1. **OpenAI API keys**: Überprüfen Sie, ob sie korrekt gesetzt sind
+2. **Model availability**: Prüfen Sie, ob Ihre Region das Modell unterstützt
+3. **Network connectivity**: Stellen Sie sicher, dass die Dienste kommunizieren können
+4. **RBAC permissions**: Überprüfen Sie, ob die App auf OpenAI zugreifen kann
 
-**Debugging-Befehle:**
+**Debugging commands:**
 ```bash
-# Umgebungsvariablen prüfen
+# Umgebungsvariablen überprüfen
 azd env get-values
 
 # Bereitstellungsprotokolle anzeigen
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# OpenAI-Bereitstellungsstatus prüfen
+# OpenAI-Bereitstellungsstatus überprüfen
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Modul 3: Anpassen von KI-Anwendungen an Ihre Anforderungen
+## Module 3: Customizing AI Applications for Your Needs
 
-### Schritt 3.1: Ändern der KI-Konfiguration
+### Step 3.1: Modify the AI Configuration
 
-1. **Aktualisieren Sie das OpenAI-Modell:**
+1. **Update the OpenAI model:**
 ```bash
 # Wechseln Sie zu einem anderen Modell (falls in Ihrer Region verfügbar)
-azd env set AZURE_OPENAI_MODEL gpt-4
+azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# Mit der neuen Konfiguration erneut bereitstellen
+# Mit der neuen Konfiguration neu bereitstellen
 azd deploy
 ```
 
-2. **Fügen Sie zusätzliche KI-Dienste hinzu:**
+2. **Add additional AI services:**
 
 Bearbeiten Sie `infra/main.bicep`, um Document Intelligence hinzuzufügen:
 
@@ -222,18 +222,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Schritt 3.2: Umgebungsbezogene Konfigurationen
+### Step 3.2: Environment-Specific Configurations
 
-**Best Practice**: Unterschiedliche Konfigurationen für Entwicklung vs Produktion.
+**Best Practice**: Unterschiedliche Konfigurationen für Entwicklung und Produktion.
 
-1. **Erstellen Sie eine Produktionsumgebung:**
+1. **Create a production environment:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Setzen Sie produktionsspezifische Parameter:**
+2. **Set production-specific parameters:**
 ```bash
-# In der Produktion werden typischerweise höhere SKUs verwendet.
+# In der Produktion werden typischerweise höhere SKUs verwendet
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -241,45 +241,45 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Laborübung 3.1: Kostenoptimierung**
+### **Lab Exercise 3.1: Cost Optimization**
 
-**Herausforderung**: Konfigurieren Sie die Vorlage für kosteneffektive Entwicklung.
+**Challenge**: Konfigurieren Sie die Vorlage für kostengünstige Entwicklung.
 
-**Aufgaben:**
-1. Identifizieren Sie, welche SKUs auf kostenlose/Basic-Stufen gesetzt werden können
+**Tasks:**
+1. Identifizieren Sie, welche SKUs auf kostenlose/basic-Tarife gesetzt werden können
 2. Konfigurieren Sie Umgebungsvariablen für minimale Kosten
-3. Bereitstellen und Kosten mit der Produktionskonfiguration vergleichen
+3. Stellen Sie bereit und vergleichen Sie die Kosten mit der Produktionskonfiguration
 
-**Hinweise zur Lösung:**
-- Verwenden Sie nach Möglichkeit die F0 (kostenlose) Stufe für Cognitive Services
-- Verwenden Sie die Basic-Stufe für den Search-Dienst in der Entwicklung
+**Solution hints:**
+- Verwenden Sie nach Möglichkeit den F0 (kostenlosen) Tarif für Cognitive Services
+- Verwenden Sie im Entwicklungsmodus den Basic-Tarif für den Search Service
 - Erwägen Sie die Verwendung des Consumption-Plans für Functions
 
-## Modul 4: Sicherheit und Produktions-Best Practices
+## Module 4: Security and Production Best Practices
 
-### Schritt 4.1: Sichere Anmeldeinformationsverwaltung
+### Step 4.1: Secure Credential Management
 
-**Aktuelle Herausforderung**: Viele KI-Apps kodieren API-Schlüssel hart oder verwenden unsichere Speicher.
+**Current challenge**: Viele KI-Anwendungen verankern API-Schlüssel im Code oder verwenden unsichere Speicher.
 
-**AZD-Lösung**: Managed Identity + Key Vault-Integration.
+**AZD Solution**: Managed Identity + Key Vault-Integration.
 
-1. **Überprüfen Sie die Sicherheitskonfiguration in Ihrer Vorlage:**
+1. **Review the security configuration in your template:**
 ```bash
-# Nach Key Vault- und Managed Identity-Konfiguration suchen
+# Suche nach Key Vault- und Managed-Identity-Konfiguration
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Verifizieren Sie, dass Managed Identity funktioniert:**
+2. **Verify Managed Identity is working:**
 ```bash
-# Überprüfen Sie, ob die Webanwendung die richtige Identitätskonfiguration hat
+# Überprüfen, ob die Web-App die korrekte Identitätskonfiguration hat.
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-### Schritt 4.2: Netzwerksicherheit
+### Step 4.2: Network Security
 
-1. **Aktivieren Sie private Endpunkte** (falls noch nicht konfiguriert):
+1. **Enable private endpoints** (if not already configured):
 
-Fügen Sie Ihrem Bicep-Template hinzu:
+Fügen Sie Ihrer Bicep-Vorlage hinzu:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -302,16 +302,16 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Schritt 4.3: Monitoring und Beobachtbarkeit
+### Step 4.3: Monitoring and Observability
 
-1. **Konfigurieren Sie Application Insights:**
+1. **Configure Application Insights:**
 ```bash
 # Application Insights sollte automatisch konfiguriert werden
 # Überprüfen Sie die Konfiguration:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Richten Sie KI-spezifisches Monitoring ein:**
+2. **Set up AI-specific monitoring:**
 
 Fügen Sie benutzerdefinierte Metriken für KI-Operationen hinzu:
 ```bicep
@@ -334,44 +334,44 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Laborübung 4.1: Sicherheitsprüfung**
+### **Lab Exercise 4.1: Security Audit**
 
-**Aufgabe**: Überprüfen Sie Ihre Bereitstellung auf Sicherheits-Best Practices.
+**Task**: Überprüfen Sie Ihre Bereitstellung auf Sicherheits-Best-Practices.
 
-**Checkliste:**
-- [ ] Keine hartkodierten Geheimnisse im Code oder in der Konfiguration
+**Checklist:**
+- [ ] Keine hartcodierten Geheimnisse im Code oder in der Konfiguration
 - [ ] Managed Identity für Service-zu-Service-Authentifizierung verwendet
-- [ ] Key Vault speichert sensitive Konfiguration
-- [ ] Netzwerkzugriff ist angemessen eingeschränkt
+- [ ] Key Vault speichert sensible Konfiguration
+- [ ] Netzwerkzugriff ist ordnungsgemäß eingeschränkt
 - [ ] Monitoring und Protokollierung sind aktiviert
 
-## Modul 5: Konvertierung Ihrer eigenen KI-Anwendung
+## Module 5: Converting Your Own AI Application
 
-### Schritt 5.1: Bewertungs-Arbeitsblatt
+### Step 5.1: Assessment Worksheet
 
-**Bevor Sie Ihre App konvertieren**, beantworten Sie diese Fragen:
+**Before converting your app**, beantworten Sie diese Fragen:
 
-1. **Anwendungsarchitektur:**
+1. **Application Architecture:**
    - Welche KI-Dienste verwendet Ihre App?
-   - Welche Compute-Ressourcen benötigt sie?
+   - Welche Rechenressourcen benötigt sie?
    - Benötigt sie eine Datenbank?
    - Welche Abhängigkeiten bestehen zwischen den Diensten?
 
-2. **Sicherheitsanforderungen:**
-   - Mit welchen sensiblen Daten arbeitet Ihre App?
+2. **Security Requirements:**
+   - Welche sensiblen Daten verarbeitet Ihre App?
    - Welche Compliance-Anforderungen haben Sie?
    - Benötigen Sie privates Networking?
 
-3. **Skalierungsanforderungen:**
-   - Wie hoch ist die erwartete Last?
+3. **Scaling Requirements:**
+   - Welche Last erwarten Sie?
    - Benötigen Sie Auto-Scaling?
    - Gibt es regionale Anforderungen?
 
-### Schritt 5.2: Erstellen Sie Ihre AZD-Vorlage
+### Step 5.2: Create Your AZD Template
 
-**Folgen Sie diesem Muster, um Ihre App zu konvertieren:**
+**Follow this pattern to convert your app:**
 
-1. **Erstellen Sie die Grundstruktur:**
+1. **Create the basic structure:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
@@ -380,7 +380,7 @@ cd my-ai-app-azd
 azd init --template minimal
 ```
 
-2. **Erstellen Sie azure.yaml:**
+2. **Create azure.yaml:**
 ```yaml
 # Metadata
 name: my-ai-app
@@ -403,9 +403,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Erstellen Sie Infrastrukturvorlagen:**
+3. **Create infrastructure templates:**
 
-**infra/main.bicep** - Haupttemplate:
+**infra/main.bicep** - Hauptvorlage:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -447,105 +447,105 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Laborübung 5.1: Template-Erstellungs-Herausforderung**
+### **Lab Exercise 5.1: Template Creation Challenge**
 
-**Herausforderung**: Erstellen Sie eine AZD-Vorlage für eine Dokumentenverarbeitungs-KI-App.
+**Challenge**: Erstellen Sie eine AZD-Vorlage für eine Dokumentenverarbeitungs-KI-App.
 
-**Anforderungen:**
-- Azure OpenAI für Inhaltsanalyse
+**Requirements:**
+- Microsoft Foundry Models für Inhaltsanalyse
 - Document Intelligence für OCR
-- Storage Account für Dokument-Uploads
-- Function App für Verarbeitungslogik
+- Storage Account für Dokumenten-Uploads
+- Function App für die Verarbeitungslogik
 - Web-App für die Benutzeroberfläche
 
-**Bonuspunkte:**
+**Bonus points:**
 - Fügen Sie eine ordnungsgemäße Fehlerbehandlung hinzu
-- Einschließlich Kostenschätzung
-- Einrichten von Monitoring-Dashboards
+- Fügen Sie eine Kostenschätzung hinzu
+- Richten Sie Monitoring-Dashboards ein
 
-## Modul 6: Fehlerbehebung bei häufigen Problemen
+## Module 6: Troubleshooting Common Issues
 
-### Häufige Bereitstellungsprobleme
+### Common Deployment Issues
 
-#### Problem 1: OpenAI-Service-Quota überschritten
-**Symptome:** Bereitstellung schlägt mit Quota-Fehler fehl
-**Lösungen:**
+#### Issue 1: OpenAI Service Quota Exceeded
+**Symptoms:** Die Bereitstellung schlägt mit einem Quota-Fehler fehl
+**Solutions:**
 ```bash
-# Aktuelle Kontingente prüfen
+# Überprüfen Sie die aktuellen Kontingente
 az cognitiveservices usage list --location eastus
 
-# Kontingenterhöhung anfordern oder eine andere Region ausprobieren
+# Beantragen Sie eine Kontingenterhöhung oder versuchen Sie eine andere Region
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Problem 2: Modell nicht in Region verfügbar
-**Symptome:** KI-Antworten schlagen fehl oder Modellbereitstellung meldet Fehler
-**Lösungen:**
+#### Issue 2: Model Not Available in Region
+**Symptoms:** KI-Antworten schlagen fehl oder Modellbereitstellungsfehler
+**Solutions:**
 ```bash
 # Modellverfügbarkeit nach Region prüfen
 az cognitiveservices model list --location eastus
 
-# Auf verfügbares Modell aktualisieren
+# Auf ein verfügbares Modell aktualisieren
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
-#### Problem 3: Berechtigungsprobleme
-**Symptome:** 403 Forbidden-Fehler beim Aufrufen von KI-Diensten
-**Lösungen:**
+#### Issue 3: Permission Issues
+**Symptoms:** 403 Forbidden-Fehler beim Aufrufen von KI-Diensten
+**Solutions:**
 ```bash
-# Rollenzuweisungen überprüfen
+# Überprüfe Rollen-Zuweisungen
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Fehlende Rollen hinzufügen
+# Füge fehlende Rollen hinzu
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Performance-Probleme
+### Performance Issues
 
-#### Problem 4: Langsame KI-Antworten
-**Untersuchungsschritte:**
+#### Issue 4: Slow AI Responses
+**Investigation steps:**
 1. Überprüfen Sie Application Insights auf Performance-Metriken
-2. Prüfen Sie OpenAI-Dienstmetriken im Azure-Portal
-3. Verifizieren Sie Netzwerkverbindung und Latenz
+2. Überprüfen Sie die OpenAI-Service-Metriken im Azure-Portal
+3. Überprüfen Sie die Netzwerkkonnektivität und Latenz
 
-**Lösungen:**
-- Implementieren Sie Caching für häufige Anfragen
-- Verwenden Sie das geeignete OpenAI-Modell für Ihren Anwendungsfall
-- Erwägen Sie Read-Replicas für hochbelastete Szenarien
+**Solutions:**
+- Implementieren Sie Caching für häufige Abfragen
+- Verwenden Sie das passende OpenAI-Modell für Ihren Anwendungsfall
+- Erwägen Sie Read Replicas für Szenarien mit hoher Last
 
-### **Laborübung 6.1: Debugging-Herausforderung**
+### **Lab Exercise 6.1: Debugging Challenge**
 
-**Szenario**: Ihre Bereitstellung war erfolgreich, aber die Anwendung gibt 500-Fehler zurück.
+**Scenario**: Ihre Bereitstellung war erfolgreich, aber die Anwendung gibt 500-Fehler zurück.
 
-**Debugging-Aufgaben:**
-1. Prüfen Sie Anwendungsprotokolle
-2. Verifizieren Sie Dienstkonnektivität
+**Debugging tasks:**
+1. Überprüfen Sie die Anwendungsprotokolle
+2. Überprüfen Sie die Dienstkonnektivität
 3. Testen Sie die Authentifizierung
 4. Überprüfen Sie die Konfiguration
 
-**Tools zur Verwendung:**
-- `azd show` für Bereitstellungsübersicht
+**Tools to use:**
+- `azd show` für einen Bereitstellungsüberblick
 - Azure-Portal für detaillierte Dienstprotokolle
-- Application Insights für Anwendungs-Telemetrie
+- Application Insights für Applikationstelemetrie
 
-## Modul 7: Monitoring und Optimierung
+## Module 7: Monitoring and Optimization
 
-### Schritt 7.1: Umfassendes Monitoring einrichten
+### Step 7.1: Set Up Comprehensive Monitoring
 
-1. **Erstellen Sie benutzerdefinierte Dashboards:**
+1. **Create custom dashboards:**
 
 Navigieren Sie zum Azure-Portal und erstellen Sie ein Dashboard mit:
-- Anzahl und Latenz der OpenAI-Anfragen
-- Anwendungsfehlerquoten
+- OpenAI-Anfrageanzahl und Latenz
+- Anwendungsfehlerraten
 - Ressourcenauslastung
 - Kostenverfolgung
 
-2. **Richten Sie Alerts ein:**
+2. **Set up alerts:**
 ```bash
 # Alarm bei hoher Fehlerrate
 az monitor metrics alert create \
@@ -556,103 +556,103 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
-### Schritt 7.2: Kostenoptimierung
+### Step 7.2: Cost Optimization
 
-1. **Analysieren Sie die aktuellen Kosten:**
+1. **Analyze current costs:**
 ```bash
-# Verwenden Sie die Azure CLI, um Kostendaten abzurufen
+# Verwenden Sie die Azure CLI, um Kostendaten abzurufen.
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Implementieren Sie Kostenkontrollen:**
-- Richten Sie Budgetwarnungen ein
-- Verwenden Sie Auto-Scaling-Richtlinien
-- Implementieren Sie Request-Caching
-- Überwachen Sie Token-Nutzung für OpenAI
+2. **Implement cost controls:**
+- Richten Sie Budget-Alerts ein
+- Verwenden Sie Autoscaling-Richtlinien
+- Implementieren Sie Anfrage-Caching
+- Überwachen Sie die Token-Nutzung für OpenAI
 
-### **Laborübung 7.1: Performance-Optimierung**
+### **Lab Exercise 7.1: Performance Optimization**
 
-**Aufgabe**: Optimieren Sie Ihre KI-Anwendung sowohl für Leistung als auch für Kosten.
+**Task**: Optimieren Sie Ihre KI-Anwendung hinsichtlich Performance und Kosten.
 
-**Metriken zu verbessern:**
-- Durchschnittliche Antwortzeit um 20% reduzieren
-- Monatliche Kosten um 15% senken
-- 99,9% Verfügbarkeit beibehalten
+**Metrics to improve:**
+- Reduzieren Sie die durchschnittliche Antwortzeit um 20%
+- Reduzieren Sie die monatlichen Kosten um 15%
+- Halten Sie 99,9% Betriebszeit aufrecht
 
-**Strategien zum Ausprobieren:**
+**Strategies to try:**
 - Implementieren Sie Response-Caching
 - Optimieren Sie Prompts für Token-Effizienz
 - Verwenden Sie geeignete Compute-SKUs
-- Richten Sie korrektes Auto-Scaling ein
+- Richten Sie ein geeignetes Autoscaling ein
 
-## Abschlussherausforderung: Ende-zu-Ende-Implementierung
+## Final Challenge: End-to-End Implementation
 
-### Szenario der Herausforderung
+### Challenge Scenario
 
-Sie sollen einen produktionsreifen, KI-gestützten Kundenservice-Chatbot erstellen mit folgenden Anforderungen:
+Sie sind damit beauftragt, einen produktionsbereiten, KI-gestützten Kundenservice-Chatbot mit folgenden Anforderungen zu erstellen:
 
-**Funktionale Anforderungen:**
-- Weboberfläche für Kundeninteraktionen
-- Integration mit Azure OpenAI für Antworten
-- Dokumentensuche mit Cognitive Search
-- Integration mit bestehender Kundendatenbank
+**Functional Requirements:**
+- Webschnittstelle für Kundeninteraktionen
+- Integration mit Microsoft Foundry Models für Antworten
+- Dokumentensuche mithilfe von Cognitive Search
+- Integration mit der bestehenden Kundendatenbank
 - Mehrsprachige Unterstützung
 
-**Nicht-funktionale Anforderungen:**
-- Verarbeitung von 1000 gleichzeitigen Nutzern
-- 99,9% Uptime-SLA
-- SOC 2-Konformität
+**Non-Functional Requirements:**
+- Umgang mit 1000 gleichzeitigen Nutzern
+- 99,9% Verfügbarkeits-SLA
+- SOC 2-Compliance
 - Kosten unter $500/Monat
 - Bereitstellung in mehreren Umgebungen (dev, staging, prod)
 
-### Implementierungsschritte
+### Implementation Steps
 
-1. **Architektur entwerfen**
-2. **AZD-Vorlage erstellen**
-3. **Sicherheitsmaßnahmen implementieren**
-4. **Monitoring und Alerting einrichten**
-5. **Bereitstellungspipelines erstellen**
-6. **Lösung dokumentieren**
+1. **Entwerfen Sie die Architektur**
+2. **Erstellen Sie die AZD-Vorlage**
+3. **Implementieren Sie Sicherheitsmaßnahmen**
+4. **Richten Sie Monitoring und Alerting ein**
+5. **Erstellen Sie Bereitstellungspipelines**
+6. **Dokumentieren Sie die Lösung**
 
-### Bewertungskriterien
+### Evaluation Criteria
 
 - ✅ **Funktionalität**: Erfüllt es alle Anforderungen?
 - ✅ **Sicherheit**: Sind Best Practices implementiert?
 - ✅ **Skalierbarkeit**: Kann es die Last bewältigen?
-- ✅ **Wartbarkeit**: Ist Code und Infrastruktur gut organisiert?
+- ✅ **Wartbarkeit**: Sind Code und Infrastruktur gut organisiert?
 - ✅ **Kosten**: Bleibt es im Budget?
 
-## Zusätzliche Ressourcen
+## Additional Resources
 
-### Microsoft-Dokumentation
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
+### Microsoft Documentation
+- [Azure Developer CLI-Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models Service-Dokumentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry-Dokumentation](https://learn.microsoft.com/azure/ai-studio/)
 
-### Beispielvorlagen
-- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+### Sample Templates
+- [Microsoft Foundry Models Chat-App](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [OpenAI Chat App Schnellstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Community-Ressourcen
+### Community Resources
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [Azure Developer CLI auf GitHub](https://github.com/Azure/azure-dev)
+- [Awesome AZD-Vorlagen](https://azure.github.io/awesome-azd/)
 
-## 🎓 Abschlusszertifikat
-Herzlichen Glückwunsch! Sie haben das AI Workshop Lab abgeschlossen. Sie sollten jetzt in der Lage sein:
+## 🎓 Completion Certificate
 
-- ✅ Vorhandene KI-Anwendungen in AZD-Vorlagen umwandeln
+Herzlichen Glückwunsch! Sie haben das KI-Workshop-Labor abgeschlossen. Sie sollten jetzt in der Lage sein:
+- ✅ Vorhandene KI-Anwendungen in AZD-Vorlagen konvertieren
 - ✅ Produktionsreife KI-Anwendungen bereitstellen
-- ✅ Beste Sicherheitspraktiken für KI-Workloads implementieren
-- ✅ Die Leistung von KI-Anwendungen überwachen und optimieren
+- ✅ Sicherheits-Best-Practices für KI-Workloads implementieren
+- ✅ KI-Anwendungsleistung überwachen und optimieren
 - ✅ Häufige Bereitstellungsprobleme beheben
 
 ### Nächste Schritte
-1. Wenden Sie diese Muster in Ihren eigenen KI-Projekten an
-2. Teilen Sie Vorlagen mit der Community
+1. Wenden Sie diese Muster auf Ihre eigenen KI-Projekte an
+2. Stellen Sie Vorlagen der Community zur Verfügung
 3. Treten Sie dem Microsoft Foundry Discord für fortlaufende Unterstützung bei
-4. Erkunden Sie fortgeschrittene Themen wie mehrregionale Bereitstellungen
+4. Erkunden Sie fortgeschrittene Themen wie Bereitstellungen in mehreren Regionen
 
 ---
 
@@ -661,17 +661,17 @@ Herzlichen Glückwunsch! Sie haben das AI Workshop Lab abgeschlossen. Sie sollte
 ---
 
 **Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
-- **⬅️ Zurück**: [Bereitstellung von KI-Modellen](ai-model-deployment.md)
-- **➡️ Weiter**: [Best Practices für Produktions-KI](production-ai-practices.md)
+- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-orientierte Entwicklung
+- **⬅️ Vorherige**: [KI-Modell-Bereitstellung](ai-model-deployment.md)
+- **➡️ Nächste**: [Best Practices für KI in der Produktion](production-ai-practices.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
-**Benötigen Sie Hilfe?** Treten Sie unserer Community bei für Unterstützung und Diskussionen über AZD- und KI-Bereitstellungen.
+**Benötigen Sie Hilfe?** Treten Sie unserer Community bei, um Unterstützung und Diskussionen zu AZD- und KI-Bereitstellungen zu erhalten.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Haftungsausschluss:
-Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes Co-op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir um Genauigkeit bemüht sind, beachten Sie bitte, dass automatische Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Bei wichtigen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

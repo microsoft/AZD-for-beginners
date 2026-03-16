@@ -1,13 +1,13 @@
 # نشر نماذج الذكاء الاصطناعي باستخدام Azure Developer CLI
 
-**التنقّل بين الفصول:**
+**تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 2 - تطوير الذكاء الاصطناعي أولاً
+- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي
 - **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ التالي**: [مختبر ورشة العمل للذكاء الاصطناعي](ai-workshop-lab.md)
-- **🚀 الفصل التالي**: [الفصل 3: التهيئة](../chapter-03-configuration/configuration.md)
+- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
 
-يوفر هذا الدليل إرشادات شاملة لنشر نماذج الذكاء الاصطناعي باستخدام قوالب AZD، ويغطي كل شيء من اختيار النموذج إلى أنماط النشر في بيئة الإنتاج.
+يوفر هذا الدليل تعليمات شاملة لنشر نماذج الذكاء الاصطناعي باستخدام قوالب AZD، ويغطي كل شيء من اختيار النموذج إلى أنماط النشر في الإنتاج.
 
 ## جدول المحتويات
 
@@ -18,9 +18,9 @@
 - [اعتبارات الإنتاج](../../../../docs/chapter-02-ai-development)
 - [المراقبة والرصد](../../../../docs/chapter-02-ai-development)
 
-## استراتيجية اختيار النموذج
+## Model Selection Strategy
 
-### نماذج Azure OpenAI
+### نماذج Microsoft Foundry نماذج
 
 اختر النموذج المناسب لحالة الاستخدام الخاصة بك:
 
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,28 +52,28 @@ services:
 
 ### تخطيط سعة النموذج
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| نوع النموذج | حالة الاستخدام | السعة الموصى بها | اعتبارات التكلفة |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | دردشة، أسئلة وأجوبة | 10-50 TPM | فعال من حيث التكلفة لمعظم أحمال العمل |
-| GPT-4 | الاستدلال المعقد | 20-100 TPM | تكلفة أعلى، استخدمه للميزات المميزة |
+| gpt-4.1-mini | دردشة، أسئلة وأجوبة | 10-50 TPM | فعال من حيث التكلفة لمعظم أحمال العمل |
+| gpt-4.1 | الاستدلال المعقد | 20-100 TPM | تكلفة أعلى، استخدمه للميزات المميزة |
 | Text-embedding-ada-002 | بحث، RAG | 30-120 TPM | أساسي للبحث الدلالي |
-| Whisper | تحويل الكلام إلى نص | 10-50 TPM | أحمال عمل معالجة الصوت |
+| Whisper | تحويل الكلام إلى نص | 10-50 TPM | أحمال العمل لمعالجة الصوت |
 
-## تكوين AZD لنماذج الذكاء الاصطناعي
+## AZD Configuration for AI Models
 
 ### تكوين قالب Bicep
 
-قم بإنشاء نشرات النماذج من خلال قوالب Bicep:
+أنشئ نشرات النماذج من خلال قوالب Bicep:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -130,11 +130,11 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 # تكوين ملف .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## أنماط النشر
+## Deployment Patterns
 
 ### النمط 1: النشر في منطقة واحدة
 
@@ -146,12 +146,12 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-الأفضل لـ:
+أفضل لـ:
 - التطوير والاختبار
-- التطبيقات لسوق واحد
+- تطبيقات سوق واحد
 - تحسين التكلفة
 
 ### النمط 2: النشر متعدد المناطق
@@ -167,14 +167,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-الأفضل لـ:
+أفضل لـ:
 - التطبيقات العالمية
-- متطلبات توفر عالية
+- متطلبات التوفر العالي
 - توزيع الحمل
 
 ### النمط 3: النشر الهجين
 
-اجمع بين Azure OpenAI وخدمات الذكاء الاصطناعي الأخرى:
+اجمع نماذج Microsoft Foundry مع خدمات ذكاء اصطناعي أخرى:
 
 ```bicep
 // Hybrid AI services
@@ -203,9 +203,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## إدارة النماذج
+## Model Management
 
-### التحكم في الإصدارات
+### التحكم بالإصدارات
 
 تتبع إصدارات النماذج في تكوين AZD الخاص بك:
 
@@ -213,7 +213,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -227,33 +227,33 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### تحديثات النموذج
 
-استخدم أدوات الربط (hooks) في AZD لتحديثات النماذج:
+استخدم روابط AZD لتحديثات النماذج:
 
 ```bash
-#!/bin/باش
-# هوكس/ما_قبل_النشر.sh
+#!/bin/bash
+# hooks/predeploy.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### اختبار A/B
 
-انشر عدة إصدارات من النموذج:
+انشر عدة إصدارات من النماذج:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -264,7 +264,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## اعتبارات الإنتاج
+## Production Considerations
 
 ### تخطيط السعة
 
@@ -363,7 +363,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## المراقبة والرصد
+## Monitoring and Observability
 
 ### تكامل Application Insights
 
@@ -408,7 +408,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 تتبع المقاييس الخاصة بالذكاء الاصطناعي:
 
 ```python
-# قياسات مخصصة لنماذج الذكاء الاصطناعي
+# قياس عن بُعد مخصص لنماذج الذكاء الاصطناعي
 import logging
 from applicationinsights import TelemetryClient
 
@@ -442,10 +442,10 @@ class AITelemetry:
 
 ### فحوصات الصحة
 
-قم بتنفيذ مراقبة حالة خدمات الذكاء الاصطناعي:
+نفّذ مراقبة حالة خدمات الذكاء الاصطناعي:
 
 ```python
-# نقاط نهاية فحص الحالة الصحية
+# نقاط نهاية فحص الحالة
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -474,29 +474,29 @@ async def check_ai_models():
 ## الخطوات التالية
 
 1. **راجع [دليل تكامل Microsoft Foundry](microsoft-foundry-integration.md)** لأنماط تكامل الخدمات
-2. **أكمل [مختبر ورشة العمل للذكاء الاصطناعي](ai-workshop-lab.md)** للحصول على خبرة عملية
-3. **نفّذ [ممارسات الذكاء الاصطناعي للإنتاج](production-ai-practices.md)** لنشر المؤسسات
+2. **أكمل [مختبر ورشة العمل للذكاء الاصطناعي](ai-workshop-lab.md)** للحصول على تجربة عملية
+3. **نفّذ [ممارسات الذكاء الاصطناعي في الإنتاج](production-ai-practices.md)** لنشر على مستوى المؤسسة
 4. **استكشف [دليل استكشاف أخطاء الذكاء الاصطناعي وإصلاحها](../chapter-07-troubleshooting/ai-troubleshooting.md)** للمشكلات الشائعة
 
 ## الموارد
 
-- [توفر نماذج Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [توفر نماذج Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [تحجيم تطبيقات الحاويات](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [تحسين تكاليف نماذج الذكاء الاصطناعي](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [تحسين تكلفة نماذج الذكاء الاصطناعي](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**التنقّل بين الفصول:**
+**تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 2 - تطوير الذكاء الاصطناعي أولاً
+- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي
 - **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ التالي**: [مختبر ورشة العمل للذكاء الاصطناعي](ai-workshop-lab.md)
-- **🚀 الفصل التالي**: [الفصل 3: التهيئة](../chapter-03-configuration/configuration.md)
+- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحساسة أو الحرجة، يُنصح بالاستعانة بترجمة احترافية يقوم بها مترجم بشري. لن نتحمل أي مسؤولية عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يُرجى مراعاة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعياري والموثوق. للمعلومات الحساسة أو الحرجة، يُنصح بالاستعانة بترجمة بشرية مهنية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
