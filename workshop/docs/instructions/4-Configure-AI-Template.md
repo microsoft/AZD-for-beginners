@@ -318,7 +318,7 @@ AZURE_KEYVAULT_NAME               # Key Vault name (if used)
 ### 3.2 Model Configuration 
 ```bash title="" linenums="0"
 # Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
 AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
 AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model

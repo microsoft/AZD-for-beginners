@@ -69,22 +69,10 @@ This is an **intermediate-level** example. You should be familiar with:
 
 This example deploys a two-tier architecture with a web application and SQL database:
 
-```
-┌─────────────────┐        ┌──────────────────────┐
-│  User Browser   │◄──────►│   Azure Web App      │
-└─────────────────┘        │   (Flask API)        │
-                           │   - /health          │
-                           │   - /products        │
-                           └──────────┬───────────┘
-                                      │
-                                      │ Secure Connection
-                                      │ (Encrypted)
-                                      │
-                           ┌──────────▼───────────┐
-                           │ Azure SQL Database   │
-                           │   - Products table   │
-                           │   - Sample data      │
-                           └──────────────────────┘
+```mermaid
+graph TD
+    Browser[User Browser] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
+    WebApp -- Secure Connection<br/>Encrypted --> SQL[Azure SQL Database<br/>Products table<br/>Sample data]
 ```
 
 **Resource Deployment:**

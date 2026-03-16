@@ -408,6 +408,7 @@ If you encounter issues:
 - [Report Issues](https://github.com/Azure/azure-dev/issues)
 - [Community Discussions](https://github.com/Azure/azure-dev/discussions)
 - [Azure Support](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Get Azure command guidance directly in your editor with `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 

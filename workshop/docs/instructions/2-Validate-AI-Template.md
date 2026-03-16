@@ -232,7 +232,7 @@ Let's try out a few commands:
       You see something like:
 
       ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
+      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
       AZURE_AI_AGENT_NAME="agent-template-assistant"
       AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
       AZURE_AI_EMBED_DIMENSIONS=100

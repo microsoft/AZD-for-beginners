@@ -43,23 +43,18 @@ By completing this chapter, you will:
 
 ### Pattern 1: Microservices AI
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
+```mermaid
+graph LR
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### Pattern 2: Event-Driven AI
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+```mermaid
+graph LR
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---

@@ -23,19 +23,12 @@ A complete, working Python Flask REST API deployed to Azure Container Apps using
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph ACA[Azure Container Apps Environment]
+        Flask[Flask API Container<br/>Health endpoints<br/>REST API<br/>Auto-scaling 0-10 replicas]
+        AppInsights[Application Insights]
+    end
 ```
 
 ## Prerequisites

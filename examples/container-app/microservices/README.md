@@ -20,35 +20,11 @@ By completing this example, you will:
 
 ### Phase 1: What We're Building (Included in This Example)
 
-```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
+```mermaid
+graph TD
+    Internet[Internet] -- HTTPS --> Gateway[API Gateway<br/>Node.js Container<br/>Routes requests<br/>Health checks<br/>Request logging]
+    Gateway -- HTTP internal --> Product[Product Service<br/>Python Container<br/>Product CRUD<br/>In-memory data store<br/>REST API]
+    Product --> Insights[Application Insights<br/>Monitoring & Logs]
 ```
 
 **Why Start Simple?**

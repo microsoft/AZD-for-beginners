@@ -17,7 +17,7 @@ Microsoft Foundry is Microsoft's unified platform for AI development that includ
 
 - **Model Catalog**: Access to state-of-the-art AI models
 - **Prompt Flow**: Visual designer for AI workflows
-- **AI Foundry Portal**: Integrated development environment for AI applications
+- **Microsoft Foundry Portal**: Integrated development environment for AI applications
 - **Deployment Options**: Multiple hosting and scaling options
 - **Safety and Security**: Built-in responsible AI features
 
@@ -35,14 +35,14 @@ Microsoft Foundry is Microsoft's unified platform for AI development that includ
 
 - Azure subscription with appropriate permissions
 - Azure Developer CLI installed
-- Access to Azure OpenAI services
+- Access to Microsoft Foundry Models services
 - Basic familiarity with Microsoft Foundry
 
 ## Core Integration Patterns
 
-### Pattern 1: Azure OpenAI Integration
+### Pattern 1: Microsoft Foundry Models Integration
 
-**Use Case**: Deploy chat applications with Azure OpenAI models
+**Use Case**: Deploy chat applications with Microsoft Foundry Models models
 
 ```yaml
 # azure.yaml
@@ -58,7 +58,7 @@ services:
 
 **Infrastructure (main.bicep):**
 ```bicep
-// Azure OpenAI Account
+// Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openAIAccountName
   location: location
@@ -217,6 +217,38 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 ```
 
 ## Deployment Workflows
+
+### AZD Extensions for Foundry
+
+AZD provides extensions that add AI-specific capabilities for working with Microsoft Foundry services:
+
+```bash
+# Install the Foundry agents extension
+azd extension install azure.ai.agents
+
+# Install the fine-tuning extension
+azd extension install azure.ai.finetune
+
+# Install the custom models extension
+azd extension install azure.ai.models
+
+# List installed extensions
+azd extension list
+```
+
+### Agent-First Deployment with `azd ai`
+
+If you have an agent manifest, use `azd ai agent init` to scaffold a project wired to Foundry Agent Service:
+
+```bash
+# Initialize from an agent manifest
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Deploy to Azure
+azd up
+```
+
+See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the full command reference and flags.
 
 ### Single Command Deployment
 
@@ -479,11 +511,13 @@ az cognitiveservices model list --location eastus
 
 ## Example Templates
 
-### Basic Chat Application
+### RAG Chat Application (Python)
 
 **Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**Services**: Azure OpenAI + Cognitive Search + App Service
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
+
+**Description**: The most popular Azure AI sample — a production-ready RAG chat app that lets you ask questions over your own documents. Uses GPT-4.1-mini for chat, text-embedding-ada-002 for embeddings, and Azure AI Search for retrieval. Supports multimodal documents, speech input/output, Microsoft Entra authentication, and Application Insights tracing.
 
 **Quick Start**:
 ```bash
@@ -491,29 +525,119 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Document Processing Pipeline
+### RAG Chat Application (.NET)
 
-**Repository**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**Repository**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**Services**: Document Intelligence + Storage + Functions
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
+
+**Description**: The .NET/C# equivalent of the Python RAG chat sample. Built with ASP.NET Core Minimal API and Blazor WebAssembly frontend. Includes voice chat, GPT-4o-mini vision support, and a companion .NET MAUI Blazor Hybrid desktop/mobile client.
 
 **Quick Start**:
 ```bash
-azd init --template ai-document-processing
+azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### Enterprise Chat with RAG
+### RAG Chat Application (Java)
+
+**Repository**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
+
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
+
+**Description**: Java version of the RAG chat sample using Langchain4J for AI orchestration. Supports microservice event-driven architecture, multiple search strategies (text, vector, hybrid), document upload with Azure Document Intelligence, and deployment on either Azure Container Apps or Azure Kubernetes Service.
+
+**Quick Start**:
+```bash
+azd init --template azure-search-openai-demo-java
+azd up
+```
+
+### Enterprise Retail Copilot with Azure AI Foundry
 
 **Repository**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Services**: Azure OpenAI + Search + Container Apps + Cosmos DB
+**Services**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+
+**Description**: End-to-end retail RAG copilot using Azure AI Foundry and Prompty. A Contoso Outdoor retailer chatbot that grounds responses in product catalog and customer order data. Demonstrates the full GenAIOps workflow — prototype with Prompty, evaluate with AI-assisted evaluators, and deploy via AZD to Container Apps.
 
 **Quick Start**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
+
+### Creative Writing Multi-Agent Application
+
+**Repository**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+
+**Services**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+
+**Description**: Multi-agent sample demonstrating AI agent orchestration with Prompty. Uses a research agent (Bing Grounding in Azure AI Agent Service), a product agent (Azure AI Search), a writer agent, and an editor agent to collaboratively produce well-researched articles. Includes CI/CD with evaluation in GitHub Actions.
+
+**Quick Start**:
+```bash
+azd init --template contoso-creative-writer
+azd up
+```
+
+### Serverless RAG Chat (JavaScript/TypeScript)
+
+**Repository**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+
+**Services**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+
+**Description**: Fully serverless RAG chatbot using LangChain.js with Azure Functions for the API and Azure Static Web Apps for hosting. Uses Azure Cosmos DB as both vector store and chat history database. Supports local development with Ollama for zero-cost testing.
+
+**Quick Start**:
+```bash
+azd init --template serverless-chat-langchainjs
+azd up
+```
+
+### Chat with Your Data Solution Accelerator
+
+**Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+
+**Services**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+
+**Description**: Enterprise-grade RAG solution accelerator with admin portal for document upload/management, multiple orchestrator options (Semantic Kernel, LangChain, Prompt Flow), speech-to-text, Microsoft Teams integration, and choice of PostgreSQL or Cosmos DB backend. Designed as a customizable starting point for production RAG scenarios.
+
+**Quick Start**:
+```bash
+azd init --template chat-with-your-data-solution-accelerator
+azd up
+```
+
+### AI Travel Agents — Multi-Agent MCP Orchestration
+
+**Repository**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+
+**Services**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+
+**Description**: Reference application for multi-agent AI orchestration using three frameworks (LangChain.js, LlamaIndex.TS, and Microsoft Agent Framework). Features MCP (Model Context Protocol) servers in four languages deployed as serverless Azure Container Apps with OpenTelemetry monitoring.
+
+**Quick Start**:
+```bash
+azd init --template azure-ai-travel-agents
+azd up
+```
+
+### Azure AI Starter
+
+**Repository**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+
+**Services**: Azure AI Services + Azure OpenAI
+
+**Description**: Minimal Bicep template that deploys Azure AI services with configured machine learning models. A lightweight starting point when you only need the Azure AI infrastructure provisioned without a full application stack.
+
+**Quick Start**:
+```bash
+azd init --template azd-ai-starter
+azd up
+```
+
+> **Browse more templates**: Visit the [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) for 80+ AI-specific AZD templates across languages and scenarios.
 
 ## Next Steps
 
@@ -526,7 +650,7 @@ azd up
 
 ## 🎯 Hands-On Exercises
 
-### Exercise 1: Deploy Azure OpenAI Chat App (30 minutes)
+### Exercise 1: Deploy Microsoft Foundry Models Chat App (30 minutes)
 **Goal**: Deploy and test a production-ready AI chat application
 
 ```bash
@@ -574,14 +698,14 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openAiAccountName
 }
 
-// GPT-4o-mini for general chat
+// gpt-4.1-mini for general chat
 resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     scaleSettings: {
@@ -672,9 +796,9 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ## 💡 Frequently Asked Questions
 
 <details>
-<summary><strong>How do I reduce Azure OpenAI costs during development?</strong></summary>
+<summary><strong>How do I reduce Microsoft Foundry Models costs during development?</strong></summary>
 
-1. **Use Free Tier**: Azure OpenAI offers 50,000 tokens/month free
+1. **Use Free Tier**: Microsoft Foundry Models offers 50,000 tokens/month free
 2. **Reduce Capacity**: Set capacity to 10 TPM instead of 30+ for dev
 3. **Use azd down**: Deallocate resources when not actively developing
 4. **Cache Responses**: Implement Redis cache for repeated queries
@@ -688,9 +812,9 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>What's the difference between Azure OpenAI and OpenAI API?</strong></summary>
+<summary><strong>What's the difference between Microsoft Foundry Models and OpenAI API?</strong></summary>
 
-**Azure OpenAI**:
+**Microsoft Foundry Models**:
 - Enterprise security and compliance
 - Private network integration
 - SLA guarantees
@@ -703,11 +827,11 @@ azd env set ENABLE_RESPONSE_CACHE true
 - Lower barrier to entry
 - Public internet only
 
-For production apps, **Azure OpenAI is recommended**.
+For production apps, **Microsoft Foundry Models is recommended**.
 </details>
 
 <details>
-<summary><strong>How do I handle Azure OpenAI quota exceeded errors?</strong></summary>
+<summary><strong>How do I handle Microsoft Foundry Models quota exceeded errors?</strong></summary>
 
 ```bash
 # Check current quota
@@ -727,7 +851,7 @@ azd provision
 </details>
 
 <details>
-<summary><strong>Can I use my own data with Azure OpenAI?</strong></summary>
+<summary><strong>Can I use my own data with Microsoft Foundry Models?</strong></summary>
 
 Yes! Use **Azure AI Search** for RAG (Retrieval Augmented Generation):
 
@@ -777,6 +901,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Official documentation](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Install Azure + Foundry agent skills in your editor with `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 

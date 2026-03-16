@@ -66,7 +66,7 @@ After completing all sections of this study guide, you will be able to:
 - Manage AI model deployments and scaling
 
 #### Key Concepts to Master
-- Azure OpenAI service integration and API management
+- Microsoft Foundry Models service integration and API management
 - AI Search configuration and vector indexing
 - Model deployment strategies and capacity planning
 - AI application monitoring and performance optimization
@@ -78,7 +78,7 @@ After completing all sections of this study guide, you will be able to:
 4. **AI Monitoring**: Implement Application Insights for AI workloads
 
 #### Assessment Questions
-- How do you configure Azure OpenAI services in an AZD template?
+- How do you configure Microsoft Foundry Models services in an AZD template?
 - What are the key components of a RAG architecture?
 - How do you manage AI model capacity and scaling?
 - What monitoring metrics are important for AI applications?

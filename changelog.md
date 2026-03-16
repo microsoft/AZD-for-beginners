@@ -22,6 +22,58 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.18.0] - 2026-03-16
+
+#### AZD AI CLI Commands, Content Validation & Template Expansion
+**This version adds `azd ai`, `azd extension`, and `azd mcp` command coverage across all AI-related chapters, fixes broken links and deprecated code in agents.md, updates the cheat sheet, and overhauls the Example Templates section with validated descriptions and new Azure AI AZD templates.**
+
+#### Added
+- **🤖 AZD AI CLI coverage** across 7 files (previously only in Chapter 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — New "Extensions and AI Commands" section introducing `azd extension`, `azd ai agent init`, and `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Option 4: `azd ai agent init` with comparison table (template vs manifest approach)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" and "Agent-First Deployment" subsections
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start now shows both template and manifest-based deployment paths
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy section now includes `azd ai agent init` option
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" subsection
+  - `resources/cheat-sheet.md` — New "AI & Extensions Commands" section with `azd extension`, `azd ai agent init`, `azd mcp`, and `azd infra generate`
+- **📦 New AZD AI example templates** in `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — .NET RAG chat with Blazor WebAssembly, Semantic Kernel, and voice chat support
+  - **azure-search-openai-demo-java** — Java RAG chat using Langchain4J with ACA/AKS deployment options
+  - **contoso-creative-writer** — Multi-agent creative writing app using Azure AI Agent Service, Bing Grounding, and Prompty
+  - **serverless-chat-langchainjs** — Serverless RAG using Azure Functions + LangChain.js + Cosmos DB with Ollama local dev support
+  - **chat-with-your-data-solution-accelerator** — Enterprise RAG accelerator with admin portal, Teams integration, and PostgreSQL/Cosmos DB options
+  - **azure-ai-travel-agents** — Multi-agent MCP orchestration reference app with servers in .NET, Python, Java, and TypeScript
+  - **azd-ai-starter** — Minimal Azure AI infrastructure Bicep starter template
+  - **🔗 Awesome AZD AI Gallery link** — Reference to the [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ templates)
+
+#### Fixed
+- **🔗 agents.md navigation**: Previous/Next links now match Chapter 2 README lesson order (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md broken links**: `production-ai-practices.md` corrected to `../chapter-08-production/production-ai-practices.md` (3 occurrences)
+- **📦 agents.md deprecated code**: Replaced `opencensus` with `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 agents.md invalid API**: Moved `max_tokens` from `create_agent()` to `create_run()` as `max_completion_tokens`
+- **🔢 agents.md token counting**: Replaced rough `len//4` estimate with `tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: Corrected services from "Cognitive Search + App Service" to "Azure AI Search + Azure Container Apps" (default host changed Oct 2024)
+- **contoso-chat**: Updated description to reference Azure AI Foundry + Prompty, matching the repo's actual title and tech stack
+
+#### Removed
+- **ai-document-processing**: Removed non-functional template reference (repo not publicly accessible as an AZD template)
+
+#### Improved
+- **📝 agents.md exercises**: Exercise 1 now shows expected output and `azd monitor` step; Exercise 2 includes full `FunctionTool` registration code; Exercise 3 replaces vague guidance with concrete `prepdocs.py` commands
+- **📚 agents.md resources**: Updated documentation links to current Azure AI Agent Service docs and quickstart
+- **📋 agents.md Next Steps table**: Added AI Workshop Lab link for complete chapter coverage
+
+#### Files Updated
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `resources/cheat-sheet.md`
+
+---
+
 ### [v3.17.0] - 2026-02-05
 
 #### Course Navigation Enhancement
@@ -38,7 +90,7 @@ After reviewing changelog entries, you will be able to:
 **This version updates product references to current Microsoft branding.**
 
 #### Changed
-- **Azure AI Foundry → Microsoft Foundry**: All references updated across non-translation files
+- **Microsoft Foundry → Microsoft Foundry**: All references updated across non-translation files
 - **Azure AI Agent Service → Foundry Agents**: Service name updated to reflect current branding
 
 #### Files Updated
@@ -271,7 +323,7 @@ Old folders have been replaced with chapter-numbered folders:
 #### Completed
 - **🎯 Workshop Module 7 (Wrap-up)**: Fully completed wrap-up module with:
   - Comprehensive summary of workshop accomplishments
-  - Key concepts mastered section covering AZD, templates, and AI Foundry
+  - Key concepts mastered section covering AZD, templates, and Microsoft Foundry
   - Learning journey continuation recommendations
   - Workshop challenge exercises with difficulty ratings
   - Community feedback and support links
@@ -337,7 +389,7 @@ Old folders have been replaced with chapter-numbered folders:
   - AZD-focused deployment with automatic provisioning
   - Complete Bicep templates for Application Insights + Log Analytics
   - Working Python applications with custom telemetry (1,200+ lines)
-  - AI/LLM monitoring patterns (Azure OpenAI token/cost tracking)
+  - AI/LLM monitoring patterns (Microsoft Foundry Models token/cost tracking)
   - 6 Mermaid diagrams (architecture, distributed tracing, telemetry flow)
   - 3 hands-on exercises (alerts, dashboards, AI monitoring)
   - Kusto query examples and cost optimization strategies
@@ -379,7 +431,7 @@ Old folders have been replaced with chapter-numbered folders:
 - **Developer Experience**: Clear path from development to production monitoring
 - **Security Standards**: Professional patterns for authentication and secrets management
 - **Observability**: Complete Application Insights integration with AZD
-- **AI Workloads**: Specialized monitoring for Azure OpenAI and multi-agent systems
+- **AI Workloads**: Specialized monitoring for Microsoft Foundry Models and multi-agent systems
 
 #### Validated
 - ✅ All lessons include complete working code (not snippets)
@@ -405,12 +457,12 @@ Old folders have been replaced with chapter-numbered folders:
 
 ### [v3.7.0] - 2025-11-19
 
-#### Documentation Quality Improvements and New Azure OpenAI Example
-**This version enhances documentation quality across the repository and adds a complete Azure OpenAI deployment example with GPT-4 chat interface.**
+#### Documentation Quality Improvements and New Microsoft Foundry Models Example
+**This version enhances documentation quality across the repository and adds a complete Microsoft Foundry Models deployment example with gpt-4.1 chat interface.**
 
 #### Added
-- **🤖 Azure OpenAI Chat Example**: Complete GPT-4 deployment with working implementation in `examples/azure-openai-chat/`:
-  - Complete Azure OpenAI infrastructure (GPT-4 model deployment)
+- **🤖 Microsoft Foundry Models Chat Example**: Complete gpt-4.1 deployment with working implementation in `examples/azure-openai-chat/`:
+  - Complete Microsoft Foundry Models infrastructure (gpt-4.1 model deployment)
   - Python command-line chat interface with conversation history
   - Key Vault integration for secure API key storage
   - Token usage tracking and cost estimation
@@ -446,13 +498,13 @@ Old folders have been replaced with chapter-numbered folders:
 - **Verification Process**: Explicit success criteria added to key workflows
 
 #### Improved
-- **Developer Experience**: Azure OpenAI deployment now takes 35-45 minutes (vs 60-90 for complex alternatives)
-- **Cost Transparency**: Clear cost estimates ($50-200/month) for Azure OpenAI example
+- **Developer Experience**: Microsoft Foundry Models deployment now takes 35-45 minutes (vs 60-90 for complex alternatives)
+- **Cost Transparency**: Clear cost estimates ($50-200/month) for Microsoft Foundry Models example
 - **Learning Path**: AI developers have clear entry point with azure-openai-chat
 - **Documentation Standards**: Consistent expected outputs and verification steps
 
 #### Validated
-- ✅ Azure OpenAI example fully functional with `azd up`
+- ✅ Microsoft Foundry Models example fully functional with `azd up`
 - ✅ All 11 implementation files syntactically correct
 - ✅ README instructions match actual deployment experience
 - ✅ Documentation links updated across 8+ locations
@@ -461,7 +513,7 @@ Old folders have been replaced with chapter-numbered folders:
 - ✅ All navigation references correct
 
 #### Technical Implementation
-- **Azure OpenAI Architecture**: GPT-4 + Key Vault + Container Apps pattern
+- **Microsoft Foundry Models Architecture**: gpt-4.1 + Key Vault + Container Apps pattern
 - **Security**: Managed Identity ready, secrets in Key Vault
 - **Monitoring**: Application Insights integration
 - **Cost Management**: Token tracking and usage optimization
@@ -736,7 +788,7 @@ If you have local branches or documentation referencing the old structure:
 - **AI Model Deployment Patterns**: Detailed guide covering model selection, configuration, and production deployment strategies
 - **AI Workshop Lab**: 2-3 hour hands-on workshop for converting AI applications to AZD-deployable solutions
 - **Production AI Best Practices**: Enterprise-ready patterns for scaling, monitoring, and securing AI workloads
-- **AI-Specific Troubleshooting Guide**: Comprehensive troubleshooting for Azure OpenAI, Cognitive Services, and AI deployment issues
+- **AI-Specific Troubleshooting Guide**: Comprehensive troubleshooting for Microsoft Foundry Models, Cognitive Services, and AI deployment issues
 - **AI Template Gallery**: Featured collection of Microsoft Foundry templates with complexity ratings
 - **Workshop Materials**: Complete workshop structure with hands-on labs and reference materials
 
@@ -856,7 +908,7 @@ If you have local branches or documentation referencing the old structure:
 - **AI Observability**: Enhanced monitoring for model performance, token usage, and response quality
 
 #### Developer Experience
-- **VS Code Extension**: Integrated AZD + AI Foundry development experience
+- **VS Code Extension**: Integrated AZD + Microsoft Foundry development experience
 - **GitHub Copilot Integration**: AI-assisted AZD template generation
 - **Interactive Tutorials**: Hands-on coding exercises with automated validation for AI scenarios
 - **Video Content**: Supplementary video tutorials for visual learners focusing on AI deployments

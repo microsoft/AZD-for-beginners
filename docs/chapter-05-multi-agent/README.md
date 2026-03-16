@@ -31,30 +31,26 @@ By completing this chapter, you will:
 ## 🚀 Quick Start
 
 ```bash
-# Deploy the retail multi-agent solution
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Or use the template directly
+# Option 1: Deploy from a template
 azd init --template agent-openai-python-prompty
 azd up
+
+# Option 2: Deploy from an agent manifest (requires azure.ai.agents extension)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
 ```
+
+> **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
 ---
 
 ## 🤖 Multi-Agent Architecture
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
+```mermaid
+graph TD
+    Orchestrator[Orchestrator Agent<br/>Routes requests, manages workflow] --> Customer[Customer Agent<br/>User queries, preferences]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock levels, orders]
 ```
 
 ---
@@ -72,7 +68,7 @@ The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrate
 
 | Service | Purpose |
 |---------|---------|
-| Azure OpenAI | Language understanding |
+| Microsoft Foundry Models | Language understanding |
 | Azure AI Search | Product catalog |
 | Cosmos DB | Agent state and memory |
 | Container Apps | Agent hosting |

@@ -1080,7 +1080,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1515,7 +1515,7 @@ az containerapp revision restart \
 - 🏠 [Course Home](../../README.md)
 
 ### Related Examples
-- [Azure OpenAI Chat Example](../../examples/azure-openai-chat/) - Uses managed identity for Azure OpenAI
+- [Microsoft Foundry Models Chat Example](../../examples/azure-openai-chat/) - Uses managed identity for Microsoft Foundry Models
 - [Microservices Example](../../examples/microservices/) - Multi-service authentication patterns
 
 ---

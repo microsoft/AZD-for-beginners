@@ -233,7 +233,7 @@ azd monitor --overview
 
 ### Example 2: AI-Powered Container App
 
-**Scenario**: AI chat application with Azure OpenAI integration
+**Scenario**: AI chat application with Microsoft Foundry Models integration
 
 **File: src/ai-chat/app.py**
 ```python
@@ -258,7 +258,7 @@ def chat():
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -328,7 +328,7 @@ azd env new dev
 
 # Configure OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # Deploy
 azd up

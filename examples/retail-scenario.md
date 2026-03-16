@@ -9,7 +9,7 @@
 
 > **⚠️ ARCHITECTURE GUIDE - NOT WORKING IMPLEMENTATION**  
 > This document provides a **comprehensive architecture blueprint** for building a multi-agent system.  
-> **What exists:** ARM template for infrastructure deployment (Azure OpenAI, AI Search, Container Apps, etc.)  
+> **What exists:** ARM template for infrastructure deployment (Microsoft Foundry Models, AI Search, Container Apps, etc.)  
 > **What you must build:** Agent code, routing logic, frontend UI, data pipelines (estimated 80-120 hours)  
 >  
 > **Use this as:**
@@ -26,7 +26,7 @@
 
 **What You'll Learn:**
 - Multi-agent architecture patterns and design principles
-- Multi-region Azure OpenAI deployment strategies
+- Multi-region Microsoft Foundry Models deployment strategies
 - AI Search integration with RAG (Retrieval-Augmented Generation)
 - Agent evaluation and security testing frameworks
 - Production deployment considerations and cost optimization
@@ -39,7 +39,7 @@
 
 A production customer support solution requires:
 - **Multiple specialized agents** for different customer needs (Customer Service + Inventory Management)
-- **Multi-model deployment** with proper capacity planning (GPT-4o, GPT-4o-mini, embeddings across regions)
+- **Multi-model deployment** with proper capacity planning (gpt-4.1, gpt-4.1-mini, embeddings across regions)
 - **Dynamic data integration** with AI Search and file uploads (vector search + document processing)
 - **Comprehensive monitoring** and evaluation capabilities (Application Insights + custom metrics)
 - **Production-grade security** with red teaming validation (vulnerability scanning + agent evaluation)
@@ -78,7 +78,7 @@ cd retail-multiagent-arm-template
 ```
 
 **What Gets Deployed:**
-- ✅ Azure OpenAI (3 regions: GPT-4o, GPT-4o-mini, embeddings)
+- ✅ Microsoft Foundry Models (3 regions: gpt-4.1, gpt-4.1-mini, embeddings)
 - ✅ AI Search service (empty, needs index configuration)
 - ✅ Container Apps environment (placeholder images)
 - ✅ Storage accounts, Cosmos DB, Key Vault
@@ -97,8 +97,8 @@ cd retail-multiagent-arm-template
 
 1. **Agent Implementation** (30-40 hours)
    - Base agent class and interfaces
-   - Customer service agent with GPT-4o
-   - Inventory agent with GPT-4o-mini
+   - Customer service agent with gpt-4.1
+   - Inventory agent with gpt-4.1-mini
    - Tool integrations (AI Search, Bing, file processing)
 
 2. **Routing Service** (12-16 hours)
@@ -145,8 +145,8 @@ graph TB
     Router --> CustomerAgent[Customer Agent<br/>Customer Service]
     Router --> InvAgent[Inventory Agent<br/>Stock Management]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Microsoft Foundry Models<br/>gpt-4.1<br/>East US 2]
+    InvAgent --> OpenAI2[Microsoft Foundry Models<br/>gpt-4.1-mini<br/>West US 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>Product Catalog]
     CustomerAgent --> BingSearch[Bing Search API<br/>Real-time Info]
@@ -162,7 +162,7 @@ graph TB
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grader<br/>Switzerland North] --> Evaluation[Evaluation Framework]
+    GraderModel[gpt-4.1 Grader<br/>Switzerland North] --> Evaluation[Evaluation Framework]
     RedTeam[Red Team Scanner] --> SecurityReports[Security Reports]
     
     subgraph "Data Layer"
@@ -204,13 +204,13 @@ graph TB
 |-----------|---------|------------|---------|
 | **Web Frontend** | User interface for customer interactions | Container Apps | Primary Region |
 | **Agent Router** | Routes requests to appropriate agent | Container Apps | Primary Region |
-| **Customer Agent** | Handles customer service queries | Container Apps + GPT-4o | Primary Region |
-| **Inventory Agent** | Manages stock and fulfillment | Container Apps + GPT-4o-mini | Primary Region |
-| **Azure OpenAI** | LLM inference for agents | Cognitive Services | Multi-region |
+| **Customer Agent** | Handles customer service queries | Container Apps + gpt-4.1 | Primary Region |
+| **Inventory Agent** | Manages stock and fulfillment | Container Apps + gpt-4.1-mini | Primary Region |
+| **Microsoft Foundry Models** | LLM inference for agents | Cognitive Services | Multi-region |
 | **AI Search** | Vector search and RAG | AI Search Service | Primary Region |
 | **Storage Account** | File uploads and documents | Blob Storage | Primary Region |
 | **Application Insights** | Monitoring and telemetry | Monitor | Primary Region |
-| **Grader Model** | Agent evaluation system | Azure OpenAI | Secondary Region |
+| **Grader Model** | Agent evaluation system | Microsoft Foundry Models | Secondary Region |
 
 ## 📁 Project Structure
 
@@ -236,7 +236,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -383,7 +383,7 @@ az resource list --resource-group myResourceGroup --output table
 ```
 
 **Expected outcome:**
-- ✅ Azure OpenAI services deployed (3 regions)
+- ✅ Microsoft Foundry Models services deployed (3 regions)
 - ✅ AI Search service created (empty)
 - ✅ Container Apps environment ready
 - ✅ Storage, Cosmos DB, Key Vault configured
@@ -451,7 +451,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -460,7 +460,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -475,12 +475,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -518,7 +518,7 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -532,7 +532,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -547,7 +547,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -562,7 +562,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
 ### 3. AI Search with Data Index Configuration
@@ -704,7 +704,7 @@ class CustomerAgent:
         
         # Generate response with grounding
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -1274,7 +1274,7 @@ echo "Security scan completed. Check security_reports/ for results."
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1297,7 +1297,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1417,7 +1417,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1648,11 +1648,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # This would call Azure OpenAI API to get current versions
+    # This would call Microsoft Foundry Models API to get current versions
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1699,7 +1699,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1754,9 +1754,9 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
 
@@ -1769,8 +1769,8 @@ services:
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1812,7 +1812,7 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
 # Start fine-tuning job
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
 # Store job ID for monitoring
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
@@ -1919,7 +1919,7 @@ The ARM template at [`retail-multiagent-arm-template/`](./retail-multiagent-arm-
 The ARM template located in [`retail-multiagent-arm-template/`](./retail-multiagent-arm-template/) includes:
 
 #### **Complete Infrastructure**
-- ✅ **Multi-region Azure OpenAI** deployments (GPT-4o, GPT-4o-mini, embeddings, grader)
+- ✅ **Multi-region Microsoft Foundry Models** deployments (gpt-4.1, gpt-4.1-mini, embeddings, grader)
 - ✅ **Azure AI Search** with vector search capabilities
 - ✅ **Azure Storage** with document and upload containers
 - ✅ **Container Apps Environment** with auto-scaling
@@ -2148,7 +2148,7 @@ cd retail-multiagent-arm-template
 2. **Multi-Region Strategy** - Strategic model placement reduces costs and improves reliability
 3. **Evaluation Framework** - Dedicated grader model enables continuous quality assessment
 4. **Security First** - Red teaming and vulnerability scanning are essential for production
-5. **Cost Optimization** - Intelligent routing between GPT-4o and GPT-4o-mini saves 60-80%
+5. **Cost Optimization** - Intelligent routing between gpt-4.1 and gpt-4.1-mini saves 60-80%
 
 ### Estimated Costs
 
@@ -2163,7 +2163,7 @@ cd retail-multiagent-arm-template
 ### Related Resources
 
 - 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Infrastructure setup
-- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Model deployment
+- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Model deployment
 - 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Vector search configuration
 - 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Microservices deployment
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Monitoring setup

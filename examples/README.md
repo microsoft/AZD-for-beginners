@@ -8,7 +8,7 @@
 
 > **📍 IMPORTANT: Local vs External Examples**  
 > This repository contains **4 complete local examples** with full implementations:  
-> - **Azure OpenAI Chat** (GPT-4 deployment with chat interface)  
+> - **Microsoft Foundry Models Chat** (gpt-4.1 deployment with chat interface)  
 > - **Container Apps** (Simple Flask API + Microservices)  
 > - **Database App** (Web + SQL Database)  
 > - **Retail Multi-Agent** (Enterprise AI Solution)  
@@ -30,13 +30,13 @@ This directory provides practical examples and references to help you learn Azur
 
 ### ✅ Local Implementation (Ready to Use)
 
-#### [Azure OpenAI Chat Application](azure-openai-chat/README.md) 🆕
-**Complete GPT-4 deployment with chat interface included in this repo**
+#### [Microsoft Foundry Models Chat Application](azure-openai-chat/README.md) 🆕
+**Complete gpt-4.1 deployment with chat interface included in this repo**
 
 - **Location:** `examples/azure-openai-chat/`
 - **Complexity:** ⭐⭐ (Intermediate)
 - **What's Included:**
-  - Complete Azure OpenAI deployment (GPT-4)
+  - Complete Microsoft Foundry Models deployment (gpt-4.1)
   - Python command-line chat interface
   - Key Vault integration for secure API keys
   - Bicep infrastructure templates
@@ -56,7 +56,7 @@ pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-**Technologies:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
+**Technologies:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
 
 #### [Container App Examples](container-app/README.md) 🆕
 **Comprehensive container deployment examples included in this repo**
@@ -94,7 +94,7 @@ azd up
 - **What's Included:**
   - Complete ARM deployment template
   - Multi-agent architecture (Customer + Inventory)
-  - Azure OpenAI integration
+  - Microsoft Foundry Models integration
   - AI Search with RAG
   - Comprehensive monitoring
   - One-click deployment script
@@ -105,7 +105,7 @@ cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**Technologies:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
+**Technologies:** Microsoft Foundry Models, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
@@ -137,7 +137,7 @@ azd up
 
 | Template | Repository | Complexity | Focus |
 |:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [Local: azure-openai-chat](azure-openai-chat/) | ⭐⭐ | GPT-4 deployment |
+| **Microsoft Foundry Models Chat** | [Local: azure-openai-chat](azure-openai-chat/) | ⭐⭐ | gpt-4.1 deployment |
 | **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Basic AI chat |
 | **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent framework |
 | **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG pattern |
@@ -212,11 +212,11 @@ Azure Samples AZD Templates (linked externally):
    **Expected Outcome:** React UI with API backend, automatic SSL, global CDN
 
 ### For Intermediate Users
-4. **[Azure OpenAI Chat Application](azure-openai-chat/)** (Local) ⭐⭐  
-   Deploy GPT-4 with chat interface and secure API key management  
+4. **[Microsoft Foundry Models Chat Application](azure-openai-chat/)** (Local) ⭐⭐  
+   Deploy gpt-4.1 with chat interface and secure API key management  
    **Time:** 35-45 minutes | **Cost:** $50-200/month  
-   **You'll Learn:** Azure OpenAI deployment, Key Vault integration, token tracking  
-   **Expected Outcome:** Working chat application with GPT-4 and cost monitoring
+   **You'll Learn:** Microsoft Foundry Models deployment, Key Vault integration, token tracking  
+   **Expected Outcome:** Working chat application with gpt-4.1 and cost monitoring
 
 5. **[Container App - Microservices](container-app/microservices/)** (Local) ⭐⭐⭐⭐  
    Production-ready multi-service architecture  
@@ -244,8 +244,8 @@ Azure Samples AZD Templates (linked externally):
 
 ### Microsoft Foundry Templates
 
-1. **[Azure OpenAI Chat App - Local Example](azure-openai-chat/)** ⭐⭐  
-   Complete GPT-4 deployment with chat interface  
+1. **[Microsoft Foundry Models Chat App - Local Example](azure-openai-chat/)** ⭐⭐  
+   Complete gpt-4.1 deployment with chat interface  
    **Time:** 35-45 minutes | **Cost:** $50-200/month  
    **Expected Outcome:** Working chat application with token tracking and cost monitoring
 
@@ -272,12 +272,12 @@ Azure Samples AZD Templates (linked externally):
 A comprehensive, production-ready multi-agent customer support solution that demonstrates enterprise-grade AI application deployment with AZD. This scenario provides:
 
 - **Complete Architecture**: Multi-agent system with specialized customer service and inventory management agents
-- **Production Infrastructure**: Multi-region Azure OpenAI deployments, AI Search, Container Apps, and comprehensive monitoring
+- **Production Infrastructure**: Multi-region Microsoft Foundry Models deployments, AI Search, Container Apps, and comprehensive monitoring
 - **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)
 - **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides
 - **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling
 
-**Technologies**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+**Technologies**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
 **Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
 
@@ -416,8 +416,8 @@ Each example includes:
 
 ### Microsoft Foundry Examples
 
-#### Azure OpenAI Chat App
-**Technologies**: Azure OpenAI, Cognitive Search, App Service  
+#### Microsoft Foundry Models Chat App
+**Technologies**: Microsoft Foundry Models, Cognitive Search, App Service  
 **Complexity**: Intermediate  
 **Concepts**: RAG architecture, vector search, LLM integration
 
@@ -481,7 +481,7 @@ The `configurations/` directory contains reusable components:
 
 | Example | Services | Database | Auth | Monitoring | Complexity |
 |---------|----------|----------|------|------------|------------|
-| **Azure OpenAI Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
+| **Microsoft Foundry Models Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
 | **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |
 | **Microservices** (Local) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
@@ -490,7 +490,7 @@ The `configurations/` directory contains reusable components:
 | C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
 | Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
 | Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| Microsoft Foundry Models Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
 | **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
@@ -535,15 +535,15 @@ The `configurations/` directory contains reusable components:
 - **Container Apps**: [Python Flask API (Local)](container-app/simple-flask-api/), [Microservices (Local)](container-app/microservices/), Java Microservices
 - **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](container-app/microservices/)
 - **Python**: [Python Flask API (Local)](container-app/simple-flask-api/), [Microservices Product Service (Local)](container-app/microservices/), Python Functions + SPA
-- **C#**: [Microservices Order Service (Local)](container-app/microservices/), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **C#**: [Microservices Order Service (Local)](container-app/microservices/), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
 - **Go**: [Microservices User Service (Local)](container-app/microservices/)
 - **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
 - **Containers**: [Python Flask (Local)](container-app/simple-flask-api/), [Microservices (Local)](container-app/microservices/), Java Microservices
 - **Databases**: [Microservices (Local)](container-app/microservices/), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Azure OpenAI Chat (Local)](azure-openai-chat/)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **AI/ML**: **[Microsoft Foundry Models Chat (Local)](azure-openai-chat/)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Systems**: **Retail Multi-Agent Solution**
-- **OpenAI Integration**: **[Azure OpenAI Chat (Local)](azure-openai-chat/)**, Retail Multi-Agent Solution
+- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Local)](azure-openai-chat/)**, Retail Multi-Agent Solution
 - **Enterprise Production**: [Microservices (Local)](container-app/microservices/), **Retail Multi-Agent Solution**
 
 ### By Architecture Pattern
@@ -552,13 +552,13 @@ The `configurations/` directory contains reusable components:
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Microservices**: [Production Microservices (Local)](container-app/microservices/), Java Spring Boot Microservices
 - **Containerized**: [Python Flask (Local)](container-app/simple-flask-api/), [Microservices (Local)](container-app/microservices/)
-- **AI-Powered**: **[Azure OpenAI Chat (Local)](azure-openai-chat/)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **AI-Powered**: **[Microsoft Foundry Models Chat (Local)](azure-openai-chat/)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
 - **Enterprise Multi-Service**: [Microservices (Local)](container-app/microservices/), **Retail Multi-Agent Solution**
 
 ### By Complexity Level
 - **Beginner**: [Python Flask API (Local)](container-app/simple-flask-api/), Node.js Express Todo, React SPA + Functions
-- **Intermediate**: **[Azure OpenAI Chat (Local)](azure-openai-chat/)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Intermediate**: **[Microsoft Foundry Models Chat (Local)](azure-openai-chat/)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
 - **Advanced**: ML Pipeline
 - **Enterprise Production-Ready**: [Microservices (Local)](container-app/microservices/) (Multi-service with message queuing), **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
 
@@ -620,7 +620,7 @@ example-name/
 
 1. **Complete Beginner?** → Start with [Flask API](container-app/simple-flask-api/) (⭐, 20 mins)
 2. **Have Basic AZD Knowledge?** → Try [Microservices](container-app/microservices/) (⭐⭐⭐⭐, 60 mins)
-3. **Building AI Apps?** → Start with [Azure OpenAI Chat](azure-openai-chat/) (⭐⭐, 35 mins) or explore [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ hours)
+3. **Building AI Apps?** → Start with [Microsoft Foundry Models Chat](azure-openai-chat/) (⭐⭐, 35 mins) or explore [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ hours)
 4. **Need Specific Tech Stack?** → Use [Finding the Right Example](#-finding-the-right-example) section above
 
 ### Next Steps

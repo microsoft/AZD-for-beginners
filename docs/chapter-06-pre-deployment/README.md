@@ -74,7 +74,7 @@ azd env get-values
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---

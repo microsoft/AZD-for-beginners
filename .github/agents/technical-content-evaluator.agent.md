@@ -174,7 +174,7 @@ Chapter X Exercise Audit:
 - Verify consistent use of voice, tone, and formality level
 - Check that chapter structures follow the same template
 - Validate consistent use of callouts, notes, warnings, and tips
-- Verify service names are consistently formatted (e.g., "Azure OpenAI" not "AzureOpenAI")
+- Verify service names are consistently formatted (e.g. using the Model Alias from the "Microsoft Foundry Models Catalog" )
 - Check that external template links point to correct unique URLs (not duplicates)
 
 **MANDATORY LINK INTEGRITY AUDIT:**
