@@ -1,32 +1,32 @@
 # Ενσωμάτωση του Application Insights με το AZD
 
-⏱️ **Εκτιμώμενος Χρόνος**: 40-50 λεπτά | 💰 **Επιπτώσεις Κόστους**: ~$5-15/μήνα | ⭐ **Πολυπλοκότητα**: Ενδιάμεση
+⏱️ **Εκτιμώμενος Χρόνος**: 40-50 minutes | 💰 **Επίπτωση Κόστους**: ~$5-15/month | ⭐ **Πολυπλοκότητα**: Intermediate
 
-**📚 Διαδρομή Μάθησης:**
-- ← Προηγούμενο: [Έλεγχοι Προ-ανάπτυξης](preflight-checks.md) - Έλεγχος πριν από ανάπτυξη
-- 🎯 **Είστε Εδώ**: Ενσωμάτωση Application Insights (Παρακολούθηση, τηλεμετρία, αποσφαλμάτωση)
-- → Επόμενο: [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md) - Ανάπτυξη στο Azure
-- 🏠 [Αρχική του Μαθήματος](../../README.md)
+**📚 Μονοπάτι Μάθησης:**
+- ← Προηγούμενο: [Έλεγχοι πριν την ανάπτυξη](preflight-checks.md) - Προ-ανάπτυξης επαλήθευση
+- 🎯 **Βρίσκεστε εδώ**: Ενσωμάτωση Application Insights (Παρακολούθηση, τηλεμετρία, αποσφαλμάτωση)
+- → Επόμενο: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Deploy to Azure
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 ## Τι θα μάθετε
 
 Με την ολοκλήρωση αυτού του μαθήματος, θα:
-- Ενσωματώσετε το **Application Insights** αυτόματα σε έργα AZD
-- Διαμορφώσετε **διανεμημένο tracing** για μικροϋπηρεσίες
-- Υλοποιήσετε **προσαρμοσμένη τηλεμετρία** (μετρικές, γεγονότα, dependencies)
-- Ρυθμίσετε **live metrics** για παρακολούθηση σε πραγματικό χρόνο
-- Δημιουργήσετε **ειδοποιήσεις και πίνακες εργαλείων** από αναπτύξεις AZD
-- Αποσφαλματώσετε προβλήματα παραγωγής με **ερωτήματα τηλεμετρίας**
+- Ενσωματώσετε αυτόματα το **Application Insights** σε έργα AZD
+- Διαμορφώσετε **κατανεμημένη ιχνηλάτηση** για μικροϋπηρεσίες
+- Υλοποιήσετε **προσαρμοσμένη τηλεμετρία** (μετρικές, γεγονότα, εξαρτήσεις)
+- Ενεργοποιήσετε **Live Metrics** για παρακολούθηση σε πραγματικό χρόνο
+- Δημιουργήσετε **ειδοποιήσεις και πίνακες ελέγχου** από αναπτύξεις AZD
+- Αποσφαλματώσετε ζητήματα παραγωγής με **ερωτήματα τηλεμετρίας**
 - Βελτιστοποιήσετε **κόστη και στρατηγικές δειγματοληψίας**
-- Παρακολουθείτε **εφαρμογές AI/LLM** (tokens, καθυστέρηση, κόστη)
+- Παρακολουθήσετε **εφαρμογές AI/LLM** (tokens, καθυστέρηση, κόστη)
 
-## Γιατί έχει σημασία το Application Insights με AZD
+## Γιατί έχει σημασία το Application Insights με το AZD
 
-### Το Πρόβλημα: Παρατηρησιμότητα σε Παραγωγή
+### Η Πρόκληση: Παρατηρησιμότητα στην Παραγωγή
 
-**Χωρίς Application Insights:**
+**Χωρίς το Application Insights:**
 ```
 ❌ No visibility into production behavior
 ❌ Manual log aggregation across services
@@ -36,7 +36,7 @@
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**Με Application Insights + AZD:**
+**Με το Application Insights + AZD:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -47,34 +47,34 @@
 ✅ AZD provisions everything automatically
 ```
 
-**Αναλογία**: Το Application Insights είναι σαν να έχετε ένα "black box" καταγραφέα πτήσης + πίνακα οργάνων πιλοτηρίου για την εφαρμογή σας. Βλέπετε τα πάντα που συμβαίνουν σε πραγματικό χρόνο και μπορείτε να αναπαράγετε οποιοδήποτε περιστατικό.
+**Αναλογία**: Το Application Insights είναι σαν να έχετε ένα «black box» καταγραφέα πτήσης + πίνακα οργάνων πιλοτηρίου για την εφαρμογή σας. Βλέπετε όλα όσα συμβαίνουν σε πραγματικό χρόνο και μπορείτε να αναπαράγετε οποιοδήποτε περιστατικό.
 
 ---
 
 ## Επισκόπηση Αρχιτεκτονικής
 
-### Η Αρχιτεκτονική του Application Insights στο AZD
+### Application Insights στην Αρχιτεκτονική AZD
 
 ```mermaid
 graph TB
     User[Χρήστης/Πελάτης]
     App1[Εφαρμογή κοντέινερ 1<br/>Πύλη API]
-    App2[Εφαρμογή κοντέινερ 2<br/>Υπηρεσία Προϊόντων]
-    App3[Εφαρμογή κοντέινερ 3<br/>Υπηρεσία Παραγγελιών]
+    App2[Εφαρμογή κοντέινερ 2<br/>Υπηρεσία προϊόντος]
+    App3[Εφαρμογή κοντέινερ 3<br/>Υπηρεσία παραγγελιών]
     
-    AppInsights[Application Insights<br/>Κέντρο Τηλεμετρίας]
-    LogAnalytics[(Log Analytics<br/>Χώρος εργασίας)]
+    AppInsights[Στοιχεία Εφαρμογής<br/>Κέντρο Τηλεμετρίας]
+    LogAnalytics[(Ανάλυση καταγραφών<br/>Χώρος εργασίας)]
     
-    Portal[Azure Portal<br/>Πίνακες ελέγχου & Ειδοποιήσεις]
+    Portal[Πύλη Azure<br/>Πίνακες ελέγχου & Ειδοποιήσεις]
     Query[Ερωτήματα Kusto<br/>Προσαρμοσμένη Ανάλυση]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Αυτόματη παρακολούθηση| AppInsights
-    App2 -.->|Αυτόματη παρακολούθηση| AppInsights
-    App3 -.->|Αυτόματη παρακολούθηση| AppInsights
+    App1 -.->|Αυτόματη ενσωμάτωση τηλεμετρίας| AppInsights
+    App2 -.->|Αυτόματη ενσωμάτωση τηλεμετρίας| AppInsights
+    App3 -.->|Αυτόματη ενσωμάτωση τηλεμετρίας| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -85,15 +85,15 @@ graph TB
 ```
 ### Τι παρακολουθείται αυτόματα
 
-| Telemetry Type | What It Captures | Use Case |
-|----------------|------------------|----------|
-| **Requests** | HTTP requests, status codes, duration | Παρακολούθηση απόδοσης API |
-| **Dependencies** | External calls (DB, APIs, storage) | Εντοπισμός σημείων συμφόρησης |
-| **Exceptions** | Unhandled errors with stack traces | Αποσφαλμάτωση αποτυχιών |
-| **Custom Events** | Business events (signup, purchase) | Ανάλυση και funnels |
-| **Metrics** | Performance counters, custom metrics | Σχεδιασμός χωρητικότητας |
-| **Traces** | Log messages with severity | Αποσφαλμάτωση και έλεγχος |
-| **Availability** | Uptime and response time tests | Παρακολούθηση SLA |
+| Είδος Τηλεμετρίας | Τι καταγράφει | Σενάριο χρήσης |
+|------------------|------------------|----------|
+| **Αιτήσεις** | HTTP requests, status codes, duration | Παρακολούθηση απόδοσης API |
+| **Εξαρτήσεις** | Εξωτερικές κλήσεις (DB, APIs, storage) | Εντοπισμός σημείων συμφόρησης |
+| **Εξαιρέσεις** | Μη χειριζόμενα σφάλματα με stack traces | Αποσφαλμάτωση αποτυχιών |
+| **Προσαρμοσμένα Γεγονότα** | Επιχειρηματικά γεγονότα (signup, purchase) | Αναλύσεις και χωνιά |
+| **Μετρικές** | Counters απόδοσης, προσαρμοσμένες μετρικές | Σχεδιασμός χωρητικότητας |
+| **Ιχνη** | Μηνύματα καταγραφής με severity | Αποσφαλμάτωση και έλεγχος |
+| **Διαθεσιμότητα** | Έλεγχοι uptime και response time | Παρακολούθηση SLA |
 
 ---
 
@@ -102,36 +102,36 @@ graph TB
 ### Απαιτούμενα Εργαλεία
 
 ```bash
-# Επαληθεύστε το Azure Developer CLI
+# Επαλήθευση του Azure Developer CLI
 azd version
 # ✅ Αναμενόμενο: έκδοση azd 1.0.0 ή νεότερη
 
-# Επαληθεύστε το Azure CLI
+# Επαλήθευση του Azure CLI
 az --version
-# ✅ Αναμενόμενο: azure-cli 2.50.0 ή νεότερη
+# ✅ Αναμενόμενο: έκδοση azure-cli 2.50.0 ή νεότερη
 ```
 
 ### Απαιτήσεις Azure
 
 - Ενεργή συνδρομή Azure
 - Δικαιώματα για δημιουργία:
-  - Πόροι Application Insights
+  - Application Insights resources
   - Log Analytics workspaces
   - Container Apps
-  - Ομάδες πόρων
+  - Resource groups
 
 ### Προαπαιτούμενες Γνώσεις
 
 Θα πρέπει να έχετε ολοκληρώσει:
-- [Βασικά του AZD](../chapter-01-foundation/azd-basics.md) - Βασικές έννοιες του AZD
-- [Διαμόρφωση](../chapter-03-configuration/configuration.md) - Ρύθμιση περιβάλλοντος
+- [Βασικά AZD](../chapter-01-foundation/azd-basics.md) - Βασικές έννοιες AZD
+- [Ρυθμίσεις](../chapter-03-configuration/configuration.md) - Ρύθμιση περιβάλλοντος
 - [Πρώτο Έργο](../chapter-01-foundation/first-project.md) - Βασική ανάπτυξη
 
 ---
 
-## Μάθημα 1: Αυτόματη ενσωμάτωση του Application Insights με το AZD
+## Μάθημα 1: Αυτόματη ενσωμάτωση Application Insights με το AZD
 
-### Πώς το AZD δημιουργεί και διαμορφώνει το Application Insights
+### Πώς το AZD δημιουργεί το Application Insights
 
 Το AZD δημιουργεί και διαμορφώνει αυτόματα το Application Insights όταν κάνετε ανάπτυξη. Ας δούμε πώς λειτουργεί.
 
@@ -154,9 +154,9 @@ monitored-app/
 
 ---
 
-### Βήμα 1: Διαμόρφωση AZD (azure.yaml)
+### Βήμα 1: Ρύθμιση AZD (azure.yaml)
 
-**File: `azure.yaml`**
+**Αρχείο: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -172,13 +172,13 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**Αυτό ήταν!** Το AZD θα δημιουργήσει το Application Insights εξ ορισμού. Δεν χρειάζεται επιπλέον διαμόρφωση για βασική παρακολούθηση.
+**Αυτό ήταν!** Το AZD θα δημιουργήσει το Application Insights από προεπιλογή. Δεν απαιτείται επιπλέον ρύθμιση για βασική παρακολούθηση.
 
 ---
 
 ### Βήμα 2: Υποδομή Παρακολούθησης (Bicep)
 
-**File: `infra/core/monitoring.bicep`**
+**Αρχείο: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -227,9 +227,9 @@ output applicationInsightsName string = applicationInsights.name
 
 ---
 
-### Βήμα 3: Σύνδεση Container App με Application Insights
+### Βήμα 3: Σύνδεση Container App με το Application Insights
 
-**File: `infra/app/api.bicep`**
+**Αρχείο: `infra/app/api.bicep`**
 
 ```bicep
 param name string
@@ -287,7 +287,7 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### Βήμα 4: Κώδικας Εφαρμογής με Τηλεμετρία
 
-**File: `src/app.py`**
+**Αρχείο: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -304,7 +304,7 @@ app = Flask(__name__)
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Διαμόρφωση διανεμημένης παρακολούθησης
+    # Διαμόρφωση διανεμημένης ιχνηλάτησης
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
@@ -331,7 +331,7 @@ def health():
 def get_products():
     logger.info('Fetching products')
     
-    # Προσομοίωση κλήσης βάσης δεδομένων (παρακολουθείται αυτόματα ως εξάρτηση)
+    # Προσομοίωση κλήσης βάσης δεδομένων (αυτόματα παρακολουθείται ως εξάρτηση)
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -364,7 +364,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: `src/requirements.txt`**
+**Αρχείο: `src/requirements.txt`**
 
 ```txt
 Flask==3.0.0
@@ -378,13 +378,13 @@ gunicorn==21.2.0
 ### Βήμα 5: Ανάπτυξη και Επαλήθευση
 
 ```bash
-# Αρχικοποίηση AZD
+# Αρχικοποιήστε το AZD
 azd init
 
-# Ανάπτυξη (παρέχει αυτόματα το Application Insights)
+# Ανάπτυξη (δημιουργεί αυτόματα το Application Insights)
 azd up
 
-# Λήψη URL εφαρμογής
+# Λήψη του URL της εφαρμογής
 APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
 
 # Δημιουργία τηλεμετρίας
@@ -394,7 +394,7 @@ curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Αναμενόμενη έξοδος:**
+**✅ Αναμενόμενο αποτέλεσμα:**
 ```json
 {
   "status": "healthy",
@@ -407,7 +407,7 @@ curl $APP_URL/api/slow
 ### Βήμα 6: Προβολή Τηλεμετρίας στο Azure Portal
 
 ```bash
-# Λήψη λεπτομερειών για το Application Insights
+# Λήψη λεπτομερειών του Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Άνοιγμα στο Azure Portal
@@ -417,12 +417,12 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-**Πλοηγηθείτε στο Azure Portal → Application Insights → Αναζήτηση Συναλλαγών**
+**Πλοηγηθείτε στο Azure Portal → Application Insights → Transaction Search**
 
 Θα πρέπει να δείτε:
-- ✅ HTTP αιτήσεις με κωδικούς κατάστασης
+- ✅ HTTP requests με status codes
 - ✅ Διάρκεια αιτήσεων (3+ δευτερόλεπτα για `/api/slow`)
-- ✅ Λεπτομέρειες εξαιρέσεων από το `/api/error-test`
+- ✅ Λεπτομέρειες εξαιρέσεων από `/api/error-test`
 - ✅ Προσαρμοσμένα μηνύματα καταγραφής
 
 ---
@@ -433,7 +433,7 @@ az monitor app-insights component show \
 
 Ας προσθέσουμε προσαρμοσμένη τηλεμετρία για επιχειρηματικά κρίσιμα γεγονότα.
 
-**File: `src/telemetry.py`**
+**Αρχείο: `src/telemetry.py`**
 
 ```python
 from opencensus.ext.azure import metrics_exporter
@@ -520,7 +520,7 @@ telemetry = TelemetryClient()
 
 ### Ενημέρωση Εφαρμογής με Προσαρμοσμένα Γεγονότα
 
-**File: `src/app.py` (ενισχυμένο)**
+**Αρχείο: `src/app.py` (enhanced)**
 
 ```python
 from flask import Flask, request, jsonify
@@ -538,7 +538,7 @@ def purchase():
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
     
-    # Παρακολούθηση επιχειρηματικού γεγονότος
+    # Παρακολούθηση επιχειρηματικού συμβάντος
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +546,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Παρακολούθηση μετρικής εσόδων
+    # Παρακολούθηση δείκτη εσόδων
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +565,19 @@ def search():
     
     start_time = time.time()
     
-    # Προσομοίωση αναζήτησης (θα ήταν πραγματικό ερώτημα στη βάση δεδομένων)
+    # Προσομοίωση αναζήτησης (θα ήταν πραγματικό ερώτημα βάσης δεδομένων)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
     duration = (time.time() - start_time) * 1000  # Μετατροπή σε ms
     
-    # Παρακολούθηση γεγονότος αναζήτησης
+    # Παρακολούθηση συμβάντος αναζήτησης
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Παρακολούθηση μετρικής απόδοσης αναζήτησης
+    # Παρακολούθηση δείκτη απόδοσης αναζήτησης
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -665,13 +665,13 @@ traces
 
 ---
 
-## Μάθημα 3: Διανεμημένο Tracing για Μικροϋπηρεσίες
+## Μάθημα 3: Κατανεμημένη Ιχνηλάτηση για Μικροϋπηρεσίες
 
-### Ενεργοποίηση Εντοπισμού μεταξύ Υπηρεσιών
+### Ενεργοποίηση ιχνηλάτησης μεταξύ υπηρεσιών
 
 Για μικροϋπηρεσίες, το Application Insights συσχετίζει αυτόματα τα αιτήματα μεταξύ υπηρεσιών.
 
-**File: `infra/main.bicep`**
+**Αρχείο: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -739,36 +739,36 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Προβολή Συναλλαγής από Άκρο σε Άκρο
+### Προβολή End-to-End Συναλλαγής
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Gateway as Πύλη API<br/>(ID ιχνηλάτησης: abc123)
-    participant Product as Υπηρεσία Προϊόντος<br/>(ID γονέα: abc123)
-    participant Order as Υπηρεσία Παραγγελιών<br/>(ID γονέα: abc123)
-    participant AppInsights as Στοιχεία Εφαρμογής
+    participant User as Χρήστης
+    participant Gateway as Πύλη API<br/>(Αναγνωριστικό ιχνηλάτησης: abc123)
+    participant Product as Υπηρεσία Προϊόντος<br/>(Αναγνωριστικό γονέα: abc123)
+    participant Order as Υπηρεσία Παραγγελιών<br/>(Αναγνωριστικό γονέα: abc123)
+    participant AppInsights as Insights Εφαρμογής
     
     User->>Gateway: POST /api/checkout
     Note over Gateway: Έναρξη ιχνηλάτησης: abc123
-    Gateway->>AppInsights: Καταγραφή αιτήματος (ID ιχνηλάτησης: abc123)
+    Gateway->>AppInsights: Καταγραφή αιτήματος (Αναγνωριστικό ιχνηλάτησης: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: ID γονέα: abc123
+    Note over Product: Αναγνωριστικό γονέα: abc123
     Product->>AppInsights: Καταγραφή κλήσης εξάρτησης
     Product-->>Gateway: Λεπτομέρειες προϊόντος
     
     Gateway->>Order: POST /orders
-    Note over Order: ID γονέα: abc123
+    Note over Order: Αναγνωριστικό γονέα: abc123
     Order->>AppInsights: Καταγραφή κλήσης εξάρτησης
     Order-->>Gateway: Παραγγελία δημιουργήθηκε
     
     Gateway-->>User: Ολοκλήρωση αγοράς
     Gateway->>AppInsights: Καταγραφή απάντησης (Διάρκεια: 450ms)
     
-    Note over AppInsights: Συσχέτιση με βάση το ID ιχνηλάτησης
+    Note over AppInsights: Συσχέτιση με βάση το Αναγνωριστικό ιχνηλάτησης
 ```
-**Ερώτημα για ίχνος από άκρο σε άκρο:**
+**Ερώτημα end-to-end trace:**
 
 ```kusto
 // Find complete request flow
@@ -790,14 +790,14 @@ dependencies
 
 ## Μάθημα 4: Live Metrics και Παρακολούθηση σε Πραγματικό Χρόνο
 
-### Ενεργοποίηση Ροής Live Metrics
+### Ενεργοποίηση Live Metrics Stream
 
-Το Live Metrics παρέχει τηλεμετρία σε πραγματικό χρόνο με καθυστέρηση <1 δευτερολέπτου.
+Το Live Metrics παρέχει τηλεμετρία σε πραγματικό χρόνο με καθυστέρηση <1 δευτερόλεπτο.
 
-**Πρόσβαση στη ροή Live Metrics:**
+**Πρόσβαση στο Live Metrics:**
 
 ```bash
-# Λήψη πόρου Application Insights
+# Λήψη πόρου του Application Insights
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
 # Λήψη ομάδας πόρων
@@ -807,14 +807,14 @@ echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME 
 ```
 
 **Τι βλέπετε σε πραγματικό χρόνο:**
-- ✅ Ρυθμός εισερχόμενων αιτήσεων (αιτήσεις/δευτ.)
+- ✅ Ρυθμός εισερχόμενων αιτήσεων (requests/sec)
 - ✅ Εξερχόμενες κλήσεις εξαρτήσεων
-- ✅ Αριθμός εξαιρέσεων
+- ✅ Πλήθος εξαιρέσεων
 - ✅ Χρήση CPU και μνήμης
-- ✅ Αριθμός ενεργών διακομιστών
-- ✅ Δείγμα τηλεμετρίας
+- ✅ Αριθμός ενεργών servers
+- ✅ Δειγματοληπτική τηλεμετρία
 
-### Δημιουργία Φόρτου για Δοκιμή
+### Παραγωγή Φόρτου για Δοκιμή
 
 ```bash
 # Δημιουργήστε φόρτο για να δείτε τις ζωντανές μετρήσεις
@@ -824,29 +824,29 @@ for i in {1..100}; do
 done
 
 # Παρακολουθήστε τις ζωντανές μετρήσεις στο Azure Portal
-# Θα πρέπει να δείτε αιχμή στον ρυθμό των αιτήσεων
+# Θα πρέπει να δείτε απότομη αύξηση στο ρυθμό αιτήσεων
 ```
 
 ---
 
 ## Πρακτικές Ασκήσεις
 
-### Άσκηση 1: Ρύθμιση Ειδοποιήσεων ⭐⭐ (Μεσαίο)
+### Άσκηση 1: Ρύθμιση Ειδοποιήσεων ⭐⭐ (Μέτρια)
 
-**Στόχος**: Δημιουργήστε ειδοποιήσεις για υψηλό ρυθμό σφαλμάτων και αργές αποκρίσεις.
+**Στόχος**: Δημιουργήστε ειδοποιήσεις για υψηλό ποσοστό σφαλμάτων και αργές αποκρίσεις.
 
 **Βήματα:**
 
-1. **Δημιουργία ειδοποίησης για ρυθμό σφαλμάτων:**
+1. **Δημιουργία ειδοποίησης για ποσοστό σφαλμάτων:**
 
 ```bash
-# Λάβετε το αναγνωριστικό πόρου του Application Insights
+# Λήψη του αναγνωριστικού πόρου του Application Insights
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Δημιουργήστε μετρική ειδοποίηση για αποτυχημένα αιτήματα
+# Δημιουργία ειδοποίησης μετρικής για αποτυχημένα αιτήματα
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -872,7 +872,7 @@ az monitor metrics alert create \
 
 3. **Δημιουργία ειδοποίησης μέσω Bicep (προτιμητέο για AZD):**
 
-**File: `infra/core/alerts.bicep`**
+**Αρχείο: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -952,7 +952,7 @@ for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Δημιουργήστε αργές αποκρίσεις
+# Δημιουργήστε αργές απαντήσεις
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
@@ -964,37 +964,37 @@ az monitor metrics alert list \
   --output table
 ```
 
-**✅ Κριτήρια Επιτυχίας:**
-- ✅ Οι ειδοποιήσεις δημιουργήθηκαν επιτυχώς
-- ✅ Οι ειδοποιήσεις ενεργοποιούνται όταν ξεπεραστούν τα όρια
-- ✅ Μπορείτε να δείτε ιστορικό ειδοποιήσεων στο Azure Portal
+**✅ Κριτήρια επιτυχίας:**
+- ✅ Ειδοποιήσεις δημιουργήθηκαν επιτυχώς
+- ✅ Οι ειδοποιήσεις πυροδοτούνται όταν ξεπεραστούν τα όρια
+- ✅ Μπορείτε να δείτε το ιστορικό ειδοποιήσεων στο Azure Portal
 - ✅ Ενσωματωμένο με την ανάπτυξη AZD
 
-**Χρόνος**: 20-25 λεπτά
+**Χρόνος**: 20-25 minutes
 
 ---
 
-### Άσκηση 2: Δημιουργία Προσαρμοσμένου Πίνακα Εργαλείων ⭐⭐ (Μεσαίο)
+### Άσκηση 2: Δημιουργία Προσαρμοσμένου Πίνακα Ελέγχου ⭐⭐ (Μέτρια)
 
-**Στόχος**: Δημιουργήστε έναν πίνακα που εμφανίζει βασικές μετρήσεις εφαρμογής.
+**Στόχος**: Δημιουργήστε έναν πίνακα που εμφανίζει βασικές μετρικές εφαρμογής.
 
 **Βήματα:**
 
 1. **Δημιουργία πίνακα μέσω Azure Portal:**
 
-Πλοηγηθείτε στο: Azure Portal → Dashboards → New Dashboard
+Πλοηγηθείτε σε: Azure Portal → Dashboards → New Dashboard
 
-2. **Προσθήκη πλακιδίων για βασικές μετρήσεις:**
+2. **Προσθήκη πλακιδίων για βασικές μετρικές:**
 
 - Αριθμός αιτήσεων (τελευταίες 24 ώρες)
 - Μέσος χρόνος απόκρισης
-- Ρυθμός σφαλμάτων
+- Ποσοστό σφαλμάτων
 - Top 5 πιο αργές λειτουργίες
 - Γεωγραφική κατανομή χρηστών
 
 3. **Δημιουργία πίνακα μέσω Bicep:**
 
-**File: `infra/core/dashboard.bicep`**
+**Αρχείο: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1081,25 +1081,25 @@ module dashboard './core/dashboard.bicep' = {
 azd up
 ```
 
-**✅ Κριτήρια Επιτυχίας:**
-- ✅ Ο πίνακας εμφανίζει βασικές μετρήσεις
-- ✅ Μπορεί να καρφιτσώνεται στην αρχική του Azure Portal
+**✅ Κριτήρια επιτυχίας:**
+- ✅ Ο πίνακας εμφανίζει βασικές μετρικές
+- ✅ Μπορεί να καρφιτσωθεί στην αρχική σελίδα του Azure Portal
 - ✅ Ενημερώνεται σε πραγματικό χρόνο
 - ✅ Αναπτύσσεται μέσω AZD
 
-**Χρόνος**: 25-30 λεπτά
+**Χρόνος**: 25-30 minutes
 
 ---
 
-### Άσκηση 3: Παρακολούθηση Εφαρμογής AI/LLM ⭐⭐⭐ (Προχωρημένο)
+### Άσκηση 3: Παρακολούθηση εφαρμογής AI/LLM ⭐⭐⭐ (Προχωρημένο)
 
-**Στόχος**: Παρακολουθήστε τη χρήση Azure OpenAI (tokens, κόστη, καθυστέρηση).
+**Στόχος**: Παρακολουθήστε τη χρήση μοντέλων Microsoft Foundry (tokens, κόστη, καθυστέρηση).
 
 **Βήματα:**
 
-1. **Δημιουργήστε wrapper παρακολούθησης AI:**
+1. **Δημιουργία wrapper παρακολούθησης για AI:**
 
-**File: `src/ai_telemetry.py`**
+**Αρχείο: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Κλήση Azure OpenAI
+            # Κλήση μοντέλων Microsoft Foundry
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1136,7 +1136,7 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Υπολογισμός κόστους (τιμολόγηση GPT-4)
+            # Υπολογισμός κόστους (τιμολόγηση gpt-4.1)
             prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 ανά 1K tokens
             completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 ανά 1K tokens
             total_cost = prompt_cost + completion_cost
@@ -1182,7 +1182,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Χρησιμοποιήστε τον παρακολουθούμενο client:**
+2. **Χρήση παρακολουθούμενου client:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1202,9 +1202,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Κλήση με αυτόματη παρακολούθηση
+    # Καλέστε με αυτόματη παρακολούθηση
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1250,13 +1250,13 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ Κριτήρια Επιτυχίας:**
-- ✅ Κάθε κλήση προς OpenAI παρακολουθείται αυτόματα
-- ✅ Η χρήση tokens και τα κόστη είναι ορατά
+**✅ Κριτήρια επιτυχίας:**
+- ✅ Κάθε κλήση OpenAI καταγράφεται αυτόματα
+- ✅ Η χρήση token και τα κόστη είναι ορατά
 - ✅ Η καθυστέρηση παρακολουθείται
-- ✅ Μπορείτε να ορίσετε ειδοποιήσεις προϋπολογισμού
+- ✅ Μπορούν να οριστούν ειδοποιήσεις προϋπολογισμού
 
-**Χρόνος**: 35-45 λεπτά
+**Χρόνος**: 35-45 minutes
 
 ---
 
@@ -1264,15 +1264,15 @@ traces
 
 ### Στρατηγικές Δειγματοληψίας
 
-Ελέγξτε τα κόστη με δειγματοληψία τηλεμετρίας:
+Ελέγξτε τα κόστη μέσω δειγματοληψίας τηλεμετρίας:
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
 
-# Ανάπτυξη: 100% δειγματοληψία
+# Ανάπτυξη: δειγματοληψία 100%
 sampler = ProbabilitySampler(rate=1.0)
 
-# Παραγωγή: 10% δειγματοληψία (μείωση κόστους κατά 90%)
+# Παραγωγή: δειγματοληψία 10% (μείωση κόστους κατά 90%)
 sampler = ProbabilitySampler(rate=0.1)
 
 # Προσαρμοστική δειγματοληψία (προσαρμόζεται αυτόματα)
@@ -1280,7 +1280,7 @@ from opencensus.trace.samplers import AdaptiveSampler
 sampler = AdaptiveSampler()
 ```
 
-**Σε Bicep:**
+**Στο Bicep:**
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -1305,14 +1305,14 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### Μηνιαίες Εκτιμήσεις Κόστους
 
-| Data Volume | Retention | Monthly Cost |
+| Όγκος Δεδομένων | Διάρκεια Διατήρησης | Μηνιαίο Κόστος |
 |-------------|-----------|--------------|
 | 1 GB/month | 30 days | ~$2-5 |
 | 5 GB/month | 30 days | ~$10-15 |
 | 10 GB/month | 90 days | ~$25-40 |
 | 50 GB/month | 90 days | ~$100-150 |
 
-**Δωρεάν επίπεδο**: 5 GB/μήνα περιλαμβάνονται
+**Δωρεάν επίπεδο**: περιλαμβάνεται 5 GB/month
 
 ---
 
@@ -1320,20 +1320,20 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### 1. Βασική Ενσωμάτωση ✓
 
-Ελέγξτε την κατανόησή σας:
+Δοκιμάστε την κατανόησή σας:
 
 - [ ] **Q1**: Πώς το AZD δημιουργεί το Application Insights;
-  - **A**: Αυτόματα μέσω Bicep templates στο `infra/core/monitoring.bicep`
+  - **A**: Αυτόματα μέσω προτύπων Bicep στο `infra/core/monitoring.bicep`
 
 - [ ] **Q2**: Ποια μεταβλητή περιβάλλοντος ενεργοποιεί το Application Insights;
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Ποιες είναι οι τρεις κύριες κατηγορίες τηλεμετρίας;
-  - **A**: Requests (HTTP calls), Dependencies (external calls), Exceptions (errors)
+- [ ] **Q3**: Ποιοι είναι οι τρεις κύριοι τύποι τηλεμετρίας;
+  - **A**: Αιτήσεις (HTTP κλήσεις), Εξαρτήσεις (εξωτερικές κλήσεις), Εξαιρέσεις (σφάλματα)
 
 **Hands-On Verification:**
 ```bash
-# Ελέγξτε αν το Application Insights έχει ρυθμιστεί
+# Ελέγξτε εάν το Application Insights έχει ρυθμιστεί
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Επαληθεύστε ότι η τηλεμετρία μεταδίδεται
@@ -1347,15 +1347,15 @@ az monitor app-insights metrics show \
 
 ### 2. Προσαρμοσμένη Τηλεμετρία ✓
 
-Ελέγξτε την κατανόησή σας:
+Δοκιμάστε την κατανόησή σας:
 
 - [ ] **Q1**: Πώς καταγράφετε προσαρμοσμένα επιχειρηματικά γεγονότα;
-  - **A**: Χρησιμοποιώντας logger με `custom_dimensions` ή `TelemetryClient.track_event()`
+  - **A**: Χρησιμοποιήστε logger με `custom_dimensions` ή `TelemetryClient.track_event()`
 
 - [ ] **Q2**: Ποια είναι η διαφορά μεταξύ γεγονότων και μετρικών;
   - **A**: Τα γεγονότα είναι διακριτές εμφανίσεις, οι μετρικές είναι αριθμητικές μετρήσεις
 
-- [ ] **Q3**: Πώς συσχετίζετε τηλεμετρία μεταξύ υπηρεσιών;
+- [ ] **Q3**: Πώς συσχετίζετε την τηλεμετρία μεταξύ υπηρεσιών;
   - **A**: Το Application Insights χρησιμοποιεί αυτόματα το `operation_Id` για συσχέτιση
 
 **Hands-On Verification:**
@@ -1368,18 +1368,18 @@ traces
 
 ---
 
-### 3. Παρακολούθηση Παραγωγής ✓
+### 3. Παρακολούθηση στην Παραγωγή ✓
 
-Ελέγξτε την κατανόησή σας:
+Δοκιμάστε την κατανόησή σας:
 
-- [ ] **Q1**: Τι είναι η δειγματοληψία και γιατί να τη χρησιμοποιήσετε;
+- [ ] **Q1**: Τι είναι η δειγματοληψία και γιατί τη χρησιμοποιούμε;
   - **A**: Η δειγματοληψία μειώνει τον όγκο δεδομένων (και το κόστος) καταγράφοντας μόνο ένα ποσοστό της τηλεμετρίας
 
 - [ ] **Q2**: Πώς ρυθμίζετε ειδοποιήσεις;
-  - **A**: Χρησιμοποιώντας metric alerts σε Bicep ή Azure Portal βασισμένα σε μετρικές του Application Insights
+  - **A**: Χρησιμοποιήστε metric alerts στο Bicep ή στο Azure Portal βασισμένα σε μετρικές του Application Insights
 
-- [ ] **Q3**: Ποια είναι η διαφορά μεταξύ Log Analytics και Application Insights;
-  - **A**: Το Application Insights αποθηκεύει δεδομένα σε Log Analytics workspace· το App Insights παρέχει εφαρμογές-συγκεκριμένες προβολές
+- [ ] **Q3**: Ποια η διαφορά μεταξύ Log Analytics και Application Insights;
+  - **A**: Το Application Insights αποθηκεύει δεδομένα σε Log Analytics workspace· το App Insights παρέχει προβολές ειδικές για εφαρμογές
 
 **Hands-On Verification:**
 ```bash
@@ -1394,7 +1394,7 @@ az monitor app-insights component show \
 
 ## Καλές Πρακτικές
 
-### ✅ ΚΑΝΕ:
+### ✅ ΚΑΝΤΕ:
 
 1. **Χρησιμοποιήστε correlation IDs**
    ```python
@@ -1406,23 +1406,23 @@ az monitor app-insights component show \
    })
    ```
 
-2. **Ρυθμίστε ειδοποιήσεις για κρίσιμες μετρήσεις**
+2. **Ρυθμίστε ειδοποιήσεις για κρίσιμες μετρικές**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Χρησιμοποιήστε δομημένη καταγραφή**
+3. **Χρησιμοποιήστε structured logging**
    ```python
    # ✅ ΚΑΛΟ: Δομημένο
    logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
    
-   # ❌ ΚΑΚΟ: Αδόμητο
+   # ❌ ΚΑΚΟ: Μη δομημένο
    logger.info(f'User 123 signed up')
    ```
 
-4. **Παρακολουθήστε εξαρτήσεις**
+4. **Παρακολουθείστε εξαρτήσεις**
    ```python
-   # Αυτόματη παρακολούθηση κλήσεων βάσης δεδομένων, αιτημάτων HTTP κ.λπ.
+   # Παρακολουθεί αυτόματα κλήσεις σε βάσεις δεδομένων, αιτήματα HTTP κ.λπ.
    ```
 
 5. **Χρησιμοποιήστε Live Metrics κατά τις αναπτύξεις**
@@ -1438,7 +1438,7 @@ az monitor app-insights component show \
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **Μην χρησιμοποιείτε 100% δειγματοληψία σε παραγωγή**
+2. **Μην χρησιμοποιείτε 100% sampling στην παραγωγή**
    ```python
    # ❌ Ακριβό
    sampler = ProbabilitySampler(rate=1.0)
@@ -1449,7 +1449,7 @@ az monitor app-insights component show \
 
 3. **Μην αγνοείτε dead letter queues**
 
-4. **Μην ξεχάσετε να θέσετε όρια διατήρησης δεδομένων**
+4. **Μην ξεχνάτε να ορίσετε όρια διατήρησης δεδομένων**
 
 ---
 
@@ -1465,7 +1465,7 @@ azd env get-values | grep APPLICATIONINSIGHTS
 # Ελέγξτε τα αρχεία καταγραφής της εφαρμογής μέσω του Azure Monitor
 azd monitor --logs
 
-# Ή χρησιμοποιήστε το Azure CLI για τα Container Apps:
+# Ή χρησιμοποιήστε το Azure CLI για τις Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
@@ -1481,7 +1481,7 @@ az containerapp show \
 
 ---
 
-### Πρόβλημα: Υψηλό κόστος
+### Πρόβλημα: Υψηλά κόστη
 
 **Διάγνωση:**
 ```bash
@@ -1493,9 +1493,9 @@ az monitor app-insights metrics show \
 ```
 
 **Λύση:**
-- Μειώστε το ποσοστό δειγματοληψίας
+- Μειώστε το sampling rate
 - Μειώστε την περίοδο διατήρησης
-- Αφαιρέστε τις εκτενείς καταγραφές
+- Αφαιρέστε περιττή εκτενή καταγραφή
 
 ---
 
@@ -1504,37 +1504,37 @@ az monitor app-insights metrics show \
 ### Επίσημη Τεκμηρίωση
 - [Επισκόπηση του Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Application Insights για Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Γλώσσα Ερωτήσεων Kusto](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [Παρακολούθηση AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### Επόμενα Βήματα σε Αυτό το Μάθημα
-- ← Προηγούμενο: [Έλεγχοι Προ-ανάπτυξης](preflight-checks.md)
-- → Επόμενο: [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Αρχική του Μαθήματος](../../README.md)
+- ← Προηγούμενο: [Έλεγχοι πριν την ανάπτυξη](preflight-checks.md)
+- → Επόμενο: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [Course Home](../../README.md)
 
 ### Σχετικά Παραδείγματα
-- [Παράδειγμα Azure OpenAI](../../../../examples/azure-openai-chat) - Τηλεμετρία AI
-- [Παράδειγμα μικροϋπηρεσιών](../../../../examples/microservices) - Διανεμημένο tracing
+- [Παράδειγμα Microsoft Foundry Models](../../../../examples/azure-openai-chat) - AI τηλεμετρία
+- [Παράδειγμα Μικροϋπηρεσιών](../../../../examples/microservices) - Κατανεμημένη ιχνηλάτηση
 
 ---
 
 ## Περίληψη
 
 **Έχετε μάθει:**
-- ✅ Αυτόματη προμήθεια του Application Insights με το AZD
-- ✅ Προσαρμοσμένη τηλεμετρία (γεγονότα, μετρικές, dependencies)
-- ✅ Διανεμημένο tracing μεταξύ μικροϋπηρεσιών
-- ✅ Ζωντανές μετρήσεις και παρακολούθηση σε πραγματικό χρόνο
+- ✅ Αυτόματη προμήθεια Application Insights με το AZD
+- ✅ Προσαρμοσμένη τηλεμετρία (γεγονότα, μετρικές, εξαρτήσεις)
+- ✅ Κατανεμημένη ιχνηλάτηση μεταξύ μικροϋπηρεσιών
+- ✅ Live Metrics και παρακολούθηση σε πραγματικό χρόνο
 - ✅ Ειδοποιήσεις και πίνακες ελέγχου
 - ✅ Παρακολούθηση εφαρμογών AI/LLM
 - ✅ Στρατηγικές βελτιστοποίησης κόστους
 
 **Κύρια Συμπεράσματα:**
-1. **Η AZD παρέχει αυτόματα παρακολούθηση** - Δεν απαιτείται χειροκίνητη ρύθμιση
-2. **Χρησιμοποιήστε δομημένη καταγραφή** - Διευκολύνει τα ερωτήματα
-3. **Παρακολουθήστε τα επιχειρηματικά συμβάντα** - Όχι μόνο τεχνικές μετρήσεις
-4. **Παρακολουθήστε τα κόστη AI** - Παρακολουθήστε tokens και δαπάνες
-5. **Ρυθμίστε ειδοποιήσεις** - Να είστε προληπτικοί, όχι αντιδραστικοί
+1. **Το AZD παρέχει αυτόματη παρακολούθηση** - Δεν απαιτείται χειροκίνητη ρύθμιση
+2. **Χρησιμοποιήστε δομημένη καταγραφή** - Διευκολύνει την εκτέλεση ερωτημάτων
+3. **Παρακολουθήστε επιχειρηματικά γεγονότα** - Όχι μόνο τεχνικούς δείκτες
+4. **Παρακολουθήστε το κόστος του AI** - Παρακολουθήστε tokens και δαπάνες
+5. **Ορίστε ειδοποιήσεις** - Να είστε προληπτικοί, όχι αντιδραστικοί
 6. **Βελτιστοποιήστε τα κόστη** - Χρησιμοποιήστε δειγματοληψία και όρια διατήρησης
 
 **Επόμενα Βήματα:**
@@ -1547,5 +1547,5 @@ az monitor app-insights metrics show \
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη Co-op Translator (https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθεια για ακρίβεια, παρακαλούμε λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται ως η επίσημη και δεσμευτική πηγή. Για κρίσιμες πληροφορίες, συνιστάται η χρήση επαγγελματικής μετάφρασης από ανθρώπινο μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρανοήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Το παρόν έγγραφο μεταφράστηκε με χρήση της υπηρεσίας μετάφρασης με τεχνητή νοημοσύνη Co‑op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από άνθρωπο. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

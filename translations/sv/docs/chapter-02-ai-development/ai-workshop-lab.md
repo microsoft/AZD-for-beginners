@@ -1,19 +1,19 @@
 # AI Workshop Lab: Göra dina AI-lösningar AZD-distribuerbara
 
-**Kapitelnavigering:**
-- **📚 Kursstartsida**: [AZD For Beginners](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 2 - AI-först utveckling
+**Chapter Navigation:**
+- **📚 Kursstartsida**: [AZD För nybörjare](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 2 - AI-först-utveckling
 - **⬅️ Föregående**: [AI Model Deployment](ai-model-deployment.md)
 - **➡️ Nästa**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Nästa kapitel**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **🚀 Nästa kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
-## Workshopöversikt
+## Workshop Overview
 
-Detta praktiska labb guidar utvecklare genom processen att ta en befintlig AI-mall och distribuera den med Azure Developer CLI (AZD). Du kommer att lära dig viktiga mönster för produktionsklara AI-distributioner med Microsoft Foundry-tjänster.
+Denna praktiska labb vägleder utvecklare genom processen att ta en befintlig AI-mall och distribuera den med Azure Developer CLI (AZD). Du kommer att lära dig viktiga mönster för produktionsdistributioner av AI med Microsoft Foundry-tjänster.
 
-**Varaktighet:** 2-3 timmar  
-**Nivå:** Mellanliggande  
-**Förkunskaper:** Grundläggande Azure-kunskaper, bekantskap med AI/ML-koncept
+**Duration:** 2-3 hours  
+**Level:** Intermediate  
+**Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
 
 ## 🎓 Lärandemål
 
@@ -26,18 +26,18 @@ I slutet av denna workshop kommer du att kunna:
 
 ## Förkunskaper
 
-### Krävs verktyg
+### Nödvändiga verktyg
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) installerad
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installerad
 - [Git](https://git-scm.com/) installerat
-- Kodredigerare (rekommenderas VS Code)
+- Kodredigerare (VS Code rekommenderas)
 
 ### Azure-resurser
-- Azure-prenumeration med bidragsbehörighet (contributor)
-- Tillgång till Azure OpenAI-tjänster (eller möjlighet att begära åtkomst)
-- Behörighet att skapa resursgrupper
+- Azure-prenumeration med contributor-behörighet
+- Tillgång till Microsoft Foundry Models-tjänster (eller möjlighet att begära åtkomst)
+- Rättigheter att skapa resursgrupper
 
-### Kunskapsförkunskaper
+### Kunskapskrav
 - Grundläggande förståelse för Azure-tjänster
 - Bekantskap med kommandoradsgränssnitt
 - Grundläggande AI/ML-koncept (API:er, modeller, prompts)
@@ -46,7 +46,7 @@ I slutet av denna workshop kommer du att kunna:
 
 ### Steg 1: Förbered miljön
 
-1. **Verifiera installationer av verktyg:**
+1. **Verifiera verktygens installationer:**
 ```bash
 # Kontrollera AZD-installation
 azd version
@@ -67,7 +67,7 @@ cd azure-search-openai-demo
 
 ## Modul 1: Förstå AZD-strukturen för AI-applikationer
 
-### Anatomi för en AI AZD-mall
+### Anatomi hos en AI AZD-mall
 
 Utforska nyckelfilerna i en AI-klar AZD-mall:
 
@@ -78,7 +78,7 @@ azure-search-openai-demo/
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Azure OpenAI configuration
+│       ├── openai.bicep    # Microsoft Foundry Models configuration
 │       ├── search.bicep    # Cognitive Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
@@ -86,7 +86,7 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Labövning 1.1: Utforska konfigurationen**
+### **Laborationsövning 1.1: Utforska konfigurationen**
 
 1. **Granska filen azure.yaml:**
 ```bash
@@ -95,26 +95,26 @@ cat azure.yaml
 
 **Vad du ska leta efter:**
 - Tjänstdefinitioner för AI-komponenter
-- Miljövariabelkarta
+- Kartläggningar av miljövariabler
 - Värdkonfigurationer
 
-2. **Granska main.bicep-infrastrukturen:**
+2. **Granska infrastrukturen main.bicep:**
 ```bash
 cat infra/main.bicep
 ```
 
 **Viktiga AI-mönster att identifiera:**
-- Provisionering av Azure OpenAI-tjänst
+- Provisionering av Microsoft Foundry Models-tjänst
 - Integrering med Cognitive Search
-- Säker hantering av nycklar
+- Säker nyckelhantering
 - Nätverkssäkerhetskonfigurationer
 
 ### **Diskussionspunkt:** Varför dessa mönster är viktiga för AI
 
-- **Tjänsteberoenden**: AI-appar kräver ofta flera koordinerade tjänster
-- **Säkerhet**: API-nycklar och endpoints måste hanteras säkert
+- **Tjänstavhängigheter**: AI-appar kräver ofta flera koordinerade tjänster
+- **Säkerhet**: API-nycklar och endpoints behöver säker hantering
 - **Skalbarhet**: AI-arbetsbelastningar har unika skalningskrav
-- **Kostnadshantering**: AI-tjänster kan bli dyra om de inte konfigureras korrekt
+- **Kostnadshantering**: AI-tjänster kan bli dyra om de inte är korrekt konfigurerade
 
 ## Modul 2: Distribuera din första AI-applikation
 
@@ -125,7 +125,7 @@ cat infra/main.bicep
 azd env new myai-workshop
 ```
 
-2. **Ställ in obligatoriska parametrar:**
+2. **Ange nödvändiga parametrar:**
 ```bash
 # Ange din föredragna Azure-region
 azd env set AZURE_LOCATION eastus
@@ -142,12 +142,12 @@ azd up
 ```
 
 **Vad som händer under `azd up`:**
-- ✅ Provisionerar Azure OpenAI-tjänst
+- ✅ Provisionerar Microsoft Foundry Models-tjänst
 - ✅ Skapar Cognitive Search-tjänst
 - ✅ Sätter upp App Service för webbapplikationen
 - ✅ Konfigurerar nätverk och säkerhet
-- ✅ Distribuerar applikationskod
-- ✅ Konfigurerar övervakning och loggning
+- ✅ Distribuerar applikationskoden
+- ✅ Sätter upp övervakning och loggning
 
 2. **Övervaka distributionsförloppet** och notera resurserna som skapas.
 
@@ -165,28 +165,28 @@ azd show --output json | grep "webAppUrl"
 
 3. **Testa AI-funktionaliteten:**
    - Navigera till webbapplikationen
-   - Prova exempelqueries
+   - Prova exempelfrågor
    - Verifiera att AI-svaren fungerar
 
-### **Labövning 2.1: Felsökningsövning**
+### **Laborationsövning 2.1: Felsökningsövning**
 
 **Scenario**: Din distribution lyckades men AI:n svarar inte.
 
 **Vanliga problem att kontrollera:**
-1. **OpenAI API-nycklar**: Verifiera att de är korrekt inställda
+1. **OpenAI API-nycklar**: Kontrollera att de är korrekt inställda
 2. **Modelltillgänglighet**: Kontrollera om din region stödjer modellen
 3. **Nätverksanslutning**: Säkerställ att tjänsterna kan kommunicera
-4. **RBAC-behörigheter**: Verifiera att appen kan komma åt OpenAI
+4. **RBAC-behörigheter**: Kontrollera att appen kan komma åt OpenAI
 
 **Felsökningskommandon:**
 ```bash
-# Kontrollera miljövariablerna
+# Kontrollera miljövariabler
 azd env get-values
 
 # Visa distributionsloggar
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Kontrollera status för OpenAI-distributionen
+# Kontrollera OpenAI-distributionens status
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
@@ -197,7 +197,7 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 1. **Uppdatera OpenAI-modellen:**
 ```bash
 # Byt till en annan modell (om tillgänglig i din region)
-azd env set AZURE_OPENAI_MODEL gpt-4
+azd env set AZURE_OPENAI_MODEL gpt-4.1
 
 # Distribuera om med den nya konfigurationen
 azd deploy
@@ -224,16 +224,16 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Steg 3.2: Miljöspecifika konfigurationer
 
-**Bästa praxis**: Olika konfigurationer för utveckling kontra produktion.
+**Bästa praxis**: Olika konfigurationer för utveckling vs produktion.
 
 1. **Skapa en produktionsmiljö:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Ställ in produktionsspecifika parametrar:**
+2. **Ange produktionsspecifika parametrar:**
 ```bash
-# Produktion använder vanligtvis högre SKU:er
+# I produktion används vanligtvis högre SKU:er
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -241,31 +241,31 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Labövning 3.1: Kostnadsoptimering**
+### **Laborationsövning 3.1: Kostnadsoptimering**
 
-**Utmaning**: Konfigurera mallen för kostnadseffektiv utveckling.
+**Uppgift**: Konfigurera mallen för kostnadseffektiv utveckling.
 
 **Uppgifter:**
-1. Identifiera vilka SKU:er som kan sättas till gratis-/grundnivåer
+1. Identifiera vilka SKUs som kan sättas till gratis/basic-nivåer
 2. Konfigurera miljövariabler för minimal kostnad
 3. Distribuera och jämför kostnader med produktionskonfigurationen
 
-**Lösningshints:**
-- Använd F0 (free) tier för Cognitive Services när det är möjligt
-- Använd Basic-tier för Search Service i utveckling
+**Ledtrådar till lösning:**
+- Använd F0 (gratis) nivå för Cognitive Services när det är möjligt
+- Använd Basic-nivå för Search Service i utveckling
 - Överväg att använda Consumption-plan för Functions
 
 ## Modul 4: Säkerhet och bästa praxis för produktion
 
-### Steg 4.1: Säker hantering av autentiseringsuppgifter
+### Steg 4.1: Säker hantering av referenser
 
-**Aktuellt problem**: Många AI-appar har hårdkodade API-nycklar eller använder osäker lagring.
+**Aktuell utmaning**: Många AI-appar hårdkodar API-nycklar eller använder osäker lagring.
 
-**AZD-lösning**: Managed Identity + Key Vault-integrering.
+**AZD-lösning**: Managed Identity + Key Vault-integration.
 
 1. **Granska säkerhetskonfigurationen i din mall:**
 ```bash
-# Sök efter konfiguration för Key Vault och hanterad identitet
+# Sök efter konfiguration av Key Vault och hanterad identitet
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
@@ -277,7 +277,7 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 ### Steg 4.2: Nätverkssäkerhet
 
-1. **Aktivera privata endpoints** (om inte redan konfigurerat):
+1. **Aktivera privata endpoints** (om det inte redan är konfigurerat):
 
 Lägg till i din bicep-mall:
 ```bicep
@@ -311,7 +311,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Sätt upp AI-specifik övervakning:**
+2. **Ställ in AI-specifik övervakning:**
 
 Lägg till anpassade mätvärden för AI-operationer:
 ```bicep
@@ -334,9 +334,9 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Labövning 4.1: Säkerhetsgranskning**
+### **Laborationsövning 4.1: Säkerhetsgranskning**
 
-**Uppgift**: Granska din distribution utifrån säkerhetsbästa praxis.
+**Uppgift**: Granska din distribution enligt säkerhetsbästa praxis.
 
 **Checklista:**
 - [ ] Inga hårdkodade hemligheter i kod eller konfiguration
@@ -347,7 +347,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ## Modul 5: Konvertera din egen AI-applikation
 
-### Steg 5.1: Bedömningsblankett
+### Steg 5.1: Bedömningsformulär
 
 **Innan du konverterar din app**, besvara dessa frågor:
 
@@ -359,12 +359,12 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 2. **Säkerhetskrav:**
    - Vilka känsliga data hanterar din app?
-   - Vilka regelefterlevnadskrav har du?
+   - Vilka efterlevnadskrav har du?
    - Behöver du privat nätverk?
 
 3. **Skalningskrav:**
    - Vad är din förväntade belastning?
-   - Behöver du automatisk skalning?
+   - Behöver du autoskalning?
    - Finns det regionala krav?
 
 ### Steg 5.2: Skapa din AZD-mall
@@ -376,7 +376,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Initiera AZD-mallen
+# Initiera AZD-mall
 azd init --template minimal
 ```
 
@@ -447,40 +447,40 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Labövning 5.1: Mallskapandeutmaning**
+### **Laborationsövning 5.1: Mallskapandeutmaning**
 
-**Utmaning**: Skapa en AZD-mall för en dokumentbehandlings-AI-app.
+**Uppgift**: Skapa en AZD-mall för en dokumentbearbetande AI-app.
 
 **Krav:**
-- Azure OpenAI för innehållsanalys
+- Microsoft Foundry Models för innehållsanalys
 - Document Intelligence för OCR
 - Storage Account för dokumentuppladdningar
 - Function App för bearbetningslogik
 - Webbapp för användargränssnitt
 
-**Bonuspunkter:**
+**Bonuspoäng:**
 - Lägg till korrekt felhantering
-- Inkludera kostnadsuppskattning
-- Sätt upp övervakningsdashboards
+- Inkludera kostnadsberäkning
+- Sätt upp övervakningsinstrumentpaneler
 
-## Modul 6: Felsök vanliga problem
+## Modul 6: Felsökning av vanliga problem
 
 ### Vanliga distributionsproblem
 
-#### Problem 1: Överskriden OpenAI-tjänstekvot
+#### Problem 1: OpenAI-tjänstens kvot överskriden
 **Symptom:** Distributionen misslyckas med kvotfel
 **Lösningar:**
 ```bash
 # Kontrollera aktuella kvoter
 az cognitiveservices usage list --location eastus
 
-# Begär kvotökning eller försök i en annan region
+# Begär en kvotökning eller prova en annan region
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### Problem 2: Modell inte tillgänglig i regionen
-**Symptom:** AI-svar misslyckas eller modelldistribution felar
+**Symptom:** AI-svar misslyckas eller modelldistribution ger fel
 **Lösningar:**
 ```bash
 # Kontrollera modellens tillgänglighet per region
@@ -514,40 +514,40 @@ az role assignment create \
 3. Verifiera nätverksanslutning och latens
 
 **Lösningar:**
-- Implementera caching för vanliga frågor
+- Implementera caching för vanliga förfrågningar
 - Använd lämplig OpenAI-modell för ditt användningsfall
-- Överväg läsrepliker för hög belastning
+- Överväg läsreplicor för hög belastning
 
-### **Labövning 6.1: Felsökningsutmaning**
+### **Laborationsövning 6.1: Felsökningsutmaning**
 
 **Scenario**: Din distribution lyckades, men applikationen returnerar 500-fel.
 
 **Felsökningsuppgifter:**
 1. Kontrollera applikationsloggar
-2. Verifiera tjänstekonnektivitet
+2. Verifiera tjänstekonnectivitet
 3. Testa autentisering
 4. Granska konfiguration
 
 **Verktyg att använda:**
 - `azd show` för översikt av distributionen
-- Azure-portalen för detaljerade tjänsteloggar
+- Azure-portalen för detaljerade tjänstloggar
 - Application Insights för applikationstelemetri
 
 ## Modul 7: Övervakning och optimering
 
 ### Steg 7.1: Sätt upp omfattande övervakning
 
-1. **Skapa anpassade dashboards:**
+1. **Skapa anpassade instrumentpaneler:**
 
-Navigera till Azure-portalen och skapa en dashboard med:
-- OpenAI-förfrågningsantal och latens
-- Applikationsfelräntor
+Navigera till Azure-portalen och skapa en instrumentpanel med:
+- Antal OpenAI-förfrågningar och latens
+- Applikationens felprocent
 - Resursutnyttjande
 - Kostnadsspårning
 
-2. **Sätt upp aviseringar:**
+2. **Ställ in aviseringar:**
 ```bash
-# Varning för hög felprocent
+# Varning för hög felkvot
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -558,49 +558,49 @@ az monitor metrics alert create \
 
 ### Steg 7.2: Kostnadsoptimering
 
-1. **Analysera aktuella kostnader:**
+1. **Analysera nuvarande kostnader:**
 ```bash
 # Använd Azure CLI för att hämta kostnadsdata
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Implementera kostnadskontroller:**
+2. **Inför kostnadskontroller:**
 - Ställ in budgetaviseringar
 - Använd autoskalningspolicyer
-- Implementera requestcaching
+- Implementera förfrågningscaching
 - Övervaka tokenanvändning för OpenAI
 
-### **Labövning 7.1: Prestandaoptimering**
+### **Laborationsövning 7.1: Prestandaoptimering**
 
 **Uppgift**: Optimera din AI-applikation för både prestanda och kostnad.
 
 **Mått att förbättra:**
 - Minska genomsnittlig svarstid med 20%
 - Minska månadskostnader med 15%
-- Behåll 99,9% driftstid
+- Upprätthåll 99,9% upptid
 
-**Strategier att försöka:**
+**Strategier att prova:**
 - Implementera responscaching
 - Optimera prompts för token-effektivitet
-- Använd lämpliga compute-SKU:er
+- Använd lämpliga beräknings-SKUs
 - Sätt upp korrekt autoskalning
 
 ## Slututmaning: Helhetsimplementering
 
-### Utmaningsscenario
+### Uppdragsscenario
 
-Du har i uppgift att skapa en produktionsklar AI-driven kundtjänstchattbot med dessa krav:
+Du har i uppdrag att skapa en produktionsklar AI-driven kundservicechattbot med följande krav:
 
 **Funktionella krav:**
-- Webgränssnitt för kundinteraktioner
-- Integration med Azure OpenAI för svar
-- Dokumentsökfunktionalitet med Cognitive Search
-- Integration med befintlig kunddatabas
-- Flerspråkigt stöd
+- Webbgränssnitt för kundinteraktioner
+- Integrering med Microsoft Foundry Models för svar
+- Dokumentsökfunktion med Cognitive Search
+- Integrering med befintlig kunddatabas
+- Fler språkstöd
 
 **Icke-funktionella krav:**
 - Hantera 1000 samtidiga användare
-- 99,9% uppetids-SLA
+- 99,9% upptid (SLA)
 - SOC 2-efterlevnad
 - Kostnad under $500/månad
 - Distribuera till flera miljöer (dev, staging, prod)
@@ -617,20 +617,20 @@ Du har i uppgift att skapa en produktionsklar AI-driven kundtjänstchattbot med 
 ### Utvärderingskriterier
 
 - ✅ **Funktionalitet**: Uppfyller den alla krav?
-- ✅ **Säkerhet**: Är bästa praxis implementerade?
-- ✅ **Skalbarhet**: Kan den hantera lasten?
-- ✅ **Underhållbarhet**: Är koden och infrastrukturen välorganiserade?
+- ✅ **Säkerhet**: Är bästa praxis implementerad?
+- ✅ **Skalbarhet**: Kan den hantera belastningen?
+- ✅ **Underhållbarhet**: Är koden och infrastrukturen välorganiserad?
 - ✅ **Kostnad**: Håller den sig inom budget?
 
 ## Ytterligare resurser
 
 ### Microsoft-dokumentation
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Exempelmallar
-- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
@@ -639,39 +639,39 @@ Du har i uppgift att skapa en produktionsklar AI-driven kundtjänstchattbot med 
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 Slutförandecertifikat
-Grattis! Du har slutfört AI Workshop Lab. Du bör nu kunna:
+## 🎓 Avslutningsintyg
 
+Grattis! Du har slutfört AI Workshop Lab. Du bör nu vara kunna:
 - ✅ Konvertera befintliga AI-applikationer till AZD-mallar
 - ✅ Distribuera produktionsklara AI-applikationer
-- ✅ Implementera säkerhetsbästa praxis för AI-arbetsbelastningar
-- ✅ Övervaka och optimera prestandan hos AI-applikationer
-- ✅ Felsöka vanliga driftsättningsproblem
+- ✅ Implementera bästa praxis för säkerhet för AI-arbetsbelastningar
+- ✅ Övervaka och optimera prestanda för AI-applikationer
+- ✅ Felsök vanliga distributionsproblem
 
 ### Nästa steg
-1. Tillämpa dessa mönster på dina egna AI-projekt
-2. Bidra med mallar tillbaka till communityn
-3. Gå med i Microsoft Foundry Discord för fortsatt stöd
-4. Utforska avancerade ämnen som driftsättningar över flera regioner
+1. Tillämpa dessa mönster i dina egna AI-projekt
+2. Bidra med mallar till communityn
+3. Gå med i Microsoft Foundry Discord för kontinuerligt stöd
+4. Utforska avancerade ämnen som distributioner i flera regioner
 
 ---
 
-**Workshop Feedback**: Hjälp oss förbättra denna workshop genom att dela din upplevelse i [Microsoft Foundry Discord #Azure-kanalen](https://discord.gg/microsoft-azure).
+**Workshopåterkoppling**: Hjälp oss förbättra denna workshop genom att dela dina erfarenheter i the [Microsoft Foundry Discord #Azure-kanal](https://discord.gg/microsoft-azure).
 
 ---
 
 **Kapitelnavigering:**
-- **📚 Kurshemsida**: [AZD för nybörjare](../../README.md)
-- **📖 Nuvarande kapitel**: Kapitel 2 - AI-först utveckling
-- **⬅️ Föregående**: [Driftsättning av AI-modell](ai-model-deployment.md)
-- **➡️ Nästa**: [Bästa praxis för produktions-AI](production-ai-practices.md)
-- **🚀 Nästa kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
+- **📚 Kurshemsida**: [AZD For Beginners](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 2 - AI-först-utveckling
+- **⬅️ Föregående**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Nästa**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Nästa kapitel**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**Behöver du hjälp?** Gå med i vår community för support och diskussioner om AZD och AI-driftsättningar.
+**Behöver du hjälp?** Gå med i vår community för stöd och diskussioner om AZD och AI-distributioner.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell, mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Ansvarsfriskrivning:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet kan automatiska översättningar innehålla fel eller brister. Originaldokumentet på dess ursprungliga språk ska anses vara den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

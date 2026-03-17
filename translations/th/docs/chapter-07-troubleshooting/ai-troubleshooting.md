@@ -1,28 +1,26 @@
-# คู่มือการแก้ไขปัญหาเฉพาะ AI
+# คู่มือแก้ไขปัญหาเฉพาะสำหรับ AI
 
 **การนำทางบท:**
-- **📚 หน้าแรกของคอร์ส**: [AZD For Beginners](../../README.md)
-- **📖 บทปัจจุบัน**: บทที่ 7 - การแก้ปัญหาและการดีบัก
-- **⬅️ ก่อนหน้า**: [Debugging Guide](debugging.md)
-- **➡️ บทถัดไป**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 ที่เกี่ยวข้อง**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 หน้าแรกของหลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 7 - การแก้ไขปัญหาและดีบัก
+- **⬅️ ก่อนหน้า**: [คู่มือดีบัก](debugging.md)
+- **➡️ บทถัดไป**: [บทที่ 8: รูปแบบการผลิตและองค์กร](../chapter-08-production/production-ai-practices.md)
+- **🤖 ที่เกี่ยวข้อง**: [บทที่ 2: การพัฒนา AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**ก่อนหน้า:** [Production AI Practices](../chapter-08-production/production-ai-practices.md) | **ถัดไป:** [AZD Basics](../chapter-01-foundation/azd-basics.md)
-
-คำแนะนำการแก้ไขปัญหาเชิงครอบคลุมนี้ครอบคลุมปัญหาทั่วไปเมื่อปรับใช้โซลูชัน AI ด้วย AZD โดยให้แนวทางแก้ไขและเทคนิคการดีบักที่เฉพาะเจาะจงกับบริการ Azure AI
+คู่มือการแก้ไขปัญหาครอบคลุมนี้จัดการกับปัญหาทั่วไปเมื่อปรับใช้โซลูชัน AI ด้วย AZD โดยแนะนำวิธีแก้ไขและเทคนิคการดีบักที่เฉพาะเจาะจงสำหรับบริการ Azure AI
 
 ## สารบัญ
 
-- [ปัญหาบริการ Azure OpenAI](../../../../docs/chapter-07-troubleshooting)
+- [ปัญหา Microsoft Foundry Models Service](../../../../docs/chapter-07-troubleshooting)
 - [ปัญหา Azure AI Search](../../../../docs/chapter-07-troubleshooting)
 - [ปัญหาการปรับใช้ Container Apps](../../../../docs/chapter-07-troubleshooting)
-- [ข้อผิดพลาดการยืนยันตัวตนและสิทธิ์](../../../../docs/chapter-07-troubleshooting)
-- [ข้อผิดพลาดการปรับใช้โมเดล](../../../../docs/chapter-07-troubleshooting)
+- [ข้อผิดพลาดการตรวจสอบสิทธิ์และสิทธิ์การเข้าถึง](../../../../docs/chapter-07-troubleshooting)
+- [ล้มเหลวในการปรับใช้โมเดล](../../../../docs/chapter-07-troubleshooting)
 - [ปัญหาด้านประสิทธิภาพและการปรับขนาด](../../../../docs/chapter-07-troubleshooting)
-- [การจัดการค่าใช้จ่ายและโควต้า](../../../../docs/chapter-07-troubleshooting)
-- [เครื่องมือและเทคนิคการดีบัก](../../../../docs/chapter-07-troubleshooting)
+- [การจัดการต้นทุนและโควต้า](../../../../docs/chapter-07-troubleshooting)
+- [เครื่องมือและเทคนิคสำหรับการดีบัก](../../../../docs/chapter-07-troubleshooting)
 
-## ปัญหาบริการ Azure OpenAI
+## ปัญหา Microsoft Foundry Models Service
 
 ### ปัญหา: บริการ OpenAI ไม่พร้อมใช้งานในภูมิภาค
 
@@ -32,15 +30,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **สาเหตุ:**
-- Azure OpenAI ไม่พร้อมใช้งานในภูมิภาคที่เลือก
-- โควต้าในภูมิภาคที่ต้องการถูกใช้งานครบแล้ว
-- ข้อจำกัดความจุในภูมิภาค
+- Microsoft Foundry Models ไม่พร้อมใช้งานในภูมิภาคที่เลือก
+- โควต้าหมดในภูมิภาคที่ต้องการ
+- ข้อจำกัดความจุของภูมิภาค
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **ตรวจสอบความพร้อมใช้งานของภูมิภาค:**
 ```bash
-# แสดงรายการภูมิภาคที่มีสำหรับ OpenAI
+# รายชื่อภูมิภาคที่มีสำหรับ OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -70,26 +68,26 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### ปัญหา: โควต้าการปรับใช้โมเดลเกิน
+### ปัญหา: โควต้าการปรับใช้โมเดลเกินขีดจำกัด
 
 **อาการ:**
 ```
 Error: Deployment failed due to insufficient quota
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **ตรวจสอบโควต้าปัจจุบัน:**
 ```bash
-# ตรวจสอบการใช้โควต้า
+# ตรวจสอบการใช้งานโควต้า
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
 ```
 
-2. **ขอเพิ่มโควต้า:**
+2. **ขอโควต้ามากขึ้น:**
 ```bash
-# ยื่นคำขอเพิ่มโควต้า
+# ส่งคำขอเพิ่มโควต้า
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -97,14 +95,14 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **ปรับแต่งความจุของโมเดล:**
+3. **เพิ่มประสิทธิภาพความจุของโมเดล:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -122,7 +120,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Error: The API version '2023-05-15' is not available for OpenAI
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **ใช้เวอร์ชัน API ที่รองรับ:**
 ```python
@@ -132,7 +130,7 @@ AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 
 2. **ตรวจสอบความเข้ากันได้ของเวอร์ชัน API:**
 ```bash
-# แสดงรายการเวอร์ชัน API ที่รองรับ
+# รายการรุ่น API ที่รองรับ
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -140,14 +138,14 @@ az rest --method get \
 
 ## ปัญหา Azure AI Search
 
-### ปัญหา: ระดับราคาของบริการค้นหาไม่เพียงพอ
+### ปัญหา: ระดับราคาบริการค้นหาไม่เพียงพอ
 
 **อาการ:**
 ```
 Error: Semantic search requires Basic tier or higher
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **อัปเกรดระดับราคา:**
 ```bicep
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **ปิดการค้นหาเชิงความหมาย (สำหรับการพัฒนา):**
+2. **ปิดการใช้ Semantic Search (สำหรับการพัฒนา):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -188,19 +186,19 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 Error: Cannot create index, insufficient permissions
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **ตรวจสอบคีย์ของบริการค้นหา:**
 ```bash
-# รับคีย์ผู้ดูแลระบบของบริการค้นหา
+# รับคีย์ผู้ดูแลระบบบริการค้นหา
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **ตรวจสอบสกีมาของดัชนี:**
+2. **ตรวจสอบโครงสร้างดัชนี:**
 ```python
-# ตรวจสอบสคีมาของดัชนี
+# ตรวจสอบความถูกต้องของสคีมาอินเด็กซ์
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -237,9 +235,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 Error: Failed to build container image
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
-1. **ตรวจสอบไวยากรณ์ของ Dockerfile:**
+1. **ตรวจสอบไวยากรณ์ Dockerfile:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -261,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **ตรวจสอบ dependencies:**
+2. **ตรวจสอบความถูกต้องของ dependencies:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -273,9 +271,9 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **เพิ่มการตรวจสอบสุขภาพ:**
+3. **เพิ่ม Health Check:**
 ```python
-# main.py - เพิ่ม endpoint ตรวจสอบสถานะ
+# main.py - เพิ่มจุดตรวจสอบสถานะสุขภาพ
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -285,16 +283,16 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### ปัญหา: การเริ่มต้นคอนเทนเนอร์แอปล้มเหลว
+### ปัญหา: การเริ่มต้น Container App ล้มเหลว
 
 **อาการ:**
 ```
 Error: Container failed to start within timeout period
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
-1. **เพิ่มเวลา timeout ในการเริ่มต้น:**
+1. **เพิ่มเวลาหมดเวลาสำหรับการเริ่มต้น:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -327,9 +325,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **ปรับปรุงการโหลดโมเดล:**
+2. **เพิ่มประสิทธิภาพการโหลดโมเดล:**
 ```python
-# โหลดโมเดลแบบเมื่อจำเป็นเพื่อลดเวลาเริ่มต้น
+# โหลดโมเดลแบบขี้เกียจเพื่อลดเวลาการเริ่มต้น
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -357,16 +355,16 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## ข้อผิดพลาดการยืนยันตัวตนและสิทธิ์
+## ข้อผิดพลาดการตรวจสอบสิทธิ์และสิทธิ์การเข้าถึง
 
-### ปัญหา: สิทธิ์ถูกปฏิเสธสำหรับ Managed Identity
+### ปัญหา: การอนุญาต Managed Identity ถูกปฏิเสธ
 
 **อาการ:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **ตรวจสอบการมอบหมายบทบาท:**
 ```bash
@@ -376,7 +374,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **มอบหมายบทบาทที่จำเป็น:**
+2. **กำหนดบทบาทที่จำเป็น:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -393,9 +391,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **ทดสอบการยืนยันตัวตน:**
+3. **ทดสอบการตรวจสอบสิทธิ์:**
 ```python
-# ทดสอบการตรวจสอบสิทธิ์ด้วย Managed Identity
+# ทดสอบการตรวจสอบสิทธิ์แบบระบุตัวตนที่จัดการโดยระบบ
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -415,9 +413,9 @@ async def test_authentication():
 Error: The user, group or application does not have secrets get permission
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
-1. **ให้สิทธิ์ Key Vault:**
+1. **ให้สิทธิ์การเข้าถึง Key Vault:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -449,16 +447,16 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## ข้อผิดพลาดการปรับใช้โมเดล
+## ล้มเหลวในการปรับใช้โมเดล
 
-### ปัญหา: เวอร์ชันของโมเดลไม่พร้อมใช้งาน
+### ปัญหา: ไม่มีเวอร์ชันโมเดลที่พร้อมใช้งาน
 
 **อาการ:**
 ```
 Error: Model version 'gpt-4-32k' is not available
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **ตรวจสอบโมเดลที่มีอยู่:**
 ```bash
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **ใช้โมเดลสำรอง:**
+2. **ใช้การสำรองโมเดล:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -499,7 +497,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **ยืนยันความถูกต้องของโมเดลก่อนการปรับใช้:**
+3. **ตรวจสอบความถูกต้องของโมเดลก่อนปรับใช้:**
 ```python
 # การตรวจสอบความถูกต้องของโมเดลก่อนการปรับใช้
 import httpx
@@ -523,18 +521,18 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## ปัญหาด้านประสิทธิภาพและการปรับขนาด
 
-### ปัญหา: การตอบสนองหน่วงสูง
+### ปัญหา: การตอบสนองความล่าช้าสูง
 
 **อาการ:**
 - เวลาตอบสนอง > 30 วินาที
-- ข้อผิดพลาดหมดเวลา
+- เกิดข้อผิดพลาดหมดเวลา (timeout)
 - ประสบการณ์ผู้ใช้ไม่ดี
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
-1. **ใช้งานการหมดเวลาในการร้องขอ:**
+1. **ใช้งานการหมดเวลาการร้องขอ:**
 ```python
-# ตั้งค่า timeout ให้เหมาะสม
+# กำหนดเวลา timeout ที่เหมาะสม
 import httpx
 
 client = httpx.AsyncClient(
@@ -547,7 +545,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **เพิ่มการแคชการตอบกลับ:**
+2. **เพิ่มแคชการตอบสนอง:**
 ```python
 # แคช Redis สำหรับการตอบกลับ
 import redis.asyncio as redis
@@ -567,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **กำหนดค่าออโต้สเกล:**
+3. **กำหนดค่า auto-scaling:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -601,14 +599,14 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ปัญหา: ข้อผิดพลาดหน่วยความจำหมด
+### ปัญหา: เกิดข้อผิดพลาดหน่วยความจำหมด
 
 **อาการ:**
 ```
 Error: Container killed due to memory limit exceeded
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
 1. **เพิ่มการจัดสรรหน่วยความจำ:**
 ```bicep
@@ -629,7 +627,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **ปรับให้การใช้หน่วยความจำมีประสิทธิภาพ:**
+2. **เพิ่มประสิทธิภาพการใช้หน่วยความจำ:**
 ```python
 # การจัดการโมเดลที่ประหยัดหน่วยความจำ
 import gc
@@ -641,10 +639,10 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # ตรวจสอบการใช้หน่วยความจำก่อนการประมวลผล
+        # ตรวจสอบการใช้หน่วยความจำก่อนประมวลผล
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # บังคับให้เรียกการเก็บขยะ
+            gc.collect()  # บังคับการเก็บขยะ
             
         result = await self._process_ai_request(request)
         
@@ -653,18 +651,18 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## การจัดการค่าใช้จ่ายและโควต้า
+## การจัดการต้นทุนและโควต้า
 
-### ปัญหา: ค่าใช้จ่ายสูงเกินคาด
+### ปัญหา: ต้นทุนสูงเกินคาด
 
 **อาการ:**
-- บิล Azure สูงกว่าที่คาด
-- การใช้โทเค็นเกินการประเมิน
-- แจ้งเตือนงบประมาณทำงาน
+- บิล Azure สูงกว่าที่คาดไว้
+- การใช้โทเคนเกินประมาณการ
+- แจ้งเตือนงบประมาณถูกกระตุ้น
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 
-1. **นำการควบคุมค่าใช้จ่ายมาใช้:**
+1. **ใช้งานการควบคุมต้นทุน:**
 ```python
 # การติดตามการใช้โทเค็น
 class TokenTracker:
@@ -683,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **ตั้งค่าการแจ้งเตือนค่าใช้จ่าย:**
+2. **ตั้งค่าการแจ้งเตือนต้นทุน:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -708,45 +706,65 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **ปรับแต่งการเลือกโมเดล:**
+3. **เพิ่มประสิทธิภาพการเลือกโมเดล:**
 ```python
-# การเลือกโมเดลโดยคำนึงถึงค่าใช้จ่าย
+# การเลือกโมเดลโดยคำนึงถึงต้นทุน
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # ต่อ 1K โทเค็น
-    'gpt-4': 0.03,          # ต่อ 1K โทเค็น
-    'gpt-35-turbo': 0.0015  # ต่อ 1K โทเค็น
+    'gpt-4.1-mini': 0.00015,  # ต่อ 1 พันโทเค็น
+    'gpt-4.1': 0.03,          # ต่อ 1 พันโทเค็น
+    'gpt-35-turbo': 0.0015  # ต่อ 1 พันโทเค็น
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
-## เครื่องมือและเทคนิคการดีบัก
+## เครื่องมือและเทคนิคสำหรับการดีบัก
 
 ### คำสั่งดีบัก AZD
 
 ```bash
-# เปิดการบันทึกอย่างละเอียด
+# เปิดใช้งานการบันทึกแบบละเอียด
 azd up --debug
 
 # ตรวจสอบสถานะการปรับใช้
 azd show
 
-# ดูบันทึกของแอปพลิเคชัน (จะเปิดแดชบอร์ดการตรวจสอบ)
+# ดูบันทึกแอปพลิเคชัน (เปิดแผงควบคุมการตรวจสอบ)
 azd monitor --logs
 
-# ดูเมตริกแบบเรียลไทม์
+# ดูเมตริกส์แบบสด
 azd monitor --live
 
 # ตรวจสอบตัวแปรสภาพแวดล้อม
 azd env get-values
 ```
+
+### คำสั่งเสริม AZD AI สำหรับการวินิจฉัย
+
+หากคุณปรับใช้เอเจนต์โดยใช้ `azd ai agent init` เครื่องมือเสริมเหล่านี้จะพร้อมใช้งาน:
+
+```bash
+# ตรวจสอบให้แน่ใจว่าได้ติดตั้งส่วนขยายของเอเจนต์แล้ว
+azd extension install azure.ai.agents
+
+# เริ่มต้นใหม่หรือตั้งค่าเอเจนต์จากไฟล์แมนนิแฟสต์
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# ใช้เซิร์ฟเวอร์ MCP เพื่อให้เครื่องมือ AI สอบถามสถานะโครงการได้
+azd mcp start
+
+# สร้างไฟล์โครงสร้างพื้นฐานสำหรับการตรวจสอบและตรวจสอบอีกครั้ง
+azd infra generate
+```
+
+> **เคล็ดลับ:** ใช้ `azd infra generate` เพื่อเขียน IaC ลงดิสก์เพื่อให้คุณสามารถตรวจสอบได้ว่าได้จัดสรรทรัพยากรอะไรบ้างอย่างชัดเจน ซึ่งมีประโยชน์มากเมื่อดีบักปัญหาการกำหนดค่าทรัพยากร ดูรายละเอียดทั้งหมดได้ที่ [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)
 
 ### การดีบักแอปพลิเคชัน
 
@@ -755,7 +773,7 @@ azd env get-values
 import logging
 import json
 
-# กำหนดค่าการบันทึกแบบมีโครงสร้างสำหรับแอปพลิเคชัน AI
+# กำหนดค่าการบันทึกข้อมูลแบบมีโครงสร้างสำหรับแอปพลิเคชัน AI
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -774,14 +792,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **จุดปลายตรวจสอบสุขภาพ:**
+2. **จุดตรวจสอบสุขภาพ (Health Check Endpoints):**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # ตรวจสอบการเชื่อมต่อกับ OpenAI
+    # ตรวจสอบการเชื่อมต่อ OpenAI
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -803,7 +821,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **การตรวจสอบประสิทธิภาพ:**
+3. **การเฝ้าติดตามประสิทธิภาพ:**
 ```python
 import time
 from functools import wraps
@@ -834,42 +852,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## รหัสข้อผิดพลาดทั่วไปและแนวทางแก้ไข
+## รหัสข้อผิดพลาดและวิธีแก้ไขที่พบบ่อย
 
-| รหัสข้อผิดพลาด | คำอธิบาย | แนวทางแก้ไข |
-|----------------|-----------|--------------|
-| 401 | ไม่ได้รับอนุญาต | ตรวจสอบคีย์ API และการกำหนดค่า managed identity |
-| 403 | การเข้าถึงถูกปฏิเสธ | ตรวจสอบการกำหนดบทบาท RBAC |
-| 429 | ถูกจำกัดอัตรา | นำตรรกะการลองใหม่มาทำงานพร้อมการหน่วงแบบทวีคูณ |
-| 500 | ข้อผิดพลาดภายในเซิร์ฟเวอร์ | ตรวจสอบสถานะการปรับใช้โมเดลและบันทึก |
-| 503 | บริการไม่พร้อมใช้งาน | ตรวจสอบสุขภาพของบริการและความพร้อมใช้งานในภูมิภาค |
+| รหัสข้อผิดพลาด | คำอธิบาย | วิธีแก้ไข |
+|------------|-------------|----------|
+| 401 | ไม่มีสิทธิ์ใช้งาน | ตรวจสอบคีย์ API และการกำหนดค่า managed identity |
+| 403 | ห้ามเข้าถึง | ตรวจสอบการมอบหมายบทบาท RBAC |
+| 429 | จำกัดอัตราการใช้งาน | ใช้ตรรกะการลองใหม่ด้วยการหน่วงเวลาทวีคูณ |
+| 500 | ข้อผิดพลาดเซิร์ฟเวอร์ภายใน | ตรวจสอบสถานะและบันทึกการปรับใช้โมเดล |
+| 503 | บริการไม่พร้อมใช้งาน | ตรวจสอบสุขภาพบริการและความพร้อมใช้งานในภูมิภาค |
 
 ## ขั้นตอนถัดไป
 
-1. **ทบทวน [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** สำหรับแนวทางปฏิบัติที่ดีที่สุดในการปรับใช้
-2. **ทำให้เสร็จ [Production AI Practices](../chapter-08-production/production-ai-practices.md)** สำหรับโซลูชันที่พร้อมใช้งานระดับองค์กร
-3. **เข้าร่วม [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** เพื่อขอการสนับสนุนจากชุมชน
-4. **ส่งปัญหา** ไปยัง [AZD GitHub repository](https://github.com/Azure/azure-dev) สำหรับปัญหาเฉพาะ AZD
+1. **ตรวจสอบ [คู่มือการปรับใช้โมเดล AI](../chapter-02-ai-development/ai-model-deployment.md)** สำหรับแนวทางปฏิบัติที่ดีที่สุดในการปรับใช้
+2. **ดำเนินการ [แนวทางปฏิบัติ AI ในการผลิต](../chapter-08-production/production-ai-practices.md)** สำหรับโซลูชันที่พร้อมใช้งานในองค์กร
+3. **เข้าร่วม [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** เพื่อรับการสนับสนุนจากชุมชน
+4. **ส่งรายงานปัญหา** ไปยัง [ที่เก็บ AZD บน GitHub](https://github.com/Azure/azure-dev) สำหรับปัญหาเฉพาะของ AZD
 
-## ทรัพยากร
+## แหล่งข้อมูล
 
-- [Azure OpenAI Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [การแก้ไขปัญหา Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [การแก้ไขปัญหา Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [การแก้ไขปัญหา Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**ทักษะ Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - ติดตั้งทักษะการแก้ไขปัญหา Azure ในแก้ไขโค้ดของคุณ: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **การนำทางบท:**
-- **📚 หน้าแรกของคอร์ส**: [AZD For Beginners](../../README.md)
-- **📖 บทปัจจุบัน**: บทที่ 7 - การแก้ปัญหาและการดีบัก
-- **⬅️ ก่อนหน้า**: [Debugging Guide](debugging.md)
-- **➡️ บทถัดไป**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 ที่เกี่ยวข้อง**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [การแก้ไขปัญหา Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📚 หน้าแรกของหลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 7 - การแก้ไขปัญหาและดีบัก
+- **⬅️ ก่อนหน้า**: [คู่มือดีบัก](debugging.md)
+- **➡️ บทถัดไป**: [บทที่ 8: รูปแบบการผลิตและองค์กร](../chapter-08-production/production-ai-practices.md)
+- **🤖 ที่เกี่ยวข้อง**: [บทที่ 2: การพัฒนา AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 อ้างอิง**: [การแก้ไขปัญหา Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ข้อจำกัดความรับผิด:
-เอกสารฉบับนี้ถูกแปลโดยใช้บริการแปลด้วยปัญญาประดิษฐ์ [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้การแปลแม่นยำ โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อนได้ เอกสารต้นฉบับควรถือว่าเป็นแหล่งข้อมูลที่เป็นหลัก สำหรับข้อมูลที่มีความสำคัญ แนะนำให้ใช้การแปลโดยนักแปลมืออาชีพ เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดใด ๆ ที่เกิดจากการใช้การแปลฉบับนี้
+**ข้อจำกัดความรับผิดชอบ**:  
+เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษาด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ความถูกต้องสูงสุด โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อนได้ เอกสารต้นฉบับในภาษาดั้งเดิมถือเป็นแหล่งข้อมูลที่น่าเชื่อถือที่สุด สำหรับข้อมูลที่มีความสำคัญ แนะนำให้ใช้การแปลโดยนักแปลมืออาชีพ เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

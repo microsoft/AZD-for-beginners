@@ -1,58 +1,58 @@
-# Πράκτορες Τεχνητής Νοημοσύνης με Azure Developer CLI
+# Πράκτορες Τεχνητής Νοημοσύνης με το Azure Developer CLI
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Μαθήματος**: [AZD για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με Προτεραιότητα στην Τεχνητή Νοημοσύνη
-- **⬅️ Προηγούμενο**: [Ανάπτυξη Μοντέλου AI](ai-model-deployment.md)
-- **➡️ Επόμενο**: [Πρακτικές AI για Παραγωγή](production-ai-practices.md)
-- **🚀 Προχωρημένο**: [Λύσεις Πολλαπλών Πρακτόρων](../../examples/retail-scenario.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - AI-First Development
+- **⬅️ Προηγούμενο**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Επόμενο**: [Ανάπτυξη Μοντέλου AI](ai-model-deployment.md)
+- **🚀 Για Προχωρημένους**: [Λύσεις Πολλαπλών Πρακτόρων](../../examples/retail-scenario.md)
 
 ---
 
 ## Εισαγωγή
 
-Οι πράκτορες AI είναι αυτόνομα προγράμματα που μπορούν να αντιλαμβάνονται το περιβάλλον τους, να λαμβάνουν αποφάσεις και να εκτελούν ενέργειες για να πετύχουν συγκεκριμένους στόχους. Σε αντίθεση με απλά chatbots που απαντούν σε προτροπές, οι πράκτορες μπορούν να:
+Οι πράκτορες AI είναι αυτόνομα προγράμματα που μπορούν να αντιληφθούν το περιβάλλον τους, να λαμβάνουν αποφάσεις και να εκτελούν ενέργειες για να επιτύχουν συγκεκριμένους στόχους. Σε αντίθεση με απλά chatbots που απαντούν σε προτροπές, οι πράκτορες μπορούν:
 
-- **Χρησιμοποιούν εργαλεία** - Καλούν APIs, αναζητούν σε βάσεις δεδομένων, εκτελούν κώδικα
-- **Σχεδιάζουν και λογικοποιούν** - Διασπούν σύνθετες εργασίες σε βήματα
-- **Μαθαίνουν από το πλαίσιο** - Διατηρούν μνήμη και προσαρμόζουν τη συμπεριφορά
-- **Συνεργάζονται** - Εργάζονται με άλλους πράκτορες (συστήματα πολλαπλών πρακτόρων)
+- **Να χρησιμοποιούν εργαλεία** - Κλήση APIs, αναζήτηση σε βάσεις δεδομένων, εκτέλεση κώδικα
+- **Να σχεδιάζουν και να αιτιολογούν** - Διασπούν σύνθετες εργασίες σε βήματα
+- **Να μαθαίνουν από το περιεχόμενο** - Διατηρούν μνήμη και προσαρμόζουν συμπεριφορά
+- **Να συνεργάζονται** - Να εργάζονται με άλλους πράκτορες (συστήματα πολλαπλών πρακτόρων)
 
 Αυτός ο οδηγός σας δείχνει πώς να αναπτύξετε πράκτορες AI στο Azure χρησιμοποιώντας το Azure Developer CLI (azd).
 
 ## Στόχοι Μάθησης
 
 Με την ολοκλήρωση αυτού του οδηγού, θα:
-- Κατανοείτε τι είναι οι πράκτορες AI και πώς διαφέρουν από τα chatbots
-- Αναπτύσσετε προ-κατασκευασμένα πρότυπα πρακτόρων χρησιμοποιώντας το AZD
-- Διαμορφώνετε Foundry Agents για προσαρμοσμένους πράκτορες
-- Υλοποιείτε βασικά πρότυπα πρακτόρων (χρήση εργαλείων, RAG, πολλαπλοί πράκτορες)
-- Παρακολουθείτε και εντοπίζετε σφάλματα σε αναπτυγμένους πράκτορες
+- Κατανοήσετε τι είναι οι πράκτορες AI και πώς διαφέρουν από τα chatbots
+- Αναπτύξετε προκατασκευασμένα πρότυπα πρακτόρων AI χρησιμοποιώντας το AZD
+- Διαμορφώσετε Foundry Agents για προσαρμοσμένους πράκτορες
+- Υλοποιήσετε βασικά μοτίβα πρακτόρων (χρήση εργαλείων, RAG, πολλαπλοί πράκτορες)
+- Παρακολουθήσετε και αποσφαλματώσετε αναπτυγμένους πράκτορες
 
-## Αναμενόμενα Αποτελέσματα Μάθησης
+## Αποτελέσματα Μάθησης
 
 Μετά την ολοκλήρωση, θα μπορείτε να:
-- Αναπτύσσετε εφαρμογές πράκτορα AI στο Azure με μία εντολή
-- Διαμορφώνετε εργαλεία και δυνατότητες πρακτόρων
-- Υλοποιείτε retrieval-augmented generation (RAG) με πράκτορες
-- Σχεδιάζετε αρχιτεκτονικές πολλαπλών πρακτόρων για σύνθετες ροές εργασίας
-- Εντοπίζετε και διορθώνετε συνήθη προβλήματα ανάπτυξης πρακτόρων
+- Αναπτύξετε εφαρμογές πρακτόρων AI στο Azure με μία εντολή
+- Διαμορφώσετε εργαλεία και δυνατότητες των πρακτόρων
+- Υλοποιήσετε retrieval-augmented generation (RAG) με πρακτόρες
+- Σχεδιάσετε αρχιτεκτονικές πολλαπλών πρακτόρων για σύνθετες ροές εργασίας
+- Εντοπίζετε και να επιλύετε συνηθισμένα προβλήματα ανάπτυξης πρακτόρων
 
 ---
 
-## 🤖 Τι κάνει έναν Πράκτορα διαφορετικό από ένα Chatbot;
+## 🤖 Τι Κάνει Έναν Πράκτορα Διαφορετικό από ένα Chatbot;
 
 | Χαρακτηριστικό | Chatbot | Πράκτορας AI |
-|---------------|---------|--------------|
+|---------|---------|----------|
 | **Συμπεριφορά** | Απαντά σε προτροπές | Αναλαμβάνει αυτόνομες ενέργειες |
 | **Εργαλεία** | Κανένα | Μπορεί να καλεί APIs, να αναζητά, να εκτελεί κώδικα |
-| **Μνήμη** | Μόνο βάσει συνεδρίας | Επίμονη μνήμη ανά συνεδρίες |
-| **Σχεδιασμός** | Μονοβηματική απάντηση | Πολλαπλά βήματα λογικής |
-| **Συνεργασία** | Μονή οντότητα | Μπορεί να συνεργάζεται με άλλους πράκτορες |
+| **Μνήμη** | Μόνο συνεδρίας | Επίμονη μνήμη ανά συνεδρίες |
+| **Σχεδιασμός** | Μία απάντηση | Πολυβηματική λογική |
+| **Συνεργασία** | Μονάδα | Μπορεί να δουλεύει με άλλους πράκτορες |
 
 ### Απλή Αναλογία
 
-- **Chatbot** = Ένα εξυπηρετικό άτομο που απαντά σε ερωτήσεις σε ένα πληροφοριακό γκισέ
+- **Chatbot** = Ένα εξυπηρετικό άτομο που απαντά σε ερωτήσεις σε ένα πληροφοριακό γραφείο
 - **Πράκτορας AI** = Ένας προσωπικός βοηθός που μπορεί να κάνει κλήσεις, να κλείνει ραντεβού και να ολοκληρώνει εργασίες για εσάς
 
 ---
@@ -62,22 +62,22 @@
 ### Επιλογή 1: Πρότυπο Foundry Agents (Συνιστάται)
 
 ```bash
-# Αρχικοποίηση του προτύπου πρακτόρων τεχνητής νοημοσύνης
+# Αρχικοποιήστε το πρότυπο πρακτόρων τεχνητής νοημοσύνης
 azd init --template get-started-with-ai-agents
 
-# Ανάπτυξη στο Azure
+# Αναπτύξτε στο Azure
 azd up
 ```
 
 **Τι αναπτύσσεται:**
 - ✅ Foundry Agents
-- ✅ Azure OpenAI (GPT-4o)
+- ✅ Microsoft Foundry Models (gpt-4.1)
 - ✅ Azure AI Search (για RAG)
-- ✅ Azure Container Apps (διαδικτυακή διεπαφή)
+- ✅ Azure Container Apps (διεπαφή web)
 - ✅ Application Insights (παρακολούθηση)
 
 **Χρόνος:** ~15-20 λεπτά
-**Κόστος:** ~$100-150/μήνα (ανάπτυξη)
+**Κόστος:** ~$100-150/month (development)
 
 ### Επιλογή 2: Πράκτορας OpenAI με Prompty
 
@@ -91,12 +91,12 @@ azd up
 
 **Τι αναπτύσσεται:**
 - ✅ Azure Functions (serverless εκτέλεση πράκτορα)
-- ✅ Azure OpenAI
-- ✅ Αρχεία διαμόρφωσης Prompty
+- ✅ Microsoft Foundry Models
+- ✅ Αρχεία ρύθμισης Prompty
 - ✅ Δείγμα υλοποίησης πράκτορα
 
 **Χρόνος:** ~10-15 λεπτά
-**Κόστος:** ~$50-100/μήνα (ανάπτυξη)
+**Κόστος:** ~$50-100/month (development)
 
 ### Επιλογή 3: RAG Chat Agent
 
@@ -109,111 +109,101 @@ azd up
 ```
 
 **Τι αναπτύσσεται:**
-- ✅ Azure OpenAI
+- ✅ Microsoft Foundry Models
 - ✅ Azure AI Search με δείγμα δεδομένων
-- ✅ Pipeline επεξεργασίας εγγράφων
+- ✅ Σωλήνας επεξεργασίας εγγράφων
 - ✅ Διεπαφή συνομιλίας με παραπομπές
 
 **Χρόνος:** ~15-25 λεπτά
-**Κόστος:** ~$80-150/μήνα (ανάπτυξη)
+**Κόστος:** ~$80-150/month (development)
+
+### Επιλογή 4: AZD AI Agent Init (Βασισμένο σε Manifest)
+
+Αν έχετε ένα αρχείο manifest πράκτορα, μπορείτε να χρησιμοποιήσετε την εντολή `azd ai` για να δημιουργήσετε ένα project Foundry Agent Service απευθείας:
+
+```bash
+# Εγκαταστήστε την επέκταση για πράκτορες τεχνητής νοημοσύνης
+azd extension install azure.ai.agents
+
+# Αρχικοποιήστε από το manifest ενός πράκτορα
+azd ai agent init -m agent-manifest.yaml
+
+# Αναπτύξτε στο Azure
+azd up
+```
+
+**Πότε να χρησιμοποιήσετε `azd ai agent init` vs `azd init --template`:**
+
+| Προσέγγιση | Καλύτερο για | Πώς λειτουργεί |
+|----------|----------|------|
+| `azd init --template` | Ξεκινώντας από ένα λειτουργικό παράδειγμα εφαρμογής | Κλωνοποιεί ένα πλήρες αποθετήριο προτύπου με κώδικα + υποδομή |
+| `azd ai agent init -m` | Οικοδόμηση από το δικό σας manifest πράκτορα | Σκαλετοποιεί τη δομή του έργου από τον ορισμό του πράκτορα σας |
+
+> **Συμβουλή:** Χρησιμοποιήστε `azd init --template` όταν μαθαίνετε (Επιλογές 1-3 παραπάνω). Χρησιμοποιήστε `azd ai agent init` όταν κατασκευάζετε παραγωγικούς πράκτορες με τα δικά σας manifests. Δείτε [Εντολές CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) για πλήρη αναφορά.
 
 ---
 
 ## 🏗️ Πρότυπα Αρχιτεκτονικής Πρακτόρων
 
-### Πρότυπο 1: Ενιαίος Πράκτορας με Εργαλεία
+### Πρότυπο 1: Μονός Πράκτορας με Εργαλεία
 
-Το πιο απλό πρότυπο πράκτορα - ένας πράκτορας που μπορεί να χρησιμοποιεί πολλαπλά εργαλεία.
+Το πιο απλό μοτίβο πράκτορα - ένας πράκτορας που μπορεί να χρησιμοποιεί πολλαπλά εργαλεία.
 
+```mermaid
+graph TD
+    UI[Διεπαφή Χρήστη] --> Agent[Πράκτορας ΤΝ<br/>gpt-4.1]
+    Agent --> Search[Εργαλείο Αναζήτησης]
+    Agent --> Database[Εργαλείο Βάσης Δεδομένων]
+    Agent --> API[Εργαλείο API]
 ```
-┌─────────────────────────────────────┐
-│           User Interface            │
-└─────────────────┬───────────────────┘
-                  │
-          ┌───────▼───────┐
-          │  AI Agent     │
-          │  (GPT-4o)     │
-          └───────┬───────┘
-                  │
-    ┌─────────────┼─────────────┐
-    │             │             │
-┌───▼───┐   ┌────▼────┐   ┌───▼───┐
-│Search │   │Database │   │ API   │
-│ Tool  │   │  Tool   │   │ Tool  │
-└───────┘   └─────────┘   └───────┘
-```
-
 **Καλύτερο για:**
 - Bots υποστήριξης πελατών
 - Βοηθούς έρευνας
 - Πράκτορες ανάλυσης δεδομένων
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD Πρότυπο:** `azure-search-openai-demo`
 
-### Πρότυπο 2: Πράκτορας RAG (Ανάκτηση-Εμπλουτισμένη Παραγωγή)
+### Πρότυπο 2: RAG Πράκτορας (Retrieval-Augmented Generation)
 
 Ένας πράκτορας που ανακτά σχετικά έγγραφα πριν δημιουργήσει απαντήσεις.
 
+```mermaid
+graph TD
+    Query[Ερώτημα Χρήστη] --> RAG[Πράκτορας RAG]
+    RAG --> Vector[Αναζήτηση Διανυσμάτων]
+    RAG --> LLM[Μεγάλο Μοντέλο Γλώσσας<br/>gpt-4.1]
+    Vector -- Έγγραφα --> LLM
+    LLM --> Response[Απάντηση με Παραπομπές]
 ```
-┌──────────────────────────────────────────────┐
-│                User Query                     │
-└─────────────────────┬────────────────────────┘
-                      │
-              ┌───────▼───────┐
-              │  RAG Agent    │
-              └───────┬───────┘
-                      │
-         ┌────────────┴────────────┐
-         │                         │
-    ┌────▼────┐              ┌────▼────┐
-    │ Vector  │              │  LLM    │
-    │ Search  │──Documents──►│ (GPT-4) │
-    └─────────┘              └────┬────┘
-                                  │
-                          ┌───────▼───────┐
-                          │ Response with │
-                          │  Citations    │
-                          └───────────────┘
-```
-
 **Καλύτερο για:**
-- Εταιρικές βάσεις γνώσης
-- Συστήματα Q&A εγγράφων
-- Έρευνα συμμόρφωσης και νομικών θεμάτων
+- Επιχειρησιακές βάσεις γνώσεων
+- Συστήματα ερωταπαντήσεων εγγράφων
+- Έρευνα συμμόρφωσης και νομική έρευνα
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD Πρότυπο:** `azure-search-openai-demo`
 
 ### Πρότυπο 3: Σύστημα Πολλαπλών Πρακτόρων
 
 Πολλοί εξειδικευμένοι πράκτορες που συνεργάζονται για σύνθετες εργασίες.
 
+```mermaid
+graph TD
+    Orchestrator[Πράκτορας Ορχηστρωτής] --> Research[Πράκτορας Έρευνας<br/>gpt-4.1]
+    Orchestrator --> Writer[Πράκτορας Συγγραφέας<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Πράκτορας Αναθεωρητής<br/>gpt-4.1]
 ```
-                ┌─────────────────┐
-                │  Orchestrator   │
-                │    Agent        │
-                └────────┬────────┘
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-┌───────▼───────┐ ┌─────▼──────┐ ┌───────▼───────┐
-│   Research    │ │   Writer   │ │   Reviewer    │
-│    Agent      │ │   Agent    │ │    Agent      │
-│  (GPT-4o)     │ │(GPT-4o-mini│ │   (GPT-4o)    │
-└───────────────┘ └────────────┘ └───────────────┘
-```
-
 **Καλύτερο για:**
 - Σύνθετη δημιουργία περιεχομένου
 - Πολυβηματικές ροές εργασίας
-- Εργασίες που απαιτούν διαφορετική ειδίκευση
+- Εργασίες που απαιτούν διαφορετική εξειδίκευση
 
-**Μάθετε Περισσότερα:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**Μάθετε Περισσότερα:** [Πρότυπα Συντονισμού Πολλαπλών Πρακτόρων](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Διαμόρφωση Εργαλείων Πρακτόρων
+## ⚙️ Διαμόρφωση Εργαλείων Πρακτόρα
 
-Οι πράκτορες γίνονται ισχυροί όταν μπορούν να χρησιμοποιούν εργαλεία. Δείτε πώς να διαμορφώσετε κοινά εργαλεία:
+Οι πράκτορες γίνονται ισχυροί όταν μπορούν να χρησιμοποιούν εργαλεία. Εδώ είναι πώς να διαμορφώσετε κοινά εργαλεία:
 
 ### Διαμόρφωση Εργαλείων σε Foundry Agents
 
@@ -222,7 +212,7 @@ azd up
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# Ορισμός προσαρμοσμένων εργαλείων
+# Ορίστε προσαρμοσμένα εργαλεία
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -238,9 +228,9 @@ search_tool = FunctionTool(
     }
 )
 
-# Δημιουργία πράκτορα με εργαλεία
+# Δημιουργήστε πράκτορα με τα εργαλεία
 agent = project_client.agents.create_agent(
-    model="gpt-4o",
+    model="gpt-4.1",
     name="Support Agent",
     instructions="You are a helpful support agent. Use the search tool to find relevant information.",
     tools=[search_tool, CodeInterpreterTool()]
@@ -250,13 +240,13 @@ agent = project_client.agents.create_agent(
 ### Διαμόρφωση Περιβάλλοντος
 
 ```bash
-# Ρυθμίστε μεταβλητές περιβάλλοντος ειδικές για τον πράκτορα
-azd env set AZURE_OPENAI_MODEL "gpt-4o"
+# Ρύθμιση μεταβλητών περιβάλλοντος ειδικών για τον πράκτορα
+azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Αναπτύξτε με ενημερωμένη διαμόρφωση
+# Αναπτύξτε με την ενημερωμένη διαμόρφωση
 azd deploy
 ```
 
@@ -266,69 +256,73 @@ azd deploy
 
 ### Ενσωμάτωση Application Insights
 
-Όλα τα πρότυπα πράκτορα AZD περιλαμβάνουν Application Insights για παρακολούθηση:
+Όλα τα πρότυπα πράκτορα AZD περιλαμβάνουν το Application Insights για παρακολούθηση:
 
 ```bash
 # Άνοιγμα πίνακα ελέγχου παρακολούθησης
 azd monitor --overview
 
-# Προβολή ζωντανών καταγραφών
+# Προβολή ζωντανών αρχείων καταγραφής
 azd monitor --logs
 
 # Προβολή ζωντανών μετρήσεων
 azd monitor --live
 ```
 
-### Βασικοί Δείκτες προς Παρακολούθηση
+### Κύρια Μετρικά για Παρακολούθηση
 
-| Δείκτης | Περιγραφή | Στόχος |
+| Μετρική | Περιγραφή | Στόχος |
 |--------|-------------|--------|
-| Καθυστέρηση Απάντησης | Χρόνος για τη δημιουργία απάντησης | < 5 δευτερόλεπτα |
-| Χρήση Token | Tokens ανά αίτημα | Παρακολούθηση για κόστος |
-| Ποσοστό Επιτυχίας Κλήσεων Εργαλείων | % επιτυχημένων εκτελέσεων εργαλείων | > 95% |
-| Ποσοστό Σφαλμάτων | Αποτυχημένα αιτήματα πράκτορα | < 1% |
-| Ικανοποίηση Χρηστών | Βαθμολογίες ανατροφοδότησης | > 4.0/5.0 |
+| Response Latency | Χρόνος για δημιουργία απάντησης | < 5 seconds |
+| Token Usage | Tokens ανά αίτημα | Παρακολουθήστε για κόστος |
+| Tool Call Success Rate | % επιτυχημένων εκτελέσεων εργαλείων | > 95% |
+| Error Rate | Ανεπιτυχείς αιτήσεις πράκτορα | < 1% |
+| User Satisfaction | Βαθμολογίες ανάδρασης | > 4.0/5.0 |
 
 ### Προσαρμοσμένη Καταγραφή για Πράκτορες
 
 ```python
-import logging
-from opencensus.ext.azure.log_exporter import AzureLogHandler
+import os
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(
+# Ρυθμίστε το Azure Monitor με OpenTelemetry
+configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
-))
+)
+
+tracer = trace.get_tracer(__name__)
 
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
-    logger.info("agent_interaction", extra={
-        "custom_dimensions": {
+    with tracer.start_as_current_span("agent_interaction") as span:
+        span.set_attributes({
             "user_query": user_query,
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
-        }
-    })
+        })
 ```
+
+> **Σημείωση:** Εγκαταστήστε τα απαιτούμενα πακέτα: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
 ## 💰 Παράγοντες Κόστους
 
-### Εκτιμώμενο Μηνιαίο Κόστος ανά Πρότυπο
+### Εκτιμώμενα Μηνιαία Κόστη ανά Πρότυπο
 
 | Πρότυπο | Περιβάλλον Ανάπτυξης | Παραγωγή |
-|---------|---------------------|----------|
-| Ενιαίος Πράκτορας | $50-100 | $200-500 |
-| Πράκτορας RAG | $80-150 | $300-800 |
-| Πολλαπλοί Πράκτορες (2-3 πράκτορες) | $150-300 | $500-1,500 |
-| Εταιρικό Σύστημα Πολλαπλών Πρακτόρων | $300-500 | $1,500-5,000+ |
+|---------|-----------------|------------|
+| Single Agent | $50-100 | $200-500 |
+| RAG Agent | $80-150 | $300-800 |
+| Multi-Agent (2-3 agents) | $150-300 | $500-1,500 |
+| Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
 
 ### Συμβουλές Βελτιστοποίησης Κόστους
 
-1. **Χρησιμοποιήστε GPT-4o-mini για απλές εργασίες**
+1. **Χρησιμοποιήστε gpt-4.1-mini για απλές εργασίες**
    ```bash
-   azd env set AZURE_OPENAI_MODEL "gpt-4o-mini"
+   azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
 2. **Εφαρμόστε caching για επαναλαμβανόμενα ερωτήματα**
@@ -340,17 +334,19 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **Ορίστε όρια tokens**
+3. **Ορίστε όρια token ανά εκτέλεση**
    ```python
-   agent = project_client.agents.create_agent(
-       model="gpt-4o",
-       max_tokens=1000  # Περιορίστε το μήκος της απάντησης
+   # Ορίστε το max_completion_tokens όταν εκτελείτε τον πράκτορα, όχι κατά τη δημιουργία
+   run = project_client.agents.create_run(
+       thread_id=thread.id,
+       agent_id=agent.id,
+       max_completion_tokens=1000  # Περιορίστε το μήκος της απάντησης
    )
    ```
 
-4. **Κλιμακώστε στο μηδέν όταν δεν χρησιμοποιείται**
+4. **Κλιμακώστε σε μηδέν όταν δεν χρησιμοποιείται**
    ```bash
-   # Οι Container Apps κλιμακώνονται αυτόματα στο μηδέν
+   # Οι Container Apps κλιμακώνονται αυτόματα σε μηδέν
    azd env set MIN_REPLICAS "0"
    ```
 
@@ -358,16 +354,16 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ## 🔧 Αντιμετώπιση Προβλημάτων Πρακτόρων
 
-### Συνήθη Προβλήματα και Λύσεις
+### Συχνά Προβλήματα και Λύσεις
 
 <details>
-<summary><strong>❌ Ο πράκτορας δεν αποκρίνεται στις κλήσεις εργαλείων</strong></summary>
+<summary><strong>❌ Ο πράκτορας δεν ανταποκρίνεται σε κλήσεις εργαλείων</strong></summary>
 
 ```bash
 # Ελέγξτε αν τα εργαλεία έχουν καταχωριστεί σωστά
 azd show
 
-# Επαληθεύστε την ανάπτυξη του OpenAI
+# Επιβεβαιώστε την ανάπτυξη του OpenAI
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
@@ -376,10 +372,10 @@ az cognitiveservices account deployment list \
 azd monitor --logs
 ```
 
-**Συνηθισμένοι λόγοι:**
-- Ασυμφωνία υπογραφής συνάρτησης εργαλείου
-- Λείπουν απαιτούμενα δικαιώματα
-- Η διεύθυνση τελικού σημείου API δεν είναι προσβάσιμη
+**Συνήθεις αιτίες:**
+- Μη συμφωνία στο signature της συνάρτησης εργαλείου
+- Έλλειψη απαραίτητων δικαιωμάτων
+- Το endpoint του API δεν είναι προσβάσιμο
 </details>
 
 <details>
@@ -389,22 +385,22 @@ azd monitor --logs
 # Ελέγξτε το Application Insights για σημεία συμφόρησης
 azd monitor --live
 
-# Σκεφτείτε να χρησιμοποιήσετε ένα ταχύτερο μοντέλο
-azd env set AZURE_OPENAI_MODEL "gpt-4o-mini"
+# Σκεφτείτε να χρησιμοποιήσετε ένα πιο γρήγορο μοντέλο
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
 **Συμβουλές βελτιστοποίησης:**
-- Χρησιμοποιήστε ροή απαντήσεων (streaming)
+- Χρησιμοποιήστε streaming απαντήσεις
 - Εφαρμόστε caching απαντήσεων
-- Μειώστε το μέγεθος παραθύρου συμφραζομένων
+- Μειώστε το μέγεθος του context window
 </details>
 
 <details>
-<summary><strong>❌ Ο πράκτορας επιστρέφει λανθασμένες ή επινοημένες πληροφορίες</strong></summary>
+<summary><strong>❌ Ο πράκτορας επιστρέφει λανθασμένες ή “hallucinated” πληροφορίες</strong></summary>
 
 ```python
-# Βελτίωσε με καλύτερες υποδείξεις συστήματος
+# Βελτιώστε με καλύτερες υποδείξεις συστήματος
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -413,11 +409,11 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Πρόσθεσε ανάκτηση για τεκμηρίωση
+# Προσθέστε ανάκτηση για τεκμηρίωση
 agent = project_client.agents.create_agent(
-    model="gpt-4o",
+    model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # Βάσισε τις απαντήσεις σε έγγραφα
+    tools=[FileSearchTool()]  # Βασίστε τις απαντήσεις σε έγγραφα
 )
 ```
 </details>
@@ -427,13 +423,15 @@ agent = project_client.agents.create_agent(
 
 ```python
 # Υλοποίηση διαχείρισης παραθύρου συμφραζομένων
-def truncate_context(messages, max_tokens=8000):
+def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
+    import tiktoken
+    encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
     truncated = []
     
     for msg in reversed(messages):
-        msg_tokens = len(msg.content) // 4  # Προσεγγιστική εκτίμηση
+        msg_tokens = len(encoding.encode(msg.content))
         if total_tokens + msg_tokens > max_tokens:
             break
         truncated.insert(0, msg)
@@ -452,108 +450,155 @@ def truncate_context(messages, max_tokens=8000):
 **Στόχος:** Αναπτύξτε τον πρώτο σας πράκτορα AI χρησιμοποιώντας το AZD
 
 ```bash
-# Βήμα 1: Αρχικοποιήστε το πρότυπο
+# Βήμα 1: Αρχικοποίηση προτύπου
 azd init --template get-started-with-ai-agents
 
-# Βήμα 2: Συνδεθείτε στο Azure
+# Βήμα 2: Σύνδεση στο Azure
 azd auth login
 
-# Βήμα 3: Αναπτύξτε
+# Βήμα 3: Ανάπτυξη
 azd up
 
 # Βήμα 4: Δοκιμάστε τον πράκτορα
-# Ανοίξτε το URL που εμφανίζεται στην έξοδο
+# Αναμενόμενη έξοδος μετά την ανάπτυξη:
+#   Η ανάπτυξη ολοκληρώθηκε!
+#   Τελικό σημείο: https://<app-name>.<region>.azurecontainerapps.io
+# Ανοίξτε το URL που εμφανίζεται στην έξοδο και δοκιμάστε να κάνετε μια ερώτηση
 
-# Βήμα 5: Καθαρίστε
+# Βήμα 5: Προβολή παρακολούθησης
+azd monitor --overview
+
+# Βήμα 6: Καθαρισμός
 azd down --force --purge
 ```
 
 **Κριτήρια Επιτυχίας:**
 - [ ] Ο πράκτορας απαντά σε ερωτήσεις
-- [ ] Μπορεί να έχει πρόσβαση στον πίνακα παρακολούθησης
-- [ ] Οι πόροι καθαρίστηκαν επιτυχώς
+- [ ] Μπορεί να έχει πρόσβαση στον πίνακα παρακολούθησης μέσω `azd monitor`
+- [ ] Οι πόροι καθαρίζονται με επιτυχία
 
 ### Άσκηση 2: Προσθέστε ένα Προσαρμοσμένο Εργαλείο (30 λεπτά)
 
 **Στόχος:** Επεκτείνετε έναν πράκτορα με ένα προσαρμοσμένο εργαλείο
 
-1. Αναπτύξτε το πρότυπο πράκτορα
-2. Δημιουργήστε μια νέα συνάρτηση εργαλείου:
+1. Αναπτύξτε το πρότυπο πράκτορα:
+   ```bash
+   azd init --template get-started-with-ai-agents
+   azd up
+   ```
+2. Δημιουργήστε μια νέα συνάρτηση εργαλείου στον κώδικα του πράκτορα σας:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
        # Κλήση API στην υπηρεσία καιρού
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Εγγράψτε το εργαλείο με τον πράκτορα
-4. Δοκιμάστε ότι ο πράκτορας χρησιμοποιεί το νέο εργαλείο
+3. Καταχωρήστε το εργαλείο στον πράκτορα:
+   ```python
+   from azure.ai.projects.models import FunctionTool
+
+   weather_tool = FunctionTool(
+       name="get_weather",
+       description="Get current weather for a location",
+       parameters={
+           "type": "object",
+           "properties": {
+               "location": {"type": "string", "description": "City name"}
+           },
+           "required": ["location"]
+       }
+   )
+
+   agent = project_client.agents.create_agent(
+       model="gpt-4.1",
+       name="Weather Agent",
+       tools=[weather_tool]
+   )
+   ```
+4. Επανααναπτύξτε και δοκιμάστε:
+   ```bash
+   azd deploy
+   # Ρώτησε: "Τι καιρό κάνει στο Σιάτλ;"
+   # Αναμενόμενο: Ο πράκτορας καλεί get_weather("Seattle") και επιστρέφει πληροφορίες καιρού
+   ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Ο πράκτορας αναγνωρίζει ερωτήματα σχετικά με τον καιρό
+- [ ] Ο πράκτορας αναγνωρίζει ερωτήσεις σχετικά με τον καιρό
 - [ ] Το εργαλείο καλείται σωστά
 - [ ] Η απάντηση περιλαμβάνει πληροφορίες καιρού
 
-### Άσκηση 3: Δημιουργήστε έναν Πράκτορα RAG (45 λεπτά)
+### Άσκηση 3: Δημιουργήστε έναν RAG Πράκτορα (45 λεπτά)
 
-**Στόχος:** Δημιουργήστε έναν πράκτορα που απαντά σε ερωτήματα από τα έγγραφά σας
+**Στόχος:** Δημιουργήστε έναν πράκτορα που απαντά σε ερωτήσεις από τα έγγραφά σας
 
 ```bash
-# Αναπτύξτε το πρότυπο RAG
+# Βήμα 1: Αναπτύξτε το πρότυπο RAG
 azd init --template azure-search-openai-demo
 azd up
 
-# Ανεβάστε τα έγγραφά σας
-# (Ακολουθήστε τον οδηγό εισαγωγής δεδομένων του προτύπου)
+# Βήμα 2: Μεταφορτώστε τα έγγραφά σας
+# Τοποθετήστε αρχεία PDF/TXT στον κατάλογο data/, στη συνέχεια εκτελέστε:
+python scripts/prepdocs.py
 
-# Δοκιμάστε με ερωτήσεις συγκεκριμένου τομέα
+# Βήμα 3: Δοκιμάστε με ερωτήσεις ειδικές για τον τομέα
+# Ανοίξτε το URL της web εφαρμογής από την έξοδο του azd up
+# Κάντε ερωτήσεις σχετικά με τα μεταφορτωμένα έγγραφά σας
+# Οι απαντήσεις πρέπει να περιλαμβάνουν παραπομπές όπως [doc.pdf]
 ```
 
 **Κριτήρια Επιτυχίας:**
-- [ ] Ο πράκτορας απαντά από τα ανεβασμένα έγγραφα
+- [ ] Ο πράκτορας απαντά από ανεβασμένα έγγραφα
 - [ ] Οι απαντήσεις περιλαμβάνουν παραπομπές
-- [ ] Καμία επινόηση σε ερωτήματα εκτός πεδίου
+- [ ] Δεν υπάρχουν “hallucinations” σε ερωτήσεις εκτός πεδίου
 
 ---
 
 ## 📚 Επόμενα Βήματα
 
-Τώρα που κατανοείτε τους πράκτορες AI, εξερευνήστε αυτά τα προχωρημένα θέματα:
+Τώρα που κατανοείτε τους πράκτορες AI, εξερευνήστε αυτά τα πιο προχωρημένα θέματα:
 
 | Θέμα | Περιγραφή | Σύνδεσμος |
-|------|-----------|----------|
+|-------|-------------|------|
 | **Συστήματα Πολλαπλών Πρακτόρων** | Δημιουργήστε συστήματα με πολλούς συνεργαζόμενους πράκτορες | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Πρότυπα Συντονισμού** | Μάθετε προτύπα ορχήστρωσης και επικοινωνίας | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Ανάπτυξη για Παραγωγή** | Ανάπτυξη πρακτόρων έτοιμη για την επιχείρηση | [Production AI Practices](production-ai-practices.md) |
-| **Αξιολόγηση Πρακτόρων** | Δοκιμάστε και αξιολογήστε την απόδοση των πρακτόρων | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Πρότυπα Συντονισμού** | Μάθετε πρότυπα ορχήστρωσης και επικοινωνίας | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Παραγωγική Ανάπτυξη** | Ανάπτυξη πρακτόρων έτοιμων για παραγωγή | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **Αξιολόγηση Πρακτόρα** | Δοκιμάστε και αξιολογήστε την απόδοση του πράκτορα | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Εργαστήριο AI** | Πρακτική: Κάντε τη λύση AI έτοιμη για AZD | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 Επιπλέον Πόροι
 
 ### Επίσημη Τεκμηρίωση
-- [Foundry Agents](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Azure OpenAI Assistants API](https://learn.microsoft.com/azure/ai-services/openai/how-to/assistant)
-- [Semantic Kernel (Agent Framework)](https://learn.microsoft.com/semantic-kernel/)
+- [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### Πρότυπα AZD για Πράκτορες
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Ξεκινήστε με Πράκτορες AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Παράδειγμα Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Κοινοτικοί Πόροι
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
-- [Azure AI Discord](https://discord.gg/microsoft-azure)
-- [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
+### Πόροι Κοινότητας
+- [Awesome AZD - Πρότυπα Πρακτόρων](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Διακομιστής Discord Azure AI](https://discord.gg/microsoft-azure)
+- [Διακομιστής Discord Microsoft Foundry](https://discord.gg/nTYy5BXMWG)
+
+### Δεξιότητες Πρακτόρα για το Επεξεργαστή σας
+- [**Δεξιότητες Πρακτόρα Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Εγκαταστήστε επαναχρησιμοποιήσιμες δεξιότητες πρακτόρα AI για ανάπτυξη Azure στο GitHub Copilot, Cursor, ή οποιονδήποτε υποστηριζόμενο πράκτορα. Περιλαμβάνει δεξιότητες για [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), και [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
 **Πλοήγηση**
-- **Προηγούμενο Μάθημα**: [Ανάπτυξη Μοντέλου AI](ai-model-deployment.md)
-- **Επόμενο Μάθημα**: [Πρακτικές AI για Παραγωγή](production-ai-practices.md)
+- **Προηγούμενο Μάθημα**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
+- **Επόμενο Μάθημα**: [Ανάπτυξη Μοντέλου AI](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης με τεχνητή νοημοσύνη Co-op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, να γνωρίζετε ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε καμία ευθύνη για τυχόν παρερμηνείες ή παρεξηγήσεις που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μηχανικής μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρότι επιδιώκουμε την ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην μητρική του γλώσσα πρέπει να θεωρείται η έγκυρη/επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,70 +1,63 @@
-# Kapitel 8: Produktion & företagsmönster
+# Kapitel 8: Produktion & Företagsmönster
 
-**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplexitet**: Avancerad
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplexitet**: Avancerad
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker företagsklara distributionsmönster, säkerhetshärdning, övervakning och kostnadsoptimering för produktions-AI-arbetsbelastningar.
+Detta kapitel täcker företagsfärdiga driftsmönster, säkerhetshärdning, övervakning och kostnadsoptimering för produktions-AI-arbetsbelastningar.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Distribuera applikationer över flera regioner för ökad motståndskraft
-- Implementera säkerhetsmönster för företag
+- Distribuera applikationer över flera regioner för motståndskraft
+- Implementera företagsäkerhetsmönster
 - Konfigurera omfattande övervakning
 - Optimera kostnader i stor skala
-- Sätta upp CI/CD-pipelines med AZD
+- Ställa in CI/CD-pipelines med AZD
 
 ---
 
 ## 📚 Lektioner
 
-| # | Lesson | Description | Time |
+| # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Företagsdistributionsmönster | 90 min |
+| 1 | [Produktions-AI-praktiker](production-ai-practices.md) | Företagsdriftsmönster | 90 min |
 
 ---
 
 ## 🚀 Produktionschecklista
 
-- [ ] Flerregionsdistribution för resiliens
+- [ ] Distribuering i flera regioner för motståndskraft
 - [ ] Hanterad identitet för autentisering (inga nycklar)
 - [ ] Application Insights för övervakning
-- [ ] Kostnadsbudgetar och larm konfigurerade
+- [ ] Kostnadsbudgetar och aviseringar konfigurerade
 - [ ] Säkerhetsskanning aktiverad
-- [ ] Integrering av CI/CD-pipeline
+- [ ] Integration av CI/CD-pipeline
 - [ ] Plan för katastrofåterställning
 
 ---
 
 ## 🏗️ Arkitekturmönster
 
-### Mönster 1: Mikrotjänster för AI
+### Mönster 1: AI med mikrotjänster
 
+```mermaid
+graph LR
+    Gateway[API-gateway] --> AI[AI-tjänst] --> Models[Microsoft Foundry-modeller]
+    Gateway --> Auth[Autentiseringstjänst]
+    AI --> Data[Datalagring]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Mönster 2: Händelsestyrd AI
 
+```mermaid
+graph LR
+    EventGrid[Händelsegrid] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Bästa säkerhetspraxis
+## 🔐 Säkerhetsbästa praxis
 
 ```bicep
 // Use managed identity
@@ -85,8 +78,8 @@ properties: {
 
 ## 💰 Kostnadsoptimering
 
-| Strategy | Savings |
-|----------|---------|
+| Strategi | Besparingar |
+|----------|-------------|
 | Skala till noll (Container Apps) | 60-80% |
 | Använd konsumtionsnivåer för utveckling | 50-70% |
 | Schemalagd skalning | 30-50% |
@@ -103,7 +96,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Övervakningsinställning
+## 📊 Övervakningsinställningar
 
 ```bash
 # Strömma loggar
@@ -120,10 +113,10 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Navigering
 
-| Direction | Chapter |
+| Riktning | Kapitel |
 |-----------|---------|
-| **Previous** | [Kapitel 7: Felsökning](../chapter-07-troubleshooting/README.md) |
-| **Course Complete** | [Kursens startsida](../../README.md) |
+| **Föregående** | [Kapitel 7: Felsökning](../chapter-07-troubleshooting/README.md) |
+| **Kurs slutförd** | [Kursens startsida](../../README.md) |
 
 ---
 
@@ -131,12 +124,12 @@ az monitor metrics list --resource <resource-id>
 
 - [Guide för AI-agenter](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Fleragentlösningar](../chapter-05-multi-agent/README.md)
-- [Exempel: mikrotjänster](../../examples/microservices/README.md)
+- [Lösningar med flera agenter](../chapter-05-multi-agent/README.md)
+- [Mikrotjänstexempel](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Vi eftersträvar noggrannhet, men observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt originalspråk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas en professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
