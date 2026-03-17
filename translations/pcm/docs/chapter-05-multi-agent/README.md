@@ -1,78 +1,73 @@
-# Chapter 5: Multi-Agent AI Solushon
+# Chaptah 5: Multi-Agent AI Solutions
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 hours | **⭐ Complexity**: Advanced
+**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 2-3 awa | **⭐ Level**: Advanced
 
 ---
 
-## Overview
+## Wetin dis chaptah go cover
 
-Dis chapter go cover advanced multi-agent architecture patterns, how to orchestrate agents, an how to deploy AI wey ready for production for complex scenarios.
+Dis chaptah dey cover advanced multi-agent architecture patterns, agent orchestration, an how to deploy AI wey ready for production for complex situations.
 
-## Learning Objectives
+## Wetin you go learn
 
-By completing this chapter, you will:
+If you finish dis chaptah, you go:
 - Sabi multi-agent architecture patterns
-- Set up coordinated AI agent systems
-- Make agents dem fit communicate with each oda
+- Fit deploy coordinated AI agent systems
+- Set up how agent dem go dey communicate
 - Build multi-agent solutions wey ready for production
 
 ---
 
-## 📚 Lessons
+## 📚 Leson dem
 
-| # | Lekshon | Description | Taim |
+| # | Leson | Tok | Taim |
 |---|--------|-------------|------|
-| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Full walkthrough for implementation | 90 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Ways to coordinate/orchestrate agents | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Deploy wit one click | 30 min |
+| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Complete implementation walkthrough | 90 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | One-click deployment | 30 min |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 How to start sharp-sharp
 
 ```bash
-# Deploy di retail solution wey get plenty agents
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Or just use di template direct
+# Option 1: Use template take deploy am
 azd init --template agent-openai-python-prompty
 azd up
+
+# Option 2: Use agent manifest take deploy am (you go need azure.ai.agents extension)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
 ```
+
+> **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
 ---
 
 ## 🤖 Multi-Agent Architecture
 
+```mermaid
+graph TD
+    Orchestrator[Orchestrator Agent<br/>E dey route requests, e dey manage di workflow] --> Customer[Customer Agent<br/>User questions, wetin dem prefer]
+    Orchestrator --> Inventory[Inventory Agent<br/>How stock dey, orders]
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
-
 ---
 
-## 🎯 Featured Solution: Retail Multi-Agent
+## 🎯 Solution we dem highlight: Retail Multi-Agent
 
-The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
+Di [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
 
-- **Customer Agent**: Dey handle customer interactions an preferences
+- **Customer Agent**: Dey handle user interactions an preferences
 - **Inventory Agent**: Dey manage stock an process orders
 - **Orchestrator**: Dey coordinate between agents
-- **Shared Memory**: Manage cross-agent context
+- **Shared Memory**: Management of cross-agent context wey dem share
 
-### Services Used
+### Services We Dem Use
 
-| Service | Purpose |
+| Service | Wetin e dey do |
 |---------|---------|
-| Azure OpenAI | Language understanding |
+| Microsoft Foundry Models | Language understanding |
 | Azure AI Search | Product catalog |
 | Cosmos DB | Agent state and memory |
 | Container Apps | Agent hosting |
@@ -82,7 +77,7 @@ The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
 
 ## 🔗 Navigation
 
-| Direction | Chapter |
+| Direction | Chaptah |
 |-----------|---------|
 | **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
 | **Next** | [Chapter 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
@@ -99,5 +94,5 @@ The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Disclaimer:
-Dis dokument don translate wit AI translation service Co‑op Translator (https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg sabi say automated translation fit get mistakes or wrong parts. The original dokument for im native language na di main authoritative source. If na important information, better make professional human translator check am. We no dey liable for any misunderstanding or wrong interpretation wey fit arise from using dis translation.
+Dis document don translate wit AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even tho we dey try make everything correct, abeg note say automated translations fit get errors or inaccuracies. The original document for im original language suppose be the main source. For critical information, we recommend make professional human translation do am. We no go responsible for any misunderstanding or misinterpretation wey fit arise from using this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

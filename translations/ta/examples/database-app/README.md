@@ -1,106 +1,93 @@
-# AZD கொண்டு Microsoft SQL தரவுத்தளம் மற்றும் Web App பதிவேற்றம்
+# Deploying a Microsoft SQL Database and Web App with AZD
 
-⏱️ **அனுமானிக்கப்பட்ட நேரம்**: 20-30 நிமிடங்கள் | 💰 **அனுமானிக்கப்பட்ட செலவு**: ~$15-25/மாதம் | ⭐ **சிக்கல்நிலை**: இடைநிலை
+⏱️ **Estimated Time**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Intermediate
 
-இந்த **முழுமையான, செயல்பாட்டிற்குரிய எடுத்துக்காட்டு** [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) ஐ பயன்படுத்தி Microsoft SQL தரவுத்தளத்துடன் கூடிய Python Flask வலை பயன்பாட்டை Azure-க்கு எப்படி பதிவேற்றுவது என்பதை விளக்குகிறது. அனைத்து குறியீட்டும் உட்படுக்கப்பட்டு சோதிக்கப்பட்டுள்ளது—எந்த வெளி சார்ந்த சார்புகளும் தேவையில்லை.
+This **complete, working example** demonstrates how to use the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) to deploy a Python Flask web application with a Microsoft SQL Database to Azure. All code is included and tested—no external dependencies required.
 
-## நீங்கள் கற்றுக்கொள்ளவுள்ளவை
+## What You'll Learn
 
-இந்த எடுத்துக்காட்டை முடித்தவுடன், நீங்கள்:
-- கட்டமைப்பு-செயலூக்கமாக பல அடுக்கு பயன்பாட்டை (web app + database) deploy செய்வதைக் கற்றுக்கொள்வீர்கள்
-- ரகசியங்களை இதழ்படாமல் பாதுகாப்பாக தரவுத்தள இணைப்புகளை கட்டமைப்பது
-- Application Insights மூலம் பயன்பாட்டின் ஆரோக்கியத்தை கண்காணிப்பது
-- AZD CLI மூலம் Azure வளங்களை திறம்பட நிர்வகிப்பது
-- பாதுகாப்பு, செலவு முந்திருப்பு மற்றும் அறியப்படுதல் அணுகுமுறைகளில் Azure சிறந்த நடைமுறைகளை பின்பற்றுவது
+By completing this example, you will:
+- Deploy a multi-tier application (web app + database) using infrastructure-as-code
+- Configure secure database connections without hardcoding secrets
+- Monitor application health with Application Insights
+- Manage Azure resources efficiently with AZD CLI
+- Follow Azure best practices for security, cost optimization, and observability
 
-## நிலைமையின் கண்ணோட்டம்
-- **Web App**: தரவுத்தள இணைப்பு கொண்ட Python Flask REST API
-- **Database**: மாதிரி தரவுகளுடன் Azure SQL Database
-- **Infrastructure**: Bicep கொண்டு provision (மொடுலர், மீண்டும் பயன்படுத்தக்கூடிய டெம்ப்ளேட்கள்)
-- **Deployment**: `azd` கட்டளைகளால் முழுமையாக தானியங்கி
-- **Monitoring**: பதிவுகள் மற்றும் டெலிமெட்ரிக்காக Application Insights
+## Scenario Overview
+- **Web App**: Python Flask REST API with database connectivity
+- **Database**: Azure SQL Database with sample data
+- **Infrastructure**: Provisioned using Bicep (modular, reusable templates)
+- **Deployment**: Fully automated with `azd` commands
+- **Monitoring**: Application Insights for logs and telemetry
 
-## தேவையான முன் நிபந்தனைகள்
+## Prerequisites
 
-### தேவையான கருவிகள்
+### Required Tools
 
-தொடக்கத்திற்கு முன்னர், கீழ்காணும் கருவிகள் உங்கள் கணினியில் நிறுவப்பட்டுள்ளதா என்று சரிபார்க்கவும்:
+Before starting, verify you have these tools installed:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (பதிப்பு 2.50.0 அல்லது அதற்கு மேல்)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```sh
    az --version
    # எதிர்பார்க்கப்படும் வெளியீடு: azure-cli 2.50.0 அல்லது அதற்கு மேல்
    ```
 
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (பதிப்பு 1.0.0 அல்லது அதற்கு மேல்)
+2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```sh
    azd version
-   # எதிர்பார்க்கப்படும் வெளியீடு: azd பதிப்பு 1.0.0 அல்லது அதற்கும் மேல்
+   # எதிர்பார்க்கப்படும் வெளியீடு: azd பதிப்பு 1.0.0 அல்லது அதற்கு மேல்
    ```
 
-3. **[Python 3.8+](https://www.python.org/downloads/)** (உள்ளூர் அபிவிருத்திக்காக)
+3. **[Python 3.8+](https://www.python.org/downloads/)** (for local development)
    ```sh
    python --version
-   # எதிர்பார்க்கப்படும் வெளியீடு: Python 3.8 அல்லது அதற்கு மேற்பட்டது
+   # எதிர்பார்க்கப்படும் வெளியீடு: Python 3.8 அல்லது அதற்கும் மேல்
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (விருப்பமானது, உள்ளூரில் கன்டெய்னரைக் கொண்டு அபிவிருத்திக்காக)
+4. **[Docker](https://www.docker.com/get-started)** (optional, for local containerized development)
    ```sh
    docker --version
-   # எதிர்பார்க்கப்படும் வெளியீடு: Docker பதிப்பு 20.10 அல்லது அதற்கு மேல்
+   # எதிர்பார்க்கப்படும் வெளியீடு: Docker பதிப்பு 20.10 அல்லது அதற்கு மேலே
    ```
 
-### Azure தேவைகள்
+### Azure Requirements
 
-- செயலில் உள்ள **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- உங்கள் subscription-இல் வளங்களை உருவாக்கும் அனுமதிகள்
-- Subscription அல்லது resource group üzerinde **Owner** அல்லது **Contributor** பங்கு
+- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- Permissions to create resources in your subscription
+- **Owner** or **Contributor** role on the subscription or resource group
 
-### அறிவு முன் நிபந்தனைகள்
+### Knowledge Prerequisites
 
-இது ஒரு **இடைநிலை** எடுத்துக்காட்சி. நீங்கள் கீழdakையைப் பற்றி அடிப்படை அறிவு கொண்டிருக்க வேண்டும்:
-- கட்டளை வரிசை அடிப்படை செயல்பாடுகள்
-- முளையான கிளவுட் கருத்துக்கள் (வளங்கள், resource groups)
-- வலை பயன்பாடுகள் மற்றும் தரவுத்தளங்கள் பற்றிய அடிப்படை புரிதல்
+This is an **intermediate-level** example. You should be familiar with:
+- Basic command-line operations
+- Fundamental cloud concepts (resources, resource groups)
+- Basic understanding of web applications and databases
 
-**AZD புதியவரா?** முதலில் [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) ஐத் தொடங்கிக் கொள்ளுங்கள்.
+**New to AZD?** Start with the [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) first.
 
-## கட்டமைப்பு
+## Architecture
 
-இந்த எடுத்துக்காட்சி ஒரு இரண்டு-அடுக்கு கட்டமைப்பை (web application மற்றும் SQL database) deploy செய்கிறது:
+This example deploys a two-tier architecture with a web application and SQL database:
 
+```mermaid
+graph TD
+    Browser[பயனர் உலாவி] <--> WebApp[Azure வலைப் பயன்பாடு<br/>Flask API<br/>/health<br/>/products]
+    WebApp -- பாதுகாப்பான இணைப்பு<br/>குறியாக்கிக்கப்பட்டது --> SQL[Azure SQL தரவுத்தளம்<br/>பொருட்கள் அட்டவணை<br/>மாதிரி தரவு]
 ```
-┌─────────────────┐        ┌──────────────────────┐
-│  User Browser   │◄──────►│   Azure Web App      │
-└─────────────────┘        │   (Flask API)        │
-                           │   - /health          │
-                           │   - /products        │
-                           └──────────┬───────────┘
-                                      │
-                                      │ Secure Connection
-                                      │ (Encrypted)
-                                      │
-                           ┌──────────▼───────────┐
-                           │ Azure SQL Database   │
-                           │   - Products table   │
-                           │   - Sample data      │
-                           └──────────────────────┘
-```
+**Resource Deployment:**
+- **Resource Group**: Container for all resources
+- **App Service Plan**: Linux-based hosting (B1 tier for cost efficiency)
+- **Web App**: Python 3.11 runtime with Flask application
+- **SQL Server**: Managed database server with TLS 1.2 minimum
+- **SQL Database**: Basic tier (2GB, suitable for development/testing)
+- **Application Insights**: Monitoring and logging
+- **Log Analytics Workspace**: Centralized log storage
 
-**வளங்களை உருவாக்குதல்:**
-- **Resource Group**: அனைத்து வளங்களுக்கும் கொண்டகமாக உள்ளது
-- **App Service Plan**: Linux அடிப்படையிலான ஹோஸ்டிங் (செலவு பாதுகாப்பிற்கான B1 tier)
-- **Web App**: Python 3.11 runtime உடன் Flask செயலி
-- **SQL Server**: TLS 1.2 குறைந்தபட்சத் தேவையுடன் நிர்வகிக்கப்படும் தரவுத்தள சேவையகம்
-- **SQL Database**: Basic tier (2GB, அபிவிருத்தி/சோதனைக்குப் பொருத்தமானது)
-- **Application Insights**: கண்காணிப்பு மற்றும் பதிவு
-- **Log Analytics Workspace**: மையப்படுத்தப்பட்ட பதிவு சேமிப்பு
+**Analogy**: Think of this like a restaurant (web app) with a walk-in freezer (database). Customers order from the menu (API endpoints), and the kitchen (Flask app) retrieves ingredients (data) from the freezer. The restaurant manager (Application Insights) tracks everything that happens.
 
-**உருவகப்படுத்தல்**: இது ஒரு உணவகம் (web app) மற்றும் ஓர் பெரிய ஃப்ரீசர் (database) போன்று நினைக்கவும். வாடிக்கையாளர் மெனுவில் இருந்து ஆர்டர் செய்கிறார் (API endpoints), சமையலறை (Flask app) ஃப்ரீசர் (தரவு) இருந்து உருப்படிகளை மீட்டெடுக்கிறது. உணவக மேலாளர் (Application Insights) நடக்கும் அனைத்தையும் பின்தொடர்கிறார்.
+## Folder Structure
 
-## கோப்புறை அமைப்பு
-
-இந்த எடுத்துக்காட்டில் அனைத்து கோப்புகளும் உட்படுக்கப்பட்டுள்ளன—பூஜ்யமான வெளி சார்புகள் தேவையில்லை:
+All files are included in this example—no external dependencies required:
 
 ```
 examples/database-app/
@@ -127,118 +114,118 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**ஒவ்வொரு கோப்பும் என்ன செய்கிறது:**
-- **azure.yaml**: AZD-க்கு என்னவும் எங்கே deploy செய்வதையும் கூறுகிறது
-- **infra/main.bicep**: அனைத்து Azure வளங்களையும் ஒழுங்குபடுத்துகிறது
-- **infra/resources/*.bicep**: தனி வள வரையறைகள் (மீண்டும் பயன்பாட்டிற்கு மொடுலார்)
-- **src/web/app.py**: தரவுத்தள லாஜிக் கொண்ட Flask செயலி
-- **requirements.txt**: Python பாகேஜ் சார்புகள்
-- **Dockerfile**: deployment-க்கான கன்டெய்னரை உருவாக்கும் வழிமுறைகள்
+**What Each File Does:**
+- **azure.yaml**: Tells AZD what to deploy and where
+- **infra/main.bicep**: Orchestrates all Azure resources
+- **infra/resources/*.bicep**: Individual resource definitions (modular for reuse)
+- **src/web/app.py**: Flask application with database logic
+- **requirements.txt**: Python package dependencies
+- **Dockerfile**: Containerization instructions for deployment
 
-## விரைவு தொடக்கம் (படி படியாக)
+## Quickstart (Step-by-Step)
 
-### படி 1: கிளோன் செய்து கோப்புறைக்கு செல்லவும்
+### Step 1: Clone and Navigate
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ வெற்றி சரிபார்க்கை**: `azure.yaml` மற்றும் `infra/` கோப்புறையை நீங்கள் காண்கிறீர்களா என்பதை சரிபார்க்கவும்:
+**✓ Success Check**: Verify you see `azure.yaml` and `infra/` folder:
 ```sh
 ls
 # எதிர்பார்க்கப்படுகிறது: README.md, azure.yaml, infra/, src/
 ```
 
-### படி 2: Azure-இல் அங்கீகாரம் பெறுதல்
+### Step 2: Authenticate with Azure
 
 ```sh
 azd auth login
 ```
 
-இது உங்கள் உலாவியில் Azure அங்கீகாரம் பெற உலாவியை திறக்கும். உங்கள் Azure அடையாளத்தால் உள்நுழையவும்.
+This opens your browser for Azure authentication. Sign in with your Azure credentials.
 
-**✓ வெற்றி சரிபார்க்கை**: நீங்கள் கீழdakரை காண வேண்டும்:
+**✓ Success Check**: You should see:
 ```
 Logged in to Azure.
 ```
 
-### படி 3: சூழலை 초기ம்செய்தல்
+### Step 3: Initialize the Environment
 
 ```sh
 azd init
 ```
 
-**என்ன జరుగுகிறது**: AZD உங்கள் பதிவேற்றத்திற்கான உள்ளூர் கட்டமைப்பை உருவாக்கும்.
+**What happens**: AZD creates a local configuration for your deployment.
 
-**நீங்கள் காண்பீர்கள் என்ற பிரியவாக்குகள்**:
-- **Environment name**: ஒரு குறுகிய பெயரை உள்ளிடவும் (எ.கா., `dev`, `myapp`)
-- **Azure subscription**: பட்டியலில் இருந்து உங்கள் subscription-ஐ தேர்ந்தெடுக்கவும்
-- **Azure location**: ஒரு பகுதியை தேர்ந்தெடுக்கவும் (எ.கா., `eastus`, `westeurope`)
+**Prompts you'll see**:
+- **Environment name**: Enter a short name (e.g., `dev`, `myapp`)
+- **Azure subscription**: Select your subscription from the list
+- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
 
-**✓ வெற்றி சரிபார்க்கை**: நீங்கள் கீழdakரை காண வேண்டும்:
+**✓ Success Check**: You should see:
 ```
 SUCCESS: New project initialized!
 ```
 
-### படி 4: Azure வளங்களை Provision செய்தல்
+### Step 4: Provision Azure Resources
 
 ```sh
 azd provision
 ```
 
-**என்ன происходит**: AZD அனைத்து கட்டமைப்பையும் deploy செய்யும் (5-8 நிமிடங்கள் எடுக்கலாம்):
-1. Resource group உருவாக்குகிறது
-2. SQL Server மற்றும் Database உருவாக்குகிறது
-3. App Service Plan உருவாக்குகிறது
-4. Web App உருவாக்குகிறது
-5. Application Insights உருவாக்குகிறது
-6. நெட்வொர்க்கிங் மற்றும் பாதுகாப்பு கட்டமைப்புகளை அமைக்கும்
+**What happens**: AZD deploys all infrastructure (takes 5-8 minutes):
+1. Creates resource group
+2. Creates SQL Server and Database
+3. Creates App Service Plan
+4. Creates Web App
+5. Creates Application Insights
+6. Configures networking and security
 
-**நீங்கள் கேட்கப்படுவது**:
-- **SQL admin username**: ஒரு பயனர்பெயரை உள்ளிடவும் (எ.கா., `sqladmin`)
-- **SQL admin password**: ஒரு வலுவான கடவுச்சொல்லை உள்ளிடவும் (இதை சேமிக்கவும்!)
+**You'll be prompted for**:
+- **SQL admin username**: Enter a username (e.g., `sqladmin`)
+- **SQL admin password**: Enter a strong password (save this!)
 
-**✓ வெற்றி சரிபார்க்கை**: நீங்கள் கீழdakரை காண வேண்டும்:
+**✓ Success Check**: You should see:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ நேரம்**: 5-8 நிமிடங்கள்
+**⏱️ Time**: 5-8 minutes
 
-### படி 5: பயன்பாட்டை Deploy செய்தல்
+### Step 5: Deploy the Application
 
 ```sh
 azd deploy
 ```
 
-**என்ன நடைபெறும்**: AZD உங்கள் Flask செயலியை build செய்து deploy செய்யும்:
-1. Python செயலியை package செய்கிறது
-2. Docker கன்டெய்னரை கட்டுகிறது
-3. Azure Web App-க்கு push செய்கிறது
-4. மாதிரி தரவுகளுடன் தரவுத்தளத்தை initialize செய்கிறது
-5. செயலியை தொடங்குகிறது
+**What happens**: AZD builds and deploys your Flask application:
+1. Packages the Python application
+2. Builds the Docker container
+3. Pushes to Azure Web App
+4. Initializes the database with sample data
+5. Starts the application
 
-**✓ வெற்றி சரிபார்க்கை**: நீங்கள் கீழdakரை காண வேண்டும்:
+**✓ Success Check**: You should see:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ நேரம்**: 3-5 நிமிடங்கள்
+**⏱️ Time**: 3-5 minutes
 
-### படி 6: பயன்பாட்டை உலாவியில் திறக்கவும்
+### Step 6: Browse the Application
 
 ```sh
 azd browse
 ```
 
-இது உங்கள் பதிவேற்றப்பட்ட web app-ஐ உலாவியில் `https://app-<unique-id>.azurewebsites.net` என்ற முகவரியில் திறக்கும்
+This opens your deployed web app in the browser at `https://app-<unique-id>.azurewebsites.net`
 
-**✓ வெற்றி சரிபார்க்கை**: நீங்கள் JSON வெளியீட்டை காண வேண்டும்:
+**✓ Success Check**: You should see JSON output:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -251,14 +238,14 @@ azd browse
 }
 ```
 
-### படி 7: API Endpoints-ஐ சோதிக்கவும்
+### Step 7: Test the API Endpoints
 
-**ஆரோக்கியச் சோதனை** (தரவுத்தள இணைப்பை சரிபார்க்க):
+**Health Check** (verify database connection):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**எதிர்பார்க்கப்படும் பதில்**:
+**Expected Response**:
 ```json
 {
   "status": "healthy",
@@ -266,12 +253,12 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**பொருட்களின் பட்டியல்** (மாதிரி தரவு):
+**List Products** (sample data):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**எதிர்பார்க்கப்படும் பதில்**:
+**Expected Response**:
 ```json
 [
   {
@@ -285,73 +272,73 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**ஒரு தனி பொருள் பெறுதல்**:
+**Get Single Product**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ வெற்றி சரிபார்க்கை**: 모든 endpoints பிழையின்றி JSON தரவுகளை திருப்ப வேண்டும்.
+**✓ Success Check**: All endpoints return JSON data without errors.
 
 ---
 
-**🎉 வாழ்த்துகள்!** நீங்கள் AZD பயன்படுத்தி Azure-க்கு வெற்றிகரமாக ஒரு வலை பயன்பாட்டையும் தரவுத்தளத்தையும் deploy செய்துள்ளீர்கள்.
+**🎉 Congratulations!** You've successfully deployed a web application with a database to Azure using AZD.
 
-## கட்டமைப்பு ஆழமான பகுப்பாய்வு
+## Configuration Deep-Dive
 
-### சூழல் மாறிலிகள்
+### Environment Variables
 
-ரகசியங்கள் Azure App Service கட்டமைப்பின் மூலம் பாதுகாப்பாக நிர்வகிக்கப்படுகின்றன—**source code-ல் ஒருபோதும் hardcode செய்யப்படக்கூடாது**.
+Secrets are managed securely via Azure App Service configuration—**never hardcoded in source code**.
 
-**AZD மூலம் தானாக கட்டமைக்கப்படும்**:
-- `SQL_CONNECTION_STRING`: குறியாக்கப்பட்ட நுண்ணறிவுடன் தரவுத்தள இணைப்பு
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: கண்காணிப்பு டெலிமெட்ரி முடிவு
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: தானாக சார்புகள் நிறுவப்படும்படி இயக்கு
+**Configured Automatically by AZD**:
+- `SQL_CONNECTION_STRING`: Database connection with encrypted credentials
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Monitoring telemetry endpoint
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Enables automatic dependency installation
 
-**ரகசியங்கள் எங்கே சேமிக்கப்படுகின்றன**:
-1. `azd provision` போது, நீங்கள் SQL சான்றுகளை பாதுகாப்பான பிரியவாக்குகள் மூலம் வழங்குகிறீர்கள்
-2. AZD அவற்றை உங்கள் உள்ளூர் `.azure/<env-name>/.env` கோப்பில் (git-ignored) சேமிக்கிறது
-3. AZD அவற்றை Azure App Service கட்டமைப்பில் இயக்கு (rest-இல் குறியாக்கம்)
-4. செயலி runtime-இல் `os.getenv()` மூலம் அவை வாசிக்கப்படும்
+**Where Secrets Are Stored**:
+1. During `azd provision`, you provide SQL credentials via secure prompts
+2. AZD stores these in your local `.azure/<env-name>/.env` file (git-ignored)
+3. AZD injects them into Azure App Service configuration (encrypted at rest)
+4. Application reads them via `os.getenv()` at runtime
 
-### உள்ளூர் அபிவிருத்தி
+### Local Development
 
-உள்ளூரில் சோதனை செய்ய, மாதிரி கொண்டு `.env` கோப்பை உருவாக்கவும்:
+For local testing, create a `.env` file from the sample:
 
 ```sh
 cp .env.sample .env
-# உங்கள் உள்ளூர் தரவுத்தள இணைப்பை பயன்படுத்தி .env ஐ திருத்தவும்
+# .env கோப்பை உங்கள் உள்ளூர் தரவுத்தள இணைப்புடன் திருத்தவும்
 ```
 
-**உள்ளூர் அபிவிருத்தி பண்படை**:
+**Local Development Workflow**:
 ```sh
 # தேவையான சார்புகளை நிறுவவும்
 cd src/web
 pip install -r requirements.txt
 
-# சூழல் மாறிலிகளை அமைக்கவும்
+# சூழல் மாறிகளை அமைக்கவும்
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
 # பயன்பாட்டை இயக்கவும்
 python app.py
 ```
 
-**உள்ளூரில் சோதிக்க**:
+**Test locally**:
 ```sh
 curl http://localhost:8000/health
-# எதிர்பார்க்கப்பட்டது: {"status": "healthy", "database": "connected"}
+# எதிர்பார்க்கப்படுகிறது: {"status": "healthy", "database": "connected"}
 ```
 
-### கோடாக் கட்டமைப்பு (Infrastructure as Code)
+### Infrastructure as Code
 
-அனைத்து Azure வளங்களும் **Bicep டெம்ப்ளேட்களில்** (`infra/` கோப்புறை) வரையறுக்கபட்டுள்ளன:
+All Azure resources are defined in **Bicep templates** (`infra/` folder):
 
-- **மொடுலர் வடிவமைப்பு**: ஒவ்வொரு வள வகைக்கும் மீண்டும் பயன்படக்கூடிய தனி கோப்பு
-- **பாராமிட்டரிடப்பட்டு**: SKUs, பிரிவுகள், பெயரிடல் நெறிமுறைகளை தனிப்பயனாக்க முடியும்
-- **சிறந்த நடைமுறைகள்**: Azure பெயர் தரநிலைகள் மற்றும் பாதுகாப்பு டீஃபால்ட்களை பின்பற்றுகிறது
-- **பதிவேற்பு கட்டுப்படுத்தப்பட்டது**: கட்டமைப்பு மாற்றங்கள் Git-ல் பதிவு செய்யப்படுகின்றன
+- **Modular Design**: Each resource type has its own file for reusability
+- **Parameterized**: Customize SKUs, regions, naming conventions
+- **Best Practices**: Follows Azure naming standards and security defaults
+- **Version Controlled**: Infrastructure changes are tracked in Git
 
-**தனிப்பயன் உதாரணம்**:
-தரவுத்தளத் த்தியைக் மாற்ற விரும்பினால், `infra/resources/sql-database.bicep` ஐ எடிட் செய்யவும்:
+**Customization Example**:
+To change the database tier, edit `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -360,51 +347,51 @@ sku: {
 }
 ```
 
-## பாதுகாப்பு சிறந்த நடைமுறைகள்
+## Security Best Practices
 
-இந்த எடுத்துக்காட்சி Azure பாதுகாப்பு சிறந்த நடைமுறைகளை பின்பற்றுகிறது:
+This example follows Azure security best practices:
 
-### 1. **மூல குறியீட்டில் ரகசியங்கள் இல்லை**
-- ✅ சான்றுகள் Azure App Service கட்டமைப்பில் சேமிக்கப்படுகின்றன (குறியாக்கம் செய்யப்பட்டவை)
-- ✅ `.env` கோப்புகள் `.gitignore` மூலம் Git-லிருந்து விலக்கப்பட்டுள்ளன
-- ✅ Provisioning போது ரகசியங்கள் பாதுகாப்பான அளவுருக்களால் வழங்கப்படுகின்றன
+### 1. **No Secrets in Source Code**
+- ✅ Credentials stored in Azure App Service configuration (encrypted)
+- ✅ `.env` files excluded from Git via `.gitignore`
+- ✅ Secrets passed via secure parameters during provisioning
 
-### 2. **குறியாக்கப்பட்ட இணைப்புகள்**
-- ✅ SQL Server-க்கு குறைந்தபட்சம் TLS 1.2
-- ✅ Web App-க்கு HTTPS மட்டுமே கட்டாயம்
-- ✅ தரவுத்தள இணைப்புகள் குறியாக்கப்பட்ட சேனல்களை பயன்படுத்துகின்றன
+### 2. **Encrypted Connections**
+- ✅ TLS 1.2 minimum for SQL Server
+- ✅ HTTPS-only enforced for Web App
+- ✅ Database connections use encrypted channels
 
-### 3. **நெட்வொர்க் பாதுகாப்பு**
-- ✅ SQL Server ஃபயர்வால் Azure சேவைகளுக்கு மட்டுமே அனுமதி கொடுக்கப்பட்டுள்ளது
-- ✅ பொது நெட்வொர்க் அணுகல் கட்டுப்பட்டுள்ளது (Private Endpoints கொண்டு மேலதிகமாக கட்டுப்படுத்தலாம்)
-- ✅ Web App-ல் FTPS இயலாது
+### 3. **Network Security**
+- ✅ SQL Server firewall configured to allow Azure services only
+- ✅ Public network access restricted (can be further locked down with Private Endpoints)
+- ✅ FTPS disabled on Web App
 
-### 4. **அங்கீகாரம் & அங்கீகாரமளிப்பு**
-- ⚠️ **தற்போது**: SQL அங்கீகாரம் (username/password)
-- ✅ **தொழிற்சாலை பரிந்துரை**: கடவுச்சொல்லற்ற அங்கீகாரத்துக்காக Azure Managed Identity பயன்படுத்தவும்
+### 4. **Authentication & Authorization**
+- ⚠️ **Current**: SQL authentication (username/password)
+- ✅ **Production Recommendation**: Use Azure Managed Identity for passwordless authentication
 
-**Managed Identity-க்கு மேம்படுத்துவதற்கான படிகள்** (உற்பத்திக்கு):
-1. Web App-ல் managed identity ஐ இயக்கு
-2. அந்த identity-க்கு SQL அனுமதிகளை வழங்கவும்
-3. connection string-ஐ managed identity பயன்படுத்தக்கூடியவாக புதுப்பிக்கவும்
-4. கடவுச்சொல் அடிப்படையிலான அங்கீகாரத்தை நீக்கவும்
+**To Upgrade to Managed Identity** (for production):
+1. Enable managed identity on Web App
+2. Grant identity SQL permissions
+3. Update connection string to use managed identity
+4. Remove password-based authentication
 
-### 5. **ஆடிட்டிங் & கட்டுப்பாடுகள்**
-- ✅ Application Insights அனைத்து கோரிக்கைகளையும் மற்றும் பிழைகளையுமே பதிவு செய்கிறது
-- ✅ SQL Database ஆடிட்டிங் இயக்கு (கட்டுப்பாட்டு தேவைக்கேற்ப கொள்கை அமைக்கலாம்)
-- ✅ அனைத்து வளங்களும் நிர்வாகத்திற்காக டேக் செய்யப்பட்டுள்ளன
+### 5. **Auditing & Compliance**
+- ✅ Application Insights logs all requests and errors
+- ✅ SQL Database auditing enabled (can be configured for compliance)
+- ✅ All resources tagged for governance
 
-**உற்பத்திக்கு முன்னர் பாதுகாப்பு செயற்தாள்**:
-- [ ] Azure Defender for SQL-ஐ இயக்கு
-- [ ] SQL Database-க்கு Private Endpoints அமைக்கவும்
-- [ ] Web Application Firewall (WAF) ஐ இயக்கு
-- [ ] ரகசிய மாற்றத்திற்காக Azure Key Vault செயல்படுத்தவும்
-- [ ] Azure AD அங்கீகாரத்தை அமைக்கவும்
-- [ ] அனைத்து வளங்களுக்கும் டைக்னொஸ்டிக் பதிவு இயக்கு
+**Security Checklist Before Production**:
+- [ ] Enable Azure Defender for SQL
+- [ ] Configure Private Endpoints for SQL Database
+- [ ] Enable Web Application Firewall (WAF)
+- [ ] Implement Azure Key Vault for secret rotation
+- [ ] Configure Azure AD authentication
+- [ ] Enable diagnostic logging for all resources
 
-## செலவு குறைப்புக்கான வழிமுறைகள்
+## Cost Optimization
 
-**அனுமான மாதச் செலவுகள்** (நவம்பர் 2025 நிலவரப்படி):
+**Estimated Monthly Costs** (as of November 2025):
 
 | Resource | SKU/Tier | Estimated Cost |
 |----------|----------|----------------|
@@ -413,68 +400,68 @@ sku: {
 | Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
 | **Total** | | **~$20/month** |
 
-**💡 செலவு சேமிப்பு குறிப்புகள்**:
+**💡 Cost-Saving Tips**:
 
-1. **கற்றலுக்காக Free Tier பயன்படுத்தவும்**:
-   - App Service: F1 tier (இலவசம், குறிப்பிட்ட நேரம் மட்டுமே)
-   - SQL Database: Azure SQL Database serverless பயன்படுத்தவும்
-   - Application Insights: 5GB/மாதம் இலவச உட்குழப்பு
+1. **Use Free Tier for Learning**:
+   - App Service: F1 tier (free, limited hours)
+   - SQL Database: Use Azure SQL Database serverless
+   - Application Insights: 5GB/month free ingestion
 
-2. **பயன்பாட்டில் இல்லாதபோது வளங்களை நிறுத்தவும்**:
+2. **Stop Resources When Not in Use**:
    ```sh
-   # வலைப் பயன்பாட்டை நிறுத்தவும் (தரவுத்தளச் செலவுகள் தொடரும்)
+   # வெப் செயலியை நிறுத்தவும் (தரவுத்தளம் இன்னும் கட்டணத்தை வசூலிக்கிறது)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # தேவையான போது மீண்டும் தொடங்கவும்
+   # தேவையான போது மீண்டும் துவக்கவும்
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **சோதனை முடிந்தால் அனைத்தையும் நீக்கவும்**:
+3. **Delete Everything After Testing**:
    ```sh
    azd down
    ```
-   இது அனைத்து வளங்களையும் நீக்கி கட்டணங்களை நிறுத்தும்.
+   This removes ALL resources and stops charges.
 
-4. **அபிவிருத்தி vs உற்பத்தி SKUs**:
-   - **அபிவிருத்தி**: இந்த எடுத்துக்காட்டில் பயன்படுத்திய Basic tier
-   - **உற்பத்தி**: redundancy கொண்ட Standard/Premium tier
+4. **Development vs. Production SKUs**:
+   - **Development**: Basic tier (used in this example)
+   - **Production**: Standard/Premium tier with redundancy
 
-**செலவு கண்காணிப்பு**:
-- [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement) இல் செலவுகளைப் பார்க்கவும்
-- அதிர்ச்சிகளை தவிர்க்க செலவு оповещения அமைக்கவும்
-- கணக்கெடுத்தல் தடயத்திற்காக அனைத்து வளங்களையும் `azd-env-name` என்ற tag-ஆலேயே அடையாளம் காண்க
+**Cost Monitoring**:
+- View costs in [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Set up cost alerts to avoid surprises
+- Tag all resources with `azd-env-name` for tracking
 
-**இலவச பரிமாற்ற மாற்று**:
-கற்றலுக்காக, `infra/resources/app-service-plan.bicep` ஐ மாற்றி Free tier பயன்படுத்தலாம்:
+**Free Tier Alternative**:
+For learning purposes, you can modify `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**குறிப்பு**: இலவச தடவை வரம்புகள் உள்ளன (1 நாள் 60 நிமிட CPU, எப்போதும்-ஓன் இல்லை).
+**Note**: Free tier has limitations (60 min/day CPU, no always-on).
 
-## கண்காணிப்பு & காணுபதி
+## Monitoring & Observability
 
-### Application Insights ஒருங்கிணைப்பு
+### Application Insights Integration
 
-இந்த எடுத்துக்காட்சி விரிவான கண்காணிப்பிற்காக **Application Insights** ஐ உட்படுத்துகிறது:
+This example includes **Application Insights** for comprehensive monitoring:
 
-**என்ன கண்காணிக்கப்படுகிறது**:
-- ✅ HTTP கோரிக்கைகள் (விரைவு, நிலை குறியீடுகள், endpoints)
-- ✅ செயலி பிழைகள் மற்றும் exceptions
-- ✅ Flask செயலியிலிருந்து வரையறுக்கப்பட்ட பதிவு
-- ✅ தரவுத்தள இணைப்பு ஆரோக்கியம்
-- ✅ செயல்திறன் அளவுருக்கள் (CPU, நினைவகம்)
+**What's Monitored**:
+- ✅ HTTP requests (latency, status codes, endpoints)
+- ✅ Application errors and exceptions
+- ✅ Custom logging from Flask app
+- ✅ Database connection health
+- ✅ Performance metrics (CPU, memory)
 
-**Application Insights அணுகுதல்**:
-1. [Azure Portal](https://portal.azure.com) திறக்கவும்
-2. உங்கள் resource group (`rg-<env-name>`) க்கு செல்லவும்
-3. Application Insights resource (`appi-<unique-id>`) மீது கிளிக் செய்க
+**Access Application Insights**:
+1. Open [Azure Portal](https://portal.azure.com)
+2. Navigate to your resource group (`rg-<env-name>`)
+3. Click on Application Insights resource (`appi-<unique-id>`)
 
-**பயனுள்ள கேள்விகள்** (Application Insights → Logs):
+**Useful Queries** (Application Insights → Logs):
 
-**அனைத்து கோரிக்கைகளையும் பார்வையிடுக**:
+**View All Requests**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -482,7 +469,7 @@ requests
 | project timestamp, name, url, resultCode, duration
 ```
 
-**பிழைகளை கண்டுபிடிக்க**:
+**Find Errors**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -490,38 +477,38 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**ஆரோக்கிய Endpoint-ஐ சரிபார்க்க**:
+**Check Health Endpoint**:
 ```kusto
 requests
 | where name contains "health"
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### SQL Database ஆடிட்டிங்
+### SQL Database Auditing
 
-**SQL Database ஆடிட்டிங் இயக்கு** என்பதன் மூலம் கீழdakைகள் ट्रாக் செய்யப்படுகின்றன:
-- தரவுத்தள அணுகல் முறைமைகள்
-- தோல்வியடைந்த உள்நுழைவு முயற்சிகள்
-- ஸ்கீமா மாற்றங்கள்
-- தரவு அணுகல் (கட்டுப்பாட்டிற்காக)
+**SQL Database auditing is enabled** to track:
+- Database access patterns
+- Failed login attempts
+- Schema changes
+- Data access (for compliance)
 
-**ஆடிட் பதிவுகளை அணுக**:
+**Access Audit Logs**:
 1. Azure Portal → SQL Database → Auditing
-2. Log Analytics workspace-ல் பதிவுகளை பார்வையிடவும்
+2. View logs in Log Analytics workspace
 
-### நேரடி கண்காணிப்பு
+### Real-Time Monitoring
 
-**Live Metrics பார்க்க**:
+**View Live Metrics**:
 1. Application Insights → Live Metrics
-2. நேரடியாக கோரிக்கைகள், தோல்விகள் மற்றும் செயல்திறன் பார்க்கலாம்
+2. See requests, failures, and performance in real-time
 
-**எச்சரிக்கை அமைக்க**:
-முக்கிய நிகழ்வுகளுக்காக எச்சரிக்கைகளை உருவாக்கவும்:
-- 5 நிமிடத்தில் HTTP 500 பிழைகள் > 5
-- தரவுத்தள இணைப்பு தோல்விகள்
-- பதிலளிப்பு நேரம் உயர் (>2 வினாடிகள்)
+**Set Up Alerts**:
+Create alerts for critical events:
+- HTTP 500 errors > 5 in 5 minutes
+- Database connection failures
+- High response times (>2 seconds)
 
-**எச்சரிக்கை உருவாக்க உதாரணம்**:
+**Example Alert Creation**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -531,11 +518,10 @@ az monitor metrics alert create \
   --description "Alert when response time exceeds 2 seconds"
 ```
 
-## பிரச்சனை தீர்க்குதல்
-
+## Troubleshooting
 ### பொதுவான பிரச்சனைகள் மற்றும் தீர்வுகள்
 
-#### 1. `azd provision` "Location not available" என்ற பிழையுடன் தோல்வியடைகிறது
+#### 1. `azd provision` "Location not available" என்ற குறியீட்டுடன் தோல்வி அடைகிறது
 
 **அறிகுறி**:
 ```
@@ -543,12 +529,12 @@ Error: The subscription is not registered for the resource type 'components' in 
 ```
 
 **தீர்வு**:
-வேறு Azure பிராந்தியத்தைத் தேர்ந்தெடுக்கவும் அல்லது resource provider-ஐ பதிவு செய்யவும்:
+மற்ற Azure பிராந்தியத்தைத் தேர்வு செய்யவும் அல்லது resource provider-ஐ பதிவு செய்யவும்:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. SQL இணைப்பு ஏற்றும் போது தோல்வியடைகிறது
+#### 2. பதிவேற்றத்தின் போது SQL இணைப்பு தோல்வி
 
 **அறிகுறி**:
 ```
@@ -556,34 +542,34 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 ```
 
 **தீர்வு**:
-- SQL Server firewall Azure சேவைகளை அனுமதிக்கிறதா என்பதை சரிபார்க்கவும் (தானாக கட்டமைக்கப்படுகிறது)
-- `azd provision` 실행時 SQL நிர்வாக கடவுச்சொல் சரியாக உள்ளிடப்பட்டது என்பதை சரிபார்க்கவும்
-- SQL Server முழுமையாக உருவாக்கப்பட்டுவிட்டதா என்பதை உறுதிசெய்க (2-3 நிமிடங்கள் எடுக்கலாம்)
+- SQL Server ன் firewall Azure சேவைகளை அனுமதிக்கிறதா என்பதை சரிபார்க்கவும் (தானாக கட்டமைக்கப்படும்)
+- `azd provision` 실행 დროს SQL நிர்வாக கடவுச்சொல் சரியாக உள்ளீட்டாகிவிட்டதா என்று சரிபார்க்கவும்
+- SQL Server முழுமையாக provision ஆனதா என்பதை உறுதிசெய்க (2-3 நிமிடம் சும்மா ஆகலாம்)
 
 **இணைப்பை சரிபார்க்கவும்**:
 ```sh
-# Azure போர்டலிலிருந்து SQL Database → Query editor சென்று கொள்ளவும்
-# உங்கள் அங்கீகார விவரங்களை பயன்படுத்தி இணைக்க முயற்சிக்கவும்
+# Azure போர்டலிலிருந்து, SQL தரவுத்தளம் → வினவல் தொகுப்பிக்கு செல்லவும்
+# உங்கள் நுழைவு விபரங்களுடன் இணைக்க முயற்சிக்கவும்
 ```
 
 #### 3. Web App "Application Error" காட்டுகிறது
 
 **அறிகுறி**:
-உலாவி பொதுவான பிழை பக்கத்தை காட்டுகிறது.
+உலாவி பொது பிழை பக்கத்தை காட்டுகிறது.
 
 **தீர்வு**:
-அப்பிளிகேஷன் பதிவு கோப்புகளைச் சோதிக்கவும்:
+அப்ளிகேஷன் பதிவுகளைச் சரிபார்க்கவும்:
 ```sh
 # சமீபத்திய பதிவுகளைப் பார்க்கவும்
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
-**பொதுவான காரணங்கள்**:
-- சுற்றுப்புற மாறிலிகள் குறைவு (App Service → Configuration-ஐ சரிபார்க்கவும்)
-- Python package நிறுவல் தோல்வி (deployment பதிவுகளைச் சரிபார்க்கவும்)
-- தரவுத்தளம் தொடக்கம் பிழை (SQL இணைதிறலைச் சரிபார்க்கவும்)
+**தகவலான காரணங்கள்**:
+- சுற்றுப்புற மாறிலிகள் காணாமல் போனவை (App Service → Configuration ஐச் சரிபார்க்கவும்)
+- Python package நிறுவல் தோல்வியடைந்தது (deployment பதிவுகளைச் சரிபார்க்கவும்)
+- தரவுத்தளம் ஆரம்பப்படும்போது பிழை (SQL இணைப்பைச் சரிபார்க்கவும்)
 
-#### 4. `azd deploy` "Build Error" என்ற பிழையுடன் தோல்வியடைகிறது
+#### 4. `azd deploy` "Build Error" என்ற காரணத்துடன் தோல்வி
 
 **அறிகுறி**:
 ```
@@ -591,18 +577,18 @@ Error: Failed to build project
 ```
 
 **தீர்வு**:
-- `requirements.txt` இல் syntax பிழைகள் இல்லை என்பதை உறுதிசெய்க
-- `infra/resources/web-app.bicep` இல் Python 3.11 குறிப்பிடப்பட்டுள்ளதா என்பதை சரிபார்க்கவும்
-- Dockerfile-ல் சரியான base image உள்ளது என்பதை சரிபார்க்கவும்
+- `requirements.txt` இல் எந்தவொரு_Syntax_ பிழைகளும் இல்லையென்பதை உறுதிசெய்க
+- `infra/resources/web-app.bicep` இல் Python 3.11 குறிப்பிடப்பட்டிருக்கிறதா என்பதை சரிபார்க்கவும்
+- Dockerfile இல் சரியான base image உள்ளதா என்பதை உறுதிசெய்க
 
-**உள்ளகமாக பிழைதிருத்தம் செய்யவும்**:
+**உதவிக்காக உள்ளூரில் டீபக் செய்யவும்**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. AZD கட்டளைகள் ஓட்டும் போது "Unauthorized"
+#### 5. AZD கட்டளைகளை விரைவில் இயக்கும்போது "Unauthorized"
 
 **அறிகுறி**:
 ```
@@ -610,7 +596,7 @@ ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have auth
 ```
 
 **தீர்வு**:
-Azure-இல் மீண்டும் அங்கீகரிக்கவும்:
+Azure உடன் மீண்டும் authentication செய்யவும்:
 ```sh
 azd auth login
 az login
@@ -618,79 +604,79 @@ az login
 
 சப்ஸ்கிரிப்ஷனில் உங்களுக்கு சரியான அனுமதிகள் (Contributor role) உள்ளதா என்பதை சரிபார்க்கவும்.
 
-#### 6. தரவுத்தள செலவுகள் அதிகம்
+#### 6. தரவுத்தள கட்டணங்கள் அதிகம்
 
 **அறிகுறி**:
 எதிர்பாராத Azure கட்டணம்.
 
 **தீர்வு**:
-- சோதனைக்குப் பிறகு `azd down` இயக்குவதை மறந்துவிட்டீர்களா என்பதைச் சரிபார்க்கவும்
-- SQL Database Basic tier ஐப் பயன்படுத்துகிறதா என சரிபார்க்கவும் (Premium அல்ல)
-- Azure Cost Management-இல் செலவுகளை மதிப்பாய்வு செய்யவும்
-- செலவு எச்சரிப்புகளை அமைக்கவும்
+- சோதித்தபின் `azd down` இயக்க மறந்துவிட்டீர்களா என்பதைப் பரிசீாரிக்கவும்
+- SQL Database Basic tier பயன்படுத்துகிறதா என்பதை உறுதிசெய்க (Premium அல்ல)
+- Azure Cost Management இல் செலவுகளை மதிப்பாய்வு செய்யவும்
+- செலவு தொடர்பான எச்சரிக்கைகள் அமைக்கவும்
 
-### உதவி பெறுவது
+### உதவி பெறுதல்
 
-**அனைத்து AZD சூழல் மாறிலிகளையும் காண்க**:
+**எல்லா AZD சுற்றுபுற மாறிலிகளையும் பார்க்கவும்**:
 ```sh
 azd env get-values
 ```
 
-**வெளியீட்டு நிலையை சரிபார்க்கவும்**:
+**Deployment நிலையைச் சரிபார்க்கவும்**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**அப்பிளிகேஷன் பதிவுகளை அணுகுக**:
+**அப்ளிகேஷன் பதிவுகளை அணுகவும்**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
 **மேலும் உதவி வேண்டுமா?**
-- [AZD பிரச்சனை தீர்க்கும் கையேடு](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [AZD பிரச்சனை தீர்க்கும் வழிகாட்டி](../../docs/chapter-07-troubleshooting/common-issues.md)
 - [Azure App Service பிரச்சனை தீர்க்குதல்](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL பிரச்சனைகள் தீர்வு](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+- [Azure SQL பிரச்சனை தீர்க்குதல்](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## நடைமுறை பயிற்சிகள்
 
-### பயிற்சி 1: உங்கள் வெளியீட்டை சரிபார்க்கவும் (ஆரம்ப நிலை)
+### பயிற்சி 1: உங்கள் பதிவேற்றத்தை உறுதிசெய்க (ஆரம்பநிலையினர்)
 
-**நோக்கம்**: அனைத்து வளங்களும் உருவாக்கப்பட்டுள்ளன மற்றும் பயன்பாடு வேலை செய்கிறதா என்பதை உறுதிசெய்யுதல்.
+**நோக்கம்**: அனைத்து வளங்களும் deployed செய்யப்பட்டுள்ளன மற்றும் அப்ளிகேஷன் வேலை செய்கிறது என்பதை உறுதிசெய்வது.
 
 **படிகள்**:
-1. உங்கள் resource group-இல் உள்ள அனைத்து வளங்களையும் பட்டியலிடுக:
+1. உங்கள் resource group இல் உள்ள அனைத்து வளங்களையும் பட்டியலிடவும்:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **எதிர்பார்க்கப்படுகிறது**: 6-7 வளங்கள் (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   ** எதிர்பார்ப்பு **: 6-7 வளங்கள் (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. அனைத்து API endpoints-ஐ சோதிக்கவும்:
+2. அனைத்து API endpoints ஐப் பரிசோதிக்கவும்:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **எதிர்பார்க்கப்படுகிறது**: எல்லாமே பிழைகள் இல்லாமல் செல்லுபடியான JSON ஐ திருப்பும்
+   ** எதிர்பார்ப்பு **: எல்லாம் தவறீறாமல் செல்லுபடி JSON ஐ திரும்பளிக்க வேண்டும்
 
-3. Application Insights-ஐ சரிபார்க்கவும்:
-   - Azure போர்டலில் Application Insights-க்கு சென்று
-   - "Live Metrics" க்கு செல்லவும்
-   - வெப் செயலியில் உலாவியை புதுப்பிக்கவும்
-   **எதிர்பார்க்கப்படுகிறது**: கோரிக்கைகள் நேரடியாக தோன்றுவதைக் காணலாம்
+3. Application Insights ஐச் சரிசெய்க:
+   - Azure Portal இல் Application Insights செல்லவும்
+   - "Live Metrics" ஐ திறக்கவும்
+   - வலை செயலியில் உலாவியை புதுப்பிக்கவும்
+   **எதிர்பார்ப்பு**: கோரிக்கைகள் நேரடி முறையில் தோன்றுவதை பார்க்க வேண்டும்
 
-**வெற்றி நிபந்தனைகள்**: அனைத்து 6-7 வளங்களும் உள்ளன, அனைத்து endpoints-களும் தரவைத் தருகின்றன, Live Metrics செயல்பாட்டைக் காட்சி செய்கிறது.
+**வெற்றி கோட்பாடு**: அனைத்து 6-7 வளங்களும் உள்ளன, அனைத்து endpoints தரவினை திரும்பளிக்கின்றன, Live Metrics செயல்பாட்டை காட்டுகிறது.
 
 ---
 
-### பயிற்சி 2: புதிய API Endpoint ஒன்றைச் சேர்க்கவும் (நடுத்தர)
+### பயிற்சி 2: புதிய API Endpoint ஐ சேர்க்கவும் (இடைநிலை)
 
-**நோக்கம்**: Flask பயன்பாட்டை புதிய endpoint மூலம் விரிவாக்குதல்.
+**நோக்கம்**: Flask அப்ளிகேஷனில் புதிய ஒரு endpoint ஐ நீட்டிப்பது.
 
-**தொடக்க குறியீடு**: தற்போதைய endpoints `src/web/app.py` இல்
+**ஆரம்பக் குறியீடு**: தற்போதைய endpoints `src/web/app.py` இல் உள்ளன
 
 **படிகள்**:
-1. `src/web/app.py` ஐத் திருத்தி `get_product()` செயல்பாட்டுக்குப் பின் புதிய endpoint ஒன்றைச் சேர்க்கவும்:
+1. `src/web/app.py` ஐ திருத்தி `get_product()` செயல்பாட்டுக்குப் பிறகு புதிய endpoint ஐ சேர்க்கவும்:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -724,27 +710,27 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. புதுப்பிக்கப்பட்ட பயன்பாட்டை ஏற்றி விடவும்:
+2. புதுப்பிக்கப்பட்ட அப்ளிகேஷனை deploy செய்யவும்:
    ```sh
    azd deploy
    ```
 
-3. புதிய endpoint-ஐ சோதிக்கவும்:
+3. புதிய endpoint ஐச் சோதிக்கவும்:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **எதிர்பார்க்கப்படுகிறது**: "laptop" என்ற தேடுதலுடன் பொருந்தும் பொருட்களைத் திருப்பும்
+   **எதிர்பார்ப்பு**: "laptop" உடன் பொருந்தும் products ஐ திருப்பும்
 
-**வெற்றி நிபந்தனைகள்**: புதிய endpoint செயல்படுகிறது, வடிகட்டப்பட்ட முடிவுகளைத் திருப்புகிறது, Application Insights பதிவுகளில் தோற்றம் காணப்படுகிறது.
+**வெற்றி கோட்பாடு**: புதிய endpoint வேலை செய்கிறது, வடிகட்டப்பட்ட முடிவுகளை திரும்பளிக்கிறது, Application Insights பதிவுகளில் தோற்றம் காணப்படுகிறது.
 
 ---
 
-### பயிற்சி 3: கண்காணிப்பு மற்றும் எச்சரிப்புகளைச் சேர்க்கவும் (மேம்பட்ட)
+### பயிற்சி 3: கண்காணிப்பு மற்றும் எச்சரிக்கைகள் சேர்க்கவும் (மேம்பட்ட)
 
-**நோக்கம்**: எச்சரிப்புகளுடன் முன்னெச்சரிக்கை கண்காணிப்பை அமைத்தல்.
+**நோக்கம்**: முன்கூட்டியே கண்காணிப்பு மற்றும் எச்சரிக்கை அமைப்புகளை அமைத்தல்.
 
 **படிகள்**:
-1. HTTP 500 பிழைகளுக்காக ஒரு எச்சரிப்பை உருவாக்கவும்:
+1. HTTP 500 பிழைகளுக்காக ஒரு எச்சரிக்கை உருவாக்கவும்:
    ```sh
    # Application Insights வளத்தின் ID ஐப் பெறவும்
    AI_ID=$(az monitor app-insights component show \
@@ -763,28 +749,28 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. பிழைகள் ஏற்பட்டு எச்சரிப்பை துவக்கவும்:
+2. பிழைகளை ஏற்படுத்தி எச்சரிக்கையை தூண்டவும்:
    ```sh
-   # இல்லாத தயாரிப்பை கோரவும்
+   # ஒரு இல்லாத தயாரிப்பை கோருதல்
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. எச்சரிப்பு இயங்கினதா என்பதை சரிபார்க்கவும்:
+3. எச்சரிக்கை நிகழ்ந்ததா என்பதை சரிபார்க்கவும்:
    - Azure Portal → Alerts → Alert Rules
-   - உங்கள் மின்னஞ்சலைச் சரிபார்க்கவும் (அமைக்கப்பட்டிருந்தால்)
+   - உங்கள் மின்னஞ்சலைச் (அமைக்கப்பட்டிருந்தால்) சரிபார்க்கவும்
 
-**வெற்றி நிபந்தனைகள்**: எச்சரிப்பு விதி உருவாக்கப்ட்டுள்ளது, பிழைகளில் செயல்படுகிறது, அறிவிப்புகள் பெறப்படுகின்றன.
+**வெற்றி கோட்பாடு**: எச்சரிக்கை விதி உருவாக்கப்பட்டது, பிழைகளை அடையாளம் கண்டு தூண்டுகிறது, அறிவிப்புகள் பெறப்படுகின்றன.
 
 ---
 
 ### பயிற்சி 4: தரவுத்தள ஸ்கீமா மாற்றங்கள் (மேம்பட்ட)
 
-**நோக்கம்**: புதிய அட்டவணையைச் சேர்த்து பயன்பாட்டை அதைப் பயன்படுத்துமாறு மாற்றுதல்.
+**நோக்கம்**: புதிய ஒரு அட்டவணையைக் சேர்த்து அப்ளிகேஷன் அதை பயன்படுத்தவும் மாற்றம் செய்யல்.
 
 **படிகள்**:
-1. Azure Portal-இல் Query Editor மூலம் SQL Database-ஐ இணைக்கவும்
+1. Azure Portal Query Editor மூலம் SQL Database ஐ அணுகுக
 
-2. புதிய `categories` அட்டவணையை உருவாக்கவும்:
+2. புதிய `categories` அட்டவணையை உருவாக்குக:
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -801,110 +787,110 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. பதில்களில் category தகவலைச் சேர்ப்பதற்கு `src/web/app.py` ஐ புதுப்பிக்கவும்
+3. பதிப்பில் `src/web/app.py` ஐ category தகவலைக் கொண்டு பதில்களில் சேர்க்கவும்
 
-4. வெளியீடு செய்து சோதிக்கவும்
+4. Deploy செய்து சோதிக்கவும்
 
-**வெற்றி நிபந்தனைகள்**: புதிய அட்டவணை உள்ளது, பொருட்கள் category தகவலைக் காட்டுகின்றன, பயன்பாடு இன்னும் செயல்படுகிறது.
+**வெற்றி கோட்பாடு**: புதிய அட்டவணை உருவாகியுள்ளது, பொருட்கள் category தகவலைக் காட்டுகின்றன, அப்ளிகேஷன் இயலும்.
 
 ---
 
-### பயிற்சி 5: கேச்சிங் செயல்படுத்தல் (நிபுணர்)
+### பயிற்சி 5: கேசிங் (Caching)實現செய்க (திறமையான)
 
-**நோக்கம்**: செயல்திறனை மேம்படுத்த Azure Redis Cache ஐச் சேர்க்கவும்.
+**நோக்கம்**: செயல்திறனை மேம்படுத்த Azure Redis Cache ஐ சேர்க்கவும்.
 
 **படிகள்**:
-1. `infra/main.bicep`-இல் Redis Cache-ஐச் சேர்க்கவும்
-2. பொருள் விசாரணைகளை கேச் செய்ய `src/web/app.py`-ஐ புதுப்பிக்கவும்
-3. Application Insights மூலம் செயல்திறன் மேம்பாட்டை அளவிடவும்
-4. கேச்ச் முன்/பிறகு பதில் நேரங்களை ஒப்பிடவும்
+1. `infra/main.bicep` இல் Redis Cache ஐ சேர்க்கவும்
+2. `src/web/app.py` ஐ புதுப்பித்து product தேடல்களை cache செய்யவும்
+3. Application Insights மூலம் செயல்திறன் மேம்பாட்டைக் கணக்கிடவும்
+4. கேசிங் முன்/பின் பதிலளிப்பு நேரங்களை ஒப்பிடவும்
 
-**வெற்றி நிபந்தனைகள்**: Redis நிறுவப்பட்டுள்ளது, கேச்சிங் செயல்படுகிறது, பதிலளிப்பு நேரங்கள் >50% இல் மேம்படுகிறது.
+**வெற்றி கோட்பாடு**: Redis deploy செய்யப்பட்டு கேசிங் வேலை செய்கிறது, பதிலளிப்பு நேரங்கள் >50% க்கு மேம்பட்டுள்ளன.
 
-**குறிப்பு**: ஆரம்பிக்க [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/) ஐப் பார்க்கவும்.
+**உதவிகுறிப்பு**: தொடங்க [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/) ஐப் பார்க்கவும்.
 
 ---
 
-## சுத்தப்படுத்தல்
+## சுத்தப்படுத்துதல்
 
-தொடரும் கட்டணங்களைத் தவிர்க்க, முடிந்தவுடன் அனைத்து வளங்களையும் நீக்கவும்:
+தொடர்ந்த கட்டணங்களைத் தவிர்க்க, முடிந்தபின் அனைத்து வளங்களையும் நீக்கவும்:
 
 ```sh
 azd down
 ```
 
-**உறுதிப்பு கேள்வி**:
+**உறுதிப்படுத்தும் கேட்பு**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
 
-`y` எனத் தட்டச்சு செய்து உறுதிசெய்க.
+உறுதிப்படுத்த `y` என்பதை உள்ளிடவும்.
 
-**✓ வெற்றிச் சரிபார்ப்பு**: 
-- அனைத்து வளங்களும் Azure போர்டலிலிருந்து நீக்கப்பட்டுள்ளன
-- மேலதிக கட்டணங்கள் இல்லை
-- உள்ளக `.azure/<env-name>` கோப்புறை நீக்கப்படலாம்
+**✓ வெற்றி சரிபார்ப்பு**: 
+- அனைத்து வளங்களும் Azure Portal இல் இருந்து நீக்கப்பட்டுள்ளன
+- தொடர்ந்த கட்டணங்கள் இல்லை
+- உள்ளூர் `.azure/<env-name>` கோப்புறை நீக்கலாம்
 
-**மாற்று** (உள்கட்டமைப்பை வைத்துக்கொண்டு, தரவை நீக்கவும்):
+**வैकल्पிகம்** (இணையஉடலமைவை வைத்திருக்க, தரவை நீக்குக):
 ```sh
-# வளக் குழுவையே மட்டும் நீக்கவும் (AZD கட்டமைப்பை வைத்துக்கொள்ளவும்)
+# வளக் குழுவையே மட்டும் அழிக்கவும் (AZD கட்டமைப்பை வைத்திருக்கவும்)
 az group delete --name rg-<env-name> --yes
 ```
-## மேலும் அறிய
+## மேலும் கற்றுக்கொள்ளுங்கள்
 
 ### தொடர்புடைய ஆவணங்கள்
-- [Azure Developer CLI ஆவணம்](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database ஆவணம்](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service ஆவணம்](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep மொழி குறிப்புகள்](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Azure Developer CLI ஆவணங்கள்](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure SQL Database ஆவணங்கள்](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Azure App Service ஆவணங்கள்](https://learn.microsoft.com/azure/app-service/)
+- [Application Insights ஆவணங்கள்](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Bicep மொழி குறிப்பு](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### இந்த பாடத்தில் அடுத்த படிகள்
-- **[Container Apps Example](../../../../examples/container-app)**: Azure Container Apps மூலம் மைக்ரோசேவைகளை வெளியேற்றுக
-- **[AI ஒருங்கிணைப்பு வழிகாட்டு](../../../../docs/ai-foundry)**: உங்கள் பயன்பாட்டிற்கு AI திறன்கள் சேர்க்கவும்
-- **[Deployment சிறந்த நடைமுறைகள்](../../docs/chapter-04-infrastructure/deployment-guide.md)**: உற்பத்தி வெளியீடு முறைவுகள்
+### இந்தப் பாடத்தின் அடுத்த படிகள்
+- **[Container Apps Example](../../../../examples/container-app)**: Azure Container Apps ஐ பயன்படுத்தி மைக்ரோசர்வீஸ்களை deploy செய்க
+- **[AI Integration Guide](../../../../docs/ai-foundry)**: உங்கள் செயலியில் AI திறன்களை சேர்க்கவும்
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: உற்பத்தி பதிவேற்ற மாதிரிகள்
 
 ### மேம்பட்ட தலைப்புகள்
-- **Managed Identity**: கடவுச்சொற்களை அகற்று மற்றும் Azure AD அங்கீகாரத்தைப் பயன்படுத்தவும்
-- **Private Endpoints**: ஒரு மெய்நிகர் நெட்வொர்க்கில் தரவுத்தள இணைப்புகளை பாதுகாப்பாகச் செய்யவும்
-- **CI/CD ஒருங்கிணைப்பு**: GitHub Actions அல்லது Azure DevOps மூலம் வெளியீடுகளை தானாக செய்யவும்
-- **பல-சூழல்கள்**: dev, staging, மற்றும் production சூழல்களை அமைக்கவும்
-- **தரவுத்தள மாற்றங்கள்**: ஸ்கீமா பதிப்பு மேலாண்மைக்கு Alembic அல்லது Entity Framework ஐ பயன்படுத்தவும்
+- **Managed Identity**: கடவுச்சொற்களை அகற்றி Azure AD அங்கீகாரத்தைப் பயன்படுத்துங்கள்
+- **Private Endpoints**: ஒரு வகை virtual network உள்ளே தரவுத்தள இணைப்புகளை பாதுகாக்கவும்
+- **CI/CD Integration**: GitHub Actions அல்லது Azure DevOps உடன் deployments ஐ தானியக்கப்படுத்தவும்
+- **Multi-Environment**: dev, staging மற்றும் production சூழல்களை அமைக்கவும்
+- **Database Migrations**: ஸ்கீமா பதிப்பு நிர்வாகத்திற்கு Alembic அல்லது Entity Framework பயன்படுத்தவும்
 
-### பிற அணுகுமுறைகளுடன் ஒப்பீடு
+### பிற அணுகுமுறைகளுடன் ஒப்பிடுதல்
 
 **AZD vs. ARM Templates**:
-- ✅ AZD: உயர் மட்ட சுருக்கம், எளிய கட்டளைகள்
-- ⚠️ ARM: அதிகமாக விவரமானது, நுணுக்கமான கட்டுப்பாடு
+- ✅ AZD: மேல் மட்டப் பரிமாணம், எளிமையான கட்டளைகள்
+- ⚠️ ARM: அதிக விவரங்கள், நுணுக்கமான கட்டுப்பாடு
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure-இற்கு சொந்தமானது, Azure சேவைகளுடன் ஒருங்கிணைக்கப்பட்டுள்ளது
-- ⚠️ Terraform: பல-க்ளவுட் ஆதரவு, பெரிய சூழலமைப்பு
+- ✅ AZD: Azure-உட்பட்டது, Azure சேவைகளுடன் இன்டிக்ரேட்டட்
+- ⚠️ Terraform: பல-மேகம் ஆதரவு, பெரிய அமைப்புத்தளம்
 
 **AZD vs. Azure Portal**:
-- ✅ AZD: மீண்டும் செய்யக்கூடியது, பதிப்பு-கட்டுப்பாடு கொண்டது, தானியக்கமயமாக்கக்கூடியது
-- ⚠️ Portal: கைமுறை கிளிக்குகள், மீண்டும் உருவாக்க கடினம்
+- ✅ AZD: மீண்டும் செய்யக்கூடியது, version-control அடிப்படையில், தானியக்கமாய்ச் செயல்படும்
+- ⚠️ Portal: கைமுறை கிளிக்குகள், மறுபடியும் உருவாக்க கடினம்
 
-**AZD ஐ இதுபோல நினையுங்கள்**: Azureக்கான Docker Compose — சிக்கலான வெளியீடுகளுக்கு எளிமைப்படுத்தப்பட்ட கட்டமைப்பு.
+**AZD-வை நினைத்தால்**: Azure க்கான Docker Compose — சிக்கலான deployments க்கு எளிமைப்படுத்திய கட்டமைப்பு.
 
 ---
 
 ## அடிக்கடி கேட்கப்படும் கேள்விகள்
 
-**Q: நான் வேறு நிரல்மொழியைப் பயன்படுத்தலாமா?**  
-A: ஆம்! `src/web/` ஐ Node.js, C#, Go அல்லது எந்த மொழியேனும் மாற்றுங்கள். `azure.yaml` மற்றும் Bicep-ஐ இணக்கமாக புதுப்பிக்கவும்.
+**Q: நான் வேறு программமிங் மொழியை பயன்படுத்தலாமா?**  
+A: ஓர் ஆம்! `src/web/` ஐ Node.js, C#, Go, அல்லது எந்த மொழியிலும் மாற்றவும். `azure.yaml` மற்றும் Bicep ஐ அதன்படி புதுப்பிக்கவும்.
 
-**Q: நான் எப்படி மேலும் தரவுத்தளங்களைச் சேர்க்கலாம்?**  
-A: `infra/main.bicep`-இல் இன்னொரு SQL Database மொட்யூலைச் சேர்க்கவும் அல்லது Azure Database சேவைகளில் இருந்து PostgreSQL/MySQL ஐப் பயன்படுத்தவும்.
+**Q: நான் மேலும் தரவுத்தளங்களை எப்படி சேர்க்கலாம்?**  
+A: `infra/main.bicep` இல் மற்றொரு SQL Database module ஐ சேர்க்கவும் அல்லது Azure Database சேவைகளிலிருந்து PostgreSQL/MySQL ஐ பயன்படுத்தவும்.
 
-**Q: நான் இதை உற்பத்திக்கு (production) பயன்படுத்தலாமா?**  
-A: இது ஒரு தொடக்கப் புள்ளிதான். உற்பத்தி அமைப்பிற்கு: managed identity, private endpoints, redundancy, backup திட்டம், WAF மற்றும் மேம்பட்ட கண்காணிப்புகளைச் சேர்க்கவும்.
+**Q: இதை உற்பத்திக்கு பயன்படுத்தலாமா?**  
+A: இது ஒரு தொடக்கப் புள்ளி. உற்பத்திக்காக, managed identity, private endpoints, redundancy, backup 전략ம், WAF, மற்றும் மேம்பட்ட கண்காணிப்புகளைச் சேர்க்கவும்.
 
-**Q: குறியீடு வெளியீட்டின் பதிலாக கொண்டெய்நர்களை பயன்படுத்த விரும்பினால் என்ன?**  
-A: முழுவதும் Docker கொன்டெய்நர்களைப் பயன்படுத்தும் [Container Apps Example](../../../../examples/container-app) ஐப் பாருங்கள்.
+**Q: கோடில் பதிப்பிறக்கத்திற்கு பதிலாக கொண்டெய்நர்களைப் பயன்படுத்த விரும்பினால் என்ன?**  
+A: முழுவதும் Docker கொண்டெய்நர்கள் பயன்படுத்தும் [Container Apps Example](../../../../examples/container-app) ஐப் பாருங்கள்.
 
-**Q: என் உள்ளக இயந்திரத்திலிருந்து தரவுத்தளத்துடன் எப்படி இணைபடுவது?**  
-A: உங்கள் IP-ஐ SQL Server firewall-இல் சேர்க்கவும்:
+**Q: என் உள்ளூர்மிஷன் இருந்து தரவுத்தளத்துடன் எப்படி இணைக்கலாம்?**  
+A: SQL Server firewall இற்கு உங்கள் IP ஐச் சேர்க்கவும்:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -914,21 +900,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**Q: புதியதை உருவாக்காமல் உள்ளே இருக்கும் தரவுத்தளத்தைப் பயன்படுத்தலாமா?**  
-A: ஆம், உள்ளே இருக்கும் SQL Server-ஐ குறிப்பிட்டு `infra/main.bicep`-ஐ மாற்றவும் மற்றும் connection string பராமரிப்புகளை புதுப்பிக்கவும்.
+**Q: புதியதை உருவாக்காமல் இருக்க υπάρதான தரவுத்தளத்தை பயன்படுத்தலாமா?**  
+A: ஆம், `infra/main.bicep` ஐ மாற்றி ஏற்கனவே உள்ள SQL Server ஐ குறிப்பிடவும் மற்றும் connection string அளவுருக்களை புதுப்பிக்கவும்.
 
 ---
 
-> **குறிப்பு:** இந்த உதாரணம் AZD-ஐ பயன்படுத்தி ஒரு வலை செயலியை ஒரு தரவுத்தளத்துடன் வெளியிடுவதற்கான சிறந்த நடைமுறைகளை விளக்குகிறது. இது செயற்படும் குறியீடு, விரிவான ஆவணம் மற்றும் கற்றலினை வலுப்படுத்துவதற்கான நடைமுறைப் பயிற்சிகளை உள்ளடக்கியது. உற்பத்தி வெளியீடுகளுக்காக, உங்கள் நிறுவனத்தின் பாதுகாப்பு, அளவீடு, ஒழுங்கு மற்றும் செலவு தேவைகளை மதிப்பாய்வு செய்யவும்.
+> **குறிப்பு:** இந்த எடுத்துக்காட்டு AZD பயன்படுத்தி ஒரு வலை செயலியை தரவுத்தளத்துடன் deploy செய்வதற்கான சிறந்த நடைமுறைகளை காட்டுகிறது. இது வேலை செய்கிற குறியீடு, முழுமையான ஆவணங்கள் மற்றும் கற்பித்தலை வலியுறுத்தும் நடைமுறைப் பயிற்சிகளைப் 포함 செய்கிறது. உற்பத்தி deployments க்காக, உங்கள் நிறுவனத்தின் பாதுகாப்பு, scale, ஒழுங்குபடுத்தல் மற்றும் செலவு தேவைகளை மீள்பாருங்கள்.
 
-**📚 பாடநெறி வழிசெலுத்தல்:**
-- ← முந்தைய: [Container Apps Example](../../../../examples/container-app)
-- → அடுத்தது: [AI ஒருங்கிணைப்பு வழிகாட்டு](../../../../docs/ai-foundry)
-- 🏠 [பாடநெறி முகப்பு](../../README.md)
+**📚 பாடநெவிகேஷன்:**
+- ← முந்தையது: [Container Apps Example](../../../../examples/container-app)
+- → அடுத்தது: [AI Integration Guide](../../../../docs/ai-foundry)
+- 🏠 [பாட கோடு முகப்பு](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-குறிப்பு:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான Co‑op Translator (https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியமாக செயல்பட முயன்றாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது துல்லியமின்மைகள் இருக்கலாம் என்பதை தயவுசெய்து மனதில் கொள்ளவும். ஆவணத்தின் அசல் மொழியில் உள்ள பதிப்பே அதிகாரபூர்வமான மூலமாக கருதப்பட வேண்டும். மிகவும் முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பாளர் மூலம் மொழிபெயர்ப்பு செய்வது பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்தவொரு தவறான புரிதலுக்கோ அல்லது தவறான விளக்கத்திற்கோ நாம் பொறுப்பு ஏற்கமாட்டோம்.
+மறுப்பு அறிவிப்பு:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயலும் போதிலும், தானியக்க மொழிபெயர்ப்புகளில் பிழைகள் அல்லது துல்லியமின்மை இருக்கக்கூடாது என்பதைக் கவனத்தில் கொள்ளவும். மூல ஆவணம் அதன் சொந்த மொழியே அதிகாரப்பூர்வமான ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பைப் பயன்படுத்தியதினால் ஏற்பட்ட எந்த புரிதல் குறைபாடுகளுக்கும் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

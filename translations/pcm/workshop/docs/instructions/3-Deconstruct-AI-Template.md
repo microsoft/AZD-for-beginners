@@ -1,40 +1,40 @@
 # 3. Break down di Template
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+!!! tip "BY THE END OF THIS MODULE YOU GO FIT DO"
 
-    - [ ] Enable GitHub Copilot wit MCP servers for Azure help
-    - [ ] Understand di AZD template folder structure an components
-    - [ ] Explore how dem organize infrastructure-as-code (Bicep)
-    - [ ] **Lab 3:** Use GitHub Copilot to explore an understand di repository architecture 
-
----
-
-
-Wit AZD templates an di Azure Developer CLI (`azd`) we fit quickly jumpstart our AI development journey wit standardized repositories wey dey provide sample code, infrastructure an configuration files - as one ready-to-deploy _starter_ project.
-
-**But now, we need to understand di project structure an codebase - an fit customize di AZD template - even if you never sabi AZD before!**
+    - [ ] Turn on GitHub Copilot wit MCP servers for Azure to help
+    - [ ] Make you sabi di AZD template folder structure an components
+    - [ ] Check how infrastructure-as-code (Bicep) dem arrange
+    - [ ] **Lab 3:** Use GitHub Copilot make e help you explore an sabi di repository architecture 
 
 ---
 
-## 1. Activate GitHub Copilot
+
+Wit AZD templates an di Azure Developer CLI (`azd`) we fit quickly start our AI development journey wit standard repositories wey get sample code, infrastructure an configuration files - as a ready-to-deploy _starter_ project.
+
+**But now, we need make we sabi di project structure an codebase - an fit customize di AZD template - even if you never get prior experience or sabi AZD!**
+
+---
+
+## 1. Turn on GitHub Copilot
 
 ### 1.1 Install GitHub Copilot Chat
 
-Na time to explore [GitHub Copilot wit Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we fit use natural language to describe our task for high level, an get help to run am. For dis lab, we go use di [Copilot Free plan](https://github.com/github-copilot/signup) wey get monthly limit for completions an chat interactions.
+Na time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we fit use normal language to describe our task for high level, an get assistance to execute am. For dis lab, we go use the [Copilot Free plan](https://github.com/github-copilot/signup) wey get monthly limit for completions an chat interactions.
 
-Di extension fit install from di marketplace, but e suppose don dey already for your Codespaces environment. _Click `Open Chat` from di Copilot icon drop-down - an type prompt like `What can you do?`_ - you fit get prompt to log in. **GitHub Copilot Chat don ready**.
+The extension fit install from the marketplace, but e suppose don dey available for your Codespaces environment. _Click `Open Chat` from the Copilot icon drop-down - an type a prompt like `What can you do?`_ - dem fit ask you to log in. **GitHub Copilot Chat don ready**.
 
 ### 1.2. Install MCP Servers
 
-For Agent mode make e work well, e need access to correct tools wey go help am retrieve knowledge or do actions. Na here MCP servers fit help. We go configure di following servers:
+For Agent mode make e work well, e need access to di correct tools to help am retrieve knowledge or take actions. Na there MCP servers go help. We go configure di following servers:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
 
 To activate these:
 
-1. Create file wey dem call `.vscode/mcp.json` if e never dey
-1. Copy di following into dat file - an start di servers!
+1. Create a file called `.vscode/mcp.json` if e no dey
+1. Copy the following into that file - an start di servers!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -55,9 +55,9 @@ To activate these:
    }
    ```
 
-??? warning "You fit see error say `npx` never install (click to expand for fix)"
+??? warning "You fit see error sey `npx` never install (click to expand for fix)"
 
-      To fix, open di `.devcontainer/devcontainer.json` file an add dis line to di features section. Then rebuild di container. You go don get `npx` installed.
+      To fix am, open the `.devcontainer/devcontainer.json` file an add this line to di features section. Then rebuild di container. You suppose get `npx` installed.
 
       ```title="" linenums="0"
          "features": {
@@ -70,47 +70,47 @@ To activate these:
 
 ### 1.3. Test GitHub Copilot Chat
 
-**First use `az login` to authenticate with Azure from VS Code command line.**
+**First run `az login` make you authenticate with Azure from VS Code command line.**
 
 You suppose fit now query your Azure subscription status, an ask questions about deployed resources or configuration. Try these prompts:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-You fit also ask questions about Azure documentation an get answers wey base for Microsoft Docs MCP server. Try these prompts:
+You fit also ask questions about Azure documentation an get responses wey base for the Microsoft Docs MCP server. Try these prompts:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Or you fit ask for code snippets to finish one task. Try dis prompt.
+Or you fit ask for code snippets to complete a task. Try this prompt.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-For `Ask` mode, dis go give you code wey you fit copy-paste an try. For `Agent` mode, e fit go one step further an create di relevant resources for you - including setup scripts an documentation - to help you run dat task.
+For `Ask` mode, dis go give code wey you fit copy-paste an try. For `Agent` mode, e fit even do more an create di relevant resources for you - including setup scripts an documentation - to help you run di task.
 
-**You don ready to start to explore di template repository**
+**You don ready to start explore di template repository**
 
 ---
 
 ## 2. Break down di Architecture
 
-??? prompt "ASK: Explain di application architecture in docs/images/architecture.png in 1 paragraph"
+??? prompt "ASK: Explain di application architecture for docs/images/architecture.png inside 1 paragraph"
 
-      Dis application na AI-powered chat application wey dey run for Azure wey dey show modern agent-based architecture. Di solution center around one Azure Container App wey dey host di main application code, wey dey process user input an generate intelligent responses through one AI agent. 
+      Dis application na AI-powered chat application wey build for Azure wey dey show modern agent-based architecture. Di solution center around an Azure Container App wey host di main application code, wey dey process user input an generate intelligent responses through an AI agent. 
       
-      Di architecture dey use Microsoft Foundry Project as di foundation for AI capabilities, an e connect to Azure AI Services wey dey provide di underlying language models (like GPT-4o-mini) an agent functionality. User interactions dey flow from React-based frontend go FastAPI backend wey dey communicate wit di AI agent service to generate contextual responses. 
+      Di architecture dey use Microsoft Foundry Project as di foundation for AI capabilities, connect to Azure AI Services wey provide di underlying language models (like gpt-4.1-mini) an agent functionality. User interactions flow from a React-based frontend go a FastAPI backend wey dey communicate wit di AI agent service to generate contextual responses. 
       
-      Di system get knowledge retrieval capabilities through file search or Azure AI Search service, wey allow di agent access an cite information from uploaded documents. For operational excellence, di architecture include monitoring through Application Insights an Log Analytics Workspace for tracing, logging, an performance optimization. 
+      Di system get knowledge retrieval capabilities through either file search or Azure AI Search service, wey allow di agent to access an cite information from uploaded documents. For operational excellence, di architecture get full monitoring through Application Insights an Log Analytics Workspace for tracing, logging, an performance optimization. 
       
-      Azure Storage dey provide blob storage for application data an file uploads, while Managed Identity dey ensure secure access between Azure resources without storing credentials. Di whole solution design to scale an easy to maintain, wit di containerized application dey auto-scale based on demand an di managed Azure services dey provide built-in security, monitoring, an CI/CD capabilities.
+      Azure Storage dey provide blob storage for application data an file uploads, while Managed Identity dey ensure secure access between Azure resources without storing credentials. Di whole solution design make e scalable an maintainable, wit di containerized application wey fit automatically scale based on demand an still provide built-in security, monitoring, an CI/CD capabilities through Azure's managed services ecosystem.
 
-![Di Architecture](../../../../../translated_images/pcm/architecture.48d94861e6e6cdc0.webp)
+![Architecture](../../../../../translated_images/pcm/architecture.48d94861e6e6cdc0.webp)
 
 ---
 
-## 3. How di repository dey arranged
+## 3. Repository Structure
 
-!!! prompt "ASK: Explain di template folder structure. Start wit one visual hierarchical diagram."
+!!! prompt "ASK: Explain di template folder structure. Start wit a visual hierarchical diagram."
 
 ??? info "ANSWER: Visual Hierarchical Diagram"
 
@@ -191,7 +191,7 @@ For `Ask` mode, dis go give you code wey you fit copy-paste an try. For `Agent` 
 
 ### 3.1. Core App Architecture
 
-Dis template dey follow one **full-stack web application** pattern wit:
+Dis template follow a **full-stack web application** pattern wit:
 
 - **Backend**: Python FastAPI wit Azure AI integration
 - **Frontend**: TypeScript/React wit Vite build system
@@ -202,9 +202,9 @@ Dis template dey follow one **full-stack web application** pattern wit:
 
 Di infrastructure layer dey use **Azure Bicep** templates wey dem organize modularly:
 
-   - **`main.bicep`**: Na e dey orchestrate all Azure resources
+   - **`main.bicep`**: E dey orchestrate all Azure resources
    - **`core/` modules**: Reusable components for different services
-      - AI services (Azure OpenAI, AI Search)
+      - AI services (Microsoft Foundry Models, AI Search)
       - Container hosting (Azure Container Apps)
       - Monitoring (Application Insights, Log Analytics)
       - Security (Key Vault, Managed Identity)
@@ -216,19 +216,19 @@ Di infrastructure layer dey use **Azure Bicep** templates wey dem organize modul
 - FastAPI-based REST API
 - Foundry Agents integration
 - Search index management for knowledge retrieval
-- File upload an processing capabilities
+- File upload and processing capabilities
 
 **Frontend (`src/frontend/`)**:
 
 - Modern React/TypeScript SPA
-- Vite for fast development an optimized builds
+- Vite for fast development and optimized builds
 - Chat interface for agent interactions
 
 **Knowledge Base (`src/files/`)**:
 
-- Sample customer an product data
-- Show how file-based knowledge retrieval dey work
-- JSON an Markdown examples
+- Sample customer and product data
+- Shows how file-based knowledge retrieval dey work
+- JSON an Markdown format examples
 
 
 ### 3.4 DevOps & Automation
@@ -266,15 +266,15 @@ Di infrastructure layer dey use **Azure Bicep** templates wey dem organize modul
 
 You don successfully use GitHub Copilot Chat wit MCP servers, to explore di repository.
 
-- [X] Enabled GitHub Copilot for Azure
-- [X] Understood di Application Architecture
-- [X] Explored di AZD template structure
+- [X] Turn on GitHub Copilot for Azure
+- [X] Make you sabi di Application Architecture
+- [X] Explore di AZD template structure
 
-Dis give you one idea of di _infrastructure as code_ assets for dis template. Next, we go look di configuration file for AZD.
+Dis one give you idea of di _infrastructure as code_ assets for dis template. Next, we go look di configuration file for AZD.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Disclaimer:
-Dis dokument don translate using AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, make you sabi say automatic translations fit get mistakes or no too accurate. Di original dokument for im own language na di official source wey you suppose rely on. If na important information, we recommend say professional human translator do di translation. We no go responsible for any misunderstanding or wrong interpretation wey fit come from using this translation.
+Dis dokument don translate with AI translation service Co-op Translator. Even though we dey try make am correct, abeg note say automated translation fit get errors or mistakes. The original dokument for im original language na the main correct source. If na serious or critical information, make you use professional human translator. We no responsible for any misunderstanding or wrong interpretation wey fit come from this translated version.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

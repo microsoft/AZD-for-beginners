@@ -1,54 +1,54 @@
-# AI Workshop Lab: Making Your AI Solutions AZD-Deployable
+# AI Töötoalabor: Teie AI lahenduste tegemine AZD-lahenduseks
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD algajatele](../../README.md)
-- **📖 Current Chapter**: Peatükk 2 - Tehisintellekti-keskne arendus
-- **⬅️ Previous**: [AI mudeli juurutamine](ai-model-deployment.md)
-- **➡️ Next**: [AI tootmise parimad tavad](production-ai-practices.md)
-- **🚀 Next Chapter**: [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/configuration.md)
+**Peatükkide navigeerimine:**
+- **📚 Kursuse avaleht**: [AZD Algajatele](../../README.md)
+- **📖 Käesolev peatükk**: Peatükk 2 - AI-eelistusega arendus
+- **⬅️ Eelmine**: [AI mudeli juurutus](ai-model-deployment.md)
+- **➡️ Järgmine**: [Tootmisvalmis AI parimad tavad](production-ai-practices.md)
+- **🚀 Järgmine peatükk**: [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/configuration.md)
 
-## Workshop Overview
+## Töötoa ülevaade
 
-See praktiline labor juhendab arendajaid läbi olemasoleva AI malli AZD abil juurutamise protsessi. Õpid tootmisvalmis AI juurutuste jaoks olulisi mustreid Microsoft Foundry teenuste kasutamisel.
+See praktiline labor juhendab arendajaid olemasoleva AI malli võtmise ja Azure Developer CLI (AZD) abil juurutamise protsessis. Õpite tootmisvalmide AI juurutuste jaoks olulisi mustreid Microsoft Foundry teenuste abil.
 
-**Duration:** 2-3 tundi  
-**Level:** Kesktase  
-**Prerequisites:** Põhiline Azure'i teadmine, tuttavus AI/ML kontseptsioonidega
+**Kestus:** 2-3 tundi  
+**Tase:** Kesktase  
+**Eeltingimused:** Põhiline Azure teadmine, tutvumine AI/ML mõistetega
 
 ## 🎓 Õpieesmärgid
 
-Selle töötoa lõppedes oskad:
-- ✅ Muuta olemasolev AI rakendus AZD mallide kasutamiseks
+Selle töötoa lõpuks oskate:
+- ✅ Konverteerida olemasolev AI rakendus AZD mallide kasutamiseks
 - ✅ Konfigureerida Microsoft Foundry teenuseid AZD abil
-- ✅ Rakendada turvalist mandaatide haldust AI teenuste jaoks
-- ✅ Juurutada tootmisvalmis AI rakendusi koos monitooringuga
-- ✅ Siluda levinumaid AI juurutuse probleeme
+- ✅ Rakendada turvalist volikirjade haldust AI teenustele
+- ✅ Juurutada tootmisvalmis AI rakendusi koos jälgimisega
+- ✅ Lahendada levinud AI juurutusprobleeme
 
 ## Eeltingimused
 
-### Nõutavad tööriistad
+### Vajalikud tööriistad
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) paigaldatud
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) paigaldatud
 - [Git](https://git-scm.com/) paigaldatud
-- Koodiredaktor (soovitatav VS Code)
+- Koodiredaktor (soovitatavalt VS Code)
 
 ### Azure ressursid
-- Azure tellimus koos contributor õigustega
-- Juurdepääs Azure OpenAI teenustele (või võimalus taotleda juurdepääsu)
+- Azure tellimus koos kaastöötluse õigustega
+- Juurdepääs Microsoft Foundry Models teenustele (või võimalus taotleda)
 - Ressursigrupi loomise õigused
 
-### Teadmiste eeldused
+### Teadmised
 - Põhiline arusaam Azure teenustest
-- Tutvumine käsurealiideste kasutamisega
-- Põhilised AI/ML kontseptsioonid (API-d, mudelid, promptid)
+- Käsurealiideste tundmine
+- Põhilised AI/ML mõisted (API-d, mudelid, promptid)
 
-## Lab Setup
+## Labori seadistus
 
-### Samm 1: Keskkonna ettevalmistus
+### Samm 1: Keskkonna ettevalmistamine
 
-1. **Kontrolli tööriistade paigaldusi:**
+1. **Kontrolli tööriistade paigaldust:**
 ```bash
-# Kontrolli AZD-i installatsiooni
+# Kontrolli AZD paigaldust
 azd version
 
 # Kontrolli Azure CLI-d
@@ -59,17 +59,17 @@ az login
 azd auth login
 ```
 
-2. **Klooni töötoa repositoorium:**
+2. **Klooni töötoa hoidla:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Moodul 1: AZD struktuuri mõistmine AI rakenduste jaoks
+## Moodul 1: AZD struktuuri mõistmine AI rakendustes
 
 ### AI AZD malli anatoomia
 
-Uuri AI-valmis AZD malli olulisi faile:
+Avasta AI-valmis AZD malli võtmefailid:
 
 ```
 azure-search-openai-demo/
@@ -78,7 +78,7 @@ azure-search-openai-demo/
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Azure OpenAI configuration
+│       ├── openai.bicep    # Microsoft Foundry Models configuration
 │       ├── search.bicep    # Cognitive Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
@@ -88,35 +88,35 @@ azure-search-openai-demo/
 
 ### **Laboriharjutus 1.1: Konfiguratsiooni uurimine**
 
-1. **Vaata üle azure.yaml fail:**
+1. **Vaata azure.yaml faili:**
 ```bash
 cat azure.yaml
 ```
 
 **Millele tähelepanu pöörata:**
-- Teenuste määratlused AI komponentide jaoks
-- Keskkonnamuutujate vastavused
-- Hostimise konfiguratsioonid
+- Teenuste definitsioonid AI komponentidele
+- Keskkonnamuutujate kaardistused
+- Hostkäivituse konfiguratsioonid
 
-2. **Vaata üle infra/main.bicep infrastruktuur:**
+2. **Ülevaade main.bicep infrastruktuurist:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Olulised AI mustrid, mida tuvastada:**
-- Azure OpenAI teenuse provisjoneerimine
-- Cognitive Search integreerimine
-- Turvaline võtmete haldamine
-- Võrgu turbe konfiguratsioonid
+**Olulised AI mustrid, mida märgata:**
+- Microsoft Foundry Models teenuse loomine
+- Cognitive Search integratsioon
+- Turvaline võtmehaldussüsteem
+- Võrgu turvaseaded
 
-### **Arutluse teema:** Miks need mustrid on AI jaoks olulised
+### **Arutelu: Miks need mustrid on AI jaoks olulised**
 
-- **Teenuste sõltuvused**: AI rakendused vajavad tihti mitut koordineeritud teenust
+- **Teenuste sõltuvused**: AI rakendused vajavad sageli mitme koordineeritud teenuse kasutamist
 - **Turvalisus**: API võtmed ja lõpp-punktid vajavad turvalist haldust
-- **Skaalautuvus**: AI töökoormustel on eripärased skaleerimisnõuded
-- **Kulude haldamine**: AI teenused võivad olla kallid, kui neid ei konfigureerita õigesti
+- **Skaalautuvus**: AI koormused nõuavad eripärast skaleerimist
+- **Kulukontroll**: AI teenused võivad ilma nõuetekohase konfiguratsioonita kalliks minna
 
-## Moodul 2: Juuruta oma esimene AI rakendus
+## Moodul 2: Esimese AI rakenduse juurutamine
 
 ### Samm 2.1: Keskkonna initsialiseerimine
 
@@ -125,9 +125,9 @@ cat infra/main.bicep
 azd env new myai-workshop
 ```
 
-2. **Määra vajalikud parameetrid:**
+2. **Sea vajalikud parameetrid:**
 ```bash
-# Määra oma eelistatud Azure'i regioon
+# Määra oma eelistatud Azure'i piirkond
 azd env set AZURE_LOCATION eastus
 
 # Valikuline: Määra konkreetne OpenAI mudel
@@ -136,22 +136,22 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 
 ### Samm 2.2: Infrastruktuuri ja rakenduse juurutamine
 
-1. **Juuruta AZD abil:**
+1. **Juuruta azd abil:**
 ```bash
 azd up
 ```
 
-**Mis juhtub `azd up` ajal:**
-- ✅ Provisjoneeritakse Azure OpenAI teenus
-- ✅ Luuakse Cognitive Search teenus
-- ✅ Seadistatakse App Service veebirakenduse jaoks
-- ✅ Konfigureeritakse võrgud ja turvalisus
-- ✅ Juurutatakse rakenduse kood
-- ✅ Seadistatakse monitooring ja logimine
+**Mis toimub `azd up` käivitamisel:**
+- ✅ Teenuse Microsoft Foundry Models loomine
+- ✅ Cognitive Search teenuse loomine
+- ✅ Veebirakenduse jaoks App Service seadistamine
+- ✅ Võrgu ja turbe konfiguratsioon
+- ✅ Rakenduskoodi juurutus
+- ✅ Jälgimise ja logimise seadistamine
 
-2. **Jälgi juurutuse edenemist** ja märgi üles loodavad ressursid.
+2. **Jälgi juurutuse edenemist** ja märgi loodavad ressursid.
 
-### Samm 2.3: Kinnita oma juurutus
+### Samm 2.3: Juurutuse kontrollimine
 
 1. **Kontrolli juurutatud ressursse:**
 ```bash
@@ -165,45 +165,45 @@ azd show --output json | grep "webAppUrl"
 
 3. **Testi AI funktsionaalsust:**
    - Liigu veebirakendusse
-   - Proovi näidupäringuid
-   - Kinnita, et AI vastused töötavad
+   - Proovi näidispäringuid
+   - Kontrolli AI vastuste õigsust
 
-### **Laboriharjutus 2.1: Tõrkeotsingu praktika**
+### **Laboriharjutus 2.1: Veadete lahendamise harjutus**
 
-**Stsenaarium**: Juurutus õnnestus, kuid AI ei reageeri.
+**Stsenaarium**: Juurutus õnnestus, aga AI ei reageeri.
 
-**Tavalised kontrollitavad probleemid:**
-1. **OpenAI API võtmed**: Kontrolli, et need on õigesti seadistatud
-2. **Mudeli kättesaadavus**: Kontrolli, kas sinu piirkond toetab mudelit
+**Levinud probleemid:**
+1. **OpenAI API võtmed**: Kontrolli, et need oleksid õigesti seadistatud
+2. **Mudeli kättesaadavus**: Kontrolli, kas sinu piirkond mudelit toetab
 3. **Võrguühendus**: Veendu, et teenused saavad omavahel suhelda
-4. **RBAC õigused**: Kontrolli, et rakendus saab OpenAI-le juurde
+4. **RBAC õigused**: Kontrolli, et rakendus pääseb OpenAI juurde
 
 **Silumise käsud:**
 ```bash
 # Kontrolli keskkonnamuutujaid
 azd env get-values
 
-# Vaata juurutamise logisid
+# Vaata kasutuselevõtu logisid
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Kontrolli OpenAI juurutamise olekut
+# Kontrolli OpenAI kasutuselevõtu olekut
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Moodul 3: Kohanda AI rakendusi vastavalt oma vajadustele
+## Moodul 3: AI rakenduste kohandamine oma vajadustele
 
-### Samm 3.1: Muuda AI konfiguratsiooni
+### Samm 3.1: AI konfiguratsiooni muutmine
 
 1. **Uuenda OpenAI mudelit:**
 ```bash
 # Vaheta teise mudeli vastu (kui see on sinu piirkonnas saadaval)
-azd env set AZURE_OPENAI_MODEL gpt-4
+azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# Juuruta uuesti uue konfiguratsiooniga
+# Paiguta uuesti koos uue konfiguratsiooniga
 azd deploy
 ```
 
-2. **Lisa täiendavaid AI teenuseid:**
+2. **Lisa täiendavad AI teenused:**
 
 Muuda `infra/main.bicep`, et lisada Document Intelligence:
 
@@ -222,18 +222,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Samm 3.2: Keskkonnaspetsiifilised konfiguratsioonid
+### Samm 3.2: Keskkonnapõhised konfiguratsioonid
 
-**Parim tava**: Erinevad konfiguratsioonid arenduseks ja tootmiseks.
+**Parim tava**: Erinevad konfiguratsioonid arendus- ja tootmiskeskkondadele.
 
 1. **Loo tootmiskeskkond:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Määra tootmispõhised parameetrid:**
+2. **Sea tootmiskeskkonna spetsiifilised parameetrid:**
 ```bash
-# Tootmises kasutatakse tavaliselt kõrgemaid SKU-sid
+# Tootmises kasutatakse tavaliselt rohkem SKU-sid
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -241,45 +241,45 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Laboriharjutus 3.1: Kulude optimeerimine**
+### **Laboriharjutus 3.1: Kulu optimeerimine**
 
-**Väljakutse**: Konfigureeri mall kuluefektiivseks arenduskeskkonnaks.
+**Väljakutse**: Konfigureeri mall kulutõhusaks arenduseks.
 
 **Ülesanded:**
-1. Tuvasta, milliseid SKU-sid saab seada tasuta/põhitasemele
-2. Konfigureeri keskkonnamuutujad minimaalsete kulude jaoks
+1. Tuvasta, millised SKU-d saab määrata tasuta või põhitasemele
+2. Sea keskkonnamuutujad minimaalsete kuludega töötamiseks
 3. Juuruta ja võrdle kulusid tootmiskonfiguratsiooniga
 
 **Lahenduse vihjed:**
-- Kasuta F0 (tasuta) taset Cognitive Services puhul, kui võimalik
-- Kasuta arenduses Search Service jaoks Basic taset
-- Kaalu Functions jaoks Consumption plaani
+- Kasuta Cognitive Services jaoks võimalusel F0 (tasuta) taset
+- Kasuta Search Service jaoks arenduses Basic taset
+- Kaalu Functions'i puhul tarbimiskava kasutamist
 
-## Moodul 4: Turvalisus ja tootmise parimad tavad
+## Moodul 4: Turvalisus ja tootmisparimad tavad
 
-### Samm 4.1: Turvaline volituste haldus
+### Samm 4.1: Turvaline volikirjade haldus
 
-**Praegune väljakutse**: Paljud AI rakendused kodeerivad API võtmeid sisse või kasutavad ebaturvalist salvestust.
+**Hetkeprobleem**: Paljud AI rakendused salvestavad API võtmeid kovalt või ebaturvaliselt.
 
-**AZD lahendus**: Managed Identity + Key Vault integratsioon.
+**AZD lahendus**: Hallatud identiteet + Key Vault integratsioon.
 
-1. **Vaata üle oma malli turbekonfiguratsioon:**
+1. **Vaata üle turvakonfiguratsioon mallis:**
 ```bash
-# Otsige Key Vaulti ja haldustatud identiteedi konfiguratsiooni
+# Otsi Key Vaulti ja hallatud identiteedi konfiguratsiooni
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Kontrolli, et Managed Identity töötab:**
+2. **Kontrolli, et hallatud identiteet töötab:**
 ```bash
-# Kontrolli, kas veebirakendusel on õige identiteedi konfiguratsioon
+# Kontrolli, kas veebirakendusel on õige identiteedikontseptsioon
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
 ### Samm 4.2: Võrgu turvalisus
 
-1. **Luba privaatotsad** (kui need pole veel konfigureeritud):
+1. **Luba privaatsed lõpp-punktid** (kui pole veel seadistatud):
 
-Lisa oma bicep-malli:
+Lisa bicep malli:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -302,18 +302,18 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Samm 4.3: Monitooring ja nähtavus
+### Samm 4.3: Jälgimine ja jälgitavus
 
 1. **Konfigureeri Application Insights:**
 ```bash
-# Application Insights peaks olema automaatselt seadistatud
+# Application Insights peaks olema automaatselt konfigureeritud
 # Kontrolli konfiguratsiooni:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Sea üles AI-spetsiifiline monitooring:**
+2. **Sea üles AI-spetsiifiline jälgimine:**
 
-Lisa kohandatud mõõdikud AI toimingute jaoks:
+Lisa AI operatsioonide kohandatud mõõdikud:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -336,18 +336,18 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ### **Laboriharjutus 4.1: Turvaaudit**
 
-**Ülesanne**: Vaata oma juurutus üle turvalisuse parimate tavade osas.
+**Ülesanne**: Kontrolli oma juurutust turvapõhimõtete osas.
 
 **Kontrollnimekiri:**
-- [ ] Puuduvad kõvakodeeritud saladused koodis või konfiguratsioonis
-- [ ] Teenustevaheliseks autentimiseks kasutatakse Managed Identity'd
+- [ ] Ei ole kovalt kodeeritud saladusi koodis ega konfiguratsioonis
+- [ ] Kasutatakse hallatud identiteeti teenustevaheliseks autentimiseks
 - [ ] Key Vault hoiab tundlikku konfiguratsiooni
 - [ ] Võrgu juurdepääs on korrektselt piiratud
-- [ ] Monitooring ja logimine on lubatud
+- [ ] Jälgimine ja logimine on lubatud
 
 ## Moodul 5: Oma AI rakenduse konverteerimine
 
-### Samm 5.1: Hinnanguleht
+### Samm 5.1: Hindamisleht
 
 **Enne rakenduse konverteerimist** vasta neile küsimustele:
 
@@ -357,26 +357,26 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
    - Kas see vajab andmebaasi?
    - Millised on teenustevahelised sõltuvused?
 
-2. **Turbe nõuded:**
-   - Milliseid tundlikke andmeid sinu rakendus käsitleb?
-   - Millised regulatiivsed nõuded kehtivad?
-   - Kas vajad privaatvõrku?
-
-3. **Skaalimise nõuded:**
-   - Milline on oodatud koormus?
+2. **Turvanõuded:**
+   - Millist tundlikku infot sinu rakendus töötleb?
+   - Millised vastavusnõuded on?
+   - Kas vajad privaatsidet?
+   
+3. **Skaalautumise nõuded:**
+   - Milline on eeldatav koormus?
    - Kas vajad automaatset skaleerimist?
-   - Kas on piirkondlikke nõudeid?
+   - Kas eksisteerivad piirkonnapõhised nõuded?
 
 ### Samm 5.2: Loo oma AZD mall
 
-**Järgi seda mustrit oma rakenduse konverteerimiseks:**
+**Järgi seda mustrit, et konverteerida rakendus:**
 
-1. **Loo põhistruktuur:**
+1. **Loo baasstruktuur:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Initsialiseeri AZD-mall
+# Initsialiseeri AZD mall
 azd init --template minimal
 ```
 
@@ -449,56 +449,56 @@ output name string = openAIAccount.name
 
 ### **Laboriharjutus 5.1: Malli loomise väljakutse**
 
-**Väljakutse**: Loo AZD mall dokumentide töötlemise AI rakenduse jaoks.
+**Väljakutse**: Loo AZD mall dokumentide töötlemise AI rakendusele.
 
 **Nõuded:**
-- Azure OpenAI sisu analüüsiks
+- Microsoft Foundry Models sisuanalüüsiks
 - Document Intelligence OCR-iks
-- Storage Account dokumentide üleslaadimiseks
-- Function App töötlemisloogika jaoks
+- Salvestuskonto dokumentide üleslaadimiseks
+- Function App töötlemisloogikaks
 - Veebirakendus kasutajaliidese jaoks
 
-**Boonuspunkte:**
-- Lisa korralik vigade käitlemine
-- Kaasa kulude hinnang
-- Sea üles monitooringu armatuurlaud
+**Boonuspunktid:**
+- Korralik vigade käsitlemine
+- Kulu prognoosimine
+- Jälgimisarmatuurlaudade seadistamine
 
-## Moodul 6: Levinud probleemide silumine
+## Moodul 6: Levinud probleemide lahendamine
 
 ### Levinud juurutusprobleemid
 
-#### Probleem 1: OpenAI teenuse piirang ületatud
-**Sümptomid:** Juurutus ebaõnnestub piirangu veaga
-**Lahendused:**
+#### Probleem 1: OpenAI teenuse kvota ületatud  
+**Sümptomid:** Juurutus ebaõnnestub kvota veaga  
+**Lahendused:**  
 ```bash
-# Kontrolli praeguseid piiranguid
+# Kontrolli praeguseid limiite
 az cognitiveservices usage list --location eastus
 
-# Taotle piirangu suurendamist või proovi teist regiooni
+# Taotle limiidi tõstmist või proovi teist piirkonda
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Probleem 2: Mudel pole piirkonnas saadaval
-**Sümptomid:** AI vastused ebaõnnestuvad või mudeli juurutamine annab vea
-**Lahendused:**
+#### Probleem 2: Mudel pole piirkonnas saadaval  
+**Sümptomid:** AI vastused ebaõnnestuvad või mudeli juurutuse vead  
+**Lahendused:**  
 ```bash
-# Kontrolli mudeli saadavust regiooniti
+# Kontrolli mudeli saadavust piirkonna järgi
 az cognitiveservices model list --location eastus
 
-# Uuenda saadaval olevale mudelile
+# Uuenda saadaoleva mudeli peale
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
 
-#### Probleem 3: Õiguste probleemid
-**Sümptomid:** 403 Forbidden vead AI teenustele pöördumisel
-**Lahendused:**
+#### Probleem 3: Õiguste probleemid  
+**Sümptomid:** 403 Keelatud vead AI teenuste kutsumisel  
+**Lahendused:**  
 ```bash
 # Kontrolli rollide määramisi
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Lisa puuduvad rollid
+# Lisa puuduvaid rolle
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -507,47 +507,47 @@ az role assignment create \
 
 ### Jõudlusprobleemid
 
-#### Probleem 4: Aeglased AI vastused
-**Uurimis- ja tõrkeotsingusammud:**
-1. Kontrolli Application Insights'i jõudlusmõõdikuid
-2. Vaata OpenAI teenuse mõõdikuid Azure portaalis
-3. Kontrolli võrguühendust ja latentsusaega
+#### Probleem 4: AI vastused on aeglased  
+**Uurimisetapid:**  
+1. Kontrolli Application Insights jõudlusmõõdikuid  
+2. Vaata OpenAI teenuse mõõdikuid Azure portaalis  
+3. Kontrolli võrguühenduse kiirust ja latentsust  
 
-**Lahendused:**
-- Rakenda vahemällu salvestust sagedaste päringute jaoks
-- Kasuta sinu juhtumi jaoks sobivat OpenAI mudelit
-- Kaalu lugemis-replikasid suure koormuse korral
+**Lahendused:**  
+- Rakenda populaarsete päringute vahemälu  
+- Kasuta õiget OpenAI mudelit oma juhtumi jaoks  
+- Kaalu lugemiskoopiaid suurte koormuste korral
 
 ### **Laboriharjutus 6.1: Silumise väljakutse**
 
-**Stsenaarium**: Juurutus õnnestus, kuid rakendus tagastab 500 vigu.
+**Stsenaarium**: Juurutus õnnestus, aga rakendus tagastab 500 vead.
 
-**Silumise ülesanded:**
-1. Kontrolli rakenduse logisid
-2. Kinnita teenuste ühenduvus
-3. Testi autentimist
-4. Vaata konfiguratsiooni üle
+**Silumise ülesanded:**  
+1. Kontrolli rakenduse logisid  
+2. Kontrolli teenusteühendust  
+3. Testi autentimist  
+4. Vaata konfiguratsiooni läbi  
 
-**Kasutatavad tööriistad:**
-- `azd show` juurutuse ülevaate jaoks
-- Azure portaal üksikasjalike teenuste logide jaoks
-- Application Insights rakenduse telemeetriaks
+**Kasutatavad tööriistad:**  
+- `azd show` juurutuse üldvaateks  
+- Azure portaal teenuste logide jaoks  
+- Application Insights rakenduse telemeetria jaoks
 
-## Moodul 7: Monitooring ja optimeerimine
+## Moodul 7: Jälgimine ja optimeerimine
 
-### Samm 7.1: Sea üles põhjalik monitooring
+### Samm 7.1: Komplekssed jälgimise seadistused
 
-1. **Loo kohandatud juhtpaneelid:**
+1. **Loo kohandatud armatuurlaud:**
 
-Mine Azure portaali ja loo armatuurlaud, mis sisaldab:
-- OpenAI päringute arv ja latentsus
-- Rakenduse vigade määr
-- Ressursside kasutus
+Mine Azure portaalisse ja loo armatuurlaud koos:  
+- OpenAI päringute arv ja latentsus  
+- Rakenduse veamäärad  
+- Ressursside kasutus  
 - Kulude jälgimine
 
-2. **Sea üles teavitused:**
+2. **Seadista hoiatused:**  
 ```bash
-# Hoiatus kõrge veamäära kohta
+# Häire kõrge veamäära korral
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -556,122 +556,122 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
-### Samm 7.2: Kulude optimeerimine
+### Samm 7.2: Kulu optimeerimine
 
-1. **Analüüsi praeguseid kulusid:**
+1. **Analüüsi praeguseid kulusid:**  
 ```bash
-# Kasutage Azure CLI-d kulude andmete saamiseks
+# Kasutage kulude andmete saamiseks Azure CLI-d
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Rakenda kulukontrolle:**
-- Sea eelarve teavitused
-- Kasuta automaatse skaleerimise poliitikaid
-- Rakenda päringute vahemällu salvestust
-- Jälgi OpenAI tokenite kasutust
+2. **Rakenda kulukontrollid:**  
+- Sea eelarveteated  
+- Kasuta automaatse skaleerimise poliitikaid  
+- Rakenda päringute vahemällu salvestamine  
+- Jälgi OpenAI märkide kasutust
 
 ### **Laboriharjutus 7.1: Jõudluse optimeerimine**
 
-**Ülesanne**: Optimeeri oma AI rakendus nii jõudluse kui kulude osas.
+**Ülesanne**: Optimeeri oma AI rakendus nii jõudluse kui ka kulu osas.
 
-**Parandatavad mõõdikud:**
-- Vähenda keskmist vastuseaega 20% võrra
-- Vähenda igakuiseid kulusid 15% võrra
+**Mõõdikud, mida parandada:**  
+- Vähenda keskmist vastuse aega 20%  
+- Vähenda kuu kulutusi 15%  
 - Säilita 99.9% tööaeg
 
-**Prooviks strateegiad:**
-- Rakenda vastuste vahemällu salvestust
-- Optimeeri promptid tokeni efektiivsuse jaoks
-- Kasuta sobivaid arvutus-SKU-sid
+**Proovitavad strateegiad:**  
+- Rakenda vastusevahemälu  
+- Optimeeri promptid märksõnade tõhususe jaoks  
+- Kasuta sobivaid arvutus-SKU-sid  
 - Sea korralik automaatne skaleerimine
 
-## Lõplik väljakutse: End-to-End rakenduse implementeerimine
+## Lõpuprojekt: Täielik rakenduse elluviimine
 
 ### Väljakutse stsenaarium
 
-Sinu ülesandeks on luua tootmisvalmis AI-toega klienditeeninduse vestlusrobot, millel on järgmised nõuded:
+Sinu ülesandeks on luua tootmisvalmis AI-põhine klienditeenindusbot, mille nõuded on:
 
-**Funktsionaalsed nõuded:**
-- Veebiliides kliendisuhtluseks
-- Integratsioon Azure OpenAI-ga vastuste saamiseks
-- Dokumendipõhine otsing Cognitive Search abil
-- Integratsioon olemasoleva kliendibaasiga
+**Funktsionaalsed nõuded:**  
+- Veebiliides kliendi suhtluseks  
+- Microsoft Foundry Models integreerimine vastusteks  
+- Dokumentide otsingu võimekus Cognitive Search abil  
+- Olemasoleva kliendiandmebaasi integreerimine  
 - Mitmekeelne tugi
 
-**Mittemfunktsionaalsed nõuded:**
-- Käsitleb 1000 samaaegset kasutajat
-- 99.9% tööaja SLA
-- SOC 2 vastavus
-- Kulu alla $500/kuu
-- Juurutada mitmesse keskkonda (dev, staging, prod)
+**Mittefunktsionaalsed nõuded:**  
+- Koormus 1000 samaaegset kasutajat  
+- 99.9% tööaja SLA  
+- SOC 2 vastavus  
+- Kulu alla 500$/kuus  
+- Juurutus mitmesse keskkonda (arendus, etapp, tootmine)
 
-### Rakendamise sammud
+### Elluviimise sammud
 
-1. **Disaini arhitektuur**
-2. **Loo AZD mall**
-3. **Rakenda turvameetmed**
-4. **Sea üles monitooring ja teavitused**
-5. **Loo juurutustorud**
-6. **Dokumenteeri lahendus**
+1. **Arhitektuuri kujundamine**  
+2. **AZD malli loomine**  
+3. **Turvameetmete rakendamine**  
+4. **Jälgimise ja hoiatussüsteemi seadistamine**  
+5. **Juurutuskanalite loomine**  
+6. **Lahenduse dokumenteerimine**
 
 ### Hindamiskriteeriumid
 
-- ✅ **Funktsionaalsus**: Kas see vastab kõikidele nõuetele?
-- ✅ **Turvalisus**: Kas parimad tavad on rakendatud?
-- ✅ **Skaalautuvus**: Kas see suudab koormust hallata?
-- ✅ **Hooldatavus**: Kas kood ja infrastruktuur on hästi organiseeritud?
-- ✅ **Kulu**: Kas see jääb eelarvesse?
+- ✅ **Funktsionaalsus**: Kas vastab kõikidele nõuetele?  
+- ✅ **Turvalisus**: Kas on rakendatud parimad tavad?  
+- ✅ **Skaalautuvus**: Kas suudab koormusega toime tulla?  
+- ✅ **Hooldatavus**: Kas kood ja infrastruktuur on hästi organiseeritud?  
+- ✅ **Kulu**: Kas jääb eelarvesse?
 
 ## Täiendavad ressursid
 
-### Microsofti dokumentatsioon
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
+### Microsofti dokumentatsioon  
+- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
+- [Microsoft Foundry Models teenuse dokumentatsioon](https://learn.microsoft.com/azure/cognitive-services/openai/)  
+- [Microsoft Foundry dokumentatsioon](https://learn.microsoft.com/azure/ai-studio/)
 
-### Näidismallid
-- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+### Näidismallid  
+- [Microsoft Foundry Models Chat rakendus](https://github.com/Azure-Samples/azure-search-openai-demo)  
+- [OpenAI Chat rakenduse kiire algus](https://github.com/Azure-Samples/openai-chat-app-quickstart)  
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Kogukonna ressursid
-- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+### Kogukonna ressursid  
+- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)  
+- [Azure Developer CLI GitHubis](https://github.com/Azure/azure-dev)  
+- [Awesome AZD mallid](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Lõputunnistus
-Palju õnne! Oled lõpetanud AI-töötoa labori. Nüüd peaksid suutma:
 
-- ✅ Konverteerida olemasolevaid AI-rakendusi AZD-mallideks
-- ✅ Juurutada tootmiskõlblikke AI-rakendusi
-- ✅ Rakendada AI töökoormuste turvalisuse parimaid tavasid
-- ✅ Jälgida ja optimeerida AI-rakenduste jõudlust
-- ✅ Lahendada tavalisi juurutusprobleeme
+Palju õnne! Olete lõpetanud AI Töötoalabori. Nüüd peaksite oskama:
+- ✅ Muuda olemasolevad tehisintellekti rakendused AZD mallideks
+- ✅ Käivita tootmiskõlbulikud tehisintellekti rakendused
+- ✅ Rakenda tehisintellekti töökoormuste turvalisuse parimaid tavasid
+- ✅ Jälgi ja optimeeri tehisintellekti rakenduse jõudlust
+- ✅ Tõrkeotsing levinumate juurutamisprobleemide korral
 
 ### Järgmised sammud
-1. Rakenda neid mustreid oma AI-projektidele
-2. Panusta mallidega kogukonda
-3. Liitu Microsoft Foundry Discordiga jätkuva toe saamiseks
-4. Uuri edasijõudnud teemasid nagu mitmeregionilised juurutused
+1. Rakenda neid mustreid omaenda tehisintellekti projektides
+2. Panusta mallid tagasi kogukonda
+3. Liitu Microsoft Foundry Discordiga pideva toe saamiseks
+4. Uuri edasi edasijõudnute teemasid nagu mitut regiooni hõlmavad juurutused
 
 ---
 
-**Töötoa tagasiside**: Aita meil seda töötoa parandada, jagades oma kogemust [Microsoft Foundry Discordi #Azure kanalis](https://discord.gg/microsoft-azure).
+**Töötoa tagasiside**: Aita meil seda töötuba paremaks muuta, jagades oma kogemusi Microsoft Foundry Discordi kanalis [#Azure](https://discord.gg/microsoft-azure).
 
 ---
 
-**Peatükkide navigeerimine:**
+**Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 2 - AI-esmane arendus
-- **⬅️ Eelmine**: [AI mudeli juurutamine](ai-model-deployment.md)
-- **➡️ Järgmine**: [AI tootmise parimad tavad](production-ai-practices.md)
-- **🚀 Järgnev peatükk**: [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/configuration.md)
+- **📖 Praegune peatükk**: Peatükk 2 - Tehisintellekti eeline arendus
+- **⬅️ Eelmine**: [Tehisintellekti mudeli juurutamine](ai-model-deployment.md)
+- **➡️ Järgmine**: [Tootmistehisintellekti parimad tavad](production-ai-practices.md)
+- **🚀 Järgmine peatükk**: [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/configuration.md)
 
-**Vajate abi?** Liitu meie kogukonnaga, et saada tuge ja arutada AZD ja AI juurutuste üle.
+**Vaja abi?** Liitu meie kogukonnaga, et saada tuge ja arutelusid AZD ja tehisintellekti juurutamise kohta.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastutusest loobumine:
-See dokument on tõlgitud tehisintellekti tõlketeenuse Co-op Translator (https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Algset dokumenti selle algkeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega väär­tõlgenduste eest.
+**Vastutusest vabanemine**:  
+See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüdleme täpsuse poole, tuleb arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles peaks olema käsitletav kui autoriteetne allikas. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

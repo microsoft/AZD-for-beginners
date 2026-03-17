@@ -1,136 +1,136 @@
-# பல-ஏஜென்ட் வாடிக்கையாளர் ஆதரவு தீர்வு - சில்லறை நிலை
+# Multi-Agent Customer Support Solution - Retailer Scenario
 
 **அத்தியாயம் 5: பல-ஏஜென்ட் AI தீர்வுகள்**
-- **📚 பாடநெறி முகப்பு**: [AZD தொடக்கவர்களுக்கு](../README.md)
+- **📚 பாடநெறி முகப்பு**: [AZD For Beginners](../README.md)
 - **📖 தற்போதைய அத்தியாயம்**: [அத்தியாயம் 5: பல-ஏஜென்ட் AI தீர்வுகள்](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ முன்னோக்கிய தேவைகள்**: [அத்தியாயம் 2: AI-முதன்மை அபிவிருத்தி](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ அடுத்த அத்தியாயம்**: [அத்தியாயம் 6: முன்-பதிவேற்றம் சரிபார்ப்பு](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM டெம்ப்ளேடுகள்**: [Deployment Package](retail-multiagent-arm-template/README.md)
+- **⬅️ முன்-தேவைகள்**: [அத்தியாயம் 2: AI-முதன்மை மேம்பாடு](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ அடுத்த அத்தியாயம்**: [அத்தியாயம் 6: முன்-வினியோக சரிபார்ப்பு](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM டெம்ப்ளேடுகள்**: [வினியோகக் தொகுப்பு](retail-multiagent-arm-template/README.md)
 
-> **⚠️ கட்டமைப்பு வழிகாட்டு - செயல்படும் செயலாக்கம் கிடையாது**  
-> இந்த ஆவணம் பல-ஏஜென்ட் சிஸ்டத்தை உருவாக்க ஒரு **விரிவான கட்டமைப்பு வரைபடத்தை** வழங்குகிறது.  
-> **இருந்து:** பொறியியல் ஆளுமை பொருளாக்கத்திற்கான ARM டெம்ப்ளேட் (Azure OpenAI, AI Search, Container Apps, போன்றவை)  
-> **நீங்கள் கட்டಬೇಕென்று வைத்துள்ளவை:** ஏஜென்ட் கோடு, வழிமாற்றல் தர்க்கம், முன்னணி UI, தரவு குழாய்கள் (மூல்யமாய் 80-120 மணித்தியாலம்)  
+> **⚠️ வடிவமைப்பு வழிகாட்டி - செயல்படக்கூடிய செயல்முறை அல்ல**  
+> இந்த ஆவணம் ஒரு பல-ஏஜென்ட் அமைப்பை உருவாக்குவதற்கான **விரிவான அமைப்பு வரைபடத்தை** வழங்குகிறது.  
+> **ஏனைய செயல்பாடுகள்:** Foundry மாதிரிகள், AI Search, Container Apps போன்றவற்றுக்கான உடையான ARM டெம்ப்ளேட்  
+> **நீங்கள் உருவாக்க வேண்டியது:** ஏஜென்ட் குறியீடு, வழிமாற்று தளர்வு, முன்னறை UI, தரவு பணவழிகள் (மதிப்பீடு 80-120 மணிநேரம்)  
 >  
-> **இதைப் பயன்படுத்துங்கள்:**  
-> - ✅ உங்கள் சொந்த பல-ஏஜென்ட் திட்டத்திற்கான கட்டமைப்பு குறிப்பிடல்  
-> - ✅ பல-ஏஜென்ட் வடிவமைப்பு நுட்பங்கள் கற்கும் வழிகாட்டி  
-> - ✅ Azure வளங்களை பிரிவேற்றுவதற்கான கட்டமைப்பு டெம்ப்ளேட்  
-> - ❌ இயக்கத் தயாரான பயன்பாடாக அல்ல (முக்கியமான அபிவிருத்தி தேவை)
+> **இதை பயன்படுத்தவும் ως:**
+> - ✅ உங்கள் சொந்த பல-ஏஜென்ட் திட்டத்திற்கான வடிவமைப்பு குறிப்ப-reference
+> - ✅ பல-ஏஜென்ட் வடிவமைப்பு முறைமைகளுக்கான கற்றல் வழிகாட்டி
+> - ✅ Azure வளங்களை வினியோகிப்பதற்கான கட்டமைப்பு டெம்ப்ளேட்
+> - ❌ இயக்கத்துக்குத் தயாரான பயன்பாடு அல்ல (முக்கியமான வளர்ச்சியை தேவைபடும்)
 
 ## கண்ணோட்டம்
 
-**கற்கும் நோக்கம்:** கையொழுக்கும் பல-ஏஜென்ட் வாடிக்கையாளர் ஆதரவு சொட்றை கட்டுவதற்கான கட்டமைப்பு, வடிவமைப்பு தீர்மானங்கள் மற்றும் செயல்படுத்தல் அணுகுமுறை ஆகியவற்றை புரிந்து கொள்வது. இது பராமரிப்பு, ஆவண செயலாக்கம் மற்றும் நுண்ணறிவு வாடிக்கையாளர் தொடர்புகளை உள்ளடக்கிய நுண்ணறிவு திறன்களைக் கொண்டிருக்க வேண்டும்.
+**கற்றல் நோக்கம்:** விநியோக மேலாண்மை, ஆவணம் செயலாக்கம் மற்றும் புத்திசாலி வாடிக்கையாளர் தொடர்பு உள்ளிட்ட சிக்கலான AI திறன்களைக் கொண்ட ஒரு சில்லறை விற்பனையாளர் நுகர்வு ஆதரவு பல-ஏஜென்ட் chatbot ஒன்றை தயாரிப்பதற்கான கட்டமைப்பு, வடிவமைப்பு முடிவுகள் மற்றும் செயல்படுத்தல் அணுகுமுறை பற்றி புரிந்துகொள்வது.
 
-**முடிக்க நேரம்:** வாசித்தலும் புரிந்தலும் (2-3 மணி) | முழு செயல்படுத்தல் கட்டமைப்பு (80-120 மணி)
+**முடிவடைய நேரம்:** வாசிப்பு + புரிதல் (2-3 மணி) | முழு செயலாக்கம் உருவாக்குதல் (80-120 மணி)
 
-**நீங்கள் கற்றுக்கொள்ளப்போகும் தொடக்கங்கள்:**
-- பல-ஏஜென்ட் கட்டமைப்பு மாதிரிகள் மற்றும் வடிவமைப்பு கோட்பாடுகள்
-- பன்மாநில Azure OpenAI பிரிவேட்டுத்துறை கையாளுதல்
-- RAG (Retrieval-Augmented Generation) உடன் AI Search ஒருங்கிணைவு
-- ஏஜென்ட் மதிப்பீடு மற்றும் பாதுகாப்பு சோதனைக் கட்டமைப்புகள்
-- உற்பத்தி வெளியீடு கருத்துக்கள் மற்றும் செலவு ஒதுக்கீடு நுட்பங்கள்
+**நீங்கள் கற்றுக்கொள்ளவிருப்பது:**
+- பல-ஏஜென்ட் கட்டமைப்பு மாதிரிகள் மற்றும் வடிவமைப்பு கொள்கைகள்
+- பல-பிராந்திய Microsoft Foundry Models வினியோகம் ռազմத்துடன்
+- RAG (Retrieval-Augmented Generation) உடன் AI Search ஒருங்கிணைப்பு
+- ஏஜென்ட் மதிப்பீடு மற்றும் பாதுகாப்பு சோதனை கட்டமைப்புகள்
+- உற்பத்தி வினியோக பரிசீலனைகள் மற்றும் செலவு உத்தேசம்
 
-## கட்டமைப்பு இலக்குகள்
+## கட்டமைப்பு நோக்கங்கள்
 
-**கல்வி கவனம்:** இந்த கட்டமைப்பு நிறுவன அளவிலான பல-ஏஜென்ட் சிஸ்டங்களுக்கான நிரூபிக்கப்பட்ட மாதிரிகளை காட்டுகிறது.
+**கல்வி கவனம்:** இந்த கட்டமைப்பு பல-ஏஜென்ட் அமைப்புகளுக்கான நிறுவன மாதிரிகளை காட்சி செய்கிறது.
 
 ### அமைப்பு தேவைகள் (உங்கள் செயலாக்கத்திற்காக)
 
-ஒரு உற்பத்தி வாடிக்கையாளர் ஆதரவு தீர்விற்கு தேவை:
-- **வாடிக்கையாளர் தேவைகளுக்காக பல சிறப்பு ஏஜென்ட்**கள் (Customer Service + Inventory Management)
-- **பல-மாடல் பிரிவேற்றம்** மற்றும் சீரான திறன் திட்டமிடல் (GPT-4o, GPT-4o-mini, embeddings பல பிராந்தியங்களில்)
-- **தன்மையான தரவு ஒருங்கிணைவு** AI Search மற்றும் கோப்பு பதிவேற்றங்களுடன் (வெக்டர் தேடல் + ஆவண செயலாக்கம்)
-- **முழுமையான கண்காணிப்பு** மற்றும் மதிப்பீடு திறன்கள் (Application Insights + தனிப்பயன் மெட்ரிக்ஸ்)
-- **உற்பத்தி தரமான பாதுகாப்பு** மற்றும் ரெட்-டீமிங் சோதனை (துணிவாய்ப்பு ஸ்கேனிங் + ஏஜென்ட் மதிப்பீடு)
+ஒரு உற்பத்தி வாடிக்கையாளர் ஆதரவு தீர்வுக்கு தேவை:
+- **பல நுட்பத்திறன்களைக் கொண்ட ஏஜென்டுகள்** வாடிக்கையாளர் தேவைகளுக்காக (வாடிக்கையாளர் சேவை + இருப்பு நிர்வாகம்)
+- **பல மாதிரி வினியோகம்** முறையாக திறன் திட்டமிடுதலுடன் (gpt-4.1, gpt-4.1-mini, பிராந்தியங்களில் embeddings)
+- **இயங்கும் தரவு ஒருங்கிணைப்பு** AI Search மற்றும் கோப்பு பதிவேற்றங்களுடன் (வெக்டர் தேடல் + ஆவணம் செயலாக்கம்)
+- **விரிவான கண்காணிப்பு** மற்றும் மதிப்பீட்டு தகுதிகள் (Application Insights + தனிப்பயன் அளவைக் கணக்கீடுகள்)
+- **உற்பத்தி தரமான பாதுகாப்பு** சிவப்பு குழு சரிபார்ப்பு (பலவீன சோதனை + ஏஜென்ட் மதிப்பீடு)
 
-### இந்த வழிகாட்டு வழங்குவது
+### இந்த வழிகாட்டி வழங்குவது
 
-✅ **கட்டமைப்பு மாதிரிகள்** - பரிமாணக்கூடிய பல-ஏஜென்ட் சிஸ்டங்களுக்கு நிரூபிக்கப்பட்ட வடிவமைப்பு  
-✅ **அமைப்பு டெம்ப்ளேடுகள்** - அனைத்து Azure சேவைகளையும் பிரிவேற்றும் ARM டெம்ப்ளேடுகள்  
-✅ **கோடு உதாரணங்கள்** - முக்கிய கூறுகளுக்கான குறிப்பு செயலாக்கங்கள்  
-✅ **கட்டமைப்புச் சார் வழிகாட்டு** - படி படியான அமைப்பு பரிந்துரைகள்  
-✅ **சிறந்த நடைமுறைகள்** - பாதுகாப்பு, கண்காணிப்பு, செலவு நுட்பங்கள்  
+✅ **வடிவமைப்பு மாதிரிகள்** - அளவீடு செய்யக்கூடிய பல-ஏஜென்ட் அமைப்புகளுக்கான நிரூபிக்கப்பட்ட வடிவமைப்பு  
+✅ **அடிக்கடி உள்ளமைவு டெம்ப்ளேட்** - அனைத்து Azure சேவைகளையும் வினியோகிக்கும் ARM டெம்ப்ளேடுகள்  
+✅ **குறியீடு எடுத்துக்காட்டுகள்** - முக்கிய கூறுகளுக்கான குறிப்பு செயலாக்கங்கள்  
+✅ ** कॉन्फிகரேஷன் வழிகாட்டி ** - படி படியாக அமைத்தல் அறிவுறுத்தல்கள்  
+✅ **மிகச்சிறந்த நடைமுறைகள்** - பாதுகாப்பு, கண்காணிப்பு, செலவு சீர்திருத்த உத்திகள்
 
-❌ **சேர்க்கப்படாதவை** - முழுமையான செயல்படக்கூடிய பயன்பாடாக கிடையாது (அபிவிருத்தி தேவை)
+❌ **சேர்க்கப்படாதவைகள்** - முழு செயல்பாட்டுள்ள செயலி (முழு உருவாக்க அழைப்பு தேவை)
 
 ## 🗺️ செயலாக்க திட்டம்
 
-### நிலை 1: கட்டமைப்பைப் படித்து அறிதல் (2-3 மணி) - இங்கே தொடங்கவும்
+### படி 1: கட்டமைப்பை ஆய்வு செய்க (2-3 மணி) - இங்கிருந்து தொடங்கு
 
-**நோக்கம்:** அமைப்பு வடிவமைப்பு மற்றும் கூறுகளின் தொடர்புகள் புரிந்து கொள்வது
+**நோக்கம்:** அமைப்பு வடிவமைப்பு மற்றும் கூறுகளின் தொடர்புகளைப் புரிந்துகொள்ளுதல்
 
 - [ ] இந்த முழு ஆவணத்தை வாசிக்கவும்
-- [ ] கட்டமைப்பு வரைபடத்தை மற்றும் கூறு தொடர்புகளை பார்க்கவும்
-- [ ] பல-ஏஜென்ட் மாதிரிகள் மற்றும் வடிவமைப்பு தீர்மானங்களை புரிந்துகொள்ளவும்
-- [ ] ஏஜென்ட் கருவிகள் மற்றும் வழிமாற்றலுக்கான குறியீடு உதாரணங்களை படிக்கவும்
-- [ ] செலவு மதிப்பீடுகள் மற்றும் திறன் திட்டமிடல் வழிகாட்டுதலை ஆய்வு செய்யவும்
+- [ ] கட்டமைப்பு வரைபடம் மற்றும் கூறுகளின் உறவுகளை மறுபரிசீலனை செய்யவும்
+- [ ] பல-ஏஜென்ட் மாதிரிகள் மற்றும் வடிவமைப்பு முடிவுகளை மதித்து புரிந்துகொள்ளவும்
+- [ ] ஏஜென்ட் கருவிகள் மற்றும் வழிமாற்று குறியீட்டு எடுத்துக்காட்டுகளைப் படிக்கவும்
+- [ ] செலவு மதிப்பீடுகள் மற்றும் திறன் திட்டமிடல் வழிகாட்டியைக் கற்றுக்கொள்ளவும்
 
-**விளைவு:** நீங்கள் கட்ட வேண்டியதைக் குறித்து தெளிவாக புரிதல்
+**விளைவு:** நீங்கள் உருவாக்க வேண்டியவற்றைப் பற்றிய தெளிவான புரிதல்
 
-### நிலை 2: வளங்கள் பிரிவேற்றம் (30-45 நிமிடங்கள்)
+### படி 2: உடையானதை வினியோகம் செய் (30-45 நிமி)
 
-**நோக்கம்:** ARM டெம்ப்ளேட் மூலம் Azure வளங்களை ஒதுக்கி அமைத்தல்
+**நோக்கம்:** ARM டெம்ப்ளேட் பயன்படுத்தி Azure வளங்களை ஒதுக்கி நிர்மாணி செய்
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**பிரிவேற்றப்படுவது:**
-- ✅ Azure OpenAI (3 பிராந்தியங்கள்: GPT-4o, GPT-4o-mini, embeddings)
-- ✅ AI Search சேவை (காலி, குறியீட்டு அமைப்பு தேவை)
-- ✅ Container Apps சுற்றுச்சூழல் (தற்காலிக படங்கள்)
-- ✅ Storage கணக்குகள், Cosmos DB, Key Vault
+**எது வினியோகிக்கப்படும்:**
+- ✅ Microsoft Foundry Models (3 பிராந்தியங்கள்: gpt-4.1, gpt-4.1-mini, embeddings)
+- ✅ AI Search சேவை (காலியாக உள்ளது, இன்டெக்ஸ் அளவுரு தேவை)
+- ✅ Container Apps சுற்றுச்சூழல் (placeholder images)
+- ✅ சேமிப்பு கணக்குகள், Cosmos DB, Key Vault
 - ✅ Application Insights கண்காணிப்பு
 
-**தேராதவை:**
-- ❌ ஏஜென்ட் செயலாக்கக் குறியீடு
-- ❌ வழிமாற்றல் தர்க்கம்
-- ❌ முன்னணி UI
-- ❌ Search குறியீட்டு அமைப்பு
+**என்ன இல்லை:**
+- ❌ ஏஜெண்ட் செயல்படுத்தும் குறியீடு
+- ❌ வழிமாற்று தர்க்கம்
+- ❌ முன்னணிப் UI
+- ❌ Search index ஸ்கீமா
 - ❌ தரவு குழாய்கள்
 
-### நிலை 3: பயன்பாட்டை கட்டமைக்கவும் (80-120 மணி)
+### படி 3: பயன்பாட்டை உருவாக்கு (80-120 மணி)
 
-**நோக்கம்:** இந்த கட்டமைப்பின் அடிப்படையில் பல-ஏஜென்ட் சிஸ்டத்தை செயல்படுத்துதல்
+**நோக்கம்:** இந்த கட்டமைப்பின் அடிப்படையில் பல-ஏஜென்ட் அமைப்பை செயல்படுத்து
 
-1. **ஏஜென்ட் செயலாக்கம்** (30-40 மணி)
+1. **ஏஜென்ட் செயல்படுத்தல்** (30-40 மணி)
    - அடிப்படை ஏஜென்ட் வகுப்பு மற்றும் இடைமுகங்கள்
-   - GPT-4o கொண்டு வாடிக்கையாளர் சேவை ஏஜென்ட்
-   - GPT-4o-mini கொண்டு இன்வெண்டரி ஏஜென்ட்
-   - கருவி ஒருங்கிணைவுகள் (AI Search, Bing, கோப்பு செயலாக்கம்)
+   - gpt-4.1 உடன் வாடிக்கையாளர் சேவை ஏஜென்ட்
+   - gpt-4.1-mini உடன் இருப்பு ஏஜென்ட்
+   - கருவி ஒருங்கிணைப்புகள் (AI Search, Bing, கோப்பு செயலாக்கம்)
 
-2. **வழிமாற்றல் சேவை** (12-16 மணி)
+2. **வழிமாற்று சேவை** (12-16 மணி)
    - கோரிக்கை வகைப்பாடு தர்க்கம்
    - ஏஜென்ட் தேர்வு மற்றும் ஒருங்கிணைப்பு
-   - FastAPI/Express பின்வங்கை
+   - FastAPI/Express பதிவுமுனை
 
-3. **முன்னணி மேம்பாடு** (20-30 மணி)
+3. **முன்நிலை மேம்பாடு** (20-30 மணி)
    - உரையாடல் இடைமுக UI
    - கோப்பு பதிவேற்ற செயல்பாடு
-   - பதில்களை காட்டுதல்
+   - பதில்கள் காட்டல்
 
 4. **தரவு குழாய்** (8-12 மணி)
-   - AI Search குறியீட்டு உருவாக்கம்
-   - Document Intelligence மூலம் ஆவண செயலாக்கம்
-   - எம்பெட்டிங் உருவாக்கம் மற்றும் குறியிடல்
+   - AI Search இன் இன்டெக்ஸ் உருவாக்கம்
+   - Document Intelligence உடன் ஆவணம் செயலாக்கம்
+   - embedding உருவாக்கம் மற்றும் இன்டெக்சிங்
 
 5. **கண்காணிப்பு & மதிப்பீடு** (10-15 மணி)
-   - தனிப்பயன் தொலைநுட்ப செயலாக்கம்
+   - தனிப்பயன் டெலிமெட்ரி செயல்படுத்தல்
    - ஏஜென்ட் மதிப்பீட்டு கட்டமைப்பு
-   - ரெட்-டீம் பாதுகாப்பு ஸ்கேனர்
+   - சிவப்பு குழு பாதுகாப்பு ஸ்கேனர்
 
-### நிலை 4: பிரிவேற்று & சோதனை (8-12 மணி)
+### படி 4: வினியோகம் & சோதனை (8-12 மணி)
 
-- அனைத்து சேவைகளுக்கும் Docker படங்களை உருவாக்குதல்
-- Azure Container Registry க்கு தள்ளுதல்
-- Container Apps ஐ உண்மையான படங்களுடன் புதுப்பித்தல்
-- சுற்றுச்சூழல் மாறிகள் மற்றும் ரகசியங்கள் கான்பிகர் செய்தல்
-- மதிப்பீடு சோதனை தொகுப்பை இயக்கு
-- பாதுகாப்பு ஸ்கேனிங்கை இயக்கவும்
+- அனைத்து சேவைகளுக்கும் Docker படங்களை கட்டு
+- Azure Container Registryக்கு புஷ் செய்
+- Container Apps ஐ உண்மையான படங்களுடன் புதுப்பி
+- சுற்றுச்சூழல் மாறிகள் மற்றும் ரகசியங்களை அமைக்கவும்
+- மதிப்பீட்டு சோதனை தொகுப்பை ஓட்டு
+- பாதுகாப்பு ஸ்கேனிங் நடக்கச் செய்
 
-**மொத்த ஊகிக்கப்பட்ட முயற்சி:** அனுபவமுள்ள வளர்ப்பாளர்களுக்கு 80-120 மணி
+**மொத்த மதிப்பீடு முயற்சி:** பரிச்சயமுள்ள டெவலப்பர்களுக்கான 80-120 மணி
 
 ## தீர்வு கட்டமைப்பு
 
@@ -138,40 +138,40 @@ cd retail-multiagent-arm-template
 
 ```mermaid
 graph TB
-    User[👤 வாடிக்கையாளர்] --> LB[Azure Front Door]
-    LB --> WebApp[வலை முன்னணி<br/>கொண்டெய்னர் செயலி]
+    User[👤 வாடிக்கையாளர்] --> LB[அஜூர் ஃப்ரண்ட் டோர்]
+    LB --> WebApp[வெப் முன்பகுதி<br/>கொண்டெய்னர் பயன்பாடு]
     
-    WebApp --> Router[ஏஜென்ட் ரவுடர்<br/>கொண்டெய்னர் செயலி]
+    WebApp --> Router[ஏஜென்ட் ரவுட்டர்<br/>கொண்டெய்னர் பயன்பாடு]
     Router --> CustomerAgent[வாடிக்கையாளர் ஏஜென்ட்<br/>வாடிக்கையாளர் சேவை]
-    Router --> InvAgent[சரக்கு ஏஜென்ட்<br/>பங்கு மேலாண்மை]
+    Router --> InvAgent[சரக்கு ஏஜென்ட்<br/>பங்கு நிர்வாகம்]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Microsoft Foundry மாதிரிகள்<br/>gpt-4.1<br/>கிழக்கு அமெரிக்கா 2]
+    InvAgent --> OpenAI2[Microsoft Foundry மாதிரிகள்<br/>gpt-4.1-mini<br/>மேற்கு அமெரிக்கா 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>பொருள் பட்டியல்]
-    CustomerAgent --> BingSearch[Bing Search API<br/>நேரடி தகவல்]
+    CustomerAgent --> AISearch[அஜூர் ஏஐ தேடல்<br/>பொருள் பட்டியல்]
+    CustomerAgent --> BingSearch[பிங் தேடல் API<br/>நேரடி தகவல்]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>ஆவணங்கள் மற்றும் கோப்புகள்]
+    AISearch --> Storage[அஜூர் சேமிப்பு<br/>ஆவணங்கள் & கோப்புகள்]
     Storage --> DocIntel[ஆவண நுண்ணறிவு<br/>உள்ளடக்க செயலாக்கம்]
     
-    OpenAI1 --> Embeddings[உரை எம்பெட்டிங்ஸ்<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[உரை எம்பெடிங்ஸ்<br/>ada-002<br/>பிரான்ஸ் மையம்]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>மேற்பார்வை]
+    Router --> AppInsights[ஆப்ளிகேஷன் இன்சைட்ஸ்<br/>கண்காணிப்பு]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o மதிப்பீட்டாளர்<br/>Switzerland North] --> Evaluation[மதிப்பீட்டு கட்டமைப்பு]
-    RedTeam[ரெட் டீம் ஸ்கேனர்] --> SecurityReports[பாதுகாப்பு அறிக்கைகள்]
+    GraderModel[gpt-4.1 மதிப்பீட்டாளர்<br/>சுவிட்சர்லாந்து வடக்கு] --> Evaluation[மதிப்பீட்டு கட்டமைப்பு]
+    RedTeam[ரெட்-டீம் ஸ்கானர்] --> SecurityReports[பாதுகாப்பு அறிக்கைகள்]
     
     subgraph "தரவு அடுக்கு"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>சேட் வரலாறு]
+        CosmosDB[Cosmos DB<br/>சாட் வரலாறு]
     end
     
-    subgraph "AI சேவைகள்"
+    subgraph "ஏஐ சேவைகள்"
         OpenAI1
         OpenAI2
         Embeddings
@@ -180,10 +180,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "மேற்பார்வை மற்றும் பாதுகாப்பு"
+    subgraph "கண்காணிப்பு & பாதுகாப்பு"
         AppInsights
-        LogAnalytics[Log Analytics வேலைப்பகுதி]
-        KeyVault[Azure Key Vault<br/>ரகசியங்கள் & கட்டமைப்பு]
+        LogAnalytics[லாக் அனலிடிக்ஸ் பணியிடம்]
+        KeyVault[அஜூர் கீ வால்ட்<br/>ரகசியங்கள் & கட்டமைப்பு]
         RedTeam
         Evaluation
     end
@@ -197,25 +197,25 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-### கூறு பார்வை
+### கூறு கண்ணோட்டம்
 
 | கூறு | நோக்கம் | தொழில்நுட்பம் | பிராந்தியம் |
 |-----------|---------|------------|---------|
-| **வலை முனையம்** | வாடிக்கையாளர் தொடர்புகளுக்கான பயனர் இடைமுகம் | Container Apps | முக்கிய பிராந்தியம் |
-| **ஏஜென்ட் ரவுடர்** | கோரிக்கைகளை பொருத்தமான ஏஜென்டிற்கு வழிமாற்றுகிறது | Container Apps | முக்கிய பிராந்தியம் |
-| **வாடிக்கையாளர் ஏஜென்ட்** | வாடிக்கையாளர் சேவை கேள்விகளை கையாள்கிறது | Container Apps + GPT-4o | முக்கிய பிராந்தியம் |
-| **இன்வெண்டரி ஏஜென்ட்** | பங்கு மற்றும் நிறைவேற்றலை நிர்வகிக்கிறது | Container Apps + GPT-4o-mini | முக்கிய பிராந்தியம் |
-| **Azure OpenAI** | ஏஜென்டுகளுக்கான LLM உணர்திறன் | Cognitive Services | பன்முக பிராந்தியம் |
-| **AI Search** | வெக்டர் தேடல் மற்றும் RAG | AI Search Service | முக்கிய பிராந்தியம் |
-| **Storage Account** | கோப்பு பதிவேற்றங்களும் ஆவணங்களும் | Blob Storage | முக்கிய பிராந்தியம் |
-| **Application Insights** | கண்காணிப்பு மற்றும் தொலைவெளியியல் | Monitor | முக்கிய பிராந்தியம் |
-| **மதிப்பீட்டாளர் மாடல்** | ஏஜென்ட் மதிப்பீட்டுக் கணமைப்பு | Azure OpenAI | துணை பிராந்தியம் |
+| **Web Frontend** | வாடிக்கையாளர் தொடர்புகளுக்கான பயனர் இடைமுகம் | Container Apps | முதன்மை பிராந்தியம் |
+| **Agent Router** | கோரிக்கைகளை பொருத்தமான ஏஜென்டுக்கு வழிமாற்றுகிறது | Container Apps | முதன்மை பிராந்தியம் |
+| **Customer Agent** | வாடிக்கையாளர் சேவை விசாரணைகளை கையாளும் | Container Apps + gpt-4.1 | முதன்மை பிராந்தியம் |
+| **Inventory Agent** | பங்கு மற்றும் நிறைவுப்பணிகளை நிர்வகிக்கிறது | Container Apps + gpt-4.1-mini | முதன்மை பிராந்தியம் |
+| **Microsoft Foundry Models** | ஏஜென்ட்களுக்கான LLM காரணி | Cognitive Services | பல பிராந்தியங்கள் |
+| **AI Search** | வெக்டர் தேடல் மற்றும் RAG | AI Search Service | முதன்மை பிராந்தியம் |
+| **Storage Account** | கோப்பு பதிவேற்றங்கள் மற்றும் ஆவணங்கள் | Blob Storage | முதன்மை பிராந்தியம் |
+| **Application Insights** | கண்காணிப்பு மற்றும் டெலிமெட்ரி | Monitor | முதன்மை பிராந்தியம் |
+| **Grader Model** | ஏஜென்ட் மதிப்பீட்டு அமைப்பு | Microsoft Foundry Models | இரண்டாம் நிலை பிராந்தியம் |
 
-## 📁 திட்ட அமைப்பு
+## 📁 திட்ட கட்டமைப்பு
 
 > **📍 நிலை குறிப்பு:**  
-> ✅ = கிடங்கில் உள்ளது  
-> 📝 = குறிப்பு செயலாக்கம் (இந்த ஆவணத்தில் குறியீடு உதாரணம்)  
+> ✅ = ஆவணக் கோற்புறையிலுள்ளது  
+> 📝 = குறிப்புரு செயலாக்கம் (இந்த ஆவணத்தில் குறியீடு எடுத்துக்காட்டு)  
 > 🔨 = நீங்கள் உருவாக்க வேண்டும்
 
 ```
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -363,77 +363,77 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 துவக்கவழி: இனிமேல் உடனடி செய்யக்கூடியவை
+## 🚀 துரித ஆரம்பம்: இப்போது நீங்கள் என்ன செய்யலாம்
 
-### விருப்பம் 1: நிர்வாக வளங்களை மட்டுமே பிரிவேற்றவும் (30 நிமிடம்)
+### விருப்பம் 1: உடையானதை மட்டும் வினியோகம் செய்க (30 நிமிடம்)
 
-**நீங்கள் பெறுவது:** அனைத்து Azure சேவைகளும் ஒதுக்கப்பட்டு வளர்ப்பிற்காக தயாராக இருக்கும்
+**நீங்கள் பெறுவது:** அனைத்து Azure சேவைகளும் ஒதுக்கப்பட்டு மேம்பாட்டுக்கு தயார்
 
 ```bash
-# களஞ்சியத்தை கிளோன் செய்
+# களஞ்சியத்தை நகலெடு
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
 # அடிப்படை கட்டமைப்பை நிறுவு
 ./deploy.sh -g myResourceGroup -m standard
 
-# நிறுவலை சரிபார்க்க
+# நிறுவலை சரிபார்க்கவும்
 az resource list --resource-group myResourceGroup --output table
 ```
 
-**எதிர்பார்க்கப்படும் முடிவு:**
-- ✅ Azure OpenAI சேவைகள் பிரிவேற்றப்பட்டன (3 பிராந்தியங்கள்)
-- ✅ AI Search சேவை உருவாக்கப்பட்டது (காலி)
+**பராமரிக்கப்படும் எதிர்பார்ப்பு:**
+- ✅ Microsoft Foundry Models சேவைகள் வினியோகிக்கப்பட்டது (3 பிராந்தியங்கள்)
+- ✅ AI Search சேவை உருவாக்கப்பட்டது (காலியானது)
 - ✅ Container Apps சுற்றுச்சூழல் தயாராக உள்ளது
-- ✅ Storage, Cosmos DB, Key Vault கட்டமைக்கப்பட்டன
-- ❌ தற்போது செயல்படும் ஏஜெண்டுகள் இல்லை (மட்டுமன்றி வளங்கள் மட்டும்)
+- ✅ சேமிப்பு, Cosmos DB, Key Vault கட்டமைக்கப்பட்டது
+- ❌ இன்னும் இயங்கும் ஏஜெண்ட்கள் இல்லை (உடைமை மட்டுமே)
 
-### விருப்பம் 2: கட்டமைப்பைப் படித்தல் (2-3 மணி)
+### விருப்பம் 2: கட்டமைப்பை ஆய்வு செய் (2-3 மணி)
 
-**நீங்கள் பெறுவது:** பல-ஏஜென்ட் மாதிரிகள் குறித்து ஆழ்ந்த புரிதல்
+**நீங்கள் பெறுவது:** பல-ஏஜென்ட் மாதிரிகளின் ஆழமான புரிதல்
 
 1. இந்த முழு ஆவணத்தை வாசிக்கவும்
-2. ஒவ்வொரு கூறிற்குமான குறியீடு உதாரணங்களைக் காணவும்
-3. வடிவமைப்பு தீர்மானங்கள் மற்றும் வர்த்தக-ஆய்வை புரிந்துகொள்ளவும்
-4. செலவு நுட்பங்களை படிக்கவும்
-5. உங்கள் செயலாக்கத் திட்டத்தை திட்டமிடவும்
+2. ஒவ்வொரு கூறிற்குமான குறியீடு எடுத்துக்காட்டுகளை ஆய்வு செய்யவும்
+3. வடிவமைப்பு முடிவுகள் மற்றும் வழிஅமைப்புகளின் பயன்கள் புரிந்து கொள்ளவும்
+4. செலவு குறைத்தல் உத்திகள் பற்றி படிக்கவும்
+5. உங்கள் செயல்படுத்தல் அணுகுமுறையை திட்டமிடவும்
 
-**எதிர்பார்க்கப்படும் முடிவு:**
-- ✅ அமைப்பு பற்றிய தெளிவான மனதளவியல் மாடல்
-- ✅ தேவைப்படும் கூறுகளின் புரிதல்
-- ✅ யூகிக்கப்பட்ட முயற்சி மதிப்பீடுகள்
-- ✅ செயல்படுத்தல் திட்டம்
+**பராமரிக்கப்படும் எதிர்பார்ப்பு:**
+- ✅ அமைப்பு பற்றிய தெளிவான மனச்சித்திரம்
+- ✅ தேவையான கூறுக்களின் புரிதல்
+- ✅ உண்மையான முயற்சி மதிப்பீடுகள்
+- ✅ செயலாக்க திட்டம்
 
-### விருப்பம் 3: முழுமையான அமைப்பை கட்டமைக்கவும் (80-120 மணி)
+### விருப்பம் 3: முழு அமைப்பை உருவாக்கு (80-120 மணி)
 
-**நீங்கள் பெறுவது:** உற்பத்தி-தரமான பல-ஏஜென்ட் தீர்வு
+**நீங்கள் பெறுவது:** உற்பத்தி-தயார் பல-ஏஜென்ட் தீர்வு
 
-1. **நிலை 1:** வளங்கள் பிரிவேற்றல் (மேலே செய்தது)
-2. **நிலை 2:** கீழே உள்ள குறியீடு உதாரணங்களை பயன்படுத்தி ஏஜெண்டுகளை செயலாக்கவும் (30-40 மணி)
-3. **நிலை 3:** வழிமாற்றல் சேவையை கட்டமைக்கவும் (12-16 மணி)
-4. **நிலை 4:** முன்னணி UI உருவாக்கவும் (20-30 மணி)
-5. **நிலை 5:** தரவு குழாய்களை அமைக்கவும் (8-12 மணி)
-6. **நிலை 6:** கண்காணிப்பு மற்றும் மதிப்பீட்டை சேர்க்கவும் (10-15 மணி)
+1. **படி 1:** உடையானதை வினியோகம் செய்க (மேலே செய்யப்பட்டது)
+2. **படி 2:** கீழே உள்ள குறியீடு எடுத்துக்காட்டுகளைப் பயன்படுத்தி ஏஜெண்டுகளை செயல்படுத்து (30-40 மணி)
+3. **படி 3:** வழிமாற்று சேவையை உருவாக்கு (12-16 மணி)
+4. **படி 4:** முன்னணித் UI உருவாக்கு (20-30 மணி)
+5. **படி 5:** தரவு குழாய்களை அமைக்க (8-12 மணி)
+6. **படி 6:** கண்காணிப்பு & மதிப்பீட்டை சேர்க்க (10-15 மணி)
 
-**எதிர்பார்க்கப்படும் முடிவு:**
-- ✅ முழுமையாக செயல்படும் பல-ஏஜென்ட் சிஸ்டம்
-- ✅ உற்பத்தி தரமான கண்காணிப்பு
+**பராமரிக்கப்படும் எதிர்பார்ப்பு:**
+- ✅ முழுமையாக செயல்படும் பல-ஏஜென்ட் அமைப்பு
+- ✅ உற்பத்தி-தர கண்காணிப்பு
 - ✅ பாதுகாப்பு சரிபார்ப்பு
-- ✅ செலவு-அனுகூலமாக அமைக்கப்பட்ட பிரிவேற்று
+- ✅ செலவு-சீர்திருத்தம்செய்த வினியோகம்
 
 ---
 
-## 📚 கட்டமைப்பு குறிப்பு & செயல்படுத்தல் வழிகாட்டு
+## 📚 கட்டமைப்பு குறிப்புகள் & செயல்படுத்தல் வழிகாட்டி
 
-பின்வரும் பிரிவுகள் உங்கள் செயல்படுத்தலை வழிநடத்த விரிவான கட்டமைப்பு மாதிரிகள், அமைப்பு உதாரணங்கள் மற்றும் குறியீடு குறிப்பு வழங்குகின்றன.
+கீழ்க்கண்டப் பகுதிகள் உங்கள் செயல்படுத்தலுக்கு வழிகாட்டும் விரிவான கட்டமைப்பு மாதிரிகள், கட்டமைப்பு எடுத்துக்காட்டுகள் மற்றும் குறியீடு குறிப்புகளை வழங்குகின்றன.
 
-## ஆரம்ப அமைப்பு தேவைகள்
+## ஆரம்ப கட்டமைப்பு தேவைகள்
 
 ### 1. பல ஏஜென்டுகள் & கட்டமைப்பு
 
-**நோக்கம்**: 2 சிறப்பு ஏஜெண்டுகளை பிரிவேற்றி வைக்கவும் - "வாடிக்கையாளர் ஏஜென்ட்" (வாடிக்கையாளர் சேவை) மற்றும் "இன்வெண்டரி" (பங்கு நிர்வாகம்)
+**நோக்கம்**: 2 சிறப்பு ஏஜென்டுகளை வினியோகம் செய்ய - "Customer Agent" (வாடிக்கையாளர் சேவை) மற்றும் "Inventory" (சக்தி நிர்வாகம்)
 
-> **📝 குறிப்பு:** கீழுள்ள azure.yaml மற்றும் Bicep அமைப்புகள் **குறிப்பு உதாரணங்கள்** ஆகும் மற்றும் பல-ஏஜென்ட் பிரிவேற்றங்களை எவ்வாறு கட்டமைக்க வேண்டும் என்று காட்டுகின்றன. இந்த கோப்புகளை உருவாக்கி அதற்கான ஏஜென்ட் செயலாக்கங்களையும் நீங்கள் உருவாக்க வேண்டும்.
+> **📝 குறிப்பு:** கீழ்காணும் azure.yaml மற்றும் Bicep கட்டமைப்புகள் **குறிப்பு எடுத்துக்காட்டுகள்** மட்டுமே; நீங்கள் இந்த கோப்புகளை மற்றும் சம்மந்தப்பட்ட ஏஜென்ட் செயல்படுத்தல்களை உருவாக்க வேண்டும்.
 
 #### கட்டமைப்பு படிகள்:
 
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -474,12 +474,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -507,17 +507,17 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. பல மாடல்கள் மற்றும் திறன் திட்டமிடல்
+### 2. பல மாதிரிகள் மற்றும் திறன் திட்டமிடல்
 
-**நோக்கம்**: உரையாடல் மாடல் (Customer), எம்பெட்டிங் மாடல் (search), மற்றும் முடிவு அறுக்கும் மாடல் (grader) ஆகியவற்றை உரிய கவர்தல் நிர்வாகத்துடன் பிரிவேற்றுதல்
+**நோக்கம்:** உரையாடல் மாதிரி (Customer), embeddings மாதிரி (search), மற்றும் reasoning மாதிரி (grader) ஆகியவற்றை சரியான கோட்டாவுடன் வினியோகம் செய்தல்
 
-#### பல-பிராந்திய நெறிமுறை:
+#### பல-பிராந்தியத் திட்டம்:
 
 ```bicep
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -555,20 +555,20 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### பிராந்தியFallback(தவறுதலுக்கு மாற்று) அமைப்பு:
+#### பிராந்திய மறுப்புப் புகுபதிகை கட்டமைப்பு:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search மற்றும் தரவு குறியீட்டு அமைப்பு
+### 3. தரவு இன்டெக்சிங் உடன் AI Search
 
-**நோக்கம்**: தரவு புதுப்பிப்புகள் மற்றும் தானியங்கி குறியிடலுக்காக AI Search ஐ அமைக்குதல்
+**நோக்கம்:** தரவு புதுப்பிப்புகள் மற்றும் தானியங்கி இன்டெக்சிங் க்காக AI Search ஐ கட்டமைக்கவும்
 
-#### முன்-பிரிவேற்றப்படுத்தும் ஹுக்:
+#### முந்தைய-வினியோக ஹுக்:
 
 ```bash
 #!/bin/bash
@@ -585,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### பிறந்தபின்-பிரிவேற்றத் தரவு அமைப்பு:
+#### பின்-வினியோக தரவு அமைப்பு:
 
 ```bash
 #!/bin/bash
@@ -593,10 +593,10 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# தேடல் சேவை விசையைப் பெறவும்
+# தேடல் சேவை விசையை பெறவும்
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# இன்டெக்ஸ் ஸ்கீமாவை உருவாக்கவும்
+# இண்டெக்ஸ் ஸ்கீமாவை உருவாக்கவும்
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
@@ -609,7 +609,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
 
-#### Search குறியீட்டு சிக்மா:
+#### Search இன்டெக்ஸ் ஸ்கிமா:
 
 ```json
 {
@@ -634,11 +634,11 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. ஏஜென்ட் கருவி அமைப்பு AI Search க்கு
+### 4. AI Search க்கான ஏஜென்ட் கருவி கட்டமைப்பு
 
-**நோக்கம்**: ஏஜென்டுகளை AI Search ஐ அடிப்படை கருவியாகப் பயன்படுத்துமாறு கட்டமைக்கவும்
+**நோக்கம்:** ஏஜென்ட்களை நிலைப்படுத்தும் கருவியாக AI Search ஐப் பயன்படுத்த도록 கட்டமைக்கவும்
 
-#### ஏஜென்ட் தேடல் கருவி செயல்படுத்தல்:
+#### ஏஜென்ட் Search கருவி செயலாக்கம்:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -682,7 +682,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
 
-#### ஏஜென்ட் ஒருங்கிணைவு:
+#### ஏஜென்ட் ஒருங்கிணைப்பு:
 
 ```python
 # src/agents/customer_agent.py
@@ -695,15 +695,15 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # முதலில், பொருத்தமான சூழ்நிலையைத் தேடுங்கள்
+        # முதலில், சம்பந்தப்பட்ட பின்னணியை தேடவும்
         search_results = await self.search_tool.search_products(user_query)
         
-        # LLM-க்காக சூழ்நிலையைத் தயாரிக்கவும்
+        # LLM-க்காக பின்னணியைத் தயாரிக்கவும்
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
         # ஆதாரத்துடன் பதிலை உருவாக்கவும்
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -713,11 +713,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. கோப்பு பதிவேற்றச் சேமிப்பு ஒருங்கிணைவு
+### 5. கோப்பு பதிவேற்ற சேமிப்பு ஒருங்கிணைப்பு
 
-**நோக்கம்**: ஏஜென்ட்கள் பதிவேற்றப்பட்ட கோப்புகளை (திட்ட நூல்கள், ஆவணங்கள்) RAG உள்ளடக்கத்திற்கு செயலாக்க 사용할தற்கு सक्षमமാക്കல்
+**நோக்கம்:** ஏஜென்டுகள் பதிவேற்றப்பட்ட கோப்புகளை (கையேடுகள், ஆவணங்கள்) RAG context க்கு செயலாக்கத் திறனாகக் கையாள்வதற்காகத் துவக்குவதை இயல 가능한 செயல்
 
-#### சேமிப்பு அமைப்பு:
+#### சேமிப்பு கட்டமைப்பு:
 
 ```bicep
 // infra/storage.bicep
@@ -756,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### ஆவண செயலாக்க குழாய்:
+#### ஆவணம் செயலாக்க குழாய்:
 
 ```python
 # src/document_processor.py
@@ -776,13 +776,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Blob சேமிப்பிடத்திலிருந்து கோப்பை பதிவிறக்கவும்
+        # Blob சேமிப்பிலிருந்து கோப்பை பதிவிறக்கவும்
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Document Intelligence பயன்படுத்தி உரையை எடுக்கவும்
+        # Document Intelligence-ஐப் பயன்படுத்தி உரையை பிரிக்கவும்
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -790,19 +790,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # உரை உள்ளடக்கத்தை எடுக்கவும்
+        # உரை உள்ளடக்கத்தை பிரிக்கவும்
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # எம்பெடிங்களை உருவாக்கவும்
+        # எம்பெடிங்குகளை உருவாக்கவும்
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # AI Search இல் குறியிடவும்
+        # AI Search-இல் குறியிடவும்
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -814,11 +814,11 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing Search ஒருங்கிணைவு
+### 6. Bing தேடல் ஒருங்கிணைப்பு
 
-**நோக்கம்**: நேரடி தகவலுக்காக Bing Search திறன்களைச் சேர்க்கவும்
+**நோக்கம்:** நேரடி தகவலுக்கு Bing Search திறன்களைச் சேர்க்கவும்
 
-#### Bicep வள கூட்டல்:
+#### Bicep வளச் சேர்க்கை:
 
 ```bicep
 // infra/bing-search.bicep
@@ -839,7 +839,7 @@ output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 #### Bing Search கருவி:
 
 ```python
-# மூலம்/ஏஜென்டுகள்/கருவிகள்/bing_தேடல்_கருவி.py
+# src/ஏஜெண்டுகள்/கருவிகள்/பிங்_தேடல்_கருவி.py
 import aiohttp
 import asyncio
 
@@ -880,13 +880,13 @@ class BingSearchTool:
 
 ---
 
-## கண்காணிப்பு & கவனிப்பாய்வு
+## கண்காணிப்பு & கண்ணோட்டம்
 
-### 7. டிரேசிங் மற்றும் Application Insights
+### 7. பின் தடம் மற்றும் Application Insights
 
-**நோக்கம்**: ட்ரேசு லாக்கள் மற்றும் Application Insights உடன் முழுமையான கண்காணிப்பு
+**நோக்கம்:** டிரேஸ் லோக்ஸ் மற்றும் Application Insights உடன் விரிவான கண்காணிப்பு
 
-#### Application Insights அமைப்பு:
+#### Application Insights கட்டமைப்பு:
 
 ```bicep
 // infra/monitoring.bicep
@@ -939,7 +939,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### தனிப்பயன் தொலைநுட்ப செயலாக்கம்:
+#### தனிப்பயன் டெலிமெட்ரி செயலாக்கம்:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -953,7 +953,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # பதிவை கட்டமைக்கவும்
+        # பதிவெடுப்பை அமைக்கவும்
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -984,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # தனியுரிமைக்காக சுருக்கவும்
+            'query': query[:100],  # தனியுரிமைக்காக துண்டிக்கவும்
             'results_found': str(results_count > 0)
         }
         
@@ -1045,11 +1045,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. ரெட்-டீமிங் பாதுகாப்பு சரிபார்ப்பு
+### 8. சிவப்பு குழு பாதுகாப்பு சரிபார்ப்பு
 
-**நோக்கம்**: ஏஜென்டுகள் மற்றும் மாடல்களுக்கு தானியங்கி பாதுகாப்பு சோதனை
+**நோக்கம்:** ஏஜென்டுகளுக்கும் மாதிரிகளுக்கும் தானியங்கி பாதுகாப்பு சோதனை
 
-#### ரெட்-டீமிங் அமைப்பு:
+#### சிவப்பு குழு கட்டமைப்பு:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # மொத்த பாதுகாப்பு மதிப்பெண்ணை கணக்கிடுக
+        # மொத்த பாதுகாப்பு மதிப்பெண்ணை கணக்கிடு
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1165,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # அமல்படுத்தல் HTTP கோரிக்கையை ஏஜெண்ட் இடைமுகத்திற்கு (endpoint) அனுப்பும்
-        # டெமோ நோக்கத்திற்காக, தற்காலிக மதிப்பை திருப்புகிறது
+        # செயலாக்கம் ஏஜென்ட் முடிவுச் சுட்டிக்கு HTTP கோரிக்கையை அனுப்பும்
+        # டெமோ நோக்கத்துக்காக இடம்காட்டியை வழங்குகிறது
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1188,7 +1188,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # எளிமைப்படுத்தப்பட்ட பலவீன கண்டறிதல்
+        # எளிமைப்படுத்தப்பட்ட பலவீன் கண்டறிதல்
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1223,14 +1223,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # அடிப்படை மதிப்பீடு: 100 - (vulnerabilities / total * 100)
+        # அடிப்படை மதிப்பீடு: 100 - (பலவீனங்கள் / மொத்தம் * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # தீவிரத்தன்மையின் அடிப்படையில் மதிப்பெண்ணை குறைக்கிறது
+        # தீவிரத்தன்மையின் அடிப்படையில் மதிப்பெண்ணை குறைக்கவும்
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1248,13 +1248,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# டெபிளாய்மென்ட் இலிருந்து ஏஜெண்ட் எண்ட்பாயிண்ட் பெறவும்
+# பதிவேற்றத்திலிருந்து ஏஜென்ட் இடைமுகத்தை பெறவும்
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# பாதுகாப்பு ஸ்கேன் இயக்கவும்
+# பாதுகாப்பு ஸ்கேன் ஓட்டவும்
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1264,16 +1264,16 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. ஏஜென்ட் மதிப்பீடு மதிப்பெண் மாடல்
+### 9. Grader மாதிரியுடன் ஏஜென்ட் மதிப்பீடு
 
-**நோக்கம்**: ஒDedicated மதிப்பீட்டு அமைப்புடன் grader மாடலை பிரிவேற்றுதல்
+**நோக்கம்:** தனியான grader மாதிரியுடன் மதிப்பீட்டு அமைப்பை வினியோகம் செய்
 
-#### மதிப்பீட்டாளர் மாடல் அமைப்பு:
+#### Grader மாதிரி கட்டமைப்பு:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1311,7 +1311,7 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
 }
 ```
 
-#### மதிப்பீடு கட்டமைப்பு:
+#### மதிப்பீட்டு கட்டமைப்பு:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1351,10 +1351,10 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # ஏஜென்ட் பதிலைப் பெறவும்
+        # ஏஜென்ட் பதிலைப் பெறுக
         agent_response = await self._get_agent_response(user_query)
         
-        # பதிலை மதிப்பீடு செய்யவும்
+        # பதிலைக் மதிப்பிடு
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1425,7 +1425,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # JSON பதிலை பார்ஸ் செய்யவும்
+            # JSON பதிலை பகுப்பாய்வு செய்
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1487,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### சோதனை வழக்குகள் அமைப்பு:
+#### சோதனை வழக்குகள் கட்டமைப்பு:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1526,13 +1526,13 @@ class AgentEvaluator:
 
 ---
 
-## தனித்துவமைப்பு & புதுப்பிப்புகள்
+## தனிப்பயனாக்கம் & புதுப்பிப்புகள்
 
-### 10. Container App தனிப்பயன் அமைப்பு
+### 10. Container App தனிப்பயனாக்கம்
 
-**நோக்கம்**: container app உள்ளமைவை புதுப்பித்து தனிப்பயன் UI கொண்டு மாற்றுதல்
+**நோக்கம்:** container app கட்டமைப்பை புதுப்பித்து தனிப்பயன் UI உடன் மாற்று
 
-#### இயக்கத்திட்ட தொகுப்பு:
+#### டைனமிக் கட்டமைப்பு:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1548,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### தனிப்பயன் முன்னணி கட்டமைப்பு:
+#### தனிப்பயன் முன்னணி கட்டடைமைப்பு:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1575,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### கட்டமைத்து வெளியிடும் ஸ்கிரிப்ட்:
+#### கட்டுதல் மற்றும் வினியோக ஸ்கிரிப்ட்:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# சூழல் மாறிகளுடன் தனிப்பயன் இமேஜை கட்டவும்
+# சூழல் மாறில்களுடன் தனிப்பயன் இமேஜை கட்டமைக்கவும்
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,13 +1591,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Azure Container Registry-க்கு புஷ் செய்யவும்
+# Azure Container Registry-க்கு அனுப்பவும்
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# கண்டெய்னர் ஆப்பை புதுப்பிக்கவும்
+# கன்டெய்னர் செயலியை புதுப்பிக்கவும்
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1608,23 +1608,23 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 பிரச்சனைதிருத்த கையேடு
+## 🔧 பிழைதிருத்த வழிகாட்டி
 
-### பொதுவான பிரச்சனைகள் மற்றும் தீர்வுகள்
+### பொதுவான பிரச்சினைகள் மற்றும் தீர்வுகள்
 
-#### 1. Container Apps க்கு கொட்டா வரம்புகள்
+#### 1. Container Apps கோட்டா வரம்புகள்
 
-**பிரச்சனை**: பிரிவேற்றம் பிராந்திய கொட்டா வரம்புகளால் தோல்வியடைகிறது
+**பிரச்சினை:** பிராந்திய கோட்டா வரம்புகள் காரணமாக வினியோகம் தோல்வியாகிறது
 
 **தீர்வு**:
 ```bash
-# தற்போதைய குவோட்டா பயன்பாட்டைச் சரிபார்க்கவும்
+# தற்போதைய ஒதுக்கீட்டு பயன்பாட்டைப் பார்க்கவும்
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# குவோட்டா அதிகரிக்க கோரவும்
+# ஒதுக்கீட்டை அதிகரிக்க கோரவும்
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1635,9 +1635,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. மாடல் பிரிவேற்ற காலாவதி
+#### 2. மாதிரி வினியோகம் காலாவதியாகி போனது
 
-**பிரச்சனை**: API பதிப்பு காலாவதியானதால் மாடல் பிரிவேற்றம் தோல்வி அடைகிறது
+**பிரச்சினை:** API பதிப்பு காலாவதியாகியதால் மாதிரி வினியோகம் தோல்வி
 
 **தீர்வு**:
 ```python
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # இது தற்போதைய பதிப்புகளைப் பெற Azure OpenAI API ஐ அழைக்கும்
+    # இது தற்போதைய பதிப்புகளைப் பெற Microsoft Foundry Models API-ஐ அழைக்கும்
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1664,12 +1664,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # வார்ப்புருவை படித்து புதுப்பிக்கவும்
+    # டெம்பிளேட்டை படித்து புதுப்பிக்கவும்
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # வார்ப்புருவில் பதிப்பை புதுப்பிக்கவும்
+        # டெம்பிளேட்டில் உள்ள பதிப்பை புதுப்பிக்கவும்
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1684,9 +1684,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. நுணுக்கமயமான(Fine-tuning) ஒருங்கிணைவு
+#### 3. நெகிழ்-முனைக்கூத்தமைப்பு (Fine-tuning) ஒருங்கிணைப்பு
 
-**பிரச்சனை**: கனிமையாக்கப்பட்ட மாடல்களை AZD டெம்ப்ளேட்டில் எப்படி ஒருங்கிணைப்பது
+**பிரச்சினை:** AZD டெம்ப்ளேட்டில் நெகிழ்-முனைக்கூத்தமைப்புகளை எவ்வாறு ஒருங்கிணைத்தல்
 
 **தீர்வு**:
 ```python
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,8 +1726,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # அமர்த்தலை (deployment) நன்கு பயிற்சி செய்யப்பட்ட மாதிரியைப் பயன்படுத்த하도록 புதுப்பிக்கவும்
-            # இது Azure CLI-ஐ அழைத்து அமர்த்தலை (deployment) புதுப்பிக்கும்
+            # மீள்பயிற்சி செய்யப்பட்ட மாதிரியைப் பயன்படுத்துவதற்காக டெப்ளாய்மெண்டை புதுப்பிக்கவும்
+            # இது Azure CLI ஐ அழைத்து டெப்ளாய்மெண்டை புதுப்பிக்கும்
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,13 +1736,13 @@ class FineTuningPipeline:
 
 ---
 
-## கேள்விகள் & திறந்த முடிவற்ற ஆய்வு
+## கேள்வி & திறந்த-ended ஆராய்ச்சி
 
 ### அடிக்கடி கேட்கப்படும் கேள்விகள்
 
-#### கே: பல ஏஜெண்டுகளை நிர்வகிப்பதற்கு எளிதான வழி உள்ளதா (வடிவமைப்பு மாதிரி)?
+#### Q: பல ஏஜென்ட்களை எளிதாக வினியோகம் செய்ய வழிமுறை உண்டா (வடிவமைப்பு மாதிரி)?
 
-**பதில்: ஆம்! பல-ஏஜென்ட் மாதிரியைப் பயன்படுத்துங்கள்:**
+**A: అవును! பல-ஏஜென்ட் மாதிரியைப் பயன்படுத்தவும்:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
 
-#### கே: "மாடல் ரவுடர்" ஐ ஒரு மாடலாகவே பிரிவேற்ற முடியுமா (செலவுத் தாக்கம்)?
+#### Q: "மாதிரி ரவுடர்" ஐ மாதிரி போலவே வினியோகம் செய்வதா (செலவுச் தாக்கங்கள்)?
 
-**பதில்: ஆம், கவனமுடன் பரிசீலிக்கவும்:**
+**A: అవును, கவனமாக பரிசீலனை செய்தால்:**
 
 ```python
-# மாதிரி ரூட்டர் செயலாக்கம்
+# மாடல் ரூட்டர் செயலாக்கம்
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1789,17 +1789,17 @@ class ModelRouter:
 ```
 
 **செலவு தாக்கங்கள்:**
-- **சேமிப்பு**: எளிய வினாக்களுக்கு 60-80% செலவு குறைவு
-- **பரிசுத்தங்கள்**: வழிமாற்றல் தர்க்கத்திற்கான சிறு தாமதம் அதிகரிக்கும்
-- **கண்காணிப்பு**: துல்லியம் vs செலவு மெட்ரிக்ஸை கண்காணிக்கவும்
+- **சேமிப்பு**: எளிய கேள்விகளுக்கு 60-80% செலவு குறைப்பு
+- **மாற்றங்கள்**: வழிமாற்று தர்க்கத்திற்கான சிறிய ஒத்திசைவு அதிகரிப்பு
+- **கண்காணிப்பு**: துல்லியம் vs செலவு அளவுருக்களை கண்காணிக்கவும்
 
-#### கே: azd டெம்ப்ளேட்டிலிருந்து ஒரு fine-tuning வேலை ஆரம்பிக்கலாமா?
+#### Q: azd டெம்ப்ளேட்டிலிருந்து நெகிழ்-முனைக்கூத்தமைப்பு பணியை தொடங்க முடியுமா?
 
-**பதில்: ஆம், post-provisioning ஹுக் மூலம்:**
+**A: అవును, பின்-வினியோக ஹுக்களின் மூலம்:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - நுணுக்க சீரமைப்பு ஒருங்கிணைப்பு
+# hooks/postprovision.sh - நுணுக்கச் சரிசெய்தல் ஒருங்கிணைவு
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1808,10 +1808,10 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# நுணுக்க சீரமைப்பு பணியை துவங்கவும்
+# நுணுக்கச் சரிசெய்தல் வேலை தொடங்கவும்
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
 # கண்காணிப்புக்காக வேலை ID-ஐ சேமிக்கவும்
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
@@ -1820,9 +1820,9 @@ echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
 
-### மேம்பட்ட காட்சிகள்
+### மேம்பட்ட சூழ்நிலைகள்
 
-#### பல-பிராந்திய பிரிவேற்று தந்திரம்
+#### பல-பிராந்திய வினியோகம் ռազմத்திட்டம்
 
 ```bicep
 // infra/multi-region.bicep
@@ -1858,7 +1858,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-#### செலவு 최优化 கட்டமைப்பு
+#### செலவு சீர்திருத்தக் கட்டமைப்பு
 
 ```python
 # src/optimization/cost_optimizer.py
@@ -1870,7 +1870,7 @@ class CostOptimizer:
         """Analyze usage to recommend optimizations"""
         recommendations = []
         
-        # மாதிரி பயன்பாடு பகுப்பாய்வு
+        # மாதிரி பயன்பாட்டு பகுப்பாய்வு
         model_usage = self.analytics.get_model_usage()
         for model, usage in model_usage.items():
             if usage['utilization'] < 0.3:
@@ -1903,71 +1903,71 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ நிறுவுவதற்கு தயார் ARM டெம்ப்ளேட்
+## ✅ அமைக்கத் தயாரான ARM டெம்ப்ளேட்
 
-> **✨ இது உண்மையாகவே உள்ளது மற்றும் செயல்படுகிறது!**  
-> மேலே உள்ள கருத்து முறை கோடு உதாரணங்களைவிட, ARM டெம்ப்ளேட் இந்த தொகுதியில் உள்ள ஒரு **உண்மையான, செயல்படும் இன்ஃப்ராஸ்ட்ரக்சர் நிறுவல்** ஆகும்.
+> **✨ இது உண்மையில் உள்ளது மற்றும் செயல்படுகிறது!**  
+> மேலே உள்ள கருத்து அடிப்படையிலான குறியீட்டு உதாரணங்களைவிட, இந்த ARM டெம்ப்ளேட் இந்த காப்பகத்தில் அடங்கியுள்ள ஒரு **உண்மையான, செயல்படும் இன்ஃப்ராஸ்ட்ரக்சர் டெப்பிளாய்மென்ட்** ஆகும்.
 
 ### இந்த டெம்ப்ளேட் உண்மையில் என்ன செய்கிறது
 
-இந்த ARM டெம்ப்ளேட் [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) பல-ஏஜென்ட் அமைப்பிற்கு தேவையான **அனைத்து Azure இன்ஃப்ராஸ்ட்ரக்சரையும்** வழங்குகிறது. இது **தயாராக இயக்கு ஒரு ஒரே கூறு** — மற்ற அனைத்தும் மேம்பாட்டை தேவைப்படுத்தும்.
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) இல் உள்ள ARM டெம்ப்ளேட் பல-ஏஜெண்ட் அமைப்பிற்கு தேவையான **அனைத்து Azure இன்ஃப்ராஸ்ட்ரக்சரையும்** வழங்குகிறது. இது **அடிக்கடி இயங்கத் தயாரான ஒரே கூறு** - மற்ற அனைத்தும் மேம்பாட்டை தேவைப்படுத்தும்.
 
-### ARM டெம்ப்ளேட்டில் என்ன சேர்க்கப்பட்டுள்ளது
+### ARM டெம்ப்ளேட்டில் சேர்க்கப்பட்டவை
 
-The ARM template located in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) includes:
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) இல் உள்ள ARM டெம்ப்ளேட்:
 
-#### **முழுமையான அமைப்பு**
-- ✅ **பல பிரதேச Azure OpenAI** நிறுவல்கள் (GPT-4o, GPT-4o-mini, embeddings, grader)
-- ✅ வெக்டர் தேடல் திறன்களுடன் **Azure AI Search**
-- ✅ ஆவணங்கள் மற்றும் பதிவேற்றக் கொண்டெயினர்களுடன் **Azure Storage**
-- ✅ சுய-அளவீட்டுடன் கூடிய **Container Apps Environment**
-- ✅ **Agent Router & Frontend** கன்டெய்னர் செயலிகள்
-- ✅ அரட்டை வரலாறு நிலைத்தன்மைக்கு **Cosmos DB**
-- ✅ விரிவான கண்காணிப்புக்காக **Application Insights**
-- ✅ பாதுகாப்பான ரகசிய மேலாண்மைக்காக **Key Vault**
-- ✅ கோப்பு செயலாக்கத்திற்கான **Document Intelligence**
-- ✅ நேரடி தகவலுக்கான **Bing Search API**
+#### **முழுமையான இன்ஃப்ராஸ்ட்ரக்சர்**
+- ✅ **பல பிரதேச Microsoft Foundry மாதிரிகள்** deploymentகள் (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Azure AI Search** வெக்டர் தேடல் திறன்களுடன்
+- ✅ **Azure Storage** ஆவணங்கள் மற்றும் பதிவேற்றக் கொன்டெய்னர்கள் உடன்
+- ✅ **Container Apps Environment** தானியங்கி ஸ்கேலிங் உடன்
+- ✅ **Agent Router & Frontend** container apps
+- ✅ **Cosmos DB** அரட்டை வரலாறு நிலைத்தன்மைக்காக
+- ✅ **Application Insights** விரிவான கண்காணிப்புக்காக
+- ✅ **Key Vault** பாதுகாப்பான ரகசிய மேலாண்மைக்காக
+- ✅ **Document Intelligence** கோப்பு செயலாக்கத்துக்காக
+- ✅ **Bing Search API** நேரடி தகவலுக்காக
 
-#### **நிறுவல் முறைகள்**
-| முறை | பயன்பாட்டு வழக்கு | வளங்கள் | மதிப்பிடப்பட்ட செலவு/மாதம் |
+#### **Deployment Modes**
+| முறை | பயன்பாடு | வளங்கள் | மாதத்திற்கான மதிப்பிடப்பட்ட செலவு |
 |------|----------|-----------|---------------------|
-| **குறைந்தபட்சம்** | அபிவிருத்தி, சோதனை | Basic SKUs, Single region | $100-370 |
-| **சாதாரணம்** | உற்பத்தி, மிதமான அளவு | Standard SKUs, Multi-region | $420-1,450 |
-| **ப்ரீமியம்** | நிறுவன, உயர்ந்த அளவு | Premium SKUs, HA setup | $1,150-3,500 |
+| **Minimal** | வளர்ச்சி, சோதனை | அடிப்படை SKUs, ஒற்றை பிரதேசம் | $100-370 |
+| **Standard** | உற்பத்தி, மிதமான அளவு | Standard SKUs, பல பிரதேசங்கள் | $420-1,450 |
+| **Premium** | நிறுவன மட்டம், பெரிய அளவு | Premium SKUs, HA அமைப்பு | $1,150-3,500 |
 
-### 🎯 விரைந்த நிறுவல் விருப்பங்கள்
+### 🎯 விரைவு டெப்பிளாய்மென்ட் விருப்பங்கள்
 
-#### விருப்பம் 1: ஒரே கிளிக் Azure நிறுவல்
+#### விருப்பம் 1: ஒரே-கிளிக் Azure டெப்பிளாய்மென்ட்
 
 [![Azure-க்கு நிறுவு](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### விருப்பம் 2: Azure CLI மூலம் நிறுவல்
+#### விருப்பம் 2: Azure CLI டெப்பிளாய்மென்ட்
 
 ```bash
 # களஞ்சியத்தை கிளோன் செய்
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# பதிவேற்றும் ஸ்கிரிப்டை இயக்கக்கூடியதாக மாற்று
+# பயன்படுத்துதல் ஸ்கிரிப்டை இயக்கக்கூடியதாக மாற்று
 chmod +x deploy.sh
 
-# இயல்பான அமைப்புகளுடன் (சாதாரண நிலை) வெளியிடு
+# இயல்புநிலை அமைப்புகளுடன் (ஸ்டாண்டர்டு முறை) பதிப்பிடு
 ./deploy.sh -g myResourceGroup
 
-# பிரீமியம் அம்சங்களுடன் உற்பத்திக்காக வெளியிடு
+# உற்பத்திக்காக மேம்பட்ட அம்சங்களுடன் பதிப்பிடு
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# வளர்ச்சிக்காக குறைந்தபட்ச பதிப்பை வெளியிடு
+# வளர்ச்சிக்காக குறைந்தபட்ச பதிப்பை பதிப்பிடு
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### விருப்பம் 3: நேரடியாக ARM டெம்ப்ளேட் மூலம் நிறுவல்
+#### விருப்பம் 3: நேரடி ARM டெம்ப்ளேட் டெப்பிளாய்மென்ட்
 
 ```bash
-# வளக் குழு உருவாக்கவும்
+# வளக் குழுவை உருவாக்கவும்
 az group create --name myResourceGroup --location eastus2
 
-# வார்ப்புருவை நேரடியாக நிறுவவும்
+# வார்ப்புருவை நேரடியாக அமைக்கவும்
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1977,7 +1977,7 @@ az deployment group create \
 
 ### டெம்ப்ளேட் வெளியீடுகள்
 
-வெற்றிகரமாக நிறுவப்பட்ட பிறகு, நீங்கள் பெறுவீர்கள்:
+வெற்றிகரமாக டெப்பிளாய்மென்ட் முடிந்தவுடன், நீங்கள் பெறுவீர்கள்:
 
 ```json
 {
@@ -1991,13 +1991,13 @@ az deployment group create \
 }
 ```
 
-### 🔧 நிறுவலுக்குப் பிறகு அமைப்புகள்
+### 🔧 டெப்பிளாய்மென்ட் பிறகு கட்டமைப்பு
 
-ARM டெம்ப்ளேட் இன்ஃப்ராஸ்ட்ரக்சர் புரோவிஷனிங்கை கையாள்கிறது. நிறுவலுக்குப் பிறகு:
+ARM டெம்ப்ளேட் இன்ஃப்ராஸ்ட்ரக்சர் வழங்குதலை கையாளும். டெப்பிளாய்மென்ட் முடிந்த பிறகு:
 
-1. **தேடல் இன்டெக்ஸ் அமைக்கவும்**:
+1. **தேடல் இன்டெக்ஸை அமைக்கவும்**:
    ```bash
-   # கொடுக்கப்பட்ட தேடல் ஸ்கீமாவைப் பயன்படுத்தவும்
+   # கொடுக்கப்பட்ட தேடல் வடிவமைப்பை பயன்படுத்தவும்
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
@@ -2006,16 +2006,16 @@ ARM டெம்ப்ளேட் இன்ஃப்ராஸ்ட்ரக்
 
 2. **ஆரம்ப ஆவணங்களை பதிவேற்றவும்**:
    ```bash
-   # தயாரிப்பு கையேடுகள் மற்றும் அறிவுத்தளம் பதிவேற்றவும்
+   # தயாரிப்பு கையேடுகள் மற்றும் அறிவுத் தளத்தை பதிவேற்றவும்
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **ஏஜென்ட் கோடையை நிறுவவும்**:
+3. **ஏஜென்ட் குறியீட்டை டெப்பிளாய் செய்யவும்**:
    ```bash
-   # உண்மையான ஏஜென்ட் பயன்பாடுகளை உருவாக்கி மற்றும் வெளியிடவும்
+   # உண்மையான முகவர் பயன்பாடுகளை கட்டி மற்றும் நிலைநிறுத்தவும்
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2023,9 +2023,9 @@ ARM டெம்ப்ளேட் இன்ஃப்ராஸ்ட்ரக்
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ தனிப்பயனாக்கும் விருப்பங்கள்
+### 🎛️ தனிப்பயன் மாற்று விருப்பங்கள்
 
-உங்கள் நிறுவலை தனிப்பயனாக்க `azuredeploy.parameters.json` ஐ திருத்தவும்:
+உங்கள் டெப்பிளாய்மெண்டை தனிப்பயனாக்க `azuredeploy.parameters.json` ஐ திருத்தவும்:
 
 ```json
 {
@@ -2039,147 +2039,147 @@ ARM டெம்ப்ளேட் இன்ஃப்ராஸ்ட்ரக்
 }
 ```
 
-### 📊 நிறுவல் அம்சங்கள்
+### 📊 டெப்பிளாய்மென்ட் அம்சங்கள்
 
-- ✅ **தேவையான முன்னிலை சரிபார்ப்பு** (Azure CLI, கோட்டாக்கள், அனுமதிகள்)
-- ✅ தானியக்க failover உடன் **பல பிரதேச உயர் கிடைப்புத்தன்மை**
-- ✅ Application Insights மற்றும் Log Analytics உடன் **விரிவான கண்காணிப்பு**
-- ✅ Key Vault மற்றும் RBAC உடன் **பாதுகாப்பு சிறந்த நடைமுறைகள்**
-- ✅ கட்டமைக்கக்கூடிய நிறுவல் முறைகளுடன் **செலவு சிறப்பாக்கம்**
-- ✅ தேவை மாதிரிகளின் அடிப்படையில் **தானியங்கி அளவீடு**
-- ✅ Container Apps திருத்தங்களுடன் **ஏற்கெனவே இயங்கும்போது இடைநீக்கம் இல்லாத புதுப்பிப்புகள்**
+- ✅ **முன்-தேவை சரிபார்ப்பு** (Azure CLI, குவோட்டாக்கள், அனுமதிகள்)
+- ✅ **பல பிரதேச உயர் கிடைமட்டத்தன்மை** தானியங்கி failover உடன்
+- ✅ **விரிவான கண்காணிப்பு** Application Insights மற்றும் Log Analytics உடன்
+- ✅ **பாதுகாப்பு சிறந்த நடைமுறைகள்** Key Vault மற்றும் RBAC உடன்
+- ✅ **செலவு நுனுக்கம்** கட்டமைக்கக்கூடிய டெப்பிளாய்மெண்ட் முறைகளுடன்
+- ✅ **தேவையின்படி தானியங்கி ஸ்கேலிங்**
+- ✅ **நிறுத்தமில்லா புதுப்பிப்புகள்** Container Apps திருத்தங்களின் மூலம்
 
 ### 🔍 கண்காணிப்பு மற்றும் மேலாண்மை
 
-நிறுவப்பட்ட பிறகு, உங்கள் தீர்வை கீழ்காணும் வழிகளில் கண்காணிக்கவும்:
+டெப்பிளாய்மென்ட் முடிந்தவுடன், உங்கள் தீர்வினை கீழ்காணும் வழிகளிலூடாக கண்காணிக்கலாம்:
 
-- **Application Insights**: செயல்திறன் அளவுகோல்கள், சார்பு தடத்தினைப் பின்தொடர்தல், மற்றும் கஸ்டம் டெலிமெட்ரி
-- **Log Analytics**: அனைத்து கூறுகளிடமிருந்தும் மையப்படுத்தப்பட்ட பதிவு
-- **Azure Monitor**: வளங்களின் உடல்நிலை மற்றும் கிடைப்புத்தன்மை கண்காணிப்பு
-- **Cost Management**: நேரடி செலவு கண்காணிப்பு மற்றும் பட்ஜெட் எச்சரிக்கைகள்
+- **Application Insights**: செயல்திறன் அளவுகோல்கள், சார்பு கண்காணிப்பு, மற்றும் தனிப்பயன் டெலிமெட்ரி
+- **Log Analytics**: அனைத்து கூறுகளிலிருந்தும் மையமாக்கப்பட்ட பதிவு
+- **Azure Monitor**: வளங்களின் சுகாதாரம் மற்றும் கிடைக்கும் திறன் கண்காணிப்பு
+- **Cost Management**: நேரடி செலவுப் கண்காணிப்பு மற்றும் பட்ஜெட் எச்சரிக்கைகள்
 
 ---
 
-## 📚 முழுமையான அமல்படுத்தல் வழிகாட்டி
+## 📚 முழுமையான செயலாக்க வழிகாட்டு
 
-இந்த காட்சி ஆவணம் ARM டெம்ப்ளேட்டுடன் இணைந்து, உற்பத்திக்கு தயாரான பல-ஏஜென்ட் வாடிக்கையாளர் ஆதரவு தீர்வை நிறுவ தேவையான அனைத்தையும் வழங்குகிறது. அமல்படுத்தல் கீழ்காணும் அம்சங்களை உள்ளடக்குகிறது:
+இந்த காட்சி ஆவணம் மற்றும் ARM டெம்ப்ளேட் இணைந்திருத்தல் உற்பத்திக்கு தயாரான பல-ஏஜென்ட் வாடிக்கையாளர் ஆதரவு தீர்வை நிறுவ தேவையான அனைத்தையும் வழங்குகிறது. செயலாக்கம் கீழ்க்காணுமாறு உள்ளடக்கியது:
 
-✅ **கட்டமைப்பு வடிவமைப்பு** - கூறு தொடர்புகளுடன் விரிவான அமைப்பு வடிவமைப்பு  
-✅ **இன்ஃப்ராஸ்ட்ரக்சர் வழங்கல்** - ஒரே கிளிக்கில் நிறுவுவதற்கான முழுமையான ARM டெம்ப்ளேட்  
-✅ **ஏஜென்ட் கட்டமைப்பு** - வாடிக்கையாளர் மற்றும் சரக்கு ஏஜென்டுகளுக்கான விரிவான அமைப்பு  
-✅ **பல-மாதிரி நிறுவல்** - பிரதேசங்கள் முழுவதும் மாதிரி இடமிடுதல் களவியல்  
-✅ **தேடல் ஒருங்கிணைப்பு** - வெக்டர் திறன்களுடன் AI Search மற்றும் தரவு குறியீடு  
-✅ **பாதுகாப்பு அமுலாக்கம்** - ரெட்-டீமிங், பலவீன ஸ்கேனிங் மற்றும் பாதுகாப்பான நடைமுறைகள்  
-✅ **கண்காணிப்பு & மதிப்பீடு** - விரிவான டெலிமெட்ரி மற்றும் ஏஜென்ட் மதிப்பீடு கட்டமைப்பு  
-✅ **உற்பத்தி தயார்மை** - HA மற்றும் விபத்து மீட்புடன் நிறுவன தரநிலை நிறுவல்  
-✅ **செலவு சிறப்பாக்கம்** - அறிவார்ந்த ருடிங் மற்றும் பயன்பாடு அடிப்படையிலான அளவீடு  
-✅ **பிரச்சனை தீர்வு வழிகாட்டி** - பொதுவான பிரச்சனைகள் மற்றும் தீர்வு முறைமைகள்
+✅ **கட்டமைப்பு வடிவு** - கூறு தொடர்புகள் உடன் முழுமையான அமைப்பு வடிவமைப்பு  
+✅ **இன்ஃப்ராஸ்ட்ரக்சர் வழங்குதல்** - ஒரே-கிளிக் டெப்பிளாய்மென்ட் க்கான முழு ARM டெம்ப்ளேட்  
+✅ **ஏஜென்ட் கட்டமைப்பு** - வாடிக்கையாளர் மற்றும் சரக்குத் தொடர்பு ஏஜென்ட்களுக்கு விரிவான அமைப்பு  
+✅ **பல-மாதிரி டெப்பிளாய்மென்ட்** - பிரதேசங்களுக்கு இடையில் மாதிரிகளின் தானே நிலைத்த இடம்கொடுத்து நடத்தை  
+✅ **தேடல் ஒருங்கிணைவு** - வெக்டர் திறன்களுடன் AI Search மற்றும் தரவு இன்டெக்சிங்  
+✅ **பாதுகாப்பு அமலாக்கம்** - ரெட்-டீமிங், பாதுக்காப்பு துளைமுனைய சோதனை மற்றும் பாதுகாப்பான நடைமுறைகள்  
+✅ **கண்காணிப்பு & மதிப்பீடு** - விரிவான டெலிமெட்ரி மற்றும் ஏஜென்ட் மதிப்பீட்டு கட்டமைப்பு  
+✅ **உற்பத்தி தயார்** - HA மற்றும் பேரழிவு மீட்பு உடன் நிறுவன தரமான டெப்பிளாய்மென்ட்  
+✅ **செலவு நுணுக்கம்** - அறிவார்ந்த வழிசெலுத்தல் மற்றும் பயன்பாட்டிற்க்கேற்ப ஸ்கேலிங்  
+✅ **பிட்டிகை நீக்க வழிகாட்டி** - பொதுவான பிழைகள் மற்றும் தீர்வு முன்னெடுப்புகள்
 
 ---
 
 ## 📊 சுருக்கம்: நீங்கள் என்ன கற்றுக்கொண்டீர்கள்
 
-### கவரப்பட்ட கட்டமைப்பு மாதிரிகள்
+### கవுர்ந்த கட்டமைப்பு மாதிரிகள்
 
-✅ **பல-ஏஜென்ட் அமைப்பு வடிவமைப்பு** - ஒதுக்கப்பட்ட மாதிரிகளுடன் சிறப்பு ஏஜென்டுகள் (வாடிக்கையாளர் + சரக்கு)  
-✅ **பல-பிரதேச திட்டம்** - செலவு சிறப்பாக்கத்திற்கும் மீளமைப்பிற்கும் மாதிரி இடமிடுதல்  
-✅ **RAG கட்டமைப்பு** - நிலையான பதில்களுக்காக வெக்டர் எம்பெடிங்க்ஸ் கொண்ட AI Search ஒருங்கிணைப்பு  
-✅ **ஏஜென்ட் மதிப்பீடு** - தர நலன்தெரிவிற்கான தனி கிரேடர் மாதிரி  
-✅ **பாதுகாப்பு கட்டமைப்பு** - ரெட்-டீமிங் மற்றும் பலவீன ஸ்கேனிங் மாதிரிகள்  
-✅ **செலவு சிறப்பாக்கம்** - மாதிரி வழிச்செலுத்தல் மற்றும் திறன் திட்டமிடல் கொள்கைகள்  
-✅ **உற்பத்தி கண்காணிப்பு** - கஸ்டம் டெலிமெட்ரியுடன் Application Insights  
+✅ **பல-ஏஜென்ட் அமைப்பு வடிவமைப்பு** - குறிப்பிட்ட ஏஜென்ட்கள் (வாடிக்கையாளர் + சரக்கு) ஆகியவை ஒதுக்கப்பட்ட மாதிரிகளை பயன்படுத்துகின்றன  
+✅ **பல பிரதேச டெப்பிளாய்மென்ட்** - செலவோட்டம் மற்றும் மீள்சீரமைப்புக்கான திறமையான மாதிரி அமைத்தல்  
+✅ **RAG கட்டமைப்பு** - தரை அடிப்படையிலான பதில்களுக்கு வெக்டர் எம்பெட்டிங்க்களுடன் AI Search ஒருங்கிணைவு  
+✅ **ஏஜென்ட் மதிப்பீடு** - தரம் மதிப்பிடுவதற்காக ஒதுக்கப்பட்ட grader மாதிரி  
+✅ **பாதுகாப்பு மூலம்** - ரெட்-டீமிங் மற்றும் பலவீனத் திருட்டு மாதிரிகள்  
+✅ **செலவு நுணுக்கம்** - மாதிரி வழிசெலுத்தல் மற்றும் திறன் திட்டமிடல்  
+✅ **உற்பத்தி கண்காணிப்பு** - தனிப்பயன் டெலிமெட்ரியுடன் Application Insights
 
-### இந்த ஆவணம் வழங்குவது
+### இந்த ஆவணம் என்ன வழங்குகிறது
 
 | கூறு | நிலை | எங்கு காணலாம் |
 |-----------|--------|------------------|
-| **இன்ஃப்ராஸ்ட்ரக்சர் டெம்ப்ளேட்** | ✅ நிறுவ தயாராக உள்ளது | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **கட்டமைப்பு வரைபடங்கள்** | ✅ முழுமை | மேலே உள்ள Mermaid வரைபடம் |
-| **கோட் உதாரணங்கள்** | ✅ குறிப்பு அமல்படுத்தல்கள் | இந்த ஆவணத்தின் முழுவதும் |
-| **கட்டமைப்பு மாதிரிகள்** | ✅ விரிவான வழிகாட்டி | மேல் உள்ள பிரிவுகள் 1-10 |
-| **ஏஜென்ட் அமல்படுத்தல்கள்** | 🔨 இதனை நீங்கள் உருவாக்க வேண்டும் | ~40 மணி நேர அபிவிருத்தி |
-| **முன்னணி UI** | 🔨 இதனை நீங்கள் உருவாக்க வேண்டும் | ~25 மணி நேர அபிவிருத்தி |
-| **தரவு பைப்‌லின்கள்** | 🔨 இதனை நீங்கள் உருவாக்க வேண்டும் | ~10 மணி நேர அபிவிருத்தி |
+| **Infrastructure Template** | ✅ அமைக்கத் தயாராக உள்ளது | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ முழுமை | மேலே உள்ள Mermaid வரைபடம் |
+| **Code Examples** | ✅ குறிப்பு நடைமுறைகள் | இந்த ஆவணத்தின் முழுவதும் |
+| **Configuration Patterns** | ✅ விரிவான வழிகாட்டி | மேலே பகுதியில் 1-10 |
+| **Agent Implementations** | 🔨 நீங்கள் இதை உருவாக்க வேண்டும் | ~40 மணி வேலை |
+| **Frontend UI** | 🔨 நீங்கள் இதை உருவாக்க வேண்டும் | ~25 மணி வேலை |
+| **Data Pipelines** | 🔨 நீங்கள் இதை உருவாக்க வேண்டும் | ~10 மணி வேலை |
 
-### நிஜ நிலை: உண்மையில் என்ன இருக்கிறது
+### உண்மைக் சரிபார்ப்பு: எது உண்மையில் உள்ளது
 
-**கிடைக்கும் தொகுதியில் (தற்போது தயாராக):**
-- ✅ 15+ Azure சேவைகளைக் கொண்ட ARM டெம்ப்ளேட் (azuredeploy.json)
-- ✅ சரிபார்ப்புடன் கூடிய நிறுவல் ஸ்கிரிப்ட் (deploy.sh)
-- ✅ அளவுரு கான்பிகரேஷன் (azuredeploy.parameters.json)
+**காப்பகத்தில் (இப்போது தயாராக):**
+- ✅ 15+ Azure சேவைகளை டெப்பிளாய் செய்யும் ARM டெம்ப்ளேட் (azuredeploy.json)
+- ✅ சரிபார்ப்பு உடன் டெப்பிளாய்மென்ட் ஸ்கிரிப்ட் (deploy.sh)
+- ✅ பாராமீட்டர் கட்டமைப்பு (azuredeploy.parameters.json)
 
-**ஆவணத்தில் குறிப்பிடப்படவுள்ளவை (நீங்கள் உருவாக்கவேண்டும்):**
-- 🔨 ஏஜென்ட் அமல்படுத்தல் கோடை (~30-40 மணிநேரம்)
-- 🔨 ரவுடிங் சேவை (~12-16 மணிநேரம்)
-- 🔨 முன்னணி பயன்பாடு (~20-30 மணிநேரம்)
-- 🔨 தரவு அமைப்பு ஸ்கிரிப்ட்கள் (~8-12 மணிநேரம்)
-- 🔨 கண்காணிப்பு கட்டமைப்பு (~10-15 மணிநேரம்)
+**ஆவணத்தில் குறிப்பிடப்பட்டுள்ளது (நீங்கள் உருவாக்கும்):**
+- 🔨 ஏஜென்ட் செயலாக்கக் குறியீடு (~30-40 மணி)
+- 🔨 மார்க்கெட்டிங் சேவை (~12-16 மணி)
+- 🔨 முன் இறுதிப் பயன்பாடு (~20-30 மணி)
+- 🔨 தரவு அமைப்பு ஸ்கிரிப்ட்கள் (~8-12 மணி)
+- 🔨 கண்காணிப்பு கட்டமைப்பு (~10-15 மணி)
 
 ### உங்கள் அடுத்த படிகள்
 
-#### நீங்கள் இன்ஃப்ராஸ்ட்ரக்சரை நிறுவ விரும்பினால் (30 நிமிடம்)
+#### நீங்கள் இன்ஃப்ராஸ்ட்ரக்சரை டெப்பிளாய்மென்ட் செய்ய விரும்பினால் (30 நிமிடம்)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### முழு அமைப்பினை உருவாக்க விரும்பினால் (80-120 மணிநேரம்)
-1. ✅ இந்த கட்டமைப்பு ஆவணத்தை படித்து புரிந்துகொள்ளவும் (2-3 மணிநேரம்)
-2. ✅ ARM டெம்ப்ளேட் பயன்படுத்தி இன்ஃப்ராஸ்ட்ரக்சரை நிறுவவும் (30 நிமிடம்)
-3. 🔨 குறிப்பு கோட் மாதிரிகளைக் கொண்டு ஏஜென்டுகளை செயல்படுத்தவும் (~40 மணிநேரம்)
-4. 🔨 FastAPI/Express மூலம் வழிசெய்தி சேவையை உருவாக்கவும் (~15 மணிநேரம்)
-5. 🔨 React/Vue மூலம் முன்னணி UI உருவாக்கவும் (~25 மணிநேரம்)
-6. 🔨 தரவு பைப்‌லைன் மற்றும் தேடல் இன்டெக்ஸை கட்டமைக்கவும் (~10 மணிநேரம்)
-7. 🔨 கண்காணிப்பும் மதிப்பீடும் சேர்க்கவும் (~15 மணிநேரம்)
-8. ✅ சோதனை, பாதுகாப்பு மற்றும் சிறப்பாக்கம் (~10 மணிநேரம்)
+#### முழு அமைப்பை உருவாக்க விரும்பினால் (80-120 மணி)
+1. ✅ இந்த கட்டமைப்பு ஆவணத்தைப் படித்து புரிந்துகொள்ளுங்கள் (2-3 மணி)
+2. ✅ ARM டெம்ப்ளேட் பயன்படுத்தி இன்ஃப்ராஸ்ட்ரக்சர் டெப்பிளாய்மென்்ட் செய்யுங்கள் (30 நிமிடம்)
+3. 🔨 குறிப்பு கோடு மாதிரிகளை பயன்படுத்தி ஏஜென்ட்களை அமல்படுத்துங்கள் (~40 மணி)
+4. 🔨 FastAPI/Express கொண்டு மாருதவார சேவையை உருவாக்குங்கள் (~15 மணி)
+5. 🔨 React/Vue கொண்டு முன் இறுதி UI உருவாக்குங்கள் (~25 மணி)
+6. 🔨 தரவு குழாய் மற்றும் தேடல் இன்டெக்ஸ் அமைக்கவும் (~10 மணி)
+7. 🔨 கண்காணிப்பு மற்றும் மதிப்பீடு சேர்க்கவும் (~15 மணி)
+8. ✅ சோதனை செய்து, பாதுகாப்பு செய்யவும் மற்றும் 최்Optimize செய்யவும் (~10 மணி)
 
-#### பல-ஏஜென்ட் மாதிரிகளை கற்க விரும்பினால் (அறிவு)
-- 📖 கட்டமைப்பு வரைபடம் மற்றும் கூறு தொடர்புகளை ஆய்வு செய்யவும்
-- 📖 SearchTool, BingTool, AgentEvaluator ஆகியோருக்கான கோட் உதாரணங்களைப் படியுங்கள்
-- 📖 பல-பிரதேச நிறுவல் யுக்தியைப் புரிந்து கொள்ளவும்
-- 📖 மதிப்பீடு மற்றும் பாதுகாப்பு கட்டமைப்புகளை கற்றுக்கொள்ளவும்
-- 📖 இந்த மாதிரிகளை உங்கள் சொந்த திட்டங்களில் பயன்படுத்துங்கள்
+#### பல-ஏஜென்ட் வடிவங்களை கற்க விரும்பினால் (அறிவு)
+- 📖 கட்டமைப்பு வரைபடம் மற்றும் கூறுகளின் தொடர்புகளை பரிசீலிக்கவும்
+- 📖 SearchTool, BingTool, AgentEvaluator உடனான கோடு உதாரணங்களை ஆய்வு செய்யவும்
+- 📖 பல பிரதேச டெப்பிளாய்மென்ட் रणनीதியைப் புரிந்துகொள்ளவும்
+- 📖 மதிப்பீடு மற்றும் பாதுகாப்பு கட்டமைப்புகளை கற்றுக் கொள்ளவும்
+- 📖 உங்கள் சொந்த திட்டங்களுக்கு இத்தகைய உதாரணங்களை பொருந்தவைத்து பயன்படுத்தவும்
 
-### முக்கிய அம்சங்கள்
+### முக்கியமான எடுத்துக்காட்டுகள்
 
-1. **இன்ஃப்ராஸ்ட்ரக்சர் மற்றும் பயன்பாடு** - ARM டெம்ப்ளேட் இன்ஃப்ராஸ்ட்ரக்சரை வழங்குகிறது; ஏஜென்டுகள் மேம்பாட்டைத் தேவைப்படுத்தும்  
-2. **பல-பிரதேச திட்டம்** - மாதிரி திட்டமிடல் செலவினத்தை குறைக்கும் மற்றும் நம்பகத்தன்மையை மேம்படுத்தும்  
-3. **மதிப்பீடு கட்டமைப்பு** - தனியான கிரேடர் மாதிரி தொடர்ச்சியான தர மதிப்பீட்டை சாத்தியம் செய்கிறது  
-4. **பாதுகாப்பு முதலில்** - ரெட்-டீமிங் மற்றும் பலவீன ஸ்கேனிங் உற்பத்திக்குப் அவசியம்  
-5. **செலவு சிறப்பாக்கம்** - GPT-4o மற்றும் GPT-4o-mini இடையே அறிவார்ந்த வழிச்செலுத்தல் 60-80% சேமிக்கிறது
+1. **இன்ஃப்ராஸ்ட்ரக்சர் Vs பயன்பாடு** - ARM டெம்ப்ளேட் இன்ஃப்ராஸ்ட்ரக்சரையே வழங்குகிறது; ஏஜென்ட்கள் மேம்பாட்டை தேவைப்படுத்தும்
+2. **பல பிரதேச стратегии** - மாதிரி இடமாற்றம் செலவுகளை குறைக்கும் மற்றும் நம்பகத்தன்மையை மேம்படுத்தும்
+3. **மதிப்பீட்டு கட்டமைப்பு** - ஒதுக்கப்பட்ட grader மாதிரி தொடர்ச்சியான தர மதிப்பீட்டை முடியும்
+4. **பாதுகாப்பு முதலில்** - ரெட்-டீமிங் மற்றும் பலவீன சோதனை உற்பத்திக்குத் அவசியம்
+5. **செலவு நுணுக்கம்** - gpt-4.1 மற்றும் gpt-4.1-mini இடையே அறிவார்ந்த வழிசெலுத்தல் 60-80% சேமிக்க உதவும்
 
 ### மதிப்பிடப்பட்ட செலவுகள்
 
-| நிறுவல் முறை | இன்ஃப்ராஸ்ட்ரக்சர்/மாதம் | அபிவிருத்தி (ஒரு முறை) | முதல் மாதம் மொத்தம் |
+| டெப்பிளாய் முறை | இன்ஃப்ராஸ்ட்ரக்சர்/மாதம் | வளர்ச்சி (ஒருமுறை) | மொத்த முதலாம் மாதம் |
 |-----------------|---------------------|------------------------|-------------------|
-| **குறைந்தபட்சம்** | $100-370 | $15K-25K (80-120 மணி நேரம்) | $15.1K-25.4K |
-| **சாதாரணம்** | $420-1,450 | $15K-25K (அதே முயற்சி) | $15.4K-26.5K |
-| **ப்ரீமியம்** | $1,150-3,500 | $15K-25K (அதே முயற்சி) | $16.2K-28.5K |
+| **Minimal** | $100-370 | $15K-25K (80-120 மணிநேரம்) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (இதே முயற்சி) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (இதே முயற்சி) | $16.2K-28.5K |
 
-**குறிப்பு:** புதிய அமல்படுத்தல்களுக்கு இன்ஃப்ராஸ்ட்ரக்சர் மொத்த செலவின் <5% ஆகும். அபிவிருத்தி முயற்சி முக்கிய முதலீடு.
+**குறிப்பு:** புதிய செயலாக்கங்களுக்கு இன்ஃப்ராஸ்ட்ரக்சர் மொத்த செலவின் <5% ஆகும். வளர்ச்சிக் கவனம் முக்கிய முதலீடாகும்.
 
-### தொடர்புடைய வளங்கள்
+### தொடர்புடைய ஆதாரங்கள்
 
-- 📚 [ARM டெம்ப்ளேட் நிறுவல் வழிகாட்டு](retail-multiagent-arm-template/README.md) - இன்ஃப்ராஸ்ட்ரக்சர் அமைப்பு
-- 📚 [Azure OpenAI சிறந்த நடைமுறைகள்](https://learn.microsoft.com/azure/ai-services/openai/) - மாதிரி நிறுவல்
-- 📚 [AI Search ஆவணம்](https://learn.microsoft.com/azure/search/) - வெக்டர் தேடல் கட்டமைப்பு
-- 📚 [Container Apps வடிவங்கள்](https://learn.microsoft.com/azure/container-apps/) - மைக்ரோசர்வீஸ் நிறுவல்
+- 📚 [ARM டெம்ப்ளேட் துவக்க வழிகாட்டி](retail-multiagent-arm-template/README.md) - இன்ஃப்ராஸ்ட்ரக்சர் அமைப்பு
+- 📚 [Microsoft Foundry மாதிரிகளுக்கான சிறந்த நடைமுறைகள்](https://learn.microsoft.com/azure/ai-services/openai/) - மாதிரி டெப்பிளாய்மென்ட்
+- 📚 [AI Search ஆவணங்கள்](https://learn.microsoft.com/azure/search/) - வெக்டர் தேடல் அமைப்பு
+- 📚 [Container Apps வடிவமைப்புகள்](https://learn.microsoft.com/azure/container-apps/) - மைக்ரோசெர்விஸ் டெப்பிளாய்மென்ட்
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - கண்காணிப்பு அமைப்பு
 
-### கேள்விகள் அல்லது பிரச்சனைகள்?
+### கேள்விகள் அல்லது பிரச்சினைகள்?
 
-- 🐛 [பிரச்சனைகளை அறிக்கையிடவும்](https://github.com/microsoft/AZD-for-beginners/issues) - டெம்ப்ளேட் பிழைகள் அல்லது ஆவணப் பிழைகள்
-- 💬 [GitHub விவாதங்கள்](https://github.com/microsoft/AZD-for-beginners/discussions) - கட்டமைப்பு கேள்விகள்
-- 📖 [அடிக்கடி கேட்கப்படும் கேள்விகள்](../resources/faq.md) - பொதுவான கேள்விகளுக்கு பதில்கள்
-- 🔧 [பிரச்சனை தீர்வு வழிகாட்டி](../docs/troubleshooting/common-issues.md) - நிறுவல் பிரச்சனைகள்
+- 🐛 [புள்ளி தகவல்கள் தெரிவிக்கவும்](https://github.com/microsoft/AZD-for-beginners/issues) - டெம்ப்ளேட் பிழைகள் அல்லது ஆவண தவறுகள்
+- 💬 [GitHub விவாதங்கள்](https://github.com/microsoft/AZD-for-beginners/discussions) - கட்டமைப்பு தொடர்பான கேள்விகள்
+- 📖 [அடிக்கடி கேட்கப்படும் கேள்விகள்](../resources/faq.md) - பொதுவான கேள்விகள்
+- 🔧 [பிழைத்தீர்க்கும் வழிகாட்டி](../docs/troubleshooting/common-issues.md) - டெப்பிளாய்மென்ட் பிரச்சினைகள்
 
 ---
 
-**இந்த முழுமையான காட்சி பல-ஏஜென்ட் நுண்ணறிவு அமைப்புகளுக்கான நிறுவன தரநிலை கட்டமைப்பு வரைபடத்தையும், இன்ஃப்ராஸ்ட்ரக்சர் டெம்ப்ளேடுகள், அமல்படுத்தல் வழிகாட்டி மற்றும் உற்பத்தி சிறந்த நடைமுறைகளையும் ஒருங்கிணைத்து Azure Developer CLI உடன் சிக்கலான வாடிக்கையாளர் ஆதரவு தீர்வுகளை கட்டுவதற்கான வழிமுறைகளை வழங்குகிறது.**
+**இந்த விரிவான காட்சி நுழைவுக் கோப்பு பல-ஏஜென்ட் AI அமைப்புகளுக்கான நிறுவன தரமான கட்டமைப்பு வரைபடத்தை, இன்ஃப்ராஸ்ட்ரக்சர் டெம்ப்ளேட்களை, செயலாக்க வழிகாட்டியையும், Azure Developer CLI உடன் உற்பத்தி சிறந்த நடைமுறைகளை வழங்குகிறது.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-பொறுப்பு விலக்கு:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையாகும் [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கக்கூடும் என்பதை தயவுசெய்து கவனத்தில் கொள்ளவும். முக்கியமான தகவல்களுக்கு, மூல ஆவணம் அதன் சொந்த மொழியிலேயே அதிகாரபூர்வ ஆதாரமாக கருதப்பட வேண்டும் மற்றும் தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பின் பயன்பாட்டினால் உருவாகக்கூடிய எந்தவொரு தவறான புரிதலுகளுக்கும் அல்லது தவறான விளக்கங்களுக்கு நாங்கள் பொறுப்பேற்கமாட்டோம்.
+**மறுப்பு**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கக்கூடும் என்பதைக் கவனத்தில் கொள்ளவும். அதன் சொந்த மொழியில் உள்ள அசல் ஆவணம் அதிகாரப்பூர்வ மூலமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்களுக்கோ அல்லது தவறாக விளக்கப்படலுக்கோ நாங்கள் பொறுப்பில்லையென்றும் கவனிக்கவும்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

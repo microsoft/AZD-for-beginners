@@ -1,30 +1,30 @@
-# Application Insights Integratsioon AZD-iga
+# Application Insightsi integratsioon AZD-ga
 
-⏱️ **Hinnanguline aeg**: 40-50 minutit | 💰 **Kulude mõju**: ~$5-15/kuus | ⭐ **Kompleksus**: Keskmine
+⏱️ **Eelnev aeg**: 40-50 minutit | 💰 **Kulu mõju**: ~$5-15/kuus | ⭐ **Keerukus**: Kesktase
 
 **📚 Õppeteek:**
-- ← Eelmine: [Preflight Checks](preflight-checks.md) - Eelpaigaldamise valideerimine
-- 🎯 **Sa oled siin**: Application Insights Integratsioon (monitooring, telemeetria, silumine)
-- → Järgmine: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Paigalda Azuresse
-- 🏠 [Course Home](../../README.md)
+- ← Eelmine: [Preflight Checks](preflight-checks.md) - Eelpaigalduse valideerimine
+- 🎯 **Oled siin**: Application Insightsi integratsioon (Monitooring, telemeetria, silumine)
+- → Järgmine: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Deploy Azure’i keskkonda
+- 🏠 [Kursuse avaleht](../../README.md)
 
 ---
 
-## Mida sa õpid
+## Mida Sa Õpid
 
-By completing this lesson, you will:
-- Integreerida **Application Insights** AZD projektidesse automaatselt
-- Konfigureerida **jaotatud jälgimist** mikroteenuste jaoks
-- Rakendada **kohandatud telemeetriat** (mõõdikud, sündmused, sõltuvused)
-- Seada üles **Live Metrics** reaalajas monitoorimiseks
-- Luua **häired ja juhtpaneelid** AZD juurutustest
-- Siluda tootmisprobleeme **telemeetria päringutega**
-- Optimeerida **kulu- ja proovivõtu** strateegiaid
-- Jälgida **AI/LLM rakendusi** (tokenid, latentsus, kulud)
+Selle õppetunni läbimisel:
+- Integreerid **Application Insightsi** automaatselt AZD projektidesse
+- Konfigureerid **jaotatud jälgimise** mikroteenuste jaoks
+- Rakendad **kohandatud telemeetriat** (mõõdikud, sündmused, sõltuvused)
+- Seadistad **reaalajas mõõdikud** otse jälgimiseks
+- Loobid **hoiatused ja armatuurlaud** AZD deploydest
+- Silud tootmisvead **telemeetria päringute** abil
+- Optimeerid **kulusid ja proovivõtu strateegiaid**
+- Monitoorid **AI/LLM rakendusi** (tokenid, latentsus, kulud)
 
-## Miks Application Insights koos AZD-iga oluline on
+## Miks on Application Insights koos AZD-ga oluline
 
-### Väljakutse: tootmiskeskkonna jälgitavus
+### Väljakutse: tootmise jälgitavus
 
 **Ilma Application Insightsita:**
 ```
@@ -36,7 +36,7 @@ By completing this lesson, you will:
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**Koos Application Insights + AZD:**
+**Application Insightsiga + AZD-ga:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -47,7 +47,7 @@ By completing this lesson, you will:
 ✅ AZD provisions everything automatically
 ```
 
-**Analoogia**: Application Insights on nagu lennuki "must kast" ja piloodi armatuurlaud sinu rakenduse jaoks. Näed kõike, mis toimub reaalajas, ja saad iga intsidenti taasesitada.
+**Analoogia**: Application Insights on nagu “must kasti” lennuandur + piloodi armatuurlaud sinu rakendusele. Sa näed kõike, mis toimub reaalajas ja saad igat intsidenti tagantjärele mängida.
 
 ---
 
@@ -58,15 +58,15 @@ By completing this lesson, you will:
 ```mermaid
 graph TB
     User[Kasutaja/Klient]
-    App1[Konteinerrakendus 1<br/>API värav]
-    App2[Konteinerrakendus 2<br/>Toote teenus]
-    App3[Konteinerrakendus 3<br/>Tellimuste teenus]
+    App1[Konteinerirakendus 1<br/>API värav]
+    App2[Konteinerirakendus 2<br/>Toote teenus]
+    App3[Konteinerirakendus 3<br/>Tellimuse teenus]
     
-    AppInsights[Application Insights<br/>Telemeetria keskus]
-    LogAnalytics[(Log Analytics<br/>Tööruum)]
+    AppInsights[Rakenduse ülevaated<br/>Telemeetria keskust]
+    LogAnalytics[(Logianalüütika<br/>Tööruum)]
     
-    Portal[Azure Portaal<br/>Armatuurlauad ja Teavitused]
-    Query[Kusto-päringud<br/>Kohandatud analüüs]
+    Portal[Azure portaal<br/>Juhtpaneelid & Hoiatused]
+    Query[Kusto päringud<br/>Kohandatud analüüs]
     
     User --> App1
     App1 --> App2
@@ -85,21 +85,21 @@ graph TB
 ```
 ### Mis jälgitakse automaatselt
 
-| Telemeetria tüüp | Mida see jäädvustab | Kasutusjuhtum |
-|------------------|---------------------|---------------|
-| **Päringud** | HTTP-päringud, staatuse koodid, kestus | API jõudluse monitooring |
-| **Sõltuvused** | Väliskõned (DB, API-d, salvestus) | Pudelikkaelade tuvastamine |
-| **Erandid** | Käsitlemata vead koos pinu jälgedega | Rikeotsing |
-| **Kohandatud sündmused** | Ärisündmused (registreerumine, ost) | Analüütika ja konversioonitorud |
-| **Mõõdikud** | Jõudlusloendurid, kohandatud mõõdikud | Võimsuse planeerimine |
-| **Jäljed** | Logisõnumid koos raskusastmega | Rikeotsing ja auditeerimine |
-| **Saadavus** | Tööaeg ja vastuseaja testid | SLA monitooring |
+| Telemeetria tüüp | Mida see hõlmab     | Kasutusjuhtum         |
+|------------------|--------------------|-----------------------|
+| **Päringud**     | HTTP päringud, staatuskoodid, kestvus | API jõudluse jälgimine |
+| **Sõltuvused**   | Välised kõned (DB, APId, salvestus)   | Pudelikaelade tuvastamine |
+| **Erandid**     | Käitlemata vead koos virnatrassiga      | Vigade silumine        |
+| **Kohandatud sündmused** | Ärisündmused (registreerimine, ost) | Analüütika ja konverterid |
+| **Mõõdikud**    | Jõudluse loendurid, kohandatud mõõdikud | Võimsusplaanimine      |
+| **Jäljed**      | Logisõnumid raskuse astmega              | Silumine ja auditeerimine |
+| **Saadavus**    | Uptime ja vastuseaegade testid            | SLA jälgimine          |
 
 ---
 
 ## Eeltingimused
 
-### Nõutavad tööriistad
+### Vajalikud tööriistad
 
 ```bash
 # Kontrolli Azure Developer CLI-d
@@ -111,31 +111,31 @@ az --version
 # ✅ Oodatud: azure-cli 2.50.0 või uuem
 ```
 
-### Azure'i nõuded
+### Azure nõuded
 
-- Aktiivne Azure'i tellimus
-- Õigused loomiseks:
-  - Application Insights ressursid
-  - Log Analytics tööruumid
-  - Container Apps
-  - Ressursigrupid
+- Aktiivne Azure tellimus
+- Õigused luua:
+  - Application Insights ressursse
+  - Log Analytics tööruume
+  - Container Applikatsioone
+  - Ressursigruppesid
 
-### Nõutavad teadmised
+### Teadmiste eeldused
 
-Peaksid olema läbinud:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - AZD põhikontseptsioonid
-- [Configuration](../chapter-03-configuration/configuration.md) - Keskkonna seadistamine
-- [First Project](../chapter-01-foundation/first-project.md) - Põhiline juurutus
+Sul peaks olema tehtud:
+- [AZD alused](../chapter-01-foundation/azd-basics.md) - AZD põhimõisted
+- [Konfiguratsioon](../chapter-03-configuration/configuration.md) - Keskkonna seadistus
+- [Esimene projekt](../chapter-01-foundation/first-project.md) - Põhjadeploy
 
 ---
 
-## Õppetund 1: Automaatne Application Insights AZD-iga
+## Õppetund 1: Automaatne Application Insights AZD-ga
 
-### Kuidas AZD loob ja konfigureerib Application Insights'i
+### Kuidas AZD kuvab Application Insightsi
 
-AZD loob ja konfigureerib Application Insights'i automaatselt, kui sa seda juurutad. Vaatame, kuidas see töötab.
+AZD loob ja konfigureerib Application Insightsi automaatselt, kui Sa deployd. Vaatame kuidas see töötab.
 
-### Projekti struktuur
+### Projektistruktuur
 
 ```
 monitored-app/
@@ -154,7 +154,7 @@ monitored-app/
 
 ---
 
-### Samm 1: Konfigureeri AZD (azure.yaml)
+### Samm 1: AZD konfiguratsioon (azure.yaml)
 
 **Fail: `azure.yaml`**
 
@@ -172,7 +172,7 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**See on kõik!** AZD loob Application Insights'i vaikimisi. Põhimonitooringuks pole vaja täiendavat konfiguratsiooni.
+**See ongi kõik!** AZD loob vaikimisi Application Insightsi. Lisakonfiguratsiooni pole vaja põhiliseks monitooringuks.
 
 ---
 
@@ -227,7 +227,7 @@ output applicationInsightsName string = applicationInsights.name
 
 ---
 
-### Samm 3: Ühenda Container App Application Insights'iga
+### Samm 3: Ühenda Container App Application Insightsiga
 
 **Fail: `infra/app/api.bicep`**
 
@@ -285,7 +285,7 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### Samm 4: Rakenduse kood telemeetriaga
+### Samm 4: Rakenduskood koos Telemeetriaga
 
 **Fail: `src/app.py`**
 
@@ -300,18 +300,18 @@ import os
 
 app = Flask(__name__)
 
-# Hangi Application Insightsi ühendusstring
+# Hangi Application Insights ühendusstring
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Konfigureeri jaotatud jälgimine
+    # Konfigureeri hajutatud jälgimine
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # Arenduseks 100% proovivõtt
+        sampler=ProbabilitySampler(rate=1.0)  # 100% proovivõtt arenduseks
     )
     
-    # Seadista logimine
+    # Konfigureeri logimine
     logger = logging.getLogger(__name__)
     logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
@@ -331,7 +331,7 @@ def health():
 def get_products():
     logger.info('Fetching products')
     
-    # Simuleeri andmebaasi päringut (automaatselt jälgitakse sõltuvusena)
+    # Simuleeri andmebaasi kõnet (tuvastatakse automaatselt sõltuvusena)
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -375,19 +375,19 @@ gunicorn==21.2.0
 
 ---
 
-### Samm 5: Juuruta ja kontrolli
+### Samm 5: Deploy ja Kontrolli
 
 ```bash
 # Algata AZD
 azd init
 
-# Juuruta (seadistab Application Insightsi automaatselt)
+# Käivita (pakub automaatselt Application Insightsi)
 azd up
 
 # Hangi rakenduse URL
 APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
 
-# Genereeri telemeetria
+# Loo telemeetria
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,10 +404,10 @@ curl $APP_URL/api/slow
 
 ---
 
-### Samm 6: Vaata telemeetriaid Azure'i portaalis
+### Samm 6: Telemeetria vaatamine Azure portaalis
 
 ```bash
-# Hangi Application Insightsi üksikasjad
+# Hangi Application Insights'i üksikasjad
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Ava Azure'i portaalis
@@ -417,13 +417,13 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-**Navigeeri Azure'i portaali → Application Insights → Tehingute otsing**
+**Mine Azure portaal → Application Insights → Transaction Search**
 
-Sa peaksid nägema:
-- ✅ HTTP-päringud koos staatuse koodidega
-- ✅ Päringu kestused (3+ sekundit `/api/slow` puhul)
-- ✅ Erandi üksikasjad `/api/error-test` päringu puhul
-- ✅ Kohandatud logisõnumeid
+Pead nägema:
+- ✅ HTTP päringud staatuskoodidega
+- ✅ Päringu kestvus (üle 3 sekundi `/api/slow` jaoks)
+- ✅ Erandite detailid `/api/error-test` kaudu
+- ✅ Kohandatud logisõnumid
 
 ---
 
@@ -458,12 +458,12 @@ class TelemetryClient:
             print("⚠️ Application Insights connection string not found")
             return
         
-        # Seadista logija
+        # Logija seadistamine
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
         
-        # Seadista mõõdikute eksportija
+        # Mõõdikute eksportija seadistamine
         self.stats = stats_module.stats
         self.view_manager = self.stats.view_manager
         self.stats_recorder = self.stats.stats_recorder
@@ -473,7 +473,7 @@ class TelemetryClient:
         )
         self.view_manager.register_exporter(exporter)
         
-        # Seadista jälgija
+        # Jälgija seadistamine
         self.tracer = tracer_module.Tracer(
             exporter=AzureExporter(connection_string=self.connection_string)
         )
@@ -518,7 +518,7 @@ class TelemetryClient:
 telemetry = TelemetryClient()
 ```
 
-### Uuenda rakendust kohandatud sündmustega
+### Rakenduse uuendus kohandatud sündmustega
 
 **Fail: `src/app.py` (täiendatud)**
 
@@ -565,10 +565,10 @@ def search():
     
     start_time = time.time()
     
-    # Simuleeri otsingut (see oleks päris andmebaasi päring)
+    # Simuleeri otsingut (oleks päris andmebaasi päring)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Teisenda millisekunditeks
+    duration = (time.time() - start_time) * 1000  # Muuda millisekunditeks
     
     # Jälgi otsingusündmust
     telemetry.track_event('Search', {
@@ -593,7 +593,7 @@ def external_call():
     success = True
     
     try:
-        # Simuleeri välise API-kõnet
+        # Simuleeri välist API kõnet
         response = requests.get('https://api.example.com/data', timeout=5)
         result = response.json()
     except Exception as e:
@@ -616,7 +616,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Testi kohandatud telemeetria
+### Katseta kohandatud telemeetriat
 
 ```bash
 # Jälgi ostusündmust
@@ -632,9 +632,9 @@ curl "$APP_URL/api/search?q=laptop"
 curl $APP_URL/api/external-call
 ```
 
-**Vaata Azure'i portaalis:**
+**Vaata Azure portaalis:**
 
-Navigeeri Application Insights → Logid, seejärel käivita:
+Mine Application Insights → Logs ja käivita päring:
 
 ```kusto
 // View purchase events
@@ -665,11 +665,11 @@ traces
 
 ---
 
-## Õppetund 3: Jaotatud jälgimine mikroteenustele
+## Õppetund 3: Jaotatud jälgimine mikroteenuste jaoks
 
-### Lülita sisse teenustevaheline jälgimine
+### Võta kasutusele ristteenuste jälgimine
 
-Mikroteenuste puhul korreleerib Application Insights päringuid teenuste lõikes automaatselt.
+Mikroteenuste puhul korreleerib Application Insights automaatselt päringuid teenuste vahel.
 
 **Fail: `infra/main.bicep`**
 
@@ -744,9 +744,9 @@ output GATEWAY_URL string = apiGateway.outputs.uri
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API-värav<br/>(Jälje ID: abc123)
-    participant Product as Toote teenus<br/>(Vanem-ID: abc123)
-    participant Order as Tellimuse teenus<br/>(Vanem-ID: abc123)
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Toote teenus<br/>(Parent ID: abc123)
+    participant Order as Tellimuse teenus<br/>(Parent ID: abc123)
     participant AppInsights as Rakenduse Insights
     
     User->>Gateway: POST /api/checkout
@@ -754,21 +754,21 @@ sequenceDiagram
     Gateway->>AppInsights: Logi päring (Jälje ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Vanem-ID: abc123
+    Note over Product: Vanema ID: abc123
     Product->>AppInsights: Logi sõltuvuskõne
     Product-->>Gateway: Toote üksikasjad
     
     Gateway->>Order: POST /orders
-    Note over Order: Vanem-ID: abc123
+    Note over Order: Vanema ID: abc123
     Order->>AppInsights: Logi sõltuvuskõne
     Order-->>Gateway: Tellimus loodud
     
-    Gateway-->>User: Ostu vormistamine lõpetatud
+    Gateway-->>User: Ostukorvi lõpetatud
     Gateway->>AppInsights: Logi vastus (Kestus: 450ms)
     
-    Note over AppInsights: Korrelatsioon jälje ID alusel
+    Note over AppInsights: Korrelatsioon Jälje ID alusel
 ```
-**Päring lõpp-lõpuni jälje kohta:**
+**Lõpp-lõpuni jälje päring:**
 
 ```kusto
 // Find complete request flow
@@ -788,56 +788,56 @@ dependencies
 
 ---
 
-## Õppetund 4: Live Metrics ja reaalajas monitooring
+## Õppetund 4: Reaalajas mõõdikud ja otsemonitooring
 
-### Luba Live Metrics voog
+### Luba Live Metrics Stream
 
-Live Metrics annab reaalajas telemeetria (<1 sekundi latentsusega).
+Live Metrics näitab telemeetriat reaalajas alla ühe sekundi viiteajaga.
 
-**Juurdepääs Live Metricsile:**
+**Ligipääs Live Metricsile:**
 
 ```bash
 # Hangi Application Insightsi ressurss
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Hangi ressursigrupp
+# Hangi ressursside grupp
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**Mida näed reaalajas:**
-- ✅ Sissetulevate päringute määr (päringud/sek)
-- ✅ Väljuvad sõltuvuskõned
+**Mida Sa reaalajas näed:**
+- ✅ Saabuvate päringute hulk (päringut sekundis)
+- ✅ Väljaminevate sõltuvuste kõned
 - ✅ Erandite arv
 - ✅ CPU ja mälu kasutus
 - ✅ Aktiivsete serverite arv
-- ✅ Proovitud telemeetria
+- ✅ Proovtelemeetria
 
-### Genereeri koormust testimiseks
+### Tooke koormust testimiseks
 
 ```bash
-# Tekita koormust, et näha reaalajas mõõdikuid
+# Genereeri koormus, et näha reaalajas mõõdikuid
 for i in {1..100}; do
   curl $APP_URL/api/products &
   curl $APP_URL/api/search?q=test$i &
 done
 
-# Jälgi reaalajas mõõdikuid Azure'i portaalis
-# Sa peaksid nägema päringute määra hüpet
+# Vaata reaalajas mõõdikuid Azure'i portaalis
+# Sa peaksid nägema päringute arvu tõusu
 ```
 
 ---
 
-## Praktilised ülesanded
+## Praktilised harjutused
 
-### Ülesanne 1: Häirete seadistamine ⭐⭐ (Keskmine)
+### Harjutus 1: Seadista hoiatused ⭐⭐ (Keskmine)
 
-**Eesmärk**: Loo häired kõrge veamäära ja aeglaste vastuste jaoks.
+**Eesmärk**: Loo hoiatused kõrgete vigade määrade ja aeglaste vastuste jaoks.
 
 **Sammud:**
 
-1. **Loo häire vea määra jaoks:**
+1. **Loo hoiatus veamäära jaoks:**
 
 ```bash
 # Hangi Application Insightsi ressursi ID
@@ -846,7 +846,7 @@ APPI_ID=$(az monitor app-insights component show \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Loo mõõdikute hoiatus nurjunud päringute jaoks
+# Loo mõõtmelüliti ebaõnnestunud päringute jaoks
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **Loo häire aeglaste vastuste jaoks:**
+2. **Loo hoiatus aeglaste vastuste jaoks:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +870,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Loo häire Bicepiga (soovitatav AZD jaoks):**
+3. **Loo hoiatus Bicepiga (eelistatud AZD jaoks):**
 
 **Fail: `infra/core/alerts.bicep`**
 
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Testi häireid:**
+4. **Testi hoiatusi:**
 
 ```bash
 # Tekita vigu
@@ -957,7 +957,7 @@ for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Kontrolli häire olekut (oota 5-10 minutit)
+# Kontrolli häiresaadet (oota 5-10 minutit)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
   --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
@@ -965,34 +965,34 @@ az monitor metrics alert list \
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Häired loodud edukalt
-- ✅ Häired käivituvad, kui läviväärtused ületatakse
-- ✅ Häirete ajalugu on Azure'i portaalis nähtav
-- ✅ Integreeritud AZD juurutusega
+- ✅ Hoiatused loodi edukalt
+- ✅ Hoiatused käivituvad künniste ületamisel
+- ✅ Saad vaadata hoiatusajaloo Azure portaalis
+- ✅ Integreeritud AZD deployga
 
 **Aeg**: 20-25 minutit
 
 ---
 
-### Ülesanne 2: Kohandatud juhtpaneeli loomine ⭐⭐ (Keskmine)
+### Harjutus 2: Loo kohandatud armatuurlaud ⭐⭐ (Keskmine)
 
-**Eesmärk**: Ehita juhtpaneel, mis kuvab peamised rakenduse mõõdikud.
+**Eesmärk**: Ehita armatuurlaud, mis kuvab olulisi rakenduse mõõdikuid.
 
 **Sammud:**
 
-1. **Loo juhtpaneel Azure'i portaalis:**
+1. **Loo armatuurlaud Azure portaali kaudu:**
 
-Navigeeri: Azure'i portaal → Juhtpaneelid → Uus juhtpaneel
+Mine: Azure portaal → Armatuurlauad → Uus armatuurlaud
 
-2. **Lisa võtmemõõdikute jaoks paanid:**
+2. **Lisa oluliste mõõdikute plokid:**
 
-- Päringute arv (viimased 24 tundi)
-- Keskmine vastusaeg
+- Päringute arv (viimase 24 tunni jooksul)
+- Keskmine vastuse aeg
 - Veamäär
-- Top 5 aeglasemat operatsiooni
+- 5 aeglaseimat toimingut
 - Kasutajate geograafiline jaotus
 
-3. **Loo juhtpaneel Bicepiga:**
+3. **Loo armatuurlaud Bicepiga:**
 
 **Fail: `infra/core/dashboard.bicep`**
 
@@ -1063,10 +1063,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Juuruta juhtpaneel:**
+4. **Deploy armatuurlaud:**
 
 ```bash
-# Lisa main.bicep-i
+# Lisa main.bicep faili
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1077,27 +1077,27 @@ module dashboard './core/dashboard.bicep' = {
   }
 }
 
-# Juuruta
+# Käivita juurutus
 azd up
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Juhtpaneel kuvab võtmemõõdikud
-- ✅ Võimalik kinnitada Azure'i portaali avalehele
+- ✅ Armatuurlaud kuvab olulised mõõdikud
+- ✅ Saab kinnitada Azure portaali avalehele
 - ✅ Uuendab reaalajas
-- ✅ Juurutatav AZD-ga
+- ✅ Deploydav AZD-ga
 
 **Aeg**: 25-30 minutit
 
 ---
 
-### Ülesanne 3: AI/LLM rakenduse jälgimine ⭐⭐⭐ (Edasijõudnutele)
+### Harjutus 3: Monitoori AI/LLM rakendust ⭐⭐⭐ (Edasijõudnu)
 
-**Eesmärk**: Jälgi Azure OpenAI kasutust (tokenid, kulud, latentsus).
+**Eesmärk**: Jälgi Microsoft Foundry mudelite kasutust (tokenid, kulud, latentsus).
 
 **Sammud:**
 
-1. **Loo AI jälgimiskest:**
+1. **Loo AI monitooringu wrapper:**
 
 **Fail: `src/ai_telemetry.py`**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Kutsu Azure OpenAI
+            # Kutsu Microsoft Foundry mudeleid
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,13 +1130,13 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Võta kasutusandmed välja
+            # Kasutuse väljavõte
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Arvuta kulu (GPT-4 hinnakiri)
+            # Arvuta kulu (gpt-4.1 hinnakirja alusel)
             prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 1000 tokeni kohta
             completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 1000 tokeni kohta
             total_cost = prompt_cost + completion_cost
@@ -1182,7 +1182,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Kasuta jälgitavat klienti:**
+2. **Kasuta jälgitud klienti:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,7 +1191,7 @@ import os
 
 app = Flask(__name__)
 
-# Initsialiseeri jälgitav OpenAI klient
+# Algata jälgitav OpenAI klient
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
     endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
@@ -1204,7 +1204,7 @@ def chat():
     
     # Kutsu automaatse jälgimisega
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,7 +1216,7 @@ def chat():
     })
 ```
 
-3. **Päring AI mõõdikutele:**
+3. **Päringu AI mõõdikud:**
 
 ```kusto
 // Total AI spend over time
@@ -1253,18 +1253,18 @@ traces
 **✅ Edu kriteeriumid:**
 - ✅ Iga OpenAI kõne jälgitakse automaatselt
 - ✅ Tokeni kasutus ja kulud on nähtavad
-- ✅ Latentsus on monitooritud
-- ✅ Saab seada eelarvehäireid
+- ✅ Latentsust monitooritakse
+- ✅ Võimalik seadistada eelarvehoiatusi
 
 **Aeg**: 35-45 minutit
 
 ---
 
-## Kuluoptimeerimine
+## Kulu optimeerimine
 
-### Proovivõtu strateegiad
+### Proovivõtustrateegiad
 
-Kontrolli kulusid telemeetria proovivõtuga:
+Kontrolli kulusid, proovides osalist telemeetria salvestust:
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
@@ -1272,7 +1272,7 @@ from opencensus.trace.samplers import ProbabilitySampler
 # Arendus: 100% proovivõtt
 sampler = ProbabilitySampler(rate=1.0)
 
-# Tootmine: 10% proovivõtt (vähendab kulusid 90% võrra)
+# Tootmine: 10% proovivõtt (kulude vähendamine 90%)
 sampler = ProbabilitySampler(rate=0.1)
 
 # Adaptiivne proovivõtt (kohandub automaatselt)
@@ -1280,7 +1280,7 @@ from opencensus.trace.samplers import AdaptiveSampler
 sampler = AdaptiveSampler()
 ```
 
-**Bicep'is:**
+**Bicepis:**
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -1291,7 +1291,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 ```
 
-### Andmete säilitamine
+### Andmete säilitus
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1303,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Igakuised kuluhinnangud
+### Kulusõltuvuse tabel
 
-| Andmemahu | Säilitamine | Igakuine kulu |
-|----------|------------|---------------|
-| 1 GB/kuu | 30 päeva | ~$2-5 |
-| 5 GB/kuu | 30 päeva | ~$10-15 |
+| Andmemaht | Säilitus | Kuukulu |
+|-----------|----------|---------|
+| 1 GB/kuu  | 30 päeva | ~$2-5   |
+| 5 GB/kuu  | 30 päeva | ~$10-15 |
 | 10 GB/kuu | 90 päeva | ~$25-40 |
 | 50 GB/kuu | 90 päeva | ~$100-150 |
 
-**Tasuta tase**: 5 GB/kuu kaasas
+**Tasuta tase**: 5 GB/kuu inbegrepen
 
 ---
 
 ## Teadmiste kontrollpunkt
 
-### 1. Põhine integratsioon ✓
+### 1. Põhiline integratsioon ✓
 
-Testi oma arusaamist:
+Testi oma mõistmist:
 
-- [ ] **Q1**: Kuidas AZD loob Application Insights'i?
-  - **A**: Automaatselt Bicep mallide kaudu failis `infra/core/monitoring.bicep`
+- [ ] **K1**: Kuidas AZD loob Application Insightsi?
+  - **V**: Automaatselt Bicep mallide kaudu `infra/core/monitoring.bicep`
 
-- [ ] **Q2**: Milline keskkonnamuutuja lubab Application Insights'i?
-  - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **K2**: Milline keskkonnamuutuja lubab Application Insightsi?
+  - **V**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Millised on kolm peamist telemeetria tüüpi?
-  - **A**: Päringud (HTTP-kõned), Sõltuvused (väliskõned), Erandid (vead)
+- [ ] **K3**: Millised on kolm peamist telemeetriatüüpi?
+  - **V**: Päringud (HTTP kõned), Sõltuvused (välised kõned), Erandid (vead)
 
-**Hands-On Verification:**
+**Praktiline kontroll:**
 ```bash
-# Kontrolli, kas Application Insights on seadistatud
+# Kontrolli, kas Application Insights on konfigureeritud
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Kontrolli, et telemeetria voolab
+# Kinnita, et telemeetria voolab
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,18 +1347,18 @@ az monitor app-insights metrics show \
 
 ### 2. Kohandatud telemeetria ✓
 
-Testi oma arusaamist:
+Testi oma mõistmist:
 
-- [ ] **Q1**: Kuidas jälgid kohandatud ärisündmusi?
-  - **A**: Kasuta loggerit koos `custom_dimensions` või `TelemetryClient.track_event()`
+- [ ] **K1**: Kuidas jälgitakse kohandatud ärisündmusi?
+  - **V**: Kasutades loggerit koos `custom_dimensions` või `TelemetryClient.track_event()`
 
-- [ ] **Q2**: Mis vahe on sündmustel ja mõõdikutel?
-  - **A**: Sündmused on diskreetsed juhtumid, mõõdikud on numbrilised mõõtmised
+- [ ] **K2**: Mis vahe on sündmustel ja mõõdikutel?
+  - **V**: Sündmused on eraldi juhtumid, mõõdikud on numbrilised väärtused
 
-- [ ] **Q3**: Kuidas korreleerid telemeetriat teenuste vahel?
-  - **A**: Application Insights kasutab automaatselt `operation_Id` korrelatsiooniks
+- [ ] **K3**: Kuidas korreleeritakse telemeetria teenuste vahel?
+  - **V**: Application Insights kasutab automaatselt `operation_Id` korrelatsiooniks
 
-**Hands-On Verification:**
+**Praktiline kontroll:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,22 +1368,22 @@ traces
 
 ---
 
-### 3. Tootmismonitooring ✓
+### 3. Tootmise monitooring ✓
 
-Testi oma arusaamist:
+Testi oma mõistmist:
 
-- [ ] **Q1**: Mis on proovivõtt ja miks seda kasutada?
-  - **A**: Proovivõtt vähendab andmemahtu (ja kulusid), salvestades ainult osa telemeetriast
+- [ ] **K1**: Mis on proovivõtt ja miks seda kasutatakse?
+  - **V**: Proovivõtt vähendab andmemahtu (ja kulusid) valimi võtmisel telemeetriast
 
-- [ ] **Q2**: Kuidas seadistada häireid?
-  - **A**: Kasuta mõõdikuhäireid Bicep'is või Azure'i portaalis, põhinedes Application Insights mõõdikutel
+- [ ] **K2**: Kuidas seadistada hoiatusi?
+  - **V**: Kasuta mõõdikutel põhinevaid hoiatusi Bicepis või Azure portaalis
 
-- [ ] **Q3**: Mis vahe on Log Analytics'il ja Application Insights'il?
-  - **A**: Application Insights salvestab andmed Log Analytics tööruumi; App Insights pakub rakendusele spetsiifilisi vaateid
+- [ ] **K3**: Mis vahe on Log Analyticsil ja Application Insightsil?
+  - **V**: Application Insights salvestab andmed Log Analyticsi tööruumi; App Insights pakub rakenduse spetsiifilisi vaateid
 
-**Hands-On Verification:**
+**Praktiline kontroll:**
 ```bash
-# Kontrolli proovivõtu konfiguratsiooni
+# Kontrolli proovivõtu seadistust
 az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1396,7 +1396,7 @@ az monitor app-insights component show \
 
 ### ✅ TEE:
 
-1. **Kasutage korrelatsiooni-ID-sid**
+1. **Kasuta korrelatsioonitähiseid**
    ```python
    logger.info('Processing order', extra={
        'custom_dimensions': {
@@ -1406,7 +1406,7 @@ az monitor app-insights component show \
    })
    ```
 
-2. **Sea üles häired kriitiliste mõõdikute jaoks**
+2. **Seadista kriitiliste mõõdikute hoiatused**
    ```bicep
    // Error rate, slow responses, availability
    ```
@@ -1422,10 +1422,10 @@ az monitor app-insights component show \
 
 4. **Monitoori sõltuvusi**
    ```python
-   # Automaatselt jälgi andmebaasi päringuid, HTTP-päringuid jne.
+   # Automaatselt jälgida andmebaasi päringuid, HTTP-päringuid jne.
    ```
 
-5. **Kasuta Live Metrics'i juurutuste ajal**
+5. **Kasuta Live Metricsit deployduste ajal**
 
 ### ❌ ÄRA TEE:
 
@@ -1438,26 +1438,26 @@ az monitor app-insights component show \
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **Ära kasuta 100% proovivõttu tootmises**
+2. **Ära kasuta tootmises 100% proovivõttu**
    ```python
    # ❌ Kallis
    sampler = ProbabilitySampler(rate=1.0)
    
-   # ✅ Kulutõhus
+   # ✅ Kuluefektiivne
    sampler = ProbabilitySampler(rate=0.1)
    ```
 
-3. **Ära eira dead letter queue'sid**
+3. **Ära ignoreeri “dead letter” järjekordi**
 
-4. **Ära unusta seadistada andmete säilituse limiite**
+4. **Ära unusta andmete säilituse limiite**
 
 ---
 
 ## Tõrkeotsing
 
-### Probleem: telemeetria ei ilmu
+### Probleem: Telemeetria ei ilmu
 
-**Diagnoos:**
+**Diagnostika:**
 ```bash
 # Kontrolli, kas ühendusstring on määratud
 azd env get-values | grep APPLICATIONINSIGHTS
@@ -1465,13 +1465,13 @@ azd env get-values | grep APPLICATIONINSIGHTS
 # Kontrolli rakenduse logisid Azure Monitori kaudu
 azd monitor --logs
 
-# Või kasuta Container Apps jaoks Azure CLI-d:
+# Või kasuta Azure CLI-d konteinerirakenduste jaoks:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Lahendus:**
 ```bash
-# Kontrolli ühenduse stringi Container Appis
+# Kontrolli ühendusstringi Container Appis
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,11 +1481,11 @@ az containerapp show \
 
 ---
 
-### Probleem: kõrged kulud
+### Probleem: Kõrged kulud
 
-**Diagnoos:**
+**Diagnostika:**
 ```bash
-# Kontrolli andmete sissetoomist
+# Kontrolli andmete sisselugemist
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1495,57 +1495,57 @@ az monitor app-insights metrics show \
 **Lahendus:**
 - Vähenda proovivõtu määra
 - Lühenda säilitusaega
-- Eemalda detailsed logid
+- Eemalda liigne logimine
 
 ---
 
-## Lisalugemine
+## Lisa õppematerjalid
 
 ### Ametlik dokumentatsioon
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Application Insights ülevaade](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Application Insights Pythonile](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Kusto päringukeel](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [AZD monitooring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Järgmised sammud kursusel
+### Järgmised sammud selles kursuses
 - ← Eelmine: [Preflight Checks](preflight-checks.md)
 - → Järgmine: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Course Home](../../README.md)
+- 🏠 [Kursuse avaleht](../../README.md)
 
 ### Seotud näited
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI telemeetria
-- [Microservices Example](../../../../examples/microservices) - Jaotatud jälgimine
+- [Microsoft Foundry mudelite näide](../../../../examples/azure-openai-chat) - AI telemeetria
+- [Mikroteenuste näide](../../../../examples/microservices) - Jaotatud jälgimine
 
 ---
 
 ## Kokkuvõte
 
-**Sa õppisid:**
-- ✅ Automaatne Application Insights provisioneerimine AZD-ga
+**Õppisid:**
+- ✅ Automaatne Application Insightsi loomine AZD-ga
 - ✅ Kohandatud telemeetria (sündmused, mõõdikud, sõltuvused)
 - ✅ Jaotatud jälgimine mikroteenuste vahel
-- ✅ Reaalajas mõõdikud ja seire
-- ✅ Teavitused ja armatuurlauad
+- ✅ Reaalajas mõõdikud ja otsemonitooring
+- ✅ Hoiatused ja armatuurlaudade loomine
 - ✅ AI/LLM rakenduste jälgimine
-- ✅ Kulude optimeerimise strateegiad
+- ✅ Kulusäästu strateegiad
 
-**Peamised järeldused:**
-1. **AZD seadistab seire automaatselt** - Ei vaja käsitsi seadistamist
-2. **Kasuta struktureeritud logimist** - See muudab päringute tegemise lihtsamaks
-3. **Jälgi ärisündmusi** - Mitte ainult tehnilisi mõõdikuid
-4. **Jälgi AI-kulusid** - Jälgi tokeneid ja kulutusi
-5. **Sea teavitused üles** - Ole proaktiivne, mitte reaktiivne
-6. **Optimeeri kulusid** - Kasuta proovivõttu ja säilitamispiiranguid
+**Olulised võtmed:**
+1. **AZD provisjonide jälgimine automaatselt** - Ei mingit käsitsi seadistamist  
+2. **Kasuta struktureeritud logimist** - Muudab päringud lihtsamaks  
+3. **Jälgi ärisündmusi** - Mitte ainult tehnilisi mõõdikuid  
+4. **Jälgi tehisintellekti kulusid** - Jälgi märke ja kulutusi  
+5. **Sea üles hoiatused** - Ole proaktiivne, mitte reaktiivne  
+6. **Optimeeri kulusid** - Kasuta proovivõtmist ja säilitamispiiranguid  
 
-**Järgmised sammud:**
-1. Lõpeta praktilised harjutused
-2. Lisa Application Insights oma AZD projektidesse
-3. Loo kohandatud armatuurlauad oma meeskonnale
-4. Tutvu [Juurutusjuhendiga](../chapter-04-infrastructure/deployment-guide.md)
+**Järgmised sammud:**  
+1. Lõpeta praktilised harjutused  
+2. Lisa Application Insights oma AZD projektidesse  
+3. Loo enda meeskonnale kohandatud juhtpaneelid  
+4. Õpi [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastutusest loobumine:
-See dokument on tõlgitud tehisintellektil põhineva tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokumenti selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega valede tõlgenduste eest.
+**Vastutusest loobumine**:
+See dokument on tõlgitud tehisintellekti tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, tuleb arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algset dokumenti selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

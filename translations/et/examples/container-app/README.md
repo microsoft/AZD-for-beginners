@@ -1,35 +1,35 @@
-# Contexti rakenduse juurutamise näited AZD-ga
+# Konteinerirakenduste juurutamise näited AZD-ga
 
-See kataloog sisaldab põhjalikke näiteid konteineriseeritud rakenduste juurutamiseks Azure Container Apps'i platvormil, kasutades Azure Developer CLI-d (AZD). Need näited demonstreerivad tegelikke mustreid, parimaid tavasid ja tootmiseks valmis konfiguratsioone.
+See kataloog sisaldab põhjalikke näiteid konteinerirakenduste juurutamiseks Azure Container Apps keskkonda, kasutades Azure Developer CLI-d (AZD). Need näited demonstreerivad reaalseid mustreid, parimaid tavasid ja tootmiskõlblikke konfiguratsioone.
 
 ## 📚 Sisukord
 
 - [Ülevaade](../../../../examples/container-app)
-- [Eeltingimused](../../../../examples/container-app)
-- [Kiirstarti näited](../../../../examples/container-app)
+- [Nõuded](../../../../examples/container-app)
+- [Kiire algus näited](../../../../examples/container-app)
 - [Tootmise näited](../../../../examples/container-app)
-- [Edasijõudnud mustrid](../../../../examples/container-app)
+- [Täiustatud mustrid](../../../../examples/container-app)
 - [Parimad tavad](../../../../examples/container-app)
 
 ## Ülevaade
 
-Azure Container Apps on täielikult hallatav serverivaba konteineriplatvorm, mis võimaldab mikroteenuseid ja konteineriseeritud rakendusi käitada ilma infrastruktuuri haldamata. Kui seda kombineerida AZD-ga, saad:
+Azure Container Apps on täielikult hallatav serverivaba konteineriplatvorm, mis võimaldab teil käivitada mikroteenuseid ja konteineripõhiseid rakendusi ilma infrastruktuuri haldamata. AZD-ga kombineerides saate:
 
-- **Lihtsustatud juurutamise**: üks käsk juurutab konteinerid koos infrastruktuuriga
-- **Automaatne skaleerimine**: skaleerib nullini ja edasi HTTP-liikluse või sündmuste põhjal
-- **Integreeritud võrguühendus**: sisseehitatud teenuseotsing ja liikluse jaotamine
-- **Hallatav identiteet**: turvaline autentimine Azure'i ressurssidele
-- **Kuluoptimeerimine**: maksad ainult kasutatud ressursside eest
+- **Lihtsustatud juurutamine**: Ühe käsuga konteinerite juurutamine koos infrastruktuuriga
+- **Automaatne skaleerimine**: Skaleerimine nullini ja väljapoole HTTP-liikluse või sündmuste põhjal
+- **Integreeritud võrgustik**: Sisseehitatud teenuste avastamine ja liikluse jagamine
+- **Hallatav identiteet**: Turvaline autentimine Azure'i ressurssidele
+- **Kuluoptimeerimine**: Maksate ainult kasutatud ressursside eest
 
-## Eeltingimused
+## Nõuded
 
-Enne alustamist veendu, et sul on:
+Enne alustamist veenduge, et teil on:
 
 ```bash
 # Kontrolli AZD installatsiooni
 azd version
 
-# Kontrolli Azure CLI-d
+# Kontrolli Azure CLI
 az version
 
 # Kontrolli Dockerit (kohandatud piltide ehitamiseks)
@@ -40,16 +40,16 @@ azd auth login
 az login
 ```
 
-**Nõutavad Azure’i ressursid:**
+**Nõutavad Azure ressursid:**
 - Aktiivne Azure tellimus
-- Ressursigruppide loomise õigused
-- Juurdepääs Container Apps keskkonnale
+- Ressursigrupi loomise õigused
+- Ligipääs Container Apps keskkonnale
 
-## Kiirstarti näited
+## Kiire algus näited
 
-### 1. Lihtne veebiliidest API (Python Flask)
+### 1. Lihtne veebipõhine API (Python Flask)
 
-Juuruta põhjalik REST API Azure Container Apps platvormil.
+Juurutage lihtne REST API Azure Container Apps abil.
 
 **Näide: Python Flask API**
 
@@ -68,10 +68,10 @@ services:
 **Juurutamise sammud:**
 
 ```bash
-# Initsialiseeri mallist
+# Algatamine mallist
 azd init --template todo-python-mongo
 
-# Hangi infrastruktuur ja juuruta
+# Infrastruktuuri ettevalmistamine ja juurutamine
 azd up
 
 # Testi juurutust
@@ -79,25 +79,25 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Põhifunktsioonid:**
-- Automaatskaleerimine 0 kuni 10 koopiani
+**Peamised omadused:**
+- Automaatne skaleerimine vahemikus 0 kuni 10 koopiat
 - Tervisekontrollid ja elavuse kontrollid
 - Keskkonnamuutujate süstimine
 - Application Insights integratsioon
 
 ### 2. Node.js Express API
 
-Juuruta Node.js taustsüsteem MongoDB integratsiooniga.
+Juurutage Node.js taustasüsteem koos MongoDB integratsiooniga.
 
 ```bash
-# Initsialiseeri Node.js API mall
+# Node.js API malli initsialiseerimine
 azd init --template todo-nodejs-mongo
 
 # Konfigureeri keskkonnamuutujad
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Paigalda
+# Deploy
 azd up
 
 # Vaata logisid Azure Monitori kaudu
@@ -147,21 +147,21 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Staatiline frontend + API taustsüsteem
+### 3. Staatiline esipool + API taust
 
-Juuruta täispinu rakendus React frontendiga ja API taustsüsteemiga.
+Juurutage täisfunktsionaalne rakendus Reacti esipoolse liidese ja API taustsüsteemiga.
 
 ```bash
-# Initsialiseeri täispinu mall
+# Algatage täisstaki mall
 azd init --template todo-csharp-sql-swa-func
 
-# Ülevaata konfiguratsioon
+# Kontrollige konfiguratsiooni
 cat azure.yaml
 
-# Paiguta mõlemad teenused
+# Paigaldage mõlemad teenused
 azd up
 
-# Ava rakendus
+# Avage rakendus
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
@@ -169,9 +169,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### Näide 1: Mikroteenuste arhitektuur
 
-**Stsenaarium**: veebikaubanduse rakendus mitme mikroteenusega
+**Stsenaarium**: E-kaubanduse rakendus mitme mikroteenusega
 
-**Kataloogistruktuur:**
+**Kataloogi struktuur:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -213,27 +213,27 @@ services:
 
 **Juurutamine:**
 ```bash
-# Algata projekt
+# Algatage projekt
 azd init
 
-# Määra tootmiskeskkond
+# Määrake tootmiskeskkond
 azd env new production
 
-# Konfigureeri tootmise seaded
+# Konfigureerige tootmise seaded
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Juhi kõik teenused jooksma
+# Paigaldage kõik teenused
 azd up
 
-# Jälgi juurutamist
+# Jälgige juurutamist
 azd monitor --overview
 ```
 
-### Näide 2: AI-põhine konteinerirakendus
+### Näide 2: Tehisintellektiga konteinerirakendus
 
-**Stsenaarium**: AI vestlusrakendus Azure OpenAI integratsiooniga
+**Stsenaarium**: AI-põhine juturobot rakendus Microsoft Foundry mudelite integratsiooniga
 
 **Fail: src/ai-chat/app.py**
 ```python
@@ -244,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Kasutage turvaliseks juurdepääsuks Managed Identity't
+# Kasutage turvaliseks juurdepääsuks hallatud identiteeti
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -258,7 +258,7 @@ def chat():
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -320,30 +320,30 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Juurutamiskäsud:**
+**Juurutuskäsud:**
 ```bash
-# Keskkonna seadistamine
+# Seadista keskkond
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAI konfigureerimine
+# Konfigureeri OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
-# Juurutamine
+# Kasuta rakendust
 azd up
 
-# API testimine
+# Testi API-t
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Näide 3: Tausttöötlus järjekorra töötlemisega
+### Näide 3: Taustatöötlus järjekorraga
 
-**Stsenaarium**: tellimuste töötlemise süsteem sõnumijärjekorraga
+**Stsenaarium**: Tellimuste töötlemise süsteem sõnumijärjekorraga
 
-**Kataloogistruktuur:**
+**Kataloogi struktuur:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -378,7 +378,7 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Töötle tellimust
+            # Töötle tellimus
             print(f"Processing order: {message.content}")
             
             # Täielik sõnum
@@ -408,10 +408,10 @@ services:
 # Initsialiseeri
 azd init
 
-# Paigalda järjekorra konfiguratsiooniga
+# Käivita järjekorra konfiguratsiooniga
 azd up
 
-# Skaala töötajat vastavalt järjekorra pikkusele
+# Skaala töölist vastavalt järjekorra pikkusele
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,9 +420,9 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Edasijõudnud mustrid
+## Täiustatud mustrid
 
-### Muster 1: Blue-Green juurutamine
+### Muster 1: Sinine-roheline juurutamine
 
 ```bash
 # Loo uus versioon ilma liikluseta
@@ -431,7 +431,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # Testi uut versiooni
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Jaga liiklust (20% sinisele, 80% praegusele)
+# Jaota liiklus (20% sinisele, 80% praegusele)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -444,7 +444,7 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Muster 2: Canary juurutamine AZD-ga
+### Muster 2: Kanarilennutamine AZD-ga
 
 **Fail: .azure/dev/config.json**
 ```json
@@ -481,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Muster 3: Mitmeregiooniline juurutamine
+### Muster 3: Mitme regiooni juurutamine
 
 **Fail: azure.yaml**
 ```yaml
@@ -529,7 +529,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Juurutamine:**
 ```bash
-# Paigalda kõigisse piirkondadesse
+# Paigalda kõikidesse piirkondadesse
 azd up
 
 # Kontrolli lõpp-punkte
@@ -595,15 +595,15 @@ def create_order():
 ### 1. Ressursside organiseerimine
 
 ```bash
-# Kasuta ühtseid nimetamisvõtteid
+# Kasutage järjepidevaid nimetamisreegleid
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Märgista ressursid kulude jälgimiseks
+# Märgistage ressursid maksumuse jälgimiseks
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Turvalisuse parimad tavad
+### 2. Turvatavad tavad
 
 ```bicep
 // Always use managed identity
@@ -662,15 +662,15 @@ services:
             concurrent: 100
 ```
 
-### 4. Jälgimine ja vaatlus
+### 4. Jälgimine ja jälgitavus
 
 ```bash
 # Luba Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Vaata logisid reaalajas
+# Vaatluslogid reaalajas
 azd monitor --logs
-# Või kasuta Azure CLI-d konteinerirakenduste jaoks:
+# Või kasuta Azure CLI konteinerirakenduste jaoks:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Jälgi mõõdikuid
@@ -688,16 +688,16 @@ az monitor metrics alert create \
 ### 5. Kuluoptimeerimine
 
 ```bash
-# Skaaleeri nulli, kui ei kasutata
+# Skaala nulli, kui seda ei kasutata
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Kasuta välgulisi (spot) instantsid arenduskeskkondades
+# Kasuta arenduskeskkondades spot-instances'e
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Sea üles eelarvehoiatused
+# Sea eelarve hoiatused üles
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -707,7 +707,7 @@ az consumption budget create \
 
 ### 6. CI/CD integratsioon
 
-**GitHub Actions näide:**
+**Näide GitHub Actionsist:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -737,79 +737,79 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Sageli kasutatavad käsud
+## Levinumad käsud
 
 ```bash
-# Initsialiseeri uus konteinerirakenduse projekt
+# Uue konteinerirakenduse projekti algväärtustamine
 azd init --template <template-name>
 
-# Käivita infrastruktuur ja rakendus
+# Infrastruktuuri ja rakenduse juurutamine
 azd up
 
-# Käivita ainult rakenduskood (jäta infrastruktuur vahele)
+# Juuruta ainult rakenduse kood (jada infrastruktuur)
 azd deploy
 
-# Käivita ainult infrastruktuur
+# Juhi ainult infrastruktuuri
 azd provision
 
 # Vaata juurutatud ressursse
 azd show
 
-# Voogesita logisid kasutades azd monitori või Azure CLI-d
+# Jälgi logisid, kasutades azd monitori või Azure CLI-d
 azd monitor --logs
-# az containerapp logs show --name <teenuse-nimi> --resource-group <rg-nimi> --järgi
+# az containerapp logs show --name <teenuse-nimi> --resource-group <rg-nimi> --follow
 
 # Jälgi rakendust
 azd monitor --overview
 
-# Puhasta ressursid
+# Ressursside puhastamine
 azd down --force --purge
 ```
 
-## Tõrkeotsing
+## Probleemide tõrkeotsing
 
-### Probleem: konteiner ei käivitu
+### Probleem: Konteiner ei käivitu
 
 ```bash
-# Logide kontrollimine Azure CLI abil
+# Kontrolli logisid Azure CLI abil
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Konteineri sündmuste vaatamine
+# Vaata konteineri sündmusi
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# Kohalik testimine
+# Testi lokaalselt
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Probleem: konteinerirakenduse lõpp-punkti ei saa kasutada
+### Probleem: Konteinerirakenduse lõpp-punkti pole võimalik saavutada
 
 ```bash
-# Kontrolli sissetuleku konfiguratsiooni
+# Kontrolli ingressi konfiguratsiooni
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Kontrolli, kas sisemine sissetulek on lubatud
+# Kontrolli, kas sisemine ingress on lubatud
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### Probleem: jõudlusprobleemid
+### Probleem: Jõudlusprobleemid
 
 ```bash
-# Kontrolli ressursside kasutust
+# Kontrolli ressursikasutust
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Skaala ressursse ülespoole
+# Suurenda ressursse
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -819,29 +819,29 @@ az containerapp update \
 
 ## Täiendavad ressursid ja näited
 - [Mikroteenuste näide](./microservices/README.md)
-- [Lihtsa Flask API näide](./simple-flask-api/README.md)
+- [Lihtne Flask API näide](./simple-flask-api/README.md)
 - [Azure Container Apps dokumentatsioon](https://learn.microsoft.com/azure/container-apps/)
 - [AZD mallide galerii](https://azure.github.io/awesome-azd/)
 - [Container Apps näidised](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep mallid](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Bicepi mallid](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Panustamine
 
-Uute konteinerirakenduste näidiste panustamiseks:
+Uute konteinerirakenduste näidete panustamiseks:
 
-1. Loo uus alamkataloog oma näitega
-2. Lisa täielikud `azure.yaml`, `infra/` ja `src/` failid
-3. Lisa põhjalik README koos juurutamisjuhistega
-4. Testi juurutamist `azd up` käsuga
-5. Esita pull request
+1. Looge uus alamkataloog oma näitega
+2. Lisage täielikud `azure.yaml`, `infra/` ja `src/` failid
+3. Lisage põhjalik README koos juurutamisjuhistega
+4. Testige juurutamist käsuga `azd up`
+5. Saatke pull-päring
 
 ---
 
-**Abi vaja?** Liitu [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) kogukonnaga toe ja küsimuste jaoks.
+**Kas vajate abi?** Liituge [Microsoft Foundry Discordi](https://discord.gg/microsoft-azure) kogukonnaga toe ja küsimuste jaoks.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastutusest loobumine**:
-See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma emakeeles on autoriteetne allikas. Olulise info puhul soovitatakse kasutada professionaalse inimese tõlget. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste ega valesti mõistmiste eest.
+See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, palun olge teadlikud, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleb pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tekkida võivate arusaamatuste või valesti tõlgenduste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

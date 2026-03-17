@@ -1,288 +1,288 @@
-# Õppematerjal - Põhjalikud õpieesmärgid
+# Õppejuhend - Kõikehõlmavad õpieesmärgid
 
-**Õppeteekonna navigeerimine**
+**Õpperaja navigeerimine**
 - **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
-- **📖 Alusta õppimist**: [1. peatükk: Alused ja kiire algus](../README.md#-chapter-1-foundation--quick-start)
+- **📖 Alusta õppimist**: [1. peatükk: Alused ja kiire alustamine](../README.md#-chapter-1-foundation--quick-start)
 - **🎯 Edusammude jälgimine**: [Kursuse lõpetamine](../README.md#-course-completion--certification)
 
 ## Sissejuhatus
 
-See põhjalik õppematerjal pakub struktureeritud õpieesmärke, võtmekontseptsioone, praktilisi harjutusi ja hindamismaterjale, et aidata sul omandada Azure Developer CLI (azd). Kasuta seda juhendit oma edusammude jälgimiseks ja veendu, et oled katnud kõik olulised teemad.
+See põhjalik õppejuhend pakub struktureeritud õpieesmärke, põhikontseptsioone, praktilisi harjutusi ja hindematerjale, et aidata sul valdab Azure Developer CLI-d (azd). Kasuta seda juhendit oma edusammude jälgimiseks ja veendumiseks, et oled käsitlenud kõiki olulisi teemasid.
 
 ## Õpieesmärgid
 
-Selle õppematerjali läbimisega:
-- Omandad kõik Azure Developer CLI põhi- ja edasijõudnud kontseptsioonid
-- Arendad praktilisi oskusi Azure'i rakenduste juurutamisel ja haldamisel
-- Saad enesekindluse juurutuste tõrkeotsingus ja optimeerimises
-- Mõistad tootmiskõlblike juurutuspraktikate ja turvalisuse kaalutlusi
+Selle õppejuhendi lõpetamisel:
+- Valdad kõiki Azure Developer CLI põhialuseid ja edasijõudnuid kontseptsioone
+- Arendad praktilisi oskusi Azure rakenduste juurutamisel ja haldamisel
+- Saad kindlustunde vigade otsimisel ja juurutuste optimeerimisel
+- Mõistad tootmisvalmis juurutuspraktikaid ning turvaküsimusi
 
 ## Õpitulemused
 
-Pärast kõigi selle õppematerjali osade läbimist suudad:
-- Kavandada, juurutada ja hallata terviklikke rakendusarhitektuure, kasutades azd-d
-- Rakendada põhjalikke monitooringu-, turva- ja kulude optimeerimise strateegiaid
-- Iseseisvalt lahendada keerulisi juurutusprobleeme
+Pärast kõigi selle õppejuhendi osade läbimist oskad:
+- Disainida, juurutada ja hallata täielikke rakendusarhitektuure azd abil
+- Rakendada põhjalikku jälgimist, turvalisust ja kulude optimeerimist
+- Iseseisvalt tõrkeotsingut keerukatel juurutustel teha
 - Luua kohandatud malle ja panustada azd kogukonda
 
 ## 8-peatükiline õpistruktuur
 
-### 1. peatükk: Alused ja kiire algus (1. nädal)
-**Kestus**: 30-45 minutit | **Keerukus**: ⭐
+### 1. peatükk: Alused ja kiire alustamine (1. nädal)  
+**Kestus**: 30–45 minutit | **Raskusaste**: ⭐
 
 #### Õpieesmärgid
 - Mõista Azure Developer CLI põhimõisteid ja terminoloogiat
-- Paigaldada ja seadistada AZD oma arendusplatvormil
-- Juurutada oma esimene rakendus, kasutades olemasolevat malli
-- Navigeerida tõhusalt AZD käsurealiideses
+- Edukalt paigalda ja konfigureeri AZD oma arenduskeskkonnas
+- Juurutamine esimest rakendust olemasoleva malliga
+- Efektiivselt navigeerida AZD käsurealiideses
 
-#### Võtmekontseptsioonid
+#### Olulised kontseptsioonid
 - AZD projekti struktuur ja komponendid (azure.yaml, infra/, src/)
 - Mallipõhised juurutusvood
-- Keskkonna seadistamise alused
-- Ressursigruppide ja tellimuste haldamine
+- Keskkonnavalikute alused
+- Ressursside ja tellimuste haldus
 
 #### Praktilised harjutused
-1. **Paigaldamise kontrollimine**: Paigalda AZD ja kontrolli `azd version` abil
-2. **Esimene juurutus**: Juuruta edukalt todo-nodejs-mongo mall
-3. **Keskkonna seadistamine**: Konfigureeri oma esimesed keskkonnamuutujad
-4. **Ressursside uurimine**: Navigeeri juurutatud ressursse Azure'i portaalis
+1. **Paigaldamise kontroll**: Paigalda AZD ja kontrolli `azd version` käsuga
+2. **Esimene juurutamine**: Juuruta edukalt todo-nodejs-mongo mall
+3. **Keskkonna seadistamine**: Määra esimesed keskkonnamuutujad
+4. **Ressursside uurimine**: Sirvi Azure portaali juurutatud ressursse
 
-#### Hindamisküsimused
-- Millised on AZD projekti põhikomponendid?
-- Kuidas algatada uut projekti mallist?
-- Mis vahe on käskudel `azd up` ja `azd deploy`?
-- Kuidas hallata mitut keskkonda AZD abil?
+#### Hinnanguküsimused
+- Millised on AZD projekti põhisammud?
+- Kuidas algatada uus projekt mallist?
+- Mis vahe on `azd up` ja `azd deploy` käskudel?
+- Kuidas hallata mitut keskkonda AZD-ga?
 
 ---
 
-### 2. peatükk: AI-põhine arendus (2. nädal)
-**Kestus**: 1-2 tundi | **Keerukus**: ⭐⭐
+### 2. peatükk: AI-Eelne Arendus (2. nädal)  
+**Kestus**: 1–2 tundi | **Raskusaste**: ⭐⭐
 
 #### Õpieesmärgid
-- Integreerida Microsoft Foundry teenused AZD töövoogudega
-- Juurutada ja konfigureerida AI-põhiseid rakendusi
+- Integreeri Microsoft Foundry teenused AZD töövoogudesse
+- Juuruta ja konfigureeri tehisintellektil põhinevaid rakendusi
 - Mõista RAG (Retrieval-Augmented Generation) rakendusmustreid
-- Hallata AI mudelite juurutusi ja skaleerimist
+- Haldada tehisintellekti mudelite juurutust ja skaleerimist
 
-#### Võtmekontseptsioonid
-- Azure OpenAI teenuse integreerimine ja API haldamine
-- AI otsingu seadistamine ja vektorindekseerimine
-- Mudelite juurutusstrateegiad ja võimsuse planeerimine
-- AI rakenduste monitooring ja jõudluse optimeerimine
+#### Olulised kontseptsioonid
+- Microsoft Foundry Models teenuse integreerimine ja API haldus
+- AI otsingu konfiguratsioon ja vektoriindekseerimine
+- Mudelite juurutusstrateegiad ja mahuprognoosimine
+- AI rakenduste jälgimine ja jõudluse optimeerimine
 
 #### Praktilised harjutused
-1. **AI vestluse juurutus**: Juuruta azure-search-openai-demo mall
+1. **AI vestlusjuurutus**: Juuruta azure-search-openai-demo mall
 2. **RAG rakendamine**: Konfigureeri dokumentide indekseerimine ja otsing
-3. **Mudelikonfiguratsioon**: Seadista mitu AI mudelit erinevateks eesmärkideks
-4. **AI monitooring**: Rakenda Application Insights AI töökoormuste jaoks
+3. **Mudelite seadistus**: Seadista mitu AI mudelit erinevate vajadustega
+4. **AI jälgimine**: Rakenda Application Insights AI koormuste jaoks
 
-#### Hindamisküsimused
-- Kuidas konfigureerida Azure OpenAI teenuseid AZD mallis?
-- Millised on RAG arhitektuuri põhikomponendid?
-- Kuidas hallata AI mudelite võimsust ja skaleerimist?
-- Millised monitooringu mõõdikud on olulised AI rakenduste jaoks?
+#### Hinnanguküsimused
+- Kuidas seadistada Microsoft Foundry Models teenuseid AZD mallis?
+- Millised on RAG arhitektuuri peamised komponendid?
+- Kuidas hallata AI mudelite mahutavust ja skaleerimist?
+- Millised jälgimismõõdikud on olulised AI rakenduste jaoks?
 
 ---
 
-### 3. peatükk: Konfiguratsioon ja autentimine (3. nädal)
-**Kestus**: 45-60 minutit | **Keerukus**: ⭐⭐
+### 3. peatükk: Konfiguratsioon ja Autentimine (3. nädal)  
+**Kestus**: 45–60 minutit | **Raskusaste**: ⭐⭐
 
 #### Õpieesmärgid
-- Omandada keskkonna konfiguratsiooni ja haldamise strateegiad
-- Rakendada turvalisi autentimismustreid ja hallatud identiteeti
-- Organiseerida ressursse korrektsete nimetamisreeglitega
-- Konfigureerida mitme keskkonna juurutusi (arendus, testimine, tootmine)
+- Valda keskkonna konfiguratsiooni ja haldusstrateegiaid
+- Rakenda turvalisi autentimismustreid ja hallatud identiteeti
+- Korralda ressursse õigete nimetamisreeglitega
+- Konfigureeri mitmekeskkondseid juurutusi (dev, staging, prod)
 
-#### Võtmekontseptsioonid
-- Keskkondade hierarhia ja konfiguratsiooni prioriteedid
-- Hallatud identiteet ja teenusepõhise autentimise printsiibid
-- Key Vault integratsioon tundlike andmete haldamiseks
-- Keskkonnaspetsiifiliste parameetrite haldamine
+#### Olulised kontseptsioonid
+- Keskkonna hierarhia ja konfiguratsiooni prioriteedid
+- Hallatud identiteet ja teenusepõhine autentimine
+- Key Vault integratsioon saladuste halduseks
+- Keskkonnaspetsiifiline parameetrite haldus
 
 #### Praktilised harjutused
-1. **Mitme keskkonna seadistamine**: Konfigureeri arendus-, testimis- ja tootmiskeskkonnad
+1. **Mitmekeskkonna seadistus**: Konfigureeri dev, staging ja prod keskkonnad
 2. **Turvakonfiguratsioon**: Rakenda hallatud identiteedi autentimine
-3. **Saladuste haldamine**: Integreeri Azure Key Vault tundlike andmete jaoks
-4. **Parameetrite haldamine**: Loo keskkonnaspetsiifilised konfiguratsioonid
+3. **Saladuste haldus**: Integreeri Azure Key Vault tundliku info jaoks
+4. **Parameetrite haldus**: Loo keskkonnaspetsiifilised seadistused
 
-#### Hindamisküsimused
-- Kuidas konfigureerida erinevaid keskkondi AZD abil?
-- Millised on hallatud identiteedi eelised võrreldes teenusepõhiste autentimismeetoditega?
+#### Hinnanguküsimused
+- Kuidas konfigureerida erinevaid keskkondi AZD-ga?
+- Millised on hallatud identiteedi eelised teenusekontode ees?
 - Kuidas turvaliselt hallata rakenduse saladusi?
-- Mis on AZD konfiguratsiooni hierarhia?
+- Milline on konfiguratsiooni hierarhia AZD-s?
 
 ---
 
-### 4. peatükk: Koodina kirjeldatud infrastruktuur ja juurutus (4.-5. nädal)
-**Kestus**: 1-1,5 tundi | **Keerukus**: ⭐⭐⭐
+### 4. peatükk: Infrastruktuur koodina & Juurutamine (4.–5. nädal)  
+**Kestus**: 1–1,5 tundi | **Raskusaste**: ⭐⭐⭐
 
 #### Õpieesmärgid
-- Luua ja kohandada Bicep infrastruktuuri malle
-- Rakendada edasijõudnud juurutusmustrid ja töövood
-- Mõista ressursside ettevalmistamise strateegiaid
-- Kavandada skaleeritavaid mitme teenuse arhitektuure
+- Loo ja kohanda Bicep infrastruktuuri malle
+- Rakenda keerukaid juurutusmustreid ja töövooge
+- Mõista ressursside provisioneerimise strateegiaid
+- Kujunda skaleeritavaid mitmeteenusega arhitektuure
 
-- Juurutada konteineripõhiseid rakendusi, kasutades Azure Container Apps ja AZD-d
+- Juuruta konteineripõhised rakendused Azure Container Apps ja AZD abil
 
-#### Võtmekontseptsioonid
-- Bicep mallide struktuur ja parimad tavad
+#### Olulised kontseptsioonid
+- Bicep mallide struktuur ja parimad praktikad
 - Ressursside sõltuvused ja juurutuse järjekord
-- Parameetrifailid ja mallide modulaarsus
-- Kohandatud hookid ja juurutuse automatiseerimine
+- Parameetrite failid ja mallide moodulid
+- Kohandatud konksud ja juurutuse automatiseerimine
 - Konteinerirakenduste juurutusmustrid (kiire algus, tootmine, mikroteenused)
 
 #### Praktilised harjutused
-1. **Kohandatud mallide loomine**: Loo mitme teenuse rakenduse mall
-2. **Bicep oskuste arendamine**: Loo modulaarseid ja taaskasutatavaid infrastruktuurikomponente
-3. **Juurutuse automatiseerimine**: Rakenda eel- ja järeljuurutuse hookid
-4. **Arhitektuuri disain**: Juuruta keeruline mikroteenuste arhitektuur
-5. **Konteinerirakenduste juurutus**: Juuruta [Simple Flask API](../../../examples/container-app/simple-flask-api) ja [Microservices Architecture](../../../examples/container-app/microservices) näited, kasutades AZD-d
+1. **Kohandatud malli loomine**: Ehita mitmeteenusega rakenduse mall
+2. **Bicep valdamine**: Loo modulaarseid, taaskasutatavaid infrastruktuurikomponente
+3. **Juurutuse automatiseerimine**: Rakenda pre-/post-juurutuse konksud
+4. **Arhitektuuri disain**: Juuruta keerukas mikroteenuste arhitektuur
+5. **Konteinerirakenduse juurutus**: Juuruta [Simple Flask API](../../../examples/container-app/simple-flask-api) ja [Microservices Architecture](../../../examples/container-app/microservices) näited AZD-ga
 
-#### Hindamisküsimused
+#### Hinnanguküsimused
 - Kuidas luua kohandatud Bicep malle AZD jaoks?
-- Millised on parimad tavad infrastruktuurikoodi organiseerimiseks?
-- Kuidas hallata ressursside sõltuvusi mallides?
-- Millised juurutusmustrid toetavad nullseisakuga uuendusi?
+- Millised on head tavad infrastruktuurikoodi korraldamisel?
+- Kuidas käsitleda ressursside sõltuvusi mallides?
+- Millised juurutusmustrid toetavad katkestusteta uuendusi?
 
 ---
 
-### 5. peatükk: Mitmeagendilised AI lahendused (6.-7. nädal)
-**Kestus**: 2-3 tundi | **Keerukus**: ⭐⭐⭐⭐
+### 5. peatükk: Mitme agendiga AI lahendused (6.–7. nädal)  
+**Kestus**: 2–3 tundi | **Raskusaste**: ⭐⭐⭐⭐
 
 #### Õpieesmärgid
-- Kavandada ja rakendada mitmeagendilisi AI arhitektuure
-- Orkestreerida agentide koordineerimist ja suhtlust
-- Juurutada tootmiskõlblikke AI lahendusi koos monitooringuga
-- Mõista agentide spetsialiseerumise ja töövoo mustreid
-- Integreerida konteineripõhiseid mikroteenuseid osana mitmeagendilistest lahendustest
+- Kujunda ja rakenda mitme agendiga tehisintellekti arhitektuure
+- Orkestreeri agentide koordineerimist ja suhtlust
+- Juuruta tootmisvalmis AI lahendusi koos jälgimisega
+- Mõista agentide spetsialiseerumist ja töövoogude mustreid
+- Integreeri konteineripõhised mikroteenused mitme agendi lahendustesse
 
-#### Võtmekontseptsioonid
-- Mitmeagendilised arhitektuurimustrid ja disainiprintsiibid
-- Agentide suhtlusprotokollid ja andmevoog
-- Koormuse tasakaalustamise ja skaleerimise strateegiad AI agentidele
-- Tootmise monitooring mitmeagendiliste süsteemide jaoks
-- Teenustevaheline suhtlus konteinerikeskkondades
+#### Olulised kontseptsioonid
+- Mitme agendi arhitektuurimustrid ja disainiprintsiibid
+- Agentide kommunikatsiooniprotokollid ja andmevoog
+- Koormuse tasakaalustamine ja AI agendi skaleerimine
+- Tootmise jälgimine mitme agenti süsteemides
+- Teenus-teenuse suhtlus konteinerikeskkondades
 
 #### Praktilised harjutused
-1. **Jaemüügilahenduse juurutus**: Juuruta täielik mitmeagendiline jaemüügistsenaarium
-2. **Agentide kohandamine**: Muuda kliendi- ja inventuuriagentide käitumist
-3. **Arhitektuuri skaleerimine**: Rakenda koormuse tasakaalustamine ja automaatne skaleerimine
-4. **Tootmise monitooring**: Seadista põhjalik monitooring ja häirete süsteem
-5. **Mikroteenuste integreerimine**: Laienda [Microservices Architecture](../../../examples/container-app/microservices) näidet, et toetada agendipõhiseid töövooge
+1. **Jaemüügilahenduse juurutus**: Juuruta täielik mitme agendi jaemüügistsenaarium
+2. **Agendi kohandamine**: Muuda kliendi ja laohalduri agendi käitumist
+3. **Arhitektuuri skaleerimine**: Rakenda koormuse tasakaalustamist ja automaatset skaleerimist
+4. **Tootmise jälgimine**: Sea sisse põhjalik jälgimine ja häireregistrid
+5. **Mikroteenuste integratsioon**: Laienda [Microservices Architecture](../../../examples/container-app/microservices) näidet agentide töövoogude toetamiseks
 
-#### Hindamisküsimused
-- Kuidas kavandada tõhusad mitmeagendilised suhtlusmustrid?
-- Millised on võtmekaalutlused AI agentide töökoormuste skaleerimisel?
-- Kuidas monitoorida ja siluda mitmeagendilisi AI süsteeme?
-- Millised tootmismustrid tagavad AI agentide töökindluse?
+#### Hinnanguküsimused
+- Kuidas kujundada tõhusaid mitme agendi suhtlusmustreid?
+- Millised on tähtsad kaalutlused AI agentide koormuse skaleerimisel?
+- Kuidas jälgida ja tõrkeotsingut teha mitme agendi AI süsteemides?
+- Millised tootmispraktikad tagavad AI agentide töökindluse?
 
 ---
 
-### 6. peatükk: Eeljuurutuse valideerimine ja planeerimine (8. nädal)
-**Kestus**: 1 tund | **Keerukus**: ⭐⭐
+### 6. peatükk: Enne juurutamist valideerimine ja planeerimine (8. nädal)  
+**Kestus**: 1 tund | **Raskusaste**: ⭐⭐
 
 #### Õpieesmärgid
-- Teha põhjalik võimsuse planeerimine ja ressursside valideerimine
-- Valida optimaalsed Azure SKU-d kulutõhususe tagamiseks
-- Rakendada automatiseeritud eelkontrollid ja valideerimine
-- Planeerida juurutusi kulude optimeerimise strateegiatega
+- Teosta põhjalik mahuprognoos ja ressursside valideerimine
+- Vali kulutõhusad Azure SKU-d
+- Rakenda automatiseeritud eelkontrolli ja valideerimist
+- Planeeri juurutused koos kulude optimeerimise strateegiatega
 
-#### Võtmekontseptsioonid
-- Azure'i ressursside kvoodid ja võimsuse piirangud
-- SKU valikukriteeriumid ja kulude optimeerimine
-- Automatiseeritud valideerimisskriptid ja testimine
-- Juurutuse planeerimine ja riskide hindamine
+#### Olulised kontseptsioonid
+- Azure ressursside kvoodid ja mahupiirangud
+- SKU valiku kriteeriumid ja kulude optimeerimine
+- Automatiseeritud valideerimiskäsud ja testimine
+- Juurutuse planeerimine ja riskihindamine
 
 #### Praktilised harjutused
-1. **Võimsuse analüüs**: Analüüsi oma rakenduste ressursinõudeid
-2. **SKU optimeerimine**: Võrdle ja vali kulutõhusad teenustasemed
-3. **Valideerimise automatiseerimine**: Rakenda eeljuurutuse kontrollskriptid
-4. **Kulude planeerimine**: Loo juurutuse kuluhinnangud ja eelarved
+1. **Mahuanalüüs**: Analüüsi rakenduste ressursside nõudeid
+2. **SKU optimeerimine**: Võrdle ja vali kulutõhusad tasemed
+3. **Valideerimise automatiseerimine**: Rakenda eeljooksu kontrolliskriptid
+4. **Kulude planeerimine**: Koosta juurutuse kulude hinnang ja eelarve
 
-#### Hindamisküsimused
-- Kuidas valideerida Azure'i võimsust enne juurutust?
-- Millised tegurid mõjutavad SKU valikuid?
-- Kuidas automatiseerida eeljuurutuse valideerimist?
-- Millised strateegiad aitavad optimeerida juurutuskulusid?
+#### Hinnanguküsimused
+- Kuidas valideerida Azure mahutavust enne juurutust?
+- Millised tegurid mõjutavad SKU valikut?
+- Kuidas automatiseerida eelpiloodi valideerimist?
+- Millised strateegiad aitavad kulusid optimeerida?
 
 ---
 
-### 7. peatükk: Tõrkeotsing ja silumine (9. nädal)
-**Kestus**: 1-1,5 tundi | **Keerukus**: ⭐⭐
+### 7. peatükk: Tõrkeotsing ja silumine (9. nädal)  
+**Kestus**: 1–1,5 tundi | **Raskusaste**: ⭐⭐
 
 #### Õpieesmärgid
-- Arendada süsteemseid tõrkeotsingu lähenemisviise AZD juurutuste jaoks
-- Lahendada levinud juurutus- ja konfiguratsiooniprobleeme
-- Siluda AI-spetsiifilisi probleeme ja jõudlusprobleeme
-- Rakendada monitooringut ja häireid probleemide ennetavaks avastamiseks
+- Arenda süsteemseid silumisstrateegiaid AZD juurutuste jaoks
+- Lahenda levinud juurutus- ja konfiguratsiooniprobleeme
+- Mõista AI-spetsiifilisi tõrkeid ja jõudlusküsimusi
+- Rakenda jälgimist ja häireid ennetava probleemide avastamiseks
 
-#### Võtmekontseptsioonid
-- Diagnostikatehnikad ja logimisstrateegiad
-- Levinud tõrkemustrid ja nende lahendused
-- Jõudluse monitooring ja optimeerimine
-- Intsidendihaldus ja taastamisprotseduurid
+#### Olulised kontseptsioonid
+- Diagnostika tehnikad ja logimise strateegiad
+- Levinud rikete mustrid ja lahendused
+- Jõudluse jälgimine ja optimeerimine
+- Juhtumite reageerimine ja taasteprotseduurid
 
 #### Praktilised harjutused
-1. **Diagnostikaoskused**: Harjuta tahtlikult vigaste juurutustega
-2. **Logianalüüs**: Kasuta tõhusalt Azure Monitori ja Application Insightsi
-3. **Jõudluse häälestamine**: Optimeeri aeglaselt töötavaid rakendusi
-4. **Taastamisprotseduurid**: Rakenda varundus- ja katastroofitaaste lahendusi
+1. **Diagnostika oskused**: Harjuta sihilikult vigaseid juurutusi
+2. **Logianalüüs**: Kasuta Azure Monitorit ja Application Insightsi tõhusalt
+3. **Jõudluse häälestus**: Optimeeri aeglaselt töötavaid rakendusi
+4. **Taasteprotseduurid**: Rakenda varundamist ja ärikatkestuse taaste
 
-#### Hindamisküsimused
-- Millised on kõige levinumad AZD juurutusvead?
-- Kuidas siluda autentimis- ja õiguste probleeme?
-- Millised monitooringustrateegiad aitavad vältida tootmisprobleeme?
-- Kuidas optimeerida rakenduse jõudlust Azure'is?
+#### Hinnanguküsimused
+- Millised on levinumad AZD juurutusvead?
+- Kuidas tõrkeid autentimises ja õigustes lahendada?
+- Millised jälgimisstrateegiad aitavad tootmise vigu ennetada?
+- Kuidas optimeerida rakenduse jõudlust Azure’is?
 
 ---
 
-### 8. peatükk: Tootmise ja ettevõtte mustrid (10.-11. nädal)
-**Kestus**: 2-3 tundi | **Keerukus**: ⭐⭐⭐⭐
+### 8. peatükk: Tootmis- ja ettevõttetasandi mustrid (10.–11. nädal)  
+**Kestus**: 2–3 tundi | **Raskusaste**: ⭐⭐⭐⭐
 
 #### Õpieesmärgid
-- Rakendada ettevõtte tasemel juurutusstrateegiaid
-- Kavandada turvamustreid ja vastavusraamistikke
-- Luua monitooringu, halduse ja kulude juhtimise süsteemid
-- Luua skaleeritavad CI/CD torustikud AZD integratsiooniga
-- Rakendada parimaid tavasid tootmiskonteinerite rakenduste juurutamiseks (turvalisus, monitooring, kulud, CI/CD)
+- Rakenda ettevõttetasandi juurutusstrateegiaid
+- Kujunda turvamustrid ja vastavusraamistikud
+- Loo jälgimise, valitsemise ja kulude halduse süsteeme
+- Ehita skaleeritavaid CI/CD torustikke AZD integratsiooniga
+- Kasuta parimaid tavasid tootmis konteinerirakenduste juurutamisel (turvalisus, jälgimine, kulud, CI/CD)
 
-#### Võtmekontseptsioonid
-- Ettevõtte turvalisuse ja vastavuse nõuded
-- Haldusraamistikud ja poliitikate rakendamine
-- Täiustatud monitooring ja kulude juhtimine
+#### Olulised kontseptsioonid
+- Ettevõtte turva- ja vastavusnõuded
+- Valitsemisraamistikud ja poliitika rakendamine
+- Täiustatud jälgimine ja kulude juhtimine
 - CI/CD integratsioon ja automatiseeritud juurutustorustikud
-- Blue-green ja kanarijuurutuse strateegiad konteineripõhiste töökoormuste jaoks
+- Sinine-roheline ja kanarindjuurutus konteinerkoormustele
 
 #### Praktilised harjutused
 1. **Ettevõtte turvalisus**: Rakenda põhjalikud turvamustrid
-2. **Haldusraamistik**: Seadista Azure Policy ja ressursside haldus
-3. **Täiustatud monitooring**: Loo juhtpaneelid ja automatiseeritud häired
+2. **Valitsemisraamistik**: Sea sisse Azure Policy ja ressursside haldus
+3. **Täiustatud jälgimine**: Loo juhtpaneelid ja automaatsed häired
 4. **CI/CD integratsioon**: Ehita automatiseeritud juurutustorustikud
-5. **Tootmiskonteinerite rakendused**: Rakenda turvalisust, monitooringut ja kulude optimeerimist [Microservices Architecture](../../../examples/container-app/microservices) näitele
+5. **Tootmis konteinerirakendused**: Rakenda turvalisus, jälgimine ja kulude optimeerimine [Microservices Architecture](../../../examples/container-app/microservices) näitel
 
-#### Hindamisküsimused
+#### Hinnanguküsimused
 - Kuidas rakendada ettevõtte turvalisust AZD juurutustes?
-- Millised haldusmustrid tagavad vastavuse ja kulude kontrolli?
-- Kuidas kavandada skaleeritavat monitooringut tootmissüsteemidele?
-- Millised CI/CD mustrid sobivad kõige paremini AZD töövoogudega?
+- Millised valitsemispraktikad tagavad vastavuse ja kulude kontrolli?
+- Kuidas kujundada skaleerivat jälgimist tootmissüsteemidele?
+- Millised CI/CD mustrid sobivad AZD töövoogudega kõige paremini?
 
 #### Õpieesmärgid
 - Mõista Azure Developer CLI põhitõdesid ja põhikontseptsioone
-- Paigaldada ja seadistada azd oma arenduskeskkonnas
-- Teha esimene juurutus, kasutades olemasolevat malli
-- Navigeerida azd projekti struktuuris ja mõista võtmekomponente
+- Edukalt paigalda ja konfigureeri azd oma arenduskeskkonnas
+- Lõpeta esimene juurutus olemasoleva malliga
+- Navigeeri azd projekti struktuuris ja mõista peamisi komponente
 
-#### Võtmekontseptsioonid
+#### Olulised kontseptsioonid
 - Mallid, keskkonnad ja teenused
-- azure.yaml konfiguratsioonistruktuur
+- azure.yaml konfiguratsiooni struktuur
 - Põhilised azd käsud (init, up, down, deploy)
-- Koodina kirjeldatud infrastruktuuri põhimõtted
-- Azure'i autentimine ja autoriseerimine
+- Infrastruktuur koodina põhimõtted
+- Azure autentimine ja autoriseerimine
 
 #### Praktilised harjutused
 
-**Harjutus 1.1: Paigaldamine ja seadistamine**
+**Harjutus 1.1: Paigaldamine ja seadistamine**  
 ```bash
 # Täida need ülesanded:
 1. Install azd using your preferred method
@@ -291,18 +291,18 @@ Pärast kõigi selle õppematerjali osade läbimist suudad:
 4. Test connectivity with: azd auth login
 5. Explore available templates: azd template list
 ```
-
-**Harjutus 1.2: Esimene juurutus**
+  
+**Harjutus 1.2: Esimene juurutus**  
 ```bash
-# Paigalda lihtne veebirakendus:
+# Käivita lihtne veebirakendus:
 1. Initialize project: azd init --template todo-nodejs-mongo
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
 4. Test the deployed application
 5. Clean up resources: azd down
 ```
-
-**Harjutus 1.3: Projekti struktuuri analüüs**
+  
+**Harjutus 1.3: Projekti struktuuri analüüs**  
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -310,31 +310,123 @@ Analyze the following components:
 3. src/ directory - application source code
 4. .azure/ directory - environment configurations
 ```
-
+  
 #### Enesehindamise küsimused
 1. Millised on azd arhitektuuri kolm põhikontseptsiooni?
-2. Milleks kasutatakse azure.yaml faili?
-3. Kuidas aitavad keskkonnad hallata erinevaid juurutuse sihtm
-5. Millised kaalutlused on olulised mitme piirkonna juurutuste puhul?
+2. Mis on azure.yaml faili eesmärk?
+3. Kuidas keskkonnad aitavad hallata erinevaid juurutuskohtasid?
+4. Milliseid autentimismeetodeid saab azd-ga kasutada?
+5. Mis juhtub, kui käivitad esimest korda `azd up`?
 
-### Moodul 4: Enne juurutamist tehtav valideerimine (5. nädal)
+---
+
+## Edusammude jälgimine ja hindamisraamistik  
+```bash
+# Loo ja seadista mitu keskkonda:
+1. Create development environment: azd env new development
+2. Create staging environment: azd env new staging
+3. Create production environment: azd env new production
+4. Configure different settings for each environment
+5. Deploy the same application to different environments
+```
+  
+**Harjutus 2.2: Täpsem konfiguratsioon**  
+```yaml
+# Modify azure.yaml to include:
+1. Multiple services with different configurations
+2. Pre and post deployment hooks
+3. Environment-specific parameters
+4. Custom resource naming patterns
+```
+  
+**Harjutus 2.3: Turvakonfiguratsioon**  
+```bash
+# Rakenda turvalisuse parimaid tavasid:
+1. Configure managed identity for service authentication
+2. Set up Azure Key Vault for secrets management
+3. Implement least-privilege access controls
+4. Enable HTTPS and secure communication protocols
+```
+  
+#### Enesehindamise küsimused
+1. Kuidas azd haldab keskkonnamuutuja prioriteeti?
+2. Mis on juurutuskõrvalkäsud ja millal neid kasutada?
+3. Kuidas seada erinevaid SKUid erinevatele keskkondadele?
+4. Millised on erinevate autentimismeetodite turvariskid?
+5. Kuidas hallata saladusi ja tundlikku konfiguratsiooni?
+
+### Moodul 3: Juurutamine ja Provisioneerimine (4. nädal)
 
 #### Õpieesmärgid
-- Rakendada põhjalikke enne juurutamist tehtavaid kontrolle
-- Valdada võimsuse planeerimist ja ressursside valideerimist
-- Mõista SKU valikut ja kulude optimeerimist
-- Luua automatiseeritud valideerimise torujuhtmeid
+- Valda juurutusvoogusid ja parimaid tavasid
+- Mõista infrastruktuuri koodina Bicep mallidega
+- Rakenda keerukaid mitmeteenusega arhitektuure
+- Optimeeri juurutuste jõudlust ja töökindlust
 
-#### Põhimõisted, mida omandada
-- Azure'i ressursside kvoodid ja piirangud
-- SKU valiku kriteeriumid ja kulude mõjud
-- Automatiseeritud valideerimise skriptid ja tööriistad
-- Võimsuse planeerimise metoodikad
-- Jõudluse testimine ja optimeerimine
+#### Olulised kontseptsioonid
+- Bicep mallide struktuur ja moodulid
+- Ressursside sõltuvused ja järjekord
+- Juurutusstrateegiad (sinine-roheline, samm-sammuline uuendus)
+- Mitme regiooni juurutused
+- Andmebaasi migreerimine ja andmehaldus
+
+#### Praktilised harjutused
+
+**Harjutus 3.1: Kohandatud infrastruktuur**  
+```bicep
+// Create custom Bicep templates for:
+1. Web application with custom domain and SSL
+2. Database with backup and high availability
+3. Storage account with access policies
+4. Monitoring and logging configuration
+5. Network security groups and virtual networks
+```
+  
+**Harjutus 3.2: Mitmeteenusega rakendus**  
+```bash
+# Paigaldage mikroteenuste arhitektuur:
+1. Frontend web application
+2. Backend API service
+3. Database service
+4. Message queue service
+5. Background worker service
+```
+  
+**Harjutus 3.3: Andmebaasi integratsioon**  
+```bash
+# Rakenda andmebaasi juurutamise mustrid:
+1. Deploy PostgreSQL with connection pooling
+2. Implement schema migrations
+3. Configure backup and recovery procedures
+4. Set up read replicas for performance
+5. Implement data seeding for different environments
+```
+  
+#### Enesehindamise küsimused
+1. Millised eelised on Bicepi kasutamisel ARM mallide ees?
+2. Kuidas hallata andmebaasi migreerimisi azd juurutustes?
+3. Millised strateegiad toetavad katkestusteta juurutusi?
+4. Kuidas hallata sõltuvusi teenuste vahel?
+5. Millised kaalutlused on mitmeregiooniliste juurutuste puhul?
+
+### Moodul 4: Enne juurutamist valideerimine (5. nädal)
+
+#### Õpieesmärgid
+- Rakenda põhjalikke eelpaigalduskontrolle
+- Oska mahupõhist planeerimist ja ressursside valideerimist
+- Mõista SKU valikut ja kulude optimeerimist
+- Ehita automatiseeritud valideerimisliinid
+
+#### Olulised mõisted, mida valdad
+- Azure’i ressursside kvantiteedid ja piirangud
+- SKU valiku kriteeriumid ja kulutused
+- Automaatsete valideerimursskriptide ja tööriistade kasutamine
+- Mahu planeerimise metoodikad
+- Tulemuslikkuse testimine ja optimeerimine
 
 #### Harjutused
 
-**Harjutus 4.1: Võimsuse planeerimine**
+**Harjutus 4.1: Mahu planeerimine**
 ```bash
 # Rakenda mahutavuse valideerimine:
 1. Create scripts to check Azure quotas
@@ -344,9 +436,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Harjutus 4.2: Kontroll enne juurutamist**
+**Harjutus 4.2: Eelkontrollid**
 ```powershell
-# Koosta terviklik valideerimise torujuhe:
+# Koosta ulatuslik valideerimisvoog:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -356,7 +448,7 @@ Analyze the following components:
 
 **Harjutus 4.3: SKU optimeerimine**
 ```bash
-# Optimeeri teenuse konfiguratsioonid:
+# Optimeeri teenuse konfiguratsioone:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
@@ -365,32 +457,32 @@ Analyze the following components:
 ```
 
 #### Enesehindamise küsimused
-1. Millised tegurid peaksid mõjutama SKU valiku otsuseid?
-2. Kuidas valideerida Azure'i ressursside saadavust enne juurutamist?
-3. Millised on süsteemi kontrolli enne juurutamist põhikomponendid?
+1. Millised tegurid peaksid mõjutama SKU valikut?
+2. Kuidas valideerid Azure’i ressursside kättesaadavust enne juurutamist?
+3. Millised on eelkontrolli süsteemi põhikomponendid?
 4. Kuidas hinnata ja kontrollida juurutamise kulusid?
-5. Milline jälgimine on oluline võimsuse planeerimiseks?
+5. Milline jälgimine on oluline mahu planeerimiseks?
 
 ### Moodul 5: Tõrkeotsing ja silumine (6. nädal)
 
 #### Õpieesmärgid
-- Valdada süstemaatilisi tõrkeotsingu metoodikaid
-- Arendada oskusi keerukate juurutamisprobleemide silumiseks
-- Rakendada põhjalikku jälgimist ja hoiatussüsteeme
-- Luua intsidentide lahendamise ja taastamise protseduurid
+- Saa meistriks süsteemsete tõrkeotsingu metoodikate valdamisel
+- Arenda oskusi keerukate juurutamisprobleemide silumisel
+- Rakenda põhjalikku jälgimist ja teavitamist
+- Koosta intsidentide reageerimise ja taastamise protseduurid
 
-#### Põhimõisted, mida omandada
-- Levinud juurutamisvigade mustrid
-- Logide analüüsi ja korrelatsiooni tehnikad
-- Jõudluse jälgimine ja optimeerimine
-- Turvaintsidentide tuvastamine ja lahendamine
-- Katastroofide taastamine ja ärikontinuitet
+#### Olulised mõisted, mida valdad
+- Levinud juurutamisvead ja nende mustrid
+- Logianalüüsi ja seostamise tehnikad
+- Tulemuslikkuse jälgimine ja optimeerimine
+- Turvaintsidentide tuvastamine ja reageerimine
+- Katastroofide taastamine ja ärijätkusuutlikkus
 
 #### Harjutused
 
 **Harjutus 5.1: Tõrkeotsingu stsenaariumid**
 ```bash
-# Harjuta levinud probleemide lahendamist:
+# Harjuta tavapäraste probleemide lahendamist:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -400,7 +492,7 @@ Analyze the following components:
 
 **Harjutus 5.2: Jälgimise rakendamine**
 ```bash
-# Seadistage põhjalik jälgimine:
+# Seadista põhjalik jälgimine:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -408,9 +500,9 @@ Analyze the following components:
 5. Health check endpoints and automated testing
 ```
 
-**Harjutus 5.3: Intsidentide lahendamine**
+**Harjutus 5.3: Intsidenti reageerimine**
 ```bash
-# Koosta intsidentide lahendamise protseduurid:
+# Koostage intsidentidele reageerimise protseduurid:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -419,30 +511,30 @@ Analyze the following components:
 ```
 
 #### Enesehindamise küsimused
-1. Mis on süstemaatiline lähenemine azd juurutuste tõrkeotsingule?
-2. Kuidas korreleerida logisid mitme teenuse ja ressursi vahel?
-3. Millised jälgimismõõdikud on kõige olulisemad probleemide varajaseks tuvastamiseks?
+1. Milline on süsteemne lähenemine azd juurutuste tõrkeotsingule?
+2. Kuidas seostad logisid mitme teenuse ja ressursi vahel?
+3. Millised jälgimisnäitajad on kriitilised probleemide varajaseks avastamiseks?
 4. Kuidas rakendada tõhusaid katastroofide taastamise protseduure?
-5. Millised on intsidentide lahendamise plaani põhikomponendid?
+5. Millised on intsidentide reageerimise plaani põhikomponendid?
 
 ### Moodul 6: Täiustatud teemad ja parimad praktikad (7.-8. nädal)
 
 #### Õpieesmärgid
-- Rakendada ettevõtte tasemel juurutamismustreid
-- Valdada CI/CD integreerimist ja automatiseerimist
-- Arendada kohandatud malle ja panustada kogukonda
+- Rakenda ettevõttetaseme juurutusmustreid
+- Saa meister CI/CD integratsiooni ja automatiseerimise valdkonnas
+- Arenda kohandatud malle ja aita kogukonda
 - Mõista täiustatud turva- ja vastavusnõudeid
 
-#### Põhimõisted, mida omandada
+#### Olulised mõisted, mida valdad
 - CI/CD torujuhtme integreerimise mustrid
-- Kohandatud mallide arendamine ja levitamine
-- Ettevõtte juhtimine ja vastavus
-- Täiustatud võrgu- ja turvakonfiguratsioonid
-- Jõudluse optimeerimine ja kulude haldamine
+- Kohandatud mallide arendus ja levitamine
+- Ettevõtte haldus ja vastavus
+- Täiustatud võrgustik ja turvakonfiguratsioonid
+- Tulemuslikkuse optimeerimine ja kulude juhtimine
 
 #### Harjutused
 
-**Harjutus 6.1: CI/CD integreerimine**
+**Harjutus 6.1: CI/CD integratsioon**
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -452,9 +544,9 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
 
-**Harjutus 6.2: Kohandatud mallide arendamine**
+**Harjutus 6.2: Kohandatud mallide arendus**
 ```bash
-# Loo ja avalda kohandatud mallid:
+# Loo ja avalda kohandatud malle:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -462,7 +554,7 @@ Analyze the following components:
 5. Publish and maintain template in template gallery
 ```
 
-**Harjutus 6.3: Ettevõtte rakendamine**
+**Harjutus 6.3: Ettevõttesisene rakendamine**
 ```bash
 # Rakenda ettevõtte tasemel funktsioone:
 1. Multi-tenant architecture with proper isolation
@@ -474,133 +566,133 @@ Analyze the following components:
 
 #### Enesehindamise küsimused
 1. Kuidas integreerida azd olemasolevatesse CI/CD töövoogudesse?
-2. Millised on kohandatud mallide arendamise peamised kaalutlused?
-3. Kuidas rakendada juhtimist ja vastavust azd juurutustes?
-4. Millised on parimad praktikad ettevõtte tasemel juurutuste jaoks?
-5. Kuidas tõhusalt panustada azd kogukonda?
+2. Millised on põhipunktid kohandatud mallide arendamisel?
+3. Kuidas rakendada haldust ja vastavust azd juurutustes?
+4. Millised on parimad praktikad ettevõtte suuruses juurutusteks?
+5. Kuidas panustada efektiivselt azd kogukonda?
 
 ## Praktilised projektid
 
 ### Projekt 1: Isiklik portfoolio veebisait
-**Keerukus**: Algaja  
+**Raskusaste**: Algaja  
 **Kestus**: 1-2 nädalat
 
 Loo ja juuruta isiklik portfoolio veebisait, kasutades:
-- Staatilise veebisaidi majutust Azure Storage'is
-- Kohandatud domeeni konfiguratsiooni
-- CDN-i integreerimist globaalse jõudluse jaoks
-- Automatiseeritud juurutamise torujuhet
+- Staatilist veebimajutust Azure Storage’il
+- Kohandatud domeeni konfigureerimist
+- CDN integratsiooni globaalse jõudluse jaoks
+- Automatiseeritud juurutusliini
 
-**Tulemused**:
-- Töötav veebisait, mis on juurutatud Azure'is
-- Kohandatud azd mall portfoolio juurutamiseks
-- Juurutamise protsessi dokumentatsioon
-- Kulude analüüs ja optimeerimise soovitused
+**Töö tulemused**:
+- Töötav veebisait paigaldatud Azure’i keskkonda
+- Kohandatud azd mall portfoolio juurutuseks
+- Juurutuse protsessi dokumentatsioon
+- Kulude analüüs ja optimeerimissoovitused
 
 ### Projekt 2: Ülesannete haldamise rakendus
-**Keerukus**: Keskmine  
+**Raskusaste**: Kesktase  
 **Kestus**: 2-3 nädalat
 
-Loo täisfunktsionaalne ülesannete haldamise rakendus, mis sisaldab:
-- React frontend, mis on juurutatud App Service'ile
-- Node.js API backend koos autentimisega
+Loo täispinu ülesannete haldamise rakendus koos:
+- React frontend, juurutatud App Service’is
+- Node.js API backend autentimisega
 - PostgreSQL andmebaas koos migratsioonidega
 - Application Insights jälgimine
 
-**Tulemused**:
-- Täielik rakendus koos kasutaja autentimisega
+**Töö tulemused**:
+- Täielik rakendus kasutaja autentimisega
 - Andmebaasi skeem ja migratsiooniskriptid
-- Jälgimise armatuurlauad ja hoiatusreeglid
-- Mitme keskkonna juurutamise konfiguratsioon
+- Jälgimisarmatuurlaudade ja teavituse reeglid
+- Mitmekesiste keskkondade juurutuskonfiguratsioon
 
 ### Projekt 3: Mikroteenuste e-kaubanduse platvorm
-**Keerukus**: Täiustatud  
+**Raskusaste**: Täiustatud  
 **Kestus**: 4-6 nädalat
 
-Disaini ja rakenda mikroteenustel põhinev e-kaubanduse platvorm:
+Disaini ja rakenda mikroteenustepõhine e-kaubanduse platvorm:
 - Mitmed API teenused (kataloog, tellimused, maksed, kasutajad)
-- Sõnumijärjekorra integreerimine Service Busiga
+- Sõnumijärjekorra integratsioon Service Bus’iga
 - Redis vahemälu jõudluse optimeerimiseks
 - Põhjalik logimine ja jälgimine
 
-**Viite näide**: Vaata [Mikroteenuste arhitektuur](../../../examples/container-app/microservices) tootmisvalmis malli ja juurutamise juhendit
+**Näidisprojekt**: Vaata [Microservices Architecture](../../../examples/container-app/microservices) tootmisvalmis malli ja juurutusjuhendit
 
-**Tulemused**:
+**Töö tulemused**:
 - Täielik mikroteenuste arhitektuur
-- Teenustevahelise kommunikatsiooni mustrid
-- Jõudluse testimine ja optimeerimine
-- Tootmisvalmis turvalisuse rakendamine
+- Teenustevahelised suhtlusmustrid
+- Tulemuslikkuse testimine ja optimeerimine
+- Tootmisvalmis turvalahenduste rakendus
 
 ## Hindamine ja sertifitseerimine
 
-### Teadmiste kontroll
+### Teadmiste kontrollid
 
-Täida need hindamised pärast iga moodulit:
+Lõpeta need testid pärast iga moodulit:
 
-**Mooduli 1 hindamine**: Põhimõisted ja paigaldamine
-- Valikvastustega küsimused põhikontseptsioonide kohta
-- Praktilised paigaldamise ja konfiguratsiooni ülesanded
-- Lihtne juurutamise harjutus
+**Moodul 1 test**: Põhimõisted ja paigaldus
+- Valikvastustega küsimused põhiteemadel
+- Praktilised paigaldus- ja konfiguratsioonitööd
+- Lihtne juurutusharjutus
 
-**Mooduli 2 hindamine**: Konfiguratsioon ja keskkonnad
+**Moodul 2 test**: Konfiguratsioon ja keskkonnad
 - Keskkonna haldamise stsenaariumid
 - Konfiguratsiooni tõrkeotsingu harjutused
-- Turvalisuse konfiguratsiooni rakendamine
+- Turvakonfiguratsioonide rakendamine
 
-**Mooduli 3 hindamine**: Juurutamine ja ressursside ettevalmistamine
-- Infrastruktuuri disaini väljakutsed
-- Mitme teenuse juurutamise stsenaariumid
-- Jõudluse optimeerimise harjutused
+**Moodul 3 test**: Juurutus ja varustamine
+- Taristu kujundamise ülesanded
+- Mitme teenuse juurutusstsenaariumid
+- Tulemuslikkuse optimeerimise harjutused
 
-**Mooduli 4 hindamine**: Enne juurutamist tehtav valideerimine
-- Võimsuse planeerimise juhtumiuuringud
-- Kulude optimeerimise stsenaariumid
-- Valideerimise torujuhtme rakendamine
+**Moodul 4 test**: Eelpaigalduskontrollid
+- Mahu planeerimise juhtumiuuringud
+- Kuluoptimeerimise stsenaariumid
+- Valideerimisliini rakendamine
 
-**Mooduli 5 hindamine**: Tõrkeotsing ja silumine
-- Probleemide diagnoosimise harjutused
+**Moodul 5 test**: Tõrkeotsing ja silumine
+- Probleemi diagnoosimise harjutused
 - Jälgimise rakendamise ülesanded
-- Intsidentide lahendamise simulatsioonid
+- Intsidentidele reageerimise simulatsioonid
 
-**Mooduli 6 hindamine**: Täiustatud teemad
-- CI/CD torujuhtme disain
-- Kohandatud mallide arendamine
+**Moodul 6 test**: Täiustatud teemad
+- CI/CD torujuhtme kavandamine
+- Kohandatud mallide arendus
 - Ettevõtte arhitektuuri stsenaariumid
 
-### Lõplik projekt
+### Lõpp-projekt
 
-Disaini ja rakenda täielik lahendus, mis näitab kõigi kontseptsioonide valdamist:
+Disaini ja rakenda täielik lahendus, mis demonstreerib kõigi mõistete valdamist:
 
 **Nõuded**:
-- Mitmetasandiline rakenduse arhitektuur
-- Mitme juurutamise keskkond
-- Põhjalik jälgimine ja hoiatussüsteemid
-- Turvalisuse ja vastavuse rakendamine
-- Kulude optimeerimine ja jõudluse häälestamine
-- Täielik dokumentatsioon ja juhendid
+- Mitmetasandiline rakenduste arhitektuur
+- Mitmekesised juurutuskeskkonnad
+- Põhjalik jälgimine ja teavitamine
+- Turva- ja vastavusnõuete täitmine
+- Kulude optimeerimine ja tulemuslikkuse häälestus
+- Terviklik dokumentatsioon ja tööjuhendid
 
 **Hindamiskriteeriumid**:
-- Tehnilise rakendamise kvaliteet
+- Tehnilise rakenduse kvaliteet
 - Dokumentatsiooni täielikkus
-- Turvalisuse ja parimate praktikate järgimine
-- Jõudluse ja kulude optimeerimine
-- Tõrkeotsingu ja jälgimise tõhusus
+- Turvalisus ja parimate praktikate järgimine
+- Tulemuslikkus ja kulude juhtimine
+- Tõrkeotsingu ja jälgimise efektiivsus
 
 ## Õppematerjalid ja viited
 
 ### Ametlik dokumentatsioon
-- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep dokumentatsioon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure arhitektuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Kogukonna ressursid
-- [AZD malligalerii](https://azure.github.io/awesome-azd/)
-- [Azure-Samples GitHub organisatsioon](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHubi repositoorium](https://github.com/Azure/azure-dev)
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
+- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
-### Praktilised keskkonnad
-- [Azure tasuta konto](https://azure.microsoft.com/free/)
-- [Azure DevOps tasuta tase](https://azure.microsoft.com/services/devops/)
+### Harjutuskeskkonnad
+- [Azure Free Account](https://azure.microsoft.com/free/)
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
 
 ### Täiendavad tööriistad
@@ -608,133 +700,163 @@ Disaini ja rakenda täielik lahendus, mis näitab kõigi kontseptsioonide valdam
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Õppeplaani soovitused
+## Õppimise ajakava soovitused
 
-### Täiskohaga õpe (8 nädalat)
-- **1.-2. nädal**: Moodulid 1-2 (Alustamine, Konfiguratsioon)
-- **3.-4. nädal**: Moodulid 3-4 (Juurutamine, Enne juurutamist)
+### Täistööajaga õppimine (8 nädalat)
+- **1.-2. nädal**: Moodulid 1-2 (Sissejuhatus, Konfiguratsioon)
+- **3.-4. nädal**: Moodulid 3-4 (Juurutus, Eelpaigaldus)
 - **5.-6. nädal**: Moodulid 5-6 (Tõrkeotsing, Täiustatud teemad)
-- **7.-8. nädal**: Praktilised projektid ja lõplik hindamine
+- **7.-8. nädal**: Praktikaprojektid ja lõpphindamine
 
-### Osalise ajaga õpe (16 nädalat)
-- **1.-4. nädal**: Moodul 1 (Alustamine)
+### Osalise tööajaga õppimine (16 nädalat)
+- **1.-4. nädal**: Moodul 1 (Sissejuhatus)
 - **5.-7. nädal**: Moodul 2 (Konfiguratsioon ja keskkonnad)
-- **8.-10. nädal**: Moodul 3 (Juurutamine ja ressursside ettevalmistamine)
-- **11.-12. nädal**: Moodul 4 (Enne juurutamist tehtav valideerimine)
+- **8.-10. nädal**: Moodul 3 (Juurutus ja varustamine)
+- **11.-12. nädal**: Moodul 4 (Eelpaigalduskontrollid)
 - **13.-14. nädal**: Moodul 5 (Tõrkeotsing ja silumine)
 - **15.-16. nädal**: Moodul 6 (Täiustatud teemad ja hindamine)
 
 ---
 
-## Edusammude jälgimine ja hindamisraamistik
+## Progressi jälgimine ja hindamisskeem
 
-### Peatüki lõpetamise kontrollnimekiri
+### Peatüki lõpuleviimise kontrollnimekiri
 
-Jälgi oma edusamme iga peatüki kaudu nende mõõdetavate tulemustega:
+Jälgi oma edenemist iga peatüki läbimisel nende mõõdetavate tulemustega:
 
-#### 📚 Peatükk 1: Alused ja kiire alustamine
-- [ ] **Paigaldamine lõpetatud**: AZD paigaldatud ja platvormil kontrollitud
-- [ ] **Esimene juurutamine**: Edukalt juurutatud todo-nodejs-mongo mall
-- [ ] **Keskkonna seadistamine**: Esimeste keskkonnamuutujate seadistamine
-- [ ] **Ressursside navigeerimine**: Azure'i portaalis juurutatud ressursside uurimine
-- [ ] **Käskude valdamine**: Mugavus AZD põhiliste käskudega
+#### 📚 Peatükk 1: Alused ja kiire stardipakett
+- [ ] **Paigaldus lõpetatud**: AZD on installeeritud ja platvormil kontrollitud
+- [ ] **Esimene juurutus**: Edukas todo-nodejs-mongo malli juurutus
+- [ ] **Keskkonna seadistamine**: Esimeste keskkonnamuutujate konfigureerimine
+- [ ] **Ressursside uurimine**: Juurutatud ressursside vaatamine Azure portaalis
+- [ ] **Käsurea oskus**: AZD põhiliste käskude valdamine
 
-#### 🤖 Peatükk 2: AI-põhine arendus  
-- [ ] **AI malli juurutamine**: Edukalt juurutatud azure-search-openai-demo
-- [ ] **RAG rakendamine**: Dokumentide indekseerimise ja otsingu seadistamine
-- [ ] **Mudelite konfiguratsioon**: Mitme AI mudeli seadistamine erinevateks eesmärkideks
-- [ ] **AI jälgimine**: Rakendatud Application Insights AI töökoormuste jaoks
-- [ ] **Jõudluse optimeerimine**: AI rakenduse jõudluse häälestamine
+#### 🤖 Peatükk 2: AI-esmane arendus  
+- [ ] **AI malli juurutus**: azure-search-openai-demo edukas juurutus
+- [ ] **RAG rakendus**: Dokumentide indekseerimise jaotsimine ja päring
+- [ ] **Mudelite seadistamine**: Mitme AI mudeli seadistamine erinevateks eesmärkideks
+- [ ] **AI jälgimine**: Application Insights rakendamine AI töökoormustele
+- [ ] **Tulemuslikkuse optimeerimine**: AI rakenduse jõudluse häälestus
 
 #### ⚙️ Peatükk 3: Konfiguratsioon ja autentimine
-- [ ] **Mitme keskkonna seadistamine**: Dev, staging ja prod keskkondade seadistamine
-- [ ] **Turvalisuse rakendamine**: Hallatud identiteedi autentimise seadistamine
-- [ ] **Saladuste haldamine**: Azure Key Vaulti integreerimine tundlike andmete jaoks
-- [ ] **Parameetrite haldamine**: Keskkonnaspetsiifiliste konfiguratsioonide loomine
-- [ ] **Autentimise valdamine**: Turvaliste juurdepääsumustrite rakendamine
+- [ ] **Mitmekesiste keskkondade seadistamine**: Dev-, staging- ja tootmiskeskkondade konfigureerimine
+- [ ] **Turvalisuse rakendamine**: Haldatava identiteedi autentimise seadistamine
+- [ ] **Salasõnade haldus**: Azure Key Vault’i integreerimine tundlike andmete jaoks
+- [ ] **Parameetrite haldus**: Keskkonnapõhiste konfiguratsioonide loomine
+- [ ] **Autentimise valdamine**: Turvaliste juurdepääsukordade rakendamine
 
-#### 🏗️ Peatükk 4: Infrastruktuur kui kood ja juurutamine
-- [ ] **Kohandatud malli loomine**: Mitme teenuse rakenduse malli loomine
-- [ ] **Bicep valdamine**: Modulaarsete, korduvkasutatavate infrastruktuurikomponentide loomine
-- [ ] **Juurutamise automatiseerimine**: Enne/pärast juurutamist tehtavate konksude rakendamine
-- [ ] **Arhitektuuri disain**: Keeruka mikroteenuste arhitektuuri juurutamine
-- [ ] **Malli optimeerimine**: Mallide optimeerimine jõudluse ja kulude jaoks
+#### 🏗️ Peatükk 4: Taristu koodina ja juurutamine
+- [ ] **Kohandatud mallide loomine**: Mitme teenusega rakenduse malli loomine
+- [ ] **Bicep valdamine**: Moodulite ja korduvkasutatavate taristu komponentide loomine
+- [ ] **Juurutuse automatiseerimine**: Eel- ja järgjuurutuse konksude rakendamine
+- [ ] **Arhitektuuri kujundus**: Keeruka mikroteenuste arhitektuuri juurutamine
+- [ ] **Malli optimeerimine**: Mallide optimeerimine jõudluse ja kulude osas
 
-#### 🎯 Peatükk 5: Mitme agendi AI lahendused
-- [ ] **Jaemüügi lahenduse juurutamine**: Täieliku mitme agendi jaemüügi stsenaariumi juurutamine
-- [ ] **Agendi kohandamine**: Kliendi ja inventari agendi käitumise muutmine
-- [ ] **Arhitektuuri skaleerimine**: Koormuse tasakaalustamise ja automaatse skaleerimise rakendamine
-- [ ] **Tootmise jälgimine**: Põhjaliku jälgimise ja hoiatussüsteemide seadistamine
-- [ ] **Jõudluse häälestamine**: Mitme agendi süsteemi jõudluse optimeerimine
+#### 🎯 Peatükk 5: Multi-agent AI lahendused
+- [ ] **Jaemüügi lahenduse juurutus**: Täielik multi-agenti jaemüügistsenaariumi paigaldus
+- [ ] **Agentide kohandamine**: Kliendi- ja varudeagentide käitumise muutmine
+- [ ] **Arhitektuuri skaleerimine**: Koormuse ja automaatse skaaleerimise rakendamine
+- [ ] **Tootmise jälgimine**: Põhjaliku jälgimise ja teavituse seadistamine
+- [ ] **Jõudluse häälestamine**: Multi-agent süsteemi jõudluse optimeerimine
 
-#### 🔍 Peatükk 6: Enne juurutamist tehtav valideerimine ja planeerimine
-- [ ] **Võimsuse analüüs**: Rakenduste ressursside nõuete analüüs
+#### 🔍 Peatükk 6: Eelpaigalduskontroll ja planeerimine
+- [ ] **Mahuanalüüs**: Rakenduste ressursonõuete analüüs
 - [ ] **SKU optimeerimine**: Kulutõhusate teenustasandite valimine
-- [ ] **Valideerimise automatiseerimine**: Enne juurutamist tehtavate kontrollskriptide rakendamine
-- [ ] **Kulude planeerimine**: Juurutamise kulude hinnangute ja eelarvete loomine
-- [ ] **Riskide hindamine**: Juurutamise riskide tuvastamine ja leevendamine
+- [ ] **Valideerimise automatiseerimine**: Eelpaigalduskontrolliskriptide loomine
+- [ ] **Kuluplaneerimine**: Juurutuskulude eelarvete koostamine
+- [ ] **Riskide hindamine**: Juurutusriskide tuvastamine ja maandamine
 
 #### 🚨 Peatükk 7: Tõrkeotsing ja silumine
-- [ ] **Diagnostika oskused**: Edukalt silutud tahtlikult katki tehtud juurutused
-- [ ] **Logide analüüs**: Azure Monitori ja Application Insightsi tõhus kasutamine
-- [ ] **Jõudluse häälestamine**: Aeglaselt töötavate rakenduste optimeerimine
-- [ ] **Taastamisprotseduurid**: Varundamise ja katastroofide taastamise rakendamine
-- [ ] **Jälgimise seadistamine**: Proaktiivse jälgimise ja hoiatussüsteemide loomine
+- [ ] **Diagnostikaoskused**: Eesmärgipäraselt katki lastud juurutuste silumine
+- [ ] **Logianalüüs**: Azure Monitori ja Application Insightsi efektiivne kasutamine
+- [ ] **Jõudluse optimeerimine**: aeglaselt töötavate rakenduste kiirendamine
+- [ ] **Taastamisprotseduurid**: Varundamise ja katastroofi taastamise rakendamine
+- [ ] **Jälgimise seadistamine**: Proaktiivse jälgimise ja teavituse loomine
 
-#### 🏢 Peatükk 8: Tootmine ja ettevõtte mustrid
+#### 🏢 Peatükk 8: Tootmis- ja ettevõttetaseme mustrid
 - [ ] **Ettevõtte turvalisus**: Põhjalike turvamustrite rakendamine
-- [ ] **Juhtimise raamistik**: Azure Policy ja ressursside haldamise seadistamine
-- [ ] **Täiustatud jälgimine**: Armatuurlauad ja automatiseeritud hoiatussüsteemid
-- [ ] **CI/CD integreerimine**: Automatiseeritud juurutamise torujuhtmete loomine
+- [ ] **Haldusraamistik**: Azure Policy ja ressursside halduse seadistamine
+- [ ] **Täiustatud jälgimine**: Armatuurlaudade ja automatiseeritud teavituse loomine
+- [ ] **CI/CD integratsioon**: Automatiseeritud juurutusliinide loomine
 - [ ] **Vastavuse rakendamine**: Ettevõtte vastavusnõuete täitmine
 
-### Õppimise ajakava ja verstapostid
+### Õppe ajakava ja olulised punktid
 
 #### 1.-2. nädal: Aluste loomine
-- **Verstapost**: Esimese AI rakend
-5. **Kogukonna panus**: Jagage malle või täiustusi
+- **Märkimisväärne asi**: Esimese AI rakenduse juurutus AZD abil
+- **Kontrollpunkt**: Töötav rakendus avalikult ligipääsetav
+- **Oskused**: Põhilised AZD töövood ja AI teenuste integreerimine
+
+#### 3.-4. nädal: Konfiguratsiooni valdamine
+- **Märkimisväärne asi**: Mitmekesise keskkonna juurutus turvalise autentimisega
+- **Kontrollpunkt**: Sama rakendus arendus-, staging- ja tootmiskeskkonnas
+- **Oskused**: Keskkonna haldus ja turvaeeskirjade rakendamine
+
+#### 5.-6. nädal: Taristu spetsialist
+- **Märkimisväärne asi**: Kohandatud mall keeruka mitme teenusega rakenduse jaoks
+- **Kontrollpunkt**: Malli kasutab teine meeskonnaliige
+- **Oskused**: Bicep ja infrastruktuuri automatiseerimine
+
+#### 7.-8. nädal: Täiustatud AI rakendus
+- **Märkimisväärne asi**: Tootmisvalmis multi-agent AI lahendus
+- **Kontrollpunkt**: Süsteem suudab reaalset koormust jälgides hallata
+- **Oskused**: Multi-agent orkestreerimine ja jõudluse optimeerimine
+
+#### 9.-10. nädal: Tootmisvalmidus
+- **Märkimisväärne asi**: Ettevõttetaseme juurutus täieliku vastavusega
+- **Kontrollpunkt**: Läbib turvaauditi ja kulude optimeerimise kontrolli
+- **Oskused**: Haldus, jälgimine ja CI/CD integreerimine
+
+### Hindamine ja sertifitseerimine
+
+#### Teadmiste valideerimise meetodid
+1. **Praktilised juurutused**: Töötavad rakendused iga peatüki jaoks
+2. **Koodi ülevaatused**: Mallide ja konfiguratsioonide kvaliteedikontroll
+3. **Probleemide lahendamine**: Tõrkeotsingu stsenaariumid ja lahendused
+4. **Võrdsete õpetamine**: Kontseptsioonide selgitamine teistele õppijatele
+5. **Kogukonna panus**: Mallide või parenduste jagamine
 
 #### Professionaalse arengu tulemused
-- **Portfoolio projektid**: 8 tootmiskõlblikku juurutust
-- **Tehnilised oskused**: Tööstusstandardile vastav AZD ja AI juurutamise ekspertteadmised
-- **Probleemide lahendamise oskused**: Iseseisev tõrkeotsing ja optimeerimine
-- **Kogukonna tunnustus**: Aktiivne osalemine Azure'i arendajate kogukonnas
-- **Karjääri edendamine**: Oskused, mis on otseselt rakendatavad pilve- ja AI-rollides
+- **Portfoolio projektid**: 8 tootmiskõlblikku juurutust  
+- **Tehnilised oskused**: Töövalmis tööstusharu standarditele vastav AZD ja tehisintellekti juurutamise oskus  
+- **Probleemide lahendamise võimed**: Iseseisev tõrkeotsing ja optimeerimine  
+- **Kogukonna tunnustus**: Aktiivne osalemine Azure arendajate kogukonnas  
+- **Karjääri edenemine**: Oskused, mis on otseselt rakendatavad pilve- ja AI-rollides  
 
-#### Edu mõõdikud
-- **Juurutuste edukuse määr**: >95% edukad juurutused
-- **Tõrkeotsingu aeg**: <30 minutit tavaprobleemide lahendamiseks
-- **Jõudluse optimeerimine**: Nähtavad parandused kuludes ja jõudluses
-- **Turvastandardite järgimine**: Kõik juurutused vastavad ettevõtte turvastandarditele
-- **Teadmiste jagamine**: Võime mentordada teisi arendajaid
+#### Edu mõõdikud  
+- **Juurutamise edukuse määr**: >95% edukad juurutused  
+- **Tõrkeotsingu aeg**: <30 minutit levinud probleemide puhul  
+- **Tulemuste optimeerimine**: Tõestatavad parendused kulus ja jõudluses  
+- **Turvastandardite järgimine**: Kõik juurutused vastavad ettevõtte turvanõuetele  
+- **Teadmiste ülekanne**: Võime juhendada teisi arendajaid  
 
-### Pidev õppimine ja kogukonna kaasamine
+### Jätkuv õppimine ja kogukonna kaasamine  
 
-#### Ole kursis
-- **Azure'i uuendused**: Jälgige Azure Developer CLI väljalaskemärkmeid
-- **Kogukonna üritused**: Osalege Azure'i ja AI arendajate üritustel
-- **Dokumentatsioon**: Panustage kogukonna dokumentatsiooni ja näidete loomisse
-- **Tagasiside**: Andke tagasisidet kursuse sisu ja Azure'i teenuste kohta
+#### Ole kursis  
+- **Azure uuendused**: Jälgi Azure Developer CLI versioonimärkmeid  
+- **Kogukonna sündmused**: Osale Azure ja AI arendajate sündmustel  
+- **Dokumentatsioon**: Panusta kogukonna dokumentatsiooni ja näidistesse  
+- **Tagasiside ring**: Anna tagasisidet kursuse sisu ja Azure teenuste kohta  
 
-#### Karjääriarendus
-- **Professionaalne võrgustik**: Looge kontakte Azure'i ja AI ekspertidega
-- **Esinemisvõimalused**: Jagage oma õppetunde konverentsidel või kohtumistel
-- **Avatud lähtekoodiga panus**: Panustage AZD mallidesse ja tööriistadesse
-- **Mentorlus**: Juhendage teisi arendajaid nende AZD õppe teekonnal
+#### Karjääri areng  
+- **Professionaalne võrgustik**: Loo kontakte Azure ja AI ekspertidega  
+- **Esinemisvõimalused**: Esitle oma teadmisi konverentsidel või üritustel  
+- **Avatud lähtekoodiga panus**: Panusta AZD mallidesse ja tööriistadesse  
+- **Mentorlus**: Juhenda teisi arendajaid nende AZD õppeteekonnal  
 
 ---
 
-**Peatüki navigeerimine:**
-- **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
-- **📖 Alusta õppimist**: [1. peatükk: Alused ja kiirstart](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Edusammude jälgimine**: Jälgige oma arengut tervikliku 8-peatükilise õppesüsteemi kaudu
-- **🤝 Kogukond**: [Azure Discord](https://discord.gg/microsoft-azure) toe ja arutelu jaoks
+**Peatükkide navigeerimine:**  
+- **📚 Kursuse avaleht**: [AZD algajatele](../README.md)  
+- **📖 Alusta õppimist**: [1. peatükk: Alused ja kiire algus](../README.md#-chapter-1-foundation--quick-start)  
+- **🎯 Edusamme jälgimine**: Jälgi oma edenemist põhjaliku 8-peatükilise õppesüsteemi kaudu  
+- **🤝 Kogukond**: [Azure Discord](https://discord.gg/microsoft-azure) toetuseks ja aruteluks  
 
-**Õppe edenemise jälgimine**: Kasutage seda struktureeritud juhendit, et omandada Azure Developer CLI praktilise ja järkjärgulise õppimise kaudu koos mõõdetavate tulemuste ja professionaalse arengu eelistega.
+**Õppimise edenemise jälgimine:** Kasuta seda struktureeritud juhendit, et omandada Azure Developer CLI teadmised samm-sammult praktilise õppimise kaudu koos mõõdetavate tulemustega ja professionaalse arengu võimalustega.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+**Vastutusest loobumine**:  
+See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüdleme täpsuse poole, palun pidage meeles, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks lugeda usaldusväärseks allikaks. Olulise teabe puhul soovitatakse professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste ega valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

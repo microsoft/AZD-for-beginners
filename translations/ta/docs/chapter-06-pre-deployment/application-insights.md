@@ -1,30 +1,30 @@
-# Application Insights Integration with AZD
+# Application Insights AZD உடன் ஒருங்கிணைப்பு
 
-⏱️ **கணிக்கப்பட்ட நேரம்**: 40-50 நிமிடங்கள் | 💰 **செலவு தாக்கம்**: ~$5-15/மாதம் | ⭐ **கஷ்ட மட்டம்**: மத்தியமாக
+⏱️ **கூறப்பட்ட நேரம்**: 40-50 நிமிடங்கள் | 💰 **செலவுச் தாக்கம்**: ~$5-15/மாதம் | ⭐ **சிக்கலான தன்மை**: இடைநிலை
 
 **📚 கற்றல் பாதை:**
-- ← Previous: [Preflight Checks](preflight-checks.md) - முன்-பணிவிதான சரிபார்ப்புகள்
-- 🎯 **நீங்கள் இங்கே இருக்கிறீர்கள்**: Application Insights ஒருங்கிணைப்பு (மானிட்டரிங், டெலிமெடிரி, பிழைதிருத்தம்)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Azure இற்கு வடிவமைக்கவும்
-- 🏠 [Course Home](../../README.md)
+- ← முந்தையது: [முன்-பரிசோதனைகள்](preflight-checks.md) - முன்-நியமன சரிபார்ப்பு
+- 🎯 **நீங்கள் இங்கே இருக்கிறீர்கள்**: Application Insights ஒருங்கிணைப்பு (மேற்பார்வை, டெலிமெட்ரி, பிழைத் திருத்தம்)
+- → அடுத்தது: [வெளியீடு வழிகாட்டி](../chapter-04-infrastructure/deployment-guide.md) - Azure-க்கு வெளியிடுதல்
+- 🏠 [பாடநெறி முகப்பு](../../README.md)
 
 ---
 
-## நீங்கள் என்ன கற்கப் போகிறீர்கள்
+## நீங்கள் கற்றுக்கொள்வது
 
-இந்த பாடத்தை முடித்தவுடன், நீங்கள்:
-- AZD திட்டங்களில் **Application Insights** ஐ தானாகஒருங்கிணைக்கலாம்
-- மைக்ரோசேவைகளுக்காக **விபரிக்கப்பட்ட டிரேசிங்** ஐ அமைக்கலாம்
-- **சிர/custom டெலிமெடிரி** (மெட்ரிக்ஸ், நிகழ்வுகள், சார்புகள்) செயல்படுத்தலாம்
-- நேரடி கண்காணிப்பிற்கு **லைவ் மெட்ரிக்ஸ்** அமைக்கலாம்
-- AZD உடன் வழங்கல்களுக்கு **அலெர்ட்கள் மற்றும் டாஷ்போர்டுகள்** உருவாக்கலாம்
-- **டெலிமெடிரி கேள்விகளுடன்** உற்பத்தி பிரச்சனைகளை டீபக் செய்யலாம்
-- **செலவுகள் மற்றும் சாம்பிளிங்** செயல்முறைகளை உத்திரவாதப்படுத்தலாம்
-- **AI/LLM பயன்பாடுகள்** (டோக்கன்கள், தாமதம், செலவுகள்) கண்காணிக்கலாம்
+By completing this lesson, you will:
+- AZD திட்டங்களில் **Application Insights** ஐ தானாக ஒருங்கிணைக்கவும்
+- மைக்ரோசேவைகள் සඳහා **distributed tracing** ஐ ஒழுங்கமைக்கவும்
+- **தனிப்பயன் டெலிமெட்ரி** (அளவீடுகள், நிகழ்வுகள், சார்புகள்) செயல்படுத்தவும்
+- நேரடிக் கண்காணிப்பிற்காக **லைவ் மெட்ரிக்ஸ்** அமைக்கவும்
+- AZD வெளியீடுகளிலிருந்து **எச்சரிக்கைகள் மற்றும் டாஷ்போர்டுகள்** உருவாக்கவும்
+- **டெலிமெட்ரி வினாக்களினூடே** உற்பத்தி சிக்கல்களை பிழைதிருத்தவும்
+- **செலவுகள் மற்றும் சாம்பிளிங்** தந்திரங்களை மேம்படுத்தவும்
+- **AI/LLM பயன்பாடுகளை** (டோக்கன்கள், தாமதம், செலவுகள்) கண்காணிக்கவும்
 
-## ஏன் AZD உடன் Application Insights முக்கியம்
+## AZD உடன் Application Insights முக்கியத்துவம்
 
-### சவால்: உற்பத்தி கண்காணிப்பு
+### சவால்: உற்பத்தி கண்காணிப்பு திறன்
 
 **Application Insights இல்லாமல்:**
 ```
@@ -47,34 +47,34 @@
 ✅ AZD provisions everything automatically
 ```
 
-**உவமை**: Application Insights என்பது உங்கள் செயலிக்கு ஒரு "பிளாக் பாக்ஸ்" விமான பதிவாளரும் + காக்பிட் குழப்பக் கணிப்பியும் போன்றது. நீங்கள் நேரடி நிகழ்வுகளை அனைத்தையும் காணலாம் மற்றும் எந்த சம்பவத்தையும் மீண்டும் ஓட்டலாம்.
+**உவமை**: Application Insights உங்கள் பயன்பாட்டிற்கான "black box" பயண பதிவாளரும் + கோக்பிட் டாஷ்போர்டும் போன்றது. நீங்கள் நேரடி முறையில் நடைபெறும் அனைத்தையும் பார்க்கலாம் மற்றும் எந்தவொரு சம்பவத்தையும் மீட்டுப் பார்வையிட முடியும்.
 
 ---
 
-## கட்டமைப்பு மேற்பார்வை
+## கட்டமைப்பு கண்ணோட்டம்
 
 ### AZD கட்டமைப்பில் Application Insights
 
 ```mermaid
 graph TB
-    User[பயனர்/கிளையன்ட்]
-    App1[கொண்டெய்னர் பயன்பாடு 1<br/>API கேட்வே]
-    App2[கொண்டெய்னர் பயன்பாடு 2<br/>பொருள் சேவை]
-    App3[கொண்டெய்னர் பயன்பாடு 3<br/>ஆர்டர் சேவை]
+    User[பயனர்/கிளையண்ட்]
+    App1[கொண்டெய்னர் செயலி 1<br/>API நுழைவாயில்]
+    App2[கொண்டெய்னர் செயலி 2<br/>தயார்ப்பு சேவை]
+    App3[கொண்டெய்னர் செயலி 3<br/>ஆர்டர் சேவை]
     
-    AppInsights[ஆப்ளிகேஷன் இன்சைட்ஸ்<br/>டெலிமெட்ரி ஹப்]
-    LogAnalytics[(லாக் அனலிட்டிக்ஸ்<br/>வேலைநிலையம்)]
+    AppInsights[அப்ளிகேஷன் இன்சைட்ஸ்<br/>டெலிமெட்ரி ஹப்]
+    LogAnalytics[(லாக் அனலிட்டிக்ஸ்<br/>வேர்க்ஸ்‌பேஸ்)]
     
-    Portal[அஜூர் போர்டல்<br/>டாஷ்போர்டுகள் & எச்சரிக்கைகள்]
-    Query[Kusto கேள்விகள்<br/>தனிப்பயன் பகுப்பாய்வு]
+    Portal[Azure போர்டல்<br/>டாஷ்போர்டுகள் & எச்சரிக்கைகள்]
+    Query[குஸ்டோ கேள்விகள்<br/>தனிப்பயன் பகுப்பாய்வு]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|தானியங்கி இன்ஸ்ட்ருமென்டேஷன்| AppInsights
-    App2 -.->|தானியங்கி இன்ஸ்ட்ருமென்டேஷன்| AppInsights
-    App3 -.->|தானியங்கி இன்ஸ்ட்ருமென்டேஷன்| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,59 +83,59 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### தானாக கண்காணிக்கப்படுவது
+### தானாகவே கண்காணிக்கப்படும் விடயங்கள்
 
-| Telemetry Type | What It Captures | Use Case |
+| டெலிமெட்ரி வகை | அது என்னப் பதிவுசெய்கிறது | பயன்பாடு |
 |----------------|------------------|----------|
-| **Requests** | HTTP எதிர்வினைகள், நிலை குறியீடுகள், காலம் | API செயல்திறன் கண்காணிப்பு |
-| **Dependencies** | வெளிப்புற அழைப்புகள் (DB, APIs, storage) | வித்தியாசங்களை அடையாளம் காணல் |
-| **Exceptions** | கையாளப்படாத பிழைகள் மற்றும் ஸ்டாக் ட்ரேசுகள் | தோல்விகளின் பிழைத்திருக்கை |
-| **Custom Events** | வணிக நிகழ்வுகள் (signup, purchase) | பகுப்பாய்வு மற்றும் ஃபனல்கள் |
-| **Metrics** | செயல்திறன் கவுன்டர்கள், தனிப்பயன் மெட்ரிக்ஸ் | கொள்ளளவு திட்டமிடல் |
-| **Traces** | தீவிரத்துடன் லாக் செய்திகள் | பிழைத்தீர்வு மற்றும் ஒடிடிங் |
-| **Availability** | நேரம் அல்லது பதில் நேர சோதனைகள் | SLA கண்காணிப்பு |
+| **Requests** | HTTP கோரிக்கைகள், நிலை குறியீடுகள், காலம் | API செயல்திறன் கண்காணிப்பு |
+| **Dependencies** | வெளி அழைப்புகள் (DB, APIs, storage) | தடைபோகும் பகுதிகளை கண்டறிதல் |
+| **Exceptions** | கைமாறு செய்யப்படாத பிழைகள் மற்றும் ஸ்டாக் டிரேஸ்கள் | தோல்விகளை பிழைதிருத்தல் |
+| **Custom Events** | வணிக நிகழ்வுகள் (சೈನ್-அப், கொள்முதல்) | அனாலிட்டிக்ஸ் மற்றும் வழித்தடங்கள் |
+| **Metrics** | செயல்திறன் கவுன்டர்கள், தனிப்பயன் மீட்ரிக்ஸ் | திறன் திட்டமிடல் |
+| **Traces** | கடுமை நிலை உடன் பதிவு செய்திகள் | பிழைதிருத்தம் மற்றும் ஆடிட்டிங் |
+| **Availability** | Uptime மற்றும் பதிலளிக்கும் நேர சோதனைகள் | SLA கண்காணிப்பு |
 
 ---
 
-## தேவைகள்
+## முன் நிபந்தனைகள்
 
 ### தேவையான கருவிகள்
 
 ```bash
-# Azure Developer CLI ஐ சரிபார்க்கவும்
+# Azure Developer CLI ஐச் சரிபார்க்கவும்
 azd version
-# ✅ எதிர்பார்ப்பு: azd பதிப்பு 1.0.0 அல்லது அதற்கு மேல்
+# ✅ எதிர்பார்க்கப்படும்: azd பதிப்பு 1.0.0 அல்லது அதற்கு மேலானது
 
-# Azure CLI ஐ சரிபார்க்கவும்
+# Azure CLI ஐச் சரிபார்க்கவும்
 az --version
-# ✅ எதிர்பார்ப்பு: azure-cli பதிப்பு 2.50.0 அல்லது அதற்கு மேல்
+# ✅ எதிர்பார்க்கப்படும்: azure-cli பதிப்பு 2.50.0 அல்லது அதற்கு மேலானது
 ```
 
 ### Azure தேவைகள்
 
-- செயலில் இருக்கும் Azure சந்தா
+- செயலில் உள்ள Azure சந்தா
 - உருவாக்க அனுமதிகள்:
   - Application Insights வளங்கள்
-  - Log Analytics பணிப்不கங்கள்
-  - Container Apps
-  - Resource groups
+  - Log Analytics வேலைநிலைகள்
+  - Container பயன்பாடுகள்
+  - வளக் குழுக்கள்
 
-### முன்னுரிமை அறிவு
+### மூல அறிவுத் தேவைகள்
 
-நீங்கள் இவற்றை முடித்திருக்க வேண்டும்:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - AZD மொத்தக் கருத்துக்கள்
-- [Configuration](../chapter-03-configuration/configuration.md) - சூழ்நிலைய் அமைப்பு
-- [First Project](../chapter-01-foundation/first-project.md) - அடிப்படை வழங்கல்
+நீங்கள் முடித்து வைத்திருப்பது என்று இருக்க வேண்டும்:
+- [AZD அடிப்படை](../chapter-01-foundation/azd-basics.md) - AZD இன் அடிப்படை கருத்துகள்
+- [கட்டமைப்பு](../chapter-03-configuration/configuration.md) - சூழல் அமைப்பு
+- [முதல் திட்டம்](../chapter-01-foundation/first-project.md) - அடிப்படை வெளியீடு
 
 ---
 
 ## பாடம் 1: AZD உடன் தானியங்கி Application Insights
 
-### AZD எப்படி Application Insights ஐ ஏற்படுத்துகிறது
+### AZD எப்படி Application Insights ஐ வழங்குகிறது
 
-AZD நீங்கள் deploy செய்தால் தானாக Application Insights ஐ உருவாக்கி அமைக்கிறது. அது எப்படி செயல்படுகிறது என்று பார்ப்போம்.
+நீங்கள் வெளியிடும்போது AZD தானாக Application Insights ஐ உருவாக்கி கட்டமைக்கிறது. அது எப்படி செயல்படுகிறது என்பதை காண்போம்.
 
-### திட்ட அமைப்பு
+### திட்ட கட்டமைப்பு
 
 ```
 monitored-app/
@@ -154,7 +154,7 @@ monitored-app/
 
 ---
 
-### படி 1: AZD ஐ அமைக்கவும் (azure.yaml)
+### படி 1: AZD ஐ கட்டமைக்கவும் (azure.yaml)
 
 **கோப்பு: `azure.yaml`**
 
@@ -172,7 +172,7 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**அடையாளம்!** AZD அடிப்படை மானிட்டரிங்கிற்கு இயல்பாக Application Insights ஐ உருவாக்கும். கூடுதல் கட்டமைப்பு தேவையில்லை.
+**அதுதான்!** AZD இயல்பாகவே Application Insights ஐ உருவாக்கும். அடிப்படை கண்காணிப்புக்கு கூடுதல் கட்டமைப்பு தேவையில்லை.
 
 ---
 
@@ -285,7 +285,7 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### படி 4: டெலிமெட்ரி உடன் செயலி கோடு
+### படி 4: டெலிமெட்ரியுடன் பயன்பாட்டு குறியீடு
 
 **கோப்பு: `src/app.py`**
 
@@ -300,15 +300,15 @@ import os
 
 app = Flask(__name__)
 
-# Application Insights இணைப்பு ஸ்ட்ரிங்கை பெறவும்
+# Application Insights இணைப்பு சரத்தைப் பெறுக
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # பகிரப்பட்ட டிரேசியை அமைக்கவும்
+    # பரவலான தடைக் கண்காணிப்பை அமைக்கவும்
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # மேம்பாட்டிற்கு 100% மாதிரீகம்
+        sampler=ProbabilitySampler(rate=1.0)  # வளர்ச்சி சூழலுக்காக 100% மாதிரித்தேர்வு
     )
     
     # பதிவுகளை அமைக்கவும்
@@ -331,7 +331,7 @@ def health():
 def get_products():
     logger.info('Fetching products')
     
-    # தரவுத்தள அழைப்பை சிமுலேட் செய் (தானாகவே சார்பாக கண்காணிக்கப்படும்)
+    # தரவுத்தள அழைப்பை மாதிரியாக்கவும் (இது தானாகவே சார்பாகக் கண்காணிக்கப்படும்)
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +356,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # மெதுவான செயல்பாட்டை சிமுலேட் செய்
+    time.sleep(3)  # மெதுவான செயல்பாட்டை மாதிரியாக்கவும்
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -375,16 +375,16 @@ gunicorn==21.2.0
 
 ---
 
-### படி 5: deploy செய்து சரிபார்க்கவும்
+### படி 5: வெளியிடவும் மற்றும் சரிபார்க்கவும்
 
 ```bash
 # AZD ஐ ஆரம்பிக்கவும்
 azd init
 
-# பணியிடவும் (Application Insights ஐ தானாக ஏற்பாடு செய்கிறது)
+# பதிவேற்றவும் (Application Insights ஐ தானாகவே ஏற்பாடு செய்கிறது)
 azd up
 
-# செயலியின் URL ஐப் பெறவும்
+# விண்ணப்பத்தின் URL ஐப் பெறுக
 APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
 
 # டெலிமெட்ரி உருவாக்கவும்
@@ -404,34 +404,34 @@ curl $APP_URL/api/slow
 
 ---
 
-### படி 6: Azure போர்டலில் டெலிமெட்ரியை காண்க
+### படி 6: Azure போர்டலில் டெலிமெட்ரியை காட்டு
 
 ```bash
 # Application Insights விவரங்களைப் பெறவும்
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure போர்டலில் திறவும்
+# Azure போர்டலில் திறக்கவும்
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Azure போர்டல் → Application Insights → Transaction Search**க்கு செல்லவும்
+**Azure போர்டலுக்கு செல்லவும் → Application Insights → பரிவர்த்தனை தேடல்**
 
-நீங்கள் காண்பீர்கள்:
+நீங்கள் காண வேண்டும்:
 - ✅ HTTP கோரிக்கைகள் நிலை குறியீடுகளுடன்
-- ✅ கோரிக்கை காலம் (`/api/slow`க்கு 3+ விநாடிகள்)
-- ✅ `/api/error-test` மூலம் பெறப்பட்ட தவறுகளின் விபரங்கள்
-- ✅ தனிப்பயன் லாக் செய்திகள்
+- ✅ கோரிக்கை காலம் (`/api/slow` க்காக 3+ வினாடிகள்)
+- ✅ `/api/error-test` இல் இருந்து தவறு விவரங்கள்
+- ✅ தனிப்பயன் பதிவு செய்திகள்
 
 ---
 
 ## பாடம் 2: தனிப்பயன் டெலிமெட்ரி மற்றும் நிகழ்வுகள்
 
-### வணிக நிகழ்வுகளை பதிவு செய்யவும்
+### வணிக நிகழ்வுகளை கண்காணித்தல்
 
-வணிக-முக்கிய நிகழ்வுகளுக்கான தனிப்பயன் டெலிமெட்ரி சேர்ப்போம்.
+வணிக-முக்கிய நிகழ்வுகளுக்கு தனிப்பயன் டெலிமெட்ரியை சேர்ப்போம்.
 
 **கோப்பு: `src/telemetry.py`**
 
@@ -463,7 +463,7 @@ class TelemetryClient:
         self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
         
-        # மெட்ரிக்ஸ் ஏற்றுமதி கருவியை அமைக்கவும்
+        # மெட்ரிக்ஸ் ஏக்ஸ்போர்டர் அமைக்கவும்
         self.stats = stats_module.stats
         self.view_manager = self.stats.view_manager
         self.stats_recorder = self.stats.stats_recorder
@@ -518,9 +518,9 @@ class TelemetryClient:
 telemetry = TelemetryClient()
 ```
 
-### தனிப்பயன் நிகழ்வுகளுடன் செயலியை புதுப்பிக்கவும்
+### தனிப்பயன் நிகழ்வுகளுடன் பயன்பாட்டை மேம்படுத்து
 
-**கோப்பு: `src/app.py` (வளர்க்கப்பட்டது)**
+**கோப்பு: `src/app.py` (விரிவாக்கம்)**
 
 ```python
 from flask import Flask, request, jsonify
@@ -538,7 +538,7 @@ def purchase():
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
     
-    # வணிக நிகழ்வை கண்காணிக்க
+    # வணிக நிகழ்வை கண்காணிக்கவும்
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +546,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # வருவாய் அளவுகூறை கண்காணிக்க
+    # வருமான அளவுகுறியை கண்காணிக்கவும்
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +565,19 @@ def search():
     
     start_time = time.time()
     
-    # தேடலை நகலாக்கு (இது உண்மையில் ஒரு தரவுத்தளக் கேள்வி இருக்கும்)
+    # தேடலை மாதிரியாகச் செயல்படுத்தவும் (உண்மையில் இது தரவுத்தளக் கேள்வி இருக்கும்)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # மில்லிசெகன்களுக்கு மாற்று
+    duration = (time.time() - start_time) * 1000  # மில்லிசெகண்டுகளில் மாற்றவும்
     
-    # தேடல் நிகழ்வை கண்காணிக்க
+    # தேடல் நிகழ்வை கண்காணிக்கவும்
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # தேடல் செயல்திறன் அளவுகூறை கண்காணிக்க
+    # தேடல் செயல்திறன் அளவுகுறியை கண்காணிக்கவும்
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -593,7 +593,7 @@ def external_call():
     success = True
     
     try:
-        # வெளிப்புற API அழைப்பை நகலாக்கு
+        # வெளிப்புற API அழைப்பை மாதிரியாகச் செயல்படுத்தவும்
         response = requests.get('https://api.example.com/data', timeout=5)
         result = response.json()
     except Exception as e:
@@ -602,7 +602,7 @@ def external_call():
     
     duration = (time.time() - start_time) * 1000
     
-    # சார்பை கண்காணிக்க
+    # சார்பை கண்காணிக்கவும்
     telemetry.track_dependency(
         name='ExternalAPI',
         dependency_type='HTTP',
@@ -616,25 +616,25 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### தனிப்பயன் டெலிமெட்ரியை சோதிக்கவும்
+### தனிப்பயன் டெலிமெட்ரியை சோதனை செய்யவும்
 
 ```bash
-# கொள்முதல் நிகழ்வை கண்காணிக்க
+# கொள்முதல் நிகழ்வை பதிவுசெய்
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# தேடல் நிகழ்வை கண்காணிக்க
+# தேடல் நிகழ்வை பதிவுசெய்
 curl "$APP_URL/api/search?q=laptop"
 
-# வெளிப்புற சார்பை கண்காணிக்க
+# வெளிப்புற சார்பை பதிவுசெய்
 curl $APP_URL/api/external-call
 ```
 
-**Azure போர்டலில் பார்க்க:**
+**Azure போர்டலில் பார்வையிடவும்:**
 
-Application Insights → Logs செல்லவும், பிறகு இயக்கு:
+Application Insights → Logs க்கு செல்லவும், பின்னர் இயக்கவும்:
 
 ```kusto
 // View purchase events
@@ -665,11 +665,11 @@ traces
 
 ---
 
-## பாடம் 3: மைக்ரோசேவைகளுக்கான விநியோக உச்சிகள் (Distributed Tracing)
+## பாடம் 3: மைக்ரோசேவைகளுக்கான பகிரப்பட்ட ட்ரேசிங்
 
-### சேவைகளுக்கிடையே டிரேசிங் இயக்கவும்
+### சேவைகள் இடையே ட்ரேசிங்கை இயக்கு
 
-மைக்ரோசேவைகளுக்காக, Application Insights தானாகவே சேவைகளுக்கு இடையே கோரிக்கைகளை இணைக்கிறது.
+மைக்ரோசேவைகளுக்கு, Application Insights தானாகவே சேவைகள் முழுவதும் கோரிக்கைகளை தொடர்புபடுத்துகிறது.
 
 **கோப்பு: `infra/main.bicep`**
 
@@ -739,36 +739,36 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### தொடங்கிலிருந்து முடிவு வரை ட்ரான்சாக்ஷனை பார்க்கவும்
+### தொடர்-முடிவு பரிவர்த்தனையை காண்க
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API வாயில்<br/>(டிரேஸ் ID: abc123)
-    participant Product as பொருள் சேவை<br/>(பெற்றோர் ID: abc123)
-    participant Order as ஆர்டர் சேவை<br/>(பெற்றோர் ID: abc123)
-    participant AppInsights as அப்ளிகேஷன் இன்சைட்ஸ்
+    participant Gateway as API நுழைவாயில்<br/>(டிரேஸ் ஐடி: abc123)
+    participant Product as தயாரிப்பு சேவை<br/>(பெற்றோர் ஐடி: abc123)
+    participant Order as ஆர்டர் சேவை<br/>(பெற்றோர் ஐடி: abc123)
+    participant AppInsights as அப்பிளிகேஷன் இன்சைட்ஸ்
     
     User->>Gateway: POST /api/checkout
     Note over Gateway: டிரேஸ் தொடக்கம்: abc123
-    Gateway->>AppInsights: கோரிக்கையை பதிவு செய் (டிரேஸ் ID: abc123)
+    Gateway->>AppInsights: கோரிக்கையை பதிவு செய் (டிரேஸ் ஐடி: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: பெற்றோர் ID: abc123
-    Product->>AppInsights: இணைப்பு அழைப்பு பதிவு செய்
-    Product-->>Gateway: பொருள் விவரங்கள்
+    Note over Product: பெற்றோர் ஐடி: abc123
+    Product->>AppInsights: சார்பு அழைப்பை பதிவு செய்
+    Product-->>Gateway: தயாரிப்பு விவரங்கள்
     
     Gateway->>Order: POST /orders
-    Note over Order: பெற்றோர் ID: abc123
-    Order->>AppInsights: இணைப்பு அழைப்பு பதிவு செய்
+    Note over Order: பெற்றோர் ஐடி: abc123
+    Order->>AppInsights: சார்பு அழைப்பை பதிவு செய்
     Order-->>Gateway: ஆர்டர் உருவாக்கப்பட்டது
     
-    Gateway-->>User: Checkout முடிந்தது
-    Gateway->>AppInsights: பதில் பதிவு செய் (காலம்: 450ms)
+    Gateway-->>User: செக்அவுட் முடிந்தது
+    Gateway->>AppInsights: பதிலை பதிவு செய் (நீளம்: 450ms)
     
-    Note over AppInsights: டிரேஸ் ID மூலம் ஒத்திசைவு
+    Note over AppInsights: டிரேஸ் ஐடி மூலம் உறவுபடுத்தல்
 ```
-**முழு-முழுவதும் டிரேசை கேள்வி செய்யவும்:**
+**End-to-end ட்ரேஸ் கேள்வி:**
 
 ```kusto
 // Find complete request flow
@@ -790,63 +790,63 @@ dependencies
 
 ## பாடம் 4: லைவ் மெட்ரிக்ஸ் மற்றும் நேரடி கண்காணிப்பு
 
-### லைவ் மெட்ரிக்ஸ் ஸ்ட்ரீமை இயக்கவும்
+### லைவ் மெட்ரிக்ஸ் ஸ்ட்ரீமினை இயக்கவும்
 
-லைவ் மெட்ரிக்ஸ் 1 விநாடிக்குக் குறைவான தாமதத்துடன் நேரடி டெலிமெட்ரியை வழங்குகிறது.
+லைவ் மெட்ரிக்ஸ் <1 second latency உடன் நேரடி டெலிமெட்ரியை வழங்குகிறது.
 
-**லைவ் மெட்ரிக்ஸை அணுக:**
+**லைவ் மெட்ரிக்ஸ் அணுகல்:**
 
 ```bash
-# Application Insights வளத்தைப் பெற
+# Application Insights வளத்தைப் பெறுக
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# வளக் குழுவைப் பெற
+# வளக் குழுவைப் பெறுக
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
 **நேரடியாக நீங்கள் காணும் விஷயங்கள்:**
-- ✅ வரும் கோரிக்கை வீதம் (requests/sec)
-- ✅ வெளியே செல்லும் dependency அழைப்புகள்
-- ✅ தவறு எண்ணிக்கை
-- ✅ CPU மற்றும் மெமரிஃப் பயன்பாடு
+- ✅ வந்துகொள்ளும் கோரிக்கை வீதம் (requests/sec)
+- ✅ வெளியே செல்லும் சார்பு அழைப்புகள்
+- ✅ தவறுகளின் எண்ணிக்கை
+- ✅ CPU மற்றும் நினைவக பயன்பாடு
 - ✅ செயலில் உள்ள சர்வர் எண்ணிக்கை
 - ✅ மாதிரி டெலிமெட்ரி
 
-### சோதனைக்கு லோட் உருவாக்கவும்
+### சோதனைக்கு ஏவல் உருவாக்குதல்
 
 ```bash
-# நேரடி அளவிகளை காண சுமையை உருவாக்கவும்
+# சுமையை உருவாக்கி நேரடி அளவுருக்களைப் பார்க்கவும்
 for i in {1..100}; do
   curl $APP_URL/api/products &
   curl $APP_URL/api/search?q=test$i &
 done
 
-# Azure போர்டலில் நேரடி அளவுகளைப் பார்க்கவும்
-# நீங்கள் கோரிக்கை விகிதம் திடீரென உயர்வைக் காண்பீர்கள்
+# Azure போர்டலில் நேரடி அளவுருக்களைப் பார்க்கவும்
+# நீங்கள் கோரிக்கை விகிதம் திடீரென அதிகரிக்கிறதை காண வேண்டும்
 ```
 
 ---
 
-## பயிற்சி பயிற்றுக்கள்
+## தொழில்முறை பயிற்சிகள்
 
-### பயிற்சி 1: அலெர்ட்களை அமைக்கலாம் ⭐⭐ (மிதமான)
+### பயிற்சி 1: எச்சரிக்கைகள் அமைக்கவும் ⭐⭐ (மிதமான)
 
-**கோல்**: உயர்ந்த பிழை விகிதங்கள் மற்றும் மெதுவான பதில்களுக்கு அலெர்ட்களை உருவாக்கவும்.
+**நோக்கம்**: அதிக பிழை விகிதம் மற்றும் மெதுவான பதில்களுக்கான எச்சரிக்கைகள் உருவாக்குதல்.
 
 **படிகள்:**
 
-1. **பிழை விகிதத்திற்கான அலெர்டை உருவாக்கவும்:**
+1. **பிழை விகிதத்துக்கான எச்சரிக்கை உருவாக்கவும்:**
 
 ```bash
-# Application Insights வளத்தின் ID ஐப் பெற
+# Application Insights வளத்தின் ID-ஐப் பெறவும்
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# தோல்வியடைந்த கோரிக்கைகளுக்கான மெட்ரிக் எச்சரிக்கையை உருவாக்கு
+# தோல்வியுற்ற கோரிக்கைகளுக்காக அளவியல் எச்சரிக்கையை உருவாக்கவும்
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **மெதுவான பதில்களுக்கு அலெர்டை உருவாக்கவும்:**
+2. **மெதுவான பதில்களுக்கு எச்சரிக்கையை உருவாக்கவும்:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +870,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Bicep மூலம் அலெர்ட் உருவாக்கு (AZD க்கு விருப்பமானது):**
+3. **Bicep மூலம் எச்சரிக்கையை உருவாக்கவும் (AZD க்காக பரிந்துரைக்கப்படுகிறது):**
 
 **கோப்பு: `infra/core/alerts.bicep`**
 
@@ -944,55 +944,55 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **அலெர்ட்களை சோதிக்கவும்:**
+4. **எச்சரிக்கைகளை பரிசோதிக்கவும்:**
 
 ```bash
-# பிழைகள் உருவாக்கு
+# பிழைகள் உருவாக்கவும்
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# மெதுவான பதில்களை உருவாக்கு
+# மெதுவான பதில்களை உருவாக்கவும்
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# அலெர்ட் நிலையை சரிபார்க்கவும் (5-10 நிமிடங்கள் காத்திருங்கள்)
+# எச்சரிக்கை நிலையை சரிபார்க்கவும் (5-10 நிமிடங்கள் காத்திருங்கள்)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
   --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
   --output table
 ```
 
-**✅ வெற்றிச் சோதனை அளவுகோல்:**
-- ✅ அலெர்ட்கள் வெற்றிகரமாக உருவாக்கப்பட்டன
-- ✅ எல்லை மீறப்பட்டால் அலெர்ட்கள் செயல்படும்
-- ✅ அலெர்ட் வரலாற்றை Azure போர்டலில் பார்க்கலாம்
-- ✅ AZD வழங்கலுடன் ஒருங்கிணைக்கப்பட்டுள்ளது
+**✅ வெற்றிக்கூறு:**
+- ✅ எச்சரிக்கைகள் வெற்றிகரமாக உருவாக்கப்பட்டன
+- ✅ வரம்புகள் மீறப்பட்டால் எச்சரிக்கைகள் இயங்கும்
+- ✅ Azure போர்டலில் எச்சரிக்கை வரலாற்றை பார்க்க முடியும்
+- ✅ AZD வெளியீட்டுடன் ஒருங்கிணைக்கப்பட்டது
 
 **நேரம்**: 20-25 நிமிடங்கள்
 
 ---
 
-### பயிற்சி 2: தனிப்பயன் டாஷ்போர்டு உருவாக்கவும் ⭐⭐ (மிதமான)
+### பயிற்சி 2: தனிப்பயன் டாஷ்போர்டு உருவாக்கம் ⭐⭐ (மிதமான)
 
-**கோல்**: முக்கிய செயலியின் மெட்ரிக்ஸ்களைக் காட்டும் டாஷ்போர்டை கட்டவும்.
+**நோக்கம்**: முக்கிய பயன்பாட்டு மீட்ரிக்ஸ்களை காட்டும் ஒரு டாஷ்போர்டை கட்டமைக்கவும்.
 
 **படிகள்:**
 
 1. **Azure போர்டல் மூலம் டாஷ்போர்டு உருவாக்கவும்:**
 
-Azure போர்டல் → Dashboards → New Dashboard வரை செல்லவும்
+செல்லவும்: Azure போர்டல் → டாஷ்போர்டுகள் → புதிய டாஷ்போர்டு
 
-2. **முக்கிய மெட்ரிக்ஸ் க்கான டைல்களை சேர்க்கவும்:**
+2. **முக்கிய மீட்ரிக்ஸ்களுக்கு டைல்கள் சேர்க்கவும்:**
 
-- கோரிக்கை எண்ணிக்கை (கடைசி 24 மணி)
-- சராசரி பதில் நேரம்
+- கோரிக்கை எண்ணிக்கை (கடந்த 24 மணிநேரம்)
+- சராசரி பதிலளிக்கும் நேரம்
 - பிழை விகிதம்
-- மேல்மையான 5 மெதுவான செயலிகள்
-- பயனாளர்களின் பிராந்திய விநியோகம்
+- மேற்பட்ட 5 மெதுவான செயல்பாடுகள்
+- பயனர்களின் புவியியல் விநியோகம்
 
-3. **Bicep மூலம் டாஷ்போர்டு உருவாக்கவும்:**
+3. **Bicep மூலம் டாஷ்போர்டை உருவாக்கவும்:**
 
 **கோப்பு: `infra/core/dashboard.bicep`**
 
@@ -1063,7 +1063,7 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **டாஷ்போர்டை deploy செய்யவும்:**
+4. **டாஷ்போர்டை வெளியிடவும்:**
 
 ```bash
 # main.bicep கோப்பில் சேர்க்கவும்
@@ -1081,11 +1081,11 @@ module dashboard './core/dashboard.bicep' = {
 azd up
 ```
 
-**✅ வெற்றிச் சோதனை அளவுகோல்:**
-- ✅ டாஷ்போர்டு முக்கிய மெட்ரிக்ஸ்களை காண்பிக்கிறது
-- ✅ Azure போர்டல் ஹோமில் பின் செய்யலாம்
+**✅ வெற்றி நிபந்தனைகள்:**
+- ✅ டாஷ்போர்டு முக்கிய மீட்ரிக்ஸ்களை காட்டுகிறது
+- ✅ Azure போர்டல் முகப்பிற்கு பின் செய்யலாம்
 - ✅ நேரடியாக புதுப்பிக்கிறது
-- ✅ AZD மூலம் deploy செய்யக்கூடியது
+- ✅ AZD மூலம் வெளியிடக்கூடியது
 
 **நேரம்**: 25-30 நிமிடங்கள்
 
@@ -1093,11 +1093,11 @@ azd up
 
 ### பயிற்சி 3: AI/LLM பயன்பாட்டை கண்காணிக்கவும் ⭐⭐⭐ (மேம்பட்ட)
 
-**கோல்**: Azure OpenAI பயன்பாட்டின் பயன்பாடு (டோக்கன்கள், செலவுகள், தாமதங்கள்) கண்காணிக்கவும்.
+**நோக்கம்**: Microsoft Foundry மாடல்களின் பயன்பாட்டை (டோக்கன்கள், செலவுகள், தாமதம்) கண்காணிக்கவும்.
 
 **படிகள்:**
 
-1. **AI கண்காணிப்பு ரூப்பரை உருவாக்கவும்:**
+1. **AI கண்காணிப்பு ரேப்பர் உருவாக்கவும்:**
 
 **கோப்பு: `src/ai_telemetry.py`**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,24 +1121,24 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Azure OpenAI ஐ அழைக்கவும்
+            # Microsoft Foundry மாடல்களை அழைக்கவும்
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 **kwargs
             )
             
-            duration = (time.time() - start_time) * 1000  # மில்லி வினாடிகள்
+            duration = (time.time() - start_time) * 1000  # ms
             
-            # பயன்பாடு தகவலை எடுக்கவும்
+            # பயன்பாடு தகவலைப் பெறவும்
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # செலவை கணக்கிடவும் (GPT-4 விலை)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # ஒவ்வொரு 1K டோக்கனுக்கு $0.03
-            completion_cost = (completion_tokens / 1000) * 0.06  # ஒவ்வொரு 1K டோக்கனுக்கு $0.06
+            # கட்டணத்தை கணக்கிடவும் (gpt-4.1 விலை)
+            prompt_cost = (prompt_tokens / 1000) * 0.03  # ஒவ்வொரு 1K டோக்கனுக்கும் $0.03
+            completion_cost = (completion_tokens / 1000) * 0.06  # ஒவ்வொரு 1K டோக்கனுக்கும் $0.06
             total_cost = prompt_cost + completion_cost
             
             # தனிப்பயன் நிகழ்வை கண்காணிக்கவும்
@@ -1152,7 +1152,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # அளவுகோல்களை கண்காணிக்கவும்
+            # அளவீடுகளை கண்காணிக்கவும்
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1191,7 +1191,7 @@ import os
 
 app = Flask(__name__)
 
-# கண்காணிக்கப்படும் OpenAI கிளையன்டை ஆரம்பிக்கவும்
+# கண்காணிக்கப்பட்ட OpenAI கிளையண்டை ஆரம்பிக்கவும்
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
     endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
@@ -1204,7 +1204,7 @@ def chat():
     
     # தானியங்கி கண்காணிப்புடன் அழைக்கவும்
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,7 +1216,7 @@ def chat():
     })
 ```
 
-3. **AI மெட்ரிக்ஸ்களை கேள்வி செய்யவும்:**
+3. **AI மீட்ரிக்ஸ்களை கேட்கவும்:**
 
 ```kusto
 // Total AI spend over time
@@ -1250,32 +1250,32 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ வெற்றிச் சோதனை அளவுகோல்:**
+**✅ வெற்றி நிபந்தனைகள்:**
 - ✅ ஒவ்வொரு OpenAI அழைப்பும் தானாக கண்காணிக்கப்படுகிறது
-- ✅ டோக்கன் பயன்பாடு மற்றும் செலவுகள் தெரியவைக்கப்படுகின்றன
+- ✅ டோக்கன் பயன்பாடு மற்றும் செலவுகள் காட்சி
 - ✅ தாமதம் கண்காணிக்கப்படுகிறது
-- ✅ பட்ஜெட் அலெர்ட்கள் அமைக்கலாம்
+- ✅ பட்ஜெட் எச்சரிக்கைகள் அமைக்க முடியும்
 
 **நேரம்**: 35-45 நிமிடங்கள்
 
 ---
 
-## செலவு ஒப்டிமைசேஷன்
+## செலவு சிறப்பாக்கம்
 
-### சாம்பிளிங் stratெஜிஸ்
+### சாம்பிளிங் தந்திரங்கள்
 
-டெலிமெட்ரி சாம்பிளிங் மூலம் செலவுகளை கட்டுப்படுத்து:
+டெலிமெட்ரியை மாதிரியாக எடுத்துக்கொண்டு செலவைக் கட்டுப்படுத்துக:
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
 
-# வளர்ச்சி: 100% மாதிரி எடுப்பு
+# வளர்ச்சி: 100% மாதிரித்தல்
 sampler = ProbabilitySampler(rate=1.0)
 
-# உற்பத்தி: 10% மாதிரி எடுப்பு (செலவுகளை 90% குறைக்கும்)
+# உற்பத்தி: 10% மாதிரித்தல் (செலவுகளை 90% குறைக்கும்)
 sampler = ProbabilitySampler(rate=0.1)
 
-# அனுகூல மாதிரி எடுப்பு (தானாகவே சரிசெய்யப்படுகிறது)
+# அனுகூலமான மாதிரித்தல் (தானாக சரிசெய்கிறது)
 from opencensus.trace.samplers import AdaptiveSampler
 sampler = AdaptiveSampler()
 ```
@@ -1291,7 +1291,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 ```
 
-### தரவு வைத்திருப்பு
+### தரவு தக்கவைக்கும் காலம்
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1305,38 +1305,38 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### மாதாந்திர செலவு மதிப்பீடுகள்
 
-| Data Volume | Retention | Monthly Cost |
+| தரவு அளவு | தக்கவைத்தல் | மாதாந்திர செலவு |
 |-------------|-----------|--------------|
-| 1 GB/month | 30 days | ~$2-5 |
-| 5 GB/month | 30 days | ~$10-15 |
-| 10 GB/month | 90 days | ~$25-40 |
-| 50 GB/month | 90 days | ~$100-150 |
+| 1 GB/மாதம் | 30 நாட்கள் | ~$2-5 |
+| 5 GB/மாதம் | 30 நாட்கள் | ~$10-15 |
+| 10 GB/மாதம் | 90 நாட்கள் | ~$25-40 |
+| 50 GB/மாதம் | 90 நாட்கள் | ~$100-150 |
 
-**இலவச தளம்**: 5 GB/month உள்kழியப்பட்டவை
+**இலவச நிலை**: 5 GB/மாதம் அடங்கியுள்ளது
 
 ---
 
-## அறிவு சோதனை
+## அறிவு பரிசோதனை
 
-### 1. அடிப்படை ஒருங்கிணைப்பு ✓
+### 1. அடிப்படை ஒருங்கிணைவு ✓
 
 உங்கள் புரிதலை சோதிக்கவும்:
 
-- [ ] **Q1**: AZD எப்படி Application Insights ஐ ஏற்படுத்துகிறது?
-  - **A**: `infra/core/monitoring.bicep` இல் Bicep வார்ப்பிரிண் மூலம் தானாக
+- [ ] **Q1**: AZD எப்படி Application Insights ஐ வழங்குகிறது?
+  - **A**: Bicep டெம்ப்ளேட்களினூடே தானாக `infra/core/monitoring.bicep`
 
-- [ ] **Q2**: எந்த சூழல் மாறி Application Insights ஐ இயக்கு?
+- [ ] **Q2**: Application Insights ஐ இயக்க எந்த சுற்றுச்சூழல் மாறி உள்ளது?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: மூன்று பிரதான டெலிமெட்ரி வகைகள் என்ன?
-  - **A**: Requests (HTTP கூற்றுகள்), Dependencies (வெளி கூற்றுகள்), Exceptions (பிழைகள்)
+- [ ] **Q3**: மூன்று முக்கிய டெலிமெட்ரி வகைகள் எவை?
+  - **A**: கோரிக்கைகள் (HTTP அழைப்புகள்), சார்புகள் (வெளி அழைப்புகள்), தவறுகள் (பிழைகள்)
 
-**அச்சு-செயல்முறை சரிபார்ப்பு:**
+**கைமுறை சரிபார்ப்பு:**
 ```bash
 # Application Insights அமைக்கப்பட்டுள்ளதா என்பதைச் சரிபார்க்கவும்
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# டெலிமெட்ரி தரவுகள் செல்கின்றதா என்பதைச் சரிபார்க்கவும்
+# டெலிமெட்ரி தரவுகள் பாய்ந்து கொண்டு இருக்கிறதா என்பதை உறுதிசெய்யவும்
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1349,16 +1349,16 @@ az monitor app-insights metrics show \
 
 உங்கள் புரிதலை சோதிக்கவும்:
 
-- [ ] **Q1**: நீங்கள் தனிப்பயன் வணிக நிகழ்வுகளை எப்படி கண்காணிப்பீர்கள்?
-  - **A**: `custom_dimensions` உடன் லோகர் பயன்படுத்தவும் அல்லது `TelemetryClient.track_event()` பயன்படுத்தவும்
+- [ ] **Q1**: தனிப்பயன் வணிக நிகழ்வுகளை நீங்கள் எப்படி கண்காணிப்பீர்கள்?
+  - **A**: `custom_dimensions` உடன் லாகர் பயன்படுத்தவும் அல்லது `TelemetryClient.track_event()`
 
-- [ ] **Q2**: நிகழ்வுகள் மற்றும் மெட்ரிக்ஸ்களுக்கிடையேயான வித்தியாசம் என்ன?
-  - **A**: நிகழ்வுகள் தனித்துவமான நிகழ்ச்சிகள், மெட்ரிக்ஸ் எண்ணிக்கைக் அளவீடுகள்
+- [ ] **Q2**: நிகழ்வுகள் மற்றும் மெட்ரிக்ஸ்களுக்கிடையிலான வித்தியாசம் என்ன?
+  - **A**: நிகழ்வுகள் தனித்துவமான நிகழ்ச்சிகள், மெட்ரிக்ஸ்கள் எண்கணிக்கை அளவீடுகள்
 
-- [ ] **Q3**: சேவைகளுக்கு இடையே டெலிமெட்ரியை எப்படி ஒத்திசைக்கிறீர்கள்?
-  - **A**: Application Insights தானாக `operation_Id` ஐ ஒத்திசைக்க பயன்படுத்துகிறது
+- [ ] **Q3**: சேவைகள் மத்தியில் டெலிமெட்ரியை எப்படி ஒத்திசைப்படுத்துவது?
+  - **A**: Application Insights தானாகவே தொடர்புக்காக `operation_Id` ஐ பயன்படுத்துகிறது
 
-**அச்சு-செயல்முறை சரிபார்ப்பு:**
+**கைமுறை சரிபார்ப்பு:**
 ```kusto
 // Verify custom events
 traces
@@ -1372,18 +1372,18 @@ traces
 
 உங்கள் புரிதலை சோதிக்கவும்:
 
-- [ ] **Q1**: சாம்பிளிங் என்ன மற்றும் ஏன் பயன்படுத்த வேண்டும்?
-  - **A**: சாம்பிளிங் தரவு அளவைக் குறைக்கும் (மற்றும் செலவை) மூலம் டெலிமெட்ரியின் ஒரு சதவீதத்தை மட்டுமே பதிவு செய்கிறது
+- [ ] **Q1**: சாம்பிளிங் என்ன மற்றும் அதை ஏன் பயன்படுத்த வேண்டும்?
+  - **A**: சாம்பிளிங் டெலிமெட்ரியின் ஒரு சதவிகிதத்தை மட்டும் பிடித்துக்கொண்டு தரவு அளவையும் (மற்றும் செலவையும்) குறைக்கிறது
 
-- [ ] **Q2**: அலெர்ட்களை எப்படி அமைக்கிறீர்கள்?
-  - **A**: Application Insights மெட்ரிக்ஸ் அடிப்படையில் Bicep அல்லது Azure போர்டலில் மெட்ரிக் அலெர்ட்களை பயன்படுத்து
+- [ ] **Q2**: எச்சரிக்கைகளை எப்படி அமைக்கின்றீர்கள்?
+  - **A**: Application Insights மீட்ரிக்ஸ்களை அடிப்படையாக கொண்டு Bicep அல்லது Azure போர்டல் இல் மெட்ரிக் எச்சரிக்கைகள் பயன்படுத்தவும்
 
-- [ ] **Q3**: Log Analytics மற்றும் Application Insights இல் என்ன வித்தியாசம்?
-  - **A**: Application Insights தரவை Log Analytics workspace இல் சேமிக்கிறது; App Insights செயலி-கேணி பார்வைகளை வழங்குகிறது
+- [ ] **Q3**: Log Analytics மற்றும் Application Insights இடையிலான வித்தியாசம் என்ன?
+  - **A**: Application Insights தரவுகளை Log Analytics வேலைநிலையில் சேமிக்கிறது; App Insights பயன்பாடு-சார்ந்த காட்சியினை வழங்குகிறது
 
-**அச்சு-செயல்முறை சரிபார்ப்பு:**
+**கைமுறை சரிபார்ப்பு:**
 ```bash
-# மாதிரி எடுக்கும் கட்டமைப்பை சரிபார்க்கவும்
+# சேம்பிளிங் கட்டமைப்பை சரிபார்க்கவும்
 az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1394,9 +1394,9 @@ az monitor app-insights component show \
 
 ## சிறந்த நடைமுறைகள்
 
-### ✅ செய்யவேண்டியது:
+### ✅ பின்பற்றவேண்டும்:
 
-1. **Correlation IDs ஐ பயன்படுத்தவும்**
+1. **ஒத்திசைப்பு IDகளைப் பயன்படுத்தவும்**
    ```python
    logger.info('Processing order', extra={
        'custom_dimensions': {
@@ -1406,72 +1406,72 @@ az monitor app-insights component show \
    })
    ```
 
-2. **நிர்ணಾಯಕ மெட்ரிக்ஸ் க்காக அலெர்ட்களை அமைக்கவும்**
+2. **கடுமையான மீட்ரிக்ஸ்க்கான எச்சரிக்கைகள் அமைக்கவும்**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **கட்டமைக்கப்பட்ட லாக்கிங் பயன்படுத்தவும்**
+3. **உருவமைந்த பதிவு (structured logging) பயன்படுத்தவும்**
    ```python
-   # ✅ நல்லது: ஒழுங்குபடுத்தப்பட்ட
+   # ✅ நல்லது: கட்டமைக்கப்பட்ட
    logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
    
-   # ❌ மோசமானது: ஒழுங்கற்ற
+   # ❌ மோசம்: கட்டமைக்கப்படாத
    logger.info(f'User 123 signed up')
    ```
 
-4. **Dependency க்களை கண்காணிக்கவும்**
+4. **சார்புகளை கண்காணிக்கவும்**
    ```python
-   # தானாக தரவுத்தள அழைப்புகள், HTTP வேண்டுதல்களை மற்றும் இதரவற்றைக் கண்காணிக்கவும்.
+   # தானாக தரவுத்தள அழைப்புகளை, HTTP கோரிக்கைகளை மற்றும் பிறவற்றை கண்காணிக்கவும்.
    ```
 
-5. **deployகளின் போது Live Metrics ஐ பயன்படுத்தவும்**
+5. **வெளியீடு போடும் போது லைவ் மெட்ரிக்ஸைப் பயன்படுத்தவும்**
 
 ### ❌ செய்யக்கூடாது:
 
-1. **ரகசிய தரவுகளை பதிவு செய்யக்கூடாது**
+1. **ரகசிய தரவை பதிவு செய்யாதீர்கள்**
    ```python
-   # ❌ மோசம்
+   # ❌ மோசமான
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ நல்லது
+   # ✅ நல்ல
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **உற்பத்தியில் 100% சாம்பிளிங் பயன்படுத்தாதீர்கள்**
+2. **உற்பத்தியில் 100% சாம்பிளிங்கைப் பயன்படுத்த வேண்டாம்**
    ```python
-   # ❌ விலையுயர்ந்த
+   # ❌ விலை அதிகம்
    sampler = ProbabilitySampler(rate=1.0)
    
-   # ✅ செலவுத் திறமையான
+   # ✅ விலைக்கு பொருத்தமான
    sampler = ProbabilitySampler(rate=0.1)
    ```
 
-3. **டெட் லெடர் கியூகளை மதிக்காமல் விடாதீர்கள்**
+3. **டெட் லெட்டர் கியூக்களை புறக்கணிக்காதீர்கள்**
 
-4. **தரவுRetention எல்லைகளை அமைக்க மறக்காதீர்கள்**
+4. **தரவு தக்கவைத்து வரம்புகளை அமைப்பதை மறக்காதீர்கள்**
 
 ---
 
-## பிரச்சனைத் திருத்தம்
+## பிரச்சினை தீர்வு
 
-### பிரச்சனை: எந்த டெலிமெட்ரியும் தோன்றவில்லை
+### பிரச்சினை: டெலிமெட்ரி தெரியவிடாமல் இருக்கிறது
 
-**காரணம் கண்டறிதல்:**
+**காரணம்:**
 ```bash
-# இணைப்பு ஸ்ட்ரிங் அமைக்கப்பட்டுள்ளது என்பதைச் சரிபார்க்கவும்
+# இணைப்பு சரம் அமைக்கப்பட்டுள்ளதா என்பதைச் சரிபார்க்கவும்
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure Monitor மூலம் பயன்பாட்டு பதிவுகளைச் சரிபார்க்கவும்
+# Azure Monitor மூலம் செயலி பதிவுகளைச் சரிபார்க்கவும்
 azd monitor --logs
 
-# அல்லது Container Apps க்கான Azure CLI ஐப் பயன்படுத்தவும்:
+# அல்லது Container Apps-க்கான Azure CLI ஐ பயன்படுத்தவும்:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **தீர்வு:**
 ```bash
-# கொண்டெய்னர் பயன்பாட்டில் இணைப்பு ஸ்ட்ரிங்கை சரிபார்க்கவும்.
+# Container App இல் இணைப்பு ஸ்ட்ரிங்கை சரிபார்க்கவும்
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,11 +1481,11 @@ az containerapp show \
 
 ---
 
-### பிரச்சனை: அதிகமான செலவுகள்
+### பிரச்சினை: அதிக செலவுகள்
 
-**காரணம் கண்டறிதல்:**
+**காரணம்:**
 ```bash
-# தரவு இறக்குதலை சரிபார்க்கவும்
+# தரவு இறக்குமதி சரிபார்க்கவும்
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1494,58 +1494,58 @@ az monitor app-insights metrics show \
 
 **தீர்வு:**
 - சாம்பிளிங் வீதத்தை குறைக்கவும்
-- Retention காலத்தை குறைக்கவும்
-- விரிவான லாக்கிங்கை அகற்று
+- தக்கவைத்தல் காலத்தைக் குறைக்கவும்
+- விரிவான பதிவீல்களை நீக்கவும்
 
 ---
 
-## மேலும் கற்றுக்கொள்ள
+## மேலும் அறிக
 
-### அதிகாரபூர்வ டாக்குமென்டேஷன்
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+### அதிகாரப்பூர்வ ஆவணங்கள்
+- [Application Insights கண்ணோட்டம்](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Python க்கான Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Kusto கேள்வி மொழி](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [AZD கண்காணிப்பு](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### இந்த பாடநெறியில் அடுத்த படிகள்
-- ← Previous: [Preflight Checks](preflight-checks.md)
-- → Next: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Course Home](../../README.md)
+### இந்த பாடநெறியில் அடுத்து செய்யவேண்டியது
+- ← முந்தையது: [முன்-பரிசோதனைகள்](preflight-checks.md)
+- → அடுத்தது: [வெளியீடு வழிகாட்டி](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [பாடநெறி முகப்பு](../../README.md)
 
 ### தொடர்புடைய உதாரணங்கள்
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI டெலிமெட்ரி
-- [Microservices Example](../../../../examples/microservices) - விநியோகமான டிரேசிங்
+- [Microsoft Foundry Models உதாரணம்](../../../../examples/azure-openai-chat) - AI டெலிமெட்ரி
+- [மைக்ரோசேவைகள் உதாரணம்](../../../../examples/microservices) - பகிரப்பட்ட ட்ரேசிங்
 
 ---
 
 ## சுருக்கம்
 
-**நீங்கள் கற்றுக்கொண்டவை:**
-- ✅ AZD உடன் தானாக Application Insights ஏற்படுத்துதல்
+**நீங்கள் கற்றுக் கொண்டுள்ளீர்கள்:**
+- ✅ AZD மூலம் தானியங்கி Application Insights ஏற்படுத்தல்
 - ✅ தனிப்பயன் டெலிமெட்ரி (நிகழ்வுகள், மெட்ரிக்ஸ், சார்புகள்)
-- ✅ மைக்ரோசேவைகளில் விநியோகப்படுத்தப்பட்ட டிரேசிங்
-- ✅ நேரடி அளவீடுகள் மற்றும் நேரடி கண்காணிப்பு
-- ✅ அறிவிப்புகள் மற்றும் டாஷ்போர்டுகள்
+- ✅ மைக்ரோசேவைகள் முழுவதும் பகிரப்பட்ட ட்ரேசிங்
+- ✅ லைவ் மெட்ரிக்ஸ் மற்றும் நேரடி கண்காணிப்பு
+- ✅ எச்சரிக்கைகள் மற்றும் டாஷ்போர்டுகள்
 - ✅ AI/LLM பயன்பாட்டு கண்காணிப்பு
-- ✅ செலவு சிறப்பாக்கக் கொள்கைகள்
+- ✅ செலவு சிறப்பாக்கத் தந்திரங்கள்
 
-**முக்கியமான கருத்துக்கள்:**
-1. **AZD கண்காணிப்பை தானாகவே ஏற்பாடு செய்கிறது** - கைமுறை அமைப்பு தேவையில்லை
-2. **கட்டமைக்கப்பட்ட பதிவு பயன்படுத்தவும்** - கேள்விகள் எளிதாக விசாரிக்கப்படுகின்றன
-3. **வணிக நிகழ்வுகளை கண்காணிக்கவும்** - வெறும் தொழில்நுட்ப அளவீடுகளுக்கு மட்டுமே அல்ல
-4. **AI செலவுகளை கண்காணிக்கவும்** - டோக்கன்களையும் செலவுகளையும் கண்காணிக்கவும்
-5. **அறிவிப்புகளை அமைக்கவும்** - முன்னெச்சரிக்கையாய் இருங்கள், எதிர்வினையாய் அல்ல
-6. **செலவுகளை சிறப்பாக்கவும்** - மாதிரிப்பீடு மற்றும் சேமிப்பு வரம்புகளைப் பயன்படுத்தவும்
+**முக்கிய வைத்துக்கொள்ள வேண்டியவை:**
+1. **AZD தானாகவே கண்காணிப்பை ஏற்பு செய்கிறது** - கைமுறை அமைப்பு தேவையில்லை
+2. **கட்டமைக்கப்பட்ட பதிவு பயன்படுத்தவும்** - வினவலை எளிதாக்குகிறது
+3. **வணிக நிகழ்வுகளை பின்தொடருங்கள்** - தொழில்நுட்ப அளவுகோல்கள் மட்டும் அல்ல
+4. **AI செலவுகளை கண்காணிக்கவும்** - டோக்கன்களையும் செலவுகளையும் பின்தொடருங்கள்
+5. **அறிவிப்புகளை அமைக்கவும்** - பின்வினையாக அல்ல, முன்னெச்சரிக்கையாக இருங்கள்
+6. **செலவுகளை மேம்படுத்தவும்** - மாதிரிப்படுத்துதல் மற்றும் காப்பு வரம்புகளைப் பயன்படுத்தவும்
 
 **அடுத்த படிகள்:**
 1. நடைமுறை பயிற்சிகளை முடிக்கவும்
-2. உங்கள் AZD திட்டங்களில் Application Insights ஐ சேர்க்கவும்
-3. உங்கள் குழுவுக்காக தனிப்பயன் டாஷ்போர்டுகளை உருவாக்கவும்
-4. கற்றுக்கொள்ள [பதிவேற்ற கையேடு](../chapter-04-infrastructure/deployment-guide.md)
+2. உங்கள் AZD திட்டங்களுக்கு Application Insights ஐச் சேர்க்கவும்
+3. உங்கள் குழுவிற்காக தனிப்பயன் டாஷ்போர்டுகளை உருவாக்கவும்
+4. கற்றுக்கொள்ள [வினியோக வழிகாட்டி](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-மறுப்பு அறிவிப்பு:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையாக இருக்கும் Co-op Translator (https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்தன்மைக்கு முயற்சி செய்தாலும், தானாகச் செயல்படும் மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான தகவல்கள் இருக்கக்கூடும் என்பதை தயவுசெய்து கவனிக்கவும். மூல ஆவணம் அதன் சொந்த மொழியில் அதிகாரபூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பின் பயன்பாட்டால் ஏற்படும் எந்த தவறான புரிதல்களுக்கும் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
+மறுப்பு:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான Co‑op Translator (https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயலினாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது துல்லியமின்மை இருக்கக்கூடும் என்பதை தயவுசெய்து கவனத்தில் கொள்ளுங்கள். ஆவணத்தின் மூல மொழியில் உள்ள அசல் ஆவணம் தான் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பைத் தேர்வு செய்ய பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்தவொரு தவறான புரிதலுக்கும் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
