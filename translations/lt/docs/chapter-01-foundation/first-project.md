@@ -1,51 +1,51 @@
-# Jūsų pirmasis projektas - Praktinė pamoka
+# Jūsų Pirmasis Projektas - Praktinis Vadovas
 
-**Skyriaus navigacija:**
-- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Ankstesnis**: [Diegimas ir nustatymas](installation.md)
-- **➡️ Kitas**: [Konfigūracija](configuration.md)
-- **🚀 Kitas skyrius**: [2 skyrius: Plėtra, orientuota į dirbtinį intelektą](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD pradedantiesiems](../../README.md)
+- **📖 Current Chapter**: 1 skyrius - Pagrindai & Greitas pradžios vadovas
+- **⬅️ Previous**: [Diegimas ir nustatymas](installation.md)
+- **➡️ Next**: [Konfigūracija](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Įvadas
+## Įžanga
 
-Sveiki atvykę į savo pirmą Azure Developer CLI projektą! Šis visapusiškas praktinis vadovas pateikia pilną žingsnis po žingsnio instrukciją, kaip sukurti, diegti ir valdyti viso steko programą Azure naudojant azd. Dirbsite su tikra todo programa, kuri apima React priekinę dalį, Node.js API galinę dalį ir MongoDB duomenų bazę.
+Sveiki atvykę į savo pirmąjį Azure Developer CLI projektą! Šis išsamus praktinis vadovas pateikia pilną žingsnių seką, kaip sukurti, įdiegti ir valdyti pilno režimo programą Azure naudojant azd. Dirbsite su tikra todo programa, kurią sudaro React frontend, Node.js API backend ir MongoDB duomenų bazė.
 
 ## Mokymosi tikslai
 
-Baigę šį vadovą, jūs:
-- Įvaldysite azd projekto inicializavimo darbo eigą, naudojant šablonus
+Baigę šį vadovą jūs:
+- Įvaldysite azd projekto inicializavimo srautą naudojant šablonus
 - Suprasite Azure Developer CLI projekto struktūrą ir konfigūracijos failus
 - Atliksite pilną programos diegimą į Azure su infrastruktūros paruošimu
-- Įgyvendinsite programos atnaujinimus ir perdiegimo strategijas
-- Valdysite kelias aplinkas vystymui ir bandymams
-- Taikysite išteklių šalinimo ir kaštų valdymo praktikas
+- Įgyvendinsite programos atnaujinimus ir pakartotinį diegimą
+- Valdysite kelias aplinkas vystymui ir paruošimui
+- Taikysite išteklių valymo ir kaštų valdymo praktiką
 
 ## Mokymosi rezultatai
 
-Baigę kursą, galėsite:
+Baigę, galėsite:
 - Nepriklausomai inicializuoti ir konfigūruoti azd projektus iš šablonų
-- Efektyviai naršyti ir keisti azd projektų struktūras
-- Diegti viso steko programas į Azure vienais komandomis
-- Spręsti dažniausias diegimo problemas ir autentifikacijos klaidas
-- Valdyti kelias Azure aplinkas skirtingiems diegimo etapams
-- Įgyvendinti nuolatinio diegimo darbo eigas programos atnaujinimams
+- Naršyti ir keisti azd projekto struktūras efektyviai
+- Vienu komandu diegti pilno komplekto programas į Azure
+- Spręsti dažniausias diegimo ir autentifikacijos problemas
+- Valdyti kelias Azure aplinkas skirtingiems diegimo etapiams
+- Įdiegti nuolatinio diegimo (CD) srautus programos atnaujinimams
 
 ## Pradžia
 
 ### Išankstiniai reikalavimai
-- ✅ Azure Developer CLI įdiegta ([Diegimo vadovas](installation.md))
-- ✅ Azure CLI įdiegta ir autentifikuota
+- ✅ Azure Developer CLI įdiegtas ([Diegimo vadovas](installation.md))
+- ✅ Azure CLI įdiegtas ir autentifikuotas
 - ✅ Git įdiegtas jūsų sistemoje
 - ✅ Node.js 16+ (šiam vadovui)
 - ✅ Visual Studio Code (rekomenduojama)
 
-### Patikrinkite savo sąranką
+### Patikrinkite savo aplinką
 ```bash
 # Patikrinkite azd diegimą
 azd version
 ```
-### Patvirtinkite Azure autentifikaciją
+### Patikrinkite Azure autentifikaciją
 
 ```bash
 az account show
@@ -58,10 +58,10 @@ node --version
 
 ## 1 žingsnis: Pasirinkite ir inicializuokite šabloną
 
-Pradėkime nuo populiaraus todo programėlės šablono, kuris apima React priekinę dalį ir Node.js API galinę dalį.
+Pradėkime nuo populiaraus todo programos šablono, kuriame yra React frontend ir Node.js API backend.
 
 ```bash
-# Naršyti prieinamus šablonus
+# Peržiūrėti galimus šablonus
 azd template list
 
 # Inicializuoti todo programėlės šabloną
@@ -69,17 +69,17 @@ mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Vykdykite nurodymus:
+# Sekite nurodymus:
 # - Įveskite aplinkos pavadinimą: "dev"
 # - Pasirinkite prenumeratą (jei turite kelias)
 # - Pasirinkite regioną: "East US 2" (arba pageidaujamą regioną)
 ```
 
 ### Kas ką tik įvyko?
-- Atsisiųstas šablono kodas į jūsų vietinį katalogą
+- Parsisiųstas šablono kodas į jūsų vietinį katalogą
 - Sukurtas `azure.yaml` failas su paslaugų apibrėžimais
 - Paruoštas infrastruktūros kodas `infra/` kataloge
-- Sukurta aplinkos konfigūracija
+- Sukonfigūruota aplinkos konfigūracija
 
 ## 2 žingsnis: Išnagrinėkite projekto struktūrą
 
@@ -119,25 +119,25 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Svarbiausi failai, kuriuos reikia suprasti
+### Svarbūs failai, kuriuos reikia suprasti
 
-**azure.yaml** - Jūsų azd projekto širdis:
+**azure.yaml** - Jūsų azd projekto šerdis:
 ```bash
 # Peržiūrėti projekto konfigūraciją
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Infrastruktūros aprašymas:
+**infra/main.bicep** - Infrastruktūros apibrėžimas:
 ```bash
 # Peržiūrėti infrastruktūros kodą
 head -30 infra/main.bicep
 ```
 
-## 3 žingsnis: Tinkinkite savo projektą (neprivaloma)
+## 3 žingsnis: Tinkinkite savo projektą (pasirinktinai)
 
-Prieš diegdami, galite pritaikyti programą:
+Prieš diegiant, galite pritaikyti programą:
 
-### Redaguokite priekinę dalį
+### Redaguokite frontend'ą
 ```bash
 # Atidarykite React programėlės komponentą
 code src/web/src/App.tsx
@@ -158,29 +158,29 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## 4 žingsnis: Diegti į Azure
+## 4 žingsnis: Diegimas į Azure
 
-Dabar – įdomioji dalis – diegti viską į Azure!
+Dabar pats įdomiausias etapas – įdiekite viską į Azure!
 
 ```bash
 # Diegti infrastruktūrą ir programą
 azd up
 
 # Ši komanda atliks:
-# 1. Sukurti Azure išteklius (App Service, Cosmos DB ir kt.)
-# 2. Sukompiliuoti jūsų programą
-# 3. Diegti į sukurtus išteklius
-# 4. Parodyti programos URL
+# 1. Paruošti Azure išteklius (App Service, Cosmos DB ir kt.)
+# 2. Sukurti jūsų programą
+# 3. Diegti į paruoštus išteklius
+# 4. Parodyti programos URL adresą
 ```
 
 ### Kas vyksta diegimo metu?
 
-Komanda `azd up` atlieka šiuos veiksmus:
-1. **Provision** (`azd provision`) - Sukuria Azure išteklius
-2. **Package** - Surenka jūsų programos kodą
-3. **Deploy** (`azd deploy`) - Diegia kodą į Azure išteklius
+`azd up` komanda atlieka šiuos žingsnius:
+1. **Paruošimas** (`azd provision`) - Sukuria Azure išteklius
+2. **Paketavimas** - Surenka jūsų programos kodą
+3. **Diegimas** (`azd deploy`) - Diegia kodą į Azure išteklius
 
-### Tikėtinas išvestis
+### Laukiama išvestis
 ```
 Packaging services (azd package)
 
@@ -196,9 +196,9 @@ https://app-web-abc123def.azurewebsites.net
 ## 5 žingsnis: Išbandykite savo programą
 
 ### Prieiga prie jūsų programos
-Spustelėkite diegimo išvestyje pateiktą URL arba pasiekite jį bet kada:
+Spustelėkite URL, pateiktą diegimo išvestyje, arba pasiekite jį bet kada:
 ```bash
-# Gauti programos galinius taškus
+# Gaukite programos galinius taškus
 azd show
 
 # Atidarykite programą naršyklėje
@@ -206,25 +206,25 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Išbandykite Todo programėlę
-1. **Add a todo item** - Spustelėkite "Add Todo" ir įveskite užduotį
-2. **Mark as complete** - Pažymėkite užbaigtus įrašus
-3. **Delete items** - Ištrinkite nebereikalingus todo elementus
+1. **Pridėti užduotį** - Spustelėkite "Add Todo" ir įveskite užduotį
+2. **Pažymėti kaip atliktą** - Pažymėkite atliktas užduotis
+3. **Ištrinti elementus** - Pašalinkite užduotis, kurių nebereikia
 
 ### Stebėkite savo programą
 ```bash
-# Atidaryti Azure portalą savo ištekliams
+# Atidarykite Azure portalą savo ištekliams
 azd monitor
 
-# Peržiūrėti programos žurnalus
+# Peržiūrėkite programos žurnalus
 azd monitor --logs
 
-# Peržiūrėti tiesioginius rodiklius
+# Peržiūrėkite tiesioginius rodiklius
 azd monitor --live
 ```
 
-## 6 žingsnis: Atlikite pakeitimus ir iš naujo įdiekite
+## 6 žingsnis: Atlikite pakeitimus ir diegkite iš naujo
 
-Atlikime pakeitimą ir pažiūrėkime, kaip lengva atnaujinti:
+Padarykime pakeitimą ir pamatykime, kaip lengva atnaujinti:
 
 ### Redaguokite API
 ```bash
@@ -243,12 +243,12 @@ res.header('X-Powered-By', 'Azure Developer CLI');
 # Diegti tik programos kodą (praleisti infrastruktūrą)
 azd deploy
 
-# Tai daug greičiau nei 'azd up', nes infrastruktūra jau egzistuoja
+# Tai gerokai greičiau nei 'azd up', nes infrastruktūra jau egzistuoja
 ```
 
 ## 7 žingsnis: Valdykite kelias aplinkas
 
-Sukurkite testavimo (staging) aplinką, kad išbandytumėte pakeitimus prieš diegiant gamyboje:
+Sukurkite parengimo (staging) aplinką, kad išbandytumėte pakeitimus prieš gamybinę aplinką:
 
 ```bash
 # Sukurti naują tarpinę aplinką
@@ -266,18 +266,18 @@ azd env list
 
 ### Aplinkų palyginimas
 ```bash
-# Peržiūrėti kūrimo aplinką
+# Peržiūrėti vystymo aplinką
 azd env select dev
 azd show
 
-# Peržiūrėti parengtinę aplinką
+# Peržiūrėti parengiamąją aplinką
 azd env select staging
 azd show
 ```
 
 ## 8 žingsnis: Išvalykite išteklius
 
-Kai baigsite eksperimentuoti, išvalykite išteklius, kad išvengtumėte nuolatinių mokesčių:
+Kai baigsite eksperimentuoti, išvalykite, kad išvengtumėte nuolatinių mokesčių:
 
 ```bash
 # Ištrinti visus Azure išteklius dabartinei aplinkai
@@ -291,23 +291,43 @@ azd env select staging
 azd down --force --purge
 ```
 
+## Klasikinė programa vs. AI palaikoma programa: tas pats darbo srautas
+
+Jūs ką tik įdiegėte tradicinę žiniatinklio programą. O ką daryti, jei norėtumėte įdiegti AI palaikomą programą — pavyzdžiui, pokalbių programą, paremta Microsoft Foundry modeliais?
+
+Gera žinia: **darbo eiga yra identiška.**
+
+| Step | Classic Todo App | AI Chat App |
+|------|-----------------|-------------|
+| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Authenticate | `azd auth login` | `azd auth login` |
+| Deploy | `azd up` | `azd up` |
+| Monitor | `azd monitor` | `azd monitor` |
+| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+
+Vienintelis skirtumas yra **šablonas**, nuo kurio pradedate. AI šablonas apima papildomą infrastruktūrą (pvz., Microsoft Foundry Models išteklių arba AI Search indeksą), tačiau azd visa tai suvaldo už jus. Jums nereikia išmokti naujų komandų, taikyti kitos priemonės ar keisti, kaip mąstote apie diegimą.
+
+Tai yra pagrindinis azd principas: **vienas darbo srautas, bet koks darbo krūvis.** Įgūdžiai, kuriuos praktikuojotės šiame vadove — inicializavimas, diegimas, stebėjimas, pakartotinis diegimas ir išteklių valymas — vienodai taikomi AI programoms ir agentams.
+
+---
+
 ## Ko išmokote
 
-Sveikiname! Jums sėkmingai pavyko:
-- ✅ Inicializuoti azd projektą iš šablono
-- ✅ Išnagrinėti projekto struktūrą ir svarbius failus
-- ✅ Įdiegti viso steko programą į Azure
-- ✅ Atlikti kodo pakeitimus ir perdiegti
-- ✅ Valdyti kelias aplinkas
-- ✅ Išvalyti išteklius
+Sveikiname! Jūs sėkmingai:
+- ✅ Inicializavote azd projektą iš šablono
+- ✅ Išnagrinėjote projekto struktūrą ir svarbius failus
+- ✅ Įdiegėte pilno komplekto programą į Azure
+- ✅ Atlikote kodo pakeitimus ir pertvarkėte (redeploy)
+- ✅ Valdėte kelias aplinkas
+- ✅ Išvalėte išteklius
 
-## 🎯 Įgūdžių patikrinimo užduotys
+## 🎯 Įgūdžių patvirtinimo užduotys
 
 ### Užduotis 1: Įdiekite kitą šabloną (15 minučių)
-**Tikslas**: Įrodyti azd init ir diegimo proceso įvaldymą
+**Tikslas**: Parodyti įvaldytą azd init ir diegimo darbo eigą
 
 ```bash
-# Išbandyti Python ir MongoDB derinį
+# Išbandyti Python + MongoDB technologijų steką
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
@@ -321,13 +341,13 @@ azd down --force --purge
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Programa įdiegta be klaidų
-- [ ] Galima pasiekti programos URL naršyklėje
-- [ ] Programa veikia teisingai (pridėti/pašalinti todo)
+- [ ] Programa diegiasi be klaidų
+- [ ] Gali pasiekti programos URL naršyklėje
+- [ ] Programa veikia tinkamai (pridėti/pašalinti užduotis)
 - [ ] Sėkmingai išvalyti visi ištekliai
 
 ### Užduotis 2: Tinkinkite konfigūraciją (20 minučių)
-**Tikslas**: Praktikuoti aplinkos kintamųjų konfigūravimą
+**Tikslas**: Pasitreniruoti aplinkos kintamųjų konfigūravimą
 
 ```bash
 cd my-first-azd-app
@@ -335,7 +355,7 @@ cd my-first-azd-app
 # Sukurti pasirinktą aplinką
 azd env new custom-config
 
-# Nustatyti pasirinktinius kintamuosius
+# Nustatyti pasirinktus kintamuosius
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
@@ -349,21 +369,21 @@ azd up
 
 **Sėkmės kriterijai:**
 - [ ] Sukurta pasirinktinė aplinka sėkmingai
-- [ ] Aplinkos kintamieji nustatyti ir juos galima gauti
-- [ ] Programa įdiegta su pasirinktinėmis konfigūracijomis
-- [ ] Galima patikrinti pasirinktines nuostatas diegtoje programoje
+- [ ] Aplinkos kintamieji nustatyti ir pasiekiami
+- [ ] Programa diegiama su pasirinkta konfigūracija
+- [ ] Galima patikrinti pasirinktinius nustatymus diegtoje programoje
 
-### Užduotis 3: Darbas su keliomis aplinkomis (25 minučių)
+### Užduotis 3: Darbo eiga kelioms aplinkoms (25 minutės)
 **Tikslas**: Įvaldyti aplinkų valdymą ir diegimo strategijas
 
 ```bash
-# Sukurti kūrimo aplinką
+# Sukurti vystymo aplinką
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Užfiksuoti kūrimo URL
+# Užfiksuoti vystymo URL
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
@@ -373,7 +393,7 @@ azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Užfiksuoti parengimo URL
+# Užfiksuoti parengimo aplinkos URL
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
@@ -392,31 +412,31 @@ azd env select staging-$(whoami) && azd down --force --purge
 **Sėkmės kriterijai:**
 - [ ] Sukurtos dvi aplinkos su skirtingomis konfigūracijomis
 - [ ] Abi aplinkos sėkmingai įdiegtos
-- [ ] Galima perjungti aplinkas naudojant `azd env select`
+- [ ] Gali perjungti aplinkas naudojant `azd env select`
 - [ ] Aplinkos kintamieji skiriasi tarp aplinkų
 - [ ] Sėkmingai išvalytos abi aplinkos
 
 ## 📊 Jūsų pažanga
 
-**Investuotas laikas**: ~60-90 minučių  
+**Investuotas laikas**: ~60–90 minučių  
 **Įgyti įgūdžiai**:
 - ✅ Projekto inicializavimas naudojant šablonus
 - ✅ Azure išteklių paruošimas
-- ✅ Programos diegimo darbo eiga
+- ✅ Programos diegimo srautai
 - ✅ Aplinkų valdymas
 - ✅ Konfigūracijos valdymas
-- ✅ Išteklių šalinimas ir kaštų valdymas
+- ✅ Išteklių valymas ir kaštų valdymas
 
-**Kitas lygis**: Esate pasiruošę peržiūrėti [Konfigūracijos vadovą](configuration.md), kad sužinotumėte pažangesnius konfigūracijos modelius!
+**Kitas lygis**: Jūs pasiruošę [Konfigūracijos vadovui](configuration.md) mokytis pažangių konfigūracijos modelių!
 
 ## Dažniausiai pasitaikančios problemos
 
 ### Autentifikacijos klaidos
 ```bash
-# Iš naujo autentifikuoti su Azure
+# Pakartotinai autentifikuokitės su Azure
 az login
 
-# Patikrinti prieigą prie prenumeratos
+# Patikrinkite prenumeratos prieigą
 az account show
 ```
 
@@ -433,35 +453,35 @@ azd monitor --logs
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### Išteklių pavadinimų konfliktai
+### Išteklių vardų konfliktai
 ```bash
 # Naudokite unikalų aplinkos pavadinimą
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Prievado/tinklo problemos
+### Prievado/tinklų problemos
 ```bash
-# Patikrinkite, ar prievadai yra laisvi
+# Patikrinti, ar prievadai yra prieinami
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## Kiti žingsniai
+## Tolimesni veiksmai
 
-Kadangi baigėte savo pirmą projektą, ištirkite šias pažangias temas:
+Dabar, kai baigėte savo pirmą projektą, ištirkite šias pažangias temas:
 
 ### 1. Tinkinkite infrastruktūrą
 - [Infrastruktūra kaip kodas](../chapter-04-infrastructure/provisioning.md)
-- [Pridėti duomenų bazes, saugyklas ir kitas paslaugas](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [Pridėti duomenų bazes, saugyklą ir kitas paslaugas](../chapter-04-infrastructure/provisioning.md#adding-services)
 
-### 2. Sukurkite CI/CD
-- [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md) - Pilnos CI/CD darbo eigos
-- [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - CI/CD vamzdynų konfigūracija
+### 2. Sukonfigūruokite CI/CD
+- [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md) - Pilni CI/CD srautai
+- [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Tiesioginės CI/CD gaires
 
-### 3. Gamybinės aplinkos geriausios praktikos
+### 3. Gamybinio naudojimo geriausios praktikos
 - [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md) - Saugumas, našumas ir stebėjimas
 
-### 4. Ištirkite daugiau šablonų
+### 4. Tyrinėkite daugiau šablonų
 ```bash
 # Naršyti šablonus pagal kategoriją
 azd template list --filter web
@@ -478,7 +498,7 @@ azd init --template todo-java-mongo
 
 ### Mokymosi medžiaga
 - [Azure Developer CLI dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Bendruomenė ir palaikymas
@@ -489,25 +509,25 @@ azd init --template todo-java-mongo
 ### Šablonai ir pavyzdžiai
 - [Oficiali šablonų galerija](https://azure.github.io/awesome-azd/)
 - [Bendruomenės šablonai](https://github.com/Azure-Samples/azd-templates)
-- [Įmonių modeliai](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**Sveikiname baigus savo pirmą azd projektą!** Dabar esate pasirengę kurti ir diegti nuostabias programas Azure su pasitikėjimu.
+**Sveikiname, kad užbaigėte savo pirmą azd projektą!** Dabar esate pasiruošę kurti ir diegti nuostabias programas Azure su pasitikėjimu.
 
 ---
 
-**Skyriaus navigacija:**
-- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Ankstesnis**: [Diegimas ir nustatymas](installation.md)
-- **➡️ Kitas**: [Konfigūracija](configuration.md)
-- **🚀 Kitas skyrius**: [2 skyrius: Plėtra, orientuota į dirbtinį intelektą](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Kitas pamoka**: [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD pradedantiesiems](../../README.md)
+- **📖 Current Chapter**: 1 skyrius - Pagrindai & Greitas pradžios vadovas
+- **⬅️ Previous**: [Diegimas ir nustatymas](installation.md)
+- **➡️ Next**: [Konfigūracijos](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **Next Lesson**: [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Atsakomybės atsisakymas:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti vertimo tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo pradinėje (originalioje) kalboje turėtų būti laikomas autoritetingu šaltiniu. Esant svarbiai arba kritinei informacijai rekomenduojame pasitelkti profesionalų žmogaus vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kilusias dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Esant kritinei informacijai rekomenduojamas profesionalus, žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar klaidingas interpretacijas, kylančias iš šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

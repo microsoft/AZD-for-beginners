@@ -1,21 +1,21 @@
-# 8 skyrius: Produkciniai ir įmonių modeliai
+# Skyrius 8: Gamyba ir įmonių modeliai
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sunkumas**: Pažengęs
+**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sudėtingumas**: Pažengęs
 
 ---
 
 ## Apžvalga
 
-Šis skyrius apima įmonėms paruoštus diegimo modelius, saugumo stiprinimą, stebėjimą ir išlaidų optimizavimą produkciniams AI darbo krūviams.
+Šis skyrius apima įmonėms tinkamus diegimo modelius, saugumo sustiprinimą, stebėjimą ir sąnaudų optimizavimą gamybos AI darbo krūviams.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių, jūs:
-- Diegsite kelių regionų atsparias programas
-- Įgyvendinsite įmonės saugumo modelius
-- Sukonfigūruosite išsamų stebėjimą
-- Optimizuosite išlaidas mastu
-- Nustatysite CI/CD pipelines su AZD
+- Diegti kelių regionų atsparias programas
+- Įdiegti įmonės saugumo modelius
+- Konfigūruoti visapusišką stebėjimą
+- Optimizuoti sąnaudas dideliu mastu
+- Nustatyti CI/CD vamzdynus su AZD
 
 ---
 
@@ -23,45 +23,38 @@ Baigę šį skyrių, jūs:
 
 | # | Pamoka | Aprašymas | Laikas |
 |---|--------|-----------|--------|
-| 1 | [Produkcinės AI praktikos](production-ai-practices.md) | Įmonių diegimo modeliai | 90 min |
+| 1 | [Gamybinės AI praktikos](production-ai-practices.md) | Įmonės diegimo modeliai | 90 min |
 
 ---
 
-## 🚀 Produkcinis kontrolinis sąrašas
+## 🚀 Gamybos kontrolinis sąrašas
 
-- [ ] Diegimas keliuose regionuose dėl atsparumo
+- [ ] Daugių regionų diegimas dėl atsparumo
 - [ ] Valdomas identitetas autentifikacijai (be raktų)
 - [ ] Application Insights stebėjimui
-- [ ] Nustatyti išlaidų biudžetai ir įspėjimai
-- [ ] Įjungtas saugumo skenavimas
-- [ ] CI/CD vamzdyno integracija
-- [ ] Avarinio atstatymo planas
+- [ ] Sąnaudų biudžetai ir įspėjimai sukonfigūruoti
+- [ ] Saugumo skenavimas įgalintas
+- [ ] CI/CD vamzdynų integracija
+- [ ] Avarinio atkūrimo planas
 
 ---
 
 ## 🏗️ Architektūros modeliai
 
-### Modelis 1: Mikrotarnybų AI
+### Modelis 1: Mikroservisų AI
 
+```mermaid
+graph LR
+    Gateway[API vartai] --> AI[DI paslauga] --> Models[Microsoft Foundry modeliai]
+    Gateway --> Auth[Autentifikavimo paslauga]
+    AI --> Data[Duomenų saugykla]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Modelis 2: Įvykių valdomas AI
 
-### Modelis 2: Įvykių valdoma AI
-
+```mermaid
+graph LR
+    EventGrid[Įvykių tinklas] --> Functions[Funkcijos] --> Pipeline[DI srautas]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Geriausios saugumo praktikos
@@ -83,17 +76,17 @@ properties: {
 
 ---
 
-## 💰 Išlaidų optimizavimas
+## 💰 Sąnaudų optimizavimas
 
 | Strategija | Sutaupymai |
 |----------|---------|
-| Skalavimas iki nulio (Container Apps) | 60-80% |
-| Naudoti vartojimo lygius kūrimo aplinkai | 50-70% |
-| Planinis skalavimas | 30-50% |
+| Mastelis iki nulio (Container Apps) | 60-80% |
+| Naudoti vartojimo lygmenis kūrimo aplinkai | 50-70% |
+| Planuotas mastelio keitimas | 30-50% |
 | Rezervuota talpa | 20-40% |
 
 ```bash
-# Nustatyti biudžeto perspėjimus
+# Nustatyti biudžeto įspėjimus
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -123,7 +116,7 @@ az monitor metrics list --resource <resource-id>
 | Kryptis | Skyrius |
 |-----------|---------|
 | **Ankstesnis** | [7 skyrius: Gedimų šalinimas](../chapter-07-troubleshooting/README.md) |
-| **Kurso pradžia** | [Kurso pradžia](../../README.md) |
+| **Kursas baigtas** | [Kurso pradžia](../../README.md) |
 
 ---
 
@@ -131,12 +124,12 @@ az monitor metrics list --resource <resource-id>
 
 - [AI agentų vadovas](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Daugiagentiniai sprendimai](../chapter-05-multi-agent/README.md)
-- [Mikrotarnybų pavyzdys](../../examples/microservices/README.md)
+- [Daugių agentų sprendimai](../chapter-05-multi-agent/README.md)
+- [Mikroservisų pavyzdys](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas pirminiu šaltiniu. Kritinei informacijai rekomenduojama naudotis profesionalaus vertėjo paslaugomis. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl kritinės informacijos rekomenduojamas profesionalus, žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

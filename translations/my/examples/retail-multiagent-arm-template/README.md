@@ -1,98 +1,98 @@
-# လက်လီ Multi-Agent Solution - အခြေခံအဆောက်အအုံ Template
+# Retail Multi-Agent Solution - အဆောက်အအုံ နမူနာ
 
-**အခန်း ၅: ထုတ်လုပ် Deployment Package**
-- **📚 သင်ခန်းစာအိမ်**: [AZD For Beginners](../../README.md)
-- **📖 ဆက်စပ်အခန်း**: [အခန်း ၅: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 အခန်းအကြောင်းအရာ**: [အပြည့်အစုံ Architecture](../retail-scenario.md)
-- **🎯 အမြန် Deploy**: [One-Click Deployment](../../../../examples/retail-multiagent-arm-template)
+**အခန်း ၅: ထုတ်လုပ်ရေး တပ်ဆင်မှု အထုပ်**
+- **📚 သင်တန်း စာမျက်နှာ**: [AZD For Beginners](../../README.md)
+- **📖 ဆက်စပ် အခန်း**: [အခန်း ၅: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 ကိစ္စရပ် လမ်းညွှန်**: [ပြည့်စုံသော ဖွဲ့စည်းပုံ](../retail-scenario.md)
+- **🎯 အမြန် တပ်ဆင်ခြင်း**: [တစ်ချက်နှိပ် ဖြင့် တပ်ဆင်ခြင်း](#-quick-deployment)
 
-> **⚠️ INFRASTRUCTURE TEMPLATE ONLY**  
-> ဒီ ARM template က **Azure resources** ကို multi-agent system အတွက် deploy လုပ်ပေးပါတယ်။  
+> **⚠️ အဆောက်အအုံ နမူနာသာ ဖြစ်ပါသည်**  
+> ဤ ARM template သည် မျိုးစုံ အေးဂျင့် စနစ်အတွက် **Azure အရင်းအမြစ်များ** ကို တပ်ဆင်ပေးပါသည်။  
 >  
-> **Deploy လုပ်ပြီးရလာမယ့်အရာများ (15-25 မိနစ်):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings across 3 regions)
-> - ✅ AI Search service (အလွတ်၊ index ဖန်တီးဖို့အဆင်သင့်)
-> - ✅ Container Apps (placeholder images, သင့် code အတွက်အဆင်သင့်)
+> **ဘာတွေ တပ်ဆင်ပေးမလဲ (15-25 မိနစ်):**
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings across 3 regions)
+> - ✅ AI Search service (empty, ready for index creation)
+> - ✅ Container Apps (placeholder images, ready for your code)
 > - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
-> **မပါဝင်သေးတဲ့အရာများ (ဖွံ့ဖြိုးတိုးတက်မှုလိုအပ်):**
+> **ဘာတွေ မပါဝင်သေးပါ (ဖွံ့ဖြိုးရေး လိုအပ်သေးသည်):**
 > - ❌ Agent implementation code (Customer Agent, Inventory Agent)
-> - ❌ Routing logic နှင့် API endpoints
+> - ❌ Routing logic and API endpoints
 > - ❌ Frontend chat UI
-> - ❌ Search index schemas နှင့် data pipelines
-> - ❌ **ဖွံ့ဖြိုးတိုးတက်မှုအချိန်ခန့်မှန်း: 80-120 နာရီ**
+> - ❌ Search index schemas and data pipelines
+> - ❌ **ခန့်မှန်း ဖွံ့ဖြိုးရေး အလုပ်အကန့်**: 80-120 နာရီ
 >  
-> **ဒီ template ကိုသုံးသင့်တဲ့အခါ:**
-> - ✅ Multi-agent project အတွက် Azure infrastructure ကို provision လုပ်ချင်တယ်
-> - ✅ Agent implementation ကိုသီးသန့်ဖွံ့ဖြိုးချင်တယ်
-> - ✅ Production-ready infrastructure baseline လိုအပ်တယ်
+> **ဤ template ကို သုံးပါက:**
+> - ✅ မျိုးစုံ အေးဂျင့် စီမံကိန်းအတွက် Azure အဆောက်အအုံကို အသင့်တင်ပေးလိုပါက
+> - ✅ အေးဂျင့် အကောင်အထည်ပြုမှုကို သီးခြား ဖွံ့ဖြိုးရန် ရည်ရွယ်ထားပါက
+> - ✅ ထုတ်လုပ်မှု အသင့် အဆောက်အအုံ အခြေခံ စနစ် လိုအပ်ပါက
 >  
-> **မသုံးသင့်တဲ့အခါ:**
-> - ❌ Multi-agent demo အလုပ်လုပ်နေတဲ့အခြေအနေကို ချက်ချင်းမျှော်လင့်တယ်
-> - ❌ အပြည့်အစုံ application code နမူနာကိုရှာနေတယ်
+> **မသုံးသင့်သော အခြေအနေများ:**
+> - ❌ ချက်ချင်း လက်တွေ့ အသုံးပြုနိုင်သော မျိုးစုံ အေးဂျင့် demo မလိုချင်ပါက
+> - ❌ ပြည့်စုံသော application code ဥပမာများလိုချင်ပါက
 
 ## အကျဉ်းချုပ်
 
-ဒီ directory မှာ multi-agent customer support system အတွက် **အခြေခံအဆောက်အအုံ** ကို deploy လုပ်ဖို့ comprehensive Azure Resource Manager (ARM) template ပါဝင်ပါတယ်။ Template က Azure services အားလုံးကို configure လုပ်ပြီး interconnected ဖြစ်အောင် provision လုပ်ပေးပါတယ်၊ သင့် application development အတွက်အဆင်သင့်ဖြစ်ပါတယ်။
+ဤ ဖိုလ်ဒါတွင် မျိုးစုံ အေးဂျင့် customer support စနစ်အတွက် အဆောက်အအုံ အခြေခံကို တပ်ဆင်ရန် အသုံးပြုနိုင်သော Azure Resource Manager (ARM) template တစ်ခု ပါဝင်သည်။ Template သည် လိုအပ်သော Azure ဝန်ဆောင်မှုများအားလုံးကို မှန်ကန်စွာ ပြင်ဆင်၍ ဆက်သွယ်ထားပေးသည် — သင့် application ဖွံ့ဖြိုးရေးအတွက် အသင့်ဖြစ်နေပါပြီ။
 
-**Deploy လုပ်ပြီးရလာမယ့်အရာ:** Production-ready Azure infrastructure  
-**System ကိုပြီးစီးဖို့လိုအပ်တာ:** Agent code, frontend UI, နှင့် data configuration (ကြည့်ပါ [Architecture Guide](../retail-scenario.md))
+**တပ်ဆင်ပြီးနောက်၊ သင့်မှာ ရှိမည်:** ထုတ်လုပ်မှု အသင့် Azure အဆောက်အအုံ  
+**စနစ်ကို ပြီးမြောက်စေရန် လိုအပ်သည့် အရာများ:** Agent code, frontend UI, နှင့် ဒေတာ ဖွဲ့စည်းပုံ (ကြည့်ရန် [ဖွဲ့စည်းပုံ လမ်းညွှန်](../retail-scenario.md))
 
-## 🎯 Deploy လုပ်ပြီးရလာမယ့်အရာများ
+## 🎯 ဘာတွေ တပ်ဆင်ပေးမလဲ
 
-### Core Infrastructure (Deploy လုပ်ပြီးနောက်အခြေအနေ)
+### မူလ အဆောက်အအုံ (တပ်ဆင်ပြီးနောက် မျက်နှာဖုံး)
 
-✅ **Azure OpenAI Services** (API calls အတွက်အဆင်သင့်)
-  - Primary region: GPT-4o deployment (20K TPM capacity)
-  - Secondary region: GPT-4o-mini deployment (10K TPM capacity)
+✅ **Microsoft Foundry Models Services** (API ခေါ်ဆိုမှုများအတွက် အသင့်)
+  - Primary region: gpt-4.1 deployment (20K TPM capacity)
+  - Secondary region: gpt-4.1-mini deployment (10K TPM capacity)
   - Tertiary region: Text embeddings model (30K TPM capacity)
-  - Evaluation region: GPT-4o grader model (15K TPM capacity)
-  - **အခြေအနေ:** အပြည့်အစုံအလုပ်လုပ်နေ - API calls ချက်ချင်းလုပ်နိုင်
+  - Evaluation region: gpt-4.1 grader model (15K TPM capacity)
+  - **အခြေအနေ:** လုံးဝ လည်ပတ်နိုင်ပြီး - ချက်ချင်း API ခေါ်ဆိုနိုင်ပါသည်
 
-✅ **Azure AI Search** (အလွတ် - configure လုပ်ဖို့အဆင်သင့်)
-  - Vector search capabilities enabled
+✅ **Azure AI Search** (ရှင်းလင်း - index ဖန်တီးရန် အသင့်)
+  - Vector search စွမ်းရည်များ ဖွင့်ထားသည်
   - Standard tier with 1 partition, 1 replica
-  - **အခြေအနေ:** Service အလုပ်လုပ်နေ၊ index ဖန်တီးဖို့လိုအပ်
-  - **လိုအပ်တဲ့အရေးယူမှု:** သင့် schema နဲ့ search index ဖန်တီးပါ
+  - **အခြေအနေ:** ဝန်ဆောင်မှု လည်ပတ်နေသော်လည်း index ဖန်တီးရန် လိုအပ်သည်
+  - **လိုအပ်သော လုပ်ဆောင်ချက်:** သင့် schema ဖြင့် search index ဖန်တီးပါ
 
-✅ **Azure Storage Account** (အလွတ် - upload လုပ်ဖို့အဆင်သင့်)
+✅ **Azure Storage Account** (ရှင်းလင်း - ဖိုင်တင်ရန် အသင့်)
   - Blob containers: `documents`, `uploads`
-  - Secure configuration (HTTPS-only, public access မရှိ)
-  - **အခြေအနေ:** ဖိုင်တွေကိုလက်ခံဖို့အဆင်သင့်
-  - **လိုအပ်တဲ့အရေးယူမှု:** သင့် product data နှင့် documents ကို upload လုပ်ပါ
+  - လုံခြုံစိတ်ချသော configuration (HTTPS-only, အများသုံး ဝင်ရောက်ခြင်းမရှိ)
+  - **အခြေအနေ:** ဖိုင်များ ရယူရန် အသင့်ဖြစ်သည်
+  - **လိုအပ်သော လုပ်ဆောင်ချက်:** သင့် ထုတ်ကုန် ဒေတာနှင့် စာရွက်စာတမ်းများ upload ပြုလုပ်ပါ
 
-⚠️ **Container Apps Environment** (Placeholder images deploy လုပ်ထား)
+⚠️ **Container Apps Environment** (Placeholder images တပ်ဆင်ထားသည်)
   - Agent router app (nginx default image)
   - Frontend app (nginx default image)
   - Auto-scaling configured (0-10 instances)
-  - **အခြေအနေ:** Placeholder containers အလုပ်လုပ်နေ
-  - **လိုအပ်တဲ့အရေးယူမှု:** သင့် agent applications ကို build နှင့် deploy လုပ်ပါ
+  - **အခြေအနေ:** Placeholder containers များ လည်ပတ်နေသည်
+  - **လိုအပ်သော လုပ်ဆောင်ချက်:** သင့် agent applications များကို build နှင့် deploy ပြုလုပ်ရန်
 
-✅ **Azure Cosmos DB** (အလွတ် - data အတွက်အဆင်သင့်)
-  - Database နှင့် container pre-configured
-  - Low-latency operations အတွက် optimize လုပ်ထား
-  - TTL enabled for automatic cleanup
-  - **အခြေအနေ:** Chat history ကိုသိမ်းဆည်းဖို့အဆင်သင့်
+✅ **Azure Cosmos DB** (ရှင်းလင်း - ဒေတာ ထည့်ရန် အသင့်)
+  - Database နှင့် container များ ကြိုတင် ပြင်ဆင်ထားသည်
+  - အနည်းဆုံး ထိတွေ့နှုန်း အတွက် optimize ပြုထားသည်
+  - TTL အနေနဲ့ အလိုအလျောက် ဖျက်ချင်မှုများ ဖွင့်ထားသည်
+  - **အခြေအနေ:** chat history သိမ်းဆည်းရန် အသင့်ဖြစ်သည်
 
-✅ **Azure Key Vault** (Optional - secrets အတွက်အဆင်သင့်)
-  - Soft delete enabled
-  - RBAC configured for managed identities
-  - **အခြေအနေ:** API keys နှင့် connection strings ကိုသိမ်းဆည်းဖို့အဆင်သင့်
+✅ **Azure Key Vault** (Optional - secret များ သိမ်းရန် အသင့်)
+  - Soft delete ဖွင့်ထားသည်
+  - RBAC ကို managed identities တွေလုပ်ပိုင်ခွင့် အရ လုပ်ထားသည်
+  - **အခြေအနေ:** API keys နှင့် connection strings သိမ်းဆည်းရန် အသင့်ဖြစ်သည်
 
-✅ **Application Insights** (Optional - monitoring အလုပ်လုပ်နေ)
-  - Log Analytics workspace နဲ့ချိတ်ဆက်ထား
-  - Custom metrics နှင့် alerts configure လုပ်ထား
-  - **အခြေအနေ:** သင့် apps မှ telemetry ကိုလက်ခံဖို့အဆင်သင့်
+✅ **Application Insights** (Optional - မော်နီတာလုပ်ငန်း ဖွင့်ထား)
+  - Log Analytics workspace နှင့် ချိတ်ဆက်ထားသည်
+  - အထူး metrics နှင့် alerts များ ပြင်ဆင်ထားသည်
+  - **အခြေအနေ:** သင့် apps အတွက် telemetry ရယူရန် အသင့်ဖြစ်သည်
 
-✅ **Document Intelligence** (API calls အတွက်အဆင်သင့်)
-  - S0 tier for production workloads
-  - **အခြေအနေ:** Upload လုပ်ထားတဲ့ documents ကို process လုပ်ဖို့အဆင်သင့်
+✅ **Document Intelligence** (API ခေါ်ဆိုမှုများအတွက် အသင့်)
+  - S0 tier ကို ထုတ်လုပ်မှုလုပ်ငန်းအတွက် သတ်မှတ်ထားသည်
+  - **အခြေအနေ:** တင်ထားသော စာရွက်စာတမ်းများကို ဖြန့်ချပေးနိုင်သည်
 
-✅ **Bing Search API** (API calls အတွက်အဆင်သင့်)
-  - S1 tier for real-time searches
-  - **အခြေအနေ:** Web search queries အတွက်အဆင်သင့်
+✅ **Bing Search API** (API ခေါ်ဆိုမှုများအတွက် အသင့်)
+  - S1 tier ကို real-time searches အတွက် သတ်မှတ်ထားသည်
+  - **အခြေအနေ:** web search queries များအတွက် အသင့်ဖြစ်သည်
 
-### Deployment Modes
+### တပ်ဆင်ခြင်း မော်ဒ်များ
 
 | Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
 |------|-----------------|---------------------|-------------|-------------------|----------|
@@ -100,157 +100,157 @@
 | **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
 | **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
 
-**ကုန်ကျစရိတ်သက်ရောက်မှု:**
-- **Minimal → Standard:** ~4x cost increase ($100-370/mo → $420-1,450/mo)
-- **Standard → Premium:** ~3x cost increase ($420-1,450/mo → $1,150-3,500/mo)
-- **ရွေးချယ်ရန်:** မျှော်လင့်ထားတဲ့ load, SLA လိုအပ်ချက်များ, budget အကန့်အသတ်များအပေါ်မူတည်
+**ကုန်ကျစရိတ် အကျိုးသက်ရောက်မှု:**
+- **Minimal → Standard:** ~4x ကုန်ကျစရိတ် တိုးလာသည် ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium:** ~3x ကုန်ကျစရိတ် တိုးလာသည် ($420-1,450/mo → $1,150-3,500/mo)
+- **ရွေးချယ်ရန် အချက်များ:** မျှော်မှန်းထားသော ထာဝရ၊ SLA လိုအပ်ချက်များ၊ ဘတ်ဂျက် ကန့်သတ်ချက်များ
 
-**Capacity Planning:**
-- **TPM (Tokens Per Minute):** Model deployments အားလုံးအတွက်စုစုပေါင်း
-- **Container Instances:** Auto-scaling range (min-max replicas)
-- **Search Tier:** Query performance နှင့် index size အကန့်အသတ်များကိုသက်ရောက်
+**စွမ်းရည် စီမံချက်:**
+- **TPM (Tokens Per Minute):** မော်ဒယ် deployment များ စုပေါင်း၏ တစ်မိနစ်လျှင် token အရေအတွက်
+- **Container Instances:** Auto-scaling ကျပ်သတ် (min-max replicas)
+- **Search Tier:** query performance နှင့် index အရွယ်အစား ကန့်သတ်ချက် များအား သက်ရောက်စေသည်
 
-## 📋 လိုအပ်ချက်များ
+## 📋 ကြိုတင် လိုအပ်ချက်များ
 
-### လိုအပ်တဲ့ Tools
+### လိုအပ်သော ကိရိယာများ
 1. **Azure CLI** (version 2.50.0 or higher)
    ```bash
-   az --version  # ဗားရှင်းကိုစစ်ဆေးပါ
+   az --version  # ဗားရှင်းကို စစ်ဆေးပါ
    az login      # အတည်ပြုပါ
    ```
 
 2. **Active Azure subscription** with Owner or Contributor access
    ```bash
-   az account show  # စာရင်းသွင်းမှုကိုအတည်ပြုပါ
+   az account show  # စာရင်းသွင်းမှုကို အတည်ပြုပါ
    ```
 
-### လိုအပ်တဲ့ Azure Quotas
+### လိုအပ်သည့် Azure Quotas
 
-Deploy လုပ်ခင် target regions မှာ quota လုံလောက်မှုကိုစစ်ဆေးပါ:
+တပ်ဆင်မှု မလုပ်ခင် သင်ရွေးချယ်ထားသော ဒေသများတွင် လုံလောက်သည့် quota များ ရှိကြောင်း စစ်ဆေးပါ။
 
 ```bash
-# သင့်ဒေသတွင် Azure OpenAI ရရှိနိုင်မှုကို စစ်ဆေးပါ
+# သင့်ဒေသတွင် Microsoft Foundry မော်ဒယ်များ ရရှိနိုင်မှုကို စစ်ဆေးပါ
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# OpenAI quota ကို အတည်ပြုပါ (ဥပမာ gpt-4o အတွက်)
+# OpenAI ကွိုတာကို စစ်ဆေးပါ (ဥပမာ gpt-4.1 အတွက်)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# Container Apps quota ကို စစ်ဆေးပါ
+# Container Apps ကွိုတာကို စစ်ဆေးပါ
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**အနည်းဆုံးလိုအပ်တဲ့ Quotas:**
-- **Azure OpenAI:** Regions အတောအတွင်း model deployments 3-4 ခု
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+**အနည်းဆုံး လိုအပ်သော Quotas:**
+- **Microsoft Foundry Models:** ဒေသအလိုက် 3-4 မော်ဒယ် deployment များ
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **မှတ်ချက်:** GPT-4o က region တချို့မှာ waitlist ရှိနိုင်ပါတယ် - [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) ကိုစစ်ဆေးပါ
-- **Container Apps:** Managed environment + container instances 2-10 ခု
-- **AI Search:** Standard tier (Basic က vector search အတွက်မလုံလောက်)
+  - **မှတ်ချက်:** gpt-4.1 ကို အချို့ဒေသများတွင် စောင့်ဆိုင်းစာရင်းရှိနိုင်သည် - [မော်ဒယ် ရရှိနိုင်မှု](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) ကို စစ်ဆေးပါ
+- **Container Apps:** Managed environment + 2-10 container instances
+- **AI Search:** Standard tier (Basic သည် vector search အတွက် မလုံလောက်ပါ)
 - **Cosmos DB:** Standard provisioned throughput
 
 **Quota မလုံလောက်ပါက:**
-1. Azure Portal → Quotas → Request increase ကိုသွားပါ
-2. ဒါမှမဟုတ် Azure CLI ကိုသုံးပါ:
+1. Azure Portal → Quotas → Request increase သို့သွားပါ
+2. သို့မဟုတ် Azure CLI သုံးပါ:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
-3. Availability ရှိတဲ့ alternative regions ကိုစဉ်းစားပါ
+3. ရရှိနိုင်မှုရှိသည့် အခြားဒေသများကို စဉ်းစားပါ
 
-## 🚀 အမြန် Deployment
+## 🚀 အမြန် တပ်ဆင်ခြင်း
 
-### Option 1: Azure CLI ကိုသုံးခြင်း
+### ရွေးချယ်စရာ ၁: Azure CLI သုံးခြင်း
 
 ```bash
-# အခြေခံဖိုင်များကို ကူးယူပါ သို့မဟုတ် ဒေါင်းလုဒ်လုပ်ပါ
+# နမူနာ ဖိုင်များကို clone လုပ်ပါ သို့မဟုတ် ဒေါင်းလုတ် ဆွဲပါ
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# တင်သွင်းမှု script ကို အကောင်အထည်ဖော်နိုင်ရန် ပြင်ဆင်ပါ
+# တပ်ဆင်ရေး စကရစ်ပ်ကို ဆောင်ရွက်နိုင်သော ဖိုင်အဖြစ် ပြောင်းပါ
 chmod +x deploy.sh
 
-# ပုံမှန်အခြေအနေများဖြင့် တင်သွင်းပါ
+# ပုံမှန် ဆက်တင်များဖြင့် တပ်ဆင်ပါ
 ./deploy.sh -g myResourceGroup
 
-# ထုတ်လုပ်မှုအတွက် အထူးအင်္ဂါရပ်များနှင့်တင်သွင်းပါ
+# အဆင့်မြင့် အင်္ဂါရပ်များနှင့်အတူ ထုတ်လုပ်ရေးအတွက် တပ်ဆင်ပါ
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Option 2: Azure Portal ကိုသုံးခြင်း
+### ရွေးချယ်စရာ ၂: Azure Portal သုံးခြင်း
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Azure တွင် တပ်ဆင်ရန်](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Option 3: Azure CLI ကိုတိုက်ရိုက်သုံးခြင်း
+### ရွေးချယ်စရာ ၃: Azure CLI ကို တိုက်ရိုက် အသုံးပြုခြင်း
 
 ```bash
-# အရင်းအမြစ်အုပ်စုကို ဖန်တီးပါ
+# ရင်းမြစ်အုပ်စု ဖန်တီးပါ
 az group create --name myResourceGroup --location eastus2
 
-# အချုပ်အခြာပုံစံကို တင်သွင်းပါ
+# ပုံစံကို ဖြန့်ချိပါ
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json
 ```
 
-## ⏱️ Deployment Timeline
+## ⏱️ တပ်ဆင်မှု အချိန်ဇယား
 
-### မျှော်လင့်ရမယ့်အရာများ
+### မျှော်လင့်ရမည့် အရာများ
 
-| အဆင့် | ကြာမြင့်ချိန် | ဖြစ်ပျက်မည့်အရာ |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| **Template Validation** | 30-60 စက္ကန့် | Azure က ARM template syntax နှင့် parameters ကို validate လုပ်ပါမည် |
-| **Resource Group Setup** | 10-20 စက္ကန့် | Resource group ကိုဖန်တီးပါမည် (လိုအပ်ပါက) |
-| **OpenAI Provisioning** | 5-8 မိနစ် | OpenAI accounts 3-4 ခုကိုဖန်တီးပြီး models ကို deploy လုပ်ပါမည် |
-| **Container Apps** | 3-5 မိနစ် | Environment ကိုဖန်တီးပြီး placeholder containers ကို deploy လုပ်ပါမည် |
-| **Search & Storage** | 2-4 မိနစ် | AI Search service နှင့် storage accounts ကို provision လုပ်ပါမည် |
-| **Cosmos DB** | 2-3 မိနစ် | Database ကိုဖန်တီးပြီး containers ကို configure လုပ်ပါမည် |
-| **Monitoring Setup** | 2-3 မိနစ် | Application Insights နှင့် Log Analytics ကို setup လုပ်ပါမည် |
-| **RBAC Configuration** | 1-2 မိနစ် | Managed identities နှင့် permissions ကို configure လုပ်ပါမည် |
-| **စုစုပေါင်း Deployment** | **15-25 မိနစ်** | အဆောက်အအုံအားလုံးအဆင်သင့်ဖြစ်ပါမည် |
+| **Template Validation** | 30-60 seconds | Azure validates ARM template syntax and parameters |
+| **Resource Group Setup** | 10-20 seconds | Creates resource group (if needed) |
+| **OpenAI Provisioning** | 5-8 minutes | Creates 3-4 OpenAI accounts and deploys models |
+| **Container Apps** | 3-5 minutes | Creates environment and deploys placeholder containers |
+| **Search & Storage** | 2-4 minutes | Provisions AI Search service and storage accounts |
+| **Cosmos DB** | 2-3 minutes | Creates database and configures containers |
+| **Monitoring Setup** | 2-3 minutes | Sets up Application Insights and Log Analytics |
+| **RBAC Configuration** | 1-2 minutes | Configures managed identities and permissions |
+| **Total Deployment** | **15-25 minutes** | Complete infrastructure ready |
 
-**Deploy လုပ်ပြီးနောက်:**
-- ✅ **Infrastructure အဆင်သင့်:** Azure services အားလုံး provision လုပ်ပြီးအလုပ်လုပ်နေ
-- ⏱️ **Application Development:** 80-120 နာရီ (သင့်တာဝန်)
-- ⏱️ **Index Configuration:** 15-30 မိနစ် (သင့် schema လိုအပ်)
-- ⏱️ **Data Upload:** Dataset size အပေါ်မူတည်
-- ⏱️ **Testing & Validation:** 2-4 နာရီ
+**တပ်ဆင်ပြီးနောက်:**
+- ✅ **အဆောက်အအုံ အသင့်:** Azure ဝန်ဆောင်မှုများအားလုံး တပ်ဆင်ပြီး လည်ပတ်နေသည်
+- ⏱️ **Application ဖွံ့ဖြိုးရေး:** 80-120 နာရီ (သင့်တာဝန်)
+- ⏱️ **Index ဖွဲ့စည်းမှု:** 15-30 မိနစ် (သင့် schema လိုအပ်သည်)
+- ⏱️ **ဒေတာ တင်ခြင်း:** dataset အရွယ်အစား ပေါ် မူတည်၍ ကြာချိန် မတူပါ
+- ⏱️ **စမ်းသပ်ရေးနှင့် အတည်ပြုခြင်း:** 2-4 နာရီ
 
 ---
 
-## ✅ Deployment အောင်မြင်မှုကိုစစ်ဆေးပါ
+## ✅ တပ်ဆင်မှု အောင်မြင်မှုကို အတည်ပြုခြင်း
 
-### အဆင့် ၁: Resource Provisioning ကိုစစ်ဆေးပါ (2 မိနစ်)
+### အဆင့် 1: Resource များ တပ်ဆင်ထားမှု စစ်ဆေးပါ (2 မိနစ်)
 
 ```bash
-# အရင်းအမြစ်အားလုံးအောင်မြင်စွာတင်သွင်းပြီးကြောင်းအတည်ပြုပါ
+# အရင်းအမြစ်အားလုံးကို အောင်မြင်စွာ ဖြန့်ချိထားကြောင်း အတည်ပြုပါ။
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-**မျှော်လင့်ရမည့်အရာ:** အလွတ် table (အားလုံး "Succeeded" status ပြပါမည်)
+**မျှော်လင့်ထားချက်:** ရင့်ရှင်းသော ဇယား (all resources show "Succeeded" status)
 
-### အဆင့် ၂: Azure OpenAI Deployments ကိုစစ်ဆေးပါ (3 မိနစ်)
+### အဆင့် 2: Microsoft Foundry Models များ တပ်ဆင်မှု စစ်ဆေးပါ (3 မိနစ်)
 
 ```bash
-# OpenAI အကောင့်အားလုံးကို စာရင်းပြုစုပါ။
+# OpenAI အကောင့်များအားလုံးကို စာရင်းပြပါ
 az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# အဓိကဒေသအတွက် မော်ဒယ်များကို စစ်ဆေးပါ။
+# ပင်မ ဒေသအတွက် မော်ဒယ်တပ်ဆင်မှုများကို စစ်ဆေးပါ
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -261,20 +261,20 @@ az cognitiveservices account deployment list \
   --output table
 ```
 
-**မျှော်လင့်ရမည့်အရာ:** 
-- OpenAI accounts 3-4 ခု (primary, secondary, tertiary, evaluation regions)
-- Model deployments 1-2 ခု (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+**မျှော်လင့်ထားချက်:** 
+- primary, secondary, tertiary, evaluation region များအတွက် OpenAI accounts 3-4 ခု
+- တစ်ခုချင်းစီတွင် 1-2 မော်ဒယ် deployment (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### အဆင့် ၃: Infrastructure Endpoints ကိုစမ်းသပ်ပါ (5 မိနစ်)
+### အဆင့် 3: အဆောက်အအုံ endpoints များ စမ်းသပ်ပါ (5 မိနစ်)
 
 ```bash
-# ကွန်တိန်နာအက်ပ် URL များကိုရယူပါ။
+# Container App အတွက် URL များကို ရယူပါ
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# router endpoint ကိုစမ်းသပ်ပါ (placeholder image ကတုံ့ပြန်မည်)
+# router endpoint ကို စမ်းသပ်ပါ (placeholder ပုံမှ ပြန်လည္တုံ့ပြန်မည်)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -284,14 +284,14 @@ echo "Testing: https://$ROUTER_URL"
 curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
 ```
 
-**မျှော်လင့်ရမည့်အရာ:** 
-- Container Apps "Running" status ပြပါမည်
-- Placeholder nginx HTTP 200 သို့မဟုတ် 404 ဖြင့်တုံ့ပြန်ပါမည် (application code မရှိသေး)
+**မျှော်လင့်ထားချက်:** 
+- Container Apps များ "Running" အခြေအနေကို ပြစေပါမည်
+- Placeholder nginx မှ HTTP 200 သို့မဟုတ် 404 ပြန်လည်ဖြေဆိုနိုင်ပါသည် (application code မရှိသေး)
 
-### အဆင့် ၄: Azure OpenAI API Access ကိုစစ်ဆေးပါ (3 မိနစ်)
+### အဆင့် 4: Microsoft Foundry Models API ဝင်ရောက် စစ်ဆေးပါ (3 မိနစ်)
 
 ```bash
-# OpenAI endpoint နှင့် key ကိုရယူပါ
+# OpenAI endpoint နှင့် key ကို ရယူပါ
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# GPT-4o deployment ကိုစမ်းသပ်ပါ
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# gpt-4.1 deployment ကို စမ်းသပ်ပါ
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,49 +312,49 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**မျှော်လင့်ရမည့်အရာ:** JSON response ဖြင့် chat completion (OpenAI အလုပ်လုပ်နေမှုကိုအတည်ပြု)
+**မျှော်လင့်ထားချက်:** JSON response နှင့် chat completion (OpenAI လည်ပတ်နိုင်ကြောင်း အတည်ပြု)
 
-### အလုပ်လုပ်နေ versus မလုပ်နိုင်သေးတဲ့အရာများ
+### ဘာတွေ လုပ်ဆောင်နိုင်ပြီ vs ဘာတွေ မလုပ်ဆောင်ရသေးသလဲ
 
-**✅ Deploy လုပ်ပြီးနောက်အလုပ်လုပ်နေသောအရာများ:**
-- Azure OpenAI models deploy လုပ်ပြီး API calls လက်ခံနေ
-- AI Search service အလုပ်လုပ်နေ (အလွတ်၊ index မရှိသေး)
-- Container Apps အလုပ်လုပ်နေ (placeholder nginx images)
-- Storage accounts upload လုပ်ဖို့အဆင်သင့်
-- Cosmos DB data operations အတွက်အဆင်သင့်
-- Application Insights infrastructure telemetry ကိုစုဆောင်းနေ
-- Key Vault secrets သိမ်းဆည်းဖို့အဆင်သင့်
+**✅ တပ်ဆင်ပြီး လုပ်ဆောင်နိုင်သေးသည်:**
+- Microsoft Foundry Models မော်ဒယ်များ တပ်ဆင်ပြီး API ခေါ်ဆိုမှုများ လက်ခံနိုင်သည်
+- AI Search ဝန်ဆောင်မှု လည်ပတ်နေသည် (ရှင်းလင်း - index မရှိသေး)
+- Container Apps များ လည်ပတ်နေသည် (placeholder nginx images)
+- Storage accounts အသုံးပြုနိုင်ပြီး ဖိုင်များ တင်နိုင်သည်
+- Cosmos DB ဒေတာ လုပ်ဆောင်မှုများအတွက် အသင့်ဖြစ်သည်
+- Application Insights က အဆောက်အအုံ telemetry စုဆောင်းနေသည်
+- Key Vault သည် secret များ သိမ်းဆည်းရန် အသင့်ဖြစ်သည်
 
-**❌ မလုပ်နိုင်သေးသောအရာများ (ဖွံ့ဖြိုးတိုးတက်မှုလိုအပ်):**
-- Agent endpoints (application code မရှိသေး)
-- Chat functionality (frontend + backend implementation လိုအပ်)
-- Search queries (search index မဖန်တီးသေး)
-- Document processing pipeline (data မ upload သေး)
+**❌ မလုပ်ဆောင်ရသေးသေး (ဖွံ့ဖြိုးရေး လိုအပ်သည်):**
+- Agent endpoints (application code မတပ်ဆင်ထား)
+- Chat လုပ်ဆောင်ချက် (frontend + backend အကောင်အထည်ဖော်ရန် လိုအပ်)
+- Search queries (search index မဖန်တီးထား)
+- Document processing pipeline (ဒေတာ မတင်ထား)
 - Custom telemetry (application instrumentation လိုအပ်)
 
-**နောက်တစ်ဆင့်များ:** [Post-Deployment Configuration](../../../../examples/retail-multiagent-arm-template) ကိုကြည့်ပြီး application ကိုဖွံ့ဖြိုးနှင့် deploy လုပ်ပါ
+**နောက်ဆင့်များ:** သင့် application ကို ဖွံ့ဖြိုး၍ deploy ပြုလုပ်ရန် [Post-Deployment Configuration](#-post-deployment-next-steps) ကို ကြည့်ပါ
 
 ---
 
-## ⚙️ Configuration Options
+## ⚙️ ကိုက်ညီစေရန် ရွေးချယ်စရာများ
 
 ### Template Parameters
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `projectName` | string | "retail" | Resource names အတွက် prefix |
+| `projectName` | string | "retail" | ထို resource name အားလုံး အတွက် prefix |
 | `location` | string | Resource group location | Primary deployment region |
-| `secondaryLocation` | string | "westus2" | Multi-region deployment အတွက် secondary region |
-| `tertiaryLocation` | string | "francecentral" | Embeddings model အတွက် region |
+| `secondaryLocation` | string | "westus2" | Secondary region for multi-region deployment |
+| `tertiaryLocation` | string | "francecentral" | Region for embeddings model |
 | `environmentName` | string | "dev" | Environment designation (dev/staging/prod) |
 | `deploymentMode` | string | "standard" | Deployment configuration (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Multi-region deployment ကို enable လုပ်ပါ |
-| `enableMonitoring` | bool | true | Application Insights နှင့် logging ကို enable လုပ်ပါ |
-| `enableSecurity` | bool | true | Key Vault နှင့် enhanced security ကို enable လုပ်ပါ |
+| `enableMultiRegion` | bool | true | မျိုးစုံ ဒေသများတွင် တပ်ဆင်မှု ဖွင့်ရန် |
+| `enableMonitoring` | bool | true | Application Insights နှင့် logging များ ဖွင့်ရန် |
+| `enableSecurity` | bool | true | Key Vault နှင့် လုံခြုံရေးအပို ဆောင်ရွက်ချက်များ ဖွင့်ရန် |
 
-### Parameters ကို customize လုပ်ခြင်း
+### Parameter များ ကို ကိုက်ညီစေရန်
 
-`azuredeploy.parameters.json` ကို edit လုပ်ပါ:
+Edit `azuredeploy.parameters.json`:
 
 ```json
 {
@@ -377,39 +377,30 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 }
 ```
 
-## 🏗️ Architecture Overview
+## 🏗️ ဖွဲ့စည်းပုံ အကျဉ်းချုပ်
 
+```mermaid
+graph TD
+    Frontend[ရှေ့ပိုင်း<br/>ကွန်တိန်နာ အက်ပလီကေးရှင်း] --> Router[အေးဂျင့် ရော်တာ<br/>ကွန်တိန်နာ အက်ပလီကေးရှင်း] --> Agents[အေးဂျင့်များ<br/>ဖောက်သည် + ကုန်ပစ္စည်း စာရင်း]
+    Router --> Search[AI ရှာဖွေရေး<br/>ဗက်တာ ဒေတာဘေ့စ်]
+    Router --> Models[Microsoft Foundry မော်ဒယ်များ<br/>ဒေသစုံ]
+    Agents --> Storage[သိုလှောင်မှု<br/>စာရွက်စာတမ်းများ]
+    Search --> CosmosDB[Cosmos DB<br/>စကားပြော မှတ်တမ်း]
+    Models --> AppInsights[App Insights<br/>စောင့်ကြည့်မှု]
+    Storage --> KeyVault[Key Vault<br/>လျှို့ဝှက်ချက်များ]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+## 📖 Deployment Script အသုံးပြုနည်း
 
-## 📖 Deployment Script Usage
-
-`deploy.sh` script က interactive deployment အတွေ့အကြုံကိုပေးပါသည်:
+`deploy.sh` script သည် အပြန်အလှန် မေးမြန်းနိုင်သည့် deployment အတွေ့အကြုံကို ပေးသည်:
 
 ```bash
-# အကူအညီပြရန်
+# အကူအညီပြပါ
 ./deploy.sh --help
 
-# အခြေခံ deployment
+# အခြေခံ ဖြန့်ချိခြင်း
 ./deploy.sh -g myResourceGroup
 
-# အထူးပြင်ဆင်မှုများနှင့်အတူ အဆင့်မြင့် deployment
+# စိတ်ကြိုက် ဆက်တင်များဖြင့် အဆင့်မြင့် ဖြန့်ချိခြင်း
 ./deploy.sh \
   -g myProductionRG \
   -p companyname \
@@ -417,7 +408,7 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   -m premium \
   -l eastus2
 
-# multi-region မပါသော ဖွံ့ဖြိုးရေး deployment
+# ဖွံ့ဖြိုးရေးအတွက် ဒေသများစုံမပါဘဲ ဖြန့်ချိခြင်း
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -426,29 +417,29 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   --no-security
 ```
 
-### Script Features
+### Script ၏ အင်္ဂါရပ်များ
 
-- ✅ **Prerequisites validation** (Azure CLI, login status, template files)
-- ✅ **Resource group management** (မရှိပါကဖန်တီးပါမည်)
-- ✅ **Template validation** deploy လုပ်ခင်
-- ✅ **Progress monitoring** colored output ဖြင့်
-- ✅ **Deployment outputs** ပြသခြင်း
-- ✅ **Post-deployment guidance**
+- ✅ **ကြိုတင်လိုအပ်ချက် စစ်ဆေးခြင်း** (Azure CLI, login အခြေအနေ, template ဖိုင်များ)
+- ✅ **Resource group စီမံခန့်ခွဲမှု** (မရှိပါက ကြိုတင်ဖန်တီး)
+- ✅ **Template ကို validate ပြုလုပ်ခြင်း** deployment မတိုင်မီ
+- ✅ **ကြာချိန် မျက်နှာကြည့်ခြင်း** စာသား အရောင်များနှင့်အတူ
+- ✅ **Deployment outputs** များ ပြသခြင်း
+- ✅ **တပ်ဆင်ပြီးနောက် လမ်းညွှန်များ**
 
-## 📊 Deployment ကိုစောင့်ကြည့်ခြင်း
+## 📊 တပ်ဆင်မှု မော်နီတာရန်
 
-### Deployment Status ကိုစစ်ဆေးပါ
+### တပ်ဆင်မှု အခြေအနေ စစ်ဆေးရန်
 
 ```bash
-# တပ်ဆင်မှုများစာရင်း
+# deployment များကို စာရင်းပြပါ
 az deployment group list --resource-group myResourceGroup --output table
 
-# တပ်ဆင်မှုအသေးစိတ်ကိုရယူပါ
+# deployment အသေးစိတ်ကို ရယူပါ
 az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# တပ်ဆင်မှုတိုးတက်မှုကိုကြည့်ရှုပါ
+# deployment တိုးတက်မှုကို ကြည့်ရှုပါ
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -456,49 +447,49 @@ az deployment group create \
   --verbose
 ```
 
-### Deployment Outputs
+### တပ်ဆင်ပြီးနောက် ထုတ်ယူနိုင်သည့် Outputs
 
-Deploy လုပ်ပြီးအောင်မြင်ပါက outputs အောက်ပါအတိုင်းရရှိပါမည်:
+တပ်ဆင်မှု အောင်မြင်ပြီးနောက် အောက်ပါ outputs များ ရရှိမည်ဖြစ်သည် -
 
-- **Frontend URL**: Web interface အတွက် public endpoint
-- **Router URL**: Agent router အတွက် API endpoint
-- **OpenAI Endpoints**: Primary နှင့် secondary OpenAI service endpoints
-- **Search Service**: Azure AI Search service endpoint
-- **Storage Account**: Documents အတွက် storage account name
-- **Key Vault**: Key Vault name (enable လုပ်ထားပါက)
-- **Application Insights**: Monitoring service name (enable လုပ်ထားပါက)
+- **Frontend URL**: ဝက်ဘ် အင်တာဖေ့စ်အတွက် အများသုံး endpoint
+- **Router URL**: agent router အတွက် API endpoint
+- **OpenAI Endpoints**: Primary နှင့် secondary OpenAI ဝန်ဆောင်မှု endpoints
+- **Search Service**: Azure AI Search ဝန်ဆောင်မှုပြီး/endpoint
+- **Storage Account**: စာရွက်စာတမ်းများအတွက် storage account အမည်
+- **Key Vault**: Key Vault အမည် (ဖွင့်ထားပါက)
+- **Application Insights**: မော်နီတာလုပ်ငန်း ဝန်ဆောင်မှု အမည် (ဖွင့်ထားပါက)
 
-## 🔧 Post-Deployment: နောက်တစ်ဆင့်များ
-> **📝 အရေးကြီးပါသည်:** အခြေခံအဆောက်အအုံများကို တင်သွင်းပြီးဖြစ်သော်လည်း၊ သင်သည် အက်ပလီကေးရှင်းကုဒ်ကို ဖွံ့ဖြိုးပြီး တင်သွင်းရန် လိုအပ်ပါသည်။
+## 🔧 တပ်ဆင်ပြီးနောက်: နောက်ဆင့်များ
+> **📝 အရေးကြီး:** အခြေခံအဆောက်အအုံကို တပ်ဆင်ပြီးသား ဖြစ်ပါသည်၊ သို့သော် သင်သည် အက်ပလီကေးရှင်း ကုဒ်ကို ဖန်တီး၍ ဖြန့်ချိရမည်။
 
-### အဆင့် ၁: အေးဂျင့်အက်ပလီကေးရှင်းများ ဖွံ့ဖြိုးရန် (သင့်တာဝန်)
+### အဆင့် ၁: Agent အက်ပလီကေးရှင်းများ ဖွံ့ဖြိုးရေး (သင်၏ တာဝန်)
 
-ARM template သည် **အလွတ် Container Apps** များကို placeholder nginx images ဖြင့် ဖန်တီးပေးပါသည်။ သင်သည် အောက်ပါအရာများကို ပြုလုပ်ရမည်ဖြစ်သည်-
+The ARM template creates **ဗလာ Container Apps** with placeholder nginx images. သင်သည် အောက်ပါအချက်များကို လုပ်ဆောင်ရမည်။
 
 **လိုအပ်သော ဖွံ့ဖြိုးမှု:**
-1. **အေးဂျင့် အကောင်အထည်ဖော်မှု** (၃၀-၄၀ နာရီ)
-   - GPT-4o ပေါင်းစပ်မှုပါဝင်သော ဖောက်သည်ဝန်ဆောင်မှုအေးဂျင့်
-   - GPT-4o-mini ပေါင်းစပ်မှုပါဝင်သော စတော့အေးဂျင့်
-   - အေးဂျင့် လမ်းကြောင်းသတ်မှတ်မှု လိုဂစ်
+1. **Agent အကောင်အထည်ဖော်ခြင်း** (30-40 နာရီ)
+   - ဖောက်သည်ဝန်ဆောင်မှု အေဂျင့် (gpt-4.1 နှင့် ပေါင်းစည်းထား)
+   - ကုန်ပစ္စည်းစာရင်း အေဂျင့် (gpt-4.1-mini နှင့် ပေါင်းစည်းထား)
+   - အေဂျင့် များသို့ လမ်းကြောင်းပေးသည့် လိုဂစ်
 
-2. **Frontend ဖွံ့ဖြိုးမှု** (၂၀-၃၀ နာရီ)
-   - Chat interface UI (React/Vue/Angular)
-   - ဖိုင်တင်သွင်းနိုင်စွမ်း
-   - တုံ့ပြန်မှု ဖော်ပြခြင်းနှင့် ဖော်မတ်ပုံဖော်ခြင်း
+2. **Frontend ဖွံ့ဖြိုးရေး** (20-30 နာရီ)
+   - Chat အင်တာဖေ့စ် UI (React/Vue/Angular)
+   - ဖိုင်တင်ခြင်း လုပ်ဆောင်ချက်
+   - တုံ့ပြန်ချက် ဖော်ပြပုံနှင့် ဖော်မက်တင်း
 
-3. **Backend ဝန်ဆောင်မှုများ** (၁၂-၁၆ နာရီ)
+3. **Backend ဝန်ဆောင်မှုများ** (12-16 နာရီ)
    - FastAPI သို့မဟုတ် Express router
-   - Authentication middleware
-   - Telemetry ပေါင်းစပ်မှု
+   - အထောက်အထား အတည်ပြုရေး middleware
+   - Telemetry ပေါင်းစည်းခြင်း
 
-**ကြည့်ပါ:** [Architecture Guide](../retail-scenario.md) အကောင်အထည်ဖော်မှု ပုံစံများနှင့် ကုဒ်ဥပမာများအတွက်
+**ကြည့်ရန်:** [တည်ဆောက်ပုံ လမ်းညွှန်](../retail-scenario.md) — အသေးစိတ် အကောင်အထည်ဖော်နည်းပုံများနှင့် ကုဒ် ဥပမာများအတွက်
 
-### အဆင့် ၂: AI ရှာဖွေမှု အညွှန်းကို ဖွဲ့စည်းရန် (၁၅-၃၀ မိနစ်)
+### အဆင့် ၂: AI Search Index ကို သတ်မှတ်ခြင်း (15-30 မိနစ်)
 
-သင့်ဒေတာမော်ဒယ်နှင့် ကိုက်ညီသော ရှာဖွေမှုအညွှန်းတစ်ခု ဖန်တီးပါ-
+သင်၏ ဒေတာမော်ဒယ်နှင့် ကိုက်ညီသော search index တစ်ခု ဖန်တီးပါ။
 
 ```bash
-# ရှာဖွေမှုဝန်ဆောင်မှုအသေးစိတ်ကိုရယူပါ
+# ရှာဖွေရေး ဝန်ဆောင်မှု အသေးစိတ်ကို ရယူပါ
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -508,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# သင့် schema (ဥပမာ) ဖြင့် index တစ်ခုဖန်တီးပါ
+# သင့် schema ဖြင့် index တစ်ခုဖန်တီးပါ (ဥပမာ)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -530,15 +521,15 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 ```
 
 **အရင်းအမြစ်များ:**
-- [AI ရှာဖွေမှု အညွှန်း Schema ဒီဇိုင်း](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector ရှာဖွေမှု ဖွဲ့စည်းမှု](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### အဆင့် ၃: သင့်ဒေတာကို တင်သွင်းပါ (အချိန် မတူညီ)
+### အဆင့် ၃: သင့်ဒေတာကို အတင်ပို့ခြင်း (အချိန် ကွာခြားနိုင်သည်)
 
-ထုတ်ကုန်ဒေတာနှင့် စာရွက်စာတမ်းများ ရရှိပြီးနောက်-
+တစ်ကြောင်းကို product data နဲ့ စာရွက်စာတမ်းများ ရရှိလာတာနဲ့အမျှ။
 
 ```bash
-# သိုလှောင်မှုအကောင့်အသေးစိတ်ကိုရယူပါ
+# သိုလှောင်မှု အကောင့် အသေးစိတ် ရယူပါ
 STORAGE_NAME=$(az storage account list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -548,14 +539,14 @@ STORAGE_KEY=$(az storage account keys list \
   --resource-group myResourceGroup \
   --query "[0].value" -o tsv)
 
-# သင့်စာရွက်စာတမ်းများကိုတင်ပါ
+# သင့်စာရွက်စာတမ်းများကို တင်ပါ
 az storage blob upload-batch \
   --destination documents \
   --source /path/to/your/product/docs \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# ဥပမာ - ဖိုင်တစ်ခုတင်ပါ
+# ဥပမာ: တစ်ဖိုင်တည်းတင်ခြင်း
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -564,27 +555,27 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### အဆင့် ၄: သင့်အက်ပလီကေးရှင်းများကို တည်ဆောက်ပြီး တင်သွင်းပါ (၈-၁၂ နာရီ)
+### အဆင့် ၄: သင့်အက်ပလီကေးရှင်းများ ကို တည်ဆောက်၍ ဖြန့်ချိခြင်း (8-12 နာရီ)
 
-အေးဂျင့်ကုဒ်ကို ဖွံ့ဖြိုးပြီးနောက်-
+သင်၏ agent ကုဒ်များ ဖော်ဆောင်ပြီးနောက်:
 
 ```bash
-# 1. Azure Container Registry ကို ဖန်တီးပါ (လိုအပ်ပါက)
+# 1. Azure Container Registry တစ်ခုကို (လိုအပ်ပါက) ဖန်တီးပါ
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. Agent router image ကို build လုပ်ပြီး push လုပ်ပါ
+# 2. agent router အီမေ့ချ်ကို တည်ဆောက်၍ push လုပ်ပါ
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. Frontend image ကို build လုပ်ပြီး push လုပ်ပါ
+# 3. frontend အီမေ့ချ်ကို တည်ဆောက်၍ push လုပ်ပါ
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. Container Apps ကို သင့်ရဲ့ images တွေနဲ့ update လုပ်ပါ
+# 4. Container Apps ကို သင့် အီမေ့ချ်များဖြင့် အပ်ဒိတ် ပြုလုပ်ပါ
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -595,7 +586,7 @@ az containerapp update \
   --resource-group myResourceGroup \
   --image myregistry.azurecr.io/frontend:v1
 
-# 5. Environment variables တွေကို configure လုပ်ပါ
+# 5. ပတ်ဝန်းကျင် အပြောင်းအလဲများကို ပြင်ဆင်၍ သတ်မှတ်ပါ
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -606,16 +597,16 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### အဆင့် ၅: သင့်အက်ပလီကေးရှင်းကို စမ်းသပ်ပါ (၂-၄ နာရီ)
+### အဆင့် ၅: သင့်အက်ပလီကေးရှင်းကို စမ်းသပ်ခြင်း (2-4 နာရီ)
 
 ```bash
-# သင့်အက်ပလီကေးရှင်း URL ကိုရယူပါ
+# သင့်အက်ပလီကေးရှင်း၏ URL ကို ရယူပါ
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# အေးဂျင့်အဆုံးစွန်ကိုစမ်းသပ်ပါ (သင့်ကုဒ်ကိုတင်ထားပြီးနောက်)
+# ကုဒ်ကို တင်ပြီးနောက် အေဂျင့် endpoint ကို စမ်းသပ်ပါ
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -623,125 +614,125 @@ curl -X POST "https://${ROUTER_URL}/chat" \
     "agent": "customer"
   }'
 
-# အက်ပလီကေးရှင်း လော့ဂ်များကိုစစ်ဆေးပါ
+# အက်ပလီကေးရှင်း၏ လော့ဂ်များကို စစ်ဆေးပါ
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 ```
 
-### အကောင်အထည်ဖော်မှု အရင်းအမြစ်များ
+### အကောင်အထည်ဖော်ရန် အရင်းအမြစ်များ
 
-**Architecture & Design:**
-- 📖 [အပြည့်အစုံ Architecture Guide](../retail-scenario.md) - အကောင်အထည်ဖော်မှု ပုံစံများ
-- 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+**တည်ဆောက်ပုံနှင့် ဒီဇိုင်း:**
+- 📖 [ပြည့်စုံသော တည်ဆောက်ပုံ လမ်းညွှန်](../retail-scenario.md) - အသေးစိတ် အကောင်အထည်ဖော်နည်းပုံများ
+- 📖 [Multi-Agent ဒီဇိုင်းပုံစံများ](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
-**ကုဒ်ဥပမာများ:**
-- 🔗 [Azure OpenAI Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG ပုံစံ
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - အေးဂျင့်ဖွဲ့စည်းမှု (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - အေးဂျင့် စီမံခန့်ခွဲမှု (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent ဆွေးနွေးမှုများ
+**ကုဒ် ဥပမာများ:**
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG ပုံစံ
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agent ဖရေမ်ဝုတ် (C#)
+- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agent စီမံခန့်ခွဲမှု (Python)
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent စကားဝိုင်းများ
 
-**စုစုပေါင်း ကြိုးပမ်းမှု ခန့်မှန်းချက်:**
-- အခြေခံအဆောက်အအုံ တင်သွင်းမှု: ၁၅-၂၅ မိနစ် (✅ ပြီးစီး)
-- အက်ပလီကေးရှင်း ဖွံ့ဖြိုးမှု: ၈၀-၁၂၀ နာရီ (🔨 သင့်အလုပ်)
-- စမ်းသပ်မှုနှင့် အကောင်းဆုံးဖြစ်အောင် ပြုလုပ်မှု: ၁၅-၂၅ နာရီ (🔨 သင့်အလုပ်)
+**စုစုပေါင်း ခန့်မှန်း အမြန်အစီအစဉ်:**
+- အခြေခံအဆောက်အအုံ တပ်ဆင်ခြင်း: 15-25 မိနစ် (✅ ပြီးစီးပြီး)
+- အက်ပလီကေးရှင်း ဖွံ့ဖြိုးရေး: 80-120 နာရီ (🔨 သင်၏ အလုပ်)
+- စမ်းသပ်မှုနှင့် တိုးတက်အောင်လုပ်ခြင်း: 15-25 နာရီ (🔨 သင်၏ အလုပ်)
 
-## 🛠️ ပြဿနာဖြေရှင်းခြင်း
+## 🛠️ ပြဿနာရှာဖွေရန်
 
-### ရှိနေသော ပြဿနာများ
+### ပုံမှန် ဖြစ်ပျက်တတ်သော ပြဿနာများ
 
-#### ၁. Azure OpenAI Quota ကျော်လွန်မှု
+#### 1. Microsoft Foundry Models Quota Exceeded
 
 ```bash
-# လက်ရှိကိုတာအသုံးပြုမှုကိုစစ်ဆေးပါ
+# လက်ရှိ ကွိုတာ အသုံးပြုမှုကို စစ်ဆေးပါ
 az cognitiveservices usage list --location eastus2
 
-# ကိုတာတိုးမြှင့်မှုတောင်းဆိုပါ
+# ကွိုတာ တိုးမြှင့်ရန် တောင်းဆိုပါ
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
-#### ၂. Container Apps တင်သွင်းမှု မအောင်မြင်ခြင်း
+#### 2. Container Apps Deployment Failed
 
 ```bash
-# ကွန်တိန်နာအက်ပ်၏ လော့ဂ်များကို စစ်ဆေးပါ။
+# ကွန်တိန်နာ အက်ပ်၏ မှတ်တမ်းများကို စစ်ဆေးပါ
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# ကွန်တိန်နာအက်ပ်ကို ပြန်စတင်ပါ။
+# ကွန်တိန်နာ အက်ပ်ကို ပြန်စတင်ပါ
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### ၃. ရှာဖွေမှု ဝန်ဆောင်မှု စတင်ခြင်း
+#### 3. Search Service Initialization
 
 ```bash
-# ရှာဖွေမှုဝန်ဆောင်မှုအခြေအနေကိုအတည်ပြုပါ
+# ရှာဖွေရေး ဝန်ဆောင်မှု၏ အခြေအနေကို အတည်ပြုပါ
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# ရှာဖွေမှုဝန်ဆောင်မှုချိတ်ဆက်မှုကိုစမ်းသပ်ပါ
+# ရှာဖွေရေး ဝန်ဆောင်မှု ဆက်သွယ်နိုင်မှုကို စမ်းသပ်ပါ
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
 
-### တင်သွင်းမှု အတည်ပြုခြင်း
+### Deployment အတည်ပြုခြင်း
 
 ```bash
-# အရင်းအမြစ်အားလုံးဖန်တီးပြီးကြောင်းအတည်ပြုပါ
+# အားလုံးသော အရင်းအမြစ်များ ဖန်တီးပြီးကြောင်း အတည်ပြုပါ
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# အရင်းအမြစ်ကျန်းမာရေးကိုစစ်ဆေးပါ
+# အရင်းအမြစ်များ၏ ကျန်းမာရေးကို စစ်ဆေးပါ
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-## 🔐 လုံခြုံရေးစဉ်းစားမှုများ
+## 🔐 လုံခြုံရေးစဉ်းစားချက်များ
 
-### Key Management
-- အားလုံးသော လျှို့ဝှက်ချက်များကို Azure Key Vault တွင် သိမ်းဆည်းထားသည် (အသုံးပြုမှုဖြင့်)
-- Container apps သည် authentication အတွက် managed identity ကို အသုံးပြုသည်
-- Storage accounts တွင် လုံခြုံမှု အခြေခံများ (HTTPS သာ, public blob access မရှိ) ပါဝင်သည်
+### သော့ခန်း စီမံခန့်ခွဲမှု
+- အားလုံးသော အမဲဆိတ်များကို Azure Key Vault တွင် သိမ်းဆည်းထားသည် (ဖွင့်ထားပါက)
+- Container apps များသည် authentication အတွက် managed identity ကို အသုံးပြုသည်
+- Storage accounts များတွင် စိတ်ချရသော မူကိုသတ်မှတ်ချက်များ ရှိသည် (HTTPS ပဲ၊ public blob access မရှိ)
 
-### Network Security
-- Container apps သည် အတွင်းပိုင်း network ကို အများဆုံး အသုံးပြုသည်
-- ရှာဖွေမှုဝန်ဆောင်မှုကို private endpoints option ဖြင့် ဖွဲ့စည်းထားသည်
-- Cosmos DB ကို လိုအပ်သော ခွင့်ပြုချက်အနည်းဆုံးဖြင့် ဖွဲ့စည်းထားသည်
+### ကွန်ယက် လုံခြုံရေး
+- Container apps များသည် ခွင့်ရလျှင် internal networking ကို အသုံးပြုသည်
+- Search service ကို private endpoints ရွေးစရာဖြင့် ထိန်းသိမ်းထားသည်
+- Cosmos DB ကို လိုအပ်သည့် permission များသာ သတ်မှတ်ထားသည်
 
-### RBAC Configuration
+### RBAC ပုံစံ ပြင်ဆင်မှု
 ```bash
-# စီမံခန့်ခွဲမှုအတိအကျအတွက် လိုအပ်သော အခန်းကဏ္ဍများကို ပေးအပ်ပါ။
+# managed identity အတွက် လိုအပ်သော ခွင့်များ သတ်မှတ်ပေးရန်
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
   --scope <openai-resource-id>
 ```
 
-## 💰 ကုန်ကျစရိတ် အကောင်းဆုံးဖြစ်အောင် ပြုလုပ်ခြင်း
+## 💰 ကုန်ကျစရိတ် လျှော့ချရန် အကြံပြုချက်
 
-### ကုန်ကျစရိတ် ခန့်မှန်းချက်များ (လစဉ်, USD)
+### ကုန်ကျစရိတ် ခန့်မှန်းချက်များ (လစဉ်၊ USD)
 
-| Mode | OpenAI | Container Apps | Search | Storage | Total Est. |
+| အဆင့် | OpenAI | Container Apps | Search | Storage | စုစုပေါင်း ခန့်မှန်း |
 |------|--------|----------------|--------|---------|------------|
-| Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
-| Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
+| နည်းဆုံး | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
+| ပုံမှန် | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
+| ပရီမီယံ | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
-### ကုန်ကျစရိတ် စောင့်ကြည့်မှု
+### ကုန်ကျစရိတ် စောင့်ကြည့်ခြင်း
 
 ```bash
-# ဘတ်ဂျက်သတိပေးချက်များကို စီစဉ်ပါ
+# ဘတ်ဂျက်အတွက် သတိပေးချက်များ သတ်မှတ်ပါ
 az consumption budget create \
   --account-name <subscription-id> \
   --budget-name "retail-budget" \
@@ -751,16 +742,16 @@ az consumption budget create \
   --end-date 2024-12-31
 ```
 
-## 🔄 အပ်ဒိတ်များနှင့် ပြုပြင်ထိန်းသိမ်းမှု
+## 🔄 အပ်ဒိတ်များနှင့် ထိန်းသိမ်းမှု
 
 ### Template အပ်ဒိတ်များ
-- ARM template ဖိုင်များကို version control ပြုလုပ်ပါ
-- ဖွံ့ဖြိုးမှု ပတ်ဝန်းကျင်တွင် အပြောင်းအလဲများကို စမ်းသပ်ပါ
-- အပ်ဒိတ်များအတွက် incremental deployment mode ကို အသုံးပြုပါ
+- ARM template ဖိုင်များကို ဗားရှင်း ထိန်းချုပ်ပါ
+- ပြောင်းလဲမှုများကို development ပတ်ဝန်းကျင်တွင် မည်မှီ စမ်းသပ်ပါ
+- အပ်ဒိတ်များအတွက် incremental deployment မုဒ်ကို အသုံးပြုပါ
 
-### အရင်းအမြစ် အပ်ဒိတ်များ
+### ရင်းမြစ် အပ်ဒိတ်များ
 ```bash
-# parameters အသစ်များဖြင့် အပ်ဒိတ်လုပ်ပါ
+# အသစ်သော ပါရာမီတာများဖြင့် အပ်ဒိတ်လုပ်ပါ
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -768,26 +759,26 @@ az deployment group create \
   --mode Incremental
 ```
 
-### Backup နှင့် Recovery
-- Cosmos DB သည် အလိုအလျောက် backup ပြုလုပ်ထားသည်
-- Key Vault သည် soft delete ကို ဖွင့်ထားသည်
-- Container app revisions များကို rollback အတွက် သိမ်းဆည်းထားသည်
+### မိတ္တူယူခြင်းနှင့် ပြန်လည်ထူထောင်ခြင်း
+- Cosmos DB အလိုအလျောက် မိတ္တူယူခြင်း ဖွင့်ထားသည်
+- Key Vault soft delete ဖွင့်ထားသည်
+- Container app revision များကို rollback အတွက် ထိန်းသိမ်းထားသည်
 
-## 📞 အထောက်အပံ့
+## 📞 ပံ့ပိုးမှု
 
 - **Template ပြဿနာများ**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Azure အထောက်အပံ့**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **အသိုင်းအဝိုင်း**: [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Azure Support**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Community**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ သင့် multi-agent ဖြေရှင်းချက်ကို တင်သွင်းရန် အသင့်ဖြစ်ပြီလား?**
+**⚡ မိမိ၏ multi-agent ဖြန့်ချိမှုကို စတင်ရန် ပြင်ဆင်ပြီးပါသလား?**
 
 စတင်ရန်: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**Disclaimer**:
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုကို ကြိုးပမ်းပေမယ့် အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှန်ကန်မှုပျက်ပြားမှုများ ပါဝင်နိုင်သည့်အချက်ကို သိရှိထားရပါသည်။ မူလစာတမ်းကို မူလဘာသာစကားဖြင့်သာ တရားဝင် အရင်းအမြစ်အဖြစ် ယူဆသင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက်တော့ ပရော်ဖက်ရှင်နယ် လူ့ဘာသာပြန်ဆီမှ ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာသော နားလည်မှုမှားခြင်းများ သို့မဟုတ် မမှန်ကန်စွာ အဓိပ္ပာယ်ဖွင့်ဖော်ခြင်းများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

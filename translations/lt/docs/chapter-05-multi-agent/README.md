@@ -1,103 +1,98 @@
-# 5 skyrius: Daugiaagentės DI sprendimai
+# Skyrius 5: Daugiagentiniai AI sprendimai
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 val. | **⭐ Sudėtingumas**: Išplėstinis
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sunkumas**: Pažengęs
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje aptariami pažangūs daugiaagentės architektūros modeliai, agentų orkestracija ir gamybai paruošti DI diegimai sudėtingiems scenarijams.
+Šiame skyriuje aptariami išplėstiniai daugiagentinės architektūros šablonai, agentų orkestracija ir gamybai paruošti AI diegimai sudėtingoms situacijoms.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių, jūs:
-- Suprasite daugiaagentės architektūros modelius
-- Išdėstysite koordinuotą DI agentų sistemą
-- Įgyvendinsite agentų tarpusavio komunikaciją
-- Kuriate gamybai paruoštus daugiaagentės sprendimus
+- Suprasti daugiagentinės architektūros šablonus
+- Diegti koordinuotus AI agentų sprendimus
+- Įgyvendinti agentų tarpusavio komunikaciją
+- Kurti gamybai paruoštus daugiagentinius sprendimus
 
 ---
 
 ## 📚 Pamokos
 
-| # | Pamoka | Aprašymas | Laikas |
+| # | Pamoka | Aprašymas | Trukmė |
 |---|--------|-------------|------|
-| 1 | [Daugiaagentis mažmeninės prekybos sprendimas](../../examples/retail-scenario.md) | Išsamus įgyvendinimo vadovas | 90 min |
+| 1 | [Mažmeninės prekybos daugiagentinis sprendimas](../../examples/retail-scenario.md) | Pilnas įgyvendinimo vadovas | 90 min |
 | 2 | [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md) | Agentų orkestravimo strategijos | 30 min |
-| 3 | [ARM šablono diegimas](../../examples/retail-multiagent-arm-template/README.md) | Vieno paspaudimo diegimas | 30 min |
+| 3 | [ARM šablono diegimas](../../examples/retail-multiagent-arm-template/README.md) | Diegimas vienu spustelėjimu | 30 min |
 
 ---
 
-## 🚀 Greita pradžia
+## 🚀 Greitas startas
 
 ```bash
-# Diegti mažmeninės prekybos daugiagentinį sprendimą
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Arba naudokite šabloną tiesiogiai
+# Parinktis 1: Diegti iš šablono
 azd init --template agent-openai-python-prompty
+azd up
+
+# Parinktis 2: Diegti iš agento manifesto (reikalauja azure.ai.agents plėtinio)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
----
-
-## 🤖 Daugiaagentė architektūra
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
+> **Kurį požiūrį pasirinkti?** Naudokite `azd init --template` kad pradėtumėte nuo veikiančio pavyzdžio. Naudokite `azd ai agent init` kai turite savo agento manifestą. Žr. [AZD AI CLI referencija](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) išsamiems nurodymams.
 
 ---
 
-## 🎯 Išryškintas sprendimas: Daugiaagentis mažmeninės prekybos sprendimas
+## 🤖 Daugiagentinė architektūra
 
-The [Daugiaagentis mažmeninės prekybos sprendimas](../../examples/retail-scenario.md) demonstrates:
+```mermaid
+graph TD
+    Orchestrator[Orkestratoriaus agentas<br/>Nukreipia užklausas, valdo darbo eigą] --> Customer[Kliento agentas<br/>Vartotojo užklausos, pageidavimai]
+    Orchestrator --> Inventory[Atsargų agentas<br/>Atsargų lygiai, užsakymai]
+```
+---
 
-- **Kliento agentas**: Tvarko vartotojo sąveikas ir preferencijas
-- **Inventoriaus agentas**: Valdo atsargas ir užsakymų apdorojimą
-- **Orkestratorius**: Koordinuoja agentus tarpusavyje
-- **Bendra atmintis**: Tarpagentinis konteksto valdymas
+## 🎯 Teminis sprendimas: Mažmeninės prekybos daugiagentinis sprendimas
 
-### Naudojamos paslaugos
+The [Mažmeninės prekybos daugiagentinis sprendimas](../../examples/retail-scenario.md) demonstrates:
 
-| Service | Purpose |
+- **Kliento agentas**: Tvarko naudotojo sąveikas ir nuostatas
+- **Atsargų agentas**: Tvarko atsargas ir užsakymų apdorojimą
+- **Orkestratorius**: Koordinuoja agentus
+- **Bendra atmintis**: Kelių agentų konteksto valdymas
+
+### Naudotos paslaugos
+
+| Paslauga | Paskirtis |
 |---------|---------|
-| Azure OpenAI | Kalbos supratimas |
+| Microsoft Foundry Models | Kalbos supratimas |
 | Azure AI Search | Produktų katalogas |
-| Cosmos DB | Agento būsena ir atmintis |
+| Cosmos DB | Agentų būsena ir atmintis |
 | Container Apps | Agentų talpinimas |
-| Application Insights | Monitoravimas |
+| Application Insights | Stebėsena |
 
 ---
 
 ## 🔗 Navigacija
 
-| Direction | Chapter |
+| Kryptis | Skyrius |
 |-----------|---------|
 | **Ankstesnis** | [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md) |
-| **Kitas** | [6 skyrius: Prieš diegimą](../chapter-06-pre-deployment/README.md) |
+| **Kitas** | [6 skyrius: Paruošimas diegimui](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [DI agentų gidas](../chapter-02-ai-development/agents.md)
-- [Gamybinio DI praktikos](../chapter-08-production/production-ai-practices.md)
-- [DI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI agentų vadovas](../chapter-02-ai-development/agents.md)
+- [AI gamybos praktikos](../chapter-08-production/production-ai-practices.md)
+- [AI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Atsakomybės apribojimas:
-Šis dokumentas buvo išverstas pasitelkus dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neprisiimame atsakomybės už bet kokius nesusipratimus ar neteisingas interpretacijas, kylančias dėl šio vertimo naudojimo.
+**Disclaimer**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Pradinė dokumento versija jo gimtąja kalba turėtų būti laikoma autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kylančius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
