@@ -1,11 +1,11 @@
-# Vzorci avtentikacije in upravljena identiteta
+# Avtentikacijski vzorci in upravljana identiteta
 
-⏱️ **Ocenjeni čas**: 45-60 minut | 💰 **Vpliv na stroške**: Brezplačno (brez dodatnih stroškov) | ⭐ **Kompleksnost**: Srednje zahtevno
+⏱️ **Ocenjen čas**: 45–60 minut | 💰 **Vpliv na stroške**: Brezplačno (brez dodatnih stroškov) | ⭐ **Kompleksnost**: Srednje zahtevno
 
 **📚 Učna pot:**
-- ← Prejšnja: [Upravljanje konfiguracije](configuration.md) - Upravljanje okoljskih spremenljivk in skrivnosti
-- 🎯 **Tukaj ste**: Avtentikacija in varnost (upravljana identiteta, Key Vault, varni vzorci)
-- → Naslednja: [Prvi projekt](first-project.md) - Zgradi svojo prvo AZD aplikacijo
+- ← Prejšnje: [Upravljanje konfiguracije](configuration.md) - Upravljanje spremenljivk okolja in skrivnosti
+- 🎯 **Tukaj ste**: Avtentikacija in varnost (Upravljana identiteta, Key Vault, varni vzorci)
+- → Naslednje: [Prvi projekt](first-project.md) - Zgradite svojo prvo AZD aplikacijo
 - 🏠 [Domača stran tečaja](../../README.md)
 
 ---
@@ -13,11 +13,11 @@
 ## Kaj se boste naučili
 
 Z dokončanjem te lekcije boste:
-- Razumeli vzorce avtentikacije v Azure (ključev, nizov za povezavo, upravljenih identitet)
+- Razumeli Azure avtentikacijske vzorce (ključne vrednosti, connection stringi, upravljana identiteta)
 - Implementirali **upravljano identiteto** za avtentikacijo brez gesel
 - Zavarovali skrivnosti z integracijo **Azure Key Vault**
-- Konfigurirali **vloge na podlagi RBAC** za AZD razmestitve
-- Uporabili varnostne prakse v Container Apps in storitvah Azure
+- Konfigurirali **dodeljevanje vlog (RBAC)** za AZD namestitve
+- Uporabili varnostne najboljše prakse v Container Apps in Azure storitvah
 - Migrirali iz avtentikacije na osnovi ključev na avtentikacijo na osnovi identitete
 
 ## Zakaj je upravljana identiteta pomembna
@@ -26,73 +26,73 @@ Z dokončanjem te lekcije boste:
 
 **Pred upravljano identiteto:**
 ```javascript
-// ❌ VARNOSTNO TVEGANJE: trdo kodirane skrivnosti v kodi
+// ❌ VARNOSNO TVEGANJE: Trdo kodirane skrivnosti v kodi
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Težave:**
-- 🔴 **Razkrite skrivnosti** v kodi, konfiguracijskih datotekah, okoljskih spremenljivkah
-- 🔴 **Rotacija poverilnic** zahteva spremembe kode in ponovno razmestitev
-- 🔴 **Nočna mora za revizijo** - kdo je dostopal do česa in kdaj?
+- 🔴 **Razkritje skrivnosti** v kodi, konfiguracijskih datotekah, spremenljivkah okolja
+- 🔴 **Rotacija poverilnic** zahteva spremembe kode in ponovno nameščanje
+- 🔴 **Revizijske nočne more** - kdo je dostopal do česa in kdaj?
 - 🔴 **Razpršenost** - skrivnosti raztresene po več sistemih
-- 🔴 **Tveganja skladnosti** - ne prestane varnostnih revizij
+- 🔴 **Tveganja skladnosti** - neuspeh pri varnostnih revizijah
 
-### Rešitev: Upravljena identiteta
+### Rešitev: Upravljana identiteta
 
-**Po upravljani identiteti:**
+**Po uvedbi upravljane identitete:**
 ```javascript
-// ✅ VARNO: V kodi ni skrivnih podatkov
+// ✅ VAREN: Brez skrivnosti v kodi
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure samodejno poskrbi za avtentikacijo
+  credential  // Azure samodejno upravlja overjanje
 );
 ```
 
 **Prednosti:**
 - ✅ **Brez skrivnosti** v kodi ali konfiguraciji
-- ✅ **Samodejna rotacija** - Azure to upravlja
-- ✅ **Popolna revizijska sled** v dnevnikih Azure AD
+- ✅ **Samodejna rotacija** - to ureja Azure
+- ✅ **Popolna revizijska sled** v Azure AD dnevnikih
 - ✅ **Centralizirana varnost** - upravljanje v Azure Portal
-- ✅ **Pripravljeno na skladnost** - izpolnjuje varnostne standarde
+- ✅ **Pripravljeno za skladnost** - izpolnjuje varnostne standarde
 
-**Prispodoba**: Tradicionalna avtentikacija je kot nošenje več fizičnih ključev za različna vrata. Upravljena identiteta je kot imetniška izkaznica, ki samodejno podeli dostop glede na to, kdo ste—brez ključev za izgubo, kopiranje ali rotacijo.
+**Analogneza**: Tradicionalna avtentikacija je kot nošenje več fizičnih ključev za različna vrata. Upravljana identiteta je kot varnostna izkaznica, ki samodejno podeli dostop glede na vašo identiteto—brez ključev, ki jih je mogoče izgubiti, kopirati ali rotirati.
 
 ---
 
 ## Pregled arhitekture
 
-### Potek avtentikacije z upravljeno identiteto
+### Potek avtentikacije z upravljano identiteto
 
 ```mermaid
 sequenceDiagram
-    participant App as Vaša aplikacija<br/>(aplikacija v kontejnerju)
+    participant App as Vaša aplikacija<br/>(kontejnerska aplikacija)
     participant MI as Upravljana identiteta<br/>(Azure AD)
     participant KV as Shramba ključev
-    participant Storage as Azure Shramba
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Zahteva dostopni žeton<br/>(samodejno)
+    App->>MI: Zahtevek za dostopni žeton<br/>(samodejno)
     MI->>MI: Preveri identiteto<br/>(geslo ni potrebno)
     MI-->>App: Vrni žeton<br/>(veljaven 1 uro)
     
-    App->>KV: Pridobi skrivnost<br/>(z uporabo žetona)
+    App->>KV: Pridobi skrivnost<br/>(z žetonom)
     KV->>KV: Preveri RBAC dovoljenja
     KV-->>App: Vrni vrednost skrivnosti
     
-    App->>Storage: Naloži blob<br/>(z uporabo žetona)
+    App->>Storage: Naloži blob<br/>(z žetonom)
     Storage->>Storage: Preveri RBAC dovoljenja
-    Storage-->>App: Uspešno
+    Storage-->>App: Uspeh
     
-    App->>DB: Poizveduj podatke<br/>(z uporabo žetona)
+    App->>DB: Poizvedi podatke<br/>(z žetonom)
     DB->>DB: Preveri SQL dovoljenja
     DB-->>App: Vrni rezultate
     
-    Note over App,DB: Vse preverjanja pristnosti brez gesla!
+    Note over App,DB: Vsa preverjanja pristnosti so brez gesla!
 ```
-### Vrste upravljenih identitet
+### Vrste upravljanih identitet
 
 ```mermaid
 graph TB
@@ -103,9 +103,9 @@ graph TB
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Življenjski cikel povezan z virom]
+    SystemAssigned --> SA1[Življenjski cikel vezan na vir]
     SystemAssigned --> SA2[Samodejno ustvarjanje/brisanje]
-    SystemAssigned --> SA3[Najbolj primerno za en vir]
+    SystemAssigned --> SA3[Najprimerneje za en vir]
     
     UserAssigned --> UA1[Neodvisen življenjski cikel]
     UserAssigned --> UA2[Ročno ustvarjanje/brisanje]
@@ -114,18 +114,18 @@ graph TB
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Značilnost | Sistemsko dodeljena | Uporabniško dodeljena |
+| Feature | System-Assigned | User-Assigned |
 |---------|----------------|---------------|
-| **Življenjski ciklus** | Povezana z virom | Neodvisna |
-| **Ustvarjanje** | Samodejno z virom | Ročno ustvarjanje |
-| **Brisanje** | Izbriše se z virom | Obstane po izbrisu vira |
-| **Deljenje** | Samo ena storitev | Več storitev |
-| **Uporaba** | Preprosti scenariji | Kompleksni scenariji z več viri |
-| **AZD privzeto** | ✅ Priporočeno | Neobvezno |
+| **Lifecycle** | Povezano z virom | Neodvisno |
+| **Creation** | Samodejno z virom | Ročna kreacija |
+| **Deletion** | Izbriše se z virom | Ostane po izbrisu vira |
+| **Sharing** | Samo en vir | Več virov |
+| **Use Case** | Enostavni scenariji | Kompleksni scenariji z več viri |
+| **AZD Default** | ✅ Priporočeno | Izbirno |
 
 ---
 
-## Predpogoji
+## Predpogoj
 
 ### Potrebna orodja
 
@@ -138,42 +138,42 @@ azd version
 
 # Preverite Azure CLI
 az --version
-# ✅ Pričakovano: azure-cli različica 2.50.0 ali novejša
+# ✅ Pričakovano: azure-cli 2.50.0 ali novejša
 ```
 
 ### Zahteve za Azure
 
-- Aktivno Azure naročnino
-- Pooblastila za:
-  - Ustvarjanje upravljenih identitet
+- Aktivna Azure naročnina
+- Dovoljenja za:
+  - Ustvarjanje upravljanih identitet
   - Dodeljevanje RBAC vlog
-  - Ustvarjanje virov Key Vault
-  - Razmestitev Container Apps
+  - Ustvarjanje Key Vault virov
+  - Nameščanje Container Apps
 
-### Potrebno znanje
+### Predznanje
 
-Morali bi biti zaključili:
-- [Installation Guide](installation.md) - AZD namestitev
-- [AZD Basics](azd-basics.md) - Osnovni koncepti
-- [Configuration Management](configuration.md) - Okoljske spremenljivke
+Morali bi imeti zaključeno:
+- [Navodila za namestitev](installation.md) - Nastavitev AZD
+- [Osnove AZD](azd-basics.md) - Osnovni koncepti
+- [Upravljanje konfiguracije](configuration.md) - Spremenljivke okolja
 
 ---
 
-## Lekcija 1: Razumevanje vzorcev avtentikacije
+## Lekcija 1: Razumevanje avtentikacijskih vzorcev
 
-### Vzorec 1: Nizi za povezavo (zastarano - izogibajte se)
+### Vzorec 1: Connection strings (zastarjeno - izogibajte se)
 
 **Kako deluje:**
 ```bash
-# Niz za povezavo vsebuje poverilnice
+# Niz povezave vsebuje poverilnice
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Težave:**
-- ❌ Skrivnosti vidne v okoljskih spremenljivkah
-- ❌ Zapisano v sistemih za razmestitev
+- ❌ Skrivnosti vidne v spremenljivkah okolja
+- ❌ Beleženo v sistemih za nameščanje
 - ❌ Težko za rotacijo
 - ❌ Brez revizijske sledi dostopa
 
@@ -181,7 +181,7 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 
 ---
 
-### Vzorec 2: Referenčne vrednosti Key Vault (bolje)
+### Vzorec 2: Key Vault reference (bolje)
 
 **Kako deluje:**
 ```bicep
@@ -208,14 +208,14 @@ env: [
 - ✅ Rotacija brez sprememb kode
 
 **Omejitve:**
-- ⚠️ Še vedno uporaba ključev/gesel
-- ⚠️ Potrebno upravljanje dostopa do Key Vault
+- ⚠️ Še vedno uporablja ključe/gesla
+- ⚠️ Potrebno upravljati dostop do Key Vault
 
-**Kdaj uporabiti:** Prehodni korak iz nizov za povezavo na upravljano identiteto.
+**Kdaj uporabiti:** Prehodni korak od connection stringov k upravljani identiteti.
 
 ---
 
-### Vzorec 3: Upravljena identiteta (najboljša praksa)
+### Vzorec 3: Upravljana identiteta (najboljša praksa)
 
 **Kako deluje:**
 ```bicep
@@ -251,11 +251,11 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Prednosti:**
-- ✅ Brez skrivnosti v kodi/konfiguraciji
+- ✅ Nobenih skrivnosti v kodi/konfiguraciji
 - ✅ Samodejna rotacija poverilnic
-- ✅ Popolna revizijska sledenje
+- ✅ Popolna revizijska sled
 - ✅ Dovoljenja na osnovi RBAC
-- ✅ Pripravljeno na skladnost
+- ✅ Pripravljeno za skladnost
 
 **Kdaj uporabiti:** Vedno, za produkcijske aplikacije.
 
@@ -263,9 +263,9 @@ const blobServiceClient = new BlobServiceClient(
 
 ## Lekcija 2: Implementacija upravljane identitete z AZD
 
-### Postopek po korakih
+### Korak po koraku
 
-Zgradimo varno Container App, ki uporablja upravljeno identiteto za dostop do Azure Storage in Key Vault.
+Zgradimo varno Container App, ki uporablja upravljano identiteto za dostop do Azure Storage in Key Vault.
 
 ### Struktura projekta
 
@@ -286,7 +286,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Konfigurirajte AZD (azure.yaml)
+### 1. Konfiguracija AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -304,7 +304,7 @@ services:
 
 ### 2. Infrastruktura: Omogočanje upravljane identitete
 
-**Datoteka: `infra/main.bicep`**
+**File: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -384,9 +384,9 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App z sistemsko dodeljeno identiteto
+### 3. Container App s sistemsko dodeljeno identiteto
 
-**Datoteka: `infra/app/container-app.bicep`**
+**File: `infra/app/container-app.bicep`**
 
 ```bicep
 param name string
@@ -441,9 +441,9 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Modul za dodeljevanje vlog RBAC
+### 4. Modul za dodeljevanje RBAC vlog
 
-**Datoteka: `infra/core/role-assignment.bicep`**
+**File: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
@@ -463,9 +463,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Koda aplikacije z upravljeno identiteto
+### 5. Koda aplikacije z upravljano identiteto
 
-**Datoteka: `src/app.js`**
+**File: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -476,21 +476,21 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Inicializiraj poverilnice (samodejno deluje z upravljano identiteto)
+// 🔑 Inicializiraj poverilnice (deluje samodejno z upravljano identiteto)
 const credential = new DefaultAzureCredential();
 
-// Nastavitev Azure Storage
+// Nastavitev Azure Storagea
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // Ključi niso potrebni!
+  credential  // Ni potrebnih ključev!
 );
 
 // Nastavitev Key Vaulta
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // Ključi niso potrebni!
+  credential  // Ni potrebnih ključev!
 );
 
 // Preverjanje stanja
@@ -498,7 +498,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Naloži datoteko v Blob Storage
+// Naloži datoteko v blob storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -537,7 +537,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Naštej blob kontejnerje (prikazuje dostop za branje)
+// Seznam blob kontejnerjev (prikazuje dostop za branje)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -562,7 +562,7 @@ app.listen(PORT, () => {
 });
 ```
 
-**Datoteka: `src/package.json`**
+**File: `src/package.json`**
 
 ```json
 {
@@ -580,23 +580,23 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Razmestitev in preizkus
+### 6. Namestitev in testiranje
 
 ```bash
 # Inicializiraj AZD okolje
 azd init
 
-# Razporedi infrastrukturo in aplikacijo
+# Namesti infrastrukturo in aplikacijo
 azd up
 
 # Pridobi URL aplikacije
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
-# Preizkusi preverjanje delovanja
+# Preizkusi preverjanje stanja
 curl $APP_URL/health
 ```
 
-**✅ Pričakovani izhod:**
+**✅ Pričakovan izpis:**
 ```json
 {
   "status": "healthy",
@@ -604,12 +604,12 @@ curl $APP_URL/health
 }
 ```
 
-**Preizkus nalaganja bloba:**
+**Preizkus nalaganja blob-a:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Pričakovani izhod:**
+**✅ Pričakovan izpis:**
 ```json
 {
   "success": true,
@@ -623,7 +623,7 @@ curl -X POST $APP_URL/upload
 curl $APP_URL/containers
 ```
 
-**✅ Pričakovani izhod:**
+**✅ Pričakovan izpis:**
 ```json
 {
   "containers": ["uploads"],
@@ -634,23 +634,23 @@ curl $APP_URL/containers
 
 ---
 
-## Pogoste vloge RBAC v Azure
+## Pogoste Azure RBAC vloge
 
-### Vgrajene ID vloge za upravljeno identiteto
+### Vgrajene ID vloge za upravljano identiteto
 
-| Storitev | Ime vloge | ID vloge | Dovoljenja |
+| Service | Role Name | Role ID | Permissions |
 |---------|-----------|---------|-------------|
 | **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Branje blobov in kontejnerjev |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Branje, zapisovanje, brisanje blobov |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Branje, zapisovanje, brisanje sporočil v vrstah |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Branje, pisanje, brisanje blobov |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Branje, pisanje, brisanje sporočil v čakalni vrsti |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Branje skrivnosti |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Branje, zapisovanje, brisanje skrivnosti |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Branje podatkov Cosmos DB |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Branje, zapisovanje podatkov Cosmos DB |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Branje, pisanje, brisanje skrivnosti |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Branje podatkov iz Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Branje, pisanje podatkov v Cosmos DB |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Upravljanje SQL baz podatkov |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Pošiljanje, prejemanje, upravljanje sporočil |
 
-### Kako poiskati ID vloge
+### Kako poiskati ID vlog
 
 ```bash
 # Prikaži vse vgrajene vloge
@@ -669,11 +669,11 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ### Vaja 1: Omogočanje upravljane identitete za obstoječo aplikacijo ⭐⭐ (Srednje)
 
-**Cilj**: Dodajte upravljeno identiteto obstoječi razmestitvi Container App
+**Cilj**: Dodajte upravljano identiteto obstoječi namestitvi Container App
 
-**Scenarij**: Imate Container App, ki uporablja nize za povezavo. Pretvorite ga v upravljano identiteto.
+**Scenarij**: Imate Container App, ki uporablja connection stringe. Pretvorite ga na upravljano identiteto.
 
-**Izhodišče**: Container App s to konfiguracijo:
+**Začetna točka**: Container App s to konfiguracijo:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -721,7 +721,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Posodobite kodo aplikacije:**
 
-**Pred (niz povezave):**
+**Pred (connection string):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -742,7 +742,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Posodobite okoljske spremenljivke:**
+4. **Posodobite spremenljivke okolja:**
 
 ```bicep
 env: [
@@ -754,21 +754,21 @@ env: [
 ]
 ```
 
-5. **Razmestite in preizkusite:**
+5. **Namestite in testirajte:**
 
 ```bash
-# Ponovno razmestite
+# Ponovno razmestiti
 azd up
 
-# Preizkusite, ali še deluje
+# Preizkusiti, ali še deluje
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
-**✅ Merila uspeha:**
-- ✅ Aplikacija se razstavi brez napak
-- ✅ Operacije Storage delujejo (nalaganje, seznam, prenos)
-- ✅ V okoljskih spremenljivkah ni nizov za povezavo
-- ✅ Identiteta vidna v Azure Portalu pod zavihek "Identity"
+**✅ Kriteriji uspeha:**
+- ✅ Aplikacija se namesti brez napak
+- ✅ Operacije nad Storage delujejo (nalaganje, seznam, prenos)
+- ✅ V spremenljivkah okolja ni connection stringov
+- ✅ Identiteta je vidna v Azure Portalu pod zavihkom "Identity"
 
 **Preverjanje:**
 
@@ -787,21 +787,21 @@ az role assignment list \
 # ✅ Pričakovano: Prikaže vlogo "Storage Blob Data Contributor"
 ```
 
-**Čas**: 20-30 minut
+**Čas**: 20–30 minut
 
 ---
 
-### Vaja 2: Dostop več storitev z uporabniško dodeljeno identiteto ⭐⭐⭐ (Napredno)
+### Vaja 2: Dostop več storitev z user-assigned identiteto ⭐⭐⭐ (Napredno)
 
-**Cilj**: Ustvarite uporabniško dodeljeno identiteto, ki jo delijo več Container App-ov
+**Cilj**: Ustvarite user-assigned identiteto, ki jo delijo več Container App-ov
 
-**Scenarij**: Imate 3 mikrostoritve, ki vse potrebujejo dostop do istega Storage računa in Key Vault.
+**Scenarij**: Imate 3 mikroservise, ki morajo vsi dostopati do istega Storage računa in Key Vault.
 
 **Koraki**:
 
-1. **Ustvarite uporabniško dodeljeno identiteto:**
+1. **Ustvarite user-assigned identiteto:**
 
-**Datoteka: `infra/core/identity.bicep`**
+**File: `infra/core/identity.bicep`**
 
 ```bicep
 param name string
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Dodelite vloge uporabniško dodeljeni identiteti:**
+2. **Dodelite vloge user-assigned identiteti:**
 
 ```bicep
 // In main.bicep
@@ -893,12 +893,12 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Koda aplikacije (vse storitve uporabljajo enak vzorec):**
+4. **Koda aplikacije (vse storitve uporabljajo isti vzorec):**
 
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Za uporabniško dodeljeno identiteto navedite ID odjemalca
+// Za uporabniško dodeljeno identiteto določite ID odjemalca
 const credential = new ManagedIdentityCredential(
   process.env.AZURE_CLIENT_ID  // ID odjemalca uporabniško dodeljene identitete
 );
@@ -912,36 +912,36 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Razmestite in preverite:**
+5. **Namestite in preverite:**
 
 ```bash
 azd up
 
-# Preverite, ali lahko vse storitve dostopajo do shrambe
+# Preveri, ali imajo vse storitve dostop do shrambe
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
-**✅ Merila uspeha:**
-- ✅ Ena identiteta deljena med 3 storitvami
-- ✅ Vse storitve imajo dostop do Storage in Key Vault
+**✅ Kriteriji uspeha:**
+- ✅ Ena identiteta, ki jo delijo 3 storitve
+- ✅ Vse storitve lahko dostopajo do Storage in Key Vault
 - ✅ Identiteta ostane, če izbrišete eno storitev
 - ✅ Centralizirano upravljanje dovoljenj
 
-**Prednosti uporabniško dodeljene identitete:**
+**Prednosti user-assigned identitete:**
 - Ena identiteta za upravljanje
 - Dosledna dovoljenja med storitvami
-- Preživi izbris storitve
+- Preživi brisanje storitve
 - Bolje za kompleksne arhitekture
 
-**Čas**: 30-40 minut
+**Čas**: 30–40 minut
 
 ---
 
-### Vaja 3: Izvedba rotacije skrivnosti v Key Vault ⭐⭐⭐ (Napredno)
+### Vaja 3: Implementacija rotacije skrivnosti v Key Vault ⭐⭐⭐ (Napredno)
 
-**Cilj**: Shranite API ključe tretjih oseb v Key Vault in dostopajte do njih z upravljeno identiteto
+**Cilj**: Shrani API ključe tretjih oseb v Key Vault in jih dostopaj z upravljano identiteto
 
 **Scenarij**: Vaša aplikacija kliče zunanji API (OpenAI, Stripe, SendGrid), ki zahteva API ključe.
 
@@ -949,7 +949,7 @@ curl https://order-service.azurecontainerapps.io/upload
 
 1. **Ustvarite Key Vault z RBAC:**
 
-**Datoteka: `infra/core/keyvault.bicep`**
+**File: `infra/core/keyvault.bicep`**
 
 ```bicep
 param name string
@@ -984,7 +984,7 @@ output uri string = keyVault.properties.vaultUri
 # Pridobi ime Key Vaulta
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Shrani API ključe tretjih oseb
+# Shrani API ključe tretjih ponudnikov
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1003,7 +1003,7 @@ az keyvault secret set \
 
 3. **Koda aplikacije za pridobivanje skrivnosti:**
 
-**Datoteka: `src/config.js`**
+**File: `src/config.js`**
 
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -1054,7 +1054,7 @@ module.exports = new Config();
 
 4. **Uporaba skrivnosti v aplikaciji:**
 
-**Datoteka: `src/app.js`**
+**File: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -1063,7 +1063,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Inicializiraj OpenAI s ključem iz Key Vault
+// Inicializiraj OpenAI s ključem iz Key Vaulta
 let openaiClient;
 
 async function initializeServices() {
@@ -1078,7 +1078,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1096,24 +1096,24 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Razmestite in preizkusite:**
+5. **Namestitev in testiranje:**
 
 ```bash
 azd up
 
-# Preveri, ali API ključi delujejo
+# Preverite, ali API ključi delujejo
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ Merila uspeha:**
-- ✅ Brez API ključev v kodi ali okoljskih spremenljivkah
-- ✅ Aplikacija pridobi ključe iz Key Vault
-- ✅ Tretji strankini API-ji delujejo pravilno
+**✅ Kriteriji uspeha:**
+- ✅ Ni API ključev v kodi ali spremenljivkah okolja
+- ✅ Aplikacija pridobiva ključe iz Key Vault
+- ✅ Klici tretjih oseb delujejo pravilno
 - ✅ Ključe lahko rotirate brez sprememb kode
 
-**Rotirajte skrivnost:**
+**Rotacija skrivnosti:**
 
 ```bash
 # Posodobi skrivnost v Key Vaultu
@@ -1128,28 +1128,28 @@ az containerapp revision restart \
   --resource-group rg-myapp
 ```
 
-**Čas**: 25-35 minut
+**Čas**: 25–35 minut
 
 ---
 
-## Preverjanje znanja
+## Kontrolna točka znanja
 
-### 1. Vzorci avtentikacije ✓
+### 1. Avtentikacijski vzorci ✓
 
 Preizkusite svoje razumevanje:
 
-- [ ] **V1**: Kateri so trije glavni vzorci avtentikacije? 
-  - **O**: Connection strings (legacy), Key Vault references (transition), Managed Identity (best)
+- [ ] **V1**: Katere so tri glavne avtentikacijske vzorce?
+  - **O**: Connection strings (zastarjeno), Key Vault reference (prehod), Upravljana identiteta (najboljša praksa)
 
-- [ ] **V2**: Zakaj je upravljana identiteta boljša kot nizi za povezavo?
-  - **O**: Brez skrivnosti v kodi, samodejna rotacija, popolna revizijska sled, dovoljenja na osnovi RBAC
+- [ ] **V2**: Zakaj je upravljana identiteta boljša od connection stringov?
+  - **O**: Ni skrivnosti v kodi, samodejna rotacija, popolna revizijska sled, dovoljenja na osnovi RBAC
 
-- [ ] **V3**: Kdaj bi uporabili uporabniško dodeljeno identiteto namesto sistemsko dodeljene?
-  - **O**: Ko delite identiteto med več viri ali ko je življenjski cikel identitete neodvisen od življenjskega cikla vira
+- [ ] **V3**: Kdaj uporabiti user-assigned identiteto namesto system-assigned?
+  - **O**: Ko identiteto delite med več viri ali ko je življenjska doba identitete neodvisna od življenjske dobe vira
 
-**Praktična preveritev:**
+**Praktično preverjanje:**
 ```bash
-# Preverite, katero vrsto identitete uporablja vaša aplikacija
+# Preverite, katero vrsto identitete vaša aplikacija uporablja
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1166,46 +1166,46 @@ az role assignment list \
 
 Preizkusite svoje razumevanje:
 
-- [ ] **V1**: Kakšen je ID vloge za "Storage Blob Data Contributor"?
+- [ ] **V1**: Kakšen je role ID za "Storage Blob Data Contributor"?
   - **O**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **V2**: Katere pravice zagotavlja "Key Vault Secrets User"?
+- [ ] **V2**: Katere pravice daje "Key Vault Secrets User"?
   - **O**: Samo bralni dostop do skrivnosti (ne more ustvarjati, posodabljati ali brisati)
 
-- [ ] **V3**: Kako dodelite Container App dostop do Azure SQL?
+- [ ] **V3**: Kako omogočite Container App dostop do Azure SQL?
   - **O**: Dodelite vlogo "SQL DB Contributor" ali konfigurirajte Azure AD avtentikacijo za SQL
 
-**Praktična preveritev:**
+**Praktično preverjanje:**
 ```bash
 # Poišči določeno vlogo
 az role definition list --name "Storage Blob Data Contributor"
 
-# Preveri, katere vloge so dodeljene vaši identiteti
+# Preveri, katere vloge so dodeljene tvoji identiteti
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Integracija Key Vault ✓
+### 3. Integracija z Key Vault ✓
 - [ ] **Q1**: Kako omogočite RBAC za Key Vault namesto dostopnih politik?
   - **A**: Nastavite `enableRbacAuthorization: true` v Bicep
 
-- [ ] **Q2**: Katera knjižnica Azure SDK upravlja overjanje z upravljano identiteto?
+- [ ] **Q2**: Katera knjižnica Azure SDK upravlja avtentikacijo upravljene identitete?
   - **A**: `@azure/identity` z razredom `DefaultAzureCredential`
 
-- [ ] **Q3**: Kako dolgo skrivnosti Key Vault ostanejo v predpomnilniku?
+- [ ] **Q3**: Koliko časa skrivnosti Key Vault ostanejo v predpomnilniku?
   - **A**: Odvisno od aplikacije; implementirajte svojo strategijo predpomnjenja
 
 **Hands-On Verification:**
 ```bash
-# Preizkusite dostop do Key Vaulta
+# Preizkusi dostop do Key Vault
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# Preverite, ali je RBAC omogočen
+# Preveri, ali je RBAC omogočen
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
@@ -1216,20 +1216,20 @@ az keyvault show \
 
 ## Najboljše varnostne prakse
 
-### ✅ NAREDITE:
+### ✅ NAREDI:
 
-1. **Vedno uporabljajte upravljano identiteto v produkcijskem okolju**
+1. **Vedno uporabljajte upravljano identiteto v produkciji**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Uporabljajte RBAC vloge z najmanjšimi privilegiji**
+2. **Uporabljajte RBAC vloge z najmanjšimi pooblastili**
    - Uporabljajte "Reader" vloge, kadar je mogoče
-   - Izogibajte se vlogam "Owner" ali "Contributor", razen če je nujno
+   - Izogibajte se vlogam "Owner" ali "Contributor", razen če je potrebno
 
-3. **Shranjujte ključe tretjih strank v Key Vault**
+3. **Shranjujte ključe tretjih oseb v Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
@@ -1249,10 +1249,10 @@ az keyvault show \
    ```
 
 6. **Redno rotirajte skrivnosti**
-   - Nastavite datume poteka za skrivnosti v Key Vault
+   - Na skrivnostih v Key Vault nastavite datume poteka
    - Avtomatizirajte rotacijo z Azure Functions
 
-### ❌ NE DELAJTE:
+### ❌ NE:
 
 1. **Nikoli ne vgrajujte skrivnosti neposredno v kodo**
    ```javascript
@@ -1260,13 +1260,13 @@ az keyvault show \
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Ne uporabljajte povezovalnih nizov (connection strings) v produkciji**
+2. **Ne uporabljajte connection stringov v produkciji**
    ```javascript
    // ❌ SLABO
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Ne podeljujte prekomernih dovoljenj**
+3. **Ne dodeljujte prekomernih pooblastil**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1275,7 +1275,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Ne beležite skrivnosti v dnevnikih**
+4. **Ne zapisujte skrivnosti v dnevnike**
    ```javascript
    // ❌ SLABO
    console.log('API Key:', apiKey);
@@ -1316,7 +1316,7 @@ az containerapp show \
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Pričakovano: Videti bi morali "Storage Blob Data Contributor" ali podobno vlogo
+# Pričakovano: videti bi morali "Storage Blob Data Contributor" ali podobno vlogo
 ```
 
 **Rešitve:**
@@ -1336,7 +1336,7 @@ az role assignment create \
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Preverite, da aplikacijska koda uporablja pravilne poverilnice:**
+3. **Preverite, ali aplikacijska koda uporablja ustrezno overitveno poverilnico:**
 ```javascript
 // Prepričajte se, da uporabljate DefaultAzureCredential
 const credential = new DefaultAzureCredential();
@@ -1369,7 +1369,7 @@ az role assignment list \
 
 **Rešitve:**
 
-1. **Omogočite RBAC na Key Vaultu:**
+1. **Omogočite RBAC na Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
@@ -1401,7 +1401,7 @@ CredentialUnavailableError: No credential available
 # Preverite, ali ste prijavljeni
 az account show
 
-# Preverite overitev Azure CLI
+# Preverite avtentikacijo Azure CLI
 az ad signed-in-user show
 ```
 
@@ -1424,7 +1424,7 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Ali lokalno uporabite drug način overjanja:**
+4. **Ali pa lokalno uporabite drugačen način overjanja:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1436,15 +1436,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Težava: Dodelitev vloge se prepočasi propagira
+### Težava: Dodeljevanje vlog traja predolgo, da se propagira
 
 **Simptomi:**
 - Vloga je bila uspešno dodeljena
-- Še vedno prejemate napake 403
-- Občasni dostop (včasih deluje, včasih ne)
+- Še vedno prihaja do napak 403
+- Prekinjen dostop (včasih deluje, včasih ne)
 
-**Razlaga:**
-Spremembe v Azure RBAC se lahko propagirajo globalno 5–10 minut.
+**Pojasnilo:**
+Spremembe v Azure RBAC lahko potrebujejo 5–10 minut za globalno propagacijo.
 
 **Rešitev:**
 
@@ -1464,30 +1464,30 @@ az containerapp revision restart \
 
 ---
 
-## Upoštevanje stroškov
+## Razmisleki o stroških
 
 ### Stroški upravljane identitete
 
-| Vir | Stroški |
+| Postavka | Strošek |
 |----------|------|
-| **Upravljana identiteta** | 🆓 **BREZPLAČNO** - Brez stroškov |
-| **Dodelitve RBAC vlog** | 🆓 **BREZPLAČNO** - Brez stroškov |
-| **Zahteve za Azure AD žetone** | 🆓 **BREZPLAČNO** - Vključeno |
+| **Upravljana identiteta** | 🆓 **BREZPLAČNO** - Ni stroškov |
+| **Dodelitve RBAC vlog** | 🆓 **BREZPLAČNO** - Ni stroškov |
+| **Zahteve žetonov Azure AD** | 🆓 **BREZPLAČNO** - Vključeno |
 | **Operacije Key Vault** | $0.03 per 10,000 operations |
-| **Shramba Key Vault** | $0.024 per secret per month |
+| **Shranjevanje v Key Vault** | $0.024 per secret per month |
 
-**Upravljana identiteta prihrani denar z:**
-- ✅ Odpravo operacij Key Vault za overjanje med storitvami
-- ✅ Zmanjšanjem varnostnih incidentov (brez razkritih poverilnic)
-- ✅ Zmanjšanjem operativne obremenitve (brez ročne rotacije)
+**Upravljana identiteta prihrani stroške z:**
+- ✅ Odprava operacij Key Vault za avtentikacijo med storitvami
+- ✅ Zmanjšanje varnostnih incidentov (brez razkritih poverilnic)
+- ✅ Zmanjšanje operativnih obremenitev (brez ročnega vrtenja)
 
 **Primerjava stroškov (mesečno):**
 
-| Scenarij | Connection Strings | Managed Identity | Prihranek |
+| Scenarij | Connection Strings | Upravljana identiteta | Prihranek |
 |----------|-------------------|-----------------|---------|
-| Majhna aplikacija (1M zahtev) | ~$50 (Key Vault + ops) | ~$0 | $50/mesec |
-| Srednja aplikacija (10M zahtev) | ~$200 | ~$0 | $200/mesec |
-| Velika aplikacija (100M zahtev) | ~$1,500 | ~$0 | $1,500/mesec |
+| Majhna aplikacija (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/mesec |
+| Srednja aplikacija (10M requests) | ~$200 | ~$0 | $200/mesec |
+| Velika aplikacija (100M requests) | ~$1,500 | ~$0 | $1,500/mesec |
 
 ---
 
@@ -1505,41 +1505,41 @@ az containerapp revision restart \
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
 ### Naslednji koraki v tem tečaju
-- ← Prejšnje: [Upravljanje konfiguracije](configuration.md)
+- ← Prejšnji: [Upravljanje konfiguracije](configuration.md)
 - → Naslednje: [Prvi projekt](first-project.md)
 - 🏠 [Domača stran tečaja](../../README.md)
 
 ### Povezani primeri
-- [Primer klepeta Azure OpenAI](../../../../examples/azure-openai-chat) - Uporablja upravljano identiteto za Azure OpenAI
-- [Primer mikrostoritev](../../../../examples/microservices) - Vzorci overjanja za več storitev
+- [Primer klepeta z Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Uporablja upravljano identiteto za Microsoft Foundry Models
+- [Primer mikrostoritev](../../../../examples/microservices) - Vzorce avtentikacije za več storitev
 
 ---
 
 ## Povzetek
 
 **Naučili ste se:**
-- ✅ Tri vzorce overjanja (povezovalni nizi, Key Vault, upravljana identiteta)
+- ✅ Trije vzorci avtentikacije (connection strings, Key Vault, upravljana identiteta)
 - ✅ Kako omogočiti in konfigurirati upravljano identiteto v AZD
-- ✅ Dodelitve RBAC vlog za storitve Azure
-- ✅ Integracija Key Vault za skrivnosti tretjih strank
-- ✅ Uporabniško dodeljene proti sistemsko dodeljenim identitetam
+- ✅ Dodelitve RBAC vlog za Azure storitve
+- ✅ Integracija Key Vault za skrivnosti tretjih oseb
+- ✅ Uporabniško dodeljene in sistemsko dodeljene identitete
 - ✅ Najboljše varnostne prakse in odpravljanje težav
 
 **Ključne ugotovitve:**
 1. **Vedno uporabljajte upravljano identiteto v produkciji** - Brez skrivnosti, samodejna rotacija
-2. **Uporabljajte RBAC vloge z najmanjšimi privilegiji** - Dodeljujte samo potrebna dovoljenja
-3. **Shranjujte ključe tretjih strank v Key Vault** - Centralizirano upravljanje skrivnosti
-4. **Ločite identitete po okoljih** - Izolacija dev, staging, prod
-5. **Omogočite revizijsko beleženje** - Spremljajte, kdo je dostopal do česa
+2. **Uporabljajte RBAC vloge z najmanjšimi pooblastili** - Dodelite le potrebna pooblastila
+3. **Shranjujte ključe tretjih oseb v Key Vault** - Centralizirano upravljanje skrivnosti
+4. **Ločite identitete po okolju** - Izolacija dev, staging, prod
+5. **Omogočite revizijsko beleženje** - Sledenje, kdo je dostopal do česa
 
 **Naslednji koraki:**
-1. Dokončajte praktične vaje zgoraj
-2. Migrirajte obstoječo aplikacijo iz povezovalnih nizov na upravljano identiteto
-3. Zgradite svoj prvi AZD projekt z varnostjo od prvega dne: [Prvi projekt](first-project.md)
+1. Dokončajte zgornje praktične vaje
+2. Migrirajte obstoječo aplikacijo iz connection strings na upravljano identiteto
+3. Zgradite vaš prvi AZD projekt z varnostjo že od prvega dne: [Prvi projekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Izjava o omejitvi odgovornosti:
-Ta dokument je bil preveden z uporabo storitve za avtomatski prevod AI [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, upoštevajte, da lahko avtomatski prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovni prevod, opravljen s strani človeka. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki bi izhajale iz uporabe tega prevoda.
+**Izjava o omejitvi odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo profesionalen človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

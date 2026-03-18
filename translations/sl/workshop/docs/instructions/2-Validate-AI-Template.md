@@ -1,20 +1,20 @@
-# 2. Preverjanje predloge
+# 2. Validate a Template
 
-!!! tip "NA KONCU TEGA MODULA BOSTE LAHKO"
+!!! tip "NA KONCU TEGA MODULA BOSTE ZMOGLI"
 
     - [ ] Analizirati arhitekturo AI rešitve
-    - [ ] Razumeti potek namestitve z AZD
+    - [ ] Razumeti potek razmestitve z AZD
     - [ ] Uporabiti GitHub Copilot za pomoč pri uporabi AZD
-    - [ ] **Laboratorij 2:** Razmestitev in preverjanje predloge AI Agentov
+    - [ ] **Lab 2:** Razmestiti in preveriti predlogo AI Agents
 
 ---
 
 
-## 1. Uvod
+## 1. Introduction
 
 The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastruktura kot koda_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **in** deploy your application at one shot!
 
 As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
@@ -38,7 +38,7 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 
 ## 2. Template Selection
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow automation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
@@ -126,16 +126,16 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
    ![Foundry](../../../../../translated_images/sl/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. You should see the Foundry Project page for your AI application
-   ![Projekt](../../../../../translated_images/sl/05-visit-foundry-portal.d734e98135892d7e.webp)
+   ![Project](../../../../../translated_images/sl/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Click on `Agents` - you see the default Agent provisioned in your project
-   ![Agenti](../../../../../translated_images/sl/06-visit-agents.bccb263f77b00a09.webp)
+   ![Agents](../../../../../translated_images/sl/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Select it - and you see the Agent details. Note the following:
 
-      - Agent privzeto uporablja File Search (vedno)
-      - Polje `Knowledge` kaže, da je naloženih 32 datotek (za iskanje po datotekah)
-      ![Agenti](../../../../../translated_images/sl/07-view-agent-details.0e049f37f61eae62.webp)
+      - The agent uses File Search by default (always)
+      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
+      ![Agents](../../../../../translated_images/sl/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Look for the `Data+indexes` option in the left menu and click for details. 
 
@@ -145,9 +145,9 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
 
 **You validated Agent operation!** 
 
-1. Agentovi odgovori temeljijo na znanju v teh datotekah. 
-1. Zdaj lahko postavljate vprašanja povezana s temi podatki in dobite utemeljene odgovore.
-1. Primer: `customer_info_10.json` opisuje 3 nakupe, ki jih je opravila "Amanda Perez"
+1. The agent responses are grounded in the knowledge in those files. 
+1. You can now ask questions related to that data, and get grounded responses.
+1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
 Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
@@ -232,7 +232,7 @@ Let's try out a few commands:
       You see something like:
 
       ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
+      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
       AZURE_AI_AGENT_NAME="agent-template-assistant"
       AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
       AZURE_AI_EMBED_DIMENSIONS=100
@@ -273,13 +273,13 @@ Let's try out a few commands:
       azd env refresh
       ```
 
-      To je zmogljiv način za _sinhronizacijo_ okoljskih spremenljivk med dvema ali več lokalnimi razvojnimi okolji (npr. ekipa z več razvijalci) - kar omogoča, da nameščena infrastruktura služi kot referenca za stanje okoljskih spremenljivk. Člani ekipe preprosto _osvežijo_ spremenljivke, da se ponovno uskladijo.
+      To je zmogljiv način za _sinhronizacijo_ spremenljivk okolja med dvema ali več lokalnimi razvojnimi okolji (npr. ekipa z več razvijalci) - kar omogoča, da nameščena infrastruktura služi kot dokončen vir resnice glede stanja spremenljivk okolja. Člani ekipe preprosto _osvežijo_ spremenljivke, da se ponovno sinhronizirajo.
 
 ---
 
 ## 9. Čestitke 🏆
 
-Pravkar ste zaključili celovit potek dela, v katerem ste:
+Pravkar ste zaključili celoten potek dela, v katerem ste:
 
 - [X] Izbrali predlogo AZD, ki jo želite uporabiti
 - [X] Zagnali predlogo z GitHub Codespaces 
@@ -289,5 +289,5 @@ Pravkar ste zaključili celovit potek dela, v katerem ste:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo zagotoviti natančnost, upoštevajte, da lahko avtomatski prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokovni prevod, opravljen s strani človeka. Nismo odgovorni za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku je treba smatrati za avtoritativni vir. Za pomembne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,46 +1,46 @@
-# Command Cheat Sheet - Osnovne AZD naredbe
+# Cheat Sheet naredbi - Osnovne AZD naredbe
 
 **Brzi pregled za sve poglavlja**
-- **📚 Početna stranica kursa**: [AZD za početnike](../README.md)
+- **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)
 - **📖 Brzi početak**: [Poglavlje 1: Osnove i Brzi početak](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI naredbe**: [Poglavlje 2: AI-prvo razvijanje](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Napredne**: [Poglavlje 4: Infrastruktura kao kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 AI naredbe**: [Poglavlje 2: AI-prvi razvoj](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Napredno**: [Poglavlje 4: Infrastruktura kao kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Uvod
 
-Ovaj sveobuhvatni cheat sheet pruža brz pregled najčešće korištenih Azure Developer CLI naredbi, organiziranih po kategorijama s praktičnim primjerima. Idealno za brze preglede tokom razvoja, rješavanja problema i svakodnevnih aktivnosti s azd projektima.
+Ovaj opsežni cheat sheet pruža brz pristup najčešće korištenim Azure Developer CLI naredbama, organiziranim po kategorijama s praktičnim primjerima. Savršen za brzo pretraživanje tijekom razvoja, otklanjanja pogrešaka i svakodnevnih operacija s azd projektima.
 
 ## Ciljevi učenja
 
-Koristeći ovaj cheat sheet, moći ćete:
-- Imati trenutni pristup osnovnim Azure Developer CLI naredbama i sintaksi
-- Razumjeti organizaciju naredbi po funkcionalnim kategorijama i slučajevima upotrebe
-- Referencirati praktične primjere za uobičajene razvojne i deployment scenarije
-- Pristupiti naredbama za rješavanje problema za brzo otklanjanje poteškoća
-- Pronaći napredne opcije konfiguracije i prilagođavanja učinkovito
-- Pronaći naredbe za upravljanje okruženjima i višestruke radne tokove okruženja
+Korištenjem ovog cheat sheeta:
+- Imat ćete trenutni pristup osnovnim Azure Developer CLI naredbama i sintaksi
+- Razumjet ćete organizaciju naredbi po funkcionalnim kategorijama i slučajevima korištenja
+- Moći ćete referencirati praktične primjere za uobičajene razvojne i implementacijske scenarije
+- Pristupiti ćete naredbama za otklanjanje pogrešaka za brzo rješavanje problema
+- Pronaći ćete napredne opcije konfiguracije i prilagodbe učinkovito
+- Pronaći ćete naredbe za upravljanje okruženjima i višestruke radne tokove okruženja
 
 ## Ishodi učenja
 
-Redovitim korištenjem ovog cheat sheeta, moći ćete:
-- Izvoditi azd naredbe samopouzdano bez potrebe za referenciranjem pune dokumentacije
-- Brzo rješavati uobičajene probleme koristeći odgovarajuće dijagnostičke naredbe
+Redovitim korištenjem ovog cheat sheeta moći ćete:
+- Izvoditi azd naredbe samouvjereno bez potrebe za referencom pune dokumentacije
+- Brzo rješavati uobičajene probleme korištenjem odgovarajućih dijagnostičkih naredbi
 - Učinkovito upravljati višestrukim okruženjima i scenarijima implementacije
-- Primijeniti napredne značajke i opcije konfiguracije azd po potrebi
-- Rješavati probleme pri implementaciji koristeći sustavne sekvence naredbi
-- Optimizirati radne tokove učinkovitim korištenjem prečaca i opcija azd
+- Primjenjivati napredne azd značajke i opcije konfiguracije prema potrebi
+- Otklanjati probleme implementacije koristeći sustavne slijedove naredbi
+- Optimizirati radne tokove učinkovitim korištenjem azd prečaca i opcija
 
 ## Početne naredbe
 
-### Autentifikacija
+### Autentikacija
 ```bash
 # Prijava u Azure putem AZD-a
 azd auth login
 
-# Prijava u Azure CLI (AZD koristi ovo u pozadini)
+# Prijava u Azure CLI (AZD to koristi u pozadini)
 az login
 
-# Provjerite trenutni račun
+# Provjeri trenutni račun
 az account show
 
 # Postavi zadanu pretplatu
@@ -56,14 +56,14 @@ az logout
 
 ### Inicijalizacija projekta
 ```bash
-# Pregledajte dostupne predloške
+# Pregled dostupnih predložaka
 azd template list
 
 # Inicijaliziraj iz predloška
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Inicijaliziraj u trenutnom direktoriju
+# Inicijaliziraj u trenutačnom direktoriju
 azd init .
 
 # Inicijaliziraj s prilagođenim imenom
@@ -72,30 +72,30 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Osnovne naredbe za implementaciju
 
-### Potpuni radni tok implementacije
+### Kompletan radni tok implementacije
 ```bash
-# Postavi sve (priprema + postavljanje)
+# Implementiraj sve (priprema + implementacija)
 azd up
 
-# Postavi s onemogućenim potvrda upita
+# Implementiraj bez potvrde korisnika
 azd up --confirm-with-no-prompt
 
-# Postavi u određeno okruženje
+# Implementiraj u određeno okruženje
 azd up --environment production
 
-# Postavi s prilagođenim parametrima
+# Implementiraj s prilagođenim parametrima
 azd up --parameter location=westus2
 ```
 
 ### Samo infrastruktura
 ```bash
-# Provisioniranje Azure resursa
+# Osigurajte Azure resurse
 azd provision
 
 # 🧪 Pregled promjena infrastrukture
 azd provision --preview
-# Prikazuje suhi prikaz onoga što bi se resursa kreiralo/izmijenilo/izbrisalo
-# Slično kao 'terraform plan' ili 'bicep what-if' - sigurno za pokretanje, bez primjene promjena
+# Prikazuje pregled bez izvršenja što bi se resursa stvorilo/izmijenilo/izbrisalo
+# Slično 'terraform plan' ili 'bicep what-if' - sigurno za pokretanje, nema primijenjenih promjena
 ```
 
 ### Samo aplikacija
@@ -111,18 +111,18 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Izgradnja i pakiranje
+### Izrada i pakiranje
 ```bash
-# Izgradnja aplikacija
+# Izgradite aplikacije
 azd package
 
-# Izgradnja specifične usluge
+# Izgradite određenu uslugu
 azd package --service api
 ```
 
 ## 🌍 Upravljanje okruženjem
 
-### Operacije nad okruženjem
+### Operacije s okruženjem
 ```bash
 # Popis svih okruženja
 azd env list
@@ -143,17 +143,17 @@ azd env refresh
 
 ### Varijable okruženja
 ```bash
-# Postavi varijablu okruženja
+# Postavi varijablu okoline
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Dohvati varijablu okruženja
+# Dohvati varijablu okoline
 azd env get API_KEY
 
-# Prikaži sve varijable okruženja
+# Nabroji sve varijable okoline
 azd env get-values
 
-# Ukloni varijablu okruženja
+# Ukloni varijablu okoline
 azd env unset DEBUG
 ```
 
@@ -177,7 +177,7 @@ azd config reset
 
 ### Konfiguracija projekta
 ```bash
-# Provjeri azure.yaml
+# Validiraj azure.yaml
 azd config validate
 
 # Prikaži informacije o projektu
@@ -191,32 +191,32 @@ azd show --output json
 
 ### Nadzorna ploča za praćenje
 ```bash
-# Otvorite nadzornu ploču monitoringa na Azure portalu
+# Otvori Azure portal nadzorne ploče
 azd monitor
 
-# Otvorite live metrike u Application Insights
+# Otvori Application Insights statistiku u stvarnom vremenu
 azd monitor --live
 
-# Otvorite zapisnike Application Insights
+# Otvori Application Insights zapisnike
 azd monitor --logs
 
-# Otvorite pregled Application Insights
+# Otvori Application Insights pregled
 azd monitor --overview
 ```
 
 ### Pregled dnevnika kontejnera
 ```bash
-# Pregledajte zapise putem Azure CLI-ja (za Container Apps)
+# Prikaz dnevnika putem Azure CLI-ja (za Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Pratite zapise u stvarnom vremenu
+# Praćenje dnevnika u stvarnom vremenu
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Pregledajte zapise iz Azure Portala
+# Prikaz dnevnika iz Azure Portala
 azd monitor --logs
 ```
 
-### Upiti za Log Analytics
+### Upiti Log Analyticsa
 ```bash
 # Pristupite Log Analytics putem Azure portala
 azd monitor --logs
@@ -237,7 +237,7 @@ azd down
 # Primoraj brisanje bez potvrde
 azd down --force
 
-# Očisti privremeno obrisane resurse
+# Očisti privremeno izbrisane resurse
 azd down --purge
 
 # Potpuno čišćenje
@@ -246,19 +246,19 @@ azd down --force --purge
 
 ### Ažuriranja
 ```bash
-# Provjeri ima li ažuriranja za azd
+# Provjerite ima li ažuriranja za azd
 azd version
 
 # Dohvati trenutnu verziju
 azd version
 
-# Prikaži trenutnu konfiguraciju
+# Prikaži trenutne postavke
 azd config list
 ```
 
 ## 🔧 Napredne naredbe
 
-### Cjevovod i CI/CD
+### Pipeline i CI/CD
 ```bash
 # Konfigurirajte GitHub Actions
 azd pipeline config
@@ -277,14 +277,14 @@ azd infra generate
 
 # 🧪 Pregled i planiranje infrastrukture
 azd provision --preview
-# Simulira pružanje infrastrukture bez implementacije
+# Simulira pripremu infrastrukture bez implementacije
 # Analizira Bicep/Terraform predloške i prikazuje:
 # - Resurse koji će biti dodani (zeleno +)
-# - Resurse koji će biti modificirani (žuto ~)
+# - Resurse koji će biti izmijenjeni (žuto ~)
 # - Resurse koji će biti izbrisani (crveno -)
-# Sigurno za pokretanje - nema stvarnih promjena u Azure okruženju
+# Sigurno za pokretanje - nisu napravljene stvarne promjene u Azure okruženju
 
-# Sintetiziraj infrastrukturu iz azure.yaml
+# Sintetizira infrastrukturu iz azure.yaml
 azd infra synth
 ```
 
@@ -300,26 +300,81 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
+## 🤖 AI i proširenja
+
+### AZD proširenja
+```bash
+# Nabrojite sve dostupne ekstenzije (uključujući AI)
+azd extension list
+
+# Instalirajte ekstenziju Foundry agenata
+azd extension install azure.ai.agents
+
+# Instalirajte ekstenziju za fino podešavanje
+azd extension install azure.ai.finetune
+
+# Instalirajte ekstenziju za prilagođene modele
+azd extension install azure.ai.models
+
+# Nadogradite sve instalirane ekstenzije
+azd extension upgrade --all
+```
+
+### AI agent naredbe
+```bash
+# Inicijalizirajte projekt agenta iz manifesta
+azd ai agent init -m <manifest-path-or-uri>
+
+# Ciljajte određeni Foundry projekt
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Navedite direktorij izvora agenta
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Odaberite ciljni hostinger
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+### MCP poslužitelj (Alpha)
+```bash
+# Pokrenite MCP poslužitelj za vaš projekt
+azd mcp start
+
+# Upravljajte pristankom na alate za MCP operacije
+azd mcp consent
+```
+
+### Generiranje infrastrukture
+```bash
+# Generirajte IaC datoteke iz definicije vašeg projekta
+azd infra generate
+
+# Sintetizirajte infrastrukturu iz azure.yaml
+azd infra synth
+```
+
+---
+
 ## 🎯 Brzi radni tokovi
 
 ### Radni tok razvoja
 ```bash
-# Zapocni novi projekt
+# Pokreni novi projekt
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Implementiraj u razvojno okruzenje
+# Postavi na razvojno okruženje
 azd env new dev
 azd up
 
-# Napravi izmjene i ponovo implementiraj
+# Napravi promjene i ponovno postavi
 azd deploy
 
-# Otvori nadzornu plocu
+# Otvori nadzornu ploču
 azd monitor --live
 ```
 
-### Radni tok s više okruženja
+### Radni tok za više okruženja
 ```bash
 # Postavi okruženja
 azd env new dev
@@ -334,14 +389,14 @@ azd up
 azd env select staging
 azd up
 
-# Implementiraj u produkcijsko okruženje
+# Implementiraj u produkciju
 azd env select production
 azd up
 ```
 
-### Radni tok za rješavanje problema
+### Radni tok za otklanjanje problema
 ```bash
-# Omogući način rada za ispravljanje pogrešaka
+# Omogući način za ispravljanje pogrešaka
 export AZD_DEBUG=true
 
 # Provjeri status implementacije
@@ -350,7 +405,7 @@ azd show
 # Provjeri valjanost konfiguracije
 azd config list
 
-# Otvori nadzornu ploču za praćenje zapisa
+# Otvori nadzornu ploču za praćenje dnevnika
 azd monitor --logs
 
 # Provjeri status resursa
@@ -359,7 +414,7 @@ azd show --output json
 
 ## 🔍 Naredbe za otklanjanje pogrešaka
 
-### Informacije za otklanjanje pogrešaka
+### Informacije za debagiranje
 ```bash
 # Omogući ispis za otklanjanje pogrešaka
 export AZD_DEBUG=true
@@ -368,14 +423,14 @@ azd <command> --debug
 # Onemogući telemetriju za čišći ispis
 export AZD_DISABLE_TELEMETRY=true
 
-# Provjeri trenutnu konfiguraciju
+# Provjeri trenutačnu konfiguraciju
 azd config list
 
 # Provjeri status autentikacije
 az account show
 ```
 
-### Otklanjanje pogrešaka predložaka
+### Debagiranje predložaka
 ```bash
 # Prikaži dostupne predloške s detaljima
 azd template list --output json
@@ -383,7 +438,7 @@ azd template list --output json
 # Prikaži informacije o predlošku
 azd template show <template-name>
 
-# Provjeri valjanost predloška prije inicijalizacije
+# Provjeri predložak prije inicijalizacije
 azd template validate <template-name>
 ```
 
@@ -406,26 +461,26 @@ echo $AZD_CONFIG_DIR  # Obično ~/.azd
 
 ### JSON izlaz
 ```bash
-# Dohvati JSON izlaz za skriptiranje
+# Nabavi JSON izlaz za skriptiranje
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parsiraj pomoću jq
+# Parsiraj s jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tablični izlaz
+### Izlaz u tablici
 ```bash
 # Formatiraj kao tablicu
 azd env list --output table
 
-# Pregledaj implementirane usluge
+# Prikaži implementirane usluge
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Česte kombinacije naredbi
+## 🔧 Uobičajene kombinacije naredbi
 
 ### Skripta za provjeru zdravlja
 ```bash
@@ -439,16 +494,16 @@ azd monitor --logs
 ### Validacija implementacije
 ```bash
 #!/bin/bash
-# Validacija prije postavljanja
+# Provjera prije implementacije
 azd show
-azd provision --preview  # Pregled promjena prije postavljanja
+azd provision --preview  # Pregledajte promjene prije implementacije
 az account show
 ```
 
 ### Usporedba okruženja
 ```bash
 #!/bin/bash
-# Usporedi okruženja
+# Usporedi okoline
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -494,13 +549,13 @@ export LOG_LEVEL="info"
 az account clear
 az login
 
-# Prisili osvježavanje okoline
+# Prisilno osvježi okruženje
 azd env refresh
 
-# Ponovno implementiraj sve servise
+# Ponovno rasporedi sve usluge
 azd deploy
 
-# Provjeri status implementacije
+# Provjeri status raspoređivanja
 azd show --output json
 ```
 
@@ -510,16 +565,16 @@ azd show --output json
 azd down --force --purge
 azd up
 
-# Ponovno provisionirajte samo infrastrukturu
+# Obnovi infrastrukturu samo
 azd provision
 
-# Ponovno implementirajte samo aplikaciju
+# Ponovno implementiraj samo aplikaciju
 azd deploy
 ```
 
-## 💡 Profesionalni savjeti
+## 💡 Savjeti stručnjaka
 
-### Alias naredbe za brži rad
+### Alias naredbe za brži radni tok
 ```bash
 # Dodajte u svoj .bashrc ili .zshrc
 alias azdup='azd up'
@@ -583,12 +638,16 @@ azd template show <template-name> --docs
 ---
 
 **Navigacija**
-- **Prethodna lekcija**: [Provjere prije implementacije](../docs/pre-deployment/preflight-checks.md)
-- **Sljedeća lekcija**: [Rječnik pojmova](glossary.md)
+- **Prethodna lekcija**: [Preflight provjere](../docs/pre-deployment/preflight-checks.md)
+- **Sljedeća lekcija**: [Rječnik](glossary.md)
+
+---
+
+> **💡 Želite pomoć s Azure naredbama u svom uređivaču?** Instalirajte [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) s `npx skills add microsoft/github-copilot-for-azure` — 37 vještina za AI, Foundry, implementaciju, dijagnostiku i još mnogo toga.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Odricanje od odgovornosti**:
-Ovaj dokument je preveden korištenjem AI usluge za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na njegovom izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+**Odricanje od odgovornosti**:  
+Ovaj je dokument preveden koristeći AI uslugu prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati glavnim i službenim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja proizašla iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,31 +1,31 @@
-# Koordinacijski obrasci za više agenata
+# Obrasci koordinacije više agenata
 
 ⏱️ **Procijenjeno vrijeme**: 60-75 minuta | 💰 **Procijenjeni trošak**: ~$100-300/mjesec | ⭐ **Složenost**: Napredno
 
 **📚 Put učenja:**
-- ← Prethodno: [Capacity Planning](capacity-planning.md) - Veličina resursa i strategije skaliranja
-- 🎯 **Nalazite se ovdje**: Koordinacijski obrasci za više agenata (orkestracija, komunikacija, upravljanje stanjem)
-- → Sljedeće: [SKU Selection](sku-selection.md) - Odabir pravih Azure usluga
-- 🏠 [Course Home](../../README.md)
+- ← Prethodno: [Planiranje kapaciteta](capacity-planning.md) - Strategije dimenzioniranja i skaliranja resursa
+- 🎯 **Nalazite se ovdje**: Obrasci koordinacije više agenata (orkestracija, komunikacija, upravljanje stanjem)
+- → Sljedeće: [Izbor SKU-a](sku-selection.md) - Odabir pravih Azure usluga
+- 🏠 [Početna stranica tečaja](../../README.md)
 
 ---
 
 ## Što ćete naučiti
 
-Dovršetkom ove lekcije ćete:
-- Razumjeti obrasce arhitekture za **više agenata** i kada ih koristiti
-- Implementirati **obrasce orkestracije** (centralizirano, decentralizirano, hijerarhijsko)
-- Dizajnirati strategije **komunikacije agenata** (sinhrono, asinhrono, vođeno događajima)
+Kroz ovaj lekciju ćete:
+- Razumjeti obrasce **arhitekture više agenata** i kada ih koristiti
+- Implementirati **orkestracijske obrasce** (centralizirane, decentralizirane, hijerarhijske)
+- Dizajnirati strategije **komunikacije agenata** (sinkrono, asinkrono, na događaje)
 - Upravljati **zajedničkim stanjem** među distribuiranim agentima
-- Deployati **sustave s više agenata** na Azure pomoću AZD
-- Primijeniti **koordinacijske obrasce** u scenarijima stvarnog svijeta ai
+- Implementirati **sustave više agenata** na Azure s AZD-om
+- Primijeniti **koordinacijske obrasce** u stvarnim AI scenarijima
 - Nadzirati i otklanjati pogreške u distribuiranim sustavima agenata
 
 ## Zašto je koordinacija više agenata važna
 
-### Evolucija: od jednog agenta do sustava s više agenata
+### Evolucija: od jednog agenta do više agenata
 
-**Pojedinačni agent (jednostavno):**
+**Jedan agent (jednostavno):**
 ```
 User → Agent → Response
 ```
@@ -35,83 +35,77 @@ User → Agent → Response
 - ❌ Ne može paralelizirati složene zadatke
 - ❌ Nema specijalizacije
 
-**Sustav s više agenata (napredno):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Specijalizirani agenti za određene zadatke
-- ✅ Paralelno izvršavanje za brzinu
+**Sustav više agenata (napredno):**
+```mermaid
+graph TD
+    Orchestrator[Orkestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Kod]
+    Orchestrator --> Agent3[Agent3<br/>Pregled]
+```- ✅ Specijalizirani agenti za određene zadatke
+- ✅ Paralelno izvršavanje radi brzine
 - ✅ Modularno i održivo
 - ✅ Bolje za složene radne tokove
 - ⚠️ Zahtijeva logiku koordinacije
 
-**Analogija**: Pojedinačni agent je kao jedna osoba koja radi sve zadatke. Sustav s više agenata je poput tima u kojem svaki član ima specijalizirane vještine (istraživač, programer, recenzent, pisac) i rade zajedno.
+**Analogija**: Jedan agent je kao jedna osoba koja radi sve zadatke. Više agenata je kao tim gdje svaki član ima specijalizirane vještine (istraživač, programer, recenzent, pisac) koji rade zajedno.
 
 ---
 
-## Temeljni koordinacijski obrasci
+## Temeljni obrasci koordinacije
 
-### Obrazac 1: Sekvencijska koordinacija (lanac odgovornosti)
+### Obrazac 1: Sekvencijalna koordinacija (lanac odgovornosti)
 
-**Kada koristiti**: Zadaci se moraju izvršiti u određenom redoslijedu, svaki agent nadograđuje izlaz prethodnog.
+**Kada koristiti**: Zadatci se moraju izvršavati točno redoslijedom, svaki agent se nadograđuje na prethodni ishod.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Istraživački agent
+    participant Agent1 as Agent za istraživanje
     participant Agent2 as Agent za pisanje
     participant Agent3 as Agent za uređivanje
     
-    User->>Orchestrator: "Napiši članak o umjetnoj inteligenciji"
+    User->>Orchestrator: "Napiši članak o AI"
     Orchestrator->>Agent1: Istraži temu
     Agent1-->>Orchestrator: Rezultati istraživanja
     Orchestrator->>Agent2: Napiši nacrt (koristeći istraživanje)
     Agent2-->>Orchestrator: Nacrt članka
     Orchestrator->>Agent3: Uredi i poboljšaj
     Agent3-->>Orchestrator: Završni članak
-    Orchestrator-->>User: Uređeni članak
+    Orchestrator-->>User: Ispravljeni članak
     
     Note over User,Agent3: Sekvencijalno: Svaki korak čeka prethodni
 ```
 **Prednosti:**
 - ✅ Jasan tok podataka
-- ✅ Lako za debugiranje
+- ✅ Jednostavno za otklanjanje pogrešaka
 - ✅ Predvidljiv redoslijed izvršavanja
 
 **Ograničenja:**
 - ❌ Sporije (nema paralelizma)
-- ❌ Jedan neuspjeh blokira cijeli lanac
-- ❌ Ne može se nositi s međuzavisnim zadacima
+- ❌ Jedna greška blokira cijeli lanac
+- ❌ Ne može rukovati međuzavisnim zadacima
 
 **Primjeri upotrebe:**
-- Pipelin za stvaranje sadržaja (istraživanje → pisanje → uređivanje → objava)
-- Generiranje koda (plan → implementacija → test → deploy)
-- Generiranje izvještaja (prikupljanje podataka → analiza → vizualizacija → sažetak)
+- Proces stvaranja sadržaja (istraživanje → pisanje → uređivanje → objava)
+- Generiranje koda (planiranje → implementacija → testiranje → implementacija)
+- Izrada izvještaja (prikupljanje podataka → analiza → vizualizacija → sažetak)
 
 ---
 
-### Obrazac 2: Paralelna koordinacija (Fan-Out/Fan-In)
+### Obrazac 2: Paralelna koordinacija (fan-out/fan-in)
 
-**Kada koristiti**: Nezavisni zadaci mogu se izvoditi istovremeno, rezultati se kombiniraju na kraju.
+**Kada koristiti**: Nezavisni zadaci koji se mogu izvoditi istovremeno, rezultati se kombiniraju na kraju.
 
 ```mermaid
 graph TB
     User[Zahtjev korisnika]
     Orchestrator[Orkestrator]
-    Agent1[Agent za analizu]
-    Agent2[Agent za istraživanje]
+    Agent1[Analitički agent]
+    Agent2[Istraživački agent]
     Agent3[Agent za podatke]
     Aggregator[Agregator rezultata]
-    Response[Kombinirani odgovor]
+    Response[Zajednički odgovor]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -126,33 +120,33 @@ graph TB
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 **Prednosti:**
-- ✅ Brzo (paralelno izvršavanje)
-- ✅ Otpornije na greške (djelomični rezultati prihvatljivi)
-- ✅ Skalira se horizontalno
+- ✅ Brzo (paralelno izvođenje)
+- ✅ Otpornost na greške (djelomični rezultati prihvatljivi)
+- ✅ Horizontalna skalabilnost
 
 **Ograničenja:**
-- ⚠️ Rezultati mogu stići izvan redoslijeda
+- ⚠️ Rezultati mogu stizati izvan reda
 - ⚠️ Potrebna logika agregacije
 - ⚠️ Kompleksno upravljanje stanjem
 
 **Primjeri upotrebe:**
-- Prikupljanje podataka iz više izvora (APIs + baze podataka + web scraping)
-- Kompetitivna analiza (više modela generira rješenja, odabire se najbolje)
-- Usluge prevođenja (istodobno prevođenje na više jezika)
+- Prikupljanje podataka iz više izvora (API-ji + baze podataka + web scraping)
+- Konkurentska analiza (više modela generira rješenja, odabire se najbolje)
+- Prevodičke usluge (istovremeni prijevod na više jezika)
 
 ---
 
-### Obrazac 3: Hijerarhijska koordinacija (Manager-Worker)
+### Obrazac 3: Hijerarhijska koordinacija (menadžer-radnik)
 
-**Kada koristiti**: Složeni radni tokovi s podzadacima, potrebna delegacija.
+**Kada koristiti**: Složeni radni tijekovi sa podzadatcima i potrebom za delegiranjem.
 
 ```mermaid
 graph TB
-    Master[Glavni orkestrator]
-    Manager1[Voditelj istraživanja]
-    Manager2[Voditelj sadržaja]
-    W1[Web sakupljač]
-    W2[Analizator radova]
+    Master[Glavni Orkestrator]
+    Manager1[Upravitelj Istraživanja]
+    Manager2[Upravitelj Sadržaja]
+    W1[Web Skidač]
+    W2[Analizator Radova]
     W3[Pisac]
     W4[Urednik]
     
@@ -167,9 +161,8 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
-
 **Prednosti:**
-- ✅ Rukuje složenim radnim tokovima
+- ✅ Rukuje složenim radnim tijekovima
 - ✅ Modularno i održivo
 - ✅ Jasne granice odgovornosti
 
@@ -179,64 +172,64 @@ graph TB
 - ⚠️ Zahtijeva sofisticiranu orkestraciju
 
 **Primjeri upotrebe:**
-- Obrada dokumenata u poduzeću (klasificiraj → usmjeri → obradi → arhiviraj)
-- Višestupanjski podaci pipelinei (ingest → čišćenje → transformacija → analiza → izvještaj)
-- Složeni automatizirani radni tokovi (planiranje → raspodjela resursa → izvršenje → nadzor)
+- Obrada dokumenata u tvrtki (klasificirati → usmjeriti → obraditi → arhivirati)
+- Višestupanjski podatkovni tokovi (unos → čišćenje → transformacija → analiza → izvještavanje)
+- Složeni automatizirani radni tijekovi (planiranje → raspodjela resursa → izvršenje → nadzor)
 
 ---
 
-### Obrazac 4: Koordinacija vođena događajima (Publish-Subscribe)
+### Obrazac 4: Koordinacija potaknuta događajima (publish-subscribe)
 
-**Kada koristiti**: Agenti trebaju reagirati na događaje, poželjno je labavo spajanje.
+**Kada koristiti**: Agentima je potrebno reagirati na događaje, želi se labava povezanost.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Sakupljač podataka
+    participant Agent1 as Prikupljač podataka
     participant EventBus as Azure Service Bus
     participant Agent2 as Analizator
     participant Agent3 as Obavijestitelj
     participant Agent4 as Arhivar
     
-    Agent1->>EventBus: Objavi "PodaciPrimljeni" događaj
-    EventBus->>Agent2: Pretplata: Analiziraj podatke
-    EventBus->>Agent3: Pretplata: Pošalji obavijest
-    EventBus->>Agent4: Pretplata: Arhiviraj podatke
+    Agent1->>EventBus: Objavi događaj "DataReceived"
+    EventBus->>Agent2: Pretplati se: Analiziraj podatke
+    EventBus->>Agent3: Pretplati se: Pošalji obavijest
+    EventBus->>Agent4: Pretplati se: Arhiviraj podatke
     
-    Note over Agent1,Agent4: Svi pretplatnici obrađuju neovisno jedni o drugima
+    Note over Agent1,Agent4: Svi pretplatnici obrađuju neovisno
     
-    Agent2->>EventBus: Objavi "AnalizaZavršena" događaj
-    EventBus->>Agent3: Pretplata: Pošalji izvješće analize
+    Agent2->>EventBus: Objavi događaj "AnalysisComplete"
+    EventBus->>Agent3: Pretplati se: Pošalji izvještaj analize
 ```
 **Prednosti:**
-- ✅ Labavo spajanje između agenata
-- ✅ Lako dodavanje novih agenata (samo se pretplate)
-- ✅ Asinhrono procesiranje
-- ✅ Otpornost (persistentnost poruka)
+- ✅ Labava povezanost između agenata
+- ✅ Jednostavno dodavanje novih agenata (prijavom)
+- ✅ Asinkrono procesiranje
+- ✅ Otpornost (perzistentnost poruka)
 
 **Ograničenja:**
-- ⚠️ Eventualna konzistentnost
-- ⚠️ Složenije debugiranje
-- ⚠️ Izazovi u redoslijedu poruka
+- ⚠️ Konačna dosljednost
+- ⚠️ Kompleksno otklanjanje pogrešaka
+- ⚠️ Izazovi s redoslijedom poruka
 
 **Primjeri upotrebe:**
-- Sustavi za praćenje u realnom vremenu (alerti, dashboardi, logovi)
-- Više-kanalna obavijestavanja (email, SMS, push, Slack)
-- Pipelinei za obradu podataka (više potrošača iste podatke)
+- Sustavi za nadzor u stvarnom vremenu (alarme, nadzorne ploče, zapisnici)
+- Višekanalne obavijesti (e-mail, SMS, push, Slack)
+- Podatkovni tokovi s više potrošača istih podataka
 
 ---
 
 ### Obrazac 5: Koordinacija zasnovana na konsenzusu (glasanje/kvorum)
 
-**Kada koristiti**: Potrebna su slaganja više agenata prije nastavka.
+**Kada koristiti**: Potreban je dogovor više agenata prije nastavka.
 
 ```mermaid
 graph TB
-    Input[Ulazni Zadatak]
-    Agent1[Agent 1: GPT-4]
+    Input[Ulazni zadatak]
+    Agent1[Agent 1: gpt-4.1]
     Agent2[Agent 2: Claude]
     Agent3[Agent 3: Gemini]
-    Voter[Konsenzusni Glasovač]
-    Output[Dogovoreni Izlaz]
+    Voter[Glasač za konsenzus]
+    Output[Složeni izlaz]
     
     Input --> Agent1
     Input --> Agent2
@@ -248,43 +241,42 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
-
 **Prednosti:**
 - ✅ Veća točnost (više mišljenja)
-- ✅ Otpornost na greške (manjinski neuspjesi prihvatljivi)
+- ✅ Otpornost na greške (manjinske greške prihvatljive)
 - ✅ Ugrađena kontrola kvalitete
 
 **Ograničenja:**
-- ❌ Skupo (više poziva modelima)
+- ❌ Skupo (više poziva modela)
 - ❌ Sporije (čekanje na sve agente)
 - ⚠️ Potrebno rješavanje sukoba
 
 **Primjeri upotrebe:**
-- Moderacija sadržaja (više modela ocjenjuje sadržaj)
-- Pregled koda (više lintera/analizatora)
-- Medicinska dijagnoza (više AI modela, validacija stručnjaka)
+- Moderacija sadržaja (više modela pregledava sadržaj)
+- Recenzija koda (više analiza/lintera)
+- Medicinska dijagnoza (više AI modela, potvrda stručnjaka)
 
 ---
 
 ## Pregled arhitekture
 
-### Potpuni sustav s više agenata na Azureu
+### Potpuni sustav više agenata na Azureu
 
 ```mermaid
 graph TB
-    User[Korisnik/API klijent]
-    APIM[Azure upravljanje API-jem]
-    Orchestrator[Usluga orkestratora<br/>Aplikacija u kontejneru]
-    ServiceBus[Azure Service Bus<br/>Središte događaja]
+    User[Korisnik/API Klijent]
+    APIM[Azure API Upravljanje]
+    Orchestrator[Orkestrator Usluga<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Event Hub]
     
-    Agent1[Agent za istraživanje<br/>Aplikacija u kontejneru]
-    Agent2[Agent za pisanje<br/>Aplikacija u kontejneru]
-    Agent3[Agent za analizu<br/>Aplikacija u kontejneru]
-    Agent4[Agent za pregled<br/>Aplikacija u kontejneru]
+    Agent1[Istraživački Agent<br/>Container App]
+    Agent2[Pisac Agent<br/>Container App]
+    Agent3[Analitičar Agent<br/>Container App]
+    Agent4[Recenzent Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Zajedničko stanje)]
-    Storage[Azure Storage<br/>Artefakti]
-    AppInsights[Application Insights<br/>Praćenje]
+    CosmosDB[(Cosmos DB<br/>Zajedničko Stanje)]
+    Storage[Azure Pohrana<br/>Artefakti]
+    AppInsights[Application Insights<br/>Nadzor]
     
     User --> APIM
     APIM --> Orchestrator
@@ -317,15 +309,15 @@ graph TB
 ```
 **Ključne komponente:**
 
-| Komponenta | Svrha | Azure Service |
-|-----------|---------|---------------|
-| **API Gateway** | Ulazna točka, ograničavanje rate-a, auth | API Management |
-| **Orchestrator** | Koordinira radne tokove agenata | Container Apps |
-| **Message Queue** | Asinhrona komunikacija | Service Bus / Event Hubs |
-| **Agents** | Specijalizirani AI radnici | Container Apps / Functions |
-| **State Store** | Zajedničko stanje, praćenje zadataka | Cosmos DB |
-| **Artifact Storage** | Dokumenti, rezultati, logovi | Blob Storage |
-| **Monitoring** | Distribuirano praćenje, logovi | Application Insights |
+| Komponenta | Namjena | Azure usluga |
+|-----------|---------|--------------|
+| **API Gateway** | Ulazna točka, ograničenje brzine, autorizacija | API Management |
+| **Orkestrator** | Koordinira radne tokove agenata | Container Apps |
+| **Message Queue** | Asinkrona komunikacija | Service Bus / Event Hubs |
+| **Agenti** | Specijalizirani AI radnici | Container Apps / Functions |
+| **Spremište stanja** | Dijeljeno stanje, praćenje zadataka | Cosmos DB |
+| **Spremište artefakata** | Dokumenti, rezultati, zapisnici | Blob Storage |
+| **Nadzor** | Distribuirano praćenje, zapisnici | Application Insights |
 
 ---
 
@@ -340,29 +332,29 @@ azd version
 
 # Provjerite Azure CLI
 az --version
-# ✅ Očekivano: azure-cli verzija 2.50.0 ili novija
+# ✅ Očekivano: azure-cli 2.50.0 ili novija
 
 # Provjerite Docker (za lokalno testiranje)
 docker --version
 # ✅ Očekivano: Docker verzija 20.10 ili novija
 ```
 
-### Azure zahtjevi
+### Zahtjevi za Azure
 
 - Aktivna Azure pretplata
 - Dozvole za kreiranje:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Service Bus imenskih prostora
+  - Cosmos DB računa
+  - Spremišnih računa
   - Application Insights
 
 ### Potrebno znanje
 
-Trebali biste dovršiti:
-- [Configuration Management](../chapter-03-configuration/configuration.md)
-- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
-- [Microservices Example](../../../../examples/microservices)
+Trebali biste imati dovršeno:
+- [Upravljanje konfiguracijom](../chapter-03-configuration/configuration.md)
+- [Autentikaciju i sigurnost](../chapter-03-configuration/authsecurity.md)
+- [Primjer mikroservisa](../../../../examples/microservices)
 
 ---
 
@@ -400,13 +392,13 @@ multi-agent-system/
 
 ---
 
-## Lekcija 1: Sekvencijski obrazac koordinacije
+## Lekcija 1: Sekvencijalni obrazac koordinacije
 
-### Implementacija: pipeline za izradu sadržaja
+### Implementacija: Proces stvaranja sadržaja
 
-Izgradimo sekvencijski pipeline: Istraživanje → Pisanje → Uređivanje → Objavljivanje
+Izgradimo sekvencijalni tok: Istraživanje → Pisanje → Uređivanje → Objavljivanje
 
-### 1. AZD konfiguracija
+### 1. Konfiguracija AZD-a
 
 **Datoteka: `azure.yaml`**
 
@@ -554,7 +546,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Usluga orkestratora
+### 4. Orkestrator servis
 
 **Datoteka: `src/orchestrator/app.py`**
 
@@ -588,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Kreiraj zadatak u spremištu stanja
+    # Stvori zadatak u spremištu stanja
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -643,7 +635,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Inicijaliziraj klijente
+# Inicijalizirajte klijente
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -663,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Pozovi Azure OpenAI za istraživanje
+    # Pozovite Microsoft Foundry modele za istraživanje
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -675,14 +667,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Ažuriraj stanje
+    # Ažurirajte stanje
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Pošalji sljedećem agentu (pisac)
+    # Pošaljite sljedećem agentu (pisac)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -721,7 +713,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Agent za pisanje
+### 6. Agent pisac
 
 **Datoteka: `src/agents/writer/app.py`**
 
@@ -752,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Pozvati Azure OpenAI da napiše članak
+    # Pozovite Microsoft Foundry modele za pisanje članka
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -764,14 +756,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Ažurirati stanje
+    # Ažuriraj stanje
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Poslati uredniku
+    # Pošalji uredniku
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -839,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Pozvati Azure OpenAI za uređivanje
+    # Pozovi Microsoft Foundry modele za uređivanje
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -851,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Označiti zadatak kao dovršen
+    # Označi zadatak kao dovršen
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -888,10 +880,19 @@ if __name__ == '__main__':
 ### 8. Deploy i testiranje
 
 ```bash
-# Inicijaliziraj i postavi
+# Opcija A: Implementacija temeljena na predlošku
 azd init
 azd up
 
+# Opcija B: Implementacija manifesta agenta (zahtijeva proširenje)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> Pogledajte [AZD AI CLI naredbe](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za sve `azd ai` zastavice i opcije.
+
+```bash
 # Dohvati URL orkestratora
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -901,7 +902,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Očekivani izlaz:**
+**✅ Očekivani ispis:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -912,13 +913,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Provjeri napredak zadatka:**
+**Provjera napretka zadatka:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Očekivani izlaz (dovršeno):**
+**✅ Očekivani ispis (dovršeno):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -948,9 +949,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## Lekcija 2: Paralelni obrazac koordinacije
 
-### Implementacija: agregator istraživanja iz više izvora
+### Implementacija: Agregator istraživanja iz više izvora
 
-Izgradimo paralelni sustav koji prikuplja informacije iz više izvora istovremeno.
+Izgradimo paralelni sustav koji prikuplja informacije sa više izvora istovremeno.
 
 ### Paralelni orkestrator
 
@@ -989,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # Raspodjela: Pošaljite svim agentima istovremeno
+    # Fan-out: Pošalji svima agentima istovremeno
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1058,18 +1059,18 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Provjeri jesu li svi agenti dovršili (fan-in)
+    # Provjeri jesu li svi agenti dovršili (spajanje)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Spoji rezultate
+        # Kombiniraj rezultate
         aggregated = {
             'query': message_data['query'],
             'sources': task_results[task_id],
             'summary': generate_summary(task_results[task_id])
         }
         
-        # Označi dovršenim
+        # Označi kao dovršeno
         state_manager.complete_task(task_id, aggregated)
         
         # Očisti
@@ -1106,25 +1107,25 @@ if __name__ == '__main__':
 
 **Prednosti paralelnog obrasca:**
 - ⚡ **4x brže** (agenti rade istovremeno)
-- 🔄 **Otpornije na greške** (djelomični rezultati prihvatljivi)
-- 📈 **Skalabilno** (lako dodavanje više agenata)
+- 🔄 **Otpornost na greške** (djelomični rezultati prihvatljivi)
+- 📈 **Skalabilnost** (lako dodavanje agenata)
 
 ---
 
 ## Praktične vježbe
 
-### Vježba 1: Dodavanje rukovanja vremenskim ograničenjem ⭐⭐ (Srednje)
+### Vježba 1: Dodajte rukovanje timeoutom ⭐⭐ (Srednje)
 
-**Cilj**: Implementirati logiku vremenskog ograničenja kako agregator ne bi čekao zauvijek za spore agente.
+**Cilj**: Implementirati logiku timeouta kako agregator ne bi čekao beskonačno na spore agente.
 
 **Koraci**:
 
-1. **Dodajte praćenje timeout-a u agregator:**
+1. **Dodajte praćenje timeouta agregatoru:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # task_id -> expiration_time
+task_timeouts = {}  # task_id -> vrijeme_isteka
 
 def process_result(message_data):
     task_id = message_data['task_id']
@@ -1138,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # Provjeri je li dovršeno ili je isteklo
+    # Provjeri je li dovršeno ILI je vrijeme isteklo
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1158,15 +1159,15 @@ def process_result(message_data):
         del task_timeouts[task_id]
 ```
 
-2. **Testirajte s umjetnim zakašnjenjima:**
+2. **Testiranje sa umjetnim zakašnjenjima:**
 
 ```python
-# U jednom agentu dodajte kašnjenje kako biste simulirali sporu obradu
+# U jednom agentu dodajte kašnjenje za simulaciju sporog procesiranja
 import time
-time.sleep(35)  # Prelazi vremensko ograničenje od 30 sekundi
+time.sleep(35)  # Prekoračen vremenski limit od 30 sekundi
 ```
 
-3. **Implementirajte i provjerite:**
+3. **Deploy i provjera:**
 
 ```bash
 azd deploy aggregator
@@ -1176,22 +1177,22 @@ curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Provjerite rezultate nakon 30 sekundi
+# Provjeri rezultate nakon 30 sekundi
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Kriteriji uspjeha:**
-- ✅ Zadatak se dovršava nakon 30 sekundi čak i ako agenti nisu dovršeni
+- ✅ Zadatak se završava nakon 30 sekundi čak i ako neki agenti nisu završili
 - ✅ Odgovor označava djelomične rezultate (`"timed_out": true`)
-- ✅ Dostupni rezultati se vraćaju (3 od 4 agenta)
+- ✅ Vraćaju se dostupni rezultati (3 od 4 agenta)
 
 **Vrijeme**: 20-25 minuta
 
 ---
 
-### Vježba 2: Implementacija logike ponovnog pokušaja ⭐⭐⭐ (Napredno)
+### Vježba 2: Implementirajte logiku ponovnog pokušaja ⭐⭐⭐ (Napredno)
 
-**Cilj**: Automatski ponavljati neuspjele zadatke agenata prije odustajanja.
+**Cilj**: Automatski ponovo pokušati neuspjele zadatke agenata prije odustajanja.
 
 **Koraci**:
 
@@ -1206,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # id_poruke -> broj_pokušaja
+retry_counts: Dict[str, int] = {}  # message_id -> broj_pokušaja
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1226,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **Dodajte handler za ponovne pokušaje u agente:**
+2. **Dodajte rukovatelja ponavljanja agentima:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1234,10 +1235,10 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Obradi poruku
+        # Process the message
         process_func(message_data)
         
-        # Uspjeh - dovršeno
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
@@ -1246,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Ponovno pokušaj: odbaci i ponovno stavi u red s povećanim brojem pokušaja
+            # Retry: abandon and re-queue with incremented count
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # Pošalji natrag u isti red s odgodom
-            time.sleep(5 * (retry_count + 1))  # Eksponencijalno odgađanje
+            # Send back to same queue with delay
+            time.sleep(5 * (retry_count + 1))  # Exponential backoff
             send_with_retry(queue_name, message_data, RetryConfig())
             
-            receiver.complete_message(message)  # Ukloni original
+            receiver.complete_message(message)  # Remove original
         else:
-            # Prekoračen maksimalan broj pokušaja - premjesti u red mrtvih poruka
+            # Max retries exceeded - move to dead letter queue
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1266,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Nadzor reda mrtvih poruka:**
+3. **Nadzirajte dead letter queue:**
 
 ```python
 def monitor_dead_letters():
@@ -1285,22 +1286,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Kriteriji uspjeha:**
-- ✅ Neuspjeli zadaci se automatski pokušavaju ponovno (do 3 puta)
-- ✅ Eksponencijalni backoff između ponovnih pokušaja (5s, 10s, 15s)
-- ✅ Nakon maksimalnog broja pokušaja, poruke odlaze u red mrtvih poruka
-- ✅ Red mrtvih poruka se može nadzirati i ponovno reproducirati
+- ✅ Neuspjeli zadaci se automatski ponovo pokušavaju (do 3 puta)
+- ✅ Eksponencijalni backoff između pokušaja (5s, 10s, 15s)
+- ✅ Nakon maksimalnog broja pokušaja, poruke idu u dead letter queue
+- ✅ Dead letter queue može se nadzirati i ponovno reproducirati
 
 **Vrijeme**: 30-40 minuta
 
 ---
 
-### Vježba 3: Implementacija circuit-breakera ⭐⭐⭐ (Napredno)
+### Vježba 3: Implementirajte prekidač kola (Circuit Breaker) ⭐⭐⭐ (Napredno)
 
-**Cilj**: Sprečavanje kaskadnih neuspjeha zaustavljanjem zahtjeva prema neuspješnim agentima.
+**Cilj**: Spriječiti kaskadne greške zaustavljanjem zahtjeva prema neispravnim agentima.
 
 **Koraci**:
 
-1. **Kreirajte klasu circuit-breaker:**
+1. **Kreirajte klasu prekidača kola:**
 
 ```python
 from enum import Enum
@@ -1308,8 +1309,8 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # Normalan rad
-    OPEN = "open"          # U kvaru, odbaciti zahtjeve
-    HALF_OPEN = "half_open"  # Provjera oporavka
+    OPEN = "open"          # Neuspjeh, odbaci zahtjeve
+    HALF_OPEN = "half_open"  # Testiranje je li oporavljen
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1322,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Provjera je li istekao vremenski limit
+            # Provjeri je li vrijeme isteklo
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1351,7 +1352,7 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **Primijenite na pozive agenata:**
+2. **Primijenite na pozive agenta:**
 
 ```python
 # U orkestratoru
@@ -1370,16 +1371,16 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Nastavi s ostalim agentima
+        # Nastavi s drugim agentima
 ```
 
-3. **Testirajte circuit-breaker:**
+3. **Testirajte prekidač kola:**
 
 ```bash
-# Simuliraj ponovljene neuspjehe (zaustavi jednog agenta)
+# Simulirajte ponovljene kvarove (zaustavite jednog agenta)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
-# Pošalji više zahtjeva
+# Pošaljite više zahtjeva
 for i in {1..10}; do
   curl -X POST $ORCHESTRATOR_URL/research-parallel \
     -H "Content-Type: application/json" \
@@ -1387,24 +1388,24 @@ for i in {1..10}; do
   sleep 2
 done
 
-# Provjeri logove - trebao bi vidjeti da je circuit otvoren nakon 5 neuspjeha
-# Koristi Azure CLI za logove Container App-a:
+# Provjerite dnevnike - trebali biste vidjeti da je krug otvoren nakon 5 kvarova
+# Koristite Azure CLI za dnevnike Container App:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ Kriteriji uspjeha:**
-- ✅ Nakon 5 neuspjeha, krug se otvara (odbijaju se zahtjevi)
-- ✅ Nakon 60 sekundi krug postaje poluotvoren (testira se oporavak)
+- ✅ Nakon 5 neuspjeha prekidač se otvara (odbijaju se zahtjevi)
+- ✅ Nakon 60 sekundi prekidač prelazi u polu-otvoreno stanje (test oporavka)
 - ✅ Ostali agenti nastavljaju normalno raditi
-- ✅ Krug se automatski zatvara kada se agent oporavi
+- ✅ Prekidač se automatski zatvara kad se agent oporavi
 
 **Vrijeme**: 40-50 minuta
 
 ---
 
-## Praćenje i otklanjanje pogrešaka
+## Nadzor i otklanjanje pogrešaka
 
-### Distribuirano praćenje s Application Insights
+### Distribuirano praćenje uz Application Insights
 
 **Datoteka: `src/shared/tracing.py`**
 
@@ -1417,18 +1418,18 @@ from opencensus.trace.samplers import AlwaysOnSampler
 import logging
 import os
 
-# Konfiguriranje praćenja
+# Konfigurirajte praćenje
 config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Stvaranje tragača
+# Kreirajte tragač
 tracer = Tracer(
     exporter=AzureExporter(connection_string=connection_string),
     sampler=AlwaysOnSampler()
 )
 
-# Konfiguriranje zapisivanja dnevnika
+# Konfigurirajte zapisivanje logova
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1452,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Upiti za Application Insights
 
-**Pratite tijekove rada više agenata:**
+**Praćenje radnih tokova više agenata:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1493,22 +1494,22 @@ exceptions
 
 ## Analiza troškova
 
-### Troškovi sustava s više agenata (mjesečne procjene)
+### Troškovi sustava više agenata (mjesečne procjene)
 
 | Komponenta | Konfiguracija | Trošak |
-|-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 agenta** | 4 Container Apps (0.5 vCPU, 1GB svaki) | $60-120 |
-| **Service Bus** | Standard tier, 10M poruka | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operacija | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokena | $100-300 |
-| **Ukupno** | | **$240-565/mjesec** |
+|------------|---------------|--------|
+| **Orkestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 Agenta** | 4 Container Apps (0.5 vCPU, 1GB svaki) | $60-120 |
+| **Service Bus** | Standardna razina, 10M poruka | $10-20 |
+| **Cosmos DB** | Serverless, 5GB prostora, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB prostora, 100K operacija | $5-10 |
+| **Application Insights** | 5GB unosa | $10-15 |
+| **Microsoft Foundry modeli** | gpt-4.1, 10M tokena | $100-300 |
+| **Ukupno** | | **$240-565/mjesečno** |
 
 ### Strategije optimizacije troškova
 
-1. **Koristite serverless gdje je moguće:**
+1. **Koristite serverless gdje god je moguće:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1517,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **Skalirajte agente na nulu kada su neaktivni:**
+2. **Smanjite agente na nulu kad su neaktivni:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1525,9 +1526,9 @@ exceptions
    }
    ```
 
-3. **Koristite batchiranje za Service Bus:**
+3. **Koristite grupiranje poruka za Service Bus:**
    ```python
-   # Šaljite poruke u paketima (jeftinije)
+   # Pošaljite poruke u serijama (jeftinije)
    sender.send_messages([message1, message2, message3])
    ```
 
@@ -1542,40 +1543,40 @@ exceptions
 
 ## Najbolje prakse
 
-### ✅ UČINITE:
+### ✅ ČINITE:
 
 1. **Koristite idempotentne operacije**
    ```python
-   # Agent može sigurno obraditi istu poruku više puta
+   # Agent može sigurno obrađivati istu poruku više puta
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
            return
-       # Obrađujem zadatak...
+       # Obrada zadatka...
    ```
 
-2. **Implementirajte sveobuhvatno logiranje**
+2. **Implementirajte opsežno vođenje zapisa**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Koristite korelacijske ID-e**
+3. **Koristite korelacijske ID-eve**
    ```python
-   # Proslijedi task_id kroz cijeli tijek rada
+   # Proslijedite task_id kroz cijeli tijek rada
    message_data = {
        'task_id': task_id,  # ID korelacije
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Postavite TTL poruka (time-to-live)**
+4. **Postavite TTL (vrijeme života) poruka**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Pratite redove mrtvih poruka**
+5. **Nadzirajte dead letter queue**
    ```python
    # Redovito praćenje neuspjelih poruka
    monitor_dead_letters()
@@ -1583,59 +1584,59 @@ exceptions
 
 ### ❌ NEMOJTE:
 
-1. **Ne stvarajte kružne ovisnosti**
+1. **Nemojte stvarati kružne ovisnosti**
    ```python
    # ❌ LOŠE: Agent A → Agent B → Agent A (beskonačna petlja)
    # ✅ DOBRO: Definirajte jasan usmjereni aciklični graf (DAG)
    ```
 
-2. **Ne blokirajte niti agenata**
+2. **Nemojte blokirati niti agenata**
    ```python
    # ❌ LOŠE: Sinkrono čekanje
    while not task_complete:
        time.sleep(1)
    
-   # ✅ DOBRO: Koristite povratne pozive iz redova poruka
+   # ✅ DOBRO: Koristite povratne pozive redova poruka
    ```
 
-3. **Ne ignorirajte djelomične neuspjehe**
+3. **Nemojte ignorirati djelomične neuspjehe**
    ```python
-   # ❌ LOŠE: Neuspjeh cijelog tijeka rada ako jedan agent zakaže
-   # ✅ DOBRO: Vratiti djelomične rezultate s indikatorima pogreške
+   # ❌ LOŠE: Ne uspije cijeli radni tijek ako jedan agent ne uspije
+   # ✅ DOBRO: Vrati djelomične rezultate s pokazateljima pogrešaka
    ```
 
-4. **Ne koristite beskonačne ponovne pokušaje**
+4. **Ne koristite beskonačne pokušaje ponovnog slanja**
    ```python
-   # ❌ LOŠE: ponovno pokušavaj zauvijek
-   # ✅ DOBRO: max_retries = 3, zatim u dead-letter
+   # ❌ LOŠE: pokušavaj ponovno zauvijek
+   # ✅ DOBRO: max_retries = 3, zatim mrtvo slovo
    ```
 
 ---
 
 ## Vodič za rješavanje problema
 
-### Problem: Poruke zaglavljene u redu
+### Problem: Poruke zapete u redu
 
 **Simptomi:**
-- Poruke se nakupljaju u redu
-- Agenti ne obrađuju
-- Status zadatka zapinje na "pending"
+- Poruke se gomilaju u redu
+- Agent ne obrađuju
+- Status zadatka zapne na "pending"
 
 **Dijagnoza:**
 ```bash
-# Provjeri dubinu reda
+# Provjerite dubinu reda
 az servicebus queue show \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Provjeri zapise agenta pomoću Azure CLI
+# Provjerite dnevnike agenta pomoću Azure CLI-ja
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Rješenja:**
 
-1. **Povećajte replike agenata:**
+1. **Povećajte broj replika agenta:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1643,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Provjerite red mrtvih poruka:**
+2. **Provjerite red mrtvih pisama (dead letter queue):**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1653,20 +1654,20 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problem: Istek vremena zadatka / zadatak se nikad ne dovrši
+### Problem: Zadatak ističe rok/nikada ne završava
 
 **Simptomi:**
 - Status zadatka ostaje "in_progress"
-- Neki agenti dovrše, drugi ne
-- Nema poruka o pogrešci
+- Neki agenti završe, drugi ne
+- Nema poruka o grešci
 
 **Dijagnoza:**
 ```bash
-# Provjerite stanje zadatka
+# Provjeri stanje zadatka
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Provjerite Application Insights
-# Pokrenite upit: traces | where customDimensions.task_id == "..."
+# Provjeri Application Insights
+# Pokreni upit: traces | where customDimensions.task_id == "..."
 ```
 
 **Rješenja:**
@@ -1675,14 +1676,14 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 2. **Provjerite neuspjehe agenata koristeći Azure Monitor:**
    ```bash
-   # Pregledajte zapisnike pomoću azd monitor
+   # Pogledajte zapise putem azd monitor
    azd monitor --logs
    
-   # Ili upotrijebite Azure CLI za provjeru zapisnika određene aplikacije u kontejneru
+   # Ili koristite Azure CLI za provjeru zapisa određenih kontejnerskih aplikacija
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Provjerite rade li svi agenti:**
+3. **Potvrdite da svi agenti rade:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1697,7 +1698,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [Dizajnerski obrasci za višestruke agente](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
 ### Sljedeći koraci u ovom tečaju
 - ← Prethodno: [Planiranje kapaciteta](capacity-planning.md)
@@ -1706,35 +1707,35 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Povezani primjeri
 - [Primjer mikroservisa](../../../../examples/microservices) - Obrasci komunikacije servisa
-- [Primjer Azure OpenAI](../../../../examples/azure-openai-chat) - Integracija AI
+- [Primjer Microsoft Foundry modela](../../../../examples/azure-openai-chat) - AI integracija
 
 ---
 
 ## Sažetak
 
 **Naučili ste:**
-- ✅ Pet obrazaca koordinacije (sekvencijalni, paralelni, hijerarhijski, događajno vođeni, konsenzus)
-- ✅ Arhitektura s više agenata na Azureu (Service Bus, Cosmos DB, Container Apps)
-- ✅ Upravljanje stanjem među distribuiranim agentima
-- ✅ Rukovanje timeoutima, ponovnim pokušajima i circuit breaker-ima
-- ✅ Praćenje i otklanjanje pogrešaka u distribuiranim sustavima
+- ✅ Pet obrazaca koordinacije (sekvencijalni, paralelni, hijerarhijski, vođeni događajima, konsenzus)
+- ✅ Višestruka arhitektura agenata na Azureu (Service Bus, Cosmos DB, Container Apps)
+- ✅ Upravljanje stanjem preko distribuiranih agenata
+- ✅ Rukovanje timeout-ovima, ponovnim pokušajima i prekidačima struja
+- ✅ Praćenje i ispravljanje grešaka u distribuiranim sustavima
 - ✅ Strategije optimizacije troškova
 
-**Ključni zaključci:**
-1. **Odaberite pravi obrazac** - Sekvencijalni za uređene tokove rada, paralelni za brzinu, događajno vođeni za fleksibilnost
+**Ključne lekcije:**
+1. **Odaberite pravi obrazac** - Sekvencijalni za uređene tijekove rada, paralelni za brzinu, vođeni događajima za fleksibilnost
 2. **Pažljivo upravljajte stanjem** - Koristite Cosmos DB ili slično za zajedničko stanje
-3. **Rukujte pogreškama na prihvatljiv način** - Timeouti, ponovni pokušaji, circuit breakeri, redovi mrtvih poruka
-4. **Nadzor svega** - Distribuirano praćenje je ključno za otklanjanje pogrešaka
-5. **Optimizirajte troškove** - Skalirajte na nulu, koristite serverless, implementirajte caching
+3. **Graceful rješavajte pogreške** - Timeout-i, ponovni pokušaji, prekidači struja, redovi mrtvih pisama
+4. **Sve pratite** - Distribuirano praćenje je ključno za otklanjanje grešaka
+5. **Optimizirajte troškove** - Skalirajte na nulu, koristite serverless, implementirajte keširanje
 
 **Sljedeći koraci:**
-1. Dovršite praktične vježbe
-2. Izgradite sustav s više agenata za vaš slučaj upotrebe
-3. Proučite [Odabir SKU-a](sku-selection.md) kako biste optimizirali performanse i troškove
+1. Završi praktične vježbe
+2. Izgradi sustav s višestrukim agentima za svoj slučaj upotrebe
+3. Prouči [Odabir SKU-a](sku-selection.md) za optimizaciju performansi i troškova
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Odricanje odgovornosti:
-Ovaj dokument preveden je korištenjem AI usluge za prevođenje Co-op Translator (https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba se smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+**Odricanje od odgovornosti**:  
+Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

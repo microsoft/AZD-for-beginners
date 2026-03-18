@@ -1,136 +1,136 @@
-# Rješenje za korisničku podršku s više agenata - Scenarij maloprodaje
+# Višeagentno rješenje za korisničku podršku - scenario trgovca
 
-**Poglavlje 5: Višeagentna AI rješenja**
-- **📚 Početna stranica tečaja**: [AZD Za početnike](../README.md)
-- **📖 Trenutno poglavlje**: [Poglavlje 5: Višeagentna AI rješenja](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Preduvjeti**: [Poglavlje 2: AI-First razvoj](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Sljedeće poglavlje**: [Poglavlje 6: Validacija prije implementacije](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM predlošci**: [Paket za implementaciju](retail-multiagent-arm-template/README.md)
+**Poglavlje 5: Višeagentna AI rješenja**  
+- **📚 Početna stranica tečaja**: [AZD za početnike](../README.md)  
+- **📖 Trenutno poglavlje**: [Poglavlje 5: Višeagentna AI rješenja](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **⬅️ Preduvjeti**: [Poglavlje 2: Razvoj s AI u prvi plan](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
+- **➡️ Sljedeće poglavlje**: [Poglavlje 6: Validacija prije implementacije](../docs/pre-deployment/capacity-planning.md)  
+- **🚀 ARM predlošci**: [Paket za implementaciju](retail-multiagent-arm-template/README.md)  
 
-> **⚠️ VODIČ ZA ARHITEKTURU - NIJE RADNA IMPLEMENTACIJA**  
-> Ovaj dokument pruža **sveobuhvatan nacrt arhitekture** za izgradnju sustava s više agenata.  
-> **Što postoji:** ARM predložak za implementaciju infrastrukture (Azure OpenAI, AI Search, Container Apps, itd.)  
-> **Što morate izgraditi:** Kôd agenata, logiku usmjeravanja, frontend UI, podatkovne pipelineove (procjena 80-120 sati)  
+> **⚠️ VODIČ ZA ARHITEKTURU - NIJE FUNKCIONALNA IMPLEMENTACIJA**  
+> Ovaj dokument pruža **detaljnu arhitektonsku shemu** za izgradnju višeagentnog sustava.  
+> **Što postoji:** ARM predložak za implementaciju infrastrukture (Microsoft Foundry modeli, AI Search, Container Apps itd.)  
+> **Što morate izgraditi:** Kod agenta, logika usmjeravanja, frontend sučelje, podatkovni tokovi (procijenjeno 80-120 sati)  
 >  
-> **Koristite ovo kao:**
-> - ✅ Referencu arhitekture za vlastiti projekt s više agenata
-> - ✅ Vodič za učenje obrazaca dizajna više agenata
-> - ✅ Predložak infrastrukture za implementaciju Azure resursa
-> - ❌ NE kao spremnu za pokretanje aplikaciju (zahtijeva znatan razvoj)
+> **Koristite ovo kao:**  
+> - ✅ Referencu arhitekture za vlastiti višeagentni projekt  
+> - ✅ Vodič za učenje dizajnerskih obrazaca za više agenata  
+> - ✅ Predložak infrastrukture za implementaciju Azure resursa  
+> - ❌ NE spremnu aplikaciju za pokretanje (zahtijeva značajan razvoj)  
 
 ## Pregled
 
-**Cilj učenja:** Razumjeti arhitekturu, odluke o dizajnu i pristup implementaciji za izgradnju proizvodnog chatbot sustava za korisničku podršku s više agenata za maloprodaju s naprednim AI mogućnostima uključujući upravljanje inventarom, obradu dokumenata i inteligentne korisničke interakcije.
+**Cilj učenja:** Razumjeti arhitekturu, dizajnerske odluke i pristup implementaciji za izgradnju proizvodnog višeagentnog chatbot sustava za korisničku podršku trgovca sa sofisticiranim AI mogućnostima uključujući upravljanje zalihama, obradu dokumenata i inteligentnu korisničku interakciju.
 
-**Vrijeme za dovršetak:** Čitanje + Razumijevanje (2-3 sata) | Izrada kompletne implementacije (80-120 sati)
+**Vrijeme za dovršetak:** Čitanje + razumijevanje (2-3 sata) | Izgradnja kompletne implementacije (80-120 sati)
 
 **Što ćete naučiti:**
-- Obrasci arhitekture i principi dizajna višestrukih agenata
-- Strategije implementacije Azure OpenAI u više regija
-- Integracija AI Search s RAG (Retrieval-Augmented Generation)
-- Okviri za evaluaciju agenata i sigurnosno testiranje
-- Razmatranja za proizvodnu implementaciju i optimizaciju troškova
+- Obrasci arhitekture za više agenata i dizajnerska načela  
+- Strategije implementacije Microsoft Foundry modela u više regija  
+- Integracija AI Search s RAG (Retrieval-Augmented Generation)  
+- Okviri za procjenu agenata i sigurnosna testiranja  
+- Razmatranja za produkcijsku implementaciju i optimizaciju troškova  
 
 ## Ciljevi arhitekture
 
-**Obrazovni fokus:** Ova arhitektura demonstrira obrasce za poduzeća za sustave s više agenata.
+**Obrazovni fokus:** Ova arhitektura demonstrira enterprise obrasce za višeagentne sustave.
 
-### Sustavni zahtjevi (za vašu implementaciju)
+### Zahtjevi sustava (za vašu implementaciju)
 
 Proizvodno rješenje za korisničku podršku zahtijeva:
-- **Više specijaliziranih agenata** za različite potrebe korisnika (Korisnička služba + Upravljanje inventarom)
-- **Implementacija više modela** s odgovarajućim planiranjem kapaciteta (GPT-4o, GPT-4o-mini, embeddings po regijama)
-- **Dinamička integracija podataka** s AI Search i prijenosom datoteka (vektorsko pretraživanje + obrada dokumenata)
-- **Sveobuhvatno praćenje** i mogućnosti evaluacije (Application Insights + prilagođene metrike)
-- **Sigurnost na razini produkcije** s red team validacijom (skeniranje ranjivosti + evaluacija agenata)
+- **Više specijaliziranih agenata** za različite potrebe kupaca (korisnička služba + upravljanje zalihama)  
+- **Višemodelnu implementaciju** s odgovarajućim planiranjem kapaciteta (gpt-4.1, gpt-4.1-mini, embeddings u više regija)  
+- **Dinamičku integraciju podataka** s AI Search i učitavanjem datoteka (vektorsko pretraživanje + obrada dokumenata)  
+- **Sveobuhvatno nadziranje** i sposobnosti evaluacije (Application Insights + prilagođene metrike)  
+- **Sigurnost proizvodne razine** s red team testiranjem (skeniranje ranjivosti + evaluacija agenata)  
 
 ### Što ovaj vodič pruža
 
-✅ **Obrasci arhitekture** - Dokazan dizajn za skalabilne sustave s više agenata  
-✅ **Infrastrukturni predlošci** - ARM predlošci za implementaciju svih Azure servisa  
+✅ **Obrasci arhitekture** - Dokazani dizajn za skalabilne višeagentne sustave  
+✅ **Predlošci infrastrukture** - ARM predlošci za implementaciju svih Azure usluga  
 ✅ **Primjeri koda** - Referentne implementacije ključnih komponenti  
 ✅ **Upute za konfiguraciju** - Korak-po-korak upute za postavljanje  
-✅ **Najbolje prakse** - Sigurnost, praćenje, strategije optimizacije troškova  
+✅ **Najbolje prakse** - Sigurnosne, nadzorne, i strategije optimizacije troškova  
 
-❌ **Nije uključeno** - Potpuna radna aplikacija (zahtijeva razvoj)
+❌ **Nije uključeno** - Potpuna funkcionalna aplikacija (zahtijeva razvoj)  
 
-## 🗺️ Put implementacije
+## 🗺️ Plan implementacije
 
-### Faza 1: Učenje arhitekture (2-3 sata) - POČNI OVDJE
+### Faza 1: Proučavanje arhitekture (2-3 sata) - Započni ovdje
 
 **Cilj:** Razumjeti dizajn sustava i interakcije komponenti
 
-- [ ] Pročitajte ovaj kompletan dokument
-- [ ] Pregledajte dijagram arhitekture i odnose komponenti
-- [ ] Razumite obrasce višestrukih agenata i odluke o dizajnu
-- [ ] Proučite primjere koda za alate agenata i usmjeravanje
-- [ ] Pregledajte procjene troškova i upute za planiranje kapaciteta
+- [ ] Pročitati ovaj dokument u cijelosti  
+- [ ] Pregledati dijagram arhitekture i odnose komponenti  
+- [ ] Razumjeti obrasce za više agenata i dizajnerske odluke  
+- [ ] Proučiti primjere koda za alate agenata i usmjeravanje  
+- [ ] Pregledati procjene troškova i smjernice za planiranje kapaciteta  
 
-**Ishod:** Jasno razumijevanje što trebate izgraditi
+**Ishod:** Jasno razumijevanje što trebate izgraditi  
 
 ### Faza 2: Implementacija infrastrukture (30-45 minuta)
 
-**Cilj:** Osigurati Azure resurse korištenjem ARM predloška
+**Cilj:** Isporučiti Azure resurse koristeći ARM predložak  
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
+  
+**Što se implementira:**  
+- ✅ Microsoft Foundry modeli (3 regije: gpt-4.1, gpt-4.1-mini, embeddings)  
+- ✅ AI Search servis (prazan, treba konfiguraciju indeksa)  
+- ✅ Okruženje Container Apps (privremene slike)  
+- ✅ Računi za pohranu, Cosmos DB, Key Vault  
+- ✅ Praćenje s Application Insights  
 
-**Što se implementira:**
-- ✅ Azure OpenAI (3 regije: GPT-4o, GPT-4o-mini, embeddings)
-- ✅ AI Search servis (prazan, treba konfiguraciju indeksa)
-- ✅ Okruženje Container Apps (placeholder slike)
-- ✅ Storage računi, Cosmos DB, Key Vault
-- ✅ Praćenje putem Application Insights
-
-**Što nedostaje:**
-- ❌ Kôd implementacije agenata
-- ❌ Logika usmjeravanja
-- ❌ Frontend UI
-- ❌ Shema indeksa za pretraživanje
-- ❌ Podatkovni pipelineovi
+**Što nedostaje:**  
+- ❌ Kod implementacije agenata  
+- ❌ Logika usmjeravanja  
+- ❌ Frontend korisničko sučelje  
+- ❌ Shema indeksa pretraživanja  
+- ❌ Podatkovni tokovi  
 
 ### Faza 3: Izgradnja aplikacije (80-120 sati)
 
-**Cilj:** Implementirati sustav s više agenata temeljen na ovoj arhitekturi
+**Cilj:** Implementirati sustav više agenata temeljen na ovoj arhitekturi
 
-1. **Implementacija agenata** (30-40 sati)
-   - Osnovna klasa i sučelja agenta
-   - Agent korisničke službe s GPT-4o
-   - Agent za inventar s GPT-4o-mini
-   - Integracije alata (AI Search, Bing, obrada datoteka)
+1. **Implementacija agenata** (30-40 sati)  
+   - Osnovna klasa agenta i sučelja  
+   - Agent korisničke službe s gpt-4.1  
+   - Agent za upravljanje zalihama s gpt-4.1-mini  
+   - Integracije alata (AI Search, Bing, obrada datoteka)  
 
-2. **Usluga usmjeravanja** (12-16 sati)
-   - Logika klasifikacije zahtjeva
-   - Odabir i orkestracija agenata
-   - Backend FastAPI/Express
+2. **Servis usmjeravanja** (12-16 sati)  
+   - Logika klasifikacije zahtjeva  
+   - Odabir i orkestracija agenata  
+   - Backend na FastAPI/Express  
 
-3. **Frontend razvoj** (20-30 sati)
-   - UI za chat sučelje
-   - Funkcionalnost prijenosa datoteka
-   - Prikaz odgovora
+3. **Frontend razvoj** (20-30 sati)  
+   - Sučelje za chat  
+   - Funkcionalnost učitavanja datoteka  
+   - Prikaz odgovora  
 
-4. **Podatkovni pipeline** (8-12 sati)
-   - Kreiranje AI Search indeksa
-   - Obrada dokumenata s Document Intelligence
-   - Generiranje i indeksiranje embeddingsa
+4. **Podatkovni tok** (8-12 sati)  
+   - Kreiranje AI Search indeksa  
+   - Obrada dokumenata s Document Intelligence  
+   - Generiranje i indeksiranje embeddinga  
 
-5. **Praćenje i evaluacija** (10-15 sati)
-   - Implementacija prilagođene telemetrije
-   - Okvir za evaluaciju agenata
-   - Sigurnosni skener red tima
+5. **Nadzor i evaluacija** (10-15 sati)  
+   - Implementacija prilagođenog telemetrijskog nadzora  
+   - Okvir za evaluaciju agenata  
+   - Sigurnosni skener red team-a  
 
 ### Faza 4: Implementacija i testiranje (8-12 sati)
 
-- Izrada Docker slika za sve servise
-- Gurnuti u Azure Container Registry
-- Ažuriranje Container Apps s pravim slikama
-- Konfiguracija varijabli okoline i tajni
-- Pokretanje evaluacijskog testnog seta
-- Provođenje sigurnosnog skeniranja
+- Izgraditi Docker slike za sve servise  
+- Upload u Azure Container Registry  
+- Ažurirati Container Apps s pravim slikama  
+- Konfigurirati varijable okoline i tajne  
+- Pokrenuti testnu evaluaciju  
+- Provoditi sigurnosno skeniranje  
 
-**Ukupni procijenjeni napor:** 80-120 sati za iskusne developere
+**Procijenjeno ukupno vrijeme:** 80-120 sati za iskusne developere  
 
 ## Arhitektura rješenja
 
@@ -138,37 +138,37 @@ cd retail-multiagent-arm-template
 
 ```mermaid
 graph TB
-    User[👤 Korisnik] --> LB[Azure Front Door]
-    LB --> WebApp[Web Supstranica<br/>Container App]
+    User[👤 Kupac] --> LB[Azure Front Door]
+    LB --> WebApp[Web Prednji Plan<br/>Container App]
     
     WebApp --> Router[Agent Router<br/>Container App]
-    Router --> CustomerAgent[Agent za korisnike<br/>Korisnička služba]
-    Router --> InvAgent[Agent zaliha<br/>Upravljanje zalihama]
+    Router --> CustomerAgent[Agent Kupca<br/>Korisnička Podrška]
+    Router --> InvAgent[Agent Zaliha<br/>Upravljanje Zaliha]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Microsoft Foundry Models<br/>gpt-4.1<br/>Istočni SAD 2]
+    InvAgent --> OpenAI2[Microsoft Foundry Models<br/>gpt-4.1-mini<br/>Zapadni SAD 2]
     
-    CustomerAgent --> AISearch[Azure AI Pretraživanje<br/>Katalog proizvoda]
+    CustomerAgent --> AISearch[Azure AI Pretraživanje<br/>Katalog Proizvoda]
     CustomerAgent --> BingSearch[Bing Pretraživanje API<br/>Informacije u stvarnom vremenu]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Pohrana<br/>Dokumenti i datoteke]
-    Storage --> DocIntel[Dokumentna Inteligencija<br/>Obrada sadržaja]
+    AISearch --> Storage[Azure Pohrana<br/>Dokumenti i Datoteke]
+    Storage --> DocIntel[Dokument Inteligencija<br/>Obrada Sadržaja]
     
-    OpenAI1 --> Embeddings[Tekstualni Umetci<br/>ada-002<br/>Francuska Središnja]
+    OpenAI1 --> Embeddings[Tekstualni Umetci<br/>ada-002<br/>Francuska Central]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Nadzor]
+    Router --> AppInsights[Aplikacijska Analitika<br/>Nadzor]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Ocjenjivač<br/>Švicarska Sjever] --> Evaluation[Okvir za evaluaciju]
-    RedTeam[Red Team skener] --> SecurityReports[Izvješća o sigurnosti]
+    GraderModel[gpt-4.1 Ocjenjivač<br/>Švicarska Sjever] --> Evaluation[Okvir za Procjenu]
+    RedTeam[Red Team Skener] --> SecurityReports[Izvještaji o Sigurnosti]
     
-    subgraph "Sloj podataka"
+    subgraph "Sloj Podataka"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Povijest chata]
+        CosmosDB[Cosmos DB<br/>Povijest Razgovora]
     end
     
     subgraph "AI Usluge"
@@ -180,10 +180,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Nadzor i sigurnost"
+    subgraph "Nadzor i Sigurnost"
         AppInsights
-        LogAnalytics[Radni prostor za Log Analytics]
-        KeyVault[Azure Key Vault<br/>Lozinke i konfiguracija]
+        LogAnalytics[Prostor za Log Analitiku]
+        KeyVault[Azure Key Vault<br/>Tajne i Konfiguracije]
         RedTeam
         Evaluation
     end
@@ -196,27 +196,27 @@ graph TB
     style OpenAI2 fill:#e3f2fd
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
-```
+```  
 ### Pregled komponenti
 
-| Komponenta       | Namjena                        | Tehnologija     | Regija          |
-|------------------|-------------------------------|-----------------|-----------------|
-| **Web Frontend**  | Korisničko sučelje interakcije| Container Apps  | Primarna regija  |
-| **Agent Router**  | Usmjerava zahtjeve pravim agentu | Container Apps  | Primarna regija  |
-| **Customer Agent**| Obrada upita korisničke službe | Container Apps + GPT-4o | Primarna regija  |
-| **Inventory Agent** | Upravljanje zalihama i isporukom | Container Apps + GPT-4o-mini | Primarna regija  |
-| **Azure OpenAI**  | Inferenzni LLM za agente        | Cognitive Services | Više regija      |
-| **AI Search**     | Vektorsko pretraživanje i RAG   | AI Search Service | Primarna regija  |
-| **Storage Account** | Prijenos datoteka i dokumenti  | Blob Storage    | Primarna regija  |
-| **Application Insights** | Praćenje i telemetrija       | Monitor         | Primarna regija  |
-| **Grader Model**  | Sustav evaluacije agenata        | Azure OpenAI    | Sekundarna regija|
+| Komponenta          | Svrha                                 | Tehnologija         | Regija          |
+|---------------------|-------------------------------------|---------------------|-----------------|
+| **Web frontend**     | Korisničko sučelje za interakciju   | Container Apps      | Primarna regija  |
+| **Agent Router**     | Usmjerava zahtjeve pravom agentu    | Container Apps      | Primarna regija  |
+| **Agent korisnika**  | Rješava upite korisničke službe     | Container Apps + gpt-4.1 | Primarna regija  |
+| **Agent zaliha**    | Upravlja zalihama i isporukom       | Container Apps + gpt-4.1-mini | Primarna regija  |
+| **Microsoft Foundry modeli** | LLM inferencija za agente          | Cognitive Services  | Višeregionalno   |
+| **AI Search**        | Vektorsko pretraživanje i RAG       | AI Search Service   | Primarna regija  |
+| **Račun za pohranu** | Učitavanja datoteka i dokumenata    | Blob Storage        | Primarna regija  |
+| **Application Insights** | Praćenje i telemetrija              | Monitor             | Primarna regija  |
+| **Grader model**     | Sustav za evaluaciju agenata         | Microsoft Foundry Models | Sekundarna regija |
 
 ## 📁 Struktura projekta
 
 > **📍 Legenda statusa:**  
 > ✅ = Postoji u repozitoriju  
 > 📝 = Referentna implementacija (primjer koda u ovom dokumentu)  
-> 🔨 = Morate kreirati ovo
+> 🔨 = Trebate stvoriti ovo  
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -360,80 +360,80 @@ retail-multiagent-solution/              🔨 Your project directory
         ├── security-scan.yml           # Security scanning
         └── performance-test.yml        # Performance testing
 ```
-
+  
 ---
 
 ## 🚀 Brzi početak: Što možete odmah napraviti
 
-### Opcija 1: Implementacija infrastrukture (30 minuta)
+### Opcija 1: Samo implementirajte infrastrukturu (30 minuta)
 
-**Što dobivate:** Svi Azure servisi osigurani i spremni za razvoj
+**Što dobivate:** Sve Azure usluge implementirane i spremne za razvoj
 
 ```bash
-# Kloniraj spremište
+# Kloniraj repozitorij
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# Postavi infrastrukturu
+# Implementiraj infrastrukturu
 ./deploy.sh -g myResourceGroup -m standard
 
 # Provjeri implementaciju
 az resource list --resource-group myResourceGroup --output table
 ```
+  
+**Očekivani ishod:**  
+- ✅ Microsoft Foundry modeli implementirani (3 regije)  
+- ✅ AI Search servis kreiran (prazan)  
+- ✅ Okruženje Container Apps spremno  
+- ✅ Konfigurirani Storage, Cosmos DB, Key Vault  
+- ❌ Još nema funkcionalnih agenata (samo infrastruktura)  
 
-**Očekivani ishod:**
-- ✅ Azure OpenAI servisi implementirani (3 regije)
-- ✅ AI Search servis kreiran (prazan)
-- ✅ Okruženje Container Apps spremno
-- ✅ Storage, Cosmos DB, Key Vault konfigurirani
-- ❌ Nema radnih agenata (samo infrastruktura)
+### Opcija 2: Proučite arhitekturu (2-3 sata)
 
-### Opcija 2: Učenje arhitekture (2-3 sata)
+**Što dobivate:** Duboko razumijevanje obrazaca za više agenata  
 
-**Što dobivate:** Duboko razumijevanje obrazaca za više agenata
+1. Pročitajte cijeli ovaj dokument  
+2. Proučite primjere koda za svaku komponentu  
+3. Razumite dizajnerske odluke i kompromise  
+4. Proučite strategije optimizacije troškova  
+5. Planirajte svoj pristup implementaciji  
 
-1. Pročitajte ovaj kompletan dokument
-2. Pregledajte primjere koda za svaku komponentu
-3. Razumite odluke o dizajnu i kompromise
-4. Naučite strategije optimizacije troškova
-5. Planirajte pristup implementaciji
+**Očekivani ishod:**  
+- ✅ Jasan mentalni model arhitekture sustava  
+- ✅ Razumijevanje potrebnih komponenti  
+- ✅ Realistične procjene napora  
+- ✅ Plan implementacije  
 
-**Očekivani ishod:**
-- ✅ Jasan mentalni model arhitekture sustava
-- ✅ Razumijevanje potrebnih komponenti
-- ✅ Realistične procjene napora
-- ✅ Plan implementacije
+### Opcija 3: Izgradite kompletan sustav (80-120 sati)
 
-### Opcija 3: Izradite kompletan sustav (80-120 sati)
+**Što dobivate:** Proizvodno spremno višeagentno rješenje  
 
-**Što dobivate:** Proizvodno spremno rješenje s više agenata
+1. **Faza 1:** Implementacija infrastrukture (već gore navedeno)  
+2. **Faza 2:** Implementacija agenata prema primjerima (30-40 sati)  
+3. **Faza 3:** Izgradnja servisa za usmjeravanje (12-16 sati)  
+4. **Faza 4:** Izrada frontend sučelja (20-30 sati)  
+5. **Faza 5:** Konfiguracija podatkovnih tokova (8-12 sati)  
+6. **Faza 6:** Dodavanje nadzora i evaluacije (10-15 sati)  
 
-1. **Faza 1:** Implementacija infrastrukture (kao gore)
-2. **Faza 2:** Implementacija agenata prema primjerima koda (30-40 sati)
-3. **Faza 3:** Izrada usluge usmjeravanja (12-16 sati)
-4. **Faza 4:** Izrada frontend UI (20-30 sati)
-5. **Faza 5:** Konfiguracija podatkovnih pipelineova (8-12 sati)
-6. **Faza 6:** Dodavanje praćenja i evaluacije (10-15 sati)
-
-**Očekivani ishod:**
-- ✅ Potpuno funkcionalan sustav s više agenata
-- ✅ Praćenje na produkcijskoj razini
-- ✅ Validacija sigurnosti
-- ✅ Optimizirana implementacija troškova
+**Očekivani ishod:**  
+- ✅ Potpuno funkcionalan višeagentni sustav  
+- ✅ Praćenje proizvodne razine  
+- ✅ Validacija sigurnosti  
+- ✅ Optimizirana implementacija po troškovima  
 
 ---
 
 ## 📚 Referenca arhitekture i vodič za implementaciju
 
-Sljedeći dijelovi pružaju detaljne obrasce arhitekture, primjere konfiguracije i reference koda za vođenje vaše implementacije.
+Sljedeći dijelovi pružaju detaljne obrasce arhitekture, primjere konfiguracije i referentni kod za vođenje vaše implementacije.
 
 ## Početni zahtjevi konfiguracije
 
 ### 1. Više agenata i konfiguracija
 
-**Cilj**: Implementirati 2 specijalizirana agenta - "Customer Agent" (korisnička služba) i "Inventory" (upravljanje zalihama)
+**Cilj:** Implementirati 2 specijalizirana agenta - "Agent korisnika" (korisnička služba) i "Agent za zalihe" (upravljanje zalihama)  
 
-> **📝 Napomena:** Sljedeće azure.yaml i Bicep konfiguracije su **referentni primjeri** koji pokazuju kako strukturirati implementacije s više agenata. Morat ćete kreirati ove datoteke i odgovarajuće implementacije agenata.
+> **📝 Napomena:** Sljedeće konfiguracije azure.yaml i Bicep su **referentni primjeri** koji pokazuju kako strukturirati implementacije više agenata. Trebat ćete stvoriti ove datoteke i odgovarajuće implementacije agenata.  
 
 #### Koraci konfiguracije:
 
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,14 +459,14 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
           }
         }
 ```
-
+  
 #### Ažuriranja Bicep predloška:
 
 ```bicep
@@ -474,12 +474,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -506,18 +506,18 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
   }
 }]
 ```
-
+  
 ### 2. Više modela s planiranjem kapaciteta
 
-**Cilj**: Implementirati chat model (korisnički agent), model za embeddings (pretraživanje) i model za procjenu (grader) s pravilnim upravljanjem kvota
+**Cilj:** Implementirati chat model (korisnički agent), model za embeddinge (pretraživanje) i model za ocjenjivanje (grader) s odgovarajućim upravljanjem kvotama  
 
-#### Strategija za više regija:
+#### Strategija za implementaciju u više regija:
 
 ```bicep
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -554,19 +554,19 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   }
 }
 ```
-
-#### Konfiguracija fallbacka po regijama:
+  
+#### Konfiguracija fallback regije:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
-
+  
 ### 3. AI Search s konfiguracijom indeksa podataka
 
-**Cilj**: Konfigurirati AI Search za ažuriranja podataka i automatizirano indeksiranje
+**Cilj:** Konfigurirati AI Search za ažuriranja podataka i automatizirano indeksiranje  
 
 #### Hook prije implementacije:
 
@@ -576,7 +576,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Kreiraj pretraživačku uslugu sa specifičnim SKU-om
+# Kreiraj uslugu pretraživanja s određenim SKU-om
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -584,8 +584,8 @@ az search service create \
   --partition-count 1 \
   --replica-count 1
 ```
-
-#### Post-implementacijsko postavljanje podataka:
+  
+#### Post-implementacijska postava podataka:
 
 ```bash
 #!/bin/bash
@@ -593,7 +593,7 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Dohvati ključ tražilice
+# Dohvati ključ usluge pretraživanja
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
 # Kreiraj shemu indeksa
@@ -608,8 +608,8 @@ python ./scripts/upload_search_data.py \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
-
-#### Shema indeksa za pretraživanje:
+  
+#### Shema indeksa pretraživanja:
 
 ```json
 {
@@ -633,12 +633,12 @@ python ./scripts/upload_search_data.py \
   }
 }
 ```
+  
+### 4. Konfiguracija alata za agente za AI Search
 
-### 4. Konfiguracija alata za AI Search u agentima
+**Cilj:** Konfigurirati agente da koriste AI Search kao alat za utemeljenje  
 
-**Cilj**: Konfigurirati agente da koriste AI Search kao izvor podataka (grounding)
-
-#### Implementacija AI Search alata za agente:
+#### Implementacija alata za pretraživanje agenta:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -681,8 +681,8 @@ class SearchTool:
         )
         return [doc async for doc in results]
 ```
-
-#### Integracija alata u agente:
+  
+#### Integracija agenta:
 
 ```python
 # src/agents/customer_agent.py
@@ -701,9 +701,9 @@ class CustomerAgent:
         # Pripremite kontekst za LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generirajte odgovor s uporištem
+        # Generirajte odgovor s utemeljenjem
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -712,10 +712,10 @@ class CustomerAgent:
         
         return response.choices[0].message.content
 ```
+  
+### 5. Integracija pohrane za učitavanje datoteka
 
-### 5. Integracija pohrane za prijenos datoteka
-
-**Cilj**: Omogućiti agentima obradu učitanih datoteka (priručnici, dokumenti) za RAG kontekst
+**Cilj:** Omogućiti agentima obradu učitanih datoteka (priručnici, dokumenti) za RAG kontekst  
 
 #### Konfiguracija pohrane:
 
@@ -755,8 +755,8 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
   }
 }
 ```
-
-#### Pipeline za obradu dokumenata:
+  
+#### Podatkovni tok za obradu dokumenata:
 
 ```python
 # src/document_processor.py
@@ -776,7 +776,7 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Preuzmi datoteku s blob pohrane
+        # Preuzmi datoteku iz blob spremišta
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
@@ -796,7 +796,7 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Generiraj ugrađene reprezentacije
+        # Generiraj ugnježdene prikaze
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
@@ -813,12 +813,12 @@ class DocumentProcessor:
         
         await self.search_client.upload_documents([document])
 ```
-
+  
 ### 6. Integracija Bing pretraživanja
 
-**Cilj**: Dodati mogućnosti Bing pretraživanja za ažurne informacije
+**Cilj:** Dodati mogućnosti Bing pretraživanja za pristup informacijama u stvarnom vremenu  
 
-#### Dodavanje resursa u Bicep:
+#### Dodavanje Bing resursa u Bicep:
 
 ```bicep
 // infra/bing-search.bicep
@@ -835,8 +835,8 @@ resource bingSearchService 'Microsoft.Bing/accounts@2020-06-10' = {
 output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
-
-#### Bing pretraživački alat:
+  
+#### Alat za Bing pretraživanje:
 
 ```python
 # src/agents/tools/bing_search_tool.py
@@ -877,14 +877,14 @@ class BingSearchTool:
                 
                 return results
 ```
-
+  
 ---
 
-## Praćenje i promatranje
+## Nadzor i promatranje
 
-### 7. Tracing i Application Insights
+### 7. Praćenje i Application Insights
 
-**Cilj**: Sveobuhvatno praćenje s zapisima tragova i aplikacijskim uvidima
+**Cilj:** Sveobuhvatno praćenje s zapisima tragova i Application Insights  
 
 #### Konfiguracija Application Insights:
 
@@ -938,7 +938,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 ```
-
+  
 #### Implementacija prilagođene telemetrije:
 
 ```python
@@ -984,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Skraćivanje radi privatnosti
+            'query': query[:100],  # Skrati radi privatnosti
             'results_found': str(results_count > 0)
         }
         
@@ -1044,12 +1044,12 @@ class AgentTelemetry:
         """Rough token estimation (4 characters per token)"""
         return len(text) // 4
 ```
+  
+### 8. Sigurnosna validacija red team-a
 
-### 8. Sigurnosna validacija red tima
+**Cilj:** Automatizirano sigurnosno testiranje agenata i modela  
 
-**Cilj**: Automatizirano sigurnosno testiranje agenata i modela
-
-#### Konfiguracija red tima:
+#### Konfiguracija red team-a:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Izračunaj ukupnu sigurnosnu ocjenu
+        # Izračunaj ukupni sigurnosni rezultat
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1165,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementacija bi poslala HTTP zahtjev prema agentovom endpointu
-        # Za potrebe demonstracije, vraćanje rezervnog mjesta
+        # Implementacija bi poslala HTTP zahtjev agentovom endpointu
+        # Za demo svrhe, vraća zamjenski rezultat
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1230,7 +1230,7 @@ class RedTeamScanner:
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Smanji ocjenu na temelju težine
+        # Smanji rezultat na temelju ozbiljnosti
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1239,7 +1239,7 @@ class RedTeamScanner:
         final_score = max(0, base_score - severity_penalty)
         return round(final_score, 2)
 ```
-
+  
 #### Automatizirani sigurnosni pipeline:
 
 ```bash
@@ -1248,7 +1248,7 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Dohvati krajnju točku agenta iz implementacije
+# Dohvati agent endpoint iz deploya
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1263,17 +1263,17 @@ python -m src.security.red_team_scanner \
 
 echo "Security scan completed. Check security_reports/ for results."
 ```
+  
+### 9. Evaluacija agenata pomoću Grader modela
 
-### 9. Evaluacija agenata s modelom grader
+**Cilj:** Implementirati sustav evaluacije s posvećenim grader modelom  
 
-**Cilj**: Implementacija sustava evaluacije s posvećenim modelom za ocjenjivanje
-
-#### Konfiguracija modela grader:
+#### Konfiguracija Grader modela:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1310,8 +1310,8 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
   }
 }
 ```
-
-#### Okvir evaluacije:
+  
+#### Okvir za evaluaciju:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1341,7 +1341,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Izračunaj sažetke metrika
+        # Izračunaj sažete metrike
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1471,7 +1471,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Ocjena učinka
+        # Ocjena izvedbe
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1486,8 +1486,8 @@ class AgentEvaluator:
         
         return summary
 ```
-
-#### Konfiguracija test slučajeva:
+  
+#### Konfiguracija testnih slučajeva:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1523,14 +1523,14 @@ class AgentEvaluator:
   ]
 }
 ```
-
+  
 ---
 
-## Prilagodba i ažuriranja
+## Prilagodbe i ažuriranja
 
-### 10. Prilagodba Container App-a
+### 10. Prilagodba Container App
 
-**Cilj**: Ažurirati konfiguraciju container aplikacije i zamijeniti prilagođenim UI-em
+**Cilj:** Ažurirati konfiguraciju container app i zamijeniti s prilagođenim UI  
 
 #### Dinamička konfiguracija:
 
@@ -1547,8 +1547,8 @@ services:
       BRAND_COLOR: "#2E86AB"
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
-
-#### Prilagođeni frontend build:
+  
+#### Izrada prilagođenog frontenda:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1574,8 +1574,8 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
-
-#### Skripta za build i deployment:
+  
+#### Skripta za izgradnju i implementaciju:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Izgradi prilagođenu sliku s varijablama okoline
+# Izradi prilagođenu sliku s varijablama okoline
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,13 +1591,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Gurni u Azure Container Registry
+# Pošalji u Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Ažuriraj kontejnersku aplikaciju
+# Ažuriraj aplikaciju kontejnera
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1605,26 +1605,26 @@ az containerapp update \
 
 echo "Frontend deployed successfully!"
 ```
-
+  
 ---
 
-## 🔧 Vodič za rješavanje problema
+## 🔧 Vodič za otklanjanje poteškoća
 
 ### Uobičajeni problemi i rješenja
 
-#### 1. Ograničenja kvote za Container Apps
+#### 1. Ograničenja kvota za Container Apps
 
-**Problem**: Implementacija ne uspijeva zbog regionalnih ograničenja kvote
+**Problem:** Implementacija ne uspijeva zbog regionalnih ograničenja kvote  
 
-**Rješenje**:
+**Rješenje:**  
 ```bash
-# Provjerite trenutnu potrošnju kvote
+# Provjeri trenutačnu potrošnju kvote
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Zahtjev za povećanje kvote
+# Zatraži povećanje kvote
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1634,12 +1634,12 @@ az support tickets create \
   --contact-phone-number "+1234567890" \
   --description "Request quota increase for Container Apps in region X"
 ```
+  
+#### 2. Istek verzije implementacije modela
 
-#### 2. Istek verzije modela
+**Problem:** Implementacija modela ne uspijeva zbog isteka verzije API-ja  
 
-**Problem**: Implementacija modela ne uspijeva zbog istekle verzije API-ja
-
-**Rješenje**:
+**Rješenje:**  
 ```python
 # scripts/update_model_versions.py
 import requests
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Ovo bi pozvalo Azure OpenAI API za dohvat trenutnih verzija
+    # Ovo bi pozvalo Microsoft Foundry Models API za dohvat trenutnih verzija
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1683,12 +1683,12 @@ if __name__ == "__main__":
     versions = check_model_versions()
     update_bicep_templates(versions)
 ```
+  
+#### 3. Integracija fino podešavanja
 
-#### 3. Integracija finog podešavanja (fine-tuning)
+**Problem:** Kako integrirati fino podešene modele u AZD implementaciju  
 
-**Problem**: Kako integrirati fino podešene modele u AZD implementaciju
-
-**Rješenje**:
+**Rješenje:**  
 ```python
 # scripts/fine_tuning_pipeline.py
 import asyncio
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,23 +1726,23 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Ažuriraj implementaciju za korištenje modela s fino podešavanjem
+            # Ažurirajte implementaciju za korištenje fino ugađenog modela
             # Ovo bi pozvalo Azure CLI za ažuriranje implementacije
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
             return None
 ```
-
+  
 ---
 
-## Često postavljana pitanja & slobodna istraživanja
+## Česta pitanja i otvorena istraživanja
 
-### Najčešća pitanja
+### Pitanja i odgovori
 
-#### P: Postoji li jednostavan način za implementaciju više agenata (obrazac dizajna)?
+#### P: Postoji li jednostavan način za implementaciju više agenata (dizajnerski obrazac)?
 
-**O: Da! Koristite obrazac više agenata:**
+**O: Da! Koristite obrazac za više agenata:**  
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
-
+  
 #### P: Mogu li implementirati "model router" kao model (implikacije na troškove)?
 
-**O: Da, uz pažljivu procjenu:**
+**O: Da, uz pažljivo razmatranje:**  
 
 ```python
-# Implementacija modela usmjerivača
+# Implementacija rutera modela
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1784,34 +1784,34 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Implementacija bi izračunala potencijalne uštede
+        # Implementacija bi izračunala moguće uštede
         pass
 ```
+  
+**Implikacije na troškove:**  
+- **Uštede:** 60-80% manje troškova za jednostavne upite  
+- **Kompromisi:** Blago povećanje latencije za logiku usmjeravanja  
+- **Praćenje:** Nadzirati točnost u odnosu na metrike troškova  
 
-**Implikacije na troškove:**
-- **Uštede**: 60-80% smanjenje troškova za jednostavne upite
-- **Kompro-misi**: Blago povećanje latencije zbog logike usmjeravanja
-- **Praćenje**: Mjerenje točnosti u odnosu na trošak
+#### P: Mogu li pokrenuti posao fino podešavanja iz azd predloška?
 
-#### P: Mogu li pokrenuti posao finog podešavanja iz azd predloška?
-
-**O: Da, korištenjem hookova nakon implementacije:**
+**O: Da, koristeći post-provizione hookove:**  
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Fino podešavanje integracije
+# hooks/postprovision.sh - Dorada integracije
 
 echo "Starting fine-tuning pipeline..."
 
-# Učitajte podatke za trening
+# Učitaj podatke za treniranje
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Pokreni posao fino podešavanja
+# Pokreni posao dorade
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
 # Spremi ID posla za nadzor
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
@@ -1819,7 +1819,7 @@ echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
-
+  
 ### Napredni scenariji
 
 #### Strategija implementacije u više regija
@@ -1857,7 +1857,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
   }
 }
 ```
-
+  
 #### Okvir za optimizaciju troškova
 
 ```python
@@ -1901,63 +1901,63 @@ class CostOptimizer:
             elif rec['type'] == 'auto_scaling':
                 self._enable_auto_scaling(rec)
 ```
-
+  
 ---
 ## ✅ ARM predložak spreman za implementaciju
 
 > **✨ OVO DOISTA POSTOJI I RADI!**  
-> Za razliku od konceptualnih primjera koda gore, ARM predložak je **stvarna, funkcionalna implementacija infrastrukture** uključena u ovaj repozitorij.
+> Za razliku od konceptualnih primjera koda iznad, ARM predložak je **stvarna, funkcionalna implementacija infrastrukture** uključena u ovaj repozitorij.
 
 ### Što ovaj predložak zapravo radi
 
-ARM predložak u [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) postavlja **sve Azure infrastrukturne komponente** potrebne za multi-agentni sustav. Ovo je **jedina komponenta spremna za pokretanje** - sve ostalo zahtijeva razvoj.
+ARM predložak u [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) osigurava **svu Azure infrastrukturu** potrebnu za multi-agentni sustav. Ovo je **jedini spremni za pokretanje komponenta** - sve ostalo zahtijeva razvoj.
 
 ### Što je uključeno u ARM predložak
 
 ARM predložak smješten u [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) uključuje:
 
-#### **Cijelu infrastrukturu**
-- ✅ **Multi-regionalna Azure OpenAI** implementacija (GPT-4o, GPT-4o-mini, embeddings, grader)
-- ✅ **Azure AI Search** s mogućnostima vektorskog pretraživanja
-- ✅ **Azure Storage** s kontejnerima za dokumente i prijenose
-- ✅ **Container Apps Environment** s automatskim skaliranjem
-- ✅ **Agent Router & Frontend** Container Apps
-- ✅ **Cosmos DB** za trajnu pohranu povijesti chatova
-- ✅ **Application Insights** za cjelovito praćenje
+#### **Potpuna infrastruktura**
+- ✅ **Više-regionalne implementacije Microsoft Foundry modela** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Azure AI Search** s mogućnostima pretraživanja vektora
+- ✅ **Azure Storage** s spremnicima za dokumente i prijenose
+- ✅ **Container Apps okruženje** s automatskim skaliranjem
+- ✅ **Agent Router & Frontend** container aplikacije
+- ✅ **Cosmos DB** za trajno spremanje povijesti razgovora
+- ✅ **Application Insights** za sveobuhvatno nadgledanje
 - ✅ **Key Vault** za sigurno upravljanje tajnama
 - ✅ **Document Intelligence** za obradu datoteka
 - ✅ **Bing Search API** za informacije u stvarnom vremenu
 
 #### **Načini implementacije**
 | Način | Namjena | Resursi | Procijenjeni trošak/mjesečno |
-|-------|---------|---------|------------------------------|
-| **Minimal** | Razvoj, testiranje | Osnovni SKU-ovi, jedna regija | $100-370 |
-| **Standard** | Produkcija, umjereni obujam | Standardni SKU-ovi, više regija | $420-1,450 |
-| **Premium** | Enterprise, visok obujam | Premium SKU-ovi, HA postavka | $1,150-3,500 |
+|-------|---------|---------|-----------------------------|
+| **Minimalno** | Razvoj, testiranje | Osnovni SKU-ovi, jedna regija | $100-370 |
+| **Standardno** | Produkcija, umjerena skala | Standardni SKU-ovi, više regija | $420-1,450 |
+| **Premium** | Enterprise, velika skala | Premium SKU-ovi, HA konfiguracija | $1,150-3,500 |
 
 ### 🎯 Brze opcije implementacije
 
-#### Opcija 1: Jedan klik za Azure implementaciju
+#### Opcija 1: Jedan klik za implementaciju na Azure
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Opcija 2: Implementacija pomoću Azure CLI-a
+#### Opcija 2: Implementacija putem Azure CLI
 
 ```bash
-# Klonirajte spremište
+# Klonirajte repozitorij
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Napravite skriptu za distribuciju izvršnom
+# Postavite skriptu za implementaciju kao izvršnu
 chmod +x deploy.sh
 
-# Distribuirajte s zadanim postavkama (Standardni način)
+# Implementirajte s zadanim postavkama (Standardni način)
 ./deploy.sh -g myResourceGroup
 
-# Distribuirajte za produkciju s premium značajkama
+# Implementirajte za proizvodnju s premium značajkama
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Distribuirajte minimalnu verziju za razvoj
+# Implementirajte minimalnu verziju za razvoj
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
@@ -1977,7 +1977,7 @@ az deployment group create \
 
 ### Izlazi predloška
 
-Nakon uspješne implementacije dobit ćete:
+Nakon uspješne implementacije, dobit ćete:
 
 ```json
 {
@@ -1993,27 +1993,27 @@ Nakon uspješne implementacije dobit ćete:
 
 ### 🔧 Konfiguracija nakon implementacije
 
-ARM predložak pobrinu se za postavljanje infrastrukture. Nakon implementacije:
+ARM predložak upravlja postavljanjem infrastrukture. Nakon implementacije:
 
-1. **Konfigurirajte pretraživački indeks**:
+1. **Konfigurirajte indeks pretraživanja**:  
    ```bash
-   # Koristite pruženi shemu pretraživanja
+   # Koristite pruženu shemu pretraživanja
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **Otpremite početne dokumente**:
+2. **Prenesite početne dokumente**:  
    ```bash
-   # Prenesite priručnike za proizvode i bazu znanja
+   # Prenesite korisničke priručnike za proizvode i bazu znanja
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Postavite kod agenata**:
+3. **Implementirajte agent kod**:  
    ```bash
    # Izgradite i implementirajte stvarne aplikacije agenata
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
@@ -2041,145 +2041,145 @@ Uredi `azuredeploy.parameters.json` za prilagodbu implementacije:
 
 ### 📊 Značajke implementacije
 
-- ✅ **Provjera preduvjeta** (Azure CLI, kvote, dozvole)
-- ✅ **Multi-regionalna visoka dostupnost** s automatskim failoverom
-- ✅ **Sveobuhvatno nadgledanje** putem Application Insights i Log Analytics
-- ✅ **Sigurnosne najbolje prakse** uz Key Vault i RBAC
-- ✅ **Optimizacija troškova** uz konfigurabilne načine implementacije
-- ✅ **Automatsko skaliranje** prema obrascima potražnje
+- ✅ **Provjera preduvjeta** (Azure CLI, kvote, dopuštenja)
+- ✅ **Visoka dostupnost u više regija** s automatskim prebacivanjem
+- ✅ **Sveobuhvatno nadgledanje** s Application Insights i Log Analytics
+- ✅ **Sigurnosne najbolje prakse** s Key Vaultom i RBAC-om
+- ✅ **Optimizacija troškova** sa konfigurabilnim načinima implementacije
+- ✅ **Automatsko skaliranje** temeljeno na obrascima potražnje
 - ✅ **Ažuriranja bez zastoja** s Container Apps revizijama
 
-### 🔍 Nadgledanje i upravljanje
+### 🔍 Nadzor i upravljanje
 
-Nakon implementacije, nadgledajte svoje rješenje putem:
+Nakon implementacije, nadzirite rješenje putem:
 
-- **Application Insights**: metričke izvedbe, praćenje ovisnosti i prilagođene telemetrije
-- **Log Analytics**: centralizirano evidentiranje iz svih komponenti
-- **Azure Monitor**: nadzor zdravlja resursa i dostupnosti
-- **Cost Management**: praćenje troškova u realnom vremenu i upozorenja budžeta
+- **Application Insights**: Metrike performansi, praćenje ovisnosti i prilagođena telemetrija
+- **Log Analytics**: Centralizirano zapisivanje svih komponenti
+- **Azure Monitor**: Praćenje zdravlja i dostupnosti resursa
+- **Cost Management**: Praćenje troškova u stvarnom vremenu i upozorenja o proračunu
 
 ---
 
-## 📚 Cjelovit vodič za implementaciju
+## 📚 Potpuni vodič za implementaciju
 
-Ovaj dokument scenarija u kombinaciji s ARM predloškom pruža sve potrebno za implementaciju proizvodno spremnog multi-agentnog rješenja za korisničku podršku. Implementacija uključuje:
+Ovaj dokument scenarija u kombinaciji s ARM predloškom pruža sve potrebno za implementaciju proizvodnog rješenja za multi-agentnu korisničku podršku. Implementacija obuhvaća:
 
 ✅ **Dizajn arhitekture** - Sveobuhvatan dizajn sustava s odnosima komponenti  
-✅ **Provisioning infrastrukture** - Potpuni ARM predložak za implementaciju jednim klikom  
-✅ **Konfiguracija agenata** - Detaljna postava za agenta za korisnike i inventar  
-✅ **Multi-model deployment** - Strategijsko postavljanje modela diljem regija  
-✅ **Integracija pretraživanja** - AI Search s vektorskim mogućnostima i indeksiranjem podataka  
-✅ **Provedba sigurnosti** - Red teaming, skeniranje ranjivosti i sigurnosne prakse  
-✅ **Nadzor i evaluacija** - Cjelovita telemetrija i okvir za procjenu agenata  
-✅ **Spremnost za produkciju** - Enterprise-grade implementacija s visokom dostupnošću i oporavkom od katastrofa  
-✅ **Optimizacija troškova** - Inteligentno usmjeravanje i skaliranje po potrošnji  
+✅ **Provisioning infrastrukture** - Kompletnu ARM predložak za implementaciju jednim klikom  
+✅ **Konfiguracija agenata** - Detaljna postava za korisničke i inventurne agente  
+✅ **Više-modelna implementacija** - Strateško raspoređivanje modela po regijama  
+✅ **Integracija pretraživanja** - AI Search s vektorskom podrškom i indeksiranjem podataka  
+✅ **Sigurnosna provedba** - Red teaming, skeniranje ranjivosti i sigurnosne prakse  
+✅ **Nadzor i evaluacija** - Sveobuhvatna telemetrija i okvir procjene agenata  
+✅ **Spremnost za produkciju** - Enterprise-grade implementacija s HA i oporavkom od katastrofa  
+✅ **Optimizacija troškova** - Inteligentno usmjeravanje i skaliranje prema potrošnji  
 ✅ **Vodič za rješavanje problema** - Česti problemi i strategije rješavanja
 
 ---
 
 ## 📊 Sažetak: Što ste naučili
 
-### Obuhvaćeni arhitektonski obrasci
+### Pokriveni arhitektonski obrasci
 
-✅ **Dizajn multi-agentnog sustava** - Specijalizirani agenti (korisnik + inventar) s posvećenim modelima  
-✅ **Multi-regionalna implementacija** - Strategijsko postavljanje modela za optimizaciju troškova i redundantnost  
-✅ **RAG arhitektura** - AI Search integracija s vektorskim embeddings za utemeljene odgovore  
-✅ **Evaluacija agenata** - Posvećen model za ocjenjivanje kvalitete  
-✅ **Sigurnosni okvir** - Obrasci za red teaming i skeniranje ranjivosti  
+✅ **Dizajn multi-agentnog sustava** - Specijalizirani agenti (Korisnik + Inventar) s namjenskim modelima  
+✅ **Više-regionalna implementacija** - Strateško postavljanje modela za optimizaciju troškova i redundanciju  
+✅ **RAG arhitektura** - AI Search integracija s vektorskim embeddingima za utemeljene odgovore  
+✅ **Evaluacija agenata** - Namjenski grader model za procjenu kvalitete  
+✅ **Sigurnosni okvir** - Obrasci red teaminga i skeniranja ranjivosti  
 ✅ **Optimizacija troškova** - Strategije usmjeravanja modela i planiranja kapaciteta  
-✅ **Nadzor u produkciji** - Application Insights s prilagođenom telemetrijom  
+✅ **Produkcijski nadzor** - Application Insights s prilagođenom telemetrijom  
 
 ### Što ovaj dokument pruža
 
-| Komponenta | Status | Lokacija |
-|------------|--------|----------|
+| Komponenta | Status | Gdje pronaći |
+|------------|--------|--------------|
 | **Infrastrukturni predložak** | ✅ Spreman za implementaciju | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Dijagrami arhitekture** | ✅ Cjelovito | Mermaid dijagram gore |
+| **Arhitektonski dijagrami** | ✅ Potpuno | Mermaid dijagram iznad |
 | **Primjeri koda** | ✅ Referentne implementacije | Kroz cijeli dokument |
-| **Konfiguracijski obrasci** | ✅ Detaljne upute | Poglavlja 1-10 gore |
-| **Implementacije agenata** | 🔨 Morate napraviti vi | ~40 sati razvoja |
-| **Frontend UI** | 🔨 Morate napraviti vi | ~25 sati razvoja |
-| **Podatkovni tokovi** | 🔨 Morate napraviti vi | ~10 sati razvoja |
+| **Obrasci konfiguracije** | ✅ Detaljna uputstva | Odjeljci 1-10 iznad |
+| **Implementacija agenata** | 🔨 Razvijate sami | ~40 sati razvoja |
+| **Frontend UI** | 🔨 Razvijate sami | ~25 sati razvoja |
+| **Data pipelines** | 🔨 Razvijate sami | ~10 sati razvoja |
 
 ### Provjera stvarnosti: Što zapravo postoji
 
 **U repozitoriju (spremno sada):**
-- ✅ ARM predložak koji implementira 15+ Azure servisa (azuredeploy.json)
-- ✅ Skripta za implementaciju s validacijom (deploy.sh)
-- ✅ Konfiguracija parametara (azuredeploy.parameters.json)
+- ✅ ARM predložak koji implementira 15+ Azure usluga (azuredeploy.json)
+- ✅ Skripta za implementaciju s provjerom (deploy.sh)
+- ✅ Konfiguracijski parametri (azuredeploy.parameters.json)
 
-**Referencirano u dokumentu (vi izrađujete):**
+**U dokumentu referencirano (vi kreirate):**
 - 🔨 Kod implementacije agenata (~30-40 sati)
-- 🔨 Servis za usmjeravanje (~12-16 sati)
+- 🔨 Servis usmjeravanja (~12-16 sati)
 - 🔨 Frontend aplikacija (~20-30 sati)
-- 🔨 Skripte za postavljanje podataka (~8-12 sati)
+- 🔨 Skripte za postavu podataka (~8-12 sati)
 - 🔨 Okvir za nadzor (~10-15 sati)
 
 ### Vaši sljedeći koraci
 
-#### Ako želite implementirati infrastrukturu (30 minuta)
+#### Ako želite postaviti infrastrukturu (30 minuta)  
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
-
-#### Ako želite izgraditi cjelokupni sustav (80-120 sati)
-1. ✅ Pročitajte i razumite ovaj arhitektonski dokument (2-3 sata)
-2. ✅ Implementirajte infrastrukturu pomoću ARM predloška (30 minuta)
-3. 🔨 Implementirajte agente koristeći referentne obrasce koda (~40 sati)
-4. 🔨 Izradite servis za usmjeravanje s FastAPI/Express (~15 sati)
-5. 🔨 Kreirajte frontend UI s React/Vue (~25 sati)
-6. 🔨 Konfigurirajte podatkovni tok i pretraživački indeks (~10 sati)
-7. 🔨 Dodajte nadzor i evaluaciju (~15 sati)
+  
+#### Ako želite izgraditi kompletan sustav (80-120 sati)  
+1. ✅ Pročitajte i razumite ovaj arhitektonski dokument (2-3 sata)  
+2. ✅ Implementirajte infrastrukturu koristeći ARM predložak (30 minuta)  
+3. 🔨 Implementirajte agente koristeći referentne obrasce koda (~40 sati)  
+4. 🔨 Izradite servis usmjeravanja s FastAPI/Express (~15 sati)  
+5. 🔨 Kreirajte frontend UI s React/Vue (~25 sati)  
+6. 🔨 Konfigurirajte data pipeline i indeks pretraživanja (~10 sati)  
+7. 🔨 Dodajte nadzor i evaluaciju (~15 sati)  
 8. ✅ Testirajte, osigurajte i optimizirajte (~10 sati)
 
-#### Ako želite učiti o multi-agentnim obrascima (studij)
-- 📖 Pregledajte dijagram arhitekture i odnose komponenti
-- 📖 Proučite primjere koda za SearchTool, BingTool, AgentEvaluator
-- 📖 Razumite strategiju multi-regionalne implementacije
-- 📖 Učite o okvirima za evaluaciju i sigurnost
-- 📖 Primijenite obrasce u vlastitim projektima
+#### Ako želite učiti o multi-agentnim obrascima (istraživanje)  
+- 📖 Pregledajte arhitektonske dijagrame i odnose komponenti  
+- 📖 Učite iz primjera koda za SearchTool, BingTool, AgentEvaluator  
+- 📖 Razumijte strategiju više-regionalne implementacije  
+- 📖 Učite okvire za evaluaciju i sigurnost  
+- 📖 Primijenite obrasce na vlastite projekte
 
-### Ključni zaključci
+### Ključne spoznaje
 
 1. **Infrastruktura vs. aplikacija** - ARM predložak pruža infrastrukturu; agenti zahtijevaju razvoj  
-2. **Multi-regionalna strategija** - Strategijsko postavljanje modela smanjuje troškove i poboljšava pouzdanost  
-3. **Okvir za evaluaciju** - Posvećeni model za ocjenjivanje omogućava stalnu procjenu kvalitete  
+2. **Više-regionalna strategija** - Strateško postavljanje modela smanjuje troškove i poboljšava pouzdanost  
+3. **Okvir za evaluaciju** - Namjenski grader model omogućuje kontinuiranu procjenu kvalitete  
 4. **Sigurnost na prvom mjestu** - Red teaming i skeniranje ranjivosti su ključni za produkciju  
-5. **Optimizacija troškova** - Inteligentno usmjeravanje između GPT-4o i GPT-4o-mini štedi 60-80%
+5. **Optimizacija troškova** - Inteligentno usmjeravanje između gpt-4.1 i gpt-4.1-mini štedi 60-80%
 
 ### Procijenjeni troškovi
 
 | Način implementacije | Infrastruktura/mjesečno | Razvoj (jednokratno) | Ukupno prvi mjesec |
-|----------------------|-------------------------|----------------------|--------------------|
-| **Minimal** | $100-370 | $15K-25K (80-120 sati) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (isti napor) | $15.4K-26.5K |
+|---------------------|------------------------|----------------------|--------------------|
+| **Minimalno** | $100-370 | $15K-25K (80-120 sati) | $15.1K-25.4K |
+| **Standardno** | $420-1,450 | $15K-25K (isti napor) | $15.4K-26.5K |
 | **Premium** | $1,150-3,500 | $15K-25K (isti napor) | $16.2K-28.5K |
 
-**Napomena:** Infrastruktura čini <5% ukupnih troškova novih implementacija. Razvoj je glavno ulaganje.
+**Napomena:** Infrastruktura je <5% ukupnih troškova za nove implementacije. Glavna investicija je razvoj.
 
-### Povezani resursi
+### Povezani izvori
 
 - 📚 [Vodič za implementaciju ARM predloška](retail-multiagent-arm-template/README.md) - Postavljanje infrastrukture  
-- 📚 [Najbolje prakse za Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - Implementacija modela  
-- 📚 [Dokumentacija AI Search](https://learn.microsoft.com/azure/search/) - Konfiguracija vektorskog pretraživanja  
-- 📚 [Obrasci za Container Apps](https://learn.microsoft.com/azure/container-apps/) - Implementacija mikroservisa  
+- 📚 [Microsoft Foundry Models najbolje prakse](https://learn.microsoft.com/azure/ai-services/openai/) - Implementacija modela  
+- 📚 [Dokumentacija AI Search](https://learn.microsoft.com/azure/search/) - Konfiguracija pretraživanja vektora  
+- 📚 [Container Apps obrasci](https://learn.microsoft.com/azure/container-apps/) - Implementacija mikroservisa  
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Postavljanje nadzora  
 
-### Imate pitanja ili probleme?
+### Pitanja ili problemi?
 
-- 🐛 [Prijavite probleme](https://github.com/microsoft/AZD-for-beginners/issues) - Bugovi predloška ili pogreške u dokumentaciji  
-- 💬 [GitHub diskusije](https://github.com/microsoft/AZD-for-beginners/discussions) - Pitanja o arhitekturi  
-- 📖 [FAQ](../resources/faq.md) - Česta pitanja s odgovorima  
+- 🐛 [Prijavi probleme](https://github.com/microsoft/AZD-for-beginners/issues) - Pogreške u predlošku ili dokumentaciji  
+- 💬 [GitHub rasprave](https://github.com/microsoft/AZD-for-beginners/discussions) - Pitanja o arhitekturi  
+- 📖 [FAQ](../resources/faq.md) - Često postavljana pitanja  
 - 🔧 [Vodič za rješavanje problema](../docs/troubleshooting/common-issues.md) - Problemi s implementacijom  
 
 ---
 
-**Ovaj sveobuhvatan scenarij pruža arhitektonske smjernice enterprise razine za multi-agentne AI sustave, uključujući infrastrukturne predloške, upute za implementaciju i najbolje prakse za proizvodnu upotrebu pri izgradnji sofisticiranih rješenja korisničke podrške s Azure Developer CLI-jem.**
+**Ovaj sveobuhvatni scenarij pruža korporativni arhitektonski plan za multi-agentne AI sustave, kompletan s infrastrukturnim predlošcima, uputama za implementaciju i proizvodnim najboljim praksama za izgradnju naprednih rješenja korisničke podrške uz Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Odricanje od odgovornosti**:
-Ovaj je dokument preveden koristeći AI uslugu prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati službenim i autoritativnim izvorom. Za kritične informacije preporučujemo profesionalni ljudski prijepis. Ne snosimo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+**Odricanje od odgovornosti**:  
+Ovaj dokument je preveden pomoću AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na njegovom izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
