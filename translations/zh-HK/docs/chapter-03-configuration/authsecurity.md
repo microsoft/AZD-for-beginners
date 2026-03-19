@@ -1,187 +1,187 @@
-# Authentication Patterns and Managed Identity
+# 認證模式與管理身份
 
-⏱️ **預計時間**: 45-60 分鐘 | 💰 **成本影響**: 免費（無額外費用） | ⭐ **複雜度**: 中級
+⏱️ <strong>預計時間</strong>：45-60 分鐘 | 💰 <strong>成本影響</strong>：免費（無額外費用） | ⭐ <strong>複雜度</strong>：中階
 
-**📚 學習路線:**
-- ← 上一節: [Configuration Management](configuration.md) - 管理環境變數與祕密
-- 🎯 **你在這裡**: Authentication & Security (Managed Identity, Key Vault, 安全模式)
-- → 下一節: [First Project](first-project.md) - 建立你的第一個 AZD 應用
-- 🏠 [Course Home](../../README.md)
+**📚 學習路徑：**
+- ← 上一節：[設定管理](configuration.md) - 管理環境變數和機密
+- 🎯 <strong>您目前所在位置</strong>：認證與安全（管理身份、金鑰保管庫、安全模式）
+- → 下一節：[第一個專案](first-project.md) - 建立您的第一個 AZD 應用程式
+- 🏠 [課程首頁](../../README.md)
 
 ---
 
-## 你將學到的內容
+## 您將學習到的內容
 
-完成本課程後，你將會：
-- 了解 Azure 驗證模式（金鑰、連線字串、Managed Identity）
-- 實作 **Managed Identity** 以達成無密碼驗證
-- 使用 **Azure Key Vault** 整合來保護祕密
-- 為 AZD 部署設定 **基於角色的存取控制 (RBAC)**
-- 在 Container Apps 與 Azure 服務中套用安全最佳實務
-- 將基於金鑰的驗證遷移到基於識別的驗證
+完成本課程後，您將能：
+- 了解 Azure 認證模式（金鑰、連接字串、管理身份）
+- 實作 <strong>管理身份</strong> 的無密碼認證
+- 藉由 **Azure Key Vault** 整合保護機密
+- 為 AZD 部署設定 **基於角色的存取控制（RBAC）**
+- 應用 Container Apps 及 Azure 服務的安全最佳實踐
+- 將基於金鑰的認證遷移為基於身份的認證
 
-## 為何 Managed Identity 重要
+## 為什麼管理身份很重要
 
-### 問題：傳統驗證
+### 問題：傳統認證
 
-**在採用 Managed Identity 之前：**
+**在管理身份之前：**
 ```javascript
-// ❌ 安全風險：在程式碼中硬編碼的機密
+// ❌ 安全風險：程式碼中硬編碼的秘密
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **問題：**
-- 🔴 **祕密暴露** 在程式碼、設定檔、環境變數中
-- 🔴 **憑證輪換** 需要修改程式碼並重新部署
-- 🔴 **稽核惡夢** - 誰在何時存取了什麼？
-- 🔴 **散佈** - 祕密分散在多個系統中
-- 🔴 **合規風險** - 未通過安全稽核
+- 🔴 代碼、設定檔、環境變數中暴露機密
+- 🔴 憑證輪替需修改代碼並重新部署
+- 🔴 審計困難 - 不清楚誰、何時存取了什麼
+- 🔴 機密散落各處，難以管理
+- 🔴 合規風險 - 無法通過安全審核
 
-### 解決方案：Managed Identity
+### 解決方案：管理身份
 
-**採用 Managed Identity 之後：**
+**使用管理身份之後：**
 ```javascript
-// ✅ 安全：程式碼中沒有任何機密資料
+// ✅ 安全：程式碼中無密碼
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure 會自動處理身份驗證
+  credential  // Azure 自動處理身份驗證
 );
 ```
 
-**好處：**
-- ✅ **程式碼或設定中零祕密**
-- ✅ **自動輪換** - 由 Azure 處理
-- ✅ **完整稽核紀錄** 在 Azure AD 日誌中
-- ✅ **集中化安全管理** - 可在 Azure Portal 管理
-- ✅ **符合合規性** - 達到安全標準
+**優點：**
+- ✅ 代碼或設定中零機密
+- ✅ 自動輪替 - 由 Azure 管理
+- ✅ Azure AD 紀錄完整審計軌跡
+- ✅ 集中安全管理 - 在 Azure 入口網站操作
+- ✅ 符合合規規範的要求
 
-**類比**：傳統驗證就像為不同的門攜帶多把實體鑰匙。Managed Identity 就像有一張安全識別證，會根據你的身分自動授權——不用擔心鑰匙遺失、複製或輪換。
+<strong>比喻</strong>：傳統認證就像攜帶多把不同門的實體鑰匙，管理身份則像持有一張安全徽章，自動授權存取，無需擔心鑰匙遺失、複製或更換。
 
 ---
 
-## 架構概覽
+## 架構概述
 
-### 使用 Managed Identity 的驗證流程
+### 使用管理身份的認證流程
 
 ```mermaid
 sequenceDiagram
     participant App as 你的應用程式<br/>(容器應用程式)
-    participant MI as 託管身分識別<br/>(Azure AD)
+    participant MI as 託管身份<br/>(Azure AD)
     participant KV as 金鑰保管庫
     participant Storage as Azure 儲存體
-    participant DB as Azure SQL 資料庫
+    participant DB as Azure SQL
     
-    App->>MI: 要求存取權杖<br/>(自動)
-    MI->>MI: 驗證身分<br/>(不需密碼)
-    MI-->>App: 回傳權杖<br/>(有效 1 小時)
+    App->>MI: 請求存取權杖<br/>(自動)
+    MI->>MI: 驗證身份<br/>(無需密碼)
+    MI-->>App: 傳回權杖<br/>(有效 1 小時)
     
-    App->>KV: 取得機密<br/>(使用權杖)
+    App->>KV: 取得密碼<br/>(使用權杖)
     KV->>KV: 檢查 RBAC 權限
-    KV-->>App: 回傳機密值
+    KV-->>App: 傳回密碼值
     
-    App->>Storage: 上傳 Blob<br/>(使用權杖)
+    App->>Storage: 上傳 blob<br/>(使用權杖)
     Storage->>Storage: 檢查 RBAC 權限
     Storage-->>App: 成功
     
     App->>DB: 查詢資料<br/>(使用權杖)
     DB->>DB: 檢查 SQL 權限
-    DB-->>App: 回傳結果
+    DB-->>App: 傳回結果
     
-    Note over App,DB: 所有驗證均無需密碼！
+    Note over App,DB: 全部認證無需密碼！
 ```
-### Managed Identity 的類型
+### 管理身份類型
 
 ```mermaid
 graph TB
-    MI[受管身分識別]
-    SystemAssigned[系統指派身分識別]
-    UserAssigned[使用者指派身分識別]
+    MI[受管理身份]
+    SystemAssigned[系統指派身份]
+    UserAssigned[使用者指派身份]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
     SystemAssigned --> SA1[生命週期與資源綁定]
     SystemAssigned --> SA2[自動建立/刪除]
-    SystemAssigned --> SA3[最適合單一資源]
+    SystemAssigned --> SA3[適合單一資源]
     
-    UserAssigned --> UA1[生命週期獨立]
+    UserAssigned --> UA1[獨立生命週期]
     UserAssigned --> UA2[手動建立/刪除]
-    UserAssigned --> UA3[可跨資源共用]
+    UserAssigned --> UA3[資源共用]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Feature | System-Assigned | User-Assigned |
+| 功能 | 系統指派 | 使用者指派 |
 |---------|----------------|---------------|
-| **Lifecycle** | 與資源綁定 | 獨立存在 |
-| **Creation** | 隨資源自動建立 | 需手動建立 |
-| **Deletion** | 隨資源刪除 | 資源刪除後仍保留 |
-| **Sharing** | 僅限單一資源 | 可供多個資源共用 |
-| **Use Case** | 簡單情境 | 複雜多資源情境 |
-| **AZD Default** | ✅ 推薦 | 選用 |
+| <strong>生命週期</strong> | 綁定至資源 | 獨立存在 |
+| <strong>建立</strong> | 隨資源自動產生 | 手動建立 |
+| <strong>刪除</strong> | 隨資源刪除 | 資源刪除後仍存在 |
+| <strong>共享性</strong> | 僅限一個資源 | 可供多個資源共用 |
+| <strong>使用情境</strong> | 簡易場景 | 複雜多資源場景 |
+| **AZD 預設** | ✅ 建議使用 | 選用 |
 
 ---
 
-## 前置需求
+## 先決條件
 
-### 所需工具
+### 必備工具
 
-你應該已經從之前的課程安裝了這些：
+您應已在前面課程安裝：
 
 ```bash
-# 驗證 Azure Developer CLI
+# 驗證 Azure 開發者 CLI
 azd version
-# ✅ 預期：azd 版本 1.0.0 或更高
+# ✅ 預期：azd 版本 1.0.0 或以上
 
 # 驗證 Azure CLI
 az --version
-# ✅ 預期：azure-cli 2.50.0 或更高
+# ✅ 預期：azure-cli 2.50.0 或以上
 ```
 
 ### Azure 要求
 
 - 有效的 Azure 訂閱
-- 權限可執行：
-  - 建立 managed identities
+- 權限包括：
+  - 建立管理身份
   - 指派 RBAC 角色
-  - 建立 Key Vault 資源
+  - 建立金鑰保管庫資源
   - 部署 Container Apps
 
-### 需具備的知識
+### 知識先修
 
-你應該已完成：
-- [Installation Guide](installation.md) - AZD 設定
-- [AZD Basics](azd-basics.md) - 核心概念
-- [Configuration Management](configuration.md) - 環境變數
+您應已完成：
+- [安裝指南](installation.md) - AZD 設定
+- [AZD 基礎](azd-basics.md) - 核心概念
+- [設定管理](configuration.md) - 環境變數
 
 ---
 
-## 課程 1：了解驗證模式
+## 課程 1：理解認證模式
 
-### 模式 1：連線字串（舊式 - 避免）
+### 模式 1：連接字串（舊式 - 避免使用）
 
 **運作方式：**
 ```bash
-# 連線字串包含認證資訊
+# 連線字串包含憑證
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **問題：**
-- ❌ 祕密在環境變數中可見
-- ❌ 在部署系統中被記錄
-- ❌ 難以輪換
-- ❌ 沒有存取稽核記錄
+- ❌ 環境變數中可見機密
+- ❌ 部署系統有記錄
+- ❌ 難以輪替
+- ❌ 無存取審計軌跡
 
-**何時使用：** 僅用於本地開發，切勿用於生產環境。
+**使用時機：** 僅用於本機開發，切勿於正式環境。
 
 ---
 
-### 模式 2：Key Vault 參照（較佳）
+### 模式 2：金鑰保管庫參考（較佳）
 
 **運作方式：**
 ```bicep
@@ -203,19 +203,19 @@ env: [
 ```
 
 **優點：**
-- ✅ 祕密安全地存放在 Key Vault
-- ✅ 集中化祕密管理
-- ✅ 輪換不需修改程式碼
+- ✅ 機密安全存放於 Key Vault
+- ✅ 集中管理機密
+- ✅ 輪替無須修改代碼
 
 **限制：**
-- ⚠️ 仍然使用金鑰/密碼
-- ⚠️ 需要管理 Key Vault 的存取權
+- ⚠️ 仍使用金鑰或密碼
+- ⚠️ 需管理 Key Vault 存取權
 
-**何時使用：** 作為從連線字串到 Managed Identity 的過渡步驟。
+**使用時機：** 從連接字串過渡到管理身份的中繼步驟。
 
 ---
 
-### 模式 3：Managed Identity（最佳實踐）
+### 模式 3：管理身份（最佳實踐）
 
 **運作方式：**
 ```bicep
@@ -237,9 +237,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-**應用程式程式碼：**
+**應用程式代碼：**
 ```javascript
-// 毋須任何秘密！
+// 唔使秘密！
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -250,22 +250,22 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-**好處：**
-- ✅ 程式碼/設定中零祕密
-- ✅ 憑證自動輪換
-- ✅ 完整稽核紀錄
+**優點：**
+- ✅ 代碼與設定零機密
+- ✅ 自動憑證輪替
+- ✅ 完整審計軌跡
 - ✅ 基於 RBAC 的權限控管
 - ✅ 符合合規需求
 
-**何時使用：** 在生產應用程式中始終使用。
+**使用時機：** 永遠用於正式環境應用程式。
 
 ---
 
-## 課程 2：在 AZD 中實作 Managed Identity
+## 課程 2：使用 AZD 實作管理身份
 
 ### 逐步實作
 
-讓我們建立一個使用 Managed Identity 存取 Azure Storage 與 Key Vault 的安全 Container App。
+讓我們建立一個可使用管理身份訪問 Azure Storage 與 Key Vault 的安全 Container App。
 
 ### 專案結構
 
@@ -286,7 +286,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. 設定 AZD (azure.yaml)
+### 1. 設定 AZD（azure.yaml）
 
 ```yaml
 name: secure-app
@@ -302,9 +302,9 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. 基礎架構：啟用 Managed Identity
+### 2. 基礎架構：啟用管理身份
 
-**File: `infra/main.bicep`**
+**檔案：`infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -384,9 +384,9 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. 具有系統指派識別的 Container App
+### 3. System-Assigned 身份的 Container App
 
-**File: `infra/app/container-app.bicep`**
+**檔案：`infra/app/container-app.bicep`**
 
 ```bicep
 param name string
@@ -443,7 +443,7 @@ output url string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### 4. RBAC 角色指派模組
 
-**File: `infra/core/role-assignment.bicep`**
+**檔案：`infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
@@ -463,9 +463,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. 使用 Managed Identity 的應用程式程式碼
+### 5. 管理身份的應用程式程式碼
 
-**File: `src/app.js`**
+**檔案：`src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -476,21 +476,21 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 初始化憑證（使用受管理身分時會自動生效）
+// 🔑 初始化憑證（可與受管理身份自動配合使用）
 const credential = new DefaultAzureCredential();
 
-// 設定 Azure 儲存體
+// Azure 儲存體設置
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // 不需要金鑰！
+  credential  // 無需密鑰！
 );
 
-// 設定 Key Vault
+// 金鑰保管庫設置
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // 不需要金鑰！
+  credential  // 無需密鑰！
 );
 
 // 健康檢查
@@ -498,7 +498,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// 將檔案上載到 Blob 儲存體
+// 上傳檔案至 Blob 儲存體
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -520,7 +520,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// 從 Key Vault 取得機密
+// 從金鑰保管庫取得機密
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -562,7 +562,7 @@ app.listen(PORT, () => {
 });
 ```
 
-**File: `src/package.json`**
+**檔案：`src/package.json`**
 
 ```json
 {
@@ -586,10 +586,10 @@ app.listen(PORT, () => {
 # 初始化 AZD 環境
 azd init
 
-# 部署基礎架構及應用程式
+# 部署基礎設施和應用程式
 azd up
 
-# 取得應用程式網址
+# 取得應用程式 URL
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
 # 測試健康檢查
@@ -604,7 +604,7 @@ curl $APP_URL/health
 }
 ```
 
-**測試 blob 上傳：**
+**測試 Blob 上傳：**
 ```bash
 curl -X POST $APP_URL/upload
 ```
@@ -634,46 +634,46 @@ curl $APP_URL/containers
 
 ---
 
-## 常見的 Azure RBAC 角色
+## 常用 Azure RBAC 角色
 
-### Managed Identity 的內建角色 ID
+### 管理身份內建角色 ID
 
-| Service | Role Name | Role ID | Permissions |
+| 服務 | 角色名稱 | 角色 ID | 權限說明 |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | 讀取 blobs 與 containers |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | 讀取、寫入、刪除 blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | 讀取、寫入、刪除佇列訊息 |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | 讀取祕密 |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | 讀取、寫入、刪除祕密 |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | 讀取 blob 和容器 |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | 讀寫並刪除 blob |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | 讀寫刪除佇列訊息 |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | 讀取機密 |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | 讀寫刪除機密 |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | 讀取 Cosmos DB 資料 |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | 讀取、寫入 Cosmos DB 資料 |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | 讀寫 Cosmos DB 資料 |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | 管理 SQL 資料庫 |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | 傳送、接收、管理訊息 |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | 傳送、接收與管理訊息 |
 
 ### 如何查找角色 ID
 
 ```bash
-# 列出所有內建角色
+# 列出所有內置角色
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
 # 搜尋特定角色
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# 取得角色詳細資料
+# 獲取角色詳細資料
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
 ---
 
-## 實作練習
+## 實務練習
 
-### 練習 1：為現有應用啟用 Managed Identity ⭐⭐（中等）
+### 練習 1：為既有應用啟用管理身份 ⭐⭐（中階）
 
-**目標**：為現有的 Container App 部署新增 Managed Identity
+<strong>目標</strong>：為已有的 Container App 部署新增管理身份
 
-**情境**：你有一個使用連線字串的 Container App。將它轉換為 Managed Identity。
+<strong>情境</strong>：您目前的 Container App 使用連接字串，轉換為管理身份。
 
-**起始點**：具有此設定的 Container App：
+**起始配置：**
 
 ```bicep
 // ❌ Current: Using connection string
@@ -685,9 +685,9 @@ env: [
 ]
 ```
 
-**步驟**：
+**步驟：**
 
-1. **在 Bicep 中啟用 managed identity：**
+1. **在 Bicep 中啟用管理身份：**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **授予 Storage 存取權：**
+2. **授予 Storage 存取權限：**
 
 ```bicep
 // Get storage account reference
@@ -721,7 +721,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **更新應用程式程式碼：**
 
-**之前（連線字串）：**
+**之前（連接字串）：**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -730,7 +730,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**之後（Managed Identity）：**
+**之後（管理身份）：**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -754,54 +754,54 @@ env: [
 ]
 ```
 
-5. **部署與測試：**
+5. **部署並測試：**
 
 ```bash
 # 重新部署
 azd up
 
-# 測試它仍然運作
+# 測試它是否仍然有效
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
-**✅ 成功準則：**
+**✅ 成功標準：**
 - ✅ 應用部署無錯誤
 - ✅ Storage 操作正常（上傳、列出、下載）
-- ✅ 環境變數中沒有連線字串
-- ✅ 在 Azure Portal 的「Identity」頁面可見該識別
+- ✅ 環境變數中沒有連接字串
+- ✅ 在 Azure 入口網站的「身份識別」分頁看到身分
 
 **驗證：**
 
 ```bash
-# 檢查受管理的身份識別是否已啟用
+# 檢查已啟用受管身份
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ 預期: "SystemAssigned"
 
-# 檢查角色指派
+# 檢查角色分配
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
 # ✅ 預期: 顯示 "Storage Blob Data Contributor" 角色
 ```
 
-**時間**：20-30 分鐘
+<strong>時間</strong>：20-30 分鐘
 
 ---
 
-### 練習 2：使用使用者指派識別的多服務存取 ⭐⭐⭐（進階）
+### 練習 2：使用者指派身份多服務存取 ⭐⭐⭐（進階）
 
-**目標**：建立一個可被多個 Container Apps 共用的使用者指派識別
+<strong>目標</strong>：建立一個使用者指派身份，供多個 Container Apps 共用
 
-**情境**：你有 3 個微服務都需要存取同一個 Storage 帳戶與 Key Vault。
+<strong>情境</strong>：有 3 個微服務需存取相同的 Storage 帳戶與 Key Vault。
 
-**步驟**：
+**步驟：**
 
-1. **建立使用者指派識別：**
+1. **建立使用者指派身份：**
 
-**File: `infra/core/identity.bicep`**
+**檔案： `infra/core/identity.bicep`**
 
 ```bicep
 param name string
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **將角色指派給使用者指派識別：**
+2. **指派角色給使用者指派身份：**
 
 ```bicep
 // In main.bicep
@@ -856,7 +856,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **將識別指派給多個 Container Apps：**
+3. **將身份指派給多個 Container Apps：**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -898,12 +898,12 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// 對於使用者指派的身分，請指定用戶端 ID
+// 對於用戶分配的身份，請指定客戶端 ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // 使用者指派身分的用戶端 ID
+  process.env.AZURE_CLIENT_ID  // 用戶分配身份的客戶端 ID
 );
 
-// 或使用 DefaultAzureCredential（自動偵測）
+// 或者使用 DefaultAzureCredential（自動檢測）
 const credential = new DefaultAzureCredential();
 
 const blobServiceClient = new BlobServiceClient(
@@ -917,39 +917,39 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# 測試所有服務是否可以存取儲存空間
+# 測試所有服務均可存取存儲
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
-**✅ 成功準則：**
-- ✅ 一個識別共用於 3 個服務
-- ✅ 所有服務都能存取 Storage 與 Key Vault
-- ✅ 刪除其中一個服務時，識別仍然保留
-- ✅ 權限管理集中化
+**✅ 成功標準：**
+- ✅ 一個身份供 3 個服務共用
+- ✅ 所有服務能存取 Storage 和 Key Vault
+- ✅ 刪除其中一服務後，身份仍持續存在
+- ✅ 權限集中管理
 
-**使用者指派識別的好處：**
-- 單一識別便於管理
-- 服務間權限一致
-- 可在服務刪除後保留
+**使用者指派身份優點：**
+- 簡化身份管理
+- 權限跨服務一致
+- 可抵抗服務刪除造成的身份中斷
 - 適合複雜架構
 
-**時間**：30-40 分鐘
+<strong>時間</strong>：30-40 分鐘
 
 ---
 
-### 練習 3：實作 Key Vault 密鑰輪換 ⭐⭐⭐（進階）
+### 練習 3：實作 Key Vault 機密輪替 ⭐⭐⭐（進階）
 
-**目標**：在 Key Vault 存放第三方 API 金鑰，並使用 Managed Identity 存取
+<strong>目標</strong>：在 Key Vault 存放第三方 API 金鑰，並使用管理身份存取
 
-**情境**：你的應用需要呼叫第三方 API（OpenAI、Stripe、SendGrid），需要 API 金鑰。
+<strong>情境</strong>：您的應用需調用外部 API（OpenAI、Stripe、SendGrid），這些需用 API 金鑰。
 
-**步驟**：
+**步驟：**
 
-1. **建立使用 RBAC 的 Key Vault：**
+1. **建立有 RBAC 的 Key Vault：**
 
-**File: `infra/core/keyvault.bicep`**
+**檔案：`infra/core/keyvault.bicep`**
 
 ```bicep
 param name string
@@ -978,13 +978,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **在 Key Vault 中儲存祕密：**
+2. **將機密存入 Key Vault：**
 
 ```bash
-# 取得 Key Vault 名稱
+# 獲取金鑰保管庫名稱
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# 儲存第三方 API 金鑰
+# 存儲第三方 API 金鑰
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1001,9 +1001,9 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **應用程式程式碼以擷取祕密：**
+3. **取得機密的應用程式程式碼：**
 
-**File: `src/config.js`**
+**檔案：`src/config.js`**
 
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -1020,7 +1020,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // 先檢查快取
+    // 首先檢查緩存
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1052,9 +1052,9 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **在應用程式中使用祕密：**
+4. **應用程式中使用機密：**
 
-**File: `src/app.js`**
+**檔案：`src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -1063,7 +1063,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// 使用 Key Vault 的金鑰初始化 OpenAI
+// 使用來自 Key Vault 的金鑰初始化 OpenAI
 let openaiClient;
 
 async function initializeServices() {
@@ -1072,13 +1072,13 @@ async function initializeServices() {
   console.log('✅ Services initialized with secrets from Key Vault');
 }
 
-// 在啟動時呼叫
+// 啟動時調用
 initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1101,55 +1101,55 @@ app.listen(3000, () => {
 ```bash
 azd up
 
-# 測試 API 金鑰能否運作
+# 測試 API 金鑰是否有效
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ 成功準則：**
-- ✅ 程式碼或環境變數中沒有 API 金鑰
-- ✅ 應用能從 Key Vault 擷取金鑰
+**✅ 成功標準：**
+- ✅ 代碼與環境變數無 API 金鑰
+- ✅ 應用程式從 Key Vault 取得金鑰
 - ✅ 第三方 API 正常運作
-- ✅ 可在不修改程式碼的情況下輪換金鑰
+- ✅ 可在無修改代碼狀況下輪替金鑰
 
-**輪換祕密：**
+**輪替機密：**
 
 ```bash
-# 在 Key Vault 中更新機密
+# 更新 Key Vault 中的秘密
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# 重新啟動應用程式以套用新金鑰
+# 重啟應用程式以使用新密鑰
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
 ```
 
-**時間**：25-35 分鐘
+<strong>時間</strong>：25-35 分鐘
 
 ---
 
 ## 知識檢核點
 
-### 1. 驗證模式 ✓
+### 1. 認證模式 ✓
 
-測試你的理解：
+測試您的理解：
 
-- [ ] **Q1**: 三種主要的驗證模式是什麼？ 
-  - **A**: 連線字串（舊式）、Key Vault 參照（過渡）、Managed Identity（最佳）
+- [ ] **Q1**：三種主要的認證模式是什麼？  
+  - **A**：連接字串（舊式）、金鑰保管庫參考（過渡）、管理身份（最佳）
 
-- [ ] **Q2**: 為什麼 Managed Identity 比連線字串更好？
-  - **A**: 程式碼中沒有祕密、自動輪換、完整稽核紀錄、基於 RBAC 的權限
+- [ ] **Q2**：為何管理身份優於連接字串？  
+  - **A**：代碼中不含機密、自動輪替、完整審計軌跡、基於 RBAC 的權限管理
 
-- [ ] **Q3**: 何時會使用使用者指派識別而不是系統指派？
-  - **A**: 當需要在多個資源間共用識別，或識別的生命週期需獨立於資源時
+- [ ] **Q3**：什麼時候使用者會使用使用者指派身份而非系統指派？  
+  - **A**：需要跨多資源共享身份，或身份生命週期與資源獨立
 
 **實作驗證：**
 ```bash
-# 檢查你的應用程式使用的是哪種類型的身份
+# 檢查您的應用程式使用的是哪種類型的身份
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1162,25 +1162,25 @@ az role assignment list \
 
 ---
 
-### 2. RBAC 與權限 ✓
+### 2. RBAC 和權限 ✓
 
-測試你的理解：
+測試您的理解：
 
-- [ ] **Q1**: "Storage Blob Data Contributor" 的角色 ID 是什麼？
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Q1**：Storage Blob Data Contributor 角色的 ID 是什麼？  
+  - **A**：`ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: "Key Vault Secrets User" 提供什麼權限？
-  - **A**: 祕密的唯讀存取（無法建立、更新或刪除）
+- [ ] **Q2**：Key Vault Secrets User 角色擁有哪些權限？  
+  - **A**：只能讀取機密（無法建立、更新或刪除）
 
-- [ ] **Q3**: 如何授權 Container App 存取 Azure SQL？
-  - **A**: 指派 "SQL DB Contributor" 角色或為 SQL 設定 Azure AD 認證
+- [ ] **Q3**：如何授予 Container App 存取 Azure SQL？  
+  - **A**：指派「SQL DB Contributor」角色或設定 SQL 的 Azure AD 認證
 
 **實作驗證：**
 ```bash
 # 尋找特定角色
 az role definition list --name "Storage Blob Data Contributor"
 
-# 檢查哪些角色已指派給你的身份
+# 檢查分配給您的身份的角色
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1189,86 +1189,86 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ### 3. Key Vault 整合 ✓
 
-測試你的理解：
-- [ ] **Q1**: 如何為 Key Vault 啟用 RBAC，而不是使用存取原則？
-  - **A**: 在 Bicep 設定 `enableRbacAuthorization: true`
+測試您的理解：
+- [ ] **Q1**: 如何為 Key Vault 啟用 RBAC 而非存取原則？
+  - **A**: 在 Bicep 中設置 `enableRbacAuthorization: true`
 
-- [ ] **Q2**: 哪個 Azure SDK 函式庫處理受管身分的驗證？
-  - **A**: 使用 `@azure/identity` 的 `DefaultAzureCredential` 類別
+- [ ] **Q2**: 哪個 Azure SDK 庫處理受管理身份驗證？
+  - **A**: 使用 `@azure/identity` 和 `DefaultAzureCredential` 類別
 
-- [ ] **Q3**: Key Vault 的 secret 在快取中會保留多久？
-  - **A**: 視應用程式而定；請實作自己的快取策略
+- [ ] **Q3**: Key Vault 秘密在快取中保持多久？
+  - **A**: 取決於應用程式；自行實作快取策略
 
-**實作驗證：**
+**實作驗證:**
 ```bash
-# 測試 Key Vault 存取
+# 測試 Key Vault 存取權限
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# 檢查 RBAC 是否已啟用
+# 檢查是否已啟用 RBAC
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ 預期：true
+# ✅ 預期結果：true
 ```
 
 ---
 
-## 安全最佳實務
+## 安全最佳實踐
 
-### ✅ 建議做：
+### ✅ 要做的：
 
-1. **在生產環境始終使用受管身分**
+1. <strong>生產環境務必使用受管理身份</strong>
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **使用最小權限的 RBAC 角色**
-   - 盡可能使用「Reader」角色
-   - 除非必要，避免使用「Owner」或「Contributor」
+2. **使用最低權限 RBAC 角色**
+   - 盡可能使用「讀者」角色
+   - 避免除非必要才使用「擁有者」或「參與者」
 
 3. **將第三方金鑰存放於 Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **啟用稽核記錄**
+4. <strong>啟用稽核日誌</strong>
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
    }
    ```
 
-5. **為開發/暫存/生產使用不同的身分**
+5. **為開發、測試、正式環境使用不同身份**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **定期輪換機密**
-   - 為 Key Vault 的機密設定到期日
-   - 使用 Azure Functions 自動化輪換
+6. <strong>定期輪替秘密</strong>
+   - 為 Key Vault 秘密設置到期日
+   - 使用 Azure Functions 自動執行輪替
 
-### ❌ 不建議：
+### ❌ 不要做的：
 
-1. **切勿將機密寫死在程式碼中**
+1. <strong>切勿硬編碼秘密</strong>
    ```javascript
-   // ❌ 唔好
+   // ❌唔好
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **不要在生產環境使用連線字串**
+2. <strong>生產環境請勿用連接字串</strong>
    ```javascript
    // ❌ 差
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **不要授予過多權限**
+3. <strong>不要授予過多權限</strong>
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1277,7 +1277,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **不要在日誌中紀錄機密**
+4. <strong>不要記錄秘密</strong>
    ```javascript
    // ❌ 唔好
    console.log('API Key:', apiKey);
@@ -1286,7 +1286,7 @@ az keyvault show \
    console.log('API Key retrieved successfully');
    ```
 
-5. **不要於不同環境間共用生產身分**
+5. <strong>不要跨環境共用正式環境身分</strong>
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1296,34 +1296,34 @@ az keyvault show \
 
 ## 疑難排解指南
 
-### 問題: "Unauthorized" 在存取 Azure Storage 時
+### 問題：「未授權」存取 Azure Storage
 
-**症狀：**
+**症狀:**
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
 
-**診斷：**
+**診斷:**
 
 ```bash
-# 檢查是否已啟用託管身分識別
+# 檢查是否啟用託管身份
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ 預期： "SystemAssigned" 或 "UserAssigned"
+# ✅ 預期: "SystemAssigned" 或 "UserAssigned"
 
 # 檢查角色指派
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# 預期：應該會看到 "Storage Blob Data Contributor" 或相似的角色
+# 預期: 應該見到 "Storage Blob Data Contributor" 或類似角色
 ```
 
-**解決方法：**
+**解決方案：**
 
-1. **授予正確的 RBAC 角色：**
+1. **授予正確 RBAC 角色：**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1332,53 +1332,53 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **等待變更傳播（可能需 5-10 分鐘）：**
+2. **等待傳播完成（可能需要 5-10 分鐘）：**
 ```bash
 # 檢查角色分配狀態
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **確認應用程式程式碼使用正確的憑證：**
+3. **確認應用程式程式碼使用正確憑證：**
 ```javascript
-// 請確保你正在使用 DefaultAzureCredential
+// 確保你使用緊 DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
 
 ---
 
-### 問題: Key Vault 存取被拒
+### 問題：Key Vault 存取被拒
 
-**症狀：**
+**症狀:**
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
 
-**診斷：**
+**診斷:**
 
 ```bash
-# 檢查 Key Vault 的 RBAC 是否已啟用
+# 檢查 Key Vault RBAC 是否已啟用
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ 預期：true
 
-# 檢查角色指派
+# 檢查角色分配
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
 ```
 
-**解決方法：**
+**解決方案：**
 
-1. **在 Key Vault 上啟用 RBAC：**
+1. **啟用 Key Vault 上的 RBAC：**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **授予 Key Vault Secrets User 角色：**
+2. **授予 Key Vault 秘密使用者角色：**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1389,25 +1389,25 @@ az role assignment create \
 
 ---
 
-### 問題: DefaultAzureCredential 在本地失敗
+### 問題：DefaultAzureCredential 本地端失敗
 
-**症狀：**
+**症狀:**
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
 
-**診斷：**
+**診斷:**
 
 ```bash
 # 檢查你是否已登入
 az account show
 
-# 檢查 Azure CLI 的認證狀態
+# 檢查 Azure CLI 認證
 az ad signed-in-user show
 ```
 
-**解決方法：**
+**解決方案：**
 
 1. **登入 Azure CLI：**
 ```bash
@@ -1419,18 +1419,18 @@ az login
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **在本地開發時，使用環境變數：**
+3. **本地開發時使用環境變數：**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **或在本地使用不同的憑證：**
+4. **或在本地使用其他憑證：**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// 本地開發時使用 AzureCliCredential
+// 本地開發使用 AzureCliCredential
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1438,22 +1438,22 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### 問題: 角色指派傳播花太長時間
+### 問題：角色指派傳播太久
 
 **症狀：**
 - 角色已成功指派
-- 仍然收到 403 錯誤
-- 存取間歇性 (有時能用，有時不能)
+- 仍出現 403 錯誤
+- 存取不穩定（時有成功時有失敗）
 
 **說明：**
-Azure RBAC 的變更可能需要 5-10 分鐘在全球傳播。
+Azure RBAC 變更需 5-10 分鐘全球同步。
 
 **解決方案：**
 
 ```bash
-# 等候並重試
+# 等待並重試
 echo "Waiting for RBAC propagation..."
-sleep 300  # 等候 5 分鐘
+sleep 300  # 等待5分鐘
 
 # 測試存取
 curl https://myapp.azurecontainerapps.io/upload
@@ -1468,35 +1468,35 @@ az containerapp revision restart \
 
 ## 成本考量
 
-### 受管身分成本
+### 受管理身份成本
 
 | 資源 | 成本 |
 |----------|------|
-| **受管身分** | 🆓 **免費** - 不收費 |
-| **RBAC 角色指派** | 🆓 **免費** - 不收費 |
-| **Azure AD 令牌請求** | 🆓 **免費** - 包含在內 |
-| **Key Vault 操作** | $0.03 每 10,000 次操作 |
-| **Key Vault 儲存** | 每個機密每月 $0.024 |
+| <strong>受管理身份</strong> | 🆓 <strong>免費</strong> - 無收費 |
+| **RBAC 角色指派** | 🆓 <strong>免費</strong> - 無收費 |
+| **Azure AD 令牌請求** | 🆓 <strong>免費</strong> - 含括在內 |
+| **Key Vault 操作** | 每 10,000 次操作 $0.03 |
+| **Key Vault 儲存** | 每個秘密每月 $0.024 |
 
-**受管身分可節省成本：**
-- ✅ 省去用於服務間驗證的 Key Vault 操作
-- ✅ 減少安全事件（無外洩憑證）
-- ✅ 降低營運負擔（無需手動輪換）
+**受管理身份可節省成本點：**
+- ✅ 消除服務間授權的 Key Vault 操作費用
+- ✅ 降低安全事故（無憑證外洩）
+- ✅ 減少營運負擔（免人工輪替）
 
-**範例成本比較（每月）：**
+**示例成本比較（月費）：**
 
-| 情境 | 連線字串 | 受管身分 | 節省 |
+| 情境 | 連接字串 | 受管理身份 | 節省 |
 |----------|-------------------|-----------------|---------|
-| 小型應用（1M 請求） | 約 $50（Key Vault + 操作） | 約 $0 | 每月 $50 |
-| 中型應用（10M 請求） | 約 $200 | 約 $0 | 每月 $200 |
-| 大型應用（100M 請求） | 約 $1,500 | 約 $0 | 每月 $1,500 |
+| 小型應用 (100 萬請求) | 約 $50（Key Vault + 操作） | 約 $0 | $50/月 |
+| 中型應用 (1,000 萬請求) | 約 $200 | 約 $0 | $200/月 |
+| 大型應用 (1 億請求) | 約 $1,500 | 約 $0 | $1,500/月 |
 
 ---
 
 ## 深入了解
 
 ### 官方文件
-- [Azure 受管身分](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure 受管理身份](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1506,42 +1506,42 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### 課程下一步
-- ← 上一節: [設定管理](configuration.md)
-- → 下一節: [第一個專案](first-project.md)
+### 本課程後續步驟
+- ← 上一課: [配置管理](configuration.md)
+- → 下一課: [第一個專案](first-project.md)
 - 🏠 [課程首頁](../../README.md)
 
 ### 相關範例
-- [Azure OpenAI Chat Example](../../../../examples/azure-openai-chat) - 使用受管身分來存取 Azure OpenAI
-- [Microservices Example](../../../../examples/microservices) - 多服務驗證模式
+- [Microsoft Foundry Models 聊天範例](../../../../examples/azure-openai-chat) - 使用受管理身份存取 Microsoft Foundry Models
+- [微服務範例](../../../../examples/microservices) - 多服務驗證模式
 
 ---
 
-## 摘要
+## 總結
 
 **你已學會：**
-- ✅ 三種驗證模式（連線字串、Key Vault、受管身分）
-- ✅ 如何在 AZD 中啟用及設定受管身分
+- ✅ 三種驗證模式（連接字串、Key Vault、受管理身份）
+- ✅ 如何在 AZD 啟用與設定受管理身份
 - ✅ Azure 服務的 RBAC 角色指派
-- ✅ Key Vault 與第三方機密的整合
-- ✅ 使用者指派身分與系統指派身分
-- ✅ 安全最佳實務與疑難排解
+- ✅ 對接第三方秘密與 Key Vault
+- ✅ 使用者指派與系統指派身份
+- ✅ 安全最佳實踐與疑難排解
 
-**重點帶走：**
-1. **在生產環境始終使用受管身分** - 無需機密，自動輪換
-2. **使用最小權限的 RBAC 角色** - 僅授予必要權限
-3. **將第三方金鑰存放於 Key Vault** - 集中管理機密
-4. **為各環境分離身分** - 開發、暫存、生產隔離
-5. **啟用稽核記錄** - 追蹤誰存取了什麼
+**重點摘錄：**
+1. <strong>生產環境一定要用受管理身份</strong> - 零秘密，自動輪替
+2. **使用最低權限 RBAC 角色** - 僅授必需權限
+3. **將第三方金鑰存放 Key Vault** - 集中管理秘密
+4. <strong>不同環境使用分離身份</strong> - 開發、測試、正式隔離
+5. <strong>啟用稽核日誌</strong> - 紀錄誰存取了什麼
 
-**下一步：**
-1. 完成上述實作練習
-2. 將現有應用從連線字串遷移到受管身分
-3. 建立你的第一個 AZD 專案，從一開始就導入安全性： [第一個專案](first-project.md)
+**後續行動：**
+1. 完成上方實作練習
+2. 將現有應用服務從連接字串遷移到受管理身份
+3. 從第一天起建置安全的 AZD 專案：[第一個專案](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明：**
-本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。文件的原始語言版本應視為具權威性的來源。如涉及重要資訊，建議採用專業人工翻譯。對於因使用本翻譯而產生的任何誤解或曲解，我們概不負責。
+**免責聲明**：  
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯。雖然我們致力於準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵資訊，建議聘請專業人員進行人工翻譯。我們不對因使用此翻譯而產生的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

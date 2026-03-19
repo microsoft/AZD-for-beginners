@@ -1,44 +1,70 @@
 # 設定指南
 
-**章節導覽：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 目前章節**: 第3章 - 設定與身份驗證
-- **⬅️ 上一章**: [你的第一個專案](first-project.md)
-- **➡️ 下一章**: [部署指南](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 下一章節**: [第4章：基礎架構即程式碼](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD 入門](../../README.md)
+- **📖 Current Chapter**: 第 3 章 - 設定與驗證
+- **⬅️ Previous**: [你的第一個專案](first-project.md)
+- **➡️ Next**: [部署指南](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Next Chapter**: [第 4 章：基礎架構即程式碼](../chapter-04-infrastructure/deployment-guide.md)
 
-## 介紹
+## 簡介
 
-本綜合指南涵蓋設定 Azure Developer CLI 以達到最佳開發與部署工作流程的所有面向。您將學習設定層級、環境管理、驗證方法，以及能夠支援高效且安全 Azure 部署的進階設定模式。
+本綜合指南涵蓋配置 Azure 開發者 CLI 以達到最佳開發與部署工作流程的各個面向。您將學習配置階層、環境管理、驗證方法，以及能夠實現高效且安全的 Azure 部署的進階配置模式。
 
 ## 學習目標
 
-完成本課程後，您將能夠：
-- 掌握 azd 的設定層級並了解設定的優先順序
+在本課程結束時，您將能夠：
+- 掌握 azd 的設定階層並了解設定如何被優先處理
 - 有效設定全域與專案特定的設定
-- 管理具有不同設定的多個環境
+- 管理具有不同配置的多個環境
 - 實作安全的驗證與授權模式
-- 了解複雜情境的進階設定模式
+- 了解用於複雜情境的進階配置模式
 
 ## 學習成果
 
-完成本課程後，您將能夠：
-- 為最佳開發流程設定 azd
-- 設定並管理多個部署環境
-- 實施安全的設定管理作法
+完成本課程後，您將能：
+- 為最佳開發工作流程設定 azd
+- 建置並管理多個部署環境
+- 實施安全的設定管理做法
 - 排解與設定相關的問題
-- 依特定組織需求自訂 azd 行為
+- 為特定組織需求自訂 azd 的行為
 
-本綜合指南涵蓋設定 Azure Developer CLI 以達到最佳開發與部署工作流程的所有面向。
+本綜合指南涵蓋配置 Azure 開發者 CLI 以達到最佳開發與部署工作流程的各個面向。
 
-## 設定層級結構
+## 理解 azd 專案中的 AI 代理
 
-azd 使用階層式的設定系統：
-1. **命令列旗標** (最高優先權)
-2. **環境變數**
-3. **本地專案設定** (`.azd/config.json`)
-4. **全域使用者設定** (`~/.azd/config.json`)
-5. **預設值** (最低優先權)
+如果您對 AI 代理還不熟悉，這裡有一個在 azd 世界中簡單的理解方式。
+
+### 什麼是代理？
+
+代理是一段能接收請求、對其進行推理並採取行動的軟體——通常透過呼叫 AI 模型、查詢資料或呼叫其他服務。在 azd 專案中，代理只是與您的網頁前端或 API 後端並列的另一個 <strong>服務</strong>。
+
+### 代理如何融入 azd 專案結構
+
+一個 azd 專案由三個層級組成：<strong>基礎架構</strong>、<strong>程式碼</strong> 與 <strong>設定</strong>。代理以與其他服務相同的方式整合到這些層級中：
+
+| 層級 | 對於傳統應用程式的作用 | 對代理的作用 |
+|-------|-------------------------------------|---------------------------|
+| <strong>基礎架構</strong> (`infra/`) | 佈建網頁應用程式和資料庫 | 佈建 AI 模型端點、搜尋索引或代理主機 |
+| <strong>程式碼</strong> (`src/`) | 包含您的前端與 API 原始程式碼 | 包含您的代理邏輯與提示詞定義 |
+| <strong>設定</strong> (`azure.yaml`) | 列出您的服務及其部署目標 | 將您的代理列為一個服務，並指向其程式碼與主機 |
+
+### `azure.yaml` 的角色
+
+您現在不需要背誦語法。概念上，`azure.yaml` 是您告訴 azd 的檔案：*"這裡是組成我應用程式的服務，下面是找到它們程式碼的位置。"*
+
+當您的專案包含 AI 代理時，`azure.yaml` 會簡單地將該代理列為服務之一。azd 隨後就會知道要佈建正確的基礎架構（像是 Microsoft Foundry Models 的端點或用來承載代理的 Container App）並部署您的代理程式碼——就像處理網頁應用或 API 一樣。
+
+這表示沒有什麼根本上需要重新學習的。如果您理解 azd 如何管理一個網路服務，您已經理解它如何管理一個代理。
+
+## 設定階層
+
+azd 使用分層的設定系統：
+1. <strong>命令列參數</strong>（優先權最高）
+2. <strong>環境變數</strong>
+3. <strong>本地專案設定</strong>（`.azd/config.json`）
+4. <strong>全域使用者設定</strong>（`~/.azd/config.json`）
+5. <strong>預設值</strong>（優先權最低）
 
 ## 全域設定
 
@@ -56,13 +82,13 @@ azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 # 檢視所有全域設定
 azd config list
 
-# 移除設定
+# 移除一個設定
 azd config unset defaults.location
 ```
 
 ### 常見的全域設定
 ```bash
-# 開發偏好設定
+# 開發偏好
 azd config set alpha.enable true                    # 啟用 Alpha 功能
 azd config set telemetry.enabled false             # 停用遙測
 azd config set output.format json                  # 設定輸出格式
@@ -176,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### 特定語言設定
+#### 語言特定設定
 ```yaml
 services:
   node-app:
@@ -215,7 +241,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### 環境設定
-每個環境都有其自己的設定，存放於 `.azure/<env-name>/config.json`：
+每個環境都有其位於 `.azure/<env-name>/config.json` 的設定：
 
 ```json
 {
@@ -244,7 +270,7 @@ azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# 查看環境變數
+# 檢視環境變數
 azd env get-values
 
 # 預期輸出:
@@ -257,11 +283,11 @@ azd env unset DEBUG
 
 # 確認已移除
 azd env get-values | grep DEBUG
-# (應該不會有任何輸出)
+# (應該不會回傳任何內容)
 ```
 
 ### 環境範本
-建立 `.azure/env.template` 以確保環境設定一致：
+建立 `.azure/env.template` 以便一致地設定環境：
 ```bash
 # 必要的變數
 AZURE_SUBSCRIPTION_ID=
@@ -281,17 +307,17 @@ LOG_LEVEL=info
 
 ### Azure CLI 整合
 ```bash
-# 使用 Azure CLI 憑證（預設）
+# 使用 Azure CLI 憑證 (預設)
 azd config set auth.useAzureCliCredential true
 
-# 以特定租戶登入
+# 使用指定租戶登入
 az login --tenant <tenant-id>
 
 # 設定預設訂閱
 az account set --subscription <subscription-id>
 ```
 
-### 服務主體驗證
+### 服務主體認證
 用於 CI/CD 管線：
 ```bash
 # 設定環境變數
@@ -304,10 +330,10 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### 託管身分識別
-用於 Azure 托管的環境：
+### 託管識別
+用於在 Azure 上託管的環境：
 ```bash
-# 啟用受管理的身分識別驗證
+# 啟用託管身分識別驗證
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -315,7 +341,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ 基礎架構設定
 
 ### Bicep 參數
-在 `infra/main.parameters.json` 中設定基礎架構參數：
+在 `infra/main.parameters.json` 設定基礎架構參數：
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -338,7 +364,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### Terraform 設定
-對於 Terraform 專案，在 `infra/terraform.tfvars` 中設定：
+對於 Terraform 專案，於 `infra/terraform.tfvars` 設定：
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -391,7 +417,7 @@ services:
 
 ### 自訂資源命名
 ```bash
-# 設定命名慣例
+# 設定命名規則
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -431,7 +457,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### 測試環境
+### 預備環境
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -459,12 +485,12 @@ azd config validate
 # 測試環境變數
 azd env get-values
 
-# 驗證基礎架構
+# 驗證基礎設施
 azd provision --dry-run
 ```
 
 ### 設定腳本
-在 `scripts/` 中建立驗證腳本：
+於 `scripts/` 建立驗證腳本：
 
 ```bash
 #!/bin/bash
@@ -472,7 +498,7 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# 檢查必需的環境變數
+# 檢查所需的環境變數
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
@@ -487,7 +513,7 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 最佳實踐
+## 🎓 最佳實務
 
 ### 1. 使用環境變數
 ```yaml
@@ -500,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. 整理設定檔案
+### 2. 組織設定檔案
 ```
 .azure/
 ├── config.json              # Global project config
@@ -519,13 +545,13 @@ database:
 ### 3. 版本控制注意事項
 ```bash
 # .gitignore
-.azure/*/config.json         # 環境設定 (包含資源 ID)
-.azure/*/.env               # 環境變數 (可能包含機密)
+.azure/*/config.json         # 環境設定（包含資源 ID）
+.azure/*/.env               # 環境變數（可能包含機密）
 .env                        # 本地環境檔案
 ```
 
-### 4. 設定文件化
-在 `CONFIG.md` 中記錄您的設定：
+### 4. 設定文件
+將您的設定紀錄於 `CONFIG.md`：
 ```markdown
 # Configuration Guide
 
@@ -544,7 +570,7 @@ database:
 
 ### 練習 1：多環境設定（15 分鐘）
 
-**目標**：建立並設定三個具有不同設定的環境
+<strong>目標</strong>：建立並設定三個具有不同設定的環境
 
 ```bash
 # 建立開發環境
@@ -572,17 +598,17 @@ azd env select production && azd env get-values
 ```
 
 **成功標準：**
-- [ ] 成功建立三個環境
-- [ ] 每個環境皆有獨特的設定
-- [ ] 能在環境間切換且不發生錯誤
+- [ ] 三個環境已成功建立
+- [ ] 每個環境具有獨特的設定
+- [ ] 能在環境間切換且無錯誤
 - [ ] `azd env list` 顯示所有三個環境
 
-### 練習 2：秘密管理（10 分鐘）
+### 練習 2：祕密管理（10 分鐘）
 
-**目標**：練習以敏感資料進行安全設定管理
+<strong>目標</strong>：練習安全地處理敏感資料的設定
 
 ```bash
-# 設定機密（不會顯示在輸出中）
+# 設定機密（不會在輸出中顯示）
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
@@ -590,23 +616,23 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# 檢視環境（機密應被遮蔽）
+# 檢視環境（機密應該被遮蔽）
 azd env get-values
 
-# 確認機密已儲存
+# 驗證機密已被儲存
 azd env get DB_PASSWORD  # 應顯示實際值
 ```
 
 **成功標準：**
-- [ ] 秘密已儲存且不在終端機中顯示
-- [ ] `azd env get-values` 顯示被遮蔽的秘密
-- [ ] 個別使用 `azd env get <SECRET_NAME>` 可擷取實際數值
+- [ ] 祕密已儲存但未在終端顯示
+- [ ] `azd env get-values` 顯示已遮蔽的祕密
+- [ ] 單一 `azd env get <SECRET_NAME>` 可取得實際值
 
 ## 下一步
 
-- [你的第一個專案](first-project.md) - 在實務中應用設定
+- [你的第一個專案](first-project.md) - 在實務中套用設定
 - [部署指南](../chapter-04-infrastructure/deployment-guide.md) - 使用設定進行部署
-- [資源佈建](../chapter-04-infrastructure/provisioning.md) - 生產就緒的設定
+- [資源佈建](../chapter-04-infrastructure/provisioning.md) - 適用於生產的設定
 
 ## 參考資料
 
@@ -616,16 +642,16 @@ azd env get DB_PASSWORD  # 應顯示實際值
 
 ---
 
-**章節導覽：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 目前章節**: 第3章 - 設定與身份驗證
-- **⬅️ 上一章**: [你的第一個專案](first-project.md)
-- **➡️ 下一章節**: [第4章：基礎架構即程式碼](../chapter-04-infrastructure/deployment-guide.md)
-- **下一課程**: [你的第一個專案](first-project.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD 入門](../../README.md)
+- **📖 Current Chapter**: 第 3 章 - 設定與驗證
+- **⬅️ Previous**: [你的第一個專案](first-project.md)
+- **➡️ Next Chapter**: [第 4 章：基礎架構即程式碼](../chapter-04-infrastructure/deployment-guide.md)
+- **Next Lesson**: [你的第一個專案](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件係使用人工智慧翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 所翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不精確之處。原始文件的母語版本應視為具權威性的參考。對於重要資訊，建議採用專業人工翻譯。我們不對因使用此翻譯而產生的任何誤解或錯誤詮釋承擔責任。
+**免責聲明**:
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於確保準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言版本應被視為具權威性的來源。如涉及重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而引致的任何誤解或錯誤詮釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

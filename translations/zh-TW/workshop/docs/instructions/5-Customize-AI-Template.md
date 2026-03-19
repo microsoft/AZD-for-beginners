@@ -3,28 +3,28 @@
 !!! tip "在本模組結束時您將能夠"
 
     - [ ] 探索預設的 AI 代理功能
-    - [ ] 新增使用自己索引的 AI 搜尋
-    - [ ] 啟用並分析追蹤指標
-    - [ ] 執行一次評估作業
+    - [ ] 新增 AI 搜尋並使用您自己的索引
+    - [ ] 啟用並分析追蹤（Tracing）指標
+    - [ ] 執行評估
     - [ ] 執行紅隊掃描
-    - [ ] **實驗 5：建立自訂計畫** 
+    - [ ] **實驗 5：建立自訂化計畫** 
 
 ---
 
 ## 5.1 AI 代理功能
 
-!!! success "我們已在實驗 01 完成此項目"
+!!! success "我們在實驗 01 中已完成此項目"
 
-- **檔案搜尋**: OpenAI 內建的檔案搜尋，用於知識檢索
-- **來源引用**: 回應中的自動來源歸屬
-- **可客製化指示**: 修改代理行為與個性
-- **工具整合**: 可擴充的工具系統以支援客製功能
+- <strong>檔案搜尋</strong>: OpenAI 內建的檔案搜尋，用於知識擷取
+- <strong>引用</strong>: 回應中的自動來源歸屬
+- <strong>可自訂指示</strong>: 修改代理的行為與個性
+- <strong>工具整合</strong>: 可擴充的工具系統以支援自訂功能
 
 ---
 
 ## 5.2 知識檢索選項
 
-!!! task "要完成此項目，我們需要進行變更並重新部署"    
+!!! task "要完成此項，我們需要進行變更並重新部署"    
     
     ```bash title=""
     # Set environment variables
@@ -42,9 +42,9 @@
 
 **OpenAI File Search (Default):**
 
-- 內建於 Foundry 代理
+- 內建於 Foundry Agents
 - 自動文件處理與建立索引
-- 不需要額外設定
+- 無需額外設定
 
 **Azure AI Search (Optional):**
 
@@ -57,43 +57,43 @@
 
 ## 5.3 [追蹤與監控](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "要完成此項目，我們需要進行變更並重新部署"    
+!!! task "要完成此項，我們需要進行變更並重新部署"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**追蹤:**
+**追蹤：**
 
-- 整合 OpenTelemetry
+- OpenTelemetry 整合
 - 請求/回應追蹤
 - 效能指標
-- 可在 Microsoft Foundry 入口網站取得
+- 可在 Microsoft Foundry 入口網站中使用
 
-**記錄:**
+**日誌記錄：**
 
 - Container Apps 中的應用程式日誌
-- 具結構化日誌與關聯 ID
-- 即時與歷史日誌檢視
+- 具關聯 ID 的結構化日誌
+- 即時與歷史日誌查看
 
 ---
 
 ## 5.4 [代理評估](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**本地評估:**
+**本地評估：**
 
 - 內建評估器用於品質評估
 - 自訂評估腳本
 - 效能基準測試
 
-**持續監控:**
+**持續監控：**
 
-- 自動評估實時互動
+- 對實時互動進行自動評估
 - 品質指標追蹤
-- 效能退化偵測
+- 效能回歸檢測
 
-**CI/CD 整合:**
+**CI/CD 整合：**
 
 - GitHub Actions 工作流程
 - 自動化測試與評估
@@ -103,29 +103,29 @@
 
 ## 5.5 [AI 紅隊代理](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI 紅隊:**
+**AI 紅隊：**
 
 - 自動化安全掃描
-- AI 系統風險評估
-- 跨多分類的安全評估
+- AI 系統的風險評估
+- 跨多類別的安全評估
 
-**驗證:**
+**驗證：**
 
-- Azure 服務的受管理身分
+- Azure 服務的託管身分識別 (Managed Identity)
 - 可選的 Azure App Service 驗證
-- 開發環境的基本驗證備援
+- 開發時的 Basic 驗證回退
 
 
 
-!!! quote "在本實驗結束時您應該已經擁有"
+!!! quote "在本實驗結束時，您應該擁有"
     - [ ] 定義您的情境需求
     - [ ] 自訂環境變數（設定）
     - [ ] 自訂代理指示（任務）
-    - [ ] 部署自訂範本（應用）
-    - [ ] 完成部署後工作（手動）
+    - [ ] 部署自訂範本（應用程式）
+    - [ ] 完成部署後任務（手動）
     - [ ] 執行測試評估
 
-此範例示範如何為企業零售使用情境自訂範本，包含兩個專門代理與多個模型部署。
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
@@ -133,23 +133,23 @@
 
 ### 5.6.1. 情境需求
 
-#### **代理部署:** 
+#### **代理部署：** 
 
-   - Shopper Agent: 協助客戶尋找並比較產品
-   - Loyalty Agent: 管理客戶獎勵與促銷
+   - Shopper Agent：協助客戶尋找並比較產品
+   - Loyalty Agent：管理客戶獎勵與促銷
 
-#### **模型部署:**
+#### **模型部署：**
 
-   - `gpt-4.1`: 主要聊天模型
-   - `o3`: 處理複雜查詢的推理模型
-   - `gpt-4.1-nano`: 用於簡單互動的輕量模型
-   - `text-embedding-3-large`: 用於搜尋的高品質嵌入
+   - `gpt-4.1`：主要的聊天模型
+   - `o3`：用於複雜查詢的推理模型
+   - `gpt-4.1-nano`：用於簡單互動的輕量模型
+   - `text-embedding-3-large`：用於搜尋的高品質嵌入向量
 
-#### **功能:**
+#### **功能：**
 
    - 啟用追蹤與監控
-   - 為產品目錄提供 AI 搜尋
-   - 品質保證的評估框架
+   - 用於產品目錄的 AI 搜尋
+   - 用於品質保證的評估框架
    - 用於安全驗證的紅隊測試
 
 ---
@@ -167,16 +167,16 @@ Create a setup script (`setup-retail.sh`)
 # 設定環境名稱
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# 設定區域（根據模型可用性選擇）
+# 設定區域（依據模型可用性選擇）
 azd env set AZURE_LOCATION "eastus2"
 
-# 啟用所有可選服務
+# 啟用所有選用服務
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# 設定主要聊天模型（gpt-4o 為最接近 gpt-4.1 的可用模型）
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# 設定主要聊天模型（gpt-4.1 為最接近 gpt-4.1 的可用模型）
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
@@ -186,7 +186,7 @@ azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# 設定代理人名稱（將建立第一個代理人）
+# 設定代理名稱（將建立第一個代理）
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # 設定搜尋索引
@@ -198,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: 代理指示
+#### 5.6.2.2：代理指示
 
 Create `custom-agents/shopper-agent-instructions.md`:
 
@@ -248,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: 部署腳本
+#### 5.6.2.3：部署腳本
 
 Create `deploy-retail.sh`:
 
@@ -280,7 +280,7 @@ echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -291,7 +291,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# 部署基礎架構與應用程式
+# 部署基礎設施與應用程式
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
@@ -299,7 +299,7 @@ azd up
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# 取得 Web 應用程式的網址
+# 取得 Web 應用程式的 URL
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
@@ -321,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: 部署後設定
+#### 5.6.2.4：部署後設定
 
 Create `configure-retail-agents.sh`:
 
@@ -378,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: 測試與驗證
+### 5.6.3：測試與驗證
 
 Create `test-retail-deployment.sh`:
 
@@ -391,7 +391,7 @@ echo "🧪 Testing retail deployment..."
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# 測試 Web 應用程式是否可用
+# 測試 Web 應用程式的可用性
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -429,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 預期成果
+### 5.6.4 期望結果
 
-依照此實作指南，您將會擁有：
+完成此實作指南後，您將擁有：
 
-1. **已部署的基礎設施:**
+1. **已部署基礎架構：**
 
-      - Microsoft Foundry 專案，包含模型部署
-      - Container Apps 托管的網頁應用程式
+      - 含模型部署的 Microsoft Foundry 專案
+      - 承載網頁應用程式的 Container Apps
       - 用於產品目錄的 AI Search 服務
       - 用於監控的 Application Insights
 
-2. **初始代理:**
+2. **初始代理：**
 
-      - 已為 Shopper Agent 設定基本指示
+      - Shopper Agent 已配置基本指示
       - 啟用檔案搜尋功能
-      - 設定追蹤與監控
+      - 已設定追蹤與監控
 
-3. **準備好進行客製化:**
+3. **準備自訂：**
 
-      - 可加入 Loyalty Agent 的架構
+      - 可新增 Loyalty Agent 的框架
       - 自訂指示範本
       - 測試與驗證腳本
       - 監控與評估設定
 
-4. **生產準備就緒:**
+4. **生產準備就緒：**
 
       - 使用紅隊進行安全掃描
       - 效能監控
       - 品質評估框架
-      - 可擴展的架構
+      - 可擴充的架構
 
-此範例示範了如何擴充並自訂 AZD 範本以符合特定企業情境，同時維持在安全性、監控與可擴展性方面的最佳實務。
+此範例示範如何在維持安全性、監控與可擴充性等最佳做法下，擴充與自訂 AZD 範本以符合特定企業情境。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言版本之文件應視為具權威性的來源。對於重要資訊，建議採用專業人工翻譯。對於因使用本翻譯而產生的任何誤解或曲解，我們概不負責。
+**免責聲明**:
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的原始文件應被視為具權威性的來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

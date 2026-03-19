@@ -1,29 +1,29 @@
-# Container App 部署範例與 AZD
+# Container App Deployment Examples with AZD
 
-此目錄包含使用 Azure Developer CLI (AZD) 將容器化應用部署到 Azure Container Apps 的完整範例。這些範例展示了實際情境的模式、最佳實務和可投入生產的設定。
+This directory contains comprehensive examples for deploying containerized applications to Azure Container Apps using Azure Developer CLI (AZD). These examples demonstrate real-world patterns, best practices, and production-ready configurations.
 
 ## 📚 目錄
 
-- [Overview](../../../../examples/container-app)
-- [Prerequisites](../../../../examples/container-app)
-- [Quick Start Examples](../../../../examples/container-app)
-- [Production Examples](../../../../examples/container-app)
-- [Advanced Patterns](../../../../examples/container-app)
-- [Best Practices](../../../../examples/container-app)
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Quick Start Examples](#quick-start-examples)
+- [Production Examples](#production-examples)
+- [Advanced Patterns](#advanced-patterns)
+- [Best Practices](#best-practices)
 
 ## Overview
 
-Azure Container Apps 是一個完全管理的無伺服器容器平台，可讓您在不管理基礎設施的情況下執行微服務和容器化應用。結合 AZD 時，您將獲得：
+Azure Container Apps is a fully managed serverless container platform that enables you to run microservices and containerized applications without managing infrastructure. When combined with AZD, you get:
 
-- **簡化部署**：單一指令即可部署含基礎設施的容器
-- **自動縮放**：可根據 HTTP 流量或事件從零縮放到更多實例
-- **整合網路**：內建服務發現與流量拆分
-- **受管理身分識別**：對 Azure 資源的安全驗證
-- **成本優化**：只為您使用的資源付費
+- **Simplified Deployment**: Single command deploys containers with infrastructure
+- **Automatic Scaling**: Scale to zero and scale out based on HTTP traffic or events
+- **Integrated Networking**: Built-in service discovery and traffic splitting
+- **Managed Identity**: Secure authentication to Azure resources
+- **Cost Optimization**: Pay only for resources you use
 
 ## Prerequisites
 
-在開始之前，請確保您已具備：
+Before getting started, ensure you have:
 
 ```bash
 # 檢查是否已安裝 AZD
@@ -32,7 +32,7 @@ azd version
 # 檢查是否已安裝 Azure CLI
 az version
 
-# 檢查 Docker（用於建置自訂映像檔）
+# 檢查 Docker（用於建立自訂映像）
 docker --version
 
 # 登入 Azure
@@ -40,18 +40,18 @@ azd auth login
 az login
 ```
 
-**所需的 Azure 資源：**
-- 有效的 Azure 訂閱
-- 建立資源群組的權限
-- Container Apps 環境存取權
+**Required Azure Resources:**
+- Active Azure subscription
+- Resource group creation permissions
+- Container Apps environment access
 
 ## Quick Start Examples
 
 ### 1. Simple Web API (Python Flask)
 
-部署一個基本的 REST API 到 Azure Container Apps。
+Deploy a basic REST API with Azure Container Apps.
 
-**範例：Python Flask API**
+**Example: Python Flask API**
 
 ```yaml
 # azure.yaml
@@ -65,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**部署步驟：**
+**Deployment Steps:**
 
 ```bash
 # 從範本初始化
 azd init --template todo-python-mongo
 
-# 佈建基礎架構並進行部署
+# 佈建基礎架構並部署
 azd up
 
 # 測試部署
@@ -79,15 +79,15 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**主要特色：**
-- 自動從 0 擴展到 10 個副本
-- 健康探測與存活檢查
-- 環境變數注入
-- 與 Application Insights 整合
+**Key Features:**
+- Auto-scaling from 0 to 10 replicas
+- Health probes and liveness checks
+- Environment variable injection
+- Application Insights integration
 
 ### 2. Node.js Express API
 
-部署一個帶有 MongoDB 整合的 Node.js 後端。
+Deploy a Node.js backend with MongoDB integration.
 
 ```bash
 # 初始化 Node.js API 範本
@@ -104,7 +104,7 @@ azd up
 azd monitor --logs
 ```
 
-**基礎設施重點：**
+**Infrastructure Highlights:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -149,13 +149,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Static Frontend + API Backend
 
-部署一個包含 React 前端與 API 後端的完整應用。
+Deploy a full-stack application with React frontend and API backend.
 
 ```bash
 # 初始化全端範本
 azd init --template todo-csharp-sql-swa-func
 
-# 檢視設定
+# 檢閱設定
 cat azure.yaml
 
 # 部署兩個服務
@@ -169,9 +169,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### Example 1: Microservices Architecture
 
-**情境**：具有多個微服務的電子商務應用
+**Scenario**: E-commerce application with multiple microservices
 
-**目錄結構：**
+**Directory Structure:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -191,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml 設定：**
+**azure.yaml Configuration:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -211,15 +211,15 @@ services:
     host: containerapp
 ```
 
-**部署：**
+**Deployment:**
 ```bash
 # 初始化專案
 azd init
 
-# 設定為生產環境
+# 設定生產環境
 azd env new production
 
-# 配置生產環境設定
+# 設定生產環境設定
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -233,9 +233,9 @@ azd monitor --overview
 
 ### Example 2: AI-Powered Container App
 
-**情境**：與 Azure OpenAI 整合的 AI 聊天應用
+**Scenario**: AI chat application with Microsoft Foundry Models integration
 
-**檔案：src/ai-chat/app.py**
+**File: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# 使用託管身分識別以進行安全存取
+# 使用受管身分識別（Managed Identity）以安全存取
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,12 +253,12 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # 從金鑰保管庫取得 OpenAI 金鑰
+    # 從 Key Vault 取得 OpenAI 金鑰
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -268,7 +268,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**檔案：azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +278,7 @@ services:
     host: containerapp
 ```
 
-**檔案：infra/main.bicep**
+**File: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -320,7 +320,7 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**部署指令：**
+**Deployment Commands:**
 ```bash
 # 設定環境
 azd init --template ai-chat-app
@@ -328,7 +328,7 @@ azd env new dev
 
 # 設定 OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # 部署
 azd up
@@ -341,9 +341,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
 
 ### Example 3: Background Worker with Queue Processing
 
-**情境**：使用訊息佇列的訂單處理系統
+**Scenario**: Order processing system with message queue
 
-**目錄結構：**
+**Directory Structure:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -360,7 +360,7 @@ queue-worker/
     └── worker/
 ```
 
-**檔案：src/worker/processor.py**
+**File: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -388,7 +388,7 @@ if __name__ == '__main__':
     process_orders()
 ```
 
-**檔案：azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -403,7 +403,7 @@ services:
     host: containerapp
 ```
 
-**部署：**
+**Deployment:**
 ```bash
 # 初始化
 azd init
@@ -431,7 +431,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # 測試新的修訂版本
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# 分配流量 (20% 到藍色, 80% 到目前版本)
+# 分配流量（20% 到藍色，80% 到目前版本）
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -446,7 +446,7 @@ az containerapp ingress traffic set \
 
 ### Pattern 2: Canary Deployment with AZD
 
-**檔案：.azure/dev/config.json**
+**File: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -458,12 +458,12 @@ az containerapp ingress traffic set \
 }
 ```
 
-**部署腳本：**
+**Deployment Script:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# 部署新修訂版本並分配 10% 的流量
+# 以 10% 流量部署新版本
 azd deploy api --revision-mode multiple
 
 # 監控指標
@@ -483,7 +483,7 @@ done
 
 ### Pattern 3: Multi-Region Deployment
 
-**檔案：azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +497,7 @@ services:
       - southeastasia
 ```
 
-**檔案：infra/multi-region.bicep**
+**File: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -527,7 +527,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**部署：**
+**Deployment:**
 ```bash
 # 部署到所有區域
 azd up
@@ -538,7 +538,7 @@ azd show --output json | jq '.services.api.endpoints'
 
 ### Pattern 4: Dapr Integration
 
-**檔案：infra/app/dapr-enabled.bicep**
+**File: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -563,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**搭配 Dapr 的應用程式程式碼：**
+**Application Code with Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -592,18 +592,18 @@ def create_order():
 
 ## Best Practices
 
-### 1. 資源組織
+### 1. Resource Organization
 
 ```bash
-# 使用一致的命名規則
+# 使用一致的命名慣例
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# 為資源加上標籤以追蹤成本
+# 為資源加上標籤以進行成本追蹤
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. 安全最佳實務
+### 2. Security Best Practices
 
 ```bicep
 // Always use managed identity
@@ -642,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. 效能最佳化
+### 3. Performance Optimization
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,7 +662,7 @@ services:
             concurrent: 100
 ```
 
-### 4. 監控與可觀察性
+### 4. Monitoring and Observability
 
 ```bash
 # 啟用 Application Insights
@@ -670,7 +670,7 @@ azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # 即時檢視日誌
 azd monitor --logs
-# 或者針對 Container Apps 使用 Azure CLI：
+# 或使用 Azure CLI 管理 Container Apps：
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # 監控指標
@@ -685,10 +685,10 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. 成本優化
+### 5. Cost Optimization
 
 ```bash
-# 不使用時縮減為零
+# 未使用時縮減到零
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -705,9 +705,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD 整合
+### 6. CI/CD Integration
 
-**GitHub Actions 範例：**
+**GitHub Actions Example:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -737,10 +737,10 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## 常用指令參考
+## Common Commands Reference
 
 ```bash
-# 初始化新的容器應用程式專案
+# 初始化新的容器應用專案
 azd init --template <template-name>
 
 # 部署基礎設施與應用程式
@@ -766,9 +766,9 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## 疑難排解
+## Troubleshooting
 
-### 問題：容器啟動失敗
+### Issue: Container fails to start
 
 ```bash
 # 使用 Azure CLI 檢查日誌
@@ -785,7 +785,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### 問題：無法存取 container app 端點
+### Issue: Can't access container app endpoint
 
 ```bash
 # 驗證 ingress 設定
@@ -794,14 +794,14 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# 檢查內部 ingress 是否已啟用
+# 檢查是否啟用內部 ingress
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### 問題：效能問題
+### Issue: Performance problems
 
 ```bash
 # 檢查資源使用情況
@@ -817,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## 其他資源與範例
-- [Microservices Example](./microservices/README.md)
-- [Simple Flash API Example](./simple-flask-api/README.md)
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
-- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+## Additional Resources and Examples
+- [微服務範例](./microservices/README.md)
+- [Simple Flash API 範例](./simple-flask-api/README.md)
+- [Azure Container Apps 文件](https://learn.microsoft.com/azure/container-apps/)
+- [AZD 範本畫廊](https://azure.github.io/awesome-azd/)
+- [Container Apps 範例](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep 範本](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Contributing
 
-要貢獻新的 container app 範例，請：
+To contribute new container app examples:
 
-1. 建立包含您範例的新子目錄
-2. 包含完整的 `azure.yaml`、`infra/` 與 `src/` 檔案
-3. 新增完整的 README，含部署說明
-4. 使用 `azd up` 測試部署
-5. 提交 Pull Request
+1. Create a new subdirectory with your example
+2. Include complete `azure.yaml`, `infra/`, and `src/` files
+3. Add comprehensive README with deployment instructions
+4. Test deployment with `azd up`
+5. Submit a pull request
 
 ---
 
-**需要幫助嗎？** 加入 [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 社群以取得支援與問題諮詢。
+**需要幫助嗎？** 加入 [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 社群以取得支援與問題協助。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件已使用 AI 翻譯服務「Co-op Translator」(https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不精確之處。原始語言的文件應視為具權威性的來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤譯承擔責任。
+**Disclaimer**:
+本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確性，但請注意自動翻譯可能包含錯誤或不精確之處。原始語言版本應被視為具權威性的來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用此翻譯而產生的任何誤解或曲解負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
