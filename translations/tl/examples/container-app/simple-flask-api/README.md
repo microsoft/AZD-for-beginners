@@ -1,64 +1,56 @@
 # Simple Flask API - Container App Example
 
-**Landas ng Pagkatuto:** Beginner ⭐ | **Oras:** 25-35 minutes | **Gastos:** $0-15/month
+**Learning Path:** Baguhan ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
 
-Isang kumpleto, gumaganang Python Flask REST API na na-deploy sa Azure Container Apps gamit ang Azure Developer CLI (azd). Ipinapakita ng halimbawang ito ang deployment ng container, auto-scaling, at mga batayan ng monitoring.
+Isang kumpleto, gumagana na Python Flask REST API na naka-deploy sa Azure Container Apps gamit ang Azure Developer CLI (azd). Ipinapakita ng halimbawang ito ang pag-deploy ng container, auto-scaling, at mga pangunahing kaalaman sa pagmomonitor.
 
-## 🎯 Ano ang Iyong Matututuhan
+## 🎯 What You'll Learn
 
 - I-deploy ang isang containerized na Python application sa Azure
-- I-configure ang auto-scaling na may scale-to-zero
+- I-configure ang auto-scaling kasama ang scale-to-zero
 - Mag-implement ng health probes at readiness checks
-- I-monitor ang mga logs at metrics ng application
-- Gamitin ang Azure Developer CLI para sa mabilisang deployment
+- Subaybayan ang mga log at metric ng application
+- Gumamit ng Azure Developer CLI para sa mabilis na deployment
 
-## 📦 Ano ang Kasama
+## 📦 What's Included
 
 ✅ **Flask Application** - Kumpletong REST API na may CRUD operations (`src/app.py`)  
-✅ **Dockerfile** - Production-ready na container configuration  
-✅ **Bicep Infrastructure** - Container Apps environment at API deployment  
-✅ **AZD Configuration** - Isang-command na setup para sa deployment  
-✅ **Health Probes** - Liveness at readiness checks na naka-configure  
+✅ **Dockerfile** - Production-ready na konfigurasyon ng container  
+✅ **Bicep Infrastructure** - Container Apps environment at pag-deploy ng API  
+✅ **AZD Configuration** - One-command deployment setup  
+✅ **Health Probes** - Nakakonfig na liveness at readiness checks  
 ✅ **Auto-scaling** - 0-10 replicas batay sa HTTP load  
 
-## Arkitektura
+## Architecture
 
+```mermaid
+graph TD
+    subgraph ACA[Kapaligiran ng Azure Container Apps]
+        Flask[Container ng Flask API<br/>Mga endpoint ng kalusugan<br/>REST API<br/>Awtomatikong pag-scale 0-10 mga replika]
+        AppInsights[Mga Insight ng Aplikasyon]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
+## Prerequisites
 
-## Kinakailangan
-
-### Kailangan
-- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+### Required
+- **Azure Developer CLI (azd)** - [Gabay sa pag-install](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (para sa lokal na testing)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (para sa lokal na pag-test)
 
-### Suriin ang Mga Kinakailangan
+### Verify Prerequisites
 
 ```bash
-# Suriin ang bersyon ng azd (kailangan 1.5.0 o mas mataas)
+# Suriin ang bersyon ng azd (kailangang 1.5.0 o mas mataas)
 azd version
 
-# Suriin ang pag-login sa Azure
+# Kumpirmahin ang pag-login sa Azure
 azd auth login
 
 # Suriin ang Docker (opsyonal, para sa lokal na pagsubok)
 docker --version
 ```
 
-## ⏱️ Timeline ng Deployment
+## ⏱️ Deployment Timeline
 
 | Phase | Duration | What Happens |
 |-------|----------|--------------||
@@ -68,7 +60,7 @@ docker --version
 | Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
 | **Total** | **8-12 minutes** | Complete deployment ready |
 
-## Mabilis na Simula
+## Quick Start
 
 ```bash
 # Pumunta sa halimbawa
@@ -81,7 +73,7 @@ azd env new myflaskapi
 azd up
 # Hihilingin sa iyo na:
 # 1. Piliin ang Azure subscription
-# 2. Piliin ang lokasyon (halimbawa, eastus2)
+# 2. Piliin ang lokasyon (hal. eastus2)
 # 3. Maghintay ng 8-12 minuto para sa pag-deploy
 
 # Kunin ang iyong API endpoint
@@ -101,7 +93,7 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Suriin ang Pag-deploy
+## ✅ Verify Deployment
 
 ### Hakbang 1: Suriin ang Katayuan ng Pag-deploy
 
@@ -112,16 +104,16 @@ azd show
 # Ipinapakita ng inaasahang output:
 # - Serbisyo: api
 # - Endpoint: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Katayuan: Gumagana
+# - Katayuan: Tumatakbo
 ```
 
-### Hakbang 2: Subukan ang mga Endpoint ng API
+### Hakbang 2: Subukan ang mga API Endpoint
 
 ```bash
 # Kunin ang endpoint ng API
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Suriin ang kalusugan
+# Subukan ang kalusugan
 curl $API_URL/health
 
 # Subukan ang pangunahing endpoint
@@ -137,15 +129,15 @@ curl $API_URL/api/items
 ```
 
 **Pamantayan ng Tagumpay:**
-- ✅ Nagbabalik ang health endpoint ng HTTP 200
-- ✅ Ipinapakita ng root endpoint ang impormasyon ng API
-- ✅ Gumagawa ang POST ng item at nagbabalik ng HTTP 201
-- ✅ Nagbabalik ang GET ng mga nilikhang item
+- ✅ Health endpoint ay nagbabalik ng HTTP 200
+- ✅ Root endpoint ay nagpapakita ng impormasyon ng API
+- ✅ POST ay lumilikha ng item at nagbabalik ng HTTP 201
+- ✅ GET ay nagbabalik ng mga nilikhang item
 
-### Hakbang 3: Tingnan ang Mga Log
+### Hakbang 3: Tingnan ang mga Log
 
 ```bash
-# I-stream ang mga live na log gamit ang azd monitor
+# I-stream ang live na mga log gamit ang azd monitor
 azd monitor --logs
 
 # O gamitin ang Azure CLI:
@@ -157,7 +149,7 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 # - Mga log ng impormasyon ng aplikasyon
 ```
 
-## Istruktura ng Proyekto
+## Project Structure
 
 ```
 simple-flask-api/
@@ -174,20 +166,20 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## Mga Endpoint ng API
+## API Endpoints
 
-| Endpoint | Method | Paglalarawan |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/api/items` | GET | List all items |
-| `/api/items` | POST | Create new item |
-| `/api/items/{id}` | GET | Get specific item |
-| `/api/items/{id}` | PUT | Update item |
-| `/api/items/{id}` | DELETE | Delete item |
+| `/health` | GET | Pagsusuri ng kalusugan |
+| `/api/items` | GET | Ilista ang lahat ng mga item |
+| `/api/items` | POST | Lumikha ng bagong item |
+| `/api/items/{id}` | GET | Kunin ang partikular na item |
+| `/api/items/{id}` | PUT | I-update ang item |
+| `/api/items/{id}` | DELETE | Tanggalin ang item |
 
-## Konfigurasyon
+## Configuration
 
-### Mga Variable ng Kapaligiran
+### Environment Variables
 
 ```bash
 # Itakda ang pasadyang konfigurasyon
@@ -198,17 +190,17 @@ azd env set MAX_REPLICAS 20
 
 ### Scaling Configuration
 
-Ang API ay awtomatikong nag-scale batay sa HTTP traffic:
-- **Min Replicas**: 0 (scales to zero when idle)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
+Awtomatikong nag-i-scale ang API base sa HTTP traffic:
+- **Pinakamababang Replica**: 0 (nag-scale sa zero kapag walang aktibidad)
+- **Pinakamataas na Replica**: 10
+- **Sabaysabay na Kahilingan kada Replica**: 50
 
-## Pag-develop
+## Development
 
 ### Patakbuhin nang Lokal
 
 ```bash
-# I-install ang mga dependensya
+# I-install ang mga dependency
 cd src
 pip install -r requirements.txt
 
@@ -232,33 +224,33 @@ docker run -p 8000:8000 flask-api:local
 curl http://localhost:8000/health
 ```
 
-## Pag-deploy
+## Deployment
 
 ### Buong Pag-deploy
 
 ```bash
-# I-deploy ang imprastruktura at aplikasyon
+# I-deploy ang imprastraktura at aplikasyon
 azd up
 ```
 
 ### Pag-deploy ng Code Lamang
 
 ```bash
-# I-deploy lamang ang kodigo ng aplikasyon (hindi binabago ang imprastruktura)
+# I-deploy lamang ang code ng aplikasyon (hindi binabago ang imprastruktura)
 azd deploy api
 ```
 
 ### I-update ang Konfigurasyon
 
 ```bash
-# I-update ang mga environment variables
+# I-update ang mga variable ng kapaligiran
 azd env set API_KEY "new-api-key"
 
-# Muling i-deploy gamit ang bagong konfigurasyon
+# I-deploy muli gamit ang bagong konfigurasyon
 azd deploy api
 ```
 
-## Pagmomonitor
+## Pagsubaybay
 
 ### Tingnan ang Mga Log
 
@@ -266,10 +258,10 @@ azd deploy api
 # I-stream ang mga live na log gamit ang azd monitor
 azd monitor --logs
 
-# O gamitin ang Azure CLI para sa Container Apps:
+# O gumamit ng Azure CLI para sa Container Apps:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# Tingnan ang huling 100 linya
+# Tingnan ang huling 100 na linya
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
@@ -279,13 +271,13 @@ az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 # Buksan ang dashboard ng Azure Monitor
 azd monitor --overview
 
-# Tingnan ang mga partikular na sukatan
+# Tingnan ang mga tiyak na sukatan
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
 ```
 
-## Pagsusuri
+## Pagsubok
 
 ### Pagsusuri ng Kalusugan
 
@@ -309,7 +301,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Kuhanin Lahat ng Mga Item
+### Kunin ang Lahat ng Mga Item
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -317,16 +309,16 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Pag-optimize ng Gastos
 
-Gumagamit ang deployment na ito ng scale-to-zero, kaya magbabayad ka lamang kapag nagpaproseso ng mga kahilingan ang API:
+Gumagamit ang deployment na ito ng scale-to-zero, kaya nagbabayad ka lamang kapag ang API ay nagpo-proseso ng mga kahilingan:
 
-- **Idle cost**: ~$0/month (scaled to zero)
+- **Idle cost**: ~$0/month (nag-scale sa zero)
 - **Active cost**: ~$0.000024/second per replica
-- **Inaasahang buwanang gastos** (magaan na paggamit): $5-15
+- **Inaasahang buwanang gastos** (mababang paggamit): $5-15
 
-### Pababain Pa ang Gastos
+### Karagdagang Pagbawas ng Gastos
 
 ```bash
-# Bawasan ang maximum na replicas para sa dev
+# Bawasan ang maximum na mga replika para sa dev
 azd env set MAX_REPLICAS 3
 
 # Gumamit ng mas maikling idle timeout
@@ -335,13 +327,13 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minuto
 
 ## Pag-troubleshoot
 
-### Hindi Magsisimula ang Container
+### Hindi Magsimula ang Container
 
 ```bash
 # Suriin ang mga log ng container gamit ang Azure CLI
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Tiyakin na lokal na nabubuo ang Docker image
+# Tiyakin na nabubuo ang Docker image nang lokal
 docker build -t test ./src
 ```
 
@@ -366,79 +358,79 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Paglilinis
+## Linisin
 
 ```bash
-# Tanggalin ang lahat ng mga mapagkukunan.
+# Tanggalin ang lahat ng mga mapagkukunan
 azd down --force --purge
 ```
 
-## Mga Susunod na Hakbang
+## Susunod na Mga Hakbang
 
 ### Palawakin ang Halimbawang Ito
 
-1. **Magdagdag ng Database** - I-integrate ang Azure Cosmos DB o SQL Database
+1. **Magdagdag ng Database** - Integrate Azure Cosmos DB or SQL Database
    ```bash
-   # Idagdag ang modyul ng Cosmos DB sa infra/main.bicep
-   # I-update ang app.py upang idagdag ang koneksyon sa database
+   # Idagdag ang module ng Cosmos DB sa infra/main.bicep
+   # I-update ang app.py gamit ang koneksyon sa database
    ```
 
-2. **Magdagdag ng Authentication** - I-implement ang Azure AD o API keys
+2. **Magdagdag ng Pagpapatotoo** - Ipatupad ang Azure AD o mga API key
    ```python
-   # Magdagdag ng middleware para sa pagpapatunay sa app.py
+   # Magdagdag ng middleware para sa awtentikasyon sa app.py
    from functools import wraps
    ```
 
-3. **I-setup ang CI/CD** - workflow ng GitHub Actions
+3. **I-set Up ang CI/CD** - GitHub Actions workflow
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Magdagdag ng Managed Identity** - Secure access to Azure services
+4. **Magdagdag ng Managed Identity** - I-secure ang access sa mga serbisyo ng Azure
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
    ```
 
-### Mga Kaugnay na Halimbawa
+### Kaugnay na Mga Halimbawa
 
-- **[Database App](../../../../../examples/database-app)** - Kumpletong halimbawa na may SQL Database
+- **[App ng Database](../../../../../examples/database-app)** - Kumpletong halimbawa na may SQL Database
 - **[Microservices](../../../../../examples/container-app/microservices)** - Multi-service architecture
-- **[Container Apps Master Guide](../README.md)** - Lahat ng container patterns
+- **[Pangunahing Gabay sa Container Apps](../README.md)** - Lahat ng mga pattern ng container
 
-### Mga Mapagkukunan sa Pagkatuto
+### Mga Mapagkukunan sa Pag-aaral
 
 - 📚 [AZD For Beginners Course](../../../README.md) - Pangunahing pahina ng kurso
-- 📚 [Container Apps Patterns](../README.md) - Higit pang mga deployment pattern
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Mga community template
+- 📚 [Mga Pattern ng Container Apps](../README.md) - Higit pang mga pattern ng deployment
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Mga template mula sa komunidad
 
-## Karagdagang Mga Mapagkukunan
+## Karagdagang Mapagkukunan
 
 ### Dokumentasyon
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Gabay sa Flask framework
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Opisyal na docs ng Azure
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Reference ng azd commands
+- **[Dokumentasyon ng Flask](https://flask.palletsprojects.com/)** - Gabay sa Flask framework
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Opisyal na dokumentasyon ng Azure
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - talaan ng utos ng azd
 
 ### Mga Tutorial
 - **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - I-deploy ang iyong unang app
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Gabay sa pag-develop ng Python
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Gabay sa pag-develop gamit ang Python
 - **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructure as code
 
-### Mga Tool
-- **[Azure Portal](https://portal.azure.com)** - Pamahalaan ang mga resource nang visual
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integration
+### Mga Kasangkapan
+- **[Azure Portal](https://portal.azure.com)** - Pamahalaan ang mga resource nang biswal
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integrasyon sa IDE
 
 ---
 
-**🎉 Congratulations!** Na-deploy mo ang isang production-ready na Flask API sa Azure Container Apps na may auto-scaling at monitoring.
+**🎉 Congratulations!** Na-deploy mo ang isang production-ready na Flask API sa Azure Container Apps na may auto-scaling at pagmomonitor.
 
-**May mga Tanong?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) o tingnan ang [FAQ](../../../resources/faq.md)
+**May mga katanungan?** [Magbukas ng isyu](https://github.com/microsoft/AZD-for-beginners/issues) o tingnan ang [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Paunawa:
-Isinalin ang dokumentong ito gamit ang AI na serbisyo sa pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman pinagsisikapan naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpakan. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong pinagmulan. Para sa mga kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasalin ng isang bihasang tagasalin. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+**Disclaimer**:
+Ang dokumentong ito ay isinalin gamit ang serbisyong AI na pagsasalin [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa kawastuhan, pakitandaan na ang awtomatikong mga pagsasalin ay maaaring maglaman ng mga error o kamalian. Ang orihinal na dokumento sa katutubong wika nito ang dapat ituring na pinagmumulan ng awtoridad. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

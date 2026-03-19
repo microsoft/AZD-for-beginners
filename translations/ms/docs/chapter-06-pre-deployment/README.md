@@ -1,33 +1,33 @@
-# Bab 6: Perancangan & Pengesahan Pra-Penyebaran
+# Chapter 6: Perancangan & Pengesahan Pra-Penerapan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1 jam | **⭐ Kerumitan**: Pertengahan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1 jam | **⭐ Kerumitan**: Sederhana
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi langkah-langkah perancangan dan pengesahan penting sebelum menyebarkan aplikasi anda. Pelajari cara mengelakkan kesilapan mahal dengan perancangan kapasiti yang betul, pemilihan SKU, dan pemeriksaan pra-pelayaran.
+Bab ini merangkumi langkah-langkah penting untuk perancangan dan pengesahan sebelum menerapkan aplikasi anda. Belajar untuk mengelakkan kesilapan mahal dengan perancangan kapasiti yang tepat, pemilihan SKU, dan semakan pra-penerapan.
 
 ## Objektif Pembelajaran
 
-Dengan menyelesaikan bab ini, anda akan:
-- Menjalankan pemeriksaan pra-pelayaran sebelum penyebaran
+Dengan menyiapkan bab ini, anda akan:
+- Menjalankan semakan pra-penerapan sebelum penerapan
 - Merancang kapasiti dan menganggarkan keperluan sumber
 - Memilih SKU yang sesuai untuk pengoptimuman kos
 - Mengkonfigurasi Application Insights untuk pemantauan
-- Memahami corak penyelarasan pasukan
+- Memahami corak koordinasi pasukan
 
 ---
 
 ## 📚 Pelajaran
 
-| # | Pelajaran | Deskripsi | Masa |
-|---|--------|-------------|------|
-| 1 | [Pemeriksaan Pra-Penyebaran](preflight-checks.md) | Sahkan konfigurasi sebelum penyebaran | 15 min |
-| 2 | [Perancangan Kapasiti](capacity-planning.md) | Anggarkan keperluan sumber | 20 min |
-| 3 | [Pemilihan SKU](sku-selection.md) | Pilih peringkat harga yang sesuai | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurasikan pemantauan | 20 min |
-| 5 | [Corak Penyelarasan](coordination-patterns.md) | Aliran kerja penyebaran pasukan | 15 min |
+| # | Pelajaran | Penerangan | Masa |
+|---|-----------|------------|------|
+| 1 | [Semakan Pra-penerapan](preflight-checks.md) | Mengesahkan konfigurasi sebelum penerapan | 15 min |
+| 2 | [Perancangan Kapasiti](capacity-planning.md) | Menganggarkan keperluan sumber | 20 min |
+| 3 | [Pemilihan SKU](sku-selection.md) | Memilih tier harga yang sesuai | 15 min |
+| 4 | [Application Insights](application-insights.md) | Mengkonfigurasi pemantauan | 20 min |
+| 5 | [Corak Koordinasi](coordination-patterns.md) | Aliran kerja penerapan pasukan | 15 min |
 
 ---
 
@@ -37,7 +37,7 @@ Dengan menyelesaikan bab ini, anda akan:
 # Semak kuota langganan
 az vm list-usage --location eastus --output table
 
-# Pratonton penyebaran (tiada sumber dibuat)
+# Pratonton penyebaran (tiada sumber dicipta)
 azd provision --preview
 
 # Sahkan sintaks Bicep
@@ -49,12 +49,12 @@ azd env get-values
 
 ---
 
-## ☑️ Senarai Semak Pra-Penyebaran
+## ☑️ Senarai Semak Pra-Penerapan
 
 ### Sebelum `azd provision`
 
 - [ ] Kuota disahkan untuk rantau
-- [ ] SKUs dipilih dengan sewajarnya
+- [ ] SKU dipilih dengan sesuai
 - [ ] Anggaran kos disemak
 - [ ] Konvensyen penamaan konsisten
 - [ ] Keselamatan/RBAC dikonfigurasi
@@ -63,18 +63,18 @@ azd env get-values
 
 - [ ] Pembolehubah persekitaran ditetapkan
 - [ ] Rahsia dalam Key Vault
-- [ ] Rentetan sambungan disahkan
-- [ ] Pemeriksaan kesihatan dikonfigurasi
+- [ ] Rantai sambungan disahkan
+- [ ] Semakan kesihatan dikonfigurasi
 
 ---
 
 ## 💰 Panduan Pemilihan SKU
 
 | Beban Kerja | Pembangunan | Pengeluaran |
-|----------|-------------|------------|
+|-------------|-------------|-------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Model Microsoft Foundry | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -82,8 +82,8 @@ azd env get-values
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-----------|---------|
-| **Sebelumnya** | [Bab 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+|-------|--------|
+| **Sebelumnya** | [Bab 5: Multi-Ejen](../chapter-05-multi-agent/README.md) |
 | **Seterusnya** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
 
 ---
@@ -91,12 +91,12 @@ azd env get-values
 ## 📖 Sumber Berkaitan
 
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
+- [Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
 - [Isu Biasa](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa ibundanya hendaklah dianggap sebagai sumber yang menjadi rujukan utama. Untuk maklumat yang kritikal, disyorkan mendapatkan terjemahan profesional oleh penterjemah manusia. Kami tidak bertanggungjawab ke atas sebarang salah faham atau salah tafsiran yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat yang penting, terjemahan profesional oleh manusia adalah disarankan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -2,238 +2,239 @@
 
 **Navigasi Jalur Pembelajaran**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../README.md)
-- **📖 Mulai Belajar**: [Bab 1: Dasar & Panduan Cepat](../README.md#-chapter-1-foundation--quick-start)
+- **📖 Mulai Belajar**: [Bab 1: Dasar & Mulai Cepat](../README.md#-chapter-1-foundation--quick-start)
 - **🎯 Pelacakan Kemajuan**: [Penyelesaian Kursus](../README.md#-course-completion--certification)
 
 ## Pendahuluan
 
-Panduan belajar komprehensif ini menyediakan tujuan pembelajaran yang terstruktur, konsep utama, latihan praktik, dan materi penilaian untuk membantu Anda menguasai Azure Developer CLI (azd). Gunakan panduan ini untuk melacak kemajuan Anda dan memastikan Anda telah mencakup semua topik penting.
+Panduan belajar komprehensif ini menyediakan tujuan pembelajaran yang terstruktur, konsep kunci, latihan praktik, dan materi penilaian untuk membantu Anda menguasai Azure Developer CLI (azd). Gunakan panduan ini untuk melacak kemajuan Anda dan memastikan Anda telah menutupi semua topik penting.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan belajar ini, Anda akan:
-- Menguasai semua konsep dasar dan lanjutan dari Azure Developer CLI
-- Mengembangkan keterampilan praktis dalam menerapkan dan mengelola aplikasi Azure
-- Membangun kepercayaan diri dalam memecahkan masalah dan mengoptimalkan penerapan
-- Memahami praktik penerapan siap produksi dan pertimbangan keamanan
+- Menguasai semua konsep dasar dan lanjutan Azure Developer CLI
+- Mengembangkan keterampilan praktis dalam menyebarkan dan mengelola aplikasi Azure
+- Membangun kepercayaan diri dalam memecahkan masalah dan mengoptimalkan penyebaran
+- Memahami praktik penyebaran siap-produksi dan pertimbangan keamanan
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan semua bagian dari panduan belajar ini, Anda akan dapat:
-- Merancang, menerapkan, dan mengelola arsitektur aplikasi lengkap menggunakan azd
-- Menerapkan strategi pemantauan, keamanan, dan optimasi biaya yang komprehensif
-- Memecahkan masalah penerapan yang kompleks secara mandiri
-- Membuat template khusus dan berkontribusi pada komunitas azd
+Setelah menyelesaikan semua bagian panduan belajar ini, Anda akan mampu:
+- Merancang, menyebarkan, dan mengelola arsitektur aplikasi lengkap menggunakan azd
+- Menerapkan strategi pemantauan, keamanan, dan optimisasi biaya yang komprehensif
+- Memecahkan masalah penyebaran kompleks secara mandiri
+- Membuat template kustom dan berkontribusi pada komunitas azd
 
 ## Struktur Pembelajaran 8 Bab
 
-### Bab 1: Dasar & Panduan Cepat (Minggu 1)
+### Bab 1: Dasar & Mulai Cepat (Minggu 1)
 **Durasi**: 30-45 menit | **Kompleksitas**: ⭐
 
 #### Tujuan Pembelajaran
 - Memahami konsep inti dan terminologi Azure Developer CLI
 - Berhasil menginstal dan mengonfigurasi AZD di platform pengembangan Anda
-- Menerapkan aplikasi pertama Anda menggunakan template yang ada
-- Menavigasi antarmuka baris perintah AZD dengan efektif
+- Menyebarkan aplikasi pertama Anda menggunakan template yang ada
+- Menavigasi antarmuka baris perintah AZD secara efektif
 
-#### Konsep Utama yang Harus Dikuasai
+#### Konsep Kunci yang Harus Dikuasai
 - Struktur proyek AZD dan komponennya (azure.yaml, infra/, src/)
-- Alur kerja penerapan berbasis template
-- Dasar konfigurasi lingkungan
+- Alur kerja penyebaran berbasis template
+- Dasar-dasar konfigurasi lingkungan
 - Pengelolaan grup sumber daya dan langganan
 
-#### Latihan Praktik
+#### Latihan Praktis
 1. **Verifikasi Instalasi**: Instal AZD dan verifikasi dengan `azd version`
-2. **Penerapan Pertama**: Berhasil menerapkan template todo-nodejs-mongo
+2. **Penyebaran Pertama**: Sukses menyebarkan template todo-nodejs-mongo
 3. **Pengaturan Lingkungan**: Konfigurasikan variabel lingkungan pertama Anda
-4. **Eksplorasi Sumber Daya**: Menavigasi sumber daya yang diterapkan di Azure Portal
+4. **Eksplorasi Sumber Daya**: Jelajahi sumber daya yang disebarkan di Azure Portal
 
 #### Pertanyaan Penilaian
 - Apa saja komponen inti dari proyek AZD?
-- Bagaimana cara menginisialisasi proyek baru dari template?
+- Bagaimana Anda menginisialisasi proyek baru dari sebuah template?
 - Apa perbedaan antara `azd up` dan `azd deploy`?
-- Bagaimana cara mengelola beberapa lingkungan dengan AZD?
+- Bagaimana Anda mengelola beberapa lingkungan dengan AZD?
 
 ---
 
-### Bab 2: Pengembangan Berbasis AI (Minggu 2)
+### Bab 2: Pengembangan Berfokus AI (Minggu 2)
 **Durasi**: 1-2 jam | **Kompleksitas**: ⭐⭐
 
 #### Tujuan Pembelajaran
 - Mengintegrasikan layanan Microsoft Foundry dengan alur kerja AZD
-- Menerapkan dan mengonfigurasi aplikasi berbasis AI
+- Menyebarkan dan mengonfigurasi aplikasi bertenaga AI
 - Memahami pola implementasi RAG (Retrieval-Augmented Generation)
-- Mengelola penerapan model AI dan skalabilitasnya
+- Mengelola penyebaran model AI dan penskalannya
 
-#### Konsep Utama yang Harus Dikuasai
-- Integrasi layanan Azure OpenAI dan pengelolaan API
-- Konfigurasi pencarian AI dan pengindeksan vektor
-- Strategi penerapan model dan perencanaan kapasitas
-- Pemantauan aplikasi AI dan optimasi kinerja
+#### Konsep Kunci yang Harus Dikuasai
+- Integrasi layanan Microsoft Foundry Models dan manajemen API
+- Konfigurasi AI Search dan pengindeksan vektor
+- Strategi penyebaran model dan perencanaan kapasitas
+- Pemantauan aplikasi AI dan optimisasi kinerja
 
-#### Latihan Praktik
-1. **Penerapan Chat AI**: Terapkan template azure-search-openai-demo
+#### Latihan Praktis
+1. **Penyebaran AI Chat**: Menyebarkan template azure-search-openai-demo
 2. **Implementasi RAG**: Konfigurasikan pengindeksan dan pengambilan dokumen
-3. **Konfigurasi Model**: Atur beberapa model AI dengan tujuan berbeda
-4. **Pemantauan AI**: Terapkan Application Insights untuk beban kerja AI
+3. **Konfigurasi Model**: Menyiapkan beberapa model AI dengan tujuan berbeda
+4. **Pemantauan AI**: Mengimplementasikan Application Insights untuk beban kerja AI
 
 #### Pertanyaan Penilaian
-- Bagaimana cara mengonfigurasi layanan Azure OpenAI dalam template AZD?
-- Apa saja komponen utama dari arsitektur RAG?
-- Bagaimana cara mengelola kapasitas dan skalabilitas model AI?
-- Apa metrik pemantauan yang penting untuk aplikasi AI?
+- Bagaimana Anda mengonfigurasi layanan Microsoft Foundry Models dalam template AZD?
+- Apa saja komponen kunci dari arsitektur RAG?
+- Bagaimana Anda mengelola kapasitas dan penskalaan model AI?
+- Metrik pemantauan apa yang penting untuk aplikasi AI?
 
 ---
 
-### Bab 3: Konfigurasi & Autentikasi (Minggu 3)
+### Bab 3: Konfigurasi & Otentikasi (Minggu 3)
 **Durasi**: 45-60 menit | **Kompleksitas**: ⭐⭐
 
 #### Tujuan Pembelajaran
 - Menguasai strategi konfigurasi dan pengelolaan lingkungan
-- Menerapkan pola autentikasi yang aman dan identitas terkelola
-- Mengorganisasi sumber daya dengan konvensi penamaan yang tepat
-- Mengonfigurasi penerapan multi-lingkungan (dev, staging, prod)
+- Menerapkan pola otentikasi yang aman dan managed identity
+- Mengorganisir sumber daya dengan konvensi penamaan yang tepat
+- Mengonfigurasi penyebaran multi-lingkungan (dev, staging, prod)
 
-#### Konsep Utama yang Harus Dikuasai
-- Hierarki lingkungan dan prioritas konfigurasi
-- Autentikasi identitas terkelola dan service principal
-- Integrasi Key Vault untuk pengelolaan rahasia
-- Pengelolaan parameter spesifik lingkungan
+#### Konsep Kunci yang Harus Dikuasai
+- Hirarki lingkungan dan presedensi konfigurasi
+- Otentikasi managed identity dan service principal
+- Integrasi Key Vault untuk manajemen rahasia
+- Manajemen parameter khusus lingkungan
 
-#### Latihan Praktik
+#### Latihan Praktis
 1. **Pengaturan Multi-Lingkungan**: Konfigurasikan lingkungan dev, staging, dan prod
-2. **Konfigurasi Keamanan**: Terapkan autentikasi identitas terkelola
-3. **Pengelolaan Rahasia**: Integrasikan Azure Key Vault untuk data sensitif
-4. **Pengelolaan Parameter**: Buat konfigurasi spesifik lingkungan
+2. **Konfigurasi Keamanan**: Terapkan otentikasi managed identity
+3. **Manajemen Rahasia**: Integrasikan Azure Key Vault untuk data sensitif
+4. **Manajemen Parameter**: Buat konfigurasi khusus lingkungan
 
 #### Pertanyaan Penilaian
-- Bagaimana cara mengonfigurasi lingkungan yang berbeda dengan AZD?
-- Apa manfaat menggunakan identitas terkelola dibandingkan service principal?
-- Bagaimana cara mengelola rahasia aplikasi dengan aman?
-- Apa hierarki konfigurasi dalam AZD?
+- Bagaimana Anda mengonfigurasi lingkungan yang berbeda dengan AZD?
+- Apa manfaat menggunakan managed identity dibanding service principal?
+- Bagaimana Anda mengelola rahasia aplikasi secara aman?
+- Apa hirarki konfigurasi di AZD?
 
 ---
 
-### Bab 4: Infrastruktur sebagai Kode & Penerapan (Minggu 4-5)
-**Durasi**: 1-1,5 jam | **Kompleksitas**: ⭐⭐⭐
+### Bab 4: Infrastruktur sebagai Kode & Penyebaran (Minggu 4-5)
+**Durasi**: 1-1.5 jam | **Kompleksitas**: ⭐⭐⭐
 
 #### Tujuan Pembelajaran
 - Membuat dan menyesuaikan template infrastruktur Bicep
-- Menerapkan pola dan alur kerja penerapan yang canggih
+- Menerapkan pola dan alur kerja penyebaran lanjutan
 - Memahami strategi penyediaan sumber daya
-- Merancang arsitektur multi-layanan yang skalabel
+- Merancang arsitektur multi-layanan yang dapat diskalakan
 
-- Menerapkan aplikasi berbasis kontainer menggunakan Azure Container Apps dan AZD
+- Menyebarkan aplikasi ter-containerisasi menggunakan Azure Container Apps dan AZD
 
-#### Konsep Utama yang Harus Dikuasai
+
+#### Konsep Kunci yang Harus Dikuasai
 - Struktur template Bicep dan praktik terbaik
-- Ketergantungan sumber daya dan urutan penerapan
-- File parameter dan modularitas template
-- Hook khusus dan otomatisasi penerapan
-- Pola penerapan aplikasi kontainer (panduan cepat, produksi, mikroservis)
+- Ketergantungan sumber daya dan urutan penyebaran
+- Berkas parameter dan modularitas template
+- Hook kustom dan otomatisasi penyebaran
+- Pola penyebaran aplikasi kontainer (quick start, production, microservices)
 
-#### Latihan Praktik
-1. **Pembuatan Template Khusus**: Bangun template aplikasi multi-layanan
-2. **Penguasaan Bicep**: Buat komponen infrastruktur modular yang dapat digunakan kembali
-3. **Otomatisasi Penerapan**: Terapkan hook pra/pasca penerapan
-4. **Desain Arsitektur**: Terapkan arsitektur mikroservis yang kompleks
-5. **Penerapan Aplikasi Kontainer**: Terapkan contoh [Simple Flask API](../../../examples/container-app/simple-flask-api) dan [Microservices Architecture](../../../examples/container-app/microservices) menggunakan AZD
+#### Latihan Praktis
+1. **Pembuatan Template Kustom**: Bangun template aplikasi multi-layanan
+2. **Menguasai Bicep**: Buat komponen infrastruktur modular dan dapat digunakan kembali
+3. **Otomatisasi Penyebaran**: Terapkan hook pra/pasca penyebaran
+4. **Desain Arsitektur**: Sebarkan arsitektur microservices yang kompleks
+5. **Penyebaran Aplikasi Kontainer**: Sebarkan contoh [Simple Flask API](../../../examples/container-app/simple-flask-api) dan [Microservices Architecture](../../../examples/container-app/microservices) menggunakan AZD
 
 #### Pertanyaan Penilaian
-- Bagaimana cara membuat template Bicep khusus untuk AZD?
-- Apa praktik terbaik untuk mengorganisasi kode infrastruktur?
-- Bagaimana cara menangani ketergantungan sumber daya dalam template?
-- Pola penerapan apa yang mendukung pembaruan tanpa downtime?
+- Bagaimana Anda membuat template Bicep kustom untuk AZD?
+- Apa praktik terbaik untuk mengatur kode infrastruktur?
+- Bagaimana Anda menangani ketergantungan sumber daya dalam template?
+- Pola penyebaran apa yang mendukung pembaruan tanpa downtime?
 
 ---
 
-### Bab 5: Solusi AI Multi-Agent (Minggu 6-7)
+### Bab 5: Solusi AI Multi-Agen (Minggu 6-7)
 **Durasi**: 2-3 jam | **Kompleksitas**: ⭐⭐⭐⭐
 
 #### Tujuan Pembelajaran
-- Merancang dan menerapkan arsitektur AI multi-agent
-- Mengatur koordinasi dan komunikasi antar agen
-- Menerapkan solusi AI siap produksi dengan pemantauan
+- Merancang dan menerapkan arsitektur AI multi-agen
+- Mengorkestrasi koordinasi dan komunikasi antar agen
+- Menyebarkan solusi AI siap-produksi dengan pemantauan
 - Memahami spesialisasi agen dan pola alur kerja
-- Mengintegrasikan mikroservis berbasis kontainer sebagai bagian dari solusi multi-agent
+- Mengintegrasikan microservices ter-containerisasi sebagai bagian dari solusi multi-agen
 
-#### Konsep Utama yang Harus Dikuasai
-- Pola arsitektur multi-agent dan prinsip desain
+#### Konsep Kunci yang Harus Dikuasai
+- Pola arsitektur multi-agen dan prinsip desain
 - Protokol komunikasi agen dan aliran data
-- Strategi penyeimbangan beban dan skalabilitas untuk agen AI
-- Pemantauan produksi untuk sistem multi-agent
-- Komunikasi antar layanan dalam lingkungan berbasis kontainer
+- Strategi load balancing dan penskalaan untuk agen AI
+- Pemantauan produksi untuk sistem multi-agen
+- Komunikasi layanan-ke-layanan dalam lingkungan ter-containerisasi
 
-#### Latihan Praktik
-1. **Penerapan Solusi Ritel**: Terapkan skenario ritel multi-agent lengkap
-2. **Kustomisasi Agen**: Modifikasi perilaku agen Pelanggan dan Inventaris
-3. **Skalabilitas Arsitektur**: Terapkan penyeimbangan beban dan auto-scaling
-4. **Pemantauan Produksi**: Atur pemantauan dan peringatan yang komprehensif
-5. **Integrasi Mikroservis**: Perluas contoh [Microservices Architecture](../../../examples/container-app/microservices) untuk mendukung alur kerja berbasis agen
+#### Latihan Praktis
+1. **Penyebaran Solusi Ritel**: Menyebarkan skenario ritel multi-agen lengkap
+2. **Kustomisasi Agen**: Ubah perilaku agen Customer dan Inventory
+3. **Pensakalan Arsitektur**: Terapkan load balancing dan auto-scaling
+4. **Pemantauan Produksi**: Siapkan pemantauan dan pengalertan yang komprehensif
+5. **Integrasi Microservices**: Perluas contoh [Microservices Architecture](../../../examples/container-app/microservices) untuk mendukung alur kerja berbasis agen
 
 #### Pertanyaan Penilaian
-- Bagaimana cara merancang pola komunikasi multi-agent yang efektif?
-- Apa pertimbangan utama untuk skalabilitas beban kerja agen AI?
-- Bagaimana cara memantau dan memperbaiki sistem AI multi-agent?
+- Bagaimana Anda merancang pola komunikasi multi-agen yang efektif?
+- Apa pertimbangan kunci untuk penskalaan beban kerja agen AI?
+- Bagaimana Anda memantau dan men-debug sistem AI multi-agen?
 - Pola produksi apa yang memastikan keandalan untuk agen AI?
 
 ---
 
-### Bab 6: Validasi & Perencanaan Pra-Penerapan (Minggu 8)
+### Bab 6: Validasi & Perencanaan Pra-Penyebaran (Minggu 8)
 **Durasi**: 1 jam | **Kompleksitas**: ⭐⭐
 
 #### Tujuan Pembelajaran
 - Melakukan perencanaan kapasitas dan validasi sumber daya yang komprehensif
-- Memilih SKU Azure yang optimal untuk efektivitas biaya
-- Menerapkan pemeriksaan pra-penerapan otomatis dan validasi
-- Merencanakan penerapan dengan strategi optimasi biaya
+- Memilih SKU Azure optimal untuk efektivitas biaya
+- Menerapkan pemeriksaan pra-penyebaran otomatis dan validasi
+- Merencanakan penyebaran dengan strategi optimisasi biaya
 
-#### Konsep Utama yang Harus Dikuasai
-- Kuota sumber daya Azure dan batas kapasitas
-- Kriteria pemilihan SKU dan optimasi biaya
+#### Konsep Kunci yang Harus Dikuasai
+- Kuota sumber daya Azure dan batasan kapasitas
+- Kriteria pemilihan SKU dan optimisasi biaya
 - Skrip validasi otomatis dan pengujian
-- Perencanaan penerapan dan penilaian risiko
+- Perencanaan penyebaran dan penilaian risiko
 
-#### Latihan Praktik
+#### Latihan Praktis
 1. **Analisis Kapasitas**: Analisis kebutuhan sumber daya untuk aplikasi Anda
-2. **Optimasi SKU**: Bandingkan dan pilih tingkat layanan yang hemat biaya
-3. **Otomasi Validasi**: Terapkan skrip pemeriksaan pra-penerapan
-4. **Perencanaan Biaya**: Buat estimasi biaya penerapan dan anggaran
+2. **Optimisasi SKU**: Bandingkan dan pilih tingkat layanan yang hemat biaya
+3. **Otomatisasi Validasi**: Terapkan skrip pemeriksaan pra-penyebaran
+4. **Perencanaan Biaya**: Buat estimasi biaya penyebaran dan anggaran
 
 #### Pertanyaan Penilaian
-- Bagaimana cara memvalidasi kapasitas Azure sebelum penerapan?
+- Bagaimana Anda memvalidasi kapasitas Azure sebelum penyebaran?
 - Faktor apa yang memengaruhi keputusan pemilihan SKU?
-- Bagaimana cara mengotomasi validasi pra-penerapan?
-- Strategi apa yang membantu mengoptimalkan biaya penerapan?
+- Bagaimana Anda mengotomatisasi validasi pra-penyebaran?
+- Strategi apa yang membantu mengoptimalkan biaya penyebaran?
 
 ---
 
 ### Bab 7: Pemecahan Masalah & Debugging (Minggu 9)
-**Durasi**: 1-1,5 jam | **Kompleksitas**: ⭐⭐
+**Durasi**: 1-1.5 jam | **Kompleksitas**: ⭐⭐
 
 #### Tujuan Pembelajaran
-- Mengembangkan pendekatan debugging yang sistematis untuk penerapan AZD
-- Menyelesaikan masalah penerapan dan konfigurasi umum
-- Debugging masalah spesifik AI dan masalah kinerja
-- Menerapkan pemantauan dan peringatan untuk deteksi masalah secara proaktif
+- Mengembangkan pendekatan debugging sistematis untuk penyebaran AZD
+- Menyelesaikan masalah penyebaran dan konfigurasi yang umum
+- Debug masalah spesifik AI dan isu kinerja
+- Menerapkan pemantauan dan pengalertan untuk deteksi masalah proaktif
 
-#### Konsep Utama yang Harus Dikuasai
+#### Konsep Kunci yang Harus Dikuasai
 - Teknik diagnostik dan strategi logging
 - Pola kegagalan umum dan solusinya
-- Pemantauan kinerja dan optimasi
+- Pemantauan kinerja dan optimisasi
 - Prosedur respons insiden dan pemulihan
 
-#### Latihan Praktik
-1. **Keterampilan Diagnostik**: Latihan dengan penerapan yang sengaja rusak
+#### Latihan Praktis
+1. **Keterampilan Diagnostik**: Latih dengan penyebaran yang sengaja rusak
 2. **Analisis Log**: Gunakan Azure Monitor dan Application Insights secara efektif
-3. **Penyetelan Kinerja**: Optimalkan aplikasi yang berkinerja lambat
-4. **Prosedur Pemulihan**: Terapkan cadangan dan pemulihan bencana
+3. **Tuning Kinerja**: Optimalkan aplikasi yang berjalan lambat
+4. **Prosedur Pemulihan**: Terapkan backup dan pemulihan bencana
 
 #### Pertanyaan Penilaian
-- Apa saja kegagalan penerapan AZD yang paling umum?
-- Bagaimana cara debugging masalah autentikasi dan izin?
+- Apa kegagalan penyebaran AZD yang paling umum?
+- Bagaimana Anda melakukan debugging masalah otentikasi dan izin?
 - Strategi pemantauan apa yang membantu mencegah masalah produksi?
-- Bagaimana cara mengoptimalkan kinerja aplikasi di Azure?
+- Bagaimana Anda mengoptimalkan kinerja aplikasi di Azure?
 
 ---
 
@@ -241,46 +242,46 @@ Setelah menyelesaikan semua bagian dari panduan belajar ini, Anda akan dapat:
 **Durasi**: 2-3 jam | **Kompleksitas**: ⭐⭐⭐⭐
 
 #### Tujuan Pembelajaran
-- Menerapkan strategi penerapan tingkat perusahaan
-- Merancang pola keamanan dan kerangka kerja kepatuhan
-- Membangun pemantauan, tata kelola, dan pengelolaan biaya
-- Membuat pipeline CI/CD yang skalabel dengan integrasi AZD
-- Menerapkan praktik terbaik untuk penerapan aplikasi kontainer produksi (keamanan, pemantauan, biaya, CI/CD)
+- Menerapkan strategi penyebaran tingkat perusahaan
+- Merancang pola keamanan dan kerangka kepatuhan
+- Membangun pemantauan, tata kelola, dan manajemen biaya
+- Membuat pipeline CI/CD yang dapat diskalakan dengan integrasi AZD
+- Menerapkan praktik terbaik untuk penyebaran aplikasi kontainer produksi (keamanan, pemantauan, biaya, CI/CD)
 
-#### Konsep Utama yang Harus Dikuasai
-- Persyaratan keamanan dan kepatuhan tingkat perusahaan
-- Kerangka kerja tata kelola dan implementasi kebijakan
-- Pemantauan lanjutan dan pengelolaan biaya
-- Integrasi CI/CD dan pipeline penerapan otomatis
-- Strategi penerapan blue-green dan canary untuk beban kerja berbasis kontainer
+#### Konsep Kunci yang Harus Dikuasai
+- Persyaratan keamanan dan kepatuhan perusahaan
+- Kerangka tata kelola dan penerapan kebijakan
+- Pemantauan lanjutan dan manajemen biaya
+- Integrasi CI/CD dan pipeline penyebaran otomatis
+- Strategi penyebaran blue-green dan canary untuk beban kerja ter-containerisasi
 
-#### Latihan Praktik
+#### Latihan Praktis
 1. **Keamanan Perusahaan**: Terapkan pola keamanan yang komprehensif
-2. **Kerangka Kerja Tata Kelola**: Atur Azure Policy dan pengelolaan sumber daya
-3. **Pemantauan Lanjutan**: Buat dasbor dan peringatan otomatis
-4. **Integrasi CI/CD**: Bangun pipeline penerapan otomatis
-5. **Aplikasi Kontainer Produksi**: Terapkan keamanan, pemantauan, dan optimasi biaya pada contoh [Microservices Architecture](../../../examples/container-app/microservices)
+2. **Kerangka Tata Kelola**: Siapkan Azure Policy dan manajemen sumber daya
+3. **Pemantauan Lanjutan**: Buat dashboard dan pengalertan otomatis
+4. **Integrasi CI/CD**: Bangun pipeline penyebaran otomatis
+5. **Aplikasi Kontainer Produksi**: Terapkan keamanan, pemantauan, dan optimisasi biaya pada contoh [Microservices Architecture](../../../examples/container-app/microservices)
 
 #### Pertanyaan Penilaian
-- Bagaimana cara menerapkan keamanan tingkat perusahaan dalam penerapan AZD?
+- Bagaimana Anda menerapkan keamanan tingkat perusahaan dalam penyebaran AZD?
 - Pola tata kelola apa yang memastikan kepatuhan dan pengendalian biaya?
-- Bagaimana cara merancang pemantauan yang skalabel untuk sistem produksi?
-- Pola CI/CD apa yang paling cocok dengan alur kerja AZD?
+- Bagaimana Anda merancang pemantauan yang dapat diskalakan untuk sistem produksi?
+- Pola CI/CD apa yang bekerja paling baik dengan alur kerja AZD?
 
 #### Tujuan Pembelajaran
-- Memahami dasar-dasar dan konsep inti Azure Developer CLI
+- Memahami dasar-dasar Azure Developer CLI dan konsep inti
 - Berhasil menginstal dan mengonfigurasi azd di lingkungan pengembangan Anda
-- Menyelesaikan penerapan pertama Anda menggunakan template yang ada
-- Menavigasi struktur proyek azd dan memahami komponen utama
+- Menyelesaikan penyebaran pertama Anda menggunakan template yang ada
+- Menavigasi struktur proyek azd dan memahami komponen kunci
 
-#### Konsep Utama yang Harus Dikuasai
+#### Konsep Kunci yang Harus Dikuasai
 - Template, lingkungan, dan layanan
 - Struktur konfigurasi azure.yaml
 - Perintah dasar azd (init, up, down, deploy)
 - Prinsip Infrastruktur sebagai Kode
-- Autentikasi dan otorisasi Azure
+- Otentikasi dan otorisasi Azure
 
-#### Latihan Praktik
+#### Latihan Praktis
 
 **Latihan 1.1: Instalasi dan Pengaturan**
 ```bash
@@ -292,9 +293,9 @@ Setelah menyelesaikan semua bagian dari panduan belajar ini, Anda akan dapat:
 5. Explore available templates: azd template list
 ```
 
-**Latihan 1.2: Penerapan Pertama**
+**Latihan 1.2: Penyebaran Pertama**
 ```bash
-# Sebarkan aplikasi web sederhana:
+# Menerapkan aplikasi web sederhana:
 1. Initialize project: azd init --template todo-nodejs-mongo
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
@@ -312,11 +313,11 @@ Analyze the following components:
 ```
 
 #### Pertanyaan Penilaian Diri
-1. Apa saja tiga konsep inti dari arsitektur azd?
-2. Apa tujuan dari file azure.yaml?
-3. Bagaimana lingkungan membantu mengelola target penerapan yang berbeda?
-4. Metode autentikasi apa yang dapat digunakan dengan azd?
-5. Apa yang terjadi saat Anda menjalankan `azd up` untuk pertama kalinya?
+1. Apa tiga konsep inti dari arsitektur azd?
+2. Apa tujuan berkas azure.yaml?
+3. Bagaimana lingkungan membantu mengelola target penyebaran yang berbeda?
+4. Metode otentikasi apa yang dapat digunakan dengan azd?
+5. Apa yang terjadi ketika Anda menjalankan `azd up` untuk pertama kali?
 
 ---
 
@@ -341,7 +342,7 @@ Analyze the following components:
 
 **Latihan 2.3: Konfigurasi Keamanan**
 ```bash
-# Terapkan praktik terbaik keamanan:
+# Terapkan praktik keamanan terbaik:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
@@ -349,30 +350,30 @@ Analyze the following components:
 ```
 
 #### Pertanyaan Penilaian Diri
-1. Bagaimana azd menangani prioritas variabel lingkungan?
-2. Apa itu deployment hooks dan kapan sebaiknya digunakan?
-3. Bagaimana cara mengonfigurasi SKU yang berbeda untuk lingkungan yang berbeda?
-4. Apa implikasi keamanan dari metode autentikasi yang berbeda?
-5. Bagaimana cara mengelola rahasia dan data konfigurasi sensitif?
+1. Bagaimana azd menangani presedensi variabel lingkungan?
+2. Apa itu deployment hooks dan kapan Anda harus menggunakannya?
+3. Bagaimana Anda mengonfigurasi SKU yang berbeda untuk lingkungan yang berbeda?
+4. Apa implikasi keamanan dari berbagai metode otentikasi?
+5. Bagaimana Anda mengelola rahasia dan data konfigurasi sensitif?
 
-### Modul 3: Penerapan dan Penyediaan (Minggu 4)
+### Modul 3: Penyebaran dan Provisioning (Minggu 4)
 
 #### Tujuan Pembelajaran
-- Menguasai alur kerja penerapan dan praktik terbaik
+- Menguasai alur kerja penyebaran dan praktik terbaik
 - Memahami Infrastruktur sebagai Kode dengan template Bicep
-- Menerapkan arsitektur multi-layanan yang kompleks
-- Mengoptimalkan kinerja dan keandalan penerapan
+- Menerapkan arsitektur multi-layanan kompleks
+- Mengoptimalkan kinerja dan keandalan penyebaran
 
-#### Konsep Utama yang Harus Dikuasai
+#### Konsep Kunci yang Harus Dikuasai
 - Struktur template Bicep dan modul
-- Ketergantungan sumber daya dan urutan
-- Strategi penerapan (blue-green, rolling updates)
-- Penerapan multi-region
-- Migrasi database dan pengelolaan data
+- Ketergantungan sumber daya dan pengurutan
+- Strategi penyebaran (blue-green, rolling updates)
+- Penyebaran multi-region
+- Migrasi basis data dan manajemen data
 
-#### Latihan Praktik
+#### Latihan Praktis
 
-**Latihan 3.1: Infrastruktur Khusus**
+**Latihan 3.1: Infrastruktur Kustom**
 ```bicep
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
@@ -392,9 +393,9 @@ Analyze the following components:
 5. Background worker service
 ```
 
-**Latihan 3.3: Integrasi Database**
+**Latihan 3.3: Integrasi Basis Data**
 ```bash
-# Menerapkan pola penerapan basis data:
+# Terapkan pola penerapan basis data:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -403,32 +404,32 @@ Analyze the following components:
 ```
 
 #### Pertanyaan Penilaian Diri
-1. Apa keuntungan menggunakan Bicep dibandingkan template ARM?
-2. Bagaimana cara menangani migrasi database dalam penerapan azd?
-3. Strategi apa yang ada untuk penerapan tanpa downtime?
-4. Bagaimana cara mengelola ketergantungan antar layanan?
-5. Apa saja pertimbangan untuk penerapan multi-region?
+1. Apa keuntungan menggunakan Bicep dibandingkan ARM template?
+2. Bagaimana Anda menangani migrasi basis data dalam penyebaran azd?
+3. Strategi apa saja yang ada untuk penyebaran tanpa downtime?
+4. Bagaimana Anda mengelola ketergantungan antar layanan?
+5. Pertimbangan apa saja untuk penyebaran multi-region?
 
-### Modul 4: Validasi Pra-Penerapan (Minggu 5)
+### Modul 4: Validasi Pra-Penyebaran (Minggu 5)
 
 #### Tujuan Pembelajaran
-- Melakukan pemeriksaan pra-penerapan yang komprehensif
-- Menguasai perencanaan kapasitas dan validasi sumber daya
-- Memahami pemilihan SKU dan optimasi biaya
-- Membangun pipeline validasi otomatis
+- Laksanakan pemeriksaan pra-deploy yang komprehensif
+- Kuasi perencanaan kapasitas dan validasi sumber daya
+- Pahami pemilihan SKU dan optimisasi biaya
+- Bangun pipeline validasi otomatis
 
 #### Konsep Utama yang Harus Dikuasai
-- Kuota dan batas sumber daya Azure
-- Kriteria pemilihan SKU dan dampak biaya
+- Kuota dan batasan sumber daya Azure
+- Kriteria pemilihan SKU dan implikasi biaya
 - Skrip dan alat validasi otomatis
 - Metodologi perencanaan kapasitas
-- Pengujian dan optimasi kinerja
+- Pengujian kinerja dan optimisasi
 
 #### Latihan Praktik
 
-**Latihan 4.1: Perencanaan Kapasitas**
+**Exercise 4.1: Capacity Planning**
 ```bash
-# Implementasi validasi kapasitas:
+# Implementasikan validasi kapasitas:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -436,9 +437,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Latihan 4.2: Validasi Pra-Penerbangan**
+**Exercise 4.2: Pre-flight Validation**
 ```powershell
-# Bangun pipeline validasi yang komprehensif:
+# Membangun pipeline validasi yang komprehensif:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -446,7 +447,7 @@ Analyze the following components:
 5. Cost estimation and budget verification
 ```
 
-**Latihan 4.3: Optimasi SKU**
+**Exercise 4.3: SKU Optimization**
 ```bash
 # Optimalkan konfigurasi layanan:
 1. Compare performance characteristics of different SKUs
@@ -457,32 +458,32 @@ Analyze the following components:
 ```
 
 #### Pertanyaan Penilaian Diri
-1. Faktor apa saja yang memengaruhi keputusan pemilihan SKU?
-2. Bagaimana cara memvalidasi ketersediaan sumber daya Azure sebelum penerapan?
-3. Apa saja komponen utama dari sistem pemeriksaan pra-penerbangan?
-4. Bagaimana cara memperkirakan dan mengontrol biaya penerapan?
+1. Faktor apa saja yang harus mempengaruhi keputusan pemilihan SKU?
+2. Bagaimana Anda memvalidasi ketersediaan sumber daya Azure sebelum deployment?
+3. Apa saja komponen kunci dari sistem pemeriksaan pra-deploy?
+4. Bagaimana Anda memperkirakan dan mengendalikan biaya deployment?
 5. Pemantauan apa yang penting untuk perencanaan kapasitas?
 
 ### Modul 5: Pemecahan Masalah dan Debugging (Minggu 6)
 
 #### Tujuan Pembelajaran
-- Menguasai metodologi pemecahan masalah secara sistematis
-- Mengembangkan keahlian dalam debugging masalah penerapan yang kompleks
-- Menerapkan pemantauan dan pemberitahuan yang komprehensif
-- Membangun prosedur respons dan pemulihan insiden
+- Kuasi metodologi pemecahan masalah yang sistematis
+- Kembangkan keahlian dalam debugging masalah deployment kompleks
+- Terapkan pemantauan dan pemberitahuan yang komprehensif
+- Bangun prosedur respons insiden dan pemulihan
 
 #### Konsep Utama yang Harus Dikuasai
-- Pola kegagalan penerapan yang umum
+- Pola kegagalan deployment umum
 - Teknik analisis dan korelasi log
-- Pemantauan dan optimasi kinerja
+- Pemantauan kinerja dan optimisasi
 - Deteksi dan respons insiden keamanan
-- Pemulihan bencana dan kelangsungan bisnis
+- Pemulihan bencana dan kesinambungan bisnis
 
 #### Latihan Praktik
 
-**Latihan 5.1: Skenario Pemecahan Masalah**
+**Exercise 5.1: Troubleshooting Scenarios**
 ```bash
-# Latihan menyelesaikan masalah umum:
+# Berlatih menyelesaikan masalah umum:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -490,9 +491,9 @@ Analyze the following components:
 5. Performance and scaling issues
 ```
 
-**Latihan 5.2: Implementasi Pemantauan**
+**Exercise 5.2: Monitoring Implementation**
 ```bash
-# Siapkan pemantauan yang komprehensif:
+# Siapkan pemantauan menyeluruh:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -500,9 +501,9 @@ Analyze the following components:
 5. Health check endpoints and automated testing
 ```
 
-**Latihan 5.3: Respons Insiden**
+**Exercise 5.3: Incident Response**
 ```bash
-# Bangun prosedur tanggapan insiden:
+# Buat prosedur respons insiden:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -511,30 +512,30 @@ Analyze the following components:
 ```
 
 #### Pertanyaan Penilaian Diri
-1. Apa pendekatan sistematis untuk pemecahan masalah penerapan azd?
-2. Bagaimana cara mengkorelasikan log di berbagai layanan dan sumber daya?
-3. Metrik pemantauan apa yang paling penting untuk deteksi masalah dini?
-4. Bagaimana cara menerapkan prosedur pemulihan bencana yang efektif?
-5. Apa saja komponen utama dari rencana respons insiden?
+1. Apa pendekatan sistematis untuk memecahkan masalah deployment azd?
+2. Bagaimana Anda mengkorelasikan log di berbagai layanan dan sumber daya?
+3. Metrik pemantauan apa yang paling kritis untuk deteksi masalah dini?
+4. Bagaimana Anda menerapkan prosedur pemulihan bencana yang efektif?
+5. Apa saja komponen kunci dari rencana respons insiden?
 
 ### Modul 6: Topik Lanjutan dan Praktik Terbaik (Minggu 7-8)
 
 #### Tujuan Pembelajaran
-- Menerapkan pola penerapan tingkat perusahaan
-- Menguasai integrasi dan otomatisasi CI/CD
-- Mengembangkan template khusus dan berkontribusi pada komunitas
-- Memahami persyaratan keamanan dan kepatuhan tingkat lanjut
+- Terapkan pola deployment kelas enterprise
+- Kuasi integrasi dan otomatisasi CI/CD
+- Kembangkan template kustom dan berkontribusi ke komunitas
+- Pahami persyaratan keamanan dan kepatuhan tingkat lanjut
 
 #### Konsep Utama yang Harus Dikuasai
 - Pola integrasi pipeline CI/CD
-- Pengembangan dan distribusi template khusus
-- Tata kelola dan kepatuhan perusahaan
+- Pengembangan dan distribusi template kustom
+- Tata kelola enterprise dan kepatuhan
 - Konfigurasi jaringan dan keamanan tingkat lanjut
-- Optimasi kinerja dan manajemen biaya
+- Optimisasi kinerja dan manajemen biaya
 
 #### Latihan Praktik
 
-**Latihan 6.1: Integrasi CI/CD**
+**Exercise 6.1: CI/CD Integration**
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -544,9 +545,9 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
 
-**Latihan 6.2: Pengembangan Template Khusus**
+**Exercise 6.2: Custom Template Development**
 ```bash
-# Buat dan publikasikan template khusus:
+# Buat dan publikasikan template kustom:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -554,9 +555,9 @@ Analyze the following components:
 5. Publish and maintain template in template gallery
 ```
 
-**Latihan 6.3: Implementasi Perusahaan**
+**Exercise 6.3: Enterprise Implementation**
 ```bash
-# Mengimplementasikan fitur tingkat perusahaan:
+# Terapkan fitur kelas perusahaan:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -565,11 +566,11 @@ Analyze the following components:
 ```
 
 #### Pertanyaan Penilaian Diri
-1. Bagaimana cara mengintegrasikan azd ke dalam alur kerja CI/CD yang ada?
-2. Apa saja pertimbangan utama untuk pengembangan template khusus?
-3. Bagaimana cara menerapkan tata kelola dan kepatuhan dalam penerapan azd?
-4. Apa saja praktik terbaik untuk penerapan skala perusahaan?
-5. Bagaimana cara berkontribusi secara efektif ke komunitas azd?
+1. Bagaimana Anda mengintegrasikan azd ke dalam alur kerja CI/CD yang sudah ada?
+2. Pertimbangan utama apa saja untuk pengembangan template kustom?
+3. Bagaimana Anda menerapkan tata kelola dan kepatuhan dalam deployment azd?
+4. Apa praktik terbaik untuk deployment skala enterprise?
+5. Bagaimana Anda berkontribusi secara efektif ke komunitas azd?
 
 ## Proyek Praktis
 
@@ -577,50 +578,50 @@ Analyze the following components:
 **Kompleksitas**: Pemula  
 **Durasi**: 1-2 minggu
 
-Bangun dan terapkan situs web portofolio pribadi menggunakan:
-- Hosting situs web statis di Azure Storage
-- Konfigurasi domain khusus
-- Integrasi CDN untuk kinerja global
-- Pipeline penerapan otomatis
+Bangun dan deploy situs web portofolio pribadi menggunakan:
+- Hosting situs statis di Azure Storage
+- Konfigurasi domain kustom
+- Integrasi CDN untuk performa global
+- Pipeline deployment otomatis
 
-**Hasil**:
-- Situs web yang berfungsi diterapkan di Azure
-- Template azd khusus untuk penerapan portofolio
-- Dokumentasi proses penerapan
-- Rekomendasi analisis dan optimasi biaya
+**Hasil yang harus diserahkan**:
+- Situs web yang berfungsi dan dideploy di Azure
+- Template azd kustom untuk deployment portofolio
+- Dokumentasi proses deployment
+- Analisis biaya dan rekomendasi optimisasi
 
 ### Proyek 2: Aplikasi Manajemen Tugas
 **Kompleksitas**: Menengah  
 **Durasi**: 2-3 minggu
 
 Buat aplikasi manajemen tugas full-stack dengan:
-- Frontend React yang diterapkan ke App Service
-- Backend API Node.js dengan autentikasi
-- Basis data PostgreSQL dengan migrasi
+- Frontend React dideploy ke App Service
+- Backend API Node.js dengan otentikasi
+- Database PostgreSQL dengan migrasi
 - Pemantauan Application Insights
 
-**Hasil**:
-- Aplikasi lengkap dengan autentikasi pengguna
-- Skema basis data dan skrip migrasi
-- Dasbor pemantauan dan aturan pemberitahuan
-- Konfigurasi penerapan multi-lingkungan
+**Hasil yang harus diserahkan**:
+- Aplikasi lengkap dengan otentikasi pengguna
+- Skema database dan skrip migrasi
+- Dashboard pemantauan dan aturan pemberitahuan
+- Konfigurasi deployment multi-environment
 
-### Proyek 3: Platform E-commerce Berbasis Microservices
+### Proyek 3: Platform E-niaga Berbasis Mikroservis
 **Kompleksitas**: Lanjutan  
 **Durasi**: 4-6 minggu
 
-Rancang dan terapkan platform e-commerce berbasis microservices:
+Rancang dan terapkan platform e-niaga berbasis mikroservis:
 - Beberapa layanan API (katalog, pesanan, pembayaran, pengguna)
-- Integrasi antrian pesan dengan Service Bus
-- Cache Redis untuk optimasi kinerja
+- Integrasi antrean pesan dengan Service Bus
+- Cache Redis untuk optimisasi kinerja
 - Logging dan pemantauan yang komprehensif
 
-**Contoh Referensi**: Lihat [Arsitektur Microservices](../../../examples/container-app/microservices) untuk template siap produksi dan panduan penerapan
+**Contoh Referensi**: Lihat [Arsitektur Mikroservis](../../../examples/container-app/microservices) untuk template siap produksi dan panduan deployment
 
-**Hasil**:
-- Arsitektur microservices lengkap
-- Pola komunikasi antar layanan
-- Pengujian dan optimasi kinerja
+**Hasil yang harus diserahkan**:
+- Arsitektur mikroservis lengkap
+- Pola komunikasi antar-layanan
+- Pengujian kinerja dan optimisasi
 - Implementasi keamanan siap produksi
 
 ## Penilaian dan Sertifikasi
@@ -632,21 +633,21 @@ Selesaikan penilaian ini setelah setiap modul:
 **Penilaian Modul 1**: Konsep dasar dan instalasi
 - Pertanyaan pilihan ganda tentang konsep inti
 - Tugas instalasi dan konfigurasi praktis
-- Latihan penerapan sederhana
+- Latihan deployment sederhana
 
 **Penilaian Modul 2**: Konfigurasi dan lingkungan
 - Skenario manajemen lingkungan
 - Latihan pemecahan masalah konfigurasi
 - Implementasi konfigurasi keamanan
 
-**Penilaian Modul 3**: Penerapan dan penyediaan
+**Penilaian Modul 3**: Deployment dan penyediaan
 - Tantangan desain infrastruktur
-- Skenario penerapan multi-layanan
-- Latihan optimasi kinerja
+- Skenario deployment multi-layanan
+- Latihan optimisasi kinerja
 
-**Penilaian Modul 4**: Validasi pra-penerapan
+**Penilaian Modul 4**: Validasi pra-deploy
 - Studi kasus perencanaan kapasitas
-- Skenario optimasi biaya
+- Skenario optimisasi biaya
 - Implementasi pipeline validasi
 
 **Penilaian Modul 5**: Pemecahan masalah dan debugging
@@ -656,26 +657,26 @@ Selesaikan penilaian ini setelah setiap modul:
 
 **Penilaian Modul 6**: Topik lanjutan
 - Desain pipeline CI/CD
-- Pengembangan template khusus
-- Skenario arsitektur perusahaan
+- Pengembangan template kustom
+- Skenario arsitektur enterprise
 
-### Proyek Akhir
+### Proyek Capstone Akhir
 
 Rancang dan terapkan solusi lengkap yang menunjukkan penguasaan semua konsep:
 
 **Persyaratan**:
 - Arsitektur aplikasi multi-tier
-- Beberapa lingkungan penerapan
+- Beberapa lingkungan deployment
 - Pemantauan dan pemberitahuan yang komprehensif
 - Implementasi keamanan dan kepatuhan
-- Optimasi biaya dan penyetelan kinerja
+- Optimisasi biaya dan penyetelan kinerja
 - Dokumentasi lengkap dan runbook
 
 **Kriteria Evaluasi**:
 - Kualitas implementasi teknis
 - Kelengkapan dokumentasi
 - Kepatuhan terhadap keamanan dan praktik terbaik
-- Optimasi kinerja dan biaya
+- Optimisasi kinerja dan biaya
 - Efektivitas pemecahan masalah dan pemantauan
 
 ## Sumber Belajar dan Referensi
@@ -690,173 +691,173 @@ Rancang dan terapkan solusi lengkap yang menunjukkan penguasaan semua konsep:
 - [Organisasi GitHub Azure-Samples](https://github.com/Azure-Samples)
 - [Repositori GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
 
-### Lingkungan Praktik
-- [Akun Gratis Azure](https://azure.microsoft.com/free/)
-- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
+### Lingkungan Latihan
+- [Azure Free Account](https://azure.microsoft.com/free/)
+- [Azure DevOps Tier Gratis](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
 
 ### Alat Tambahan
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Paket Ekstensi Alat Azure](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
+- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
 ## Rekomendasi Jadwal Belajar
 
 ### Studi Penuh Waktu (8 minggu)
 - **Minggu 1-2**: Modul 1-2 (Memulai, Konfigurasi)
-- **Minggu 3-4**: Modul 3-4 (Penerapan, Pra-penerapan)
+- **Minggu 3-4**: Modul 3-4 (Deployment, Pra-deploy)
 - **Minggu 5-6**: Modul 5-6 (Pemecahan Masalah, Topik Lanjutan)
 - **Minggu 7-8**: Proyek Praktis dan Penilaian Akhir
 
 ### Studi Paruh Waktu (16 minggu)
 - **Minggu 1-4**: Modul 1 (Memulai)
 - **Minggu 5-7**: Modul 2 (Konfigurasi dan Lingkungan)
-- **Minggu 8-10**: Modul 3 (Penerapan dan Penyediaan)
-- **Minggu 11-12**: Modul 4 (Validasi Pra-penerapan)
+- **Minggu 8-10**: Modul 3 (Deployment dan Penyediaan)
+- **Minggu 11-12**: Modul 4 (Validasi Pra-deploy)
 - **Minggu 13-14**: Modul 5 (Pemecahan Masalah dan Debugging)
 - **Minggu 15-16**: Modul 6 (Topik Lanjutan dan Penilaian)
 
 ---
 
-## Pelacakan Kemajuan dan Kerangka Penilaian
+## Kerangka Pelacakan Kemajuan dan Penilaian
 
 ### Daftar Periksa Penyelesaian Bab
 
-Lacak kemajuan Anda melalui setiap bab dengan hasil yang terukur ini:
+Lacak kemajuan Anda melalui setiap bab dengan hasil terukur berikut:
 
 #### 📚 Bab 1: Dasar & Memulai Cepat
-- [ ] **Instalasi Selesai**: AZD terinstal dan diverifikasi di platform Anda
-- [ ] **Penerapan Pertama**: Berhasil menerapkan template todo-nodejs-mongo
+- [ ] **Instalasi Selesai**: AZD diinstal dan diverifikasi di platform Anda
+- [ ] **Deployment Pertama**: Berhasil mendeploy template todo-nodejs-mongo
 - [ ] **Pengaturan Lingkungan**: Mengonfigurasi variabel lingkungan pertama
-- [ ] **Navigasi Sumber Daya**: Menjelajahi sumber daya yang diterapkan di Azure Portal
-- [ ] **Penguasaan Perintah**: Nyaman dengan perintah dasar AZD
+- [ ] **Navigasi Sumber Daya**: Menjelajahi sumber daya yang dideploy di Azure Portal
+- [ ] **Penguasaan Perintah**: Nyaman dengan perintah AZD dasar
 
 #### 🤖 Bab 2: Pengembangan Berbasis AI  
-- [ ] **Penerapan Template AI**: Berhasil menerapkan azure-search-openai-demo
+- [ ] **Penerapan Template AI**: Berhasil mendeploy azure-search-openai-demo
 - [ ] **Implementasi RAG**: Mengonfigurasi pengindeksan dan pengambilan dokumen
 - [ ] **Konfigurasi Model**: Menyiapkan beberapa model AI dengan tujuan berbeda
 - [ ] **Pemantauan AI**: Menerapkan Application Insights untuk beban kerja AI
-- [ ] **Optimasi Kinerja**: Menyetel kinerja aplikasi AI
+- [ ] **Optimisasi Kinerja**: Menyetel kinerja aplikasi AI
 
-#### ⚙️ Bab 3: Konfigurasi & Autentikasi
+#### ⚙️ Bab 3: Konfigurasi & Otentikasi
 - [ ] **Pengaturan Multi-Lingkungan**: Mengonfigurasi lingkungan dev, staging, dan prod
-- [ ] **Implementasi Keamanan**: Menyiapkan autentikasi identitas terkelola
+- [ ] **Implementasi Keamanan**: Menyiapkan otentikasi managed identity
 - [ ] **Manajemen Rahasia**: Mengintegrasikan Azure Key Vault untuk data sensitif
-- [ ] **Manajemen Parameter**: Membuat konfigurasi khusus lingkungan
-- [ ] **Penguasaan Autentikasi**: Menerapkan pola akses yang aman
+- [ ] **Manajemen Parameter**: Membuat konfigurasi spesifik lingkungan
+- [ ] **Penguasaan Otentikasi**: Menerapkan pola akses yang aman
 
-#### 🏗️ Bab 4: Infrastruktur sebagai Kode & Penerapan
-- [ ] **Pembuatan Template Khusus**: Membangun template aplikasi multi-layanan
-- [ ] **Penguasaan Bicep**: Membuat komponen infrastruktur modular dan dapat digunakan kembali
-- [ ] **Otomasi Penerapan**: Menerapkan hook pra/pasca penerapan
-- [ ] **Desain Arsitektur**: Menerapkan arsitektur microservices yang kompleks
-- [ ] **Optimasi Template**: Mengoptimalkan template untuk kinerja dan biaya
+#### 🏗️ Bab 4: Infrastruktur sebagai Kode & Deployment
+- [ ] **Pembuatan Template Kustom**: Membangun template aplikasi multi-layanan
+- [ ] **Penguasaan Bicep**: Membuat komponen infrastruktur modular yang dapat digunakan ulang
+- [ ] **Otomatisasi Deployment**: Menerapkan hook pra/pasca deployment
+- [ ] **Desain Arsitektur**: Mendeploy arsitektur mikroservis yang kompleks
+- [ ] **Optimisasi Template**: Mengoptimalkan template untuk kinerja dan biaya
 
 #### 🎯 Bab 5: Solusi AI Multi-Agen
-- [ ] **Penerapan Solusi Ritel**: Menerapkan skenario ritel multi-agen lengkap
-- [ ] **Kustomisasi Agen**: Memodifikasi perilaku agen Pelanggan dan Inventaris
+- [ ] **Deployment Solusi Ritel**: Mendeploy skenario ritel multi-agen lengkap
+- [ ] **Kustomisasi Agen**: Memodifikasi perilaku agen Customer dan Inventory
 - [ ] **Skalabilitas Arsitektur**: Menerapkan load balancing dan auto-scaling
 - [ ] **Pemantauan Produksi**: Menyiapkan pemantauan dan pemberitahuan yang komprehensif
 - [ ] **Penyetelan Kinerja**: Mengoptimalkan kinerja sistem multi-agen
 
-#### 🔍 Bab 6: Validasi Pra-Penerapan & Perencanaan
+#### 🔍 Bab 6: Validasi & Perencanaan Pra-Deployment
 - [ ] **Analisis Kapasitas**: Menganalisis kebutuhan sumber daya untuk aplikasi
-- [ ] **Optimasi SKU**: Memilih tingkat layanan yang hemat biaya
-- [ ] **Otomasi Validasi**: Menerapkan skrip pemeriksaan pra-penerapan
-- [ ] **Perencanaan Biaya**: Membuat estimasi biaya penerapan dan anggaran
-- [ ] **Penilaian Risiko**: Mengidentifikasi dan mengurangi risiko penerapan
+- [ ] **Optimisasi SKU**: Memilih tier layanan yang hemat biaya
+- [ ] **Otomatisasi Validasi**: Menerapkan skrip pemeriksaan pra-deploy
+- [ ] **Perencanaan Biaya**: Membuat perkiraan biaya deployment dan anggaran
+- [ ] **Penilaian Risiko**: Mengidentifikasi dan mengurangi risiko deployment
 
 #### 🚨 Bab 7: Pemecahan Masalah & Debugging
-- [ ] **Keterampilan Diagnostik**: Berhasil memecahkan penerapan yang sengaja rusak
+- [ ] **Keterampilan Diagnostik**: Berhasil melakukan debugging pada deployment yang sengaja dibuat rusak
 - [ ] **Analisis Log**: Menggunakan Azure Monitor dan Application Insights secara efektif
-- [ ] **Penyetelan Kinerja**: Mengoptimalkan aplikasi yang berkinerja lambat
-- [ ] **Prosedur Pemulihan**: Menerapkan cadangan dan pemulihan bencana
+- [ ] **Penyetelan Kinerja**: Mengoptimalkan aplikasi yang lambat
+- [ ] **Prosedur Pemulihan**: Menerapkan backup dan pemulihan bencana
 - [ ] **Pengaturan Pemantauan**: Membuat pemantauan dan pemberitahuan proaktif
 
-#### 🏢 Bab 8: Pola Produksi & Perusahaan
-- [ ] **Keamanan Perusahaan**: Menerapkan pola keamanan yang komprehensif
+#### 🏢 Bab 8: Pola Produksi & Enterprise
+- [ ] **Keamanan Enterprise**: Menerapkan pola keamanan yang komprehensif
 - [ ] **Kerangka Tata Kelola**: Menyiapkan Azure Policy dan manajemen sumber daya
-- [ ] **Pemantauan Lanjutan**: Membuat dasbor dan pemberitahuan otomatis
-- [ ] **Integrasi CI/CD**: Membangun pipeline penerapan otomatis
-- [ ] **Implementasi Kepatuhan**: Memenuhi persyaratan kepatuhan perusahaan
+- [ ] **Pemantauan Tingkat Lanjut**: Membuat dashboard dan pemberitahuan otomatis
+- [ ] **Integrasi CI/CD**: Membangun pipeline deployment otomatis
+- [ ] **Implementasi Kepatuhan**: Memenuhi persyaratan kepatuhan enterprise
 
 ### Garis Waktu Pembelajaran dan Tonggak
 
-#### Minggu 1-2: Membangun Dasar
-- **Tonggak**: Menerapkan aplikasi AI pertama menggunakan AZD
-- **Validasi**: Aplikasi yang berfungsi dapat diakses melalui URL publik
-- **Keterampilan**: Alur kerja dasar AZD dan integrasi layanan AI
+#### Minggu 1-2: Membangun Fondasi
+- **Tonggak**: Mendeploy aplikasi AI pertama menggunakan AZD
+- **Validasi**: Aplikasi berfungsi dapat diakses melalui URL publik
+- **Keterampilan**: Alur kerja AZD dasar dan integrasi layanan AI
 
 #### Minggu 3-4: Penguasaan Konfigurasi
-- **Tonggak**: Penerapan multi-lingkungan dengan autentikasi yang aman
-- **Validasi**: Aplikasi yang sama diterapkan ke dev/staging/prod
+- **Tonggak**: Deployment multi-lingkungan dengan otentikasi aman
+- **Validasi**: Aplikasi yang sama dideploy ke dev/staging/prod
 - **Keterampilan**: Manajemen lingkungan dan implementasi keamanan
 
 #### Minggu 5-6: Keahlian Infrastruktur
-- **Tonggak**: Template khusus untuk aplikasi multi-layanan yang kompleks
-- **Validasi**: Template yang dapat digunakan kembali diterapkan oleh anggota tim lain
+- **Tonggak**: Template kustom untuk aplikasi multi-layanan kompleks
+- **Validasi**: Template yang dapat digunakan ulang dideploy oleh anggota tim lain
 - **Keterampilan**: Penguasaan Bicep dan otomasi infrastruktur
 
-#### Minggu 7-8: Implementasi AI Lanjutan
+#### Minggu 7-8: Implementasi AI Tingkat Lanjut
 - **Tonggak**: Solusi AI multi-agen siap produksi
 - **Validasi**: Sistem menangani beban dunia nyata dengan pemantauan
-- **Keterampilan**: Orkestrasi multi-agen dan optimasi kinerja
+- **Keterampilan**: Orkestrasi multi-agen dan optimisasi kinerja
 
 #### Minggu 9-10: Kesiapan Produksi
-- **Tonggak**: Penerapan tingkat perusahaan dengan kepatuhan penuh
-- **Validasi**: Lulus tinjauan keamanan dan audit optimasi biaya
+- **Tonggak**: Deployment kelas enterprise dengan kepatuhan penuh
+- **Validasi**: Lulus tinjauan keamanan dan audit optimisasi biaya
 - **Keterampilan**: Tata kelola, pemantauan, dan integrasi CI/CD
 
 ### Penilaian dan Sertifikasi
 
 #### Metode Validasi Pengetahuan
-1. **Penerapan Praktis**: Aplikasi yang berfungsi untuk setiap bab
+1. **Deployment Praktis**: Aplikasi yang berfungsi untuk setiap bab
 2. **Tinjauan Kode**: Penilaian kualitas template dan konfigurasi
 3. **Pemecahan Masalah**: Skenario pemecahan masalah dan solusi
-4. **Pengajaran Rekan**: Menjelaskan konsep kepada pelajar lain
-5. **Kontribusi Komunitas**: Bagikan template atau perbaikan
+4. **Pengajaran Sebaya**: Menjelaskan konsep kepada peserta lain
+5. **Kontribusi Komunitas**: Membagikan template atau perbaikan
 
 #### Hasil Pengembangan Profesional
-- **Proyek Portofolio**: 8 deployment siap produksi
-- **Keterampilan Teknis**: Keahlian AZD dan deployment AI standar industri
-- **Kemampuan Pemecahan Masalah**: Pemecahan masalah dan optimalisasi secara mandiri
+- **Proyek Portofolio**: 8 penyebaran siap produksi
+- **Keterampilan Teknis**: Keahlian penerapan AZD dan AI sesuai standar industri
+- **Kemampuan Pemecahan Masalah**: Pemecahan masalah dan optimasi secara mandiri
 - **Pengakuan Komunitas**: Partisipasi aktif dalam komunitas pengembang Azure
-- **Kemajuan Karir**: Keterampilan yang langsung dapat diterapkan pada peran cloud dan AI
+- **Kemajuan Karier**: Keterampilan yang langsung dapat diterapkan pada peran cloud dan AI
 
-#### Metode Keberhasilan
-- **Tingkat Keberhasilan Deployment**: >95% deployment berhasil
+#### Metrik Keberhasilan
+- **Tingkat Keberhasilan Penyebaran**: >95% penyebaran berhasil
 - **Waktu Pemecahan Masalah**: <30 menit untuk masalah umum
-- **Optimalisasi Performa**: Peningkatan yang dapat dibuktikan dalam biaya dan performa
-- **Kepatuhan Keamanan**: Semua deployment memenuhi standar keamanan perusahaan
+- **Optimasi Kinerja**: Peningkatan yang dapat dibuktikan dalam biaya dan kinerja
+- **Kepatuhan Keamanan**: Semua penyebaran memenuhi standar keamanan perusahaan
 - **Transfer Pengetahuan**: Kemampuan untuk membimbing pengembang lain
 
 ### Pembelajaran Berkelanjutan dan Keterlibatan Komunitas
 
 #### Tetap Terkini
 - **Pembaruan Azure**: Ikuti catatan rilis Azure Developer CLI
-- **Acara Komunitas**: Berpartisipasi dalam acara pengembang Azure dan AI
+- **Acara Komunitas**: Ikut serta dalam acara pengembang Azure dan AI
 - **Dokumentasi**: Berkontribusi pada dokumentasi dan contoh komunitas
-- **Umpan Balik**: Berikan umpan balik tentang konten kursus dan layanan Azure
+- **Umpan Balik**: Berikan masukan pada konten kursus dan layanan Azure
 
-#### Pengembangan Karir
-- **Jaringan Profesional**: Terhubung dengan ahli Azure dan AI
-- **Kesempatan Berbicara**: Presentasikan pembelajaran di konferensi atau meetup
+#### Pengembangan Karier
+- **Jaringan Profesional**: Terhubung dengan pakar Azure dan AI
+- **Peluang Presentasi**: Presentasikan pembelajaran pada konferensi atau meetup
 - **Kontribusi Open Source**: Berkontribusi pada template dan alat AZD
-- **Mentorship**: Membimbing pengembang lain dalam perjalanan pembelajaran AZD mereka
+- **Bimbingan**: Membimbing pengembang lain dalam perjalanan pembelajaran AZD mereka
 
 ---
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD Untuk Pemula](../README.md)
+- **📚 Beranda Kursus**: [AZD untuk Pemula](../README.md)
 - **📖 Mulai Belajar**: [Bab 1: Dasar & Mulai Cepat](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Pelacakan Kemajuan**: Lacak kemajuan Anda melalui sistem pembelajaran 8 bab yang komprehensif
+- **🎯 Pelacakan Kemajuan**: Lacak kemajuan Anda melalui sistem pembelajaran 8-bab yang komprehensif
 - **🤝 Komunitas**: [Azure Discord](https://discord.gg/microsoft-azure) untuk dukungan dan diskusi
 
-**Pelacakan Kemajuan Studi**: Gunakan panduan terstruktur ini untuk menguasai Azure Developer CLI melalui pembelajaran praktis yang progresif dengan hasil yang terukur dan manfaat pengembangan profesional.
+**Pelacakan Kemajuan Studi**: Gunakan panduan terstruktur ini untuk menguasai Azure Developer CLI melalui pembelajaran progresif dan praktis dengan hasil yang terukur dan manfaat pengembangan profesional.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan terjemahan yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa terjemahan manusia profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau interpretasi yang salah yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidaktepatan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,58 +1,58 @@
-# Gabay sa Pag-aaral - Komprehensibong Layunin sa Pagkatuto
+# Gabay sa Pag-aaral - Komprehensibong Mga Layunin sa Pagkatuto
 
-**Pag-navigate sa Learning Path**
-- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../README.md)
-- **📖 Simulan ang Pag-aaral**: [Kabanata 1: Pundasyon at Mabilisang Simula](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Pagsubaybay sa Pag-unlad**: [Pagkumpleto ng Kurso](../README.md#-course-completion--certification)
+**Navigasyon ng Landas ng Pagkatuto**
+- **📚 Course Home**: [AZD For Beginners](../README.md)
+- **📖 Start Learning**: [Kabanata 1: Pundasyon & Mabilis na Pagsisimula](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Progress Tracking**: [Pagkumpleto ng Kurso](../README.md#-course-completion--certification)
 
 ## Panimula
 
-Ang komprehensibong gabay sa pag-aaral na ito ay nagbibigay ng maayos na layunin sa pagkatuto, mahahalagang konsepto, mga pagsasanay, at materyales sa pagsusuri upang matulungan kang ma-master ang Azure Developer CLI (azd). Gamitin ang gabay na ito upang subaybayan ang iyong progreso at tiyaking natutunan mo ang lahat ng mahahalagang paksa.
+Ang komprehensibong gabay na ito sa pag-aaral ay nagbibigay ng istrukturadong mga layunin sa pagkatuto, mga pangunahing konsepto, mga praktikal na gawain, at mga materyales para sa pagsusuri upang tulungan kang maging bihasa sa Azure Developer CLI (azd). Gamitin ang gabay na ito upang subaybayan ang iyong pag-unlad at tiyaking natakpan mo ang lahat ng mahahalagang paksa.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng gabay na ito, ikaw ay:
-- Magiging bihasa sa lahat ng pangunahing at advanced na konsepto ng Azure Developer CLI
-- Magkakaroon ng praktikal na kasanayan sa pag-deploy at pamamahala ng mga Azure application
-- Magkakaroon ng kumpiyansa sa pag-troubleshoot at pag-optimize ng mga deployment
-- Maiintindihan ang mga praktika sa production-ready deployment at mga konsiderasyon sa seguridad
+Sa pamamagitan ng pagtatapos ng gabay na ito, ikaw ay:
+- Maging dalubhasa sa lahat ng pangunahing at advanced na konsepto ng Azure Developer CLI
+- Bumuo ng praktikal na kakayahan sa pag-deploy at pamamahala ng mga aplikasyon sa Azure
+- Magkaroon ng kumpiyansa sa pag-troubleshoot at pag-optimize ng mga deployment
+- Maunawaan ang mga kasanayan para sa production-ready na deployment at mga konsiderasyon sa seguridad
 
-## Mga Resulta ng Pagkatuto
+## Mga Kinalabasan ng Pagkatuto
 
-Pagkatapos makumpleto ang lahat ng seksyon ng gabay na ito, magagawa mo:
-- Magdisenyo, mag-deploy, at mag-manage ng kumpletong application architectures gamit ang azd
-- Magpatupad ng komprehensibong monitoring, seguridad, at mga estratehiya sa cost optimization
-- Mag-troubleshoot ng mga komplikadong isyu sa deployment nang mag-isa
-- Gumawa ng mga custom na template at mag-ambag sa komunidad ng azd
+Matapos makumpleto ang lahat ng bahagi ng gabay na ito, magagawa mong:
+- Mag-disenyo, mag-deploy, at mag-manage ng kumpletong arkitektura ng aplikasyon gamit ang azd
+- Magpatupad ng komprehensibong monitoring, seguridad, at mga estratehiya sa pag-optimize ng gastos
+- Mag-troubleshoot ng kumplikadong mga isyu sa deployment nang mag-isa
+- Lumikha ng mga custom na template at mag-ambag sa komunidad ng azd
 
-## 8-Kabanatang Estruktura ng Pagkatuto
+## Istruktura ng Pagkatuto na Binubuo ng 8 Kabanata
 
-### Kabanata 1: Pundasyon at Mabilisang Simula (Linggo 1)
+### Kabanata 1: Pundasyon & Mabilis na Pagsisimula (Linggo 1)
 **Tagal**: 30-45 minuto | **Kompleksidad**: ⭐
 
 #### Mga Layunin sa Pagkatuto
 - Maunawaan ang mga pangunahing konsepto at terminolohiya ng Azure Developer CLI
 - Matagumpay na mai-install at ma-configure ang AZD sa iyong development platform
-- Ma-deploy ang iyong unang application gamit ang isang umiiral na template
-- Mabisang mag-navigate sa AZD command-line interface
+- I-deploy ang iyong unang aplikasyon gamit ang umiiral na template
+- Mag-navigate nang epektibo sa AZD command-line interface
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Estruktura ng proyekto ng AZD at mga bahagi nito (azure.yaml, infra/, src/)
-- Mga workflow sa deployment na batay sa template
-- Mga pangunahing kaalaman sa configuration ng environment
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Istruktura ng proyekto ng AZD at mga bahagi (azure.yaml, infra/, src/)
+- Mga workflow ng deployment na batay sa template
+- Mga batayan ng konfigurasyon ng environment
 - Pamamahala ng resource group at subscription
 
-#### Mga Praktikal na Pagsasanay
-1. **Pag-verify ng Installation**: I-install ang AZD at i-verify gamit ang `azd version`
-2. **Unang Deployment**: Matagumpay na i-deploy ang todo-nodejs-mongo template
-3. **Setup ng Environment**: I-configure ang iyong unang environment variables
-4. **Pag-explore ng Resource**: Mag-navigate sa mga na-deploy na resources sa Azure Portal
+#### Mga Praktikal na Ehersisyo
+1. **Pagpapatunay ng Instalasyon**: I-install ang AZD at i-verify gamit ang `azd version`
+2. **Unang Deployment**: I-deploy nang matagumpay ang todo-nodejs-mongo template
+3. **Pag-setup ng Environment**: I-configure ang iyong unang mga environment variable
+4. **Eksplorasyon ng Mga Resource**: Mag-navigate sa mga na-deploy na resource sa Azure Portal
 
 #### Mga Tanong sa Pagsusuri
-- Ano ang mga pangunahing bahagi ng isang AZD project?
-- Paano mo ini-initialize ang isang bagong proyekto mula sa template?
-- Ano ang pagkakaiba ng `azd up` at `azd deploy`?
-- Paano mo pinamamahalaan ang maraming environment gamit ang AZD?
+- Ano ang mga pangunahing bahagi ng isang proyekto ng AZD?
+- Paano ka mag-i-initialize ng bagong proyekto mula sa isang template?
+- Ano ang pagkakaiba sa pagitan ng `azd up` at `azd deploy`?
+- Paano mo pinamamahalaan ang maramihang mga environment gamit ang AZD?
 
 ---
 
@@ -60,89 +60,90 @@ Pagkatapos makumpleto ang lahat ng seksyon ng gabay na ito, magagawa mo:
 **Tagal**: 1-2 oras | **Kompleksidad**: ⭐⭐
 
 #### Mga Layunin sa Pagkatuto
-- Isama ang Microsoft Foundry services sa mga workflow ng AZD
-- Mag-deploy at mag-configure ng mga AI-powered application
+- I-integrate ang Microsoft Foundry services sa mga workflow ng AZD
+- Mag-deploy at mag-configure ng mga aplikasyon na pinapagana ng AI
 - Maunawaan ang mga pattern ng implementasyon ng RAG (Retrieval-Augmented Generation)
-- Pamahalaan ang mga deployment ng AI model at scaling
+- Pamahalaan ang deployment at scaling ng mga AI model
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Integrasyon ng Azure OpenAI service at pamamahala ng API
-- Configuration ng AI Search at vector indexing
-- Mga estratehiya sa deployment ng model at capacity planning
-- Monitoring ng AI application at pag-optimize ng performance
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Integrasyon ng Microsoft Foundry Models service at pamamahala ng API
+- Konfigurasyon ng AI Search at pag-index ng vector
+- Mga estratehiya sa deployment ng modelo at pagpaplano ng kapasidad
+- Pagmo-monitor ng AI application at pag-optimize ng performance
 
-#### Mga Praktikal na Pagsasanay
-1. **Deployment ng AI Chat**: I-deploy ang azure-search-openai-demo template
-2. **Implementasyon ng RAG**: I-configure ang document indexing at retrieval
-3. **Configuration ng Model**: Mag-set up ng maraming AI models para sa iba't ibang layunin
-4. **Monitoring ng AI**: Magpatupad ng Application Insights para sa AI workloads
+#### Mga Praktikal na Ehersisyo
+1. **AI Chat Deployment**: I-deploy ang azure-search-openai-demo template
+2. **RAG Implementation**: I-configure ang pag-index at retrieval ng dokumento
+3. **Model Configuration**: Mag-set up ng maraming AI model para sa iba’t ibang layunin
+4. **AI Monitoring**: Ipatupad ang Application Insights para sa AI workloads
 
 #### Mga Tanong sa Pagsusuri
-- Paano mo kino-configure ang Azure OpenAI services sa isang AZD template?
+- Paano mo iko-configure ang Microsoft Foundry Models services sa isang AZD template?
 - Ano ang mga pangunahing bahagi ng isang RAG architecture?
-- Paano mo pinamamahalaan ang kapasidad at scaling ng AI model?
-- Anong mga monitoring metrics ang mahalaga para sa AI applications?
+- Paano mo pinamamahalaan ang capacity at scaling ng AI model?
+- Anong mga metric sa monitoring ang mahalaga para sa mga AI application?
 
 ---
 
-### Kabanata 3: Configuration at Authentication (Linggo 3)
+### Kabanata 3: Konfigurasyon & Pag-authenticate (Linggo 3)
 **Tagal**: 45-60 minuto | **Kompleksidad**: ⭐⭐
 
 #### Mga Layunin sa Pagkatuto
-- Ma-master ang mga estratehiya sa configuration at pamamahala ng environment
-- Magpatupad ng secure authentication patterns at managed identity
-- Mag-organisa ng mga resources gamit ang tamang naming conventions
-- Mag-configure ng multi-environment deployments (dev, staging, prod)
+- Maging eksperto sa mga estratehiya ng konfigurasyon at pamamahala ng environment
+- Magpatupad ng mga secure na pattern ng authentication at managed identity
+- Ayusin ang mga resource gamit ang tamang naming conventions
+- I-configure ang multi-environment deployments (dev, staging, prod)
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Hierarchy ng environment at configuration precedence
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Hierarchy ng environment at precedence ng konfigurasyon
 - Managed identity at service principal authentication
-- Integrasyon ng Key Vault para sa pamamahala ng mga secrets
-- Pamamahala ng environment-specific parameters
+- Integrasyon ng Key Vault para sa pamamahala ng mga secret
+- Pamamahala ng parameter na naka-specify para sa bawat environment
 
-#### Mga Praktikal na Pagsasanay
-1. **Setup ng Multi-Environment**: I-configure ang dev, staging, at prod environments
-2. **Configuration ng Seguridad**: Magpatupad ng managed identity authentication
-3. **Pamamahala ng Secrets**: Isama ang Azure Key Vault para sa sensitibong data
-4. **Pamamahala ng Parameter**: Gumawa ng environment-specific configurations
+#### Mga Praktikal na Ehersisyo
+1. **Multi-Environment Setup**: I-configure ang dev, staging, at prod environments
+2. **Security Configuration**: Magpatupad ng managed identity authentication
+3. **Secrets Management**: I-integrate ang Azure Key Vault para sa sensitibong data
+4. **Parameter Management**: Lumikha ng environment-specific na mga konfigurasyon
 
 #### Mga Tanong sa Pagsusuri
-- Paano mo kino-configure ang iba't ibang environment gamit ang AZD?
+- Paano ka nagko-configure ng iba't ibang environment gamit ang AZD?
 - Ano ang mga benepisyo ng paggamit ng managed identity kumpara sa service principals?
-- Paano mo securely pinamamahalaan ang application secrets?
-- Ano ang hierarchy ng configuration sa AZD?
+- Paano mo ligtas na pinamamahalaan ang mga secret ng aplikasyon?
+- Ano ang hierarchy ng konfigurasyon sa AZD?
 
 ---
 
-### Kabanata 4: Infrastructure as Code at Deployment (Linggo 4-5)
+### Kabanata 4: Infrastructure as Code & Deployment (Linggo 4-5)
 **Tagal**: 1-1.5 oras | **Kompleksidad**: ⭐⭐⭐
 
 #### Mga Layunin sa Pagkatuto
-- Gumawa at mag-customize ng Bicep infrastructure templates
-- Magpatupad ng advanced deployment patterns at workflows
-- Maunawaan ang mga estratehiya sa resource provisioning
-- Magdisenyo ng scalable multi-service architectures
+- Lumikha at i-customize ang mga Bicep infrastructure template
+- Magpatupad ng advanced na mga pattern at workflow ng deployment
+- Maunawaan ang mga estratehiya sa provisioning ng resource
+- Mag-disenyo ng scalable na multi-service architectures
 
-- Mag-deploy ng containerized applications gamit ang Azure Container Apps at AZD
+- I-deploy ang mga containerized na aplikasyon gamit ang Azure Container Apps at AZD
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Estruktura ng Bicep template at mga best practices
-- Mga dependencies ng resource at pagkakasunod-sunod ng deployment
-- Mga parameter files at modularity ng template
+
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Istruktura ng Bicep template at mga best practice
+- Mga dependency ng resource at ordering ng deployment
+- Mga parameter file at modularity ng template
 - Custom hooks at automation ng deployment
-- Mga pattern ng deployment ng container app (quick start, production, microservices)
+- Mga pattern sa pag-deploy ng container app (quick start, production, microservices)
 
-#### Mga Praktikal na Pagsasanay
-1. **Paglikha ng Custom Template**: Gumawa ng multi-service application template
-2. **Mastery ng Bicep**: Gumawa ng modular, reusable infrastructure components
-3. **Automation ng Deployment**: Magpatupad ng pre/post deployment hooks
-4. **Disenyo ng Arkitektura**: Mag-deploy ng complex microservices architecture
-5. **Deployment ng Container App**: I-deploy ang [Simple Flask API](../../../examples/container-app/simple-flask-api) at [Microservices Architecture](../../../examples/container-app/microservices) examples gamit ang AZD
+#### Mga Praktikal na Ehersisyo
+1. **Custom Template Creation**: Bumuo ng multi-service application template
+2. **Bicep Mastery**: Lumikha ng modular, reusable na mga bahagi ng infrastructure
+3. **Deployment Automation**: Magpatupad ng pre/post deployment hooks
+4. **Architecture Design**: I-deploy ang kumplikadong microservices architecture
+5. **Container App Deployment**: I-deploy ang [Simple Flask API](../../../examples/container-app/simple-flask-api) at [Microservices Architecture](../../../examples/container-app/microservices) na mga halimbawa gamit ang AZD
 
 #### Mga Tanong sa Pagsusuri
-- Paano ka gumagawa ng custom Bicep templates para sa AZD?
-- Ano ang mga best practices sa pag-organisa ng infrastructure code?
-- Paano mo hinahandle ang mga dependencies ng resource sa templates?
+- Paano ka lumikha ng custom Bicep templates para sa AZD?
+- Ano ang mga best practice para sa pag-oorganisa ng infrastructure code?
+- Paano mo hinahandle ang mga dependency ng resource sa mga template?
 - Anong mga pattern ng deployment ang sumusuporta sa zero-downtime updates?
 
 ---
@@ -151,138 +152,138 @@ Pagkatapos makumpleto ang lahat ng seksyon ng gabay na ito, magagawa mo:
 **Tagal**: 2-3 oras | **Kompleksidad**: ⭐⭐⭐⭐
 
 #### Mga Layunin sa Pagkatuto
-- Magdisenyo at magpatupad ng multi-agent AI architectures
-- Mag-orchestrate ng coordination at communication ng agent
-- Mag-deploy ng production-ready AI solutions na may monitoring
-- Maunawaan ang specialization ng agent at mga workflow patterns
-- Isama ang containerized microservices bilang bahagi ng multi-agent solutions
+- Mag-disenyo at magpatupad ng multi-agent AI architectures
+- I-orchestrate ang koordinasyon at komunikasyon ng mga agent
+- Mag-deploy ng production-ready na AI solutions na may monitoring
+- Maunawaan ang agent specialization at mga workflow pattern
+- I-integrate ang containerized microservices bilang bahagi ng multi-agent solutions
 
-#### Mahahalagang Konsepto na Dapat Ma-master
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
 - Mga pattern ng multi-agent architecture at prinsipyo ng disenyo
 - Mga protocol ng komunikasyon ng agent at daloy ng data
 - Mga estratehiya sa load balancing at scaling para sa AI agents
-- Monitoring ng production para sa multi-agent systems
-- Komunikasyon ng service-to-service sa containerized environments
+- Production monitoring para sa multi-agent systems
+- Serbisyo-sa-serbisyo na komunikasyon sa containerized na mga environment
 
-#### Mga Praktikal na Pagsasanay
-1. **Deployment ng Retail Solution**: I-deploy ang kumpletong multi-agent retail scenario
-2. **Customization ng Agent**: I-modify ang mga behavior ng Customer at Inventory agent
-3. **Scaling ng Arkitektura**: Magpatupad ng load balancing at auto-scaling
-4. **Monitoring ng Production**: Mag-set up ng komprehensibong monitoring at alerting
-5. **Integrasyon ng Microservices**: Palawakin ang [Microservices Architecture](../../../examples/container-app/microservices) example upang suportahan ang agent-based workflows
+#### Mga Praktikal na Ehersisyo
+1. **Retail Solution Deployment**: I-deploy ang kumpletong multi-agent retail scenario
+2. **Agent Customization**: I-modify ang pag-uugali ng Customer at Inventory agent
+3. **Architecture Scaling**: Magpatupad ng load balancing at auto-scaling
+4. **Production Monitoring**: Mag-set up ng komprehensibong monitoring at alerting
+5. **Microservices Integration**: I-extend ang [Microservices Architecture](../../../examples/container-app/microservices) na halimbawa upang suportahan ang agent-based workflows
 
 #### Mga Tanong sa Pagsusuri
-- Paano ka nagdidisenyo ng epektibong mga pattern ng komunikasyon ng multi-agent?
+- Paano ka mag-didisenyo ng epektibong mga pattern ng komunikasyon ng multi-agent?
 - Ano ang mga pangunahing konsiderasyon para sa scaling ng AI agent workloads?
-- Paano mo mino-monitor at dine-debug ang multi-agent AI systems?
-- Anong mga production patterns ang nagsisiguro ng reliability para sa AI agents?
+- Paano mo imo-monitor at ida-debug ang multi-agent AI systems?
+- Anong mga production pattern ang nagsisiguro ng pagiging maaasahan para sa mga AI agent?
 
 ---
 
-### Kabanata 6: Pre-Deployment Validation at Planning (Linggo 8)
+### Kabanata 6: Pre-Deployment Validation & Planning (Linggo 8)
 **Tagal**: 1 oras | **Kompleksidad**: ⭐⭐
 
 #### Mga Layunin sa Pagkatuto
 - Magsagawa ng komprehensibong capacity planning at resource validation
-- Pumili ng optimal na Azure SKUs para sa cost-effectiveness
-- Magpatupad ng automated pre-flight checks at validation
-- Magplano ng deployments gamit ang mga estratehiya sa cost optimization
+- Pumili ng pinakamainam na Azure SKUs para sa cost-effectiveness
+- Magpatupad ng automated na pre-flight checks at validation
+- Magplano ng deployment na may mga estratehiya sa pag-optimize ng gastos
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Mga quota ng Azure resource at mga limitasyon sa kapasidad
-- Mga pamantayan sa pagpili ng SKU at cost optimization
-- Mga automated validation scripts at testing
-- Pagpaplano ng deployment at risk assessment
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Azure resource quotas at mga limitasyon ng kapasidad
+- Mga kriteriya sa pagpili ng SKU at pag-optimize ng gastos
+- Mga automated validation script at testing
+- Pagpaplano ng deployment at pagtatasa ng panganib
 
-#### Mga Praktikal na Pagsasanay
-1. **Pagsusuri ng Kapasidad**: Suriin ang mga kinakailangan sa resource para sa iyong mga application
-2. **Optimization ng SKU**: Ihambing at pumili ng cost-effective na service tiers
-3. **Automation ng Validation**: Magpatupad ng pre-deployment check scripts
-4. **Pagpaplano ng Gastos**: Gumawa ng mga pagtatantya ng deployment cost at budget
+#### Mga Praktikal na Ehersisyo
+1. **Capacity Analysis**: Suriin ang mga kinakailangan sa resource para sa iyong mga aplikasyon
+2. **SKU Optimization**: Ihambing at piliin ang cost-effective na service tiers
+3. **Validation Automation**: Magpatupad ng mga script para sa pre-deployment checks
+4. **Cost Planning**: Lumikha ng mga pagtatantya ng gastos at mga budget para sa deployment
 
 #### Mga Tanong sa Pagsusuri
-- Paano mo vinalidate ang kapasidad ng Azure bago ang deployment?
+- Paano mo vinavalidate ang kapasidad ng Azure bago ang deployment?
 - Anong mga salik ang nakakaapekto sa mga desisyon sa pagpili ng SKU?
 - Paano mo ina-automate ang pre-deployment validation?
-- Anong mga estratehiya ang nakakatulong sa pag-optimize ng deployment costs?
+- Anong mga estratehiya ang tumutulong mag-optimize ng gastos sa deployment?
 
 ---
 
-### Kabanata 7: Troubleshooting at Debugging (Linggo 9)
+### Kabanata 7: Troubleshooting & Debugging (Linggo 9)
 **Tagal**: 1-1.5 oras | **Kompleksidad**: ⭐⭐
 
 #### Mga Layunin sa Pagkatuto
-- Bumuo ng sistematikong mga approach sa debugging para sa AZD deployments
-- Lutasin ang mga karaniwang isyu sa deployment at configuration
-- Mag-debug ng mga AI-specific na problema at isyu sa performance
-- Magpatupad ng monitoring at alerting para sa proactive na pag-detect ng isyu
+- Bumuo ng sistematikong mga pamamaraan sa debugging para sa mga AZD deployment
+- Lutasin ang mga karaniwang isyu sa deployment at konfigurasyon
+- I-debug ang mga AI-specific na problema at mga isyu sa performance
+- Magpatupad ng monitoring at alerting para sa proaktibong pagtuklas ng mga isyu
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Mga teknik sa diagnostic at mga estratehiya sa logging
-- Mga karaniwang pattern ng failure at kanilang mga solusyon
-- Monitoring ng performance at optimization
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Mga teknik sa diagnosis at mga estratehiya sa pag-log
+- Mga karaniwang pattern ng pagkabigo at ang kanilang mga solusyon
+- Monitoring ng performance at pag-optimize
 - Mga pamamaraan sa incident response at recovery
 
-#### Mga Praktikal na Pagsasanay
-1. **Mga Kasanayan sa Diagnostic**: Mag-practice gamit ang intentionally broken deployments
-2. **Pagsusuri ng Log**: Gamitin ang Azure Monitor at Application Insights nang epektibo
-3. **Pag-tune ng Performance**: Mag-optimize ng mga application na mabagal ang performance
-4. **Mga Pamamaraan sa Recovery**: Magpatupad ng backup at disaster recovery
+#### Mga Praktikal na Ehersisyo
+1. **Diagnostic Skills**: Magsanay sa mga sinadyang sira na deployment
+2. **Log Analysis**: Epektibong gamitin ang Azure Monitor at Application Insights
+3. **Performance Tuning**: I-optimize ang mga mabagal na aplikasyon
+4. **Recovery Procedures**: Magpatupad ng backup at disaster recovery
 
 #### Mga Tanong sa Pagsusuri
-- Ano ang mga pinakakaraniwang failure sa AZD deployment?
-- Paano mo dine-debug ang mga isyu sa authentication at permission?
-- Anong mga estratehiya sa monitoring ang nakakatulong sa pag-iwas sa mga isyu sa production?
-- Paano mo ina-optimize ang performance ng application sa Azure?
+- Ano ang mga pinaka-karaniwang pagkabigo sa AZD deployment?
+- Paano mo ido-debug ang mga isyu sa authentication at permission?
+- Anong mga estratehiya sa monitoring ang tumutulong maiwasan ang mga isyu sa production?
+- Paano mo i-o-optimize ang performance ng aplikasyon sa Azure?
 
 ---
 
-### Kabanata 8: Production at Enterprise Patterns (Linggo 10-11)
+### Kabanata 8: Production & Enterprise Patterns (Linggo 10-11)
 **Tagal**: 2-3 oras | **Kompleksidad**: ⭐⭐⭐⭐
 
 #### Mga Layunin sa Pagkatuto
-- Magpatupad ng mga estratehiya sa enterprise-grade deployment
-- Magdisenyo ng mga pattern sa seguridad at compliance frameworks
-- Magtatag ng monitoring, governance, at cost management
-- Gumawa ng scalable CI/CD pipelines na may integrasyon ng AZD
-- Magpatupad ng mga best practices para sa production container app deployments (seguridad, monitoring, gastos, CI/CD)
+- Magpatupad ng enterprise-grade na mga estratehiya sa deployment
+- Mag-disenyo ng mga pattern ng seguridad at mga framework para sa pagsunod
+- Magtatag ng monitoring, governance, at pamamahala ng gastos
+- Lumikha ng scalable na CI/CD pipelines na may integrasyon ng AZD
+- I-apply ang mga best practice para sa production container app deployments (seguridad, monitoring, gastos, CI/CD)
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Mga kinakailangan sa seguridad at compliance ng enterprise
-- Mga framework ng governance at implementasyon ng policy
-- Advanced monitoring at cost management
-- Integrasyon ng CI/CD at automated deployment pipelines
-- Mga estratehiya sa blue-green at canary deployment para sa containerized workloads
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Mga kinakailangan sa enterprise security at compliance
+- Mga framework ng governance at pagpapatupad ng polisiya
+- Advanced monitoring at pamamahala ng gastos
+- CI/CD integration at automated deployment pipelines
+- Mga estratehiya ng blue-green at canary deployment para sa containerized workloads
 
-#### Mga Praktikal na Pagsasanay
-1. **Seguridad ng Enterprise**: Magpatupad ng komprehensibong mga pattern sa seguridad
-2. **Framework ng Governance**: Mag-set up ng Azure Policy at pamamahala ng resource
-3. **Advanced Monitoring**: Gumawa ng mga dashboard at automated alerting
-4. **Integrasyon ng CI/CD**: Bumuo ng automated deployment pipelines
-5. **Production Container Apps**: Magpatupad ng seguridad, monitoring, at cost optimization sa [Microservices Architecture](../../../examples/container-app/microservices) example
+#### Mga Praktikal na Ehersisyo
+1. **Enterprise Security**: Magpatupad ng komprehensibong mga pattern ng seguridad
+2. **Governance Framework**: Mag-set up ng Azure Policy at pamamahala ng resource
+3. **Advanced Monitoring**: Lumikha ng mga dashboard at automated alerting
+4. **CI/CD Integration**: Bumuo ng automated deployment pipelines
+5. **Production Container Apps**: I-apply ang seguridad, monitoring, at pag-optimize ng gastos sa [Microservices Architecture](../../../examples/container-app/microservices) na halimbawa
 
 #### Mga Tanong sa Pagsusuri
-- Paano mo ipinatutupad ang seguridad ng enterprise sa AZD deployments?
-- Anong mga pattern ng governance ang nagsisiguro ng compliance at cost control?
-- Paano mo dinisenyo ang scalable monitoring para sa production systems?
-- Anong mga pattern ng CI/CD ang pinakamahusay na gumagana sa AZD workflows?
+- Paano mo ipinatutupad ang enterprise security sa mga AZD deployment?
+- Anong mga pattern ng governance ang nagsisiguro ng pagsunod at pagkontrol ng gastos?
+- Paano ka mag-didisenyo ng scalable na monitoring para sa mga production system?
+- Anong mga pattern ng CI/CD ang pinakamahusay na gumagana sa mga workflow ng AZD?
 
 #### Mga Layunin sa Pagkatuto
-- Maunawaan ang mga pangunahing konsepto ng Azure Developer CLI
+- Maunawaan ang mga pundasyon at pangunahing konsepto ng Azure Developer CLI
 - Matagumpay na mai-install at ma-configure ang azd sa iyong development environment
-- Kumpletuhin ang iyong unang deployment gamit ang isang umiiral na template
-- Mag-navigate sa estruktura ng azd project at maunawaan ang mga pangunahing bahagi
+- Makumpleto ang iyong unang deployment gamit ang umiiral na template
+- Mag-navigate sa istruktura ng proyekto ng azd at maunawaan ang mga pangunahing bahagi
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Mga template, environment, at serbisyo
-- Estruktura ng configuration ng azure.yaml
-- Mga pangunahing utos ng azd (init, up, down, deploy)
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Templates, environments, at services
+- Istruktura ng azure.yaml konfigurasyon
+- Mga pangunahing azd commands (init, up, down, deploy)
 - Mga prinsipyo ng Infrastructure as Code
 - Azure authentication at authorization
 
-#### Mga Pagsasanay
+#### Mga Praktikal na Ehersisyo
 
-**Pagsasanay 1.1: Installation at Setup**
+**Exercise 1.1: Installation and Setup**
 ```bash
 # Kumpletuhin ang mga gawaing ito:
 1. Install azd using your preferred method
@@ -292,9 +293,9 @@ Pagkatapos makumpleto ang lahat ng seksyon ng gabay na ito, magagawa mo:
 5. Explore available templates: azd template list
 ```
 
-**Pagsasanay 1.2: Unang Deployment**
+**Exercise 1.2: First Deployment**
 ```bash
-# Mag-deploy ng isang simpleng web application:
+# I-deploy ang isang simpleng web application:
 1. Initialize project: azd init --template todo-nodejs-mongo
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
@@ -302,7 +303,7 @@ Pagkatapos makumpleto ang lahat ng seksyon ng gabay na ito, magagawa mo:
 5. Clean up resources: azd down
 ```
 
-**Pagsasanay 1.3: Pagsusuri ng Estruktura ng Proyekto**
+**Exercise 1.3: Project Structure Analysis**
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -311,18 +312,18 @@ Analyze the following components:
 4. .azure/ directory - environment configurations
 ```
 
-#### Mga Tanong sa Sariling Pagsusuri
-1. Ano ang tatlong pangunahing konsepto ng azd architecture?
+#### Mga Tanong para sa Sariling Pagsusuri
+1. Ano ang tatlong pangunahing konsepto ng arkitektura ng azd?
 2. Ano ang layunin ng azure.yaml file?
-3. Paano nakakatulong ang mga environment sa pamamahala ng iba't ibang deployment targets?
-4. Anong mga authentication methods ang maaaring gamitin sa azd?
-5. Ano ang nangyayari kapag nag-run ka ng `azd up` sa unang pagkakataon?
+3. Paano nakakatulong ang mga environment sa pamamahala ng iba't ibang deployment target?
+4. Anong mga paraan ng authentication ang maaaring gamitin sa azd?
+5. Ano ang nangyayari kapag pinatakbo mo ang `azd up` sa unang pagkakataon?
 
 ---
 
-## Pagsubaybay sa Progreso at Framework ng Pagsusuri
+## Pagsubaybay sa Progreso at Balangkas ng Pagtatasa
 ```bash
-# Lumikha at i-configure ang maraming kapaligiran:
+# Gumawa at i-configure ang maramihang kapaligiran:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -330,7 +331,7 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**Pagsasanay 2.2: Advanced Configuration**
+**Exercise 2.2: Advanced Configuration**
 ```yaml
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
@@ -339,40 +340,40 @@ Analyze the following components:
 4. Custom resource naming patterns
 ```
 
-**Pagsasanay 2.3: Configuration ng Seguridad**
+**Exercise 2.3: Security Configuration**
 ```bash
-# Ipatupad ang pinakamahusay na mga kasanayan sa seguridad:
+# Ipatupad ang pinakamahusay na mga gawi sa seguridad:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### Mga Tanong sa Sariling Pagsusuri
-1. Paano hinahandle ng azd ang environment variable precedence?
+#### Mga Tanong para sa Sariling Pagsusuri
+1. Paano hinahandle ng azd ang precedence ng environment variable?
 2. Ano ang mga deployment hooks at kailan mo dapat gamitin ang mga ito?
-3. Paano mo kino-configure ang iba't ibang SKUs para sa iba't ibang environment?
-4. Ano ang mga implikasyon sa seguridad ng iba't ibang authentication methods?
-5. Paano mo pinamamahalaan ang mga secrets at sensitibong configuration data?
+3. Paano mo iko-configure ang iba't ibang SKU para sa iba't ibang environment?
+4. Ano ang mga implikasyon sa seguridad ng iba't ibang paraan ng authentication?
+5. Paano mo pinamamahalaan ang mga secret at sensitibong konfigurasyon?
 
-### Module 3: Deployment at Provisioning (Linggo 4)
+### Modyul 3: Deployment at Provisioning (Linggo 4)
 
 #### Mga Layunin sa Pagkatuto
-- Ma-master ang mga workflow sa deployment at best practices
+- Maging eksperto sa mga workflow ng deployment at mga best practice
 - Maunawaan ang Infrastructure as Code gamit ang Bicep templates
-- Magpatupad ng mga komplikadong multi-service architectures
-- Mag-optimize ng performance at reliability ng deployment
+- Magpatupad ng kumplikadong multi-service architectures
+- I-optimize ang performance at reliability ng deployment
 
-#### Mahahalagang Konsepto na Dapat Ma-master
-- Estruktura ng Bicep template at mga modules
-- Mga dependencies ng resource at pagkakasunod-sunod
+#### Mga Mahalagang Konsepto na Dapat Mabisang Matutunan
+- Istruktura ng Bicep template at mga module
+- Mga dependency ng resource at ordering
 - Mga estratehiya sa deployment (blue-green, rolling updates)
-- Mga deployment sa multi-region
-- Mga database migrations at pamamahala ng data
+- Multi-region deployments
+- Database migrations at pamamahala ng data
 
-#### Mga Pagsasanay
+#### Mga Praktikal na Ehersisyo
 
-**Pagsasanay 3.1: Custom Infrastructure**
+**Exercise 3.1: Custom Infrastructure**
 ```bicep
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
@@ -382,7 +383,7 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**Pagsasanay 3.2: Multi-Service Application**
+**Exercise 3.2: Multi-Service Application**
 ```bash
 # Mag-deploy ng arkitektura ng microservices:
 1. Frontend web application
@@ -392,7 +393,7 @@ Analyze the following components:
 5. Background worker service
 ```
 
-**Pagsasanay 3.3: Integrasyon ng Database**
+**Exercise 3.3: Database Integration**
 ```bash
 # Ipatupad ang mga pattern ng deployment ng database:
 1. Deploy PostgreSQL with connection pooling
@@ -402,27 +403,29 @@ Analyze the following components:
 5. Implement data seeding for different environments
 ```
 
-#### Mga Tanong sa Sariling Pagsus
+#### Mga Tanong para sa Sariling Pagsusuri
+1. Ano ang mga pakinabang ng paggamit ng Bicep kumpara sa ARM templates?
+2. Paano mo hinahandle ang database migrations sa mga azd deployment?
+3. Anong mga estratehiya ang umiiral para sa zero-downtime deployments?
+4. Paano mo pinamamahalaan ang dependencies sa pagitan ng mga serbisyo?
 5. Ano ang mga konsiderasyon para sa multi-region deployments?
 
-### Module 4: Pre-Deployment Validation (Linggo 5)
+### Modyul 4: Pre-Deployment Validation (Linggo 5)
+- Ipatupad ang komprehensibong mga tseke bago i-deploy
+- Maging bihasa sa pagpaplano ng kapasidad at pagpapatunay ng mga resource
+- Unawain ang pagpili ng SKU at pag-optimize ng gastos
+- Magtayo ng awtomatikong mga pipeline ng pag-validate
 
-#### Mga Layunin sa Pagkatuto
-- Magpatupad ng komprehensibong pre-deployment checks
-- Maging bihasa sa capacity planning at resource validation
-- Maunawaan ang pagpili ng SKU at pag-optimize ng gastos
-- Bumuo ng automated validation pipelines
+#### Mga Pangunahing Konsepto na Dapat Mabisang Matutunan
+- Mga quota at limitasyon ng mga Azure resource
+- Mga pamantayan sa pagpili ng SKU at mga implikasyon sa gastos
+- Awtomatikong mga script at tool para sa pag-validate
+- Mga metodolohiya ng pagpaplano ng kapasidad
+- Pagsusuri sa pagganap at pag-optimize
 
-#### Mga Pangunahing Konsepto na Dapat Matutunan
-- Mga quota at limitasyon ng Azure resources
-- Mga pamantayan sa pagpili ng SKU at epekto sa gastos
-- Mga automated validation script at tools
-- Mga pamamaraan sa capacity planning
-- Pagsusuri ng performance at pag-optimize
+#### Mga Ehersisyong Pang-praktis
 
-#### Mga Ehersisyo sa Pagsasanay
-
-**Ehersisyo 4.1: Capacity Planning**  
+**Ehersisyo 4.1: Pagpaplano ng Kapasidad**
 ```bash
 # Ipatupad ang pagpapatunay ng kapasidad:
 1. Create scripts to check Azure quotas
@@ -431,8 +434,8 @@ Analyze the following components:
 4. Plan for scaling and growth requirements
 5. Document capacity requirements for each environment
 ```
-  
-**Ehersisyo 4.2: Pre-flight Validation**  
+
+**Ehersisyo 4.2: Paunang Pagpapatunay**
 ```powershell
 # Bumuo ng komprehensibong pipeline ng pagpapatunay:
 1. Authentication and permissions validation
@@ -441,43 +444,42 @@ Analyze the following components:
 4. Network connectivity and security validation
 5. Cost estimation and budget verification
 ```
-  
-**Ehersisyo 4.3: SKU Optimization**  
+
+**Ehersisyo 4.3: Pag-optimize ng SKU**
 ```bash
-# I-optimize ang mga configuration ng serbisyo:
+# I-optimize ang mga konfigurasyon ng serbisyo:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
 4. Create monitoring dashboards for resource utilization
 5. Set up auto-scaling policies
 ```
-  
 
-#### Mga Tanong sa Self-Assessment
+#### Mga Tanong para sa Sariling Pagsusuri
 1. Anong mga salik ang dapat makaapekto sa mga desisyon sa pagpili ng SKU?
-2. Paano mo nava-validate ang availability ng Azure resources bago ang deployment?
-3. Ano ang mga pangunahing bahagi ng isang pre-flight check system?
-4. Paano mo tinatantiya at kinokontrol ang mga gastos sa deployment?
-5. Anong monitoring ang mahalaga para sa capacity planning?
+2. Paano mo pinapatunayan ang availability ng mga Azure resource bago mag-deploy?
+3. Ano ang mga pangunahing bahagi ng isang sistema para sa paunang tseke?
+4. Paano mo tinatantya at kinokontrol ang mga gastos sa deployment?
+5. Anong pagsubaybay ang mahalaga para sa pagpaplano ng kapasidad?
 
-### Module 5: Troubleshooting at Debugging (Linggo 6)
+### Modyul 5: Troubleshooting at Debugging (Linggo 6)
 
 #### Mga Layunin sa Pagkatuto
-- Maging bihasa sa sistematikong mga pamamaraan ng troubleshooting
-- Magkaroon ng kadalubhasaan sa pag-debug ng mga kumplikadong isyu sa deployment
-- Magpatupad ng komprehensibong monitoring at alerting
-- Bumuo ng mga pamamaraan para sa incident response at recovery
+- Maging bihasa sa sistematikong metodolohiya ng troubleshooting
+- Paunlarin ang kadalubhasaan sa pag-debug ng kumplikadong mga isyu sa deployment
+- Magpatupad ng komprehensibong pagsubaybay at pag-alerto
+- Bumuo ng mga pamamaraan ng pagtugon sa insidente at pagbawi
 
-#### Mga Pangunahing Konsepto na Dapat Matutunan
-- Mga karaniwang pattern ng pagkabigo sa deployment
-- Mga pamamaraan sa pagsusuri at pag-uugnay ng logs
-- Monitoring ng performance at pag-optimize
-- Pagtuklas ng insidente sa seguridad at pagtugon
-- Disaster recovery at business continuity
+#### Mga Pangunahing Konsepto na Dapat Mabisang Matutunan
+- Karaniwang mga pattern ng pagkabigo ng deployment
+- Mga teknik sa pagsusuri ng log at korelasyon
+- Pagsubaybay sa pagganap at pag-optimize
+- Pag-detect at pagtugon sa mga security incident
+- Pagbawi mula sa sakuna at pagpapatuloy ng negosyo
 
-#### Mga Ehersisyo sa Pagsasanay
+#### Mga Ehersisyong Pang-praktis
 
-**Ehersisyo 5.1: Troubleshooting Scenarios**  
+**Ehersisyo 5.1: Mga Senaryong Pag-troubleshoot**
 ```bash
 # Magsanay sa paglutas ng mga karaniwang isyu:
 1. Authentication and authorization failures
@@ -486,18 +488,18 @@ Analyze the following components:
 4. Network connectivity problems
 5. Performance and scaling issues
 ```
-  
-**Ehersisyo 5.2: Monitoring Implementation**  
+
+**Ehersisyo 5.2: Implementasyon ng Monitoring**
 ```bash
-# Mag-set up ng komprehensibong pagmamanman:
+# Itakda ang komprehensibong pagmamanman:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
 ```
-  
-**Ehersisyo 5.3: Incident Response**  
+
+**Ehersisyo 5.3: Pagtugon sa Insidente**
 ```bash
 # Bumuo ng mga pamamaraan para sa pagtugon sa insidente:
 1. Create runbooks for common problems
@@ -506,33 +508,32 @@ Analyze the following components:
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
 ```
-  
 
-#### Mga Tanong sa Self-Assessment
-1. Ano ang sistematikong paraan sa pag-troubleshoot ng azd deployments?
-2. Paano mo inuugnay ang mga logs sa iba't ibang serbisyo at resources?
-3. Anong mga monitoring metrics ang pinakamahalaga para sa maagang pagtuklas ng problema?
-4. Paano mo ipinatutupad ang epektibong mga pamamaraan sa disaster recovery?
-5. Ano ang mga pangunahing bahagi ng isang incident response plan?
+#### Mga Tanong para sa Sariling Pagsusuri
+1. Ano ang sistematikong paraan sa pag-troubleshoot ng mga azd deployment?
+2. Paano mo kinokorelasyon ang mga log sa pagitan ng maraming serbisyo at mga resource?
+3. Aling mga monitoring metric ang pinaka-krusyal para sa maagang pagtuklas ng problema?
+4. Paano ka magpapatupad ng epektibong mga pamamaraan ng disaster recovery?
+5. Ano ang mga pangunahing bahagi ng isang plano ng pagtugon sa insidente?
 
-### Module 6: Advanced Topics at Best Practices (Linggo 7-8)
+### Modyul 6: Mga Advanced na Paksa at Pinakamahuhusay na Praktika (Linggo 7-8)
 
 #### Mga Layunin sa Pagkatuto
 - Magpatupad ng mga deployment pattern na pang-enterprise
-- Maging bihasa sa CI/CD integration at automation
+- Maging dalubhasa sa integrasyon at awtomasyon ng CI/CD
 - Bumuo ng mga custom na template at mag-ambag sa komunidad
-- Maunawaan ang mga advanced na pangangailangan sa seguridad at pagsunod
+- Unawain ang mga advanced na kinakailangan sa seguridad at pagsunod
 
-#### Mga Pangunahing Konsepto na Dapat Matutunan
-- Mga pattern ng CI/CD pipeline integration
-- Pagbuo at pamamahagi ng custom na template
-- Pamamahala at pagsunod sa enterprise
-- Mga advanced na networking at security configurations
-- Pag-optimize ng performance at pamamahala ng gastos
+#### Mga Pangunahing Konsepto na Dapat Mabisang Matutunan
+- Mga pattern ng integrasyon ng CI/CD pipeline
+- Pag-develop at pamamahagi ng custom na mga template
+- Pamamahala at pagsunod para sa enterprise
+- Mga advanced na network at configuration ng seguridad
+- Pag-optimize ng pagganap at pamamahala ng gastos
 
-#### Mga Ehersisyo sa Pagsasanay
+#### Mga Ehersisyong Pang-praktis
 
-**Ehersisyo 6.1: CI/CD Integration**  
+**Ehersisyo 6.1: Integrasyon ng CI/CD**
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -541,321 +542,320 @@ Analyze the following components:
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
 ```
-  
-**Ehersisyo 6.2: Custom Template Development**  
+
+**Ehersisyo 6.2: Pag-develop ng Custom na Template**
 ```bash
-# Lumikha at maglathala ng mga pasadyang template:
+# Lumikha at ilathala ang mga pasadyang template:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
 ```
-  
-**Ehersisyo 6.3: Enterprise Implementation**  
+
+**Ehersisyo 6.3: Implementasyon sa Enterprise**
 ```bash
-# Ipatupad ang mga tampok na pang-enterprise:
+# Magpatupad ng mga tampok na pang-enterprise:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
 ```
-  
 
-#### Mga Tanong sa Self-Assessment
-1. Paano mo ini-integrate ang azd sa umiiral na CI/CD workflows?
-2. Ano ang mga pangunahing konsiderasyon sa pagbuo ng custom na template?
-3. Paano mo ipinatutupad ang pamamahala at pagsunod sa azd deployments?
-4. Ano ang mga best practices para sa mga deployment na pang-enterprise scale?
-5. Paano ka epektibong nag-aambag sa azd community?
+#### Mga Tanong para sa Sariling Pagsusuri
+1. Paano mo i-iintegrate ang azd sa umiiral na mga daloy ng trabaho ng CI/CD?
+2. Ano ang mga pangunahing konsiderasyon sa pag-develop ng custom na template?
+3. Paano mo ipinatutupad ang governance at compliance sa mga azd deployment?
+4. Ano ang mga pinakamahuhusay na praktika para sa enterprise-scale na mga deployment?
+5. Paano ka epektibong makapag-aambag sa komunidad ng azd?
 
 ## Mga Praktikal na Proyekto
 
-### Proyekto 1: Personal Portfolio Website  
-**Kumplikado**: Baguhan  
-**Tagal**: 1-2 linggo  
+### Proyekto 1: Personal na Portfolio na Website
+**Kompleksidad**: Baguhan  
+**Tagal**: 1-2 linggo
 
-Gumawa at mag-deploy ng personal portfolio website gamit ang:
-- Static website hosting sa Azure Storage
-- Custom domain configuration
-- CDN integration para sa global performance
-- Automated deployment pipeline  
+Buuin at i-deploy ang isang personal na portfolio na website gamit ang:
+- Pagho-host ng static na website sa Azure Storage
+- Konfigurasyon ng custom na domain
+- Integrasyon ng CDN para sa pandaigdigang pagganap
+- Awtomatikong deployment pipeline
 
-**Mga Output**:
-- Gumaganang website na naka-deploy sa Azure
-- Custom na azd template para sa portfolio deployments
-- Dokumentasyon ng deployment process
-- Mga rekomendasyon sa cost analysis at optimization  
+**Mga Ihahain**:
+- Gumaganang website na na-deploy sa Azure
+- Custom na azd template para sa mga deployment ng portfolio
+- Dokumentasyon ng proseso ng deployment
+- Pagsusuri sa gastos at mga rekomendasyon para sa pag-optimize
 
-### Proyekto 2: Task Management Application  
-**Kumplikado**: Intermediate  
-**Tagal**: 2-3 linggo  
+### Proyekto 2: Aplikasyon para sa Pamamahala ng Gawain
+**Kompleksidad**: Katamtaman  
+**Tagal**: 2-3 linggo
 
-Gumawa ng full-stack task management application na may:
-- React frontend na naka-deploy sa App Service
+Gumawa ng full-stack na aplikasyon para sa pamamahala ng gawain na may:
+- React frontend na na-deploy sa App Service
 - Node.js API backend na may authentication
 - PostgreSQL database na may migrations
-- Application Insights monitoring  
+- Pagsubaybay gamit ang Application Insights
 
-**Mga Output**:
-- Kumpletong application na may user authentication
-- Database schema at migration scripts
-- Monitoring dashboards at alerting rules
-- Multi-environment deployment configuration  
+**Mga Ihahain**:
+- Kumpletong aplikasyon na may user authentication
+- Database schema at mga script para sa migration
+- Mga dashboard para sa pagsubaybay at mga patakaran sa pag-alerto
+- Konfigurasyon para sa deployment sa maraming environment
 
-### Proyekto 3: Microservices E-commerce Platform  
-**Kumplikado**: Advanced  
-**Tagal**: 4-6 linggo  
+### Proyekto 3: Microservices na E-commerce Plataporma
+**Kompleksidad**: Mataas  
+**Tagal**: 4-6 linggo
 
-Disenyo at implementasyon ng microservices-based e-commerce platform:
-- Maramihang API services (catalog, orders, payments, users)
-- Message queue integration gamit ang Service Bus
-- Redis cache para sa performance optimization
-- Komprehensibong logging at monitoring  
+Idisenyo at ipatupad ang isang e-commerce plataporma na batay sa microservices:
+- Maramihang mga API service (catalog, orders, payments, users)
+- Integrasyon ng message queue gamit ang Service Bus
+- Redis cache para sa pag-optimize ng pagganap
+- Komprehensibong logging at pagsubaybay
 
-**Halimbawa ng Sanggunian**: Tingnan ang [Microservices Architecture](../../../examples/container-app/microservices) para sa production-ready template at deployment guide  
+**Halimbawa na Sanggunian**: Tingnan ang [Microservices Architecture](../../../examples/container-app/microservices) para sa isang production-ready na template at gabay sa deployment
 
-**Mga Output**:
-- Kumpletong microservices architecture
-- Mga pattern ng inter-service communication
-- Pagsusuri ng performance at pag-optimize
-- Production-ready na implementasyon ng seguridad  
+**Mga Ihahain**:
+- Kumpletong arkitektura ng microservices
+- Mga pattern ng komunikasyon sa pagitan ng mga serbisyo
+- Pagsusuri sa pagganap at pag-optimize
+- Implementasyon ng seguridad na handa para sa production
 
 ## Pagtatasa at Sertipikasyon
 
-### Mga Pagsusuri sa Kaalaman
+### Mga Pagsusuri ng Kaalaman
 
-Kumpletuhin ang mga pagsusuri pagkatapos ng bawat module:
+Kumpletuhin ang mga pagtatasa na ito pagkatapos ng bawat modyul:
 
-**Module 1 Assessment**: Mga pangunahing konsepto at pag-install  
-- Mga multiple choice na tanong sa core concepts  
-- Praktikal na pag-install at configuration tasks  
-- Simpleng deployment exercise  
+**Pagtatasa ng Modyul 1**: Mga pangunahing konsepto at instalasyon
+- Mga tanong na multiple choice tungkol sa mga pangunahing konsepto
+- Praktikal na mga gawain sa instalasyon at konfigurasyon
+- Simpleng ehersisyo sa deployment
 
-**Module 2 Assessment**: Configuration at environments  
-- Mga senaryo sa environment management  
-- Mga troubleshooting exercises sa configuration  
-- Implementasyon ng security configuration  
+**Pagtatasa ng Modyul 2**: Konfigurasyon at mga environment
+- Mga senaryo sa pamamahala ng environment
+- Mga ehersisyong pag-troubleshoot ng konfigurasyon
+- Pagsasagawa ng mga konfigurasyon sa seguridad
 
-**Module 3 Assessment**: Deployment at provisioning  
-- Mga hamon sa disenyo ng infrastructure  
-- Mga senaryo sa multi-service deployment  
-- Mga pagsasanay sa pag-optimize ng performance  
+**Pagtatasa ng Modyul 3**: Deployment at provisioning
+- Mga hamon sa disenyo ng imprastruktura
+- Mga senaryo ng multi-service deployment
+- Mga ehersisyo sa pag-optimize ng pagganap
 
-**Module 4 Assessment**: Pre-deployment validation  
-- Mga case study sa capacity planning  
-- Mga senaryo sa cost optimization  
-- Implementasyon ng validation pipeline  
+**Pagtatasa ng Modyul 4**: Paunang pag-validate bago ang deployment
+- Mga case study sa pagpaplano ng kapasidad
+- Mga senaryo ng pag-optimize ng gastos
+- Implementasyon ng validation pipeline
 
-**Module 5 Assessment**: Troubleshooting at debugging  
-- Mga pagsasanay sa problem diagnosis  
-- Mga task sa monitoring implementation  
-- Mga simulation ng incident response  
+**Pagtatasa ng Modyul 5**: Troubleshooting at debugging
+- Mga ehersisyo sa diagnosis ng problema
+- Mga gawain sa implementasyon ng pagsubaybay
+- Mga simulation ng pagtugon sa insidente
 
-**Module 6 Assessment**: Advanced topics  
-- Disenyo ng CI/CD pipeline  
-- Pagbuo ng custom template  
-- Mga senaryo sa enterprise architecture  
+**Pagtatasa ng Modyul 6**: Mga advanced na paksa
+- Disenyo ng CI/CD pipeline
+- Pag-develop ng custom na template
+- Mga senaryo ng arkitekturang pang-enterprise
 
-### Final Capstone Project
+### Pangwakas na Capstone na Proyekto
 
-Disenyo at implementasyon ng kumpletong solusyon na nagpapakita ng mastery ng lahat ng konsepto:
+Idisenyo at ipatupad ang isang kumpletong solusyon na magpapakita ng kahusayan sa lahat ng mga konsepto:
 
 **Mga Kinakailangan**:
-- Multi-tier application architecture  
-- Maramihang deployment environments  
-- Komprehensibong monitoring at alerting  
-- Implementasyon ng seguridad at pagsunod  
-- Pag-optimize ng gastos at performance tuning  
-- Kumpletong dokumentasyon at runbooks  
+- Multi-tier na arkitektura ng aplikasyon
+- Maramihang deployment environment
+- Komprehensibong pagsubaybay at pag-alerto
+- Implementasyon ng seguridad at pagsunod
+- Pag-optimize ng gastos at pag-tune ng pagganap
+- Kumpletong dokumentasyon at mga runbook
 
-**Pamantayan sa Pagsusuri**:
-- Kalidad ng teknikal na implementasyon  
-- Kumpletong dokumentasyon  
-- Pagsunod sa seguridad at best practices  
-- Pag-optimize ng performance at gastos  
-- Epektibo sa troubleshooting at monitoring  
+**Pamantayan sa Pagtatasa**:
+- Kalidad ng teknikal na implementasyon
+- Kumpletong dokumentasyon
+- Pagsunod sa seguridad at pinakamahuhusay na praktika
+- Pag-optimize ng pagganap at gastos
+- Epektibidad ng troubleshooting at pagsubaybay
 
-## Mga Sanggunian at Resources sa Pag-aaral
+## Mga Mapagkukunan ng Pag-aaral at Sanggunian
 
 ### Opisyal na Dokumentasyon
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Dokumentasyon ng Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Mga Resource ng Komunidad
-- [AZD Template Gallery](https://azure.github.io/awesome-azd/)  
-- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)  
-- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)  
+### Mga Mapagkukunang Pang-komunidad
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
+- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
-### Mga Practice Environment
-- [Azure Free Account](https://azure.microsoft.com/free/)  
-- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)  
-- [GitHub Actions](https://github.com/features/actions)  
+### Mga Kapaligiran para sa Pagsasanay
+- [Azure Free Account](https://azure.microsoft.com/free/)
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
+- [GitHub Actions](https://github.com/features/actions)
 
 ### Karagdagang Mga Tool
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
-- [Visual Studio Code](https://code.visualstudio.com/)  
-- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Rekomendasyon sa Iskedyul ng Pag-aaral
+## Mga Rekomendasyon sa Iskedyul ng Pag-aaral
 
-### Full-Time Study (8 linggo)
-- **Linggo 1-2**: Modules 1-2 (Getting Started, Configuration)  
-- **Linggo 3-4**: Modules 3-4 (Deployment, Pre-deployment)  
-- **Linggo 5-6**: Modules 5-6 (Troubleshooting, Advanced Topics)  
-- **Linggo 7-8**: Praktikal na Proyekto at Final Assessment  
+### Buong-panahong Pag-aaral (8 linggo)
+- **Linggo 1-2**: Mga Modyul 1-2 (Pagpapakilala, Konfigurasyon)
+- **Linggo 3-4**: Mga Modyul 3-4 (Deployment, Paunang Pag-validate)
+- **Linggo 5-6**: Mga Modyul 5-6 (Troubleshooting, Advanced na Paksa)
+- **Linggo 7-8**: Mga Praktikal na Proyekto at Pangwakas na Pagtatasa
 
-### Part-Time Study (16 linggo)
-- **Linggo 1-4**: Module 1 (Getting Started)  
-- **Linggo 5-7**: Module 2 (Configuration and Environments)  
-- **Linggo 8-10**: Module 3 (Deployment and Provisioning)  
-- **Linggo 11-12**: Module 4 (Pre-deployment Validation)  
-- **Linggo 13-14**: Module 5 (Troubleshooting and Debugging)  
-- **Linggo 15-16**: Module 6 (Advanced Topics and Assessment)  
+### Part-Time na Pag-aaral (16 linggo)
+- **Linggo 1-4**: Modyul 1 (Pagpapakilala)
+- **Linggo 5-7**: Modyul 2 (Konfigurasyon at Mga Environment)
+- **Linggo 8-10**: Modyul 3 (Deployment at Provisioning)
+- **Linggo 11-12**: Modyul 4 (Paunang Pag-validate)
+- **Linggo 13-14**: Modyul 5 (Troubleshooting at Debugging)
+- **Linggo 15-16**: Modyul 6 (Mga Advanced na Paksa at Pagtatasa)
 
 ---
 
-## Pagsubaybay sa Progreso at Framework ng Pagtatasa
+## Balangkas ng Pagsubaybay sa Progreso at Pagtatasa
 
 ### Checklist ng Pagkumpleto ng Kabanata
 
-Subaybayan ang iyong progreso sa bawat kabanata gamit ang mga sumusunod na measurable outcomes:
+Subaybayan ang iyong progreso sa bawat kabanata gamit ang mga nasusukat na resulta na ito:
 
-#### 📚 Kabanata 1: Foundation & Quick Start  
-- [ ] **Natapos ang Pag-install**: Na-install at na-verify ang AZD sa iyong platform  
-- [ ] **Unang Deployment**: Matagumpay na na-deploy ang todo-nodejs-mongo template  
-- [ ] **Setup ng Environment**: Na-configure ang unang environment variables  
-- [ ] **Pag-navigate sa Resource**: Na-explore ang mga na-deploy na resources sa Azure Portal  
-- [ ] **Mastery ng Command**: Kumportable sa mga pangunahing AZD commands  
+#### 📚 Kabanata 1: Pundasyon at Mabilisang Pagsisimula
+- [ ] **Instalasyon Kumpleto**: Na-install at napatunayan ang AZD sa iyong platform
+- [ ] **Unang Deployment**: Matagumpay na na-deploy ang todo-nodejs-mongo template
+- [ ] **Pag-set up ng Environment**: Nakonpigura ang unang mga environment variable
+- [ ] **Pag-navigate ng Mga Resource**: Na-explore ang mga na-deploy na resource sa Azure Portal
+- [ ] **Kasanayan sa Command**: Kumportable sa mga pangunahing AZD command
 
-#### 🤖 Kabanata 2: AI-First Development  
-- [ ] **Deployment ng AI Template**: Matagumpay na na-deploy ang azure-search-openai-demo  
-- [ ] **Implementasyon ng RAG**: Na-configure ang document indexing at retrieval  
-- [ ] **Configuration ng Model**: Na-setup ang maraming AI models na may iba't ibang layunin  
-- [ ] **AI Monitoring**: Naipatupad ang Application Insights para sa AI workloads  
-- [ ] **Pag-optimize ng Performance**: Na-tune ang performance ng AI application  
+#### 🤖 Kabanata 2: Pag-develop na Inuuna ang AI
+- [ ] **Deployment ng AI Template**: Matagumpay na na-deploy ang azure-search-openai-demo
+- [ ] **Implementasyon ng RAG**: Nakonpigura ang pag-index at retrieval ng dokumento
+- [ ] **Pagkonpigura ng Modelo**: Naitakda ang maraming AI model para sa iba't ibang layunin
+- [ ] **AI Monitoring**: Ipinatupad ang Application Insights para sa mga AI workload
+- [ ] **Pag-optimize ng Pagganap**: Naayos ang pagganap ng AI application
 
-#### ⚙️ Kabanata 3: Configuration & Authentication  
-- [ ] **Setup ng Multi-Environment**: Na-configure ang dev, staging, at prod environments  
-- [ ] **Implementasyon ng Seguridad**: Na-setup ang managed identity authentication  
-- [ ] **Pamahala ng Secrets**: Na-integrate ang Azure Key Vault para sa sensitibong data  
-- [ ] **Pamahala ng Parameter**: Nalikha ang environment-specific configurations  
-- [ ] **Mastery ng Authentication**: Naipatupad ang secure access patterns  
+#### ⚙️ Kabanata 3: Konfigurasyon at Pagpapatunay
+- [ ] **Pag-set up ng Maramihang Environment**: Nakonpigura ang dev, staging, at prod na mga environment
+- [ ] **Implementasyon ng Seguridad**: Naitakda ang managed identity authentication
+- [ ] **Pamamahala ng Mga Sekreto**: Inintegrate ang Azure Key Vault para sa sensitibong data
+- [ ] **Pamamahala ng Parameter**: Nilikha ang mga konfigurasyong tukoy sa environment
+- [ ] **Kasanayan sa Pagpapatunay**: Ipinatupad ang mga secure na pattern ng access
 
-#### 🏗️ Kabanata 4: Infrastructure as Code & Deployment  
-- [ ] **Paglikha ng Custom Template**: Naitayo ang multi-service application template  
-- [ ] **Mastery ng Bicep**: Nalikha ang modular, reusable infrastructure components  
-- [ ] **Automation ng Deployment**: Naipatupad ang pre/post deployment hooks  
-- [ ] **Disenyo ng Arkitektura**: Na-deploy ang complex microservices architecture  
-- [ ] **Pag-optimize ng Template**: Na-optimize ang templates para sa performance at gastos  
+#### 🏗️ Kabanata 4: Imprastruktura bilang Code at Deployment
+- [ ] **Paglikha ng Custom na Template**: Nagtayo ng multi-service application template
+- [ ] **Kasanayan sa Bicep**: Nilikha ang modular, reusable na mga component ng imprastruktura
+- [ ] **Awtomasyon ng Deployment**: Ipinatupad ang pre/post deployment hooks
+- [ ] **Disenyo ng Arkitektura**: Na-deploy ang kumplikadong arkitektura ng microservices
+- [ ] **Pag-optimize ng Template**: In-optimize ang mga template para sa pagganap at gastos
 
-#### 🎯 Kabanata 5: Multi-Agent AI Solutions  
-- [ ] **Deployment ng Retail Solution**: Na-deploy ang kumpletong multi-agent retail scenario  
-- [ ] **Pag-customize ng Agent**: Na-modify ang Customer at Inventory agent behaviors  
-- [ ] **Scaling ng Arkitektura**: Naipatupad ang load balancing at auto-scaling  
-- [ ] **Monitoring ng Production**: Na-setup ang komprehensibong monitoring at alerting  
-- [ ] **Pag-optimize ng Performance**: Na-optimize ang performance ng multi-agent system  
+#### 🎯 Kabanata 5: Mga Solusyong Multi-Agent AI
+- [ ] **Deployment ng Retail na Solusyon**: Na-deploy ang kumpletong multi-agent retail scenario
+- [ ] **Pag-customize ng Agent**: Binago ang mga behavior ng Customer at Inventory agent
+- [ ] **Pag-scale ng Arkitektura**: Ipinatupad ang load balancing at auto-scaling
+- [ ] **Monitoring sa Production**: Naitakda ang komprehensibong pagsubaybay at pag-alerto
+- [ ] **Pag-tune ng Pagganap**: In-optimize ang pagganap ng multi-agent system
 
-#### 🔍 Kabanata 6: Pre-Deployment Validation & Planning  
-- [ ] **Pagsusuri ng Capacity**: Na-analyze ang resource requirements para sa applications  
-- [ ] **Pag-optimize ng SKU**: Napili ang cost-effective service tiers  
-- [ ] **Automation ng Validation**: Naipatupad ang pre-deployment check scripts  
-- [ ] **Pagpaplano ng Gastos**: Nalikha ang deployment cost estimates at budgets  
-- [ ] **Pagtatasa ng Risk**: Natukoy at na-mitigate ang deployment risks  
+#### 🔍 Kabanata 6: Paunang Pag-validate at Pagpaplano bago ang Deployment
+- [ ] **Pagsusuri ng Kapasidad**: Sinuri ang mga kinakailangan sa resource para sa mga aplikasyon
+- [ ] **Pag-optimize ng SKU**: Pinili ang mga cost-effective na service tier
+- [ ] **Awtomasyon ng Pag-validate**: Ipinatupad ang mga script para sa pre-deployment checks
+- [ ] **Pagpaplano ng Gastos**: Nilikha ang mga pagtatantya ng gastos sa deployment at badyet
+- [ ] **Pagsusuri ng Panganib**: Natukoy at nabawasan ang mga panganib sa deployment
 
-#### 🚨 Kabanata 7: Troubleshooting & Debugging  
-- [ ] **Kasanayan sa Diagnostic**: Matagumpay na na-debug ang intentionally broken deployments  
-- [ ] **Pagsusuri ng Log**: Epektibong nagamit ang Azure Monitor at Application Insights  
-- [ ] **Pag-optimize ng Performance**: Na-optimize ang mabagal na applications  
-- [ ] **Mga Pamamaraan sa Recovery**: Naipatupad ang backup at disaster recovery  
-- [ ] **Setup ng Monitoring**: Nalikha ang proactive monitoring at alerting  
+#### 🚨 Kabanata 7: Troubleshooting at Pag-debug
+- [ ] **Kasanayan sa Diagnostiko**: Matagumpay na na-debug ang mga sinadyang sirang deployment
+- [ ] **Pagsusuri ng Log**: Epektibong ginamit ang Azure Monitor at Application Insights
+- [ ] **Pag-tune ng Pagganap**: In-optimize ang mga aplikasyon na mabagal ang takbo
+- [ ] **Mga Pamamaraan sa Pagbawi**: Ipinatupad ang backup at disaster recovery
+- [ ] **Pag-set up ng Monitoring**: Nilikha ang proactive na pagsubaybay at pag-alerto
 
-#### 🏢 Kabanata 8: Production & Enterprise Patterns  
-- [ ] **Seguridad ng Enterprise**: Naipatupad ang komprehensibong security patterns  
-- [ ] **Framework ng Pamamahala**: Na-setup ang Azure Policy at resource management  
-- [ ] **Advanced Monitoring**: Nalikha ang dashboards at automated alerting  
-- [ ] **Integration ng CI/CD**: Naitayo ang automated deployment pipelines  
-- [ ] **Implementasyon ng Pagsunod**: Naabot ang mga enterprise compliance requirements  
+#### 🏢 Kabanata 8: Mga Pattern sa Production at Enterprise
+- [ ] **Seguridad sa Enterprise**: Ipinatupad ang komprehensibong mga pattern ng seguridad
+- [ ] **Balangkas ng Pamamahala**: Naitakda ang Azure Policy at pamamahala ng resource
+- [ ] **Advanced na Pagsubaybay**: Nilikha ang mga dashboard at awtomatikong pag-alerto
+- [ ] **Integrasyon ng CI/CD**: Nagtayo ng mga awtomatikong pipeline ng deployment
+- [ ] **Implementasyon ng Pagsunod**: Tinugunan ang mga kinakailangan sa pagsunod ng enterprise
 
-### Timeline ng Pag-aaral at Milestones
+### Timeline ng Pagkatuto at Mga Milestone
 
-#### Linggo 1-2: Foundation Building  
-- **Milestone**: Ma-deploy ang unang AI application gamit ang AZD  
-- **Validation**: Gumaganang application na accessible via public URL  
-- **Kasanayan**: Mga pangunahing workflow ng AZD at AI service integration  
+#### Linggo 1-2: Pagbuo ng Pundasyon
+- **Milestone**: I-deploy ang unang AI application gamit ang AZD
+- **Validation**: Gumagana ang aplikasyon at naa-access via public URL
+- **Kasanayan**: Mga pangunahing workflow ng AZD at integrasyon ng AI service
 
-#### Linggo 3-4: Mastery ng Configuration  
-- **Milestone**: Multi-environment deployment na may secure authentication  
-- **Validation**: Parehong application na na-deploy sa dev/staging/prod  
-- **Kasanayan**: Pamamahala ng environment at implementasyon ng seguridad  
+#### Linggo 3-4: Kasanayan sa Konfigurasyon
+- **Milestone**: Multi-environment deployment na may secure authentication
+- **Validation**: Parehong aplikasyon na-deploy sa dev/staging/prod
+- **Kasanayan**: Pamamahala ng environment at pagpapatupad ng seguridad
 
-#### Linggo 5-6: Kadalubhasaan sa Infrastructure  
-- **Milestone**: Custom na template para sa complex multi-service application  
-- **Validation**: Reusable template na na-deploy ng ibang miyembro ng team  
-- **Kasanayan**: Mastery ng Bicep at automation ng infrastructure  
+#### Linggo 5-6: Ekspertis sa Imprastruktura
+- **Milestone**: Custom na template para sa kumplikadong multi-service application
+- **Validation**: Reusable na template na na-deploy ng ibang miyembro ng koponan
+- **Kasanayan**: Kasanayan sa Bicep at awtomasyon ng imprastruktura
 
-#### Linggo 7-8: Advanced AI Implementation  
-- **Milestone**: Production-ready na multi-agent AI solution  
-- **Validation**: System na kayang humawak ng real-world load na may monitoring  
-- **Kasanayan**: Orkestrasyon ng multi-agent at pag-optimize ng performance  
+#### Linggo 7-8: Advanced na Implementasyon ng AI
+- **Milestone**: Production-ready na multi-agent AI solution
+- **Validation**: Sistemang nakakahawak ng totoong load na may pagsubaybay
+- **Kasanayan**: Orkestrasyon ng multi-agent at pag-optimize ng pagganap
 
-#### Linggo 9-10: Kahandaan sa Production  
-- **Milestone**: Deployment na pang-enterprise na may full compliance  
-- **Validation**: Pumasa sa security review at cost optimization audit  
-- **Kasanayan**: Pamamahala, monitoring, at integration ng CI/CD  
+#### Linggo 9-10: Kahandaan para sa Production
+- **Milestone**: Enterprise-grade na deployment na may kumpletong pagsunod
+- **Validation**: Pumasa sa security review at audit sa pag-optimize ng gastos
+- **Kasanayan**: Pamamahala, pagsubaybay, at integrasyon ng CI/CD
 
 ### Pagtatasa at Sertipikasyon
 
-#### Mga Paraan ng Pagsusuri ng Kaalaman
-1. **Praktikal na Deployments**: Gumaganang applications para sa bawat kabanata  
-2. **Code Reviews**: Pagtatasa ng kalidad ng template at configuration  
-3. **Paglutas ng Problema**: Mga senaryo ng troubleshooting at solusyon  
-4. **Peer Teaching**: Pagpapaliwanag ng mga konsepto sa ibang mag-aaral  
-5. **Ambag ng Komunidad**: Magbahagi ng mga template o mga pagpapabuti
+#### Mga Paraan ng Pagpapatunay ng Kaalaman
+1. Praktikal na Pag-deploy: Gumaganang aplikasyon para sa bawat kabanata
+2. Mga Code Review: Pagtatasa ng kalidad ng template at konfigurasyon
+3. Paglutas ng Problema: Mga senaryo ng troubleshooting at mga solusyon
+4. Pagtuturo sa Kapwa: Ipaliwanag ang mga konsepto sa ibang mga nag-aaral
+5. Ambag sa Komunidad: Magbahagi ng mga template o pagpapabuti
 
-#### Mga Resulta ng Propesyonal na Pag-unlad
-- **Mga Proyekto sa Portfolio**: 8 deployment na handa na para sa produksyon
-- **Mga Teknikal na Kasanayan**: Ekspertong kaalaman sa AZD at AI deployment na naaayon sa industriya
-- **Kakayahan sa Paglutas ng Problema**: Kakayahang mag-troubleshoot at mag-optimize nang mag-isa
-- **Pagkilala ng Komunidad**: Aktibong pakikilahok sa Azure developer community
-- **Pag-unlad sa Karera**: Mga kasanayang direktang naaangkop sa mga tungkulin sa cloud at AI
+#### Mga Kinalabasan ng Propesyonal na Pag-unlad
+- **Mga Proyektong Portfolio**: 8 mga deployment na handa para sa produksyon
+- **Mga Teknikal na Kasanayan**: Ekspertis sa AZD at AI deployment na alinsunod sa pamantayan ng industriya
+- **Kakayahan sa Paglutas ng Problema**: Nakakapag-troubleshoot at mag-optimize nang mag-isa
+- **Pagkilala mula sa Komunidad**: Aktibong pakikilahok sa komunidad ng mga developer ng Azure
+- **Pagsulong sa Karera**: Mga kasanayang direktang magagamit sa cloud at AI na mga tungkulin
 
 #### Mga Sukatan ng Tagumpay
 - **Rate ng Tagumpay ng Deployment**: >95% matagumpay na deployment
-- **Oras ng Troubleshooting**: <30 minuto para sa mga karaniwang isyu
-- **Pag-optimize ng Performance**: Mapapatunayang mga pagpapabuti sa gastos at performance
-- **Pagsunod sa Seguridad**: Lahat ng deployment ay sumusunod sa mga pamantayan ng seguridad ng enterprise
-- **Paglipat ng Kaalaman**: Kakayahang magturo sa ibang mga developer
+- **Oras ng Pag-troubleshoot**: <30 minuto para sa mga karaniwang isyu
+- **Pag-optimize ng Performance**: Mapapatunayang pagpapabuti sa gastos at performance
+- **Pagsunod sa Seguridad**: Lahat ng deployment ay tumutugon sa mga pamantayan sa seguridad ng enterprise
+- **Paglilipat ng Kaalaman**: Kakayahang mag-mentor ng ibang mga developer
 
-### Patuloy na Pag-aaral at Pakikilahok sa Komunidad
+### Patuloy na Pagkatuto at Pakikilahok sa Komunidad
 
 #### Manatiling Napapanahon
-- **Mga Update sa Azure**: Sundan ang mga release notes ng Azure Developer CLI
-- **Mga Kaganapan sa Komunidad**: Makilahok sa mga kaganapan ng Azure at AI developer
-- **Dokumentasyon**: Mag-ambag sa dokumentasyon ng komunidad at mga halimbawa
-- **Feedback Loop**: Magbigay ng feedback sa nilalaman ng kurso at mga serbisyo ng Azure
+- **Mga Update ng Azure**: Sundan ang release notes ng Azure Developer CLI
+- **Mga Kaganapan sa Komunidad**: Lumahok sa mga kaganapan ng mga developer ng Azure at AI
+- **Dokumentasyon**: Mag-ambag sa dokumentasyon at mga halimbawa ng komunidad
+- **Feedback Loop**: Magbigay ng puna sa nilalaman ng kurso at mga serbisyo ng Azure
 
-#### Pag-unlad sa Karera
+#### Pagpapaunlad ng Karera
 - **Propesyonal na Network**: Kumonekta sa mga eksperto sa Azure at AI
-- **Mga Pagkakataon sa Pagsasalita**: Ibahagi ang mga natutunan sa mga kumperensya o meetups
-- **Ambag sa Open Source**: Mag-ambag sa mga template at tools ng AZD
-- **Mentorship**: Gabayan ang ibang mga developer sa kanilang pag-aaral ng AZD
+- **Mga Oportunidad sa Pagsasalita**: Ibahagi ang mga natutunan sa mga kumperensya o meetups
+- **Ambag sa Open Source**: Mag-ambag sa mga AZD template at mga tool
+- **Mentorship**: Gabayan ang ibang mga developer sa kanilang paglalakbay sa pag-aaral ng AZD
 
 ---
 
-**Pag-navigate sa Kabanata:**
-- **📚 Home ng Kurso**: [AZD Para sa Mga Baguhan](../README.md)
-- **📖 Simulan ang Pag-aaral**: [Kabanata 1: Pundasyon at Mabilisang Simula](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Pagsubaybay sa Pag-unlad**: Subaybayan ang iyong pag-unlad sa pamamagitan ng komprehensibong 8-kabanatang sistema ng pag-aaral
-- **🤝 Komunidad**: [Azure Discord](https://discord.gg/microsoft-azure) para sa suporta at talakayan
+**Pag-navigate ng Kabanata:**
+- **📚 Home ng Kurso**: [AZD Para sa mga Nagsisimula](../README.md)
+- **📖 Magsimulang Matuto**: [Kabanata 1: Pundasyon at Mabilis na Pagsisimula](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Pagsubaybay sa Pag-unlad**: Subaybayan ang iyong pag-usad sa pamamagitan ng komprehensibong 8-kabanatang sistema ng pag-aaral
+- **🤝 Komunidad**: [Discord ng Azure](https://discord.gg/microsoft-azure) para sa suporta at diskusyon
 
-**Pagsubaybay sa Pag-aaral**: Gamitin ang naka-istrukturang gabay na ito upang ma-master ang Azure Developer CLI sa pamamagitan ng progresibo, praktikal na pag-aaral na may nasusukat na resulta at benepisyo sa propesyonal na pag-unlad.
+**Pagsubaybay sa Pag-unlad ng Pag-aaral**: Gamitin ang estrukturadong gabay na ito upang pag-aralan nang lubusan ang Azure Developer CLI sa pamamagitan ng progresibo, praktikal na pagkatuto na may nasusukat na mga resulta at benepisyo sa pag-unlad ng propesyon.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagamat sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+**Pagtanggi ng Pananagutan**:
+Ang dokumentong ito ay isinalin gamit ang serbisyong pagsasalin na gumagamit ng AI [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Ang orihinal na dokumento sa likas nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na nagmumula sa paggamit ng salin na ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

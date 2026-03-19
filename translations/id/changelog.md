@@ -1,31 +1,83 @@
-# Catatan Perubahan - AZD For Beginners
+# Catatan Perubahan - AZD Untuk Pemula
 
 ## Pendahuluan
 
-Catatan perubahan ini mendokumentasikan semua perubahan, pembaruan, dan perbaikan yang signifikan pada repositori AZD For Beginners. Kami mengikuti prinsip penomoran versi semantik dan memelihara log ini untuk membantu pengguna memahami apa yang berubah antar versi.
+Catatan perubahan ini mendokumentasikan semua perubahan, pembaruan, dan peningkatan penting pada repositori AZD For Beginners. Kami mengikuti prinsip penomoran versi semantik dan memelihara log ini untuk membantu pengguna memahami apa yang telah berubah antar versi.
 
 ## Tujuan Pembelajaran
 
 Dengan meninjau catatan perubahan ini, Anda akan:
-- Tetap mendapatkan informasi tentang fitur baru dan penambahan konten
-- Memahami perbaikan yang dibuat pada dokumentasi yang ada
+- Tetap diberi informasi tentang fitur baru dan penambahan konten
+- Memahami peningkatan yang dibuat pada dokumentasi yang ada
 - Melacak perbaikan bug dan koreksi untuk memastikan akurasi
 - Mengikuti evolusi materi pembelajaran dari waktu ke waktu
 
-## Capaian Pembelajaran
+## Hasil Pembelajaran
 
-Setelah meninjau entri catatan perubahan, Anda akan dapat:
-- Mengidentifikasi konten dan sumber daya baru yang tersedia untuk pembelajaran
+Setelah meninjau entri changelog, Anda akan dapat:
+- Mengidentifikasi konten dan sumber daya baru yang tersedia untuk belajar
 - Memahami bagian mana yang telah diperbarui atau ditingkatkan
-- Merencanakan jalur pembelajaran Anda berdasarkan materi yang paling terbaru
+- Merencanakan jalur pembelajaran Anda berdasarkan materi terbaru
 - Memberikan umpan balik dan saran untuk perbaikan di masa depan
 
 ## Riwayat Versi
 
+### [v3.18.0] - 2026-03-16
+
+#### Perintah AZD AI CLI, Validasi Konten & Perluasan Template
+**Versi ini menambahkan cakupan perintah `azd ai`, `azd extension`, dan `azd mcp` di semua bab terkait AI, memperbaiki tautan rusak dan kode yang usang di agents.md, memperbarui lembar contekan, dan merombak Bagian Contoh Template dengan deskripsi yang tervalidasi serta template Azure AI AZD baru.**
+
+#### Ditambahkan
+- **🤖 Cakupan AZD AI CLI** di 7 file (sebelumnya hanya di Bab 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — Bagian baru "Extensions and AI Commands" yang memperkenalkan `azd extension`, `azd ai agent init`, dan `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Opsi 4: `azd ai agent init` dengan tabel perbandingan (pendekatan template vs manifest)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — Sub-bagian "AZD Extensions for Foundry" dan "Agent-First Deployment"
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start sekarang menunjukkan jalur deployment berbasis template dan berbasis manifest
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Bagian Deploy sekarang mencakup opsi `azd ai agent init`
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — Sub-bagian "AZD AI Extension Commands for Diagnostics"
+  - `resources/cheat-sheet.md` — Bagian baru "AI & Extensions Commands" dengan `azd extension`, `azd ai agent init`, `azd mcp`, dan `azd infra generate`
+- **📦 Template contoh AZD AI baru** di `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — .NET RAG chat dengan Blazor WebAssembly, Semantic Kernel, dan dukungan obrolan suara
+  - **azure-search-openai-demo-java** — Java RAG chat menggunakan Langchain4J dengan opsi deployment ACA/AKS
+  - **contoso-creative-writer** — Aplikasi penulisan kreatif multi-agen menggunakan Azure AI Agent Service, Bing Grounding, dan Prompty
+  - **serverless-chat-langchainjs** — RAG serverless menggunakan Azure Functions + LangChain.js + Cosmos DB dengan dukungan dev lokal Ollama
+  - **chat-with-your-data-solution-accelerator** — Accelerator RAG perusahaan dengan portal admin, integrasi Teams, dan opsi PostgreSQL/Cosmos DB
+  - **azure-ai-travel-agents** — Aplikasi referensi orkestrasi MCP multi-agen dengan server dalam .NET, Python, Java, dan TypeScript
+  - **azd-ai-starter** — Template starter Bicep infrastruktur Azure AI minimal
+  - **🔗 Tautan Galeri AZD AI Awesome** — Referensi ke [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ template)
+
+#### Diperbaiki
+- **🔗 navigasi agents.md**: Tautan Sebelumnya/Berikutnya sekarang cocok dengan urutan pelajaran README Bab 2 (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 tautan rusak di agents.md**: `production-ai-practices.md` dikoreksi menjadi `../chapter-08-production/production-ai-practices.md` (3 kejadian)
+- **📦 kode usang di agents.md**: Mengganti `opencensus` dengan `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 API tidak valid di agents.md**: Memindahkan `max_tokens` dari `create_agent()` ke `create_run()` sebagai `max_completion_tokens`
+- **🔢 penghitungan token di agents.md**: Mengganti perkiraan kasar `len//4` dengan `tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: Mengoreksi layanan dari "Cognitive Search + App Service" menjadi "Azure AI Search + Azure Container Apps" (host default berubah Okt 2024)
+- **contoso-chat**: Memperbarui deskripsi untuk merujuk Azure AI Foundry + Prompty, sesuai dengan judul repo dan tumpukan teknologi yang sebenarnya
+
+#### Dihapus
+- **ai-document-processing**: Menghapus referensi template yang tidak berfungsi (repo tidak dapat diakses publik sebagai template AZD)
+
+#### Ditingkatkan
+- **📝 latihan di agents.md**: Latihan 1 sekarang menunjukkan output yang diharapkan dan langkah `azd monitor`; Latihan 2 mencakup kode pendaftaran `FunctionTool` lengkap; Latihan 3 mengganti panduan samar dengan perintah `prepdocs.py` yang konkret
+- **📚 sumber daya di agents.md**: Memperbarui tautan dokumentasi ke dokumentasi dan quickstart Azure AI Agent Service yang terbaru
+- **📋 tabel Langkah Selanjutnya di agents.md**: Menambahkan tautan AI Workshop Lab untuk cakupan bab yang lengkap
+
+#### File yang Diperbarui
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `resources/cheat-sheet.md`
+
+---
+
 ### [v3.17.0] - 2026-02-05
 
 #### Peningkatan Navigasi Kursus
-**Versi ini meningkatkan navigasi bab di README.md dengan format tabel yang ditingkatkan.**
+**Versi ini meningkatkan navigasi README.md bab dengan format tabel yang ditingkatkan.**
 
 #### Diubah
 - **Tabel Peta Kursus**: Ditingkatkan dengan tautan pelajaran langsung, estimasi durasi, dan peringkat kompleksitas
@@ -35,40 +87,40 @@ Setelah meninjau entri catatan perubahan, Anda akan dapat:
 ### [v3.16.0] - 2026-02-05
 
 #### Pembaruan Nama Produk
-**Versi ini memperbarui referensi produk agar sesuai dengan merek Microsoft saat ini.**
+**Versi ini memperbarui referensi produk ke merek Microsoft saat ini.**
 
 #### Diubah
-- **Azure AI Foundry → Microsoft Foundry**: All references updated across non-translation files
-- **Azure AI Agent Service → Foundry Agents**: Service name updated to reflect current branding
+- **Microsoft Foundry → Microsoft Foundry**: Semua referensi diperbarui di seluruh file non-terjemahan
+- **Azure AI Agent Service → Foundry Agents**: Nama layanan diperbarui untuk mencerminkan merek saat ini
 
-#### Files Updated
-- `README.md` - Main course landing page
-- `changelog.md` - Version history
-- `course-outline.md` - Course structure
-- `docs/chapter-02-ai-development/agents.md` - AI agents guide
-- `examples/README.md` - Examples documentation
-- `workshop/README.md` - Workshop landing page
-- `workshop/docs/index.md` - Workshop index
-- `workshop/docs/instructions/*.md` - All workshop instruction files
+#### File yang Diperbarui
+- `README.md` - Halaman utama kursus
+- `changelog.md` - Riwayat versi
+- `course-outline.md` - Struktur kursus
+- `docs/chapter-02-ai-development/agents.md` - Panduan agen AI
+- `examples/README.md` - Dokumentasi contoh
+- `workshop/README.md` - Halaman utama workshop
+- `workshop/docs/index.md` - Indeks workshop
+- `workshop/docs/instructions/*.md` - Semua file instruksi workshop
 
 ---
 
 ### [v3.15.0] - 2026-02-05
 
 #### Restrukturisasi Besar Repositori: Nama Folder Berbasis Bab
-**Versi ini merestrukturisasi dokumentasi menjadi folder bab yang khusus untuk navigasi yang lebih jelas.**
+**Versi ini merestrukturisasi dokumentasi ke folder bab khusus untuk navigasi yang lebih jelas.**
 
 #### Penggantian Nama Folder
-Folder lama telah diganti dengan folder bernomor bab:
+Folder lama telah digantikan dengan folder bernomor bab:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- Added new: `docs/chapter-05-multi-agent/`
+- Ditambahkan baru: `docs/chapter-05-multi-agent/`
 
-#### Migrasi Berkas
-| Berkas | Dari | Ke |
+#### Migrasi File
+| File | Dari | Ke |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -86,15 +138,15 @@ Folder lama telah diganti dengan folder bernomor bab:
 | All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Ditambahkan
-- **📚 File README Bab**: Created README.md in each chapter folder with:
+- **📚 File README Bab**: Membuat README.md di setiap folder bab dengan:
   - Tujuan pembelajaran dan durasi
   - Tabel pelajaran dengan deskripsi
-  - Perintah mulai cepat
+  - Perintah quick start
   - Navigasi ke bab lain
 
 #### Diubah
 - **🔗 Memperbarui semua tautan internal**: 78+ jalur diperbarui di seluruh file dokumentasi
-- **🗺️ Main README.md**: Memperbarui Peta Kursus dengan struktur bab baru
+- **🗺️ README.md utama**: Memperbarui Peta Kursus dengan struktur bab baru
 - **📝 examples/README.md**: Memperbarui referensi silang ke folder bab
 
 #### Dihapus
@@ -115,50 +167,50 @@ Folder lama telah diganti dengan folder bernomor bab:
 **Versi ini menambahkan panduan komprehensif untuk menerapkan agen AI dengan Azure Developer CLI.**
 
 #### Ditambahkan
-- **🤖 docs/microsoft-foundry/agents.md**: Complete guide covering:
-  - What AI agents are and how they differ from chatbots
-  - Three quick-start agent templates (Foundry Agents, Prompty, RAG)
-  - Agent architecture patterns (single agent, RAG, multi-agent)
-  - Tool configuration and customization
-  - Monitoring and metrics tracking
-  - Cost considerations and optimization
-  - Common troubleshooting scenarios
-  - Three hands-on exercises with success criteria
+- **🤖 docs/microsoft-foundry/agents.md**: Panduan lengkap yang mencakup:
+  - Apa itu agen AI dan bagaimana mereka berbeda dari chatbot
+  - Tiga template agent quick-start (Foundry Agents, Prompty, RAG)
+  - Pola arsitektur agen (agen tunggal, RAG, multi-agen)
+  - Konfigurasi dan kustomisasi tool
+  - Pemantauan dan pelacakan metrik
+  - Pertimbangan biaya dan optimisasi
+  - Skenario pemecahan masalah umum
+  - Tiga latihan praktis dengan kriteria keberhasilan
 
 #### Struktur Konten
 - **Pendahuluan**: Konsep agen untuk pemula
-- **Mulai Cepat**: Terapkan agen dengan `azd init --template get-started-with-ai-agents`
+- **Quick Start**: Menerapkan agen dengan `azd init --template get-started-with-ai-agents`
 - **Pola Arsitektur**: Diagram visual pola agen
-- **Konfigurasi**: Pengaturan alat dan variabel lingkungan
+- **Konfigurasi**: Pengaturan tool dan variabel lingkungan
 - **Pemantauan**: Integrasi Application Insights
-- **Latihan**: Pembelajaran praktik bertahap (20-45 menit masing-masing)
+- **Latihan**: Pembelajaran praktis bertahap (20-45 menit masing-masing)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
 #### Pembaruan Lingkungan DevContainer
-**Versi ini memperbarui konfigurasi container pengembangan dengan alat modern dan default yang lebih baik untuk pengalaman belajar AZD.**
+**Versi ini memperbarui konfigurasi kontainer pengembangan dengan alat modern dan default yang lebih baik untuk pengalaman belajar AZD.**
 
 #### Diubah
-- **🐳 Image Dasar**: Diperbarui dari `python:3.12-bullseye` ke `python:3.12-bookworm` (Debian stabil terbaru)
-- **📛 Nama Container**: Diganti dari "Python 3" menjadi "AZD for Beginners" untuk kejelasan
+- **🐳 Gambar Basis**: Diperbarui dari `python:3.12-bullseye` menjadi `python:3.12-bookworm` (Debian stabil terbaru)
+- **📛 Nama Kontainer**: Diganti dari "Python 3" menjadi "AZD for Beginners" untuk kejelasan
 
 #### Ditambahkan
 - **🔧 Fitur Dev Container Baru**:
   - `azure-cli` dengan dukungan Bicep diaktifkan
   - `node:20` (versi LTS untuk template AZD)
   - `github-cli` untuk manajemen template
-  - `docker-in-docker` untuk penerapan aplikasi container
+  - `docker-in-docker` untuk penyebaran aplikasi kontainer
 
 - **🔌 Penerusan Port**: Port yang telah dikonfigurasi sebelumnya untuk pengembangan umum:
   - 8000 (pratinjau MkDocs)
-  - 3000 (Aplikasi web)
+  - 3000 (aplikasi web)
   - 5000 (Python Flask)
-  - 8080 (APIs)
+  - 8080 (API)
 
 - **🧩 Ekstensi VS Code Baru**:
-  - `ms-python.vscode-pylance` - Peningkatan IntelliSense Python
+  - `ms-python.vscode-pylance` - IntelliSense Python yang ditingkatkan
   - `ms-azuretools.vscode-azurefunctions` - Dukungan Azure Functions
   - `ms-azuretools.vscode-docker` - Dukungan Docker
   - `ms-azuretools.vscode-bicep` - Dukungan bahasa Bicep
@@ -170,44 +222,44 @@ Folder lama telah diganti dengan folder bernomor bab:
   - `eamodio.gitlens` - Visualisasi Git
   - `mhutchie.git-graph` - Riwayat Git
 
-- **⚙️ Pengaturan VS Code**: Menambahkan pengaturan default untuk interpreter Python, format saat menyimpan, dan pemangkasan spasi
+- **⚙️ Pengaturan VS Code**: Menambahkan pengaturan default untuk interpreter Python, format saat menyimpan, dan pemangkasan spasi putih
 
-- **📦 Memperbarui requirements-dev.txt**:
+- **📦 Pembaruan requirements-dev.txt**:
   - Menambahkan plugin MkDocs minify
   - Menambahkan pre-commit untuk kualitas kode
   - Menambahkan paket Azure SDK (azure-identity, azure-mgmt-resource)
 
 #### Diperbaiki
-- **Perintah Pasca-Buat**: Sekarang memverifikasi instalasi AZD dan Azure CLI saat container dimulai
+- **Perintah Post-Create**: Sekarang memverifikasi pemasangan AZD dan Azure CLI saat kontainer dimulai
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Perombakan README Ramah Pemula
+#### Perombakan README yang Ramah Pemula
 **Versi ini secara signifikan meningkatkan README.md agar lebih mudah diakses oleh pemula dan menambahkan sumber daya penting untuk pengembang AI.**
 
 #### Ditambahkan
-- **🆚 Perbandingan Azure CLI vs AZD**: Penjelasan jelas kapan menggunakan masing-masing alat dengan contoh praktis
-- **🌟 Tautan Awesome AZD**: Tautan langsung ke galeri template komunitas dan sumber kontribusi:
-  - [Galeri Awesome AZD](https://azure.github.io/awesome-azd/) - 200+ template siap untuk dideploy
-  - [Kirim Template](https://github.com/Azure/awesome-azd/issues) - Kontribusi komunitas
+- **🆚 Perbandingan Azure CLI vs AZD**: Penjelasan jelas tentang kapan menggunakan masing-masing alat dengan contoh praktis
+- **🌟 Tautan Awesome AZD**: Tautan langsung ke galeri template komunitas dan sumber daya kontribusi:
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ ready-to-deploy templates
+  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Community contribution
 - **🎯 Panduan Mulai Cepat**: Bagian memulai yang disederhanakan dalam 3 langkah (Install → Login → Deploy)
-- **📊 Tabel Navigasi Berdasarkan Pengalaman**: Panduan jelas tentang dari mana memulai berdasarkan pengalaman pengembang
+- **📊 Tabel Navigasi Berdasarkan Pengalaman**: Panduan jelas tentang di mana mulai berdasarkan pengalaman pengembang
 
 #### Diubah
-- **Struktur README**: Disusun ulang untuk pengungkapan bertahap - informasi kunci di awal
-- **Bagian Pendahuluan**: Ditulis ulang untuk menjelaskan "The Magic of `azd up`" bagi pemula total
+- **Struktur README**: Disusun ulang untuk pengungkapan bertahap - informasi kunci diutamakan
+- **Bagian Pendahuluan**: Ditulis ulang untuk menjelaskan "Keajaiban `azd up`" bagi pemula total
 - **Menghapus Konten Duplikat**: Menghilangkan bagian pemecahan masalah yang duplikat
-- **Perintah Pemecahan Masalah**: Memperbaiki referensi `azd logs` untuk menggunakan `azd monitor --logs`
+- **Perintah Pemecahan Masalah**: Memperbaiki referensi `azd logs` untuk menggunakan `azd monitor --logs` yang valid
 
 #### Diperbaiki
 - **🔐 Perintah Otentikasi**: Menambahkan `azd auth login` dan `azd auth logout` ke cheat-sheet.md
 - **Referensi Perintah Tidak Valid**: Menghapus sisa `azd logs` dari bagian pemecahan masalah README
 
 #### Catatan
-- **Ruang Lingkup**: Perubahan diterapkan pada README.md utama dan resources/cheat-sheet.md
-- **Audiens Sasaran**: Perbaikan khusus ditujukan untuk pengembang yang baru menggunakan AZD
+- **Scope**: Perubahan diterapkan pada README.md utama dan resources/cheat-sheet.md
+- **Target Audience**: Perbaikan secara khusus ditujukan untuk pengembang yang baru dengan AZD
 
 ---
 
@@ -217,34 +269,31 @@ Folder lama telah diganti dengan folder bernomor bab:
 **Versi ini memperbaiki perintah AZD yang tidak ada di seluruh dokumentasi, memastikan semua contoh kode menggunakan sintaks Azure Developer CLI yang valid.**
 
 #### Diperbaiki
-- **🔧 Perintah AZD yang Tidak Ada Dihapus**: Audit dan koreksi menyeluruh terhadap perintah yang tidak valid:
+- **🔧 Perintah AZD yang Tidak Ada Dihapus**: Audit menyeluruh dan perbaikan perintah tidak valid:
   - `azd logs` (tidak ada) → diganti dengan `azd monitor --logs` atau alternatif Azure CLI
-  - Subperintah `azd service` (tidak ada) → diganti dengan `azd show` dan Azure CLI
+  - Sub-perintah `azd service` (tidak ada) → diganti dengan `azd show` dan Azure CLI
   - `azd infra import/export/validate` (tidak ada) → dihapus atau diganti dengan alternatif yang valid
   - Flag `azd deploy --rollback/--incremental/--parallel/--detect-changes` (tidak ada) → dihapus
   - Flag `azd provision --what-if/--rollback` (tidak ada) → diperbarui untuk menggunakan `--preview`
   - `azd config validate` (tidak ada) → diganti dengan `azd config list`
   - `azd info`, `azd history`, `azd metrics` (tidak ada) → dihapus
 
-- **📚 File yang Diperbarui dengan Koreksi Perintah**:
-  - `resources/cheat-sheet.md`: Major overhaul of command reference
-  - `docs/deployment/deployment-guide.md`: Fixed rollback and deployment strategies
-  - `docs/troubleshooting/debugging.md`: Corrected log analysis sections
-  - `docs/troubleshooting/common-issues.md`: Updated troubleshooting commands
-  - `docs/troubleshooting/ai-troubleshooting.md`: Fixed AZD debugging section
-  - `docs/getting-started/azd-basics.md`: Corrected monitoring commands
-  - `docs/getting-started/first-project.md`: Updated monitoring and debugging examples
-  - `docs/getting-started/installation.md`: Fixed help and version examples
-  - `docs/pre-deployment/application-insights.md`: Corrected log viewing commands
-  - `docs/pre-deployment/coordination-patterns.md`: Fixed agent debugging commands
-
-- **📝 Referensi Versi Diperbarui**: 
-  - `docs/getting-started/installation.md`: Mengubah versi `1.5.0` yang dikodekan menjadi `1.x.x` generik dengan tautan ke rilisan
+- **📚 Berkas Diperbarui dengan Koreksi Perintah**:
+  - `resources/cheat-sheet.md`: Perombakan besar referensi perintah
+  - `docs/deployment/deployment-guide.md`: Memperbaiki strategi rollback dan penyebaran
+  - `docs/troubleshooting/debugging.md`: Memperbaiki bagian analisis log
+  - `docs/troubleshooting/common-issues.md`: Memperbarui perintah pemecahan masalah
+  - `docs/troubleshooting/ai-troubleshooting.md`: Memperbaiki bagian debugging AZD
+  - `docs/getting-started/azd-basics.md`: Memperbaiki perintah pemantauan
+  - `docs/getting-started/first-project.md`: Memperbarui contoh pemantauan dan debugging
+  - `docs/getting-started/installation.md`: Memperbaiki contoh bantuan dan versi
+  - `docs/pre-deployment/application-insights.md`: Memperbaiki perintah penayangan log
+  - `docs/pre-deployment/coordination-patterns.md`: Memperbaiki perintah debugging agen
 
 #### Diubah
 - **Strategi Rollback**: Memperbarui dokumentasi untuk menggunakan rollback berbasis Git (AZD tidak memiliki rollback bawaan)
-- **Menampilkan Log**: Mengganti referensi `azd logs` dengan `azd monitor --logs`, `azd monitor --live`, dan perintah Azure CLI
-- **Bagian Performa**: Menghapus flag deployment paralel/inkremental yang tidak ada, menyediakan alternatif yang valid
+- **Penayangan Log**: Mengganti referensi `azd logs` dengan `azd monitor --logs`, `azd monitor --live`, dan perintah Azure CLI
+- **Bagian Performa**: Menghapus flag penyebaran paralel/incremental yang tidak ada, menyediakan alternatif yang valid
 
 #### Rincian Teknis
 - **Perintah AZD yang Valid**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
@@ -265,55 +314,54 @@ Folder lama telah diganti dengan folder bernomor bab:
 - **📝 CONTRIBUTING.md**: Dokumen pedoman kontribusi baru dengan:
   - Instruksi jelas untuk melaporkan masalah dan mengusulkan perubahan
   - Standar dokumentasi untuk konten baru
-  - Panduan contoh kode dan konvensi pesan commit
+  - Pedoman contoh kode dan konvensi pesan commit
   - Informasi keterlibatan komunitas
 
-#### Diselesaikan
-- **🎯 Modul Workshop 7 (Penutup)**: Modul penutup yang sepenuhnya diselesaikan dengan:
-  - Ringkasan komprehensif tentang pencapaian workshop
-  - Bagian konsep kunci yang dikuasai mencakup AZD, template, dan AI Foundry
+#### Selesai
+- **🎯 Modul Workshop 7 (Penutup)**: Modul penutup yang selesai sepenuhnya dengan:
+  - Ringkasan komprehensif pencapaian workshop
+  - Bagian konsep kunci yang dikuasai meliputi AZD, template, dan Microsoft Foundry
   - Rekomendasi kelanjutan perjalanan pembelajaran
-  - Latihan tantangan workshop dengan peringkat kesulitan
-  - Umpan balik komunitas dan tautan dukungan
+  - Latihan tantangan workshop dengan tingkat kesulitan
+  - Tautan umpan balik komunitas dan dukungan
 
-- **📚 Modul Workshop 3 (Dekonstruksi)**: Tujuan pembelajaran diperbarui dengan:
+- **📚 Modul Workshop 3 (Deconstruct)**: Memperbarui tujuan pembelajaran dengan:
   - Panduan aktivasi GitHub Copilot dengan server MCP
   - Pemahaman struktur folder template AZD
-  - Pola organisasi Infrastructure-as-code (Bicep)
-  - Petunjuk lab praktikum
+  - Pola organisasi Infrastruktur-sebagai-kode (Bicep)
+  - Instruksi lab praktik
 
-- **🔧 Modul Workshop 6 (Pembongkaran)**: Diselesaikan dengan:
+- **🔧 Modul Workshop 6 (Teardown)**: Selesai dengan:
   - Tujuan pembersihan sumber daya dan manajemen biaya
   - Penggunaan `azd down` untuk deprovisioning infrastruktur yang aman
   - Panduan pemulihan layanan kognitif yang soft-deleted
-  - Prompt eksplorasi tambahan untuk GitHub Copilot dan Azure Portal
+  - Petunjuk eksplorasi tambahan untuk GitHub Copilot dan Azure Portal
 
 #### Diperbaiki
-- **🔗 Perbaikan Tautan Rusak**: Menyelesaikan 15+ tautan dokumentasi internal yang rusak:
-  - `docs/ai-foundry/ai-model-deployment.md`: Memperbaiki path ke microsoft-foundry-integration.md
-  - `docs/troubleshooting/ai-troubleshooting.md`: Mengoreksi path ai-model-deployment.md dan production-ai-practices.md
+- **🔗 Perbaikan Tautan Rusak**: Menyelesaikan 15+ tautan internal dokumentasi yang rusak:
+  - `docs/ai-foundry/ai-model-deployment.md`: Memperbaiki jalur ke microsoft-foundry-integration.md
+  - `docs/troubleshooting/ai-troubleshooting.md`: Memperbaiki jalur ai-model-deployment.md dan production-ai-practices.md
   - `docs/getting-started/first-project.md`: Mengganti cicd-integration.md yang tidak ada dengan deployment-guide.md
-  - `examples/retail-scenario.md`: Memperbaiki path FAQ dan panduan pemecahan masalah
-  - `examples/container-app/microservices/README.md`: Mengoreksi path course home dan panduan deployment
+  - `examples/retail-scenario.md`: Memperbaiki jalur FAQ dan panduan pemecahan masalah
+  - `examples/container-app/microservices/README.md`: Memperbaiki jalur home course dan panduan penyebaran
   - `resources/faq.md` dan `resources/glossary.md`: Memperbarui referensi bab AI
-  - `course-outline.md`: Memperbaiki referensi instructor guide dan lab workshop AI
+  - `course-outline.md`: Memperbaiki referensi panduan instruktur dan lab workshop AI
 
 - **📅 Banner Status Workshop**: Diperbarui dari "Under Construction" menjadi status workshop aktif dengan tanggal Februari 2026
-
-- **🔗 Navigasi Workshop**: Memperbaiki tautan navigasi yang rusak di workshop README.md yang mengarah ke folder lab-1-azd-basics yang tidak ada
+- **🔗 Navigasi Workshop**: Memperbaiki tautan navigasi yang rusak di README.md workshop yang mengarah ke folder lab-1-azd-basics yang tidak ada
 
 #### Diubah
-- **Presentasi Workshop**: Menghapus peringatan "under construction", workshop sekarang lengkap dan siap digunakan
+- **Presentasi Workshop**: Menghapus peringatan "under construction", workshop kini lengkap dan siap digunakan
 - **Konsistensi Navigasi**: Memastikan semua modul workshop memiliki navigasi antar-modul yang tepat
-- **Referensi Jalur Pembelajaran**: Memperbarui cross-reference bab untuk menggunakan path microsoft-foundry yang benar
+- **Referensi Jalur Pembelajaran**: Memperbarui referensi bab silang untuk menggunakan jalur microsoft-foundry yang benar
 
-#### Diverifikasi
-- ✅ Semua file markdown berbahasa Inggris memiliki tautan internal yang valid
+#### Divalidasi
+- ✅ Semua berkas markdown bahasa Inggris memiliki tautan internal yang valid
 - ✅ Modul workshop 0-7 lengkap dengan tujuan pembelajaran
 - ✅ Navigasi antar bab dan modul berfungsi dengan benar
-- ✅ Konten cocok untuk pengembang AI yang menggunakan Microsoft AZD
-- ✅ Bahasa dan struktur yang ramah pemula dipertahankan sepanjang
-- ✅ CONTRIBUTING.md memberikan panduan yang jelas bagi kontributor komunitas
+- ✅ Konten sesuai untuk pengembang AI yang menggunakan Microsoft AZD
+- ✅ Bahasa dan struktur ramah pemula dipertahankan di seluruh
+- ✅ CONTRIBUTING.md memberikan panduan yang jelas untuk kontributor komunitas
 
 #### Implementasi Teknis
 - **Validasi Tautan**: Skrip PowerShell otomatis memverifikasi semua tautan internal .md
@@ -321,170 +369,170 @@ Folder lama telah diganti dengan folder bernomor bab:
 - **Sistem Navigasi**: Pola navigasi bab dan modul yang konsisten diterapkan
 
 #### Catatan
-- **Cakupan**: Perubahan diterapkan hanya pada dokumentasi berbahasa Inggris
-- **Terjemahan**: Folder terjemahan tidak diperbarui pada versi ini (terjemahan otomatis akan disinkronkan nanti)
-- **Durasi Workshop**: Workshop lengkap sekarang menyediakan 3-4 jam pembelajaran praktik
+- **Scope**: Perubahan diterapkan hanya pada dokumentasi berbahasa Inggris
+- **Translations**: Folder terjemahan tidak diperbarui di versi ini (terjemahan otomatis akan disinkronkan nanti)
+- **Durasi Workshop**: Workshop lengkap kini menyediakan 3-4 jam pembelajaran praktis
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
 #### Dokumentasi Lanjutan: Pemantauan, Keamanan, dan Pola Multi-Agen
-**Versi ini menambahkan pelajaran menyeluruh tingkatan A tentang integrasi Application Insights, pola otentikasi, dan koordinasi multi-agen untuk deployment produksi.**
+**Versi ini menambahkan pelajaran komprehensif tingkat A tentang integrasi Application Insights, pola otentikasi, dan koordinasi multi-agen untuk penyebaran produksi.**
 
 #### Ditambahkan
 - **📊 Pelajaran Integrasi Application Insights**: di `docs/pre-deployment/application-insights.md`:
-  - Deployment berfokus AZD dengan provisioning otomatis
+  - Penyebaran berfokus AZD dengan provisi otomatis
   - Template Bicep lengkap untuk Application Insights + Log Analytics
-  - Aplikasi Python yang bekerja dengan telemetri kustom (1.200+ baris)
-  - Pola pemantauan AI/LLM (pelacakan token/biaya Azure OpenAI)
-  - 6 diagram Mermaid (arsitektur, distributed tracing, aliran telemetri)
-  - 3 latihan praktis (alerts, dashboards, pemantauan AI)
-  - Contoh kueri Kusto dan strategi optimisasi biaya
-  - Streaming metrik langsung dan debugging real-time
-  - Waktu pembelajaran 40-50 menit dengan pola siap produksi
+  - Aplikasi Python yang berfungsi dengan telemetri kustom (1,200+ lines)
+  - Pola pemantauan AI/LLM (pelacakan token/biaya Model Microsoft Foundry)
+  - 6 diagram Mermaid (arsitektur, distributed tracing, alur telemetri)
+  - 3 latihan praktik (alert, dashboard, pemantauan AI)
+  - Contoh kueri Kusto dan strategi optimasi biaya
+  - Streaming metrik langsung dan debugging waktu-nyata
+  - Waktu pembelajaran 40-50 menit dengan pola siap-produksi
 
 - **🔐 Pelajaran Pola Otentikasi & Keamanan**: di `docs/getting-started/authsecurity.md`:
   - 3 pola otentikasi (connection strings, Key Vault, managed identity)
-  - Template infrastruktur Bicep lengkap untuk deployment aman
+  - Template infrastruktur Bicep lengkap untuk penyebaran aman
   - Kode aplikasi Node.js dengan integrasi Azure SDK
-  - 3 latihan lengkap (aktifkan managed identity, user-assigned identity, rotasi Key Vault)
+  - 3 latihan lengkap (mengaktifkan managed identity, user-assigned identity, rotasi Key Vault)
   - Praktik terbaik keamanan dan konfigurasi RBAC
   - Panduan pemecahan masalah dan analisis biaya
-  - Pola otentikasi tanpa kata sandi siap produksi
+  - Pola otentikasi tanpa kata sandi siap-produksi
 
 - **🤖 Pelajaran Pola Koordinasi Multi-Agen**: di `docs/pre-deployment/coordination-patterns.md`:
-  - 5 pola koordinasi (sekuensial, paralel, hierarkis, event-driven, konsensus)
-  - Implementasi layanan orchestrator lengkap (Python/Flask, 1.500+ baris)
-  - 3 implementasi agen khusus (Research, Writer, Editor)
-  - Integrasi Service Bus untuk antrian pesan
-  - Manajemen status Cosmos DB untuk sistem terdistribusi
+  - 5 pola koordinasi (sequential, parallel, hierarchical, event-driven, consensus)
+  - Implementasi layanan orchestrator lengkap (Python/Flask, 1,500+ lines)
+  - 3 implementasi agen spesialis (Research, Writer, Editor)
+  - Integrasi Service Bus untuk antrean pesan
+  - Manajemen state di Cosmos DB untuk sistem terdistribusi
   - 6 diagram Mermaid yang menunjukkan interaksi agen
   - 3 latihan lanjutan (penanganan timeout, logika retry, circuit breaker)
-  - Rincian biaya ($240-565/month) dengan strategi optimisasi
+  - Rincian biaya ($240-565/month) dengan strategi optimasi
   - Integrasi Application Insights untuk pemantauan
 
 #### Ditingkatkan
-- **Bab Pra-deployment**: Sekarang mencakup pola pemantauan dan koordinasi yang komprehensif
-- **Bab Memulai**: Ditingkatkan dengan pola otentikasi profesional
-- **Kesiapan Produksi**: Cakupan lengkap dari keamanan hingga observability
+- **Bab Pre-deployment**: Kini mencakup pemantauan dan pola koordinasi yang komprehensif
+- **Bab Getting Started**: Ditingkatkan dengan pola otentikasi profesional
+- **Kesiapan Produksi**: Cakupan lengkap dari keamanan hingga observabilitas
 - **Garis Besar Kursus**: Diperbarui untuk merujuk pelajaran baru di Bab 3 dan 6
 
 #### Diubah
-- **Progres Pembelajaran**: Integrasi lebih baik antara keamanan dan pemantauan di seluruh kursus
+- **Progresi Pembelajaran**: Integrasi yang lebih baik dari keamanan dan pemantauan di seluruh kursus
 - **Kualitas Dokumentasi**: Standar tingkat A yang konsisten (95-97%) di seluruh pelajaran baru
-- **Pola Produksi**: Cakupan end-to-end lengkap untuk deployment enterprise
+- **Pola Produksi**: Cakupan end-to-end lengkap untuk penyebaran tingkat perusahaan
 
-#### Diperbaiki
-- **Pengalaman Pengembang**: Jalur yang jelas dari pengembangan ke pemantauan produksi
-- **Standar Keamanan**: Pola profesional untuk otentikasi dan manajemen rahasia
-- **Observability**: Integrasi Application Insights yang lengkap dengan AZD
-- **Workload AI**: Pemantauan khusus untuk Azure OpenAI dan sistem multi-agen
+#### Ditingkatkan
+- **Developer Experience**: Jalur yang jelas dari pengembangan ke pemantauan produksi
+- **Security Standards**: Pola profesional untuk otentikasi dan manajemen rahasia
+- **Observability**: Integrasi lengkap Application Insights dengan AZD
+- **AI Workloads**: Pemantauan khusus untuk Microsoft Foundry Models dan sistem multi-agen
 
-#### Diverifikasi
-- ✅ Semua pelajaran menyertakan kode kerja lengkap (bukan potongan)
+#### Divalidasi
+- ✅ Semua pelajaran menyertakan kode kerja lengkap (bukan cuplikan)
 - ✅ Diagram Mermaid untuk pembelajaran visual (19 total di 3 pelajaran)
-- ✅ Latihan praktis dengan langkah verifikasi (9 total)
-- ✅ Template Bicep siap produksi dapat dideploy via `azd up`
+- ✅ Latihan praktik dengan langkah verifikasi (9 total)
+- ✅ Template Bicep siap produksi yang dapat dideploy melalui `azd up`
 - ✅ Analisis biaya dan strategi optimisasi
 - ✅ Panduan pemecahan masalah dan praktik terbaik
-- ✅ Checkpoint pengetahuan dengan perintah verifikasi
+- ✅ Titik pemeriksaan pengetahuan dengan perintah verifikasi
 
 #### Hasil Penilaian Dokumentasi
-- **docs/pre-deployment/application-insights.md**: - Panduan pemantauan yang komprehensif
+- **docs/pre-deployment/application-insights.md**: - Panduan pemantauan komprehensif
 - **docs/getting-started/authsecurity.md**: - Pola keamanan profesional
 - **docs/pre-deployment/coordination-patterns.md**: - Arsitektur multi-agen tingkat lanjut
-- **Konten Baru Secara Keseluruhan**: - Standar kualitas tinggi yang konsisten
+- **Overall New Content**: - Standar kualitas tinggi yang konsisten
 
 #### Implementasi Teknis
 - **Application Insights**: Log Analytics + telemetri kustom + distributed tracing
-- **Otentikasi**: Managed Identity + Key Vault + pola RBAC
-- **Multi-Agen**: Service Bus + Cosmos DB + Container Apps + orkestrasi
-- **Pemantauan**: Metrik langsung + kueri Kusto + alerts + dashboards
-- **Manajemen Biaya**: Strategi sampling, kebijakan retensi, kontrol anggaran
+- **Authentication**: Managed Identity + Key Vault + pola RBAC
+- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orkestrasi
+- **Monitoring**: Live metrics + kueri Kusto + alert + dashboard
+- **Cost Management**: Strategi sampling, kebijakan retensi, kontrol anggaran
 
 ### [v3.7.0] - 2025-11-19
 
-#### Peningkatan Kualitas Dokumentasi dan Contoh Azure OpenAI Baru
-**Versi ini meningkatkan kualitas dokumentasi di seluruh repositori dan menambahkan contoh deployment Azure OpenAI lengkap dengan antarmuka chat GPT-4.**
+#### Peningkatan Kualitas Dokumentasi dan Contoh Microsoft Foundry Models Baru
+**Versi ini meningkatkan kualitas dokumentasi di seluruh repositori dan menambahkan contoh penyebaran Microsoft Foundry Models lengkap dengan antarmuka chat gpt-4.1.**
 
 #### Ditambahkan
-- **🤖 Contoh Chat Azure OpenAI**: Deployment GPT-4 lengkap dengan implementasi kerja di `examples/azure-openai-chat/`:
-  - Infrastruktur Azure OpenAI lengkap (deployment model GPT-4)
-  - Antarmuka chat baris perintah Python dengan riwayat percakapan
-  - Integrasi Key Vault untuk penyimpanan API key yang aman
+- **🤖 Microsoft Foundry Models Chat Example**: Penyebaran gpt-4.1 lengkap dengan implementasi kerja di `examples/azure-openai-chat/`:
+  - Infrastruktur Microsoft Foundry Models lengkap (penyebaran model gpt-4.1)
+  - Antarmuka chat baris-perintah Python dengan riwayat percakapan
+  - Integrasi Key Vault untuk penyimpanan kunci API yang aman
   - Pelacakan penggunaan token dan estimasi biaya
   - Pembatasan laju dan penanganan kesalahan
-  - README komprehensif dengan panduan deployment 35-45 menit
+  - README komprehensif dengan panduan penyebaran 35-45 menit
   - 11 file siap produksi (template Bicep, aplikasi Python, konfigurasi)
 - **📚 Latihan Dokumentasi**: Menambahkan latihan praktik ke panduan konfigurasi:
-  - Latihan 1: Konfigurasi multi-environment (15 menit)
-  - Latihan 2: Praktik manajemen rahasia (10 menit)
+  - Latihan 1: Konfigurasi multi-lingkungan (15 menit)
+  - Latihan 2: Latihan manajemen rahasia (10 menit)
   - Kriteria keberhasilan dan langkah verifikasi yang jelas
-- **✅ Verifikasi Deployment**: Menambahkan bagian verifikasi pada panduan deployment:
-  - Prosedur health check
+- **✅ Verifikasi Penyebaran**: Menambahkan bagian verifikasi ke panduan penyebaran:
+  - Prosedur pemeriksaan kesehatan
   - Daftar periksa kriteria keberhasilan
-  - Output yang diharapkan untuk semua perintah deployment
+  - Output yang diharapkan untuk semua perintah penyebaran
   - Referensi cepat pemecahan masalah
 
 #### Ditingkatkan
-- **examples/README.md**: Diperbarui ke kualitas tingkat A (93%):
+- **examples/README.md**: Diperbarui menjadi kualitas A-grade (93%):
   - Menambahkan azure-openai-chat ke semua bagian relevan
-  - Memperbarui jumlah contoh lokal dari 3 menjadi 4
-  - Ditambahkan ke tabel Contoh Aplikasi AI
+  - Mengupdate jumlah contoh lokal dari 3 menjadi 4
+  - Menambahkan ke tabel Contoh Aplikasi AI
   - Diintegrasikan ke Quick Start untuk Pengguna Menengah
-  - Ditambahkan ke bagian Microsoft Foundry Templates
-  - Memperbarui Matriks Perbandingan dan bagian pencarian teknologi
-- **Kualitas Dokumentasi**: Meningkat dari B+ (87%) → A- (92%) di seluruh folder docs:
+  - Ditambahkan ke bagian Template Microsoft Foundry
+  - Memperbarui Matriks Perbandingan dan bagian temuan teknologi
+- **Kualitas Dokumentasi**: Meningkat dari B+ (87%) → A- (92%) di folder docs:
   - Menambahkan output yang diharapkan ke contoh perintah kritis
   - Menyertakan langkah verifikasi untuk perubahan konfigurasi
-  - Meningkatkan pembelajaran praktik dengan latihan yang lebih aplikatif
+  - Meningkatkan pembelajaran praktis dengan latihan yang aplikatif
 
 #### Diubah
-- **Progres Pembelajaran**: Integrasi contoh AI yang lebih baik untuk pembelajar menengah
-- **Struktur Dokumentasi**: Latihan yang lebih dapat ditindaklanjuti dengan hasil yang jelas
-- **Proses Verifikasi**: Kriteria keberhasilan eksplisit ditambahkan ke alur kerja utama
+- **Progres Pembelajaran**: Integrasi yang lebih baik dari contoh AI untuk pelajar menengah
+- **Struktur Dokumentasi**: Latihan yang lebih terarah dengan hasil yang jelas
+- **Proses Verifikasi**: Kriteria keberhasilan eksplisit ditambahkan ke alur kerja penting
 
 #### Diperbaiki
-- **Pengalaman Pengembang**: Deployment Azure OpenAI sekarang memakan waktu 35-45 menit (vs 60-90 untuk alternatif kompleks)
-- **Transparansi Biaya**: Estimasi biaya yang jelas ($50-200/month) untuk contoh Azure OpenAI
+- **Developer Experience**: Penyebaran Microsoft Foundry Models kini memakan waktu 35-45 menit (vs 60-90 untuk alternatif kompleks)
+- **Transparansi Biaya**: Estimasi biaya yang jelas ($50-200/month) untuk contoh Microsoft Foundry Models
 - **Jalur Pembelajaran**: Pengembang AI memiliki titik masuk yang jelas dengan azure-openai-chat
 - **Standar Dokumentasi**: Output yang diharapkan dan langkah verifikasi yang konsisten
 
-#### Diverifikasi
-- ✅ Contoh Azure OpenAI berfungsi penuh dengan `azd up`
+#### Divalidasi
+- ✅ Contoh Microsoft Foundry Models berfungsi penuh dengan `azd up`
 - ✅ Semua 11 file implementasi secara sintaksis benar
-- ✅ Instruksi README cocok dengan pengalaman deployment aktual
-- ✅ Tautan dokumentasi diperbarui di 8+ lokasi
-- ✅ Indeks contoh mencerminkan 4 contoh lokal dengan akurat
+- ✅ Instruksi README cocok dengan pengalaman penyebaran aktual
+- ✅ Tautan dokumentasi diperbarui di lebih dari 8 lokasi
+- ✅ Indeks contoh mencerminkan 4 contoh lokal secara akurat
 - ✅ Tidak ada duplikat tautan eksternal di tabel
 - ✅ Semua referensi navigasi benar
 
 #### Implementasi Teknis
-- **Arsitektur Azure OpenAI**: GPT-4 + Key Vault + pola Container Apps
+- **Arsitektur Microsoft Foundry Models**: gpt-4.1 + Key Vault + pola Container Apps
 - **Keamanan**: Siap Managed Identity, rahasia di Key Vault
-- **Pemantauan**: Integrasi Application Insights
+- **Monitoring**: Integrasi Application Insights
 - **Manajemen Biaya**: Pelacakan token dan optimisasi penggunaan
-- **Deployment**: Satu perintah `azd up` untuk setup lengkap
+- **Penyebaran**: Perintah tunggal `azd up` untuk pengaturan lengkap
 
 ### [v3.6.0] - 2025-11-19
 
-#### Pembaruan Utama: Contoh Deployment Container App
-**Versi ini memperkenalkan contoh deployment aplikasi kontainer yang komprehensif dan siap produksi menggunakan Azure Developer CLI (AZD), dengan dokumentasi lengkap dan integrasi ke jalur pembelajaran.**
+#### Pembaruan Besar: Contoh Penyebaran Container App
+**Versi ini memperkenalkan contoh penyebaran aplikasi kontainer yang komprehensif dan siap produksi menggunakan Azure Developer CLI (AZD), dengan dokumentasi lengkap dan integrasi ke jalur pembelajaran.**
 
 #### Ditambahkan
 - **🚀 Contoh Container App**: Contoh lokal baru di `examples/container-app/`:
-  - [Master Guide](examples/container-app/README.md): Tinjauan lengkap deployment terkontainerisasi, quick start, produksi, dan pola lanjutan
-  - [Simple Flask API](../../examples/container-app/simple-flask-api): API REST ramah pemula dengan scale-to-zero, health probes, pemantauan, dan pemecahan masalah
-  - [Arsitektur Microservices](../../examples/container-app/microservices): Deployment multi-layanan siap produksi (API Gateway, Product, Order, User, Notification), messaging asinkron, Service Bus, Cosmos DB, Azure SQL, distributed tracing, blue-green/canary deployment
-- **Praktik Terbaik**: Keamanan, pemantauan, optimisasi biaya, dan panduan CI/CD untuk workload yang terkontainerisasi
-- **Contoh Kode**: `azure.yaml` lengkap, template Bicep, dan implementasi layanan multi-bahasa (Python, Node.js, C#, Go)
-- **Pengujian & Pemecahan Masalah**: Skenario pengujian end-to-end, perintah pemantauan, panduan pemecahan masalah
+  - [Master Guide](examples/container-app/README.md): Ikhtisar lengkap tentang penyebaran terkontainer, quick start, produksi, dan pola lanjutan
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): API REST ramah-pemula dengan scale-to-zero, health probes, pemantauan, dan pemecahan masalah
+  - [Microservices Architecture](../../examples/container-app/microservices): Penyebaran multi-layanan siap produksi (API Gateway, Product, Order, User, Notification), messaging asinkron, Service Bus, Cosmos DB, Azure SQL, distributed tracing, blue-green/canary deployment
+- **Praktik Terbaik**: Keamanan, pemantauan, optimisasi biaya, dan panduan CI/CD untuk beban kerja terkontainer
+- **Contoh Kode**: `azure.yaml`, template Bicep, dan implementasi layanan multi-bahasa lengkap (Python, Node.js, C#, Go)
+- **Pengujian & Pemecahan Masalah**: Skenario uji end-to-end, perintah pemantauan, panduan pemecahan masalah
 
 #### Diubah
 - **README.md**: Diperbarui untuk menampilkan dan menautkan contoh container app baru di bawah "Local Examples - Container Applications"
-- **examples/README.md**: Diperbarui untuk menyoroti contoh container app, menambahkan entri matriks perbandingan, dan memperbarui referensi teknologi/arsitektur
-- **Garis Besar Kursus & Panduan Studi**: Diperbarui untuk merujuk contoh aplikasi kontainer baru dan pola deployment di bab terkait
+- **examples/README.md**: Diperbarui untuk menyoroti contoh container app, menambah entri matriks perbandingan, dan memperbarui referensi teknologi/arsitektur
+- **Outline Kursus & Panduan Studi**: Diperbarui untuk merujuk contoh container app baru dan pola penyebaran di bab terkait
 
 #### Divalidasi
 - ✅ Semua contoh baru dapat dideploy dengan `azd up` dan mengikuti praktik terbaik
@@ -493,35 +541,35 @@ Folder lama telah diganti dengan folder bernomor bab:
 
 #### Catatan
 - **Ruang Lingkup**: Dokumentasi dan contoh berbahasa Inggris saja
-- **Langkah Selanjutnya**: Perluas dengan pola kontainer lanjutan tambahan dan automasi CI/CD di rilis mendatang
+- **Langkah Selanjutnya**: Perluasan dengan pola container lanjutan tambahan dan otomasi CI/CD di rilis mendatang
 
 ### [v3.5.0] - 2025-11-19
 
 #### Rebranding Produk: Microsoft Foundry
-**Versi ini menerapkan perubahan nama produk yang komprehensif dari "Microsoft Foundry" menjadi "Microsoft Foundry" di seluruh dokumentasi berbahasa Inggris, mencerminkan rebranding resmi Microsoft.**
+**Versi ini menerapkan perubahan nama produk secara komprehensif dari "Microsoft Foundry" ke "Microsoft Foundry" di seluruh dokumentasi bahasa Inggris, mencerminkan rebranding resmi Microsoft.**
 
 #### Diubah
-- **🔄 Pembaruan Nama Produk**: Rebranding lengkap dari "Microsoft Foundry" menjadi "Microsoft Foundry"
-  - Diperbarui semua referensi di seluruh dokumentasi berbahasa Inggris di folder `docs/`
-  - Renamed folder: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Renamed file: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Total: 23 content references updated across 7 documentation files
+- **🔄 Pembaruan Nama Produk**: Rebranding lengkap dari "Microsoft Foundry" ke "Microsoft Foundry"
+  - Memperbarui semua referensi di dokumentasi bahasa Inggris di folder `docs/`
+  - Mengganti nama folder: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Mengganti nama file: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Total: 23 referensi konten diperbarui di 7 file dokumentasi
 
 - **📁 Perubahan Struktur Folder**:
-  - `docs/ai-foundry/` renamed to `docs/microsoft-foundry/`
+  - `docs/ai-foundry/` diganti nama menjadi `docs/microsoft-foundry/`
   - Semua referensi silang diperbarui untuk mencerminkan struktur folder baru
   - Tautan navigasi divalidasi di seluruh dokumentasi
 
-- **📄 Penggantian Nama Berkas**:
+- **📄 Penggantian Nama File**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Semua tautan internal diperbarui untuk merujuk nama berkas baru
+  - Semua tautan internal diperbarui untuk merujuk nama file baru
 
-#### Berkas yang Diperbarui
-- **Dokumentasi Bab** (7 files):
+#### File yang Diperbarui
+- **Dokumentasi Bab** (7 file):
   - `docs/microsoft-foundry/ai-model-deployment.md` - 3 pembaruan tautan navigasi
   - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 referensi nama produk diperbarui
   - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Sudah menggunakan Microsoft Foundry (dari pembaruan sebelumnya)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 referensi diperbarui (overview, feedback komunitas, dokumentasi)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 referensi diperbarui (ikhtisar, umpan balik komunitas, dokumentasi)
   - `docs/getting-started/azd-basics.md` - 4 tautan referensi silang diperbarui
   - `docs/getting-started/first-project.md` - 2 tautan navigasi bab diperbarui
   - `docs/getting-started/installation.md` - 2 tautan bab berikutnya diperbarui
@@ -529,114 +577,114 @@ Folder lama telah diganti dengan folder bernomor bab:
   - `docs/troubleshooting/common-issues.md` - 1 tautan navigasi diperbarui
   - `docs/troubleshooting/debugging.md` - 1 tautan navigasi diperbarui
 
-- **Berkas Struktur Kursus** (2 files):
-  - `README.md` - 17 referensi diperbarui (ikhtisar kursus, judul bab, bagian templat, wawasan komunitas)
-  - `course-outline.md` - 14 referensi diperbarui (ikhtisar, tujuan pembelajaran, sumber daya bab)
+- **File Struktur Kursus** (2 file):
+  - `README.md` - 17 referensi diperbarui (ikhtisar kursus, judul bab, bagian template, wawasan komunitas)
+  - `course-outline.md` - 14 referensi diperbarui (ikhtisar, tujuan pembelajaran, sumber bab)
 
 #### Divalidasi
-- ✅ Tidak ada lagi referensi path folder "ai-foundry" yang tersisa di dokumentasi berbahasa Inggris
-- ✅ Tidak ada lagi referensi nama produk "Microsoft Foundry" yang tersisa di dokumentasi berbahasa Inggris
+- ✅ Tidak ada sisa path folder "ai-foundry" di dokumentasi bahasa Inggris
+- ✅ Tidak ada sisa referensi nama produk "Microsoft Foundry" di dokumentasi bahasa Inggris
 - ✅ Semua tautan navigasi berfungsi dengan struktur folder baru
-- ✅ Penggantian nama berkas dan folder berhasil diselesaikan
-- ✅ Referensi silang antar bab telah divalidasi
+- ✅ Penggantian nama file dan folder berhasil diselesaikan
+- ✅ Referensi silang antar bab divalidasi
 
 #### Catatan
-- **Ruang Lingkup**: Perubahan diterapkan pada dokumentasi berbahasa Inggris di folder `docs/` saja
-- **Terjemahan**: Folder terjemahan (`translations/`) tidak diperbarui dalam versi ini
-- **Workshop**: Materi workshop (`workshop/`) tidak diperbarui dalam versi ini
-- **Contoh**: Berkas contoh mungkin masih merujuk penamaan lama (akan ditangani pada pembaruan mendatang)
+- **Ruang Lingkup**: Perubahan diterapkan pada dokumentasi bahasa Inggris di folder `docs/` saja
+- **Terjemahan**: Folder terjemahan (`translations/`) tidak diperbarui pada versi ini
+- **Workshop**: Materi workshop (`workshop/`) tidak diperbarui pada versi ini
+- **Contoh**: File contoh mungkin masih merujuk penamaan lama (akan ditangani di pembaruan mendatang)
 - **Tautan Eksternal**: URL eksternal dan referensi repositori GitHub tetap tidak berubah
 
 #### Panduan Migrasi untuk Kontributor
 Jika Anda memiliki cabang lokal atau dokumentasi yang merujuk struktur lama:
 1. Perbarui referensi folder: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. Perbarui referensi berkas: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+2. Perbarui referensi file: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
 3. Ganti nama produk: "Microsoft Foundry" → "Microsoft Foundry"
-4. Validasi semua tautan dokumentasi internal masih berfungsi
+4. Validasi semua tautan internal di dokumentasi masih berfungsi
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Peningkatan Pratinjau Infrastruktur dan Validasi
-**Versi ini memperkenalkan dukungan komprehensif untuk fitur pratinjau baru Azure Developer CLI dan meningkatkan pengalaman pengguna workshop.**
+#### Peningkatan Preview Infrastruktur dan Validasi
+**Versi ini memperkenalkan dukungan komprehensif untuk fitur preview baru Azure Developer CLI dan meningkatkan pengalaman pengguna workshop.**
 
 #### Ditambahkan
-- **🧪 Dokumentasi Fitur azd provision --preview**: Cakupan komprehensif untuk kemampuan pratinjau infrastruktur baru
-  - Referensi perintah dan contoh penggunaan dalam cheat sheet
-  - Integrasi terperinci dalam panduan provisioning dengan kasus penggunaan dan manfaat
+- **🧪 Dokumentasi fitur azd provision --preview**: Cakupan lengkap dari kemampuan preview infrastruktur baru
+  - Referensi perintah dan contoh penggunaan di cheat sheet
+  - Integrasi rinci di panduan provisioning dengan kasus penggunaan dan manfaat
   - Integrasi pemeriksaan pra-penerbangan untuk validasi penyebaran yang lebih aman
   - Pembaruan panduan memulai dengan praktik penyebaran yang mengutamakan keselamatan
 - **🚧 Banner Status Workshop**: Banner HTML profesional yang menunjukkan status pengembangan workshop
   - Desain gradien dengan indikator konstruksi untuk komunikasi pengguna yang jelas
-  - Cap waktu pembaruan terakhir untuk transparansi
-  - Desain responsif untuk perangkat seluler semua jenis perangkat
+  - Stempel waktu terakhir diperbarui untuk transparansi
+  - Desain responsif untuk perangkat seluler
 
 #### Ditingkatkan
-- **Keamanan Infrastruktur**: Fungsionalitas pratinjau diintegrasikan di seluruh dokumentasi penyebaran
-- **Validasi Pra-penyebaran**: Skrip otomatis sekarang menyertakan pengujian pratinjau infrastruktur
-- **Alur Kerja Pengembang**: Urutan perintah diperbarui untuk menyertakan pratinjau sebagai praktik terbaik
-- **Pengalaman Workshop**: Harapan yang jelas ditetapkan bagi pengguna tentang status pengembangan konten
+- **Keamanan Infrastruktur**: Fungsionalitas preview diintegrasikan ke seluruh dokumentasi penyebaran
+- **Validasi Pra-penerapan**: Skrip otomatis sekarang menyertakan pengujian preview infrastruktur
+- **Alur Kerja Pengembang**: Urutan perintah diperbarui untuk menyertakan preview sebagai praktik terbaik
+- **Pengalaman Workshop**: Ekspektasi yang jelas untuk pengguna tentang status pengembangan konten
 
 #### Diubah
-- **Praktik Terbaik Penyebaran**: Alur kerja pratinjau-pertama sekarang direkomendasikan
+- **Praktik Terbaik Penyebaran**: Alur kerja dengan preview-first kini direkomendasikan
 - **Alur Dokumentasi**: Validasi infrastruktur dipindahkan lebih awal dalam proses pembelajaran
 - **Presentasi Workshop**: Komunikasi status profesional dengan garis waktu pengembangan yang jelas
 
-#### Ditingkatkan
-- **Pendekatan Mengutamakan Keamanan**: Perubahan infrastruktur sekarang dapat divalidasi sebelum penyebaran
-- **Kolaborasi Tim**: Hasil pratinjau dapat dibagikan untuk tinjauan dan persetujuan
-- **Kesadaran Biaya**: Pemahaman yang lebih baik tentang biaya sumber daya sebelum provisioning
-- **Mitigasi Risiko**: Pengurangan kegagalan penyebaran melalui validasi sebelumnya
+#### Diperbaiki
+- **Pendekatan Utamakan Keselamatan**: Perubahan infrastruktur kini dapat divalidasi sebelum penyebaran
+- **Kolaborasi Tim**: Hasil preview dapat dibagikan untuk ditinjau dan disetujui
+- **Kepedulian Biaya**: Pemahaman biaya sumber daya yang lebih baik sebelum provisioning
+- **Mitigasi Risiko**: Mengurangi kegagalan penyebaran melalui validasi sebelumnya
 
 #### Implementasi Teknis
-- **Integrasi Multi-dokumen**: Fitur pratinjau didokumentasikan di 4 berkas kunci
-- **Pola Perintah**: Sintaks dan contoh yang konsisten di seluruh dokumentasi
-- **Integrasi Praktik Terbaik**: Pratinjau disertakan dalam alur kerja dan skrip validasi
-- **Indikator Visual**: Tanda fitur BARU yang jelas untuk memudahkan penemuan
+- **Integrasi Multi-dokumen**: Fitur preview didokumentasikan di 4 file kunci
+- **Pola Perintah**: Sintaks dan contoh konsisten di seluruh dokumentasi
+- **Integrasi Praktik Terbaik**: Preview disertakan dalam alur kerja validasi dan skrip
+- **Indikator Visual**: Penandaan fitur BARU yang jelas untuk kemudahan penemuan
 
 #### Infrastruktur Workshop
-- **Komunikasi Status**: Banner HTML profesional dengan gaya gradien
+- **Komunikasi Status**: Banner HTML profesional dengan styling gradien
 - **Pengalaman Pengguna**: Status pengembangan yang jelas mencegah kebingungan
-- **Presentasi Profesional**: Mempertahankan kredibilitas repositori sambil menetapkan ekspektasi
-- **Transparansi Garis Waktu**: Cap waktu pembaruan terakhir Oktober 2025 untuk akuntabilitas
+- **Presentasi Profesional**: Menjaga kredibilitas repositori sambil menetapkan ekspektasi
+- **Transparansi Garis Waktu**: Stempel waktu terakhir diperbarui Oktober 2025 untuk akuntabilitas
 
 ### [v3.3.0] - 2025-09-24
 
-#### Ditingkatkan Materi Workshop dan Pengalaman Pembelajaran Interaktif
-**Versi ini memperkenalkan materi workshop komprehensif dengan panduan interaktif berbasis browser dan jalur pembelajaran yang terstruktur.**
+#### Materi Workshop yang Ditingkatkan dan Pengalaman Pembelajaran Interaktif
+**Versi ini memperkenalkan materi workshop komprehensif dengan panduan interaktif berbasis browser dan jalur pembelajaran terstruktur.**
 
 #### Ditambahkan
 - **🎥 Panduan Workshop Interaktif**: Pengalaman workshop berbasis browser dengan kemampuan pratinjau MkDocs
-- **📝 Instruksi Workshop Terstruktur**: Jalur pembelajaran 7 langkah yang dipandu dari penemuan hingga kustomisasi
-  - 0-Introduction: Ikhtisar dan pengaturan workshop
-  - 1-Select-AI-Template: Penemuan templat dan proses pemilihan
-  - 2-Validate-AI-Template: Prosedur deployment dan validasi
-  - 3-Deconstruct-AI-Template: Memahami arsitektur templat
+- **📝 Instruksi Workshop Terstruktur**: Jalur pembelajaran berpemandu 7 langkah dari penemuan hingga kustomisasi
+  - 0-Introduction: Ikhtisar workshop dan pengaturan
+  - 1-Select-AI-Template: Proses penemuan dan pemilihan template
+  - 2-Validate-AI-Template: Prosedur penyebaran dan validasi
+  - 3-Deconstruct-AI-Template: Memahami arsitektur template
   - 4-Configure-AI-Template: Konfigurasi dan kustomisasi
   - 5-Customize-AI-Template: Modifikasi lanjutan dan iterasi
-  - 6-Teardown-Infrastructure: Pembersihan dan manajemen sumber daya
-  - 7-Wrap-up: Ringkasan dan langkah berikutnya
-- **🛠️ Alat Workshop**: Konfigurasi MkDocs dengan tema Material untuk pengalaman belajar yang ditingkatkan
-- **🎯 Jalur Pembelajaran Praktis**: Metodologi 3 langkah (Discovery → Deployment → Customization)
+  - 6-Teardown-Infrastructure: Pembersihan dan pengelolaan sumber daya
+  - 7-Wrap-up: Ringkasan dan langkah selanjutnya
+- **🛠️ Peralatan Workshop**: Konfigurasi MkDocs dengan tema Material untuk pengalaman belajar yang lebih baik
+- **🎯 Jalur Pembelajaran Praktik**: Metodologi 3 langkah (Penemuan → Penyebaran → Kustomisasi)
 - **📱 Integrasi GitHub Codespaces**: Pengaturan lingkungan pengembangan yang mulus
 
 #### Ditingkatkan
-- **Lab Workshop AI**: Diperluas dengan pengalaman pembelajaran terstruktur 2-3 jam yang komprehensif
+- **AI Workshop Lab**: Diperluas dengan pengalaman pembelajaran terstruktur 2-3 jam yang komprehensif
 - **Dokumentasi Workshop**: Presentasi profesional dengan navigasi dan bantuan visual
-- **Progresi Pembelajaran**: Panduan langkah demi langkah yang jelas dari pemilihan templat hingga deployment produksi
-- **Pengalaman Pengembang**: Alat terintegrasi untuk alur kerja pengembangan yang lebih efisien
+- **Progres Pembelajaran**: Panduan langkah demi langkah yang jelas dari pemilihan template hingga penyebaran produksi
+- **Pengalaman Pengembang**: Peralatan terintegrasi untuk alur kerja pengembangan yang lebih lancar
 
-#### Ditingkatkan
-- **Aksesibilitas**: Antarmuka berbasis browser dengan pencarian, fungsi salin, dan tombol tema
-- **Pembelajaran Mandiri**: Struktur workshop yang fleksibel mengakomodasi kecepatan belajar yang berbeda
-- **Aplikasi Praktis**: Skenario deployment templat AI dunia nyata
+#### Diperbaiki
+- **Aksesibilitas**: Antarmuka berbasis browser dengan pencarian, fungsi salin, dan pengalihan tema
+- **Pembelajaran Mandiri**: Struktur workshop fleksibel yang mengakomodasi kecepatan belajar yang berbeda
+- **Aplikasi Praktis**: Skenario penyebaran template AI dunia nyata
 - **Integrasi Komunitas**: Integrasi Discord untuk dukungan dan kolaborasi workshop
 
 #### Fitur Workshop
 - **Pencarian Bawaan**: Penemuan cepat kata kunci dan pelajaran
-- **Salin Blok Kode**: Fungsi hover-to-copy untuk semua contoh kode
-- **Tombol Tema**: Dukungan mode gelap/terang untuk preferensi berbeda
+- **Salin Blok Kode**: Fitur hover-to-copy untuk semua contoh kode
+- **Pengalihan Tema**: Dukungan mode gelap/terang untuk preferensi berbeda
 - **Aset Visual**: Tangkapan layar dan diagram untuk pemahaman yang lebih baik
 - **Integrasi Bantuan**: Akses langsung ke Discord untuk dukungan komunitas
 
@@ -647,62 +695,62 @@ Jika Anda memiliki cabang lokal atau dokumentasi yang merujuk struktur lama:
 
 #### Ditambahkan
 - **📚 Sistem Pembelajaran Berbasis Bab**: Menyusun ulang seluruh kursus menjadi 8 bab pembelajaran progresif
-  - Bab 1: Foundation & Quick Start (⭐ - 30-45 menit)
-  - Bab 2: AI-First Development (⭐⭐ - 1-2 jam)
-  - Bab 3: Configuration & Authentication (⭐⭐ - 45-60 menit)
-  - Bab 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 jam)
-  - Bab 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 jam)
-  - Bab 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 jam)
-  - Bab 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 jam)
-  - Bab 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 jam)
+  - Bab 1: Dasar & Mulai Cepat (⭐ - 30-45 menit)
+  - Bab 2: Pengembangan Berfokus AI (⭐⭐ - 1-2 jam)
+  - Bab 3: Konfigurasi & Otentikasi (⭐⭐ - 45-60 menit)
+  - Bab 4: Infrastructure as Code & Penyebaran (⭐⭐⭐ - 1-1.5 jam)
+  - Bab 5: Solusi AI Multi-Agen (⭐⭐⭐⭐ - 2-3 jam)
+  - Bab 6: Validasi & Perencanaan Pra-Penyebaran (⭐⭐ - 1 jam)
+  - Bab 7: Pemecahan Masalah & Debugging (⭐⭐ - 1-1.5 jam)
+  - Bab 8: Pola Produksi & Perusahaan (⭐⭐⭐⭐ - 2-3 jam)
 - **📚 Sistem Navigasi Komprehensif**: Header dan footer navigasi yang konsisten di seluruh dokumentasi
 - **🎯 Pelacakan Progres**: Daftar periksa penyelesaian kursus dan sistem verifikasi pembelajaran
-- **🗺️ Panduan Jalur Pembelajaran**: Titik masuk yang jelas untuk berbagai tingkat pengalaman dan tujuan
-- **🔗 Navigasi Referensi Silang**: Bab terkait dan prasyarat yang jelas ditautkan
+- **🗺️ Panduan Jalur Pembelajaran**: Titik masuk yang jelas untuk tingkat pengalaman dan tujuan berbeda
+- **🔗 Navigasi Silang**: Bab terkait dan prasyarat yang terhubung dengan jelas
 
 #### Ditingkatkan
 - **Struktur README**: Diubah menjadi platform pembelajaran terstruktur dengan organisasi berbasis bab
-- **Navigasi Dokumentasi**: Setiap halaman sekarang menyertakan konteks bab dan panduan progres
-- **Pengorganisasian Templat**: Contoh dan templat dipetakan ke bab pembelajaran yang sesuai
-- **Integrasi Sumber Daya**: Cheat sheet, FAQ, dan panduan studi terhubung ke bab terkait
-- **Integrasi Workshop**: Lab praktis dipetakan ke berbagai tujuan pembelajaran bab
+- **Navigasi Dokumentasi**: Setiap halaman sekarang menyertakan konteks bab dan panduan progresi
+- **Organisasi Template**: Contoh dan template dipetakan ke bab pembelajaran yang sesuai
+- **Integrasi Sumber Daya**: Cheat sheet, FAQ, dan panduan studi terhubung ke bab relevan
+- **Integrasi Workshop**: Lab praktis dipetakan ke banyak tujuan pembelajaran bab
 
 #### Diubah
-- **Progresi Pembelajaran**: Berubah dari dokumentasi linier ke pembelajaran berbasis bab yang fleksibel
-- **Penempatan Konfigurasi**: Panduan konfigurasi diposisikan sebagai Bab 3 untuk alur pembelajaran yang lebih baik
+- **Progres Pembelajaran**: Beralih dari dokumentasi linear ke pembelajaran berbasis bab yang fleksibel
+- **Penempatan Konfigurasi**: Panduan konfigurasi dipindahkan ke Bab 3 untuk alur pembelajaran yang lebih baik
 - **Integrasi Konten AI**: Integrasi konten khusus AI yang lebih baik di seluruh perjalanan pembelajaran
-- **Konten Produksi**: Pola lanjutan dikonsolidasikan di Bab 8 untuk pembelajar enterprise
+- **Konten Produksi**: Pola lanjutan dikonsolidasikan di Bab 8 untuk pembelajar perusahaan
 
-#### Ditingkatkan
-- **Pengalaman Pengguna**: Breadcrumb navigasi dan indikator progres bab yang jelas
-- **Aksesibilitas**: Pola navigasi konsisten untuk memudahkan penelusuran kursus
-- **Presentasi Profesional**: Struktur bergaya universitas yang cocok untuk pelatihan akademik dan perusahaan
-- **Efisiensi Pembelajaran**: Waktu menemukan konten relevan berkurang melalui organisasi yang ditingkatkan
+#### Diperbaiki
+- **Pengalaman Pengguna**: Breadcrumb navigasi yang jelas dan indikator progresi bab
+- **Aksesibilitas**: Pola navigasi konsisten untuk mempermudah penelusuran kursus
+- **Presentasi Profesional**: Struktur kursus bergaya universitas yang cocok untuk pelatihan akademis dan korporat
+- **Efisiensi Pembelajaran**: Waktu untuk menemukan konten relevan berkurang melalui organisasi yang lebih baik
 
 #### Implementasi Teknis
-- **Header Navigasi**: Navigasi bab standar di lebih dari 40+ berkas dokumentasi
-- **Footer Navigasi**: Panduan progres dan indikator penyelesaian bab yang konsisten
-- **Referensi Silang**: Sistem penautan internal komprehensif yang menghubungkan konsep terkait
-- **Pemetaan Bab**: Templat dan contoh dikaitkan dengan jelas ke tujuan pembelajaran
+- **Navigation Headers**: Navigasi bab standar di lebih dari 40+ file dokumentasi
+- **Footer Navigation**: Panduan progresi dan indikator penyelesaian bab yang konsisten
+- **Cross-Linking**: Sistem tautan internal komprehensif yang menghubungkan konsep terkait
+- **Chapter Mapping**: Template dan contoh jelas diasosiasikan dengan tujuan pembelajaran
 
 #### Peningkatan Panduan Studi
-- **📚 Tujuan Pembelajaran Komprehensif**: Panduan studi disusun ulang untuk selaras dengan sistem 8-bab
+- **📚 Tujuan Pembelajaran Komprehensif**: Panduan studi diubah untuk selaras dengan sistem 8-bab
 - **🎯 Penilaian Berbasis Bab**: Setiap bab mencakup tujuan pembelajaran spesifik dan latihan praktis
-- **📋 Pelacakan Progres**: Jadwal pembelajaran mingguan dengan hasil terukur dan daftar periksa penyelesaian
+- **📋 Pelacakan Progres**: Jadwal pembelajaran mingguan dengan hasil yang terukur dan daftar periksa penyelesaian
 - **❓ Pertanyaan Penilaian**: Pertanyaan validasi pengetahuan untuk setiap bab dengan hasil profesional
-- **🛠️ Latihan Praktis**: Aktivitas praktis dengan skenario deployment nyata dan pemecahan masalah
-- **📊 Progresi Keterampilan**: Kemajuan yang jelas dari konsep dasar hingga pola enterprise dengan fokus pengembangan karier
+- **🛠️ Latihan Praktis**: Aktivitas hands-on dengan skenario penyebaran nyata dan pemecahan masalah
+- **📊 Progres Keterampilan**: Kemajuan yang jelas dari konsep dasar ke pola perusahaan dengan fokus pengembangan karier
 - **🎓 Kerangka Sertifikasi**: Hasil pengembangan profesional dan sistem pengakuan komunitas
-- **⏱️ Manajemen Garis Waktu**: Rencana pembelajaran 10-minggu terstruktur dengan validasi pencapaian
+- **⏱️ Manajemen Garis Waktu**: Rencana pembelajaran 10 minggu terstruktur dengan validasi tonggak
 
 ### [v3.1.0] - 2025-09-17
 
-#### Peningkatan Solusi AI Multi-Agen
-**Versi ini meningkatkan solusi ritel multi-agen dengan penamaan agen yang lebih baik dan dokumentasi yang ditingkatkan.**
+#### Solusi AI Multi-Agen yang Ditingkatkan
+**Versi ini meningkatkan solusi ritel multi-agen dengan penamaan agen yang lebih baik dan dokumentasi yang disempurnakan.**
 
 #### Diubah
-- **Terminologi Multi-Agen**: Mengganti "Cora agent" dengan "Customer agent" di seluruh solusi ritel multi-agen untuk pemahaman yang lebih jelas
-- **Arsitektur Agen**: Memperbarui semua dokumentasi, template ARM, dan contoh kode untuk menggunakan penamaan "Customer agent" yang konsisten
+- **Terminologi Multi-Agen**: Replaced "Cora agent" with "Customer agent" throughout retail multi-agent solution for clearer understanding
+- **Arsitektur Agen**: Memperbarui seluruh dokumentasi, template ARM, dan contoh kode untuk menggunakan penamaan "Customer agent" yang konsisten
 - **Contoh Konfigurasi**: Memodernisasi pola konfigurasi agen dengan konvensi penamaan yang diperbarui
 - **Konsistensi Dokumentasi**: Memastikan semua referensi menggunakan nama agen yang profesional dan deskriptif
 
@@ -712,92 +760,92 @@ Jika Anda memiliki cabang lokal atau dokumentasi yang merujuk struktur lama:
 - **Contoh Kode**: Kelas Python dan contoh implementasi sekarang menggunakan penamaan CustomerAgent
 - **Variabel Lingkungan**: Memperbarui semua skrip penyebaran untuk menggunakan konvensi CUSTOMER_AGENT_NAME
 
-#### Ditingkatkan
-- **Developer Experience**: Peran dan tanggung jawab agen yang lebih jelas dalam dokumentasi
-- **Production Readiness**: Penyesuaian yang lebih baik dengan konvensi penamaan perusahaan
-- **Learning Materials**: Penamaan agen yang lebih intuitif untuk tujuan pendidikan
-- **Template Usability**: Pemahaman yang disederhanakan tentang fungsi agen dan pola penyebaran
+#### Diperbaiki
+- **Pengalaman Pengembang**: Peran dan tanggung jawab agen lebih jelas dalam dokumentasi
+- **Kesiapan Produksi**: Penyelarasan yang lebih baik dengan konvensi penamaan perusahaan
+- **Materi Pembelajaran**: Penamaan agen yang lebih intuitif untuk tujuan pendidikan
+- **Kegunaan Template**: Pemahaman fungsi agen dan pola penyebaran menjadi lebih sederhana
 
 #### Rincian Teknis
-- Memperbarui diagram arsitektur Mermaid dengan referensi CustomerAgent
-- Mengganti nama kelas CoraAgent dengan CustomerAgent dalam contoh Python
-- Mengubah konfigurasi ARM template JSON untuk menggunakan tipe agen "customer"
-- Memperbarui variabel lingkungan dari CORA_AGENT_* ke pola CUSTOMER_AGENT_*
-- Menyegarkan semua perintah penyebaran dan konfigurasi kontainer
+- Updated Mermaid architecture diagrams with CustomerAgent references
+- Replaced CoraAgent class names with CustomerAgent in Python examples
+- Modified ARM template JSON configurations to use "customer" agent type
+- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
+- Refreshed all deployment commands and container configurations
 
 ### [v3.0.0] - 2025-09-12
 
-#### Perubahan Utama - Fokus Pengembang AI dan Integrasi Microsoft Foundry
-**Versi ini mengubah repositori menjadi sumber belajar yang berfokus pada AI yang komprehensif dengan integrasi Microsoft Foundry.**
+#### Perubahan Besar - Fokus Pengembang AI dan Integrasi Microsoft Foundry
+**Versi ini mengubah repositori menjadi sumber belajar berfokus AI yang komprehensif dengan integrasi Microsoft Foundry.**
 
 #### Ditambahkan
-- **🤖 AI-First Learning Path**: Restrukturisasi lengkap yang memprioritaskan pengembang dan insinyur AI
-- **Microsoft Foundry Integration Guide**: Dokumentasi komprehensif untuk menghubungkan AZD dengan layanan Microsoft Foundry
-- **AI Model Deployment Patterns**: Panduan rinci yang mencakup pemilihan model, konfigurasi, dan strategi penyebaran produksi
-- **AI Workshop Lab**: Lokakarya praktik 2-3 jam untuk mengonversi aplikasi AI menjadi solusi yang dapat dideploy oleh AZD
-- **Production AI Best Practices**: Pola siap-perusahaan untuk penskalaan, pemantauan, dan pengamanan beban kerja AI
-- **AI-Specific Troubleshooting Guide**: Panduan pemecahan masalah komprehensif untuk Azure OpenAI, Cognitive Services, dan masalah penyebaran AI
-- **AI Template Gallery**: Koleksi unggulan template Microsoft Foundry dengan peringkat kompleksitas
-- **Workshop Materials**: Struktur lokakarya lengkap dengan lab praktik dan materi referensi
+- **🤖 Jalur Pembelajaran AI-First**: Restrukturisasi lengkap yang memprioritaskan pengembang dan insinyur AI
+- **Panduan Integrasi Microsoft Foundry**: Dokumentasi komprehensif untuk menghubungkan AZD dengan layanan Microsoft Foundry
+- **Pola Penyebaran Model AI**: Panduan terperinci mencakup pemilihan model, konfigurasi, dan strategi penyebaran produksi
+- **AI Workshop Lab**: Workshop hands-on 2-3 jam untuk mengonversi aplikasi AI menjadi solusi yang dapat dideploy oleh AZD
+- **Praktik Terbaik AI untuk Produksi**: Pola siap-enterprise untuk penskalaan, pemantauan, dan pengamanan beban kerja AI
+- **Panduan Pemecahan Masalah Khusus AI**: Pemecahan masalah komprehensif untuk Microsoft Foundry Models, Cognitive Services, dan isu penyebaran AI
+- **Galeri Template AI**: Koleksi template Microsoft Foundry unggulan dengan peringkat kompleksitas
+- **Materi Workshop**: Struktur workshop lengkap dengan lab praktis dan materi referensi
 
 #### Ditingkatkan
-- **README Structure**: Berfokus pada pengembang AI dengan data minat komunitas 45% dari Microsoft Foundry Discord
-- **Learning Paths**: Perjalanan khusus pengembang AI di samping jalur tradisional untuk mahasiswa dan insinyur DevOps
-- **Template Recommendations**: Template AI unggulan termasuk azure-search-openai-demo, contoso-chat, dan openai-chat-app-quickstart
-- **Community Integration**: Dukungan komunitas Discord yang ditingkatkan dengan saluran dan diskusi khusus AI
+- **Struktur README**: Berfokus pada pengembang AI dengan data minat komunitas 45% dari Microsoft Foundry Discord
+- **Jalur Pembelajaran**: Perjalanan khusus pengembang AI berdampingan dengan jalur tradisional untuk pelajar dan insinyur DevOps
+- **Rekomendasi Template**: Template AI unggulan termasuk azure-search-openai-demo, contoso-chat, dan openai-chat-app-quickstart
+- **Integrasi Komunitas**: Dukungan komunitas Discord yang ditingkatkan dengan saluran khusus AI dan diskusi
 
 #### Fokus Keamanan & Produksi
-- **Managed Identity Patterns**: Konfigurasi otentikasi dan keamanan khusus AI
-- **Cost Optimization**: Pelacakan penggunaan token dan kontrol anggaran untuk beban kerja AI
-- **Multi-Region Deployment**: Strategi untuk penyebaran aplikasi AI global
-- **Performance Monitoring**: Metrik khusus AI dan integrasi Application Insights
+- **Polapola Managed Identity**: Otentikasi dan konfigurasi keamanan khusus AI
+- **Optimasi Biaya**: Pelacakan penggunaan token dan kontrol anggaran untuk beban kerja AI
+- **Penyebaran Multi-Region**: Strategi untuk penyebaran aplikasi AI secara global
+- **Pemantauan Kinerja**: Metrik khusus AI dan integrasi Application Insights
 
 #### Kualitas Dokumentasi
-- **Linear Course Structure**: Progresi logis dari pemula hingga pola penyebaran AI tingkat lanjut
-- **Validated URLs**: Semua tautan repositori eksternal diverifikasi dan dapat diakses
-- **Complete Reference**: Semua tautan dokumentasi internal telah diverifikasi dan berfungsi
-- **Production Ready**: Pola penyebaran perusahaan dengan contoh dunia nyata
+- **Struktur Kursus Linear**: Progres logis dari pemula ke pola penyebaran AI tingkat lanjut
+- **URL Tervalidasi**: Semua tautan repositori eksternal diverifikasi dan dapat diakses
+- **Referensi Lengkap**: Semua tautan dokumentasi internal tervalidasi dan fungsional
+- **Siap Produksi**: Pola penyebaran enterprise dengan contoh dunia nyata
 
 ### [v2.0.0] - 2025-09-09
 
-#### Perubahan Utama - Restrukturisasi Repositori dan Peningkatan Profesional
-**Versi ini merupakan perombakan signifikan pada struktur repositori dan penyajian konten.**
+#### Perubahan Besar - Restrukturisasi Repositori dan Peningkatan Profesional
+**Versi ini merepresentasikan perombakan signifikan pada struktur repositori dan penyajian konten.**
 
 #### Ditambahkan
-- **Structured Learning Framework**: Semua halaman dokumentasi sekarang mencakup bagian Introduction, Learning Goals, dan Learning Outcomes
-- **Navigation System**: Menambahkan tautan Previous/Next lesson di seluruh dokumentasi untuk kemajuan pembelajaran yang terpandu
-- **Study Guide**: study-guide.md komprehensif dengan tujuan pembelajaran, latihan praktik, dan materi penilaian
-- **Professional Presentation**: Menghapus semua ikon emoji untuk meningkatkan aksesibilitas dan penampilan profesional
-- **Enhanced Content Structure**: Peningkatan organisasi dan alur materi pembelajaran
+- **Kerangka Pembelajaran Terstruktur**: Semua halaman dokumentasi kini menyertakan bagian Introduction, Learning Goals, dan Learning Outcomes
+- **Sistem Navigasi**: Menambahkan tautan pelajaran Sebelumnya/Berikutnya di seluruh dokumentasi untuk panduan progresi pembelajaran
+- **Panduan Studi**: study-guide.md yang komprehensif dengan tujuan pembelajaran, latihan praktik, dan materi penilaian
+- **Penyajian Profesional**: Menghapus semua ikon emoji untuk meningkatkan aksesibilitas dan penampilan profesional
+- **Struktur Konten yang Ditingkatkan**: Organisasi dan alur materi pembelajaran yang lebih baik
 
 #### Diubah
-- **Documentation Format**: Menstandarkan semua dokumentasi dengan struktur yang konsisten berfokus pada pembelajaran
-- **Navigation Flow**: Menerapkan progresi logis melalui semua materi pembelajaran
-- **Content Presentation**: Menghapus elemen dekoratif demi format yang jelas dan profesional
-- **Link Structure**: Memperbarui semua tautan internal untuk mendukung sistem navigasi baru
+- **Format Dokumentasi**: Menstandarisasi semua dokumentasi dengan struktur berfokus pembelajaran yang konsisten
+- **Alur Navigasi**: Mengimplementasikan progresi logis melalui semua materi pembelajaran
+- **Penyajian Konten**: Menghapus elemen dekoratif demi formatting yang jelas dan profesional
+- **Struktur Tautan**: Memperbarui semua tautan internal untuk mendukung sistem navigasi baru
 
-#### Ditingkatkan
-- **Accessibility**: Menghapus ketergantungan emoji untuk kompatibilitas pembaca layar yang lebih baik
-- **Professional Appearance**: Penyajian bergaya akademis yang bersih cocok untuk pembelajaran perusahaan
-- **Learning Experience**: Pendekatan terstruktur dengan tujuan dan hasil yang jelas untuk setiap pelajaran
-- **Content Organization**: Alur logis dan koneksi yang lebih baik antar topik terkait
+#### Diperbaiki
+- **Aksesibilitas**: Menghapus ketergantungan emoji untuk kompatibilitas pembaca layar yang lebih baik
+- **Penampilan Profesional**: Penyajian gaya akademis yang bersih cocok untuk pembelajaran perusahaan
+- **Pengalaman Pembelajaran**: Pendekatan terstruktur dengan tujuan dan hasil yang jelas untuk setiap pelajaran
+- **Organisasi Konten**: Alur logis yang lebih baik dan koneksi antar topik terkait
 
 ### [v1.0.0] - 2025-09-09
 
-#### Rilis Awal - Repositori Pembelajaran AZD yang Komprehensif
+#### Rilis Awal - Repositori Pembelajaran AZD Komprehensif
 
 #### Ditambahkan
 - **Struktur Dokumentasi Inti**
-  - Seri panduan memulai lengkap
+  - Seri panduan getting-started lengkap
   - Dokumentasi penyebaran dan provisioning yang komprehensif
-  - Sumber daya pemecahan masalah dan panduan debugging yang rinci
+  - Sumber daya pemecahan masalah dan panduan debugging yang mendetail
   - Alat dan prosedur validasi pra-penyebaran
 
 - **Modul Memulai**
   - AZD Basics: Konsep inti dan terminologi
-  - Installation Guide: Instruksi pengaturan spesifik platform
+  - Installation Guide: Instruksi pemasangan spesifik platform
   - Configuration Guide: Pengaturan lingkungan dan otentikasi
-  - First Project Tutorial: Pembelajaran praktik langkah demi langkah
+  - First Project Tutorial: Pembelajaran hands-on langkah demi langkah
 
 - **Modul Penyebaran dan Provisioning**
   - Deployment Guide: Dokumentasi alur kerja lengkap
@@ -805,131 +853,131 @@ Jika Anda memiliki cabang lokal atau dokumentasi yang merujuk struktur lama:
   - Praktik terbaik untuk penyebaran produksi
   - Pola arsitektur multi-layanan
 
-- **Modul Validasi Pra-penyebaran**
+- **Modul Validasi Pra-Penyebaran**
   - Capacity Planning: Validasi ketersediaan sumber daya Azure
-  - SKU Selection: Panduan lengkap pemilihan tier layanan
+  - SKU Selection: Panduan tingkat layanan yang komprehensif
   - Pre-flight Checks: Skrip validasi otomatis (PowerShell dan Bash)
   - Alat estimasi biaya dan perencanaan anggaran
 
 - **Modul Pemecahan Masalah**
   - Common Issues: Masalah yang sering ditemui dan solusinya
-  - Debugging Guide: Metodologi pemecahan masalah yang sistematis
-  - Teknik dan alat diagnostik tingkat lanjut
-  - Pemantauan kinerja dan optimisasi
+  - Debugging Guide: Metodologi pemecahan masalah sistematis
+  - Teknik diagnostik lanjutan dan alat
+  - Pemantauan kinerja dan optimasi
 
 - **Sumber Daya dan Referensi**
-  - Command Cheat Sheet: Referensi cepat untuk perintah penting
+  - Command Cheat Sheet: Referensi cepat untuk perintah esensial
   - Glossary: Definisi terminologi dan akronim yang komprehensif
-  - FAQ: Jawaban rinci untuk pertanyaan umum
+  - FAQ: Jawaban mendetail untuk pertanyaan umum
   - Tautan sumber eksternal dan koneksi komunitas
 
 - **Contoh dan Template**
   - Contoh Aplikasi Web Sederhana
   - Template penyebaran Situs Statis
   - Konfigurasi Aplikasi Kontainer
-  - Pola integrasi Basis Data
-  - Contoh arsitektur Microservices
-  - Implementasi fungsi Serverless
+  - Pola integrasi database
+  - Contoh arsitektur microservices
+  - Implementasi fungsi serverless
 
 #### Fitur
-- **Multi-Platform Support**: Panduan instalasi dan konfigurasi untuk Windows, macOS, dan Linux
-- **Multiple Skill Levels**: Konten dirancang untuk siswa hingga pengembang profesional
-- **Practical Focus**: Contoh praktik dan skenario dunia nyata
-- **Comprehensive Coverage**: Dari konsep dasar hingga pola perusahaan tingkat lanjut
-- **Security-First Approach**: Praktik terbaik keamanan terintegrasi di seluruh
-- **Cost Optimization**: Panduan untuk penyebaran hemat biaya dan manajemen sumber daya
+- **Dukungan Multi-Platform**: Panduan pemasangan dan konfigurasi untuk Windows, macOS, dan Linux
+- **Berbagai Tingkat Keahlian**: Konten dirancang untuk pelajar hingga pengembang profesional
+- **Fokus Praktis**: Contoh hands-on dan skenario dunia nyata
+- **Cakupan Komprehensif**: Dari konsep dasar hingga pola enterprise tingkat lanjut
+- **Pendekatan Keamanan-Utama**: Praktik terbaik keamanan terintegrasi di seluruh materi
+- **Optimasi Biaya**: Panduan untuk penyebaran yang hemat biaya dan pengelolaan sumber daya
 
 #### Kualitas Dokumentasi
-- **Detailed Code Examples**: Contoh kode praktis yang diuji
-- **Step-by-Step Instructions**: Panduan jelas dan dapat ditindaklanjuti
-- **Comprehensive Error Handling**: Pemecahan masalah untuk masalah umum
-- **Best Practices Integration**: Standar industri dan rekomendasi
-- **Version Compatibility**: Terbaru dengan layanan Azure dan fitur azd terkini
+- **Contoh Kode yang Mendetail**: Contoh kode praktis dan teruji
+- **Instruksi Langkah-demi-Langkah**: Panduan yang jelas dan dapat ditindaklanjuti
+- **Penanganan Error Komprehensif**: Pemecahan masalah untuk masalah umum
+- **Integrasi Praktik Terbaik**: Standar industri dan rekomendasi
+- **Kompatibilitas Versi**: Terbaru dengan layanan Azure dan fitur azd terkini
 
-## Peningkatan Masa Depan yang Direncanakan
+## Rencana Peningkatan Mendatang
 
-### Version 3.1.0 (Direncanakan)
+### Version 3.1.0 (Planned)
 #### Perluasan Platform AI
-- **Multi-Model Support**: Pola integrasi untuk Hugging Face, Azure Machine Learning, dan model kustom
-- **AI Agent Frameworks**: Template untuk penyebaran LangChain, Semantic Kernel, dan AutoGen
-- **Advanced RAG Patterns**: Opsi database vektor di luar Azure AI Search (Pinecone, Weaviate, dll.)
-- **AI Observability**: Pemantauan ditingkatkan untuk kinerja model, penggunaan token, dan kualitas respons
+- **Dukungan Multi-Model**: Pola integrasi untuk Hugging Face, Azure Machine Learning, dan model kustom
+- **Kerangka Agen AI**: Template untuk penyebaran LangChain, Semantic Kernel, dan AutoGen
+- **Pola RAG Lanjutan**: Opsi database vektor selain Azure AI Search (Pinecone, Weaviate, dll.)
+- **Observabilitas AI**: Pemantauan yang ditingkatkan untuk performa model, penggunaan token, dan kualitas respons
 
-#### Pengalaman Pengembang
-- **VS Code Extension**: Pengalaman pengembangan terintegrasi AZD + AI Foundry
-- **GitHub Copilot Integration**: Pembuatan template AZD berbantuan AI
-- **Interactive Tutorials**: Latihan pengkodean praktik dengan validasi otomatis untuk skenario AI
-- **Video Content**: Tutorial video tambahan untuk pembelajar visual yang berfokus pada penyebaran AI
+#### Developer Experience
+- **Ekstensi VS Code**: Pengalaman pengembangan AZD + Microsoft Foundry yang terintegrasi
+- **Integrasi GitHub Copilot**: Pembuatan template AZD dibantu AI
+- **Tutorial Interaktif**: Latihan pengkodean langsung dengan validasi otomatis untuk skenario AI
+- **Konten Video**: Tutorial video pelengkap untuk pembelajar visual yang fokus pada penyebaran AI
 
-### Version 4.0.0 (Direncanakan)
+### Versi 4.0.0 (Direncanakan)
 #### Pola AI Perusahaan
-- **Governance Framework**: Tata kelola model AI, kepatuhan, dan jejak audit
-- **Multi-Tenant AI**: Pola untuk melayani banyak pelanggan dengan layanan AI terisolasi
-- **Edge AI Deployment**: Integrasi dengan Azure IoT Edge dan instance kontainer
-- **Hybrid Cloud AI**: Pola penyebaran multi-cloud dan hybrid untuk beban kerja AI
+- **Kerangka Tata Kelola**: Tata kelola model AI, kepatuhan, dan jejak audit
+- **AI Multi-Tenant**: Pola untuk melayani banyak pelanggan dengan layanan AI terisolasi
+- **Penyebaran Edge AI**: Integrasi dengan Azure IoT Edge dan instance kontainer
+- **AI Hybrid Cloud**: Pola penyebaran multi-cloud dan hybrid untuk beban kerja AI
 
 #### Fitur Lanjutan
-- **AI Pipeline Automation**: Integrasi MLOps dengan pipeline Azure Machine Learning
-- **Advanced Security**: Pola zero-trust, private endpoint, dan perlindungan ancaman tingkat lanjut
-- **Performance Optimization**: Penyetelan dan strategi penskalaan tingkat lanjut untuk aplikasi AI dengan throughput tinggi
-- **Global Distribution**: Pola pengiriman konten dan caching edge untuk aplikasi AI
+- **Otomatisasi Pipeline AI**: Integrasi MLOps dengan pipeline Azure Machine Learning
+- **Keamanan Lanjutan**: Pola zero-trust, private endpoints, dan perlindungan ancaman lanjutan
+- **Optimisasi Performa**: Penalaan dan strategi skala lanjutan untuk aplikasi AI throughput tinggi
+- **Distribusi Global**: Pola pengiriman konten dan caching edge untuk aplikasi AI
 
-### Version 3.0.0 (Direncanakan) - Digantikan oleh Rilis Saat Ini
-#### Penambahan yang Diusulkan - Sekarang Diimplementasikan di v3.0.0
-- ✅ **AI-Focused Content**: Integrasi Microsoft Foundry yang komprehensif (Selesai)
-- ✅ **Interactive Tutorials**: Lab lokakarya AI praktik (Selesai)
-- ✅ **Advanced Security Module**: Pola keamanan khusus AI (Selesai)
-- ✅ **Performance Optimization**: Strategi penyetelan beban kerja AI (Selesai)
+### Versi 3.0.0 (Direncanakan) - Digantikan oleh Rilis Saat Ini
+#### Usulan Penambahan - Sekarang Diimplementasikan di v3.0.0
+- ✅ **Konten Berfokus AI**: Integrasi Microsoft Foundry yang komprehensif (Selesai)
+- ✅ **Tutorial Interaktif**: Lab workshop AI praktis (Selesai)
+- ✅ **Modul Keamanan Lanjutan**: Pola keamanan khusus AI (Selesai)
+- ✅ **Optimisasi Performa**: Strategi penalaan beban kerja AI (Selesai)
 
-### Version 2.1.0 (Direncanakan) - Sebagian Diimplementasikan di v3.0.0
-#### Peningkatan Minor - Beberapa Diselesaikan di Rilis Saat Ini
-- ✅ **Additional Examples**: Skenario penyebaran berfokus AI (Selesai)
-- ✅ **Extended FAQ**: Pertanyaan dan pemecahan masalah khusus AI (Selesai)
-- **Tool Integration**: Panduan integrasi IDE dan editor yang ditingkatkan
-- ✅ **Monitoring Expansion**: Pola pemantauan dan pemberitahuan khusus AI (Selesai)
+### Versi 2.1.0 (Direncanakan) - Sebagian Diimplementasikan di v3.0.0
+#### Peningkatan Minor - Beberapa Selesai di Rilis Saat Ini
+- ✅ **Contoh Tambahan**: Skenario penyebaran berfokus AI (Selesai)
+- ✅ **FAQ Diperluas**: Pertanyaan dan pemecahan masalah khusus AI (Selesai)
+- **Integrasi Alat**: Panduan integrasi IDE dan editor yang ditingkatkan
+- ✅ **Perluasan Pemantauan**: Pola pemantauan dan pemberian peringatan khusus AI (Selesai)
 
 #### Masih Direncanakan untuk Rilis Mendatang
-- **Mobile-Friendly Documentation**: Desain responsif untuk pembelajaran seluler
-- **Offline Access**: Paket dokumentasi yang dapat diunduh
-- **Enhanced IDE Integration**: Ekstensi VS Code untuk alur kerja AZD + AI
-- **Community Dashboard**: Metrik komunitas real-time dan pelacakan kontribusi
+- **Dokumentasi Ramah Mobile**: Desain responsif untuk pembelajaran mobile
+- **Akses Offline**: Paket dokumentasi yang dapat diunduh
+- **Integrasi IDE yang Ditingkatkan**: Ekstensi VS Code untuk alur kerja AZD + AI
+- **Dasbor Komunitas**: Metrik komunitas real-time dan pelacakan kontribusi
 
 ## Berkontribusi pada Changelog
 
 ### Melaporkan Perubahan
-Saat berkontribusi ke repositori ini, harap pastikan entri changelog mencakup:
+Saat berkontribusi ke repositori ini, pastikan entri changelog mencakup:
 
-1. **Nomor Versi**: Mengikuti penomoran semantik (major.minor.patch)
+1. **Nomor Versi**: Mengikuti penomoran versi semantik (major.minor.patch)
 2. **Tanggal**: Tanggal rilis atau pembaruan dalam format YYYY-MM-DD
-3. **Kategori**: Added, Changed, Deprecated, Removed, Fixed, Security
-4. **Deskripsi yang Jelas**: Deskripsi singkat tentang apa yang diubah
-5. **Penilaian Dampak**: Bagaimana perubahan memengaruhi pengguna yang ada
+3. **Kategori**: Ditambahkan, Diubah, Tidak Direkomendasikan, Dihapus, Diperbaiki, Keamanan
+4. **Deskripsi Jelas**: Deskripsi singkat tentang apa yang diubah
+5. **Penilaian Dampak**: Bagaimana perubahan memengaruhi pengguna yang sudah ada
 
 ### Kategori Perubahan
 
 #### Ditambahkan
 - Fitur baru, bagian dokumentasi, atau kapabilitas
-- Contoh, template, atau sumber belajar baru
-- Alat, skrip, atau utilitas tambahan
+- Contoh baru, template, atau sumber belajar
+- Alat tambahan, skrip, atau utilitas
 
 #### Diubah
-- Modifikasi pada fungsionalitas atau dokumentasi yang ada
+- Modifikasi pada fungsi atau dokumentasi yang sudah ada
 - Pembaruan untuk meningkatkan kejelasan atau akurasi
 - Restrukturisasi konten atau organisasi
 
-#### Dideprekasi
-- Fitur atau pendekatan yang sedang dihentikan secara bertahap
+#### Tidak Direkomendasikan
+- Fitur atau pendekatan yang sedang dihentikan bertahap
 - Bagian dokumentasi yang dijadwalkan untuk dihapus
 - Metode yang memiliki alternatif yang lebih baik
 
 #### Dihapus
 - Fitur, dokumentasi, atau contoh yang tidak lagi relevan
-- Informasi usang atau pendekatan yang dideprekasi
-- Konten yang redundant atau dikonsolidasikan
+- Informasi usang atau pendekatan yang tidak lagi direkomendasikan
+- Konten yang berlebihan atau digabungkan
 
 #### Diperbaiki
 - Koreksi terhadap kesalahan dalam dokumentasi atau kode
-- Penyelesaian masalah atau isu yang dilaporkan
+- Penyelesaian isu atau masalah yang dilaporkan
 - Peningkatan akurasi atau fungsionalitas
 
 #### Keamanan
@@ -937,87 +985,87 @@ Saat berkontribusi ke repositori ini, harap pastikan entri changelog mencakup:
 - Pembaruan praktik terbaik keamanan
 - Penyelesaian kerentanan keamanan
 
-### Pedoman Penomoran Semantik
+### Pedoman Penomoran Versi Semantik
 
 #### Versi Mayor (X.0.0)
-- Perubahan yang merusak kompatibilitas dan memerlukan tindakan pengguna
-- Restrukturisasi signifikan pada konten atau organisasi
+- Perubahan besar yang membutuhkan tindakan pengguna
+- Restrukturisasi signifikan dari konten atau organisasi
 - Perubahan yang mengubah pendekatan atau metodologi dasar
 
 #### Versi Minor (X.Y.0)
 - Fitur baru atau penambahan konten
 - Peningkatan yang mempertahankan kompatibilitas mundur
-- Contoh, alat, atau sumber tambahan
+- Contoh, alat, atau sumber daya tambahan
 
 #### Versi Patch (X.Y.Z)
 - Perbaikan bug dan koreksi
 - Peningkatan kecil pada konten yang ada
 - Klarifikasi dan peningkatan kecil
 
-## Masukan dan Saran Komunitas
+## Umpan Balik dan Saran Komunitas
 
-Kami secara aktif mendorong masukan komunitas untuk meningkatkan sumber belajar ini:
+Kami mendorong umpan balik komunitas secara aktif untuk meningkatkan sumber belajar ini:
 
-### Cara Memberikan Masukan
-- **GitHub Issues**: Laporkan masalah atau sarankan perbaikan (isu khusus AI dipersilakan)
-- **Discord Discussions**: Bagikan ide dan berinteraksi dengan komunitas Microsoft Foundry
+### Cara Memberikan Umpan Balik
+- **GitHub Issues**: Laporkan masalah atau sarankan perbaikan (isu spesifik AI disambut)
+- **Diskusi Discord**: Bagikan ide dan berinteraksi dengan komunitas Microsoft Foundry
 - **Pull Requests**: Kontribusikan perbaikan langsung pada konten, terutama template dan panduan AI
-- **Microsoft Foundry Discord**: Berpartisipasi di channel #Azure untuk diskusi AZD + AI
-- **Community Forums**: Ikuti diskusi pengembang Azure yang lebih luas
+- **Microsoft Foundry Discord**: Berpartisipasi di saluran #Azure untuk diskusi AZD + AI
+- **Forum Komunitas**: Berpartisipasi dalam diskusi pengembang Azure yang lebih luas
 
-### Kategori Masukan
-- **AI Content Accuracy**: Koreksi terhadap integrasi layanan AI dan informasi penyebaran
-- **Learning Experience**: Saran untuk peningkatan alur pembelajaran pengembang AI
-- **Missing AI Content**: Permintaan untuk template, pola, atau contoh AI tambahan
-- **Accessibility**: Peningkatan untuk kebutuhan belajar yang beragam
-- **AI Tool Integration**: Saran untuk integrasi alur kerja pengembangan AI yang lebih baik
-- **Production AI Patterns**: Permintaan pola penyebaran AI perusahaan
+### Kategori Umpan Balik
+- **Akurasi Konten AI**: Koreksi pada integrasi layanan AI dan informasi penyebaran
+- **Pengalaman Belajar**: Saran untuk alur pembelajaran pengembang AI yang lebih baik
+- **Konten AI yang Hilang**: Permintaan untuk template, pola, atau contoh AI tambahan
+- **Aksesibilitas**: Peningkatan untuk kebutuhan belajar yang beragam
+- **Integrasi Alat AI**: Saran untuk integrasi alur kerja pengembangan AI yang lebih baik
+- **Pola AI Produksi**: Permintaan pola penyebaran AI tingkat perusahaan
 
-### Komitmen Respons
-- **Issue Response**: Dalam 48 jam untuk masalah yang dilaporkan
-- **Feature Requests**: Evaluasi dalam waktu satu minggu
-- **Community Contributions**: Tinjauan dalam waktu satu minggu
-- **Security Issues**: Prioritas segera dengan respons yang dipercepat
+### Komitmen Tanggapan
+- **Tanggapan Isu**: Dalam 48 jam untuk masalah yang dilaporkan
+- **Permintaan Fitur**: Evaluasi dalam waktu satu minggu
+- **Kontribusi Komunitas**: Ditinjau dalam waktu satu minggu
+- **Isu Keamanan**: Prioritas segera dengan respons dipercepat
 
 ## Jadwal Pemeliharaan
 
-### Pembaruan Berkala
-- **Monthly Reviews**: Keakuratan konten dan validasi tautan
-- **Quarterly Updates**: Penambahan dan peningkatan konten utama
-- **Semi-Annual Reviews**: Restrukturisasi dan peningkatan komprehensif
-- **Annual Releases**: Pembaruan versi mayor dengan peningkatan signifikan
+### Pembaruan Rutin
+- **Tinjauan Bulanan**: Akurasi konten dan validasi tautan
+- **Pembaruan Kuartalan**: Penambahan dan peningkatan konten utama
+- **Tinjauan Semi-Tahunan**: Restrukturisasi dan peningkatan komprehensif
+- **Rilis Tahunan**: Pembaruan versi mayor dengan peningkatan signifikan
 
 ### Pemantauan dan Jaminan Kualitas
-- **Automated Testing**: Validasi rutin contoh kode dan tautan
-- **Community Feedback Integration**: Penggabungan rutin saran pengguna
-- **Technology Updates**: Penyesuaian dengan layanan Azure terbaru dan rilis azd
-- **Accessibility Audits**: Tinjauan rutin untuk prinsip desain inklusif
+- **Pengujian Otomatis**: Validasi rutin contoh kode dan tautan
+- **Integrasi Umpan Balik Komunitas**: Penggabungan rutin saran pengguna
+- **Pembaruan Teknologi**: Penyelarasan dengan layanan Azure terbaru dan rilis azd
+- **Audit Aksesibilitas**: Tinjauan rutin untuk prinsip desain inklusif
 
 ## Kebijakan Dukungan Versi
 
 ### Dukungan Versi Saat Ini
-- **Latest Major Version**: Dukungan penuh dengan pembaruan rutin
-- **Previous Major Version**: Pembaruan keamanan dan perbaikan kritis selama 12 bulan
-- **Legacy Versions**: Hanya dukungan komunitas, tidak ada pembaruan resmi
+- **Versi Mayor Terbaru**: Dukungan penuh dengan pembaruan rutin
+- **Versi Mayor Sebelumnya**: Pembaruan keamanan dan perbaikan kritis selama 12 bulan
+- **Versi Legasi**: Hanya dukungan komunitas, tidak ada pembaruan resmi
 
 ### Panduan Migrasi
- Ketika versi mayor dirilis, kami memberikan:
+Saat versi mayor dirilis, kami menyediakan:
 - **Panduan Migrasi**: Instruksi transisi langkah demi langkah
-- **Catatan Kompatibilitas**: Rincian tentang perubahan yang tidak kompatibel
+- **Catatan Kompatibilitas**: Detail tentang perubahan yang bersifat breaking
 - **Dukungan Alat**: Skrip atau utilitas untuk membantu migrasi
-- **Dukungan Komunitas**: Forum khusus untuk pertanyaan tentang migrasi
+- **Dukungan Komunitas**: Forum khusus untuk pertanyaan migrasi
 
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Panduan Belajar](resources/study-guide.md)
-- **Pelajaran Berikutnya**: Kembali ke [README Utama](README.md)
+- **Pelajaran Sebelumnya**: [Panduan Studi](resources/study-guide.md)
+- **Pelajaran Selanjutnya**: Kembali ke [README Utama](README.md)
 
-**Tetap Terinformasi**: Pantau repositori ini untuk mendapatkan notifikasi tentang rilis baru dan pembaruan penting pada materi pembelajaran.
+**Tetap Terbarui**: Pantau repositori ini untuk notifikasi tentang rilis baru dan pembaruan penting pada materi pembelajaran.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul akibat penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas segala kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

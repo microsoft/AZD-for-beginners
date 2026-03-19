@@ -1,28 +1,28 @@
-# Penyebaran Model AI dengan Azure Developer CLI
+# Penghantaran Model AI dengan Azure Developer CLI
 
 **Navigasi Bab:**
-- **📚 Laman Kursus**: [AZD For Beginners](../../README.md)
-- **📖 Bab Semasa**: Bab 2 - Pembangunan Berfokus AI
-- **⬅️ Sebelum**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Seterusnya**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Halaman Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan AI-Pertama
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Seterusnya**: [Makmal Bengkel AI](ai-workshop-lab.md)
 - **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
-Panduan ini menyediakan arahan komprehensif untuk menyebarkan model AI menggunakan templat AZD, merangkumi segala-galanya dari pemilihan model hingga corak penyebaran pengeluaran.
+Panduan ini menyediakan arahan menyeluruh untuk menghantar model AI menggunakan templat AZD, merangkumi segala-galanya dari pemilihan model hingga corak penghantaran ke pengeluaran.
 
-## Isi Kandungan
+## Kandungan
 
-- [Strategi Pemilihan Model](../../../../docs/chapter-02-ai-development)
-- [Konfigurasi AZD untuk Model AI](../../../../docs/chapter-02-ai-development)
-- [Corak Penyebaran](../../../../docs/chapter-02-ai-development)
-- [Pengurusan Model](../../../../docs/chapter-02-ai-development)
-- [Pertimbangan Pengeluaran](../../../../docs/chapter-02-ai-development)
-- [Pemantauan dan Kebolehlihatan](../../../../docs/chapter-02-ai-development)
+- [Strategi Pemilihan Model](#strategi-pemilihan-model)
+- [Konfigurasi AZD untuk Model AI](#konfigurasi-azd-untuk-model-ai)
+- [Corak Penghantaran](#corak-penghantaran)
+- [Pengurusan Model](#pengurusan-model)
+- [Pertimbangan Pengeluaran](#pertimbangan-pengeluaran)
+- [Pemantauan dan Kebolehperhatian](#pemantauan-dan-kebolehperhatian)
 
 ## Strategi Pemilihan Model
 
-### Model Azure OpenAI
+### Model Microsoft Foundry
 
-Pilih model yang betul untuk kes penggunaan anda:
+Pilih model yang sesuai untuk kes penggunaan anda:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,28 +52,28 @@ services:
 
 ### Perancangan Kapasiti Model
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Jenis Model | Kes Penggunaan | Kapasiti Disyorkan | Pertimbangan Kos |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Sembang, Soal Jawab | 10-50 TPM | Berpatutan untuk kebanyakan beban kerja |
-| GPT-4 | Pemikiran kompleks | 20-100 TPM | Kos lebih tinggi, guna untuk ciri premium |
+| gpt-4.1-mini | Sembang, Soal Jawab | 10-50 TPM | Berkesan kos untuk kebanyakan beban kerja |
+| gpt-4.1 | Penaakulan kompleks | 20-100 TPM | Kos lebih tinggi, untuk ciri premium |
 | Text-embedding-ada-002 | Carian, RAG | 30-120 TPM | Penting untuk carian semantik |
-| Whisper | Pertuturan-ke-teks | 10-50 TPM | Beban kerja pemprosesan audio |
+| Whisper | Pertuturan ke teks | 10-50 TPM | Beban kerja pemprosesan audio |
 
 ## Konfigurasi AZD untuk Model AI
 
 ### Konfigurasi Templat Bicep
 
-Buat penyebaran model melalui templat Bicep:
+Cipta penghantaran model melalui templat Bicep:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -127,16 +127,16 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurasikan persekitaran aplikasi anda:
 
 ```bash
-# Konfigurasi .env
+# konfigurasi .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Corak Penyebaran
+## Corak Penghantaran
 
-### Corak 1: Penyebaran Satu- Wilayah
+### Corak 1: Penghantaran Satu Wilayah
 
 ```yaml
 # azure.yaml - Single region
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Terbaik untuk:
-- Pembangunan dan pengujian
+- Pembangunan dan ujian
 - Aplikasi pasaran tunggal
 - Pengoptimuman kos
 
-### Corak 2: Penyebaran Pelbagai Wilayah
+### Corak 2: Penghantaran Pelbagai Wilayah
 
 ```bicep
 // Multi-region deployment
@@ -169,12 +169,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Terbaik untuk:
 - Aplikasi global
-- Keperluan kebolehcapaian tinggi
+- Keperluan ketersediaan tinggi
 - Pengagihan beban
 
-### Corak 3: Penyebaran Hibrid
+### Corak 3: Penghantaran Hibrid
 
-Gabungkan Azure OpenAI dengan perkhidmatan AI lain:
+Gabungkan Model Microsoft Foundry dengan perkhidmatan AI lain:
 
 ```bicep
 // Hybrid AI services
@@ -207,13 +207,13 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kawalan Versi
 
-Jejak versi model dalam konfigurasi AZD anda:
+Jejaki versi model dalam konfigurasi AZD anda:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -227,7 +227,7 @@ Jejak versi model dalam konfigurasi AZD anda:
 
 ### Kemas Kini Model
 
-Gunakan hooks AZD untuk kemas kini model:
+Gunakan kait AZD untuk kemas kini model:
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### Ujian A/B
 
-Sebarkan pelbagai versi model:
+Hantar pelbagai versi model:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -293,9 +293,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfigurasi Penskalaan Automatik
+### Konfigurasi Auto-scaling
 
-Konfigurasikan penskalaan automatik untuk Aplikasi Kontena:
+Konfigurasikan auto-scaling untuk Aplikasi Kontena:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -363,7 +363,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Pemantauan dan Kebolehlihatan
+## Pemantauan dan Kebolehperhatian
 
 ### Integrasi Application Insights
 
@@ -405,7 +405,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Metrik Tersuai
 
-Jejak metrik khusus AI:
+Jejaki metrik khusus AI:
 
 ```python
 # Telemetri tersuai untuk model AI
@@ -475,28 +475,28 @@ async def check_ai_models():
 
 1. **Semak [Panduan Integrasi Microsoft Foundry](microsoft-foundry-integration.md)** untuk corak integrasi perkhidmatan
 2. **Selesaikan [Makmal Bengkel AI](ai-workshop-lab.md)** untuk pengalaman praktikal
-3. **Laksanakan [Amalan AI Pengeluaran](production-ai-practices.md)** untuk penyebaran perusahaan
+3. **Laksanakan [Amalan AI Pengeluaran](production-ai-practices.md)** untuk penghantaran perusahaan
 4. **Terokai [Panduan Penyelesaian Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** untuk isu biasa
 
 ## Sumber
 
-- [Ketersediaan Model Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Ketersediaan Model Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Penskalaan Aplikasi Kontena](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Skala Aplikasi Kontena](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Pengoptimuman Kos Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Navigasi Bab:**
-- **📚 Laman Kursus**: [AZD For Beginners](../../README.md)
-- **📖 Bab Semasa**: Bab 2 - Pembangunan Berfokus AI
-- **⬅️ Sebelum**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Seterusnya**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Halaman Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan AI-Pertama
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Seterusnya**: [Makmal Bengkel AI](ai-workshop-lab.md)
 - **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha mencapai ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi ralat atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber rujukan utama. Untuk maklumat yang kritikal, disarankan menggunakan penterjemah profesional manusia. Kami tidak bertanggungjawab terhadap sebarang salah faham atau tafsiran yang salah yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha mencapai ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau penafsiran yang salah yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

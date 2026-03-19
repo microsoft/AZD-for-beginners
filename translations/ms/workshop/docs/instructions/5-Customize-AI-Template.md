@@ -1,30 +1,30 @@
-# 5. Sesuaikan Templet
+# 5. Sesuaikan Templat
 
-!!! tip "PADA AKHIR MODUL INI ANDA AKAN BOLEH"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
 
-    - [ ] Meneroka Kebolehan Ejen AI lalai
-    - [ ] Menambah Pencarian AI dengan indek anda sendiri
+    - [ ] Meneroka Keupayaan Ejen AI lalai
+    - [ ] Menambah Carian AI dengan indeks anda sendiri
     - [ ] Mengaktifkan dan menganalisis metrik Penjejakan
     - [ ] Melaksanakan larian penilaian
-    - [ ] Melaksanakan imbasan red-teaming
+    - [ ] Melaksanakan pengimbasan red-teaming
     - [ ] **Makmal 5: Membina Pelan Penyesuaian**
 
 ---
 
-## 5.1 Kebolehan Ejen AI
+## 5.1 Keupayaan Ejen AI
 
 !!! success "Kami telah menyelesaikan ini dalam Makmal 01"
 
 - **Carian Fail**: Carian fail terbina dalam OpenAI untuk pengambilan pengetahuan
-- **Sitat**: Atribusi sumber automatik dalam jawapan
-- **Arahan Boleh Diubahsuai**: Ubah suai tingkah laku dan personaliti ejen
-- **Integrasi Alat**: Sistem alat boleh luaskan untuk kebolehan tersuai
+- **Sitat**: Perpautan sumber automatik dalam respons
+- **Arahan Boleh Disesuaikan**: Mengubah perilaku dan personaliti ejen
+- **Integrasi Alat**: Sistem alat boleh kembangkan untuk keupayaan tersuai
 
 ---
 
 ## 5.2 Pilihan Pengambilan Pengetahuan
 
-!!! task "Untuk melengkapkan ini kita perlu membuat perubahan dan menyebarkan semula"    
+!!! task "Untuk melengkapkan ini kita perlu membuat perubahan dan melaksanakan semula"    
     
     ```bash title=""
     # Tetapkan pembolehubah persekitaran
@@ -34,7 +34,7 @@
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Muat naik data dan cipta indek saya
+    # Muat naik data dan buat indeks saya
 
     ```
 
@@ -46,18 +46,18 @@
 - Pemprosesan dokumen dan pengindeksan automatik
 - Tiada konfigurasi tambahan diperlukan
 
-**Pencarian AI Azure (Pilihan):**
+**Carian AI Azure (Pilihan):**
 
-- Pencarian semantik dan vektor hibrid
-- Pengurusan indek tersuai
-- Kebolehan carian maju
+- Carian sintaks hibrid dan vektor
+- Pengurusan indeks tersuai
+- Keupayaan carian lanjut
 - Memerlukan `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [Penjejakan & Pemantauan](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Untuk melengkapkan ini kita perlu membuat perubahan dan menyebarkan semula"    
+!!! task "Untuk melengkapkan ini kita perlu membuat perubahan dan melaksanakan semula"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -71,11 +71,11 @@
 - Metrik prestasi
 - Tersedia dalam portal Microsoft Foundry
 
-**Pelogging:**
+**Logging:**
 
 - Log aplikasi dalam Container Apps
-- Peloggan berstruktur dengan ID korelasi
-- Paparan log masa nyata dan sejarah
+- Logging berstruktur dengan ID korelasi
+- Melihat log masa nyata dan sejarah
 
 ---
 
@@ -85,11 +85,11 @@
 
 - Penilai terbina dalam untuk penilaian kualiti
 - Skrip penilaian tersuai
-- Penandaarasan prestasi
+- Penanda aras prestasi
 
 **Pemantauan Berterusan:**
 
-- Penilaian automatik interaksi langsung
+- Penilaian automatik interaksi semasa
 - Penjejakan metrik kualiti
 - Pengesanan regresi prestasi
 
@@ -105,25 +105,25 @@
 
 **Red Teaming AI:**
 
-- Imbasan keselamatan automatik
+- Pengimbasan keselamatan automatik
 - Penilaian risiko untuk sistem AI
-- Penilaian keselamatan merentas pelbagai kategori
+- Penilaian keselamatan di pelbagai kategori
 
 **Pengesahan:**
 
 - Managed Identity untuk perkhidmatan Azure
-- Pilihan pengesahan Azure App Service
-- Kaedah fallback auth asas untuk pembangunan
+- Pengesahan Azure App Service pilihan
+- Kemasukan fallback pengesahan asas untuk pembangunan
 
-!!! quote "PADA AKHIR MAKAMAL INI ANDA PERLU MEMPUNYAI"
-    - [ ] Mentakrifkan keperluan senario anda
-    - [ ] Mengubah suai pembolehubah persekitaran (konfig)
-    - [ ] Mengubah suai arahan ejen (tugasan)
-    - [ ] Menyebarkan templet tersuai (app)
-    - [ ] Menyelesaikan tugasan selepas penyebaran (manual)
+!!! quote "PADA AKHIR MAKMAL INI ANDA SEPATUTNYA TELAH"
+    - [ ] Mendefinisikan keperluan senario anda
+    - [ ] Menyesuaikan pembolehubah persekitaran (konfig)
+    - [ ] Menyesuaikan arahan ejen (tugas)
+    - [ ] Melaksanakan templat yang disesuaikan (app)
+    - [ ] Menyelesaikan tugas pasca-pelaksanaan (manual)
     - [ ] Menjalankan penilaian ujian
 
-Contoh ini menunjukkan kaedah menyesuaikan templet untuk kes penggunaan runcit perusahaan dengan dua ejen khusus dan pelbagai penyebaran model.
+Contoh ini menunjukkan penyesuaian templat untuk kes penggunaan runcit perusahaan dengan dua ejen khusus dan pelbagai pelaksanaan model.
 
 ---
 
@@ -131,22 +131,22 @@ Contoh ini menunjukkan kaedah menyesuaikan templet untuk kes penggunaan runcit p
 
 ### 5.6.1. Keperluan Senario
 
-#### **Penyebaran Ejen:**
+#### **Pelaksanaan Ejen:** 
 
-   - Ejen Pembeli: Membantu pelanggan mencari dan membanding produk
+   - Ejen Pembeli: Membantu pelanggan mencari dan membandingkan produk
    - Ejen Kesetiaan: Mengurus ganjaran dan promosi pelanggan
 
-#### **Penyebaran Model:**
+#### **Pelaksanaan Model:**
 
-   - `gpt-4.1`: Model chat utama
-   - `o3`: Model alasan untuk pertanyaan kompleks
+   - `gpt-4.1`: Model sembang utama
+   - `o3`: Model penaakulan untuk pertanyaan kompleks
    - `gpt-4.1-nano`: Model ringan untuk interaksi mudah
-   - `text-embedding-3-large`: Penjimatan berkualiti tinggi untuk carian
+   - `text-embedding-3-large`: Embeddings berkualiti tinggi untuk carian
 
 #### **Ciri-ciri:**
 
    - Penjejakan dan pemantauan diaktifkan
-   - Pencarian AI untuk katalog produk
+   - Carian AI untuk katalog produk
    - Rangka kerja penilaian untuk jaminan kualiti
    - Red teaming untuk pengesahan keselamatan
 
@@ -155,9 +155,9 @@ Contoh ini menunjukkan kaedah menyesuaikan templet untuk kes penggunaan runcit p
 ### 5.6.2 Pelaksanaan Senario
 
 
-#### 5.6.2.1. Konfigurasi Pra-Penyebaran
+#### 5.6.2.1. Konfigurasi Pra-Pelaksanaan
 
-Cipta skrip persediaan (`setup-retail.sh`)
+Buat skrip penyediaan (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -165,7 +165,7 @@ Cipta skrip persediaan (`setup-retail.sh`)
 # Tetapkan nama persekitaran
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Konfigurasikan rantau (pilih berdasarkan ketersediaan model)
+# Konfigurasikan wilayah (pilih berdasarkan ketersediaan model)
 azd env set AZURE_LOCATION "eastus2"
 
 # Aktifkan semua perkhidmatan pilihan
@@ -173,18 +173,18 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfigurasikan model sembang utama (gpt-4o sebagai yang paling hampir dengan gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Konfigurasikan model chat utama (gpt-4.1 sebagai yang paling hampir dengan gpt-4.1)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfigurasikan model embedding untuk pencarian yang dipertingkatkan
+# Konfigurasikan model embedding untuk carian yang lebih baik
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Tetapkan nama ejen (akan membuat ejen pertama)
+# Tetapkan nama ejen (akan mencipta ejen pertama)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # Konfigurasikan indeks carian
@@ -198,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: Arahan Ejen
 
-Cipta `custom-agents/shopper-agent-instructions.md`:
+Buat `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -221,7 +221,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Cipta `custom-agents/loyalty-agent-instructions.md`:
+Buat `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -246,9 +246,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Skrip Penyebaran
+#### 5.6.2.3: Skrip Pelaksanaan
 
-Cipta `deploy-retail.sh`:
+Buat `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -273,12 +273,12 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Semak kuota di rantau yang dipilih
+# Semak kuota di wilayah yang dipilih
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -289,11 +289,11 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Lancarkan infrastruktur dan aplikasi
+# Laksanakan infrastruktur dan aplikasi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Tangkap output pelancaran
+# Tangkap output pelaksanaan
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
@@ -319,16 +319,16 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfigurasi Pasca Penyebaran
+#### 5.6.2.4: Konfigurasi Pasca-Pelaksanaan
 
-Cipta `configure-retail-agents.sh`:
+Buat `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Dapatkan maklumat penempatan
+# Dapatkan maklumat pengedaran
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -378,14 +378,14 @@ echo "
 
 ### 5.6.3: Ujian dan Pengesahan
 
-Cipta `test-retail-deployment.sh`:
+Buat `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Sahkan pemboleh ubah persekitaran ditetapkan
+# Sahkan pembolehubah persekitaran telah ditetapkan
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
@@ -427,42 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Hasil Yang Dijangka
+### 5.6.4 Hasil Dijangka
 
 Selepas mengikuti panduan pelaksanaan ini, anda akan mempunyai:
 
-1. **Infrastruktur Disebarkan:**
+1. **Infrastruktur Dilaksanakan:**
 
-      - Projek Microsoft Foundry dengan penyebaran model
+      - Projek Microsoft Foundry dengan pelaksanaan model
       - Container Apps yang menghoskan aplikasi web
-      - Perkhidmatan Pencarian AI untuk katalog produk
+      - Perkhidmatan Carian AI untuk katalog produk
       - Application Insights untuk pemantauan
 
-2. **Ejen Awal:**
+2. **Ejen Permulaan:**
 
-      - Ejen Pembeli yang dikonfigurasikan dengan arahan asas
-      - Kebolehan carian fail diaktifkan
+      - Ejen Pembeli dikonfigurasikan dengan arahan asas
+      - Keupayaan carian fail diaktifkan
       - Penjejakan dan pemantauan dikonfigurasikan
 
-3. **Sedia untuk Penyesuaian:**
+3. **Sedia Untuk Penyesuaian:**
 
       - Rangka kerja untuk menambah Ejen Kesetiaan
-      - Templet arahan tersuai
+      - Templat arahan tersuai
       - Skrip ujian dan pengesahan
-      - Persediaan pemantauan dan penilaian
+      - Setup pemantauan dan penilaian
 
-4. **Kesediaan Produksi:**
+4. **Kesediaan Pengeluaran:**
 
-      - Imbasan keselamatan dengan red teaming
+      - Pengimbasan keselamatan dengan red teaming
       - Pemantauan prestasi
       - Rangka kerja penilaian kualiti
-      - Senibina yang boleh diskala
+      - Seni bina boleh diskalakan
 
-Contoh ini menunjukkan bagaimana templet AZD boleh diperluas dan disesuaikan untuk senario perusahaan khusus sambil mengekalkan amalan terbaik untuk keselamatan, pemantauan, dan kebolehskalaan.
+Contoh ini menunjukkan bagaimana templat AZD boleh dilanjutkan dan disesuaikan untuk senario perusahaan tertentu sambil mengekalkan amalan terbaik untuk keselamatan, pemantauan, dan kebolehpindahan.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh penterjemah profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

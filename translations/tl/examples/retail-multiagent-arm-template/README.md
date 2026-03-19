@@ -1,143 +1,143 @@
-# Retail Multi-Agent Solution - Template ng Imprastraktura
+# Retail Multi-Agent Solution - Infrastructure Template
 
-**Kabanata 5: Production Deployment Package**
-- **📚 Bahay ng Kurso**: [AZD Para sa Mga Baguhan](../../README.md)
-- **📖 Kaugnay na Kabanata**: [Kabanata 5: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Gabay sa Senaryo**: [Kumpletong Arkitektura](../retail-scenario.md)
-- **🎯 Mabilis na Pag-deploy**: [Isang-Click na Deployment](../../../../examples/retail-multiagent-arm-template)
+**Chapter 5: Production Deployment Package**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Related Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Scenario Guide**: [Complete Architecture](../retail-scenario.md)
+- **🎯 Quick Deploy**: [One-Click Deployment](#-quick-deployment)
 
-> **⚠️ TEMPLATE NG IMPRASTRAKTURA LAMANG**  
-> Ang ARM template na ito ay nagde-deploy ng **mga Azure resources** para sa isang multi-agent system.  
+> **⚠️ INFRASTRUCTURE TEMPLATE ONLY**  
+> Ang ARM template na ito ay nagde-deploy ng **Azure resources** para sa isang multi-agent system.  
 >  
 > **Ano ang nade-deploy (15-25 minuto):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings sa 3 rehiyon)
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings sa 3 rehiyon)
 > - ✅ AI Search service (walang laman, handa para sa paglikha ng index)
 > - ✅ Container Apps (placeholder images, handa para sa iyong code)
 > - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
-> **Ano ang HINDI kasama (kailangan ng development):**
-> - ❌ Code ng implementasyon ng agent (Customer Agent, Inventory Agent)
+> **Ano ang HINDI kasama (kailangang i-develop):**
+> - ❌ Agent implementation code (Customer Agent, Inventory Agent)
 > - ❌ Routing logic at API endpoints
 > - ❌ Frontend chat UI
-> - ❌ Mga schema ng search index at data pipelines
-> - ❌ **Tinatayang oras ng development: 80-120 oras**
+> - ❌ Search index schemas at data pipelines
+> - ❌ **Tinatayang effort sa pag-develop: 80-120 oras**
 >  
 > **Gamitin ang template na ito kung:**
-> - ✅ Gusto mong mag-provision ng Azure infrastructure para sa isang multi-agent na proyekto
-> - ✅ Plano mong i-develop ang implementasyon ng agent nang hiwalay
-> - ✅ Kailangan mo ng production-ready na imprastraktura bilang baseline
+> - ✅ Nais mong mag-provision ng Azure infrastructure para sa isang multi-agent na proyekto
+> - ✅ Plano mong i-develop ang agent implementation nang hiwalay
+> - ✅ Kailangan mo ng production-ready infrastructure baseline
 >  
 > **Huwag gamitin kung:**
-> - ❌ Inaasahan mo ang isang gumaganang multi-agent demo kaagad
-> - ❌ Naghahanap ka ng kumpletong halimbawa ng application code
+> - ❌ Inaasahan mong magkakaroon ng gumaganang multi-agent demo agad
+> - ❌ Naghahanap ka ng kumpletong application code examples
 
-## Pangkalahatang-ideya
+## Overview
 
-Ang direktoryong ito ay naglalaman ng isang komprehensibong Azure Resource Manager (ARM) template para sa pag-deploy ng **pundasyon ng imprastraktura** ng isang multi-agent customer support system. Ang template ay nagpo-provision ng lahat ng kinakailangang Azure services, maayos na naka-configure at magkakaugnay, handa na para sa iyong application development.
+Nasa direktoryong ito ang isang komprehensibong Azure Resource Manager (ARM) template para i-deploy ang **infrastructure foundation** ng isang multi-agent customer support system. Ina-provision ng template ang lahat ng kinakailangang Azure services, tama ang pagkaka-configure at pagkakakonekta, handa para sa iyong application development.
 
-**Pagkatapos ng deployment, magkakaroon ka ng:** Production-ready na Azure infrastructure  
-**Upang makumpleto ang sistema, kailangan mo ng:** Agent code, frontend UI, at data configuration (tingnan ang [Architecture Guide](../retail-scenario.md))
+**Pagkatapos ng deployment, magkakaroon ka ng:** Production-ready Azure infrastructure  
+**Para kumpleto ang sistema, kailangan mo ng:** Agent code, frontend UI, at data configuration (tingnan ang [Architecture Guide](../retail-scenario.md))
 
-## 🎯 Ano ang Nade-deploy
+## 🎯 What Gets Deployed
 
-### Pangunahing Imprastraktura (Kalagayan Pagkatapos ng Deployment)
+### Core Infrastructure (Status After Deployment)
 
-✅ **Azure OpenAI Services** (Handa para sa API calls)
-  - Pangunahing rehiyon: GPT-4o deployment (20K TPM capacity)
-  - Pangalawang rehiyon: GPT-4o-mini deployment (10K TPM capacity)
-  - Pangatlong rehiyon: Text embeddings model (30K TPM capacity)
-  - Rehiyon para sa pagsusuri: GPT-4o grader model (15K TPM capacity)
-  - **Kalagayan:** Ganap na gumagana - maaaring mag-API calls kaagad
+✅ **Microsoft Foundry Models Services** (Handa para sa API calls)
+  - Primary region: gpt-4.1 deployment (20K TPM capacity)
+  - Secondary region: gpt-4.1-mini deployment (10K TPM capacity)
+  - Tertiary region: Text embeddings model (30K TPM capacity)
+  - Evaluation region: gpt-4.1 grader model (15K TPM capacity)
+  - **Status:** Ganap na gumagana - maaaring gumawa ng API calls kaagad
 
 ✅ **Azure AI Search** (Walang laman - handa para sa configuration)
-  - May kakayahang mag-vector search
+  - Nakabukas ang vector search capabilities
   - Standard tier na may 1 partition, 1 replica
-  - **Kalagayan:** Tumatakbo ang serbisyo, ngunit kailangan ng paglikha ng index
-  - **Kailangang gawin:** Lumikha ng search index gamit ang iyong schema
+  - **Status:** Serbisyo ay tumatakbo, ngunit kailangan ng paglikha ng index
+  - **Kailangang aksyon:** Lumikha ng search index gamit ang iyong schema
 
 ✅ **Azure Storage Account** (Walang laman - handa para sa uploads)
   - Blob containers: `documents`, `uploads`
-  - Secure na configuration (HTTPS-only, walang public access)
-  - **Kalagayan:** Handa nang tumanggap ng mga file
-  - **Kailangang gawin:** I-upload ang iyong product data at mga dokumento
+  - Secure configuration (HTTPS-only, walang public access)
+  - **Status:** Handa nang tumanggap ng mga file
+  - **Kailangang aksyon:** I-upload ang iyong product data at mga dokumento
 
-⚠️ **Container Apps Environment** (Placeholder images ang nadeploy)
+⚠️ **Container Apps Environment** (Placeholder images na-deploy)
   - Agent router app (nginx default image)
   - Frontend app (nginx default image)
-  - Auto-scaling na naka-configure (0-10 instances)
-  - **Kalagayan:** Tumatakbo ang placeholder containers
-  - **Kailangang gawin:** I-build at i-deploy ang iyong mga agent applications
+  - Auto-scaling na-configure (0-10 instances)
+  - **Status:** Nagtatakbo ang placeholder containers
+  - **Kailangang aksyon:** I-build at i-deploy ang iyong agent applications
 
 ✅ **Azure Cosmos DB** (Walang laman - handa para sa data)
-  - Database at container na pre-configured
-  - Na-optimize para sa low-latency operations
-  - TTL na naka-enable para sa awtomatikong paglilinis
-  - **Kalagayan:** Handa nang mag-imbak ng chat history
+  - Database at container na naka-pre-configure
+  - Optimized para sa low-latency operations
+  - TTL enabled para sa automatic cleanup
+  - **Status:** Handa nang mag-imbak ng chat history
 
-✅ **Azure Key Vault** (Opsyonal - handa para sa mga secrets)
-  - Soft delete na naka-enable
-  - RBAC na naka-configure para sa managed identities
-  - **Kalagayan:** Handa nang mag-imbak ng API keys at connection strings
+✅ **Azure Key Vault** (Opsyonal - handa para sa secrets)
+  - Soft delete enabled
+  - RBAC na-configure para sa managed identities
+  - **Status:** Handa nang mag-imbak ng API keys at connection strings
 
-✅ **Application Insights** (Opsyonal - aktibo ang monitoring)
+✅ **Application Insights** (Opsyonal - monitoring active)
   - Nakakonekta sa Log Analytics workspace
-  - Custom metrics at alerts na naka-configure
-  - **Kalagayan:** Handa nang tumanggap ng telemetry mula sa iyong apps
+  - Custom metrics at alerts na-configure
+  - **Status:** Handa nang tumanggap ng telemetry mula sa iyong mga app
 
 ✅ **Document Intelligence** (Handa para sa API calls)
   - S0 tier para sa production workloads
-  - **Kalagayan:** Handa nang magproseso ng mga na-upload na dokumento
+  - **Status:** Handa nang i-proseso ang mga ina-upload na dokumento
 
 ✅ **Bing Search API** (Handa para sa API calls)
   - S1 tier para sa real-time searches
-  - **Kalagayan:** Handa para sa web search queries
+  - **Status:** Handa para sa web search queries
 
-### Mga Mode ng Deployment
+### Deployment Modes
 
-| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Pinakamainam Para sa |
-|------|-----------------|---------------------|-------------|-------------------|-----------------------|
+| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
+|------|-----------------|---------------------|-------------|-------------------|----------|
 | **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, learning, proof-of-concept |
 | **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
 | **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
 
-**Epekto sa Gastos:**
-- **Minimal → Standard:** ~4x na pagtaas sa gastos ($100-370/buwan → $420-1,450/buwan)
-- **Standard → Premium:** ~3x na pagtaas sa gastos ($420-1,450/buwan → $1,150-3,500/buwan)
-- **Pumili batay sa:** Inaasahang load, SLA requirements, mga limitasyon sa badyet
+**Cost Impact:**
+- **Minimal → Standard:** ~4x pagtaas ng gastos ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium:** ~3x pagtaas ng gastos ($420-1,450/mo → $1,150-3,500/mo)
+- **Pumili base sa:** Inaasahang load, SLA requirements, limitasyon ng budget
 
-**Pagpaplano ng Kapasidad:**
+**Capacity Planning:**
 - **TPM (Tokens Per Minute):** Kabuuan sa lahat ng model deployments
 - **Container Instances:** Saklaw ng auto-scaling (min-max replicas)
-- **Search Tier:** Nakakaapekto sa query performance at mga limitasyon sa laki ng index
+- **Search Tier:** Nakakaapekto sa query performance at limitasyon ng index size
 
-## 📋 Mga Kinakailangan
+## 📋 Prerequisites
 
-### Mga Kinakailangang Tool
-1. **Azure CLI** (bersyon 2.50.0 o mas mataas)
+### Required Tools
+1. **Azure CLI** (version 2.50.0 o mas mataas)
    ```bash
    az --version  # Suriin ang bersyon
-   az login      # Magpatotoo
+   az login      # Patunayan ang pagkakakilanlan
    ```
 
-2. **Aktibong Azure subscription** na may Owner o Contributor access
+2. **Active Azure subscription** na may Owner o Contributor access
    ```bash
-   az account show  # Tiyakin ang subscription
+   az account show  # Kumpirmahin ang subscription
    ```
 
-### Mga Kinakailangang Azure Quotas
+### Required Azure Quotas
 
-Bago ang deployment, tiyaking sapat ang mga quota sa iyong target na rehiyon:
+Bago mag-deploy, tiyaking sapat ang quotas sa iyong target na mga rehiyon:
 
 ```bash
-# Suriin ang availability ng Azure OpenAI sa iyong rehiyon
+# Suriin kung available ang Microsoft Foundry Models sa iyong rehiyon
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# I-verify ang OpenAI quota (halimbawa para sa gpt-4o)
+# Suriin ang quota ng OpenAI (halimbawa para sa gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
 # Suriin ang quota ng Container Apps
 az provider show \
@@ -145,14 +145,14 @@ az provider show \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**Minimum na Kinakailangang Quotas:**
-- **Azure OpenAI:** 3-4 na model deployments sa mga rehiyon
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+**Minimum Required Quotas:**
+- **Microsoft Foundry Models:** 3-4 model deployments across regions
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Tandaan:** Ang GPT-4o ay maaaring nasa waitlist sa ilang rehiyon - tingnan ang [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+  - **Tandaan:** Maaaring may waitlist ang gpt-4.1 sa ilang rehiyon - tingnan ang [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - **Container Apps:** Managed environment + 2-10 container instances
-- **AI Search:** Standard tier (hindi sapat ang Basic para sa vector search)
+- **AI Search:** Standard tier (Basic insufficient for vector search)
 - **Cosmos DB:** Standard provisioned throughput
 
 **Kung kulang ang quota:**
@@ -162,37 +162,37 @@ az provider show \
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
 3. Isaalang-alang ang mga alternatibong rehiyon na may availability
 
-## 🚀 Mabilis na Pag-deploy
+## 🚀 Quick Deployment
 
-### Opsyon 1: Gamit ang Azure CLI
+### Option 1: Using Azure CLI
 
 ```bash
-# Kopyahin o i-download ang mga template na file
+# I-clone o i-download ang mga file ng template
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
 # Gawing executable ang deployment script
 chmod +x deploy.sh
 
-# I-deploy gamit ang default na mga setting
+# I-deploy gamit ang mga default na setting
 ./deploy.sh -g myResourceGroup
 
-# I-deploy para sa produksyon gamit ang mga premium na tampok
+# I-deploy para sa produksyon na may mga premium na tampok
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Opsyon 2: Gamit ang Azure Portal
+### Option 2: Using Azure Portal
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![I-deploy sa Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Opsyon 3: Gamit ang Azure CLI nang direkta
+### Option 3: Using Azure CLI directly
 
 ```bash
-# Lumikha ng pangkat ng mapagkukunan
+# Lumikha ng grupo ng mga resource
 az group create --name myResourceGroup --location eastus2
 
 # I-deploy ang template
@@ -202,46 +202,46 @@ az deployment group create \
   --parameters azuredeploy.parameters.json
 ```
 
-## ⏱️ Timeline ng Deployment
+## ⏱️ Deployment Timeline
 
-### Ano ang Aasahan
+### What to Expect
 
-| Yugto | Tagal | Ano ang Nangyayari |
-|-------|-------|--------------------||
-| **Template Validation** | 30-60 segundo | Tine-validate ng Azure ang syntax at mga parameter ng ARM template |
-| **Resource Group Setup** | 10-20 segundo | Lumilikha ng resource group (kung kinakailangan) |
-| **OpenAI Provisioning** | 5-8 minuto | Lumilikha ng 3-4 OpenAI accounts at nagde-deploy ng mga modelo |
-| **Container Apps** | 3-5 minuto | Lumilikha ng environment at nagde-deploy ng placeholder containers |
-| **Search & Storage** | 2-4 minuto | Nagpo-provision ng AI Search service at mga storage account |
-| **Cosmos DB** | 2-3 minuto | Lumilikha ng database at nagko-configure ng mga container |
-| **Monitoring Setup** | 2-3 minuto | Nagsesetup ng Application Insights at Log Analytics |
-| **RBAC Configuration** | 1-2 minuto | Nagko-configure ng managed identities at mga pahintulot |
-| **Kabuuang Deployment** | **15-25 minuto** | Kumpletong imprastraktura na handa na |
+| Phase | Duration | What Happens |
+|-------|----------|--------------||
+| **Template Validation** | 30-60 seconds | Azure validates ARM template syntax and parameters |
+| **Resource Group Setup** | 10-20 seconds | Gumagawa ng resource group (kung kailangan) |
+| **OpenAI Provisioning** | 5-8 minutes | Lumilikha ng 3-4 OpenAI accounts at nagde-deploy ng mga modelo |
+| **Container Apps** | 3-5 minutes | Lumilikha ng environment at nagde-deploy ng placeholder containers |
+| **Search & Storage** | 2-4 minutes | Ina-provision ang AI Search service at storage accounts |
+| **Cosmos DB** | 2-3 minutes | Lumilikha ng database at nagko-configure ng mga container |
+| **Monitoring Setup** | 2-3 minutes | Nagse-set up ng Application Insights at Log Analytics |
+| **RBAC Configuration** | 1-2 minutes | Nagko-configure ng managed identities at permissions |
+| **Total Deployment** | **15-25 minutes** | Kumpletong infrastructure na handa |
 
 **Pagkatapos ng Deployment:**
-- ✅ **Handa na ang Imprastraktura:** Lahat ng Azure services ay na-provision at tumatakbo
+- ✅ **Infrastructure Ready:** Lahat ng Azure services ay na-provision at tumatakbo
 - ⏱️ **Application Development:** 80-120 oras (iyong responsibilidad)
-- ⏱️ **Index Configuration:** 15-30 minuto (kailangan ng iyong schema)
-- ⏱️ **Data Upload:** Depende sa laki ng dataset
+- ⏱️ **Index Configuration:** 15-30 minuto (kailangan ang iyong schema)
+- ⏱️ **Data Upload:** Nag-iiba depende sa laki ng dataset
 - ⏱️ **Testing & Validation:** 2-4 oras
 
 ---
 
-## ✅ I-verify ang Tagumpay ng Deployment
+## ✅ Verify Deployment Success
 
-### Hakbang 1: Suriin ang Resource Provisioning (2 minuto)
+### Step 1: Check Resource Provisioning (2 minutes)
 
 ```bash
-# Tiyakin na lahat ng mga resources ay matagumpay na na-deploy
+# Suriin kung matagumpay na na-deploy ang lahat ng mga resource
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-**Inaasahan:** Walang laman na talahanayan (lahat ng resources ay nagpapakita ng "Succeeded" status)
+**Inaasahan:** Walang laman na table (lahat ng resources ay nagpapakita ng "Succeeded" status)
 
-### Hakbang 2: I-verify ang Azure OpenAI Deployments (3 minuto)
+### Step 2: Verify Microsoft Foundry Models Deployments (3 minutes)
 
 ```bash
 # Ilista ang lahat ng mga account ng OpenAI
@@ -262,10 +262,10 @@ az cognitiveservices account deployment list \
 ```
 
 **Inaasahan:** 
-- 3-4 OpenAI accounts (pangunahing, pangalawa, pangatlong rehiyon, rehiyon para sa pagsusuri)
-- 1-2 model deployments bawat account (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 3-4 OpenAI accounts (primary, secondary, tertiary, evaluation regions)
+- 1-2 model deployments per account (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### Hakbang 3: Subukan ang Infrastructure Endpoints (5 minuto)
+### Step 3: Test Infrastructure Endpoints (5 minutes)
 
 ```bash
 # Kunin ang mga URL ng Container App
@@ -274,7 +274,7 @@ az containerapp list \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# Subukan ang endpoint ng router (magre-respond ang placeholder na imahe)
+# Subukan ang endpoint ng router (tutugon ang placeholder na imahe)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -285,13 +285,13 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 ```
 
 **Inaasahan:** 
-- Ang Container Apps ay nagpapakita ng "Running" status
-- Ang placeholder nginx ay tumutugon gamit ang HTTP 200 o 404 (walang application code pa)
+- Ipinapakita ng Container Apps ang "Running" status
+- Ang placeholder nginx ay tumutugon ng HTTP 200 o 404 (walang application code pa)
 
-### Hakbang 4: I-verify ang Azure OpenAI API Access (3 minuto)
+### Step 4: Verify Microsoft Foundry Models API Access (3 minutes)
 
 ```bash
-# Kunin ang endpoint at key ng OpenAI
+# Kunin ang OpenAI endpoint at susi
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Subukan ang deployment ng GPT-4o
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Subukan ang pag-deploy ng gpt-4.1
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -314,45 +314,45 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 
 **Inaasahan:** JSON response na may chat completion (nagkukumpirma na gumagana ang OpenAI)
 
-### Ano ang Gumagana vs. Hindi Gumagana
+### Ano ang Gumagana vs. Ano ang Hindi
 
 **✅ Gumagana Pagkatapos ng Deployment:**
-- Na-deploy ang mga Azure OpenAI models at tumatanggap ng API calls
-- Tumatakbo ang AI Search service (walang laman, walang indexes pa)
-- Tumatakbo ang Container Apps (placeholder nginx images)
-- Accessible ang mga storage account at handa para sa uploads
-- Handa ang Cosmos DB para sa data operations
-- Nagtitipon ng telemetry ang Application Insights mula sa imprastraktura
-- Handa ang Key Vault para sa pag-iimbak ng mga secrets
+- Microsoft Foundry Models na-deploy at tumatanggap ng API calls
+- AI Search service tumatakbo (walang laman, walang indexes)
+- Container Apps tumatakbo (placeholder nginx images)
+- Storage accounts naa-access at handa para sa uploads
+- Cosmos DB handa para sa data operations
+- Application Insights nagko-collect ng infrastructure telemetry
+- Key Vault handa para sa secret storage
 
-**❌ Hindi Pa Gumagana (Kailangan ng Development):**
-- Mga endpoint ng agent (walang application code na na-deploy)
-- Chat functionality (kailangan ng frontend + backend implementation)
-- Mga search query (walang search index na nalikha pa)
+**❌ Hindi Pa Gumagana (Kailangang I-develop):**
+- Agent endpoints (walang application code na na-deploy)
+- Chat functionality (kailangan ang frontend + backend implementation)
+- Search queries (walang search index na ginawa pa)
 - Document processing pipeline (walang data na na-upload)
-- Custom telemetry (kailangan ng application instrumentation)
+- Custom telemetry (kailangan ang application instrumentation)
 
-**Mga Susunod na Hakbang:** Tingnan ang [Post-Deployment Configuration](../../../../examples/retail-multiagent-arm-template) upang i-develop at i-deploy ang iyong application
+**Susunod na Hakbang:** Tingnan ang [Post-Deployment Configuration](#-post-deployment-next-steps) para i-develop at i-deploy ang iyong application
 
 ---
 
-## ⚙️ Mga Opsyon sa Configuration
+## ⚙️ Configuration Options
 
-### Mga Parameter ng Template
+### Template Parameters
 
-| Parameter | Uri | Default | Paglalarawan |
-|-----------|-----|---------|--------------|
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
 | `projectName` | string | "retail" | Prefix para sa lahat ng resource names |
-| `location` | string | Lokasyon ng resource group | Pangunahing rehiyon ng deployment |
-| `secondaryLocation` | string | "westus2" | Pangalawang rehiyon para sa multi-region deployment |
-| `tertiaryLocation` | string | "francecentral" | Rehiyon para sa embeddings model |
-| `environmentName` | string | "dev" | Designasyon ng environment (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | Configuration ng deployment (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Paganahin ang multi-region deployment |
-| `enableMonitoring` | bool | true | Paganahin ang Application Insights at logging |
-| `enableSecurity` | bool | true | Paganahin ang Key Vault at enhanced security |
+| `location` | string | Resource group location | Primary deployment region |
+| `secondaryLocation` | string | "westus2" | Secondary region para sa multi-region deployment |
+| `tertiaryLocation` | string | "francecentral" | Region para sa embeddings model |
+| `environmentName` | string | "dev" | Pagpapangalan ng environment (dev/staging/prod) |
+| `deploymentMode` | string | "standard" | Deployment configuration (minimal/standard/premium) |
+| `enableMultiRegion` | bool | true | I-enable ang multi-region deployment |
+| `enableMonitoring` | bool | true | I-enable ang Application Insights at logging |
+| `enableSecurity` | bool | true | I-enable ang Key Vault at enhanced security |
 
-### Pag-customize ng Mga Parameter
+### Customizing Parameters
 
 I-edit ang `azuredeploy.parameters.json`:
 
@@ -377,30 +377,21 @@ I-edit ang `azuredeploy.parameters.json`:
 }
 ```
 
-## 🏗️ Pangkalahatang-ideya ng Arkitektura
+## 🏗️ Architecture Overview
 
+```mermaid
+graph TD
+    Frontend[Frontend<br/>Aplikasyon ng Container] --> Router[Router ng Ahente<br/>Aplikasyon ng Container] --> Agents[Mga Ahente<br/>Kliyente + Imbentaryo]
+    Router --> Search[Paghahanap ng AI<br/>Vector DB]
+    Router --> Models[Mga Modelo ng Microsoft Foundry<br/>Maramihang Rehiyon]
+    Agents --> Storage[Imbakan<br/>Mga Dokumento]
+    Search --> CosmosDB[Cosmos DB<br/>Kasaysayan ng Chat]
+    Models --> AppInsights[App Insights<br/>Pagsubaybay]
+    Storage --> KeyVault[Key Vault<br/>Mga Lihim]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+## 📖 Deployment Script Usage
 
-## 📖 Paggamit ng Deployment Script
-
-Ang `deploy.sh` script ay nagbibigay ng interactive na karanasan sa deployment:
+Ang `deploy.sh` script ay nagbibigay ng interactive deployment experience:
 
 ```bash
 # Ipakita ang tulong
@@ -409,7 +400,7 @@ Ang `deploy.sh` script ay nagbibigay ng interactive na karanasan sa deployment:
 # Pangunahing pag-deploy
 ./deploy.sh -g myResourceGroup
 
-# Advanced na pag-deploy gamit ang pasadyang mga setting
+# Mas advanced na pag-deploy na may pasadyang mga setting
 ./deploy.sh \
   -g myProductionRG \
   -p companyname \
@@ -417,7 +408,7 @@ Ang `deploy.sh` script ay nagbibigay ng interactive na karanasan sa deployment:
   -m premium \
   -l eastus2
 
-# Pag-deploy para sa pag-develop nang walang multi-region
+# Pag-deploy para sa development na walang maramihang rehiyon
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -426,18 +417,18 @@ Ang `deploy.sh` script ay nagbibigay ng interactive na karanasan sa deployment:
   --no-security
 ```
 
-### Mga Tampok ng Script
+### Script Features
 
-- ✅ **Pag-validate ng mga kinakailangan** (Azure CLI, login status, template files)
-- ✅ **Pamamahala ng resource group** (lumilikha kung wala pa)
-- ✅ **Pag-validate ng template** bago ang deployment
-- ✅ **Pagsubaybay sa progreso** na may colored output
-- ✅ **Pagpapakita ng deployment outputs**
-- ✅ **Gabay pagkatapos ng deployment**
+- ✅ **Prerequisites validation** (Azure CLI, login status, template files)
+- ✅ **Resource group management** (gumagawa kung wala pa)
+- ✅ **Template validation** bago ang deployment
+- ✅ **Progress monitoring** na may colored output
+- ✅ **Deployment outputs** na ipinapakita
+- ✅ **Post-deployment guidance**
 
-## 📊 Pagsubaybay sa Deployment
+## 📊 Monitoring Deployment
 
-### Suriin ang Status ng Deployment
+### Check Deployment Status
 
 ```bash
 # Ilista ang mga deployment
@@ -448,7 +439,7 @@ az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Panoorin ang progreso ng deployment
+# Subaybayan ang progreso ng deployment
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -456,46 +447,46 @@ az deployment group create \
   --verbose
 ```
 
-### Mga Output ng Deployment
+### Deployment Outputs
 
 Pagkatapos ng matagumpay na deployment, ang mga sumusunod na outputs ay magagamit:
 
-- **Frontend URL**: Pampublikong endpoint para sa web interface
+- **Frontend URL**: Public endpoint para sa web interface
 - **Router URL**: API endpoint para sa agent router
-- **OpenAI Endpoints**: Pangunahing at pangalawang OpenAI service endpoints
-- **Search Service**: Endpoint ng Azure AI Search service
+- **OpenAI Endpoints**: Primary at secondary OpenAI service endpoints
+- **Search Service**: Azure AI Search service endpoint
 - **Storage Account**: Pangalan ng storage account para sa mga dokumento
-- **Key Vault**: Pangalan ng Key Vault (kung naka-enable)
-- **Application Insights**: Pangalan ng monitoring service (kung naka-enable)
+- **Key Vault**: Pangalan ng Key Vault (kung enabled)
+- **Application Insights**: Pangalan ng monitoring service (kung enabled)
 
-## 🔧 Pagkatapos ng Deployment: Mga Susunod na Hakbang
-> **📝 Mahalagang Paalala:** Na-deploy na ang imprastraktura, ngunit kailangan mong bumuo at mag-deploy ng application code.
+## 🔧 Post-Deployment: Next Steps
+> **📝 Mahalaga:** Na-deploy na ang imprastruktura, ngunit kailangan mong i-develop at i-deploy ang application code.
 
-### Phase 1: Bumuo ng Agent Applications (Iyong Responsibilidad)
+### Yugto 1: Bumuo ng Mga Application ng Ahente (Iyong Responsibilidad)
 
-Ang ARM template ay lumilikha ng **walang laman na Container Apps** na may placeholder na mga nginx image. Kailangan mong:
+Ang ARM template ay lumilikha ng **mga walang laman na Container Apps** na may pansamantalang mga imahe ng nginx. Kailangan mong:
 
-**Kinakailangang Pagbuo:**
-1. **Pagpapatupad ng Agent** (30-40 oras)
-   - Customer service agent na may GPT-4o integration
-   - Inventory agent na may GPT-4o-mini integration
-   - Agent routing logic
+**Kinakailangang Pag-develop:**
+1. **Implementasyon ng Ahente** (30-40 oras)
+   - Ahente para sa customer service na may integrasyon ng gpt-4.1
+   - Ahente ng imbentaryo na may integrasyon ng gpt-4.1-mini
+   - Lohika ng pag-ruta ng ahente
 
-2. **Frontend Development** (20-30 oras)
+2. **Pag-develop ng Frontend** (20-30 oras)
    - UI ng chat interface (React/Vue/Angular)
-   - Functionality para sa pag-upload ng file
+   - Pag-andar ng pag-upload ng file
    - Pag-render at pag-format ng mga sagot
 
-3. **Backend Services** (12-16 oras)
+3. **Mga Backend na Serbisyo** (12-16 oras)
    - FastAPI o Express router
-   - Authentication middleware
-   - Telemetry integration
+   - middleware para sa autentikasyon
+   - Integrasyon ng telemetry
 
-**Tingnan:** [Architecture Guide](../retail-scenario.md) para sa detalyadong mga pattern ng implementasyon at mga halimbawa ng code
+**Tingnan:** [Gabay sa Arkitektura](../retail-scenario.md) para sa detalyadong mga pattern ng implementasyon at mga halimbawa ng code
 
-### Phase 2: I-configure ang AI Search Index (15-30 minuto)
+### Yugto 2: I-configure ang AI Search Index (15-30 minuto)
 
-Gumawa ng search index na tumutugma sa iyong data model:
+Lumikha ng search index na tumutugma sa iyong data model:
 
 ```bash
 # Kunin ang mga detalye ng serbisyo sa paghahanap
@@ -530,12 +521,12 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 ```
 
 **Mga Mapagkukunan:**
-- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+- [Disenyo ng Schema ng AI Search Index](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Konfigurasyon ng Vector Search](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Phase 3: I-upload ang Iyong Data (Nag-iiba ang Oras)
+### Yugto 3: I-upload ang Iyong Data (Nag-iiba ang oras)
 
-Kapag mayroon ka nang product data at mga dokumento:
+Kapag mayroon ka nang data ng produkto at mga dokumento:
 
 ```bash
 # Kunin ang mga detalye ng storage account
@@ -564,23 +555,23 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### Phase 4: Bumuo at I-deploy ang Iyong Mga Application (8-12 oras)
+### Yugto 4: Bumuo at I-deploy ang Iyong Mga Application (8-12 oras)
 
-Kapag natapos mo na ang pagbuo ng iyong agent code:
+Kapag na-develop mo na ang iyong code ng ahente:
 
 ```bash
-# 1. Gumawa ng Azure Container Registry (kung kinakailangan)
+# 1. Gumawa ng Azure Container Registry (kung kailangan)
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. I-build at i-push ang agent router image
+# 2. I-build at i-push ang imahe ng agent router
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. I-build at i-push ang frontend image
+# 3. I-build at i-push ang imahe ng frontend
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
@@ -606,7 +597,7 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### Phase 5: Subukan ang Iyong Application (2-4 oras)
+### Yugto 5: Subukan ang Iyong Application (2-4 oras)
 
 ```bash
 # Kunin ang URL ng iyong aplikasyon
@@ -615,7 +606,7 @@ ROUTER_URL=$(az containerapp show \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Subukan ang endpoint ng ahente (kapag na-deploy na ang iyong code)
+# Subukan ang endpoint ng agent (kapag na-deploy na ang iyong code)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -633,56 +624,56 @@ az containerapp logs show \
 ### Mga Mapagkukunan para sa Implementasyon
 
 **Arkitektura at Disenyo:**
-- 📖 [Kumpletong Architecture Guide](../retail-scenario.md) - Detalyadong mga pattern ng implementasyon
-- 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+- 📖 [Kumpletong Gabay sa Arkitektura](../retail-scenario.md) - Detalyadong mga pattern ng implementasyon
+- 📖 [Mga Pattern ng Disenyo para sa Multi-Agent](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Mga Halimbawa ng Code:**
-- 🔗 [Azure OpenAI Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG pattern
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agent framework (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agent orchestration (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent conversations
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - pattern na RAG
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Framework ng ahente (C#)
+- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Orkestrasyon ng ahente (Python)
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Mga multi-agent na pag-uusap
 
-**Tinatayang Kabuuang Pagsisikap:**
-- Deployment ng imprastraktura: 15-25 minuto (✅ Tapos na)
-- Pagbuo ng application: 80-120 oras (🔨 Iyong trabaho)
-- Pagsubok at pag-optimize: 15-25 oras (🔨 Iyong trabaho)
+**Tantiyang Kabuuang Pagsisikap:**
+- Pag-deploy ng imprastruktura: 15-25 minuto (✅ Kumpleto)
+- Pag-develop ng application: 80-120 oras (🔨 Iyong gawain)
+- Pagsusuri at optimisasyon: 15-25 oras (🔨 Iyong gawain)
 
 ## 🛠️ Pag-troubleshoot
 
-### Karaniwang Mga Isyu
+### Mga Karaniwang Isyu
 
-#### 1. Lumampas sa Azure OpenAI Quota
+#### 1. Lumabis ang Quota ng Microsoft Foundry Models
 
 ```bash
-# Suriin ang kasalukuyang paggamit ng quota
+# Suriin ang kasalukuyang paggamit ng kuota
 az cognitiveservices usage list --location eastus2
 
-# Humiling ng pagtaas ng quota
+# Humiling ng pagtaas ng kuota
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
 #### 2. Nabigo ang Deployment ng Container Apps
 
 ```bash
-# Suriin ang mga log ng container app
+# Suriin ang mga log ng app ng container
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# I-restart ang container app
+# Muling simulan ang app ng container
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### 3. Pag-initialize ng Search Service
+#### 3. Inisyalisasyon ng Search Service
 
 ```bash
-# Tiyakin ang status ng serbisyo ng paghahanap
+# Suriin ang katayuan ng serbisyo ng paghahanap
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
@@ -695,12 +686,12 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
 ### Pag-validate ng Deployment
 
 ```bash
-# Tiyakin na lahat ng mga mapagkukunan ay nalikha
+# Tiyakin na nalikha ang lahat ng resources
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Suriin ang kalusugan ng mapagkukunan
+# Suriin ang kalusugan ng resource
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -709,19 +700,19 @@ az resource list \
 
 ## 🔐 Mga Pagsasaalang-alang sa Seguridad
 
-### Pamamahala ng Key
-- Lahat ng mga secret ay nakaimbak sa Azure Key Vault (kapag naka-enable)
-- Ang mga container app ay gumagamit ng managed identity para sa authentication
-- Ang mga storage account ay may secure defaults (HTTPS lamang, walang public blob access)
+### Pamamahala ng Mga Susi
+- Lahat ng mga lihim ay naka-imbak sa Azure Key Vault (kapag pinagana)
+- Gumagamit ang mga container app ng managed identity para sa autentikasyon
+- May secure defaults ang mga storage account (HTTPS lamang, walang public blob access)
 
 ### Seguridad ng Network
-- Ang mga container app ay gumagamit ng internal networking kung maaari
-- Ang search service ay naka-configure gamit ang private endpoints option
-- Ang Cosmos DB ay naka-configure na may minimal na kinakailangang mga pahintulot
+- Gumagamit ang container apps ng internal networking kapag posible
+- Ang search service ay naka-configure na may opsyon na private endpoints
+- Ang Cosmos DB ay naka-configure na may pinakamababang kinakailangang permiso
 
-### RBAC Configuration
+### Konfigurasyon ng RBAC
 ```bash
-# Magtalaga ng mga kinakailangang tungkulin para sa pinamamahalaang pagkakakilanlan
+# Magtalaga ng mga kinakailangang role para sa managed identity
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
@@ -730,18 +721,18 @@ az role assignment create \
 
 ## 💰 Pag-optimize ng Gastos
 
-### Tinatayang Gastos (Buwanang, USD)
+### Tantiyang Gastos (Buwanang, USD)
 
-| Mode | OpenAI | Container Apps | Search | Storage | Kabuuang Tantiya |
-|------|--------|----------------|--------|---------|------------------|
+| Mode | OpenAI | Container Apps | Search | Storage | Kabuuang Tantya |
+|------|--------|----------------|--------|---------|-----------------|
 | Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
-### Pagsubaybay sa Gastos
+### Pagmo-monitor ng Gastos
 
 ```bash
-# Mag-set up ng mga alerto sa badyet
+# Itakda ang mga alerto sa badyet
 az consumption budget create \
   --account-name <subscription-id> \
   --budget-name "retail-budget" \
@@ -754,8 +745,8 @@ az consumption budget create \
 ## 🔄 Mga Update at Pagpapanatili
 
 ### Mga Update sa Template
-- I-version control ang mga ARM template file
-- Subukan ang mga pagbabago sa development environment muna
+- Gamitin ang version control para sa mga ARM template files
+- Subukan muna ang mga pagbabago sa development environment
 - Gumamit ng incremental deployment mode para sa mga update
 
 ### Mga Update sa Resource
@@ -768,26 +759,26 @@ az deployment group create \
   --mode Incremental
 ```
 
-### Backup at Recovery
-- Naka-enable ang automatic backup ng Cosmos DB
-- Naka-enable ang soft delete ng Key Vault
-- Ang mga revision ng container app ay pinapanatili para sa rollback
+### Backup at Pag-recover
+- Awtomatikong backup ng Cosmos DB ay pinagana
+- Soft delete para sa Key Vault ay pinagana
+- Pinapanatili ang mga revisyon ng container app para sa rollback
 
 ## 📞 Suporta
 
-- **Mga Isyu sa Template:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Suporta sa Azure:** [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **Komunidad:** [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Mga Isyu sa Template**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Suporta ng Azure**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Komunidad**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ Handa ka na bang i-deploy ang iyong multi-agent solution?**
+**⚡ Handa ka na bang i-deploy ang iyong multi-agent na solusyon?**
 
-Simulan sa: `./deploy.sh -g myResourceGroup`
+Magsimula sa: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang serbisyong AI na tagasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kaming maging tumpak, pakatandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling ginawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

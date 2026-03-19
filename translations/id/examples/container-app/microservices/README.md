@@ -1,68 +1,43 @@
 # Arsitektur Microservices - Contoh Container App
 
-⏱️ **Perkiraan Waktu**: 25-35 menit | 💰 **Perkiraan Biaya**: ~$50-100/bulan | ⭐ **Kompleksitas**: Lanjutan
+⏱️ **Waktu Perkiraan**: 25-35 menit | 💰 **Perkiraan Biaya**: ~$50-100/bulan | ⭐ **Kompleksitas**: Lanjutan
 
-Sebuah arsitektur microservices yang **sederhana tetapi fungsional** yang dideploy ke Azure Container Apps menggunakan AZD CLI. Contoh ini memperagakan komunikasi antar layanan, orkestrasi container, dan pemantauan dengan setup praktis 2-layanan.
+Arsitektur microservices yang **disederhanakan tetapi fungsional** yang dideploy ke Azure Container Apps menggunakan AZD CLI. Contoh ini menunjukkan komunikasi antar-layanan, orkestrasi container, dan pemantauan dengan setup praktis 2-layanan.
 
-> **📚 Pendekatan Pembelajaran**: Contoh ini dimulai dengan arsitektur 2-layanan minimal (API Gateway + Backend Service) yang benar-benar dapat Anda deploy dan pelajari. Setelah menguasai dasar ini, kami memberikan panduan untuk memperluas ke ekosistem microservices yang lengkap.
+> **📚 Pendekatan Pembelajaran**: Contoh ini dimulai dengan arsitektur 2-layanan minimal (API Gateway + Layanan Backend) yang dapat Anda deploy dan pelajari. Setelah menguasai fondasi ini, kami memberi panduan untuk memperluas ke ekosistem microservices yang lebih lengkap.
 
-## Apa yang Akan Anda Pelajari
+## Yang Akan Anda Pelajari
 
 Dengan menyelesaikan contoh ini, Anda akan:
 - Mendeploy beberapa container ke Azure Container Apps
-- Mengimplementasikan komunikasi antar layanan dengan jaringan internal
-- Mengonfigurasi skala berbasis lingkungan dan pemeriksaan kesehatan
+- Mengimplementasikan komunikasi antar-layanan dengan jaringan internal
+- Mengonfigurasi penskalaan berbasis lingkungan dan pemeriksaan kesehatan
 - Memantau aplikasi terdistribusi dengan Application Insights
 - Memahami pola deployment microservices dan praktik terbaik
-- Mempelajari ekspansi progresif dari arsitektur sederhana ke kompleks
+- Belajar perluasan progresif dari arsitektur sederhana ke kompleks
 
 ## Arsitektur
 
 ### Fase 1: Apa yang Kita Bangun (Termasuk dalam Contoh Ini)
 
+```mermaid
+graph TD
+    Internet[Internet] -- HTTPS --> Gateway[Gerbang API<br/>Kontainer Node.js<br/>Mengarahkan permintaan<br/>Pemeriksaan kesehatan<br/>Pencatatan permintaan]
+    Gateway -- HTTP internal --> Product[Layanan Produk<br/>Kontainer Python<br/>CRUD Produk<br/>Penyimpanan data dalam memori<br/>REST API]
+    Product --> Insights[Application Insights<br/>Pemantauan & Log]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
-
-**Mengapa Mulai Sederhana?**
+**Mengapa Memulai Sederhana?**
 - ✅ Deploy dan pahami dengan cepat (25-35 menit)
 - ✅ Pelajari pola inti microservices tanpa kompleksitas
-- ✅ Kode yang berfungsi yang dapat Anda modifikasi dan eksperimen
+- ✅ Kode yang bekerja yang dapat Anda modifikasi dan eksperimen
 - ✅ Biaya lebih rendah untuk pembelajaran (~$50-100/bulan vs $300-1400/bulan)
-- ✅ Bangun kepercayaan diri sebelum menambahkan database dan antrean pesan
+- ✅ Membangun kepercayaan diri sebelum menambahkan database dan antrean pesan
 
-**Analogi**: Anggap ini seperti belajar mengemudi. Anda mulai dengan tempat parkir kosong (2 layanan), menguasai dasar, lalu berlanjut ke lalu lintas kota (5+ layanan dengan database).
+**Analogi**: Anggap ini seperti belajar mengemudi. Anda mulai di lahan parkir kosong (2 layanan), kuasai dasar, lalu beralih ke lalu lintas kota (5+ layanan dengan database).
 
-### Fase 2: Ekspansi di Masa Depan (Arsitektur Referensi)
+### Fase 2: Ekspansi Mendatang (Arsitektur Referensi)
 
-Sekali Anda menguasai arsitektur 2-layanan, Anda dapat memperluas ke:
+Setelah Anda menguasai arsitektur 2-layanan, Anda dapat memperluas ke:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -77,24 +52,24 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-Lihat bagian "Expansion Guide" di bagian akhir untuk instruksi langkah-demi-langkah.
+Lihat bagian "Expansion Guide" di akhir untuk instruksi langkah demi langkah.
 
 ## Fitur yang Disertakan
 
-✅ **Penemuan Layanan**: Penemuan berbasis DNS otomatis antar container  
-✅ **Load Balancing**: Load balancing bawaan di antara replika  
-✅ **Auto-scaling**: Skala independen per layanan berdasarkan permintaan HTTP  
-✅ **Pemantauan Kesehatan**: Liveness dan readiness probes untuk kedua layanan  
-✅ **Logging Terdistribusi**: Logging terpusat dengan Application Insights  
-✅ **Jaringan Internal**: Komunikasi layanan-ke-layanan yang aman  
-✅ **Orkestrasi Container**: Deploy dan skala otomatis  
-✅ **Pembaruan Tanpa Downtime**: Rolling updates dengan manajemen revisi  
+✅ **Service Discovery**: Penemuan otomatis berbasis DNS antar container  
+✅ **Load Balancing**: Load balancing bawaan antar replika  
+✅ **Auto-scaling**: Pensakalan independen per layanan berdasarkan permintaan HTTP  
+✅ **Health Monitoring**: Liveness dan readiness probe untuk kedua layanan  
+✅ **Distributed Logging**: Logging terpusat dengan Application Insights  
+✅ **Internal Networking**: Komunikasi aman antar-layanan  
+✅ **Container Orchestration**: Deployment dan penskalaan otomatis  
+✅ **Zero-Downtime Updates**: Rolling updates dengan manajemen revisi  
 
 ## Prasyarat
 
 ### Alat yang Diperlukan
 
-Sebelum memulai, pastikan Anda telah menginstal alat-alat ini:
+Sebelum memulai, pastikan Anda sudah menginstal alat-alat berikut:
 
 1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versi 1.0.0 atau lebih tinggi)
    ```bash
@@ -116,36 +91,36 @@ Sebelum memulai, pastikan Anda telah menginstal alat-alat ini:
 
 ### Persyaratan Azure
 
-- Langganan **Azure** yang aktif ([create a free account](https://azure.microsoft.com/free/)
+- Berlangganan **Azure aktif** ([buat akun gratis](https://azure.microsoft.com/free/))
 - Izin untuk membuat sumber daya di langganan Anda
-- Peran **Contributor** pada subscription atau resource group
+- Peran **Contributor** pada langganan atau grup sumber daya
 
 ### Prasyarat Pengetahuan
 
-Ini adalah contoh tingkat **lanjutan**. Anda sebaiknya telah:
-- Menyelesaikan [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- Pemahaman dasar tentang arsitektur microservices
-- Familiar dengan REST API dan HTTP
+Ini adalah contoh tingkat **lanjutan**. Anda sebaiknya:
+- Telah menyelesaikan [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Memiliki pemahaman dasar tentang arsitektur microservices
+- Mengenal REST API dan HTTP
 - Memahami konsep container
 
-**Baru di Container Apps?** Mulai dengan [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) terlebih dahulu untuk mempelajari dasar-dasarnya.
+**Baru ke Container Apps?** Mulailah dengan [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) terlebih dahulu untuk mempelajari dasar-dasarnya.
 
-## Mulai Cepat (Langkah-demi-Langkah)
+## Mulai Cepat (Langkah demi Langkah)
 
-### Langkah 1: Clone dan Masuk
+### Langkah 1: Clone dan Arahkan
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Pemeriksaan Sukses**: Verifikasi Anda melihat `azure.yaml`:
+**✓ Pemeriksaan Keberhasilan**: Verifikasi Anda melihat `azure.yaml`:
 ```bash
 ls
 # Diharapkan: README.md, azure.yaml, infra/, src/
 ```
 
-### Langkah 2: Autentikasi dengan Azure
+### Langkah 2: Autentikasi ke Azure
 
 ```bash
 azd auth login
@@ -153,23 +128,23 @@ azd auth login
 
 Ini akan membuka browser Anda untuk autentikasi Azure. Masuk dengan kredensial Azure Anda.
 
-**✓ Pemeriksaan Sukses**: Anda seharusnya melihat:
+**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat:
 ```
 Logged in to Azure.
 ```
 
-### Langkah 3: Inisialisasi Environment
+### Langkah 3: Inisialisasi Lingkungan
 
 ```bash
 azd init
 ```
 
 **Prompt yang akan Anda lihat**:
-- **Environment name**: Masukkan nama singkat (mis. `microservices-dev`)
-- **Azure subscription**: Pilih subscription Anda
-- **Azure location**: Pilih region (mis. `eastus`, `westeurope`)
+- **Environment name**: Masukkan nama singkat (misal, `microservices-dev`)
+- **Azure subscription**: Pilih langganan Anda
+- **Azure location**: Pilih region (misal, `eastus`, `westeurope`)
 
-**✓ Pemeriksaan Sukses**: Anda seharusnya melihat:
+**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat:
 ```
 SUCCESS: New project initialized!
 ```
@@ -189,7 +164,7 @@ azd up
 6. Mengonfigurasi jaringan dan pemeriksaan kesehatan
 7. Menyiapkan pemantauan dan logging
 
-**✓ Pemeriksaan Sukses**: Anda seharusnya melihat:
+**✓ Pemeriksaan Keberhasilan**: Anda seharusnya melihat:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -197,7 +172,7 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ Waktu**: 8-12 menit
 
-### Langkah 5: Uji Deployment
+### Langkah 5: Uji Penerapan
 
 ```bash
 # Dapatkan endpoint gateway
@@ -210,7 +185,7 @@ curl $GATEWAY_URL/health
 # {"status":"sehat","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Uji product service melalui gateway**:
+**Uji layanan produk melalui gateway**:
 ```bash
 # Daftar produk
 curl $GATEWAY_URL/api/products
@@ -223,7 +198,7 @@ curl $GATEWAY_URL/api/products
 # ]
 ```
 
-**✓ Pemeriksaan Sukses**: Kedua endpoint mengembalikan data JSON tanpa error.
+**✓ Pemeriksaan Keberhasilan**: Kedua endpoint mengembalikan data JSON tanpa kesalahan.
 
 ---
 
@@ -231,7 +206,7 @@ curl $GATEWAY_URL/api/products
 
 ## Struktur Proyek
 
-Semua file implementasi disertakan—ini adalah contoh lengkap dan berfungsi:
+Semua file implementasi disertakan—ini adalah contoh lengkap yang bekerja:
 
 ```
 microservices/
@@ -267,12 +242,12 @@ microservices/
 - `main.bicep`: Mengorkestrasi semua sumber daya Azure dan dependensinya
 - `core/container-apps-environment.bicep`: Membuat Container Apps environment dan Azure Container Registry
 - `core/monitor.bicep`: Menyiapkan Application Insights untuk logging terdistribusi
-- `app/*.bicep`: Definisi container app individual dengan konfigurasi skala dan pemeriksaan kesehatan
+- `app/*.bicep`: Definisi container app individu dengan penskalaan dan pemeriksaan kesehatan
 
 **API Gateway (src/api-gateway/)**:
-- Layanan yang menghadap publik yang merutekan permintaan ke layanan backend
+- Layanan publik yang merutekan permintaan ke layanan backend
 - Mengimplementasikan logging, penanganan error, dan penerusan permintaan
-- Memperagakan komunikasi HTTP layanan-ke-layanan
+- Menunjukkan komunikasi HTTP antar-layanan
 
 **Product Service (src/product-service/)**:
 - Layanan internal dengan katalog produk (in-memory untuk kesederhanaan)
@@ -284,7 +259,7 @@ microservices/
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Akses**: Publik (external ingress)  
+**Akses**: Publik (ingress eksternal)  
 **Tujuan**: Merutekan permintaan masuk ke layanan backend yang sesuai  
 
 **Endpoints**:
@@ -297,10 +272,10 @@ microservices/
 - Routing permintaan dengan axios
 - Logging terpusat
 - Penanganan error dan manajemen timeout
-- Penemuan layanan melalui variabel lingkungan
+- Service discovery melalui variabel lingkungan
 - Integrasi Application Insights
 
-**Code Highlight** (`src/api-gateway/app.js`):
+**Sorotan Kode** (`src/api-gateway/app.js`):
 ```javascript
 // Komunikasi layanan internal
 app.get('/api/products', async (req, res) => {
@@ -312,7 +287,7 @@ app.get('/api/products', async (req, res) => {
 ### Product Service (Python/Flask)
 
 **Port**: 8000  
-**Akses**: Internal saja (tidak ada external ingress)  
+**Akses**: Hanya internal (tanpa ingress eksternal)  
 **Tujuan**: Mengelola katalog produk dengan data in-memory  
 
 **Endpoints**:
@@ -340,9 +315,9 @@ app.get('/api/products', async (req, res) => {
 ```
 
 **Mengapa Hanya Internal?**
-Product service tidak diekspos secara publik. Semua permintaan harus melewati API Gateway, yang menyediakan:
-- Keamanan: Titik akses yang dikendalikan
-- Fleksibilitas: Bisa mengubah backend tanpa memengaruhi klien
+Product service tidak diekspos secara publik. Semua permintaan harus melalui API Gateway, yang menyediakan:
+- Keamanan: Titik akses yang dikontrol
+- Fleksibilitas: Dapat mengubah backend tanpa memengaruhi klien
 - Pemantauan: Logging permintaan terpusat
 
 ## Memahami Komunikasi Layanan
@@ -355,7 +330,7 @@ Dalam contoh ini, API Gateway berkomunikasi dengan Product Service menggunakan *
 // Gerbang API (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Buat permintaan HTTP internal
+// Lakukan permintaan HTTP internal
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
@@ -363,21 +338,21 @@ const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 
 1. **Penemuan Berbasis DNS**: Container Apps secara otomatis menyediakan DNS untuk layanan internal
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Disederhanakan menjadi: `http://product-service` (Container Apps menyelesaikannya)
+   - Disederhanakan sebagai: `http://product-service` (Container Apps menyelesaikannya)
 
-2. **Tidak Diekspos ke Publik**: Product Service memiliki `external: false` di Bicep
+2. **Tidak Diekspos Publik**: Product Service memiliki `external: false` di Bicep
    - Hanya dapat diakses dalam Container Apps environment
    - Tidak dapat dijangkau dari internet
 
-3. **Variabel Lingkungan**: URL layanan disuntikkan saat deployment
+3. **Variabel Lingkungan**: URL layanan disuntikkan saat waktu deployment
    - Bicep meneruskan FQDN internal ke gateway
-   - Tidak ada URL yang disematkan di kode aplikasi
+   - Tidak ada URL yang di-hardcode di kode aplikasi
 
-**Analogi**: Anggap ini seperti ruang kantor. API Gateway adalah meja resepsionis (menghadap publik), dan Product Service adalah ruang kantor (hanya internal). Pengunjung harus melalui resepsionis untuk mencapai kantor mana pun.
+**Analogi**: Anggap ini seperti ruang kantor. API Gateway adalah meja resepsionis (berwajah publik), dan Product Service adalah ruang kantor (hanya internal). Pengunjung harus melalui resepsionis untuk mencapai kantor mana pun.
 
-## Opsi Deploy
+## Opsi Penerapan
 
-### Deploy Penuh (Direkomendasikan)
+### Penerapan Penuh (Direkomendasikan)
 
 ```bash
 # Menyebarkan infrastruktur dan kedua layanan
@@ -393,17 +368,17 @@ Ini mendeploy:
 
 **Waktu**: 8-12 menit
 
-### Deploy Layanan Individual
+### Terapkan Layanan Individu
 
 ```bash
-# Sebarkan hanya satu layanan (setelah azd up awal)
+# Deploy hanya satu layanan (setelah azd up awal)
 azd deploy api-gateway
 
-# Atau sebarkan layanan produk
+# Atau deploy layanan produk
 azd deploy product-service
 ```
 
-**Kasus Penggunaan**: Ketika Anda telah memperbarui kode di satu layanan dan ingin mendeploy hanya layanan itu.
+**Kasus Penggunaan**: Saat Anda telah memperbarui kode di satu layanan dan ingin mendeploy hanya layanan tersebut.
 
 ### Perbarui Konfigurasi
 
@@ -411,15 +386,15 @@ azd deploy product-service
 # Ubah parameter penskalaan
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Gelar ulang dengan konfigurasi baru
+# Terapkan ulang dengan konfigurasi baru
 azd up
 ```
 
 ## Konfigurasi
 
-### Konfigurasi Skala
+### Konfigurasi Penskalaan
 
-Kedua layanan dikonfigurasi dengan autoscaling berbasis HTTP di file Bicep mereka:
+Kedua layanan dikonfigurasi dengan autoscaling berbasis HTTP dalam file Bicep mereka:
 
 **API Gateway**:
 - Min replicas: 2 (selalu minimal 2 untuk ketersediaan)
@@ -427,11 +402,11 @@ Kedua layanan dikonfigurasi dengan autoscaling berbasis HTTP di file Bicep merek
 - Scale trigger: 50 concurrent requests per replica
 
 **Product Service**:
-- Min replicas: 1 (dapat diskalakan hingga nol jika diperlukan)
+- Min replicas: 1 (dapat diskalakan menjadi nol jika perlu)
 - Max replicas: 10
 - Scale trigger: 100 concurrent requests per replica
 
-**Sesuaikan Skala** (di `infra/app/*.bicep`):
+**Sesuaikan Penskalaan** (di `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -459,11 +434,11 @@ scale: {
 **Product Service**:
 - CPU: 0.5 vCPU
 - Memory: 1 GiB
-- Alasan: Operasi in-memory yang ringan
+- Alasan: Operasi in-memory ringan
 
 ### Pemeriksaan Kesehatan
 
-Kedua layanan menyertakan liveness dan readiness probes:
+Kedua layanan mencakup liveness dan readiness probes:
 
 ```bicep
 probes: [
@@ -488,15 +463,15 @@ probes: [
 ]
 ```
 
-**Apa Artinya Ini**:
-- **Liveness**: Jika pemeriksaan kesehatan gagal, Container Apps akan merestart container
-- **Readiness**: Jika tidak siap, Container Apps berhenti merutekan trafik ke replika tersebut
+**Apa Artinya**:
+- **Liveness**: Jika pemeriksaan kesehatan gagal, Container Apps me-restart container
+- **Readiness**: Jika belum siap, Container Apps berhenti merutekan trafik ke replika tersebut
 
 
 
 ## Pemantauan & Observabilitas
 
-### Melihat Log Layanan
+### Lihat Log Layanan
 
 ```bash
 # Lihat log menggunakan azd monitor
@@ -518,9 +493,9 @@ az containerapp logs show --name product-service --resource-group $RG_NAME --tai
 [product-service] Retrieved 5 products
 ```
 
-### Query Application Insights
+### Kueri Application Insights
 
-Akses Application Insights di Azure Portal, lalu jalankan query-query ini:
+Akses Application Insights di Azure Portal, lalu jalankan kueri berikut:
 
 **Temukan Permintaan Lambat**:
 ```kusto
@@ -531,7 +506,7 @@ requests
 | order by count_ desc
 ```
 
-**Lacak Panggilan Antar Layanan**:
+**Lacak Panggilan Antar-Layanan**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -540,7 +515,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Tingkat Error per Layanan**:
+**Tingkat Kesalahan per Layanan**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -562,29 +537,29 @@ requests
 # Dapatkan detail Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Buka pemantauan Portal Azure
+# Buka pemantauan di Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Metrik Langsung
+### Live Metrics
 
-1. Buka Application Insights di Azure Portal
+1. Navigasikan ke Application Insights di Azure Portal
 2. Klik "Live Metrics"
-3. Lihat permintaan, kegagalan, dan performa secara real-time
+3. Lihat permintaan real-time, kegagalan, dan performa
 4. Uji dengan menjalankan: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
 ## Latihan Praktis
 
-[Catatan: Lihat latihan lengkap di atas dalam bagian "Practical Exercises" untuk latihan langkah-demi-langkah terperinci termasuk verifikasi deployment, modifikasi data, pengujian autoscaling, penanganan error, dan menambahkan layanan ketiga.]
+[Catatan: Lihat latihan lengkap di atas dalam bagian "Practical Exercises" untuk latihan langkah demi langkah termasuk verifikasi deployment, modifikasi data, uji autoscaling, penanganan error, dan menambahkan layanan ketiga.]
 
 ## Analisis Biaya
 
 ### Perkiraan Biaya Bulanan (Untuk Contoh 2-Layanan Ini)
 
-| Sumber Daya | Konfigurasi | Perkiraan Biaya |
+| Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
 | API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
 | Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
@@ -593,14 +568,14 @@ az monitor app-insights component show \
 | Log Analytics | 1 GB/month | $3 |
 | **Total** | | **$58-243/month** |
 
-**Rincian Biaya berdasarkan Penggunaan**:
-- **Trafik ringan** (pengujian/pembelajaran): ~$60/bulan
-- **Trafik sedang** (produksi kecil): ~$120/bulan
-- **Trafik tinggi** (periode sibuk): ~$240/bulan
+**Rincian Biaya Berdasarkan Penggunaan**:
+- **Light traffic** (testing/pembelajaran): ~$60/bulan
+- **Moderate traffic** (produksi kecil): ~$120/bulan
+- **High traffic** (periode sibuk): ~$240/bulan
 
-### Tips Optimasi Biaya
+### Tips Optimisasi Biaya
 
-1. **Skala ke Nol untuk Pengembangan**:
+1. **Skalakan ke Nol untuk Pengembangan**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -609,7 +584,7 @@ az monitor app-insights component show \
    ```
 
 2. **Gunakan Consumption Plan untuk Cosmos DB** (ketika Anda menambahkannya):
-   - Bayar hanya untuk yang Anda gunakan
+   - Bayar hanya untuk apa yang Anda gunakan
    - Tidak ada biaya minimum
 
 3. **Atur Sampling di Application Insights**:
@@ -622,11 +597,12 @@ az monitor app-insights component show \
    azd down
    ```
 
-### Opsi Tier Gratis
-Untuk pembelajaran/pengetesan, pertimbangkan:
+### Opsi Gratis
+
+Untuk pembelajaran/pengujian, pertimbangkan:
 - Gunakan kredit gratis Azure (30 hari pertama)
-- Pertahankan jumlah replika seminimal mungkin
-- Hapus setelah pengujian (tidak ada biaya berkelanjutan)
+- Pertahankan replika seminimal mungkin
+- Hapus setelah pengujian (tanpa biaya berkelanjutan)
 
 ---
 
@@ -645,30 +621,30 @@ azd down --force --purge
 
 Ketik `y` untuk mengonfirmasi.
 
-**Apa yang Dihapus**:
-- Container Apps Environment
-- Both Container Apps (gateway & product service)
-- Container Registry
+**Yang Akan Dihapus**:
+- Lingkungan Container Apps
+- Kedua Container Apps (gateway & layanan produk)
+- Registri Container
 - Application Insights
-- Log Analytics Workspace
-- Resource Group
+- Ruang Kerja Log Analytics
+- Grup Sumber Daya
 
 **✓ Verifikasi Pembersihan**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Seharusnya kosong.
+Seharusnya kembali kosong.
 
 ---
 
 ## Panduan Perluasan: Dari 2 ke 5+ Layanan
 
-Setelah Anda menguasai arsitektur 2-layanan ini, berikut cara mengembangkannya:
+Setelah Anda menguasai arsitektur 2-layanan ini, berikut cara untuk memperluasnya:
 
 ### Fase 1: Tambahkan Persistensi Database (Langkah Berikutnya)
 
-**Tambahkan Cosmos DB untuk layanan produk**:
+**Tambahkan Cosmos DB untuk Layanan Produk**:
 
 1. Buat `infra/core/cosmos.bicep`:
    ```bicep
@@ -683,9 +659,9 @@ Setelah Anda menguasai arsitektur 2-layanan ini, berikut cara mengembangkannya:
    }
    ```
 
-2. Perbarui layanan produk untuk menggunakan Cosmos DB alih-alih menyimpan data di memori
+2. Perbarui layanan produk untuk menggunakan Cosmos DB alih-alih data di memori
 
-3. Estimasi biaya tambahan: ~$25/bulan (serverless)
+3. Perkiraan biaya tambahan: ~ $25/bulan (serverless)
 
 ### Fase 2: Tambahkan Layanan Ketiga (Manajemen Pesanan)
 
@@ -704,18 +680,18 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Fase 3: Tambahkan Komunikasi Asinkron (Service Bus)
 
-**Implementasikan Arsitektur Berbasis Peristiwa**:
+**Terapkan Arsitektur Berbasis Peristiwa**:
 
 1. Tambahkan Azure Service Bus: `infra/core/servicebus.bicep`
-2. Layanan produk menerbitkan event "ProductCreated"
-3. Layanan pesanan berlangganan ke event produk
+2. Layanan Produk menerbitkan event "ProductCreated"
+3. Layanan Pesanan berlangganan ke event produk
 4. Tambahkan Layanan Notifikasi untuk memproses event
 
-**Polanya**: Request/Response (HTTP) + Event-Driven (Service Bus)
+**Pola**: Request/Response (HTTP) + Berbasis Peristiwa (Service Bus)
 
 ### Fase 4: Tambahkan Otentikasi Pengguna
 
-**Implementasikan Layanan Pengguna**:
+**Terapkan Layanan Pengguna**:
 
 1. Buat `src/user-service/` (Go/Node.js)
 2. Tambahkan Azure AD B2C atau otentikasi JWT kustom
@@ -725,14 +701,14 @@ API Gateway → Product Service (Cosmos DB)
 ### Fase 5: Kesiapan Produksi
 
 **Tambahkan Komponen Ini**:
-- Azure Front Door (penyeimbangan beban global)
+- Azure Front Door (load balancing global)
 - Azure Key Vault (manajemen rahasia)
-- Azure Monitor Workbooks (dasbor kustom)
+- Azure Monitor Workbooks (dashboard kustom)
 - Pipeline CI/CD (GitHub Actions)
-- Blue-Green Deployments
+- Deploy Blue-Green
 - Managed Identity untuk semua layanan
 
-**Perkiraan Biaya Arsitektur Produksi Penuh**: ~$300-1,400/bulan
+**Biaya Arsitektur Produksi Penuh**: ~ $300-1,400/bulan
 
 ---
 
@@ -740,13 +716,13 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Dokumentasi Terkait
 - [Dokumentasi Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Panduan Arsitektur Mikroservis](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Panduan Arsitektur Microservices](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
 - [Application Insights untuk Pelacakan Terdistribusi](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### Langkah Berikutnya dalam Kursus Ini
-- ← Sebelumnya: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Contoh pemula single-container
-- → Selanjutnya: [Panduan Integrasi AI](../../../../../examples/docs/ai-foundry) - Tambahkan kemampuan AI
+- ← Sebelumnya: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Contoh satu-kontainer untuk pemula
+- → Berikutnya: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Tambahkan kemampuan AI
 - 🏠 [Beranda Kursus](../../README.md)
 
 ### Perbandingan: Kapan Menggunakan Apa
@@ -754,43 +730,43 @@ API Gateway → Product Service (Cosmos DB)
 **Aplikasi Satu Kontainer** (contoh Simple Flask API):
 - ✅ Aplikasi sederhana
 - ✅ Arsitektur monolitik
-- ✅ Cepat untuk dideploy
+- ✅ Cepat untuk diterapkan
 - ❌ Skalabilitas terbatas
-- **Biaya**: ~$15-50/bulan
+- **Biaya**: ~ $15-50/bulan
 
-**Mikroservis** (Contoh ini):
+**Microservices** (Contoh ini):
 - ✅ Aplikasi kompleks
-- ✅ Skala independen per layanan
+- ✅ Skalabilitas independen per layanan
 - ✅ Otonomi tim (layanan berbeda, tim berbeda)
 - ❌ Lebih kompleks untuk dikelola
-- **Biaya**: ~$60-250/bulan
+- **Biaya**: ~ $60-250/bulan
 
 **Kubernetes (AKS)**:
 - ✅ Kontrol dan fleksibilitas maksimal
 - ✅ Portabilitas multi-cloud
-- ✅ Jaringan lanjutan
+- ✅ Jaringan tingkat lanjut
 - ❌ Membutuhkan keahlian Kubernetes
-- **Biaya**: ~$150-500/bulan minimal
+- **Biaya**: ~ $150-500/bulan minimal
 
-**Rekomendasi**: Mulai dengan Container Apps (contoh ini), beralih ke AKS hanya jika Anda membutuhkan fitur khusus Kubernetes.
+**Rekomendasi**: Mulai dengan Container Apps (contoh ini), pindah ke AKS hanya jika Anda membutuhkan fitur khusus Kubernetes.
 
 ---
 
 ## Pertanyaan yang Sering Diajukan
 
-**Q: Mengapa hanya 2 layanan alih-alih 5+?**  
-A: Progresi pembelajaran. Kuasai dasar-dasar (komunikasi layanan, pemantauan, penskalaan) dengan contoh sederhana sebelum menambahkan kompleksitas. Pola yang Anda pelajari di sini berlaku untuk arsitektur berisi 100 layanan.
+**Q: Mengapa hanya 2 layanan bukan 5+?**  
+A: Progresi pembelajaran. Kuasai dasar-dasar (komunikasi layanan, pemantauan, penskalaan) dengan contoh sederhana sebelum menambah kompleksitas. Pola yang Anda pelajari di sini berlaku untuk arsitektur 100-layanan.
 
 **Q: Bisakah saya menambahkan lebih banyak layanan sendiri?**  
 A: Tentu! Ikuti panduan perluasan di atas. Setiap layanan baru mengikuti pola yang sama: buat folder src, buat file Bicep, perbarui azure.yaml, deploy.
 
 **Q: Apakah ini siap produksi?**  
-A: Ini adalah fondasi yang solid. Untuk produksi, tambahkan: managed identity, Key Vault, database persisten, pipeline CI/CD, alert pemantauan, dan strategi backup.
+A: Ini merupakan pondasi yang solid. Untuk produksi, tambahkan: managed identity, Key Vault, database persisten, pipeline CI/CD, alert pemantauan, dan strategi cadangan.
 
 **Q: Mengapa tidak menggunakan Dapr atau service mesh lain?**  
-A: Jaga supaya tetap sederhana untuk pembelajaran. Setelah Anda memahami jaringan Container Apps bawaan, Anda dapat menambahkan Dapr untuk skenario lanjutan.
+A: Jaga tetap sederhana untuk pembelajaran. Setelah Anda memahami jaringan native Container Apps, Anda bisa menambahkan Dapr untuk skenario lanjutan.
 
-**Q: Bagaimana cara saya melakukan debug secara lokal?**  
+**Q: Bagaimana cara debug secara lokal?**  
 A: Jalankan layanan secara lokal dengan Docker:
 ```bash
 cd src/api-gateway
@@ -799,24 +775,24 @@ docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gatew
 ```
 
 **Q: Bisakah saya menggunakan bahasa pemrograman yang berbeda?**  
-A: Ya! Contoh ini menunjukkan Node.js (gateway) + Python (layanan produk). Anda bisa mencampur bahasa apa pun yang berjalan di dalam container.
+A: Ya! Contoh ini menunjukkan Node.js (gateway) + Python (layanan produk). Anda dapat mencampur bahasa apa pun yang berjalan di dalam container.
 
-**Q: Bagaimana jika saya tidak punya kredit Azure?**  
-A: Gunakan Azure free tier (30 hari pertama untuk akun baru) atau deploy untuk periode pengujian singkat dan hapus segera.
+**Q: Bagaimana jika saya tidak memiliki kredit Azure?**  
+A: Gunakan tier gratis Azure (30 hari pertama untuk akun baru) atau deploy untuk periode pengujian singkat dan hapus segera.
 
 ---
 
-> **🎓 Ringkasan Jalur Pembelajaran**: Anda telah belajar menerapkan arsitektur multi-layanan dengan penskalaan otomatis, jaringan internal, pemantauan terpusat, dan pola siap-produksi. Fondasi ini mempersiapkan Anda untuk sistem terdistribusi yang kompleks dan arsitektur mikroservis kelas perusahaan.
+> **🎓 Ringkasan Jalur Pembelajaran**: Anda telah belajar untuk menyebarkan arsitektur multi-layanan dengan penskalaan otomatis, jaringan internal, pemantauan terpusat, dan pola siap-produksi. Pondasi ini mempersiapkan Anda untuk sistem terdistribusi kompleks dan arsitektur microservices perusahaan.
 
 **📚 Navigasi Kursus:**
 - ← Sebelumnya: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Selanjutnya: [Contoh Integrasi Database](../../../../../examples/database-app)
+- → Berikutnya: [Contoh Integrasi Database](../../../../../examples/database-app)
 - 🏠 [Beranda Kursus](../../../README.md)
 - 📖 [Praktik Terbaik Container Apps](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berusaha mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidaktepatan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+**Disclaimer**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya menjaga akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas segala kesalahpahaman atau penafsiran yang salah yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
