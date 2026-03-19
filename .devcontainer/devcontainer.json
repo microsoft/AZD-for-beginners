@@ -61,7 +61,6 @@
 				"ms-azuretools.vscode-docker",
 				"ms-azuretools.vscode-bicep",
 				"ms-vscode.azure-repos",
-				"ms-azure-devtools.azure-resource-groups",
 				
 				// Markdown and documentation
 				"yzhang.markdown-all-in-one",
