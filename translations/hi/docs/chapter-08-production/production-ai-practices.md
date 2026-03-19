@@ -1,50 +1,43 @@
-# उत्पादन AI वर्कलोड हेतु सर्वोत्कृष्ट प्रथाएँ AZD के साथ
+# Production AI Workload Best Practices with AZD
 
-**अध्याय नेविगेशन:**
-- **📚 पाठ्यक्रम गृह**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय 8 - उत्पादन और एंटरप्राइज़ पैटर्न
-- **⬅️ पिछला अध्याय**: [अध्याय 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ भी संबंधित**: [AI वर्कशॉप लैब](ai-workshop-lab.md)
-- **🎯 पाठ्यक्रम पूरा**: [AZD For Beginners](../../README.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: अध्याय 8 - प्रोडक्शन और एंटरप्राइज़ पैटर्न
+- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Course Complete**: [AZD For Beginners](../../README.md)
 
-## अवलोकन
+## Overview
 
-यह मार्गदर्शिका Azure Developer CLI (AZD) का उपयोग करके प्रोडक्शन-तैयार AI वर्कलोड्स को डिप्लॉय करने के लिए व्यापक सर्वोत्तम प्रथाएँ प्रदान करती है। Microsoft Foundry Discord समुदाय से प्रतिक्रिया और वास्तविक ग्राहक तैनातियों के आधार पर, ये प्रथाएँ प्रोडक्शन AI सिस्टम्स में सबसे सामान्य चुनौतियों को संबोधित करती हैं।
+यह मार्गदर्शिका Azure Developer CLI (AZD) का उपयोग करके प्रोडक्शन-तैयार AI वर्कलोड्स को तैनात करने के लिए व्यापक सर्वोत्तम प्रथाएँ प्रदान करती है। Microsoft Foundry Discord समुदाय और वास्तविक ग्राहक तैनाती से मिले फीडबैक के आधार पर, ये प्रथाएँ प्रोडक्शन AI सिस्टम्स में सबसे सामान्य चुनौतियों का समाधान करती हैं।
 
-## प्रमुख चुनौतियाँ जिन्हें संबोधित किया गया है
+## Key Challenges Addressed
 
-हमारे समुदाय के पोल परिणामों के आधार पर, डेवलपर्स जिन्हें सबसे अधिक समस्याएँ होती हैं वे हैं:
+हमारे समुदाय के पोल परिणामों के आधार पर, डेवलपर्स किन प्रमुख चुनौतियों का सामना कर रहे हैं:
 
-- **45%** बहु-सर्विस AI डिप्लॉयमेंट्स के साथ जूझते हैं
-- **38%** क्रेडेंशियल और सीक्रेट प्रबंधन में समस्याएँ करते हैं  
+- **45%** बहु-सेवा AI तैनाती के साथ संघर्ष करते हैं
+- **38%** क्रेडेंशियल और सीक्रेट प्रबंध में समस्याएँ रखते हैं  
 - **35%** प्रोडक्शन रेडीनेस और स्केलिंग को कठिन पाते हैं
-- **32%** बेहतर लागत अनुकूलन रणनीतियों की आवश्यकता है
-- **29%** निगरानी और ट्रबलशूटिंग में सुधार की आवश्यकता है
+- **32%** बेहतर लागत अनुकूलन रणनीतियाँ चाहते हैं
+- **29%** निगरानी और समस्या निवारण में सुधार की आवश्यकता है
 
-## प्रोडक्शन AI के लिए आर्किटेक्चर पैटर्न
+## Architecture Patterns for Production AI
 
-### पैटर्न 1: माइक्रोसर्विसेज़ AI आर्किटेक्चर
+### Pattern 1: Microservices AI Architecture
 
-**कब उपयोग करें**: जटिल AI एप्लिकेशन्स जिनमें कई क्षमताएँ हों
+**When to use**: जटिल AI एप्लिकेशन जिनमें कई क्षमताएँ हों
 
+```mermaid
+graph TD
+    Frontend[वेब फ्रंटएंड] --- Gateway[एपीआई गेटवे] --- LB[लोड बैलेंसर]
+    Gateway --> Chat[चैट सेवा]
+    Gateway --> Image[इमेज सेवा]
+    Gateway --> Text[टेक्स्ट सेवा]
+    Chat --> OpenAI[Microsoft Foundry मॉडल्स]
+    Image --> Vision[कंप्यूटर विज़न]
+    Text --> DocIntel[दस्तावेज़ इंटेलिजेंस]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
-**AZD कार्यान्वयन**:
+**AZD Implementation**:
 
 ```yaml
 # azure.yaml
@@ -67,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### पैटर्न 2: इवेंट-ड्रिवन AI प्रोसेसिंग
+### Pattern 2: Event-Driven AI Processing
 
-**कब उपयोग करें**: बैच प्रोसेसिंग, दस्तावेज़ विश्लेषण, असिंक्रोनस वर्कफ़्लो
+**When to use**: बैच प्रोसेसिंग, दस्तावेज़ विश्लेषण, असिंक्रोनस वर्कफ़्लो
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -116,15 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## सुरक्षा सर्वोत्तम प्रथाएँ
+## Thinking About AI Agent Health
 
-### 1. ज़ीरो-ट्रस्ट सुरक्षा मॉडल
+जब एक पारंपरिक वेब ऐप टूटता है, तो लक्षण परिचित होते हैं: एक पेज लोड नहीं होता, एक API त्रुटि लौटाता है, या तैनाती विफल होती है। AI-सक्षम एप्लिकेशन भी उन सभी तरीकों से टूट सकते हैं—लेकिन वे उन सूक्ष्म तरीकों से भी गलत व्यवहार कर सकते हैं जो स्पष्ट त्रुटि संदेश उत्पन्न नहीं करते।
 
-**कार्यान्वयन रणनीति**:
-- प्रमाणिकरण के बिना कोई सेवा-से-सेवा संचार नहीं
-- सभी API कॉल्स प्रबंधित पहचान (managed identities) का उपयोग करते हैं
-- प्राइवेट एंडपॉइंट्स के साथ नेटवर्क अलगाव
-- न्यूनतम अनुमतियाँ (least privilege) एक्सेस कंट्रोल
+यह अनुभाग आपको AI वर्कलोड्स की निगरानी के लिए एक मानसिक मॉडल बनाने में मदद करता है ताकि जब चीजें सही न लगें तो आप जानें कि कहाँ देखना है।
+
+### How Agent Health Differs from Traditional App Health
+
+एक पारंपरिक ऐप या तो काम करता है या नहीं। एक AI एजेंट काम करते हुए भी खराब परिणाम दे सकता है। एजेंट स्वास्थ्य को दो परतों में सोचें:
+
+| Layer | What to Watch | Where to Look |
+|-------|--------------|---------------|
+| **Infrastructure health** | क्या सेवा चल रही है? क्या संसाधन प्रोविज़न किए गए हैं? क्या एंडपॉइंट पहुँच योग्य हैं? | `azd monitor`, Azure Portal resource health, container/app logs |
+| **Behavior health** | क्या एजेंट सटीक प्रतिक्रिया दे रहा है? क्या प्रतिक्रियाएँ समय पर आ रही हैं? क्या मॉडल सही ढंग से कॉल किया जा रहा है? | Application Insights traces, model call latency metrics, response quality logs |
+
+इंफ्रास्ट्रक्चर स्वास्थ्य परिचित है—यह किसी भी azd ऐप के लिए समान है। व्यवहार स्वास्थ्य वह नई परत है जो AI वर्कलोड्स लाती है।
+
+### Where to Look When AI Apps Don't Behave as Expected
+
+यदि आपका AI एप्लिकेशन अपेक्षित परिणाम नहीं दे रहा है, तो यहाँ एक काल्पनिक चेकलिस्ट है:
+
+1. **बुनियादी बातों से शुरू करें।** क्या ऐप चल रहा है? क्या यह अपनी निर्भरताओं तक पहुँच सकता है? किसी भी ऐप की तरह `azd monitor` और resource health की जाँच करें।
+2. **मॉडल कनेक्शन की जाँच करें।** क्या आपका एप्लिकेशन सफलतापूर्वक AI मॉडल को कॉल कर रहा है? असफल या टाइम-आउट मॉडल कॉल AI ऐप समस्याओं का सबसे सामान्य कारण होते हैं और ये आपकी एप्लिकेशन लॉग्स में दिखेंगे।
+3. **देखें कि मॉडल को क्या मिला।** AI प्रतिक्रियाएँ इनपुट (प्रॉम्प्ट और किसी भी रिट्रीव्ड संदर्भ) पर निर्भर करती हैं। यदि आउटपुट गलत है, तो आमतौर पर इनपुट गलत होता है। जांचें कि क्या आपका एप्लिकेशन मॉडल को सही डेटा भेज रहा है।
+4. **प्रतिक्रिया विलंबता की समीक्षा करें।** AI मॉडल कॉल सामान्य API कॉल्स की तुलना में धीमे होते हैं। यदि आपका ऐप सुस्त महसूस हो रहा है, तो जांचें कि क्या मॉडल प्रतिक्रिया समय बढ़ गया है—यह थ्रॉटलिंग, क्षमता सीमाएँ, या क्षेत्र-स्तरीय भीड़भाड़ संकेत कर सकता है।
+5. **लागत संकेतों पर नजर रखें।** टोकन उपयोग या API कॉल्स में अप्रत्याशित उछाल एक लूप, गलत कॉन्फ़िगर किया गया प्रॉम्प्ट, या अत्यधिक रिट्राइज़ का संकेत दे सकता है।
+
+आपको तुरंत ऑब्ज़र्वेबिलिटी टूलिंग में महारत हासिल करने की आवश्यकता नहीं है। मुख्य बात यह है कि AI एप्लिकेशन की निगरानी के लिए एक अतिरिक्त व्यवहार परत होती है, और azd का बिल्ट-इन मॉनिटरिंग (`azd monitor`) आपको दोनों परतों की जांच के लिए एक शुरुआती बिंदु देता है।
+
+---
+
+## Security Best Practices
+
+### 1. Zero-Trust Security Model
+
+**Implementation Strategy**:
+- प्रमाणीकरण के बिना कोई सर्विस-टू-सर्विस संवाद नहीं
+- सभी API कॉल्स में managed identities का उपयोग
+- private endpoints के साथ नेटवर्क आइसोलेशन
+- न्यूनतम विशेषाधिकार पहुँच नियंत्रण
 
 ```bicep
 // Managed Identity for each service
@@ -145,9 +169,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. सुरक्षित सीक्रेट प्रबंधन
+### 2. Secure Secret Management
 
-**Key Vault एकीकरण पैटर्न**:
+**Key Vault Integration Pattern**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -180,9 +204,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. नेटवर्क सुरक्षा
+### 3. Network Security
 
-**प्राइवेट एंडपॉइंट कॉन्फ़िगरेशन**:
+**Private Endpoint Configuration**:
 
 ```bicep
 // Virtual Network for AI services
@@ -240,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## प्रदर्शन और स्केलिंग
+## Performance and Scaling
 
-### 1. ऑटो-स्केलिंग रणनीतियाँ
+### 1. Auto-Scaling Strategies
 
-**Container Apps ऑटो-स्केलिंग**:
+**Container Apps Auto-scaling**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -288,9 +312,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. कैशिंग रणनीतियाँ
+### 2. Caching Strategies
 
-**AI प्रतिक्रियाओं के लिए Redis Cache**:
+**Redis Cache for AI Responses**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -318,9 +342,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. लोड बैलेंसिंग और ट्रैफ़िक प्रबंधन
+### 3. Load Balancing and Traffic Management
 
-**Application Gateway के साथ WAF**:
+**Application Gateway with WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -356,14 +380,14 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 लागत अनुकूलन
+## 💰 Cost Optimization
 
-### 1. संसाधन का सही आकार निर्धारण
+### 1. Resource Right-Sizing
 
-**पर्यावरण-विशिष्ट कॉन्फ़िगरेशन**:
+**Environment-Specific Configurations**:
 
 ```bash
-# विकास वातावरण
+# विकास पर्यावरण
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -371,7 +395,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# उत्पादन वातावरण
+# उत्पादन पर्यावरण
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -380,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. लागत निगरानी और बजट
+### 2. Cost Monitoring and Budgets
 
 ```bicep
 // Cost management and budgets
@@ -421,9 +445,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. टोकन उपयोग अनुकूलन
+### 3. Token Usage Optimization
 
-**OpenAI लागत प्रबंधन**:
+**OpenAI Cost Management**:
 
 ```typescript
 // एप्लिकेशन-स्तरीय टोकन अनुकूलन
@@ -444,15 +468,15 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // अनुमान: 1 टोकन ≈ 4 वर्ण
+    // अनुमानतः 1 टोकन ≈ 4 अक्षर
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## निगरानी और अवलोकन
+## Monitoring and Observability
 
-### 1. व्यापक Application Insights
+### 1. Comprehensive Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -497,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-विशिष्ट निगरानी
+### 2. AI-Specific Monitoring
 
-**AI मेट्रिक्स के लिए कस्टम डैशबोर्ड**:
+**Custom Dashboards for AI Metrics**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -528,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. हेल्थ चेक और अपटाइम मॉनिटरिंग
+### 3. Health Checks and Uptime Monitoring
 
 ```bicep
 // Application Insights availability tests
@@ -597,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## डिज़ास्टर रिकवरी और हाई अवेलेबिलिटी
+## Disaster Recovery and High Availability
 
-### 1. मल्टी-रीजन तैनाती
+### 1. Multi-Region Deployment
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -661,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. डेटा बैकअप और रिकवरी
+### 2. Data Backup and Recovery
 
 ```bicep
 // Backup configuration for critical data
@@ -712,9 +736,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps और CI/CD एकीकरण
+## DevOps and CI/CD Integration
 
-### 1. GitHub Actions वर्कफ़्लो
+### 1. GitHub Actions Workflow
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -795,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. इन्फ्रास्ट्रक्चर मान्यता (Infrastructure Validation)
+### 2. Infrastructure Validation
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -803,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# जांचें कि सभी आवश्यक सेवाएँ चल रही हैं
+# सुनिश्चित करें कि सभी आवश्यक सेवाएँ चल रही हैं
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -813,7 +837,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# OpenAI मॉडल की तैनाती की जाँच करें
+# OpenAI मॉडल तैनाती को सत्यापित करें
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -828,70 +852,70 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## प्रोडक्शन रेडीनेस चेकलिस्ट
+## Production Readiness Checklist
 
-### सुरक्षा ✅
-- [ ] सभी सेवाएँ प्रबंधित पहचान का उपयोग करें
-- [ ] सीक्रेट्स Key Vault में संग्रहीत हों
-- [ ] प्राइवेट एंडपॉइंट्स कॉन्फ़िगर किए गए हों
-- [ ] नेटवर्क सुरक्षा समूह लागू किए गए हों
-- [ ] न्यूनतम अनुमतियों के साथ RBAC
-- [ ] सार्वजनिक एंडपॉइंट्स पर WAF सक्षम हो
+### Security ✅
+- [ ] All services use managed identities
+- [ ] Secrets stored in Key Vault
+- [ ] Private endpoints configured
+- [ ] Network security groups implemented
+- [ ] RBAC with least privilege
+- [ ] WAF enabled on public endpoints
 
-### प्रदर्शन ✅
-- [ ] ऑटो-स्केलिंग कॉन्फ़िगर किया गया हो
-- [ ] कैशिंग लागू की गई हो
-- [ ] लोड बैलेंसिंग सेटअप हो
-- [ ] स्टैटिक कंटेंट के लिए CDN
-- [ ] डेटाबेस कनेक्शन पूलिंग
-- [ ] टोकन उपयोग अनुकूलन
+### Performance ✅
+- [ ] Auto-scaling configured
+- [ ] Caching implemented
+- [ ] Load balancing setup
+- [ ] CDN for static content
+- [ ] Database connection pooling
+- [ ] Token usage optimization
 
-### निगरानी ✅
-- [ ] Application Insights कॉन्फ़िगर किया गया हो
-- [ ] कस्टम मेट्रिक्स परिभाषित हों
-- [ ] अलर्टिंग नियम सेटअप हों
-- [ ] डैशबोर्ड बनाया गया हो
-- [ ] हेल्थ चेक लागू किए गए हों
-- [ ] लॉग रिटेंशन नीतियाँ
+### Monitoring ✅
+- [ ] Application Insights configured
+- [ ] Custom metrics defined
+- [ ] Alerting rules setup
+- [ ] Dashboard created
+- [ ] Health checks implemented
+- [ ] Log retention policies
 
-### विश्वसनीयता ✅
-- [ ] मल्टी-रीजन तैनाती
-- [ ] बैकअप और रिकवरी प्लान
-- [ ] सर्किट ब्रेकर्स लागू किए गए हों
-- [ ] रीट्राई नीतियाँ कॉन्फ़िगर की गई हों
-- [ ] ग्रेसफुल डिग्रेडेशन
-- [ ] हेल्थ चेक एंडपॉइंट्स
+### Reliability ✅
+- [ ] Multi-region deployment
+- [ ] Backup and recovery plan
+- [ ] Circuit breakers implemented
+- [ ] Retry policies configured
+- [ ] Graceful degradation
+- [ ] Health check endpoints
 
-### लागत प्रबंधन ✅
-- [ ] बजट अलर्ट कॉन्फ़िगर किए गए हों
-- [ ] संसाधन सही आकार के हों
-- [ ] Dev/test छूट लागू की गई हों
-- [ ] रिज़र्व्ड इंस्टेंसेज़ खरीदी गई हों
-- [ ] लागत निगरानी डैशबोर्ड
-- [ ] नियमित लागत समीक्षाएँ
+### Cost Management ✅
+- [ ] Budget alerts configured
+- [ ] Resource right-sizing
+- [ ] Dev/test discounts applied
+- [ ] Reserved instances purchased
+- [ ] Cost monitoring dashboard
+- [ ] Regular cost reviews
 
-### अनुपालन ✅
-- [ ] डेटा रेजिडेंसी आवश्यकताएँ पूरी हों
-- [ ] ऑडिट लॉगिंग सक्षम हो
-- [ ] अनुपालन नीतियाँ लागू हों
-- [ ] सुरक्षा बेसलाइन्स लागू हों
-- [ ] नियमित सुरक्षा आकलन
-- [ ] घटना प्रतिक्रिया योजना
+### Compliance ✅
+- [ ] Data residency requirements met
+- [ ] Audit logging enabled
+- [ ] Compliance policies applied
+- [ ] Security baselines implemented
+- [ ] Regular security assessments
+- [ ] Incident response plan
 
-## प्रदर्शन बेंचमार्क
+## Performance Benchmarks
 
-### सामान्य प्रोडक्शन मेट्रिक्स
+### Typical Production Metrics
 
 | Metric | Target | Monitoring |
 |--------|--------|------------|
 | **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | अपटाइम मॉनिटरिंग |
-| **Error Rate** | < 0.1% | एप्लिकेशन लॉग्स |
-| **Token Usage** | < $500/month | लागत प्रबंधन |
-| **Concurrent Users** | 1000+ | लोड परीक्षण |
-| **Recovery Time** | < 1 hour | डिज़ास्टर रिकवरी परीक्षण |
+| **Availability** | 99.9% | Uptime monitoring |
+| **Error Rate** | < 0.1% | Application logs |
+| **Token Usage** | < $500/month | Cost management |
+| **Concurrent Users** | 1000+ | Load testing |
+| **Recovery Time** | < 1 hour | Disaster recovery tests |
 
-### लोड परीक्षण
+### Load Testing
 
 ```bash
 # एआई अनुप्रयोगों के लिए लोड परीक्षण स्क्रिप्ट
@@ -902,47 +926,233 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 समुदाय की सर्वोत्तम प्रथाएँ
+## 🤝 Community Best Practices
 
-Microsoft Foundry Discord समुदाय की प्रतिक्रियाओं के आधार पर:
+Microsoft Foundry Discord समुदाय के फीडबैक के आधार पर:
 
-### समुदाय से शीर्ष सिफारिशें:
+### Top Recommendations from the Community:
 
-1. **छोटे से शुरू करें, धीरे-धीरे स्केल करें**: बेसिक SKUs से शुरू करें और वास्तविक उपयोग के आधार पर ऊपर स्केल करें
-2. **सब कुछ मॉनिटर करें**: पहले दिन से व्यापक निगरानी सेट करें
-3. **सुरक्षा को ऑटोमेट करें**: निरंतर सुरक्षा के लिए Infrastructure as Code का उपयोग करें
-4. **थorough परीक्षण करें**: अपनी पाइपलाइन में AI-विशिष्ट परीक्षण शामिल करें
-5. **लागत की योजना बनाएं**: टोकन उपयोग मॉनिटर करें और जल्दी बजट अलर्ट सेट करें
+1. **छोटे से शुरू करें, धीरे-धीरे स्केल करें**: बुनियादी SKUs के साथ शुरू करें और वास्तविक उपयोग के आधार पर ऊपर स्केल करें
+2. **सब कुछ मॉनिटर करें**: पहले दिन से ही व्यापक निगरानी सेट करें
+3. **सुरक्षा को ऑटोमेट करें**: निरंतर सुरक्षा के लिए infrastructure as code का उपयोग करें
+4. **ठीक तरह से टेस्ट करें**: अपनी पाइपलाइन में AI-विशिष्ट परीक्षण शामिल करें
+5. **लागत की योजना बनाएं**: टोकन उपयोग की निगरानी करें और जल्दी से बजट अलर्ट सेट करें
 
-### सामान्य चलती-फिसलती गलतियाँ जिन्हें बचना चाहिए:
+### Common Pitfalls to Avoid:
 
-- ❌ कोड में API कुंजियों का हार्डकोडिंग करना
-- ❌ उचित निगरानी सेट न करना
+- ❌ कोड में API keys हार्डकोड करना
+- ❌ उचित मॉनिटरिंग न सेट करना
 - ❌ लागत अनुकूलन की अनदेखी करना
-- ❌ विफलता परिदृश्यों का परीक्षण न करना
-- ❌ हेल्थ चेक के बिना डिप्लॉय करना
+- ❌ फेलियर सिनेरियो का परीक्षण न करना
+- ❌ हेल्थ चेक्स के बिना तैनाती करना
 
-## अतिरिक्त संसाधन
+## AZD AI CLI Commands and Extensions
 
+AZD में AI-विशिष्ट कमांड और एक्सटेंशन्स का एक बढ़ता हुआ सेट शामिल है जो प्रोडक्शन AI वर्कफ़्लो को सरल बनाता है। ये उपकरण स्थानीय विकास और प्रोडक्शन तैनाती के बीच की खाई को पाटते हैं।
+
+### AZD Extensions for AI
+
+AZD AI-विशिष्ट क्षमताएँ जोड़ने के लिए एक एक्सटेंशन सिस्टम का उपयोग करता है। एक्सटेंशन्स इंस्टॉल और प्रबंधित करें:
+
+```bash
+# सभी उपलब्ध एक्सटेंशन सूचीबद्ध करें (AI सहित)
+azd extension list
+
+# Foundry agents एक्सटेंशन इंस्टॉल करें
+azd extension install azure.ai.agents
+
+# फाइन-ट्यूनिंग एक्सटेंशन इंस्टॉल करें
+azd extension install azure.ai.finetune
+
+# कस्टम मॉडल्स एक्सटेंशन इंस्टॉल करें
+azd extension install azure.ai.models
+
+# सभी इंस्टॉल किए गए एक्सटेंशनों को अपग्रेड करें
+azd extension upgrade --all
+```
+
+**Available AI extensions:**
+
+| Extension | Purpose | Status |
+|-----------|---------|--------|
+| `azure.ai.agents` | Foundry Agent Service management | Preview |
+| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
+| `azure.ai.models` | Foundry custom models | Preview |
+| `azure.coding-agent` | Coding agent configuration | Available |
+
+### Initializing Agent Projects with `azd ai agent init`
+
+`azd ai agent init` कमांड Microsoft Foundry Agent Service के साथ एकीकृत प्रोडक्शन-तैयार AI एजेंट प्रोजेक्ट स्कैफ़ोल्ड करता है:
+
+```bash
+# एजेंट मैनिफेस्ट से नया एजेंट प्रोजेक्ट प्रारंभ करें
+azd ai agent init -m <manifest-path-or-uri>
+
+# किसी विशिष्ट Foundry प्रोजेक्ट को प्रारंभ और लक्षित करें
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# कस्टम स्रोत निर्देशिका के साथ प्रारंभ करें
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Container Apps को होस्ट के रूप में लक्षित करें
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Key flags:**
+
+| Flag | Description |
+|------|-------------|
+| `-m, --manifest` | Path or URI to an agent manifest to add to your project |
+| `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
+| `-s, --src` | Directory to download the agent definition (defaults to `src/<agent-id>`) |
+| `--host` | Override the default host (e.g., `containerapp`) |
+| `-e, --environment` | The azd environment to use |
+
+**Production tip**: `--project-id` का उपयोग करके सीधे किसी मौजूदा Foundry प्रोजेक्ट से कनेक्ट करें, ताकि आपके एजेंट कोड और क्लाउड संसाधन शुरू से ही जुड़े रहें।
+
+### Model Context Protocol (MCP) with `azd mcp`
+
+AZD में बिल्ट-इन MCP सर्वर समर्थन (Alpha) शामिल है, जो AI एजेंट्स और टूल्स को मानकीकृत प्रोटोकॉल के माध्यम से आपके Azure संसाधनों के साथ इंटरैक्ट करने में सक्षम बनाता है:
+
+```bash
+# अपने प्रोजेक्ट के लिए MCP सर्वर शुरू करें
+azd mcp start
+
+# MCP संचालन के लिए टूल की सहमति प्रबंधित करें
+azd mcp consent
+```
+
+MCP सर्वर आपके azd प्रोजेक्ट संदर्भ—environments, services, और Azure resources—को AI-समर्थित विकास उपकरणों के लिए एक्सपोज़ करता है। इससे सक्षम होता है:
+
+- **AI-assisted deployment**: कोडिंग एजेंट्स को आपके प्रोजेक्ट स्टेट का क्वेरी करने और तैनाती ट्रिगर करने दें
+- **Resource discovery**: AI टूल्स यह पता लगा सकते हैं कि आपका प्रोजेक्ट किन Azure संसाधनों का उपयोग करता है
+- **Environment management**: एजेंट्स dev/staging/production environments के बीच स्विच कर सकते हैं
+
+### Infrastructure Generation with `azd infra generate`
+
+प्रोडक्शन AI वर्कलोड्स के लिए, आप ऑटोमैटिक प्रोविजनिंग पर निर्भर रहने के बजाय Infrastructure as Code जनरेट और कस्टमाइज़ कर सकते हैं:
+
+```bash
+# अपने प्रोजेक्ट की परिभाषा से Bicep/Terraform फ़ाइलें उत्पन्न करें
+azd infra generate
+```
+
+यह IaC को डिस्क पर लिखता है ताकि आप:
+- तैनाती से पहले इन्फ्रास्ट्रक्चर की समीक्षा और ऑडिट कर सकें
+- कस्टम सुरक्षा नीतियाँ जोड़ सकें (नेटवर्क नियम, private endpoints)
+- मौजूदा IaC समीक्षा प्रक्रियाओं के साथ एकीकृत कर सकें
+- एप्लिकेशन कोड से अलग इन्फ्रास्ट्रक्चर परिवर्तनों का वर्शन कंट्रोल कर सकें
+
+### Production Lifecycle Hooks
+
+AZD hooks आपको तैनाती लाइफ़साइकल के हर चरण पर कस्टम लॉजिक इंजेक्ट करने देते हैं—जो प्रोडक्शन AI वर्कफ़्लो के लिए महत्वपूर्ण हैं:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# विकास के दौरान किसी विशिष्ट हुक को मैन्युअल रूप से चलाएँ
+azd hooks run predeploy
+```
+
+**Recommended production hooks for AI workloads:**
+
+| Hook | Use Case |
+|------|----------|
+| `preprovision` | AI मॉडल क्षमता के लिए subscription quotas का सत्यापन |
+| `postprovision` | private endpoints कॉन्फ़िगर करना, model weights तैनात करना |
+| `predeploy` | AI सुरक्षा परीक्षण चलाना, प्रॉम्प्ट टेम्पलेट्स का मान्यकरण |
+| `postdeploy` | एजेंट प्रतिक्रियाओं का स्मोक टेस्ट, मॉडल कनेक्टिविटी सत्यापित करना |
+
+### CI/CD Pipeline Configuration
+
+`azd pipeline config` का उपयोग करके अपने प्रोजेक्ट को GitHub Actions या Azure Pipelines से सुरक्षित Azure प्रमाणीकरण के साथ कनेक्ट करें:
+
+```bash
+# CI/CD पाइपलाइन कॉन्फ़िगर करें (इंटरएक्टिव)
+azd pipeline config
+
+# किसी विशिष्ट प्रदाता के साथ कॉन्फ़िगर करें
+azd pipeline config --provider github
+```
+
+यह कमांड:
+- न्यूनतम-विशेषाधिकार पहुँच के साथ एक service principal बनाता है
+- federated credentials कॉन्फ़िगर करता है (कोई संग्रहीत सीक्रेट्स नहीं)
+- आपके pipeline definition फ़ाइल को जनरेट या अपडेट करता है
+- आपके CI/CD सिस्टम में आवश्यक environment variables सेट करता है
+
+**Production workflow with pipeline config:**
+
+```bash
+# 1. उत्पादन वातावरण सेट करें
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. पाइपलाइन को कॉन्फ़िगर करें
+azd pipeline config --provider github
+
+# 3. पाइपलाइन हर बार main पर push होने पर azd deploy चलाती है
+```
+
+### Adding Components with `azd add`
+
+मौजूदा प्रोजेक्ट में क्रमिक रूप से Azure सेवाएँ जोड़ें:
+
+```bash
+# इंटरैक्टिव रूप से एक नया सेवा घटक जोड़ें
+azd add
+```
+
+यह विशेष रूप से प्रोडक्शन AI एप्लिकेशन का विस्तार करने के लिए उपयोगी है—उदाहरण के लिए, एक वेक्टर सर्च सेवा जोड़ना, एक नया एजेंट एंडपॉइंट, या मौजूदा तैनाती में एक निगरानी कंपोनेंट जोड़ना।
+
+## Additional Resources
 - **Azure Well-Architected Framework**: [AI वर्कलोड मार्गदर्शन](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [आधिकारिक दस्तावेज़](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 खुले एजेंट स्किल्स Azure AI, Foundry, परिनियोजन, लागत अनुकूलन, और निदान के लिए। अपने एडिटर में इंस्टॉल करें:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
 **अध्याय नेविगेशन:**
-- **📚 पाठ्यक्रम गृह**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय 8 - उत्पादन और एंटरप्राइज़ पैटर्न
-- **⬅️ पिछला अध्याय**: [अध्याय 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ भी संबंधित**: [AI वर्कशॉप लैब](ai-workshop-lab.md)
-- **🎆 पाठ्यक्रम पूरा**: [AZD For Beginners](../../README.md)
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
+- **📖 वर्तमान अध्याय**: Chapter 8 - उत्पादन और एंटरप्राइज़ पैटर्न
+- **⬅️ पिछला अध्याय**: [Chapter 7: समस्या निवारण](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ यह भी संबंधित**: [AI Workshop Lab](ai-workshop-lab.md)
+- **� कोर्स पूरा**: [AZD For Beginners](../../README.md)
 
-**याद रखें**: प्रोडक्शन AI वर्कलोड्स के लिए सावधानीपूर्वक योजना, निगरानी, और सतत अनुकूलन आवश्यक हैं। इन पैटर्नों से शुरू करें और इन्हें अपनी विशिष्ट आवश्यकताओं के अनुसार अनुकूलित करें।
+**याद रखें**: Production AI वर्कलोड्स को सावधानीपूर्ण योजना, निगरानी, और निरंतर अनुकूलन की आवश्यकता होती है। इन पैटर्न्स से शुरू करें और इन्हें अपनी विशिष्ट आवश्यकताओं के अनुसार अनुकूलित करें।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यह दस्तावेज़ AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) का उपयोग करके अनुवादित किया गया है। हम सटीकता के लिए प्रयासरत हैं, पर कृपया ध्यान रखें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ को उसकी मूल भाषा में अधिकृत स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए पेशेवर मानव अनुवाद की सिफारिश की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
+**Disclaimer**:
+यह दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके अनुवादित किया गया है। जबकि हम सटीकता के लिए प्रयास करते हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल भाषा में मौजूद दस्तावेज़ को प्रामाणिक स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए पेशेवर मानव अनुवाद की सलाह दी जाती है। हम इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए उत्तरदायी नहीं हैं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

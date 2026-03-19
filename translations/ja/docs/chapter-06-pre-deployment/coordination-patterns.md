@@ -1,107 +1,101 @@
-# マルチエージェントの協調パターン
+# マルチエージェント調整パターン
 
-⏱️ **推定時間**: 60-75分 | 💰 **推定コスト**: ~$100-300/月 | ⭐ **難易度**: 上級
+⏱️ <strong>推定所要時間</strong>: 60〜75 分 | 💰 <strong>推定コスト</strong>: 約$100-300/月 | ⭐ <strong>複雑さ</strong>: 上級
 
-**📚 学習経路:**
-- ← 前: [Capacity Planning](capacity-planning.md) - リソースのサイズ計画とスケーリング戦略
-- 🎯 **現在地**: マルチエージェントの協調パターン (オーケストレーション、通信、状態管理)
-- → 次: [SKU Selection](sku-selection.md) - 適切な Azure サービスの選定
-- 🏠 [コースホーム](../../README.md)
+**📚 学習パス:**
+- ← 前へ: [Capacity Planning](capacity-planning.md) - リソースのサイズ見積もりとスケーリング戦略
+- 🎯 <strong>現在位置</strong>: マルチエージェント調整パターン（オーケストレーション、通信、状態管理）
+- → 次へ: [SKU Selection](sku-selection.md) - 適切な Azure サービスの選択
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 ## このレッスンで学ぶこと
 
-このレッスンを修了すると、以下ができるようになります:
-- **マルチエージェントアーキテクチャ**のパターンとその適用場面を理解する
-- **オーケストレーションパターン**（集中型、分散型、階層型）を実装する
-- **エージェント間通信**の戦略を設計する（同期、非同期、イベント駆動）
-- 分散エージェント間で**共有状態**を管理する
-- AZD を使って Azure に**マルチエージェントシステム**をデプロイする
-- 実際の AI シナリオに対して**協調パターン**を適用する
+このレッスンを完了すると、以下ができるようになります:
+- マルチエージェントアーキテクチャのパターンと適用時期を理解する
+- オーケストレーションパターン（集中型、分散型、階層型）を実装する
+- エージェント間の通信戦略（同期、非同期、イベント駆動）を設計する
+- 分散エージェント間で共有状態を管理する
+- AZD を使って Azure 上にマルチエージェントシステムをデプロイする
+- 実世界の AI シナリオに調整パターンを適用する
 - 分散エージェントシステムを監視およびデバッグする
 
-## なぜマルチエージェントの協調が重要か
+## なぜマルチエージェントの調整が重要か
 
-### 進化：単一エージェントからマルチエージェントへ
+### 進化：シングルエージェントからマルチエージェントへ
 
-**単一エージェント（単純）:**
+**シングルエージェント（単純）:**
 ```
 User → Agent → Response
 ```
-- ✅ 理解および実装が簡単
-- ✅ 単純なタスクに対して高速
-- ❌ 単一モデルの能力に制限される
+- ✅ 理解と実装が容易
+- ✅ 単純なタスクでは高速
+- ❌ 単一モデルの能力に制約される
 - ❌ 複雑なタスクを並列化できない
 - ❌ 専門化がない
 
 **マルチエージェントシステム（高度）:**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ 特定タスクに特化したエージェント
-- ✅ 並列実行による高速化
-- ✅ モジュール化され保守性が高い
+```mermaid
+graph TD
+    Orchestrator[オーケストレーター] --> Agent1[エージェント1<br/>計画]
+    Orchestrator --> Agent2[エージェント2<br/>コード]
+    Orchestrator --> Agent3[エージェント3<br/>レビュー]
+```- ✅ 特定のタスクに特化したエージェント
+- ✅ スピードのための並列実行
+- ✅ モジュール化され保守しやすい
 - ✅ 複雑なワークフローに強い
-- ⚠️ 協調ロジックが必要
+- ⚠️ 調整ロジックが必要
 
-**類推**: 単一エージェントは一人がすべての作業を行うようなもの。マルチエージェントは、研究者、コーダー、レビュアー、ライターなど専門スキルを持つチームが協力するようなものです。
+<strong>例え</strong>: シングルエージェントは一人の人がすべての作業を行うようなものです。マルチエージェントは研究者、コーダー、レビュアー、ライターなど各メンバーが専門技能を持ち協力するチームのようなものです。
 
 ---
 
-## コア協調パターン
+## コア調整パターン
 
-### パターン1: 逐次協調（責任の連鎖）
+### パターン 1: 逐次調整（責任の連鎖）
 
-**いつ使うか**: タスクが特定の順序で完了する必要があり、各エージェントが前の出力を基に動作する場合。
+<strong>使用場面</strong>: タスクは特定の順序で完了する必要があり、各エージェントは前の出力に基づく。
 
 ```mermaid
 sequenceDiagram
-    participant User as ユーザー
-    participant Orchestrator as オーケストレーター
+    participant User
+    participant Orchestrator
     participant Agent1 as リサーチエージェント
     participant Agent2 as ライターエージェント
     participant Agent3 as 編集エージェント
     
-    User->>Orchestrator: "AIについての記事を書いてください"
-    Orchestrator->>Agent1: トピックを調査
+    User->>Orchestrator: "AIについての記事を書いて"
+    Orchestrator->>Agent1: トピックを調査する
     Agent1-->>Orchestrator: 調査結果
     Orchestrator->>Agent2: 下書きを作成（調査を使用）
-    Agent2-->>Orchestrator: 下書き記事
-    Orchestrator->>Agent3: 編集して改善
-    Agent3-->>Orchestrator: 最終記事
-    Orchestrator-->>User: ブラッシュアップされた記事
+    Agent2-->>Orchestrator: 記事の草稿
+    Orchestrator->>Agent3: 編集して改善する
+    Agent3-->>Orchestrator: 最終版の記事
+    Orchestrator-->>User: 校正済みの記事
     
-    Note over User,Agent3: 順次: 各ステップは前のステップを待ちます
+    Note over User,Agent3: 逐次実行: 各ステップは前のステップを待つ
 ```
 **利点:**
-- ✅ 明確なデータフロー
+- ✅ データフローが明確
 - ✅ デバッグが容易
 - ✅ 実行順序が予測可能
 
 **制限:**
 - ❌ 遅い（並列化なし）
-- ❌ 1つの失敗がチェーン全体を止める
-- ❌ 相互依存タスクには対応できない
+- ❌ 1つの失敗がチェーン全体を停止させる
+- ❌ 相互依存タスクには不向き
 
-**使用例:**
+**利用例:**
 - コンテンツ作成パイプライン（調査 → 執筆 → 編集 → 公開）
-- コード生成（設計 → 実装 → テスト → デプロイ）
+- コード生成（計画 → 実装 → テスト → デプロイ）
 - レポート生成（データ収集 → 分析 → 可視化 → 要約）
 
 ---
 
-### パターン2: 並列協調（ファンアウト/ファンイン）
+### パターン 2: 並列調整（ファンアウト/ファンイン）
 
-**いつ使うか**: 独立したタスクを同時に実行でき、結果を最後に結合する場合。
+<strong>使用場面</strong>: 独立したタスクは同時に実行でき、結果を最後に結合する。
 
 ```mermaid
 graph TB
@@ -125,34 +119,33 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-
 **利点:**
 - ✅ 高速（並列実行）
-- ✅ フォールトトレラント（部分結果が許容される）
-- ✅ 水平スケーリングが可能
+- ✅ フォールトトレラント（部分的な結果を許容）
+- ✅ 水平方向にスケール可能
 
 **制限:**
 - ⚠️ 結果が順不同で到着する可能性がある
 - ⚠️ 集約ロジックが必要
 - ⚠️ 状態管理が複雑
 
-**使用例:**
-- マルチソースデータ収集（API + データベース + ウェブスクレイピング）
-- 競合分析（複数モデルがソリューションを生成しベストを選択）
-- 翻訳サービス（複数言語へ同時翻訳）
+**利用例:**
+- 複数ソースからのデータ収集（API + データベース + ウェブスクレイピング）
+- 競合分析（複数モデルが解を生成し、最良を選択）
+- 翻訳サービス（複数言語への同時翻訳）
 
 ---
 
-### パターン3: 階層的協調（マネージャー-ワーカー）
+### パターン 3: 階層型調整（マネージャー-ワーカー）
 
-**いつ使うか**: サブタスクを含む複雑なワークフローで、委任が必要な場合。
+<strong>使用場面</strong>: サブタスクを含む複雑なワークフローで、委任が必要な場合。
 
 ```mermaid
 graph TB
-    Master[マスター・オーケストレーター]
-    Manager1[リサーチマネージャー]
+    Master[マスターオーケストレーター]
+    Manager1[研究マネージャー]
     Manager2[コンテンツマネージャー]
-    W1[ウェブスクレイパー]
+    W1[Webスクレイパー]
     W2[論文アナライザー]
     W3[ライター]
     W4[編集者]
@@ -169,40 +162,40 @@ graph TB
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
 **利点:**
-- ✅ 複雑なワークフローを扱える
-- ✅ モジュール化され保守性が高い
+- ✅ 複雑なワークフローを処理できる
+- ✅ モジュール化され保守しやすい
 - ✅ 責任範囲が明確
 
 **制限:**
-- ⚠️ アーキテクチャが複雑になる
-- ⚠️ レイテンシが高くなる（複数の調整レイヤー）
-- ⚠️ 高度なオーケストレーションが必要
+- ⚠️ アーキテクチャがより複雑
+- ⚠️ レイテンシが高くなりがち（複数の調整レイヤー）
+- ⚠️ 洗練されたオーケストレーションが必要
 
-**使用例:**
-- 企業文書処理（分類 → ルーティング → 処理 → アーカイブ）
-- 複数段階のデータパイプライン（取り込み → クレンジング → 変換 → 分析 → レポート）
-- 複雑な自動化ワークフロー（計画 → リソース割当 → 実行 → 監視）
+**利用例:**
+- 企業向け文書処理（分類 → ルーティング → 処理 → アーカイブ）
+- 多段階データパイプライン（取り込み → クレンジング → 変換 → 分析 → レポート）
+- 複雑な自動化ワークフロー（計画 → リソース配分 → 実行 → 監視）
 
 ---
 
-### パターン4: イベント駆動型協調（パブリッシュ-サブスクライブ）
+### パターン 4: イベント駆動型調整（パブリッシュ-サブスクライブ）
 
-**いつ使うか**: エージェントがイベントに反応する必要があり、疎結合が望ましい場合。
+<strong>使用場面</strong>: エージェントがイベントに反応する必要があり、疎結合が望ましい場合。
 
 ```mermaid
 sequenceDiagram
     participant Agent1 as データコレクター
-    participant EventBus as Azure サービス バス
-    participant Agent2 as 解析者
+    participant EventBus as Azure サービスバス
+    participant Agent2 as アナライザー
     participant Agent3 as 通知者
     participant Agent4 as アーカイバー
     
     Agent1->>EventBus: 発行 "データ受信" イベント
-    EventBus->>Agent2: 購読: データを分析
+    EventBus->>Agent2: 購読: データを解析
     EventBus->>Agent3: 購読: 通知を送信
     EventBus->>Agent4: 購読: データをアーカイブ
     
-    Note over Agent1,Agent4: すべての購読者は独立して処理します
+    Note over Agent1,Agent4: すべての購読者は独立して処理されます
     
     Agent2->>EventBus: 発行 "解析完了" イベント
     EventBus->>Agent3: 購読: 解析レポートを送信
@@ -210,32 +203,32 @@ sequenceDiagram
 **利点:**
 - ✅ エージェント間の疎結合
 - ✅ 新しいエージェントの追加が容易（サブスクライブするだけ）
-- ✅ 非同期処理が可能
-- ✅ レジリエント（メッセージの永続化）
+- ✅ 非同期処理が容易
+- ✅ レジリエント（メッセージ永続化）
 
 **制限:**
-- ⚠️ 最終的整合性（Eventual consistency）
+- ⚠️ 最終的整合性
 - ⚠️ デバッグが複雑
-- ⚠️ メッセージ順序の問題
+- ⚠️ メッセージの順序問題
 
-**使用例:**
+**利用例:**
 - リアルタイム監視システム（アラート、ダッシュボード、ログ）
 - マルチチャネル通知（メール、SMS、プッシュ、Slack）
-- データ処理パイプライン（同じデータの複数コンシューマ）
+- データ処理パイプライン（同じデータを複数のコンシューマが消費）
 
 ---
 
-### パターン5: コンセンサスベースの協調（投票/定足数）
+### パターン 5: コンセンサスベースの調整（投票/定足数）
 
-**いつ使うか**: 先に進む前に複数のエージェントの合意が必要な場合。
+<strong>使用場面</strong>: 進行前に複数のエージェントから合意が必要な場合。
 
 ```mermaid
 graph TB
     Input[入力タスク]
-    Agent1[エージェント 1: GPT-4]
+    Agent1[エージェント 1: gpt-4.1]
     Agent2[エージェント 2: Claude]
     Agent3[エージェント 3: Gemini]
-    Voter[コンセンサス投票者]
+    Voter[合意投票者]
     Output[合意された出力]
     
     Input --> Agent1
@@ -249,19 +242,19 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **利点:**
-- ✅ 精度向上（複数の意見）
-- ✅ フォールトトレラント（少数の故障は許容）
+- ✅ 精度が向上（複数の意見）
+- ✅ フォールトトレラント（少数の故障を許容）
 - ✅ 品質保証が組み込まれている
 
 **制限:**
-- ❌ コストが高い（複数モデルの呼び出し）
-- ❌ 遅い（全員の回答を待つ必要がある）
-- ⚠️ コンフリクト解決が必要
+- ❌ コストが高い（複数のモデル呼び出し）
+- ❌ 遅い（全エージェントの応答を待つ）
+- ⚠️ 競合解決が必要
 
-**使用例:**
-- コンテンツモデレーション（複数モデルでレビュー）
+**利用例:**
+- コンテンツモデレーション（複数モデルによるレビュー）
 - コードレビュー（複数のリンター/アナライザー）
-- 医療診断（複数のAIモデル、専門家による検証）
+- 医療診断（複数の AI モデル、専門家の検証）
 
 ---
 
@@ -273,13 +266,13 @@ graph TB
 graph TB
     User[ユーザー/API クライアント]
     APIM[Azure API 管理]
-    Orchestrator[オーケストレーターサービス<br/>コンテナーアプリ]
-    ServiceBus[Azure Service Bus<br/>イベントハブ]
+    Orchestrator[オーケストレーター サービス<br/>コンテナ アプリ]
+    ServiceBus[Azure Service Bus<br/>イベント ハブ]
     
-    Agent1[リサーチエージェント<br/>コンテナーアプリ]
-    Agent2[ライターエージェント<br/>コンテナーアプリ]
-    Agent3[アナリストエージェント<br/>コンテナーアプリ]
-    Agent4[レビュアーエージェント<br/>コンテナーアプリ]
+    Agent1[リサーチ エージェント<br/>コンテナ アプリ]
+    Agent2[ライター エージェント<br/>コンテナ アプリ]
+    Agent3[アナリスト エージェント<br/>コンテナ アプリ]
+    Agent4[レビュアー エージェント<br/>コンテナ アプリ]
     
     CosmosDB[(Cosmos DB<br/>共有状態)]
     Storage[Azure Storage<br/>アーティファクト]
@@ -316,15 +309,15 @@ graph TB
 ```
 **主要コンポーネント:**
 
-| コンポーネント | 目的 | Azure Service |
+| Component | Purpose | Azure Service |
 |-----------|---------|---------------|
-| **API ゲートウェイ** | エントリポイント、レート制限、認証 | API Management |
-| **オーケストレーター** | エージェントのワークフローを調整 | Container Apps |
-| **メッセージキュー** | 非同期通信 | Service Bus / Event Hubs |
-| **エージェント** | 特化した AI ワーカー | Container Apps / Functions |
-| **状態ストア** | 共有状態、タスク追跡 | Cosmos DB |
-| **アーティファクトストレージ** | ドキュメント、結果、ログ | Blob Storage |
-| **監視** | 分散トレーシング、ログ | Application Insights |
+| **API Gateway** | エントリーポイント、レート制限、認証 | API Management |
+| **Orchestrator** | エージェントワークフローを調整 | Container Apps |
+| **Message Queue** | 非同期通信 | Service Bus / Event Hubs |
+| **Agents** | 専門の AI ワーカー | Container Apps / Functions |
+| **State Store** | 共有状態、タスク追跡 | Cosmos DB |
+| **Artifact Storage** | ドキュメント、結果、ログ | Blob Storage |
+| **Monitoring** | 分散トレーシング、ログ | Application Insights |
 
 ---
 
@@ -333,32 +326,32 @@ graph TB
 ### 必要なツール
 
 ```bash
-# Azure Developer CLI を確認する
+# Azure Developer CLI を確認してください
 azd version
-# ✅ 期待される: azd バージョン 1.0.0 以上
+# ✅ 期待されるバージョン: azd 1.0.0 以上
 
-# Azure CLI を確認する
+# Azure CLI を確認してください
 az --version
-# ✅ 期待される: azure-cli 2.50.0 以上
+# ✅ 期待されるバージョン: azure-cli 2.50.0 以上
 
-# Docker を確認する（ローカルテスト用）
+# Docker（ローカルテスト用）を確認してください
 docker --version
-# ✅ 期待される: Docker バージョン 20.10 以上
+# ✅ 期待されるバージョン: Docker のバージョン 20.10 以上
 ```
 
 ### Azure の要件
 
 - 有効な Azure サブスクリプション
-- 作成する権限:
+- 次の作成権限:
   - Container Apps
   - Service Bus namespaces
   - Cosmos DB accounts
   - Storage accounts
   - Application Insights
 
-### 必要な知識
+### 知識の前提条件
 
-以下を修了していることが望ましい:
+以下を完了していること:
 - [Configuration Management](../chapter-03-configuration/configuration.md)
 - [Authentication & Security](../chapter-03-configuration/authsecurity.md)
 - [Microservices Example](../../../../examples/microservices)
@@ -399,13 +392,13 @@ multi-agent-system/
 
 ---
 
-## レッスン1: 逐次協調パターン
+## レッスン 1: 逐次調整パターン
 
 ### 実装: コンテンツ作成パイプライン
 
 逐次パイプラインを構築します: 調査 → 執筆 → 編集 → 公開
 
-### 1. AZD 構成
+### 1. AZD 設定
 
 **ファイル: `azure.yaml`**
 
@@ -436,7 +429,7 @@ services:
     host: containerapp
 ```
 
-### 2. インフラ: 協調のための Service Bus
+### 2. インフラ: 調整用の Service Bus
 
 **ファイル: `infra/core/servicebus.bicep`**
 
@@ -493,7 +486,7 @@ output namespace string = serviceBusNamespace.name
 output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
 ```
 
-### 3. 共有状態マネージャ
+### 3. 共有状態マネージャー
 
 **ファイル: `src/shared/state_manager.py`**
 
@@ -568,7 +561,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Service Bus 接続
+# Service Bus への接続
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -587,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # 状態ストアにタスクを作成
+    # ステートストアにタスクを作成する
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -595,7 +588,7 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # リサーチエージェントにメッセージを送信（最初のステップ）
+    # リサーチエージェントにメッセージを送信する（最初のステップ）
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
@@ -662,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # 調査のために Azure OpenAI を呼び出す
+    # 研究のために Microsoft Foundry モデルを呼び出す
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -681,7 +674,7 @@ def process_research_task(message_data):
         result={'research': research_results}
     )
     
-    # 次のエージェント（ライター）に送る
+    # 次のエージェント (ライター) に送る
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -751,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Azure OpenAI を呼び出して記事を書く
+    # Microsoft Foundry Models を呼び出して記事を書く
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -838,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # 編集するために Azure OpenAI を呼び出す
+    # 編集するために Microsoft Foundry Models を呼び出す
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -887,14 +880,23 @@ if __name__ == '__main__':
 ### 8. デプロイとテスト
 
 ```bash
-# 初期化してデプロイ
+# オプションA: テンプレートベースのデプロイ
 azd init
 azd up
 
-# オーケストレーターのURLを取得
+# オプションB: エージェントマニフェストによるデプロイ (拡張が必要)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> すべての `azd ai` フラグとオプションについては [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) を参照してください。
+
+```bash
+# オーケストレーターのURLを取得する
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# コンテンツを作成
+# コンテンツを作成する
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
@@ -911,7 +913,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**タスク進行状況を確認:**
+**タスク進捗を確認:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -945,7 +947,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## レッスン2: 並列協調パターン
+## レッスン 2: 並列調整パターン
 
 ### 実装: マルチソース調査アグリゲーター
 
@@ -1039,7 +1041,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# タスクごとに結果を追跡する
+# タスクごとの結果を追跡する
 task_results = defaultdict(list)
 expected_agents = 4  # ウェブ、学術、ニュース、ソーシャル
 
@@ -1105,20 +1107,20 @@ if __name__ == '__main__':
 
 **並列パターンの利点:**
 - ⚡ **4x 高速**（エージェントが同時に実行）
-- 🔄 **フォールトトレラント**（部分的な結果が許容される）
-- 📈 **スケーラブル**（エージェントの追加が容易）
+- 🔄 <strong>フォールトトレラント</strong>（部分的な結果を許容）
+- 📈 <strong>スケーラブル</strong>（エージェントを簡単に追加）
 
 ---
 
 ## 実践演習
 
-### 演習1: タイムアウト処理を追加 ⭐⭐（中級）
+### 演習 1: タイムアウト処理を追加 ⭐⭐（中級）
 
-**目的**: アグリゲーターが遅いエージェントを永遠に待たないようにタイムアウトロジックを実装する。
+<strong>目的</strong>: 集約器が遅いエージェントを永遠に待たないようにタイムアウトロジックを実装する。
 
-**手順**:
+<strong>手順</strong>:
 
-1. **アグリゲーターにタイムアウト追跡を追加する:**
+1. **集約器にタイムアウト追跡を追加:**
 
 ```python
 from datetime import datetime, timedelta
@@ -1137,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # 完了しているか、またはタイムアウトしているかを確認する
+    # 完了しているか、またはタイムアウトしたかを確認する
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1157,44 +1159,44 @@ def process_result(message_data):
         del task_timeouts[task_id]
 ```
 
-2. **人工的な遅延でテストする:**
+2. **人工的な遅延でテスト:**
 
 ```python
-# 1つのエージェントに遅延を追加して、処理が遅いことをシミュレートする
+# あるエージェントに遅延を追加して、処理が遅いことをシミュレートする
 import time
 time.sleep(35)  # 30秒のタイムアウトを超える
 ```
 
-3. **デプロイして検証する:**
+3. **デプロイして検証:**
 
 ```bash
 azd deploy aggregator
 
-# タスクを提出
+# タスクを送信
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# 30秒後に結果を確認
+# 30秒後に結果を確認する
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ 成功基準:**
-- ✅ エージェントが未完の場合でも30秒でタスクが完了する
-- ✅ レスポンスは部分的な結果（`"timed_out": true`）を示す
-- ✅ 利用可能な結果が返される（4 エージェント中 3）
+- ✅ エージェントが未完でも30秒後にタスクが完了する
+- ✅ レスポンスに部分的な結果を示す（"timed_out": true）
+- ✅ 利用可能な結果が返される（4つ中3つのエージェント）
 
-**所要時間**: 20-25 分
+<strong>所要時間</strong>: 20-25 分
 
 ---
 
-### 演習2: リトライロジックの実装 ⭐⭐⭐（上級）
+### 演習 2: リトライロジックの実装 ⭐⭐⭐（上級）
 
-**目的**: 失敗したエージェントタスクを諦める前に自動的にリトライする。
+<strong>目的</strong>: 失敗したエージェントタスクを自動的にリトライしてから諦める。
 
-**手順**:
+<strong>手順</strong>:
 
-1. **オーケストレーターにリトライ追跡を追加する:**
+1. **オーケストレーターにリトライ追跡を追加:**
 
 ```python
 from dataclasses import dataclass
@@ -1205,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # message_id を retry_count に対応付ける
+retry_counts: Dict[str, int] = {}  # message_id は retry_count に対応する
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1225,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **エージェントにリトライハンドラを追加する:**
+2. **エージェントにリトライハンドラを追加:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1245,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # 再試行: 放棄してカウントを増やして再キューに入れる
+            # 再試行: 放棄してカウントを増やし、再キューに入れる
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # 同じキューに遅延を付けて戻す
-            time.sleep(5 * (retry_count + 1))  # 指数バックオフ
+            # 遅延付きで同じキューに戻す
+            time.sleep(5 * (retry_count + 1))  # 指数的バックオフ
             send_with_retry(queue_name, message_data, RetryConfig())
             
             receiver.complete_message(message)  # 元のメッセージを削除する
         else:
-            # 最大再試行回数を超えた - デッドレターキューに移動する
+            # 最大再試行回数を超過 - デッドレターキューに移動
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1265,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **デッドレターキューを監視する:**
+3. **デッドレターキューを監視:**
 
 ```python
 def monitor_dead_letters():
@@ -1284,31 +1286,31 @@ def monitor_dead_letters():
 ```
 
 **✅ 成功基準:**
-- ✅ 失敗したタスクが自動的にリトライされる（最大3回）
-- ✅ リトライ間は指数バックオフ（5秒、10秒、15秒）
-- ✅ 最大リトライ後、メッセージはデッドレターキューへ移動する
-- ✅ デッドレターキューは監視およびリプレイ可能である
+- ✅ 失敗タスクが自動的にリトライされる（最大3回）
+- ✅ リトライ間に指数バックオフ（5s、10s、15s）
+- ✅ 最大リトライ後、メッセージはデッドレターキューへ移る
+- ✅ デッドレターキューを監視してリプレイできる
 
-**所要時間**: 30-40 分
+<strong>所要時間</strong>: 30-40 分
 
 ---
 
-### 演習3: サーキットブレーカーの実装 ⭐⭐⭐（上級）
+### 演習 3: サーキットブレーカーを実装 ⭐⭐⭐（上級）
 
-**目的**: 故障が連鎖するのを防ぐため、失敗しているエージェントへのリクエストを停止する。
+<strong>目的</strong>: 故障が連鎖しないよう、故障中のエージェントへのリクエストを停止する。
 
-**手順**:
+<strong>手順</strong>:
 
-1. **サーキットブレーカークラスを作成する:**
+1. **サーキットブレーカークラスを作成:**
 
 ```python
 from enum import Enum
 from datetime import datetime, timedelta
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # 正常動作
-    OPEN = "open"          # 障害発生中、リクエストを拒否
-    HALF_OPEN = "half_open"  # 復旧確認中
+    CLOSED = "closed"      # 通常動作
+    OPEN = "open"          # 失敗中、リクエストを拒否する
+    HALF_OPEN = "half_open"  # 回復しているかをテスト中
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1321,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # タイムアウトが経過したか確認
+            # タイムアウトが経過したか確認する
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1350,7 +1352,7 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **エージェント呼び出しに適用する:**
+2. **エージェント呼び出しに適用:**
 
 ```python
 # オーケストレーター内で
@@ -1372,10 +1374,10 @@ def send_to_agent(agent_type, message_data):
         # 他のエージェントで続行する
 ```
 
-3. **サーキットブレーカーをテストする:**
+3. **サーキットブレーカーをテスト:**
 
 ```bash
-# 繰り返しの障害をシミュレートする（1つのエージェントを停止する）
+# 繰り返しの失敗をシミュレートする（1つのエージェントを停止する）
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
 # 複数のリクエストを送信する
@@ -1386,24 +1388,24 @@ for i in {1..10}; do
   sleep 2
 done
 
-# ログを確認する - 5回の失敗後にサーキットブレーカーが開いているはず
-# Container App のログには Azure CLI を使用する:
+# ログを確認する - 5回の失敗後にサーキットブレーカーがオープンになるのが確認できるはず
+# コンテナアプリのログには Azure CLI を使用する:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ 成功基準:**
-- ✅ 5 回の失敗後、サーキットがオープンになり（リクエストを拒否）する
-- ✅ 60 秒後、サーキットがハーフオープンになり（回復をテスト）する
-- ✅ 他のエージェントは通常通り動作を続ける
-- ✅ エージェントが回復するとサーキットは自動的にクローズする
+- ✅ 5回の失敗後、サーキットがオープン（リクエストを拒否）
+- ✅ 60秒後、サーキットはハーフオープン（回復をテスト）
+- ✅ 他のエージェントは通常通り動作し続ける
+- ✅ エージェントが回復すると自動的にサーキットがクローズする
 
-**所要時間**: 40-50 分
+<strong>所要時間</strong>: 40-50 分
 
 ---
 
 ## 監視とデバッグ
 
-### Application Insights を用いた分散トレーシング
+### Application Insights を使った分散トレーシング
 
 **ファイル: `src/shared/tracing.py`**
 
@@ -1416,18 +1418,18 @@ from opencensus.trace.samplers import AlwaysOnSampler
 import logging
 import os
 
-# トレーシングの設定
+# トレーシングを構成する
 config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# トレーサーを作成
+# トレーサーを作成する
 tracer = Tracer(
     exporter=AzureExporter(connection_string=connection_string),
     sampler=AlwaysOnSampler()
 )
 
-# ログの設定
+# ロギングを構成する
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1492,22 +1494,22 @@ exceptions
 
 ## コスト分析
 
-### マルチエージェントシステムのコスト（月額見積）
+### マルチエージェントシステムのコスト（推定・月額）
 
-| コンポーネント | 構成 | コスト |
+| Component | Configuration | Cost |
 |-----------|--------------|------|
-| **オーケストレーター** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **エージェント ×4** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
+| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
 | **Service Bus** | Standard tier, 10M messages | $10-20 |
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operations | $5-10 |
 | **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
-| **合計** | | **$240-565/month** |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
+| **Total** | | **$240-565/month** |
 
 ### コスト最適化戦略
 
-1. **可能な場合はサーバーレスを利用する:**
+1. **可能な限りサーバーレスを使用する:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1524,9 +1526,9 @@ exceptions
    }
    ```
 
-3. **Service Bus でバッチ処理を使用する:**
+3. **Service Bus のバッチ処理を活用する:**
    ```python
-   # メッセージをまとめて送信する（コストが安くなる）
+   # メッセージをバッチで送信する（安くなる）
    sender.send_messages([message1, message2, message3])
    ```
 
@@ -1541,9 +1543,9 @@ exceptions
 
 ## ベストプラクティス
 
-### ✅ 実行すべきこと:
+### ✅ 実施すべきこと:
 
-1. **冪等性のある操作を使用する**
+1. <strong>冪等性のある操作を使用する</strong>
    ```python
    # エージェントは同じメッセージを複数回安全に処理できます
    def process_task(task_id):
@@ -1553,12 +1555,12 @@ exceptions
        # タスクを処理中...
    ```
 
-2. **包括的なロギングを実装する**
+2. <strong>包括的なログ記録を実装する</strong>
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **相関IDを使用する**
+3. **相関 ID を使用する**
    ```python
    # task_id をワークフロー全体に渡す
    message_data = {
@@ -1567,28 +1569,28 @@ exceptions
    }
    ```
 
-4. **メッセージのTTL（time-to-live）を設定する**
+4. **メッセージの TTL（time-to-live）を設定する**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **デッドレターキューを監視する**
+5. <strong>デッドレターキューを監視する</strong>
    ```python
    # 失敗したメッセージの定期的な監視
    monitor_dead_letters()
    ```
 
-### ❌ やってはいけないこと:
+### ❌ 実施してはいけないこと:
 
-1. **循環依存を作らない**
+1. <strong>循環依存を作成しない</strong>
    ```python
    # ❌ 悪い: エージェントA → エージェントB → エージェントA（無限ループ）
    # ✅ 良い: 明確な有向非巡回グラフ（DAG）を定義する
    ```
 
-2. **エージェントのスレッドをブロックしない**
+2. <strong>エージェントスレッドをブロックしない</strong>
    ```python
    # ❌ 悪い: 同期的な待機
    while not task_complete:
@@ -1597,26 +1599,26 @@ exceptions
    # ✅ 良い: メッセージキューのコールバックを使用する
    ```
 
-3. **部分的な失敗を無視しない**
+3. <strong>部分的な失敗を無視しない</strong>
    ```python
-   # ❌ 悪い: 1つのエージェントが失敗した場合にワークフロー全体を失敗させる
-   # ✅ 良い: エラー指標を付けて部分的な結果を返す
+   # ❌ 悪い: 1つのエージェントが失敗したらワークフロー全体を失敗させる
+   # ✅ 良い: エラーを示す指標を付けて部分的な結果を返す
    ```
 
-4. **無限リトライを使わない**
+4. <strong>無限リトライを使用しない</strong>
    ```python
-   # ❌ 悪い: 永遠にリトライし続ける
-   # ✅ 良い: max_retries = 3、その後デッドレターへ送る
+   # ❌ 悪い: 無限に再試行する
+   # ✅ 良い: max_retries = 3、その後デッドレターに送る
    ```
 
 ---
 
 ## トラブルシューティングガイド
 
-### 問題: メッセージがキューに滞留する
+### Problem: メッセージがキューに滞留している
 
 **症状:**
-- メッセージがキューに蓄積する
+- メッセージがキューに溜まる
 - エージェントが処理していない
 - タスクのステータスが "pending" のまま
 
@@ -1634,7 +1636,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 **解決策:**
 
-1. **エージェントのレプリカを増やす:**
+1. **エージェントのレプリカ数を増やす:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1652,11 +1654,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### 問題: タスクがタイムアウトする/完了しない
+### Problem: タスクがタイムアウトする/完了しない
 
 **症状:**
 - タスクのステータスが "in_progress" のまま
-- 一部のエージェントは完了するが、他はしない
+- 一部のエージェントは完了するが、他は完了しない
 - エラーメッセージがない
 
 **診断:**
@@ -1670,11 +1672,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **解決策:**
 
-1. **アグリゲーターでタイムアウトを実装する（演習 1）**
+1. **アグリゲーターでタイムアウトを実装する (演習 1)**
 
 2. **Azure Monitor を使用してエージェントの障害を確認する:**
    ```bash
-   # azd monitor でログを表示
+   # azd monitor を使ってログを表示する
    azd monitor --logs
    
    # または Azure CLI を使って特定のコンテナー アプリのログを確認する
@@ -1690,50 +1692,50 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## 詳しく学ぶ
+## 詳細
 
 ### 公式ドキュメント
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [マルチエージェント設計パターン](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
 ### このコースの次のステップ
-- ← 前へ: [キャパシティプランニング](capacity-planning.md)
-- → 次へ: [SKU の選択](sku-selection.md)
+- ← 前へ: [容量計画](capacity-planning.md)
+- → 次へ: [SKU 選択](sku-selection.md)
 - 🏠 [コースホーム](../../README.md)
 
-### 関連の例
+### 関連する例
 - [マイクロサービスの例](../../../../examples/microservices) - サービス間通信パターン
-- [Azure OpenAI の例](../../../../examples/azure-openai-chat) - AI 統合
+- [Microsoft Foundry Models の例](../../../../examples/azure-openai-chat) - AI 統合
 
 ---
 
 ## まとめ
 
 **学んだこと:**
-- ✅ 5つの調整パターン（順次、並列、階層、イベント駆動、コンセンサス）
-- ✅ Azure 上のマルチエージェントアーキテクチャ（Service Bus、Cosmos DB、Container Apps）
+- ✅ 5つのコーディネーションパターン（順次、並列、階層型、イベント駆動、コンセンサス）
+- ✅ Azure上のマルチエージェントアーキテクチャ（Service Bus、Cosmos DB、Container Apps）
 - ✅ 分散エージェント間の状態管理
-- ✅ タイムアウト処理、リトライ、サーキットブレーカー
+- ✅ タイムアウト処理、リトライ、およびサーキットブレーカー
 - ✅ 分散システムの監視とデバッグ
 - ✅ コスト最適化戦略
 
 **重要なポイント:**
-1. **適切なパターンを選択する** - 順序が必要なワークフローには順次、速度が重要な場合には並列、柔軟性が必要な場合にはイベント駆動
-2. **状態を注意深く管理する** - 共有状態には Cosmos DB または類似のものを使用する
-3. **障害を適切に処理する** - タイムアウト、リトライ、サーキットブレーカー、デッドレターキュー
-4. **すべてを監視する** - デバッグには分散トレーシングが不可欠
-5. **コストを最適化する** - スケール・トゥ・ゼロ、サーバーレスの活用、キャッシュの導入
+1. <strong>適切なパターンを選ぶ</strong> - 順序が重要なワークフローには順次、速度が求められる場合は並列、柔軟性が必要な場合はイベント駆動
+2. <strong>状態を慎重に管理する</strong> - 共有状態には Cosmos DB などを使用する
+3. <strong>障害を適切に処理する</strong> - タイムアウト、リトライ、サーキットブレーカー、デッドレターキュー
+4. <strong>すべてを監視する</strong> - 分散トレーシングはデバッグに不可欠
+5. <strong>コストを最適化する</strong> - ゼロへのスケール、サーバーレスの活用、キャッシュの実装
 
 **次のステップ:**
 1. 実践演習を完了する
 2. 自分のユースケース向けにマルチエージェントシステムを構築する
-3. パフォーマンスとコストを最適化するために [SKU の選択](sku-selection.md) を学ぶ
+3. パフォーマンスとコストを最適化するために [SKU 選択](sku-selection.md) を学ぶ
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-本書はAI翻訳サービス「Co‑op Translator」（https://github.com/Azure/co-op-translator）を用いて翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確な表現が含まれる可能性があることをご了承ください。原文（原語）を権威ある情報源としてご参照ください。重要な情報については、専門の人間翻訳（プロの翻訳者）を利用することをおすすめします。本翻訳の利用により生じたいかなる誤解や誤訳についても、当方は責任を負いません。
+**免責事項**:
+本書類はAI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性を期しておりますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご注意ください。原文（原言語の文書）を権威ある出典として参照してください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用に起因するいかなる誤解や誤訳についても、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,30 +1,30 @@
-# 5. テンプレートをカスタマイズする
+# 5. テンプレートのカスタマイズ
 
-!!! tip "このモジュールの終了時には以下ができるようになります"
+!!! tip "このモジュールの終了時には次のことができるようになります"
 
     - [ ] デフォルトの AI エージェント機能を調査した
     - [ ] 独自のインデックスで AI 検索を追加した
-    - [ ] トレース メトリクスを有効化して解析した
-    - [ ] 評価実行を実施した
-    - [ ] レッドチーミング スキャンを実行した
+    - [ ] トレース指標を有効化して分析した
+    - [ ] 評価実行を行った
+    - [ ] レッドチーミングスキャンを実行した
     - [ ] **Lab 5: カスタマイズ計画を作成した** 
 
 ---
 
 ## 5.1 AI エージェントの機能
 
-!!! success "ラボ01でこれを完了しました"
+!!! success "Lab 01でこれを完了しました"
 
-- **File Search**: 知識検索のための OpenAI 組み込みファイル検索
-- **Citations**: レスポンスでの自動ソース帰属
-- **Customizable Instructions**: エージェントの振る舞いと性格を変更可能
-- **Tool Integration**: カスタム機能のための拡張可能なツールシステム
+- <strong>ファイル検索</strong>: 知識取得のための OpenAI 組み込みファイル検索
+- <strong>引用</strong>: 応答における自動ソース帰属
+- <strong>カスタマイズ可能な指示</strong>: エージェントの動作や性格を変更する
+- <strong>ツール統合</strong>: カスタム機能のための拡張可能なツールシステム
 
 ---
 
-## 5.2 知識検索のオプション
+## 5.2 知識取得オプション
 
-!!! task "これを完了するには変更を加えて再デプロイする必要があります"    
+!!! task "これを完了するには変更を行い再デプロイする必要があります"    
     
     ```bash title=""
     # Set environment variables
@@ -42,22 +42,22 @@
 
 **OpenAI File Search (Default):**
 
-- Foundry Agents に組み込み
-- 自動ドキュメント処理とインデックス作成
+- Foundry Agents に組み込まれている
+- ドキュメントの自動処理とインデックス作成
 - 追加設定不要
 
 **Azure AI Search (Optional):**
 
-- ハイブリッドのセマンティック検索とベクトル検索
+- ハイブリッドなセマンティック検索とベクトル検索
 - カスタムインデックス管理
 - 高度な検索機能
-- `USE_AZURE_AI_SEARCH_SERVICE=true` が必要
+- 利用には `USE_AZURE_AI_SEARCH_SERVICE=true` が必要
 
 ---
 
 ## 5.3 [トレースとモニタリング](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "これを完了するには変更を加えて再デプロイする必要があります"    
+!!! task "これを完了するには変更を行い再デプロイする必要があります"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -67,19 +67,19 @@
 **トレース:**
 
 - OpenTelemetry 統合
-- リクエスト/レスポンス追跡
+- 要求/応答の追跡
 - パフォーマンス指標
 - Microsoft Foundry ポータルで利用可能
 
-**ログ記録:**
+**ロギング:**
 
 - Container Apps のアプリケーションログ
 - 相関 ID を用いた構造化ログ
-- リアルタイムおよび過去ログの表示
+- リアルタイムおよび履歴ログの閲覧
 
 ---
 
-## 5.4 [エージェント評価](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [エージェントの評価](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **ローカル評価:**
 
@@ -101,7 +101,7 @@
 
 ---
 
-## 5.5 [AI レッドチーミング エージェント](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI レッドチーミングエージェント](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI レッドチーミング:**
 
@@ -111,21 +111,21 @@
 
 **認証:**
 
-- Azure サービスのためのマネージド ID
+- Azure サービス用のマネージド ID
 - オプションの Azure App Service 認証
-- 開発時のベーシック認証フォールバック
+- 開発用の基本認証フォールバック
 
 
 
-!!! quote "このラボの終了時までにあなたが持っているべきもの"
-    - [ ] シナリオ要件を定義した
-    - [ ] 環境変数（構成）をカスタマイズした
-    - [ ] エージェントの指示（タスク）をカスタマイズした
-    - [ ] カスタマイズしたテンプレートをデプロイした（アプリ）
-    - [ ] 展開後のタスクを完了した（手動）
-    - [ ] テスト評価を実行した
+!!! quote "このラボの終了時にあなたが持っているべきもの"
+    - [ ] シナリオ要件を定義する
+    - [ ] 環境変数（config）をカスタマイズする
+    - [ ] エージェント指示（task）をカスタマイズする
+    - [ ] カスタマイズされたテンプレートをデプロイする（app）
+    - [ ] デプロイ後のタスクを完了する（manual）
+    - [ ] テスト評価を実行する
 
-この例は、2 つの専門エージェントと複数のモデルデプロイメントを備えたエンタープライズ小売ユースケース向けにテンプレートをカスタマイズする方法を示しています。
+この例は、小売企業向けユースケースのテンプレートをカスタマイズし、2つの専門エージェントと複数のモデルデプロイメントを組み合わせる方法を示しています。
 
 ---
 
@@ -133,22 +133,22 @@
 
 ### 5.6.1. シナリオ要件
 
-#### **Agent Deployments:** 
+#### **エージェントのデプロイ:** 
 
-   - Shopper Agent: 顧客が製品を見つけ比較するのを支援
-   - Loyalty Agent: 顧客の報酬とプロモーションを管理
+   - Shopper Agent: 顧客が製品を見つけ比較するのを支援する
+   - Loyalty Agent: 顧客の報酬とプロモーションを管理する
 
-#### **Model Deployments:**
+#### **モデルのデプロイ:**
 
-   - `gpt-4.1`: 主要なチャットモデル
-   - `o3`: 複雑なクエリのための推論モデル
-   - `gpt-4.1-nano`: 単純な対話向けの軽量モデル
-   - `text-embedding-3-large`: 検索用の高品質埋め込み
+   - `gpt-4.1`: プライマリのチャットモデル
+   - `o3`: 複雑なクエリ向けの推論モデル
+   - `gpt-4.1-nano`: 単純なやり取り向けの軽量モデル
+   - `text-embedding-3-large`: 検索用の高品質な埋め込み
 
-#### **Features:**
+#### **機能:**
 
    - トレースとモニタリングを有効化
-   - 製品カタログ用の AI 検索
+   - 製品カタログのための AI Search
    - 品質保証のための評価フレームワーク
    - セキュリティ検証のためのレッドチーミング
 
@@ -157,7 +157,7 @@
 ### 5.6.2 シナリオ実装
 
 
-#### 5.6.2.1. デプロイ前の設定
+#### 5.6.2.1. 事前デプロイ設定
 
 セットアップスクリプトを作成する (`setup-retail.sh`)
 
@@ -175,13 +175,13 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# 主要なチャットモデルを設定する（gpt-4.1 に最も近い利用可能なモデルとして gpt-4o を使用）
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# 主要チャットモデルを設定する（gpt-4.1はgpt-4.1に最も近い利用可能なモデルとして）
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# 強化された検索のために埋め込みモデルを設定する
+# 強化された検索のための埋め込みモデルを設定する
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
@@ -198,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: エージェント指示
+#### 5.6.2.2: エージェントの指示
 
-`custom-agents/shopper-agent-instructions.md` を作成:
+`custom-agents/shopper-agent-instructions.md` を作成する：
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-`custom-agents/loyalty-agent-instructions.md` を作成:
+`custom-agents/loyalty-agent-instructions.md` を作成する：
 
 ```markdown
 # Loyalty Agent Instructions
@@ -250,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: デプロイスクリプト
 
-`deploy-retail.sh` を作成:
+`deploy-retail.sh` を作成する：
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -270,7 +270,7 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# 環境を設定する
+# 環境をセットアップする
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
@@ -280,7 +280,7 @@ echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -321,16 +321,16 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: 展開後の設定
+#### 5.6.2.4: デプロイ後の構成
 
-`configure-retail-agents.sh` を作成:
+`configure-retail-agents.sh` を作成する：
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# デプロイ情報を取得する
+# デプロイメント情報を取得する
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -380,7 +380,7 @@ echo "
 
 ### 5.6.3: テストと検証
 
-`test-retail-deployment.sh` を作成:
+`test-retail-deployment.sh` を作成する：
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -391,7 +391,7 @@ echo "🧪 Testing retail deployment..."
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# webアプリケーションの可用性をテストする
+# Webアプリケーションの可用性をテストする
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# 設定されている場合に評価を実行する
+# 設定されていれば評価を実行する
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -429,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 期待される成果
+### 5.6.4 期待される結果
 
-これらの実装ガイドに従うと、次が得られます:
+この実装ガイドに従うと、以下が得られます:
 
 1. **デプロイ済みインフラストラクチャ:**
 
       - モデルデプロイメントを含む Microsoft Foundry プロジェクト
       - Web アプリケーションをホストする Container Apps
       - 製品カタログ用の AI Search サービス
-      - モニタリング用の Application Insights
+      - 監視用の Application Insights
 
 2. **初期エージェント:**
 
       - 基本指示で構成された Shopper Agent
-      - ファイル検索機能が有効
-      - トレースとモニタリングが設定済み
+      - ファイル検索機能が有効化された
+      - トレースとモニタリングが設定された
 
-3. **カスタマイズ準備完了:**
+3. **カスタマイズの準備完了:**
 
       - Loyalty Agent を追加するためのフレームワーク
       - カスタム指示テンプレート
-      - テストおよび検証スクリプト
-      - モニタリングと評価のセットアップ
+      - テストと検証用スクリプト
+      - モニタリングと評価の設定
 
-4. **本番準備:**
+4. **本番稼働準備:**
 
       - レッドチーミングによるセキュリティスキャン
-      - パフォーマンスモニタリング
+      - パフォーマンス監視
       - 品質評価フレームワーク
       - スケーラブルなアーキテクチャ
 
-この例は、AZD テンプレートがどのように特定のエンタープライズシナリオ向けに拡張およびカスタマイズできるかを示しており、セキュリティ、モニタリング、およびスケーラビリティに関するベストプラクティスを維持する方法を示しています。
+この例は、AZD テンプレートを特定のエンタープライズシナリオ向けに拡張およびカスタマイズしつつ、セキュリティ、モニタリング、およびスケーラビリティのベストプラクティスを維持する方法を示しています。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-本書はAI翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されています。正確性には努めておりますが、自動翻訳には誤りや不正確な表現が含まれる可能性があることをご承知ください。重要な情報については、専門の翻訳者による人間翻訳を推奨します。原文（原言語）が正式な出典として優先されます。本翻訳の利用により生じた誤解や解釈の相違について、当社は一切の責任を負いません。
+**免責事項**:
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご注意ください。原文（原言語の文書）を権威ある情報源としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用により生じた誤解や誤訳について、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

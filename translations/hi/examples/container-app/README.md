@@ -1,27 +1,27 @@
-# AZD के साथ कंटेनर ऐप परिनियोजन उदाहरण
+# AZD के साथ कंटेनर ऐप तैनाती उदाहरण
 
-यह निर्देशिका Azure Developer CLI (AZD) का उपयोग करके Azure Container Apps पर कंटेनरीकृत अनुप्रयोगों को तैनात करने के लिए व्यापक उदाहरणों को सम्मिलित करती है। ये उदाहरण वास्तविक-विश्व पैटर्न, सर्वोत्तम प्रथाओं, और उत्पादन-तैयार कॉन्फ़िगरेशन को दर्शाते हैं।
+यह निर्देशिका Azure Developer CLI (AZD) का उपयोग कर Azure Container Apps में कंटेनरयुक्त अनुप्रयोगों को तैनात करने के लिए व्यापक उदाहरणों को समाहित करती है। ये उदाहरण वास्तविक दुनिया के पैटर्न, सर्वोत्तम प्रथाएँ, और प्रोडक्शन-रेडी कॉन्फ़िगरेशन प्रदर्शित करते हैं।
 
-## 📚 सामग्री
+## 📚 विषय सूची
 
-- [अवलोकन](../../../../examples/container-app)
-- [पूर्वापेक्षाएँ](../../../../examples/container-app)
-- [त्वरित आरंभ उदाहरण](../../../../examples/container-app)
-- [उत्पादन उदाहरण](../../../../examples/container-app)
-- [उन्नत पैटर्न](../../../../examples/container-app)
-- [सर्वोत्तम प्रथाएँ](../../../../examples/container-app)
+- [अवलोकन](#overview)
+- [आवश्यकताएँ](#prerequisites)
+- [त्वरित प्रारंभ उदाहरण](#quick-start-examples)
+- [उत्पादन उदाहरण](#production-examples)
+- [उन्नत पैटर्न](#advanced-patterns)
+- [सर्वोत्तम प्रथाएँ](#best-practices)
 
 ## Overview
 
-Azure Container Apps एक पूर्ण रूप से प्रबंधित सर्वरलेस कंटेनर प्लेटफ़ॉर्म है जो आपको बुनियादी अवसंरचना प्रबंधन किए बिना माइक्रोसर्विस और कंटेनरीकृत अनुप्रयोग चलाने में सक्षम बनाता है। AZD के साथ संयोजन में, आपको मिलता है:
+Azure Container Apps एक पूर्ण रूप से प्रबंधित सर्वरलेस कंटेनर प्लेटफ़ॉर्म है जो आपको माइक्रोसर्विसेज़ और कंटेनरयुक्त अनुप्रयोगों को अवसंरचना प्रबंधित किए बिना चलाने में सक्षम बनाता है। AZD के साथ संयोजन में, आपको मिलता है:
 
-- **सरलीकृत परिनियोजन**: एकल कमांड के माध्यम से अवसंरचना के साथ कंटेनरों को तैनात करना
-- **स्वचालित स्केलिंग**: HTTP ट्रैफ़िक या घटनाओं के आधार पर शून्य से स्केल और स्केल आउट
-- **एकीकृत नेटवर्किंग**: बिल्ट-इन सर्विस डिस्कवरी और ट्रैफ़िक स्प्लिटिंग
-- **प्रबंधित पहचान**: Azure संसाधनों के लिए सुरक्षित प्रमाणीकरण
-- **लागत अनुकूलन**: आप केवल उन संसाधनों के लिए भुगतान करते हैं जिनका आप उपयोग करते हैं
+- **सरल तैनाती**: एक कमांड में कंटेनरों को अवसंरचना के साथ तैनात किया जाता है
+- **स्वचालित स्केलिंग**: HTTP ट्रैफ़िक या इवेंट्स के आधार पर शून्य तक स्केल और आउट स्केल
+- **एकीकृत नेटवर्किंग**: अंतर्निहित सर्विस डिस्कवरी और ट्रैफ़िक स्प्लिटिंग
+- **मैनेज्ड आइडेंटिटी**: Azure संसाधनों के लिए सुरक्षित प्रमाणीकरण
+- **लागत अनुकूलन**: आप केवल उन संसाधनों के लिए भुगतान करते हैं जो आप उपयोग करते हैं
 
-## पूर्वापेक्षाएँ
+## Prerequisites
 
 शुरू करने से पहले, सुनिश्चित करें कि आपके पास है:
 
@@ -41,13 +41,13 @@ az login
 ```
 
 **आवश्यक Azure संसाधन:**
-- सक्रिय Azure सब्सक्रिप्शन
-- Resource group निर्माण की अनुमतियाँ
-- Container Apps वातावरण का एक्सेस
+- सक्रिय Azure सदस्यता
+- रिसोर्स ग्रुप बनाने के अनुमतियाँ
+- Container Apps environment एक्सेस
 
-## त्वरित आरंभ उदाहरण
+## Quick Start Examples
 
-### 1. सरल वेब API (Python Flask)
+### 1. Simple Web API (Python Flask)
 
 Azure Container Apps के साथ एक बुनियादी REST API तैनात करें।
 
@@ -65,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**परिनियोजन चरण:**
+**तैनाती चरण:**
 
 ```bash
 # टेम्पलेट से प्रारंभ करें
 azd init --template todo-python-mongo
 
-# बुनियादी ढांचे की व्यवस्था करें और तैनात करें
+# बुनियादी ढांचे को प्रावधान करें और तैनात करें
 azd up
 
 # तैनाती का परीक्षण करें
@@ -80,9 +80,9 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **मुख्य विशेषताएँ:**
-- 0 से 10 प्रतियों तक स्वचालित स्केलिंग
-- हेल्थ प्रॉब और लाइवनेस चेक
-- पर्यावरण चर इंजेक्शन
+- 0 से 10 रेप्लिका तक ऑटो-स्केलिंग
+- स्वास्थ्य जांच और लिवनेस चेक
+- वातावरण चर इंजेक्शन
 - Application Insights एकीकरण
 
 ### 2. Node.js Express API
@@ -97,14 +97,14 @@ azd init --template todo-nodejs-mongo
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# तैनात करें
+# परिनियोजित करें
 azd up
 
 # Azure Monitor के माध्यम से लॉग देखें
 azd monitor --logs
 ```
 
-**इन्फ्रास्ट्रक्चर मुख्य बिंदु:**
+**इन्फ्रास्ट्रक्चर हाइलाइट्स:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -147,7 +147,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. स्टेटिक फ्रंटएंड + API बैकएंड
+### 3. Static Frontend + API Backend
 
 React फ्रंटएंड और API बैकएंड के साथ एक फुल-स्टैक एप्लिकेशन तैनात करें।
 
@@ -165,13 +165,13 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## उत्पादन उदाहरण
+## Production Examples
 
-### उदाहरण 1: माइक्रोसर्विस आर्किटेक्चर
+### Example 1: Microservices Architecture
 
-**परिदृश्य**: कई माइक्रोसर्विस वाले ई-कॉमर्स एप्लिकेशन
+**परिदृश्य**: कई माइक्रोसर्विसेज़ वाले ई-कॉमर्स एप्लिकेशन
 
-**डायरेक्टरी संरचना:**
+**निर्देशिका संरचना:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -211,12 +211,12 @@ services:
     host: containerapp
 ```
 
-**परिनियोजन:**
+**तैनाती:**
 ```bash
-# परियोजना प्रारंभ करें
+# परियोजना आरंभ करें
 azd init
 
-# उत्पादन पर्यावरण सेट करें
+# उत्पादन वातावरण सेट करें
 azd env new production
 
 # उत्पादन सेटिंग्स कॉन्फ़िगर करें
@@ -224,16 +224,16 @@ azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# सभी सेवाओं को तैनात करें
+# सभी सेवाएँ तैनात करें
 azd up
 
 # तैनाती की निगरानी करें
 azd monitor --overview
 ```
 
-### उदाहरण 2: AI-संचालित कंटेनर ऐप
+### Example 2: AI-Powered Container App
 
-**परिदृश्य**: Azure OpenAI एकीकरण के साथ AI चैट एप्लिकेशन
+**परिदृश्य**: Microsoft Foundry Models एकीकरण के साथ AI चैट एप्लिकेशन
 
 **फ़ाइल: src/ai-chat/app.py**
 ```python
@@ -258,7 +258,7 @@ def chat():
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -320,15 +320,15 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**परिनियोजन कमांड:**
+**तैनाती कमांड्स:**
 ```bash
-# पर्यावरण तैयार करें
+# पर्यावरण सेट करें
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAI कॉन्फ़िगर करें
+# OpenAI को कॉन्फ़िगर करें
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # तैनात करें
 azd up
@@ -339,11 +339,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### उदाहरण 3: कतार प्रोसेसिंग के साथ बैकग्राउंड वर्कर
+### Example 3: Background Worker with Queue Processing
 
 **परिदृश्य**: मैसेज कतार के साथ ऑर्डर प्रोसेसिंग सिस्टम
 
-**डायरेक्टरी संरचना:**
+**निर्देशिका संरचना:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -378,7 +378,7 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # आदेश संसाधित करें
+            # ऑर्डर संसाधित करें
             print(f"Processing order: {message.content}")
             
             # संदेश पूरा करें
@@ -403,15 +403,15 @@ services:
     host: containerapp
 ```
 
-**परिनियोजन:**
+**तैनाती:**
 ```bash
 # प्रारंभ करें
 azd init
 
-# क्यू विन्यास के साथ तैनात करें
+# कतार विन्यास के साथ तैनात करें
 azd up
 
-# क्यू की लंबाई के आधार पर वर्कर को स्केल करें
+# कतार की लंबाई के आधार पर वर्कर को स्केल करें
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,31 +420,31 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## उन्नत पैटर्न
+## Advanced Patterns
 
-### पैटर्न 1: ब्लू-ग्रीन परिनियोजन
+### Pattern 1: Blue-Green Deployment
 
 ```bash
-# ट्रैफ़िक के बिना नई रिवीजन बनाएं
+# ट्रैफ़िक के बिना नया संशोधन बनाएं
 azd deploy api --revision-suffix blue --no-traffic
 
-# नई रिवीजन का परीक्षण करें
+# नए संशोधन का परीक्षण करें
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# ट्रैफ़िक विभाजित करें (20% नीले पर, 80% मौजूदा पर)
+# ट्रैफ़िक विभाजित करें (20% ब्लू को, 80% वर्तमान को)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# पूर्ण रूप से नीले पर स्विच करें
+# संपूर्ण ट्रैफ़िक को ब्लू पर स्थानांतरित करें
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### पैटर्न 2: AZD के साथ केनरी परिनियोजन
+### Pattern 2: Canary Deployment with AZD
 
 **फ़ाइल: .azure/dev/config.json**
 ```json
@@ -458,18 +458,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**परिनियोजन स्क्रिप्ट:**
+**तैनाती स्क्रिप्ट:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# 10% ट्रैफ़िक के साथ नया रिवीजन तैनात करें
+# नई रिवीजन को 10% ट्रैफ़िक के साथ तैनात करें
 azd deploy api --revision-mode multiple
 
 # मेट्रिक्स की निगरानी करें
 azd monitor --service api --duration 5m
 
-# ट्रैफ़िक धीरे-धीरे बढ़ाएँ
+# ट्रैफ़िक धीरे-धीरे बढ़ाएं
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -481,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### पैटर्न 3: मल्टी-रीजन परिनियोजन
+### Pattern 3: Multi-Region Deployment
 
 **फ़ाइल: azure.yaml**
 ```yaml
@@ -527,7 +527,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**परिनियोजन:**
+**तैनाती:**
 ```bash
 # सभी क्षेत्रों में तैनात करें
 azd up
@@ -536,7 +536,7 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### पैटर्न 4: Dapr एकीकरण
+### Pattern 4: Dapr Integration
 
 **फ़ाइल: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -590,12 +590,12 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## सर्वोत्तम प्रथाएँ
+## Best Practices
 
-### 1. संसाधन संगठन
+### 1. Resource Organization
 
 ```bash
-# सुसंगत नामकरण मानकों का पालन करें
+# सुसंगत नामकरण नियमों का उपयोग करें
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -603,7 +603,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. सुरक्षा सर्वोत्तम प्रथाएँ
+### 2. Security Best Practices
 
 ```bicep
 // Always use managed identity
@@ -642,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. प्रदर्शन अनुकूलन
+### 3. Performance Optimization
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,13 +662,13 @@ services:
             concurrent: 100
 ```
 
-### 4. निगरानी और अवलोकनीयता
+### 4. Monitoring and Observability
 
 ```bash
 # Application Insights सक्षम करें
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# वास्तविक समय में लॉग देखें
+# लॉग्स को वास्तविक समय में देखें
 azd monitor --logs
 # या Container Apps के लिए Azure CLI का उपयोग करें:
 az containerapp logs show --name api --resource-group rg-myapp --follow
@@ -685,10 +685,10 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. लागत अनुकूलन
+### 5. Cost Optimization
 
 ```bash
-# इस्तेमाल में न होने पर शून्य तक स्केल करें
+# उपयोग में न होने पर शून्य तक स्केल करें
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -705,9 +705,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD एकीकरण
+### 6. CI/CD Integration
 
-**GitHub Actions उदाहरण:**
+**GitHub Actions Example:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -737,22 +737,22 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## सामान्य कमांड संदर्भ
+## Common Commands Reference
 
 ```bash
-# नया कंटेनर ऐप प्रोजेक्ट प्रारंभ करें
+# नया कंटेनर ऐप प्रोजेक्ट आरंभ करें
 azd init --template <template-name>
 
-# बुनियादी ढांचा और एप्लिकेशन तैनात करें
+# बुनियादी ढाँचा और एप्लिकेशन तैनात करें
 azd up
 
-# केवल एप्लिकेशन कोड तैनात करें (बुनियादी ढांचे को छोड़ें)
+# केवल एप्लिकेशन कोड तैनात करें (इन्फ्रास्ट्रक्चर छोड़ें)
 azd deploy
 
-# केवल बुनियादी ढांचे की व्यवस्था करें
+# केवल बुनियादी ढाँचा प्रोविजन करें
 azd provision
 
-# तैनात किए गए संसाधनों को देखें
+# तैनात किए गए संसाधन देखें
 azd show
 
 # azd monitor या Azure CLI का उपयोग करके लॉग स्ट्रीम करें
@@ -762,13 +762,13 @@ azd monitor --logs
 # एप्लिकेशन की निगरानी करें
 azd monitor --overview
 
-# संसाधनों को साफ़ करें
+# संसाधनों की सफाई करें
 azd down --force --purge
 ```
 
-## समस्या समाधान
+## Troubleshooting
 
-### समस्या: कंटेनर शुरू नहीं होता
+### Issue: Container fails to start
 
 ```bash
 # Azure CLI का उपयोग करके लॉग जांचें
@@ -785,23 +785,23 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### समस्या: कंटेनर ऐप एंडपॉइंट तक पहुँच नहीं हो रही है
+### Issue: Can't access container app endpoint
 
 ```bash
-# इंग्रेस विन्यास सत्यापित करें
+# इंग्रेस कॉन्फ़िगरेशन सत्यापित करें
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# जाँचें कि आंतरिक इंग्रेस सक्षम है या नहीं
+# जांचें कि आंतरिक इंग्रेस सक्षम है या नहीं
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### समस्या: प्रदर्शन समस्याएँ
+### Issue: Performance problems
 
 ```bash
 # संसाधन उपयोग की जाँच करें
@@ -817,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## अतिरिक्त संसाधन और उदाहरण
-- [Microservices Example](./microservices/README.md)
-- [Simple Flash API Example](./simple-flask-api/README.md)
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
-- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+## Additional Resources and Examples
+- [माइक्रोसर्विसेज़ उदाहरण](./microservices/README.md)
+- [सरल Flask API उदाहरण](./simple-flask-api/README.md)
+- [Azure Container Apps दस्तावेज़](https://learn.microsoft.com/azure/container-apps/)
+- [AZD टेम्पलेट गैलरी](https://azure.github.io/awesome-azd/)
+- [Container Apps नमूने](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep टेम्पलेट्स](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## योगदान
+## Contributing
 
-नए कंटेनर ऐप उदाहरण योगदान करने के लिए:
+नए कंटेनर ऐप उदाहरण जोड़ने के लिए:
 
-1. अपना उदाहरण एक नई सबडायरेक्टरी में बनाएं
-2. पूरी `azure.yaml`, `infra/`, और `src/` फ़ाइलें शामिल करें
-3. परिनियोजन निर्देशों के साथ व्यापक README जोड़ें
-4. `azd up` के साथ परिनियोजन का परीक्षण करें
+1. अपने उदाहरण के साथ एक नया उप-निर्देशिका बनाएं
+2. पूर्ण `azure.yaml`, `infra/`, और `src/` फ़ाइलें शामिल करें
+3. तैनाती निर्देशों के साथ व्यापक README जोड़ें
+4. `azd up` के साथ तैनाती का परीक्षण करें
 5. एक पुल अनुरोध सबमिट करें
 
 ---
 
-**मदद चाहिए?** सहायता और प्रश्नों के लिए [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) समुदाय से जुड़ें।
+**मदद चाहिए?** समर्थन और प्रश्नों के लिए [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) समुदाय में शामिल हों।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यह दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके अनूदित किया गया है। जबकि हम सटीकता के लिए प्रयत्नशील हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या असंगतियाँ हो सकती हैं। मूल दस्तावेज़ को उसकी मूल भाषा में अधिकृत स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए पेशेवर मानवीय अनुवाद की सिफारिश की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी प्रकार की गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
+**अस्वीकरण**:
+यह दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके अनुवादित किया गया है। हालांकि हम सटीकता के लिए प्रयास करते हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ अपनी मूल भाषा में अधिकृत स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए, पेशेवर मानव अनुवाद की अनुशंसा की जाती है। हम इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए उत्तरदायी नहीं हैं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
