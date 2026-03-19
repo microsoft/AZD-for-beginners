@@ -1,49 +1,42 @@
-# AI éles munkaterhelések legjobb gyakorlatai AZD-vel
+# Termelési AI munkaterhelés legjobb gyakorlatok AZD-vel
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam főoldal**: [AZD For Beginners](../../README.md)
-- **📖 Jelenlegi fejezet**: 8. fejezet - Éles és vállalati minták
+- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 8. fejezet - Termelési és vállalati minták
 - **⬅️ Előző fejezet**: [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Kapcsolódó**: [AI Workshop labor](ai-workshop-lab.md)
-- **🎯 Tanfolyam befejezése**: [AZD For Beginners](../../README.md)
+- **⬅️ Kapcsolódó**: [AI Műhely Labor](ai-workshop-lab.md)
+- **🎯 Kurzus befejezve**: [AZD Kezdőknek](../../README.md)
 
 ## Áttekintés
 
-Ez az útmutató átfogó legjobb gyakorlatokat nyújt élesre kész AI munkaterhelések telepítéséhez az Azure Developer CLI (AZD) használatával. A Microsoft Foundry Discord közösség és valós ügyféltelepítések visszajelzései alapján ezek a gyakorlatok a leggyakoribb kihívásokat célozzák meg az éles AI rendszerekben.
+Ez az útmutató átfogó legjobb gyakorlatokat kínál termelésre kész AI munkaterhelések telepítéséhez az Azure Developer CLI (AZD) segítségével. A Microsoft Foundry Discord közösség visszajelzései és valós ügyféltelepítések alapján ezek a gyakorlatok a termelési AI rendszerek leggyakoribb kihívásait kezelik.
 
-## Kezelt főbb kihívások
+## Megoldott kulcskihívások
 
-A közösségi felmérésünk eredményei alapján ezek a fejlesztők legfőbb kihívásai:
+Közösségi szavazásunk eredményei alapján a fejlesztők legfontosabb kihívásai:
 
-- **45%** küzd több szolgáltatást érintő AI-telepítésekkel
-- **38%**-nak problémái vannak hitelesítési adatok és titkok kezelésével  
-- **35%** számára nehéz az éles bevethetőség és a skálázás
-- **32%**-nak jobb költségoptimalizálási stratégiákra van szüksége
-- **29%**-uknak jobb megfigyelésre és hibakeresésre van szüksége
+- **45%** küzd több szolgáltatást magába foglaló AI telepítéssel
+- **38%** hitelesítési és titkos kezelési problémákkal  
+- **35%** nehézséget okoz a termelési készültség és skálázás
+- **32%** jobb költségoptimalizálási stratégiákra van szükségük
+- **29%** fejlettebb monitorozást és hibakeresést igényelnek
 
-## Architektúra minták éles AI-hez
+## Termelési AI architektúra minták
 
-### Minta 1: Mikroszolgáltatás-alapú AI architektúra
+### Minta 1: Mikro-szolgáltatások AI architektúrája
 
-**Mikor használjuk**: Bonyolult AI alkalmazások több funkcióval
+**Mikor használjuk**: Összetett AI alkalmazások esetén, több funkcióval
 
+```mermaid
+graph TD
+    Frontend[Web Frontend] --- Gateway[API Átjáró] --- LB[Terheléselosztó]
+    Gateway --> Chat[Chat Szolgáltatás]
+    Gateway --> Image[Kép Szolgáltatás]
+    Gateway --> Text[Szöveg Szolgáltatás]
+    Chat --> OpenAI[Microsoft Foundry Modellek]
+    Image --> Vision[Számítógépes Látás]
+    Text --> DocIntel[Dokumentum Intelligencia]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
 **AZD megvalósítás**:
 
 ```yaml
@@ -67,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Minta 2: Eseményvezérelt AI feldolgozás
+### Minta 2: Esemény-alapú AI feldolgozás
 
-**Mikor használjuk**: Kötegelt feldolgozás, dokumentumelemzés, aszinkron munkafolyamatok
+**Mikor használjuk**: Kötegelt feldolgozás, dokumentum elemzés, aszinkron munkafolyamatok
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -116,15 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+## Gondolkodás az AI ügynök egészségéről
+
+Ha egy hagyományos webalkalmazás meghibásodik, a tünetek ismertek: egy oldal nem töltődik be, egy API hibát ad vissza, vagy egy telepítés nem sikerül. Az AI által vezérelt alkalmazások hasonló módon hibásodhatnak meg—de előfordulhat, hogy finomabb módon viselkednek helytelenül, amelyek nem produkálnak egyértelmű hibajelzéseket.
+
+Ez a rész segít felépíteni egy mentális modellt az AI munkaterhelések monitorozásához, hogy tudd, hol keresd a problémákat, amikor valami nem tűnik rendben lévőnek.
+
+### Hogyan különbözik az ügynök egészsége a hagyományos alkalmazás egészségétől
+
+Egy hagyományos alkalmazás vagy működik, vagy nem. Egy AI ügynök úgy tűnhet, hogy működik, de rossz eredményeket adhat. Az ügynök egészségét két rétegben érdemes gondolkodni:
+
+| Réteg | Mit figyeljünk | Hol keressük |
+|-------|----------------|--------------|
+| **Infrastruktúra egészsége** | Fut-e a szolgáltatás? Ki vannak-e osztva az erőforrások? Elérhetők az végpontok? | `azd monitor`, Azure Portal erőforrás egészség, konténer/app naplók |
+| **Viselkedési egészség** | Pontosan válaszol az ügynök? Időben érkeznek a válaszok? Helyesen hívják a modellt? | Application Insights trace-ek, modell hívási késleltetés, válaszminőség naplók |
+
+Az infrastruktúra egészsége ismerős - ez minden azd alkalmazásnál ugyanaz. A viselkedési egészség az az új réteg, amit az AI munkaterhelések vezetnek be.
+
+### Hol keressük, ha az AI alkalmazások nem úgy viselkednek, ahogy kellene
+
+Ha az AI alkalmazásod nem a várt eredményeket hozza, itt egy fogalmi ellenőrzőlista:
+
+1. **Kezdd az alapokkal.** Fut az alkalmazás? Eléri a függőségeit? Ellenőrizd az `azd monitor`-t és az erőforrás egészséget, ahogy bármely alkalmazásnál tennéd.
+2. **Ellenőrizd a modell kapcsolatot.** Az alkalmazás sikeresen hívja-e az AI modellt? Sikertelen vagy időtúllépéses modell hívások a leggyakoribb AI alkalmazás problémák oka, és megjelennek az alkalmazás naplóiban.
+3. **Nézd meg, mit kapott a modell.** Az AI válaszok a bemenettől függenek (a prompt és a lekért kontextus). Ha a kimenet helytelen, a bemenet általában hibás. Ellenőrizd, hogy az alkalmazás a megfelelő adatot küldi-e a modellnek.
+4. **Vizsgáld meg a válasz késését.** Az AI modell hívások lassabbak, mint a tipikus API hívások. Ha az alkalmazás lassúnak érződik, nézd meg, nem nőtt-e meg a válaszidő — ez jelezheti a korlátozást, kapacitáskorlátokat vagy régiószintű terheltséget.
+5. **Figyeld meg a költségjelzéseket.** Váratlan felhasználási vagy API hívási kiugrások jelezhetnek végtelen ciklust, rosszul konfigurált promptot vagy túlzott újrapróbálkozásokat.
+
+Nem kell rögtön mesterévé válnod az észlelhetőségi eszközöknek. A legfontosabb tanulság, hogy az AI alkalmazásoknál egy plusz viselkedési réteget is monitorozni kell, és az azd beépített monitorozója (`azd monitor`) jó kiindulópontot ad mindkét réteg vizsgálatához.
+
+---
+
 ## Biztonsági legjobb gyakorlatok
 
-### 1. Zero-trust biztonsági modell
+### 1. Zero-Trust biztonsági modell
 
 **Megvalósítási stratégia**:
-- Nincs szolgáltatás-szolgáltatás közötti kommunikáció hitelesítés nélkül
-- Minden API-hívás kezelt identitásokat használ
+- Szolgáltatás közötti kommunikáció hitelesítés nélkül nem engedélyezett
+- Minden API hívás kezelt identitásokat használ
 - Hálózati elszigetelés privát végpontokkal
-- A legkisebb jogosultság elve szerinti hozzáférés-vezérlés
+- Legkisebb jogosultság elvének alkalmazása
 
 ```bicep
 // Managed Identity for each service
@@ -182,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Hálózati biztonság
 
-**Privát végpont konfigurációja**:
+**Privát végpont konfiguráció**:
 
 ```bicep
 // Virtual Network for AI services
@@ -244,7 +268,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. Automatikus skálázási stratégiák
 
-**Container Apps automatikus skálázása**:
+**Container Apps automatikus skálázás**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -290,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Gyorsítótárazási stratégiák
 
-**Redis Cache az AI válaszokhoz**:
+**Redis gyorsítótár AI válaszokhoz**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -318,9 +342,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Terheléselosztás és forgalomkezelés
+### 3. Terhelés elosztás és forgalomkezelés
 
-**Application Gateway WAF-pel**:
+**Application Gateway WAF-fal**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -363,7 +387,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 **Környezetspecifikus konfigurációk**:
 
 ```bash
-# Fejlesztési környezet
+# Fejlesztői környezet
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -371,7 +395,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Éles környezet
+# Termelési környezet
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -380,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Költségfigyelés és költségvetések
+### 2. Költségmonitorozás és költségkeretek
 
 ```bicep
 // Cost management and budgets
@@ -421,12 +445,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Token felhasználás optimalizálása
+### 3. Token használat optimalizálása
 
 **OpenAI költségkezelés**:
 
 ```typescript
-// Alkalmazásszintű token optimalizálás
+// Alkalmazásszintű token optimalizáció
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -436,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Rövidítsd le a kontextust, ne a felhasználói bemenetet
+      // Kontextus lekicsinyítése, nem a felhasználói bemeneté
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -450,7 +474,7 @@ class TokenOptimizer {
 }
 ```
 
-## Megfigyelés és megfigyelhetőség
+## Monitorozás és észlelhetőség
 
 ### 1. Átfogó Application Insights
 
@@ -497,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-specifikus megfigyelés
+### 2. AI-specifikus monitorozás
 
-**Egyedi műszerfalak AI-mutatókhoz**:
+**Egyedi műszerfalak AI mérőszámokhoz**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -528,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Egészségellenőrzések és rendelkezésre állás figyelése
+### 3. Állapotellenőrzések és rendelkezésre állás
 
 ```bicep
 // Application Insights availability tests
@@ -597,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Katasztrófa utáni helyreállítás és magas rendelkezésre állás
+## Katasztrófa helyreállítás és magas rendelkezésre állás
 
-### 1. Több régiós telepítés
+### 1. Többrégiós telepítés
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -795,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastruktúra-ellenőrzés
+### 2. Infrastruktúra validáció
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -803,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Ellenőrizze, hogy minden szükséges szolgáltatás fut-e
+# Ellenőrizze, hogy az összes szükséges szolgáltatás fut-e
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -813,7 +837,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# OpenAI modelltelepítések érvényesítése
+# Ellenőrizze az OpenAI modell telepítéseket
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -821,80 +845,80 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Az AI szolgáltatás kapcsolatának tesztelése
+# Tesztelje az AI szolgáltatás kapcsolódását
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Éles üzemre való felkészültség ellenőrzőlista
+## Termelési készültségi ellenőrzőlista
 
 ### Biztonság ✅
 - [ ] Minden szolgáltatás kezelt identitásokat használ
 - [ ] Titkok a Key Vault-ban tárolva
 - [ ] Privát végpontok konfigurálva
 - [ ] Hálózati biztonsági csoportok megvalósítva
-- [ ] RBAC a legkisebb jogosultság elvével
-- [ ] WAF engedélyezve a nyilvános végpontokon
+- [ ] RBAC legkisebb jogosultsággal
+- [ ] WAF engedélyezve a publikus végpontokon
 
 ### Teljesítmény ✅
-- [ ] Automatikus skálázás konfigurálva
+- [ ] Automatikus skálázás beállítva
 - [ ] Gyorsítótárazás megvalósítva
-- [ ] Terheléselosztás beállítva
+- [ ] Terheléseloszlás beállítva
 - [ ] CDN statikus tartalmakhoz
-- [ ] Adatbázis-kapcsolat pooling
-- [ ] Token használat optimalizálva
+- [ ] Adatbázis kapcsolat-poolozás
+- [ ] Token használat optimalizálása
 
-### Megfigyelés ✅
+### Monitorozás ✅
 - [ ] Application Insights konfigurálva
 - [ ] Egyedi metrikák definiálva
-- [ ] Riasztási szabályok beállítva
+- [ ] Értesítési szabályok beállítva
 - [ ] Műszerfal létrehozva
-- [ ] Egészségellenőrzések megvalósítva
-- [ ] Naplómegőrzési irányelvek
+- [ ] Állapotellenőrzések implementálva
+- [ ] Naplómegőrzési szabályok
 
 ### Megbízhatóság ✅
-- [ ] Több régiós telepítés
+- [ ] Többrégiós telepítés
 - [ ] Mentési és helyreállítási terv
-- [ ] Circuit breaker minták megvalósítva
-- [ ] Újrapróbálkozási szabályok konfigurálva
-- [ ] Szolgáltatás fokozatos degradációja
-- [ ] Egészségellenőrző végpontok
+- [ ] Kapcsolókörök implementálva
+- [ ] Újrapróbálkozási szabályok beállítva
+- [ ] Szépen degradálódó működés
+- [ ] Állapotellenőrző végpontok
 
-### Költségkezelés ✅
-- [ ] Költségvetési riasztások konfigurálva
-- [ ] Erőforrások megfelelő méretezése
-- [ ] Fejlesztő/teszt kedvezmények alkalmazva
-- [ ] Fenntartott példányok megvásárolva
-- [ ] Költségfigyelő műszerfal
-- [ ] Rendszeres költségellenőrzések
+### Költségmenedzsment ✅
+- [ ] Költségkeret riasztások beállítva
+- [ ] Erőforrások helyes méretezése
+- [ ] Fejlesztési/teszt kedvezmények érvényesítve
+- [ ] Lefoglalt példányok vásárlása
+- [ ] Költségmonitorozó műszerfal
+- [ ] Rendszeres költségáttekintések
 
-### Megfelelőség ✅
-- [ ] Adathely követelmények teljesítve
+### Megfelelés ✅
+- [ ] Adathely-megfelelőségi követelmények teljesülnek
 - [ ] Audit naplózás engedélyezve
-- [ ] Megfelelőségi irányelvek alkalmazva
-- [ ] Biztonsági alapvonalak megvalósítva
+- [ ] Megfelelőségi szabályzatok alkalmazva
+- [ ] Biztonsági alapértékek implementálva
 - [ ] Rendszeres biztonsági értékelések
-- [ ] Eseménykezelési terv
+- [ ] Incidenskezelési terv
 
-## Teljesítmény-benchmarkok
+## Teljesítmény mutatók
 
-### Tipikus éles üzem metrikák
+### Tipikus termelési metrikák
 
-| Metrika | Cél | Figyelés |
-|--------|--------|------------|
+| Metrika | Célérték | Monitorozás |
+|---------|----------|-------------|
 | **Válaszidő** | < 2 másodperc | Application Insights |
-| **Rendelkezésre állás** | 99.9% | Rendelkezésre állás figyelése |
-| **Hibaarány** | < 0.1% | Alkalmazás naplók |
-| **Token használat** | < $500/hónap | Költségkezelés |
-| **Egyidejű felhasználók** | 1000+ | Terhelés tesztelés |
-| **Helyreállási idő** | < 1 óra | Katasztrófa utáni helyreállítási tesztek |
+| **Rendelkezésre állás** | 99,9% | Rendelkezésre állás monitorozás |
+| **Hibaarány** | < 0,1% | Alkalmazás naplók |
+| **Token használat** | < 500 $/hó | Költségkezelés |
+| **Egyidejű felhasználók** | 1000+ | Terhelés teszt |
+| **Helyreállítási idő** | < 1 óra | Katasztrófa helyreállítás tesztek |
 
 ### Terhelés tesztelés
 
 ```bash
-# AI-alkalmazások terhelésvizsgálatára szolgáló szkript
+# Betöltési teszt szkript AI alkalmazásokhoz
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -906,43 +930,229 @@ python scripts/load_test.py \
 
 A Microsoft Foundry Discord közösség visszajelzései alapján:
 
-### A közösség legfőbb ajánlásai:
+### A közösség fő ajánlásai:
 
-1. **Kezdj kicsiben, skálázz fokozatosan**: Kezdd alap SKU-kkal és skálázz a tényleges használat alapján
-2. **Figyelj mindent**: Állíts be átfogó megfigyelést az első naptól
-3. **Automatizáld a biztonságot**: Használj infrastruktúrát kódként a következetes biztonság érdekében
-4. **Tesztelj alaposan**: Építs be AI-specifikus tesztelést a folyamataidba
-5. **Tervezz a költségekre**: Figyeld a tokenfelhasználást és állíts be költségfigyelmeztetéseket korán
+1. **Kezdj kicsiben, méretezz fokozatosan**: Alap SKU-kkal indulj, és a tényleges használat alapján skálázz
+2. **Figyelj mindent**: Átfogó monitorozást állíts be az első naptól
+3. **Automatizáld a biztonságot**: Használj infrastruktúrát kódként a következetes biztonságért
+4. **Tesztelj alaposan**: Vond be az AI-specifikus teszteket a pipeline-ba
+5. **Tervezd a költségeket**: Figyeld a token használatot és állíts be költség riasztásokat korán
 
-### Kerüld el a következő gyakori hibákat:
+### Gyakori buktatók elkerülése:
 
-- ❌ API-kulcsok kódban történő rögzítése
-- ❌ A megfelelő megfigyelés hiánya
+- ❌ API kulcsok keménykódolása a kódban
+- ❌ Megfelelő monitorozás hiánya
 - ❌ Költségoptimalizálás figyelmen kívül hagyása
-- ❌ Hibaszcenáriók tesztelésének mellőzése
-- ❌ Telepítés egészségellenőrzés nélkül
+- ❌ Hibaszcenáriók tesztelésének elhanyagolása
+- ❌ Telepítés egészségellenőrzések nélkül
+
+## AZD AI CLI parancsok és kiterjesztések
+
+Az AZD egyre bővülő készletet kínál AI-specifikus parancsokból és kiterjesztésekből, amelyek egyszerűsítik a termelési AI munkafolyamatokat. Ezek az eszközök hidat képeznek a helyi fejlesztés és a termelési telepítés között AI munkaterhelések esetén.
+
+### AZD kiterjesztések AI-hoz
+
+AZD kiterjesztési rendszert használ az AI-specifikus képességek hozzáadásához. Telepítsd és kezeld a kiterjesztéseket ezzel:
+
+```bash
+# Sorolja fel az összes elérhető bővítményt (beleértve az AI-t is)
+azd extension list
+
+# Telepítse a Foundry agents bővítményt
+azd extension install azure.ai.agents
+
+# Telepítse a finomhangolás bővítményt
+azd extension install azure.ai.finetune
+
+# Telepítse az egyedi modellek bővítményt
+azd extension install azure.ai.models
+
+# Frissítsen minden telepített bővítményt
+azd extension upgrade --all
+```
+
+**Elérhető AI kiterjesztések:**
+
+| Kiterjesztés | Cél | Állapot |
+|--------------|-----|---------|
+| `azure.ai.agents` | Foundry Agent Service menedzsment | Előzetes |
+| `azure.ai.finetune` | Foundry modell finomhangolás | Előzetes |
+| `azure.ai.models` | Foundry egyedi modellek | Előzetes |
+| `azure.coding-agent` | Kódoló ügynök konfiguráció | Elérhető |
+
+### Ügynök projektek inicializálása `azd ai agent init` segítségével
+
+Az `azd ai agent init` parancs termelésre kész AI ügynök projektet generál, amely integrált a Microsoft Foundry Agent Service-szel:
+
+```bash
+# Új ügynök projekt inicializálása egy ügynök leírófájlból
+azd ai agent init -m <manifest-path-or-uri>
+
+# Egy adott Foundry projekt inicializálása és célzása
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Egyedi forráskönyvtárral inicializálás
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Container Apps megcélzása gazdaként
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Fontos jelzők:**
+
+| Jelző | Leírás |
+|-------|--------|
+| `-m, --manifest` | Az ügynök manifest elérési útja vagy URI-ja a projektedhez |
+| `-p, --project-id` | Létező Microsoft Foundry projektazonosító az azd környezetedhez |
+| `-s, --src` | Könyvtár az ügynök definíció letöltéséhez (alapértelmezett: `src/<agent-id>`) |
+| `--host` | Alapértelmezett hoszt felülírása (pl. `containerapp`) |
+| `-e, --environment` | Az azd környezet megadása |
+
+**Termelési tipp**: Használd a `--project-id` opciót, hogy közvetlenül kapcsolódj egy meglévő Foundry projekthez, így az ügynök kódod és a felhő erőforrásaid azonnal összekapcsolódnak.
+
+### Model Kontextus Protokoll (MCP) az `azd mcp`-vel
+
+Az AZD beépített MCP szervert kínál (Alpha), amely lehetővé teszi az AI ügynökök és eszközök számára, hogy szabványosított protokollon keresztül kommunikáljanak az Azure erőforrásaiddal:
+
+```bash
+# Indítsa el az MCP szervert a projektjéhez
+azd mcp start
+
+# Kezelje az eszköz beleegyezést az MCP műveletekhez
+azd mcp consent
+```
+
+Az MCP szerver elérhetővé teszi az azd projekted kontextusát—környezetek, szolgáltatások és Azure erőforrások—AI-alapú fejlesztői eszközök számára. Ez lehetővé teszi:
+
+- **AI-támogatott telepítést**: Kódoló ügynökök lekérdezhetik a projekt állapotát és indíthatnak telepítéseket
+- **Erőforrás felfedezést**: AI eszközök felfedezhetik, milyen Azure erőforrásokat használ a projekt
+- **Környezet menedzsmentet**: Ügynökök válthatnak fejlesztői/staging/termelési környezetek között
+
+### Infrastruktúra generálás az `azd infra generate`-bel
+
+Termelési AI munkaterhelésekhez generálhatsz és testreszabhatsz Infrastrukturát Kódként, ahelyett, hogy automatikus kiosztásra hagyatkoznál:
+
+```bash
+# Hozzon létre Bicep/Terraform fájlokat a projekt definíciójából
+azd infra generate
+```
+
+Ez diszkre írja az IaC-t, így:
+- Átnézheted és auditálhatod az infrastruktúrát telepítés előtt
+- Hozzáadhatsz egyedi biztonsági szabályokat (hálózati szabályok, privát végpontok)
+- Integrálhatod meglévő IaC átvizsgálási folyamatokkal
+- Verziókezelheted az infrastruktúra változásait külön az alkalmazáskódtól
+
+### Termelési életciklus horogok
+
+Az AZD horogok lehetővé teszik egyedi logikák beillesztését a telepítési életciklus minden lépésébe—kritikus a termelési AI munkafolyamatokhoz:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# Run a specific hook manually during development
+azd hooks run predeploy
+```
+
+**Ajánlott production horogok AI munkaterhelésekhez:**
+
+| Horog | Használati eset |
+|-------|-----------------|
+| `preprovision` | Előfizetési kvóták ellenőrzése AI modell kapacitáshoz |
+| `postprovision` | Privát végpontok konfigurálása, modell súlyok telepítése |
+| `predeploy` | AI biztonsági tesztek futtatása, prompt sablonok validálása |
+| `postdeploy` | Ügynök válaszok smoke tesztje, modell kapcsolat ellenőrzése |
+
+### CI/CD pipeline konfiguráció
+
+Használd az `azd pipeline config` parancsot projekted összekapcsolására GitHub Actions vagy Azure Pipelines szolgáltatással biztonságos Azure hitelesítéssel:
+
+```bash
+# CI/CD csővezeték konfigurálása (interaktív)
+azd pipeline config
+
+# Konfigurálás egy adott szolgáltatóval
+azd pipeline config --provider github
+```
+
+Ez a parancs:
+- Létrehoz egy legkisebb jogosultságú szolgáltatói identitást
+- Konfigurálja a szövetségi hitelesítést (titkok tárolása nélkül)
+- Generálja vagy frissíti a pipeline definíciós fájlt
+- Beállítja a szükséges környezeti változókat a CI/CD rendszeren
+
+**Termelési munkafolyamat pipeline konfigurációval:**
+
+```bash
+# 1. Állítsa be a termelési környezetet
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. Állítsa be a pipeline-t
+azd pipeline config --provider github
+
+# 3. A pipeline minden push esetén lefuttatja az azd deploy-t a main ágon
+```
+
+### Komponensek hozzáadása az `azd add`-dal
+
+Fokozatosan adhatsz Azure szolgáltatásokat meglévő projekthez:
+
+```bash
+# Új szolgáltatáskomponenst adjon hozzá interaktívan
+azd add
+```
+
+Ez különösen hasznos termelési AI alkalmazások bővítéséhez—for például vektoros kereső szolgáltatás, új ügynök végpont, vagy monitorozó komponens hozzáadása meglévő telepítéshez.
 
 ## További források
-
-- **Azure Well-Architected Framework**: [Útmutató AI munkaterhelésekhez](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Hivatalos dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
-- **Közösségi sablonok**: [Azure Samples](https://github.com/Azure-Samples)
+- **Azure Jól megalapozott keretrendszer**: [AI munkaterhelés útmutató](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Dokumentáció**: [Hivatalos dokumentumok](https://learn.microsoft.com/azure/ai-studio/)
+- **Közösségi sablonok**: [Azure minták](https://github.com/Azure-Samples)
 - **Discord közösség**: [#Azure csatorna](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure a skills.sh oldalon](https://skills.sh/microsoft/github-copilot-for-azure) - 37 nyitott agent képesség az Azure AI, Foundry, telepítés, költségoptimalizálás és diagnosztika témákban. Telepítsd az eszközödbe:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam főoldal**: [AZD For Beginners](../../README.md)
-- **📖 Jelenlegi fejezet**: 8. fejezet - Éles és vállalati minták
+- **📚 Tanfolyam kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 8. fejezet - Termelési és vállalati minták
 - **⬅️ Előző fejezet**: [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Kapcsolódó**: [AI Workshop labor](ai-workshop-lab.md)
-- **🎆 Tanfolyam befejezése**: [AZD For Beginners](../../README.md)
+- **⬅️ Kapcsolódó**: [AI workshop labor](ai-workshop-lab.md)
+- **� Tanfolyam befejezve**: [AZD Kezdőknek](../../README.md)
 
-**Emlékeztető**: Az éles AI munkaterhelések gondos tervezést, megfigyelést és folyamatos optimalizálást igényelnek. Kezdj ezekkel a mintákkal, és igazítsd őket a saját követelményeidhez.
+**Ne feledd**: A termelési AI munkaterhelésekhez alapos tervezés, figyelés és folyamatos optimalizálás szükséges. Kezdd ezekkel a mintákkal, és igazítsd őket a saját igényeidhez.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ez a dokumentum a Co-op Translator mesterséges intelligencia fordítószolgáltatás (https://github.com/Azure/co-op-translator) segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum eredeti nyelvű változatát tekintse a hiteles forrásnak. Fontos információk esetén szakmai, emberi fordítást javasolunk. Nem vállalunk felelősséget az e fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Kizáró nyilatkozat**:  
+Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az igyekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén professzionális emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

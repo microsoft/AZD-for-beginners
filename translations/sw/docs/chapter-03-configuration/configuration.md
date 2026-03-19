@@ -1,48 +1,74 @@
 # Mwongozo wa Usanidi
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Sura 3 - Usanidi & Uthibitishaji
-- **⬅️ Previous**: [Mradi Wako wa Kwanza](first-project.md)
-- **➡️ Next**: [Mwongozo wa Uenezaji](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Sura 4: Miundombinu kama Msimbo](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura 3 - Usanidi & Uthibitishaji
+- **⬅️ Iliyotangulia**: [Mradi Wako wa Kwanza](first-project.md)
+- **➡️ Ifuatayo**: [Mwongozo wa Utekelezaji](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Sura Ifuatayo**: [Sura 4: Miundombinu kama Msimbo](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Utangulizi
 
-Mwongozo huu kamili unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mtiririko bora wa maendeleo na uenezaji. Utajifunza kuhusu muundo wa usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi ya hali ya juu zinazowezesha uenezaji wa Azure kwa ufanisi na usalama.
+Mwongozo huu wa kina unashughulikia nyanja zote za kusanidi Azure Developer CLI kwa mtiririko mzuri wa maendeleo na utekelezaji. Utajifunza kuhusu hierarki ya usanidi, usimamizi wa mazingira, mbinu za uthibitishaji, na mifumo ya usanidi ya juu inayowezesha utekelezaji wa Azure kwa ufanisi na usalama.
 
 ## Malengo ya Kujifunza
 
 Mwisho wa somo hili, utakuwa umeweza:
-- Kuwa mtaalamu wa hierarchy ya usanidi ya azd na kuelewa jinsi mipangilio inavyopangiwa kwa kipaumbele
+- Kumaster hierarki ya usanidi ya azd na kuelewa jinsi mipangilio inavyopangiwa kwa kipaumbele
 - Kusanidi mipangilio ya kimataifa na maalum kwa mradi kwa ufanisi
-- Kudhibiti mazingira mengi yenye usanidi tofauti
-- Kutekeleza mifumo salama ya uthibitisho na idhini
-- Kuelewa mifumo ya usanidi ya hali ya juu kwa ajili ya mazingira changamano
+- Kusimamia mazingira mengi yenye mipangilio tofauti
+- Kutekeleza mbinu salama za uthibitishaji na idhini
+- Kuelewa mifumo ya usanidi ya juu kwa matukio changamano
 
 ## Matokeo ya Kujifunza
 
 Baada ya kumaliza somo hili, utaweza:
-- Kusanidi azd kwa mtiririko bora wa maendeleo
-- Kuweka na kudhibiti mazingira mengi ya uenezaji
+- Kusanidi azd kwa mtiririko mzuri wa maendeleo
+- Kusanidi na kusimamia mazingira mengi ya utekelezaji
 - Kutekeleza mbinu salama za usimamizi wa usanidi
-- Kutatua matatizo yanayohusiana na usanidi
-- Kurekebisha tabia ya azd kwa mahitaji maalum ya shirika
+- Kutatua masuala yanayohusiana na usanidi
+- Kubinafsisha tabia ya azd kwa mahitaji maalum ya shirika
 
-Mwongozo huu kamili unashughulikia vipengele vyote vya kusanidi Azure Developer CLI kwa ajili ya mtiririko bora wa maendeleo na uenezaji.
+Mwongozo huu wa kina unashughulikia nyanja zote za kusanidi Azure Developer CLI kwa mtiririko mzuri wa maendeleo na utekelezaji.
 
-## Hierarkia ya Usanidi
+## Kuelewa Mawakala wa AI katika Mradi wa azd
 
-azd inatumia mfumo wa usanidi ulio katika tabaka:
-1. **Command-line flags** (kipaumbele cha juu zaidi)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (kipaumbele cha chini zaidi)
+Ikiwa wewe ni mpya kwa mawakala wa AI, hapa kuna njia rahisi ya kuwafikiria ndani ya ulimwengu wa azd.
+
+### Wakala ni Nini?
+
+Wakala ni kipande cha programu kinachoweza kupokea ombi, kukisia juu yake, na kuchukua hatua—mara nyingi kwa kukamata mfano wa AI, kutafuta data, au kuitisha huduma nyingine. Katika mradi wa azd, wakala ni tu huduma nyingine **service** kando na frontend ya wavuti au backend ya API yako.
+
+### Mawakala Wanavyofaa Katika Muundo wa Mradi wa azd
+
+Mradi wa azd unaundwa kwa tabaka tatu: **infrastructure**, **code**, na **configuration**. Mawakala huingizwa katika tabaka hizi kwa namna ile ile huduma nyingine yoyote inavyofanya:
+
+| Layer | Kile Inachofanya kwa Programu ya Kawaida | Kile Inachofanya kwa Wakala |
+|-------|-------------------------------------|---------------------------|
+| **Infrastructure** (`infra/`) | Huandaa web app na database | Huandaa endpoint ya Microsoft Foundry Models, index ya utafutaji, au mwenyeji wa wakala |
+| **Code** (`src/`) | Inajumuisha msimbo wako wa frontend na API | Inajumuisha mantiki ya wakala wako na ufafanuzi wa prompt |
+| **Configuration** (`azure.yaml`) | Inaorodhesha huduma zako na malengo yao ya kuhost | Inaorodhesha wakala wako kama huduma, ikielekeza kwenye msimbo wake na mwenyeji |
+
+### Nafasi ya `azure.yaml`
+
+Hauhitaji kukumbuka sintaksia sasa hivi. Kwa dhana, `azure.yaml` ni faili ambapo unaambia azd: *"Hizi ndizo huduma zinazounda programu yangu, na hapa ndipo pa kupata msimbo wao."*
+
+Wakati mradi wako unajumuisha wakala wa AI, `azure.yaml` inamoorodhesha wakala huo tu kama moja ya huduma. azd basi inajua kuandaa miundombinu sahihi (kama Microsoft Foundry Models endpoint au Container App kuhosti wakala) na kupeleka msimbo wa wakala wako—kama ilivyofanya kwa web app au API.
+
+Hii inamaanisha hakuna jambo jipya kabisa la kujifunza. Ikiwa unaelewa jinsi azd inavyosimamia huduma ya wavuti, tayari unaelewa jinsi inavyosimamia wakala.
+
+## Hierarki ya Usanidi
+
+azd inatumia mfumo wa usanidi wenye hierarki:
+1. **Bendera za mstari wa amri** (kipaumbele cha juu)
+2. **Variable za mazingira**
+3. **Usanidi wa mradi wa ndani** (`.azd/config.json`)
+4. **Usanidi wa mtumiaji wa kimataifa** (`~/.azd/config.json`)
+5. **Thamani za msingi** (kipaumbele cha chini)
 
 ## Usanidi wa Kimataifa
 
-### Kuweka Chaguo-msingi za Kimataifa
+### Setting Global Defaults
 ```bash
 # Weka usajili wa chaguo-msingi
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -53,33 +79,33 @@ azd config set defaults.location "eastus2"
 # Weka kanuni ya majina ya kikundi cha rasilimali cha chaguo-msingi
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# Tazama usanidi wote wa kimataifa
+# Onyesha usanidi wote wa kimataifa
 azd config list
 
 # Ondoa usanidi
 azd config unset defaults.location
 ```
 
-### Mipangilio ya Kimataifa ya Kawaida
+### Common Global Settings
 ```bash
 # Mapendeleo ya ukuzaji
 azd config set alpha.enable true                    # Washa vipengele vya alpha
-azd config set telemetry.enabled false             # Zima telemetry
+azd config set telemetry.enabled false             # Zima telemetri
 azd config set output.format json                  # Weka muundo wa pato
 
 # Mipangilio ya usalama
-azd config set auth.useAzureCliCredential true     # Tumia Azure CLI kwa uthibitishaji
+azd config set auth.useAzureCliCredential true     # Tumia Azure CLI kwa uthibitisho
 azd config set tls.insecure false                  # Lazimisha uhakiki wa TLS
 
-# Urekebishaji wa utendaji
-azd config set provision.parallelism 5             # Uundaji wa rasilimali kwa njia sambamba
+# Uboreshaji wa utendaji
+azd config set provision.parallelism 5             # Uundaji wa rasilimali sambamba
 azd config set deploy.timeout 30m                  # Muda wa mwisho wa utekelezaji
 ```
 
 ## 🏗️ Usanidi wa Mradi
 
-### Muundo wa azure.yaml
-Faili `azure.yaml` ni kiini cha mradi wako wa azd:
+### Muundo wa `azure.yaml`
+Faili ya `azure.yaml` ni moyo wa mradi wako wa azd:
 
 ```yaml
 # Minimum configuration
@@ -237,7 +263,7 @@ Kila mazingira yana usanidi wake katika `.azure/<env-name>/config.json`:
 }
 ```
 
-### Vigezo vya Mazingira
+### Variable za Mazingira
 ```bash
 # Weka vigezo maalum vya mazingira
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -261,9 +287,9 @@ azd env get-values | grep DEBUG
 ```
 
 ### Violezo vya Mazingira
-Unda `.azure/env.template` kwa usanidi thabiti wa mazingira:
+Tengeneza `.azure/env.template` kwa usanidi thabiti wa mazingira:
 ```bash
-# Vigezo vinavyohitajika
+# Vibadilishaji vinavyohitajika
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
@@ -279,9 +305,9 @@ LOG_LEVEL=info
 
 ## 🔐 Usanidi wa Uthibitishaji
 
-### Uunganisho wa Azure CLI
+### Uunganishaji wa Azure CLI
 ```bash
-# Tumia nyaraka za kuingia za Azure CLI (chaguo-msingi)
+# Tumia taarifa za uthibitisho za Azure CLI (chaguo-msingi)
 azd config set auth.useAzureCliCredential true
 
 # Ingia kwa mpangaji maalum
@@ -292,7 +318,7 @@ az account set --subscription <subscription-id>
 ```
 
 ### Uthibitishaji wa Service Principal
-Kwa mizunguko ya CI/CD:
+Kwa pipelines za CI/CD:
 ```bash
 # Weka vigezo vya mazingira
 export AZURE_CLIENT_ID="your-client-id"
@@ -305,9 +331,9 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Utambulisho Ulioendeshwa
-Kwa mazingira yaliyo mwenyeji kwenye Azure:
+Kwa mazingira yaliyohostiwa Azure:
 ```bash
-# Wezesha uthibitishaji wa utambulisho uliosimamiwa
+# Wezesha uthibitishaji wa kitambulisho kilichosimamiwa
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -346,7 +372,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Usanidi wa Uenezaji
+## 🚀 Usanidi wa Utekelezaji
 
 ### Usanidi wa Ujenzi
 ```yaml
@@ -389,7 +415,7 @@ Mfano wa `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/az
 
 ## 🔧 Usanidi wa Juu
 
-### Uainishaji Maalum wa Rasilimali
+### Uteuzi wa Majina ya Rasilimali
 ```bash
 # Weka miongozo ya majina
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -424,14 +450,14 @@ monitoring:
 
 ### Mazingira ya Maendeleo
 ```bash
-# .azure/development/.env
+# .azure/maendeleo/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Mazingira ya Ujaribu
+### Mazingira ya Staging
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -442,7 +468,7 @@ USE_PRODUCTION_APIS=true
 
 ### Mazingira ya Uzalishaji
 ```bash
-# .azure/uzalishaji/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -453,7 +479,7 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Thibitisha Usanidi
 ```bash
-# Kagua sintaksia ya usanidi
+# Angalia sintaksia ya usanidi
 azd config validate
 
 # Jaribu vigezo vya mazingira
@@ -472,7 +498,7 @@ Tengeneza skripti za uthibitisho katika `scripts/`:
 
 echo "Validating configuration..."
 
-# Angalia vigezo vya mazingira vinavyohitajika
+# Kagua vigezo vya mazingira vinavyohitajika
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
@@ -489,7 +515,7 @@ echo "Configuration validation passed!"
 
 ## 🎓 Mbinu Bora
 
-### 1. Tumia Vigezo vya Mazingira
+### 1. Tumia Variable za Mazingira
 ```yaml
 # Good: Use environment variables
 database:
@@ -500,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Panga Faili za Usanidi
+### 2. Panga Mafaili ya Usanidi
 ```
 .azure/
 ├── config.json              # Global project config
@@ -516,16 +542,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Mambo ya Kuzingatia kuhusu Udhibiti wa Toleo
+### 3. Mambo ya Kuzingatia kwenye Udhibiti wa Matoleo
 ```bash
 # .gitignore
-.azure/*/config.json         # Mipangilio ya mazingira (zina vitambulisho vya rasilimali)
+.azure/*/config.json         # Usanidi wa mazingira (zina vitambulisho vya rasilimali)
 .azure/*/.env               # Vigezo vya mazingira (vinaweza kuwa na siri)
 .env                        # Faili ya mazingira ya ndani
 ```
 
 ### 4. Nyaraka za Usanidi
-Andika nyaraka za usanidi zako katika `CONFIG.md`:
+Andika nyaraka za usanidi wako katika `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -542,7 +568,7 @@ Andika nyaraka za usanidi zako katika `CONFIG.md`:
 
 ## 🎯 Mazoezi ya Vitendo
 
-### Zoefisho 1: Usanidi wa Mazingira Nyingi (15 minutes)
+### Zoëzi 1: Usanidi wa Mazingira Nyingi (15 minutes)
 
 **Lengo**: Unda na usanidi mazingira matatu yenye mipangilio tofauti
 
@@ -572,61 +598,60 @@ azd env select production && azd env get-values
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Mazingira matatu yameundwa kwa mafanikio
-- [ ] Kila mazingira yana usanidi wa kipekee
+- [ ] Mazingira matatu yalioundwa kwa mafanikio
+- [ ] Kila mazingira yana usanidi tofauti
 - [ ] Inawezekana kubadilisha kati ya mazingira bila makosa
 - [ ] `azd env list` inaonyesha mazingira yote matatu
 
-### Zoefisho 2: Usimamizi wa Siri (10 minutes)
+### Zoëzi 2: Usimamizi wa Siri (10 minutes)
 
-**Lengo**: Fanya mazoezi ya usanidi salama kwa data nyeti
+**Lengo**: Tumia usanidi salama kwa data nyeti
 
 ```bash
-# Weka siri (haitaonyeshwa katika matokeo)
+# Weka siri (hazionyeshwi katika pato)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Weka usanidi usiosiokuwa siri
+# Weka usanidi usio wa siri
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
 # Tazama mazingira (siri zinapaswa kufichwa)
 azd env get-values
 
-# Hakikisha siri zimehifadhiwa
+# Thibitisha siri zimehifadhiwa
 azd env get DB_PASSWORD  # Inapaswa kuonyesha thamani halisi
 ```
 
 **Vigezo vya Mafanikio:**
 - [ ] Siri zimehifadhiwa bila kuonyeshwa kwenye terminal
-- [ ] `azd env get-values` inaonyesha siri zilizofichwa
-- [ ] `azd env get <SECRET_NAME>` ya mtu mmoja inapata thamani halisi
+- [ ] `azd env get-values` inaonyesha siri zilizosafishwa
+- [ ] `azd env get <SECRET_NAME>` inairejesha thamani halisi
 
 ## Hatua Zifuatazo
 
-- [Mradi Wako wa Kwanza](first-project.md) - Tumia usanidi kwa vitendo
-- [Mwongozo wa Uenezaji](../chapter-04-infrastructure/deployment-guide.md) - Tumia usanidi kwa ajili ya uenezaji
-- [Utayarishaji wa Rasilimali](../chapter-04-infrastructure/provisioning.md) - Usanidi tayari kwa uzalishaji
+- [Mradi Wako wa Kwanza](first-project.md) - Tumia usanidi vitendo
+- [Mwongozo wa Utekelezaji](../chapter-04-infrastructure/deployment-guide.md) - Tumia usanidi kwa utekelezaji
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Usanidi tayari kwa uzalishaji
 
 ## Marejeo
 
 - [Marejeo ya Usanidi wa azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Skema ya azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Vigezo vya Mazingira](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Muundo wa azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Variable za Mazingira](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Sura 3 - Usanidi & Uthibitishaji
-- **⬅️ Previous**: [Mradi Wako wa Kwanza](first-project.md)
-- **➡️ Next Chapter**: [Sura 4: Miundombinu kama Msimbo](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura 3 - Usanidi & Uthibitishaji
+- **⬅️ Iliyotangulia**: [Mradi Wako wa Kwanza](first-project.md)
+- **➡️ Sura Ifuatayo**: [Sura 4: Miundombinu kama Msimbo](../chapter-04-infrastructure/deployment-guide.md)
 - **Next Lesson**: [Mradi Wako wa Kwanza](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kujiondoa dhamana:
-
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI Co-op Translator (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufanikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upotovu wa maana. Nyaraka ya asili kwa lugha yake ya asili inapaswa kuchukuliwa kama chanzo rasmi. Kwa habari muhimu, tunapendekeza kutumia tafsiri ya mtaalamu wa kibinadamu. Hatujawajibika kwa kutokuelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Kukanusha**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokamilika. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya kibinadamu. Hatuwajibiki kwa mwelewa mbaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

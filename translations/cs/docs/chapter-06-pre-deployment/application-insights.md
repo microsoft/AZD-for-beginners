@@ -1,8 +1,8 @@
-# Application Insights Integration with AZD
+# Integrace Application Insights s AZD
 
-⏱️ **Odhadovaný čas**: 40–50 minut | 💰 **Dopad na náklady**: ~$5-15/měsíc | ⭐ **Složitost**: Střední
+⏱️ **Odhadovaný čas**: 40-50 minut | 💰 **Dopad na náklady**: ~$5-15/měsíc | ⭐ **Složitost**: Středně pokročilé
 
-**📚 Vzdělávací cesta:**
+**📚 Cesta učení:**
 - ← Předchozí: [Kontroly před nasazením](preflight-checks.md) - Přednasazovací ověření
 - 🎯 **Jste zde**: Integrace Application Insights (monitorování, telemetrie, ladění)
 - → Další: [Průvodce nasazením](../chapter-04-infrastructure/deployment-guide.md) - Nasazení do Azure
@@ -13,18 +13,18 @@
 ## Co se naučíte
 
 Po dokončení této lekce:
-- Integrujete **Application Insights** do projektů AZD automaticky
-- Nakonfigurujete **distribuované trasování** pro mikroservisy
-- Implementujete **vlastní telemetrii** (metry, události, závislosti)
-- Nastavíte **live metrics** pro monitorování v reálném čase
-- Vytvoříte **alarmy a panely (dashboards)** z nasazení AZD
-- Budete ladit produkční problémy pomocí **telemetrických dotazů**
-- Optimalizujete **náklady a strategie sampling**
-- Monitorujete **AI/LLM aplikace** (tokeny, latence, náklady)
+- Integrovat **Application Insights** do projektů AZD automaticky
+- Konfigurovat **distribuované trasování** pro mikroservisy
+- Implementovat **vlastní telemetrii** (metriky, události, závislosti)
+- Nastavit **Live Metrics** pro monitorování v reálném čase
+- Vytvářet **upozornění a dashboardy** z nasazení AZD
+- Ladit problémy v produkci pomocí **dotazů na telemetrii**
+- Optimalizovat **náklady a strategie vzorkování**
+- Monitorovat **AI/LLM aplikace** (tokeny, latence, náklady)
 
-## Proč je Application Insights s AZD důležité
+## Proč je Application Insights s AZD důležitý
 
-### Výzva: Produkční pozorovatelnost
+### Výzva: Pozorovatelnost v produkci
 
 **Bez Application Insights:**
 ```
@@ -47,7 +47,7 @@ Po dokončení této lekce:
 ✅ AZD provisions everything automatically
 ```
 
-**Analogie**: Application Insights je jako černá skříňka + palubní deska pro vaši aplikaci. Vidíte vše, co se děje v reálném čase, a můžete přehrát jakýkoli incident.
+**Analogie**: Application Insights je jako mít „černou skříňku“ letového záznamníku + palubní přístrojovou desku pro vaši aplikaci. Vidíte vše, co se děje v reálném čase, a můžete přehrát jakýkoli incident.
 
 ---
 
@@ -59,7 +59,7 @@ Po dokončení této lekce:
 graph TB
     User[Uživatel/Klient]
     App1[Kontejnerová aplikace 1<br/>API brána]
-    App2[Kontejnerová aplikace 2<br/>Produktová služba]
+    App2[Kontejnerová aplikace 2<br/>Služba produktů]
     App3[Kontejnerová aplikace 3<br/>Služba objednávek]
     
     AppInsights[Application Insights<br/>Centrum telemetrie]
@@ -83,17 +83,17 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### Co je monitorováno automaticky
+### Co se sleduje automaticky
 
-| Typ telemetrie | Co zachycuje | Použití |
-|----------------|--------------|---------|
+| Typ telemetrie | Co zaznamenává | Použití |
+|----------------|------------------|----------|
 | **Requests** | HTTP požadavky, status kódy, doba trvání | Monitorování výkonu API |
-| **Dependencies** | Vnější volání (DB, API, storage) | Identifikace úzkých míst |
-| **Exceptions** | Neodchycené chyby se stack trace | Ladění selhání |
-| **Custom Events** | Obchodní události (registrace, nákup) | Analytika a funnely |
-| **Metrics** | Výkonnostní počítadla, vlastní metriky | Plánování kapacity |
-| **Traces** | Logovací zprávy s úrovní závažnosti | Ladění a audit |
-| **Availability** | Testy dostupnosti a doby odezvy | Monitorování SLA |
+| **Dependencies** | Externí volání (DB, API, úložiště) | Identifikace úzkých míst |
+| **Exceptions** | Nezachycené chyby se stack trace | Ladění selhání |
+| **Custom Events** | Obchodní události (registrace, nákup) | Analytika a konverzní trychtýře |
+| **Metrics** | Výkonové čítače, vlastní metriky | Plánování kapacity |
+| **Traces** | Zprávy protokolu s úrovní závažnosti | Ladění a audit |
+| **Availability** | Měření provozuschopnosti a doby odezvy | Monitorování SLA |
 
 ---
 
@@ -115,21 +115,21 @@ az --version
 
 - Aktivní předplatné Azure
 - Oprávnění k vytvoření:
-  - Application Insights prostředků
-  - Log Analytics workspace
+  - zdrojů Application Insights
+  - pracovišť Log Analytics
   - Container Apps
-  - Resource groups
+  - skupin prostředků
 
 ### Předchozí znalosti
 
 Měli byste mít dokončeno:
-- [AZD Základy](../chapter-01-foundation/azd-basics.md) - Základní koncepty AZD
+- [Základy AZD](../chapter-01-foundation/azd-basics.md) - Hlavní koncepty AZD
 - [Konfigurace](../chapter-03-configuration/configuration.md) - Nastavení prostředí
 - [První projekt](../chapter-01-foundation/first-project.md) - Základní nasazení
 
 ---
 
-## Lekce 1: Automatické Application Insights s AZD
+## Lekce 1: Automatické přidání Application Insights v AZD
 
 ### Jak AZD zřizuje Application Insights
 
@@ -300,7 +300,7 @@ import os
 
 app = Flask(__name__)
 
-# Získat připojovací řetězec pro Application Insights
+# Získat připojovací řetězec Application Insights
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
@@ -311,7 +311,7 @@ if connection_string:
         sampler=ProbabilitySampler(rate=1.0)  # 100% vzorkování pro vývoj
     )
     
-    # Konfigurovat logování
+    # Konfigurovat protokolování
     logger = logging.getLogger(__name__)
     logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
@@ -378,7 +378,7 @@ gunicorn==21.2.0
 ### Krok 5: Nasazení a ověření
 
 ```bash
-# Inicializujte AZD
+# Inicializovat AZD
 azd init
 
 # Nasadit (automaticky zřizuje Application Insights)
@@ -387,7 +387,7 @@ azd up
 # Získat URL aplikace
 APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
 
-# Generovat telemetrii
+# Vygenerovat telemetrii
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -407,7 +407,7 @@ curl $APP_URL/api/slow
 ### Krok 6: Zobrazení telemetrie v Azure Portal
 
 ```bash
-# Získat podrobnosti o Application Insights
+# Zobrazit podrobnosti služby Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Otevřít v portálu Azure
@@ -420,10 +420,10 @@ az monitor app-insights component show \
 **Přejděte do Azure Portal → Application Insights → Transaction Search**
 
 Měli byste vidět:
-- ✅ HTTP požadavky s status kódy
-- ✅ Doba trvání požadavků (3+ sekundy pro `/api/slow`)
+- ✅ HTTP požadavky se status kódy
+- ✅ Doba trvání požadavku (3+ sekundy pro `/api/slow`)
 - ✅ Detaily výjimek z `/api/error-test`
-- ✅ Vlastní logovací zprávy
+- ✅ Vlastní zprávy v logu
 
 ---
 
@@ -473,7 +473,7 @@ class TelemetryClient:
         )
         self.view_manager.register_exporter(exporter)
         
-        # Nastavení trasovače
+        # Nastavení traceru
         self.tracer = tracer_module.Tracer(
             exporter=AzureExporter(connection_string=self.connection_string)
         )
@@ -520,7 +520,7 @@ telemetry = TelemetryClient()
 
 ### Aktualizace aplikace s vlastními událostmi
 
-**Soubor: `src/app.py` (rozšířený)**
+**Soubor: `src/app.py` (rozšířeno)**
 
 ```python
 from flask import Flask, request, jsonify
@@ -546,7 +546,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Sledovat metriku tržeb
+    # Sledovat metriku příjmů
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -577,7 +577,7 @@ def search():
         'duration_ms': duration
     })
     
-    # Sledovat metriku výkonnosti vyhledávání
+    # Sledovat metriku výkonu vyhledávání
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -616,7 +616,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Testování vlastní telemetrie
+### Otestujte vlastní telemetrii
 
 ```bash
 # Sledovat událost nákupu
@@ -634,7 +634,7 @@ curl $APP_URL/api/external-call
 
 **Zobrazení v Azure Portal:**
 
-Přejděte do Application Insights → Logs a spusťte:
+Přejděte do Application Insights → Logs, poté spusťte:
 
 ```kusto
 // View purchase events
@@ -667,9 +667,9 @@ traces
 
 ## Lekce 3: Distribuované trasování pro mikroservisy
 
-### Povolení trasování napříč službami
+### Povolit trasování napříč službami
 
-Pro mikroservisy Application Insights automaticky koreluje požadavky mezi službami.
+Pro mikroservisy Application Insights automaticky koreluje požadavky napříč službami.
 
 **Soubor: `infra/main.bicep`**
 
@@ -739,31 +739,31 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Zobrazení end-to-end transakce
+### Zobrazit transakci od začátku do konce
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Gateway as API brána<br/>(ID trasování: abc123)
-    participant Product as Služba produktů<br/>(Rodičovské ID: abc123)
-    participant Order as Služba objednávek<br/>(Rodičovské ID: abc123)
+    participant User as Uživatel
+    participant Gateway as Brána API<br/>(ID trasování: abc123)
+    participant Product as Služba produktů<br/>(ID rodiče: abc123)
+    participant Order as Služba objednávek<br/>(ID rodiče: abc123)
     participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Zahájení trasování: abc123
+    Note over Gateway: Spustit trasování: abc123
     Gateway->>AppInsights: Zaznamenat požadavek (ID trasování: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Rodičovské ID: abc123
+    Note over Product: ID rodiče: abc123
     Product->>AppInsights: Zaznamenat volání závislosti
-    Product-->>Gateway: Detaily produktu
+    Product-->>Gateway: Podrobnosti produktu
     
     Gateway->>Order: POST /orders
-    Note over Order: Rodičovské ID: abc123
+    Note over Order: ID rodiče: abc123
     Order->>AppInsights: Zaznamenat volání závislosti
-    Order-->>Gateway: Vyřízení objednávky dokončeno
+    Order-->>Gateway: Objednávka vytvořena
     
-    Gateway-->>User: Vyřízení objednávky dokončeno
+    Gateway-->>User: Dokončení nákupu dokončeno
     Gateway->>AppInsights: Zaznamenat odpověď (Doba trvání: 450ms)
     
     Note over AppInsights: Korelace podle ID trasování
@@ -790,7 +790,7 @@ dependencies
 
 ## Lekce 4: Live Metrics a monitorování v reálném čase
 
-### Povolení Live Metrics Stream
+### Povolit Live Metrics Stream
 
 Live Metrics poskytuje telemetrii v reálném čase s latencí <1 sekundy.
 
@@ -807,23 +807,23 @@ echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME 
 ```
 
 **Co uvidíte v reálném čase:**
-- ✅ Rychlost příchozích požadavků (requests/sec)
+- ✅ Rychlost příchozích požadavků (požadavky/s)
 - ✅ Odchozí volání závislostí
 - ✅ Počet výjimek
 - ✅ Využití CPU a paměti
 - ✅ Počet aktivních serverů
-- ✅ Vzorkovaná telemetrie
+- ✅ Vzorky telemetrie
 
 ### Generování zátěže pro testování
 
 ```bash
-# Vygenerujte zátěž, abyste viděli metriky v reálném čase
+# Vygenerujte zátěž, abyste viděli živé metriky
 for i in {1..100}; do
   curl $APP_URL/api/products &
   curl $APP_URL/api/search?q=test$i &
 done
 
-# Sledujte metriky v reálném čase v Azure Portal
+# Sledujte živé metriky v Azure portálu
 # Měli byste vidět prudký nárůst počtu požadavků
 ```
 
@@ -831,13 +831,13 @@ done
 
 ## Praktická cvičení
 
-### Cvičení 1: Nastavit alerty ⭐⭐ (Středně)
+### Cvičení 1: Nastavení upozornění ⭐⭐ (Střední)
 
-**Cíl**: Vytvořit alarmy pro vysoké míry chyb a pomalé odpovědi.
+**Cíl**: Vytvořit upozornění pro vysokou chybovost a pomalé odpovědi.
 
 **Kroky:**
 
-1. **Vytvořit alert pro míru chyb:**
+1. **Vytvořte upozornění pro chybovost:**
 
 ```bash
 # Získat ID prostředku Application Insights
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **Vytvořit alert pro pomalé odpovědi:**
+2. **Vytvořte upozornění pro pomalé odpovědi:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +870,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Vytvořit alert přes Bicep (preferované pro AZD):**
+3. **Vytvořit upozornění pomocí Bicep (doporučeno pro AZD):**
 
 **Soubor: `infra/core/alerts.bicep`**
 
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Otestovat alerty:**
+4. **Otestujte upozornění:**
 
 ```bash
 # Generovat chyby
@@ -957,7 +957,7 @@ for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Zkontrolovat stav upozornění (počkat 5-10 minut)
+# Zkontrolujte stav upozornění (čekejte 5-10 minut)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
   --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
@@ -965,16 +965,16 @@ az monitor metrics alert list \
 ```
 
 **✅ Kritéria úspěchu:**
-- ✅ Alerty byly úspěšně vytvořeny
-- ✅ Alerty se spustí při překročení prahů
-- ✅ Lze zobrazit historii alertů v Azure Portal
+- ✅ Upozornění úspěšně vytvořena
+- ✅ Upozornění se spouštějí při překročení prahů
+- ✅ Lze zobrazit historii upozornění v Azure Portal
 - ✅ Integrované s nasazením AZD
 
-**Čas**: 20–25 minut
+**Čas**: 20-25 minut
 
 ---
 
-### Cvičení 2: Vytvořit vlastní dashboard ⭐⭐ (Středně)
+### Cvičení 2: Vytvoření vlastního dashboardu ⭐⭐ (Střední)
 
 **Cíl**: Vytvořit dashboard zobrazující klíčové metriky aplikace.
 
@@ -988,11 +988,11 @@ Přejděte na: Azure Portal → Dashboards → New Dashboard
 
 - Počet požadavků (posledních 24 hodin)
 - Průměrná doba odezvy
-- Míra chyb
+- Míra chybovosti
 - Top 5 nejpomalejších operací
 - Geografické rozložení uživatelů
 
-3. **Vytvořit dashboard přes Bicep:**
+3. **Vytvořit dashboard pomocí Bicep:**
 
 **Soubor: `infra/core/dashboard.bicep`**
 
@@ -1066,7 +1066,7 @@ output dashboardId string = dashboard.id
 4. **Nasadit dashboard:**
 
 ```bash
-# Přidejte do main.bicep
+# Přidat do main.bicep
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1087,17 +1087,17 @@ azd up
 - ✅ Aktualizuje se v reálném čase
 - ✅ Nasaditelné přes AZD
 
-**Čas**: 25–30 minut
+**Čas**: 25-30 minut
 
 ---
 
-### Cvičení 3: Monitorovat AI/LLM aplikaci ⭐⭐⭐ (Pokročilé)
+### Cvičení 3: Monitorování AI/LLM aplikace ⭐⭐⭐ (Pokročilé)
 
-**Cíl**: Sledovat využití Azure OpenAI (tokeny, náklady, latence).
+**Cíl**: Sledovat používání Microsoft Foundry Models (tokeny, náklady, latence).
 
 **Kroky:**
 
-1. **Vytvořit AI monitoring wrapper:**
+1. **Vytvořit wrapper pro monitorování AI:**
 
 **Soubor: `src/ai_telemetry.py`**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Zavolat Azure OpenAI
+            # Volání modelů Microsoft Foundry
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1136,9 +1136,9 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Vypočítat náklady (ceny GPT-4)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0,03 za 1K tokenů
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0,06 za 1K tokenů
+            # Vypočítat náklady (ceny GPT-4.1)
+            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0,03 za 1 000 tokenů
+            completion_cost = (completion_tokens / 1000) * 0.06  # $0,06 za 1 000 tokenů
             total_cost = prompt_cost + completion_cost
             
             # Sledovat vlastní událost
@@ -1202,9 +1202,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Zavolat s automatickým monitorováním
+    # Volání s automatickým monitorováním
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1251,20 +1251,20 @@ traces
 ```
 
 **✅ Kritéria úspěchu:**
-- ✅ Každé volání OpenAI je automaticky sledováno
+- ✅ Každé volání OpenAI je sledováno automaticky
 - ✅ Využití tokenů a náklady jsou viditelné
 - ✅ Latence je monitorována
-- ✅ Lze nastavit rozpočtové alerty
+- ✅ Lze nastavit rozpočtová upozornění
 
-**Čas**: 35–45 minut
+**Čas**: 35-45 minut
 
 ---
 
 ## Optimalizace nákladů
 
-### Strategie sampling
+### Strategie vzorkování
 
-Omezte náklady pomocí sampling telemetrie:
+Omezte náklady vzorkováním telemetrie:
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
@@ -1272,7 +1272,7 @@ from opencensus.trace.samplers import ProbabilitySampler
 # Vývoj: 100% vzorkování
 sampler = ProbabilitySampler(rate=1.0)
 
-# Produkce: 10% vzorkování (snižuje náklady o 90%)
+# Produkce: 10% vzorkování (snížení nákladů o 90%)
 sampler = ProbabilitySampler(rate=0.1)
 
 # Adaptivní vzorkování (automaticky se přizpůsobuje)
@@ -1305,38 +1305,38 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 ### Měsíční odhad nákladů
 
-| Objem dat | Retence | Měsíční náklad |
-|-----------|---------|----------------|
-| 1 GB/měsíc | 30 dní | ~$2-5 |
-| 5 GB/měsíc | 30 dní | ~$10-15 |
-| 10 GB/měsíc | 90 dní | ~$25-40 |
-| 50 GB/měsíc | 90 dní | ~$100-150 |
+| Objem dat | Uchovávání | Měsíční náklady |
+|-------------|-----------|--------------|
+| 1 GB/month | 30 days | ~$2-5 |
+| 5 GB/month | 30 days | ~$10-15 |
+| 10 GB/month | 90 days | ~$25-40 |
+| 50 GB/month | 90 days | ~$100-150 |
 
-**Free tier**: 5 GB/měsíc zahrnuto
+**Bezplatný tarif**: 5 GB/měsíc zahrnuto
 
 ---
 
-## Kontrolní znalostní bod
+## Kontrolní bod znalostí
 
 ### 1. Základní integrace ✓
 
-Ověřte své znalosti:
+Ověřte své porozumění:
 
-- [ ] **Q1**: Jak AZD zřizuje Application Insights?
-  - **A**: Automaticky pomocí Bicep šablon v `infra/core/monitoring.bicep`
+- [ ] **Q1**: Jak AZD poskytuje Application Insights?
+  - **A**: Automaticky přes Bicep šablony v `infra/core/monitoring.bicep`
 
-- [ ] **Q2**: Která proměnná prostředí umožňuje Application Insights?
+- [ ] **Q2**: Která proměnná prostředí povoluje Application Insights?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
 - [ ] **Q3**: Jaké jsou tři hlavní typy telemetrie?
-  - **A**: Requests (HTTP volání), Dependencies (vnější volání), Exceptions (chyby)
+  - **A**: Requests (HTTP volání), Dependencies (externí volání), Exceptions (chyby)
 
 **Praktické ověření:**
 ```bash
-# Zkontrolujte, zda je Application Insights nakonfigurováno
+# Zkontrolujte, zda je Application Insights nakonfigurován
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Ověřte, že telemetrie proudí
+# Ověřte, zda telemetrie proudí
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,15 +1347,15 @@ az monitor app-insights metrics show \
 
 ### 2. Vlastní telemetrie ✓
 
-Ověřte své znalosti:
+Ověřte své porozumění:
 
-- [ ] **Q1**: Jak sledovat vlastní obchodní události?
-  - **A**: Použít logger s `custom_dimensions` nebo `TelemetryClient.track_event()`
+- [ ] **Q1**: Jak sledujete vlastní obchodní události?
+  - **A**: Použijte logger s `custom_dimensions` nebo `TelemetryClient.track_event()`
 
-- [ ] **Q2**: Jaký je rozdíl mezi událostmi a metrikami?
-  - **A**: Události jsou diskrétní výskyty, metriky jsou číselná měření
+- [ ] **Q2**: V čem je rozdíl mezi událostmi a metrikami?
+  - **A**: Události jsou jednotlivé výskyty, metriky jsou číselná měření
 
-- [ ] **Q3**: Jak korelovat telemetrii napříč službami?
+- [ ] **Q3**: Jak korelujete telemetrii mezi službami?
   - **A**: Application Insights automaticky používá `operation_Id` pro korelaci
 
 **Praktické ověření:**
@@ -1368,18 +1368,18 @@ traces
 
 ---
 
-### 3. Produkční monitorování ✓
+### 3. Monitorování v produkci ✓
 
-Ověřte své znalosti:
+Ověřte své porozumění:
 
-- [ ] **Q1**: Co je sampling a proč ho používat?
-  - **A**: Sampling snižuje objem dat (a náklady) tím, že zachytí pouze procento telemetrie
+- [ ] **Q1**: Co je vzorkování a proč ho používat?
+  - **A**: Vzorkování snižuje objem dat (a tedy náklady) tím, že zachytí pouze procento telemetrie
 
-- [ ] **Q2**: Jak nastavit alerty?
-  - **A**: Použít metrické alerty v Bicep nebo Azure Portal založené na metrikách Application Insights
+- [ ] **Q2**: Jak nastavíte upozornění?
+  - **A**: Použijte metrická upozornění v Bicep nebo Azure Portal na základě metrik Application Insights
 
 - [ ] **Q3**: Jaký je rozdíl mezi Log Analytics a Application Insights?
-  - **A**: Application Insights ukládá data do Log Analytics workspace; App Insights poskytuje pohledy šité na aplikace
+  - **A**: Application Insights ukládá data do Log Analytics workspace; App Insights poskytuje pohled specifický pro aplikaci
 
 **Praktické ověření:**
 ```bash
@@ -1392,11 +1392,11 @@ az monitor app-insights component show \
 
 ---
 
-## Best Practices
+## Nejlepší postupy
 
 ### ✅ DĚLAT:
 
-1. **Používat correlation IDs**
+1. **Používejte korelační ID**
    ```python
    logger.info('Processing order', extra={
        'custom_dimensions': {
@@ -1406,12 +1406,12 @@ az monitor app-insights component show \
    })
    ```
 
-2. **Nastavit alerty pro kritické metriky**
+2. **Nastavte upozornění pro kritické metriky**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Používat strukturované logování**
+3. **Používejte strukturované logování**
    ```python
    # ✅ DOBRÉ: Strukturované
    logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
@@ -1420,16 +1420,16 @@ az monitor app-insights component show \
    logger.info(f'User 123 signed up')
    ```
 
-4. **Monitorovat závislosti**
+4. **Sledujte závislosti**
    ```python
-   # Automaticky sleduje volání databáze, HTTP požadavky atd.
+   # Automaticky sledovat volání databáze, HTTP požadavky atd.
    ```
 
-5. **Používat Live Metrics během nasazení**
+5. **Používejte Live Metrics během nasazení**
 
 ### ❌ NEDĚLAT:
 
-1. **Nezaznamenávat citlivá data**
+1. **Nezaznamenávejte citlivá data**
    ```python
    # ❌ ŠPATNÉ
    logger.info(f'Login: {username}:{password}')
@@ -1438,7 +1438,7 @@ az monitor app-insights component show \
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **Nepoužívat 100% sampling v produkci**
+2. **Nepoužívejte 100% vzorkování v produkci**
    ```python
    # ❌ Drahé
    sampler = ProbabilitySampler(rate=1.0)
@@ -1447,19 +1447,19 @@ az monitor app-insights component show \
    sampler = ProbabilitySampler(rate=0.1)
    ```
 
-3. **Neignorovat dead letter queues**
+3. **Neignorujte fronty odmítnutých zpráv**
 
-4. **Nezapomínat nastavit limity uchovávání dat**
+4. **Nezapomeňte nastavit limity uchovávání dat**
 
 ---
 
 ## Řešení problémů
 
-### Problém: Neobjevuje se žádná telemetrie
+### Problém: Nezobrazuje se telemetrie
 
 **Diagnóza:**
 ```bash
-# Zkontrolujte, že je nastaven řetězec připojení
+# Zkontrolujte, že je řetězec připojení nastaven
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Zkontrolujte protokoly aplikace pomocí Azure Monitoru
@@ -1471,7 +1471,7 @@ az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 
 **Řešení:**
 ```bash
-# Ověřte připojovací řetězec v aplikaci Container App.
+# Ověřte připojovací řetězec v Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,7 +1485,7 @@ az containerapp show \
 
 **Diagnóza:**
 ```bash
-# Zkontrolovat příjem dat
+# Zkontrolujte načítání dat
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1493,27 +1493,27 @@ az monitor app-insights metrics show \
 ```
 
 **Řešení:**
-- Snížit míru sampling
-- Zkrátit dobu retence
-- Odebrat podrobné (verbose) logování
+- Snižte míru vzorkování
+- Zkraťte dobu uchovávání
+- Odstraňte podrobné logování
 
 ---
 
 ## Další informace
 
 ### Oficiální dokumentace
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Přehled Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Application Insights pro Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
 - [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
 - [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Další kroky v tomto kurzu
+### Další kroky v kurzu
 - ← Předchozí: [Kontroly před nasazením](preflight-checks.md)
 - → Další: [Průvodce nasazením](../chapter-04-infrastructure/deployment-guide.md)
 - 🏠 [Domov kurzu](../../README.md)
 
-### Příbuzné příklady
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI telemetrie
+### Související příklady
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI telemetrie
 - [Microservices Example](../../../../examples/microservices) - Distribuované trasování
 
 ---
@@ -1524,28 +1524,28 @@ az monitor app-insights metrics show \
 - ✅ Automatické zřizování Application Insights s AZD
 - ✅ Vlastní telemetrii (události, metriky, závislosti)
 - ✅ Distribuované trasování napříč mikroservisami
-- ✅ Živé metriky a monitorování v reálném čase
-- ✅ Upozornění a řídicí panely
-- ✅ Monitorování aplikací AI/LLM
+- ✅ Live Metrics a monitorování v reálném čase
+- ✅ Upozornění a dashboardy
+- ✅ Monitorování AI/LLM aplikací
 - ✅ Strategie optimalizace nákladů
 
-**Klíčové poznatky:**
-1. **AZD zajišťuje monitorování automaticky** - Není potřeba ruční nastavení
+**Hlavní poznatky:**
+1. **AZD zřizuje monitorování automaticky** - Žádné ruční nastavení
 2. **Používejte strukturované logování** - Usnadňuje dotazování
 3. **Sledujte obchodní události** - Nejen technické metriky
-4. **Monitorujte náklady na AI** - Sledujte tokeny a výdaje
+4. **Sledujte náklady na AI** - Sledujte tokeny a výdaje
 5. **Nastavte upozornění** - Buďte proaktivní, ne reaktivní
 6. **Optimalizujte náklady** - Používejte vzorkování a limity uchovávání
 
 **Další kroky:**
 1. Dokončete praktická cvičení
 2. Přidejte Application Insights do svých projektů AZD
-3. Vytvořte vlastní řídicí panely pro svůj tým
+3. Vytvořte vlastní přehledy pro svůj tým
 4. Seznamte se s [Průvodcem nasazením](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakákoli nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu.
+**Zřeknutí odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, vezměte prosím na vědomí, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění ani mylné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,21 +1,21 @@
-# Kapitola 6: Plánování a ověření před nasazením
+# Kapitola 6: Plánování a ověřování před nasazením
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1 hodina | **⭐ Náročnost**: Střední
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1 hodina | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá základní kroky plánování a ověření před nasazením vaší aplikace. Naučte se vyhnout nákladným chybám pomocí správného plánování kapacity, výběru SKU a předběžných kontrol.
+Tato kapitola pokrývá základní kroky plánování a ověřování před nasazením vaší aplikace. Naučíte se vyhnout drahým chybám díky správnému plánování kapacity, výběru SKU a předběžným kontrolám.
 
-## Výukové cíle
+## Cíle učení
 
 Po dokončení této kapitoly budete:
-- Spouštět předběžné kontroly před nasazením
-- Plánovat kapacitu a odhadovat požadavky na zdroje
+- Spustit předběžné kontroly před nasazením
+- Plánovat kapacitu a odhadnout požadavky na zdroje
 - Vybrat vhodné SKU pro optimalizaci nákladů
 - Nakonfigurovat Application Insights pro monitorování
-- Pochopit vzory týmové koordinace
+- Pochopit vzory koordinace týmu
 
 ---
 
@@ -23,27 +23,27 @@ Po dokončení této kapitoly budete:
 
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Kontroly před nasazením](preflight-checks.md) | Ověřte konfiguraci před nasazením | 15 min |
-| 2 | [Plánování kapacity](capacity-planning.md) | Odhadněte požadavky na zdroje | 20 min |
-| 3 | [Výběr SKU](sku-selection.md) | Vyberte vhodné cenové úrovně | 15 min |
-| 4 | [Application Insights](application-insights.md) | Nakonfigurujte monitorování | 20 min |
-| 5 | [Vzory koordinace](coordination-patterns.md) | Pracovní postupy týmu při nasazování | 15 min |
+| 1 | [Předběžné kontroly](preflight-checks.md) | Ověřit konfiguraci před nasazením | 15 min |
+| 2 | [Plánování kapacity](capacity-planning.md) | Odhadnout požadavky na zdroje | 20 min |
+| 3 | [Výběr SKU](sku-selection.md) | Vybrat vhodné cenové hladiny | 15 min |
+| 4 | [Application Insights](application-insights.md) | Nastavit monitorování | 20 min |
+| 5 | [Vzory koordinace](coordination-patterns.md) | Týmové pracovní postupy nasazení | 15 min |
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Zkontrolujte kvóty předplatného
+# Zkontrolovat kvóty předplatného
 az vm list-usage --location eastus --output table
 
 # Náhled nasazení (nebudou vytvořeny žádné prostředky)
 azd provision --preview
 
-# Ověřte syntaxi Bicep
+# Ověřit syntaxi Bicep
 az bicep build --file infra/main.bicep
 
-# Zkontrolujte konfiguraci prostředí
+# Zkontrolovat konfiguraci prostředí
 azd env get-values
 ```
 
@@ -56,13 +56,13 @@ azd env get-values
 - [ ] Kvóta ověřena pro region
 - [ ] SKUs vybrány vhodně
 - [ ] Odhad nákladů zkontrolován
-- [ ] Konzistentní konvence pojmenování
-- [ ] Bezpečnost/RBAC nakonfigurováno
+- [ ] Konvence pojmenování konzistentní
+- [ ] Bezpečnost/RBAC nakonfigurována
 
 ### Před `azd deploy`
 
 - [ ] Proměnné prostředí nastaveny
-- [ ] Tajné hodnoty v Key Vault
+- [ ] Tajná data v Key Vault
 - [ ] Řetězce připojení ověřeny
 - [ ] Kontroly stavu nakonfigurovány
 
@@ -70,11 +70,11 @@ azd env get-values
 
 ## 💰 Průvodce výběrem SKU
 
-| Pracovní zátěž | Vývoj | Produkce |
+| Zatížení | Vývoj | Produkce |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -97,6 +97,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí AI překladatelské služby Co-op Translator (https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za rozhodující zdroj. U kritických informací se doporučuje profesionální lidský překlad. Za případná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu neneseme odpovědnost.
+**Disclaimer**:
+Tento dokument byl přeložen pomocí služby AI překladu [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro kritické informace se doporučuje využít profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo mylné výklady vzniklé v důsledku použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

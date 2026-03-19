@@ -1,6 +1,6 @@
 # 2. Ověřit šablonu
 
-!!! tip "NA KONCI TOHOTO MODULU BUDETE SCHOPNI"
+!!! tip "NA KONCI TOHOTO MODULU BUDETE MOCI"
 
     - [ ] Analyzovat architekturu AI řešení
     - [ ] Porozumět pracovnímu postupu nasazení pomocí AZD
@@ -43,7 +43,7 @@ The Microsoft Foundry platform comes with a [set of recommended AZD templates](h
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Vyber](../../../../../translated_images/cs/01-pick-template.60d2d5fff5ebc374.webp)
+![Vybrat](../../../../../translated_images/cs/01-pick-template.60d2d5fff5ebc374.webp)
 
 
 The **Basic** options are your starter templates:
@@ -85,13 +85,13 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
       ```
 1. Your Azure Portal will now have a provisioned resource group with that env name:
 
-      ![Infrastruktura](../../../../../translated_images/cs/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Provozní infrastruktura](../../../../../translated_images/cs/02-provisioned-infra.46c706b14f56e0bf.webp)
 
 1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
-## 4. Validace šablony
+## 4. Ověření šablony
 
 1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
 1. Click on RG for your environment name - you see the page above
@@ -114,7 +114,7 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ---
 
-## 5.  Ověření agenta
+## 5. Ověření agenta
 
 The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
@@ -143,7 +143,7 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
       - These will correspond to the 12 customer files and 20 product files under `src/files` 
       ![Data](../../../../../translated_images/cs/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**Potvrdili jste fungování agenta!** 
 
 1. The agent responses are grounded in the knowledge in those files. 
 1. You can now ask questions related to that data, and get grounded responses.
@@ -179,7 +179,7 @@ You also see a _stats_ row below the response.
 
 ---
 
-## 7. Vestavěná pozorovatelnost
+## 7. Vestavěná sledovatelnost
 
 Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
@@ -232,7 +232,7 @@ Let's try out a few commands:
       You see something like:
 
       ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
+      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
       AZURE_AI_AGENT_NAME="agent-template-assistant"
       AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
       AZURE_AI_EMBED_DIMENSIONS=100
@@ -273,21 +273,21 @@ Let's try out a few commands:
       azd env refresh
       ```
 
-      Toto je silný způsob, jak _synchronizovat_ proměnné prostředí mezi dvěma nebo více lokálními vývojovými prostředími (např. tým s více vývojáři) - což umožňuje, aby nasazená infrastruktura sloužila jako jediný zdroj pravdy pro stav proměnných prostředí. Členové týmu jednoduše _obnoví_ proměnné, aby se opět synchronizovali.
+      Toto je silný způsob, jak _synchronizovat_ proměnné prostředí mezi dvěma nebo více lokálními vývojovými prostředími (např. tým s více vývojáři) - což umožňuje, aby nasazená infrastruktura sloužila jako zdroj pravdy pro stav proměnných prostředí. Členové týmu jednoduše _obnoví_ proměnné, aby se opět synchronizovali.
 
 ---
 
 ## 9. Gratulujeme 🏆
 
-Právě jste dokončili kompletní pracovní postup, ve kterém jste:
+Právě jste dokončili kompletní end-to-end pracovní postup, ve kterém jste:
 
-- [X] Vybrali šablonu AZD, kterou chcete použít
-- [X] Spustili šablonu pomocí GitHub Codespaces 
-- [X] Nasadili šablonu a ověřili, že funguje
+- [X] Vybrali jste šablonu AZD, kterou chcete použít
+- [X] Spustili jste šablonu pomocí GitHub Codespaces 
+- [X] Nasadili jste šablonu a ověřili, že funguje
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí služby strojového překladu [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, vezměte prosím na vědomí, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace doporučujeme využít profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo chybné výklady, která mohou vzniknout v důsledku použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoliv usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v originálním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědni za žádná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

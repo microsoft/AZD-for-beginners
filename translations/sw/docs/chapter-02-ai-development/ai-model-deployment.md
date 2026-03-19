@@ -1,28 +1,28 @@
-# Uenezaji wa Mfano wa AI na Azure Developer CLI
+# Utekelezaji wa Modeli za AI kwa Azure Developer CLI
 
-**Uvinjari wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya Kwanza ya AI
-- **⬅️ Iliyopita**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Ifuatayo**: [AI Workshop Lab](ai-workshop-lab.md)
+**Chapter Navigation:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Mwanzo](../../README.md)
+- **📖 Sura ya Sasa**: Sura 2 - Maendeleo Yanayompa Kipaumbele AI
+- **⬅️ Iliyotangulia**: [Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Ifuatayo**: [Maabara ya Warsha ya AI](ai-workshop-lab.md)
 - **🚀 Sura Ifuatayo**: [Sura 3: Usanidi](../chapter-03-configuration/configuration.md)
 
-Mwongozo huu unaelezea kwa kina maagizo ya kueneza mifano ya AI kwa kutumia violezo vya AZD, ukiwasha kila kitu kuanzia uteuzi wa mfano hadi mifumo ya ueneaji wa uzalishaji.
+Mwongozo huu unatoa maelekezo kamili kwa ajili ya kuweka modeli za AI kwa kutumia violezo vya AZD, ukifunika kila kitu kutoka kwa uchaguzi wa modeli hadi mifumo ya uenezaji kwa uzalishaji.
 
-## Orodha ya Yaliyomo
+## Jedwali la Yaliyomo
 
-- [Mkakati wa Uchaguzi wa Mfano](../../../../docs/chapter-02-ai-development)
-- [Usanidi wa AZD kwa Mifano ya AI](../../../../docs/chapter-02-ai-development)
-- [Mifumo ya Ueneaji](../../../../docs/chapter-02-ai-development)
-- [Usimamizi wa Mfano](../../../../docs/chapter-02-ai-development)
-- [Mambo ya Kuzingatia kwa Uzalishaji](../../../../docs/chapter-02-ai-development)
-- [Ufuatiliaji na Uwezo wa Kuonekana](../../../../docs/chapter-02-ai-development)
+- [Mkakati wa Uchaguzi wa Modeli](#mkakati-wa-uchaguzi-wa-modeli)
+- [Usanidi wa AZD kwa Modeli za AI](#usanidi-wa-azd-kwa-modeli-za-ai)
+- [Mifumo ya Utekelezaji](#mifumo-ya-utekelezaji)
+- [Usimamizi wa Modeli](#usimamizi-wa-modeli)
+- [Mambo ya Kuzingatia kwa Uzalishaji](#mambo-ya-kuzingatia-kwa-uzalishaji)
+- [Ufuatiliaji na Uwezo wa Kuonekana](#ufuatiliaji-na-uwezo-wa-kuonekana)
 
-## Mkakati wa Uchaguzi wa Mfano
+## Mkakati wa Uchaguzi wa Modeli
 
-### Mifano ya Azure OpenAI
+### Modeli za Microsoft Foundry
 
-Chagua mfano unaofaa kwa kesi yako ya matumizi:
+Chagua modeli sahihi kwa matumizi yako:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -50,30 +50,30 @@ services:
         ]
 ```
 
-### Upangaji wa Uwezo wa Mfano
+### Mipango ya Uwezo wa Modeli
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Aina ya Modeli | Matumizi | Uwezo Unaopendekezwa | Mambo ya Gharama |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Cost-effective for most workloads |
-| GPT-4 | Complex reasoning | 20-100 TPM | Higher cost, use for premium features |
-| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Essential for semantic search |
-| Whisper | Speech-to-text | 10-50 TPM | Audio processing workloads |
+| gpt-4.1-mini | Mazungumzo, Maswali na Majibu | 10-50 TPM | Inayoweza kuendeshwa kwa gharama kwa kazi nyingi |
+| gpt-4.1 | Ufikiri mgumu | 20-100 TPM | Gharama juu, tumia kwa vipengele vya kiwango cha juu |
+| Text-embedding-ada-002 | Utafutaji, RAG | 30-120 TPM | Muhimu kwa utafutaji wa maana (semantic) |
+| Whisper | Hotuba hadi maandishi | 10-50 TPM | Mizigo ya kazi ya usindikaji wa sauti |
 
-## Usanidi wa AZD kwa Mifano ya AI
+## Usanidi wa AZD kwa Modeli za AI
 
-### Usanidi wa Kiolezo cha Bicep
+### Usanidi wa Violezo vya Bicep
 
-Tengeneza uenezaji wa mifano kupitia violezo vya Bicep:
+Tengeneza utoaji wa modeli kupitia violezo vya Bicep:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -127,16 +127,16 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Sanidi mazingira ya programu yako:
 
 ```bash
-# usanidi wa .env
+# Usanidi wa .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Mifumo ya Ueneaji
+## Mifumo ya Utekelezaji
 
-### Mfumo 1: Ueneaji wa Mkoa Mmoja
+### Mfano 1: Utekelezaji wa Mkoa Mmoja
 
 ```yaml
 # azure.yaml - Single region
@@ -146,7 +146,7 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Inafaa kwa:
@@ -154,7 +154,7 @@ Inafaa kwa:
 - Programu za soko moja
 - Uboreshaji wa gharama
 
-### Mfumo 2: Ueneaji wa Mikoa Mingi
+### Mfano 2: Utekelezaji wa Mikoa Nyingi
 
 ```bicep
 // Multi-region deployment
@@ -172,9 +172,9 @@ Inafaa kwa:
 - Mahitaji ya upatikanaji wa juu
 - Ugawaji wa mzigo
 
-### Mfumo 3: Ueneaji Mseto
+### Mfano 3: Utekelezaji Mchanganyiko
 
-Changanya Azure OpenAI na huduma nyingine za AI:
+Changanya Modeli za Microsoft Foundry na huduma zingine za AI:
 
 ```bicep
 // Hybrid AI services
@@ -203,17 +203,17 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Usimamizi wa Mfano
+## Usimamizi wa Modeli
 
-### Udhibiti wa Matoleo
+### Udhibiti wa Toleo
 
-Fuata matoleo ya mifano katika usanidi wako wa AZD:
+Fuatilia toleo za modeli katika usanidi wako wa AZD:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -225,9 +225,9 @@ Fuata matoleo ya mifano katika usanidi wako wa AZD:
 }
 ```
 
-### Sasisho za Mfano
+### Sasisho za Modeli
 
-Tumia AZD hooks kwa sasisho za mifano:
+Tumia hooks za AZD kwa sasisho za modeli:
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
-### Upimaji A/B
+### Upimaji wa A/B
 
-Sambaza matoleo mengi ya mifano:
+Weka toleo mbalimbali za modeli:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -271,7 +271,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 Hesabu uwezo unaohitajika kulingana na mifumo ya matumizi:
 
 ```python
-# Mfano wa hesabu ya uwezo
+# Mfano wa kuhesabu uwezo
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -293,9 +293,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Usanidi wa Upanuaji Kiotomatiki
+### Usanidi wa Ukuaji wa Kiotomatiki
 
-Sanidi upanuaji kiotomatiki kwa Container Apps:
+Sanidi ukuaji wa kiotomatiki kwa Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -365,9 +365,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Ufuatiliaji na Uwezo wa Kuonekana
 
-### Uunganishaji wa Application Insights
+### Muunganisho wa Application Insights
 
-Sanidi ufuatiliaji kwa mzigo wa kazi wa AI:
+Sanidi ufuatiliaji kwa mizigo ya kazi za AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,10 +405,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Vipimo Maalum
 
-Fuata vipimo maalumu vya AI:
+Fuatilia vipimo maalum vya AI:
 
 ```python
-# Telemetri iliyobinafsishwa kwa modeli za AI
+# Telemetri maalum kwa mifano ya AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -445,7 +445,7 @@ class AITelemetry:
 Tekeleza ufuatiliaji wa afya ya huduma za AI:
 
 ```python
-# Vituo vya ukaguzi wa afya
+# Miisho ya ukaguzi wa afya
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,30 +473,30 @@ async def check_ai_models():
 
 ## Hatua Zifuatazo
 
-1. **Pitia [Mwongozo wa Uunganishaji wa Microsoft Foundry](microsoft-foundry-integration.md)** kwa mifumo ya uunganishaji wa huduma
-2. **Kamilisha [AI Workshop Lab](ai-workshop-lab.md)** kwa uzoefu wa vitendo
-3. **Tekeleza [Mbinu za AI za Uzalishaji](production-ai-practices.md)** kwa ueneaji wa kampuni
-4. **Chunguza [Mwongozo wa Utatuzi wa AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** kwa matatizo ya kawaida
+1. **Pitia [Mwongozo wa Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)** kwa mifumo ya muunganisho wa huduma
+2. **Kamilisha [Maabara ya Warsha ya AI](ai-workshop-lab.md)** kwa uzoefu wa vitendo
+3. **Tekeleza [Mazoea ya AI kwa Uzalishaji](production-ai-practices.md)** kwa uenezaji wa shirika
+4. **Chunguza [Mwongozo wa Utatuzi wa Matatizo ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** kwa matatizo ya kawaida
 
 ## Rasilimali
 
-- [Upatikanaji wa Mifano ya Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Upatikanaji wa Modeli za Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Upanuaji wa Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Uboreshaji wa Gharama za Mfano wa AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Ukuaji wa Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Uboreshaji wa Gharama za Modeli za AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Uvinjari wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Sura ya 2 - Maendeleo ya Kwanza ya AI
-- **⬅️ Iliyopita**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Ifuatayo**: [AI Workshop Lab](ai-workshop-lab.md)
+**Chapter Navigation:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Mwanzo](../../README.md)
+- **📖 Sura ya Sasa**: Sura 2 - Maendeleo Yanayompa Kipaumbele AI
+- **⬅️ Iliyotangulia**: [Muunganisho wa Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Ifuatayo**: [Maabara ya Warsha ya AI](ai-workshop-lab.md)
 - **🚀 Sura Ifuatayo**: [Sura 3: Usanidi](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Onyo:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator] (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu iliyofanywa na mtaalamu wa binadamu. Hatuwajibiki kwa kutoelewana au tafsiri mbaya zitokanazo na matumizi ya tafsiri hii.
+**Kukanusha**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri zilizofanywa kiotomatiki zinaweza kuwa na makosa au kutokukamilika. Nyaraka ya awali katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha kuaminika. Kwa taarifa muhimu, tafsiri ya kitaalamu iliyofanywa na mtafsiri wa kibinadamu inashauriwa. Sisi hatuwajibiki kwa uelewa mbaya au tafsiri potofu yoyote zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

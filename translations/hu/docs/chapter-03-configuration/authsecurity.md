@@ -1,92 +1,92 @@
 # Hitelesítési minták és kezelt identitás
 
-⏱️ **Becsült idő**: 45-60 perc | 💰 **Költséghatás**: Ingyenes (nincs további díj) | ⭐ **Bonyolultság**: Középhaladó
+⏱️ **Becsült idő**: 45-60 perc | 💰 **Költség hatás**: Ingyenes (további díjak nélkül) | ⭐ **Bonyolultság**: Középhaladó
 
-**📚 Tanulási útvonal:**
-- ← Előző: [Konfiguráció-kezelés](configuration.md) - Környezeti változók és titkok kezelése
-- 🎯 **Jelenleg itt**: Hitelesítés és biztonság (kezelt identitás, Key Vault, biztonságos minták)
-- → Következő: [Első projekt](first-project.md) - Építsd meg az első AZD alkalmazásodat
-- 🏠 [Kurzus főoldal](../../README.md)
+**📚 Tanulási út:**
+- ← Előző: [Konfigurációkezelés](configuration.md) - Környezeti változók és titkok kezelése
+- 🎯 **Itt vagy**: Hitelesítés és biztonság (Kezelt identitás, Key Vault, biztonságos minták)
+- → Következő: [Első projekt](first-project.md) - Első AZD alkalmazásod felépítése
+- 🏠 [Tanfolyam főoldal](../../README.md)
 
 ---
 
-## Mit fogsz megtanulni
+## Amit megtanulsz
 
-Ennek a leckének a befejezésével:
-- Megérteni az Azure hitelesítési mintáit (kulcsok, kapcsolati karakterláncok, kezelt identitás)
-- Megvalósítani a **Kezelt identitást** jelszó nélküli hitelesítéshez
-- Titkok védelme az **Azure Key Vault** integrációjával
-- A szerepalapú hozzáférés-vezérlés (**RBAC**) konfigurálása az AZD telepítésekhez
-- Biztonsági legjobb gyakorlatok alkalmazása a Container Apps és az Azure szolgáltatások esetében
-- Áttérés kulcsalapú hitelesítésről identitásalapú hitelesítésre
+A lecke elvégzésével:
+- Megérted az Azure hitelesítési mintákat (kulcsok, kapcsolati láncok, kezelt identitás)
+- Megvalósítod a **Kezelt identitás** használatát jelszó nélküli hitelesítéshez
+- Biztonságosan kezeled a titkokat az **Azure Key Vault** integrációval
+- Beállítod a **szerepalapú hozzáférés-vezérlést (RBAC)** AZD telepítésekhez
+- Alkalmazod a biztonsági legjobb gyakorlatokat a Container Apps és Azure szolgáltatások esetén
+- Átállsz kulcs alapúról identitás alapú hitelesítésre
 
 ## Miért fontos a kezelt identitás
 
 ### A probléma: Hagyományos hitelesítés
 
-**A kezelt identitás előtt:**
+**Kezelt identitás előtt:**
 ```javascript
-// ❌ BIZTONSÁGI KOCKÁZAT: Kódban keményen kódolt titkok
+// ❌ BIZTONSÁGI KOCKÁZAT: Keménykódolt titkok a kódban
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Problémák:**
-- 🔴 **Kiszivárgott titkok** a kódban, konfigurációs fájlokban és környezeti változókban
-- 🔴 **Hitelesítő adatok forgatása** kódváltoztatást és újratelepítést igényel
-- 🔴 **Audit rémálmok** - ki, mikor és mihez fér hozzá?
-- 🔴 **Szétterjedés** - titkok szétszórva több rendszeren
-- 🔴 **Megfelelőségi kockázatok** - sikertelen biztonsági auditok
+- 🔴 **Kiszivárgó titkok** kódban, konfigurációs fájlokban, környezeti változókban
+- 🔴 **Hitelesítő adatok cseréje** kódmódosítást és újratelepítést igényel
+- 🔴 **Ellenőrzési rémálmok** - ki mikor mit ért el?
+- 🔴 **Szóródás** - titkok szétszóródnak több rendszerben
+- 🔴 **Megfelelési kockázatok** - nem felel meg a biztonsági auditoknak
 
 ### A megoldás: Kezelt identitás
 
-**A kezelt identitás után:**
+**Kezelt identitás után:**
 ```javascript
 // ✅ BIZTONSÁGOS: Nincsenek titkok a kódban
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure automatikusan kezeli a hitelesítést
+  credential  // Az Azure automatikusan kezeli az autentikációt
 );
 ```
 
 **Előnyök:**
-- ✅ **Nincsenek titkok** a kódban vagy konfigurációban
+- ✅ **Nincsenek titkok** a kódban vagy beállításokban
 - ✅ **Automatikus forgatás** - az Azure kezeli
-- ✅ **Teljes audit nyomvonal** az Azure AD naplóiban
-- ✅ **Központosított biztonság** - kezelhető az Azure Portalon
-- ✅ **Megfelelőségre készen** - megfelel a biztonsági szabványoknak
+- ✅ **Teljes audit nyomvonal** az Azure AD naplókban
+- ✅ **Központosított biztonság** - az Azure Portalon kezelhető
+- ✅ **Megfelelésre kész** - biztonsági előírásoknak megfelel
 
-**Párhuzam**: A hagyományos hitelesítés olyan, mintha több fizikai kulcsot cipelnének különböző ajtókhoz. A kezelt identitás olyan, mint egy biztonsági belépőkártya, amely automatikusan engedélyt ad a személyazonosság alapján — nincs kulcs, amit elveszíthetünk, lemásolhatunk vagy forgathatunk.
+**Hasonlat**: A hagyományos hitelesítés olyan, mintha több fizikai kulcsot cipelnének külön ajtókhoz. A Kezelt identitás olyan, mint egy biztonsági kártya, amely automatikusan hozzáférést ad személy alapján – nincs több elhagyott, másolt vagy cserélt kulcs.
 
 ---
 
-## Architektúra áttekintése
+## Architektúra áttekintés
 
-### Hitelesítési folyamat kezelt identitással
+### Hitelesítési folyamat kezelten
 
 ```mermaid
 sequenceDiagram
-    participant App as Az alkalmazásod<br/>(konténeralkalmazás)
-    participant MI as Felügyelt identitás<br/>(Azure AD)
-    participant KV as Kulcs tároló
-    participant Storage as Azure Storage
+    participant App as Az Ön Alkalmazása<br/>(Konténer Alkalmazás)
+    participant MI as Kezelt Identitás<br/>(Azure AD)
+    participant KV as Kulcs Tároló
+    participant Storage as Azure Tároló
     participant DB as Azure SQL
     
     App->>MI: Hozzáférési token kérése<br/>(automatikus)
-    MI->>MI: Identitás ellenőrzése<br/>(jelszó nem szükséges)
+    MI->>MI: Identitás ellenőrzése<br/>(nem szükséges jelszó)
     MI-->>App: Token visszaadása<br/>(1 óráig érvényes)
     
     App->>KV: Titok lekérése<br/>(token használatával)
     KV->>KV: RBAC jogosultságok ellenőrzése
-    KV-->>App: Titok értékének visszaadása
+    KV-->>App: Titok érték visszaadása
     
     App->>Storage: Blob feltöltése<br/>(token használatával)
     Storage->>Storage: RBAC jogosultságok ellenőrzése
     Storage-->>App: Siker
     
-    App->>DB: Adat lekérdezése<br/>(token használatával)
+    App->>DB: Adatok lekérdezése<br/>(token használatával)
     DB->>DB: SQL jogosultságok ellenőrzése
     DB-->>App: Eredmények visszaadása
     
@@ -96,32 +96,32 @@ sequenceDiagram
 
 ```mermaid
 graph TB
-    MI[Felügyelt identitás]
-    SystemAssigned[Rendszerhez rendelt identitás]
-    UserAssigned[Felhasználóhoz rendelt identitás]
+    MI[Ke kezelt azonosító]
+    SystemAssigned[Rendszer által kiosztott azonosító]
+    UserAssigned[Felhasználó által kiosztott azonosító]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Élettartam erőforráshoz kötve]
+    SystemAssigned --> SA1[Élettartam a forráshoz kötve]
     SystemAssigned --> SA2[Automatikus létrehozás/törlés]
-    SystemAssigned --> SA3[Legalkalmasabb egyetlen erőforráshoz]
+    SystemAssigned --> SA3[Legjobb egyedi forráshoz]
     
-    UserAssigned --> UA1[Független életciklus]
+    UserAssigned --> UA1[Független élettartam]
     UserAssigned --> UA2[Kézi létrehozás/törlés]
     UserAssigned --> UA3[Erőforrások között megosztott]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Jellemző | Rendszerhez rendelt | Felhasználóhoz rendelt |
-|---------|----------------|---------------|
-| **Életciklus** | Az erőforráshoz kötött | Független |
+| Jellemző | Erőforráshoz rendelt | Felhasználó által rendelt |
+|---------|---------------------|--------------------------|
+| **Élettartam** | Erőforráshoz kötött | Független |
 | **Létrehozás** | Automatikus az erőforrással | Kézi létrehozás |
-| **Törlés** | Törlődik az erőforrással | Megmarad az erőforrás törlése után |
-| **Megosztás** | Csak egy erőforrás | Több erőforrás |
+| **Törlés** | Erőforrással törlődik | Megmarad erőforrás törlése után |
+| **Megosztás** | Csak egy erőforráshoz | Több erőforráshoz |
 | **Használati eset** | Egyszerű helyzetek | Összetett több erőforrásos helyzetek |
-| **AZD alapértelmezés** | ✅ Ajánlott | Opcionális |
+| **AZD alapértelmezett** | ✅ Ajánlott | Választható |
 
 ---
 
@@ -129,59 +129,59 @@ graph TB
 
 ### Szükséges eszközök
 
-Ezeknek már telepítve kell lenniük az előző leckék alapján:
+Már telepítve kell legyenek az előző leckékből:
 
 ```bash
 # Ellenőrizze az Azure Developer CLI-t
 azd version
-# ✅ Várható: azd verzió 1.0.0 vagy újabb
+# ✅ Elvárt: azd verzió 1.0.0 vagy újabb
 
 # Ellenőrizze az Azure CLI-t
 az --version
-# ✅ Várható: azure-cli 2.50.0 vagy újabb
+# ✅ Elvárt: azure-cli 2.50.0 vagy újabb
 ```
 
 ### Azure követelmények
 
-- Aktív Azure-előfizetés
+- Aktív Azure előfizetés
 - Engedélyek a következőkhöz:
   - Kezelt identitások létrehozása
   - RBAC szerepek hozzárendelése
   - Key Vault erőforrások létrehozása
   - Container Apps telepítése
 
-### Tudásbeli előfeltételek
+### Tudás előfeltételek
 
-Teljesítened kell a következőket:
-- [Telepítési útmutató](installation.md) - AZD beállítása
+Teljesítettnek kell lennie:
+- [Telepítési útmutató](installation.md) - AZD beállítás
 - [AZD alapok](azd-basics.md) - Alapfogalmak
-- [Konfiguráció-kezelés](configuration.md) - Környezeti változók
+- [Konfigurációkezelés](configuration.md) - Környezeti változók
 
 ---
 
-## Lecke 1: A hitelesítési minták megértése
+## 1. lecke: Hitelesítési minták megértése
 
-### Minta 1: Kapcsolati karakterláncok (Hagyományos - Kerülendő)
+### Minta 1: Kapcsolati láncok (régi - kerülendő)
 
 **Hogyan működik:**
 ```bash
-# Kapcsolati karakterlánc hitelesítő adatokat tartalmaz
+# A kapcsolati karakterlánc tartalmaz hitelesítő adatokat
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Problémák:**
-- ❌ Titkok láthatók a környezeti változókban
-- ❌ Naplózódnak a telepítési rendszerekben
-- ❌ Nehéz forgatni
-- ❌ Nincs audit nyomvonal a hozzáférésről
+- ❌ Titkok látszanak környezeti változókban
+- ❌ Naplózódik a telepítési rendszerben
+- ❌ Nehéz cserélni
+- ❌ Nincs audit nyomvonal
 
-**Mikor használd:** Csak helyi fejlesztéshez, soha ne éles környezetben.
+**Mikor használd:** Csak helyi fejlesztéshez, sose éles környezetben.
 
 ---
 
-### Minta 2: Key Vault hivatkozások (Jobb)
+### Minta 2: Key Vault hivatkozások (jobb)
 
 **Hogyan működik:**
 ```bicep
@@ -203,19 +203,19 @@ env: [
 ```
 
 **Előnyök:**
-- ✅ Titkok biztonságosan tárolva a Key Vaultban
-- ✅ Központosított titokkezelés
-- ✅ Forgatás kódváltoztatás nélkül
+- ✅ Titkok biztonságosan tárolva Key Vault-ban
+- ✅ Központosított titkkezelés
+- ✅ Forgatás kódmódosítás nélkül
 
 **Korlátozások:**
 - ⚠️ Még mindig kulcsokat/jelszavakat használ
-- ⚠️ Kezelni kell a Key Vault hozzáférését
+- ⚠️ Key Vault hozzáférést kezelni kell
 
-**Mikor használd:** Átmeneti lépés a kapcsolati karakterláncokról a kezelt identitásra.
+**Mikor használd:** Átmeneti lépés a kapcsolati láncokról a kezelt identitásra.
 
 ---
 
-### Minta 3: Kezelt identitás (Legjobb gyakorlat)
+### Minta 3: Kezelt identitás (legjobb gyakorlat)
 
 **Hogyan működik:**
 ```bicep
@@ -239,7 +239,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 **Alkalmazáskód:**
 ```javascript
-// Nincs szükség titokra!
+// Nincsenek szükséges titkok!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -251,21 +251,21 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Előnyök:**
-- ✅ Nincsenek titkok a kódban/konfigurációban
+- ✅ Nincs titok a kódban vagy beállításban
 - ✅ Automatikus hitelesítő adat forgatás
 - ✅ Teljes audit nyomvonal
-- ✅ Szerepalapú (RBAC) engedélyek
-- ✅ Megfelelőségre készen
+- ✅ RBAC-alapú jogosultságok
+- ✅ Megfelelésre kész
 
-**Mikor használd:** Mindig, éles alkalmazásoknál.
+**Mikor használd:** Mindig, éles alkalmazások esetén.
 
 ---
 
-## Lecke 2: Kezelt identitás megvalósítása AZD-vel
+## 2. lecke: Kezelt identitás megvalósítása AZD-vel
 
 ### Lépésről lépésre megvalósítás
 
-Építsünk egy biztonságos Container Appet, amely kezelt identitást használ az Azure Storage és a Key Vault eléréséhez.
+Készítsünk biztonságos Container App-et, amely kezelt identitást használ Azure Storage és Key Vault eléréséhez.
 
 ### Projekt struktúra
 
@@ -384,7 +384,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App rendszerhez rendelt identitással
+### 3. Container App rendszer által rendelt identitással
 
 **Fájl: `infra/app/container-app.bicep`**
 
@@ -441,7 +441,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. RBAC szerepkiosztási modul
+### 4. RBAC szerepkör hozzárendelési modul
 
 **Fájl: `infra/core/role-assignment.bicep`**
 
@@ -463,7 +463,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Alkalmazáskód kezelt identitással
+### 5. Alkalmazáskód kezeltt identitással
 
 **Fájl: `src/app.js`**
 
@@ -476,29 +476,29 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Hitelesítő inicializálása (a kezelt identitással automatikusan működik)
+// 🔑 Hitelesítő adat inicializálása (automatikusan működik kezelt identitással)
 const credential = new DefaultAzureCredential();
 
 // Azure Storage beállítása
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // Nincs szükség kulcsokra!
+  credential  // Kulcsok nem szükségesek!
 );
 
 // Key Vault beállítása
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // Nincs szükség kulcsokra!
+  credential  // Kulcsok nem szükségesek!
 );
 
-// Egészségellenőrzés
+// Állapot ellenőrzés
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Fájl feltöltése a blob-tárolóba
+// Fájl feltöltése blob tárolóba
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -520,7 +520,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Titok lekérése a Key Vaultból
+// Titok lekérése a Key Vault-ból
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -537,7 +537,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Blob-tárolók felsorolása (az olvasási hozzáférést bemutatja)
+// Blob tárolók listázása (olvasi hozzáférés bemutatása)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -589,10 +589,10 @@ azd init
 # Infrastruktúra és alkalmazás telepítése
 azd up
 
-# Alkalmazás URL lekérése
+# Az alkalmazás URL-jének lekérése
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
-# Egészségellenőrzés tesztelése
+# Egészségügyi ellenőrzés tesztelése
 curl $APP_URL/health
 ```
 
@@ -618,7 +618,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Teszt konténerlista:**
+**Teszt konténer lista:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -636,27 +636,27 @@ curl $APP_URL/containers
 
 ## Gyakori Azure RBAC szerepek
 
-### Beépített szerepazonosítók a kezelt identitáshoz
+### Beépített szerepazonosítók kezelthez
 
 | Szolgáltatás | Szerep neve | Szerepazonosító | Jogosultságok |
-|---------|-----------|---------|-------------|
+|-------------|-------------|-----------------|---------------|
 | **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Blobok és konténerek olvasása |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Blobok olvasása, írása és törlése |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Sorüzenetek olvasása, írása és törlése |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Blobok olvasása, írása, törlése |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Sorüzenetek olvasása, írása, törlése |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Titkok olvasása |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Titkok olvasása, írása és törlése |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Titkok olvasása, írása, törlése |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Cosmos DB adatok olvasása |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Cosmos DB adatok olvasása és írása |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Cosmos DB adatok olvasása, írása |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | SQL adatbázisok kezelése |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Üzenetek küldése, fogadása és kezelése |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Üzenetek küldése, fogadása, kezelése |
 
-### Hogyan találhatók meg a szerepazonosítók
+### Hogyan találjuk meg a szerepazonosítókat
 
 ```bash
 # Az összes beépített szerep listázása
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Egy adott szerep keresése
+# Specifikus szerep keresése
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
 # Szerep részleteinek lekérése
@@ -667,13 +667,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Gyakorlati feladatok
 
-### Feladat 1: Kezelt identitás engedélyezése meglévő alkalmazáshoz ⭐⭐ (Közepes)
+### Feladat 1: Kezelt identitás engedélyezése meglévő alkalmazásnál ⭐⭐ (Középhaladó)
 
 **Cél**: Kezelt identitás hozzáadása egy meglévő Container App telepítéshez
 
-**Forgatókönyv**: Van egy Container App-ed, amely kapcsolati karakterláncokat használ. Alakítsd át kezelt identitásra.
+**Forgatókönyv**: Van egy Container App, amely kapcsolati láncot használ. Alakítsd át kezelt identitásra.
 
-**Kezdő állapot**: Container App ezzel a konfigurációval:
+**Kiindulási pont**: Container App ezzel a konfigurációval:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -687,7 +687,7 @@ env: [
 
 **Lépések**:
 
-1. **Engedélyezd a kezelt identitást a Bicep-ben:**
+1. **Kezelt identitás engedélyezése Bicep-ben:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Adj Storage hozzáférést:**
+2. **Storage hozzáférés megadása:**
 
 ```bicep
 // Get storage account reference
@@ -719,9 +719,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Frissítsd az alkalmazáskódot:**
+3. **Alkalmazáskód frissítése:**
 
-**Előtte (kapcsolati karakterlánc):**
+**Korábban (kapcsolati lánc):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -742,7 +742,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Frissítsd a környezeti változókat:**
+4. **Környezeti változók frissítése:**
 
 ```bicep
 env: [
@@ -754,21 +754,21 @@ env: [
 ]
 ```
 
-5. **Telepítsd és teszteld:**
+5. **Telepítés és tesztelés:**
 
 ```bash
-# Telepítsd újra
+# Újratelepítés
 azd up
 
-# Ellenőrizd, hogy továbbra is működik
+# Ellenőrizze, hogy továbbra is működik-e
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
-**✅ Siker kritériumok:**
-- ✅ Az alkalmazás hibamentesen települ
-- ✅ A Storage műveletek működnek (feltöltés, listázás, letöltés)
-- ✅ Nincsenek kapcsolati karakterláncok a környezeti változókban
-- ✅ Az identitás látható az Azure Portalon az "Identity" lapon
+**✅ Sikerkritériumok:**
+- ✅ Hibamentes telepítés
+- ✅ Storage műveletek működnek (feltöltés, lista, letöltés)
+- ✅ Nincsenek kapcsolati láncok környezeti változókban
+- ✅ Identitás látható az Azure Portal "Identitás" panelén
 
 **Ellenőrzés:**
 
@@ -778,28 +778,28 @@ az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Várható: "SystemAssigned"
+# ✅ Várt eredmény: "SystemAssigned"
 
-# Ellenőrizze a szerepkiosztást
+# Ellenőrizze a szerepkör-hozzárendelést
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Várható: Mutatja a "Storage Blob Data Contributor" szerepet
+# ✅ Várt eredmény: A "Storage Blob Data Contributor" szerep megjelenik
 ```
 
 **Idő**: 20-30 perc
 
 ---
 
-### Feladat 2: Többszolgáltatásos hozzáférés felhasználóhoz rendelt identitással ⭐⭐⭐ (Haladó)
+### Feladat 2: Több szolgáltatás hozzáférés felhasználó által rendelt identitással ⭐⭐⭐ (Haladó)
 
-**Cél**: Hozz létre egy felhasználóhoz rendelt identitást, amelyet több Container App is megoszt
+**Cél**: Felhasználó által rendelt identitás létrehozása, amely több Container App között megosztható
 
-**Forgatókönyv**: 3 mikroszolgáltatásod van, amelyeknek mind hozzá kell férniük ugyanahhoz a Storage-fiókhoz és Key Vaulthoz.
+**Forgatókönyv**: Három mikroszolgáltatás van, amelyek ugyanahhoz a Storage fiókhoz és Key Vault-hoz férnek hozzá.
 
 **Lépések**:
 
-1. **Hozz létre felhasználóhoz rendelt identitást:**
+1. **Felhasználó által rendelt identitás létrehozása:**
 
 **Fájl: `infra/core/identity.bicep`**
 
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Szerepek hozzárendelése a felhasználóhoz rendelt identitáshoz:**
+2. **Szerepkörök hozzárendelése a felhasználó által rendelt identitáshoz:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +856,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Identitás hozzárendelése több Container Apphez:**
+3. **Identitás hozzárendelése több Container App-hez:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -893,17 +893,17 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Alkalmazáskód (minden szolgáltatás ugyanazt a mintát használja):**
+4. **Alkalmazáskód (mindhárom szolgáltatás ugyanazt a mintát használja):**
 
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Felhasználóhoz rendelt identitás esetén adja meg az ügyfélazonosítót
+// Felhasználó által hozzárendelt identitás esetén adja meg az ügyfélazonosítót
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Felhasználóhoz rendelt identitás ügyfélazonosítója
+  process.env.AZURE_CLIENT_ID  // Felhasználó által hozzárendelt identitás ügyfélazonosítója
 );
 
-// Vagy használja a DefaultAzureCredential-et (automatikusan észleli)
+// Vagy használja a DefaultAzureCredential-t (automatikusan felismeri)
 const credential = new DefaultAzureCredential();
 
 const blobServiceClient = new BlobServiceClient(
@@ -917,23 +917,23 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Ellenőrizze, hogy minden szolgáltatás hozzáfér-e a tárolóhoz
+# Tesztelje, hogy az összes szolgáltatás hozzáfér-e a tárolóhoz
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
-**✅ Siker kritériumok:**
-- ✅ Egy identitás megosztva a 3 szolgáltatás között
-- ✅ Minden szolgáltatás hozzáfér a Storage-hoz és a Key Vaulthoz
-- ✅ Az identitás megmarad, ha törölsz egy szolgáltatást
+**✅ Sikerkritériumok:**
+- ✅ Egy identitás megosztva 3 szolgáltatás között
+- ✅ Minden szolgáltatás hozzáfér Storage-hoz és Key Vault-hoz
+- ✅ Identitás megmarad, ha törölsz egy szolgáltatást
 - ✅ Központosított jogosultságkezelés
 
-**Előnyei a felhasználóhoz rendelt identitásnak:**
+**Felhasználó által rendelt identitás előnyei:**
 - Egyetlen identitás kezelése
-- Konzisztens jogosultságok a szolgáltatások között
-- Megmarad a szolgáltatás törlése után
-- Jobb összetett architektúrák esetén
+- Egységes engedélyek szolgáltatások között
+- Kibírja egy szolgáltatás törlését
+- Jobb összetett architektúrákhoz
 
 **Idő**: 30-40 perc
 
@@ -941,9 +941,9 @@ curl https://order-service.azurecontainerapps.io/upload
 
 ### Feladat 3: Key Vault titok forgatás megvalósítása ⭐⭐⭐ (Haladó)
 
-**Cél**: Harmadik fél API kulcsainak tárolása a Key Vaultban és azok elérése kezelt identitással
+**Cél**: Harmadik fél API kulcsokat tárolni Key Vault-ban és hozzáférni azokhoz kezeltt identitással
 
-**Forgatókönyv**: Az alkalmazásodnak külső API-t (OpenAI, Stripe, SendGrid) kell hívnia, amely API kulcsokat igényel.
+**Forgatókönyv**: Az alkalmazásnak külső API-t (OpenAI, Stripe, SendGrid) kell hívnia, amely API kulcsot igényel.
 
 **Lépések**:
 
@@ -978,13 +978,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Titkok tárolása a Key Vaultban:**
+2. **Titkok tárolása Key Vault-ban:**
 
 ```bash
-# Key Vault nevének lekérése
+# Szerezze be a Key Vault nevét
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Harmadik fél API-kulcsainak tárolása
+# Harmadik fél API kulcsainak tárolása
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1020,7 +1020,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Először ellenőrizd a gyorsítótárat
+    // Először ellenőrizze a gyorsítótárat
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1063,7 +1063,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Inicializálja az OpenAI-t a Key Vault kulcsával
+// Inicializálja az OpenAI-t a Key Vaultból származó kulccsal
 let openaiClient;
 
 async function initializeServices() {
@@ -1072,13 +1072,13 @@ async function initializeServices() {
   console.log('✅ Services initialized with secrets from Key Vault');
 }
 
-// Indításkor hívandó
+// Indításkor hívja meg
 initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1096,33 +1096,33 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Telepítés és tesztelés:**
+5. **Telepítés és teszt:**
 
 ```bash
 azd up
 
-# Ellenőrizze, hogy az API-kulcsok működnek
+# Teszteld, hogy az API kulcsok működnek-e
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ Siker kritériumok:**
-- ✅ Nincsenek API kulcsok a kódban vagy a környezeti változókban
-- ✅ Az alkalmazás a Key Vaultból szerzi be a kulcsokat
-- ✅ A harmadik fél API-k megfelelően működnek
-- ✅ A kulcsok forgathatók kódváltoztatás nélkül
+**✅ Sikerkritériumok:**
+- ✅ Nincs API kulcs a kódban vagy környezeti változóban
+- ✅ Az alkalmazás lekéri a kulcsokat Key Vault-ból
+- ✅ Harmadik fél API-k helyesen működnek
+- ✅ Kulcsok forgathatók kódmódosítás nélkül
 
 **Titok forgatása:**
 
 ```bash
-# Titok frissítése a Key Vaultban
+# Titok frissítése a Key Vault-ban
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Indítsa újra az alkalmazást, hogy felvegye az új kulcsot
+# Az alkalmazás újraindítása az új kulcs érvényesítéséhez
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1136,16 +1136,16 @@ az containerapp revision restart \
 
 ### 1. Hitelesítési minták ✓
 
-Teszteld a megértésedet:
+Teszteld a tudásod:
 
-- [ ] **Q1**: Mik a három fő hitelesítési minta? 
-  - **A**: Kapcsolati karakterláncok (hagyományos), Key Vault hivatkozások (átmeneti), Kezelt identitás (legjobb)
+- [ ] **K1**: Mik a három fő hitelesítési minta? 
+  - **V**: Kapcsolati láncok (régi), Key Vault hivatkozások (átmeneti), Kezelt identitás (legjobb)
 
-- [ ] **Q2**: Miért jobb a kezelt identitás a kapcsolati karakterláncoknál?
-  - **A**: Nincsenek titkok a kódban, automatikus forgatás, teljes audit nyomvonal, RBAC alapú jogosultságok
+- [ ] **K2**: Miért jobb a kezelt identitás a kapcsolati láncoknál?
+  - **V**: Nincsenek titkok a kódban, automatikus forgatás, teljes audit nyomvonal, RBAC jogosultságok
 
-- [ ] **Q3**: Mikor használnál felhasználóhoz rendelt identitást rendszerhez rendelt helyett?
-  - **A**: Amikor az identitást több erőforrás között szeretnéd megosztani, vagy amikor az identitás életciklusa független az erőforrás életciklusától
+- [ ] **K3**: Mikor használsz felhasználó által rendelt identitást rendszer által rendelt helyett?
+  - **V**: Ha identitást osztasz meg több erőforrás között, vagy az identitás élettartama független az erőforrásétól
 
 **Gyakorlati ellenőrzés:**
 ```bash
@@ -1155,7 +1155,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Sorolja fel az identitás összes szerepkör-hozzárendelését
+# Sorolja fel az identitáshoz tartozó összes szerepkör-hozzárendelést
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1164,23 +1164,23 @@ az role assignment list \
 
 ### 2. RBAC és jogosultságok ✓
 
-Teszteld a megértésedet:
+Teszteld a tudásod:
 
-- [ ] **Q1**: Mi a szerepazonosító a "Storage Blob Data Contributor" szerephez?
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **K1**: Mi a szerepazonosítója a "Storage Blob Data Contributor"-nak?
+  - **V**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: Milyen jogosultságokat ad a "Key Vault Secrets User"?
-  - **A**: Csak olvasási hozzáférés a titkokhoz (nem hozhat létre, frissíthet vagy törölhet)
+- [ ] **K2**: Mit enged a "Key Vault Secrets User"?
+  - **V**: Csak olvasási hozzáférés a titkokhoz (nem hozhat létre, nem módosíthat, nem törölhet)
 
-- [ ] **Q3**: Hogyan adsz egy Container Appnek hozzáférést Azure SQL-hez?
-  - **A**: Rendeld hozzá a "SQL DB Contributor" szerepet vagy konfiguráld az Azure AD hitelesítést SQL-hez
+- [ ] **K3**: Hogyan adsz Container App-nek hozzáférést Azure SQL-hez?
+  - **V**: Hozzárendeled az "SQL DB Contributor" szerepet vagy konfigurálod az Azure AD hitelesítést SQL-hez
 
 **Gyakorlati ellenőrzés:**
 ```bash
 # Konkrét szerep keresése
 az role definition list --name "Storage Blob Data Contributor"
 
-# Ellenőrizd, mely szerepek vannak hozzárendelve az identitásodhoz
+# Ellenőrizze, milyen szerepek vannak hozzárendelve az identitásához
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1189,19 +1189,19 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ### 3. Key Vault integráció ✓
 
-Teszteld a megértésedet:
-- [ ] **Q1**: Hogyan engedélyezed a RBAC-ot a Key Vault számára a hozzáférési házirendek helyett?
-  - **A**: Set `enableRbacAuthorization: true` in Bicep
+Teszteld a tudásod:
+- [ ] **1. kérdés**: Hogyan engedélyezheted az RBAC használatát Key Vault esetén az hozzáférési házirendek helyett?
+  - **Válasz**: Állítsd be az `enableRbacAuthorization: true` értéket Bicep-ben
 
-- [ ] **Q2**: Melyik Azure SDK könyvtár kezeli a managed identity hitelesítést?
-  - **A**: `@azure/identity` a `DefaultAzureCredential` osztállyal
+- [ ] **2. kérdés**: Melyik Azure SDK könyvtár kezeli a kezelt identitás hitelesítést?
+  - **Válasz**: `@azure/identity` a `DefaultAzureCredential` osztállyal
 
-- [ ] **Q3**: Mennyi ideig maradnak a Key Vault titkok a gyorsítótárban?
-  - **A**: Az alkalmazástól függ; valósítsd meg a saját gyorsítótár-stratégiádat
+- [ ] **3. kérdés**: Meddig maradnak a Key Vault titkok a gyorsítótárban?
+  - **Válasz**: Alkalmazástól függően; saját gyorsítótár-kezelési stratégiát kell megvalósítani
 
 **Gyakorlati ellenőrzés:**
 ```bash
-# Key Vault hozzáférés tesztelése
+# Kulcs tároló hozzáférés tesztelése
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1211,27 +1211,27 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Elvárt: true
+# ✅ Várt eredmény: igaz
 ```
 
 ---
 
 ## Biztonsági legjobb gyakorlatok
 
-### ✅ AJÁNLOTT:
+### ✅ Tedd:
 
-1. **Mindig használj managed identity-t éles környezetben**
+1. **Mindig használj kezelt identitást éles környezetben**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Használj legkisebb jogosultság elvén alapuló RBAC szerepköröket**
-   - Használd a "Reader" szerepkört, amikor lehetséges
+2. **Használj legkisebb jogosultságú RBAC szerepköröket**
+   - Lehetőség szerint használj "Reader" szerepköröket
    - Kerüld az "Owner" vagy "Contributor" szerepköröket, ha nem szükséges
 
-3. **Harmadik fél kulcsait tárold a Key Vault-ban**
+3. **Tárold a harmadik féltől származó kulcsokat Key Vault-ban**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
@@ -1243,26 +1243,26 @@ az keyvault show \
    }
    ```
 
-5. **Használj külön identitásokat dev/staging/prod számára**
+5. **Használj külön identitásokat fejlesztéshez, teszteléshez és éles környezethez**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **Rendszeresen cseréld a titkokat**
-   - Állíts lejárati dátumokat a Key Vault titkoknál
-   - Automatizáld a forgatást Azure Functions-szal
+6. **Rendszeresen forgass titkokat**
+   - Állíts be lejárati dátumokat a Key Vault titkoknál
+   - Automatizáld a forgatást Azure Function-ökkel
 
-### ❌ NE:
+### ❌ Ne tedd:
 
-1. **Soha ne keménykódold a titkokat**
+1. **Sosem kódolj be titkokat**
    ```javascript
    // ❌ ROSSZ
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Ne használj connection stringeket éles környezetben**
+2. **Ne használj kapcsolati karakterláncokat éles környezetben**
    ```javascript
    // ❌ ROSSZ
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
@@ -1277,7 +1277,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Ne naplózd a titkokat**
+4. **Ne naplózz titkokat**
    ```javascript
    // ❌ ROSSZ
    console.log('API Key:', apiKey);
@@ -1296,7 +1296,7 @@ az keyvault show \
 
 ## Hibakeresési útmutató
 
-### Probléma: "Unauthorized" az Azure Storage elérésekor
+### Probléma: "Unauthorized" hiba Azure Storage elérésekor
 
 **Tünetek:**
 ```
@@ -1307,7 +1307,7 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Diagnózis:**
 
 ```bash
-# Ellenőrizze, hogy a kezelt identitás engedélyezve van-e
+# Ellenőrizze, hogy az kezelt identitás engedélyezve van-e
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1318,7 +1318,7 @@ az containerapp show \
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Várható: Látni kell a "Storage Blob Data Contributor" vagy hasonló szerepet
+# Várható: Látnia kell a "Storage Blob Data Contributor" vagy hasonló szerepkört
 ```
 
 **Megoldások:**
@@ -1334,19 +1334,19 @@ az role assignment create \
 
 2. **Várj a propagációra (5-10 percet is igénybe vehet):**
 ```bash
-# Ellenőrizze a szerepkör hozzárendelés állapotát
+# Ellenőrizze a szerepkiósa állapotát
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Ellenőrizd, hogy az alkalmazáskód a megfelelő hitelesítőt használja:**
+3. **Ellenőrizd az alkalmazáskód helyes hitelesítést használ:**
 ```javascript
-// Győződj meg róla, hogy a DefaultAzureCredential-t használod.
+// Ügyelj rá, hogy a DefaultAzureCredential-t használd
 const credential = new DefaultAzureCredential();
 ```
 
 ---
 
-### Probléma: Hozzáférés megtagadva a Key Vault-hoz
+### Probléma: Hozzáférés megtagadva Key Vault-hoz
 
 **Tünetek:**
 ```
@@ -1357,13 +1357,13 @@ The user, group or application does not have secrets get permission
 **Diagnózis:**
 
 ```bash
-# Ellenőrizze, hogy a Key Vault RBAC engedélyezve van-e
+# Ellenőrizze, hogy az Key Vault RBAC engedélyezve van-e
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Elvárt: true
+# ✅ Elvárt: igaz
 
-# Ellenőrizze a szerepkör-hozzárendeléseket
+# Ellenőrizze a szerepkör hozzárendeléseket
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1371,14 +1371,14 @@ az role assignment list \
 
 **Megoldások:**
 
-1. **Engedélyezd az RBAC-ot a Key Vaulton:**
+1. **Engedélyezd az RBAC-ot a Key Vault-on:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **Add meg a Key Vault Secrets User szerepkört:**
+2. **Adj meg Key Vault Secrets User szerepkört:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1389,7 +1389,7 @@ az role assignment create \
 
 ---
 
-### Probléma: DefaultAzureCredential helyi használatkor meghiúsul
+### Probléma: DefaultAzureCredential helyi hiba
 
 **Tünetek:**
 ```
@@ -1403,13 +1403,13 @@ CredentialUnavailableError: No credential available
 # Ellenőrizze, hogy be van-e jelentkezve
 az account show
 
-# Ellenőrizze az Azure CLI hitelesítését
+# Ellenőrizze az Azure CLI hitelesítést
 az ad signed-in-user show
 ```
 
 **Megoldások:**
 
-1. **Jelentkezz be az Azure CLI-be:**
+1. **Jelentkezz be Azure CLI-val:**
 ```bash
 az login
 ```
@@ -1419,18 +1419,18 @@ az login
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **Helyi fejlesztéshez használj környezeti változókat:**
+3. **Helyi fejlesztéshez használd a környezeti változókat:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Vagy használj más hitelesítőt helyileg:**
+4. **Vagy használj helyileg más hitelesítést:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// Használja az AzureCliCredentialt helyi fejlesztéshez
+// Használja az AzureCliCredential-t helyi fejlesztéshez
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1438,27 +1438,27 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Probléma: A szerepkör-hozzárendelések propagálása túl sokáig tart
+### Probléma: Szerepkör-hozzárendelés késleltetve propagálódik
 
 **Tünetek:**
-- A szerepkört sikeresen hozzárendelték
-- Még mindig 403-as hibákat kapsz
+- Szerepkör sikeresen hozzárendelve
+- Mégis 403 hibákat kapsz
 - Időszakos hozzáférés (néha működik, néha nem)
 
 **Magyarázat:**
-Az Azure RBAC-változások globális propagációja 5-10 percet is igénybe vehet.
+Az Azure RBAC változtatások globális propagációja 5-10 percet is igénybe vehet.
 
 **Megoldás:**
 
 ```bash
-# Várjon és próbálja újra
+# Várj és próbáld újra
 echo "Waiting for RBAC propagation..."
-sleep 300  # Várjon 5 percet
+sleep 300  # Várj 5 percet
 
-# Tesztelje a hozzáférést
+# Hozzáférés tesztelése
 curl https://myapp.azurecontainerapps.io/upload
 
-# Ha még mindig nem működik, indítsa újra az alkalmazást
+# Ha még mindig sikertelen, indítsd újra az alkalmazást
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1472,31 +1472,31 @@ az containerapp revision restart \
 
 | Erőforrás | Költség |
 |----------|------|
-| **Managed Identity** | 🆓 **INGYEN** - Nincs díj |
-| **RBAC szerepkör-hozzárendelések** | 🆓 **INGYEN** - Nincs díj |
-| **Azure AD tokenkérések** | 🆓 **INGYEN** - Tartalmazva |
-| **Key Vault műveletek** | $0.03 10,000 műveletenként |
-| **Key Vault tárolás** | $0.024 titkonként havonta |
+| **Kezelt identitás** | 🆓 **INGYENES** - Nincs díj |
+| **RBAC szerepkör-hozzárendelések** | 🆓 **INGYENES** - Nincs díj |
+| **Azure AD token kérelmek** | 🆓 **INGYENES** - Beletartozik |
+| **Key Vault műveletek** | 0,03 USD / 10 000 művelet |
+| **Key Vault tárolás** | 0,024 USD / titok havonta |
 
-**A kezelt identitás pénzt takarít meg az alábbiak révén:**
-- ✅ Eliminálja a Key Vault műveleteket szolgáltatás-közi hitelesítés esetén
-- ✅ Csökkenti a biztonsági incidenseket (nincsenek kiszivárgott hitelesítő adatok)
+**A kezelt identitás pénzt takarít meg így:**
+- ✅ Megszünteti a Key Vault műveletek költségét szolgáltatás-szolgáltatás hitelesítésnél
+- ✅ Csökkenti a biztonsági incidenseket (nincsenek kiszivárgó hitelesítő adatok)
 - ✅ Csökkenti az üzemeltetési terheket (nincs kézi forgatás)
 
-**Példa költségösszehasonlítás (havonta):**
+**Költség összehasonlítás példa (havonta):**
 
-| Forgatókönyv | Connection stringek | Kezelt identitás | Megtakarítás |
+| Forgatókönyv | Kapcsolati karakterláncok | Kezelt identitás | Megtakarítás |
 |----------|-------------------|-----------------|---------|
-| Kis alkalmazás (1M kérések) | ~$50 (Key Vault + műveletek) | ~$0 | $50/hó |
-| Közepes alkalmazás (10M kérések) | ~$200 | ~$0 | $200/hó |
-| Nagy alkalmazás (100M kérések) | ~$1,500 | ~$0 | $1,500/hó |
+| Kis alkalmazás (1 millió kérés) | kb. 50 USD (Key Vault + műveletek) | kb. 0 USD | 50 USD/hónap |
+| Közepes alkalmazás (10 millió kérés) | kb. 200 USD | kb. 0 USD | 200 USD/hónap |
+| Nagy alkalmazás (100 millió kérés) | kb. 1500 USD | kb. 0 USD | 1500 USD/hónap |
 
 ---
 
-## További információ
+## További információk
 
 ### Hivatalos dokumentáció
-- [Azure kezelt identitások](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure Kezelt Identitás](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1506,42 +1506,42 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Következő lépések a kurzusban
-- ← Előző: [Konfiguráció kezelése](configuration.md)
-- → Következő: [Első projekt](first-project.md)
-- 🏠 [Kurzus főoldal](../../README.md)
+### Következő lépések ebben a tanfolyamban
+- ← Előző: [Konfiguráció Kezelés](configuration.md)
+- → Következő: [Első Projekt](first-project.md)
+- 🏠 [Tanfolyam kezdőlap](../../README.md)
 
 ### Kapcsolódó példák
-- [Azure OpenAI Chat példa](../../../../examples/azure-openai-chat) - Managed identity-t használ az Azure OpenAI-hoz
-- [Microservices példa](../../../../examples/microservices) - Több szolgáltatásos hitelesítési minták
+- [Microsoft Foundry Models Chat példa](../../../../examples/azure-openai-chat) - Microsoft Foundry Models kezelt identitás használatával
+- [Mikroszolgáltatások példa](../../../../examples/microservices) - Több szolgáltatás hitelesítési minták
 
 ---
 
-## Összegzés
+## Összefoglaló
 
-**Amit megtanultál:**
-- ✅ Három hitelesítési minta (connection stringek, Key Vault, managed identity)
-- ✅ Hogyan engedélyezd és konfiguráld a managed identity-t AZD-ben
-- ✅ RBAC szerepkör-hozzárendelések Azure szolgáltatásokhoz
-- ✅ Key Vault integráció harmadik fél titkaihoz
-- ✅ Felhasználó által hozzárendelt vs rendszer által hozzárendelt identitások
-- ✅ Biztonsági legjobb gyakorlatok és hibakeresés
+**Megtanultad:**
+- ✅ Három hitelesítési mintát (kapcsolati karakterláncok, Key Vault, kezelt identitás)
+- ✅ Hogyan engedélyezd és konfiguráld a kezelt identitást AZD-ben
+- ✅ RBAC szerepkör-hozzárendeléseket Azure szolgáltatásokhoz
+- ✅ Key Vault integrációját harmadik fél titkokhoz
+- ✅ Felhasználó-hozzárendelt vs rendszer-hozzárendelt identitások
+- ✅ Biztonsági legjobb gyakorlatokat és hibakeresést
 
 **Fő tanulságok:**
-1. **Mindig használj managed identity-t éles környezetben** - Nincsenek titkok, automatikus forgatás
-2. **Használj legkisebb jogosultság elvén alapuló RBAC szerepköröket** - Adj csak szükséges jogosultságokat
-3. **Harmadik fél kulcsait tárold a Key Vault-ban** - Központosított titokkezelés
-4. **Szétválasztott identitások környezetenként** - Dev, staging, prod elkülönítés
-5. **Kapcsold be az audit naplózást** - Kövesd nyomon, ki mihez fér hozzá
+1. **Mindig használj kezelt identitást éles környezetben** - Nincsenek titkok, automatikus forgatás
+2. **Használj legkisebb jogosultságú RBAC szerepköröket** - Csak a szükséges jogosultságokat add meg
+3. **Tárold a harmadik féltől származó kulcsokat Key Vault-ban** - Központosított titokkezelés
+4. **Használj külön identitásokat minden környezethez** - Fejlesztés, tesztelés, éles elkülönítés
+5. **Engedélyezd az audit naplózást** - Kövesd nyomon, ki mikor fér hozzá
 
 **Következő lépések:**
 1. Fejezd be a fenti gyakorlati feladatokat
-2. Migrálj egy meglévő alkalmazást connection stringekről managed identity-re
-3. Építsd meg az első AZD projektedet biztonsággal az első naptól: [Első projekt](first-project.md)
+2. Migrálj egy meglévő alkalmazást kapcsolati karakterláncokról kezelt identitásra
+3. Építsd meg első AZD projektedet biztonsággal az első naptól: [Első Projekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ezt a dokumentumot az AI fordítószolgáltatás, a Co-op Translator (https://github.com/Azure/co-op-translator) használatával fordították le. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum eredeti nyelvű változata tekintendő a hiteles forrásnak. Kritikus jelentőségű információk esetén szakmai, emberi fordítás ajánlott. Nem vállalunk felelősséget az e fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Jogi nyilatkozat**:  
+Ezt a dokumentumot az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) használatával fordítottuk. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt szakmai, emberi fordítás igénybevétele. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

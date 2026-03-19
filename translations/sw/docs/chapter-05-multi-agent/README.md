@@ -1,20 +1,20 @@
-# Sura 5: Suluhisho za AI za Wakala-Wengi
+# Sura 5: Suluhisho za AI za Wakala Wengi
 
-**📚 Kozi**: [AZD Kwa Waanze](../../README.md) | **⏱️ Muda**: 2-3 hours | **⭐ Ugumu**: Juu
+**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 2-3 saa | **⭐ Ugumu**: Ngumu
 
 ---
 
 ## Muhtasari
 
-Sura hii inashughulikia mifumo ya usanifu ya wakala-wengi za hali ya juu, uratibu wa mawakala, na uanzishaji wa AI tayari kwa uzalishaji kwa hali ngumu.
+Sura hii inashughulikia mifumo ya usanifu ya mawakala wengi yenye maendeleo, uratibu wa mawakala, na uenezaji wa AI unaofaa kwa uzalishaji kwa matukio tata.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza sura hii, utakuwa umeweza:
-- Kuelewa mifumo ya usanifu ya wakala-wengi
-- Kuweka mifumo ya mawakala wa AI iliyoratibiwa
-- Kutekeleza mawasiliano kati ya mawakala
-- Kujenga suluhisho za wakala-wengi zilizo tayari kwa uzalishaji
+Baada ya kumaliza sura hii, utaweza:
+- Elewa mifumo ya usanifu ya mawakala wengi
+- Eneza mifumo ya mawakala wa AI iliyoratibiwa
+- Tekeleza mawasiliano kati ya mawakala
+- Jenga suluhisho za wakala wengi zinazofaa kwa uzalishaji
 
 ---
 
@@ -22,60 +22,55 @@ Kwa kumaliza sura hii, utakuwa umeweza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Suluhisho la Wakala-Wengi kwa Rejareja](../../examples/retail-scenario.md) | Mwongozo kamili wa utekelezaji | 90 min |
-| 2 | [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md) | Mikakati ya uratibu wa mawakala | 30 min |
-| 3 | [Utekelezaji wa Kiolezo cha ARM](../../examples/retail-multiagent-arm-template/README.md) | Uanzishaji kwa bonyeza moja | 30 min |
+| 1 | [Suluhisho la Wakala Wengi kwa Rejareja](../../examples/retail-scenario.md) | Mwongozo kamili wa utekelezaji | 90 dakika |
+| 2 | [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md) | Mikakati ya uratibu wa mawakala | 30 dakika |
+| 3 | [Utekelezaji wa Templati ya ARM](../../examples/retail-multiagent-arm-template/README.md) | Uwekaji kwa bonyeza moja | 30 dakika |
 
 ---
 
 ## 🚀 Anza Haraka
 
 ```bash
-# Sakinisha suluhisho la mawakala wengi kwa sekta ya rejareja
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Au tumia kiolezo moja kwa moja
+# Chaguo 1: Anzisha kutoka kwa kiolezo
 azd init --template agent-openai-python-prompty
+azd up
+
+# Chaguo 2: Anzisha kutoka kwa manifesti ya wakala (inahitaji ugani wa azure.ai.agents)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
----
-
-## 🤖 Usanifu wa Wakala-Wengi
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
+> **Njia gani?** Tumia `azd init --template` kuanza kutoka kwa sampuli inayofanya kazi. Tumia `azd ai agent init` unapokuwa na manifest ya wakala mwenyewe. Angalia rejea ya [Rejea ya AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa maelezo kamili.
 
 ---
 
-## 🎯 Suluhisho Maarufu: Wakala-Wengi wa Rejareja
+## 🤖 Usanifu wa Wakala Wengi
 
-The [Suluhisho la Wakala-Wengi kwa Rejareja](../../examples/retail-scenario.md) linaonyesha:
+```mermaid
+graph TD
+    Orchestrator[Wakala wa Orchestrator<br/>Inaelekeza maombi, inasimamia mtiririko wa kazi] --> Customer[Wakala wa Mteja<br/>Maswali ya mtumiaji, mapendeleo]
+    Orchestrator --> Inventory[Wakala wa Hisa<br/>Viwango vya hisa, maagizo]
+```
+---
 
-- **Wakala wa Mteja**: Hushughulikia mwingiliano wa mtumiaji na mapendeleo
+## 🎯 Suluhisho Iliyotangazwa: Suluhisho la Wakala Wengi kwa Rejareja
+
+The [Suluhisho la Wakala Wengi kwa Rejareja](../../examples/retail-scenario.md) linaonyesha:
+
+- **Wakala wa Mteja**: Hushughulikia mwingiliano na mapendeleo ya watumiaji
 - **Wakala wa Hifadhi**: Husimamia hisa na usindikaji wa maagizo
 - **Mratibu**: Anaratibu kati ya mawakala
-- **Kumbukumbu Iliyogawanywa**: Usimamizi wa muktadha unaogawanywa kati ya mawakala
+- **Kumbukumbu Iliyoshirikiwa**: Usimamizi wa muktadha wa mawakala mbalimbali
 
-### Huduma Zinazotumika
+### Huduma Zilitumika
 
 | Huduma | Madhumuni |
 |---------|---------|
-| Azure OpenAI | Ufafanuzi wa lugha |
+| Microsoft Foundry Models | Uelewa wa lugha |
 | Azure AI Search | Katalogi ya bidhaa |
 | Cosmos DB | Hali na kumbukumbu ya wakala |
-| Container Apps | Uwekaji mwenyeji wa mawakala |
+| Container Apps | Ukaribishaji wa mawakala |
 | Application Insights | Ufuatiliaji |
 
 ---
@@ -84,20 +79,20 @@ The [Suluhisho la Wakala-Wengi kwa Rejareja](../../examples/retail-scenario.md) 
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyotangulia** | [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md) |
-| **Ifuatayo** | [Sura 6: Kabla ya Uanzishaji](../chapter-06-pre-deployment/README.md) |
+| **Iliyopita** | [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md) |
+| **Ifuatayo** | [Sura 6: Kabla ya Ueneaji](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Mwongozo wa Wakala wa AI](../chapter-02-ai-development/agents.md)
-- [Mbinu za AI kwa Uzalishaji](../chapter-08-production/production-ai-practices.md)
+- [Mwongozo wa Wakala za AI](../chapter-02-ai-development/agents.md)
+- [Mazoea ya AI kwa Uzalishaji](../chapter-08-production/production-ai-practices.md)
 - [Utatuzi wa Matatizo ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Tamko la kutohusika**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali kumbuka kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kasoro. Nyaraka ya awali katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya kitaalamu iliyofanywa na mtaalamu wa kibinadamu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Taarifa ya kutokuwajibika**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokukamilika. Nyaraka ya asili katika lugha yake ya awali inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu iliyofanywa na mtaalamu wa binadamu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

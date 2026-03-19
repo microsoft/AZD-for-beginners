@@ -1,106 +1,93 @@
-# Kuweka Hifadhidata ya Microsoft SQL na Web App kwa AZD
+# Kuweka Database ya Microsoft SQL na Web App kwa AZD
 
-⏱️ **Muda unaokadiriwa**: 20-30 dakika | 💰 **Gharama Inayokadiriwa**: ~$15-25/mwezi | ⭐ **Ugumu**: Kati
+⏱️ **Muda Unaokadiriwa**: 20-30 dakika | 💰 **Gharama Inayokadiriwa**: ~$15-25/mwezi | ⭐ **Ugumu**: Wastani
 
-Mfano huu kamili, unaofanya kazi unaonyesha jinsi ya kutumia [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) kupeleka programu ya wavuti ya Python Flask yenye hifadhidata ya Microsoft SQL kwenye Azure. Msimbo mzima umejumuishwa na umejaribiwa—hakuna utegemezi wa nje unaohitajika.
+Mfano huu **kamili, unaofanya kazi** unaonyesha jinsi ya kutumia [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) kupeleka programu ya wavuti ya Python Flask pamoja na Database ya Microsoft SQL kwenye Azure. Msimbo wote umejumuishwa na umejaribiwa—hakuna utegemezi wa nje unaohitajika.
 
-## Utajifunza Nini
+## Utakachojifunza
 
-Kwa kukamilisha mfano huu, ut:
-- Kupeleka programu yenye ngazi nyingi (web app + hifadhidata) ukitumia miundombinu kama msimbo
-- Kusanidi muunganisho salama wa hifadhidata bila kuweka siri ndani ya msimbo
+Kwa kukamilisha mfano huu, utatekeleza:
+- Kuweka programu yenye tabaka nyingi (web app + database) kwa kutumia miundombinu-kama-msimbo
+- Kusanidi muunganisho salama wa database bila kuweka siri moja kwa moja kwenye msimbo
 - Kufuatilia afya ya programu kwa Application Insights
-- Kusimamia rasilimali za Azure kwa ufanisi kwa kutumia AZD CLI
-- Kufuatilia mbinu bora za Azure kwa usalama, uboreshaji wa gharama, na uonekano
+- Kudhibiti rasilimali za Azure kwa ufanisi kwa AZD CLI
+- Kufuata mbinu bora za Azure kwa usalama, uboreshaji wa gharama, na ufuatiliaji
 
-## Muhtasari wa Senario
-- **Web App**: API ya REST ya Python Flask yenye muunganisho wa hifadhidata
-- **Database**: Azure SQL Database yenye data ya mfano
-- **Infrastructure**: Imetolewa kwa kutumia Bicep (modular, templates zinazoweza kutumika tena)
-- **Deployment**: Imewezeshwa kikamilifu kwa amri za `azd`
-- **Monitoring**: Application Insights kwa kumbukumbu na telemetry
+## Muhtasari wa Mfano
+- **Web App**: API ya Python Flask REST yenye muunganisho wa database
+- **Database**: Azure SQL Database yenye data za mfano
+- **Miundombinu**: Imetolewa kwa kutumia Bicep (kiolezo kinachoweza kutumika tena, kivyake)
+- **Uwasilishaji**: Umeendeshwa kikamilifu kwa amri za `azd`
+- **Ufuatiliaji**: Application Insights kwa kumbukumbu na telemetry
 
-## Mahitaji ya Awali
+## Mahitaji
 
 ### Zana Zinazohitajika
 
 Kabla ya kuanza, hakikisha umeweka zana hizi:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (toleo 2.50.0 au juu)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (toleo 2.50.0 au zaidi)
    ```sh
    az --version
-   # Matokeo yanayotarajiwa: azure-cli 2.50.0 au zaidi
+   # Matokeo yanayotarajiwa: azure-cli 2.50.0 au juu zaidi
    ```
 
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (toleo 1.0.0 au juu)
+2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (toleo 1.0.0 au zaidi)
    ```sh
    azd version
-   # Matokeo yanayotarajiwa: toleo la azd 1.0.0 au juu zaidi
+   # Matokeo yanayotarajiwa: azd toleo 1.0.0 au ya juu zaidi
    ```
 
-3. **[Python 3.8+](https://www.python.org/downloads/)** (kwa uendelezaji wa sehemu ya mtaa)
+3. **[Python 3.8+](https://www.python.org/downloads/)** (kwa maendeleo ya eneo)
    ```sh
    python --version
-   # Matokeo yanayotarajiwa: Python 3.8 au zaidi
+   # Matokeo yanayotarajiwa: Python 3.8 au toleo la juu zaidi
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (hiari, kwa maendeleo ya ndani kwa kutumia kontena)
+4. **[Docker](https://www.docker.com/get-started)** (hiari, kwa maendeleo ya kontena mahali)
    ```sh
    docker --version
-   # Matokeo yanayotarajiwa: Toleo la Docker 20.10 au zaidi
+   # Matokeo yanayotarajiwa: toleo la Docker 20.10 au la juu zaidi
    ```
 
 ### Mahitaji ya Azure
 
 - Usajili wa **Azure** unaofanya kazi ([unda akaunti ya bure](https://azure.microsoft.com/free/))
-- Ruhusa za kuunda rasilimali kwenye usajili wako
+- Ruhusa za kuunda rasilimali katika usajili wako
 - Nafasi ya **Owner** au **Contributor** kwenye usajili au kundi la rasilimali
 
 ### Maarifa Yanayohitajika
 
-Mfano huu ni wa ngazi ya **kati**. Unapaswa kuwa unafahamu:
-- Uendeshaji wa mistari ya amri kwa msingi
+Huu ni mfano wa kiwango cha **wastani**. Unapaswa kuwa unafahamu:
+- Utendakazi wa msingi wa laini ya amri
 - Misingi ya dhana za wingu (rasilimali, makundi ya rasilimali)
-- Uelewa wa msingi wa programu za wavuti na hifadhidata
+- Uelewa wa msingi wa programu za wavuti na database
 
-**Mpya kwa AZD?** Anza na [Mwongozo wa Kuanzisha](../../docs/chapter-01-foundation/azd-basics.md) kwanza.
+**Mpya kwa AZD?** Anza na [Mwongozo wa Kuanzia](../../docs/chapter-01-foundation/azd-basics.md) kwanza.
 
-## Miundombinu
+## Muundo
 
-Mfano huu unapeleka usanifu wa ngazi mbili yenye programu ya wavuti na hifadhidata ya SQL:
+Mfano huu unaweka muundo wa tabaka mbili na programu ya wavuti na database:
 
+```mermaid
+graph TD
+    Browser[Kivinjari cha Mtumiaji] <--> WebApp[Programu ya Wavuti ya Azure<br/>API ya Flask<br/>/health<br/>/products]
+    WebApp -- Unganisho Salama<br/>Iliyosimbwa --> SQL[Hifadhidata ya Azure SQL<br/>Jedwali la Bidhaa<br/>Takwimu za mfano]
 ```
-┌─────────────────┐        ┌──────────────────────┐
-│  User Browser   │◄──────►│   Azure Web App      │
-└─────────────────┘        │   (Flask API)        │
-                           │   - /health          │
-                           │   - /products        │
-                           └──────────┬───────────┘
-                                      │
-                                      │ Secure Connection
-                                      │ (Encrypted)
-                                      │
-                           ┌──────────▼───────────┐
-                           │ Azure SQL Database   │
-                           │   - Products table   │
-                           │   - Sample data      │
-                           └──────────────────────┘
-```
-
 **Resource Deployment:**
-- **Resource Group**: Chombo cha kuhifadhi rasilimali zote
-- **App Service Plan**: Uendeshaji kwa Linux (ngazi B1 kwa ufanisi wa gharama)
-- **Web App**: Runtime ya Python 3.11 na programu ya Flask
-- **SQL Server**: Seva ya hifadhidata inayodhibitiwa na TLS 1.2 au zaidi
-- **SQL Database**: Ngazi ya Basic (2GB, inafaa kwa maendeleo/majaribio)
+- **Resource Group**: Chombo cha kuhifadhia rasilimali zote
+- **App Service Plan**: Ukarabati wa mwenyeji wa Linux (ngazi B1 kwa ufanisi wa gharama)
+- **Web App**: Muda wa kuendesha Python 3.11 na programu ya Flask
+- **SQL Server**: Server iliyosimamiwa ya database yenye TLS 1.2 angalau
+- **SQL Database**: Ngazi ya Basic (2GB, inayofaa kwa maendeleo/majaribio)
 - **Application Insights**: Ufuatiliaji na kumbukumbu
-- **Log Analytics Workspace**: Uhifadhi wa kumbukumbu ulio katikati
+- **Log Analytics Workspace**: Hifadhi ya kumbukumbu ya kati
 
-**Mfanano**: Fikiria hii kama mkahawa (web app) una friza ya walk-in (hifadhidata). Wateja wanaagiza kutoka kwenye menyu (endpoints za API), na jikoni (app ya Flask) huchukua viungo (data) kutoka friza. Meneja wa mkahawa (Application Insights) anafuatilia kila kitu kinachotokea.
+**Mfanano**: Fikiria hii kama mgahawa (web app) mwenye sakafu ya kuhifadhi baridi (database). Wateja wanaagiza kutoka kwenye menyu (vituo vya API), na jikoni (app ya Flask) inachukua viungo (data) kutoka kwenye sakafu ya baridi. Meneja wa mgahawa (Application Insights) anafuatilia kila kitu kinachotokea.
 
 ## Muundo wa Folda
 
-Faili zote zimetajwa katika mfano huu—hakuna utegemezi wa nje unaohitajika:
+Faili zote zimetangazwa katika mfano huu—hakuna utegemezi wa nje unaohitajika:
 
 ```
 examples/database-app/
@@ -127,38 +114,38 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**What Each File Does:**
-- **azure.yaml**: Inaeleza AZD nini cha kupeleka na wapi
-- **infra/main.bicep**: Inaratibu rasilimali zote za Azure
-- **infra/resources/*.bicep**: Ufafanuzi wa kila rasilimali (moduli kwa matumizi tena)
-- **src/web/app.py**: Programu ya Flask yenye mantiki ya hifadhidata
-- **requirements.txt**: Vimnunuzi vya pakiti za Python
-- **Dockerfile**: Maelekezo ya kuweka ndani ya kontena kwa ajili ya utumiaji
+**Kazi ya Kila Faili:**
+- **azure.yaml**: Inamwambia AZD nini cha kupeleka na wapi
+- **infra/main.bicep**: Inaandaa rasilimali zote za Azure
+- **infra/resources/*.bicep**: Ufafanuzi wa rasilimali kwa kila mmoja (modulari kwa matumizi tena)
+- **src/web/app.py**: Programu ya Flask yenye mantiki ya database
+- **requirements.txt**: Mipangilio ya vifurushi vya Python
+- **Dockerfile**: Maelekezo ya kukontena kwa uwasilishaji
 
 ## Mwongozo wa Haraka (Hatua kwa Hatua)
 
-### Hatua 1: Kloni na Nenda Katika Folda
+### Hatua 1: Nakili na Uelekeze
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Kagua Umefanikiwa**: Hakikisha unaona `azure.yaml` na folda `infra/`:
+**✓ Ukaguzi wa Mafanikio**: Hakikisha unaona `azure.yaml` na folda `infra/`:
 ```sh
 ls
 # Inatarajiwa: README.md, azure.yaml, infra/, src/
 ```
 
-### Hatua 2: Ingia kwenye Azure
+### Hatua 2: Thibitisha Utambulisho na Azure
 
 ```sh
 azd auth login
 ```
 
-Hii itafungua kivinjari chako kwa uthibitishaji wa Azure. Ingia kwa nyaraka zako za Azure.
+Hii itafungua kivinjari chako kwa ajili ya uthibitishaji wa Azure. Ingia kwa vitambulisho vyako vya Azure.
 
-**✓ Kagua Umefanikiwa**: Unapaswa kuona:
+**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona:
 ```
 Logged in to Azure.
 ```
@@ -169,14 +156,14 @@ Logged in to Azure.
 azd init
 ```
 
-**Nini kinatokea**: AZD huunda usanidi wa ndani kwa ajili ya utekelezaji wako.
+**Kinachotokea**: AZD inaunda usanidi wa eneo kwa ajili ya uwasilishaji wako.
 
-**Una maswali utakaoyaona**:
-- **Environment name**: Ingiza jina fupi (kwa mfano, `dev`, `myapp`)
+**Maswali utakayoyaona**:
+- **Environment name**: Ingiza jina fupi (mfano, `dev`, `myapp`)
 - **Azure subscription**: Chagua usajili wako kutoka kwenye orodha
-- **Azure location**: Chagua eneo (kwa mfano, `eastus`, `westeurope`)
+- **Azure location**: Chagua eneo (mfano, `eastus`, `westeurope`)
 
-**✓ Kagua Umefanikiwa**: Unapaswa kuona:
+**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona:
 ```
 SUCCESS: New project initialized!
 ```
@@ -187,7 +174,7 @@ SUCCESS: New project initialized!
 azd provision
 ```
 
-**Nini kinatokea**: AZD inapeleka miundombinu yote (huchukua dakika 5-8):
+**Kinachotokea**: AZD inasambaza miundombinu yote (inachukua dakika 5-8):
 1. Inaunda resource group
 2. Inaunda SQL Server na Database
 3. Inaunda App Service Plan
@@ -196,10 +183,10 @@ azd provision
 6. Inasanidi mtandao na usalama
 
 **Utaulizwa kwa**:
-- **SQL admin username**: Weka jina la mtumiaji (kwa mfano, `sqladmin`)
-- **SQL admin password**: Weka nenosiri salama (hihifadhi!)
+- **SQL admin username**: Ingiza jina la mtumiaji (mfano, `sqladmin`)
+- **SQL admin password**: Ingiza nenosiri imara (ihifadhi!)
 
-**✓ Kagua Umefanikiwa**: Unapaswa kuona:
+**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -208,20 +195,20 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Muda**: 5-8 dakika
 
-### Hatua 5: Peleka Programu
+### Hatua 5: Tuma Programu
 
 ```sh
 azd deploy
 ```
 
-**Nini kinatokea**: AZD hujenga na kupeleka programu yako ya Flask:
+**Kinachotokea**: AZD inajenga na kupeleka programu yako ya Flask:
 1. Inapakisha programu ya Python
 2. Inajenga kontena la Docker
-3. Inatuliza kwenye Azure Web App
-4. Inanzisha hifadhidata kwa data ya mfano
-5. Inaamsha programu
+3. Inalipusha kwenye Azure Web App
+4. Inanzisha database na data za mfano
+5. Inaendesha programu
 
-**✓ Kagua Umefanikiwa**: Unapaswa kuona:
+**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -230,7 +217,7 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Muda**: 3-5 dakika
 
-### Hatua 6: Vinjari Programu
+### Hatua 6: Tazama Programu
 
 ```sh
 azd browse
@@ -238,7 +225,7 @@ azd browse
 
 Hii itafungua web app yako iliyowekwa kwenye kivinjari kwa `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Kagua Umefanikiwa**: Unapaswa kuona toleo la JSON:
+**✓ Ukaguzi wa Mafanikio**: Unapaswa kuona toleo la JSON:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -251,9 +238,9 @@ Hii itafungua web app yako iliyowekwa kwenye kivinjari kwa `https://app-<unique-
 }
 ```
 
-### Hatua 7: Jaribu Endpoints za API
+### Hatua 7: Jaribu Vituo vya API
 
-**Ukaguzi wa Afya** (hakikisha muunganisho wa hifadhidata):
+**Ukaguzi wa Afya** (thibitisha muunganisho wa database):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
@@ -266,7 +253,7 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**Orodha ya Bidhaa** (data ya mfano):
+**Orodha ya Bidhaa** (data za mfano):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
@@ -290,39 +277,39 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Kagua Umefanikiwa**: Endpoints zote zinarejea data ya JSON bila makosa.
+**✓ Ukaguzi wa Mafanikio**: Vituo vyote vinarejesha data za JSON bila makosa.
 
 ---
 
-**🎉 Hongera!** Umefanikiwa kupeleka programu ya wavuti yenye hifadhidata kwenye Azure kwa kutumia AZD.
+**🎉 Hongera!** Umefanikiwa kuweka programu ya wavuti pamoja na database kwenye Azure kwa kutumia AZD.
 
-## Ufafanuzi wa Mipangilio
+## Uchunguzi wa Mipangilio kwa Kina
 
 ### Vigezo vya Mazingira
 
-Siri zinadhibitiwa kwa usalama kupitia usanidi wa Azure App Service—**zitafutwe kamwe ndani ya msimbo wa chanzo**.
+Siri zinadhibitiwa kwa usalama kupitia usanidi wa Azure App Service—**zisitokee kwenye msimbo wa chanzo**.
 
-**Zimewekwa Kiotomatiki na AZD**:
-- `SQL_CONNECTION_STRING`: Muunganisho wa hifadhidata yenye sifa zilizofichwa
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Seva ya telemetry ya ufuatiliaji
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Inawezesha usakinishaji wa utegemezi wakati wa utolewaji
+**Zinasanidiwa Kiotomatiki na AZD**:
+- `SQL_CONNECTION_STRING`: Muunganisho wa database wenye vitambulisho vilivyosenywa
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Mwisho wa telemetry ya ufuatiliaji
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Inaruhusu ufungaji wa utegemezi kiotomatiki wakati wa uwasilishaji
 
-**Wapi Siri Zinahifadhiwa**:
-1. Wakati wa `azd provision`, unatoa nyaraka za SQL kupitia vituo vya usalama
-2. AZD inazihifadhi katika faili yako ya ndani `.azure/<env-name>/.env` (haijajumuishwa Git)
-3. AZD zinaingizwa kwenye usanidi wa Azure App Service (zilifichwa wakati wa kupumzika)
-4. Programu inazisoma kupitia `os.getenv()` wakati wa utekelezaji
+**Mahali Siri Zinapohifadhiwa**:
+1. Wakati wa `azd provision`, unatoa vitambulisho vya SQL kupitia maulizo salama
+2. AZD inaweka haya kwenye faili lako la ndani `.azure/<env-name>/.env` (limejumuishwa katika .gitignore)
+3. AZD inayaingiza kwenye usanidi wa Azure App Service (yamehifadhiwa kimefumwa)
+4. Programu inayasoma kupitia `os.getenv()` wakati wa utekelezaji
 
-### Maendeleo ya Ndani (Local Development)
+### Maendeleo ya Kienyeji
 
-Kwa ajili ya majaribio ya ndani, tengeneza faili `.env` kutoka kwa sampuli:
+Kwa upimaji wa eneo, tengeneza faili `.env` kutoka kwa mfano:
 
 ```sh
 cp .env.sample .env
-# Hariri .env na muunganisho wa hifadhidata yako ya ndani
+# Hariri .env ili kuweka muunganisho wako wa hifadhidata ya ndani
 ```
 
-**Mfumo wa Kazi wa Maendeleo ya Ndani**:
+**Mtiririko wa Maendeleo ya Kienyeji**:
 ```sh
 # Sakinisha utegemezi
 cd src/web
@@ -338,20 +325,20 @@ python app.py
 **Jaribu kwa ndani**:
 ```sh
 curl http://localhost:8000/health
-# Inatarajiwa: {"status": "hai", "database": "imeunganishwa"}
+# Inatarajiwa: {"status": "healthy", "database": "connected"}
 ```
 
 ### Miundombinu kama Msimbo
 
-Rasilimali zote za Azure zimetajwa katika **templates za Bicep** (folda `infra/`):
+Rasilimali zote za Azure zimefafanuliwa katika **kiolezo za Bicep** (`infra/` folda):
 
-- **Muundo wa Moduli**: Kila aina ya rasilimali ina faili yake kwa matumizi tena
-- **Iliyoparametishwa**: Badilisha SKUs, maeneo, na kanuni za uandishi majina
-- **Marekebisho Bora**: Inafuata viwango vya uandishi majina vya Azure na chaguo-msingi za usalama
-- **Iliyodhibitiwa kwa Tovuti ya Msimbo**: Mabadiliko ya miundombinu yafuatiwa kwa Git
+- **Muundo wa Modular**: Kila aina ya rasilimali ina faili yake kwa matumizi tena
+- **Inakarabatiwa kwa Parameta**: Badilisha SKU, maeneo, na kanuni za kuweka majina
+- **Mbinu Bora**: Inafuata viwango vya majina na vipaumbele vya usalama vya Azure
+- **Inadhibitiwa kwa Toleo**: Mabadiliko ya miundombinu yanafuatiliwa katika Git
 
-**Mfano wa Urekebishaji**:
-Ili kubadilisha ngazi ya hifadhidata, badilisha `infra/resources/sql-database.bicep`:
+**Mfano wa Ubinafsishaji**:
+Ili kubadilisha ngazi ya database, hariri `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -364,85 +351,85 @@ sku: {
 
 Mfano huu unafuata mbinu bora za usalama za Azure:
 
-### 1. **Hakuna Siri Katika Msimbo wa Chanzo**
-- ✅ Nywila zimedhibitiwa kwenye usanidi wa Azure App Service (zilifichwa)
-- ✅ Faili `.env` zimeondolewa kutoka Git kwa `.gitignore`
-- ✅ Siri zinapitishwa kupitia vigezo salama wakati wa utolewaji
+### 1. **Hakuna Siri kwenye Msimbo wa Chanzo**
+- ✅ Vitambulisho vinahifadhiwa katika usanidi wa Azure App Service (vimefichwa)
+- ✅ Faili za `.env` zimetengwa kutoka Git kupitia `.gitignore`
+- ✅ Siri hupitishwa kupitia parameta salama wakati wa utoaji
 
-### 2. **Muunganisho uliofichwa**
+### 2. **Muunganisho Umefichwa**
 - ✅ TLS 1.2 angalau kwa SQL Server
-- ✅ HTTPS pekee imetekelezwa kwa Web App
-- ✅ Muunganisho wa hifadhidata unatumia njia zilizo na usimbaji
+- ✅ HTTPS pekee imelazimishwa kwa Web App
+- ✅ Muunganisho wa database unatumia njia zilizoenyeangwa
 
 ### 3. **Usalama wa Mtandao**
-- ✅ Firewall ya SQL Server imesanifiwa ili kuruhusu huduma za Azure pekee
-- ✅ Ufikiaji wa mtandao wa umma umezuiliwa (unaweza kufungwa zaidi kwa Private Endpoints)
+- ✅ Firewall ya SQL Server imesanidiwa kuruhusu huduma za Azure pekee
+- ✅ Ufikiaji wa mtandao wa umma umewekewa kikomo (unaweza kuufunga zaidi kwa Private Endpoints)
 - ✅ FTPS imezimwa kwenye Web App
 
-### 4. **Uthibitishaji & Uidhinishaji**
-- ⚠️ **Sasa**: Uthibitishaji wa SQL (jina la mtumiaji/nenosiri)
-- ✅ **Mapendekezo kwa Uzalishaji**: Tumia Azure Managed Identity kwa uthibitishaji bila neno la siri
+### 4. **Uthibitishaji & Ruhusa**
+- ⚠️ **Kwa sasa**: Uthibitishaji wa SQL (jina la mtumiaji/nenosiri)
+- ✅ **Mapendekezo kwa Uzalishaji**: Tumia Azure Managed Identity kwa uthibitishaji bila nywila
 
-**Ili Kuboresha kwa Managed Identity** (kwa uzalishaji):
+**Ili Kuboresha hadi Managed Identity** (kwa uzalishaji):
 1. Washa managed identity kwenye Web App
-2. Toa ruhusa za SQL kwa utambulisho
-3. Sasisha string ya muunganisho ili kutumia managed identity
-4. Ondoa uthibitishaji unaotumia nenosiri
+2. Mpe identity ruhusa za SQL
+3. Sasisha connection string ili itumie managed identity
+4. Ondoa uthibitishaji unaotegemea nenosiri
 
 ### 5. **Ukaguzi & Uzingatiaji**
-- ✅ Application Insights inarekodi maombi yote na makosa
-- ✅ Ukaguzi wa SQL Database umewezeshwa (unaweza kusanidiwa kwa uzingatiaji)
-- ✅ Rasilimali zote zimewekwa tag kwa ajili ya utawala
+- ✅ Application Insights inaandika maombi yote na makosa
+- ✅ Ukaguzi wa SQL Database umewezeshwa (unaweza kusanidi kwa uzingatiaji)
+- ✅ Rasilimali zote zimepewa tag kwa ajili ya utawala
 
 **Orodha ya Usalama Kabla ya Uzalishaji**:
 - [ ] Washa Azure Defender kwa SQL
 - [ ] Sanidi Private Endpoints kwa SQL Database
 - [ ] Washa Web Application Firewall (WAF)
-- [ ] Tekeleza Azure Key Vault kwa mzunguko wa siri
+- [ ] Tumia Azure Key Vault kwa mzunguko wa siri
 - [ ] Sanidi uthibitishaji wa Azure AD
-- [ ] Washa kurekodi uchunguzi kwa rasilimali zote
+- [ ] Washa upigaji kumbukumbu wa utambuzi kwa rasilimali zote
 
 ## Uboreshaji wa Gharama
 
-**Gharama za Kila Mwezi Zinazokadiriwa** (kama ya Novemba 2025):
+**Gharama Zilizokadiriwa kwa Mwezi** (kama ya Novemba 2025):
 
-| Resource | SKU/Tier | Estimated Cost |
+| Mali | SKU/Tier | Gharama Inayokadiriwa |
 |----------|----------|----------------|
 | App Service Plan | B1 (Basic) | ~$13/month |
 | SQL Database | Basic (2GB) | ~$5/month |
-| Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
-| **Total** | | **~$20/month** |
+| Application Insights | Pay-as-you-go | ~$2/month (trafiki ndogo) |
+| **Jumla** | | **~$20/month** |
 
 **💡 Vidokezo vya Kuokoa Gharama**:
 
 1. **Tumia Ngazi ya Bure kwa Kujifunza**:
-   - App Service: ngazi F1 (bure, saa chache)
+   - App Service: ngazi F1 (bure, masaa maalum)
    - SQL Database: Tumia Azure SQL Database serverless
-   - Application Insights: 5GB/mwezi ukusanyaji wa bure
+   - Application Insights: 5GB/mwezi ingizo la bure
 
 2. **Zima Rasilimali Usizotumia**:
    ```sh
-   # Simamisha programu ya wavuti (hifadhidata bado inagharimu)
+   # Zima programu ya wavuti (hifadhidata bado inagharimu)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Anzisha upya inapohitajika
+   # Anzisha tena inapohitajika
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **Futa Kila Kitu Baada ya Majaribio**:
+3. **Futa Kila Kitu Baada ya Kupima**:
    ```sh
    azd down
    ```
-   Hii inafuta RASILIMALI ZOTE na kusitisha malipo.
+   Hii inafuta rasilimali ZOTE na kuacha malipo.
 
-4. **SKUs kwa Maendeleo dhidi ya Uzalishaji**:
+4. **SKU za Maendeleo dhidi ya Uzalishaji**:
    - **Maendeleo**: Ngazi ya Basic (inayotumika katika mfano huu)
-   - **Uzalishaji**: Ngazi ya Standard/Premium yenye redundancy
+   - **Uzalishaji**: Ngazi ya Standard/Premium yenye uraia
 
 **Ufuatiliaji wa Gharama**:
 - Tazama gharama katika [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
 - Sanidi arifa za gharama ili kuepuka mshangao
-- Piga tag kwa rasilimali zote kwa `azd-env-name` kwa ufuatiliaji
+- Oka rasilimali zote kwa `azd-env-name` kwa ajili ya ufuatiliaji
 
 **Mbadala wa Ngazi ya Bure**:
 Kwa madhumuni ya kujifunza, unaweza kubadilisha `infra/resources/app-service-plan.bicep`:
@@ -452,27 +439,27 @@ sku: {
   tier: 'Free'
 }
 ```
-**Kumbuka**: Ngazi ya bure ina mipaka (60 min/saa CPU kwa siku, hakuna always-on).
+**Kumbuka**: Ngazi ya bure ina vikwazo (60 min/siku CPU, hakuna always-on).
 
-## Ufuatiliaji & Uonekano
+## Ufuatiliaji & Uwezo wa Kuonekana
 
-### Uunganishaji wa Application Insights
+### Ujumuishaji wa Application Insights
 
-Mfano huu unajumuisha **Application Insights** kwa ufuatiliaji kamili:
+Mfano huu unajumuisha **Application Insights** kwa ufuatiliaji wa kina:
 
 **Kinachofuatiliwa**:
-- ✅ Maombi ya HTTP (ugumu, nambari za msimamo, endpoints)
-- ✅ Makosa na exceptions za programu
-- ✅ Kumbukumbu maalum kutoka app ya Flask
-- ✅ Afya ya muunganisho wa hifadhidata
+- ✅ Maombi ya HTTP (usitawi, nambari za hali, vituo)
+- ✅ Makosa ya programu na ubaguzi
+- ✅ Uandishi wa log maalum kutoka app ya Flask
+- ✅ Afya ya muunganisho wa database
 - ✅ Vipimo vya utendaji (CPU, kumbukumbu)
 
-**Fikia Application Insights**:
+**Jinsi ya Kupata Application Insights**:
 1. Fungua [Azure Portal](https://portal.azure.com)
-2. Nenda kwenye kundi lako la rasilimali (`rg-<env-name>`)
+2. Elekea kwenye resource group yako (`rg-<env-name>`)
 3. Bofya kwenye rasilimali ya Application Insights (`appi-<unique-id>`)
 
-**Maswali Yanayofaa** (Application Insights → Logs):
+**Maswali Muhimu** (Application Insights → Logs):
 
 **Tazama Maombi Yote**:
 ```kusto
@@ -490,7 +477,7 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Kagua Endpoint ya Afya**:
+**Kagua Kiungo cha Afya**:
 ```kusto
 requests
 | where name contains "health"
@@ -499,29 +486,29 @@ requests
 
 ### Ukaguzi wa SQL Database
 
-**Ukaguzi wa SQL Database umewezeshwa** ili kufuatilia:
-- Mifumo ya upatikanaji wa hifadhidata
-- Jaribio la kuingia lililoshindikana
+**Ukaguzi wa SQL Database umewezeshwa** kufuatilia:
+- Mfano wa upatikanaji wa database
+- Jaribio la kuingia lililoshindwa
 - Mabadiliko ya skima
-- Upatikanaji wa data (kwa uzingatiaji)
+- Upataji wa data (kwa uzingatiaji)
 
-**Fikia Logi za Ukaguzi**:
+**Pata Log za Ukaguzi**:
 1. Azure Portal → SQL Database → Auditing
-2. Tazama logi kwenye Log Analytics workspace
+2. Tazama log katika Log Analytics workspace
 
 ### Ufuatiliaji wa Wakati Halisi
 
-**Tazama Vipimo Hai**:
+**Tazama Vipimo Moja kwa Moja**:
 1. Application Insights → Live Metrics
-2. Tazama maombi, kushindwa, na utendaji kwa wakati halisi
+2. Ona maombi, kushindwa, na utendaji kwa wakati halisi
 
 **Sanidi Arifa**:
 Tengeneza arifa kwa matukio muhimu:
-- HTTP 500 makosa > 5 ndani ya dakika 5
-- Kushindwa kwa muunganisho wa hifadhidata
-- Muda wa majibu mrefu (>2 sekunde)
+- Makosa ya HTTP 500 > 5 ndani ya dakika 5
+- Kushindwa kwa muunganisho wa database
+- Muda mrefu wa majibu (>2 sekunde)
 
-**Mfano wa Kuunda Onyo**:
+**Mfano wa Uundaji wa Arifa**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -532,165 +519,164 @@ az monitor metrics alert create \
 ```
 
 ## Utatuzi wa Matatizo
-
 ### Masuala ya Kawaida na Suluhisho
 
-#### 1. `azd provision` inashindwa na "Location not available"
+#### 1. `azd provision` fails with "Location not available"
 
-**Dalili**:
+**Symptom**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
 
-**Suluhisho**:
-Chagua eneo tofauti la Azure au jisajili kwa mtoa rasilimali:
+**Solution**:
+Chagua eneo tofauti la Azure au jisajili kwa muuzaji wa rasilimali:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. Muunganisho wa SQL Unashindwa Wakati wa Utekelezaji
+#### 2. SQL Connection Fails During Deployment
 
-**Dalili**:
+**Symptom**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
 
-**Suluhisho**:
-- Thibitisha firewall ya SQL Server inaruhusu huduma za Azure (imewekwa kiotomatiki)
-- Kagua kuwa nenosiri la msimamizi wa SQL liliingizwa kwa usahihi wakati wa `azd provision`
-- Hakikisha SQL Server imeanzishwa kikamilifu (inaweza kuchukua 2-3 dakika)
+**Solution**:
+- Thibitisha kwamba ukuta wa moto wa SQL Server unaruhusu huduma za Azure (imewekwa kiotomatiki)
+- Hakiki kuwa nenosiri la msimamizi wa SQL liliingizwa kwa usahihi wakati wa `azd provision`
+- Hakikisha SQL Server imekamilika kabisa (inaweza kuchukua dakika 2-3)
 
-**Thibitisha Muunganisho**:
+**Verify Connection**:
 ```sh
-# Kutoka kwenye Portal ya Azure, nenda kwenye SQL Database → Mhariri wa Maswali
-# Jaribu kuungana kwa kutumia vitambulisho vyako
+# Kutoka kwenye Azure Portal, nenda kwenye SQL Database → Mhariri wa maswali
+# Jaribu kuungana kwa kutumia taarifa zako za kuingia
 ```
 
-#### 3. Web App Inaonyesha "Application Error"
+#### 3. Web App Shows "Application Error"
 
-**Dalili**:
-Kivinjari kinaonyesha ukurasa wa ujumbe wa hitilafu wa jumla.
+**Symptom**:
+Kivinjari kinaonyesha ukurasa wa kosa wa jumla.
 
-**Suluhisho**:
-Kagua kumbukumbu za programu:
+**Solution**:
+Angalia kumbukumbu za programu:
 ```sh
-# Tazama rekodi za hivi karibuni
+# Tazama kumbukumbu za hivi karibuni
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
-**Sababu za kawaida**:
-- Vigezo vya mazingira vinakosekana (angalia App Service → Configuration)
-- Usakinishaji wa vifurushi vya Python umefeli (angalia deployment logs)
-- Hitilafu ya uzinduzi wa hifadhidata (angalia muunganisho wa SQL)
+**Common causes**:
+- Vigezo vya mazingira vimetoweka (angalia App Service → Configuration)
+- Usakinishaji wa kifurushi cha Python ulishindwa (angalia kumbukumbu za utekelezaji)
+- Hitilafu ya awali ya hifadhidata (angalia muunganisho wa SQL)
 
-#### 4. `azd deploy` Inashindwa na "Build Error"
+#### 4. `azd deploy` Fails with "Build Error"
 
-**Dalili**:
+**Symptom**:
 ```
 Error: Failed to build project
 ```
 
-**Suluhisho**:
-- Hakikisha `requirements.txt` haina makosa ya sintaksia
-- Angalia kuwa Python 3.11 imeainishwa katika `infra/resources/web-app.bicep`
+**Solution**:
+- Hakikisha `requirements.txt` haina makosa ya sentensi
+- Angalia kwamba Python 3.11 imeainishwa katika `infra/resources/web-app.bicep`
 - Thibitisha Dockerfile ina picha ya msingi sahihi
 
-**Chunguza kwa kompyuta yako**:
+**Debug locally**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Unauthorized" Wakati wa Kuendesha Amri za AZD
+#### 5. "Unauthorized" When Running AZD Commands
 
-**Dalili**:
+**Symptom**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
 
-**Suluhisho**:
-Jisajili tena na Azure:
+**Solution**:
+Fanya uthibitisho upya na Azure:
 ```sh
 azd auth login
 az login
 ```
 
-Thibitisha una ruhusa sahihi (Contributor role) kwenye subscription.
+Thibitisha kuwa una ruhusa sahihi (Contributor role) kwenye usajili.
 
-#### 6. Gharama za Juu za Hifadhidata
+#### 6. High Database Costs
 
-**Dalili**:
-Bili ya Azure isiyotarajiwa.
+**Symptom**:
+Ankara ya Azure isiyotarajiwa.
 
-**Suluhisho**:
-- Angalia kama ulikosa kuendesha `azd down` baada ya kupima
-- Thibitisha SQL Database inatumia Basic tier (si Premium)
-- Kagua gharama katika Azure Cost Management
-- Sanidi arifa za gharama
+**Solution**:
+- Angalia kama uliisahau kuendesha `azd down` baada ya kujaribu
+- Hakiki kuwa SQL Database inatumia tier ya Basic (si Premium)
+- Pitia gharama katika Azure Cost Management
+- Weka arifu za gharama
 
 ### Kupata Msaada
 
-**Tazama Vigezo Vyote vya Mazingira vya AZD**:
+**View All AZD Environment Variables**:
 ```sh
 azd env get-values
 ```
 
-**Kagua Hali ya Utekelezaji**:
+**Check Deployment Status**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Pata Logu za Programu**:
+**Access Application Logs**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**Unahitaji Msaada Zaidi?**
+**Need More Help?**
 - [Mwongozo wa Utatuzi wa AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Utatuzi wa Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Utatuzi wa Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+- [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## Mazoezi ya Vitendo
 
-### Zoezi 1: Thibitisha Utekelezaji Wako (Mwanzo)
+### Mazoezi 1: Thibitisha Utekelezaji Wako (Mwanzo)
 
 **Lengo**: Thibitisha rasilimali zote zimewekwa na programu inafanya kazi.
 
 **Hatua**:
-1. Orodhesha rasilimali zote katika kundi lako la rasilimali:
+1. Orodhesha rasilimali zote katika resource group yako:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Inayotarajiwa**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Inayotarajiwa**: 6-7 rasilimali (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. Jaribu vituo vya mwisho vya API zote:
+2. Jaribu miisho yote ya API:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Inayotarajiwa**: Zote zirejeshe JSON halali bila makosa
+   **Inayotarajiwa**: Zote zitarudisha JSON halali bila makosa
 
 3. Angalia Application Insights:
-   - Nenda kwenye Application Insights kwenye Azure Portal
+   - Nenda kwenye Application Insights katika Azure Portal
    - Nenda kwenye "Live Metrics"
-   - Sasisha kivinjari chako kwenye web app
-   **Inayotarajiwa**: Oona maombi yanaonekana kwa wakati halisi
+   - Sasisha kivinjari chako kwenye programu ya wavuti
+   **Inayotarajiwa**: Ona maombi yakionekana kwa wakati halisi
 
-**Vigezo vya Mafanikio**: Rasilimali zote 6-7 zipo, vituo vyote vya mwisho vinarejesha data, Live Metrics inaonyesha shughuli.
+**Vigezo vya Mafanikio**: Rasilimali zote 6-7 zipo, miisho yote inarudisha data, Live Metrics inaonyesha shughuli.
 
 ---
 
-### Zoezi 2: Ongeza Endpoint Mpya wa API (Kati)
+### Mazoezi 2: Ongeza Mwisho Mpya wa API (Wa Kati)
 
-**Lengo**: Panua programu ya Flask kwa kuongeza endpoint mpya.
+**Lengo**: Panua programu ya Flask na mwisho mpya.
 
-**Msimbo wa Mwanzo**: Endpoint za sasa katika `src/web/app.py`
+**Starter Code**: Miisho ya sasa katika `src/web/app.py`
 
 **Hatua**:
-1. Hariri `src/web/app.py` na ongeza endpoint mpya baada ya kazi ya `get_product()`:
+1. Hariri `src/web/app.py` na ongeza mwisho mpya baada ya kazi ya `get_product()`:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -724,27 +710,27 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. Tekeleza programu iliyosasishwa:
+2. Sambaza programu iliyosasishwa:
    ```sh
    azd deploy
    ```
 
-3. Jaribu endpoint mpya:
+3. Jaribu mwisho mpya:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Inayotarajiwa**: Inarejesha bidhaa zinazolingana na "laptop"
+   **Inayotarajiwa**: Inarudisha bidhaa zinazolingana na "laptop"
 
-**Vigezo vya Mafanikio**: Endpoint mpya inafanya kazi, inarejesha matokeo yaliyosefa, inaonekana kwenye logu za Application Insights.
+**Vigezo vya Mafanikio**: Mwisho mpya unafanya kazi, unarudisha matokeo yaliyosisitizwa, unaonekana katika kumbukumbu za Application Insights.
 
 ---
 
-### Zoezi 3: Ongeza Ufuatiliaji na Arifa (Kiwango cha Juu)
+### Mazoezi 3: Ongeza Ufuatiliaji na Arifa (Kiwango cha Juu)
 
-**Lengo**: Sanidi ufuatiliaji wa kuzuia matatizo na arifa.
+**Lengo**: Sanidi ufuatiliaji wa kinara na arifa.
 
 **Hatua**:
-1. Unda onyo la makosa ya HTTP 500:
+1. Unda arifa kwa makosa ya HTTP 500:
    ```sh
    # Pata ID ya rasilimali ya Application Insights
    AI_ID=$(az monitor app-insights component show \
@@ -752,7 +738,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # Unda onyo
+   # Unda tahadhari
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -763,26 +749,26 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. Zidisha onyo kwa kusababisha makosa:
+2. Washa arifa kwa kusababisha makosa:
    ```sh
-   # Ombi la bidhaa isiyopo
+   # Omba bidhaa isiyopo
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Angalia kama onyo limezinduliwa:
+3. Angalia kama arifa ilipigwa:
    - Azure Portal → Alerts → Alert Rules
    - Angalia barua pepe yako (ikiwa imewekwa)
 
-**Vigezo vya Mafanikio**: Sheria ya onyo imetengenezwa, inazinduliwa kwa makosa, taarifa zinapokelewa.
+**Vigezo vya Mafanikio**: Sheria ya arifa imeundwa, inawasababisha makosa, arifa zinapokelewa.
 
 ---
 
-### Zoezi 4: Mabadiliko ya Schema ya Hifadhidata (Kiwango cha Juu)
+### Mazoezi 4: Mabadiliko ya Muundo wa Hifadhidata (Kiwango cha Juu)
 
-**Lengo**: Ongeza jedwali jipya na urekebishe programu ili kuitumia.
+**Lengo**: Ongeza jedwali jipya na ubadilishe programu kuitumia.
 
 **Hatua**:
-1. Unganisha na SQL Database kupitia Query Editor ya Azure Portal
+1. Unganisha na SQL Database kupitia Azure Portal Query Editor
 
 2. Unda jedwali jipya `categories`:
    ```sql
@@ -801,39 +787,39 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Sasisha `src/web/app.py` ili kujumuisha taarifa za kategoria katika majibu
+3. Sasisha `src/web/app.py` kujumuisha taarifa za kategoria katika majibu
 
-4. Tekeleza na jaribu
+4. Sambaza na jaribu
 
 **Vigezo vya Mafanikio**: Jedwali jipya lipo, bidhaa zinaonyesha taarifa za kategoria, programu bado inafanya kazi.
 
 ---
 
-### Zoezi 5: Tekeleza Caching (Mtaalam)
+### Mazoezi 5: Tekeleza Kache (Mtaalamu)
 
-**Lengo**: Ongeza Azure Redis Cache ili kuboresha utendaji.
+**Lengo**: Ongeza Azure Redis Cache kuboresha utendaji.
 
 **Hatua**:
-1. Ongeza Redis Cache kwenye `infra/main.bicep`
-2. Sasisha `src/web/app.py` ili kuhifadhi (cache) maswali ya bidhaa
-3. Pima uboreshaji wa utendaji kwa kutumia Application Insights
-4. Linganisha nyakati za majibu kabla/baada ya caching
+1. Ongeza Redis Cache katika `infra/main.bicep`
+2. Sasisha `src/web/app.py` kuweka kache kwa maswali ya bidhaa
+3. Pima uboreshaji wa utendaji kwa Application Insights
+4. Linganisha nyakati za majibu kabla/baada ya kache
 
-**Vigezo vya Mafanikio**: Redis imesakinishwa, caching inafanya kazi, nyakati za majibu zinaboresha kwa >50%.
+**Vigezo vya Mafanikio**: Redis imesambazwa, kache inafanya kazi, nyakati za majibu zinaongezeka kwa >50%.
 
-**Kidokezo**: Anza na [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Hint**: Anza na [nyaraka za Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Usafishaji
 
-To avoid ongoing charges, delete all resources when done:
+Ili kuepuka malipo yanayoendelea, futa rasilimali zote baada ya kumaliza:
 
 ```sh
 azd down
 ```
 
-**Onyo la Uthibitisho**:
+**Utaarifu wa uthibitisho**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
@@ -843,7 +829,7 @@ Andika `y` kuthibitisha.
 **✓ Ukaguzi wa Mafanikio**: 
 - Rasilimali zote zimefutwa kutoka Azure Portal
 - Hakuna malipo yanayoendelea
-- Folda ya eneo `.azure/<env-name>` inaweza kufutwa
+- Folda ya ndani `.azure/<env-name>` inaweza kufutwa
 
 **Mbadala** (hifadhi miundombinu, futa data):
 ```sh
@@ -853,58 +839,58 @@ az group delete --name rg-<env-name> --yes
 ## Jifunze Zaidi
 
 ### Nyaraka Zinazohusiana
-- [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Nyaraka za Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Nyaraka za Azure App Service](https://learn.microsoft.com/azure/app-service/)
-- [Nyaraka za Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Marejeo ya Lugha ya Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
+- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ### Hatua Zifuatazo Katika Kozi Hii
-- **[Mfano wa Container Apps](../../../../examples/container-app)**: Tuma microservices kwa Azure Container Apps
-- **[Mwongozo wa Uingizaji AI](../../../../docs/ai-foundry)**: Ongeza uwezo wa AI kwenye programu yako
-- **[Mbinu Bora za Utekelezaji](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Mifano ya utekelezaji kwa uzalishaji
+- **[Mfano wa Container Apps](../../../../examples/container-app)**: Sambaza microservices na Azure Container Apps
+- **[Mwongozo wa Ujumuishaji wa AI](../../../../docs/ai-foundry)**: Ongeza uwezo wa AI kwenye programu yako
+- **[Mwongozo wa Mazoea Bora ya Utekelezaji](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Mifumo ya utekelezaji wa uzalishaji
 
 ### Mada za Juu
-- **Managed Identity**: Ondoa nywila na tumia uthibitishaji wa Azure AD
-- **Private Endpoints**: Linda muunganisho wa hifadhidata ndani ya virtual network
-- **CI/CD Integration**: Automaticisha deployments kwa kutumia GitHub Actions au Azure DevOps
-- **Multi-Environment**: Sanidi dev, staging, na production environments
-- **Database Migrations**: Tumia Alembic au Entity Framework kwa ufuatiliaji wa toleo la schema
+- **Managed Identity**: Ondoa nywila na tumia uthibitisho wa Azure AD
+- **Private Endpoints**: Salama muunganisho wa hifadhidata ndani ya mtandao wa virtual
+- **CI/CD Integration**: Panga utolewaji kiotomatiki na GitHub Actions au Azure DevOps
+- **Multi-Environment**: Sanidi mazingira ya dev, staging, na production
+- **Database Migrations**: Tumia Alembic au Entity Framework kwa udhibiti wa toleo la skema
 
-### Ulinganifu na Njia Nyingine
+### Ulinganisho na Mbinu Nyingine
 
 **AZD vs. ARM Templates**:
-- ✅ AZD: Abstraksi ya ngazi ya juu, amri rahisi
+- ✅ AZD: Ufafanuzi wa juu zaidi, amri rahisi
 - ⚠️ ARM: Maelezo mengi, udhibiti wa kina
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure-native, imeunganishwa na huduma za Azure
-- ⚠️ Terraform: Inasaidia wingu nyingi, mfumo mkubwa wa mazingira
+- ✅ AZD: Azure-native, imejumuishwa na huduma za Azure
+- ⚠️ Terraform: Inasaidia multi-cloud, mazingira makubwa
 
 **AZD vs. Azure Portal**:
-- ✅ AZD: Inarudiwa, inasimamiwa kwa toleo, inaweza kuendeshwa kiotomatiki
-- ⚠️ Portal: Bonyeza kwa mwongozo, ngumu kuiga tena
+- ✅ AZD: Inarudiwa, iko chini ya udhibiti wa toleo, inaweza kuendeshwa kiotomatiki
+- ⚠️ Portal: Bonyeza kwa mkono, vigumu kurudia
 
-Fikiria AZD kama: Docker Compose kwa Azure—usanidi uliorahisishwa kwa utekelezaji mgumu.
+**Fikiria AZD kama**: Docker Compose kwa Azure—usanidi uliorahisishwa kwa utekelezaji tata.
 
 ---
 
 ## Maswali Yanayoulizwa Mara kwa Mara
 
-**Q: Je, naweza kutumia lugha tofauti ya programu?**  
+**Q: Can I use a different programming language?**  
 A: Ndiyo! Badilisha `src/web/` na Node.js, C#, Go, au lugha yoyote. Sasisha `azure.yaml` na Bicep ipasavyo.
 
-**Q: Ninawezaje kuongeza hifadhidata zaidi?**  
-A: Ongeza moduli nyingine ya SQL Database ndani ya `infra/main.bicep` au tumia PostgreSQL/MySQL kutoka kwa huduma za Azure Database.
+**Q: How do I add more databases?**  
+A: Ongeza moduli nyingine ya SQL Database katika `infra/main.bicep` au tumia PostgreSQL/MySQL kutoka kwa huduma za Azure Database.
 
-**Q: Je, naweza kuitumia kwa uzalishaji?**  
-A: Hii ni mwanzo wa mradi. Kwa uzalishaji, ongeza: managed identity, private endpoints, redundancy, mkakati wa backup, WAF, na ufuatiliaji ulioboreshwa.
+**Q: Can I use this for production?**  
+A: Hii ni msingi wa kuanzia. Kwa uzalishaji, ongeza: managed identity, private endpoints, redundancy, mkakati wa backup, WAF, na ufuatiliaji ulioboreshwa.
 
-**Q: Je, ninataka kutumia kontena badala ya kupeleka msimbo?**  
+**Q: What if I want to use containers instead of code deployment?**  
 A: Angalia [Mfano wa Container Apps](../../../../examples/container-app) ambayo inatumia kontena za Docker kote.
 
-**Q: Ninawezaje kuungana na hifadhidata kutoka mashine yangu ya ndani?**  
-A: Ongeza IP yako kwenye firewall ya SQL Server:
+**Q: How do I connect to the database from my local machine?**  
+A: Ongeza IP yako kwenye ukuta wa moto wa SQL Server:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -914,21 +900,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**Q: Je, naweza kutumia hifadhidata iliyopo badala ya kuunda mpya?**  
+**Q: Can I use an existing database instead of creating a new one?**  
 A: Ndiyo, rekebisha `infra/main.bicep` kurejea SQL Server iliyopo na sasisha vigezo vya connection string.
 
 ---
 
-> **Kumbuka:** Mfano huu unaonyesha mbinu bora za kupeleka web app pamoja na hifadhidata kwa kutumia AZD. Unajumuisha msimbo unaofanya kazi, nyaraka kamili, na mazoezi ya vitendo ili kuimarisha kujifunza. Kwa utekelezaji wa uzalishaji, kagua usalama, upanuzi, utii wa sheria, na mahitaji ya gharama maalum kwa shirika lako.
+> **Kumbuka:** Mfano huu unaonyesha mbinu bora za kusambaza programu ya wavuti yenye hifadhidata kwa kutumia AZD. Unajumuisha msimbo unaofanya kazi, nyaraka za kina, na mazoezi ya vitendo ili kuimarisha kujifunza. Kwa utekelezaji wa uzalishaji, pitia mahitaji ya usalama, upanuaji, uzingatiaji, na gharama za shirika lako.
 
-**📚 Urambazaji wa Kozi:**
-- ← Iliyotangulia: [Mfano wa Container Apps](../../../../examples/container-app)
-- → Inayofuata: [Mwongozo wa Uingizaji AI](../../../../docs/ai-foundry)
-- 🏠 [Nyumbani wa Kozi](../../README.md)
+**📚 Course Navigation:**
+- ← Previous: [Mfano wa Container Apps](../../../../examples/container-app)
+- → Next: [Mwongozo wa Ujumuishaji wa AI](../../../../docs/ai-foundry)
+- 🏠 [Nyumbani ya Kozi](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Angalizo:
-Waraka huu umetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kutambulika kama chanzo cha mamlaka. Kwa taarifa muhimu, tunapendekeza utumie tafsiri ya kitaalamu iliyofanywa na mtafsiri wa binadamu. Hatutawajibika kwa maelewano potofu au tafsiri isiyo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Kukanusha**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokukamilika. Nyaraka ya asili katika lugha yake inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutokuelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
