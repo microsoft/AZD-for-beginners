@@ -1,181 +1,181 @@
-# ਰਿਟੇਲ ਮਲਟੀ-ਏਜੰਟ ਹੱਲ - ਇੰਫਰਾਸਟਰਕਚਰ ਟੈਂਪਲੇਟ
+# ਰੀਟੇਲ ਮਲਟੀ-ਏਜੰਟ ਸਲੂਸ਼ਨ - ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਟੈਂਪਲੇਟ
 
-**ਅਧਿਆਇ 5: ਪ੍ਰੋਡਕਸ਼ਨ ਡਿਪਲੌਇਮੈਂਟ ਪੈਕੇਜ**
-- **📚 ਕੋਰਸ ਹੋਮ**: [AZD ਫਾਰ ਬਿਗਿਨਰਜ਼](../../README.md)
-- **📖 ਸੰਬੰਧਿਤ ਅਧਿਆਇ**: [ਅਧਿਆਇ 5: ਮਲਟੀ-ਏਜੰਟ AI ਹੱਲ](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 ਸਿਨੇਰੀਓ ਗਾਈਡ**: [ਪੂਰੀ ਆਰਕੀਟੈਕਚਰ](../retail-scenario.md)
-- **🎯 ਤੁਰੰਤ ਡਿਪਲੌਇਮੈਂਟ**: [ਇੱਕ-ਕਲਿੱਕ ਡਿਪਲੌਇਮੈਂਟ](../../../../examples/retail-multiagent-arm-template)
+**ਅਧਿਆਇ 5: ਉਤਪਾਦਨ ਤਾਇਨਾਤੀ ਪੈਕੇਜ**
+- **📚 ਕੋਰਸ ਹੋਮ**: [AZD ਬਿਗਿਨਰਜ਼ ਲਈ](../../README.md)
+- **📖 ਸਬੰਧਤ ਅਧਿਆਇ**: [ਅਧਿਆਇ 5: ਮਲਟੀ-ਏਜੰਟ AI ਹੱਲ](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 ਸੈਨਾਰਿਓ ਗਾਈਡ**: [ਸੰਪੂਰਨ ਆਰਕੀਟੈਕਚਰ](../retail-scenario.md)
+- **🎯 ਤੁਰੰਤ ਤਾਇਨਾਤੀ**: [ਇੱਕ-ਕਲਿਕ ਤਾਇਨਾਤੀ](#-quick-deployment)
 
-> **⚠️ ਸਿਰਫ਼ ਇੰਫਰਾਸਟਰਕਚਰ ਟੈਂਪਲੇਟ**  
-> ਇਹ ARM ਟੈਂਪਲੇਟ **Azure ਸਰੋਤਾਂ** ਨੂੰ ਮਲਟੀ-ਏਜੰਟ ਸਿਸਟਮ ਲਈ ਡਿਪਲੌਇ ਕਰਦਾ ਹੈ।  
+> **⚠️ ਸਿਰਫ਼ ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਟੈਂਪਲੇਟ**  
+> ਇਹ ARM ਟੈਂਪਲੇਟ ਇੱਕ ਮਲਟੀ-ਏਜੰਟ ਸਿਸਟਮ ਲਈ **Azure ਸਰੋਤਾਂ** ਨੂੰ ਤਾਇਨਾਤੀ ਕਰਦਾ ਹੈ।  
 >  
-> **ਕੀ ਡਿਪਲੌਇ ਹੁੰਦਾ ਹੈ (15-25 ਮਿੰਟ):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings ਤਿੰਨ ਖੇਤਰਾਂ ਵਿੱਚ)
+> **ਕੀ ਤਾਇਨਾਤੀ ਹੁੰਦਾ ਹੈ (15-25 ਮਿੰਟ):**
+> - ✅ Microsoft Foundry ਮਾਡਲਸ (gpt-4.1, gpt-4.1-mini, embeddings ਤਿੰਨ ਖੇਤਰਾਂ ਵਿੱਚ)
 > - ✅ AI Search ਸੇਵਾ (ਖਾਲੀ, ਇੰਡੈਕਸ ਬਣਾਉਣ ਲਈ ਤਿਆਰ)
-> - ✅ ਕੰਟੇਨਰ ਐਪਸ (placeholder images, ਤੁਹਾਡੇ ਕੋਡ ਲਈ ਤਿਆਰ)
-> - ✅ ਸਟੋਰੇਜ, Cosmos DB, Key Vault, Application Insights
+> - ✅ Container Apps (ਪਲੇਸਹੋਲਡਰ ਇਮੇਜ, ਤੁਹਾਡੇ ਕੋਡ ਲਈ ਤਿਆਰ)
+> - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
-> **ਕੀ ਸ਼ਾਮਲ ਨਹੀਂ ਹੈ (ਵਿਕਾਸ ਦੀ ਲੋੜ ਹੈ):**
+> **ਕੀ ਸ਼ਾਮਲ ਨਹੀਂ ਹੈ (ਡਿਵੈਲਪਮੈਂਟ ਦੀ ਲੋੜ):**
 > - ❌ ਏਜੰਟ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਕੋਡ (Customer Agent, Inventory Agent)
-> - ❌ ਰੂਟਿੰਗ ਲਾਜਿਕ ਅਤੇ API endpoints
+> - ❌ ਰੂਟਿੰਗ ਲੌਜਿਕ ਅਤੇ API ਐਂਡਪੌਇੰਟਸ
 > - ❌ ਫਰੰਟਐਂਡ ਚੈਟ UI
-> - ❌ Search ਇੰਡੈਕਸ schemas ਅਤੇ ਡਾਟਾ ਪਾਈਪਲਾਈਨ
-> - ❌ **ਅਨੁਮਾਨਿਤ ਵਿਕਾਸ ਦਾ ਸਮਾਂ: 80-120 ਘੰਟੇ**
+> - ❌ ਸਰਚ ਇੰਡੈਕਸ ਸਕੀਮਾ ਅਤੇ ਡੇਟਾ ਪਾਈਪਲਾਈਨ
+> - ❌ **ਅੰਦਾਜ਼ਾ ਡਿਵੈਲਪਮੈਂਟ ਮਿਹਨਤ: 80-120 ਘੰਟੇ**
 >  
-> **ਇਸ ਟੈਂਪਲੇਟ ਨੂੰ ਵਰਤੋ ਜੇ:**
-> - ✅ ਤੁਸੀਂ ਮਲਟੀ-ਏਜੰਟ ਪ੍ਰੋਜੈਕਟ ਲਈ Azure ਇੰਫਰਾਸਟਰਕਚਰ ਪ੍ਰੋਵਿਜਨ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ
-> - ✅ ਤੁਸੀਂ ਏਜੰਟ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਨੂੰ ਅਲੱਗ ਤੋਂ ਵਿਕਸਿਤ ਕਰਨ ਦੀ ਯੋਜਨਾ ਬਣਾਈ ਹੈ
-> - ✅ ਤੁਹਾਨੂੰ ਪ੍ਰੋਡਕਸ਼ਨ-ਤਿਆਰ ਇੰਫਰਾਸਟਰਕਚਰ ਬੇਸਲਾਈਨ ਦੀ ਲੋੜ ਹੈ
+> **ਇਸ ਟੈਂਪਲੇਟ ਨੂੰ ਵਰਤੋਂ ਜੇ:**
+> - ✅ ਤੁਸੀਂ ਮਲਟੀ-ਏਜੰਟ ਪ੍ਰੋਜੈਕਟ ਲਈ Azure ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਪ੍ਰੋਵਿਜ਼ਨ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ
+> - ✅ ਤੁਸੀਂ ਏਜੰਟ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਨੂੰ ਵੱਖਰਾ ਵਿਕਸਿਤ ਕਰਨ ਦੀ ਯੋਜਨਾ ਬਣਾ ਰਹੇ ਹੋ
+> - ✅ ਤੁਹਾਨੂੰ ਪ੍ਰੋਡਕਸ਼ਨ-ਰੇਡੀ ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਬੇਸਲਾਈਨ ਦੀ ਲੋੜ ਹੈ
 >  
-> **ਵਰਤੋਂ ਨਾ ਕਰੋ ਜੇ:**
-> - ❌ ਤੁਸੀਂ ਤੁਰੰਤ ਕੰਮ ਕਰਨ ਵਾਲੇ ਮਲਟੀ-ਏਜੰਟ ਡੈਮੋ ਦੀ ਉਮੀਦ ਕਰਦੇ ਹੋ
-> - ❌ ਤੁਸੀਂ ਪੂਰੇ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਉਦਾਹਰਨਾਂ ਦੀ ਭਾਲ ਕਰ ਰਹੇ ਹੋ
+> **ਇਹ ਨਾ ਵਰਤੋਂ ਜੇ:**
+> - ❌ ਤੁਸੀਂ ਤੁਰੰਤ ਇੱਕ ਕੰਮ ਕਰਦੇ ਮਲਟੀ-ਏਜੰਟ ਡੈਮੋ ਦੀ ਉਮੀਦ ਕਰ ਰਹੇ ਹੋ
+> - ❌ ਤੁਸੀਂ ਪੂਰਾ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਉਦਾਹਰਣ ਲੱਭ ਰਹੇ ਹੋ
 
-## ਝਲਕ
+## ਓਵਰਵਿਊ
 
-ਇਹ ਡਾਇਰੈਕਟਰੀ **ਮਲਟੀ-ਏਜੰਟ ਕਸਟਮਰ ਸਪੋਰਟ ਸਿਸਟਮ** ਦੇ **ਇੰਫਰਾਸਟਰਕਚਰ ਫਾਊਂਡੇਸ਼ਨ** ਨੂੰ ਡਿਪਲੌਇ ਕਰਨ ਲਈ ਇੱਕ ਵਿਸਤ੍ਰਿਤ Azure Resource Manager (ARM) ਟੈਂਪਲੇਟ ਸ਼ਾਮਲ ਕਰਦੀ ਹੈ। ਟੈਂਪਲੇਟ ਸਾਰੇ ਲੋੜੀਂਦੇ Azure ਸੇਵਾਵਾਂ ਨੂੰ ਪ੍ਰੋਵਿਜਨ ਕਰਦਾ ਹੈ, ਜੋ ਸਹੀ ਤਰੀਕੇ ਨਾਲ ਸੰਰਚਿਤ ਅਤੇ ਆਪਸ ਵਿੱਚ ਜੁੜੇ ਹੋਏ ਹਨ, ਤੁਹਾਡੇ ਐਪਲੀਕੇਸ਼ਨ ਵਿਕਾਸ ਲਈ ਤਿਆਰ।
+ਇਹ ਡਾਇਰੈਕਟਰੀ ਇੱਕ ਵਿਆਪਕ Azure Resource Manager (ARM) ਟੈਂਪਲੇਟ ਸ਼ਾਮਲ ਕਰਦੀ ਹੈ ਜੋ ਇੱਕ ਮਲਟੀ-ਏਜੰਟ ਗ੍ਰਾਹਕ ਸਹਾਇਤਾ ਸਿਸਟਮ ਦੀ **ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਨੀਂਹ** ਤਾਇਨਾਤ ਕਰਨ ਲਈ ਹੈ। ਟੈਂਪਲੇਟ ਸਾਰੇ ਲੋੜੀਂਦੇ Azure ਸੇਵਾਵਾਂ ਪ੍ਰੋਵਾਈਜਨ ਕਰਦਾ ਹੈ, ਢੰਗ ਨਾਲ ਕਨਫਿਗਰ ਕੀਤੀਆਂ ਅਤੇ ਇਕ ਦੂਜੇ ਨਾਲ ਜੁੜੀਆਂ ਹੋਈਆਂ, ਤੁਹਾਡੇ ਐਪਲੀਕੇਸ਼ਨ ਡਿਵੈਲਪਮੈਂਟ ਲਈ ਤਿਆਰ।
 
-**ਡਿਪਲੌਇਮੈਂਟ ਤੋਂ ਬਾਅਦ ਤੁਹਾਡੇ ਕੋਲ ਹੋਵੇਗਾ:** ਪ੍ਰੋਡਕਸ਼ਨ-ਤਿਆਰ Azure ਇੰਫਰਾਸਟਰਕਚਰ  
-**ਸਿਸਟਮ ਨੂੰ ਪੂਰਾ ਕਰਨ ਲਈ ਤੁਹਾਨੂੰ ਲੋੜ ਹੈ:** ਏਜੰਟ ਕੋਡ, ਫਰੰਟਐਂਡ UI, ਅਤੇ ਡਾਟਾ ਸੰਰਚਨਾ (ਵੇਖੋ [ਆਰਕੀਟੈਕਚਰ ਗਾਈਡ](../retail-scenario.md))
+**ਤਾਇਨਾਤੀ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਡੇ ਕੋਲ ਹੋਵੇਗਾ:** ਪ੍ਰੋਡਕਸ਼ਨ-ਰੇਡੀ Azure ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ  
+**ਸਿਸਟਮ ਨੂੰ ਪੂਰਾ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਲੋੜ ਹੈ:** ਏਜੰਟ ਕੋਡ, ਫਰੰਟਐਂਡ UI, ਅਤੇ ਡੇਟਾ ਕਨਫਿਗਰੇਸ਼ਨ (ਦੇਖੋ [Architecture Guide](../retail-scenario.md))
 
-## 🎯 ਕੀ ਡਿਪਲੌਇ ਹੁੰਦਾ ਹੈ
+## 🎯 ਕੀ ਤਾਇਨਾਤੀ ਹੁੰਦਾ ਹੈ
 
-### ਕੋਰ ਇੰਫਰਾਸਟਰਕਚਰ (ਡਿਪਲੌਇਮੈਂਟ ਤੋਂ ਬਾਅਦ ਸਥਿਤੀ)
+### ਕੋਰ ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ (ਤਾਇਨਾਤੀ ਤੋਂ ਬਾਅਦ ਸਥਿਤੀ)
 
-✅ **Azure OpenAI ਸੇਵਾਵਾਂ** (API ਕਾਲਾਂ ਲਈ ਤਿਆਰ)
-  - ਪ੍ਰਾਇਮਰੀ ਖੇਤਰ: GPT-4o ਡਿਪਲੌਇਮੈਂਟ (20K TPM ਸਮਰੱਥਾ)
-  - ਸੈਕੰਡਰੀ ਖੇਤਰ: GPT-4o-mini ਡਿਪਲੌਇਮੈਂਟ (10K TPM ਸਮਰੱਥਾ)
-  - ਤੀਜਾ ਖੇਤਰ: ਟੈਕਸਟ embeddings ਮਾਡਲ (30K TPM ਸਮਰੱਥਾ)
-  - ਮੁਲਾਂਕਣ ਖੇਤਰ: GPT-4o grader ਮਾਡਲ (15K TPM ਸਮਰੱਥਾ)
-  - **ਸਥਿਤੀ:** ਪੂਰੀ ਤਰ੍ਹਾਂ ਕਾਰਗਰ - ਤੁਰੰਤ API ਕਾਲਾਂ ਕਰ ਸਕਦੇ ਹੋ
+✅ **Microsoft Foundry Models Services** (API ਕਾਲਾਂ ਲਈ ਤਿਆਰ)
+  - ਪ੍ਰਾਇਮਰੀ ਖੇਤਰ: gpt-4.1 ਡਿਪਲੋਇਮੈਂਟ (20K TPM ਕੈਪਸੀਟੀ)
+  - ਸੈਕੰਡਰੀ ਖੇਤਰ: gpt-4.1-mini ਡਿਪਲੋਇਮੈਂਟ (10K TPM ਕੈਪਸੀਟੀ)
+  - ਟਰਸ਼ਰੀ ਖੇਤਰ: Text embeddings ਮਾਡਲ (30K TPM ਕੈਪਸੀਟੀ)
+  - ਇਵੈਲੂਏਸ਼ਨ ਖੇਤਰ: gpt-4.1 grader ਮਾਡਲ (15K TPM ਕੈਪਸੀਟੀ)
+  - **ਸਥਿਤੀ:** ਪੂਰੀ ਤਰ੍ਹਾਂ ਕਾਰਯਸ਼ੀਲ - ਤੁਰੰਤ API ਕਾਲਾਂ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ
 
-✅ **Azure AI Search** (ਖਾਲੀ - ਸੰਰਚਨਾ ਲਈ ਤਿਆਰ)
-  - ਵੈਕਟਰ ਖੋਜ ਸਮਰੱਥਾ ਚਾਲੂ
-  - ਸਟੈਂਡਰਡ ਟੀਅਰ 1 partition, 1 replica ਨਾਲ
-  - **ਸਥਿਤੀ:** ਸੇਵਾ ਚਾਲੂ, ਪਰ ਇੰਡੈਕਸ ਬਣਾਉਣ ਦੀ ਲੋੜ ਹੈ
-  - **ਕਰਮ:** ਆਪਣੇ schema ਨਾਲ ਖੋਜ ਇੰਡੈਕਸ ਬਣਾਓ
+✅ **Azure AI Search** (ਖਾਲੀ - ਕਨਫਿਗਰੇਸ਼ਨ ਲਈ ਤਿਆਰ)
+  - ਵੇਕਟਰ ਸੇਰਚ ਸਮਰੱਥਾਵਾਂ ਸක්ਰਿਯ
+  - ਸਟੈਂਡਰਡ ਟੀਅਰ ਨਾਲ 1 ਪਾਰਟੀਸ਼ਨ, 1 ਰਪੀਲਿਕਾ
+  - **ਸਥਿਤੀ:** ਸੇਵਾ ਚੱਲ ਰਹੀ ਹੈ, ਪਰ ਇੰਡੈਕਸ ਬਣਾਉਣ ਦੀ ਲੋੜ ਹੈ
+  - **ਕਾਰਵਾਈ ਲੋੜੀਦੀ ਹੈ:** ਆਪਣੇ ਸਕੀਮਾ ਨਾਲ ਸਰਚ ਇੰਡੈਕਸ ਬਣਾਓ
 
-✅ **Azure Storage Account** (ਖਾਲੀ - ਅਪਲੋਡ ਲਈ ਤਿਆਰ)
-  - Blob containers: `documents`, `uploads`
-  - ਸੁਰੱਖਿਅਤ ਸੰਰਚਨਾ (ਸਿਰਫ HTTPS, ਕੋਈ ਜਨਤਕ ਪਹੁੰਚ ਨਹੀਂ)
-  - **ਸਥਿਤੀ:** ਫਾਈਲਾਂ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਤਿਆਰ
-  - **ਕਰਮ:** ਆਪਣੇ ਉਤਪਾਦ ਡਾਟਾ ਅਤੇ ਦਸਤਾਵੇਜ਼ ਅਪਲੋਡ ਕਰੋ
+✅ **Azure Storage Account** (ਖਾਲੀ - ਅੱਪਲੋਡ ਲਈ ਤਿਆਰ)
+  - Blob ਕਨਟੇਨਰ: `documents`, `uploads`
+  - ਸੁਰੱਖਿਅਤ ਕਨਫਿਗਰੇਸ਼ਨ (ਸਿਰਫ HTTPS, ਕੋਈ ਪਬਲਿਕ ਐਕਸેસ ਨਹੀਂ)
+  - **ਸਥਿਤੀ:** ਫਾਇਲਾਂ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਤਿਆਰ
+  - **ਕਾਰਵਾਈ ਲੋੜੀਦੀ ਹੈ:** ਆਪਣਾ ਉਤਪਾਦ ਡੇਟਾ ਅਤੇ ਦਸਤਾਵੇਜ਼ ਅੱਪਲੋਡ ਕਰੋ
 
-⚠️ **Container Apps Environment** (Placeholder images ਡਿਪਲੌਇ ਕੀਤੇ)
-  - Agent router app (nginx default image)
-  - Frontend app (nginx default image)
-  - Auto-scaling ਸੰਰਚਿਤ (0-10 instances)
-  - **ਸਥਿਤੀ:** Placeholder containers ਚਾਲੂ
-  - **ਕਰਮ:** ਆਪਣੇ ਏਜੰਟ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਓ ਅਤੇ ਡਿਪਲੌਇ ਕਰੋ
+⚠️ **Container Apps Environment** (ਪਲੇਸਹੋਲਡਰ ਇਮੇਜ ਤਾਇਨਾਤ)
+  - ਏਜੰਟ ਰਾਊਟਰ ਐਪ (nginx ਡਿਫ਼ਾਲਟ ਇਮੇਜ)
+  - ਫਰੰਟਐਂਡ ਐਪ (nginx ਡਿਫ਼ਾਲਟ ਇਮੇਜ)
+  - ਆਟੋ-ਸਕੇਲਿੰਗ ਕਨਫਿਗਰ ਕੀਤੀ ਗਈ (0-10 ਇੰਸਟੈਂਸ)
+  - **ਸਥਿਤੀ:** ਪਲੇਸਹੋਲਡਰ ਕੰਟੇਨਰ ਚੱਲ ਰਹੇ ਹਨ
+  - **ਕਾਰਵਾਈ ਲੋੜੀਦੀ ਹੈ:** ਆਪਣੇ ਏਜੰਟ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਓ ਅਤੇ ਤਾਇਨਾਤ ਕਰੋ
 
-✅ **Azure Cosmos DB** (ਖਾਲੀ - ਡਾਟਾ ਲਈ ਤਿਆਰ)
-  - ਡਾਟਾਬੇਸ ਅਤੇ ਕੰਟੇਨਰ ਪਹਿਲਾਂ ਤੋਂ ਸੰਰਚਿਤ
-  - ਘੱਟ-ਵਿਲੰਬੀ ਕਾਰਵਾਈਆਂ ਲਈ ਅਨੁਕੂਲਿਤ
-  - TTL ਚਾਲੂ ਸਵੈ-ਸਫਾਈ ਲਈ
-  - **ਸਥਿਤੀ:** ਚੈਟ ਇਤਿਹਾਸ ਸਟੋਰ ਕਰਨ ਲਈ ਤਿਆਰ
+✅ **Azure Cosmos DB** (ਖਾਲੀ - ਡੇਟਾ ਲਈ ਤਿਆਰ)
+  - ਡੇਟਾਬੇਸ ਅਤੇ ਕਨਟੇਨਰ ਪਹਿਲਾਂ ਤੋਂ ਕਨਫਿਗਰ ਕੀਤੇ ਗਏ
+  - ਘੱਟ-ਲੈਨਸੀ ਦੇ ਕਾਰਜਾਂ ਲਈ ਓਪਟੀਮਾਈਜ਼ਡ
+  - TTL ਆਟੋਮੈਟਿਕ ਕਲੀਨਅਪ ਲਈ ਸක්ਰਿਯ
+  - **ਸਥਿਤੀ:** ਚੈਟ ਇਤਿਹਾਸ ਸੰਭਾਲਣ ਲਈ ਤਿਆਰ
 
-✅ **Azure Key Vault** (ਵਿਕਲਪਿਕ - ਰਾਜ਼ਾਂ ਲਈ ਤਿਆਰ)
-  - Soft delete ਚਾਲੂ
-  - RBAC ਸੰਰਚਿਤ ਮੈਨੇਜਡ identities ਲਈ
-  - **ਸਥਿਤੀ:** API keys ਅਤੇ connection strings ਸਟੋਰ ਕਰਨ ਲਈ ਤਿਆਰ
+✅ **Azure Key Vault** (ਔਪਸ਼ਨਲ - ਸੀਕ੍ਰੇਟਸ ਲਈ ਤਿਆਰ)
+  - ਸੌਫਟ ਡੀਲੀਟ ਸක්ਰਿਯ
+  - ਮੈਨੇਜਡ ਆਈਡੈਂਟਿਟੀਜ਼ ਲਈ RBAC ਕਨਫਿਗਰ ਕੀਤਾ ਗਿਆ
+  - **ਸਥਿਤੀ:** API ਕੀਜ਼ ਅਤੇ ਕਨੈਕਸ਼ਨ ਸਟਰਿੰਗਜ਼ ਸਟੋਰ ਕਰਨ ਲਈ ਤਿਆਰ
 
-✅ **Application Insights** (ਵਿਕਲਪਿਕ - ਮਾਨੀਟਰਿੰਗ ਚਾਲੂ)
-  - Log Analytics workspace ਨਾਲ ਜੁੜਿਆ
-  - Custom metrics ਅਤੇ alerts ਸੰਰਚਿਤ
-  - **ਸਥਿਤੀ:** ਤੁਹਾਡੇ ਐਪਸ ਤੋਂ ਟੈਲੀਮੈਟਰੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਤਿਆਰ
+✅ **Application Insights** (ਔਪਸ਼ਨਲ - ਮਾਨੀਟਰਿੰਗ ਚਾਲੂ)
+  - Log Analytics ਵਰਕਸਪੇਸ ਨਾਲ ਜੁੜਿਆ
+  - ਕਸਟਮ ਮੈਟ੍ਰਿਕਸ ਅਤੇ ਅਲਰਟਸ ਕਨਫਿਗਰ ਕੀਤੇ ਗਏ
+  - **ਸਥਿਤੀ:** ਤੁਹਾਡੇ ਐਪਸ ਤੋਂ ਟੈਲੀਮੇਟਰੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਤਿਆਰ
 
 ✅ **Document Intelligence** (API ਕਾਲਾਂ ਲਈ ਤਿਆਰ)
-  - S0 tier ਪ੍ਰੋਡਕਸ਼ਨ ਵਰਕਲੋਡ ਲਈ
-  - **ਸਥਿਤੀ:** ਅਪਲੋਡ ਕੀਤੇ ਦਸਤਾਵੇਜ਼ ਪ੍ਰਕਿਰਿਆ ਕਰਨ ਲਈ ਤਿਆਰ
+  - S0 ਟੀਅਰ ਪ੍ਰੋਡਕਸ਼ਨ ਵਰਕਲੋਡ ਲਈ
+  - **ਸਥਿਤੀ:** ਅੱਪਲੋਡ ਕੀਤੇ ਦਸਤਾਵੇਜ਼ ਪ੍ਰੋਸੈੱਸ ਕਰਨ ਲਈ ਤਿਆਰ
 
 ✅ **Bing Search API** (API ਕਾਲਾਂ ਲਈ ਤਿਆਰ)
-  - S1 tier ਰੀਅਲ-ਟਾਈਮ ਖੋਜਾਂ ਲਈ
-  - **ਸਥਿਤੀ:** ਵੈੱਬ ਖੋਜ ਪੁੱਛਗਿੱਛ ਲਈ ਤਿਆਰ
+  - S1 ਟੀਅਰ ਰੀਅਲ-ਟਾਈਮ ਸਰਚ ਲਈ
+  - **ਸਥਿਤੀ:** ਵੈੱਬ ਸਰਚ ਕੁਐਰੀਆਂ ਲਈ ਤਿਆਰ
 
-### ਡਿਪਲੌਇਮੈਂਟ ਮੋਡ
+### ਤਾਇਨਾਤੀ ਮੋਡ
 
-| ਮੋਡ | OpenAI ਸਮਰੱਥਾ | ਕੰਟੇਨਰ ਇੰਸਟੈਂਸ | Search Tier | ਸਟੋਰੇਜ ਰਿਡੰਡੈਂਸੀ | ਬਿਹਤਰ ਲਈ |
+| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
 |------|-----------------|---------------------|-------------|-------------------|----------|
-| **ਮਿਨੀਮਲ** | 10K-20K TPM | 0-2 replicas | Basic | LRS (ਸਥਾਨਕ) | Dev/test, ਸਿੱਖਣਾ, proof-of-concept |
-| **ਸਟੈਂਡਰਡ** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | ਪ੍ਰੋਡਕਸ਼ਨ, ਮੋਡਰੇਟ ਟ੍ਰੈਫਿਕ (<10K ਯੂਜ਼ਰ) |
-| **ਪ੍ਰੀਮੀਅਮ** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K ਯੂਜ਼ਰ), 99.99% SLA |
+| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, ਸਿੱਖਿਆ, ਪ੍ਰੂਫ-ਆਫ-ਕਾਂਸੈਪਟ |
+| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | ਪ੍ਰੋਡਕਸ਼ਨ, ਦਰਮਿਆਨਾ ਟ੍ਰੈਫਿਕ (<10K ਯੂਜ਼ਰ) |
+| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | ਐਨਟਰਪ੍ਰਾਈਜ਼, ਉੱਚ ਟ੍ਰੈਫਿਕ (>10K ਯੂਜ਼ਰ), 99.99% SLA |
 
 **ਲਾਗਤ ਪ੍ਰਭਾਵ:**
-- **ਮਿਨੀਮਲ → ਸਟੈਂਡਰਡ:** ~4x ਲਾਗਤ ਵਾਧਾ ($100-370/mo → $420-1,450/mo)
-- **ਸਟੈਂਡਰਡ → ਪ੍ਰੀਮੀਅਮ:** ~3x ਲਾਗਤ ਵਾਧਾ ($420-1,450/mo → $1,150-3,500/mo)
-- **ਚੋਣ ਕਰੋ ਆਧਾਰ ਤੇ:** ਉਮੀਦਵਾਰ ਲੋਡ, SLA ਜ਼ਰੂਰਤਾਂ, ਬਜਟ ਸੀਮਾਵਾਂ
+- **Minimal → Standard:** ~4x ਲਾਗਤ ਵਾਧਾ ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium:** ~3x ਲਾਗਤ ਵਾਧਾ ($420-1,450/mo → $1,150-3,500/mo)
+- **ਚੁਣੋ ਅਧਾਰ 'ਤੇ:** ਉਮੀਦ ਕੀਤੀ ਲੋਡ, SLA ਦੀਆਂ ਲੋੜਾਂ, ਬਜਟ ਦੀਆਂ ਪਾਬੰਦੀਆਂ
 
-**ਸਮਰੱਥਾ ਯੋਜਨਾ:**
-- **TPM (Tokens Per Minute):** ਸਾਰੇ ਮਾਡਲ ਡਿਪਲੌਇਮੈਂਟਾਂ ਵਿੱਚ ਕੁੱਲ
-- **ਕੰਟੇਨਰ ਇੰਸਟੈਂਸ:** Auto-scaling ਰੇਂਜ (min-max replicas)
-- **Search Tier:** ਪੁੱਛਗਿੱਛ ਪ੍ਰਦਰਸ਼ਨ ਅਤੇ ਇੰਡੈਕਸ ਆਕਾਰ ਸੀਮਾਵਾਂ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰਦਾ ਹੈ
+**ਕੈਪਸੀਟੀ ਯੋਜਨਾ:**
+- **TPM (Tokens Per Minute):** ਸਾਰੇ ਮਾਡਲ ਡਿਪਲੋਇਮੈਂਟਾਂ ਵਿੱਚ ਕੁੱਲ
+- **Container Instances:** ਆਟੋ-ਸਕੇਲਿੰਗ ਰੇਂਜ (ਮਿਨ-ਮੈਕਸ ਰੀਪਲਿਕਾ)
+- **Search Tier:** ਕੁਐਰੀ ਪ੍ਰਦਸ਼ਨ ਅਤੇ ਇੰਡੈਕਸ ਸਾਈਜ਼ ਸੀਮਾਵਾਂ ਨੂੰ ਪ੍ਰਭਾਵਤ ਕਰਦਾ ਹੈ
 
-## 📋 ਪੂਰਵ ਸ਼ਰਤਾਂ
+## 📋 ਪਹਿਲਾਂ ਤੋਂ ਲੋੜੀਂਦੇ ਚੀਜ਼ਾਂ
 
 ### ਲੋੜੀਂਦੇ ਟੂਲ
-1. **Azure CLI** (ਸੰਸਕਰਣ 2.50.0 ਜਾਂ ਉੱਚਾ)
+1. **Azure CLI** (ਸੰਸਕਰਣ 2.50.0 ਜਾਂ ਉੱਪਰ)
    ```bash
-   az --version  # ਵਰਜਨ ਚੈੱਕ ਕਰੋ
-   az login      # ਪ੍ਰਮਾਣਿਕਤਾ ਕਰੋ
+   az --version  # ਸੰਸਕਰਣ ਦੀ ਜਾਂਚ ਕਰੋ
+   az login      # ਪ੍ਰਮਾਣੀਕਰਨ ਕਰੋ
    ```
 
-2. **ਸਰਗਰਮ Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ** Owner ਜਾਂ Contributor ਪਹੁੰਚ ਨਾਲ
+2. **ਸਕ੍ਰਿਆ Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ** ਜਿਸ ਵਿੱਚ Owner ਜਾਂ Contributor ਐਕਸੈਸ ਹੋਵੇ
    ```bash
-   az account show  # ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
+   az account show  # ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
    ```
 
-### ਲੋੜੀਂਦੇ Azure ਕੋਟੇ
+### ਲੋੜੀਂਦੇ Azure ਕੋਟਾ
 
-ਡਿਪਲੌਇਮੈਂਟ ਤੋਂ ਪਹਿਲਾਂ, ਆਪਣੇ ਟਾਰਗਟ ਖੇਤਰਾਂ ਵਿੱਚ ਯਥਾਰਥ ਕੋਟੇ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ:
+ਤਾਇਨਾਤੀ ਤੋਂ ਪਹਿਲਾਂ, ਆਪਣੇ ਟਾਰਗੇਟ ਖੇਤਰਾਂ ਵਿੱਚ ਕਾਫੀ ਕੋਟਾ ਦੀ ਜਾਂਚ ਕਰੋ:
 
 ```bash
-# ਆਪਣੇ ਖੇਤਰ ਵਿੱਚ Azure OpenAI ਦੀ ਉਪਲਬਧਤਾ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਆਪਣੇ ਖੇਤਰ ਵਿੱਚ Microsoft Foundry ਮਾਡਲਾਂ ਦੀ ਉਪਲਬਧਤਾ ਜਾਂਚੋ
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# OpenAI ਕੋਟਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ (ਉਦਾਹਰਨ ਲਈ gpt-4o)
+# OpenAI ਕੋਟਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ (gpt-4.1 ਲਈ ਉਦਾਹਰਨ)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# ਕੰਟੇਨਰ ਐਪਸ ਕੋਟਾ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਕੰਟੇਨਰ ਐਪਸ ਕੋਟਾ ਜਾਂਚੋ
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**ਘੱਟੋ-ਘੱਟ ਲੋੜੀਂਦੇ ਕੋਟੇ:**
-- **Azure OpenAI:** 3-4 ਮਾਡਲ ਡਿਪਲੌਇਮੈਂਟਾਂ ਖੇਤਰਾਂ ਵਿੱਚ
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+**ਨਿਊਨਤਮ ਲੋੜੀਂਦੇ ਕੋਟਾ:**
+- **Microsoft Foundry Models:** ਖੇਤਰਾਂ ਵਿੱਚ 3-4 ਮਾਡਲ ਡਿਪਲੋਇਮੈਂਟ
+  - gpt-4.1: 20K TPM (ਟੋਕਨ ਪ੍ਰਤੀ ਮਿੰਟ)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **ਨੋਟ:** GPT-4o ਕੁਝ ਖੇਤਰਾਂ ਵਿੱਚ ਵੇਟਲਿਸਟ ਹੋ ਸਕਦਾ ਹੈ - [ਮਾਡਲ ਉਪਲਬਧਤਾ](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) ਚੈੱਕ ਕਰੋ
-- **Container Apps:** ਮੈਨੇਜਡ environment + 2-10 container instances
-- **AI Search:** ਸਟੈਂਡਰਡ ਟੀਅਰ (ਵੈਕਟਰ ਖੋਜ ਲਈ Basic ਅਪਰਾਪਤ)
-- **Cosmos DB:** ਸਟੈਂਡਰਡ provisioned throughput
+  - **ਨੋਟ:** gpt-4.1 ਕੁਝ ਖੇਤਰਾਂ ਵਿੱਚ ਵੈਟਲਿਸਟ 'ਤੇ ਹੋ ਸਕਦਾ ਹੈ - [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) ਦੀ ਜਾਂਚ ਕਰੋ
+- **Container Apps:** ਮੈਨੇਜਡ ਐਨਵਾਇਰਨਮੈਂਟ + 2-10 ਕੰਟੇਨਰ ਇੰਸਟੈਂਸ
+- **AI Search:** Standard ਟੀਅਰ (Basic ਵੇਕਟਰ ਸਰਚ ਲਈ ਅਪਰਯਾਪਤ)
+- **Cosmos DB:** ਸਟੈਂਡਰਡ ਪ੍ਰੋਵਿਸ਼ਨਡ ਥਰੂਪੁੱਟ
 
-**ਜੇ ਕੋਟਾ ਅਪਰਾਪਤ:**
-1. ਜਾਓ Azure Portal → Quotas → Request increase
-2. ਜਾਂ ਵਰਤੋ Azure CLI:
+**ਜੇ ਕੋਟਾ ਅਪਰਯਾਪਤ ਹੈ:**
+1. Azure ਪੋਰਟਲ → Quotas → Request increase 'ਤੇ ਜाओ
+2. ਜਾਂ Azure CLI ਵਰਤੋ:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
-3. ਉਪਲਬਧਤਾ ਵਾਲੇ ਵਿਕਲਪਿਕ ਖੇਤਰਾਂ ਨੂੰ ਵਿਚਾਰੋ
+3. ਉਪਲਬਧਤਾ ਵਾਲੇ ਵਿਕਲਪ ਖੇਤਰਾਂ 'ਤੇ ਵਿਚਾਰ ਕਰੋ
 
-## 🚀 ਤੁਰੰਤ ਡਿਪਲੌਇਮੈਂਟ
+## 🚀 ਤੁਰੰਤ ਤਾਇਨਾਤੀ
 
 ### ਵਿਕਲਪ 1: Azure CLI ਵਰਤ ਕੇ
 
 ```bash
-# ਟੈਂਪਲੇਟ ਫਾਈਲਾਂ ਕਲੋਨ ਜਾਂ ਡਾਊਨਲੋਡ ਕਰੋ
+# ਟੈਂਪਲੇਟ ਫਾਈਲਾਂ ਨੂੰ ਕਲੋਨ ਕਰੋ ਜਾਂ ਡਾਊਨਲੋਡ ਕਰੋ
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# ਡਿਪਲੌਇਮੈਂਟ ਸਕ੍ਰਿਪਟ ਨੂੰ ਐਗਜ਼ਿਕਿਊਟੇਬਲ ਬਣਾਓ
+# ਡਿਪਲੌਇਮੈਂਟ ਸਕ੍ਰਿਪਟ ਨੂੰ ਚਲਾਉਣ ਯੋਗ ਬਣਾਓ
 chmod +x deploy.sh
 
 # ਡਿਫਾਲਟ ਸੈਟਿੰਗਾਂ ਨਾਲ ਡਿਪਲੌਇ ਕਰੋ
@@ -185,72 +185,72 @@ chmod +x deploy.sh
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### ਵਿਕਲਪ 2: Azure Portal ਵਰਤ ਕੇ
+### ਵਿਕਲਪ 2: Azure ਪੋਰਟਲ ਵਰਤ ਕੇ
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Azure 'ਤੇ ਤਾਇਨਾਤੀ ਕਰੋ](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### ਵਿਕਲਪ 3: Azure CLI ਸਿੱਧੇ ਤੌਰ ਤੇ
+### ਵਿਕਲਪ 3: Azure CLI ਨੂੰ ਸਿੱਧਾ ਵਰਤ ਕੇ
 
 ```bash
 # ਰਿਸੋਰਸ ਗਰੁੱਪ ਬਣਾਓ
 az group create --name myResourceGroup --location eastus2
 
-# ਟੈਂਪਲੇਟ ਤੈਨਾਤ ਕਰੋ
+# ਟੈਮਪਲੇਟ ਤੈਨਾਤ ਕਰੋ
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json
 ```
 
-## ⏱️ ਡਿਪਲੌਇਮੈਂਟ ਟਾਈਮਲਾਈਨ
+## ⏱️ ਤਾਇਨਾਤੀ ਸਮਾਂਰੈਖਾ
 
 ### ਕੀ ਉਮੀਦ ਰੱਖਣੀ ਹੈ
 
-| ਫੇਜ਼ | ਅਵਧੀ | ਕੀ ਹੁੰਦਾ ਹੈ |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| **ਟੈਂਪਲੇਟ ਵੈਲੀਡੇਸ਼ਨ** | 30-60 ਸਕਿੰਟ | Azure ARM ਟੈਂਪਲੇਟ syntax ਅਤੇ parameters ਦੀ ਪੁਸ਼ਟੀ ਕਰਦਾ ਹੈ |
-| **Resource Group ਸੈਟਅੱਪ** | 10-20 ਸਕਿੰਟ | Resource group ਬਣਾਉਂਦਾ ਹੈ (ਜੇ ਲੋੜ ਹੋਵੇ) |
-| **OpenAI Provisioning** | 5-8 ਮਿੰਟ | 3-4 OpenAI accounts ਬਣਾਉਂਦਾ ਹੈ ਅਤੇ ਮਾਡਲ ਡਿਪਲੌਇ ਕਰਦਾ ਹੈ |
-| **Container Apps** | 3-5 ਮਿੰਟ | Environment ਬਣਾਉਂਦਾ ਹੈ ਅਤੇ placeholder containers ਡਿਪਲੌਇ ਕਰਦਾ ਹੈ |
-| **Search & Storage** | 2-4 ਮਿੰਟ | AI Search ਸੇਵਾ ਅਤੇ ਸਟੋਰੇਜ accounts ਪ੍ਰੋਵਿਜਨ ਕਰਦਾ ਹੈ |
-| **Cosmos DB** | 2-3 ਮਿੰਟ | ਡਾਟਾਬੇਸ ਬਣਾਉਂਦਾ ਹੈ ਅਤੇ ਕੰਟੇਨਰ ਸੰਰਚਿਤ ਕਰਦਾ ਹੈ |
-| **ਮਾਨੀਟਰਿੰਗ ਸੈਟਅੱਪ** | 2-3 ਮਿੰਟ | Application Insights ਅਤੇ Log Analytics ਸੈਟਅੱਪ ਕਰਦਾ ਹੈ |
-| **RBAC ਸੰਰਚਨਾ** | 1-2 ਮਿੰਟ | ਮੈਨੇਜਡ identities ਅਤੇ permissions ਸੰਰਚਿਤ ਕਰਦਾ ਹੈ |
-| **ਕੁੱਲ ਡਿਪਲੌਇਮੈਂਟ** | **15-25 ਮਿੰਟ** | ਪੂਰੀ ਇੰਫਰਾਸਟਰਕਚਰ ਤਿਆਰ |
+| **Template Validation** | 30-60 seconds | Azure ਟੈਂਪਲੇਟ ਸਿੰਟੈਕਸ ਅਤੇ ਪੈਰਾਮੀਟਰਾਂ ਦੀ ਜਾਂਚ ਕਰਦਾ ਹੈ |
+| **Resource Group Setup** | 10-20 seconds | ਰਿਸੋর্স ਗਰੁੱਪ ਬਣਾਉਂਦਾ ਹੈ (ਜੇ ਲੋੜ ਹੋਵੇ) |
+| **OpenAI Provisioning** | 5-8 minutes | 3-4 OpenAI ਖਾਤੇ ਬਣਾਉਂਦਾ ਅਤੇ ਮਾਡਲ ਡਿਪਲੋਇ ਕਰਦਾ ਹੈ |
+| **Container Apps** | 3-5 minutes | ਐਨਵਾਇਰਨਮੈਂਟ ਬਣਾਉਂਦਾ ਅਤੇ ਪਲੇਸਹੋਲਡਰ ਕੰਟੇਨਰ ਤਾਇਨਾਤ ਕਰਦਾ ਹੈ |
+| **Search & Storage** | 2-4 minutes | AI Search ਸੇਵਾ ਅਤੇ ਸਟੋਰੇਜ ਅਕਾਊਂਟ ਪ੍ਰੋਵਾਈਜਨ ਕਰਦਾ ਹੈ |
+| **Cosmos DB** | 2-3 minutes | ਡੇਟਾਬੇਸ ਬਣਾਉਂਦਾ ਅਤੇ ਕਨਟੇਨਰ ਕਨਫਿਗਰ ਕਰਦਾ ਹੈ |
+| **Monitoring Setup** | 2-3 minutes | Application Insights ਅਤੇ Log Analytics ਸੈਟਅੱਪ ਕਰਦਾ ਹੈ |
+| **RBAC Configuration** | 1-2 minutes | ਮੈਨੇਜਡ ਆਈਡੈਂਟਿਟੀਜ਼ ਅਤੇ ਅਨੁਮਤੀਆਂ ਕਨਫਿਗਰ ਕਰਦਾ ਹੈ |
+| **Total Deployment** | **15-25 minutes** | ਸਾਰੀ ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਤਿਆਰ |
 
-**ਡਿਪਲੌਇਮੈਂਟ ਤੋਂ ਬਾਅਦ:**
-- ✅ **ਇੰਫਰਾਸਟਰਕਚਰ ਤਿਆਰ:** ਸਾਰੇ Azure ਸੇਵਾਵਾਂ ਪ੍ਰੋਵਿਜਨ ਕੀਤੀਆਂ ਅਤੇ ਚਾਲੂ
-- ⏱️ **ਐਪਲੀਕੇਸ਼ਨ ਵਿਕਾਸ:** 80-120 ਘੰਟੇ (ਤੁਹਾਡੀ ਜ਼ਿੰਮੇਵਾਰੀ)
-- ⏱️ **ਇੰਡੈਕਸ ਸੰਰਚਨਾ:** 15-30 ਮਿੰਟ (ਤੁਹਾਡੇ schema ਦੀ ਲੋੜ ਹੈ)
-- ⏱️ **ਡਾਟਾ ਅਪਲੋਡ:** ਡਾਟਾਸੈਟ ਆਕਾਰ ਦੇ ਅਨੁਸਾਰ
-- ⏱️ **ਟੈਸਟਿੰਗ ਅਤੇ ਵੈਲੀਡੇਸ਼ਨ:** 2-4 ਘੰਟੇ
+**ਤਾਇਨਾਤੀ ਤੋਂ ਬਾਅਦ:**
+- ✅ **ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਤਿਆਰ:** ਸਾਰੇ Azure ਸਰੋਤ ਪ੍ਰੋਵਾਈਜਡ ਅਤੇ ਚੱਲ ਰਹੇ ਹਨ
+- ⏱️ **ਐਪਲੀਕੇਸ਼ਨ ਡਿਵੈਲਪਮੈਂਟ:** 80-120 ਘੰਟੇ (ਤੁਹਾਡੀ ਜਿੰਮੇਵਾਰੀ)
+- ⏱️ **ਇੰਡੀਐਕਸ ਕਨਫਿਗਰੇਸ਼ਨ:** 15-30 ਮਿੰਟ (ਤੁਹਾਡੇ ਸਕੀਮਾ ਦੀ ਲੋੜ)
+- ⏱️ **ਡੇਟਾ ਅੱਪਲੋਡ:** ਡੈਟਾਸੈਟ ਦੇ ਸਾਈਜ਼ ਅਨੁਸਾਰ ਵੱਖ-ਵੱਖ
+- ⏱️ **ਟੈਸਟਿੰਗ ਅਤੇ ਵੈਰਿਫਿਕੇਸ਼ਨ:** 2-4 ਘੰਟੇ
 
 ---
 
-## ✅ ਡਿਪਲੌਇਮੈਂਟ ਸਫਲਤਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
+## ✅ ਤਾਇਨਾਤੀ ਸਫਲਤਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
 
-### ਕਦਮ 1: Resource Provisioning ਚੈੱਕ ਕਰੋ (2 ਮਿੰਟ)
+### ਕਦਮ 1: ਰਿਸੋর্স ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਦੀ ਜਾਂਚ (2 ਮਿੰਟ)
 
 ```bash
-# ਸਾਰੇ ਸਰੋਤ ਸਫਲਤਾਪੂਰਵਕ ਤੈਨਾਤ ਹੋਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
+# ਸਾਰੇ ਸਾਧਨ ਸਫਲਤਾਪੂਰਵਕ ਤਾਇਨਾਤ ਹੋਏ ਹਨ ਇਹ ਪੱਕਾ ਕਰੋ
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-**ਉਮੀਦਵਾਰ:** ਖਾਲੀ ਟੇਬਲ (ਸਾਰੇ ਸਰੋਤ "Succeeded" ਸਥਿਤੀ ਦਿਖਾਉਂਦੇ ਹਨ)
+**ਉਮੀਦ ਕੀਤੀ ਗਈ:** ਖਾਲੀ ਟੇਬਲ (ਸਾਰੇ ਰਿਸੋর্স "Succeeded" ਸਥਿਤੀ ਦਿਖਾ ਰਹੇ ਹੋਣ)
 
-### ਕਦਮ 2: Azure OpenAI Deployments ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ (3 ਮਿੰਟ)
+### ਕਦਮ 2: Microsoft Foundry Models ਡਿਪਲੋਇਮੈਂਟ ਦੀ ਜਾਂਚ (3 ਮਿੰਟ)
 
 ```bash
-# ਸਾਰੇ OpenAI ਖਾਤਿਆਂ ਦੀ ਸੂਚੀ ਬਣਾਓ
+# ਸਾਰੇ OpenAI ਖਾਤੇ ਲਿਸਟ ਕਰੋ
 az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# ਮੁੱਖ ਖੇਤਰ ਲਈ ਮਾਡਲ ਤਾਇਨਾਤੀਆਂ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਮੁੱਖ ਖੇਤਰ ਲਈ ਮਾਡਲ ਤੈਨਾਤੀਆਂ ਦੀ ਜਾਂਚ ਕਰੋ
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -261,11 +261,11 @@ az cognitiveservices account deployment list \
   --output table
 ```
 
-**ਉਮੀਦਵਾਰ:** 
-- 3-4 OpenAI accounts (ਪ੍ਰਾਇਮਰੀ, ਸੈਕੰਡਰੀ, ਤੀਜਾ, ਮੁਲਾਂਕਣ ਖੇਤਰ)
-- 1-2 ਮਾਡਲ ਡਿਪਲੌਇਮੈਂਟ ਪ੍ਰਤੀ account (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+**ਉਮੀਦ ਕੀਤੀ ਗਈ:** 
+- 3-4 OpenAI ਖਾਤੇ (ਪ੍ਰਾਇਮਰੀ, ਸੈਕੰਡਰੀ, ਟਰਸ਼ਰੀ, ਇਵੈਲੂਏਸ਼ਨ ਖੇਤਰ)
+- ਪ੍ਰਤੀ ਖਾਤੇ 1-2 ਮਾਡਲ ਡਿਪਲੋਇਮੈਂਟ (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### ਕਦਮ 3: Infrastructure Endpoints ਟੈਸਟ ਕਰੋ (5 ਮਿੰਟ)
+### ਕਦਮ 3: ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਐਂਡਪੌਇੰਟਸ ਦੀ ਟੈਸਟਿੰਗ (5 ਮਿੰਟ)
 
 ```bash
 # ਕੰਟੇਨਰ ਐਪ URLs ਪ੍ਰਾਪਤ ਕਰੋ
@@ -274,7 +274,7 @@ az containerapp list \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# ਰਾਊਟਰ ਐਂਡਪੌਇੰਟ ਦੀ ਜਾਂਚ ਕਰੋ (ਪਲੇਸਹੋਲਡਰ ਚਿੱਤਰ ਜਵਾਬ ਦੇਵੇਗਾ)
+# ਰਾਊਟਰ ਐਂਡਪੋਇੰਟ ਦੀ ਜਾਂਚ ਕਰੋ (ਪਲੇਸਹੋਲਡਰ ਚਿੱਤਰ ਜਵਾਬ ਦੇਵੇਗਾ)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -284,14 +284,14 @@ echo "Testing: https://$ROUTER_URL"
 curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
 ```
 
-**ਉਮੀਦਵਾਰ:** 
+**ਉਮੀਦ ਕੀਤੀ ਗਈ:** 
 - Container Apps "Running" ਸਥਿਤੀ ਦਿਖਾਉਂਦੇ ਹਨ
-- Placeholder nginx HTTP 200 ਜਾਂ 404 ਨਾਲ ਜਵਾਬ ਦਿੰਦਾ ਹੈ (ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਨਹੀਂ)
+- ਪਲੇਸਹੋਲਡਰ nginx HTTP 200 ਜਾਂ 404 ਨਾਲ ਜਵਾਬ ਦਿੰਦਾ ਹੈ (ਹਾਲੇ ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਨਹੀਂ)
 
-### ਕਦਮ 4: Azure OpenAI API Access ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ (3 ਮਿੰਟ)
+### ਕਦਮ 4: Microsoft Foundry Models API ਐਕਸੈਸ ਦੀ ਜਾਂਚ (3 ਮਿੰਟ)
 
 ```bash
-# ਓਪਨਏਆਈ ਐਂਡਪੌਇੰਟ ਅਤੇ ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰੋ
+# OpenAI ਐਂਡਪਾਇੰਟ ਅਤੇ ਕੀ ਪ੍ਰਾਪਤ ਕਰੋ
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# GPT-4o ਡਿਪਲੌਇਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# gpt-4.1 ਡਿਪਲੋਇਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,52 +312,184 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**ਉਮੀਦਵਾਰ:** JSON ਜਵਾਬ ਚੈਟ completion ਨਾਲ (OpenAI ਕਾਰਗਰ ਹੋਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰਦਾ ਹੈ)
+**ਉਮੀਦ ਕੀਤੀ ਗਈ:** JSON ਜਵਾਬ chat completion ਨਾਲ (OpenAI ਕਾਰਯਸ਼ੀਲ ਹੋਣ ਦੀ ਪੁਸ਼ਟੀ)
 
-### ਕੀ ਚਾਲੂ ਹੈ ਅਤੇ ਕੀ ਨਹੀਂ
+### ਕੀ ਕੰਮ ਕਰ ਰਿਹਾ ਹੈ ਬਣਾਮ ਕੀ ਨਹੀਂ
 
-**✅ ਡਿਪਲੌਇਮੈਂਟ ਤੋਂ ਬਾਅਦ ਚਾਲੂ:**
-- Azure OpenAI ਮਾਡਲ ਡਿਪਲੌਇ ਕੀਤੇ ਅਤੇ API ਕਾਲਾਂ ਸਵੀਕਾਰ ਕਰਦੇ ਹਨ
-- AI Search ਸੇਵਾ ਚਾਲੂ (ਖਾਲੀ, ਕੋਈ ਇੰਡੈਕਸ ਨਹੀਂ)
-- Container Apps ਚਾਲੂ (placeholder nginx images)
-- ਸਟੋਰੇਜ accounts ਪਹੁੰਚਯੋਗ ਅਤੇ ਅਪਲੋਡ ਲਈ ਤਿਆਰ
-- Cosmos DB ਡਾਟਾ ਕਾਰਵਾਈਆਂ ਲਈ ਤਿਆਰ
-- Application Insights infrastructure ਟੈਲੀਮੈਟਰੀ ਇਕੱਠਾ ਕਰ ਰਿਹਾ ਹੈ
-- Key Vault ਰਾਜ਼ ਸਟੋਰ ਕਰਨ ਲਈ ਤਿਆਰ
+**✅ ਤਾਇਨਾਤੀ ਤੋਂ ਬਾਅਦ ਕੰਮ ਕਰ ਰਿਹਾ ਹੈ:**
+- Microsoft Foundry Models ਡਿਪਲੋਇ ਹੋਏ ਅਤੇ API ਕਾਲਾਂ ਕਬੂਲ ਕਰ ਰਹੇ ਹਨ
+- AI Search ਸੇਵਾ ਚੱਲ ਰਹੀ ਹੈ (ਖਾਲੀ, ਅਜੇ ਕੋਈ ਇੰਡੈਕਸ ਨਹੀਂ)
+- Container Apps ਚੱਲ ਰਹੇ ਹਨ (ਪਲੇਸਹੋਲਡਰ nginx ਇਮੇਜ)
+- ਸਟੋਰੇਜ ਅਕਾਊਂਟਸ ਪਹੁੰਚਯੋਗ ਹਨ ਅਤੇ ਅੱਪਲੋਡ ਲਈ ਤਿਆਰ ਹਨ
+- Cosmos DB ਡੇਟਾ ਕਾਰਜਾਂ ਲਈ ਤਿਆਰ ਹੈ
+- Application Insights ਇੰਫਰਾਸਟ੍ਰੱਕਚਰ ਟੈਲੀਮੇਟਰੀ ਇਕੱਠੀ ਕਰ ਰਿਹਾ ਹੈ
+- Key Vault ਸੀਕ੍ਰੇਟ ਸਟੋਰ ਕਰਨ ਲਈ ਤਿਆਰ ਹੈ
 
-**❌ ਅਜੇ ਤਿਆਰ ਨਹੀਂ (ਵਿਕਾਸ ਦੀ ਲੋੜ ਹੈ):**
-- ਏਜੰਟ endpoints (ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਡਿਪਲੌਇ ਨਹੀਂ)
-- ਚੈਟ ਕਾਰਗਰਤਾ (
-> **📝 ਮਹੱਤਵਪੂਰਨ:** ਢਾਂਚਾ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਹੈ, ਪਰ ਤੁਹਾਨੂੰ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਵਿਕਸਿਤ ਅਤੇ ਤਿਆਰ ਕਰਨਾ ਹੈ।
+**❌ ਅਜੇ ਕੰਮ ਨਹੀਂ ਕਰ ਰਿਹਾ (ਡਿਵੈਲਪਮੈਂਟ ਦੀ ਲੋੜ):**
+- ਏਜੰਟ ਐਂਡਪੌਇੰਟ (ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਤਾਇਨਾਤ ਨਹੀਂ)
+- ਚੈਟ ਫੰਕਸ਼ਨਾਲਟੀ (ਫਰੰਟਐਂਡ + ਬੈਕਐਂਡ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਦੀ ਲੋੜ)
+- ਸਰਚ ਕੁਐਰੀਆਂ (ਕੋਈ ਸਰਚ ਇੰਡੈਕਸ ਬਣਾਇਆ ਨਹੀਂ ਗਿਆ)
+- ਦਸਤਾਵੇਜ਼ ਪ੍ਰੋਸੈਸਿੰਗ ਪਾਈਪਲਾਈਨ (ਕੋਈ ਡੇਟਾ ਅੱਪਲੋਡ ਨਹੀਂ)
+- ਕਸਟਮ ਟੈਲੀਮੇਟਰੀ (ਐਪਲੀਕੇਸ਼ਨ ਇੰਸਟਰੂਮੈਂਟੇਸ਼ਨ ਦੀ ਲੋੜ)
 
-### ਪੜਾਅ 1: ਏਜੰਟ ਐਪਲੀਕੇਸ਼ਨ ਵਿਕਸਿਤ ਕਰੋ (ਤੁਹਾਡੀ ਜ਼ਿੰਮੇਵਾਰੀ)
+**ਅਗਲੇ ਕਦਮ:** ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਵਿਕਸਿਤ ਅਤੇ ਤਾਇਨਾਤ ਕਰਨ ਲਈ [Post-Deployment Configuration](#-post-deployment-next-steps) ਵੇਖੋ
 
-ARM ਟੈਂਪਲੇਟ **ਖਾਲੀ ਕੰਟੇਨਰ ਐਪਸ** ਬਣਾਉਂਦਾ ਹੈ ਜਿਨ੍ਹਾਂ ਵਿੱਚ placeholder nginx ਚਿੱਤਰ ਹਨ। ਤੁਹਾਨੂੰ ਇਹ ਕਰਨ ਦੀ ਲੋੜ ਹੈ:
+---
 
-**ਲਾਜ਼ਮੀ ਵਿਕਾਸ:**
-1. **ਏਜੰਟ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ** (30-40 ਘੰਟੇ)
-   - ਗਾਹਕ ਸੇਵਾ ਏਜੰਟ GPT-4o ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਨਾਲ
-   - ਇਨਵੈਂਟਰੀ ਏਜੰਟ GPT-4o-mini ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਨਾਲ
-   - ਏਜੰਟ ਰੂਟਿੰਗ ਲਾਜ਼ਿਕ
+## ⚙️ ਸੰਰਚਨਾ ਵਿਕਲਪ
 
-2. **ਫਰੰਟਐਂਡ ਵਿਕਾਸ** (20-30 ਘੰਟੇ)
-   - ਚੈਟ ਇੰਟਰਫੇਸ UI (React/Vue/Angular)
-   - ਫਾਈਲ ਅਪਲੋਡ ਫੰਕਸ਼ਨਾਲਿਟੀ
-   - ਜਵਾਬ ਰੈਂਡਰਿੰਗ ਅਤੇ ਫਾਰਮੈਟਿੰਗ
+### ਟੈਂਪਲੇਟ ਪੈਰਾਮੀਟਰ
 
-3. **ਬੈਕਐਂਡ ਸੇਵਾਵਾਂ** (12-16 ਘੰਟੇ)
-   - FastAPI ਜਾਂ Express ਰਾਊਟਰ
-   - ਪ੍ਰਮਾਣਿਕਤਾ ਮਿਡਲਵੇਅਰ
-   - ਟੈਲੀਮੇਟਰੀ ਇੰਟੀਗ੍ਰੇਸ਼ਨ
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `projectName` | string | "retail" | ਸਾਰੇ ਰਿਸੋর্স ਨਾਂਵਾਂ ਲਈ ਪ੍ਰੀਫਿਕਸ |
+| `location` | string | Resource group location | ਪ੍ਰਾਇਮਰੀ ਤਾਇਨਾਤੀ ਖੇਤਰ |
+| `secondaryLocation` | string | "westus2" | ਮਲਟੀ-ਰੀਜਨ ਤਾਇਨਾਤੀ ਲਈ ਸੈਕੰਡਰੀ ਖੇਤਰ |
+| `tertiaryLocation` | string | "francecentral" | embeddings ਮਾਡਲ ਲਈ ਖੇਤਰ |
+| `environmentName` | string | "dev" | ਵਾਤਾਵਰਣ ਦਾ ਨਿਰਧਾਰਨ (dev/staging/prod) |
+| `deploymentMode` | string | "standard" | ਤਾਇਨਾਤੀ ਕਨਫਿਗਰੇਸ਼ਨ (minimal/standard/premium) |
+| `enableMultiRegion` | bool | true | ਮਲਟੀ-ਰੀਜਨ ਤਾਇਨਾਤੀ ਨੂੰ ਐਨੇਬਲ ਕਰੋ |
+| `enableMonitoring` | bool | true | Application Insights ਅਤੇ ਲੋਗਿੰਗ ਐਨੇਬਲ ਕਰੋ |
+| `enableSecurity` | bool | true | Key Vault ਅਤੇ ਸੁਧਰੇ ਸੁਰੱਖਿਆ ਨੂੰ ਐਨੇਬਲ ਕਰੋ |
 
-**ਵੇਖੋ:** [ਆਰਕੀਟੈਕਚਰ ਗਾਈਡ](../retail-scenario.md) ਵਿਸਥਾਰ ਵਿੱਚ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਪੈਟਰਨ ਅਤੇ ਕੋਡ ਉਦਾਹਰਣਾਂ ਲਈ
+### ਪੈਰਾਮੀਟਰ ਕਸਟਮਾਈਜ਼ ਕਰਨਾ
 
-### ਪੜਾਅ 2: AI ਸਰਚ ਇੰਡੈਕਸ ਕਨਫਿਗਰ ਕਰੋ (15-30 ਮਿੰਟ)
+Edit `azuredeploy.parameters.json`:
 
-ਆਪਣੇ ਡਾਟਾ ਮਾਡਲ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਇੱਕ ਸਰਚ ਇੰਡੈਕਸ ਬਣਾਓ:
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "projectName": {
+      "value": "mycompany"
+    },
+    "environmentName": {
+      "value": "prod"
+    },
+    "deploymentMode": {
+      "value": "premium"
+    },
+    "location": {
+      "value": "eastus2"
+    }
+  }
+}
+```
+
+## 🏗️ ਆਰਕੀਟੈਕਚਰ ਓਵਰਵਿਊ
+
+```mermaid
+graph TD
+    Frontend[ਫਰੰਟਏਂਡ<br/>ਕੰਟੇਨਰ ਐਪ] --> Router[ਏਜੰਟ ਰਾਊਟਰ<br/>ਕੰਟੇਨਰ ਐਪ] --> Agents[ਏਜੰਟ<br/>ਗਾਹਕ + ਇਨਵੈਂਟਰੀ]
+    Router --> Search[ਏਆਈ ਖੋਜ<br/>ਵੇਕਟਰ ਡੀਬੀ]
+    Router --> Models[Microsoft Foundry ਮਾਡਲ<br/>ਮਲਟੀ-ਰੀਜਨ]
+    Agents --> Storage[ਸਟੋਰੇਜ<br/>ਦਸਤਾਵੇਜ਼]
+    Search --> CosmosDB[Cosmos DB<br/>ਚੈਟ ਇਤਿਹਾਸ]
+    Models --> AppInsights[ਐਪ ਇਨਸਾਈਟਸ<br/>ਨਿਗਰਾਨੀ]
+    Storage --> KeyVault[ਕੀ ਵੌਲਟ<br/>ਰਹੱਸ]
+```
+## 📖 ਤਾਇਨਾਤੀ ਸਕ੍ਰਿਪਟ ਦੀ ਵਰਤੋਂ
+
+`deploy.sh` ਸਕ੍ਰਿਪਟ ਇੱਕ ਇੰਟਰਐਕਟਿਵ ਤਾਇਨਾਤੀ ਅਨੁਭਵ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ:
 
 ```bash
-# ਖੋਜ ਸੇਵਾ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
+# ਸਹਾਇਤਾ ਦਿਖਾਓ
+./deploy.sh --help
+
+# ਬੁਨਿਆਦੀ ਤੈਨਾਤੀ
+./deploy.sh -g myResourceGroup
+
+# ਕਸਟਮ ਸੈਟਿੰਗਾਂ ਨਾਲ ਉੱਨਤ ਤੈਨਾਤੀ
+./deploy.sh \
+  -g myProductionRG \
+  -p companyname \
+  -e prod \
+  -m premium \
+  -l eastus2
+
+# ਮਲਟੀ-ਰੀਜਨ ਤੋਂ ਬਿਨਾਂ ਵਿਕਾਸੀ ਤੈਨਾਤੀ
+./deploy.sh \
+  -g myDevRG \
+  -e dev \
+  -m minimal \
+  --no-multi-region \
+  --no-security
+```
+
+### ਸਕ੍ਰਿਪਟ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ
+
+- ✅ **ਪ੍ਰੀਰੇਕਵਿਜ਼ਾਈਟਸ ਵੈਰੀਫਿਕੇਸ਼ਨ** (Azure CLI, ਲਾਗਇਨ ਸਥਿਤੀ, ਟੈਂਪਲੇਟ ਫਾਇਲਾਂ)
+- ✅ **ਰਿਸੋর্স ਗਰੁੱਪ ਪ੍ਰਬੰਧਨ** (ਜੇ ਨਹੀਂ ਹੋਵੇ ਤਾਂ ਬਣਾਉਂਦਾ ਹੈ)
+- ✅ **ਤਾਇਨਾਤੀ ਤੋਂ ਪਹਿਲਾਂ ਟੈਂਪਲੇਟ ਵੈਰੀਫਾਈ** ਕਰਦਾ ਹੈ
+- ✅ **ਪ੍ਰੋਗਰੈਸ ਮਾਨੀਟਰਿੰਗ** ਰੰਗੀਨ ਆਊਟਪੁੱਟ ਨਾਲ
+- ✅ **ਤਾਇਨਾਤੀ ਆਉਟਪੁੱਟ** ਦਿਖਾਉਂਦਾ ਹੈ
+- ✅ **ਪੋਸਟ-ਤਾਇਨਾਤੀ ਮਾਰਗਦਰਸ਼ਨ**
+
+## 📊 ਤਾਇਨਾਤੀ ਦੀ ਨਿਗਰਾਨੀ
+
+### ਤਾਇਨਾਤੀ ਸਥਿਤੀ ਚੈੱਕ ਕਰੋ
+
+```bash
+# ਡਿਪਲਾਇਮੈਂਟਾਂ ਦੀ ਸੂਚੀ
+az deployment group list --resource-group myResourceGroup --output table
+
+# ਡਿਪਲਾਇਮੈਂਟ ਦੇ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
+az deployment group show \
+  --resource-group myResourceGroup \
+  --name retail-deployment-YYYYMMDD-HHMMSS
+
+# ਡਿਪਲਾਇਮੈਂਟ ਦੀ ਤਰੱਕੀ ਵੇਖੋ
+az deployment group create \
+  --resource-group myResourceGroup \
+  --template-file azuredeploy.json \
+  --parameters azuredeploy.parameters.json \
+  --verbose
+```
+
+### ਤਾਇਨਾਤੀ ਆਉਟਪੁੱਟਸ
+
+ਸਫਲ ਤਾਇਨਾਤੀ ਤੋਂ ਬਾਅਦ, ਹੇਠਾਂ ਦਿੱਤੇ ਆਉਟਪੁੱਟ ਉਪਲਬਧ ਹੁੰਦੇ ਹਨ:
+
+- **Frontend URL**: ਵੈੱਬ ਇੰਟਰਫੇਸ ਲਈ ਪਬਲਿਕ ਐਂਡਪੌਇੰਟ
+- **Router URL**: ਏਜੰਟ ਰਾਊਟਰ ਲਈ API ਐਂਡਪੌਇੰਟ
+- **OpenAI Endpoints**: ਪ੍ਰਾਇਮਰੀ ਅਤੇ ਸੈਕੰਡਰੀ OpenAI ਸੇਵਾ ਐਂਡਪੌਇੰਟ
+- **Search Service**: Azure AI Search ਸੇਵਾ ਐਂਡਪੌਇੰਟ
+- **Storage Account**: ਦਸਤਾਵੇਜ਼ਾਂ ਲਈ ਸਟੋਰੇਜ ਅਕਾਊਂਟ ਦਾ ਨਾਂ
+- **Key Vault**: Key Vault ਦਾ ਨਾਂ (ਜੇ ਐਨੇਬਲ ਕੀਤਾ ਗਿਆ ਹੋਵੇ)
+- **Application Insights**: ਮਾਨੀਟਰਿੰਗ ਸੇਵਾ ਦਾ ਨਾਂ (ਜੇ ਐਨੇਬਲ ਕੀਤਾ ਗਿਆ ਹੋਵੇ)
+
+## 🔧 ਪੋਸਟ-ਤਾਇਨਾਤੀ: ਅਗਲੇ ਕਦਮ
+> **📝 ਮਹੱਤਵਪੂਰਣ:** ਇੰਫਰਾਸਟਰਕਚਰ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਹੈ, ਪਰ ਤੁਹਾਨੂੰ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਵਿਕਸਿਤ ਅਤੇ ਡੀਪਲੋਇ ਕਰਨਾ ਲਾਜ਼ਮੀ ਹੈ।
+
+### ਫੇਜ਼ 1: ਏਜੰਟ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦਾ ਵਿਕਾਸ (ਤੁਹਾਡੇ ਦੀ ਜ਼ਿੰਮੇਵਾਰੀ)
+
+ARM ਟੈਮਪਲੇਟ **ਖਾਲੀ Container Apps** ਬਣਾਉਂਦਾ ਹੈ ਜਿਨ੍ਹਾਂ ਵਿੱਚ placeholder nginx images ਹਨ। ਤੁਹਾਨੂੰ ਇਹ ਕਰਨੇ ਲਾਜ਼ਮੀ ਹਨ:
+
+**ਲਾਜ਼ਮੀ ਵਿਕਾਸ:**
+1. **Agent Implementation** (30-40 hours)
+   - ਗਾਹਕ ਸੇਵਾ ਏਜੰਟ gpt-4.1 ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਨਾਲ
+   - ਇਨਵੇਂਟਰੀ ਏਜੰਟ gpt-4.1-mini ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਨਾਲ
+   - ਏਜੰਟ ਰਾਊਟਿੰਗ ਲੌਜਿਕ
+
+2. **Frontend Development** (20-30 hours)
+   - ਚੈਟ ਇੰਟਰਫੇਸ UI (React/Vue/Angular)
+   - ਫਾਈਲ ਅਪਲੋਡ ਫੰਕਸ਼ਨਾਲਿਟੀ
+   - ਜਵਾਬ ਦੀ ਰੇਂਡਰਿੰਗ ਅਤੇ ਫਾਰਮੇਟਿੰਗ
+
+3. **Backend Services** (12-16 hours)
+   - FastAPI or Express router
+   - Authentication middleware
+   - ਟੈਲੇਮੇਟਰੀ ਇੰਟਿਗ੍ਰੇਸ਼ਨ
+
+See: [Architecture Guide](../retail-scenario.md) for detailed implementation patterns and code examples
+
+### ਫੇਜ਼ 2: AI Search Index ਸੰਰਚਨਾ ਕਰੋ (15-30 minutes)
+
+ਆਪਣੇ ਡੇਟਾ ਮਾਡਲ ਨਾਲ ਮੇਲ ਖਾਂਦੇ ਖੋਜ ਇੰਡੈਕਸ ਬਣਾਓ:
+
+```bash
+# ਖੋਜ ਸੇਵਾ ਦੇ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -388,16 +520,16 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
   }'
 ```
 
-**ਸਰੋਤ:**
-- [AI ਸਰਚ ਇੰਡੈਕਸ ਸਕੀਮਾ ਡਿਜ਼ਾਈਨ](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [ਵੇਕਟਰ ਸਰਚ ਕਨਫਿਗਰੇਸ਼ਨ](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+**Resources:**
+- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### ਪੜਾਅ 3: ਆਪਣਾ ਡਾਟਾ ਅਪਲੋਡ ਕਰੋ (ਸਮਾਂ ਵੱਖ-ਵੱਖ ਹੋ ਸਕਦਾ ਹੈ)
+### ਫੇਜ਼ 3: ਆਪਣਾ ਡੇਟਾ ਅਪਲੋਡ ਕਰੋ (ਸਮਾਂ ਵੱਖਰਾ ਹੋ ਸਕਦਾ ਹੈ)
 
-ਜਦੋਂ ਤੁਹਾਡੇ ਕੋਲ ਉਤਪਾਦ ਡਾਟਾ ਅਤੇ ਦਸਤਾਵੇਜ਼ ਹੋਣ:
+ਜਦੋਂ ਤੁਹਾਡੇ ਕੋਲ ਉਤਪਾਦ ਡੇਟਾ ਅਤੇ ਦਸਤਾਵੇਜ਼ ਹੋਣ:
 
 ```bash
-# ਸਟੋਰੇਜ ਅਕਾਊਂਟ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
+# ਸਟੋਰੇਜ ਖਾਤੇ ਦੇ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
 STORAGE_NAME=$(az storage account list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -407,14 +539,14 @@ STORAGE_KEY=$(az storage account keys list \
   --resource-group myResourceGroup \
   --query "[0].value" -o tsv)
 
-# ਆਪਣੇ ਦਸਤਾਵੇਜ਼ ਅਪਲੋਡ ਕਰੋ
+# ਆਪਣੇ ਦਸਤਾਵੇਜ਼ਾਂ ਨੂੰ ਅਪਲੋਡ ਕਰੋ
 az storage blob upload-batch \
   --destination documents \
   --source /path/to/your/product/docs \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# ਉਦਾਹਰਨ: ਇੱਕ ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ
+# ਉਦਾਹਰਨ: ਇੱਕ ਫਾਇਲ ਅਪਲੋਡ ਕਰੋ
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -423,12 +555,12 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### ਪੜਾਅ 4: ਆਪਣੀਆਂ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਓ ਅਤੇ ਤਿਆਰ ਕਰੋ (8-12 ਘੰਟੇ)
+### ਫੇਜ਼ 4: ਆਪਣੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਓ ਅਤੇ ਡੀਪਲੋਇ ਕਰੋ (8-12 hours)
 
-ਜਦੋਂ ਤੁਸੀਂ ਆਪਣਾ ਏਜੰਟ ਕੋਡ ਵਿਕਸਿਤ ਕਰ ਲਵੋ:
+ਜਦੋਂ ਤੁਸੀਂ ਆਪਣਾ ਏਜੰਟ ਕੋਡ ਵਿਕਸਿਤ ਕਰ ਲਿਆ ਹੈ:
 
 ```bash
-# 1. ਐਜ਼ਰ ਕੰਟੇਨਰ ਰਜਿਸਟਰੀ ਬਣਾਓ (ਜੇ ਲੋੜ ਹੋਵੇ)
+# 1. ਜੇ ਲੋੜ ਹੋਵੇ ਤਾਂ Azure Container Registry ਬਣਾਓ
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
@@ -439,11 +571,11 @@ docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. ਫਰੰਟਐਂਡ ਇਮੇਜ ਬਣਾਓ ਅਤੇ ਪੁਸ਼ ਕਰੋ
+# 3. ਫਰੰਟਏਂਡ ਇਮੇਜ ਬਣਾਓ ਅਤੇ ਪੁਸ਼ ਕਰੋ
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. ਆਪਣੇ ਇਮੇਜਾਂ ਨਾਲ ਕੰਟੇਨਰ ਐਪਸ ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ
+# 4. ਆਪਣੇ ਇਮੇਜਾਂ ਨਾਲ Container Apps ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -454,7 +586,7 @@ az containerapp update \
   --resource-group myResourceGroup \
   --image myregistry.azurecr.io/frontend:v1
 
-# 5. ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲਜ਼ ਸੰਰਚਿਤ ਕਰੋ
+# 5. ਵਾਤਾਵਰਣ ਵੇਰੀਏਬਲ ਸੰਰਚਿਤ ਕਰੋ
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -465,16 +597,16 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### ਪੜਾਅ 5: ਆਪਣੀ ਐਪਲੀਕੇਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ (2-4 ਘੰਟੇ)
+### ਫੇਜ਼ 5: ਆਪਣੀ ਐਪਲੀਕੇਸ਼ਨ ਦੀ ਟੈਸਟਿੰਗ ਕਰੋ (2-4 hours)
 
 ```bash
-# ਆਪਣੀ ਐਪਲੀਕੇਸ਼ਨ URL ਪ੍ਰਾਪਤ ਕਰੋ
+# ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਦਾ URL ਪ੍ਰਾਪਤ ਕਰੋ
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# ਏਜੰਟ ਐਂਡਪੌਇੰਟ ਦੀ ਜਾਂਚ ਕਰੋ (ਜਦੋਂ ਤੁਹਾਡਾ ਕੋਡ ਡਿਪਲੌਇ ਕੀਤਾ ਜਾਵੇ)
+# ਏਜੰਟ ਐਂਡਪੋਇੰਟ ਦੀ ਜਾਂਚ ਕਰੋ (ਜਦੋਂ ਤੁਹਾਡਾ ਕੋਡ ਡੈਪਲੋਇਡ ਹੋ ਜਾਵੇ)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -482,51 +614,51 @@ curl -X POST "https://${ROUTER_URL}/chat" \
     "agent": "customer"
   }'
 
-# ਐਪਲੀਕੇਸ਼ਨ ਲੌਗਜ਼ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੌਗ ਚੈੱਕ ਕਰੋ
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 ```
 
-### ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਸਰੋਤ
+### ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਰਿਸੋਰਸਜ਼
 
-**ਆਰਕੀਟੈਕਚਰ ਅਤੇ ਡਿਜ਼ਾਈਨ:**
-- 📖 [ਪੂਰੀ ਆਰਕੀਟੈਕਚਰ ਗਾਈਡ](../retail-scenario.md) - ਵਿਸਥਾਰ ਵਿੱਚ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਪੈਟਰਨ
-- 📖 [ਮਲਟੀ-ਏਜੰਟ ਡਿਜ਼ਾਈਨ ਪੈਟਰਨ](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+**Architecture & Design:**
+- 📖 [Complete Architecture Guide](../retail-scenario.md) - ਵਿਸਥਾਰਿਤ ਇੰਪਲੀਮੈਂਟੇਸ਼ਨ ਪੈਟਰਨ
+- 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
-**ਕੋਡ ਉਦਾਹਰਣਾਂ:**
-- 🔗 [Azure OpenAI ਚੈਟ ਸੈਂਪਲ](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG ਪੈਟਰਨ
-- 🔗 [ਸੈਮੈਂਟਿਕ Kernel](https://github.com/microsoft/semantic-kernel) - ਏਜੰਟ ਫਰੇਮਵਰਕ (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - ਏਜੰਟ ਆਰਕੇਸਟਰਸ਼ਨ (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - ਮਲਟੀ-ਏਜੰਟ ਗੱਲਬਾਤਾਂ
+**Code Examples:**
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG pattern
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agent ਫਰੇਮਵਰਕ (C#)
+- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agent orchestration (Python)
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent conversations
 
-**ਕੁੱਲ ਅੰਦਾਜ਼ਾ ਸਮਾਂ:**
-- ਢਾਂਚਾ ਤਿਆਰ ਕਰਨਾ: 15-25 ਮਿੰਟ (✅ ਪੂਰਾ)
-- ਐਪਲੀਕੇਸ਼ਨ ਵਿਕਾਸ: 80-120 ਘੰਟੇ (🔨 ਤੁਹਾਡਾ ਕੰਮ)
-- ਜਾਂਚ ਅਤੇ ਅਨੁਕੂਲਤਾ: 15-25 ਘੰਟੇ (🔨 ਤੁਹਾਡਾ ਕੰਮ)
+**Estimated Total Effort:**
+- Infrastructure deployment: 15-25 minutes (✅ Complete)
+- Application development: 80-120 hours (🔨 ਤੁਹਾਡਾ ਕੰਮ)
+- Testing and optimization: 15-25 hours (🔨 ਤੁਹਾਡਾ ਕੰਮ)
 
-## 🛠️ ਸਮੱਸਿਆ ਹੱਲ
+## 🛠️ ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ
 
-### ਆਮ ਸਮੱਸਿਆਵਾਂ
+### ਆਮ ਮੁੱਦੇ
 
-#### 1. Azure OpenAI ਕੋਟਾ ਖਤਮ ਹੋ ਗਿਆ
+#### 1. Microsoft Foundry Models Quota Exceeded
 
 ```bash
-# ਮੌਜੂਦਾ ਕੋਟਾ ਵਰਤੋਂ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਮੌਜੂਦਾ ਕੋਟਾ ਦੀ ਵਰਤੋਂ ਜਾਂਚੋ
 az cognitiveservices usage list --location eastus2
 
-# ਕੋਟਾ ਵਾਧੇ ਦੀ ਬੇਨਤੀ ਕਰੋ
+# ਕੋਟਾ ਵਧਾਉਣ ਦੀ ਬੇਨਤੀ ਕਰੋ
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
-#### 2. ਕੰਟੇਨਰ ਐਪਸ ਡਿਪਲੋਇਮੈਂਟ ਫੇਲ੍ਹ ਹੋਇਆ
+#### 2. Container Apps Deployment Failed
 
 ```bash
-# ਕੰਟੇਨਰ ਐਪ ਲੌਗ ਚੈੱਕ ਕਰੋ
+# ਕੰਟੇਨਰ ਐਪ ਦੇ ਲੌਗ ਚੈੱਕ ਕਰੋ
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -538,28 +670,28 @@ az containerapp revision restart \
   --resource-group myResourceGroup
 ```
 
-#### 3. ਸਰਚ ਸੇਵਾ ਸ਼ੁਰੂਆਤ
+#### 3. Search Service Initialization
 
 ```bash
-# ਖੋਜ ਸੇਵਾ ਦੀ ਸਥਿਤੀ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਖੋਜ ਸੇਵਾ ਦੀ ਸਥਿਤੀ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# ਖੋਜ ਸੇਵਾ ਕਨੈਕਟਿਵਿਟੀ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਖੋਜ ਸੇਵਾ ਨਾਲ ਜੁੜਾਈ ਦੀ ਜਾਂਚ ਕਰੋ
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
 
-### ਡਿਪਲੋਇਮੈਂਟ ਵੈਰੀਫਿਕੇਸ਼ਨ
+### ਡੀਪਲੋਇਮੈਂਟ ਵਿਸ਼ਲੇਸ਼ਣ
 
 ```bash
-# ਸਾਰੇ ਸਰੋਤਾਂ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ ਕਿ ਉਹ ਬਣਾਏ ਗਏ ਹਨ
+# ਸਾਰੇ ਸਰੋਤ ਬਣਾਏ ਗਏ ਹਨ ਇਹ ਪੁਸ਼ਟੀ ਕਰੋ
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# ਸਰੋਤ ਦੀ ਸਿਹਤ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਸਰੋਤਾਂ ਦੀ ਸਿਹਤ ਜਾਂਚੋ
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -568,39 +700,39 @@ az resource list \
 
 ## 🔐 ਸੁਰੱਖਿਆ ਵਿਚਾਰ
 
-### ਕੁੰਜੀ ਪ੍ਰਬੰਧਨ
-- ਸਾਰੇ ਰਾਜ਼ Azure Key Vault ਵਿੱਚ ਸਟੋਰ ਕੀਤੇ ਜਾਂਦੇ ਹਨ (ਜਦੋਂ ਯੋਗ ਕੀਤਾ ਗਿਆ)
-- ਕੰਟੇਨਰ ਐਪਸ ਪ੍ਰਮਾਣਿਕਤਾ ਲਈ ਮੈਨੇਜਡ ਆਈਡੈਂਟਿਟੀ ਵਰਤਦੇ ਹਨ
-- ਸਟੋਰੇਜ ਅਕਾਊਂਟ ਸੁਰੱਖਿਅਤ ਡਿਫਾਲਟਸ ਨਾਲ ਹਨ (ਕੇਵਲ HTTPS, ਕੋਈ ਪਬਲਿਕ ਬਲਾਬ ਐਕਸੈਸ ਨਹੀਂ)
+### ਕੀ ਮੈਨੇਜਮੈਂਟ
+- ਸਾਰੇ ਸਿਕ੍ਰੇਟ Azure Key Vault ਵਿੱਚ ਸਟੋਰ ਕੀਤੇ ਜਾਂਦੇ ਹਨ (ਜਦੋਂ सक्षम ਹੋਵੇ)
+- Container apps authentication ਲਈ managed identity ਵਰਤਦੇ ਹਨ
+- Storage accounts ਦੇ ਸੁਰੱਖਿਅਤ ਡਿਫੌਲਟ ਹਨ (ਸਿਰਫ HTTPS, ਕੋਈ ਪਬਲਿਕ blob ਪਹੁੰਚ ਨਹੀਂ)
 
 ### ਨੈੱਟਵਰਕ ਸੁਰੱਖਿਆ
-- ਕੰਟੇਨਰ ਐਪਸ ਸੰਭਵ ਹੋਣ 'ਤੇ ਅੰਦਰੂਨੀ ਨੈੱਟਵਰਕਿੰਗ ਵਰਤਦੇ ਹਨ
-- ਸਰਚ ਸੇਵਾ ਪ੍ਰਾਈਵੇਟ ਐਂਡਪੋਇੰਟਸ ਵਿਕਲਪ ਨਾਲ ਕਨਫਿਗਰ ਕੀਤੀ ਗਈ ਹੈ
-- Cosmos DB ਘੱਟੋ-ਘੱਟ ਲੋੜੀਂਦੇ ਅਧਿਕਾਰਾਂ ਨਾਲ ਕਨਫਿਗਰ ਕੀਤੀ ਗਈ ਹੈ
+- Container apps ਜਿੱਥੇ ਸੰਭਵ ਹੈ ਇੰਟਰਨਲ ਨੈੱਟਵਰਕਿੰਗ ਵਰਤਦੇ ਹਨ
+- Search service ਨੂੰ private endpoints ਵਿਕਲਪ ਨਾਲ ਸੰਰਚਿਤ ਕੀਤਾ ਗਿਆ ਹੈ
+- Cosmos DB ਨੂੰ ਘੱਟੋ-ਘੱਟ ਲੋੜੀਂਦੇ ਅਨੁਮਤੀਆਂ ਨਾਲ ਸੰਰਚਿਤ ਕੀਤਾ ਗਿਆ ਹੈ
 
-### RBAC ਕਨਫਿਗਰੇਸ਼ਨ
+### RBAC ਸੰਰਚਨਾ
 ```bash
-# ਪ੍ਰਬੰਧਿਤ ਪਹਿਚਾਣ ਲਈ ਜਰੂਰੀ ਭੂਮਿਕਾਵਾਂ ਸੌਂਪੋ
+# ਮੈਨੇਜਡ ਆਈਡੈਂਟਿਟੀ ਲਈ ਜ਼ਰੂਰੀ ਭੂਮਿਕਾਵਾਂ ਸੌਂਪੋ
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
   --scope <openai-resource-id>
 ```
 
-## 💰 ਲਾਗਤ ਅਨੁਕੂਲਤਾ
+## 💰 ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ
 
-### ਲਾਗਤ ਅੰਦਾਜ਼ੇ (ਮਾਸਿਕ, USD)
+### ਲਾਗਤ ਅਨੁਮਾਨ (ਮਾਸਿਕ, USD)
 
-| ਮੋਡ | OpenAI | ਕੰਟੇਨਰ ਐਪਸ | ਸਰਚ | ਸਟੋਰੇਜ | ਕੁੱਲ ਅੰਦਾਜ਼ਾ |
+| ਮੋਡ | OpenAI | Container Apps | Search | Storage | ਕੁੱਲ ਅਨੁਮਾਨ |
 |------|--------|----------------|--------|---------|------------|
-| ਘੱਟੋ-ਘੱਟ | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| ਸਧਾਰਨ | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
+| ਮਿਨੀਮਲ | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
+| ਸਟੈਂਡਰਡ | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | ਪ੍ਰੀਮੀਅਮ | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
 ### ਲਾਗਤ ਮਾਨੀਟਰਿੰਗ
 
 ```bash
-# ਬਜਟ ਅਲਰਟ ਸੈਟਅੱਪ ਕਰੋ
+# ਬਜਟ ਅਲਰਟਾਂ ਸੈੱਟ ਕਰੋ
 az consumption budget create \
   --account-name <subscription-id> \
   --budget-name "retail-budget" \
@@ -610,16 +742,16 @@ az consumption budget create \
   --end-date 2024-12-31
 ```
 
-## 🔄 ਅਪਡੇਟਸ ਅਤੇ ਰਖਰਖਾਅ
+## 🔄 ਅਪਡੇਟਸ ਅਤੇ ਮੇਨਟੇਨੈਂਸ
 
-### ਟੈਂਪਲੇਟ ਅਪਡੇਟਸ
-- ARM ਟੈਂਪਲੇਟ ਫਾਈਲਾਂ ਨੂੰ ਵਰਜਨ ਕੰਟਰੋਲ ਕਰੋ
-- ਪਹਿਲਾਂ ਵਿਕਾਸ ਵਾਤਾਵਰਣ ਵਿੱਚ ਬਦਲਾਅ ਦੀ ਜਾਂਚ ਕਰੋ
-- ਅਪਡੇਟਸ ਲਈ ਇੰਕ੍ਰੀਮੈਂਟਲ ਡਿਪਲੋਇਮੈਂਟ ਮੋਡ ਵਰਤੋ
+### ਟੈਮਪਲੇਟ ਅਪਡੇਟਸ
+- ARM template ਫਾਈਲਾਂ ਦਾ version control ਕਰੋ
+- ਪਹਿਲਾਂ ਵਿਕਾਸ ਪਰਿਵਾਰਧੀ ਵਿਚ ਬਦਲਾਅਾਂ ਦੀ ਟੈਸਟਿੰਗ ਕਰੋ
+- ਅਪਡੇਟਸ ਲਈ incremental deployment mode ਵਰਤੋ
 
-### ਸਰੋਤ ਅਪਡੇਟਸ
+### ਰਿਸੋਰਸ ਅਪਡੇਟਸ
 ```bash
-# ਨਵੇਂ ਪੈਰਾਮੀਟਰਾਂ ਨਾਲ ਅੱਪਡੇਟ ਕਰੋ
+# ਨਵੇਂ ਪੈਰਾਮੀਟਰਾਂ ਨਾਲ ਅਪਡੇਟ
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -628,25 +760,25 @@ az deployment group create \
 ```
 
 ### ਬੈਕਅੱਪ ਅਤੇ ਰਿਕਵਰੀ
-- Cosmos DB ਆਟੋਮੈਟਿਕ ਬੈਕਅੱਪ ਯੋਗ ਕੀਤਾ ਗਿਆ
-- Key Vault ਸਾਫਟ ਡਿਲੀਟ ਯੋਗ ਕੀਤਾ ਗਿਆ
-- ਕੰਟੇਨਰ ਐਪ ਰਿਵੀਜ਼ਨ ਰੋਲਬੈਕ ਲਈ ਰੱਖੇ ਗਏ
+- Cosmos DB automatic backup ਯੋਗ ਕੀਤਾ ਗਿਆ ਹੈ
+- Key Vault soft delete ਯੋਗ ਕੀਤਾ ਗਿਆ ਹੈ
+- ਰੋਲਬੈਕ ਲਈ Container app revisions ਬਰਕਰਾਰ ਰੱਖੇ ਜਾਂਦੇ ਹਨ
 
 ## 📞 ਸਹਾਇਤਾ
 
-- **ਟੈਂਪਲੇਟ ਸਮੱਸਿਆਵਾਂ:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Azure ਸਹਾਇਤਾ:** [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **ਕਮਿਊਨਿਟੀ:** [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Template Issues**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Azure Support**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Community**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ ਆਪਣਾ ਮਲਟੀ-ਏਜੰਟ ਹੱਲ ਤਿਆਰ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ?**
+**⚡ ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਮਲਟੀ-ਏਜੰਟ ਹੱਲ ਡੀਪਲੋਇ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ?**
 
-ਸ਼ੁਰੂ ਕਰੋ: `./deploy.sh -g myResourceGroup`
+ਇਸ ਤੋਂ ਸ਼ੁਰੂ ਕਰੋ: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਰਤੀ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦਾ ਯਤਨ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚੀਤਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਮੌਜੂਦ ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰਨ**:
+ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੇ ਉਪਯੋਗ ਨਾਲ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਧਿਆਨ ਰਹੇ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣਸੱਚਾਈਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਅਸਲ ਦਸਤਾਵੇਜ਼ ਜਿਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹੈ, ਉਸਨੂੰ ਅਧਿਕਾਰਿਕ ਸਰੋਤ ਮਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
