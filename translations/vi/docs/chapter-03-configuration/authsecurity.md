@@ -1,43 +1,43 @@
-# Authentication Patterns and Managed Identity
+# Mẫu Xác thực và Managed Identity
 
-⏱️ **Thời gian ước tính**: 45-60 phút | 💰 **Tác động chi phí**: Miễn phí (không phát sinh chi phí bổ sung) | ⭐ **Độ phức tạp**: Trung bình
+⏱️ **Thời gian ước tính**: 45-60 phút | 💰 **Chi phí**: Miễn phí (không tính phí bổ sung) | ⭐ **Độ phức tạp**: Trung bình
 
 **📚 Lộ trình học:**
-- ← Previous: [Quản lý Cấu hình](configuration.md) - Quản lý biến môi trường và bí mật
-- 🎯 **Bạn đang ở đây**: Authentication & Security (Managed Identity, Key Vault, các mẫu bảo mật)
-- → Next: [Dự án đầu tiên](first-project.md) - Xây dựng ứng dụng AZD đầu tiên của bạn
+- ← Trước: [Quản lý Cấu hình](configuration.md) - Quản lý biến môi trường và bí mật
+- 🎯 **Bạn đang ở đây**: Xác thực & Bảo mật (Managed Identity, Key Vault, các mẫu an toàn)
+- → Kế tiếp: [Dự án đầu tiên](first-project.md) - Xây dựng ứng dụng AZD đầu tiên của bạn
 - 🏠 [Trang khóa học](../../README.md)
 
 ---
 
 ## Những gì bạn sẽ học
 
-Khi hoàn thành bài học này, bạn sẽ:
-- Hiểu các mẫu xác thực của Azure (keys, connection strings, managed identity)
+Bằng cách hoàn thành bài học này, bạn sẽ:
+- Hiểu các mẫu xác thực của Azure (khóa, connection strings, managed identity)
 - Triển khai **Managed Identity** để xác thực không cần mật khẩu
-- Bảo mật bí mật với tích hợp **Azure Key Vault**
-- Cấu hình **role-based access control (RBAC)** cho các triển khai AZD
-- Áp dụng các thực hành bảo mật tốt nhất trong Container Apps và các dịch vụ Azure
-- Di chuyển từ xác thực dựa trên key sang xác thực dựa trên danh tính
+- Bảo mật bí mật bằng tích hợp **Azure Key Vault**
+- Cấu hình **điều khiển truy cập theo vai trò (RBAC)** cho các triển khai AZD
+- Áp dụng thực hành bảo mật tốt nhất trong Container Apps và các dịch vụ Azure
+- Di chuyển từ xác thực dựa trên khóa sang xác thực dựa trên định danh
 
-## Tại sao Managed Identity quan trọng
+## Tại sao Managed Identity lại quan trọng
 
 ### Vấn đề: Xác thực truyền thống
 
 **Trước Managed Identity:**
 ```javascript
-// ❌ RỦI RO BẢO MẬT: Bí mật được cố định trong mã nguồn
+// ❌ NGUY CƠ BẢO MẬT: Bí mật được nhúng cứng trong mã
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Vấn đề:**
-- 🔴 **Bí mật bị lộ** trong mã, tập tin cấu hình, biến môi trường
-- 🔴 **Quay vòng thông tin xác thực** đòi hỏi thay đổi mã và triển khai lại
+- 🔴 **Bí mật bị lộ** trong mã, tệp cấu hình, biến môi trường
+- 🔴 **Xoay vòng thông tin xác thực** yêu cầu thay đổi mã và triển khai lại
 - 🔴 **Ác mộng kiểm toán** - ai đã truy cập gì, khi nào?
-- 🔴 **Rải rác** - bí mật nằm rải rác trên nhiều hệ thống
-- 🔴 **Rủi ro tuân thủ** - không đạt các tiêu chí kiểm toán bảo mật
+- 🔴 **Rải rác** - bí mật phân tán trên nhiều hệ thống
+- 🔴 **Rủi ro tuân thủ** - không vượt qua kiểm toán bảo mật
 
 ### Giải pháp: Managed Identity
 
@@ -53,12 +53,12 @@ const client = new BlobServiceClient(
 
 **Lợi ích:**
 - ✅ **Không có bí mật** trong mã hoặc cấu hình
-- ✅ **Tự động quay vòng** - Azure xử lý
-- ✅ **Theo dõi kiểm toán đầy đủ** trong logs của Azure AD
-- ✅ **Bảo mật tập trung** - quản lý qua Azure Portal
-- ✅ **Sẵn sàng tuân thủ** - đáp ứng các tiêu chuẩn bảo mật
+- ✅ **Xoay vòng tự động** - Azure sẽ xử lý
+- ✅ **Lưu vết kiểm toán đầy đủ** trong nhật ký Azure AD
+- ✅ **Bảo mật tập trung** - quản lý trong Azure Portal
+- ✅ **Sẵn sàng tuân thủ** - đáp ứng tiêu chuẩn bảo mật
 
-**Tương tự**: Xác thực truyền thống giống như mang nhiều chìa khóa vật lý cho các cửa khác nhau. Managed Identity giống như một thẻ an ninh tự động cấp quyền dựa trên danh tính của bạn—không có chìa khóa để làm mất, sao chép hoặc quay vòng.
+**Tương tự**: Xác thực truyền thống giống như mang nhiều chìa khóa vật lý cho các cửa khác nhau. Managed Identity giống như có một thẻ an ninh tự động cấp quyền dựa trên danh tính của bạn—không có chìa khóa để làm mất, sao chép hoặc xoay vòng.
 
 ---
 
@@ -68,29 +68,29 @@ const client = new BlobServiceClient(
 
 ```mermaid
 sequenceDiagram
-    participant App as Ứng dụng của bạn<br/>(ứng dụng Container)
+    participant App as Ứng dụng của bạn<br/>(Ứng dụng container)
     participant MI as Danh tính được quản lý<br/>(Azure AD)
     participant KV as Key Vault
-    participant Storage as Azure Storage
+    participant Storage as Lưu trữ Azure
     participant DB as Azure SQL
     
-    App->>MI: Yêu cầu token truy cập<br/>(tự động)
+    App->>MI: Yêu cầu mã thông báo truy cập<br/>(tự động)
     MI->>MI: Xác minh danh tính<br/>(không cần mật khẩu)
-    MI-->>App: Trả về token<br/>(hợp lệ 1 giờ)
+    MI-->>App: Trả về mã thông báo<br/>(hợp lệ 1 giờ)
     
-    App->>KV: Lấy bí mật<br/>(sử dụng token)
+    App->>KV: Lấy bí mật<br/>(sử dụng mã thông báo)
     KV->>KV: Kiểm tra quyền RBAC
     KV-->>App: Trả về giá trị bí mật
     
-    App->>Storage: Tải lên blob<br/>(sử dụng token)
+    App->>Storage: Tải blob lên<br/>(sử dụng mã thông báo)
     Storage->>Storage: Kiểm tra quyền RBAC
     Storage-->>App: Thành công
     
-    App->>DB: Truy vấn dữ liệu<br/>(sử dụng token)
+    App->>DB: Truy vấn dữ liệu<br/>(sử dụng mã thông báo)
     DB->>DB: Kiểm tra quyền SQL
     DB-->>App: Trả về kết quả
     
-    Note over App,DB: Tất cả xác thực không cần mật khẩu!
+    Note over App,DB: Mọi xác thực đều không cần mật khẩu!
 ```
 ### Các loại Managed Identities
 
@@ -104,64 +104,64 @@ graph TB
     MI --> UserAssigned
     
     SystemAssigned --> SA1[Vòng đời gắn với tài nguyên]
-    SystemAssigned --> SA2[Tạo/xóa tự động]
+    SystemAssigned --> SA2[Tạo và xóa tự động]
     SystemAssigned --> SA3[Phù hợp nhất cho một tài nguyên]
     
     UserAssigned --> UA1[Vòng đời độc lập]
-    UserAssigned --> UA2[Tạo/xóa thủ công]
+    UserAssigned --> UA2[Tạo và xóa thủ công]
     UserAssigned --> UA3[Chia sẻ giữa các tài nguyên]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Tính năng | System-Assigned | User-Assigned |
+| Tính năng | Gán theo hệ thống | Gán theo người dùng |
 |---------|----------------|---------------|
 | **Vòng đời** | Gắn với tài nguyên | Độc lập |
-| **Tạo** | Tự động với tài nguyên | Tạo thủ công |
-| **Xóa** | Bị xóa cùng tài nguyên | Duy trì sau khi xóa tài nguyên |
+| **Tạo** | Tự động cùng tài nguyên | Tạo thủ công |
+| **Xóa** | Bị xóa cùng tài nguyên | Tồn tại sau khi xóa tài nguyên |
 | **Chia sẻ** | Chỉ một tài nguyên | Nhiều tài nguyên |
 | **Trường hợp sử dụng** | Kịch bản đơn giản | Kịch bản phức tạp nhiều tài nguyên |
 | **Mặc định AZD** | ✅ Được khuyến nghị | Tùy chọn |
 
 ---
 
-## Yêu cầu trước khi bắt đầu
+## Yêu cầu tiên quyết
 
 ### Công cụ cần thiết
 
 Bạn nên đã cài các công cụ sau từ các bài học trước:
 
 ```bash
-# Xác minh Azure Developer CLI
+# Kiểm tra Azure Developer CLI
 azd version
 # ✅ Yêu cầu: azd phiên bản 1.0.0 hoặc cao hơn
 
-# Xác minh Azure CLI
+# Kiểm tra Azure CLI
 az --version
 # ✅ Yêu cầu: azure-cli 2.50.0 hoặc cao hơn
 ```
 
 ### Yêu cầu Azure
 
-- Tài khoản đăng ký Azure đang hoạt động
+- Có đăng ký Azure đang hoạt động
 - Quyền để:
-  - Tạo managed identities
+  - Tạo Managed Identity
   - Gán vai trò RBAC
   - Tạo tài nguyên Key Vault
   - Triển khai Container Apps
 
-### Kiến thức tiền đề
+### Kiến thức tiên quyết
 
 Bạn nên đã hoàn thành:
-- [Hướng dẫn cài đặt](installation.md) - Thiết lập AZD
-- [AZD Basics](azd-basics.md) - Các khái niệm cốt lõi
-- [Configuration Management](configuration.md) - Biến môi trường
+- [Hướng dẫn Cài đặt](installation.md) - Thiết lập AZD
+- [Cơ bản về AZD](azd-basics.md) - Các khái niệm cốt lõi
+- [Quản lý Cấu hình](configuration.md) - Biến môi trường
 
 ---
 
 ## Bài học 1: Hiểu các mẫu xác thực
 
-### Mẫu 1: Chuỗi kết nối (Cũ - Tránh)
+### Mẫu 1: Connection Strings (Cũ - Tránh dùng)
 
 **Cách hoạt động:**
 ```bash
@@ -173,11 +173,11 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 
 **Vấn đề:**
 - ❌ Bí mật hiển thị trong biến môi trường
-- ❌ Được ghi log trong hệ thống triển khai
-- ❌ Khó quay vòng
-- ❌ Không có lộ trình kiểm toán truy cập
+- ❌ Được ghi lại trong hệ thống triển khai
+- ❌ Khó để xoay vòng
+- ❌ Không có lưu vết kiểm toán về truy cập
 
-**Khi nào sử dụng:** Chỉ cho phát triển cục bộ, không bao giờ cho production.
+**Khi nào sử dụng:** Chỉ cho phát triển cục bộ, không bao giờ dùng trong production.
 
 ---
 
@@ -203,15 +203,15 @@ env: [
 ```
 
 **Lợi ích:**
-- ✅ Bí mật được lưu an toàn trong Key Vault
+- ✅ Bí mật được lưu trữ an toàn trong Key Vault
 - ✅ Quản lý bí mật tập trung
-- ✅ Quay vòng mà không cần thay đổi mã
+- ✅ Xoay vòng mà không cần thay đổi mã
 
 **Hạn chế:**
-- ⚠️ Vẫn sử dụng keys/mật khẩu
+- ⚠️ Vẫn sử dụng khóa/mật khẩu
 - ⚠️ Cần quản lý quyền truy cập Key Vault
 
-**Khi nào sử dụng:** Bước chuyển tiếp từ chuỗi kết nối sang managed identity.
+**Khi nào sử dụng:** Bước chuyển tiếp từ connection strings sang managed identity.
 
 ---
 
@@ -252,12 +252,12 @@ const blobServiceClient = new BlobServiceClient(
 
 **Lợi ích:**
 - ✅ Không có bí mật trong mã/cấu hình
-- ✅ Tự động quay vòng thông tin xác thực
-- ✅ Theo dõi kiểm toán đầy đủ
+- ✅ Xoay vòng thông tin xác thực tự động
+- ✅ Lưu vết kiểm toán đầy đủ
 - ✅ Quyền dựa trên RBAC
 - ✅ Sẵn sàng tuân thủ
 
-**Khi nào sử dụng:** Luôn luôn, cho các ứng dụng production.
+**Khi nào sử dụng:** Luôn luôn, cho ứng dụng production.
 
 ---
 
@@ -265,7 +265,7 @@ const blobServiceClient = new BlobServiceClient(
 
 ### Triển khai từng bước
 
-Hãy xây một Container App an toàn sử dụng managed identity để truy cập Azure Storage và Key Vault.
+Hãy xây dựng một Container App an toàn sử dụng managed identity để truy cập Azure Storage và Key Vault.
 
 ### Cấu trúc dự án
 
@@ -441,7 +441,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Module Gán Vai Trò RBAC
+### 4. Module gán vai trò RBAC
 
 **Tệp: `infra/core/role-assignment.bicep`**
 
@@ -493,12 +493,12 @@ const secretClient = new SecretClient(
   credential  // Không cần khóa!
 );
 
-// Kiểm tra tình trạng
+// Kiểm tra sức khỏe
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Tải tệp lên blob storage
+// Tải tệp lên Blob Storage
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -580,7 +580,7 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Triển khai và Kiểm tra
+### 6. Triển khai và kiểm thử
 
 ```bash
 # Khởi tạo môi trường AZD
@@ -592,7 +592,7 @@ azd up
 # Lấy URL ứng dụng
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
-# Kiểm tra tình trạng hoạt động
+# Kiểm tra sức khỏe
 curl $APP_URL/health
 ```
 
@@ -604,7 +604,7 @@ curl $APP_URL/health
 }
 ```
 
-**Kiểm thử upload blob:**
+**Kiểm thử tải blob lên:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
@@ -618,7 +618,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Liệt kê container kiểm thử:**
+**Kiểm thử liệt kê container:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -634,14 +634,14 @@ curl $APP_URL/containers
 
 ---
 
-## Các vai trò RBAC phổ biến trên Azure
+## Các vai trò RBAC Azure phổ biến
 
-### Built-in Role IDs cho Managed Identity
+### ID vai trò tích hợp cho Managed Identity
 
-| Service | Role Name | Role ID | Permissions |
+| Dịch vụ | Role Name | Role ID | Quyền |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Đọc các blob và container |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Đọc, ghi, xóa blob |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Đọc blobs và containers |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Đọc, ghi, xóa blobs |
 | **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Đọc, ghi, xóa tin nhắn hàng đợi |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Đọc bí mật |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Đọc, ghi, xóa bí mật |
@@ -650,7 +650,7 @@ curl $APP_URL/containers
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Quản lý cơ sở dữ liệu SQL |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Gửi, nhận, quản lý tin nhắn |
 
-### Cách tìm Role IDs
+### Cách tìm ID vai trò
 
 ```bash
 # Liệt kê tất cả các vai trò tích hợp sẵn
@@ -659,7 +659,7 @@ az role definition list --query "[].{Name:roleName, ID:name}" --output table
 # Tìm kiếm vai trò cụ thể
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Lấy thông tin chi tiết vai trò
+# Lấy chi tiết vai trò
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
@@ -669,11 +669,11 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ### Bài tập 1: Bật Managed Identity cho Ứng dụng hiện có ⭐⭐ (Trung bình)
 
-**Mục tiêu**: Thêm managed identity vào một triển khai Container App đang có
+**Mục tiêu**: Thêm managed identity vào triển khai Container App hiện có
 
-**Kịch bản**: Bạn có một Container App đang dùng chuỗi kết nối. Chuyển sang managed identity.
+**Kịch bản**: Bạn có một Container App đang sử dụng connection strings. Chuyển nó sang managed identity.
 
-**Điểm bắt đầu**: Container App với cấu hình này:
+**Điểm khởi điểm**: Container App với cấu hình này:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -685,7 +685,7 @@ env: [
 ]
 ```
 
-**Các bước**:
+**Bước thực hiện**:
 
 1. **Bật managed identity trong Bicep:**
 
@@ -721,7 +721,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Cập nhật mã ứng dụng:**
 
-**Trước (chuỗi kết nối):**
+**Trước (connection string):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -754,7 +754,7 @@ env: [
 ]
 ```
 
-5. **Triển khai và kiểm tra:**
+5. **Triển khai và kiểm thử:**
 
 ```bash
 # Triển khai lại
@@ -766,25 +766,25 @@ curl https://myapp.azurecontainerapps.io/upload
 
 **✅ Tiêu chí thành công:**
 - ✅ Ứng dụng triển khai không lỗi
-- ✅ Các thao tác Storage hoạt động (upload, list, download)
-- ✅ Không còn chuỗi kết nối trong biến môi trường
-- ✅ Identity hiển thị trong Azure Portal dưới blade "Identity"
+- ✅ Các thao tác Storage hoạt động (tải lên, liệt kê, tải xuống)
+- ✅ Không có connection strings trong biến môi trường
+- ✅ Identity hiển thị trong Azure Portal dưới "Identity" blade
 
 **Xác minh:**
 
 ```bash
-# Kiểm tra managed identity đã được bật
+# Kiểm tra định danh được quản lý đã được bật
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Dự kiến: "SystemAssigned"
+# ✅ Mong đợi: "SystemAssigned"
 
 # Kiểm tra gán vai trò
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Dự kiến: Hiển thị vai trò "Storage Blob Data Contributor"
+# ✅ Mong đợi: Hiển thị vai trò "Storage Blob Data Contributor"
 ```
 
 **Thời gian**: 20-30 phút
@@ -793,11 +793,11 @@ az role assignment list \
 
 ### Bài tập 2: Truy cập đa dịch vụ với User-Assigned Identity ⭐⭐⭐ (Nâng cao)
 
-**Mục tiêu**: Tạo user-assigned identity được chia sẻ giữa nhiều Container App
+**Mục tiêu**: Tạo user-assigned identity được chia sẻ giữa nhiều Container Apps
 
-**Kịch bản**: Bạn có 3 microservice cần truy cập cùng một Storage account và Key Vault.
+**Kịch bản**: Bạn có 3 microservice đều cần truy cập cùng một tài khoản Storage và Key Vault.
 
-**Các bước**:
+**Bước thực hiện**:
 
 1. **Tạo user-assigned identity:**
 
@@ -856,7 +856,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Gán identity cho nhiều Container Apps:**
+3. **Gán identity cho nhiều Container App:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -898,9 +898,9 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Đối với danh tính được gán bởi người dùng, hãy chỉ định client ID
+// Đối với danh tính do người dùng gán, hãy chỉ định client ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // client ID của danh tính được gán bởi người dùng
+  process.env.AZURE_CLIENT_ID  // Client ID của danh tính do người dùng gán
 );
 
 // Hoặc sử dụng DefaultAzureCredential (tự động phát hiện)
@@ -917,7 +917,7 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Kiểm tra tất cả các dịch vụ có thể truy cập lưu trữ
+# Kiểm tra tất cả dịch vụ có thể truy cập vào lưu trữ
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
@@ -930,22 +930,22 @@ curl https://order-service.azurecontainerapps.io/upload
 - ✅ Quản lý quyền tập trung
 
 **Lợi ích của User-Assigned Identity:**
-- Một identity để quản lý
+- Một identity duy nhất để quản lý
 - Quyền nhất quán giữa các dịch vụ
-- Tồn tại sau khi xóa dịch vụ
-- Tốt cho kiến trúc phức tạp
+- Tồn tại khi xóa dịch vụ
+- Tốt hơn cho kiến trúc phức tạp
 
 **Thời gian**: 30-40 phút
 
 ---
 
-### Bài tập 3: Triển khai Quay vòng Bí mật Key Vault ⭐⭐⭐ (Nâng cao)
+### Bài tập 3: Triển khai xoay vòng bí mật trong Key Vault ⭐⭐⭐ (Nâng cao)
 
-**Mục tiêu**: Lưu API keys của bên thứ ba trong Key Vault và truy cập chúng bằng managed identity
+**Mục tiêu**: Lưu khóa API bên thứ ba trong Key Vault và truy cập chúng bằng managed identity
 
-**Kịch bản**: Ứng dụng của bạn cần gọi API bên ngoài (OpenAI, Stripe, SendGrid) yêu cầu API keys.
+**Kịch bản**: Ứng dụng của bạn cần gọi API bên ngoài (OpenAI, Stripe, SendGrid) yêu cầu khóa API.
 
-**Các bước**:
+**Bước thực hiện**:
 
 1. **Tạo Key Vault với RBAC:**
 
@@ -978,13 +978,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Lưu bí mật vào Key Vault:**
+2. **Lưu bí mật trong Key Vault:**
 
 ```bash
 # Lấy tên Key Vault
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Lưu các khóa API của bên thứ ba
+# Lưu trữ các khóa API của bên thứ ba
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1063,7 +1063,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Khởi tạo OpenAI bằng khóa từ Key Vault
+// Khởi tạo OpenAI với khóa từ Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1078,7 +1078,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1096,24 +1096,24 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Triển khai và kiểm tra:**
+5. **Triển khai và kiểm thử:**
 
 ```bash
 azd up
 
-# Kiểm tra rằng các khóa API hoạt động
+# Kiểm tra xem các khóa API có hoạt động hay không
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
 **✅ Tiêu chí thành công:**
-- ✅ Không có API keys trong mã hoặc biến môi trường
-- ✅ Ứng dụng truy xuất khóa từ Key Vault
-- ✅ Các API bên thứ ba hoạt động chính xác
-- ✅ Có thể quay vòng khóa mà không cần thay đổi mã
+- ✅ Không có khóa API trong mã hoặc biến môi trường
+- ✅ Ứng dụng lấy khóa từ Key Vault
+- ✅ Các API bên thứ ba hoạt động đúng
+- ✅ Có thể xoay vòng khóa mà không thay đổi mã
 
-**Quay vòng một bí mật:**
+**Xoay một bí mật:**
 
 ```bash
 # Cập nhật bí mật trong Key Vault
@@ -1132,30 +1132,30 @@ az containerapp revision restart \
 
 ---
 
-## Điểm kiểm tra kiến thức
+## Kiểm tra kiến thức
 
 ### 1. Mẫu xác thực ✓
 
 Kiểm tra hiểu biết của bạn:
 
 - [ ] **Q1**: Ba mẫu xác thực chính là gì? 
-  - **A**: Chuỗi kết nối (cũ), Tham chiếu Key Vault (chuyển tiếp), Managed Identity (tốt nhất)
+  - **A**: Connection strings (cũ), Key Vault references (bước chuyển tiếp), Managed Identity (tốt nhất)
 
-- [ ] **Q2**: Tại sao managed identity tốt hơn chuỗi kết nối?
-  - **A**: Không có bí mật trong mã, quay vòng tự động, theo dõi kiểm toán đầy đủ, quyền theo RBAC
+- [ ] **Q2**: Tại sao managed identity tốt hơn connection strings?
+  - **A**: Không có bí mật trong mã, xoay vòng tự động, lưu vết kiểm toán đầy đủ, quyền theo RBAC
 
 - [ ] **Q3**: Khi nào bạn sử dụng user-assigned identity thay vì system-assigned?
   - **A**: Khi cần chia sẻ identity giữa nhiều tài nguyên hoặc khi vòng đời identity độc lập với vòng đời tài nguyên
 
 **Xác minh thực hành:**
 ```bash
-# Kiểm tra ứng dụng của bạn đang sử dụng loại định danh nào
+# Kiểm tra loại danh tính mà ứng dụng của bạn sử dụng
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Liệt kê tất cả các phân công vai trò cho định danh
+# Liệt kê tất cả các phân công vai trò cho danh tính
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1166,13 +1166,13 @@ az role assignment list \
 
 Kiểm tra hiểu biết của bạn:
 
-- [ ] **Q1**: Role ID cho "Storage Blob Data Contributor" là gì?
+- [ ] **Q1**: ID vai trò cho "Storage Blob Data Contributor" là gì?
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: "Key Vault Secrets User" cung cấp những quyền gì?
+- [ ] **Q2**: Vai trò "Key Vault Secrets User" cung cấp những quyền gì?
   - **A**: Quyền chỉ đọc đối với bí mật (không thể tạo, cập nhật hoặc xóa)
 
-- [ ] **Q3**: Làm thế nào để cấp cho một Container App quyền truy cập Azure SQL?
+- [ ] **Q3**: Làm thế nào để cấp quyền cho Container App truy cập Azure SQL?
   - **A**: Gán vai trò "SQL DB Contributor" hoặc cấu hình xác thực Azure AD cho SQL
 
 **Xác minh thực hành:**
@@ -1180,7 +1180,7 @@ Kiểm tra hiểu biết của bạn:
 # Tìm vai trò cụ thể
 az role definition list --name "Storage Blob Data Contributor"
 
-# Kiểm tra các vai trò được gán cho danh tính của bạn
+# Kiểm tra vai trò nào đang được gán cho danh tính của bạn
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1188,18 +1188,20 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 ---
 
 ### 3. Tích hợp Key Vault ✓
-- [ ] **Q1**: Làm thế nào để bật RBAC cho Key Vault thay vì các chính sách truy cập?
+
+Kiểm tra hiểu biết của bạn:
+- [ ] **Q1**: Làm thế nào để bật RBAC cho Key Vault thay vì sử dụng access policies?
   - **A**: Đặt `enableRbacAuthorization: true` trong Bicep
 
-- [ ] **Q2**: Thư viện Azure SDK nào xử lý xác thực Managed Identity?
-  - **A**: `@azure/identity` với lớp `DefaultAzureCredential`
+- [ ] **Q2**: Thư viện Azure SDK nào xử lý xác thực bằng định danh được quản lý?
+  - **A**: `@azure/identity` with `DefaultAzureCredential` class
 
-- [ ] **Q3**: Bí mật Key Vault được giữ trong bộ nhớ đệm bao lâu?
-  - **A**: Tùy thuộc vào ứng dụng; triển khai chiến lược bộ nhớ đệm của riêng bạn
+- [ ] **Q3**: Bí mật trong Key Vault được lưu trong bộ nhớ đệm bao lâu?
+  - **A**: Tùy vào ứng dụng; triển khai chiến lược cache của riêng bạn
 
-**Hands-On Verification:**
+**Xác minh Thực hành:**
 ```bash
-# Kiểm tra truy cập Key Vault
+# Kiểm tra quyền truy cập Key Vault
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1209,25 +1211,25 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Mong đợi: true
+# ✅ Kết quả mong đợi: true
 ```
 
 ---
 
-## Thực tiễn bảo mật tốt nhất
+## Những Thực hành Tốt nhất về Bảo mật
 
-### ✅ NÊN LÀM:
+### ✅ NÊN:
 
-1. **Luôn sử dụng Managed Identity trong môi trường sản xuất**
+1. **Luôn sử dụng định danh được quản lý trong môi trường sản xuất**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Sử dụng các vai trò RBAC với nguyên tắc ít quyền nhất**
-   - Sử dụng vai trò "Reader" khi có thể
-   - Tránh sử dụng "Owner" hoặc "Contributor" trừ khi cần thiết
+2. **Sử dụng vai trò RBAC với nguyên tắc ít đặc quyền nhất**
+   - Sử dụng "Reader" roles khi có thể
+   - Tránh "Owner" hoặc "Contributor" trừ khi cần thiết
 
 3. **Lưu khóa bên thứ ba trong Key Vault**
    ```javascript
@@ -1248,15 +1250,15 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **Xoay vòng bí mật thường xuyên**
+6. **Thường xuyên xoay vòng bí mật**
    - Đặt ngày hết hạn cho các bí mật trong Key Vault
-   - Tự động hóa việc xoay vòng với Azure Functions
+   - Tự động hóa việc xoay vòng bằng Azure Functions
 
 ### ❌ KHÔNG NÊN:
 
 1. **Không bao giờ nhúng bí mật vào mã nguồn**
    ```javascript
-   // ❌ XẤU
+   // ❌ KHÔNG TỐT
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
@@ -1275,9 +1277,9 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Không ghi nhật ký bí mật**
+4. **Không ghi log các bí mật**
    ```javascript
-   // ❌ KHÔNG TỐT
+   // ❌ XẤU
    console.log('API Key:', apiKey);
    
    // ✅ TỐT
@@ -1292,7 +1294,7 @@ az keyvault show \
 
 ---
 
-## Hướng dẫn khắc phục sự cố
+## Hướng dẫn Khắc phục Sự cố
 
 ### Vấn đề: "Unauthorized" khi truy cập Azure Storage
 
@@ -1310,18 +1312,18 @@ az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Mong đợi: "SystemAssigned" hoặc "UserAssigned"
+# ✅ Kỳ vọng: "SystemAssigned" hoặc "UserAssigned"
 
-# Kiểm tra phân công vai trò
+# Kiểm tra gán vai trò
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Mong đợi: Nên thấy "Storage Blob Data Contributor" hoặc vai trò tương tự
+# Kỳ vọng: Nên thấy "Storage Blob Data Contributor" hoặc vai trò tương tự
 ```
 
 **Giải pháp:**
 
-1. **Cấp đúng vai trò RBAC:**
+1. **Cấp vai trò RBAC đúng:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1330,13 +1332,13 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Chờ cho thay đổi lan truyền (có thể mất 5-10 phút):**
+2. **Chờ cho việc lan truyền (có thể mất 5-10 phút):**
 ```bash
 # Kiểm tra trạng thái gán vai trò
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Xác minh mã ứng dụng đang sử dụng thông tin xác thực đúng:**
+3. **Xác minh mã ứng dụng sử dụng credential đúng:**
 ```javascript
 // Hãy đảm bảo bạn đang sử dụng DefaultAzureCredential
 const credential = new DefaultAzureCredential();
@@ -1344,7 +1346,7 @@ const credential = new DefaultAzureCredential();
 
 ---
 
-### Vấn đề: Truy cập Key Vault bị từ chối
+### Vấn đề: Quyền truy cập Key Vault bị từ chối
 
 **Triệu chứng:**
 ```
@@ -1361,7 +1363,7 @@ az keyvault show \
   --query "properties.enableRbacAuthorization"
 # ✅ Kỳ vọng: true
 
-# Kiểm tra chỉ định vai trò
+# Kiểm tra phân công vai trò
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1387,7 +1389,7 @@ az role assignment create \
 
 ---
 
-### Vấn đề: DefaultAzureCredential không hoạt động cục bộ
+### Vấn đề: DefaultAzureCredential thất bại khi chạy cục bộ
 
 **Triệu chứng:**
 ```
@@ -1412,7 +1414,7 @@ az ad signed-in-user show
 az login
 ```
 
-2. **Đặt subscription Azure:**
+2. **Thiết lập subscription Azure:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
@@ -1424,7 +1426,7 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Hoặc sử dụng thông tin xác thực khác khi chạy cục bộ:**
+4. **Hoặc sử dụng thông tin xác thực khác khi làm việc cục bộ:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1436,15 +1438,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Vấn đề: Việc gán vai trò mất quá nhiều thời gian để lan truyền
+### Vấn đề: Việc gán vai trò mất quá lâu để lan truyền
 
 **Triệu chứng:**
 - Vai trò đã được gán thành công
 - Vẫn nhận lỗi 403
-- Truy cập không ổn định (đôi khi hoạt động, đôi khi không)
+- Truy cập không ổn định (đôi khi được, đôi khi không)
 
 **Giải thích:**
-Các thay đổi RBAC của Azure có thể mất 5-10 phút để lan truyền trên toàn cầu.
+Azure RBAC changes can take 5-10 minutes to propagate globally.
 
 **Giải pháp:**
 
@@ -1464,37 +1466,37 @@ az containerapp revision restart \
 
 ---
 
-## Cân nhắc chi phí
+## Cân nhắc về chi phí
 
-### Chi phí Managed Identity
+### Chi phí Định danh được quản lý
 
-| Tài nguyên | Chi phí |
+| Resource | Cost |
 |----------|------|
-| **Managed Identity** | 🆓 **MIỄN PHÍ** - Không tính phí |
-| **Gán vai trò RBAC** | 🆓 **MIỄN PHÍ** - Không tính phí |
-| **Yêu cầu token Azure AD** | 🆓 **MIỄN PHÍ** - Đã bao gồm |
-| **Hoạt động Key Vault** | $0.03 cho mỗi 10,000 thao tác |
+| **Định danh được quản lý** | 🆓 **MIỄN PHÍ** - Không tính phí |
+| **Việc gán vai trò RBAC** | 🆓 **MIỄN PHÍ** - Không tính phí |
+| **Yêu cầu Token Azure AD** | 🆓 **MIỄN PHÍ** - Đã bao gồm |
+| **Hoạt động Key Vault** | $0.03 cho mỗi 10.000 thao tác |
 | **Lưu trữ Key Vault** | $0.024 cho mỗi bí mật mỗi tháng |
 
-**Managed identity giúp tiết kiệm chi phí bằng cách:**
+**Định danh được quản lý giúp tiết kiệm chi phí bằng cách:**
 - ✅ Loại bỏ các thao tác Key Vault cho xác thực dịch vụ-đến-dịch vụ
-- ✅ Giảm sự cố bảo mật (không rò rỉ thông tin xác thực)
+- ✅ Giảm sự cố bảo mật (không có thông tin xác thực bị rò rỉ)
 - ✅ Giảm chi phí vận hành (không cần xoay vòng thủ công)
 
 **Ví dụ so sánh chi phí (hàng tháng):**
 
-| Kịch bản | Chuỗi kết nối | Managed Identity | Tiết kiệm |
+| Scenario | Connection Strings | Managed Identity | Savings |
 |----------|-------------------|-----------------|---------|
-| Ứng dụng nhỏ (1M yêu cầu) | ~$50 (Key Vault + thao tác) | ~$0 | $50/tháng |
-| Ứng dụng trung bình (10M yêu cầu) | ~$200 | ~$0 | $200/tháng |
-| Ứng dụng lớn (100M yêu cầu) | ~$1,500 | ~$0 | $1,500/tháng |
+| Ứng dụng nhỏ (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/tháng |
+| Ứng dụng trung bình (10M requests) | ~$200 | ~$0 | $200/tháng |
+| Ứng dụng lớn (100M requests) | ~$1,500 | ~$0 | $1,500/tháng |
 
 ---
 
 ## Tìm hiểu thêm
 
 ### Tài liệu chính thức
-- [Managed Identity của Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Định danh được quản lý Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1506,11 +1508,11 @@ az containerapp revision restart \
 
 ### Bước tiếp theo trong Khóa học này
 - ← Trước: [Quản lý cấu hình](configuration.md)
-- → Tiếp theo: [Dự án đầu tiên](first-project.md)
-- 🏠 [Trang chủ khóa học](../../README.md)
+- → Tiếp: [Dự án đầu tiên](first-project.md)
+- 🏠 [Trang chủ Khóa học](../../README.md)
 
 ### Ví dụ liên quan
-- [Ví dụ Azure OpenAI Chat](../../../../examples/azure-openai-chat) - Sử dụng Managed Identity cho Azure OpenAI
+- [Ví dụ Chat Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Sử dụng định danh được quản lý cho Microsoft Foundry Models
 - [Ví dụ Microservices](../../../../examples/microservices) - Mẫu xác thực đa dịch vụ
 
 ---
@@ -1518,28 +1520,28 @@ az containerapp revision restart \
 ## Tóm tắt
 
 **Bạn đã học:**
-- ✅ Ba mô hình xác thực (chuỗi kết nối, Key Vault, Managed Identity)
-- ✅ Cách bật và cấu hình Managed Identity trong AZD
+- ✅ Ba mô hình xác thực (chuỗi kết nối, Key Vault, định danh được quản lý)
+- ✅ Cách bật và cấu hình định danh được quản lý trong AZD
 - ✅ Gán vai trò RBAC cho các dịch vụ Azure
-- ✅ Tích hợp Key Vault cho các bí mật bên thứ ba
-- ✅ Định danh được gán bởi người dùng (user-assigned) vs định danh hệ thống (system-assigned)
-- ✅ Thực tiễn bảo mật tốt nhất và khắc phục sự cố
+- ✅ Tích hợp Key Vault cho bí mật bên thứ ba
+- ✅ Định danh do người dùng gán vs định danh do hệ thống gán
+- ✅ Các thực hành bảo mật tốt nhất và khắc phục sự cố
 
 **Những điểm chính:**
-1. **Luôn sử dụng Managed Identity trong môi trường sản xuất** - Không có bí mật, xoay vòng tự động
-2. **Sử dụng vai trò RBAC với nguyên tắc ít quyền nhất** - Chỉ cấp các quyền cần thiết
+1. **Luôn sử dụng định danh được quản lý trong môi trường sản xuất** - Không có bí mật, xoay vòng tự động
+2. **Sử dụng vai trò RBAC ít đặc quyền nhất** - Chỉ cấp các quyền cần thiết
 3. **Lưu khóa bên thứ ba trong Key Vault** - Quản lý bí mật tập trung
 4. **Tách biệt định danh theo môi trường** - Cô lập dev, staging, prod
-5. **Bật ghi nhật ký kiểm toán** - Theo dõi ai đã truy cập cái gì
+5. **Bật ghi nhật ký kiểm toán** - Theo dõi ai đã truy cập gì
 
 **Bước tiếp theo:**
 1. Hoàn thành các bài tập thực hành ở trên
-2. Di chuyển một ứng dụng hiện có từ chuỗi kết nối sang Managed Identity
-3. Xây dựng dự án AZD đầu tiên của bạn với bảo mật ngay từ đầu: [Dự án đầu tiên](first-project.md)
+2. Di chuyển một ứng dụng hiện tại từ chuỗi kết nối sang định danh được quản lý
+3. Xây dựng dự án AZD đầu tiên của bạn với bảo mật ngay từ ngày đầu: [Dự án đầu tiên](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng bản dịch chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu nhầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu nên được coi là nguồn chính thức. Đối với thông tin quan trọng, nên sử dụng bản dịch chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hay giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

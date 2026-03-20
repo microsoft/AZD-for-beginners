@@ -1,73 +1,88 @@
-# AZD Basics - Inzicht in Azure Developer CLI
+# AZD Basics - Azure Developer CLI begrijpen
 
-# AZD Basics - Kernconcepten en basisprincipes
+# AZD Basics - Kernconcepten en Basisprincipes
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Voor Beginners](../../README.md)
-- **📖 Current Chapter**: Hoofdstuk 1 - Fundament & Snelstart
-- **⬅️ Previous**: [Cursusoverzicht](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Next**: [Installatie & Configuratie](installation.md)
-- **🚀 Next Chapter**: [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Startpagina**: [AZD voor Beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 1 - Basis & Snelle start
+- **⬅️ Vorige**: [Cursusoverzicht](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Volgende**: [Installatie & Configuratie](installation.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introductie
 
-Deze les introduceert je in Azure Developer CLI (azd), een krachtig commandoregelhulpmiddel dat je reis van lokale ontwikkeling naar Azure-implementatie versnelt. Je leert de fundamentele concepten, kernfuncties en begrijpt hoe azd het uitrollen van cloud-native applicaties vereenvoudigt.
+Deze les introduceert je in Azure Developer CLI (azd), een krachtig commandoregelhulpmiddel dat je traject van lokale ontwikkeling naar Azure-implementatie versnelt. Je leert de fundamentele concepten, kernfuncties en begrijpt hoe azd het deployen van cloud-native applicaties vereenvoudigt.
 
 ## Leerdoelen
 
-Aan het eind van deze les zul je:
-- Begrijpen wat Azure Developer CLI is en wat het primaire doel is
+Aan het einde van deze les zul je:
+- Begrijpen wat Azure Developer CLI is en wat het hoofddoel is
 - De kernconcepten van templates, omgevingen en services leren
-- Belangrijke functies verkennen, waaronder template-gestuurde ontwikkeling en Infrastructuur als Code
-- De azd-projectstructuur en workflow begrijpen
-- Klaar zijn om azd te installeren en te configureren voor je ontwikkelomgeving
+- Belangrijke functies verkennen waaronder template-gedreven ontwikkeling en Infrastructure as Code
+- Het azd-projectstructuur en de workflow begrijpen
+- Klaar zijn om azd te installeren en configureren voor je ontwikkelomgeving
 
 ## Leerresultaten
 
 Na het voltooien van deze les kun je:
-- De rol van azd in moderne cloudontwikkelworkflows uitleggen
+- De rol van azd in moderne cloudontwikkelingsworkflows uitleggen
 - De componenten van een azd-projectstructuur identificeren
 - Beschrijven hoe templates, omgevingen en services samenwerken
-- De voordelen van Infrastructuur als Code met azd begrijpen
-- Verschillende azd-commando's en hun doeleinden herkennen
+- De voordelen van Infrastructure as Code met azd begrijpen
+- Verschillende azd-commando's herkennen en hun doelen
 
 ## Wat is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is een commandoregelhulpmiddel dat is ontworpen om je reis van lokale ontwikkeling naar Azure-implementatie te versnellen. Het vereenvoudigt het proces van bouwen, uitrollen en beheren van cloud-native applicaties op Azure.
+Azure Developer CLI (azd) is een commandoregelhulpmiddel dat is ontworpen om je traject van lokale ontwikkeling naar Azure-implementatie te versnellen. Het vereenvoudigt het proces van het bouwen, implementeren en beheren van cloud-native applicaties op Azure.
 
-### 🎯 Waarom AZD gebruiken? Een vergelijking uit de praktijk
+### Wat kun je met azd implementeren?
 
-Laten we het uitrollen van een eenvoudige webapp met database vergelijken:
+azd ondersteunt een breed scala aan workloads — en de lijst groeit nog steeds. Vandaag kun je azd gebruiken om te implementeren:
+
+| Workloadtype | Voorbeelden | Zelfde workflow? |
+|---------------|----------|----------------|
+| **Traditionele applicaties** | Web-apps, REST-API's, statische sites | ✅ `azd up` |
+| **Services en microservices** | Container Apps, Function Apps, backends met meerdere services | ✅ `azd up` |
+| **AI-aangedreven applicaties** | Chat-apps met Microsoft Foundry-modellen, RAG-oplossingen met AI Search | ✅ `azd up` |
+| **Intelligente agents** | In Foundry gehoste agents, multi-agent orkestraties | ✅ `azd up` |
+
+De kerninzichten is dat **de azd-levenscyclus hetzelfde blijft, ongeacht wat je implementeert**. Je initialiseert een project, voorziet infrastructuur, implementeert je code, monitort je app en ruimt op — of het nu een eenvoudige website of een geavanceerde AI-agent is.
+
+Deze continuïteit is opzettelijk. azd behandelt AI-mogelijkheden als een andere soort service die je applicatie kan gebruiken, niet als iets fundamenteel anders. Een chatendpoint ondersteund door Microsoft Foundry-modellen is, vanuit azd's perspectief, gewoon een andere service om te configureren en te implementeren.
+
+### 🎯 Waarom AZD gebruiken? Een praktijkvergelijking
+
+Laten we het implementeren van een eenvoudige webapp met database vergelijken:
 
 #### ❌ ZONDER AZD: Handmatige Azure-implementatie (30+ minuten)
 
 ```bash
-# Stap 1: Maak een resourcegroep
+# Stap 1: Maak resourcegroep
 az group create --name myapp-rg --location eastus
 
-# Stap 2: Maak een App Service-plan
+# Stap 2: Maak App Service-plan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Stap 3: Maak een Web-app
+# Stap 3: Maak Web App
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
   --runtime "NODE:18-lts"
 
-# Stap 4: Maak een Cosmos DB-account (10-15 minuten)
+# Stap 4: Maak Cosmos DB-account (10-15 minuten)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# Stap 5: Maak een database
+# Stap 5: Maak database
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --name tododb
 
-# Stap 6: Maak een collectie
+# Stap 6: Maak collectie
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
@@ -99,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Stap 11: Koppel App Insights aan de Web-app
+# Stap 11: Koppel App Insights aan Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -110,14 +125,14 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# Stap 12: Bouw de applicatie lokaal
+# Stap 12: Bouw applicatie lokaal
 npm install
 npm run build
 
-# Stap 13: Maak een implementatiepakket
+# Stap 13: Maak implementatiepakket
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# Stap 14: Implementeer de applicatie
+# Stap 14: Implementeer applicatie
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
@@ -128,10 +143,10 @@ az webapp deployment source config-zip \
 ```
 
 **Problemen:**
-- ❌ 15+ commando's om te onthouden en in volgorde uit te voeren
+- ❌ 15+ commando's om te onthouden en in de juiste volgorde uit te voeren
 - ❌ 30-45 minuten handmatig werk
-- ❌ Gemakkelijk fouten te maken (typfouten, verkeerde parameters)
-- ❌ Connection strings zichtbaar in terminalgeschiedenis
+- ❌ Makkelijk fouten te maken (typefouten, verkeerde parameters)
+- ❌ Verbindingsstrings zichtbaar in terminalgeschiedenis
 - ❌ Geen automatische rollback als er iets misgaat
 - ❌ Moeilijk te reproduceren voor teamleden
 - ❌ Elke keer anders (niet reproduceerbaar)
@@ -154,42 +169,42 @@ azd provision --preview
 # Stap 5: Alles uitrollen
 azd up
 
-# ✨ Klaar! Alles is uitgerold, geconfigureerd en gemonitord
+# ✨ Klaar! Alles is uitgerold, geconfigureerd en bewaakt
 ```
 
 **Voordelen:**
 - ✅ **5 commando's** vs. 15+ handmatige stappen
-- ✅ **10-15 minuten** totale tijd (meestal wachten op Azure)
+- ✅ **10-15 minuten** totale tijd (voornamelijk wachten op Azure)
 - ✅ **Geen fouten** - geautomatiseerd en getest
 - ✅ **Geheimen veilig beheerd** via Key Vault
-- ✅ **Automatisch terugdraaien** bij fouten
-- ✅ **Volledig reproduceerbaar** - hetzelfde resultaat elke keer
-- ✅ **Klaar voor teams** - iedereen kan met dezelfde commando's deployen
-- ✅ **Infrastructuur als Code** - versiebeheerde Bicep-templates
+- ✅ **Automatische rollback** bij fouten
+- ✅ **Volledig reproduceerbaar** - elke keer hetzelfde resultaat
+- ✅ **Klaar voor teams** - iedereen kan deployen met dezelfde commando's
+- ✅ **Infrastructure as Code** - versiebeheerde Bicep-templates
 - ✅ **Ingebouwde monitoring** - Application Insights automatisch geconfigureerd
 
-### 📊 Tijd- en foutenreductie
+### 📊 Tijds- en foutreductie
 
-| Metric | Manual Deployment | AZD Deployment | Improvement |
+| Meting | Handmatige implementatie | AZD-implementatie | Verbetering |
 |:-------|:------------------|:---------------|:------------|
 | **Commando's** | 15+ | 5 | 67% minder |
 | **Tijd** | 30-45 min | 10-15 min | 60% sneller |
-| **Foutenpercentage** | ~40% | <5% | 88% reductie |
+| **Foutpercentage** | ~40% | <5% | 88% vermindering |
 | **Consistentie** | Laag (handmatig) | 100% (geautomatiseerd) | Perfect |
-| **Teamintroductie** | 2-4 uur | 30 minuten | 75% sneller |
+| **Team Onboarding** | 2-4 uur | 30 minuten | 75% sneller |
 | **Rollback-tijd** | 30+ min (handmatig) | 2 min (geautomatiseerd) | 93% sneller |
 
 ## Kernconcepten
 
-### Templates
-Templates zijn de basis van azd. Ze bevatten:
+### Sjablonen
+Sjablonen vormen de basis van azd. Ze bevatten:
 - **Applicatiecode** - Je broncode en afhankelijkheden
 - **Infrastructuurdefinities** - Azure-resources gedefinieerd in Bicep of Terraform
 - **Configuratiebestanden** - Instellingen en omgevingsvariabelen
-- **Deploymentscripts** - Geautomatiseerde deploymentworkflows
+- **Implementatiescripts** - Geautomatiseerde implementatieworkflows
 
 ### Omgevingen
-Omgevingen vertegenwoordigen verschillende implementatiedoelen:
+Omgevingen vertegenwoordigen verschillende implementatiedoelomgevingen:
 - **Ontwikkeling** - Voor testen en ontwikkeling
 - **Staging** - Pre-productieomgeving
 - **Productie** - Live productieomgeving
@@ -203,53 +218,53 @@ Elke omgeving onderhoudt zijn eigen:
 Services zijn de bouwstenen van je applicatie:
 - **Frontend** - Webapplicaties, SPAs
 - **Backend** - API's, microservices
-- **Database** - Dataopslagoplossingen
-- **Opslag** - Bestands- en blobopslag
+- **Database** - Oplossingen voor gegevensopslag
+- **Opslag** - Bestand- en blobopslag
 
-## Belangrijkste kenmerken
+## Belangrijkste functies
 
-### 1. Template-gestuurde ontwikkeling
+### 1. Template-gedreven ontwikkeling
 ```bash
 # Blader door beschikbare sjablonen
 azd template list
 
-# Initialiseer vanaf een sjabloon
+# Initialiseren vanuit een sjabloon
 azd init --template <template-name>
 ```
 
 ### 2. Infrastructuur als Code
-- **Bicep** - Domeinspecifieke taal van Azure
+- **Bicep** - Azure's domeinspecifieke taal
 - **Terraform** - Multi-cloud infrastructuurtool
-- **ARM Templates** - Azure Resource Manager-templates
+- **ARM-templates** - Azure Resource Manager-templates
 
 ### 3. Geïntegreerde workflows
 ```bash
-# Volledige implementatieworkflow
-azd up            # Provision + Deploy: dit is volledig geautomatiseerd voor de eerste configuratie
+# Volledige deployment-workflow
+azd up            # Provision + Deploy dit is zonder handmatige tussenkomst voor de eerste configuratie
 
 # 🧪 NIEUW: Bekijk infrastructuurwijzigingen vóór implementatie (VEILIG)
 azd provision --preview    # Simuleer infrastructuurimplementatie zonder wijzigingen aan te brengen
 
-azd provision     # Maak Azure-resources aan; gebruik dit als je de infrastructuur bijwerkt
-azd deploy        # Implementeer applicatiecode of herimplementeer de applicatiecode na een update
+azd provision     # Maak Azure-resources aan. Gebruik dit als je de infrastructuur bijwerkt
+azd deploy        # Implementeer applicatiecode of implementeer de applicatiecode opnieuw nadat je een update hebt uitgevoerd
 azd down          # Ruim resources op
 ```
 
-#### 🛡️ Veilige infrastructuurplanning met preview
-Het `azd provision --preview`-commando is een belangrijke verbetering voor veilige implementaties:
-- **Dry-run-analyse** - Toont wat wordt gemaakt, gewijzigd of verwijderd
+#### 🛡️ Veilige infrastructuurplanning met Preview
+Het `azd provision --preview`-commando is een game-changer voor veilige implementaties:
+- **Dry-run-analyse** - Geeft weer wat aangemaakt, gewijzigd of verwijderd zal worden
 - **Geen risico** - Er worden geen daadwerkelijke wijzigingen in je Azure-omgeving aangebracht
-- **Teamsamenwerking** - Deel previewresultaten vóór implementatie
-- **Kostenraming** - Begrijp resourcekosten voordat je je vastlegt
+- **Team samenwerking** - Deel previewresultaten vóór implementatie
+- **Kostenschatting** - Begrijp resourcekosten vóór toewijzing
 
 ```bash
 # Voorbeeld van een voorvertoning-workflow
 azd provision --preview           # Bekijk wat er zal veranderen
 # Beoordeel de uitvoer, bespreek met het team
-azd provision                     # Pas wijzigingen met vertrouwen toe
+azd provision                     # Voer wijzigingen met vertrouwen door
 ```
 
-### 📊 Visualisatie: AZD-ontwikkelworkflow
+### 📊 Visueel: AZD-ontwikkelworkflow
 
 ```mermaid
 graph LR
@@ -259,10 +274,10 @@ graph LR
     D -->|Ja| E[azd up]
     D -->|Nee| F[azd provision --preview]
     F -->|Wijzigingen beoordelen| G[azd provision]
-    E -->|Provisioning & uitrol| H[Resources actief]
-    G -->|Infrastructuur bijwerken| H
+    E -->|Voorziet en rolt uit| H[Hulpbronnen actief]
+    G -->|Werk infrastructuur bij| H
     H -->|Monitoren| I[azd monitor]
-    I -->|Code aanpassen| J[azd deploy]
+    I -->|Code wijzigen| J[azd deploy]
     J -->|Alleen code opnieuw uitrollen| H
     H -->|Opruimen| K[azd down]
     
@@ -272,14 +287,14 @@ graph LR
     style H fill:#c5e1a5
     style K fill:#ffcdd2
 ```
-**Workflowuitleg:**
-1. **Init** - Begin met een template of nieuw project
-2. **Auth** - Meld je aan bij Azure
+**Workflow Uitleg:**
+1. **Init** - Begin met een sjabloon of nieuw project
+2. **Auth** - Authenticeer bij Azure
 3. **Environment** - Maak een geïsoleerde implementatieomgeving
 4. **Preview** - 🆕 Bekijk altijd eerst de infrastructuurwijzigingen (veilige werkwijze)
-5. **Provision** - Maak bij of werk Azure-resources bij
+5. **Provision** - Maak/werk Azure-resources bij
 6. **Deploy** - Push je applicatiecode
-7. **Monitor** - Observeer de applicatieprestaties
+7. **Monitor** - Observeer applicatieprestaties
 8. **Iterate** - Breng wijzigingen aan en deploy de code opnieuw
 9. **Cleanup** - Verwijder resources wanneer klaar
 
@@ -290,6 +305,26 @@ azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
+
+### 5. Extensies en AI-commando's
+
+azd gebruikt een extensiesysteem om mogelijkheden toe te voegen buiten de kern-CLI. Dit is vooral nuttig voor AI-workloads:
+
+```bash
+# Beschikbare extensies weergeven
+azd extension list
+
+# Installeer de Foundry-agents-extensie
+azd extension install azure.ai.agents
+
+# Initialiseer een AI-agentproject vanuit een manifest
+azd ai agent init -m agent-manifest.yaml
+
+# Start de MCP-server voor AI-ondersteunde ontwikkeling (Alpha)
+azd mcp start
+```
+
+> Extensies worden in detail behandeld in [Hoofdstuk 2: AI-First ontwikkeling](../chapter-02-ai-development/agents.md) en de referentie [AZD AI CLI-commando's](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 Projectstructuur
 
@@ -353,17 +388,17 @@ Omgevingsspecifieke configuratie:
 }
 ```
 
-## 🎪 Veelvoorkomende workflows met praktische oefeningen
+## 🎪 Veelvoorkomende workflows met praktijkoefeningen
 
-> **💡 Leertip:** Volg deze oefeningen in volgorde om je AZD-vaardigheden geleidelijk op te bouwen.
+> **💡 Leertip:** Volg deze oefeningen op volgorde om je AZD-vaardigheden geleidelijk op te bouwen.
 
 ### 🎯 Oefening 1: Initialiseer je eerste project
 
-**Doel:** Maak een AZD-project en verken de structuur ervan
+**Doel:** Maak een AZD-project en verken de structuur
 
 **Stappen:**
 ```bash
-# Gebruik een beproefd sjabloon
+# Gebruik een bewezen sjabloon
 azd init --template todo-nodejs-mongo
 
 # Verken de gegenereerde bestanden
@@ -375,30 +410,30 @@ ls -la  # Bekijk alle bestanden, inclusief verborgen bestanden
 # - src/ (applicatiecode)
 ```
 
-**✅ Succes:** Je hebt azure.yaml, infra/ en src/ mappen
+**✅ Succes:** Je hebt azure.yaml, infra/, en src/ mappen
 
 ---
 
-### 🎯 Oefening 2: Implementeren naar Azure
+### 🎯 Oefening 2: Deployen naar Azure
 
-**Doel:** Volledige end-to-end-implementatie voltooien
+**Doel:** Volledige end-to-end implementatie
 
 **Stappen:**
 ```bash
-# 1. Authenticeren
+# 1. Meld je aan
 az login && azd auth login
 
-# 2. Maak een omgeving
+# 2. Maak een omgeving aan
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
 # 3. Wijzigingen bekijken (AANBEVOLEN)
 azd provision --preview
 
-# 4. Alles implementeren
+# 4. Rol alles uit
 azd up
 
-# 5. Controleer implementatie
+# 5. Controleer de uitrol
 azd show    # Bekijk de URL van je app
 ```
 
@@ -409,16 +444,16 @@ azd show    # Bekijk de URL van je app
 
 ### 🎯 Oefening 3: Meerdere omgevingen
 
-**Doel:** Deploy naar dev en staging
+**Doel:** Deployen naar dev en staging
 
 **Stappen:**
 ```bash
-# Als je al een dev-omgeving hebt, maak dan een staging-omgeving aan
+# Heb al dev, maak staging aan
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Wissel tussen beide
+# Schakel tussen beide
 azd env list
 azd env select dev
 ```
@@ -429,7 +464,7 @@ azd env select dev
 
 ### 🛡️ Schone lei: `azd down --force --purge`
 
-Wanneer je volledig moet resetten:
+Wanneer je volledig wilt resetten:
 
 ```bash
 azd down --force --purge
@@ -437,12 +472,12 @@ azd down --force --purge
 
 **Wat het doet:**
 - `--force`: Geen bevestigingsprompts
-- `--purge`: Verwijdert alle lokale status en Azure-resources
+- `--purge`: Verwijdert alle lokale staat en Azure-resources
 
 **Gebruik wanneer:**
-- Implementatie is halverwege mislukt
-- Van project wisselen
-- Je hebt een frisse start nodig
+- Implementatie halverwege mislukt
+- Wisselen van projecten
+- Nodig voor een nieuwe start
 
 ---
 
@@ -460,56 +495,56 @@ azd init
 azd init .
 ```
 
-### Ontwikkelingscyclus
+### Ontwikkelcyclus
 ```bash
-# Stel de ontwikkelomgeving in
+# Ontwikkelomgeving opzetten
 azd auth login
 azd env new dev
 azd env select dev
 
-# Rol alles uit
+# Alles implementeren
 azd up
 
-# Breng wijzigingen aan en rol opnieuw uit
+# Breng wijzigingen aan en implementeer opnieuw
 azd deploy
 
-# Ruim op als je klaar bent
-azd down --force --purge # Een commando in de Azure Developer CLI is een **volledige reset** voor je omgeving—vooral handig wanneer je problemen oplost met mislukte implementaties, verweesde resources opruimt of je voorbereidt op een nieuwe uitrol.
+# Opruimen wanneer klaar
+azd down --force --purge # commando in de Azure Developer CLI is een **harde reset** voor je omgeving—uiterst handig wanneer je mislukte implementaties oplost, verweesde resources opruimt of je voorbereidt op een schone heruitrol.
 ```
 
 ## Begrijpen van `azd down --force --purge`
-Het `azd down --force --purge`-commando is een krachtige manier om je azd-omgeving en alle bijbehorende resources volledig af te breken. Hier is een overzicht van wat elke vlag doet:
+Het `azd down --force --purge`-commando is een krachtig middel om je azd-omgeving en alle bijbehorende resources volledig af te breken. Hier is een overzicht van wat elke vlag doet:
 ```
 --force
 ```
 - Slaat bevestigingsprompts over.
-- Handig voor automatisering of scripten waar handmatige input niet mogelijk is.
-- Zorgt ervoor dat het verwijderen doorgaat zonder onderbreking, zelfs als de CLI inconsistenties detecteert.
+- Handig voor automatisering of scripting waar handmatige input niet mogelijk is.
+- Zorgt dat de teardown zonder onderbreking doorgaat, zelfs als de CLI inconsistenties detecteert.
 
 ```
 --purge
 ```
 Verwijdert **alle bijbehorende metadata**, inclusief:
-Omgevingstoestand
+Omgevingsstatus
 Lokale `.azure` map
-Gecachte deploymentinformatie
-Voorkomt dat azd eerdere implementaties "onthoudt", wat problemen kan veroorzaken zoals niet-overeenkomende resourcegroepen of verouderde registry-referenties.
+Gecachte implementatiegegevens
+Voorkomt dat azd eerdere implementaties "onthoudt", wat problemen kan veroorzaken zoals niet-overeenkomende resourcegroepen of verouderde registry-verwijzingen.
 
 
 ### Waarom beide gebruiken?
-Wanneer je vastloopt met `azd up` door achtergebleven status of gedeeltelijke implementaties, zorgt deze combinatie voor een **schone lei**.
+Wanneer je vastloopt met `azd up` door achtergebleven staat of gedeeltelijke implementaties, zorgt deze combinatie voor een **schone lei**.
 
-Het is vooral handig na handmatige verwijderingen van resources in de Azure-portal of bij het wisselen van templates, omgevingen of naamgevingsconventies voor resourcegroepen.
+Het is vooral nuttig na handmatige verwijderingen van resources in de Azure-portal of bij het wisselen van templates, omgevingen of naamgevingsconventies van resourcegroepen.
 
 
 ### Meerdere omgevingen beheren
 ```bash
-# Maak een stagingomgeving
+# Maak een staging-omgeving
 azd env new staging
 azd env select staging
 azd up
 
-# Schakel terug naar dev
+# Schakel terug naar ontwikkelomgeving
 azd env select dev
 
 # Vergelijk omgevingen
@@ -518,11 +553,11 @@ azd env list
 
 ## 🔐 Authenticatie en referenties
 
-Het begrijpen van authenticatie is cruciaal voor succesvolle azd-implementaties. Azure gebruikt meerdere authenticatiemethoden, en azd maakt gebruik van dezelfde credentialketen die door andere Azure-tools wordt gebruikt.
+Begrijpen van authenticatie is cruciaal voor succesvolle azd-implementaties. Azure gebruikt meerdere authenticatiemethoden, en azd maakt gebruik van dezelfde credential-keten die door andere Azure-tools wordt gebruikt.
 
 ### Azure CLI-authenticatie (`az login`)
 
-Voordat je azd gebruikt, moet je authenticeren bij Azure. De meest voorkomende methode is via Azure CLI:
+Voordat je azd gebruikt, moet je authenticeren bij Azure. De meest voorkomende methode is het gebruik van Azure CLI:
 
 ```bash
 # Interactieve aanmelding (opent browser)
@@ -537,7 +572,7 @@ az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 # Controleer huidige aanmeldingsstatus
 az account show
 
-# Beschikbare abonnementen weergeven
+# Toon beschikbare abonnementen
 az account list --output table
 
 # Stel standaardabonnement in
@@ -545,14 +580,14 @@ az account set --subscription <subscription-id>
 ```
 
 ### Authenticatiestroom
-1. **Interactieve aanmelding**: Opent je standaardbrowser voor authenticatie
+1. **Interactive Login**: Opent je standaardbrowser voor authenticatie
 2. **Device Code Flow**: Voor omgevingen zonder browsertoegang
-3. **Service Principal**: Voor automatisering en CI/CD-scenario's
+3. **Service Principal**: Voor automatiserings- en CI/CD-scenario's
 4. **Managed Identity**: Voor op Azure gehoste applicaties
 
 ### DefaultAzureCredential-keten
 
-`DefaultAzureCredential` is een credentialtype dat een vereenvoudigde authenticatie-ervaring biedt door automatisch meerdere credentialbronnen in een specifieke volgorde te proberen:
+`DefaultAzureCredential` is een credentialtype dat een vereenvoudigde authenticatie-ervaring biedt door automatisch meerdere credential-bronnen in een specifieke volgorde te proberen:
 
 #### Volgorde van de credential-keten
 ```mermaid
@@ -564,7 +599,7 @@ graph TD
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[Interactieve browser]
+    H --> I[Interactieve Browser]
 ```
 #### 1. Omgevingsvariabelen
 ```bash
@@ -575,30 +610,30 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
-Wordt automatisch gebruikt in:
+Gebruikt automatisch in:
 - Azure Kubernetes Service (AKS) met Workload Identity
 - GitHub Actions met OIDC-federatie
-- Andere scenario's met gefedereerde identiteit
+- Andere gefedereerde identity-scenario's
 
 #### 3. Managed Identity
 Voor Azure-resources zoals:
-- Virtual Machines
+- Virtuele Machines
 - App Service
 - Azure Functions
 - Container Instances
 
 ```bash
-# Controleren of het op een Azure-resource met een managed identity draait
+# Controleer of het draait op een Azure-resource met een beheerde identiteit
 az account show --query "user.type" --output tsv
-# Retourneert: "servicePrincipal" als er een managed identity wordt gebruikt
+# Geeft "servicePrincipal" terug als er een beheerde identiteit wordt gebruikt
 ```
 
 #### 4. Integratie met ontwikkeltools
 - **Visual Studio**: Gebruikt automatisch het aangemelde account
-- **VS Code**: Gebruikt de Azure Account-extensiereferenties
+- **VS Code**: Gebruikt de referenties van de Azure Account-extensie
 - **Azure CLI**: Gebruikt `az login`-referenties (meest gebruikelijk voor lokale ontwikkeling)
 
-### AZD-authenticatieconfiguratie
+### AZD-authenticatie-instellingen
 
 ```bash
 # Methode 1: Gebruik Azure CLI (Aanbevolen voor ontwikkeling)
@@ -611,7 +646,7 @@ azd auth login --use-device-code  # Voor headless-omgevingen
 # Methode 3: Controleer de authenticatiestatus
 azd auth login --check-status
 
-# Methode 4: Afmelden en opnieuw authenticeren
+# Methode 4: Uitloggen en opnieuw authenticeren
 azd auth logout
 azd auth login
 ```
@@ -620,7 +655,7 @@ azd auth login
 
 #### Voor lokale ontwikkeling
 ```bash
-# 1. Aanmelden met Azure CLI
+# 1. Inloggen met Azure CLI
 az login
 
 # 2. Controleer het juiste abonnement
@@ -655,27 +690,27 @@ azd auth login
 
 ### Veelvoorkomende authenticatieproblemen en oplossingen
 
-#### Probleem: "No subscription found"
+#### Probleem: "Geen abonnement gevonden"
 ```bash
-# Oplossing: Stel het standaardabonnement in
+# Oplossing: Standaardabonnement instellen
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Probleem: "Insufficient permissions"
+#### Probleem: "Onvoldoende machtigingen"
 ```bash
-# Oplossing: Controleer en wijs vereiste rollen toe
+# Oplossing: Controleer en wijs de vereiste rollen toe
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
 # Veelvoorkomende vereiste rollen:
 # - Contributor (voor resourcebeheer)
-# - User Access Administrator (voor roltoewijzingen)
+# - User Access Administrator (voor het toewijzen van rollen)
 ```
 
-#### Probleem: "Token expired"
+#### Probleem: "Token verlopen"
 ```bash
-# Oplossing: opnieuw authenticeren
+# Oplossing: Opnieuw authenticeren
 az logout
 az login
 azd auth logout
@@ -698,27 +733,26 @@ az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Multi-tenantscenario's
+#### Multi-tenant scenario's
 ```bash
 # Schakel tussen tenants
 az login --tenant tenant1.onmicrosoft.com
-# Uitrollen naar tenant 1
+# Deploy naar tenant 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Uitrollen naar tenant 2
+# Deploy naar tenant 2
 azd up
 ```
 
 ### Beveiligingsoverwegingen
+1. **Credential Storage**: Sla nooit referenties in broncode op
+2. **Scope Limitation**: Gebruik het principe van minste privileges voor service principals
+3. **Token Rotation**: Draai regelmatig de geheimen van service principals
+4. **Audit Trail**: Controleer authenticatie- en implementatieactiviteiten
+5. **Network Security**: Gebruik waar mogelijk privé-eindpunten
 
-1. **Opslag van referenties**: Sla nooit referenties op in de broncode
-2. **Beperk de scope**: Gebruik het least-privilege-principe voor service principals
-3. **Tokenrotatie**: Roteer regelmatig service principal-secrets
-4. **Audittrail**: Monitor authenticatie- en deploymentactiviteiten
-5. **Netwerkbeveiliging**: Gebruik waar mogelijk private endpoints
-
-### Problemen oplossen bij authenticatie
+### Probleemoplossing bij authenticatie
 
 ```bash
 # Authenticatieproblemen debuggen
@@ -729,14 +763,14 @@ az account get-access-token
 # Veelvoorkomende diagnostische opdrachten
 whoami                          # Huidige gebruikerscontext
 az ad signed-in-user show      # Azure AD-gebruikersgegevens
-az group list                  # Toegang tot resources testen
+az group list                  # Toegang tot resource testen
 ```
 
 ## Begrijpen van `azd down --force --purge`
 
 ### Ontdekking
 ```bash
-azd template list              # Door sjablonen bladeren
+azd template list              # Bladeren door sjablonen
 azd template show <template>   # Sjabloondetails
 azd init --help               # Initialisatieopties
 ```
@@ -750,9 +784,9 @@ azd config list             # Configuratie-instellingen
 
 ### Monitoring
 ```bash
-azd monitor                  # Open de monitoring in het Azure-portal
-azd monitor --logs           # Bekijk applicatielogboeken
-azd monitor --live           # Bekijk realtime statistieken
+azd monitor                  # Open monitoring in het Azure-portal
+azd monitor --logs           # Bekijk applicatielogs
+azd monitor --live           # Bekijk realtime-statistieken
 azd pipeline config          # Stel CI/CD in
 ```
 
@@ -769,55 +803,55 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Gebruik templates
-- Begin met bestaande templates
-- Pas aan naar jouw behoeften
-- Maak herbruikbare templates voor je organisatie
+### 2. Maak gebruik van sjablonen
+- Begin met bestaande sjablonen
+- Pas aan voor jouw behoeften
+- Maak herbruikbare sjablonen voor je organisatie
 
 ### 3. Omgevingsisolatie
-- Gebruik aparte omgevingen voor dev/staging/prod
-- Zet nooit rechtstreeks naar productie vanuit een lokale machine
+- Gebruik gescheiden omgevingen voor ontwikkeling/acceptatie/productie
+- Nooit rechtstreeks naar productie implementeren vanaf je lokale machine
 - Gebruik CI/CD-pijplijnen voor productie-implementaties
 
-### 4. Configuratiemanagement
+### 4. Configuratiebeheer
 - Gebruik omgevingsvariabelen voor gevoelige gegevens
-- Bewaar configuratie in versiebeheer
-- Documenteer omgeving-specifieke instellingen
+- Houd configuratie in versiebeheer
+- Documenteer omgevingsspecifieke instellingen
 
 ## Leertraject
 
 ### Beginner (Week 1-2)
 1. Installeer azd en authenticeer
-2. Implementeer een eenvoudige template
+2. Implementeer een eenvoudig sjabloon
 3. Begrijp de projectstructuur
 4. Leer basiscommando's (up, down, deploy)
 
 ### Gevorderd (Week 3-4)
-1. Pas templates aan
+1. Pas sjablonen aan
 2. Beheer meerdere omgevingen
 3. Begrijp infrastructuurcode
-4. Stel CI/CD-pijplijnen in
+4. Zet CI/CD-pijplijnen op
 
 ### Geavanceerd (Week 5+)
-1. Maak aangepaste templates
+1. Maak aangepaste sjablonen
 2. Geavanceerde infrastructuurpatronen
-3. Implementaties in meerdere regio's
+3. Multi-regio-implementaties
 4. Enterprise-grade configuraties
 
 ## Volgende stappen
 
-**📖 Ga verder met Hoofdstuk 1:**
+**📖 Ga door met hoofdstuk 1:**
 - [Installatie & Configuratie](installation.md) - Installeer en configureer azd
-- [Je Eerste Project](first-project.md) - Volledige praktische tutorial
-- [Configuratiegids](configuration.md) - Geavanceerde configuratie-opties
+- [Je Eerste Project](first-project.md) - Voltooi de praktische tutorial
+- [Configuratiehandleiding](configuration.md) - Geavanceerde configuratie-opties
 
 **🎯 Klaar voor het volgende hoofdstuk?**
-- [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md) - Begin met het bouwen van AI-toepassingen
+- [Hoofdstuk 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md) - Begin met het bouwen van AI-toepassingen
 
 ## Aanvullende bronnen
 
-- [Overzicht Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template Gallery](https://azure.github.io/awesome-azd/)
+- [Overzicht van Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Sjabloongalerij](https://azure.github.io/awesome-azd/)
 - [Communityvoorbeelden](https://github.com/Azure-Samples)
 
 ---
@@ -828,16 +862,16 @@ azd init --template template1
 
 **Q: Wat is het verschil tussen AZD en Azure CLI?**
 
-A: Azure CLI (`az`) is voor het beheren van individuele Azure-resources. AZD (`azd`) is voor het beheren van gehele applicaties:
+A: Azure CLI (`az`) is voor het beheren van individuele Azure-resources. AZD (`azd`) is voor het beheren van volledige applicaties:
 
 ```bash
-# Azure CLI - resourcebeheer op laag niveau
+# Azure CLI - beheer van resources op laag niveau
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...veel meer opdrachten nodig
+# ...nog veel meer commando's nodig
 
-# AZD - Beheer op applicatieniveau
-azd up  # Implementeert de volledige app met alle resources
+# AZD - beheer op applicatieniveau
+azd up  # Implementeert de gehele applicatie met alle resources
 ```
 
 **Denk er zo over:**
@@ -846,7 +880,7 @@ azd up  # Implementeert de volledige app met alle resources
 
 ---
 
-**Q: Moet ik Bicep of Terraform kennen om AZD te gebruiken?**
+**Q: Heb ik Bicep of Terraform nodig om AZD te gebruiken?**
 
 A: Nee! Begin met sjablonen:
 ```bash
@@ -859,7 +893,7 @@ Je kunt Bicep later leren om de infrastructuur aan te passen. Sjablonen bieden w
 
 ---
 
-**Q: Hoeveel kost het om AZD-sjablonen uit te voeren?**
+**Q: Hoeveel kost het om AZD-sjablonen te draaien?**
 
 A: Kosten variëren per sjabloon. De meeste ontwikkelingssjablonen kosten $50-150/maand:
 
@@ -871,23 +905,23 @@ azd provision --preview
 azd down --force --purge  # Verwijdert alle bronnen
 ```
 
-**Pro tip:** Gebruik gratis tiers waar beschikbaar:
-- App Service: F1 (Free) tier
-- Azure OpenAI: 50,000 tokens/maand gratis
+**Handige tip:** Gebruik waar mogelijk gratis niveaus:
+- App Service: F1 (gratis) tier
+- Microsoft Foundry Models: Azure OpenAI 50.000 tokens/maand gratis
 - Cosmos DB: 1000 RU/s gratis tier
 
 ---
 
 **Q: Kan ik AZD gebruiken met bestaande Azure-resources?**
 
-A: Ja, maar het is makkelijker om vanaf nul te beginnen. AZD werkt het beste wanneer het de volledige levenscyclus beheert. Voor bestaande resources:
+A: Ja, maar het is gemakkelijker om vanaf nul te beginnen. AZD werkt het beste wanneer het de volledige levenscyclus beheert. Voor bestaande resources:
 
 ```bash
-# Optie 1: Bestaande resources importeren (geavanceerd)
+# Optie 1: Bestaande resources importeren (gevorderd)
 azd init
 # Wijzig vervolgens infra/ om naar bestaande resources te verwijzen
 
-# Optie 2: Begin opnieuw (aanbevolen)
+# Optie 2: Vanaf nul beginnen (aanbevolen)
 azd init --template matching-your-stack
 azd up  # Maakt een nieuwe omgeving aan
 ```
@@ -899,7 +933,7 @@ azd up  # Maakt een nieuwe omgeving aan
 A: Commit het AZD-project naar Git (maar NIET de .azure-map):
 
 ```bash
-# Al standaard in .gitignore opgenomen
+# Staat standaard al in .gitignore
 .azure/        # Bevat geheimen en omgevingsgegevens
 *.env          # Omgevingsvariabelen
 
@@ -910,11 +944,11 @@ azd env new <their-name>-dev
 azd up
 ```
 
-Iedereen krijgt identieke infrastructuur vanuit dezelfde sjablonen.
+Iedereen krijgt identieke infrastructuur uit dezelfde sjablonen.
 
 ---
 
-### Problemen oplossen
+### Probleemoplossingsvragen
 
 **Q: "azd up" is halverwege mislukt. Wat moet ik doen?**
 
@@ -926,11 +960,11 @@ azd show
 
 # Veelvoorkomende oplossingen:
 
-# 1. Als de quota is overschreden:
+# 1. Als de quota zijn overschreden:
 azd env set AZURE_LOCATION "westus2"  # Probeer een andere regio
 
-# 2. Als er een naamconflict is voor de resource:
-azd down --force --purge  # Maak een schone lei
+# 2. Als er een conflict is met de resource-naam:
+azd down --force --purge  # Begin opnieuw
 azd up  # Opnieuw proberen
 
 # 3. Als de authenticatie is verlopen:
@@ -947,12 +981,12 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Hoe zet ik alleen codewijzigingen uit zonder opnieuw te provisioneren?**
+**Q: Hoe implementeer ik alleen codewijzigingen zonder herprovisioning?**
 
 A: Gebruik `azd deploy` in plaats van `azd up`:
 
 ```bash
-azd up          # Eerste keer: inrichten + uitrollen (traag)
+azd up          # Eerste keer: inrichten en uitrollen (traag)
 
 # Breng codewijzigingen aan...
 
@@ -960,8 +994,8 @@ azd deploy      # Volgende keren: alleen uitrollen (snel)
 ```
 
 Snelheidsvergelijking:
-- `azd up`: 10-15 minuten (richt infrastructuur in)
-- `azd deploy`: 2-5 minuten (alleen code)
+- `azd up`: 10-15 minutes (richt infrastructuur in)
+- `azd deploy`: 2-5 minutes (alleen code)
 
 ---
 
@@ -972,16 +1006,16 @@ A: Ja! Bewerk de Bicep-bestanden in `infra/`:
 ```bash
 # Na azd init
 cd infra/
-code main.bicep  # Bewerk in VS Code
+code main.bicep  # Bewerken in VS Code
 
-# Bekijk wijzigingen
+# Wijzigingen bekijken
 azd provision --preview
 
 # Wijzigingen toepassen
 azd provision
 ```
 
-**Tip:** Begin klein - verander eerst SKUs:
+**Tip:** Begin klein - wijzig eerst SKUs:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -993,7 +1027,7 @@ sku: {
 
 **Q: Hoe verwijder ik alles wat AZD heeft aangemaakt?**
 
-A: Eén commando verwijdert alle resources:
+A: Met één commando verwijder je alle resources:
 
 ```bash
 azd down --force --purge
@@ -1007,24 +1041,25 @@ azd down --force --purge
 
 **Voer dit altijd uit wanneer:**
 - Klaar met het testen van een sjabloon
-- Overschakelen naar een ander project
-- Wil opnieuw beginnen
+- Je overschakelt naar een ander project
+- Je vanaf nul opnieuw wilt beginnen
 
-**Kostenbesparing:** Het verwijderen van ongebruikte resources = $0 kosten
+**Kostensbesparing:** Het verwijderen van ongebruikte resources = $0 kosten
 
 ---
 
-**Q: Wat als ik per ongeluk resources in de Azure-portal heb verwijderd?**
+**Q: Wat als ik per ongeluk resources heb verwijderd in de Azure Portal?**
 
-A: De AZD-status kan uit sync raken. Schoon begin:
+A: De AZD-status kan uit sync raken. Schone lei-benadering:
+
 ```bash
-# 1. Verwijder lokale toestand
+# 1. Verwijder lokale status
 azd down --force --purge
 
 # 2. Begin opnieuw
 azd up
 
-# Alternatief: Laat AZD detecteren en oplossen
+# Alternatief: Laat AZD het detecteren en herstellen
 azd provision  # Zal ontbrekende resources aanmaken
 ```
 
@@ -1032,9 +1067,9 @@ azd provision  # Zal ontbrekende resources aanmaken
 
 ### Gevorderde vragen
 
-**Q: Kan ik AZD gebruiken in CI/CD-pijplijnen?**
+**Q: Kan ik AZD in CI/CD-pijplijnen gebruiken?**
 
-A: Ja! Voorbeeld met GitHub Actions:
+A: Ja! Voorbeeld voor GitHub Actions:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1071,20 +1106,20 @@ jobs:
 A: AZD integreert automatisch met Azure Key Vault:
 
 ```bash
-# Geheimen worden opgeslagen in Key Vault, niet in code
+# Geheimen worden opgeslagen in Key Vault, niet in de code
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
 # AZD doet dit automatisch:
-# 1. Maakt een Key Vault aan
+# 1. Maakt Key Vault aan
 # 2. Slaat het geheim op
 # 3. Geeft de app toegang via een beheerde identiteit
 # 4. Injecteert tijdens runtime
 ```
 
-**Commit nooit:**
+**Nooit committen:**
 - `.azure/` map (bevat omgevingsgegevens)
 - `.env` bestanden (lokale geheimen)
-- Connection strings
+- Connectiestrings
 
 ---
 
@@ -1107,11 +1142,11 @@ azd up
 azd env list
 ```
 
-Voor echte multi-regio-apps, pas de Bicep-sjablonen aan om gelijktijdig naar meerdere regio's uit te rollen.
+Voor echte multi-regio-apps, pas de Bicep-sjablonen aan om tegelijkertijd naar meerdere regio's te implementeren.
 
 ---
 
-**Q: Waar kan ik hulp krijgen als ik vastzit?**
+**Q: Waar kan ik hulp krijgen als ik vastloop?**
 
 1. **AZD-documentatie:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
@@ -1119,46 +1154,46 @@ Voor echte multi-regio-apps, pas de Bicep-sjablonen aan om gelijktijdig naar mee
 4. **Stack Overflow:** Tag `azure-developer-cli`
 5. **Deze cursus:** [Probleemoplossingsgids](../chapter-07-troubleshooting/common-issues.md)
 
-**Pro tip:** Voordat je hulp vraagt, voer het volgende uit:
+**Handige tip:** Voordat je vraagt, voer het volgende uit:
 ```bash
 azd show       # Toont huidige status
-azd version    # Toont je versie
+azd version    # Toont jouw versie
 ```
-Voeg deze informatie toe aan je vraag voor snellere hulp.
+Voeg deze info toe aan je vraag voor snellere hulp.
 
 ---
 
-## 🎓 Wat is de volgende stap?
+## 🎓 Wat nu?
 
 Je begrijpt nu de basisprincipes van AZD. Kies je pad:
 
 ### 🎯 Voor beginners:
-1. **Volgende:** [Installatie & Configuratie](installation.md) - Installeer AZD op je machine
+1. **Volgend:** [Installatie & Configuratie](installation.md) - Installeer AZD op je machine
 2. **Vervolgens:** [Je Eerste Project](first-project.md) - Implementeer je eerste app
 3. **Oefen:** Voltooi alle 3 oefeningen in deze les
 
 ### 🚀 Voor AI-ontwikkelaars:
-1. **Sla over naar:** [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Deploy:** Begin met `azd init --template get-started-with-ai-chat`
+1. **Ga naar:** [Hoofdstuk 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Implementeer:** Begin met `azd init --template get-started-with-ai-chat`
 3. **Leer:** Bouw terwijl je implementeert
 
 ### 🏗️ Voor ervaren ontwikkelaars:
-1. **Bekijk:** [Configuratiegids](configuration.md) - Geavanceerde instellingen
-2. **Verken:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Diepgaande Bicep-uitleg
-3. **Bouw:** Maak aangepaste sjablonen voor je stack
+1. **Bekijk:** [Configuratiehandleiding](configuration.md) - Geavanceerde instellingen
+2. **Verken:** [Infrastructuur als code](../chapter-04-infrastructure/provisioning.md) - Diepgaande Bicep-verkenning
+3. **Bouw:** Maak aangepaste sjablonen voor jouw stack
 
 ---
 
-**Hoofdstuknavigatie:**
-- **📚 Cursusstart**: [AZD voor beginners](../../README.md)
+**Navigatie door hoofdstukken:**
+- **📚 Cursus startpagina**: [AZD voor beginners](../../README.md)
 - **📖 Huidig hoofdstuk**: Hoofdstuk 1 - Basis & Quick Start  
 - **⬅️ Vorige**: [Cursusoverzicht](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Volgende**: [Installatie & Configuratie](installation.md)
-- **🚀 Volgend hoofdstuk**: [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Volgend hoofdstuk**: [Hoofdstuk 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. De originele versie van het document in de oorspronkelijke taal dient als de gezaghebbende bron te worden beschouwd. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

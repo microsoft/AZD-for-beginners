@@ -1,24 +1,24 @@
 # 5. Pas een sjabloon aan
 
-!!! tip "AAN HET EINDE VAN DEZE MODULE KUNT U"
+!!! tip "AAN HET EINDE VAN DIT MODULE ZULT U IN STAAT ZIJN OM"
 
-    - [ ] De standaard AI Agent-mogelijkheden onderzocht
+    - [ ] De standaard AI-agentmogelijkheden verkend
     - [ ] AI Search toegevoegd met uw eigen index
     - [ ] Tracing-metrics geactiveerd en geanalyseerd
-    - [ ] Een evaluatieronde uitgevoerd
+    - [ ] Een evaluatie uitgevoerd
     - [ ] Een red-teaming scan uitgevoerd
-    - [ ] **Lab 5: Een aanpassingsplan gemaakt** 
+    - [ ] **Lab 5: Een aanpassingsplan opgesteld** 
 
 ---
 
-## 5.1 AI Agent-mogelijkheden
+## 5.1 AI-agentmogelijkheden
 
 !!! success "We hebben dit voltooid in Lab 01"
 
-- **File Search**: OpenAI's ingebouwde bestandszoekfunctie voor kennisopvraging
-- **Citations**: Automatische bronvermelding in antwoorden
-- **Customizable Instructions**: Pas het gedrag en de persoonlijkheid van de agent aan
-- **Tool Integration**: Uitbreidbaar toolsysteem voor aangepaste functionaliteit
+- **Bestandszoekfunctie**: OpenAI's ingebouwde bestandszoekfunctie voor kennisopvraging
+- **Bronvermelding**: Automatische bronvermelding in antwoorden
+- **Aanpasbare instructies**: Pas het gedrag en de persoonlijkheid van de agent aan
+- **Toolintegratie**: Uitbreidbaar toolsysteem voor aangepaste mogelijkheden
 
 ---
 
@@ -40,22 +40,22 @@
 
 ---
 
-**OpenAI File Search (Standaard):**
+**OpenAI File Search (Default):**
 
 - Ingebouwd in Foundry Agents
 - Automatische documentverwerking en indexering
-- Geen extra configuratie vereist
+- Geen aanvullende configuratie vereist
 
 **Azure AI Search (Optioneel):**
 
-- Hybride semantische en vectorzoekopdrachten
+- Hybride semantische en vectorzoekfunctie
 - Aangepast indexbeheer
 - Geavanceerde zoekmogelijkheden
 - Vereist `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Tracing & Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Tracing en monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
 !!! task "Om dit te voltooien moeten we wijzigingen aanbrengen en opnieuw implementeren"    
     
@@ -66,100 +66,100 @@
 
 **Tracing:**
 
-- OpenTelemetry-integratie
-- Volgen van verzoeken/antwoorden
-- Prestatiemaatstaven
+- Integratie met OpenTelemetry
+- Het bijhouden van verzoeken/antwoorden
+- Prestatiestatistieken
 - Beschikbaar in het Microsoft Foundry-portaal
 
 **Logging:**
 
-- Applicatielogboeken in Container Apps
+- Applicatielogs in Container Apps
 - Gestructureerde logging met correlatie-ID's
 - Realtime en historische logweergave
 
 ---
 
-## 5.4 [Agent Evaluation](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agent-evaluatie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Lokale evaluatie:**
 
-- Ingebouwde beoordelaars voor kwaliteitsbeoordeling
+- Ingebouwde evaluators voor kwaliteitsbeoordeling
 - Aangepaste evaluatiescripts
-- Prestatiebenchmarks
+- Prestatiebenchmarking
 
 **Continue monitoring:**
 
-- Automatische evaluatie van live-interacties
-- Bijhouden van kwaliteitsmetriek
-- Detectie van prestatieverslechtering
+- Automatische evaluatie van live interacties
+- Bijhouden van kwaliteitsstatistieken
+- Detectie van prestatie-regressies
 
 **CI/CD-integratie:**
 
 - GitHub Actions-workflow
-- Geautomatiseerd testen en evaluatie
-- Statistische vergelijkende tests
+- Geautomatiseerde tests en evaluatie
+- Statistische vergelijkingstests
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming-agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
 - Geautomatiseerde beveiligingsscans
 - Risicobeoordeling voor AI-systemen
-- Veiligheidsevaluatie over meerdere categorieën
+- Veiligheidsbeoordeling over meerdere categorieën
 
 **Authenticatie:**
 
 - Managed Identity voor Azure-services
 - Optionele Azure App Service-authenticatie
-- Basic-auth fallback voor ontwikkeling
+- Basic-auth als fallback voor ontwikkeling
 
 
 
-!!! quote "AAN HET EINDE VAN DIT LAB ZOU U MOETEN HEBBEN"
+!!! quote "AAN HET EINDE VAN DIT LAB ZOU U HET VOLGENDE MOETEN HEBBEN"
     - [ ] Definieer uw scenariovereisten
     - [ ] Aangepaste omgevingsvariabelen (config)
     - [ ] Aangepaste agentinstructies (taak)
-    - [ ] Het aangepaste sjabloon uitgerold (app)
-    - [ ] Voltooide post-deployment taken (handmatig)
-    - [ ] Voer een testevaluatie uit
+    - [ ] Het aangepaste sjabloon geïmplementeerd (app)
+    - [ ] Post-implementatietaken voltooid (handmatig)
+    - [ ] Een testevaluatie uitgevoerd
 
-Dit voorbeeld toont hoe het sjabloon kan worden aangepast voor een enterprise retail-usecase met twee gespecialiseerde agenten en meerdere modelimplementaties.
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Pas het aan voor jou!
+## 5.6 Pas het aan voor u!
 
 ### 5.6.1. Scenariovereisten
 
-#### **Agentimplementaties:** 
+#### **Agent-implementaties:** 
 
-   - Shopper-agent: Helpt klanten producten te vinden en te vergelijken
-   - Loyalty-agent: Beheert klantbeloningen en promoties
+   - Shopper Agent: Helpt klanten producten te vinden en te vergelijken
+   - Loyalty Agent: Beheert klantbeloningen en promoties
 
 #### **Modelimplementaties:**
 
    - `gpt-4.1`: Primair chatmodel
-   - `o3`: Redeneermodel voor complexe queries
+   - `o3`: Redeneringsmodel voor complexe queries
    - `gpt-4.1-nano`: Lichtgewicht model voor eenvoudige interacties
-   - `text-embedding-3-large`: Hoogwaardige embeddings voor zoekopdrachten
+   - `text-embedding-3-large`: Embeddings van hoge kwaliteit voor zoekopdrachten
 
 #### **Functies:**
 
    - Tracing en monitoring ingeschakeld
    - AI Search voor productcatalogus
-   - Evaluatiekader voor kwaliteitsborging
-   - Red-teaming voor veiligheidsvalidatie
+   - Evaluatiekader voor kwaliteitswaarborging
+   - Red teaming voor beveiligingsvalidatie
 
 ---
 
 ### 5.6.2 Scenario-implementatie
 
 
-#### 5.6.2.1. Pre-deploy-configuratie
+#### 5.6.2.1. Configuratie vóór implementatie
 
-Maak een setup-script (`setup-retail.sh`)
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -175,21 +175,21 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configureer het primaire chatmodel (gpt-4o als dichtstbijzijnde beschikbare optie tot gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Configureer primair chatmodel (gpt-4.1 als dichtstbijzijnde beschikbare optie)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configureer het embeddingmodel voor verbeterde zoekresultaten
+# Configureer embeddingmodel voor verbeterde zoekfunctie
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Stel de agentnaam in (maakt de eerste agent aan)
+# Stel agentnaam in (maakt de eerste agent aan)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configureer de zoekindex
+# Configureer zoekindex
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -200,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: Agentinstructies
 
-Maak `custom-agents/shopper-agent-instructions.md`:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Maak `custom-agents/loyalty-agent-instructions.md`:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -250,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: Deploymentscript
 
-Maak `deploy-retail.sh`:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -258,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Controleer vereisten
+# Valideer de vereisten
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -275,12 +275,12 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Controleer quota in geselecteerde regio
+# Controleer de quota in de geselecteerde regio
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -291,7 +291,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Implementeer infrastructuur en applicatie
+# Implementeer de infrastructuur en de applicatie
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
@@ -321,16 +321,16 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Post-deploymentconfiguratie
+#### 5.6.2.4: Post-implementatieconfiguratie
 
-Maak `configure-retail-agents.sh`:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Haal informatie over de implementatie op
+# Haal implementatie-informatie op
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -380,7 +380,7 @@ echo "
 
 ### 5.6.3: Testen en validatie
 
-Maak `test-retail-deployment.sh`:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Voer evaluatie uit indien geconfigureerd
+# Voer evaluatie uit als geconfigureerd
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -429,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Verwachte uitkomsten
+### 5.6.4 Verwachte resultaten
 
-Na het volgen van deze implementatiegids heb je:
+Na het volgen van deze implementatiegids heeft u:
 
-1. **Uitgerolde infrastructuur:**
+1. **Geïmplementeerde infrastructuur:**
 
       - Microsoft Foundry-project met modelimplementaties
-      - Container Apps die de webapp hosten
-      - AI Search-service voor de productcatalogus
+      - Container Apps die de webapplicatie hosten
+      - AI Search-service voor productcatalogus
       - Application Insights voor monitoring
 
 2. **Initiële agent:**
 
-      - Shopper-agent geconfigureerd met basisinstructies
+      - Shopper Agent geconfigureerd met basisinstructies
       - Bestandszoekfunctie ingeschakeld
       - Tracing en monitoring geconfigureerd
 
 3. **Klaar voor aanpassing:**
 
-      - Framework voor het toevoegen van de Loyalty-agent
+      - Framework voor het toevoegen van de Loyalty Agent
       - Aangepaste instructiesjablonen
       - Test- en validatiescripts
       - Monitoring- en evaluatieconfiguratie
 
-4. **Productieklaarheid:**
+4. **Productieklaar:**
 
       - Beveiligingsscans met red teaming
       - Prestatiemonitoring
       - Kwaliteitsevaluatiekader
       - Schaalbare architectuur
 
-Dit voorbeeld toont aan hoe het AZD-sjabloon kan worden uitgebreid en aangepast voor specifieke enterprise-scenario's, terwijl best practices voor beveiliging, monitoring en schaalbaarheid behouden blijven.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal geldt als de gezaghebbende bron. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerd geïnterpreteerde informatie die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

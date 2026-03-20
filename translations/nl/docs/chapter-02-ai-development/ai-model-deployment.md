@@ -1,28 +1,28 @@
-# AI Model Deployment with Azure Developer CLI
+# AI-modelimplementatie met Azure Developer CLI
 
-**Hoofdstuknavigatie:**
-- **📚 Course Home**: [AZD voor Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
+**Hoofdstuk-navigatie:**
+- **📚 Cursus Startpagina**: [AZD For Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
 - **⬅️ Vorige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
-Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen met AZD-sjablonen, en behandelt alles van modelselectie tot productiedeploymentscenario's.
+Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen met AZD-sjablonen, en behandelt alles van modelkeuze tot productie-implementatiepatronen.
 
 ## Inhoudsopgave
 
-- [Strategie voor modelselectie](../../../../docs/chapter-02-ai-development)
-- [AZD-configuratie voor AI-modellen](../../../../docs/chapter-02-ai-development)
-- [Implementatiepatronen](../../../../docs/chapter-02-ai-development)
-- [Modelbeheer](../../../../docs/chapter-02-ai-development)
-- [Productieoverwegingen](../../../../docs/chapter-02-ai-development)
-- [Monitoring en observeerbaarheid](../../../../docs/chapter-02-ai-development)
+- [Strategie voor modelselectie](#strategie-voor-modelselectie)
+- [AZD-configuratie voor AI-modellen](#azd-configuratie-voor-ai-modellen)
+- [Implementatiepatronen](#implementatiepatronen)
+- [Modelbeheer](#modelbeheer)
+- [Productieoverwegingen](#productieoverwegingen)
+- [Monitoring en observeerbaarheid](#monitoring-en-observeerbaarheid)
 
 ## Strategie voor modelselectie
 
-### Azure OpenAI-modellen
+### Microsoft Foundry-modellen
 
-Kies het juiste model voor uw gebruiksscenario:
+Kies het juiste model voor uw use-case:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,12 +52,12 @@ services:
 
 ### Capaciteitsplanning voor modellen
 
-| Model Type | Gebruiksscenario | Aanbevolen capaciteit | Kostenoverwegingen |
-|------------|------------------|----------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kostenefficiënt voor de meeste workloads |
-| GPT-4 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premiumfuncties |
+| Modeltype | Use-case | Aanbevolen capaciteit | Kostenoverwegingen |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Kosteneffectief voor de meeste workloads |
+| gpt-4.1 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premium functies |
 | Text-embedding-ada-002 | Zoeken, RAG | 30-120 TPM | Essentieel voor semantische zoekopdrachten |
-| Whisper | Spraak-naar-tekst | 10-50 TPM | Workloads voor audiaverwerking |
+| Whisper | Spraak-naar-tekst | 10-50 TPM | Audioverwerkingsworkloads |
 
 ## AZD-configuratie voor AI-modellen
 
@@ -70,10 +70,10 @@ Maak modelimplementaties via Bicep-sjablonen:
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -130,7 +130,7 @@ Configureer uw applicatieomgeving:
 # Configuratie van .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
@@ -146,13 +146,13 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Geschikt voor:
 - Ontwikkeling en testen
 - Applicaties voor één markt
-- Kostoptimalisatie
+- Kostenoptimalisatie
 
 ### Patroon 2: Implementatie in meerdere regio's
 
@@ -169,12 +169,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Geschikt voor:
 - Wereldwijde applicaties
-- Vereisten voor hoge beschikbaarheid
+- Hoge beschikbaarheidseisen
 - Verdeling van belasting
 
 ### Patroon 3: Hybride implementatie
 
-Combineer Azure OpenAI met andere AI-services:
+Combineer Microsoft Foundry-modellen met andere AI-diensten:
 
 ```bicep
 // Hybrid AI services
@@ -213,7 +213,7 @@ Volg modelversies in uw AZD-configuratie:
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -237,7 +237,7 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### A/B-testen
@@ -249,11 +249,11 @@ param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -293,7 +293,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Auto-scalingconfiguratie
+### Configuratie van autoscaling
 
 Configureer autoscaling voor Container Apps:
 
@@ -333,7 +333,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Kostenoptimalisatie
 
-Implementeer kostenbeheersing:
+Implementeer kostenbeheersmaatregelen:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -442,7 +442,7 @@ class AITelemetry:
 
 ### Gezondheidscontroles
 
-Implementeer gezondheidsmonitoring voor AI-services:
+Implementeer gezondheidsmonitoring voor AI-diensten:
 
 ```python
 # Healthcheck-eindpunten
@@ -455,7 +455,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # OpenAI-verbinding testen
+        # Test OpenAI-verbinding
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,30 +473,30 @@ async def check_ai_models():
 
 ## Volgende stappen
 
-1. **Bekijk de [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** voor integratiepatronen van services
-2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktijkervaring
-3. **Implementeer [Productie AI-praktijken](production-ai-practices.md)** voor enterprise-implementaties
-4. **Bekijk de [AI-foutopsporingsgids](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
+1. **Bekijk de [Microsoft Foundry Integratiehandleiding](microsoft-foundry-integration.md)** voor service-integratiepatronen
+2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktische ervaring
+3. **Implementeer de [Production AI Practices](production-ai-practices.md)** voor bedrijfsimplementaties
+4. **Bekijk de [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
 
-## Hulpbronnen
+## Bronnen
 
-- [Beschikbaarheid van Azure OpenAI-modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Beschikbaarheid van Microsoft Foundry-modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentatie Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Schaalbaarheid van Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Kostenoptimalisatie voor AI-modellen](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Hoofdstuknavigatie:**
-- **📚 Course Home**: [AZD voor Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
+**Hoofdstuk-navigatie:**
+- **📚 Cursus Startpagina**: [AZD For Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
 - **⬅️ Vorige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vrijwaring**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, wees u ervan bewust dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het document in de oorspronkelijke taal moet als gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,123 +1,123 @@
-# Implementatiehandleiding - Beheersing van AZD-implementaties
+# Implementatiehandleiding - Meesterschap in AZD-implementaties
 
 **Hoofdstuknavigatie:**
 - **📚 Cursus Startpagina**: [AZD voor beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 4 - Infrastructuur als Code & Implementatie
-- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
-- **➡️ Volgende**: [Bronnen provisioneren](provisioning.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 5: Multi-agent AI-oplossingen](../../examples/retail-scenario.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 4 - Infrastructuur als Code & Implementatie
+- **⬅️ Vorig hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+- **➡️ Volgend**: [Hulpbronnen voorzien](provisioning.md)
+- **🚀 Volgend hoofdstuk**: [Hoofdstuk 5: Multi-agent AI-oplossingen](../../examples/retail-scenario.md)
 
 ## Inleiding
 
-Deze## Begrijpen van het implementatieprocesuitgebreide gids behandelt alles wat je moet weten over het implementeren van applicaties met Azure Developer CLI, van basisimplementaties met één opdracht tot geavanceerde productiescenario's met aangepaste hooks, meerdere omgevingen en CI/CD-integratie. Beheers de volledige implementatielevenscyclus met praktische voorbeelden en best practices.
+Deze uitgebreide handleiding behandelt alles wat je moet weten over het implementeren van applicaties met de Azure Developer CLI, van eenvoudige één-commando-implementaties tot geavanceerde productiescenario's met aangepaste hooks, meerdere omgevingen en CI/CD-integratie. Beheers de volledige implementatielevenscyclus met praktische voorbeelden en best practices.
 
 ## Leerdoelen
 
-By completing this guide, you will:
-- Beheers alle Azure Developer CLI-implementatieopdrachten en workflows
-- Begrijp de volledige implementatielevenscyclus van provisioning tot monitoring
-- Implementeer aangepaste implementatie-hooks voor pre- en post-implementatie-automatisering
-- Configureer meerdere omgevingen met omgeving-specifieke parameters
-- Stel geavanceerde implementatiestrategieën in, waaronder blue-green en canary-implementaties
-- Integreer azd-implementaties met CI/CD-pijplijnen en DevOps-workflows
+Door deze handleiding te doorlopen zul je:
+- Alle Azure Developer CLI-implementatieopdrachten en workflows onder de knie krijgen
+- De volledige implementatielevenscyclus begrijpen van provisioning tot monitoring
+- Aangepaste implementatiehooks implementeren voor pre- en post-implementatie automatisering
+- Meerdere omgevingen configureren met omgevingsspecifieke parameters
+- Geavanceerde implementatiestrategieën opzetten, waaronder blue-green en canary-implementaties
+- azd-implementaties integreren met CI/CD-pijplijnen en DevOps-workflows
 
 ## Leerresultaten
 
-Upon completion, you will be able to:
-- Voer zelfstandig alle azd-implementatieworkflows uit en los problemen op
-- Ontwerp en implementeer aangepaste implementatieautomatisering met hooks
-- Configureer productieklare implementaties met juiste beveiliging en monitoring
-- Beheer complexe multi-omgeving implementatiescenario's
-- Optimaliseer implementatieprestaties en implementeer rollback-strategieën
-- Integreer azd-implementaties in enterprise DevOps-praktijken
+Na voltooiing kun je:
+- Alle azd-implementatieworkflows zelfstandig uitvoeren en troubleshooten
+- Aangepaste implementatieautomatisering ontwerpen en implementeren met hooks
+- Productieklaar implementaties configureren met juiste beveiliging en monitoring
+- Complexe multi-omgeving implementatiescenario's beheren
+- Implementatieprestaties optimaliseren en rollback-strategieën implementeren
+- azd-implementaties integreren in enterprise DevOps-praktijken
 
 ## Overzicht van implementatie
 
 Azure Developer CLI biedt verschillende implementatieopdrachten:
-- `azd up` - Volledige workflow (voorziening + implementatie)
+- `azd up` - Volledige workflow (provision + deploy)
 - `azd provision` - Alleen Azure-resources maken/bijwerken
 - `azd deploy` - Alleen applicatiecode implementeren
-- `azd package` - Bouw en pak applicaties in
+- `azd package` - Applicaties bouwen en verpakken
 
 ## Basisimplementatieworkflows
 
 ### Volledige implementatie (azd up)
 De meest voorkomende workflow voor nieuwe projecten:
 ```bash
-# Alles helemaal opnieuw uitrollen
+# Rol alles vanaf nul uit
 azd up
 
-# Uitrollen met specifieke omgeving
+# Rol uit met een specifieke omgeving
 azd up --environment production
 
-# Uitrollen met aangepaste parameters
+# Rol uit met aangepaste parameters
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Alleen infrastructuurimplementatie
+### Alleen infrastructuur implementatie
 Wanneer je alleen Azure-resources hoeft bij te werken:
 ```bash
-# Infrastructuur inrichten/bijwerken
+# Voorzien/bijwerken van infrastructuur
 azd provision
 
-# Inrichten met een proefuitvoering (dry-run) om wijzigingen te bekijken
+# Voorzien met dry-run om wijzigingen te bekijken
 azd provision --preview
 
-# Specifieke diensten inrichten
+# Specifieke diensten voorzien
 azd provision --service database
 ```
 
-### Alleen code-implementatie
+### Alleen code implementatie
 Voor snelle applicatie-updates:
 ```bash
-# Alle services implementeren
+# Implementeer alle services
 azd deploy
 
 # Verwachte uitvoer:
 # Services implementeren (azd deploy)
 # - web: Implementeren... Klaar
 # - api: Implementeren... Klaar
-# SUCCES: Uw implementatie is voltooid in 2 minuten 15 seconden
+# SUCCES: Uw implementatie is voltooid in 2 minuten en 15 seconden
 
-# Een specifieke service implementeren
+# Implementeer specifieke service
 azd deploy --service web
 azd deploy --service api
 
-# Implementeren met aangepaste buildargumenten
+# Implementeer met aangepaste build-argumenten
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Implementatie verifiëren
+# Controleer implementatie
 azd show --output json | jq '.services'
 ```
 
-### ✅ Implementatieverificatie
+### ✅ Verificatie van implementatie
 
-Controleer na elke implementatie of deze succesvol is:
+Controleer na elke implementatie het succes:
 
 ```bash
-# Controleer of alle services actief zijn
+# Controleer of alle services draaien
 azd show
 
-# Test health-eindpunten
+# Test gezondheids-eindpunten
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Controleer op fouten (opent standaard in de browser)
+# Houd fouten in de gaten (opent standaard in de browser)
 azd monitor --logs
 ```
 
 **Succescriteria:**
-- ✅ Alle services tonen de status "Actief"
-- ✅ Health-eindpunten geven HTTP 200 terug
-- ✅ Geen foutlogboeken in de laatste 5 minuten
-- ✅ Applicatie reageert op testverzoeken
+- ✅ Alle services tonen de status "Running"
+- ✅ Health-endpoints geven HTTP 200 terug
+- ✅ Geen foutlogs in de laatste 5 minuten
+- ✅ Applicatie reageert op testaanvragen
 
-## 🏗️ Begrijpen van het implementatieproces
+## 🏗️ Begrip van het implementatieproces
 
-### Fase 1: Pre-voorzieningshooks
+### Fase 1: Pre-provision hooks
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Fase 2: Infrastructuurvoorziening
+### Fase 2: Infrastructuur provisioning
 - Leest infrastructuursjablonen (Bicep/Terraform)
 - Maakt of werkt Azure-resources bij
 - Configureert netwerken en beveiliging
-- Stelt monitoring en logging in
+- Zet monitoring en logging op
 
-### Fase 3: Post-voorzieningshooks
+### Fase 3: Post-provision hooks
 ```yaml
 hooks:
   postprovision:
@@ -153,9 +153,9 @@ hooks:
 ### Fase 4: Applicatieverpakking
 - Bouwt applicatiecode
 - Maakt implementatie-artifacten
-- Pakt in voor het doelplatform (containers, ZIP-bestanden, enz.)
+- Verpakt voor het doelplatform (containers, ZIP-bestanden, enz.)
 
-### Fase 5: Pre-deployhooks
+### Fase 5: Pre-deploy hooks
 ```yaml
 hooks:
   predeploy:
@@ -170,10 +170,10 @@ hooks:
 
 ### Fase 6: Applicatie-implementatie
 - Implementeert verpakte applicaties naar Azure-services
-- Bijwerkt configuratie-instellingen
+- Werkt configuratie-instellingen bij
 - Start/herstart services
 
-### Fase 7: Post-deployhooks
+### Fase 7: Post-deploy hooks
 ```yaml
 hooks:
   postdeploy:
@@ -188,7 +188,7 @@ hooks:
 
 ## 🎛️ Implementatieconfiguratie
 
-### Service-specifieke implementatie-instellingen
+### Servicespecifieke implementatie-instellingen
 ```yaml
 # azure.yaml
 services:
@@ -218,14 +218,14 @@ services:
     buildCommand: npm install --production
 ```
 
-### Omgeving-specifieke configuraties
+### Omgevingsspecifieke configuraties
 ```bash
 # Ontwikkelomgeving
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging-omgeving
+# Stagingomgeving
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -285,7 +285,7 @@ azd up --environment production-blue
 # Test de blauwe omgeving
 ./scripts/test-environment.sh production-blue
 
-# Schakel het verkeer over naar blauw (handmatige DNS/loadbalancer-update)
+# Schakel het verkeer naar blauw (handmatige DNS/loadbalancer-update)
 ./scripts/switch-traffic.sh production-blue
 
 # Ruim de groene omgeving op
@@ -338,7 +338,7 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Container-implementaties
+## 🐳 Containerimplementaties
 
 ### Container-app-implementaties
 ```yaml
@@ -392,9 +392,9 @@ CMD ["npm", "start"]
 
 ## ⚡ Prestatieoptimalisatie
 
-### Service-specifieke implementaties
+### Servicespecifieke implementaties
 ```bash
-# Rol een specifieke service uit om sneller te itereren
+# Rol een specifieke service uit voor snellere iteratie
 azd deploy --service web
 azd deploy --service api
 
@@ -402,7 +402,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### Buildcaching
+### Build-caching
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -415,7 +415,7 @@ services:
 ### Efficiënte code-implementaties
 ```bash
 # Gebruik azd deploy (niet azd up) voor alleen codewijzigingen
-# Dit slaat de provisionering van de infrastructuur over en is veel sneller
+# Dit slaat het inrichten van de infrastructuur over en is veel sneller
 azd deploy
 
 # Implementeer een specifieke service voor de snelste iteratie
@@ -424,15 +424,15 @@ azd deploy --service api
 
 ## 🔍 Implementatiemonitoring
 
-### Realtime implementatiemonitoring
+### Real-time implementatiemonitoring
 ```bash
-# Applicatie in realtime bewaken
+# Applicatie in realtime monitoren
 azd monitor --live
 
-# Bekijk applicatielogs
+# Applicatielogs bekijken
 azd monitor --logs
 
-# Controleer de status van de implementatie
+# Implementatiestatus controleren
 azd show
 ```
 
@@ -485,7 +485,7 @@ echo "✅ Deployment validation completed successfully"
 
 ## 🔐 Beveiligingsoverwegingen
 
-### Beheer van geheimen
+### Secretsbeheer
 ```bash
 # Sla geheimen veilig op
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identiteits- en toegangsbeheer
+### Identiteit en toegangsbeheer
 ```yaml
 services:
   api:
@@ -553,12 +553,12 @@ git checkout main
 # Bekijk infrastructuurwijzigingen voordat u ze toepast
 azd provision --preview
 
-# Voor het terugdraaien van infrastructuur, gebruik versiebeheer:
+# Voor het terugrollen van de infrastructuur, gebruik versiebeheer:
 git revert HEAD  # Draai infrastructuurwijzigingen terug
-azd provision    # Pas de vorige infrastructuurtoestand toe
+azd provision    # Herstel de vorige staat van de infrastructuur
 ```
 
-### Rollback van databasemigratie
+### Rollback van databasemigraties
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -576,17 +576,17 @@ echo "Database rollback completed"
 
 ### Volg implementatieprestaties
 ```bash
-# Bekijk huidige implementatiestatus
+# Bekijk de huidige implementatiestatus
 azd show
 
-# Bewaak de applicatie met Application Insights
+# Houd de applicatie in de gaten met Application Insights
 azd monitor --overview
 
-# Bekijk live statistieken
+# Bekijk realtime statistieken
 azd monitor --live
 ```
 
-### Aangepaste metricsverzameling
+### Aangepaste metriekverzameling
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,20 +603,20 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Beste praktijken
+## 🎯 Best practices
 
-### 1. Consistentie van omgevingen
+### 1. Omgevingsconsistentie
 ```bash
 # Gebruik consistente naamgeving
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Behoud pariteit tussen omgevingen
+# Zorg voor gelijke omgevingen
 ./scripts/sync-environments.sh
 ```
 
-### 2. Validatie van infrastructuur
+### 2. Infrastructuurvalidatie
 ```bash
 # Bekijk infrastructuurwijzigingen vóór implementatie
 azd provision --preview
@@ -628,7 +628,7 @@ az bicep lint --file infra/main.bicep
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Integratie van testen
+### 3. Testintegratie
 ```yaml
 hooks:
   predeploy:
@@ -667,12 +667,12 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Volgende stappen
 
-- [Voorziening van bronnen](provisioning.md) - Diepgaande duik in infrastructuurbeheer
-- [Pre-implementatieplanning](../chapter-06-pre-deployment/capacity-planning.md) - Plan je implementatiestrategie
+- [Hulpbronnen voorzien](provisioning.md) - Diepgaande blik op infrastructuurbeheer
+- [Pre-deploy planning](../chapter-06-pre-deployment/capacity-planning.md) - Plan je implementatiestrategie
 - [Veelvoorkomende problemen](../chapter-07-troubleshooting/common-issues.md) - Los implementatieproblemen op
-- [Beste praktijken](../chapter-07-troubleshooting/debugging.md) - Productieklare implementatiestrategieën
+- [Best practices](../chapter-07-troubleshooting/debugging.md) - Productieklare implementatiestrategieën
 
-## 🎯 Hands-on implementatieoefeningen
+## 🎯 Praktische implementatie-oefeningen
 
 ### Oefening 1: Incrementele implementatieworkflow (20 minuten)
 **Doel**: Beheers het verschil tussen volledige en incrementele implementaties
@@ -689,30 +689,30 @@ echo "Full deployment: $(date)" > deployment-log.txt
 # Breng een wijziging in de code aan
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Alleen code uitrollen (snel)
+# Rol alleen code uit (snel)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
 # Vergelijk tijden
 cat deployment-log.txt
 
-# Opruimen
+# Ruim op
 azd down --force --purge
 ```
 
 **Succescriteria:**
 - [ ] Volledige implementatie duurt 5-15 minuten
-- [ ] Alleen-code-implementatie duurt 2-5 minuten
-- [ ] Codewijzigingen worden weergegeven in de geïmplementeerde app
+- [ ] Alleen code-implementatie duurt 2-5 minuten
+- [ ] Codewijzigingen zijn zichtbaar in de geïmplementeerde app
 - [ ] Infrastructuur ongewijzigd na `azd deploy`
 
-**Leerresultaat**: `azd deploy` is 50-70% sneller dan `azd up` voor codewijzigingen
+**Leeruitkomst**: `azd deploy` is 50-70% sneller dan `azd up` voor codewijzigingen
 
 ### Oefening 2: Aangepaste implementatiehooks (30 minuten)
-**Doel**: Implementeer pre- en post-implementatie-automatisering
+**Doel**: Implementeer pre- en post-implementatie automatisering
 
 ```bash
-# Maak pre-deploy-validatiescript
+# Maak een pre-deploy-validatiescript
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -724,7 +724,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# Controleer op niet-gecommitte wijzigingen
+# Controleer op niet-gecommitteerde wijzigingen
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Maak post-deploy smoke-test
+# Maak een post-deploy smoke-test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -771,13 +771,13 @@ azd deploy
 ```
 
 **Succescriteria:**
-- [ ] Pre-deployscript draait vóór implementatie
-- [ ] Implementatie stopt als tests falen
-- [ ] Post-deploy smoke-test valideert gezondheid
-- [ ] Hooks voeren uit in de juiste volgorde
+- [ ] Pre-deploy script draait vóór de implementatie
+- [ ] Implementatie wordt afgebroken als tests falen
+- [ ] Post-deploy smoke test valideert de gezondheid
+- [ ] Hooks worden in de juiste volgorde uitgevoerd
 
 ### Oefening 3: Multi-omgeving implementatiestrategie (45 minuten)
-**Doel**: Implementeer een gefaseerde implementatieworkflow (dev → staging → production)
+**Doel**: Implementeer een gefaseerde implementatieworkflow (dev → staging → productie)
 
 ```bash
 # Maak een implementatiescript
@@ -829,51 +829,51 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# Maak omgevingen aan
+# Maak omgevingen
 azd env new dev
 azd env new staging
 azd env new production
 
-# Voer gefaseerde uitrol uit
+# Voer een gefaseerde uitrol uit
 ./deploy-staged.sh
 ```
 
 **Succescriteria:**
-- [ ] Dev-omgeving wordt succesvol geïmplementeerd
-- [ ] Staging-omgeving wordt succesvol geïmplementeerd
+- [ ] Dev-omgeving implementeert succesvol
+- [ ] Staging-omgeving implementeert succesvol
 - [ ] Handmatige goedkeuring vereist voor productie
 - [ ] Alle omgevingen hebben werkende healthchecks
-- [ ] Kan indien nodig terugrollen
+- [ ] Kan terugrollen indien nodig
 
 ### Oefening 4: Rollback-strategie (25 minuten)
-**Doel**: Implementeer en test rollback van implementaties met Git
+**Doel**: Implementeer en test rollback van implementatie met Git
 
 ```bash
-# Uitrollen v1
+# Rol v1 uit
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Sla v1 commit-hash op
+# Sla de commit-hash van v1 op
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Uitrollen v2 met een brekende wijziging
+# Rol v2 uit met een brekende wijziging
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Detecteer falen en rol terug
+# Detecteer een fout en rol terug
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Terugrollen met git
+    # Rol terug met git
     git revert HEAD --no-edit
     
     # Rol de omgeving terug
     azd env set APP_VERSION "1.0.0"
     
-    # Heruitrollen v1
+    # Rol v1 opnieuw uit
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -883,7 +883,7 @@ fi
 **Succescriteria:**
 - [ ] Kan implementatiefouten detecteren
 - [ ] Rollback-script wordt automatisch uitgevoerd
-- [ ] Applicatie keert terug naar werkende toestand
+- [ ] Applicatie keert terug naar werkende staat
 - [ ] Healthchecks slagen na rollback
 
 ## 📊 Bijhouden van implementatiestatistieken
@@ -891,7 +891,7 @@ fi
 ### Volg je implementatieprestaties
 
 ```bash
-# Maak script voor implementatiestatistieken
+# Maak script voor deploymentstatistieken
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -918,31 +918,31 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Analyseer je metrics:**
+**Analyseer je metriek:**
 ```bash
-# Bekijk de implementatiegeschiedenis
+# Bekijk implementatiegeschiedenis
 cat deployment-metrics.csv
 
-# Bereken de gemiddelde implementatietijd
+# Bereken gemiddelde implementatietijd
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Aanvullende bronnen
 
-- [Azure Developer CLI Implementatiereferentie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service-implementatie](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps-implementatie](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions-implementatie](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigatie**
-- **Vorig Lessen**: [Je eerste project](../chapter-01-foundation/first-project.md)
-- **Volgende Les**: [Voorziening van bronnen](provisioning.md)
+- **Vorig les**: [Je eerste project](../chapter-01-foundation/first-project.md)
+- **Volgende les**: [Hulpbronnen voorzien](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u zich ervan bewust te zijn dat automatische vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Vrijwaring**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de brontaal moet als de gezaghebbende bron worden beschouwd. Voor kritische informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

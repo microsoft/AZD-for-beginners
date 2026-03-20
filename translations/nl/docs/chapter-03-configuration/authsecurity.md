@@ -1,30 +1,30 @@
-# Authenticatiepatronen en Beheerde identiteit
+# Authenticatiepatronen en Managed Identity
 
-⏱️ **Geschatte tijd**: 45-60 minuten | 💰 **Kostenimpact**: Gratis (geen extra kosten) | ⭐ **Complexiteit**: Midden
+⏱️ **Geschatte tijd**: 45-60 minuten | 💰 **Kostenimpact**: Gratis (geen extra kosten) | ⭐ **Complexiteit**: Gemiddeld
 
-**📚 Leerlijn:**
-- ← Vorige: [Configuratiebeheer](configuration.md) - Omgevingsvariabelen en geheimen beheren
-- 🎯 **Je bevindt je hier**: Authenticatie & Beveiliging (Beheerde identiteit, Key Vault, beveiligde patronen)
+**📚 Leerpad:**
+- ← Vorige: [Configuratiebeheer](configuration.md) - Beheren van omgevingsvariabelen en secrets
+- 🎯 **Je bevindt je hier**: Authenticatie & Beveiliging (Managed Identity, Key Vault, veilige patronen)
 - → Volgende: [Eerste project](first-project.md) - Bouw je eerste AZD-applicatie
-- 🏠 [Cursusstart](../../README.md)
+- 🏠 [Cursus Home](../../README.md)
 
 ---
 
 ## Wat je zult leren
 
-Door deze les te voltooien, leer je:
-- Begrijp Azure-authenticatiepatronen (sleutels, connectiestrings, beheerde identiteit)
-- Implementeer **Beheerde identiteit** voor wachtwoordloze authenticatie
-- Beveilig geheimen met **Azure Key Vault**-integratie
-- Configureer **role-based access control (RBAC)** voor AZD-implementaties
-- Pas beveiligingsbest practices toe in Container Apps en Azure-services
-- Migreer van sleutelgebaseerde naar identiteitsgebaseerde authenticatie
+Door deze les te voltooien zul je:
+- Azure-authenticatiepatronen begrijpen (sleutels, connection strings, managed identity)
+- **Managed Identity** implementeren voor wachtwoordloze authenticatie
+- Secrets beveiligen met **Azure Key Vault**-integratie
+- Rolgebaseerde toegangscontrole (RBAC) configureren voor AZD-implementaties
+- Beveiligingsbest practices toepassen in Container Apps en Azure-services
+- Migreren van sleutelgebaseerde naar identiteitsgebaseerde authenticatie
 
-## Waarom beheerde identiteit belangrijk is
+## Waarom Managed Identity belangrijk is
 
 ### Het probleem: Traditionele authenticatie
 
-**Voor beheerde identiteit:**
+**Voor Managed Identity:**
 ```javascript
 // ❌ BEVEILIGINGSRISICO: Hardgecodeerde geheimen in de code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
@@ -33,103 +33,103 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Problemen:**
-- 🔴 **Blootgestelde geheimen** in code, configuratiebestanden, omgevingsvariabelen
-- 🔴 **Rotatie van referenties** vereist codewijzigingen en herimplementatie
-- 🔴 **Audit nachtmerries** - wie had wanneer toegang tot wat?
-- 🔴 **Verspreiding** - geheimen verspreid over meerdere systemen
+- 🔴 **Blootgestelde secrets** in code, configuratiebestanden, omgevingsvariabelen
+- 🔴 **Wisselen van referenties** vereist codewijzigingen en herimplementatie
+- 🔴 **Audit-nightmares** - wie had wanneer toegang?
+- 🔴 **Verspreiding** - secrets verspreid over meerdere systemen
 - 🔴 **Compliance-risico's** - faalt beveiligingsaudits
 
-### De oplossing: Beheerde identiteit
+### De oplossing: Managed Identity
 
-**Na beheerde identiteit:**
+**Na Managed Identity:**
 ```javascript
 // ✅ VEILIG: Geen geheimen in de code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure handelt authenticatie automatisch af
+  credential  // Azure regelt authenticatie automatisch
 );
 ```
 
 **Voordelen:**
-- ✅ **Geen geheimen** in code of configuratie
-- ✅ **Automatische rotatie** - Azure regelt dit
-- ✅ **Volledige audittrail** in Azure AD-logboeken
+- ✅ **Geen secrets** in code of configuratie
+- ✅ **Automatische rotatie** - Azure regelt het
+- ✅ **Volledige audittrail** in Azure AD-logs
 - ✅ **Gecentraliseerde beveiliging** - beheer in de Azure Portal
 - ✅ **Compliance-klaar** - voldoet aan beveiligingsnormen
 
-**Analogie**: Traditionele authenticatie is als het dragen van meerdere fysieke sleutels voor verschillende deuren. Beheerde identiteit is als een beveiligingsbadge die automatisch toegang verleent op basis van wie je bent—geen sleutels om te verliezen, kopiëren of te roteren.
+**Analogie**: Traditionele authenticatie is als het dragen van meerdere fysieke sleutels voor verschillende deuren. Managed Identity is als een beveiligingsbadge die automatisch toegang verleent op basis van wie je bent—geen sleutels om te verliezen, kopiëren of te roteren.
 
 ---
 
 ## Architectuuroverzicht
 
-### Authenticatiestroom met beheerde identiteit
+### Authenticatiestroom met Managed Identity
 
 ```mermaid
 sequenceDiagram
     participant App as Uw applicatie<br/>(Container-app)
     participant MI as Beheerde identiteit<br/>(Azure AD)
-    participant KV as Keykluis
-    participant Storage as Azure-opslag
+    participant KV as Key Vault
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Toegangstoken aanvragen<br/>(automatisch)
-    MI->>MI: Identiteit verifiëren<br/>(geen wachtwoord nodig)
-    MI-->>App: Token retourneren<br/>(geldig 1 uur)
+    App->>MI: Vraag toegangstoken op<br/>(automatisch)
+    MI->>MI: Verifieer identiteit<br/>(geen wachtwoord nodig)
+    MI-->>App: Retourneer token<br/>(geldig 1 uur)
     
-    App->>KV: Geheim ophalen<br/>(met token)
+    App->>KV: Haal geheim op<br/>(met token)
     KV->>KV: Controleer RBAC-machtigingen
-    KV-->>App: Geheime waarde retourneren
+    KV-->>App: Retourneer geheime waarde
     
-    App->>Storage: Blob uploaden<br/>(met token)
+    App->>Storage: Upload blob<br/>(met token)
     Storage->>Storage: Controleer RBAC-machtigingen
     Storage-->>App: Succes
     
-    App->>DB: Gegevens opvragen<br/>(met token)
+    App->>DB: Vraag gegevens op<br/>(met token)
     DB->>DB: Controleer SQL-machtigingen
-    DB-->>App: Resultaten retourneren
+    DB-->>App: Retourneer resultaten
     
     Note over App,DB: Alle authenticatie is wachtwoordloos!
 ```
-### Typen beheerde identiteiten
+### Typen Managed Identities
 
 ```mermaid
 graph TB
     MI[Beheerde identiteit]
     SystemAssigned[Systeem-toegewezen identiteit]
-    UserAssigned[Door gebruiker toegewezen identiteit]
+    UserAssigned[Gebruikers-toegewezen identiteit]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
     SystemAssigned --> SA1[Levenscyclus gekoppeld aan resource]
-    SystemAssigned --> SA2[Automatische creatie/verwijdering]
-    SystemAssigned --> SA3[Het meest geschikt voor een enkele resource]
+    SystemAssigned --> SA2[Automatisch aanmaken/verwijderen]
+    SystemAssigned --> SA3[Het beste voor één resource]
     
     UserAssigned --> UA1[Onafhankelijke levenscyclus]
-    UserAssigned --> UA2[Handmatige creatie/verwijdering]
+    UserAssigned --> UA2[Handmatig aanmaken/verwijderen]
     UserAssigned --> UA3[Gedeeld tussen resources]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Kenmerk | Systeemtoegewezen | Gebruiker-toegewezen |
+| Kenmerk | Systeem-toegewezen | Gebruiker-toegewezen |
 |---------|----------------|---------------|
 | **Levenscyclus** | Gekoppeld aan resource | Onafhankelijk |
-| **Aanmaken** | Automatisch met resource | Handmatige aanmaak |
-| **Verwijderen** | Verwijderd met resource | Blijft bestaan na verwijderen van resource |
+| **Aanmaken** | Automatisch met resource | Handmatig aanmaken |
+| **Verwijdering** | Verwijderd met resource | Blijft bestaan na het verwijderen van de resource |
 | **Delen** | Alleen één resource | Meerdere resources |
-| **Gebruiksscenario** | Eenvoudige scenario's | Complexe scenario's met meerdere resources |
-| **AZD-standaard** | ✅ Aanbevolen | Optioneel |
+| **Gebruiksscenario** | Eenvoudige scenario's | Complexe multi-resource scenario's |
+| **AZD Standaard** | ✅ Aanbevolen | Optioneel |
 
 ---
 
 ## Vereisten
 
-### Vereiste tools
+### Benodigde tools
 
-Je zou deze al geïnstalleerd moeten hebben vanuit vorige lessen:
+Je zou deze al geïnstalleerd moeten hebben uit eerdere lessen:
 
 ```bash
 # Controleer Azure Developer CLI
@@ -141,27 +141,27 @@ az --version
 # ✅ Verwacht: azure-cli 2.50.0 of hoger
 ```
 
-### Azure-vereisten
+### Vereisten voor Azure
 
-- Actief Azure-abonnement
+- Actieve Azure-abonnement
 - Machtigingen om:
-  - Beheerde identiteiten maken
-  - RBAC-rollen toewijzen
-  - Key Vault-resources maken
-  - Container Apps implementeren
+  - Beheerde identiteiten aan te maken
+  - RBAC-rollen toe te wijzen
+  - Key Vault-resources aan te maken
+  - Container Apps te implementeren
 
-### Vereiste voorkennis
+### Vereiste kennis
 
-Je zou het volgende afgerond moeten hebben:
-- [Installatiehandleiding](installation.md) - AZD-installatie
-- [AZD Basis](azd-basics.md) - Kernconcepten
+Je zou hebben voltooid:
+- [Installatiehandleiding](installation.md) - AZD-setup
+- [AZD Basisprincipes](azd-basics.md) - Kernconcepten
 - [Configuratiebeheer](configuration.md) - Omgevingsvariabelen
 
 ---
 
-## Les 1: Authenticatiepatronen begrijpen
+## Les 1: Begrijpen van authenticatiepatronen
 
-### Patroon 1: Connectiestrings (Verouderd - Vermijden)
+### Patroon 1: Connection Strings (Legacy - Vermijden)
 
 **Hoe het werkt:**
 ```bash
@@ -172,12 +172,12 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 ```
 
 **Problemen:**
-- ❌ Geheimen zichtbaar in omgevingsvariabelen
+- ❌ Secrets zichtbaar in omgevingsvariabelen
 - ❌ Gelogd in implementatiesystemen
 - ❌ Moeilijk te roteren
 - ❌ Geen audittrail van toegang
 
-**Wanneer te gebruiken:** Alleen voor lokale ontwikkeling, nooit in productie.
+**Wanneer te gebruiken:** Alleen voor lokale ontwikkeling, nooit productie.
 
 ---
 
@@ -203,19 +203,19 @@ env: [
 ```
 
 **Voordelen:**
-- ✅ Geheimen veilig opgeslagen in Key Vault
-- ✅ Gecentraliseerd beheer van geheimen
+- ✅ Secrets veilig opgeslagen in Key Vault
+- ✅ Gecentraliseerd secretbeheer
 - ✅ Rotatie zonder codewijzigingen
 
 **Beperkingen:**
-- ⚠️ Gebruikt nog steeds sleutels/wachtwoorden
+- ⚠️ Nog steeds sleutels/wachtwoorden gebruiken
 - ⚠️ Toegang tot Key Vault moet beheerd worden
 
-**Wanneer te gebruiken:** Overstapstap van connectiestrings naar beheerde identiteit.
+**Wanneer te gebruiken:** Overstapstap van connection strings naar managed identity.
 
 ---
 
-### Patroon 3: Beheerde identiteit (Beste praktijk)
+### Patroon 3: Managed Identity (Beste praktijk)
 
 **Hoe het werkt:**
 ```bicep
@@ -251,21 +251,21 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Voordelen:**
-- ✅ Geen geheimen in code/config
-- ✅ Automatische referentierotatie
+- ✅ Geen secrets in code/config
+- ✅ Automatische rotatie van referenties
 - ✅ Volledige audittrail
-- ✅ RBAC-gebaseerde machtigingen
+- ✅ RBAC-gebaseerde permissies
 - ✅ Compliance-klaar
 
 **Wanneer te gebruiken:** Altijd, voor productieapplicaties.
 
 ---
 
-## Les 2: Beheerde identiteit implementeren met AZD
+## Les 2: Implementeren van Managed Identity met AZD
 
 ### Stapsgewijze implementatie
 
-Laten we een veilige Container App bouwen die een beheerde identiteit gebruikt om toegang te krijgen tot Azure Storage en Key Vault.
+Laten we een veilige Container App bouwen die managed identity gebruikt om toegang te krijgen tot Azure Storage en Key Vault.
 
 ### Projectstructuur
 
@@ -286,7 +286,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. AZD configureren (azure.yaml)
+### 1. Configureer AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -302,9 +302,9 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastructuur: Beheerde identiteit inschakelen
+### 2. Infrastructuur: Managed Identity inschakelen
 
-**Bestand: `infra/main.bicep`**
+**File: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -384,9 +384,9 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App met systeemtoegewezen identiteit
+### 3. Container App met Systeem-toegewezen identiteit
 
-**Bestand: `infra/app/container-app.bicep`**
+**File: `infra/app/container-app.bicep`**
 
 ```bicep
 param name string
@@ -441,9 +441,9 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. RBAC-roltoewijzingsmodule
+### 4. RBAC Role Assignment Module
 
-**Bestand: `infra/core/role-assignment.bicep`**
+**File: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
@@ -463,9 +463,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Applicatiecode met beheerde identiteit
+### 5. Applicatiecode met Managed Identity
 
-**Bestand: `src/app.js`**
+**File: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -479,7 +479,7 @@ const PORT = process.env.PORT || 3000;
 // 🔑 Initialiseer referentie (werkt automatisch met beheerde identiteit)
 const credential = new DefaultAzureCredential();
 
-// Azure Storage-configuratie
+// Azure Storage configuratie
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
@@ -498,7 +498,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Bestand uploaden naar blobopslag
+// Upload bestand naar blobopslag
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -537,7 +537,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Blobcontainers weergeven (toont leesrechten)
+// Lijst blobcontainers (demonstreert leesrechten)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -562,7 +562,7 @@ app.listen(PORT, () => {
 });
 ```
 
-**Bestand: `src/package.json`**
+**File: `src/package.json`**
 
 ```json
 {
@@ -583,7 +583,7 @@ app.listen(PORT, () => {
 ### 6. Implementeren en testen
 
 ```bash
-# Initialiseer de AZD-omgeving
+# Initialiseer AZD-omgeving
 azd init
 
 # Implementeer infrastructuur en applicatie
@@ -636,30 +636,30 @@ curl $APP_URL/containers
 
 ## Veelvoorkomende Azure RBAC-rollen
 
-### Ingebouwde rol-ID's voor beheerde identiteit
+### Vooraf ingestelde rol-ID's voor Managed Identity
 
 | Service | Rolnaam | Rol-ID | Machtigingen |
 |---------|-----------|---------|-------------|
 | **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Blobs en containers lezen |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Lezen, schrijven, verwijderen van blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Lezen, schrijven, verwijderen van wachtrijberichten |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Geheimen lezen |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Lezen, schrijven, verwijderen van geheimen |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Blobs lezen, schrijven, verwijderen |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Queueberichten lezen, schrijven, verwijderen |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Secrets lezen |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Secrets lezen, schrijven, verwijderen |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Cosmos DB-gegevens lezen |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Cosmos DB-gegevens lezen en schrijven |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Beheer SQL-databases |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | SQL-databases beheren |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Berichten verzenden, ontvangen en beheren |
 
 ### Hoe rol-ID's te vinden
 
 ```bash
-# Lijst alle ingebouwde rollen
+# Alle ingebouwde rollen weergeven
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Zoek naar een specifieke rol
+# Zoeken naar een specifieke rol
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Haal roldetails op
+# Rolgegevens ophalen
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
@@ -667,11 +667,11 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Praktische oefeningen
 
-### Oefening 1: Schakel beheerde identiteit in voor bestaande app ⭐⭐ (Middel)
+### Oefening 1: Managed Identity inschakelen voor bestaande app ⭐⭐ (Middeld)
 
-**Doel**: Voeg een beheerde identiteit toe aan een bestaande Container App-implementatie
+**Doel**: Voeg managed identity toe aan een bestaande Container App-implementatie
 
-**Scenario**: Je hebt een Container App die connectiestrings gebruikt. Converteer deze naar beheerde identiteit.
+**Scenario**: Je hebt een Container App die connection strings gebruikt. Converteer deze naar managed identity.
 
 **Startpunt**: Container App met deze configuratie:
 
@@ -687,7 +687,7 @@ env: [
 
 **Stappen**:
 
-1. **Schakel beheerde identiteit in in Bicep:**
+1. **Managed identity inschakelen in Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Verleen Storage-toegang:**
+2. **Geef toegang tot Storage:**
 
 ```bicep
 // Get storage account reference
@@ -721,7 +721,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Werk applicatiecode bij:**
 
-**Voor (connectiestring):**
+**Voorheen (connection string):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -730,7 +730,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Na (beheerde identiteit):**
+**Daarna (managed identity):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -765,22 +765,22 @@ curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Succescriteria:**
-- ✅ Applicatie wordt zonder fouten geïmplementeerd
-- ✅ Storage-bewerkingen werken (upload, lijst, download)
-- ✅ Geen connectiestrings in omgevingsvariabelen
-- ✅ Identiteit zichtbaar in Azure Portal onder "Identity" blade
+- ✅ Applicatie implementeert zonder fouten
+- ✅ Storage-operaties werken (uploaden, opsommen, downloaden)
+- ✅ Geen connection strings in omgevingsvariabelen
+- ✅ Identiteit zichtbaar in Azure Portal onder de "Identity"-blade
 
 **Verificatie:**
 
 ```bash
-# Controleer of de beheerde identiteit is ingeschakeld
+# Controleer of beheerde identiteit is ingeschakeld
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Verwacht: "SystemAssigned"
 
-# Controleer de roltoewijzing
+# Controleer roltoewijzing
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
@@ -791,17 +791,17 @@ az role assignment list \
 
 ---
 
-### Oefening 2: Multi-service toegang met gebruiker-toegewezen identiteit ⭐⭐⭐ (Geavanceerd)
+### Oefening 2: Multi-service toegang met user-assigned identity ⭐⭐⭐ (Geavanceerd)
 
-**Doel**: Maak een gebruiker-toegewezen identiteit die gedeeld wordt tussen meerdere Container Apps
+**Doel**: Maak een user-assigned identity die gedeeld wordt tussen meerdere Container Apps
 
-**Scenario**: Je hebt 3 microservices die allemaal toegang nodig hebben tot hetzelfde Storage-account en Key Vault.
+**Scenario**: Je hebt 3 microservices die allemaal toegang nodig hebben tot dezelfde Storage-account en Key Vault.
 
 **Stappen**:
 
-1. **Maak gebruiker-toegewezen identiteit aan:**
+1. **Maak een user-assigned identity:**
 
-**Bestand: `infra/core/identity.bicep`**
+**File: `infra/core/identity.bicep`**
 
 ```bicep
 param name string
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Wijs rollen toe aan de gebruiker-toegewezen identiteit:**
+2. **Wijs rollen toe aan de user-assigned identity:**
 
 ```bicep
 // In main.bicep
@@ -900,7 +900,7 @@ const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/id
 
 // Voor een door de gebruiker toegewezen identiteit, geef de client-id op
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Client-id van door de gebruiker toegewezen identiteit
+  process.env.AZURE_CLIENT_ID  // Client-id van een door de gebruiker toegewezen identiteit
 );
 
 // Of gebruik DefaultAzureCredential (detecteert automatisch)
@@ -917,21 +917,21 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Test of alle services toegang tot opslag hebben
+# Test of alle services toegang hebben tot opslag
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
 **✅ Succescriteria:**
-- ✅ Eén identiteit gedeeld door 3 services
+- ✅ Één identiteit gedeeld over 3 services
 - ✅ Alle services kunnen Storage en Key Vault bereiken
 - ✅ Identiteit blijft bestaan als je één service verwijdert
 - ✅ Gecentraliseerd permissiebeheer
 
-**Voordelen van gebruiker-toegewezen identiteit:**
+**Voordelen van een user-assigned identity:**
 - Eén identiteit om te beheren
-- Consistente machtigingen over services heen
+- Consistente permissies over services
 - Overleeft het verwijderen van een service
 - Beter voor complexe architecturen
 
@@ -939,17 +939,17 @@ curl https://order-service.azurecontainerapps.io/upload
 
 ---
 
-### Oefening 3: Implementeer Key Vault-secretrotatie ⭐⭐⭐ (Geavanceerd)
+### Oefening 3: Implementeer Key Vault secret-rotatie ⭐⭐⭐ (Geavanceerd)
 
-**Doel**: Sla API-sleutels van derden op in Key Vault en krijg er toegang toe met een beheerde identiteit
+**Doel**: Sla third-party API-sleutels op in Key Vault en geef er toegang toe via managed identity
 
 **Scenario**: Je app moet een externe API aanroepen (OpenAI, Stripe, SendGrid) die API-sleutels vereist.
 
 **Stappen**:
 
-1. **Maak Key Vault met RBAC aan:**
+1. **Maak Key Vault met RBAC:**
 
-**Bestand: `infra/core/keyvault.bicep`**
+**File: `infra/core/keyvault.bicep`**
 
 ```bicep
 param name string
@@ -978,7 +978,7 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Sla geheimen op in Key Vault:**
+2. **Sla secrets op in Key Vault:**
 
 ```bash
 # Haal Key Vault-naam op
@@ -1001,9 +1001,9 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Applicatiecode om geheimen op te halen:**
+3. **Applicatiecode om secrets op te halen:**
 
-**Bestand: `src/config.js`**
+**File: `src/config.js`**
 
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -1052,9 +1052,9 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Gebruik geheimen in de applicatie:**
+4. **Gebruik secrets in applicatie:**
 
-**Bestand: `src/app.js`**
+**File: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -1078,7 +1078,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1101,7 +1101,7 @@ app.listen(3000, () => {
 ```bash
 azd up
 
-# Testen of API-sleutels werken
+# Test of API-sleutels werken
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
@@ -1110,19 +1110,19 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 **✅ Succescriteria:**
 - ✅ Geen API-sleutels in code of omgevingsvariabelen
 - ✅ Applicatie haalt sleutels op uit Key Vault
-- ✅ Derden-API's werken correct
+- ✅ Third-party API's werken correct
 - ✅ Sleutels kunnen geroteerd worden zonder codewijzigingen
 
-**Geheim roteren:**
+**Roteren van een secret:**
 
 ```bash
-# Werk het geheim in Key Vault bij
+# Werk het geheim bij in Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Herstart de app om de nieuwe sleutel te gebruiken
+# Start de app opnieuw op om de nieuwe sleutel te gebruiken
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1132,30 +1132,30 @@ az containerapp revision restart \
 
 ---
 
-## Kennischeckpoint
+## Kenniscontrole
 
 ### 1. Authenticatiepatronen ✓
 
 Test je begrip:
 
-- [ ] **Q1**: Wat zijn de drie belangrijkste authenticatiepatronen? 
-  - **A**: Connectiestrings (verouderd), Key Vault-referenties (overgang), Beheerde identiteit (beste)
+- [ ] **V1**: Wat zijn de drie belangrijkste authenticatiepatronen? 
+  - **A**: Connection strings (legacy), Key Vault-referenties (overgang), Managed Identity (beste)
 
-- [ ] **Q2**: Waarom is beheerde identiteit beter dan connectiestrings?
-  - **A**: Geen geheimen in code, automatische rotatie, volledige audittrail, RBAC-machtigingen
+- [ ] **V2**: Waarom is managed identity beter dan connection strings?
+  - **A**: Geen secrets in code, automatische rotatie, volledige audittrail, RBAC-permissies
 
-- [ ] **Q3**: Wanneer zou je gebruiker-toegewezen identiteit gebruiken in plaats van systeemtoegewezen?
-  - **A**: Wanneer je identiteit deelt tussen meerdere resources of wanneer de levenscyclus van de identiteit onafhankelijk is van de levenscyclus van de resource
+- [ ] **V3**: Wanneer zou je user-assigned identity gebruiken in plaats van systeem-toegewezen?
+  - **A**: Wanneer je identiteit wilt delen tussen meerdere resources of wanneer de levenscyclus van de identiteit onafhankelijk moet zijn van de resource
 
 **Hands-On verificatie:**
 ```bash
-# Controleer welk type identiteit uw app gebruikt
+# Controleer welk type identiteit je app gebruikt
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Toon alle roltoewijzingen voor de identiteit
+# Lijst alle roltoewijzingen voor de identiteit
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1166,21 +1166,21 @@ az role assignment list \
 
 Test je begrip:
 
-- [ ] **Q1**: Wat is de rol-ID voor "Storage Blob Data Contributor"?
+- [ ] **V1**: Wat is de rol-ID voor "Storage Blob Data Contributor"?
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: Welke machtigingen geeft "Key Vault Secrets User"?
-  - **A**: Alleen-lezen toegang tot geheimen (kan niet creëren, bijwerken of verwijderen)
+- [ ] **V2**: Welke machtigingen geeft "Key Vault Secrets User"?
+  - **A**: Alleen-lezen toegang tot secrets (kan niet aanmaken, bijwerken of verwijderen)
 
-- [ ] **Q3**: Hoe verleen je een Container App toegang tot Azure SQL?
+- [ ] **V3**: Hoe geef je een Container App toegang tot Azure SQL?
   - **A**: Wijs de rol "SQL DB Contributor" toe of configureer Azure AD-authenticatie voor SQL
 
 **Hands-On verificatie:**
 ```bash
-# Zoek specifieke rol
+# Zoek een specifieke rol
 az role definition list --name "Storage Blob Data Contributor"
 
-# Controleer welke rollen aan jouw identiteit zijn toegewezen
+# Controleer welke rollen aan je identiteit zijn toegewezen
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1190,18 +1190,18 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 ### 3. Key Vault-integratie ✓
 
 Test je begrip:
-- [ ] **Q1**: Hoe schakel je RBAC in voor Key Vault in plaats van toegangsbeleid?
-  - **A**: Stel `enableRbacAuthorization: true` in Bicep in
+- [ ] **Q1**: Hoe schakel je RBAC in voor Key Vault in plaats van toegangsbeleidsregels?
+  - **A**: Zet `enableRbacAuthorization: true` in Bicep
 
 - [ ] **Q2**: Welke Azure SDK-bibliotheek verzorgt authenticatie voor managed identity?
   - **A**: `@azure/identity` met de `DefaultAzureCredential`-klasse
 
-- [ ] **Q3**: Hoe lang blijven Key Vault-geheimen in de cache?
+- [ ] **Q3**: Hoe lang blijven Key Vault-secrets in de cache?
   - **A**: Afhankelijk van de applicatie; implementeer je eigen cachingstrategie
 
-**Hands-On Verification:**
+**Praktische verificatie:**
 ```bash
-# Test Key Vault-toegang
+# Toegang tot Key Vault testen
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1218,7 +1218,7 @@ az keyvault show \
 
 ## Beste beveiligingspraktijken
 
-### ✅ TE DOEN:
+### ✅ WEL:
 
 1. **Gebruik altijd managed identity in productie**
    ```bicep
@@ -1231,7 +1231,7 @@ az keyvault show \
    - Gebruik waar mogelijk de "Reader"-rol
    - Vermijd "Owner" of "Contributor" tenzij nodig
 
-3. **Bewaar sleutels van derden in Key Vault**
+3. **Sla sleutels van derden op in Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
@@ -1250,13 +1250,13 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **Draai geheimen regelmatig**
-   - Stel vervaldatums in voor Key Vault-geheimen
+6. **Roteer secrets regelmatig**
+   - Stel vervaldatums in voor Key Vault-secrets
    - Automatiseer rotatie met Azure Functions
 
-### ❌ NIET DOEN:
+### ❌ NIET:
 
-1. **Nooit geheimen hardcoderen**
+1. **Hardcode nooit geheimen**
    ```javascript
    // ❌ SLECHT
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
@@ -1268,7 +1268,7 @@ az keyvault show \
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Ken geen overmatige machtigingen toe**
+3. **Verleen geen buitensporige machtigingen**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1294,7 +1294,7 @@ az keyvault show \
 
 ---
 
-## Gids voor probleemoplossing
+## Probleemoplossingsgids
 
 ### Probleem: "Unauthorized" bij toegang tot Azure Storage
 
@@ -1318,7 +1318,7 @@ az containerapp show \
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Verwacht: Moet "Storage Blob Data Contributor" of een vergelijkbare rol zien
+# Verwacht: zou "Storage Blob Data Contributor" of een vergelijkbare rol moeten zien
 ```
 
 **Oplossingen:**
@@ -1338,7 +1338,7 @@ az role assignment create \
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Controleer of de applicatiecode de juiste referenties gebruikt:**
+3. **Controleer of de applicatiecode de juiste credential gebruikt:**
 ```javascript
 // Zorg ervoor dat u DefaultAzureCredential gebruikt
 const credential = new DefaultAzureCredential();
@@ -1403,7 +1403,7 @@ CredentialUnavailableError: No credential available
 # Controleer of je bent ingelogd
 az account show
 
-# Controleer de authenticatie van de Azure CLI
+# Controleer de Azure CLI-authenticatie
 az ad signed-in-user show
 ```
 
@@ -1414,7 +1414,7 @@ az ad signed-in-user show
 az login
 ```
 
-2. **Stel het Azure-abonnement in:**
+2. **Stel Azure-subscriptie in:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
@@ -1426,7 +1426,7 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Of gebruik lokaal een andere referentie:**
+4. **Of gebruik lokaal een andere credential:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1442,11 +1442,11 @@ const credential = process.env.NODE_ENV === 'production'
 
 **Symptomen:**
 - Rol succesvol toegewezen
-- Ontvang nog steeds 403-fouten
+- Nog steeds 403-fouten
 - Intermitterende toegang (soms werkt het, soms niet)
 
 **Uitleg:**
-Azure RBAC-wijzigingen kunnen 5-10 minuten duren om wereldwijd door te voeren.
+Wijzigingen in Azure RBAC kunnen 5-10 minuten duren voordat ze wereldwijd zijn doorgevoerd.
 
 **Oplossing:**
 
@@ -1455,10 +1455,10 @@ Azure RBAC-wijzigingen kunnen 5-10 minuten duren om wereldwijd door te voeren.
 echo "Waiting for RBAC propagation..."
 sleep 300  # Wacht 5 minuten
 
-# Toegang testen
+# Controleer toegang
 curl https://myapp.azurecontainerapps.io/upload
 
-# Als het nog steeds niet werkt, herstart de app
+# Als het nog steeds niet werkt, start de app opnieuw
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1468,26 +1468,26 @@ az containerapp revision restart \
 
 ## Kostenoverwegingen
 
-### Kosten van Managed Identity
+### Kosten voor Managed Identity
 
-| Resource | Kosten |
+| Bron | Kosten |
 |----------|------|
 | **Managed Identity** | 🆓 **GRATIS** - Geen kosten |
-| **RBAC-roltoewijzingen** | 🆓 **GRATIS** - Geen kosten |
-| **Azure AD-tokenaanvragen** | 🆓 **GRATIS** - Inbegrepen |
-| **Key Vault-bewerkingen** | $0.03 per 10.000 bewerkingen |
-| **Key Vault-opslag** | $0.024 per geheim per maand |
+| **RBAC Role Assignments** | 🆓 **GRATIS** - Geen kosten |
+| **Azure AD Token Requests** | 🆓 **GRATIS** - Inclusief |
+| **Key Vault Operations** | $0.03 per 10,000 bewerkingen |
+| **Key Vault Storage** | $0.024 per secret per maand |
 
-**Managed identity bespaart geld door:**
-- ✅ Het elimineren van Key Vault-bewerkingen voor service-to-service authenticatie
-- ✅ Het verminderen van beveiligingsincidenten (geen gelekte referenties)
+**Managed identity bespaart kosten door:**
+- ✅ Het elimineren van Key Vault-bewerkingen voor service-naar-service authenticatie
+- ✅ Het verminderen van beveiligingsincidenten (geen gelekte credentials)
 - ✅ Het verminderen van operationele overhead (geen handmatige rotatie)
 
 **Voorbeeld kostenvergelijking (maandelijks):**
 
 | Scenario | Connection Strings | Managed Identity | Besparing |
 |----------|-------------------|-----------------|---------|
-| Kleine app (1M requests) | ~$50 (Key Vault + operaties) | ~$0 | $50/maand |
+| Kleine app (1M aanvragen) | ~$50 (Key Vault + ops) | ~$0 | $50/maand |
 | Medium app (10M requests) | ~$200 | ~$0 | $200/maand |
 | Large app (100M requests) | ~$1,500 | ~$0 | $1,500/maand |
 
@@ -1507,12 +1507,12 @@ az containerapp revision restart \
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
 ### Volgende stappen in deze cursus
-- ← Vorige: [Configuration Management](configuration.md)
-- → Volgende: [First Project](first-project.md)
+- ← Vorige: [Configuratiebeheer](configuration.md)
+- → Volgende: [Eerste project](first-project.md)
 - 🏠 [Cursus startpagina](../../README.md)
 
 ### Gerelateerde voorbeelden
-- [Azure OpenAI Chat Example](../../../../examples/azure-openai-chat) - Gebruikt managed identity voor Azure OpenAI
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Gebruikt managed identity voor Microsoft Foundry Models
 - [Microservices Example](../../../../examples/microservices) - Authenticatiepatronen voor meerdere services
 
 ---
@@ -1521,27 +1521,27 @@ az containerapp revision restart \
 
 **Je hebt geleerd:**
 - ✅ Drie authenticatiepatronen (connection strings, Key Vault, managed identity)
-- ✅ Hoe je managed identity in AZD kunt inschakelen en configureren
+- ✅ Hoe je managed identity kunt inschakelen en configureren in AZD
 - ✅ RBAC-roltoewijzingen voor Azure-services
-- ✅ Key Vault-integratie voor geheimen van derden
-- ✅ Door gebruiker toegewezen versus door systeem toegewezen identiteiten
-- ✅ Beveiligingsbest practices en probleemoplossing
+- ✅ Integratie van Key Vault voor secrets van derden
+- ✅ Gebruiker-toegewezen vs systeem-toegewezen identiteiten
+- ✅ Beste beveiligingspraktijken en probleemoplossing
 
 **Belangrijkste punten:**
-1. **Gebruik altijd managed identity in productie** - Geen geheimen, automatische rotatie
-2. **Gebruik RBAC-rollen met minimaal benodigde rechten** - Ken alleen noodzakelijke machtigingen toe
-3. **Bewaar sleutels van derden in Key Vault** - Gecentraliseerd geheimbeheer
-4. **Scheid identiteiten per omgeving** - Isolatie voor dev, staging, prod
-5. **Schakel auditlogging in** - Volg wie toegang heeft gehad tot wat
+1. **Gebruik altijd managed identity in productie** - Geen secrets, automatische rotatie
+2. **Gebruik RBAC-rollen met minimaal benodigde rechten** - Verleen alleen noodzakelijke machtigingen
+3. **Sla sleutels van derden op in Key Vault** - Gecentraliseerd geheimbeheer
+4. **Scheid identiteiten per omgeving** - Dev, staging, prod isolatie
+5. **Schakel auditlogging in** - Volg wie wat heeft benaderd
 
 **Volgende stappen:**
-1. Voltooi de praktische oefeningen hierboven
+1. Voltooi de bovenstaande praktische oefeningen
 2. Migreer een bestaande app van connection strings naar managed identity
-3. Bouw je eerste AZD-project met beveiliging vanaf dag één: [First Project](first-project.md)
+3. Bouw je eerste AZD-project met security vanaf dag één: [Eerste project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel wij naar nauwkeurigheid streven, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

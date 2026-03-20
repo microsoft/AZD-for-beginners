@@ -1,143 +1,143 @@
-# Retail Multi-Agent Oplossing - Infrastructuur Template
+# Retail Multi-Agent-oplossing - Infrastructuursjabloon
 
-**Hoofdstuk 5: Productie Implementatiepakket**
-- **📚 Cursus Home**: [AZD Voor Beginners](../../README.md)
-- **📖 Gerelateerd Hoofdstuk**: [Hoofdstuk 5: Multi-Agent AI Oplossingen](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Scenario Gids**: [Volledige Architectuur](../retail-scenario.md)
-- **🎯 Snelle Implementatie**: [One-Click Implementatie](../../../../examples/retail-multiagent-arm-template)
+**Hoofdstuk 5: Productie-implementatiepakket**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Gerelateerd Hoofdstuk**: [Hoofdstuk 5: Multi-Agent AI-oplossingen](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Scenariogids**: [Volledige Architectuur](../retail-scenario.md)
+- **🎯 Snel Implementeren**: [Implementatie met één klik](#-quick-deployment)
 
-> **⚠️ ALLEEN INFRASTRUCTUUR TEMPLATE**  
-> Deze ARM-template implementeert **Azure resources** voor een multi-agent systeem.  
+> **⚠️ ALLEEN INFRASTRUCTUURSJABLOON**  
+> Deze ARM-sjabloon implementeert **Azure-resources** voor een multi-agent systeem.  
 >  
 > **Wat wordt geïmplementeerd (15-25 minuten):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings in 3 regio's)
-> - ✅ AI Zoekservice (leeg, klaar voor indexcreatie)
-> - ✅ Container Apps (placeholder afbeeldingen, klaar voor jouw code)
-> - ✅ Opslag, Cosmos DB, Key Vault, Application Insights
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings in 3 regio's)
+> - ✅ AI Search-service (leeg, klaar voor indexcreatie)
+> - ✅ Container Apps (voorbeeldafbeeldingen, klaar voor uw code)
+> - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
-> **Wat is NIET inbegrepen (vereist ontwikkeling):**
-> - ❌ Agent implementatiecode (Customer Agent, Inventory Agent)
+> **Wat NIET is opgenomen (vereist ontwikkeling):**
+> - ❌ Agent-implementatiecode (Customer Agent, Inventory Agent)
 > - ❌ Routeringslogica en API-eindpunten
-> - ❌ Frontend chat UI
-> - ❌ Zoekindexschema's en datastromen
-> - ❌ **Geschatte ontwikkelingsinspanning: 80-120 uur**
+> - ❌ Frontend chat-UI
+> - ❌ Zoekindexschema's en datapijplijnen
+> - ❌ **Geschatte ontwikkeltijd: 80-120 uur**
 >  
-> **Gebruik deze template als:**
-> - ✅ Je Azure infrastructuur wilt voorzien voor een multi-agent project
-> - ✅ Je van plan bent om agent implementatie apart te ontwikkelen
-> - ✅ Je een productieklare infrastructuur baseline nodig hebt
+> **Gebruik dit sjabloon als:**
+> - ✅ U Azure-infrastructuur wilt provisionen voor een multi-agent project
+> - ✅ U van plan bent agentimplementatie afzonderlijk te ontwikkelen
+> - ✅ U een productie-klaar infrastructuur-baseline nodig heeft
 >  
 > **Gebruik niet als:**
-> - ❌ Je direct een werkende multi-agent demo verwacht
-> - ❌ Je op zoek bent naar volledige applicatiecodevoorbeelden
+> - ❌ U direct een werkende multi-agent demo verwacht
+> - ❌ U op zoek bent naar complete toepassingscodevoorbeelden
 
 ## Overzicht
 
-Deze map bevat een uitgebreide Azure Resource Manager (ARM) template voor het implementeren van de **infrastructuur basis** van een multi-agent klantenondersteuningssysteem. De template voorziet alle benodigde Azure services, correct geconfigureerd en verbonden, klaar voor jouw applicatieontwikkeling.
+Deze map bevat een uitgebreid Azure Resource Manager (ARM) sjabloon voor het implementeren van de **infrastructuurbasis** van een multi-agent klantenondersteuningssysteem. Het sjabloon provisioneert alle benodigde Azure-services, correct geconfigureerd en onderling verbonden, klaar voor uw applicatieontwikkeling.
 
-**Na implementatie heb je:** Productieklare Azure infrastructuur  
-**Om het systeem te voltooien heb je nodig:** Agent code, frontend UI en dataconfiguratie (zie [Architectuur Gids](../retail-scenario.md))
+**Na implementatie heeft u:** Productieklare Azure-infrastructuur  
+**Om het systeem te voltooien, heeft u nodig:** Agentcode, frontend-UI en dataconfiguratie (zie [Architectuurgids](../retail-scenario.md))
 
-## 🎯 Wat Wordt Geïmplementeerd
+## 🎯 Wat wordt geïmplementeerd
 
-### Kerninfrastructuur (Status Na Implementatie)
+### Kerninfrastructuur (status na implementatie)
 
-✅ **Azure OpenAI Services** (Klaar voor API-aanroepen)
-  - Primaire regio: GPT-4o implementatie (20K TPM capaciteit)
-  - Secundaire regio: GPT-4o-mini implementatie (10K TPM capaciteit)
-  - Tertiaire regio: Tekst embeddings model (30K TPM capaciteit)
-  - Evaluatieregio: GPT-4o grader model (15K TPM capaciteit)
-  - **Status:** Volledig functioneel - kan direct API-aanroepen doen
+✅ **Microsoft Foundry Models Services** (Klaar voor API-aanroepen)
+  - Primaire regio: gpt-4.1 deployment (20K TPM capacity)
+  - Secundaire regio: gpt-4.1-mini deployment (10K TPM capacity)
+  - Tertiaire regio: Text embeddings model (30K TPM capacity)
+  - Evaluatieregio: gpt-4.1 grader model (15K TPM capacity)
+  - **Status:** Volledig functioneel - kan onmiddellijk API-aanroepen doen
 
-✅ **Azure AI Zoekservice** (Leeg - klaar voor configuratie)
-  - Vector zoekmogelijkheden ingeschakeld
-  - Standaard tier met 1 partitie, 1 replica
-  - **Status:** Service actief, maar vereist indexcreatie
-  - **Actie nodig:** Maak zoekindex met jouw schema
+✅ **Azure AI Search** (Leeg - klaar voor configuratie)
+  - Vector-zoekmogelijkheden ingeschakeld
+  - Standaard tier met 1 partition, 1 replica
+  - **Status:** Service draait, maar vereist indexcreatie
+  - **Vereiste actie:** Maak een zoekindex met uw schema
 
-✅ **Azure Opslagaccount** (Leeg - klaar voor uploads)
+✅ **Azure Storage Account** (Leeg - klaar voor uploads)
   - Blob containers: `documents`, `uploads`
   - Veilige configuratie (alleen HTTPS, geen openbare toegang)
   - **Status:** Klaar om bestanden te ontvangen
-  - **Actie nodig:** Upload jouw productdata en documenten
+  - **Vereiste actie:** Upload uw productgegevens en documenten
 
-⚠️ **Container Apps Omgeving** (Placeholder afbeeldingen geïmplementeerd)
-  - Agent router app (nginx standaard afbeelding)
-  - Frontend app (nginx standaard afbeelding)
-  - Auto-scaling geconfigureerd (0-10 instanties)
-  - **Status:** Placeholder containers actief
-  - **Actie nodig:** Bouw en implementeer jouw agent applicaties
+⚠️ **Container Apps-omgeving** (Voorbeeldafbeeldingen geïmplementeerd)
+  - Agent router-app (nginx standaardafbeelding)
+  - Frontend-app (nginx standaardafbeelding)
+  - Autoscaling geconfigureerd (0-10 instanties)
+  - **Status:** Voorbeeldcontainers draaien
+  - **Vereiste actie:** Bouw en implementeer uw agenttoepassingen
 
 ✅ **Azure Cosmos DB** (Leeg - klaar voor data)
   - Database en container vooraf geconfigureerd
-  - Geoptimaliseerd voor lage latentie operaties
-  - TTL ingeschakeld voor automatische opruiming
+  - Geoptimaliseerd voor laag-latentie bewerkingen
+  - TTL ingeschakeld voor automatische opschoning
   - **Status:** Klaar om chatgeschiedenis op te slaan
 
 ✅ **Azure Key Vault** (Optioneel - klaar voor geheimen)
   - Soft delete ingeschakeld
   - RBAC geconfigureerd voor beheerde identiteiten
-  - **Status:** Klaar om API-sleutels en verbindingsstrings op te slaan
+  - **Status:** Klaar om API-sleutels en verbindingstrings op te slaan
 
 ✅ **Application Insights** (Optioneel - monitoring actief)
-  - Verbonden met Log Analytics workspace
+  - Verbonden met Log Analytics-workspace
   - Aangepaste metrics en waarschuwingen geconfigureerd
-  - **Status:** Klaar om telemetrie van jouw apps te ontvangen
+  - **Status:** Klaar om telemetrie van uw apps te ontvangen
 
 ✅ **Document Intelligence** (Klaar voor API-aanroepen)
-  - S0 tier voor productie workloads
+  - S0-tier voor productieworkloads
   - **Status:** Klaar om geüploade documenten te verwerken
 
-✅ **Bing Zoek API** (Klaar voor API-aanroepen)
-  - S1 tier voor realtime zoekopdrachten
+✅ **Bing Search API** (Klaar voor API-aanroepen)
+  - S1-tier voor realtime zoekopdrachten
   - **Status:** Klaar voor webzoekopdrachten
 
 ### Implementatiemodi
 
-| Modus | OpenAI Capaciteit | Container Instanties | Zoek Tier | Opslag Redundantie | Beste Voor |
-|-------|-------------------|----------------------|-----------|--------------------|------------|
-| **Minimal** | 10K-20K TPM | 0-2 replica's | Basic | LRS (Lokaal) | Ontwikkeling/test, leren, proof-of-concept |
-| **Standard** | 30K-60K TPM | 2-5 replica's | Standaard | ZRS (Zone) | Productie, matig verkeer (<10K gebruikers) |
-| **Premium** | 80K-150K TPM | 5-10 replica's, zone-redundant | Premium | GRS (Geo) | Enterprise, hoog verkeer (>10K gebruikers), 99.99% SLA |
+| Modus | OpenAI-capaciteit | Containerinstanties | Zoeklaag | Opslagredundantie | Het beste voor |
+|------|-------------------|---------------------|-------------|-------------------|----------|
+| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, leren, proof-of-concept |
+| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Productie, matig verkeer (<10K users) |
+| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, hoog verkeer (>10K users), 99.99% SLA |
 
 **Kostenimpact:**
-- **Minimal → Standard:** ~4x kostenstijging ($100-370/maand → $420-1,450/maand)
-- **Standard → Premium:** ~3x kostenstijging ($420-1,450/maand → $1,150-3,500/maand)
-- **Kies op basis van:** Verwachte belasting, SLA-vereisten, budgetbeperkingen
+- **Minimal → Standard:** ~4x kostenstijging ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium:** ~3x kostenstijging ($420-1,450/mo → $1,150-3,500/mo)
+- **Kies op basis van:** Verwachte load, SLA-vereisten, budgetbeperkingen
 
 **Capaciteitsplanning:**
 - **TPM (Tokens Per Minute):** Totaal over alle modelimplementaties
-- **Container Instanties:** Auto-scaling bereik (min-max replica's)
-- **Zoek Tier:** Beïnvloedt queryprestaties en indexgrootte limieten
+- **Container Instances:** Autoscaling-bereik (min-max replicas)
+- **Search Tier:** Beïnvloedt queryprestaties en limieten voor indexgrootte
 
 ## 📋 Vereisten
 
-### Vereiste Tools
+### Vereiste tools
 1. **Azure CLI** (versie 2.50.0 of hoger)
    ```bash
    az --version  # Controleer versie
-   az login      # Verifiëren
+   az login      # Authenticeer
    ```
 
-2. **Actief Azure abonnement** met Eigenaar of Bijdrager toegang
+2. **Actief Azure-abonnement** met Owner- of Contributor-toegang
    ```bash
-   az account show  # Verifieer abonnement
+   az account show  # Abonnement verifiëren
    ```
 
-### Vereiste Azure Quota's
+### Vereiste Azure-quota's
 
-Controleer vóór implementatie of er voldoende quota's beschikbaar zijn in jouw doelregio's:
+Controleer voor implementatie of er voldoende quota's zijn in uw doelregio's:
 
 ```bash
-# Controleer de beschikbaarheid van Azure OpenAI in uw regio
+# Controleer de beschikbaarheid van Microsoft Foundry-modellen in uw regio
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# Verifieer OpenAI-quota (voorbeeld voor gpt-4o)
+# Controleer OpenAI-quota (voorbeeld voor gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
 # Controleer Container Apps-quota
 az provider show \
@@ -145,15 +145,15 @@ az provider show \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**Minimaal Vereiste Quota's:**
-- **Azure OpenAI:** 3-4 modelimplementaties in verschillende regio's
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+**Minimaal vereiste quota's:**
+- **Microsoft Foundry Models:** 3-4 modelimplementaties verspreid over regio's
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Let op:** GPT-4o kan een wachtlijst hebben in sommige regio's - controleer [modelbeschikbaarheid](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Container Apps:** Beheerde omgeving + 2-10 container instanties
-- **AI Zoekservice:** Standaard tier (Basic onvoldoende voor vectorzoekopdrachten)
-- **Cosmos DB:** Standaard geprovisioneerde throughput
+  - **Opmerking:** gpt-4.1 kan op sommige regio's een wachtlijst hebben - controleer de [beschikbaarheid van modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps:** Managed environment + 2-10 containerinstanties
+- **AI Search:** Standaard tier (Basic onvoldoende voor vector search)
+- **Cosmos DB:** Standaard provisioned throughput
 
 **Als quota onvoldoende zijn:**
 1. Ga naar Azure Portal → Quota's → Verzoek om verhoging
@@ -162,20 +162,20 @@ az provider show \
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
 3. Overweeg alternatieve regio's met beschikbaarheid
 
-## 🚀 Snelle Implementatie
+## 🚀 Snelle implementatie
 
-### Optie 1: Gebruik Azure CLI
+### Optie 1: Met Azure CLI
 
 ```bash
-# Clone of download de templatebestanden
+# Kloon of download de sjabloonbestanden
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# Maak het implementatiescript uitvoerbaar
+# Maak het deployment-script uitvoerbaar
 chmod +x deploy.sh
 
 # Implementeer met standaardinstellingen
@@ -185,17 +185,17 @@ chmod +x deploy.sh
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Optie 2: Gebruik Azure Portal
+### Optie 2: Met Azure Portal
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Naar Azure implementeren](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Optie 3: Gebruik Azure CLI direct
+### Optie 3: Direct met Azure CLI
 
 ```bash
-# Maak resourcegroep
+# Resourcegroep aanmaken
 az group create --name myResourceGroup --location eastus2
 
-# Implementeer sjabloon
+# Sjabloon implementeren
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -204,44 +204,44 @@ az deployment group create \
 
 ## ⏱️ Implementatietijdlijn
 
-### Wat te Verwachten
+### Wat te verwachten
 
-| Fase | Duur | Wat Gebeurt Er |
-|------|------|----------------||
-| **Template Validatie** | 30-60 seconden | Azure valideert ARM template syntax en parameters |
-| **Resourcegroep Setup** | 10-20 seconden | Maakt resourcegroep (indien nodig) |
-| **OpenAI Implementatie** | 5-8 minuten | Maakt 3-4 OpenAI accounts en implementeert modellen |
-| **Container Apps** | 3-5 minuten | Maakt omgeving en implementeert placeholder containers |
-| **Zoek & Opslag** | 2-4 minuten | Voorziet AI Zoekservice en opslagaccounts |
+| Fase | Duur | Wat gebeurt er |
+|-------|----------|--------------||
+| **Sjabloonvalidatie** | 30-60 seconden | Azure valideert ARM-sjabloon-syntaxis en parameters |
+| **Resourcegroepinstelling** | 10-20 seconden | Maakt resourcegroep aan (indien nodig) |
+| **OpenAI-provisioning** | 5-8 minuten | Maakt 3-4 OpenAI-accounts aan en implementeert modellen |
+| **Container Apps** | 3-5 minuten | Maakt omgeving en implementeert voorbeeldcontainers |
+| **Search & Storage** | 2-4 minuten | Provisioneert AI Search-service en storage-accounts |
 | **Cosmos DB** | 2-3 minuten | Maakt database en configureert containers |
 | **Monitoring Setup** | 2-3 minuten | Stelt Application Insights en Log Analytics in |
-| **RBAC Configuratie** | 1-2 minuten | Configureert beheerde identiteiten en permissies |
-| **Totale Implementatie** | **15-25 minuten** | Volledige infrastructuur klaar |
+| **RBAC Configuration** | 1-2 minuten | Configureert beheerde identiteiten en machtigingen |
+| **Totale implementatie** | **15-25 minuten** | Volledige infrastructuur klaar |
 
-**Na Implementatie:**
-- ✅ **Infrastructuur Klaar:** Alle Azure services geïmplementeerd en actief
-- ⏱️ **Applicatieontwikkeling:** 80-120 uur (jouw verantwoordelijkheid)
-- ⏱️ **Index Configuratie:** 15-30 minuten (vereist jouw schema)
-- ⏱️ **Data Upload:** Afhankelijk van datasetgrootte
-- ⏱️ **Testen & Validatie:** 2-4 uur
+**Na implementatie:**
+- ✅ **Infrastructuur Klaar:** Alle Azure-services provisioned en draaiend
+- ⏱️ **Applicatieontwikkeling:** 80-120 uur (uw verantwoordelijkheid)
+- ⏱️ **Indexconfiguratie:** 15-30 minuten (vereist uw schema)
+- ⏱️ **Data-upload:** Afhankelijk van datasetgrootte
+- ⏱️ **Testen & validatie:** 2-4 uur
 
 ---
 
-## ✅ Verifieer Implementatiesucces
+## ✅ Verifieer implementatiesucces
 
-### Stap 1: Controleer Resource Implementatie (2 minuten)
+### Stap 1: Controleer resource-voorziening (2 minuten)
 
 ```bash
-# Verifieer of alle resources succesvol zijn ingezet
+# Controleer of alle resources succesvol zijn uitgerold
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-**Verwacht:** Lege tabel (alle resources tonen "Succeeded" status)
+**Verwacht:** Lege tabel (alle resources tonen de status "Succeeded")
 
-### Stap 2: Verifieer Azure OpenAI Implementaties (3 minuten)
+### Stap 2: Controleer Microsoft Foundry Models-implementaties (3 minuten)
 
 ```bash
 # Lijst alle OpenAI-accounts
@@ -262,19 +262,19 @@ az cognitiveservices account deployment list \
 ```
 
 **Verwacht:** 
-- 3-4 OpenAI accounts (primaire, secundaire, tertiaire, evaluatieregio's)
-- 1-2 modelimplementaties per account (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 3-4 OpenAI-accounts (primaire, secundaire, tertiaire, evaluatieregio's)
+- 1-2 modelimplementaties per account (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### Stap 3: Test Infrastructuur Eindpunten (5 minuten)
+### Stap 3: Test infrastructuur-eindpunten (5 minuten)
 
 ```bash
-# Haal Container App URL's op
+# Container-app-URL's ophalen
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# Test router eindpunt (plaatsvervangende afbeelding zal reageren)
+# Router-endpoint testen (voorbeeldafbeelding zal antwoorden)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -286,12 +286,12 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 
 **Verwacht:** 
 - Container Apps tonen "Running" status
-- Placeholder nginx reageert met HTTP 200 of 404 (nog geen applicatiecode)
+- Voorbeeld nginx reageert met HTTP 200 of 404 (nog geen applicatiecode)
 
-### Stap 4: Verifieer Azure OpenAI API Toegang (3 minuten)
+### Stap 4: Controleer Microsoft Foundry Models API-toegang (3 minuten)
 
 ```bash
-# Haal OpenAI-eindpunt en sleutel op
+# Haal OpenAI-endpoint en sleutel op
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Test GPT-4o implementatie
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Test gpt-4.1-implementatie
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,47 +312,47 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**Verwacht:** JSON-reactie met chatvoltooiing (bevestigt dat OpenAI functioneel is)
+**Verwacht:** JSON-antwoord met chat completion (bevestigt dat OpenAI functioneel is)
 
-### Wat Werkt vs. Wat Niet
+### Wat werkt vs. wat niet werkt
 
-**✅ Werkt Na Implementatie:**
-- Azure OpenAI modellen geïmplementeerd en accepteren API-aanroepen
-- AI Zoekservice actief (leeg, geen indexen nog)
-- Container Apps actief (placeholder nginx afbeeldingen)
-- Opslagaccounts toegankelijk en klaar voor uploads
-- Cosmos DB klaar voor dataoperaties
+**✅ Werkt na implementatie:**
+- Microsoft Foundry Models zijn geïmplementeerd en accepteren API-aanroepen
+- AI Search-service draait (leeg, nog geen indexen)
+- Container Apps draaien (voorbeeld nginx-afbeeldingen)
+- Storage-accounts toegankelijk en klaar voor uploads
+- Cosmos DB klaar voor data-operaties
 - Application Insights verzamelt infrastructuurtelemetrie
-- Key Vault klaar voor geheimenopslag
+- Key Vault klaar voor geheimopslag
 
-**❌ Werkt Nog Niet (Vereist Ontwikkeling):**
-- Agent eindpunten (geen applicatiecode geïmplementeerd)
-- Chatfunctionaliteit (vereist frontend + backend implementatie)
-- Zoekopdrachten (geen zoekindex nog gemaakt)
-- Documentverwerkingsstroom (geen data geüpload)
+**❌ Werkt nog niet (vereist ontwikkeling):**
+- Agent-eindpunten (geen applicatiecode gedeployed)
+- Chatfunctionaliteit (vereist frontend + backend-implementatie)
+- Zoekopdrachten (geen zoekindex aangemaakt)
+- Documentverwerkingspijplijn (geen data geüpload)
 - Aangepaste telemetrie (vereist applicatie-instrumentatie)
 
-**Volgende Stappen:** Zie [Post-Implementatie Configuratie](../../../../examples/retail-multiagent-arm-template) om jouw applicatie te ontwikkelen en implementeren
+**Volgende stappen:** Zie [Post-implementatieconfiguratie](#-post-deployment-next-steps) om uw applicatie te ontwikkelen en implementeren
 
 ---
 
-## ⚙️ Configuratieopties
+## ⚙️ Configuratie-opties
 
-### Template Parameters
+### Sjabloonparameters
 
 | Parameter | Type | Standaard | Beschrijving |
-|-----------|------|----------|--------------|
-| `projectName` | string | "retail" | Prefix voor alle resource namen |
-| `location` | string | Resourcegroep locatie | Primaire implementatieregio |
+|-----------|------|---------|-------------|
+| `projectName` | string | "retail" | Voorvoegsel voor alle resource-namen |
+| `location` | string | Locatie van resourcegroep | Primaire implementatieregio |
 | `secondaryLocation` | string | "westus2" | Secundaire regio voor multi-regio implementatie |
-| `tertiaryLocation` | string | "francecentral" | Regio voor embeddings model |
+| `tertiaryLocation` | string | "francecentral" | Regio voor embeddings-model |
 | `environmentName` | string | "dev" | Omgevingsaanduiding (dev/staging/prod) |
 | `deploymentMode` | string | "standard" | Implementatieconfiguratie (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Multi-regio implementatie inschakelen |
-| `enableMonitoring` | bool | true | Application Insights en logging inschakelen |
-| `enableSecurity` | bool | true | Key Vault en verbeterde beveiliging inschakelen |
+| `enableMultiRegion` | bool | true | Schakel multi-regio implementatie in |
+| `enableMonitoring` | bool | true | Schakel Application Insights en logging in |
+| `enableSecurity` | bool | true | Schakel Key Vault en verbeterde beveiliging in |
 
-### Parameters Aanpassen
+### Parameters aanpassen
 
 Bewerk `azuredeploy.parameters.json`:
 
@@ -379,28 +379,19 @@ Bewerk `azuredeploy.parameters.json`:
 
 ## 🏗️ Architectuuroverzicht
 
+```mermaid
+graph TD
+    Frontend[Frontend<br/>Container-app] --> Router[Agent-router<br/>Container-app] --> Agents[Agenten<br/>Klant + Voorraad]
+    Router --> Search[AI-zoekopdracht<br/>Vector-DB]
+    Router --> Models[Microsoft Foundry-modellen<br/>Meerdere regio's]
+    Agents --> Storage[Opslag<br/>Documenten]
+    Search --> CosmosDB[Cosmos DB<br/>Chatgeschiedenis]
+    Models --> AppInsights[App Insights<br/>Monitoring]
+    Storage --> KeyVault[Key Vault<br/>Geheimen]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+## 📖 Gebruik van implementatiescript
 
-## 📖 Implementatiescript Gebruik
-
-Het `deploy.sh` script biedt een interactieve implementatie-ervaring:
+Het `deploy.sh`-script biedt een interactieve implementatie-ervaring:
 
 ```bash
 # Toon hulp
@@ -426,29 +417,29 @@ Het `deploy.sh` script biedt een interactieve implementatie-ervaring:
   --no-security
 ```
 
-### Script Functies
+### Scriptfuncties
 
-- ✅ **Vereistenvalidatie** (Azure CLI, loginstatus, templatebestanden)
-- ✅ **Resourcegroepbeheer** (maakt aan indien niet aanwezig)
-- ✅ **Templatevalidatie** vóór implementatie
-- ✅ **Voortgangsmonitoring** met gekleurde output
-- ✅ **Implementatie-uitvoer** weergave
+- ✅ **Voorwaardenvalidatie** (Azure CLI, loginstatus, sjabloonbestanden)
+- ✅ **Resourcegroepbeheer** (maakt aan als deze nog niet bestaat)
+- ✅ **Sjabloonvalidatie** vóór implementatie
+- ✅ **Voortgangsbewaking** met gekleurde uitvoer
+- ✅ **Implementatie-uitvoer** weergeven
 - ✅ **Post-implementatie begeleiding**
 
-## 📊 Implementatie Monitoren
+## 📊 Monitoring van implementatie
 
-### Controleer Implementatiestatus
+### Controleer implementatiestatus
 
 ```bash
-# Lijst implementaties
+# Implementaties weergeven
 az deployment group list --resource-group myResourceGroup --output table
 
-# Verkrijg implementatiedetails
+# Haal details van de implementatie op
 az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Bekijk implementatievoortgang
+# Volg de voortgang van de implementatie
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -456,49 +447,49 @@ az deployment group create \
   --verbose
 ```
 
-### Implementatie Uitvoer
+### Implementatie-uitvoer
 
-Na succesvolle implementatie zijn de volgende uitvoer beschikbaar:
+Na succesvolle implementatie zijn de volgende outputs beschikbaar:
 
-- **Frontend URL**: Publiek eindpunt voor de webinterface
-- **Router URL**: API-eindpunt voor de agent router
-- **OpenAI Eindpunten**: Primaire en secundaire OpenAI service eindpunten
-- **Zoekservice**: Azure AI Zoekservice eindpunt
-- **Opslagaccount**: Naam van het opslagaccount voor documenten
+- **Frontend-URL**: Publiek eindpunt voor de webinterface
+- **Router-URL**: API-eindpunt voor de agent-router
+- **OpenAI-eindpunten**: Primaire en secundaire OpenAI-service-eindpunten
+- **Search-service**: Azure AI Search-service-eindpunt
+- **Storage Account**: Naam van het storage-account voor documenten
 - **Key Vault**: Naam van de Key Vault (indien ingeschakeld)
 - **Application Insights**: Naam van de monitoringservice (indien ingeschakeld)
 
-## 🔧 Post-Implementatie: Volgende Stappen
-> **📝 Belangrijk:** De infrastructuur is geïmplementeerd, maar je moet de applicatiecode ontwikkelen en implementeren.
+## 🔧 Post-implementatie: Volgende stappen
+> **📝 Belangrijk:** Infrastructuur is geïmplementeerd, maar u moet applicatiecode ontwikkelen en implementeren.
 
-### Fase 1: Ontwikkel Agent Applicaties (Jouw Verantwoordelijkheid)
+### Fase 1: Ontwikkel agentapplicaties (Uw verantwoordelijkheid)
 
-De ARM-template maakt **lege Container Apps** met tijdelijke nginx-afbeeldingen. Jij moet:
+De ARM-sjabloon maakt **lege Container Apps** met tijdelijke nginx-afbeeldingen. U moet:
 
-**Vereiste Ontwikkeling:**
-1. **Agent Implementatie** (30-40 uur)
-   - Klantenservice-agent met GPT-4o-integratie
-   - Inventarisagent met GPT-4o-mini-integratie
-   - Logica voor agentroutering
+**Vereiste ontwikkeling:**
+1. **Agentimplementatie** (30-40 uur)
+   - Klantenservice-agent met gpt-4.1 integratie
+   - Inventory-agent met gpt-4.1-mini integratie
+   - Agent-routeringslogica
 
-2. **Frontend Ontwikkeling** (20-30 uur)
+2. **Frontendontwikkeling** (20-30 uur)
    - Chatinterface UI (React/Vue/Angular)
-   - Functionaliteit voor bestand uploaden
+   - Bestandsuploadfunctionaliteit
    - Weergave en opmaak van reacties
 
-3. **Backend Services** (12-16 uur)
+3. **Backendservices** (12-16 uur)
    - FastAPI of Express-router
-   - Authenticatie-middleware
+   - Authenticatiemiddleware
    - Telemetrie-integratie
 
 **Zie:** [Architectuurgids](../retail-scenario.md) voor gedetailleerde implementatiepatronen en codevoorbeelden
 
-### Fase 2: Configureer AI Zoekindex (15-30 minuten)
+### Fase 2: Configureer AI-zoekindex (15-30 minuten)
 
-Maak een zoekindex die overeenkomt met je datamodel:
+Maak een zoekindex die overeenkomt met uw datamodel:
 
 ```bash
-# Haal zoekservicedetails op
+# Zoekservicegegevens ophalen
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -508,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# Maak een index met je schema (voorbeeld)
+# Maak een index met uw schema (voorbeeld)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -530,12 +521,12 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 ```
 
 **Bronnen:**
-- [AI Zoekindex Schema Ontwerp](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector Zoekconfiguratie](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+- [Ontwerp van AI-zoekindexschema](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Vectorzoekconfiguratie](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Fase 3: Upload Je Data (Tijd varieert)
+### Fase 3: Upload uw gegevens (tijd varieert)
 
-Zodra je productdata en documenten hebt:
+Zodra u productgegevens en documenten heeft:
 
 ```bash
 # Haal opslagaccountgegevens op
@@ -555,7 +546,7 @@ az storage blob upload-batch \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# Voorbeeld: Upload een enkel bestand
+# Voorbeeld: één bestand uploaden
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -564,27 +555,27 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### Fase 4: Bouw en Implementeer Je Applicaties (8-12 uur)
+### Fase 4: Bouw en implementeer uw applicaties (8-12 uur)
 
-Zodra je je agentcode hebt ontwikkeld:
+Zodra u uw agentcode heeft ontwikkeld:
 
 ```bash
-# 1. Maak Azure Container Registry (indien nodig)
+# 1. Maak een Azure Container Registry aan (indien nodig)
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. Bouw en push agent router afbeelding
+# 2. Bouw en push de agent-router-afbeelding
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. Bouw en push frontend afbeelding
+# 3. Bouw en push de frontend-afbeelding
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. Update Container Apps met jouw afbeeldingen
+# 4. Werk Container Apps bij met uw afbeeldingen
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -606,16 +597,16 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### Fase 5: Test Je Applicatie (2-4 uur)
+### Fase 5: Test uw applicatie (2-4 uur)
 
 ```bash
-# Haal de URL van uw applicatie op
+# Haal je applicatie-URL op
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Test de agent-eindpunt (zodra uw code is geïmplementeerd)
+# Test het agent-eindpunt (zodra je code is ingezet)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -623,7 +614,7 @@ curl -X POST "https://${ROUTER_URL}/chat" \
     "agent": "customer"
   }'
 
-# Controleer applicatielogs
+# Controleer de applicatielogs
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -633,56 +624,56 @@ az containerapp logs show \
 ### Implementatiebronnen
 
 **Architectuur & Ontwerp:**
-- 📖 [Volledige Architectuurgids](../retail-scenario.md) - Gedetailleerde implementatiepatronen
-- 📖 [Multi-Agent Ontwerppatronen](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+- 📖 [Volledige architectuurgids](../retail-scenario.md) - Gedetailleerde implementatiepatronen
+- 📖 [Ontwerppatronen voor multi-agenten](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Codevoorbeelden:**
-- 🔗 [Azure OpenAI Chat Voorbeeld](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG-patroon
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agentframework (C#)
+- 🔗 [Microsoft Foundry Models Chat-voorbeeld](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG-patroon
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agent-framework (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agentorkestratie (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent gesprekken
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Gesprekken tussen meerdere agenten
 
-**Geschatte Totale Inspanning:**
-- Implementatie van infrastructuur: 15-25 minuten (✅ Voltooid)
-- Applicatieontwikkeling: 80-120 uur (🔨 Jouw werk)
-- Testen en optimalisatie: 15-25 uur (🔨 Jouw werk)
+**Geschatte totale inspanning:**
+- Infrastructuurimplementatie: 15-25 minuten (✅ Voltooid)
+- Applicatieontwikkeling: 80-120 uur (🔨 Uw werk)
+- Testen en optimalisatie: 15-25 uur (🔨 Uw werk)
 
 ## 🛠️ Problemen oplossen
 
-### Veelvoorkomende Problemen
+### Veelvoorkomende problemen
 
-#### 1. Azure OpenAI Quota Overschreden
+#### 1. Quota voor Microsoft Foundry-modellen overschreden
 
 ```bash
 # Controleer het huidige quotagebruik
 az cognitiveservices usage list --location eastus2
 
-# Vraag om een quotaverhoging
+# Vraag om een verhoging van de quota
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
-#### 2. Container Apps Implementatie Mislukt
+#### 2. Implementatie van Container Apps mislukt
 
 ```bash
-# Controleer container-app logs
+# Controleer de logs van de container-app
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# Herstart container-app
+# Herstart de container-app
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### 3. Initialisatie van Zoekservice
+#### 3. Initialisatie van de zoekservice
 
 ```bash
-# Verifieer de status van de zoekservice
+# Controleer de status van de zoekservice
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
@@ -692,36 +683,36 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
   -H "api-key: <search-admin-key>"
 ```
 
-### Validatie van Implementatie
+### Implementatievalidatie
 
 ```bash
-# Valideer dat alle resources zijn aangemaakt
+# Valideer dat alle bronnen zijn aangemaakt
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Controleer de gezondheid van de resources
+# Controleer de gezondheid van de bron
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-## 🔐 Veiligheidsoverwegingen
+## 🔐 Beveiligingsoverwegingen
 
 ### Sleutelbeheer
 - Alle geheimen worden opgeslagen in Azure Key Vault (indien ingeschakeld)
-- Container apps gebruiken managed identity voor authenticatie
+- Container-apps gebruiken een beheerde identiteit voor authenticatie
 - Opslagaccounts hebben veilige standaardinstellingen (alleen HTTPS, geen openbare blobtoegang)
 
 ### Netwerkbeveiliging
-- Container apps gebruiken interne netwerken waar mogelijk
-- Zoekservice geconfigureerd met optie voor private endpoints
-- Cosmos DB geconfigureerd met minimale benodigde permissies
+- Container-apps gebruiken waar mogelijk interne netwerken
+- Zoekservice geconfigureerd met optie voor privé-eindpunten
+- Cosmos DB geconfigureerd met minimale noodzakelijke machtigingen
 
-### RBAC Configuratie
+### RBAC-configuratie
 ```bash
-# Wijs de benodigde rollen toe voor beheerde identiteit
+# Ken de benodigde rollen toe aan de beheerde identiteit.
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
@@ -730,10 +721,10 @@ az role assignment create \
 
 ## 💰 Kostenoptimalisatie
 
-### Kostenramingen (Maandelijks, USD)
+### Kostenraming (maandelijks, USD)
 
-| Modus | OpenAI | Container Apps | Zoekservice | Opslag | Totale Schatting |
-|-------|--------|----------------|-------------|--------|------------------|
+| Modus | OpenAI | Container-apps | Zoekservice | Opslag | Totaal geschat |
+|------|--------|----------------|--------|---------|------------|
 | Minimaal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standaard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
@@ -751,14 +742,14 @@ az consumption budget create \
   --end-date 2024-12-31
 ```
 
-## 🔄 Updates en Onderhoud
+## 🔄 Updates en onderhoud
 
-### Template Updates
-- Versiebeheer de ARM-templatebestanden
+### Sjabloonupdates
+- Beheer ARM-sjabloonbestanden met versiebeheer
 - Test wijzigingen eerst in de ontwikkelomgeving
 - Gebruik incrementele implementatiemodus voor updates
 
-### Resource Updates
+### Resource-updates
 ```bash
 # Bijwerken met nieuwe parameters
 az deployment group create \
@@ -768,26 +759,26 @@ az deployment group create \
   --mode Incremental
 ```
 
-### Back-up en Herstel
-- Cosmos DB automatische back-up ingeschakeld
-- Key Vault soft delete ingeschakeld
-- Container app-revisies behouden voor rollback
+### Back-up en herstel
+- Automatische back-up van Cosmos DB ingeschakeld
+- Soft delete voor Key Vault ingeschakeld
+- Container-apprevisies behouden voor rollback
 
 ## 📞 Ondersteuning
 
-- **Template Problemen**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Azure Ondersteuning**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Sjabloonproblemen**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Azure-ondersteuning**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
 - **Community**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ Klaar om je multi-agent oplossing te implementeren?**
+**⚡ Klaar om uw multi-agentoplossing te implementeren?**
 
 Begin met: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Vrijwaring**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

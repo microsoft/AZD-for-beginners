@@ -1,24 +1,24 @@
-# AZD voor Beginners: Een Gestructureerde Leerreis
+# AZD Voor Beginners: Een Gestructureerd Leertraject
 
-![AZD voor beginners](../../translated_images/nl/azdbeginners.5527441dd9f74068.webp) 
+![AZD-voor-beginners](../../translated_images/nl/azdbeginners.5527441dd9f74068.webp) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub kijkers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub sterren](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ---
 
-### Automatische vertalingen (Altijd up-to-date)
+### Geautomatiseerde vertalingen (Altijd actueel)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabisch](../ar/README.md) | [Bengaals](../bn/README.md) | [Bulgaars](../bg/README.md) | [Burmees (Myanmar)](../my/README.md) | [Chinees (Vereenvoudigd)](../zh-CN/README.md) | [Chinees (Traditioneel, Hongkong)](../zh-HK/README.md) | [Chinees (Traditioneel, Macau)](../zh-MO/README.md) | [Chinees (Traditioneel, Taiwan)](../zh-TW/README.md) | [Kroatisch](../hr/README.md) | [Tsjechisch](../cs/README.md) | [Deens](../da/README.md) | [Nederlands](./README.md) | [Ests](../et/README.md) | [Fins](../fi/README.md) | [Frans](../fr/README.md) | [Duits](../de/README.md) | [Grieks](../el/README.md) | [Hebreeuws](../he/README.md) | [Hindi](../hi/README.md) | [Hongaars](../hu/README.md) | [Indonesisch](../id/README.md) | [Italiaans](../it/README.md) | [Japans](../ja/README.md) | [Kannada](../kn/README.md) | [Koreaans](../ko/README.md) | [Litouws](../lt/README.md) | [Maleis](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepalees](../ne/README.md) | [Nigeriaanse Pidgin](../pcm/README.md) | [Noors](../no/README.md) | [Perzisch (Farsi)](../fa/README.md) | [Pools](../pl/README.md) | [Portugees (Brazilië)](../pt-BR/README.md) | [Portugees (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Roemeens](../ro/README.md) | [Russisch](../ru/README.md) | [Servisch (Cyrillisch)](../sr/README.md) | [Slowaaks](../sk/README.md) | [Sloveens](../sl/README.md) | [Spaans](../es/README.md) | [Swahili](../sw/README.md) | [Zweeds](../sv/README.md) | [Tagalog (Filipijns)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thais](../th/README.md) | [Turks](../tr/README.md) | [Oekraïens](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamees](../vi/README.md)
+[Arabisch](../ar/README.md) | [Bengaals](../bn/README.md) | [Bulgaars](../bg/README.md) | [Birmees (Myanmar)](../my/README.md) | [Chinees (vereenvoudigd)](../zh-CN/README.md) | [Chinees (traditioneel, Hong Kong)](../zh-HK/README.md) | [Chinees (traditioneel, Macau)](../zh-MO/README.md) | [Chinees (traditioneel, Taiwan)](../zh-TW/README.md) | [Kroatisch](../hr/README.md) | [Tsjechisch](../cs/README.md) | [Deens](../da/README.md) | [Nederlands](./README.md) | [Ests](../et/README.md) | [Fins](../fi/README.md) | [Frans](../fr/README.md) | [Duits](../de/README.md) | [Grieks](../el/README.md) | [Hebreeuws](../he/README.md) | [Hindi](../hi/README.md) | [Hongaars](../hu/README.md) | [Indonesisch](../id/README.md) | [Italiaans](../it/README.md) | [Japans](../ja/README.md) | [Kannada](../kn/README.md) | [Koreaans](../ko/README.md) | [Litouws](../lt/README.md) | [Maleis](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepalees](../ne/README.md) | [Nigeriaans Pidgin](../pcm/README.md) | [Noors](../no/README.md) | [Perzisch (Farsi)](../fa/README.md) | [Pools](../pl/README.md) | [Portugees (Brazilië)](../pt-BR/README.md) | [Portugees (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Roemeens](../ro/README.md) | [Russisch](../ru/README.md) | [Servisch (Cyrillisch)](../sr/README.md) | [Slowaaks](../sk/README.md) | [Sloveens](../sl/README.md) | [Spaans](../es/README.md) | [Swahili](../sw/README.md) | [Zweeds](../sv/README.md) | [Tagalog (Filipijns)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thais](../th/README.md) | [Turks](../tr/README.md) | [Oekraïens](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamees](../vi/README.md)
 
-> **Bij voorkeur lokaal klonen?**
+> **Liever lokaal klonen?**
 >
-> Deze repository bevat meer dan 50 taalvertalingen die de downloadgrootte aanzienlijk vergroten. Om te klonen zonder vertalingen, gebruik sparse checkout:
+> Deze repository bevat meer dan 50 taalvertalingen, waardoor de downloadgrootte aanzienlijk toeneemt. Om te clonen zonder vertalingen, gebruik sparse checkout:
 >
 > **Bash / macOS / Linux:**
 > ```bash
@@ -37,9 +37,23 @@
 > Dit geeft je alles wat je nodig hebt om de cursus te voltooien met een veel snellere download.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
+## 🆕 Wat is er vandaag nieuw in azd
+
+Azure Developer CLI is gegroeid voorbij traditionele web-apps en API's. Vandaag is azd het enige hulpmiddel om **elke** applicatie naar Azure te implementeren — inclusief AI-aangedreven applicaties en intelligente agenten.
+
+Dit betekent het volgende voor jou:
+
+- **AI-agenten zijn nu eersteklas azd-workloads.** Je kunt AI-agentprojecten initialiseren, implementeren en beheren met dezelfde `azd init` → `azd up` workflow die je al kent.
+- **Integratie met Microsoft Foundry** brengt modelimplementatie, agent-hosting en AI-serviceconfiguratie rechtstreeks in het azd-sjabloonecosysteem.
+- **De kernworkflow is niet veranderd.** Of je nu een todo-app, een microservice of een multi-agent AI-oplossing implementeert, de commando's zijn hetzelfde.
+
+Als je azd eerder hebt gebruikt, is AI-ondersteuning een natuurlijke uitbreiding — geen apart hulpmiddel of een gevorderd traject. Als je nieuw begint, leer je één workflow die voor alles werkt.
+
+---
+
 ## 🚀 Wat is Azure Developer CLI (azd)?
 
-**Azure Developer CLI (azd)** is een ontwikkelaarsvriendelijke opdrachtregeltool die het eenvoudig maakt om applicaties naar Azure te implementeren. In plaats van handmatig tientallen Azure-resources te maken en te verbinden, kun je hele applicaties met één opdracht implementeren.
+**Azure Developer CLI (azd)** is een ontwikkelaarvriendelijke commandoregels-tool die het eenvoudig maakt om applicaties naar Azure te implementeren. In plaats van handmatig tientallen Azure-resources te creëren en te koppelen, kun je volledige applicaties implementeren met één enkel commando.
 
 ### De magie van `azd up`
 
@@ -48,12 +62,12 @@
 # ✅ Maakt alle Azure-resources aan
 # ✅ Configureert netwerken en beveiliging
 # ✅ Bouwt je applicatiecode
-# ✅ Zet uit naar Azure
+# ✅ Zet het uit naar Azure
 # ✅ Geeft je een werkende URL
 azd up
 ```
 
-**Dat is alles!** Geen klikken in de Azure Portal, geen complexe ARM-sjablonen om eerst te leren, geen handmatige configuratie - alleen werkende applicaties op Azure.
+**Dat is alles!** Geen klikken in de Azure Portal, geen complexe ARM-templates die je eerst moet leren, geen handmatige configuratie — alleen werkende applicaties op Azure.
 
 ---
 
@@ -66,18 +80,18 @@ Dit is de meest gestelde vraag door beginners. Hier is het eenvoudige antwoord:
 | **Doel** | Beheer individuele Azure-resources | Implementeer complete applicaties |
 | **Denkwijze** | Infrastructuurgericht | Applicatiegericht |
 | **Voorbeeld** | `az webapp create --name myapp...` | `azd up` |
-| **Leercurve** | Moet Azure-diensten kennen | Ken alleen je app |
-| **Bij uitstek voor** | DevOps, infrastructuur | Ontwikkelaars, prototyping |
+| **Leercurve** | Je moet Azure-services kennen | Ken alleen je app |
+| **Het meest geschikt voor** | DevOps, infrastructuur | Ontwikkelaars, prototyping |
 
 ### Eenvoudige analogie
 
-- **Azure CLI** is als het hebben van alle gereedschappen om een huis te bouwen - hamers, zagen, spijkers. Je kunt alles bouwen, maar je moet weten hoe bouwkunde werkt.
-- **Azure Developer CLI** is als het inhuren van een aannemer - je beschrijft wat je wilt en zij regelen de bouw.
+- **Azure CLI** is alsof je alle gereedschappen hebt om een huis te bouwen — hamers, zagen, spijkers. Je kunt alles bouwen, maar je moet weten hoe bouwen werkt.
+- **Azure Developer CLI** is alsof je een aannemer inhuurt — je beschrijft wat je wilt en zij regelen de bouw.
 
 ### Wanneer gebruik je welke
 
 | Scenario | Gebruik dit |
-|----------|-------------|
+|----------|----------|
 | "I want to deploy my web app quickly" | `azd up` |
 | "I need to create just a storage account" | `az storage account create` |
 | "I'm building a full AI application" | `azd init --template azure-search-openai-demo` |
@@ -88,10 +102,10 @@ Dit is de meest gestelde vraag door beginners. Hier is het eenvoudige antwoord:
 
 AZD gebruikt Azure CLI onder de motorkap. Je kunt beide gebruiken:
 ```bash
-# Implementeer je app met AZD
+# Zet je app in met AZD
 azd up
 
-# Fijnstem vervolgens specifieke resources met Azure CLI
+# Stel daarna specifieke resources bij met Azure CLI
 az webapp config set --name myapp --always-on true
 ```
 
@@ -99,18 +113,18 @@ az webapp config set --name myapp --always-on true
 
 ## 🌟 Vind sjablonen in Awesome AZD
 
-Begin niet vanaf nul! **Awesome AZD** is de communityverzameling van kant-en-klare sjablonen die direct te implementeren zijn:
+Begin niet vanaf nul! **Awesome AZD** is de communitycollectie van kant-en-klare sjablonen om te implementeren:
 
-| Bron | Beschrijving |
+| Resource | Beschrijving |
 |----------|-------------|
-| 🔗 [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) | Blader door 200+ sjablonen met één-klik implementatie |
-| 🔗 [**Submit a Template**](https://github.com/Azure/awesome-azd/issues) | Draag je eigen sjabloon bij aan de community |
-| 🔗 [**GitHub Repository**](https://github.com/Azure/awesome-azd) | Geef een ster en verken de bron |
+| 🔗 [**Awesome AZD-galerij**](https://azure.github.io/awesome-azd/) | Blader door 200+ sjablonen met één-klik implementatie |
+| 🔗 [**Sjabloon indienen**](https://github.com/Azure/awesome-azd/issues) | Draag je eigen sjabloon bij aan de community |
+| 🔗 [**GitHub-repository**](https://github.com/Azure/awesome-azd) | Geef een ster en verken de bron |
 
 ### Populaire AI-sjablonen van Awesome AZD
 
 ```bash
-# RAG-chat met Azure OpenAI + AI-zoekfunctie
+# RAG Chat met Microsoft Foundry-modellen + AI-zoekfunctie
 azd init --template azure-search-openai-demo
 
 # Snelle AI-chatapplicatie
@@ -141,7 +155,7 @@ brew tap azure/azd && brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### Stap 2: Log in bij Azure
+### Stap 2: Inloggen bij Azure
 
 ```bash
 azd auth login
@@ -150,7 +164,7 @@ azd auth login
 ### Stap 3: Implementeer je eerste app
 
 ```bash
-# Initialiseren van een sjabloon
+# Initialiseren vanuit een sjabloon
 azd init --template todo-nodejs-mongo
 
 # Implementeren naar Azure (maakt alles aan!)
@@ -159,7 +173,7 @@ azd up
 
 **🎉 Dat is alles!** Je app staat nu live op Azure.
 
-### Opruimen (niet vergeten!)
+### Opruimen (Niet vergeten!)
 
 ```bash
 # Remove all resources when done experimenting
@@ -170,25 +184,25 @@ azd down --force --purge
 
 ## 📚 Hoe gebruik je deze cursus
 
-Deze cursus is ontworpen voor **progressief leren** - begin waar je je comfortabel bij voelt en werk je omhoog:
+Deze cursus is ontworpen voor **progressief leren** — begin waar je je comfortabel bij voelt en werk jezelf omhoog:
 
-| Jouw ervaring | Begin hier |
+| Je ervaring | Begin hier |
 |-----------------|------------|
-| **Volledig nieuw met Azure** | [Hoofdstuk 1: Foundation](../..) |
-| **Ken Azure, nieuw met AZD** | [Hoofdstuk 1: Foundation](../..) |
-| **Wil AI-apps implementeren** | [Hoofdstuk 2: AI-First Development](../..) |
-| **Wil praktische oefening** | [🎓 Interactive Workshop](workshop/README.md) - 3-4 uur begeleide lab |
-| **Hebben productiepatronen nodig** | [Hoofdstuk 8: Production & Enterprise](../..) |
+| **Helemaal nieuw met Azure** | [Hoofdstuk 1: Basis](#-chapter-1-foundation--quick-start) |
+| **Kent Azure, nieuw met AZD** | [Hoofdstuk 1: Basis](#-chapter-1-foundation--quick-start) |
+| **Wil AI-apps implementeren** | [Hoofdstuk 2: AI-eerst ontwikkeling](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
+| **Wil hands-on oefening** | [🎓 Interactieve Workshop](workshop/README.md) - 3-4 uur begeleide lab |
+| **Heb je productiepatronen nodig** | [Hoofdstuk 8: Productie & Enterprise](#-chapter-8-production--enterprise-patterns) |
 
-### Snel opzetten
+### Snelle setup
 
 1. **Maak een fork van deze repository**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
 2. **Kloon het**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
-3. **Hulp krijgen**: [Azure Discord-community](https://discord.com/invite/ByRwuEEgH4)
+3. **Krijg hulp**: [Azure Discord-community](https://discord.com/invite/ByRwuEEgH4)
 
-> **Bij voorkeur lokaal klonen?**
->
-> Deze repository bevat meer dan 50 taalvertalingen die de downloadgrootte aanzienlijk vergroten. Om te klonen zonder vertalingen, gebruik sparse checkout:
+> **Liever lokaal klonen?**
+
+> Deze repository bevat meer dan 50 taalvertalingen, waardoor de downloadgrootte aanzienlijk toeneemt. Om te clonen zonder vertalingen, gebruik sparse checkout:
 > ```bash
 > git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
 > cd AZD-for-beginners
@@ -197,46 +211,46 @@ Deze cursus is ontworpen voor **progressief leren** - begin waar je je comfortab
 > Dit geeft je alles wat je nodig hebt om de cursus te voltooien met een veel snellere download.
 
 
-## Cursusoverzicht
+## Overzicht van de Cursus
 
-Beheers Azure Developer CLI (azd) via gestructureerde hoofdstukken ontworpen voor progressief leren. **Speciale focus op AI-applicatie-implementatie met Microsoft Foundry-integratie.**
+Beheers Azure Developer CLI (azd) via gestructureerde hoofdstukken die ontworpen zijn voor progressief leren. **Speciale focus op het implementeren van AI-applicaties met Microsoft Foundry-integratie.**
 
 ### Waarom deze cursus essentieel is voor moderne ontwikkelaars
 
-Gebaseerd op inzichten uit de Microsoft Foundry Discord-community, **wil 45% van de ontwikkelaars AZD gebruiken voor AI-workloads**, maar ondervinden uitdagingen met:
+Gebaseerd op inzichten uit de Microsoft Foundry Discord-community, wil **45% van de ontwikkelaars AZD gebruiken voor AI-workloads**, maar ze lopen tegen uitdagingen aan met:
 - Complexe multi-service AI-architecturen
-- Best practices voor productie-implementatie van AI  
-- Integratie en configuratie van Azure AI-diensten
+- Productie-implementatie best practices voor AI  
+- Integratie en configuratie van Azure AI-services
 - Kostenoptimalisatie voor AI-workloads
-- Foutoplossing van AI-specifieke implementatieproblemen
+- Problemen oplossen bij AI-specifieke implementaties
 
 ### Leerdoelen
 
-Door deze gestructureerde cursus te voltooien, zal je:
-- **Beheers de AZD-basisprincipes**: Kernconcepten, installatie en configuratie
-- **Implementeer AI-applicaties**: Gebruik AZD met Microsoft Foundry-diensten
-- **Implementeer Infrastructure as Code**: Beheer Azure-resources met Bicep-sjablonen
-- **Problemen oplossen bij implementaties**: Los veelvoorkomende problemen op en debug problemen
-- **Optimaliseren voor productie**: Beveiliging, schalen, monitoring en kostenbeheer
-- **Bouw multi-agentoplossingen**: Implementeer complexe AI-architecturen
+Door deze gestructureerde cursus te voltooien, zul je:
+- **AZD-grondbeginselen beheersen**: Kernconcepten, installatie en configuratie
+- **AI-applicaties implementeren**: Gebruik AZD met Microsoft Foundry-services
+- **Infrastructuur als code implementeren**: Beheer Azure-resources met Bicep-sjablonen
+- **Implementaties debuggen**: Los veelvoorkomende problemen op en debug fouten
+- **Optimaliseren voor productie**: Beveiliging, schaalbaarheid, monitoring en kostenbeheer
+- **Multi-agent oplossingen bouwen**: Implementeer complexe AI-architecturen
 
-## 🗺️ Cursuskaart: Snelle navigatie per hoofdstuk
+## 🗺️ Cursusoverzicht: Snelle navigatie per hoofdstuk
 
-Elk hoofdstuk heeft een toegewijde README met leerdoelen, snelle starts en oefeningen:
+Elk hoofdstuk heeft een toegewijd README met leerdoelen, snelle starts en oefeningen:
 
 | Hoofdstuk | Onderwerp | Lessen | Duur | Complexiteit |
 |---------|-------|---------|----------|------------|
-| **[Hoofdstuk 1: Foundation](docs/chapter-01-foundation/README.md)** | Aan de slag | [AZD Basics](docs/chapter-01-foundation/azd-basics.md) &#124; [Installatie](docs/chapter-01-foundation/installation.md) &#124; [Eerste project](docs/chapter-01-foundation/first-project.md) | 30-45 min | ⭐ |
-| **[Hoofdstuk 2: AI-ontwikkeling](docs/chapter-02-ai-development/README.md)** | AI-eerste apps | [Foundry-integratie](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [AI-agents](docs/chapter-02-ai-development/agents.md) &#124; [Modelimplementatie](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [Workshop](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 hrs | ⭐⭐ |
-| **[Hoofdstuk 3: Configuratie](docs/chapter-03-configuration/README.md)** | Auth & Beveiliging | [Configuratie](docs/chapter-03-configuration/configuration.md) &#124; [Authenticatie & Beveiliging](docs/chapter-03-configuration/authsecurity.md) | 45-60 min | ⭐⭐
-| **[Ch 4: Infrastructure](docs/chapter-04-infrastructure/README.md)** | IaC & Implementatie | [Implementatiegids](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [Provisioning](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 hrs | ⭐⭐⭐ |
-| **[Ch 5: Multi-Agent](docs/chapter-05-multi-agent/README.md)** | AI Agent Oplossingen | [Retail Scenario](examples/retail-scenario.md) &#124; [Coördinatiepatronen](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 hrs | ⭐⭐⭐⭐ |
-| **[Ch 6: Pre-Deployment](docs/chapter-06-pre-deployment/README.md)** | Planning & Validatie | [Preflight Checks](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [SKU Selection](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [App Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 hr | ⭐⭐ |
-| **[Ch 7: Troubleshooting](docs/chapter-07-troubleshooting/README.md)** | Debug & Oplossen | [Veelvoorkomende Problemen](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Debugging](docs/chapter-07-troubleshooting/debugging.md) &#124; [AI Issues](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 hrs | ⭐⭐ |
-| **[Ch 8: Production](docs/chapter-08-production/README.md)** | Enterprise Patronen | [Productiepraktijken](docs/chapter-08-production/production-ai-practices.md) | 2-3 hrs | ⭐⭐⭐⭐ |
-| **[🎓 Workshop](workshop/README.md)** | Hands-On Lab | [Introductie](workshop/docs/instructions/0-Introduction.md) &#124; [Selectie](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Validatie](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Deconstructie](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Configuratie](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Aanpassing](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Afbouw](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [Afronding](workshop/docs/instructions/7-Wrap-up.md) | 3-4 hrs | ⭐⭐ |
+| **[Ch 1: Basis](docs/chapter-01-foundation/README.md)** | Aan de slag | [AZD Basis](docs/chapter-01-foundation/azd-basics.md) &#124; [Installatie](docs/chapter-01-foundation/installation.md) &#124; [Eerste project](docs/chapter-01-foundation/first-project.md) | 30-45 min | ⭐ |
+| **[Ch 2: AI-ontwikkeling](docs/chapter-02-ai-development/README.md)** | AI-first apps | [Foundry-integratie](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [AI-agents](docs/chapter-02-ai-development/agents.md) &#124; [Modelimplementatie](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [Workshop](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 hrs | ⭐⭐ |
+| **[Ch 3: Configuratie](docs/chapter-03-configuration/README.md)** | Authenticatie & beveiliging | [Configuratie](docs/chapter-03-configuration/configuration.md) &#124; [Authenticatie & beveiliging](docs/chapter-03-configuration/authsecurity.md) | 45-60 min | ⭐⭐ |
+| **[Ch 4: Infrastructuur](docs/chapter-04-infrastructure/README.md)** | IaC & uitrol | [Uitrolgids](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [Provisioning](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 hrs | ⭐⭐⭐ |
+| **[Ch 5: Multi-Agent](docs/chapter-05-multi-agent/README.md)** | AI-agentoplossingen | [Retailscenario](examples/retail-scenario.md) &#124; [Coördinatiepatronen](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 hrs | ⭐⭐⭐⭐ |
+| **[Ch 6: Pre-Deployment](docs/chapter-06-pre-deployment/README.md)** | Planning & validatie | [Preflight-controles](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Capaciteitsplanning](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [SKU-selectie](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [App Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 hr | ⭐⭐ |
+| **[Ch 7: Probleemoplossing](docs/chapter-07-troubleshooting/README.md)** | Debuggen & oplossen | [Veelvoorkomende problemen](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Debuggen](docs/chapter-07-troubleshooting/debugging.md) &#124; [AI-problemen](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 hrs | ⭐⭐ |
+| **[Ch 8: Productie](docs/chapter-08-production/README.md)** | Enterprise-patronen | [Productiepraktijken](docs/chapter-08-production/production-ai-practices.md) | 2-3 hrs | ⭐⭐⭐⭐ |
+| **[🎓 Workshop](workshop/README.md)** | Praktijklab | [Introductie](workshop/docs/instructions/0-Introduction.md) &#124; [Selectie](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Validatie](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Ontleding](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Configuratie](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Aanpassing](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Afbouw](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [Afronding](workshop/docs/instructions/7-Wrap-up.md) | 3-4 hrs | ⭐⭐ |
 
-**Totale cursusduur:** ~10-14 uur | **Vaardigheidsprogressie:** Beginner → Productieklaar
+**Totale cursusduur:** ~10-14 hours | **Vaardigheidsontwikkeling:** Beginner → Klaar voor productie
 
 ---
 
@@ -249,19 +263,19 @@ Elk hoofdstuk heeft een toegewijde README met leerdoelen, snelle starts en oefen
 **Duur**: 30-45 minuten  
 **Complexiteit**: ⭐
 
-#### Wat je leert
+#### Wat je zult leren
 - Begrijpen van de basisprincipes van Azure Developer CLI
 - AZD installeren op je platform
-- Je eerste succesvolle implementatie
+- Je eerste succesvolle uitrol
 
 #### Leermaterialen
-- **🎯 Begin hier**: [What is Azure Developer CLI?](../..)
-- **📖 Theorie**: [AZD Basics](docs/chapter-01-foundation/azd-basics.md) - Kernconcepten en terminologie
-- **⚙️ Setup**: [Installation & Setup](docs/chapter-01-foundation/installation.md) - Platform-specifieke handleidingen
-- **🛠️ Hands-On**: [Your First Project](docs/chapter-01-foundation/first-project.md) - Stapsgewijze tutorial
-- **📋 Snelreferentie**: [Command Cheat Sheet](resources/cheat-sheet.md)
+- **🎯 Begin hier**: [Wat is Azure Developer CLI?](#what-is-azure-developer-cli)
+- **📖 Theorie**: [AZD Basisprincipes](docs/chapter-01-foundation/azd-basics.md) - Kernconcepten en terminologie
+- **⚙️ Installatie**: [Installatie & configuratie](docs/chapter-01-foundation/installation.md) - Platformspecifieke gidsen
+- **🛠️ Hands-On**: [Je Eerste Project](docs/chapter-01-foundation/first-project.md) - Stapsgewijze handleiding
+- **📋 Snelle referentie**: [Command Cheat Sheet](resources/cheat-sheet.md)
 
-#### Praktische oefeningen
+#### Praktische Oefeningen
 ```bash
 # Snelle installatiecontrole
 azd version
@@ -271,69 +285,56 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Leerresultaat Hoofdstuk**: Een eenvoudige webapplicatie succesvol implementeren naar Azure met AZD
+**💡 Hoofdstukresultaat**: Een eenvoudige webapplicatie succesvol naar Azure uitrollen met AZD
 
 **✅ Succesvalidatie:**
 ```bash
-# Na het voltooien van Hoofdstuk 1 zou je in staat moeten zijn om:
-azd version              # Toont geïnstalleerde versie
-azd init --template todo-nodejs-mongo  # Initialiseert project
-azd up                  # Publiceert naar Azure
-azd show                # Toont URL van de draaiende app
-# Applicatie opent in de browser en werkt
-azd down --force --purge  # Ruimt resources op
-```
-
-**📊 Tijdsinvestering:** 30-45 minuten  
-**📈 Vaardigheidsniveau daarna:** Kan basisapplicaties zelfstandig implementeren
-
-**✅ Succesvalidatie:**
-```bash
-# Na het voltooien van Hoofdstuk 1 zou je het volgende moeten kunnen:
+# Na het voltooien van hoofdstuk 1 moet je in staat zijn om:
 azd version              # Toont de geïnstalleerde versie
-azd init --template todo-nodejs-mongo  # Initialiseert project
+azd init --template todo-nodejs-mongo  # Initialiseert het project
 azd up                  # Deployt naar Azure
-azd show                # Toont URL van de draaiende app
+azd show                # Toont de URL van de draaiende app
 # De applicatie opent in de browser en werkt
-azd down --force --purge  # Ruimt resources op
+azd down --force --purge  # Ruimt bronnen op
 ```
 
 **📊 Tijdsinvestering:** 30-45 minuten  
-**📈 Vaardigheidsniveau daarna:** Kan basisapplicaties zelfstandig implementeren
+**📈 Vaardigheidsniveau daarna:** Kan basisapplicaties zelfstandig uitrollen
+**📈 Vaardigheidsniveau daarna:** Kan basisapplicaties zelfstandig uitrollen
 
 ---
 
-### 🤖 Hoofdstuk 2: AI-First Ontwikkeling (Aanbevolen voor AI-ontwikkelaars)
+### 🤖 Hoofdstuk 2: AI-first ontwikkeling (Aanbevolen voor AI-ontwikkelaars)
 **Vereisten**: Hoofdstuk 1 voltooid  
 **Duur**: 1-2 uur  
 **Complexiteit**: ⭐⭐
 
-#### Wat je leert
-- Integratie van Microsoft Foundry met AZD
-- Implementeren van AI-gestuurde applicaties
+#### Wat je zult leren
+- Microsoft Foundry-integratie met AZD
+- AI-gestuurde applicaties uitrollen
 - Begrijpen van AI-serviceconfiguraties
 
 #### Leermaterialen
-- **🎯 Begin hier**: [Microsoft Foundry Integration](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🤖 AI-agents**: [AI Agents Guide](docs/chapter-02-ai-development/agents.md) - Implementeer intelligente agents met AZD
-- **📖 Patronen**: [AI Model Deployment](docs/chapter-02-ai-development/ai-model-deployment.md) - AI-modellen implementeren en beheren
+- **🎯 Begin hier**: [Microsoft Foundry-integratie](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 AI-agents**: [Gids voor AI-agents](docs/chapter-02-ai-development/agents.md) - Implementeer intelligente agenten met AZD
+- **📖 Patronen**: [Modelimplementatie](docs/chapter-02-ai-development/ai-model-deployment.md) - Implementeer en beheer AI-modellen
 - **🛠️ Workshop**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Maak je AI-oplossingen AZD-klaar
-- **🎥 Interactieve gids**: [Workshop Materials](workshop/README.md) - Browser-gebaseerd leren met MkDocs * DevContainer-omgeving
-- **📋 Templates**: [Microsoft Foundry Templates](../..)
-- **📝 Voorbeelden**: [AZD Deployment Examples](examples/README.md)
+- **🎥 Interactieve gids**: [Workshop Materials](workshop/README.md) - Browsergebaseerd leren met MkDocs * DevContainer-omgeving
+- **📋 Sjablonen**: [Microsoft Foundry-sjablonen](#workshopbronnen)
+- **📝 Voorbeelden**: [AZD Implementatievoorbeelden](examples/README.md)
 
-#### Praktische oefeningen
+#### Praktische Oefeningen
 ```bash
-# Implementeer je eerste AI-toepassing
+# Implementeer je eerste AI-applicatie
 azd init --template azure-search-openai-demo
 azd up
 
-# Probeer aanvullende AI-sjablonen
+# Probeer extra AI-sjablonen
 azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Leerresultaat Hoofdstuk**: Een AI-gestuurde chatapplicatie implementeren en configureren met RAG-mogelijkheden
+**💡 Hoofdstukresultaat**: Een AI-gestuurde chatapplicatie met RAG-mogelijkheden implementeren en configureren
 
 **✅ Succesvalidatie:**
 ```bash
@@ -341,113 +342,113 @@ azd init --template agent-openai-python-prompty
 azd init --template azure-search-openai-demo
 azd up
 # Test de AI-chatinterface
-# Stel vragen en ontvang door AI aangedreven antwoorden met bronnen
+# Stel vragen en ontvang AI-gegenereerde antwoorden met bronnen
 # Controleer of de zoekintegratie werkt
-azd monitor  # Controleer of Application Insights telemetrie toont
+azd monitor  # Controleer of Application Insights telemetrie weergeeft
 azd down --force --purge
 ```
 
 **📊 Tijdsinvestering:** 1-2 uur  
-**📈 Vaardigheidsniveau daarna:** Kan production-ready AI-applicaties implementeren en configureren  
-**💰 Kostenbewustzijn:** Begrijp $80-150/maand ontwikkelkosten, $300-3500/maand productiekosten
+**📈 Vaardigheidsniveau daarna:** Kan productieklare AI-applicaties uitrollen en configureren  
+**💰 Kostenbewustzijn:** Begrijp ontwikkelkosten van $80-150/maand, productiekosten van $300-3500/maand
 
 #### 💰 Kostenoverwegingen voor AI-implementaties
 
-**Ontwikkelomgeving (Geschat $80-150/maand):**
-- Azure OpenAI (Pay-as-you-go): $0-50/maand (gebaseerd op tokengebruik)
-- AI Search (Basic tier): $75/maand
+**Ontwikkelomgeving (Schatting $80-150/maand):**
+- Microsoft Foundry Models (Pay-as-you-go): $0-50/maand (afhankelijk van tokengebruik)
+- AI Search (Basic-laag): $75/maand
 - Container Apps (Consumption): $0-20/maand
-- Storage (Standard): $1-5/maand
+- Opslag (Standaard): $1-5/maand
 
-**Productieomgeving (Geschat $300-3.500+/maand):**
-- Azure OpenAI (PTU voor consistente prestaties): $3.000+/maand OF Pay-as-you-go bij hoog volume
-- AI Search (Standard tier): $250/maand
+**Productieomgeving (Schatting $300-3.500+/maand):**
+- Microsoft Foundry Models (PTU voor consistente prestaties): $3.000+/maand OF Pay-as-go bij hoog volume
+- AI Search (Standaard-laag): $250/maand
 - Container Apps (Dedicated): $50-100/maand
 - Application Insights: $5-50/maand
-- Storage (Premium): $10-50/maand
+- Opslag (Premium): $10-50/maand
 
 **💡 Tips voor kostenoptimalisatie:**
-- Gebruik **Free Tier** Azure OpenAI voor leren (50.000 tokens/maand inbegrepen)
-- Voer `azd down` uit om resources te dealloceren wanneer je niet actief ontwikkelt
-- Begin met verbruik-gebaseerde facturering, upgrade naar PTU alleen voor productie
-- Gebruik `azd provision --preview` om kosten voor implementatie te schatten
+- Gebruik de **Free Tier** van Microsoft Foundry Models voor leren (Azure OpenAI 50.000 tokens/maand inbegrepen)
+- Voer `azd down` uit om resources vrij te geven wanneer je niet actief ontwikkelt
+- Begin met verbruikgebaseerde facturatie, upgrade naar PTU alleen voor productie
+- Gebruik `azd provision --preview` om kosten te schatten vóór implementatie
 - Schakel autoscaling in: betaal alleen voor daadwerkelijk gebruik
 
 **Kostenbewaking:**
 ```bash
-# Controleer de geschatte maandelijkse kosten
+# Controleer geschatte maandelijkse kosten
 azd provision --preview
 
-# Houd de werkelijke kosten in de Azure Portal in de gaten
+# Controleer werkelijke kosten in de Azure Portal
 az consumption budget list --resource-group <your-rg>
 ```
 
 ---
 
-### ⚙️ Hoofdstuk 3: Configuratie & Authenticatie
+### ⚙️ Hoofdstuk 3: Configuratie & authenticatie
 **Vereisten**: Hoofdstuk 1 voltooid  
 **Duur**: 45-60 minuten  
 **Complexiteit**: ⭐⭐
 
-#### Wat je leert
+#### Wat je zult leren
 - Omgevingsconfiguratie en -beheer
-- Authenticatie en beveiligingsbest practices
+- Authenticatie- en beveiligingsbest practices
 - Naamgeving en organisatie van resources
 
 #### Leermaterialen
-- **📖 Configuratie**: [Configuration Guide](docs/chapter-03-configuration/configuration.md) - Omgevingsinstelling
-- **🔐 Beveiliging**: [Authentication patterns and managed identity](docs/chapter-03-configuration/authsecurity.md) - Authenticatiepatronen
-- **📝 Voorbeelden**: [Database App Example](examples/database-app/README.md) - AZD-databasevoorbeelden
+- **📖 Configuratie**: [Configuratiegids](docs/chapter-03-configuration/configuration.md) - Omgevingssetup
+- **🔐 Beveiliging**: [Authenticatiepatronen en managed identity](docs/chapter-03-configuration/authsecurity.md) - Authenticatiepatronen
+- **📝 Voorbeelden**: [Database-appvoorbeeld](examples/database-app/README.md) - AZD-databasevoorbeelden
 
-#### Praktische oefeningen
+#### Praktische Oefeningen
 - Configureer meerdere omgevingen (dev, staging, prod)
 - Stel managed identity-authenticatie in
 - Implementeer omgevingsspecifieke configuraties
 
-**💡 Leerresultaat Hoofdstuk**: Beheer meerdere omgevingen met juiste authenticatie en beveiliging
+**💡 Hoofdstukresultaat**: Beheer meerdere omgevingen met de juiste authenticatie en beveiliging
 
 ---
 
-### 🏗️ Hoofdstuk 4: Infrastructure as Code & Implementatie
+### 🏗️ Hoofdstuk 4: Infrastructuur als code & uitrol
 **Vereisten**: Hoofdstukken 1-3 voltooid  
-**Duur**: 1-1.5 uur  
+**Duur**: 1-1,5 uur  
 **Complexiteit**: ⭐⭐⭐
 
-#### Wat je leert
-- Geavanceerde implementatiepatronen
-- Infrastructure as Code met Bicep
-- Resource-provisioning strategieën
+#### Wat je zult leren
+- Geavanceerde uitrolpatronen
+- Infrastructuur als code met Bicep
+- Strategieën voor resourcevoorziening
 
 #### Leermaterialen
-- **📖 Implementatie**: [Deployment Guide](docs/chapter-04-infrastructure/deployment-guide.md) - Volledige workflows
-- **🏗️ Provisioning**: [Provisioning Resources](docs/chapter-04-infrastructure/provisioning.md) - Azure resourcebeheer
-- **📝 Voorbeelden**: [Container App Example](../../examples/container-app) - Gedeployde containeroplossingen
+- **📖 Uitrol**: [Uitrolgids](docs/chapter-04-infrastructure/deployment-guide.md) - Volledige workflows
+- **🏗️ Provisioning**: [Provisioning van resources](docs/chapter-04-infrastructure/provisioning.md) - Azure-resourcemanagement
+- **📝 Voorbeelden**: [Container-appvoorbeeld](../../examples/container-app) - Gecontaineriseerde implementaties
 
-#### Praktische oefeningen
-- Maak aangepaste Bicep-templates
-- Implementeer multi-service applicaties
-- Implementeer blue-green deployment-strategieën
+#### Praktische Oefeningen
+- Maak aangepaste Bicep-sjablonen
+- Rol multi-service applicaties uit
+- Implementeer blue-green uitrolstrategieën
 
-**💡 Leerresultaat Hoofdstuk**: Implementeer complexe multi-service applicaties met aangepaste infrastructuurtemplates
+**💡 Hoofdstukresultaat**: Complexe multi-service applicaties uitrollen met aangepaste infrastructuursjablonen
 
 ---
 
-### 🎯 Hoofdstuk 5: Multi-Agent AI Oplossingen (Gevorderd)
+### 🎯 Hoofdstuk 5: Multi-agent AI-oplossingen (Gevorderd)
 **Vereisten**: Hoofdstukken 1-2 voltooid  
 **Duur**: 2-3 uur  
 **Complexiteit**: ⭐⭐⭐⭐
 
-#### Wat je leert
-- Multi-agent architectuurpatronen
+#### Wat je zult leren
+- Architectuurpatronen voor multi-agent
 - Agent-orchestratie en coördinatie
-- Production-ready AI-implementaties
+- AI-implementaties klaar voor productie
 
 #### Leermaterialen
 - **🤖 Uitgelicht project**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Volledige implementatie
-- **🛠️ ARM-templates**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click implementatie
-- **📖 Architectuur**: [Multi-agent coordination patterns](docs/chapter-06-pre-deployment/coordination-patterns.md) - Patronen
+- **🛠️ ARM-sjablonen**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - One-click implementatie
+- **📖 Architectuur**: [Coördinatiepatronen voor multi-agents](docs/chapter-06-pre-deployment/coordination-patterns.md) - Patronen
 
-#### Praktische oefeningen
+#### Praktische Oefeningen
 ```bash
 # Implementeer de volledige retail multi-agentoplossing
 cd examples/retail-multiagent-arm-template
@@ -457,114 +458,114 @@ cd examples/retail-multiagent-arm-template
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Leerresultaat Hoofdstuk**: Implementeer en beheer een production-ready multi-agent AI-oplossing met Customer- en Inventory-agents
+**💡 Hoofdstukresultaat**: Een productieklare multi-agent AI-oplossing uitrollen en beheren met Customer- en Inventory-agents
 
 ---
 
-### 🔍 Hoofdstuk 6: Pre-Deployment Validatie & Planning
+### 🔍 Hoofdstuk 6: Pre-deployment validatie & planning
 **Vereisten**: Hoofdstuk 4 voltooid  
 **Duur**: 1 uur  
 **Complexiteit**: ⭐⭐
 
-#### Wat je leert
-- Capacity planning en resource-validatie
-- SKU-selectiestrategieën
-- Pre-flight checks en automatisering
+#### Wat je zult leren
+- Capaciteitsplanning en resourcevalidatie
+- Strategieën voor SKU-selectie
+- Preflight-controles en automatisering
 
 #### Leermaterialen
-- **📊 Planning**: [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) - Resource-validatie
-- **💰 Selectie**: [SKU Selection](docs/chapter-06-pre-deployment/sku-selection.md) - Kosteneffectieve keuzes
-- **✅ Validatie**: [Pre-flight Checks](docs/chapter-06-pre-deployment/preflight-checks.md) - Geautomatiseerde scripts
+- **📊 Planning**: [Capaciteitsplanning](docs/chapter-06-pre-deployment/capacity-planning.md) - Resourcevalidatie
+- **💰 Selectie**: [SKU-selectie](docs/chapter-06-pre-deployment/sku-selection.md) - Kosteneffectieve keuzes
+- **✅ Validatie**: [Preflight-controles](docs/chapter-06-pre-deployment/preflight-checks.md) - Geautomatiseerde scripts
 
-#### Praktische oefeningen
-- Voer capacity-validatiescripts uit
+#### Praktische Oefeningen
+- Voer capaciteitsvalidatiescripts uit
 - Optimaliseer SKU-selecties voor kosten
-- Implementeer geautomatiseerde pre-deployment checks
+- Implementeer geautomatiseerde pre-deploycontroles
 
-**💡 Leerresultaat Hoofdstuk**: Valideer en optimaliseer implementaties vóór uitvoering
+**💡 Hoofdstukresultaat**: Valideer en optimaliseer implementaties vóór uitvoering
 
 ---
 
-### 🚨 Hoofdstuk 7: Troubleshooting & Debugging
-**Vereisten**: Elk implementatiehoofdstuk voltooid  
-**Duur**: 1-1.5 uur  
+### 🚨 Hoofdstuk 7: Probleemoplossing & debuggen
+**Vereisten**: Een van de implementatiehoofdstukken voltooid  
+**Duur**: 1-1,5 uur  
 **Complexiteit**: ⭐⭐
 
-#### Wat je leert
-- Systematische debuggingbenaderingen
+#### Wat je zult leren
+- Systematische debugmethoden
 - Veelvoorkomende problemen en oplossingen
 - AI-specifieke probleemoplossing
 
 #### Leermaterialen
-- **🔧 Veelvoorkomende problemen**: [Common Issues](docs/chapter-07-troubleshooting/common-issues.md) - FAQ en oplossingen
-- **🕵️ Debugging**: [Debugging Guide](docs/chapter-07-troubleshooting/debugging.md) - Stapsgewijze strategieën
-- **🤖 AI-problemen**: [AI-Specific Troubleshooting](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Problemen met AI-services
+- **🔧 Veelvoorkomende problemen**: [Veelvoorkomende problemen](docs/chapter-07-troubleshooting/common-issues.md) - FAQ en oplossingen
+- **🕵️ Debuggen**: [Debuggengids](docs/chapter-07-troubleshooting/debugging.md) - Stapsgewijze strategieën
+- **🤖 AI-problemen**: [AI-specifieke probleemoplossing](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - AI-serviceproblemen
 
-#### Praktische oefeningen
-- Diagnoseer implementatiefouten
+#### Praktische Oefeningen
+- Diagnostiseer uitrolfouten
 - Los authenticatieproblemen op
 - Debug AI-serviceconnectiviteit
 
-**💡 Leerresultaat Hoofdstuk**: Diagnoseer en los zelfstandig veelvoorkomende implementatieproblemen op
+**💡 Hoofdstukresultaat**: Diagnoseer en los zelfstandig veelvoorkomende implementatieproblemen op
 
 ---
 
-### 🏢 Hoofdstuk 8: Productie & Enterprise Patronen
+### 🏢 Hoofdstuk 8: Productie & enterprisepatronen
 **Vereisten**: Hoofdstukken 1-4 voltooid  
 **Duur**: 2-3 uur  
 **Complexiteit**: ⭐⭐⭐⭐
 
-#### Wat je leert
-- Productie-implementatiestrategieën
+#### Wat je zult leren
+- Strategieën voor productie-implementatie
 - Enterprise-beveiligingspatronen
 - Monitoring en kostenoptimalisatie
 
 #### Leermaterialen
-- **🏭 Productie**: [Production AI Best Practices](docs/chapter-08-production/production-ai-practices.md) - Enterprisepatronen
-- **📝 Voorbeelden**: [Microservices Example](../../examples/microservices) - Complexe architecturen
-- **📊 Monitoring**: [Application Insights integration](docs/chapter-06-pre-deployment/application-insights.md) - Monitoring
+- **🏭 Productie**: [Productie AI Best Practices](docs/chapter-08-production/production-ai-practices.md) - Enterprise-patronen
+- **📝 Voorbeelden**: [Microservices Voorbeeld](../../examples/microservices) - Complexe architecturen
+- **📊 Monitoring**: [Integratie Application Insights](docs/chapter-06-pre-deployment/application-insights.md) - Monitoring
 
-#### Praktische oefeningen
+#### Praktische Oefeningen
 - Implementeer enterprise-beveiligingspatronen
 - Stel uitgebreide monitoring in
-- Deploy naar productie met juiste governance
+- Implementeer naar productie met de juiste governance
 
-**💡 Leerresultaat Hoofdstuk**: Implementeer enterprise-klare applicaties met volledige productiemogelijkheden
+**💡 Hoofdstukresultaat**: Implementeer bedrijfsklare applicaties met volledige productiemogelijkheden
 
 ---
 
-## 🎓 Workshop Overzicht: Hands-On Leerervaring
+## 🎓 Workshop Overzicht: Praktijkgerichte Leerervaring
 
-> **⚠️ WORKSHOP STATUS: Actieve Ontwikkeling**
-> De workshopmaterialen worden momenteel ontwikkeld en verfijnd. Kernmodules zijn functioneel, maar sommige geavanceerde secties zijn nog niet voltooid. We werken actief aan het voltooien van alle inhoud. [Volg de voortgang →](workshop/README.md)
+> **⚠️ WORKSHOP STATUS: Actieve Ontwikkeling**  
+> De workshopmaterialen worden momenteel ontwikkeld en verfijnd. Kernmodules zijn functioneel, maar sommige gevorderde secties zijn onvolledig. We werken actief aan het voltooien van alle inhoud. [Volg voortgang →](workshop/README.md)
 
-### Interactieve workshopmaterialen
-**Uitgebreide praktische leerervaring met browser-gebaseerde tools en begeleide oefeningen**
+### Interactieve Workshopmaterialen
+**Uitgebreide praktijkgerichte leerervaring met browsergebaseerde tools en begeleide oefeningen**
 
-Onze workshopmaterialen bieden een gestructureerde, interactieve leerervaring die het hoofdstukgebaseerde curriculum hierboven aanvult. De workshop is ontworpen voor zowel zelfgestuurd leren als door een instructeur geleide sessies.
+Onze workshopmaterialen bieden een gestructureerde, interactieve leerervaring die het hoofdstukgebaseerde curriculum hierboven aanvult. De workshop is ontworpen voor zowel zelfgestuurd leren als sessies onder leiding van een instructeur.
 
-#### 🛠️ Workshopfuncties
-- **Browsergebaseerde interface**: Complete MkDocs-aangedreven workshop met zoek-, kopieer- en themafuncties
-- **Integratie met GitHub Codespaces**: Opzetten van de ontwikkelomgeving met één klik
-- **Gestructureerd leerpad**: 8-module geleide oefeningen (3-4 uur in totaal)
-- **Progressieve methodologie**: Introductie → Selectie → Validatie → Ontleding → Configuratie → Personalisatie → Afbouw → Afronding
-- **Interactieve DevContainer-omgeving**: Vooraf geconfigureerde tools en afhankelijkheden
+#### 🛠️ Workshop Kenmerken
+- **Browsergebaseerde interface**: Volledige MkDocs-gestuurde workshop met zoek-, kopieer- en themafuncties
+- **GitHub Codespaces-integratie**: Met één klik de ontwikkelomgeving instellen
+- **Gestructureerd leerpad**: 8-modulaire begeleide oefeningen (3-4 uur in totaal)
+- **Progressieve methodologie**: Introductie → Selectie → Validatie → Ontleding → Configuratie → Aanpassing → Afbouw → Afronding
+- **Interactieve DevContainer-omgeving**: Voorgeconfigureerde tools en afhankelijkheden
 
-#### 📚 Structuur van workshopmodules
-De workshop volgt een **8-module progressieve methodologie** die je van verkenning naar beheersing van implementatie brengt:
+#### 📚 Structuur van de workshopmodules
+De workshop volgt een **8-modulaire progressieve methodologie** die je van ontdekking naar beheersing van implementatie brengt:
 
-| Module | Onderwerp | Wat je zult doen | Duur |
-|--------|-------|----------------|----------|
-| **0. Introductie** | Workshopoverzicht | Begrijp leerdoelen, vereisten en de workshopstructuur | 15 min |
-| **1. Selectie** | Template-ontdekking | Verken AZD-templates en selecteer het juiste AI-template voor jouw scenario | 20 min |
-| **2. Validatie** | Implementeren & verifiëren | Implementeer het template met `azd up` en verifieer dat de infrastructuur werkt | 30 min |
-| **3. Ontleding** | Begrijp structuur | Gebruik GitHub Copilot om template-architectuur, Bicep-bestanden en code-organisatie te verkennen | 30 min |
-| **4. Configuratie** | Diepgaande azure.yaml-analyse | Beheers de `azure.yaml`-configuratie, lifecycle hooks en omgevingsvariabelen | 30 min |
-| **5. Personalisatie** | Maak het eigen | Schakel AI Search, tracing, evaluatie in en pas aan voor jouw scenario | 45 min |
-| **6. Afbouw** | Opruimen | Deprovisioneer resources veilig met `azd down --purge` | 15 min |
-| **7. Afronding** | Volgende stappen | Beoordeel behaalde resultaten, kernconcepten en zet je leerreis voort | 15 min |
+| Module | Onderwerp | Wat je gaat doen | Duur |
+|--------|-----------|------------------|------|
+| **0. Introductie** | Overzicht van de workshop | Begrijp leerdoelen, vereisten en de structuur van de workshop | 15 min |
+| **1. Selectie** | Sjabloonontdekking | Verken AZD-sjablonen en kies het juiste AI-sjabloon voor jouw scenario | 20 min |
+| **2. Validatie** | Implementeren & Verifiëren | Implementeer de sjabloon met `azd up` en controleer of de infrastructuur werkt | 30 min |
+| **3. Ontleding** | Begrijp de structuur | Gebruik GitHub Copilot om de sjabloonarchitectuur, Bicep-bestanden en codeorganisatie te verkennen | 30 min |
+| **4. Configuratie** | Diepgaande azure.yaml | Beheers de configuratie van `azure.yaml`, lifecycle hooks en omgevingsvariabelen | 30 min |
+| **5. Aanpassing** | Maak het van jou | Schakel AI Search, tracing en evaluatie in en pas aan voor jouw scenario | 45 min |
+| **6. Afbouw** | Opruimen | Verwijder resources veilig met `azd down --purge` | 15 min |
+| **7. Afronding** | Volgende stappen | Beoordeel behaalde resultaten, kernconcepten en zet je leertraject voort | 15 min |
 
-**Workshopverloop:**
+**Workshop Flow:**
 ```
 Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
      ↓            ↓           ↓              ↓               ↓              ↓            ↓           ↓
@@ -581,32 +582,32 @@ Introduction → Selection → Validation → Deconstruction → Configuration �
 # Optie 2: Lokale ontwikkeling
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Volg de setup-instructies in workshop/README.md
+# Volg de installatie-instructies in workshop/README.md
 ```
 
 #### 🎯 Leerresultaten van de workshop
-Door de workshop te voltooien zullen deelnemers:
-- **Productie AI-toepassingen implementeren**: Gebruik AZD met Microsoft Foundry-services
-- **Beheers multi-agent-architecturen**: Implementeer gecoördineerde AI-agentoplossingen
+Door het voltooien van de workshop zullen deelnemers:
+- **Productie-AI-applicaties implementeren**: Gebruik AZD met Microsoft Foundry-services
+- **Beheers multi-agentarchitecturen**: Implementeer gecoördineerde AI-agentoplossingen
 - **Implementeer beveiligingsbest practices**: Configureer authenticatie en toegangscontrole
-- **Optimaliseer voor schaal**: Ontwerp kosteneffectieve, presterende implementaties
-- **Los implementatieproblemen op**: Los veelvoorkomende problemen zelfstandig op
+- **Optimaliseren voor schaal**: Ontwerp kosteneffectieve, performante implementaties
+- **Problemen met implementaties oplossen**: Los veelvoorkomende problemen zelfstandig op
 
 #### 📖 Workshopbronnen
-- **🎥 Interactieve gids**: [Workshopmaterialen](workshop/README.md) - Browser-gebaseerde leeromgeving
-- **📋 Instructies per module**:
+- **🎥 Interactieve gids**: [Workshopmaterialen](workshop/README.md) - Browsergebaseerde leeromgeving
+- **📋 Module-voor-module instructies**:
   - [0. Introductie](workshop/docs/instructions/0-Introduction.md) - Overzicht van de workshop en doelstellingen
-  - [1. Selectie](workshop/docs/instructions/1-Select-AI-Template.md) - Vind en selecteer AI-templates
-  - [2. Validatie](workshop/docs/instructions/2-Validate-AI-Template.md) - Implementeer en verifieer templates
-  - [3. Ontleding](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Verken template-architectuur
-  - [4. Configuratie](workshop/docs/instructions/4-Configure-AI-Template.md) - Beheers azure.yaml
-  - [5. Personalisatie](workshop/docs/instructions/5-Customize-AI-Template.md) - Pas aan voor jouw scenario
+  - [1. Selectie](workshop/docs/instructions/1-Select-AI-Template.md) - Vind en kies AI-sjablonen
+  - [2. Validatie](workshop/docs/instructions/2-Validate-AI-Template.md) - Implementeer en verifieer sjablonen
+  - [3. Ontleding](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Verken sjabloonarchitectuur
+  - [4. Configuratie](workshop/docs/instructions/4-Configure-AI-Template.md) - Beheers `azure.yaml`
+  - [5. Aanpassing](workshop/docs/instructions/5-Customize-AI-Template.md) - Pas aan voor jouw scenario
   - [6. Opruimen](workshop/docs/instructions/6-Teardown-Infrastructure.md) - Ruim resources op
-  - [7. Afronding](workshop/docs/instructions/7-Wrap-up.md) - Beoordeling en volgende stappen
-- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Oefeningen gericht op AI
-- **💡 Snelstart**: [Workshop Setup Guide](workshop/README.md#quick-start) - Omgevingsconfiguratie
+  - [7. Afronding](workshop/docs/instructions/7-Wrap-up.md) - Beoordeel en volgende stappen
+- **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - AI-gerichte oefeningen
+- **💡 Snelstart**: [Workshop Installatiegids](workshop/README.md#quick-start) - Omgevingsconfiguratie
 
-**Perfect voor**: Bedrijfstrainingen, universitaire cursussen, zelfgestuurd leren en developer bootcamps.
+**Perfect voor**: Bedrijfstraining, universitaire cursussen, zelfgestuurd leren en ontwikkelaarsbootcamps.
 
 ---
 
@@ -614,117 +615,123 @@ Door de workshop te voltooien zullen deelnemers:
 
 Naast de basis biedt AZD krachtige functies voor productie-implementaties:
 
-- **Template-gebaseerde implementaties** - Gebruik vooraf gebouwde templates voor veelvoorkomende applicatiepatronen
-- **Infrastructure as Code** - Beheer Azure-resources met Bicep of Terraform  
-- **Geïntegreerde workflows** - Provision, implementeer en monitor applicaties naadloos
-- **Developer-vriendelijk** - Geoptimaliseerd voor ontwikkelaarsproductiviteit en -ervaring
+- **Sjabloon-gebaseerde implementaties** - Gebruik vooraf gebouwde sjablonen voor veelvoorkomende toepassingspatronen
+- **Infrastructuur als Code** - Beheer Azure-resources met Bicep of Terraform  
+- **Geïntegreerde workflows** - Voorzie, implementeer en monitor applicaties naadloos
+- **Ontwikkelaarvriendelijk** - Geoptimaliseerd voor ontwikkelaarsproductiviteit en -ervaring
 
 ### **AZD + Microsoft Foundry: Perfect voor AI-implementaties**
 
-**Waarom AZD voor AI-oplossingen?** AZD pakt de belangrijkste uitdagingen aan waarmee AI-ontwikkelaars te maken hebben:
+**Waarom AZD voor AI-oplossingen?** AZD pakt de grootste uitdagingen aan waar AI-ontwikkelaars mee te maken hebben:
 
-- **AI-klaar templates** - Vooraf geconfigureerde templates voor Azure OpenAI, Cognitive Services en ML-workloads
-- **Veilige AI-implementaties** - Ingebouwde beveiligingspatronen voor AI-diensten, API-sleutels en modelendpoints  
+- **AI-klaar sjablonen** - Vooraf geconfigureerde sjablonen voor Microsoft Foundry-modellen, Cognitive Services en ML-workloads
+- **Veilige AI-implementaties** - Ingebouwde beveiligingspatronen voor AI-services, API-sleutels en modelendpunten  
 - **Productie-AI-patronen** - Best practices voor schaalbare, kosteneffectieve AI-applicatie-implementaties
 - **End-to-end AI-workflows** - Van modelontwikkeling tot productie-implementatie met juiste monitoring
-- **Kostenoptimalisatie** - Slimme resource-toewijzing en schaalstrategieën voor AI-workloads
-- **Integratie met Microsoft Foundry** - Naadloze koppeling met de Microsoft Foundry modelcatalogus en endpoints
+- **Kostenoptimalisatie** - Slimme toewijzing van resources en schaalstrategieën voor AI-workloads
+- **Microsoft Foundry-integratie** - Naadloze verbinding met de Microsoft Foundry-modelcatalogus en eindpunten
 
 ---
 
 ## 🎯 Sjablonen- en voorbeeldbibliotheek
 
-### Aanbevolen: Microsoft Foundry-templates
-**Begin hier als je AI-toepassingen implementeert!**
+### Uitgelicht: Microsoft Foundry-sjablonen
+**Begin hier als je AI-applicaties implementeert!**
 
-> **Opmerking:** Deze templates tonen verschillende AI-patronen. Sommige zijn externe Azure Samples, andere zijn lokale implementaties.
+> **Opmerking:** Deze sjablonen tonen verschillende AI-patronen. Sommige zijn externe Azure Samples, andere zijn lokale implementaties.
 
 | Sjabloon | Hoofdstuk | Complexiteit | Services | Type |
-|----------|---------|------------|----------|------|
+|----------|-----------|--------------|----------|------|
 | [**Aan de slag met AI-chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Hoofdstuk 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Extern |
-| [**Aan de slag met AI-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Hoofdstuk 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Extern |
+| [**Aan de slag met AI-agenten**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Hoofdstuk 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Extern |
 | [**Azure Search + OpenAI-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Hoofdstuk 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Extern |
 | [**OpenAI Chat-app Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Hoofdstuk 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Extern |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Hoofdstuk 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Extern |
 | [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Hoofdstuk 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Extern |
 | [**Retail Multi-Agent-oplossing**](examples/retail-scenario.md) | Hoofdstuk 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Lokaal** |
 
-### Aanbevolen: Volledige leerscenario's
-**Productieklare applicatie-templates gekoppeld aan leershoofdstukken**
+### Uitgelicht: Volledige leerscenario's
+**Productieklare applicatie-sjablonen gekoppeld aan leerhoofdstukken**
 
 | Sjabloon | Leerhoofdstuk | Complexiteit | Belangrijkste leerpunten |
 |----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Hoofdstuk 2 | ⭐ | Basispatronen voor AI-implementatie |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Hoofdstuk 2 | ⭐ | Basis AI-implementatiepatronen |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Hoofdstuk 2 | ⭐⭐ | RAG-implementatie met Azure AI Search |
 | [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Hoofdstuk 4 | ⭐⭐ | Integratie van Document Intelligence |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Hoofdstuk 5 | ⭐⭐⭐ | Agent-framework en functie-aanroepen |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Hoofdstuk 8 | ⭐⭐⭐ | Enterprise AI-orchestratie |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Hoofdstuk 5 | ⭐⭐⭐⭐ | Multi-agentarchitectuur met Customer- en Inventory-agents |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Hoofdstuk 8 | ⭐⭐⭐ | Ondernemings-AI-orkestratie |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Hoofdstuk 5 | ⭐⭐⭐⭐ | Multi-agentarchitectuur met Klant- en Voorraadagenten |
 
 ### Leren per voorbeeldtype
 
-> **📌 Lokaal vs. externe voorbeelden:**  
-> **Lokale voorbeelden** (in deze repo) = Klaar voor direct gebruik  
-> **Externe voorbeelden** (Azure Samples) = Kloon vanuit gekoppelde repositories
+> **📌 Lokale vs. Externe voorbeelden:**  
+> **Lokale voorbeelden** (in deze repo) = Direct klaar voor gebruik  
+> **Externe voorbeelden** (Azure Samples) = Cloneer vanaf de gelinkte repositories
 
-#### Lokale voorbeelden (Klaar voor gebruik)
-- [**Retail Multi-Agent-oplossing**](examples/retail-scenario.md) - Complete productieklare implementatie met ARM-templates
-  - Multi-agentarchitectuur (Customer + Inventory agents)
+#### Lokale voorbeelden (Direct klaar voor gebruik)
+- [**Retail Multi-Agent-oplossing**](examples/retail-scenario.md) - Volledige productieklare implementatie met ARM-sjablonen
+  - Multi-agentarchitectuur (Klant- en Voorraadagenten)
   - Uitgebreide monitoring en evaluatie
-  - Eén-klik deployment via ARM-template
+  - Eén-klik implementatie via ARM-sjabloon
 
-#### Lokale voorbeelden - Container-applicaties (Hoofdstukken 2-5)
-**Uitgebreide containerimplementatievoorbeelden in deze repository:**
-- [**Container App Voorbeelden**](examples/container-app/README.md) - Volledige gids voor containerimplementaties
-  - [Simple Flask API](../../examples/container-app/simple-flask-api) - Basis REST API met scale-to-zero
-  - [Microservices Architecture](../../examples/container-app/microservices) - Productieklare multi-service implementatie
-  - Quick Start, Productie en Geavanceerde implementatiepatronen
-  - Richtlijnen voor monitoring, beveiliging en kostenoptimalisatie
+#### Lokale voorbeelden - Containerapplicaties (Hoofdstukken 2-5)
+**Uitgebreide voorbeelden van containerimplementaties in deze repository:**
+- [**Container App-voorbeelden**](examples/container-app/README.md) - Volledige gids voor containerimplementaties
+  - [Eenvoudige Flask API](../../examples/container-app/simple-flask-api) - Basis REST API met scale-to-zero
+  - [Microservices Architectuur](../../examples/container-app/microservices) - Productieklare multi-service implementatie
+  - Quick Start, Productie, en Geavanceerde implementatiepatronen
+  - Monitoring-, beveiligings- en kostenoptimalisatie-advies
 
 #### Externe voorbeelden - Eenvoudige applicaties (Hoofdstukken 1-2)
-**Kloon deze Azure Samples repositories om te beginnen:**
+**Clone deze Azure Samples-repositories om te beginnen:**
 - [Simple Web App - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Basisimplementatiepatronen
 - [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Implementatie van statische content
 - [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API-implementatie
 
 #### Externe voorbeelden - Database-integratie (Hoofdstukken 3-4)  
-- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Databaseconnectiviteits-patronen
+- [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Patronen voor databaseconnectiviteit
 - [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless dataworkflows
 
 #### Externe voorbeelden - Geavanceerde patronen (Hoofdstukken 4-8)
-- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service architecturen
+- [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service-architecturen
 - [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Achtergrondverwerking  
-- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Productieklare ML-patronen
+- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - ML-patronen klaar voor productie
 
-### Externe templatecollecties
-- [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Gecureerde collectie van officiële en community-templates
-- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn template-documentatie
-- [**Examples Directory**](examples/README.md) - Lokale leervoorbeelden met gedetailleerde uitleg
+### Externe sjablooncollecties
+- [**Officiële AZD Template-galerij**](https://azure.github.io/awesome-azd/) - Geselecteerde collectie officiële en community-sjablonen
+- [**Azure Developer CLI Templates**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Microsoft Learn sjabloondocumentatie
+- [**Voorbeeldmap**](examples/README.md) - Lokale leervoorbeelden met gedetailleerde uitleg
 
 ---
 
-## 📚 Leerbronnen en referenties
+## 📚 Leermiddelen & Referenties
 
-### Snelle referenties
-- [**Overzicht van commando's**](resources/cheat-sheet.md) - Essentiële azd-commando's, georganiseerd per hoofdstuk
-- [**Woordenlijst**](resources/glossary.md) - Terminologie voor Azure en azd  
-- [**FAQ**](resources/faq.md) - Veelgestelde vragen, georganiseerd per leerhoofdstuk
+### Snelreferenties
+- [**Command Cheat Sheet**](resources/cheat-sheet.md) - Essentiële azd-commando's geordend per hoofdstuk
+- [**Woordenlijst**](resources/glossary.md) - Terminologie van Azure en azd  
+- [**FAQ**](resources/faq.md) - Veelgestelde vragen geordend per leerhoofdstuk
 - [**Studiegids**](resources/study-guide.md) - Uitgebreide oefenopdrachten
 
-### Praktische workshops
+### Praktijkworkshops
 - [**AI Workshop Lab**](docs/chapter-02-ai-development/ai-workshop-lab.md) - Maak je AI-oplossingen AZD-implementeerbaar (2-3 uur)
-- [**Interactieve workshop**](workshop/README.md) - 8-module geleide oefeningen met MkDocs en GitHub Codespaces
-  - Volgt: Introductie → Selectie → Validatie → Ontleding → Configuratie → Personalisatie → Afbouw → Afronding
+- [**Interactieve Workshop**](workshop/README.md) - 8-modulaire begeleide oefeningen met MkDocs en GitHub Codespaces
+  - Volgt: Introductie → Selectie → Validatie → Ontleding → Configuratie → Aanpassing → Afbouw → Afronding
 
-### Externe leerbronnen
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Status](https://status.azure.com/)
+### Externe leermaterialen
+- [Azure Developer CLI-documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architectuurcentrum](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Prijsberekenaar](https://azure.microsoft.com/pricing/calculator/)
+- [Azure-status](https://status.azure.com/)
+
+### AI-agentvaardigheden voor je editor
+- [**Microsoft Azure-vaardigheden op skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - 37 open agentvaardigheden voor Azure AI, Foundry, deployment, diagnostiek, kostenoptimalisatie en meer. Installeer ze in GitHub Copilot, Cursor, Claude Code of elke ondersteunde agent:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
-## 🔧 Snelle probleemoplossingsgids
+## 🔧 Snelle handleiding voor probleemoplossing
 
 **Veelvoorkomende problemen voor beginners en directe oplossingen:**
 
@@ -732,7 +739,7 @@ Naast de basis biedt AZD krachtige functies voor productie-implementaties:
 <summary><strong>❌ "azd: command not found"</strong></summary>
 
 ```bash
-# Installeer eerst AZD
+# Installeer AZD eerst
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -742,7 +749,7 @@ brew tap azure/azd && brew install azd
 # Linux:
 curl -fsSL https://aka.ms/install-azd.sh | bash
 
-# Controleer de installatie
+# Controleer installatie
 azd version
 ```
 </details>
@@ -757,22 +764,23 @@ az account list --output table
 # Stel standaardabonnement in
 az account set --subscription "<subscription-id-or-name>"
 
-# Instellen voor AZD-omgeving
+# Stel in voor AZD-omgeving
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
-# Controleren
+# Verifiëren
 az account show
 ```
 </details>
+
 <details>
-<summary><strong>❌ "InsufficientQuota" of "Quota exceeded"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
 
 ```bash
 # Probeer een andere Azure-regio
 azd env set AZURE_LOCATION "westus2"
 azd up
 
-# Of gebruik kleinere SKU's tijdens ontwikkeling
+# Of gebruik kleinere SKUs in ontwikkeling
 # Bewerk infra/main.parameters.json:
 {
   "sku": "B1"  // Instead of "P1V2"
@@ -781,26 +789,26 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" faalt halverwege</strong></summary>
+<summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
 # Optie 1: Opschonen en opnieuw proberen
 azd down --force --purge
 azd up
 
-# Optie 2: Alleen infrastructuur repareren
+# Optie 2: Alleen de infrastructuur herstellen
 azd provision
 
-# Optie 3: Controleer gedetailleerde status
+# Optie 3: Gedetailleerde status controleren
 azd show
 
-# Optie 4: Controleer logs in Azure Monitor
+# Optie 4: Logs controleren in Azure Monitor
 azd monitor --logs
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Authentication failed" of "Token expired"</strong></summary>
+<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
 
 ```bash
 # Opnieuw authenticeren
@@ -816,52 +824,52 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" of naamconflicten</strong></summary>
+<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
-# AZD genereert unieke namen, maar als er een conflict is:
+# AZD genereert unieke namen, maar bij een conflict:
 azd down --force --purge
 
-# Probeer het dan opnieuw met een schone omgeving
+# Probeer dan opnieuw met een nieuwe omgeving
 azd env new dev-v2
 azd up
 ```
 </details>
 
 <details>
-<summary><strong>❌ Sjabloonimplementatie duurt te lang</strong></summary>
+<summary><strong>❌ Template deployment taking too long</strong></summary>
 
 **Normale wachttijden:**
 - Eenvoudige webapp: 5-10 minuten
 - App met database: 10-15 minuten
-- AI-toepassingen: 15-25 minuten (de provisioning van OpenAI is traag)
+- AI-toepassingen: 15-25 minuten (het provisionen van OpenAI is traag)
 
 ```bash
-# Controleer voortgang
+# Controleer de voortgang
 azd show
 
-# Als het meer dan 30 minuten vastzit, controleer de Azure-portal:
+# Als je langer dan 30 minuten vastzit, controleer de Azure-portal:
 azd monitor
 # Zoek naar mislukte implementaties
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Permission denied" of "Forbidden"</strong></summary>
+<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
 
 ```bash
-# Controleer je Azure-rol
+# Controleer uw Azure-rol
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# Je hebt minimaal de rol "Contributor" nodig
-# Vraag je Azure-beheerder om het volgende toe te kennen:
+# U heeft minimaal de rol "Contributor" nodig
+# Vraag uw Azure-beheerder om toe te kennen:
 # - Contributor (voor bronnen)
 # - User Access Administrator (voor roltoewijzingen)
 ```
 </details>
 
 <details>
-<summary><strong>❌ Kan de URL van de gedeployde applicatie niet vinden</strong></summary>
+<summary><strong>❌ Can't find deployed application URL</strong></summary>
 
 ```bash
 # Toon alle service-eindpunten
@@ -878,71 +886,71 @@ azd env get-values
 
 ### 📚 Volledige bronnen voor probleemoplossing
 
-- **Gids voor veelvoorkomende problemen:** [Gedetailleerde oplossingen](docs/chapter-07-troubleshooting/common-issues.md)
+- **Gids veelvoorkomende problemen:** [Gedetailleerde oplossingen](docs/chapter-07-troubleshooting/common-issues.md)
 - **AI-specifieke problemen:** [AI-probleemoplossing](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
-- **Foutopsporingsgids:** [Stapsgewijze foutopsporing](docs/chapter-07-troubleshooting/debugging.md)
+- **Debuggengids:** [Stapsgewijze debugging](docs/chapter-07-troubleshooting/debugging.md)
 - **Hulp krijgen:** [Azure Discord](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🎓 Cursus voltooiing & certificering
+## 🎓 Cursusafronding en certificering
 
 ### Voortgang bijhouden
 Volg je voortgang per hoofdstuk:
 
 - [ ] **Hoofdstuk 1**: Basis & Snelstart ✅
 - [ ] **Hoofdstuk 2**: AI-first ontwikkeling ✅  
-- [ ] **Hoofdstuk 3**: Configuratie & Authenticatie ✅
-- [ ] **Hoofdstuk 4**: Infrastructuur als code & Implementatie ✅
+- [ ] **Hoofdstuk 3**: Configuratie & authenticatie ✅
+- [ ] **Hoofdstuk 4**: Infrastructuur als code & implementatie ✅
 - [ ] **Hoofdstuk 5**: Multi-agent AI-oplossingen ✅
-- [ ] **Hoofdstuk 6**: Validatie & Planning vóór implementatie ✅
-- [ ] **Hoofdstuk 7**: Probleemoplossing & Foutopsporing ✅
-- [ ] **Hoofdstuk 8**: Productie & Enterprise-patronen ✅
+- [ ] **Hoofdstuk 6**: Validatie en planning vóór implementatie ✅
+- [ ] **Hoofdstuk 7**: Probleemoplossing & debugging ✅
+- [ ] **Hoofdstuk 8**: Productie- & enterprise-patronen ✅
 
-### Verificatie van kennis
-Na het voltooien van elk hoofdstuk, controleer je kennis door:
-1. **Praktijkopdracht**: Voltooi de hands-on implementatie van het hoofdstuk
-2. **Kenniscontrole**: Bekijk de FAQ-sectie van je hoofdstuk
-3. **Communitydiscussie**: Deel je ervaring in Azure Discord
+### Verificatie van het leren
+Controleer je kennis na het voltooien van elk hoofdstuk door:
+1. **Praktijkopdracht**: Voltooi de praktische implementatie van het hoofdstuk
+2. **Kenniscontrole**: Bekijk de veelgestelde vragen (FAQ) voor je hoofdstuk
+3. **Communitydiscussie**: Deel je ervaring in de Azure Discord
 4. **Volgend hoofdstuk**: Ga naar het volgende complexiteitsniveau
 
-### Voordelen na voltooiing van de cursus
+### Voordelen bij afronding van de cursus
 Na het voltooien van alle hoofdstukken heb je:
-- **Productie-ervaring**: Echte AI-toepassingen in Azure geïmplementeerd
-- **Professionele vaardigheden**: Implementatiemogelijkheden geschikt voor ondernemingen  
+- **Productie-ervaring**: Reële AI-toepassingen in Azure ingezet
+- **Professionele vaardigheden**: Enterprise-klare implementatievaardigheden  
 - **Communityerkenning**: Actief lid van de Azure-ontwikkelaarscommunity
-- **Carrièreontwikkeling**: Gewilde AZD- en AI-implementatie-expertise
+- **Carrièremogelijkheden**: Gevraagde AZD- en AI-implementatie-expertise
 
 ---
 
-## 🤝 Community & Ondersteuning
+## 🤝 Community & ondersteuning
 
-### Hulp & Ondersteuning
+### Hulp & ondersteuning
 - **Technische problemen**: [Meld bugs en vraag functies aan](https://github.com/microsoft/azd-for-beginners/issues)
-- **Vragen over leren**: [Microsoft Azure Discord Community](https://discord.gg/microsoft-azure) en [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **AI-specifieke hulp**: Sluit je aan bij de [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **Documentatie**: [Officiële documentatie van Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- **Vragen over leren**: [Microsoft Azure Discord-community](https://discord.gg/microsoft-azure) en [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **AI-specifieke hulp**: Word lid van de [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Documentatie**: [Officiële Azure Developer CLI-documentatie](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
 ### Communityinzichten van Microsoft Foundry Discord
 
 **Recente peilingresultaten van het #Azure-kanaal:**
 - **45%** van ontwikkelaars wil AZD gebruiken voor AI-workloads
-- **Top-uitdagingen**: Multi-service implementaties, beheer van referenties, productierijpheid  
+- **Belangrijkste uitdagingen**: Meerdere services implementeren, beheer van referenties, productierijpheid  
 - **Meest gevraagd**: AI-specifieke sjablonen, probleemoplossingsgidsen, best practices
 
-**Sluit je aan bij onze community om:**
+**Word lid van onze community om:**
 - Deel je AZD + AI-ervaringen en krijg hulp
-- Toegang tot vroege previews van nieuwe AI-sjablonen
-- Bijdragen aan best practices voor AI-implementatie
-- Beïnvloed de toekomstige ontwikkeling van AI + AZD-functionaliteit
+- Krijg toegang tot vroege previews van nieuwe AI-sjablonen
+- Draag bij aan best practices voor AI-implementatie
+- Beïnvloed toekomstige AI- + AZD-functieontwikkeling
 
 ### Bijdragen aan de cursus
-We verwelkomen bijdragen! Lees onze [Richtlijnen voor bijdragen](CONTRIBUTING.md) voor details over:
+Wij verwelkomen bijdragen! Lees onze [Bijdragengids](CONTRIBUTING.md) voor details over:
 - **Inhoudsverbeteringen**: Verbeter bestaande hoofdstukken en voorbeelden
 - **Nieuwe voorbeelden**: Voeg praktijkvoorbeelden en sjablonen toe  
-- **Vertaling**: Help meertalige ondersteuning onderhouden
+- **Vertaling**: Help bij het onderhouden van meertalige ondersteuning
 - **Bugrapporten**: Verbeter nauwkeurigheid en duidelijkheid
-- **Communitynormen**: Volg onze inclusieve communityrichtlijnen
+- **Communitystandaarden**: Volg onze inclusieve communityrichtlijnen
 
 ---
 
@@ -953,7 +961,7 @@ Dit project is gelicentieerd onder de MIT-licentie - zie het [LICENSE](../../LIC
 
 ### Gerelateerde Microsoft-leermaterialen
 
-Onze team produceert andere uitgebreide leercursussen:
+Ons team produceert andere uitgebreide leercursussen:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
@@ -962,15 +970,15 @@ Onze team produceert andere uitgebreide leercursussen:
 [![LangChain voor beginners](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
-### Azure / Edge / MCP / Agents
+### Azure / Edge / MCP / Agenten
 [![AZD voor beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Edge AI voor beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![MCP voor beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI Agenten voor beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents voor beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### Generatieve AI-serie
+### Generatieve AI-reeks
 [![Generatieve AI voor beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Generatieve AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
 [![Generatieve AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
@@ -978,7 +986,7 @@ Onze team produceert andere uitgebreide leercursussen:
 
 ---
  
-### Kernmateriaal
+### Kernonderwerpen
 [![ML voor beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
 [![Data Science voor beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI voor beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
@@ -989,10 +997,10 @@ Onze team produceert andere uitgebreide leercursussen:
 
 ---
  
-### Copilot-serie
+### Copilot-reeks
 [![Copilot voor AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
 [![Copilot voor C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Copilot-avontuur](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Copilot Avontuur](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
@@ -1001,15 +1009,15 @@ Onze team produceert andere uitgebreide leercursussen:
 
 **🚀 Klaar om te beginnen met leren?**
 
-**Beginners**: Begin met [Hoofdstuk 1: Basis & Snelstart](../..)  
-**AI-ontwikkelaars**: Ga naar [Hoofdstuk 2: AI-first ontwikkeling](../..)  
-**Ervaren ontwikkelaars**: Begin met [Hoofdstuk 3: Configuratie & Authenticatie](../..)
+**Beginners**: Begin met [Hoofdstuk 1: Basis & Snelstart](#-chapter-1-foundation--quick-start)  
+**AI-ontwikkelaars**: Ga naar [Hoofdstuk 2: AI-first ontwikkeling](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
+**Ervaren ontwikkelaars**: Begin met [Hoofdstuk 3: Configuratie & Authenticatie](#️-chapter-3-configuration--authentication)
 
 **Volgende stappen**: [Begin Hoofdstuk 1 - AZD Basics](docs/chapter-01-foundation/azd-basics.md) →
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, verzoeken wij u te bedenken dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal geldt als de gezaghebbende bron. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat automatische vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

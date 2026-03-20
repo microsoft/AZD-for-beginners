@@ -1,4 +1,4 @@
-# Hoofdstuk 5: Multi-Agent AI-oplossingen
+# Hoofdstuk 5: Multi-agent AI-oplossingen
 
 **📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 2-3 uur | **⭐ Complexiteit**: Gevorderd
 
@@ -10,9 +10,9 @@ Dit hoofdstuk behandelt geavanceerde multi-agent architectuurpatronen, agentorke
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien zul je:
-- Begrijpen van multi-agent architectuurpatronen
-- Georkestreerde AI-agent systemen implementeren
+Door dit hoofdstuk te voltooien, zul je:
+- Multi-agent architectuurpatronen begrijpen
+- Gecoördineerde AI-agentensystemen implementeren
 - Agent-naar-agent communicatie implementeren
 - Productieklare multi-agent oplossingen bouwen
 
@@ -20,7 +20,7 @@ Door dit hoofdstuk te voltooien zul je:
 
 ## 📚 Lessen
 
-| # | Les | Beschrijving | Tijd |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
 | 1 | [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) | Volledige implementatiedoorloop | 90 min |
 | 2 | [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md) | Strategieën voor agentorkestratie | 30 min |
@@ -28,76 +28,71 @@ Door dit hoofdstuk te voltooien zul je:
 
 ---
 
-## 🚀 Snel aan de slag
+## 🚀 Snelle start
 
 ```bash
-# Implementeer de multi-agentoplossing voor de detailhandel
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Of gebruik direct het sjabloon
+# Optie 1: Uitrollen vanaf een sjabloon
 azd init --template agent-openai-python-prompty
+azd up
+
+# Optie 2: Uitrollen vanuit een agentmanifest (vereist de extensie azure.ai.agents)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
+> **Welke aanpak?** Gebruik `azd init --template` om te beginnen met een werkend voorbeeld. Gebruik `azd ai agent init` wanneer je je eigen agentmanifest hebt. Zie de [AZD AI CLI-referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
+
 ---
 
-## 🤖 Multi-Agent Architectuur
+## 🤖 Multi-agentarchitectuur
 
+```mermaid
+graph TD
+    Orchestrator[Orchestrator-agent<br/>Leidt verzoeken, beheert workflow] --> Customer[Klantagent<br/>Gebruikersvragen, voorkeuren]
+    Orchestrator --> Inventory[Voorraadagent<br/>Voorraadniveaus, bestellingen]
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
-
 ---
 
 ## 🎯 Uitgelichte oplossing: Retail Multi-Agent
 
-De [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) demonstreert:
+De [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) laat zien:
 
-- **Customer Agent**: Beheert gebruikersinteracties en voorkeuren
-- **Inventory Agent**: Beheert voorraad en orderverwerking
-- **Orchestrator**: Coördineert tussen agenten
-- **Shared Memory**: Contextbeheer tussen agenten
+- **Klantagent**: Behandelt gebruikersinteracties en voorkeuren
+- **Voorraadagent**: Beheert voorraad en orderverwerking
+- **Orkestrator**: Coördineert tussen agenten
+- **Gedeeld geheugen**: Beheer van context tussen agenten
 
 ### Gebruikte services
 
 | Service | Doel |
-|---------|---------|
-| Azure OpenAI | Taalbegrip |
+|---------|------|
+| Microsoft Foundry Models | Taalbegrip |
 | Azure AI Search | Productcatalogus |
-| Cosmos DB | Agent status en geheugen |
-| Container Apps | Hosting van agents |
+| Cosmos DB | Agentstatus en geheugen |
+| Container Apps | Hosten van agenten |
 | Application Insights | Monitoring |
 
 ---
 
 ## 🔗 Navigatie
 
-| Richting | Hoofdstuk |
+| Direction | Chapter |
 |-----------|---------|
-| **Vorige** | [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md) |
-| **Volgende** | [Hoofdstuk 6: Voor-implementatie](../chapter-06-pre-deployment/README.md) |
+| **Previous** | [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md) |
+| **Next** | [Hoofdstuk 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Gerelateerde bronnen
 
 - [Gids voor AI-agents](../chapter-02-ai-development/agents.md)
-- [AI-productiepraktijken](../chapter-08-production/production-ai-practices.md)
+- [Productie AI-praktijken](../chapter-08-production/production-ai-practices.md)
 - [AI-probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vrijwaring**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel wij streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onjuistheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor essentiële informatie raden wij een professionele menselijke vertaling aan. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel wij streven naar nauwkeurigheid, houd er rekening mee dat geautomatiseerde vertalingen fouten of onjuistheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,76 +1,76 @@
-# פתרון רב-סוכנים לתמיכת לקוחות - תרחיש קמעונאי
+# פתרון תמיכת לקוחות מרובה-סוכנים - תרחיש קמעונאי
 
-**פרק 5: פתרונות AI רב-סוכניים**  
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../README.md)  
-- **📖 פרק נוכחי**: [פרק 5: פתרונות AI רב-סוכניים](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
-- **⬅️ מקדים**: [פרק 2: פיתוח מונחה AI](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
+**פרק 5: פתרונות בינה מלאכותית מרובי סוכנים**  
+- **🏠 בית הקורס**: [AZD למתחילים](../README.md)  
+- **📖 הפרק הנוכחי**: [פרק 5: פתרונות בינה מלאכותית מרובי סוכנים](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **⬅️ תנאים מקדימים**: [פרק 2: פיתוח מכוון בינה מלאכותית](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
 - **➡️ הפרק הבא**: [פרק 6: אימות לפני פריסה](../docs/pre-deployment/capacity-planning.md)  
 - **🚀 תבניות ARM**: [חבילת פריסה](retail-multiagent-arm-template/README.md)  
 
 > **⚠️ מדריך ארכיטקטורה - לא יישום עובד**  
-> מסמך זה מספק **מפת דרכים ארכיטקטונית מקיפה** לבניית מערכת רב-סוכנים.  
-> **מה קיים:** תבנית ARM לפריסת תשתיות (Azure OpenAI, AI Search, Container Apps וכו')  
-> **מה יש לבנות:** קוד סוכן, לוגיקת ניתוב, ממשק משתמש, צנרת נתונים (מוערך 80-120 שעות)  
+> מסמך זה מספק **מפת דרכים ארכיטקטונית מקיפה** לבניית מערכת מרובת סוכנים.  
+> **מה קיים:** תבנית ARM לפריסת תשתיות (Microsoft Foundry Models, AI Search, Container Apps וכו')  
+> **מה אתה צריך לבנות:** קוד סוכן, לוגיקת ניתוב, ממשק משתמש קדמי, צינורות נתונים (מוערך 80-120 שעות)  
 >  
-> **שימוש מומלץ:**  
-> - ✅ התייחסות ארכיטקטונית לפרויקט רב-סוכנים שלך  
-> - ✅ מדריך ללמידת תבניות עיצוב רב-סוכניים  
-> - ✅ תבנית תשתית לפריסת משאבי Azure  
-> - ❌ לא יישום מוכן לשימוש (דורש פיתוח משמעותי)  
+> **שימוש כזה:**
+> - ✅ הפניה ארכיטקטונית לפרויקט מרובת סוכנים משלך
+> - ✅ מדריך ללימוד דפוסי עיצוב מרובי סוכנים
+> - ✅ תבנית תשתית לפריסת משאבי Azure
+> - ❌ לא אפליקציה מוכנה להפעלה (דורש פיתוח משמעותי)
 
-## מבוא
+## סקירה כללית
 
-**מטרת למידה:** הבנת הארכיטקטורה, החלטות העיצוב, והשיטה ליישום צ׳טבוט תמיכת לקוחות רב-סוכני מוכן לייצור לקמעונאי, עם יכולות AI מתקדמות כולל ניהול מלאי, עיבוד מסמכים, ואינטראקציות חכמות עם לקוחות.
+**מטרת הלמידה:** להבין את הארכיטקטורה, קבלת ההחלטות והגישה ליישום לבניית בוט תמיכה בלקוחות מרובת סוכנים מוכן לייצור עבור קמעונאי עם יכולות AI מתקדמות הכוללות ניהול מלאי, עיבוד מסמכים ותקשורת חכמה עם לקוחות.
 
-**משך זמן להשלמה:** קריאה והבנה (2-3 שעות) | בניית יישום מלא (80-120 שעות)
+**זמן להשלמה:** קריאה והבנה (2-3 שעות) | בניית יישום מלא (80-120 שעות)
 
-**מה תלמדו:**  
-- תבניות ארכיטקטורת רב-סוכנים ועקרונות עיצוב  
-- אסטרטגיות פריסה מרובות אזורים של Azure OpenAI  
-- שילוב AI Search עם RAG (יצירת תוכן משולב שליפה)  
-- מסגרות הערכה ובדיקות אבטחה לסוכנים  
-- שיקולי פריסה בייצור ואופטימיזציה של עלויות  
+**מה תלמד:**
+- דפוסי ארכיטקטורה ועקרונות עיצוב מרובי סוכנים
+- אסטרטגיות פריסה למודלים של Microsoft Foundry במגוון אזורים
+- אינטגרציה של AI Search עם RAG (יצירת תוכן מוגבר בשליפה)
+- מסגרות הערכת סוכן ובדיקות אבטחה
+- שיקולי פריסה בייצור ואופטימיזציה של עלויות
 
-## מטרות הארכיטקטורה
+## יעדי ארכיטקטורה
 
-**מיקוד חינוכי:** ארכיטקטורה זו ממחישה תבניות ארגוניות למערכות רב-סוכניים.
+**מוקד חינוכי:** ארכיטקטורה זו מדגימה דפוסי ארגון אירגוני למערכות מרובות סוכנים.
 
-### דרישות מערכת (ליישום שלך)
+### דרישות המערכת (ליישום שלך)
 
 פתרון תמיכת לקוחות לייצור דורש:  
-- **מספר סוכנים מיומנים** לצרכים שונים של הלקוח (שירות לקוחות + ניהול מלאי)  
-- **פריסה של מספר מודלים** תוך תכנון קיבולת מתאים (GPT-4o, GPT-4o-mini, אמבדינג אזורי)  
-- **שילוב דינמי של נתונים** עם AI Search והעלאת קבצים (חיפוש וקטורי + עיבוד מסמכים)  
-- **ניטור והערכת ביצועים מקיפה** (Application Insights + מדדים מותאמים)  
-- **אבטחה ברמת ייצור** עם אימות צוות אדום (סריקת פגיעויות + הערכת סוכנים)  
+- **מספר סוכנים מתמחים** לצרכים שונים של לקוחות (שירות לקוחות + ניהול מלאי)  
+- **פריסת מודלים מרובה** עם תכנון קיבולת נכון (gpt-4.1, gpt-4.1-mini, הטמעות באזורים שונים)  
+- **אינטגרציה דינמית של נתונים** עם AI Search והעלאת קבצים (חיפוש וקטורי + עיבוד מסמכים)  
+- **ניטור והערכת יכולות מקיפה** (Application Insights + מדדים מותאמים)  
+- **אבטחה ברמת ייצור** עם אימות Red Teaming (סריקת פרצות + הערכת סוכן)
 
 ### מה מדריך זה מספק
 
-✅ **תבניות ארכיטקטורה** - עיצוב מוכח למערכות רב-סוכנים מקצה לקצה  
+✅ **דפוסי ארכיטקטורה** - עיצוב מוכח למערכות מרובות סוכנים ניתנות להרחבה  
 ✅ **תבניות תשתית** - תבניות ARM לפריסת כל שירותי Azure  
-✅ **דוגמאות קוד** - יישומים לדוגמה של רכיבים מרכזיים  
-✅ **הכוונת תצורה** - הוראות הגדרה צעד-אחר-צעד  
-✅ **שיטות עבודה מומלצות** - אבטחה, ניטור, ואופטימיזציה של עלויות  
+✅ **דוגמאות קוד** - יישומים לדוגמה לרכיבים מרכזיים  
+✅ **הנחיות הגדרה** - הוראות הגדרה שלב-אחר-שלב  
+✅ **הנחיות מיטביות** - אסטרטגיות אבטחה, ניטור ואופטימיזציה של עלויות  
 
-❌ **לא כלול** - יישום עובד מלא (דורש מאמץ פיתוח)  
+❌ **לא כלול** - אפליקציה פונקציונלית מלאה (דורש מאמץ פיתוח)
 
 ## 🗺️ מפת דרכים ליישום
 
 ### שלב 1: למידת הארכיטקטורה (2-3 שעות) - התחלה כאן
 
-**מטרה:** הבנת עיצוב המערכת והאינטראקציות בין הרכיבים
+**מטרה:** להבין את עיצוב המערכת ואינטראקציות הרכיבים
 
-- [ ] קרא את המסמך השלם  
-- [ ] סקור דיאגרמת הארכיטקטורה וקשרים בין הרכיבים  
-- [ ] הבן תבניות רב-סוכניות והחלטות עיצוב  
-- [ ] למד דוגמאות קוד לכלי סוכן וניתוב  
-- [ ] סקור הערכות עלויות והנחיות תכנון קיבולת  
+- [ ] לקרוא את המסמך המלא  
+- [ ] לסקור דיאגרמת הארכיטקטורה ויחסי הרכיבים  
+- [ ] להבין דפוסי מרובי סוכנים והחלטות עיצוב  
+- [ ] ללמוד דוגמאות קוד לכלים וללוגיקת ניתוב  
+- [ ] לעיין באומדני עלויות והנחיות תכנון קיבולת  
 
-**תוצאה:** הבנה ברורה של מה נדרש לבנות
+**תוצאה:** הבנה ברורה של מה יש לבנות
 
 ### שלב 2: פריסת תשתית (30-45 דקות)
 
-**מטרה:** יצירת משאבי Azure באמצעות תבנית ARM
+**מטרה:** לספק משאבי Azure בעזרת תבנית ARM
 
 ```bash
 cd retail-multiagent-arm-template
@@ -78,100 +78,100 @@ cd retail-multiagent-arm-template
 ```
   
 **מה נפרס:**  
-- ✅ Azure OpenAI (3 אזורים: GPT-4o, GPT-4o-mini, אמבדינג)  
-- ✅ שירות AI Search (ריק, דורש הגדרת אינדקס)  
-- ✅ סביבה של Container Apps (תמונות זמניות)  
+- ✅ Microsoft Foundry Models (3 אזורים: gpt-4.1, gpt-4.1-mini, embeddings)  
+- ✅ שירות AI Search (ריק, צריך הגדרת אינדקס)  
+- ✅ סביבת Container Apps (תמונות זמניות)  
 - ✅ חשבונות אחסון, Cosmos DB, Key Vault  
-- ✅ ניטור עם Application Insights  
+- ✅ ניטור ב-Application Insights  
 
 **מה חסר:**  
-- ❌ יישום קוד סוכן  
+- ❌ קוד יישום סוכן  
 - ❌ לוגיקת ניתוב  
 - ❌ ממשק משתמש קדמי  
-- ❌ סכמת אינדקס חיפוש  
+- ❌ סכמה לאינדקס חיפוש  
 - ❌ צינורות נתונים  
 
 ### שלב 3: בניית היישום (80-120 שעות)
 
-**מטרה:** ליישם את מערכת הרב-סוכנים בהתבסס על הארכיטקטורה הזו
+**מטרה:** ליישם את מערכת המרובי סוכנים בהתבסס על הארכיטקטורה הזו
 
 1. **יישום סוכן** (30-40 שעות)  
-   - מחלקת בסיס וסוגי ממשקים לסוכן  
-   - סוכן שירות לקוחות עם GPT-4o  
-   - סוכן ניהול מלאי עם GPT-4o-mini  
-   - אינטגרציה עם כלים (AI Search, Bing, עיבוד קבצים)  
+   - מחלקת סוכן בסיסית וממשקים  
+   - סוכן שירות לקוחות עם gpt-4.1  
+   - סוכן ניהול מלאי עם gpt-4.1-mini  
+   - אינטגרציה של כלים (AI Search, Bing, עיבוד קבצים)  
 
 2. **שירות ניתוב** (12-16 שעות)  
-   - סיווג בקשות  
+   - לוגיקת סיווג בקשות  
    - בחירת סוכן ותזמור  
    - Backend ב-FastAPI/Express  
 
-3. **פיתוח ממשק משתמש קדמי** (20-30 שעות)  
-   - ממשק צ׳ט  
-   - פונקציונליות העלאת קבצים  
+3. **פיתוח ממשק קדמי** (20-30 שעות)  
+   - ממשק שיחה  
+   - פונקציונליות של העלאת קבצים  
    - הצגת תגובות  
 
 4. **צינור נתונים** (8-12 שעות)  
    - יצירת אינדקס AI Search  
    - עיבוד מסמכים עם Document Intelligence  
-   - יצירת אמבדינג ואינדוקס  
+   - יצירת הטמעות ותיוג אינדקס  
 
 5. **ניטור והערכה** (10-15 שעות)  
    - יישום טלמטריה מותאמת  
    - מסגרת הערכת סוכן  
-   - סורק אבטחה צוות אדום  
+   - סורק אבטחה (Red Teaming)  
 
 ### שלב 4: פריסה ובדיקה (8-12 שעות)
 
-- בניית תמונות Docker לכל השירותים  
-- דחיקה ל-Azure Container Registry  
+- יצירת תמונות Docker לכל השירותים  
+- דחיפה ל-Azure Container Registry  
 - עדכון Container Apps עם תמונות אמיתיות  
-- קביעת משתני סביבה וסודות  
-- הרצת בדיקות הערכה  
-- ביצוע סריקות אבטחה  
+- הגדרת משתני סביבה וסודות  
+- הרצת מערך בדיקות הערכה  
+- ביצוע סריקת אבטחה  
 
-**הערכת מאמץ כוללת:** 80-120 שעות למפתחים מנוסים  
+**סך מאמץ מוערך:** 80-120 שעות למפתחים מנוסים
 
 ## ארכיטקטורת הפתרון
 
-### דיאגרמת ארכיטקטורה
+### דיאגרמת הארכיטקטורה
 
 ```mermaid
 graph TB
     User[👤 לקוח] --> LB[Azure Front Door]
-    LB --> WebApp[ממשק אינטרנטי<br/>אפליקציית מכולה]
+    LB --> WebApp[ממשק קדמי לאינטרנט<br/>אפליקציית מכולה]
     
-    WebApp --> Router[נתב סוכן<br/>אפליקציית מכולה]
+    WebApp --> Router[נתב סוכנים<br/>אפליקציית מכולה]
     Router --> CustomerAgent[סוכן לקוחות<br/>שירות לקוחות]
     Router --> InvAgent[סוכן מלאי<br/>ניהול מלאי]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>מזרח ארה"ב 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>מערב ארה"ב 2]
+    CustomerAgent --> OpenAI1[דגמי מייקרוסופט פאונדרי<br/>gpt-4.1<br/>מזרח ארה"ב 2]
+    InvAgent --> OpenAI2[דגמי מייקרוסופט פאונדרי<br/>gpt-4.1-מיני<br/>מערב ארה"ב 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>קטלוג מוצרים]
-    CustomerAgent --> BingSearch[ממשק חיפוש Bing<br/>מידע בזמן אמת]
+    CustomerAgent --> BingSearch[מנוע חיפוש Bing API<br/>מידע בזמן אמת]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>מסמכים וקבצים]
+    AISearch --> Storage[אחסון Azure<br/>מסמכים וקבצים]
     Storage --> DocIntel[אינטליגנציה למסמכים<br/>עיבוד תוכן]
     
-    OpenAI1 --> Embeddings[הטמעות טקסט<br/>ada-002<br/>מרכז צרפת]
+    OpenAI1 --> Embeddings[הטמעות טקסט<br/>ada-002<br/>צרפת מרכז]
     OpenAI2 --> Embeddings
     
     Router --> AppInsights[Application Insights<br/>ניטור]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grדר<br/>צפון שוויץ] --> Evaluation[מסגרת הערכה]
-    RedTeam[סורק צוות אדום] --> SecurityReports[דיווחי אבטחה]
+    GraderModel[gpt-4.1 Grader<br/>שווייץ צפון] --> Evaluation[מסגרת הערכה]
+    RedTeam[סורק צוות אדום] --> SecurityReports[דוחות אבטחה]
     
     subgraph "שכבת נתונים"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>היסטוריית שיחות]
+        CosmosDB[Cosmos DB<br/>היסטוריית צ'אט]
     end
     
-    subgraph "שירותי AI"
+    subgraph "שירותי בינה מלאכותית"
         OpenAI1
         OpenAI2
         Embeddings
@@ -182,8 +182,8 @@ graph TB
     
     subgraph "ניטור ואבטחה"
         AppInsights
-        LogAnalytics[מרחב עבודה לניתוח לוגים]
-        KeyVault[מאגר מפתחות Azure<br/>סודות וקונפיגורציה]
+        LogAnalytics[מרחב עבודה לניתוח יומנים]
+        KeyVault[מנעול מפתחות Azure<br/>סודות וקונפיגורציה]
         RedTeam
         Evaluation
     end
@@ -199,24 +199,24 @@ graph TB
 ```  
 ### סקירת רכיבים
 
-| רכיב            | מטרה                              | טכנולוגיה          | אזור        |
-|-----------------|----------------------------------|---------------------|-------------|
-| **ממשק משתמש וובי**  | ממשק אינטראקציה עם הלקוחות         | Container Apps      | האזור הראשי  |
-| **נתב סוכנים**       | ניתוב בקשות לסוכן המתאים           | Container Apps      | האזור הראשי  |
-| **סוכן לקוחות**      | טיפול בשאלות שירות לקוחות          | Container Apps + GPT-4o | האזור הראשי  |
-| **סוכן מלאי**        | ניהול מלאי ומימוש הזמנות           | Container Apps + GPT-4o-mini | האזור הראשי  |
-| **Azure OpenAI**     | מודלים לוגיים גדולים לסוכנים       | Cognitive Services  | מרובה אזורים |
-| **AI Search**        | חיפוש וקטורי ו-RAG                | שירות AI Search    | האזור הראשי  |
-| **חשבון אחסון**      | העלאת קבצים ומסמכים               | Blob Storage        | האזור הראשי  |
-| **Application Insights** | ניטור וטלמטריה                   | Monitor             | האזור הראשי  |
-| **מודל Grader**      | מערכת הערכת סוכנים                | Azure OpenAI        | אזור משני   |  
+| רכיב | מטרה | טכנולוגיה | אזור |  
+|-------|-----------|-------------|----------|  
+| **ממשק משתמש קדמי** | ממשק לפניות לקוחות | Container Apps | אזור ראשי |  
+| **נתב סוכנים** | מפנה בקשות לסוכן המתאים | Container Apps | אזור ראשי |  
+| **סוכן לקוח** | מטפל בפניות שירות לקוחות | Container Apps + gpt-4.1 | אזור ראשי |  
+| **סוכן מלאי** | מנהל מלאי ומימוש | Container Apps + gpt-4.1-mini | אזור ראשי |  
+| **Microsoft Foundry Models** | ביצוע LLM עבור סוכנים | Cognitive Services | רב-אזורי |  
+| **AI Search** | חיפוש וקטורי ו-RAG | שירות AI Search | אזור ראשי |  
+| **חשבון אחסון** | העלאת קבצים ומסמכים | Blob Storage | אזור ראשי |  
+| **Application Insights** | ניטור וטלמטריה | Monitor | אזור ראשי |  
+| **דגם Grader** | מערכת הערכת סוכן | Microsoft Foundry Models | אזור משני |
 
 ## 📁 מבנה הפרויקט
 
-> **📍 סטטוס:**  
+> **📍 סמל סטטוס:**  
 > ✅ = קיים במאגר  
-> 📝 = יישום לדוגמה (קוד במסמך זה)  
-> 🔨 = צריך ליצור  
+> 📝 = יישום לדוגמה (דוגמאות בקוד במסמך זה)  
+> 🔨 = יש ליצור  
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -367,75 +367,75 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ### אפשרות 1: פריסת תשתית בלבד (30 דקות)
 
-**מה מקבלים:** כל שירותי Azure פרוסים ומוכנים לפיתוח
+**מה תקבל:** כל שירותי Azure מסופקים ומוכנים לפיתוח
 
 ```bash
-# שכפול מאגר
+# שכפל מאגר
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# פריסת תשתית
+# פרוס תשתית
 ./deploy.sh -g myResourceGroup -m standard
 
-# אימות הפריסה
+# אמת פריסה
 az resource list --resource-group myResourceGroup --output table
 ```
   
 **תוצאה צפויה:**  
-- ✅ שירותי Azure OpenAI פרוסים (3 אזורים)  
-- ✅ יצירת שירות AI Search (ריק)  
-- ✅ סביבה Container Apps מוכנה  
-- ✅ הגדרת אחסון, Cosmos DB, Key Vault  
-- ❌ עדיין ללא סוכנים פועלים (רק תשתית)  
+- ✅ שירותי Microsoft Foundry Models פרוסים (3 אזורים)  
+- ✅ שירות AI Search נוצר (ריק)  
+- ✅ סביבת Container Apps מוכנה  
+- ✅ קונפיגורציית אחסון, Cosmos DB, Key Vault  
+- ❌ סוכנים עובדים עדיין לא קיימים (תשתית בלבד)  
 
-### אפשרות 2: למידת הארכיטקטורה (2-3 שעות)
+### אפשרות 2: ללמוד את הארכיטקטורה (2-3 שעות)
 
-**מה מקבלים:** הבנה מעמיקה של תבניות רב-סוכנים
+**מה תקבל:** הבנה עמוקה של דפוסי מערכת מרובת סוכנים
 
-1. קריאת המסמך השלם  
+1. קריאת המסמך המלא  
 2. סקירת דוגמאות קוד לכל רכיב  
 3. הבנת החלטות עיצוב ופשרות  
-4. לימוד אסטרטגיות אופטימיזציה של עלויות  
-5. תכנון גישה ליישום  
+4. למידת אסטרטגיות אופטימיזציית עלויות  
+5. תכנון גישת היישום שלך  
 
 **תוצאה צפויה:**  
-- ✅ מודל מנטלי ברור של הארכיטקטורה  
-- ✅ הבנת רכיבים נדרשים  
-- ✅ הערכות מאמץ ריאליסטיות  
-- ✅ תכנית יישום  
+- ✅ מודל מנטלי ברור של ארכיטקטורת המערכת  
+- ✅ הבנת הרכיבים הנדרשים  
+- ✅ אומדני מאמץ ריאליסטיים  
+- ✅ תוכנית יישום  
 
-### אפשרות 3: בניית מערכת שלמה (80-120 שעות)
+### אפשרות 3: בניית מערכת מלאה (80-120 שעות)
 
-**מה מקבלים:** פתרון רב-סוכנים מוכן לייצור
+**מה תקבל:** פתרון מרובה סוכנים מוכן לייצור
 
-1. **שלב 1:** פריסת תשתית (כפי לעיל)  
-2. **שלב 2:** יישום סוכנים בדוגמאות קוד (30-40 שעות)  
+1. **שלב 1:** פריסת תשתית (למעלה)  
+2. **שלב 2:** יישום סוכנים על בסיס דוגמאות קוד (30-40 שעות)  
 3. **שלב 3:** בניית שירות ניתוב (12-16 שעות)  
-4. **שלב 4:** יצירת ממשק משתמש קדמי (20-30 שעות)  
-5. **שלב 5:** קביעת צנרת נתונים (8-12 שעות)  
+4. **שלב 4:** יצירת ממשק קדמי (20-30 שעות)  
+5. **שלב 5:** הגדרת צינורות נתונים (8-12 שעות)  
 6. **שלב 6:** הוספת ניטור והערכה (10-15 שעות)  
 
 **תוצאה צפויה:**  
-- ✅ מערכת רב-סוכנים פונקציונלית מלאה  
+- ✅ מערכת מרובת סוכנים עובדת במלואה  
 - ✅ ניטור ברמת ייצור  
 - ✅ אימות אבטחה  
-- ✅ פריסה מופקת בעלות אופטימלית  
+- ✅ פריסה מותאמת עלות  
 
 ---
 
-## 📚 הפניה לארכיטקטורה ומדריך ליישום
+## 📚 הפניה ארכיטקטונית ומדריך ליישום
 
-הקטעים הבאים מספקים תבניות ארכיטקטורה מפורטות, דוגמאות תצורה, וקוד הפניה להנחיית היישום.
+הקטעים הבאים מספקים דפוסי ארכיטקטורה מפורטים, דוגמאות קונפיגורציה וקוד הפניה להנחות היישום שלך.
 
-## דרישות תצורה ראשוניות
+## דרישות הגדרה ראשונית
 
-### 1. מספר סוכנים ותצורה
+### 1. מספר סוכנים וקונפיגורציה
 
-**מטרה**: פריסה של 2 סוכנים מומחים - "סוכן לקוחות" (שירות לקוחות) ו"ניהול מלאי" (ניהול מלאי)
+**מטרה**: לפרוס 2 סוכנים מתמחים - "סוכן לקוח" (שירות לקוחות) ו"ניהול מלאי"
 
-> **📝 הערה:** azure.yaml ותצורות Bicep הבאות הן **דוגמאות להפניה** המראות כיצד לבנות פריסות רב-סוכנים. יש ליצור את הקבצים ואת מימושי הסוכנים המתאימים.
+> **📝 הערה:** קבצי azure.yaml ו-Bicep הבאים הם **דוגמאות הפניה** המראות כיצד לבנות פריסה מרובת סוכנים. תצטרך ליצור קבצים אלה ויישומים מתאימים לסוכנים.
 
-#### שלבי התצורה:
+#### שלבי קונפיגורציה:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -474,12 +474,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -507,17 +507,17 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
   
-### 2. ריבוי מודלים עם תכנון קיבולת
+### 2. פריסת מודלים מרובה עם תכנון קיבולת
 
-**מטרה**: פריסת מודל שיחה (לקוחות), מודל אמבדינג (חיפוש), ומודל הנמקה (grader) עם ניהול מכסות מתאים
+**מטרה**: לפרוס דגם שיחה (לקוח), דגם הטמעות (חיפוש) ודגם שיפוט (grader) עם ניהול קווטות נכון
 
-#### אסטרטגיית ריבוי אזורים:
+#### אסטרטגיית רב-אזור:
 
 ```bicep
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -555,20 +555,20 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
   
-#### תצורת גיבוי אזורי:
+#### קונפיגורציית גיבוי לאזור:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
   
-### 3. AI Search עם תצורת אינדקס נתונים
+### 3. AI Search עם הגדרת אינדקס נתונים
 
-**מטרה**: תצורת AI Search לעדכוני נתונים ואינדוקס אוטומטי
+**מטרה**: להגדיר AI Search לעדכון נתונים ותיוג אוטומטי
 
-#### וו פרה-פרוביז'ן:
+#### הפעלת hook טרום-פריסה:
 
 ```bash
 #!/bin/bash
@@ -585,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
   
-#### הגדרת נתוני פוסט-פרוביז'ן:
+#### הגדרת נתונים לאחר פריסה:
 
 ```bash
 #!/bin/bash
@@ -593,10 +593,10 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# קבל מפתח שירות החיפוש
+# קבל מפתח שירות חיפוש
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# צור סכמת מפתח חיפוש
+# צור סכימת אינדקס
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
@@ -609,7 +609,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
   
-#### סכמת אינדקס חיפוש:
+#### סכמה לאינדקס חיפוש:
 
 ```json
 {
@@ -634,14 +634,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
   
-### 4. תצורת כלים לסוכן עבור AI Search
+### 4. קונפיגורציית כלי סוכן ל-AI Search
 
-**מטרה**: תצורת סוכנים לשימוש ב-AI Search ככלי רקע
+**מטרה**: להגדיר שימוש ב-AI Search ככלי יישור
 
 #### יישום כלי חיפוש לסוכן:
 
 ```python
-# קובץ src/agents/tools/search_tool.py
+# src/agents/tools/search_tool.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -682,7 +682,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
   
-#### אינטגרציה לסוכן:
+#### אינטגרציית סוכן:
 
 ```python
 # src/agents/customer_agent.py
@@ -698,12 +698,12 @@ class CustomerAgent:
         # תחילה, חפש הקשר רלוונטי
         search_results = await self.search_tool.search_products(user_query)
         
-        # הכנת ההקשר עבור ה-LLM
+        # הכנת הקשר עבור ה-LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # יצירת תגובה עם ביסוס
+        # יצירת תגובה עם עיגון
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -713,11 +713,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
   
-### 5. אינטגרציית אחסון הקלטת קבצים
+### 5. אינטגרציית אחסון להעלאת קבצים
 
-**מטרה**: לספק לסוכנים יכולת עיבוד קבצים שהועלו (מדריכים, מסמכים) להקשר RAG
+**מטרה**: לאפשר לסוכנים לעבד קבצים שהועלו (מדריכים, מסמכים) עבור הקשר RAG
 
-#### תצורת אחסון:
+#### קונפיגורציית אחסון:
 
 ```bicep
 // infra/storage.bicep
@@ -776,7 +776,7 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # הורד קובץ מאחסון blob
+        # הורדת קובץ מאחסון האבנים
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
@@ -796,13 +796,13 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # יצירת האשכולות
+        # יצירת הטמעות
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # אינדקס בחיפוש AI
+        # אינדקס בחיפוש בינה מלאכותית
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -816,7 +816,7 @@ class DocumentProcessor:
   
 ### 6. אינטגרציית חיפוש Bing
 
-**מטרה**: הוספת יכולות חיפוש בזמן אמת דרך Bing
+**מטרה**: להוסיף יכולות Bing Search לקבלת מידע בזמן אמת
 
 #### הוספת משאב Bicep:
 
@@ -839,7 +839,7 @@ output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 #### כלי חיפוש Bing:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# מקור/סוכנים/כלים/כלי_חיפוש_bing.py
 import aiohttp
 import asyncio
 
@@ -880,13 +880,13 @@ class BingSearchTool:
   
 ---
 
-## ניטור וצפייה
+## ניטור ותצפית
 
-### 7. מעקב ואפליקציה Insights
+### 7. מעקב ו-Application Insights
 
-**מטרה**: ניטור מקיף עם לוגי מעקב ו-Application Insights
+**מטרה**: ניטור מקיף עם רישומי מעקב ו-application insights
 
-#### תצורת Application Insights:
+#### קונפיגורציית Application Insights:
 
 ```bicep
 // infra/monitoring.bicep
@@ -953,7 +953,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # קביעת תצורת רישום
+        # הגדרת רישום
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -984,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # לקצר לפרטיות
+            'query': query[:100],  # קיצור לפרטיות
             'results_found': str(results_count > 0)
         }
         
@@ -1045,11 +1045,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
   
-### 8. אימות אבטחה עם Red Teaming
+### 8. אימות אבטחת Red Teaming
 
 **מטרה**: בדיקות אבטחה אוטומטיות לסוכנים ולמודלים
 
-#### תצורת Red Teaming:
+#### קונפיגורציית Red Teaming:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # לחשב את הציון הכללי של האבטחה
+        # לחשב ניקוד אבטחה כולל
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1165,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # המימוש ישלח בקשת HTTP לנקודת הקצה של הסוכן
-        # למטרות הדגמה, מחזיר ערך זמני
+        # היישום ישלח בקשת HTTP לנקודת קצה של הסוכן
+        # למטרות הדגמה, מחזיר מיקום מחזיק מקום
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1188,7 +1188,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # איתור פשיטות פשטני
+        # זיהוי פגיעויות מפושט
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1230,7 +1230,7 @@ class RedTeamScanner:
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # להפחית את הציון על פי חומרה
+        # להפחית ניקוד על פי חומרה
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1248,13 +1248,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# קבל נקודת קצה של הסוכן מהפריסה
+# לקבל נקודת קצה של סוכן מהפריסה
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# הפעל סריקת אבטחה
+# להריץ סריקת אבטחה
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1264,16 +1264,16 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
   
-### 9. הערכת סוכנים עם מודל Grader
+### 9. הערכת סוכן עם דגם Grader
 
-**מטרה**: פריסת מערכת הערכה עם מודל Grader ייעודי
+**מטרה**: לפרוס מערכת הערכה עם דגם שיפוט ייעודי
 
-#### תצורת מודל Grader:
+#### קונפיגורציית דגם Grader:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1351,7 +1351,7 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # קבל את תגובת הסוכן
+        # קבל תגובת סוכן
         agent_response = await self._get_agent_response(user_query)
         
         # דרג את התגובה
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1487,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
   
-#### תצורת מקרים לבדיקות:
+#### קונפיגורציית מקרי בדיקה:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1530,9 +1530,9 @@ class AgentEvaluator:
 
 ### 10. התאמת Container App
 
-**מטרה**: עדכון תצורת container app והחלפת UI מותאם
+**מטרה**: לעדכן קונפיגורציית אפליקציית מכולה ולהחליף בממשק UI מותאם
 
-#### תצורה דינמית:
+#### קונפיגורציה דינמית:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1548,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
   
-#### בניית ממשק משתמש מותאם:
+#### בניית ממשק קדמי מותאם:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1591,13 +1591,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# דחוף ל-Azure Container Registry
+# לדחוף ל-Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# עדכון אפליקציית מכולה
+# לעדכן את אפליקציית המכולה
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1610,11 +1610,11 @@ echo "Frontend deployed successfully!"
 
 ## 🔧 מדריך פתרון בעיות
 
-### בעיות נפוצות ופתרונות
+### תקלות נפוצות ופתרונותיהן
 
-#### 1. הגבלות מכסת Container Apps
+#### 1. מגבלות קווטת Container Apps
 
-**בעיה:** כישלון פריסה עקב מגבלות מכסה אזורית
+**בעיה:** הפריסה נכשלת עקב מגבלות קווטת אזור
 
 **פתרון:**  
 ```bash
@@ -1635,9 +1635,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
   
-#### 2. תפוגת גרסת מודל לפריסה
+#### 2. תוקף פג של פריסת מודל
 
-**בעיה:** כישלון בפריסת מודל עקב نسخه API שפג תוקפה
+**בעיה:** הפריסה נכשלת עקב גרסת API שפגה
 
 **פתרון:**  
 ```python
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # זה יקרא ל-API של Azure OpenAI כדי לקבל את הגרסאות הנוכחיות
+    # זה יקרא ל-API של Microsoft Foundry Models כדי לקבל את הגרסאות הנוכחיות
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1684,9 +1684,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
   
-#### 3. אינטגרציה של fine-tuning
+#### 3. אינטגרציית כוונון עדין
 
-**בעיה:** כיצד לשלב מודלים מותאמים בפריסת AZD
+**בעיה:** כיצד לשלב מודלים מכווננים בפריסת AZD
 
 **פתרון:**  
 ```python
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,8 +1726,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # עדכון פריסה לשימוש במודל מכוונן בדיוק
-            # זה יפעיל את Azure CLI לעדכון הפריסה
+            # עדכן את הפריסה כדי להשתמש בדגם המותאם
+            # זה יקרא ל-Azure CLI כדי לעדכן את הפריסה
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,13 +1736,13 @@ class FineTuningPipeline:
   
 ---
 
-## שאלות נפוצות וחקירה פתוחה
+## שאלות נפוצות וחקר פתוח
 
 ### שאלות נפוצות
 
-#### ש: האם יש דרך פשוטה לפרוס סוכנים רבים (תבנית עיצוב)?
+#### ש: האם יש דרך פשוטה לפרוס מספר סוכנים (דפוס עיצוב)?
 
-**ת:** כן! השתמש בתבנית רב-סוכני:
+**ת:** כן! השתמש בדפוס מרובי סוכנים:  
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
   
-#### ש: האם ניתן לפרוס "נתב מודלים" כמודל (השפעות עלויות)?
+#### ש: האם אפשר לפרוס "נתב מודלים" כדגם (השפעות עלות)?
 
-**ת:** כן, בתשומת לב:
+**ת:** כן, בשיקול דעת זהיר:  
 
 ```python
-# מימוש נתב מודל
+# יישום נתב דגם
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1784,22 +1784,22 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # המימוש יחושב חיסכונות פוטנציאליים
+        # היישום יחשב חיסכון פוטנציאלי
         pass
 ```
   
-**השפעות עלויות:**  
-- **חיסכון**: הפחתת עלות של 60-80% לשאילתות פשוטות  
-- **פשרה**: הגדלת עומס זמן תגובה ללוגיקת ניתוב  
-- **ניטור**: מעקב אחרי דיוק מול עלות  
+**השפעות עלות:**  
+- **חסכון:** הפחתת עלויות 60-80% עבור שאילתות פשוטות  
+- **פשרות:** הגדלת זמן חיץ קטן בלוגיקת הניתוב  
+- **ניטור:** מעקב דיוק מול מדדי עלות  
 
-#### ש: האם אפשר להתחיל משימת fine-tuning מתבנית azd?
+#### ש: האם ניתן להתחיל משימת כוונון עדין מתוך תבנית azd?
 
-**ת:** כן, באמצעות ווים לאחר פריסה:
+**ת:** כן, באמצעות hooks לאחר פריסה:  
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - כוונון עדין של אינטגרציה
+# hooks/postprovision.sh - כוונון עדין לאינטגרציה
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1808,12 +1808,12 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# התחלת משימת כוונון עדין
+# התחלת עבודת כוונון עדין
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
-# שמירת מזהה המשימה למעקב
+# שמירת מזהה העבודה למעקב
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
@@ -1822,7 +1822,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
   
 ### תרחישים מתקדמים
 
-#### אסטרטגיית פריסה מרובת אזורים
+#### אסטרטגיית פריסה רב-אזורית
 
 ```bicep
 // infra/multi-region.bicep
@@ -1882,7 +1882,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # ניתוח שעת שיא
+        # ניתוח שיא זמן
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1906,62 +1906,62 @@ class CostOptimizer:
 ## ✅ תבנית ARM מוכנה לפריסה
 
 > **✨ זה באמת קיים ועובד!**  
-> בניגוד לדוגמאות הקוד הקונספטואליות למעלה, תבנית ה-ARM היא **פריסת תשתית אמיתית ופועלת** הכלולה במאגר זה.
+> בניגוד לדוגמאות קוד רעיוניות לעיל, תבנית ה-ARM היא **פריסת תשתית אמיתית ועובדת** הכלולה במאגר זה.
 
-### מה התבנית הזו בעצם עושה
+### מה התבנית הזו עושה בפועל
 
-תבנית ה-ARM ב [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) מספקת **את כל תשתית ה-Azure** הנדרשת למערכת המרובת סוכנים. זו **הרכיב היחיד המוכן להרצה** - כל השאר דורש פיתוח.
+תבנית ה-ARM ב-[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) מספקת את **כל תשתית Azure** הדרושה למערכת רב-סוכנים. זהו **הרכיב היחיד המוכן לפעולה** - כל השאר דורש פיתוח.
 
 ### מה כלול בתבנית ה-ARM
 
-תבנית ה-ARM הממוקמת ב- [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) כוללת:
+תבנית ה-ARM הממוקמת ב-[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) כוללת:
 
 #### **תשתית מלאה**
-- ✅ פריסות **Azure OpenAI** מרובות אזורים (GPT-4o, GPT-4o-mini, א-מבלדים, גריידר)
+- ✅ פריסה של **מודלים מרובי אזורים של Microsoft Foundry** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
 - ✅ **Azure AI Search** עם יכולות חיפוש וקטורי
 - ✅ **Azure Storage** עם מכולות למסמכים והעלאות
-- ✅ **Container Apps Environment** עם תזמון אוטומטי
+- ✅ **סביבת Container Apps** עם קנה מידה אוטומטי
 - ✅ אפליקציות מכולה של **Agent Router & Frontend**
-- ✅ **Cosmos DB** לשמירת היסטוריית צ׳אט
+- ✅ **Cosmos DB** לשמירת היסטורית שיחות
 - ✅ **Application Insights** לניטור מקיף
-- ✅ **Key Vault** לניהול סודות מאובטח
+- ✅ **Key Vault** לניהול סודי מאובטח
 - ✅ **Document Intelligence** לעיבוד קבצים
 - ✅ **Bing Search API** למידע בזמן אמת
 
 #### **מצבי פריסה**
 | מצב | שימוש | משאבים | עלות משוערת לחודש |
 |------|----------|-----------|---------------------|
-| **מינימלי** | פיתוח, בדיקה | SKU בסיסיים, אזור יחיד | $100-370 |
-| **סטנדרטי** | ייצור, בקנה מידה בינוני | SKU סטנדרטיים, מרובת אזורים | $420-1,450 |
-| **פרימיום** | ארגוני, בקנה מידה גבוה | SKU פרימיום, הגדרת HA | $1,150-3,500 |
+| **מינימלי** | פיתוח, בדיקות | SKU בסיסיים, אזור יחיד | 100-370$ |
+| **סטנדרטי** | ייצור, קנה מידה בינוני | SKU סטנדרטי, ריבוי אזורים | 420-1,450$ |
+| **פרימיום** | ארגוני, קנה מידה גבוה | SKU פרימיום, הגדרת HA | 1,150-3,500$ |
 
-### 🎯 אפשרויות פריסה מהירות
+### 🎯 אפשרויות פריסה מהירה
 
-#### אפשרות 1: פריסת Azure בלחיצה אחת
+#### אפשרות 1: פריסה בקליק אחד ל-Azure
 
-[![פריסה ל-Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### אפשרות 2: פריסת Azure CLI
+#### אפשרות 2: פריסה בעזרת Azure CLI
 
 ```bash
-# שכפל את המאגר
+# לשכפל את המאגר
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# הפוך את סקריפט הפריסה לביצועי
+# להפוך את סקריפט הפריסה לביצוע
 chmod +x deploy.sh
 
-# פרוס עם הגדרות ברירת מחדל (מצב סטנדרט)
+# לפרוס עם הגדרות ברירת מחדל (מצב סטנדרטי)
 ./deploy.sh -g myResourceGroup
 
-# פרוס לייצור עם תכונות פרימיום
+# לפרוס לייצור עם תכונות פרימיום
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# פרוס גרסה מינימלית לפיתוח
+# לפרוס גרסה מינימלית לפיתוח
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### אפשרות 3: פריסת תבנית ARM ישירה
+#### אפשרות 3: פריסת תבנית ARM ישירות
 
 ```bash
 # צור קבוצת משאבים
@@ -1975,9 +1975,9 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### פלטי התבנית
+### פלטים של התבנית
 
-לאחר פריסה מוצלחת, תקבלו:
+לאחר פריסה מוצלחת, תקבל:
 
 ```json
 {
@@ -1991,31 +1991,31 @@ az deployment group create \
 }
 ```
 
-### 🔧 קונפיגורציה לאחר פריסה
+### 🔧 קונפיגורציה לאחר הפריסה
 
 תבנית ה-ARM מטפלת בפריסת התשתית. לאחר הפריסה:
 
-1. **הגדרת אינדקס חיפוש**:
+1. **הגדרת אינדקס חיפוש**:  
    ```bash
-   # השתמש בסכימת החיפוש שסופקה
+   # השתמש במבנה החיפוש שסופק
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **העלאת מסמכים ראשוניים**:
+2. **העלאת מסמכים ראשוניים**:  
    ```bash
-   # העלה מדריכי מוצר ובסיס ידע
+   # העלאת מדריכי מוצר ומאגר ידע
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **פריסת קוד הסוכן**:
+3. **פריסת קוד הסוכן**:  
    ```bash
-   # לבנות ולפרוס אפליקציות סוכנים ממשיות
+   # לבנות ולפרוס יישומי סוכנים אמיתיים
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2025,7 +2025,7 @@ az deployment group create \
 
 ### 🎛️ אפשרויות התאמה אישית
 
-ערוך `azuredeploy.parameters.json` כדי להתאים את הפריסה:
+ערוך את `azuredeploy.parameters.json` כדי להתאים את הפריסה שלך:
 
 ```json
 {
@@ -2041,145 +2041,145 @@ az deployment group create \
 
 ### 📊 תכונות הפריסה
 
-- ✅ **אימות דרישות קדם** (Azure CLI, מכסות, הרשאות)
-- ✅ **זמינות גבוהה מרובה אזורים** עם כשל אוטומטי
-- ✅ **ניטור מקיף** עם Application Insights ו-Log Analytics
-- ✅ **פרקטיקות אבטחה מיטביות** עם Key Vault ו-RBAC
-- ✅ **אופטימיזציית עלויות** עם מצבי פריסה משתנים
-- ✅ **תזמון אוטומטי** לפי דפוסי ביקוש
-- ✅ **עדכונים ללא השבתה** עם רביזיות Container Apps
+- ✅ **וולידציה של דרישות מקדימות** (Azure CLI, מכסות, הרשאות)  
+- ✅ **זמינות גבוהה מרובת אזורים** עם גיבוי אוטומטי  
+- ✅ **ניטור מקיף** עם Application Insights ו-Log Analytics  
+- ✅ **פרקטיקות אבטחה מובילות** עם Key Vault ו-RBAC  
+- ✅ **אופטימיזציית עלויות** עם מצבי פריסה ניתנים לקונפיגורציה  
+- ✅ **קנה מידה אוטומטי** בהתבסס על דפוסי דרישה  
+- ✅ **עדכונים ללא השבתה** עם גרסאות Container Apps  
 
 ### 🔍 ניטור וניהול
 
-לאחר הפריסה, נטר את הפתרון דרך:
+לאחר הפריסה, נטר את הפתרון שלך באמצעות:
 
-- **Application Insights**: מדדי ביצועים, מעקב תלות, וטלמטריה מותאמת
-- **Log Analytics**: ריכוז רישומים מכל הרכיבים
-- **Azure Monitor**: ניטור בריאות וזמינות משאבים
-- **ניהול עלויות**: מעקב עלויות בזמן אמת והתראות תקציביות
+- **Application Insights**: מדדי ביצועים, מעקב תלותות וטלמטריה מותאמת  
+- **Log Analytics**: רישום מרכזי מכל הרכיבים  
+- **Azure Monitor**: ניטור בריאות וזמינות המשאבים  
+- **ניהול עלויות**: מעקב בזמן אמת אחר עלויות והתרעות תקציב  
 
 ---
 
-## 📚 מדריך יישום מלא
+## 📚 מדריך מימוש מלא
 
-מסמך התרחיש הזה יחד עם תבנית ה-ARM מספקים כל מה שצריך לפריסת פתרון תמיכה בלקוחות רב-סוכני מוכן לייצור. היישום מכסה:
+מסמך התרחיש הזה בשילוב עם תבנית ה-ARM מספק את כל הדרוש לפריסת פתרון רב-סוכני מותאם לייצור לתמיכה בלקוחות. המימוש כולל:
 
-✅ **עיצוב ארכיטקטורה** - עיצוב מערכת מקיף עם יחסי רכיבים  
-✅ **התקנת תשתית** - תבנית ARM מלאה לפריסה בלחיצה אחת  
+✅ **עיצוב ארכיטקטורה** - תכנון מערכת מקיף עם יחסי רכיבים  
+✅ **אספקת תשתית** - תבנית ARM מוכנה לפריסה בלחיצת כפתור  
 ✅ **קונפיגורציית סוכנים** - הגדרות מפורטות לסוכני לקוח ומלאי  
-✅ **פריסת מודלים מרובים** - מיקום אסטרטגי של מודלים לפי אזורים  
-✅ **אינטגרציית חיפוש** - AI Search עם וקטורים ואינדקסים  
-✅ **יישום אבטחה** - Red teaming, סריקת פגיעויות ופרקטיקות בטוחות  
+✅ **פריסת מודלים מרובים** - מיקום אסטרטגי של מודלים באזורים שונים  
+✅ **אינטגרציית חיפוש** - AI Search עם וקטורים ואינדוקס נתונים  
+✅ **מימוש אבטחה** - מבודדים אדומים, סריקת חולשות ופרקטיקות מאובטחות  
 ✅ **ניטור והערכה** - טלמטריה מקיפה ומסגרת הערכת סוכנים  
-✅ **מוכנות לייצור** - פריסה ארגונית עם זמינות גבוהה ושחזור מאסון  
-✅ **אופטימיזציית עלויות** - ניתוב חכם ותזמון מבוסס שימוש  
-✅ **מדריך פתרון בעיות** - בעיות נפוצות ודרכי פתרון
+✅ **מוכנות לייצור** - פריסה ארגונית עם HA ושחזור מאסון  
+✅ **אופטימיזציית עלויות** - ניתוב חכם וקנה מידה מבוסס שימוש  
+✅ **מדריך פתרון תקלות** - בעיות נפוצות ואסטרטגיות טיפול  
 
 ---
 
-## 📊 סיכום: מה למדת
+## 📊 סיכום: מה למדתם
 
-### דפוסי ארכיטקטורה שנכנסו
+### דפוסי ארכיטקטורה מכוסים
 
-✅ **עיצוב מערכת רב-סוכנים** - סוכנים ייעודיים (לקוח + מלאי) עם מודלים מותאמים  
-✅ **פריסה מרובת אזורים** - מיקום מודלים אסטרטגי לחיסכון בעלויות ורפליקציה  
-✅ **ארכיטקטורת RAG** - אינטגרציית AI Search עם וקטורי אמבלדים לתשובות מבוססות  
-✅ **הערכת סוכן** - מודל גריידר ייעודי להערכת איכות  
-✅ **מסגרת אבטחה** - דפוסי red teaming וסריקת פגיעויות  
+✅ **עיצוב מערכת רב-סוכנית** - סוכנים מותאמים (לקוח + מלאי) עם מודלים ייעודיים  
+✅ **פריסת ריבוי אזורים** - מיקום אסטרטגי של מודלים לחיסכון בעלויות ולביודדיות  
+✅ **ארכיטקטורת RAG** - אינטגרציית AI Search עם אמבדינג וקטורי לתגובות מבוססות  
+✅ **הערכת סוכנים** - מודל ייעודי grader לאבחון איכות  
+✅ **מסגרת אבטחה** - דפוסי red teaming וסריקת חולשות  
 ✅ **אופטימיזציית עלויות** - ניתוב מודלים ותכנון קיבולת  
 ✅ **ניטור ייצור** - Application Insights עם טלמטריה מותאמת  
 
-### מה המסמך הזה מספק
+### מה מספק מסמך זה
 
-| רכיב | סטטוס | היכן למצוא |
+| רכיב | מצב | מקום למציאה |
 |-----------|--------|------------------|
 | **תבנית תשתית** | ✅ מוכנה לפריסה | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **דיאגרמות ארכיטקטורה** | ✅ מלא | דיאגרמת Mermaid למעלה |
-| **דוגמאות קוד** | ✅ יישומים לדוגמה | לאורך כל המסמך |
-| **דפוסי תצורה** | ✅ הנחיות מפורטות | סעיפים 1-10 למעלה |
-| **יישומי סוכנים** | 🔨 אתה בונה את זה | כ-40 שעות פיתוח |
-| **ממשק משתמש קדמי** | 🔨 אתה בונה את זה | כ-25 שעות פיתוח |
-| **צנרת נתונים** | 🔨 אתה בונה את זה | כ-10 שעות פיתוח |
+| **דיאגרמות ארכיטקטורה** | ✅ מלאות | דיאגרמת Mermaid למעלה |
+| **דוגמאות קוד** | ✅ מימושי ייחוס | לאורך כל המסמך |
+| **דפוסי קונפיגורציה** | ✅ הדרכה מפורטת | פרקים 1-10 למעלה |
+| **מימושי סוכנים** | 🔨 עליך לבנות | ~40 שעות פיתוח |
+| **ממשק משתמש קדמי** | 🔨 עליך לבנות | ~25 שעות פיתוח |
+| **צינורות נתונים** | 🔨 עליך לבנות | ~10 שעות פיתוח |
 
 ### בדיקת מציאות: מה באמת קיים
 
-**במאגר (מוכן עכשיו):**
-- ✅ תבנית ARM מפריסה 15+ שירותי Azure (azuredeploy.json)
-- ✅ סקריפט פריסה עם אימות (deploy.sh)
-- ✅ קונפיגורציית פרמטרים (azuredeploy.parameters.json)
+**במאגר (מוכן עכשיו):**  
+- ✅ תבנית ARM לפריסה של 15+ שירותי Azure (azuredeploy.json)  
+- ✅ סקריפט פריסה עם אימות (deploy.sh)  
+- ✅ קונפיגורציית פרמטרים (azuredeploy.parameters.json)  
 
-**מתועד במסמך (אתה יוצר):**
-- 🔨 קוד יישום סוכן (~30-40 שעות)
-- 🔨 שירות ניתוב (~12-16 שעות)
-- 🔨 אפליקציית frontend (~20-30 שעות)
-- 🔨 סקריפטים להקמת נתונים (~8-12 שעות)
-- 🔨 מסגרת ניטור (~10-15 שעות)
+**מוזכר במסמך (אתה יוצר):**  
+- 🔨 מימוש סוכנים (~30-40 שעות)  
+- 🔨 שירות ניתוב (~12-16 שעות)  
+- 🔨 אפליקציית frontend (~20-30 שעות)  
+- 🔨 סקריפטי הקמת נתונים (~8-12 שעות)  
+- 🔨 מסגרת ניטור (~10-15 שעות)  
 
 ### הצעדים הבאים שלך
 
-#### אם ברצונך לפרוס תשתית (30 דקות)
+#### אם ברצונך לפרוס תשתית (30 דקות)  
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### אם ברצונך לבנות את המערכת המלאה (80-120 שעות)
-1. ✅ קרא והבן את מסמך הארכיטקטורה הזה (2-3 שעות)
-2. ✅ פרוס תשתית באמצעות תבנית ARM (30 דקות)
-3. 🔨 יישם סוכנים באמצעות דפוסי קוד לדוגמה (~40 שעות)
-4. 🔨 בנה שירות ניתוב עם FastAPI/Express (~15 שעות)
-5. 🔨 צור ממשק משתמש קדמי עם React/Vue (~25 שעות)
-6. 🔨 קונפיגורציה של צנרת נתונים ואינדקס חיפוש (~10 שעות)
-7. 🔨 הוסף ניטור והערכה (~15 שעות)
-8. ✅ בדוק, אבטח ואופטם (~10 שעות)
+#### אם ברצונך לבנות את המערכת המלאה (80-120 שעות)  
+1. ✅ קרא והבן את מסמך הארכיטקטורה הזה (2-3 שעות)  
+2. ✅ פרוס תשתית באמצעות תבנית ARM (30 דקות)  
+3. 🔨 מימוש סוכנים באמצעות דפוסי קוד ייחוס (~40 שעות)  
+4. 🔨 בניית שירות ניתוב עם FastAPI/Express (~15 שעות)  
+5. 🔨 יצירת ממשק frontend עם React/Vue (~25 שעות)  
+6. 🔨 הגדרת צנרת נתונים ואינדקס חיפוש (~10 שעות)  
+7. 🔨 הוספת ניטור והערכה (~15 שעות)  
+8. ✅ בדוק, אבטח ואופטימז (~10 שעות)  
 
-#### אם ברצונך ללמוד דפוסי רב-סוכנים (לימוד)
-- 📖 עיין בדיאגרמת הארכיטקטורה ויחסי רכיבים
-- 📖 למוד דוגמאות קוד ל-SearchTool, BingTool, AgentEvaluator
-- 📖 הבן אסטרטגיית פריסה מרובה אזורים
-- 📖 למד מסגרות הערכה ואבטחה
-- 📖 החל דפוסים בפרויקטים שלך
+#### אם ברצונך ללמוד דפוסי רב-סוכנים (לימוד)  
+- 📖 חקור את דיאגרמת הארכיטקטורה ויחסי רכיבים  
+- 📖 למד דוגמאות קוד ל-SearchTool, BingTool, AgentEvaluator  
+- 📖 הבן את אסטרטגיית הפריסה הרב-אזורית  
+- 📖 למד מסגרות הערכה ואבטחה  
+- 📖 השתמש בדפוסים בפרויקטים שלך  
 
-### עיקרי הדברים
+### נקודות מרכזיות להבנה
 
-1. **תשתית מול אפליקציה** - תבנית ARM מספקת תשתית; סוכנים דורשים פיתוח
-2. **אסטרטגיית מרובה אזורים** - מיקום מודל אסטרטגי מפחית עלויות ומשפר אמינות
-3. **מסגרת הערכה** - מודל גריידר ייעודי מאפשר הערכת איכות רציפה
-4. **אבטחה ראשונה** - Red teaming וסריקת פגיעויות חיוניים לייצור
-5. **אופטימיזציית עלויות** - ניתוב חכם בין GPT-4o ל-GPT-4o-mini חוסך 60-80%
+1. **תשתית לעומת אפליקציה** - תבנית ARM מספקת תשתית; סוכנים דורשים פיתוח  
+2. **אסטרטגיית ריבוי אזורים** - מיקום מודלים אסטרטגי מפחית עלויות ומשפר אמינות  
+3. **מסגרת הערכה** - מודל grader ייעודי מאפשר הערכה איכותית רציפה  
+4. **אבטחה בראש** - red teaming וסריקת חולשות חיוניים לייצור  
+5. **אופטימיזציית עלות** - ניתוב חכם בין gpt-4.1 ל-gpt-4.1-mini חוסך 60-80%  
 
 ### עלויות משוערות
 
-| מצב פריסה | תשתית לחודש | פיתוח (חד-פעמי) | סך הכל בחודש הראשון |
+| מצב פריסה | תשתית לחודש | פיתוח (חד פעמי) | סה"כ חודש ראשון |
 |-----------------|---------------------|------------------------|-------------------|
-| **מינימלי** | $100-370 | $15K-25K (80-120 שעות) | $15.1K-25.4K |
-| **סטנדרטי** | $420-1,450 | $15K-25K (אותו מאמץ) | $15.4K-26.5K |
-| **פרימיום** | $1,150-3,500 | $15K-25K (אותו מאמץ) | $16.2K-28.5K |
+| **מינימלי** | 100-370$ | 15K-25K$ (80-120 שעות) | 15.1K-25.4K$ |
+| **סטנדרטי** | 420-1,450$ | 15K-25K$ (אותו מאמץ) | 15.4K-26.5K$ |
+| **פרימיום** | 1,150-3,500$ | 15K-25K$ (אותו מאמץ) | 16.2K-28.5K$ |
 
-**הערה:** התשתית מהווה <5% מהעלות הכוללת בפרויקטים חדשים. מאמץ הפיתוח הוא ההשקעה המרכזית.
+**הערה:** התשתית מהווה פחות מ-5% מסך העלות למימושים חדשים. מאמץ הפיתוח הוא ההשקעה הגדולה.
 
 ### משאבים קשורים
 
-- 📚 [מדריך פריסת תבנית ARM](retail-multiagent-arm-template/README.md) - התקנת תשתית  
-- 📚 [הנחיות Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - פריסת מודלים  
+- 📚 [מדריך פריסת תבנית ARM](retail-multiagent-arm-template/README.md) - הגדרת תשתית  
+- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - פריסת מודלים  
 - 📚 [תיעוד AI Search](https://learn.microsoft.com/azure/search/) - קונפיגורציית חיפוש וקטורי  
-- 📚 [דפוסי Container Apps](https://learn.microsoft.com/azure/container-apps/) - פריסת מיקרו-שירותים  
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - התקנת ניטור  
+- 📚 [דפוסי Container Apps](https://learn.microsoft.com/azure/container-apps/) - פריסת מיקרוסרביסים  
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - הגדרת ניטור  
 
 ### שאלות או בעיות?
 
-- 🐛 [דווח על בעיות](https://github.com/microsoft/AZD-for-beginners/issues) - באגים בתבנית או תיעוד  
-- 💬 [שיחות GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - שאלות ארכיטקטורה  
+- 🐛 [דווח על בעיות](https://github.com/microsoft/AZD-for-beginners/issues) - תקלות תבנית או שגיאות תיעוד  
+- 💬 [דיונים ב-GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - שאלות ארכיטקטורה  
 - 📖 [שאלות נפוצות](../resources/faq.md) - תשובות לשאלות נפוצות  
 - 🔧 [מדריך פתרון בעיות](../docs/troubleshooting/common-issues.md) - בעיות בפריסה  
 
 ---
 
-**תרחיש מקיף זה מספק תכנון ארכיטקטוני ברמת ארגון למערכות AI רב-סוכניות, כולל תבניות תשתית, הנחיות יישום ופרקטיקות מיטביות לייצור עבור בניית פתרונות תמיכה מתוחכמים עם Azure Developer CLI.**
+**תרחיש מקיף זה מספק תבנית ארכיטקטורה ברמת ארגון למערכות AI רב-סוכניות, כולל תבניות תשתית, הנחיות מימוש ופרקטיקות מיטביות לייצור לפיתוח פתרונות תמיכה בלקוחות מתקדמים באמצעות Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:
-מסמך זה תורגם באמצעות שירות התרגום המבוסס על בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדייק, יש לקחת בחשבון כי תרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. יש להחשיב את המסמך המקורי בשפת המקור כמקור הסמכותי. למידע קריטי מומלץ להיעזר בתרגום מקצועי על ידי מתרגם אנושי. איננו אחראים להבנות מוטעות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+**כתב ויתור**:  
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו משתדלים לדייק, יש לשים לב כי תרגומים אוטומטיים עלולים להכיל טעויות או אי דיוקים. יש לראות במסמך המקורי בשפת המקור כמקור הסמכותי. למידע קריטי מומלץ תרגום מקצועי על ידי מתרגם אנושי. איננו נושאים באחריות לכל אי הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
