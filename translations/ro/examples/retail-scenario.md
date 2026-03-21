@@ -1,76 +1,76 @@
 # Soluție Multi-Agent pentru Suport Clienți - Scenariu Retailer
 
-**Capitolul 5: Soluții Multi-Agent AI**  
-- **📚 Acasă Curs**: [AZD Pentru Începători](../README.md)  
-- **📖 Capitol Curent**: [Capitolul 5: Soluții Multi-Agent AI](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
-- **⬅️ Cerințe Prealabile**: [Capitolul 2: Dezvoltare AI-First](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
-- **➡️ Capitol Următor**: [Capitolul 6: Validare Pre-Deploy](../docs/pre-deployment/capacity-planning.md)  
+**Capitolul 5: Soluții AI Multi-Agent**  
+- **📚 Pagina cursului**: [AZD Pentru Începători](../README.md)  
+- **📖 Capitolul curent**: [Capitolul 5: Soluții AI Multi-Agent](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **⬅️ Precondiții**: [Capitolul 2: Dezvoltare AI-First](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
+- **➡️ Capitolul următor**: [Capitolul 6: Validare Pre-Implementare](../docs/pre-deployment/capacity-planning.md)  
 - **🚀 Șabloane ARM**: [Pachet de Implementare](retail-multiagent-arm-template/README.md)  
 
 > **⚠️ GHID DE ARHITECTURĂ - IMPLEMENTARE NEFUNCȚIONALĂ**  
-> Acest document oferă un **plan arhitectural detaliat** pentru construirea unui sistem multi-agent.  
-> **Ce există:** Șablon ARM pentru implementarea infrastructurii (Azure OpenAI, AI Search, Container Apps etc.)  
-> **Ce trebuie să construiți:** Cod agenți, logică de rutare, UI frontend, fluxuri de date (estimare 80-120 ore)  
+> Acest document oferă un **plan complet de arhitectură** pentru construirea unui sistem multi-agent.  
+> **Ce există:** Șablon ARM pentru implementarea infrastructurii (Microsoft Foundry Models, AI Search, Container Apps etc.)  
+> **Ce trebuie să construiți:** Cod agent, logică de rutare, UI frontend, pipeline-uri de date (estimare 80-120 ore)  
 >  
-> **Utilizați acest document ca:**  
-> - ✅ Referință arhitecturală pentru proiectul dumneavoastră multi-agent  
-> - ✅ Ghid de învățare pentru tiparele de design multi-agent  
-> - ✅ Șablon infrastructură pentru deploy resurse Azure  
-> - ❌ NU este o aplicație gata-folosită (necesită dezvoltare considerabilă)  
+> **Folosiți-l ca:**  
+> - ✅ Referință de arhitectură pentru propriul proiect multi-agent  
+> - ✅ Ghid de învățare pentru modele multi-agent  
+> - ✅ Șablon infrastructură pentru implementare resurse Azure  
+> - ❌ NU este o aplicație gata de utilizare (necesită dezvoltare semnificativă)  
 
-## Prezentare Generală
+## Prezentare generală
 
-**Obiectiv de Învățare:** Înțelegerea arhitecturii, deciziilor de design și abordării de implementare pentru construirea unui chatbot multi-agent de suport clienți gata de producție pentru un retailer, cu capabilități AI avansate precum management inventar, procesare documente și interacțiuni inteligente cu clienții.
+**Obiectiv de învățare:** Înțelegerea arhitecturii, deciziilor de proiectare și abordării implementării pentru construirea unui chatbot multi-agent de suport clienți pregătit pentru producție pentru un retailer, cu capabilități AI sofisticate incluzând managementul inventarului, procesarea documentelor și interacțiuni inteligente cu clienții.
 
-**Timp pentru Finalizare:** Citire + Înțelegere (2-3 ore) | Construire Implementare Completă (80-120 ore)
+**Timp estimat pentru finalizare:** Citire + Înțelegere (2-3 ore) | Construirea implementării complete (80-120 ore)
 
-**Ce Veți Înțelege:**  
-- Tipare arhitecturale multi-agent și principii de design  
-- Strategii multi-regiune pentru implementarea Azure OpenAI  
-- Integrare AI Search cu RAG (Generare Augmentată prin Căutare)  
-- Framework-uri de evaluare și testare securitate pentru agenți  
-- Considerații pentru implementare în producție și optimizare a costurilor  
+**Ce veți învăța:**  
+- Modele arhitecturale multi-agent și principii de design  
+- Strategii de implementare Microsoft Foundry Models multi-regiune  
+- Integrarea AI Search cu RAG (Generare Augmentată prin Recuperare)  
+- Cadre de evaluare a agenților și testare de securitate  
+- Considerații pentru implementarea în producție și optimizare costuri  
 
-## Obiective de Arhitectură
+## Obiectivele arhitecturii
 
-**Focalizare Educațională:** Arhitectura demonstrează tipare enterprise pentru sisteme multi-agent.
+**Focalizare educațională:** Această arhitectură demonstrează modele enterprise pentru sisteme multi-agent.
 
-### Cerințe Sistem (Pentru Implementarea Dvs.)
+### Cerințe sistem (pentru implementarea ta)
 
-O soluție de suport clienți pentru producție necesită:  
-- **Mai mulți agenți specializați** pentru nevoi diferite ale clienților (Suport Clienți + Management Inventar)  
-- **Implementare multi-model** cu planificare adecvată a capacității (GPT-4o, GPT-4o-mini, embeddings în regiuni multiple)  
-- **Integrare dinamică a datelor** cu AI Search și upload fișiere (căutare vectorială + procesare documente)  
-- **Monitorizare** și capabilități de evaluare complete (Application Insights + metrici personalizate)  
-- **Securitate în producție** cu validare red teaming (scanare vulnerabilități + evaluare agenți)  
+O soluție de suport clienți în producție necesită:  
+- **Mai mulți agenți specializați** pentru nevoi diferite ale clienților (Serviciu Clienți + Management Inventar)  
+- **Implementare multi-model** cu planificare adecvată a capacității (gpt-4.1, gpt-4.1-mini, embeddings în regiuni multiple)  
+- **Integrare dinamică a datelor** cu AI Search și încărcare fișiere (căutare vectorială + procesare documente)  
+- **Monitorizare și evaluare comprehensive** (Application Insights + metrici personalizate)  
+- **Securitate de nivel producție** cu validare “red teaming” (scanare vulnerabilități + evaluare agenți)  
 
 ### Ce oferă acest ghid
 
-✅ **Tipare Arhitecturale** — Design validat pentru sisteme scalabile multi-agent  
-✅ **Șabloane Infrastructură** — Șabloane ARM pentru implementare servicii Azure  
-✅ **Exemple Cod** — Implementări de referință pentru componente cheie  
-✅ **Instrucțiuni Configurare** — Pași detaliați pentru setare  
-✅ **Best Practices** — Strategii de securitate, monitorizare, optimizare costuri  
+✅ **Modele de arhitectură** - Design dovedit pentru sisteme multi-agent scalabile  
+✅ **Șabloane infrastructură** - Șabloane ARM pentru implementarea tuturor serviciilor Azure  
+✅ **Exemple de cod** - Implementări de referință pentru componente cheie  
+✅ **Ghid configurare** - Instrucțiuni pas cu pas pentru configurare  
+✅ **Best Practices** - Strategii de securitate, monitorizare și optimizare costuri  
 
-❌ **Neincluse** — Aplicație complet funcțională (necesită dezvoltare)  
+❌ **Nu include** - Aplicație complet funcțională (necesită efort de dezvoltare)  
 
-## 🗺️ Plan Implementare
+## 🗺️ Parcurgerea implementării
 
-### Faza 1: Studiu Arhitectural (2-3 ore) - ÎNCEPEȚI DE AICI
+### Faza 1: Studierea arhitecturii (2-3 ore) - ÎNCEPE AICI
 
-**Obiectiv:** Înțelegerea designului sistemului și a interacțiunilor componentelor
+**Scop:** Înțelegerea designului sistemului și interacțiunilor componentelor  
 
-- [ ] Citiți acest document complet  
-- [ ] Examinați diagramele de arhitectură și relațiile componentelor  
-- [ ] Înțelegeți tiparele multi-agent și deciziile de design  
-- [ ] Studiați exemplele de cod pentru instrumentele agenților și rutare  
-- [ ] Verificați estimările de cost și ghidajul pentru planificarea capacității  
+- [ ] Citiți întregul document  
+- [ ] Examinați diagramele arhitecturale și relațiile dintre componente  
+- [ ] Înțelegeți modelele multi-agent și deciziile de design  
+- [ ] Studiați exemplele de cod pentru unelte și rutare agenți  
+- [ ] Revizuiți estimările de cost și recomandările de planificare  
 
-**Rezultat:** Înțelegere clară a ceea ce trebuie să construiți
+**Rezultat:** Înțelegere clară a ceea ce trebuie construit  
 
-### Faza 2: Deploy Infrastructură (30-45 minute)
+### Faza 2: Implementarea infrastructurii (30-45 minute)
 
-**Obiectiv:** Implementarea resurselor Azure folosind șablon ARM
+**Scop:** Provisonarea resurselor Azure folosind șablon ARM  
 
 ```bash
 cd retail-multiagent-arm-template
@@ -78,63 +78,63 @@ cd retail-multiagent-arm-template
 ```
   
 **Ce se implementează:**  
-- ✅ Azure OpenAI (3 regiuni: GPT-4o, GPT-4o-mini, embeddings)  
+- ✅ Microsoft Foundry Models (3 regiuni: gpt-4.1, gpt-4.1-mini, embeddings)  
 - ✅ Serviciu AI Search (gol, necesită configurare index)  
-- ✅ Mediu Container Apps (imagini de tip placeholder)  
-- ✅ Conturi stocare, Cosmos DB, Key Vault  
+- ✅ Mediu Container Apps (imagini placeholder)  
+- ✅ Conturi de stocare, Cosmos DB, Key Vault  
 - ✅ Monitorizare Application Insights  
 
 **Ce lipsește:**  
-- ❌ Cod de implementare agenți  
-- ❌ Logică de rutare  
+- ❌ Cod implementare agenți  
+- ❌ Logică rutare  
 - ❌ UI frontend  
 - ❌ Schema index căutare  
-- ❌ Fluxuri de date  
+- ❌ Pipeline-uri de date  
 
-### Faza 3: Construire Aplicație (80-120 ore)
+### Faza 3: Construirea aplicației (80-120 ore)
 
-**Obiectiv:** Implementarea sistemului multi-agent conform arhitecturii
+**Scop:** Implementarea sistemului multi-agent conform arhitecturii  
 
-1. **Implementare Agenti** (30-40 ore)  
-   - Clasă bază agent și interfețe  
-   - Agent suport clienți cu GPT-4o  
-   - Agent inventar cu GPT-4o-mini  
-   - Integrare instrumente (AI Search, Bing, procesare fișiere)  
+1. **Implementare agenți** (30-40 ore)  
+   - Clasa de bază agent și interfețe  
+   - Agent serviciu clienți cu gpt-4.1  
+   - Agent inventar cu gpt-4.1-mini  
+   - Integrare unelte (AI Search, Bing, procesare fișiere)  
 
-2. **Serviciu Rutare** (12-16 ore)  
+2. **Serviciu rutare** (12-16 ore)  
    - Logică clasificare cereri  
    - Selecție și orchestrare agenți  
    - Backend FastAPI/Express  
 
-3. **Dezvoltare Frontend** (20-30 ore)  
-   - UI chat  
+3. **Dezvoltare frontend** (20-30 ore)  
+   - Interfață chat  
    - Funcționalitate upload fișiere  
-   - Redare răspunsuri  
+   - Randare răspunsuri  
 
-4. **Flux Date** (8-12 ore)  
+4. **Pipeline date** (8-12 ore)  
    - Creare index AI Search  
    - Procesare documente cu Document Intelligence  
    - Generare embedding-uri și indexare  
 
-5. **Monitorizare & Evaluare** (10-15 ore)  
+5. **Monitorizare & evaluare** (10-15 ore)  
    - Implementare telemetrie personalizată  
-   - Framework evaluare agenți  
+   - Cadru evaluare agenți  
    - Scaner securitate red team  
 
-### Faza 4: Deploy & Testare (8-12 ore)
+### Faza 4: Implementare & testare (8-12 ore)
 
-- Construire imagini Docker pentru toate serviciile  
-- Împingere în Azure Container Registry  
-- Actualizare Container Apps cu imagini reale  
-- Configurare variabile de mediu și secrete  
-- Rulare suită teste evaluare  
-- Realizare scanări securitate  
+- Construirea imaginilor Docker pentru toate serviciile  
+- Push în Azure Container Registry  
+- Actualizarea Container Apps cu imagini reale  
+- Configurarea variabilelor de mediu și secretelor  
+- Executarea suitei de testare evaluare  
+- Scaneări de securitate  
 
-**Efort Estimat Total:** 80-120 ore pentru dezvoltatori experimentați  
+**Efort total estimat:** 80-120 ore pentru dezvoltatori experimentați  
 
-## Arhitectura Soluției
+## Arhitectura soluției
 
-### Diagramă Arhitectură
+### Diagramă arhitecturală
 
 ```mermaid
 graph TB
@@ -145,8 +145,8 @@ graph TB
     Router --> CustomerAgent[Agent Client<br/>Serviciu Clienți]
     Router --> InvAgent[Agent Inventar<br/>Gestionare Stocuri]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Est SUA 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Vest SUA 2]
+    CustomerAgent --> OpenAI1[Modele Microsoft Foundry<br/>gpt-4.1<br/>East US 2]
+    InvAgent --> OpenAI2[Modele Microsoft Foundry<br/>gpt-4.1-mini<br/>West US 2]
     
     CustomerAgent --> AISearch[Căutare AI Azure<br/>Catalog Produse]
     CustomerAgent --> BingSearch[API Căutare Bing<br/>Informații în timp real]
@@ -155,17 +155,17 @@ graph TB
     AISearch --> Storage[Stocare Azure<br/>Documente & Fișiere]
     Storage --> DocIntel[Inteligență Documente<br/>Procesare Conținut]
     
-    OpenAI1 --> Embeddings[Încorporări Text<br/>ada-002<br/>Franța Centrală]
+    OpenAI1 --> Embeddings[Încapsulări Text<br/>ada-002<br/>Franța Centrală]
     OpenAI2 --> Embeddings
     
     Router --> AppInsights[Application Insights<br/>Monitorizare]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[Evaluator GPT-4o<br/>Elveția Nord] --> Evaluation[Cadrul de Evaluare]
-    RedTeam[Scanner Echipa Roșie] --> SecurityReports[Rapoarte de Securitate]
+    GraderModel[gpt-4.1 Evaluator<br/>Elveția Nord] --> Evaluation[Cadrul de Evaluare]
+    RedTeam[Echipă Roșie Scanner] --> SecurityReports[Rapoarte de Securitate]
     
-    subgraph "Strat Date"
+    subgraph "Stratul de Date"
         Storage
         AISearch
         CosmosDB[Cosmos DB<br/>Istoric Chat]
@@ -182,7 +182,7 @@ graph TB
     
     subgraph "Monitorizare & Securitate"
         AppInsights
-        LogAnalytics[Spațiu Workspace pentru Loguri]
+        LogAnalytics[Workspace Analize Log]
         KeyVault[Azure Key Vault<br/>Secrete & Configurații]
         RedTeam
         Evaluation
@@ -197,26 +197,26 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```  
-### Prezentare Componente
+### Prezentare generală componente
 
-| Componentă | Scop | Tehnologie | Regiune |  
-|------------|-------|------------|----------|  
-| **Web Frontend** | Interfață utilizator pentru interacțiuni clienți | Container Apps | Regiune Principală |  
-| **Agent Router** | Rutează cererile către agentul corespunzător | Container Apps | Regiune Principală |  
-| **Agent Client** | Gestionează întrebări suport clienți | Container Apps + GPT-4o | Regiune Principală |  
-| **Agent Inventar** | Administrează stoc și livrări | Container Apps + GPT-4o-mini | Regiune Principală |  
-| **Azure OpenAI** | Inferență LLM pentru agenți | Cognitive Services | Multi-regiune |  
-| **AI Search** | Căutare vectorială și RAG | Serviciu AI Search | Regiune Principală |  
-| **Storage Account** | Upload fișiere și documente | Blob Storage | Regiune Principală |  
-| **Application Insights** | Monitorizare și telemetrie | Monitor | Regiune Principală |  
-| **Grader Model** | Sistem de evaluare agenți | Azure OpenAI | Regiune Secundară |  
+| Componentă         | Scop                                   | Tehnologie        | Regiune       |  
+|--------------------|---------------------------------------|-------------------|--------------|  
+| **Frontend Web**   | Interfață utilizator pentru interacțiuni clienți | Container Apps    | Regiune principală |  
+| **Router Agenți**  | Routează cererile către agentul potrivit | Container Apps    | Regiune principală |  
+| **Agent Clienți**  | Gestionează întrebările serviciului clienți | Container Apps + gpt-4.1 | Regiune principală |  
+| **Agent Inventar** | Administrează stocuri și livrări       | Container Apps + gpt-4.1-mini | Regiune principală |  
+| **Microsoft Foundry Models** | Inferență LLM pentru agenți      | Cognitive Services | Multi-regiune |  
+| **AI Search**      | Căutare vectorială și RAG              | AI Search Service  | Regiune principală |  
+| **Cont stocare**   | Încărcări fișiere și documente         | Blob Storage       | Regiune principală |  
+| **Application Insights** | Monitorizare și telemetrie          | Monitor            | Regiune principală |  
+| **Model Grader**   | Sistem evaluare agenți                  | Microsoft Foundry Models | Regiune secundară |  
 
-## 📁 Structura Proiectului
+## 📁 Structura proiectului
 
-> **📍 Legenda Status:**  
-> ✅ = Există în repository  
-> 📝 = Implementare de referință (exemplu cod în acest document)  
-> 🔨 = Trebuie creat  
+> **📍 Legenda stării:**  
+> ✅ = Există în depozit  
+> 📝 = Implementare de referință (exemplu de cod în acest document)  
+> 🔨 = Trebuie creat de tine  
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -363,18 +363,18 @@ retail-multiagent-solution/              🔨 Your project directory
   
 ---
 
-## 🚀 Pornire Rapidă: Ce Puteți Face Acum
+## 🚀 Pornire rapidă: Ce poți face acum
 
-### Opțiunea 1: Deploy Infrastructură Doar (30 minute)
+### Opțiunea 1: Implementare doar infrastructură (30 minute)
 
-**Ce primiți:** Toate serviciile Azure provisionate și gata pentru dezvoltare
+**Ce obții:** Toate serviciile Azure provisionate și gata pentru dezvoltare  
 
 ```bash
 # Clonează depozitul
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# Desfășoară infrastructura
+# Implementare infrastructură
 ./deploy.sh -g myResourceGroup -m standard
 
 # Verifică implementarea
@@ -382,17 +382,17 @@ az resource list --resource-group myResourceGroup --output table
 ```
   
 **Rezultat așteptat:**  
-- ✅ Servicii Azure OpenAI implementate (3 regiuni)  
+- ✅ Servicii Microsoft Foundry Models implementate (3 regiuni)  
 - ✅ Serviciu AI Search creat (gol)  
-- ✅ Mediu Container Apps pregătit  
-- ✅ Stocare, Cosmos DB, Key Vault configurate  
-- ❌ Agenți funcționali încă nu (doar infrastructură)  
+- ✅ Mediu Container Apps gata  
+- ✅ Configurări Storage, Cosmos DB, Key Vault  
+- ❌ Nu există agenți funcționali (doar infrastructură)  
 
-### Opțiunea 2: Studiu Arhitectural (2-3 ore)
+### Opțiunea 2: Studierea arhitecturii (2-3 ore)
 
-**Ce primiți:** Înțelegere aprofundată a tiparelor multi-agent
+**Ce obții:** Înțelegere profundă a modelelor multi-agent  
 
-1. Citiți acest document complet  
+1. Citiți documentul complet  
 2. Examinați exemplele de cod pentru fiecare componentă  
 3. Înțelegeți deciziile de design și compromisurile  
 4. Studiați strategiile de optimizare costuri  
@@ -401,41 +401,41 @@ az resource list --resource-group myResourceGroup --output table
 **Rezultat așteptat:**  
 - ✅ Model mental clar al arhitecturii sistemului  
 - ✅ Înțelegerea componentelor necesare  
-- ✅ Estimări realiste de efort  
-- ✅ Plan implementare  
+- ✅ Estimări reale ale efortului  
+- ✅ Plan de implementare  
 
-### Opțiunea 3: Construire Sistem Complet (80-120 ore)
+### Opțiunea 3: Construirea sistemului complet (80-120 ore)
 
-**Ce primiți:** Soluție multi-agent gata pentru producție
+**Ce obții:** Soluție multi-agent gata de producție  
 
-1. **Faza 1:** Deploy infrastructură (finalizat mai sus)  
-2. **Faza 2:** Implementare agenți folosind exemplele de cod (30-40 ore)  
-3. **Faza 3:** Construire serviciu rutare (12-16 ore)  
-4. **Faza 4:** Creare UI frontend (20-30 ore)  
-5. **Faza 5:** Configurare fluxuri date (8-12 ore)  
-6. **Faza 6:** Adăugare monitorizare & evaluare (10-15 ore)  
+1. **Faza 1:** Implementarea infrastructurii (deja făcută mai sus)  
+2. **Faza 2:** Implementarea agenților folosind exemplele de cod (30-40 ore)  
+3. **Faza 3:** Construirea serviciului de rutare (12-16 ore)  
+4. **Faza 4:** Crearea UI-ului frontend (20-30 ore)  
+5. **Faza 5:** Configurarea pipeline-urilor de date (8-12 ore)  
+6. **Faza 6:** Adăugarea monitorizării și evaluării (10-15 ore)  
 
 **Rezultat așteptat:**  
 - ✅ Sistem multi-agent complet funcțional  
-- ✅ Monitorizare pentru producție  
+- ✅ Monitorizare de nivel producție  
 - ✅ Validare securitate  
-- ✅ Deploy optimizat din punct de vedere al costurilor  
+- ✅ Implementare optimizată pentru costuri  
 
 ---
 
-## 📚 Referință Arhitectură & Ghid Implementare
+## 📚 Referințe arhitecturale și ghid de implementare
 
-Secțiunile următoare oferă tipare arhitecturale detaliate, exemple de configurare și cod referință pentru ghidarea implementării.
+Secțiunile următoare oferă modele arhitecturale detaliate, exemple de configurare și cod de referință pentru a vă ghida implementarea.
 
-## Cerințe Inițiale Configurare
+## Cerințe inițiale de configurare
 
-### 1. Mai Mulți Agenți & Configurare
+### 1. Mai mulți agenți și configurare
 
-**Obiectiv:** Implementați 2 agenți specializați - "Agent Client" (suport clienți) și "Inventar" (management stoc)
+**Scop:** Implementați 2 agenți specializați - "Agent Client" (serviciu clienți) și "Inventar" (management stoc)
 
-> **📝 Notă:** Fișierele azure.yaml și configurațiile Bicep următoare sunt **exemple de referință** pentru modul de structurare a implementărilor multi-agent. Va trebui să creați aceste fișiere și implementările agenților corespunzătoare.
+> **📝 Notă:** Fișierele azure.yaml și șabloanele Bicep de mai jos sunt **exemple de referință** arătând cum să structurați implementări multi-agent. Trebuie să creați aceste fișiere și implementările aferente agenților.
 
-#### Pași Configurare:  
+#### Pași de configurare:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -467,19 +467,19 @@ services:
         }
 ```
   
-#### Actualizări Șablon Bicep:  
+#### Actualizări șablon Bicep:
 
 ```bicep
 // infra/agents.bicep
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -507,17 +507,17 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
   
-### 2. Modele Multiple cu Planificare Capacitate
+### 2. Mai multe modele cu planificare capacitate
 
-**Obiectiv:** Implementați model chat (Client), model embeddings (căutare) și model raționare (grader) cu management corect al cotei
+**Scop:** Implementați model chat (client), model embeddings (căutare), și model raționare (evaluator) cu management corect de cotă  
 
-#### Strategie Multi-Regiune:  
+#### Strategie multi-regiune:
 
 ```bicep
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -555,20 +555,20 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
   
-#### Configurare Fallback Regiune:  
+#### Configurare fallback regiune:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
   
-### 3. AI Search cu Configurare Index Date
+### 3. AI Search cu configurare index date
 
-**Obiectiv:** Configurare AI Search pentru actualizări date și indexare automată
+**Scop:** Configurați AI Search pentru actualizări date și indexare automată  
 
-#### Hook Pre-Provisionare:  
+#### Hook de pre-provisionare:
 
 ```bash
 #!/bin/bash
@@ -585,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
   
-#### Setare Date Post-Provisionare:  
+#### Configurare date post-provisionare:
 
 ```bash
 #!/bin/bash
@@ -609,7 +609,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
   
-#### Schema Index Căutare:  
+#### Schema index căutare:
 
 ```json
 {
@@ -634,11 +634,11 @@ python ./scripts/upload_search_data.py \
 }
 ```
   
-### 4. Configurare Instrument Agent pentru AI Search
+### 4. Configurare unealtă agent pentru AI Search
 
-**Obiectiv:** Configurare agenți să utilizeze AI Search ca instrument de fundamentare
+**Scop:** Configurați agenții să utilizeze AI Search ca unealtă de fundamentare  
 
-#### Implementare Instrument Căutare Agent:  
+#### Implementare unealtă căutare agent:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -682,7 +682,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
   
-#### Integrare Agent:  
+#### Integrare agent:
 
 ```python
 # src/agents/customer_agent.py
@@ -695,15 +695,15 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # Mai întâi, caută contextul relevant
+        # Mai întâi, caută context relevant
         search_results = await self.search_tool.search_products(user_query)
         
         # Pregătește contextul pentru LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Generează răspunsul cu fundamentare
+        # Generează răspuns cu fundamentare
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -713,11 +713,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
   
-### 5. Integrare Stocare Upload Fișiere
+### 5. Integrare stocare pentru încărcare fișiere
 
-**Obiectiv:** Permite agenților procesarea fișierelor încărcate (manuale, documente) pentru context RAG
+**Scop:** Permiteți agenților procesarea fișierelor încărcate (manuale, documente) pentru context RAG  
 
-#### Configurare Stocare:  
+#### Configurare stocare:
 
 ```bicep
 // infra/storage.bicep
@@ -756,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
   
-#### Flux Procesare Documente:  
+#### Pipeline procesare documente:
 
 ```python
 # src/document_processor.py
@@ -776,13 +776,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Descarcă fișierul din stocarea de tip blob
+        # Descarcă fișierul din stocarea blob
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # Extrage text folosind Document Intelligence
+        # Extrage textul folosind Inteligența Documentară
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -816,9 +816,9 @@ class DocumentProcessor:
   
 ### 6. Integrare Bing Search
 
-**Obiectiv:** Adăugați capabilități Bing Search pentru informații în timp real
+**Scop:** Adăugați capabilități Bing Search pentru informații în timp real  
 
-#### Adăugare Resursă Bicep:  
+#### Adăugare resurse Bicep:
 
 ```bicep
 // infra/bing-search.bicep
@@ -836,7 +836,7 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
   
-#### Instrument Bing Search:  
+#### Unealtă Bing Search:
 
 ```python
 # src/agents/tools/bing_search_tool.py
@@ -880,13 +880,13 @@ class BingSearchTool:
   
 ---
 
-## Monitorizare & Observabilitate
+## Monitorizare și observabilitate
 
-### 7. Urmărire și Application Insights
+### 7. Tracing și Application Insights
 
-**Obiectiv:** Monitorizare completă cu log-uri trace și application insights
+**Scop:** Monitorizare completă cu loguri trace și insights aplicație  
 
-#### Configurare Application Insights:  
+#### Configurare Application Insights:
 
 ```bicep
 // infra/monitoring.bicep
@@ -939,7 +939,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
   
-#### Implementare Telemetrie Personalizată:  
+#### Implementare telemetrie personalizată:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -953,7 +953,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Configurează jurnalizarea
+        # Configurează logarea
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -1045,11 +1045,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
   
-### 8. Validare Securitate Red Teaming
+### 8. Validare securitate Red Teaming
 
-**Obiectiv:** Testare automată securitate pentru agenți și modele
+**Scop:** Testare automată de securitate pentru agenți și modele  
 
-#### Configurare Red Teaming:  
+#### Configurare Red Teaming:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Calculează scorul general de securitate
+        # Calculați scorul general de securitate
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1165,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Implementarea va trimite o cerere HTTP către endpoint-ul agentului
-        # Pentru scopuri demo, se returnează un substitut
+        # Implementarea ar trimite o cerere HTTP către endpoint-ul agentului
+        # În scop demonstrativ, se returnează un marcator de poziție
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,14 +1223,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Scor de bază: 100 - (vulnerabilități / total * 100)
+        # Scorare de bază: 100 - (vulnerabilități / total * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Reduce scorul în funcție de severitate
+        # Reduceți scorul bazat pe severitate
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1240,7 +1240,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
   
-#### Flux Automatizat Securitate:  
+#### Pipeline securitate automatizată:
 
 ```bash
 #!/bin/bash
@@ -1264,16 +1264,16 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
   
-### 9. Evaluare Agenți cu Model Grader
+### 9. Evaluare agenți cu model Grader
 
-**Obiectiv:** Implementați sistem evaluare cu model grader dedicat
+**Scop:** Implementare sistem evaluare cu model grader dedicat  
 
-#### Configurare Model Grader:  
+#### Configurare model Grader:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1311,7 +1311,7 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
 }
 ```
   
-#### Framework Evaluare:  
+#### Cadru evaluare:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1341,7 +1341,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Calculează metricile sumare
+        # Calculează metrici sumare
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1487,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
   
-#### Configurare Cazuri Test:  
+#### Configurare cazuri de test:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1526,13 +1526,13 @@ class AgentEvaluator:
   
 ---
 
-## Personalizări & Actualizări
+## Personalizare și actualizări
 
 ### 10. Personalizare Container App
 
-**Obiectiv:** Actualizați configurația container app și înlocuiți cu UI custom
+**Scop:** Actualizați configurația aplicației container și înlocuiți cu UI custom  
 
-#### Configurare Dinamică:  
+#### Configurare dinamică:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1548,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
   
-#### Build Frontend Custom:  
+#### Build frontend custom:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1575,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
   
-#### Script Build și Deploy:  
+#### Script build și deploy:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Construiește o imagine personalizată cu variabile de mediu
+# Construiește imagine personalizată cu variabile de mediu
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,13 +1591,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Împinge către Azure Container Registry
+# Trimite la Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Actualizează aplicația container
+# Actualizează aplicația containerului
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1608,23 +1608,23 @@ echo "Frontend deployed successfully!"
   
 ---
 
-## 🔧 Ghid Depanare
+## 🔧 Ghid de depanare
 
-### Probleme Comune și Soluții
+### Probleme comune și soluții
 
-#### 1. Limite Cota Container Apps
+#### 1. Limite cotă Container Apps
 
-**Problemă:** Deploy eșuează din cauza limitelor regionale de cotă
+**Problemă:** Implementare eșuează din cauza limitelor de cotă regionale  
 
 **Soluție:**  
 ```bash
-# Verificați utilizarea curentă a cotei
+# Verifică utilizarea curentă a cotei
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Solicitați creșterea cotei
+# Solicită creșterea cotei
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1635,9 +1635,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
   
-#### 2. Expirare Versiune API Model Deploy
+#### 2. Expirare versiune API implementare model
 
-**Problemă:** Deploy model eșuează din cauza expirării versiunii API
+**Problemă:** Implementare model eșuează din cauza expirării versiunii API  
 
 **Soluție:**  
 ```python
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Aceasta ar apela API-ul Azure OpenAI pentru a obține versiunile curente
+    # Aceasta va apela API-ul Microsoft Foundry Models pentru a obține versiunile curente
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1684,9 +1684,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
   
-#### 3. Integrare Fine-tuning
+#### 3. Integrarea fine-tuningului
 
-**Problemă:** Cum se integrează modele fine-tunate în deploy AZD
+**Problemă:** Cum să integrăm modelele fine-tuned în implementarea AZD  
 
 **Soluție:**  
 ```python
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,7 +1726,7 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Actualizează implementarea pentru a utiliza modelul ajustat fin
+            # Actualizează implementarea pentru a folosi modelul ajustat fin
             # Acest lucru ar apela Azure CLI pentru a actualiza implementarea
             return fine_tuned_model
         else:
@@ -1736,13 +1736,13 @@ class FineTuningPipeline:
   
 ---
 
-## FAQ & Explorări Deschise
+## FAQ și explorări deschise
 
-### Întrebări Frecvente
+### Întrebări frecvente
 
-#### Î: Există o metodă simplă de a implementa mai mulți agenți (tipar design)?
+#### Î: Există o modalitate ușoară de a implementa mai mulți agenți (model de design)?
 
-**R: Da! Folosiți Tiparul Multi-Agent:**  
+**R: Da! Folosiți modelul Multi-Agent:**  
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
   
-#### Î: Pot să implementez "model router" ca model (implicații cost)?
+#### Î: Pot implementa "model router" ca model (implicații cost)?
 
 **R: Da, cu atenție:**  
 
 ```python
-# Implementarea Routerului de Model
+# Implementarea Routerului Model
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1788,14 +1788,14 @@ class ModelRouter:
         pass
 ```
   
-**Implicații Cost:**  
-- **Economii**: Reducere costuri 60-80% pentru interogări simple  
-- **Compromisuri**: Creștere ușoară a latenței pentru logica rutării  
-- **Monitorizare**: Urmăriți acuratețea vs. metrici cost  
+**Implicații cost:**  
+- **Economii:** reducere costuri 60-80% pentru interogări simple  
+- **Compromis:** ușoară creștere a latenței pentru logica rutării  
+- **Monitorizare:** urmărire acuratețe vs cost  
 
-#### Î: Pot porni un job fine-tuning dintr-un șablon azd?
+#### Î: Pot lansa un job de fine-tuning dintr-un șablon azd?
 
-**R: Da, cu hook-uri post-provisionare:**  
+**R: Da, folosind hook-uri post-provisionare:**  
 
 ```bash
 #!/bin/bash
@@ -1803,26 +1803,26 @@ class ModelRouter:
 
 echo "Starting fine-tuning pipeline..."
 
-# Încarcă datele de antrenament
+# Încărcați datele de antrenament
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Pornește procesul de ajustare fină
+# Porniți jobul de ajustare fină
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
-# Stochează ID-ul jobului pentru monitorizare
+# Salvați ID-ul jobului pentru monitorizare
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
   
-### Scenarii Avansate
+### Scenarii avansate
 
-#### Strategie Deploy Multi-Regiune
+#### Strategie implementare multi-regiune  
 
 ```bicep
 // infra/multi-region.bicep
@@ -1858,7 +1858,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
   
-#### Framework Optimizare Costuri
+#### Cadrul pentru optimizare costuri  
 
 ```python
 # src/optimization/cost_optimizer.py
@@ -1882,7 +1882,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Analiza orelor de vârf
+        # Analiza orei de vârf
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1905,35 +1905,35 @@ class CostOptimizer:
 ---
 ## ✅ Șablon ARM gata de implementare
 
-> **✨ ACEASTA EXISTĂ CU ADEVĂRAT ȘI FUNCȚIONEAZĂ!**  
-> Spre deosebire de exemplele conceptuale de cod de mai sus, șablonul ARM este o **implementare reală și funcțională a infrastructurii** inclusă în acest depozit.
+> **✨ ACESTA EXISTĂ CU ADEVĂRAT ȘI FUNCȚIONEAZĂ!**  
+> Spre deosebire de exemplele conceptuale de cod de mai sus, șablonul ARM este o **implementare reală, funcțională a infrastructurii** inclusă în acest depozit.
 
-### Ce face acest șablon cu adevărat
+### Ce face de fapt acest șablon
 
-Șablonul ARM din [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) provisionează **toată infrastructura Azure** necesară pentru sistemul multi-agent. Acesta este **singurul component gata de rulare** - tot restul necesită dezvoltare.
+Șablonul ARM din [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) furnizează **toată infrastructura Azure** necesară pentru sistemul multi-agent. Acesta este **singurul component gata de utilizare** - tot restul necesită dezvoltare.
 
 ### Ce este inclus în șablonul ARM
 
-Șablonul ARM situat în [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) include:
+Șablonul ARM aflat în [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) include:
 
-#### **Infrastructură completă**
-- ✅ **Implementări multi-regiune Azure OpenAI** (GPT-4o, GPT-4o-mini, embeddings, evaluator)
-- ✅ **Azure AI Search** cu capabilități de căutare vectorială
+#### **Infrastructură Completă**
+- ✅ Implementări **Multi-regiune Microsoft Foundry Models** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Azure AI Search** cu capacități de căutare vectorială
 - ✅ **Azure Storage** cu containere pentru documente și încărcări
-- ✅ **Mediu Container Apps** cu scalare automată
-- ✅ **Router Agent & Frontend** aplicații containerizate
-- ✅ **Cosmos DB** pentru persistenta istoricului de chat
-- ✅ **Application Insights** pentru monitorizare comprehensivă
+- ✅ **Container Apps Environment** cu scalare automată
+- ✅ **Agent Router & Frontend** aplicații containerizate
+- ✅ **Cosmos DB** pentru persistarea istoricului de chat
+- ✅ **Application Insights** pentru monitorizare completă
 - ✅ **Key Vault** pentru gestionarea sigură a secretelor
 - ✅ **Document Intelligence** pentru procesarea fișierelor
 - ✅ **Bing Search API** pentru informații în timp real
 
-#### **Moduri de implementare**
-| Mod      | Caz de utilizare        | Resurse               | Cost estimat/lună    |
-| -------- | ----------------------- | --------------------- | -------------------- |
-| **Minimal**  | Dezvoltare, Testare        | SKU-uri de bază, o singură regiune | $100-370            |
-| **Standard** | Producție, Scalare moderată | SKU-uri standard, multi-regiune       | $420-1,450          |
-| **Premium**  | Enterprise, Scalare mare     | SKU-uri premium, setare HA            | $1,150-3,500        |
+#### **Moduri de Implementare**
+| Mod | Caz de utilizare | Resurse | Cost estimat/lună |
+|------|----------|-----------|---------------------|
+| **Minimal** | Dezvoltare, Testare | SKUs de bază, O singură regiune | 100-370 $ |
+| **Standard** | Producție, Scalare moderată | SKUs standard, Multi-regiune | 420-1,450 $ |
+| **Premium** | Enterprise, Scalare ridicată | SKUs premium, Configurare HA | 1,150-3,500 $ |
 
 ### 🎯 Opțiuni rapide de implementare
 
@@ -1951,13 +1951,13 @@ cd azd-for-beginners/examples/retail-multiagent-arm-template
 # Fă scriptul de implementare executabil
 chmod +x deploy.sh
 
-# Realizează implementarea cu setările implicite (mod Standard)
+# Implementează cu setările implicite (mod Standard)
 ./deploy.sh -g myResourceGroup
 
-# Realizează implementarea pentru producție cu funcții premium
+# Implementează pentru producție cu funcții premium
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Realizează implementarea versiunii minimale pentru dezvoltare
+# Implementează o versiune minimală pentru dezvoltare
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
@@ -1967,7 +1967,7 @@ chmod +x deploy.sh
 # Creează grupul de resurse
 az group create --name myResourceGroup --location eastus2
 
-# Deploiază șablonul direct
+# Desfășoară șablonul direct
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1975,9 +1975,9 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### Rezultatele șablonului
+### Ieșiri ale șablonului
 
-După implementarea cu succes, vei primi:
+După implementarea cu succes, veți primi:
 
 ```json
 {
@@ -1991,31 +1991,31 @@ După implementarea cu succes, vei primi:
 }
 ```
 
-### 🔧 Configurare post-implementare
+### 🔧 Configurare după implementare
 
-Șablonul ARM se ocupă de provisionarea infrastructurii. După implementare:
+Șablonul ARM gestionează furnizarea infrastructurii. După implementare:
 
-1. **Configurează indexul de căutare**:
+1. **Configurați indexul de căutare**:
    ```bash
-   # Folosiți schema de căutare furnizată
+   # Folosește schema de căutare furnizată
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **Încarcă documentele inițiale**:
+2. **Încărcați documentele inițiale**:
    ```bash
-   # Încarcă manuale de produs și baza de cunoștințe
+   # Încarcă manuale de produs și bază de cunoștințe
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Deplasează codul agenților**:
+3. **Implementați codul agentului**:
    ```bash
-   # Construiește și distribuie aplicații reale pentru agenți
+   # Construiește și distribuie aplicații reale de agenți
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2025,7 +2025,7 @@ După implementarea cu succes, vei primi:
 
 ### 🎛️ Opțiuni de personalizare
 
-Editează `azuredeploy.parameters.json` pentru a personaliza implementarea:
+Editează `azuredeploy.parameters.json` pentru a personaliza implementarea ta:
 
 ```json
 {
@@ -2041,81 +2041,81 @@ Editează `azuredeploy.parameters.json` pentru a personaliza implementarea:
 
 ### 📊 Caracteristici ale implementării
 
-- ✅ **Validarea cerințelor preliminare** (Azure CLI, cote, permisiuni)
+- ✅ **Validare precondiții** (Azure CLI, cote, permisiuni)
 - ✅ **Disponibilitate ridicată multi-regiune** cu failover automat
 - ✅ **Monitorizare completă** cu Application Insights și Log Analytics
 - ✅ **Cele mai bune practici de securitate** cu Key Vault și RBAC
-- ✅ **Optimizare costuri** cu moduri configurabile de implementare
-- ✅ **Scalare automată** bazată pe modele de cerere
-- ✅ **Actualizări fără downtime** cu revizii Container Apps
+- ✅ **Optimizarea costurilor** cu moduri de implementare configurabile
+- ✅ **Scalare automată** bazată pe tipare de cerere
+- ✅ **Actualizări fără întreruperi** cu revizii Container Apps
 
-### 🔍 Monitorizare și management
+### 🔍 Monitorizare și gestionare
 
-Odată implementat, monitorizează-ți soluția prin:
+Odată implementată, monitorizează soluția prin:
 
 - **Application Insights**: metrici de performanță, urmărirea dependențelor și telemetrie personalizată
-- **Log Analytics**: logare centralizată din toate componentele
-- **Azure Monitor**: sănătatea resurselor și monitorizarea disponibilității
-- **Cost Management**: urmărirea costurilor în timp real și alerte de buget
+- **Log Analytics**: colectare centralizată a jurnalelor din toate componentele
+- **Azure Monitor**: monitorizarea sănătății și disponibilității resurselor
+- **Cost Management**: urmărirea costurilor în timp real și alerte bugetare
 
 ---
 
 ## 📚 Ghid complet de implementare
 
-Acest document de scenariu împreună cu șablonul ARM oferă tot ce este necesar pentru a implementa o soluție multi-agent de suport clienți gata de producție. Implementarea acoperă:
+Acest document de scenariu combinat cu șablonul ARM oferă tot ceea ce este necesar pentru a implementa o soluție multi-agent pentru suport clienți gata pentru producție. Implementarea acoperă:
 
-✅ **Design arhitectural** - Proiectare sistem cu relațiile componentelor  
-✅ **Provisionare infrastructură** - Șablon ARM complet pentru implementare cu un clic  
-✅ **Configurare agenți** - Setări detaliate pentru agenții Customer și Inventory  
-✅ **Implementare multi-model** - Plasarea strategică a modelelor în regiuni  
-✅ **Integrare căutare** - AI Search cu vector embeddings și indexare date  
-✅ **Implementare securitate** - Red teaming, scanare vulnerabilități și practici sigure  
-✅ **Monitorizare și evaluare** - Telemetrie cuprinzătoare și cadru de evaluare a agenților  
-✅ **Pregătire pentru producție** - Implementare enterprise cu HA și recuperare după dezastru  
-✅ **Optimizare costuri** - Rutare inteligentă și scalare bazată pe utilizare  
+✅ **Design arhitectural** - Proiectare completă a sistemului cu relațiile dintre componente  
+✅ **Furnizarea infrastructurii** - Șablon ARM complet pentru implementare cu un singur clic  
+✅ **Configurarea agentului** - Setări detaliate pentru agenții Customer și Inventory  
+✅ **Implementarea multi-model** - Plasarea strategică a modelelor în regiuni  
+✅ **Integrare de căutare** - AI Search cu capabilități vectoriale și indexare de date  
+✅ **Implementare securitate** - Red teaming, scanare de vulnerabilități și practici sigure  
+✅ **Monitorizare și evaluare** - Telemetrie completă și cadru de evaluare a agenților  
+✅ **Gata pentru producție** - Implementare enterprise cu HA și recuperare în caz de dezastru  
+✅ **Optimizarea costurilor** - Rutare inteligentă și scalare bazată pe utilizare  
 ✅ **Ghid de depanare** - Probleme comune și strategii de rezolvare
 
 ---
 
-## 📊 Rezumat: Ce ai învățat
+## 📊 Rezumat: Ce ați învățat
 
 ### Modele arhitecturale acoperite
 
-✅ **Proiectare sistem multi-agent** - Agenți specializați (Customer + Inventory) cu modele dedicate  
-✅ **Implementare multi-regiune** - Plasare strategică a modelelor pentru optimizare cost și redundanță  
-✅ **Arhitectura RAG** - Integrare AI Search cu vector embeddings pentru răspunsuri fundamentate  
-✅ **Evaluarea agenților** - Model evaluator dedicat pentru evaluarea calității  
-✅ **Cadrul de securitate** - Red teaming și scanare vulnerabilități  
-✅ **Optimizarea costurilor** - Rutare modele și planificare capacitate  
-✅ **Monitorizare producție** - Application Insights cu telemetrie personalizată  
+✅ **Design sistem multi-agent** - Agenți specializați (Customer + Inventory) cu modele dedicate  
+✅ **Implementare multi-regiune** - Plasare strategică a modelelor pentru optimizarea costurilor și redundanță  
+✅ **Arhitectura RAG** - Integrare AI Search cu vector embeddings pentru răspunsuri fondate  
+✅ **Evaluarea agentului** - Model grader dedicat pentru evaluarea calității  
+✅ **Cadru de securitate** - Modele de red teaming și scanare de vulnerabilități  
+✅ **Optimizarea costurilor** - Strategii de rutare a modelelor și planificare a capacității  
+✅ **Monitorizare în producție** - Application Insights cu telemetrie personalizată  
 
 ### Ce oferă acest document
 
-| Componentă              | Status                  | Unde se găsește               |
-| ----------------------- | ----------------------- | -----------------------------|
-| **Șablon Infrastructură** | ✅ Gata de implementare  | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Diagrame arhitecturale** | ✅ Complete             | Diagrama Mermaid de mai sus   |
-| **Exemple de cod**        | ✅ Implementări de referință | Pe tot parcursul documentului |
-| **Tipare de configurare** | ✅ Ghid detaliat         | Secțiunile 1-10 de mai sus    |
-| **Implementări agenți**   | 🔨 Construiești tu           | ~40 ore dezvoltare            |
-| **Interfață Frontend**    | 🔨 Construiești tu           | ~25 ore dezvoltare            |
-| **Pipelines date**         | 🔨 Construiești tu           | ~10 ore dezvoltare            |
+| Componentă | Stare | Unde să găsiți |
+|-----------|--------|------------------|
+| **Șablon infrastructură** | ✅ Gata de implementare | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Diagrame arhitecturale** | ✅ Complete | Diagrama Mermaid de mai sus |
+| **Exemple de cod** | ✅ Implementări de referință | Pe tot parcursul documentului |
+| **Modele de configurare** | ✅ Ghid detaliat | Secțiunile 1-10 de mai sus |
+| **Implementări agenți** | 🔨 Trebuie să dezvolți | ~40 de ore de dezvoltare |
+| **Interfață frontend** | 🔨 Trebuie să dezvolți | ~25 de ore de dezvoltare |
+| **Fluxuri de date** | 🔨 Trebuie să dezvolți | ~10 ore de dezvoltare |
 
 ### Verificare realitate: Ce există cu adevărat
 
-**În depozit (Gata acum):**
-- ✅ Șablon ARM care implementează peste 15 servicii Azure (azuredeploy.json)
+**În depozit (gata acum):**
+- ✅ Șablon ARM care implementează 15+ servicii Azure (azuredeploy.json)
 - ✅ Script de implementare cu validare (deploy.sh)
 - ✅ Configurare parametri (azuredeploy.parameters.json)
 
-**Menționat în document (tu creezi):**
-- 🔨 Cod implementare agenți (~30-40 ore)
+**Referit în document (trebuie să creezi):**
+- 🔨 Cod de implementare agent (~30-40 ore)
 - 🔨 Serviciu de rutare (~12-16 ore)
 - 🔨 Aplicație frontend (~20-30 ore)
-- 🔨 Scripturi configurare date (~8-12 ore)
-- 🔨 Cadru monitorizare (~10-15 ore)
+- 🔨 Scripturi de configurare date (~8-12 ore)
+- 🔨 Cadru de monitorizare (~10-15 ore)
 
-### Pașii tăi următori
+### Pașii următori
 
 #### Dacă vrei să implementezi infrastructura (30 minute)
 ```bash
@@ -2124,62 +2124,62 @@ cd retail-multiagent-arm-template
 ```
 
 #### Dacă vrei să construiești sistemul complet (80-120 ore)
-1. ✅ Citește și înțelege documentul arhitectural (2-3 ore)
+1. ✅ Citește și înțelege acest document architectural (2-3 ore)
 2. ✅ Implementează infrastructura folosind șablonul ARM (30 minute)
 3. 🔨 Implementează agenții folosind modelele de cod de referință (~40 ore)
 4. 🔨 Construiește serviciul de rutare cu FastAPI/Express (~15 ore)
-5. 🔨 Creează UI frontend cu React/Vue (~25 ore)
-6. 🔨 Configurează pipeline-ul de date și indexul de căutare (~10 ore)
+5. 🔨 Creează interfața frontend cu React/Vue (~25 ore)
+6. 🔨 Configurează fluxul de date și indexul de căutare (~10 ore)
 7. 🔨 Adaugă monitorizare și evaluare (~15 ore)
 8. ✅ Testează, securizează și optimizează (~10 ore)
 
-#### Dacă vrei să înveți modelele multi-agent (studiu)
-- 📖 Revizuiește diagrama arhitecturală și relațiile componentelor
-- 📖 Studiază exemplele de cod pentru SearchTool, BingTool, AgentEvaluator
+#### Dacă vrei să înveți modelele multi-agent (Studiu)
+- 📖 Studiază diagrama arhitecturală și relațiile între componente
+- 📖 Examinează exemplele de cod pentru SearchTool, BingTool, AgentEvaluator
 - 📖 Înțelege strategia de implementare multi-regiune
 - 📖 Învață cadrele de evaluare și securitate
 - 📖 Aplică modelele în propriile proiecte
 
-### Ce reții esențial
+### Concluzii cheie
 
-1. **Infrastructură vs Aplicație** - Șablonul ARM oferă infrastructura; agenții necesită dezvoltare
-2. **Strategie multi-regiune** - Plasarea strategică a modelelor reduce costurile și crește fiabilitatea
-3. **Cadru de evaluare** - Model evaluator dedicat permite evaluarea continuă a calității
-4. **Securitate înainte de toate** - Red teaming și scanare vulnerabilități sunt esențiale pentru producție
-5. **Optimizare costuri** - Rutare inteligentă între GPT-4o și GPT-4o-mini economisește 60-80%
+1. **Infrastructură vs Aplicație** - Șablon ARM furnizează infrastructura; agenții necesită dezvoltare
+2. **Strategie multi-regiune** - Plasarea strategică a modelelor reduce costurile și îmbunătățește fiabilitatea
+3. **Cadru de evaluare** - Modelul grader dedicat permite evaluarea continuă a calității
+4. **Securitate pe primul loc** - Red teaming și scanarea vulnerabilităților sunt esențiale în producție
+5. **Optimizarea costurilor** - Rutare inteligentă între gpt-4.1 și gpt-4.1-mini economisește 60-80%
 
 ### Costuri estimate
 
-| Mod implementare | Infrastructură/lună | Dezvoltare (unică)        | Total prima lună      |
-|------------------|--------------------|---------------------------|----------------------|
-| **Minimal**      | $100-370           | $15K-25K (80-120 ore)     | $15.1K-25.4K         |
-| **Standard**     | $420-1,450         | $15K-25K (același efort)  | $15.4K-26.5K         |
-| **Premium**      | $1,150-3,500       | $15K-25K (același efort)  | $16.2K-28.5K         |
+| Mod implementare | Infrastructură/Lună | Dezvoltare (O dată) | Total prima lună |
+|-----------------|---------------------|------------------------|-------------------|
+| **Minimal** | 100-370 $ | 15K-25K $ (80-120 ore) | 15.1K-25.4K $ |
+| **Standard** | 420-1,450 $ | 15K-25K $ (același efort) | 15.4K-26.5K $ |
+| **Premium** | 1,150-3,500 $ | 15K-25K $ (același efort) | 16.2K-28.5K $ |
 
 **Notă:** Infrastructura reprezintă <5% din costul total pentru implementări noi. Efortul de dezvoltare este investiția majoră.
 
 ### Resurse conexe
 
-- 📚 [Ghid de implementare șablon ARM](retail-multiagent-arm-template/README.md) - Configurare infrastructură
-- 📚 [Best Practices Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - Implementare modele  
-- 📚 [Documentație AI Search](https://learn.microsoft.com/azure/search/) - Configurare căutare vectorială  
-- 📚 [Tipare Container Apps](https://learn.microsoft.com/azure/container-apps/) - Implementare microservicii  
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Configurare monitorizare  
+- 📚 [Ghid de implementare ARM Template](retail-multiagent-arm-template/README.md) - Configurare infrastructură
+- 📚 [Best Practices Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - Implementarea modelelor
+- 📚 [Documentație AI Search](https://learn.microsoft.com/azure/search/) - Configurare căutare vectorială
+- 📚 [Modele Container Apps](https://learn.microsoft.com/azure/container-apps/) - Implementare microservicii
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Configurare monitorizare
 
 ### Întrebări sau probleme?
 
-- 🐛 [Raportează probleme](https://github.com/microsoft/AZD-for-beginners/issues) - Erori în șablon sau documentație  
-- 💬 [Discuții GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Întrebări arhitecturale  
-- 📖 [FAQ](../resources/faq.md) - Întrebări frecvente răspunse  
-- 🔧 [Ghid depanare](../docs/troubleshooting/common-issues.md) - Probleme la implementare  
+- 🐛 [Raportează probleme](https://github.com/microsoft/AZD-for-beginners/issues) - Bug-uri șablon sau erori documentație
+- 💬 [Discuții GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Întrebări legate de arhitectură
+- 📖 [FAQ](../resources/faq.md) - Întrebări frecvente răspunse
+- 🔧 [Ghid de depanare](../docs/troubleshooting/common-issues.md) - Probleme de implementare
 
 ---
 
-**Acest scenariu cuprinzător oferă un plan arhitectural enterprise-grade pentru sisteme AI multi-agent, complet cu șabloane de infrastructură, ghiduri de implementare și bune practici de producție pentru construirea unor soluții sofisticate de suport pentru clienți folosind Azure Developer CLI.**
+**Acest scenariu cuprinzător oferă un model arhitectural de nivel enterprise pentru sisteme multi-agent AI, complet cu șabloane de infrastructură, ghid de implementare și cele mai bune practici pentru producție în construirea de soluții sofisticate de suport clienți cu Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări eronate rezultate din utilizarea acestei traduceri.
+**Declinare a responsabilității**:  
+Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventuale neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

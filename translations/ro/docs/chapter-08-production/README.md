@@ -1,19 +1,19 @@
-# Capitolul 8: Modele pentru producție și întreprinderi
+# Capitolul 8: Modele de Producție și Enterprise
 
-**📚 Curs**: [AZD pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore | **⭐ Complexitate**: Avansat
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore | **⭐ Complexitate**: Avansat
 
 ---
 
-## Prezentare generală
+## Prezentare Generală
 
-Acest capitol acoperă modele de implementare pregătite pentru mediul enterprise, întărirea securității, monitorizare și optimizarea costurilor pentru sarcini AI în producție.
+Acest capitol acoperă modele de implementare pregătite pentru mediul enterprise, întărirea securității, monitorizarea și optimizarea costurilor pentru sarcini de lucru AI în producție.
 
-## Obiective de învățare
+## Obiective de Învățare
 
-Prin parcurgerea acestui capitol, veți:
-- Implementa aplicații reziliente în mai multe regiuni
-- Implementa modele de securitate pentru întreprinderi
-- Configura monitorizare cuprinzătoare
+Prin finalizarea acestui capitol, vei:
+- Implementa aplicații reziliente multi-regiune
+- Implementa modele de securitate enterprise
+- Configura monitorizare completă
 - Optimiza costurile la scară
 - Configura pipeline-uri CI/CD cu AZD
 
@@ -21,16 +21,16 @@ Prin parcurgerea acestui capitol, veți:
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Timp |
-|---|--------|-------------|------|
-| 1 | [Practici AI pentru producție](production-ai-practices.md) | Modele de implementare pentru întreprinderi | 90 min |
+| # | Lecție | Descriere | Durată |
+|---|--------|-----------|--------|
+| 1 | [Practici AI de Producție](production-ai-practices.md) | Modele de implementare enterprise | 90 min |
 
 ---
 
-## 🚀 Lista de verificare pentru producție
+## 🚀 Lista de Verificare pentru Producție
 
 - [ ] Implementare multi-regiune pentru reziliență
-- [ ] Identitate administrată pentru autentificare (fără chei)
+- [ ] Identitate gestionată pentru autentificare (fără chei)
 - [ ] Application Insights pentru monitorizare
 - [ ] Bugete de cost și alerte configurate
 - [ ] Scanare de securitate activată
@@ -39,32 +39,25 @@ Prin parcurgerea acestui capitol, veți:
 
 ---
 
-## 🏗️ Modele arhitecturale
+## 🏗️ Modele de Arhitectură
 
-### Model 1: Microservicii AI
+### Modelul 1: Microservicii AI
 
+```mermaid
+graph LR
+    Gateway[API Gateway] --> AI[Serviciu AI] --> Models[Modele Microsoft Foundry]
+    Gateway --> Auth[Serviciu Autentificare]
+    AI --> Data[Stocare Date]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Modelul 2: AI bazat pe Evenimente
 
-### Model 2: AI bazat pe evenimente
-
+```mermaid
+graph LR
+    EventGrid[Grila de Evenimente] --> Functions[Funcții] --> Pipeline[Flux de AI]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Bune practici de securitate
+## 🔐 Cele Mai Bune Practici de Securitate
 
 ```bicep
 // Use managed identity
@@ -83,10 +76,10 @@ properties: {
 
 ---
 
-## 💰 Optimizarea costurilor
+## 💰 Optimizarea Costurilor
 
 | Strategie | Economii |
-|----------|---------|
+|-----------|----------|
 | Scalare la zero (Container Apps) | 60-80% |
 | Folosirea nivelurilor de consum pentru dezvoltare | 50-70% |
 | Scalare programată | 30-50% |
@@ -103,10 +96,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Configurare monitorizare
+## 📊 Configurarea Monitorizării
 
 ```bash
-# Transmite loguri
+# Flux de jurnale
 azd monitor --logs
 
 # Verifică Application Insights
@@ -121,22 +114,22 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|-----------|---------|
+|----------|---------|
 | **Anterior** | [Capitolul 7: Depanare](../chapter-07-troubleshooting/README.md) |
-| **Curs complet** | [Pagina cursului](../../README.md) |
+| **Curs Finalizat** | [Pagina Cursului](../../README.md) |
 
 ---
 
-## 📖 Resurse conexe
+## 📖 Resurse Aferente
 
-- [Ghid agenți AI](../chapter-02-ai-development/agents.md)
+- [Ghid Agenți AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Soluții multi-agent](../chapter-05-multi-agent/README.md)
-- [Exemplu microservicii](../../examples/microservices/README.md)
+- [Soluții Multi-Agent](../chapter-05-multi-agent/README.md)
+- [Exemplu Microservicii](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind un serviciu de traducere prin inteligență artificială [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autoritară. Pentru informații critice se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+**Declinare a responsabilității**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații esențiale, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite rezultate din folosirea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

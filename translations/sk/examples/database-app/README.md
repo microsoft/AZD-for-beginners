@@ -1,106 +1,93 @@
-# Deploying a Microsoft SQL Database and Web App with AZD
+# Nasadenie databázy Microsoft SQL a webovej aplikácie s AZD
 
-⏱️ **Estimated Time**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Intermediate
+⏱️ **Odhadovaný čas**: 20-30 minút | 💰 **Odhadované náklady**: ~$15-25/mesiac | ⭐ **Zložitosť**: Stredná
 
-This **complete, working example** demonstrates how to use the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) to deploy a Python Flask web application with a Microsoft SQL Database to Azure. All code is included and tested—no external dependencies required.
+Tento **úplný, funkčný príklad** ukazuje, ako použiť [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) na nasadenie Python Flask webovej aplikácie s databázou Microsoft SQL do Azure. Všetok kód je zahrnutý a otestovaný — nie sú potrebné žiadne externé závislosti.
 
-## What You'll Learn
+## Čo sa naučíte
 
-By completing this example, you will:
-- Deploy a multi-tier application (web app + database) using infrastructure-as-code
-- Configure secure database connections without hardcoding secrets
-- Monitor application health with Application Insights
-- Manage Azure resources efficiently with AZD CLI
-- Follow Azure best practices for security, cost optimization, and observability
+Po dokončení tohto príkladu budete:
+- Nasadiť viacvrstvovú aplikáciu (webová aplikácia + databáza) pomocou infraštruktúry ako kódu
+- Konfigurovať bezpečné pripojenia k databáze bez ukladania tajomstiev do zdrojového kódu
+- Monitorovať stav aplikácie pomocou Application Insights
+- Efektívne spravovať zdroje Azure pomocou AZD CLI
+- Dodržiavať osvedčené postupy Azure pre bezpečnosť, optimalizáciu nákladov a sledovateľnosť
 
-## Scenario Overview
-- **Web App**: Python Flask REST API with database connectivity
-- **Database**: Azure SQL Database with sample data
-- **Infrastructure**: Provisioned using Bicep (modular, reusable templates)
-- **Deployment**: Fully automated with `azd` commands
-- **Monitoring**: Application Insights for logs and telemetry
+## Prehľad scenára
+- **Web App**: Python Flask REST API s prepojením na databázu
+- **Database**: Azure SQL Database so vzorovými údajmi
+- **Infrastructure**: Poskytované pomocou Bicep (modulárne, znovupoužiteľné šablóny)
+- **Deployment**: Plne automatizované pomocou príkazov `azd`
+- **Monitoring**: Application Insights pre logy a telemetriu
 
-## Prerequisites
+## Predpoklady
 
-### Required Tools
+### Požadované nástroje
 
-Before starting, verify you have these tools installed:
+Pred začatím skontrolujte, či máte nainštalované tieto nástroje:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (verzia 2.50.0 alebo vyššia)
    ```sh
    az --version
-   # Očakávaný výstup: azure-cli 2.50.0 alebo vyššia
+   # Očakávaný výstup: azure-cli 2.50.0 alebo novší
    ```
 
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
+2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (verzia 1.0.0 alebo vyššia)
    ```sh
    azd version
    # Očakávaný výstup: azd verzia 1.0.0 alebo novšia
    ```
 
-3. **[Python 3.8+](https://www.python.org/downloads/)** (for local development)
+3. **[Python 3.8+](https://www.python.org/downloads/)** (pre lokálny vývoj)
    ```sh
    python --version
-   # Očakávaný výstup: Python 3.8 alebo vyšší
+   # Očakávaný výstup: Python 3.8 alebo novší
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (optional, for local containerized development)
+4. **[Docker](https://www.docker.com/get-started)** (voliteľné, pre lokálny kontajnerizovaný vývoj)
    ```sh
    docker --version
    # Očakávaný výstup: Docker verzia 20.10 alebo novšia
    ```
 
-### Azure Requirements
+### Požiadavky pre Azure
 
-- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- Permissions to create resources in your subscription
-- **Owner** or **Contributor** role on the subscription or resource group
+- Aktívne **predplatné Azure** ([vytvorte si bezplatný účet](https://azure.microsoft.com/free/))
+- Povolenia na vytváranie prostriedkov vo vašom predplatnom
+- Rola **Owner** alebo **Contributor** na predplatnom alebo v skupine prostriedkov
 
-### Knowledge Prerequisites
+### Požiadavky na znalosti
 
-This is an **intermediate-level** example. You should be familiar with:
-- Basic command-line operations
-- Fundamental cloud concepts (resources, resource groups)
-- Basic understanding of web applications and databases
+Toto je príklad strednej úrovne. Mali by ste ovládať:
+- Základné operácie v príkazovom riadku
+- Základné cloudové koncepty (prostriedky, skupiny prostriedkov)
+- Základné pochopenie webových aplikácií a databáz
 
-**New to AZD?** Start with the [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) first.
+**Nový v AZD?** Najprv začnite s [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md).
 
-## Architecture
+## Architektúra
 
-This example deploys a two-tier architecture with a web application and SQL database:
+Tento príklad nasadzuje dvojvrstvovú architektúru s webovou aplikáciou a SQL databázou:
 
+```mermaid
+graph TD
+    Browser[Prehliadač používateľa] <--> WebApp[Webová aplikácia Azure<br/>Flask API<br/>/health<br/>/products]
+    WebApp -- Zabezpečené pripojenie<br/>Šifrované --> SQL[Azure SQL databáza<br/>Tabuľka produktov<br/>Ukážkové údaje]
 ```
-┌─────────────────┐        ┌──────────────────────┐
-│  User Browser   │◄──────►│   Azure Web App      │
-└─────────────────┘        │   (Flask API)        │
-                           │   - /health          │
-                           │   - /products        │
-                           └──────────┬───────────┘
-                                      │
-                                      │ Secure Connection
-                                      │ (Encrypted)
-                                      │
-                           ┌──────────▼───────────┐
-                           │ Azure SQL Database   │
-                           │   - Products table   │
-                           │   - Sample data      │
-                           └──────────────────────┘
-```
+**Nasadenie zdrojov:**
+- **Resource Group**: Kontajner pre všetky prostriedky
+- **App Service Plan**: Hosting na Linuxe (B1 tier pre úsporu nákladov)
+- **Web App**: Runtime Python 3.11 s Flask aplikáciou
+- **SQL Server**: Spravovaný databázový server s minimálne TLS 1.2
+- **SQL Database**: Basic tier (2GB, vhodné pre vývoj/testovanie)
+- **Application Insights**: Monitorovanie a zapisovanie logov
+- **Log Analytics Workspace**: Centralizované úložisko logov
 
-**Resource Deployment:**
-- **Resource Group**: Container for all resources
-- **App Service Plan**: Linux-based hosting (B1 tier for cost efficiency)
-- **Web App**: Python 3.11 runtime with Flask application
-- **SQL Server**: Managed database server with TLS 1.2 minimum
-- **SQL Database**: Basic tier (2GB, suitable for development/testing)
-- **Application Insights**: Monitoring and logging
-- **Log Analytics Workspace**: Centralized log storage
+**Analógia**: Predstavte si to ako reštauráciu (web app) s mraziacou komorou (databáza). Zákazníci objednávajú z menu (API endpointy) a kuchyňa (Flask app) vyberá ingrediencie (údaje) z mrazničky. Manažér reštaurácie (Application Insights) sleduje všetko, čo sa deje.
 
-**Analogy**: Think of this like a restaurant (web app) with a walk-in freezer (database). Customers order from the menu (API endpoints), and the kitchen (Flask app) retrieves ingredients (data) from the freezer. The restaurant manager (Application Insights) tracks everything that happens.
+## Štruktúra priečinkov
 
-## Folder Structure
-
-All files are included in this example—no external dependencies required:
+Všetky súbory sú zahrnuté v tomto príklade — nie sú potrebné žiadne externé závislosti:
 
 ```
 examples/database-app/
@@ -127,118 +114,118 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**What Each File Does:**
-- **azure.yaml**: Tells AZD what to deploy and where
-- **infra/main.bicep**: Orchestrates all Azure resources
-- **infra/resources/*.bicep**: Individual resource definitions (modular for reuse)
-- **src/web/app.py**: Flask application with database logic
-- **requirements.txt**: Python package dependencies
-- **Dockerfile**: Containerization instructions for deployment
+**Čo robí každý súbor:**
+- **azure.yaml**: Informuje AZD, čo nasadiť a kam
+- **infra/main.bicep**: Orchestruje všetky Azure prostriedky
+- **infra/resources/*.bicep**: Jednotlivé definície prostriedkov (modulárne pre opätovné použitie)
+- **src/web/app.py**: Flask aplikácia s logikou databázy
+- **requirements.txt**: Závislosti balíčkov Pythonu
+- **Dockerfile**: Inštrukcie pre kontajnerizáciu pri nasadení
 
-## Quickstart (Step-by-Step)
+## Rýchly štart (krok za krokom)
 
-### Step 1: Clone and Navigate
+### Krok 1: Klonovať a prejsť do priečinka
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Success Check**: Verify you see `azure.yaml` and `infra/` folder:
+**✓ Kontrola úspechu**: Overte, či vidíte `azure.yaml` a priečinok `infra/`:
 ```sh
 ls
 # Očakávané: README.md, azure.yaml, infra/, src/
 ```
 
-### Step 2: Authenticate with Azure
+### Krok 2: Overenie identity v Azure
 
 ```sh
 azd auth login
 ```
 
-This opens your browser for Azure authentication. Sign in with your Azure credentials.
+Tým sa otvorí prehliadač na overenie identity v Azure. Prihláste sa pomocou svojich prihlasovacích údajov Azure.
 
-**✓ Success Check**: You should see:
+**✓ Kontrola úspechu**: Mali by ste vidieť:
 ```
 Logged in to Azure.
 ```
 
-### Step 3: Initialize the Environment
+### Krok 3: Inicializácia prostredia
 
 ```sh
 azd init
 ```
 
-**What happens**: AZD creates a local configuration for your deployment.
+**Čo sa deje**: AZD vytvorí lokálnu konfiguráciu pre vaše nasadenie.
 
-**Prompts you'll see**:
-- **Environment name**: Enter a short name (e.g., `dev`, `myapp`)
-- **Azure subscription**: Select your subscription from the list
-- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
+**Výzvy, ktoré uvidíte**:
+- **Názov prostredia**: Zadajte krátky názov (napr. `dev`, `myapp`)
+- **Predplatné Azure**: Vyberte svoje predplatné zo zoznamu
+- **Lokalita Azure**: Vyberte región (napr. `eastus`, `westeurope`)
 
-**✓ Success Check**: You should see:
+**✓ Kontrola úspechu**: Mali by ste vidieť:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Step 4: Provision Azure Resources
+### Krok 4: Poskytnutie prostriedkov Azure
 
 ```sh
 azd provision
 ```
 
-**What happens**: AZD deploys all infrastructure (takes 5-8 minutes):
-1. Creates resource group
-2. Creates SQL Server and Database
-3. Creates App Service Plan
-4. Creates Web App
-5. Creates Application Insights
-6. Configures networking and security
+**Čo sa deje**: AZD nasadí celú infraštruktúru (trvá 5–8 minút):
+1. Vytvorí resource group
+2. Vytvorí SQL Server a databázu
+3. Vytvorí App Service Plan
+4. Vytvorí Web App
+5. Vytvorí Application Insights
+6. Nakonfiguruje sieťovanie a bezpečnosť
 
-**You'll be prompted for**:
-- **SQL admin username**: Enter a username (e.g., `sqladmin`)
-- **SQL admin password**: Enter a strong password (save this!)
+**Budete vyzvaní na**:
+- **Používateľské meno správcu SQL**: Zadajte používateľské meno (napr. `sqladmin`)
+- **Heslo správcu SQL**: Zadajte silné heslo (uložte si ho!)
 
-**✓ Success Check**: You should see:
+**✓ Kontrola úspechu**: Mali by ste vidieť:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Time**: 5-8 minutes
+**⏱️ Čas**: 5–8 minút
 
-### Step 5: Deploy the Application
+### Krok 5: Nasadiť aplikáciu
 
 ```sh
 azd deploy
 ```
 
-**What happens**: AZD builds and deploys your Flask application:
-1. Packages the Python application
-2. Builds the Docker container
-3. Pushes to Azure Web App
-4. Initializes the database with sample data
-5. Starts the application
+**Čo sa deje**: AZD zostaví a nasadí vašu Flask aplikáciu:
+1. Zabalí Python aplikáciu
+2. Zostaví Docker kontajner
+3. Pushne ho do Azure Web App
+4. Inicializuje databázu so vzorovými údajmi
+5. Spustí aplikáciu
 
-**✓ Success Check**: You should see:
+**✓ Kontrola úspechu**: Mali by ste vidieť:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Time**: 3-5 minutes
+**⏱️ Čas**: 3–5 minút
 
-### Step 6: Browse the Application
+### Krok 6: Prehliadanie aplikácie
 
 ```sh
 azd browse
 ```
 
-This opens your deployed web app in the browser at `https://app-<unique-id>.azurewebsites.net`
+Tým sa otvorí nasadená webová aplikácia v prehliadači na adrese `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Success Check**: You should see JSON output:
+**✓ Kontrola úspechu**: Mali by ste vidieť JSON výstup:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -251,14 +238,14 @@ This opens your deployed web app in the browser at `https://app-<unique-id>.azur
 }
 ```
 
-### Step 7: Test the API Endpoints
+### Krok 7: Otestovať API endpointy
 
-**Health Check** (verify database connection):
+**Kontrola stavu** (overenie pripojenia k databáze):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**Expected Response**:
+**Očakávaná odpoveď**:
 ```json
 {
   "status": "healthy",
@@ -266,12 +253,12 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**List Products** (sample data):
+**Zoznam produktov** (vzorové údaje):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**Expected Response**:
+**Očakávaná odpoveď**:
 ```json
 [
   {
@@ -285,73 +272,73 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**Get Single Product**:
+**Získať jednotlivý produkt**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Success Check**: All endpoints return JSON data without errors.
+**✓ Kontrola úspechu**: Všetky endpointy vracajú JSON údaje bez chýb.
 
 ---
 
-**🎉 Congratulations!** You've successfully deployed a web application with a database to Azure using AZD.
+**🎉 Gratulujeme!** Úspešne ste nasadili webovú aplikáciu s databázou do Azure pomocou AZD.
 
-## Configuration Deep-Dive
+## Podrobný rozbor konfigurácie
 
-### Environment Variables
+### Premenné prostredia
 
-Secrets are managed securely via Azure App Service configuration—**never hardcoded in source code**.
+Tajomstvá sú bezpečne spravované cez konfiguráciu Azure App Service — **nikdy neumiestňujte tajomstvá priamo v zdrojovom kóde**.
 
-**Configured Automatically by AZD**:
-- `SQL_CONNECTION_STRING`: Database connection with encrypted credentials
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Monitoring telemetry endpoint
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Enables automatic dependency installation
+**Automaticky nakonfigurované AZD**:
+- `SQL_CONNECTION_STRING`: Reťazec pripojenia k databáze s šifrovanými povereniami
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Koncový bod telemetrie pre monitorovanie
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Umožňuje automatickú inštaláciu závislostí
 
-**Where Secrets Are Stored**:
-1. During `azd provision`, you provide SQL credentials via secure prompts
-2. AZD stores these in your local `.azure/<env-name>/.env` file (git-ignored)
-3. AZD injects them into Azure App Service configuration (encrypted at rest)
-4. Application reads them via `os.getenv()` at runtime
+**Kde sú tajomstvá uložené**:
+1. Počas `azd provision` zadáte SQL poverenia cez zabezpečené výzvy
+2. AZD ich uloží do lokálneho súboru `.azure/<env-name>/.env` (ignorovaný v Gite)
+3. AZD ich injektuje do konfigurácie Azure App Service (šifrované v pokoji)
+4. Aplikácia ich načíta pomocou `os.getenv()` za behu
 
-### Local Development
+### Lokálny vývoj
 
-For local testing, create a `.env` file from the sample:
+Pre lokálne testovanie vytvorte súbor `.env` z ukážky:
 
 ```sh
 cp .env.sample .env
-# Upravte súbor .env s pripojením na lokálnu databázu
+# Upravte .env a nastavte v ňom pripojenie na vašu lokálnu databázu
 ```
 
-**Local Development Workflow**:
+**Pracovný postup pre lokálny vývoj**:
 ```sh
-# Nainštalovať závislosti
+# Nainštalujte závislosti
 cd src/web
 pip install -r requirements.txt
 
-# Nastaviť premenné prostredia
+# Nastavte premenné prostredia
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
-# Spustiť aplikáciu
+# Spustite aplikáciu
 python app.py
 ```
 
-**Test locally**:
+**Test lokálne**:
 ```sh
 curl http://localhost:8000/health
-# Očakávané: {"status": "healthy", "database": "connected"}
+# Očakávané: {"stav": "zdravý", "databáza": "pripojená"}
 ```
 
-### Infrastructure as Code
+### Infraštruktúra ako kód
 
-All Azure resources are defined in **Bicep templates** (`infra/` folder):
+Všetky Azure prostriedky sú definované v **Bicep šablónach** (priečinok `infra/`):
 
-- **Modular Design**: Each resource type has its own file for reusability
-- **Parameterized**: Customize SKUs, regions, naming conventions
-- **Best Practices**: Follows Azure naming standards and security defaults
-- **Version Controlled**: Infrastructure changes are tracked in Git
+- **Modulárny dizajn**: Každý typ prostriedku má vlastný súbor pre znovupoužitie
+- **Parametrizované**: Prispôsobte SKU, regióny, konvencie pomenovania
+- **Osvedčené postupy**: Dodržiava Azure štandardy pomenovania a predvolené bezpečnostné nastavenia
+- **Verzované**: Zmeny infraštruktúry sú sledované v Gite
 
-**Customization Example**:
-To change the database tier, edit `infra/resources/sql-database.bicep`:
+**Príklad prispôsobenia**:
+Ak chcete zmeniť úroveň databázy, upravte `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -360,41 +347,41 @@ sku: {
 }
 ```
 
-## Security Best Practices
+## Najlepšie postupy pre bezpečnosť
 
-This example follows Azure security best practices:
+Tento príklad dodržiava bezpečnostné osvedčené postupy Azure:
 
-### 1. **No Secrets in Source Code**
-- ✅ Credentials stored in Azure App Service configuration (encrypted)
-- ✅ `.env` files excluded from Git via `.gitignore`
-- ✅ Secrets passed via secure parameters during provisioning
+### 1. **Žiadne tajomstvá v zdrojovom kóde**
+- ✅ Prihlasovacie údaje uložené v konfigurácii Azure App Service (šifrované)
+- ✅ Súbory `.env` vylúčené z Gitu cez `.gitignore`
+- ✅ Tajomstvá odovzdávané cez zabezpečené parametre počas provisioningu
 
-### 2. **Encrypted Connections**
-- ✅ TLS 1.2 minimum for SQL Server
-- ✅ HTTPS-only enforced for Web App
-- ✅ Database connections use encrypted channels
+### 2. **Šifrované pripojenia**
+- ✅ TLS 1.2 minimálne pre SQL Server
+- ✅ Pre Web App vynútené iba HTTPS
+- ✅ Pripojenia k databáze používajú šifrované kanály
 
-### 3. **Network Security**
-- ✅ SQL Server firewall configured to allow Azure services only
-- ✅ Public network access restricted (can be further locked down with Private Endpoints)
-- ✅ FTPS disabled on Web App
+### 3. **Sieťová bezpečnosť**
+- ✅ Firewall SQL Servera nakonfigurovaný tak, aby povolil len služby Azure
+- ✅ Verejný prístup obmedzený (možno ďalej uzavrieť pomocou Private Endpoints)
+- ✅ FTPS zakázané na Web App
 
-### 4. **Authentication & Authorization**
-- ⚠️ **Current**: SQL authentication (username/password)
-- ✅ **Production Recommendation**: Use Azure Managed Identity for passwordless authentication
+### 4. **Autentifikácia a autorizácia**
+- ⚠️ **Aktuálne**: SQL autentifikácia (používateľské meno/heslo)
+- ✅ **Odporúčanie do produkcie**: Použiť Azure Managed Identity pre autentifikáciu bez hesla
 
-**To Upgrade to Managed Identity** (for production):
-1. Enable managed identity on Web App
-2. Grant identity SQL permissions
-3. Update connection string to use managed identity
-4. Remove password-based authentication
+**Na prechod na Managed Identity** (pre produkciu):
+1. Povoliť managed identity na Web App
+2. Udeliť identity oprávnenia pre SQL
+3. Aktualizovať reťazec pripojenia na použitie managed identity
+4. Odstrániť autentifikáciu založenú na hesle
 
-### 5. **Auditing & Compliance**
-- ✅ Application Insights logs all requests and errors
-- ✅ SQL Database auditing enabled (can be configured for compliance)
-- ✅ All resources tagged for governance
+### 5. **Auditovanie a súlad**
+- ✅ Application Insights loguje všetky požiadavky a chyby
+- ✅ Auditovanie SQL databázy povolené (možno konfigurovať pre súlad)
+- ✅ Všetky zdroje označené pre governance
 
-**Security Checklist Before Production**:
+**Kontrolný zoznam bezpečnosti pred produkciou**:
 - [ ] Enable Azure Defender for SQL
 - [ ] Configure Private Endpoints for SQL Database
 - [ ] Enable Web Application Firewall (WAF)
@@ -402,79 +389,79 @@ This example follows Azure security best practices:
 - [ ] Configure Azure AD authentication
 - [ ] Enable diagnostic logging for all resources
 
-## Cost Optimization
+## Optimalizácia nákladov
 
-**Estimated Monthly Costs** (as of November 2025):
+**Odhadované mesačné náklady** (k novembru 2025):
 
-| Resource | SKU/Tier | Estimated Cost |
+| Zdroj | SKU/Tier | Odhadované náklady |
 |----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~$13/month |
-| SQL Database | Basic (2GB) | ~$5/month |
-| Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
-| **Total** | | **~$20/month** |
+| App Service Plan | B1 (Basic) | ~$13/mesiac |
+| SQL Database | Basic (2GB) | ~$5/mesiac |
+| Application Insights | Pay-as-you-go | ~$2/mesiac (nízka záťaž) |
+| **Spolu** | | **~$20/mesiac** |
 
-**💡 Cost-Saving Tips**:
+**💡 Tipy na úsporu nákladov**:
 
-1. **Use Free Tier for Learning**:
-   - App Service: F1 tier (free, limited hours)
-   - SQL Database: Use Azure SQL Database serverless
-   - Application Insights: 5GB/month free ingestion
+1. **Využite bezplatnú úroveň pre učenie sa**:
+   - App Service: F1 tier (zadarmo, obmedzené hodiny)
+   - SQL Database: Použiť Azure SQL Database serverless
+   - Application Insights: 5GB/mesiac bezplatný príjem
 
-2. **Stop Resources When Not in Use**:
+2. **Zastavte prostriedky, keď ich nepoužívate**:
    ```sh
-   # Zastaviť webovú aplikáciu (za databázu sa stále platí)
+   # Zastaviť webovú aplikáciu (databáza stále účtuje poplatky)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
    # Reštartovať podľa potreby
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **Delete Everything After Testing**:
+3. **Vymažte všetko po testovaní**:
    ```sh
    azd down
    ```
-   This removes ALL resources and stops charges.
+   Tým sa odstránia VŠETKY prostriedky a zastavia sa poplatky.
 
-4. **Development vs. Production SKUs**:
-   - **Development**: Basic tier (used in this example)
-   - **Production**: Standard/Premium tier with redundancy
+4. **Vývojové vs. produkčné SKU**:
+   - **Vývoj**: Basic tier (použité v tomto príklade)
+   - **Produkcia**: Standard/Premium tier s redundanciou
 
-**Cost Monitoring**:
-- View costs in [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Set up cost alerts to avoid surprises
-- Tag all resources with `azd-env-name` for tracking
+**Sledovanie nákladov**:
+- Zobraziť náklady v [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Nastaviť upozornenia na náklady, aby ste sa vyhli prekvapeniam
+- Označiť všetky zdroje s `azd-env-name` pre sledovanie
 
-**Free Tier Alternative**:
-For learning purposes, you can modify `infra/resources/app-service-plan.bicep`:
+**Alternatíva bezplatnej úrovne**:
+Pre učebné účely môžete upraviť `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Note**: Free tier has limitations (60 min/day CPU, no always-on).
+**Poznámka**: Bezplatná úroveň má obmedzenia (60 min/deň CPU, žiadne always-on).
 
-## Monitoring & Observability
+## Monitorovanie a pozorovateľnosť
 
-### Application Insights Integration
+### Integrácia Application Insights
 
-This example includes **Application Insights** for comprehensive monitoring:
+Tento príklad zahŕňa **Application Insights** pre komplexné monitorovanie:
 
-**What's Monitored**:
-- ✅ HTTP requests (latency, status codes, endpoints)
-- ✅ Application errors and exceptions
-- ✅ Custom logging from Flask app
-- ✅ Database connection health
-- ✅ Performance metrics (CPU, memory)
+**Čo sa monitoruje**:
+- ✅ HTTP požiadavky (latencia, stavové kódy, endpointy)
+- ✅ Chyby a výnimky aplikácie
+- ✅ Vlastné logovanie z Flask aplikácie
+- ✅ Stav pripojenia k databáze
+- ✅ Výkonnostné metriky (CPU, pamäť)
 
-**Access Application Insights**:
-1. Open [Azure Portal](https://portal.azure.com)
-2. Navigate to your resource group (`rg-<env-name>`)
-3. Click on Application Insights resource (`appi-<unique-id>`)
+**Prístup k Application Insights**:
+1. Otvorte [Azure Portal](https://portal.azure.com)
+2. Prejdite do vašej skupiny prostriedkov (`rg-<env-name>`)
+3. Kliknite na Application Insights zdroj (`appi-<unique-id>`)
 
-**Useful Queries** (Application Insights → Logs):
+**Užitočné dopyty** (Application Insights → Logs):
 
-**View All Requests**:
+**Zobraziť všetky požiadavky**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -482,7 +469,7 @@ requests
 | project timestamp, name, url, resultCode, duration
 ```
 
-**Find Errors**:
+**Nájsť chyby**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -490,36 +477,36 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Check Health Endpoint**:
+**Overiť health endpoint**:
 ```kusto
 requests
 | where name contains "health"
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### SQL Database Auditing
+### Auditovanie SQL databázy
 
-**SQL Database auditing is enabled** to track:
-- Database access patterns
-- Failed login attempts
-- Schema changes
-- Data access (for compliance)
+**Auditovanie SQL databázy je povolené** na sledovanie:
+- Vzorce prístupu k databáze
+- Neúspešné pokusy o prihlásenie
+- Zmeny schémy
+- Prístup k údajom (pre súlad)
 
-**Access Audit Logs**:
+**Prístup k auditným logom**:
 1. Azure Portal → SQL Database → Auditing
-2. View logs in Log Analytics workspace
+2. Zobraziť logy v Log Analytics workspace
 
-### Real-Time Monitoring
+### Monitorovanie v reálnom čase
 
-**View Live Metrics**:
+**Zobraziť Live Metrics**:
 1. Application Insights → Live Metrics
-2. See requests, failures, and performance in real-time
+2. Zobraziť požiadavky, chyby a výkon v reálnom čase
 
-**Set Up Alerts**:
-Create alerts for critical events:
-- HTTP 500 errors > 5 in 5 minutes
-- Database connection failures
-- Vysoké doby odpovede (>2 sekundy)
+**Nastaviť upozornenia**:
+Vytvorte upozornenia pre kritické udalosti:
+- HTTP 500 chyby > 5 za 5 minút
+- Zlyhania pripojenia k databáze
+- Vysoké doby odozvy (>2 sekundy)
 
 **Príklad vytvorenia upozornenia**:
 ```sh
@@ -532,35 +519,34 @@ az monitor metrics alert create \
 ```
 
 ## Riešenie problémov
-
 ### Bežné problémy a riešenia
 
 #### 1. `azd provision` zlyhá s "Location not available"
 
-**Príznak**:
+**Symptóm**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
 
 **Riešenie**:
-Vyberte iný Azure región alebo zaregistrujte poskytovateľa prostriedkov:
+Vyberte inú oblasť Azure alebo zaregistrujte poskytovateľa prostriedkov:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. Zlyhanie pripojenia k SQL počas nasadenia
+#### 2. Zlyhá pripojenie k SQL počas nasadenia
 
-**Príznak**:
+**Symptóm**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
 
 **Riešenie**:
-- Overte, či firewall SQL Servera povoľuje služby Azure (automaticky nakonfigurované)
-- Skontrolujte, či bol administračný SQL password zadaný správne počas `azd provision`
-- Uistite sa, že SQL Server je úplne provisionovaný (môže to trvať 2–3 minúty)
+- Overte, že firewall SQL Servera povoľuje služby Azure (konfigurované automaticky)
+- Skontrolujte, či bol pri `azd provision` správne zadaný adminské heslo pre SQL
+- Uistite sa, že SQL Server je plne provisionovaný (môže to trvať 2-3 minúty)
 
-**Overenie pripojenia**:
+**Overiť pripojenie**:
 ```sh
 # V Azure portáli prejdite na SQL Database → Query editor
 # Skúste sa pripojiť pomocou svojich prihlasovacích údajov
@@ -568,7 +554,7 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 
 #### 3. Webová aplikácia zobrazuje "Application Error"
 
-**Príznak**:
+**Symptóm**:
 Prehliadač zobrazuje všeobecnú chybovú stránku.
 
 **Riešenie**:
@@ -580,22 +566,22 @@ az webapp log tail --name <app-name> --resource-group <rg-name>
 
 **Bežné príčiny**:
 - Chýbajúce premenné prostredia (skontrolujte App Service → Configuration)
-- Inštalácia Python balíčkov zlyhala (skontrolujte nasadzovacie logy)
-- Chyba inicializácie databázy (skontrolujte konektivitu k SQL)
+- Inštalácia balíčkov Python zlyhala (skontrolujte logy nasadenia)
+- Chyba inicializácie databázy (skontrolujte SQL konektivitu)
 
 #### 4. `azd deploy` zlyhá s "Build Error"
 
-**Príznak**:
+**Symptóm**:
 ```
 Error: Failed to build project
 ```
 
 **Riešenie**:
 - Uistite sa, že `requirements.txt` nemá syntaktické chyby
-- Skontrolujte, že je v `infra/resources/web-app.bicep` uvedený Python 3.11
-- Overte, že Dockerfile má správny základný image
+- Skontrolujte, že Python 3.11 je uvedený v `infra/resources/web-app.bicep`
+- Overte, či Dockerfile má správny base image
 
-**Ladenie lokálne**:
+**Ladiť lokálne**:
 ```sh
 cd src/web
 docker build -t test-app .
@@ -604,30 +590,30 @@ docker run -p 8000:8000 test-app
 
 #### 5. "Unauthorized" pri spúšťaní AZD príkazov
 
-**Príznak**:
+**Symptóm**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
 
 **Riešenie**:
-Znovu sa autentifikujte v Azure:
+Znovu sa prihláste do Azure:
 ```sh
 azd auth login
 az login
 ```
 
-Overte, či máte správne povolenia (rolu Contributor) na subscription.
+Overte, že máte správne povolenia (rola Contributor) v subscription.
 
 #### 6. Vysoké náklady na databázu
 
-**Príznak**:
-Neočekávaný účet za Azure.
+**Symptóm**:
+Nečakaný účet za Azure.
 
 **Riešenie**:
-- Skontrolujte, či ste po testovaní nezabudli spustiť `azd down`
-- Overte, že SQL Database používa Basic tier (nie Premium)
-- Skontrolujte náklady v Azure Cost Management
-- Nastavte upozornenia na náklady
+- Skontrolujte, či ste nezabudli spustiť `azd down` po testovaní
+- Overte, či SQL Database používa úroveň Basic (nie Premium)
+- Preskúmajte náklady v Azure Cost Management
+- Nastavte si upozornenia na náklady
 
 ### Získanie pomoci
 
@@ -647,18 +633,18 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 ```
 
 **Potrebujete viac pomoci?**
-- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Príručka riešenia problémov AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
 - [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
 - [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## Praktické cvičenia
 
-### Cvičenie 1: Overte svoje nasadenie (Začiatočník)
+### Cvičenie 1: Overenie vášho nasadenia (Začiatočník)
 
 **Cieľ**: Potvrdiť, že všetky prostriedky sú nasadené a aplikácia funguje.
 
 **Kroky**:
-1. Vylistujte všetky prostriedky v resource group:
+1. Vypíšte všetky prostriedky v skupine prostriedkov:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
@@ -671,13 +657,13 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Očakávané**: Všetky vracajú platné JSON bez chýb
+   **Očakávané**: Všetky vracajú validný JSON bez chýb
 
 3. Skontrolujte Application Insights:
-   - Prejdite na Application Insights v Azure Porte
-   - Choďte do "Live Metrics"
-   - Obnovte stránku vo webovej aplikácii
-   **Očakávané**: V reálnom čase vidieť prichádzajúce požiadavky
+   - Prejdite do Application Insights v Azure Porte
+   - Choďte na "Live Metrics"
+   - Obnovte prehliadač na webovej aplikácii
+   **Očakávané**: Vidieť požiadavky v reálnom čase
 
 **Kritériá úspechu**: Všetkých 6-7 prostriedkov existuje, všetky endpointy vracajú dáta, Live Metrics zobrazuje aktivitu.
 
@@ -687,10 +673,10 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Cieľ**: Rozšíriť Flask aplikáciu o nový endpoint.
 
-**Štartovací kód**: Aktuálne endpointy v `src/web/app.py`
+**Ukážkový kód**: Aktuálne endpointy v `src/web/app.py`
 
 **Kroky**:
-1. Upravte `src/web/app.py` a pridajte nový endpoint za funkciou `get_product()`:
+1. Upraviť `src/web/app.py` a pridať nový endpoint po funkcii `get_product()`:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -724,35 +710,35 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. Nasadte aktualizovanú aplikáciu:
+2. Nasadiť aktualizovanú aplikáciu:
    ```sh
    azd deploy
    ```
 
-3. Otestujte nový endpoint:
+3. Otestovať nový endpoint:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
    **Očakávané**: Vracia produkty zodpovedajúce "laptop"
 
-**Kritériá úspechu**: Nový endpoint funguje, vracia filtrované výsledky, objaví sa v logoch Application Insights.
+**Kritériá úspechu**: Nový endpoint funguje, vracia filtrované výsledky, zobrazuje sa v logoch Application Insights.
 
 ---
 
-### Cvičenie 3: Pridať monitorovanie a upozornenia (Pokročilý)
+### Cvičenie 3: Pridať monitoring a upozornenia (Pokročilý)
 
-**Cieľ**: Nastaviť proaktívne monitorovanie s upozorneniami.
+**Cieľ**: Nastaviť proaktívny monitoring s upozorneniami.
 
 **Kroky**:
-1. Vytvorte upozornenie na HTTP 500 chyby:
+1. Vytvorte upozornenie pre HTTP 500 chyby:
    ```sh
-   # Získať ID prostriedku Application Insights
+   # Získajte ID prostriedku Application Insights
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # Vytvoriť upozornenie
+   # Vytvorte upozornenie
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -765,24 +751,24 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 2. Spustite upozornenie vyvolaním chýb:
    ```sh
-   # Požiadať o neexistujúci produkt
+   # Požiadajte o neexistujúci produkt
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
 3. Skontrolujte, či sa upozornenie spustilo:
    - Azure Portal → Alerts → Alert Rules
-   - Skontrolujte svoj e-mail (ak nakonfigurované)
+   - Skontrolujte svoj e-mail (ak je nastavený)
 
 **Kritériá úspechu**: Pravidlo upozornenia je vytvorené, spúšťa sa pri chybách, prijímajú sa notifikácie.
 
 ---
 
-### Cvičenie 4: Zmeny schémy databázy (Pokročilý)
+### Cvičenie 4: Zmeny v schéme databázy (Pokročilý)
 
-**Cieľ**: Pridať novú tabuľku a upraviť aplikáciu, aby ju používala.
+**Cieľ**: Pridať novú tabuľku a upraviť aplikáciu tak, aby ju používala.
 
 **Kroky**:
-1. Pripojte sa k SQL Database cez Query Editor v Azure Portal
+1. Pripojte sa k SQL Database cez Query Editor v Azure Porte
 
 2. Vytvorte novú tabuľku `categories`:
    ```sql
@@ -801,56 +787,56 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Aktualizujte `src/web/app.py` tak, aby odpovede obsahovali informácie o kategóriách
+3. Aktualizujte `src/web/app.py`, aby odpovede obsahovali informácie o kategóriách
 
-4. Nasadte a otestujte
+4. Nasadiť a otestovať
 
-**Kritériá úspechu**: Nová tabuľka existuje, produkty zobrazujú informácie o kategórii, aplikácia stále funguje.
+**Kritériá úspechu**: Nová tabuľka existuje, produkty zobrazujú informácie o kategóriách, aplikácia stále funguje.
 
 ---
 
-### Cvičenie 5: Implementovať cache (Expert)
+### Cvičenie 5: Implementovať caching (Expert)
 
-**Cieľ**: Pridať Azure Redis Cache na zlepšenie výkonu.
+**Cieľ**: Pridať Azure Redis Cache pre zlepšenie výkonu.
 
 **Kroky**:
-1. Pridajte Redis Cache do `infra/main.bicep`
-2. Aktualizujte `src/web/app.py` pre cachovanie dotazov produktov
-3. Zmerajte zlepšenie výkonu pomocou Application Insights
-4. Porovnajte doby odozvy pred/po cachovaní
+1. Pridať Redis Cache do `infra/main.bicep`
+2. Aktualizovať `src/web/app.py`, aby cachoval dotazy na produkty
+3. Zmerať zlepšenie výkonu pomocou Application Insights
+4. Porovnať doby odozvy pred/po cachovaní
 
-**Kritériá úspechu**: Redis je nasadený, cachovanie funguje, doby odozvy sa zlepšili o >50%.
+**Kritériá úspechu**: Redis je nasadený, cachovanie funguje, doby odozvy sa zlepšia o >50%.
 
 **Tip**: Začnite s [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
-## Upratovanie
+## Vyčistenie
 
-Aby ste predišli pretrvávajúcim poplatkom, vymažte všetky prostriedky po skončení:
+Aby ste sa vyhli pokračujúcim poplatkom, odstráňte všetky prostriedky po dokončení:
 
 ```sh
 azd down
 ```
 
-**Výzva na potvrdenie**:
+**Potvrdenie**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
 
-Zadajte `y` pre potvrdenie.
+Napíšte `y` pre potvrdenie.
 
 **✓ Kontrola úspechu**: 
-- Všetky prostriedky sú vymazané z Azure Portalu
-- Žiadne pretrvávajúce poplatky
+- Všetky prostriedky sú odstránené z Azure Portalu
+- Žiadne prebiehajúce poplatky
 - Lokálny priečinok `.azure/<env-name>` môže byť vymazaný
 
 **Alternatíva** (ponechať infraštruktúru, vymazať dáta):
 ```sh
-# Odstrániť iba skupinu prostriedkov (ponechať konfiguráciu AZD)
+# Vymazať iba skupinu prostriedkov (ponechať konfiguráciu AZD)
 az group delete --name rg-<env-name> --yes
 ```
-## Zistiť viac
+## Learn More
 
 ### Súvisiaca dokumentácia
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
@@ -860,50 +846,50 @@ az group delete --name rg-<env-name> --yes
 - [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ### Ďalšie kroky v tomto kurze
-- **[Container Apps Example](../../../../examples/container-app)**: Nasadiť mikroservisy s Azure Container Apps
-- **[AI Integration Guide](../../../../docs/ai-foundry)**: Pridať AI funkcie do vašej aplikácie
+- **[Container Apps Example](../../../../examples/container-app)**: Nasadiť microservices s Azure Container Apps
+- **[AI Integration Guide](../../../../docs/ai-foundry)**: Pridať AI schopnosti do vašej aplikácie
 - **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Vzory nasadenia do produkcie
 
 ### Pokročilé témy
-- **Managed Identity**: Odstránenie hesiel a použitie Azure AD autentifikácie
-- **Private Endpoints**: Zabezpečenie databázových pripojení v rámci virtuálnej siete
-- **CI/CD Integrácia**: Automatizujte nasadenia pomocou GitHub Actions alebo Azure DevOps
-- **Viac prostredí**: Nastavte dev, staging a production prostredia
-- **Migrácie databázy**: Použite Alembic alebo Entity Framework pre verziovanie schémy
+- **Managed Identity**: Odstrániť heslá a použiť overovanie Azure AD
+- **Private Endpoints**: Zabezpečiť pripojenia k databáze v rámci virtuálnej siete
+- **CI/CD Integration**: Automatizovať nasadenia s GitHub Actions alebo Azure DevOps
+- **Multi-Environment**: Nastaviť dev, staging a production prostredia
+- **Database Migrations**: Použiť Alembic alebo Entity Framework pre verzovanie schémy
 
 ### Porovnanie s inými prístupmi
 
 **AZD vs. ARM Templates**:
 - ✅ AZD: Vyššia úroveň abstrakcie, jednoduchšie príkazy
-- ⚠️ ARM: Verbóznejší, detailnejšia kontrola
+- ⚠️ ARM: Viac rozvláčne, detailnejšia kontrola
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure-natívne, integrované so službami Azure
-- ⚠️ Terraform: Podpora multi-cloud, väčšia ekosystém
+- ✅ AZD: Nativné pre Azure, integrované so službami Azure
+- ⚠️ Terraform: Podpora viacerých cloudov, väčšia ekosystém
 
 **AZD vs. Azure Portal**:
-- ✅ AZD: Opakovateľné, verzovateľné, automatizovateľné
+- ✅ AZD: Opakovateľné, verzované v kontrolovaní, automatizovateľné
 - ⚠️ Portal: Manuálne kliky, ťažko reprodukovateľné
 
-**Premýšľajte o AZD ako**: Docker Compose pre Azure — zjednodušená konfigurácia pre zložité nasadenia.
+Myslite na AZD ako: Docker Compose pre Azure — zjednodušená konfigurácia pre zložité nasadenia.
 
 ---
 
 ## Často kladené otázky
 
 **Otázka: Môžem použiť iný programovací jazyk?**  
-Odpoveď: Áno! Nahraďte `src/web/` Node.js, C#, Go alebo akýmkoľvek iným jazykom. Aktualizujte `azure.yaml` a Bicep podľa potreby.
+Odpoveď: Áno! Nahraďte `src/web/` Node.js, C#, Go alebo akýmkoľvek iným jazykom. Aktualizujte `azure.yaml` a Bicep zodpovedajúcim spôsobom.
 
-**Otázka: Ako pridám viac databáz?**  
-Odpoveď: Pridajte ďalší modul SQL Database do `infra/main.bicep` alebo použite PostgreSQL/MySQL z Azure Database služieb.
+**Otázka: Ako pridať viac databáz?**  
+Odpoveď: Pridajte ďalší modul SQL Database v `infra/main.bicep` alebo použite PostgreSQL/MySQL zo služieb Azure Database.
 
 **Otázka: Môžem to použiť v produkcii?**  
-Odpoveď: Toto je východiskový bod. Pre produkciu pridajte: managed identity, private endpoints, redundanciu, stratégiu zálohovania, WAF a rozšírené monitorovanie.
+Odpoveď: Toto je východiskový bod. Pre produkciu pridajte: managed identity, private endpoints, redundanciu, stratégiu zálohovania, WAF a rozšírený monitoring.
 
 **Otázka: Čo ak chcem používať kontajnery namiesto nasadzovania kódu?**  
 Odpoveď: Pozrite si [Container Apps Example](../../../../examples/container-app), ktorý používa Docker kontajnery.
 
-**Otázka: Ako sa pripojím k databáze z lokálneho stroja?**  
+**Otázka: Ako sa pripojím k databáze z lokálneho počítača?**  
 Odpoveď: Pridajte svoju IP do firewallu SQL Servera:
 ```sh
 az sql server firewall-rule create \
@@ -919,16 +905,16 @@ Odpoveď: Áno, upravte `infra/main.bicep`, aby odkazoval na existujúci SQL Ser
 
 ---
 
-> **Poznámka:** Tento príklad demonštruje osvedčené postupy pre nasadenie webovej aplikácie s databázou pomocou AZD. Obsahuje fungujúci kód, komplexnú dokumentáciu a praktické cvičenia na upevnenie vedomostí. Pre produkčné nasadenia skontrolujte bezpečnosť, škálovanie, súlad a požiadavky na náklady špecifické pre vašu organizáciu.
+> **Poznámka:** Tento príklad demonštruje osvedčené postupy pre nasadenie webovej aplikácie s databázou pomocou AZD. Obsahuje fungujúci kód, komplexnú dokumentáciu a praktické cvičenia na upevnenie učenia. Pre produkčné nasadenia skontrolujte bezpečnosť, škálovanie, súlad a požiadavky na náklady špecifické pre vašu organizáciu.
 
 **📚 Navigácia kurzu:**
 - ← Predchádzajúce: [Container Apps Example](../../../../examples/container-app)
-- → Ďalšie: [AI Integration Guide](../../../../docs/ai-foundry)
+- → Nasledujúce: [AI Integration Guide](../../../../docs/ai-foundry)
 - 🏠 [Domov kurzu](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Upozornenie:
-Tento dokument bol preložený pomocou služby strojového prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho originálnom jazyku by mal byť považovaný za rozhodujúci zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne výklady vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

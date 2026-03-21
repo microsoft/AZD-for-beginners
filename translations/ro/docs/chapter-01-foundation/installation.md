@@ -1,83 +1,83 @@
-# Installation & Setup Guide
+# Ghid de Instalare și Configurare
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [AZD Basics](azd-basics.md)
-- **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navigare Capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 1 - Fundament și Început Rapid
+- **⬅️ Anterior**: [Bazele AZD](azd-basics.md)
+- **➡️ Următor**: [Primul Tău Proiect](first-project.md)
+- **🚀 Capitolul Următor**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introduction
+## Introducere
 
-This comprehensive guide will walk you through installing and configuring Azure Developer CLI (azd) on your system. You'll learn multiple installation methods for different operating systems, authentication setup, and initial configuration to prepare your development environment for Azure deployments.
+Acest ghid cuprinzător te va conduce prin procesul de instalare și configurare a Azure Developer CLI (azd) pe sistemul tău. Vei învăța metode multiple de instalare pentru diferite sisteme de operare, configurarea autentificării și configurarea inițială pentru a-ți pregăti mediul de dezvoltare pentru implementările Azure.
 
-## Learning Goals
+## Obiective de Învățare
 
-By the end of this lesson, you will:
-- Successfully install Azure Developer CLI on your operating system
-- Configure authentication with Azure using multiple methods
-- Set up your development environment with necessary prerequisites
-- Understand different installation options and when to use each
-- Troubleshoot common installation and setup issues
+La sfârșitul acestei lecții, vei:
+- Instala cu succes Azure Developer CLI pe sistemul tău de operare
+- Configura autentificarea cu Azure folosind mai multe metode
+- Configura mediul tău de dezvoltare cu prerechizitele necesare
+- Înțelege diferitele opțiuni de instalare și când să folosești fiecare
+- Depana problemele comune de instalare și configurare
 
-## Learning Outcomes
+## Rezultate de Învățare
 
-After completing this lesson, you will be able to:
-- Install azd using the appropriate method for your platform
-- Authenticate with Azure using azd auth login
-- Verify your installation and test basic azd commands
-- Configure your development environment for optimal azd usage
-- Resolve common installation problems independently
+După finalizarea acestei lecții, vei putea:
+- Instala azd folosind metoda potrivită platformei tale
+- Autentifica cu Azure folosind azd auth login
+- Verifica instalarea și testa comenzile azd de bază
+- Configura mediul tău de dezvoltare pentru utilizare optimă a azd
+- Rezolva probleme comune de instalare pe cont propriu
 
-This guide will help you install and configure Azure Developer CLI on your system, regardless of your operating system or development environment.
+Acest ghid te va ajuta să instalezi și configurezi Azure Developer CLI pe sistemul tău, indiferent de sistemul de operare sau mediul de dezvoltare.
 
-## Prerequisites
+## Prerechizite
 
-Before installing azd, ensure you have:
-- **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
-- **Azure CLI** - For authentication and resource management
-- **Git** - For cloning templates and version control
-- **Docker** (optional) - For containerized applications
+Înainte de a instala azd, asigură-te că ai:
+- **Abonament Azure** - [Creează un cont gratuit](https://azure.microsoft.com/free/)
+- **Azure CLI** - Pentru autentificare și gestionare resurse
+- **Git** - Pentru clonarea șabloanelor și controlul versiunilor
+- **Docker** (opțional) - Pentru aplicații containerizate
 
-## Installation Methods
+## Metode de Instalare
 
 ### Windows
 
-#### Option 1: PowerShell (Recommended)
+#### Opțiunea 1: PowerShell (Recomandată)
 ```powershell
-# Rulați ca Administrator sau cu privilegii ridicate
+# Rulează ca administrator sau cu privilegii elevate
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Option 2: Windows Package Manager (winget)
+#### Opțiunea 2: Windows Package Manager (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
 
-#### Option 3: Chocolatey
+#### Opțiunea 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### Option 4: Manual Installation
-1. Download the latest release from [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Extract to `C:\Program Files\azd\`
-3. Add to PATH environment variable
+#### Opțiunea 4: Instalare Manuală
+1. Descarcă ultima versiune de la [GitHub](https://github.com/Azure/azure-dev/releases)
+2. Extrage în `C:\Program Files\azd\`
+3. Adaugă la variabila de mediu PATH
 
 ### macOS
 
-#### Option 1: Homebrew (Recommended)
+#### Opțiunea 1: Homebrew (Recomandată)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### Option 2: Install Script
+#### Opțiunea 2: Script de Instalare
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Option 3: Manual Installation
+#### Opțiunea 3: Instalare Manuală
 ```bash
 # Descarcă și instalează
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
@@ -85,26 +85,26 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### Option 1: Install Script (Recommended)
+#### Opțiunea 1: Script de Instalare (Recomandată)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Option 2: Package Managers
+#### Opțiunea 2: Manageri de Pachete
 
 **Ubuntu/Debian:**
 ```bash
-# Adăugați depozitul de pachete Microsoft
+# Adaugă depozitul de pachete Microsoft
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Instalați azd
+# Instalează azd
 sudo apt-get update
 sudo apt-get install azd
 ```
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Adaugă depozitul de pachete Microsoft
+# Adăugați depozitul de pachete Microsoft
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -112,7 +112,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd comes pre-installed in GitHub Codespaces. Simply create a codespace and start using azd immediately.
+azd vine preinstalat în GitHub Codespaces. Pur și simplu creează un codespace și începe să folosești azd imediat.
 
 ### Docker
 
@@ -124,61 +124,61 @@ docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:l
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verify Installation
+## ✅ Verifică Instalarea
 
-After installation, verify azd is working correctly:
+După instalare, verifică dacă azd funcționează corect:
 
 ```bash
 # Verifică versiunea
 azd version
 
-# Afișează ajutorul
+# Vizualizează ajutorul
 azd --help
 
 # Listează șabloanele disponibile
 azd template list
 ```
 
-Expected output:
+Output așteptat:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Note**: The actual version number will vary. Check [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) for the latest version.
+**Notă**: Numărul versiunii reale va varia. Verifică [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) pentru cea mai recentă versiune.
 
-**✅ Installation Success Checklist:**
-- [ ] `azd version` shows version number without errors
-- [ ] `azd --help` displays command documentation
-- [ ] `azd template list` shows available templates
-- [ ] `az account show` displays your Azure subscription
-- [ ] You can create a test directory and run `azd init` successfully
+**✅ Lista de Verificare Succes Instalare:**
+- [ ] `azd version` afișează numărul versiunii fără erori
+- [ ] `azd --help` afișează documentația comenzilor
+- [ ] `azd template list` afișează șabloanele disponibile
+- [ ] `az account show` afișează abonamentul tău Azure
+- [ ] Poți crea un director de test și să rulezi cu succes `azd init`
 
-**If all checks pass, you're ready to proceed to [Your First Project](first-project.md)!**
+**Dacă toate verificările sunt OK, ești gata să continui la [Primul Tău Proiect](first-project.md)!**
 
-## Authentication Setup
+## Configurarea Autentificării
 
-### Azure CLI Authentication (Recommended)
+### Autentificare Azure CLI (Recomandată)
 ```bash
-# Instalați Azure CLI dacă nu este deja instalat
+# Instalează Azure CLI dacă nu este deja instalat
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
 # Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Conectați-vă la Azure
+# Autentifică-te în Azure
 az login
 
-# Verificați autentificarea
+# Verifică autentificarea
 az account show
 ```
 
-### Device Code Authentication
-If you're on a headless system or having browser issues:
+### Autentificare cu Cod Dispozitiv
+Dacă folosești un sistem fără interfață grafică sau ai probleme cu browserul:
 ```bash
 az login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
-For automated environments:
+Pentru medii automate:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -186,9 +186,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## Configuration
+## Configurare
 
-### Global Configuration
+### Configurare Globală
 ```bash
 # Setează abonamentul implicit
 azd config set defaults.subscription <subscription-id>
@@ -196,12 +196,12 @@ azd config set defaults.subscription <subscription-id>
 # Setează locația implicită
 azd config set defaults.location eastus2
 
-# Vizualizează întreaga configurație
+# Vizualizează toată configurația
 azd config list
 ```
 
-### Environment Variables
-Add to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
+### Variabile de Mediu
+Adaugă în profilul shell-ului tău (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Configurare Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -209,26 +209,26 @@ export AZURE_LOCATION="eastus2"
 
 # Configurare azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Activează înregistrarea pentru depanare
+export AZD_DEBUG=true  # Activează înregistrarea în modul de depanare
 ```
 
-## IDE Integration
+## Integrare IDE
 
 ### Visual Studio Code
-Install the Azure Developer CLI extension:
-1. Open VS Code
-2. Go to Extensions (Ctrl+Shift+X)
-3. Search for "Azure Developer CLI"
-4. Install the extension
+Instalează extensia Azure Developer CLI:
+1. Deschide VS Code
+2. Accesează Extensii (Ctrl+Shift+X)
+3. Caută "Azure Developer CLI"
+4. Instalează extensia
 
-Features:
-- IntelliSense for azure.yaml
-- Integrated terminal commands
-- Template browsing
-- Deployment monitoring
+Funcționalități:
+- IntelliSense pentru azure.yaml
+- Comenzi terminal integrate
+- Navigare șabloane
+- Monitorizare implementare
 
 ### GitHub Codespaces
-Create a `.devcontainer/devcontainer.json`:
+Creează un fișier `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -241,22 +241,22 @@ Create a `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Install the Azure plugin
-2. Configure Azure credentials
-3. Use integrated terminal for azd commands
+1. Instalează plugin-ul Azure
+2. Configurează acreditările Azure
+3. Folosește terminalul integrat pentru comenzile azd
 
-## 🐛 Troubleshooting Installation
+## 🐛 Depanare Instalare
 
-### Common Issues
+### Probleme Comune
 
-#### Permission Denied (Windows)
+#### Permisiune Refuzată (Windows)
 ```powershell
 # Rulați PowerShell ca Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-#### PATH Issues
-Manually add azd to your PATH:
+#### Probleme cu PATH
+Adaugă manual azd în PATH:
 
 **Windows:**
 ```cmd
@@ -269,28 +269,28 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Network/Proxy Issues
+#### Probleme de Rețea/Proxy
 ```bash
 # Configurează proxy-ul
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Omită verificarea SSL (nu este recomandat pentru producție)
+# Sare peste verificarea SSL (nu este recomandat pentru producție)
 azd config set http.insecure true
 ```
 
-#### Version Conflicts
+#### Conflicte de Versiune
 ```bash
-# Eliminați instalările vechi
+# Elimină instalările vechi
 # Windows: winget uninstall Microsoft.Azd
 # macOS: brew uninstall azd
 # Linux: sudo apt remove azd
 
-# Curățați configurația
+# Curăță configurația
 rm -rf ~/.azd
 ```
 
-### Getting More Help
+### Obținerea Mai Multor Ajutor
 ```bash
 # Activează jurnalizarea de depanare
 export AZD_DEBUG=true
@@ -303,15 +303,15 @@ azd config list
 azd show
 ```
 
-## Updating azd
+## Actualizarea azd
 
-### Automatic Updates
-azd will notify you when updates are available:
+### Actualizări Automate
+azd te va notifica când sunt disponibile actualizări:
 ```bash
 azd version --check-for-updates
 ```
 
-### Manual Updates
+### Actualizări Manuale
 
 **Windows (winget):**
 ```cmd
@@ -328,41 +328,41 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 Frequently Asked Questions
+## 💡 Întrebări Frecvente
 
 <details>
 <summary><strong>Care este diferența dintre azd și az CLI?</strong></summary>
 
-**Azure CLI (az)**: Low-level tool for managing individual Azure resources
+**Azure CLI (az)**: Unelte de nivel scăzut pentru gestionarea resurselor individuale Azure
 - `az webapp create`, `az storage account create`
-- One resource at a time
-- Infrastructure management focus
+- O resursă pe rând
+- Focus pe managementul infrastructurii
 
-**Azure Developer CLI (azd)**: High-level tool for complete application deployments
-- `azd up` deploys entire app with all resources
-- Template-based workflows
-- Developer productivity focus
+**Azure Developer CLI (azd)**: Unelte de nivel înalt pentru implementări complete de aplicații
+- `azd up` implementează întreaga aplicație cu toate resursele
+- Fluxuri de lucru bazate pe șabloane
+- Focus pe productivitatea dezvoltatorului
 
-**You need both**: azd uses az CLI for authentication
+**Ai nevoie de ambele**: azd utilizează az CLI pentru autentificare
 </details>
 
 <details>
 <summary><strong>Pot folosi azd cu resurse Azure existente?</strong></summary>
 
-Yes! You can:
-1. Import existing resources into azd environments
-2. Reference existing resources in your Bicep templates
-3. Use azd for new deployments alongside existing infrastructure
+Da! Poți:
+1. Importa resurse existente în mediile azd
+2. Referi resurse existente în șabloanele tale Bicep
+3. Folosi azd pentru implementări noi alături de infrastructura existentă
 
-See [Configuration Guide](configuration.md) for details.
+Vezi [Ghidul de Configurare](configuration.md) pentru detalii.
 </details>
 
 <details>
 <summary><strong>Funcționează azd cu Azure Government sau Azure China?</strong></summary>
 
-Yes, configure the cloud:
+Da, configurează cloud-ul:
 ```bash
-# Azure pentru guvern
+# Azure Guvernamental
 az cloud set --name AzureUSGovernment
 az login
 
@@ -373,56 +373,57 @@ az login
 </details>
 
 <details>
-<summary><strong>Pot folosi azd în pipeline-uri CI/CD?</strong></summary>
+<summary><strong>Pot folosi azd în pipeline-urile CI/CD?</strong></summary>
 
-Absolutely! azd is designed for automation:
-- GitHub Actions integration
-- Azure DevOps support
-- Service principal authentication
-- Non-interactive mode
+Absolut! azd este proiectat pentru automatizare:
+- Integrare GitHub Actions
+- Suport Azure DevOps
+- Autentificare prin service principal
+- Mod non-interactiv
 
-See [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) for CI/CD patterns.
+Vezi [Ghidul de Implementare](../chapter-04-infrastructure/deployment-guide.md) pentru modele CI/CD.
 </details>
 
 <details>
-<summary><strong>Cât costă folosirea azd?</strong></summary>
+<summary><strong>Cât costă utilizarea azd?</strong></summary>
 
-azd itself is **completely free** and open-source. You only pay for:
-- Azure resources you deploy
-- Azure consumption costs (compute, storage, etc.)
+azd în sine este **complet gratuit** și open-source. Plătești doar pentru:
+- Resursele Azure pe care le implementezi
+- Costurile de consum Azure (calcul, stocare, etc.)
 
-Use `azd provision --preview` to estimate costs before deployment.
+Folosește `azd provision --preview` pentru a estima costurile înainte de implementare.
 </details>
 
-## Next Steps
+## Pașii Următori
 
-1. **Complete authentication**: Ensure you can access your Azure subscription
-2. **Try your first deployment**: Follow the [First Project Guide](first-project.md)
-3. **Explore templates**: Browse available templates with `azd template list`
-4. **Configure your IDE**: Set up your development environment
+1. **Finalizează autentificarea**: Asigură-te că poți accesa abonamentul tău Azure
+2. **Încearcă prima implementare**: Urmează [Ghidul Primului Proiect](first-project.md)
+3. **Explorează șabloanele**: Răsfoiește șabloanele disponibile cu `azd template list`
+4. **Configurează IDE-ul**: Pregătește mediul tău de dezvoltare
 
-## Support
+## Suport
 
-If you encounter issues:
-- [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Report Issues](https://github.com/Azure/azure-dev/issues)
-- [Community Discussions](https://github.com/Azure/azure-dev/discussions)
-- [Azure Support](https://azure.microsoft.com/support/)
+Dacă întâmpini probleme:
+- [Documentație Oficială](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Raportează Probleme](https://github.com/Azure/azure-dev/issues)
+- [Discuții Comunitare](https://github.com/Azure/azure-dev/discussions)
+- [Suport Azure](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Primește ghidaj pentru comenzile Azure direct în editor cu `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [AZD Basics](azd-basics.md) 
-- **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navigare Capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 1 - Fundament și Început Rapid
+- **⬅️ Anterior**: [Bazele AZD](azd-basics.md) 
+- **➡️ Următor**: [Primul Tău Proiect](first-project.md)
+- **🚀 Capitolul Următor**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.
+**✅ Instalare Finalizată!** Continuă către [Primul Tău Proiect](first-project.md) pentru a începe să folosești azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autoritativă. Pentru informații critice se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventuale neînțelegeri sau interpretări eronate care pot rezulta din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru orice neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
