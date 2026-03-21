@@ -1,143 +1,143 @@
-# Retail Multi-Agent Løsning - Infrastruktur Skabelon
+# Retail Multi-Agent-løsning - Infrastrukturskabelon
 
 **Kapitel 5: Produktionsudrulningspakke**
-- **📚 Kursushjem**: [AZD For Begyndere](../../README.md)
-- **📖 Relateret Kapitel**: [Kapitel 5: Multi-Agent AI Løsninger](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Scenarieguide**: [Komplet Arkitektur](../retail-scenario.md)
-- **🎯 Hurtig Udrulning**: [Én-Klik Udrulning](../../../../examples/retail-multiagent-arm-template)
+- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
+- **📖 Relateret kapitel**: [Kapitel 5: Multi-Agent AI Solutions](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Scenarieguide**: [Complete Architecture](../retail-scenario.md)
+- **🎯 Hurtig udrulning**: [One-Click Deployment](#-quick-deployment)
 
-> **⚠️ KUN INFRASTRUKTUR SKABELON**  
-> Denne ARM-skabelon udruller **Azure ressourcer** til et multi-agent system.  
+> **⚠️ KUN INFRASTRUKTURSKABELON**  
+> Denne ARM-skabelon udruller **Azure-ressourcer** til et multi-agent-system.  
 >  
 > **Hvad der bliver udrullet (15-25 minutter):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings på tværs af 3 regioner)
-> - ✅ AI Search service (tom, klar til oprettelse af indeks)
-> - ✅ Container Apps (pladsholder billeder, klar til din kode)
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings på tværs af 3 regioner)
+> - ✅ AI Search-tjeneste (tom, klar til oprettelse af indeks)
+> - ✅ Container Apps (pladsholder-billeder, klar til din kode)
 > - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
 > **Hvad der IKKE er inkluderet (kræver udvikling):**
-> - ❌ Agent implementeringskode (Kundeagent, Lageragent)
-> - ❌ Routing logik og API endpoints
+> - ❌ Agentimplementeringskode (Customer Agent, Inventory Agent)
+> - ❌ Routinglogik og API-endpoints
 > - ❌ Frontend chat UI
-> - ❌ Søgeindeks skemaer og datapipelines
-> - ❌ **Estimeret udviklingsindsats: 80-120 timer**
+> - ❌ Search-indeksskemaer og datapipelines
+> - ❌ **Anslået udviklingsindsats: 80-120 timer**
 >  
 > **Brug denne skabelon hvis:**
-> - ✅ Du vil klargøre Azure infrastruktur til et multi-agent projekt
-> - ✅ Du planlægger at udvikle agent implementering separat
-> - ✅ Du har brug for en produktionsklar infrastruktur baseline
+> - ✅ Du vil provisionere Azure-infrastruktur til et multi-agent-projekt
+> - ✅ Du planlægger at udvikle agentimplementering separat
+> - ✅ Du har brug for en produktionsklar infrastrukturbaseline
 >  
 > **Brug ikke hvis:**
-> - ❌ Du forventer en fungerende multi-agent demo med det samme
-> - ❌ Du leder efter komplette applikationskodeeksempler
+> - ❌ Du forventer en fungerende multi-agent-demo med det samme
+> - ❌ Du søger komplette eksempler på applikationskode
 
 ## Oversigt
 
-Denne mappe indeholder en omfattende Azure Resource Manager (ARM) skabelon til udrulning af **infrastruktur fundamentet** for et multi-agent kundesupportsystem. Skabelonen klargør alle nødvendige Azure-tjenester, korrekt konfigureret og forbundet, klar til din applikationsudvikling.
+Denne mappe indeholder en omfattende Azure Resource Manager (ARM) skabelon til udrulning af **infrastrukturgrundlaget** for et multi-agent kundesupportsystem. Skabelonen provisionerer alle nødvendige Azure-tjenester, korrekt konfigureret og sammenkoblet, klar til din applikationsudvikling.
 
-**Efter udrulning har du:** Produktionsklar Azure infrastruktur  
-**For at fuldføre systemet skal du bruge:** Agentkode, frontend UI og datakonfiguration (se [Arkitekturguide](../retail-scenario.md))
+**Efter udrulning får du:** Produktionsklar Azure-infrastruktur  
+**For at fuldføre systemet har du brug for:** Agentkode, frontend UI og datakonfiguration (se [Architecture Guide](../retail-scenario.md))
 
-## 🎯 Hvad der bliver udrullet
+## 🎯 Hvad udrulles
 
-### Kerneinfrastruktur (Status Efter Udrulning)
+### Kerneinfrastruktur (status efter udrulning)
 
-✅ **Azure OpenAI Services** (Klar til API-kald)
-  - Primær region: GPT-4o udrulning (20K TPM kapacitet)
-  - Sekundær region: GPT-4o-mini udrulning (10K TPM kapacitet)
-  - Tertiær region: Tekst embeddings model (30K TPM kapacitet)
-  - Evalueringsregion: GPT-4o grader model (15K TPM kapacitet)
-  - **Status:** Fuldt funktionel - kan lave API-kald med det samme
+✅ **Microsoft Foundry Models-tjenester** (Klar til API-opkald)
+  - Primær region: gpt-4.1-udrulning (20K TPM kapacitet)
+  - Sekundær region: gpt-4.1-mini-udrulning (10K TPM kapacitet)
+  - Tertiær region: Tekst embeddings-model (30K TPM kapacitet)
+  - Evalueringsregion: gpt-4.1 grader-model (15K TPM kapacitet)
+  - **Status:** Fuld funktionsdygtig - kan foretage API-opkald med det samme
 
 ✅ **Azure AI Search** (Tom - klar til konfiguration)
-  - Vektorsøgefunktioner aktiveret
-  - Standard tier med 1 partition, 1 replika
-  - **Status:** Tjenesten kører, men kræver oprettelse af indeks
+  - Vektor-søgning aktiveret
+  - Standardniveau med 1 partition, 1 replika
+  - **Status:** Tjeneste kører, men kræver oprettelse af indeks
   - **Handling nødvendig:** Opret søgeindeks med dit skema
 
-✅ **Azure Storage Account** (Tom - klar til uploads)
-  - Blob containere: `documents`, `uploads`
+✅ **Azure Storage Account** (Tom - klar til upload)
+  - Blob-containere: `documents`, `uploads`
   - Sikker konfiguration (kun HTTPS, ingen offentlig adgang)
   - **Status:** Klar til at modtage filer
   - **Handling nødvendig:** Upload dine produktdata og dokumenter
 
-⚠️ **Container Apps Miljø** (Pladsholder billeder udrullet)
-  - Agent router app (nginx standardbillede)
-  - Frontend app (nginx standardbillede)
-  - Auto-skalering konfigureret (0-10 instanser)
-  - **Status:** Kører pladsholder containere
+⚠️ **Container Apps Environment** (Pladsholder-billeder udrullet)
+  - Agentrouter-app (nginx standardimage)
+  - Frontend-app (nginx standardimage)
+  - Autoskalering konfigureret (0-10 instanser)
+  - **Status:** Kører pladsholder-containere
   - **Handling nødvendig:** Byg og udrul dine agentapplikationer
 
 ✅ **Azure Cosmos DB** (Tom - klar til data)
   - Database og container forudkonfigureret
-  - Optimeret til lav-latens operationer
+  - Optimeret til lav latenstid
   - TTL aktiveret for automatisk oprydning
   - **Status:** Klar til at gemme chat-historik
 
 ✅ **Azure Key Vault** (Valgfri - klar til hemmeligheder)
   - Soft delete aktiveret
-  - RBAC konfigureret til administrerede identiteter
+  - RBAC konfigureret for administrerede identiteter
   - **Status:** Klar til at gemme API-nøgler og forbindelsesstrenge
 
 ✅ **Application Insights** (Valgfri - overvågning aktiv)
-  - Forbundet til Log Analytics arbejdsområde
+  - Forbundet til Log Analytics-arbejdsområde
   - Brugerdefinerede metrikker og alarmer konfigureret
   - **Status:** Klar til at modtage telemetri fra dine apps
 
-✅ **Document Intelligence** (Klar til API-kald)
-  - S0 tier til produktionsarbejdsbelastninger
+✅ **Document Intelligence** (Klar til API-opkald)
+  - S0-niveau til produktionsarbejdsmængder
   - **Status:** Klar til at behandle uploadede dokumenter
 
-✅ **Bing Search API** (Klar til API-kald)
-  - S1 tier til realtidssøgninger
-  - **Status:** Klar til websøgeforespørgsler
+✅ **Bing Search API** (Klar til API-opkald)
+  - S1-niveau til realtidssøgninger
+  - **Status:** Klar til web-søgninger
 
 ### Udrulningsmodi
 
-| Mode | OpenAI Kapacitet | Container Instanser | Søge Tier | Storage Redundans | Bedst Til |
-|------|------------------|---------------------|-----------|-------------------|-----------|
-| **Minimal** | 10K-20K TPM | 0-2 replikaer | Basic | LRS (Lokal) | Udvikling/test, læring, proof-of-concept |
-| **Standard** | 30K-60K TPM | 2-5 replikaer | Standard | ZRS (Zone) | Produktion, moderat trafik (<10K brugere) |
-| **Premium** | 80K-150K TPM | 5-10 replikaer, zone-redundant | Premium | GRS (Geo) | Enterprise, høj trafik (>10K brugere), 99.99% SLA |
+| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
+|------|-----------------|---------------------|-------------|-------------------|----------|
+| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, learning, proof-of-concept |
+| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
+| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
 
 **Omkostningspåvirkning:**
-- **Minimal → Standard:** ~4x omkostningsstigning ($100-370/md → $420-1,450/md)
-- **Standard → Premium:** ~3x omkostningsstigning ($420-1,450/md → $1,150-3,500/md)
-- **Vælg baseret på:** Forventet belastning, SLA krav, budgetbegrænsninger
+- **Minimal → Standard:** ~4x omkostningsstigning ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium:** ~3x omkostningsstigning ($420-1,450/mo → $1,150-3,500/mo)
+- **Vælg baseret på:** Forventet belastning, SLA-krav, budgetbegrænsninger
 
 **Kapacitetsplanlægning:**
 - **TPM (Tokens Per Minute):** Total på tværs af alle modeludrulninger
-- **Container Instanser:** Auto-skalering rækkevidde (min-max replikaer)
-- **Søge Tier:** Påvirker forespørgselsydelse og indeksstørrelsesgrænser
+- **Container Instances:** Autoskalering interval (min-max replikaer)
+- **Search Tier:** Påvirker forespørgselsydelse og indeksstørrelsesgrænser
 
 ## 📋 Forudsætninger
 
-### Nødvendige Værktøjer
-1. **Azure CLI** (version 2.50.0 eller højere)
+### Nødvendige værktøjer
+1. **Azure CLI** (version 2.50.0 eller nyere)
    ```bash
    az --version  # Kontroller version
-   az login      # Godkend
+   az login      # Autentificer
    ```
 
-2. **Aktivt Azure abonnement** med Ejer- eller Bidragsyderadgang
+2. **Aktivt Azure-abonnement** med Owner- eller Contributor-adgang
    ```bash
    az account show  # Bekræft abonnement
    ```
 
-### Nødvendige Azure Kvoter
+### Påkrævede Azure-kvoter
 
-Før udrulning, verificer tilstrækkelige kvoter i dine målregioner:
+Før udrulning skal du verificere tilstrækkelige kvoter i dine målregioner:
 
 ```bash
-# Kontroller Azure OpenAI tilgængelighed i din region
+# Kontroller tilgængeligheden af Microsoft Foundry-modeller i din region
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# Bekræft OpenAI-kvote (eksempel for gpt-4o)
+# Bekræft OpenAI-kvote (eksempel for gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
 # Kontroller Container Apps-kvote
 az provider show \
@@ -145,30 +145,30 @@ az provider show \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**Minimum Nødvendige Kvoter:**
-- **Azure OpenAI:** 3-4 modeludrulninger på tværs af regioner
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+**Minimum krævede kvoter:**
+- **Microsoft Foundry Models:** 3-4 modeludrulninger på tværs af regioner
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Bemærk:** GPT-4o kan have venteliste i nogle regioner - tjek [modeltilgængelighed](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Container Apps:** Administreret miljø + 2-10 container instanser
-- **AI Search:** Standard tier (Basic utilstrækkelig til vektorsøgning)
-- **Cosmos DB:** Standard provisioneret gennemløb
+  - **Bemærk:** gpt-4.1 kan have venteliste i nogle regioner - tjek [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps:** Managed environment + 2-10 containerinstanser
+- **AI Search:** Standardniveau (Basic er utilstrækkeligt til vektor-søgning)
+- **Cosmos DB:** Standard provisioned throughput
 
-**Hvis kvoter er utilstrækkelige:**
-1. Gå til Azure Portal → Kvoter → Anmod om stigning
+**Hvis kvoten er utilstrækkelig:**
+1. Gå til Azure Portal → Quotas → Request increase
 2. Eller brug Azure CLI:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
 3. Overvej alternative regioner med tilgængelighed
 
-## 🚀 Hurtig Udrulning
+## 🚀 Hurtig udrulning
 
-### Mulighed 1: Brug Azure CLI
+### Mulighed 1: Brug af Azure CLI
 
 ```bash
 # Klon eller download skabelonfilerne
@@ -178,21 +178,21 @@ cd examples/retail-multiagent-arm-template
 # Gør implementeringsscriptet eksekverbart
 chmod +x deploy.sh
 
-# Implementer med standardindstillinger
+# Udrul med standardindstillinger
 ./deploy.sh -g myResourceGroup
 
-# Implementer til produktion med premiumfunktioner
+# Udrul til produktion med premiumfunktioner
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Mulighed 2: Brug Azure Portal
+### Mulighed 2: Brug af Azure Portal
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Udrul til Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 ### Mulighed 3: Brug Azure CLI direkte
 
 ```bash
-# Opret ressourcergruppe
+# Opret ressourcegruppe
 az group create --name myResourceGroup --location eastus2
 
 # Udrul skabelon
@@ -204,35 +204,35 @@ az deployment group create \
 
 ## ⏱️ Udrulningstidslinje
 
-### Hvad man kan forvente
+### Hvad du kan forvente
 
-| Fase | Varighed | Hvad der sker |
-|------|----------|--------------||
-| **Skabelonvalidering** | 30-60 sekunder | Azure validerer ARM skabelonsyntaks og parametre |
-| **Opsætning af Ressourcegruppe** | 10-20 sekunder | Opretter ressourcegruppe (hvis nødvendigt) |
-| **OpenAI Klargøring** | 5-8 minutter | Opretter 3-4 OpenAI konti og udruller modeller |
-| **Container Apps** | 3-5 minutter | Opretter miljø og udruller pladsholder containere |
-| **Søgning & Storage** | 2-4 minutter | Klargør AI Search service og storage konti |
-| **Cosmos DB** | 2-3 minutter | Opretter database og konfigurerer containere |
-| **Opsætning af Overvågning** | 2-3 minutter | Opsætter Application Insights og Log Analytics |
-| **RBAC Konfiguration** | 1-2 minutter | Konfigurerer administrerede identiteter og tilladelser |
-| **Total Udrulning** | **15-25 minutter** | Komplet infrastruktur klar |
+| Phase | Duration | What Happens |
+|-------|----------|--------------||
+| **Template Validation** | 30-60 seconds | Azure validerer ARM-skabelonens syntaks og parametre |
+| **Resource Group Setup** | 10-20 seconds | Opretter resource group (hvis nødvendigt) |
+| **OpenAI Provisioning** | 5-8 minutes | Opretter 3-4 OpenAI-konti og udruller modeller |
+| **Container Apps** | 3-5 minutes | Opretter miljø og udruller pladsholder-containere |
+| **Search & Storage** | 2-4 minutes | Provisonerer AI Search-tjeneste og storage-konti |
+| **Cosmos DB** | 2-3 minutes | Opretter database og konfigurerer containere |
+| **Monitoring Setup** | 2-3 minutes | Opsætter Application Insights og Log Analytics |
+| **RBAC Configuration** | 1-2 minutes | Konfigurerer administrerede identiteter og tilladelser |
+| **Total Deployment** | **15-25 minutes** | Færdig infrastruktur klar |
 
-**Efter Udrulning:**
-- ✅ **Infrastruktur Klar:** Alle Azure tjenester klargjort og kører
+**Efter udrulning:**
+- ✅ **Infrastruktur klar:** Alle Azure-tjenester provisioneret og kørende
 - ⏱️ **Applikationsudvikling:** 80-120 timer (dit ansvar)
-- ⏱️ **Indekskonfiguration:** 15-30 minutter (kræver dit skema)
-- ⏱️ **Data Upload:** Varierer efter datasætstørrelse
-- ⏱️ **Test & Validering:** 2-4 timer
+- ⏱️ **Indeks-konfiguration:** 15-30 minutter (kræver dit skema)
+- ⏱️ **Dataupload:** Varierer efter datasætstørrelse
+- ⏱️ **Test & validering:** 2-4 timer
 
 ---
 
-## ✅ Verificer Udrulningssucces
+## ✅ Bekræft udrulningssucces
 
-### Trin 1: Tjek Ressource Klargøring (2 minutter)
+### Trin 1: Tjek ressourceprovisionering (2 minutter)
 
 ```bash
-# Bekræft, at alle ressourcer er implementeret korrekt
+# Bekræft, at alle ressourcer blev udrullet med succes
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -241,16 +241,16 @@ az resource list \
 
 **Forventet:** Tom tabel (alle ressourcer viser "Succeeded" status)
 
-### Trin 2: Verificer Azure OpenAI Udrulninger (3 minutter)
+### Trin 2: Bekræft Microsoft Foundry Models-udrulninger (3 minutter)
 
 ```bash
-# Liste alle OpenAI-konti
+# Vis alle OpenAI-konti
 az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# Kontroller modelimplementeringer for primær region
+# Kontroller modeludrulninger i den primære region
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -262,19 +262,19 @@ az cognitiveservices account deployment list \
 ```
 
 **Forventet:** 
-- 3-4 OpenAI konti (primær, sekundær, tertiær, evalueringsregioner)
-- 1-2 modeludrulninger pr. konto (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 3-4 OpenAI-konti (primær, sekundær, tertiær, evalueringsregioner)
+- 1-2 modeludrulninger pr. konto (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### Trin 3: Test Infrastruktur Endpoints (5 minutter)
+### Trin 3: Test infrastrukturendepunkter (5 minutter)
 
 ```bash
-# Hent Container App URL'er
+# Hent Container App-URL'er
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# Test router endpoint (pladsholderbillede vil svare)
+# Test router-endepunkt (et pladsholderbillede vil blive returneret)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -288,10 +288,10 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 - Container Apps viser "Running" status
 - Pladsholder nginx svarer med HTTP 200 eller 404 (ingen applikationskode endnu)
 
-### Trin 4: Verificer Azure OpenAI API Adgang (3 minutter)
+### Trin 4: Bekræft Microsoft Foundry Models API-adgang (3 minutter)
 
 ```bash
-# Hent OpenAI endpoint og nøgle
+# Hent OpenAI-endpoint og nøgle
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Test GPT-4o implementering
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Test gpt-4.1-udrulning
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,27 +312,27 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**Forventet:** JSON svar med chat completion (bekræfter OpenAI er funktionel)
+**Forventet:** JSON-respons med chat completion (bekræfter, at OpenAI fungerer)
 
-### Hvad der virker vs. hvad der ikke gør
+### Hvad virker vs. hvad fungerer ikke
 
-**✅ Virker Efter Udrulning:**
-- Azure OpenAI modeller udrullet og accepterer API-kald
-- AI Search service kører (tom, ingen indekser endnu)
-- Container Apps kører (pladsholder nginx billeder)
-- Storage konti tilgængelige og klar til uploads
+**✅ Fungerer efter udrulning:**
+- Microsoft Foundry Models- modeller udrullet og accepterer API-opkald
+- AI Search-tjeneste kører (tom, ingen indekser endnu)
+- Container Apps kører (pladsholder nginx-billeder)
+- Storage-konti tilgængelige og klar til uploads
 - Cosmos DB klar til dataoperationer
 - Application Insights indsamler infrastrukturtelemetri
 - Key Vault klar til hemmelighedslagring
 
-**❌ Virker Ikke Endnu (Kræver Udvikling):**
-- Agent endpoints (ingen applikationskode udrullet)
-- Chat funktionalitet (kræver frontend + backend implementering)
-- Søgeforespørgsler (intet søgeindeks oprettet endnu)
+**❌ Fungerer ikke endnu (kræver udvikling):**
+- Agentendpoints (ingen applikationskode udrullet)
+- Chatfunktionalitet (kræver frontend + backend-implementering)
+- Søgninger (intet søgeindeks oprettet endnu)
 - Dokumentbehandlingspipeline (ingen data uploadet)
 - Brugerdefineret telemetri (kræver applikationsinstrumentering)
 
-**Næste Skridt:** Se [Post-Udrulningskonfiguration](../../../../examples/retail-multiagent-arm-template) for at udvikle og udrulle din applikation
+**Næste skridt:** Se [Post-Deployment Configuration](#-post-deployment-next-steps) for at udvikle og udrulle din applikation
 
 ---
 
@@ -340,19 +340,19 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 
 ### Skabelonparametre
 
-| Parameter | Type | Standard | Beskrivelse |
-|-----------|------|----------|-------------|
-| `projectName` | string | "retail" | Præfiks for alle ressourcenavne |
-| `location` | string | Ressourcegruppens placering | Primær udrulningsregion |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `projectName` | string | "retail" | Prefix for alle ressourcenavne |
+| `location` | string | Resource group location | Primær udrulningsregion |
 | `secondaryLocation` | string | "westus2" | Sekundær region til multi-region udrulning |
-| `tertiaryLocation` | string | "francecentral" | Region til embeddings model |
+| `tertiaryLocation` | string | "francecentral" | Region til embeddings-model |
 | `environmentName` | string | "dev" | Miljøbetegnelse (dev/staging/prod) |
 | `deploymentMode` | string | "standard" | Udrulningskonfiguration (minimal/standard/premium) |
 | `enableMultiRegion` | bool | true | Aktiver multi-region udrulning |
-| `enableMonitoring` | bool | true | Aktiver Application Insights og logning |
+| `enableMonitoring` | bool | true | Aktiver Application Insights og logging |
 | `enableSecurity` | bool | true | Aktiver Key Vault og forbedret sikkerhed |
 
-### Tilpasning af Parametre
+### Tilpasning af parametre
 
 Rediger `azuredeploy.parameters.json`:
 
@@ -377,30 +377,21 @@ Rediger `azuredeploy.parameters.json`:
 }
 ```
 
-## 🏗️ Arkitektur Oversigt
+## 🏗️ Arkitekturoversigt
 
+```mermaid
+graph TD
+    Frontend[Frontend<br/>Container-app] --> Router[Agent-router<br/>Container-app] --> Agents[Agenter<br/>Kunde + Lager]
+    Router --> Search[AI-søgning<br/>Vektor DB]
+    Router --> Models[Microsoft Foundry-modeller<br/>Flere regioner]
+    Agents --> Storage[Lagring<br/>Dokumenter]
+    Search --> CosmosDB[Cosmos DB<br/>Chat-historik]
+    Models --> AppInsights[App Insights<br/>Overvågning]
+    Storage --> KeyVault[Key Vault<br/>Hemmeligheder]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+## 📖 Brug af udrulningsscript
 
-## 📖 Brug af Udrulningsscript
-
-`deploy.sh` scriptet giver en interaktiv udrulningsoplevelse:
+Scriptet `deploy.sh` giver en interaktiv udrulningsoplevelse:
 
 ```bash
 # Vis hjælp
@@ -417,7 +408,7 @@ Rediger `azuredeploy.parameters.json`:
   -m premium \
   -l eastus2
 
-# Udviklingsudrulning uden multi-region
+# Udviklingsudrulning uden flere regioner
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -426,21 +417,21 @@ Rediger `azuredeploy.parameters.json`:
   --no-security
 ```
 
-### Script Funktioner
+### Scriptfunktioner
 
-- ✅ **Validering af forudsætninger** (Azure CLI, loginstatus, skabelonfiler)
-- ✅ **Ressourcegruppehåndtering** (opretter hvis den ikke findes)
-- ✅ **Skabelonvalidering** før udrulning
-- ✅ **Overvågning af fremskridt** med farvet output
-- ✅ **Visning af udrulningsoutput**
+- ✅ **Validering af forudsætninger** (Azure CLI, login-status, skabelonfiler)
+- ✅ **Håndtering af resource group** (opretter hvis den ikke findes)
+- ✅ **Validering af skabelon** før udrulning
+- ✅ **Overvågning af fremdrift** med farvet output
+- ✅ **Udrulningsoutput** vises
 - ✅ **Vejledning efter udrulning**
 
-## 📊 Overvågning af Udrulning
+## 📊 Overvågning af udrulning
 
-### Tjek Udrulningsstatus
+### Tjek udrulningsstatus
 
 ```bash
-# Liste udrulninger
+# Vis udrulninger
 az deployment group list --resource-group myResourceGroup --output table
 
 # Hent udrulningsdetaljer
@@ -448,7 +439,7 @@ az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Overvåg udrulningsfremskridt
+# Overvåg udrulningens fremdrift
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -458,38 +449,38 @@ az deployment group create \
 
 ### Udrulningsoutput
 
-Efter vellykket udrulning er følgende output tilgængelige:
+Efter en vellykket udrulning er følgende outputs tilgængelige:
 
-- **Frontend URL**: Offentlig endpoint til webgrænsefladen
-- **Router URL**: API endpoint til agent router
-- **OpenAI Endpoints**: Primære og sekundære OpenAI service endpoints
-- **Search Service**: Azure AI Search service endpoint
-- **Storage Account**: Navn på storage kontoen til dokumenter
+- **Frontend URL**: Offentligt endepunkt for webgrænsefladen
+- **Router URL**: API-endepunkt for agentrouteren
+- **OpenAI Endpoints**: Primære og sekundære OpenAI-tjenesteendepunkter
+- **Search Service**: Azure AI Search-tjenesteendepunkt
+- **Storage Account**: Navn på storage-kontoen til dokumenter
 - **Key Vault**: Navn på Key Vault (hvis aktiveret)
 - **Application Insights**: Navn på overvågningstjenesten (hvis aktiveret)
 
-## 🔧 Efter Udrulning: Næste Skridt
-> **📝 Vigtigt:** Infrastruktur er implementeret, men du skal udvikle og implementere applikationskode.
+## 🔧 Efter udrulning: Næste skridt
+> **📝 Vigtigt:** Infrastrukturen er udrullet, men du skal udvikle og implementere applikationskode.
 
-### Fase 1: Udvikling af agentapplikationer (Dit ansvar)
+### Fase 1: Udvikl agentapplikationer (dit ansvar)
 
-ARM-skabelonen opretter **tomme Container Apps** med pladsholder nginx-billeder. Du skal:
+The ARM template creates **empty Container Apps** with placeholder nginx images. You must:
 
-**Påkrævet udvikling:**
-1. **Agentimplementering** (30-40 timer)
-   - Kundeserviceagent med GPT-4o-integration
-   - Lageragent med GPT-4o-mini-integration
-   - Agent-routing logik
+**Required Development:**
+1. **Agent Implementation** (30-40 hours)
+   - Kundeserviceagent med gpt-4.1-integration
+   - Lageragent med gpt-4.1-mini-integration
+   - Routing-logik for agenter
 
-2. **Frontend-udvikling** (20-30 timer)
+2. **Frontend Development** (20-30 hours)
    - Chatgrænseflade UI (React/Vue/Angular)
-   - Funktionalitet til filupload
-   - Rendering og formatering af svar
+   - Filupload-funktionalitet
+   - Gengivelse og formatering af svar
 
-3. **Backend-tjenester** (12-16 timer)
-   - FastAPI eller Express-router
-   - Middleware til autentifikation
-   - Telemetri-integration
+3. **Backend Services** (12-16 hours)
+   - FastAPI- eller Express-router
+   - Autentificeringsmiddleware
+   - Telemetriintegration
 
 **Se:** [Arkitekturguide](../retail-scenario.md) for detaljerede implementeringsmønstre og kodeeksempler
 
@@ -498,7 +489,7 @@ ARM-skabelonen opretter **tomme Container Apps** med pladsholder nginx-billeder.
 Opret et søgeindeks, der matcher din datamodel:
 
 ```bash
-# Hent søgetjenestedetaljer
+# Hent detaljer om søgetjenesten
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -533,7 +524,7 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 - [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
 - [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Fase 3: Upload dine data (Tidsforbrug varierer)
+### Fase 3: Upload dine data (tidsforbrug varierer)
 
 Når du har produktdata og dokumenter:
 
@@ -555,7 +546,7 @@ az storage blob upload-batch \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# Eksempel: Upload enkelt fil
+# Eksempel: Upload en enkelt fil
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -575,7 +566,7 @@ az acr create \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. Byg og push agent router-billede
+# 2. Byg og push agent-router-billede
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
@@ -609,13 +600,13 @@ az containerapp update \
 ### Fase 5: Test din applikation (2-4 timer)
 
 ```bash
-# Få din applikations-URL
+# Hent din applikations-URL
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Test agentens endpoint (når din kode er implementeret)
+# Test agent-endpointet (når din kode er udrullet)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -623,7 +614,7 @@ curl -X POST "https://${ROUTER_URL}/chat" \
     "agent": "customer"
   }'
 
-# Tjek applikationslogfiler
+# Tjek applikationslogs
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -632,15 +623,15 @@ az containerapp logs show \
 
 ### Implementeringsressourcer
 
-**Arkitektur & Design:**
+**Arkitektur & design:**
 - 📖 [Komplet arkitekturguide](../retail-scenario.md) - Detaljerede implementeringsmønstre
-- 📖 [Multi-agent designmønstre](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+- 📖 [Designmønstre for multi-agent-systemer](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Kodeeksempler:**
-- 🔗 [Azure OpenAI Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG-mønster
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agentframework (C#)
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG-mønster
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agent-framework (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agentorkestrering (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent samtaler
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent-samtaler
 
 **Estimeret samlet indsats:**
 - Implementering af infrastruktur: 15-25 minutter (✅ Fuldført)
@@ -651,20 +642,20 @@ az containerapp logs show \
 
 ### Almindelige problemer
 
-#### 1. Azure OpenAI-kvote overskredet
+#### 1. Microsoft Foundry Models Quota Exceeded
 
 ```bash
-# Kontroller nuværende kvoteforbrug
+# Kontroller aktuelt kvoteforbrug
 az cognitiveservices usage list --location eastus2
 
-# Anmod om kvoteforøgelse
+# Anmod om forhøjelse af kvoten
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
-#### 2. Container Apps implementering mislykkedes
+#### 2. Container Apps Deployment Failed
 
 ```bash
 # Kontroller container-app-logfiler
@@ -679,7 +670,7 @@ az containerapp revision restart \
   --resource-group myResourceGroup
 ```
 
-#### 3. Initialisering af søgetjeneste
+#### 3. Search Service Initialization
 
 ```bash
 # Bekræft søgetjenestens status
@@ -695,33 +686,33 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
 ### Validering af implementering
 
 ```bash
-# Bekræft, at alle ressourcer er oprettet
+# Kontroller, at alle ressourcer er oprettet
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Kontroller ressourcehelbred
+# Kontroller ressourcernes tilstand
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-## 🔐 Sikkerhedsovervejelser
+## 🔐 Sikkerhedshensyn
 
 ### Nøglehåndtering
-- Alle hemmeligheder opbevares i Azure Key Vault (når aktiveret)
-- Container apps bruger administreret identitet til autentifikation
-- Lagerkonti har sikre standardindstillinger (kun HTTPS, ingen offentlig blob-adgang)
+- Alle hemmeligheder gemmes i Azure Key Vault (når aktiveret)
+- Container-apps bruger managed identity til autentificering
+- Storage-konti har sikre standardindstillinger (kun HTTPS, ingen offentlig adgang til blobs)
 
 ### Netværkssikkerhed
-- Container apps bruger intern netværk, hvor det er muligt
-- Søgetjeneste konfigureret med private endpoints
+- Container-apps bruger intern netværksforbindelse, hvor det er muligt
+- Søgetjeneste konfigureret med mulighed for private endpoints
 - Cosmos DB konfigureret med minimale nødvendige tilladelser
 
 ### RBAC-konfiguration
 ```bash
-# Tildel nødvendige roller til administreret identitet
+# Tildel nødvendige roller til den administrerede identitet
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
@@ -730,10 +721,10 @@ az role assignment create \
 
 ## 💰 Omkostningsoptimering
 
-### Omkostningsestimater (Månedligt, USD)
+### Omkostningsoverslag (månedligt, USD)
 
-| Tilstand | OpenAI | Container Apps | Search | Storage | Total Est. |
-|----------|--------|----------------|--------|---------|------------|
+| Tilstand | OpenAI | Container Apps | Search | Storage | Samlet est. |
+|------|--------|----------------|--------|---------|------------|
 | Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
@@ -741,7 +732,7 @@ az role assignment create \
 ### Omkostningsovervågning
 
 ```bash
-# Opsæt budgetadvarsler
+# Opsæt budgetalarmer
 az consumption budget create \
   --account-name <subscription-id> \
   --budget-name "retail-budget" \
@@ -754,7 +745,7 @@ az consumption budget create \
 ## 🔄 Opdateringer og vedligeholdelse
 
 ### Skabelonopdateringer
-- Versionskontroller ARM-skabelonfilerne
+- Versionsstyring af ARM-skabelonfilerne
 - Test ændringer i udviklingsmiljøet først
 - Brug inkrementel implementeringstilstand til opdateringer
 
@@ -769,9 +760,9 @@ az deployment group create \
 ```
 
 ### Backup og gendannelse
-- Cosmos DB automatisk backup aktiveret
+- Cosmos DB automatisk sikkerhedskopiering aktiveret
 - Key Vault soft delete aktiveret
-- Container app-revisioner opretholdt til rollback
+- Container-app revisioner opretholdes for rollback
 
 ## 📞 Support
 
@@ -781,13 +772,13 @@ az deployment group create \
 
 ---
 
-**⚡ Klar til at implementere din multi-agent løsning?**
+**⚡ Klar til at implementere din multi-agent-løsning?**
 
 Start med: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal det bemærkes, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

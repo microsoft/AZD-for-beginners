@@ -1,64 +1,64 @@
 # Dit første projekt - Praktisk vejledning
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
 - **📖 Nuværende kapitel**: Kapitel 1 - Grundlag & Hurtig start
-- **⬅️ Forrige**: [Installation og opsætning](installation.md)
-- **➡️ Næste**: [Konfiguration](configuration.md)
-- **🚀 Næste kapitel**: [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **⬅️ Forrige**: [Installation & Setup](installation.md)
+- **➡️ Næste**: [Configuration](configuration.md)
+- **🚀 Næste kapitel**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduktion
 
-Velkommen til dit første Azure Developer CLI-projekt! Denne omfattende praktiske vejledning giver en komplet gennemgang af oprettelse, udrulning og administration af en full-stack-applikation på Azure ved hjælp af azd. Du arbejder med en rigtig todo-applikation, der inkluderer en React-frontend, Node.js API-backend og MongoDB-database.
+Velkommen til dit første Azure Developer CLI-projekt! Denne omfattende praktiske vejledning giver en komplet gennemgang af at oprette, implementere og administrere en full-stack-applikation på Azure ved hjælp af azd. Du arbejder med en rigtig todo-applikation, der inkluderer et React-frontend, Node.js API-backend og MongoDB-database.
 
 ## Læringsmål
 
-Når du har gennemført denne vejledning, vil du:
-- Mestre azd-projektinitialiseringsworkflowet ved hjælp af skabeloner
+Ved at gennemføre denne vejledning vil du:
+- Mestre azd-projektinitialiseringsarbejdsgangen ved hjælp af skabeloner
 - Forstå Azure Developer CLI-projektstruktur og konfigurationsfiler
 - Udføre komplet applikationsudrulning til Azure med infrastrukturprovisionering
-- Implementere opdaterings- og genudrulningsstrategier for applikationen
+- Implementere opdaterings- og genudrulningsstrategier for applikationer
 - Administrere flere miljøer til udvikling og staging
 - Anvende ressourcerensning og omkostningsstyringspraksis
 
 ## Læringsudbytte
 
-Når du er færdig, vil du være i stand til at:
-- Initialisere og konfigurere azd-projekter fra skabeloner uafhængigt
-- Navigere i og ændre azd-projektstrukturer effektivt
+Efter gennemførelse vil du kunne:
+- Initialisere og konfigurere azd-projekter fra skabeloner selvstændigt
+- Navigere og ændre azd-projektstrukturer effektivt
 - Udrulle full-stack-applikationer til Azure med enkeltkommandoer
-- Fejlfinde almindelige udrulningsproblemer og godkendelsesproblemer
+- Fejlfinde almindelige udrulningsproblemer og autentificeringsproblemer
 - Administrere flere Azure-miljøer til forskellige udrulningsstadier
-- Implementere kontinuerlige udrulnings-workflows for applikationsopdateringer
+- Implementere kontinuerlige udrulningsarbejdsgange til applikationsopdateringer
 
 ## Kom godt i gang
 
-### Forudsætninger
-- ✅ Azure Developer CLI installeret ([Installationsvejledning](installation.md))
-- ✅ Azure CLI installeret og godkendt
+### Tjekliste for forudsætninger
+- ✅ Azure Developer CLI installeret ([Installation Guide](installation.md))
+- ✅ Azure CLI installeret og autentificeret
 - ✅ Git installeret på dit system
 - ✅ Node.js 16+ (til denne vejledning)
-- ✅ Visual Studio Code (anbefalet)
+- ✅ Visual Studio Code (anbefales)
 
 ### Bekræft din opsætning
 ```bash
 # Kontroller azd-installationen
 azd version
 ```
-### Bekræft Azure-godkendelse
+### Bekræft Azure-autentificering
 
 ```bash
 az account show
 ```
 
-### Tjek Node.js-version
+### Kontroller Node.js-version
 ```bash
 node --version
 ```
 
 ## Trin 1: Vælg og initialiser en skabelon
 
-Lad os starte med en populær todo-applikationsskabelon, der inkluderer en React-frontend og en Node.js API-backend.
+Lad os starte med en populær todo-applikationsskabelon, der inkluderer et React-frontend og Node.js API-backend.
 
 ```bash
 # Gennemse tilgængelige skabeloner
@@ -69,7 +69,7 @@ mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Følg anvisningerne:
+# Følg instruktionerne:
 # - Indtast et miljønavn: "dev"
 # - Vælg et abonnement (hvis du har flere)
 # - Vælg en region: "East US 2" (eller din foretrukne region)
@@ -77,13 +77,13 @@ azd init --template todo-nodejs-mongo
 
 ### Hvad skete der lige?
 - Downloadede skabelonkoden til din lokale mappe
-- Oprettede en `azure.yaml` fil med servicedefinitioner
-- Opsatte infrastrukturkode i `infra/`-mappen
+- Oprettede en `azure.yaml`-fil med servicedefinitioner
+- Konfigurerede infrastrukturkode i `infra/`-mappen
 - Oprettede en miljøkonfiguration
 
 ## Trin 2: Undersøg projektstrukturen
 
-Lad os gennemgå, hvad azd oprettede for os:
+Lad os se nærmere på, hvad azd oprettede for os:
 
 ```bash
 # Vis projektstrukturen
@@ -92,7 +92,7 @@ tree /f   # Windows
 find . -type f | head -20   # macOS/Linux
 ```
 
-Du bør se:
+Du skulle gerne se:
 ```
 my-first-azd-app/
 ├── .azd/
@@ -119,17 +119,17 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Vigtige filer at forstå
+### Nøglefiler at forstå
 
 **azure.yaml** - Hjertet i dit azd-projekt:
 ```bash
-# Vis projektkonfigurationen
+# Se projektkonfigurationen
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Infrastrukturdefinition:
 ```bash
-# Se infrastrukturkoden
+# Vis infrastrukturkoden
 head -30 infra/main.bicep
 ```
 
@@ -143,7 +143,7 @@ Før udrulning kan du tilpasse applikationen:
 code src/web/src/App.tsx
 ```
 
-Foretag en enkel ændring:
+Lav en enkel ændring:
 ```typescript
 // Find titlen og ændr den
 <h1>My Awesome Todo App</h1>
@@ -160,7 +160,7 @@ azd env get-values
 
 ## Trin 4: Udrul til Azure
 
-Nu til den spændende del — udrul alt til Azure!
+Nu til den spændende del - udrul alt til Azure!
 
 ```bash
 # Udrul infrastruktur og applikation
@@ -175,7 +175,7 @@ azd up
 
 ### Hvad sker der under udrulningen?
 
-Kommandoen `azd up` udfører disse trin:
+`azd up`-kommandoen udfører disse trin:
 1. **Provision** (`azd provision`) - Opretter Azure-ressourcer
 2. **Package** - Bygger din applikationskode
 3. **Deploy** (`azd deploy`) - Udruller kode til Azure-ressourcer
@@ -196,7 +196,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Trin 5: Test din applikation
 
 ### Få adgang til din applikation
-Klik på URL'en, der blev vist i udrulningsoutputtet, eller hent den når som helst:
+Klik på den URL, der er angivet i udrulningsoutputtet, eller hent den når som helst:
 ```bash
 # Hent applikationens endepunkter
 azd show
@@ -206,8 +206,8 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Test Todo-appen
-1. **Tilføj et todo-element** - Klik "Add Todo" og indtast en opgave
-2. **Marker som fuldført** - Sæt hak ved fuldførte emner
+1. **Tilføj en todo-post** - Klik på "Add Todo" og indtast en opgave
+2. **Markér som færdig** - Sæt kryds ved gennemførte elementer
 3. **Slet elementer** - Fjern todos, du ikke længere har brug for
 
 ### Overvåg din applikation
@@ -218,23 +218,23 @@ azd monitor
 # Vis applikationslogfiler
 azd monitor --logs
 
-# Vis målinger i realtid
+# Vis live-målinger
 azd monitor --live
 ```
 
-## Trin 6: Foretag ændringer og udrul igen
+## Trin 6: Foretag ændringer og genudrul
 
 Lad os lave en ændring og se, hvor nemt det er at opdatere:
 
-### Ændr API'en
+### Rediger API'en
 ```bash
 # Rediger API-koden
 code src/api/src/routes/lists.js
 ```
 
-Tilføj en brugerdefineret respons-header:
+Tilføj en brugerdefineret svarheader:
 ```javascript
-// Find en route-handler og tilføj:
+// Find en rutehåndterer og tilføj:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
@@ -254,28 +254,28 @@ Opret et staging-miljø for at teste ændringer før produktion:
 # Opret et nyt staging-miljø
 azd env new staging
 
-# Udrul til staging-miljø
+# Udrul til staging
 azd up
 
-# Skift tilbage til dev-miljø
+# Skift tilbage til udviklingsmiljøet
 azd env select dev
 
 # Vis alle miljøer
 azd env list
 ```
 
-### Miljøsammenligning
+### Sammenligning af miljøer
 ```bash
 # Vis udviklingsmiljø
 azd env select dev
 azd show
 
-# Vis staging-miljø
+# Vis stagingmiljø
 azd env select staging
 azd show
 ```
 
-## Trin 8: Ryd op i ressourcer
+## Trin 8: Ryd op i ressourcerne
 
 Når du er færdig med at eksperimentere, ryd op for at undgå løbende omkostninger:
 
@@ -283,7 +283,7 @@ Når du er færdig med at eksperimentere, ryd op for at undgå løbende omkostni
 # Slet alle Azure-ressourcer for det aktuelle miljø
 azd down
 
-# Tving sletning uden bekræftelse og fjern blødt slettede ressourcer permanent
+# Tving sletning uden bekræftelse og permanent sletning af blødslettede ressourcer
 azd down --force --purge
 
 # Slet et specifikt miljø
@@ -291,23 +291,43 @@ azd env select staging
 azd down --force --purge
 ```
 
+## Klassisk app vs. AI-drevet app: Samme arbejdsgang
+
+Du har lige udrullet en traditionel webapplikation. Men hvad hvis du ønskede at udrulle en AI-drevet app i stedet—f.eks. en chatapplikation understøttet af Microsoft Foundry Models?
+
+Den gode nyhed: **arbejdsgangen er identisk.**
+
+| Trin | Klassisk Todo-app | AI Chat-app |
+|------|-------------------|-------------|
+| Initialiser | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Autentificer | `azd auth login` | `azd auth login` |
+| Udrul | `azd up` | `azd up` |
+| Overvåg | `azd monitor` | `azd monitor` |
+| Ryd op | `azd down --force --purge` | `azd down --force --purge` |
+
+Den eneste forskel er den **skabelon**, du starter fra. En AI-skabelon inkluderer yderligere infrastruktur (som en Microsoft Foundry Models-ressource eller et AI Search-indeks), men azd håndterer alt dette for dig. Du behøver ikke lære nye kommandoer, tage et andet værktøj i brug eller ændre den måde, du tænker på ved udrulning.
+
+Dette er kerneprincippet for azd: **én arbejdsgang, enhver arbejdsopgave.** De færdigheder, du øvede i denne vejledning—initialisering, udrulning, overvågning, genudrulning og oprydning—gælder lige så godt for AI-applikationer og agenter.
+
+---
+
 ## Hvad du har lært
 
-Tillykke! Du har succesfuldt:
+Tillykke! Du har med succes:
 - ✅ Initialiseret et azd-projekt fra en skabelon
-- ✅ Undersøgt projektstrukturen og nøglefiler
+- ✅ Undersøgt projektstrukturen og nøglefilerne
 - ✅ Udrullet en full-stack-applikation til Azure
 - ✅ Foretaget kodeændringer og genudrullet
 - ✅ Administreret flere miljøer
-- ✅ Ryddet op i ressourcer
+- ✅ Ryddet op i ressourcerne
 
-## 🎯 Færdighedsvalideringsøvelser
+## 🎯 Øvelser til færdighedsvalidering
 
 ### Øvelse 1: Udrul en anden skabelon (15 minutter)
-**Mål**: Demonstrer mestring af azd init og udrulningsworkflow
+**Mål**: Demonstrere mestring af azd init og udrulningsarbejdsgangen
 
 ```bash
-# Prøv Python + MongoDB-stak
+# Prøv Python + MongoDB-stakken
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
@@ -320,13 +340,13 @@ curl $(azd show --output json | jq -r '.services.web.endpoint')
 azd down --force --purge
 ```
 
-**Succeskriterier:**
+**Succes-kriterier:**
 - [ ] Applikationen udrulles uden fejl
-- [ ] Kan få adgang til applikationens URL i browseren
+- [ ] Kan få adgang til applikations-URL i browseren
 - [ ] Applikationen fungerer korrekt (tilføj/fjern todos)
-- [ ] Ryddet op i alle ressourcer succesfuldt
+- [ ] Har med succes ryddet op i alle ressourcer
 
-### Øvelse 2: Tilpas konfiguration (20 minutter)
+### Øvelse 2: Tilpas konfigurationen (20 minutter)
 **Mål**: Øv konfiguration af miljøvariabler
 
 ```bash
@@ -347,13 +367,13 @@ azd env get-values | grep APP_TITLE
 azd up
 ```
 
-**Succeskriterier:**
-- [ ] Tilpasset miljø oprettet succesfuldt
-- [ ] Miljøvariabler sat og hentbare
-- [ ] Applikationen udrulles med brugerdefineret konfiguration
-- [ ] Kan verificere brugerdefinerede indstillinger i den udrullede app
+**Succes-kriterier:**
+- [ ] Tilpasset miljø oprettet med succes
+- [ ] Miljøvariabler sat og kan hentes
+- [ ] Applikationen udrulles med tilpasset konfiguration
+- [ ] Kan verificere tilpassede indstillinger i den udrullede app
 
-### Øvelse 3: Multi-miljø workflow (25 minutter)
+### Øvelse 3: Arbejdsgang med flere miljøer (25 minutter)
 **Mål**: Mestre miljøstyring og udrulningsstrategier
 
 ```bash
@@ -363,7 +383,7 @@ azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Noter udviklings-URL
+# Notér udviklings-URL
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
@@ -373,73 +393,73 @@ azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Noter staging-URL
+# Notér staging-URL
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
-# Sammenlign miljøer
+# Sammenlign miljøerne
 azd env list
 
 # Test begge miljøer
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
-# Ryd begge miljøer op
+# Ryd begge op
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
-**Succeskriterier:**
+**Succes-kriterier:**
 - [ ] To miljøer oprettet med forskellige konfigurationer
-- [ ] Begge miljøer udrullet succesfuldt
+- [ ] Begge miljøer udrullet med succes
 - [ ] Kan skifte mellem miljøer ved hjælp af `azd env select`
-- [ ] Miljøvariabler adskiller sig mellem miljøerne
-- [ ] Ryddet op i begge miljøer succesfuldt
+- [ ] Miljøvariablerne er forskellige mellem miljøerne
+- [ ] Har med succes ryddet op i begge miljøer
 
 ## 📊 Din fremgang
 
 **Tidsforbrug**: ~60-90 minutter  
-**Erhvervede færdigheder**:
+**Tilegnede færdigheder**:
 - ✅ Skabelonbaseret projektinitialisering
-- ✅ Azure-ressourceprovisionering
-- ✅ Applikationsudrulnings-workflows
+- ✅ Provisionering af Azure-ressourcer
+- ✅ Udrulningsarbejdsgange for applikationer
 - ✅ Miljøstyring
 - ✅ Konfigurationsstyring
-- ✅ Rensning af ressourcer og omkostningsstyring
+- ✅ Rydning af ressourcer og omkostningsstyring
 
-**Næste niveau**: Du er klar til [Konfigurationsvejledning](configuration.md) for at lære avancerede konfigurationsmønstre!
+**Næste niveau**: Du er klar til [Configuration Guide](configuration.md) for at lære avancerede konfigurationsmønstre!
 
-## Fejlfinding - almindelige problemer
+## Fejlfinding af almindelige problemer
 
-### Godkendelsesfejl
+### Autentificeringsfejl
 ```bash
-# Godkend igen med Azure
+# Genautentificer med Azure
 az login
 
-# Bekræft adgang til abonnementet
+# Bekræft adgang til abonnement
 az account show
 ```
 
 ### Udrulningsfejl
 ```bash
-# Aktivér debug-logning
+# Aktivér fejlsøgningslogning
 export AZD_DEBUG=true
 azd up --debug
 
-# Se applikationslogfiler i Azure
+# Vis applikationslogfiler i Azure
 azd monitor --logs
 
 # For Container Apps, brug Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### Konflikter i ressourcenavne
+### Konflikter i ressource-navne
 ```bash
 # Brug et unikt miljønavn
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Port-/Netværksproblemer
+### Port-/netværksproblemer
 ```bash
 # Kontroller, om porte er tilgængelige
 netstat -an | grep :3000
@@ -448,18 +468,18 @@ netstat -an | grep :3100
 
 ## Næste skridt
 
-Nu hvor du har gennemført dit første projekt, kan du udforske disse avancerede emner:
+Nu hvor du har gennemført dit første projekt, udforsk disse avancerede emner:
 
-### 1. Tilpas infrastruktur
-- [Infrastruktur som kode](../chapter-04-infrastructure/provisioning.md)
-- [Tilføj databaser, storage og andre services](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 1. Tilpas infrastrukturen
+- [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
+- [Tilføj databaser, storage og andre tjenester](../chapter-04-infrastructure/provisioning.md#adding-services)
 
 ### 2. Opsæt CI/CD
-- [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md) - Fuldstændige CI/CD-workflows
-- [Dokumentation for Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipelinekonfiguration
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Komplette CI/CD-arbejdsgange
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipelinekonfiguration
 
-### 3. Bedste praksis for produktion
-- [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md) - Sikkerhed, ydeevne og overvågning
+### 3. Bedste praksis til produktion
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Sikkerhed, ydeevne og overvågning
 
 ### 4. Udforsk flere skabeloner
 ```bash
@@ -476,38 +496,38 @@ azd init --template todo-java-mongo
 
 ## Yderligere ressourcer
 
-### Læringsmaterialer
+### Læringsmateriale
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Fællesskab & support
+### Fællesskab og support
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Skabeloner & eksempler
+### Skabeloner og eksempler
 - [Official Template Gallery](https://azure.github.io/awesome-azd/)
 - [Community Templates](https://github.com/Azure-Samples/azd-templates)
 - [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**Tillykke med at have gennemført dit første azd-projekt!** Du er nu klar til at bygge og udrulle fantastiske applikationer på Azure med tillid.
+Tillykke med at have gennemført dit første azd-projekt! Du er nu klar til at bygge og udrulle fantastiske applikationer på Azure med selvtillid.
 
 ---
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
 - **📖 Nuværende kapitel**: Kapitel 1 - Grundlag & Hurtig start
-- **⬅️ Forrige**: [Installation og opsætning](installation.md)
-- **➡️ Næste**: [Konfiguration](configuration.md)
-- **🚀 Næste kapitel**: [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Næste lektion**: [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md)
+- **⬅️ Forrige**: [Installation & Setup](installation.md)
+- **➡️ Næste**: [Configuration](configuration.md)
+- **🚀 Næste kapitel**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **Næste lektion**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets originalsprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,21 +1,21 @@
 # Luku 8: Tuotanto- ja yritysmallit
 
-**📚 Course**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2-3 tuntia | **⭐ Vaikeustaso**: Edistynyt
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2–3 tuntia | **⭐ Monimutkaisuus**: Edistynyt
 
 ---
 
 ## Yleiskatsaus
 
-Tämä luku käsittelee yritysvalmiita käyttöönotto-malleja, turvallisuuden koventamista, valvontaa ja kustannusten optimointia tuotannon tekoälykuormituksille.
+Tämä luku käsittelee yritystason käyttöönoton malleja, turvallisuuden koventamista, valvontaa ja kustannusten optimointia tuotannon tekoälykuormille.
 
 ## Oppimistavoitteet
 
-Suorittamalla tämän luvun osaat:
+Tämän luvun suorittamisen jälkeen osaat:
 - Ota käyttöön monialueisia kestäviä sovelluksia
-- Toteuttaa yritystason turvallisuusmalleja
-- Konfiguroida kattavan valvonnan
-- Optimoida kustannuksia laajassa mittakaavassa
-- Määrittää CI/CD-putket AZD:llä
+- Ota käyttöön yritystason turvallisuusmallit
+- Määritä kattava valvonta
+- Optimoi kustannukset laajassa mittakaavassa
+- Ota käyttöön CI/CD-putkistot AZD:llä
 
 ---
 
@@ -23,45 +23,38 @@ Suorittamalla tämän luvun osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Tuotannon tekoälykäytännöt](production-ai-practices.md) | Yritystason käyttöönotto-mallit | 90 min |
+| 1 | [Production AI Practices](production-ai-practices.md) | Yritystason käyttöönoton mallit | 90 min |
 
 ---
 
-## 🚀 Tuotantotarkistuslista
+## 🚀 Tuotannon tarkistuslista
 
-- [ ] Monialueinen käyttöönotto kestävyyden takaamiseksi
-- [ ] Hallinnoitu identiteetti todennukseen (ei avaimia)
+- [ ] Monialueinen käyttöönotto kestävyyttä varten
+- [ ] Hallitut identiteetit todennusta varten (ei avaimia)
 - [ ] Application Insights valvontaan
-- [ ] Kustannusbudjetit ja hälytykset määritetty
+- [ ] Kustannusbudjetit ja hälytykset konfiguroitu
 - [ ] Turvallisuusskannaus käytössä
-- [ ] CI/CD-putken integrointi
-- [ ] Häiriönsieto- ja toipumissuunnitelma
+- [ ] CI/CD-putkiston integrointi
+- [ ] Kriisipalautussuunnitelma
 
 ---
 
 ## 🏗️ Arkkitehtuurimallit
 
-### Malli 1: Mikropalveluiden tekoäly
+### Malli 1: Mikropalveluinen tekoäly
 
+```mermaid
+graph LR
+    Gateway[API-yhdyskäytävä] --> AI[Tekoälypalvelu] --> Models[Microsoft Foundry -mallit]
+    Gateway --> Auth[Todennuspalvelu]
+    AI --> Data[Tietovarasto]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Malli 2: Tapahtumapohjainen tekoäly
 
+```mermaid
+graph LR
+    EventGrid[Tapahtumaruudukko] --> Functions[Funktiot] --> Pipeline[Tekoälyputki]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Turvallisuuden parhaat käytännöt
@@ -85,15 +78,15 @@ properties: {
 
 ## 💰 Kustannusten optimointi
 
-| Strategia | Säästöt |
+| Strategia | Säästö |
 |----------|---------|
 | Skaalaa nollaan (Container Apps) | 60-80% |
-| Käytä kulutuspohjaisia tasoja kehityksessä | 50-70% |
+| Käytä kulutuskerroksia kehityksessä | 50-70% |
 | Aikataulutettu skaalaus | 30-50% |
 | Varattu kapasiteetti | 20-40% |
 
 ```bash
-# Aseta budjetti-ilmoitukset
+# Aseta budjettihälytykset
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -106,7 +99,7 @@ az consumption budget create \
 ## 📊 Valvonnan asetukset
 
 ```bash
-# Suoratoista lokeja
+# Näytä lokit reaaliajassa
 azd monitor --logs
 
 # Tarkista Application Insights
@@ -122,21 +115,21 @@ az monitor metrics list --resource <resource-id>
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 7: Vianmääritys](../chapter-07-troubleshooting/README.md) |
-| **Kurssi valmis** | [Kurssin etusivu](../../README.md) |
+| **Edellinen** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Kurssi valmis** | [Course Home](../../README.md) |
 
 ---
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [AI-agenttien opas](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Moni-agenttiset ratkaisut](../chapter-05-multi-agent/README.md)
-- [Mikropalvelu-esimerkki](../../examples/microservices/README.md)
+- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- [Microservices Example](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua Co-op Translator (https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä on pidettävä määräävänä lähteenä. Tärkeiden tietojen osalta suosittelemme ammattimaisen kääntäjän tekemää käännöstä. Emme ole vastuussa mistään tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää määräävänä lähteenä. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,18 +1,18 @@
-# Kapittel 8: Produksjon og enterprise-mønstre
+# Kapittel 8: Produksjon og bedriftsmønstre
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 2-3 timer | **⭐ Kompleksitet**: Avansert
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 2-3 timer | **⭐ Vanskelighetsgrad**: Avansert
 
 ---
 
 ## Oversikt
 
-Dette kapitlet dekker enterprise-klare distribusjonsmønstre, sikkerhetsherding, overvåking og kostnadsoptimalisering for produksjons-AI arbeidsmengder.
+Dette kapittelet dekker bedriftsklare distribusjonsmønstre, sikkerhetsforsterkning, overvåking og kostnadsoptimalisering for produksjons-ALlaster.
 
 ## Læringsmål
 
-Ved å fullføre dette kapitlet vil du:
-- Distribuere flerregions robuste applikasjoner
-- Implementere sikkerhetsmønstre for enterprise
+Etter å ha fullført dette kapittelet vil du:
+- Distribuere robuste applikasjoner på tvers av regioner
+- Implementere sikkerhetsmønstre for bedriftsbruk
 - Konfigurere omfattende overvåking
 - Optimalisere kostnader i stor skala
 - Sette opp CI/CD-pipelines med AZD
@@ -23,45 +23,38 @@ Ved å fullføre dette kapitlet vil du:
 
 | # | Leksjon | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Produksjon AI-praksis](production-ai-practices.md) | Distribusjonsmønstre for enterprise | 90 min |
+| 1 | [Produksjonspraksis for AI](production-ai-practices.md) | Bedriftsdistribusjonsmønstre | 90 min |
 
 ---
 
-## 🚀 Produksjonssjekkliste
+## 🚀 Sjekkliste for produksjon
 
-- [ ] Flerregionsdistribusjon for høy tilgjengelighet
+- [ ] Distribusjon i flere regioner for robusthet
 - [ ] Administrert identitet for autentisering (ingen nøkler)
 - [ ] Application Insights for overvåking
 - [ ] Kostnadsbudsjetter og varsler konfigurert
 - [ ] Sikkerhetsskanning aktivert
 - [ ] Integrasjon med CI/CD-pipeline
-- [ ] Plan for katastrofegjenoppretting
+- [ ] Katastrofegjenopprettingsplan
 
 ---
 
 ## 🏗️ Arkitekturmønstre
 
-### Mønster 1: Mikrotjenester for AI
+### Mønster 1: Mikrotjenester AI
 
+```mermaid
+graph LR
+    Gateway[API Gateway] --> AI[AI-tjeneste] --> Models[Microsoft Foundry-modeller]
+    Gateway --> Auth[Autentiseringstjeneste]
+    AI --> Data[Datalager]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Mønster 2: Hendelsesdrevet AI
 
+```mermaid
+graph LR
+    EventGrid[Hendelsesnett] --> Functions[Funksjoner] --> Pipeline[AI-pipeline]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Beste sikkerhetspraksiser
@@ -85,15 +78,15 @@ properties: {
 
 ## 💰 Kostnadsoptimalisering
 
-| Strategi | Besparelser |
-|----------|-------------|
-| Skaler til null (Container Apps) | 60-80% |
-| Bruk forbruksnivåer for utvikling | 50-70% |
-| Planlagt skalering | 30-50% |
-| Reservert kapasitet | 20-40% |
+| Strategi | Besparelse |
+|----------|---------|
+| Skaler til null (Container Apps) | 60-80 % |
+| Bruk forbruksnivåer for dev | 50-70 % |
+| Planlagt skalering | 30-50 % |
+| Reservert kapasitet | 20-40 % |
 
 ```bash
-# Angi budsjettvarsler
+# Sett budsjettvarsler
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,10 +96,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Overvåkingsoppsett
+## 📊 Oppsett for overvåking
 
 ```bash
-# Strømme logger
+# Strøm logger
 azd monitor --logs
 
 # Sjekk Application Insights
@@ -123,20 +116,20 @@ az monitor metrics list --resource <resource-id>
 | Retning | Kapittel |
 |-----------|---------|
 | **Forrige** | [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/README.md) |
-| **Kurs fullført** | [Kursoversikt](../../README.md) |
+| **Kurs fullført** | [Kurs Hjem](../../README.md) |
 
 ---
 
 ## 📖 Relaterte ressurser
 
-- [Guide til AI-agenter](../chapter-02-ai-development/agents.md)
+- [AI-agenter guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-agentløsninger](../chapter-05-multi-agent/README.md)
-- [Mikrotjenesteksempel](../../examples/microservices/README.md)
+- [Løsninger med flere agenter](../chapter-05-multi-agent/README.md)
+- [Eksempel på mikrotjenester](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten Co-op Translator (https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell, menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:  
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på det opprinnelige språket bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår fra bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

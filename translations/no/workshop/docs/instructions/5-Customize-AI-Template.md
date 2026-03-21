@@ -1,24 +1,24 @@
-# 5. Tilpass en mal
+# 5. Tilpass en Mal
 
-!!! tip "PÅ SLUTTEN AV DETTE MODULEN VIL DU KUNNE"
+!!! tip "ETTER DETTE MODULEN VIL DU KUNNE"
 
-    - [ ] Utforsket standard AI Agent-funksjoner
-    - [ ] Lagt til AI Search med din egen indeks
-    - [ ] Aktivert og analysert sporing-metrikker
-    - [ ] Kjørt en evalueringsrunde
-    - [ ] Kjørt en red-teaming skanning
-    - [ ] **Lab 5: Bygget en tilpasningsplan**
+    - [ ] Utforsket standard AI-agentfunksjoner
+    - [ ] Lagt til AI-søk med din egen indeks
+    - [ ] Aktivert og analysert sporingmetrics
+    - [ ] Utført en evalueringskjøring
+    - [ ] Utført en red-teaming-skanning
+    - [ ] **Lab 5: Bygget en tilpasningsplan** 
 
 ---
 
-## 5.1 AI Agent-funksjoner
+## 5.1 AI-agentfunksjoner
 
 !!! success "Vi fullførte dette i Lab 01"
 
-- **File Search**: OpenAIs innebygde filsøking for kunnskapsinnhenting
-- **Referanser**: Automatisk kildehenvisning i svar
+- **Fil-søk**: OpenAIs innebygde filsøk for kunnskapsinnhenting
+- **Siteringer**: Automatisk kildehenvisning i svar
 - **Tilpassbare instruksjoner**: Endre agentens oppførsel og personlighet
-- **Verktøyintegrasjon**: Utvidbart verktøysystem for egendefinerte funksjoner
+- **Verktøyintegrasjon**: Utvidbart verktøysystem for egne funksjoner
 
 ---
 
@@ -40,22 +40,22 @@
 
 ---
 
-**OpenAI File Search (Standard):**
+**OpenAI Fil-søk (Standard):**
 
-- Innebygget i Foundry Agents
+- Innebygd i Foundry-agenter
 - Automatisk dokumentbehandling og indeksering
 - Ingen ekstra konfigurasjon nødvendig
 
 **Azure AI Search (Valgfritt):**
 
 - Hybrid semantisk og vektorsøk
-- Tilpasset indeksadministrasjon
+- Egen indekshåndtering
 - Avanserte søkefunksjoner
 - Krever `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Sporing og overvåking](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Sporing og Overvåking](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
 !!! task "For å fullføre dette må vi gjøre endringer og distribuere på nytt"    
     
@@ -67,8 +67,8 @@
 **Sporing:**
 
 - OpenTelemetry-integrasjon
-- Forespørsels-/svarsregistrering
-- Ytelsesmetrikker
+- Forespørsels-/responssporing
+- Ytelsesmetrikk
 - Tilgjengelig i Microsoft Foundry-portalen
 
 **Logging:**
@@ -79,25 +79,25 @@
 
 ---
 
-## 5.4 [Agent-evaluering](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agent Evaluering](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Lokal evaluering:**
 
-- Innebygde evalueringsverktøy for kvalitetsvurdering
+- Innebygde vurderingsverktøy for kvalitetsvurdering
 - Egendefinerte evalueringsskripter
-- Ytelsesbenchmarking
+- Ytelsesmåling
 
 **Kontinuerlig overvåking:**
 
-- Automatisk evaluering av live-interaksjoner
-- Sporing av kvalitetsmetrikker
+- Automatisk evaluering av levende interaksjoner
+- Kvalitetsmetrikkeroppfølging
 - Oppdagelse av ytelsesregresjon
 
 **CI/CD-integrasjon:**
 
 - GitHub Actions workflow
-- Automatisert testing og evaluering
-- Statistisk sammenligningstesting
+- Automatisk testing og evaluering
+- Statistisk sammenligningstest
 
 ---
 
@@ -105,43 +105,45 @@
 
 **AI Red Teaming:**
 
-- Automatisert sikkerhetsskanning
-- Risikovurdering for AI-systemer
-- Sikkerhetsevaluering på tvers av flere kategorier
+- Automatisk sikkerhetsskanning
+- Risikoanalyse for AI-systemer
+- Sikkerhetsevaluering på flere områder
 
 **Autentisering:**
 
-- Managed Identity for Azure-tjenester
+- Administrert identitet for Azure-tjenester
 - Valgfri Azure App Service-autentisering
 - Basic auth fallback for utvikling
 
-!!! quote "PÅ SLUTTEN AV DENNE LABBEN BØR DU HA"
-    - [ ] Definert dine scenario-krav
+
+
+!!! quote "ETTER DENNE LABBEN SKAL DU HA"
+    - [ ] Definert dine scenariokrav
     - [ ] Tilpasset miljøvariabler (konfig)
     - [ ] Tilpasset agentinstruksjoner (oppgave)
     - [ ] Distribuert den tilpassede malen (app)
-    - [ ] Fullført oppgaver etter distribusjon (manuell)
-    - [ ] Kjørt en test-evaluering
+    - [ ] Fullført oppgaver etter distribusjon (manuelt)
+    - [ ] Kjørt en testevaluering
 
-Dette eksempelet demonstrerer tilpasning av malen for et bedriftsbruk innen detaljhandel med to spesialiserte agenter og flere modellutplasseringer.
+Dette eksempelet viser hvordan man tilpasser malen for en bedriftsforhandlerbruk med to spesialiserte agenter og flere modellutrullinger.
 
 ---
 
 ## 5.6 Tilpass den for deg!
 
-### 5.6.1. Scenario-krav
+### 5.6.1. Scenariokrav
 
-#### **Agentutplasseringer:**
+#### **Agentdistribusjoner:** 
 
    - Shopper Agent: Hjelper kunder med å finne og sammenligne produkter
-   - Loyalty Agent: Håndterer kundelojalitetsbelønninger og kampanjer
+   - Loyalty Agent: Administrerer kundelojalitet og kampanjer
 
-#### **Modellutplasseringer:**
+#### **Modelldistribusjoner:**
 
    - `gpt-4.1`: Primær chatmodell
    - `o3`: Resonneringsmodell for komplekse spørsmål
    - `gpt-4.1-nano`: Lettvektsmodell for enkle interaksjoner
-   - `text-embedding-3-large`: Høy-kvalitets embeddings for søk
+   - `text-embedding-3-large`: Høykvalitets embedding for søk
 
 #### **Funksjoner:**
 
@@ -155,14 +157,14 @@ Dette eksempelet demonstrerer tilpasning av malen for et bedriftsbruk innen deta
 ### 5.6.2 Scenarioimplementering
 
 
-#### 5.6.2.1. Konfigurasjon før distribusjon
+#### 5.6.2.1. Forhåndskonfigurasjon før distribusjon
 
-Lag et oppsettsskript (`setup-retail.sh`)
+Lag et oppsettskript (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Angi miljønavn
+# Sett miljønavn
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
 # Konfigurer region (velg basert på modelltilgjengelighet)
@@ -173,18 +175,18 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfigurer primær chatmodell (gpt-4o som nærmest tilgjengelig til gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Konfigurer primær chatmodell (gpt-4.1 som nærmeste tilgjengelige til gpt-4.1)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfigurer innebyggingsmodell for forbedret søk
+# Konfigurer innebygget modell for forbedret søk
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Angi agentnavn (vil opprette første agent)
+# Sett agentnavn (vil opprette første agent)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # Konfigurer søkeindeks
@@ -278,7 +280,7 @@ echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -293,11 +295,11 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Fang distribusjonsutdata
+# Ta vare på distribusjonsutdata
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Hent nettapplikasjons-URL
+# Hent webapp-URLen
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
@@ -335,7 +337,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instruksjoner for manuell konfigurasjon
+# Instruksjoner for manuell konfigurering
 echo "
 🤖 Agent Configuration:
 
@@ -385,11 +387,11 @@ Lag `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Bekreft at miljøvariabler er satt
+# Sjekk at miljøvariabler er satt
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test tilgjengeligheten til webapplikasjonen
+# Test tilgjengelighet for nettapplikasjon
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -433,7 +435,7 @@ Etter å ha fulgt denne implementeringsveiledningen vil du ha:
 
 1. **Distribuert infrastruktur:**
 
-      - Microsoft Foundry-prosjekt med modellutplasseringer
+      - Microsoft Foundry-prosjekt med modellutrullinger
       - Container Apps som hoster webapplikasjonen
       - AI Search-tjeneste for produktkatalog
       - Application Insights for overvåking
@@ -441,13 +443,13 @@ Etter å ha fulgt denne implementeringsveiledningen vil du ha:
 2. **Første agent:**
 
       - Shopper Agent konfigurert med grunnleggende instruksjoner
-      - Mulighet for filsøking aktivert
+      - Fil-søk aktivert
       - Sporing og overvåking konfigurert
 
-3. **Klar for tilpasning:**
+3. **Klar til tilpasning:**
 
       - Rammeverk for å legge til Loyalty Agent
-      - Maler for egendefinerte instruksjoner
+      - Tilpassede instruksjonsmaler
       - Skripter for testing og validering
       - Oppsett for overvåking og evaluering
 
@@ -458,11 +460,11 @@ Etter å ha fulgt denne implementeringsveiledningen vil du ha:
       - Kvalitetsevalueringsrammeverk
       - Skalerbar arkitektur
 
-Dette eksempelet viser hvordan AZD-malen kan utvides og tilpasses for spesifikke bedriftscenarioer samtidig som beste praksis for sikkerhet, overvåking og skalerbarhet opprettholdes.
+Dette eksempelet demonstrerer hvordan AZD-malen kan utvides og tilpasses for spesifikke bedriftsbrukstilfeller samtidig som beste praksis for sikkerhet, overvåking og skalerbarhet opprettholdes.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på morsmålet bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår som følge av bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:  
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

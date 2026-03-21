@@ -1,52 +1,52 @@
-# Studieguide - Omfattende læringsmål
+# Studieguide - Omfattende Læringsmål
 
-**Navigering i læringsstien**
-- **📚 Kursoversikt**: [AZD for nybegynnere](../README.md)
-- **📖 Start læringen**: [Kapittel 1: Grunnlag & Hurtigstart](../README.md#-chapter-1-foundation--quick-start)
+**Navigasjon for Læringsvei**
+- **📚 Kursoversikt**: [AZD For Beginners](../README.md)
+- **📖 Start Læringen**: [Kapittel 1: Grunnlag & Rask Start](../README.md#-chapter-1-foundation--quick-start)
 - **🎯 Fremdriftssporing**: [Kursfullføring](../README.md#-course-completion--certification)
 
 ## Introduksjon
 
-Denne omfattende studieguiden gir strukturerte læringsmål, nøkkelkonsepter, praktiske øvelser og vurderingsmateriale for å hjelpe deg med å mestre Azure Developer CLI (azd). Bruk denne guiden til å spore fremgangen din og sikre at du har dekket alle essensielle emner.
+Denne omfattende studieguiden gir strukturerte læringsmål, nøkkelbegreper, praksisøvelser og vurderingsmateriell for å hjelpe deg med å mestre Azure Developer CLI (azd). Bruk denne guiden for å spore fremdriften din og sikre at du har dekket alle viktige emner.
 
 ## Læringsmål
 
 Ved å fullføre denne studieguiden vil du:
-- Mestre alle grunnleggende og avanserte konsepter i Azure Developer CLI
-- Utvikle praktiske ferdigheter i å distribuere og administrere Azure-applikasjoner
+- Mestre alle grunnleggende og avanserte konsepter av Azure Developer CLI
+- Utvikle praktiske ferdigheter i distribusjon og administrasjon av Azure-applikasjoner
 - Bygge selvtillit i feilsøking og optimalisering av distribusjoner
-- Forstå produksjonsklare distribusjonspraksiser og sikkerhetsvurderinger
+- Forstå produksjonsklare distribusjonspraksiser og sikkerhetshensyn
 
-## Læringsresultater
+## Læringsutbytter
 
 Etter å ha fullført alle seksjoner i denne studieguiden, vil du kunne:
 - Designe, distribuere og administrere komplette applikasjonsarkitekturer ved hjelp av azd
-- Implementere omfattende overvåking, sikkerhet og kostnadsoptimaliseringsstrategier
+- Implementere omfattende overvåkings-, sikkerhets- og kostnadsoptimaliseringsstrategier
 - Feilsøke komplekse distribusjonsproblemer selvstendig
-- Lage tilpassede maler og bidra til azd-samfunnet
+- Lage tilpassede maler og bidra til azd-fellesskapet
 
-## 8-kapitlers læringsstruktur
+## 8-Kapitlers Læringsstruktur
 
-### Kapittel 1: Grunnlag & Hurtigstart (Uke 1)
+### Kapittel 1: Grunnlag & Rask Start (Uke 1)
 **Varighet**: 30-45 minutter | **Kompleksitet**: ⭐
 
 #### Læringsmål
-- Forstå kjernekonsepter og terminologi i Azure Developer CLI
-- Installere og konfigurere AZD på din utviklingsplattform
+- Forstå Azure Developer CLI kjernebegreper og terminologi
+- Installere og konfigurere AZD på din utviklingsplattform med suksess
 - Distribuere din første applikasjon ved hjelp av en eksisterende mal
-- Navigere effektivt i AZD-kommandolinjegrensesnittet
+- Navigere effektivt i AZD kommandolinjegrensesnitt
 
-#### Nøkkelkonsepter å mestre
-- AZD-prosjektstruktur og komponenter (azure.yaml, infra/, src/)
+#### Nøkkelbegreper å Mestre
+- AZD prosjektstruktur og komponenter (azure.yaml, infra/, src/)
 - Malbaserte distribusjonsarbeidsflyter
-- Grunnleggende miljøkonfigurasjon
-- Administrasjon av ressursgrupper og abonnementer
+- Miljøkonfigurasjon grunnleggende
+- Ressursgruppe- og abonnementshåndtering
 
-#### Praktiske øvelser
-1. **Installasjonsverifisering**: Installer AZD og verifiser med `azd version`
-2. **Første distribusjon**: Distribuer todo-nodejs-mongo-malen vellykket
+#### Praktiske Øvelser
+1. **Verifisering av Installasjon**: Installer AZD og verifiser med `azd version`
+2. **Første Distribusjon**: Distribuer todo-nodejs-mongo malen med suksess
 3. **Miljøoppsett**: Konfigurer dine første miljøvariabler
-4. **Ressursutforskning**: Naviger distribuerte ressurser i Azure Portal
+4. **Ressursutforskning**: Naviger distribuerte ressurser i Azure-portalen
 
 #### Vurderingsspørsmål
 - Hva er kjernekomponentene i et AZD-prosjekt?
@@ -56,31 +56,31 @@ Etter å ha fullført alle seksjoner i denne studieguiden, vil du kunne:
 
 ---
 
-### Kapittel 2: AI-først utvikling (Uke 2)
+### Kapittel 2: AI-First Utvikling (Uke 2)
 **Varighet**: 1-2 timer | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
 - Integrere Microsoft Foundry-tjenester med AZD-arbeidsflyter
 - Distribuere og konfigurere AI-drevne applikasjoner
-- Forstå implementeringsmønstre for RAG (Retrieval-Augmented Generation)
-- Administrere AI-modelldistribusjoner og skalering
+- Forstå RAG (Retrieval-Augmented Generation) implementasjonsmønstre
+- Administrere AI-modell distribusjoner og skalering
 
-#### Nøkkelkonsepter å mestre
-- Integrasjon av Azure OpenAI-tjenester og API-administrasjon
-- Konfigurasjon av AI-søk og vektorindeksering
-- Strategier for modelldistribusjon og kapasitetsplanlegging
-- Overvåking og ytelsesoptimalisering av AI-applikasjoner
+#### Nøkkelbegreper å Mestre
+- Microsoft Foundry Models tjenesteintegrasjon og API-administrasjon
+- AI-søk konfigurasjon og vektorindeksering
+- Modell distribusjonsstrategier og kapasitetsplanlegging
+- AI-applikasjonsovervåking og ytelsesoptimalisering
 
-#### Praktiske øvelser
-1. **AI-chat-distribusjon**: Distribuer azure-search-openai-demo-malen
-2. **RAG-implementering**: Konfigurer dokumentindeksering og gjenfinning
+#### Praktiske Øvelser
+1. **AI Chat Distribusjon**: Distribuer azure-search-openai-demo malen
+2. **RAG Implementering**: Konfigurer dokumentindeksering og gjenfinning
 3. **Modellkonfigurasjon**: Sett opp flere AI-modeller med ulike formål
-4. **AI-overvåking**: Implementer Application Insights for AI-arbeidsbelastninger
+4. **AI Overvåking**: Implementer Application Insights for AI arbeidsmengder
 
 #### Vurderingsspørsmål
-- Hvordan konfigurerer du Azure OpenAI-tjenester i en AZD-mal?
+- Hvordan konfigurerer du Microsoft Foundry Models tjenester i en AZD-mal?
 - Hva er nøkkelkomponentene i en RAG-arkitektur?
-- Hvordan administrerer du AI-modellkapasitet og skalering?
+- Hvordan administrerer du AI-modell kapasitet og skalering?
 - Hvilke overvåkingsmetrikker er viktige for AI-applikasjoner?
 
 ---
@@ -89,122 +89,121 @@ Etter å ha fullført alle seksjoner i denne studieguiden, vil du kunne:
 **Varighet**: 45-60 minutter | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
-- Mestre strategier for miljøkonfigurasjon og administrasjon
+- Mestre miljøkonfigurasjon og administrasjonsstrategier
 - Implementere sikre autentiseringsmønstre og administrert identitet
 - Organisere ressurser med riktige navnekonvensjoner
-- Konfigurere distribusjoner for flere miljøer (dev, staging, prod)
+- Konfigurere flere miljødistribusjoner (dev, staging, prod)
 
-#### Nøkkelkonsepter å mestre
-- Miljøhierarki og konfigurasjonsprioritet
+#### Nøkkelbegreper å Mestre
+- Miljøhierarki og konfigurasjonspreferanse
 - Administrert identitet og tjenesteprinsippautentisering
-- Integrasjon av Key Vault for hemmelighetsadministrasjon
-- Miljøspesifikk parameteradministrasjon
+- Key Vault-integrasjon for hemmelighetshåndtering
+- Miljøspesifikk parameterhåndtering
 
-#### Praktiske øvelser
-1. **Oppsett for flere miljøer**: Konfigurer dev-, staging- og prod-miljøer
+#### Praktiske Øvelser
+1. **Oppsett for Flere Miljøer**: Konfigurer dev, staging, og prod miljøer
 2. **Sikkerhetskonfigurasjon**: Implementer autentisering med administrert identitet
-3. **Hemmelighetsadministrasjon**: Integrer Azure Key Vault for sensitiv data
-4. **Parameteradministrasjon**: Lag miljøspesifikke konfigurasjoner
+3. **Hemmelighetshåndtering**: Integrer Azure Key Vault for sensitiv data
+4. **Parameterhåndtering**: Lag miljøspesifikke konfigurasjoner
 
 #### Vurderingsspørsmål
-- Hvordan konfigurerer du ulike miljøer med AZD?
-- Hva er fordelene med å bruke administrert identitet fremfor tjenesteprinsipper?
-- Hvordan administrerer du applikasjonshemmeligheter sikkert?
+- Hvordan konfigurerer du forskjellige miljøer med AZD?
+- Hva er fordelene ved å bruke administrert identitet over tjenesteprinsipper?
+- Hvordan håndterer du applikasjonshemmeligheter sikkert?
 - Hva er konfigurasjonshierarkiet i AZD?
 
 ---
 
-### Kapittel 4: Infrastruktur som kode & Distribusjon (Uke 4-5)
+### Kapittel 4: Infrastruktur som Kode & Distribusjon (Uke 4-5)
 **Varighet**: 1-1,5 timer | **Kompleksitet**: ⭐⭐⭐
 
 #### Læringsmål
-- Lage og tilpasse Bicep-infrastrukturmaler
+- Lage og tilpasse Bicep infrastruktursmaler
 - Implementere avanserte distribusjonsmønstre og arbeidsflyter
-- Forstå strategier for ressursprovisjonering
+- Forstå ressursprovisjoneringsstrategier
 - Designe skalerbare arkitekturer med flere tjenester
+- Distribuere containeriserte applikasjoner med Azure Container Apps og AZD
 
-- Distribuere containeriserte applikasjoner ved hjelp av Azure Container Apps og AZD
-
-#### Nøkkelkonsepter å mestre
-- Struktur og beste praksis for Bicep-maler
-- Ressursavhengigheter og distribusjonsrekkefølge
-- Parameterfiler og malmodularitet
+#### Nøkkelbegreper å Mestre
+- Bicep-malstruktur og beste praksis
+- Ressursavhengigheter og rekkefølge for distribusjon
+- Parameterfiler og moduler i maler
 - Tilpassede hooks og distribusjonsautomatisering
-- Distribusjonsmønstre for containerapper (hurtigstart, produksjon, mikrotjenester)
+- Distribusjonsmønstre for Container App (rask start, produksjon, mikrotjenester)
 
-#### Praktiske øvelser
-1. **Opprettelse av tilpasset mal**: Bygg en applikasjonsmal med flere tjenester
-2. **Bicep-mestring**: Lag modulære, gjenbrukbare infrastrukturkomponenter
-3. **Distribusjonsautomatisering**: Implementer pre/post distribusjonshooks
-4. **Arkitekturdesign**: Distribuer komplekse mikrotjenestearkitekturer
-5. **Distribusjon av containerapper**: Distribuer [Simple Flask API](../../../examples/container-app/simple-flask-api) og [Microservices Architecture](../../../examples/container-app/microservices) eksempler ved hjelp av AZD
+#### Praktiske Øvelser
+1. **Egendefinert Malopprettelse**: Bygg en mal for en fler-tjeneste applikasjon
+2. **Bicep-mestring**: Lag modulære, gjenbrukbare infrastrukturelementer
+3. **Distribusjonsautomatisering**: Implementer pre-/post-distribusjonshooks
+4. **Arkitekturdesign**: Distribuer kompleks mikrotjenestearkitektur
+5. **Container App Distribusjon**: Distribuer [Simple Flask API](../../../examples/container-app/simple-flask-api) og [Microservices Architecture](../../../examples/container-app/microservices) eksemplene med AZD
 
 #### Vurderingsspørsmål
-- Hvordan lager du tilpassede Bicep-maler for AZD?
+- Hvordan lager du egendefinerte Bicep-maler for AZD?
 - Hva er beste praksis for organisering av infrastrukturkode?
 - Hvordan håndterer du ressursavhengigheter i maler?
 - Hvilke distribusjonsmønstre støtter oppdateringer uten nedetid?
 
 ---
 
-### Kapittel 5: AI-løsninger med flere agenter (Uke 6-7)
+### Kapittel 5: Multi-Agent AI-Løsninger (Uke 6-7)
 **Varighet**: 2-3 timer | **Kompleksitet**: ⭐⭐⭐⭐
 
 #### Læringsmål
-- Designe og implementere AI-arkitekturer med flere agenter
-- Orkestrere agentkoordinering og kommunikasjon
+- Designe og implementere multi-agent AI-arkitekturer
+- Orkestrere agentkoordinasjon og kommunikasjon
 - Distribuere produksjonsklare AI-løsninger med overvåking
-- Forstå spesialisering av agenter og arbeidsflytmønstre
-- Integrere containeriserte mikrotjenester som en del av løsninger med flere agenter
+- Forstå agentspesialisering og arbeidsflytmønstre
+- Integrere containeriserte mikrotjenester som del av multi-agent løsninger
 
-#### Nøkkelkonsepter å mestre
-- Mønstre og designprinsipper for arkitekturer med flere agenter
-- Kommunikasjonsprotokoller og dataflyt mellom agenter
+#### Nøkkelbegreper å Mestre
+- Multi-agent arkitekturmønstre og designprinsipper
+- Agentkommunikasjonsprotokoller og dataflyt
 - Lastbalansering og skaleringsstrategier for AI-agenter
-- Produksjonsovervåking for systemer med flere agenter
-- Tjeneste-til-tjeneste-kommunikasjon i containeriserte miljøer
+- Produksjonsovervåking for multi-agent systemer
+- Tjeneste-til-tjeneste kommunikasjon i containeriserte miljøer
 
-#### Praktiske øvelser
-1. **Distribusjon av detaljhandelsløsning**: Distribuer det komplette detaljhandelscenarioet med flere agenter
-2. **Tilpasning av agenter**: Modifiser oppførselen til kunde- og lageragenter
-3. **Skalering av arkitektur**: Implementer lastbalansering og autoskalering
+#### Praktiske Øvelser
+1. **Detaljhandelsløsning Distribusjon**: Distribuer det komplette multi-agent detaljhandelsscenarioet
+2. **Agenttilpasning**: Endre oppførsel for Kunde- og Lageragenter
+3. **Arkitektur Skalering**: Implementer lastbalansering og autoskalering
 4. **Produksjonsovervåking**: Sett opp omfattende overvåking og varsling
-5. **Integrasjon av mikrotjenester**: Utvid [Microservices Architecture](../../../examples/container-app/microservices) eksempelet for å støtte arbeidsflyter med flere agenter
+5. **Mikrotjenesteintegrasjon**: Utvid [Microservices Architecture](../../../examples/container-app/microservices) eksempelet for å støtte agentbaserte arbeidsflyter
 
 #### Vurderingsspørsmål
-- Hvordan designer du effektive kommunikasjonsmønstre for flere agenter?
-- Hva er nøkkelbetraktninger for skalering av AI-agentarbeidsbelastninger?
-- Hvordan overvåker og feilsøker du AI-systemer med flere agenter?
+- Hvordan designer du effektive multi-agent kommunikasjonsmønstre?
+- Hva er nøkkelbetraktninger for skalering av AI-agent arbeidsmengder?
+- Hvordan overvåker og feilsøker du multi-agent AI-systemer?
 - Hvilke produksjonsmønstre sikrer pålitelighet for AI-agenter?
 
 ---
 
-### Kapittel 6: Validering & Planlegging før distribusjon (Uke 8)
+### Kapittel 6: Validering og Planlegging Før Distribusjon (Uke 8)
 **Varighet**: 1 time | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
 - Utføre omfattende kapasitetsplanlegging og ressursvalidering
-- Velge optimale Azure SKUs for kostnadseffektivitet
-- Implementere automatiserte pre-flight-sjekker og validering
+- Velge optimale Azure SKU-er for kostnadseffektivitet
+- Implementere automatiserte pre-flight kontroller og validering
 - Planlegge distribusjoner med kostnadsoptimaliseringsstrategier
 
-#### Nøkkelkonsepter å mestre
+#### Nøkkelbegreper å Mestre
 - Azure ressurskvoter og kapasitetsbegrensninger
 - Kriterier for SKU-valg og kostnadsoptimalisering
 - Automatiserte valideringsskript og testing
 - Distribusjonsplanlegging og risikovurdering
 
-#### Praktiske øvelser
-1. **Kapasitetsanalyse**: Analyser ressurskravene for applikasjonene dine
+#### Praktiske Øvelser
+1. **Kapasitetsanalyse**: Analyser ressurskrav for dine applikasjoner
 2. **SKU-optimalisering**: Sammenlign og velg kostnadseffektive tjenestenivåer
-3. **Valideringsautomatisering**: Implementer pre-distribusjonssjekk-skript
-4. **Kostnadsplanlegging**: Lag kostnadsestimater og budsjetter for distribusjon
+3. **Valideringsautomatisering**: Implementer skript for pre-distribusjonskontroller
+4. **Kostnadsplanlegging**: Lag kostnadsoverslag og budsjetter for distribusjon
 
 #### Vurderingsspørsmål
 - Hvordan validerer du Azure-kapasitet før distribusjon?
-- Hvilke faktorer påvirker beslutninger om SKU-valg?
-- Hvordan automatiserer du validering før distribusjon?
-- Hvilke strategier hjelper med å optimalisere distribusjonskostnader?
+- Hvilke faktorer påvirker SKU-valg?
+- Hvordan automatiserer du pre-distribusjonsvalidering?
+- Hvilke strategier hjelper til med å optimalisere distribusjonskostnader?
 
 ---
 
@@ -212,77 +211,77 @@ Etter å ha fullført alle seksjoner i denne studieguiden, vil du kunne:
 **Varighet**: 1-1,5 timer | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
-- Utvikle systematiske feilsøkingsmetoder for AZD-distribusjoner
+- Utvikle systematiske debugging-metoder for AZD distribusjoner
 - Løse vanlige distribusjons- og konfigurasjonsproblemer
-- Debugge AI-spesifikke problemer og ytelsesutfordringer
-- Implementere overvåking og varsling for proaktiv problemidentifikasjon
+- Feilsøke AI-spesifikke problemer og ytelsesutfordringer
+- Implementere overvåking og varsling for proaktiv problemoppdagelse
 
-#### Nøkkelkonsepter å mestre
+#### Nøkkelbegreper å Mestre
 - Diagnoseteknikker og loggstrategier
-- Vanlige feilmønstre og deres løsninger
+- Vanlige feil mønstre og løsninger
 - Ytelsesovervåking og optimalisering
-- Respons på hendelser og gjenopprettingsprosedyrer
+- Hendelseshåndtering og gjenopprettingsprosedyrer
 
-#### Praktiske øvelser
-1. **Diagnostiske ferdigheter**: Øv med bevisst ødelagte distribusjoner
+#### Praktiske Øvelser
+1. **Diagnoseferdigheter**: Øv på bevisst ødelagte distribusjoner
 2. **Logganalyse**: Bruk Azure Monitor og Application Insights effektivt
-3. **Ytelsesjustering**: Optimaliser applikasjoner med lav ytelse
+3. **Ytelsesoptimalisering**: Optimaliser applikasjoner med dårlig ytelse
 4. **Gjenopprettingsprosedyrer**: Implementer backup og katastrofegjenoppretting
 
 #### Vurderingsspørsmål
-- Hva er de vanligste feilene i AZD-distribusjoner?
+- Hva er de vanligste AZD distribusjonsfeilene?
 - Hvordan feilsøker du autentiserings- og tillatelsesproblemer?
 - Hvilke overvåkingsstrategier hjelper med å forhindre produksjonsproblemer?
 - Hvordan optimaliserer du applikasjonsytelse i Azure?
 
 ---
 
-### Kapittel 8: Produksjon & Enterprise-mønstre (Uke 10-11)
+### Kapittel 8: Produksjon- & Enterprise-Mønstre (Uke 10-11)
 **Varighet**: 2-3 timer | **Kompleksitet**: ⭐⭐⭐⭐
 
 #### Læringsmål
-- Implementere distribusjonsstrategier på enterprise-nivå
+- Implementere enterprise-grad distribusjonsstrategier
 - Designe sikkerhetsmønstre og samsvarsrammeverk
-- Etablere overvåking, styring og kostnadsadministrasjon
+- Etablere overvåking, styring og kostnadskontroll
 - Lage skalerbare CI/CD-pipelines med AZD-integrasjon
-- Anvende beste praksis for produksjonsdistribusjon av containerapper (sikkerhet, overvåking, kostnad, CI/CD)
+- Anvende beste praksis for produksjonsdistribusjoner av container-apper (sikkerhet, overvåking, kostnad, CI/CD)
 
-#### Nøkkelkonsepter å mestre
-- Sikkerhets- og samsvarskrav på enterprise-nivå
+#### Nøkkelbegreper å Mestre
+- Enterprise sikkerhets- og samsvarskrav
 - Styringsrammeverk og policyimplementering
-- Avansert overvåking og kostnadsadministrasjon
+- Avansert overvåking og kostnadsstyring
 - CI/CD-integrasjon og automatiserte distribusjonspipelines
-- Blue-green og kanaridistribusjonsstrategier for containeriserte arbeidsbelastninger
+- Blue-green og kanaridistribusjonsstrategier for containeriserte arbeidsmengder
 
-#### Praktiske øvelser
-1. **Enterprise-sikkerhet**: Implementer omfattende sikkerhetsmønstre
+#### Praktiske Øvelser
+1. **Enterprise Sikkerhet**: Implementer omfattende sikkerhetsmønstre
 2. **Styringsrammeverk**: Sett opp Azure Policy og ressursadministrasjon
-3. **Avansert overvåking**: Lag dashboards og automatisert varsling
-4. **CI/CD-integrasjon**: Bygg automatiserte distribusjonspipelines
-5. **Produksjonscontainerapper**: Anvend sikkerhet, overvåking og kostnadsoptimalisering på [Microservices Architecture](../../../examples/container-app/microservices) eksempelet
+3. **Avansert Overvåking**: Lag dashboards og automatisert varsling
+4. **CI/CD Integrasjon**: Bygg automatiserte distribusjonspipelines
+5. **Produksjons Container Apper**: Anvend sikkerhet, overvåking og kostnadsoptimalisering på [Microservices Architecture](../../../examples/container-app/microservices) eksempelet
 
 #### Vurderingsspørsmål
-- Hvordan implementerer du enterprise-sikkerhet i AZD-distribusjoner?
+- Hvordan implementerer du enterprise-sikkerhet i AZD distribusjoner?
 - Hvilke styringsmønstre sikrer samsvar og kostnadskontroll?
 - Hvordan designer du skalerbar overvåking for produksjonssystemer?
-- Hvilke CI/CD-mønstre fungerer best med AZD-arbeidsflyter?
+- Hvilke CI/CD-mønstre fungerer best med AZD arbeidsflyter?
 
 #### Læringsmål
-- Forstå grunnleggende konsepter og kjerneprinsipper i Azure Developer CLI
-- Installere og konfigurere azd på ditt utviklingsmiljø
-- Fullføre din første distribusjon ved hjelp av en eksisterende mal
-- Navigere i azd-prosjektstrukturen og forstå nøkkelkomponenter
+- Forstå Azure Developer CLI grunnleggende og kjernebegreper
+- Installer og konfigurer azd i ditt utviklingsmiljø med suksess
+- Fullfør din første distribusjon ved å bruke en eksisterende mal
+- Naviger i azd prosjektstruktur og forstå nøkkelkomponenter
 
-#### Nøkkelkonsepter å mestre
+#### Nøkkelbegreper å Mestre
 - Maler, miljøer og tjenester
-- azure.yaml-konfigurasjonsstruktur
+- azure.yaml konfigurasjonsstruktur
 - Grunnleggende azd-kommandoer (init, up, down, deploy)
-- Prinsipper for infrastruktur som kode
-- Azure-autentisering og autorisasjon
+- Infrastruktur som kode-prinsipper
+- Azure autentisering og autorisasjon
 
-#### Praktiske øvelser
+#### Praksisøvelser
 
-**Øvelse 1.1: Installasjon og oppsett**
+**Øvelse 1.1: Installasjon og Oppsett**
 ```bash
 # Fullfør disse oppgavene:
 1. Install azd using your preferred method
@@ -292,9 +291,9 @@ Etter å ha fullført alle seksjoner i denne studieguiden, vil du kunne:
 5. Explore available templates: azd template list
 ```
 
-**Øvelse 1.2: Første distribusjon**
+**Øvelse 1.2: Første Distribusjon**
 ```bash
-# Distribuer en enkel webapplikasjon:
+# Distribuer en enkel nettapplikasjon:
 1. Initialize project: azd init --template todo-nodejs-mongo
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
@@ -302,7 +301,7 @@ Etter å ha fullført alle seksjoner i denne studieguiden, vil du kunne:
 5. Clean up resources: azd down
 ```
 
-**Øvelse 1.3: Analyse av prosjektstruktur**
+**Øvelse 1.3: Analyse av Prosjektstruktur**
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -311,16 +310,16 @@ Analyze the following components:
 4. .azure/ directory - environment configurations
 ```
 
-#### Selv-vurderingsspørsmål
-1. Hva er de tre kjernekonseptene i azd-arkitektur?
-2. Hva er formålet med azure.yaml-filen?
-3. Hvordan hjelper miljøer med å administrere ulike distribusjonsmål?
+#### Egenvurderingsspørsmål
+1. Hva er de tre kjernebegrepene i azd-arkitekturen?
+2. Hva er hensikten med azure.yaml-filen?
+3. Hvordan hjelper miljøer med å administrere forskjellige distribusjonsmål?
 4. Hvilke autentiseringsmetoder kan brukes med azd?
 5. Hva skjer når du kjører `azd up` for første gang?
 
 ---
 
-## Fremdriftssporing og vurderingsrammeverk
+## Fremdriftssporing og Vurderingsrammeverk
 ```bash
 # Opprett og konfigurer flere miljøer:
 1. Create development environment: azd env new development
@@ -330,7 +329,7 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**Øvelse 2.2: Avansert konfigurasjon**
+**Øvelse 2.2: Avansert Konfigurasjon**
 ```yaml
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
@@ -341,38 +340,38 @@ Analyze the following components:
 
 **Øvelse 2.3: Sikkerhetskonfigurasjon**
 ```bash
-# Implementer beste praksis for sikkerhet:
+# Implementer sikkerhets beste praksis:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### Selv-vurderingsspørsmål
-1. Hvordan håndterer azd miljøvariabelprioritet?
-2. Hva er distribusjonshooks, og når bør du bruke dem?
-3. Hvordan konfigurerer du ulike SKUs for ulike miljøer?
+#### Egenvurderingsspørsmål
+1. Hvordan håndterer azd miljøvariabelpreferanser?
+2. Hva er distribusjonshooks og når bør du bruke dem?
+3. Hvordan konfigurerer du forskjellige SKUer for ulike miljøer?
 4. Hva er sikkerhetsimplikasjonene av ulike autentiseringsmetoder?
-5. Hvordan administrerer du hemmeligheter og sensitiv konfigurasjonsdata?
+5. Hvordan håndterer du hemmeligheter og sensitiv konfigurasjonsdata?
 
 ### Modul 3: Distribusjon og Provisjonering (Uke 4)
 
 #### Læringsmål
 - Mestre distribusjonsarbeidsflyter og beste praksis
-- Forstå infrastruktur som kode med Bicep-maler
-- Implementere komplekse arkitekturer med flere tjenester
+- Forstå Infrastruktur som kode med Bicep-maler
+- Implementere komplekse fler-tjeneste arkitekturer
 - Optimalisere distribusjonsytelse og pålitelighet
 
-#### Nøkkelkonsepter å mestre
-- Struktur og moduler i Bicep-maler
+#### Nøkkelbegreper å Mestre
+- Bicep-malstruktur og moduler
 - Ressursavhengigheter og rekkefølge
-- Distribusjonsstrategier (blue-green, rullerende oppdateringer)
-- Distribusjoner på tvers av regioner
-- Databasemigrasjoner og databehandling
+- Distribusjonsstrategier (blue-green, trinnvise oppdateringer)
+- Multi-region distribusjoner
+- Database-migrasjoner og databehandling
 
-#### Praktiske øvelser
+#### Praksisøvelser
 
-**Øvelse 3.1: Tilpasset infrastruktur**
+**Øvelse 3.1: Egendefinert Infrastruktur**
 ```bicep
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
@@ -382,29 +381,53 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**Øvelse
-5. Hva bør vurderes ved distribusjoner i flere regioner?
+**Øvelse 3.2: Fler-tjeneste Applikasjon**
+```bash
+# Distribuer en mikrotjenestearkitektur:
+1. Frontend web application
+2. Backend API service
+3. Database service
+4. Message queue service
+5. Background worker service
+```
 
-### Modul 4: Validering før distribusjon (Uke 5)
+**Øvelse 3.3: Databaseintegrasjon**
+```bash
+# Implementer databaseutrullingsmønstre:
+1. Deploy PostgreSQL with connection pooling
+2. Implement schema migrations
+3. Configure backup and recovery procedures
+4. Set up read replicas for performance
+5. Implement data seeding for different environments
+```
+
+#### Egenvurderingsspørsmål
+1. Hva er fordelene ved å bruke Bicep fremfor ARM-maler?
+2. Hvordan håndterer du database-migrasjoner i azd distribusjoner?
+3. Hvilke strategier finnes for distribusjoner uten nedetid?
+4. Hvordan håndterer du avhengigheter mellom tjenester?
+5. Hva bør vurderes ved multi-region distribusjoner?
+
+### Modul 4: Pre-Distribusjon Validering (Uke 5)
 
 #### Læringsmål
-- Utføre omfattende kontroller før distribusjon
-- Mestre kapasitetsplanlegging og ressursvalidering
-- Forstå valg av SKU og kostnadsoptimalisering
-- Bygge automatiserte valideringspipelines
+- Utfør omfattende kontroller før distribusjon  
+- Mestre kapasitetsplanlegging og ressursvalidering  
+- Forstå SKU-utvelgelse og kostnadsoptimalisering  
+- Bygg automatiserte valideringspipelines  
 
-#### Viktige konsepter å mestre
-- Kvoter og begrensninger for Azure-ressurser
-- Kriterier for valg av SKU og kostnadskonsekvenser
-- Automatiserte valideringsskript og verktøy
-- Metoder for kapasitetsplanlegging
-- Ytelsestesting og optimalisering
+#### Nøkkelkonsepter å mestre  
+- Azure-ressurskvoter og begrensninger  
+- Kriterier for SKU-utvelgelse og kostnadskonsekvenser  
+- Automatiserte valideringsskript og -verktøy  
+- Metodikker for kapasitetsplanlegging  
+- Ytelsestesting og optimalisering  
 
-#### Øvelser
+#### Øvelser  
 
 **Øvelse 4.1: Kapasitetsplanlegging**  
 ```bash
-# Implementer kapasitetsvalidering:
+# Implementer validering av kapasitet:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -412,9 +435,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
   
-**Øvelse 4.2: Validering før distribusjon**  
+**Øvelse 4.2: Pre-flight-validering**  
 ```powershell
-# Bygg omfattende valideringspipeline:
+# Bygg en omfattende valideringspipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -432,30 +455,29 @@ Analyze the following components:
 5. Set up auto-scaling policies
 ```
   
+#### Selv-vurderingsspørsmål  
+1. Hvilke faktorer bør påvirke beslutninger om SKU-utvelgelse?  
+2. Hvordan validerer du tilgjengeligheten av Azure-ressurser før distribusjon?  
+3. Hva er hovedkomponentene i et pre-flight kontrollsystem?  
+4. Hvordan estimerer og kontrollerer du distribusjonskostnader?  
+5. Hvilken overvåking er essensiell for kapasitetsplanlegging?  
 
-#### Selvstendige vurderingsspørsmål
-1. Hvilke faktorer bør påvirke beslutninger om valg av SKU?
-2. Hvordan validerer du tilgjengeligheten av Azure-ressurser før distribusjon?
-3. Hva er de viktigste komponentene i et system for validering før distribusjon?
-4. Hvordan estimerer og kontrollerer du distribusjonskostnader?
-5. Hvilken overvåking er essensiell for kapasitetsplanlegging?
+### Modul 5: Feilsøking og debugging (Uke 6)  
 
-### Modul 5: Feilsøking og debugging (Uke 6)
+#### Læringsmål  
+- Mestre systematiske metodikker for feilsøking  
+- Utvikle ekspertise i debugging av komplekse distribusjonsproblemer  
+- Implementere omfattende overvåking og varsling  
+- Bygge prosedyrer for hendelseshåndtering og gjenoppretting  
 
-#### Læringsmål
-- Mestre systematiske feilsøkingsmetoder
-- Utvikle ekspertise i debugging av komplekse distribusjonsproblemer
-- Implementere omfattende overvåking og varsling
-- Bygge prosedyrer for hendelseshåndtering og gjenoppretting
+#### Nøkkelkonsepter å mestre  
+- Vanlige feilmønstre ved distribusjon  
+- Logganalyse og korrelasjonsteknikker  
+- Overvåking av ytelse og optimalisering  
+- Oppdagelse og respons på sikkerhetshendelser  
+- Katastrofegjenoppretting og forretningskontinuitet  
 
-#### Viktige konsepter å mestre
-- Vanlige mønstre for distribusjonsfeil
-- Logganalyse og korrelasjonsteknikker
-- Ytelsesovervåking og optimalisering
-- Oppdagelse og respons på sikkerhetshendelser
-- Katastrofegjenoppretting og forretningskontinuitet
-
-#### Øvelser
+#### Øvelser  
 
 **Øvelse 5.1: Feilsøkingsscenarier**  
 ```bash
@@ -479,7 +501,7 @@ Analyze the following components:
   
 **Øvelse 5.3: Hendelseshåndtering**  
 ```bash
-# Bygg prosedyrer for hendelsesrespons:
+# Bygg prosedyrer for hendelseshåndtering:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -487,30 +509,29 @@ Analyze the following components:
 5. Document lessons learned and improvements
 ```
   
+#### Selv-vurderingsspørsmål  
+1. Hva er den systematiske tilnærmingen til feilsøking av azd-distribusjoner?  
+2. Hvordan korrelerer du logger på tvers av flere tjenester og ressurser?  
+3. Hvilke overvåkingsmetrikker er mest kritiske for tidlig feiloppdagelse?  
+4. Hvordan implementerer du effektive prosedyrer for katastrofegjenoppretting?  
+5. Hva er hovedkomponentene i en hendelsesresponssplan?  
 
-#### Selvstendige vurderingsspørsmål
-1. Hva er den systematiske tilnærmingen til feilsøking av azd-distribusjoner?
-2. Hvordan korrelerer du logger på tvers av flere tjenester og ressurser?
-3. Hvilke overvåkingsmetrikker er mest kritiske for tidlig problemoppdagelse?
-4. Hvordan implementerer du effektive prosedyrer for katastrofegjenoppretting?
-5. Hva er de viktigste komponentene i en plan for hendelseshåndtering?
+### Modul 6: Avanserte emner og beste praksis (Uke 7-8)  
 
-### Modul 6: Avanserte emner og beste praksis (Uke 7-8)
+#### Læringsmål  
+- Implementere distribusjonsmønstre på bedriftsnivå  
+- Mestre CI/CD-integrasjon og automatisering  
+- Utvikle egendefinerte maler og bidra til fellesskapet  
+- Forstå avanserte sikkerhets- og samsvarskrav  
 
-#### Læringsmål
-- Implementere distribusjonsmønstre på bedriftsnivå
-- Mestre CI/CD-integrasjon og automatisering
-- Utvikle tilpassede maler og bidra til fellesskapet
-- Forstå avanserte sikkerhets- og samsvarskrav
+#### Nøkkelkonsepter å mestre  
+- Mønstre for CI/CD pipeline-integrasjon  
+- Utvikling og distribusjon av egendefinerte maler  
+- Bedriftsstyring og samsvar  
+- Avanserte nettverks- og sikkerhetskonfigurasjoner  
+- Ytelsesoptimalisering og kostnadsstyring  
 
-#### Viktige konsepter å mestre
-- Integrasjonsmønstre for CI/CD-pipelines
-- Utvikling og distribusjon av tilpassede maler
-- Styring og samsvar på bedriftsnivå
-- Avanserte nettverks- og sikkerhetskonfigurasjoner
-- Ytelsesoptimalisering og kostnadsstyring
-
-#### Øvelser
+#### Øvelser  
 
 **Øvelse 6.1: CI/CD-integrasjon**  
 ```yaml
@@ -522,7 +543,7 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
   
-**Øvelse 6.2: Utvikling av tilpassede maler**  
+**Øvelse 6.2: Utvikling av egendefinerte maler**  
 ```bash
 # Opprett og publiser egendefinerte maler:
 1. Design template for your organization's architecture
@@ -532,7 +553,7 @@ Analyze the following components:
 5. Publish and maintain template in template gallery
 ```
   
-**Øvelse 6.3: Implementering på bedriftsnivå**  
+**Øvelse 6.3: Bedriftsimplementering**  
 ```bash
 # Implementer funksjoner på bedriftsnivå:
 1. Multi-tenant architecture with proper isolation
@@ -542,296 +563,299 @@ Analyze the following components:
 5. Disaster recovery and business continuity
 ```
   
+#### Selv-vurderingsspørsmål  
+1. Hvordan integrerer du azd i eksisterende CI/CD-arbeidsflyter?  
+2. Hva er viktige hensyn ved utvikling av egendefinerte maler?  
+3. Hvordan implementerer du styring og samsvar i azd-distribusjoner?  
+4. Hva er beste praksis for distribusjoner i bedriftsstørrelse?  
+5. Hvordan bidrar du effektivt til azd-fellesskapet?  
 
-#### Selvstendige vurderingsspørsmål
-1. Hvordan integrerer du azd i eksisterende CI/CD-arbeidsflyter?
-2. Hva er de viktigste hensynene ved utvikling av tilpassede maler?
-3. Hvordan implementerer du styring og samsvar i azd-distribusjoner?
-4. Hva er beste praksis for distribusjoner i stor skala?
-5. Hvordan bidrar du effektivt til azd-fellesskapet?
+## Praktiske prosjekter  
 
-## Praktiske prosjekter
-
-### Prosjekt 1: Personlig porteføljenettsted
-**Kompleksitet**: Nybegynner  
+### Prosjekt 1: Personlig porteføljenettsted  
+**Vanskelighetsgrad**: Nybegynner  
 **Varighet**: 1-2 uker  
 
-Bygg og distribuer et personlig porteføljenettsted ved hjelp av:
-- Statisk nettstedhosting på Azure Storage
-- Konfigurasjon av egendefinert domene
-- CDN-integrasjon for global ytelse
-- Automatisert distribusjonspipeline
+Bygg og distribuer et personlig porteføljenettsted med:  
+- Statisk nettstedsvert på Azure Storage  
+- Egendefinert domenekonfigurasjon  
+- CDN-integrasjon for global ytelse  
+- Automatisert distribusjonspipeline  
 
-**Leveranser**:
-- Fungerende nettsted distribuert på Azure
-- Tilpasset azd-mal for porteføljedistribusjoner
-- Dokumentasjon av distribusjonsprosessen
-- Anbefalinger for kostnadsanalyse og optimalisering
+**Leveranser**:  
+- Funksjonelt nettsted distribuert på Azure  
+- Egendefinert azd-mal for porteføljedistribusjoner  
+- Dokumentasjon av distribusjonsprosess  
+- Kostnadsanalyse og optimaliseringsanbefalinger  
 
-### Prosjekt 2: Oppgavehåndteringsapplikasjon
-**Kompleksitet**: Middels  
+### Prosjekt 2: Oppgavehåndteringsapplikasjon  
+**Vanskelighetsgrad**: Middels  
 **Varighet**: 2-3 uker  
 
-Lag en fullstack oppgavehåndteringsapplikasjon med:
-- React frontend distribuert til App Service
-- Node.js API-backend med autentisering
-- PostgreSQL-database med migreringer
-- Overvåking med Application Insights
+Lag en fullstack oppgavehåndteringsapplikasjon med:  
+- React frontend distribuert til App Service  
+- Node.js API backend med autentisering  
+- PostgreSQL-database med migrasjoner  
+- Application Insights-overvåking  
 
-**Leveranser**:
-- Komplett applikasjon med brukergodkjenning
-- Databaseskjema og migreringsskript
-- Overvåkingsdashbord og varslingsregler
-- Distribusjonskonfigurasjon for flere miljøer
+**Leveranser**:  
+- Komplett applikasjon med brukergodkjenning  
+- Databaseskjema og migrasjonsskript  
+- Overvåkingsdashboards og varslingsregler  
+- Distribusjonskonfigurasjon for flere miljøer  
 
-### Prosjekt 3: E-handelsplattform med mikrotjenester
-**Kompleksitet**: Avansert  
+### Prosjekt 3: Mikrotjeneste-ehandelsplattform  
+**Vanskelighetsgrad**: Avansert  
 **Varighet**: 4-6 uker  
 
-Design og implementer en e-handelsplattform basert på mikrotjenester:
-- Flere API-tjenester (katalog, bestillinger, betalinger, brukere)
-- Integrasjon av meldingskø med Service Bus
-- Redis-cache for ytelsesoptimalisering
-- Omfattende logging og overvåking
+Design og implementer en mikrotjenestebasert ehandelsplattform:  
+- Flere API-tjenester (katalog, ordre, betalinger, brukere)  
+- Meldingskøintegrasjon med Service Bus  
+- Redis-cache for ytelsesoptimalisering  
+- Omfattende logging og overvåking  
 
-**Referanseeksempel**: Se [Mikrotjenestearkitektur](../../../examples/container-app/microservices) for en produksjonsklar mal og distribusjonsveiledning
+**Referanseeksempel**: Se [Microservices Architecture](../../../examples/container-app/microservices) for en produksjonsklar mal og distribusjonsveiledning  
 
-**Leveranser**:
-- Komplett mikrotjenestearkitektur
-- Mønstre for kommunikasjon mellom tjenester
-- Ytelsestesting og optimalisering
-- Produksjonsklar sikkerhetsimplementering
+**Leveranser**:  
+- Komplett mikrotjenestearkitektur  
+- Kommunikasjonsmønstre mellom tjenester  
+- Ytelsestesting og optimalisering  
+- Produksjonsklar sikkerhetsimplementering  
 
-## Vurdering og sertifisering
+## Vurdering og sertifisering  
 
-### Kunnskapstester
+### Kunnskapskontroller  
 
-Fullfør disse vurderingene etter hver modul:
+Fullfør disse vurderingene etter hver modul:  
 
-**Modul 1 Vurdering**: Grunnleggende konsepter og installasjon
-- Flervalgsspørsmål om kjernekonsepter
-- Praktiske installasjons- og konfigurasjonsoppgaver
-- Enkel distribusjonsøvelse
+**Modul 1 Vurdering**: Grunnleggende konsepter og installasjon  
+- Flervalgsspørsmål om kjernebegreper  
+- Praktiske installasjons- og konfigurasjonsoppgaver  
+- Enkel distribusjonsøvelse  
 
-**Modul 2 Vurdering**: Konfigurasjon og miljøer
-- Scenarier for miljøhåndtering
-- Øvelser i feilsøking av konfigurasjon
-- Implementering av sikkerhetskonfigurasjon
+**Modul 2 Vurdering**: Konfigurasjon og miljøer  
+- Scenarioer for miljøhåndtering  
+- Feilsøkingsøvelser i konfigurasjon  
+- Implementering av sikkerhetskonfigurasjon  
 
-**Modul 3 Vurdering**: Distribusjon og klargjøring
-- Utfordringer i infrastrukturdesign
-- Scenarier for distribusjon av flere tjenester
-- Øvelser i ytelsesoptimalisering
+**Modul 3 Vurdering**: Distribusjon og provisjonering  
+- Utfordringer i infrastrukturdesign  
+- Scenarioer for distribusjon av flere tjenester  
+- Øvelser for ytelsesoptimalisering  
 
-**Modul 4 Vurdering**: Validering før distribusjon
-- Casestudier i kapasitetsplanlegging
-- Scenarier for kostnadsoptimalisering
-- Implementering av valideringspipelines
+**Modul 4 Vurdering**: Validering før distribusjon  
+- Casestudier for kapasitetsplanlegging  
+- Scenarioer for kostnadsoptimalisering  
+- Implementering av valideringspipelines  
 
-**Modul 5 Vurdering**: Feilsøking og debugging
-- Øvelser i problemdiagnostisering
-- Oppgaver for implementering av overvåking
-- Simuleringer av hendelseshåndtering
+**Modul 5 Vurdering**: Feilsøking og debugging  
+- Diagnoseøvelser  
+- Oppgaver for implementering av overvåking  
+- Simuleringer av hendelseshåndtering  
 
-**Modul 6 Vurdering**: Avanserte emner
-- Design av CI/CD-pipelines
-- Utvikling av tilpassede maler
-- Scenarier for bedriftsarkitektur
+**Modul 6 Vurdering**: Avanserte emner  
+- Design av CI/CD-pipelines  
+- Utvikling av egendefinerte maler  
+- Scenarioer for bedriftsarkitektur  
 
-### Avsluttende prosjekt
+### Avsluttende hovedprosjekt  
 
-Design og implementer en komplett løsning som demonstrerer mestring av alle konsepter:
+Design og implementer en komplett løsning som demonstrerer mestring av alle konsepter:  
 
-**Krav**:
-- Flerlags applikasjonsarkitektur
-- Flere distribusjonsmiljøer
-- Omfattende overvåking og varsling
-- Implementering av sikkerhet og samsvar
-- Kostnadsoptimalisering og ytelsestilpasning
-- Komplett dokumentasjon og driftsmanualer
+**Krav**:  
+- Applikasjonsarkitektur med flere lag  
+- Flere distribusjonsmiljøer  
+- Omfattende overvåking og varsling  
+- Implementering av sikkerhet og samsvar  
+- Kostnadsoptimalisering og ytelsestuning  
+- Fullstendig dokumentasjon og driftsmanualer  
 
-**Evalueringskriterier**:
-- Teknisk implementeringskvalitet
-- Dokumentasjonsfullstendighet
-- Overholdelse av sikkerhet og beste praksis
-- Ytelses- og kostnadsoptimalisering
-- Effektivitet i feilsøking og overvåking
+**Evalueringskriterier**:  
+- Teknisk implementasjonskvalitet  
+- Dokumentasjonens fullstendighet  
+- Overholdelse av sikkerhet og beste praksis  
+- Ytelse og kostnadsoptimalisering  
+- Effektivitet i feilsøking og overvåking  
 
-## Studieressurser og referanser
+## Studieressurser og referanser  
 
-### Offisiell dokumentasjon
-- [Azure Developer CLI Dokumentasjon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep Dokumentasjon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+### Offisiell dokumentasjon  
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
 
-### Fellesskapsressurser
-- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
-- [Azure-Samples GitHub Organisasjon](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
+### Fellesskapsressurser  
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)  
+- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)  
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)  
 
-### Øvingsmiljøer
-- [Azure Gratis Konto](https://azure.microsoft.com/free/)
-- [Azure DevOps Gratis Nivå](https://azure.microsoft.com/services/devops/)
-- [GitHub Actions](https://github.com/features/actions)
+### Øvingsmiljøer  
+- [Azure Free Account](https://azure.microsoft.com/free/)  
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)  
+- [GitHub Actions](https://github.com/features/actions)  
 
-### Tilleggsverktøy
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
+### Ekstra verktøy  
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
+- [Visual Studio Code](https://code.visualstudio.com/)  
+- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
 
-## Anbefalinger for studieplan
+## Anbefalinger for studieplan  
 
-### Fulltidsstudier (8 uker)
-- **Uke 1-2**: Modul 1-2 (Kom i gang, Konfigurasjon)
-- **Uke 3-4**: Modul 3-4 (Distribusjon, Validering før distribusjon)
-- **Uke 5-6**: Modul 5-6 (Feilsøking, Avanserte emner)
-- **Uke 7-8**: Praktiske prosjekter og avsluttende vurdering
+### Heltidsstudium (8 uker)  
+- **Uke 1-2**: Modul 1-2 (Komme i gang, Konfigurasjon)  
+- **Uke 3-4**: Modul 3-4 (Distribusjon, Forhåndsvalidering)  
+- **Uke 5-6**: Modul 5-6 (Feilsøking, Avanserte emner)  
+- **Uke 7-8**: Praktiske prosjekter og avsluttende vurdering  
 
-### Deltidsstudier (16 uker)
-- **Uke 1-4**: Modul 1 (Kom i gang)
-- **Uke 5-7**: Modul 2 (Konfigurasjon og miljøer)
-- **Uke 8-10**: Modul 3 (Distribusjon og klargjøring)
-- **Uke 11-12**: Modul 4 (Validering før distribusjon)
-- **Uke 13-14**: Modul 5 (Feilsøking og debugging)
-- **Uke 15-16**: Modul 6 (Avanserte emner og vurdering)
+### Deltidsstudium (16 uker)  
+- **Uke 1-4**: Modul 1 (Komme i gang)  
+- **Uke 5-7**: Modul 2 (Konfigurasjon og miljøer)  
+- **Uke 8-10**: Modul 3 (Distribusjon og provisjonering)  
+- **Uke 11-12**: Modul 4 (Forhåndsvalidering)  
+- **Uke 13-14**: Modul 5 (Feilsøking og debugging)  
+- **Uke 15-16**: Modul 6 (Avanserte emner og vurdering)  
 
----
+---  
 
-## Fremdriftssporing og vurderingsrammeverk
+## Framdriftssporing og vurderingsrammeverk  
 
-### Kapittel fullføringssjekkliste
+### Sjekkliste for kapittelgjennomføring  
 
-Spor fremdriften din gjennom hvert kapittel med disse målbare resultatene:
+Følg din progresjon gjennom hvert kapittel med disse målbare resultatene:  
 
-#### 📚 Kapittel 1: Grunnlag & Hurtigstart
-- [ ] **Installasjon fullført**: AZD installert og verifisert på plattformen din
-- [ ] **Første distribusjon**: Vellykket distribusjon av todo-nodejs-mongo-mal
-- [ ] **Miljøoppsett**: Konfigurert første miljøvariabler
-- [ ] **Ressursnavigering**: Utforsket distribuerte ressurser i Azure-portalen
-- [ ] **Kommandoferdighet**: Komfortabel med grunnleggende AZD-kommandoer
+#### 📚 Kapittel 1: Grunnlag og rask start  
+- [ ] **Fullført installasjon**: AZD installert og verifisert på din plattform  
+- [ ] **Første distribusjon**: Vel gjennomført distribusjon av todo-nodejs-mongo-mal  
+- [ ] **Miljøoppsett**: Konfigurert første miljøvariabler  
+- [ ] **Ressursnavigasjon**: Utforsket distribuerte ressurser i Azure Portal  
+- [ ] **Kommandomestring**: Behersker grunnleggende AZD-kommandoer  
 
-#### 🤖 Kapittel 2: AI-First Utvikling  
-- [ ] **Distribusjon av AI-mal**: Vellykket distribusjon av azure-search-openai-demo
-- [ ] **RAG-implementering**: Konfigurert dokumentindeksering og gjenfinning
-- [ ] **Modellkonfigurasjon**: Satt opp flere AI-modeller med ulike formål
-- [ ] **AI-overvåking**: Implementert Application Insights for AI-arbeidsbelastninger
-- [ ] **Ytelsesoptimalisering**: Justert AI-applikasjonens ytelse
+#### 🤖 Kapittel 2: AI-først utvikling  
+- [ ] **AI-maldistribusjon**: Azure-search-openai-demo distribuert vellykket  
+- [ ] **RAG-implementering**: Konfigurert dokumentindeksering og gjenfinning  
+- [ ] **Modellkonfigurasjon**: Sat opp flere AI-modeller med forskjellige formål  
+- [ ] **AI-overvåking**: Implementert Application Insights for AI-arbeidsmengder  
+- [ ] **Ytelsesoptimalisering**: Optimalisert AI-applikasjonens ytelse  
 
-#### ⚙️ Kapittel 3: Konfigurasjon & Autentisering
-- [ ] **Oppsett av flere miljøer**: Konfigurert utvikling, staging og produksjonsmiljøer
-- [ ] **Sikkerhetsimplementering**: Satt opp administrert identitetsautentisering
-- [ ] **Håndtering av hemmeligheter**: Integrert Azure Key Vault for sensitiv data
-- [ ] **Parameterhåndtering**: Opprettet miljøspesifikke konfigurasjoner
-- [ ] **Autentiseringsferdighet**: Implementert sikre tilgangsmønstre
+#### ⚙️ Kapittel 3: Konfigurasjon og autentisering  
+- [ ] **Oppsett for flere miljøer**: Konfigurert dev, staging og prod miljøer  
+- [ ] **Sikkerhetsimplementering**: Sett opp Managed Identity autentisering  
+- [ ] **Håndtering av hemmeligheter**: Integrert Azure Key Vault for sensitive data  
+- [ ] **Parameterhåndtering**: Opprettet miljøspesifikk konfigurasjon  
+- [ ] **Autentiseringsmestring**: Implementert sikre tilgangsmønstre  
 
-#### 🏗️ Kapittel 4: Infrastruktur som kode & Distribusjon
-- [ ] **Opprettelse av tilpasset mal**: Bygget en mal for applikasjoner med flere tjenester
-- [ ] **Bicep-ferdighet**: Opprettet modulære, gjenbrukbare infrastrukturkomponenter
-- [ ] **Distribusjonsautomatisering**: Implementert før/etter distribusjonshooks
-- [ ] **Arkitekturdesign**: Distribuert kompleks mikrotjenestearkitektur
-- [ ] **Maloptimalisering**: Optimalisert maler for ytelse og kostnad
+#### 🏗️ Kapittel 4: Infrastruktur som kode og distribusjon  
+- [ ] **Opprettelse av egendefinert mal**: Bygget mal for multi-tjeneste applikasjon  
+- [ ] **Bicep-mestring**: Laget modulære, gjenbrukbare infrastrukturelementer  
+- [ ] **Distribusjonsautomatisering**: Implementert pre/post distribusjons-hooks  
+- [ ] **Arkitekturdesign**: Distribuert kompleks mikrotjenestearkitektur  
+- [ ] **Maloptimalisering**: Optimalisert maler for ytelse og kostnad  
 
-#### 🎯 Kapittel 5: Multi-Agent AI-løsninger
-- [ ] **Distribusjon av detaljhandelsløsning**: Distribuert komplett multi-agent detaljhandelsscenario
-- [ ] **Tilpasning av agenter**: Endret atferd for kunde- og lageragenter
-- [ ] **Skalering av arkitektur**: Implementert lastbalansering og autoskalering
-- [ ] **Produksjonsovervåking**: Satt opp omfattende overvåking og varsling
-- [ ] **Ytelsesjustering**: Optimalisert ytelsen til multi-agent systemet
+#### 🎯 Kapittel 5: Multi-agent AI-løsninger  
+- [ ] **Distribusjon av detaljhandeløsning**: Fullført multi-agent detaljhandelsscenario  
+- [ ] **Agenttilpasning**: Endret kunde- og lageragenters atferd  
+- [ ] **Skalering av arkitektur**: Implementert lastbalansering og autoskalering  
+- [ ] **Produksjonsovervåking**: Satt opp omfattende overvåking og varsling  
+- [ ] **Ytelsestuning**: Optimalisert multi-agent systemytelse  
 
-#### 🔍 Kapittel 6: Validering & Planlegging før distribusjon
-- [ ] **Kapasitetsanalyse**: Analysert ressursbehov for applikasjoner
-- [ ] **SKU-optimalisering**: Valgt kostnadseffektive tjenestenivåer
-- [ ] **Automatisering av validering**: Implementert skript for kontroller før distribusjon
-- [ ] **Kostnadsplanlegging**: Opprettet kostnadsestimater og budsjetter for distribusjon
-- [ ] **Risikovurdering**: Identifisert og redusert distribusjonsrisikoer
+#### 🔍 Kapittel 6: Forhåndsvalidering og planlegging  
+- [ ] **Kapasitetsanalyse**: Analysert ressurskrav for applikasjoner  
+- [ ] **SKU-optimalisering**: Valgt kostnadseffektive servicelag  
+- [ ] **Automatisering av validering**: Implementert sjekkskript før distribusjon  
+- [ ] **Kostnadsplanlegging**: Utarbeidet estimater og budsjetter for distribusjon  
+- [ ] **Risikoevaluering**: Identifisert og redusert distribusjonsrisiko  
 
-#### 🚨 Kapittel 7: Feilsøking & Debugging
-- [ ] **Diagnostiske ferdigheter**: Vellykket feilsøkt med vilje ødelagte distribusjoner
-- [ ] **Logganalyse**: Brukt Azure Monitor og Application Insights effektivt
-- [ ] **Ytelsesjustering**: Optimalisert tregt presterende applikasjoner
-- [ ] **Gjenopprettingsprosedyrer**: Implementert backup og katastrofegjenoppretting
-- [ ] **Overvåkingsoppsett**: Opprettet proaktiv overvåking og varsling
+#### 🚨 Kapittel 7: Feilsøking og debugging  
+- [ ] **Diagnostiske ferdigheter**: Lyktes med å debugge bevisst feilaktige distribusjoner  
+- [ ] **Logganalyse**: Brukt Azure Monitor og Application Insights effektivt  
+- [ ] **Ytelsestuning**: Optimalisert tregt fungerende applikasjoner  
+- [ ] **Gjenopprettingsprosedyrer**: Implementert backup og katastrofegjenoppretting  
+- [ ] **Overvåkingsoppsett**: Opprettet proaktiv overvåking og varsling  
 
-#### 🏢 Kapittel 8: Produksjon & Bedriftsmønstre
-- [ ] **Sikkerhet på bedriftsnivå**: Implementert omfattende sikkerhetsmønstre
-- [ ] **Styringsrammeverk**: Satt opp Azure Policy og ressursstyring
-- [ ] **Avansert overvåking**: Opprettet dashbord og automatisert varsling
-- [ ] **CI/CD-integrasjon**: Bygget automatiserte distribusjonspipelines
-- [ ] **Samsvarsimplementering**: Oppfylt krav til samsvar på bedriftsnivå
+#### 🏢 Kapittel 8: Produksjons- og bedriftsmønstre  
+- [ ] **Bedriftssikkerhet**: Implementert omfattende sikkerhetsmønstre  
+- [ ] **Styringsrammeverk**: Satt opp Azure Policy og ressursstyring  
+- [ ] **Avansert overvåking**: Opprettet dashbord og automatisert varsling  
+- [ ] **CI/CD-integrasjon**: Bygget automatiserte distribusjonspipelines  
+- [ ] **Samsvarsimplementering**: Oppfylt bedriftskrav til samsvar  
 
-### Læringsplan og milepæler
+### Læringstidslinje og milepæler  
 
-#### Uke 1-2: Bygge grunnlag
-- **Milepæl**: Distribuer første AI-applikasjon ved hjelp av AZD
-- **Validering**: Fungerende applikasjon tilgjengelig via offentlig URL
-- **Ferdigheter**: Grunnleggende AZD-arbeidsflyter og AI-tjenesteintegrasjon
+#### Uke 1-2: Grunnleggende bygging  
+- **Milepæl**: Distribuer første AI-applikasjon med AZD  
+- **Validering**: Funksjonell applikasjon tilgjengelig via offentlig URL  
+- **Ferdigheter**: Grunnleggende AZD-arbeidsflyter og AI-tjenesteintegrasjon  
 
-#### Uke 3-4: Mestre konfigurasjon
-- **Milepæl**: Distribusjon til flere miljøer med sikker autentisering
-- **Validering**: Samme applikasjon distribuert til utvikling/staging/produksjon
-- **Ferdigheter**: Miljøhåndtering og sikkerhetsimplementering
+#### Uke 3-4: Konfigurasjonsmestring  
+- **Milepæl**: Distribusjon til flere miljøer med sikker autentisering  
+- **Validering**: Samme applikasjon distribuert til dev/staging/prod  
+- **Ferdigheter**: Miljøhåndtering og sikkerhetsimplementering  
 
-#### Uke 5-6: Infrastrukturkompetanse
-- **Milepæl**: Tilpasset mal for kompleks applikasjon med flere tjenester
-- **Validering**: Gjenbrukbar mal distribuert av et annet teammedlem
-- **Ferdigheter**: Bicep-ferdighet og infrastrukturautomatisering
+#### Uke 5-6: Infrastrukturkompetanse  
+- **Milepæl**: Egendefinert mal for komplekse multi-tjeneste applikasjoner  
+- **Validering**: Gjenbrukbar mal distribuert av et annet teammedlem  
+- **Ferdigheter**: Bicep-mestring og infrastrukturautomatisering  
 
-#### Uke 7-8: Avansert AI-implementering
-- **Milepæl**: Produksjonsklar multi-agent AI-løsning
-- **Validering**: System som håndterer reell belastning med overvåking
-- **Ferdigheter**: Orkestrering av multi-agenter og ytelsesoptimalisering
+#### Uke 7-8: Avansert AI-implementering  
+- **Milepæl**: Produksjonsklar multi-agent AI-løsning  
+- **Validering**: System håndterer reell belastning med overvåking  
+- **Ferdigheter**: Orkestrering av multi-agent systemer og ytelsesoptimalisering  
 
-#### Uke 9-10: Produksjonsklarhet
-- **Milepæl**: Distribusjon på bedriftsnivå med full samsvar
-- **Validering**: Består sikkerhetsgjennomgang og kostnadsoptimaliseringsrevisjon
-- **Ferdigheter**: Styring, overvåking og CI/CD-integrasjon
+#### Uke 9-10: Produksjonsklarhet  
+- **Milepæl**: Distribusjon på bedriftsnivå med full samsvar  
+- **Validering**: Bestått sikkerhetsgjennomgang og kostnadsoptimalisering  
+- **Ferdigheter**: Styring, overvåking og CI/CD-integrasjon  
 
-### Vurdering og sertifisering
+### Vurdering og sertifisering  
 
-#### Metoder for kunnskapsvalider
-5. **Fellesskapsbidrag**: Del maler eller forbedringer
+#### Metoder for kunnskapsvalidering  
+1. **Praktiske distribusjoner**: Funksjonelle applikasjoner for hvert kapittel  
+2. **Kodegjennomganger**: Vurdering av maler og konfigurasjonskvalitet  
+3. **Problemløsning**: Feilsøkingsscenarier og løsninger  
+4. **Fagutveksling**: Forklar konsepter til andre elever  
+5. **Bidrag til fellesskapet**: Del maler eller forbedringer  
 
 #### Resultater for profesjonell utvikling
-- **Porteføljeprosjekter**: 8 produksjonsklare distribusjoner
-- **Tekniske ferdigheter**: Bransjestandard AZD- og AI-distribusjonsekspertise
+- **Porteføljeprosjekter**: 8 produksjonsklare implementeringer
+- **Tekniske ferdigheter**: Bransjestandard AZD og AI implementeringsekspertise
 - **Problemløsningsevner**: Selvstendig feilsøking og optimalisering
-- **Fellesskapsanerkjennelse**: Aktiv deltakelse i Azure-utviklerfellesskapet
-- **Karriereutvikling**: Ferdigheter direkte anvendelige for sky- og AI-roller
+- **Annerkjennelse i fellesskapet**: Aktiv deltakelse i Azure-utviklerfellesskapet
+- **Karriereutvikling**: Ferdigheter direkte anvendbare i sky- og AI-roller
 
-#### Suksessmålinger
-- **Distribusjonssuksessrate**: >95% vellykkede distribusjoner
+#### Suksessmål
+- **Implementeringssuksessrate**: >95 % vellykkede implementeringer
 - **Feilsøkingstid**: <30 minutter for vanlige problemer
-- **Ytelsesoptimalisering**: Påvisbare forbedringer i kostnad og ytelse
-- **Sikkerhetssamsvar**: Alle distribusjoner oppfyller bedriftens sikkerhetsstandarder
+- **Ytelsesoptimalisering**: Målbare forbedringer i kostnad og ytelse
+- **Sikkerhetsoverholdelse**: Alle implementeringer oppfyller virksomhetens sikkerhetsstandarder
 - **Kunnskapsoverføring**: Evne til å veilede andre utviklere
 
 ### Kontinuerlig læring og fellesskapsengasjement
 
 #### Hold deg oppdatert
-- **Azure-oppdateringer**: Følg utgivelsesnotater for Azure Developer CLI
-- **Fellesskapsarrangementer**: Delta på Azure- og AI-utviklerarrangementer
+- **Azure-oppdateringer**: Følg Azure Developer CLI-utgivelsesnotater
+- **Fellesskapsarrangementer**: Delta i Azure- og AI-utviklerarrangementer
 - **Dokumentasjon**: Bidra til fellesskapsdokumentasjon og eksempler
 - **Tilbakemeldingssløyfe**: Gi tilbakemelding på kursinnhold og Azure-tjenester
 
 #### Karriereutvikling
-- **Profesjonelt nettverk**: Knytt kontakter med Azure- og AI-eksperter
-- **Foredragsmuligheter**: Presenter lærdom på konferanser eller meetups
-- **Åpen kildekode-bidrag**: Bidra til AZD-maler og verktøy
+- **Profesjonelt nettverk**: Knytt kontakt med eksperter innen Azure og AI
+- **Foredragsmuligheter**: Presenter læring på konferanser eller treff
+- **Bidrag til åpen kildekode**: Bidra til AZD-maler og verktøy
 - **Mentorskap**: Veilede andre utviklere i deres AZD-læringsreise
 
 ---
 
 **Kapittelnavigasjon:**
-- **📚 Kursoversikt**: [AZD For Beginners](../README.md)
-- **📖 Start læringen**: [Kapittel 1: Grunnlag & Hurtigstart](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Fremdriftssporing**: Følg din utvikling gjennom det omfattende 8-kapittels læringssystemet
+- **📚 Kursstart**: [AZD For Beginners](../README.md)
+- **📖 Start læring**: [Kapittel 1: Grunnlag og hurtigstart](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Fremdriftssporing**: Spor fremgangen din gjennom det omfattende 8-kapitlers læringssystemet
 - **🤝 Fellesskap**: [Azure Discord](https://discord.gg/microsoft-azure) for støtte og diskusjon
 
-**Fremdriftssporing for studier**: Bruk denne strukturerte veiledningen for å mestre Azure Developer CLI gjennom progressiv, praktisk læring med målbare resultater og fordeler for profesjonell utvikling.
+**Studiefremdriftssporing**: Bruk denne strukturerte guiden for å mestre Azure Developer CLI gjennom progressiv, praktisk læring med målbare resultater og fordeler for profesjonell utvikling.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved bruk av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som følge av bruken av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

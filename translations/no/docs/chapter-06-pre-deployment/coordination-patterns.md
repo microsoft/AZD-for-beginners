@@ -1,86 +1,80 @@
 # Multi-agent koordinasjonsmønstre
 
-⏱️ **Anslått tid**: 60-75 minutter | 💰 **Anslått kostnad**: ~$100-300/måned | ⭐ **Kompleksitet**: Avansert
+⏱️ **Estimert tid**: 60-75 minutter | 💰 **Estimert kostnad**: ~$100-300/måned | ⭐ **Kompleksitet**: Avansert
 
 **📚 Læringssti:**
-- ← Forrige: [Kapasitetsplanlegging](capacity-planning.md) - Ressurstildeling og skaleringsstrategier
-- 🎯 **Du er her**: Multi-agent koordinasjonsmønstre (Orkestrering, kommunikasjon, tilstandshåndtering)
-- → Neste: [SKU-utvalg](sku-selection.md) - Velge riktige Azure-tjenester
-- 🏠 [Kursoversikt](../../README.md)
+- ← Forrige: [Capacity Planning](capacity-planning.md) - Ressursstørrelse og skaleringsstrategier
+- 🎯 **Du er her**: Multi-agent koordinasjonsmønstre (Orkestrering, kommunikasjon, tilstandsstyring)
+- → Neste: [SKU Selection](sku-selection.md) - Velge riktige Azure-tjenester
+- 🏠 [Kurs Hjem](../../README.md)
 
 ---
 
 ## Hva du vil lære
 
 Ved å fullføre denne leksjonen vil du:
-- Forstå mønstre for **multi-agent-arkitektur** og når de skal brukes
+- Forstå **multi-agent arkitektur** mønstre og når du skal bruke dem
 - Implementere **orkestreringsmønstre** (sentralisert, desentralisert, hierarkisk)
-- Designe strategier for **agentkommunikasjon** (synkron, asynkron, hendelsesdrevet)
+- Designe **agentkommunikasjons**-strategier (synkron, asynkron, hendelsesdrevet)
 - Håndtere **delt tilstand** på tvers av distribuerte agenter
-- Distribuere **multi-agent-systemer** på Azure med AZD
-- Bruke **koordinasjonsmønstre** i virkelige AI-scenarier
+- Distribuere **multi-agent systemer** på Azure med AZD
+- Anvende **koordineringsmønstre** for virkelige AI-scenarier
 - Overvåke og feilsøke distribuerte agentsystemer
 
-## Hvorfor multi-agent koordinasjon er viktig
+## Hvorfor multi-agent koordinering er viktig
 
 ### Utviklingen: Fra enkeltagent til multi-agent
 
-**Enkeltagent (enkelt):**
+**Enkeltagent (Enkel):**
 ```
 User → Agent → Response
 ```
-- ✅ Enkelt å forstå og implementere
-- ✅ Raskt for enkle oppgaver
+- ✅ Lett å forstå og implementere
+- ✅ Rask for enkle oppgaver
 - ❌ Begrenset av enkeltmodellens kapasiteter
 - ❌ Kan ikke parallellisere komplekse oppgaver
 - ❌ Ingen spesialisering
 
-**Multi-agent system (avansert):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Spesialiserte agenter for spesifikke oppgaver
-- ✅ Parallell utførelse for høyere hastighet
+**Multi-agent system (Avansert):**
+```mermaid
+graph TD
+    Orchestrator[Orkestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Kode]
+    Orchestrator --> Agent3[Agent3<br/>Gjennomgå]
+```- ✅ Spesialiserte agenter for spesifikke oppgaver
+- ✅ Parallell kjøring for fart
 - ✅ Modulær og vedlikeholdbar
 - ✅ Bedre på komplekse arbeidsflyter
-- ⚠️ Krever koordinasjonslogikk
+- ⚠️ Krever koordineringslogikk
 
-**Analogien**: En enkeltagent er som én person som utfører alle oppgaver. Et multi-agent-system er som et team hvor hvert medlem har spesialiserte ferdigheter (forsker, koder, korrekturleser, skribent) som jobber sammen.
+**Analogien**: Enkeltagent er som én person som gjør alle oppgaver. Multi-agent er som et team hvor hvert medlem har spesialiserte ferdigheter (forsker, koder, anmelder, forfatter) som jobber sammen.
 
 ---
 
-## Kjernemønstre for koordinasjon
+## Kjernemønstre for koordinering
 
-### Mønster 1: Sekvensiell koordinasjon (ansvarskjede)
+### Mønster 1: Sekvensiell koordinering (Ansvarskjede)
 
-**Når du bør bruke**: Oppgaver må fullføres i en bestemt rekkefølge, hver agent bygger på forrige utdata.
+**Når å bruke**: Oppgaver må fullføres i en bestemt rekkefølge, hver agent bygger på forrige output.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Forskeragent
-    participant Agent2 as Forfatteragent
+    participant Agent1 as Forskningsagent
+    participant Agent2 as Skriveagent
     participant Agent3 as Redaktøragent
     
-    User->>Orchestrator: "Skriv artikkel om AI"
-    Orchestrator->>Agent1: Undersøk emnet
+    User->>Orchestrator: "Skriv artikkel om KI"
+    Orchestrator->>Agent1: Undersøk tema
     Agent1-->>Orchestrator: Forskningsresultater
-    Orchestrator->>Agent2: Skriv utkast (basert på forskning)
+    Orchestrator->>Agent2: Skriv utkast (bruker forskning)
     Agent2-->>Orchestrator: Utkast til artikkel
     Orchestrator->>Agent3: Rediger og forbedre
     Agent3-->>Orchestrator: Endelig artikkel
-    Orchestrator-->>User: Polert artikkel
+    Orchestrator-->>User: Ferdig artikkel
     
-    Note over User,Agent3: Sekvensiell: Hvert trinn venter på det forrige
+    Note over User,Agent3: Sekvensiell: Hvert steg venter på forrige
 ```
 **Fordeler:**
 - ✅ Klar dataflyt
@@ -88,20 +82,20 @@ sequenceDiagram
 - ✅ Forutsigbar kjørerekkefølge
 
 **Begrensninger:**
-- ❌ Langsommere (ingen parallellisme)
-- ❌ Én feil blokkerer hele kjeden
-- ❌ Kan ikke håndtere avhengige oppgaver
+- ❌ Langsommere (ingen parallellitet)
+- ❌ En feil stopper hele kjeden
+- ❌ Kan ikke håndtere gjensidig avhengige oppgaver
 
-**Eksempelbrukstilfeller:**
+**Eksempler:**
 - Innholdsproduksjonspipeline (forskning → skrive → redigere → publisere)
 - Kodegenerering (planlegge → implementere → teste → distribuere)
-- Rapportgenerering (datainnsamling → analyse → visualisering → sammendrag)
+- Rapportgenerering (datainnsamling → analyse → visualisering → oppsummering)
 
 ---
 
-### Mønster 2: Parallell koordinasjon (Fan-Out/Fan-In)
+### Mønster 2: Parallel koordinering (Fan-Out/Fan-In)
 
-**Når du bør bruke**: Uavhengige oppgaver kan kjøres samtidig, resultater kombineres til slutt.
+**Når å bruke**: Uavhengige oppgaver kan kjøre samtidig, resultater kombineres til slutt.
 
 ```mermaid
 graph TB
@@ -111,7 +105,7 @@ graph TB
     Agent2[Forskningsagent]
     Agent3[Dataagent]
     Aggregator[Resultataggregator]
-    Response[Kombinert svar]
+    Response[Sammensatt svar]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -126,34 +120,34 @@ graph TB
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 **Fordeler:**
-- ✅ Raskt (parallell utførelse)
+- ✅ Rask (parallell kjøring)
 - ✅ Feiltolerant (delvise resultater akseptable)
 - ✅ Skalerer horisontalt
 
 **Begrensninger:**
-- ⚠️ Resultater kan komme i feil rekkefølge
+- ⚠️ Resultater kan komme uordnet
 - ⚠️ Trenger aggregeringslogikk
-- ⚠️ Kompleks tilstandshåndtering
+- ⚠️ Kompleks tilstandsstyring
 
-**Eksempelbrukstilfeller:**
-- Innsamling fra flere kilder (API-er + databaser + nettskraping)
-- Konkurranseanalyse (flere modeller genererer løsninger, best velges)
-- Oversettelsestjenester (oversett til flere språk samtidig)
+**Eksempler:**
+- Innsamling fra flere kilder (API-er + databaser + webskraping)
+- Konkurranseanalyse (flere modeller genererer løsninger, beste velges)
+- Oversettelsestjenester (oversette til flere språk samtidig)
 
 ---
 
-### Mønster 3: Hierarkisk koordinasjon (Manager-Worker)
+### Mønster 3: Hierarkisk koordinering (Leder-medarbeider)
 
-**Når du bør bruke**: Kompleks arbeidsflyt med underoppgaver, delegasjon nødvendig.
+**Når å bruke**: Komplekse arbeidsflyter med underoppgaver, delegasjon nødvendig.
 
 ```mermaid
 graph TB
-    Master[Hovedorkestrator]
+    Master[Master Orkestrator]
     Manager1[Forskningsleder]
-    Manager2[Innholdsansvarlig]
+    Manager2[Innholdsleder]
     W1[Nettskraper]
-    W2[Artikkelanalysator]
-    W3[Skribent]
+    W2[Papiranalysator]
+    W3[Forfatter]
     W4[Redaktør]
     
     Master --> Manager1
@@ -174,19 +168,19 @@ graph TB
 
 **Begrensninger:**
 - ⚠️ Mer kompleks arkitektur
-- ⚠️ Høyere ventetid (flere koordineringslag)
-- ⚠️ Krever sofistikert orkestrering
+- ⚠️ Høyere latenstid (flere koordinasjonslag)
+- ⚠️ Krever avansert orkestrering
 
-**Eksempelbrukstilfeller:**
-- Enterprise dokumentbehandling (klassifiser → rute → prosesser → arkiver)
-- Fleretrinns datapipelines (ingest → rengjør → transformer → analyser → rapport)
-- Kompleks automasjonsarbeidsflyt (planlegging → ressursallokering → utførelse → overvåkning)
+**Eksempler:**
+- Enterprise dokumentbehandling (klassifiser → ruter → behandle → arkiver)
+- Flertrinns datapipelines (inngang → rengjør → transformer → analyser → rapporter)
+- Komplekse automatiseringsarbeidsflyter (planlegging → ressursallokering → utførelse → overvåking)
 
 ---
 
-### Mønster 4: Hendelsesdrevet koordinasjon (Publish-Subscribe)
+### Mønster 4: Hendelsesdrevet koordinering (Publiser-Abonner)
 
-**Når du bør bruke**: Agenter må reagere på hendelser, ønskes løs kobling.
+**Når å bruke**: Agenter må reagere på hendelser, løs kobling ønskes.
 
 ```mermaid
 sequenceDiagram
@@ -194,14 +188,14 @@ sequenceDiagram
     participant EventBus as Azure Service Bus
     participant Agent2 as Analysator
     participant Agent3 as Varsler
-    participant Agent4 as Arkiverer
+    participant Agent4 as Arkivator
     
     Agent1->>EventBus: Publiser "DataMottatt" hendelse
     EventBus->>Agent2: Abonner: Analyser data
-    EventBus->>Agent3: Abonner: Send varsling
+    EventBus->>Agent3: Abonner: Send varsel
     EventBus->>Agent4: Abonner: Arkiver data
     
-    Note over Agent1,Agent4: Alle abonnenter behandler hver for seg
+    Note over Agent1,Agent4: Alle abonnenter behandler uavhengig
     
     Agent2->>EventBus: Publiser "AnalyseFullført" hendelse
     EventBus->>Agent3: Abonner: Send analyserapport
@@ -209,33 +203,33 @@ sequenceDiagram
 **Fordeler:**
 - ✅ Løs kobling mellom agenter
 - ✅ Lett å legge til nye agenter (bare abonner)
-- ✅ Asynkron behandling
+- ✅ Asynkron prosessering
 - ✅ Robust (meldingspersistens)
 
 **Begrensninger:**
-- ⚠️ Eventual konsistens
-- ⚠️ Vanskelig å feilsøke
-- ⚠️ Utfordringer med meldingsrekkefølge
+- ⚠️ Til slutt-konsistens
+- ⚠️ Kompleks feilsøking
+- ⚠️ Vansker med meldingsrekkefølge
 
-**Eksempelbrukstilfeller:**
-- Sanntidsovervåkingssystemer (alarmer, dashbord, logger)
-- Multikanals varsling (e-post, SMS, push, Slack)
-- Databehandlingspipelines (flere forbrukere av samme data)
+**Eksempler:**
+- Sanntidsovervåkingssystemer (varsler, dashboards, logger)
+- Multikanal varslinger (e-post, SMS, push, Slack)
+- Datapipelines (flere fogytere av samme data)
 
 ---
 
-### Mønster 5: Konsensusbasert koordinasjon (Voting/Quorum)
+### Mønster 5: Konsensusbasert koordinering (Avstemning/Kvorum)
 
-**Når du bør bruke**: Trenger enighet fra flere agenter før du går videre.
+**Når å bruke**: Krever enighet fra flere agenter før fortsettelse.
 
 ```mermaid
 graph TB
     Input[Inndataoppgave]
-    Agent1[Agent 1: GPT-4]
+    Agent1[Agent 1: gpt-4.1]
     Agent2[Agent 2: Claude]
     Agent3[Agent 3: Gemini]
-    Voter[Konsensusvelger]
-    Output[Avtalt utdata]
+    Voter[Enstemmig Velger]
+    Output[Enig Resultat]
     
     Input --> Agent1
     Input --> Agent2
@@ -249,18 +243,18 @@ graph TB
 ```
 **Fordeler:**
 - ✅ Høyere nøyaktighet (flere meninger)
-- ✅ Feiltolerant (minoritetsfeil akseptable)
+- ✅ Feiltolerant (mindre feil akseptable)
 - ✅ Kvalitetssikring innebygd
 
 **Begrensninger:**
 - ❌ Kostbart (flere modellkall)
 - ❌ Langsommere (venter på alle agenter)
-- ⚠️ Krever konfliktløsning
+- ⚠️ Må ha konfliktløsning
 
-**Eksempelbrukstilfeller:**
-- Innholdsmoderering (flere modeller vurderer innhold)
-- Kodegjennomgang (flere linters/analyzere)
-- Medisinsk diagnostikk (flere AI-modeller, ekspertvalidering)
+**Eksempler:**
+- Innholdmoderering (flere modeller gjennomgår innhold)
+- Kodegjennomgang (flere linters/analyzers)
+- Medisinsk diagnose (flere AI-modeller, ekspertvalidering)
 
 ---
 
@@ -271,17 +265,17 @@ graph TB
 ```mermaid
 graph TB
     User[Bruker/API-klient]
-    APIM[Azure API-administrasjon]
-    Orchestrator[Orkestrator-tjeneste<br/>Container-app]
-    ServiceBus[Azure Service Bus<br/>Event Hub]
+    APIM[Azure API Management]
+    Orchestrator[Orkestreringstjeneste<br/>Container-app]
+    ServiceBus[Azure Service Bus<br/>Hendelseshub]
     
     Agent1[Forskningsagent<br/>Container-app]
     Agent2[Forfatteragent<br/>Container-app]
     Agent3[Analytikeragent<br/>Container-app]
-    Agent4[Gjennomgangsagent<br/>Container-app]
+    Agent4[Reviewer-agent<br/>Container-app]
     
     CosmosDB[(Cosmos DB<br/>Delt tilstand)]
-    Storage[Azure Storage<br/>Artefakter]
+    Storage[Azure-lagring<br/>Artefakter]
     AppInsights[Application Insights<br/>Overvåking]
     
     User --> APIM
@@ -317,13 +311,13 @@ graph TB
 
 | Komponent | Formål | Azure-tjeneste |
 |-----------|---------|---------------|
-| **API Gateway** | Inngangspunkt, ratebegrensning, autentisering | API Management |
-| **Orchestrator** | Koordinerer agentarbeidsflyter | Container Apps |
-| **Message Queue** | Asynkron kommunikasjon | Service Bus / Event Hubs |
-| **Agents** | Spesialiserte AI-arbeidere | Container Apps / Functions |
-| **State Store** | Delt tilstand, oppgavessporing | Cosmos DB |
-| **Artifact Storage** | Dokumenter, resultater, logger | Blob Storage |
-| **Monitoring** | Distribuert sporing, logger | Application Insights |
+| **API Gateway** | Inngangspunkt, rate-begrensning, autentisering | API Management |
+| **Orkestrator** | Koordinerer agentarbeidsflyter | Container Apps |
+| **Meldingskø** | Asynkron kommunikasjon | Service Bus / Event Hubs |
+| **Agenter** | Spesialiserte AI-arbeidere | Container Apps / Functions |
+| **Tilstandslager** | Delt tilstand, oppgaveoppfølging | Cosmos DB |
+| **Artefaktlagring** | Dokumenter, resultater, logger | Blob Storage |
+| **Overvåking** | Distribuert sporing, logger | Application Insights |
 
 ---
 
@@ -332,39 +326,39 @@ graph TB
 ### Nødvendige verktøy
 
 ```bash
-# Kontroller Azure Developer CLI
+# Verifiser Azure Developer CLI
 azd version
-# ✅ Forventet: azd versjon 1.0.0 eller nyere
+# ✅ Forventet: azd versjon 1.0.0 eller høyere
 
-# Kontroller Azure CLI
+# Verifiser Azure CLI
 az --version
-# ✅ Forventet: azure-cli 2.50.0 eller nyere
+# ✅ Forventet: azure-cli 2.50.0 eller høyere
 
-# Kontroller Docker (for lokale tester)
+# Verifiser Docker (for lokal testing)
 docker --version
-# ✅ Forventet: Docker-versjon 20.10 eller nyere
+# ✅ Forventet: Docker versjon 20.10 eller høyere
 ```
 
 ### Azure-krav
 
-- Aktivt Azure-abonnement
-- Tillatelser til å opprette:
+- Aktiv Azure-abonnement
+- Rettigheter til å opprette:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Service Bus-områder
+  - Cosmos DB-kontoer
+  - Storage-kontoer
   - Application Insights
 
-### Forkunnskaper
+### Kunnskapsforutsetninger
 
 Du bør ha fullført:
-- [Konfigurasjonsstyring](../chapter-03-configuration/configuration.md)
-- [Autentisering & Sikkerhet](../chapter-03-configuration/authsecurity.md)
-- [Mikrotjenestereksempel](../../../../examples/microservices)
+- [Configuration Management](../chapter-03-configuration/configuration.md)
+- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
+- [Microservices Example](../../../../examples/microservices)
 
 ---
 
-## Implementeringsguide
+## Implementeringsveiledning
 
 ### Prosjektstruktur
 
@@ -435,7 +429,7 @@ services:
     host: containerapp
 ```
 
-### 2. Infrastruktur: Service Bus for koordinasjon
+### 2. Infrastruktur: Service Bus for koordinering
 
 **Fil: `infra/core/servicebus.bicep`**
 
@@ -492,7 +486,7 @@ output namespace string = serviceBusNamespace.name
 output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
 ```
 
-### 3. Delt tilstandsbehandler
+### 3. Delt tilstandshåndterer
 
 **Fil: `src/shared/state_manager.py`**
 
@@ -552,7 +546,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Orkestrator-tjeneste
+### 4. Orkestratortjeneste
 
 **Fil: `src/orchestrator/app.py`**
 
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Opprett oppgave i tilstandslageret
+    # Opprett oppgave i tilstandslager
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -594,13 +588,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Send melding til forskningsagent (første trinn)
+    # Send melding til forskningsagent (første steg)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Hvor skal resultatene sendes
+            'next_queue': 'writer-tasks'  # Hvor det skal sendes resultater
         }),
         content_type='application/json'
     )
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Kall Azure OpenAI for forskning
+    # Kall Microsoft Foundry-modeller for forskning
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -719,7 +713,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Skriveagent
+### 6. Forfatteragent
 
 **Fil: `src/agents/writer/app.py`**
 
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Kall Azure OpenAI for å skrive en artikkel
+    # Kall Microsoft Foundry-modeller for å skrive artikkel
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -807,7 +801,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Redigeringsagent
+### 7. Redaktøragent
 
 **Fil: `src/agents/editor/app.py`**
 
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Kall Azure OpenAI for å redigere
+    # Kall Microsoft Foundry-modeller for å redigere
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Marker oppgave som fullført
+    # Merk oppgaven som fullført
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -886,20 +880,29 @@ if __name__ == '__main__':
 ### 8. Distribuer og test
 
 ```bash
-# Initialiser og distribuer
+# Alternativ A: Malbasert distribusjon
 azd init
 azd up
 
-# Hent orkestrator-URL
+# Alternativ B: Agentmanifestdistribusjon (krever utvidelse)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> Se [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for alle `azd ai` flagg og alternativer.
+
+```bash
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Opprett innhold
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Forventet resultat:**
+**✅ Forventet utdata:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -910,13 +913,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Sjekk oppgavens fremdrift:**
+**Sjekk oppgaveprogresjon:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Forventet resultat (fullført):**
+**✅ Forventet utdata (fullført):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -944,13 +947,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Leksjon 2: Parallell koordinasjonsmønster
+## Leksjon 2: Parallel koordinasjonsmønster
 
 ### Implementering: Multi-kilde forskningsaggregator
 
 La oss bygge et parallelt system som samler informasjon fra flere kilder samtidig.
 
-### Parallell orkestrator
+### Parallel orkestrator
 
 **Fil: `src/orchestrator/parallel_workflow.py`**
 
@@ -1056,7 +1059,7 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Sjekk om alle agenter har fullført (fan-in)
+    # Sjekk om alle agenter er ferdige (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
@@ -1067,7 +1070,7 @@ def process_result(message_data):
             'summary': generate_summary(task_results[task_id])
         }
         
-        # Marker som fullført
+        # Merk som fullført
         state_manager.complete_task(task_id, aggregated)
         
         # Rydd opp
@@ -1111,23 +1114,23 @@ if __name__ == '__main__':
 
 ## Praktiske øvelser
 
-### Øvelse 1: Legg til tidsavbruddsbehandling ⭐⭐ (Middels)
+### Øvelse 1: Legg til timeout-håndtering ⭐⭐ (Middels)
 
-**Mål**: Implementer tidsavbruddslogikk slik at aggregatoren ikke venter evig på trege agenter.
+**Mål**: Implementer timeout-logikk slik at aggregatoren ikke venter uendelig på trege agenter.
 
-**Trinn**:
+**Steg**:
 
-1. **Legg til tidsavbrudds-sporing i aggregatoren:**
+1. **Legg til timeout-sporing i aggregator:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # task_id -> expiration_time
+task_timeouts = {}  # task_id -> utløpstid
 
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # Angi tidsavbrudd for første resultat
+    # Sett tidsavbrudd på første resultat
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1159,9 +1162,9 @@ def process_result(message_data):
 2. **Test med kunstige forsinkelser:**
 
 ```python
-# I én agent, legg til en forsinkelse for å simulere langsom behandling
+# I en agent, legg til forsinkelse for å simulere treg behandling
 import time
-time.sleep(35)  # Overskrider 30 sekunders tidsgrense
+time.sleep(35)  # Overskrider 30 sekunders tidsavbrudd
 ```
 
 3. **Distribuer og verifiser:**
@@ -1169,18 +1172,18 @@ time.sleep(35)  # Overskrider 30 sekunders tidsgrense
 ```bash
 azd deploy aggregator
 
-# Send inn oppgaven
+# Send inn oppgave
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Sjekk resultatene etter 30 sekunder
+# Sjekk resultater etter 30 sekunder
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Oppgaven fullføres etter 30 sekunder selv om noen agenter ikke er ferdige
-- ✅ Responsen indikerer delvise resultater (`"timed_out": true`)
+- ✅ Oppgave fullføres etter 30 sekunder selv om agenter ikke er ferdige
+- ✅ Respons indikerer delvise resultater (`"timed_out": true`)
 - ✅ Tilgjengelige resultater returneres (3 av 4 agenter)
 
 **Tid**: 20-25 minutter
@@ -1189,11 +1192,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Øvelse 2: Implementer retry-logikk ⭐⭐⭐ (Avansert)
 
-**Mål**: Prøv på nytt mislykkede agentoppgaver automatisk før man gir opp.
+**Mål**: Gjenta mislykkede agentoppgaver automatisk før du gir opp.
 
-**Trinn**:
+**Steg**:
 
-1. **Legg til retry-sporing i orkestratoren:**
+1. **Legg til retry-sporing i orkestrator:**
 
 ```python
 from dataclasses import dataclass
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # melding_id -> antall_forsøk
+retry_counts: Dict[str, int] = {}  # message_id -> antall_omforsøk
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1224,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **Legg til retry-håndterer i agenter:**
+2. **Legg til retry-behandler i agenter:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Prøv igjen: forkast og legg tilbake i kø med økt antall forsøk
+            # Prøv igjen: avbryt og legg tilbake i kø med økt teller
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
             # Send tilbake til samme kø med forsinkelse
-            time.sleep(5 * (retry_count + 1))  # Eksponentiell backoff
+            time.sleep(5 * (retry_count + 1))  # Eksponentiell tilbakekobling
             send_with_retry(queue_name, message_data, RetryConfig())
             
-            receiver.complete_message(message)  # Fjern originalen
+            receiver.complete_message(message)  # Fjern original
         else:
-            # Maks antall forsøk overskredet - flytt til dead letter-kø
+            # Maksimalt antall forsøk overskredet - flytt til kø for døde brev
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Overvåk dead letter-køen:**
+3. **Overvåk dead letter-kø:**
 
 ```python
 def monitor_dead_letters():
@@ -1283,22 +1286,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Mislykkede oppgaver prøves automatisk igjen (opptil 3 ganger)
-- ✅ Eksponentiell backoff mellom forsøk (5s, 10s, 15s)
-- ✅ Etter maks antall forsøk går meldinger til dead letter-køen
-- ✅ Dead letter-køen kan overvåkes og replayes
+- ✅ Mislykkede oppgaver prøves på nytt automatisk (opptil 3 ganger)
+- ✅ Eksponentiell backoff mellom retries (5s, 10s, 15s)
+- ✅ Etter maks retries går meldinger til dead letter-kø
+- ✅ Dead letter-kø kan overvåkes og spilles av på nytt
 
 **Tid**: 30-40 minutter
 
 ---
 
-### Øvelse 3: Implementer Circuit Breaker ⭐⭐⭐ (Avansert)
+### Øvelse 3: Implementer kretsbryter ⭐⭐⭐ (Avansert)
 
 **Mål**: Forhindre kaskaderende feil ved å stoppe forespørsler til feilende agenter.
 
-**Trinn**:
+**Steg**:
 
-1. **Opprett circuit breaker-klasse:**
+1. **Lag kretsbryter-klasse:**
 
 ```python
 from enum import Enum
@@ -1306,8 +1309,8 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # Normal drift
-    OPEN = "open"          # Feiler, avviser forespørsler
-    HALF_OPEN = "half_open"  # Tester om den er gjenopprettet
+    OPEN = "open"          # Feiler, avvis forespørsler
+    HALF_OPEN = "half_open"  # Tester om gjenopprettet
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Sjekk om tidsavbruddet har utløpt
+            # Sjekk om tidsavbrudd er utløpt
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1371,7 +1374,7 @@ def send_to_agent(agent_type, message_data):
         # Fortsett med andre agenter
 ```
 
-3. **Test circuit breaker:**
+3. **Test kretsbryter:**
 
 ```bash
 # Simuler gjentatte feil (stopp en agent)
@@ -1385,7 +1388,7 @@ for i in {1..10}; do
   sleep 2
 done
 
-# Sjekk loggene - bør se at kretsen er åpen etter 5 feil
+# Sjekk logger - bør se at kretsen åpnes etter 5 feil
 # Bruk Azure CLI for Container App-logger:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
@@ -1393,8 +1396,8 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 **✅ Suksesskriterier:**
 - ✅ Etter 5 feil åpner kretsen (avviser forespørsler)
 - ✅ Etter 60 sekunder går kretsen til halvåpen (tester gjenoppretting)
-- ✅ Andre agenter fortsetter å fungere normalt
-- ✅ Kretsen lukker seg automatisk når agenten gjenoppretter
+- ✅ Andre agenter fortsetter normalt
+- ✅ Kretsen lukker seg automatisk når agenten gjenoppretter seg
 
 **Tid**: 40-50 minutter
 
@@ -1426,7 +1429,7 @@ tracer = Tracer(
     sampler=AlwaysOnSampler()
 )
 
-# Konfigurer loggføring
+# Konfigurer logging
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1450,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Application Insights-spørringer
 
-Spor multi-agent-arbeidsflyter:
+**Spor multi-agent arbeidsflyter:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1491,22 +1494,22 @@ exceptions
 
 ## Kostnadsanalyse
 
-### Kostnader for multi-agent-system (månedlige estimater)
+### Kostnader for multi-agent system (månedlige estimater)
 
 | Komponent | Konfigurasjon | Kostnad |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
+| **Orkestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 Agenter** | 4 Container Apps (0.5 vCPU, 1GB hver) | $60-120 |
+| **Service Bus** | Standard nivå, 10M meldinger | $10-20 |
+| **Cosmos DB** | Serverless, 5GB lagring, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB lagring, 100K operasjoner | $5-10 |
+| **Application Insights** | 5GB inntak | $10-15 |
+| **Microsoft Foundry-modeller** | gpt-4.1, 10M tokens | $100-300 |
 | **Totalt** | | **$240-565/måned** |
 
-### Strategier for kostnadsoptimisering
+### Kostnadsoptimaliseringsstrategier
 
-1. **Bruk serverløst der det er mulig:**
+1. **Bruk serverless når mulig:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1523,13 +1526,13 @@ exceptions
    }
    ```
 
-3. **Bruk batch-behandling for Service Bus:**
+3. **Bruk batch prosessering for Service Bus:**
    ```python
    # Send meldinger i batcher (billigere)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Bufre ofte brukte resultater:**
+4. **Cache ofte brukte resultater:**
    ```python
    # Bruk Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1552,21 +1555,21 @@ exceptions
        # Behandler oppgave...
    ```
 
-2. **Implementer omfattende loggføring**
+2. **Implementer omfattende logging**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Bruk korrelasjons-IDer**
+3. **Bruk korrelasjons-ID-er**
    ```python
-   # Før task_id gjennom hele arbeidsflyten
+   # Send task_id gjennom hele arbeidsflyten
    message_data = {
        'task_id': task_id,  # Korrelasjons-ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Sett meldingers TTL (time-to-live)**
+4. **Sett meldingers TTL (levetid)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
@@ -1579,44 +1582,45 @@ exceptions
    monitor_dead_letters()
    ```
 
-### ❌ IKKE:
+### ❌ IKKE GJØR:
 
-1. **Ikke opprett sirkulære avhengigheter**
+1. **Ikke lag sirkelavhengigheter**
    ```python
    # ❌ DÅRLIG: Agent A → Agent B → Agent A (uendelig løkke)
-   # ✅ GODT: Definer en klar rettet acyklisk graf (DAG)
+   # ✅ BRA: Definer en klar rettet asyklisk graf (DAG)
    ```
 
-2. **Ikke blokker agenttråder**
+2. **Ikke blokker agent-tråder**
    ```python
    # ❌ DÅRLIG: Synkron venting
    while not task_complete:
        time.sleep(1)
    
-   # ✅ BRA: Bruk tilbakeringinger fra meldingskøen
+   # ✅ BRA: Bruk meldingskø callbacks
    ```
 
 3. **Ikke ignorer delvise feil**
    ```python
-   # ❌ DÅRLIG: Avslutt hele arbeidsflyten hvis en agent feiler
-   # ✅ GODT: Returner delvise resultater med feilindikatorer
+   # ❌ DÅRLIG: Avbryt hele arbeidsflyten hvis en agent feiler
+   # ✅ BRA: Returner delvise resultater med feilsindikatorer
    ```
 
-4. **Ikke bruk uendelige nyforsøk**
+4. **Ikke bruk uendelige gjenforsøk**
    ```python
-   # ❌ DÅRLIG: prøv på nytt i det uendelige
-   # ✅ BRA: max_retries = 3, deretter sendt til dead-letter
+   # ❌ DÅRLIG: prøv igjen for alltid
+   # ✅ BRA: max_retries = 3, deretter dead letter
    ```
 
 ---
-## Feilsøkingsveiledning
 
-### Problem: Meldinger sitter fast i køen
+## Feilsøkingsguide
+
+### Problem: Meldinger sitter fast i kø
 
 **Symptomer:**
-- Meldinger hoper seg opp i køen
+- Meldinger hoper seg opp i kø
 - Agenter behandler ikke
-- Oppgavens status sitter fast på "pending"
+- Oppgavens status sitter fast på "ventende"
 
 **Diagnose:**
 ```bash
@@ -1626,13 +1630,13 @@ az servicebus queue show \
   --name research-tasks \
   --query "countDetails"
 
-# Sjekk agentlogger med Azure CLI
+# Sjekk agentlogger ved hjelp av Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Løsninger:**
 
-1. **Øk antall agentreplikater:**
+1. **Øk antall agent-replikaer:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1640,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Sjekk dead letter-køen:**
+2. **Sjekk dødbrevkøen:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1650,16 +1654,16 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problem: Oppgaven går ut på tid/ferdigstilles aldri
+### Problem: Oppgaven tidsavbrytes/fullføres aldri
 
 **Symptomer:**
-- Oppgavens status forblir "in_progress"
-- Noen agenter fullfører, andre gjør det ikke
+- Oppgavens status forblir "pågående"
+- Noen agenter fullfører, andre gjør ikke
 - Ingen feilmeldinger
 
 **Diagnose:**
 ```bash
-# Sjekk oppgavens status
+# Sjekk oppgavetilstand
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # Sjekk Application Insights
@@ -1668,18 +1672,18 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Løsninger:**
 
-1. **Implementer tidsavbrudd i aggregatoren (Øvelse 1)**
+1. **Implementer tidsavbrudd i aggregator (Oppgave 1)**
 
-2. **Sjekk for agentfeil ved hjelp av Azure Monitor:**
+2. **Sjekk etter agentfeil ved hjelp av Azure Monitor:**
    ```bash
-   # Vis logger via azd monitor
+   # Se logger via azd monitor
    azd monitor --logs
    
-   # Eller bruk Azure CLI for å sjekke logger for en spesifikk containerapp
+   # Eller bruk Azure CLI for å sjekke spesifikke container app logger
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Kontroller at alle agenter kjører:**
+3. **Bekreft at alle agenter kjører:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1688,43 +1692,43 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Lær mer
+## Lær Mer
 
-### Offisiell dokumentasjon
+### Offisiell Dokumentasjon
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
-### Neste steg i dette kurset
+### Neste Steg i Dette Kurset
 - ← Forrige: [Kapasitetsplanlegging](capacity-planning.md)
 - → Neste: [Valg av SKU](sku-selection.md)
-- 🏠 [Kursforside](../../README.md)
+- 🏠 [Kurs Hjem](../../README.md)
 
-### Relaterte eksempler
-- [Eksempel på mikrotjenester](../../../../examples/microservices) - Kommunikasjonsmønstre for tjenester
-- [Azure OpenAI-eksempel](../../../../examples/azure-openai-chat) - AI-integrasjon
+### Relaterte Eksempler
+- [Mikrotjenester Eksempel](../../../../examples/microservices) - Mønstere for tjenestekommunikasjon
+- [Microsoft Foundry Modeller Eksempel](../../../../examples/azure-openai-chat) - AI-integrasjon
 
 ---
 
 ## Sammendrag
 
 **Du har lært:**
-- ✅ Fem koordineringsmønstre (sekvensiell, parallell, hierarkisk, hendelsesdrevet, konsensus)
-- ✅ Multi-agent-arkitektur på Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Tilstandshåndtering på tvers av distribuerte agenter
-- ✅ Håndtering av tidsavbrudd, gjentatte forsøk og kretsbrytere
+- ✅ Fem koordinasjonsmønstre (sekvensiell, parallell, hierarkisk, hendelsesdrevet, konsensus)
+- ✅ Multi-agent arkitektur på Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Tilstandsadministrasjon på tvers av distribuerte agenter
+- ✅ Håndtering av tidsavbrudd, gjenforsøk og sikringsbrytere
 - ✅ Overvåking og feilsøking av distribuerte systemer
-- ✅ Strategier for kostnadsoptimalisering
+- ✅ Kostnadsoptimaliseringsstrategier
 
-**Viktige punkter:**
+**Viktige Punkter:**
 1. **Velg riktig mønster** - Sekvensiell for ordnede arbeidsflyter, parallell for hastighet, hendelsesdrevet for fleksibilitet
 2. **Håndter tilstand nøye** - Bruk Cosmos DB eller lignende for delt tilstand
-3. **Håndter feil på en robust måte** - Tidsavbrudd, gjentatte forsøk, kretsbrytere, dead letter-køer
-4. **Overvåk alt** - Distribuert sporing er essensiell for feilsøking
-5. **Optimaliser kostnader** - Skaler til null, bruk serverløs, implementer caching
+3. **Håndter feil elegant** - Tidsavbrudd, gjenforsøk, sikringsbrytere, dødbrevkøer
+4. **Overvåk alt** - Distribuert sporing er essensielt for feilsøking
+5. **Optimaliser kostnader** - Skaler til null, bruk serverløst, implementer caching
 
-**Neste steg:**
+**Neste Steg:**
 1. Fullfør de praktiske øvelsene
 2. Bygg et multi-agent-system for ditt brukstilfelle
 3. Studer [Valg av SKU](sku-selection.md) for å optimalisere ytelse og kostnader
@@ -1732,6 +1736,6 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som følge av bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

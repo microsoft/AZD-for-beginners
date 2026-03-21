@@ -1,36 +1,36 @@
-# 4. Määritä mallipohja
+# 4. Määritä malli
 
 !!! tip "TÄMÄN MODUULIN LOPPUUN MENNESSÄ OSAAT"
 
     - [ ] Ymmärtää `azure.yaml`-tiedoston tarkoituksen
-    - [ ] Ymmärtää `azure.yaml`-tiedoston rakenteen
-    - [ ] Ymmärtää azd-elinkaaren `hooks`-kohdan merkityksen
+    - [ ] Ymmärtää `azure.yaml`-tiedoston rakenne
+    - [ ] Ymmärtää azd-elinkaaren `hooks` merkityksen
     - [ ] **Lab 4:** Tutki ja muokkaa ympäristömuuttujia
 
 ---
 
 !!! prompt "Mitä `azure.yaml`-tiedosto tekee? Käytä koodilohkoa ja selitä se rivi riviltä"
 
-      The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
+      `azure.yaml`-tiedosto on **Azure Developer CLI:n (azd) määritystiedosto**. Se määrittelee, miten sovelluksesi tulisi ottaa käyttöön Azureen, mukaan lukien infrastruktuuri, palvelut, käyttöönoton hookit ja ympäristömuuttujat.
 
 ---
 
 ## 1. Tarkoitus ja toiminnallisuus
 
-Tämä `azure.yaml`-tiedosto toimii **julkaisusuunnitelmana** AI-agenttisovellukselle, joka:
+Tämä `azure.yaml`-tiedosto toimii **käyttöönoton suunnitelmapohjana** AI-agenttisovellukselle, joka:
 
-1. **Varmistaa ympäristön** ennen julkaisua
-2. **Provisioi Azure AI -palvelut** (AI Hub, AI Project, Search jne.)
-3. **Julkaisee Python-sovelluksen** Azure Container Appsiin
-4. **Määrittelee AI-mallit** sekä chat- että upotustoiminnallisuuksiin
-5. **Asettaa valvonnan ja jäljityksen** AI-sovellukselle
+1. **Varmistaa ympäristön** ennen käyttöönottoa
+2. **Ottaa käyttöön Azure AI -palvelut** (AI Hub, AI Project, Search, jne.)
+3. **Ottaa käyttöön Python-sovelluksen** Azure Container Appsiin
+4. **Määrittää AI-mallit** sekä chat- että upotuskäyttöä varten
+5. **Ottaa käyttöön valvonnan ja jäljityksen** AI-sovellukselle
 6. **Käsittelee sekä uusia että olemassa olevia** Azure AI -projektitilanteita
 
-Tiedosto mahdollistaa **yhdellä komennolla julkaisemisen** (`azd up`) täydelliselle AI-agenttiratkaisulle oikealla validoinnilla, provisioinnilla ja jälkiasetuksilla.
+Tiedosto mahdollistaa **yhden komennon käyttöönoton** (`azd up`) täydelliselle AI-agenttiratkaisulle asianmukaisella tarkistuksella, provisioinnilla ja käyttöönoton jälkeisellä konfiguroinnilla.
 
 ??? info "Laajenna nähdäksesi: `azure.yaml`"
 
-      The `azure.yaml` file defines how Azure Developer CLI should deploy and manage this AI Agent application in Azure. Let's break it down line-by-line.
+      `azure.yaml`-tiedosto määrittelee, miten Azure Developer CLI ottaa käyttöön ja hallinnoi tätä AI-agenttisovellusta Azureen. Käydään se läpi rivi riviltä.
 
       ```yaml title="" linenums="0"
 
@@ -128,7 +128,7 @@ Tiedosto mahdollistaa **yhdellä komennolla julkaisemisen** (`azd up`) täydelli
 
 ## 2. Tiedoston purkaminen
 
-Käydään tiedosto läpi osa kerrallaan, jotta ymmärrät mitä kukin osa tekee ja miksi.
+Käydään tiedosto läpi osio kerrallaan, jotta ymmärrämme, mitä se tekee ja miksi.
 
 ### 2.1 **Otsikko ja skeema (1-3)**
 
@@ -136,7 +136,7 @@ Käydään tiedosto läpi osa kerrallaan, jotta ymmärrät mitä kukin osa tekee
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Rivi 1**: Tarjoaa YAML-kielen palvelimen skeeman validoinnin IDE-tukea ja IntelliSenseä varten
+- **Rivi 1**: Tarjoaa YAML-kielipalvelimen skeeman validoinnin IDE-tukea ja IntelliSenseä varten
 
 ### 2.2 Projektin metatiedot (5-10)
 
@@ -149,10 +149,10 @@ requiredVersions:
 ```
 
 - **Rivi 5**: Määrittelee projektin nimen, jota Azure Developer CLI käyttää
-- **Rivit 6-7**: Ilmoittaa, että tämä perustuu mallipohjaan versiossa 1.0.2
-- **Rivit 8-9**: Vaatimus Azure Developer CLI -versiolle 1.14.0 tai uudempi
+- **Rivit 6-7**: Määrää, että tämä perustuu malliin versiolla 1.0.2
+- **Rivit 8-9**: Vaatii Azure Developer CLI -version 1.14.0 tai uudemman
 
-### 2.3 Julkaisukoukut (11-40)
+### 2.3 Käyttöönoton hookit (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -169,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Rivit 11-20**: **Ennakkotarkistus (pre-deployment hook)** - suoritetaan ennen `azd up`
+- **Rivit 11-20**: **Ennen käyttöönottoa suoritettava hook** - suoritetaan ennen `azd up`
 
-      - Unix/Linux: Tekee validointiskriptistä suoritettavan ja suorittaa sen
-      - Windows: Suorittaa PowerShell-validointiskriptin
-      - Molemmat ovat interaktiivisia ja keskeyttävät julkaisun, jos ne epäonnistuvat
+      - Unix/Linuxissa: Tekee validointiskriptistä suoritettavan ja suorittaa sen
+      - Windowsissa: Suorittaa PowerShell-validointiskriptin
+      - Molemmat ovat interaktiivisia ja keskeyttävät käyttöönoton, jos ne epäonnistuvat
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -188,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Rivit 21-30**: **Post-provision-hook** - suoritetaan sen jälkeen, kun Azure-resurssit on luotu
+- **Rivit 21-30**: **Provisionin jälkeinen hook** - suoritetaan sen jälkeen, kun Azure-resurssit on luotu
 
-  - Suorittaa ympäristömuuttujien kirjoitusskriptit
-  - Jatkaa julkaisua, vaikka nämä skriptit epäonnistuisivat (`continueOnError: true`)
+  - Suorittaa ympäristömuuttujia kirjoittavat skriptit
+  - Jatkaa käyttöönottoa, vaikka nämä skriptit epäonnistuisivat (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -206,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Rivit 31-40**: **Post-deploy-hook** - suoritetaan sovelluksen julkaisun jälkeen
+- **Rivit 31-40**: **Käyttöönoton jälkeinen hook** - suoritetaan sovelluksen käyttöönoton jälkeen
 
-  - Suorittaa lopulliset asennusskriptit
-  - Jatkaa, vaikka skriptit epäonnistuisivat
+  - Suorittaa lopulliset asetusskriptit
+  - Jatkaa vaikka skriptit epäonnistuisivat
 
-### 2.4 Palvelukonfiguraatio (41-48)
+### 2.4 Palvelun asetukset (41-48)
 
-Tämä määrittelee sovelluspalvelun, jonka julkaiset.
+Tämä määrittää sen sovelluspalvelun, jonka otat käyttöön.
 
 ```yaml title="" linenums="0"
 services:
@@ -227,17 +227,17 @@ services:
 ```
 
 - **Rivi 42**: Määrittelee palvelun nimeltä "api_and_frontend"
-- **Rivi 43**: Viittaa `./src`-kansioon lähdekoodia varten
+- **Rivi 43**: Viittaa lähdekoodin hakemistoon `./src`
 - **Rivi 44**: Määrittää Pythonin ohjelmointikieleksi
-- **Rivi 45**: Käyttää Azure Container Apps -isännöintiä
-- **Rivit 46-48**: Docker-konfiguraatio
+- **Rivi 45**: Käyttää Azure Container Appsia isännöintialustana
+- **Rivit 46-48**: Dockerin konfigurointi
 
-      - Käyttää "api_and_frontend" kuvannimeä
-      - Rakentaa Docker-kuvan etänä Azuressä (ei paikallisesti)
+      - Käyttää "api_and_frontend" kuvanimenä
+      - Rakentaa Docker-kuvan etänä Azurella (ei paikallisesti)
 
-### 2.5 Putkilinjan muuttujat (49-76)
+### 2.5 Putken muuttujat (49-76)
 
-Nämä ovat muuttujia, jotka auttavat sinua suorittamaan `azd`-komentoja CI/CD-putkissa automaatiota varten
+Nämä muuttujat auttavat ajamaan `azd`:ää CI/CD-putkissa automaatiota varten
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -278,92 +278,92 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Tämä osio määrittelee julkaisun aikana käytettävät ympäristömuuttujat, järjestettynä kategorioittain:
+Tämä osio määrittelee käyttöönoton aikana käytettävät ympäristömuuttujat, järjestettyinä kategorioittain:
 
 - **Azure-resurssien nimet (Rivit 51-60)**:
-      - Perus Azure -palvelujen resurssien nimet, esim. Resource Group, AI Hub, AI Project jne.
-- **Ominaisuuksien kytkimet (Rivit 61-63)**:
-      - Boolean-tyyppiset muuttujat, joilla otetaan tietyt Azure-palvelut käyttöön tai pois päältä
-- **AI-agentin konfiguraatio (Rivit 64-71)**:
-      - Pää-AI-agentin asetusarvot, mukaan lukien nimi, ID, julkaisun asetukset ja mallin tiedot
-- **AI-upotuskonfiguraatio (Rivit 72-79)**:
-      - Upotusmallin konfiguraatio vektorihaulle
+      - Keskeiset Azure-palvelujen resurssinimet, esim. Resource Group, AI Hub, AI Project, jne.- 
+- **Ominaisuuskytkimet (Rivit 61-63)**:
+      - Totuusarvoiset muuttujat, jotka ottavat käytölle tai pois käytöstä tietyt Azure-palvelut
+- **AI-agentin asetukset (Rivit 64-71)**:
+      - Kokoonpano pää-AI-agentille mukaan lukien nimi, ID, käyttöönottoasetukset, mallin tiedot- 
+- **AI-upotusasetukset (Rivit 72-79)**:
+      - Kokoonpano upotusmallille, jota käytetään vektorihakua varten
 - **Haku ja valvonta (Rivit 80-84)**:
-      - Hakemiston nimi, olemassa olevien resurssien ID:t ja valvonta/jäljitysasetukset
+      - Hakemiston nimi, olemassa olevien resurssien ID:t ja valvonta-/jäljitysasetus­tiedot
 
 ---
 
 ## 3. Tunne ympäristömuuttujat
-Seuraavat ympäristömuuttujat ohjaavat julkaisusi konfiguraatiota ja käyttäytymistä, järjestetty pääasiallisen tarkoituksensa mukaan. Useimmilla muuttujilla on järkevät oletusarvot, mutta voit mukauttaa ne vastaamaan omia vaatimuksiasi tai olemassa olevia Azure-resursseja.
+Seuraavat ympäristömuuttujat ohjaavat käyttöönoton asetuksia ja käyttäytymistä, järjestetty pääasiallisen tarkoituksensa mukaan. Useimmilla muuttujilla on järkevät oletusarvot, mutta voit mukauttaa niitä vastaamaan omia vaatimuksiasi tai olemassa olevia Azure-resursseja.
 
 ### 3.1 Pakolliset muuttujat 
 
 ```bash title="" linenums="0"
-# Azurein peruskonfiguraatio
+# Azure-perusmääritykset
 AZURE_ENV_NAME                    # Ympäristön nimi (käytetään resurssien nimeämisessä)
 AZURE_LOCATION                    # Käyttöönottoalue
 AZURE_SUBSCRIPTION_ID             # Kohdetilaus
 AZURE_RESOURCE_GROUP              # Resurssiryhmän nimi
-AZURE_PRINCIPAL_ID                # Käyttäjäprinsipaali RBAC:lle
+AZURE_PRINCIPAL_ID                # Käyttäjäpäämies RBAC:ia varten
 
-# Resurssinimet (luodaan automaattisesti, jos ei määritetty)
+# Resurssien nimet (luodaan automaattisesti, jos ei määritetty)
 AZURE_AIHUB_NAME                  # Microsoft Foundry -hubin nimi
 AZURE_AIPROJECT_NAME              # Tekoälyprojektin nimi
-AZURE_AISERVICES_NAME             # Tekoälypalvelutilin nimi
+AZURE_AISERVICES_NAME             # AI-palvelutilin nimi
 AZURE_STORAGE_ACCOUNT_NAME        # Tallennustilin nimi
-AZURE_CONTAINER_REGISTRY_NAME     # Säilörekisterin nimi
+AZURE_CONTAINER_REGISTRY_NAME     # Säiliörekisterin nimi
 AZURE_KEYVAULT_NAME               # Key Vaultin nimi (jos käytössä)
 ```
 
-### 3.2 Mallin konfiguraatio 
+### 3.2 Mallin asetukset 
 ```bash title="" linenums="0"
-# Chat-mallin määritys
-AZURE_AI_AGENT_MODEL_NAME         # Oletus: gpt-4o-mini
+# Chat-mallin asetukset
+AZURE_AI_AGENT_MODEL_NAME         # Oletus: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Oletus: OpenAI (tai Microsoft)
 AZURE_AI_AGENT_MODEL_VERSION      # Oletus: uusin saatavilla oleva
 AZURE_AI_AGENT_DEPLOYMENT_NAME    # Chat-mallin käyttöönoton nimi
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Oletus: Standard
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # Oletus: Vakio
 AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Oletus: 80 (tuhansia TPM)
 
-# Upotusmallin määritys
+# Upotusmallin asetukset
 AZURE_AI_EMBED_MODEL_NAME         # Oletus: text-embedding-3-small
 AZURE_AI_EMBED_MODEL_FORMAT       # Oletus: OpenAI
 AZURE_AI_EMBED_MODEL_VERSION      # Oletus: uusin saatavilla oleva
 AZURE_AI_EMBED_DEPLOYMENT_NAME    # Upotusmallin käyttöönoton nimi
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Oletus: Standard
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # Oletus: Vakio
 AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Oletus: 50 (tuhansia TPM)
 
-# Agentin määritys
-AZURE_AI_AGENT_NAME               # Agentin näyttönimi
+# Agentin asetukset
+AZURE_AI_AGENT_NAME               # Agentin näytettävä nimi
 AZURE_EXISTING_AGENT_ID           # Käytä olemassa olevaa agenttia (valinnainen)
 ```
 
 ### 3.3 Ominaisuuksien kytkin
 ```bash title="" linenums="0"
 # Valinnaiset palvelut
-USE_APPLICATION_INSIGHTS         # Oletus: true
-USE_AZURE_AI_SEARCH_SERVICE      # Oletus: false
-USE_CONTAINER_REGISTRY           # Oletus: true
+USE_APPLICATION_INSIGHTS         # Oletusarvo: true
+USE_AZURE_AI_SEARCH_SERVICE      # Oletusarvo: false
+USE_CONTAINER_REGISTRY           # Oletusarvo: true
 
 # Seuranta ja jäljitys
-ENABLE_AZURE_MONITOR_TRACING     # Oletus: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Oletus: false
+ENABLE_AZURE_MONITOR_TRACING     # Oletusarvo: false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Oletusarvo: false
 
 # Hakuasetukset
 AZURE_AI_SEARCH_INDEX_NAME       # Haun indeksin nimi
-AZURE_SEARCH_SERVICE_NAME        # Haun palvelun nimi
+AZURE_SEARCH_SERVICE_NAME        # Hakupalvelun nimi
 ```
 
-### 3.4 AI-projektin konfiguraatio 
+### 3.4 AI-projektin asetukset 
 ```bash title="" linenums="0"
 # Käytä olemassa olevia resursseja
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Olemassa olevan tekoälyprojektin täydellinen resurssi-ID
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Olemassa olevan tekoälyprojektin täydellinen resurssitunnus
 AZURE_EXISTING_AIPROJECT_ENDPOINT       # Olemassa olevan projektin päätepisteen URL-osoite
 ```
 
 ### 3.5 Tarkista muuttujasi
 
-Käytä Azure Developer CLI:tä tarkastellaksesi ja hallitaksesi ympäristömuuttujiasi:
+Käytä Azure Developer CLI:tä katsellaksesi ja hallitaksesi ympäristömuuttujiasi:
 
 ```bash title="" linenums="0"
 # Näytä kaikki nykyisen ympäristön ympäristömuuttujat
@@ -375,13 +375,13 @@ azd env get-value AZURE_ENV_NAME
 # Aseta ympäristömuuttuja
 azd env set AZURE_LOCATION eastus
 
-# Aseta useita ympäristömuuttujia .env-tiedostosta
+# Aseta useita muuttujia .env-tiedostosta
 azd env set --from-file .env
 ```
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla Co-op Translator (https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää määräävänä lähteenä. Tärkeää tietoa varten suositellaan ammattimaista ihmiskääntäjän tekemää käännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomaathan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulee pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskääntäjää. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinkäsityksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

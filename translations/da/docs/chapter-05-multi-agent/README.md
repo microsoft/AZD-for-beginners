@@ -1,4 +1,4 @@
-# Kapitel 5: Multi-agent AI-løsninger
+# Kapitel 5: Multi-Agent AI-løsninger
 
 **📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 2-3 timer | **⭐ Kompleksitet**: Avanceret
 
@@ -6,12 +6,12 @@
 
 ## Oversigt
 
-Dette kapitel dækker avancerede multi-agent-arkitekturmønstre, agentorkestrering og produktionsklare AI-implementeringer til komplekse scenarier.
+Dette kapitel dækker avancerede multi-agent arkitekturmønstre, agentorkestrering og produktionsklare AI-implementeringer til komplekse scenarier.
 
 ## Læringsmål
 
-Ved at gennemføre dette kapitel vil du:
-- Forstå multi-agent-arkitekturmønstre
+Efter at have gennemført dette kapitel vil du:
+- Forstå multi-agent arkitekturmønstre
 - Udrulle koordinerede AI-agent-systemer
 - Implementere agent-til-agent kommunikation
 - Bygge produktionsklare multi-agent-løsninger
@@ -20,84 +20,79 @@ Ved at gennemføre dette kapitel vil du:
 
 ## 📚 Lektioner
 
-| # | Lesson | Description | Time |
+| # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Komplet implementeringsgennemgang | 90 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategier for agentorkestrering | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Én-klik-implementering | 30 min |
+| 1 | [Retail Multi-Agent-løsning](../../examples/retail-scenario.md) | Fuld implementeringsgennemgang | 90 min |
+| 2 | [Koordinationsmønstre](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier | 30 min |
+| 3 | [ARM-skabelonimplementering](../../examples/retail-multiagent-arm-template/README.md) | Én-klik-udrulning | 30 min |
 
 ---
 
 ## 🚀 Hurtig start
 
 ```bash
-# Udrul detailhandelens multi-agent-løsning
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Eller brug skabelonen direkte
+# Mulighed 1: Udrul fra en skabelon
 azd init --template agent-openai-python-prompty
+azd up
+
+# Mulighed 2: Udrul fra et agent-manifest (kræver azure.ai.agents-udvidelsen)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
----
-
-## 🤖 Multi-agent-arkitektur
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
+> **Hvilken tilgang?** Brug `azd init --template` for at starte fra et fungerende eksempel. Brug `azd ai agent init`, når du har dit eget agent-manifest. Se [AZD AI CLI-reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fulde detaljer.
 
 ---
 
-## 🎯 Fremhævet løsning: Multi-agent til detailhandel
+## 🤖 Multi-agent arkitektur
 
-The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrates:
+```mermaid
+graph TD
+    Orchestrator[Orkestrator-agent<br/>Ruter forespørgsler, styrer arbejdsgang] --> Customer[Kundeagent<br/>Brugerforespørgsler, præferencer]
+    Orchestrator --> Inventory[Lageragent<br/>Lagerniveauer, ordrer]
+```
+---
 
-- **Customer Agent**: Håndterer brugerinteraktioner og præferencer
-- **Inventory Agent**: Håndterer lager og ordrebehandling
-- **Orchestrator**: Koordinerer mellem agenter
-- **Shared Memory**: Styring af kontekst på tværs af agenter
+## 🎯 Fremhævet løsning: Retail Multi-Agent
 
-### Anvendte tjenester
+Løsningen [Retail Multi-Agent-løsning](../../examples/retail-scenario.md) demonstrerer:
 
-| Service | Purpose |
+- **Kundeagent**: Håndterer brugerinteraktioner og præferencer
+- **Lageragent**: Styrer lager og ordrebehandling
+- **Orkestrator**: Koordinerer mellem agenterne
+- **Delt hukommelse**: Håndtering af kontekst på tværs af agenter
+
+### Benyttede tjenester
+
+| Tjeneste | Formål |
 |---------|---------|
-| Azure OpenAI | Sprogforståelse |
+| Microsoft Foundry Models | Sprogforståelse |
 | Azure AI Search | Produktkatalog |
 | Cosmos DB | Agenttilstand og hukommelse |
-| Container Apps | Agenthosting |
+| Container Apps | Agent-hosting |
 | Application Insights | Overvågning |
 
 ---
 
 ## 🔗 Navigation
 
-| Direction | Chapter |
+| Retning | Kapitel |
 |-----------|---------|
-| **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Next** | [Chapter 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Forrige** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
+| **Næste** | [Kapitel 6: Forud-udrulning](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Relaterede ressourcer
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Guide til AI-agenter](../chapter-02-ai-development/agents.md)
+- [Produktions-AI-praksis](../chapter-08-production/production-ai-practices.md)
+- [AI-fejlsøgning](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på sit oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+**Disclaimer**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

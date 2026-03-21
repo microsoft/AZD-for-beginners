@@ -1,11 +1,11 @@
-# 4. Konfigurer en Mal
+# 4. Konfigurer en mal
 
 !!! tip "PÅ SLUTTEN AV DETTE MODULEN VIL DU KUNNE"
 
     - [ ] Forstå hensikten med `azure.yaml`
     - [ ] Forstå strukturen til `azure.yaml`
     - [ ] Forstå verdien av azd livssyklus `hooks`
-    - [ ] **Lab 4:** Utforsk og modifiser miljøvariabler
+    - [ ] **Lab 4:** Utforske og endre miljøvariabler
 
 ---
 
@@ -15,28 +15,28 @@
 
 ---
 
-## 1. Formål og Funksjonalitet
+## 1. Formål og funksjonalitet
 
-Denne `azure.yaml`-filen fungerer som en **distribusjonsplan** for en AI-agent-applikasjon som:
+Denne `azure.yaml`-filen fungerer som **distribusjonsplanen** for en AI-agent-applikasjon som:
 
 1. **Validerer miljøet** før distribusjon
-2. **Setter opp Azure AI-tjenester** (AI Hub, AI Project, Search, osv.)
+2. **Provisionerer Azure AI-tjenester** (AI Hub, AI Project, Search, osv.)
 3. **Distribuerer en Python-applikasjon** til Azure Container Apps
-4. **Konfigurerer AI-modeller** for både chat- og embedding-funksjonalitet
-5. **Setter opp overvåking og sporing** for AI-applikasjonen
-6. **Håndterer både nye og eksisterende** Azure AI-prosjekt-scenarioer
+4. **Konfigurerer AI-modeller** for både chat og embedding-funksjonalitet
+5. **Setter opp overvåkning og sporing** for AI-applikasjonen
+6. **Håndterer både nye og eksisterende** Azure AI-prosjekt-scenarier
 
-Filen muliggjør **en-kommando distribusjon** (`azd up`) av en komplett AI-agentløsning med korrekt validering, oppsett og konfigurasjon etter distribusjon.
+Filene muliggjør **en-kommando distribusjon** (`azd up`) av en komplett AI-agent-løsning med riktig validering, provisjonering og etter-distribusjonskonfigurasjon.
 
 ??? info "Utvid for å se: `azure.yaml`"
 
-      `azure.yaml`-filen definerer hvordan Azure Developer CLI skal distribuere og administrere denne AI-agent-applikasjonen i Azure. La oss gå gjennom den linje for linje.
+      `azure.yaml`-filen definerer hvordan Azure Developer CLI skal distribuere og administrere denne AI Agent-applikasjonen i Azure. La oss bryte det ned linje for linje.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: trenger vi hooks? 
-      # TODO: trenger vi alle variablene?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -126,9 +126,9 @@ Filen muliggjør **en-kommando distribusjon** (`azd up`) av en komplett AI-agent
 
 ---
 
-## 2. De-konstruksjon av Filen
+## 2. Dekonstruere filen
 
-La oss gå gjennom filen seksjon for seksjon, for å forstå hva den gjør - og hvorfor.
+La oss gå gjennom filen seksjon for seksjon for å forstå hva den gjør – og hvorfor.
 
 ### 2.1 **Header og Skjema (1-3)**
 
@@ -136,7 +136,7 @@ La oss gå gjennom filen seksjon for seksjon, for å forstå hva den gjør - og 
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Linje 1**: Gir YAML language server skjema-validering for IDE-støtte og IntelliSense
+- **Linje 1**: Gir YAML språkserver-skjema validering for IDE-støtte og IntelliSense
 
 ### 2.2 Prosjektmetadata (5-10)
 
@@ -148,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Linje 5**: Definerer prosjektnavnet som brukes av Azure Developer CLI
+- **Linje 5**: Definerer prosjektnavnet brukt av Azure Developer CLI
 - **Linje 6-7**: Spesifiserer at dette er basert på en mal versjon 1.0.2
-- **Linje 8-9**: Krever Azure Developer CLI versjon 1.14.0 eller høyere
+- **Linje 8-9**: Krever Azure Developer CLI versjon 1.14.0 eller nyere
 
 ### 2.3 Distribusjonshooks (11-40)
 
@@ -169,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Linje 11-20**: **Pre-distribusjons-hook** - kjører før `azd up`
+- **Linje 11-20**: **Pre-distribusjonshook** - kjører før `azd up`
 
       - På Unix/Linux: Gjør valideringsskriptet kjørbart og kjører det
       - På Windows: Kjører PowerShell valideringsskript
-      - Begge er interaktive og stopper distribusjonen om de feiler
+      - Begge er interaktive og stopper distribusjonen hvis de feiler
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -188,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linje 21-30**: **Post-provision hook** - kjører etter at Azure-ressurser er opprettet
+- **Linje 21-30**: **Post-provisjoneringshook** - kjører etter Azure-ressurser er opprettet
 
-  - Kjør skript som skriver miljøvariabler
-  - Fortsetter distribusjonen selv om disse skriptene feiler (`continueOnError: true`)
+  - Utfører skript for å skrive miljøvariabler
+  - Fortsetter distribusjonen selv om skriptene feiler (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -206,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linje 31-40**: **Post-distribusjons-hook** - kjører etter applikasjonsdistribusjon
+- **Linje 31-40**: **Post-distribusjonshook** - kjører etter at applikasjonen er distribuert
 
-  - Utfører endelige oppsetts-skript
+  - Utfører sluttkonfigurasjonsskripter
   - Fortsetter selv om skriptene feiler
 
 ### 2.4 Tjenestekonfigurasjon (41-48)
 
-Denne konfigurerer applikasjonstjenesten du distribuerer.
+Dette konfigurerer applikasjonstjenesten du distribuerer.
 
 ```yaml title="" linenums="0"
 services:
@@ -227,17 +227,17 @@ services:
 ```
 
 - **Linje 42**: Definerer en tjeneste kalt "api_and_frontend"
-- **Linje 43**: Viser til `./src`-mappen for kildekode
-- **Linje 44**: Angir Python som programmeringsspråk
-- **Linje 45**: Bruker Azure Container Apps som vertsplattform
+- **Linje 43**: Refererer til `./src` katalogen for kildekoden
+- **Linje 44**: Spesifiserer Python som programmeringsspråk
+- **Linje 45**: Bruker Azure Container Apps som hostingplattform
 - **Linje 46-48**: Docker-konfigurasjon
 
-      - Bruker "api_and_frontend" som bilde-navn
-      - Bygger Docker-bildet eksternt i Azure (ikke lokalt)
+      - Bruker "api_and_frontend" som bildets navn
+      - Bygger Docker-imaget eksternt i Azure (ikke lokalt)
 
 ### 2.5 Pipeline Variabler (49-76)
 
-Dette er variabler for å hjelpe deg kjøre `azd` i CI/CD pipelines for automatisering
+Disse er variabler for å hjelpe deg kjøre `azd` i CI/CD pipelines for automatisering
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -280,47 +280,47 @@ pipeline:
 
 Denne seksjonen definerer miljøvariabler brukt **under distribusjon**, organisert etter kategori:
 
-- **Azure Ressursnavn (Linje 51-60)**:
-      - Kjernenavn for Azure-tjenester, f.eks. Ressursgruppe, AI Hub, AI Prosjekt, osv.
-- **Funksjonsflag (Linje 61-63)**:
-      - Boolean-variabler for å aktivere/deaktivere spesifikke Azure-tjenester
-- **AI Agent-konfigurasjon (Linje 64-71)**:
-      - Konfigurasjon for hoved-AI-agent inkludert navn, ID, deploy-innstillinger, modelldetaljer
-- **AI Embedding-konfigurasjon (Linje 72-79)**:
-      - Konfigurasjon for embedding-modellen brukt til vektorsøk
-- **Søk og Overvåking (Linje 80-84)**:
-      - Søk-indeksnavn, eksisterende ressurs-IDer og overvåkings/sporingsinnstillinger
+- **Azure Ressursnavn (linje 51-60)**:
+      - Kjernetjenestens ressursnavn i Azure, f.eks Ressursgruppe, AI Hub, AI Project osv.
+- **Funksjonsflagg (linje 61-63)**:
+      - Boolske variabler for å aktivere/deaktivere spesifikke Azure-tjenester
+- **AI Agent Konfigurasjon (linje 64-71)**:
+      - Konfigurasjon for hoved-AI-agent inkludert navn, ID, distribusjonsinnstillinger, modelldetaljer
+- **AI Embedding Konfigurasjon (linje 72-79)**:
+      - Konfigurasjon for embeddingmodell brukt til vektorsøk
+- **Søk og Overvåkning (linje 80-84)**:
+      - Navn på søkeindeks, eksisterende ressurs-IDer og innstillinger for overvåkning/sporing
 
 ---
 
-## 3. Kjenn Miljøvariablene
-Følgende miljøvariabler styrer konfigurasjon og oppførsel for din distribusjon, organisert etter deres hovedformål. De fleste variabler har fornuftige standarder, men du kan tilpasse dem til å passe dine spesifikke behov eller eksisterende Azure-ressurser.
+## 3. Kjenn miljøvariablene
+Følgende miljøvariabler kontrollerer konfigurasjon og oppførsel for distribusjonen din, organisert etter deres primære formål. De fleste variabler har fornuftige standardverdier, men du kan tilpasse dem for å matche dine spesifikke krav eller eksisterende Azure-ressurser.
 
-### 3.1 Nødvendige Variabler 
+### 3.1 Påkrevde variabler 
 
 ```bash title="" linenums="0"
 # Kjerne Azure-konfigurasjon
 AZURE_ENV_NAME                    # Miljønavn (brukes i ressursnavngivning)
 AZURE_LOCATION                    # Distribusjonsregion
 AZURE_SUBSCRIPTION_ID             # Målabonnement
-AZURE_RESOURCE_GROUP              # Ressursgruppens navn
-AZURE_PRINCIPAL_ID                # Brukerhovedkonto for RBAC
+AZURE_RESOURCE_GROUP              # Ressursgruppe navn
+AZURE_PRINCIPAL_ID                # Brukerprincipal for RBAC
 
-# Ressursnavn (auto-generert hvis ikke spesifisert)
+# Ressursnavn (auto-generert hvis ikke angitt)
 AZURE_AIHUB_NAME                  # Microsoft Foundry hub-navn
-AZURE_AIPROJECT_NAME              # AI-prosjektnavn
-AZURE_AISERVICES_NAME             # AI-tjenestekontonavn
-AZURE_STORAGE_ACCOUNT_NAME        # Lagringskontonavn
-AZURE_CONTAINER_REGISTRY_NAME     # Containerregisternavn
-AZURE_KEYVAULT_NAME               # Key Vault-navn (hvis brukt)
+AZURE_AIPROJECT_NAME              # AI prosjekt navn
+AZURE_AISERVICES_NAME             # AI tjenester konto navn
+AZURE_STORAGE_ACCOUNT_NAME        # Lagringskonto navn
+AZURE_CONTAINER_REGISTRY_NAME     # Container register navn
+AZURE_KEYVAULT_NAME               # Key Vault navn (hvis brukt)
 ```
 
 ### 3.2 Modellkonfigurasjon 
 ```bash title="" linenums="0"
-# Chat-modellkonfigurasjon
-AZURE_AI_AGENT_MODEL_NAME         # Standard: gpt-4o-mini
+# Chatmodellkonfigurasjon
+AZURE_AI_AGENT_MODEL_NAME         # Standard: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Standard: OpenAI (eller Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Standard: siste tilgjengelige
+AZURE_AI_AGENT_MODEL_VERSION      # Standard: nyeste tilgjengelige
 AZURE_AI_AGENT_DEPLOYMENT_NAME    # Distribusjonsnavn for chatmodell
 AZURE_AI_AGENT_DEPLOYMENT_SKU     # Standard: Standard
 AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standard: 80 (tusen TPM)
@@ -328,36 +328,36 @@ AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standard: 80 (tusen TPM)
 # Innebyggingsmodellkonfigurasjon
 AZURE_AI_EMBED_MODEL_NAME         # Standard: text-embedding-3-small
 AZURE_AI_EMBED_MODEL_FORMAT       # Standard: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Standard: siste tilgjengelige
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Distribusjonsnavn for innebygde modeller
+AZURE_AI_EMBED_MODEL_VERSION      # Standard: nyeste tilgjengelige
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Distribusjonsnavn for innebygginger
 AZURE_AI_EMBED_DEPLOYMENT_SKU     # Standard: Standard
 AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Standard: 50 (tusen TPM)
 
 # Agentkonfigurasjon
-AZURE_AI_AGENT_NAME               # Agent visningsnavn
+AZURE_AI_AGENT_NAME               # Agents visningsnavn
 AZURE_EXISTING_AGENT_ID           # Bruk eksisterende agent (valgfritt)
 ```
 
 ### 3.3 Funksjonsbryter
 ```bash title="" linenums="0"
 # Valgfrie tjenester
-USE_APPLICATION_INSIGHTS         # Standard: sant
-USE_AZURE_AI_SEARCH_SERVICE      # Standard: usant
-USE_CONTAINER_REGISTRY           # Standard: sant
+USE_APPLICATION_INSIGHTS         # Standard: sann
+USE_AZURE_AI_SEARCH_SERVICE      # Standard: usann
+USE_CONTAINER_REGISTRY           # Standard: sann
 
 # Overvåking og sporing
-ENABLE_AZURE_MONITOR_TRACING     # Standard: usant
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standard: usant
+ENABLE_AZURE_MONITOR_TRACING     # Standard: usann
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standard: usann
 
 # Søkekonfigurasjon
-AZURE_AI_SEARCH_INDEX_NAME       # Søk indeksenavn
-AZURE_SEARCH_SERVICE_NAME        # Søk tjenestenavn
+AZURE_AI_SEARCH_INDEX_NAME       # Navn på søkeindeks
+AZURE_SEARCH_SERVICE_NAME        # Navn på søketjeneste
 ```
 
 ### 3.4 AI-prosjektkonfigurasjon 
 ```bash title="" linenums="0"
 # Bruk eksisterende ressurser
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Fullt ressurs-ID for eksisterende AI-prosjekt
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Full ressurs-ID for eksisterende AI-prosjekt
 AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endepunkt-URL for eksisterende prosjekt
 ```
 
@@ -383,5 +383,5 @@ azd env set --from-file .env
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på sitt morsmål skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
