@@ -1,28 +1,26 @@
-# AI 特定故障排除指南
+# AI 专用故障排除指南
 
-**章节导航：**
-- **📚 课程首页**: [AZD 入门](../../README.md)
-- **📖 当前章节**: 第7章 - 故障排除与调试
-- **⬅️ 上一章**: [调试指南](debugging.md)
-- **➡️ 下一章**: [第8章：生产与企业模式](../chapter-08-production/production-ai-practices.md)
-- **🤖 相关**: [第2章：以AI为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
-
-**上一节：** [生产 AI 实践](../chapter-08-production/production-ai-practices.md) | **下一节：** [AZD 基础](../chapter-01-foundation/azd-basics.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD 入门](../../README.md)
+- **📖 Current Chapter**: 第7章 - 故障排除与调试
+- **⬅️ Previous**: [调试指南](debugging.md)
+- **➡️ Next Chapter**: [第8章：生产与企业模式](../chapter-08-production/production-ai-practices.md)
+- **🤖 Related**: [第2章：以 AI 为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 本综合故障排除指南解决在使用 AZD 部署 AI 解决方案时的常见问题，提供针对 Azure AI 服务的解决方案和调试技术。
 
 ## 目录
 
-- [Azure OpenAI 服务问题](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI 搜索问题](../../../../docs/chapter-07-troubleshooting)
-- [容器应用部署问题](../../../../docs/chapter-07-troubleshooting)
-- [身份验证与权限错误](../../../../docs/chapter-07-troubleshooting)
-- [模型部署失败](../../../../docs/chapter-07-troubleshooting)
-- [性能与扩展问题](../../../../docs/chapter-07-troubleshooting)
-- [成本与配额管理](../../../../docs/chapter-07-troubleshooting)
-- [调试工具与技术](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry 模型服务问题](#azure-openai-service-issues)
+- [Azure AI 搜索问题](#azure-ai-搜索问题)
+- [容器应用部署问题](#容器应用部署问题)
+- [身份验证与权限错误](#身份验证与权限错误)
+- [模型部署失败](#模型部署失败)
+- [性能与扩展问题](#性能与扩展问题)
+- [成本与配额管理](#成本与配额管理)
+- [调试工具与技术](#调试工具与技术)
 
-## Azure OpenAI 服务问题
+## Microsoft Foundry 模型服务问题
 
 ### 问题：OpenAI 服务在该区域不可用
 
@@ -32,9 +30,9 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **原因：**
-- Azure OpenAI 在所选区域不可用
-- 首选区域配额已用尽
-- 区域容量限制
+- 在所选区域无法使用 Microsoft Foundry 模型
+- 首选区域配额已耗尽
+- 区域容量受限
 
 **解决方案：**
 
@@ -70,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### 问题：模型部署配额超限
+### 问题：模型部署配额超出
 
 **症状：**
 ```
@@ -104,7 +102,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -140,7 +138,7 @@ az rest --method get \
 
 ## Azure AI 搜索问题
 
-### 问题：搜索服务定价层级不足
+### 问题：搜索服务定价层不足
 
 **症状：**
 ```
@@ -149,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **解决方案：**
 
-1. **升级定价层级：**
+1. **升级定价层：**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **禁用语义搜索（开发环境）：**
+2. **在开发环境中禁用语义搜索：**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -192,7 +190,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **验证搜索服务密钥：**
 ```bash
-# 获取搜索服务管理员密钥
+# 获取搜索服务的管理员密钥
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -343,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # 在此初始化 AI 客户端
+        # 在此处初始化 AI 客户端
         pass
 
 @asynccontextmanager
@@ -363,7 +361,7 @@ app = FastAPI(lifespan=lifespan)
 
 **症状：**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **解决方案：**
@@ -436,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **使用 RBAC 而非访问策略：**
+2. **使用 RBAC 而不是访问策略：**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -475,7 +473,7 @@ az cognitiveservices account list-models \
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -523,7 +521,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## 性能与扩展问题
 
-### 问题：响应延迟高
+### 问题：高延迟响应
 
 **症状：**
 - 响应时间 > 30 秒
@@ -534,7 +532,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 1. **实现请求超时：**
 ```python
-# 配置适当的超时
+# 配置适当的超时设置
 import httpx
 
 client = httpx.AsyncClient(
@@ -567,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **配置自动伸缩：**
+3. **配置自动扩缩：**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -601,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### 问题：内存不足错误
+### 问题：内存溢出错误
 
 **症状：**
 ```
@@ -655,11 +653,11 @@ class MemoryOptimizedAI:
 
 ## 成本与配额管理
 
-### 问题：意外的高成本
+### 问题：意外的高额费用
 
 **症状：**
 - Azure 账单高于预期
-- 令牌使用超出估算
+- 令牌使用量超过估算
 - 触发预算警报
 
 **解决方案：**
@@ -710,21 +708,21 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **优化模型选择：**
 ```python
-# 成本感知的模型选择
+# 考虑成本的模型选择
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # 每千个令牌
-    'gpt-4': 0.03,          # 每千个令牌
-    'gpt-35-turbo': 0.0015  # 每千个令牌
+    'gpt-4.1-mini': 0.00015,  # 每1K标记
+    'gpt-4.1': 0.03,          # 每1K标记
+    'gpt-35-turbo': 0.0015  # 每1K标记
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
 ## 调试工具与技术
@@ -738,7 +736,7 @@ azd up --debug
 # 检查部署状态
 azd show
 
-# 查看应用日志（打开监控仪表板）
+# 查看应用程序日志（打开监控仪表板）
 azd monitor --logs
 
 # 查看实时指标
@@ -748,14 +746,34 @@ azd monitor --live
 azd env get-values
 ```
 
-### 应用调试
+### AZD AI 扩展诊断命令
 
-1. **结构化日志：**
+如果您使用 `azd ai agent init` 部署了代理，可使用以下附加工具：
+
+```bash
+# 确保 agents 扩展已安装
+azd extension install azure.ai.agents
+
+# 从清单重新初始化或更新代理
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# 使用 MCP 服务器允许 AI 工具查询项目状态
+azd mcp start
+
+# 生成用于审查和审计的基础设施文件
+azd infra generate
+```
+
+> **提示：** 使用 `azd infra generate` 将 IaC 写入磁盘，以便您可以准确检查已配置的资源。这在调试资源配置问题时非常有价值。完整详情请参见 [AZD AI CLI 参考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
+
+### 应用程序调试
+
+1. **结构化日志记录：**
 ```python
 import logging
 import json
 
-# 为 AI 应用配置结构化日志记录
+# 为 AI 应用配置结构化日志
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -781,7 +799,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # 检查与 OpenAI 的连接
+    # 检查 OpenAI 连通性
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -834,42 +852,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## 常见错误代码与解决方法
+## 常见错误代码与解决方案
 
 | 错误代码 | 描述 | 解决方案 |
 |------------|-------------|----------|
 | 401 | 未授权 | 检查 API 密钥和托管身份配置 |
 | 403 | 禁止访问 | 验证 RBAC 角色分配 |
-| 429 | 被限流 | 实现带指数退避的重试逻辑 |
-| 500 | 内部服务器错误 | 检查模型部署状态和日志 |
-| 503 | 服务不可用 | 验证服务健康状况和区域可用性 |
+| 429 | 超出速率限制 | 实施带指数退避的重试逻辑 |
+| 500 | 服务器内部错误 | 检查模型部署状态和日志 |
+| 503 | 服务不可用 | 验证服务运行状况和区域可用性 |
 
 ## 后续步骤
 
 1. **查看 [AI 模型部署指南](../chapter-02-ai-development/ai-model-deployment.md)** 以获取部署最佳实践
-2. **完成 [生产 AI 实践](../chapter-08-production/production-ai-practices.md)** 以获得企业级解决方案
+2. **完成 [生产 AI 实践](../chapter-08-production/production-ai-practices.md)** 以获得企业就绪的解决方案
 3. **加入 [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** 获取社区支持
-4. **向 [AZD GitHub 存储库](https://github.com/Azure/azure-dev) 提交问题** 以报告 AZD 特定问题
+4. **提交问题至 [AZD GitHub 仓库](https://github.com/Azure/azure-dev)** 以报告 AZD 特定问题
 
 ## 资源
 
-- [Azure OpenAI 服务故障排除](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Microsoft Foundry 模型服务故障排除](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [容器应用故障排除](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Azure AI 搜索故障排除](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure 诊断代理技能**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - 在你的编辑器中安装 Azure 故障排除技能： `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**章节导航：**
-- **📚 课程首页**: [AZD 入门](../../README.md)
-- **📖 当前章节**: 第7章 - 故障排除与调试
-- **⬅️ 上一章**: [调试指南](debugging.md)
-- **➡️ 下一章**: [第8章：生产与企业模式](../chapter-08-production/production-ai-practices.md)
-- **🤖 相关**: [第2章：以AI为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Azure Developer CLI 故障排除](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD 入门](../../README.md)
+- **📖 Current Chapter**: 第7章 - 故障排除与调试
+- **⬅️ Previous**: [调试指南](debugging.md)
+- **➡️ Next Chapter**: [第8章：生产与企业模式](../chapter-08-production/production-ai-practices.md)
+- **🤖 Related**: [第2章：以 AI 为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Reference**: [Azure 开发者 CLI 故障排除](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件使用 AI 翻译服务 Co-op Translator（https://github.com/Azure/co-op-translator）进行翻译。尽管我们力求准确，但请注意，自动翻译可能存在错误或不准确之处。应以原始语言的原文为准。对于重要信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或曲解承担责任。
+**免责声明**:
+本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们尽力确保准确，但请注意自动翻译可能包含错误或不准确之处。原始文档的原语言版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们概不负责。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

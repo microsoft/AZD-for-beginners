@@ -1,42 +1,42 @@
-# عامل‌های هوش مصنوعی با Azure Developer CLI
+# عوامل هوش مصنوعی با Azure Developer CLI
 
 **ناوبری فصل:**
-- **📚 خانه دوره**: [AZD For Beginners](../../README.md)
-- **📖 فصل جاری**: فصل 2 - توسعه مبتنی بر هوش مصنوعی
-- **⬅️ قبلی**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ بعدی**: [Production AI Practices](production-ai-practices.md)
-- **🚀 پیشرفته**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+- **📚 صفحه دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل 2 - توسعهٔ مبتنی بر هوش مصنوعی
+- **⬅️ قبلی**: [ادغام Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ بعدی**: [استقرار مدل هوش مصنوعی](ai-model-deployment.md)
+- **🚀 پیشرفته**: [راه‌حل‌های چندعاملی](../../examples/retail-scenario.md)
 
 ---
 
-## مقدمه
+## معرفی
 
-عامل‌های هوش مصنوعی برنامه‌های خودگردانی هستند که می‌توانند محیط خود را درک کنند، تصمیم بگیرند و برای دستیابی به اهداف خاص اقدام کنند. برخلاف چت‌بات‌های ساده که به ورودی‌ها پاسخ می‌دهند، عامل‌ها می‌توانند:
+عوامل هوش مصنوعی برنامه‌های خودگردان هستند که می‌توانند محیط پیرامون خود را درک کنند، تصمیم بگیرند و برای رسیدن به اهداف خاص اقدام کنند. برخلاف چت‌بات‌های ساده که به درخواست‌ها پاسخ می‌دهند، عوامل می‌توانند:
 
-- **از ابزارها استفاده کنند** - فراخوانی APIها، جستجوی پایگاه‌های داده، اجرای کد
-- **برنامه‌ریزی و استدلال کنند** - تقسیم کارهای پیچیده به مراحل
-- **از متن یاد بگیرند** - حفظ حافظه و تطبیق رفتار
-- **همکاری کنند** - کار با سایر عامل‌ها (سیستم‌های چندعاملی)
+- **استفاده از ابزارها** - فراخوانی APIها، جستجوی پایگاه‌های داده، اجرای کد
+- **برنامه‌ریزی و استدلال** - تقسیم وظایف پیچیده به گام‌ها
+- **یادگیری از زمینه** - حفظ حافظه و تطبیق رفتار
+- **همکاری** - کار با سایر عوامل (سامانه‌های چندعامله)
 
-این راهنما نشان می‌دهد چگونه عامل‌های هوش مصنوعی را با استفاده از Azure Developer CLI (azd) در Azure مستقر کنید.
+این راهنما نشان می‌دهد چگونه با استفاده از Azure Developer CLI (azd) عوامل هوش مصنوعی را در Azure مستقر کنید.
 
 ## اهداف یادگیری
 
-با تکمیل این راهنما، شما:
-- درک می‌کنید عامل‌های هوش مصنوعی چه هستند و چگونه با چت‌بات‌ها متفاوت‌اند
-- قالب‌های آماده عامل را با استفاده از AZD مستقر می‌کنید
-- Foundry Agents را برای عامل‌های سفارشی پیکربندی می‌کنید
-- الگوهای پایه عامل را پیاده‌سازی می‌کنید (استفاده از ابزار، RAG، چندعاملی)
-- عامل‌های مستقر را مانیتور و اشکال‌زدایی می‌کنید
+با تکمیل این راهنما، شما قادر خواهید بود:
+- درک اینکه عوامل هوش مصنوعی چه هستند و چگونه از چت‌بات‌ها متفاوتند
+- استقرار قالب‌های ازپیش‌ساختهٔ عامل هوش مصنوعی با استفاده از AZD
+- پیکربندی Foundry Agents برای عوامل سفارشی
+- اجرای الگوهای پایه‌ای عامل (استفاده از ابزارها، RAG، چندعاملی)
+- مانیتورینگ و رفع اشکال عوامل مستقرشده
 
 ## نتایج یادگیری
 
-پس از تکمیل، شما قادر خواهید بود:
+پس از اتمام، شما قادر خواهید بود:
 - برنامه‌های عامل هوش مصنوعی را با یک فرمان در Azure مستقر کنید
 - ابزارها و قابلیت‌های عامل را پیکربندی کنید
-- تولید تقویت‌شده با بازیابی (RAG) را با عامل‌ها پیاده‌سازی کنید
-- معماری‌های چندعاملی برای جریان‌های کاری پیچیده طراحی کنید
-- مشکلات رایج استقرار عامل را عیب‌یابی کنید
+- پیاده‌سازی تولید تقویت‌شده با بازیابی (RAG) توسط عوامل
+- طراحی معماری‌های چندعاملی برای گردش‌کارهای پیچیده
+- رفع اشکال مشکلات رایج استقرار عامل
 
 ---
 
@@ -45,21 +45,21 @@
 | ویژگی | چت‌بات | عامل هوش مصنوعی |
 |---------|---------|----------|
 | **رفتار** | به درخواست‌ها پاسخ می‌دهد | اقدامات خودگردان انجام می‌دهد |
-| **ابزارها** | ندارد | می‌تواند APIها را فراخوانی کند، جستجو کند، کد اجرا کند |
+| **ابزارها** | هیچ‌کدام | قادر به فراخوانی APIها، جستجو، اجرای کد |
 | **حافظه** | تنها مبتنی بر جلسه | حافظه پایدار بین جلسات |
-| **برنامه‌ریزی** | پاسخ تک‌مرحله‌ای | استدلال چندمرحله‌ای |
-| **همکاری** | موجودیت واحد | می‌تواند با سایر عامل‌ها کار کند |
+| **برنامه‌ریزی** | تک‌پاسخ | استدلال چندمرحله‌ای |
+| **همکاری** | واحد منفرد | می‌تواند با سایر عوامل کار کند |
 
 ### تشبیه ساده
 
-- **چت‌بات** = یک فرد کمک‌کننده که در میز اطلاعات به سوالات پاسخ می‌دهد
-- **عامل هوش مصنوعی** = یک دستیار شخصی که می‌تواند تماس بگیرد، وقت رزرو کند و کارها را برای شما انجام دهد
+- **چت‌بات** = شخصی یاری‌دهنده که در یک میز اطلاعاتی به سوالات پاسخ می‌دهد
+- **عامل هوش مصنوعی** = دستیار شخصی که می‌تواند تماس بگیرد، قرار ملاقات‌ها را رزرو کند و وظایفی را برای شما انجام دهد
 
 ---
 
-## 🚀 شروع سریع: اولین عامل خود را مستقر کنید
+## 🚀 شروع سریع: استقرار اولین عامل شما
 
-### گزینه 1: قالب Foundry Agents (توصیه‌شده)
+### گزینهٔ 1: قالب Foundry Agents (توصیه‌شده)
 
 ```bash
 # قالب عامل‌های هوش مصنوعی را مقداردهی اولیه کنید
@@ -69,17 +69,17 @@ azd init --template get-started-with-ai-agents
 azd up
 ```
 
-**چه چیزهایی مستقر می‌شوند:**
+**مواردی که مستقر می‌شوند:**
 - ✅ Foundry Agents
-- ✅ Azure OpenAI (GPT-4o)
-- ✅ Azure AI Search (برای RAG)
-- ✅ Azure Container Apps (رابط وب)
-- ✅ Application Insights (نظارت)
+- ✅ Microsoft Foundry Models (gpt-4.1)
+- ✅ Azure AI Search (for RAG)
+- ✅ Azure Container Apps (web interface)
+- ✅ Application Insights (monitoring)
 
 **زمان:** ~15-20 دقیقه
 **هزینه:** ~$100-150/ماه (توسعه)
 
-### گزینه 2: عامل OpenAI با Prompty
+### گزینهٔ 2: عامل OpenAI با Prompty
 
 ```bash
 # قالب عامل مبتنی بر Prompty را مقداردهی اولیه کنید
@@ -89,33 +89,57 @@ azd init --template agent-openai-python-prompty
 azd up
 ```
 
-**چه چیزهایی مستقر می‌شوند:**
-- ✅ Azure Functions (اجرای عامل بدون سرور)
-- ✅ Azure OpenAI
-- ✅ فایل‌های پیکربندی Prompty
-- ✅ پیاده‌سازی نمونه عامل
+**مواردی که مستقر می‌شوند:**
+- ✅ Azure Functions (serverless agent execution)
+- ✅ Microsoft Foundry Models
+- ✅ Prompty configuration files
+- ✅ نمونهٔ پیاده‌سازی عامل
 
 **زمان:** ~10-15 دقیقه
 **هزینه:** ~$50-100/ماه (توسعه)
 
-### گزینه 3: عامل چت RAG
+### گزینهٔ 3: عامل چت RAG
 
 ```bash
-# الگوی چت RAG را مقداردهی اولیه کنید
+# قالب گفتگوی RAG را مقداردهی اولیه کنید
 azd init --template azure-search-openai-demo
 
 # در Azure مستقر کنید
 azd up
 ```
 
-**چه چیزهایی مستقر می‌شوند:**
-- ✅ Azure OpenAI
-- ✅ Azure AI Search با داده نمونه
-- ✅ خط لوله پردازش اسناد
-- ✅ رابط چت با ارجاعات (citations)
+**مواردی که مستقر می‌شوند:**
+- ✅ Microsoft Foundry Models
+- ✅ Azure AI Search with sample data
+- ✅ خط‌لولهٔ پردازش اسناد
+- ✅ رابط چت با ارجاعات
 
 **زمان:** ~15-25 دقیقه
 **هزینه:** ~$80-150/ماه (توسعه)
+
+### گزینهٔ 4: AZD AI Agent Init (مبتنی بر Manifest)
+
+اگر یک فایل مانفیست عامل دارید، می‌توانید از فرمان `azd ai` برای اسکافولد کردن یک پروژهٔ سرویس Foundry Agent به‌طور مستقیم استفاده کنید:
+
+```bash
+# افزونهٔ عامل‌های هوش مصنوعی را نصب کنید
+azd extension install azure.ai.agents
+
+# از یک مانیفست عامل مقداردهی اولیه کنید
+azd ai agent init -m agent-manifest.yaml
+
+# در Azure مستقر کنید
+azd up
+```
+
+**چه زمانی از `azd ai agent init` در مقابل `azd init --template` استفاده کنیم:**
+
+| رویکرد | مناسب برای | چگونه کار می‌کند |
+|----------|----------|------|
+| `azd init --template` | شروع از یک برنامه نمونهٔ کاری | رونوشت (کلون) یک مخزن قالب کامل با کد و زیرساخت |
+| `azd ai agent init -m` | ساختن از مانفیست عامل خود | اسکافولد کردن ساختار پروژه از تعریف عامل شما |
+
+> **نکته:** هنگام یادگیری از `azd init --template` استفاده کنید (گزینه‌های 1-3 بالا). هنگام ساخت عوامل تولیدی با مانفیست‌های خود از `azd ai agent init` استفاده کنید. برای مرجع کامل به [فرمان‌های AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) مراجعه کنید.
 
 ---
 
@@ -125,95 +149,61 @@ azd up
 
 ساده‌ترین الگوی عامل - یک عامل که می‌تواند از چندین ابزار استفاده کند.
 
+```mermaid
+graph TD
+    UI[رابط کاربری] --> Agent[عامل هوش مصنوعی<br/>gpt-4.1]
+    Agent --> Search[ابزار جستجو]
+    Agent --> Database[ابزار پایگاه داده]
+    Agent --> API[ابزار API]
 ```
-┌─────────────────────────────────────┐
-│           User Interface            │
-└─────────────────┬───────────────────┘
-                  │
-          ┌───────▼───────┐
-          │  AI Agent     │
-          │  (GPT-4o)     │
-          └───────┬───────┘
-                  │
-    ┌─────────────┼─────────────┐
-    │             │             │
-┌───▼───┐   ┌────▼────┐   ┌───▼───┐
-│Search │   │Database │   │ API   │
-│ Tool  │   │  Tool   │   │ Tool  │
-└───────┘   └─────────┘   └───────┘
-```
-
 **مناسب برای:**
 - بات‌های پشتیبانی مشتری
 - دستیاران پژوهشی
-- عامل‌های تحلیل داده
+- عوامل تحلیل داده
 
 **قالب AZD:** `azure-search-openai-demo`
 
 ### الگو 2: عامل RAG (تولید تقویت‌شده با بازیابی)
 
-عاملی که قبل از تولید پاسخ، اسناد مرتبط را بازیابی می‌کند.
+عاملی که قبل از تولید پاسخ‌ها، اسناد مرتبط را بازیابی می‌کند.
 
+```mermaid
+graph TD
+    Query[پرس‌وجوی کاربر] --> RAG[عامل RAG]
+    RAG --> Vector[جستجوی برداری]
+    RAG --> LLM[مدل زبان بزرگ (LLM)<br/>gpt-4.1]
+    Vector -- اسناد --> LLM
+    LLM --> Response[پاسخ با ارجاعات]
 ```
-┌──────────────────────────────────────────────┐
-│                User Query                     │
-└─────────────────────┬────────────────────────┘
-                      │
-              ┌───────▼───────┐
-              │  RAG Agent    │
-              └───────┬───────┘
-                      │
-         ┌────────────┴────────────┐
-         │                         │
-    ┌────▼────┐              ┌────▼────┐
-    │ Vector  │              │  LLM    │
-    │ Search  │──Documents──►│ (GPT-4) │
-    └─────────┘              └────┬────┘
-                                  │
-                          ┌───────▼───────┐
-                          │ Response with │
-                          │  Citations    │
-                          └───────────────┘
-```
-
 **مناسب برای:**
 - پایگاه‌های دانش سازمانی
-- سیستم‌های پرسش‌وپاسخ سندی
-- تحقیقات تطبیقی و حقوقی
+- سیستم‌های پرسش‌وپاسخ اسناد
+- مطالعات حقوقی و انطباق
 
 **قالب AZD:** `azure-search-openai-demo`
 
-### الگو 3: سیستم چندعاملی
+### الگو 3: سامانهٔ چندعامله
 
-چندین عامل تخصصی که با هم در وظایف پیچیده همکاری می‌کنند.
+چندین عامل تخصصی که برای وظایف پیچیده با هم کار می‌کنند.
 
+```mermaid
+graph TD
+    Orchestrator[عامل هماهنگ‌کننده] --> Research[عامل پژوهشگر<br/>gpt-4.1]
+    Orchestrator --> Writer[عامل نویسنده<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[عامل بازبین<br/>gpt-4.1]
 ```
-                ┌─────────────────┐
-                │  Orchestrator   │
-                │    Agent        │
-                └────────┬────────┘
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-┌───────▼───────┐ ┌─────▼──────┐ ┌───────▼───────┐
-│   Research    │ │   Writer   │ │   Reviewer    │
-│    Agent      │ │   Agent    │ │    Agent      │
-│  (GPT-4o)     │ │(GPT-4o-mini│ │   (GPT-4o)    │
-└───────────────┘ └────────────┘ └───────────────┘
-```
-
 **مناسب برای:**
 - تولید محتوای پیچیده
-- جریان‌های کاری چندمرحله‌ای
-- وظایف نیازمند تخصص‌های مختلف
+- گردش‌کارهای چندمرحله‌ای
+- وظایفی که به تخصص‌های مختلف نیاز دارند
 
-**بیشتر بیاموزید:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**بیشتر بیاموزید:** [الگوهای هماهنگی چندعامله](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
 ## ⚙️ پیکربندی ابزارهای عامل
 
-عامل‌ها زمانی قدرتمند می‌شوند که بتوانند از ابزارها استفاده کنند. در اینجا نحوه پیکربندی ابزارهای متداول آمده است:
+عوامل زمانی قدرتمند می‌شوند که بتوانند از ابزارها استفاده کنند. در اینجا نحوهٔ پیکربندی ابزارهای متداول آمده است:
 
 ### پیکربندی ابزار در Foundry Agents
 
@@ -222,7 +212,7 @@ azd up
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# تعریف ابزارهای سفارشی
+# ابزارهای سفارشی را تعریف کنید
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -238,9 +228,9 @@ search_tool = FunctionTool(
     }
 )
 
-# ایجاد عامل با ابزارها
+# عامل را با ابزارها ایجاد کنید
 agent = project_client.agents.create_agent(
-    model="gpt-4o",
+    model="gpt-4.1",
     name="Support Agent",
     instructions="You are a helpful support agent. Use the search tool to find relevant information.",
     tools=[search_tool, CodeInterpreterTool()]
@@ -250,21 +240,21 @@ agent = project_client.agents.create_agent(
 ### پیکربندی محیط
 
 ```bash
-# تنظیم متغیرهای محیطی مخصوص عامل
-azd env set AZURE_OPENAI_MODEL "gpt-4o"
+# متغیرهای محیطی مخصوص عامل را تنظیم کنید
+azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# استقرار با پیکربندی به‌روز شده
+# با پیکربندی به‌روز شده مستقر کنید
 azd deploy
 ```
 
 ---
 
-## 📊 مانیتورینگ عامل‌ها
+## 📊 مانیتورینگ عوامل
 
-### ادغام Application Insights
+### یکپارچه‌سازی Application Insights
 
 تمام قالب‌های عامل AZD شامل Application Insights برای مانیتورینگ هستند:
 
@@ -279,59 +269,63 @@ azd monitor --logs
 azd monitor --live
 ```
 
-### معیارهای کلیدی برای دنبال کردن
+### معیارهای کلیدی برای پیگیری
 
 | معیار | توضیحات | هدف |
 |--------|-------------|--------|
-| تأخیر پاسخ | زمان تولید پاسخ | < 5 ثانیه |
-| مصرف توکن | توکن‌ها در هر درخواست | برای هزینه نظارت کنید |
-| نرخ موفقیت فراخوانی ابزار | ٪ اجرای موفق ابزارها | > 95% |
+| تاخیر پاسخ | زمان تولید پاسخ | < 5 ثانیه |
+| مصرف توکن | توکن‌ها در هر درخواست | برای هزینه پایش شود |
+| نرخ موفقیت فراخوانی ابزار | % اجرای موفق ابزارها | > 95% |
 | نرخ خطا | درخواست‌های ناموفق عامل | < 1% |
-| رضایت کاربر | امتیازات بازخورد | > 4.0/5.0 |
+| رضایت کاربر | امتیازهای بازخورد | > 4.0/5.0 |
 
-### ثبت لاگ سفارشی برای عامل‌ها
+### لاگ‌گیری سفارشی برای عوامل
 
 ```python
-import logging
-from opencensus.ext.azure.log_exporter import AzureLogHandler
+import os
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(
+# پیکربندی Azure Monitor با OpenTelemetry
+configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
-))
+)
+
+tracer = trace.get_tracer(__name__)
 
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
-    logger.info("agent_interaction", extra={
-        "custom_dimensions": {
+    with tracer.start_as_current_span("agent_interaction") as span:
+        span.set_attributes({
             "user_query": user_query,
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
-        }
-    })
+        })
 ```
+
+> **توجه:** بسته‌های مورد نیاز را نصب کنید: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
 ## 💰 ملاحظات هزینه
 
-### هزینه‌های تخمینی ماهیانه بر اساس الگو
+### هزینهٔ ماهیانهٔ تخمینی بر اساس الگو
 
 | الگو | محیط توسعه | تولید |
 |---------|-----------------|------------|
 | عامل واحد | $50-100 | $200-500 |
 | عامل RAG | $80-150 | $300-800 |
-| چندعاملی (2-3 عامل) | $150-300 | $500-1,500 |
-| چندعاملی سازمانی | $300-500 | $1,500-5,000+ |
+| چندعامله (2-3 عامل) | $150-300 | $500-1,500 |
+| چندعامله سازمانی | $300-500 | $1,500-5,000+ |
 
 ### نکات بهینه‌سازی هزینه
 
-1. **برای کارهای ساده از GPT-4o-mini استفاده کنید**
+1. **برای وظایف ساده از gpt-4.1-mini استفاده کنید**
    ```bash
-   azd env set AZURE_OPENAI_MODEL "gpt-4o-mini"
+   azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **برای پرسش‌های تکراری کش پیاده‌سازی کنید**
+2. **برای پرس‌وجوهای تکراری کش پیاده‌سازی کنید**
    ```python
    from functools import lru_cache
    
@@ -340,23 +334,25 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **محدودیت توکن تنظیم کنید**
+3. **محدودیت توکن برای هر اجرا تعیین کنید**
    ```python
-   agent = project_client.agents.create_agent(
-       model="gpt-4o",
-       max_tokens=1000  # طول پاسخ را محدود کنید
+   # مقدار max_completion_tokens را هنگام اجرای عامل تنظیم کنید، نه هنگام ایجاد
+   run = project_client.agents.create_run(
+       thread_id=thread.id,
+       agent_id=agent.id,
+       max_completion_tokens=1000  # طول پاسخ را محدود کنید
    )
    ```
 
-4. **هنگامی که استفاده‌ای نیست، به صفر مقیاس دهید**
+4. **هنگام عدم استفاده تا صفر مقیاس دهید**
    ```bash
-   # Container Apps به‌طور خودکار تا صفر مقیاس می‌یابند
+   # برنامه‌های کانتینری به‌طور خودکار تا صفر مقیاس می‌یابند
    azd env set MIN_REPLICAS "0"
    ```
 
 ---
 
-## 🔧 عیب‌یابی عامل‌ها
+## 🔧 عیب‌یابی عوامل
 
 ### مشکلات رایج و راه‌حل‌ها
 
@@ -376,35 +372,35 @@ az cognitiveservices account deployment list \
 azd monitor --logs
 ```
 
-**دلایل رایج:**
-- تطابق نداشتن امضای تابع ابزار
-- مجوزهای لازم مفقود است
-- endpoint API قابل دسترسی نیست
+**علل رایج:**
+- ناسازگاری امضای تابع ابزار
+- مجوزهای لازم از دست رفته
+- نقطه پایانی API در دسترس نیست
 </details>
 
 <details>
-<summary><strong>❌ تأخیر بالا در پاسخ‌های عامل</strong></summary>
+<summary><strong>❌ تأخیر زیاد در پاسخ‌های عامل</strong></summary>
 
 ```bash
-# برای یافتن گلوگاه‌ها، Application Insights را بررسی کنید
+# Application Insights را برای گلوگاه‌ها بررسی کنید
 azd monitor --live
 
-# استفاده از یک مدل سریع‌تر را در نظر بگیرید
-azd env set AZURE_OPENAI_MODEL "gpt-4o-mini"
+# در نظر بگیرید از مدل سریع‌تری استفاده کنید
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
 **نکات بهینه‌سازی:**
-- از پاسخ‌های استریمینگ استفاده کنید
+- از پاسخ‌های جریانی استفاده کنید
 - کش پاسخ را پیاده‌سازی کنید
-- اندازه پنجره کانتکست را کاهش دهید
+- اندازهٔ پنجرهٔ زمینه را کاهش دهید
 </details>
 
 <details>
-<summary><strong>❌ عامل اطلاعات نادرست یا توهم‌زده برمی‌گرداند</strong></summary>
+<summary><strong>❌ عامل اطلاعات نادرست یا خیال‌پردازی‌شده بازمی‌گرداند</strong></summary>
 
 ```python
-# با پرومپت‌های سیستمی بهتر بهبود دهید
+# با پرامپت‌های سیستمی بهتر شود
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -413,27 +409,29 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# برای پایه‌گذاری، قابلیت بازیابی اضافه کنید
+# بازیابی را برای پایه‌گذاری اضافه کنید
 agent = project_client.agents.create_agent(
-    model="gpt-4o",
+    model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # پاسخ‌ها را مبتنی بر اسناد قرار دهید
+    tools=[FileSearchTool()]  # پاسخ‌ها را بر اسناد پایه‌گذاری کنید
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ خطاهای تجاوز از محدودیت توکن</strong></summary>
+<summary><strong>❌ خطاهای تجاوز از حد توکن</strong></summary>
 
 ```python
-# پیاده‌سازی مدیریت پنجره‌ی زمینه
-def truncate_context(messages, max_tokens=8000):
+# پیاده‌سازی مدیریت پنجرهٔ زمینه
+def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
+    import tiktoken
+    encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
     truncated = []
     
     for msg in reversed(messages):
-        msg_tokens = len(msg.content) // 4  # برآورد تقریبی
+        msg_tokens = len(encoding.encode(msg.content))
         if total_tokens + msg_tokens > max_tokens:
             break
         truncated.insert(0, msg)
@@ -449,111 +447,158 @@ def truncate_context(messages, max_tokens=8000):
 
 ### تمرین 1: استقرار یک عامل پایه (20 دقیقه)
 
-**هدف:** اولین عامل هوش مصنوعی خود را با AZD مستقر کنید
+**هدف:** استقرار اولین عامل هوش مصنوعی شما با استفاده از AZD
 
 ```bash
-# گام ۱: مقداردهی اولیه قالب
+# مرحله 1: مقداردهی اولیه قالب
 azd init --template get-started-with-ai-agents
 
-# گام ۲: ورود به Azure
+# مرحله 2: ورود به Azure
 azd auth login
 
-# گام ۳: استقرار
+# مرحله 3: استقرار
 azd up
 
-# گام ۴: تست ایجنت
-# آدرس URL نشان‌داده‌شده در خروجی را باز کنید
+# مرحله 4: تست عامل
+# خروجی مورد انتظار پس از استقرار:
+#   استقرار کامل شد!
+#   نقطه پایانی: https://<app-name>.<region>.azurecontainerapps.io
+# URL نمایش‌داده‌شده در خروجی را باز کنید و سعی کنید یک سؤال بپرسید
 
-# گام ۵: پاک‌سازی
+# مرحله 5: مشاهده پایش
+azd monitor --overview
+
+# مرحله 6: پاک‌سازی
 azd down --force --purge
 ```
 
 **معیارهای موفقیت:**
 - [ ] عامل به سوالات پاسخ می‌دهد
-- [ ] قادر به دسترسی به داشبورد مانیتورینگ است
-- [ ] منابع با موفقیت پاک‌سازی شده‌اند
+- [ ] می‌تواند از طریق `azd monitor` به داشبورد مانیتورینگ دسترسی داشته باشد
+- [ ] منابع به‌طور موفقیت‌آمیز پاک‌سازی شدند
 
 ### تمرین 2: افزودن یک ابزار سفارشی (30 دقیقه)
 
-**هدف:** یک ابزار سفارشی به عامل اضافه کنید
+**هدف:** گسترش یک عامل با یک ابزار سفارشی
 
-1. قالب عامل را مستقر کنید
-2. یک تابع ابزار جدید ایجاد کنید:
+1. قالب عامل را مستقر کنید:
+   ```bash
+   azd init --template get-started-with-ai-agents
+   azd up
+   ```
+2. یک تابع ابزار جدید در کد عامل خود ایجاد کنید:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # فراخوانی API به سرویس هواشناسی
+       # فراخوانی API برای سرویس هواشناسی
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. ابزار را در عامل ثبت کنید
-4. آزمایش کنید که عامل از ابزار جدید استفاده می‌کند
+3. ابزار را با عامل ثبت کنید:
+   ```python
+   from azure.ai.projects.models import FunctionTool
+
+   weather_tool = FunctionTool(
+       name="get_weather",
+       description="Get current weather for a location",
+       parameters={
+           "type": "object",
+           "properties": {
+               "location": {"type": "string", "description": "City name"}
+           },
+           "required": ["location"]
+       }
+   )
+
+   agent = project_client.agents.create_agent(
+       model="gpt-4.1",
+       name="Weather Agent",
+       tools=[weather_tool]
+   )
+   ```
+4. دوباره مستقر و آزمایش کنید:
+   ```bash
+   azd deploy
+   # پرسش: "هوا در سیاتل چگونه است؟"
+   # انتظار: عامل تابع get_weather("Seattle") را فراخوانی کرده و اطلاعات هواشناسی را بازمی‌گرداند.
+   ```
 
 **معیارهای موفقیت:**
-- [ ] عامل پرسش‌های مرتبط با هواشناسی را تشخیص می‌دهد
-- [ ] ابزار به درستی فراخوانی می‌شود
-- [ ] پاسخ شامل اطلاعات هواشناسی است
+- [ ] عامل پرسش‌های مربوط به آب‌وهوا را تشخیص می‌دهد
+- [ ] ابزار به‌درستی فراخوانی می‌شود
+- [ ] پاسخ شامل اطلاعات آب‌وهوا است
 
 ### تمرین 3: ساخت یک عامل RAG (45 دقیقه)
 
-**هدف:** عاملی ایجاد کنید که از اسناد شما سوالات را پاسخ دهد
+**هدف:** ایجاد عاملی که از اسناد شما به سوالات پاسخ دهد
 
 ```bash
-# قالب RAG را مستقر کنید
+# مرحله ۱: استقرار قالب RAG
 azd init --template azure-search-openai-demo
 azd up
 
-# اسناد خود را بارگذاری کنید
-# (راهنمای ورود داده‌های قالب را دنبال کنید)
+# مرحله ۲: فایل‌های خود را بارگذاری کنید
+# فایل‌های PDF/TXT را در پوشه data/ قرار دهید، سپس اجرا کنید:
+python scripts/prepdocs.py
 
-# با سؤالات اختصاصی دامنه آزمایش کنید
+# مرحله ۳: با سوالات مرتبط با حوزه تست کنید
+# آدرس برنامه وب را از خروجی azd up باز کنید
+# در مورد اسناد آپلودشده خود سوال بپرسید
+# پاسخ‌ها باید شامل ارجاعات استنادی مانند [doc.pdf] باشند
 ```
 
 **معیارهای موفقیت:**
-- [ ] عامل از اسناد بارگذاری‌شده پاسخ می‌دهد
+- [ ] عامل از اسناد آپلودشده پاسخ می‌دهد
 - [ ] پاسخ‌ها شامل ارجاعات هستند
-- [ ] در سوالات خارج از حوزه توهم‌زایی رخ ندهد
+- [ ] در سوالات خارج از محدوده توهم رخ ندهد
 
 ---
 
 ## 📚 گام‌های بعدی
 
-اکنون که با عامل‌های هوش مصنوعی آشنا شدید، این مباحث پیشرفته را کاوش کنید:
+حالا که عوامل هوش مصنوعی را درک کردید، این موضوعات پیشرفته را بررسی کنید:
 
-| موضوع | توضیحات | لینک |
+| موضوع | توضیحات | پیوند |
 |-------|-------------|------|
-| **سیستم‌های چندعاملی** | ساخت سیستم‌هایی با چند عامل همکاری‌کننده | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **الگوهای هماهنگی** | یادگیری الگوهای ارکستراسیون و ارتباطات | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **استقرار تولید** | استقرار عامل آماده سازمان | [Production AI Practices](production-ai-practices.md) |
-| **ارزیابی عامل** | تست و ارزیابی عملکرد عامل | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **سیستم‌های چندعامله** | ساخت سیستم‌هایی با چند عامل همکاری‌کننده | [نمونهٔ چندعامله خرده‌فروشی](../../examples/retail-scenario.md) |
+| **الگوهای هماهنگی** | یادگیری الگوهای ارکستریشن و ارتباط | [الگوهای هماهنگی](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **استقرار در تولید** | استقرار عامل آمادهٔ سازمانی | [روش‌های تولیدی هوش مصنوعی](../chapter-08-production/production-ai-practices.md) |
+| **ارزیابی عامل** | تست و ارزیابی عملکرد عامل | [عیب‌یابی هوش مصنوعی](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **آزمایشگاه کارگاه هوش مصنوعی** | عملی: آماده‌سازی راهکار هوش مصنوعی شما برای AZD | [آزمایشگاه کارگاه هوش مصنوعی](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 منابع اضافی
 
 ### مستندات رسمی
-- [Foundry Agents](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Azure OpenAI Assistants API](https://learn.microsoft.com/azure/ai-services/openai/how-to/assistant)
-- [Semantic Kernel (Agent Framework)](https://learn.microsoft.com/semantic-kernel/)
+- [سرویس عامل هوش مصنوعی Azure](https://learn.microsoft.com/azure/ai-services/agents/)
+- [شروع سریع سرویس Foundry Agent Azure AI](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [چارچوب عامل Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
 
-### قالب‌های AZD برای عامل‌ها
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+### قالب‌های AZD برای عوامل
+- [شروع به کار با عوامل هوش مصنوعی](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [عامل OpenAI پایتون Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
+- [دموی Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### منابع جامعه
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
-- [Azure AI Discord](https://discord.gg/microsoft-azure)
-- [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
+- [Awesome AZD - قالب‌های عامل](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [دی‌سکورد Azure AI](https://discord.gg/microsoft-azure)
+- [دی‌سکورد Microsoft Foundry](https://discord.gg/nTYy5BXMWG)
+
+### مهارت‌های عامل برای ویرایشگر شما
+- [**مهارت‌های عامل Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - مهارت‌های قابل استفاده مجدد عامل هوش مصنوعی برای توسعه در Azure را در GitHub Copilot، Cursor یا هر عامل پشتیبانی‌شده نصب کنید. شامل مهارت‌هایی برای [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), و [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
 **ناوبری**
-- **درس قبلی**: [AI Model Deployment](ai-model-deployment.md)
-- **درس بعدی**: [Production AI Practices](production-ai-practices.md)
+- **درس قبلی**: [ادغام Microsoft Foundry](microsoft-foundry-integration.md)
+- **درس بعدی**: [استقرار مدل هوش مصنوعی](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش‌مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری‌اش باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی یا حساس، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مادری آن باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما مسئول هیچ‌گونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، نیستیم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

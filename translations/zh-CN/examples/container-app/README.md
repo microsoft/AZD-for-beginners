@@ -1,32 +1,32 @@
 # 使用 AZD 的容器应用部署示例
 
-此目录包含使用 Azure Developer CLI (AZD) 将容器化应用部署到 Azure Container Apps 的全面示例。这些示例演示了现实世界的模式、最佳实践和适用于生产环境的配置。
+此目录包含使用 Azure Developer CLI (AZD) 将容器化应用部署到 Azure Container Apps 的完整示例。这些示例展示了真实场景模式、最佳实践以及生产就绪的配置。
 
 ## 📚 目录
 
-- [概述](../../../../examples/container-app)
-- [先决条件](../../../../examples/container-app)
-- [快速开始示例](../../../../examples/container-app)
-- [生产示例](../../../../examples/container-app)
-- [高级模式](../../../../examples/container-app)
-- [最佳实践](../../../../examples/container-app)
+- [概览](#overview)
+- [先决条件](#先决条件)
+- [快速入门示例](#快速入门示例)
+- [生产示例](#生产示例)
+- [高级模式](#高级模式)
+- [最佳实践](#最佳实践)
 
-## 概述
+## Overview
 
-Azure Container Apps 是一个完全托管的无服务器容器平台，使您能够在无需管理基础设施的情况下运行微服务和容器化应用。结合 AZD，您将获得：
+Azure Container Apps 是一个完全托管的无服务器容器平台，可让您在无需管理基础设施的情况下运行微服务和容器化应用。结合 AZD，您将获得：
 
-- **简化的部署**：单个命令即可部署包含基础设施的容器
-- **自动缩放**：根据 HTTP 流量或事件实现缩减到 0 并向外扩展
-- **集成网络**：内置的服务发现和流量拆分
-- **托管身份**：对 Azure 资源的安全认证
-- **成本优化**：仅为您使用的资源付费
+- <strong>简化的部署</strong>：单条命令即可部署容器及其基础设施
+- <strong>自动伸缩</strong>：可根据 HTTP 流量或事件从零扩展
+- <strong>集成网络</strong>：内置服务发现和流量拆分
+- <strong>托管标识</strong>：对 Azure 资源的安全认证
+- <strong>成本优化</strong>：仅为您使用的资源付费
 
 ## 先决条件
 
 在开始之前，请确保您具备：
 
 ```bash
-# 检查 AZD 安装
+# 检查是否已安装 AZD
 azd version
 
 # 检查 Azure CLI
@@ -41,11 +41,11 @@ az login
 ```
 
 **所需的 Azure 资源：**
-- 活跃的 Azure 订阅
+- 有效的 Azure 订阅
 - 资源组创建权限
 - Container Apps 环境访问权限
 
-## 快速开始示例
+## 快速入门示例
 
 ### 1. 简单 Web API（Python Flask）
 
@@ -80,10 +80,10 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **主要特性：**
-- 自动从 0 到 10 个副本扩缩
+- 自动伸缩，从 0 到 10 个副本
 - 健康探针和存活检查
 - 环境变量注入
-- 集成 Application Insights
+- Application Insights 集成
 
 ### 2. Node.js Express API
 
@@ -149,19 +149,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. 静态前端 + API 后端
 
-部署一个具有 React 前端和 API 后端的全栈应用。
+部署一个包含 React 前端和 API 后端的全栈应用。
 
 ```bash
 # 初始化全栈模板
 azd init --template todo-csharp-sql-swa-func
 
-# 审查配置
+# 检查配置
 cat azure.yaml
 
 # 部署两个服务
 azd up
 
-# 打开应用程序
+# 打开应用
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
@@ -169,7 +169,7 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### 示例 1：微服务架构
 
-**场景**：具有多个微服务的电子商务应用
+<strong>场景</strong>：具有多个微服务的电子商务应用
 
 **目录结构：**
 ```
@@ -233,9 +233,9 @@ azd monitor --overview
 
 ### 示例 2：AI 驱动的容器应用
 
-**场景**：与 Azure OpenAI 集成的 AI 聊天应用
+<strong>场景</strong>：集成 Microsoft Foundry 模型的 AI 聊天应用
 
-**文件: src/ai-chat/app.py**
+**文件：src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# 使用托管标识进行安全访问
+# 使用托管身份进行安全访问
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -258,7 +258,7 @@ def chat():
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -268,7 +268,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**文件: azure.yaml**
+**文件：azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +278,7 @@ services:
     host: containerapp
 ```
 
-**文件: infra/main.bicep**
+**文件：infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -328,7 +328,7 @@ azd env new dev
 
 # 配置 OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # 部署
 azd up
@@ -339,9 +339,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### 示例 3：带队列处理的后台工作器
+### 示例 3：带队列处理的后台工作者
 
-**场景**：具有消息队列的订单处理系统
+<strong>场景</strong>：带消息队列的订单处理系统
 
 **目录结构：**
 ```
@@ -360,7 +360,7 @@ queue-worker/
     └── worker/
 ```
 
-**文件: src/worker/processor.py**
+**文件：src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -378,17 +378,17 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # 处理顺序
+            # 处理订单
             print(f"Processing order: {message.content}")
             
-            # 完整的消息
+            # 完整消息
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
     process_orders()
 ```
 
-**文件: azure.yaml**
+**文件：azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -411,7 +411,7 @@ azd init
 # 使用队列配置部署
 azd up
 
-# 根据队列长度调整工作进程数量
+# 根据队列长度缩放工作进程数
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -425,19 +425,19 @@ az containerapp update \
 ### 模式 1：蓝绿部署
 
 ```bash
-# 创建不接收流量的新修订
+# 创建新的修订版本，不分配流量
 azd deploy api --revision-suffix blue --no-traffic
 
-# 测试新修订
+# 测试新的修订版本
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# 拆分流量（20% 到 blue，80% 到 current）
+# 拆分流量（20% 到蓝色，80% 到当前）
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# 完全切换到 blue
+# 完全切换到蓝色
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -446,7 +446,7 @@ az containerapp ingress traffic set \
 
 ### 模式 2：使用 AZD 的金丝雀部署
 
-**文件: .azure/dev/config.json**
+**文件：.azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -463,7 +463,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# 以 10% 的流量部署新修订
+# 以10%的流量部署新修订
 azd deploy api --revision-mode multiple
 
 # 监控指标
@@ -477,13 +477,13 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # 等待 5 分钟
+  sleep 300  # 等待5分钟
 done
 ```
 
 ### 模式 3：多区域部署
 
-**文件: azure.yaml**
+**文件：azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +497,7 @@ services:
       - southeastasia
 ```
 
-**文件: infra/multi-region.bicep**
+**文件：infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -538,7 +538,7 @@ azd show --output json | jq '.services.api.endpoints'
 
 ### 模式 4：Dapr 集成
 
-**文件: infra/app/dapr-enabled.bicep**
+**文件：infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -599,7 +599,7 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# 为资源添加标签以跟踪成本
+# 为资源打标签以便进行成本跟踪
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -670,7 +670,7 @@ azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # 实时查看日志
 azd monitor --logs
-# 或使用适用于容器应用的 Azure CLI：
+# 或使用用于容器应用的 Azure CLI：
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # 监控指标
@@ -688,7 +688,7 @@ az monitor metrics alert create \
 ### 5. 成本优化
 
 ```bash
-# 在不使用时缩减到零
+# 不使用时缩容到零
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -746,7 +746,7 @@ azd init --template <template-name>
 # 部署基础设施和应用程序
 azd up
 
-# 仅部署应用程序代码（跳过基础设施）
+# 仅部署应用代码（跳过基础设施）
 azd deploy
 
 # 仅预配基础设施
@@ -768,7 +768,7 @@ azd down --force --purge
 
 ## 故障排除
 
-### 问题：容器启动失败
+### 问题：容器无法启动
 
 ```bash
 # 使用 Azure CLI 检查日志
@@ -788,13 +788,13 @@ docker run -p 8000:8000 api:local
 ### 问题：无法访问容器应用端点
 
 ```bash
-# 验证 ingress 配置
+# 验证 Ingress 配置
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# 检查内部 ingress 是否已启用
+# 检查内部 Ingress 是否已启用
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -804,7 +804,7 @@ az containerapp ingress update \
 ### 问题：性能问题
 
 ```bash
-# 检查资源使用情况
+# 检查资源利用情况
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
@@ -817,9 +817,9 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## 其他资源和示例
+## 附加资源和示例
 - [微服务示例](./microservices/README.md)
-- [简单 Flask API 示例](./simple-flask-api/README.md)
+- [简单 Flash API 示例](./simple-flask-api/README.md)
 - [Azure Container Apps 文档](https://learn.microsoft.com/azure/container-apps/)
 - [AZD 模板库](https://azure.github.io/awesome-azd/)
 - [Container Apps 示例](https://github.com/Azure-Samples/container-apps-samples)
@@ -829,7 +829,7 @@ az containerapp update \
 
 要贡献新的容器应用示例：
 
-1. 创建一个包含您示例的新子目录
+1. 创建包含您示例的新子目录
 2. 包含完整的 `azure.yaml`、`infra/` 和 `src/` 文件
 3. 添加包含部署说明的完整 README
 4. 使用 `azd up` 测试部署
@@ -837,11 +837,11 @@ az containerapp update \
 
 ---
 
-**需要帮助吗？** 加入 [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 社区以获得支持和答疑。
+**需要帮助？** 加入 [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 社区以获取支持和问题解答。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件使用 AI 翻译服务 Co-op Translator（https://github.com/Azure/co-op-translator）进行了翻译。虽然我们努力确保准确性，但请注意自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于关键信息，建议采用专业人工翻译。我们不对因使用本翻译而产生的任何误解或曲解承担责任。
+**免责声明**:
+本文档已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于重要信息，建议采用专业人工翻译。因使用本翻译而导致的任何误解或曲解，我们不承担任何责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,57 +1,57 @@
 # 2. 验证模板
 
-!!! tip "在本模块结束时您将能够"
+!!! tip "在本模块结束时你将能够"
 
     - [ ] 分析 AI 解决方案架构
     - [ ] 了解 AZD 部署工作流
     - [ ] 使用 GitHub Copilot 获取 AZD 使用帮助
-    - [ ] **实验 2：** 部署并验证 AI Agents 模板
+    - [ ] **Lab 2:** 部署并验证 AI Agents 模板
 
 ---
 
 
 ## 1. 介绍
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) 或 `azd` 是一个开源命令行工具，在将应用构建并部署到 Azure 时可以简化开发人员的工作流。
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) 是标准化的代码仓库，包含示例应用代码、_基础设施即代码_ 资产以及用于一致解决方案架构的 `azd` 配置文件。通过运行 `azd provision` 命令即可简化基础设施的配置，而使用 `azd up` 则可以一次性完成基础设施的配置**并**部署你的应用！
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure <strong>并且</strong> deploy your application at one shot!
 
-因此，启动你的应用开发流程可能只需找到最接近你应用和基础设施需求的 _AZD 入门模板_，然后根据场景需求自定义该仓库即可。
+As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
-在我们开始之前，先确保你已安装 Azure Developer CLI。
+Before we begin, let's make sure you have the Azure Developer CLI installed.
 
-1. 打开 VS Code 终端并输入以下命令：
+1. Open a VS Code terminal and type this command:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. 你应该会看到类似以下的输出！
+1. You should see something like this!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**你现在已准备好使用 azd 选择并部署一个模板**
+**You are now ready to select and deploy a template with `azd`**
 
 ---
 
 ## 2. 模板选择
 
-Microsoft Foundry 平台提供了一组[推荐的 AZD 模板](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)，涵盖诸如 _多代理工作流自动化_ 和 _多模态内容处理_ 等常见解决方案场景。你也可以通过访问 Microsoft Foundry 门户来发现这些模板。
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
-1. 访问 [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. 在提示时登录 Microsoft Foundry 门户 - 你会看到类似下面的界面。
+1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
 ![选择](../../../../../translated_images/zh-CN/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-**Basic** 选项是你的入门模板：
+The **Basic** options are your starter templates:
 
-1. [ ] [开始使用 AI 聊天](https://github.com/Azure-Samples/get-started-with-ai-chat) ，它会将一个基本的聊天应用（使用你的数据）部署到 Azure Container Apps。使用此模板可以探索一个基础的 AI 聊天机器人场景。
-1. [X] [开始使用 AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) ，它也会部署一个标准的 AI Agent（使用 Foundry Agents）。使用此模板可以熟悉涉及工具和模型的自治式 AI 解决方案。
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
-在新浏览器选项卡中打开第二个链接（或在相关卡片上点击 `Open in GitHub`）。你应该会看到该 AZD 模板的仓库。花一点时间浏览 README。应用架构如下所示：
+Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
 
 ![架构](../../../../../translated_images/zh-CN/architecture.8cec470ec15c65c7.webp)
 
@@ -59,199 +59,199 @@ Microsoft Foundry 平台提供了一组[推荐的 AZD 模板](https://learn.micr
 
 ## 3. 模板激活
 
-让我们尝试部署此模板并确认其有效性。我们将按照[入门](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) 部分中的指南操作。
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. 点击[此链接](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - 确认默认操作为 `Create codespace`
-1. 这会在新标签页中打开一个页面 - 等待 GitHub Codespaces 会话完成加载
-1. 在 Codespaces 中打开 VS Code 终端 - 输入以下命令：
+1. Click [此链接](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
+1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
+1. Open the VS Code terminal in Codespaces - type the following command:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-完成该命令将触发的工作流步骤：
+Complete the workflow steps that this will trigger:
 
-1. 系统会提示你登录 Azure - 按照说明进行身份验证
-1. 输入一个对你唯一的环境名称 - 例如，我使用了 `nitya-mshack-azd`
-1. 这将创建一个 `.azure/` 文件夹 - 你会看到以环境名命名的子文件夹
-1. 系统会提示你选择订阅名称 - 选择默认订阅
-1. 系统会提示你选择位置 - 使用 `East US 2`
+1. You will be prompted to log into Azure - follow instructions to authenticate
+1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
+1. This  will create a `.azure/` folder - you will see a subfolder with the env name
+1. You will be prompted to select a subscription name - select the default
+1. You will be prompted for a location - use `East US 2`
 
-现在，等待配置完成。**这需要 10-15 分钟**
+Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
-1. 完成后，控制台将显示类似这样的 SUCCESS 消息：
+1. When done, your console will show a SUCCESS message like this:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. 你的 Azure 门户现在将有一个以该环境名称命名的已配置资源组：
+1. Your Azure Portal will now have a provisioned resource group with that env name:
 
-      ![已部署基础设施](../../../../../translated_images/zh-CN/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![已预配的基础设施](../../../../../translated_images/zh-CN/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **你现在已准备好验证已部署的基础设施和应用程序**。
+1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
 ## 4. 模板验证
 
-1. 访问 Azure 门户 [资源组](https://portal.azure.com/#browse/resourcegroups) 页面 - 在提示时登录
-1. 点击与你的环境名称对应的 RG - 你会看到上面的页面
+1. Visit Azure Portal [资源组](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Click on RG for your environment name - you see the page above
 
       - 点击 Azure Container Apps 资源
-      - 点击 _Essentials_ 部分（右上）的 应用 URL
+      - 在 _Essentials_ 部分（右上）点击应用程序 Url
 
-1. 你应该会看到一个托管的应用前端 UI，类似如下：
+1. You should see a hosted application front-end UI like this:
 
    ![应用](../../../../../translated_images/zh-CN/03-test-application.471910da12c3038e.webp)
 
-1. 尝试提出几个[示例问题](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. 提问： ```法国的首都是什么？``` 
-      1. 提问： ```在 200 美元以下，适合两人的最佳帐篷是什么，它有哪些特性？```
+      1. Ask: ```What is the capital of France?``` 
+      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. 你应该会得到与下图类似的答案。_但这是如何工作的？_
+1. You should get answers similar to what is shown below. _But how does this work?_ 
 
       ![应用](../../../../../translated_images/zh-CN/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5. 代理验证
+## 5.  代理验证
 
-Azure Container App 部署了一个端点，该端点连接到为此模板在 Microsoft Foundry 项目中配置的 AI Agent。让我们看看这意味着什么。
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
-1. 返回 Azure 门户中你资源组的 _概览_ 页面
+1. Return to the Azure Portal _Overview_ page for your resource group
 
-1. 在列表中点击 `Microsoft Foundry` 资源
+1. Click on the `Microsoft Foundry` resource in that list
 
-1. 你应该会看到这个。点击 `Go to Microsoft Foundry Portal` 按钮。 
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](../../../../../translated_images/zh-CN/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. 你应该会看到你的 AI 应用的 Foundry 项目页面
+1. You should see the Foundry Project page for your AI application
    ![项目](../../../../../translated_images/zh-CN/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. 点击 `Agents` - 你会看到项目中配置的默认代理
+1. Click on `Agents` - you see the default Agent provisioned in your project
    ![代理](../../../../../translated_images/zh-CN/06-visit-agents.bccb263f77b00a09.webp)
 
-1. 选择它 - 你会看到代理详情。注意以下几点：
+1. Select it - and you see the Agent details. Note the following:
 
-      - 该代理默认使用文件搜索（始终）
-      - 代理的 `Knowledge` 表示它已上传 32 个文件（用于文件搜索）
+      - The agent uses File Search by default (always)
+      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
       ![代理](../../../../../translated_images/zh-CN/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. 在左侧菜单中查找 `Data+indexes` 选项并点击以查看详细信息。 
+1. Look for the `Data+indexes` option in the left menu and click for details. 
 
-      - 你应该能看到为知识上传的 32 个数据文件。
-      - 这些将对应于 `src/files` 下的 12 个客户文件和 20 个产品文件 
-      ![数据与索引](../../../../../translated_images/zh-CN/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - You should see the 32 data files uploaded for knowledge.
+      - These will correspond to the 12 customer files and 20 product files under `src/files` 
+      ![数据](../../../../../translated_images/zh-CN/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**你已验证代理运行！** 
+**You validated Agent operation!** 
 
-1. 代理的响应基于这些文件中的知识。 
-1. 你现在可以提出与这些数据相关的问题，并获得有依据的响应。
-1. 示例：`customer_info_10.json` 描述了 "Amanda Perez" 的 3 次购买
+1. The agent responses are grounded in the knowledge in those files. 
+1. You can now ask questions related to that data, and get grounded responses.
+1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
-重新访问包含 Container App 端点的浏览器标签页并提问： `Amanda Perez 拥有哪些产品？`。你应该会看到类似如下内容：
+Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
-![数据查询结果](../../../../../translated_images/zh-CN/09-ask-in-aca.4102297fc465a4d5.webp)
+![数据](../../../../../translated_images/zh-CN/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. 代理试验场
+## 6. Agent Playground
 
-让我们通过在 Agents Playground 中试用该代理，进一步建立对 Microsoft Foundry 能力的直观理解。
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
-1. 返回 Microsoft Foundry 中的 `Agents` 页面 - 选择默认代理
-1. 点击 `Try in Playground` 选项 - 你应该会得到如下的试验场 UI
-1. 提问同样的问题： `Amanda Perez 拥有哪些产品？`
+1. Return to the `Agents` page in Microsoft Foundry - select the default agent
+1. Click the `Try in Playground` option - you should get a Playground UI like this
+1. Ask the same question: `What products does Amanda Perez own?`
 
-    ![试验场查询](../../../../../translated_images/zh-CN/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![数据](../../../../../translated_images/zh-CN/09-ask-in-playground.a1b93794f78fa676.webp)
 
-你会得到相同（或类似）的响应——但你还会获得额外的信息，用于了解你的代理应用的质量、成本和性能。例如：
+You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
 
-1. 注意响应引用了用于“落地”响应的数据文件
-1. 将鼠标悬停在这些文件标签上 - 数据是否与查询和显示的响应匹配？
+1. Note that the response cites data files used to "ground" the response
+1. Hover over any of these file labels - does the data match your query and displayed response?
 
-你还会在响应下方看到一行 _stats_。
+You also see a _stats_ row below the response. 
 
-1. 将鼠标悬停在任一指标上 - 例如 Safety。你会看到类似如下信息
-1. 评估的评分是否与您对响应安全级别的直觉一致？
+1. Hover over any metric - e.g., Safety. You see something like this
+1. Does the assessed rating match your intuition for the response safety level?
 
-      ![运行信息计量视图](../../../../../translated_images/zh-CN/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![数据](../../../../../translated_images/zh-CN/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
 ## 7. 内置可观测性
 
-可观测性是指对你的应用进行监测以生成可用于理解、调试和优化其运行的数据。要感受一下这一点：
+Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
-1. 点击 `View Run Info` 按钮 - 你应该会看到此视图。这是[代理追踪](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) 的一个示例。_你也可以通过在顶级菜单中点击 Thread Logs 来获得此视图_。
+1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - 了解运行步骤以及代理调用的工具
-   - 了解响应的总 Token 数（与输出 token 使用量的对比）
-   - 了解延迟以及执行中时间的消耗位置
+   - Get a sense for the run steps and tools engaged by the agent
+   - Understand total Token count (vs. output tokens usage) for response
+   - Understand the latency and where time is being spent in execution
 
-      ![代理运行视图](../../../../../translated_images/zh-CN/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![代理](../../../../../translated_images/zh-CN/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. 点击 `Metadata` 选项卡以查看该运行的其他属性，这些属性可能为以后调试问题提供有用的上下文。   
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
-      ![元数据视图](../../../../../translated_images/zh-CN/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![代理](../../../../../translated_images/zh-CN/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. 点击 `Evaluations` 选项卡以查看对代理响应的自动评估。这些评估包括安全评估（例如自残类）以及代理特定的评估（例如意图解析、任务遵从性）。
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
-      ![评估视图](../../../../../translated_images/zh-CN/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+      ![代理](../../../../../translated_images/zh-CN/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. 最后但并非最不重要，点击侧边栏菜单中的 `Monitoring` 选项卡。
+1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
-      - 在显示的页面中选择 `Resource usage` 选项卡 - 并查看指标。
-      - 跟踪应用的使用情况（成本：tokens）和负载（请求）。
-      - 跟踪应用延迟，从首字节（输入处理）到末字节（输出）。
+      - Select `Resource usage` tab in the displayed page - and view the metrics.
+      - Track application usage in terms of costs (tokens) and load (requests).
+      - Track applicaton latency to first byte (input processing) and last byte (output).
 
-      ![监控资源](../../../../../translated_images/zh-CN/13-monitoring-resources.5148015f7311807f.webp)
+      ![代理](../../../../../translated_images/zh-CN/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
 ## 8. 环境变量
 
-到目前为止，我们已经在浏览器中完成了部署演练并验证了基础设施和应用正在运行。但要以“代码优先”的方式与应用程序协同工作，我们需要在本地开发环境中配置与这些资源交互所需的相关变量。使用 `azd` 可以很容易实现这一点。
+So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
-1. Azure Developer CLI [使用环境变量](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) 来存储和管理应用部署的配置信息。
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
 
-1. 环境变量存储在 `.azure/<env-name>/.env` 中 - 这使它们与部署时使用的 `env-name` 环境相关联，并帮助你在同一仓库的不同部署目标之间隔离环境。
+1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
 
-1. 每当 `azd` 执行特定命令（例如 `azd up`）时，会自动加载环境变量。注意 `azd` 不会自动读取操作系统级别的环境变量（例如在 shell 中设置的），而是使用 `azd set env` 和 `azd get env` 在脚本中传输信息。
+1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
 
 
-让我们试几个命令：
+Let's try out a few commands:
 
-1. 获取在此环境中为 `azd` 设置的所有环境变量：
+1. Get all the environment variables set for `azd` in this environment:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      你会看到类似内容：
+      You see something like:
 
       ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
+      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
       AZURE_AI_AGENT_NAME="agent-template-assistant"
       AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
       AZURE_AI_EMBED_DIMENSIONS=100
       ...
       ```
 
-1. 获取一个特定的值 - 例如，我想知道是否设置了 `AZURE_AI_AGENT_MODEL_NAME` 值
+1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      你会看到类似内容 - 默认情况下未设置该值！
+      You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. 为 `azd` 设置一个新的环境变量。在这里，我们更新代理模型名称。_注意：所做的任何更改将立即反映在 `.azure/<env-name>/.env` 文件中。_
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -259,35 +259,35 @@ Azure Container App 部署了一个端点，该端点连接到为此模板在 Mi
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      现在，我们应该能看到该值已设置：
+      Now, we should find the value is set:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. 注意某些资源是持久的（例如模型部署），仅仅运行 `azd up` 无法强制重新部署它们。我们尝试拆除原始部署并使用更改后的环境变量重新部署。
+1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **刷新** 如果你之前使用 azd 模板部署了基础设施 - 你可以使用以下命令基于当前 Azure 部署的状态刷新本地环境变量的状态：
+1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      这是在两个或多个本地开发环境（例如有多个开发者的团队）之间_同步_环境变量的强大方式 - 允许已部署的基础设施作为环境变量状态的权威来源。团队成员只需_刷新_变量即可重新同步。
+      这是在两个或多个本地开发环境 (例如有多位开发者的团队) 之间 _同步_ 环境变量的一种强大方式 - 允许已部署的基础设施作为环境变量状态的真实来源。团队成员只需 _刷新_ 变量即可重新同步。
 
 ---
 
 ## 9. 恭喜 🏆
 
-您刚刚完成了一个端到端的工作流程，包括：
+您刚刚完成了一个端到端的工作流程，您在其中完成了：
 
-- [X] 已选择您想使用的 AZD 模板
-- [X] 使用 GitHub Codespaces 启动了该模板 
-- [X] 部署了该模板并验证其运行正常
+- [X] 已选择您要使用的 AZD Template
+- [X] 已使用 GitHub Codespaces 启动了该 Template 
+- [X] 已部署该 Template 并验证其工作正常
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件由 AI 翻译服务 Co-op Translator（https://github.com/Azure/co-op-translator）翻译而成。尽管我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用本翻译而引起的任何误解或曲解承担责任。
+**免责声明**:
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误译，我们不承担任何责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

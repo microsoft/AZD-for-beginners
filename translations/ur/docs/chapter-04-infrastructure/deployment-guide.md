@@ -1,48 +1,48 @@
-# ڈپلائمنٹ گائیڈ - AZD ڈپلائمنٹس میں مہارت
+# تعیناتی گائیڈ - AZD تعیناتی میں مہارت حاصل کرنا
 
-**باب نیویگیشن:**
-- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
-- **📖 موجودہ باب**: باب 4 - Infrastructure as Code & Deployment
-- **⬅️ پچھلا باب**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
-- **➡️ اگلا**: [Provisioning Resources](provisioning.md)
-- **🚀 اگلا باب**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم:** [AZD برائے مبتدی](../../README.md)
+- **📖 موجودہ باب:** باب 4 - انفراسٹرکچر از کوڈ اور تعیناتی
+- **⬅️ پچھلا باب:** [باب 3: تشکیل](../chapter-03-configuration/configuration.md)
+- **➡️ اگلا:** [وسائل کی تعیناتی](provisioning.md)
+- **🚀 اگلا باب:** [باب 5: ملٹی ایجنٹ AI حل](../../examples/retail-scenario.md)
 
-## Introduction
+## تعارف
 
-This## Understanding the Deployment Processcomprehensive guide آپ کو Azure Developer CLI استعمال کرتے ہوئے ایپلیکیشنز کی تعیناتی کے بارے میں درکار تمام معلومات فراہم کرتا ہے، بنیادی ایک کمانڈ ڈپلائمنٹس سے لے کر کسٹم ہکس، متعدد ماحول، اور CI/CD انضمام کے ساتھ ایڈوانسڈ پروڈکشن منظرناموں تک۔ عملی مثالوں اور بہترین طریقوں کے ساتھ مکمل ڈپلائمنٹ لائف سائیکل میں مہارت حاصل کریں۔
+یہ جامع گائیڈ Azure Developer CLI کے استعمال سے ایپلیکیشنز کو تعینات کرنے کے لیے آپ کو جو کچھ جاننے کی ضرورت ہے، اس کا احاطہ کرتا ہے، بنیادی سنگل کمانڈ تعینات کاری سے لے کر کسٹم ہوکس، متعدد ماحول، اور CI/CD انضمام کے ساتھ ایڈوانس پروڈکشن منظرناموں تک۔ عملی مثالوں اور بہترین طریقوں کے ساتھ مکمل تعیناتی لائف سائیکل میں مہارت حاصل کریں۔
 
-## Learning Goals
+## سیکھنے کے اہداف
 
-اس گائیڈ کو مکمل کرنے کے بعد آپ:
-- Azure Developer CLI کی تمام ڈپلائمنٹ کمانڈز اور ورک فلو میں مہارت حاصل کریں گے
-- پروویژننگ سے مانیٹرنگ تک مکمل ڈپلائمنٹ لائف سائیکل کو سمجھیں گے
-- پری اور پوسٹ ڈپلائمنٹ آٹومیشن کے لیے کسٹم ڈپلائمنٹ ہکس نافذ کریں گے
-- ماحول مخصوص پیرا میٹرز کے ساتھ متعدد ماحول ترتیب دیں گے
-- بلو-گرین اور کینیری تعیناتی جیسے ایڈوانسڈ ڈپلائمنٹ حکمت عملیاں قائم کریں گے
-- azd ڈپلائمنٹس کو CI/CD پائپ لائنز اور DevOps ورک فلو کے ساتھ یکجا کریں گے
+اس گائیڈ کو مکمل کرکے آپ:
+- Azure Developer CLI کے تمام تعیناتی کمانڈز اور ورک فلوؤں میں مہارت حاصل کریں گے
+- تعیناتی کے مکمل عمل کو پوہچنے سے مانیٹرنگ تک سمجھیں گے
+- پری اور پوسٹ تعیناتی آٹومیشن کیلئے کسٹم تعیناتی هوکس نافذ کریں گے
+- ماحول کے مخصوص پیرا میٹرز کے ساتھ متعدد ماحول کو ترتیب دیں گے
+- بلو-گرین اور کینری تعیناتی سمیت ایڈوانسڈ تعیناتی حکمت عملی مرتب کریں گے
+- azd تعیناتیوں کو CI/CD پائپلائنز اور DevOps ورک فلو کے ساتھ مربوط کریں گے
 
-## Learning Outcomes
+## سیکھنے کے نتائج
 
-مکمل کرنے پر، آپ قابل ہوں گے:
-- تمام azd ڈپلائمنٹ ورک فلو کو خود مختار طریقے سے چلانا اور ٹربل شوٹ کرنا
-- ہکس استعمال کرتے ہوئے کسٹم ڈپلائمنٹ آٹومیشن ڈیزائن اور نافذ کرنا
-- مناسب سیکیورٹی اور مانیٹرنگ کے ساتھ پروڈکشن-ریڈی ڈپلائمنٹس ترتیب دینا
-- پیچیدہ ملٹی-ماحول ڈپلائمنٹ منظرناموں کو منظم کرنا
-- ڈپلائمنٹ کارکردگی کو بہتر بنانا اور رول بیک حکمت عملیاں نافذ کرنا
-- azd ڈپلائمنٹس کو ادارہ جاتی DevOps طریقہ کار میں انضمام کرنا
+مکمل کرنے کے بعد، آپ قابل ہوں گے کہ:
+- تمام azd تعیناتی ورک فلو کو خود مختاری سے چلائیں اور مسائل حل کریں
+- ہوکس استعمال کرتے ہوئے کسٹم تعیناتی آٹومیشن ڈیزائن اور نافذ کریں
+- مناسب سیکیورٹی اور مانیٹرنگ کے ساتھ پروڈکشن تیار تعیناتی مرتب کریں
+- پیچیدہ ملٹی-ماحول تعیناتی منظرناموں کا انتظام کریں
+- تعیناتی کی کارکردگی کو بہتر بنائیں اور رول بیک حکمت عملی نافذ کریں
+- azd تعیناتیوں کو ادارہ جاتی DevOps طریقوں میں شامل کریں
 
-## Deployment Overview
+## تعیناتی کا جائزہ
 
-Azure Developer CLI کئی ڈپلائمنٹ کمانڈز فراہم کرتا ہے:
-- `azd up` - مکمل ورک فلو (provision + deploy)
-- `azd provision` - صرف Azure وسائل بنائیں/اپڈیٹ کریں
-- `azd deploy` - صرف ایپلیکیشن کوڈ ڈپلائے کریں
-- `azd package` - ایپلیکیشنز کو بلڈ اور پیکیج کریں
+Azure Developer CLI کئی تعیناتی کمانڈز فراہم کرتا ہے:
+- `azd up` - مکمل ورک فلو (پروویژن + تعیناتی)
+- `azd provision` - صرف Azure وسائل بنائیں/اپ ڈیٹ کریں
+- `azd deploy` - صرف ایپلیکیشن کوڈ تعینات کریں
+- `azd package` - ایپلیکیشنز کو بلڈ اور پیکج کریں
 
-## Basic Deployment Workflows
+## بنیادی تعیناتی ورک فلو
 
-### Complete Deployment (azd up)
-نئے پروجیکٹس کے لیے سب سے عام ورک فلو:
+### مکمل تعیناتی (azd up)
+نئے منصوبوں کے لیے سب سے عام ورک فلو:
 ```bash
 # سب کچھ شروع سے تعینات کریں
 azd up
@@ -50,74 +50,74 @@ azd up
 # مخصوص ماحول کے ساتھ تعینات کریں
 azd up --environment production
 
-# حسبِ ضرورت پیرامیٹرز کے ساتھ تعینات کریں
+# حسب ضرورت پیرامیٹرز کے ساتھ تعینات کریں
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Infrastructure-Only Deployment
-جب آپ کو صرف Azure وسائل اپڈیٹ کرنے کی ضرورت ہو:
+### صرف انفراسٹرکچر تعیناتی
+جب آپ کو صرف Azure وسائل کو اپ ڈیٹ کرنے کی ضرورت ہو:
 ```bash
 # انفراسٹرکچر فراہم کریں/اپ ڈیٹ کریں
 azd provision
 
-# تبدیلیوں کا پیش نظارہ دیکھنے کے لیے dry-run کے ساتھ فراہم کریں
+# تبدیلیوں کا پیش نظارہ کرنے کے لیے خشک تجربہ کے ساتھ فراہمی
 azd provision --preview
 
 # مخصوص خدمات فراہم کریں
 azd provision --service database
 ```
 
-### Code-Only Deployment
-تیز رفتار ایپلیکیشن اپڈیٹس کے لیے:
+### صرف کوڈ تعیناتی
+تیز ایپلیکیشن اپ ڈیٹس کے لیے:
 ```bash
-# تمام خدمات تعینات کریں
+# تمام خدمات کو تعینات کریں
 azd deploy
 
 # متوقع نتیجہ:
-# خدمات تعینات کی جا رہی ہیں (azd deploy)
-# - web: تعینات ہو رہا ہے... مکمل
-# - api: تعینات ہو رہا ہے... مکمل
+# خدمات کی تعیناتی (azd deploy)
+# - ویب: تعیناتی جاری ہے... مکمل
+# - ای پی آئی: تعیناتی جاری ہے... مکمل
 # کامیابی: آپ کی تعیناتی 2 منٹ 15 سیکنڈ میں مکمل ہو گئی
 
-# مخصوص سروس کو تعینات کریں
+# مخصوص خدمت کی تعیناتی
 azd deploy --service web
 azd deploy --service api
 
-# کسٹم بلڈ دلائل کے ساتھ تعینات کریں
+# حسبِ ضرورت تعمیر کے دلائل کے ساتھ تعیناتی
 azd deploy --service api --build-arg NODE_ENV=production
 
 # تعیناتی کی تصدیق کریں
 azd show --output json | jq '.services'
 ```
 
-### ✅ Deployment Verification
+### ✅ تعیناتی کی تصدیق
 
-کسی بھی ڈپلائمنٹ کے بعد، کامیابی کی تصدیق کریں:
+کسی بھی تعیناتی کے بعد کامیابی کی تصدیق کریں:
 
 ```bash
-# تمام خدمات چل رہی ہیں یا نہیں، چیک کریں
+# تمام خدمات کے چلنے کی جانچ کریں
 azd show
 
-# ہیلتھ اینڈ پوائنٹس کی جانچ کریں
+# صحت کے نقاط کا ٹیسٹ کریں
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# غلطیوں کی نگرانی کریں (ڈیفالٹ کے طور پر براؤزر میں کھلتا ہے)
+# غلطیوں کی نگرانی کریں (براہِ راست براؤزر میں کھلتا ہے)
 azd monitor --logs
 ```
 
 **کامیابی کے معیار:**
-- ✅ تمام سروسز "Running" اسٹیٹس دکھاتی ہیں
-- ✅ ہیلتھ اینڈ پوائنٹس HTTP 200 واپس کرتے ہیں
-- ✅ گزشتہ 5 منٹس میں کوئی ایرر لاگز نہیں
-- ✅ ایپلیکیشن ٹیسٹ ریکوئسٹس کا جواب دیتی ہے
+- ✅ تمام سروسز کا "چل رہا ہے" اسٹیٹس دکھانا
+- ✅ ہیلتھ اینڈ پوائنٹس HTTP 200 واپس کریں
+- ✅ پچھلے 5 منٹ میں کوئی ایرر لاگز نہ ہوں
+- ✅ ایپلیکیشن ٹیسٹ درخواستوں کا جواب دیتی ہو
 
-## 🏗️ Understanding the Deployment Process
+## 🏗️ تعیناتی کے عمل کو سمجھنا
 
-### Phase 1: Pre-Provision Hooks
+### مرحلہ 1: پری پروویژن هوکس
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Phase 2: Infrastructure Provisioning
-- انفراسٹرکچر ٹیمپلیٹس پڑھتا ہے (Bicep/Terraform)
-- Azure وسائل بناتا یا اپڈیٹ کرتا ہے
-- نیٹ ورکنگ اور سیکیورٹی کو کنفیگر کرتا ہے
+### مرحلہ 2: انفراسٹرکچر کی پروویژننگ
+- انفراسٹرکچر ٹیمپلیٹس (Bicep/Terraform) پڑھتا ہے
+- Azure وسائل بناتا یا اپ ڈیٹ کرتا ہے
+- نیٹ ورکنگ اور سیکیورٹی کو ترتیب دیتا ہے
 - مانیٹرنگ اور لاگنگ سیٹ اپ کرتا ہے
 
-### Phase 3: Post-Provision Hooks
+### مرحلہ 3: پوسٹ پروویژن هوکس
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +150,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Phase 4: Application Packaging
-- ایپلیکیشن کوڈ کو بنڈل کرتا ہے
-- ڈپلائمنٹ آرٹیفیکٹس بناتا ہے
-- ٹارگٹ پلیٹ فارم کے لیے پیک کرتا ہے (کنٹینرز، ZIP فائلز، وغیرہ)
+### مرحلہ 4: ایپلیکیشن پیکجنگ
+- ایپلیکیشن کوڈ بناتا ہے
+- تعیناتی آرتیفیکٹس بناتا ہے
+- ہدف پلیٹ فارم کے لیے پیکجنگ کرتا ہے (کنٹینرز، ZIP فائلز، وغیرہ)
 
-### Phase 5: Pre-Deploy Hooks
+### مرحلہ 5: پری ڈپلائے هوکس
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +168,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Phase 6: Application Deployment
-- پیکیج شدہ ایپلیکیشنز کو Azure سروسز پر ڈپلائے کرتا ہے
-- کنفیگریشن سیٹنگز کو اپڈیٹ کرتا ہے
-- سروسز کو اسٹارٹ/ری اسٹارٹ کرتا ہے
+### مرحلہ 6: ایپلیکیشن کی تعیناتی
+- پیکج کردہ ایپلیکیشنز کو Azure سروسز پر تعینات کرتا ہے
+- کنفیگریشن سیٹنگز کو اپ ڈیٹ کرتا ہے
+- سروسز کو شروع یا ری اسٹارٹ کرتا ہے
 
-### Phase 7: Post-Deploy Hooks
+### مرحلہ 7: پوسٹ ڈپلائے هوکس
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +186,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Deployment Configuration
+## 🎛️ تعیناتی کی ترتیب
 
-### Service-Specific Deployment Settings
+### سروس کے مخصوص تعیناتی سیٹنگز
 ```yaml
 # azure.yaml
 services:
@@ -218,14 +218,14 @@ services:
     buildCommand: npm install --production
 ```
 
-### Environment-Specific Configurations
+### ماحول کے مخصوص ترتیبیں
 ```bash
 # ترقیاتی ماحول
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# اسٹیجنگ ماحول
+# جائزہ لینے کا ماحول
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,9 +238,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Advanced Deployment Scenarios
+## 🔧 ایڈوانس تعیناتی منظرنامے
 
-### Multi-Service Applications
+### ملٹی سروس ایپلیکیشنز
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,24 +276,24 @@ services:
     host: function
 ```
 
-### Blue-Green Deployments
+### بلو-گرین تعیناتیاں
 ```bash
 # نیلا ماحول بنائیں
 azd env new production-blue
 azd up --environment production-blue
 
-# نیلے ماحول کی جانچ کریں
+# نیلے ماحول کا ٹیسٹ کریں
 ./scripts/test-environment.sh production-blue
 
-# ٹریفک کو نیلے ماحول کی طرف منتقل کریں (دستی DNS/لوڈ بیلینسر اپڈیٹ)
+# نیلے کی طرف ٹریفک سوئچ کریں (دستی DNS/لوڈ بیلنسر اپڈیٹ)
 ./scripts/switch-traffic.sh production-blue
 
-# سبز ماحول کو صاف کریں
+# سبز ماحول کی صفائی کریں
 azd env select production-green
 azd down --force
 ```
 
-### Canary Deployments
+### کینری تعیناتیاں
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,10 +307,10 @@ services:
         percentage: 10
 ```
 
-### Staged Deployments
+### مرحلہ وار تعیناتیاں
 ```bash
-#!/bin/bash
-# deploy-staged.sh
+#!/بن/بش
+# تعیناتی-مرحلہ.sh
 
 echo "Deploying to development..."
 azd env select dev
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Container Deployments
+## 🐳 کنٹینر کی تعیناتیاں
 
-### Container App Deployments
+### کنٹینر ایپ تعیناتیاں
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### Multi-Stage Dockerfile Optimization
+### ملٹی-اسٹیج Dockerfile آپٹیمائزیشن
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,19 +390,19 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ Performance Optimization
+## ⚡ کارکردگی کی بہتری
 
-### Service-Specific Deployments
+### سروس کے مخصوص تعیناتیاں
 ```bash
-# مخصوص سروس کو تیزی سے تکرار کے لیے تعینات کریں
+# تیز رفتار تکرار کے لیے مخصوص سروس تعینات کریں
 azd deploy --service web
 azd deploy --service api
 
-# تمام خدمات کو تعینات کریں
+# تمام خدمات تعینات کریں
 azd deploy
 ```
 
-### Build Caching
+### بلڈ کیشنگ
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,31 +412,31 @@ services:
     outputPath: dist
 ```
 
-### Efficient Code Deployments
+### مؤثر کوڈ تعیناتیاں
 ```bash
 # صرف کوڈ کی تبدیلیوں کے لیے azd deploy استعمال کریں (azd up نہیں)
-# یہ بنیادی ڈھانچے کی پروویژننگ کو چھوڑ دیتا ہے اور بہت تیز ہے
+# یہ بنیادی ڈھانچے کی فراہمی کو چھوڑ دیتا ہے اور کہیں زیادہ تیز ہے
 azd deploy
 
-# تیز ترین تکرار کے لیے مخصوص سروس کو ڈپلائے کریں
+# تیز ترین تکرار کے لیے مخصوص سروس کو تعینات کریں
 azd deploy --service api
 ```
 
-## 🔍 Deployment Monitoring
+## 🔍 تعیناتی کی مانیٹرنگ
 
-### Real-Time Deployment Monitoring
+### حقیقی وقت کی تعیناتی مانیٹرنگ
 ```bash
-# حقیقی وقت میں ایپلیکیشن کی نگرانی کریں
+# درخواست کو حقیقی وقت میں مانیٹر کریں
 azd monitor --live
 
-# ایپلیکیشن کے لاگز دیکھیں
+# درخواست کے لاگز دیکھیں
 azd monitor --logs
 
-# تعیناتی کی صورتحال چیک کریں
+# تعیناتی کی حیثیت چیک کریں
 azd show
 ```
 
-### Health Checks
+### ہیلتھ چیکس
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -450,14 +450,14 @@ services:
       retries: 3
 ```
 
-### Post-Deployment Validation
+### تعیناتی کے بعد کی تصدیق
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# درخواست کی صحت چیک کریں
+# ایپلیکیشن کی صحت چیک کریں
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -483,16 +483,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Security Considerations
+## 🔐 سیکیورٹی کے پہلو
 
-### Secrets Management
+### سیکرٹس کی مدیریت
 ```bash
-# خفیہ معلومات کو محفوظ طریقے سے ذخیرہ کریں
+# رازوں کو محفوظ طریقے سے ذخیرہ کریں
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# azure.yaml میں خفیہ معلومات کا حوالہ دیں
+# azure.yaml میں رازوں کا حوالہ دیں
 ```
 
 ```yaml
@@ -505,7 +505,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Network Security
+### نیٹ ورک سیکیورٹی
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identity and Access Management
+### شناخت اور رسائی کا انتظام
 ```yaml
 services:
   api:
@@ -531,34 +531,34 @@ services:
           - external-api-key
 ```
 
-## 🚨 Rollback Strategies
+## 🚨 رول بیک حکمت عملی
 
-### Quick Rollback
+### تیز رول بیک
 ```bash
-# AZD میں بلٹ ان رول بیک موجود نہیں ہے۔ تجویز کردہ طریقے:
+# AZD میں بلٹ ان رول بیک شامل نہیں ہے۔ سفارش کردہ طریقے:
 
-# اختیار 1: Git سے دوبارہ ڈپلائے کریں (تجویز کردہ)
-git revert HEAD  # مسئلہ پیدا کرنے والی کمیٹ کو ریورٹ کریں
+# آپشن 1: Git سے دوبارہ تعیناتی (سفارش کی گئی)
+git revert HEAD  # مسئلہ پیدا کرنے والی کمیٹ کو واپس کریں
 git push
 azd deploy
 
-# اختیار 2: مخصوص کمیٹ کو دوبارہ ڈپلائے کریں
+# آپشن 2: مخصوص کمیٹ کو دوبارہ تعینات کریں
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Infrastructure Rollback
+### انفراسٹرکچر رول بیک
 ```bash
-# لاگو کرنے سے پہلے انفراسٹرکچر میں تبدیلیوں کا پیش نظارہ کریں
+# تبدیل کرنے سے پہلے انفراسٹرکچر کی تبدیلیوں کا پیش نظارہ کریں
 azd provision --preview
 
-# انفراسٹرکچر کو واپس پلٹانے کے لیے ورژن کنٹرول استعمال کریں:
-git revert HEAD  # انفراسٹرکچر میں کی گئی تبدیلیاں واپس کریں
-azd provision    # پچھلے انفراسٹرکچر کی حالت کو لاگو کریں
+# انفراسٹرکچر کو واپس پلٹانے کے لئے، ورژن کنٹرول استعمال کریں:
+git revert HEAD  # انفراسٹرکچر کی تبدیلیوں کو واپس کریں
+azd provision    # پچھلی انفراسٹرکچر حالت کو نافذ کریں
 ```
 
-### Database Migration Rollback
+### ڈیٹابیس مائیگریشن رول بیک
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,21 +572,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Deployment Metrics
+## 📊 تعیناتی میٹرکس
 
-### Track Deployment Performance
+### تعیناتی کی کارکردگی کا تعاقب کریں
 ```bash
-# موجودہ تعیناتی کی حیثیت دیکھیں
+# موجودہ تنصیب کی حالت دیکھیں
 azd show
 
-# Application Insights کے ذریعے ایپلیکیشن کی نگرانی کریں
+# ایپلیکیشن انسائٹس کے ساتھ ایپلیکیشن کی نگرانی کریں
 azd monitor --overview
 
-# براہِ راست میٹرکس دیکھیں
+# لائیو میٹرکس دیکھیں
 azd monitor --live
 ```
 
-### Custom Metrics Collection
+### کسٹم میٹرکس کلیکشن
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,32 +603,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Best Practices
+## 🎯 بہترین طریقے
 
-### 1. Environment Consistency
+### 1. ماحول کی مطابقت
 ```bash
-# ناموں میں تسلسل رکھیں
+# یکساں ناموں کا استعمال کریں
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# ماحول میں یکسانیت برقرار رکھیں
+# ماحول کی ہم آہنگی برقرار رکھیں
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastructure Validation
+### 2. انفراسٹرکچر کی توثیق
 ```bash
-# ڈپلائمنٹ سے پہلے انفراسٹرکچر کی تبدیلیوں کا پیش نظارہ
+# تعیناتی سے پہلے انفراسٹرکچر کی تبدیلیوں کا پیش نظارہ کریں
 azd provision --preview
 
-# ARM/Bicep کے لیے لِنٹنگ استعمال کریں
+# ARM/Bicep لینٹنگ کا استعمال کریں
 az bicep lint --file infra/main.bicep
 
-# Bicep کی نحو کی توثیق کریں
+# Bicep نحو کی توثیق کریں
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Testing Integration
+### 3. ٹیسٹنگ انضمام
 ```yaml
 hooks:
   predeploy:
@@ -657,39 +657,39 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Documentation and Logging
+### 4. دستاویزات اور لاگنگ
 ```bash
-# تعیناتی طریقہ کار کو دستاویزی شکل دیں
+# دستاویز تعیناتی کے طریقہ کار
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Next Steps
+## اگلے اقدامات
 
-- [Provisioning Resources](provisioning.md) - انفراسٹرکچر منیجمنٹ میں گہرائی سے مطالعہ
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - اپنی ڈپلائمنٹ حکمت عملی کی منصوبہ بندی کریں
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - ڈپلائمنٹ مسائل حل کریں
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - پروڈکشن-ریڈی ڈپلائمنٹ حکمت عملیاں
+- [وسائل کی تعیناتی](provisioning.md) - انفراسٹرکچر مینجمنٹ میں گہرائی سے جائزہ
+- [پری-ڈپلائے منصوبہ بندی](../chapter-06-pre-deployment/capacity-planning.md) - اپنی تعیناتی حکمت عملی منصوبہ بنائیں
+- [عام مسائل](../chapter-07-troubleshooting/common-issues.md) - تعیناتی کے مسائل حل کریں
+- [بہترین طریقے](../chapter-07-troubleshooting/debugging.md) - پروڈکشن تیار تعیناتی حکمت عملی
 
-## 🎯 Hands-On Deployment Exercises
+## 🎯 عملی تعیناتی مشقیں
 
-### Exercise 1: Incremental Deployment Workflow (20 minutes)
-**مقصد**: مکمل اور انکریمنٹل ڈپلائمنٹس کے درمیان فرق میں مہارت حاصل کرنا
+### مشق 1: انکریمنٹل تعیناتی ورک فلو (20 منٹ)
+**مقصد:** مکمل اور انکریمنٹل تعیناتیوں میں فرق میں مہارت حاصل کریں
 
 ```bash
-# ابتدائی تعیناتی
+# ابتدائی نفاذ
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# ابتدائی تعیناتی کا وقت ریکارڈ کریں
+# ابتدائی نفاذ کا وقت ریکارڈ کریں
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # کوڈ میں تبدیلی کریں
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# صرف کوڈ تعینات کریں (تیز)
+# صرف کوڈ نافذ کریں (تیز)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -701,30 +701,30 @@ azd down --force --purge
 ```
 
 **کامیابی کے معیار:**
-- [ ] مکمل ڈپلائمنٹ 5-15 منٹس میں ہوتی ہے
-- [ ] صرف کوڈ ڈپلائمنٹ 2-5 منٹس میں ہوتی ہے
-- [ ] ڈپلائے شدہ ایپ میں کوڈ تبدیلیاں ظاہر ہوں
-- [ ] `azd deploy` کے بعد انفراسٹرکچر میں تبدیلی نہیں ہوئی
+- [ ] مکمل تعیناتی 5-15 منٹ لیتی ہے
+- [ ] صرف کوڈ تعیناتی 2-5 منٹ لیتی ہے
+- [ ] کوڈ کی تبدیلیاں تعینات ایپ میں ظاہر ہوں
+- [ ] `azd deploy` کے بعد انفراسٹرکچر بغیر تبدیلی کے رہے
 
-**Learning Outcome**: `azd deploy` کوڈ تبدیلیوں کے لیے `azd up` کے مقابلے میں 50-70% تیز ہے
+**سیکھنے کا نتیجہ:** کوڈ کی تبدیلیوں کے لیے `azd deploy`، `azd up` کی نسبت 50-70% تیز ہے
 
-### Exercise 2: Custom Deployment Hooks (30 minutes)
-**مقصد**: پری اور پوسٹ ڈپلائمنٹ آٹومیشن نافذ کرنا
+### مشق 2: کسٹم تعیناتی هوکس (30 منٹ)
+**مقصد:** پری اور پوسٹ تعیناتی خودکار عمل درآمد نافذ کریں
 
 ```bash
-# قبل از تعیناتی تصدیق کا اسکرپٹ بنائیں
+# پری-ڈیپلائے ویلیڈیشن اسکرپٹ بنائیں
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# تصدیق کریں کہ ٹیسٹ پاس ہوئے ہیں
+# چیک کریں کہ ٹیسٹ پاس ہوتے ہیں
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# غیر کمٹ شدہ تبدیلیاں چیک کریں
+# ان کمیٹڈ تبدیلیوں کے لیے چیک کریں
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# بعد از تعیناتی سموک ٹیسٹ بنائیں
+# پوسٹ-ڈیپلائے سموک ٹیسٹ بنائیں
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# azure.yaml میں ہکس شامل کریں
+# azure.yaml میں ہُکس شامل کریں
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# ہکس کے ساتھ تعیناتی کی جانچ کریں
+# ہُکس کے ساتھ ڈیپلائیمنٹ کا ٹیسٹ کریں
 azd deploy
 ```
 
 **کامیابی کے معیار:**
-- [ ] پری-ڈپلائے اسکرپٹ ڈپلائمنٹ سے پہلے چلتا ہے
-- [ ] اگر ٹیسٹ فیل ہوں تو ڈپلائمنٹ منسوخ ہو جاتی ہے
-- [ ] پوسٹ-ڈپلائے سموک ٹیسٹ ہیلتھ کی تصدیق کرتا ہے
-- [ ] ہکس درست ترتیب میں چلتے ہیں
+- [ ] پری ڈپلائے اسکرپٹ تعیناتی سے پہلے چلتا ہے
+- [ ] اگر ٹیسٹ ناکام ہوں تو تعیناتی منسوخ ہوجائے
+- [ ] پوسٹ ڈپلائے سمک ٹیسٹ صحت کی تصدیق کرتا ہے
+- [ ] هوکس درست ترتیب میں چلائے جائیں
 
-### Exercise 3: Multi-Environment Deployment Strategy (45 minutes)
-**مقصد**: اسٹیجڈ ڈپلائمنٹ ورک فلو نافذ کرنا (dev → staging → production)
+### مشق 3: ملٹی-ماحول تعیناتی حکمت عملی (45 منٹ)
+**مقصد:** مرحلہ وار تعیناتی ورک فلو نافذ کریں (ڈیولپ → اسٹیجنگ → پروڈکشن)
 
 ```bash
 # تعیناتی اسکرپٹ بنائیں
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# مرحلہ 1: dev پر تعینات کریں
+# مرحلہ 1: ترقی میں تعینات کریں
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# مرحلہ 2: staging پر تعینات کریں
+# مرحلہ 2: اسٹیجنگ میں تعینات کریں
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# مرحلہ 3: پروڈکشن کے لیے دستی منظوری
+# مرحلہ 3: پیداواری کے لئے دستی منظوری
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -829,7 +829,7 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# ماحول بنائیں
+# ماحولیات بنائیں
 azd env new dev
 azd env new staging
 azd env new production
@@ -839,41 +839,41 @@ azd env new production
 ```
 
 **کامیابی کے معیار:**
-- [ ] Dev ماحول کامیابی کے ساتھ ڈپلائے ہوتا ہے
-- [ ] Staging ماحول کامیابی کے ساتھ ڈپلائے ہوتا ہے
-- [ ] پروڈکشن کے لیے دستی منظوری درکار ہے
-- [ ] تمام ماحول میں ورکنگ ہیلتھ چیکس ہیں
-- [ ] ضرورت پڑنے پر رول بیک کیا جا سکے
+- [ ] ڈیولپ ماحول کامیابی سے تعینات ہو
+- [ ] اسٹیجنگ ماحول کامیابی سے تعینات ہو
+- [ ] پروڈکشن کے لیے دستی منظوری درکار ہو
+- [ ] تمام ماحولوں میں کام کرنے والے ہیلتھ چیکس ہوں
+- [ ] ضرورت پڑنے پر رول بیک کیا جا سکتا ہو
 
-### Exercise 4: Rollback Strategy (25 minutes)
-**مقصد**: Git کا استعمال کرتے ہوئے ڈپلائمنٹ رول بیک نافذ کرنا اور ٹیسٹ کرنا
+### مشق 4: رول بیک حکمت عملی (25 منٹ)
+**مقصد:** Git استعمال کرکے تعیناتی کا رول بیک نافذ اور ٹیسٹ کریں
 
 ```bash
-# v1 کو تعینات کریں
+# تعینات کریں v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# v1 کے کمیٹ ہیش کو محفوظ کریں
+# v1 کمیٹ ہیش محفوظ کریں
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# v2 کو ایک بریکنگ چینج کے ساتھ تعینات کریں
+# توڑ پھوڑ والی تبدیلی کے ساتھ v2 تعینات کریں
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# ناکامی کا پتہ لگائیں اور رول بیک کریں
+# ناکامی کا پتہ لگائیں اور پچھلی حالت پر لوٹ جائیں
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # git استعمال کرتے ہوئے رول بیک کریں
+    # گٹ کا استعمال کرتے ہوئے پچھلی حالت پر واپس جائیں
     git revert HEAD --no-edit
     
-    # ماحول کو رول بیک کریں
+    # ماحول کی پچھلی حالت پر واپس آنا
     azd env set APP_VERSION "1.0.0"
     
-    # v1 کو دوبارہ تعینات کریں
+    # v1 دوبارہ تعینات کریں
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +881,17 @@ fi
 ```
 
 **کامیابی کے معیار:**
-- [ ] ڈپلائمنٹ فیلیرز کا پتہ لگا سکیں
-- [ ] رول بیک اسکرپٹ خودکار طور پر چلتا ہے
-- [ ] ایپلیکیشن دوبارہ کام کرنے والی حالت میں واپس آ جاتی ہے
-- [ ] رول بیک کے بعد ہیلتھ چیکس پاس ہوتے ہیں
+- [ ] تعیناتی کی ناکامیوں کی نشاندہی کر سکتا ہو
+- [ ] رول بیک اسکرپٹ خودکار طور پر چلتا ہو
+- [ ] ایپلیکیشن کام کرنے والی حالت میں واپس آئے
+- [ ] رول بیک کے بعد ہیلتھ چیکس پاس ہوں
 
-## 📊 Deployment Metrics Tracking
+## 📊 تعیناتی میٹرکس کا تعاقب
 
-### اپنی ڈپلائمنٹ کارکردگی کا سراغ لگائیں
+### اپنی تعیناتی کی کارکردگی کا جائزہ لیں
 
 ```bash
-# ڈپلائمنٹ میٹرکس کا اسکرپٹ بنائیں
+# تعیناتی کے میٹرکس کا اسکرپٹ بنائیں
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -923,26 +923,26 @@ chmod +x track-deployment.sh
 # تعیناتی کی تاریخ دیکھیں
 cat deployment-metrics.csv
 
-# اوسط تعیناتی وقت کا حساب کریں
+# اوسط تعیناتی کا وقت حساب کریں
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## Additional Resources
+## اضافی وسائل
 
-- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI تعیناتی حوالہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service تعیناتی](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps تعیناتی](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions تعیناتی](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **نیویگیشن**
-- **پچھلا لیکچر**: [Your First Project](../chapter-01-foundation/first-project.md)
-- **اگلا لیکچر**: [Provisioning Resources](provisioning.md)
+- **پچھلا سبق:** [آپ کا پہلا منصوبہ](../chapter-01-foundation/first-project.md)
+- **اگلا سبق:** [وسائل کی تعیناتی](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-انکارِ ذمہ داری:
-یہ دستاویز AI ترجمہ سروس Co‑op Translator (https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ اگرچہ ہم درستگی کی کوشش کرتے ہیں، براہِ کرم نوٹ کریں کہ خودکار تراجم میں غلطیاں یا خامیاں ہو سکتی ہیں۔ اصل دستاویز اس کی مادری زبان میں مستند ماخذ سمجھی جائے۔ اہم معلومات کے معاملے میں پیشہ ور انسانی ترجمے کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تعبیر کے لیے ہم ذمہ دار نہیں ہیں۔
+**ڈس کلیمر**:  
+اس دستاویز کا ترجمہ AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے کیا گیا ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم آگاہ رہیں کہ خودکار تراجم میں غلطیاں یا عدم مطابقت ہو سکتی ہے۔ اصل دستاویز اپنی مادری زبان میں مستند ماخذ سمجھا جانا چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمہ کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تعبیرات کے لیے ہم ذمہ دار نہیں ہیں۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

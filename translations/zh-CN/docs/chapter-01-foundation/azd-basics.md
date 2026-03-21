@@ -3,103 +3,118 @@
 # AZD 基础 - 核心概念与基础
 
 **章节导航：**
-- **📚 课程首页**: [AZD 入门](../../README.md)
-- **📖 当前章节**: 第1章 - 基础与快速开始
+- **📚 课程主页**: [AZD 入门](../../README.md)
+- **📖 当前章节**: 第1章 - 基础与快速入门
 - **⬅️ 上一章**: [课程概览](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ 下一步**: [安装与设置](installation.md)
-- **🚀 下一章**: [第2章：以 AI 为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ 下一章**: [安装与设置](installation.md)
+- **🚀 下一章节**: [第2章：AI 优先开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## 介绍
 
-本课将向您介绍 Azure Developer CLI (azd)，一款强大的命令行工具，可加速您从本地开发到部署到 Azure 的过程。您将学习基本概念、核心功能，并理解 azd 如何简化云原生应用的部署。
+本课介绍 Azure Developer CLI (azd)，这是一个强大的命令行工具，可加速您从本地开发到 Azure 部署的过程。您将学习基础概念、核心功能，并了解 azd 如何简化云原生应用的部署。
 
 ## 学习目标
 
-到本课结束时，您将能够：
-- 了解 Azure Developer CLI 的定义及其主要用途
+完成本课后，您将：
+- 了解 Azure Developer CLI 是什么及其主要用途
 - 学习模板、环境和服务的核心概念
-- 探索关键功能，包括基于模板的开发和基础设施即代码
-- 理解 azd 项目结构和工作流
+- 探索包括模板驱动开发和基础设施即代码在内的关键功能
+- 了解 azd 项目结构和工作流
 - 为在开发环境中安装和配置 azd 做好准备
 
 ## 学习成果
 
 完成本课后，您将能够：
-- 解释 azd 在现代云开发工作流程中的作用
-- 确认 azd 项目结构的组成部分
+- 解释 azd 在现代云开发工作流中的作用
+- 识别 azd 项目结构的组成部分
 - 描述模板、环境和服务如何协同工作
-- 理解使用 azd 实现基础设施即代码的好处
+- 理解使用 azd 的基础设施即代码的好处
 - 识别不同的 azd 命令及其用途
 
-## 什么是 Azure Developer CLI (azd)？
+## 什么是 Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) 是一个旨在加速您从本地开发到 Azure 部署之旅的命令行工具。它简化了在 Azure 上构建、部署和管理云原生应用的过程。
+Azure Developer CLI (azd) 是一个命令行工具，旨在加速您从本地开发到 Azure 部署的旅程。它简化了在 Azure 上构建、部署和管理云原生应用的过程。
 
-### 🎯 为什么使用 AZD？一个现实世界的对比
+### 使用 azd 可以部署什么？
 
-让我们对比一下部署带数据库的简单 Web 应用的过程：
+azd 支持广泛的工作负载——并且列表还在不断增长。如今，您可以使用 azd 部署：
 
-#### ❌ 无 AZD：手动在 Azure 上部署（30 分钟以上）
+| 工作负载类型 | 示例 | 相同工作流程？ |
+|---------------|----------|----------------|
+| <strong>传统应用</strong> | Web 应用、REST API、静态网站 | ✅ `azd up` |
+| <strong>服务与微服务</strong> | Container Apps、Function Apps、多服务后端 | ✅ `azd up` |
+| **AI 驱动的应用** | 基于 Microsoft Foundry Models 的聊天应用、使用 AI Search 的 RAG 解决方案 | ✅ `azd up` |
+| <strong>智能代理</strong> | 由 Foundry 托管的代理、多代理编排 | ✅ `azd up` |
+
+关键见解是，**无论您在部署什么，azd 的生命周期保持不变**。您会初始化项目、配置基础设施、部署代码、监视应用并进行清理——无论是简单的网站还是复杂的 AI 代理。
+
+这种连续性是设计使然。azd 将 AI 功能视为应用可以使用的另一类服务，而不是根本不同的东西。从 azd 的角度来看，由 Microsoft Foundry Models 支持的聊天端点只是另一个需要配置和部署的服务。
+
+### 🎯 为什么使用 AZD？真实场景对比
+
+让我们比较一下部署带数据库的简单 Web 应用：
+
+#### ❌ 未使用 AZD：手动在 Azure 上部署（30 分钟以上）
 
 ```bash
-# 步骤 1：创建资源组
+# 第一步：创建资源组
 az group create --name myapp-rg --location eastus
 
-# 步骤 2：创建应用服务计划
+# 第二步：创建应用服务计划
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# 步骤 3：创建 Web 应用
+# 第三步：创建 Web 应用
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
   --runtime "NODE:18-lts"
 
-# 步骤 4：创建 Cosmos DB 帐户 (10-15 分钟)
+# 第四步：创建 Cosmos DB 帐户（10-15 分钟）
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# 步骤 5：创建数据库
+# 第五步：创建数据库
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --name tododb
 
-# 步骤 6：创建集合
+# 第六步：创建集合
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --database-name tododb \
   --name todos
 
-# 步骤 7：获取连接字符串
+# 第七步：获取连接字符串
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --type connection-strings \
   --query "connectionStrings[0].connectionString" -o tsv)
 
-# 步骤 8：配置应用设置
+# 第八步：配置应用设置
 az webapp config appsettings set \
   --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# 步骤 9：启用日志记录
+# 第九步：启用日志记录
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# 步骤 10：设置 Application Insights
+# 第十步：设置 Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# 步骤 11：将 Application Insights 链接到 Web 应用
+# 第十一步：将 App Insights 关联到 Web 应用
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -110,105 +125,105 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# 步骤 12：在本地构建应用程序
+# 第十二步：在本地构建应用程序
 npm install
 npm run build
 
-# 步骤 13：创建部署包
+# 第十三步：创建部署包
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# 步骤 14：部署应用程序
+# 第十四步：部署应用程序
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# 步骤 15：等待并祈祷它能正常运行 🙏
-# (没有自动验证，需手动测试)
+# 第十五步：等待并祈祷它能正常工作 🙏
+# （没有自动验证，需要手动测试）
 ```
 
 **问题：**
-- ❌ 需要记住并按顺序执行 15 个以上的命令
+- ❌ 需要记住并按顺序执行 15+ 条命令
 - ❌ 30-45 分钟的手动工作
 - ❌ 容易出错（拼写错误、参数错误）
 - ❌ 连接字符串会暴露在终端历史记录中
-- ❌ 失败时没有自动回滚
+- ❌ 若发生错误则没有自动回滚
 - ❌ 团队成员难以复现
-- ❌ 每次都不同（不可复现）
+- ❌ 每次都不同（不可重现）
 
 #### ✅ 使用 AZD：自动化部署（5 条命令，10-15 分钟）
 
 ```bash
-# 步骤 1：从模板初始化
+# 第 1 步：从模板初始化
 azd init --template todo-nodejs-mongo
 
-# 步骤 2：进行身份验证
+# 第 2 步：进行身份验证
 azd auth login
 
-# 步骤 3：创建环境
+# 第 3 步：创建环境
 azd env new dev
 
-# 步骤 4：预览更改（可选但推荐）
+# 第 4 步：预览更改（可选但推荐）
 azd provision --preview
 
-# 步骤 5：部署所有内容
+# 第 5 步：部署所有内容
 azd up
 
-# ✨ 完成！所有内容已部署、配置并受到监控
+# ✨ 已完成！所有内容已部署、配置并受到监控
 ```
 
-**好处：**
+**优点：**
 - ✅ **5 条命令** 对比 15+ 条手动步骤
-- ✅ **10-15 分钟** 总时间（主要在等待 Azure）
-- ✅ **零错误** - 自动化且经过测试
+- ✅ **10-15 分钟** 总时间（大部分时间在等待 Azure）
+- ✅ <strong>零错误</strong> - 自动化并经过测试
 - ✅ **通过 Key Vault 安全管理机密**
-- ✅ **失败时自动回滚**
-- ✅ **完全可复现** - 每次结果相同
-- ✅ **团队就绪** - 任何人都可以使用相同命令进行部署
-- ✅ **基础设施即代码** - Bicep 模板纳入版本控制
-- ✅ **内置监控** - 自动配置 Application Insights
+- ✅ <strong>失败时自动回滚</strong>
+- ✅ <strong>完全可复现</strong> - 每次结果相同
+- ✅ <strong>适合团队</strong> - 任何人都可以使用相同命令进行部署
+- ✅ <strong>基础设施即代码</strong> - 受版本控制的 Bicep 模板
+- ✅ <strong>内置监控</strong> - 自动配置 Application Insights
 
-### 📊 时间与错误降低
+### 📊 时间与错误减少
 
-| 指标 | 手动部署 | AZD 部署 | 提升 |
+| 指标 | 手动部署 | AZD 部署 | 改进 |
 |:-------|:------------------|:---------------|:------------|
-| **命令数** | 15+ | 5 | 67% 减少 |
-| **时间** | 30-45 min | 10-15 min | 60% 更快 |
-| **错误率** | ~40% | <5% | 88% 降低 |
-| **一致性** | 低（手动） | 100%（自动化） | 完美 |
-| **团队入门时间** | 2-4 hours | 30 minutes | 75% 更快 |
-| **回滚时间** | 30+ min (manual) | 2 min (automated) | 93% 更快 |
+| <strong>命令数</strong> | 15+ | 5 | 减少 67% |
+| <strong>时间</strong> | 30-45 min | 10-15 min | 快 60% |
+| <strong>错误率</strong> | ~40% | <5% | 减少 88% |
+| <strong>一致性</strong> | 低（手动） | 100%（自动） | 完美 |
+| <strong>团队上手时间</strong> | 2-4 hours | 30 minutes | 快 75% |
+| <strong>回滚时间</strong> | 30+ min (manual) | 2 min (automated) | 快 93% |
 
 ## 核心概念
 
 ### 模板
 模板是 azd 的基础。它们包含：
-- **应用代码** - 您的源代码和依赖项
-- **基础设施定义** - 在 Bicep 或 Terraform 中定义的 Azure 资源
-- **配置文件** - 设置和环境变量
-- **部署脚本** - 自动化部署工作流
+- <strong>应用代码</strong> - 您的源代码和依赖项
+- <strong>基础设施定义</strong> - 以 Bicep 或 Terraform 定义的 Azure 资源
+- <strong>配置文件</strong> - 设置和环境变量
+- <strong>部署脚本</strong> - 自动化部署工作流
 
 ### 环境
-环境代表不同的部署目标：
+环境表示不同的部署目标：
 - **Development** - 用于测试和开发
 - **Staging** - 预生产环境
-- **Production** - 生产环境
+- **Production** - 线上生产环境
 
-每个环境维护其自己的：
+每个环境维护其各自的：
 - Azure 资源组
 - 配置设置
 - 部署状态
 
 ### 服务
-服务是应用的构建模块：
-- **Frontend** - Web 应用、单页应用（SPA）
+服务是构建应用程序的构件：
+- **Frontend** - Web 应用、SPA
 - **Backend** - API、微服务
 - **Database** - 数据存储解决方案
 - **Storage** - 文件和 Blob 存储
 
-## 关键功能
+## 主要功能
 
-### 1. 基于模板的开发
+### 1. 模板驱动开发
 ```bash
 # 浏览可用模板
 azd template list
@@ -220,51 +235,51 @@ azd init --template <template-name>
 ### 2. 基础设施即代码
 - **Bicep** - Azure 的领域特定语言
 - **Terraform** - 多云基础设施工具
-- **ARM Templates** - Azure 资源管理器模板
+- **ARM Templates** - Azure Resource Manager 模板
 
 ### 3. 集成工作流
 ```bash
-# 完整的部署工作流
+# 完整部署工作流
 azd up            # 预配 + 部署：首次设置无需人工干预
 
-# 🧪 新功能：在部署前预览基础设施变更（安全）
+# 🧪 新：在部署前预览基础设施更改（安全）
 azd provision --preview    # 在不进行更改的情况下模拟基础设施部署
 
-azd provision     # 创建 Azure 资源；如果你更新基础设施，请使用此操作
+azd provision     # 如果更新基础设施并需要创建 Azure 资源，请使用此项
 azd deploy        # 部署应用代码，或在更新后重新部署应用代码
 azd down          # 清理资源
 ```
 
 #### 🛡️ 使用预览进行安全的基础设施规划
-`azd provision --preview` 命令是安全部署的变革性功能：
-- **演练分析（Dry-run analysis）** - 显示将被创建、修改或删除的内容
-- **零风险** - 不会对您的 Azure 环境进行实际更改
-- **团队协作** - 在部署前共享预览结果
-- **成本估算** - 在投入前了解资源成本
+命令 `azd provision --preview` 是实现安全部署的变革性工具：
+- <strong>演练分析</strong> - 显示将创建、修改或删除的内容
+- <strong>零风险</strong> - 不会对您的 Azure 环境做出实际更改
+- <strong>团队协作</strong> - 在部署前共享预览结果
+- <strong>成本估算</strong> - 在承诺之前了解资源成本
 
 ```bash
-# 示例预览工作流程
+# 示例预览工作流
 azd provision --preview           # 查看将要更改的内容
 # 审查输出，与团队讨论
-azd provision                     # 自信地应用更改
+azd provision                     # 放心地应用更改
 ```
 
 ### 📊 可视化：AZD 开发工作流
 
 ```mermaid
 graph LR
-    A[azd init] -->|初始化项目| B[azd auth login]
-    B -->|身份验证| C[azd env new]
-    C -->|创建环境| D{首次部署？}
-    D -->|是| E[azd up]
-    D -->|否| F[azd provision --preview]
-    F -->|查看更改| G[azd provision]
-    E -->|配置并部署| H[资源运行中]
+    A[azd 初始化] -->|初始化项目| B[azd 身份验证 登录]
+    B -->|验证身份| C[azd 环境 新建]
+    C -->|创建环境| D{第一次部署？}
+    D -->|是| E[azd 上线]
+    D -->|否| F[azd 预配 --preview]
+    F -->|审查更改| G[azd 预配]
+    E -->|预配并部署| H[资源运行中]
     G -->|更新基础设施| H
-    H -->|监控| I[azd monitor]
-    I -->|修改代码| J[azd deploy]
+    H -->|监控| I[azd 监控]
+    I -->|进行代码更改| J[azd 部署]
     J -->|仅重新部署代码| H
-    H -->|清理| K[azd down]
+    H -->|清理| K[azd 停用]
     
     style A fill:#e1f5fe
     style E fill:#c8e6c9
@@ -273,15 +288,15 @@ graph LR
     style K fill:#ffcdd2
 ```
 **工作流说明：**
-1. **Init** - 从模板或新建项目开始
+1. **Init** - 从模板或新项目开始
 2. **Auth** - 与 Azure 进行身份验证
 3. **Environment** - 创建隔离的部署环境
 4. **Preview** - 🆕 始终先预览基础设施更改（安全做法）
 5. **Provision** - 创建/更新 Azure 资源
-6. **Deploy** - 推送应用代码
-7. **Monitor** - 监控应用性能
+6. **Deploy** - 推送您的应用代码
+7. **Monitor** - 观察应用性能
 8. **Iterate** - 进行更改并重新部署代码
-9. **Cleanup** - 完成后移除资源
+9. **Cleanup** - 完成后删除资源
 
 ### 4. 环境管理
 ```bash
@@ -290,6 +305,26 @@ azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
+
+### 5. 扩展和 AI 命令
+
+azd 使用扩展系统在核心 CLI 之外添加功能。这在 AI 工作负载中特别有用：
+
+```bash
+# 列出可用扩展
+azd extension list
+
+# 安装 Foundry agents 扩展
+azd extension install azure.ai.agents
+
+# 从清单初始化 AI 代理项目
+azd ai agent init -m agent-manifest.yaml
+
+# 启动用于 AI 辅助开发的 MCP 服务器（Alpha）
+azd mcp start
+```
+
+> 扩展在 [第2章：AI 优先开发](../chapter-02-ai-development/agents.md) 和 [AZD AI CLI 命令](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 参考中有详细介绍。
 
 ## 📁 项目结构
 
@@ -339,7 +374,7 @@ hooks:
 ```
 
 ### .azure/config.json
-环境特定的配置：
+特定环境的配置：
 ```json
 {
   "version": 1,
@@ -355,9 +390,9 @@ hooks:
 
 ## 🎪 常见工作流与实践练习
 
-> **💡 学习提示：** 按顺序完成这些练习，以循序渐进地提升您的 AZD 技能。
+> **💡 学习小贴士：** 按顺序完成这些练习以逐步提升您的 AZD 技能。
 
-### 🎯 练习1：初始化您的第一个项目
+### 🎯 练习 1：初始化您的第一个项目
 
 **目标：** 创建一个 AZD 项目并探索其结构
 
@@ -366,26 +401,26 @@ hooks:
 # 使用经过验证的模板
 azd init --template todo-nodejs-mongo
 
-# 查看生成的文件
-ls -la  # 查看所有文件，包括隐藏文件
+# 浏览生成的文件
+ls -la  # 查看所有文件包括隐藏文件
 
 # 创建的关键文件：
-# - azure.yaml (主配置)
-# - infra/ (基础设施代码)
-# - src/ (应用代码)
+# - azure.yaml（主配置）
+# - infra/（基础设施代码）
+# - src/（应用程序代码）
 ```
 
 **✅ 成功：** 您将拥有 azure.yaml、infra/ 和 src/ 目录
 
 ---
 
-### 🎯 练习2：部署到 Azure
+### 🎯 练习 2：部署到 Azure
 
 **目标：** 完成端到端部署
 
 **步骤：**
 ```bash
-# 1. 进行身份验证
+# 1. 身份验证
 az login && azd auth login
 
 # 2. 创建环境
@@ -407,13 +442,13 @@ azd show    # 查看您的应用 URL
 
 ---
 
-### 🎯 练习3：多个环境
+### 🎯 练习 3：多个环境
 
 **目标：** 部署到 dev 和 staging
 
 **步骤：**
 ```bash
-# 已有 dev，创建 staging
+# 已经有 dev，创建 staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
@@ -423,11 +458,11 @@ azd env list
 azd env select dev
 ```
 
-**✅ 成功：** 在 Azure 门户中创建了两个独立的资源组
+**✅ 成功：** 在 Azure 门户中有两个独立的资源组
 
 ---
 
-### 🛡️ 清理： `azd down --force --purge`
+### 🛡️ 清空环境：`azd down --force --purge`
 
 当您需要完全重置时：
 
@@ -436,10 +471,10 @@ azd down --force --purge
 ```
 
 **它的作用：**
-- `--force`：不提示确认
+- `--force`：无确认提示
 - `--purge`：删除所有本地状态和 Azure 资源
 
-**何时使用：**
+**使用场景：**
 - 部署中途失败
 - 切换项目
 - 需要重新开始
@@ -470,36 +505,36 @@ azd env select dev
 # 部署所有内容
 azd up
 
-# 做更改并重新部署
+# 进行更改并重新部署
 azd deploy
 
 # 完成后清理
-azd down --force --purge # Azure Developer CLI 中的该命令是对您环境的 **硬重置**—在排查部署失败、清理孤立资源或为全新重新部署做准备时尤其有用。
+azd down --force --purge # Azure Developer CLI 中的该命令是对你的环境的“硬重置”——在你排查部署失败、清理孤立资源或为全新重新部署做准备时尤其有用。
 ```
 
 ## 理解 `azd down --force --purge`
-`azd down --force --purge` 命令是完全拆除您的 azd 环境及所有相关资源的强大方式。以下是每个标志的说明：
+命令 `azd down --force --purge` 是一种强力方式，可彻底拆除您的 azd 环境及所有相关资源。以下是各个标志的作用分解：
 ```
 --force
 ```
 - 跳过确认提示。
-- 适用于自动化或脚本场景，无法进行人工输入时使用。
-- 即使 CLI 检测到不一致，也能确保拆除过程不被中断。
+- 适用于自动化或脚本场景，当人工输入不可行时。
+- 确保即使 CLI 检测到不一致，也能不中断地继续拆除。
 
 ```
 --purge
 ```
-删除 **所有相关元数据**，包括：
+删除 <strong>所有相关元数据</strong>，包括：
 环境状态
 本地 `.azure` 文件夹
 缓存的部署信息
-阻止 azd “记住”之前的部署，这可能会导致资源组不匹配或注册表引用过时等问题。
+防止 azd 从“记住”以前的部署，这可能导致资源组不匹配或陈旧的注册表引用等问题。
 
 
 ### 为什么同时使用两者？
-当您由于残留状态或部分部署而在运行 `azd up` 时卡住，该组合可确保实现一个 **干净的起点**。
+当由于残留状态或部分部署导致 `azd up` 遇到障碍时，这组组合可确保一个<strong>干净的起点</strong>。
 
-这在您在 Azure 门户中手动删除资源之后，或切换模板、环境或资源组命名约定时尤其有用。
+在 Azure 门户中手动删除资源后，或在切换模板、环境或资源组命名约定时，尤其有用。
 
 
 ### 管理多个环境
@@ -516,19 +551,19 @@ azd env select dev
 azd env list
 ```
 
-## 🔐 身份验证与凭据
+## 🔐 认证与凭据
 
-理解身份验证对于成功使用 azd 部署至关重要。Azure 使用多种身份验证方法，azd 利用与其他 Azure 工具相同的凭据链。
+理解认证对于成功的 azd 部署至关重要。Azure 使用多种认证方法，azd 利用与其他 Azure 工具相同的凭据链。
 
-### Azure CLI 身份验证 (`az login`)
+### Azure CLI 认证 (`az login`)
 
-在使用 azd 之前，您需要进行 Azure 身份验证。最常用的方法是使用 Azure CLI：
+在使用 azd 之前，您需要对 Azure 进行身份验证。最常见的方法是使用 Azure CLI：
 
 ```bash
 # 交互式登录（打开浏览器）
 az login
 
-# 使用指定租户登录
+# 使用特定租户登录
 az login --tenant <tenant-id>
 
 # 使用服务主体登录
@@ -544,22 +579,22 @@ az account list --output table
 az account set --subscription <subscription-id>
 ```
 
-### 身份验证流程
-1. **交互式登录**：打开默认浏览器进行身份验证
-2. **设备代码流**：用于没有浏览器访问的环境
-3. **服务主体（Service Principal）**：用于自动化和 CI/CD 场景
-4. **托管身份（Managed Identity）**：用于托管在 Azure 上的应用
+### 认证流程
+1. 交互式登录：打开默认浏览器进行身份验证
+2. 设备代码流：用于无浏览器访问的环境
+3. 服务主体（Service Principal）：用于自动化和 CI/CD 场景
+4. 托管身份（Managed Identity）：用于部署在 Azure 上的应用
 
 ### DefaultAzureCredential 凭据链
 
-`DefaultAzureCredential` 是一种凭据类型，通过以特定顺序自动尝试多个凭据来源来提供简化的身份验证体验：
+DefaultAzureCredential 是一种凭据类型，它通过按特定顺序自动尝试多个凭据来源来简化认证体验：
 
 #### 凭据链顺序
 ```mermaid
 graph TD
     A[默认 Azure 凭据] --> B[环境变量]
     B --> C[工作负载标识]
-    C --> D[托管标识]
+    C --> D[托管身份]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
@@ -577,46 +612,46 @@ export AZURE_TENANT_ID="<tenant-id>"
 #### 2. 工作负载身份（Kubernetes/GitHub Actions）
 自动用于：
 - 使用工作负载身份的 Azure Kubernetes Service (AKS)
-- 使用 OIDC 联合的 GitHub Actions
-- 其他联合身份场景
+- 使用 OIDC 联邦的 GitHub Actions
+- 其他联邦身份场景
 
 #### 3. 托管身份
-适用于下列 Azure 资源：
+用于以下 Azure 资源：
 - 虚拟机
-- 应用服务
+- App Service
 - Azure Functions
 - 容器实例
 
 ```bash
 # 检查是否在具有托管标识的 Azure 资源上运行
 az account show --query "user.type" --output tsv
-# 返回：如果使用托管标识则为 "servicePrincipal"
+# 返回：如果使用托管标识，则为 "servicePrincipal"
 ```
 
 #### 4. 开发工具集成
-- **Visual Studio**：自动使用已登录账户
+- **Visual Studio**：自动使用已登录账号
 - **VS Code**：使用 Azure Account 扩展的凭据
 - **Azure CLI**：使用 `az login` 的凭据（本地开发最常用）
 
-### AZD 身份验证设置
+### AZD 认证设置
 
 ```bash
 # 方法 1：使用 Azure CLI（推荐用于开发）
 az login
 azd auth login  # 使用现有的 Azure CLI 凭据
 
-# 方法 2：直接 azd 身份验证
-azd auth login --use-device-code  # 适用于无头环境
+# 方法 2：直接进行 azd 身份验证
+azd auth login --use-device-code  # 用于无头环境
 
 # 方法 3：检查身份验证状态
 azd auth login --check-status
 
-# 方法 4：注销并重新进行身份验证
+# 方法 4：登出并重新验证身份
 azd auth logout
 azd auth login
 ```
 
-### 身份验证最佳实践
+### 认证最佳实践
 
 #### 本地开发
 ```bash
@@ -648,14 +683,14 @@ azd auth login
 ```
 
 #### 生产环境
-- 在 Azure 资源上运行时使用 **托管身份（Managed Identity）**
-- 在自动化场景中使用 **服务主体（Service Principal）**
+- 在 Azure 资源上运行时使用 **Managed Identity**
+- 在自动化场景中使用 **Service Principal**
 - 避免在代码或配置文件中存储凭据
-- 对于敏感配置，使用 **Azure Key Vault**
+- 对敏感配置使用 **Azure Key Vault**
 
-### 常见身份验证问题及解决方案
+### 常见认证问题与解决方案
 
-#### 问题：“找不到订阅”
+#### 问题：“未找到订阅”
 ```bash
 # 解决方案：设置默认订阅
 az account list --output table
@@ -668,7 +703,7 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # 解决方案：检查并分配所需角色
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# 常见的必需角色：
+# 常见的所需角色：
 # - 参与者（用于资源管理）
 # - 用户访问管理员（用于角色分配）
 ```
@@ -682,7 +717,7 @@ azd auth logout
 azd auth login
 ```
 
-### 不同场景下的身份验证
+### 不同场景下的认证
 
 #### 本地开发
 ```bash
@@ -700,7 +735,7 @@ azd auth login
 
 #### 多租户场景
 ```bash
-# 切换租户
+# 在租户之间切换
 az login --tenant tenant1.onmicrosoft.com
 # 部署到租户 1
 azd up
@@ -711,14 +746,13 @@ azd up
 ```
 
 ### 安全注意事项
+1. <strong>凭证存储</strong>: 切勿在源代码中存储凭证
+2. <strong>范围限制</strong>: 对服务主体使用最小权限原则
+3. <strong>令牌轮换</strong>: 定期轮换服务主体密钥
+4. <strong>审计追踪</strong>: 监控身份验证和部署活动
+5. <strong>网络安全</strong>: 在可能的情况下使用私有端点
 
-1. **凭据存储**：切勿在源代码中存储凭据
-2. **权限范围限制**：对服务主体使用最小权限原则
-3. **令牌轮换**：定期轮换服务主体的密钥
-4. **审计跟踪**：监控身份验证和部署活动
-5. **网络安全**：尽可能使用私有端点
-
-### 身份验证故障排除
+### 故障排除：身份验证
 
 ```bash
 # 调试身份验证问题
@@ -771,34 +805,34 @@ azd init --template template1
 
 ### 2. 利用模板
 - 从现有模板开始
-- 根据需求自定义
-- 为组织创建可重用的模板
+- 根据需求进行自定义
+- 为你的组织创建可重用模板
 
 ### 3. 环境隔离
 - 为 dev/staging/prod 使用独立环境
-- 切勿直接从本地机器部署到生产环境
+- 切勿从本地机器直接部署到生产环境
 - 使用 CI/CD 管道进行生产部署
 
 ### 4. 配置管理
-- 对于敏感数据使用环境变量
+- 对敏感数据使用环境变量
 - 将配置保存在版本控制中
-- 记录特定环境的设置
+- 记录环境特定设置
 
 ## 学习进阶
 
-### 初级（第1-2周）
+### 初学者（第 1-2 周）
 1. 安装 azd 并进行身份验证
-2. 部署一个简单模板
+2. 部署一个简单的模板
 3. 理解项目结构
 4. 学习基本命令（up、down、deploy）
 
-### 中级（第3-4周）
+### 中级（第 3-4 周）
 1. 自定义模板
 2. 管理多个环境
 3. 理解基础设施代码
-4. 配置 CI/CD 管道
+4. 设置 CI/CD 管道
 
-### 高级（第5周及以后）
+### 高级（第 5 周及以后）
 1. 创建自定义模板
 2. 高级基础设施模式
 3. 多区域部署
@@ -806,81 +840,81 @@ azd init --template template1
 
 ## 下一步
 
-**📖 继续第1章学习：**
-- [安装与设置](installation.md) - 获取并配置 azd
-- [您的第一个项目](first-project.md) - 完整的动手教程
+**📖 继续第 1 章学习：**
+- [安装与设置](installation.md) - 安装并配置 azd
+- [你的第一个项目](first-project.md) - 完成实操教程
 - [配置指南](configuration.md) - 高级配置选项
 
 **🎯 准备好进入下一章了吗？**
-- [第2章：以 AI 为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md) - 开始构建 AI 应用
+- [第 2 章：AI 优先开发](../chapter-02-ai-development/microsoft-foundry-integration.md) - 开始构建 AI 应用
 
-## 其他资源
+## 额外资源
 
-- [Azure Developer CLI 概述](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure 开发者 CLI 概述](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [模板库](https://azure.github.io/awesome-azd/)
 - [社区示例](https://github.com/Azure-Samples)
 
 ---
 
-## 🙋 常见问题解答
+## 🙋 常见问题
 
 ### 常规问题
 
-**问：AZD 和 Azure CLI 有什么区别？**
+**Q: AZD 和 Azure CLI 有何区别？**
 
-答：Azure CLI (`az`) 用于管理单个 Azure 资源。AZD (`azd`) 用于管理整个应用程序：
+A: Azure CLI (`az`) 用于管理单个 Azure 资源。AZD (`azd`) 用于管理整个应用程序：
 
 ```bash
-# Azure CLI - 低级别资源管理
+# Azure CLI - 底层资源管理
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...还需要更多命令
+# ...需要更多命令
 
-# AZD - 应用级别管理
+# AZD - 应用级管理
 azd up  # 部署整个应用及其所有资源
 ```
 
 **可以这样理解：**
 - `az` = 操作单个乐高积木
-- `azd` = 处理完整的乐高套装
+- `azd` = 使用完整的乐高套装进行工作
 
 ---
 
-**问：使用 AZD 是否需要了解 Bicep 或 Terraform？**
+**Q: 使用 AZD 是否需要了解 Bicep 或 Terraform？**
 
-答：不需要！从模板开始：
+A: 不需要！从模板开始：
 ```bash
-# 使用现有模板 - 无需基础设施即代码（IaC）知识
+# 使用现有模板 - 不需要 IaC 知识
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-您可以稍后学习 Bicep 来自定义基础设施。模板提供可用的示例以供学习。
+你可以在之后学习 Bicep 来自定义基础设施。模板提供可供学习的工作示例。
 
 ---
 
-**问：运行 AZD 模板需要多少费用？**
+**Q: 运行 AZD 模板的费用是多少？**
 
-答：费用因模板而异。大多数开发模板费用为每月 $50-150：
+A: 费用取决于模板。大多数开发模板的成本为 $50-150/月：
 
 ```bash
 # 在部署前预览费用
 azd provision --preview
 
 # 不使用时始终清理
-azd down --force --purge  # 删除所有资源
+azd down --force --purge  # 移除所有资源
 ```
 
-**小贴士：**在可用时使用免费层：
-- App Service: F1 (Free) tier
-- Azure OpenAI: 50,000 tokens/month free
-- Cosmos DB: 1000 RU/s free tier
+**专家提示：** 在可用时使用免费层：
+- App Service: F1（免费）层
+- Microsoft Foundry Models: Azure OpenAI 每月 50,000 令牌免费
+- Cosmos DB: 1000 RU/s 免费层
 
 ---
 
-**问：我可以将 AZD 与现有的 Azure 资源一起使用吗？**
+**Q: 我可以在已有的 Azure 资源上使用 AZD 吗？**
 
-答：可以，但从头开始更容易。当 AZD 管理完整生命周期时效果最好。对于现有资源：
+A: 可以，但从头开始更容易。AZD 在管理完整生命周期时效果最佳。对于现有资源：
 
 ```bash
 # 选项 1：导入现有资源（高级）
@@ -894,31 +928,31 @@ azd up  # 创建新环境
 
 ---
 
-**问：如何与团队成员共享我的项目？**
+**Q: 我如何与队友共享我的项目？**
 
-答：将 AZD 项目提交到 Git（但不要提交 `.azure` 文件夹）：
+A: 将 AZD 项目提交到 Git（但不要提交 .azure 文件夹）：
 
 ```bash
-# 默认已包含在 .gitignore 中
-.azure/        # 包含机密和环境数据
+# 已默认包含在 .gitignore 中
+.azure/        # 包含机密信息和环境数据
 *.env          # 环境变量
 
-# 团队成员：
+# 当时的团队成员：
 git clone <your-repo>
 azd auth login
 azd env new <their-name>-dev
 azd up
 ```
 
-所有人都会从相同的模板获得相同的基础设施。
+每个人都能从相同的模板获得相同的基础设施。
 
 ---
 
-### 故障排除问题
+### 故障排查问题
 
-**问：“azd up” 在中途失败。我该怎么办？**
+**Q: "azd up" 在中途失败。我该怎么办？**
 
-答：检查错误，修复后重试：
+A: 检查错误，修复后重试：
 
 ```bash
 # 查看详细日志
@@ -926,11 +960,11 @@ azd show
 
 # 常见修复：
 
-# 1. 如果配额超限：
+# 1. 如果超出配额：
 azd env set AZURE_LOCATION "westus2"  # 尝试不同的区域
 
 # 2. 如果资源名称冲突：
-azd down --force --purge  # 清理干净
+azd down --force --purge  # 重置为初始状态
 azd up  # 重试
 
 # 3. 如果认证已过期：
@@ -947,30 +981,30 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**问：如何仅部署代码更改而不重新配置资源？**
+**Q: 如何仅部署代码更改而不重新配置资源？**
 
-答：使用 `azd deploy` 而不是 `azd up`：
+A: 使用 `azd deploy` 而不是 `azd up`：
 
 ```bash
-azd up          # 首次：预配 + 部署 (慢)
+azd up          # 第一次：预配 + 部署 (慢)
 
 # 进行代码更改...
 
 azd deploy      # 后续：仅部署 (快)
 ```
 
-速度比较：
+速度对比：
 - `azd up`: 10-15 分钟（配置基础设施）
 - `azd deploy`: 2-5 分钟（仅代码）
 
 ---
 
-**问：我可以自定义基础设施模板吗？**
+**Q: 我可以自定义基础设施模板吗？**
 
-答：可以！编辑 `infra/` 中的 Bicep 文件：
+A: 可以！编辑 `infra/` 中的 Bicep 文件：
 
 ```bash
-# 运行 azd init 之后
+# 在 azd init 之后
 cd infra/
 code main.bicep  # 在 VS Code 中编辑
 
@@ -981,7 +1015,7 @@ azd provision --preview
 azd provision
 ```
 
-**提示：**从小处开始 - 先更改 SKUs：
+**提示：** 从小处开始 - 先更改 SKUs：
 ```bicep
 // infra/main.bicep
 sku: {
@@ -991,9 +1025,9 @@ sku: {
 
 ---
 
-**问：如何删除 AZD 创建的所有内容？**
+**Q: 如何删除 AZD 创建的所有内容？**
 
-答：一个命令可删除所有资源：
+A: 一条命令可删除所有资源：
 
 ```bash
 azd down --force --purge
@@ -1005,37 +1039,37 @@ azd down --force --purge
 # - 缓存的部署数据
 ```
 
-**在以下情况下始终运行此命令：**
+**在以下情况下务必运行：**
 - 完成模板测试
-- 切换到不同的项目
-- 想重新开始
+- 切换到不同项目
+- 想要重新开始
 
 **节省成本：** 删除未使用的资源 = $0 费用
 
 ---
 
-**问：如果我在 Azure 门户意外删除了资源怎么办？**
+**Q: 如果我在 Azure 门户中意外删除了资源怎么办？**
 
-答：AZD 的状态可能会不同步。清理并重建的方法：
+A: AZD 的状态可能会不同步。清除状态的做法：
 
 ```bash
 # 1. 删除本地状态
 azd down --force --purge
 
-# 2. 从头开始
+# 2. 重新开始
 azd up
 
-# 可选：让 AZD 检测并修复
-azd provision  # 会创建缺失的资源
+# 替代方案：让 AZD 检测并修复
+azd provision  # 将创建缺失的资源
 ```
 
 ---
 
 ### 高级问题
 
-**问：我可以在 CI/CD 管道中使用 AZD 吗？**
+**Q: 我可以在 CI/CD 管道中使用 AZD 吗？**
 
-答：可以！这是 GitHub Actions 示例：
+A: 可以！GitHub Actions 示例：
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1067,18 +1101,18 @@ jobs:
 
 ---
 
-**问：如何处理密钥和敏感数据？**
+**Q: 我如何处理机密和敏感数据？**
 
-答：AZD 会自动与 Azure Key Vault 集成：
+A: AZD 会自动与 Azure Key Vault 集成：
 
 ```bash
 # 机密存储在 Key Vault 中，而不是在代码中
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
-# AZD 自动执行：
+# AZD 会自动：
 # 1. 创建 Key Vault
 # 2. 存储机密
-# 3. 通过托管身份授予应用访问权限
+# 3. 通过托管标识授予应用访问权限
 # 4. 在运行时注入
 ```
 
@@ -1089,9 +1123,9 @@ azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
 ---
 
-**问：我可以部署到多个区域吗？**
+**Q: 我可以部署到多个区域吗？**
 
-答：可以，为每个区域创建一个环境：
+A: 可以，为每个区域创建环境：
 
 ```bash
 # 美国东部环境
@@ -1099,7 +1133,7 @@ azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# 西欧环境
+# 欧洲西部环境
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
@@ -1112,54 +1146,53 @@ azd env list
 
 ---
 
-**问：如果我遇到困难，在哪里可以寻求帮助？**
+**Q: 如果遇到困难，我可以在哪里寻求帮助？**
 
 1. **AZD 文档：** https://learn.microsoft.com/azure/developer/azure-developer-cli/
-2. **GitHub 问题：** https://github.com/Azure/azure-dev/issues
+2. **GitHub Issues：** https://github.com/Azure/azure-dev/issues
 3. **Discord：** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli 频道
-4. **Stack Overflow：** 标签 `azure-developer-cli`
+4. **Stack Overflow：** 使用标签 `azure-developer-cli`
 5. **本课程：** [故障排除指南](../chapter-07-troubleshooting/common-issues.md)
 
-**小贴士：**在提问前，运行：
-```bash
+**小提示：** 在提问前，运行：```bash
 azd show       # 显示当前状态
 azd version    # 显示你的版本
 ```
-在您的问题中包含这些信息以获得更快的帮助。
+在提问时包含这些信息以获得更快的帮助。
 
 ---
 
 ## 🎓 接下来做什么？
 
-您现在已了解 AZD 基础。请选择您的路径：
+你现在了解了 AZD 的基本概念。选择你的路径：
 
 ### 🎯 面向初学者：
-1. **接下来：** [安装与设置](installation.md) - 在您的机器上安装 AZD
-2. **然后：** [您的第一个项目](first-project.md) - 部署您的第一个应用
+1. **下一步：** [安装与设置](installation.md) - 在你的机器上安装 AZD
+2. **然后：** [你的第一个项目](first-project.md) - 部署你的第一个应用
 3. **练习：** 完成本课的全部 3 个练习
 
 ### 🚀 面向 AI 开发者：
-1. **跳转到：** [第2章：以 AI 为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
+1. **跳转到：** [第 2 章：AI 优先开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
 2. **部署：** 从 `azd init --template get-started-with-ai-chat` 开始
 3. **学习：** 在部署的同时构建
 
 ### 🏗️ 面向有经验的开发者：
-1. **查看：** [配置指南](configuration.md) - 高级设置
-2. **探索：** [基础设施即代码](../chapter-04-infrastructure/provisioning.md) - Bicep 深入解析
-3. **构建：** 为您的技术栈创建自定义模板
+1. **复习：** [配置指南](configuration.md) - 高级设置
+2. **探索：** [基础设施即代码](../chapter-04-infrastructure/provisioning.md) - Bicep 深度解析
+3. **构建：** 为你的技术栈创建自定义模板
 
 ---
 
 **章节导航：**
-- **📚 课程主页**: [AZD 入门](../../README.md)
-- **📖 当前章节**: 第1章 - 基础与快速开始  
-- **⬅️ 上一页**: [课程概览](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ 下一页**: [安装与设置](installation.md)
-- **🚀 下一章**: [第2章：以 AI 为先的开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 课程主页**: [AZD 初学者](../../README.md)
+- **📖 当前章节**: 第 1 章 - 基础与快速入门  
+- **⬅️ 上一个**: [课程概览](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ 下一个**: [安装与设置](installation.md)
+- **🚀 下一章**: [第 2 章：AI 优先开发](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。我们尽力确保准确性，但请注意，自动翻译可能存在错误或不准确之处。原始语言的文件应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或曲解，我们不承担任何责任。
+**免责声明**:
+本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文档的原文应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用此翻译而产生的任何误解或误释，我们概不负责。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

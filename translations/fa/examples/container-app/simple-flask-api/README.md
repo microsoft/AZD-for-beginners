@@ -1,72 +1,64 @@
-# API ساده Flask - مثال Container App
+# نمونه ساده Flask API - مثال اپ Container App
 
 **مسیر یادگیری:** مبتدی ⭐ | **زمان:** 25-35 دقیقه | **هزینه:** $0-15/ماه
 
-یک API کامل REST با Python Flask که با استفاده از Azure Developer CLI (azd) به Azure Container Apps مستقر شده است. این مثال اصول استقرار کانتینر، مقیاس‌پذیری خودکار و مبانی مانیتورینگ را نشان می‌دهد.
+یک API REST کامل و عملی با Python و Flask که با استفاده از Azure Developer CLI (azd) در Azure Container Apps مستقر شده است. این مثال مبانی استقرار کانتینر، مقیاس‌بندی خودکار و نظارت را نشان می‌دهد.
 
-## 🎯 آنچه خواهید آموخت
+## 🎯 آنچه می‌آموزید
 
-- استقرار یک برنامه پایتون کانتینری‌شده در Azure
-- پیکربندی مقیاس‌پذیری خودکار با امکان scale-to-zero
-- پیاده‌سازی پروب‌های سلامت و بررسی‌های readiness
-- مانیتور کردن لاگ‌ها و معیارهای برنامه
+- استقرار یک برنامه‌ی پایتون کانتینری شده در Azure
+- پیکربندی مقیاس‌بندی خودکار با مقیاس تا صفر
+- پیاده‌سازی probes سلامت و بررسی‌های آمادگی
+- مشاهده‌ی لاگ‌ها و متریک‌های برنامه
 - استفاده از Azure Developer CLI برای استقرار سریع
 
 ## 📦 موارد شامل
 
-✅ **برنامه Flask** - API کامل REST با عملیات CRUD (`src/app.py`)  
+✅ **برنامه‌ی Flask** - API REST کامل با عملیات CRUD (`src/app.py`)  
 ✅ **Dockerfile** - پیکربندی کانتینر آماده تولید  
 ✅ **زیرساخت Bicep** - محیط Container Apps و استقرار API  
-✅ **پیکربندی AZD** - تنظیم استقرار با یک فرمان  
-✅ **پروب‌های سلامت** - بررسی‌های liveness و readiness پیکربندی شده  
-✅ **مقیاس‌پذیری خودکار** - 0-10 نسخه بر اساس بار HTTP  
+✅ **پیکربندی AZD** - راه‌اندازی استقرار با یک فرمان  
+✅ **Probes سلامت** - بررسی‌های Liveness و Readiness پیکربندی شده  
+✅ **مقیاس‌بندی خودکار** - 0-10 نمونه بر اساس بار HTTP  
 
 ## معماری
 
+```mermaid
+graph TD
+    subgraph ACA[محیط Azure Container Apps]
+        Flask[کانتینر API فلاسک<br/>نقاط پایانی سلامت<br/>رابط REST<br/>مقیاس‌دهی خودکار 0-10 نسخه‌ها]
+        AppInsights[اپلیکیشن اینسایتس]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
-
-## پیش‌نیازها
+## ملزومات
 
 ### مورد نیاز
 - **Azure Developer CLI (azd)** - [راهنمای نصب](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **اشتراک Azure** - [حساب رایگان](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [نصب Docker](https://www.docker.com/products/docker-desktop/) (برای تست محلی)
+- **Docker Desktop** - [نصب Docker](https://www.docker.com/products/docker-desktop/) (برای آزمایش محلی)
 
-### بررسی پیش‌نیازها
+### بررسی ملزومات
 
 ```bash
-# نسخه azd را بررسی کنید (به نسخهٔ 1.5.0 یا بالاتر نیاز است)
+# نسخه azd را بررسی کنید (نیاز به 1.5.0 یا بالاتر)
 azd version
 
 # ورود به Azure را تأیید کنید
 azd auth login
 
-# Docker را بررسی کنید (اختیاری، برای آزمایش محلی)
+# Docker را بررسی کنید (اختیاری، برای تست محلی)
 docker --version
 ```
 
 ## ⏱️ زمان‌بندی استقرار
 
-| مرحله | مدت | چه اتفاقی می‌افتد |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
 | Environment setup | 30 seconds | Create azd environment |
 | Build container | 2-3 minutes | Docker build Flask app |
 | Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
 | Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **مجموع** | **8-12 minutes** | استقرار کامل و آماده |
+| **Total** | **8-12 minutes** | Complete deployment ready |
 
 ## شروع سریع
 
@@ -77,14 +69,14 @@ cd examples/container-app/simple-flask-api
 # محیط را مقداردهی اولیه کنید (یک نام یکتا انتخاب کنید)
 azd env new myflaskapi
 
-# همه موارد را مستقر کنید (زیرساخت + برنامه)
+# همه چیز را مستقر کنید (زیرساخت + برنامه)
 azd up
 # از شما خواسته می‌شود:
-# 1. اشتراک Azure را انتخاب کنید
-# 2. محل را انتخاب کنید (مثلاً eastus2)
-# 3. برای استقرار 8-12 دقیقه صبر کنید
+# ۱. اشتراک Azure را انتخاب کنید
+# ۲. منطقه را انتخاب کنید (برای مثال، eastus2)
+# ۳. برای استقرار ۸–۱۲ دقیقه صبر کنید
 
-# نقطه انتهایی API خود را دریافت کنید
+# نقطه پایانی API خود را دریافت کنید
 azd env get-values
 
 # API را آزمایش کنید
@@ -101,12 +93,12 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ تایید استقرار
+## ✅ تأیید استقرار
 
-### مرحله 1: بررسی وضعیت استقرار
+### گام 1: بررسی وضعیت استقرار
 
 ```bash
-# مشاهده سرویس‌های مستقر
+# مشاهده سرویس‌های مستقر شده
 azd show
 
 # خروجی مورد انتظار نشان می‌دهد:
@@ -115,7 +107,7 @@ azd show
 # - وضعیت: در حال اجرا
 ```
 
-### مرحله 2: آزمون نقاط انتهایی API
+### گام 2: آزمون نقاط انتهایی API
 
 ```bash
 # دریافت نقطهٔ پایانی API
@@ -132,20 +124,20 @@ curl -X POST $API_URL/api/items \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Item", "description": "My first item"}'
 
-# دریافت همه آیتم‌ها
+# دریافت همهٔ موارد
 curl $API_URL/api/items
 ```
 
 **معیارهای موفقیت:**
-- ✅ نقطه سلامت پاسخ HTTP 200 بازمی‌گرداند
-- ✅ نقطه ریشه اطلاعات API را نمایش می‌دهد
-- ✅ POST آیتمی ایجاد می‌کند و HTTP 201 بازمی‌گرداند
-- ✅ GET آیتم‌های ایجادشده را برمی‌گرداند
+- ✅ endpoint سلامت پاسخ HTTP 200 برمی‌گرداند
+- ✅ endpoint ریشه اطلاعات API را نشان می‌دهد
+- ✅ درخواست POST آیتم ایجاد می‌کند و HTTP 201 برمی‌گرداند
+- ✅ درخواست GET آیتم‌های ایجادشده را بازمی‌گرداند
 
-### مرحله 3: مشاهده لاگ‌ها
+### گام 3: مشاهده لاگ‌ها
 
 ```bash
-# پخش زندهٔ لاگ‌ها با استفاده از azd monitor
+# لاگ‌های زنده را با azd monitor پخش کنید
 azd monitor --logs
 
 # یا از Azure CLI استفاده کنید:
@@ -153,8 +145,8 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # شما باید ببینید:
 # - پیام‌های راه‌اندازی Gunicorn
-# - لاگ‌های درخواست HTTP
-# - لاگ‌های اطلاعاتی برنامه
+# - لاگ‌های درخواست‌های HTTP
+# - لاگ‌های اطلاعات برنامه
 ```
 
 ## ساختار پروژه
@@ -196,39 +188,39 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### پیکربندی مقیاس‌پذیری
+### پیکربندی مقیاس‌بندی
 
-API به‌صورت خودکار بر اساس ترافیک HTTP مقیاس می‌شود:
-- **حداقل نسخه‌ها**: 0 (در حالت بیکار به صفر مقیاس می‌یابد)
-- **حداکثر نسخه‌ها**: 10
-- **درخواست‌های همزمان به ازای هر نسخه**: 50
+API به‌صورت خودکار بر اساس ترافیک HTTP مقیاس می‌یابد:
+- **حداقل نمونه‌ها**: 0 (در حالت بیکار تا صفر مقیاس می‌یابد)
+- **حداکثر نمونه‌ها**: 10
+- **درخواست‌های همزمان به ازای هر نمونه**: 50
 
 ## توسعه
 
-### اجرای محلی
+### اجرا به‌صورت محلی
 
 ```bash
-# وابستگی‌ها را نصب کنید
+# نصب وابستگی‌ها
 cd src
 pip install -r requirements.txt
 
-# برنامه را اجرا کنید
+# اجرای برنامه
 python app.py
 
-# به‌صورت محلی تست کنید
+# تست به‌صورت محلی
 curl http://localhost:8000/health
 ```
 
-### ساخت و آزمایش کانتینر
+### ساخت و تست کانتینر
 
 ```bash
-# ساخت تصویر داکر
+# ساخت ایمیج داکر
 docker build -t flask-api:local ./src
 
 # اجرای کانتینر به‌صورت محلی
 docker run -p 8000:8000 flask-api:local
 
-# تست کانتینر
+# آزمایش کانتینر
 curl http://localhost:8000/health
 ```
 
@@ -237,7 +229,7 @@ curl http://localhost:8000/health
 ### استقرار کامل
 
 ```bash
-# استقرار زیرساخت و برنامهٔ کاربردی
+# استقرار زیرساخت و برنامه
 azd up
 ```
 
@@ -258,12 +250,12 @@ azd env set API_KEY "new-api-key"
 azd deploy api
 ```
 
-## مانیتورینگ
+## نظارت
 
 ### مشاهده لاگ‌ها
 
 ```bash
-# لاگ‌های زنده را با azd monitor استریم کنید
+# پخش زنده لاگ‌ها با استفاده از azd monitor
 azd monitor --logs
 
 # یا از Azure CLI برای Container Apps استفاده کنید:
@@ -273,19 +265,19 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### مشاهده معیارها
+### نظارت بر متریک‌ها
 
 ```bash
 # باز کردن داشبورد Azure Monitor
 azd monitor --overview
 
-# مشاهدهٔ معیارهای خاص
+# مشاهده متریک‌های مشخص
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
 ```
 
-## آزمایش
+## تست
 
 ### بررسی سلامت
 
@@ -317,43 +309,43 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## بهینه‌سازی هزینه
 
-این استقرار از قابلیت scale-to-zero استفاده می‌کند، بنابراین فقط زمانی هزینه پرداخت می‌کنید که API در حال پردازش درخواست‌ها باشد:
+این استقرار از مقیاس تا صفر استفاده می‌کند، بنابراین تنها هنگام پردازش درخواست‌ها هزینه پرداخت می‌کنید:
 
-- **هزینه در حالت بیکار**: ~$0/ماه (به صفر مقیاس می‌یابد)
-- **هزینه فعال**: ~$0.000024/ثانیه به ازای هر نسخه
-- **هزینه ماهانه مورد انتظار** (استفاده سبک): $5-15
+- **هزینه در حالت بیکار**: ~$0/ماه (مقیاس تا صفر)
+- **هزینه فعال**: ~$0.000024/ثانیه به ازای هر نمونه
+- **هزینه ماهیانه مورد انتظار** (استفاده سبک): $5-15
 
 ### کاهش بیشتر هزینه‌ها
 
 ```bash
-# کاهش تعداد حداکثر نمونه‌ها برای توسعه
+# حداکثر تعداد نسخه‌ها را برای محیط توسعه کاهش دهید
 azd env set MAX_REPLICAS 3
 
-# زمان بی‌کاری کوتاه‌تری تنظیم کنید
+# از تایم‌اوت بیکاری کوتاه‌تری استفاده کنید
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # ۵ دقیقه
 ```
 
-## رفع اشکال
+## عیب‌یابی
 
 ### کانتینر راه‌اندازی نمی‌شود
 
 ```bash
-# لاگ‌های کانتینر را با استفاده از Azure CLI بررسی کنید
+# با استفاده از Azure CLI لاگ‌های کانتینر را بررسی کنید
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# تایید کنید که ایمیج Docker به صورت محلی ساخته می‌شود
+# اطمینان حاصل کنید که ایمیج Docker به‌صورت محلی ساخته می‌شود
 docker build -t test ./src
 ```
 
-### دسترسی به API ممکن نیست
+### دسترسی به API امکان‌پذیر نیست
 
 ```bash
-# تأیید کنید که اینگرس خارجی است
+# بررسی کنید که اینگرس خارجی است
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### زمان‌های پاسخ بالا
+### زمان پاسخ‌گویی بالا
 
 ```bash
 # مصرف CPU/حافظه را بررسی کنید
@@ -377,26 +369,26 @@ azd down --force --purge
 
 ### گسترش این مثال
 
-1. **افزودن پایگاه‌داده** - یکپارچه‌سازی Azure Cosmos DB یا SQL Database
+1. **افزودن پایگاه داده** - ادغام Azure Cosmos DB یا SQL Database
    ```bash
-   # ماژول Cosmos DB را به infra/main.bicep اضافه کنید
-   # app.py را با اتصال به پایگاه داده به‌روزرسانی کنید
+   # افزودن ماژول Cosmos DB به infra/main.bicep
+   # به‌روزرسانی app.py با اتصال به پایگاه‌داده
    ```
 
 2. **افزودن احراز هویت** - پیاده‌سازی Azure AD یا کلیدهای API
    ```python
-   # افزودن میان‌افزار احراز هویت به app.py
+   # میان‌افزار احراز هویت را به app.py اضافه کنید
    from functools import wraps
    ```
 
-3. **راه‌اندازی CI/CD** - گردش‌کار GitHub Actions
+3. **راه‌اندازی CI/CD** - workflowهای GitHub Actions
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **افزودن Managed Identity** - امن‌سازی دسترسی به سرویس‌های Azure
+4. **افزودن Managed Identity** - دسترسی امن به سرویس‌های Azure
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -404,41 +396,41 @@ azd down --force --purge
 
 ### مثال‌های مرتبط
 
-- **[برنامه پایگاه‌داده](../../../../../examples/database-app)** - مثال کامل با SQL Database
-- **[میکروسرویس‌ها](../../../../../examples/container-app/microservices)** - معماری چندسرویسی
-- **[راهنمای جامع Container Apps](../README.md)** - تمام الگوهای کانتینری
+- **[Database App](../../../../../examples/database-app)** - مثال کامل با SQL Database
+- **[Microservices](../../../../../examples/container-app/microservices)** - معماری چندسرویسی
+- **[Container Apps Master Guide](../README.md)** - تمام الگوهای کانتینر
 
 ### منابع یادگیری
 
-- 📚 [دوره AZD برای مبتدیان](../../../README.md) - صفحه اصلی دوره
-- 📚 [الگوهای Container Apps](../README.md) - الگوهای استقرار بیشتر
-- 📚 [گالری قالب‌های AZD](https://azure.github.io/awesome-azd/) - قالب‌های جامعه
+- 📚 [AZD For Beginners Course](../../../README.md) - صفحه اصلی دوره
+- 📚 [Container Apps Patterns](../README.md) - الگوهای استقرار بیشتر
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - قالب‌های جامعه
 
 ## منابع اضافی
 
 ### مستندات
-- **[مستندات Flask](https://flask.palletsprojects.com/)** - راهنمای فریم‌ورک Flask
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - راهنمای فریم‌ورک Flask
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - مستندات رسمی Azure
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - مرجع دستورات azd
 
 ### آموزش‌ها
-- **[شروع سریع Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - استقرار اولین برنامه‌تان
-- **[پایتون در Azure](https://learn.microsoft.com/azure/developer/python/)** - راهنمای توسعه پایتون
-- **[زبان Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - زیرساخت به‌عنوان کد
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - استقرار اولین برنامه‌ی شما
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - راهنمای توسعه پایتون
+- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - زیرساخت به‌عنوان کد
 
 ### ابزارها
-- **[Azure Portal](https://portal.azure.com)** - مدیریت منابع به‌صورت گرافیکی
-- **[افزونه VS Code برای Azure](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - یکپارچه‌سازی با IDE
+- **[Azure Portal](https://portal.azure.com)** - مدیریت بصری منابع
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - یکپارچه‌سازی IDE
 
 ---
 
-**🎉 تبریک!** شما یک API Flask آماده تولید را با مقیاس‌پذیری خودکار و مانیتورینگ به Azure Container Apps مستقر کرده‌اید.
+**🎉 تبریک!** شما یک API Flask آماده‌ی تولید را در Azure Container Apps با مقیاس‌بندی خودکار و نظارت مستقر کرده‌اید.
 
-**سؤالی دارید؟** [یک issue باز کنید](https://github.com/microsoft/AZD-for-beginners/issues) یا به [سؤالات متداول](../../../resources/faq.md) مراجعه کنید
+**سؤالی دارید؟** [ایجاد یک issue](https://github.com/microsoft/AZD-for-beginners/issues) یا بررسی [سؤالات متداول](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. اگرچه ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطا یا نادرستی باشند. نسخهٔ اصلی سند به زبان مبدأ باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس یا حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هر گونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی اشتباهات یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان بومی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس یا حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

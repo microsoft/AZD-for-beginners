@@ -1,46 +1,46 @@
 # نمونه‌های استقرار برنامه‌های کانتینری با AZD
 
-این دایرکتوری حاوی مثال‌های جامع برای استقرار برنامه‌های کانتینری در Azure Container Apps با استفاده از Azure Developer CLI (AZD) است. این مثال‌ها الگوهای واقعی، بهترین شیوه‌ها و پیکربندی‌های آماده تولید را نشان می‌دهند.
+این دایرکتوری حاوی مثال‌های جامعی برای استقرار برنامه‌های کانتینری در Azure Container Apps با استفاده از Azure Developer CLI (AZD) است. این مثال‌ها الگوهای دنیای واقعی، بهترین شیوه‌ها، و پیکربندی‌های آماده تولید را نشان می‌دهند.
 
 ## 📚 فهرست مطالب
 
-- [بررسی اجمالی](../../../../examples/container-app)
-- [پیش‌نیازها](../../../../examples/container-app)
-- [مثال‌های شروع سریع](../../../../examples/container-app)
-- [مثال‌های تولیدی](../../../../examples/container-app)
-- [الگوهای پیشرفته](../../../../examples/container-app)
-- [بهترین شیوه‌ها](../../../../examples/container-app)
+- [مروری](#overview)
+- [پیش‌نیازها](#prerequisites)
+- [مثال‌های شروع سریع](#quick-start-examples)
+- [نمونه‌های تولید](#production-examples)
+- [الگوهای پیشرفته](#advanced-patterns)
+- [بهترین شیوه‌ها](#best-practices)
 
 ## Overview
 
-Azure Container Apps یک پلتفرم کانتینری بدون‌سرور کاملاً مدیریت‌شده است که به شما امکان اجرای میکروسرویس‌ها و برنامه‌های کانتینری را بدون مدیریت زیرساخت می‌دهد. هنگامی که با AZD ترکیب می‌شود، شما به موارد زیر دسترسی دارید:
+Azure Container Apps یک پلتفرم کانتینری بدون‌سرور کاملاً مدیریت‌شده است که به شما امکان می‌دهد میکروسرویس‌ها و برنامه‌های کانتینری شده را بدون مدیریت زیرساخت اجرا کنید. هنگامی که با AZD ترکیب می‌شود، شما دریافت می‌کنید:
 
-- **استقرار ساده‌شده**: یک فرمان کانتینرها را همراه با زیرساخت مستقر می‌کند
-- **مقیاس‌پذیری خودکار**: مقیاس‌گیری تا صفر و افزایش مقیاس بر اساس ترافیک HTTP یا رویدادها
-- **شبکه‌بندی یکپارچه**: کشف سرویس و تقسیم ترافیک درون‌ساختی
+- **استقرار ساده**: یک دستور، کانتینرها را همراه با زیرساخت مستقر می‌کند
+- **مقیاس‌بندی خودکار**: مقیاس تا صفر و مقیاس‌دهی بر اساس ترافیک HTTP یا رویدادها
+- **شبکه‌بندی یکپارچه**: کشف سرویس و تقسیم ترافیک داخلی
 - **هویت مدیریتی**: احراز هویت امن به منابع Azure
 - **بهینه‌سازی هزینه**: فقط برای منابعی که استفاده می‌کنید پرداخت کنید
 
 ## Prerequisites
 
-قبل از شروع، اطمینان حاصل کنید که دارید:
+قبل از شروع، مطمئن شوید که دارید:
 
 ```bash
-# بررسی نصب AZD
+# نصب AZD را بررسی کنید
 azd version
 
-# بررسی Azure CLI
+# Azure CLI را بررسی کنید
 az version
 
-# بررسی Docker (برای ساخت ایمیج‌های سفارشی)
+# Docker را بررسی کنید (برای ساخت ایمیج‌های سفارشی)
 docker --version
 
-# ورود به Azure
+# به Azure وارد شوید
 azd auth login
 az login
 ```
 
-**منابع Azure مورد نیاز:**
+**Resources مورد نیاز در Azure:**
 - اشتراک Azure فعال
 - مجوزهای ایجاد گروه منابع
 - دسترسی به محیط Container Apps
@@ -51,7 +51,7 @@ az login
 
 یک API REST پایه را با Azure Container Apps مستقر کنید.
 
-**مثال: API Python Flask**
+**مثال: API پایتون Flask**
 
 ```yaml
 # azure.yaml
@@ -68,43 +68,43 @@ services:
 **مراحل استقرار:**
 
 ```bash
-# از الگو مقداردهی اولیه کنید
+# از قالب مقداردهی اولیه
 azd init --template todo-python-mongo
 
-# زیرساخت را تأمین کرده و مستقر کنید
+# تأمین زیرساخت و استقرار
 azd up
 
-# استقرار را آزمایش کنید
+# تست استقرار
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **ویژگی‌های کلیدی:**
-- مقیاس خودکار از 0 تا 10 نسخه
-- پروب‌های سلامت و بررسی‌های زنده بودن
+- مقیاس‌بندی خودکار از 0 تا 10 نسخه
+- پروب‌های سلامت و بررسی‌های liveness
 - تزریق متغیرهای محیطی
 - یکپارچه‌سازی Application Insights
 
 ### 2. Node.js Express API
 
-یک بک‌اند Node.js با یکپارچه‌سازی MongoDB مستقر کنید.
+یک بک‌اند Node.js را با یکپارچه‌سازی MongoDB مستقر کنید.
 
 ```bash
-# الگوی API مربوط به Node.js را مقداردهی اولیه کنید
+# قالب API Node.js را مقداردهی اولیه کنید
 azd init --template todo-nodejs-mongo
 
 # متغیرهای محیطی را پیکربندی کنید
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# استقرار دهید
+# استقرار
 azd up
 
-# از طریق Azure Monitor لاگ‌ها را مشاهده کنید
+# لاگ‌ها را از طریق Azure Monitor مشاهده کنید
 azd monitor --logs
 ```
 
-**نکات برجسته زیرساخت:**
+**نکات کلیدی زیرساخت:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -152,7 +152,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 یک برنامه فول‌استک با فرانت‌اند React و بک‌اند API مستقر کنید.
 
 ```bash
-# مقداردهی اولیهٔ قالب فول‌استک
+# قالب فول‌استک را مقداردهی اولیه کنید
 azd init --template todo-csharp-sql-swa-func
 
 # پیکربندی را بررسی کنید
@@ -224,7 +224,7 @@ azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# استقرار همه سرویس‌ها
+# استقرار تمام سرویس‌ها
 azd up
 
 # نظارت بر استقرار
@@ -233,9 +233,9 @@ azd monitor --overview
 
 ### Example 2: AI-Powered Container App
 
-**سناریو**: برنامه چت AI با یکپارچه‌سازی Azure OpenAI
+**سناریو**: برنامه چت هوش مصنوعی با یکپارچه‌سازی Microsoft Foundry Models
 
-**فایل: src/ai-chat/app.py**
+**File: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# برای دسترسی امن از Managed Identity استفاده کنید
+# برای دسترسی امن از شناسهٔ مدیریت‌شده استفاده کنید
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -258,7 +258,7 @@ def chat():
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -268,7 +268,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**فایل: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +278,7 @@ services:
     host: containerapp
 ```
 
-**فایل: infra/main.bicep**
+**File: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -328,12 +328,12 @@ azd env new dev
 
 # پیکربندی OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # استقرار
 azd up
 
-# تست API
+# آزمایش API
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
@@ -360,7 +360,7 @@ queue-worker/
     └── worker/
 ```
 
-**فایل: src/worker/processor.py**
+**File: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -378,7 +378,7 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # ترتیب پردازش
+            # پردازش سفارش
             print(f"Processing order: {message.content}")
             
             # پیام کامل
@@ -388,7 +388,7 @@ if __name__ == '__main__':
     process_orders()
 ```
 
-**فایل: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -431,13 +431,13 @@ azd deploy api --revision-suffix blue --no-traffic
 # تست نسخهٔ جدید
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# تقسیم ترافیک (۲۰٪ به آبی، ۸۰٪ به نسخهٔ فعلی)
+# تقسیم ترافیک (۲۰٪ به نسخهٔ آبی، ۸۰٪ به نسخهٔ فعلی)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# انتقال کامل به آبی
+# انتقال کامل به نسخهٔ آبی
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -446,7 +446,7 @@ az containerapp ingress traffic set \
 
 ### Pattern 2: Canary Deployment with AZD
 
-**فایل: .azure/dev/config.json**
+**File: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -463,10 +463,10 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# استقرار نسخهٔ جدید با ۱۰٪ ترافیک
+# نسخهٔ جدید را با ۱۰٪ ترافیک مستقر کنید
 azd deploy api --revision-mode multiple
 
-# معیارها را پایش کنید
+# شاخص‌ها را پایش کنید
 azd monitor --service api --duration 5m
 
 # ترافیک را به‌تدریج افزایش دهید
@@ -483,7 +483,7 @@ done
 
 ### Pattern 3: Multi-Region Deployment
 
-**فایل: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +497,7 @@ services:
       - southeastasia
 ```
 
-**فایل: infra/multi-region.bicep**
+**File: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -532,13 +532,13 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 # در همه مناطق مستقر کنید
 azd up
 
-# نقاط انتهایی را بررسی کنید
+# نقاط پایانی را بررسی کنید
 azd show --output json | jq '.services.api.endpoints'
 ```
 
 ### Pattern 4: Dapr Integration
 
-**فایل: infra/app/dapr-enabled.bicep**
+**File: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -573,7 +573,7 @@ app = Flask(__name__)
 @app.route('/orders', methods=['POST'])
 def create_order():
     with DaprClient() as client:
-        # ذخیرهٔ وضعیت
+        # ذخیره وضعیت
         client.save_state(
             store_name='statestore',
             key='order-123',
@@ -595,7 +595,7 @@ def create_order():
 ### 1. Resource Organization
 
 ```bash
-# از کنوانسیون‌های نام‌گذاری سازگار استفاده کنید
+# از قراردادهای نام‌گذاری یکسان استفاده کنید
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -668,12 +668,12 @@ services:
 # Application Insights را فعال کنید
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# لاگ‌ها را به‌صورت زمان واقعی مشاهده کنید
+# لاگ‌ها را به‌صورت بلادرنگ مشاهده کنید
 azd monitor --logs
-# یا از Azure CLI برای Container Apps استفاده کنید:
+# یا از Azure CLI برای برنامه‌های کانتینری استفاده کنید:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# بر معیارها نظارت کنید
+# متریک‌ها را پایش کنید
 azd monitor --live
 
 # هشدارها را ایجاد کنید
@@ -688,16 +688,16 @@ az monitor metrics alert create \
 ### 5. Cost Optimization
 
 ```bash
-# در صورت عدم استفاده، مقیاس را به صفر برسانید
+# در صورت عدم استفاده مقیاس را به صفر برسانید.
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# برای محیط‌های توسعه از نمونه‌های Spot استفاده کنید
+# برای محیط‌های توسعه از نمونه‌های اسپات استفاده کنید.
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# هشدارهای بودجه را تنظیم کنید
+# هشدارهای بودجه را تنظیم کنید.
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -740,22 +740,22 @@ jobs:
 ## Common Commands Reference
 
 ```bash
-# پروژهٔ جدید برنامهٔ کانتینری را مقداردهی اولیه کنید
+# پروژهٔ جدید برنامهٔ کانتینری را راه‌اندازی کنید
 azd init --template <template-name>
 
 # زیرساخت و برنامه را مستقر کنید
 azd up
 
-# فقط کد برنامه را مستقر کنید (استقرار زیرساخت را انجام ندهید)
+# فقط کد برنامه را مستقر کنید (از استقرار زیرساخت صرف‌نظر کنید)
 azd deploy
 
-# فقط زیرساخت را تهیه کنید
+# فقط زیرساخت را فراهم کنید
 azd provision
 
-# مشاهده منابع مستقر‌شده
+# مشاهدهٔ منابع مستقر شده
 azd show
 
-# پخش لاگ‌ها با استفاده از azd monitor یا Azure CLI
+# نمایش زندهٔ لاگ‌ها با استفاده از azd monitor یا Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -768,7 +768,7 @@ azd down --force --purge
 
 ## Troubleshooting
 
-### مشکل: کانتینر راه‌اندازی نمی‌شود
+### Issue: Container fails to start
 
 ```bash
 # با استفاده از Azure CLI لاگ‌ها را بررسی کنید
@@ -780,12 +780,12 @@ az containerapp revision show \
   --resource-group rg-myapp \
   --revision latest
 
-# به‌صورت محلی تست کنید
+# به‌صورت محلی آزمایش کنید
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### مشکل: عدم دسترسی به نقطه‌پایان برنامه کانتینر
+### Issue: Can't access container app endpoint
 
 ```bash
 # تأیید پیکربندی اینگرس
@@ -794,22 +794,22 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# بررسی فعال بودن اینگرس داخلی
+# بررسی اینکه اینگرس داخلی فعال است یا خیر
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### مشکل: مشکلات عملکرد
+### Issue: Performance problems
 
 ```bash
-# استفاده از منابع را بررسی کنید
+# بررسی میزان استفاده از منابع
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# منابع را افزایش دهید
+# افزایش ظرفیت منابع
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -817,7 +817,7 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## منابع و مثال‌های اضافی
+## Additional Resources and Examples
 - [مثال میکروسرویس‌ها](./microservices/README.md)
 - [مثال API ساده Flask](./simple-flask-api/README.md)
 - [مستندات Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
@@ -825,23 +825,23 @@ az containerapp update \
 - [نمونه‌های Container Apps](https://github.com/Azure-Samples/container-apps-samples)
 - [قالب‌های Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## مشارکت
+## Contributing
 
-برای مشارکت و افزودن مثال‌های جدید برنامه کانتینر:
+برای مشارکت با مثال‌های جدید برنامه کانتینری:
 
-1. یک زیرشاخه جدید با مثال خود ایجاد کنید
-2. فایل‌های کامل `azure.yaml`، `infra/` و `src/` را درج کنید
-3. یک README جامع با دستورالعمل‌های استقرار اضافه کنید
+1. یک زیرپوشهٔ جدید با مثال خود ایجاد کنید
+2. شامل فایل‌های کامل `azure.yaml`، `infra/` و `src/` باشید
+3. README جامع با دستورالعمل‌های استقرار اضافه کنید
 4. استقرار را با `azd up` تست کنید
 5. یک pull request ارسال کنید
 
 ---
 
-**نیاز به کمک؟** به جامعه [دیسکورد Microsoft Foundry](https://discord.gg/microsoft-azure) بپیوندید برای پشتیبانی و سوالات.
+**نیاز به کمک؟** به جامعه [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) بپیوندید برای پشتیبانی و سوالات.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مادری‌اش باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی یا حساس، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی اشتباهات یا نادرستی‌هایی باشند. سند اصلی به زبان مادری‌اش باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

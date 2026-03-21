@@ -1,67 +1,61 @@
 # الگوهای هماهنگی چندعاملی
 
-⏱️ **زمان تقریبی**: 60-75 minutes | 💰 **هزینه تقریبی**: ~$100-300/month | ⭐ **پیچیدگی**: Advanced
+⏱️ **زمان برآوردی**: 60-75 دقیقه | 💰 **هزینه برآوردی**: ~$100-300/ماه | ⭐ **پیچیدگی**: پیشرفته
 
 **📚 مسیر یادگیری:**
-- ← Previous: [برنامه‌ریزی ظرفیت](capacity-planning.md) - سایزبندی منابع و استراتژی‌های مقیاس‌دهی
-- 🎯 **شما اینجا هستید**: الگوهای هماهنگی چندعاملی (ارکستراسیون، ارتباطات، مدیریت حالت)
-- → Next: [انتخاب SKU](sku-selection.md) - انتخاب سرویس‌های مناسب Azure
-- 🏠 [صفحه‌ی دوره](../../README.md)
+- ← قبلی: [برنامه‌ریزی ظرفیت](capacity-planning.md) - تخمین منابع و استراتژی‌های مقیاس‌بندی
+- 🎯 **شما اینجا هستید**: الگوهای هماهنگی چندعاملی (ارکستراسیون، ارتباط، مدیریت حالت)
+- → بعدی: [انتخاب SKU](sku-selection.md) - انتخاب سرویس‌های مناسب Azure
+- 🏠 [صفحه دوره](../../README.md)
 
 ---
 
 ## آنچه خواهید آموخت
 
 با تکمیل این درس، شما:
-- درک الگوهای **معماری چندعاملی** و زمان مناسب برای استفاده از آنها
+- درک الگوهای **معماری چندعاملی** و زمان استفاده از آن‌ها
 - پیاده‌سازی **الگوهای ارکستراسیون** (متمرکز، غیرمتمرکز، سلسله‌مراتبی)
-- طراحی استراتژی‌های **ارتباط بین عامل‌ها** (همزمان، غیرهمزمان، رویدادمحور)
-- مدیریت **حالت مشترک** در میان عامل‌های توزیع‌شده
-- استقرار **سامانه‌های چندعاملی** روی Azure با AZD
-- اعمال **الگوهای هماهنگی** برای سناریوهای واقعی هوش مصنوعی
-- نظارت و رفع اشکال سامانه‌های چندعاملی توزیع‌شده
+- طراحی استراتژی‌های **ارتباط عامل‌ها** (همزمان، ناهمزمان، رویدادمحور)
+- مدیریت **حالت مشترک** در بین عامل‌های توزیع‌شده
+- استقرار **سیستم‌های چندعاملی** روی Azure با AZD
+- به‌کارگیری **الگوهای هماهنگی** برای سناریوهای واقعی AI
+- پایش و اشکال‌زدایی سیستم‌های عامل توزیع‌شده
 
 ## چرا هماهنگی چندعاملی اهمیت دارد
 
-### تکامل: از عامل منفرد تا چندعاملی
+### تکامل: از عامل تک‌نفره تا چندعاملی
 
-**عامل منفرد (ساده):**
+**عامل تک‌نفره (ساده):**
 ```
 User → Agent → Response
 ```
-- ✅ فهم و پیاده‌سازی آسان
+- ✅ آسان برای درک و پیاده‌سازی
 - ✅ سریع برای وظایف ساده
-- ❌ محدود به توانایی‌های یک مدل
+- ❌ محدود به قابلیت‌های یک مدل
 - ❌ قابلیت اجرای موازی وظایف پیچیده را ندارد
-- ❌ فاقد تخصص
+- ❌ عدم تخصص
 
-**سامانه چندعاملی (پیشرفته):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ عامل‌های تخصصی برای وظایف مشخص
+**سیستم چندعاملی (پیشرفته):**
+```mermaid
+graph TD
+    Orchestrator[هماهنگ‌کننده] --> Agent1[عامل1<br/>برنامه]
+    Orchestrator --> Agent2[عامل2<br/>کد]
+    Orchestrator --> Agent3[عامل3<br/>بازبینی]
+```- ✅ عامل‌های تخصصی برای وظایف مشخص
 - ✅ اجرای موازی برای افزایش سرعت
 - ✅ ماژولار و قابل نگهداری
-- ✅ بهتر در جریان‌های کاری پیچیده
+- ✅ عملکرد بهتر در جریان‌های کاری پیچیده
 - ⚠️ نیازمند منطق هماهنگی
 
-**تشبیه**: عامل منفرد مانند یک نفر است که همه وظایف را انجام می‌دهد. چندعاملی مانند یک تیم است که هر عضو مهارت‌های تخصصی دارد (پژوهشگر، برنامه‌نویس، بازبین، نویسنده) و با هم کار می‌کنند.
+**تشبیه**: عامل تک‌نفره مانند یک نفر است که همه کارها را انجام می‌دهد. سیستم چندعاملی مانند تیمی است که هر عضو مهارت تخصصی دارد (پژوهشگر، کدنویس، بازبین، نویسنده) و با هم کار می‌کنند.
 
 ---
 
 ## الگوهای اصلی هماهنگی
 
-### الگو 1: هماهنگی ترتیبی (زنجیره مسؤولیت)
+### الگو 1: هماهنگی متوالی (زنجیره مسئولیت)
 
-**زمان استفاده**: وظایف باید به ترتیب مشخص تکمیل شوند، هر عامل بر پایه خروجی قبلی کار می‌کند.
+**زمان استفاده**: وظایف باید به ترتیب خاصی کامل شوند، هر عامل روی خروجی قبلی بنا می‌کند.
 
 ```mermaid
 sequenceDiagram
@@ -71,47 +65,47 @@ sequenceDiagram
     participant Agent2 as عامل نویسنده
     participant Agent3 as عامل ویراستار
     
-    User->>Orchestrator: "نوشتن مقاله دربارهٔ هوش مصنوعی"
-    Orchestrator->>Agent1: تحقیق در مورد موضوع
+    User->>Orchestrator: "یک مقاله دربارهٔ هوش مصنوعی بنویس"
+    Orchestrator->>Agent1: تحقیق دربارهٔ موضوع
     Agent1-->>Orchestrator: نتایج تحقیق
     Orchestrator->>Agent2: نوشتن پیش‌نویس (با استفاده از تحقیق)
     Agent2-->>Orchestrator: پیش‌نویس مقاله
     Orchestrator->>Agent3: ویرایش و بهبود
     Agent3-->>Orchestrator: مقاله نهایی
-    Orchestrator-->>User: مقاله آراسته
+    Orchestrator-->>User: مقاله اصلاح‌شده
     
-    Note over User,Agent3: پیاپی: هر مرحله منتظر مرحلهٔ قبلی است
+    Note over User,Agent3: به‌صورت متوالی: هر مرحله منتظر مرحلهٔ قبلی است
 ```
 **مزایا:**
 - ✅ جریان داده واضح
-- ✅ ساده برای رفع اشکال
-- ✅ ترتیب اجرای قابل پیش‌بینی
+- ✅ آسان برای اشکال‌زدایی
+- ✅ ترتیب اجرای پیش‌بینی‌شده
 
 **محدودیت‌ها:**
 - ❌ کندتر (بدون موازی‌سازی)
 - ❌ یک خطا کل زنجیره را مسدود می‌کند
 - ❌ نمی‌تواند وظایف وابسته به هم را مدیریت کند
 
-**نمونه‌های کاربردی:**
-- خط لوله تولید محتوا (پژوهش → نوشتن → ویرایش → انتشار)
+**مثال‌های کاربردی:**
+- خط لوله تولید محتوا (تحقیق → نوشتن → ویرایش → انتشار)
 - تولید کد (برنامه‌ریزی → پیاده‌سازی → تست → استقرار)
-- تولید گزارش (جمع‌آوری داده → تحلیل → بصری‌سازی → خلاصه)
+- تولید گزارش (جمع‌آوری داده → تحلیل → بصری‌سازی → خلاصه‌سازی)
 
 ---
 
-### الگو 2: هماهنگی موازی (پخش-تجمیع / Fan-Out/Fan-In)
+### الگو 2: هماهنگی موازی (Fan-Out/Fan-In)
 
-**زمان استفاده**: وظایف مستقل می‌توانند به‌صورت هم‌زمان اجرا شوند، نتایج در پایان ترکیب می‌شوند.
+**زمان استفاده**: وظایف مستقل می‌توانند هم‌زمان اجرا شوند و نتایج در انتها ترکیب می‌شوند.
 
 ```mermaid
 graph TB
-    User[درخواست کاربر]
-    Orchestrator[هماهنگ‌کننده]
-    Agent1[عامل تحلیل]
-    Agent2[عامل پژوهش]
-    Agent3[عامل داده]
-    Aggregator[تجمیع‌کننده نتایج]
-    Response[پاسخ ترکیبی]
+    User[‏درخواست کاربر]
+    Orchestrator[‏هماهنگ‌کننده]
+    Agent1[‏عامل تحلیل]
+    Agent2[‏عامل پژوهش]
+    Agent3[‏عامل داده]
+    Aggregator[‏تجمیع‌کننده نتایج]
+    Response[‏پاسخ ترکیبی]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -127,16 +121,16 @@ graph TB
 ```
 **مزایا:**
 - ✅ سریع (اجرای موازی)
-- ✅ پایدار در برابر خطا (نتایج جزئی قابل قبول)
-- ✅ قابلیت مقیاس‌پذیری افقی
+- ✅ تحمل خطا (نتایج جزئی قابل قبول‌اند)
+- ✅ مقیاس‌پذیر به‌طور افقی
 
 **محدودیت‌ها:**
-- ⚠️ ممکن است نتایج خارج از ترتیب برسند
+- ⚠️ نتایج ممکن است خارج از ترتیب برسند
 - ⚠️ نیاز به منطق تجمیع دارد
-- ⚠️ مدیریت وضعیت پیچیده
+- ⚠️ مدیریت حالت پیچیده
 
-**نمونه‌های کاربردی:**
-- جمع‌آوری داده از منابع متعدد (APIs + پایگاه‌داده‌ها + وب‌اسکرپینگ)
+**مثال‌های کاربردی:**
+- جمع‌آوری داده از منابع چندگانه (APIها + پایگاه‌های داده + وب‌اسکرپینگ)
 - تحلیل رقابتی (چندین مدل راه‌حل تولید می‌کنند، بهترین انتخاب می‌شود)
 - خدمات ترجمه (ترجمه هم‌زمان به چند زبان)
 
@@ -144,7 +138,7 @@ graph TB
 
 ### الگو 3: هماهنگی سلسله‌مراتبی (مدیر-کارگر)
 
-**زمان استفاده**: جریان‌های کاری پیچیده با زیروظایف، نیاز به واگذاری دارند.
+**زمان استفاده**: جریان‌های کاری پیچیده با زیروظایف، نیاز به واگذاری کارها وجود دارد.
 
 ```mermaid
 graph TB
@@ -152,7 +146,7 @@ graph TB
     Manager1[مدیر پژوهش]
     Manager2[مدیر محتوا]
     W1[خزندهٔ وب]
-    W2[تحلیل‌گر مقاله]
+    W2[تحلیلگر مقاله]
     W3[نویسنده]
     W4[ویراستار]
     
@@ -170,71 +164,71 @@ graph TB
 **مزایا:**
 - ✅ مدیریت جریان‌های کاری پیچیده
 - ✅ ماژولار و قابل نگهداری
-- ✅ حدود مسئولیت‌های واضح
+- ✅ مرزبندی مسئولیت‌ها واضح
 
 **محدودیت‌ها:**
 - ⚠️ معماری پیچیده‌تر
-- ⚠️ تاخیر بیشتر (چندین لایه هماهنگی)
-- ⚠️ نیازمند ارکستراسیون پیچیده
+- ⚠️ تأخیر بیشتر (لایه‌های هماهنگی متعدد)
+- ⚠️ نیاز به ارکستراسیون پیشرفته
 
-**نمونه‌های کاربردی:**
-- پردازش اسناد سازمانی (رده‌بندی → ارجاع → پردازش → بایگانی)
-- خطوط داده چندمرحله‌ای (دریافت → پاک‌سازی → تبدیل → تحلیل → گزارش)
-- جریان‌های کاری اتوماسیون پیچیده (برنامه‌ریزی → تخصیص منابع → اجرا → مانیتورینگ)
+**مثال‌های کاربردی:**
+- پردازش اسناد سازمانی (طبقه‌بندی → هدایت → پردازش → آرشیو)
+- خط لوله‌های چندمرحله‌ای داده (ورود → پاک‌سازی → تبدیل → تحلیل → گزارش)
+- جریان‌های خودکارسازی پیچیده (برنامه‌ریزی → تخصیص منابع → اجرا → پایش)
 
 ---
 
-### الگو 4: هماهنگی رویدادمحور (انتشار-اشتراک)
+### الگو 4: هماهنگی رویدادمحور (Publish-Subscribe)
 
-**زمان استفاده**: عامل‌ها باید به رویدادها واکنش نشان دهند، اتصال ضعیف مطلوب است.
+**زمان استفاده**: عامل‌ها باید به رویدادها واکنش نشان دهند و اتصال سستی مطلوب است.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as جمع‌آوری‌کنندهٔ داده‌ها
+    participant Agent1 as جمع‌آورنده داده‌ها
     participant EventBus as سرویس‌باس آژور
     participant Agent2 as تحلیل‌گر
     participant Agent3 as اطلاع‌رسان
     participant Agent4 as بایگانی‌کننده
     
-    Agent1->>EventBus: انتشار رویداد "داده دریافت‌شده"
+    Agent1->>EventBus: انتشار رویداد "دریافت داده"
     EventBus->>Agent2: اشتراک: تحلیل داده‌ها
     EventBus->>Agent3: اشتراک: ارسال اعلان
     EventBus->>Agent4: اشتراک: بایگانی داده‌ها
     
     Note over Agent1,Agent4: تمام مشترکین به‌صورت مستقل پردازش می‌شوند
     
-    Agent2->>EventBus: انتشار رویداد "تحلیل تکمیل‌شده"
+    Agent2->>EventBus: انتشار رویداد "تکمیل تحلیل"
     EventBus->>Agent3: اشتراک: ارسال گزارش تحلیل
 ```
 **مزایا:**
-- ✅ وابستگی ضعیف بین عامل‌ها
+- ✅ اتصال سست بین عامل‌ها
 - ✅ افزودن عامل‌های جدید آسان است (فقط مشترک شوند)
-- ✅ پردازش غیرهمزمان
+- ✅ پردازش ناهمزمان
 - ✅ مقاوم (پایداری پیام)
 
 **محدودیت‌ها:**
-- ⚠️ سازگاری نهایی
-- ⚠️ رفع اشکال پیچیده
+- ⚠️ سازگاری در نهایت
+- ⚠️ اشکال‌زدایی پیچیده
 - ⚠️ چالش‌های ترتیب پیام
 
-**نمونه‌های کاربردی:**
-- سامانه‌های مانیتورینگ زمان واقعی (هشدارها، داشبوردها، لاگ‌ها)
+**مثال‌های کاربردی:**
+- سیستم‌های پایش بلادرنگ (هشدارها، داشبوردها، لاگ‌ها)
 - اطلاع‌رسانی چندکاناله (ایمیل، SMS، پوش، Slack)
-- خطوط پردازش داده (چند مصرف‌کننده برای یک داده)
+- خط لوله‌های پردازش داده (چند مصرف‌کننده از یک داده)
 
 ---
 
-### الگو 5: هماهنگی مبتنی بر اجماع (رأی‌گیری/اکثریت)
+### الگو 5: هماهنگی مبتنی بر اجماع (رأی‌گیری/Quorum)
 
-**زمان استفاده**: نیاز به توافق چند عامل قبل از ادامه.
+**زمان استفاده**: نیاز به توافق چندین عامل قبل از ادامه کار وجود دارد.
 
 ```mermaid
 graph TB
-    Input[وظیفه ورودی]
-    Agent1[عامل ۱: GPT-4]
+    Input[وظیفهٔ ورودی]
+    Agent1[عامل ۱: gpt-4.1]
     Agent2[عامل ۲: Claude]
     Agent3[عامل ۳: Gemini]
-    Voter[رای‌دهنده اجماعی]
+    Voter[رای‌دهندهٔ اجماع]
     Output[خروجی توافق‌شده]
     
     Input --> Agent1
@@ -248,40 +242,40 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **مزایا:**
-- ✅ دقت بالاتر (چند نظر)
-- ✅ پایدار در برابر خطا (نارسایی اقلیت قابل قبول)
-- ✅ اطمینان از کیفیت به‌صورت تعبیه‌شده
+- ✅ دقت بالاتر (چندین نظر)
+- ✅ تحمل خطا (خرابی اقلیت قابل قبول است)
+- ✅ تضمین کیفیت درونی
 
 **محدودیت‌ها:**
-- ❌ گران‌قیمت (فراخوانی چندین مدل)
-- ❌ کندتر (انتظار برای همه عامل‌ها)
+- ❌ پرهزینه (تماس‌های چندگانه با مدل)
+- ❌ کندتر (منتظر ماندن برای همه عامل‌ها)
 - ⚠️ نیاز به حل تعارض
 
-**نمونه‌های کاربردی:**
-- نظارت بر محتوا (چندین مدل محتوا را بازبینی می‌کنند)
-- بازبینی کد (چندین linter/تحلیلگر)
-- تشخیص پزشکی (چندین مدل هوش مصنوعی، تایید متخصص)
+**مثال‌های کاربردی:**
+- تعدیل محتوا (چندین مدل محتوا را بررسی می‌کنند)
+- بازبینی کد (چندین لینتر/آنالایزر)
+- تشخیص پزشکی (چندین مدل AI، تأیید توسط متخصص)
 
 ---
 
-## مرور کلی معماری
+## مرور معماری
 
-### سامانه کامل چندعاملی روی Azure
+### سیستم کامل چندعاملی روی Azure
 
 ```mermaid
 graph TB
     User[کاربر/کلاینت API]
-    APIM[مدیریت API Azure]
+    APIM[مدیریت API آژور]
     Orchestrator[سرویس ارکستراتور<br/>برنامه کانتینری]
-    ServiceBus[سرویس‌باس Azure<br/>هاب رویداد]
+    ServiceBus[Service Bus آژور<br/>هاب رویداد]
     
     Agent1[عامل پژوهشگر<br/>برنامه کانتینری]
     Agent2[عامل نویسنده<br/>برنامه کانتینری]
     Agent3[عامل تحلیلگر<br/>برنامه کانتینری]
     Agent4[عامل بازبین<br/>برنامه کانتینری]
     
-    CosmosDB[(Cosmos DB<br/>حالت مشترک)]
-    Storage[ذخیره‌سازی Azure<br/>آرتیفکت‌ها]
+    CosmosDB[(Cosmos DB<br/>وضعیت مشترک)]
+    Storage[ذخیره‌سازی آژور<br/>آرتیفکت‌ها]
     AppInsights[Application Insights<br/>نظارت]
     
     User --> APIM
@@ -315,12 +309,12 @@ graph TB
 ```
 **اجزای کلیدی:**
 
-| مولفه | هدف | سرویس Azure |
+| Component | Purpose | Azure Service |
 |-----------|---------|---------------|
-| **API Gateway** | نقطهٔ ورود، محدودسازی نرخ، احراز هویت | API Management |
+| **API Gateway** | نقطه ورود، محدودسازی نرخ، احراز هویت | API Management |
 | **Orchestrator** | هماهنگ‌کننده جریان‌های کاری عامل‌ها | Container Apps |
-| **Message Queue** | ارتباط غیرهمزمان | Service Bus / Event Hubs |
-| **Agents** | عامل‌های تخصصی هوش مصنوعی | Container Apps / Functions |
+| **Message Queue** | ارتباط ناهمگام | Service Bus / Event Hubs |
+| **Agents** | عامل‌های AI تخصصی | Container Apps / Functions |
 | **State Store** | حالت مشترک، پیگیری وظایف | Cosmos DB |
 | **Artifact Storage** | اسناد، نتایج، لاگ‌ها | Blob Storage |
 | **Monitoring** | ردیابی توزیع‌شده، لاگ‌ها | Application Insights |
@@ -329,20 +323,20 @@ graph TB
 
 ## پیش‌نیازها
 
-### ابزارهای موردنیاز
+### ابزارهای مورد نیاز
 
 ```bash
 # بررسی Azure Developer CLI
 azd version
-# ✅ انتظار می‌رود: azd نسخهٔ 1.0.0 یا بالاتر
+# ✅ مورد انتظار: نسخهٔ azd 1.0.0 یا بالاتر
 
 # بررسی Azure CLI
 az --version
-# ✅ انتظار می‌رود: azure-cli نسخه 2.50.0 یا بالاتر
+# ✅ مورد انتظار: azure-cli نسخهٔ 2.50.0 یا بالاتر
 
 # بررسی Docker (برای تست محلی)
 docker --version
-# ✅ انتظار می‌رود: Docker نسخهٔ 20.10 یا بالاتر
+# ✅ مورد انتظار: نسخهٔ Docker 20.10 یا بالاتر
 ```
 
 ### نیازمندی‌های Azure
@@ -355,12 +349,12 @@ docker --version
   - Storage accounts
   - Application Insights
 
-### پیش‌نیازهای دانشی
+### پیش‌نیازهای دانش
 
-شما باید موارد زیر را کامل کرده باشید:
+شما باید موارد زیر را تکمیل کرده باشید:
 - [مدیریت پیکربندی](../chapter-03-configuration/configuration.md)
 - [احراز هویت و امنیت](../chapter-03-configuration/authsecurity.md)
-- [مثال میکروسرویس‌ها](../../../../examples/microservices)
+- [نمونه میکروسرویس‌ها](../../../../examples/microservices)
 
 ---
 
@@ -398,13 +392,13 @@ multi-agent-system/
 
 ---
 
-## درس 1: الگوی هماهنگی ترتیبی
+## درس 1: الگوی هماهنگی متوالی
 
 ### پیاده‌سازی: خط لوله تولید محتوا
 
-بیایید یک خط لوله ترتیبی بسازیم: پژوهش → نوشتن → ویرایش → انتشار
+بیایید یک خط لوله متوالی بسازیم: تحقیق → نوشتن → ویرایش → انتشار
 
-### 1. AZD Configuration
+### 1. پیکربندی AZD
 
 **فایل: `azure.yaml`**
 
@@ -435,7 +429,7 @@ services:
     host: containerapp
 ```
 
-### 2. Infrastructure: Service Bus for Coordination
+### 2. زیرساخت: Service Bus برای هماهنگی
 
 **فایل: `infra/core/servicebus.bicep`**
 
@@ -492,7 +486,7 @@ output namespace string = serviceBusNamespace.name
 output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
 ```
 
-### 3. Shared State Manager
+### 3. مدیر حالت مشترک
 
 **فایل: `src/shared/state_manager.py`**
 
@@ -552,7 +546,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Orchestrator Service
+### 4. سرویس ارکستراتور
 
 **فایل: `src/orchestrator/app.py`**
 
@@ -567,7 +561,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# اتصال سرویس‌باس
+# ارتباط با Service Bus
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # ایجاد وظیفه در ذخیره‌ساز وضعیت
+    # ایجاد وظیفه در مخزن وضعیت
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -600,7 +594,7 @@ def create_content():
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # کجا نتایج را ارسال کنیم
+            'next_queue': 'writer-tasks'  # نتایج را به کجا ارسال کنیم
         }),
         content_type='application/json'
     )
@@ -629,7 +623,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Research Agent
+### 5. عامل پژوهش
 
 **فایل: `src/agents/research/app.py`**
 
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # برای پژوهش، Azure OpenAI را فراخوانی کنید
+    # برای پژوهش، مدل‌های Microsoft Foundry را فراخوانی کنید
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -673,7 +667,7 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # وضعیت را به‌روزرسانی کنید
+    # وضعیت را به‌روز کنید
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
@@ -719,7 +713,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Writer Agent
+### 6. عامل نویسنده
 
 **فایل: `src/agents/writer/app.py`**
 
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Azure OpenAI را برای نوشتن مقاله فراخوانی کنید
+    # برای نوشتن مقاله، مدل‌های مایکروسافت فاندری را فراخوانی کن
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -762,14 +756,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # وضعیت را به‌روزرسانی کنید
+    # وضعیت را به‌روزرسانی کن
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # ارسال به ویراستار
+    # به ویراستار ارسال کن
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -807,7 +801,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Editor Agent
+### 7. عامل ویرایشگر
 
 **فایل: `src/agents/editor/app.py`**
 
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # برای ویرایش، Azure OpenAI را فراخوانی کنید
+    # مدل‌های Microsoft Foundry را برای ویرایش فراخوانی کنید
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # وظیفه را به‌عنوان تکمیل‌شده علامت‌گذاری کنید
+    # وظیفه را به‌عنوان انجام‌شده علامت بزنید
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -883,13 +877,22 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Deploy and Test
+### 8. استقرار و تست
 
 ```bash
-# راه‌اندازی و استقرار
+# گزینهٔ A: استقرار مبتنی بر قالب
 azd init
 azd up
 
+# گزینهٔ B: استقرار مانیفست عامل (نیاز به افزونه دارد)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> برای همه فلگ‌ها و گزینه‌های `azd ai` به [دستورات AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) مراجعه کنید.
+
+```bash
 # دریافت آدرس URL ارکستراتور
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -910,13 +913,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**پیشرفت وظیفه را بررسی کنید:**
+**پیشرفت تسک را بررسی کنید:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ خروجی مورد انتظار (تکمیل شده):**
+**✅ خروجی مورد انتظار (تکمیل‌شده):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -946,9 +949,9 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## درس 2: الگوی هماهنگی موازی
 
-### پیاده‌سازی: تجمیع‌کننده پژوهش چندمنبعی
+### پیاده‌سازی: گردآورنده تحقیق از منابع چندگانه
 
-بیایید سیستمی موازی بسازیم که اطلاعات را هم‌زمان از چند منبع جمع‌آوری کند.
+بیایید یک سیستم موازی بسازیم که اطلاعات را هم‌زمان از چندین منبع جمع‌آوری کند.
 
 ### ارکستراتور موازی
 
@@ -987,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # توزیع هم‌زمان: ارسال به همهٔ عامل‌ها
+    # پخش: ارسال هم‌زمان به همهٔ عامل‌ها
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1038,9 +1041,9 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# ردیابی نتایج برای هر وظیفه
+# پیگیری نتایج برای هر وظیفه
 task_results = defaultdict(list)
-expected_agents = 4  # وب، آکادمیک، اخبار، اجتماعی
+expected_agents = 4  # وب، آکادمیک، خبری، اجتماعی
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1048,7 +1051,7 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # ذخیره نتیجه
+    # ذخیره‌سازی نتیجه
     task_results[task_id].append({
         'agent': agent_type,
         'data': result
@@ -1056,7 +1059,7 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # بررسی کنید که آیا همه عامل‌ها تکمیل شده‌اند (fan-in)
+    # بررسی کنید که آیا همه عامل‌ها تکمیل شده‌اند (فن-این)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
@@ -1103,31 +1106,31 @@ if __name__ == '__main__':
 ```
 
 **مزایای الگوی موازی:**
-- ⚡ **۴ برابر سریع‌تر** (عامل‌ها هم‌زمان اجرا می‌شوند)
-- 🔄 **پایدار در برابر خطا** (نتایج جزئی قابل قبول)
-- 📈 **قابلیت مقیاس‌پذیری** (به‌سادگی عامل‌های بیشتری اضافه کنید)
+- ⚡ **4 برابر سریع‌تر** (عامل‌ها هم‌زمان اجرا می‌شوند)
+- 🔄 **تحمل خطا** (نتایج جزئی قابل قبول‌اند)
+- 📈 **قابل مقیاس** (افزودن عامل‌های بیشتر به‌راحتی)
 
 ---
 
-## تمرین‌های عملی
+## تمرینات عملی
 
 ### تمرین 1: افزودن مدیریت تایم‌اوت ⭐⭐ (متوسط)
 
-**هدف**: پیاده‌سازی منطق تایم‌اوت تا تجمیع‌کننده برای عامل‌های کند بی‌نهایت انتظار نکشد.
+**هدف**: پیاده‌سازی منطق تایم‌اوت به‌گونه‌ای که گردآورنده برای عامل‌های کند تا ابد منتظر نماند.
 
 **مراحل**:
 
-1. **افزودن ردیابی تایم‌اوت به تجمیع‌کننده:**
+1. **افزودن پیگیری تایم‌اوت به گردآورنده:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # شناسهٔ وظیفه -> زمان انقضا
+task_timeouts = {}  # شناسه_وظیفه -> زمان_انقضا
 
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # تنظیم مهلت زمانی برای اولین نتیجه
+    # برای اولین نتیجه محدودیت زمانی تنظیم کنید
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1136,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # بررسی اینکه کامل شده یا زمان آن به پایان رسیده است
+    # بررسی کنید آیا کامل شده یا زمان آن گذشته است
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1156,10 +1159,10 @@ def process_result(message_data):
         del task_timeouts[task_id]
 ```
 
-2. **آزمایش با تأخیر مصنوعی:**
+2. **آزمایش با تاخیرهای مصنوعی:**
 
 ```python
-# در یکی از عامل‌ها، با افزودن تأخیر پردازش کند را شبیه‌سازی کنید
+# در یک عامل، تأخیر اضافه کنید تا پردازش کندتر شبیه‌سازی شود
 import time
 time.sleep(35)  # از محدودیت زمانی ۳۰ ثانیه‌ای فراتر می‌رود
 ```
@@ -1174,26 +1177,26 @@ curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# نتایج را پس از ۳۰ ثانیه بررسی کنید
+# بعد از ۳۰ ثانیه نتایج را بررسی کنید
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ معیارهای موفقیت:**
-- ✅ وظیفه پس از 30 ثانیه کامل می‌شود حتی اگر عامل‌ها ناقص باشند
+- ✅ تسک پس از 30 ثانیه کامل می‌شود حتی اگر عامل‌ها ناقص باشند
 - ✅ پاسخ نشان‌دهنده نتایج جزئی است (`"timed_out": true`)
-- ✅ نتایج در دسترس بازگردانده می‌شوند (3 از 4 عامل)
+- ✅ نتایج در دسترس برگردانده می‌شوند (3 از 4 عامل)
 
 **زمان**: 20-25 دقیقه
 
 ---
 
-### تمرین 2: پیاده‌سازی منطق تکرار مجدد ⭐⭐⭐ (پیشرفته)
+### تمرین 2: پیاده‌سازی منطق تلاش مجدد ⭐⭐⭐ (پیشرفته)
 
-**هدف**: تلاش خودکار برای وظایف عامل‌های ناموفق قبل از قطع تلاش
+**هدف**: تلاش مجدد خودکار برای تسک‌های عامل‌های ناموفق قبل از انصراف.
 
 **مراحل**:
 
-1. **افزودن ردیابی تلاش مجدد به ارکستراتور:**
+1. **افزودن پیگیری تلاش مجدد به ارکستراتور:**
 
 ```python
 from dataclasses import dataclass
@@ -1235,7 +1238,7 @@ def process_with_retry(message, receiver, process_func):
         # پردازش پیام
         process_func(message_data)
         
-        # موفقیت - انجام شد
+        # موفقیت - تکمیل شد
         receiver.complete_message(message)
         
     except Exception as e:
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # تلاش مجدد: رها کنید و با افزایش شمارش دوباره در صف قرار دهید
+            # تلاش مجدد: رها کنید و با افزایش شمارش دوباره وارد صف کنید
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
             # ارسال مجدد به همان صف با تأخیر
-            time.sleep(5 * (retry_count + 1))  # افزایش تأخیر به‌صورت نمایی
+            time.sleep(5 * (retry_count + 1))  # تاخیر نمایی
             send_with_retry(queue_name, message_data, RetryConfig())
             
             receiver.complete_message(message)  # حذف نسخهٔ اصلی
         else:
-            # حداکثر تلاش‌ها سپری شد - انتقال به صف پیام‌های مرده
+            # تعداد مجاز تلاش‌ها تمام شد - انتقال به صف پیام‌های مرده
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **نظارت بر صف پیام‌های مرده (dead letter queue):**
+3. **نظارت بر صف dead letter:**
 
 ```python
 def monitor_dead_letters():
@@ -1283,31 +1286,31 @@ def monitor_dead_letters():
 ```
 
 **✅ معیارهای موفقیت:**
-- ✅ وظایف ناموفق به‌طور خودکار دوباره تلاش می‌شوند (حداکثر 3 بار)
-- ✅ عقب‌نشینی نمایی بین تلاش‌ها (5s, 10s, 15s)
-- ✅ پس از حداکثر تلاش‌ها، پیام‌ها به صف پیام‌های مرده (dead letter queue) می‌روند
-- ✅ می‌توان صف پیام‌های مرده را مانیتور و بازپخش کرد
+- ✅ تسک‌های ناموفق به‌صورت خودکار تا 3 بار تلاش می‌شوند
+- ✅ بک‌آف نمایی بین تلاش‌ها (5s، 10s، 15s)
+- ✅ پس از حداکثر تلاش‌ها، پیام‌ها به dead letter queue می‌روند
+- ✅ می‌توان بر dead letter queue نظارت کرد و بازپخش انجام داد
 
 **زمان**: 30-40 دقیقه
 
 ---
 
-### تمرین 3: پیاده‌سازی مدار شکن ⭐⭐⭐ (پیشرفته)
+### تمرین 3: پیاده‌سازی قطع‌کننده مدار (Circuit Breaker) ⭐⭐⭐ (پیشرفته)
 
-**هدف**: جلوگیری از شکست‌های آبشاری با متوقف کردن درخواست‌ها به عامل‌های ناکام
+**هدف**: جلوگیری از شکست‌های آبشاری با متوقف کردن درخواست‌ها به سمت عامل‌های خراب.
 
 **مراحل**:
 
-1. **ایجاد کلاس مدار شکن:**
+1. **ایجاد کلاس قطع‌کننده مدار:**
 
 ```python
 from enum import Enum
 from datetime import datetime, timedelta
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # عملیات عادی
-    OPEN = "open"          # در حال خرابی، درخواست‌ها را رد می‌کند
-    HALF_OPEN = "half_open"  # در حال آزمایش برای بازیابی
+    CLOSED = "closed"      # عملکرد عادی
+    OPEN = "open"          # در حال خطا، درخواست‌ها را رد می‌کند
+    HALF_OPEN = "half_open"  # در حال آزمایش برای بررسی بازیابی
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # بررسی اینکه تایم‌اوت منقضی شده است
+            # بررسی کنید آیا تایم‌اوت منقضی شده است
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1330,7 +1333,7 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # موفقیت
+            # موفق
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1349,10 +1352,10 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **اعمال به فراخوانی‌های عامل‌ها:**
+2. **اعمال در فراخوانی‌های عامل:**
 
 ```python
-# در ارکستراتور
+# در اورکستراتور
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,10 +1374,10 @@ def send_to_agent(agent_type, message_data):
         # با سایر عامل‌ها ادامه دهید
 ```
 
-3. **آزمایش مدار شکن:**
+3. **آزمایش قطع‌کننده مدار:**
 
 ```bash
-# شبیه‌سازی خطاهای مکرر (متوقف کردن یک عامل)
+# شبیه‌سازی شکست‌های مکرر (متوقف کردن یک عامل)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
 # ارسال چندین درخواست
@@ -1385,22 +1388,22 @@ for i in {1..10}; do
   sleep 2
 done
 
-# لاگ‌ها را بررسی کنید - باید پس از ۵ خطا باز شدن مدار را ببینید
-# برای لاگ‌های برنامه کانتینری از Azure CLI استفاده کنید:
+# لاگ‌ها را بررسی کنید — باید پس از ۵ خطا باز شدن مدار را ببینید.
+# برای لاگ‌های برنامهٔ کانتینری از Azure CLI استفاده کنید:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ معیارهای موفقیت:**
 - ✅ پس از 5 شکست، مدار باز می‌شود (درخواست‌ها رد می‌شوند)
-- ✅ پس از 60 ثانیه، مدار نیمه‌باز می‌شود (آزمایش بازیابی)
-- ✅ سایر عامل‌ها به‌طور عادی به کار خود ادامه می‌دهند
-- ✅ مدار هنگام بازیابی عامل به‌طور خودکار بسته می‌شود
+- ✅ پس از 60 ثانیه، مدار نیمه‌باز می‌شود (بازیابی تست می‌شود)
+- ✅ سایر عامل‌ها به‌صورت عادی به کار خود ادامه می‌دهند
+- ✅ وقتی عامل بازیابی می‌شود، مدار به‌طور خودکار بسته می‌شود
 
 **زمان**: 40-50 دقیقه
 
 ---
 
-## مانیتورینگ و رفع اشکال
+## نظارت و اشکال‌زدایی
 
 ### ردیابی توزیع‌شده با Application Insights
 
@@ -1491,22 +1494,22 @@ exceptions
 
 ## تحلیل هزینه
 
-### هزینه‌های سامانه چندعاملی (برآورد ماهانه)
+### هزینه‌های سیستم چندعاملی (برآورد ماهانه)
 
-| مولفه | پیکربندی | هزینه |
+| Component | Configuration | Cost |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
+| **ارکستراتور** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 عامل** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
 | **Service Bus** | Standard tier, 10M messages | $10-20 |
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operations | $5-10 |
 | **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
 | **مجموع** | | **$240-565/month** |
 
-### راهکارهای بهینه‌سازی هزینه
+### استراتژی‌های بهینه‌سازی هزینه
 
-1. **هرجا ممکن است از سرورلس استفاده کنید:**
+1. **از سرورلس هر جا ممکن است استفاده کنید:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1515,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **مقیاس‌دهی عامل‌ها به صفر در حالت بیکار:**
+2. **عامل‌ها را هنگام بیکار بودن تا صفر مقیاس دهید:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1523,26 +1526,26 @@ exceptions
    }
    ```
 
-3. **استفاده از دسته‌بندی پیام‌ها برای Service Bus:**
+3. **برای Service Bus از پردازش دسته‌ای استفاده کنید:**
    ```python
    # پیام‌ها را به‌صورت دسته‌ای ارسال کنید (ارزان‌تر)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **کش‌کردن نتایج پرکاربرد:**
+4. **نتایج پرکاربرد را کش کنید:**
    ```python
-   # از Azure Cache for Redis استفاده کنید
+   # از Azure Cache for Redis استفاده کنید.
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## بهترین روش‌ها
+## بهترین شیوه‌ها
 
-### ✅ انجام دهید:
+### ✅ کارهایی که باید انجام دهید:
 
-1. **از عملیات idempotent استفاده کنید**
+1. **از عملیات ایندمپوتنت استفاده کنید**
    ```python
    # عامل می‌تواند همان پیام را چندین بار به‌طور ایمن پردازش کند
    def process_task(task_id):
@@ -1552,71 +1555,72 @@ exceptions
        # در حال پردازش وظیفه...
    ```
 
-2. **پیاده‌سازی ثبت لاگ جامع**
+2. **لاگ‌گذاری جامع را پیاده‌سازی کنید**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **استفاده از شناسه‌های همبستگی (correlation IDs)**
+3. **از شناسه‌های همبستگی استفاده کنید**
    ```python
-   # شناسه task_id را در کل جریان کاری منتقل کنید
+   # شناسهٔ task_id را در سراسر گردش‌کار منتقل کنید
    message_data = {
-       'task_id': task_id,  # شناسه همبستگی
+       'task_id': task_id,  # شناسهٔ همبستگی
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **تنظیم TTL پیام (time-to-live)**
+4. **TTL پیام را تنظیم کنید (time-to-live)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **نظارت بر صف‌های dead letter**
+5. **بر صف‌های dead letter نظارت کنید**
    ```python
-   # پایش منظم پیام‌های ناموفق
+   # نظارت منظم بر پیام‌های ناموفق
    monitor_dead_letters()
    ```
 
-### ❌ انجام ندهید:
+### ❌ کارهایی که نباید انجام دهید:
 
-1. **وابستگی‌های دایره‌ای ایجاد نکنید**
+1. **وابستگی‌های دورانی ایجاد نکنید**
    ```python
-   # ❌ بد: عامل A → عامل B → عامل A (حلقه بی‌پایان)
-   # ✅ خوب: یک گراف جهت‌دار بدون چرخه (DAG) واضح تعریف کنید
+   # ❌ بد: عامل A → عامل B → عامل A (حلقه بی‌نهایت)
+   # ✅ خوب: یک گراف جهت‌دار غیرمدور (DAG) واضح تعریف کنید
    ```
 
-2. **تردهای عامل را مسدود نکنید**
+2. **نخ‌های عامل را مسدود نکنید**
    ```python
-   # ❌ بد: انتظار همزمان
+   # ❌ بد: انتظار هم‌زمان
    while not task_complete:
        time.sleep(1)
    
-   # ✅ خوب: از کال‌بک‌های صف پیام استفاده کنید
+   # ✅ خوب: از callback‌های صف پیام استفاده کنید
    ```
 
-3. **خطاهای جزئی را نادیده نگیرید**
+3. **شکست‌های جزئی را نادیده نگیرید**
    ```python
-   # ❌ بد: در صورت شکست یک عامل، کل جریان کار را متوقف کنید
-   # ✅ خوب: نتایج جزئی را همراه با نشانگرهای خطا بازگردانید
+   # ❌ بد: در صورت شکست یک عامل، کل جریان کاری را متوقف کنید
+   # ✅ خوب: نتایج جزئی را همراه با نشانه‌های خطا برگردانید
    ```
 
-4. **از تلاش‌های نامحدود استفاده نکنید**
+4. **از تکرارهای بی‌نهایت استفاده نکنید**
    ```python
-   # ❌ بد: تلاش مجدد تا ابد
-   # ✅ خوب: max_retries = 3، سپس ارسال به صف پیام‌های مرده
+   # ❌ بد: تلاش بی‌پایان
+   # ✅ خوب: max_retries = 3، سپس ارسال به صف پیام‌های خطا
    ```
 
 ---
-## راهنمای رفع اشکال
+
+## راهنمای عیب‌یابی
 
 ### مشکل: پیام‌ها در صف گیر کرده‌اند
 
-**نشانه‌ها:**
-- پیام‌ها در صف جمع می‌شوند
+**علائم:**
+- پیام‌ها در صف انباشته می‌شوند
 - عامل‌ها پردازش نمی‌کنند
-- وضعیت وظیفه در حالت "pending" گیر کرده است
+- وضعیت کار در "pending" گیر کرده
 
 **تشخیص:**
 ```bash
@@ -1632,7 +1636,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 **راه‌حل‌ها:**
 
-1. **افزایش تعداد نسخه‌های عامل:**
+1. **افزایش تعداد نمونه‌های عامل:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1650,11 +1654,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### مشکل: تسک تایم‌اوت می‌شود یا هرگز تکمیل نمی‌شود
+### مشکل: تایم‌اوت یا تکمیل‌نشدن وظیفه
 
-**نشانه‌ها:**
-- وضعیت تسک در حالت "in_progress" باقی می‌ماند
-- بعضی از عامل‌ها کار را تکمیل می‌کنند، برخی تکمیل نمی‌کنند
+**علائم:**
+- وضعیت کار در "in_progress" باقی می‌ماند
+- برخی عامل‌ها کار را کامل می‌کنند، برخی دیگر نه
 - هیچ پیام خطایی
 
 **تشخیص:**
@@ -1663,19 +1667,19 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # Application Insights را بررسی کنید
-# اجرای پرس‌وجو: traces | where customDimensions.task_id == "..."
+# پرس‌وجو را اجرا کنید: traces | where customDimensions.task_id == "..."
 ```
 
 **راه‌حل‌ها:**
 
-1. **پیاده‌سازی تایم‌اوت در تجمیع‌کننده (تمرین 1)**
+1. **پیاده‌سازی تایم‌اوت در جمع‌کننده (تمرین 1)**
 
-2. **بررسی شکست عامل‌ها با استفاده از Azure Monitor:**
+2. **بررسی خرابی‌های عامل با استفاده از Azure Monitor:**
    ```bash
-   # مشاهدهٔ لاگ‌ها از طریق azd monitor
+   # مشاهده لاگ‌ها از طریق azd monitor
    azd monitor --logs
    
-   # یا از Azure CLI برای بررسی لاگ‌های برنامهٔ کانتینری مشخص استفاده کنید
+   # یا برای بررسی لاگ‌های برنامه کانتینری مشخص از Azure CLI استفاده کنید
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1688,50 +1692,50 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## بیشتر بیاموزید
+## اطلاعات بیشتر
 
 ### مستندات رسمی
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [الگوهای طراحی چندعامله](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [الگوهای طراحی چندعاملی](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
 ### گام‌های بعدی در این دوره
-- ← قبلی: [Capacity Planning](capacity-planning.md)
+- ← قبلی: [برنامه‌ریزی ظرفیت](capacity-planning.md)
 - → بعدی: [انتخاب SKU](sku-selection.md)
-- 🏠 [صفحه اصلی دوره](../../README.md)
+- 🏠 [خانه دوره](../../README.md)
 
-### نمونه‌های مرتبط
-- [مثال میکروسرویس‌ها](../../../../examples/microservices) - الگوهای ارتباط سرویس
-- [مثال Azure OpenAI](../../../../examples/azure-openai-chat) - یکپارچه‌سازی هوش مصنوعی
+### مثال‌های مرتبط
+- [مثال میکروسرویس‌ها](../../../../examples/microservices) - الگوهای ارتباط سرویس‌ها
+- [مثال Microsoft Foundry Models](../../../../examples/azure-openai-chat) - ادغام هوش مصنوعی
 
 ---
 
 ## خلاصه
 
-**آنچه آموختید:**
-- ✅ پنج الگوی هماهنگی (ترتیبی، موازی، سلسله‌مراتبی، مبتنی بر رویداد، اجماع)
-- ✅ معماری چندعامله روی Azure (Service Bus، Cosmos DB، Container Apps)
+**شما آموختید:**
+- ✅ پنج الگوی هماهنگی (متوالی، موازی، سلسله‌مراتبی، رویداد-محور، اجماع)
+- ✅ معماری چندعاملی در Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ مدیریت وضعیت در میان عامل‌های توزیع‌شده
-- ✅ مدیریت تایم‌اوت، تلاش‌های مجدد و قطع‌کننده‌های مدار
-- ✅ پایش و اشکال‌زدایی سیستم‌های توزیع‌شده
-- ✅ استراتژی‌های بهینه‌سازی هزینه
+- ✅ مدیریت تایم‌اوت، تلاش‌های مجدد، و قطع‌کننده‌های مدار
+- ✅ نظارت و اشکال‌زدایی سیستم‌های توزیع‌شده
+- ✅ راهبردهای بهینه‌سازی هزینه
 
 **نکات کلیدی:**
-1. **الگوی مناسب را انتخاب کنید** - ترتیبی برای جریان‌های کاری مرتب، موازی برای سرعت، مبتنی بر رویداد برای انعطاف‌پذیری
-2. **وضعیت را به‌دقت مدیریت کنید** - از Cosmos DB یا معادل آن برای وضعیت مشترک استفاده کنید
-3. **خطاها را به‌خوبی مدیریت کنید** - تایم‌اوت‌ها، تلاش‌های مجدد، قطع‌کننده‌ها، صف‌های نامه‌های مرده
-4. **همه چیز را پایش کنید** - ردیابی توزیع‌شده برای اشکال‌زدایی ضروری است
-5. **هزینه‌ها را بهینه کنید** - مقیاس‌پذیری تا صفر، استفاده از بدون‌سرور، پیاده‌سازی کش
+1. **الگوی مناسب را انتخاب کنید** - متوالی برای گردش‌کارهای مرتب، موازی برای سرعت، رویداد-محور برای انعطاف‌پذیری
+2. **حالت را با دقت مدیریت کنید** - از Cosmos DB یا مشابه برای حالت مشترک استفاده کنید
+3. **با شکست‌ها با ظرافت برخورد کنید** - تایم‌اوت‌ها، تلاش‌های مجدد، قطع‌کننده‌های مدار، صف‌های نامه‌های مرده
+4. **همه‌چیز را پایش کنید** - ردیابی توزیع‌شده برای اشکال‌زدایی ضروری است
+5. **هزینه‌ها را بهینه کنید** - مقیاس‌دهی تا صفر، استفاده از سرورلس، پیاده‌سازی کش
 
 **گام‌های بعدی:**
-1. تکمیل تمرین‌های عملی
-2. ساخت یک سیستم چندعامله برای مورد استفاده خود
+1. تمرین‌های عملی را کامل کنید
+2. یک سیستم چندعاملی برای مورد استفاده خود بسازید
 3. مطالعه [انتخاب SKU](sku-selection.md) برای بهینه‌سازی عملکرد و هزینه
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمه‌ی هوش مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً آگاه باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مبدأ باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی یا بسیار مهم، توصیه می‌شود از ترجمهٔ حرفه‌ای انسانی استفاده شود. ما در قبال هرگونه سوءتفاهم یا برداشت نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است دارای خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان بومی آن باید به‌عنوان مرجع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوء‌تفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

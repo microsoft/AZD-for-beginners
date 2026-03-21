@@ -1,30 +1,30 @@
-# Application Insights Integration with AZD
+# Application Insights 与 AZD 集成
 
-⏱️ **预计时间**: 40-50 分钟 | 💰 **费用影响**: ~$5-15/月 | ⭐ **复杂度**: 中级
+⏱️ <strong>预计时间</strong>：40-50 分钟 | 💰 <strong>成本影响</strong>：约 $5-15/月 | ⭐ <strong>复杂度</strong>：中等
 
-**📚 学习路径:**
-- ← 上一节: [Preflight Checks](preflight-checks.md) - 部署前验证
-- 🎯 **你在这里**: Application Insights 集成（监控、遥测、调试）
-- → 下一节: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - 部署到 Azure
-- 🏠 [课程主页](../../README.md)
+**📚 学习路径：**
+- ← 上一课: [预部署检查](preflight-checks.md) - 部署前验证
+- 🎯 <strong>您现在的位置</strong>：Application Insights 集成（监控、遥测、调试）
+- → 下一课: [部署指南](../chapter-04-infrastructure/deployment-guide.md) - 部署到 Azure
+- 🏠 [课程首页](../../README.md)
 
 ---
 
-## 你将学到的内容
+## 你将学到
 
-完成本课程后，你将：
+通过完成本课，你将：
 - 将 **Application Insights** 自动集成到 AZD 项目中
-- 为微服务配置 **分布式追踪**
-- 实现 **自定义遥测**（指标、事件、依赖项）
-- 设置 **实时指标** 以实现实时监控
-- 从 AZD 部署中创建 **警报与仪表板**
-- 使用 **遥测查询** 调试生产问题
-- 优化 **成本与采样** 策略
+- 为微服务配置 <strong>分布式追踪</strong>
+- 实现 <strong>自定义遥测</strong>（指标、事件、依赖）
+- 设置 **实时指标 (Live Metrics)** 以进行实时监控
+- 从 AZD 部署创建 <strong>告警和仪表板</strong>
+- 使用 <strong>遥测查询</strong> 调试生产问题
+- 优化 <strong>成本和采样</strong> 策略
 - 监控 **AI/LLM 应用**（令牌、延迟、成本）
 
 ## 为什么在 AZD 中使用 Application Insights 很重要
 
-### 挑战：生产可观测性
+### 挑战：生产环境可观测性
 
 **没有 Application Insights：**
 ```
@@ -47,7 +47,7 @@
 ✅ AZD provisions everything automatically
 ```
 
-**类比**：Application Insights 就像为你的应用提供了一个“黑匣子”飞行记录器 + 驾驶舱仪表盘。你可以实时看到所有发生的事情，并能回放任何事件。
+<strong>类比</strong>：Application Insights 就像为你的应用配备了“黑匣子”飞行记录仪 + 驾驶舱仪表板。你可以实时看到发生的一切，并能回放任何事件。
 
 ---
 
@@ -72,9 +72,9 @@ graph TB
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|自动化埋点| AppInsights
-    App2 -.->|自动化埋点| AppInsights
-    App3 -.->|自动化埋点| AppInsights
+    App1 -.->|自动化检测| AppInsights
+    App2 -.->|自动化检测| AppInsights
+    App3 -.->|自动化检测| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -85,15 +85,15 @@ graph TB
 ```
 ### 自动监控的内容
 
-| Telemetry Type | What It Captures | Use Case |
+| 遥测类型 | 捕获内容 | 使用场景 |
 |----------------|------------------|----------|
-| **Requests** | HTTP requests, status codes, duration | API 性能监控 |
-| **Dependencies** | External calls (DB, APIs, storage) | 识别瓶颈 |
-| **Exceptions** | Unhandled errors with stack traces | 调试故障 |
-| **Custom Events** | Business events (signup, purchase) | 分析与漏斗 |
-| **Metrics** | Performance counters, custom metrics | 容量规划 |
-| **Traces** | Log messages with severity | 调试与审计 |
-| **Availability** | Uptime and response time tests | SLA 监控 |
+| <strong>请求</strong> | HTTP 请求、状态码、持续时间 | API 性能监控 |
+| <strong>依赖</strong> | 外部调用（数据库、API、存储） | 识别瓶颈 |
+| <strong>异常</strong> | 未处理的错误及堆栈跟踪 | 调试故障 |
+| <strong>自定义事件</strong> | 业务事件（注册、购买） | 分析与漏斗 |
+| <strong>指标</strong> | 性能计数器、自定义指标 | 容量规划 |
+| <strong>跟踪</strong> | 带严重级别的日志消息 | 调试和审计 |
+| <strong>可用性</strong> | 正常运行时间和响应时间测试 | SLA 监控 |
 
 ---
 
@@ -102,7 +102,7 @@ graph TB
 ### 所需工具
 
 ```bash
-# 验证 Azure 开发者 CLI
+# 验证 Azure Developer CLI
 azd version
 # ✅ 预期：azd 版本 1.0.0 或更高
 
@@ -114,26 +114,26 @@ az --version
 ### Azure 要求
 
 - 有效的 Azure 订阅
-- 拥有以下资源的创建权限：
+- 创建以下资源的权限：
   - Application Insights 资源
   - Log Analytics 工作区
   - Container Apps
   - 资源组
 
-### 知识预备
+### 知识前提
 
-你应该已完成：
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - AZD 核心概念
-- [Configuration](../chapter-03-configuration/configuration.md) - 环境设置
-- [First Project](../chapter-01-foundation/first-project.md) - 基本部署
+你应已完成：
+- [AZD 基础](../chapter-01-foundation/azd-basics.md) - AZD 核心概念
+- [配置](../chapter-03-configuration/configuration.md) - 环境设置
+- [第一个项目](../chapter-01-foundation/first-project.md) - 基本部署
 
 ---
 
-## 课程 1：使用 AZD 自动创建 Application Insights
+## 课程 1：使用 AZD 自动配置 Application Insights
 
 ### AZD 如何配置 Application Insights
 
-AZD 在部署时会自动创建并配置 Application Insights。下面看看它是如何工作的。
+当你部署时，AZD 会自动创建并配置 Application Insights。让我们看看它是如何工作的。
 
 ### 项目结构
 
@@ -154,7 +154,7 @@ monitored-app/
 
 ---
 
-### 第 1 步：配置 AZD (azure.yaml)
+### 步骤 1：配置 AZD（azure.yaml）
 
 **文件：`azure.yaml`**
 
@@ -172,11 +172,11 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**就这样！** AZD 默认会创建 Application Insights。基本监控不需要额外配置。
+**就是这样！** AZD 将默认创建 Application Insights。对于基本监控无需额外配置。
 
 ---
 
-### 第 2 步：监控基础设施（Bicep）
+### 步骤 2：监控基础设施（Bicep）
 
 **文件：`infra/core/monitoring.bicep`**
 
@@ -227,7 +227,7 @@ output applicationInsightsName string = applicationInsights.name
 
 ---
 
-### 第 3 步：将 Container App 连接到 Application Insights
+### 步骤 3：将容器应用连接到 Application Insights
 
 **文件：`infra/app/api.bicep`**
 
@@ -285,7 +285,7 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### 第 4 步：带有遥测的应用代码
+### 步骤 4：带遥测的应用代码
 
 **文件：`src/app.py`**
 
@@ -304,7 +304,7 @@ app = Flask(__name__)
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # 配置分布式跟踪
+    # 配置分布式追踪
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
@@ -331,7 +331,7 @@ def health():
 def get_products():
     logger.info('Fetching products')
     
-    # 模拟数据库调用（会自动作为依赖进行跟踪）
+    # 模拟数据库调用 (会被自动跟踪为依赖)
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -375,26 +375,26 @@ gunicorn==21.2.0
 
 ---
 
-### 第 5 步：部署并验证
+### 步骤 5：部署并验证
 
 ```bash
 # 初始化 AZD
 azd init
 
-# 部署（自动配置 Application Insights）
+# 部署 (会自动配置 Application Insights)
 azd up
 
 # 获取应用 URL
 APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
 
-# 生成遥测数据
+# 生成遥测
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ 预期输出：**
+**✅ 预计输出：**
 ```json
 {
   "status": "healthy",
@@ -404,7 +404,7 @@ curl $APP_URL/api/slow
 
 ---
 
-### 第 6 步：在 Azure 门户查看遥测
+### 步骤 6：在 Azure 门户查看遥测
 
 ```bash
 # 获取 Application Insights 的详细信息
@@ -417,12 +417,12 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-**导航至 Azure 门户 → Application Insights → Transaction Search**
+**导航到 Azure 门户 → Application Insights → 事务搜索**
 
-你应该看到：
-- ✅ 带有状态码的 HTTP 请求
-- ✅ 请求持续时间（例如 `/api/slow` 超过 3 秒）
-- ✅ `/api/error-test` 的异常详情
+你应该会看到：
+- ✅ 带状态码的 HTTP 请求
+- ✅ 请求持续时间（`/api/slow` 超过 3 秒）
+- ✅ 来自 `/api/error-test` 的异常详情
 - ✅ 自定义日志消息
 
 ---
@@ -518,7 +518,7 @@ class TelemetryClient:
 telemetry = TelemetryClient()
 ```
 
-### 用自定义事件更新应用
+### 使用自定义事件更新应用
 
 **文件：`src/app.py`（增强版）**
 
@@ -565,7 +565,7 @@ def search():
     
     start_time = time.time()
     
-    # 模拟搜索（在真实情况下会是数据库查询）
+    # 模拟搜索（在真实场景中会是数据库查询）
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
     duration = (time.time() - start_time) * 1000  # 转换为毫秒
@@ -628,13 +628,13 @@ curl -X POST $APP_URL/api/purchase \
 # 跟踪搜索事件
 curl "$APP_URL/api/search?q=laptop"
 
-# 跟踪外部依赖项
+# 跟踪外部依赖
 curl $APP_URL/api/external-call
 ```
 
 **在 Azure 门户查看：**
 
-导航至 Application Insights → 日志，然后运行：
+导航到 Application Insights → 日志，然后运行：
 
 ```kusto
 // View purchase events
@@ -669,7 +669,7 @@ traces
 
 ### 启用跨服务追踪
 
-对于微服务，Application Insights 会自动将跨服务的请求进行关联。
+对于微服务，Application Insights 会自动将跨服务请求关联起来。
 
 **文件：`infra/main.bicep`**
 
@@ -743,15 +743,15 @@ output GATEWAY_URL string = apiGateway.outputs.uri
 
 ```mermaid
 sequenceDiagram
-    participant User as 用户
-    participant Gateway as API 网关<br/>(Trace ID: abc123)
+    participant User
+    participant Gateway as API 网关<br/>(跟踪 ID: abc123)
     participant Product as 产品服务<br/>(父 ID: abc123)
     participant Order as 订单服务<br/>(父 ID: abc123)
-    participant AppInsights as 应用程序洞察
+    participant AppInsights as 应用洞察
     
     User->>Gateway: POST /api/checkout
     Note over Gateway: 开始跟踪: abc123
-    Gateway->>AppInsights: 记录请求 (Trace ID: abc123)
+    Gateway->>AppInsights: 记录请求 (跟踪 ID: abc123)
     
     Gateway->>Product: GET /products/123
     Note over Product: 父 ID: abc123
@@ -766,7 +766,7 @@ sequenceDiagram
     Gateway-->>User: 结账完成
     Gateway->>AppInsights: 记录响应 (耗时: 450ms)
     
-    Note over AppInsights: 按 Trace ID 进行关联
+    Note over AppInsights: 按跟踪 ID 进行关联
 ```
 **查询端到端追踪：**
 
@@ -790,11 +790,11 @@ dependencies
 
 ## 课程 4：实时指标与实时监控
 
-### 启用实时指标流
+### 启用 Live Metrics 流
 
-实时指标提供 <1 秒延迟的实时遥测。
+Live Metrics 提供低于 1 秒延迟的实时遥测。
 
-**访问实时指标：**
+**访问 Live Metrics：**
 
 ```bash
 # 获取 Application Insights 资源
@@ -806,13 +806,13 @@ RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**你在实时中会看到：**
+**实时看到的内容：**
 - ✅ 传入请求速率（请求/秒）
-- ✅ 外发依赖调用
+- ✅ 发出的依赖调用
 - ✅ 异常计数
-- ✅ CPU 与内存使用情况
-- ✅ 活动服务器数量
-- ✅ 采样的遥测
+- ✅ CPU 和内存使用情况
+- ✅ 活跃服务器数量
+- ✅ 采样遥测
 
 ### 生成负载以进行测试
 
@@ -824,20 +824,20 @@ for i in {1..100}; do
 done
 
 # 在 Azure 门户中查看实时指标
-# 您应该会看到请求速率飙升
+# 您应该会看到请求速率激增
 ```
 
 ---
 
 ## 实践练习
 
-### 练习 1：设置警报 ⭐⭐（中等）
+### 练习 1：设置告警 ⭐⭐（中等）
 
-**目标**：为高错误率和慢响应创建警报。
+<strong>目标</strong>：为高错误率和慢响应创建告警。
 
 **步骤：**
 
-1. **为错误率创建警报：**
+1. **为错误率创建告警：**
 
 ```bash
 # 获取 Application Insights 资源 ID
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **为慢响应创建警报：**
+2. **为慢响应创建告警：**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +870,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **通过 Bicep 创建警报（推荐用于 AZD）：**
+3. **通过 Bicep 创建告警（AZD 推荐）：**
 
 **文件：`infra/core/alerts.bicep`**
 
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **测试警报：**
+4. **测试告警：**
 
 ```bash
 # 生成错误
@@ -952,7 +952,7 @@ for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# 生成缓慢响应
+# 产生较慢的响应
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
@@ -965,31 +965,31 @@ az monitor metrics alert list \
 ```
 
 **✅ 成功标准：**
-- ✅ 成功创建警报
-- ✅ 超过阈值时警报触发
-- ✅ 可在 Azure 门户查看警报历史
+- ✅ 成功创建告警
+- ✅ 超过阈值时触发告警
+- ✅ 可以在 Azure 门户查看告警历史
 - ✅ 与 AZD 部署集成
 
-**时间**：20-25 分钟
+<strong>时间</strong>：20-25 分钟
 
 ---
 
 ### 练习 2：创建自定义仪表板 ⭐⭐（中等）
 
-**目标**：构建显示关键应用指标的仪表板。
+<strong>目标</strong>：构建显示关键应用指标的仪表板。
 
 **步骤：**
 
 1. **通过 Azure 门户创建仪表板：**
 
-导航至：Azure 门户 → 仪表板 → 新建仪表板
+导航到：Azure 门户 → 仪表板 → 新建仪表板
 
-2. **添加关键指标的图块：**
+2. **添加关键指标的图表：**
 
-- 请求数量（最近 24 小时）
+- 请求数（过去 24 小时）
 - 平均响应时间
 - 错误率
-- 最慢的前 5 个操作
+- 响应最慢的前 5 个操作
 - 用户的地理分布
 
 3. **通过 Bicep 创建仪表板：**
@@ -1083,21 +1083,21 @@ azd up
 
 **✅ 成功标准：**
 - ✅ 仪表板显示关键指标
-- ✅ 可固定到 Azure 门户主页
+- ✅ 可以固定到 Azure 门户首页
 - ✅ 实时更新
 - ✅ 可通过 AZD 部署
 
-**时间**：25-30 分钟
+<strong>时间</strong>：25-30 分钟
 
 ---
 
 ### 练习 3：监控 AI/LLM 应用 ⭐⭐⭐（高级）
 
-**目标**：跟踪 Azure OpenAI 使用情况（令牌、成本、延迟）。
+<strong>目标</strong>：跟踪 Microsoft Foundry Models 的使用情况（令牌、成本、延迟）。
 
 **步骤：**
 
-1. **创建 AI 监控封装器：**
+1. **创建 AI 监控包装器：**
 
 **文件：`src/ai_telemetry.py`**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # 调用 Azure OpenAI
+            # 调用 Microsoft Foundry 模型
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,13 +1130,13 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # 毫秒
             
-            # 提取使用情况
+            # 提取使用量
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # 计算成本（GPT-4 定价）
+            # 计算成本 (gpt-4.1 定价)
             prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 每 1K 令牌
             completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 每 1K 令牌
             total_cost = prompt_cost + completion_cost
@@ -1191,7 +1191,7 @@ import os
 
 app = Flask(__name__)
 
-# 初始化被监控的 OpenAI 客户端
+# 初始化受监控的 OpenAI 客户端
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
     endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
@@ -1202,9 +1202,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # 使用自动监控调用
+    # 使用自动监控进行调用
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1251,12 +1251,12 @@ traces
 ```
 
 **✅ 成功标准：**
-- ✅ 每次 OpenAI 调用都被自动跟踪
+- ✅ 每次 OpenAI 调用均自动跟踪
 - ✅ 令牌使用和成本可见
-- ✅ 延迟被监控
-- ✅ 能设置预算警报
+- ✅ 延迟已监控
+- ✅ 可以设置预算告警
 
-**时间**：35-45 分钟
+<strong>时间</strong>：35-45 分钟
 
 ---
 
@@ -1264,7 +1264,7 @@ traces
 
 ### 采样策略
 
-通过采样控制成本：
+通过对遥测进行采样来控制成本：
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
@@ -1303,16 +1303,16 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### 每月成本估算
+### 每月费用估算
 
-| Data Volume | Retention | Monthly Cost |
+| 数据量 | 保留期 | 每月费用 |
 |-------------|-----------|--------------|
-| 1 GB/month | 30 days | ~$2-5 |
-| 5 GB/month | 30 days | ~$10-15 |
-| 10 GB/month | 90 days | ~$25-40 |
-| 50 GB/month | 90 days | ~$100-150 |
+| 1 GB/月 | 30 天 | 约 $2-5 |
+| 5 GB/月 | 30 天 | 约 $10-15 |
+| 10 GB/月 | 90 天 | 约 $25-40 |
+| 50 GB/月 | 90 天 | 约 $100-150 |
 
-**免费套餐**：包含每月 5 GB
+<strong>免费额度</strong>：包含 5 GB/月
 
 ---
 
@@ -1323,20 +1323,20 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 测试你的理解：
 
 - [ ] **Q1**：AZD 如何配置 Application Insights？
-  - **A**：通过 `infra/core/monitoring.bicep` 中的 Bicep 模板自动配置
+  - **A**：通过 `infra/core/monitoring.bicep` 中的 Bicep 模板自动创建
 
 - [ ] **Q2**：哪个环境变量启用 Application Insights？
   - **A**：`APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**：三种主要的遥测类型是什么？
-  - **A**：Requests（HTTP 调用）、Dependencies（外部调用）、Exceptions（错误）
+- [ ] **Q3**：主要的三种遥测类型是什么？
+  - **A**：请求（HTTP 调用）、依赖（外部调用）、异常（错误）
 
 **动手验证：**
 ```bash
-# 检查 Application Insights 是否已配置
+# 检查是否已配置 Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# 验证是否正在发送遥测数据
+# 验证遥测数据是否正常传输
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1350,12 +1350,12 @@ az monitor app-insights metrics show \
 测试你的理解：
 
 - [ ] **Q1**：如何跟踪自定义业务事件？
-  - **A**：使用带有 `custom_dimensions` 的记录器或 `TelemetryClient.track_event()`
+  - **A**：使用带有 `custom_dimensions` 的日志记录器或 `TelemetryClient.track_event()`
 
-- [ ] **Q2**：事件和指标有什么区别？
+- [ ] **Q2**：事件和指标之间有什么区别？
   - **A**：事件是离散发生的事件，指标是数值测量
 
-- [ ] **Q3**：如何在服务间关联遥测？
+- [ ] **Q3**：如何在服务之间关联遥测？
   - **A**：Application Insights 会自动使用 `operation_Id` 进行关联
 
 **动手验证：**
@@ -1373,13 +1373,13 @@ traces
 测试你的理解：
 
 - [ ] **Q1**：什么是采样，为什么使用它？
-  - **A**：采样通过只捕获一部分遥测来减少数据量（和成本）
+  - **A**：采样通过仅捕获部分遥测来减少数据量（和成本）
 
-- [ ] **Q2**：如何设置警报？
-  - **A**：在 Bicep 或 Azure 门户中基于 Application Insights 指标使用指标警报
+- [ ] **Q2**：如何设置告警？
+  - **A**：基于 Application Insights 指标，在 Bicep 或 Azure 门户中使用度量告警
 
-- [ ] **Q3**：Log Analytics 与 Application Insights 有何不同？
-  - **A**：Application Insights 将数据存储在 Log Analytics 工作区；App Insights 提供面向应用的视图
+- [ ] **Q3**：Log Analytics 和 Application Insights 有何不同？
+  - **A**：Application Insights 将数据存储在 Log Analytics 工作区；App Insights 提供特定于应用的视图
 
 **动手验证：**
 ```bash
@@ -1394,9 +1394,9 @@ az monitor app-insights component show \
 
 ## 最佳实践
 
-### ✅ 建议做：
+### ✅ 建议：
 
-1. **使用关联 ID**
+1. **使用关联 ID（correlation IDs）**
    ```python
    logger.info('Processing order', extra={
        'custom_dimensions': {
@@ -1406,54 +1406,54 @@ az monitor app-insights component show \
    })
    ```
 
-2. **为关键指标设置警报**
+2. <strong>为关键指标设置告警</strong>
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **使用结构化日志**
+3. <strong>使用结构化日志</strong>
    ```python
-   # ✅ 好：结构化
+   # ✅ 良好：结构化
    logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
    
-   # ❌ 坏：非结构化
+   # ❌ 不良：非结构化
    logger.info(f'User 123 signed up')
    ```
 
-4. **监控依赖项**
+4. <strong>监控依赖</strong>
    ```python
    # 自动跟踪数据库调用、HTTP 请求等。
    ```
 
-5. **在部署期间使用实时指标**
+5. **在部署期间使用 Live Metrics**
 
-### ❌ 不建议：
+### ❌ 不要：
 
-1. **不要记录敏感数据**
+1. <strong>不要记录敏感数据</strong>
    ```python
-   # ❌ 差
+   # ❌ 错误
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ 好
+   # ✅ 正确
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **生产环境不要使用 100% 采样**
+2. **在生产中不要使用 100% 采样**
    ```python
    # ❌ 昂贵
    sampler = ProbabilitySampler(rate=1.0)
    
-   # ✅ 具有成本效益
+   # ✅ 性价比高
    sampler = ProbabilitySampler(rate=0.1)
    ```
 
-3. **不要忽略死信队列**
+3. <strong>不要忽略死信队列</strong>
 
-4. **别忘了设置数据保留限制**
+4. <strong>不要忘记设置数据保留限制</strong>
 
 ---
 
-## 故障排查
+## 故障排除
 
 ### 问题：没有遥测出现
 
@@ -1465,7 +1465,7 @@ azd env get-values | grep APPLICATIONINSIGHTS
 # 通过 Azure Monitor 检查应用程序日志
 azd monitor --logs
 
-# 或者使用适用于容器应用的 Azure CLI：
+# 或者使用用于 Container Apps 的 Azure CLI：
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
@@ -1481,11 +1481,11 @@ az containerapp show \
 
 ---
 
-### 问题：高昂的成本
+### 问题：高成本
 
 **诊断：**
 ```bash
-# 检查数据摄入
+# 检查数据摄取
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1495,57 +1495,57 @@ az monitor app-insights metrics show \
 **解决方案：**
 - 降低采样率
 - 缩短保留期
-- 删除冗长的日志记录
+- 移除冗长日志
 
 ---
 
 ## 深入了解
 
 ### 官方文档
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [Application Insights 概览](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [适用于 Python 的 Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Kusto 查询语言](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [AZD 监控](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### 本课程的下一步
-- ← 上一节: [Preflight Checks](preflight-checks.md)
-- → 下一节: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [课程主页](../../README.md)
+- ← 上一课: [预部署检查](preflight-checks.md)
+- → 下一课: [部署指南](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [课程首页](../../README.md)
 
 ### 相关示例
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI 遥测
-- [Microservices Example](../../../../examples/microservices) - 分布式追踪
+- [Microsoft Foundry Models 示例](../../../../examples/azure-openai-chat) - AI 遥测
+- [微服务示例](../../../../examples/microservices) - 分布式追踪
 
 ---
 
 ## 总结
 
-**你已经学会：**
+**你已学到：**
 - ✅ 使用 AZD 自动配置 Application Insights
-- ✅ 自定义遥测（事件、指标、依赖项）
+- ✅ 自定义遥测（事件、指标、依赖）
 - ✅ 跨微服务的分布式追踪
-- ✅ 实时指标和监控
-- ✅ 警报和仪表板
+- ✅ Live Metrics 和实时监控
+- ✅ 告警和仪表板
 - ✅ AI/LLM 应用监控
 - ✅ 成本优化策略
 
-**主要收获：**
+**关键要点：**
 1. **AZD 自动配置监控** - 无需手动设置
-2. **使用结构化日志** - 便于查询
-3. **跟踪业务事件** - 不仅仅是技术指标
-4. **监控 AI 成本** - 跟踪令牌和支出
-5. **设置警报** - 要主动，而不是被动
-6. **优化成本** - 使用采样和保留限制
+2. <strong>使用结构化日志</strong> - 便于查询
+3. <strong>跟踪业务事件</strong> - 不仅限于技术指标
+4. **监控 AI 成本** - 跟踪 tokens 和支出
+5. <strong>设置警报</strong> - 主动而非被动
+6. <strong>优化成本</strong> - 使用采样和保留限制
 
 **下一步：**
-1. 完成实操练习
-2. 向你的 AZD 项目添加 Application Insights
+1. 完成实践练习
+2. 将 Application Insights 添加到你的 AZD 项目中
 3. 为你的团队创建自定义仪表板
 4. 学习 [部署指南](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件已使用 AI 翻译服务 Co-op Translator（https://github.com/Azure/co-op-translator）进行翻译。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文档的原文应被视为权威来源。对于关键信息，建议采用专业人工翻译。对于因使用本翻译而产生的任何误解或错误解释，我们不承担任何责任。
+**免责声明**:
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力追求准确性，但请注意自动翻译可能包含错误或不准确之处。原始文档的原始语言版本应被视为权威来源。对于重要信息，建议采用专业人工翻译。我们不对因使用此翻译而产生的任何误解或错误解释承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
